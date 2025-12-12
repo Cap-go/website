@@ -31,7 +31,7 @@ defaultChannel: 'v2'
 defaultChannel: 'v3'
 ```
 
-:::tip
+:::Consejo
 **Beneficios de este enfoque:**
 - **Siempre tienes control** sobre qué usuarios reciben actualizaciones
 - **No se necesita cambio dinámico de canal** en el código de tu aplicación
@@ -68,13 +68,13 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-:::note
+:::Nota
 **Para versión 1.x:** Si no estableciste un `defaultChannel` inicialmente, los usuarios de la versión 1.x están en el canal `production`. Para futuras versiones mayores, siempre establece un canal específico como `v3`, `v4`, etc.
 :::
 
 ## 3. Gestionar Ramas de Código Separadas
 
-Crea ramas git separadas para mantener compatibilidad entre versiones de aplicación:
+Crea ramas Git separadas para mantener compatibilidad entre versiones de aplicación:
 
 ```bash
 # Crear y mantener una rama para actualizaciones de versión 1.x
@@ -85,13 +85,13 @@ git push origin v1-maintenance
 git checkout main
 ```
 
-:::warning
-**Crítico:** Nunca envíes bundles JavaScript a aplicaciones antiguas que esperan código/APIs nativas que no tienen. Siempre compila actualizaciones desde la rama apropiada:
+:::Advertencia
+**Crítico:** Nunca envíes Paquetes JavaScript a aplicaciones antiguas que esperan código/APIs nativas que no tienen. Siempre compila actualizaciones desde la rama apropiada:
 - **rama v1-maintenance**: Para actualizaciones a aplicaciones 1.x (canal production)
 - **rama main**: Para actualizaciones a aplicaciones 2.x (canal v2)
 :::
 
-## 4. Subir Bundles a Canales Respectivos
+## 4. Subir Paquetes a Canales Respectivos
 
 ```bash
 # Para actualizaciones 1.x: Compila desde rama v1-maintenance
@@ -114,9 +114,9 @@ npx @capgo/cli channel set v2 --self-assign
 
 ## 6. Desplegar en la Tienda de Aplicaciones
 
-Compila y despliega la versión 2.0.0 en la tienda de aplicaciones. Todos los usuarios que descarguen esta versión (ya sean usuarios nuevos o usuarios existentes actualizando) automáticamente usarán el canal v2 porque está configurado en el bundle de la aplicación.
+Compila y despliega la versión 2.0.0 en la tienda de aplicaciones. Todos los usuarios que descarguen esta versión (ya sean usuarios nuevos o usuarios existentes actualizando) automáticamente usarán el canal v2 porque está configurado en el Paquete de la aplicación.
 
-:::note
+:::Nota
 **¡No se necesitan cambios de código!** Como `defaultChannel: 'v2'` está incluido en la versión de la tienda de aplicaciones, todos los usuarios que descarguen la versión 2.0.0 usarán automáticamente el canal correcto.
 :::
 
@@ -164,15 +164,15 @@ git branch -d v1-maintenance
 git push origin --delete v1-maintenance
 ```
 
-:::tip
+:::Consejo
 Este enfoque asegura que los usuarios solo reciban actualizaciones compatibles con su versión de aplicación
 :::
 
-:::warning
+:::Advertencia
 Siempre prueba las actualizaciones a fondo en cada canal antes del despliegue
 :::
 
-:::note
+:::Nota
 Puedes eliminar con seguridad el canal v2 en Capgo incluso si algunos usuarios todavía tienen la anulación de canal. Automáticamente recibirán actualizaciones del canal production en su lugar.
 :::
 
@@ -198,6 +198,6 @@ git push origin v1-maintenance
 npx @capgo/cli bundle upload --channel production
 ```
 
-:::tip
+:::Consejo
 Mantén tu rama v1-maintenance actualizada con correcciones de errores que sean compatibles con la versión 1.x, pero nunca fusiones cambios incompatibles desde main
 :::

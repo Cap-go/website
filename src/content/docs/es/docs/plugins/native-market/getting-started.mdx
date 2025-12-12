@@ -1,26 +1,26 @@
 ---
 title: Comenzar
-description: Aprende cómo instalar y usar el plugin Native Market para redirigir usuarios a Google Play Store o Apple App Store desde tu aplicación Capacitor.
+description: Aprende cómo instalar y usar el Plugin Native Market para redirigir usuarios a Google Play Store o Apple Aplicación Store desde tu aplicación Capacitor.
 locale: es
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
+Importar { Code, Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
+<Pasos>
 1. **Instalar el paquete**
-   <PackageManagers pkg="@capgo/native-market" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/native-market" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+</Pasos>
 
 ## Uso
 
-Importa el plugin y usa sus métodos para redirigir usuarios a las tiendas de aplicaciones:
+Importa el Plugin y usa sus métodos para redirigir usuarios a las tiendas de aplicaciones:
 
 ```typescript
 import { NativeMarket } from '@capgo/native-market';
@@ -47,7 +47,7 @@ const searchInStore = async () => {
 
 ## Referencia de API
 
-### openStoreListing(options)
+### openStoreListing(Opciones)
 
 Abre el listado de la tienda de aplicaciones para la aplicación especificada.
 
@@ -61,7 +61,7 @@ interface OpenStoreListingOptions {
 
 Solicita una reseña dentro de la aplicación del usuario. En iOS 10.3+, esto muestra el diálogo de calificación sin salir de la aplicación.
 
-### search(options)
+### Buscar(Opciones)
 
 Abre la tienda de aplicaciones con resultados de búsqueda.
 
@@ -75,7 +75,7 @@ interface SearchOptions {
 
 ### iOS
 - Usa `SKStoreReviewController` para reseñas dentro de la aplicación en iOS 10.3+
-- Vuelve a abrir App Store para versiones anteriores
+- Vuelve a abrir Aplicación Store para versiones anteriores
 
 ### Android
 - Abre Google Play Store
@@ -83,21 +83,21 @@ interface SearchOptions {
 
 ## Ejemplo
 
-```typescript
-import { NativeMarket } from '@capgo/native-market';
-import { Capacitor } from '@capacitor/core';
+```TypeScript
+Importar { NativeMarket } De '@Capgo/native-market';
+Importar { Capacitor } De '@Capacitor/core';
 
-export class AppService {
+Exportar Clase AppService {
   async rateApp() {
     try {
       // Intentar reseña dentro de la aplicación primero
       await NativeMarket.requestReview();
-    } catch (error) {
+    } catch (Error) {
       // Alternativa a abrir el listado de la tienda
       const platform = Capacitor.getPlatform();
       const appId = platform === 'ios'
         ? 'id123456789' // Tu ID de aplicación iOS
-        : 'com.example.app'; // Tu nombre de paquete Android
+        : 'com.Ejemplo.Aplicación'; // Tu nombre de paquete Android
 
       await NativeMarket.openStoreListing({ appId });
     }

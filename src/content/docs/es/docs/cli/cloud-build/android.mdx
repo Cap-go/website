@@ -1,19 +1,19 @@
 ---
 title: Compilaciones Android
-description: Configura y compila aplicaciones Android con Capgo Cloud Build
+description: Configura y compila aplicaciones Android con Capgo Construcción en la nube
 locale: es
 sidebar:
   order: 3
 ---
 
-import { Steps, Aside, Card, CardGrid } from '@astrojs/starlight/components';
+Importar { Pasos, Aside, Card, CardGrid } De '@astrojs/starlight/components';
 
 Compila y envía aplicaciones Android a Google Play Store usando la infraestructura de nube segura de Capgo.
 
 ## Antes de Compilar
 
 <CardGrid>
-  <Card title="⚠️ Configura las Credenciales de Android Primero" icon="warning">
+  <Card title="⚠️ Configura las Credenciales de Android Primero" icon="Advertencia">
     **Requerido:** Debes guardar tus credenciales de Android antes de compilar aplicaciones de lanzamiento.
 
     [Configurar Credenciales de Android →](/docs/cli/cloud-build/credentials/#saving-android-credentials)
@@ -46,12 +46,12 @@ Para compilaciones de lanzamiento, necesitas un keystore de firma:
 
 | Tipo de Compilación | Keystore Requerido | Propósito |
 |------------|-------------------|---------|
-| **Debug** | No | Solo pruebas, autogenerado |
-| **Release** | Sí | Envío a Play Store |
+| **Depuración** | No | Solo pruebas, autogenerado |
+| **Lanzamiento** | Sí | Envío a Play Store |
 
 ## Crear un Keystore
 
-<Aside type="tip">
+<Aside type="Consejo">
 Para guías detalladas paso a paso con capturas de pantalla, visita:
 - [Guía de Certificados Android](https://capawesome.io/cloud/native-builds/certificates/android/)
 - [Blog: Compilaciones Automáticas de Android con GitHub Actions](https://capgo.app/blog/automatic-capacitor-android-build-github-action/)
@@ -74,7 +74,7 @@ Responde las preguntas:
 - **Organización**: Nombre de tu empresa
 - **Ubicación**: Tu ciudad, estado, país
 
-<Aside type="caution">
+<Aside type="Precaución">
 **Importante**: ¡Mantén tu archivo keystore y contraseñas seguras! Si las pierdes, no podrás actualizar tu aplicación en Play Store.
 </Aside>
 
@@ -130,11 +130,11 @@ La cadena base64 ahora está en tu portapapeles.
 
 Para habilitar las cargas automáticas a Play Store, necesitas crear una cuenta de servicio de Google Cloud con los permisos apropiados.
 
-<Aside type="tip">
+<Aside type="Consejo">
 Para instrucciones detalladas con capturas de pantalla, consulta la [Guía de Certificados Android](https://capawesome.io/cloud/native-builds/certificates/android/).
 </Aside>
 
-<Steps>
+<Pasos>
 
 1. **Crear Cuenta de Servicio en Google Cloud**
    - Ve a [Google Play Console](https://play.google.com/console) → Configuración → Acceso a la API
@@ -161,22 +161,22 @@ Para instrucciones detalladas con capturas de pantalla, consulta la [Guía de Ce
    - En "Permisos de cuenta", otorga:
      - **Lanzamientos**: "Ver información de la aplicación y descargar informes masivos (solo lectura)"
      - **Lanzamientos**: "Crear, editar y eliminar lanzamientos borrador"
-     - **Lanzamientos**: "Lanzar a producción, excluir dispositivos y usar Play App Signing"
+     - **Lanzamientos**: "Lanzar a producción, excluir dispositivos y usar Play Aplicación Signing"
    - Haz clic en "Invitar usuario"
 
 4. **Aceptar la Invitación**
    - La cuenta de servicio recibirá un correo de invitación
    - Acepta la invitación para activar los permisos
 
-</Steps>
+</Pasos>
 
-<Aside type="caution">
+<Aside type="Precaución">
 El archivo JSON de la cuenta de servicio contiene credenciales sensibles. Nunca lo confirmes en control de versiones ni lo compartas públicamente.
 </Aside>
 
 ## Compilando para Android
 
-### Compilación de Debug
+### Compilación de Depuración
 
 Perfecto para pruebas sin firma:
 
@@ -186,9 +186,9 @@ npx @capgo/cli@latest build com.example.app \
   --build-mode debug
 ```
 
-Esto crea un APK de debug que se puede instalar en cualquier dispositivo para pruebas.
+Esto crea un APK de Depuración que se puede instalar en cualquier dispositivo para pruebas.
 
-### Compilación de Release
+### Compilación de Lanzamiento
 
 Para envío a Play Store:
 
@@ -198,7 +198,7 @@ npx @capgo/cli@latest build com.example.app \
   --build-mode release
 ```
 
-Requiere que las credenciales de firma estén configuradas como variables de entorno.
+Requiere que las credenciales de firma estén configuradas como Variables de entorno.
 
 ## Integración CI/CD
 
@@ -249,7 +249,7 @@ jobs:
 
 ### Qué Sucede Durante una Compilación Android
 
-<Steps>
+<Pasos>
 
 1. **Inicialización del Sandbox** (~5 segundos)
    - Contenedor seguro iniciado
@@ -264,7 +264,7 @@ jobs:
 3. **Compilación Gradle** (2-4 minutos)
    - Dependencias descargadas
    - Compilación APK/AAB
-   - Optimización ProGuard/R8 (modo release)
+   - Optimización ProGuard/R8 (modo Lanzamiento)
    - Firma de código aplicada
 
 4. **Carga a Play Store** (30 segundos, si está configurado)
@@ -277,7 +277,7 @@ jobs:
    - Contenedor destruido
    - Sin artefactos retenidos
 
-</Steps>
+</Pasos>
 
 ### Pila de Compilación
 
@@ -286,20 +286,20 @@ Nuestro entorno de compilación Android incluye:
 - **Java**: OpenJDK 17
 - **Android SDK**: Última versión estable
 - **Gradle**: 8.x
-- **Build Tools**: 34.x
+- **Construir Tools**: 34.x
 - **Node.js**: 18.x (LTS)
-- **NPM**: Última versión estable
+- **npm**: Última versión estable
 
 ## Salida de Compilación
 
 ### APK vs AAB
 
 - **APK** (Paquete Android): Archivo instalable para instalación directa
-- **AAB** (Android App Bundle): Formato recomendado por Google Play (descargas más pequeñas para usuarios)
+- **AAB** (Android Aplicación Paquete): Formato recomendado por Google Play (descargas más pequeñas para usuarios)
 
 Por defecto, las compilaciones de Capgo crean:
-- **Modo debug**: APK
-- **Modo release**: AAB (optimizado para Play Store)
+- **Modo Depuración**: APK
+- **Modo Lanzamiento**: AAB (optimizado para Play Store)
 
 ## Tiempos de Compilación
 
@@ -307,11 +307,11 @@ Tiempos típicos de compilación Android:
 
 | Tipo de Compilación | Tiempo Promedio |
 |------------|--------------|
-| Debug | 2-3 minutos |
-| Release (sin ProGuard) | 3-4 minutos |
-| Release (con ProGuard) | 4-6 minutos |
+| Depuración | 2-3 minutos |
+| Lanzamiento (sin ProGuard) | 3-4 minutos |
+| Lanzamiento (con ProGuard) | 4-6 minutos |
 
-<Aside type="note">
+<Aside type="Nota">
 Las compilaciones Android cuestan **1× la tarifa base** (la mitad del costo de las compilaciones iOS).
 </Aside>
 
@@ -354,7 +354,7 @@ Esto compila la variante `premiumProductionRelease`.
 - Lista los alias: `keytool -list -keystore my-release-key.keystore`
 
 **"Compilación Gradle falló"**
-- Revisa los registros de compilación para el error específico
+- Revisa los registros de compilación para el Error específico
 - Asegúrate de que tu aplicación compile localmente con `./gradlew assembleRelease`
 - Verifica que todas las dependencias nativas estén en `build.gradle`
 
@@ -368,7 +368,7 @@ Esto compila la variante `premiumProductionRelease`.
 - Verifica si se pueden eliminar dependencias innecesarias
 - Contacta soporte si las compilaciones consistentemente agotan el tiempo
 
-### Registros de Debug
+### Registros de Depuración
 
 Busca estas fases clave en los registros de compilación:
 
@@ -380,7 +380,7 @@ Busca estas fases clave en los registros de compilación:
 ✔ Compilación exitosa
 ```
 
-Si una compilación falla, el error específico de Gradle se mostrará en los registros.
+Si una compilación falla, el Error específico de Gradle se mostrará en los registros.
 
 ## Mejores Prácticas
 
@@ -467,4 +467,4 @@ Si prefieres el envío manual:
 
 - [Guía de Solución de Problemas](/docs/cli/cloud-build/troubleshooting/)
 - [Comunidad Discord](https://discord.com/invite/VnYRvBfgA6)
-- Email: support@capgo.app
+- Email: support@Capgo.Aplicación

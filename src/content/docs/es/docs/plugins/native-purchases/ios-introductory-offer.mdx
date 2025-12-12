@@ -6,7 +6,7 @@ sidebar:
   order: 9
 ---
 
-import { Steps } from '@astrojs/starlight/components';
+Importar { Pasos } De '@astrojs/starlight/components';
 
 Las ofertas introductorias te permiten proporcionar a usuarios elegibles pruebas gratuitas o precios introductorios con descuento para reducir barreras de entrada y aumentar las conversiones de suscripción.
 
@@ -66,8 +66,8 @@ Los usuarios solo pueden recibir ofertas introductorias si:
 - No han recibido una oferta introductoria para ningún producto en el mismo grupo de suscripción
 - No han tenido una suscripción activa al producto
 
-:::note
-Apple maneja la verificación de elegibilidad automáticamente. El plugin native-purchases proporciona métodos para verificar la elegibilidad antes de presentar ofertas.
+:::Nota
+Apple maneja la verificación de elegibilidad automáticamente. El Plugin native-purchases proporciona métodos para verificar la elegibilidad antes de presentar ofertas.
 :::
 
 ## Requisitos previos
@@ -76,11 +76,11 @@ Primero debes [crear una suscripción renovable automáticamente](/docs/plugins/
 
 ## Crear una Oferta Introductoria
 
-<Steps>
+<Pasos>
 
 1. **Navegar a la Suscripción**
 
-   En App Store Connect, ve a la sección **Monetize > Subscriptions** de tu aplicación y selecciona la suscripción a la que deseas agregar una oferta.
+   En Aplicación Store Connect, ve a la sección **Monetize > Subscriptions** de tu aplicación y selecciona la suscripción a la que deseas agregar una oferta.
 
 2. **Agregar Precio de Suscripción**
 
@@ -88,7 +88,7 @@ Primero debes [crear una suscripción renovable automáticamente](/docs/plugins/
 
 3. **Crear Oferta Introductoria**
 
-   Selecciona **"Create introductory offer"** de las opciones.
+   Selecciona **"Crear introductory offer"** de las opciones.
 
    ![Crear oferta introductoria](/native-purchases/ios/introductory-offer/create-introductory-offer.webp)
 
@@ -134,9 +134,9 @@ Primero debes [crear una suscripción renovable automáticamente](/docs/plugins/
 
 7. **Guardar**
 
-   Haz clic en **Save** para crear la oferta introductoria. Estará disponible para pruebas inmediatamente en modo sandbox.
+   Haz clic en **Guardar** para crear la oferta introductoria. Estará disponible para pruebas inmediatamente en modo sandbox.
 
-</Steps>
+</Pasos>
 
 ## Ejemplos de Configuración de Oferta
 
@@ -176,7 +176,7 @@ Luego: $9.99/mes
 
 ## Usar en tu Aplicación
 
-El plugin native-purchases maneja automáticamente la presentación de ofertas introductorias y la elegibilidad:
+El Plugin native-purchases maneja automáticamente la presentación de ofertas introductorias y la elegibilidad:
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -339,13 +339,13 @@ setTimeout(async () => {
 ## Solución de Problemas
 
 **Oferta introductoria no se muestra:**
-- Verifica si la oferta está activada en App Store Connect
+- Verifica si la oferta está activada en Aplicación Store Connect
 - Verifica que el usuario no haya usado una oferta introductoria antes
 - Asegúrate de que el usuario no se haya suscrito a nada en el grupo
 - Prueba con una nueva cuenta sandbox
 
 **Falla la verificación de elegibilidad:**
-- Espera la sincronización de App Store (puede tomar 2-3 horas)
+- Espera la sincronización de Aplicación Store (puede tomar 2-3 horas)
 - Verifica que el product ID sea correcto
 - Verifica la configuración del grupo de suscripción
 - Prueba en sandbox con cuenta de prueba nueva
@@ -359,7 +359,7 @@ setTimeout(async () => {
 **Problemas de prueba en sandbox:**
 - Usa duraciones aceleradas (3 min = 1 semana)
 - Crea nuevas cuentas de prueba para cada prueba
-- Espera que la prueba se complete naturalmente
+- Espera que la prueba se Completo naturalmente
 - Verifica el recuento de renovaciones (máximo 6 en sandbox)
 
 ## Análisis y Optimización

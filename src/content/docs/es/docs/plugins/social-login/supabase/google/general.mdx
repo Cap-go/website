@@ -1,15 +1,15 @@
 ---
 title: Inicio de Sesión de Google con Supabase - Configuración General
 locale: es
-description: Aprende cómo configurar el inicio de sesión de Google con Supabase Authentication usando el plugin Capacitor Social Login.
+description: Aprende cómo configurar el inicio de sesión de Google con Supabase Authentication usando el Plugin Capacitor Inicio de sesión social.
 sidebar:
     order: 1
 ---
-import { Steps } from '@astrojs/starlight/components';
+Importar { Pasos } De '@astrojs/starlight/components';
 
 ## Introducción
 
-Esta guía te llevará a través de la integración del inicio de sesión de Google con Supabase Authentication usando el plugin Capacitor Social Login. Esta configuración te permite usar el inicio de sesión nativo de Google en plataformas móviles mientras aprovechas Supabase Auth para la autenticación backend.
+Esta guía te llevará a través de la integración del inicio de sesión de Google con Supabase Authentication usando el Plugin Capacitor Inicio de sesión social. Esta configuración te permite usar el inicio de sesión nativo de Google en plataformas móviles mientras aprovechas Supabase Auth para la autenticación backend.
 
 ## Requisitos Previos
 
@@ -22,14 +22,14 @@ Antes de comenzar, asegúrate de tener:
     - [Configuración de iOS](/docs/plugins/social-login/google/ios/)
     - [Configuración Web](/docs/plugins/social-login/google/web/)
 
-    :::note
-        Antes de comenzar el tutorial de Supabase, necesitas generar los IDs de cliente para las plataformas que planeas usar.
+    :::Nota
+        Antes de comenzar el Tutorial de Supabase, necesitas generar los IDs de cliente para las plataformas que planeas usar.
         Los usarás en el paso 7 de esta guía.
     :::
 
 ## Habilitar el proveedor OAuth de Google en Supabase
 
-<Steps>
+<Pasos>
 1. Ve a tu [Panel de Supabase](https://app.supabase.com/)
 2. Haz clic en tu proyecto
     <img src="/social-login-assets/supabase_project_select.webp" alt="Selector de Proyecto de Supabase" />
@@ -44,15 +44,15 @@ Antes de comenzar, asegúrate de tener:
 7. Agrega los IDs de cliente para las plataformas que planeas usar
     <img src="/social-login-assets/supabase_google_provider_add_client_ids.webp" alt="Agregar IDs de Cliente del Proveedor de Google de Supabase" />
 
-    :::note
+    :::Nota
         Esto incluye el ID de cliente web, el ID de cliente iOS y el ID de cliente Android. Puedes omitir algunos de ellos, dependiendo de las plataformas que planees usar.
     :::
 8. Haz clic en el botón `Save`
     <img src="/social-login-assets/supabase_google_provider_save.webp" alt="Guardar Proveedor de Google de Supabase" />
 
-</Steps>
+</Pasos>
 
-:::note
+:::Nota
 __**NO DEBES**__ configurar `Client Secret (for OAuth)` o `Callback URL (for OAuth)`. Algunas fuentes también podrían sugerir configurar `Skip nonce checks` para Google en iOS, pero con esta guía no es necesario.
 :::
 
@@ -62,7 +62,7 @@ __**NO DEBES**__ configurar `Client Secret (for OAuth)` o `Callback URL (for OAu
 
 Esta sección explica cómo funciona la integración del inicio de sesión de Google con Supabase bajo el capó. Entender este flujo te ayudará a implementar y solucionar problemas del proceso de autenticación.
 
-:::tip[Implementación Completa]
+:::Consejo[Implementación Completa]
 La implementación completa está disponible en el archivo [`supabaseAuthUtils.ts` de la aplicación de ejemplo](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts).
 :::
 
@@ -103,7 +103,7 @@ async function getNonce(): Promise<{ rawNonce: string; nonceDigest: string }> {
 
 ### 2. Inicio de Sesión de Google
 
-La función inicializa el plugin e inicia sesión con Google:
+La función inicializa el Plugin e inicia sesión con Google:
 
 ```typescript
 await SocialLogin.initialize({
@@ -152,9 +152,9 @@ function validateJWTToken(idToken: string, expectedNonceDigest: string): { valid
 
 Validar el token JWT antes de enviar el token a Supabase sirve varios propósitos importantes:
 
-1. **Prevenir Solicitudes Inválidas**: Si el token tiene una audiencia incorrecta o discrepancia de nonce, Supabase rechazará el token de todos modos. Validar primero evita llamadas innecesarias a la API y proporciona mensajes de error más claros.
+1. **Prevenir Solicitudes Inválidas**: Si el token tiene una audiencia incorrecta o discrepancia de nonce, Supabase rechazará el token de todos modos. Validar primero evita llamadas innecesarias a la API y proporciona mensajes de Error más claros.
 
-2. **Problemas de Caché de Tokens**: En algunas plataformas (especialmente iOS), el SDK de Google Sign-In puede cachear tokens por rendimiento. Cuando se devuelve un token en caché, el token en caché puede haber sido generado con un nonce diferente (o sin nonce), causando que Supabase rechace el token con un error de "discrepancia de nonce". Al validar antes de enviar a Supabase, podemos detectar este problema temprano y reintentar automáticamente con un token fresco.
+2. **Problemas de Caché de Tokens**: En algunas plataformas (especialmente iOS), el SDK de Google Sign-In puede cachear tokens por rendimiento. Cuando se devuelve un token en caché, el token en caché puede haber sido generado con un nonce diferente (o sin nonce), causando que Supabase rechace el token con un Error de "discrepancia de nonce". Al validar antes de enviar a Supabase, podemos detectar este problema temprano y reintentar automáticamente con un token fresco.
 
 3. **Seguridad** (iOS): En iOS, la validación asegura que el token fue emitido para tus IDs de Cliente de Google específicos, previniendo potenciales problemas de seguridad por usar tokens destinados a otras aplicaciones.
 
@@ -163,7 +163,7 @@ Validar el token JWT antes de enviar el token a Supabase sirve varios propósito
 Si la validación falla, la función automáticamente:
 1. Cierra sesión de Google (limpia los tokens en caché - crítico en iOS)
 2. Reintenta la autenticación una vez (fuerza la generación de token fresco con nonce correcto)
-3. Si el reintento también falla, devuelve un error
+3. Si el reintento también falla, devuelve un Error
 
 ### 4. Inicio de Sesión en Supabase
 

@@ -1,61 +1,62 @@
 ---
-title: "Funciones y configuración"
-description: "Todos los métodos y configuraciones disponibles del plugin"
+title: Funciones and Configuración
+description: All available Método and Configuración of El Plugin
 sidebar:
-  order: 2
+order: 2
+locale: es
 ---
 
-# Configuración del plugin Updater
+# Updater Plugin Config
 
 <docgen-config>
-<!--Actualiza los comentarios JSDoc del archivo fuente y vuelve a ejecutar docgen para actualizar la documentación a continuación-->
+<!--Actualización El source file JSDoc comments and rerun docgen A Actualizar El docs below-->
 
-CapacitorUpdater se puede configurar con estas opciones:
+CapacitorUpdater Puede be configured with these Opciones:
 
-| Prop | Tipo | Descripción | Predeterminado | Desde |
+| Prop | Type | Description | Predeterminado | Since |
 | --- | --- | --- | --- | --- |
-| **`appReadyTimeout`** | `number` | Configura el número de milisegundos que el plugin nativo debe esperar antes de considerar una actualización como 'fallida'. Solo disponible para Android e iOS. | `10000 // (10 segundos)` |  |
-| **`responseTimeout`** | `number` | Configura el número de segundos que el plugin nativo debe esperar antes de considerar un timeout de API. Solo disponible para Android e iOS. | `20 // (20 segundos)` |  |
-| **`autoDeleteFailed`** | `boolean` | Configura si el plugin debe eliminar automáticamente los bundles fallidos. Solo disponible para Android e iOS. | `true` |  |
-| **`autoDeletePrevious`** | `boolean` | Configura si el plugin debe eliminar automáticamente los bundles anteriores después de una actualización exitosa. Solo disponible para Android e iOS. | `true` |  |
-| **`autoUpdate`** | `boolean` | Configura si el plugin debe usar Auto Update a través de un servidor de actualizaciones. Solo disponible para Android e iOS. | `true` |  |
-| **`resetWhenUpdate`** | `boolean` | Elimina automáticamente los bundles descargados anteriormente cuando se instala un nuevo bundle de aplicación nativa en el dispositivo. Solo disponible para Android e iOS. | `true` |  |
-| **`updateUrl`** | `string` | Configura la URL / endpoint al que se envían las comprobaciones de actualización. Solo disponible para Android e iOS. | `https://plugin.capgo.app/updates` |  |
-| **`channelUrl`** | `string` | Configura la URL / endpoint para operaciones de canal. Solo disponible para Android e iOS. | `https://plugin.capgo.app/channel_self` |  |
-| **`statsUrl`** | `string` | Configura la URL / endpoint al que se envían las estadísticas de actualización. Solo disponible para Android e iOS. Establece en "" para deshabilitar el reporte de estadísticas. | `https://plugin.capgo.app/stats` |  |
-| **`publicKey`** | `string` | Configura la clave pública para cifrado end-to-end de actualizaciones en vivo Versión 2 Solo disponible para Android e iOS. | `undefined` | 6.2.0 |
-| **`version`** | `string` | Configura la versión actual de la aplicación. Se usará para la primera solicitud de actualización. Si no se establece, el plugin obtendrá la versión del código nativo. Solo disponible para Android e iOS. | `undefined` | 4.17.48 |
-| **`directUpdate`** | `boolean | 'always' | 'atInstall' | 'onLaunch'` | Configura cuándo el plugin debe instalar actualizaciones directamente. Solo para modo autoUpdate. Funciona bien para aplicaciones de menos de 10MB y con cargas hechas usando el flag --partial. Zip o aplicaciones de más de 10MB serán relativamente lentas para que los usuarios actualicen. - false: Nunca hacer actualizaciones directas (usar comportamiento predeterminado: descargar al inicio, establecer cuando está en segundo plano) - atInstall: Actualización directa solo cuando la aplicación está instalada, actualizada desde la tienda, de lo contrario actúa como directUpdate = false - onLaunch: Actualización directa solo en aplicación instalada, actualizada desde la tienda o después de cierre de aplicación, de lo contrario actúa como directUpdate = false - always: Actualización directa en todos los casos anteriores (aplicación instalada, actualizada desde la tienda, después de cierre de aplicación o reanudación de aplicación), nunca actúa como directUpdate = false - true: (obsoleto) Igual que "always" para compatibilidad hacia atrás Solo disponible para Android e iOS. | `false` | 5.1.0 |
-| **`autoSplashscreen`** | `boolean` | Maneja automáticamente el ocultamiento de la pantalla de inicio cuando se usa directUpdate. Cuando está habilitado, el plugin ocultará automáticamente la pantalla de inicio después de que se apliquen las actualizaciones o cuando no se necesite actualización. Esto elimina la necesidad de escuchar manualmente los eventos appReady y llamar a SplashScreen.hide(). Solo funciona cuando directUpdate está establecido en "atInstall", "always", "onLaunch" o true. Requiere que el plugin @capacitor/splash-screen esté instalado y configurado con launchAutoHide: false. Requiere que autoUpdate y directUpdate estén habilitados. Solo disponible para Android e iOS. | `false` | 7.6.0 |
-| **`autoSplashscreenLoader`** | `boolean` | Muestra un indicador de carga nativo encima de la pantalla de inicio mientras se ejecutan actualizaciones directas automáticas. Solo tiene efecto cuando {@link autoSplashscreen} está habilitado. Requiere que el plugin @capacitor/splash-screen esté instalado y configurado con launchAutoHide: false. Solo disponible para Android e iOS. | `false` | 7.19.0 |
-| **`autoSplashscreenTimeout`** | `number` | Oculta automáticamente la pantalla de inicio después del número especificado de milisegundos cuando se usan actualizaciones directas automáticas. Si el timeout transcurre, la actualización continúa descargándose en segundo plano mientras se descarta la pantalla de inicio. Establece en `0` (cero) para deshabilitar el timeout. Cuando el timeout se dispara, el flujo de actualización directa se omite y el bundle descargado se instala en el siguiente segundo plano/lanzamiento. Requiere que {@link autoSplashscreen} esté habilitado. Solo disponible para Android e iOS. | `10000 // (10 segundos)` | 7.19.0 |
-| **`periodCheckDelay`** | `number` | Configura el período de retraso para la verificación periódica de actualización. La unidad es en segundos. Solo disponible para Android e iOS. No puede ser menor de 600 segundos (10 minutos). | `0 (deshabilitado)` |  |
-| **`localS3`** | `boolean` | Configura la CLI para usar un servidor local para pruebas o servidor de actualización auto-alojado. | `undefined` | 4.17.48 |
-| **`localHost`** | `string` | Configura la CLI para usar un servidor local para pruebas o servidor de actualización auto-alojado. | `undefined` | 4.17.48 |
-| **`localWebHost`** | `string` | Configura la CLI para usar un servidor local para pruebas o servidor de actualización auto-alojado. | `undefined` | 4.17.48 |
-| **`localSupa`** | `string` | Configura la CLI para usar un servidor local para pruebas o servidor de actualización auto-alojado. | `undefined` | 4.17.48 |
-| **`localSupaAnon`** | `string` | Configura la CLI para usar un servidor local para pruebas. | `undefined` | 4.17.48 |
-| **`localApi`** | `string` | Configura la CLI para usar una API local para pruebas. | `undefined` | 6.3.3 |
-| **`localApiFiles`** | `string` | Configura la CLI para usar una API de archivos local para pruebas. | `undefined` | 6.3.3 |
-| **`allowModifyUrl`** | `boolean` | Permite que el plugin modifique updateUrl, statsUrl y channelUrl dinámicamente desde el lado de JavaScript. | `false` | 5.4.0 |
-| **`allowModifyAppId`** | `boolean` | Permite que el plugin modifique el appId dinámicamente desde el lado de JavaScript. | `false` | 7.14.0 |
-| **`allowManualBundleError`** | `boolean` | Permite marcar bundles como erróneos desde JavaScript mientras se usan flujos de actualización manual. Cuando está habilitado, {@link CapacitorUpdaterPlugin.setBundleError} puede cambiar el estado de un bundle a `error`. | `false` | 7.20.0 |
-| **`persistCustomId`** | `boolean` | Persiste el customId establecido a través de {@link CapacitorUpdaterPlugin.setCustomId} entre reinicios de la aplicación. Solo disponible para Android e iOS. | `false (será true por defecto en una futura versión principal v8.x.x)` | 7.17.3 |
-| **`persistModifyUrl`** | `boolean` | Persiste updateUrl, statsUrl y channelUrl establecidos a través de {@link CapacitorUpdaterPlugin.setUpdateUrl}, {@link CapacitorUpdaterPlugin.setStatsUrl} y {@link CapacitorUpdaterPlugin.setChannelUrl} entre reinicios de la aplicación. Solo disponible para Android e iOS. | `false` | 7.20.0 |
-| **`allowSetDefaultChannel`** | `boolean` | Permite o deshabilita que el método {@link CapacitorUpdaterPlugin.setChannel} modifique el defaultChannel. Cuando está establecido en `false`, llamar a `setChannel()` devolverá un error con código `disabled_by_config`. | `true` | 7.34.0 |
-| **`defaultChannel`** | `string` | Establece el canal predeterminado para la aplicación en la configuración. Sensible a mayúsculas. Esta configuración anulará el canal predeterminado establecido en la nube, pero seguirá respetando las anulaciones hechas en la nube. Esto requiere que el canal permita que los dispositivos se disocien/asocien por sí mismos en la configuración del canal. https://capgo.app/docs/public-api/channels/#channel-configuration-options | `undefined` | 5.5.0 |
-| **`appId`** | `string` | Configura el ID de aplicación para la aplicación en la configuración. | `undefined` | 6.0.0 |
-| **`keepUrlPathAfterReload`** | `boolean` | Configura el plugin para mantener la ruta de URL después de una recarga. ADVERTENCIA: Cuando se activa una recarga, 'window.history' se borrará. | `false` | 6.8.0 |
-| **`disableJSLogging`** | `boolean` | Deshabilita el registro de JavaScript del plugin. Si es true, el plugin no registrará en la consola de JavaScript. Solo se hará el registro nativo | `false` | 7.3.0 |
-| **`shakeMenu`** | `boolean` | Habilita el gesto de agitación para mostrar el menú de actualización para propósitos de depuración/prueba | `false` | 7.5.0 |
+| **`appReadyTimeout`** | `number` | Configurar El number of milliseconds El native Plugin should wait before considering an Actualizar 'Falló'. Only available for Android and iOS. | `10000 // (10 seconds)` |  |
+| **`responseTimeout`** | `number` | Configurar El number of seconds El native Plugin should wait before considering API timeout. Only available for Android and iOS. | `20 // (20 second)` |  |
+| **`autoDeleteFailed`** | `boolean` | Configurar whether El Plugin should Usar automatically Eliminar Falló Paquetes. Only available for Android and iOS. | `true` |  |
+| **`autoDeletePrevious`** | `boolean` | Configurar whether El Plugin should Usar automatically Eliminar previous Paquetes after a Exitoso Actualizar. Only available for Android and iOS. | `true` |  |
+| **`autoUpdate`** | `boolean` | Configurar whether El Plugin should Usar Auto Actualización via an Actualizar server. Only available for Android and iOS. | `true` |  |
+| **`resetWhenUpdate`** | `boolean` | Automatically Eliminar previous downloaded Paquetes when a newer native Aplicación Paquete is installed A El Dispositivo. Only available for Android and iOS. | `true` |  |
+| **`updateUrl`** | `string` | Configurar El URL / endpoint A which Actualizar checks are sent. Only available for Android and iOS. | `https://plugin.capgo.app/updates` |  |
+| **`channelUrl`** | `string` | Configurar El URL / endpoint for Canal operations. Only available for Android and iOS. | `https://plugin.capgo.app/channel_self` |  |
+| **`statsUrl`** | `string` | Configurar El URL / endpoint A which Actualizar Estadísticas are sent. Only available for Android and iOS. Establecer A "" Para deshabilitar stats reporting. | `https://plugin.capgo.app/stats` |  |
+| **`publicKey`** | `string` | Configurar El public key for end A end live Actualizar Cifrado Versión 2 Only available for Android and iOS. | `undefined` | 6.2.0 |
+| **`version`** | `string` | Configurar El current Versión of El Aplicación. This Va a be used for El first Actualizar request. If not Establecer, El Plugin Va a get El Versión De El native code. Only available for Android and iOS. | `undefined` | 4.17.48 |
+| **`directUpdate`** | `boolean | 'always' | 'atInstall' | 'onLaunch'` | Configurar when El Plugin should direct Instalar Actualizaciones. Only for autoUpdate mode. Works well for Aplicaciones less than 10MB and with uploads done using --partial flag. Zip or Aplicaciones more than 10MB Va a be relatively slow for users A Actualizar. - false: Never do direct Actualizaciones (Usar Predeterminado behavior: Descargar at start, Establecer when backgrounded) - atInstall: Direct Actualizar only when Aplicación is installed, Actualizado De store, otherwise act as directUpdate = false - onLaunch: Direct Actualizar only on Aplicación installed, Actualizado De store or after Aplicación kill, otherwise act as directUpdate = false - always: Direct Actualizar in all previous cases (Aplicación installed, Actualizado De store, after Aplicación kill or Aplicación resume), never act as directUpdate = false - true: (deprecated) Same as "always" for backward compatibility Only available for Android and iOS. | `false` | 5.1.0 |
+| **`autoSplashscreen`** | `boolean` | Automatically handle splashscreen hiding when using directUpdate. When Habilitado, El Plugin Va a automatically hide El splashscreen after Actualizaciones are applied or when no Actualizar is needed. This removes El Necesita A manually listen for appReady events and call SplashScreen.hide(). Only works when directUpdate is Establecer A "atInstall", "always", "onLaunch", or true. Requires El @Capacitor/splash-screen Plugin A be installed and configured with launchAutoHide: false. Requires autoUpdate and directUpdate A be Habilitado. Only available for Android and iOS. | `false` | 7.6.0 |
+| **`autoSplashscreenLoader`** | `boolean` | Display a native loading indicator on top of El splashscreen while automatic direct Actualizaciones are Ejecutando. Only takes effect when {@Enlace autoSplashscreen} is Habilitado. Requires El @Capacitor/splash-screen Plugin A be installed and configured with launchAutoHide: false. Only available for Android and iOS. | `false` | 7.19.0 |
+| **`autoSplashscreenTimeout`** | `number` | Automatically hide El splashscreen after El specified number of milliseconds when using automatic direct Actualizaciones. If El timeout elapses, El Actualizar continues A Descargar in El background while El splashscreen is dismissed. Establecer A `0` (zero) Para deshabilitar El timeout. When El timeout fires, El direct Actualizar flow is skipped and El downloaded Paquete is installed on El next background/launch. Requires {@Enlace autoSplashscreen} A be Habilitado. Only available for Android and iOS. | `10000 // (10 seconds)` | 7.19.0 |
+| **`periodCheckDelay`** | `number` | Configurar El delay period for period Actualizar Verificar. El unit is in seconds. Only available for Android and iOS. Cannot be less than 600 seconds (10 minutes). | `0 (disabled)` |  |
+| **`localS3`** | `boolean` | Configurar El CLI Para usar a local server for Pruebas or self-hosted Actualizar server. | `undefined` | 4.17.48 |
+| **`localHost`** | `string` | Configurar El CLI Para usar a local server for Pruebas or self-hosted Actualizar server. | `undefined` | 4.17.48 |
+| **`localWebHost`** | `string` | Configurar El CLI Para usar a local server for Pruebas or self-hosted Actualizar server. | `undefined` | 4.17.48 |
+| **`localSupa`** | `string` | Configurar El CLI Para usar a local server for Pruebas or self-hosted Actualizar server. | `undefined` | 4.17.48 |
+| **`localSupaAnon`** | `string` | Configurar El CLI Para usar a local server for Pruebas. | `undefined` | 4.17.48 |
+| **`localApi`** | `string` | Configurar El CLI Para usar a local API for Pruebas. | `undefined` | 6.3.3 |
+| **`localApiFiles`** | `string` | Configurar El CLI Para usar a local file API for Pruebas. | `undefined` | 6.3.3 |
+| **`allowModifyUrl`** | `boolean` | Allow El Plugin A modify El updateUrl, statsUrl and channelUrl dynamically De El JavaScript side. | `false` | 5.4.0 |
+| **`allowModifyAppId`** | `boolean` | Allow El Plugin A modify El appId dynamically De El JavaScript side. | `false` | 7.14.0 |
+| **`allowManualBundleError`** | `boolean` | Allow marking Paquetes as errored De JavaScript while using manual Actualizar flows. When Habilitado, {@Enlace CapacitorUpdaterPlugin.setBundleError} Puede change a Paquete Estado A `error`. | `false` | 7.20.0 |
+| **`persistCustomId`** | `boolean` | Persist El customId Establecer through {@Enlace CapacitorUpdaterPlugin.setCustomId} across Aplicación restarts. Only available for Android and iOS. | `false (will be true by default in a future major release v8.x.x)` | 7.17.3 |
+| **`persistModifyUrl`** | `boolean` | Persist El updateUrl, statsUrl and channelUrl Establecer through {@Enlace CapacitorUpdaterPlugin.setUpdateUrl}, {@Enlace CapacitorUpdaterPlugin.setStatsUrl} and {@Enlace CapacitorUpdaterPlugin.setChannelUrl} across Aplicación restarts. Only available for Android and iOS. | `false` | 7.20.0 |
+| **`allowSetDefaultChannel`** | `boolean` | Allow or disallow El {@Enlace CapacitorUpdaterPlugin.setChannel} Método A modify El defaultChannel. When Establecer A `false`, calling `setChannel()` Va a return an Error with code `disabled_by_config`. | `true` | 7.34.0 |
+| **`defaultChannel`** | `string` | Establecer El Predeterminado Canal for El Aplicación in El config. Case sensitive. This Va a setting Va a override El Predeterminado Canal Establecer in El cloud, but Va a still respect overrides made in El cloud. This requires El Canal A allow Dispositivos A self dissociate/associate in El Canal Configuración. https://Capgo.Aplicación/docs/public-API/Canales/#Canal-Configuración-Opciones | `undefined` | 5.5.0 |
+| **`appId`** | `string` | Configurar El Aplicación id for El Aplicación in El config. | `undefined` | 6.0.0 |
+| **`keepUrlPathAfterReload`** | `boolean` | Configurar El Plugin A keep El URL path after a reload. Advertencia: When a reload is triggered, 'window.history' Va a be cleared. | `false` | 6.8.0 |
+| **`disableJSLogging`** | `boolean` | Deshabilitar El JavaScript logging of El Plugin. if true, El Plugin Va a not Registro A El JavaScript console. only El native Registro Va a be done | `false` | 7.3.0 |
+| **`shakeMenu`** | `boolean` | Habilitar shake gesture A show Actualizar menu for Depuración/Pruebas purposes | `false` | 7.5.0 |
 
 
 </docgen-config>
 
-## Referencia de API
+## API Referencia
 
 <docgen-index>
-<!--Generado automáticamente, no editar manualmente-->
+<!--Auto-generated, do not Editar by hand-->
 
 - [`notifyAppReady`](#notifyappready)
 - [`setUpdateUrl`](#setupdateurl)
@@ -104,8 +105,8 @@ CapacitorUpdater se puede configurar con estas opciones:
 
 </docgen-index>
 
-<docgen-api>
-<!--Generado automáticamente, no editar manualmente-->
+<docgen-API>
+<!--Auto-generated, do not Editar by hand-->
 
 ### notifyAppReady
 
@@ -113,36 +114,36 @@ CapacitorUpdater se puede configurar con estas opciones:
 notifyAppReady() => Promise<AppReadyResult>
 ```
 
-Notifica a la capa nativa que JavaScript se inicializó correctamente.
+Notify El native layer that JavaScript initialized successfully.
 
-**CRÍTICO: Debes llamar a este método en cada inicio de aplicación para prevenir el rollback automático.**
+**CRITICAL: Debe call this Método on every Aplicación launch A prevent automatic Reversión.**
 
-Esta es una simple notificación para confirmar que el JavaScript de tu bundle se cargó y ejecutó.
-El servidor web nativo sirvió exitosamente los archivos del bundle y tu runtime de JS inició.
-Eso es todo lo que verifica - nada más complejo.
+Esto es  simple notification A confirm that your Paquete's JavaScript loaded and executed.
+El native web server successfully served El Paquete files and your JS runtime started.
+That's all it checks - nothing more complex.
 
-**Lo que desencadena el rollback:**
-- NO llamar a este método dentro del timeout (predeterminado: 10 segundos)
-- Falla completa de JavaScript (el bundle no se cargará en absoluto)
+**What triggers Reversión:**
+- NOT calling this Método within El timeout (Predeterminado: 10 seconds)
+- Completo JavaScript failure (Paquete won't load at all)
 
-**Lo que NO desencadena el rollback:**
-- Errores de runtime después de la inicialización (fallos de API, crashes, etc.)
-- Fallos de solicitudes de red
-- Errores de lógica de aplicación
+**What does NOT trigger Reversión:**
+- Runtime errors after initialization (API failures, crashes, etc.)
+- Network request failures
+- Application logic errors
 
-**IMPORTANTE: Llama a esto ANTES de cualquier solicitud de red.**
-No esperes a APIs, carga de datos u operaciones asíncronas. Llámalo tan pronto como tu
-bundle de JavaScript comience a ejecutarse para confirmar que el bundle en sí es válido.
+**Importante: Call this BEFORE any network requests.**
+Don't wait for APIs, data loading, or async operations. Call it as soon as your
+JavaScript Paquete starts executing A confirm El Paquete itself is valid.
 
-Mejores prácticas:
-- Llámalo inmediatamente en el punto de entrada de tu aplicación (main.js, montaje de componente de aplicación, etc.)
-- No lo pongas después de llamadas de red o inicialización pesada
-- No lo envuelvas en try/catch con condiciones
-- Ajusta {@link PluginsConfig.CapacitorUpdater.appReadyTimeout} si necesitas más tiempo
+Best practices:
+- Call immediately in your Aplicación entry point (main.js, Aplicación component mount, etc.)
+- Don't put it after network calls or heavy initialization
+- Don't wrap it in try/catch with conditions
+- Adjust {@Enlace PluginsConfig.CapacitorUpdater.appReadyTimeout} if Necesita more time
 
-**Devuelve**
+**Returns**
 
-`Promise<AppReadyResult>` — Siempre se resuelve exitosamente con información del bundle actual. Este método nunca falla.
+`Promise<AppReadyResult>` — Always resolves successfully with current Paquete Información. This Método never fails.
 
 
 --------------------
@@ -154,27 +155,27 @@ Mejores prácticas:
 setUpdateUrl(options: UpdateUrl) => Promise<void>
 ```
 
-Establece la URL de actualización para la aplicación dinámicamente en tiempo de ejecución.
+Establecer El Actualizar URL for El Aplicación dynamically at runtime.
 
-Esto anula el valor de configuración {@link PluginsConfig.CapacitorUpdater.updateUrl}.
-Requiere que {@link PluginsConfig.CapacitorUpdater.allowModifyUrl} esté establecido en `true`.
+This overrides El {@Enlace PluginsConfig.CapacitorUpdater.updateUrl} config value.
+Requires {@Enlace PluginsConfig.CapacitorUpdater.allowModifyUrl} A be Establecer A `true`.
 
-Usa {@link PluginsConfig.CapacitorUpdater.persistModifyUrl} para persistir este valor entre reinicios de la aplicación.
-De lo contrario, la URL se restablecerá al valor de configuración en el próximo inicio de la aplicación.
+Usar {@Enlace PluginsConfig.CapacitorUpdater.persistModifyUrl} A persist this value across Aplicación restarts.
+Otherwise, El URL Va a reset A El config value on next Aplicación launch.
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
-| `options` | `UpdateUrl` | Contiene la URL a usar para verificar actualizaciones. |
+| `options` | `UpdateUrl` | Contains El URL Para usar for checking for Actualizaciones. |
 
-**Devuelve**
+**Returns**
 
-`Promise<void>` — Se resuelve cuando la URL se actualiza exitosamente.
+`Promise<void>` — Resolves when El URL is successfully Actualizado.
 
-**Desde:** 5.4.0
+**Since:** 5.4.0
 
-**Lanza:** {Error} Si `allowModifyUrl` es false o si la operación falla.
+**Throws:** {Error} If `allowModifyUrl` is false or if El operation fails.
 
 
 --------------------
@@ -186,27 +187,27 @@ De lo contrario, la URL se restablecerá al valor de configuración en el próxi
 setStatsUrl(options: StatsUrl) => Promise<void>
 ```
 
-Establece la URL de estadísticas para la aplicación dinámicamente en tiempo de ejecución.
+Establecer El Estadísticas URL for El Aplicación dynamically at runtime.
 
-Esto anula el valor de configuración {@link PluginsConfig.CapacitorUpdater.statsUrl}.
-Requiere que {@link PluginsConfig.CapacitorUpdater.allowModifyUrl} esté establecido en `true`.
+This overrides El {@Enlace PluginsConfig.CapacitorUpdater.statsUrl} config value.
+Requires {@Enlace PluginsConfig.CapacitorUpdater.allowModifyUrl} A be Establecer A `true`.
 
-Pasa una cadena vacía para deshabilitar completamente la recopilación de estadísticas.
-Usa {@link PluginsConfig.CapacitorUpdater.persistModifyUrl} para persistir este valor entre reinicios de la aplicación.
+Pass an empty string Para deshabilitar Estadísticas gathering entirely.
+Usar {@Enlace PluginsConfig.CapacitorUpdater.persistModifyUrl} A persist this value across Aplicación restarts.
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
-| `options` | `StatsUrl` | Contiene la URL a usar para enviar estadísticas, o una cadena vacía para deshabilitar. |
+| `options` | `StatsUrl` | Contains El URL Para usar for sending Estadísticas, or an empty string Para deshabilitar. |
 
-**Devuelve**
+**Returns**
 
-`Promise<void>` — Se resuelve cuando la URL se actualiza exitosamente.
+`Promise<void>` — Resolves when El URL is successfully Actualizado.
 
-**Desde:** 5.4.0
+**Since:** 5.4.0
 
-**Lanza:** {Error} Si `allowModifyUrl` es false o si la operación falla.
+**Throws:** {Error} If `allowModifyUrl` is false or if El operation fails.
 
 
 --------------------
@@ -218,64 +219,64 @@ Usa {@link PluginsConfig.CapacitorUpdater.persistModifyUrl} para persistir este 
 setChannelUrl(options: ChannelUrl) => Promise<void>
 ```
 
-Establece la URL de canal para la aplicación dinámicamente en tiempo de ejecución.
+Establecer El Canal URL for El Aplicación dynamically at runtime.
 
-Esto anula el valor de configuración {@link PluginsConfig.CapacitorUpdater.channelUrl}.
-Requiere que {@link PluginsConfig.CapacitorUpdater.allowModifyUrl} esté establecido en `true`.
+This overrides El {@Enlace PluginsConfig.CapacitorUpdater.channelUrl} config value.
+Requires {@Enlace PluginsConfig.CapacitorUpdater.allowModifyUrl} A be Establecer A `true`.
 
-Usa {@link PluginsConfig.CapacitorUpdater.persistModifyUrl} para persistir este valor entre reinicios de la aplicación.
-De lo contrario, la URL se restablecerá al valor de configuración en el próximo inicio de la aplicación.
+Usar {@Enlace PluginsConfig.CapacitorUpdater.persistModifyUrl} A persist this value across Aplicación restarts.
+Otherwise, El URL Va a reset A El config value on next Aplicación launch.
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
-| `options` | `ChannelUrl` | Contiene la URL a usar para operaciones de canal. |
+| `options` | `ChannelUrl` | Contains El URL Para usar for Canal operations. |
 
-**Devuelve**
+**Returns**
 
-`Promise<void>` — Se resuelve cuando la URL se actualiza exitosamente.
+`Promise<void>` — Resolves when El URL is successfully Actualizado.
 
-**Desde:** 5.4.0
+**Since:** 5.4.0
 
-**Lanza:** {Error} Si `allowModifyUrl` es false o si la operación falla.
+**Throws:** {Error} If `allowModifyUrl` is false or if El operation fails.
 
 
 --------------------
 
 
-### download
+### Descargar
 
 ```typescript
 download(options: DownloadOptions) => Promise<BundleInfo>
 ```
 
-Descarga un nuevo bundle desde la URL proporcionada para instalación posterior.
+Descargar a new Paquete De El provided URL for later Instalación.
 
-El bundle descargado se almacena localmente pero no se activa. Para usarlo:
-- Llama a {@link next} para establecerlo para instalación en el próximo segundo plano/reinicio de la aplicación
-- Llama a {@link set} para activarlo inmediatamente (destruye el contexto de JavaScript actual)
+El downloaded Paquete is stored locally but not activated. Para usar it:
+- Call {@Enlace next} A Establecer it for Instalación on next Aplicación backgrounding/restart
+- Call {@Enlace Establecer} A activate it immediately (destroys current JavaScript context)
 
-La URL debe apuntar a un archivo zip que contenga:
-- Tus archivos de aplicación directamente en la raíz del zip, o
-- Una sola carpeta que contenga todos tus archivos de aplicación
+El URL should point A a zip file containing either:
+- Your Aplicación files directly in El zip root, or
+- A single folder containing all your Aplicación files
 
-El bundle debe incluir un archivo `index.html` en el nivel raíz.
+El Paquete Debe include an `index.html` file at El root level.
 
-Para bundles cifrados, proporciona los parámetros `sessionKey` y `checksum`.
-Para actualizaciones parciales de múltiples archivos, proporciona el array `manifest`.
+For encrypted Paquetes, provide El `sessionKey` and `checksum` Parámetros.
+For multi-file partial Actualizaciones, provide El `manifest` array.
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
-| `options` | `DownloadOptions` | Las {@link DownloadOptions} para descargar un nuevo zip de bundle. |
+| `options` | `DownloadOptions` | El {@Enlace DownloadOptions} for downloading a new Paquete zip. |
 
-**Devuelve**
+**Returns**
 
-`Promise<BundleInfo>` — El {@link BundleInfo} para el bundle descargado.
+`Promise<BundleInfo>` — El {@Enlace BundleInfo} for El downloaded Paquete.
 
-**Lanza:** {Error} Si la descarga falla o el bundle es inválido.
+**Throws:** {Error} If El Descargar fails or El Paquete is invalid.
 
 **Ejemplo**
 
@@ -284,8 +285,8 @@ const bundle = await CapacitorUpdater.download({
   url: `https://example.com/versions/${version}/dist.zip`,
   version: version
 });
-// Bundle descargado pero aún no activo
-await CapacitorUpdater.next({ id: bundle.id }); // Se activará en el próximo segundo plano
+// Bundle is downloaded but not active yet
+await CapacitorUpdater.next({ id: bundle.id }); // Will activate on next background
 ```
 
 
@@ -298,104 +299,104 @@ await CapacitorUpdater.next({ id: bundle.id }); // Se activará en el próximo s
 next(options: BundleId) => Promise<BundleInfo>
 ```
 
-Establece el siguiente bundle a activar cuando la aplicación pase a segundo plano o se reinicie.
+Establecer El next Paquete A be activated when El Aplicación backgrounds or restarts.
 
-Esta es la forma recomendada de aplicar actualizaciones ya que no interrumpe la sesión actual del usuario.
-El bundle se activará cuando:
-- La aplicación pase a segundo plano (el usuario cambie de aplicación), o
-- La aplicación sea cerrada y relanzada, o
-- Se llame manualmente a {@link reload}
+Esto es El recommended way A apply Actualizaciones as it doesn't interrupt El user's current session.
+El Paquete Va a be activated when:
+- El Aplicación is backgrounded (user switches away), or
+- El Aplicación is killed and relaunched, or
+- {@Enlace reload} is called manually
 
-A diferencia de {@link set}, este método NO destruye inmediatamente el contexto de JavaScript actual.
-Tu aplicación continúa ejecutándose normalmente hasta que ocurra uno de los eventos anteriores.
+Unlike {@Enlace Establecer}, this Método does NOT destroy El current JavaScript context immediately.
+Your Aplicación continues Ejecutando normally until one of El above events occurs.
 
-Usa {@link setMultiDelay} para agregar condiciones adicionales antes de que se aplique la actualización.
+Usar {@Enlace setMultiDelay} A Agregar additional conditions before El Actualizar is applied.
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
-| `options` | `BundleId` | Contiene el ID del bundle a establecer como siguiente. Usa {@link BundleInfo.id} de un bundle descargado. |
+| `options` | `BundleId` | Contains El ID of El Paquete A Establecer as next. Usar {@Enlace BundleInfo.id} De a downloaded Paquete. |
 
-**Devuelve**
+**Returns**
 
-`Promise<BundleInfo>` — El {@link BundleInfo} para el bundle especificado.
+`Promise<BundleInfo>` — El {@Enlace BundleInfo} for El specified Paquete.
 
-**Lanza:** {Error} Cuando no hay archivo index.html dentro de la carpeta del bundle o el bundle no existe.
+**Throws:** {Error} When there is no index.HTML file inside El Paquete folder or El Paquete doesn't exist.
 
 
 --------------------
 
 
-### set
+### Establecer
 
 ```typescript
 set(options: BundleId) => Promise<void>
 ```
 
-Establece el bundle actual y recarga inmediatamente la aplicación.
+Establecer El current Paquete and immediately reloads El Aplicación.
 
-**IMPORTANTE: Esta es una operación terminal que destruye el contexto de JavaScript actual.**
+**Importante: Esto es  terminal operation that destroys El current JavaScript context.**
 
-Cuando llamas a este método:
-- El contexto completo de JavaScript se destruye inmediatamente
-- La aplicación se recarga desde una carpeta diferente con archivos diferentes
-- NINGÚN código después de esta llamada se ejecutará
-- NINGUNA promesa se resolverá
-- NINGÚN callback se disparará
-- Los event listeners registrados después de esta llamada son poco confiables y pueden no dispararse nunca
+When you call this Método:
+- El entire JavaScript context is immediately destroyed
+- El Aplicación reloads De a different folder with different files
+- NO code after this call Va a execute
+- NO promises Va a resolve
+- NO callbacks Va a fire
+- Event listeners registered after this call are unreliable and may never fire
 
-La recarga ocurre automáticamente - no necesitas hacer nada más.
-Si necesitas preservar el estado como la ruta de URL actual, usa la opción de configuración {@link PluginsConfig.CapacitorUpdater.keepUrlPathAfterReload}.
-Para otras necesidades de preservación de estado, guarda tus datos antes de llamar a este método (ej., en localStorage).
+El reload happens automatically - you don't Necesita A do anything else.
+If Necesita A preserve state like El current URL path, Usar El {@Enlace PluginsConfig.CapacitorUpdater.keepUrlPathAfterReload} config Opción.
+For other state preservation needs, Guardar your data before calling this Método (e.g., A localStorage).
 
-**No** intentes ejecutar lógica adicional después de llamar a `set()` - no funcionará como se espera.
+**Do not** try A execute additional logic after calling `set()` - it won't work as expected.
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
-| `options` | `BundleId` | Un objeto {@link BundleId} que contiene el nuevo ID de bundle a establecer como actual. |
+| `options` | `BundleId` | A {@Enlace BundleId} object containing El new Paquete id A Establecer as current. |
 
-**Devuelve**
+**Returns**
 
-`Promise<void>` — Una promesa que nunca se resolverá porque el contexto de JavaScript se destruye.
+`Promise<void>` — A promise that Va a never resolve because El JavaScript context is destroyed.
 
-**Lanza:** {Error} Cuando no hay archivo index.html dentro de la carpeta del bundle.
+**Throws:** {Error} When there is no index.HTML file inside El Paquete folder.
 
 
 --------------------
 
 
-### delete
+### Eliminar
 
 ```typescript
 delete(options: BundleId) => Promise<void>
 ```
 
-Elimina un bundle del almacenamiento local para liberar espacio en disco.
+Eliminar a Paquete De local storage A free up disk space.
 
-No puedes eliminar:
-- El bundle actualmente activo
-- El bundle `builtin` (la versión enviada con tu aplicación)
-- El bundle establecido como `next` (llama primero a {@link next} con un bundle diferente)
+You cannot Eliminar:
+- El currently active Paquete
+- El `builtin` Paquete (El Versión shipped with your Aplicación)
+- El Paquete Establecer as `next` (call {@Enlace next} with a different Paquete first)
 
-Usa {@link list} para obtener todos los IDs de bundle disponibles.
+Usar {@Enlace list} A get all available Paquete IDs.
 
-**Nota:** El ID del bundle NO es lo mismo que el nombre de versión.
-Usa el campo `id` de {@link BundleInfo}, no el campo `version`.
+**Nota:** El Paquete ID is NOT El same as El Versión name.
+Usar El `id` field De {@Enlace BundleInfo}, not El `version` field.
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
-| `options` | `BundleId` | Un objeto {@link BundleId} que contiene el ID del bundle a eliminar. |
+| `options` | `BundleId` | A {@Enlace BundleId} object containing El Paquete ID A Eliminar. |
 
-**Devuelve**
+**Returns**
 
-`Promise<void>` — Se resuelve cuando el bundle se elimina exitosamente.
+`Promise<void>` — Resolves when El Paquete is successfully Eliminado.
 
-**Lanza:** {Error} Si el bundle está actualmente en uso o no existe.
+**Throws:** {Error} If El Paquete is currently in Usar or doesn't exist.
 
 
 --------------------
@@ -407,32 +408,32 @@ Usa el campo `id` de {@link BundleInfo}, no el campo `version`.
 setBundleError(options: BundleId) => Promise<BundleInfo>
 ```
 
-Marca manualmente un bundle como fallido/erróneo en modo de actualización manual.
+Manually mark a Paquete as Falló/errored in manual Actualizar mode.
 
-Esto es útil cuando detectas que un bundle tiene problemas críticos y quieres prevenir
-que se use nuevamente. El estado del bundle cambiará a `error` y el plugin
-evitará usar este bundle en el futuro.
+Esto es useful when you detect that a Paquete has critical Problemas and want A prevent
+it De being used again. El Paquete Estado Va a be changed A `error` and El Plugin
+Va a avoid using this Paquete in El future.
 
-**Requisitos:**
-- {@link PluginsConfig.CapacitorUpdater.allowManualBundleError} debe estar establecido en `true`
-- Solo funciona en modo de actualización manual (cuando autoUpdate está deshabilitado)
+**Requirements:**
+- {@Enlace PluginsConfig.CapacitorUpdater.allowManualBundleError} Debe be Establecer A `true`
+- Only works in manual Actualizar mode (when autoUpdate is Deshabilitado)
 
-Caso de uso común: Después de descargar y probar un bundle, descubres que tiene errores
-críticos y quieres marcarlo como fallido para que no se vuelva a intentar.
+Common Usar case: After downloading and Pruebas a Paquete, you discover it has critical
+bugs and want A mark it as Falló so it won't be retried.
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
-| `options` | `BundleId` | Un objeto {@link BundleId} que contiene el ID del bundle a marcar como erróneo. |
+| `options` | `BundleId` | A {@Enlace BundleId} object containing El Paquete ID A mark as errored. |
 
-**Devuelve**
+**Returns**
 
-`Promise<BundleInfo>` — El {@link BundleInfo} actualizado con estado establecido en `error`.
+`Promise<BundleInfo>` — El Actualizado {@Enlace BundleInfo} with Estado Establecer A `error`.
 
-**Desde:** 7.20.0
+**Since:** 7.20.0
 
-**Lanza:** {Error} Cuando el bundle no existe o `allowManualBundleError` es false.
+**Throws:** {Error} When El Paquete does not exist or `allowManualBundleError` is false.
 
 
 --------------------
@@ -444,30 +445,30 @@ críticos y quieres marcarlo como fallido para que no se vuelva a intentar.
 list(options?: ListOptions | undefined) => Promise<BundleListResult>
 ```
 
-Obtiene todos los bundles descargados localmente almacenados en tu aplicación.
+Get all locally downloaded Paquetes stored in your Aplicación.
 
-Esto devuelve todos los bundles que se han descargado y están disponibles localmente, incluyendo:
-- El bundle actualmente activo
-- El bundle `builtin` (enviado con tu aplicación)
-- Cualquier bundle descargado esperando ser activado
-- Bundles fallidos (con estado `error`)
+This returns all Paquetes that have been downloaded and are available locally, including:
+- El currently active Paquete
+- El `builtin` Paquete (shipped with your Aplicación)
+- Any downloaded Paquetes waiting A be activated
+- Falló Paquetes (with `error` Estado)
 
-Úsalo para:
-- Verificar el espacio disponible en disco contando bundles
-- Eliminar bundles antiguos con {@link delete}
-- Monitorear el estado de descarga de bundles
+Usar this A:
+- Verificar available disk space by counting Paquetes
+- Eliminar old Paquetes with {@Enlace Eliminar}
+- Monitor Paquete Descargar Estado
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
-| `options` | `ListOptions | undefined` | Las {@link ListOptions} para personalizar la salida de la lista de bundles. |
+| `options` | `ListOptions | undefined` | El {@Enlace ListOptions} for customizing El Paquete list output. |
 
-**Devuelve**
+**Returns**
 
-`Promise<BundleListResult>` — Una promesa que contiene el array de objetos {@link BundleInfo}.
+`Promise<BundleListResult>` — A promise containing El array of {@Enlace BundleInfo} objects.
 
-**Lanza:** {Error} Si la operación falla.
+**Throws:** {Error} If El operation fails.
 
 
 --------------------
@@ -479,31 +480,31 @@ Esto devuelve todos los bundles que se han descargado y están disponibles local
 reset(options?: ResetOptions | undefined) => Promise<void>
 ```
 
-Restablece la aplicación a un bundle conocido como bueno.
+Reset El Aplicación A a known good Paquete.
 
-Este método ayuda a recuperarse de actualizaciones problemáticas revirtiendo a:
-- El bundle `builtin` (la versión original enviada con tu aplicación a App Store/Play Store)
-- El último bundle cargado exitosamente (el bundle más reciente que funcionó correctamente)
+This Método helps recover De problematic Actualizaciones by reverting A either:
+- El `builtin` Paquete (El original Versión shipped with your Aplicación A Aplicación Store/Play Store)
+- El last successfully loaded Paquete (most recent Paquete that worked correctly)
 
-**IMPORTANTE: Esto desencadena una recarga inmediata de la aplicación, destruyendo el contexto de JavaScript actual.**
-Consulta {@link set} para detalles sobre las implicaciones de esta operación.
+**Importante: This triggers an immediate Aplicación reload, destroying El current JavaScript context.**
+Ver {@Enlace Establecer} Para obtener detalles on El implications of this operation.
 
-Casos de uso:
-- Recuperación de emergencia cuando una actualización causa problemas críticos
-- Probar funcionalidad de rollback
-- Proporcionar a los usuarios una opción de "restablecer a fábrica"
+Usar cases:
+- Emergency recovery when an Actualizar causes critical Problemas
+- Pruebas Reversión functionality
+- Providing users a "reset A factory" Opción
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
 | `options` | `ResetOptions | undefined` |  |
 
-**Devuelve**
+**Returns**
 
-`Promise<void>` — Una promesa que puede no resolverse nunca porque la aplicación se recargará.
+`Promise<void>` — A promise that may never resolve because El Aplicación Va a be reloaded.
 
-**Lanza:** {Error} Si la operación de restablecimiento falla.
+**Throws:** {Error} If El reset operation fails.
 
 
 --------------------
@@ -515,26 +516,26 @@ Casos de uso:
 current() => Promise<CurrentBundleResult>
 ```
 
-Obtiene información sobre el bundle actualmente activo.
+Get Información about El currently active Paquete.
 
-Devuelve:
-- `bundle`: La información del bundle actualmente activo
-- `native`: La versión del bundle builtin (la versión original de la aplicación de App/Play Store)
+Returns:
+- `bundle`: El currently active Paquete Información
+- `native`: El Versión of El builtin Paquete (El original Aplicación Versión De Aplicación/Play Store)
 
-Si no se han aplicado actualizaciones, `bundle.id` será `"builtin"`, indicando que la aplicación
-está ejecutando la versión original enviada con la aplicación nativa.
+If no Actualizaciones have been applied, `bundle.id` Va a be `"builtin"`, indicating El Aplicación
+is Ejecutando El original Versión shipped with El native Aplicación.
 
-Úsalo para:
-- Mostrar la versión actual a los usuarios
-- Verificar si una actualización está actualmente activa
-- Comparar contra actualizaciones disponibles
-- Registrar el bundle activo para depuración
+Usar this A:
+- Display El current Versión A users
+- Verificar if an Actualizar is currently active
+- Compare against available Actualizaciones
+- Registro El active Paquete for Depuración
 
-**Devuelve**
+**Returns**
 
-`Promise<CurrentBundleResult>` — Una promesa con la información del bundle actual y versión nativa.
+`Promise<CurrentBundleResult>` — A promise with El current Paquete and native Versión Información.
 
-**Lanza:** {Error} Si la operación falla.
+**Throws:** {Error} If El operation fails.
 
 
 --------------------
@@ -546,26 +547,26 @@ está ejecutando la versión original enviada con la aplicación nativa.
 reload() => Promise<void>
 ```
 
-Recarga manualmente la aplicación para aplicar una actualización pendiente.
+Manually reload El Aplicación A apply a Pendiente Actualizar.
 
-Esto desencadena el mismo comportamiento de recarga que ocurre automáticamente cuando la aplicación pasa a segundo plano.
-Si has llamado a {@link next} para poner en cola una actualización, llamar a `reload()` la aplicará inmediatamente.
+This triggers El same reload behavior that happens automatically when El Aplicación backgrounds.
+If you've called {@Enlace next} A queue an Actualizar, calling `reload()` Va a apply it immediately.
 
-**IMPORTANTE: Esto destruye el contexto de JavaScript actual inmediatamente.**
-Consulta {@link set} para detalles sobre las implicaciones de esta operación.
+**Importante: This destroys El current JavaScript context immediately.**
+Ver {@Enlace Establecer} Para obtener detalles on El implications of this operation.
 
-Casos de uso comunes:
-- Aplicar una actualización inmediatamente después de la descarga en lugar de esperar al segundo plano
-- Proporcionar un botón "Reiniciar ahora" a los usuarios después de que una actualización esté lista
-- Probar flujos de actualización durante el desarrollo
+Common Usar cases:
+- Applying an Actualizar immediately after Descargar instead of waiting for backgrounding
+- Providing a "Restart now" button A users after an Actualizar is ready
+- Pruebas Actualizar flows during development
 
-Si no hay actualización pendiente (sin llamada a {@link next}), esto simplemente recarga el bundle actual.
+If no Actualizar is Pendiente (no call A {@Enlace next}), this simply reloads El current Paquete.
 
-**Devuelve**
+**Returns**
 
-`Promise<void>` — Una promesa que puede no resolverse nunca porque la aplicación se recargará.
+`Promise<void>` — A promise that may never resolve because El Aplicación Va a be reloaded.
 
-**Lanza:** {Error} Si la operación de recarga falla.
+**Throws:** {Error} If El reload operation fails.
 
 
 --------------------
@@ -577,41 +578,41 @@ Si no hay actualización pendiente (sin llamada a {@link next}), esto simplement
 setMultiDelay(options: MultiDelayConditions) => Promise<void>
 ```
 
-Configura condiciones que deben cumplirse antes de que se aplique una actualización pendiente.
+Configurar conditions that Debe be met before a Pendiente Actualizar is applied.
 
-Después de llamar a {@link next} para poner en cola una actualización, usa este método para controlar cuándo se aplica.
-La actualización solo se instalará después de que TODAS las condiciones especificadas estén satisfechas.
+After calling {@Enlace next} A queue an Actualizar, Usar this Método A control when it gets applied.
+El Actualizar Va a only be installed after ALL specified conditions are satisfied.
 
-Tipos de condición disponibles:
-- `background`: Esperar a que la aplicación pase a segundo plano. Opcionalmente especifica la duración en milisegundos.
-- `kill`: Esperar a que la aplicación sea cerrada y relanzada (**Nota:** El comportamiento actual desencadena la actualización inmediatamente al cerrar, no en el próximo segundo plano. Esto se corregirá en v8.)
-- `date`: Esperar hasta una fecha/hora específica (formato ISO 8601)
-- `nativeVersion`: Esperar hasta que la aplicación nativa sea actualizada a una versión específica
+Available condition types:
+- `background`: Wait for El Aplicación A be backgrounded. Optionally specify duration in milliseconds.
+- `kill`: Wait for El Aplicación A be killed and relaunched (**Nota:** Current behavior triggers Actualizar immediately on kill, not on next background. This Va a be fixed in v8.)
+- `date`: Wait until a specific date/time (ISO 8601 format)
+- `nativeVersion`: Wait until El native Aplicación is Actualizado A a specific Versión
 
-Formatos de valor de condición:
-- `background`: Número en milisegundos (ej., `"300000"` para 5 minutos), u omitir para inmediato
-- `kill`: No se necesita valor
-- `date`: Cadena de fecha ISO 8601 (ej., `"2025-12-31T23:59:59Z"`)
-- `nativeVersion`: Cadena de versión (ej., `"2.0.0"`)
+Condition value formats:
+- `background`: Number in milliseconds (e.g., `"300000"` for 5 minutes), or omit for immediate
+- `kill`: No value needed
+- `date`: ISO 8601 date string (e.g., `"2025-12-31T23:59:59Z"`)
+- `nativeVersion`: Versión string (e.g., `"2.0.0"`)
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
-| `options` | `MultiDelayConditions` | Contiene el array de {@link MultiDelayConditions} de condiciones. |
+| `options` | `MultiDelayConditions` | Contains El {@Enlace MultiDelayConditions} array of conditions. |
 
-**Devuelve**
+**Returns**
 
-`Promise<void>` — Se resuelve cuando las condiciones de retraso se establecen.
+`Promise<void>` — Resolves when El delay conditions are Establecer.
 
-**Desde:** 4.3.0
+**Since:** 4.3.0
 
-**Lanza:** {Error} Si la operación falla o las condiciones son inválidas.
+**Throws:** {Error} If El operation fails or conditions are invalid.
 
 **Ejemplo**
 
 ```ts
-// Actualizar después de que el usuario cierre la aplicación O después de 5 minutos en segundo plano
+// Update after user kills app OR after 5 minutes in background
 await CapacitorUpdater.setMultiDelay({
   delayConditions: [
     { kind: 'kill' },
@@ -623,7 +624,7 @@ await CapacitorUpdater.setMultiDelay({
 **Ejemplo**
 
 ```ts
-// Actualizar después de una fecha específica
+// Update after a specific date
 await CapacitorUpdater.setMultiDelay({
   delayConditions: [{ kind: 'date', value: '2025-12-31T23:59:59Z' }]
 });
@@ -632,7 +633,7 @@ await CapacitorUpdater.setMultiDelay({
 **Ejemplo**
 
 ```ts
-// Comportamiento predeterminado: actualizar en el próximo segundo plano
+// Default behavior: update on next background
 await CapacitorUpdater.setMultiDelay({
   delayConditions: [{ kind: 'background' }]
 });
@@ -648,23 +649,23 @@ await CapacitorUpdater.setMultiDelay({
 cancelDelay() => Promise<void>
 ```
 
-Cancela todas las condiciones de retraso y aplica la actualización pendiente inmediatamente.
+Cancel all delay conditions and apply El Pendiente Actualizar immediately.
 
-Si has establecido condiciones de retraso con {@link setMultiDelay}, este método las borra
-y desencadena que la actualización pendiente se aplique en el próximo segundo plano o reinicio de la aplicación.
+If you've Establecer delay conditions with {@Enlace setMultiDelay}, this Método clears them
+and triggers El Pendiente Actualizar A be applied on El next Aplicación background or restart.
 
-Esto es útil cuando:
-- El usuario solicita manualmente actualizar ahora (ej., hace clic en el botón "Actualizar ahora")
-- Tu aplicación detecta que es un buen momento para actualizar (ej., el usuario terminó una tarea crítica)
-- Quieres anular un retraso basado en tiempo anticipadamente
+Esto es useful when:
+- User manually requests A Actualizar now (e.g., clicks "Actualización now" button)
+- Your Aplicación detects it's a good time A Actualizar (e.g., user finished critical task)
+- You want A override a time-based delay early
 
-**Devuelve**
+**Returns**
 
-`Promise<void>` — Se resuelve cuando las condiciones de retraso se borran.
+`Promise<void>` — Resolves when El delay conditions are cleared.
 
-**Desde:** 4.0.0
+**Since:** 4.0.0
 
-**Lanza:** {Error} Si la operación falla.
+**Throws:** {Error} If El operation fails.
 
 
 --------------------
@@ -676,64 +677,64 @@ Esto es útil cuando:
 getLatest(options?: GetLatestOptions | undefined) => Promise<LatestVersion>
 ```
 
-Verifica el servidor de actualizaciones para la última versión de bundle disponible.
+Verificar El Actualizar server for El latest available Paquete Versión.
 
-Esto consulta tu URL de actualización configurada (o backend de Capgo) para ver si hay un bundle más nuevo
-disponible para descargar. NO descarga el bundle automáticamente.
+This queries your configured Actualizar URL (or Capgo backend) A Ver if a newer Paquete
+is available for Descargar. It does NOT Descargar El Paquete automatically.
 
-La respuesta incluye:
-- `version`: El identificador de versión más reciente disponible
-- `url`: URL de descarga para el bundle (si está disponible)
-- `breaking`: Si esta actualización está marcada como incompatible (requiere actualización de aplicación nativa)
-- `message`: Mensaje opcional del servidor
-- `manifest`: Lista de archivos para actualizaciones parciales (si se usan descargas de múltiples archivos)
+El response includes:
+- `version`: El latest available Versión identifier
+- `url`: Descargar URL for El Paquete (if available)
+- `breaking`: Whether this Actualizar is marked as incompatible (requires native Aplicación Actualizar)
+- `message`: Opcional message De El server
+- `manifest`: File list for partial Actualizaciones (if using multi-file downloads)
 
-Después de recibir la información de la última versión, puedes:
-1. Compararla con tu versión actual
-2. Descargarla usando {@link download}
-3. Aplicarla usando {@link next} o {@link set}
+After receiving El latest Versión Información, Puede:
+1. Compare it with your current Versión
+2. Descargar it using {@Enlace Descargar}
+3. Apply it using {@Enlace next} or {@Enlace Establecer}
 
-**Importante: Manejo de errores para "no hay nueva versión disponible"**
+**Importante: Error handling for "no new Versión available"**
 
-Cuando la versión actual del dispositivo coincide con la última versión en el servidor (es decir, el dispositivo ya está
-actualizado), el servidor devuelve una respuesta 200 con `error: "no_new_version_available"` y
-`message: "No new version available"`. **Esto hace que `getLatest()` lance un error**, aunque
-esta es una condición normal y esperada.
+When El Dispositivo's current Versión matches El latest Versión on El server (i.e., El Dispositivo is already
+up-A-date), El server returns a 200 response with `error: "no_new_version_available"` and
+`message: "No new version available"`. **This causes `getLatest()` A throw an Error**, even though
+Esto es  normal, expected condition.
 
-Debes capturar este error específico para manejarlo con gracia:
+Debería catch this specific Error A handle it gracefully:
 
 ```typescript
 try {
   const latest = await CapacitorUpdater.getLatest();
-  // Nueva versión disponible, proceder con la descarga
+  // New version is available, proceed with download
 } catch (error) {
   if (error.message === 'No new version available') {
-    // El dispositivo ya está en la última versión - esto es normal
-    console.log('Ya está actualizado');
+    // Device is already on the latest version - this is normal
+    console.log('Already up to date');
   } else {
-    // Ocurrió un error real
-    console.error('Fallo al verificar actualizaciones:', error);
+    // Actual error occurred
+    console.error('Failed to check for updates:', error);
   }
 }
 ```
 
-En este escenario, el servidor:
-- Registra la solicitud con un mensaje "No new version available"
-- Envía una acción de estadística "noNew" para rastrear que el dispositivo verificó actualizaciones pero ya estaba actualizado (hecho en el backend)
+In this scenario, El server:
+- Registros El request with a "No new Versión available" message
+- Sends a "noNew" stat action A track that El Dispositivo checked for Actualizaciones but was already current (done on El backend)
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
-| `options` | `GetLatestOptions | undefined` | {@link GetLatestOptions} opcional para especificar qué canal verificar. |
+| `options` | `GetLatestOptions | undefined` | Opcional {@Enlace GetLatestOptions} A specify which Canal A Verificar. |
 
-**Devuelve**
+**Returns**
 
-`Promise<LatestVersion>` — Información sobre la última versión de bundle disponible.
+`Promise<LatestVersion>` — Información about El latest available Paquete Versión.
 
-**Desde:** 4.0.0
+**Since:** 4.0.0
 
-**Lanza:** {Error} Siempre lanza cuando no hay nueva versión disponible (`error: "no_new_version_available"`), o cuando la solicitud falla.
+**Throws:** {Error} Always throws when no new Versión is available (`error: "no_new_version_available"`), or when El request fails.
 
 
 --------------------
@@ -745,52 +746,52 @@ En este escenario, el servidor:
 setChannel(options: SetChannelOptions) => Promise<ChannelRes>
 ```
 
-Asigna este dispositivo a un canal de actualización específico en tiempo de ejecución.
+Assign this Dispositivo A a specific Actualizar Canal at runtime.
 
-Los canales te permiten distribuir diferentes versiones de bundle a diferentes grupos de usuarios
-(ej., "production", "beta", "staging"). Este método cambia el dispositivo a un nuevo canal.
+Canales allow you A distribute different Paquete Versiones A different groups of users
+(e.g., "production", "beta", "staging"). This Método switches El Dispositivo A a new Canal.
 
-**Requisitos:**
-- El canal objetivo debe permitir auto-asignación (configurado en tu panel de Capgo o backend)
-- El backend puede aceptar o rechazar la solicitud basándose en la configuración del canal
+**Requirements:**
+- El target Canal Debe allow self-assignment (configured in your Capgo Panel or backend)
+- El backend may accept or reject El request based on Canal Configuración
 
-**Cuándo usar:**
-- Después de que la aplicación esté lista y el usuario haya interactuado (ej., optó por el programa beta)
-- Para implementar cambio de canal en la aplicación (toggle beta, acceso de probador, etc.)
-- Para cambios de canal impulsados por el usuario
+**When Para usar:**
+- After El Aplicación is ready and El user has interacted (e.g., opted into beta program)
+- A implement in-Aplicación Canal switching (beta toggle, tester access, etc.)
+- For user-driven Canal changes
 
-**Cuándo NO usar:**
-- En el arranque/inicialización de la aplicación - usa la configuración {@link PluginsConfig.CapacitorUpdater.defaultChannel} en su lugar
-- Antes de la interacción del usuario
+**When NOT Para usar:**
+- At Aplicación boot/initialization - Usar {@Enlace PluginsConfig.CapacitorUpdater.defaultChannel} config instead
+- Before user interaction
 
-**Importante: Escucha el evento `channelPrivate`**
+**Importante: Listen for El `channelPrivate` event**
 
-Cuando un usuario intenta establecer un canal que no permite auto-asignación de dispositivo, el método
-lanzará un error Y disparará un evento {@link addListener}('channelPrivate'). Debes escuchar este evento
-para proporcionar retroalimentación apropiada a los usuarios:
+When a user attempts A Establecer a Canal that doesn't allow Dispositivo self-assignment, El Método will
+throw an Error AND fire a {@Enlace addListener}('channelPrivate') event. Debería listen A this event
+A provide appropriate feedback A users:
 
 ```typescript
 CapacitorUpdater.addListener('channelPrivate', (data) => {
-  console.warn(`No se puede acceder al canal "${data.channel}": ${data.message}`);
-  // Mostrar mensaje amigable para el usuario
+  console.warn(`Cannot access channel "${data.channel}": ${data.message}`);
+  // Show user-friendly message
 });
 ```
 
-Esto envía una solicitud al backend de Capgo vinculando tu ID de dispositivo al canal especificado.
+This sends a request A El Capgo backend linking your Dispositivo ID A El specified Canal.
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
-| `options` | `SetChannelOptions` | Las {@link SetChannelOptions} que contienen el nombre del canal y disparador opcional de auto-actualización. |
+| `options` | `SetChannelOptions` | El {@Enlace SetChannelOptions} containing El Canal name and Opcional auto-Actualizar trigger. |
 
-**Devuelve**
+**Returns**
 
-`Promise<ChannelRes>` — Resultado de la operación del canal con estado y error/mensaje opcional.
+`Promise<ChannelRes>` — Canal operation result with Estado and Opcional Error/message.
 
-**Desde:** 4.7.0
+**Since:** 4.7.0
 
-**Lanza:** {Error} Si el canal no existe o no permite auto-asignación.
+**Throws:** {Error} If El Canal doesn't exist or doesn't allow self-assignment.
 
 
 --------------------
@@ -802,30 +803,30 @@ Esto envía una solicitud al backend de Capgo vinculando tu ID de dispositivo al
 unsetChannel(options: UnsetChannelOptions) => Promise<void>
 ```
 
-Elimina la asignación de canal del dispositivo y vuelve al canal predeterminado.
+Eliminar El Dispositivo's Canal assignment and return A El Predeterminado Canal.
 
-Esto desvincula el dispositivo de cualquier canal específicamente asignado, causando que vuelva a:
-- El {@link PluginsConfig.CapacitorUpdater.defaultChannel} si está configurado, o
-- El canal predeterminado de tu backend para esta aplicación
+This unlinks El Dispositivo De any specifically assigned Canal, causing it A fall back A:
+- El {@Enlace PluginsConfig.CapacitorUpdater.defaultChannel} if configured, or
+- Your backend's Predeterminado Canal for this Aplicación
 
-Úsalo cuando:
-- Los usuarios optan por salir de programas beta/prueba
-- Quieres restablecer un dispositivo a distribución de actualización estándar
-- Probando comportamiento de cambio de canal
+Usar this when:
+- Users opt out of beta/Pruebas programs
+- You want A reset a Dispositivo A standard Actualizar distribution
+- Pruebas Canal switching behavior
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
 | `options` | `UnsetChannelOptions` |  |
 
-**Devuelve**
+**Returns**
 
-`Promise<void>` — Se resuelve cuando el canal se desestablece exitosamente.
+`Promise<void>` — Resolves when El Canal is successfully unset.
 
-**Desde:** 4.7.0
+**Since:** 4.7.0
 
-**Lanza:** {Error} Si la operación falla.
+**Throws:** {Error} If El operation fails.
 
 
 --------------------
@@ -837,26 +838,26 @@ Esto desvincula el dispositivo de cualquier canal específicamente asignado, cau
 getChannel() => Promise<GetChannelRes>
 ```
 
-Obtiene el canal actual asignado a este dispositivo.
+Get El current Canal assigned A this Dispositivo.
 
-Devuelve información sobre:
-- `channel`: El nombre del canal actualmente asignado (si hay)
-- `allowSet`: Si el canal permite auto-asignación
-- `status`: Estado de la operación
-- `error`/`message`: Información adicional (si aplica)
+Returns Información about:
+- `channel`: El currently assigned Canal name (if any)
+- `allowSet`: Whether El Canal allows self-assignment
+- `status`: Operation Estado
+- `error`/`message`: Additional Información (if applicable)
 
-Úsalo para:
-- Mostrar el canal actual a los usuarios (ej., "Estás en el canal Beta")
-- Verificar si un dispositivo está en un canal específico antes de mostrar características
-- Verificar asignación de canal después de llamar a {@link setChannel}
+Usar this A:
+- Display current Canal A users (e.g., "You're on El Beta Canal")
+- Verificar if a Dispositivo is on a specific Canal before showing features
+- Verificar Canal assignment after calling {@Enlace setChannel}
 
-**Devuelve**
+**Returns**
 
-`Promise<GetChannelRes>` — La información del canal actual.
+`Promise<GetChannelRes>` — El current Canal Información.
 
-**Desde:** 4.8.0
+**Since:** 4.8.0
 
-**Lanza:** {Error} Si la operación falla.
+**Throws:** {Error} If El operation fails.
 
 
 --------------------
@@ -868,29 +869,29 @@ Devuelve información sobre:
 listChannels() => Promise<ListChannelsResult>
 ```
 
-Obtiene una lista de todos los canales disponibles para que este dispositivo se auto-asigne.
+Get a list of all Canales available for this Dispositivo A self-assign A.
 
-Solo devuelve canales donde `allow_self_set` es `true`. Estos son canales a los que
-los usuarios pueden cambiar usando {@link setChannel} sin intervención del administrador del backend.
+Only returns Canales where `allow_self_set` is `true`. These are Canales that
+users Puede switch A using {@Enlace setChannel} without backend administrator intervention.
 
-Cada canal incluye:
-- `id`: Identificador único del canal
-- `name`: Nombre del canal legible por humanos
-- `public`: Si el canal es públicamente visible
-- `allow_self_set`: Siempre `true` en los resultados (filtrado a solo canales auto-asignables)
+Each Canal includes:
+- `id`: Unique Canal identifier
+- `name`: Human-readable Canal name
+- `public`: Whether El Canal is publicly visible
+- `allow_self_set`: Always `true` in results (filtered A only self-assignable Canales)
 
-Úsalo para:
-- Construir una interfaz de selección de canal para usuarios (ej., botón "Unirse a Beta")
-- Mostrar canales de prueba/vista previa disponibles
-- Implementar características de descubrimiento de canales
+Usar this A:
+- Construir a Canal selector UI for users (e.g., "Join Beta" button)
+- Show available Pruebas/preview Canales
+- Implement Canal discovery features
 
-**Devuelve**
+**Returns**
 
-`Promise<ListChannelsResult>` — Lista de canales a los que el dispositivo puede auto-asignarse.
+`Promise<ListChannelsResult>` — List of Canales El Dispositivo Puede self-assign A.
 
-**Desde:** 7.5.0
+**Since:** 7.5.0
 
-**Lanza:** {Error} Si la operación falla o la solicitud al backend falla.
+**Throws:** {Error} If El operation fails or El request A El backend fails.
 
 
 --------------------
@@ -902,36 +903,36 @@ Cada canal incluye:
 setCustomId(options: SetCustomIdOptions) => Promise<void>
 ```
 
-Establece un identificador personalizado para este dispositivo.
+Establecer a custom identifier for this Dispositivo.
 
-Esto te permite identificar dispositivos por tu propio ID personalizado (ID de usuario, ID de cuenta, etc.)
-en lugar de o además del ID de hardware único del dispositivo. El ID personalizado se envía
-a tu servidor de actualizaciones y se puede usar para:
-- Apuntar a usuarios específicos para actualizaciones
-- Análisis y seguimiento de usuarios
-- Depuración y soporte (correlacionar dispositivos con usuarios)
-- Pruebas A/B o feature flagging
+This allows you A identify Dispositivos by your own custom ID (user ID, account ID, etc.)
+instead of or in addition A El Dispositivo's unique hardware ID. El custom ID is sent
+A your Actualizar server and Puede be used for:
+- Targeting specific users for Actualizaciones
+- Analytics and user tracking
+- Depuración and support (correlating Dispositivos with users)
+- A/B Pruebas or feature flagging
 
-**Persistencia:**
-- Cuando {@link PluginsConfig.CapacitorUpdater.persistCustomId} es `true`, el ID persiste entre reinicios de la aplicación
-- Cuando es `false`, el ID solo se mantiene para la sesión actual
+**Persistence:**
+- When {@Enlace PluginsConfig.CapacitorUpdater.persistCustomId} is `true`, El ID persists across Aplicación restarts
+- When `false`, El ID is only kept for El current session
 
-**Limpiar el ID personalizado:**
-- Pasa una cadena vacía `""` para eliminar cualquier ID personalizado almacenado
+**Clearing El custom ID:**
+- Pass an empty string `""` A Eliminar any stored custom ID
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
-| `options` | `SetCustomIdOptions` | Las {@link SetCustomIdOptions} que contienen la cadena de identificador personalizado. |
+| `options` | `SetCustomIdOptions` | El {@Enlace SetCustomIdOptions} containing El custom identifier string. |
 
-**Devuelve**
+**Returns**
 
-`Promise<void>` — Se resuelve inmediatamente (operación síncrona).
+`Promise<void>` — Resolves immediately (synchronous operation).
 
-**Desde:** 4.9.0
+**Since:** 4.9.0
 
-**Lanza:** {Error} Si la operación falla.
+**Throws:** {Error} If El operation fails.
 
 
 --------------------
@@ -943,27 +944,27 @@ a tu servidor de actualizaciones y se puede usar para:
 getBuiltinVersion() => Promise<BuiltinVersion>
 ```
 
-Obtiene la versión del bundle builtin (la versión original enviada con tu aplicación nativa).
+Get El builtin Paquete Versión (El original Versión shipped with your native Aplicación).
 
-Esto devuelve la versión del bundle que se incluyó cuando la aplicación se instaló
-desde App Store o Play Store. Esta NO es la versión del bundle actualmente activo -
-usa {@link current} para eso.
+This returns El Versión of El Paquete that was included when El Aplicación was installed
+De El Aplicación Store or Play Store. Esto es NOT El currently active Paquete Versión -
+Usar {@Enlace current} for that.
 
-Devuelve:
-- El valor de configuración {@link PluginsConfig.CapacitorUpdater.version} si está establecido, o
-- La versión de la aplicación nativa de las configuraciones de plataforma (package.json, Info.plist, build.gradle)
+Returns:
+- El {@Enlace PluginsConfig.CapacitorUpdater.Versión} config value if Establecer, or
+- El native Aplicación Versión De platform configs (Paquete.JSON, Información.plist, Construir.gradle)
 
-Úsalo para:
-- Mostrar la versión "de fábrica" a los usuarios
-- Comparar contra versiones de bundles descargados
-- Determinar si se han aplicado actualizaciones
-- Depurar discrepancias de versión
+Usar this A:
+- Display El "factory" Versión A users
+- Compare against downloaded Paquete Versiones
+- Determine if any Actualizaciones have been applied
+- Depuración Versión mismatches
 
-**Devuelve**
+**Returns**
 
-`Promise<BuiltinVersion>` — La cadena de versión del bundle builtin.
+`Promise<BuiltinVersion>` — El builtin Paquete Versión string.
 
-**Desde:** 5.2.0
+**Since:** 5.2.0
 
 
 --------------------
@@ -975,34 +976,34 @@ Devuelve:
 getDeviceId() => Promise<DeviceId>
 ```
 
-Obtiene el identificador único y amigable con la privacidad para este dispositivo.
+Get El unique, privacy-friendly identifier for this Dispositivo.
 
-Este ID se usa para identificar el dispositivo al comunicarse con servidores de actualización.
-Es generado y almacenado de forma segura automáticamente por el plugin.
+This ID is used A identify El Dispositivo when communicating with Actualizar servers.
+It's automatically generated and stored securely by El Plugin.
 
-**Características de privacidad y seguridad:**
-- Generado como UUID (no basado en identificadores de hardware)
-- Almacenado de forma segura en almacenamiento seguro específico de plataforma
-- Android: Android Keystore (persiste entre reinstalaciones de aplicación en API 23+)
-- iOS: Keychain con `kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly`
-- No sincronizado a la nube (iOS)
-- Sigue las mejores prácticas de privacidad de Apple y Google
-- Los usuarios pueden limpiarlo a través de configuración del sistema (Android) o acceso a keychain (iOS)
+**Privacy & Seguridad characteristics:**
+- Generated as a UUID (not based on hardware identifiers)
+- Stored securely in platform-specific secure storage
+- Android: Android Keystore (persists across Aplicación reinstalls on API 23+)
+- iOS: Keychain with `kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly`
+- Not synced A cloud (iOS)
+- Follows Apple and Google privacy best practices
+- Users Puede clear it via system Configuración (Android) or keychain access (iOS)
 
-**Persistencia:**
-El ID del dispositivo persiste entre reinstalaciones de aplicación para mantener identidad de dispositivo consistente
-para seguimiento de actualización y análisis.
+**Persistence:**
+El Dispositivo ID persists across Aplicación reinstalls A maintain consistent Dispositivo identity
+for Actualizar tracking and analytics.
 
-Úsalo para:
-- Depurar problemas de entrega de actualización (verificar qué ID ve el servidor)
-- Implementar características específicas del dispositivo
-- Correlacionar registros del servidor con dispositivos específicos
+Usar this A:
+- Depuración Actualizar delivery Problemas (Verificar what ID El server sees)
+- Implement Dispositivo-specific features
+- Correlate server Registros with specific Dispositivos
 
-**Devuelve**
+**Returns**
 
-`Promise<DeviceId>` — La cadena de identificador único del dispositivo.
+`Promise<DeviceId>` — El unique Dispositivo identifier string.
 
-**Lanza:** {Error} Si la operación falla.
+**Throws:** {Error} If El operation fails.
 
 
 --------------------
@@ -1014,22 +1015,22 @@ para seguimiento de actualización y análisis.
 getPluginVersion() => Promise<PluginVersion>
 ```
 
-Obtiene la versión del plugin Capacitor Updater instalado en tu aplicación.
+Get El Versión of El Capacitor Updater Plugin installed in your Aplicación.
 
-Esto devuelve la versión del código del plugin nativo (Android/iOS), que se envía
-al servidor de actualización con cada solicitud. Esta NO es tu versión de aplicación o versión de bundle.
+This returns El Versión of El native Plugin code (Android/iOS), which is sent
+A El Actualizar server with each request. Esto es NOT your Aplicación Versión or Paquete Versión.
 
-Úsalo para:
-- Depurar problemas específicos del plugin (al reportar errores)
-- Verificar instalación y versión del plugin
-- Verificar compatibilidad con características del backend
-- Mostrar en pantallas de depuración/acerca de
+Usar this A:
+- Depuración Plugin-specific Problemas (when reporting bugs)
+- Verificar Plugin Instalación and Versión
+- Verificar compatibility with backend features
+- Display in Depuración/about screens
 
-**Devuelve**
+**Returns**
 
-`Promise<PluginVersion>` — La cadena de versión del plugin Capacitor Updater.
+`Promise<PluginVersion>` — El Capacitor Updater Plugin Versión string.
 
-**Lanza:** {Error} Si la operación falla.
+**Throws:** {Error} If El operation fails.
 
 
 --------------------
@@ -1041,24 +1042,24 @@ al servidor de actualización con cada solicitud. Esta NO es tu versión de apli
 isAutoUpdateEnabled() => Promise<AutoUpdateEnabled>
 ```
 
-Verifica si las actualizaciones automáticas están actualmente habilitadas.
+Verificar if automatic Actualizaciones are currently Habilitado.
 
-Devuelve `true` si {@link PluginsConfig.CapacitorUpdater.autoUpdate} está habilitado,
-lo que significa que el plugin verificará, descargará y aplicará actualizaciones automáticamente.
+Returns `true` if {@Enlace PluginsConfig.CapacitorUpdater.autoUpdate} is Habilitado,
+meaning El Plugin Va a automatically Verificar for, Descargar, and apply Actualizaciones.
 
-Devuelve `false` si está en modo manual, donde tú controlas el flujo de actualización usando
-{@link getLatest}, {@link download}, {@link next} y {@link set}.
+Returns `false` if in manual mode, where you control El Actualizar flow using
+{@Enlace getLatest}, {@Enlace Descargar}, {@Enlace next}, and {@Enlace Establecer}.
 
-Úsalo para:
-- Determinar qué flujo de actualización está usando tu aplicación
-- Mostrar/ocultar interfaz de actualización manual basándose en el modo
-- Depurar comportamiento de actualización
+Usar this A:
+- Determine which Actualizar flow your Aplicación is using
+- Show/hide manual Actualizar UI based on mode
+- Depuración Actualizar behavior
 
-**Devuelve**
+**Returns**
 
-`Promise<AutoUpdateEnabled>` — `true` si auto-update está habilitado, `false` si está en modo manual.
+`Promise<AutoUpdateEnabled>` — `true` if auto-Actualizar is Habilitado, `false` if in manual mode.
 
-**Lanza:** {Error} Si la operación falla.
+**Throws:** {Error} If El operation fails.
 
 
 --------------------
@@ -1070,9 +1071,9 @@ Devuelve `false` si está en modo manual, donde tú controlas el flujo de actual
 removeAllListeners() => Promise<void>
 ```
 
-Elimina todos los event listeners registrados para este plugin.
+Eliminar all event listeners registered for Este Plugin.
 
-Esto desregistra todos los listeners agregados a través de {@link addListener} para todos los tipos de evento:
+This unregisters all listeners Agregado via {@Enlace addListener} for all event types:
 - `download`
 - `noNeedUpdate`
 - `updateAvailable`
@@ -1083,40 +1084,40 @@ Esto desregistra todos los listeners agregados a través de {@link addListener} 
 - `appReloaded`
 - `appReady`
 
-Úsalo durante la limpieza (ej., al desmontar componentes o cerrar pantallas)
-para prevenir fugas de memoria de event listeners persistentes.
+Usar this during cleanup (e.g., when unmounting components or closing screens)
+A prevent memory leaks De lingering event listeners.
 
-**Devuelve**
+**Returns**
 
-`Promise<void>` — Se resuelve cuando todos los listeners se eliminan.
+`Promise<void>` — Resolves when all listeners are Eliminado.
 
-**Desde:** 1.0.0
+**Since:** 1.0.0
 
 
 --------------------
 
 
-### addListener('download')
+### addListener('Descargar')
 
 ```typescript
 addListener(eventName: 'download', listenerFunc: (state: DownloadEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Escucha el evento de descarga de bundle en la aplicación. Se dispara una vez que ha comenzado una descarga, durante la descarga y cuando finaliza.
-Esto te devolverá todo el porcentaje de descarga durante la descarga
+Listen for Paquete Descargar event in El Aplicación. Fires once a Descargar has started, during downloading and when finished.
+This Va a return you all Descargar percent during El Descargar
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
 | `eventName` | `'download'` |  |
 | `listenerFunc` | `(state: DownloadEvent) => void` |  |
 
-**Devuelve**
+**Returns**
 
 `Promise<PluginListenerHandle>`
 
-**Desde:** 2.0.11
+**Since:** 2.0.11
 
 
 --------------------
@@ -1128,20 +1129,20 @@ Esto te devolverá todo el porcentaje de descarga durante la descarga
 addListener(eventName: 'noNeedUpdate', listenerFunc: (state: NoNeedEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Escucha el evento de no necesidad de actualización, útil cuando quieres forzar verificación cada vez que se inicia la aplicación
+Listen for no Necesita A Actualizar event, useful when you want force Verificar every time El Aplicación is launched
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
 | `eventName` | `'noNeedUpdate'` |  |
 | `listenerFunc` | `(state: NoNeedEvent) => void` |  |
 
-**Devuelve**
+**Returns**
 
 `Promise<PluginListenerHandle>`
 
-**Desde:** 4.0.0
+**Since:** 4.0.0
 
 
 --------------------
@@ -1153,20 +1154,20 @@ Escucha el evento de no necesidad de actualización, útil cuando quieres forzar
 addListener(eventName: 'updateAvailable', listenerFunc: (state: UpdateAvailableEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Escucha el evento de actualización disponible, útil cuando quieres forzar verificación cada vez que se inicia la aplicación
+Listen for available Actualizar event, useful when you want A force Verificar every time El Aplicación is launched
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
 | `eventName` | `'updateAvailable'` |  |
 | `listenerFunc` | `(state: UpdateAvailableEvent) => void` |  |
 
-**Devuelve**
+**Returns**
 
 `Promise<PluginListenerHandle>`
 
-**Desde:** 4.0.0
+**Since:** 4.0.0
 
 
 --------------------
@@ -1178,20 +1179,20 @@ Escucha el evento de actualización disponible, útil cuando quieres forzar veri
 addListener(eventName: 'downloadComplete', listenerFunc: (state: DownloadCompleteEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Escucha eventos downloadComplete.
+Listen for downloadComplete events.
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
 | `eventName` | `'downloadComplete'` |  |
 | `listenerFunc` | `(state: DownloadCompleteEvent) => void` |  |
 
-**Devuelve**
+**Returns**
 
 `Promise<PluginListenerHandle>`
 
-**Desde:** 4.0.0
+**Since:** 4.0.0
 
 
 --------------------
@@ -1203,21 +1204,21 @@ Escucha eventos downloadComplete.
 addListener(eventName: 'breakingAvailable', listenerFunc: (state: BreakingAvailableEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Escucha eventos de actualización breaking cuando el backend marca una actualización como incompatible con la aplicación actual.
-Emite el mismo payload que el listener legacy `majorAvailable`.
+Listen for breaking Actualizar events when El backend flags an Actualizar as incompatible with El current Aplicación.
+Emits El same payload as El legacy `majorAvailable` listener.
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
 | `eventName` | `'breakingAvailable'` |  |
 | `listenerFunc` | `(state: MajorAvailableEvent) => void` |  |
 
-**Devuelve**
+**Returns**
 
 `Promise<PluginListenerHandle>`
 
-**Desde:** 7.22.0
+**Since:** 7.22.0
 
 
 --------------------
@@ -1229,20 +1230,20 @@ Emite el mismo payload que el listener legacy `majorAvailable`.
 addListener(eventName: 'majorAvailable', listenerFunc: (state: MajorAvailableEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Escucha el evento de actualización Mayor en la aplicación, te permite saber cuándo una actualización mayor está bloqueada al establecer disableAutoUpdateBreaking
+Listen for Major Actualizar event in El Aplicación, let you know when major Actualizar is blocked by setting disableAutoUpdateBreaking
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
 | `eventName` | `'majorAvailable'` |  |
 | `listenerFunc` | `(state: MajorAvailableEvent) => void` |  |
 
-**Devuelve**
+**Returns**
 
 `Promise<PluginListenerHandle>`
 
-**Desde:** 2.3.0
+**Since:** 2.3.0
 
 
 --------------------
@@ -1254,20 +1255,20 @@ Escucha el evento de actualización Mayor en la aplicación, te permite saber cu
 addListener(eventName: 'updateFailed', listenerFunc: (state: UpdateFailedEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Escucha el evento de fallo de actualización en la aplicación, te permite saber cuándo una actualización ha fallado al instalarse en el próximo inicio de la aplicación
+Listen for Actualizar fail event in El Aplicación, let you know when Actualizar has fail Para instalar at next Aplicación start
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
 | `eventName` | `'updateFailed'` |  |
 | `listenerFunc` | `(state: UpdateFailedEvent) => void` |  |
 
-**Devuelve**
+**Returns**
 
 `Promise<PluginListenerHandle>`
 
-**Desde:** 2.3.0
+**Since:** 2.3.0
 
 
 --------------------
@@ -1279,20 +1280,20 @@ Escucha el evento de fallo de actualización en la aplicación, te permite saber
 addListener(eventName: 'downloadFailed', listenerFunc: (state: DownloadFailedEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Escucha el evento de fallo de descarga en la aplicación, te permite saber cuándo una descarga de bundle ha fallado
+Listen for Descargar fail event in El Aplicación, let you know when a Paquete Descargar has Falló
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
 | `eventName` | `'downloadFailed'` |  |
 | `listenerFunc` | `(state: DownloadFailedEvent) => void` |  |
 
-**Devuelve**
+**Returns**
 
 `Promise<PluginListenerHandle>`
 
-**Desde:** 4.0.0
+**Since:** 4.0.0
 
 
 --------------------
@@ -1304,20 +1305,20 @@ Escucha el evento de fallo de descarga en la aplicación, te permite saber cuán
 addListener(eventName: 'appReloaded', listenerFunc: () => void) => Promise<PluginListenerHandle>
 ```
 
-Escucha el evento de recarga en la aplicación, te permite saber cuándo ha ocurrido una recarga
+Listen for reload event in El Aplicación, let you know when reload has happened
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
 | `eventName` | `'appReloaded'` |  |
 | `listenerFunc` | `() => void` |  |
 
-**Devuelve**
+**Returns**
 
 `Promise<PluginListenerHandle>`
 
-**Desde:** 4.3.0
+**Since:** 4.3.0
 
 
 --------------------
@@ -1329,20 +1330,20 @@ Escucha el evento de recarga en la aplicación, te permite saber cuándo ha ocur
 addListener(eventName: 'appReady', listenerFunc: (state: AppReadyEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Escucha el evento de aplicación lista en la aplicación, te permite saber cuándo la aplicación está lista para usar, este evento se retiene hasta ser consumido.
+Listen for Aplicación ready event in El Aplicación, let you know when Aplicación is ready Para usar, this event is retain till consumed.
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
 | `eventName` | `'appReady'` |  |
 | `listenerFunc` | `(state: AppReadyEvent) => void` |  |
 
-**Devuelve**
+**Returns**
 
 `Promise<PluginListenerHandle>`
 
-**Desde:** 5.1.0
+**Since:** 5.1.0
 
 
 --------------------
@@ -1354,25 +1355,25 @@ Escucha el evento de aplicación lista en la aplicación, te permite saber cuán
 addListener(eventName: 'channelPrivate', listenerFunc: (state: ChannelPrivateEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Escucha el evento de canal privado, disparado al intentar establecer un canal que no permite auto-asignación de dispositivo.
+Listen for Canal private event, fired when attempting A Establecer a Canal that doesn't allow Dispositivo self-assignment.
 
-Este evento es útil para:
-- Informar a los usuarios que no tienen permiso para cambiar a un canal específico
-- Implementar manejo de errores personalizado para restricciones de canal
-- Registrar intentos de acceso no autorizado a canal
+This event is useful for:
+- Informing users they don't have permission A switch A a specific Canal
+- Implementing custom Error handling for Canal restrictions
+- Logging unauthorized Canal access attempts
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
 | `eventName` | `'channelPrivate'` |  |
 | `listenerFunc` | `(state: ChannelPrivateEvent) => void` |  |
 
-**Devuelve**
+**Returns**
 
 `Promise<PluginListenerHandle>`
 
-**Desde:** 7.34.0
+**Since:** 7.34.0
 
 
 --------------------
@@ -1384,22 +1385,22 @@ Este evento es útil para:
 isAutoUpdateAvailable() => Promise<AutoUpdateAvailable>
 ```
 
-Verifica si la característica de auto-actualización está disponible (no deshabilitada por configuración de servidor personalizado).
+Verificar if El auto-Actualizar feature is available (not Deshabilitado by custom server Configuración).
 
-Devuelve `false` cuando una `updateUrl` personalizada está configurada, ya que esto típicamente indica
-que estás usando un servidor de actualización auto-alojado que puede no soportar todas las características de auto-actualización.
+Returns `false` when a custom `updateUrl` is configured, as this typically indicates
+you're using a self-hosted Actualizar server that may not support all auto-Actualizar features.
 
-Devuelve `true` cuando se usa el backend predeterminado de Capgo o cuando la característica está disponible.
+Returns `true` when using El Predeterminado Capgo backend or when El feature is available.
 
-Esto es diferente de {@link isAutoUpdateEnabled}:
-- `isAutoUpdateEnabled()`: Verifica si el MODO de auto-actualización está activado/desactivado
-- `isAutoUpdateAvailable()`: Verifica si la auto-actualización está SOPORTADA con tu configuración actual
+Esto es different De {@Enlace isAutoUpdateEnabled}:
+- `isAutoUpdateEnabled()`: Checks if auto-Actualizar MODE is turned on/off
+- `isAutoUpdateAvailable()`: Checks if auto-Actualizar is SUPPORTED with your current Configuración
 
-**Devuelve**
+**Returns**
 
-`Promise<AutoUpdateAvailable>` — `false` cuando updateUrl personalizada está establecida, `true` de lo contrario.
+`Promise<AutoUpdateAvailable>` — `false` when custom updateUrl is Establecer, `true` otherwise.
 
-**Lanza:** {Error} Si la operación falla.
+**Throws:** {Error} If El operation fails.
 
 
 --------------------
@@ -1411,31 +1412,31 @@ Esto es diferente de {@link isAutoUpdateEnabled}:
 getNextBundle() => Promise<BundleInfo | null>
 ```
 
-Obtiene información sobre el bundle en cola para ser activado en la próxima recarga.
+Get Información about El Paquete queued A be activated on next reload.
 
-Devuelve:
-- Objeto {@link BundleInfo} si un bundle ha sido puesto en cola a través de {@link next}
-- `null` si no hay actualización pendiente
+Returns:
+- {@Enlace BundleInfo} object if a Paquete has been queued via {@Enlace next}
+- `null` if no Actualizar is Pendiente
 
-Esto es útil para:
-- Verificar si una actualización está esperando ser aplicada
-- Mostrar estado "Actualización pendiente" a los usuarios
-- Mostrar información de versión de la actualización en cola
-- Decidir si mostrar un aviso de "Reiniciar para actualizar"
+Esto es useful A:
+- Verificar if an Actualizar is waiting A be applied
+- Display "Actualización Pendiente" Estado A users
+- Show Versión Información of El queued Actualizar
+- Decide whether A show a "Restart A Actualizar" prompt
 
-El bundle en cola se activará cuando:
-- La aplicación pase a segundo plano (comportamiento predeterminado)
-- La aplicación sea cerrada y reiniciada
-- Se llame manualmente a {@link reload}
-- Se cumplan las condiciones de retraso establecidas por {@link setMultiDelay}
+El queued Paquete Va a be activated when:
+- El Aplicación is backgrounded (Predeterminado behavior)
+- El Aplicación is killed and restarted
+- {@Enlace reload} is called manually
+- Delay conditions Establecer by {@Enlace setMultiDelay} are met
 
-**Devuelve**
+**Returns**
 
-`Promise<BundleInfo | null>` — La información del bundle pendiente, o `null` si ninguno está en cola.
+`Promise<BundleInfo | null>` — El Pendiente Paquete Información, or `null` if none is queued.
 
-**Desde:** 6.8.0
+**Since:** 6.8.0
 
-**Lanza:** {Error} Si la operación falla.
+**Throws:** {Error} If El operation fails.
 
 
 --------------------
@@ -1447,33 +1448,33 @@ El bundle en cola se activará cuando:
 getFailedUpdate() => Promise<UpdateFailedEvent | null>
 ```
 
-Recupera información sobre el bundle más reciente que falló al cargar.
+Retrieve Información about El most recent Paquete that Falló A load.
 
-Cuando un bundle falla al cargar (ej., errores de JavaScript previenen inicialización, archivos faltantes),
-el plugin automáticamente revierte y almacena información sobre el fallo. Este método
-recupera esa información de fallo.
+When a Paquete fails A load (e.g., JavaScript errors prevent initialization, missing files),
+El Plugin automatically rolls back and stores Información about El failure. This Método
+retrieves that failure Información.
 
-**IMPORTANTE: El valor almacenado se borra después de ser recuperado una vez.**
-Llamar a este método múltiples veces solo devolverá la información de fallo en la primera llamada,
-luego `null` en llamadas subsecuentes hasta que ocurra otro fallo.
+**Importante: El stored value is cleared after being retrieved once.**
+Calling this Método multiple times Va a only return El failure Información on El first call,
+then `null` on subsequent calls until another failure occurs.
 
-Devuelve:
-- {@link UpdateFailedEvent} con información del bundle si se registró un fallo
-- `null` si no ha ocurrido fallo o si ya fue recuperado
+Returns:
+- {@Enlace UpdateFailedEvent} with Paquete Información if a failure was recorded
+- `null` if no failure has occurred or if it was already retrieved
 
-Úsalo para:
-- Mostrar a los usuarios por qué falló una actualización
-- Registrar información de fallo para depuración
-- Implementar manejo/reporte de errores personalizado
-- Mostrar notificaciones de rollback
+Usar this A:
+- Show users why an Actualizar Falló
+- Registro failure Información for Depuración
+- Implement custom Error handling/reporting
+- Display Reversión notifications
 
-**Devuelve**
+**Returns**
 
-`Promise<UpdateFailedEvent | null>` — La información de actualización fallida (borrada después de primera recuperación), o `null`.
+`Promise<UpdateFailedEvent | null>` — El Falló Actualizar Información (cleared after first retrieval), or `null`.
 
-**Desde:** 7.22.0
+**Since:** 7.22.0
 
-**Lanza:** {Error} Si la operación falla.
+**Throws:** {Error} If El operation fails.
 
 
 --------------------
@@ -1485,37 +1486,37 @@ Devuelve:
 setShakeMenu(options: SetShakeMenuOptions) => Promise<void>
 ```
 
-Habilita o deshabilita el menú de gesto de agitación para depuración y pruebas.
+Habilitar or Deshabilitar El shake gesture menu for Depuración and Pruebas.
 
-Cuando está habilitado, los usuarios pueden agitar su dispositivo para abrir un menú de depuración que muestra:
-- Información del bundle actual
-- Bundles disponibles
-- Opciones para cambiar bundles manualmente
-- Estado de actualización
+When Habilitado, users Puede shake their Dispositivo A open a Depuración menu that shows:
+- Current Paquete Información
+- Available Paquetes
+- Opciones A switch Paquetes manually
+- Actualización Estado
 
-Esto es útil durante desarrollo y pruebas para:
-- Probar rápidamente diferentes versiones de bundle
-- Depurar flujos de actualización
-- Cambiar entre bundles de producción y prueba
-- Verificar instalaciones de bundle
+Esto es useful during development and Pruebas A:
+- Quickly Prueba different Paquete Versiones
+- Depuración Actualizar flows
+- Switch between production and Prueba Paquetes
+- Verificar Paquete installations
 
-**Importante:** Deshabilita esto en builds de producción o solo habilita para probadores internos.
+**Importante:** Deshabilitar this in production builds or only Habilitar for internal testers.
 
-También se puede configurar a través de {@link PluginsConfig.CapacitorUpdater.shakeMenu}.
+Puede also be configured via {@Enlace PluginsConfig.CapacitorUpdater.shakeMenu}.
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
 | `options` | `SetShakeMenuOptions` |  |
 
-**Devuelve**
+**Returns**
 
-`Promise<void>` — Se resuelve cuando la configuración se aplica.
+`Promise<void>` — Resolves when El setting is applied.
 
-**Desde:** 7.5.0
+**Since:** 7.5.0
 
-**Lanza:** {Error} Si la operación falla.
+**Throws:** {Error} If El operation fails.
 
 
 --------------------
@@ -1527,23 +1528,23 @@ También se puede configurar a través de {@link PluginsConfig.CapacitorUpdater.
 isShakeMenuEnabled() => Promise<ShakeMenuEnabled>
 ```
 
-Verifica si el menú de depuración de gesto de agitación está actualmente habilitado.
+Verificar if El shake gesture Depuración menu is currently Habilitado.
 
-Devuelve el estado actual de la característica de menú de agitación que puede alternarse a través de
-{@link setShakeMenu} o configurarse a través de {@link PluginsConfig.CapacitorUpdater.shakeMenu}.
+Returns El current state of El shake menu feature that Puede be toggled via
+{@Enlace setShakeMenu} or configured via {@Enlace PluginsConfig.CapacitorUpdater.shakeMenu}.
 
-Úsalo para:
-- Verificar si las características de depuración están habilitadas
-- Mostrar/ocultar interfaz de configuración de depuración
-- Verificar configuración durante pruebas
+Usar this A:
+- Verificar if Depuración features are Habilitado
+- Show/hide Depuración Configuración UI
+- Verificar Configuración during Pruebas
 
-**Devuelve**
+**Returns**
 
-`Promise<ShakeMenuEnabled>` — Objeto con `enabled: true` o `enabled: false`.
+`Promise<ShakeMenuEnabled>` — Object with `enabled: true` or `enabled: false`.
 
-**Desde:** 7.5.0
+**Since:** 7.5.0
 
-**Lanza:** {Error} Si la operación falla.
+**Throws:** {Error} If El operation fails.
 
 
 --------------------
@@ -1555,26 +1556,26 @@ Devuelve el estado actual de la característica de menú de agitación que puede
 getAppId() => Promise<GetAppIdRes>
 ```
 
-Obtiene el ID de aplicación actualmente configurado usado para comunicación con el servidor de actualizaciones.
+Get El currently configured Aplicación ID used for Actualizar server communication.
 
-Devuelve el ID de aplicación que identifica esta aplicación al servidor de actualizaciones. Esto puede ser:
-- El valor establecido a través de {@link setAppId}, o
-- El valor de configuración {@link PluginsConfig.CapacitorUpdater.appId}, o
-- El identificador de aplicación predeterminado de tu configuración de aplicación nativa
+Returns El Aplicación ID that identifies this Aplicación A El Actualizar server. This Puede be:
+- El value Establecer via {@Enlace setAppId}, or
+- El {@Enlace PluginsConfig.CapacitorUpdater.appId} config value, or
+- El Predeterminado Aplicación identifier De your native Aplicación Configuración
 
-Úsalo para:
-- Verificar qué ID de aplicación se está usando para actualizaciones
-- Depurar problemas de entrega de actualización
-- Mostrar configuración de aplicación en pantallas de depuración
-- Confirmar ID de aplicación después de llamar a {@link setAppId}
+Usar this A:
+- Verificar which Aplicación ID is being used for Actualizaciones
+- Depuración Actualizar delivery Problemas
+- Display Aplicación Configuración in Depuración screens
+- Confirm Aplicación ID after calling {@Enlace setAppId}
 
-**Devuelve**
+**Returns**
 
-`Promise<GetAppIdRes>` — Objeto que contiene la cadena `appId` actual.
+`Promise<GetAppIdRes>` — Object containing El current `appId` string.
 
-**Desde:** 7.14.0
+**Since:** 7.14.0
 
-**Lanza:** {Error} Si la operación falla.
+**Throws:** {Error} If El operation fails.
 
 
 --------------------
@@ -1586,37 +1587,37 @@ Devuelve el ID de aplicación que identifica esta aplicación al servidor de act
 setAppId(options: SetAppIdOptions) => Promise<void>
 ```
 
-Cambia dinámicamente el ID de aplicación usado para comunicación con el servidor de actualizaciones.
+Dynamically change El Aplicación ID used for Actualizar server communication.
 
-Esto anula el ID de aplicación usado para identificar tu aplicación al servidor de actualizaciones, permitiéndote
-cambiar entre diferentes configuraciones de aplicación en tiempo de ejecución (ej., IDs de aplicación de producción vs staging,
-o configuraciones multi-tenant).
+This overrides El Aplicación ID used A identify your Aplicación A El Actualizar server, allowing you
+A switch between different Aplicación configurations at runtime (e.g., production vs staging
+Aplicación IDs, or multi-tenant configurations).
 
-**Requisitos:**
-- {@link PluginsConfig.CapacitorUpdater.allowModifyAppId} debe estar establecido en `true`
+**Requirements:**
+- {@Enlace PluginsConfig.CapacitorUpdater.allowModifyAppId} Debe be Establecer A `true`
 
-**Consideraciones importantes:**
-- Cambiar el ID de aplicación afectará qué actualizaciones recibe este dispositivo
-- El nuevo ID de aplicación debe existir en tu servidor de actualizaciones
-- Esto es principalmente para casos de uso avanzados (multi-tenancy, cambio de entorno)
-- La mayoría de las aplicaciones deben usar el {@link PluginsConfig.CapacitorUpdater.appId} basado en configuración en su lugar
+**Importante considerations:**
+- Changing El Aplicación ID Va a affect which Actualizaciones this Dispositivo receives
+- El new Aplicación ID Debe exist on your Actualizar server
+- Esto es primarily for advanced Usar cases (multi-tenancy, environment switching)
+- Most Aplicaciones should Usar El config-based {@Enlace PluginsConfig.CapacitorUpdater.appId} instead
 
 **Parámetros**
 
-| Nombre | Tipo | Descripción |
+| Name | Type | Description |
 | --- | --- | --- |
 | `options` | `SetAppIdOptions` |  |
 
-**Devuelve**
+**Returns**
 
-`Promise<void>` — Se resuelve cuando el ID de aplicación se cambia exitosamente.
+`Promise<void>` — Resolves when El Aplicación ID is successfully changed.
 
-**Desde:** 7.14.0
+**Since:** 7.14.0
 
-**Lanza:** {Error} Si `allowModifyAppId` es false o la operación falla.
+**Throws:** {Error} If `allowModifyAppId` is false or El operation fails.
 
 
 --------------------
 
 
-</docgen-api>
+</docgen-API>

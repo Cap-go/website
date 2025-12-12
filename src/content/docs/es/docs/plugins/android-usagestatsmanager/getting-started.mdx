@@ -1,12 +1,12 @@
 ---
 title: Comenzando
-description: Aprende cómo instalar y usar el plugin Android Usage Stats Manager para acceder a estadísticas de uso de aplicaciones y datos de uso del dispositivo.
+description: Aprende cómo instalar y usar el Plugin Android Uso Stats Manager para acceder a estadísticas de uso de aplicaciones y datos de uso del dispositivo.
 sidebar:
   order: 2
 locale: es
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
 
 ## Instalación
 
@@ -96,7 +96,7 @@ openUsageStatsSettings() => Promise<void>
 
 Abre la página de configuración del sistema para conceder el permiso de estadísticas de uso.
 
-### queryAndAggregateUsageStats(options)
+### queryAndAggregateUsageStats(Opciones)
 
 ```typescript
 queryAndAggregateUsageStats(options: UsageStatsOptions) => Promise<UsageStatsResult>
@@ -150,7 +150,7 @@ Contiene información sobre paquetes instalados:
 
 ## Manejo de permisos
 
-El plugin requiere permisos especiales que no pueden ser concedidos a través de solicitudes normales de permisos en tiempo de ejecución:
+El Plugin requiere permisos especiales que no pueden ser concedidos a través de solicitudes normales de permisos en tiempo de ejecución:
 
 1. **PACKAGE_USAGE_STATS**: Permite el acceso a estadísticas de uso
 2. **QUERY_ALL_PACKAGES**: Requerido para información de paquetes (Android 11+)

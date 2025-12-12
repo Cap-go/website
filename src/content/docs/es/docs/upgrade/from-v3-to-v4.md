@@ -35,7 +35,7 @@ Para ti, este es el cambio más significativo, ¡pero para mejor! Obtienes tonel
 
 * `autoUpdateUrl` se convierte en `updateUrl` ya que esta configuración puede usarse en modo manual ahora también
 * Eliminación de `cancelDelay` y `delayUpdate` en favor de `setDelay`
-* Ya no hay `versionName` en set
+* Ya no hay `versionName` en Establecer
 * Cambio de la clave `version`, que se devolvía en la mayoría de funciones al objeto `BundleInfo`
 
 ```typescript
@@ -49,8 +49,8 @@ interface BundleInfo {
 
 * Renombrado de nombres confusos ahora (incluso para explicar no puede ser claro, pero en el uso es fácil entender el nuevo):
   * lo que se llamaba `version` ahora se refiere a un `bundle`
-  * `id` se refiere a la antigua `version` que era una cadena aleatoria de 10 caracteres, este `id` es la única forma confiable y única de acceder a tus bundles, ejemplo `7Dfcd2RedN`
-  * `version` se refiere ahora al `versionName` que eliges para un bundle, ejemplo `100`
+  * `id` se refiere a la antigua `version` que era una cadena aleatoria de 10 caracteres, este `id` es la única forma confiable y única de acceder a tus Paquetes, ejemplo `7Dfcd2RedN`
+  * `version` se refiere ahora al `versionName` que eliges para un Paquete, ejemplo `100`
 * `updateUrl` cambia de `get` a `post`, ya que los encabezados personalizados eran un problema para algunos de ustedes y post es más lógico, todos los encabezados anteriores van al cuerpo y el prefijo `cap_` desaparece
 * el método `versionName` se elimina, en favor de `getId`
 * list ahora devuelve una lista de `BundleInfo`
@@ -64,7 +64,7 @@ interface BundleInfo {
 * Método `next`, para establecer la versión en el próximo paso a segundo plano, en oposición a `set` que lo hace instantáneamente
 * Método `isAutoUpdateEnabled`, para que sepas si estás en un contexto de auto-actualización
 * Evento `downloadComplete` cuando la descarga alcanza el 100%
-* Campo obligatorio añadido `version` en el método download
+* Campo obligatorio añadido `version` en el método Descargar
 * `notifyAppReady` se vuelve obligatorio en modo manual también, si no se llama después de 10 segundos la aplicación vuelve a la versión anterior
 
 ## Contribuidores

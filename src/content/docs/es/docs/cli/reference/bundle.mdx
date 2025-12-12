@@ -1,6 +1,6 @@
 ---
 title: paquete
-sidebar_label: bundle
+sidebar_label: Paquete
 sidebar:
   order: 5
 locale: es
@@ -8,7 +8,7 @@ locale: es
 
 El comando `bundle` te permite gestionar los paquetes de tu aplicación
 
-### upload
+### Subir
 
 `npx @capgo/cli bundle upload [appId]`
 
@@ -37,7 +37,7 @@ Opciones:
 - `--no-code-check`: Omitir la verificación de `notifyAppReady()` en el código fuente y `indexhtml` en la carpeta raíz
 - `--display-iv-session`: Mostrar la IV y clave de sesión usada para encriptar la actualización
 - `-b, --bundle <bundle>`: Número de versión del paquete a subir
-- `--min-update-version <minUpdateVersion>`: Versión mínima de la app requerida para aplicar esta actualización (solo se usa si la auto-actualización está deshabilitada vía metadata)
+- `--min-update-version <minUpdateVersion>`: Versión mínima de la Aplicación requerida para aplicar esta actualización (solo se usa si la auto-actualización está deshabilitada vía metadata)
 - `--auto-min-update-version`: Establecer automáticamente la versión mínima de actualización basada en versiones nativas del paquete
 - `--ignore-metadata-check`: Ignorar la verificación de metadata (node_modules) al subir
 - `--ignore-checksum-check`: Ignorar la verificación del checksum al subir
@@ -69,7 +69,7 @@ Opciones:
 - `--package-json <packageJson>`: Lista separada por comas de rutas a archivos `packagejson` (útil para monorepos)
 - `--node-modules <nodeModules>`: Lista separada por comas de rutas a directorios `node_modules` (útil para monorepos)
 
-### delete
+### Eliminar
 
 `npx @capgo/cli bundle delete [bundleId] [appId]`
 

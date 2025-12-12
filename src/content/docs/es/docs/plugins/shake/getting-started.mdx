@@ -1,22 +1,22 @@
 ---
 title: Comenzando
 locale: es
-description: Aprende cómo instalar y configurar el plugin Capacitor Shake para detectar gestos de agitación y crear experiencias interactivas en tu aplicación.
+description: Aprende cómo instalar y configurar el Plugin Capacitor Shake para detectar gestos de agitación y crear experiencias interactivas en tu aplicación.
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Tabs, TabItem, Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
+<Pasos>
 1. **Instalar el paquete**
-   <PackageManagers pkg="@capgo/capacitor-shake" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/Capacitor-shake" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configurar el plugin**
+3. **Configurar el Plugin**
 
    **Ejemplo de Uso Básico:**
    ```typescript
@@ -102,7 +102,7 @@ import { PackageManagers } from 'starlight-package-managers'
      }
    }
    ```
-</Steps>
+</Pasos>
 
 ## Referencia del API
 
@@ -153,7 +153,7 @@ interface ShakeOptions {
 ## Solución de Problemas
 
 **Agitación no detectada:**
-- Asegúrate de que el plugin esté iniciado con `Shake.start()`
+- Asegúrate de que el Plugin esté iniciado con `Shake.start()`
 - Intenta ajustar el valor del umbral (menor = más sensible)
 - Verifica que los escuchadores estén correctamente registrados
 

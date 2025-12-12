@@ -1,18 +1,18 @@
 ---
 title: Comenzando
 locale: es
-description: Aprende cómo instalar y usar el plugin SDK de chat Crisp para soporte al cliente en tu aplicación Capacitor.
+description: Aprende cómo instalar y usar el Plugin SDK de chat Crisp para soporte al cliente en tu aplicación Capacitor.
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
+Importar { Code, Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
+<Pasos>
 1. **Instalar el paquete**
-   <PackageManagers pkg="@capgo/capacitor-crisp" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/Capacitor-crisp" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
@@ -21,11 +21,11 @@ import { PackageManagers } from 'starlight-package-managers'
    - Regístrate en [crisp.chat](https://crisp.chat)
    - Crea un sitio web/proyecto
    - Encuentra tu ID de sitio web en Configuración > Instrucciones de configuración
-</Steps>
+</Pasos>
 
 ## Uso básico
 
-Importa el plugin y configúralo con tu ID de sitio web:
+Importa el Plugin y configúralo con tu ID de sitio web:
 
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
@@ -60,7 +60,7 @@ const logout = async () => {
 
 ## Referencia de API
 
-### configure(options)
+### Configurar(Opciones)
 
 Configura Crisp con tu ID de sitio web y ajustes opcionales.
 
@@ -85,7 +85,7 @@ Abre la interfaz de chat de Crisp.
 await CapacitorCrisp.openMessenger();
 ```
 
-### setUser(options)
+### setUser(Opciones)
 
 Establece la información del usuario para la sesión de chat.
 
@@ -103,7 +103,7 @@ await CapacitorCrisp.setUser({
 });
 ```
 
-### setUserCompany(options)
+### setUserCompany(Opciones)
 
 Establece información de la empresa para usuarios empresariales.
 
@@ -132,7 +132,7 @@ await CapacitorCrisp.setUserCompany({
 });
 ```
 
-### pushEvent(options)
+### pushEvent(Opciones)
 
 Envía eventos personalizados para rastrear acciones del usuario.
 

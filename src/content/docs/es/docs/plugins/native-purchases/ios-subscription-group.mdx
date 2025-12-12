@@ -1,12 +1,12 @@
 ---
 title: Crear Grupo de Suscripción de iOS
 locale: es
-description: Aprende cómo crear y configurar grupos de suscripción en App Store Connect para organizar las ofertas de suscripción de tu aplicación.
+description: Aprende cómo crear y configurar grupos de suscripción en Aplicación Store Connect para organizar las ofertas de suscripción de tu aplicación.
 sidebar:
   order: 7
 ---
 
-import { Steps } from '@astrojs/starlight/components';
+Importar { Pasos } De '@astrojs/starlight/components';
 
 Los grupos de suscripción son esenciales para organizar y gestionar múltiples niveles de suscripción en tu aplicación iOS. Comprender cómo funcionan es crucial para implementar funcionalidad de actualización, degradación y cambio entre niveles.
 
@@ -91,11 +91,11 @@ Cambiar a otra suscripción **en el mismo nivel**.
 
 ## Crear un Grupo de Suscripción
 
-<Steps>
+<Pasos>
 
 1. **Navegar a Suscripciones**
 
-   En App Store Connect, selecciona tu aplicación y ve a **Monetize > Subscriptions**.
+   En Aplicación Store Connect, selecciona tu aplicación y ve a **Monetize > Subscriptions**.
 
 2. **Crear Grupo**
 
@@ -119,11 +119,11 @@ Cambiar a otra suscripción **en el mismo nivel**.
    - Los niveles de precio más alto se clasifican por encima de los más bajos
    - Los niveles Ultimate/premium se clasifican más alto
 
-</Steps>
+</Pasos>
 
 ## Usar en tu Aplicación
 
-El plugin native-purchases maneja automáticamente la lógica del grupo de suscripción:
+El Plugin native-purchases maneja automáticamente la lógica del grupo de suscripción:
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -214,7 +214,7 @@ Siempre comunica el comportamiento del cambio claramente:
 
 ## Monitoreo del Servidor
 
-Usa las App Store Server Notifications v2 de Apple o tu propio backend de validación de recibos para reflejar los cambios de StoreKit en tu base de datos. Combina las notificaciones del servidor con el listener `transactionUpdated` para que tanto el cliente como el backend se mantengan sincronizados.
+Usa las Aplicación Store Server Notifications v2 de Apple o tu propio backend de validación de recibos para reflejar los cambios de StoreKit en tu base de datos. Combina las notificaciones del servidor con el listener `transactionUpdated` para que tanto el cliente como el backend se mantengan sincronizados.
 
 ## Mejores Prácticas
 
@@ -279,7 +279,7 @@ Esta configuración proporciona máxima flexibilidad mientras mantiene una lógi
 
 **La suscripción no aparece en el grupo:**
 - Verifica que esté asignada al grupo correcto
-- Verifica que esté al menos en estado "Ready to Submit"
+- Verifica que esté al menos en estado "Ready A Submit"
 - Asegúrate de que el product ID sea correcto
 
 **Comportamiento incorrecto de actualización/degradación:**
@@ -294,7 +294,7 @@ Esta configuración proporciona máxima flexibilidad mientras mantiene una lógi
 **getActiveProducts muestra múltiples suscripciones:**
 - Verifica si las suscripciones están en diferentes grupos
 - Verifica que el usuario no esté suscrito vía Family Sharing
-- Revisa el estado de suscripción en App Store Connect
+- Revisa el estado de suscripción en Aplicación Store Connect
 
 ## Recursos Adicionales
 

@@ -1,7 +1,7 @@
 ---
 title: Inicio de Sesión de Google con Supabase en Android
 locale: es
-description: Aprende cómo configurar el inicio de sesión de Google con Supabase Authentication en Android usando el plugin Capacitor Social Login.
+description: Aprende cómo configurar el inicio de sesión de Google con Supabase Authentication en Android usando el Plugin Capacitor Inicio de sesión social.
 sidebar:
     order: 2
 ---
@@ -53,13 +53,13 @@ La implementación del nonce sigue el patrón de la [documentación de React Nat
 La implementación incluye lógica de reintento automático:
 - Si la validación de JWT falla en el primer intento, cierra sesión y reintenta una vez
 - Esto maneja casos donde los tokens en caché pueden tener nonces incorrectos
-- Si el reintento también falla, se devuelve un error
+- Si el reintento también falla, se devuelve un Error
 
 ## Solución de Problemas
 
 Si la autenticación falla:
 
 - **Audiencia inválida**: Verifica que tus IDs de cliente de Google coincidan tanto en la consola de Google Cloud como en Supabase
-- **Discrepancia de nonce**: Revisa los logs de la consola - la función reintentará automáticamente, pero puedes cerrar sesión manualmente primero si es necesario
+- **Discrepancia de nonce**: Revisa los Registros de la consola - la función reintentará automáticamente, pero puedes cerrar sesión manualmente primero si es necesario
 - **La validación del token falla**: Asegúrate de estar usando `mode: 'online'` en la llamada de inicialización para obtener un idToken
 - Revisa el [código de la aplicación de ejemplo](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) como referencia

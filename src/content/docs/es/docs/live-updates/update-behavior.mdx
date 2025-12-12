@@ -5,7 +5,7 @@ sidebar:
 locale: es
 ---
 
-import { Aside, Steps } from '@astrojs/starlight/components';
+Importar { Aside, Pasos } De '@astrojs/starlight/components';
 
 Cuando lanzas una actualización de tu aplicación Capgo, probablemente quieres que tus usuarios reciban esa actualización lo antes posible. Pero también no quieres interrumpir su experiencia forzándolos a esperar una descarga o reiniciar la aplicación en medio de una sesión.
 
@@ -15,9 +15,9 @@ El comportamiento de actualización de Capgo está diseñado para lograr un equi
 
 Por defecto, así es como Capgo maneja las actualizaciones de la aplicación:
 
-<Steps>
+<Pasos>
 
-1. Al iniciar la aplicación, el plugin de Capgo verifica si hay una nueva actualización disponible
+1. Al iniciar la aplicación, el Plugin de Capgo verifica si hay una nueva actualización disponible
 
 2. Si se encuentra una actualización, se descarga en segundo plano mientras el usuario continúa usando la versión actual de la aplicación
 
@@ -25,11 +25,11 @@ Por defecto, así es como Capgo maneja las actualizaciones de la aplicación:
 
 4. Cuando el usuario vuelva a iniciar la aplicación, estará ejecutando la versión actualizada
 
-</Steps>
+</Pasos>
 
 Este flujo asegura que los usuarios siempre estén ejecutando la última versión de tu aplicación, sin ser interrumpidos por avisos de actualización o forzados a esperar descargas.
 
-<Aside type="tip">
+<Aside type="Consejo">
 Capgo también busca actualizaciones cuando la aplicación se reanuda desde segundo plano, por lo que los usuarios recibirán actualizaciones incluso si no cierran completamente la aplicación
 </Aside>
 
@@ -55,7 +55,7 @@ Para mitigar esto, recomendamos:
 
 ## Personalizando Cuándo se Aplican las Actualizaciones
 
-En algunos casos, es posible que desees más control sobre exactamente cuándo se aplica una actualización. Por ejemplo, podrías querer asegurarte de que un usuario complete un flujo en progreso antes de actualizar, o coordinar una actualización de la aplicación con un cambio del lado del servidor.
+En algunos casos, es posible que desees más control sobre exactamente cuándo se aplica una actualización. Por ejemplo, podrías querer asegurarte de que un usuario Completo un flujo en progreso antes de actualizar, o coordinar una actualización de la aplicación con un cambio del lado del servidor.
 
 Capgo proporciona una función `setDelay` que te permite especificar condiciones que deben cumplirse antes de que se instale una actualización:
 
@@ -95,15 +95,15 @@ Ten en cuenta que la condición `kill` actualmente activa la actualización desp
 
 Para actualizaciones críticas o aplicaciones con estado muy simple, es posible que desees aplicar una actualización tan pronto como se descargue, sin esperar un evento de segundo plano o cierre. Capgo admite esto a través de la opción de configuración `directUpdate`.
 
-<Aside type="tip" title="Recomendado: Usar Delta Updates con Direct Update">
-Al usar `directUpdate`, **recomendamos encarecidamente** habilitar [Delta Updates](/docs/live-updates/differentials/) para minimizar los tiempos de descarga y mejorar la experiencia del usuario. Las Delta Updates solo descargan archivos modificados en lugar del bundle completo, lo cual es especialmente importante cuando las actualizaciones se aplican inmediatamente mientras los usuarios están usando activamente tu aplicación.
+<Aside type="Consejo" title="Recomendado: Usar Delta Actualizaciones con Direct Actualizar">
+Al usar `directUpdate`, **recomendamos encarecidamente** habilitar [Delta Updates](/docs/live-updates/differentials/) para minimizar los tiempos de descarga y mejorar la experiencia del usuario. Las Delta Actualizaciones solo descargan archivos modificados en lugar del Paquete completo, lo cual es especialmente importante cuando las actualizaciones se aplican inmediatamente mientras los usuarios están usando activamente tu aplicación.
 
-**Por qué esto es importante para Direct Updates:**
+**Por qué esto es importante para Direct Actualizaciones:**
 - **Actualizaciones más rápidas**: Descargas más pequeñas significan que las actualizaciones se completan rápidamente, reduciendo el tiempo en que los usuarios ven pantallas de carga
 - **Mejor experiencia móvil**: Los usuarios en redes celulares o conexiones más lentas no enfrentarán largos tiempos de espera
 - **Menor uso de ancho de banda**: Solo se descargan archivos modificados, ahorrando datos tanto para ti como para tus usuarios
 
-Para habilitar Delta Updates, simplemente usa el flag `--partial` al subir bundles:
+Para habilitar Delta Actualizaciones, simplemente usa el flag `--partial` al subir Paquetes:
 ```shell
 npx @capgo/cli@latest bundle upload --partial
 ```
@@ -129,7 +129,7 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-Con `directUpdate` habilitado, Capgo aplicará inmediatamente una actualización tan pronto como se complete la descarga, incluso si el usuario está usando activamente la aplicación.
+Con `directUpdate` habilitado, Capgo aplicará inmediatamente una actualización tan pronto como se Completo la descarga, incluso si el usuario está usando activamente la aplicación.
 
 Ten en cuenta que debido a que `directUpdate` es una configuración nativa, requiere un manejo adicional en tu código JavaScript.
 
@@ -149,7 +149,7 @@ CapacitorUpdater.notifyAppReady();
 
 El evento `appReady` se dispara una vez que la aplicación ha terminado de inicializarse y aplicar cualquier actualización pendiente. Este es el punto en el que es seguro mostrar la interfaz de usuario de tu aplicación, ya que asegura que el usuario verá la última versión.
 
-Además de manejar el evento `appReady`, recomendamos establecer la opción de configuración `keepUrlPathAfterReload` en `true` cuando se use `directUpdate`. Esto preserva la ruta URL actual cuando la aplicación se recarga debido a una actualización, ayudando a mantener la ubicación del usuario en la aplicación y reduciendo la desorientación.
+Además de manejar el evento `appReady`, recomendamos establecer la opción de configuración `keepUrlPathAfterReload` en `true` cuando se Usar `directUpdate`. Esto preserva la ruta URL actual cuando la aplicación se recarga debido a una actualización, ayudando a mantener la ubicación del usuario en la aplicación y reduciendo la desorientación.
 
 Si no manejas el evento `appReady` y estableces `keepUrlPathAfterReload` cuando uses `directUpdate`, el usuario puede ver brevemente una versión obsoleta de la aplicación, ser llevado de vuelta a la ruta inicial, o ver un parpadeo mientras se aplica la actualización.
 

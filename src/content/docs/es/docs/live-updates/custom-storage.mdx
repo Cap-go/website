@@ -1,12 +1,12 @@
 ---
 title: Almacenamiento Personalizado
-description: "Aprenda cómo usar soluciones de almacenamiento personalizadas con Capgo Live Updates, incluyendo URLs externas, integración S3 y cifrado de paquetes para despliegues seguros."
+description: "Aprenda cómo usar soluciones de almacenamiento personalizadas con Capgo Actualizaciones en vivo, incluyendo URLs externas, integración S3 y cifrado de paquetes para despliegues seguros."
 sidebar:
   order: 6
 locale: es
 ---
 
-import { Aside, Steps } from '@astrojs/starlight/components';
+Importar { Aside, Pasos } De '@astrojs/starlight/components';
 
 Capgo admite soluciones de almacenamiento personalizadas para sus paquetes de aplicación, lo que le permite alojar sus actualizaciones en su propia infraestructura o servicios de almacenamiento de terceros. Esto es particularmente útil para organizaciones con requisitos de seguridad específicos, necesidades de cumplimiento o infraestructura de almacenamiento existente.
 
@@ -14,7 +14,7 @@ Capgo admite soluciones de almacenamiento personalizadas para sus paquetes de ap
 
 El almacenamiento personalizado en Capgo funciona cargando su paquete en una ubicación externa y proporcionando a Capgo la URL para acceder a él. El SDK de Capgo descargará las actualizaciones directamente desde su ubicación de almacenamiento personalizada en lugar del almacenamiento en la nube predeterminado de Capgo.
 
-<Aside type="tip">
+<Aside type="Consejo">
 
 El almacenamiento personalizado es ideal para:
 - Organizaciones con requisitos estrictos de residencia de datos
@@ -97,7 +97,7 @@ Primero, cree un archivo zip de su paquete de aplicación:
 npx @capgo/cli@latest bundle zip com.example.app --path ./dist
 ```
 
-El comando zip devolverá el checksum del archivo zip. Puede usar este checksum para cifrar el archivo zip si es necesario. Use la opción `--json` para obtener salida estructurada incluyendo el checksum.
+El comando zip devolverá el checksum del archivo zip. Puede usar este checksum para cifrar el archivo zip si es necesario. Usar la opción `--json` para obtener salida estructurada incluyendo el checksum.
 
 #### Opciones del Comando Zip
 
@@ -114,13 +114,13 @@ npx @capgo/cli@latest bundle zip [appId] \
 
 | Opción | Descripción |
 |--------|-------------|
-| `--path` | Ruta a la carpeta a comprimir (por defecto es webDir de capacitor.config) |
+| `--path` | Ruta a la carpeta a comprimir (por defecto es webDir de Capacitor.config) |
 | `--bundle` | Número de versión del paquete para nombrar el archivo zip |
 | `--name` | Nombre personalizado para el archivo zip |
 | `--json` | Salida de resultados en formato JSON (incluye checksum) |
 | `--no-code-check` | Omitir la verificación de llamada a notifyAppReady() y archivo index |
 | `--key-v2` | Usar cifrado v2 |
-| `--package-json` | Rutas a archivos package.json para monorepos (separados por comas) |
+| `--package-json` | Rutas a archivos Paquete.JSON para monorepos (separados por comas) |
 
 ### Paso 2: Cifrar el Paquete (Opcional)
 
@@ -137,7 +137,7 @@ npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM --key ./path/to/.capgo
 npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM --key-data "PRIVATE_KEY_CONTENT"
 ```
 
-El parámetro `CHECKSUM` es requerido y debe ser el checksum de su archivo zip. Puede obtener el checksum de la salida del comando zip (use la opción `--json` para salida estructurada).
+El parámetro `CHECKSUM` es requerido y debe ser el checksum de su archivo zip. Puede obtener el checksum de la salida del comando zip (Usar la opción `--json` para salida estructurada).
 
 Por defecto, el comando encrypt usará su clave de firma privada local. Puede especificar una clave personalizada usando las opciones `--key` o `--key-data`.
 
@@ -153,7 +153,7 @@ El comando encrypt devolverá el `ivSessionKey` necesario para la carga o descif
 | `--key-data` | Datos de clave de firma privada directamente (opcional) |
 | `--json` | Salida de resultados en formato JSON |
 
-<Aside type="caution">
+<Aside type="Precaución">
 
 El comando encrypt generará un `ivSessionKey` que necesitará proporcionar al cargar con la opción `--iv-session-key`.
 
@@ -163,7 +163,7 @@ El comando encrypt generará un `ivSessionKey` que necesitará proporcionar al c
 
 ### Ejemplo 1: URL Externa con Cifrado
 
-<Steps>
+<Pasos>
 
 1. **Compile su aplicación:**
    ```shell
@@ -194,11 +194,11 @@ El comando encrypt generará un `ivSessionKey` que necesitará proporcionar al c
      --iv-session-key IV_SESSION_KEY_FROM_STEP_3
    ```
 
-</Steps>
+</Pasos>
 
 ### Ejemplo 2: Carga Directa a S3
 
-<Steps>
+<Pasos>
 
 1. **Compile su aplicación:**
    ```shell
@@ -215,11 +215,11 @@ El comando encrypt generará un `ivSessionKey` que necesitará proporcionar al c
      --channel Production
    ```
 
-</Steps>
+</Pasos>
 
 ### Ejemplo 3: S3 con Cifrado
 
-<Steps>
+<Pasos>
 
 1. **Compile y comprima:**
    ```shell
@@ -243,7 +243,7 @@ El comando encrypt generará un `ivSessionKey` que necesitará proporcionar al c
      --channel Production
    ```
 
-</Steps>
+</Pasos>
 
 ## Consideraciones de Seguridad
 
@@ -251,17 +251,17 @@ Al usar almacenamiento personalizado, considere estas mejores prácticas de segu
 
 ### Control de Acceso
 - Asegúrese de que sus URLs de almacenamiento sean accesibles para los usuarios de su aplicación pero no públicamente descubribles
-- Use URLs firmadas o autenticación basada en tokens cuando sea posible
+- Usar URLs firmadas o autenticación basada en tokens cuando sea posible
 - Implemente encabezados CORS apropiados para aplicaciones basadas en web
 
 ### Cifrado
 - Siempre cifre paquetes sensibles usando las herramientas de cifrado de Capgo
 - Almacene las claves de cifrado de forma segura y rótelas regularmente
-- Use HTTPS para todas las URLs de paquetes (requerido para iOS y Android)
+- Usar HTTPS para todas las URLs de paquetes (requerido para iOS y Android)
 
 ### Monitoreo
 - Monitoree los registros de acceso para detectar patrones de descarga inusuales
-- Configure alertas para descargas de paquetes fallidas
+- Configurar alertas para descargas de paquetes fallidas
 - Audite regularmente los permisos de su almacenamiento
 
 ## Solución de Problemas
@@ -269,14 +269,14 @@ Al usar almacenamiento personalizado, considere estas mejores prácticas de segu
 ### Problemas Comunes
 
 **El paquete no se descarga:**
-- Verifique que la URL sea públicamente accesible y use HTTPS (requerido para iOS y Android)
+- Verifique que la URL sea públicamente accesible y Usar HTTPS (requerido para iOS y Android)
 - Verifique los encabezados CORS para aplicaciones web
 - Asegúrese de que el formato del paquete sea correcto
 
 **Errores de cifrado:**
 - Verifique que el `ivSessionKey` coincida con el paquete cifrado
 - Verifique que el paquete fue cifrado con la clave correcta
-- Asegúrese de que se use el cifrado v2 para nuevos paquetes
+- Asegúrese de que se Usar el cifrado v2 para nuevos paquetes
 
 **Fallos de carga S3:**
 - Verifique sus credenciales y permisos de S3
@@ -299,4 +299,4 @@ npx @capgo/cli@latest bundle list
 
 - Conozca sobre [Canales](/docs/live-updates/channels/) para gestionar diferentes entornos de despliegue
 - Explore [Comportamiento de Actualización](/docs/live-updates/update-behavior/) para personalizar cómo se aplican las actualizaciones
-- Configure [Integración CI/CD](/docs/getting-started/cicd-integration/) para automatizar su flujo de trabajo de almacenamiento personalizado
+- Configurar [Integración CI/CD](/docs/getting-started/cicd-integration/) para automatizar su flujo de trabajo de almacenamiento personalizado

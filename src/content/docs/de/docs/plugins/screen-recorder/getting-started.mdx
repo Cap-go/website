@@ -1,8 +1,6 @@
 ---
-title: Getting Started
-description: >-
-  Learn how to install and use the Screen Recorder plugin to capture screen
-  recordings in your Capacitor app.
+title: "Erste Schritte mit Screen Recorder"
+description: "Lernen Sie, wie Sie das Screen Recorder Plugin installieren und verwenden, um Bildschirmaufnahmen in Ihrer Capacitor-App zu erfassen"
 sidebar:
   order: 2
 locale: de
@@ -13,25 +11,25 @@ import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Paket installieren**
    <PackageManagers pkg="@capgo/capacitor-screen-recorder" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Mit nativen Projekten synchronisieren**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure permissions**
-   
+3. **Berechtigungen konfigurieren**
+
    ### iOS
-   Add usage descriptions to your `Info.plist`:
+   Fügen Sie Verwendungsbeschreibungen zu Ihrer `Info.plist` hinzu:
    ```xml
    <key>NSMicrophoneUsageDescription</key>
-   <string>To record audio with screen recording</string>
+   <string>Um Audioaufnahmen mit Bildschirmaufnahmen zu erfassen</string>
    <key>NSPhotoLibraryUsageDescription</key>
-   <string>To save screen recordings</string>
+   <string>Um Bildschirmaufnahmen zu speichern</string>
    ```
-   
+
    ### Android
-   Add permissions to your `AndroidManifest.xml`:
+   Fügen Sie Berechtigungen zu Ihrer `AndroidManifest.xml` hinzu:
    ```xml
    <uses-permission android:name="android.permission.RECORD_AUDIO" />
    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -39,54 +37,54 @@ import { PackageManagers } from 'starlight-package-managers'
    ```
 </Steps>
 
-## Usage
+## Verwendung
 
-Import the plugin and use its methods to record the screen:
+Importieren Sie das Plugin und verwenden Sie seine Methoden zur Bildschirmaufnahme:
 
 ```typescript
 import { ScreenRecorder } from '@capgo/capacitor-screen-recorder';
 
-// Start recording
+// Aufnahme starten
 const startRecording = async () => {
   try {
     await ScreenRecorder.start();
-    console.log('Recording started');
+    console.log('Aufnahme gestartet');
   } catch (error) {
-    console.error('Failed to start recording:', error);
+    console.error('Aufnahmestart fehlgeschlagen:', error);
   }
 };
 
-// Stop recording
+// Aufnahme beenden
 const stopRecording = async () => {
   try {
     const result = await ScreenRecorder.stop();
-    console.log('Recording saved to:', result.videoUrl);
-    
-    // You can now use the video URL
-    // For example, share it or play it back
+    console.log('Aufnahme gespeichert auf:', result.videoUrl);
+
+    // Sie können jetzt die Video-URL verwenden
+    // Zum Beispiel freigeben oder abspielen
   } catch (error) {
-    console.error('Failed to stop recording:', error);
+    console.error('Aufnahmebeeendigung fehlgeschlagen:', error);
   }
 };
 
-// Check if recording is supported
+// Überprüfen Sie, ob Bildschirmaufnahme unterstützt wird
 const checkSupport = async () => {
   const { value } = await ScreenRecorder.isSupported();
-  console.log('Screen recording supported:', value);
+  console.log('Bildschirmaufnahme unterstützt:', value);
 };
 
-// Check if currently recording
+// Überprüfen Sie, ob gerade Aufnahme läuft
 const checkRecordingStatus = async () => {
   const { value } = await ScreenRecorder.isRecording();
-  console.log('Currently recording:', value);
+  console.log('Derzeit aufnehmen:', value);
 };
 ```
 
-## API Reference
+## API-Referenz
 
 ### start()
 
-Starts screen recording.
+Starten Sie die Bildschirmaufnahme.
 
 ```typescript
 await ScreenRecorder.start();
@@ -94,7 +92,7 @@ await ScreenRecorder.start();
 
 ### stop()
 
-Stops recording and returns the video file path.
+Beenden Sie die Aufnahme und geben Sie den Videodateipfad zurück.
 
 ```typescript
 interface RecordingResult {
@@ -106,40 +104,40 @@ const result = await ScreenRecorder.stop();
 
 ### isSupported()
 
-Checks if screen recording is supported on the device.
+Überprüfen Sie, ob die Bildschirmaufnahme auf dem Gerät unterstützt wird.
 
 ```typescript
 const { value } = await ScreenRecorder.isSupported();
-// Returns: { value: boolean }
+// Rückgabe: { value: boolean }
 ```
 
 ### isRecording()
 
-Checks if screen recording is currently active.
+Überprüfen Sie, ob die Bildschirmaufnahme gerade aktiv ist.
 
 ```typescript
 const { value } = await ScreenRecorder.isRecording();
-// Returns: { value: boolean }
+// Rückgabe: { value: boolean }
 ```
 
-## Advanced Usage
+## Erweiterte Verwendung
 
-### Recording with Options
+### Aufnahme mit Optionen
 
 ```typescript
-// iOS-specific options
+// iOS-spezifische Optionen
 const startWithOptions = async () => {
   await ScreenRecorder.start({
-    // iOS only options
+    // iOS nur Optionen
     recordAudio: true,
     microphoneAudio: true,
     showIOSNotification: true,
-    notificationText: "Recording in progress..."
+    notificationText: "Aufnahme wird durchgeführt..."
   });
 };
 ```
 
-### Complete Recording Flow
+### Vollständiger Aufnahmefluss
 
 ```typescript
 import { ScreenRecorder } from '@capgo/capacitor-screen-recorder';
@@ -158,19 +156,19 @@ export class RecordingService {
 
   private async startRecording() {
     try {
-      // Check if supported
+      // Überprüfen Sie, ob unterstützt
       const { value: isSupported } = await ScreenRecorder.isSupported();
       if (!isSupported) {
-        throw new Error('Screen recording not supported');
+        throw new Error('Bildschirmaufnahme wird nicht unterstützt');
       }
 
-      // Start recording
+      // Aufnahme starten
       await ScreenRecorder.start();
       this.isRecording = true;
-      
-      console.log('Recording started');
+
+      console.log('Aufnahme gestartet');
     } catch (error) {
-      console.error('Failed to start recording:', error);
+      console.error('Aufnahmestart fehlgeschlagen:', error);
       throw error;
     }
   }
@@ -179,13 +177,13 @@ export class RecordingService {
     try {
       const result = await ScreenRecorder.stop();
       this.isRecording = false;
-      
-      console.log('Recording saved:', result.videoUrl);
-      
-      // Option to share the recording
+
+      console.log('Aufnahme gespeichert:', result.videoUrl);
+
+      // Option zum Teilen der Aufnahme
       await this.shareRecording(result.videoUrl);
     } catch (error) {
-      console.error('Failed to stop recording:', error);
+      console.error('Aufnahmebeeendigung fehlgeschlagen:', error);
       throw error;
     }
   }
@@ -193,13 +191,13 @@ export class RecordingService {
   private async shareRecording(videoUrl: string) {
     try {
       await Share.share({
-        title: 'Screen Recording',
-        text: 'Check out my screen recording!',
+        title: 'Bildschirmaufnahme',
+        text: 'Schauen Sie sich meine Bildschirmaufnahme an!',
         url: videoUrl,
-        dialogTitle: 'Share Recording'
+        dialogTitle: 'Aufnahme teilen'
       });
     } catch (error) {
-      console.error('Failed to share recording:', error);
+      console.error('Aufnahmefreigabe fehlgeschlagen:', error);
     }
   }
 }
@@ -207,44 +205,44 @@ export class RecordingService {
 
 ## Best Practices
 
-1. **Check support before use**
+1. **Unterstützung überprüfen**
    ```typescript
    const { value } = await ScreenRecorder.isSupported();
    if (!value) {
-     // Hide recording feature or show alternative
+     // Aufnahmefunktion ausblenden oder Alternative anzeigen
    }
    ```
 
-2. **Handle permissions properly**
-   On iOS, the system will automatically prompt for permission. On Android, ensure you request necessary permissions.
+2. **Berechtigungen ordnungsgemäß handhaben**
+   Das System fordert unter iOS automatisch auf Berechtigungen an. Unter Android sollten Sie erforderliche Berechtigungen anfordern.
 
-3. **Provide user feedback**
-   Show clear indicators when recording is active:
+3. **Benutzerrückmeldung geben**
+   Zeigen Sie klare Indikatoren, wenn die Aufnahme aktiv ist:
    ```typescript
    let recordingInterval: any;
-   
+
    const startRecording = async () => {
      await ScreenRecorder.start();
-     
-     // Show recording indicator
+
+     // Aufnahmeindikat anzeigen
      recordingInterval = setInterval(() => {
-       // Update UI to show recording duration
+       // UI aktualisieren, um Aufnahmedauer anzuzeigen
      }, 1000);
    };
-   
+
    const stopRecording = async () => {
      clearInterval(recordingInterval);
      await ScreenRecorder.stop();
    };
    ```
 
-4. **Handle interruptions**
+4. **Unterbrechen behandeln**
    ```typescript
    import { App } from '@capacitor/app';
-   
+
    App.addListener('appStateChange', async ({ isActive }) => {
      if (!isActive) {
-       // Consider stopping recording when app goes to background
+       // Erwägen Sie, die Aufnahme zu stoppen, wenn die App in den Hintergrund geht
        const { value } = await ScreenRecorder.isRecording();
        if (value) {
          await ScreenRecorder.stop();
@@ -253,37 +251,37 @@ export class RecordingService {
    });
    ```
 
-## Platform Notes
+## Plattformnotizen
 
 ### iOS
-- Requires iOS 11.0+
-- Uses `ReplayKit` framework
-- System shows recording indicator in status bar
-- User must confirm recording start
+- Erfordert iOS 11.0+
+- Verwendet `ReplayKit` Framework
+- System zeigt Aufnahmeindikat in der Statusleiste
+- Der Benutzer muss Aufnahmebeginn bestätigen
 
 ### Android
-- Requires Android 5.0 (API 21)+
-- Uses `MediaProjection` API
-- Shows notification during recording
-- Some devices may have manufacturer-specific limitations
+- Erfordert Android 5.0 (API 21)+
+- Verwendet `MediaProjection` API
+- Zeigt Benachrichtigung während der Aufnahme
+- Einige Geräte haben möglicherweise herstellerspezifische Einschränkungen
 
 ### Web
-- Not supported on web platform
-- Will return `isSupported: false`
+- Nicht auf Web-Plattform unterstützt
+- Gibt `isSupported: false` zurück
 
-## Troubleshooting
+## Fehlerbehebung
 
-1. **Recording fails to start**
-   - Ensure all permissions are granted
-   - Check if another app is already recording
-   - Verify device supports screen recording
+1. **Aufnahmestart schlägt fehl**
+   - Stellen Sie sicher, dass alle Berechtigungen erteilt wurden
+   - Überprüfen Sie, ob eine andere App bereits aufnimmt
+   - Überprüfen Sie, ob das Gerät Bildschirmaufnahmen unterstützt
 
-2. **No audio in recording**
-   - Check microphone permissions
-   - Ensure `recordAudio` option is enabled
-   - Some devices may not support system audio recording
+2. **Kein Ton in der Aufnahme**
+   - Überprüfen Sie Mikrofonberechtigungen
+   - Stellen Sie sicher, dass die `recordAudio`-Option aktiviert ist
+   - Einige Geräte unterstützen möglicherweise keine Systemtonautzeichnung
 
-3. **Video file not found**
-   - Check file permissions
-   - Ensure sufficient storage space
-   - Verify the returned video URL is valid
+3. **Videodatei nicht gefunden**
+   - Überprüfen Sie Dateiberechtigungen
+   - Stellen Sie sicher, dass ausreichend Speicherplatz vorhanden ist
+   - Überprüfen Sie, dass die zurückgegebene Video-URL gültig ist

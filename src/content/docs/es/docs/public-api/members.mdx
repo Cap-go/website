@@ -14,7 +14,7 @@ Los miembros de la organización son usuarios que tienen acceso a su organizaci�
 
 ### Roles Regulares
 - **read**: Puede ver recursos pero no puede hacer cambios
-- **upload**: Puede subir nuevos paquetes y ver recursos
+- **Subir**: Puede subir nuevos paquetes y ver recursos
 - **write**: Puede modificar recursos y subir paquetes
 - **admin**: Puede gestionar configuraciones de la organización y miembros
 - **super_admin**: Tiene control total sobre la organización
@@ -81,7 +81,7 @@ curl -X POST \
 
 Notas: 
 - Al agregar un nuevo miembro, recibirá un correo electrónico de invitación. Su rol tendrá el prefijo "invite_" hasta que acepte la invitación.
-- El usuario ya debe tener una cuenta de Capgo antes de poder ser invitado. Si no tiene una cuenta, primero debe crear una en https://console.capgo.app/register/
+- El usuario ya debe tener una cuenta de Capgo antes de poder ser invitado. Si no tiene una cuenta, primero debe crear una en https://console.Capgo.Aplicación/register/
 
 ### GET 
 
@@ -142,7 +142,7 @@ curl -H "authorization: your-api-key" \
 }
 ```
 
-### DELETE
+### Eliminar
 
 `https://api.capgo.app/organization/members/`
 
@@ -180,7 +180,7 @@ curl -X DELETE \
 
 ## Manejo de Errores
 
-Escenarios de error comunes y sus respuestas:
+Escenarios de Error comunes y sus respuestas:
 
 ```json
 // Miembro no encontrado

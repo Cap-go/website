@@ -1,12 +1,12 @@
 ---
 title: Comenzando
-description: Aprende cómo instalar y usar el plugin Launch Navigator para integrar con aplicaciones de navegación nativas en iOS y Android.
+description: Aprende cómo instalar y usar el Plugin Launch Navigator para integrar con aplicaciones de navegación nativas en iOS y Android.
 locale: es
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
 
 ## Instalación
 
@@ -58,7 +58,7 @@ Agrega esquemas de URL a tu `Info.plist` para detectar aplicaciones de navegaci�
 
 ### Android
 
-No se requiere configuración adicional. El plugin detectará automáticamente las aplicaciones de navegación instaladas.
+No se requiere configuración adicional. El Plugin detectará automáticamente las aplicaciones de navegación instaladas.
 
 ## Ejemplo de Uso
 
@@ -103,7 +103,7 @@ console.log('Aplicaciones soportadas:', supportedApps);
 
 ## Referencia de la API
 
-### navigate(options)
+### navigate(Opciones)
 
 ```typescript
 navigate(options: NavigateOptions) => Promise<void>
@@ -115,7 +115,7 @@ Inicia la navegación a coordenadas especificadas.
 | ------------- | ------------------------- |
 | **`options`** | `NavigateOptions` |
 
-### isAppAvailable(options)
+### isAppAvailable(Opciones)
 
 ```typescript
 isAppAvailable(options: { app: string }) => Promise<{ available: boolean }>
@@ -165,7 +165,7 @@ Obtiene la lista de todas las aplicaciones soportadas para la plataforma actual.
 | **`start`**          | `[number, number]` | Coordenadas de inicio [lat, lng] (opcional) |
 | **`transportMode`**  | `TransportMode` | Método de transporte (opcional)       |
 | **`app`**            | `string` | Aplicación de navegación preferida (opcional)    |
-| **`appDisplayName`** | `string` | Nombre para mostrar de la app (opcional)        |
+| **`appDisplayName`** | `string` | Nombre para mostrar de la Aplicación (opcional)        |
 
 ### TransportMode
 
@@ -180,7 +180,7 @@ enum TransportMode {
 
 ## Requisito de Coordenadas
 
-> **Importante**: Este plugin solo acepta coordenadas de latitud/longitud para navegación. Usa [@capgo/capacitor-nativegeocoder](https://github.com/Cap-go/capacitor-nativegeocoder) para convertir direcciones a coordenadas.
+> **Importante**: Este Plugin solo acepta coordenadas de latitud/longitud para navegación. Usa [@capgo/capacitor-nativegeocoder](https://github.com/Cap-go/capacitor-nativegeocoder) para convertir direcciones a coordenadas.
 
 ```typescript
 import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
@@ -226,7 +226,7 @@ if (geocodeResult.results.length > 0) {
 
 ## Ejemplos Avanzados
 
-### Verificar Múltiples Apps y Usar la Primera Disponible
+### Verificar Múltiples Aplicaciones y Usar la Primera Disponible
 
 ```typescript
 const appsToCheck = ['google_maps', 'waze', 'apple_maps'];
@@ -301,8 +301,8 @@ await LaunchNavigator.navigate({
 
 ## Mejores Prácticas
 
-- Siempre verifica la disponibilidad de la app antes de intentar navegar
-- Proporciona opciones de respaldo cuando las apps preferidas no estén disponibles
+- Siempre verifica la disponibilidad de la Aplicación antes de intentar navegar
+- Proporciona opciones de respaldo cuando las Aplicaciones preferidas no estén disponibles
 - Usa nombres de visualización significativos para selección del usuario
 - Maneja errores con gracia con mensajes amigables para el usuario
 - Considera las preferencias del usuario para aplicaciones de navegación predeterminadas
@@ -330,8 +330,8 @@ try {
 ## Casos de Uso
 
 - **Servicios basados en ubicación**: Navegar usuarios a puntos de interés
-- **Apps de entrega**: Guiar conductores a ubicaciones de entrega
-- **Apps de eventos**: Dirigir asistentes a ubicaciones de lugares
-- **Apps inmobiliarias**: Navegar a ubicaciones de propiedades
-- **Apps de viaje**: Guiar turistas a atracciones
-- **Apps de servicio**: Dirigir trabajadores de campo a sitios de trabajo
+- **Aplicaciones de entrega**: Guiar conductores a ubicaciones de entrega
+- **Aplicaciones de eventos**: Dirigir asistentes a ubicaciones de lugares
+- **Aplicaciones inmobiliarias**: Navegar a ubicaciones de propiedades
+- **Aplicaciones de viaje**: Guiar turistas a atracciones
+- **Aplicaciones de servicio**: Dirigir trabajadores de campo a sitios de trabajo

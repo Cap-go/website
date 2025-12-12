@@ -1,26 +1,26 @@
 ---
 title: Comenzando
 locale: es
-description: Aprende cómo instalar y usar el plugin Speech Synthesis para convertir texto a voz en tu aplicación Capacitor.
+description: Aprende cómo instalar y usar el Plugin Speech Synthesis para convertir texto a voz en tu aplicación Capacitor.
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
+Importar { Code, Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
+<Pasos>
 1. **Instala el paquete**
-   <PackageManagers pkg="@capgo/capacitor-speech-synthesis" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/Capacitor-speech-synthesis" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincroniza con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+</Pasos>
 
 ## Uso
 
-Importa el plugin y sintetiza voz desde texto:
+Importa el Plugin y sintetiza voz desde texto:
 
 ```typescript
 import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
@@ -48,7 +48,7 @@ const speakWithVoice = async () => {
 
 ## Referencia de API
 
-### speak(options)
+### speak(Opciones)
 
 Habla el texto dado usando la configuración de voz especificada.
 

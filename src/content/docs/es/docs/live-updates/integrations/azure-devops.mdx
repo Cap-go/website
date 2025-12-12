@@ -6,7 +6,7 @@ sidebar:
   order: 1
 ---
 
-import { Aside, Steps } from '@astrojs/starlight/components';
+Importar { Aside, Pasos } De '@astrojs/starlight/components';
 
 Integre las Actualizaciones en Vivo de Capgo con Azure DevOps Pipelines para desplegar automáticamente las actualizaciones de su aplicación cada vez que realice cambios en el código. Esta guía cubre la configuración de flujos de trabajo automatizados de construcción, pruebas y despliegue.
 
@@ -21,24 +21,24 @@ Antes de configurar la integración con Azure DevOps, asegúrese de tener:
 
 ## Configuración de Azure DevOps Pipeline
 
-### Paso 1: Crear variables de Pipeline
+### Paso 1: Crear Variables de Pipeline
 
-Primero, configure las variables necesarias en su proyecto de Azure DevOps:
+Primero, Configurar las Variables necesarias en su proyecto de Azure DevOps:
 
-<Steps>
+<Pasos>
 
 1. Navegue a su proyecto de Azure DevOps
 2. Vaya a **Pipelines** → **Library** → **Variable groups**
-3. Cree un nuevo grupo de variables llamado `Capgo-Variables`
-4. Agregue las siguientes variables:
+3. Cree un nuevo grupo de Variables llamado `Capgo-Variables`
+4. Agregue las siguientes Variables:
 
-</Steps>
+</Pasos>
 
-| Nombre de variable | Valor | Segura |
+| Nombre de Variable | Valor | Segura |
 |---------------|-------|---------|
 | `CAPGO_TOKEN` | Su token de API de Capgo | ✅ Sí |
 
-<Aside type="tip">
+<Aside type="Consejo">
 
 Obtenga su token de API de Capgo desde [console.capgo.app/apikeys](https://console.capgo.app/apikeys). El ID de su aplicación ya está configurado en su archivo `capacitor.config.ts`.
 
@@ -86,7 +86,7 @@ jobs:
 
 ### Despliegues de ramas de características
 
-Despliegue ramas de características a canales de prueba para revisión y testing:
+Despliegue ramas de características a canales de prueba para revisión y Pruebas:
 
 ```yaml
 # Despliegue de rama de características
@@ -125,7 +125,7 @@ jobs:
         displayName: 'Desplegar a canal de características'
 ```
 
-<Aside type="tip">
+<Aside type="Consejo">
 
 **Pruebas con Canales**: Después de desplegar a un canal de características, puede probar la actualización en su aplicación configurándola para usar ese canal específico. Aprenda más sobre [configurar canales en su aplicación](/docs/live-updates/channels/#configuring-the-channel-in-your-app).
 
@@ -135,14 +135,14 @@ jobs:
 
 Si está usando la [función de cifrado de Capgo](/docs/live-updates/encryption/), deberá almacenar su clave privada de forma segura en su entorno de CI/CD.
 
-Después de [configurar las claves de cifrado](/docs/live-updates/encryption/#setting-up-encryption) localmente, agregue su clave privada a las variables de Azure DevOps:
+Después de [configurar las claves de cifrado](/docs/live-updates/encryption/#setting-up-encryption) localmente, agregue su clave privada a las Variables de Azure DevOps:
 
 ```shell
 # Mostrar el contenido de su clave privada (copiar esta salida)
 cat .capgo_key_v2
 ```
 
-Agregue este contenido como `CAPGO_PRIVATE_KEY` en su grupo de variables de Azure DevOps (márquelo como secreto), luego úselo en pipelines:
+Agregue este contenido como `CAPGO_PRIVATE_KEY` en su grupo de Variables de Azure DevOps (márquelo como secreto), luego úselo en pipelines:
 
 ```yaml
 # Desplegar con cifrado
@@ -152,12 +152,12 @@ Agregue este contenido como `CAPGO_PRIVATE_KEY` en su grupo de variables de Azur
   displayName: 'Desplegar a Capgo con cifrado'
 ```
 
-<Aside type="caution">
+<Aside type="Precaución">
 
 **Mejores prácticas de seguridad:**
 - Nunca confirme el archivo `.capgo_key_v2` en el control de versiones
 - Almacene la clave privada solo en la gestión segura de secretos de CI/CD
-- Use claves diferentes para diferentes entornos
+- Usar claves diferentes para diferentes entornos
 
 </Aside>
 
@@ -165,7 +165,7 @@ Agregue este contenido como `CAPGO_PRIVATE_KEY` en su grupo de variables de Azur
 
 Para obtener información completa sobre la configuración y gestión de múltiples canales de despliegue, consulte la [documentación de Canales](/docs/live-updates/channels/).
 
-Configuración completa con múltiples entornos y despliegues de pull request:
+Configuración completa con múltiples entornos y despliegues de Solicitud de extracción:
 
 ```yaml
 # Azure DevOps Pipeline avanzado con múltiples canales
@@ -367,7 +367,7 @@ stages:
                     channel: 'production'
 ```
 
-### Plantilla de despliegue (deploy-steps.yml)
+### Plantilla de despliegue (Desplegar-Pasos.yml)
 
 Cree un archivo de plantilla reutilizable `deploy-steps.yml`:
 
@@ -403,7 +403,7 @@ steps:
 
 ### Estrategia de despliegue basada en ramas
 
-Configure diferentes estrategias de despliegue según las ramas de Git:
+Configurar diferentes estrategias de despliegue según las ramas de Git:
 
 ```yaml
 trigger:
@@ -466,16 +466,16 @@ stages:
 
 ## Mejores prácticas de seguridad
 
-### Gestión segura de variables
+### Gestión segura de Variables
 
-<Steps>
+<Pasos>
 
-1. **Use grupos de variables**: Almacene datos sensibles en grupos de variables de Azure DevOps
-2. **Marque como secreto**: Siempre marque tokens de API y claves como variables secretas
-3. **Acceso de ámbito**: Limite el acceso del grupo de variables a pipelines y usuarios específicos
+1. **Usar grupos de Variables**: Almacene datos sensibles en grupos de Variables de Azure DevOps
+2. **Marque como secreto**: Siempre marque tokens de API y claves como Variables secretas
+3. **Acceso de ámbito**: Limite el acceso del grupo de Variables a pipelines y usuarios específicos
 4. **Rote claves**: Rote regularmente sus tokens de API de Capgo
 
-</Steps>
+</Pasos>
 
 ## Monitoreo y notificaciones
 
@@ -505,7 +505,7 @@ Agregue notificaciones de Microsoft Teams a su pipeline:
 
 ### Notificaciones por correo electrónico
 
-Configure notificaciones por correo electrónico para el estado del despliegue:
+Configurar notificaciones por correo electrónico para el estado del despliegue:
 
 ```yaml
 - task: EmailReport@1
@@ -578,7 +578,7 @@ Agregue pasos de depuración para solucionar problemas:
 
 - Aprenda sobre [Canales](/docs/live-updates/channels/) para gestionar diferentes entornos de despliegue
 - Explore [Almacenamiento personalizado](/docs/live-updates/custom-storage/) para escenarios de despliegue avanzados
-- Configure [Cifrado](/docs/live-updates/encryption/) para despliegues seguros
-- Configure [Comportamiento de actualización](/docs/live-updates/update-behavior/) para personalizar cómo se aplican las actualizaciones
+- Configurar [Cifrado](/docs/live-updates/encryption/) para despliegues seguros
+- Configurar [Comportamiento de actualización](/docs/live-updates/update-behavior/) para personalizar cómo se aplican las actualizaciones
 
 Con la integración de Azure DevOps, puede automatizar sus despliegues de Capgo y garantizar actualizaciones consistentes y confiables para los usuarios de su aplicación móvil.

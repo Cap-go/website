@@ -1,32 +1,32 @@
 ---
 title: Configurar Pruebas en Sandbox de iOS
 locale: es
-description: Aprende cómo configurar pruebas en sandbox para compras dentro de la aplicación en iOS usando App Store Connect y Xcode.
+description: Aprende cómo configurar pruebas en sandbox para compras dentro de la aplicación en iOS usando Aplicación Store Connect y Xcode.
 sidebar:
   order: 6
 ---
 
-import { Steps } from '@astrojs/starlight/components';
+Importar { Pasos } De '@astrojs/starlight/components';
 
-Las pruebas de compras dentro de la aplicación en iOS requieren una configuración adecuada en App Store Connect y en tus dispositivos de prueba. Esta guía cubre todo lo que necesitas para comenzar con las pruebas en sandbox.
+Las pruebas de compras dentro de la aplicación en iOS requieren una configuración adecuada en Aplicación Store Connect y en tus dispositivos de prueba. Esta guía cubre todo lo que necesitas para comenzar con las pruebas en sandbox.
 
 ## Requisitos previos
 
 - **Apple Developer Program**: Membresía activa con renovación anual
 - **Agreements**: "Paid Applications Agreement" firmado con información bancaria y fiscal completada
-- **Xcode Project**: Configurado con el bundle identifier y capacidades adecuadas
+- **Xcode Project**: Configurado con el Paquete identifier y capacidades adecuadas
 
-:::note
+:::Nota
 La aprobación de la configuración bancaria y fiscal puede tomar horas o días. Completa esto con suficiente antelación antes de las pruebas.
 :::
 
 ## Proceso de Configuración
 
-<Steps>
+<Pasos>
 
 1. **Firmar Paid Applications Agreement**
 
-   En App Store Connect, navega a **Agreements, Tax, and Banking** y completa:
+   En Aplicación Store Connect, navega a **Agreements, Tax, and Banking** y completa:
    - Firma el Paid Applications Agreement
    - Agrega tu información bancaria
    - Completa los formularios fiscales
@@ -35,7 +35,7 @@ La aprobación de la configuración bancaria y fiscal puede tomar horas o días.
 
 2. **Crear Usuario de Prueba Sandbox**
 
-   En App Store Connect, ve a **Users and Access > Sandbox Testers**.
+   En Aplicación Store Connect, ve a **Users and Access > Sandbox Testers**.
 
    Haz clic en el botón **+** para crear un nuevo probador sandbox.
 
@@ -50,13 +50,13 @@ La aprobación de la configuración bancaria y fiscal puede tomar horas o días.
    A partir de iOS 12, ya no necesitas cerrar sesión de tu cuenta de iTunes para probar compras.
 
    En tu dispositivo iOS:
-   1. Abre **Settings**
-   2. Toca **App Store**
+   1. Abre **Configuración**
+   2. Toca **Aplicación Store**
    3. Desplázate hasta el final
    4. Toca **Sandbox Account**
    5. Inicia sesión con tu cuenta de prueba sandbox
 
-   :::tip
+   :::Consejo
    ¡Esto es mucho más conveniente que el método antiguo de cerrar sesión de tu cuenta de iTunes!
    :::
 
@@ -64,21 +64,21 @@ La aprobación de la configuración bancaria y fiscal puede tomar horas o días.
 
    Asegúrate de que tu proyecto Xcode tenga:
 
-   **Bundle Identifier**
+   **Paquete Identifier**
    - Debe coincidir con el identificador en tu Developer Center
-   - Debe coincidir con el identificador en App Store Connect
+   - Debe coincidir con el identificador en Aplicación Store Connect
 
-   **In-App Purchase Capability**
+   **In-Aplicación Purchase Capability**
    1. Selecciona tu proyecto en Xcode
    2. Ve a **Signing & Capabilities**
    3. Haz clic en **+ Capability**
-   4. Agrega **In-App Purchase**
+   4. Agrega **In-Aplicación Purchase**
 
 5. **Crear Productos de Compra Dentro de la Aplicación**
 
-   En App Store Connect, navega a tu aplicación y crea tus productos de compra dentro de la aplicación (suscripciones, consumibles, etc.).
+   En Aplicación Store Connect, navega a tu aplicación y crea tus productos de compra dentro de la aplicación (suscripciones, consumibles, etc.).
 
-   Los productos deben estar al menos en estado "Ready to Submit" para las pruebas en sandbox.
+   Los productos deben estar al menos en estado "Ready A Submit" para las pruebas en sandbox.
 
 6. **Probar tu Implementación**
 
@@ -88,7 +88,7 @@ La aprobación de la configuración bancaria y fiscal puede tomar horas o días.
 
    Esta confirmación indica que estás en el entorno sandbox y no se te cobrará dinero real.
 
-</Steps>
+</Pasos>
 
 ## Notas Importantes
 
@@ -150,20 +150,20 @@ Cuando esté configurado correctamente, deberías observar:
 ## Solución de Problemas
 
 **Los productos no se cargan:**
-- Verifica que el bundle identifier coincida con App Store Connect
+- Verifica que el Paquete identifier coincida con Aplicación Store Connect
 - Verifica que los acuerdos estén firmados y aprobados
-- Asegúrate de que los productos estén al menos en estado "Ready to Submit"
+- Asegúrate de que los productos estén al menos en estado "Ready A Submit"
 - Espera 2-3 horas después de crear los productos
 
-**"Cannot connect to iTunes Store":**
+**"Cannot connect A iTunes Store":**
 - Verifica que la cuenta sandbox esté configurada correctamente
 - Verifica que el dispositivo esté conectado a internet
 - Intenta cerrar sesión y volver a iniciar sesión en la cuenta sandbox
 - Reinicia la aplicación
 
 **Las compras fallan silenciosamente:**
-- Verifica la consola de Xcode para mensajes de error
-- Verifica que la capacidad In-App Purchase esté habilitada
+- Verifica la consola de Xcode para mensajes de Error
+- Verifica que la capacidad In-Aplicación Purchase esté habilitada
 - Asegúrate de que el correo de la cuenta sandbox no sea un Apple ID real
 - Intenta crear una nueva cuenta de prueba sandbox
 
@@ -171,14 +171,14 @@ Cuando esté configurado correctamente, deberías observar:
 - Usa el endpoint de validación de recibo sandbox en las pruebas
 - Endpoint de producción: `https://buy.itunes.apple.com/verifyReceipt`
 - Endpoint sandbox: `https://sandbox.itunes.apple.com/verifyReceipt`
-- El plugin native-purchases maneja esto automáticamente
+- El Plugin native-purchases maneja esto automáticamente
 
 **Duración de suscripción incorrecta:**
 - Recuerda que las suscripciones están aceleradas en sandbox
 - Usa la tabla de conversión anterior para duraciones esperadas
 - Las suscripciones se renuevan automáticamente máximo 6 veces en sandbox
 
-**"This Apple ID has not yet been used in the iTunes Store":**
+**"This Apple ID has not yet been used in El iTunes Store":**
 - Esto es normal para nuevas cuentas sandbox
 - Continúa con la compra para activar la cuenta
 - Solo sucede en el primer uso

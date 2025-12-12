@@ -1,28 +1,28 @@
 ---
 title: Comenzando
 locale: es
-description: Aprende cómo instalar y usar el plugin de WeChat para integrar funcionalidad de WeChat en tu aplicación Capacitor.
+description: Aprende cómo instalar y usar el Plugin de WeChat para integrar funcionalidad de WeChat en tu aplicación Capacitor.
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
+Importar { Code, Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
+<Pasos>
 1. **Instalar el paquete**
-   <PackageManagers pkg="@capgo/capacitor-wechat" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/Capacitor-wechat" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+</Pasos>
 
 ## Configuración
 
 ### Registro de la Aplicación en WeChat
 
-Antes de usar este plugin, debes registrar tu aplicación en la [Plataforma Abierta de WeChat](https://open.weixin.qq.com/) para obtener un App ID.
+Antes de usar este Plugin, debes registrar tu aplicación en la [Plataforma Abierta de WeChat](https://open.weixin.qq.com/) para obtener un Aplicación ID.
 
 ### Configuración de iOS
 
@@ -208,7 +208,7 @@ const result = await CapacitorWechat.isInstalled();
 // Devuelve: { installed: boolean }
 ```
 
-### auth(options)
+### auth(Opciones)
 
 Autentica al usuario con WeChat OAuth.
 
@@ -222,7 +222,7 @@ const result = await CapacitorWechat.auth(options);
 // Devuelve: { code: string, state?: string }
 ```
 
-### share(options)
+### share(Opciones)
 
 Comparte contenido en WeChat.
 
@@ -246,7 +246,7 @@ interface WechatShareOptions {
 await CapacitorWechat.share(options);
 ```
 
-### sendPaymentRequest(options)
+### sendPaymentRequest(Opciones)
 
 Envía una solicitud de pago a WeChat Pay.
 
@@ -263,7 +263,7 @@ interface WechatPaymentOptions {
 await CapacitorWechat.sendPaymentRequest(options);
 ```
 
-### openMiniProgram(options)
+### openMiniProgram(Opciones)
 
 Abre un mini programa de WeChat.
 
@@ -277,7 +277,7 @@ interface WechatMiniProgramOptions {
 await CapacitorWechat.openMiniProgram(options);
 ```
 
-### chooseInvoice(options)
+### chooseInvoice(Opciones)
 
 Elige una factura de WeChat (para aplicaciones empresariales).
 
@@ -296,7 +296,7 @@ const result = await CapacitorWechat.chooseInvoice(options);
 
 ### getPluginVersion()
 
-Obtiene la versión del plugin nativo.
+Obtiene la versión del Plugin nativo.
 
 ```typescript
 const result = await CapacitorWechat.getPluginVersion();
@@ -357,11 +357,11 @@ export class WeChatService {
 
 ## Notas Importantes
 
-1. **Integración del SDK de WeChat**: Este plugin proporciona la interfaz de Capacitor, pero necesitas integrar el SDK oficial de WeChat en tus proyectos nativos.
+1. **Integración del SDK de WeChat**: Este Plugin proporciona la interfaz de Capacitor, pero necesitas integrar el SDK oficial de WeChat en tus proyectos nativos.
 
-2. **Registro de la Aplicación**: Debes registrar tu aplicación en la [Plataforma Abierta de WeChat](https://open.weixin.qq.com/) para obtener un App ID.
+2. **Registro de la Aplicación**: Debes registrar tu aplicación en la [Plataforma Abierta de WeChat](https://open.weixin.qq.com/) para obtener un Aplicación ID.
 
-3. **Universal Links (iOS)**: Para iOS 13+, necesitas configurar Universal Links para los callbacks de WeChat.
+3. **Universal Enlaces (iOS)**: Para iOS 13+, necesitas configurar Universal Enlaces para los callbacks de WeChat.
 
 4. **Integración del Backend**: Las funciones de autenticación y pago requieren integración del backend para intercambiar códigos por tokens y preparar parámetros de pago.
 
@@ -380,7 +380,7 @@ export class WeChatService {
 ### iOS
 - Requiere iOS 10.0+
 - Usa el SDK oficial de WeChat para iOS
-- Requiere configuración de Universal Links para iOS 13+
+- Requiere configuración de Universal Enlaces para iOS 13+
 
 ### Android
 - Requiere Android 5.0 (API 21)+

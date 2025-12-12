@@ -1,6 +1,6 @@
 ---
 title: "Añadir una Aplicación"
-description: "Añade una aplicación a tu cuenta de Capgo e instala el plugin en tu aplicación"
+description: "Añade una aplicación a tu cuenta de Capgo e instala el Plugin en tu aplicación"
 sidebar:
   order: 2
 prev: false
@@ -8,8 +8,8 @@ next: false
 locale: es
 ---
 
-import { YouTube } from 'astro-embed';
-import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
+Importar { YouTube } De 'astro-embed';
+Importar { Aside, Pasos, LinkCard, Code } De '@astrojs/starlight/components';
 
 ## Requisitos
 
@@ -25,34 +25,34 @@ Antes de comenzar con Capgo, asegúrate de tener:
 
 ### Configuración guiada
 
-<Steps>
+<Pasos>
 
 1. Crea tu cuenta en [https://capgo.app/register](https://capgo.app/register).
 ![captura de pantalla de registro](/signup.webp "captura de pantalla de registro")
 
-2. Usa el comando Init para comenzar <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Se te presentará una serie de preguntas. Proporciona las respuestas necesarias para completar la configuración automatizada.<Aside type="tip">Siguiendo estos pasos, estarás en funcionamiento en poco tiempo. Si necesitas más asistencia durante el proceso, nuestro equipo de soporte está [aquí para ayudar](https://support.capgo.app). ¡Feliz incorporación!</Aside>
+2. Usa el comando Init para comenzar <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Se te presentará una serie de preguntas. Proporciona las respuestas necesarias para completar la configuración automatizada.<Aside type="Consejo">Siguiendo estos pasos, estarás en funcionamiento en poco tiempo. Si necesitas más asistencia durante el proceso, nuestro equipo de soporte está [aquí para ayudar](https://support.capgo.app). ¡Feliz incorporación!</Aside>
 
-3. Implementa una actualización en vivo <LinkCard href="/docs/getting-started/deploy/" title="Implementar una actualización en vivo" description="Aprende cómo implementar una actualización en vivo en tu aplicación" />
+3. Implementa una actualización en vivo <LinkCard href="/docs/getting-started/Desplegar/" title="Implementar una actualización en vivo" description="Aprende cómo implementar una actualización en vivo en tu aplicación" />
 
-</Steps>
+</Pasos>
 
 ### Configuración manual
 
 En caso de que el comando init no funcione para ti, puedes añadir manualmente una aplicación.
 
-<Steps>
+<Pasos>
 
 1. Conecta la CLI a tu cuenta: <Code code={`npx @capgo/cli@latest login [APIKEY]`} lang="bash" />
 
 2. Añade la aplicación a tu cuenta con este comando: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
 
-3. Instala el plugin en tu aplicación: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
+3. Instala el Plugin en tu aplicación: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
 
-4. Configura el plugin en tu `capacitor.config` <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
+4. Configura el Plugin en tu `capacitor.config` <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="JSON" />
   [Ver todas las opciones disponibles](/docs/plugin/settings/). Esta información se inferirá si no se proporciona.
 
-5. Llama al método init lo más temprano posible en tu aplicación: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
+5. Llama al método init lo más temprano posible en tu aplicación: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="TypeScript" />
 
-6. Implementa una actualización en vivo <LinkCard href="/docs/getting-started/deploy/" title="Implementar una actualización en vivo" description="Aprende cómo implementar una actualización en vivo en tu aplicación" />
+6. Implementa una actualización en vivo <LinkCard href="/docs/getting-started/Desplegar/" title="Implementar una actualización en vivo" description="Aprende cómo implementar una actualización en vivo en tu aplicación" />
 
-</Steps>
+</Pasos>

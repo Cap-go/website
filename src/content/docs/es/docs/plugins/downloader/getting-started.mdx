@@ -1,13 +1,13 @@
 ---
 title: Comenzando
 locale: es
-description: Guía de instalación y uso para @capgo/capacitor-downloader
+description: Guía de instalación y uso para @Capgo/Capacitor-downloader
 sidebar:
   order: 2
   label: "Comenzando"
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
 
 ## Instalación
 
@@ -114,7 +114,7 @@ interface DownloadOptions {
 
 ## Escuchadores de eventos
 
-El plugin proporciona manejo integral de eventos:
+El Plugin proporciona manejo integral de eventos:
 
 - `downloadProgress` - Rastrear el progreso de descarga en tiempo real
 - `downloadCompleted` - Manejar la finalización exitosa de descarga
@@ -146,11 +146,11 @@ await CapacitorDownloader.download({
 ## Estados de descarga
 
 Las descargas pueden estar en varios estados:
-- **Pending**: En cola para descarga
-- **Running**: Descargando actualmente
+- **Pendiente**: En cola para descarga
+- **Ejecutando**: Descargando actualmente
 - **Paused**: Detenida temporalmente
-- **Completed**: Finalizada exitosamente
-- **Failed**: Encontró un error
+- **Completado**: Finalizada exitosamente
+- **Falló**: Encontró un Error
 - **Stopped**: Cancelada manualmente
 
 ## Información del archivo

@@ -1,16 +1,16 @@
 ---
 title: Auto actualización
-description: Cómo utilizar la actualización automática con capacitor-updater
+description: Cómo utilizar la actualización automática con Capacitor-updater
 sidebar:
   order: 2
 locale: es
 ---
 
-Este modo permite a los desarrolladores utilizar capacitor-updater con modo de actualización automática y enviar actualizaciones a través de canales Capgo o equivalentes
+Este modo permite a los desarrolladores utilizar Capacitor-updater con modo de actualización automática y enviar actualizaciones a través de canales Capgo o equivalentes
 
 ### Prerrequisitos
 
-Asegúrate de que la versión de tu aplicación use [https://semver.org/](https://semver.org/) antes de usar la actualización automática de Capgo
+Asegúrate de que la versión de tu aplicación Usar [https://semver.org/](https://semver.org/) antes de usar la actualización automática de Capgo
 
 Esta es la convención que utiliza para gestionar versiones en Capgo
 
@@ -29,18 +29,18 @@ Nueva forma: Usa el campo `version` en tu archivo `capacitor.config.json`
   }
 }
 ```
-Estas opciones serán utilizadas por el plugin para verificar actualizaciones y por la CLI para subir la versión
+Estas opciones serán utilizadas por el Plugin para verificar actualizaciones y por la CLI para subir la versión
 
 Forma antigua:
 En 3 archivos en tu proyecto:
 
-* `package.json` en **version**
+* `package.json` en **Versión**
 * `android/app/build.gradle` en **versionName**
 * `ios/App/App.xcodeproj/project.pbxproj` en **CURRENT_PROJECT_VERSION**
 
 ### Tutoriales
 
-Configura tu app en 5 minutos
+Configura tu Aplicación en 5 minutos
 
 [Actualiza tus apps de capacitor sin problemas usando capacitor updater](https://capgo.app/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater)
 
@@ -63,15 +63,15 @@ El servidor te permite gestionar canales, versiones y mucho más
 
 `autoUpdate` utilizará datos de `capacitor.config` para identificar el servidor Capgo
 
-:::note
+:::Nota
 Aún puedes usar Capgo Cloud sin enviar tu código a nuestro servidor si tu empresa no lo permite
 :::
 
 #### Validar versión
 
-Cuando la actualización automática está configurada, debes notificar desde JS que tu app está activa y lista
+Cuando la actualización automática está configurada, debes notificar desde JS que tu Aplicación está activa y lista
 
-Esto se puede hacer llamando `notifyAppReady` dentro de tu app
+Esto se puede hacer llamando `notifyAppReady` dentro de tu Aplicación
 
 Hazlo tan pronto como sea posible
 
@@ -82,21 +82,21 @@ CapacitorUpdater.notifyAppReady()
 ```
 
 #### Flujo de usuario
-* El usuario abre la app, la app consulta al servidor por actualizaciones, si se encuentra alguna se descargará en segundo plano
-* El usuario sale de la app, la nueva versión se establece como activa
-* El usuario abre la app nuevamente, cargamos la nueva versión activa y la establecemos como predeterminada
-* Si se llama a `notifyAppReady()`, cuando el usuario sale de la app, la versión anterior se elimina
-* El usuario continúa el flujo normal de la app hasta el siguiente ciclo de actualización
+* El usuario abre la Aplicación, la Aplicación consulta al servidor por actualizaciones, si se encuentra alguna se descargará en segundo plano
+* El usuario sale de la Aplicación, la nueva versión se establece como activa
+* El usuario abre la Aplicación nuevamente, cargamos la nueva versión activa y la establecemos como predeterminada
+* Si se llama a `notifyAppReady()`, cuando el usuario sale de la Aplicación, la versión anterior se elimina
+* El usuario continúa el flujo normal de la Aplicación hasta el siguiente ciclo de actualización
 
 :::danger
-⚠️ No llamar a `notifyAppReady()` en tu app, hará que la versión actual se marque como inválida y volverá al último paquete válido o al original
+⚠️ No llamar a `notifyAppReady()` en tu Aplicación, hará que la versión actual se marque como inválida y volverá al último paquete válido o al original
 :::
 
 #### Flujo de desarrollo
 
-Cuando desarrolles nuevas funciones, asegúrate de bloquear `autoUpdate`, ya que capgo sobrescribirá constantemente tu trabajo con el último paquete de actualización
+Cuando desarrolles nuevas funciones, asegúrate de bloquear `autoUpdate`, ya que Capgo sobrescribirá constantemente tu trabajo con el último paquete de actualización
 Establece `autoUpdate` en false en tu configuración
-Si por alguna razón te quedas atascado en una actualización, puedes eliminar la app y reinstalarla
+Si por alguna razón te quedas atascado en una actualización, puedes eliminar la Aplicación y reinstalarla
 Asegúrate de establecer `autoUpdate` en false en tu configuración antes de hacerlo
 Y luego compílala nuevamente con Xcode o Android studio
 
@@ -106,7 +106,7 @@ Para subir la versión en cada commit configura CI/CD con esta guía
 
 #### Evento Major Available
 
-Cuando `disableAutoUpdateBreaking` está establecido en true, puedes escuchar el evento para saber cuándo la app rechaza hacer una actualización mayor
+Cuando `disableAutoUpdateBreaking` está establecido en true, puedes escuchar el evento para saber cuándo la Aplicación rechaza hacer una actualización mayor
 
 ```jsx
 import { CapacitorUpdater } from '@capgo/capacitor-updater'

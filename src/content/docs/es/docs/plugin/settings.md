@@ -10,7 +10,7 @@ Para tener un control más preciso sobre el sistema de actualización, puedes co
 
 ## `appReadyTimeout`
 
-> Configura el número de milisegundos que el plugin nativo debe esperar antes de considerar una actualización como 'fallida'
+> Configura el número de milisegundos que el Plugin nativo debe esperar antes de considerar una actualización como 'fallida'
 
 Solo disponible para Android e iOS
 
@@ -29,7 +29,7 @@ Predeterminado: `10000` (10 segundos)
 
 ## `responseTimeout`
 
-> Configura el número de milisegundos que el plugin nativo debe esperar antes de considerar un tiempo de espera de la API
+> Configura el número de milisegundos que el Plugin nativo debe esperar antes de considerar un tiempo de espera de la API
 
 Solo disponible para Android e iOS
 
@@ -48,7 +48,7 @@ Predeterminado: `20` (20 segundos)
 
 ## `autoDeleteFailed`
 
-> Configura si el plugin debe eliminar automáticamente los paquetes fallidos
+> Configura si el Plugin debe eliminar automáticamente los paquetes fallidos
 
 Solo disponible para Android e iOS
 
@@ -67,7 +67,7 @@ Predeterminado: `true`
 
 ## `autoDeletePrevious`
 
-> Configura si el plugin debe eliminar automáticamente los paquetes anteriores después de una actualización exitosa
+> Configura si el Plugin debe eliminar automáticamente los paquetes anteriores después de una actualización exitosa
 
 Solo disponible para Android e iOS
 
@@ -86,7 +86,7 @@ Predeterminado: `true`
 
 ## `autoUpdate`
 
-> Configura si el plugin debe usar la Actualización Automática a través de un servidor de actualización
+> Configura si el Plugin debe usar la Actualización Automática a través de un servidor de actualización
 
 Solo disponible para Android e iOS
 
@@ -164,7 +164,7 @@ Predeterminado: `undefined`
 
 ## `directUpdate`
 
-> Hace que el plugin instale directamente la actualización cuando la aplicación se acaba de actualizar/instalar. Solo aplicable para el modo autoUpdate
+> Hace que el Plugin instale directamente la actualización cuando la aplicación se acaba de actualizar/instalar. Solo aplicable para el modo autoUpdate
 
 Solo disponible para Android e iOS
 
@@ -184,13 +184,13 @@ Predeterminado: `undefined`
 
 ## `resetWhenUpdate`
 
-:::note
+:::Nota
 Cuando ocurre una actualización de la tienda, deshabilita el reinicio forzado a la versión nativa
 :::
 
 Hay muchas más configuraciones disponibles solo en la [aplicación web](https://console.capgo.app/login)
 
-Para configurar el plugin, usa estos ajustes:
+Para configurar el Plugin, usa estos ajustes:
 
 ```json
 // capacitorconfigjson
@@ -205,9 +205,9 @@ Para configurar el plugin, usa estos ajustes:
 ```
 
 ## `directUpdate`
-Hace que el plugin instale directamente la actualización cuando la aplicación se acaba de actualizar/instalar. Solo aplicable para el modo autoUpdate
+Hace que el Plugin instale directamente la actualización cuando la aplicación se acaba de actualizar/instalar. Solo aplicable para el modo autoUpdate
 
-:::caution
+:::Precaución
 Esta configuración requiere que ocultes la aplicación del usuario mientras se instala la actualización. De lo contrario, la aplicación se reiniciará mientras el usuario está navegando
 :::
 
@@ -239,7 +239,7 @@ Establece el canal predeterminado para la aplicación. Esto anulará cualquier o
 
 ## `appId`
 Establece el appId para la aplicación. Esto anulará cualquier otra forma de obtener el appId. Esto es útil cuando quieres tener un appId diferente en Capgo y en tu código nativo
-:::note
+:::Nota
 Esta es la nueva forma de establecer el appId. La forma antigua sigue y seguirá siendo compatible
 :::
 ```json
@@ -255,7 +255,7 @@ Esta es la nueva forma de establecer el appId. La forma antigua sigue y seguirá
 
 ## `version`
 Establece la versión para la aplicación. Esto anulará cualquier otra forma de obtener la versión. Esto es útil cuando quieres tener una versión diferente en Capgo y en tu código nativo
-:::note
+:::Nota
 Esta es la nueva forma de establecer la versión. La forma antigua sigue y seguirá siendo compatible
 :::
 ```json

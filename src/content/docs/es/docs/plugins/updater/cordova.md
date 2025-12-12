@@ -1,12 +1,12 @@
 ---
 title: "Cordova"
 locale: es
-description: "Explorando la disponibilidad potencial del plugin capacitor-updater para Cordova y los desafíos involucrados en su desarrollo."
+description: "Explorando la disponibilidad potencial del Plugin Capacitor-updater para Cordova y los desafíos involucrados en su desarrollo."
 sidebar:
   order: 8
 ---
 
-Te has estado preguntando si este plugin alguna vez estará disponible para Cordova.
+Te has estado preguntando si este Plugin alguna vez estará disponible para Cordova.
 
 Hemos iniciado un repositorio de I+D para eso, pero es una gran cantidad de trabajo.
 

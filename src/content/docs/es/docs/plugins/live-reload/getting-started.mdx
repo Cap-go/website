@@ -1,21 +1,21 @@
 ---
 title: Comenzando
-description: Aprende cómo configurar la recarga en vivo para un desarrollo más rápido con tu app Capacitor.
+description: Aprende cómo configurar la recarga en vivo para un desarrollo más rápido con tu Aplicación Capacitor.
 locale: es
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
+<Pasos>
 1. **Instalar el paquete**
-   <PackageManagers pkg="@capgo/capacitor-live-reload" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/Capacitor-live-reload" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+</Pasos>
 
 ## Configuración
 
@@ -58,7 +58,7 @@ LiveReload.addListener('statusChange', (status) => {
 
 ## Referencia de la API
 
-### configureServer(options)
+### configureServer(Opciones)
 
 Almacenar configuraciones del servidor de desarrollo remoto para conexiones posteriores.
 
@@ -120,7 +120,7 @@ Activar manualmente una recarga completa del WebView de Capacitor.
 await LiveReload.reload();
 ```
 
-### reloadFile(options)
+### reloadFile(Opciones)
 
 Recargar un solo archivo/módulo (retrocede a recarga completa si no es compatible).
 
@@ -257,7 +257,7 @@ export class DevServer {
 
 ## Ejemplo de Configuración de Vite
 
-Configura tu servidor Vite para trabajar con el plugin de recarga en vivo:
+Configura tu servidor Vite para trabajar con el Plugin de recarga en vivo:
 
 ```typescript
 // vite.config.ts
@@ -303,7 +303,7 @@ export default defineConfig({
    }
    ```
 
-4. **Limpiar al salir de la app**
+4. **Limpiar al salir de la Aplicación**
    ```typescript
    window.addEventListener('beforeunload', async () => {
      await LiveReload.disconnect();

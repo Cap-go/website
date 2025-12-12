@@ -1,23 +1,23 @@
 ---
 title: Comenzando
 locale: es
-description: Aprende cómo instalar y configurar el plugin Capacitor Navigation Bar para personalizar el color y estilo de la barra de navegación de Android.
+description: Aprende cómo instalar y configurar el Plugin Capacitor Navigation Bar para personalizar el color y estilo de la barra de navegación de Android.
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
+Importar { Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
+<Pasos>
 1. **Instalar el paquete**
-   <PackageManagers pkg="@capgo/capacitor-navigation-bar" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/Capacitor-navigation-bar" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configurar el plugin**
+3. **Configurar el Plugin**
 
    **Establecer Color de Barra de Navegación:**
    ```typescript
@@ -45,12 +45,12 @@ import { PackageManagers } from 'starlight-package-managers'
      <TabItem label="Android">
        **Requisitos Mínimos:**
        - Android 5.0 (API nivel 21) o superior
-       - El plugin solo funciona en dispositivos Android
+       - El Plugin solo funciona en dispositivos Android
 
-       No se requiere configuración adicional en AndroidManifest.xml.
+       No se requiere configuración adicional en AndroidManifest.XML.
      </TabItem>
      <TabItem label="iOS">
-       Este plugin es solo para Android. iOS no tiene una barra de navegación personalizable.
+       Este Plugin es solo para Android. iOS no tiene una barra de navegación personalizable.
      </TabItem>
    </Tabs>
 
@@ -117,7 +117,7 @@ import { PackageManagers } from 'starlight-package-managers'
        });
      });
    ```
-</Steps>
+</Pasos>
 
 ## Referencia de API
 
@@ -160,7 +160,7 @@ interface ColorResult {
 - La barra de navegación podría no ser visible en dispositivos con navegación por gestos
 
 ### iOS
-- Este plugin no tiene efecto en dispositivos iOS
+- Este Plugin no tiene efecto en dispositivos iOS
 - iOS no proporciona APIs para personalizar la navegación del sistema
 
 ## Casos de Uso Comunes

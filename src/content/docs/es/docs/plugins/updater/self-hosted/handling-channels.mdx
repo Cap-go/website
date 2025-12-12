@@ -32,11 +32,11 @@ Configura la URL del endpoint de canal en tu `capacitor.config.json`:
 
 ## Operaciones de Canales
 
-El plugin realiza diferentes operaciones de canales que tu endpoint necesita manejar:
+El Plugin realiza diferentes operaciones de canales que tu endpoint necesita manejar:
 
 ### 1. Obtener Canal (Solicitud GET)
 
-Cuando el plugin llama a `getChannel()`, envía una solicitud GET para recuperar la asignación de canal actual del dispositivo.
+Cuando el Plugin llama a `getChannel()`, envía una solicitud GET para recuperar la asignación de canal actual del dispositivo.
 
 #### Formato de Solicitud
 ```typescript
@@ -71,7 +71,7 @@ interface GetChannelRequest {
 
 ### 2. Establecer Canal (Solicitud POST)
 
-Cuando el plugin llama a `setChannel()`, envía una solicitud POST para asignar el dispositivo a un canal específico.
+Cuando el Plugin llama a `setChannel()`, envía una solicitud POST para asignar el dispositivo a un canal específico.
 
 #### Formato de Solicitud
 ```typescript
@@ -97,9 +97,9 @@ interface SetChannelRequest {
 }
 ```
 
-### 3. Desasignar Canal (Solicitud DELETE)
+### 3. Desasignar Canal (Solicitud Eliminar)
 
-Cuando el plugin llama a `unsetChannel()`, envía una solicitud DELETE para eliminar la asignación de canal del dispositivo.
+Cuando el Plugin llama a `unsetChannel()`, envía una solicitud Eliminar para eliminar la asignación de canal del dispositivo.
 
 #### Formato de Solicitud
 ```typescript
@@ -310,7 +310,7 @@ CREATE TABLE device_channels (
 
 ## Manejo de Errores
 
-Maneja escenarios de error comunes:
+Maneja escenarios de Error comunes:
 
 ```typescript
 // Canal no encontrado

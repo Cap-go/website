@@ -8,11 +8,11 @@ sidebar:
 
 ## Introducción
 
-El plugin Capacitor Social Login **no soporta plataformas web**. Para aplicaciones web, debes usar el inicio de sesión de Google integrado de Firebase directamente, que proporciona un flujo de autenticación basado en ventanas emergentes más confiable.
+El Plugin Capacitor Inicio de sesión social **no soporta plataformas web**. Para aplicaciones web, debes usar el inicio de sesión de Google integrado de Firebase directamente, que proporciona un flujo de autenticación basado en ventanas emergentes más confiable.
 
-## ¿Por qué no usar el plugin en Web?
+## ¿Por qué no usar el Plugin en Web?
 
-El plugin Capacitor Social Login está diseñado para plataformas móviles nativas (Android e iOS) donde puede aprovechar los flujos de autenticación específicos de la plataforma. Para web, el método nativo `signInWithPopup` de Firebase es:
+El Plugin Capacitor Inicio de sesión social está diseñado para plataformas móviles nativas (Android e iOS) donde puede aprovechar los flujos de autenticación específicos de la plataforma. Para web, el método nativo `signInWithPopup` de Firebase es:
 
 - ✅ Más confiable y mejor soportado
 - ✅ Maneja el almacenamiento de sesión del navegador automáticamente
@@ -25,28 +25,28 @@ El plugin Capacitor Social Login está diseñado para plataformas móviles nativ
 
    Asegúrate de que tu proyecto de Firebase tenga habilitado el inicio de sesión de Google:
    - Ve a la [consola de Firebase](https://console.firebase.google.com/)
-   - Navega a Authentication > Sign-in method
+   - Navega a Authentication > Sign-in Método
    - Habilita el proveedor de inicio de sesión de Google
 
 2. Agrega tus dominios autorizados
     1. Ve a la descripción general de tu proyecto en [console.cloud.google.com](https://console.cloud.google.com/)
-        <img src="/social-login-assets/firebase_project_overview.webp" alt="Firebase Project Overview" />
+        <img src="/social-login-assets/firebase_project_overview.webp" alt="Firebase Project Descripción general" />
     2. Abre el menú `Authentication`
         <img src="/social-login-assets/firebase_select_authentication.webp" alt="Firebase Authentication Menu" />
     3. Haz clic en el botón `Settings`
-        <img src="/social-login-assets/firebase_select_authentication_settings.webp" alt="Firebase Authentication Sign-in Method Button" />
+        <img src="/social-login-assets/firebase_select_authentication_settings.webp" alt="Firebase Authentication Sign-in Método Button" />
     4. Configura los `Authorized domains`
-        <img src="/social-login-assets/firebase_select_authentication_settings_authorized_domains.webp" alt="Firebase Authentication Settings Authorized Domains" />
+        <img src="/social-login-assets/firebase_select_authentication_settings_authorized_domains.webp" alt="Firebase Authentication Configuración Authorized Domains" />
 
 ## Ejemplo de implementación
 
 Consulta el archivo [authUtils.ts](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/authUtils.ts) en la aplicación de ejemplo para una implementación completa que:
 
 - Usa `signInWithPopup` de Firebase para plataformas web
-- Usa el plugin Capacitor Social Login para plataformas Android/iOS
+- Usa el Plugin Capacitor Inicio de sesión social para plataformas Android/iOS
 - Maneja la detección de plataforma automáticamente
 
-El ejemplo muestra cómo usar condicionalmente el método integrado de Firebase para web mientras se usa el plugin para plataformas nativas.
+El ejemplo muestra cómo usar condicionalmente el método integrado de Firebase para web mientras se usa el Plugin para plataformas nativas.
 
 ## Recursos adicionales
 

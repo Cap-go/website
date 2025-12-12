@@ -1,22 +1,22 @@
 ---
 title: Comenzando
 locale: es
-description: Aprende cómo instalar y configurar el plugin Capacitor Data Storage SQLite para almacenamiento rápido de clave-valor con encriptación opcional.
+description: Aprende cómo instalar y configurar el Plugin Capacitor Data Storage SQLite para almacenamiento rápido de clave-valor con encriptación opcional.
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Tabs, TabItem, Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
+<Pasos>
 1. **Instalar el paquete**
-   <PackageManagers pkg="@capgo/capacitor-data-storage-sqlite" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/Capacitor-data-storage-sqlite" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configurar el plugin**
+3. **Configurar el Plugin**
 
    **Ejemplo de almacenamiento básico:**
    ```typescript
@@ -237,7 +237,7 @@ import { PackageManagers } from 'starlight-package-managers'
    const profile = await storage.getObject<any>('user_profile');
    console.log('Perfil de usuario:', profile);
    ```
-</Steps>
+</Pasos>
 
 ## Referencia de API
 
@@ -249,7 +249,7 @@ Abre una base de datos de almacenamiento.
 **Parámetros:**
 - `options.database`: string - Nombre de la base de datos
 - `options.encrypted`: boolean - Habilitar encriptación
-- `options.mode`: string - 'encryption' o 'no-encryption'
+- `options.mode`: string - 'Cifrado' o 'no-Cifrado'
 - `options.version`: number - Versión de la base de datos
 
 #### `closeStore(options: CloseStoreOptions)`
@@ -386,7 +386,7 @@ interface RemoveOptions {
 
 **Los datos no persisten:**
 - Asegúrate de que `openStore` se llame antes de las operaciones
-- Verifica cualquier error en la consola
+- Verifica cualquier Error en la consola
 - Verifica que los nombres de claves sean cadenas
 
 **Problemas de rendimiento:**

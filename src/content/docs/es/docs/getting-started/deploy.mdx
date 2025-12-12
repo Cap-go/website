@@ -5,13 +5,13 @@ sidebar:
   order: 3
 locale: es
 ---
-import { Steps, LinkCard, Tabs, TabItem } from '@astrojs/starlight/components';
+Importar { Pasos, LinkCard, Tabs, TabItem } De '@astrojs/starlight/components';
 
-Utiliza la función de Actualizaciones en Vivo de Capgo para actualizar la interfaz de usuario y la lógica de negocio de tu aplicación de forma remota y en tiempo real. Envía actualizaciones de bundles JS directamente a tus usuarios sin pasar por la tienda de aplicaciones para corregir errores al instante y lanzar nuevas funciones.
+Utiliza la función de Actualizaciones en Vivo de Capgo para actualizar la interfaz de usuario y la lógica de negocio de tu aplicación de forma remota y en tiempo real. Envía actualizaciones de Paquetes JS directamente a tus usuarios sin pasar por la tienda de aplicaciones para corregir errores al instante y lanzar nuevas funciones.
 
 Esta guía asume que has completado el [Inicio Rápido de Capgo](/docs/getting-started/quickstart) y ya has:
 
-<Steps>
+<Pasos>
 
 1. Instalado el SDK `@capgo/capacitor-updater` en tu aplicación Capacitor
 
@@ -19,29 +19,29 @@ Esta guía asume que has completado el [Inicio Rápido de Capgo](/docs/getting-s
 
 3. Añadido en tu código el método `CapacitorUpdater.notifyAppReady()`
 
-</Steps>
+</Pasos>
 
 Si aún no has completado estos pasos, por favor regresa y completa primero el inicio rápido.
 
-<LinkCard href="/docs/getting-started/add-an-app/" title="Añadir una aplicación" description="Añade una aplicación a tu cuenta Capgo e instala el plugin en tu aplicación" />
+<LinkCard href="/docs/getting-started/Agregar-an-Aplicación/" title="Añadir una aplicación" description="Añade una aplicación a tu cuenta Capgo e instala el Plugin en tu aplicación" />
 
-## Subir un Bundle
+## Subir un Paquete
 
-Con el SDK de Capgo instalado y configurado, estás listo para subir tu primer bundle de actualización en vivo:
+Con el SDK de Capgo instalado y configurado, estás listo para subir tu primer Paquete de actualización en vivo:
 
 1. Compila tus activos web:
    ```shell
    npm run build
    ```
 
-2. Sube el bundle a Capgo:
+2. Sube el Paquete a Capgo:
     <Tabs>
       <TabItem label="Consola">
         ```shell
       npx @capgo/cli@latest bundle upload --channel=production
       ```
       </TabItem>
-      <TabItem label="Github Actions">
+      <TabItem label="GitHub Actions">
       ```yml
       // .github/workflows/build_and_deploy.yml
     name: Build source code and send to Capgo
@@ -74,7 +74,7 @@ Con el SDK de Capgo instalado y configurado, estás listo para subir tu primer b
               CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
       ```
       </TabItem>
-      <TabItem label="Gitlab">
+      <TabItem label="GitLab">
       ```yml
       // .gitlab-ci.yml
       stages:
@@ -102,7 +102,7 @@ Con el SDK de Capgo instalado y configurado, estás listo para subir tu primer b
       ```
       </TabItem>
     </Tabs>
-   Esto subirá una nueva versión de bundle al canal especificado en el comando.
+   Esto subirá una nueva versión de Paquete al canal especificado en el comando.
 
 ### Solución de Problemas de Subida
 
@@ -115,7 +115,7 @@ Si aún tienes problemas, ve a la sección de [Solución de Problemas](/docs/get
 
 ## Recibir una Actualización en un Dispositivo
 
-Una vez que tu bundle está subido, puedes probar la actualización en vivo en un dispositivo:
+Una vez que tu Paquete está subido, puedes probar la actualización en vivo en un dispositivo:
 
 1. Sincroniza tu aplicación con el dispositivo:
    ```shell
@@ -135,7 +135,7 @@ Una vez que tu bundle está subido, puedes probar la actualización en vivo en u
 
 4. Mantén la aplicación abierta durante aproximadamente 30 segundos para permitir que la actualización se descargue en segundo plano.
 
-5. Los logs tardarán unos segundos en actualizarse y mostrar el estado de la actualización.
+5. Los Registros tardarán unos segundos en actualizarse y mostrar el estado de la actualización.
 
 6. Cierra y vuelve a abrir la aplicación. ¡Deberías ver tu actualización en vivo aplicada!
 

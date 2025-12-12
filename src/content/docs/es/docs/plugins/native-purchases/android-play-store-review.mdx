@@ -6,9 +6,9 @@ sidebar:
   order: 11
 ---
 
-import { Steps } from '@astrojs/starlight/components';
+Importar { Pasos } De '@astrojs/starlight/components';
 
-Obtener la aprobación de tu app de Android en Google Play requiere cumplimiento con las políticas de Google, especialmente para apps con compras dentro de la aplicación y suscripciones. Esta guía cubre todo lo que necesitas para pasar la revisión exitosamente.
+Obtener la aprobación de tu Aplicación de Android en Google Play requiere cumplimiento con las políticas de Google, especialmente para Aplicaciones con compras dentro de la aplicación y suscripciones. Esta guía cubre todo lo que necesitas para pasar la revisión exitosamente.
 
 ## Requisitos de Facturación de Google Play
 
@@ -18,21 +18,21 @@ Para bienes y servicios digitales, **debes** usar el sistema de facturación de 
 
 **Bienes Digitales (Debe Usar Play Billing):**
 - Suscripciones a funciones premium
-- Moneda o créditos dentro de la app
+- Moneda o créditos dentro de la Aplicación
 - Contenido digital (ebooks, música, videos)
 - Mejoras y potenciadores de juegos
-- Desbloqueos de apps y niveles premium
+- Desbloqueos de Aplicaciones y niveles premium
 
 **Bienes Físicos (No Puede Usar Play Billing):**
 - Mercancía física
 - Servicios del mundo real
 - Donaciones únicas a organizaciones sin fines de lucro
 
-:::caution Requisito 2025
-Las apps nuevas deben usar las APIs `monetization.subscriptions` para manejar catálogos de suscripción. Las APIs de facturación heredadas están obsoletas.
+:::Precaución Requisito 2025
+Las Aplicaciones nuevas deben usar las APIs `monetization.subscriptions` para manejar catálogos de suscripción. Las APIs de facturación heredadas están obsoletas.
 :::
 
-### Implementación con Native Purchases
+### Implementación con Compras nativas
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -118,13 +118,13 @@ Antes de que una suscripción se renueve automáticamente, Google requiere:
 - Recordatorio del precio
 - Fácil acceso a la cancelación
 
-:::tip
-El plugin native-purchases trabaja con Google Play para manejar notificaciones de renovación automática automáticamente. Asegúrate de que tus productos de suscripción estén configurados correctamente en Google Play Console.
+:::Consejo
+El Plugin native-purchases trabaja con Google Play para manejar notificaciones de renovación automática automáticamente. Asegúrate de que tus productos de suscripción estén configurados correctamente en Google Play Console.
 :::
 
 ### Consistencia de Precios Entre Plataformas
 
-**Regla Crítica:** Los precios deben ser consistentes en todas las plataformas donde tu app esté disponible.
+**Regla Crítica:** Los precios deben ser consistentes en todas las plataformas donde tu Aplicación esté disponible.
 
 **Ejemplo de Violación:**
 - iOS: $9.99/mes
@@ -137,15 +137,15 @@ El plugin native-purchases trabaja con Google Play para manejar notificaciones d
 
 ### Política de Privacidad Obligatoria
 
-Si tu app incluye compras dentro de la aplicación, debes:
+Si tu Aplicación incluye compras dentro de la aplicación, debes:
 
 1. **Enlace en el Listado de Play Store**
    - Agregar URL de política de privacidad en Play Console
    - Debe ser públicamente accesible
-   - Debe estar en el mismo idioma que tu app
+   - Debe estar en el mismo idioma que tu Aplicación
 
-2. **Enlace Dentro de la App**
-   - Mostrar política de privacidad en configuración de la app
+2. **Enlace Dentro de la Aplicación**
+   - Mostrar política de privacidad en configuración de la Aplicación
    - Mostrar antes de recopilar cualquier dato de usuario
    - Hacerla fácilmente descubrible
 
@@ -184,15 +184,15 @@ function SettingsScreen() {
 
 Google Play requiere divulgación detallada en la sección de Seguridad de Datos:
 
-**Para Apps con IAP, Declarar:**
+**Para Aplicaciones con IAP, Declarar:**
 - Recopilación de historial de compras
 - Direcciones de correo electrónico (para recibos)
 - IDs de dispositivo (para prevención de fraude)
 - Manejo de información de pago
 - Recopilación de datos de analíticas
 
-:::warning
-La sección de Seguridad de Datos es legalmente vinculante. Las declaraciones inexactas pueden resultar en la eliminación de la app.
+:::Advertencia
+La sección de Seguridad de Datos es legalmente vinculante. Las declaraciones inexactas pueden resultar en la eliminación de la Aplicación.
 :::
 
 ## Razones Comunes de Rechazo
@@ -283,7 +283,7 @@ function PurchaseScreen({ product }) {
 ### 4. Pruebas Incompletas
 
 **Por Qué Falla:**
-- La app se bloquea al comprar
+- La Aplicación se bloquea al comprar
 - Los productos no se cargan
 - La confirmación de compra no se muestra
 - Las funciones premium no se desbloquean después de la compra
@@ -338,14 +338,14 @@ async function testPurchaseFlow() {
 ### 5. Violaciones de Política de Privacidad
 
 **Por Qué Falla:**
-- No hay enlace de política de privacidad en la app
+- No hay enlace de política de privacidad en la Aplicación
 - Política de privacidad no accesible
 - Recopilación de datos no divulgada
 - Sección de Seguridad de Datos inexacta
 
 **Prevención:**
 - Agregar política de privacidad al listado de Play Store
-- Incluir enlace en configuración de la app
+- Incluir enlace en configuración de la Aplicación
 - Completar con precisión la sección de Seguridad de Datos
 - Actualizar política al agregar nueva recopilación de datos
 
@@ -366,8 +366,8 @@ Google ahora permite sistemas de facturación alternativos en ciertas regiones:
 - Cumplir con regulaciones locales
 - Aún se aplica tarifa de servicio (reducida)
 
-:::note
-Para la mayoría de los desarrolladores, quedarse solo con Google Play Billing es más simple. El plugin native-purchases maneja esto automáticamente.
+:::Nota
+Para la mayoría de los desarrolladores, quedarse solo con Google Play Billing es más simple. El Plugin native-purchases maneja esto automáticamente.
 :::
 
 ## Gestión de Suscripciones
@@ -434,7 +434,7 @@ function CancellationInfo() {
 
 ![Lista de Verificación Pre-Envío](/native-purchases/review-guides/pre-submission-checklist.webp)
 
-<Steps>
+<Pasos>
 
 1. **Verificar Implementación de Facturación**
    - Usando Google Play Billing (vía native-purchases)
@@ -460,7 +460,7 @@ function CancellationInfo() {
 
 4. **Cumplimiento de Privacidad**
    - Política de privacidad enlazada en Play Console
-   - Política de privacidad accesible en la app
+   - Política de privacidad accesible en la Aplicación
    - Sección de Seguridad de Datos completada con precisión
    - Permisos justificados y documentados
 
@@ -470,12 +470,12 @@ function CancellationInfo() {
    - Declarar compras dentro de la aplicación en el cuestionario
 
 6. **Preparar Listado de la Tienda**
-   - Descripción de la app precisa
+   - Descripción de la Aplicación precisa
    - Las capturas de pantalla muestran la versión actual
    - El gráfico destacado cumple con los requisitos
    - Todos los activos requeridos subidos
 
-</Steps>
+</Pasos>
 
 ## Cronología de Revisión
 
@@ -484,8 +484,8 @@ function CancellationInfo() {
 **Violaciones de Política:** Suspensión inmediata posible
 **Apelaciones:** 7-14 días para revisión
 
-:::tip Revisiones Continuas
-A diferencia de Apple, Google revisa apps continuamente. Tu app puede publicarse en cualquier momento durante el período de revisión, no en un momento fijo.
+:::Consejo Revisiones Continuas
+A diferencia de Apple, Google revisa Aplicaciones continuamente. Tu Aplicación puede publicarse en cualquier momento durante el período de revisión, no en un momento fijo.
 :::
 
 ## Pruebas Antes del Envío
@@ -543,7 +543,7 @@ Antes del lanzamiento a producción:
 4. Los probadores descargan desde Play Store (pista de prueba)
 5. Verificar que los flujos de compra funcionen de extremo a extremo
 
-## Mejores Prácticas para Native Purchases
+## Mejores Prácticas para Compras nativas
 
 ### Manejar Todos los Estados de Compra
 
@@ -704,7 +704,7 @@ async function checkSubscriptionStatus() {
 }
 ```
 
-## Si tu App es Rechazada
+## Si tu Aplicación es Rechazada
 
 ### Violaciones de Política Comunes
 
@@ -720,7 +720,7 @@ async function checkSubscriptionStatus() {
 
 ### Pasos de Resolución
 
-<Steps>
+<Pasos>
 
 1. **Revisar el Aviso de Violación**
    - Leer la política específica citada
@@ -764,7 +764,7 @@ async function checkSubscriptionStatus() {
    - Reenviar para revisión
    - Monitorear estado en Play Console
 
-</Steps>
+</Pasos>
 
 ## Recursos Adicionales
 
@@ -783,9 +783,9 @@ Navegar la revisión de Play Store puede ser complejo, especialmente con los nue
 - Revisión de implementación de IAP
 - Cumplimiento de Seguridad de Datos y privacidad
 - Solución de problemas de rechazo y apelaciones
-- Proceso completo de envío de app
+- Proceso completo de envío de Aplicación
 
-Nuestros expertos han guiado cientos de apps a través de envíos exitosos de Play Store y pueden ayudarte a navegar los requisitos de 2025.
+Nuestros expertos han guiado cientos de Aplicaciones a través de envíos exitosos de Play Store y pueden ayudarte a navegar los requisitos de 2025.
 
 ## Soporte
 

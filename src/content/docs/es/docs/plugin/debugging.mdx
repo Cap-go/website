@@ -6,7 +6,7 @@ sidebar:
 locale: es
 ---
 
-import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+Importar { LinkCard, CardGrid } De '@astrojs/starlight/components';
 
 ## Entendiendo los registros en la nube:
 
@@ -29,18 +29,18 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 | código  | Descripción                                                                       |
 | --------------------- | --------------------------------------------------------------------------------- |
 | **get**               | La información para descargar la nueva versión ha sido enviada al dispositivo                 |
-| **delete**            | Un paquete ha sido eliminado en el dispositivo                                        |
-| **set**               | Un paquete ha sido establecido en el dispositivo                                              |
+| **Eliminar**            | Un paquete ha sido eliminado en el dispositivo                                        |
+| **Establecer**               | Un paquete ha sido establecido en el dispositivo                                              |
 | **set_fail**          | El paquete falló al establecerse                                                         |
 | **reset**             | El dispositivo se reinició al paquete `builtin`                                         |
 | **download_XX**       | Un nuevo paquete ha sido descargado - progreso indicado por XX% (incrementos de 10%) |
 | **download_complete** | La descarga del nuevo paquete ha finalizado                                          |
 | **download_fail**     | El nuevo paquete falló al descargar                                                |
 | **update_fail**       | El nuevo paquete ha sido instalado pero falló al llamar a `notifyAppReady`            |
-| **checksum_fail**     | El nuevo paquete falló al validar el checksum. Si estás usando Capgo Cloud y encuentras este error, generalmente significa que la versión de tu aplicación está esperando un tipo de checksum diferente. La última versión de la CLI y los plugins (versión 6.25.0 o 7+) utilizan checksums SHA256, mientras que los plugins antiguos usaban CRC32. Si ves un error de checksum, verifica si el checksum es CRC32 (un hash más corto) en lugar de SHA256. Esto generalmente indica que el bundle fue subido con una versión antigua de la CLI. Verifica la versión de tu bundle en el panel de Capgo - los bundles creados desde la versión 6.25.0/7 deberían usar SHA256. Si ves checksums CRC32, asegúrate de tener la última versión del plugin instalada localmente (la CLI verifica tu versión local del plugin para determinar qué tipo de checksum subir), luego actualiza tu CLI y vuelve a subir el bundle.                                   |
+| **checksum_fail**     | El nuevo paquete falló al validar el checksum. Si estás usando Capgo Cloud y encuentras este Error, generalmente significa que la versión de tu aplicación está esperando un tipo de checksum diferente. La última versión de la CLI y los Plugins (versión 6.25.0 o 7+) utilizan checksums SHA256, mientras que los Plugins antiguos usaban CRC32. Si ves un Error de checksum, verifica si el checksum es CRC32 (un hash más corto) en lugar de SHA256. Esto generalmente indica que el Paquete fue subido con una versión antigua de la CLI. Verifica la versión de tu Paquete en el panel de Capgo - los Paquetes creados desde la versión 6.25.0/7 deberían usar SHA256. Si ves checksums CRC32, asegúrate de tener la última versión del Plugin instalada localmente (la CLI verifica tu versión local del Plugin para determinar qué tipo de checksum subir), luego actualiza tu CLI y vuelve a subir el Paquete.                                   |
 | **windows_path_fail** | El zip tiene archivos que contienen rutas de Windows que son ilegales                        |
 | **canonical_path_fail** | La ruta de los archivos no es canónica                                              |
-| **directory_path_fail** | Hay un error en la ruta de los archivos zip                                         |
+| **directory_path_fail** | Hay un Error en la ruta de los archivos zip                                         |
 | **unzip_fail**          | La descompresión falló                                                                   |
 | **low_mem_fail** | La descarga falló debido a memoria baja en el dispositivo                                    |
 
@@ -69,8 +69,8 @@ Esto te permitirá verificar todos los eventos que ocurren en la aplicación y e
 para encontrar tus registros en Xcode
 
 <LinkCard
-    title="Getting the Device Log in Xcode"
-    href="https://intercomhelp/deploygate/en/articles/4682692-getting-the-device-log-in-xcode"
+    title="Getting El Dispositivo Registro in Xcode"
+    href="https://intercomhelp/deploygate/en/articles/4682692-getting-the-Dispositivo-Registro-in-xcode"
 />
 
 ### Android:
@@ -78,8 +78,8 @@ para encontrar tus registros en Xcode
 para encontrar tus registros en Android studio
 
 <LinkCard
-    title="View logs with Logcat"
-    href="https://developerandroidcom/studio/debug/am-logcat"
+    title="View Registros with Logcat"
+    href="https://developerandroidcom/studio/Depuración/am-logcat"
 />
 
 ### Explicaciones de Registros
@@ -97,17 +97,17 @@ Xcode tiene una función incorporada para inspeccionar el sistema de archivos de
 
 Para lograr esto:
 
-* Conecta tu dispositivo a tu Mac y selecciona Window > Devices en la barra de menú de Xcode
-* Selecciona tu dispositivo en el panel izquierdo bajo la sección Devices
+* Conecta tu dispositivo a tu Mac y selecciona Window > Dispositivos en la barra de menú de Xcode
+* Selecciona tu dispositivo en el panel izquierdo bajo la sección Dispositivos
 * Esto mostrará una lista de aplicaciones instaladas por desarrolladores para ese dispositivo
 * Selecciona la aplicación que deseas inspeccionar y luego selecciona el ícono de engranaje cerca de la parte inferior de la pantalla
 * Aquí puedes ver el sistema de archivos actual seleccionando Show Container o descargar una instantánea del mismo
 
-Seleccionar Download Container descargará y exportará una instantánea del sistema de archivos como un archivo xcappdata que puedes navegar
+Seleccionar Descargar Container descargará y exportará una instantánea del sistema de archivos como un archivo xcappdata que puedes navegar
 
-Haz clic derecho en este archivo y selecciona Show Package Contents para abrir la carpeta
+Haz clic derecho en este archivo y selecciona Show Paquete Contents para abrir la carpeta
 
-Abre la carpeta App Data, y ahora deberías ver algunas carpetas como Documents, Library, tmp, etc
+Abre la carpeta Aplicación Data, y ahora deberías ver algunas carpetas como Documents, Library, tmp, etc
 
 ![iOS app container folder structure showing Documents and Library folders](/ios_debug_update_1.webp)
 
@@ -121,7 +121,7 @@ y `documents/versions` para recarga en caliente
 
 Para depurar en Android, necesitas acceder al dispositivo desde Android Studio:
 
-* Haz clic en View > Tool Windows > Device File Explorer o haz clic en el botón Device File Explorer en la barra de herramientas para abrir el Device File Explorer
+* Haz clic en View > Tool Windows > Dispositivo File Explorer o haz clic en el botón Dispositivo File Explorer en la barra de herramientas para abrir el Dispositivo File Explorer
 * Selecciona un dispositivo de la lista desplegable
 * Abre la ruta **data/data/APP_NAME/** donde **APP_NAME es el ID de tu aplicación**
 
@@ -129,13 +129,13 @@ Para depurar en Android, necesitas acceder al dispositivo desde Android Studio:
 
 Luego encuentra la carpeta `versions` para ver todas las versiones
 
-:::tip[¿Sabías que?]
+:::Consejo[¿Sabías que?]
 En Android, todas las versiones se almacenan en una carpeta, a diferencia de iOS donde tiene que duplicarse en dos ubicaciones
 :::
 
 ## Entendiendo los registros de fallos de producción en iOS
 
 <LinkCard
-    title="How to review your app's crash logs"
+    title="Cómo review your Aplicación's crash Registros"
     href="https://developer.apple.com/news/?id=nra79npr"
 />

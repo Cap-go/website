@@ -6,20 +6,20 @@ sidebar:
   order: 8
 ---
 
-> ⚡️ Capgo automatiza canales, limpieza de bundles, reversiones, analíticas y cargas CLI de forma nativa. Usa esta guía para realizar los pasos mínimos requeridos para migrar y opcionalmente recrear cualquier comportamiento personalizado que aún necesites.
+> ⚡️ Capgo automatiza canales, limpieza de Paquetes, reversiones, analíticas y cargas CLI de forma nativa. Usa esta guía para realizar los pasos mínimos requeridos para migrar y opcionalmente recrear cualquier comportamiento personalizado que aún necesites.
 
 ## Descripción general
 
-1. Recopila tu configuración existente de Capawesome Cloud (App ID, canales, claves de firma, tokens CLI) para que puedas archivarla o auditarla más tarde.
-2. Instala el plugin de Capgo, elimina el SDK de Capawesome y llama a `CapacitorUpdater.notifyAppReady()`.
-3. Configura comportamientos opcionales (descargas manuales, fijación de bundles, recargas) si dependes de esos flujos actualmente.
+1. Recopila tu configuración existente de Capawesome Cloud (Aplicación ID, canales, claves de firma, tokens CLI) para que puedas archivarla o auditarla más tarde.
+2. Instala el Plugin de Capgo, elimina el SDK de Capawesome y llama a `CapacitorUpdater.notifyAppReady()`.
+3. Configura comportamientos opcionales (descargas manuales, fijación de Paquetes, recargas) si dependes de esos flujos actualmente.
 
-Con Capgo solo necesitas instalar nuestro plugin y llamar a `CapacitorUpdater.notifyAppReady()`. Todo lo demás—canales, limpieza de bundles, reversiones, analíticas y automatización CLI—se maneja de forma nativa. Las secciones a continuación explican cada tarea directamente.
+Con Capgo solo necesitas instalar nuestro Plugin y llamar a `CapacitorUpdater.notifyAppReady()`. Todo lo demás—canales, limpieza de Paquetes, reversiones, analíticas y automatización CLI—se maneja de forma nativa. Las secciones a continuación explican cada tarea directamente.
 
 ## Antes de comenzar
 
 - Asegúrate de que tu proyecto ya esté usando Capacitor 5 o posterior.
-- Instala el CLI de Capgo (`npm install -g @capgo/cli`) si planeas enviar bundles desde CI/CD.
+- Instala el CLI de Capgo (`npm install -g @capgo/cli`) si planeas enviar Paquetes desde CI/CD.
 
 ## Paso 1 – Instalar Capgo y eliminar el SDK de Capawesome
 
@@ -29,7 +29,7 @@ npm install @capgo/capacitor-updater
 npx cap sync
 ```
 
-Ese es el único intercambio obligatorio. El código nativo de Capgo viene incluido con el plugin; no se requieren helpers adicionales de JavaScript.
+Ese es el único intercambio obligatorio. El código nativo de Capgo viene incluido con el Plugin; no se requieren helpers adicionales de JavaScript.
 
 ## Paso 2 – Configuración mínima
 
@@ -61,7 +61,7 @@ Todo lo que Capawesome lista como banderas manuales (`defaultChannel`, `autoDele
 | `defaultChannel` | Reglas de canal gestionadas en el panel/API | Opcional; la mayoría de equipos lo configuran del lado del servidor |
 | `autoDeleteBundles` | `autoDeletePrevious: true` (predeterminado) | Ya está habilitado |
 | `publicKey` | Gestionado en la consola de Capgo | Solo si rotas claves manualmente |
-| `maxVersions` / retención | Política de retención de bundles | Configurado centralmente en Capgo (1 mes por defecto, 24 meses máx.) |
+| `maxVersions` / retención | Política de retención de Paquetes | Configurado centralmente en Capgo (1 mes por defecto, 24 meses máx.) |
 
 ## Paso 3 – Llamar a `notifyAppReady()` (el único hook requerido)
 
@@ -73,7 +73,7 @@ import { CapacitorUpdater } from '@capgo/capacitor-updater'
 CapacitorUpdater.notifyAppReady()
 ```
 
-Esto confirma que la app se inició correctamente. Si la confirmación nunca llega, Capgo revierte automáticamente el bundle—no se necesita JavaScript adicional.
+Esto confirma que la Aplicación se inició correctamente. Si la confirmación nunca llega, Capgo revierte automáticamente el Paquete—no se necesita JavaScript adicional.
 
 **Eso es todo—Capgo maneja verificaciones en segundo plano, visibilidad del splash y reversiones de forma nativa.**
 
@@ -102,15 +102,15 @@ En Capgo normalmente dejas que el actualizador automático se ejecute; las APIs 
 | --- | --- | --- |
 | `LiveUpdate.fetchLatestBundle()` | `CapacitorUpdater.getLatest()` | Solo al implementar tu propio flujo de descarga |
 | `LiveUpdate.downloadBundle()` | `CapacitorUpdater.download()` | Opcional: la actualización automática nativa ya descarga |
-| `LiveUpdate.setNextBundle()` | `CapacitorUpdater.next()` | Opcional: el panel fija bundles automáticamente |
-| `LiveUpdate.reload()` | `CapacitorUpdater.reload()` | Opcional; Capgo aplica bundles obligatorios después de `notifyAppReady()` |
+| `LiveUpdate.setNextBundle()` | `CapacitorUpdater.next()` | Opcional: el panel fija Paquetes automáticamente |
+| `LiveUpdate.reload()` | `CapacitorUpdater.reload()` | Opcional; Capgo aplica Paquetes obligatorios después de `notifyAppReady()` |
 | `LiveUpdate.getCurrentBundle()` | `CapacitorUpdater.current()` | Diagnósticos opcionales |
 
 Si te quedas con el comportamiento de actualización automática nativa, puedes eliminar completamente el JavaScript de Capawesome.
 
 ### Ejemplos de control manual
 
-**Descargar el último bundle**
+**Descargar el último Paquete**
 
 ```ts title="Capgo"
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -142,7 +142,7 @@ const downloadUpdate = async () => {
 }
 ```
 
-**Establecer el siguiente bundle**
+**Establecer el siguiente Paquete**
 
 ```ts title="Capgo"
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -160,7 +160,7 @@ const setNextBundle = async () => {
 }
 ```
 
-**Aplicar el bundle descargado inmediatamente**
+**Aplicar el Paquete descargado inmediatamente**
 
 ```ts title="Capgo"
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -215,9 +215,9 @@ App.addListener('resume', async () => {
 
 ### Actualización forzada
 - **Flujo de trabajo anterior**: conectar lógica de prompt y forzar recarga.
-- **Capgo**: marca el bundle como "obligatorio" en el panel, luego escucha el evento `majorAvailable` (emitido después de `notifyAppReady()`) para requerir que los usuarios actualicen dentro de tu app.
+- **Capgo**: marca el Paquete como "obligatorio" en el panel, luego escucha el evento `majorAvailable` (emitido después de `notifyAppReady()`) para requerir que los usuarios actualicen dentro de tu Aplicación.
 
-## Paso 6 – Desplegar bundles
+## Paso 6 – Desplegar Paquetes
 
 Si anteriormente dependías de `capawesome live-update deploy`, Capgo ofrece un flujo de trabajo CLI similar, y también puedes automatizar despliegues completamente a través de la API.
 
@@ -229,7 +229,7 @@ capgo login
 capgo bundle upload --path dist --channel production
 ```
 
-Dado que Capgo rastrea la salud de los bundles automáticamente, también obtienes:
+Dado que Capgo rastrea la salud de los Paquetes automáticamente, también obtienes:
 
 - Registros de auditoría a nivel de dispositivo para cada instalación.
 - Retención automática (un mes por defecto) con límites configurables de hasta 24 meses.
@@ -237,7 +237,7 @@ Dado que Capgo rastrea la salud de los bundles automáticamente, también obtien
 
 ## Cronología de migración
 
-- **Inventario e instalación**: 10 minutos (`npm install`, eliminar plugin antiguo).
+- **Inventario e instalación**: 10 minutos (`npm install`, eliminar Plugin antiguo).
 - **Configuración y preparación**: 5 minutos (`notifyAppReady`).
 - **Verificaciones de cordura**: 15 minutos (pruebas manuales o listeners opcionales).
 - **Primer despliegue**: 10 minutos con CLI de Capgo o integración CI.
@@ -250,4 +250,4 @@ En la práctica, los equipos terminan en menos de una hora. Si proporcionas deta
 - **Comunidad**: únete al [Discord de Capgo](https://discord.gg/VCXxSVjefW).
 - **Rastreador de problemas**: [github.com/Cap-go/capacitor-updater/issues](https://github.com/Cap-go/capacitor-updater/issues).
 
-Capgo está construido para confiabilidad a largo plazo: actualizaciones delta nativas, bundles encriptados, reversiones automáticas y analíticas que no requieren JavaScript personalizado. Una vez que migres, puedes eliminar el código de mantenimiento pesado y dejar que la plataforma ejecute actualizaciones automáticamente.
+Capgo está construido para confiabilidad a largo plazo: actualizaciones delta nativas, Paquetes encriptados, reversiones automáticas y analíticas que no requieren JavaScript personalizado. Una vez que migres, puedes eliminar el código de mantenimiento pesado y dejar que la plataforma ejecute actualizaciones automáticamente.

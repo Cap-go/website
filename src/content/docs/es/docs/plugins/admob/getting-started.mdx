@@ -1,21 +1,21 @@
 ---
 title: Comenzando
 locale: es
-description: Instale y configure el plugin AdMob de Capgo para servir anuncios dentro de su aplicación Capacitor.
+description: Instale y Configurar el Plugin AdMob de Capgo para servir anuncios dentro de su aplicación Capacitor.
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
-1. **Instalar el plugin**
-   <PackageManagers pkg="@capgo/capacitor-admob" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+<Pasos>
+1. **Instalar el Plugin**
+   <PackageManagers pkg="@Capgo/Capacitor-admob" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+</Pasos>
 
 ## Inicializar el SDK
 
@@ -86,4 +86,4 @@ await handle.remove();
 
 - **iOS**: Agregue su ID de aplicación de AdMob a `Info.plist` bajo la clave `GADApplicationIdentifier` e incluya cualquier ID de SKAdNetwork en el que confíe.
 - **Android**: Declare su ID de aplicación de AdMob en `AndroidManifest.xml` agregando `com.google.android.gms.ads.APPLICATION_ID` dentro de la etiqueta `<application>`.
-- **Consentimiento y privacidad**: Use `requestTrackingAuthorization()` en iOS 14+ y banderas de `configRequest()` dirigidas a niños para cumplir con las reglas de privacidad regionales.
+- **Consentimiento y privacidad**: Usar `requestTrackingAuthorization()` en iOS 14+ y banderas de `configRequest()` dirigidas a niños para cumplir con las reglas de privacidad regionales.

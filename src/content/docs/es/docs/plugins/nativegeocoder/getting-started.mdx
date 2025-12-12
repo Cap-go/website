@@ -1,18 +1,18 @@
 ---
 title: Comenzando
 locale: es
-description: Aprende cómo instalar y usar el plugin Native Geocoder para conversión de direcciones y coordenadas en tu aplicación Capacitor.
+description: Aprende cómo instalar y usar el Plugin Native Geocoder para conversión de direcciones y coordenadas en tu aplicación Capacitor.
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
+Importar { Code, Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
+<Pasos>
 1. **Instalar el paquete**
-   <PackageManagers pkg="@capgo/nativegeocoder" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/nativegeocoder" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
@@ -32,11 +32,11 @@ import { PackageManagers } from 'starlight-package-managers'
    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
    ```
-</Steps>
+</Pasos>
 
 ## Uso
 
-Importa el plugin y usa sus métodos de geocodificación:
+Importa el Plugin y usa sus métodos de geocodificación:
 
 ```typescript
 import { NativeGeocoder } from '@capgo/nativegeocoder';
@@ -72,7 +72,7 @@ const reverseGeocode = async () => {
 
 ## Referencia de API
 
-### forwardGeocode(options)
+### forwardGeocode(Opciones)
 
 Convierte una cadena de dirección en coordenadas geográficas.
 
@@ -103,7 +103,7 @@ interface Address {
 }
 ```
 
-### reverseGeocode(options)
+### reverseGeocode(Opciones)
 
 Convierte coordenadas geográficas en información de dirección.
 
@@ -318,17 +318,17 @@ export class LocationPicker {
 
 ### iOS
 - Usa `CLGeocoder` de CoreLocation
-- No se requiere API key
+- No se requiere Clave API
 - Respeta la configuración regional del usuario automáticamente
 
 ### Android
 - Usa Android Geocoder API
-- API key opcional de Google para mejores resultados
+- Clave API opcional de Google para mejores resultados
 - Puede recurrir al servicio web de Google
 
-### Configuración de API Key (Android)
+### Configuración de Clave API (Android)
 
-Para mejores resultados en Android, puedes proporcionar una API key de Google:
+Para mejores resultados en Android, puedes proporcionar una Clave API de Google:
 
 ```typescript
 await NativeGeocoder.forwardGeocode({
@@ -346,7 +346,7 @@ await NativeGeocoder.forwardGeocode({
 
 2. **Errores de permisos**
    - Asegúrate de que los permisos de ubicación estén otorgados
-   - Verifica Info.plist/AndroidManifest.xml
+   - Verifica Información.plist/AndroidManifest.XML
 
 3. **Resultados inexactos**
    - Usa direcciones más específicas

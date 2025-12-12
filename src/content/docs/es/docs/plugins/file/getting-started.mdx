@@ -1,26 +1,26 @@
 ---
 title: Comenzando
-description: Aprende cómo instalar y usar el plugin File para operaciones del sistema de archivos en tu aplicación Capacitor.
+description: Aprende cómo instalar y usar el Plugin File para operaciones del sistema de archivos en tu aplicación Capacitor.
 locale: es
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
+Importar { Code, Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
+<Pasos>
 1. **Instala el paquete**
-   <PackageManagers pkg="@capgo/capacitor-file" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/Capacitor-file" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincroniza con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+</Pasos>
 
 ## Uso
 
-Importa el plugin y usa sus métodos para operaciones de archivos:
+Importa el Plugin y usa sus métodos para operaciones de archivos:
 
 ```typescript
 import { CapacitorFile, Directory, Encoding } from '@capgo/capacitor-file';
@@ -67,7 +67,7 @@ const deleteFile = async () => {
 
 ## Ubicaciones de Directorios
 
-El plugin proporciona varias constantes de directorio:
+El Plugin proporciona varias constantes de directorio:
 
 ```typescript
 import { Directory } from '@capgo/capacitor-file';
@@ -94,7 +94,7 @@ Encoding.UTF16  // Codificación de texto UTF-16
 
 ## Referencia de API
 
-### writeFile(options)
+### writeFile(Opciones)
 
 Escribe datos en un archivo.
 
@@ -111,7 +111,7 @@ const result = await CapacitorFile.writeFile({
 // Devuelve: { uri: string }
 ```
 
-### readFile(options)
+### readFile(Opciones)
 
 Lee el contenido de un archivo.
 
@@ -126,7 +126,7 @@ const result = await CapacitorFile.readFile({
 // Devuelve: { data: string }
 ```
 
-### appendFile(options)
+### appendFile(Opciones)
 
 Añade datos a un archivo.
 
@@ -139,7 +139,7 @@ await CapacitorFile.appendFile({
 });
 ```
 
-### deleteFile(options)
+### deleteFile(Opciones)
 
 Elimina un archivo.
 
@@ -150,7 +150,7 @@ await CapacitorFile.deleteFile({
 });
 ```
 
-### mkdir(options)
+### mkdir(Opciones)
 
 Crea un directorio.
 
@@ -162,7 +162,7 @@ await CapacitorFile.mkdir({
 });
 ```
 
-### rmdir(options)
+### rmdir(Opciones)
 
 Elimina un directorio.
 
@@ -174,7 +174,7 @@ await CapacitorFile.rmdir({
 });
 ```
 
-### readdir(options)
+### readdir(Opciones)
 
 Lista el contenido del directorio.
 
@@ -187,7 +187,7 @@ const result = await CapacitorFile.readdir({
 // Cada entrada tiene: { name, isFile, isDirectory, fullPath, nativeURL }
 ```
 
-### stat(options)
+### stat(Opciones)
 
 Obtiene metadatos de archivo o directorio.
 
@@ -199,7 +199,7 @@ const result = await CapacitorFile.stat({
 // Devuelve: { type, size, mtime, ctime, uri }
 ```
 
-### exists(options)
+### exists(Opciones)
 
 Verifica si existe un archivo o directorio.
 
@@ -211,7 +211,7 @@ const result = await CapacitorFile.exists({
 // Devuelve: { exists: boolean, type?: 'file' | 'directory' }
 ```
 
-### copy(options)
+### Copiar(Opciones)
 
 Copia un archivo o directorio.
 
@@ -225,7 +225,7 @@ const result = await CapacitorFile.copy({
 // Devuelve: { uri: string }
 ```
 
-### rename(options) / move(options)
+### rename(Opciones) / move(Opciones)
 
 Renombra o mueve un archivo o directorio.
 
@@ -238,7 +238,7 @@ await CapacitorFile.rename({
 });
 ```
 
-### truncate(options)
+### truncate(Opciones)
 
 Trunca un archivo a un tamaño específico.
 
@@ -250,7 +250,7 @@ await CapacitorFile.truncate({
 });
 ```
 
-### getUri(options)
+### getUri(Opciones)
 
 Obtiene el URI nativo para un archivo.
 
@@ -375,14 +375,14 @@ export class FileService {
 
 ### iOS
 - Requiere iOS 13.0+
-- El directorio Documents es visible en la app Files
-- El directorio Library es para archivos de soporte de la app
+- El directorio Documents es visible en la Aplicación Files
+- El directorio Library es para archivos de soporte de la Aplicación
 - Cache puede ser borrado cuando el almacenamiento del dispositivo es bajo
 
 ### Android
 - Requiere Android 6.0 (API 23)+
 - El almacenamiento externo requiere permisos de tiempo de ejecución en versiones antiguas de Android
-- El directorio Documents se mapea al directorio de archivos de la app
+- El directorio Documents se mapea al directorio de archivos de la Aplicación
 - Usa el directorio External para acceso a almacenamiento compartido
 
 ### Web

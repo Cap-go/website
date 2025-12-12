@@ -6,7 +6,7 @@ sidebar:
 locale: es
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+Importar { Aside } De '@astrojs/starlight/components';
 
 Capgo está diseñado con la privacidad, la seguridad y el cumplimiento en mente. Este documento explica qué datos se recopilan, cómo se utilizan y qué medidas se implementan para proteger la privacidad de sus usuarios y garantizar el cumplimiento normativo al usar el servicio de actualización en vivo de Capgo.
 
@@ -22,11 +22,11 @@ Capgo recopila solo los datos necesarios para proporcionar la función de actual
 - **Código de Versión de la Aplicación**: El código de versión de la aplicación que se utiliza para determinar qué actualizaciones son compatibles con la aplicación
 - **Nombre de Versión de la Aplicación**: El nombre de versión de la aplicación que se utiliza para propósitos de visualización
 - **Plataforma**: La plataforma (iOS, Android) de la aplicación que se utiliza para determinar qué actualizaciones son compatibles con la aplicación
-- **ID de Dispositivo**: Un identificador único para el dispositivo que se utiliza para entregar actualizaciones a un dispositivo específico y para propósitos de facturación. Este identificador es una cadena aleatoria que se crea cuando la aplicación se inicia por primera vez. **A partir de las versiones v5.10.0, v6.25.0 y v7.25.0 del plugin**, el ID del dispositivo ahora persiste a través de las reinstalaciones de la aplicación (almacenado de forma segura en Keychain en iOS y EncryptedSharedPreferences en Android) para proporcionar un mejor seguimiento del dispositivo mientras se mantiene el cumplimiento con las directrices de las tiendas de aplicaciones. Antes de estas versiones, el ID del dispositivo se restablecía con cada instalación de la aplicación
+- **ID de Dispositivo**: Un identificador único para el dispositivo que se utiliza para entregar actualizaciones a un dispositivo específico y para propósitos de facturación. Este identificador es una cadena aleatoria que se crea cuando la aplicación se inicia por primera vez. **A partir de las versiones v5.10.0, v6.25.0 y v7.25.0 del Plugin**, el ID del dispositivo ahora persiste a través de las reinstalaciones de la aplicación (almacenado de forma segura en Keychain en iOS y EncryptedSharedPreferences en Android) para proporcionar un mejor seguimiento del dispositivo mientras se mantiene el cumplimiento con las directrices de las tiendas de aplicaciones. Antes de estas versiones, el ID del dispositivo se restablecía con cada instalación de la aplicación
 - **ID de Paquete**: El identificador único para el paquete que está actualmente instalado en el dispositivo
 - **Nombre del Canal**: El nombre del canal que está seleccionado para recibir actualizaciones
 - **Versión del SO**: La versión del sistema operativo que se utiliza para determinar qué actualizaciones son compatibles con el dispositivo
-- **Versión del Plugin**: La versión del plugin @capgo/capacitor-updater que se utiliza para entregar actualizaciones al dispositivo
+- **Versión del Plugin**: La versión del Plugin @Capgo/Capacitor-updater que se utiliza para entregar actualizaciones al dispositivo
 
 **Datos Técnicos Adicionales:**
 - Marcas de tiempo de verificación de actualizaciones
@@ -35,8 +35,8 @@ Capgo recopila solo los datos necesarios para proporcionar la función de actual
 - Eventos de reversión y razones
 - Dirección IP (para geolocalización y optimización de CDN)
 
-<Aside type="note">
-Puede verificar los datos que se recopilan inspeccionando el código fuente del plugin @capgo/capacitor-updater, que es de código abierto y está disponible en [GitHub](https://github.com/Cap-go/capacitor-updater). Capgo no recopila información de identificación personal (PII) como nombres, direcciones de correo electrónico, números de teléfono o identificadores de dispositivos persistentes que puedan usarse para rastrear usuarios individuales entre aplicaciones.
+<Aside type="Nota">
+Puede verificar los datos que se recopilan inspeccionando el código fuente del Plugin @Capgo/Capacitor-updater, que es de código abierto y está disponible en [GitHub](https://github.com/Cap-go/capacitor-updater). Capgo no recopila información de identificación personal (PII) como nombres, direcciones de correo electrónico, números de teléfono o identificadores de dispositivos persistentes que puedan usarse para rastrear usuarios individuales entre aplicaciones.
 </Aside>
 
 ### Qué Datos NO se Recopilan
@@ -102,7 +102,7 @@ Los datos recopilados por Capgo se utilizan exclusivamente para:
 Como usuario de Capgo, usted tiene control sobre:
 
 - **Gestión de Canales**: Controle qué actualizaciones se distribuyen a qué usuarios
-- **Minimización de Datos**: Configure qué información del dispositivo se comparte
+- **Minimización de Datos**: Configurar qué información del dispositivo se comparte
 - **Controles Geográficos**: Gestione dónde se distribuyen sus actualizaciones
 - **Configuración de Retención**: Controle cuánto tiempo se retienen los datos de actualización
 
@@ -127,7 +127,7 @@ Capgo está diseñado para cumplir con las principales regulaciones de protecci�
 ### Cumplimiento de las Tiendas de Aplicaciones
 Capgo se adhiere estrictamente a las directrices y políticas de las tiendas de aplicaciones:
 
-- **Apple App Store**: Cumple con las [Directrices de Revisión de App Store](https://developer.apple.com/app-store/review/guidelines/) sección 3.3.2, asegurando que las actualizaciones en vivo solo modifican el comportamiento de la aplicación de formas que son consistentes con la aplicación enviada
+- **Apple Aplicación Store**: Cumple con las [Directrices de Revisión de App Store](https://developer.apple.com/app-store/review/guidelines/) sección 3.3.2, asegurando que las actualizaciones en vivo solo modifican el comportamiento de la aplicación de formas que son consistentes con la aplicación enviada
 - **Google Play Store**: Sigue los requisitos de la [Política de Desarrolladores de Google Play](https://play.google.com/about/developer-content-policy/) para carga dinámica de código y actualizaciones de aplicaciones
 - **Restricciones de Contenido**: Las actualizaciones en vivo no pueden introducir funcionalidad que no estaba presente en el envío original de la aplicación o violar políticas de contenido específicas de la plataforma
 - **Requisitos de Seguridad**: Todas las actualizaciones mantienen la misma postura de seguridad y permisos que la aplicación original
@@ -140,7 +140,7 @@ Como desarrollador de aplicaciones que usa Capgo, usted debe:
 - Garantizar el cumplimiento con las leyes aplicables en su jurisdicción
 - Implementar mecanismos de consentimiento apropiados si es necesario
 
-<Aside type="tip">
+<Aside type="Consejo">
 **No se Requiere Implementación Adicional de Privacidad**: Capgo está diseñado para cumplir con la privacidad por defecto. No necesita implementar controles de privacidad adicionales ni mecanismos de manejo de datos en el código de su aplicación. El enfoque de recopilación mínima de datos y privacidad por diseño significa que integrar Capgo típicamente no requiere cambios en sus declaraciones o políticas de privacidad existentes.
 </Aside>
 
@@ -172,7 +172,7 @@ Si tiene preguntas sobre las prácticas de privacidad de Capgo o necesita report
 - Contacte a nuestro equipo de privacidad a través de los canales de soporte
 - Reporte cualquier problema relacionado con la privacidad a través de nuestro contacto de seguridad
 
-<Aside type="tip">
+<Aside type="Consejo">
 Recuerde actualizar la política de privacidad de su propia aplicación para reflejar el uso del servicio de actualización en vivo de Capgo y cualquier recopilación de datos que pueda ocurrir como parte del proceso de actualización.
 </Aside>
 

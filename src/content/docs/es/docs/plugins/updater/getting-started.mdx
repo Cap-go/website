@@ -1,12 +1,12 @@
 ---
 title: Primeros Pasos
 locale: es
-description: Guía de inicio rápido para integrar actualizaciones en vivo en tu aplicación Capacitor con el plugin Updater.
+description: Guía de inicio rápido para integrar actualizaciones en vivo en tu aplicación Capacitor con el Plugin Updater.
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
 
 ## Instalación
 
@@ -39,26 +39,26 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ## Inicio Rápido
 
-Para la mayoría de usuarios, recomendamos seguir la [guía principal de Quickstart](/docs/getting-started/quickstart/) que cubre tanto la instalación del plugin como la integración con la nube de Capgo.
+Para la mayoría de usuarios, recomendamos seguir la [guía principal de Quickstart](/docs/getting-started/quickstart/) que cubre tanto la instalación del Plugin como la integración con la nube de Capgo.
 
-Esta guía de primeros pasos se enfoca en los detalles técnicos del plugin para usuarios avanzados que quieren entender los mecanismos subyacentes o implementar actualizaciones auto-hospedadas.
+Esta guía de primeros pasos se enfoca en los detalles técnicos del Plugin para usuarios avanzados que quieren entender los mecanismos subyacentes o implementar actualizaciones auto-hospedadas.
 
 ## Descripción General
 
-El plugin Capacitor Updater habilita actualizaciones over-the-air (OTA) para tus aplicaciones Capacitor. Esto te permite enviar actualizaciones a tu aplicación sin pasar por las revisiones de tiendas de aplicaciones.
+El Plugin Capacitor Updater habilita actualizaciones over-the-air (OTA) para tus aplicaciones Capacitor. Esto te permite enviar actualizaciones a tu aplicación sin pasar por las revisiones de tiendas de aplicaciones.
 
 ## Cómo Funciona
 
-1. **Descarga de Bundle**: El plugin descarga bundles de actualización (archivos ZIP que contienen tus assets web)
-2. **Extracción**: Los bundles se extraen al almacenamiento del dispositivo
-3. **Hot Reload**: La aplicación cambia al nuevo bundle sin requerir un reinicio
+1. **Descarga de Paquete**: El Plugin descarga Paquetes de actualización (archivos ZIP que contienen tus assets web)
+2. **Extracción**: Los Paquetes se extraen al almacenamiento del dispositivo
+3. **Hot Reload**: La aplicación cambia al nuevo Paquete sin requerir un reinicio
 4. **Fallback**: Si una actualización falla, la aplicación revierte a la versión de trabajo anterior
 
 ## Modos de Uso
 
 ### 1. Modo de Actualización Automática (Recomendado)
 
-La forma más simple de usar el plugin con gestión automática de actualizaciones:
+La forma más simple de usar el Plugin con gestión automática de actualizaciones:
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
@@ -106,11 +106,11 @@ await CapacitorUpdater.reload();
 
 ### iOS
 
-No se requiere configuración adicional. El plugin funciona out of the box.
+No se requiere configuración adicional. El Plugin funciona out of El box.
 
 ### Android
 
-No se requiere configuración adicional. El plugin funciona out of the box.
+No se requiere configuración adicional. El Plugin funciona out of El box.
 
 ## Uso Básico de API
 
@@ -127,7 +127,7 @@ const bundle = await CapacitorUpdater.download({
 console.log('Bundle descargado:', bundle.id);
 ```
 
-### Establecer Bundle Activo
+### Establecer Paquete Activo
 
 ```typescript
 // Establecer bundle para usar en el próximo inicio de la aplicación
@@ -136,21 +136,21 @@ await CapacitorUpdater.set({
 });
 ```
 
-### Recargar con Nuevo Bundle
+### Recargar con Nuevo Paquete
 
 ```typescript
 // Recargar aplicación inmediatamente con nuevo bundle
 await CapacitorUpdater.reload();
 ```
 
-### Listar Bundles
+### Listar Paquetes
 
 ```typescript
 const { bundles } = await CapacitorUpdater.list();
 console.log('Bundles disponibles:', bundles);
 ```
 
-### Eliminar un Bundle
+### Eliminar un Paquete
 
 ```typescript
 await CapacitorUpdater.delete({
@@ -158,7 +158,7 @@ await CapacitorUpdater.delete({
 });
 ```
 
-### Obtener Bundle Actual
+### Obtener Paquete Actual
 
 ```typescript
 const { bundle } = await CapacitorUpdater.current();
@@ -195,7 +195,7 @@ CapacitorUpdater.addListener('updateAvailable', (info) => {
 
 ## Opciones de Configuración
 
-Configura el plugin en tu `capacitor.config.ts`:
+Configura el Plugin en tu `capacitor.config.ts`:
 
 ```typescript
 {
@@ -308,7 +308,7 @@ async function checkAndUpdate() {
 - Prueba las actualizaciones a fondo antes de enviarlas a producción
 - Implementa manejo apropiado de errores para fallos de red
 - Usa números de versión de manera consistente
-- Mantén los tamaños de bundle pequeños para descargas más rápidas
+- Mantén los tamaños de Paquete pequeños para descargas más rápidas
 - Monitorea las tasas de éxito de actualizaciones
 
 ## Próximos Pasos

@@ -1,25 +1,25 @@
 ---
 title: Comenzando
-description: Aprende cómo instalar y usar el plugin AppInsights para analíticas de aplicación en tu aplicación Capacitor.
+description: Aprende cómo instalar y usar el Plugin AppInsights para analíticas de aplicación en tu aplicación Capacitor.
 sidebar:
   order: 2
 locale: es
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
+<Pasos>
 1. **Instalar el paquete**
-   <PackageManagers pkg="@capgo/capacitor-appinsights" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/Capacitor-appinsights" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+</Pasos>
 
 ## Uso
 
-Importa el plugin e inicialízalo con tus credenciales de AppInsights:
+Importa el Plugin e inicialízalo con tus credenciales de AppInsights:
 
 ```typescript
 import { CapacitorAppinsights } from '@capgo/capacitor-appinsights';
@@ -52,7 +52,7 @@ const checkVersion = async () => {
 
 ## Referencia de API
 
-### init(options)
+### init(Opciones)
 
 Inicializa el SDK de AppInsights con tus credenciales.
 
@@ -67,7 +67,7 @@ await CapacitorAppinsights.init({
 - `partnerId` (string): Tu ID de socio de AppInsights
 - `partnerKey` (string): Tu clave de socio de AppInsights
 
-### setUserId(options)
+### setUserId(Opciones)
 
 Establece o actualiza el ID de usuario después de la inicialización.
 
@@ -101,7 +101,7 @@ console.log(state);
 
 ### getPluginVersion()
 
-Obtiene la versión nativa del plugin Capacitor.
+Obtiene la versión nativa del Plugin Capacitor.
 
 ```typescript
 const { version } = await CapacitorAppinsights.getPluginVersion();
@@ -197,7 +197,7 @@ export class AnalyticsService {
 
 ### iOS
 - Requiere iOS 10.0+
-- Asegúrate de tener los permisos necesarios en Info.plist para el seguimiento
+- Asegúrate de tener los permisos necesarios en Información.plist para el seguimiento
 
 ### Android
 - Requiere Android 5.0 (API 21)+

@@ -1,12 +1,12 @@
 ---
 title: Cordova
-description: ¿Estará capacitor-updater disponible en Cordova?
+description: ¿Estará Capacitor-updater disponible en Cordova?
 sidebar:
   order: 8
 locale: es
 ---
 
-Te has estado preguntando si este plugin estará disponible alguna vez para Cordova
+Te has estado preguntando si este Plugin estará disponible alguna vez para Cordova
 
 He comenzado un repositorio de I+D para eso, pero es una gran cantidad de trabajo
 

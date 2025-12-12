@@ -8,51 +8,51 @@ prev: false
 locale: es
 ---
 
-import { Card, CardGrid, Steps, LinkCard, Aside } from '@astrojs/starlight/components';
+Importar { Card, CardGrid, Pasos, LinkCard, Aside } De '@astrojs/starlight/components';
 
-El tutorial de inicio rápido te guiará a través de los conceptos clave de Capgo. Los conceptos que se explorarán incluyen:
+El Tutorial de inicio rápido te guiará a través de los conceptos clave de Capgo. Los conceptos que se explorarán incluyen:
 
-<Steps>
+<Pasos>
 
 1. Agregar una aplicación a tu cuenta de Capgo
 
 2. Integrar Capgo con tu CI/CD
 
-3. Activar la carga de bundles en Capgo al enviar commits
+3. Activar la carga de Paquetes en Capgo al enviar commits
 
-4. Configurar y personalizar la publicación de bundles de Capgo
+4. Configurar y personalizar la publicación de Paquetes de Capgo
 
 5. Configurar tu aplicación para habilitar actualizaciones en vivo a través de Capgo
 
 6. Implementar actualizaciones en vivo en tu aplicación desde Capgo
 
-</Steps>
+</Pasos>
 
 Simplemente sigue la guía paso a paso, o navega directamente a la documentación del componente que te interese.
 
 
 <CardGrid stagger>
-  <a href="/docs/getting-started/add-an-app/" ><Card title="Comenzar el Tutorial" icon="rocket" >
-    ¡Sigue el tutorial de inicio rápido y comienza a usar Capgo en poco tiempo!
+  <a href="/docs/getting-started/Agregar-an-Aplicación/" ><Card title="Comenzar el Tutorial" icon="rocket" >
+    ¡Sigue el Tutorial de inicio rápido y comienza a usar Capgo en poco tiempo!
   </Card></a>
-  <a href="/docs/getting-started/deploy/"><Card title="Enviar actualizaciones" icon="pencil">
+  <a href="/docs/getting-started/Desplegar/"><Card title="Enviar actualizaciones" icon="pencil">
     Envía actualizaciones a tu aplicación desde el panel de Capgo.
   </Card></a>
-  <a href="/docs/getting-started/cicd-integration/"><Card title="Automatizar actualizaciones" icon="pencil">
-    Integra Capgo con tu CI/CD y activa cargas de bundles en Capgo al enviar commits.
+  <a href="/docs/getting-started/cicd-Integración/"><Card title="Automatizar actualizaciones" icon="pencil">
+    Integra Capgo con tu CI/CD y activa cargas de Paquetes en Capgo al enviar commits.
   </Card></a>
-  <a href="/docs/getting-started/troubleshooting/"><Card title="Solución de Problemas" icon="open-book">
+  <a href="/docs/getting-started/Solución de problemas/"><Card title="Solución de Problemas" icon="open-book">
     Problemas comunes y cómo resolverlos.
   </Card></a>
   <a href="/docs/getting-started/wrapping-up/"><Card title="Conclusión" icon="pencil">
-    Finaliza el tutorial y obtén una visión rápida de lo que has aprendido.
+    Finaliza el Tutorial y obtén una visión rápida de lo que has aprendido.
   </Card></a>
 </CardGrid>
 
-<Aside type="tip">
+<Aside type="Consejo">
 La función de actualización Over-the-Air (OTA) solo es aplicable para modificaciones realizadas en archivos HTML, CSS y JavaScript.
 
-Si realizas cambios en el código nativo, como actualizaciones de plugins de Capacitor, es obligatorio volver a enviar la aplicación a la tienda de aplicaciones para su aprobación.
+Si realizas cambios en el código nativo, como actualizaciones de Plugins de Capacitor, es obligatorio volver a enviar la aplicación a la tienda de aplicaciones para su aprobación.
 </Aside>
 
 ## Únete a la Comunidad de Discord
@@ -61,7 +61,7 @@ Si realizas cambios en el código nativo, como actualizaciones de plugins de Cap
 
 ## Mantenimiento
 
-| Versión del plugin | Compatibilidad con Capacitor | Mantenimiento     |
+| Versión del Plugin | Compatibilidad con Capacitor | Mantenimiento     |
 | ------------------ | ---------------------------- | ----------------- |
 | v7.\*.\* (≥7.25.0) | v7.\*.\*                     | ✅ Totalmente compatible |
 | v6.\*.\* (≥6.25.0) | v6.\*.\*                     | ✅ Totalmente compatible |
@@ -73,24 +73,24 @@ Si realizas cambios en el código nativo, como actualizaciones de plugins de Cap
 
 ## Cumplimiento de las Directrices de las Tiendas
 
-Google Play de Android y App Store de iOS tienen directrices correspondientes con reglas que debes conocer antes de integrar la solución Capacitor-updater en tu aplicación.
+Google Play de Android y Aplicación Store de iOS tienen directrices correspondientes con reglas que debes conocer antes de integrar la solución Capacitor-updater en tu aplicación.
 
 ### Google Play
 
-El tercer párrafo del tema [Abuso de Dispositivos y Red](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en) describe que está restringida la actualización del código fuente por cualquier método que no sea el mecanismo de actualización de Google Play. Pero esta restricción no se aplica a la actualización de bundles javascript.
+El tercer párrafo del tema [Abuso de Dispositivos y Red](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en) describe que está restringida la actualización del código fuente por cualquier método que no sea el mecanismo de actualización de Google Play. Pero esta restricción no se aplica a la actualización de Paquetes JavaScript.
 > Esta restricción no se aplica al código que se ejecuta en una máquina virtual y tiene acceso limitado a las API de Android (como JavaScript en un webview o navegador).
 
-Esto permite completamente Capacitor-updater ya que solo actualiza los bundles JS y no actualizará código nativo.
+Esto permite completamente Capacitor-updater ya que solo actualiza los Paquetes JS y no actualizará código nativo.
 
-### App Store
+### Aplicación Store
 
 El párrafo **3.3.2**, desde 2015 en el [Acuerdo de Licencia del Programa de Desarrollador de Apple](https://developer.apple.com/programs/ios/information/) permite completamente realizar actualizaciones over-the-air de JavaScript y activos - y en su última versión (20170605) [descargable aquí](https://developer.apple.com/terms/) esta normativa es incluso más amplia:
 
-> El código interpretado puede descargarse en una Aplicación solo mientras dicho código: (a) no cambie el propósito principal de la Aplicación proporcionando características o funcionalidades que sean inconsistentes con el propósito previsto y anunciado de la Aplicación tal como se envió a la App Store, (b) no cree una tienda o punto de venta para otro código o aplicaciones, y (c) no eluda la firma, el sandbox u otras características de seguridad del SO.
+> El código interpretado puede descargarse en una Aplicación solo mientras dicho código: (a) no cambie el propósito principal de la Aplicación proporcionando características o funcionalidades que sean inconsistentes con el propósito previsto y anunciado de la Aplicación tal como se envió a la Aplicación Store, (b) no cree una tienda o punto de venta para otro código o aplicaciones, y (c) no eluda la firma, el sandbox u otras características de seguridad del SO.
 
-Capacitor Updater te permite seguir estas reglas en total cumplimiento siempre que la actualización que envíes no se desvíe significativamente de la intención original de tu producto aprobada por la App Store.
+Capacitor Updater te permite seguir estas reglas en total cumplimiento siempre que la actualización que envíes no se desvíe significativamente de la intención original de tu producto aprobada por la Aplicación Store.
 
-Para mantener aún más el cumplimiento de las directrices de Apple, sugerimos que las aplicaciones distribuidas en la App Store no habiliten el escenario de `Actualización forzada`, ya que en las [Directrices de Revisión de la App Store](https://developer.apple.com/app-store/review/guidelines/) se establece que:
+Para mantener aún más el cumplimiento de las directrices de Apple, sugerimos que las aplicaciones distribuidas en la Aplicación Store no habiliten el escenario de `Actualización forzada`, ya que en las [Directrices de Revisión de la App Store](https://developer.apple.com/app-store/review/guidelines/) se establece que:
 
 > Las aplicaciones no deben forzar a los usuarios a calificar la aplicación, revisar la aplicación, descargar otras aplicaciones u otras acciones similares para acceder a la funcionalidad, contenido o uso de la aplicación.
 
@@ -98,19 +98,19 @@ Esto no es un problema para el comportamiento predeterminado de actualización e
 
 ## Código abierto
 
-El plugin está bajo la Licencia LGPL-3.0 y el back-end está bajo la Licencia AGPL-3.0.
+El Plugin está bajo la Licencia LGPL-3.0 y el back-end está bajo la Licencia AGPL-3.0.
 
-> 💡 LGPL-3.0 significa que si alguien modifica el código del plugin, es obligatorio publicarlo, en código abierto con la misma licencia. Si usas el código sin modificación, eso no te concierne. Para más detalles, consulta el problema a continuación, revisa el enlace 👇
+> 💡 LGPL-3.0 significa que si alguien modifica el código del Plugin, es obligatorio publicarlo, en código abierto con la misma licencia. Si usas el código sin modificación, eso no te concierne. Para más detalles, consulta el problema a continuación, revisa el enlace 👇
 
 <LinkCard
 	title="¿Licenciamiento?"
-	href="https://github.com/Cap-go/capacitor-updater/issues/7"
+	href="https://GitHub.com/Cap-go/Capacitor-updater/Problemas/7"
 />
 
 
 <LinkCard
 	title="Prueba GPTS Capgo para obtener ayuda en lugar de leer la documentación"
-	href="https://chat.openai.com/g/g-3dMwHbF2w-capgo-doc-gpt"
+	href="https://chat.openai.com/g/g-3dMwHbF2w-Capgo-doc-gpt"
 />
 
 

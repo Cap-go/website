@@ -1,7 +1,7 @@
 ---
 title: Inicio de Sesión de Google con Supabase en iOS
 locale: es
-description: Aprende cómo configurar el inicio de sesión de Google con Supabase Authentication en iOS usando el plugin Capacitor Social Login.
+description: Aprende cómo configurar el inicio de sesión de Google con Supabase Authentication en iOS usando el Plugin Capacitor Inicio de sesión social.
 sidebar:
     order: 3
 ---
@@ -40,12 +40,12 @@ Para una explicación detallada de cómo funciona el flujo de autenticación, in
 
 ### Caché de Tokens de iOS y Problemas de Nonce
 
-:::warning[Problema de Caché de Nonce en iOS]
+:::Advertencia[Problema de Caché de Nonce en iOS]
 En iOS, Google Sign-In puede cachear tokens, lo que puede causar que la validación de nonce falle. La función `validateJWTToken` detecta esto y lo maneja automáticamente:
 
 1. **Detección Automática**: La función verifica si el nonce en el token coincide con el `nonceDigest` esperado
 2. **Reintento Automático**: Si la validación falla, automáticamente cierra sesión de Google y reintenta una vez
-3. **Manejo de Errores**: Si el reintento también falla, se devuelve un error
+3. **Manejo de Errores**: Si el reintento también falla, se devuelve un Error
 
 **Por qué sucede esto**: El SDK de Google Sign-In en iOS cachea tokens por rendimiento. Cuando se devuelve un token en caché, puede haber sido generado con un nonce diferente (o sin nonce), causando una discrepancia.
 
@@ -80,7 +80,7 @@ La implementación del nonce sigue el patrón de la [documentación de React Nat
 
 La función `authenticateWithGoogleSupabase` incluye un parámetro `retry`:
 - Primera llamada (`retry=false`): Si la validación falla, automáticamente cierra sesión y reintenta una vez
-- Llamada de reintento (`retry=true`): Si la validación falla de nuevo, devuelve inmediatamente un error
+- Llamada de reintento (`retry=true`): Si la validación falla de nuevo, devuelve inmediatamente un Error
 
 Esto maneja el problema de caché de tokens de iOS automáticamente.
 
@@ -88,8 +88,8 @@ Esto maneja el problema de caché de tokens de iOS automáticamente.
 
 Si la autenticación falla:
 
-- **Discrepancia de nonce**: La función reintenta automáticamente - revisa los logs de la consola para detalles. Si persiste, cierra sesión manualmente primero
+- **Discrepancia de nonce**: La función reintenta automáticamente - revisa los Registros de la consola para detalles. Si persiste, cierra sesión manualmente primero
 - **Audiencia inválida**: Verifica que tus IDs de cliente de Google coincidan tanto en la consola de Google Cloud como en Supabase (tanto iOS como IDs de cliente Web)
 - **La validación del token falla**: Asegúrate de estar usando `mode: 'online'` en la llamada de inicialización para obtener un idToken
-- **Configuración de Info.plist**: Asegúrate de que Info.plist tenga los esquemas de URL correctos y GIDClientID
+- **Configuración de Información.plist**: Asegúrate de que Información.plist tenga los esquemas de URL correctos y GIDClientID
 - Revisa el [código de la aplicación de ejemplo](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) como referencia

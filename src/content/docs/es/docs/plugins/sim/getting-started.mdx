@@ -1,21 +1,21 @@
 ---
 title: Comenzando
 locale: es
-description: Recupera detalles de la tarjeta SIM y maneja permisos en tiempo de ejecución con el plugin Capgo SIM.
+description: Recupera detalles de la tarjeta SIM y maneja permisos en tiempo de ejecución con el Plugin Capgo SIM.
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
-1. **Instalar el plugin**
-   <PackageManagers pkg="@capgo/capacitor-sim" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+<Pasos>
+1. **Instalar el Plugin**
+   <PackageManagers pkg="@Capgo/Capacitor-sim" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar plataformas**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+</Pasos>
 
 ## Permisos
 
@@ -56,4 +56,4 @@ simCards.forEach((card, index) => {
 
 - **Dispositivos Dual SIM**: Itera a través del array devuelto; cada entrada corresponde a una ranura. Cuando está presente, `subscriptionId` te ayuda a interactuar con las APIs de telefonía de Android.
 - **iOS 16.4+**: Apple oculta varios atributos del operador. Espera valores de marcador de posición (`--`, `65535`) y planifica alternativas en tu interfaz de usuario.
-- **Web**: El plugin se resuelve con datos vacíos porque los navegadores no pueden acceder a la información SIM.
+- **Web**: El Plugin se resuelve con datos vacíos porque los navegadores no pueden acceder a la información SIM.

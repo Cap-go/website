@@ -1,18 +1,18 @@
 ---
 title: Comenzar
-description: Aprende cómo instalar y usar el plugin Native Biometric para autenticación biométrica segura en tu aplicación Capacitor.
+description: Aprende cómo instalar y usar el Plugin Biometría nativa para autenticación biométrica segura en tu aplicación Capacitor.
 locale: es
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
+Importar { Code, Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
+<Pasos>
 1. **Instalar el paquete**
-   <PackageManagers pkg="@capgo/capacitor-native-biometric" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/Capacitor-native-biometric" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
@@ -31,11 +31,11 @@ import { PackageManagers } from 'starlight-package-managers'
    ```xml
    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
    ```
-</Steps>
+</Pasos>
 
 ## Uso
 
-Importa el plugin y usa sus métodos para autenticación biométrica:
+Importa el Plugin y usa sus métodos para autenticación biométrica:
 
 ```typescript
 import { NativeBiometric } from '@capgo/capacitor-native-biometric';
@@ -115,7 +115,7 @@ enum BiometryType {
 }
 ```
 
-### verifyIdentity(options)
+### verifyIdentity(Opciones)
 
 Realiza la autenticación biométrica.
 
@@ -131,7 +131,7 @@ interface BiometricOptions {
 }
 ```
 
-### setCredentials(options)
+### setCredentials(Opciones)
 
 Almacena credenciales de forma segura con protección biométrica.
 
@@ -143,7 +143,7 @@ interface Credentials {
 }
 ```
 
-### getCredentials(options)
+### getCredentials(Opciones)
 
 Recupera credenciales almacenadas después de la autenticación biométrica.
 
@@ -153,7 +153,7 @@ interface GetCredentialOptions {
 }
 ```
 
-### deleteCredentials(options)
+### deleteCredentials(Opciones)
 
 Elimina credenciales almacenadas.
 

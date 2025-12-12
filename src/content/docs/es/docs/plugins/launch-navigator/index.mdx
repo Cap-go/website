@@ -1,6 +1,6 @@
 ---
-title: "@capgo/capacitor-launch-navigator"
-description: Plugin de inicio de aplicaciones de navegación para apps Capacitor con soporte para Google Maps, Apple Maps, Waze y otros servicios de navegación.
+title: "@Capgo/Capacitor-launch-navigator"
+description: Plugin de inicio de aplicaciones de navegación para Aplicaciones Capacitor con soporte para Google Maps, Apple Maps, Waze y otros servicios de navegación.
 locale: es
 tableOfContents: false
 next: false
@@ -11,32 +11,32 @@ sidebar:
 hero:
   tagline: Inicia aplicaciones de navegación con direcciones paso a paso, soportando múltiples proveedores de mapas y opciones de enrutamiento personalizadas.
   image:
-    file: ~public/icons/plugins/launch-navigator.svg
+    file: ~public/icons/Plugins/launch-navigator.svg
   actions:
     - text: Comenzar
-      link: /docs/plugins/launch-navigator/getting-started/
+      Enlace: /docs/Plugins/launch-navigator/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
-      link: https://github.com/Cap-go/capacitor-launch-navigator/
+    - text: GitHub
+      Enlace: https://GitHub.com/Cap-go/Capacitor-launch-navigator/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+Importar { Card, CardGrid } De '@astrojs/starlight/components';
 
 ## Descripción General
 
-El plugin Capacitor Launch Navigator permite iniciar aplicaciones de navegación nativas en dispositivos iOS y Android con navegación basada en coordenadas. Este plugin proporciona integración perfecta con aplicaciones de mapas populares y soporta múltiples modos de transporte para soluciones de navegación completas.
+El Plugin Capacitor Launch Navigator permite iniciar aplicaciones de navegación nativas en dispositivos iOS y Android con navegación basada en coordenadas. Este Plugin proporciona integración perfecta con aplicaciones de mapas populares y soporta múltiples modos de transporte para soluciones de navegación completas.
 
 <CardGrid stagger>
-  <Card title="Soporte multi-app" icon="rocket">
+  <Card title="Soporte multi-Aplicación" icon="rocket">
     Google Maps, Apple Maps, Waze, Citymapper y más 🗺️
   </Card>
   <Card title="Modos de transporte" icon="magnifier">
     Direcciones en coche, a pie, en transporte público y en bicicleta 🧭
   </Card>
-  <Card title="Detección de apps" icon="magnifier">
+  <Card title="Detección de Aplicaciones" icon="magnifier">
     Verifica disponibilidad y lista aplicaciones de navegación instaladas 🔍
   </Card>
   <Card title="Basado en coordenadas" icon="star">
@@ -162,7 +162,7 @@ enum TransportMode {
 
 ## Requisitos de Coordenadas
 
-> ⚠️ **Importante**: Este plugin solo acepta coordenadas de latitud/longitud para navegación. Usa [@capgo/capacitor-nativegeocoder](https://github.com/Cap-go/capacitor-nativegeocoder) para convertir direcciones a coordenadas.
+> ⚠️ **Importante**: Este Plugin solo acepta coordenadas de latitud/longitud para navegación. Usa [@capgo/capacitor-nativegeocoder](https://github.com/Cap-go/capacitor-nativegeocoder) para convertir direcciones a coordenadas.
 
 ```typescript
 // Ejemplo con geocodificación
@@ -183,7 +183,7 @@ if (geocodeResult.results.length > 0) {
 }
 ```
 
-## Detección y Selección de Apps
+## Detección y Selección de Aplicaciones
 
 ```typescript
 // Verificar múltiples apps y usar la primera disponible
@@ -228,15 +228,15 @@ try {
 ## Casos de Uso
 
 - **Servicios basados en ubicación**: Navegar usuarios a puntos de interés
-- **Apps de entrega**: Guiar conductores a ubicaciones de entrega
-- **Apps de eventos**: Dirigir asistentes a ubicaciones de lugares
-- **Apps inmobiliarias**: Navegar a ubicaciones de propiedades
-- **Apps de viaje**: Guiar turistas a atracciones
+- **Aplicaciones de entrega**: Guiar conductores a ubicaciones de entrega
+- **Aplicaciones de eventos**: Dirigir asistentes a ubicaciones de lugares
+- **Aplicaciones inmobiliarias**: Navegar a ubicaciones de propiedades
+- **Aplicaciones de viaje**: Guiar turistas a atracciones
 
 ## Mejores Prácticas
 
-- Siempre verifica la disponibilidad de la app antes de intentar navegar
-- Proporciona opciones de respaldo cuando las apps preferidas no estén disponibles
+- Siempre verifica la disponibilidad de la Aplicación antes de intentar navegar
+- Proporciona opciones de respaldo cuando las Aplicaciones preferidas no estén disponibles
 - Usa nombres de visualización significativos para selección del usuario
 - Maneja errores con gracia con mensajes amigables para el usuario
 - Considera las preferencias del usuario para aplicaciones de navegación predeterminadas

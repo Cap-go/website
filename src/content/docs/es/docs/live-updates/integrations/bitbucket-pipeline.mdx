@@ -6,7 +6,7 @@ sidebar:
   order: 4
 ---
 
-import { Aside, Steps } from '@astrojs/starlight/components';
+Importar { Aside, Pasos } De '@astrojs/starlight/components';
 
 Integre las Actualizaciones en Vivo de Capgo con Bitbucket Pipelines para desplegar automáticamente las actualizaciones de su aplicación cada vez que realice cambios en el código. Esta guía cubre la configuración de flujos de trabajo automatizados de construcción, pruebas y despliegue.
 
@@ -20,23 +20,23 @@ Antes de configurar la integración con Bitbucket Pipelines, asegúrese de tener
 
 ## Configuración de Bitbucket Pipelines
 
-### Paso 1: Configurar variables del repositorio
+### Paso 1: Configurar Variables del repositorio
 
-Primero, configure las variables necesarias en su repositorio de Bitbucket:
+Primero, Configurar las Variables necesarias en su repositorio de Bitbucket:
 
-<Steps>
+<Pasos>
 
 1. Navegue a su repositorio de Bitbucket
-2. Vaya a **Repository settings** → **Pipelines** → **Repository variables**
-3. Agregue las siguientes variables:
+2. Vaya a **Repositorio Configuración** → **Pipelines** → **Repositorio Variables**
+3. Agregue las siguientes Variables:
 
-</Steps>
+</Pasos>
 
-| Nombre de variable | Valor | Asegurada |
+| Nombre de Variable | Valor | Asegurada |
 |---------------|-------|---------|
 | `CAPGO_TOKEN` | Su token de API de Capgo | ✅ Sí |
 
-<Aside type="tip">
+<Aside type="Consejo">
 
 Obtenga su token de API de Capgo desde [console.capgo.app/apikeys](https://console.capgo.app/apikeys). El ID de su aplicación ya está configurado en su archivo `capacitor.config.ts`.
 
@@ -69,7 +69,7 @@ pipelines:
 
 ### Despliegues de ramas de características
 
-Despliegue ramas de características a canales de prueba para revisión y testing:
+Despliegue ramas de características a canales de prueba para revisión y Pruebas:
 
 ```yaml
 # Despliegue de rama de características
@@ -91,7 +91,7 @@ pipelines:
             - dist/**
 ```
 
-<Aside type="tip">
+<Aside type="Consejo">
 
 **Pruebas con Canales**: Después de desplegar a un canal de características, puede probar la actualización en su aplicación configurándola para usar ese canal específico. Aprenda más sobre [configurar canales en su aplicación](/docs/live-updates/channels/#configuring-the-channel-in-your-app).
 
@@ -101,14 +101,14 @@ pipelines:
 
 Si está usando la [función de cifrado de Capgo](/docs/live-updates/encryption/), deberá almacenar su clave privada de forma segura en su entorno de CI/CD.
 
-Después de [configurar las claves de cifrado](/docs/live-updates/encryption/#setting-up-encryption) localmente, agregue su clave privada a las variables de Bitbucket:
+Después de [configurar las claves de cifrado](/docs/live-updates/encryption/#setting-up-encryption) localmente, agregue su clave privada a las Variables de Bitbucket:
 
 ```shell
 # Mostrar el contenido de su clave privada (copiar esta salida)
 cat .capgo_key_v2
 ```
 
-Agregue este contenido como `CAPGO_PRIVATE_KEY` en las variables del repositorio de Bitbucket (marque como asegurada), luego úselo en pipelines:
+Agregue este contenido como `CAPGO_PRIVATE_KEY` en las Variables del repositorio de Bitbucket (marque como asegurada), luego úselo en pipelines:
 
 ```yaml
 # Desplegar con cifrado
@@ -119,12 +119,12 @@ Agregue este contenido como `CAPGO_PRIVATE_KEY` en las variables del repositorio
       - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --key-data-v2 "$CAPGO_PRIVATE_KEY" --channel production
 ```
 
-<Aside type="caution">
+<Aside type="Precaución">
 
 **Mejores prácticas de seguridad:**
 - Nunca confirme el archivo `.capgo_key_v2` en el control de versiones
 - Almacene la clave privada solo en la gestión segura de secretos de CI/CD
-- Use claves diferentes para diferentes entornos
+- Usar claves diferentes para diferentes entornos
 
 </Aside>
 
@@ -132,7 +132,7 @@ Agregue este contenido como `CAPGO_PRIVATE_KEY` en las variables del repositorio
 
 Para obtener información completa sobre la configuración y gestión de múltiples canales de despliegue, consulte la [documentación de Canales](/docs/live-updates/channels/).
 
-Configuración completa con múltiples entornos y despliegues de pull request:
+Configuración completa con múltiples entornos y despliegues de Solicitud de extracción:
 
 ```yaml
 # bitbucket-pipelines.yml - Configuración avanzada multicanal
@@ -319,18 +319,18 @@ pipelines:
 
 ### Variables del repositorio
 
-<Steps>
+<Pasos>
 
 1. **Variables aseguradas**: Siempre marque los tokens de API como asegurados
-2. **Variables de entorno**: Use variables específicas del despliegue cuando sea necesario
+2. **Variables de entorno**: Usar Variables específicas del despliegue cuando sea necesario
 3. **Control de acceso**: Limite el acceso al repositorio a los miembros autorizados del equipo
 4. **Rotación de tokens**: Rote regularmente sus tokens de API de Capgo
 
-</Steps>
+</Pasos>
 
 ### Entornos de despliegue
 
-Configure entornos de despliegue para mayor seguridad:
+Configurar entornos de despliegue para mayor seguridad:
 
 ```yaml
 # Despliegue con restricciones de entorno
@@ -380,7 +380,7 @@ pipelines:
 
 ### Notificaciones por correo electrónico
 
-Configure notificaciones por correo electrónico a través de las funciones integradas de Bitbucket o usando servicios externos:
+Configurar notificaciones por correo electrónico a través de las funciones integradas de Bitbucket o usando servicios externos:
 
 ```yaml
 # Paso de notificación por correo electrónico
@@ -492,7 +492,7 @@ pipelines:
 
 - Aprenda sobre [Canales](/docs/live-updates/channels/) para gestionar diferentes entornos de despliegue
 - Explore [Almacenamiento personalizado](/docs/live-updates/custom-storage/) para escenarios de despliegue avanzados
-- Configure [Cifrado](/docs/live-updates/encryption/) para despliegues seguros
-- Configure [Comportamiento de actualización](/docs/live-updates/update-behavior/) para personalizar cómo se aplican las actualizaciones
+- Configurar [Cifrado](/docs/live-updates/encryption/) para despliegues seguros
+- Configurar [Comportamiento de actualización](/docs/live-updates/update-behavior/) para personalizar cómo se aplican las actualizaciones
 
 Con la integración de Bitbucket Pipelines, puede automatizar sus despliegues de Capgo y garantizar actualizaciones consistentes y confiables para los usuarios de su aplicación móvil.

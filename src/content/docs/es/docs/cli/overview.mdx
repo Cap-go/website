@@ -7,13 +7,13 @@ next: false
 locale: es
 ---
 
-import { Steps, CardGrid, Card, Aside } from '@astrojs/starlight/components';
+Importar { Pasos, CardGrid, Card, Aside } De '@astrojs/starlight/components';
 
-Use la función de Actualizaciones en Vivo de Capgo para actualizar los paquetes JavaScript de su aplicación de forma remota y en tiempo real. Envíe actualizaciones JS directamente a sus usuarios sin pasar por el proceso de revisión de la tienda de aplicaciones para corregir errores y lanzar nuevas funciones instantáneamente.
+Usar la función de Actualizaciones en Vivo de Capgo para actualizar los paquetes JavaScript de su aplicación de forma remota y en tiempo real. Envíe actualizaciones JS directamente a sus usuarios sin pasar por el proceso de revisión de la tienda de aplicaciones para corregir errores y lanzar nuevas funciones instantáneamente.
 
 <Aside>
 
-Las Actualizaciones en Vivo están limitadas a cambios en los paquetes JavaScript. Si necesita actualizar código nativo, como agregar o eliminar un plugin o cambiar la configuración del proyecto nativo, deberá enviar una nueva compilación binaria nativa a las tiendas de aplicaciones.
+Las Actualizaciones en Vivo están limitadas a cambios en los paquetes JavaScript. Si necesita actualizar código nativo, como agregar o eliminar un Plugin o cambiar la configuración del proyecto nativo, deberá enviar una nueva compilación binaria nativa a las tiendas de aplicaciones.
 
 </Aside>
 
@@ -31,9 +31,9 @@ Cuando sube un nuevo paquete JS a Capgo y lo asigna a un canal, el SDK de Capgo 
 
 Para comenzar a usar las Actualizaciones en Vivo, siga estos pasos:
 
-<Steps>
+<Pasos>
 
-1. Complete el [Inicio rápido de Capgo](/docs/getting-started/quickstart) para configurar su aplicación en Capgo e instalar el SDK de Capgo.
+1. Completo el [Inicio rápido de Capgo](/docs/getting-started/quickstart) para configurar su aplicación en Capgo e instalar el SDK de Capgo.
 
 2. En el código de su aplicación, llame a `CapacitorUpdater.notifyAppReady()` después de que su aplicación haya terminado de inicializarse. Esto le indica al SDK de Capgo que su aplicación está lista para recibir actualizaciones.
 
@@ -50,7 +50,7 @@ Para comenzar a usar las Actualizaciones en Vivo, siga estos pasos:
 
 5. Una vez que se descargue la actualización, cierre y vuelva a abrir su aplicación para cargar el nuevo paquete.
 
-</Steps>
+</Pasos>
 
 Consulte la guía [Implementación de Actualizaciones en Vivo](/docs/getting-started/deploy) para más detalles.
 
@@ -91,24 +91,24 @@ Si está familiarizado con otras herramientas CLI de actualización en vivo, hay
 ## Siguientes pasos
 
 <CardGrid stagger>
-  <a href="/docs/live-updates/channels/">
+  <a href="/docs/live-Actualizaciones/Canales/">
     <Card title="Canales" icon="bars">
       Aprenda cómo usar canales para gestionar diferentes pistas de lanzamiento y dirigir actualizaciones a usuarios específicos
     </Card>
   </a>
 
-  <a href="/docs/live-updates/rollbacks/">
+  <a href="/docs/live-Actualizaciones/Reversiones/">
     <Card title="Reversiones" icon="left-arrow">
       Descubra cómo revertir a una versión anterior del paquete JS si una actualización causa problemas
     </Card>
   </a>
 
-  <a href="/docs/live-updates/update-behavior/">
+  <a href="/docs/live-Actualizaciones/Actualizar-behavior/">
     <Card title="Comportamiento de actualización" icon="setting">
       Personalice cómo y cuándo se descargan y aplican las actualizaciones en su aplicación
     </Card>
   </a>
-  <a href="/docs/live-updates/differentials/">
+  <a href="/docs/live-Actualizaciones/differentials/">
     <Card title="Actualizaciones rápidas" icon="starlight">
       Aprenda cómo usar actualizaciones rápidas para acelerar el proceso de actualización
     </Card>

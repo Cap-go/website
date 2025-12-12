@@ -1,23 +1,23 @@
 ---
 title: "Configuraciones"
 locale: es
-description: "Todas las configuraciones disponibles para Capacitor Updater, toda la configuración que puedes establecer en tu configuración de capacitor y para qué se utilizan"
+description: "Todas las configuraciones disponibles para Capacitor Updater, toda la configuración que puedes establecer en tu configuración de Capacitor y para qué se utilizan"
 sidebar:
   order: 8
 ---
 
-import {  Aside } from '@astrojs/starlight/components';
+Importar {  Aside } De '@astrojs/starlight/components';
 
 Para tener un control más preciso sobre el sistema de actualización, puedes configurarlo con estas opciones:
 
-<Aside type="tip">
- Cualquier cambio a estas configuraciones en el archivo capacitor.config, requiere sincronizar la plataforma y lanzar a la tienda para que las aplicaciones en producción las reciban.
+<Aside type="Consejo">
+ Cualquier cambio a estas configuraciones en el archivo Capacitor.config, requiere sincronizar la plataforma y lanzar a la tienda para que las aplicaciones en producción las reciban.
 </Aside>
 
 
 ## `appReadyTimeout`
 
-> Configura el número de milisegundos que el plugin nativo debe esperar antes de considerar una actualización como 'fallida'.
+> Configura el número de milisegundos que el Plugin nativo debe esperar antes de considerar una actualización como 'fallida'.
 
 Solo disponible para Android e iOS.
 
@@ -36,7 +36,7 @@ Por defecto: `10000` (10 segundos)
 
 ## `responseTimeout`
 
-> Configura el número de milisegundos que el plugin nativo debe esperar antes de considerar el timeout de la API.
+> Configura el número de milisegundos que el Plugin nativo debe esperar antes de considerar el timeout de la API.
 
 Solo disponible para Android e iOS.
 
@@ -55,7 +55,7 @@ Por defecto: `20` (20 segundos)
 
 ## `autoDeleteFailed`
 
-> Configura si el plugin debe eliminar automáticamente los bundles fallidos.
+> Configura si el Plugin debe eliminar automáticamente los Paquetes fallidos.
 
 Solo disponible para Android e iOS.
 
@@ -74,7 +74,7 @@ Por defecto: `true`
 
 ## `autoDeletePrevious`
 
-> Configura si el plugin debe eliminar automáticamente bundles anteriores después de una actualización exitosa.
+> Configura si el Plugin debe eliminar automáticamente Paquetes anteriores después de una actualización exitosa.
 
 Solo disponible para Android e iOS.
 
@@ -93,7 +93,7 @@ Por defecto: `true`
 
 ## `autoUpdate`
 
-> Configura si el plugin debe usar Actualización Automática a través de un servidor de actualización.
+> Configura si el Plugin debe usar Actualización Automática a través de un servidor de actualización.
 
 Solo disponible para Android e iOS.
 
@@ -169,15 +169,15 @@ Por defecto: `undefined`
 
 ## `directUpdate`
 
-> Configura cuándo el plugin debe instalar actualizaciones directamente. Solo para modo autoUpdate.
-> Funciona bien para apps menores a 10MB y con subidas hechas usando la bandera --partial.
-> Zip o apps de más de 10MB serán relativamente lentas para que los usuarios actualicen.
+> Configura cuándo el Plugin debe instalar actualizaciones directamente. Solo para modo autoUpdate.
+> Funciona bien para Aplicaciones menores a 10MB y con subidas hechas usando la bandera --partial.
+> Zip o Aplicaciones de más de 10MB serán relativamente lentas para que los usuarios actualicen.
 
 Opciones:
 - `false`: Nunca hacer actualizaciones directas (usar comportamiento por defecto: descargar al iniciar, establecer al pasar a segundo plano)
-- `'atInstall'`: Actualización directa solo cuando la app está instalada, actualizada desde la tienda, de lo contrario actuar como directUpdate = false
-- `'onLaunch'`: Actualización directa solo en app instalada, actualizada desde la tienda o después de matar app, de lo contrario actuar como directUpdate = false
-- `'always'`: Actualización directa en todos los casos anteriores (app instalada, actualizada desde la tienda, después de matar app o reanudar app), nunca actuar como directUpdate = false
+- `'atInstall'`: Actualización directa solo cuando la Aplicación está instalada, actualizada desde la tienda, de lo contrario actuar como directUpdate = false
+- `'onLaunch'`: Actualización directa solo en Aplicación instalada, actualizada desde la tienda o después de matar Aplicación, de lo contrario actuar como directUpdate = false
+- `'always'`: Actualización directa en todos los casos anteriores (Aplicación instalada, actualizada desde la tienda, después de matar Aplicación o reanudar Aplicación), nunca actuar como directUpdate = false
 - `true`: (obsoleto) Igual que "always" para compatibilidad hacia atrás
 
 Solo disponible para Android e iOS.
@@ -198,7 +198,7 @@ Por defecto: `false`
 
 ## `resetWhenUpdate`
 
-> Eliminar automáticamente bundles descargados anteriormente cuando se instale un bundle de app nativo más reciente en el dispositivo.
+> Eliminar automáticamente Paquetes descargados anteriormente cuando se instale un Paquete de Aplicación nativo más reciente en el dispositivo.
 
 Solo disponible para Android e iOS.
 
@@ -217,7 +217,7 @@ Por defecto: `true`
 
 ## `defaultChannel`
 
-> Establece el canal por defecto para la app en la configuración. Sensible a mayúsculas.
+> Establece el canal por defecto para la Aplicación en la configuración. Sensible a mayúsculas.
 > Esta configuración anulará el canal por defecto establecido en la nube, pero seguirá respetando las anulaciones hechas en la nube.
 
 Solo disponible para Android e iOS.
@@ -237,7 +237,7 @@ Por defecto: `undefined`
 
 ## `appId`
 
-> Configura el id de la app en la configuración.
+> Configura el id de la Aplicación en la configuración.
 
 Solo disponible para Android e iOS.
 
@@ -256,8 +256,8 @@ Por defecto: `undefined`
 
 ## `version`
 
-> Configura la versión actual de la app. Esto se usará para la primera solicitud de actualización.
-> Si no se establece, el plugin obtendrá la versión del código nativo.
+> Configura la versión actual de la Aplicación. Esto se usará para la primera solicitud de actualización.
+> Si no se establece, el Plugin obtendrá la versión del código nativo.
 
 Solo disponible para Android e iOS.
 
@@ -295,10 +295,10 @@ Por defecto: `https://plugin.capgo.app/channel_self`
 
 ## `autoSplashscreen`
 
-> Manejar automáticamente el ocultamiento del splashscreen cuando se usa directUpdate. Cuando está habilitado, el plugin ocultará automáticamente el splashscreen después de que se apliquen las actualizaciones o cuando no se necesite actualización.
+> Manejar automáticamente el ocultamiento del splashscreen cuando se usa directUpdate. Cuando está habilitado, el Plugin ocultará automáticamente el splashscreen después de que se apliquen las actualizaciones o cuando no se necesite actualización.
 > Esto elimina la necesidad de escuchar manualmente eventos appReady y llamar a SplashScreen.hide().
 > Solo funciona cuando directUpdate está establecido como "atInstall", "always" o true.
-> Requiere que el plugin @capacitor/splash-screen esté instalado y configurado con launchAutoHide: false.
+> Requiere que el Plugin @Capacitor/splash-screen esté instalado y configurado con launchAutoHide: false.
 > Requiere que autoUpdate y directUpdate estén habilitados.
 
 Solo disponible para Android e iOS.
@@ -340,7 +340,7 @@ Por defecto: `600` (10 minutos)
 
 ## `allowModifyUrl`
 
-> Permitir que el plugin modifique updateUrl, statsUrl y channelUrl dinámicamente desde el lado de JavaScript.
+> Permitir que el Plugin modifique updateUrl, statsUrl y channelUrl dinámicamente desde el lado de JavaScript.
 
 Solo disponible para Android e iOS.
 
@@ -359,9 +359,9 @@ Por defecto: `false`
 
 ## `keepUrlPathAfterReload`
 
-> Configura el plugin para mantener la ruta de URL después de una recarga.
+> Configura el Plugin para mantener la ruta de URL después de una recarga.
 
-<Aside type="caution">
+<Aside type="Precaución">
 Cuando se activa una recarga, 'window.history' será borrado.
 </Aside>
 
@@ -382,7 +382,7 @@ Por defecto: `false`
 
 ## `disableJSLogging`
 
-> Deshabilitar el registro JavaScript del plugin. Si es true, el plugin no registrará en la consola JavaScript. Solo se hará el registro nativo.
+> Deshabilitar el registro JavaScript del Plugin. Si es true, el Plugin no registrará en la consola JavaScript. Solo se hará el registro nativo.
 
 Solo disponible para Android e iOS.
 
@@ -490,7 +490,7 @@ Por defecto: `undefined`
 
 ### `localApi`
 
-> Configura el CLI para usar un api local para pruebas.
+> Configura el CLI para usar un API local para pruebas.
 
 Por defecto: `undefined`
 
@@ -507,7 +507,7 @@ Por defecto: `undefined`
 
 ### `localApiFiles`
 
-> Configura el CLI para usar un api de archivos local para pruebas.
+> Configura el CLI para usar un API de archivos local para pruebas.
 
 Por defecto: `undefined`
 
@@ -522,6 +522,6 @@ Por defecto: `undefined`
 }
 ```
 
-<Aside type="tip">
-Hay configuraciones adicionales disponibles en la [aplicación web de Capgo](https://console.capgo.app/login) que se pueden configurar por canal sin requerir un lanzamiento de app nativa.
+<Aside type="Consejo">
+Hay configuraciones adicionales disponibles en la [aplicación web de Capgo](https://console.capgo.app/login) que se pueden configurar por canal sin requerir un lanzamiento de Aplicación nativa.
 </Aside>

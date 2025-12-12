@@ -1,21 +1,21 @@
 ---
 title: Comenzando
 locale: es
-description: Configura valores de entorno por compilación y obtenlos en tiempo de ejecución con el plugin Env.
+description: Configura valores de entorno por compilación y obtenlos en tiempo de ejecución con el Plugin Env.
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
+<Pasos>
 1. **Instalar el paquete**
-   <PackageManagers pkg="@capgo/capacitor-env" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/Capacitor-env" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar plataformas nativas**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+</Pasos>
 
 ## Declarar valores de configuración
 

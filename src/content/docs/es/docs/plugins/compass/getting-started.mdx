@@ -1,22 +1,22 @@
 ---
 title: Comenzar
 locale: es
-description: Aprende cómo instalar y usar el plugin Compass para leer el rumbo de la brújula del dispositivo en tu aplicación Capacitor.
+description: Aprende cómo instalar y usar el Plugin Compass para leer el rumbo de la brújula del dispositivo en tu aplicación Capacitor.
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
+Importar { Code, Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
+<Pasos>
 1. **Instalar el paquete**
-   <PackageManagers pkg="@capgo/capacitor-compass" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/Capacitor-compass" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+</Pasos>
 
 ## Configuración de iOS
 
@@ -29,11 +29,11 @@ En iOS, el acceso a la brújula requiere permiso de ubicación. Agrega lo siguie
 
 ## Configuración de Android
 
-No se requiere configuración adicional. El plugin usa los sensores magnetómetro y acelerómetro del dispositivo.
+No se requiere configuración adicional. El Plugin usa los sensores magnetómetro y acelerómetro del dispositivo.
 
 ## Uso
 
-Importa el plugin y usa sus métodos para leer el rumbo de la brújula:
+Importa el Plugin y usa sus métodos para leer el rumbo de la brújula:
 
 ```typescript
 import { CapgoCompass } from '@capgo/capacitor-compass';
@@ -141,7 +141,7 @@ const status = await CapgoCompass.requestPermissions();
 
 ### getPluginVersion()
 
-Obtiene la versión del plugin nativo.
+Obtiene la versión del Plugin nativo.
 
 ```typescript
 const { version } = await CapgoCompass.getPluginVersion();

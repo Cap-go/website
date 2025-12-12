@@ -6,7 +6,7 @@ sidebar:
   order: 2
 ---
 
-import { Aside, Steps } from '@astrojs/starlight/components';
+Importar { Aside, Pasos } De '@astrojs/starlight/components';
 
 Integre las Actualizaciones en Vivo de Capgo con GitLab CI/CD para desplegar automáticamente las actualizaciones de su aplicación cada vez que realice cambios en el código. Esta guía cubre la configuración de flujos de trabajo automatizados de construcción, pruebas y despliegue.
 
@@ -20,23 +20,23 @@ Antes de configurar la integración con GitLab CI/CD, asegúrese de tener:
 
 ## Configuración de GitLab CI/CD
 
-### Paso 1: Configurar variables de entorno
+### Paso 1: Configurar Variables de entorno
 
-Primero, configure las variables necesarias en su proyecto de GitLab:
+Primero, Configurar las Variables necesarias en su proyecto de GitLab:
 
-<Steps>
+<Pasos>
 
 1. Navegue a su proyecto de GitLab
-2. Vaya a **Settings** → **CI/CD** → **Variables**
-3. Agregue las siguientes variables:
+2. Vaya a **Configuración** → **CI/CD** → **Variables**
+3. Agregue las siguientes Variables:
 
-</Steps>
+</Pasos>
 
-| Nombre de variable | Valor | Protegida | Enmascarada |
+| Nombre de Variable | Valor | Protegida | Enmascarada |
 |---------------|-------|-----------|--------|
 | `CAPGO_TOKEN` | Su token de API de Capgo | ✅ Sí | ✅ Sí |
 
-<Aside type="tip">
+<Aside type="Consejo">
 
 Obtenga su token de API de Capgo desde [console.capgo.app/apikeys](https://console.capgo.app/apikeys). El ID de su aplicación ya está configurado en su archivo `capacitor.config.ts`.
 
@@ -86,7 +86,7 @@ deploy_production:
 
 ### Despliegues de ramas de características
 
-Despliegue ramas de características a canales de prueba para revisión y testing:
+Despliegue ramas de características a canales de prueba para revisión y Pruebas:
 
 ```yaml
 # Despliegue de rama de características
@@ -106,7 +106,7 @@ deploy_feature:
     url: https://your-app.com/channels/$CHANNEL_NAME
 ```
 
-<Aside type="tip">
+<Aside type="Consejo">
 
 **Pruebas con Canales**: Después de desplegar a un canal de características, puede probar la actualización en su aplicación configurándola para usar ese canal específico. Aprenda más sobre [configurar canales en su aplicación](/docs/live-updates/channels/#configuring-the-channel-in-your-app).
 
@@ -116,14 +116,14 @@ deploy_feature:
 
 Si está usando la [función de cifrado de Capgo](/docs/live-updates/encryption/), deberá almacenar su clave privada de forma segura en su entorno de CI/CD.
 
-Después de [configurar las claves de cifrado](/docs/live-updates/encryption/#setting-up-encryption) localmente, agregue su clave privada a las variables de GitLab:
+Después de [configurar las claves de cifrado](/docs/live-updates/encryption/#setting-up-encryption) localmente, agregue su clave privada a las Variables de GitLab:
 
 ```shell
 # Mostrar el contenido de su clave privada (copiar esta salida)
 cat .capgo_key_v2
 ```
 
-Agregue este contenido como `CAPGO_PRIVATE_KEY` en las variables del proyecto de GitLab (marque como protegida y enmascarada), luego úselo en pipelines:
+Agregue este contenido como `CAPGO_PRIVATE_KEY` en las Variables del proyecto de GitLab (marque como protegida y enmascarada), luego úselo en pipelines:
 
 ```yaml
 # Desplegar con cifrado
@@ -133,12 +133,12 @@ deploy_production:
     - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --key-data-v2 "$CAPGO_PRIVATE_KEY" --channel production
 ```
 
-<Aside type="caution">
+<Aside type="Precaución">
 
 **Mejores prácticas de seguridad:**
 - Nunca confirme el archivo `.capgo_key_v2` en el control de versiones
 - Almacene la clave privada solo en la gestión segura de secretos de CI/CD
-- Use claves diferentes para diferentes entornos
+- Usar claves diferentes para diferentes entornos
 
 </Aside>
 
@@ -289,14 +289,14 @@ deploy:
 
 ### Variables protegidas
 
-<Steps>
+<Pasos>
 
-1. **Marcar variables sensibles**: Siempre marque los tokens de API como protegidos y enmascarados
-2. **Protección de rama**: Use variables protegidas para despliegues de producción
-3. **Control de acceso**: Limite el acceso de variables solo a mantenedores
+1. **Marcar Variables sensibles**: Siempre marque los tokens de API como protegidos y enmascarados
+2. **Protección de rama**: Usar Variables protegidas para despliegues de producción
+3. **Control de acceso**: Limite el acceso de Variables solo a mantenedores
 4. **Rotación regular**: Rote los tokens de API regularmente
 
-</Steps>
+</Pasos>
 
 ### Configuración segura de pipeline
 
@@ -348,7 +348,7 @@ notify_failure:
 
 ### Notificaciones por correo electrónico
 
-Configure notificaciones por correo electrónico en la configuración de su proyecto de GitLab o use la API:
+Configurar notificaciones por correo electrónico en la configuración de su proyecto de GitLab o Usar la API:
 
 ```yaml
 notify_email:
@@ -420,7 +420,7 @@ debug:
 
 - Aprenda sobre [Canales](/docs/live-updates/channels/) para gestionar diferentes entornos de despliegue
 - Explore [Almacenamiento personalizado](/docs/live-updates/custom-storage/) para escenarios de despliegue avanzados
-- Configure [Cifrado](/docs/live-updates/encryption/) para despliegues seguros
-- Configure [Comportamiento de actualización](/docs/live-updates/update-behavior/) para personalizar cómo se aplican las actualizaciones
+- Configurar [Cifrado](/docs/live-updates/encryption/) para despliegues seguros
+- Configurar [Comportamiento de actualización](/docs/live-updates/update-behavior/) para personalizar cómo se aplican las actualizaciones
 
 Con la integración de GitLab CI/CD, puede automatizar sus despliegues de Capgo y garantizar actualizaciones consistentes y confiables para los usuarios de su aplicación móvil.

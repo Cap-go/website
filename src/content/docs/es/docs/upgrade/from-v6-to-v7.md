@@ -38,5 +38,5 @@ Recomendamos agregar las siguientes propiedades en tu archivo `capacitor.config`
 - `version`
 - `autoUpdate`
 
-Estas configuraciones deberían ayudar a gestionar mejor el plugin y sus comportamientos.
+Estas configuraciones deberían ayudar a gestionar mejor el Plugin y sus comportamientos.
 

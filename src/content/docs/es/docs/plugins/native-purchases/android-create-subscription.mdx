@@ -1,12 +1,12 @@
 ---
 title: Crear Suscripción Renovable Automática en Android
-description: Guía paso a paso para crear suscripciones renovables automáticas en Google Play Console para el plugin native-purchases.
+description: Guía paso a paso para crear suscripciones renovables automáticas en Google Play Console para el Plugin native-purchases.
 locale: es
 sidebar:
   order: 4
 ---
 
-import { Steps } from '@astrojs/starlight/components';
+Importar { Pasos } De '@astrojs/starlight/components';
 
 Las suscripciones renovables automáticas proporcionan acceso a contenido, servicios o funciones premium en tu aplicación de manera continua. Esta guía te ayudará a crear y configurar suscripciones en Google Play Console.
 
@@ -20,11 +20,11 @@ Las suscripciones se renuevan automáticamente al final de cada período de fact
 
 ## Crear una Suscripción
 
-<Steps>
+<Pasos>
 
 1. **Navegar a Suscripciones**
 
-   En Google Play Console, selecciona tu app y elige **Monetizar > Suscripciones** del menú izquierdo.
+   En Google Play Console, selecciona tu Aplicación y elige **Monetizar > Suscripciones** del menú izquierdo.
 
    Haz clic en el botón **Crear suscripción** para comenzar.
 
@@ -32,13 +32,13 @@ Las suscripciones se renuevan automáticamente al final de cada período de fact
 
 2. **Ingresar Información Básica**
 
-   Proporciona un nombre de suscripción e ID de producto. El ID de producto es necesario para la configuración en tu app y no se puede cambiar después.
+   Proporciona un nombre de suscripción e ID de producto. El ID de producto es necesario para la configuración en tu Aplicación y no se puede cambiar después.
 
    ![Ingresar detalles de suscripción](/native-purchases/android/create-subscription/enter-subscription-details.webp)
 
 3. **Crear Plan Base**
 
-   Google Play requiere exactamente un plan base por suscripción. El plugin native-purchases soporta solo un plan base para mantener compatibilidad con iOS.
+   Google Play requiere exactamente un plan base por suscripción. El Plugin native-purchases soporta solo un plan base para mantener compatibilidad con iOS.
 
    Haz clic en **Agregar plan base** para continuar.
 
@@ -83,13 +83,13 @@ Las suscripciones se renuevan automáticamente al final de cada período de fact
 
    ![Activar suscripción](/native-purchases/android/create-subscription/activate-subscription.webp)
 
-</Steps>
+</Pasos>
 
 ## Consideraciones Importantes
 
 ### Limitación del Plan Base
 
-El plugin native-purchases requiere exactamente un plan base por suscripción para asegurar consistencia con el manejo de suscripciones de iOS. No se soportan múltiples planes base.
+El Plugin native-purchases requiere exactamente un plan base por suscripción para asegurar consistencia con el manejo de suscripciones de iOS. No se soportan múltiples planes base.
 
 ### Período de Gracia
 
@@ -101,9 +101,9 @@ El período de gracia permite a Google Play reintentar pagos fallidos mientras m
 
 Después de la creación, tu suscripción estará en estado "Borrador" hasta que sea activada. Puedes probar suscripciones en borrador en modo sandbox.
 
-## Usar en tu App
+## Usar en tu Aplicación
 
-Una vez creada, referencia la suscripción en tu app usando el ID de producto:
+Una vez creada, referencia la suscripción en tu Aplicación usando el ID de producto:
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -149,10 +149,10 @@ if (subscription && subscription.purchaseState === 'PURCHASED' && subscription.i
 
 ## Solución de Problemas
 
-**La suscripción no aparece en la app:**
+**La suscripción no aparece en la Aplicación:**
 - Verifica que el ID de producto coincida exactamente
 - Asegúrate de que la suscripción esté activada
-- Verifica que tu app tenga el nombre de paquete correcto
+- Verifica que tu Aplicación tenga el nombre de paquete correcto
 - Espera 2-3 horas después de la activación para que los cambios se propaguen
 
 **Errores del plan base:**

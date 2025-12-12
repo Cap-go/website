@@ -1,5 +1,5 @@
 ---
-title: Devices
+title: Dispositivos
 description: >-
   Documentación para gestionar dispositivos a través de la API de Capgo, que
   cubre seguimiento, versiones y asignaciones de canales para instalaciones de
@@ -9,19 +9,19 @@ sidebar:
 locale: es
 ---
 
-Los Devices representan instalaciones individuales de su aplicación que son gestionadas por Capgo. La API de Devices le permite rastrear y gestionar dispositivos, incluyendo sus versiones, canales y estado de actualización.
+Los Dispositivos representan instalaciones individuales de su aplicación que son gestionadas por Capgo. La API de Dispositivos le permite rastrear y gestionar dispositivos, incluyendo sus versiones, canales y estado de actualización.
 
-:::note[Retención de Datos]
+:::Nota[Retención de Datos]
 Los datos del dispositivo se retienen durante **90 días** desde la última actividad del dispositivo. Los dispositivos que no se han conectado a Capgo dentro de este período se eliminarán automáticamente del sistema. Los dispositivos activos se rastrean continuamente a medida que verifican las actualizaciones.
 :::
 
-## Comprender los Devices
+## Comprender los Dispositivos
 
 Cada dispositivo tiene características y estados únicos:
 - **Platform**: iOS o Android
-- **Version**: Versión actual del bundle y versión de compilación nativa
+- **Versión**: Versión actual del Paquete y versión de compilación nativa
 - **Environment**: Producción o desarrollo, emulador o dispositivo físico
-- **Channel**: Asignación actual del canal de actualización
+- **Canal**: Asignación actual del canal de actualización
 - **Custom ID**: Identificador opcional para sus propios fines de seguimiento
 
 ## Mejores Prácticas
@@ -29,7 +29,7 @@ Cada dispositivo tiene características y estados únicos:
 1. **Seguimiento de Versiones**: Monitoree las versiones de los dispositivos para asegurar la adopción de actualizaciones
 2. **Gestión de Canales**: Asigne dispositivos a canales apropiados según las necesidades de prueba
 3. **Conciencia del Entorno**: Maneje diferentes entornos (prod/dev/emulador) apropiadamente
-4. **Identificación Personalizada**: Use IDs personalizados para integrar con sus sistemas existentes
+4. **Identificación Personalizada**: Usar IDs personalizados para integrar con sus sistemas existentes
 
 ## Endpoints
 
@@ -195,18 +195,18 @@ interface Device {
 }
 ```
 
-### DELETE
+### Eliminar
 
 `https://api.capgo.app/device/`
 
 Desvincular un dispositivo de su anulación de canal. Esto restablece el dispositivo para usar su canal predeterminado.
 
-:::note[Eliminar dispositivo]
+:::Nota[Eliminar dispositivo]
 Los datos del dispositivo se retienen durante **90 días** desde la última actividad del dispositivo. Los dispositivos que no se han conectado a Capgo dentro de este período se eliminarán automáticamente del sistema. Los dispositivos activos se rastrean continuamente a medida que verifican las actualizaciones.
 No puede eliminar un dispositivo con este endpoint, solo afecta la anulación del canal.
 :::
 
-#### Query Parameters
+#### Query Parámetros
 
 ```typescript
 interface Device {
@@ -238,7 +238,7 @@ curl -X DELETE \
 
 ## Manejo de Errores
 
-Escenarios de error comunes y sus respuestas:
+Escenarios de Error comunes y sus respuestas:
 
 ```json
 // Device not found
@@ -268,7 +268,7 @@ Escenarios de error comunes y sus respuestas:
 
 ## Casos de Uso Comunes
 
-1. **Beta Device Registration**
+1. **Beta Dispositivo Registration**
 ```typescript
 {
   "app_id": "app_123",
@@ -277,7 +277,7 @@ Escenarios de error comunes y sus respuestas:
 }
 ```
 
-2. **Version Override**
+2. **Versión Override**
 ```typescript
 {
   "app_id": "app_123",
@@ -286,7 +286,7 @@ Escenarios de error comunes y sus respuestas:
 }
 ```
 
-3. **Reset to Default Channel**
+3. **Reset A Predeterminado Canal**
 ```typescript
 // Use DELETE endpoint to remove overrides
 ```
@@ -294,6 +294,6 @@ Escenarios de error comunes y sus respuestas:
 ## Consejos para la Gestión de Dispositivos
 
 1. **Monitoreo**: Verifique regularmente el estado del dispositivo y la distribución de versiones
-2. **Pruebas**: Use IDs personalizados para identificar fácilmente los dispositivos de prueba
+2. **Pruebas**: Usar IDs personalizados para identificar fácilmente los dispositivos de prueba
 3. **Solución de Problemas**: Rastree las actualizaciones de dispositivos y las asignaciones de canales
 4. **Control de Versiones**: Monitoree las versiones nativas de la aplicación para garantizar la compatibilidad 

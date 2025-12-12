@@ -6,7 +6,7 @@ sidebar:
 locale: es
 ---
 
-Esta documentación explicará cómo actualizar a la versión 3 de auto-update
+Esta documentación explicará cómo actualizar a la versión 3 de auto-Actualizar
 
 ## Primero migrar a las últimas herramientas:
 
@@ -44,7 +44,7 @@ para dejar solo esto:
 
 ## Qué cambia
 
-Todas las configuraciones se vuelven del lado del servidor para auto-update, para darte más control sobre cómo envías una actualización a los usuarios
+Todas las configuraciones se vuelven del lado del servidor para auto-Actualizar, para darte más control sobre cómo envías una actualización a los usuarios
 
 Esto nos permite revertir, incluso desplegar solo a un usuario con canales. Estas configuraciones se agregan de nuevo a la interfaz web:
 
@@ -53,7 +53,7 @@ Esto nos permite revertir, incluso desplegar solo a un usuario con canales. Esta
 
 > ⚠️ Se volverán verdaderos por defecto para todos los canales
 
-Esto también eliminará la necesidad de actualizar frecuentemente el plugin, la mayoría de las actualizaciones se realizarán del lado del servidor, y las obtendrás sin ningún cambio de tu parte
+Esto también eliminará la necesidad de actualizar frecuentemente el Plugin, la mayoría de las actualizaciones se realizarán del lado del servidor, y las obtendrás sin ningún cambio de tu parte
 
 > ⚠️ Reinicio cuando una actualización se convierte en predeterminada, así que si prefieres no eliminar todas las versiones descargadas al actualizar desde la tienda, haz esto:
 
@@ -82,7 +82,7 @@ import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
 Luego compila tu código nuevamente `npm run build` y copia los assets una vez más `npx cap copy`
 
-Ahora deberías poder probar el último sistema de auto-update
+Ahora deberías poder probar el último sistema de auto-Actualizar
 
 Envía tu versión con:
 
@@ -102,4 +102,4 @@ Por ahora solo se usa el primer canal público, en el futuro, público cambiará
 
 ## Problemas comunes:
 
-* Problema de compilación después de actualizar: si ya has abierto el código fuente del plugin en Android Studio o Xcode, a veces la sincronización no los elimina, esa es la causa del problema. Abre el IDE nativo y elimina `capacitor-updater` manualmente y haz `npx cap sync`, esto debería resolverlo
+* Problema de compilación después de actualizar: si ya has abierto el código fuente del Plugin en Android Studio o Xcode, a veces la sincronización no los elimina, esa es la causa del problema. Abre el IDE nativo y elimina `capacitor-updater` manualmente y haz `npx cap sync`, esto debería resolverlo

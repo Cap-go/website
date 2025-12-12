@@ -1,22 +1,22 @@
 ---
 title: Comenzando
-description: Aprende cómo instalar y usar el plugin File Compressor para comprimir imágenes en tu aplicación Capacitor.
+description: Aprende cómo instalar y usar el Plugin File Compressor para comprimir imágenes en tu aplicación Capacitor.
 locale: es
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
+Importar { Code, Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
+<Pasos>
 1. **Instala el paquete**
-   <PackageManagers pkg="@capgo/capacitor-file-compressor" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/Capacitor-file-compressor" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincroniza con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+</Pasos>
 
 ## Soporte de Plataformas
 
@@ -30,7 +30,7 @@ Nota: Los metadatos EXIF se eliminan durante la compresión en todas las platafo
 
 ## Uso
 
-Importa el plugin y comprime imágenes:
+Importa el Plugin y comprime imágenes:
 
 ```typescript
 import { FileCompressor } from '@capgo/capacitor-file-compressor';
@@ -52,7 +52,7 @@ const compressImage = async () => {
 
 ## Referencia de API
 
-### compressImage(options)
+### compressImage(Opciones)
 
 Comprime un archivo de imagen con dimensiones y configuraciones de calidad especificadas.
 
@@ -81,7 +81,7 @@ const result = await FileCompressor.compressImage(options);
 
 ### getPluginVersion()
 
-Obtiene la versión del plugin nativo.
+Obtiene la versión del Plugin nativo.
 
 ```typescript
 const { version } = await FileCompressor.getPluginVersion();

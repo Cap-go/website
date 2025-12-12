@@ -1,18 +1,18 @@
 ---
 title: Comenzar
-description: Aprende cómo instalar y usar el plugin Camera Preview para mostrar la transmisión de cámara en tiempo real y capturar fotos/videos en tu aplicación Capacitor.
+description: Aprende cómo instalar y usar el Plugin Camera Preview para mostrar la transmisión de cámara en tiempo real y capturar fotos/videos en tu aplicación Capacitor.
 locale: es
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
+Importar { Code, Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
+<Pasos>
 1. **Instalar el paquete**
-   <PackageManagers pkg="@capgo/camera-preview" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/camera-preview" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
@@ -37,11 +37,11 @@ import { PackageManagers } from 'starlight-package-managers'
    <uses-permission android:name="android.permission.RECORD_AUDIO" />
    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
    ```
-</Steps>
+</Pasos>
 
 ## Uso
 
-Importa el plugin y usa sus métodos para controlar la cámara:
+Importa el Plugin y usa sus métodos para controlar la cámara:
 
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
@@ -111,7 +111,7 @@ const stopRecording = async () => {
 
 ## Referencia de API
 
-### start(options)
+### start(Opciones)
 
 Inicia la vista previa de la cámara.
 
@@ -139,7 +139,7 @@ interface CameraPreviewOptions {
 
 Detiene la vista previa de la cámara.
 
-### capture(options)
+### capture(Opciones)
 
 Toma una foto y la devuelve como cadena codificada en base64.
 
@@ -155,7 +155,7 @@ interface CameraPreviewPictureOptions {
 
 Cambia entre la cámara frontal y trasera.
 
-### setFlashMode(options)
+### setFlashMode(Opciones)
 
 Establece el modo de flash.
 
@@ -165,7 +165,7 @@ interface CameraPreviewFlashMode {
 }
 ```
 
-### startRecordVideo(options)
+### startRecordVideo(Opciones)
 
 Inicia la grabación de video.
 

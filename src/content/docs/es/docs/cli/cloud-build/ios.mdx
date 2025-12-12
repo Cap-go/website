@@ -1,19 +1,19 @@
 ---
 title: Compilaciones iOS
-description: Configura y compila aplicaciones iOS con Capgo Cloud Build
+description: Configura y compila aplicaciones iOS con Capgo Construcción en la nube
 locale: es
 sidebar:
   order: 2
 ---
 
-import { Steps, Aside, Card, CardGrid } from '@astrojs/starlight/components';
+Importar { Pasos, Aside, Card, CardGrid } De '@astrojs/starlight/components';
 
-Compila y envía aplicaciones iOS a TestFlight y App Store usando la infraestructura Mac dedicada de Capgo.
+Compila y envía aplicaciones iOS a TestFlight y Aplicación Store usando la infraestructura Mac dedicada de Capgo.
 
 ## Antes de Compilar
 
 <CardGrid>
-  <Card title="⚠️ Configura las Credenciales iOS Primero" icon="warning">
+  <Card title="⚠️ Configura las Credenciales iOS Primero" icon="Advertencia">
     **Requerido:** Debes guardar tus credenciales iOS antes de compilar.
 
     [Configurar Credenciales iOS →](/docs/cli/cloud-build/credentials/#saving-ios-credentials)
@@ -48,11 +48,11 @@ Necesitarás uno de estos tipos de certificados dependiendo de tu compilación:
 |------------|---------------------|---------------------|
 | **Development** | Apple Development | Perfil de Desarrollo |
 | **Ad Hoc** | Apple Distribution | Perfil Ad Hoc |
-| **App Store** | Apple Distribution | Perfil App Store |
+| **Aplicación Store** | Apple Distribution | Perfil Aplicación Store |
 
 #### Cómo Obtener Certificados iOS y Perfiles de Aprovisionamiento
 
-<Aside type="tip">
+<Aside type="Consejo">
 Para guías detalladas paso a paso con capturas de pantalla, visita:
 - [Guía de Certificados iOS](https://capawesome.io/cloud/native-builds/certificates/ios/)
 - [Blog: Compilaciones Automáticas iOS con GitHub Actions](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/)
@@ -60,7 +60,7 @@ Para guías detalladas paso a paso con capturas de pantalla, visita:
 
 **Resumen Rápido:**
 
-<Steps>
+<Pasos>
 
 1. **Crear una Solicitud de Firma de Certificado (CSR)**
    - Abre Acceso a Llaveros en tu Mac
@@ -71,7 +71,7 @@ Para guías detalladas paso a paso con capturas de pantalla, visita:
 2. **Generar Certificado en el Portal de Desarrollador de Apple**
    - Ve a [Certificados de Desarrollador de Apple](https://developer.apple.com/account/resources/certificates)
    - Haz clic en "+" para crear un nuevo certificado
-   - Elige el tipo de certificado (Distribución iOS para compilaciones de App Store)
+   - Elige el tipo de certificado (Distribución iOS para compilaciones de Aplicación Store)
    - Sube tu archivo CSR
    - Descarga el certificado (archivo `.cer`)
 
@@ -84,18 +84,18 @@ Para guías detalladas paso a paso con capturas de pantalla, visita:
 4. **Crear Perfil de Aprovisionamiento**
    - Ve a [Perfiles de Desarrollador de Apple](https://developer.apple.com/account/resources/profiles)
    - Haz clic en "+" para crear un nuevo perfil
-   - Elige el tipo de perfil (App Store para compilaciones de producción)
+   - Elige el tipo de perfil (Aplicación Store para compilaciones de producción)
    - Selecciona tu ID de aplicación
    - Selecciona el certificado que acabas de crear
    - Descarga el archivo `.mobileprovision`
 
-</Steps>
+</Pasos>
 
-### 3. Clave API de App Store Connect (Recomendado)
+### 3. Clave API de Aplicación Store Connect (Recomendado)
 
 Para envío automático a TestFlight, crea una clave API:
 
-<Steps>
+<Pasos>
 
 1. Ve a [App Store Connect](https://appstoreconnect.apple.com/) → Usuarios y Acceso → Claves
 2. Haz clic en el botón "+" para crear una nueva clave
@@ -103,9 +103,9 @@ Para envío automático a TestFlight, crea una clave API:
 4. Descarga el archivo `.p8` (¡solo puedes descargarlo una vez!)
 5. Anota el **ID de Clave** y el **ID de Emisor**
 
-</Steps>
+</Pasos>
 
-<Aside type="note">
+<Aside type="Nota">
 También puedes encontrar tu **ID de Equipo** en tu cuenta de desarrollador de Apple bajo los detalles de Membresía.
 </Aside>
 
@@ -133,7 +133,7 @@ APPLE_PROFILE_NAME="App Store com.example.app"
 
 ### Generando Credenciales en Base64
 
-<Aside type="tip">
+<Aside type="Consejo">
 Usa estos comandos para codificar tus certificados para Capgo:
 </Aside>
 
@@ -147,16 +147,16 @@ base64 -i TuCertificado.p12 | pbcopy
 base64 -i TuPerfil.mobileprovision | pbcopy
 ```
 
-**Clave de App Store Connect (.p8):**
+**Clave de Aplicación Store Connect (.p8):**
 ```bash
 base64 -i AuthKey_ABC1234567.p8 | pbcopy
 ```
 
-La cadena base64 ahora está en tu portapapeles - pégala en tu variable de entorno o secretos de CI/CD.
+La cadena base64 ahora está en tu portapapeles - pégala en tu Variable de entorno o secretos de CI/CD.
 
 ## Compilando para iOS
 
-### Compilación de Debug (Development)
+### Compilación de Depuración (Development)
 
 ```bash
 npx @capgo/cli@latest build com.example.app \
@@ -166,7 +166,7 @@ npx @capgo/cli@latest build com.example.app \
 
 Esto crea una compilación de desarrollo que se puede instalar en dispositivos registrados.
 
-### Compilación de Release (App Store)
+### Compilación de Lanzamiento (Aplicación Store)
 
 ```bash
 npx @capgo/cli@latest build com.example.app \
@@ -174,7 +174,7 @@ npx @capgo/cli@latest build com.example.app \
   --build-mode release
 ```
 
-Esto crea una compilación de App Store y automáticamente la envía a TestFlight si tienes configuradas las credenciales de la API de App Store Connect.
+Esto crea una compilación de Aplicación Store y automáticamente la envía a TestFlight si tienes configuradas las credenciales de la API de Aplicación Store Connect.
 
 ## Integración CI/CD
 
@@ -227,7 +227,7 @@ jobs:
 
 ### Qué Sucede Durante una Compilación iOS
 
-<Steps>
+<Pasos>
 
 1. **Aprovisionamiento de Máquina** (1-2 minutos)
    - Se aprovisiona o asigna un Mac mini de Scaleway
@@ -242,7 +242,7 @@ jobs:
 3. **Configuración de Proyecto** (~30 segundos)
    - Zip del proyecto descargado desde R2
    - Extraído al espacio de trabajo
-   - Credenciales inyectadas como variables de entorno
+   - Credenciales inyectadas como Variables de entorno
 
 4. **Compilación Fastlane** (3-8 minutos)
    - Llavero creado con certificado de firma
@@ -250,8 +250,8 @@ jobs:
    - Comando de compilación Xcode ejecutado
    - Archivo IPA generado
 
-5. **Envío a App Store** (1-2 minutos, si está configurado)
-   - IPA subido a App Store Connect
+5. **Envío a Aplicación Store** (1-2 minutos, si está configurado)
+   - IPA subido a Aplicación Store Connect
    - Enviado a TestFlight
    - El procesamiento comienza del lado de Apple
 
@@ -264,7 +264,7 @@ jobs:
    - La máquina Mac es destruida
    - Todos los datos eliminados permanentemente
 
-</Steps>
+</Pasos>
 
 ### Pila de Compilación
 
@@ -283,12 +283,12 @@ Tiempos típicos de compilación iOS:
 
 | Tipo de Compilación | Primera Compilación | Compilaciones Subsecuentes* |
 |------------|-------------|-------------------|
-| Debug | 5-7 minutos | 4-6 minutos |
-| Release | 7-10 minutos | 5-8 minutos |
+| Depuración | 5-7 minutos | 4-6 minutos |
+| Lanzamiento | 7-10 minutos | 5-8 minutos |
 
 *Las compilaciones subsecuentes pueden ser más rápidas si se reutiliza la misma máquina dentro de la ventana de 24 horas.
 
-<Aside type="note">
+<Aside type="Nota">
 Las compilaciones iOS cuestan **2× la tarifa base** debido a los requisitos de hardware Mac dedicado.
 </Aside>
 
@@ -305,7 +305,7 @@ Las compilaciones iOS cuestan **2× la tarifa base** debido a los requisitos de 
 - Regenera tu perfil de aprovisionamiento incluyendo el certificado
 - Vuelve a descargar y vuelve a codificar el perfil
 
-**"Autenticación de App Store Connect falló"**
+**"Autenticación de Aplicación Store Connect falló"**
 - Verifica APPLE_KEY_ID, APPLE_ISSUER_ID y APPLE_KEY_CONTENT
 - Asegúrate de que la clave API no haya sido revocada
 - Verifica que la clave tenga el rol "Developer" o superior
@@ -315,7 +315,7 @@ Las compilaciones iOS cuestan **2× la tarifa base** debido a los requisitos de 
 - Considera optimizar tu Podfile
 - Contacta soporte si las compilaciones consistentemente agotan el tiempo
 
-### Registros de Debug
+### Registros de Depuración
 
 Todos los registros de compilación se transmiten en tiempo real. Busca estas fases clave:
 
@@ -329,7 +329,7 @@ Todos los registros de compilación se transmiten en tiempo real. Busca estas fa
 ✔ Compilación exitosa
 ```
 
-Si una compilación falla, el error se mostrará claramente en los registros con el mensaje de error específico de Fastlane/Xcode.
+Si una compilación falla, el Error se mostrará claramente en los registros con el mensaje de Error específico de Fastlane/Xcode.
 
 ## Mejores Prácticas
 
@@ -372,4 +372,4 @@ Compilación exitosa en 6m 42s (13.4 minutos de facturación a tarifa 2×)
 
 - [Guía de Solución de Problemas](/docs/cli/cloud-build/troubleshooting/)
 - [Comunidad Discord](https://discord.com/invite/VnYRvBfgA6)
-- Email: support@capgo.app
+- Email: support@Capgo.Aplicación

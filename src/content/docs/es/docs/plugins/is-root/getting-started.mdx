@@ -1,12 +1,12 @@
 ---
 title: Comenzando
-description: Aprende cómo instalar y usar el plugin Is Root para detectar dispositivos Android rooteados y emuladores para mayor seguridad de la app.
+description: Aprende cómo instalar y usar el Plugin Is Root para detectar dispositivos Android rooteados y emuladores para mayor seguridad de la Aplicación.
 locale: es
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
 
 ## Instalación
 
@@ -40,7 +40,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 ## Soporte de Plataformas
 
 - **Android**: Soporte completo para detección de root y emuladores
-- **iOS**: No se requiere configuración (el plugin está enfocado en Android)
+- **iOS**: No se requiere configuración (el Plugin está enfocado en Android)
 
 ## Ejemplo de Uso
 
@@ -193,7 +193,7 @@ if (!securityStatus.secure) {
 
 ### Detección de Root
 
-El plugin emplea múltiples métodos de detección:
+El Plugin emplea múltiples métodos de detección:
 
 - Verifica aplicaciones de gestión de root (SuperSU, Magisk, KingRoot, etc.)
 - Escanea propiedades sospechosas del sistema
@@ -254,7 +254,7 @@ function showBlockedScreen(message: string) {
 - Implementar degradación gradual en lugar de bloquear el acceso completamente
 - Proporcionar comunicación clara al usuario sobre preocupaciones de seguridad
 - Considerar la experiencia del usuario al implementar medidas de seguridad
-- Mantener el plugin actualizado a medida que evolucionan los métodos de detección
+- Mantener el Plugin actualizado a medida que evolucionan los métodos de detección
 - Probar en dispositivos tanto rooteados como no rooteados
 - Manejar fallos de detección con gracia
 
@@ -269,8 +269,8 @@ function showBlockedScreen(message: string) {
 
 ## Casos de Uso
 
-- **Apps bancarias y financieras**: Prevenir acceso en dispositivos comprometidos
+- **Aplicaciones bancarias y financieras**: Prevenir acceso en dispositivos comprometidos
 - **Contenido protegido con DRM**: Proteger material con derechos de autor
-- **Apps empresariales**: Aplicar políticas de seguridad BYOD
+- **Aplicaciones empresariales**: Aplicar políticas de seguridad BYOD
 - **Procesamiento de pagos**: Asegurar entorno de transacciones seguras
-- **Apps de datos sensibles**: Proteger información confidencial
+- **Aplicaciones de datos sensibles**: Proteger información confidencial

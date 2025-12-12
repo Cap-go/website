@@ -1,26 +1,26 @@
 ---
 title: Primeros Pasos
 locale: es
-description: Aprende cómo instalar y usar el plugin Printer para imprimir contenido desde tu aplicación Capacitor.
+description: Aprende cómo instalar y usar el Plugin Printer para imprimir contenido desde tu aplicación Capacitor.
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
+Importar { Code, Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
+<Pasos>
 1. **Instalar el paquete**
-   <PackageManagers pkg="@capgo/capacitor-printer" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/Capacitor-printer" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+</Pasos>
 
 ## Uso
 
-Importa el plugin e imprime varios tipos de contenido:
+Importa el Plugin e imprime varios tipos de contenido:
 
 ```typescript
 import { Printer } from '@capgo/capacitor-printer';
@@ -52,7 +52,7 @@ const printImage = async () => {
 
 ## Referencia de API
 
-### print(options)
+### print(Opciones)
 
 Abre el diálogo de impresión nativo con el contenido especificado.
 

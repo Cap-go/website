@@ -1,12 +1,12 @@
 ---
 title: Comenzando
-description: Aprende cómo instalar e integrar JW Player en tu app Capacitor para capacidades de streaming de video profesionales.
+description: Aprende cómo instalar e integrar JW Player en tu Aplicación Capacitor para capacidades de streaming de video profesionales.
 locale: es
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
 
 ## Instalación
 
@@ -39,7 +39,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ## Requisitos Previos
 
-Necesitarás una cuenta y clave de licencia de JW Player para usar este plugin. Regístrate en [JW Player](https://www.jwplayer.com/) si no tienes una.
+Necesitarás una cuenta y clave de licencia de JW Player para usar este Plugin. Regístrate en [JW Player](https://www.jwplayer.com/) si no tienes una.
 
 ## Configuración de Plataforma
 
@@ -104,7 +104,7 @@ JWPlayer.addListener('error', (error) => {
 
 ## Referencia de la API
 
-### playVideo(options)
+### playVideo(Opciones)
 
 ```typescript
 playVideo(options: VideoOptions) => Promise<void>
@@ -116,7 +116,7 @@ Reproduce un solo video en modo pantalla completa.
 | ------------- | ----------------------- |
 | **`options`** | `VideoOptions` |
 
-### playPlaylist(options)
+### playPlaylist(Opciones)
 
 ```typescript
 playPlaylist(options: PlaylistOptions) => Promise<void>
@@ -144,7 +144,7 @@ play() => Promise<void>
 
 Reanudar la reproducción del video.
 
-### seek(options)
+### seek(Opciones)
 
 ```typescript
 seek(options: { position: number }) => Promise<void>
@@ -156,7 +156,7 @@ Buscar una posición específica en el video.
 | ------------- | ---------------------------- |
 | **`options`** | `{ position: number }` |
 
-### setPlaybackSpeed(options)
+### setPlaybackSpeed(Opciones)
 
 ```typescript
 setPlaybackSpeed(options: { speed: number }) => Promise<void>
@@ -168,7 +168,7 @@ Establecer la velocidad de reproducción.
 | ------------- | ------------------------- |
 | **`options`** | `{ speed: number }` |
 
-### setVolume(options)
+### setVolume(Opciones)
 
 ```typescript
 setVolume(options: { volume: number }) => Promise<void>
@@ -180,7 +180,7 @@ Establecer el volumen de audio (0.0 a 1.0).
 | ------------- | -------------------------- |
 | **`options`** | `{ volume: number }` |
 
-### selectAudioTrack(options)
+### selectAudioTrack(Opciones)
 
 ```typescript
 selectAudioTrack(options: { trackIndex: number }) => Promise<void>
@@ -192,7 +192,7 @@ Seleccionar una pista de audio por índice.
 | ------------- | ------------------------------- |
 | **`options`** | `{ trackIndex: number }` |
 
-### selectCaptionTrack(options)
+### selectCaptionTrack(Opciones)
 
 ```typescript
 selectCaptionTrack(options: { trackIndex: number }) => Promise<void>
@@ -239,7 +239,7 @@ Detener la reproducción y cerrar el reproductor.
 - `play` - Reproducción de video iniciada
 - `pause` - Reproducción de video pausada
 - `complete` - Reproducción de video completada
-- `error` - El reproductor encontró un error
+- `error` - El reproductor encontró un Error
 - `seek` - El usuario buscó una posición diferente
 - `time` - Tiempo de reproducción actualizado
 - `bufferChange` - Estado del buffer cambió
@@ -317,7 +317,7 @@ await JWPlayer.setVolume({ volume: 0.5 });
 ## Mejores Prácticas
 
 - Siempre proporciona una imagen de póster para mejor experiencia del usuario
-- Maneja los errores del reproductor con mensajes de error apropiados
+- Maneja los errores del reproductor con mensajes de Error apropiados
 - Limpia los listeners de eventos cuando el componente se desmonte
 - Prueba la reproducción de video en dispositivos iOS y Android
 - Usa formatos de video apropiados (MP4 recomendado)
@@ -335,8 +335,8 @@ await JWPlayer.setVolume({ volume: 0.5 });
 
 ### Problemas de Pantalla Completa
 
-- El plugin siempre reproduce en modo pantalla completa
-- Asegúrate de tener permisos apropiados para pantalla completa en tu app
+- El Plugin siempre reproduce en modo pantalla completa
+- Asegúrate de tener permisos apropiados para pantalla completa en tu Aplicación
 
 ### Rendimiento
 

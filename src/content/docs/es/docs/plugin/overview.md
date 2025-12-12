@@ -15,7 +15,7 @@ El Modo Auto-Hospedado es para aquellos que quieren manejar toda la lógica de a
 
 El Modo Manual Auto-Hospedado combina control y autonomía. Tú decides cuándo actualizar a través de JavaScript, pero tu servidor maneja qué se actualiza. Es un poco complejo ya que estás incluyendo código de actualización en las actualizaciones.
 
-:::note
+:::Nota
 Si eliges auto-hospedar te perderás todas las excelentes funciones que ofrece Capgo cloud como: reversiones automáticas, alertas por correo electrónico, canales, estadísticas, cifrado y más
 :::
 

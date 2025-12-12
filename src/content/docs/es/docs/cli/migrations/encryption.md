@@ -20,9 +20,9 @@ npx @capgo/cli key create
 
 Este comando creará un nuevo par de claves en tu aplicación; es imperativo almacenar la clave privada en un lugar seguro. Nunca se debe confirmar la clave privada en el control de código fuente ni compartirla con terceros no confiables
 
-Este comando también eliminará la clave antigua de tu configuración de Capacitor, pero no eliminará los archivos de la clave antigua. El CLI los mantiene para permitirte continuar enviando actualizaciones en vivo para las aplicaciones que no han recibido una actualización de la tienda de aplicaciones y que todavía utilizan el plugin anterior. Esto facilita la migración
+Este comando también eliminará la clave antigua de tu configuración de Capacitor, pero no eliminará los archivos de la clave antigua. El CLI los mantiene para permitirte continuar enviando actualizaciones en vivo para las aplicaciones que no han recibido una actualización de la tienda de aplicaciones y que todavía utilizan el Plugin anterior. Esto facilita la migración
 
-Cuando la migración te pregunte "¿Quieres configurar el cifrado con el nuevo canal para admitir aplicaciones antiguas y facilitar la migración?", por favor acepta. Esto agregará una nueva opción "defaultChannel" a tu configuración de Capacitor. Esto hará que tu aplicación use el canal "encryption_v2". Esto asegurará que el nuevo cifrado sea utilizado solo por aplicaciones que lo soporten. Las aplicaciones que no han recibido una actualización de la tienda de aplicaciones continuarán usando el canal predeterminado anterior
+Cuando la migración te pregunte "¿Quieres configurar el cifrado con el nuevo canal para admitir aplicaciones antiguas y facilitar la migración?", por favor acepta. Esto agregará una nueva opción "defaultChannel" a tu configuración de Capacitor. Esto hará que tu aplicación Usar el canal "encryption_v2". Esto asegurará que el nuevo cifrado sea utilizado solo por aplicaciones que lo soporten. Las aplicaciones que no han recibido una actualización de la tienda de aplicaciones continuarán usando el canal predeterminado anterior
 
 ---
 
@@ -36,7 +36,7 @@ npx @capgo/cli bundle upload --channel encryption_v2
 
 Luego, ejecuta este comando para permitir que las aplicaciones se auto-asignen al canal "encryption_v2"
 
-:::caution
+:::Precaución
 Esto es necesario para que la nueva opción "defaultChannel" funcione
 :::
 

@@ -1,12 +1,12 @@
 ---
 title: Actualización Automática
-description: Cómo usar el plugin de actualización automática en modo auto-alojado
+description: Cómo usar el Plugin de actualización automática en modo auto-alojado
 sidebar:
   order: 3
 locale: es
 ---
 
-import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+Importar { LinkCard, CardGrid } De '@astrojs/starlight/components';
 
 Esta documentación explicará cómo ejecutar tu servidor de actualización automática
 
@@ -17,21 +17,13 @@ ej. ```https://myservercom/app/updates/updatesjson```
 Si no estás familiarizado con servir un paquete, te recomendamos que pruebes Capgo Cloud o veas un ejemplo aquí:
 <LinkCard
 	title="Servir un Paquete"
-	href="/docs/self-hosted/auto-update/update-endpoint"
+	href="/docs/self-hosted/auto-Actualizar/Actualizar-endpoint"
 />
 
 ## Configuración
 Añade una ``updateUrl`` a tu ``capacitorconfigjson``
 
-```json
-{
-	"plugins": {
-		"CapacitorUpdater": {
-			"updateUrl": "https://myservercom/app/updates/updatesjson",
-		}
-	}
-}
-```
+__CODEBLOCK_1__
 :::caution
 Cuando estés publicando una actualización auto-alojada, ten en cuenta que no puedes usar endpoints "HTTP" ya que va en contra de las políticas de seguridad de las aplicaciones Android, para fines de prueba puedes [permitirlo](https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-not-permitted)
 :::
@@ -40,30 +32,11 @@ Cuando estés publicando una actualización auto-alojada, ten en cuenta que no p
 
 El plugin realizará una llamada POST a tu API cada vez que se abra la aplicación, con este cuerpo:
 
-```typescript
-interface AppInfos {
-    "platform": "ios" | "android",
-    "device_id": "UUID_of_device_unique_by_install",
-    "app_id": "APPID_FROM_CAPACITOR_CONFIG",
-    "custom_id": "your_custom_id_set_on_runtime",
-    "plugin_version": "PLUGIN_VERSION",
-    "version_build": "VERSION_NUMBER_FROM_NATIVE_CODE",
-    "version_code": "VERSION_CODE_FROM_NATIVE_CODE",
-    "version_name": "LAST_DOWNLOADER_VERSION" | "builtin"
-    "version_os": "VERSION_OF_SYSYEM_OS",
-    "is_emulator": boolean,
-    "is_prod": boolean,
-}
-```
+__CODEBLOCK_2__
 
 El servidor API debe responder, en JSON, al plugin capacitor-updater con estos datos si una actualización es necesaria:
 
-```json
-{
-"version": "123",
-"url": "https://myservercom/app/updates/my-new-app-200zip"
-}
-```
+__CODEBLOCK_3__
 
 En modo de actualización automática, el servidor debe comparar las versiones y devolver la correcta, si la clave URL está presente, el plugin inicia el proceso de descarga
 

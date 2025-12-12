@@ -1,14 +1,14 @@
 ---
 title: Crear Suscripción Renovable Automáticamente en iOS
 locale: es
-description: Guía paso a paso para crear suscripciones renovables automáticamente en App Store Connect para el plugin native-purchases.
+description: Guía paso a paso para crear suscripciones renovables automáticamente en Aplicación Store Connect para el Plugin native-purchases.
 sidebar:
   order: 8
 ---
 
-import { Steps } from '@astrojs/starlight/components';
+Importar { Pasos } De '@astrojs/starlight/components';
 
-Las suscripciones renovables automáticamente proporcionan acceso recurrente a contenido, servicios o funciones premium en tu aplicación iOS. Esta guía te lleva a través de la creación de suscripciones en App Store Connect.
+Las suscripciones renovables automáticamente proporcionan acceso recurrente a contenido, servicios o funciones premium en tu aplicación iOS. Esta guía te lleva a través de la creación de suscripciones en Aplicación Store Connect.
 
 ## Descripción general
 
@@ -24,15 +24,15 @@ Las suscripciones renovables automáticamente se renuevan automáticamente al fi
 Antes de crear suscripciones, debes:
 1. [Crear un grupo de suscripción](/docs/plugins/native-purchases/ios-subscription-group/) para organizar tus suscripciones
 2. Tener una membresía activa del Apple Developer Program
-3. Completar la información bancaria y fiscal en App Store Connect
+3. Completar la información bancaria y fiscal en Aplicación Store Connect
 
 ## Crear una suscripción
 
-<Steps>
+<Pasos>
 
 1. **Navegar a Suscripciones**
 
-   En App Store Connect, selecciona tu aplicación y ve a **Monetize > Subscriptions**.
+   En Aplicación Store Connect, selecciona tu aplicación y ve a **Monetize > Subscriptions**.
 
    Selecciona tu grupo de suscripción o crea uno nuevo si es necesario.
 
@@ -44,13 +44,13 @@ Antes de crear suscripciones, debes:
 
 3. **Ingresar Información Básica**
 
-   **Reference Name**: Nombre descriptivo para tu uso interno (no se muestra a los clientes)
+   **Referencia Name**: Nombre descriptivo para tu uso interno (no se muestra a los clientes)
    - Ejemplos: "Premium Monthly", "Ultimate Annual", "Basic Plan"
 
    **Product ID**: Identificador único para esta suscripción (no se puede cambiar después)
    - Formato: `com.yourcompany.yourapp.premium_monthly`
    - Usa nombres descriptivos en minúsculas con guiones bajos
-   - Requerido para configurar el plugin native-purchases
+   - Requerido para configurar el Plugin native-purchases
 
    ![Ingresar detalles de suscripción](/native-purchases/ios/create-subscription/enter-subscription-info.webp)
 
@@ -68,7 +68,7 @@ Antes de crear suscripciones, debes:
 
 5. **Configurar Precios**
 
-   Haz clic en **Add Subscription Price** para configurar los precios:
+   Haz clic en **Agregar Subscription Price** para configurar los precios:
 
    **Base Territory**: Selecciona tu mercado principal (generalmente tu país)
 
@@ -83,7 +83,7 @@ Antes de crear suscripciones, debes:
 
    Decide si habilitar Family Sharing, que permite hasta 6 miembros de la familia acceder a la suscripción.
 
-   :::caution
+   :::Precaución
    Una vez que Family Sharing está habilitado, no se puede desactivar para este producto.
    :::
 
@@ -110,24 +110,24 @@ Antes de crear suscripciones, debes:
 
    ![Agregar localizaciones](/native-purchases/ios/create-subscription/add-localization.webp)
 
-8. **Imagen Promocional de App Store (Opcional)**
+8. **Imagen Promocional de Aplicación Store (Opcional)**
 
    Sube una imagen promocional para esta suscripción (312x390 píxeles):
-   - Se muestra en la página de suscripción de App Store
+   - Se muestra en la página de suscripción de Aplicación Store
    - Debe coincidir con el diseño de tu aplicación
    - Incluye el nombre de la suscripción para mayor claridad
 
-   :::note
-   Aunque las imágenes son opcionales para el envío inicial, son requeridas para la visualización promocional en App Store. Puedes agregarlas más tarde.
+   :::Nota
+   Aunque las imágenes son opcionales para el envío inicial, son requeridas para la visualización promocional en Aplicación Store. Puedes agregarlas más tarde.
    :::
 
 9. **Guardar y Enviar**
 
-   Haz clic en **Save** para crear la suscripción.
+   Haz clic en **Guardar** para crear la suscripción.
 
    **Para la Primera Suscripción:**
    - Debe enviarse con una nueva versión de la aplicación
-   - Incluir en tu próximo envío a App Store
+   - Incluir en tu próximo envío a Aplicación Store
    - No se puede enviar de forma independiente
 
    **Para Suscripciones Subsiguientes:**
@@ -135,7 +135,7 @@ Antes de crear suscripciones, debes:
    - No requieren una nueva versión de la aplicación
    - Disponibles después de que se apruebe la primera suscripción
 
-</Steps>
+</Pasos>
 
 ## Estado de la Suscripción
 
@@ -144,14 +144,14 @@ Tu suscripción tendrá uno de estos estados:
 | Estado | Descripción | ¿Se puede probar? |
 |--------|-------------|-----------|
 | **Missing Metadata** | Configuración incompleta | Sí (sandbox) |
-| **Ready to Submit** | Completa pero no enviada | Sí (sandbox) |
+| **Ready A Submit** | Completa pero no enviada | Sí (sandbox) |
 | **Waiting for Review** | Enviada a Apple | Sí (sandbox) |
 | **In Review** | Siendo revisada por Apple | Sí (sandbox) |
 | **Approved** | Disponible para compra | Sí |
 | **Rejected** | Necesita cambios | Sí (sandbox) |
 
-:::tip
-¡Puedes probar suscripciones en modo sandbox incluso si muestran "Missing Metadata" o "Ready to Submit"!
+:::Consejo
+¡Puedes probar suscripciones en modo sandbox incluso si muestran "Missing Metadata" o "Ready A Submit"!
 :::
 
 ## Usar en tu Aplicación
@@ -275,7 +275,7 @@ Aplicación Gratuita + Suscripción Premium
 **Suscripción no se carga en la aplicación:**
 - Verifica que el product ID coincida exactamente (sensible a mayúsculas)
 - Verifica que la suscripción esté en el grupo de suscripción
-- Asegúrate de que el bundle identifier coincida con App Store Connect
+- Asegúrate de que el Paquete identifier coincida con Aplicación Store Connect
 - Espera 2-3 horas después de crear el producto
 
 **No se puede enviar la suscripción:**

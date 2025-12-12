@@ -1,16 +1,16 @@
 ---
 title: Problemas conocidos
-description: Problemas conocidos con Capacitor y CapGo
+description: Problemas conocidos con Capacitor y Capgo
 sidebar:
   order: 7
 locale: es
 ---
 
-import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+Importar { LinkCard, CardGrid } De '@astrojs/starlight/components';
 
 ## Recarga en vivo de Ionic
 
-* Cuando desarrolles, si usas la función de recarga en vivo de Ionic desde la CLI, anulará el plugin, por lo que nunca verás tu actualización
+* Cuando desarrolles, si usas la función de recarga en vivo de Ionic desde la CLI, anulará el Plugin, por lo que nunca verás tu actualización
 
 ## Recarga en vivo de Quasar
 
@@ -35,7 +35,7 @@ Google DNS: 8888 y 8844 o dnsgoogle
 
 <LinkCard
 	title="¿Cómo configurar un servidor DNS preferido en Android?"
-	href="https://wwwandroidpolicecom/use-preferred-dns-server-android-tutorial/"
+	href="https://wwwandroidpolicecom/Usar-preferred-dns-server-android-Tutorial/"
 />
 
 ### Auto-alojado
@@ -61,7 +61,7 @@ Este es un problema conocido de Java:
 
 ### Problema de Clearfix
 
-* Si tienes problemas con usesCleartextTraffic, es porque el plugin sigue las buenas prácticas recomendadas por sonar cloud, en el 90% de los casos funcionará bien, pero con algunos plugins causa problemas
+* Si tienes problemas con usesCleartextTraffic, es porque el Plugin sigue las buenas prácticas recomendadas por sonar cloud, en el 90% de los casos funcionará bien, pero con algunos Plugins causa problemas
 
 Para solucionarlo, agrega en `android/app/src/main/AndroidManifestxml` en la clave `<application>`:
 
@@ -107,7 +107,7 @@ Cuando uses un servidor local para probar actualizaciones, la aplicación pedir�
 
 Cuando se realizan actualizaciones en modo manual, algunos eventos no son fáciles de capturar, por ejemplo, el fallo de actualización se dispara justo antes de que tu código JS se recargue, por lo que no podrás capturarlo
 
-Una alternativa es listar los paquetes y verificar las estadísticas de error para saber si la actualización falló
+Una alternativa es listar los paquetes y verificar las estadísticas de Error para saber si la actualización falló
 
 Necesitamos encontrar una mejor manera de manejar esto en el futuro, pero no es una prioridad, ya que el modo automático es la forma recomendada de hacer actualizaciones
 

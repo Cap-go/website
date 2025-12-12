@@ -6,7 +6,7 @@ sidebar:
   order: 5
 ---
 
-import { Steps } from '@astrojs/starlight/components';
+Importar { Pasos } De '@astrojs/starlight/components';
 
 Las ofertas introductorias te permiten proporcionar a usuarios elegibles un período de prueba gratuito o un precio introductorio con descuento. Después de que concluya el período introductorio, las suscripciones se renuevan automáticamente a precio estándar a menos que se cancelen.
 
@@ -28,7 +28,7 @@ Primero debes [crear una suscripción renovable automática](/docs/plugins/nativ
 
 ## Crear una Oferta Introductoria
 
-<Steps>
+<Pasos>
 
 1. **Acceder a Configuración de Oferta**
 
@@ -53,8 +53,8 @@ Primero debes [crear una suscripción renovable automática](/docs/plugins/nativ
    - **Clientes existentes**: Usuarios que previamente se suscribieron
    - **Determinado por desarrollador**: Lógica de elegibilidad personalizada (no soportada por native-purchases)
 
-   :::caution
-   El plugin native-purchases no soporta la opción de elegibilidad "Determinado por desarrollador". Usa "Nuevos clientes" o "Clientes existentes" en su lugar.
+   :::Precaución
+   El Plugin native-purchases no soporta la opción de elegibilidad "Determinado por desarrollador". Usa "Nuevos clientes" o "Clientes existentes" en su lugar.
    :::
 
    ![Configurar oferta](/native-purchases/android/introductory-offer/configure-offer-details.webp)
@@ -94,7 +94,7 @@ Primero debes [crear una suscripción renovable automática](/docs/plugins/nativ
 
    Haz clic en **Aplicar**, luego **Guardar** para activar la oferta. El botón **Activar** estará disponible una vez guardado.
 
-</Steps>
+</Pasos>
 
 ## Ejemplos de Fases de Oferta
 
@@ -111,9 +111,9 @@ Primero debes [crear una suscripción renovable automática](/docs/plugins/nativ
 - Fase 2: $4.99/mes por 2 meses
 - Luego: $9.99/mes precio estándar
 
-## Usar en tu App
+## Usar en tu Aplicación
 
-El plugin native-purchases maneja automáticamente la elegibilidad y presentación de ofertas introductorias:
+El Plugin native-purchases maneja automáticamente la elegibilidad y presentación de ofertas introductorias:
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -149,7 +149,7 @@ console.log('Transacción de compra introductoria', transaction.transactionId);
 ## Mejores Prácticas
 
 ### Duración de la Oferta
-- **Pruebas gratuitas**: 3-14 días es óptimo para la mayoría de las apps
+- **Pruebas gratuitas**: 3-14 días es óptimo para la mayoría de las Aplicaciones
 - **Períodos con descuento**: 1-3 meses funciona bien para construir hábito
 - **Descuento de precio**: 50-70% del precio regular impulsa conversiones
 
@@ -178,7 +178,7 @@ Prueba diferentes estructuras de oferta:
 **La oferta introductoria no se muestra:**
 - Verifica que la oferta esté activada en Play Console
 - Verifica elegibilidad del usuario (puede haber usado la oferta antes)
-- Asegúrate de que la app esté usando la información más reciente del producto
+- Asegúrate de que la Aplicación esté usando la información más reciente del producto
 
 **Usuarios incorrectos recibiendo oferta:**
 - Revisa configuración de elegibilidad (nuevos vs. clientes existentes)

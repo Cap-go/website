@@ -1,23 +1,23 @@
 ---
 title: Comenzando
 locale: es
-description: Aprende cómo instalar y usar el plugin Speech Recognition para agregar transcripción de voz a tu aplicación Capacitor
+description: Aprende cómo instalar y usar el Plugin Speech Recognition para agregar transcripción de voz a tu aplicación Capacitor
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
+<Pasos>
 1. **Instala el paquete**
-   <PackageManagers pkg="@capgo/capacitor-speech-recognition" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/Capacitor-speech-recognition" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincroniza con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 3. **Configura los permisos de plataforma** (ver abajo)
-</Steps>
+</Pasos>
 
 ## Configuración de Plataforma
 
@@ -34,7 +34,7 @@ Agrega las siguientes claves al archivo `Info.plist` de tu aplicación:
 
 ### Android
 
-El plugin agrega automáticamente el permiso requerido `RECORD_AUDIO` a tu `AndroidManifest.xml`. No se necesita configuración adicional.
+El Plugin agrega automáticamente el permiso requerido `RECORD_AUDIO` a tu `AndroidManifest.xml`. No se necesita configuración adicional.
 
 ## Uso Básico
 
@@ -124,7 +124,7 @@ await SpeechRecognition.stop();
 
 ## Ejemplo Completo
 
-Aquí hay un ejemplo completo mostrando cómo usar el plugin:
+Aquí hay un ejemplo completo mostrando cómo usar el Plugin:
 
 ```typescript
 import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
@@ -232,7 +232,7 @@ const result = await SpeechRecognition.available();
 // Devuelve: { available: boolean }
 ```
 
-### start(options?)
+### start(Opciones?)
 
 Comienza a capturar audio y transcribir el habla.
 
@@ -272,7 +272,7 @@ const result = await SpeechRecognition.getSupportedLanguages();
 
 ### isListening()
 
-Devuelve si el plugin está escuchando activamente el habla.
+Devuelve si el Plugin está escuchando activamente el habla.
 
 ```typescript
 const result = await SpeechRecognition.isListening();

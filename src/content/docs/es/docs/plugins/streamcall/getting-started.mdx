@@ -6,7 +6,7 @@ sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
 
 ## Instalación
 
@@ -125,7 +125,7 @@ StreamCall.addListener('participantLeft', (data) => {
 
 ## Referencia de API
 
-### initialize(options)
+### initialize(Opciones)
 
 ```typescript
 initialize(options: InitializeOptions) => Promise<void>
@@ -137,7 +137,7 @@ Inicializa el Stream Video SDK.
 | ------------- | --------------------------- |
 | **`options`** | `InitializeOptions` |
 
-### createCall(options)
+### createCall(Opciones)
 
 ```typescript
 createCall(options: CreateCallOptions) => Promise<void>
@@ -149,7 +149,7 @@ Crea una nueva videollamada.
 | ------------- | --------------------------- |
 | **`options`** | `CreateCallOptions` |
 
-### joinCall(options)
+### joinCall(Opciones)
 
 ```typescript
 joinCall(options: JoinCallOptions) => Promise<void>
@@ -169,7 +169,7 @@ leaveCall() => Promise<void>
 
 Sal de la llamada actual.
 
-### toggleCamera(options)
+### toggleCamera(Opciones)
 
 ```typescript
 toggleCamera(options: { enabled: boolean }) => Promise<void>
@@ -181,7 +181,7 @@ Habilita o deshabilita la cámara.
 | ------------- | ----------------------------- |
 | **`options`** | `{ enabled: boolean }` |
 
-### toggleMicrophone(options)
+### toggleMicrophone(Opciones)
 
 ```typescript
 toggleMicrophone(options: { enabled: boolean }) => Promise<void>
@@ -201,7 +201,7 @@ switchCamera() => Promise<void>
 
 Cambia entre cámara frontal y trasera.
 
-### setSpeakerphone(options)
+### setSpeakerphone(Opciones)
 
 ```typescript
 setSpeakerphone(options: { enabled: boolean }) => Promise<void>
@@ -213,7 +213,7 @@ Habilita o deshabilita el altavoz.
 | ------------- | ----------------------------- |
 | **`options`** | `{ enabled: boolean }` |
 
-### sendCallInvite(options)
+### sendCallInvite(Opciones)
 
 ```typescript
 sendCallInvite(options: InviteOptions) => Promise<void>
@@ -225,7 +225,7 @@ Envía una invitación de llamada a un usuario.
 | ------------- | ----------------------- |
 | **`options`** | `InviteOptions` |
 
-### acceptCall(options)
+### acceptCall(Opciones)
 
 ```typescript
 acceptCall(options: { callId: string }) => Promise<void>
@@ -237,7 +237,7 @@ Acepta una llamada entrante.
 | ------------- | -------------------------- |
 | **`options`** | `{ callId: string }` |
 
-### rejectCall(options)
+### rejectCall(Opciones)
 
 ```typescript
 rejectCall(options: { callId: string }) => Promise<void>
@@ -266,7 +266,7 @@ Rechaza una llamada entrante.
 | Prop           | Type              | Description                        |
 | -------------- | ----------------- | ---------------------------------- |
 | **`callId`**   | `string` | Identificador único de llamada             |
-| **`callType`** | `string` | Tipo de llamada (ej., 'default', 'audio-only') |
+| **`callType`** | `string` | Tipo de llamada (ej., 'Predeterminado', 'audio-only') |
 | **`members`**  | `string[]` | Array de IDs de usuario para invitar (opcional) |
 
 ### JoinCallOptions
@@ -293,7 +293,7 @@ Rechaza una llamada entrante.
 - `incomingCall` - Llamada entrante recibida
 - `callAccepted` - La llamada fue aceptada
 - `callRejected` - La llamada fue rechazada
-- `error` - Ocurrió un error
+- `error` - Ocurrió un Error
 
 ### Ejemplo de Evento
 
@@ -475,7 +475,7 @@ await videoCall.endCall();
 
 ## Localización
 
-El plugin soporta múltiples idiomas para elementos UI nativos. Configura en tus ajustes específicos de plataforma.
+El Plugin soporta múltiples idiomas para elementos UI nativos. Configura en tus ajustes específicos de plataforma.
 
 ## Casos de Uso
 

@@ -1,18 +1,18 @@
 ---
 title: Comenzando
 locale: es
-description: Aprende cómo instalar y usar el plugin Background Uploader para subidas de archivos confiables en tu app Capacitor.
+description: Aprende cómo instalar y usar el Plugin Background Uploader para subidas de archivos confiables en tu Aplicación Capacitor.
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
+Importar { Code, Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
+<Pasos>
 1. **Instalar el paquete**
-   <PackageManagers pkg="@capgo/capacitor-uploader" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/Capacitor-uploader" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
@@ -35,11 +35,11 @@ import { PackageManagers } from 'starlight-package-managers'
    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
    ```
-</Steps>
+</Pasos>
 
 ## Uso
 
-Importa el plugin y usa sus métodos para subir archivos:
+Importa el Plugin y usa sus métodos para subir archivos:
 
 ```typescript
 import { Uploader } from '@capgo/capacitor-uploader';
@@ -97,7 +97,7 @@ const getActiveUploads = async () => {
 
 ## Referencia API
 
-### startUpload(options)
+### startUpload(Opciones)
 
 Inicia una nueva subida de archivo.
 
@@ -115,7 +115,7 @@ interface UploadOptions {
 }
 ```
 
-### cancelUpload(options)
+### cancelUpload(Opciones)
 
 Cancela una subida en curso.
 
@@ -129,7 +129,7 @@ interface CancelOptions {
 
 Devuelve todas las subidas activas.
 
-### removeUpload(options)
+### removeUpload(Opciones)
 
 Elimina una subida de la cola.
 
@@ -288,7 +288,7 @@ const smartUpload = async () => {
 ### iOS
 - Usa `URLSession` para subidas en segundo plano
 - Requiere capacidad de procesamiento en segundo plano
-- Las subidas continúan cuando la app está suspendida
+- Las subidas continúan cuando la Aplicación está suspendida
 
 ### Android
 - Usa `WorkManager` para subidas confiables

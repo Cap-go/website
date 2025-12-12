@@ -6,7 +6,7 @@ sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
 
 ## Instalación
 
@@ -103,7 +103,7 @@ console.log('Config value:', result.value);
 
 ## Referencia de API
 
-### init(options)
+### init(Opciones)
 
 ```typescript
 init(options: { containerId: string }) => Promise<void>
@@ -115,7 +115,7 @@ Inicializa Google Tag Manager con tu ID de contenedor.
 | ------------- | -------------------------------- |
 | **`options`** | `{ containerId: string }` |
 
-### pushEvent(options)
+### pushEvent(Opciones)
 
 ```typescript
 pushEvent(options: GTMEvent) => Promise<void>
@@ -127,7 +127,7 @@ Envía un evento al dataLayer con parámetros opcionales.
 | ------------- | ----------------- |
 | **`options`** | `GTMEvent` |
 
-### setUserProperty(options)
+### setUserProperty(Opciones)
 
 ```typescript
 setUserProperty(options: { key: string; value: string }) => Promise<void>
@@ -139,7 +139,7 @@ Establece una propiedad de usuario para segmentación y targeting.
 | ------------- | ----------------------------------------- |
 | **`options`** | `{ key: string; value: string }` |
 
-### getVariable(options)
+### getVariable(Opciones)
 
 ```typescript
 getVariable(options: { key: string }) => Promise<{ value: any }>

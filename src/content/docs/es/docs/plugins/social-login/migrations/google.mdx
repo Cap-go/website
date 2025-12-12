@@ -1,19 +1,19 @@
 ---
-title: Guía de Migración de @codetrix-studio/capacitor-google-auth a @capgo/capacitor-social-login
-description: Esta guía describe la transición del antiguo plugin de autenticación de Google al nuevo paquete de inicio de sesión social de Capgo, que unifica múltiples proveedores de autenticación social.
+title: Guía de Migración de @codetrix-studio/Capacitor-google-auth a @Capgo/Capacitor-social-login
+description: Esta guía describe la transición del antiguo Plugin de autenticación de Google al nuevo paquete de inicio de sesión social de Capgo, que unifica múltiples proveedores de autenticación social.
 sidebar:
   order: 3
 locale: es
 ---
-import { Steps } from '@astrojs/starlight/components';
+Importar { Pasos } De '@astrojs/starlight/components';
 
 ## Descripción General
 
-Esta guía proporciona pasos completos para migrar de `@codetrix-studio/capacitor-google-auth` a `@capgo/capacitor-social-login`, asegurando una transición suave y una experiencia de autenticación mejorada. El nuevo plugin unifica múltiples proveedores de autenticación social bajo una API única y consistente.
+Esta guía proporciona pasos completos para migrar de `@codetrix-studio/capacitor-google-auth` a `@capgo/capacitor-social-login`, asegurando una transición suave y una experiencia de autenticación mejorada. El nuevo Plugin unifica múltiples proveedores de autenticación social bajo una API única y consistente.
 
 ## Instalación
 
-<Steps>
+<Pasos>
 1. Elimina el paquete antiguo:
    ```bash
    npm uninstall @codetrix-studio/capacitor-google-auth
@@ -24,12 +24,12 @@ Esta guía proporciona pasos completos para migrar de `@codetrix-studio/capacito
    npm install @capgo/capacitor-social-login
    npx cap sync
    ```
-</Steps>
+</Pasos>
 
 ## Cambios Importantes en la Configuración de Google Auth
 
 ### Requisito del ID de Cliente Web
-**Cambio Crítico**: El plugin actualizado requiere usar un ID de Cliente Web en todas las plataformas.
+**Cambio Crítico**: El Plugin actualizado requiere usar un ID de Cliente Web en todas las plataformas.
 
 Necesitarás:
 1. Crear un ID de Cliente Web en Google Cloud Console si no tienes uno ([Cómo obtener las credenciales](/docs/plugins/social-login/google/general/))
@@ -123,7 +123,7 @@ El método de inicio de sesión cambia de `GoogleAuth.signIn()` a `SocialLogin.l
 
 1. No se necesitan cambios importantes en AppDelegate.swift ([Guía de configuración de iOS](/docs/plugins/social-login/google/ios/))
 
-2. Actualiza tu configuración en `capacitor.config.json`, no lo usamos en el nuevo plugin:
+2. Actualiza tu configuración en `capacitor.config.json`, no lo usamos en el nuevo Plugin:
 ```diff
 {
   "plugins": {

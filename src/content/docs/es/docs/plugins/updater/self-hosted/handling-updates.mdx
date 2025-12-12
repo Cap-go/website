@@ -1,12 +1,12 @@
 ---
 title: "Endpoint API de Actualización"
 locale: es
-description: "Cómo construir el endpoint API de tu servidor de actualización para responder a las solicitudes del plugin de Capgo con información apropiada del bundle y checksums"
+description: "Cómo construir el endpoint API de tu servidor de actualización para responder a las solicitudes del Plugin de Capgo con información apropiada del Paquete y checksums"
 sidebar:
   order: 6
 ---
 
-Aquí hay un ejemplo de código en JavaScript para enviar una actualización al plugin
+Aquí hay un ejemplo de código en JavaScript para enviar una actualización al Plugin
 
 ```typescript
 interface AppInfos {
@@ -66,7 +66,7 @@ export const handler: Handler = async (event) => {
 
 ## Formato de Respuesta
 
-Para **bundles no encriptados**, tu endpoint debe devolver:
+Para **Paquetes no encriptados**, tu endpoint debe devolver:
 
 ```json
 {
@@ -76,7 +76,7 @@ Para **bundles no encriptados**, tu endpoint debe devolver:
 }
 ```
 
-Para **bundles encriptados**, también necesitas incluir la clave de sesión:
+Para **Paquetes encriptados**, también necesitas incluir la clave de sesión:
 
 ```json
 {
@@ -87,7 +87,7 @@ Para **bundles encriptados**, también necesitas incluir la clave de sesión:
 }
 ```
 
-Y si no hay actualización o error, agrega la clave `message` y opcionalmente un `error`:
+Y si no hay actualización o Error, agrega la clave `message` y opcionalmente un `error`:
 
 ```json
 {
@@ -99,13 +99,13 @@ Y si no hay actualización o error, agrega la clave `message` y opcionalmente un
 
 ## Descripciones de Campos
 
-- **`checksum`**: Hash SHA256 de tu archivo zip del bundle para verificación de integridad
-- **`session_key`**: Requerido solo para bundles encriptados - este es el `ivSessionKey` devuelto por el comando encrypt
+- **`checksum`**: Hash SHA256 de tu archivo zip del Paquete para verificación de integridad
+- **`session_key`**: Requerido solo para Paquetes encriptados - este es el `ivSessionKey` devuelto por el comando encrypt
 - **`version`**: Identificador de versión en formato semver
-- **`url`**: URL HTTPS donde el bundle puede ser descargado
+- **`url`**: URL HTTPS donde el Paquete puede ser descargado
 
-## Creación de Bundle
+## Creación de Paquete
 
-Para aprender cómo crear bundles compatibles y generar checksums, consulta la [documentación de Actualización Automática](/docs/plugin/self-hosted/auto-update/#generating-bundle-checksum).
+Para aprender cómo crear Paquetes compatibles y generar checksums, consulta la [documentación de Actualización Automática](/docs/plugin/self-hosted/auto-update/#generating-bundle-checksum).
 
-Para bundles encriptados, consulta la [documentación de Bundles Encriptados](/docs/plugin/self-hosted/encrypted-bundles/) que explica el flujo de trabajo completo de encriptación.
+Para Paquetes encriptados, consulta la [documentación de Bundles Encriptados](/docs/plugin/self-hosted/encrypted-bundles/) que explica el flujo de trabajo completo de encriptación.

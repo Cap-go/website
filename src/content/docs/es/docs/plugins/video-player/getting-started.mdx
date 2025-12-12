@@ -1,21 +1,21 @@
 ---
 title: Comenzando
 locale: es
-description: Aprende cómo integrar reproducción de video nativo en tu app Capacitor.
+description: Aprende cómo integrar reproducción de video nativo en tu Aplicación Capacitor.
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
+<Pasos>
 1. **Instalar el paquete**
-   <PackageManagers pkg="@capgo/capacitor-video-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/Capacitor-video-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+</Pasos>
 
 ## Uso Básico
 
@@ -59,7 +59,7 @@ await CapacitorVideoPlayer.setVolume({
 
 ## Referencia API
 
-### initPlayer(options)
+### initPlayer(Opciones)
 
 Inicializa una instancia del reproductor de video.
 
@@ -78,7 +78,7 @@ await CapacitorVideoPlayer.initPlayer({
 });
 ```
 
-### play(options)
+### play(Opciones)
 
 Reproduce el video.
 
@@ -86,7 +86,7 @@ Reproduce el video.
 await CapacitorVideoPlayer.play({ playerId: 'player1' });
 ```
 
-### pause(options)
+### pause(Opciones)
 
 Pausa el video.
 
@@ -94,7 +94,7 @@ Pausa el video.
 await CapacitorVideoPlayer.pause({ playerId: 'player1' });
 ```
 
-### getDuration(options)
+### getDuration(Opciones)
 
 Obtiene la duración del video en segundos.
 
@@ -103,7 +103,7 @@ const { value } = await CapacitorVideoPlayer.getDuration({ playerId: 'player1' }
 console.log('Duration:', value, 'seconds');
 ```
 
-### getCurrentTime(options)
+### getCurrentTime(Opciones)
 
 Obtiene la posición de reproducción actual en segundos.
 
@@ -111,7 +111,7 @@ Obtiene la posición de reproducción actual en segundos.
 const { value } = await CapacitorVideoPlayer.getCurrentTime({ playerId: 'player1' });
 ```
 
-### setCurrentTime(options)
+### setCurrentTime(Opciones)
 
 Busca un tiempo específico.
 
@@ -122,7 +122,7 @@ await CapacitorVideoPlayer.setCurrentTime({
 });
 ```
 
-### setVolume(options)
+### setVolume(Opciones)
 
 Establece el volumen (0.0 a 1.0).
 
@@ -133,7 +133,7 @@ await CapacitorVideoPlayer.setVolume({
 });
 ```
 
-### getVolume(options)
+### getVolume(Opciones)
 
 Obtiene el volumen actual.
 
@@ -141,7 +141,7 @@ Obtiene el volumen actual.
 const { value } = await CapacitorVideoPlayer.getVolume({ playerId: 'player1' });
 ```
 
-### setMuted(options)
+### setMuted(Opciones)
 
 Silencia o activa el sonido del video.
 
@@ -152,7 +152,7 @@ await CapacitorVideoPlayer.setMuted({
 });
 ```
 
-### setRate(options)
+### setRate(Opciones)
 
 Establece la velocidad de reproducción.
 

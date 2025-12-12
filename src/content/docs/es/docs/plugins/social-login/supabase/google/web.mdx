@@ -1,7 +1,7 @@
 ---
 title: Inicio de Sesión de Google con Supabase en Web
 locale: es
-description: Aprende cómo configurar el inicio de sesión de Google con Supabase Authentication en Web usando el plugin Capacitor Social Login.
+description: Aprende cómo configurar el inicio de sesión de Google con Supabase Authentication en Web usando el Plugin Capacitor Inicio de sesión social.
 sidebar:
     order: 4
 ---
@@ -34,8 +34,8 @@ if (result.success) {
 
 ## Crítico: Manejo de Redirección
 
-:::warning[Crítico: Manejo de Redirección]
-Cuando uses el inicio de sesión de Google en web, **DEBES** llamar cualquier función del plugin cuando ocurra la redirección para inicializar el plugin y así pueda manejar la redirección y cerrar la ventana emergente. Puedes llamar ya sea `isLoggedIn()` O `initialize()` - ambas activarán el manejo de redirección.
+:::Advertencia[Crítico: Manejo de Redirección]
+Cuando uses el inicio de sesión de Google en web, **DEBES** llamar cualquier función del Plugin cuando ocurra la redirección para inicializar el Plugin y así pueda manejar la redirección y cerrar la ventana emergente. Puedes llamar ya sea `isLoggedIn()` O `initialize()` - ambas activarán el manejo de redirección.
 
 Esto es esencial para que el flujo de OAuth con ventana emergente funcione correctamente.
 :::
@@ -86,7 +86,7 @@ También consulta:
 
 ### Manejo de Redirección
 
-Cuando uses el inicio de sesión de Google en web, **DEBES** llamar cualquier función del plugin cuando ocurra la redirección para inicializar el plugin y así pueda manejar la redirección y cerrar la ventana emergente. Puedes llamar ya sea `isLoggedIn()` O `initialize()` - ambas activarán el manejo de redirección.
+Cuando uses el inicio de sesión de Google en web, **DEBES** llamar cualquier función del Plugin cuando ocurra la redirección para inicializar el Plugin y así pueda manejar la redirección y cerrar la ventana emergente. Puedes llamar ya sea `isLoggedIn()` O `initialize()` - ambas activarán el manejo de redirección.
 
 Esto es esencial para que el flujo de OAuth con ventana emergente funcione correctamente. Sin esto, la ventana emergente no se cerrará después de la autenticación.
 
@@ -103,7 +103,7 @@ La implementación del nonce sigue el patrón de la [documentación de React Nat
 La implementación incluye lógica de reintento automático:
 - Si la validación de JWT falla en el primer intento, cierra sesión y reintenta una vez
 - Esto maneja casos donde los tokens en caché pueden tener nonces incorrectos
-- Si el reintento también falla, se devuelve un error
+- Si el reintento también falla, se devuelve un Error
 
 ## Solución de Problemas
 
@@ -112,6 +112,6 @@ Si la autenticación falla:
 - **La redirección no funciona**: Asegúrate de estar llamando `isLoggedIn()` al montar el componente (ver ejemplo arriba)
 - **Audiencia inválida**: Verifica que tus IDs de cliente de Google coincidan tanto en la consola de Google Cloud como en Supabase
 - **URLs de redirección autorizadas**: Verifica que las URLs de redirección autorizadas estén configuradas tanto en la consola de Google Cloud como en Supabase
-- **Discrepancia de nonce**: Revisa los logs de la consola - la función reintentará automáticamente, pero puedes cerrar sesión manualmente primero si es necesario
+- **Discrepancia de nonce**: Revisa los Registros de la consola - la función reintentará automáticamente, pero puedes cerrar sesión manualmente primero si es necesario
 - **La validación del token falla**: Asegúrate de estar usando `mode: 'online'` en la llamada de inicialización para obtener un idToken
 - Revisa el [código de la aplicación de ejemplo](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) como referencia

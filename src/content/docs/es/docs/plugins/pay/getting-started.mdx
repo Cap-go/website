@@ -1,21 +1,21 @@
 ---
 title: Comenzando
 locale: es
-description: Configura Apple Pay y Google Pay para tu checkout Capacitor con el plugin Pay.
+description: Configura Apple Pay y Google Pay para tu checkout Capacitor con el Plugin Pay.
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
-1. **Instalar el plugin**
-   <PackageManagers pkg="@capgo/capacitor-pay" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+<Pasos>
+1. **Instalar el Plugin**
+   <PackageManagers pkg="@Capgo/Capacitor-pay" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+</Pasos>
 
 ## Requisitos previos nativos
 
@@ -31,7 +31,7 @@ import { PackageManagers } from 'starlight-package-managers'
   3. Si planeas usar tarjetas de producción, cambia `environment` a `PRODUCTION` y registra tarjetas de prueba para QA.
   4. Confirma que los servicios de Google Play estén disponibles en el dispositivo (requerido por Google Pay).
 
-Consulta las guías bajo `docs/` en el repositorio del plugin para capturas de pantalla paso a paso.
+Consulta las guías bajo `docs/` en el repositorio del Plugin para capturas de pantalla paso a paso.
 
 ## Verificar disponibilidad
 

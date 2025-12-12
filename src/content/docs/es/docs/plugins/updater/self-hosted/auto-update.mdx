@@ -1,38 +1,30 @@
 ---
 title: "Actualización Automática"
 locale: es
-description: "Cómo usar el endpoint de actualización de Capgo con el plugin de actualización automática en modo auto-hospedado, para qué se utilizan y qué esperar"
+description: "Cómo usar el endpoint de actualización de Capgo con el Plugin de actualización automática en modo auto-hospedado, para qué se utilizan y qué esperar"
 sidebar:
   order: 4
 ---
 
-import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+Importar { LinkCard, CardGrid } De '@astrojs/starlight/components';
 
 Esta documentación explicará cómo ejecutar tu servidor de actualización automática.
 
-## Servir tu bundle
-Asegúrate de que tu bundle se sirva a través de HTTPS, y que el servidor tenga los encabezados CORS correctos para permitir que la aplicación descargue la actualización.
+## Servir tu Paquete
+Asegúrate de que tu Paquete se sirva a través de HTTPS, y que el servidor tenga los encabezados CORS correctos para permitir que la aplicación descargue la actualización.
 por ejemplo, ```https://myserver.com/app/updates/updates.json```
 
 
-Si no estás familiarizado con servir un bundle, te recomendamos que pruebes Capgo Cloud o veas un ejemplo aquí:
+Si no estás familiarizado con servir un Paquete, te recomendamos que pruebes Capgo Cloud o veas un ejemplo aquí:
 <LinkCard
-	title="Servir un Bundle"
-	href="/docs/self-hosted/auto-update/update-endpoint"
+	title="Servir un Paquete"
+	href="/docs/self-hosted/auto-Actualizar/Actualizar-endpoint"
 />
 
 ## Configuración
 Agrega un ``updateUrl`` a tu ``capacitor.config.json``.
 
-```json
-{
-	"plugins": {
-		"CapacitorUpdater": {
-			"updateUrl": "https://myserver.com/app/updates/updates.json",
-		}
-	}
-}
-```
+__CODEBLOCK_1__
 :::caution
 Cuando estés enviando una actualización auto-hospedada, ten en cuenta que no puedes usar un endpoint "HTTP" ya que va en contra de las políticas de seguridad de las aplicaciones Android, para propósitos de prueba puedes [permitirlo](https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-not-permitted).
 :::
@@ -41,31 +33,11 @@ Cuando estés enviando una actualización auto-hospedada, ten en cuenta que no p
 
 El plugin hará una llamada POST a tu API cada vez que la aplicación se abra, con este body:
 
-```typescript
-interface AppInfos {
-    "platform": "ios" | "android",
-    "device_id": "UUID_of_device_unique_by_install",
-    "app_id": "APPID_FROM_CAPACITOR_CONFIG",
-    "custom_id": "your_custom_id_set_on_runtime",
-    "plugin_version": "PLUGIN_VERSION",
-    "version_build": "VERSION_NUMBER_FROM_NATIVE_CODE",
-    "version_code": "VERSION_CODE_FROM_NATIVE_CODE",
-    "version_name": "LAST_DOWNLOADER_VERSION" | "builtin"
-    "version_os": "VERSION_OF_SYSTEM_OS",
-    "is_emulator": boolean,
-    "is_prod": boolean,
-}
-```
+__CODEBLOCK_2__
 
 La API del servidor debe responder, en JSON, al plugin capacitor-updater. Con estos datos si es necesaria una actualización:
 
-```json
-{
-"version": "1.2.3",
-"url": "https://myserver.com/app/updates/my-new-app-2.0.0.zip",
-"checksum": "sha256_checksum_of_bundle"
-}
-```
+__CODEBLOCK_3__
 
 En modo de actualización automática, el servidor debe comparar las versiones y devolver la correcta, si la clave URL está presente, el plugin inicia el proceso de descarga.
 
@@ -78,9 +50,7 @@ El zip debe tener `index.html` como archivo en la raíz, o solo una carpeta en l
 
 Puedes usar el comando del CLI para comprimir tu bundle:
 
-```bash title="Crear un bundle con tus archivos para servir desde tu servidor"
-npx @capgo/cli bundle zip --path [/path/to/my/bundle]
-```
+__CODEBLOCK_4__
 
 ## Generación del Checksum del Bundle
 
@@ -88,9 +58,7 @@ npx @capgo/cli bundle zip --path [/path/to/my/bundle]
 
 Para generar el checksum de tu bundle, usa el comando zip del CLI de Capgo con la bandera `--json`:
 
-```bash title="Crear bundle con información de checksum"
-npx @capgo/cli bundle zip [appId] --json
-```
+__CODEBLOCK_5__
 
 Este comando:
 - Creará un archivo zip correctamente formateado compatible con el plugin de Capgo
@@ -98,12 +66,6 @@ Este comando:
 - Mostrará la información del bundle en formato JSON
 
 Ejemplo de salida:
-```json
-{
-  "version": "1.2.3",
-  "checksum": "a1b2c3d4e5f6789...",
-  "size": 1234567
-}
-```
+__CODEBLOCK_6__
 
-Usa el valor `checksum` de esta salida en la respuesta de tu API para asegurar que el plugin pueda verificar la integridad del bundle antes de la instalación.
+Usa el valor `checksum` de esta salida en la respuesta de tu API para asegurar que el Plugin pueda verificar la integridad del Paquete antes de la instalación.

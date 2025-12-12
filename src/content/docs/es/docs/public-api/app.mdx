@@ -14,16 +14,16 @@ Las aplicaciones son las entidades fundamentales en Capgo. Cada aplicación repr
 ## Comprendiendo las Aplicaciones
 
 Una aplicación en Capgo representa su aplicación Capacitor e incluye:
-- **App ID**: Identificador único para su aplicación
+- **Aplicación ID**: Identificador único para su aplicación
 - **Name**: Nombre legible para humanos de su aplicación
 - **Icons**: Identificadores visuales para su aplicación en el panel
-- **Configuration**: Configuraciones que controlan cómo se entregan las actualizaciones
+- **Configuración**: Configuraciones que controlan cómo se entregan las actualizaciones
 - **Ownership**: Información de acceso de organización y usuario
-- **Usage Statistics**: Métricas sobre instalaciones y actualizaciones
+- **Uso Estadísticas**: Métricas sobre instalaciones y actualizaciones
 
 ## Mejores Prácticas
 
-1. **Convención de Nomenclatura**: Use nombres claros e identificables para sus aplicaciones
+1. **Convención de Nomenclatura**: Usar nombres claros e identificables para sus aplicaciones
 2. **Seguridad**: Proteja sus claves API y credenciales de acceso
 3. **Organización**: Agrupe aplicaciones relacionadas bajo la misma organización
 4. **Monitoreo**: Revise regularmente las estadísticas y el rendimiento de las aplicaciones
@@ -43,7 +43,7 @@ Recuperar información sobre sus aplicaciones.
 - `org_id`: Opcional. Filtrar aplicaciones por ID de organización. Si no se proporciona, devuelve aplicaciones de todas las organizaciones a las que el usuario tiene acceso
 
 Para obtener una aplicación específica:
-- Use el ID de la aplicación en la ruta URL: `https://api.capgo.app/app/:app_id`
+- Usar el ID de la aplicación en la ruta URL: `https://api.capgo.app/app/:app_id`
 
 #### Tipo de Respuesta
 
@@ -198,11 +198,11 @@ curl -X PUT \
 }
 ```
 
-### DELETE
+### Eliminar
 
 `https://api.capgo.app/app/:app_id`
 
-Eliminar una aplicación y todos los recursos asociados. El ID de la aplicación se especifica en la ruta URL. Use con extrema precaución ya que esta acción no se puede deshacer.
+Eliminar una aplicación y todos los recursos asociados. El ID de la aplicación se especifica en la ruta URL. Usar con extrema precaución ya que esta acción no se puede deshacer.
 
 #### Ejemplo de Solicitud
 
@@ -222,7 +222,7 @@ curl -X DELETE \
 
 ## Manejo de Errores
 
-Escenarios de error comunes y sus respuestas:
+Escenarios de Error comunes y sus respuestas:
 
 ```json
 // Aplicación no encontrada

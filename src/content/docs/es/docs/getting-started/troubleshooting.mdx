@@ -8,7 +8,7 @@ prev: false
 locale: es
 ---
 
-import { Card } from '@astrojs/starlight/components';
+Importar { Card } De '@astrojs/starlight/components';
 
 Aquí hay algunos problemas comunes que puedes encontrar mientras usas Capgo y cómo resolverlos.
 
@@ -28,7 +28,7 @@ Aquí hay algunos problemas comunes que puedes encontrar mientras usas Capgo y c
 
 ### Fallos en la Carga
 
-Si tu carga de bundle falla, verifica dos veces:
+Si tu carga de Paquete falla, verifica dos veces:
 - Tu ID de aplicación en `capacitor.config.ts` coincide con tu aplicación en el panel de Capgo
 - Estás ejecutando el comando de carga desde la raíz de tu proyecto Capacitor
 - Tus activos web están compilados y actualizados
@@ -37,7 +37,7 @@ Si tu carga de bundle falla, verifica dos veces:
 
 La CLI de Capgo proporciona algunas banderas adicionales para ayudar con problemas comunes de carga:
 
-- `--tus`: Usa el [protocolo de carga reanudable tus](https://tus.io/) para cargas más confiables de bundles grandes o en conexiones de red deficientes. Si tu bundle es mayor a 10MB o estás en una conexión irregular, considera usar `--tus`:
+- `--tus`: Usa el [protocolo de carga reanudable tus](https://tus.io/) para cargas más confiables de Paquetes grandes o en conexiones de red deficientes. Si tu Paquete es mayor a 10MB o estás en una conexión irregular, considera usar `--tus`:
   ```shell
   npx @capgo/cli@latest bundle upload --tus
   ```
@@ -61,18 +61,18 @@ Si encuentras problemas con las actualizaciones en vivo, el comando de depuraci�
    npx @capgo/cli@latest app debug
    ```
 
-2. Lanza tu aplicación en un dispositivo o emulador y realiza la acción que debería activar una actualización (por ejemplo, reabrir la aplicación después de subir un nuevo bundle).
+2. Lanza tu aplicación en un dispositivo o emulador y realiza la acción que debería activar una actualización (por ejemplo, reabrir la aplicación después de subir un nuevo Paquete).
 
 3. Observa la salida del comando de depuración. Registrará información sobre el proceso de actualización, incluyendo:
    - Cuándo la aplicación verifica una actualización
    - Si se encuentra una actualización y qué versión es
    - Progreso de descarga e instalación para la actualización
-   - Cualquier error que ocurra durante el proceso de actualización
+   - Cualquier Error que ocurra durante el proceso de actualización
 
 4. Usa los registros de depuración para identificar dónde está ocurriendo el problema. Por ejemplo:
-   - Si no se encuentra ninguna actualización, verifica dos veces que tu bundle se subió exitosamente y que la aplicación está configurada para usar el canal correcto.
+   - Si no se encuentra ninguna actualización, verifica dos veces que tu Paquete se subió exitosamente y que la aplicación está configurada para usar el canal correcto.
    - Si la actualización se descarga pero no se instala, asegúrate de haber llamado a `CapacitorUpdater.notifyAppReady()` y que la aplicación se cerró completamente y se volvió a abrir.
-   - Si ves un mensaje de error, busca ese error específico en los documentos de Capgo o contacta al soporte para obtener ayuda.
+   - Si ves un mensaje de Error, busca ese Error específico en los documentos de Capgo o contacta al soporte para obtener ayuda.
 
 El comando de depuración es especialmente útil para identificar problemas con el proceso de descarga e instalación de actualizaciones. Si los registros muestran que se encontró la versión de actualización esperada pero no se aplicó finalmente, enfoca tu solución de problemas en los pasos después de la descarga.
 
@@ -96,12 +96,12 @@ El SDK de Capgo registrará eventos clave durante el proceso de actualización, 
 - Si se encuentra una actualización y qué versión es
 - Cuándo la descarga de actualización comienza y se completa
 - Cuándo se activa la instalación de actualización
-- Cualquier error que ocurra durante los pasos de actualización nativos
+- Cualquier Error que ocurra durante los pasos de actualización nativos
 
 Problemas comunes específicos de Android que podrías ver en los registros incluyen:
 - Problemas de conectividad de red que impiden la descarga de la actualización
-- Errores de permisos de archivo al guardar o leer el bundle de actualización
-- Falta de espacio de almacenamiento para el bundle de actualización
+- Errores de permisos de archivo al guardar o leer el Paquete de actualización
+- Falta de espacio de almacenamiento para el Paquete de actualización
 - Fallo al reiniciar la aplicación después de instalar la actualización
 
 #### Registros de iOS
@@ -109,7 +109,7 @@ Problemas comunes específicos de Android que podrías ver en los registros incl
 Para acceder a los registros de iOS:
 
 1. Conecta tu dispositivo o inicia tu simulador
-2. Abre Xcode y ve a "Window > Devices and Simulators"
+2. Abre Xcode y ve a "Window > Dispositivos and Simulators"
 3. Selecciona tu dispositivo y haz clic en "Open Console"
 4. En la salida de la consola, busca cualquier línea que incluya `Capgo` para encontrar los registros del SDK
 
@@ -119,13 +119,13 @@ Similar a Android, el SDK de Capgo registrará eventos clave del lado de iOS:
 - Inicio y resultado de verificación de actualización
 - Inicio, progreso y finalización de descarga
 - Activación y resultado de instalación
-- Cualquier error durante el proceso de actualización nativo
+- Cualquier Error durante el proceso de actualización nativo
 
 Problemas específicos de iOS que podrías identificar en los registros incluyen:
 - Problemas de certificado SSL al descargar la actualización
 - Seguridad de transporte de aplicaciones bloqueando la descarga de actualización
-- Espacio de almacenamiento insuficiente para el bundle de actualización
-- Fallo al extraer o aplicar correctamente el bundle de actualización
+- Espacio de almacenamiento insuficiente para el Paquete de actualización
+- Fallo al extraer o aplicar correctamente el Paquete de actualización
 
 En ambas plataformas, los registros nativos proporcionan una vista de nivel inferior del proceso de actualización, con más detalles sobre la implementación nativa. Son especialmente útiles para identificar problemas que ocurren fuera de la capa JavaScript de Capgo.
 
@@ -133,11 +133,11 @@ Al solucionar un problema complicado de actualización en vivo, es una buena ide
 
 ### Actualizaciones que no se aplican
 
-Si has subido un bundle pero no ves los cambios en tu dispositivo:
+Si has subido un Paquete pero no ves los cambios en tu dispositivo:
 - Asegúrate de haber llamado a `CapacitorUpdater.notifyAppReady()` en el código de tu aplicación como se muestra en el [inicio rápido](/docs/getting-started/quickstart)
 - Verifica que tu dispositivo esté conectado a internet y que los registros de depuración de Capgo muestren que la actualización se descargó
 - Intenta cerrar completamente y volver a abrir la aplicación, ya que las actualizaciones solo se aplican en un lanzamiento nuevo
-- Busca cualquier error en los registros nativos que pueda indicar un problema al aplicar la actualización
+- Busca cualquier Error en los registros nativos que pueda indicar un problema al aplicar la actualización
 
 Consulta la guía de [implementación de actualizaciones en vivo](/docs/getting-started/deploy) para más detalles sobre el proceso de actualización. Si aún estás atascado, usa el comando `npx @capgo/cli@latest app debug` y los registros nativos para obtener más visibilidad sobre lo que está sucediendo.
 

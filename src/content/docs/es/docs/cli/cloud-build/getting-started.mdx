@@ -1,14 +1,14 @@
 ---
 title: Comenzar
-description: Crea tu primera compilación nativa con Capgo Cloud Build
+description: Crea tu primera compilación nativa con Capgo Construcción en la nube
 locale: es
 sidebar:
   order: 1
 ---
 
-import { Steps, Card, CardGrid } from '@astrojs/starlight/components';
+Importar { Pasos, Card, CardGrid } De '@astrojs/starlight/components';
 
-Comienza con Capgo Cloud Build y crea tu primera compilación nativa iOS o Android en minutos.
+Comienza con Capgo Construcción en la nube y crea tu primera compilación nativa iOS o Android en minutos.
 
 ## Lo Que Necesitarás
 
@@ -23,7 +23,7 @@ Antes de comenzar, asegúrate de tener:
 ## Antes de Tu Primera Compilación
 
 <CardGrid>
-  <Card title="⚠️ Configura las Credenciales Primero" icon="warning">
+  <Card title="⚠️ Configura las Credenciales Primero" icon="Advertencia">
     **Requerido antes de compilar:** Debes configurar tus credenciales de compilación (certificados para iOS, keystores para Android).
 
     [Configurar Credenciales →](/docs/cli/cloud-build/credentials/)
@@ -32,7 +32,7 @@ Antes de comenzar, asegúrate de tener:
 
 ## Inicio Rápido
 
-<Steps>
+<Pasos>
 
 1. **Configurar Credenciales de Compilación**
 
@@ -87,14 +87,14 @@ Antes de comenzar, asegúrate de tener:
    npx @capgo/cli@latest login
    ```
 
-   O configura la variable de entorno:
+   O configura la Variable de entorno:
    ```bash
    export CAPGO_TOKEN=tu_clave_api_aquí
    ```
 
 4. **Ejecutar Tu Primera Compilación**
 
-   Comienza con una compilación de debug de Android (la más rápida para probar):
+   Comienza con una compilación de Depuración de Android (la más rápida para probar):
 
    ```bash
    npx @capgo/cli@latest build com.example.app \
@@ -121,9 +121,9 @@ Antes de comenzar, asegúrate de tener:
 
    - Tiempo de compilación
    - Estado de éxito/fallo
-   - Aplicación enviada a App Store/Play Store (si las credenciales están configuradas)
+   - Aplicación enviada a Aplicación Store/Play Store (si las credenciales están configuradas)
 
-</Steps>
+</Pasos>
 
 ## Entendiendo el Proceso de Compilación
 
@@ -170,7 +170,7 @@ Las compilaciones iOS requieren certificados de firma y perfiles de aprovisionam
 
 ## Qué se Compila
 
-**Importante:** Capgo Cloud Build solo compila las **partes nativas** de tu aplicación (código nativo iOS y Android).
+**Importante:** Capgo Construcción en la nube solo compila las **partes nativas** de tu aplicación (código nativo iOS y Android).
 
 Tú eres responsable de:
 - Compilar tus recursos web (`npm run build`)
@@ -245,4 +245,4 @@ Ahora que has creado tu primera compilación:
 
 - Consulta la [guía de solución de problemas](/docs/cli/cloud-build/troubleshooting/)
 - Únete a nuestra [comunidad Discord](https://discord.com/invite/VnYRvBfgA6)
-- Envía un correo a soporte en support@capgo.app
+- Envía un correo a soporte en support@Capgo.Aplicación

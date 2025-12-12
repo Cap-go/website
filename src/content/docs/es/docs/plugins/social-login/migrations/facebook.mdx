@@ -1,19 +1,19 @@
 ---
-title: Guía de Migración de @capacitor-community/facebook-login a @capgo/capacitor-social-login
-description: Esta guía detallada proporciona instrucciones paso a paso para la transición del plugin @capacitor-community/facebook-login al plugin @capgo/capacitor-social-login, asegurando un proceso de migración fluido con funciones mejoradas.
+title: Guía de Migración de @Capacitor-community/facebook-login a @Capgo/Capacitor-social-login
+description: Esta guía detallada proporciona instrucciones paso a paso para la transición del Plugin @Capacitor-community/facebook-login al Plugin @Capgo/Capacitor-social-login, asegurando un proceso de migración fluido con funciones mejoradas.
 sidebar:
   order: 2
 locale: es
 ---
-import { Steps } from '@astrojs/starlight/components';
+Importar { Pasos } De '@astrojs/starlight/components';
 
 ## Descripción General
 
-Esta guía proporciona instrucciones completas para migrar de `@capacitor-community/facebook-login` a `@capgo/capacitor-social-login`. El nuevo plugin moderniza la autenticación de Facebook con una API unificada que admite múltiples proveedores sociales, soporte mejorado de TypeScript y capacidades mejoradas.
+Esta guía proporciona instrucciones completas para migrar de `@capacitor-community/facebook-login` a `@capgo/capacitor-social-login`. El nuevo Plugin moderniza la autenticación de Facebook con una API unificada que admite múltiples proveedores sociales, soporte mejorado de TypeScript y capacidades mejoradas.
 
 ## Instalación
 
-<Steps>
+<Pasos>
 1. Elimina el paquete antiguo:
    ```bash
    npm uninstall @capacitor-community/facebook-login
@@ -24,7 +24,7 @@ Esta guía proporciona instrucciones completas para migrar de `@capacitor-commun
    npm install @capgo/capacitor-social-login
    npx cap sync
    ```
-</Steps>
+</Pasos>
 
 ## Cambios en el Código
 
@@ -218,11 +218,11 @@ Resumen de cambios disruptivos al migrar:
 2. **La estructura del objeto de respuesta ha cambiado significativamente** - Nuevo formato de resultado anidado con datos de perfil mejorados
 3. **El token de cliente ahora es requerido para Android** - Se necesita configuración adicional
 4. **Diferentes nombres de métodos y estructuras de parámetros** - Enfoque basado en proveedores
-5. **El manejo de errores y los tipos de errores han cambiado** - Información de error más detallada
+5. **El manejo de errores y los tipos de errores han cambiado** - Información de Error más detallada
 
 ## Ventajas Clave
 
-El nuevo plugin proporciona:
+El nuevo Plugin proporciona:
 
 - **API Unificada** en múltiples proveedores sociales (Google, Apple, Facebook)
 - **Soporte mejorado de TypeScript** con mejores definiciones de tipos

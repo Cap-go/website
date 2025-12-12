@@ -1,14 +1,14 @@
 ---
 title: Solución de Problemas
-description: Problemas comunes y soluciones para Capgo Cloud Build
+description: Problemas comunes y soluciones para Capgo Construcción en la nube
 locale: es
 sidebar:
   order: 4
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+Importar { Aside } De '@astrojs/starlight/components';
 
-Soluciones a problemas comunes al compilar aplicaciones nativas con Capgo Cloud Build.
+Soluciones a problemas comunes al compilar aplicaciones nativas con Capgo Construcción en la nube.
 
 ## Fallos de Compilación
 
@@ -35,9 +35,9 @@ Soluciones a problemas comunes al compilar aplicaciones nativas con Capgo Cloud 
 
 3. **Verifica la expiración de la URL de subida**
    - Las URLs de subida expiran después de 1 hora
-   - Si obtienes un error de URL expirada, vuelve a ejecutar el comando de compilación
+   - Si obtienes un Error de URL expirada, vuelve a ejecutar el comando de compilación
 
-<Aside type="tip">
+<Aside type="Consejo">
 Los proyectos grandes (>200MB) pueden alcanzar los límites de tiempo de espera. Contacta soporte para opciones empresariales.
 </Aside>
 
@@ -75,7 +75,7 @@ Los proyectos grandes (>200MB) pueden alcanzar los límites de tiempo de espera.
 ### "Clave API inválida" o "No autorizado"
 
 **Síntomas:**
-- La compilación falla inmediatamente con error de autenticación
+- La compilación falla inmediatamente con Error de autenticación
 - Errores 401 o 403
 
 **Soluciones:**
@@ -107,7 +107,7 @@ Los proyectos grandes (>200MB) pueden alcanzar los límites de tiempo de espera.
 ### "Aplicación no encontrada" o "Sin permiso para esta aplicación"
 
 **Síntomas:**
-- La autenticación funciona pero hay error específico de la aplicación
+- La autenticación funciona pero hay Error específico de la aplicación
 
 **Soluciones:**
 
@@ -118,7 +118,7 @@ Los proyectos grandes (>200MB) pueden alcanzar los límites de tiempo de espera.
 
 2. **Verifica que el ID de la aplicación coincida**
    - Verifica el appId en `capacitor.config.json`
-   - Asegúrate de que el comando use el ID de aplicación correcto
+   - Asegúrate de que el comando Usar el ID de aplicación correcto
 
 3. **Verifica el acceso a la organización**
    - Verifica que estés en la organización correcta
@@ -136,7 +136,7 @@ Los proyectos grandes (>200MB) pueden alcanzar los límites de tiempo de espera.
 
 1. **Verifica que el tipo de certificado coincida con el tipo de compilación**
    - Las compilaciones de desarrollo necesitan certificados de Desarrollo
-   - Las compilaciones de App Store necesitan certificados de Distribución
+   - Las compilaciones de Aplicación Store necesitan certificados de Distribución
 
 2. **Verifica que el certificado y el perfil coincidan**
    ```bash
@@ -153,7 +153,7 @@ Los proyectos grandes (>200MB) pueden alcanzar los límites de tiempo de espera.
 4. **Regenera las credenciales**
    - Elimina el certificado/perfil antiguo
    - Crea nuevos en el portal de desarrollador de Apple
-   - Vuelve a codificar y actualiza las variables de entorno
+   - Vuelve a codificar y actualiza las Variables de entorno
 
 ### "El perfil de aprovisionamiento no incluye el certificado de firma"
 
@@ -181,7 +181,7 @@ Los proyectos grandes (>200MB) pueden alcanzar los límites de tiempo de espera.
    - Asegúrate de que tu certificado de distribución esté seleccionado
    - Descarga y vuelve a codificar
 
-### "Autenticación de App Store Connect falló"
+### "Autenticación de Aplicación Store Connect falló"
 
 **Síntomas:**
 - La subida a TestFlight falla
@@ -205,10 +205,10 @@ Los proyectos grandes (>200MB) pueden alcanzar los límites de tiempo de espera.
 
 3. **Verifica los permisos de la clave API**
    - La clave necesita el rol "Developer" o superior
-   - Verifica en App Store Connect → Usuarios y Acceso → Claves
+   - Verifica en Aplicación Store Connect → Usuarios y Acceso → Claves
 
 4. **Asegúrate de que la clave no haya sido revocada**
-   - Verifica en App Store Connect
+   - Verifica en Aplicación Store Connect
    - Genera una nueva clave si es necesario
 
 ### "La instalación de Pod falló"
@@ -224,7 +224,7 @@ Los proyectos grandes (>200MB) pueden alcanzar los límites de tiempo de espera.
    git status ios/App/Podfile.lock
    ```
 
-2. **Prueba pod install localmente**
+2. **Prueba pod Instalar localmente**
    ```bash
    cd ios/App
    pod install
@@ -260,7 +260,7 @@ Los proyectos grandes (>200MB) pueden alcanzar los límites de tiempo de espera.
    # Ingresa la contraseña cuando se solicite
    ```
 
-2. **Verifica las variables de entorno**
+2. **Verifica las Variables de entorno**
    ```bash
    # Asegúrate de que no haya espacios extra o caracteres especiales
    echo "$KEYSTORE_STORE_PASSWORD" | cat -A
@@ -277,7 +277,7 @@ Los proyectos grandes (>200MB) pueden alcanzar los límites de tiempo de espera.
 ### "Alias de clave no encontrado"
 
 **Síntomas:**
-- La firma falla con error de alias
+- La firma falla con Error de alias
 
 **Soluciones:**
 
@@ -312,8 +312,8 @@ Los proyectos grandes (>200MB) pueden alcanzar los límites de tiempo de espera.
    ```
 
 2. **Verifica las dependencias faltantes**
-   - Revisa los archivos build.gradle
-   - Asegúrate de que todos los plugins estén listados en las dependencias
+   - Revisa los archivos Construir.gradle
+   - Asegúrate de que todos los Plugins estén listados en las dependencias
 
 3. **Verifica la compatibilidad de la versión de Gradle**
    ```bash
@@ -392,7 +392,7 @@ Los proyectos grandes (>200MB) pueden alcanzar los límites de tiempo de espera.
    git status ios/ android/
    ```
 
-3. **Verifica archivos nativos ignorados por git**
+3. **Verifica archivos nativos ignorados por Git**
    - Revisa .gitignore
    - Asegúrate de que los archivos de configuración importantes no estén ignorados
 
@@ -408,7 +408,7 @@ Los proyectos grandes (>200MB) pueden alcanzar los límites de tiempo de espera.
    - Para beta pública, contacta soporte sobre acceso a artefactos
 
 2. **Para envío a TestFlight de iOS**
-   - Verifica App Store Connect
+   - Verifica Aplicación Store Connect
    - El procesamiento puede tardar 5-30 minutos después de la subida
 
 3. **Para Play Store de Android**
@@ -444,7 +444,7 @@ Los proyectos grandes (>200MB) pueden alcanzar los límites de tiempo de espera.
 **Soluciones:**
 
 1. **Verifica que los secretos estén configurados**
-   - Ve a Configuración del repositorio → Secretos y variables → Actions
+   - Ve a Configuración del repositorio → Secretos y Variables → Actions
    - Agrega todos los secretos requeridos
 
 2. **Usa la sintaxis correcta**
@@ -475,7 +475,7 @@ Al contactar soporte, incluye:
    npx @capgo/cli@latest build com.example.app --platform ios
    ```
 
-2. **Mensaje de error** (salida completa)
+2. **Mensaje de Error** (salida completa)
 
 3. **ID de trabajo** (de la salida de compilación)
 
@@ -491,7 +491,7 @@ Al contactar soporte, incluye:
 ### Contactar Soporte
 
 - **Discord**: [Únete a nuestra comunidad](https://discord.com/invite/VnYRvBfgA6)
-- **Email**: support@capgo.app
+- **Email**: support@Capgo.Aplicación
 - **Documentación**: [Documentos de Capgo](/docs/)
 
 ### Limitaciones Conocidas

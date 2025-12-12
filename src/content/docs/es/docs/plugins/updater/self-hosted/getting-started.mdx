@@ -6,7 +6,7 @@ sidebar:
     order: 1
 ---
 
-import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+Importar { LinkCard, CardGrid } De '@astrojs/starlight/components';
 
 Esta documentación explicará cómo ejecutar tu propio servidor de actualización automática.
 
@@ -22,7 +22,7 @@ Pero para que sea posible, es necesario que todos hagamos nuestra parte, incluy�
 
 Si Capgo no te conviene, entonces paga tu propio precio y [apoya a un creador independiente](https://github.com/sponsors/riderx) en tus propios términos.
 
-<LinkCard title="Considera Contribuir" href="/docs/plugin/self-hosted/contributing/"/>
+<LinkCard title="Considera Contribuir" href="/docs/Plugin/self-hosted/Contribuyendo/"/>
 ## Paridad de características
 
 Si eliges tu propio servidor, perderás el flujo de configuración de 5 minutos.\
@@ -44,7 +44,7 @@ Necesitas implementar todas estas características tú mismo.
 | API de Canales               | ✅     | 🚧             |
 | Estadísticas de Actualizaciones | ✅  | 🚧             |
 | Estadísticas de Fallos de Descarga | ✅ | 🚧          |
-| Estadísticas de Uso de App   | ✅     | 🚧             |
+| Estadísticas de Uso de Aplicación   | ✅     | 🚧             |
 | Encriptación de Actualizaciones | ✅  | 🚧             |
 | Actualizaciones diferenciales | ✅    | ❌             |
 
@@ -59,7 +59,7 @@ Si envías una actualización incorrecta a tus usuarios, puedes y romperás su a
 :::danger
 La característica de actualización Over-the-Air (OTA) es aplicable solo para modificaciones realizadas en archivos HTML, CSS y JavaScript.
 
-Si realizas cambios en el código nativo, como actualizaciones en plugins de Capacitor, es obligatorio volver a enviar la aplicación a la tienda de aplicaciones para su aprobación.
+Si realizas cambios en el código nativo, como actualizaciones en Plugins de Capacitor, es obligatorio volver a enviar la aplicación a la tienda de aplicaciones para su aprobación.
 :::
 
 ## Elegir entre Auto y Manual
@@ -71,12 +71,12 @@ En modo manual, toda la lógica es manejada por el JS.
 
 <LinkCard
 	title="Actualización Automática"
-	href="/docs/plugin/self-hosted/auto-update/"
+	href="/docs/Plugin/self-hosted/auto-Actualizar/"
 />
 
 <LinkCard
 	title="Manual"
-	href="/docs/plugin/self-hosted/manual-update/"
+	href="/docs/Plugin/self-hosted/manual-Actualizar/"
 />
 
 ## Instalar Capacitor updater
@@ -86,7 +86,7 @@ npm install @capgo/capacitor-updater
 npx cap sync
 ```
 
-## Preparar tu bundle
+## Preparar tu Paquete
 
 Para enviar actualizaciones a tu aplicación, necesitas comprimirla.
 La mejor manera de estar seguro de que tu zip es bueno es usar el CLI de Capgo para comprimirlo.
@@ -99,19 +99,19 @@ Tendrás que servir este zip desde tu servidor por tu cuenta.
 
 <LinkCard
 	title="Actualización Automática"
-	href="/docs/plugin/self-hosted/auto-update/"
+	href="/docs/Plugin/self-hosted/auto-Actualizar/"
 />
 
 <LinkCard
 	title="Manual"
-	href="/docs/plugin/self-hosted/manual-update/"
+	href="/docs/Plugin/self-hosted/manual-Actualizar/"
 />
 
 
-:::note
+:::Nota
 Si esto parece mucho trabajo, prueba el trial de Capgo Cloud.
 :::
 
-:::note
+:::Nota
 La actualización diferencial no funcionará en actualizaciones manuales, pero puede funcionar en actualización automática, ahora mismo no está documentado ya que es un proceso bastante complejo
 :::

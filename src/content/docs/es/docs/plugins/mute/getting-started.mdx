@@ -1,26 +1,26 @@
 ---
 title: Comenzar
-description: Aprende cómo instalar y usar el plugin Mute para detectar el estado de modo silencioso en tu aplicación Capacitor.
+description: Aprende cómo instalar y usar el Plugin Mute para detectar el estado de modo silencioso en tu aplicación Capacitor.
 locale: es
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+Importar { Tabs, TabItem } De '@astrojs/starlight/components';
+Importar { Code, Pasos } De '@astrojs/starlight/components';
+Importar { PackageManagers } De 'starlight-Paquete-managers'
 
-<Steps>
+<Pasos>
 1. **Instalar el paquete**
-   <PackageManagers pkg="@capgo/capacitor-mute" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/Capacitor-mute" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+</Pasos>
 
 ## Uso
 
-Importa el plugin y usa sus métodos para verificar el estado de silencio:
+Importa el Plugin y usa sus métodos para verificar el estado de silencio:
 
 ```typescript
 import { CapacitorMute } from '@capgo/capacitor-mute';
@@ -130,7 +130,7 @@ setInterval(() => {
 ## Mejores Prácticas
 
 1. **Sondear para detectar cambios**
-   Dado que el plugin no proporciona eventos en tiempo real, sondea periódicamente si necesitas rastrear cambios:
+   Dado que el Plugin no proporciona eventos en tiempo real, sondea periódicamente si necesitas rastrear cambios:
    ```typescript
    // Verificar el estado de silencio periódicamente
    setInterval(async () => {
@@ -202,7 +202,7 @@ setInterval(() => {
    - Algunos dispositivos Android pueden tener un comportamiento diferente
 
 2. **No hay eventos de cambio disponibles**
-   - El plugin no proporciona eventos de cambio en tiempo real
+   - El Plugin no proporciona eventos de cambio en tiempo real
    - Implementa sondeo si necesitas detectar cambios
 
 3. **No funciona en el simulador**

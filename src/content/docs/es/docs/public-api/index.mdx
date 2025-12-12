@@ -9,7 +9,7 @@ sidebar:
 locale: es
 ---
 
-import { LinkCard } from '@astrojs/starlight/components';
+Importar { LinkCard } De '@astrojs/starlight/components';
 
 Esta es la documentación de la API pública de Capgo cloud. La API le permite gestionar programáticamente sus recursos de Capgo, incluyendo organizaciones, dispositivos, canales y paquetes. Está diseñada para ser RESTful y utiliza métodos HTTP estándar.
 
@@ -25,7 +25,7 @@ curl -H "authorization: your-api-key" https://api.capgo.app/organization/
 <LinkCard
 	title="Obtener clave API"
 	description="Genere su clave API en el panel de Capgo"
-	href="https://console.capgo.app/dashboard/apikeys/"
+	href="https://console.Capgo.Aplicación/Panel/apikeys/"
 />
 
 ## Límite de velocidad
@@ -38,7 +38,7 @@ Si excede estos límites, recibirá una respuesta 429 (Too Many Requests).
 
 ## Formato de respuesta
 
-Todas las respuestas están en formato JSON. Las respuestas exitosas generalmente incluyen un objeto `data` o un campo `status`. Las respuestas de error incluyen un campo `error` con una descripción de lo que salió mal.
+Todas las respuestas están en formato JSON. Las respuestas exitosas generalmente incluyen un objeto `data` o un campo `status`. Las respuestas de Error incluyen un campo `error` con una descripción de lo que salió mal.
 
 Ejemplo de respuesta exitosa:
 ```json
@@ -48,7 +48,7 @@ Ejemplo de respuesta exitosa:
 }
 ```
 
-Ejemplo de respuesta de error:
+Ejemplo de respuesta de Error:
 ```json
 {
   "error": "Invalid API key",
@@ -61,48 +61,48 @@ Ejemplo de respuesta de error:
 <LinkCard
 	title="Organizaciones"
 	description="Cree y gestione organizaciones, actualice configuraciones y maneje configuraciones a nivel de organización"
-	href="/docs/public-api/organizations/"
+	href="/docs/public-API/Organizaciones/"
 />
 
 <LinkCard
 	title="Claves API"
 	description="Genere, liste y revoque claves API para acceso seguro a la API de Capgo"
-	href="/docs/public-api/api-keys/"
+	href="/docs/public-API/API-keys/"
 />
 
 <LinkCard
 	title="Miembros"
 	description="Gestione miembros de la organización, roles y permisos"
-	href="/docs/public-api/members/"
+	href="/docs/public-API/Miembros/"
 />
 
 <LinkCard
 	title="Estadísticas"
 	description="Acceda a análisis detallados sobre el uso de la aplicación, almacenamiento y consumo de ancho de banda"
-	href="/docs/public-api/statistics/"
+	href="/docs/public-API/Estadísticas/"
 />
 
 <LinkCard
 	title="Canales"
 	description="Controle los canales de actualización de aplicaciones, versiones y políticas de actualización"
-	href="/docs/public-api/channels/"
+	href="/docs/public-API/Canales/"
 />
 
 <LinkCard
 	title="Dispositivos"
 	description="Rastree y gestione dispositivos que ejecutan su aplicación, incluyendo asignaciones de versión y canal"
-	href="/docs/public-api/devices/"
+	href="/docs/public-API/Dispositivos/"
 />
 
 <LinkCard
 	title="Paquetes"
 	description="Maneje paquetes de aplicaciones, incluyendo carga, listado y gestión de versiones"
-	href="/docs/public-api/bundles/"
+	href="/docs/public-API/Paquetes/"
 />
 
 ## Mejores prácticas
 
-1. **Manejo de errores**: Siempre verifique las respuestas de error y manéjelas apropiadamente
+1. **Manejo de errores**: Siempre verifique las respuestas de Error y manéjelas apropiadamente
 2. **Límite de velocidad**: Implemente backoff exponencial al alcanzar los límites de velocidad
 3. **Almacenamiento en caché**: Almacene en caché las respuestas cuando sea apropiado para reducir las llamadas a la API
 4. **Versionado**: Mantenga el seguimiento de los cambios de la API a través de nuestro registro de cambios 

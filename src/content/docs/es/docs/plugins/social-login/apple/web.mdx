@@ -1,18 +1,18 @@
 ---
 title: Inicio de sesión de Apple para navegadores web
 locale: es
-description: Esta guía proporciona un recorrido detallado sobre la configuración del inicio de sesión de Apple usando Capacitor para aplicaciones web, utilizando el plugin @capgo/capacitor-social-login para garantizar un proceso de integración fluido.
+description: Esta guía proporciona un recorrido detallado sobre la configuración del inicio de sesión de Apple usando Capacitor para aplicaciones web, utilizando el Plugin @Capgo/Capacitor-social-login para garantizar un proceso de integración fluido.
 sidebar:
     order: 4
 ---
-import { Steps } from '@astrojs/starlight/components';
+Importar { Pasos } De '@astrojs/starlight/components';
 
 
 Configurar el inicio de sesión web no es trivial. Es más difícil que configurar `Sign in with Apple` en iOS pero más difícil que configurar `Sign in with Apple` en Android.
 
 ## Generando el servicio
 
-:::note
+:::Nota
 Este paso es redundante si ya has configurado `Sign in with Apple` en Android.
 :::
 
@@ -20,7 +20,7 @@ Por favor, sigue la guía [aquí](/docs/plugins/social-login/apple/android/#crea
 
 ## Configurando las `Return URLs`
 
-<Steps>
+<Pasos>
 
 1. **Ve a la configuración de tu Service ID**
 
@@ -41,14 +41,14 @@ Por favor, sigue la guía [aquí](/docs/plugins/social-login/apple/android/#crea
 4. **Agrega las Return URLs**
 
    Agrega tu dominio para tu aplicación web en `Domains and Subdomains`.
-   :::caution
+   :::Precaución
    **NO PUEDES** agregar `localhost` o `127.0.0.1` como dominio aquí.
    :::
 
    Luego, agrega tu dominio con el prefijo `https://` y la ruta desde la cual llamarás al inicio de sesión de Apple.
    Por ejemplo, si tu dominio es `https://my-app.com` y llamarás al inicio de sesión de Apple desde `/login`, debes agregar `https://my-app.com/login` como URL de retorno.
 
-   :::caution
+   :::Precaución
    **DEBES** agregar tanto el dominio con una barra diagonal al final como sin una barra diagonal al final.
    :::
 
@@ -60,4 +60,4 @@ Por favor, sigue la guía [aquí](/docs/plugins/social-login/apple/android/#crea
    2. Haz clic en el botón `Save` para guardar los cambios.
 
 6. Deberías estar listo para probar el inicio de sesión para JavaScript. Ten en cuenta que no puedes probar desde localhost.
-</Steps>
+</Pasos>

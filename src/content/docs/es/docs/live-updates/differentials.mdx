@@ -5,9 +5,9 @@ sidebar:
   order: 4
 locale: es
 ---
-import { Aside, Steps } from '@astrojs/starlight/components';
+Importar { Aside, Pasos } De '@astrojs/starlight/components';
 
-El sistema de Actualización en Vivo de Capgo puede entregar actualizaciones más rápido y eficientemente enviando solo los archivos modificados, en lugar del bundle JS completo.
+El sistema de Actualización en Vivo de Capgo puede entregar actualizaciones más rápido y eficientemente enviando solo los archivos modificados, en lugar del Paquete JS completo.
 
 Esto es especialmente beneficioso para usuarios en conexiones de red más lentas o con datos limitados, ya que minimiza la cantidad de datos que necesitan descargarse.
 
@@ -15,16 +15,16 @@ Un segundo beneficio es cuando la aplicación tiene activos grandes que cambian 
 
 ## Cómo Funcionan las Actualizaciones Diferenciales
 
-Las actualizaciones diferenciales en Capgo son manejadas por el plugin de Capgo instalado en tu aplicación. Cuando subes una nueva versión de tu aplicación usando la bandera `--partial`, Capgo hace lo siguiente:
+Las actualizaciones diferenciales en Capgo son manejadas por el Plugin de Capgo instalado en tu aplicación. Cuando subes una nueva versión de tu aplicación usando la bandera `--partial`, Capgo hace lo siguiente:
 
 1. Cada archivo en tu compilación se sube individualmente
 2. Se generan checksums para cada archivo
-3. Se crea un nuevo manifiesto json, listando todos los archivos y sus checksums
+3. Se crea un nuevo manifiesto JSON, listando todos los archivos y sus checksums
 4. Este manifiesto se sube a la base de datos de Capgo
 
-Cuando un dispositivo ejecutando tu aplicación verifica una actualización, el plugin de Capgo recibe el nuevo manifiesto del servidor. Lo compara con el manifiesto que tiene actualmente, identificando qué archivos han cambiado basándose en los checksums y la ruta de archivos.
+Cuando un dispositivo ejecutando tu aplicación verifica una actualización, el Plugin de Capgo recibe el nuevo manifiesto del servidor. Lo compara con el manifiesto que tiene actualmente, identificando qué archivos han cambiado basándose en los checksums y la ruta de archivos.
 
-El plugin luego descarga solo los archivos modificados, en lugar del bundle JS completo. Reconstruye la nueva versión de la aplicación combinando estos archivos descargados con los archivos sin cambios que ya tiene.
+El Plugin luego descarga solo los archivos modificados, en lugar del Paquete JS completo. Reconstruye la nueva versión de la aplicación combinando estos archivos descargados con los archivos sin cambios que ya tiene.
 
 <Aside title="Manifiesto">
 
@@ -38,7 +38,7 @@ Para habilitar actualizaciones diferenciales para tu aplicación Capgo, simpleme
 
 ## Forzar Actualizaciones Diferenciales
 
-Si quieres asegurar que todas las cargas sean actualizaciones diferenciales y prevenir cargas accidentales de bundles completos, puedes usar la bandera `--partial-only`:
+Si quieres asegurar que todas las cargas sean actualizaciones diferenciales y prevenir cargas accidentales de Paquetes completos, puedes usar la bandera `--partial-only`:
 
 ```shell
 npx @capgo/cli@latest bundle upload --partial-only
@@ -48,33 +48,33 @@ Cuando se usa `--partial-only`, Capgo solo subirá archivos individuales y gener
 
 Podrías querer usar `--partial-only` si:
 
-- Siempre quieres usar actualizaciones diferenciales y nunca quieres permitir cargas de bundles completos
+- Siempre quieres usar actualizaciones diferenciales y nunca quieres permitir cargas de Paquetes completos
 - Estás configurando un pipeline de CI/CD y quieres asegurar que todas las cargas automatizadas sean diferenciales
 - Tu aplicación es grande y el ancho de banda está limitado, por lo que necesitas minimizar los tamaños de carga/descarga
 
-Si necesitas hacer una carga de bundle completo mientras `--partial-only` está establecido, simplemente ejecuta el comando de carga sin `--partial-only`. Esto anulará la configuración para esa única carga, permitiéndote enviar un bundle completo cuando sea necesario.
+Si necesitas hacer una carga de Paquete completo mientras `--partial-only` está establecido, simplemente ejecuta el comando de carga sin `--partial-only`. Esto anulará la configuración para esa única carga, permitiéndote enviar un Paquete completo cuando sea necesario.
 
 ## Solución de Problemas
 
-Si las actualizaciones diferenciales no parecen estar funcionando (es decir, los dispositivos siempre están descargando el bundle JS completo incluso para pequeños cambios), verifica dos veces que:
+Si las actualizaciones diferenciales no parecen estar funcionando (es decir, los dispositivos siempre están descargando el Paquete JS completo incluso para pequeños cambios), verifica dos veces que:
 
 - Estés usando la bandera `--partial` cada vez que subes una nueva versión
 - Si usas `--partial-only`, asegúrate de no haber omitido accidentalmente la bandera `--partial`
-- Tu dispositivo esté ejecutando la última versión del plugin de Capgo
+- Tu dispositivo esté ejecutando la última versión del Plugin de Capgo
 - Tu dispositivo tenga una conexión de red estable y pueda alcanzar los servidores de Capgo
 
 También puedes usar la aplicación web de Capgo para verificar los detalles de tu última carga:
-<Steps>
+<Pasos>
 1. Ve a la [aplicación web](https://app.capgo.io)
 2. Haz clic en tu aplicación
-3. Haz clic en el número de bundles de la barra de estadísticas.
-4. Selecciona el último bundle
+3. Haz clic en el número de Paquetes de la barra de estadísticas.
+4. Selecciona el último Paquete
 5. Verifica el campo `Partial`
   ![tipo de bundle](/bundle_type.webp)
-</Steps>
+</Pasos>
 
 Si continúas teniendo problemas, contacta al soporte de Capgo para más asistencia. Pueden verificar los registros del servidor para confirmar que tus cargas parciales se están procesando correctamente y que los dispositivos están recibiendo los manifiestos actualizados.
 
 ¡Eso es todo! La bandera `--partial` le dice a Capgo que realice las cargas de archivos individuales y la generación de manifiesto necesaria para actualizaciones diferenciales.
 
-Ten en cuenta que necesitas usar `--partial` cada vez que subes una nueva versión que quieres que se entregue como una actualización diferencial. Si omites la bandera, Capgo subirá el bundle JS completo como un solo archivo, y los dispositivos descargarán todo el bundle incluso si solo una pequeña parte ha cambiado.
+Ten en cuenta que necesitas usar `--partial` cada vez que subes una nueva versión que quieres que se entregue como una actualización diferencial. Si omites la bandera, Capgo subirá el Paquete JS completo como un solo archivo, y los dispositivos descargarán todo el Paquete incluso si solo una pequeña parte ha cambiado.

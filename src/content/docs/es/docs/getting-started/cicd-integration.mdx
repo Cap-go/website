@@ -1,14 +1,14 @@
 ---
 title: Integración CI/CD
-description: Integrar Capgo en tu pipeline de CI/CD te permite automatizar completamente el proceso de construir e implementar actualizaciones en tu aplicación. Al aprovechar la CLI de Capgo y semantic-release, puedes asegurar implementaciones consistentes y confiables y habilitar iteración rápida.
+description: Integrar Capgo en tu pipeline de CI/CD te permite automatizar completamente el proceso de construir e implementar actualizaciones en tu aplicación. Al aprovechar la CLI de Capgo y semantic-Lanzamiento, puedes asegurar implementaciones consistentes y confiables y habilitar iteración rápida.
 sidebar:
   order: 4
 locale: es
 ---
 
-import { Steps, Code } from '@astrojs/starlight/components';
+Importar { Pasos, Code } De '@astrojs/starlight/components';
 
-Integrar Capgo en tu pipeline de CI/CD te permite automatizar completamente el proceso de construir e implementar actualizaciones en tu aplicación. Al aprovechar la CLI de Capgo y semantic-release, puedes asegurar implementaciones consistentes y confiables y habilitar iteración rápida.
+Integrar Capgo en tu pipeline de CI/CD te permite automatizar completamente el proceso de construir e implementar actualizaciones en tu aplicación. Al aprovechar la CLI de Capgo y semantic-Lanzamiento, puedes asegurar implementaciones consistentes y confiables y habilitar iteración rápida.
 
 ## Beneficios de la Integración CI/CD
 
@@ -20,7 +20,7 @@ Integrar Capgo en tu pipeline de CI/CD te permite automatizar completamente el p
 
 ## CLI de Capgo
 
-La CLI de Capgo es la clave para integrar Capgo en tu flujo de trabajo CI/CD. Proporciona comandos para subir nuevas versiones de bundles, gestionar canales y más.
+La CLI de Capgo es la clave para integrar Capgo en tu flujo de trabajo CI/CD. Proporciona comandos para subir nuevas versiones de Paquetes, gestionar canales y más.
 
 El comando más importante para la integración CI/CD es `bundle upload`:
 
@@ -40,14 +40,14 @@ npx @capgo/cli@latest bundle upload --channel Production --apikey YOUR_API_KEY -
 npx @capgo/cli@latest bundle upload --channel Production --apikey YOUR_API_KEY --key-data-v2 PRIVATE_KEY_CONTENT
 ```
 
-**Usando variables de entorno (mejor práctica para CI/CD):**
+**Usando Variables de entorno (mejor práctica para CI/CD):**
 ```shell
 npx @capgo/cli@latest bundle upload --channel Production --apikey YOUR_API_KEY --key-data-v2 "$CAPGO_PRIVATE_KEY"
 ```
 
 ### Configurar Variables de Entorno para Encriptación
 
-Para entornos CI/CD, se recomienda almacenar tu clave privada como una variable de entorno en lugar de un archivo. Aquí está cómo configurarlo:
+Para entornos CI/CD, se recomienda almacenar tu clave privada como una Variable de entorno en lugar de un archivo. Aquí está cómo configurarlo:
 
 1. **Obtén el contenido de tu clave privada:**
    ```shell
@@ -57,8 +57,8 @@ Para entornos CI/CD, se recomienda almacenar tu clave privada como una variable 
 
 2. **Agrégalo a tu entorno CI/CD:**
    - **GitHub Actions**: Agrega `CAPGO_PRIVATE_KEY` a los secretos de tu repositorio
-   - **GitLab CI**: Agrégalo como una variable enmascarada en la configuración de tu proyecto
-   - **CircleCI**: Agrégalo como una variable de entorno en la configuración de tu proyecto
+   - **GitLab CI**: Agrégalo como una Variable enmascarada en la configuración de tu proyecto
+   - **CircleCI**: Agrégalo como una Variable de entorno en la configuración de tu proyecto
    - **Jenkins**: Agrégalo como una credencial de texto secreto
 
 3. **Úsalo en tu pipeline:**
@@ -66,7 +66,7 @@ Para entornos CI/CD, se recomienda almacenar tu clave privada como una variable 
    - run: npx @capgo/cli@latest bundle upload --channel=production --apikey=${{ secrets.CAPGO_API_KEY }} --key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"
    ```
 
-**Nota**: La bandera `--key-data-v2` te permite pasar el contenido de la clave privada directamente como una cadena, haciéndolo perfecto para variables de entorno en pipelines CI/CD donde no quieres crear archivos temporales.
+**Nota**: La bandera `--key-data-v2` te permite pasar el contenido de la clave privada directamente como una cadena, haciéndolo perfecto para Variables de entorno en pipelines CI/CD donde no quieres crear archivos temporales.
 
 Este comando sube la construcción web actual al canal especificado. Típicamente ejecutarás esto como el último paso en tu pipeline CI/CD, después de que tu construcción web se haya completado exitosamente.
 
@@ -74,16 +74,16 @@ Este comando sube la construcción web actual al canal especificado. Típicament
 
 Aunque los pasos exactos variarán dependiendo de tu herramienta CI/CD de elección, el proceso general para integrar Capgo se ve así:
 
-<Steps>
+<Pasos>
 1. **Generar una clave API**: Inicia sesión en el panel de Capgo y crea una nueva clave API. Esta clave se usará para autenticar la CLI en tu entorno CI/CD. ¡Manténla secreta y nunca la comprometas en tu repositorio!
 
-3. **Configurar el comando `bundle upload`**: Agrega un paso a tu configuración CI/CD que ejecute el comando `bundle upload` con los argumentos apropiados: <Code lang="yaml" title="upload.yml" code={`- run: npx @capgo/cli@latest bundle upload --channel=production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />\n Reemplaza `Production` con el canal al que quieres implementar, `${{ secrets.CAPGO_API_KEY }}` con la variable de entorno que contiene tu clave API, y agrega `--key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"` si usas encriptación.
+3. **Configurar el comando `bundle upload`**: Agrega un paso a tu configuración CI/CD que ejecute el comando `bundle upload` con los argumentos apropiados: <Code lang="YAML" title="Subir.yml" code={`- run: npx @capgo/cli@latest bundle upload --channel=production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />\n Reemplaza `Production` con el canal al que quieres implementar, `${{ secrets.CAPGO_API_KEY }}` con la Variable de entorno que contiene tu clave API, y agrega `--key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"` si usas encriptación.
 
-4. **Agregar el paso `upload` después de tu construcción web**: Asegúrate de que el paso `upload` venga después de que tu construcción web se haya completado exitosamente. Esto asegura que siempre estés implementando tu código más reciente.\n  Aquí hay una configuración de ejemplo para GitHub Actions:\n<Code lang="yaml" title="upload.yml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v6\n - uses: actions/setup-node@v6\n  with:\n   node-version: '24'\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest bundle upload --channel=production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\} --key-data-v2 "$\{\{ secrets.CAPGO_PRIVATE_KEY \}\}"`} />
+4. **Agregar el paso `upload` después de tu construcción web**: Asegúrate de que el paso `upload` venga después de que tu construcción web se haya completado exitosamente. Esto asegura que siempre estés implementando tu código más reciente.\n  Aquí hay una configuración de ejemplo para GitHub Actions:\n<Code lang="YAML" title="Subir.yml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v6\n - uses: actions/setup-node@v6\n  with:\n   node-version: '24'\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest bundle upload --channel=production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\} --key-data-v2 "$\{\{ secrets.CAPGO_PRIVATE_KEY \}\}"`} />
 
-</Steps>
+</Pasos>
 
-## Gestión de Versiones con Semantic-release
+## Gestión de Versiones con Semantic-Lanzamiento
 
 La forma recomendada de manejar el versionado con Capgo es establecer la versión en tu archivo `capacitor.config.ts` importándola desde `package.json`:
 
@@ -101,9 +101,9 @@ const config: CapacitorConfig = {
 ```
 
 Este enfoque te permite:
-1. Usar semantic-release (o cualquier otra herramienta) para actualizar la versión de `package.json`
+1. Usar semantic-Lanzamiento (o cualquier otra herramienta) para actualizar la versión de `package.json`
 2. Construir tu aplicación con la versión actualizada incluida automáticamente
-3. Subir el bundle con la versión correcta
+3. Subir el Paquete con la versión correcta
 
 Tu flujo de trabajo CI/CD se vería así:
 ```yaml
@@ -113,7 +113,7 @@ Tu flujo de trabajo CI/CD se vería así:
 - run: npx @capgo/cli@latest bundle upload --channel=production --apikey=${{ secrets.CAPGO_API_KEY }}
 ```
 
-Aquí hay un archivo de configuración `.releaserc` de ejemplo para semantic-release:
+Aquí hay un archivo de configuración `.releaserc` de ejemplo para semantic-Lanzamiento:
 
 ```json
 {
@@ -144,20 +144,20 @@ Esta configuración hace lo siguiente:
 1. Analiza los mensajes de commit para determinar el próximo número de versión, siguiendo la especificación de Conventional Commits.
 2. Genera notas de lanzamiento basadas en los commits desde el último lanzamiento.
 3. Actualiza el archivo `CHANGELOG.md` con las nuevas notas de lanzamiento.
-4. Actualiza la versión de `package.json`, que será recogida por tu capacitor.config.
+4. Actualiza la versión de `package.json`, que será recogida por tu Capacitor.config.
 5. Hace commit de los archivos actualizados `CHANGELOG.md`, `package.json` y cualquier otro archivo cambiado de vuelta al repositorio.
 
-Asegúrate de ejecutar semantic-release antes de construir tu aplicación para que la versión actualizada de `package.json` se incluya en tu construcción a través del capacitor.config.
+Asegúrate de ejecutar semantic-Lanzamiento antes de construir tu aplicación para que la versión actualizada de `package.json` se incluya en tu construcción a través del Capacitor.config.
 
 ## Solución de Problemas
 
 Si encuentras problemas con tu integración CI/CD de Capgo, aquí hay algunas cosas para verificar:
 
-- **Clave API**: Asegúrate de que tu clave API sea válida y tenga los permisos necesarios. Si usas una variable de entorno, verifica dos veces que esté configurada correctamente.
+- **Clave API**: Asegúrate de que tu clave API sea válida y tenga los permisos necesarios. Si usas una Variable de entorno, verifica dos veces que esté configurada correctamente.
 
 - **Versión de CLI**: Asegúrate de que estés usando la última versión de la CLI de Capgo. Las versiones antiguas pueden tener problemas de compatibilidad o carecer de ciertas características.
 
-- **Artefactos de construcción**: Confirma que tu construcción web esté generando los archivos de salida esperados. La CLI de Capgo necesita una construcción web válida para crear un bundle.
+- **Artefactos de construcción**: Confirma que tu construcción web esté generando los archivos de salida esperados. La CLI de Capgo necesita una construcción web válida para crear un Paquete.
 
 - **Conectividad de red**: Verifica que tu entorno CI/CD tenga acceso de red a los servidores de Capgo. Los problemas de firewall o proxy a veces pueden interferir con el comando `upload`.
 
@@ -165,10 +165,10 @@ Si aún tienes problemas, contacta al soporte de Capgo para asistencia. Pueden a
 
 ## Conclusión
 
-Integrar Capgo en tu pipeline de CI/CD con gestión de versiones adecuada puede agilizar enormemente tu flujo de trabajo de desarrollo. Al automatizar tus implementaciones y versionado a través del enfoque de capacitor.config, puedes enviar actualizaciones más rápido y con más confianza.
+Integrar Capgo en tu pipeline de CI/CD con gestión de versiones adecuada puede agilizar enormemente tu flujo de trabajo de desarrollo. Al automatizar tus implementaciones y versionado a través del enfoque de Capacitor.config, puedes enviar actualizaciones más rápido y con más confianza.
 
-El enfoque recomendado de establecer la versión en tu archivo `capacitor.config.ts` y usar semantic-release para actualizar `package.json` proporciona un proceso de implementación robusto y confiable que te permite enfocarte en construir grandes características en lugar de preocuparte por pasos de lanzamiento manuales.
+El enfoque recomendado de establecer la versión en tu archivo `capacitor.config.ts` y usar semantic-Lanzamiento para actualizar `package.json` proporciona un proceso de implementación robusto y confiable que te permite enfocarte en construir grandes características en lugar de preocuparte por pasos de lanzamiento manuales.
 
-Para más detalles sobre los comandos y opciones de la CLI de Capgo, consulta la [referencia CLI](/docs/cli/overview). Y para una inmersión más profunda en la configuración de semantic-release, ve los [documentos de semantic-release](https://github.com/semantic-release/semantic-release).
+Para más detalles sobre los comandos y opciones de la CLI de Capgo, consulta la [referencia CLI](/docs/cli/overview). Y para una inmersión más profunda en la configuración de semantic-Lanzamiento, ve los [documentos de semantic-release](https://github.com/semantic-release/semantic-release).
 
 ¡Felices implementaciones!
