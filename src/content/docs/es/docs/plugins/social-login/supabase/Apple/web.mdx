@@ -1,0 +1,95 @@
+---
+title: Inicio de sesión de Apple con Supabase en Web
+description: Aprende a integrar el inicio de sesión de Apple con la autenticación de Supabase en Web.
+sidebar:
+    order: 4
+---
+
+## Requisitos previos
+
+Esta guía te ayudará a integrar el inicio de sesión de Apple con la autenticación de Supabase en Web. Se asume que ya has completado:
+- la [configuración de inicio de sesión de Apple para Web](/docs/plugins/social-login/apple/web/)
+- la [Configuración general de inicio de sesión de Apple con Supabase](./general/).
+
+## Implementación
+
+La implementación completa está disponible en el archivo [`supabaseAuthUtils.ts` de la aplicación de ejemplo](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts). Esta guía explica los conceptos clave y cómo usarla.
+
+### Usar el ayudante de autenticación
+
+La función `authenticateWithAppleSupabase` maneja todo el flujo de autenticación:
+
+```typescript
+import { authenticateWithAppleSupabase } from './supabaseAuthUtils';
+
+const result = await authenticateWithAppleSupabase();
+if (result.success) {
+  console.log('Sesión iniciada:', result.user);
+  // Navega a tu área autenticada
+} else {
+  console.error('Error:', result.error);
+}
+```
+
+## Cómo funciona
+
+En Web, el inicio de sesión de Apple usa un flujo de ventana emergente OAuth:
+
+1. **Inicialización**: El plugin se inicializa con tu ID de servicio y la URL de la página actual como URL de redirección
+2. **Ventana emergente OAuth**: Abre una ventana emergente con la página de OAuth de Apple
+3. **Autenticación del usuario**: El usuario se autentica con Apple en la ventana emergente
+4. **Token de identidad**: Apple devuelve un token de identidad (JWT) que contiene información del usuario
+5. **Autenticación de Supabase**: El token de identidad se envía a Supabase usando `signInWithIdToken()`
+
+La función auxiliar detecta automáticamente la plataforma web y configura todo apropiadamente.
+
+## Notas importantes
+
+### Configuración del ID de servicio
+
+- Web requiere tu ID de servicio de Apple (igual que Android)
+- El ID de servicio debe estar configurado en el portal de desarrolladores de Apple con las URLs de retorno correctas
+- Asegúrate de que tu dominio esté agregado a los dominios permitidos en el portal de desarrolladores de Apple
+
+### URL de redirección
+
+- En web, la URL de redirección se establece automáticamente en `window.location.href` (URL de la página actual)
+- Esto debe coincidir con una de las URLs de retorno configuradas en el portal de desarrolladores de Apple
+- Asegúrate de que tanto la URL con como sin barra diagonal final estén configuradas en el portal de desarrolladores de Apple
+
+### ID de cliente de Supabase
+
+En Supabase, configura tu proveedor de Apple con:
+- **ID de cliente**: Tu ID de servicio de Apple (ej., `com.example.app.service`)
+
+Si también estás usando iOS, necesitarás proporcionar tanto el ID de aplicación como el ID de servicio en el campo ID de cliente de Supabase (separados por comas).
+
+### Actualizar la función auxiliar
+
+Al usar la función auxiliar `authenticateWithAppleSupabase`, **debes** actualizar el `clientId` para que coincida con tu ID de servicio de Apple:
+
+```typescript
+await SocialLogin.initialize({
+  apple: {
+    clientId: isIOS
+      ? undefined // iOS usa el ID de paquete automáticamente
+      : 'your.service.id.here', // Tu ID de servicio de Apple para Web y Android
+    redirectUrl: redirectUrl,
+  },
+});
+```
+
+:::caution[Importante]
+Reemplaza `'your.service.id.here'` con tu ID de servicio de Apple real (el mismo valor que configuraste en el portal de desarrolladores de Apple).
+:::
+
+## Solución de problemas
+
+Si la autenticación falla:
+
+- **ID de servicio no coincide**: Verifica que tu ID de servicio coincida tanto en el portal de desarrolladores de Apple como en tu código
+- **URL de retorno no configurada**: Asegúrate de que la URL de tu página actual (con y sin barra diagonal final) esté configurada en el portal de desarrolladores de Apple
+- **Ventana emergente bloqueada**: Verifica la configuración del navegador - algunos navegadores bloquean ventanas emergentes por defecto
+- **Dominio no permitido**: Verifica que tu dominio esté agregado a los dominios permitidos en el portal de desarrolladores de Apple
+- **Configuración de Supabase**: Verifica que tu ID de servicio esté configurado correctamente en la configuración del proveedor de Apple de Supabase
+- Revisa el [código de la aplicación de ejemplo](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) para referencia

@@ -1,0 +1,68 @@
+---
+title: Supabase Apple Login - iOS設定
+description: iOSでSupabase認証を用いたAppleサインインを統合する方法を学びます。
+sidebar:
+    order: 2
+---
+
+## 前提条件
+
+このガイドでは、iOSでSupabase認証を用いたAppleサインインを統合する方法を説明します。以下の手順を既に完了していることを前提としています:
+- [Apple Login iOS設定](/docs/plugins/social-login/apple/ios/)
+- [Supabase Apple Login - 一般設定](./general/)
+
+## 実装
+
+完全な実装は、[サンプルアプリの`supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts)ファイルで利用可能です。このガイドでは、主要な概念と使用方法について説明します。
+
+### 認証ヘルパーの使用
+
+`authenticateWithAppleSupabase`関数は、認証フロー全体を処理します:
+
+```typescript
+import { authenticateWithAppleSupabase } from './supabaseAuthUtils';
+
+const result = await authenticateWithAppleSupabase();
+if (result.success) {
+  console.log('サインイン:', result.user);
+  // 認証されたエリアに移動
+} else {
+  console.error('エラー:', result.error);
+}
+```
+
+## 仕組み
+
+iOSでは、Appleサインインはネイティブ実装を使用します:
+
+1. **初期化**: プラグインはアプリのバンドルIDを自動的に使用します(`clientId`は不要)
+2. **ネイティブサインイン**: AppleのネイティブなSign in with Appleボタンと認証フローを使用
+3. **IDトークン**: Appleはユーザー情報を含むIDトークン(JWT)を返します
+4. **Supabase認証**: IDトークンは`signInWithIdToken()`を使用してSupabaseに送信されます
+
+ヘルパー関数は自動的にiOSプラットフォームを検出し、すべてを適切に設定します。
+
+## 重要な注意事項
+
+### バンドルID設定
+
+- iOSはAppleサインインのためにアプリのバンドルIDを自動的に使用します
+- バンドルIDがApple Developer Portalで設定されているものと一致することを確認してください
+- バンドルIDには「Sign in with Apple」機能が有効になっている必要があります
+
+### SupabaseクライアントID
+
+Supabaseで、Appleプロバイダーを以下のように設定してください:
+- **クライアントID**: iOSアプリID(バンドルID) - 例: `app.capgo.plugin.SocialLogin`
+
+Android/Webも使用している場合は、SupabaseのクライアントIDフィールドにアプリIDとサービスIDの両方を提供する必要があります(カンマ区切り)。
+
+## トラブルシューティング
+
+認証に失敗した場合:
+
+- **バンドルIDの不一致**: XcodeとApple Developer Portalの両方でバンドルIDが一致することを確認
+- **機能が有効になっていない**: Xcodeで「Sign in with Apple」機能が有効になっていることを確認
+- **Supabase設定**: SupabaseのAppleプロバイダー設定でアプリIDが正しく設定されていることを確認
+- **トークン検証の失敗**: AppleからIDトークンが受信されていることを確認
+- リファレンスについては、[サンプルアプリコード](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts)を確認

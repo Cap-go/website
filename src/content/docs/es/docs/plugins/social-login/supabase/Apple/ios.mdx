@@ -1,0 +1,68 @@
+---
+title: Configuración de inicio de sesión de Apple con Supabase en iOS
+description: Aprende a integrar el inicio de sesión de Apple con la autenticación de Supabase en iOS.
+sidebar:
+    order: 2
+---
+
+## Requisitos previos
+
+Esta guía te ayudará a integrar el inicio de sesión de Apple con la autenticación de Supabase en iOS. Se asume que ya has completado:
+- la [configuración de inicio de sesión de Apple para iOS](/docs/plugins/social-login/apple/ios/)
+- la [Configuración general de inicio de sesión de Apple con Supabase](./general/).
+
+## Implementación
+
+La implementación completa está disponible en el archivo [`supabaseAuthUtils.ts` de la aplicación de ejemplo](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts). Esta guía explica los conceptos clave y cómo usarla.
+
+### Usar el ayudante de autenticación
+
+La función `authenticateWithAppleSupabase` maneja todo el flujo de autenticación:
+
+```typescript
+import { authenticateWithAppleSupabase } from './supabaseAuthUtils';
+
+const result = await authenticateWithAppleSupabase();
+if (result.success) {
+  console.log('Sesión iniciada:', result.user);
+  // Navega a tu área autenticada
+} else {
+  console.error('Error:', result.error);
+}
+```
+
+## Cómo funciona
+
+En iOS, el inicio de sesión de Apple usa la implementación nativa:
+
+1. **Inicialización**: El plugin usa el ID de paquete de tu aplicación automáticamente (no se necesita `clientId`)
+2. **Inicio de sesión nativo**: Usa el botón nativo de Iniciar sesión con Apple y el flujo de autenticación de Apple
+3. **Token de identidad**: Apple devuelve un token de identidad (JWT) que contiene información del usuario
+4. **Autenticación de Supabase**: El token de identidad se envía a Supabase usando `signInWithIdToken()`
+
+La función auxiliar detecta automáticamente la plataforma iOS y configura todo apropiadamente.
+
+## Notas importantes
+
+### Configuración del ID de paquete
+
+- iOS usa el ID de paquete de tu aplicación automáticamente para el inicio de sesión de Apple
+- Asegúrate de que tu ID de paquete coincida con lo que está configurado en el portal de desarrolladores de Apple
+- El ID de paquete debe tener habilitada la capacidad "Iniciar sesión con Apple"
+
+### ID de cliente de Supabase
+
+En Supabase, configura tu proveedor de Apple con:
+- **ID de cliente**: Tu ID de aplicación de iOS (ID de paquete) - ej., `app.capgo.plugin.SocialLogin`
+
+Si también estás usando Android/Web, necesitarás proporcionar tanto el ID de aplicación como el ID de servicio en el campo ID de cliente de Supabase (separados por comas).
+
+## Solución de problemas
+
+Si la autenticación falla:
+
+- **ID de paquete no coincide**: Verifica que tu ID de paquete coincida tanto en Xcode como en el portal de desarrolladores de Apple
+- **Capacidad no habilitada**: Asegúrate de que la capacidad "Iniciar sesión con Apple" esté habilitada en Xcode
+- **Configuración de Supabase**: Verifica que tu ID de aplicación esté configurado correctamente en la configuración del proveedor de Apple de Supabase
+- **Validación de token falla**: Verifica que el token de identidad se esté recibiendo de Apple
+- Revisa el [código de la aplicación de ejemplo](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) para referencia

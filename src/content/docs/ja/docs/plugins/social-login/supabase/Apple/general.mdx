@@ -1,0 +1,102 @@
+---
+title: Supabase Apple Login - 一般設定
+description: Capacitor Social Loginプラグインを使用して、Supabase認証にAppleサインインを統合する方法を学びます。
+sidebar:
+    order: 1
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## 概要
+
+このガイドでは、Supabase認証にAppleサインインを統合する方法を説明します。Appleサインインは、iOS、Android、Webプラットフォーム全体で機能する、安全でプライバシー重視の認証方法を提供します。
+
+## 前提条件
+
+開始する前に、以下を確認してください:
+
+1. [Supabaseプロジェクトを作成済み](https://database.new/)
+2. [Apple Login一般設定](/docs/plugins/social-login/apple/general/)ガイドを読み、Apple OAuth認証情報を設定済み
+3. ターゲットプラットフォーム向けのApple OAuth認証情報を設定するため、それぞれのプラットフォーム固有のガイドに従った:
+    - [Android設定](/docs/plugins/social-login/apple/android/)
+    - [iOS設定](/docs/plugins/social-login/apple/ios/)
+    - [Web設定](/docs/plugins/social-login/apple/web/)
+
+    :::note
+        Supabaseチュートリアルを開始する前に、使用する予定のプラットフォーム用のクライアントIDを生成する必要があります。
+
+
+        iOSの場合、クライアントIDはアプリIDと同じです。
+        AndroidとWebの場合、クライアントIDはサービスIDと同じです。
+        これらはこのガイドのステップ7で使用します。
+    :::
+
+## SupabaseでApple OAuthプロバイダーを有効化
+
+<Steps>
+1. [Supabaseダッシュボード](https://app.supabase.com/)に移動
+2. プロジェクトをクリック
+    <img src="/social-login-assets/supabase_project_select.webp" alt="Supabase Project Selector" />
+3. `Authentication`メニューに移動
+    <img src="/social-login-assets/supabase_authentication_menu.webp" alt="Supabase Authentication Menu" />
+4. `Providers`タブをクリック
+    <img src="/social-login-assets/supabase_providers_tab.webp" alt="Supabase Providers Tab" />
+5. `Apple`プロバイダーを見つける
+    <img src="/social-login-assets/supabase_apple_provider.webp" alt="Supabase Apple Provider" />
+6. `Apple`プロバイダーを有効化
+    <img src="/social-login-assets/supabase_apple_provider_enable.webp" alt="Supabase Apple Provider Enable" />
+7. クライアントID設定を入力:
+
+    :::note
+      iOS用にAppleログインを使用している場合、クライアントIDはアプリIDと同じです。
+      AndroidまたはWeb用にAppleログインを使用している場合、クライアントIDはサービスIDと同じです。
+      両方を使用している場合は、アプリIDとサービスIDの両方を提供する必要があります。
+    :::
+
+    <img src="/social-login-assets/supabase_apple_provider_client_id.webp" alt="Supabase Apple Provider Client ID" />
+8. `Save`ボタンをクリック
+    <img src="/social-login-assets/supabase_apple_provider_save.webp" alt="Supabase Apple Provider Save" />
+
+
+    :::note
+      `Secret key (for OAuth)`を設定する必要は__**ありません**__。Appleログインを処理するためのカスタムバックエンド実装を行います。
+    :::
+</Steps>
+
+これで、Supabase認証でAppleサインインが有効になりました 🎉
+
+## 認証ヘルパーの使用
+
+完全な実装には、Supabaseを使用したAppleサインインフロー全体を処理するヘルパー関数`authenticateWithAppleSupabase()`が含まれています。この関数は以下を行います:
+
+- プラットフォーム固有の設定でAppleサインインを初期化
+- 認証フローを処理(iOSではネイティブ、Android/WebではOAuthリダイレクト)
+- AppleからIDトークンを抽出
+- IDトークンでSupabaseにサインイン
+
+:::tip[完全な実装]
+完全な実装は、[サンプルアプリの`supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts)ファイルで利用可能です。
+:::
+
+### 基本的な使用方法
+
+```typescript
+import { authenticateWithAppleSupabase } from './supabaseAuthUtils';
+
+const result = await authenticateWithAppleSupabase();
+if (result.success) {
+  console.log('サインイン:', result.user);
+  // 認証されたエリアに移動
+} else {
+  console.error('エラー:', result.error);
+}
+```
+
+### 仕組み
+
+ヘルパー関数は、プラットフォーム固有の違いを自動的に処理します:
+
+- **iOS**: ネイティブなAppleサインインを使用(リダイレクトURL不要、自動的にバンドルIDを使用)
+- **Android**: バックエンドEdge Functionを使用したOAuthリダイレクトフロー(Service IDが必要)
+- **Web**: OAuthポップアップフロー(Service IDと現在のページURLをリダイレクトとして必要)
+
+この関数はAppleからIDトークンを返し、それを使用して`supabase.auth.signInWithIdToken()`でSupabaseに認証します。

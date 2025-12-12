@@ -1,0 +1,95 @@
+---
+title: Supabase Apple Login im Web
+description: Erfahren Sie, wie Sie Apple Sign-In mit Supabase-Authentifizierung im Web integrieren.
+sidebar:
+    order: 4
+---
+
+## Voraussetzungen
+
+Diese Anleitung hilft Ihnen bei der Integration von Apple Sign-In mit Supabase-Authentifizierung im Web. Es wird vorausgesetzt, dass Sie bereits Folgendes abgeschlossen haben:
+- die [Apple Login Web-Einrichtung](/docs/plugins/social-login/apple/web/)
+- die [Supabase Apple Login - Allgemeine Einrichtung](./general/).
+
+## Implementierung
+
+Die vollständige Implementierung ist in der Datei [`supabaseAuthUtils.ts` der Beispiel-App](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) verfügbar. Diese Anleitung erklärt die wichtigsten Konzepte und wie Sie sie verwenden.
+
+### Verwendung des Authentifizierungs-Helpers
+
+Die Funktion `authenticateWithAppleSupabase` verarbeitet den gesamten Authentifizierungsablauf:
+
+```typescript
+import { authenticateWithAppleSupabase } from './supabaseAuthUtils';
+
+const result = await authenticateWithAppleSupabase();
+if (result.success) {
+  console.log('Angemeldet:', result.user);
+  // Navigieren Sie zu Ihrem authentifizierten Bereich
+} else {
+  console.error('Fehler:', result.error);
+}
+```
+
+## Funktionsweise
+
+Im Web verwendet Apple Sign-In einen OAuth-Popup-Ablauf:
+
+1. **Initialisierung**: Das Plugin wird mit Ihrer Service-ID und der aktuellen Seiten-URL als Weiterleitungs-URL initialisiert
+2. **OAuth-Popup**: Öffnet ein Popup-Fenster mit der OAuth-Seite von Apple
+3. **Benutzer-Authentifizierung**: Der Benutzer authentifiziert sich bei Apple im Popup
+4. **Identitäts-Token**: Apple gibt ein Identitäts-Token (JWT) mit Benutzerinformationen zurück
+5. **Supabase-Authentifizierung**: Das Identitäts-Token wird mit `signInWithIdToken()` an Supabase gesendet
+
+Die Helper-Funktion erkennt automatisch die Web-Plattform und konfiguriert alles entsprechend.
+
+## Wichtige Hinweise
+
+### Service-ID-Konfiguration
+
+- Web erfordert Ihre Apple Service-ID (wie bei Android)
+- Die Service-ID muss im Apple Developer Portal mit den richtigen Return-URLs konfiguriert sein
+- Stellen Sie sicher, dass Ihre Domain zu den erlaubten Domains im Apple Developer Portal hinzugefügt wurde
+
+### Weiterleitungs-URL
+
+- Im Web wird die Weiterleitungs-URL automatisch auf `window.location.href` (aktuelle Seiten-URL) gesetzt
+- Diese muss mit einer der im Apple Developer Portal konfigurierten Return-URLs übereinstimmen
+- Stellen Sie sicher, dass sowohl die URL mit als auch ohne abschließenden Schrägstrich im Apple Developer Portal konfiguriert sind
+
+### Supabase Client-ID
+
+Konfigurieren Sie in Supabase Ihren Apple-Anbieter mit:
+- **Client-ID**: Ihre Apple Service-ID (z.B. `com.example.app.service`)
+
+Wenn Sie auch iOS verwenden, müssen Sie sowohl die App-ID als auch die Service-ID im Client-ID-Feld von Supabase angeben (durch Komma getrennt).
+
+### Aktualisierung der Helper-Funktion
+
+Wenn Sie die Helper-Funktion `authenticateWithAppleSupabase` verwenden, **müssen** Sie die `clientId` aktualisieren, damit sie mit Ihrer Apple Service-ID übereinstimmt:
+
+```typescript
+await SocialLogin.initialize({
+  apple: {
+    clientId: isIOS
+      ? undefined // iOS verwendet automatisch die Bundle-ID
+      : 'ihre.service.id.hier', // Ihre Apple Service-ID für Web und Android
+    redirectUrl: redirectUrl,
+  },
+});
+```
+
+:::caution[Wichtig]
+Ersetzen Sie `'ihre.service.id.hier'` durch Ihre tatsächliche Apple Service-ID (derselbe Wert, den Sie im Apple Developer Portal konfiguriert haben).
+:::
+
+## Fehlerbehebung
+
+Wenn die Authentifizierung fehlschlägt:
+
+- **Service-ID stimmt nicht überein**: Überprüfen Sie, ob Ihre Service-ID sowohl im Apple Developer Portal als auch in Ihrem Code übereinstimmt
+- **Return-URL nicht konfiguriert**: Stellen Sie sicher, dass Ihre aktuelle Seiten-URL (mit und ohne abschließenden Schrägstrich) im Apple Developer Portal konfiguriert ist
+- **Popup blockiert**: Überprüfen Sie die Browsereinstellungen - einige Browser blockieren Popups standardmäßig
+- **Domain nicht erlaubt**: Überprüfen Sie, ob Ihre Domain zu den erlaubten Domains im Apple Developer Portal hinzugefügt wurde
+- **Supabase-Konfiguration**: Überprüfen Sie, ob Ihre Service-ID in den Supabase Apple-Anbieter-Einstellungen korrekt konfiguriert ist
+- Überprüfen Sie den [Beispiel-App-Code](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) als Referenz
