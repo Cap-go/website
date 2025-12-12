@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-27T10:45:18.129Z
-updated_at: 2025-11-13T20:57:27.000Z
+updated_at: 2025-12-12T10:43:53.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68354087d3b966198183f9df-1748342797166.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, app updates, staged rollouts, delta updates, network performance, real-time updates, user retention, mobile apps
