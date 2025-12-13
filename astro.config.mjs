@@ -17,7 +17,26 @@ export default defineConfig({
   site: `https://${config.base_domain.prod}`,
   output: 'static',
   build: {
-    concurrency: 6,
+    // Increase concurrency for faster builds on larger runners
+    // GitHub Actions ubuntu-latest-8-core has 8 cores
+    // Netlify large builders have 8 cores
+    concurrency: 8,
+    // Enable build caching
+    inlineStylesheets: 'auto',
+  },
+  vite: {
+    build: {
+      // Increase chunk size warning limit
+      chunkSizeWarningLimit: 1000,
+      // Enable minification
+      minify: 'esbuild',
+      // Optimize dependencies
+      rollupOptions: {
+        output: {
+          manualChunks: undefined,
+        },
+      },
+    },
   },
   env: {
     validateSecrets: true,
