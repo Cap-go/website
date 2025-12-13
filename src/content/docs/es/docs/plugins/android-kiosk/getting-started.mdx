@@ -2,16 +2,19 @@
 title: Primeros pasos
 description: Learn how Para instalar and Usar El Android Kiosk Plugin A lock your Android Dispositivo into kiosk mode in your Capacitor Aplicación.
 sidebar:
-order: 2
-locale: es---
-Importar { Pasos } De '@astrojs/starlight/components';
-Importar { PackageManagers } De 'starlight-Paquete-managers'
+  order: 2
+locale: es
+---
+import { Pasos } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers';
+
 <Pasos>
 1. **Instalar El Paquete**
 <PackageManagers pkg="@Capgo/Capacitor-android-kiosk" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 2. **Sync with native projects**
 <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Pasos>
+
 Este Plugin is **Android-only**. For iOS kiosk mode functionality, please Usar El Dispositivo's built-in [Guided Access](https://support.apple.com/en-us/HT202612) feature.
 - **Kiosk Mode**: Hide system UI and enter immersive fullscreen mode
 - **Launcher Integración**: Establecer your Aplicación as El Dispositivo launcher/home Aplicación

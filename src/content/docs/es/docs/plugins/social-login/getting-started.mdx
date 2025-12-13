@@ -6,10 +6,10 @@ sidebar:
   order: 2
 ---
 
-Importar { Tabs, TabItem } De '@astrojs/starlight/components';
-Importar { Code, Pasos, Card, CardGrid } De '@astrojs/starlight/components';
-Importar { PackageManagers } De 'starlight-Paquete-managers'
-Importar MicroCard De '@/components/MicroCard.astro'
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Pasos, Card, CardGrid } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers';
+import MicroCard from '@/components/MicroCard.astro';
 
 <Pasos>
 1. **Instala el paquete**
@@ -19,7 +19,7 @@ Importar MicroCard De '@/components/MicroCard.astro'
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 3. **Configura el Plugin**
-   <div Clase="flex flex-nowrap gap-4 h-full">
+   <div class="flex flex-nowrap gap-4 h-full">
       <div style="display: flex; gap: 1rem; width: 100% !Importante; max-width: 100% !Importante;">
          <MicroCard href="/docs/Plugins/social-login/google/general/" title="Google" customIcon="/icons/google.svg">
             Configura el inicio de sesión de Google para tu aplicación
@@ -33,5 +33,4 @@ Importar MicroCard De '@/components/MicroCard.astro'
       </div>
    </div>
 </Pasos>
-
 

@@ -11,19 +11,19 @@ sidebar:
 hero:
   tagline: Entrega configuraciones específicas por inquilino sin nuevas compilaciones leyendo valores de configuración seguros directamente desde Capacitor.
   image:
-    file: ~public/Configuración-go.webp
+    file: ~public/settings-go.webp
   actions:
     - text: Comenzar
-      Enlace: /docs/Plugins/env/getting-started/
+      link: /docs/Plugins/env/getting-started/
       icon: right-arrow
       variant: primary
     - text: GitHub
-      Enlace: https://GitHub.com/Cap-go/Capacitor-env/
+      link: https://GitHub.com/Cap-go/Capacitor-env/
       icon: external
       variant: minimal
 ---
 
-Importar { Card, CardGrid } De '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
 
 Capgo Env te permite almacenar secretos y configuración por compilación dentro de `capacitor.config.*` y resolverlos en tiempo de ejecución a través de una API simple.
 

@@ -2,7 +2,7 @@
 title: Funciones and Configuración
 description: All available Método and Configuración of El Plugin
 sidebar:
-order: 2
+  order: 2
 locale: es
 ---
 
@@ -316,7 +316,7 @@ Usar {@Enlace setMultiDelay} A Agregar additional conditions before El Actualiza
 
 | Name | Type | Description |
 | --- | --- | --- |
-| `options` | `BundleId` | Contains El ID of El Paquete A Establecer as next. Usar {@Enlace BundleInfo.id} De a downloaded Paquete. |
+| `options` | `BundleId` | Contains El ID of El Paquete A Establecer as next. Usar {@Enlace BundleInfo.id'} from 'a downloaded Paquete. |
 
 **Returns**
 
