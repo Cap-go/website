@@ -798,6 +798,7 @@
   "credit_20_percent": "20%",
   "credit_30_percent": "30%",
   "credit_based_usage": "Utilizzo basato su credito",
+  "credit_based_overages": "eccedenze basate su credito",
   "credit_percentage": "Crédito Porcentual",
   "credit_pricing": "Prezzo del Credito",
   "credit_requests_payment_desc": "Per richiedere un Credito di Servizio, il Cliente deve inviare un'email a Capgo all'indirizzo support@capgo.app entro trenta (30) giorni dalla fine del mese in cui non è stato rispettato l'Impegno di Disponibilità. Il Cliente deve includere o il proprio ID account o l'indirizzo email registrato, e le date e gli orari precedentemente segnalati in cui non è stata garantita la Disponibilità del Servizio. Se Capgo conferma che il Cliente è idoneo a ricevere un Credito di Servizio, Capgo emetterà un credito sul conto del Cliente entro trenta (30) giorni. I Crediti di Servizio non sono rimborsi, non possono essere convertiti in un importo contante e possono essere utilizzati solo per compensare future spese di fatturazione. Fatta eccezione per quanto previsto nella Sezione 4 qui sotto, i Crediti di Servizio saranno l'unico e esclusivo rimedio del Cliente e l'unica e esclusiva responsabilità di Capgo per qualsiasi inadempimento da parte di Capgo nell'adempimento dell'Impegno di Disponibilità.",

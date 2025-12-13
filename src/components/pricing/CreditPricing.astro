@@ -84,7 +84,7 @@ function formatPrice(price: number): string {
 }
 ---
 
-<section class="py-12 px-0 mx-auto max-w-7xl sm:px-6 lg:px-8">
+<section id="credit-pricing" class="py-12 px-0 mx-auto max-w-7xl sm:px-6 lg:px-8">
   <div class="p-6 bg-white rounded-3xl shadow-xl sm:p-8 lg:p-12">
     <div class="mb-6 text-center sm:mb-8">
       <h2 class="inline-flex flex-col gap-2 items-center text-2xl font-bold text-gray-900 sm:flex-row sm:gap-3 sm:text-3xl">
@@ -152,13 +152,6 @@ function formatPrice(price: number): string {
       </p>
       <p class="text-xs text-gray-500 sm:text-sm">
         {m.credits_usage_info({}, { locale: Astro.locals.locale })}
-      </p>
-      <p class="text-sm text-gray-700 sm:text-base">
-        {m.credits_beta_info({}, { locale: Astro.locals.locale })}
-        {' '}
-        <a href="https://cal.com/team/capgo/capgo-enterprise-inquiry" target="_blank" class="inline-block font-medium text-blue-600 underline hover:text-blue-700">
-          {m.book_call_with_team({}, { locale: Astro.locals.locale })}
-        </a>.
       </p>
     </div>
   </div>

@@ -798,6 +798,7 @@
   "credit_20_percent": "20%",
   "credit_30_percent": "30%",
   "credit_based_usage": "基于信用的使用",
+  "credit_based_overages": "基于信用的超额",
   "credit_percentage": "信用百分比",
   "credit_pricing": "信用定价",
   "credit_requests_payment_desc": "要申请服务抵扣，客户必须在未达到正常运行时间承诺的月份结束后的三十（30）天内向Capgo发送电子邮件至support@capgo.app。客户必须包括其账号ID或注册电子邮件地址，以及之前报告的无服务可用性的日期和时间。如果Capgo确认客户有资格获得服务抵扣，Capgo将在三十（30）天内为客户的账户发放抵扣。服务抵扣不是退款，不能兑换成现金金额，并且只能用于未来的计费费用。除非如下第4节所述，否则对于Capgo未能满足正常运行时间承诺的任何失败，服务抵扣应是客户唯一和排他性的补救措施，并且是Capgo唯一和排他性的责任。",

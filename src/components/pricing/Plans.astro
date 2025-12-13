@@ -72,7 +72,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
       pricing.map((plan) => (
         <div
           class:list={[
-            'relative divide-y divide-gray-200 rounded-2xl border bg-white shadow-xl sm:rounded-3xl',
+            'relative flex flex-col divide-y divide-gray-200 rounded-2xl border bg-white shadow-xl sm:rounded-3xl',
             {
               'divide-blue-200 border-blue-600': plan.name === 'Maker',
               'divide-gray-200 border-gray-200': plan.name !== 'Maker',
@@ -107,15 +107,15 @@ function buildTimeDisplay(buildTimeSeconds: number) {
             <p class="mt-8" data-yearly-price style={yearly ? '' : 'display: none'}>
               <span class="text-gray-900">
                 {plan.name === 'Pay as you go' ? (
-                  <span>
-                    {m.billed_monthly({}, { locale: Astro.locals.locale })} +{' '}
-                    <a href="#calculator" class="font-medium text-black border-b border-blue-600 hover:text-blue-600 focus:text-blue-600">
-                      {m.credit_based_usage({}, { locale: Astro.locals.locale })}
-                    </a>
-                  </span>
+                  <span>{m.billed_monthly({}, { locale: Astro.locals.locale })}</span>
                 ) : (
-                  `${m.billed_annually_at({}, { locale: Astro.locals.locale })} $${plan.price_y}`
+                  <span>{m.billed_annually_at({}, { locale: Astro.locals.locale })} ${plan.price_y}</span>
                 )}
+              </span>
+            </p>
+            <p class="mt-8" data-monthly-price style={yearly ? 'display: none' : ''}>
+              <span class="text-gray-900">
+                <span>{m.billed_monthly({}, { locale: Astro.locals.locale })}</span>
               </span>
             </p>
             <div class="mt-6">
@@ -265,6 +265,13 @@ function buildTimeDisplay(buildTimeSeconds: number) {
               )}
             </ul>
           </div>
+          <div class="py-4 px-4 mt-auto bg-gray-50 border-t border-gray-200 rounded-b-2xl sm:px-6 sm:rounded-b-3xl">
+            <p class="text-sm text-center text-gray-600">
+              <a href="#credit-pricing" class="font-medium text-black border-b border-blue-600 hover:text-blue-600 focus:text-blue-600">
+                {m.credit_based_overages({}, { locale: Astro.locals.locale })}
+              </a>
+            </p>
+          </div>
         </div>
       ))
     }
@@ -285,6 +292,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
 
         const priceElement = planElement.querySelector('[data-price]')
         const yearlyPriceElement = planElement.querySelector('[data-yearly-price]')
+        const monthlyPriceElement = planElement.querySelector('[data-monthly-price]')
 
         if (priceElement) {
           if (planName === 'Pay as you go') {
@@ -296,6 +304,10 @@ function buildTimeDisplay(buildTimeSeconds: number) {
 
         if (yearlyPriceElement) {
           yearlyPriceElement.style.display = isYearly ? '' : 'none'
+        }
+
+        if (monthlyPriceElement) {
+          monthlyPriceElement.style.display = isYearly ? 'none' : ''
         }
       })
     }
