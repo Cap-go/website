@@ -1617,6 +1617,7 @@
   "live_update_lts_capacitor5": "Kondensator 5",
   "live_update_lts_capacitor6": "Kondensator 6",
   "live_update_lts_capacitor7": "Kondensator 7",
+  "live_update_lts_capacitor8": "Kondensator 8",
   "live_update_lts_desc": "Kein Druck, sofort zu aktualisieren. Capgo unterstützt offiziell Capacitor 7, 6 und 5 - das gibt Ihnen jahrelange Unterstützung und Flexibilität, um nach Ihrem eigenen Zeitplan zu aktualisieren.",
   "live_update_lts_subtitle": "Wir unterstützen die letzten 3 großen Capacitor-Versionen",
   "live_update_lts_supported": "Vollständig unterstützt",
