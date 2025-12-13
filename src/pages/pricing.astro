@@ -30,7 +30,7 @@ credits = await creditsResponse.json()
 
 // Filter plans
 const plans = plansAll.length ? plansAll.filter((p) => p.name !== 'Free') : []
-const payg = plansAll.length ? plansAll.filter((p) => p.name === 'Pay as you go')[0] : undefined
+const payg = plansAll.length ? plansAll.filter((p) => p.name === 'Enterprise')[0] : undefined
 
 // Create ldJSON for pricing plans
 if (plans.length > 0) {
@@ -84,7 +84,7 @@ if (plans.length > 0) {
 
       {plans && plans.length > 0 && <Plans yearly={yearly} pricing={plans} />}
 
-      <div class="flex justify-center items-center pb-12 mt-8 space-x-6 sm:pb-16">
+      <div class="flex items-center justify-center pb-12 mt-8 space-x-6 sm:pb-16">
         <div class="flex items-center">
           <input
             id="monthly"
@@ -116,9 +116,9 @@ if (plans.length > 0) {
       <div class="pb-24 sm:pb-32">
         <div class="px-6 mx-auto max-w-7xl lg:px-8">
           <h2 class="font-semibold text-center text-gray-900 text-lg/8">{m.trusted_by_the_biggest_capacitor_apps({}, { locale: Astro.locals.locale })}</h2>
-          <div class="grid grid-cols-2 gap-x-8 gap-y-10 items-center mx-auto mt-10 max-w-lg sm:grid-cols-3 sm:gap-x-10 sm:max-w-2xl lg:grid-cols-5 lg:mx-0 lg:max-w-none">
+          <div class="grid items-center max-w-lg grid-cols-2 mx-auto mt-10 gap-x-8 gap-y-10 sm:grid-cols-3 sm:gap-x-10 sm:max-w-2xl lg:grid-cols-5 lg:mx-0 lg:max-w-none">
             <div class="flex flex-col items-center space-y-2">
-              <div class="bg-gray-100 rounded-2xl shadow-sm">
+              <div class="bg-gray-100 shadow-sm rounded-2xl">
                 <img class="object-contain w-12 h-12 rounded-xl grayscale" src="/nana-logo-transparent.webp" alt="Nana" width="48" height="48" />
               </div>
               <div class="text-center">
@@ -127,7 +127,7 @@ if (plans.length > 0) {
               </div>
             </div>
             <div class="flex flex-col items-center space-y-2">
-              <div class="bg-gray-100 rounded-2xl shadow-sm">
+              <div class="bg-gray-100 shadow-sm rounded-2xl">
                 <img class="object-contain w-12 h-12 rounded-xl grayscale" src="/snowqueen.webp" alt="Snowqueen" width="48" height="48" />
               </div>
               <div class="text-center">
@@ -136,7 +136,7 @@ if (plans.length > 0) {
               </div>
             </div>
             <div class="flex flex-col items-center space-y-2">
-              <div class="bg-gray-100 rounded-2xl shadow-sm">
+              <div class="bg-gray-100 shadow-sm rounded-2xl">
                 <img class="object-contain w-12 h-12 rounded-xl grayscale" src="/shelf_app.webp" alt="Shelf" width="48" height="48" />
               </div>
               <div class="text-center">
@@ -145,7 +145,7 @@ if (plans.length > 0) {
               </div>
             </div>
             <div class="flex flex-col items-center space-y-2">
-              <div class="bg-gray-100 rounded-2xl shadow-sm">
+              <div class="bg-gray-100 shadow-sm rounded-2xl">
                 <img class="object-contain w-12 h-12 rounded-xl grayscale" src="/suez.webp" alt="Suez" width="48" height="48" />
               </div>
               <div class="text-center">
@@ -154,7 +154,7 @@ if (plans.length > 0) {
               </div>
             </div>
             <div class="flex flex-col items-center space-y-2">
-              <div class="bg-gray-100 rounded-2xl shadow-sm">
+              <div class="bg-gray-100 shadow-sm rounded-2xl">
                 <img class="object-contain w-12 h-12 rounded-xl grayscale" src="/janitor_app.webp" alt="Janitor" width="48" height="48" />
               </div>
               <div class="text-center">
@@ -168,7 +168,7 @@ if (plans.length > 0) {
       <Enterprise />
       {credits && credits.length > 0 && <CreditPricing credits={credits} />}
       <!-- <Calculator /> -->
-      <p class="mx-auto mb-8 max-w-md text-base text-center text-gray-500 md:mt-16 font-pj">
+      <p class="max-w-md mx-auto mb-8 text-base text-center text-gray-500 md:mt-16 font-pj">
         {m.we_don_t_bill_you_automatically_until_your_confirmation({}, { locale: Astro.locals.locale })}<br />
         {m.we_don_t_store_or_sell_your_data_to_anyone({}, { locale: Astro.locals.locale })}
       </p>

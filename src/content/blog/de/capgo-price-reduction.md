@@ -29,7 +29,7 @@ Große Neuigkeiten: Wir haben Ihren Capgo-Plan kostenlos aufgewertet! 🚀
 | Solo | 500 ➡️ 1k | 1 GB | 13 GB ➡️ 50 GB |
 | Maker | 5k ➡️ 10k | 3 GB ➡️ 5 GB | 125 GB ➡️ 500 GB |
 | Team | 30k ➡️ 100k | 6 GB ➡️ 10 GB | 750 GB ➡️ 2.000 GB |
-| Pay as you go | 200k ➡️ 1M | 12 GB ➡️ 20 GB | 5.000 GB ➡️ 10.000 GB |
+| Enterprise | 200k ➡️ 1M | 12 GB ➡️ 20 GB | 5.000 GB ➡️ 10.000 GB |
 
 ## Warum machen wir das? 🤔
 

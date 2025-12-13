@@ -259,7 +259,7 @@ function formatIntroOffer(product: any): string {
     // Pay up front
     return `${intro.priceString} for ${intro.periodString}, then ${regular}`;
   } else {
-    // Pay as you go
+    // Enterprise
     return `${intro.priceString} for ${intro.cycles} ${intro.periodString}s, then ${regular}`;
   }
 }

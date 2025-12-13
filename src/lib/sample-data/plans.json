@@ -71,7 +71,7 @@
   {
     "created_at": "2022-08-19T15:50:49+00:00",
     "updated_at": "2022-08-19T15:50:49+00:00",
-    "name": "Pay as you go",
+    "name": "Enterprise",
     "description": "plan.pay_as_you_go.desc",
     "price_m": 999,
     "price_y": 9800,
