@@ -6,16 +6,16 @@ sidebar:
   order: 2
 ---
 
-import { Pasos } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers';
 
-<Pasos>
+<Steps>
 1. **Instalar el Plugin**
    <PackageManagers pkg="@Capgo/Capacitor-mux-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Pasos>
+</Steps>
 
 ## Preparación para iOS
 

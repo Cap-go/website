@@ -6,16 +6,16 @@ sidebar:
   order: 2
 ---
 
-import { Pasos } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers';
 
-<Pasos>
+<Steps>
 1. **Instalar el Plugin**
    <PackageManagers pkg="@Capgo/Capacitor-media-session" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincronizar plataformas**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Pasos>
+</Steps>
 
 > ℹ️ La API de Media Session está disponible en Android (navegadores basados en Chrome, WebView) y muchos navegadores de escritorio. En plataformas no compatibles, las llamadas se resuelven sin tener efecto, por lo que protege tu interfaz de usuario en consecuencia.
 

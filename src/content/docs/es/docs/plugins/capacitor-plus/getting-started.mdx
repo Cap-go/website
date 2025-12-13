@@ -7,12 +7,12 @@ sidebar:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Pasos, Aside } from '@astrojs/starlight/components';
+import { Code, Steps, Aside } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers';
 
 ## Instalación de Nuevo Proyecto
 
-<Pasos>
+<Steps>
 1. **Instalar paquetes principales**
    ```bash
    npm install @capacitor-plus/core @capacitor-plus/cli
@@ -30,13 +30,13 @@ import { PackageManagers } from 'starlight-package-managers';
 4. **Agregar plataformas**
    <PackageManagers type="exec" pkg="cap" args="Agregar android" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
    <PackageManagers type="exec" pkg="cap" args="Agregar ios" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Pasos>
+</Steps>
 
 ## Migración desde Capacitor Oficial
 
 Si tienes un proyecto de Capacitor existente, migrar a Capacitor+ es simple:
 
-<Pasos>
+<Steps>
 1. **Eliminar paquetes oficiales**
    ```bash
    npm uninstall @capacitor/core @capacitor/cli @capacitor/android @capacitor/ios
@@ -51,9 +51,9 @@ Si tienes un proyecto de Capacitor existente, migrar a Capacitor+ es simple:
 
 3. **Sincronizar tu proyecto**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Pasos>
+</Steps>
 
-<Aside type="Nota">
+<Aside type="note">
   ¡No se requieren cambios en el código! Capacitor+ tiene la misma API que Capacitor oficial. Tus importaciones y código permanecen exactamente iguales.
 </Aside>
 
@@ -148,7 +148,7 @@ Cada sincronización upstream se analiza para:
 | **Seguridad de Datos** | Escenarios de pérdida de datos, violaciones de privacidad, almacenamiento inseguro |
 | **Integridad del Código** | Código ofuscado, llamadas de red sospechosas, puertas traseras |
 
-<Aside type="Precaución">
+<Aside type="caution">
   Si se detectan problemas, el PR se marca para revisión manual y NO se fusionará automáticamente. Esto garantiza que siempre obtengas versiones estables y seguras.
 </Aside>
 
@@ -156,13 +156,13 @@ Cada sincronización upstream se analiza para:
 
 ¿Tienes un PR atascado en el repositorio oficial de Capacitor? Hazlo fusionar en Capacitor+:
 
-<Pasos>
+<Steps>
 1. **Abre un Problema** en el [repositorio de Capacitor+](https://github.com/Cap-go/capacitor-plus/issues) enlazando a tu PR upstream
 
 2. **O envíalo directamente** como PR a la rama `plus`
 
 3. El equipo revisará, ejecutará CI y fusionará si pasa
-</Pasos>
+</Steps>
 
 De esta manera tú y otros pueden beneficiarse de tu trabajo inmediatamente sin esperar el ciclo de lanzamiento upstream.
 

@@ -6,7 +6,7 @@ sidebar:
   order: 2
 ---
 
-import { Aside, Pasos } from '@astrojs/starlight/components';
+import { Aside, Steps } from '@astrojs/starlight/components';
 
 Integre las Actualizaciones en Vivo de Capgo con GitLab CI/CD para desplegar automáticamente las actualizaciones de su aplicación cada vez que realice cambios en el código. Esta guía cubre la configuración de flujos de trabajo automatizados de construcción, pruebas y despliegue.
 
@@ -24,19 +24,19 @@ Antes de configurar la integración con GitLab CI/CD, asegúrese de tener:
 
 Primero, Configurar las Variables necesarias en su proyecto de GitLab:
 
-<Pasos>
+<Steps>
 
 1. Navegue a su proyecto de GitLab
 2. Vaya a **Configuración** → **CI/CD** → **Variables**
 3. Agregue las siguientes Variables:
 
-</Pasos>
+</Steps>
 
 | Nombre de Variable | Valor | Protegida | Enmascarada |
 |---------------|-------|-----------|--------|
 | `CAPGO_TOKEN` | Su token de API de Capgo | ✅ Sí | ✅ Sí |
 
-<Aside type="Consejo">
+<Aside type="tip">
 
 Obtenga su token de API de Capgo desde [console.capgo.app/apikeys](https://console.capgo.app/apikeys). El ID de su aplicación ya está configurado en su archivo `capacitor.config.ts`.
 
@@ -106,7 +106,7 @@ deploy_feature:
     url: https://your-app.com/channels/$CHANNEL_NAME
 ```
 
-<Aside type="Consejo">
+<Aside type="tip">
 
 **Pruebas con Canales**: Después de desplegar a un canal de características, puede probar la actualización en su aplicación configurándola para usar ese canal específico. Aprenda más sobre [configurar canales en su aplicación](/docs/live-updates/channels/#configuring-the-channel-in-your-app).
 
@@ -133,7 +133,7 @@ deploy_production:
     - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --key-data-v2 "$CAPGO_PRIVATE_KEY" --channel production
 ```
 
-<Aside type="Precaución">
+<Aside type="caution">
 
 **Mejores prácticas de seguridad:**
 - Nunca confirme el archivo `.capgo_key_v2` en el control de versiones
@@ -289,14 +289,14 @@ deploy:
 
 ### Variables protegidas
 
-<Pasos>
+<Steps>
 
 1. **Marcar Variables sensibles**: Siempre marque los tokens de API como protegidos y enmascarados
 2. **Protección de rama**: Usar Variables protegidas para despliegues de producción
 3. **Control de acceso**: Limite el acceso de Variables solo a mantenedores
 4. **Rotación regular**: Rote los tokens de API regularmente
 
-</Pasos>
+</Steps>
 
 ### Configuración segura de pipeline
 

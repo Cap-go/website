@@ -6,7 +6,7 @@ sidebar:
   order: 2
 ---
 
-import { Pasos, Aside, Card, CardGrid } from '@astrojs/starlight/components';
+import { Steps, Aside, Card, CardGrid } from '@astrojs/starlight/components';
 
 Compila y envía aplicaciones iOS a TestFlight y Aplicación Store usando la infraestructura Mac dedicada de Capgo.
 
@@ -52,7 +52,7 @@ Necesitarás uno de estos tipos de certificados dependiendo de tu compilación:
 
 #### Cómo Obtener Certificados iOS y Perfiles de Aprovisionamiento
 
-<Aside type="Consejo">
+<Aside type="tip">
 Para guías detalladas paso a paso con capturas de pantalla, visita:
 - [Guía de Certificados iOS](https://capgo.app/cloud/native-builds/certificates/ios/)
 - [Blog: Compilaciones Automáticas iOS con GitHub Actions](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/)
@@ -60,7 +60,7 @@ Para guías detalladas paso a paso con capturas de pantalla, visita:
 
 **Resumen Rápido:**
 
-<Pasos>
+<Steps>
 
 1. **Crear una Solicitud de Firma de Certificado (CSR)**
    - Abre Acceso a Llaveros en tu Mac
@@ -89,13 +89,13 @@ Para guías detalladas paso a paso con capturas de pantalla, visita:
    - Selecciona el certificado que acabas de crear
    - Descarga el archivo `.mobileprovision`
 
-</Pasos>
+</Steps>
 
 ### 3. Clave API de Aplicación Store Connect (Recomendado)
 
 Para envío automático a TestFlight, crea una clave API:
 
-<Pasos>
+<Steps>
 
 1. Ve a [App Store Connect](https://appstoreconnect.apple.com/) → Usuarios y Acceso → Claves
 2. Haz clic en el botón "+" para crear una nueva clave
@@ -103,9 +103,9 @@ Para envío automático a TestFlight, crea una clave API:
 4. Descarga el archivo `.p8` (¡solo puedes descargarlo una vez!)
 5. Anota el **ID de Clave** y el **ID de Emisor**
 
-</Pasos>
+</Steps>
 
-<Aside type="Nota">
+<Aside type="note">
 También puedes encontrar tu **ID de Equipo** en tu cuenta de desarrollador de Apple bajo los detalles de Membresía.
 </Aside>
 
@@ -133,7 +133,7 @@ APPLE_PROFILE_NAME="App Store com.example.app"
 
 ### Generando Credenciales en Base64
 
-<Aside type="Consejo">
+<Aside type="tip">
 Usa estos comandos para codificar tus certificados para Capgo:
 </Aside>
 
@@ -227,7 +227,7 @@ jobs:
 
 ### Qué Sucede Durante una Compilación iOS
 
-<Pasos>
+<Steps>
 
 1. **Aprovisionamiento de Máquina** (1-2 minutos)
    - Se aprovisiona o asigna un Mac mini de Scaleway
@@ -264,7 +264,7 @@ jobs:
    - La máquina Mac es destruida
    - Todos los datos eliminados permanentemente
 
-</Pasos>
+</Steps>
 
 ### Pila de Compilación
 
@@ -288,7 +288,7 @@ Tiempos típicos de compilación iOS:
 
 *Las compilaciones subsecuentes pueden ser más rápidas si se reutiliza la misma máquina dentro de la ventana de 24 horas.
 
-<Aside type="Nota">
+<Aside type="note">
 Las compilaciones iOS cuestan **2× la tarifa base** debido a los requisitos de hardware Mac dedicado.
 </Aside>
 

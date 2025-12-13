@@ -6,7 +6,7 @@ sidebar:
 locale: es
 ---
 
-import { Aside, Pasos } from '@astrojs/starlight/components';
+import { Aside, Steps } from '@astrojs/starlight/components';
 
 Un canal de Actualización en Vivo apunta a una compilación específica del Paquete JS de tu aplicación que se compartirá con cualquier dispositivo configurado para escuchar ese canal para actualizaciones. Cuando [instalas el SDK de Actualizaciones en Vivo de Capgo](/docs/getting-started/quickstart/) en tu aplicación, cualquier binario nativo configurado para ese canal verificará las actualizaciones disponibles cada vez que se inicie la aplicación. Puedes cambiar la compilación a la que apunta un canal en cualquier momento y también puedes revertir a compilaciones anteriores si es necesario.
 
@@ -76,7 +76,7 @@ const config: CapacitorConfig = {
 
 A continuación, compila tu aplicación web y ejecuta `npx cap sync` para copiar el archivo de configuración actualizado a tus proyectos iOS y Android. Si omites este paso de sincronización, tus proyectos nativos continuarán usando el canal para el que estaban previamente configurados.
 
-<Aside type="Precaución">
+<Aside type="caution">
 Orden de selección de canal: Forzado > Anulación (`setChannel` / panel) > Config `defaultChannel` > Predeterminado en la Nube.
 
 Usa `defaultChannel` solo en compilaciones de prueba/internas; déjalo fuera para producción para que los usuarios sigan el Predeterminado en la Nube (cuando esté establecido) en lugar de duplicar el enrutamiento en la configuración nativa.
@@ -159,14 +159,14 @@ Usar semver con identificadores de pre-lanzamiento es un enfoque recomendado, pe
 
 Si implementas una actualización en vivo que introduce un Error o necesita ser revertida, puedes fácilmente revertir a una compilación anterior. Desde la sección "Canales" del panel:
 
-<Pasos>
+<Steps>
 
 1. Haz clic en el nombre del canal que quieres revertir
 2. Encuentra la compilación a la que quieres revertir y haz clic en el ícono de corona
 ![Revertir compilación](/select_bundle.webp)
 3. Confirma la acción
 
-</Pasos>
+</Steps>
 
 La compilación seleccionada se convertirá inmediatamente en la compilación activa para ese canal nuevamente. Las aplicaciones recibirán la versión revertida la próxima vez que verifiquen una actualización.
 

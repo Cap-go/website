@@ -9,7 +9,7 @@ locale: es
 ---
 
 import { YouTube } from 'astro-embed';
-import { Aside, Pasos, LinkCard, Code } from '@astrojs/starlight/components';
+import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
 
 ## Requisitos
 
@@ -25,22 +25,22 @@ Antes de comenzar con Capgo, asegúrate de tener:
 
 ### Configuración guiada
 
-<Pasos>
+<Steps>
 
 1. Crea tu cuenta en [https://capgo.app/register](https://capgo.app/register).
 ![captura de pantalla de registro](/signup.webp "captura de pantalla de registro")
 
-2. Usa el comando Init para comenzar <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Se te presentará una serie de preguntas. Proporciona las respuestas necesarias para completar la configuración automatizada.<Aside type="Consejo">Siguiendo estos pasos, estarás en funcionamiento en poco tiempo. Si necesitas más asistencia durante el proceso, nuestro equipo de soporte está [aquí para ayudar](https://support.capgo.app). ¡Feliz incorporación!</Aside>
+2. Usa el comando Init para comenzar <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Se te presentará una serie de preguntas. Proporciona las respuestas necesarias para completar la configuración automatizada.<Aside type="tip">Siguiendo estos pasos, estarás en funcionamiento en poco tiempo. Si necesitas más asistencia durante el proceso, nuestro equipo de soporte está [aquí para ayudar](https://support.capgo.app). ¡Feliz incorporación!</Aside>
 
 3. Implementa una actualización en vivo <LinkCard href="/docs/getting-started/Desplegar/" title="Implementar una actualización en vivo" description="Aprende cómo implementar una actualización en vivo en tu aplicación" />
 
-</Pasos>
+</Steps>
 
 ### Configuración manual
 
 En caso de que el comando init no funcione para ti, puedes añadir manualmente una aplicación.
 
-<Pasos>
+<Steps>
 
 1. Conecta la CLI a tu cuenta: <Code code={`npx @capgo/cli@latest login [APIKEY]`} lang="bash" />
 
@@ -55,4 +55,4 @@ En caso de que el comando init no funcione para ti, puedes añadir manualmente u
 
 6. Implementa una actualización en vivo <LinkCard href="/docs/getting-started/Desplegar/" title="Implementar una actualización en vivo" description="Aprende cómo implementar una actualización en vivo en tu aplicación" />
 
-</Pasos>
+</Steps>

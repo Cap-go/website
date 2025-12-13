@@ -6,10 +6,10 @@ sidebar:
   order: 2
 ---
 
-import { Pasos } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers';
 
-<Pasos>
+<Steps>
 1. **Instala el paquete**
    <PackageManagers pkg="@Capgo/Capacitor-speech-recognition" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
@@ -17,7 +17,7 @@ import { PackageManagers } from 'starlight-package-managers';
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 3. **Configura los permisos de plataforma** (ver abajo)
-</Pasos>
+</Steps>
 
 ## Configuración de Plataforma
 

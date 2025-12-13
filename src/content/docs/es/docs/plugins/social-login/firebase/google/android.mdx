@@ -5,7 +5,7 @@ description: Aprende cómo configurar el inicio de sesión de Google con Firebas
 sidebar:
     order: 2
 ---
-import { Pasos } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
 
 ## Introducción
 
@@ -17,7 +17,7 @@ Asumiré que aún no has creado tu aplicación de Android en la consola de Fireb
 
 ## Pasos de configuración
 
-<Pasos>
+<Steps>
 1. Ve a la descripción general de tu proyecto en [console.cloud.google.com](https://console.cloud.google.com/)
     <img src="/social-login-assets/firebase_project_overview.webp" alt="Firebase Project Descripción general" />
 
@@ -99,14 +99,14 @@ Asumiré que aún no has creado tu aplicación de Android en la consola de Fireb
       :::Nota
       Recomiendo usar la función auxiliar `authenticateWithGoogle` disponible en el archivo [authUtils.ts](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/authUtils.ts) de la aplicación de ejemplo.
       :::
-</Pasos>
+</Steps>
 
 En este punto, estás **__TÉCNICAMENTE__** listo para usar el inicio de sesión de Google con Firebase Authentication en Android. Sin embargo, recomendaría verificar la configuración en la consola de Google Cloud como se explica en el siguiente paso.
 
 ## Verifica la configuración en la consola de Google Cloud
 
 Para asegurarte de que la configuración es correcta, deberías verificarla en la consola de Google Cloud.
-<Pasos>
+<Steps>
    1. Ve a [console.cloud.google.com](https://console.cloud.google.com/)
    2. Encuentra tu proyecto
       1. Haz clic en el selector de proyectos
@@ -138,7 +138,7 @@ Para asegurarte de que la configuración es correcta, deberías verificarla en l
          <img src="/social-login-assets/firebase_gc_web_app_client_id_configured.webp" alt="Google Cloud Console Aplicación web Client ID Configured" />
       :::Nota
       Por favor, ignora el resto de la configuración del cliente web. Discutiremos esto en la [guía de configuración web](/docs/plugins/social-login/firebase/google/web/).
-</Pasos>
+</Steps>
 
 ¡Listo! Ahora estás preparado para usar el inicio de sesión de Google con Firebase Authentication en Android.
 

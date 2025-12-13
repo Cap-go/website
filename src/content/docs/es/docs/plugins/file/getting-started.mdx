@@ -7,16 +7,16 @@ sidebar:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Pasos } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers';
 
-<Pasos>
+<Steps>
 1. **Instala el paquete**
    <PackageManagers pkg="@Capgo/Capacitor-file" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sincroniza con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Pasos>
+</Steps>
 
 ## Uso
 

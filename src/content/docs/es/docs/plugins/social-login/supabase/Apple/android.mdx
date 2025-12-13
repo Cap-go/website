@@ -5,7 +5,7 @@ sidebar:
   order: 3
 locale: es
 ---
-import { Pasos } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
 
 ## Prerequisites
 
@@ -20,7 +20,7 @@ Apple Sign-In on Android requires a backend server because Apple doesn't provide
 
 First, we Necesita Para desplegar El Supabase Edge Función that Va a handle El Apple OAuth callback.
 
-<Pasos>
+<Steps>
 
 1. **Navigate A your Supabase project directory**
 
@@ -81,7 +81,7 @@ First, we Necesita Para desplegar El Supabase Edge Función that Va a handle El 
    You'll Necesita this URL in El next Paso when configuring Apple Developer Portal.
    :::
 
-</Pasos>
+</Steps>
 
 ## Paso 2: Configurar Apple Developer Portal
 
@@ -91,7 +91,7 @@ Now we Necesita Para configurar Apple Developer Portal with El backend URL and g
 Make sure you have your Supabase Edge Función URL De Paso 1 before proceeding. You'll Necesita it Para configurar El Return URL in Apple Developer Portal.
 :::
 
-<Pasos>
+<Steps>
 
 1. **Siga El Apple Login Android Configuración Guía**
 
@@ -132,13 +132,13 @@ Make sure you have your Supabase Edge Función URL De Paso 1 before proceeding. 
    El value of your deep Enlace is dependent on El `android:scheme="capgo-demo-app"` code. Si have Establecer `android:scheme="capgo-demo-app"` in your `AndroidManifest.xml`, then your deep Enlace Va a be `capgo-demo-app://path`.
    :::
 
-</Pasos>
+</Steps>
 
 ## Paso 3: Establecer Supabase Secrets
 
 Now we Necesita Para configurar El environment Variables (secrets) for El Supabase Edge Función.
 
-<Pasos>
+<Steps>
 
 1. **Encode your private key**
 
@@ -172,7 +172,7 @@ Now we Necesita Para configurar El environment Variables (secrets) for El Supaba
    2. Navigate A **Edge Funciones** → **Configuración** → **Secrets**
    3. Agregar each secret Variable with its value
 
-</Pasos>
+</Steps>
 
 :::Nota[Android Aplicación Configuración]
 El [Apple Login Android Setup guide](/docs/plugins/social-login/apple/android/) already covers configuring your Android Aplicación:
@@ -237,7 +237,7 @@ Ver El [complete implementation](https://github.com/Cap-go/capacitor-social-logi
 
 ## Paso 5: Prueba El Integración
 
-<Pasos>
+<Steps>
 
 1. **Construir and Ejecutar your Android Aplicación**
 
@@ -265,7 +265,7 @@ Ver El [complete implementation](https://github.com/Cap-go/capacitor-social-logi
    7. Android Aplicación receives El deep Enlace and processes El identity token
    8. Aplicación signs in A Supabase with El identity token
 
-</Pasos>
+</Steps>
 
 ## Solución de problemas
 

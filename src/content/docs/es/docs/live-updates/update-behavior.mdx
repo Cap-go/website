@@ -5,7 +5,7 @@ sidebar:
 locale: es
 ---
 
-import { Aside, Pasos } from '@astrojs/starlight/components';
+import { Aside, Steps } from '@astrojs/starlight/components';
 
 Cuando lanzas una actualización de tu aplicación Capgo, probablemente quieres que tus usuarios reciban esa actualización lo antes posible. Pero también no quieres interrumpir su experiencia forzándolos a esperar una descarga o reiniciar la aplicación en medio de una sesión.
 
@@ -15,7 +15,7 @@ El comportamiento de actualización de Capgo está diseñado para lograr un equi
 
 Por defecto, así es como Capgo maneja las actualizaciones de la aplicación:
 
-<Pasos>
+<Steps>
 
 1. Al iniciar la aplicación, el Plugin de Capgo verifica si hay una nueva actualización disponible
 
@@ -25,11 +25,11 @@ Por defecto, así es como Capgo maneja las actualizaciones de la aplicación:
 
 4. Cuando el usuario vuelva a iniciar la aplicación, estará ejecutando la versión actualizada
 
-</Pasos>
+</Steps>
 
 Este flujo asegura que los usuarios siempre estén ejecutando la última versión de tu aplicación, sin ser interrumpidos por avisos de actualización o forzados a esperar descargas.
 
-<Aside type="Consejo">
+<Aside type="tip">
 Capgo también busca actualizaciones cuando la aplicación se reanuda desde segundo plano, por lo que los usuarios recibirán actualizaciones incluso si no cierran completamente la aplicación
 </Aside>
 
@@ -95,7 +95,7 @@ Ten en cuenta que la condición `kill` actualmente activa la actualización desp
 
 Para actualizaciones críticas o aplicaciones con estado muy simple, es posible que desees aplicar una actualización tan pronto como se descargue, sin esperar un evento de segundo plano o cierre. Capgo admite esto a través de la opción de configuración `directUpdate`.
 
-<Aside type="Consejo" title="Recomendado: Usar Delta Actualizaciones con Direct Actualizar">
+<Aside type="tip" title="Recomendado: Usar Delta Actualizaciones con Direct Actualizar">
 Al usar `directUpdate`, **recomendamos encarecidamente** habilitar [Delta Updates](/docs/live-updates/differentials/) para minimizar los tiempos de descarga y mejorar la experiencia del usuario. Las Delta Actualizaciones solo descargan archivos modificados en lugar del Paquete completo, lo cual es especialmente importante cuando las actualizaciones se aplican inmediatamente mientras los usuarios están usando activamente tu aplicación.
 
 **Por qué esto es importante para Direct Actualizaciones:**

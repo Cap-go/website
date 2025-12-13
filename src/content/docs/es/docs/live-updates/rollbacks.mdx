@@ -6,7 +6,7 @@ sidebar:
 locale: es
 ---
 
-import { Aside, Pasos } from '@astrojs/starlight/components';
+import { Aside, Steps } from '@astrojs/starlight/components';
 
 Mientras que las actualizaciones en vivo de Capgo te permiten entregar mejoras y correcciones rápidamente a tus usuarios, puede haber situaciones en las que necesites revertir a una versión anterior de tu aplicación. Quizás una nueva actualización introdujo un problema crítico inesperado, o tal vez quieres revertir un cambio específico mientras trabajas en una corrección.
 
@@ -30,7 +30,7 @@ Si `notifyAppReady()` no se llama debido a un fallo de JavaScript o Error críti
 2. Revertirá automáticamente al Paquete anterior que funciona
 3. Marcará la actualización problemática como fallida para prevenir que se aplique nuevamente
 
-<Aside type="Consejo">
+<Aside type="tip">
 Asegúrate de llamar a `notifyAppReady()` en el código de inicialización de tu aplicación después de que tus componentes principales se hayan cargado exitosamente. Esto asegura que la protección de reversión automática funcione como se pretende.
 </Aside>
 
@@ -69,7 +69,7 @@ La forma principal de revertir es a través de la interfaz de reversión, que se
 
 Para revertir usando la pestaña Historial:
 
-<Pasos>
+<Steps>
 
 1. Inicia sesión en el [Panel de Capgo](https://app.capgo.io).
 
@@ -85,21 +85,21 @@ Para revertir usando la pestaña Historial:
 
 7. Confirma que quieres revertir a esta compilación.
 
-</Pasos>
+</Steps>
 
 ### Método Alternativo: Usar el Ícono de Corona
 
 Como segunda forma, también puedes revertir directamente desde la primera pestaña haciendo clic en el ícono de corona junto a cualquier compilación en el historial de compilaciones del canal:
 
-<Pasos>
+<Steps>
 
 1. En la primera pestaña de la vista del canal, encuentra la compilación a la que quieres revertir.
 2. Haz clic en el ícono de corona junto a esa compilación para hacerla la compilación activa para el canal. ![Opciones de gestión de canal](/select_bundle.webp)
 3. Confirma que quieres revertir a esta compilación.
 
-</Pasos>
+</Steps>
 
-<Aside type="Nota">
+<Aside type="note">
 Revertir a una compilación anterior solo afecta al canal seleccionado. Si tienes múltiples canales (por ejemplo, Production, Staging, etc.), necesitarás repetir el proceso de reversión para cada canal afectado.
 </Aside>
 
@@ -111,14 +111,14 @@ Si quieres detener temporalmente las actualizaciones en un canal mientras invest
 
 Para desvincular un canal:
 
-<Pasos>
+<Steps>
 1. Navega al canal en el Panel de Capgo.
 
 2. Haz clic en el botón "Unlink" junto a la compilación actual.
 
 3. Confirma que quieres desvincular el canal.
 
-</Pasos>
+</Steps>
 
 Una vez que un canal está desvinculado, no distribuirá ninguna nueva actualización. Los dispositivos configurados para ese canal permanecerán en su compilación actual hasta que el canal se vincule a una compilación nuevamente.
 
@@ -130,7 +130,7 @@ En situaciones más severas, podrías querer revertir todos los dispositivos en 
 
 Para forzar el Paquete incorporado en un canal:
 
-<Pasos>
+<Steps>
 
 1. Navega al canal en el Panel de Capgo.
 
@@ -138,13 +138,13 @@ Para forzar el Paquete incorporado en un canal:
 
 3. Confirma que quieres forzar el Paquete incorporado.
 
-</Pasos>
+</Steps>
 
 Cuando fuerzas el Paquete incorporado, todos los dispositivos configurados para ese canal revertirán de vuelta a la compilación web empaquetada original en su próxima verificación de actualización. Esto sucede independientemente de en qué compilación estén actualmente.
 
 Esta es una opción de reversión más agresiva que revertir a una compilación anterior específica, ya que descarta todas las actualizaciones en vivo lanzadas desde que la aplicación se publicó por última vez en las tiendas de aplicaciones.
 
-<Aside type="Precaución">
+<Aside type="caution">
 Ten cuidado al forzar el Paquete incorporado, ya que afectará a todos los dispositivos en el canal. Asegúrate de haber considerado el impacto y tener un plan para avanzar antes de tomar esta acción.
 </Aside>
 

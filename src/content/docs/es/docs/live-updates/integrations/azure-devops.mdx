@@ -6,7 +6,7 @@ sidebar:
   order: 1
 ---
 
-import { Aside, Pasos } from '@astrojs/starlight/components';
+import { Aside, Steps } from '@astrojs/starlight/components';
 
 Integre las Actualizaciones en Vivo de Capgo con Azure DevOps Pipelines para desplegar automáticamente las actualizaciones de su aplicación cada vez que realice cambios en el código. Esta guía cubre la configuración de flujos de trabajo automatizados de construcción, pruebas y despliegue.
 
@@ -25,20 +25,20 @@ Antes de configurar la integración con Azure DevOps, asegúrese de tener:
 
 Primero, Configurar las Variables necesarias en su proyecto de Azure DevOps:
 
-<Pasos>
+<Steps>
 
 1. Navegue a su proyecto de Azure DevOps
 2. Vaya a **Pipelines** → **Library** → **Variable groups**
 3. Cree un nuevo grupo de Variables llamado `Capgo-Variables`
 4. Agregue las siguientes Variables:
 
-</Pasos>
+</Steps>
 
 | Nombre de Variable | Valor | Segura |
 |---------------|-------|---------|
 | `CAPGO_TOKEN` | Su token de API de Capgo | ✅ Sí |
 
-<Aside type="Consejo">
+<Aside type="tip">
 
 Obtenga su token de API de Capgo desde [console.capgo.app/apikeys](https://console.capgo.app/apikeys). El ID de su aplicación ya está configurado en su archivo `capacitor.config.ts`.
 
@@ -125,7 +125,7 @@ jobs:
         displayName: 'Desplegar a canal de características'
 ```
 
-<Aside type="Consejo">
+<Aside type="tip">
 
 **Pruebas con Canales**: Después de desplegar a un canal de características, puede probar la actualización en su aplicación configurándola para usar ese canal específico. Aprenda más sobre [configurar canales en su aplicación](/docs/live-updates/channels/#configuring-the-channel-in-your-app).
 
@@ -152,7 +152,7 @@ Agregue este contenido como `CAPGO_PRIVATE_KEY` en su grupo de Variables de Azur
   displayName: 'Desplegar a Capgo con cifrado'
 ```
 
-<Aside type="Precaución">
+<Aside type="caution">
 
 **Mejores prácticas de seguridad:**
 - Nunca confirme el archivo `.capgo_key_v2` en el control de versiones
@@ -468,14 +468,14 @@ stages:
 
 ### Gestión segura de Variables
 
-<Pasos>
+<Steps>
 
 1. **Usar grupos de Variables**: Almacene datos sensibles en grupos de Variables de Azure DevOps
 2. **Marque como secreto**: Siempre marque tokens de API y claves como Variables secretas
 3. **Acceso de ámbito**: Limite el acceso del grupo de Variables a pipelines y usuarios específicos
 4. **Rote claves**: Rote regularmente sus tokens de API de Capgo
 
-</Pasos>
+</Steps>
 
 ## Monitoreo y notificaciones
 

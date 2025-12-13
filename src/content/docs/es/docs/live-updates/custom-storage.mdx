@@ -6,7 +6,7 @@ sidebar:
 locale: es
 ---
 
-import { Aside, Pasos } from '@astrojs/starlight/components';
+import { Aside, Steps } from '@astrojs/starlight/components';
 
 Capgo admite soluciones de almacenamiento personalizadas para sus paquetes de aplicación, lo que le permite alojar sus actualizaciones en su propia infraestructura o servicios de almacenamiento de terceros. Esto es particularmente útil para organizaciones con requisitos de seguridad específicos, necesidades de cumplimiento o infraestructura de almacenamiento existente.
 
@@ -14,7 +14,7 @@ Capgo admite soluciones de almacenamiento personalizadas para sus paquetes de ap
 
 El almacenamiento personalizado en Capgo funciona cargando su paquete en una ubicación externa y proporcionando a Capgo la URL para acceder a él. El SDK de Capgo descargará las actualizaciones directamente desde su ubicación de almacenamiento personalizada en lugar del almacenamiento en la nube predeterminado de Capgo.
 
-<Aside type="Consejo">
+<Aside type="tip">
 
 El almacenamiento personalizado es ideal para:
 - Organizaciones con requisitos estrictos de residencia de datos
@@ -153,7 +153,7 @@ El comando encrypt devolverá el `ivSessionKey` necesario para la carga o descif
 | `--key-data` | Datos de clave de firma privada directamente (opcional) |
 | `--json` | Salida de resultados en formato JSON |
 
-<Aside type="Precaución">
+<Aside type="caution">
 
 El comando encrypt generará un `ivSessionKey` que necesitará proporcionar al cargar con la opción `--iv-session-key`.
 
@@ -163,7 +163,7 @@ El comando encrypt generará un `ivSessionKey` que necesitará proporcionar al c
 
 ### Ejemplo 1: URL Externa con Cifrado
 
-<Pasos>
+<Steps>
 
 1. **Compile su aplicación:**
    ```shell
@@ -194,11 +194,11 @@ El comando encrypt generará un `ivSessionKey` que necesitará proporcionar al c
      --iv-session-key IV_SESSION_KEY_FROM_STEP_3
    ```
 
-</Pasos>
+</Steps>
 
 ### Ejemplo 2: Carga Directa a S3
 
-<Pasos>
+<Steps>
 
 1. **Compile su aplicación:**
    ```shell
@@ -215,11 +215,11 @@ El comando encrypt generará un `ivSessionKey` que necesitará proporcionar al c
      --channel Production
    ```
 
-</Pasos>
+</Steps>
 
 ### Ejemplo 3: S3 con Cifrado
 
-<Pasos>
+<Steps>
 
 1. **Compile y comprima:**
    ```shell
@@ -243,7 +243,7 @@ El comando encrypt generará un `ivSessionKey` que necesitará proporcionar al c
      --channel Production
    ```
 
-</Pasos>
+</Steps>
 
 ## Consideraciones de Seguridad
 

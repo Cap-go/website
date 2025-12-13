@@ -5,15 +5,15 @@ sidebar:
   order: 2
 locale: es
 ---
-import { Pasos } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers';
 
-<Pasos>
+<Steps>
 1. **Instalar El Paquete**
-<PackageManagers pkg="@Capgo/Capacitor-android-kiosk" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@Capgo/Capacitor-android-kiosk" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 2. **Sync with native projects**
-<PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Pasos>
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
 
 Este Plugin is **Android-only**. For iOS kiosk mode functionality, please Usar El Dispositivo's built-in [Guided Access](https://support.apple.com/en-us/HT202612) feature.
 - **Kiosk Mode**: Hide system UI and enter immersive fullscreen mode

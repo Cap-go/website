@@ -5,7 +5,7 @@ sidebar:
   order: 4
 locale: es
 ---
-import { Aside, Pasos } from '@astrojs/starlight/components';
+import { Aside, Steps } from '@astrojs/starlight/components';
 
 El sistema de Actualización en Vivo de Capgo puede entregar actualizaciones más rápido y eficientemente enviando solo los archivos modificados, en lugar del Paquete JS completo.
 
@@ -64,14 +64,14 @@ Si las actualizaciones diferenciales no parecen estar funcionando (es decir, los
 - Tu dispositivo tenga una conexión de red estable y pueda alcanzar los servidores de Capgo
 
 También puedes usar la aplicación web de Capgo para verificar los detalles de tu última carga:
-<Pasos>
+<Steps>
 1. Ve a la [aplicación web](https://app.capgo.io)
 2. Haz clic en tu aplicación
 3. Haz clic en el número de Paquetes de la barra de estadísticas.
 4. Selecciona el último Paquete
 5. Verifica el campo `Partial`
   ![tipo de bundle](/bundle_type.webp)
-</Pasos>
+</Steps>
 
 Si continúas teniendo problemas, contacta al soporte de Capgo para más asistencia. Pueden verificar los registros del servidor para confirmar que tus cargas parciales se están procesando correctamente y que los dispositivos están recibiendo los manifiestos actualizados.
 

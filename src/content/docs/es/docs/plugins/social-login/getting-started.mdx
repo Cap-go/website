@@ -7,11 +7,11 @@ sidebar:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Pasos, Card, CardGrid } from '@astrojs/starlight/components';
+import { Code, Steps, Card, CardGrid } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers';
 import MicroCard from '@/components/MicroCard.astro';
 
-<Pasos>
+<Steps>
 1. **Instala el paquete**
    <PackageManagers pkg="@Capgo/Capacitor-social-login" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
@@ -32,5 +32,5 @@ import MicroCard from '@/components/MicroCard.astro';
          </MicroCard>
       </div>
    </div>
-</Pasos>
+</Steps>
 

@@ -6,10 +6,10 @@ sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem, Pasos } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers';
 
-<Pasos>
+<Steps>
 1. **Instalar el paquete**
    <PackageManagers pkg="@Capgo/Capacitor-data-storage-sqlite" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
@@ -237,7 +237,7 @@ import { PackageManagers } from 'starlight-package-managers';
    const profile = await storage.getObject<any>('user_profile');
    console.log('Perfil de usuario:', profile);
    ```
-</Pasos>
+</Steps>
 
 ## Referencia de API
 

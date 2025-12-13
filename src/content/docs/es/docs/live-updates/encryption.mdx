@@ -6,7 +6,7 @@ sidebar:
 locale: es
 ---
 
-import { Aside, Pasos } from '@astrojs/starlight/components';
+import { Aside, Steps } from '@astrojs/starlight/components';
 
 Capgo proporciona un cifrado de extremo a extremo robusto para sus paquetes de aplicación, asegurando que su código JavaScript y activos estén protegidos durante la transmisión y almacenamiento. Este sistema de cifrado está diseñado para darle control completo sobre la seguridad de su aplicación mientras mantiene la conveniencia de las actualizaciones en vivo.
 
@@ -16,7 +16,7 @@ El sistema de cifrado de Capgo utiliza métodos criptográficos estándar de la 
 
 **Cifrado Verdadero de Extremo a Extremo**: A diferencia de otras plataformas de actualización OTA que solo firman actualizaciones (dejando el código públicamente legible), Capgo proporciona cifrado verdadero de extremo a extremo. Esto significa que solo sus usuarios pueden descifrar sus actualizaciones - nadie más, incluido Capgo mismo. El contenido de su paquete permanece completamente privado e ilegible durante todo el proceso de entrega.
 
-<Aside type="Consejo">
+<Aside type="tip">
 
 El cifrado es particularmente importante para:
 - Aplicaciones que manejan datos sensibles o lógica de negocio
@@ -55,7 +55,7 @@ El checksum se cifra junto con la clave AES para prevenir manipulación. Dado qu
 
 Este proceso asegura que incluso si un atacante intercepta el paquete cifrado, no puede modificar la clave de sesión AES ni proporcionar un checksum falso, porque necesitaría su clave privada para crear una firma válida que la clave pública pueda descifrar.
 
-<Aside type="Consejo">
+<Aside type="tip">
 
 RSA no puede cifrar grandes cantidades de datos eficientemente, por lo que AES se usa para el cifrado del paquete real mientras que RSA asegura la clave AES y proporciona verificación de integridad a través de la firma del checksum.
 
@@ -114,7 +114,7 @@ Esto crea:
 
 Estos archivos se crean en el directorio actual donde ejecuta el comando.
 
-<Aside type="Precaución">
+<Aside type="caution">
 
 **Notas Importantes de Almacenamiento:**
 - **Clave Privada (`.capgo_key_v2`)**: Nunca confirme esto en control de versiones. Este archivo debe mantenerse seguro y usarse solo para cifrado durante las cargas de paquetes.
@@ -147,7 +147,7 @@ Después de guardar la clave pública, **debe** sincronizar la plataforma Capaci
 npx cap sync
 ```
 
-<Aside type="Precaución">
+<Aside type="caution">
 
 **Pasos Requeridos**:
 1. El comando `key save` almacena la clave pública en su configuración de Capacitor
@@ -173,7 +173,7 @@ npx @capgo/cli@latest bundle upload --key-v2
 
 Para más control, puede cifrar paquetes manualmente:
 
-<Pasos>
+<Steps>
 
 1. **Crear un paquete zip:**
    ```shell
@@ -194,7 +194,7 @@ Para más control, puede cifrar paquetes manualmente:
    npx @capgo/cli@latest bundle upload --external https://your-storage.com/encrypted-bundle.zip --iv-session-key IV_SESSION_KEY_FROM_STEP_2
    ```
 
-</Pasos>
+</Steps>
 
 ## Gestión de Claves
 
@@ -234,7 +234,7 @@ npx @capgo/cli@latest key save --key ./.capgo_key_v2.pub
 
 Rote regularmente sus claves de cifrado para mayor seguridad:
 
-<Pasos>
+<Steps>
 
 1. **Generar nuevas claves:**
    ```shell
@@ -252,7 +252,7 @@ Rote regularmente sus claves de cifrado para mayor seguridad:
 
 4. **Desplegar la aplicación actualizada** antes de cargar paquetes cifrados con la nueva clave
 
-</Pasos>
+</Steps>
 
 ## Mejores Prácticas de Seguridad
 

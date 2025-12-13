@@ -6,7 +6,7 @@ sidebar:
 locale: es
 ---
 
-import { Pasos, Code } from '@astrojs/starlight/components';
+import { Steps, Code } from '@astrojs/starlight/components';
 
 Integrar Capgo en tu pipeline de CI/CD te permite automatizar completamente el proceso de construir e implementar actualizaciones en tu aplicación. Al aprovechar la CLI de Capgo y semantic-Lanzamiento, puedes asegurar implementaciones consistentes y confiables y habilitar iteración rápida.
 
@@ -74,14 +74,14 @@ Este comando sube la construcción web actual al canal especificado. Típicament
 
 Aunque los pasos exactos variarán dependiendo de tu herramienta CI/CD de elección, el proceso general para integrar Capgo se ve así:
 
-<Pasos>
+<Steps>
 1. **Generar una clave API**: Inicia sesión en el panel de Capgo y crea una nueva clave API. Esta clave se usará para autenticar la CLI en tu entorno CI/CD. ¡Manténla secreta y nunca la comprometas en tu repositorio!
 
 3. **Configurar el comando `bundle upload`**: Agrega un paso a tu configuración CI/CD que ejecute el comando `bundle upload` con los argumentos apropiados: <Code lang="YAML" title="Subir.yml" code={`- run: npx @capgo/cli@latest bundle upload --channel=production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />\n Reemplaza `Production` con el canal al que quieres implementar, `${{ secrets.CAPGO_API_KEY }}` con la Variable de entorno que contiene tu clave API, y agrega `--key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"` si usas encriptación.
 
 4. **Agregar el paso `upload` después de tu construcción web**: Asegúrate de que el paso `upload` venga después de que tu construcción web se haya completado exitosamente. Esto asegura que siempre estés implementando tu código más reciente.\n  Aquí hay una configuración de ejemplo para GitHub Actions:\n<Code lang="YAML" title="Subir.yml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v6\n - uses: actions/setup-node@v6\n  with:\n   node-version: '24'\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest bundle upload --channel=production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\} --key-data-v2 "$\{\{ secrets.CAPGO_PRIVATE_KEY \}\}"`} />
 
-</Pasos>
+</Steps>
 
 ## Gestión de Versiones con Semantic-Lanzamiento
 

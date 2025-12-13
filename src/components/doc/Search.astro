@@ -13,43 +13,50 @@ export type { Props } from '@astrojs/starlight/props'
   import { defineCustomElements } from '@orama/wc-components/loader'
   import { ORAMA_CLOUD_API_KEY, ORAMA_CLOUD_ENDPOINT } from 'astro:env/client'
 
-  document.querySelectorAll<HTMLOramaSearchBoxElement>('.orama-search-bar orama-search-box').forEach((el) => {
-    Object.assign(el, {
-      index: {
-        endpoint: ORAMA_CLOUD_ENDPOINT,
-        api_key: ORAMA_CLOUD_API_KEY,
-      },
-      linksTarget: '_top',
-      disableChat: false,
-      sourcesMap: {
-        title: 'title',
-        description: 'content',
-      },
-      resultMap: {
-        title: 'title',
-        description: 'content',
-        section: 'category',
-      },
-      searchPlaceholder: 'Search in Capgo',
-      chatPlaceholder: 'What do you dream of doing with Capgo?',
-      suggestions: ['What is Capgo?', 'How to use Live updates plugin?', 'How to use Capgo CLI?'],
-    } satisfies Partial<HTMLOramaSearchBoxElement>)
-  })
+  const hasOramaCloud = Boolean(ORAMA_CLOUD_ENDPOINT && ORAMA_CLOUD_API_KEY)
 
-  function updateSearchTheme() {
-    const theme = document.documentElement.dataset.theme || 'dark'
-    document.querySelectorAll('.orama-search-bar').forEach((el) => {
-      const button = el.querySelector('orama-search-button')
-      const box = el.querySelector('orama-search-box')
-      if (button) button.colorScheme = theme as any
-      if (box) box.colorScheme = theme as any
+  if (!hasOramaCloud) {
+    console.warn('[capgo] Orama Cloud env vars missing; search disabled.')
+    document.querySelectorAll('.orama-search-bar').forEach((el) => el.remove())
+  } else {
+    document.querySelectorAll<HTMLOramaSearchBoxElement>('.orama-search-bar orama-search-box').forEach((el) => {
+      Object.assign(el, {
+        index: {
+          endpoint: ORAMA_CLOUD_ENDPOINT,
+          api_key: ORAMA_CLOUD_API_KEY,
+        },
+        linksTarget: '_top',
+        disableChat: false,
+        sourcesMap: {
+          title: 'title',
+          description: 'content',
+        },
+        resultMap: {
+          title: 'title',
+          description: 'content',
+          section: 'category',
+        },
+        searchPlaceholder: 'Search in Capgo',
+        chatPlaceholder: 'What do you dream of doing with Capgo?',
+        suggestions: ['What is Capgo?', 'How to use Live updates plugin?', 'How to use Capgo CLI?'],
+      } satisfies Partial<HTMLOramaSearchBoxElement>)
     })
+
+    function updateSearchTheme() {
+      const theme = document.documentElement.dataset.theme || 'dark'
+      document.querySelectorAll('.orama-search-bar').forEach((el) => {
+        const button = el.querySelector('orama-search-button')
+        const box = el.querySelector('orama-search-box')
+        if (button) button.colorScheme = theme as any
+        if (box) box.colorScheme = theme as any
+      })
+    }
+
+    updateSearchTheme()
+
+    const observer = new MutationObserver(updateSearchTheme)
+    observer.observe(document.documentElement, { attributes: true, subtree: false })
   }
-
-  updateSearchTheme()
-
-  const observer = new MutationObserver(updateSearchTheme)
-  observer.observe(document.documentElement, { attributes: true, subtree: false })
 
   defineCustomElements()
 </script>

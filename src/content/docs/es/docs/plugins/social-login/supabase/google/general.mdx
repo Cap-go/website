@@ -5,7 +5,7 @@ description: Aprende cómo configurar el inicio de sesión de Google con Supabas
 sidebar:
     order: 1
 ---
-import { Pasos } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
 
 ## Introducción
 
@@ -29,7 +29,7 @@ Antes de comenzar, asegúrate de tener:
 
 ## Habilitar el proveedor OAuth de Google en Supabase
 
-<Pasos>
+<Steps>
 1. Ve a tu [Panel de Supabase](https://app.supabase.com/)
 2. Haz clic en tu proyecto
     <img src="/social-login-assets/supabase_project_select.webp" alt="Selector de Proyecto de Supabase" />
@@ -50,7 +50,7 @@ Antes de comenzar, asegúrate de tener:
 8. Haz clic en el botón `Save`
     <img src="/social-login-assets/supabase_google_provider_save.webp" alt="Guardar Proveedor de Google de Supabase" />
 
-</Pasos>
+</Steps>
 
 :::Nota
 __**NO DEBES**__ configurar `Client Secret (for OAuth)` o `Callback URL (for OAuth)`. Algunas fuentes también podrían sugerir configurar `Skip nonce checks` para Google en iOS, pero con esta guía no es necesario.

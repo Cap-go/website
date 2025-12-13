@@ -6,7 +6,7 @@ sidebar:
   order: 3
 ---
 
-import { Pasos, Aside, Card, CardGrid } from '@astrojs/starlight/components';
+import { Steps, Aside, Card, CardGrid } from '@astrojs/starlight/components';
 
 Compila y envía aplicaciones Android a Google Play Store usando la infraestructura de nube segura de Capgo.
 
@@ -51,7 +51,7 @@ Para compilaciones de lanzamiento, necesitas un keystore de firma:
 
 ## Crear un Keystore
 
-<Aside type="Consejo">
+<Aside type="tip">
 Para guías detalladas paso a paso con capturas de pantalla, visita:
 - [Guía de Certificados Android](https://capgo.app/cloud/native-builds/certificates/android/)
 - [Blog: Compilaciones Automáticas de Android con GitHub Actions](https://capgo.app/blog/automatic-capacitor-android-build-github-action/)
@@ -74,7 +74,7 @@ Responde las preguntas:
 - **Organización**: Nombre de tu empresa
 - **Ubicación**: Tu ciudad, estado, país
 
-<Aside type="Precaución">
+<Aside type="caution">
 **Importante**: ¡Mantén tu archivo keystore y contraseñas seguras! Si las pierdes, no podrás actualizar tu aplicación en Play Store.
 </Aside>
 
@@ -130,11 +130,11 @@ La cadena base64 ahora está en tu portapapeles.
 
 Para habilitar las cargas automáticas a Play Store, necesitas crear una cuenta de servicio de Google Cloud con los permisos apropiados.
 
-<Aside type="Consejo">
+<Aside type="tip">
 Para instrucciones detalladas con capturas de pantalla, consulta la [Guía de Certificados Android](https://capgo.app/cloud/native-builds/certificates/android/).
 </Aside>
 
-<Pasos>
+<Steps>
 
 1. **Crear Cuenta de Servicio en Google Cloud**
    - Ve a [Google Play Console](https://play.google.com/console) → Configuración → Acceso a la API
@@ -168,9 +168,9 @@ Para instrucciones detalladas con capturas de pantalla, consulta la [Guía de Ce
    - La cuenta de servicio recibirá un correo de invitación
    - Acepta la invitación para activar los permisos
 
-</Pasos>
+</Steps>
 
-<Aside type="Precaución">
+<Aside type="caution">
 El archivo JSON de la cuenta de servicio contiene credenciales sensibles. Nunca lo confirmes en control de versiones ni lo compartas públicamente.
 </Aside>
 
@@ -249,7 +249,7 @@ jobs:
 
 ### Qué Sucede Durante una Compilación Android
 
-<Pasos>
+<Steps>
 
 1. **Inicialización del Sandbox** (~5 segundos)
    - Contenedor seguro iniciado
@@ -277,7 +277,7 @@ jobs:
    - Contenedor destruido
    - Sin artefactos retenidos
 
-</Pasos>
+</Steps>
 
 ### Pila de Compilación
 
@@ -311,7 +311,7 @@ Tiempos típicos de compilación Android:
 | Lanzamiento (sin ProGuard) | 3-4 minutos |
 | Lanzamiento (con ProGuard) | 4-6 minutos |
 
-<Aside type="Nota">
+<Aside type="note">
 Las compilaciones Android cuestan **1× la tarifa base** (la mitad del costo de las compilaciones iOS).
 </Aside>
 
