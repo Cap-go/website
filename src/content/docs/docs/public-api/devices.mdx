@@ -121,6 +121,7 @@ interface Device {
   version_build: string;
   is_prod: boolean;
   is_emulator: boolean;
+  key_id: string | null; // First 4 chars of encryption key (e.g., "MIIB")
 }
 ```
 
@@ -143,6 +144,7 @@ interface Device {
   version_build: string;
   is_prod: boolean;
   is_emulator: boolean;
+  key_id: string | null; // First 4 chars of encryption key (e.g., "MIIB")
 }
 ```
 
