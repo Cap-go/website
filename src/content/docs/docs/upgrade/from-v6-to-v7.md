@@ -2,7 +2,7 @@
 title: "From V6 to V7"
 description: "A detailed guide on transitioning from version 6 to version 7 of Capgo updater, outlining the necessary steps and considerations for a successful upgrade process, ensuring compatibility with the latest Capacitor features and improvements."
 sidebar:
-  order: 1
+  order: 2
 ---
 
 ## Why this upgrade
