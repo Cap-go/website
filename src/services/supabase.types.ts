@@ -926,7 +926,7 @@ export type Database = {
           paying_monthly: number | null
           paying_yearly: number | null
           plan_maker: number | null
-          plan_payg: number | null
+          plan_enterprise: number | null
           plan_solo: number | null
           plan_team: number | null
           registers_today: number
@@ -953,7 +953,7 @@ export type Database = {
           paying_monthly?: number | null
           paying_yearly?: number | null
           plan_maker?: number | null
-          plan_payg?: number | null
+          plan_enterprise?: number | null
           plan_solo?: number | null
           plan_team?: number | null
           registers_today?: number
@@ -980,7 +980,7 @@ export type Database = {
           paying_monthly?: number | null
           paying_yearly?: number | null
           plan_maker?: number | null
-          plan_payg?: number | null
+          plan_enterprise?: number | null
           plan_solo?: number | null
           plan_team?: number | null
           registers_today?: number
