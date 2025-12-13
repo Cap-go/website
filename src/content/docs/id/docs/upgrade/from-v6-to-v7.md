@@ -3,7 +3,7 @@ title: "Dari V6 ke V7"
 locale: id
 description: "Panduan detail tentang transisi dari versi 6 ke versi 7 dari Capgo updater, menguraikan langkah-langkah dan pertimbangan yang diperlukan untuk proses upgrade yang sukses, memastikan kompatibilitas dengan fitur dan peningkatan Capacitor terbaru."
 sidebar:
-  order: 1
+  order: 2
 ---
 
 ## Mengapa upgrade ini

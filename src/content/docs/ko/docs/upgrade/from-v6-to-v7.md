@@ -3,7 +3,7 @@ title: "V6에서 V7로"
 locale: ko
 description: "Capgo 업데이터의 버전 6에서 버전 7로 전환하는 자세한 가이드로, 성공적인 업그레이드 프로세스에 필요한 단계와 고려 사항을 설명하여 최신 Capacitor 기능 및 개선 사항과의 호환성을 보장합니다."
 sidebar:
-  order: 1
+  order: 2
 ---
 
 ## 이 업그레이드가 필요한 이유

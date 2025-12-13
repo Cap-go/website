@@ -3,7 +3,7 @@ title: "从 V6 升级到 V7"
 locale: zh
 description: "一份关于从 Capgo updater 版本 6 过渡到版本 7 的详细指南，概述成功升级过程所需的步骤和注意事项，确保与最新的 Capacitor 功能和改进兼容。"
 sidebar:
-  order: 1
+  order: 2
 ---
 
 ## 为什么要升级

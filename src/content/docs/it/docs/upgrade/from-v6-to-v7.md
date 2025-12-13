@@ -3,7 +3,7 @@ title: "Da V6 a V7"
 locale: it
 description: "Una guida dettagliata sulla transizione dalla versione 6 alla versione 7 dell'updater Capgo, delineando i passaggi necessari e le considerazioni per un processo di aggiornamento di successo, garantendo la compatibilità con le ultime funzionalità e miglioramenti di Capacitor."
 sidebar:
-  order: 1
+  order: 2
 ---
 
 ## Perché questo aggiornamento
