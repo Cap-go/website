@@ -1,26 +1,26 @@
 ---
 locale: en
 ---
-# Using @capgo/keep-awake Package
+# Using @capgo/capacitor-keep-awake Package
 
-The `@capgo/keep-awake` package allows you to prevent the device screen from dimming or sleeping. This is useful for video players, navigation apps, games, presentations, and any app that needs the screen to stay on. In this tutorial, we will guide you through the process of installing and using this package in your Capacitor app.
+The `@capgo/capacitor-keep-awake` package allows you to prevent the device screen from dimming or sleeping. This is useful for video players, navigation apps, games, presentations, and any app that needs the screen to stay on. In this tutorial, we will guide you through the process of installing and using this package in your Capacitor app.
 
 ## Installation
 
-To install the `@capgo/keep-awake` package, run the following command in your project's root directory:
+To install the `@capgo/capacitor-keep-awake` package, run the following command in your project's root directory:
 
 ```bash
-npm install @capgo/keep-awake
+npm install @capgo/capacitor-keep-awake
 npx cap sync
 ```
 
 ## iOS Setup
 
-The `@capgo/keep-awake` package works out of the box on iOS, so no additional setup is required.
+The `@capgo/capacitor-keep-awake` package works out of the box on iOS, so no additional setup is required.
 
 ## Android Setup
 
-The `@capgo/keep-awake` package works out of the box on Android. No permissions are required.
+The `@capgo/capacitor-keep-awake` package works out of the box on Android. No permissions are required.
 
 ## Web Setup
 
@@ -28,14 +28,14 @@ On the web, the plugin uses the Screen Wake Lock API. Not all browsers support t
 
 ## API
 
-The `@capgo/keep-awake` package provides the following API methods:
+The `@capgo/capacitor-keep-awake` package provides the following API methods:
 
 ### keepAwake()
 
 This method prevents the device from dimming the screen.
 
 ```typescript
-import { KeepAwake } from '@capgo/keep-awake';
+import { KeepAwake } from '@capgo/capacitor-keep-awake';
 
 async function enableKeepAwake() {
   await KeepAwake.keepAwake();
@@ -48,7 +48,7 @@ async function enableKeepAwake() {
 This method allows the device to dim the screen (disables keep awake).
 
 ```typescript
-import { KeepAwake } from '@capgo/keep-awake';
+import { KeepAwake } from '@capgo/capacitor-keep-awake';
 
 async function disableKeepAwake() {
   await KeepAwake.allowSleep();
@@ -61,7 +61,7 @@ async function disableKeepAwake() {
 This method checks if the keep awake feature is supported on the current platform.
 
 ```typescript
-import { KeepAwake } from '@capgo/keep-awake';
+import { KeepAwake } from '@capgo/capacitor-keep-awake';
 
 async function checkSupport() {
   const { isSupported } = await KeepAwake.isSupported();
@@ -74,7 +74,7 @@ async function checkSupport() {
 This method checks if the device is currently being kept awake.
 
 ```typescript
-import { KeepAwake } from '@capgo/keep-awake';
+import { KeepAwake } from '@capgo/capacitor-keep-awake';
 
 async function checkStatus() {
   const { isKeptAwake } = await KeepAwake.isKeptAwake();
@@ -87,7 +87,7 @@ async function checkStatus() {
 This method returns the native plugin version.
 
 ```typescript
-import { KeepAwake } from '@capgo/keep-awake';
+import { KeepAwake } from '@capgo/capacitor-keep-awake';
 
 async function getVersion() {
   const { version } = await KeepAwake.getPluginVersion();
@@ -100,7 +100,7 @@ async function getVersion() {
 Here's a complete example showing how to use keep awake with a video player:
 
 ```typescript
-import { KeepAwake } from '@capgo/keep-awake';
+import { KeepAwake } from '@capgo/capacitor-keep-awake';
 
 class VideoPlayerController {
   private isPlaying = false;
@@ -164,7 +164,7 @@ await player.cleanup();
 Here's an example of a presentation mode toggle button:
 
 ```typescript
-import { KeepAwake } from '@capgo/keep-awake';
+import { KeepAwake } from '@capgo/capacitor-keep-awake';
 
 class PresentationMode {
   private enabled = false;
@@ -233,4 +233,4 @@ function updateUI(isEnabled: boolean) {
 
 5. **Consider battery impact** - Keeping the screen on drains battery faster. Only use when necessary.
 
-That's it! You have successfully learned how to use the `@capgo/keep-awake` package in your Capacitor app to prevent the screen from dimming.
+That's it! You have successfully learned how to use the `@capgo/capacitor-keep-awake` package in your Capacitor app to prevent the screen from dimming.

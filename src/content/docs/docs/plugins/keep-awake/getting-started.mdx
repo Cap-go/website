@@ -11,7 +11,7 @@ import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
 1. **Install the package**
-   <PackageManagers pkg="@capgo/keep-awake" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@capgo/capacitor-keep-awake" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sync with native projects**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
@@ -36,7 +36,7 @@ Works in modern browsers that support the Screen Wake Lock API. Call `isSupporte
 Import the plugin and use its methods to control screen wake lock:
 
 ```typescript
-import { KeepAwake } from '@capgo/keep-awake';
+import { KeepAwake } from '@capgo/capacitor-keep-awake';
 
 // Check if keep awake is supported
 const checkSupport = async () => {
@@ -111,7 +111,7 @@ const { version } = await KeepAwake.getPluginVersion();
 ## Complete Example - Video Player
 
 ```typescript
-import { KeepAwake } from '@capgo/keep-awake';
+import { KeepAwake } from '@capgo/capacitor-keep-awake';
 
 export class VideoPlayerService {
   private isPlaying = false;
@@ -160,7 +160,7 @@ export class VideoPlayerService {
 ## Complete Example - Navigation App
 
 ```typescript
-import { KeepAwake } from '@capgo/keep-awake';
+import { KeepAwake } from '@capgo/capacitor-keep-awake';
 import { App } from '@capacitor/app';
 
 export class NavigationService {
@@ -193,7 +193,7 @@ export class NavigationService {
 ## Complete Example - Presentation Mode
 
 ```typescript
-import { KeepAwake } from '@capgo/keep-awake';
+import { KeepAwake } from '@capgo/capacitor-keep-awake';
 
 export class PresentationMode {
   private isPresenting = false;

@@ -91,7 +91,7 @@
   "@capgo/capacitor-compass": 375,
   "@capgo/capacitor-file": 311,
   "@capgo/capacitor-bluetooth-low-energy": 0,
-  "@capgo/keep-awake": 0,
+  "@capgo/capacitor-keep-awake": 0,
   "@capgo/capacitor-in-app-review": 0,
   "@capgo/capacitor-file-picker": 0
 }

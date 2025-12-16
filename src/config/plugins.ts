@@ -814,7 +814,7 @@ export const actions = [
     icon: RadioIcon,
   },
   {
-    name: '@capgo/keep-awake',
+    name: '@capgo/capacitor-keep-awake',
     author: 'github.com/Cap-go',
     description: 'Prevent device screen from dimming or sleeping for video players, navigation, and presentations',
     href: 'https://github.com/Cap-go/capacitor-keep-awake/',
