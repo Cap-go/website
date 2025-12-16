@@ -52,6 +52,8 @@ import ShieldExclamationIcon from 'astro-heroicons/mini/ShieldExclamation.astro'
 import ArrowsRightLeftIcon from 'astro-heroicons/mini/ArrowsRightLeft.astro'
 import FolderIcon from 'astro-heroicons/mini/Folder.astro'
 import SunIcon from 'astro-heroicons/mini/Sun.astro'
+import StarIcon from 'astro-heroicons/mini/Star.astro'
+import FolderOpenIcon from 'astro-heroicons/mini/FolderOpen.astro'
 
 export interface Action {
   icon?: any
@@ -818,5 +820,21 @@ export const actions = [
     href: 'https://github.com/Cap-go/capacitor-keep-awake/',
     title: 'Keep Awake',
     icon: SunIcon,
+  },
+  {
+    name: '@capgo/capacitor-in-app-review',
+    author: 'github.com/Cap-go',
+    description: 'Prompt users to submit app store ratings and reviews without leaving your app using native iOS and Android APIs',
+    href: 'https://github.com/Cap-go/capacitor-in-app-review/',
+    title: 'In App Review',
+    icon: StarIcon,
+  },
+  {
+    name: '@capgo/capacitor-file-picker',
+    author: 'github.com/Cap-go',
+    description: 'Pick files, images, videos, and directories with full native support for iOS and Android including HEIC conversion',
+    href: 'https://github.com/Cap-go/capacitor-file-picker/',
+    title: 'File Picker',
+    icon: FolderOpenIcon,
   },
 ]

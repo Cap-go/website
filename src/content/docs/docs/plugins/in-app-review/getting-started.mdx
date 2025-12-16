@@ -1,0 +1,210 @@
+---
+title: Getting Started
+description: Learn how to install and use the In-App Review plugin to request app store reviews in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-in-app-review" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Usage
+
+Import the plugin and request a review at appropriate moments in your app:
+
+```typescript
+import { CapgoInAppReview } from '@capgo/capacitor-in-app-review';
+
+// Request a review at a natural point in your app's user flow
+const requestReview = async () => {
+  try {
+    await CapgoInAppReview.requestReview();
+    console.log('Review requested successfully');
+  } catch (error) {
+    console.error('Failed to request review:', error);
+  }
+};
+```
+
+## API Reference
+
+### requestReview()
+
+Triggers the native in-app review dialog.
+
+```typescript
+await CapgoInAppReview.requestReview();
+```
+
+**Important Notes:**
+- The review dialog may not be displayed every time this method is called
+- Both Apple and Google have guidelines that limit how often the prompt can appear
+- There is no guarantee that the user will see the review prompt
+- The method resolves successfully even if the dialog was not shown
+- Do not call this in response to a user action like a button tap
+
+### getPluginVersion()
+
+Returns the native plugin version.
+
+```typescript
+const { version } = await CapgoInAppReview.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+## Best Practices
+
+### When to Request Reviews
+
+Request reviews at moments when users are most likely to have a positive experience:
+
+```typescript
+// Good examples:
+// - After completing a level in a game
+// - After successfully completing a task
+// - After the user has used the app multiple times
+// - After a positive interaction
+
+// Example: Track usage and request review after positive milestone
+let taskCompletedCount = 0;
+
+const onTaskComplete = async () => {
+  taskCompletedCount++;
+
+  // Request review after user completes 5 tasks
+  if (taskCompletedCount === 5) {
+    await CapgoInAppReview.requestReview();
+  }
+};
+```
+
+### When NOT to Request Reviews
+
+```typescript
+// Bad examples - DO NOT do these:
+// - On app launch
+// - In response to a "Rate Us" button tap
+// - After an error or negative experience
+// - Too frequently (respect platform quotas)
+```
+
+### Track Review Requests
+
+Since the platform controls whether the dialog is shown, track your requests:
+
+```typescript
+import { CapgoInAppReview } from '@capgo/capacitor-in-app-review';
+import { Preferences } from '@capacitor/preferences';
+
+const requestReviewIfAppropriate = async () => {
+  const lastRequest = await Preferences.get({ key: 'lastReviewRequest' });
+  const daysSinceLastRequest = lastRequest.value
+    ? (Date.now() - parseInt(lastRequest.value)) / (1000 * 60 * 60 * 24)
+    : Infinity;
+
+  // Only request if it's been at least 30 days
+  if (daysSinceLastRequest >= 30) {
+    await CapgoInAppReview.requestReview();
+    await Preferences.set({
+      key: 'lastReviewRequest',
+      value: Date.now().toString()
+    });
+  }
+};
+```
+
+## Platform Notes
+
+### iOS
+
+- Uses `SKStoreReviewController`
+- The system automatically limits the display to **3 times within a 365-day period**
+- The dialog may not appear based on App Store policy
+- Testing: In development, the dialog will always appear but won't submit reviews
+
+### Android
+
+- Uses the **Play In-App Review API**
+- Google Play enforces a quota on how often a user can be shown the dialog
+- The dialog will **not be shown in debug builds**
+- For testing, you need to:
+  - Have the app installed from the Play Store (internal testing track works)
+  - Have a Google account on the device
+
+## Complete Example
+
+```typescript
+import { CapgoInAppReview } from '@capgo/capacitor-in-app-review';
+import { Preferences } from '@capacitor/preferences';
+
+export class ReviewService {
+  private static REVIEW_REQUEST_KEY = 'lastReviewRequest';
+  private static MIN_DAYS_BETWEEN_REQUESTS = 30;
+  private static MIN_APP_LAUNCHES = 5;
+
+  async checkAndRequestReview(): Promise<boolean> {
+    const shouldRequest = await this.shouldRequestReview();
+
+    if (shouldRequest) {
+      try {
+        await CapgoInAppReview.requestReview();
+        await this.recordReviewRequest();
+        return true;
+      } catch (error) {
+        console.error('Review request failed:', error);
+        return false;
+      }
+    }
+
+    return false;
+  }
+
+  private async shouldRequestReview(): Promise<boolean> {
+    // Check app launch count
+    const launchCount = await this.getAppLaunchCount();
+    if (launchCount < ReviewService.MIN_APP_LAUNCHES) {
+      return false;
+    }
+
+    // Check days since last request
+    const lastRequest = await Preferences.get({ key: ReviewService.REVIEW_REQUEST_KEY });
+    if (lastRequest.value) {
+      const daysSince = (Date.now() - parseInt(lastRequest.value)) / (1000 * 60 * 60 * 24);
+      if (daysSince < ReviewService.MIN_DAYS_BETWEEN_REQUESTS) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  private async getAppLaunchCount(): Promise<number> {
+    const count = await Preferences.get({ key: 'appLaunchCount' });
+    return count.value ? parseInt(count.value) : 0;
+  }
+
+  private async recordReviewRequest(): Promise<void> {
+    await Preferences.set({
+      key: ReviewService.REVIEW_REQUEST_KEY,
+      value: Date.now().toString()
+    });
+  }
+
+  async incrementLaunchCount(): Promise<void> {
+    const current = await this.getAppLaunchCount();
+    await Preferences.set({
+      key: 'appLaunchCount',
+      value: (current + 1).toString()
+    });
+  }
+}
+```

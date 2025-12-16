@@ -1,0 +1,355 @@
+---
+title: Getting Started
+description: Learn how to install and use the File Picker plugin to select files, images, videos, and directories in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-file-picker" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Requirements
+
+- iOS: iOS 15.0+
+- Android: API 24+ (Android 7.0+)
+- Web: Modern browsers with File API support
+
+## Basic Usage
+
+### Pick Files
+
+```typescript
+import { FilePicker } from '@capgo/capacitor-file-picker';
+
+// Pick any files
+const pickFiles = async () => {
+  const result = await FilePicker.pickFiles({
+    limit: 5 // Max 5 files
+  });
+
+  for (const file of result.files) {
+    console.log('File name:', file.name);
+    console.log('File path:', file.path);
+    console.log('MIME type:', file.mimeType);
+    console.log('Size:', file.size);
+  }
+};
+
+// Pick specific file types
+const pickPDFs = async () => {
+  const result = await FilePicker.pickFiles({
+    types: ['application/pdf'],
+    limit: 1
+  });
+  return result.files[0];
+};
+```
+
+### Pick Images
+
+```typescript
+import { FilePicker } from '@capgo/capacitor-file-picker';
+
+const pickImages = async () => {
+  const result = await FilePicker.pickImages({
+    limit: 10,
+    ordered: true // Show selection order badges (iOS 15+)
+  });
+
+  for (const image of result.files) {
+    console.log('Image:', image.name);
+    console.log('Dimensions:', image.width, 'x', image.height);
+    console.log('Path:', image.path);
+  }
+};
+```
+
+### Pick Videos
+
+```typescript
+import { FilePicker } from '@capgo/capacitor-file-picker';
+
+const pickVideos = async () => {
+  const result = await FilePicker.pickVideos({
+    limit: 3,
+    skipTranscoding: true // Skip video transcoding on iOS
+  });
+
+  for (const video of result.files) {
+    console.log('Video:', video.name);
+    console.log('Duration:', video.duration, 'seconds');
+    console.log('Dimensions:', video.width, 'x', video.height);
+  }
+};
+```
+
+### Pick Media (Images + Videos)
+
+```typescript
+import { FilePicker } from '@capgo/capacitor-file-picker';
+
+const pickMedia = async () => {
+  const result = await FilePicker.pickMedia({
+    limit: 0 // Unlimited selection
+  });
+
+  return result.files;
+};
+```
+
+### Pick Directory
+
+```typescript
+import { FilePicker } from '@capgo/capacitor-file-picker';
+
+const pickDirectory = async () => {
+  const result = await FilePicker.pickDirectory();
+  console.log('Selected directory:', result.path);
+  return result.path;
+};
+```
+
+## API Reference
+
+### pickFiles(options?)
+
+Pick one or more files from the device.
+
+```typescript
+interface PickFilesOptions {
+  types?: string[];     // MIME types or extensions: ['image/*'], ['application/pdf']
+  limit?: number;       // Max files (0 = unlimited)
+  readData?: boolean;   // Return base64 data
+}
+
+const result = await FilePicker.pickFiles(options);
+// Returns: { files: PickedFile[] }
+```
+
+### pickImages(options?)
+
+Pick images from the gallery. Android/iOS only.
+
+```typescript
+interface PickMediaOptions {
+  limit?: number;           // Max files (0 = unlimited)
+  readData?: boolean;       // Return base64 data
+  skipTranscoding?: boolean; // iOS: Skip transcoding
+  ordered?: boolean;        // iOS 15+: Show selection order
+}
+
+const result = await FilePicker.pickImages(options);
+```
+
+### pickVideos(options?)
+
+Pick videos from the gallery. Android/iOS only.
+
+```typescript
+const result = await FilePicker.pickVideos(options);
+```
+
+### pickMedia(options?)
+
+Pick images or videos from the gallery. Android/iOS only.
+
+```typescript
+const result = await FilePicker.pickMedia(options);
+```
+
+### pickDirectory()
+
+Pick a directory. Android/iOS only.
+
+```typescript
+const result = await FilePicker.pickDirectory();
+// Returns: { path: string }
+```
+
+### convertHeicToJpeg(options)
+
+Convert a HEIC image to JPEG. iOS only.
+
+```typescript
+interface ConvertHeicToJpegOptions {
+  path: string;      // Path to HEIC file
+  quality?: number;  // 0.0 - 1.0 (default: 0.9)
+}
+
+const result = await FilePicker.convertHeicToJpeg({
+  path: '/path/to/image.heic',
+  quality: 0.8
+});
+// Returns: { path: string } - Path to converted JPEG
+```
+
+### copyFile(options)
+
+Copy a file to a new location.
+
+```typescript
+interface CopyFileOptions {
+  from: string;        // Source path
+  to: string;          // Destination path
+  overwrite?: boolean; // Overwrite if exists (default: false)
+}
+
+await FilePicker.copyFile({
+  from: '/path/to/source.jpg',
+  to: '/path/to/destination.jpg',
+  overwrite: true
+});
+```
+
+### checkPermissions() / requestPermissions()
+
+Check or request file access permissions. Android only.
+
+```typescript
+const status = await FilePicker.checkPermissions();
+// Returns: { readExternalStorage: 'granted' | 'denied' | 'prompt' }
+
+const newStatus = await FilePicker.requestPermissions();
+```
+
+## PickedFile Interface
+
+```typescript
+interface PickedFile {
+  name: string;       // File name
+  path: string;       // File path
+  mimeType: string;   // MIME type
+  size: number;       // Size in bytes
+  data?: string;      // Base64 data (if readData was true)
+  blob?: Blob;        // Blob instance (Web only)
+  width?: number;     // Width in pixels (images/videos)
+  height?: number;    // Height in pixels (images/videos)
+  duration?: number;  // Duration in seconds (videos)
+  modifiedAt?: number; // Last modified timestamp
+}
+```
+
+## Complete Example
+
+```typescript
+import { FilePicker } from '@capgo/capacitor-file-picker';
+import { Capacitor } from '@capacitor/core';
+
+export class FilePickerService {
+  async pickProfileImage(): Promise<string | null> {
+    try {
+      const result = await FilePicker.pickImages({
+        limit: 1
+      });
+
+      if (result.files.length === 0) {
+        return null;
+      }
+
+      const file = result.files[0];
+
+      // Convert HEIC to JPEG on iOS if needed
+      if (Capacitor.getPlatform() === 'ios' &&
+          file.mimeType === 'image/heic') {
+        const converted = await FilePicker.convertHeicToJpeg({
+          path: file.path,
+          quality: 0.9
+        });
+        return converted.path;
+      }
+
+      return file.path;
+    } catch (error) {
+      console.error('Failed to pick image:', error);
+      return null;
+    }
+  }
+
+  async pickDocuments(): Promise<PickedFile[]> {
+    const result = await FilePicker.pickFiles({
+      types: [
+        'application/pdf',
+        'application/msword',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      ],
+      limit: 10
+    });
+
+    return result.files;
+  }
+
+  async pickAndReadFile(): Promise<{ name: string; data: string } | null> {
+    const result = await FilePicker.pickFiles({
+      limit: 1,
+      readData: true
+    });
+
+    if (result.files.length === 0) return null;
+
+    const file = result.files[0];
+    return {
+      name: file.name,
+      data: file.data! // Base64 encoded data
+    };
+  }
+
+  async getVideoForUpload(): Promise<{
+    path: string;
+    duration: number;
+    dimensions: { width: number; height: number };
+  } | null> {
+    const result = await FilePicker.pickVideos({
+      limit: 1,
+      skipTranscoding: false // Ensure compatible format
+    });
+
+    if (result.files.length === 0) return null;
+
+    const video = result.files[0];
+    return {
+      path: video.path,
+      duration: video.duration || 0,
+      dimensions: {
+        width: video.width || 0,
+        height: video.height || 0
+      }
+    };
+  }
+}
+```
+
+## Platform Notes
+
+### iOS
+
+- Requires iOS 15.0+
+- Uses `PHPickerViewController` for images/videos
+- Uses `UIDocumentPickerViewController` for files
+- HEIC images can be converted to JPEG using `convertHeicToJpeg()`
+- `ordered` option shows selection order badges (iOS 15+)
+- `skipTranscoding` prevents automatic video format conversion
+
+### Android
+
+- Requires API 24+ (Android 7.0+)
+- Uses `Intent.ACTION_OPEN_DOCUMENT` for file picking
+- Uses `Intent.ACTION_PICK` with MediaStore for media
+- Permissions are automatically requested when needed
+- Check permissions with `checkPermissions()` before picking
+
+### Web
+
+- Uses native `<input type="file">` element
+- Returns `Blob` objects in the `blob` property
+- `pickDirectory()` is not supported on web
+- HEIC conversion is not supported on web
+- Some metadata (dimensions, duration) may not be available
