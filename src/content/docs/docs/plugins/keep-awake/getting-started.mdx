@@ -1,0 +1,293 @@
+---
+title: Getting Started
+description: Learn how to install and use the Keep Awake plugin to prevent screen dimming in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/keep-awake" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Platform Setup
+
+### iOS
+
+Works out of the box. Uses `UIApplication.shared.isIdleTimerDisabled` to control screen sleep.
+
+### Android
+
+Works out of the box. Uses `WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON` flag. No permissions required.
+
+### Web
+
+Works in modern browsers that support the Screen Wake Lock API. Call `isSupported()` first to check if wake lock is available on the current browser.
+
+## Basic Usage
+
+Import the plugin and use its methods to control screen wake lock:
+
+```typescript
+import { KeepAwake } from '@capgo/keep-awake';
+
+// Check if keep awake is supported
+const checkSupport = async () => {
+  const { isSupported } = await KeepAwake.isSupported();
+  console.log('Keep awake supported:', isSupported);
+};
+
+// Keep the screen on
+const keepScreenOn = async () => {
+  await KeepAwake.keepAwake();
+  console.log('Screen will stay on');
+};
+
+// Allow the screen to sleep
+const allowScreenSleep = async () => {
+  await KeepAwake.allowSleep();
+  console.log('Screen can now sleep');
+};
+
+// Check current status
+const checkStatus = async () => {
+  const { isKeptAwake } = await KeepAwake.isKeptAwake();
+  console.log('Screen is kept awake:', isKeptAwake);
+};
+```
+
+## API Reference
+
+### keepAwake()
+
+Prevents the device from dimming the screen.
+
+```typescript
+await KeepAwake.keepAwake();
+```
+
+### allowSleep()
+
+Allows the device to dim the screen (disables keep awake).
+
+```typescript
+await KeepAwake.allowSleep();
+```
+
+### isSupported()
+
+Checks if the keep awake feature is supported on the current platform.
+
+```typescript
+const { isSupported } = await KeepAwake.isSupported();
+// Returns: { isSupported: boolean }
+```
+
+### isKeptAwake()
+
+Checks if the device is currently being kept awake.
+
+```typescript
+const { isKeptAwake } = await KeepAwake.isKeptAwake();
+// Returns: { isKeptAwake: boolean }
+```
+
+### getPluginVersion()
+
+Gets the native plugin version.
+
+```typescript
+const { version } = await KeepAwake.getPluginVersion();
+// Returns: { version: string }
+```
+
+## Complete Example - Video Player
+
+```typescript
+import { KeepAwake } from '@capgo/keep-awake';
+
+export class VideoPlayerService {
+  private isPlaying = false;
+
+  async init() {
+    const { isSupported } = await KeepAwake.isSupported();
+    if (!isSupported) {
+      console.warn('Keep awake not supported on this platform');
+    }
+  }
+
+  async onVideoPlay() {
+    this.isPlaying = true;
+    try {
+      await KeepAwake.keepAwake();
+      console.log('Screen will stay on during playback');
+    } catch (error) {
+      console.error('Failed to keep screen awake:', error);
+    }
+  }
+
+  async onVideoPause() {
+    this.isPlaying = false;
+    try {
+      await KeepAwake.allowSleep();
+      console.log('Screen can now dim');
+    } catch (error) {
+      console.error('Failed to allow sleep:', error);
+    }
+  }
+
+  async onVideoEnd() {
+    this.isPlaying = false;
+    await KeepAwake.allowSleep();
+  }
+
+  // Call this when component/page is destroyed
+  async cleanup() {
+    if (this.isPlaying) {
+      await KeepAwake.allowSleep();
+    }
+  }
+}
+```
+
+## Complete Example - Navigation App
+
+```typescript
+import { KeepAwake } from '@capgo/keep-awake';
+import { App } from '@capacitor/app';
+
+export class NavigationService {
+  private isNavigating = false;
+
+  async startNavigation() {
+    this.isNavigating = true;
+
+    // Keep screen on during navigation
+    await KeepAwake.keepAwake();
+
+    // Handle app going to background
+    App.addListener('appStateChange', async ({ isActive }) => {
+      if (!isActive && this.isNavigating) {
+        // App went to background - screen management is handled by OS
+      } else if (isActive && this.isNavigating) {
+        // App came back - ensure screen stays on
+        await KeepAwake.keepAwake();
+      }
+    });
+  }
+
+  async stopNavigation() {
+    this.isNavigating = false;
+    await KeepAwake.allowSleep();
+  }
+}
+```
+
+## Complete Example - Presentation Mode
+
+```typescript
+import { KeepAwake } from '@capgo/keep-awake';
+
+export class PresentationMode {
+  private isPresenting = false;
+
+  async togglePresentationMode() {
+    const { isSupported } = await KeepAwake.isSupported();
+
+    if (!isSupported) {
+      alert('Presentation mode not available on this device');
+      return;
+    }
+
+    const { isKeptAwake } = await KeepAwake.isKeptAwake();
+
+    if (isKeptAwake) {
+      await KeepAwake.allowSleep();
+      this.isPresenting = false;
+      console.log('Presentation mode OFF');
+    } else {
+      await KeepAwake.keepAwake();
+      this.isPresenting = true;
+      console.log('Presentation mode ON');
+    }
+  }
+
+  async forceExit() {
+    if (this.isPresenting) {
+      await KeepAwake.allowSleep();
+      this.isPresenting = false;
+    }
+  }
+}
+```
+
+## Best Practices
+
+1. **Check support first**
+   Always verify keep awake is supported before using it:
+   ```typescript
+   const { isSupported } = await KeepAwake.isSupported();
+   if (!isSupported) {
+     // Handle gracefully - feature won't work on this platform
+   }
+   ```
+
+2. **Always allow sleep when done**
+   Make sure to call `allowSleep()` when the feature is no longer needed:
+   ```typescript
+   // In cleanup/destroy lifecycle
+   async ngOnDestroy() {
+     await KeepAwake.allowSleep();
+   }
+   ```
+
+3. **Handle errors gracefully**
+   ```typescript
+   try {
+     await KeepAwake.keepAwake();
+   } catch (error) {
+     console.error('Failed to keep screen awake:', error);
+   }
+   ```
+
+4. **Consider battery impact**
+   Keeping the screen on drains battery faster. Only use when necessary and disable when not needed.
+
+5. **Handle app lifecycle**
+   Remember to manage wake lock state when app goes to background/foreground.
+
+## Use Cases
+
+- **Video Players** - Keep screen on during playback
+- **Navigation Apps** - Prevent dimming during turn-by-turn navigation
+- **Games** - Keep screen active during gameplay
+- **Presentations** - Prevent sleep during slideshows
+- **Reading Apps** - Keep screen on while reading
+- **Cooking Apps** - Keep recipe visible while cooking
+- **Fitness Apps** - Keep workout instructions visible
+- **Kiosk Mode** - Prevent idle screen dimming
+
+## Platform Notes
+
+### iOS
+- Uses `UIApplication.shared.isIdleTimerDisabled`
+- Works across all iOS versions supported by Capacitor
+- No permissions required
+
+### Android
+- Uses `WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON`
+- Works across all Android versions supported by Capacitor
+- No permissions required
+
+### Web
+- Uses the Screen Wake Lock API (`navigator.wakeLock`)
+- Requires a secure context (HTTPS)
+- Not supported in all browsers - check with `isSupported()`
+- Wake lock may be released by the browser when the tab is not visible

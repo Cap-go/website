@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: Discover how to install and configure the Capacitor Social Login plugin to enhance your app's authentication with seamless integration for Google, Apple, and Facebook logins.
+description: Discover how to install and configure the Capacitor Social Login plugin to enhance your app's authentication with seamless integration for Google, Apple, Facebook, and generic OAuth2 logins.
 sidebar:
   order: 2
 ---
@@ -19,7 +19,7 @@ import MicroCard from '@/components/MicroCard.astro'
 
 3. **Configure the plugin**
    <div class="flex flex-nowrap gap-4 h-full">
-      <div style="display: flex; gap: 1rem; width: 100% !important; max-width: 100% !important;">
+      <div style="display: flex; gap: 1rem; width: 100% !important; max-width: 100% !important; flex-wrap: wrap;">
          <MicroCard href="/docs/plugins/social-login/google/general/" title="Google" customIcon="/icons/google.svg">
             Configure Google Sign-In for your app
          </MicroCard>
@@ -28,6 +28,9 @@ import MicroCard from '@/components/MicroCard.astro'
          </MicroCard>
          <MicroCard href="/docs/plugins/social-login/apple/general/" title="Apple" icon="apple">
             Enable Sign in with Apple
+         </MicroCard>
+         <MicroCard href="/docs/plugins/social-login/oauth2/" title="OAuth2" icon="external">
+            Generic OAuth2 for GitHub, Azure, Auth0, and more
          </MicroCard>
       </div>
    </div>

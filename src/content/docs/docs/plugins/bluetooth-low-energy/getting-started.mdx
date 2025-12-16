@@ -1,0 +1,365 @@
+---
+title: Getting Started
+description: Learn how to install and use the Bluetooth Low Energy plugin to communicate with BLE devices in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-bluetooth-low-energy" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## iOS Setup
+
+Add the following to your `Info.plist`:
+
+```xml
+<key>NSBluetoothAlwaysUsageDescription</key>
+<string>This app uses Bluetooth to communicate with BLE devices.</string>
+<key>NSBluetoothPeripheralUsageDescription</key>
+<string>This app uses Bluetooth to communicate with BLE devices.</string>
+```
+
+For background BLE support, add:
+
+```xml
+<key>UIBackgroundModes</key>
+<array>
+    <string>bluetooth-central</string>
+    <string>bluetooth-peripheral</string>
+</array>
+```
+
+## Android Setup
+
+Works out of the box. The plugin automatically adds required permissions. For Android 12+, request runtime permissions:
+
+```typescript
+await BluetoothLowEnergy.requestPermissions();
+```
+
+## Web Setup
+
+Works in Chrome and Chromium-based browsers using the Web Bluetooth API. Requires HTTPS and user interaction to scan for devices.
+
+## Basic Usage
+
+```typescript
+import { BluetoothLowEnergy } from '@capgo/capacitor-bluetooth-low-energy';
+
+// Initialize the plugin
+await BluetoothLowEnergy.initialize();
+
+// Request permissions (Android 12+)
+await BluetoothLowEnergy.requestPermissions();
+
+// Check if Bluetooth is available and enabled
+const { available } = await BluetoothLowEnergy.isAvailable();
+const { enabled } = await BluetoothLowEnergy.isEnabled();
+
+if (!available || !enabled) {
+  console.log('Bluetooth is not available or not enabled');
+  return;
+}
+
+// Start scanning for devices
+BluetoothLowEnergy.addListener('deviceScanned', (event) => {
+  console.log('Found device:', event.device.name, event.device.deviceId);
+});
+
+await BluetoothLowEnergy.startScan({
+  services: ['180d'], // Filter by Heart Rate service UUID
+  timeout: 10000, // 10 seconds
+});
+```
+
+## Connecting to a Device
+
+```typescript
+// Connect to a device
+await BluetoothLowEnergy.connect({
+  deviceId: 'AA:BB:CC:DD:EE:FF',
+});
+
+// Listen for connection events
+BluetoothLowEnergy.addListener('deviceConnected', (event) => {
+  console.log('Connected to:', event.deviceId);
+});
+
+BluetoothLowEnergy.addListener('deviceDisconnected', (event) => {
+  console.log('Disconnected from:', event.deviceId);
+});
+
+// Discover services
+await BluetoothLowEnergy.discoverServices({
+  deviceId: 'AA:BB:CC:DD:EE:FF',
+});
+
+// Get discovered services
+const { services } = await BluetoothLowEnergy.getServices({
+  deviceId: 'AA:BB:CC:DD:EE:FF',
+});
+
+console.log('Services:', services);
+```
+
+## Reading and Writing Characteristics
+
+```typescript
+// Read a characteristic
+const { value } = await BluetoothLowEnergy.readCharacteristic({
+  deviceId: 'AA:BB:CC:DD:EE:FF',
+  service: '180d',
+  characteristic: '2a37',
+});
+
+console.log('Value:', value); // Array of bytes
+
+// Write to a characteristic
+await BluetoothLowEnergy.writeCharacteristic({
+  deviceId: 'AA:BB:CC:DD:EE:FF',
+  service: '180d',
+  characteristic: '2a39',
+  value: [0x01], // Array of bytes
+  type: 'withResponse',
+});
+```
+
+## Subscribing to Notifications
+
+```typescript
+// Listen for characteristic changes
+BluetoothLowEnergy.addListener('characteristicChanged', (event) => {
+  console.log('Characteristic changed:', event.characteristic);
+  console.log('New value:', event.value);
+});
+
+// Start notifications
+await BluetoothLowEnergy.startCharacteristicNotifications({
+  deviceId: 'AA:BB:CC:DD:EE:FF',
+  service: '180d',
+  characteristic: '2a37',
+});
+
+// Stop notifications when done
+await BluetoothLowEnergy.stopCharacteristicNotifications({
+  deviceId: 'AA:BB:CC:DD:EE:FF',
+  service: '180d',
+  characteristic: '2a37',
+});
+```
+
+## Complete Example - Heart Rate Monitor
+
+```typescript
+import { BluetoothLowEnergy } from '@capgo/capacitor-bluetooth-low-energy';
+
+const HEART_RATE_SERVICE = '180d';
+const HEART_RATE_MEASUREMENT = '2a37';
+
+export class HeartRateMonitor {
+  private deviceId: string | null = null;
+
+  async init() {
+    await BluetoothLowEnergy.initialize();
+
+    const { available } = await BluetoothLowEnergy.isAvailable();
+    if (!available) {
+      throw new Error('Bluetooth not available');
+    }
+
+    await BluetoothLowEnergy.requestPermissions();
+  }
+
+  async scan(): Promise<string[]> {
+    const devices: string[] = [];
+
+    BluetoothLowEnergy.addListener('deviceScanned', (event) => {
+      if (event.device.name && !devices.includes(event.device.deviceId)) {
+        devices.push(event.device.deviceId);
+        console.log('Found:', event.device.name);
+      }
+    });
+
+    await BluetoothLowEnergy.startScan({
+      services: [HEART_RATE_SERVICE],
+      timeout: 5000,
+    });
+
+    return devices;
+  }
+
+  async connect(deviceId: string) {
+    this.deviceId = deviceId;
+
+    await BluetoothLowEnergy.connect({ deviceId });
+    await BluetoothLowEnergy.discoverServices({ deviceId });
+  }
+
+  async startMonitoring(callback: (heartRate: number) => void) {
+    if (!this.deviceId) throw new Error('Not connected');
+
+    BluetoothLowEnergy.addListener('characteristicChanged', (event) => {
+      if (event.characteristic === HEART_RATE_MEASUREMENT) {
+        // Parse heart rate from BLE Heart Rate Measurement format
+        const flags = event.value[0];
+        const is16Bit = (flags & 0x01) !== 0;
+        const heartRate = is16Bit
+          ? (event.value[2] << 8) | event.value[1]
+          : event.value[1];
+        callback(heartRate);
+      }
+    });
+
+    await BluetoothLowEnergy.startCharacteristicNotifications({
+      deviceId: this.deviceId,
+      service: HEART_RATE_SERVICE,
+      characteristic: HEART_RATE_MEASUREMENT,
+    });
+  }
+
+  async disconnect() {
+    if (this.deviceId) {
+      await BluetoothLowEnergy.disconnect({ deviceId: this.deviceId });
+      this.deviceId = null;
+    }
+  }
+}
+```
+
+## API Reference
+
+### Core Methods
+
+| Method | Description |
+|--------|-------------|
+| `initialize()` | Initialize the BLE plugin (required before other calls) |
+| `isAvailable()` | Check if Bluetooth is available on the device |
+| `isEnabled()` | Check if Bluetooth is enabled |
+| `checkPermissions()` | Check current permission status |
+| `requestPermissions()` | Request Bluetooth permissions |
+
+### Scanning
+
+| Method | Description |
+|--------|-------------|
+| `startScan(options?)` | Start scanning for BLE devices |
+| `stopScan()` | Stop scanning |
+
+### Connection
+
+| Method | Description |
+|--------|-------------|
+| `connect(options)` | Connect to a BLE device |
+| `disconnect(options)` | Disconnect from a device |
+| `getConnectedDevices()` | Get list of connected devices |
+| `createBond(options)` | Create a bond (Android only) |
+| `isBonded(options)` | Check if device is bonded (Android only) |
+
+### Service Discovery
+
+| Method | Description |
+|--------|-------------|
+| `discoverServices(options)` | Discover services on connected device |
+| `getServices(options)` | Get discovered services |
+
+### Characteristics
+
+| Method | Description |
+|--------|-------------|
+| `readCharacteristic(options)` | Read a characteristic value |
+| `writeCharacteristic(options)` | Write to a characteristic |
+| `startCharacteristicNotifications(options)` | Subscribe to notifications |
+| `stopCharacteristicNotifications(options)` | Unsubscribe from notifications |
+
+### Descriptors
+
+| Method | Description |
+|--------|-------------|
+| `readDescriptor(options)` | Read a descriptor value |
+| `writeDescriptor(options)` | Write to a descriptor |
+
+### Advanced
+
+| Method | Description |
+|--------|-------------|
+| `readRssi(options)` | Read signal strength of connected device |
+| `requestMtu(options)` | Request MTU size change (Android) |
+| `requestConnectionPriority(options)` | Request connection priority (Android) |
+| `startAdvertising(options)` | Start advertising as peripheral |
+| `stopAdvertising()` | Stop advertising |
+| `startForegroundService(options)` | Start foreground service (Android) |
+| `stopForegroundService()` | Stop foreground service (Android) |
+
+### Events
+
+| Event | Description |
+|-------|-------------|
+| `deviceScanned` | Emitted when a device is found during scanning |
+| `deviceConnected` | Emitted when connected to a device |
+| `deviceDisconnected` | Emitted when disconnected from a device |
+| `characteristicChanged` | Emitted when a characteristic value changes |
+
+## Best Practices
+
+1. **Always initialize first**
+   ```typescript
+   await BluetoothLowEnergy.initialize();
+   ```
+
+2. **Check permissions before scanning**
+   ```typescript
+   const { bluetooth } = await BluetoothLowEnergy.checkPermissions();
+   if (bluetooth !== 'granted') {
+     await BluetoothLowEnergy.requestPermissions();
+   }
+   ```
+
+3. **Handle disconnections gracefully**
+   ```typescript
+   BluetoothLowEnergy.addListener('deviceDisconnected', async (event) => {
+     // Attempt reconnection or notify user
+   });
+   ```
+
+4. **Clean up listeners when done**
+   ```typescript
+   await BluetoothLowEnergy.removeAllListeners();
+   ```
+
+5. **Use foreground service for long-running operations (Android)**
+   ```typescript
+   await BluetoothLowEnergy.startForegroundService({
+     title: 'BLE Active',
+     body: 'Connected to device',
+     smallIcon: 'ic_notification',
+   });
+   ```
+
+## Platform Notes
+
+### iOS
+- Requires iOS 10.0+
+- Uses CoreBluetooth framework
+- Supports background modes with proper entitlements
+- Device IDs are UUIDs (not MAC addresses)
+
+### Android
+- Requires Android 5.0 (API 21)+
+- Android 12+ requires BLUETOOTH_SCAN and BLUETOOTH_CONNECT permissions
+- Device IDs are MAC addresses
+- Location services may be required for scanning
+
+### Web
+- Requires Chrome/Chromium with Web Bluetooth API
+- Must be served over HTTPS
+- Requires user interaction to initiate scanning
+- Limited compared to native implementations

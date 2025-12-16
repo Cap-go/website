@@ -51,6 +51,7 @@ import CommandLineIcon from 'astro-heroicons/mini/CommandLine.astro'
 import ShieldExclamationIcon from 'astro-heroicons/mini/ShieldExclamation.astro'
 import ArrowsRightLeftIcon from 'astro-heroicons/mini/ArrowsRightLeft.astro'
 import FolderIcon from 'astro-heroicons/mini/Folder.astro'
+import SunIcon from 'astro-heroicons/mini/Sun.astro'
 
 export interface Action {
   icon?: any
@@ -801,5 +802,21 @@ export const actions = [
     href: 'https://github.com/Cap-go/capacitor-file/',
     title: 'File',
     icon: FolderIcon,
+  },
+  {
+    name: '@capgo/capacitor-bluetooth-low-energy',
+    author: 'github.com/Cap-go',
+    description: 'Full-featured BLE plugin for scanning, connecting, reading, writing, and receiving notifications from Bluetooth devices',
+    href: 'https://github.com/Cap-go/capacitor-bluetooth-low-energy/',
+    title: 'Bluetooth Low Energy',
+    icon: RadioIcon,
+  },
+  {
+    name: '@capgo/keep-awake',
+    author: 'github.com/Cap-go',
+    description: 'Prevent device screen from dimming or sleeping for video players, navigation, and presentations',
+    href: 'https://github.com/Cap-go/capacitor-keep-awake/',
+    title: 'Keep Awake',
+    icon: SunIcon,
   },
 ]

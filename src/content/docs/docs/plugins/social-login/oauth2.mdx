@@ -1,0 +1,530 @@
+---
+title: Generic OAuth2 Setup
+description: This guide provides a comprehensive walkthrough on setting up generic OAuth2 authentication using Capacitor, supporting multiple providers like GitHub, Azure AD, Auth0, Okta, and any OAuth2-compliant server.
+sidebar:
+    order: 5
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Introduction
+
+The Capgo Social Login plugin supports generic OAuth2 authentication, allowing you to integrate with any OAuth2-compliant provider. This includes:
+
+- GitHub
+- Azure AD / Microsoft Entra ID
+- Auth0
+- Okta
+- Keycloak
+- Custom OAuth2 servers
+- Any OpenID Connect (OIDC) provider
+
+**Key Feature**: You can configure **multiple OAuth2 providers simultaneously**, each with its own settings.
+
+## Prerequisites
+
+Before you begin, you'll need:
+
+- Your OAuth2 provider's client ID (App ID)
+- Authorization endpoint URL
+- Token endpoint URL (for authorization code flow)
+- A configured redirect URL in your OAuth2 provider's dashboard
+
+## Multi-Provider Configuration
+
+The plugin supports configuring multiple OAuth2 providers at once. Each provider is identified by a unique key (e.g., `github`, `azure`, `auth0`):
+
+```typescript
+import { SocialLogin } from '@capgo/capacitor-social-login';
+
+await SocialLogin.initialize({
+  oauth2: {
+    // GitHub OAuth2
+    github: {
+      appId: 'your-github-client-id',
+      authorizationBaseUrl: 'https://github.com/login/oauth/authorize',
+      accessTokenEndpoint: 'https://github.com/login/oauth/access_token',
+      redirectUrl: 'myapp://oauth/github',
+      scope: 'read:user user:email',
+      pkceEnabled: true,
+    },
+    // Azure AD OAuth2
+    azure: {
+      appId: 'your-azure-client-id',
+      authorizationBaseUrl: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
+      accessTokenEndpoint: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
+      redirectUrl: 'myapp://oauth/azure',
+      scope: 'openid profile email',
+      pkceEnabled: true,
+      resourceUrl: 'https://graph.microsoft.com/v1.0/me',
+    },
+    // Auth0 OAuth2
+    auth0: {
+      appId: 'your-auth0-client-id',
+      authorizationBaseUrl: 'https://your-tenant.auth0.com/authorize',
+      accessTokenEndpoint: 'https://your-tenant.auth0.com/oauth/token',
+      redirectUrl: 'myapp://oauth/auth0',
+      scope: 'openid profile email offline_access',
+      pkceEnabled: true,
+      additionalParameters: {
+        audience: 'https://your-api.example.com',
+      },
+    },
+  },
+});
+```
+
+## Configuration Options
+
+| Option | Type | Required | Description |
+|--------|------|----------|-------------|
+| `appId` | string | Yes | OAuth2 Client ID from your provider |
+| `authorizationBaseUrl` | string | Yes | Authorization endpoint URL |
+| `accessTokenEndpoint` | string | No* | Token endpoint URL (*Required for code flow) |
+| `redirectUrl` | string | Yes | Callback URL for OAuth redirect |
+| `responseType` | `'code'` \| `'token'` | No | OAuth flow type (default: `'code'`) |
+| `pkceEnabled` | boolean | No | Enable PKCE (default: `true`) |
+| `scope` | string | No | Default scopes to request |
+| `resourceUrl` | string | No | URL to fetch user profile after auth |
+| `additionalParameters` | Record<string, string> | No | Extra params for authorization URL |
+| `additionalResourceHeaders` | Record<string, string> | No | Extra headers for resource request |
+| `logoutUrl` | string | No | URL to open on logout |
+| `logsEnabled` | boolean | No | Enable debug logging (default: `false`) |
+
+## Using OAuth2 Login
+
+### Login
+
+```typescript
+// Login with GitHub
+const githubResult = await SocialLogin.login({
+  provider: 'oauth2',
+  options: {
+    providerId: 'github',  // Required: must match key from initialize()
+  },
+});
+
+// Login with Azure AD
+const azureResult = await SocialLogin.login({
+  provider: 'oauth2',
+  options: {
+    providerId: 'azure',
+    scope: 'openid profile email',  // Optional: override default scopes
+  },
+});
+
+console.log('Access Token:', azureResult.result.accessToken?.token);
+console.log('ID Token:', azureResult.result.idToken);
+console.log('User Data:', azureResult.result.resourceData);
+```
+
+### Login Response
+
+The login response includes:
+
+```typescript
+interface OAuth2LoginResponse {
+  providerId: string;          // The provider ID used for login
+  accessToken: {
+    token: string;             // The access token
+    tokenType: string;         // Usually 'bearer'
+    expires?: string;          // Expiration timestamp
+    refreshToken?: string;     // Refresh token if available
+  } | null;
+  idToken: string | null;      // JWT ID token (for OIDC providers)
+  refreshToken: string | null; // Refresh token
+  resourceData: Record<string, unknown> | null;  // User profile from resourceUrl
+  scope: string[];             // Granted scopes
+  tokenType: string;           // Token type
+  expiresIn: number | null;    // Expiration in seconds
+}
+```
+
+### Check Login Status
+
+```typescript
+const status = await SocialLogin.isLoggedIn({
+  provider: 'oauth2',
+  providerId: 'github',  // Required for OAuth2
+});
+console.log('Is logged in:', status.isLoggedIn);
+```
+
+### Logout
+
+```typescript
+await SocialLogin.logout({
+  provider: 'oauth2',
+  providerId: 'github',  // Required for OAuth2
+});
+```
+
+### Refresh Token
+
+```typescript
+await SocialLogin.refresh({
+  provider: 'oauth2',
+  options: {
+    providerId: 'github',  // Required for OAuth2
+  },
+});
+```
+
+### Get Authorization Code / Access Token
+
+```typescript
+const authCode = await SocialLogin.getAuthorizationCode({
+  provider: 'oauth2',
+  providerId: 'github',
+});
+console.log('Access Token:', authCode.accessToken);
+```
+
+## Provider-Specific Setup
+
+### GitHub
+
+<Steps>
+1. Create an OAuth App in GitHub
+
+   Go to [GitHub Developer Settings](https://github.com/settings/developers) and create a new OAuth App.
+
+2. Configure the OAuth App
+
+   - **Application name**: Your app name
+   - **Homepage URL**: Your app's homepage
+   - **Authorization callback URL**: Your redirect URL (e.g., `myapp://oauth/github`)
+
+3. Get your Client ID
+
+   Copy the Client ID from your OAuth App settings.
+
+4. Initialize in your app
+
+   ```typescript
+   await SocialLogin.initialize({
+     oauth2: {
+       github: {
+         appId: 'your-github-client-id',
+         authorizationBaseUrl: 'https://github.com/login/oauth/authorize',
+         accessTokenEndpoint: 'https://github.com/login/oauth/access_token',
+         redirectUrl: 'myapp://oauth/github',
+         scope: 'read:user user:email',
+         pkceEnabled: true,
+         resourceUrl: 'https://api.github.com/user',
+       },
+     },
+   });
+   ```
+</Steps>
+
+### Azure AD / Microsoft Entra ID
+
+<Steps>
+1. Register an application in Azure Portal
+
+   Go to [Azure Portal](https://portal.azure.com) > Azure Active Directory > App registrations > New registration.
+
+2. Configure the application
+
+   - **Name**: Your app name
+   - **Supported account types**: Choose based on your needs
+   - **Redirect URI**: Select "Mobile and desktop applications" and add your redirect URL
+
+3. Get your Application (client) ID
+
+   Copy the Application (client) ID from the Overview page.
+
+4. Initialize in your app
+
+   ```typescript
+   await SocialLogin.initialize({
+     oauth2: {
+       azure: {
+         appId: 'your-azure-client-id',
+         authorizationBaseUrl: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
+         accessTokenEndpoint: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
+         redirectUrl: 'myapp://oauth/azure',
+         scope: 'openid profile email User.Read',
+         pkceEnabled: true,
+         resourceUrl: 'https://graph.microsoft.com/v1.0/me',
+       },
+     },
+   });
+   ```
+
+   :::note
+   Replace `common` with your tenant ID for single-tenant apps.
+   :::
+</Steps>
+
+### Auth0
+
+<Steps>
+1. Create an application in Auth0
+
+   Go to [Auth0 Dashboard](https://manage.auth0.com) > Applications > Create Application.
+
+2. Configure the application
+
+   - **Name**: Your app name
+   - **Application Type**: Native
+   - **Allowed Callback URLs**: Your redirect URL
+
+3. Get your Client ID and Domain
+
+   Copy the Client ID and Domain from the Settings tab.
+
+4. Initialize in your app
+
+   ```typescript
+   await SocialLogin.initialize({
+     oauth2: {
+       auth0: {
+         appId: 'your-auth0-client-id',
+         authorizationBaseUrl: 'https://your-tenant.auth0.com/authorize',
+         accessTokenEndpoint: 'https://your-tenant.auth0.com/oauth/token',
+         redirectUrl: 'myapp://oauth/auth0',
+         scope: 'openid profile email offline_access',
+         pkceEnabled: true,
+         additionalParameters: {
+           audience: 'https://your-api.example.com', // Optional: for API access
+         },
+         logoutUrl: 'https://your-tenant.auth0.com/v2/logout?client_id=your-auth0-client-id',
+       },
+     },
+   });
+   ```
+</Steps>
+
+### Okta
+
+<Steps>
+1. Create an application in Okta
+
+   Go to your Okta Admin Console > Applications > Create App Integration.
+
+2. Configure the application
+
+   - **Sign-in method**: OIDC
+   - **Application type**: Native Application
+   - **Sign-in redirect URIs**: Your redirect URL
+
+3. Get your Client ID
+
+   Copy the Client ID from the application settings.
+
+4. Initialize in your app
+
+   ```typescript
+   await SocialLogin.initialize({
+     oauth2: {
+       okta: {
+         appId: 'your-okta-client-id',
+         authorizationBaseUrl: 'https://your-domain.okta.com/oauth2/default/v1/authorize',
+         accessTokenEndpoint: 'https://your-domain.okta.com/oauth2/default/v1/token',
+         redirectUrl: 'myapp://oauth/okta',
+         scope: 'openid profile email offline_access',
+         pkceEnabled: true,
+         resourceUrl: 'https://your-domain.okta.com/oauth2/default/v1/userinfo',
+       },
+     },
+   });
+   ```
+</Steps>
+
+## Platform-Specific Configuration
+
+### iOS
+
+<Steps>
+1. Configure URL Scheme
+
+   Add your custom URL scheme to `ios/App/App/Info.plist`:
+
+   ```xml
+   <key>CFBundleURLTypes</key>
+   <array>
+     <dict>
+       <key>CFBundleURLSchemes</key>
+       <array>
+         <string>myapp</string>
+       </array>
+     </dict>
+   </array>
+   ```
+
+2. Handle Universal Links (Optional)
+
+   For universal links, configure Associated Domains in your Xcode project.
+</Steps>
+
+:::note
+**iOS Authentication**: The plugin uses `ASWebAuthenticationSession` which provides a secure, system-managed authentication flow.
+:::
+
+### Android
+
+<Steps>
+1. Configure Intent Filter
+
+   Add an intent filter for your redirect URL in `android/app/src/main/AndroidManifest.xml`:
+
+   ```xml
+   <activity
+       android:name="ee.forgr.capacitor.social.login.OAuth2LoginActivity"
+       android:exported="true"
+       android:launchMode="singleTask">
+       <intent-filter>
+           <action android:name="android.intent.action.VIEW" />
+           <category android:name="android.intent.category.DEFAULT" />
+           <category android:name="android.intent.category.BROWSABLE" />
+           <data android:scheme="myapp" android:host="oauth" />
+       </intent-filter>
+   </activity>
+   ```
+
+   :::note
+   This intent filter should already be registered by the plugin. Only add it if you need custom configuration.
+   :::
+</Steps>
+
+### Web
+
+For web applications, OAuth2 flows typically use popup windows:
+
+```typescript
+// Initialize with web-compatible redirect URLs
+await SocialLogin.initialize({
+  oauth2: {
+    github: {
+      appId: 'your-github-client-id',
+      authorizationBaseUrl: 'https://github.com/login/oauth/authorize',
+      accessTokenEndpoint: 'https://github.com/login/oauth/access_token',
+      redirectUrl: 'http://localhost:3000/oauth/callback', // Web redirect
+      scope: 'read:user user:email',
+      pkceEnabled: true,
+    },
+  },
+});
+```
+
+:::warning
+For web, you may need to handle CORS issues with the token endpoint. Consider using a backend proxy for the token exchange.
+:::
+
+## Security Best Practices
+
+<Steps>
+1. **Always Use PKCE**
+
+   PKCE (Proof Key for Code Exchange) protects against authorization code interception attacks. Keep `pkceEnabled: true` (default).
+
+2. **Use Authorization Code Flow**
+
+   Prefer `responseType: 'code'` over `'token'` (implicit flow). The authorization code flow is more secure.
+
+3. **Validate Tokens on Your Backend**
+
+   Always validate access tokens and ID tokens on your backend server before trusting them.
+
+4. **Use HTTPS**
+
+   In production, always use HTTPS for redirect URLs and all endpoints.
+
+5. **Secure Token Storage**
+
+   Use [@capgo/capacitor-persistent-account](https://github.com/Cap-go/capacitor-persistent-account) for secure token storage on native platforms.
+
+6. **Rotate Refresh Tokens**
+
+   If your provider supports it, enable refresh token rotation for additional security.
+</Steps>
+
+## Troubleshooting
+
+### Common Issues
+
+1. **"providerId is required" error**
+
+   Make sure you're passing the `providerId` in all OAuth2 method calls:
+
+   ```typescript
+   // Correct
+   await SocialLogin.login({
+     provider: 'oauth2',
+     options: { providerId: 'github' },
+   });
+
+   // Incorrect - missing providerId
+   await SocialLogin.login({
+     provider: 'oauth2',
+     options: {},
+   });
+   ```
+
+2. **"OAuth2 provider 'xxx' not configured" error**
+
+   Ensure you've initialized the provider before attempting to login:
+
+   ```typescript
+   // Initialize first
+   await SocialLogin.initialize({
+     oauth2: {
+       github: { /* config */ },
+     },
+   });
+
+   // Then login
+   await SocialLogin.login({
+     provider: 'oauth2',
+     options: { providerId: 'github' },
+   });
+   ```
+
+3. **Redirect URL mismatch**
+
+   - Verify the redirect URL in your OAuth provider's dashboard matches exactly what you've configured
+   - Check for trailing slashes and protocol (http vs https)
+   - For mobile apps, ensure the URL scheme is registered
+
+4. **Token exchange fails**
+
+   - Verify `accessTokenEndpoint` is correct
+   - Check if your provider requires a client secret (public clients usually don't)
+   - Enable `logsEnabled: true` to see detailed logs
+
+5. **User cancellation not handled**
+
+   Wrap your login call in try-catch to handle cancellations:
+
+   ```typescript
+   try {
+     const result = await SocialLogin.login({
+       provider: 'oauth2',
+       options: { providerId: 'github' },
+     });
+   } catch (error) {
+     if (error.message.includes('cancelled')) {
+       console.log('User cancelled login');
+     } else {
+       console.error('Login failed:', error);
+     }
+   }
+   ```
+
+### Debug Mode
+
+Enable debug logging to troubleshoot issues:
+
+```typescript
+await SocialLogin.initialize({
+  oauth2: {
+    github: {
+      // ... other config
+      logsEnabled: true,  // Enable debug logs
+    },
+  },
+});
+```
+
+This will output detailed logs about the OAuth flow, including authorization URLs and token exchanges.
