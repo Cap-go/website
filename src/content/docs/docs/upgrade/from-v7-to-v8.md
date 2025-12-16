@@ -53,12 +53,9 @@ The configuration remains the same as v7. Your existing `capacitor.config` setti
 
 ## Migration Checklist
 
-- [ ] Update @capacitor/core to ^8.0.0
-- [ ] Update @capacitor/android to ^8.0.0
-- [ ] Update @capacitor/ios to ^8.0.0
-- [ ] Follow Capacitor's v8 migration guide
-- [ ] Update @capgo/capacitor-updater to ^8.0.0
-- [ ] Run `npx cap sync`
+- [ ] Follow Capacitor's v8 [migration guide](https://capacitorjs.com/docs/updating/8-0), check for breaking changes.
+- [ ] [Update](#install) @capgo/capacitor-updater to ^8.0.0
+- [ ] [Run](#install) `npx cap sync`
 - [ ] Test your app thoroughly on both iOS and Android
 
 ## Need Help?
