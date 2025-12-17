@@ -1,0 +1,358 @@
+---
+title: iOS Certificates Setup
+description: Step-by-step guide to create iOS signing certificates and provisioning profiles for Capgo Cloud Build
+sidebar:
+  order: 1
+---
+
+import { Steps, Aside, Card, CardGrid, Tabs, TabItem } from '@astrojs/starlight/components';
+
+Complete guide to creating and exporting the iOS signing certificates and provisioning profiles required for building iOS apps with Capgo Cloud Build.
+
+## Overview
+
+To build iOS apps, you need:
+
+1. **Signing Certificate** (`.p12` file) - Authenticates you as a developer
+2. **Provisioning Profile** (`.mobileprovision` file) - Links your app, certificate, and devices
+3. **App Store Connect API Key** (`.p8` file) - For automatic TestFlight/App Store submission
+
+<CardGrid>
+  <Card title="What You'll Create" icon="document">
+    - Apple Distribution Certificate (`.p12`)
+    - App Store Provisioning Profile (`.mobileprovision`)
+    - App Store Connect API Key (`.p8`)
+  </Card>
+  <Card title="Requirements" icon="list-format">
+    - Mac computer with Keychain Access
+    - Apple Developer Account ($99/year)
+    - App already registered in App Store Connect
+  </Card>
+</CardGrid>
+
+## Part 1: Create a Signing Certificate
+
+### Option A: Export Existing Certificate from Keychain
+
+If you already have a distribution certificate installed on your Mac, export it as a `.p12` file:
+
+<Steps>
+
+1. **Open Keychain Access**
+
+   Open Spotlight (Cmd + Space) and search for "Keychain Access", or navigate to:
+   `Applications → Utilities → Keychain Access`
+
+2. **Find your certificate**
+
+   In the sidebar, select **login** → **My Certificates**.
+
+   Look for a certificate named:
+   - `Apple Distribution: [Your Name/Company]` (for App Store builds)
+   - `Apple Development: [Your Name]` (for development builds)
+
+3. **Verify private key exists**
+
+   Click the arrow next to the certificate to expand it. You should see a **private key** underneath.
+
+   <Aside type="caution">
+   If there's no private key, you cannot export a valid `.p12`. You'll need to create a new certificate on the same Mac where you generated the Certificate Signing Request (CSR).
+   </Aside>
+
+4. **Export as .p12**
+
+   - Select **both** the certificate AND the private key (Cmd+click to select both)
+   - Right-click and choose **"Export 2 items..."**
+   - Select **"Personal Information Exchange (.p12)"** as the format
+   - Choose a location and filename (e.g., `DistributionCertificate.p12`)
+   - Set a **strong password** when prompted - you'll need this later as `P12_PASSWORD`
+
+5. **Save the password securely**
+
+   Store the password in a password manager. You'll need it for Capgo builds.
+
+</Steps>
+
+### Option B: Create a New Certificate
+
+If you don't have a certificate yet, create one in the Apple Developer Portal:
+
+<Steps>
+
+1. **Generate a Certificate Signing Request (CSR)**
+
+   On your Mac, open **Keychain Access** and go to:
+   `Keychain Access → Certificate Assistant → Request a Certificate From a Certificate Authority`
+
+   Fill in the form:
+   - **User Email Address**: Your email
+   - **Common Name**: Your name or company name
+   - **CA Email Address**: Leave empty
+   - **Request is**: Select **"Saved to disk"**
+
+   Click **Continue** and save the `.certSigningRequest` file.
+
+2. **Create certificate in Apple Developer Portal**
+
+   Go to [Apple Developer Certificates](https://developer.apple.com/account/resources/certificates/list) and click the **"+"** button.
+
+   Select the certificate type:
+   - **Apple Distribution** - For App Store and Ad Hoc distribution
+   - **Apple Development** - For development/testing only
+
+   Click **Continue**.
+
+3. **Upload your CSR**
+
+   Click **"Choose File"** and select the `.certSigningRequest` file you created.
+
+   Click **Continue**.
+
+4. **Download the certificate**
+
+   Click **Download** to save the `.cer` file.
+
+5. **Install in Keychain**
+
+   Double-click the downloaded `.cer` file. It will be added to your Keychain.
+
+6. **Export as .p12**
+
+   Follow Option A above to export the newly installed certificate as a `.p12` file.
+
+</Steps>
+
+## Part 2: Create a Provisioning Profile
+
+The provisioning profile links your app ID, certificate, and (for development) devices.
+
+<Steps>
+
+1. **Go to Provisioning Profiles**
+
+   Visit [Apple Developer Profiles](https://developer.apple.com/account/resources/profiles/list) and click the **"+"** button.
+
+2. **Select profile type**
+
+   Choose based on your build needs:
+
+   | Profile Type | Use Case |
+   |--------------|----------|
+   | **App Store Connect** | Production builds for App Store/TestFlight |
+   | **Ad Hoc** | Internal testing on specific devices |
+   | **iOS App Development** | Development/debugging |
+
+   For Capgo Cloud Build release builds, select **"App Store Connect"**.
+
+   Click **Continue**.
+
+3. **Select your App ID**
+
+   Choose your app from the dropdown list.
+
+   <Aside type="note">
+   If your app isn't listed, you need to register it first in [Identifiers](https://developer.apple.com/account/resources/identifiers/list).
+   </Aside>
+
+   Click **Continue**.
+
+4. **Select your certificate**
+
+   Check the box next to the distribution certificate you created/exported earlier.
+
+   Click **Continue**.
+
+5. **Name your profile**
+
+   Enter a descriptive name, e.g., `App Store - com.example.myapp`
+
+   <Aside type="tip">
+   Use a naming convention that includes the profile type and bundle ID for easy identification later.
+   </Aside>
+
+   Click **Generate**.
+
+6. **Download the profile**
+
+   Click **Download** to save the `.mobileprovision` file.
+
+</Steps>
+
+### Finding Existing Profiles
+
+If you've already created provisioning profiles, you can find them locally:
+
+```bash
+# List all provisioning profiles on your Mac
+ls -la ~/Library/MobileDevice/Provisioning\ Profiles/
+
+# Find the App ID for a specific profile
+security cms -D -i ~/Library/MobileDevice/Provisioning\ Profiles/PROFILE_UUID.mobileprovision | grep -A 1 "application-identifier"
+```
+
+Or download them again from [Apple Developer Portal](https://developer.apple.com/account/resources/profiles/list).
+
+## Part 3: Create an App Store Connect API Key
+
+The API key enables automatic upload to TestFlight/App Store after building.
+
+<Steps>
+
+1. **Go to App Store Connect**
+
+   Visit [App Store Connect](https://appstoreconnect.apple.com/) and sign in.
+
+2. **Navigate to API Keys**
+
+   Go to **Users and Access** → **Integrations** → **App Store Connect API** → **Team Keys**
+
+   Click the **"+"** button to create a new key.
+
+3. **Configure the key**
+
+   - **Name**: Enter a descriptive name (e.g., `Capgo CI/CD`)
+   - **Access**: Select **"Developer"** (minimum required) or **"App Manager"** for more permissions
+
+   Click **Generate**.
+
+4. **Download the key**
+
+   <Aside type="caution">
+   **Download immediately!** You can only download the `.p8` file **once**. If you lose it, you'll need to create a new key.
+   </Aside>
+
+   Click **Download** and save the file (named `AuthKey_XXXXXXXXXX.p8`).
+
+5. **Note the Key ID and Issuer ID**
+
+   After downloading, you'll see:
+   - **Key ID**: A 10-character alphanumeric ID (e.g., `ABC1234567`)
+   - **Issuer ID**: A UUID visible at the top of the keys list (e.g., `00000000-0000-0000-0000-000000000000`)
+
+   Save both values - you'll need them for configuration.
+
+</Steps>
+
+### Finding Your Team ID
+
+You may also need your **Team ID** for some configurations:
+
+1. Go to [Apple Developer Membership](https://developer.apple.com/account/#!/membership/)
+2. Find **Team ID** in the Membership details
+
+## Part 4: Save Credentials for Capgo
+
+Now that you have all the files, save them for Capgo Cloud Build:
+
+### Using the CLI (Recommended)
+
+```bash
+npx @capgo/cli build credentials save \
+  --platform ios \
+  --certificate ./DistributionCertificate.p12 \
+  --p12-password "YourP12Password" \
+  --provisioning-profile ./AppStore_com.example.myapp.mobileprovision \
+  --apple-key ./AuthKey_ABC1234567.p8 \
+  --apple-key-id "ABC1234567" \
+  --apple-issuer-id "00000000-0000-0000-0000-000000000000" \
+  --apple-team-id "TEAM123456"
+```
+
+### Using Environment Variables
+
+For CI/CD environments, encode files as base64 and set environment variables:
+
+```bash
+# Encode files to base64
+base64 -i DistributionCertificate.p12 | pbcopy  # Certificate
+base64 -i AppStore_com.example.myapp.mobileprovision | pbcopy  # Profile
+base64 -i AuthKey_ABC1234567.p8 | pbcopy  # API Key
+```
+
+Set these environment variables in your CI/CD secrets:
+
+| Variable | Description |
+|----------|-------------|
+| `BUILD_CERTIFICATE_BASE64` | Base64-encoded `.p12` certificate |
+| `BUILD_PROVISION_PROFILE_BASE64` | Base64-encoded `.mobileprovision` profile |
+| `P12_PASSWORD` | Password for the `.p12` file |
+| `APPLE_KEY_CONTENT` | Base64-encoded `.p8` API key |
+| `APPLE_KEY_ID` | App Store Connect API Key ID |
+| `APPLE_ISSUER_ID` | App Store Connect Issuer ID (UUID) |
+| `APP_STORE_CONNECT_TEAM_ID` | Your Apple Team ID |
+
+## Verify Your Setup
+
+Test that everything is configured correctly:
+
+```bash
+# List saved credentials
+npx @capgo/cli build credentials list
+
+# Run a test build
+npx @capgo/cli build com.example.app --platform ios --build-mode debug
+```
+
+## Common Issues
+
+### "Certificate does not include private key"
+
+**Cause**: You exported only the certificate, not the certificate + private key pair.
+
+**Solution**: In Keychain Access, expand the certificate to show the private key, select both items, then export.
+
+### "Provisioning profile doesn't match certificate"
+
+**Cause**: The provisioning profile was created with a different certificate.
+
+**Solution**:
+1. Go to Apple Developer Portal → Profiles
+2. Edit the profile
+3. Select the correct certificate
+4. Download the updated profile
+
+### "Invalid provisioning profile"
+
+**Cause**: Profile may be expired or revoked.
+
+**Solution**:
+1. Check expiration date in Apple Developer Portal
+2. If expired, create a new profile
+3. Profiles expire after ~1 year
+
+### "App Store Connect API authentication failed"
+
+**Cause**: Invalid API key credentials.
+
+**Solution**:
+1. Verify `APPLE_KEY_ID` matches the Key ID shown in App Store Connect
+2. Verify `APPLE_ISSUER_ID` is the UUID shown at the top of the API keys page
+3. Ensure the `.p8` file content is correctly base64-encoded
+4. Check that the API key hasn't been revoked
+
+### "Code signing identity not found"
+
+**Cause**: The certificate type doesn't match the build type.
+
+**Solution**:
+- For App Store builds: Use "Apple Distribution" certificate
+- For development builds: Use "Apple Development" certificate
+
+## Certificate Types Reference
+
+| Certificate Type | Use | Provisioning Profile |
+|-----------------|-----|---------------------|
+| **Apple Development** | Testing on devices | iOS App Development |
+| **Apple Distribution** | App Store, TestFlight, Ad Hoc | App Store Connect, Ad Hoc |
+
+## Next Steps
+
+- [Build iOS Apps](/docs/cli/cloud-build/ios/) - Start building with Capgo
+- [Managing Credentials](/docs/cli/cloud-build/credentials/) - Credential management reference
+- [Troubleshooting](/docs/cli/cloud-build/troubleshooting/) - Common build issues
+
+## Need Help?
+
+- [Troubleshooting Guide](/docs/cli/cloud-build/troubleshooting/)
+- [Discord Community](https://discord.com/invite/VnYRvBfgA6)
+- Email: support@capgo.app
