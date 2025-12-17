@@ -14,6 +14,31 @@ Pertama ikuti panduan migrasi Capacitor:
 
 [https://capacitorjs.com/docs/updating/8-0](https://capacitorjs.com/docs/updating/8-0/)
 
+## Persyaratan Versi Minimum iOS
+
+Target deployment minimum iOS telah ditingkatkan ke **15.5** untuk memastikan perangkat iOS dengan [CVE-2022-36943](https://nvd.nist.gov/vuln/detail/CVE-2022-36943) dikecualikan. Ini adalah versi minimum dari pustaka zip iOS yang memiliki perbaikan keamanan yang diimplementasikan.
+
+### Solusi Swift Package Manager (SPM)
+
+Capacitor saat ini memiliki bug ([ionic-team/capacitor#7556](https://github.com/ionic-team/capacitor/issues/7556)) yang tidak memungkinkan pengaturan target deployment iOS ke 15.5 saat menggunakan SPM.
+
+Jika Anda membutuhkan dukungan SPM, Anda dapat sementara menggunakan fork kami:
+
+**GitHub:** [https://github.com/Cap-go/capacitor-plus](https://github.com/Cap-go/capacitor-plus)
+
+Untuk menggunakannya, ganti paket CLI `@capacitor/cli` dengan `@capacitor-plus/cli`:
+
+```bash
+npm uninstall @capacitor/cli
+npm install @capacitor-plus/cli
+```
+
+Kemudian gunakan CLI seperti biasa:
+
+```bash
+npx capacitor sync
+```
+
 ## Instalasi
 
 `npm i @capgo/capacitor-updater@8`
@@ -54,10 +79,9 @@ Konfigurasi tetap sama seperti v7. Pengaturan `capacitor.config` yang ada akan t
 
 ## Daftar Periksa Migrasi
 
-- [ ] Perbarui @capacitor/core ke ^8.0.0
-- [ ] Perbarui @capacitor/android ke ^8.0.0
-- [ ] Perbarui @capacitor/ios ke ^8.0.0
-- [ ] Ikuti panduan migrasi v8 Capacitor
+- [ ] Ikuti [panduan migrasi](https://capacitorjs.com/docs/updating/8-0) v8 Capacitor, periksa perubahan yang tidak kompatibel
+- [ ] Tingkatkan target deployment minimum iOS ke 15.5 (diperlukan untuk perbaikan CVE-2022-36943)
+- [ ] Jika menggunakan SPM, sementara beralih ke [@capacitor-plus/cli](https://github.com/Cap-go/capacitor-plus) sampai [ionic-team/capacitor#7556](https://github.com/ionic-team/capacitor/issues/7556) diperbaiki
 - [ ] Perbarui @capgo/capacitor-updater ke ^8.0.0
 - [ ] Jalankan `npx cap sync`
 - [ ] Uji aplikasi Anda secara menyeluruh di iOS dan Android

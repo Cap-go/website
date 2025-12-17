@@ -14,6 +14,31 @@ sidebar:
 
 [https://capacitorjs.com/docs/updating/8-0](https://capacitorjs.com/docs/updating/8-0/)
 
+## iOS 최소 버전 요구사항
+
+iOS 최소 배포 대상이 **15.5**로 상향되어 [CVE-2022-36943](https://nvd.nist.gov/vuln/detail/CVE-2022-36943) 취약점이 있는 iOS 기기가 제외됩니다. 이는 보안 수정이 구현된 iOS zip 라이브러리의 최소 버전입니다.
+
+### Swift Package Manager (SPM) 해결 방법
+
+Capacitor에는 현재 SPM 사용 시 iOS 배포 대상을 15.5로 설정할 수 없는 버그([ionic-team/capacitor#7556](https://github.com/ionic-team/capacitor/issues/7556))가 있습니다.
+
+SPM 지원이 필요한 경우 일시적으로 우리의 포크를 사용할 수 있습니다:
+
+**GitHub:** [https://github.com/Cap-go/capacitor-plus](https://github.com/Cap-go/capacitor-plus)
+
+사용하려면 CLI 패키지 `@capacitor/cli`를 `@capacitor-plus/cli`로 교체하세요:
+
+```bash
+npm uninstall @capacitor/cli
+npm install @capacitor-plus/cli
+```
+
+그런 다음 평소처럼 CLI를 사용합니다:
+
+```bash
+npx capacitor sync
+```
+
 ## 설치
 
 `npm i @capgo/capacitor-updater@8`
@@ -54,10 +79,9 @@ capacitor-updater 버전 8은 Capacitor 8과의 완전한 호환성을 제공하
 
 ## 마이그레이션 체크리스트
 
-- [ ] @capacitor/core를 ^8.0.0으로 업데이트
-- [ ] @capacitor/android를 ^8.0.0으로 업데이트
-- [ ] @capacitor/ios를 ^8.0.0으로 업데이트
-- [ ] Capacitor의 v8 마이그레이션 가이드 따르기
+- [ ] Capacitor의 v8 [마이그레이션 가이드](https://capacitorjs.com/docs/updating/8-0) 따르기, 주요 변경 사항 확인
+- [ ] iOS 최소 배포 대상을 15.5로 상향 (CVE-2022-36943 수정에 필요)
+- [ ] SPM 사용 시 [ionic-team/capacitor#7556](https://github.com/ionic-team/capacitor/issues/7556)이 수정될 때까지 일시적으로 [@capacitor-plus/cli](https://github.com/Cap-go/capacitor-plus)로 전환
 - [ ] @capgo/capacitor-updater를 ^8.0.0으로 업데이트
 - [ ] `npx cap sync` 실행
 - [ ] iOS 및 Android에서 앱을 철저히 테스트
