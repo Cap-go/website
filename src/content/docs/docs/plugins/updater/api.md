@@ -87,8 +87,6 @@ In `capacitor.config.json`:
 In `capacitor.config.ts`:
 
 ```ts
-/// <reference types="@capgo/capacitor-updater" />
-
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {

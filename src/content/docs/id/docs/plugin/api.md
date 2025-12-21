@@ -83,8 +83,6 @@ Dalam `capacitorconfigjson`:
 Dalam `capacitorconfigts`:
 
 ```ts
-/// <reference types="@capgo/capacitor-updater" />
-
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {

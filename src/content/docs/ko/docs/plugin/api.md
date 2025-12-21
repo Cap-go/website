@@ -83,8 +83,6 @@ CapacitorUpdater는 다음 옵션으로 구성할 수 있습니다:
 `capacitorconfigts`에서:
 
 ```ts
-/// <reference types="@capgo/capacitor-updater" />
-
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {

@@ -88,8 +88,6 @@ CapacitorUpdater 可以使用以下选项进行配置：
 在 `capacitor.config.ts` 中：
 
 ```ts
-/// <reference types="@capgo/capacitor-updater" />
-
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
