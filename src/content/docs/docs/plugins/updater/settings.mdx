@@ -14,170 +14,9 @@ To have more fine-grained control over the update system, you can configure it w
 </Aside>
 
 
-## `appReadyTimeout` 
+## `allowModifyUrl`
 
-> Configure the number of milliseconds the native plugin should wait before considering an update 'failed'.
-
-Only available for Android and iOS.
-
-Default: `10000` (10 seconds)
-
-```json
-// capacitor.config.json
-{
-  "plugins": {
-    "CapacitorUpdater": {
-      "appReadyTimeout": 1000
-    }
-  }
-}
-```
-
-## `responseTimeout` 
-
-> Configure the number of milliseconds the native plugin should wait before considering API timeout.
-
-Only available for Android and iOS.
-
-Default: `20` (20 seconds)
-
-```json
-// capacitor.config.json
-{
-  "plugins": {
-    "CapacitorUpdater": {
-      "responseTimeout": 10 // (10 seconds)
-    }
-  }
-}
-```
-
-## `autoDeleteFailed` 
-
-> Configure whether the plugin should automatically delete failed bundles.
-
-Only available for Android and iOS.
-
-Default: `true`
-
-```json
-// capacitor.config.json
-{
-  "plugins": {
-    "CapacitorUpdater": {
-      "autoDeleteFailed": false
-    }
-  }
-}
-```
-
-## `autoDeletePrevious` 
-
-> Configure whether the plugin should automatically delete previous bundles after a successful update.
-
-Only available for Android and iOS.
-
-Default: `true`
-
-```json
-// capacitor.config.json
-{
-  "plugins": {
-    "CapacitorUpdater": {
-      "autoDeletePrevious": false
-    }
-  }
-}
-```
-
-## `autoUpdate` 
-
-> Configure whether the plugin should use Auto Update via an update server.
-
-Only available for Android and iOS.
-
-Default: `true`
-
-```json
-// capacitor.config.json
-{
-  "plugins": {
-    "CapacitorUpdater": {
-      "autoUpdate": false
-    }
-  }
-}
-```
-
-## `updateUrl` 
-
-> Configure the URL / endpoint to which update checks are sent.
-
-Only available for Android and iOS.
-
-Default: `https://plugin.capgo.app/updates`
-
-```json
-// capacitor.config.json
-{
-  "plugins": {
-    "CapacitorUpdater": {
-      "updateUrl": "https://example.com/api/auto_update"
-    }
-  }
-}
-```
-
-## `statsUrl` 
-
-> Configure the URL / endpoint to which update statistics are sent.
-
-Only available for Android and iOS. Set to "" to disable stats reporting.
-
-Default: `https://plugin.capgo.app/stats`
-
-```json
-// capacitor.config.json
-{
-  "plugins": {
-    "CapacitorUpdater": {
-      "statsUrl": "https://example.com/api/stats"
-    }
-  }
-}
-```
-
-## `publicKey` 
-
-> Configure the public key for end to end live update encryption Version 2.
-
-Only available for Android and iOS.
-
-Default: `undefined`
-
-```json
-// capacitor.config.json
-{
-  "plugins": {
-    "CapacitorUpdater": {
-      "publicKey": "YOUR_PUBLIC_KEY"
-    }
-  }
-}
-```
-
-## `directUpdate` 
-
-> Configure when the plugin should direct install updates. Only for autoUpdate mode.
-> Works well for apps less than 10MB and with uploads done using --partial flag.
-> Zip or apps more than 10MB will be relatively slow for users to update.
-
-Options:
-- `false`: Never do direct updates (use default behavior: download at start, set when backgrounded)
-- `'atInstall'`: Direct update only when app is installed, updated from store, otherwise act as directUpdate = false
-- `'onLaunch'`: Direct update only on app installed, updated from store or after app kill, otherwise act as directUpdate = false
-- `'always'`: Direct update in all previous cases (app installed, updated from store, after app kill or app resume), never act as directUpdate = false
-- `true`: (deprecated) Same as "always" for backward compatibility
+> Allow the plugin to modify the updateUrl, statsUrl and channelUrl dynamically from the JavaScript side.
 
 Only available for Android and iOS.
 
@@ -188,47 +27,7 @@ Default: `false`
 {
   "plugins": {
     "CapacitorUpdater": {
-      "autoUpdate": true,
-      "directUpdate": "atInstall"
-    }
-  }
-}
-```
-
-## `resetWhenUpdate` 
-
-> Automatically delete previous downloaded bundles when a newer native app bundle is installed to the device.
-
-Only available for Android and iOS.
-
-Default: `true`
-
-```json
-// capacitor.config.json
-{
-  "plugins": {
-    "CapacitorUpdater": {
-      "resetWhenUpdate": false
-    }
-  }
-}
-```
-
-## `defaultChannel`
-
-> Set the default channel for the app in the config. Case sensitive.
-> This setting will override the default channel set in the cloud, but will still respect overrides made in the cloud.
-
-Only available for Android and iOS.
-
-Default: `undefined`
-
-```json
-// capacitor.config.json
-{
-  "plugins": {
-    "CapacitorUpdater": {
-      "defaultChannel": "production"
+      "allowModifyUrl": true
     }
   }
 }
@@ -253,40 +52,58 @@ Default: `undefined`
 }
 ```
 
-## `version`
+## `appReadyTimeout`
 
-> Configure the current version of the app. This will be used for the first update request.
-> If not set, the plugin will get the version from the native code.
+> Configure the number of milliseconds the native plugin should wait before considering an update 'failed'.
 
 Only available for Android and iOS.
 
-Default: `undefined`
+Default: `10000` (10 seconds)
 
 ```json
 // capacitor.config.json
 {
   "plugins": {
     "CapacitorUpdater": {
-      "version": "1.0.0"
+      "appReadyTimeout": 1000
     }
   }
 }
 ```
 
-## `channelUrl`
+## `autoDeleteFailed`
 
-> Configure the URL / endpoint for channel operations.
+> Configure whether the plugin should automatically delete failed bundles.
 
 Only available for Android and iOS.
 
-Default: `https://plugin.capgo.app/channel_self`
+Default: `true`
 
 ```json
 // capacitor.config.json
 {
   "plugins": {
     "CapacitorUpdater": {
-      "channelUrl": "https://example.com/api/channel"
+      "autoDeleteFailed": false
+    }
+  }
+}
+```
+
+## `autoDeletePrevious`
+
+> Configure whether the plugin should automatically delete previous bundles after a successful update.
+
+Only available for Android and iOS.
+
+Default: `true`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoDeletePrevious": false
     }
   }
 }
@@ -317,29 +134,76 @@ Default: `false`
 }
 ```
 
-## `periodCheckDelay`
+## `autoUpdate`
 
-> Configure the delay period for period update check. The unit is in seconds.
-> Cannot be less than 600 seconds (10 minutes).
+> Configure whether the plugin should use Auto Update via an update server.
 
 Only available for Android and iOS.
 
-Default: `600` (10 minutes)
+Default: `true`
 
 ```json
 // capacitor.config.json
 {
   "plugins": {
     "CapacitorUpdater": {
-      "periodCheckDelay": 600 // (10 minutes)
+      "autoUpdate": false
     }
   }
 }
 ```
 
-## `allowModifyUrl`
+## `channelUrl`
 
-> Allow the plugin to modify the updateUrl, statsUrl and channelUrl dynamically from the JavaScript side.
+> Configure the URL / endpoint for channel operations.
+
+Only available for Android and iOS.
+
+Default: `https://plugin.capgo.app/channel_self`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "channelUrl": "https://example.com/api/channel"
+    }
+  }
+}
+```
+
+## `defaultChannel`
+
+> Set the default channel for the app in the config. Case sensitive.
+> This setting will override the default channel set in the cloud, but will still respect overrides made in the cloud.
+
+Only available for Android and iOS.
+
+Default: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "defaultChannel": "production"
+    }
+  }
+}
+```
+
+## `directUpdate`
+
+> Configure when the plugin should direct install updates. Only for autoUpdate mode.
+> Works well for apps less than 10MB and with uploads done using --partial flag.
+> Zip or apps more than 10MB will be relatively slow for users to update.
+
+Options:
+- `false`: Never do direct updates (use default behavior: download at start, set when backgrounded)
+- `'atInstall'`: Direct update only when app is installed, updated from store, otherwise act as directUpdate = false
+- `'onLaunch'`: Direct update only on app installed, updated from store or after app kill, otherwise act as directUpdate = false
+- `'always'`: Direct update in all previous cases (app installed, updated from store, after app kill or app resume), never act as directUpdate = false
+- `true`: (deprecated) Same as "always" for backward compatibility
 
 Only available for Android and iOS.
 
@@ -350,7 +214,27 @@ Default: `false`
 {
   "plugins": {
     "CapacitorUpdater": {
-      "allowModifyUrl": true
+      "autoUpdate": true,
+      "directUpdate": "atInstall"
+    }
+  }
+}
+```
+
+## `disableJSLogging`
+
+> Disable the JavaScript logging of the plugin. If true, the plugin will not log to the JavaScript console. Only the native log will be done.
+
+Only available for Android and iOS.
+
+Default: `false`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "disableJSLogging": true
     }
   }
 }
@@ -379,20 +263,78 @@ Default: `false`
 }
 ```
 
-## `disableJSLogging`
+## `periodCheckDelay`
 
-> Disable the JavaScript logging of the plugin. If true, the plugin will not log to the JavaScript console. Only the native log will be done.
+> Configure the delay period for period update check. The unit is in seconds.
+> Cannot be less than 600 seconds (10 minutes).
 
 Only available for Android and iOS.
 
-Default: `false`
+Default: `600` (10 minutes)
 
 ```json
 // capacitor.config.json
 {
   "plugins": {
     "CapacitorUpdater": {
-      "disableJSLogging": true
+      "periodCheckDelay": 600 // (10 minutes)
+    }
+  }
+}
+```
+
+## `publicKey`
+
+> Configure the public key for end to end live update encryption Version 2.
+
+Only available for Android and iOS.
+
+Default: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "publicKey": "YOUR_PUBLIC_KEY"
+    }
+  }
+}
+```
+
+## `resetWhenUpdate`
+
+> Automatically delete previous downloaded bundles when a newer native app bundle is installed to the device.
+
+Only available for Android and iOS.
+
+Default: `true`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "resetWhenUpdate": false
+    }
+  }
+}
+```
+
+## `responseTimeout`
+
+> Configure the number of milliseconds the native plugin should wait before considering API timeout.
+
+Only available for Android and iOS.
+
+Default: `20` (20 seconds)
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "responseTimeout": 10 // (10 seconds)
     }
   }
 }
@@ -417,7 +359,99 @@ Default: `false`
 }
 ```
 
+## `statsUrl`
+
+> Configure the URL / endpoint to which update statistics are sent.
+
+Only available for Android and iOS. Set to "" to disable stats reporting.
+
+Default: `https://plugin.capgo.app/stats`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "statsUrl": "https://example.com/api/stats"
+    }
+  }
+}
+```
+
+## `updateUrl`
+
+> Configure the URL / endpoint to which update checks are sent.
+
+Only available for Android and iOS.
+
+Default: `https://plugin.capgo.app/updates`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "updateUrl": "https://example.com/api/auto_update"
+    }
+  }
+}
+```
+
+## `version`
+
+> Configure the current version of the app. This will be used for the first update request.
+> If not set, the plugin will get the version from the native code.
+
+Only available for Android and iOS.
+
+Default: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "version": "1.0.0"
+    }
+  }
+}
+```
+
 ## Development Settings
+
+### `localApi`
+
+> Configure the CLI to use a local api for testing.
+
+Default: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "localApi": "http://localhost:54321/functions/v1"
+    }
+  }
+}
+```
+
+### `localApiFiles`
+
+> Configure the CLI to use a local file api for testing.
+
+Default: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "localApiFiles": "http://localhost:54321/functions/v1/files"
+    }
+  }
+}
+```
 
 ### `localHost`
 
@@ -431,23 +465,6 @@ Default: `undefined`
   "plugins": {
     "CapacitorUpdater": {
       "localHost": "http://localhost:5173"
-    }
-  }
-}
-```
-
-### `localWebHost`
-
-> Configure the CLI to use a local server for testing or self-hosted update server.
-
-Default: `undefined`
-
-```json
-// capacitor.config.json
-{
-  "plugins": {
-    "CapacitorUpdater": {
-      "localWebHost": "http://localhost:5173"
     }
   }
 }
@@ -487,26 +504,9 @@ Default: `undefined`
 }
 ```
 
-### `localApi`
+### `localWebHost`
 
-> Configure the CLI to use a local api for testing.
-
-Default: `undefined`
-
-```json
-// capacitor.config.json
-{
-  "plugins": {
-    "CapacitorUpdater": {
-      "localApi": "http://localhost:54321/functions/v1"
-    }
-  }
-}
-```
-
-### `localApiFiles`
-
-> Configure the CLI to use a local file api for testing.
+> Configure the CLI to use a local server for testing or self-hosted update server.
 
 Default: `undefined`
 
@@ -515,7 +515,7 @@ Default: `undefined`
 {
   "plugins": {
     "CapacitorUpdater": {
-      "localApiFiles": "http://localhost:54321/functions/v1/files"
+      "localWebHost": "http://localhost:5173"
     }
   }
 }
