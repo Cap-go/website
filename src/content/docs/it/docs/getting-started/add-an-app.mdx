@@ -50,9 +50,29 @@ Nel caso in cui il comando init non funzioni, puoi aggiungere manualmente un'app
 
 2. Aggiungi l'app al tuo account con questo comando: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
 
-3. Installa il plugin nella tua app: <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
+3. Installa il plugin nella tua app: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
 
-4. Chiama il metodo init il prima possibile nella tua app: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
+   <Aside type="note" title="Installazione per versioni precedenti di Capacitor">
+   Il comando sopra installa l'ultima versione (v8.x) per Capacitor 8. Per versioni precedenti di Capacitor, usa il tag npm appropriato:
+
+   ```bash
+   # Capacitor 7
+   npm i @capgo/capacitor-updater@lts-v7
+
+   # Capacitor 6
+   npm i @capgo/capacitor-updater@lts-v6
+
+   # Capacitor 5
+   npm i @capgo/capacitor-updater@lts-v5
+   ```
+
+   Ogni versione maggiore del plugin corrisponde alla versione maggiore di Capacitor (v8 → Capacitor 8, v7 → Capacitor 7, v6 → Capacitor 6, v5 → Capacitor 5). Le versioni minori condividono lo stesso set di funzionalità su tutte le versioni maggiori (es., 5.34.0, 6.34.0, 7.34.0 e 8.34.0 includono le stesse funzionalità).
+   </Aside>
+
+4. Configura il plugin nel tuo `capacitor.config` <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
+  [Vedi tutte le opzioni disponibili](/docs/plugin/settings/). Queste informazioni verranno dedotte se non fornite.
+
+5. Chiama il metodo init il prima possibile nella tua app: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
 
 5. Distribuisci un aggiornamento live <LinkCard href="/docs/getting-started/deploy/" title="Deploy a live update" description="Impara come distribuire un aggiornamento live alla tua app" />
 

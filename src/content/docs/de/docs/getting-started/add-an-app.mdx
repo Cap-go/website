@@ -51,6 +51,23 @@ Falls der Init-Befehl für Sie nicht funktioniert, können Sie eine App manuell 
 
 3. Installieren Sie das Plugin in Ihrer App: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
 
+   <Aside type="note" title="Installation für ältere Capacitor-Versionen">
+   Der obige Befehl installiert die neueste Version (v8.x) für Capacitor 8. Für ältere Capacitor-Versionen verwenden Sie den entsprechenden npm-Tag:
+
+   ```bash
+   # Capacitor 7
+   npm i @capgo/capacitor-updater@lts-v7
+
+   # Capacitor 6
+   npm i @capgo/capacitor-updater@lts-v6
+
+   # Capacitor 5
+   npm i @capgo/capacitor-updater@lts-v5
+   ```
+
+   Jede Plugin-Hauptversion entspricht der Capacitor-Hauptversion (v8 → Capacitor 8, v7 → Capacitor 7, v6 → Capacitor 6, v5 → Capacitor 5). Minor-Versionen teilen denselben Funktionsumfang über alle Hauptversionen (z.B. 5.34.0, 6.34.0, 7.34.0 und 8.34.0 enthalten dieselben Funktionen).
+   </Aside>
+
 4. Konfigurieren Sie das Plugin in Ihrer `capacitor.config` <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
   [Siehe alle verfügbaren Optionen](/docs/plugin/settings/). Diese Informationen werden abgeleitet, wenn sie nicht bereitgestellt werden.
 

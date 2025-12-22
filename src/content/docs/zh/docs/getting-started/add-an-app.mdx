@@ -52,6 +52,23 @@ import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
 
 3. 在您的应用中安装插件：<Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
 
+   <Aside type="note" title="为旧版 Capacitor 安装">
+   上面的命令会安装最新版本 (v8.x)，适用于 Capacitor 8。对于旧版 Capacitor，请使用相应的 npm 标签：
+
+   ```bash
+   # Capacitor 7
+   npm i @capgo/capacitor-updater@lts-v7
+
+   # Capacitor 6
+   npm i @capgo/capacitor-updater@lts-v6
+
+   # Capacitor 5
+   npm i @capgo/capacitor-updater@lts-v5
+   ```
+
+   每个插件主版本对应 Capacitor 主版本（v8 → Capacitor 8，v7 → Capacitor 7，v6 → Capacitor 6，v5 → Capacitor 5）。所有主版本的相同次版本号具有相同的功能集（例如，5.34.0、6.34.0、7.34.0 和 8.34.0 都包含相同的功能）。
+   </Aside>
+
 4. 在您的 `capacitor.config` 中配置插件 <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
   [查看所有可用选项](/docs/plugin/settings/)。如果未提供，此信息将被推断。
 

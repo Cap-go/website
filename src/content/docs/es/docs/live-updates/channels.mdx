@@ -15,7 +15,17 @@ Un canal de Actualización en Vivo apunta a una compilación específica del Paq
 Cuando un dispositivo verifica una actualización, Capgo decide qué canal usar en este orden estricto (prioridad más alta primero):
 
 1. **Mapeo forzado de dispositivo (Panel)** – Ancla manualmente un ID de dispositivo específico a un canal. Úsalo para depuración urgente o pruebas controladas con un solo usuario real. Esto siempre gana.
-2. **Anulación en la nube (por dispositivo) vía `setChannel()` o Panel** – Creado cuando tu aplicación llama a `setChannel()` (a menudo expuesto en un menú QA/Depuración) o cambias el canal del dispositivo en el panel. Úsalo para usuarios de QA cambiando entre canales de características / PR o para reproducir un problema de usuario. Reinstalar el binario no lo borra; eliminar la entrada del dispositivo sí lo hace.
+2. **Anulación en la nube (por dispositivo) vía Panel o API** – Creado cuando cambias el canal del dispositivo en el panel o vía API. Úsalo para usuarios de QA cambiando entre canales de características / PR o para reproducir un problema de usuario. Reinstalar el binario no lo borra; eliminar la entrada del dispositivo sí lo hace.
+
+<Aside type="tip" title="Cambio Instantáneo de Canal con setChannel()">
+**A partir de la versión del plugin 5.34.0, 6.34.0, 7.34.0, o 8.0.0** (dependiendo de tu versión mayor), `setChannel()` funciona de manera diferente: contacta al backend para **validar** que el canal está permitido (verificando si la auto-asignación está habilitada para ese canal), luego almacena el canal **localmente en el dispositivo** como `defaultChannel`. Esto significa que el nuevo canal toma efecto **instantáneamente** para la próxima verificación de actualización—sin esperar replicación.
+
+Anteriormente, `setChannel()` guardaba la anulación del canal en la base de datos del backend (igual que los cambios del Panel o API). Los dispositivos tenían que esperar la replicación del backend (hasta 2 minutos) antes de que el nuevo canal fuera reconocido. El nuevo comportamiento solo lee del backend (para validación) y almacena localmente, haciendo los cambios de canal instantáneos.
+
+**Nota de seguridad:** Incluso si un canal se vuelve no permitido después de configurarse localmente, el backend aún validará el canal durante las verificaciones de actualización, asegurando que la seguridad se mantenga.
+
+**Importante:** Cuando los cambios de canal se realizan vía el Panel o API, todavía hay un retraso de replicación de hasta 2 minutos. Para cambio instantáneo de canal, usa `setChannel()` desde el código de tu aplicación—valida con el backend, luego establece el canal localmente para efecto inmediato.
+</Aside>
 3. **Config de Capacitor `defaultChannel` (predeterminado de compilación de prueba)** – Si está presente en `capacitor.config.*` y no existe forzado/anulación, la aplicación comienza en este canal (por ejemplo, `beta`, `qa`, `pr-123`). Destinado para TestFlight / compilaciones internas para que los evaluadores aterricen automáticamente en un canal de pre-lanzamiento. Las compilaciones de producción típicamente dejan esto sin configurar.
 4. **Canal Predeterminado en la Nube (ruta principal ~99% de usuarios)** – Si marcas un canal predeterminado en el panel, todos los usuarios finales normales (sin forzado, sin anulación, sin config defaultChannel) se conectan aquí. Cámbialo para desplegar o revertir al instante—sin nuevo binario. Si tienes predeterminados específicos de plataforma (uno solo para iOS, uno solo para Android), cada dispositivo aterriza en el predeterminado que coincida con su plataforma. Dejar el predeterminado en la nube sin configurar está permitido; en ese caso, el dispositivo debe coincidir en los pasos 1–3 para recibir actualizaciones.
 

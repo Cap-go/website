@@ -1,5 +1,6 @@
 ---
 title: Saluran
+description: "Pelajari cara mengelola dan mengonfigurasi saluran Live Update di Capgo, memungkinkan pembaruan aplikasi yang mulus dengan mengarahkan build bundle JS tertentu ke perangkat yang dikonfigurasi untuk saluran tersebut."
 sidebar:
   order: 2
 locale: id
@@ -9,9 +10,49 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 Channel Live Update mengarah ke build bundle JS tertentu dari aplikasi Anda yang akan dibagikan dengan perangkat yang dikonfigurasi untuk mendengarkan channel tersebut untuk pembaruan. Ketika Anda [menginstal Capgo Live Updates SDK](/docs/getting-started/quickstart/) di aplikasi Anda, setiap binary native yang dikonfigurasi ke channel tersebut akan memeriksa pembaruan yang tersedia setiap kali aplikasi diluncurkan. Anda dapat mengubah build yang ditunjuk channel kapan saja dan juga dapat kembali ke build sebelumnya jika diperlukan.
 
+## Bagaimana Perangkat Memilih Channel (Prioritas)
+
+Ketika perangkat memeriksa pembaruan, Capgo memutuskan channel mana yang akan digunakan dalam urutan ketat ini (prioritas tertinggi lebih dulu):
+
+1. **Pemetaan perangkat paksa (Dashboard)** – Pin ID perangkat tertentu ke channel secara manual. Gunakan untuk debugging mendesak atau pengujian terkontrol dengan satu pengguna nyata. Ini selalu menang.
+2. **Override cloud (per-perangkat) via Dashboard atau API** – Dibuat ketika Anda mengubah channel perangkat di dashboard atau via API. Gunakan untuk pengguna QA yang beralih antar channel fitur/PR atau untuk mereproduksi masalah pengguna. Menginstal ulang binary tidak menghapusnya; menghapus entri perangkat yang menghapusnya.
+
+<Aside type="tip" title="Pergantian Channel Instan dengan setChannel()">
+**Mulai dari plugin versi 5.34.0, 6.34.0, 7.34.0, atau 8.0.0** (tergantung versi major Anda), `setChannel()` bekerja secara berbeda: ia menghubungi backend untuk **memvalidasi** bahwa channel diizinkan (memeriksa apakah self-assignment diaktifkan untuk channel tersebut), kemudian menyimpan channel **secara lokal di perangkat** sebagai `defaultChannel`. Ini berarti channel baru berlaku **secara instan** untuk pemeriksaan pembaruan berikutnya—tidak perlu menunggu replikasi.
+
+Sebelumnya, `setChannel()` menyimpan override channel ke database backend (seperti perubahan Dashboard atau API), dan perangkat harus menunggu replikasi data (hingga 2 menit) sebelum channel baru dikenali. Perilaku baru hanya membaca dari backend (untuk validasi) dan menyimpan secara lokal, membuat pergantian channel menjadi instan.
+
+**Catatan:** Bahkan jika channel menjadi tidak diizinkan setelah diatur secara lokal, backend akan tetap memvalidasi channel selama pemeriksaan pembaruan, sehingga keamanan tetap terjaga.
+
+**Penting:** Ketika perubahan channel dilakukan via Dashboard atau API, masih ada lag replikasi hingga 2 menit sebelum semua edge server mencerminkan perubahan. Untuk pergantian channel instan, gunakan `setChannel()` dari kode aplikasi Anda—ia memvalidasi dengan backend, kemudian mengatur channel secara lokal untuk efek langsung.
+</Aside>
+
+3. **Capacitor config `defaultChannel` (default build test)** – Jika ada di `capacitor.config.*` dan tidak ada force/override, aplikasi mulai di channel ini (misalnya `beta`, `qa`, `pr-123`). Ditujukan untuk build TestFlight/internal agar tester otomatis masuk ke channel pre-release. Build produksi biasanya membiarkan ini tidak diatur.
+4. **Cloud Default Channel (jalur utama ~99% pengguna)** – Jika Anda menandai channel default di dashboard, semua pengguna akhir normal (tanpa force, tanpa override, tanpa config defaultChannel) terhubung di sini. Ubah untuk roll out atau roll back secara instan—tidak perlu binary baru. Jika Anda memiliki default spesifik platform (satu khusus iOS, satu khusus Android), setiap perangkat masuk ke default yang sesuai dengan platformnya. Membiarkan cloud default tidak diatur diperbolehkan; dalam hal ini perangkat harus cocok di langkah 1-3 untuk menerima pembaruan.
+
+Best practice:
+- Perlakukan 1-3 sebagai layer pengecualian/pengujian; ketika Anda mengatur cloud default, pengguna nyata harus mengalir ke sana. Jika Anda memilih untuk tidak mengaturnya, sengaja tentukan bagaimana pengguna terhubung (biasanya via `defaultChannel` di config atau override per-perangkat).
+- Hanya konfigurasikan `defaultChannel` di binary yang Anda kirim secara eksplisit ke tester. Membiarkannya tidak diatur menjaga logika produksi terpusat di dashboard.
+- Gunakan `setChannel()` dengan hemat di produksi—terutama untuk QA atau diagnostik tertarget.
+
+Jika channel dinonaktifkan untuk platform (toggle iOS/Android) ketika seharusnya dipilih, proses seleksi melewatinya dan melanjutkan ke bawah daftar.
+
+> Ringkasan: Force > Override > Config `defaultChannel` > Cloud Default.
+
+## Perilaku Channel Default
+
+Mengatur cloud default bersifat opsional, tetapi biasanya berfungsi sebagai jalur catch-all untuk perangkat baru. Tanpanya, hanya perangkat yang cocok di pemetaan paksa, override, atau `defaultChannel` di config Capacitor yang akan menerima pembaruan. Ketika Anda memilih untuk menandai default, ingat pola-pola ini:
+
+- **Default tunggal (paling umum)** – Jika channel mengaktifkan iOS dan Android, ia menjadi satu-satunya default; perangkat apa pun tanpa override akan terhubung di sini.
+- **Default spesifik platform** – Jika Anda memisahkan channel berdasarkan platform (misalnya, `ios-production` dengan hanya iOS diaktifkan dan `android-production` dengan hanya Android diaktifkan), tandai masing-masing sebagai default untuk platformnya. Perangkat iOS pergi ke default iOS, perangkat Android pergi ke default Android.
+
+Ingat bahwa cloud default dan `defaultChannel` di `capacitor.config.*` keduanya menempati layer keputusan yang sama. Jika Anda mengatur cloud default, Anda tidak perlu menduplikasi nilai di config Capacitor Anda—biarkan `defaultChannel` kosong untuk build produksi. Cadangkan `defaultChannel` untuk binary yang Anda sengaja kirim ke tester atau QA ketika Anda ingin mereka mulai di channel non-produksi meskipun cloud default berbeda.
+
+Anda dapat mengubah default kapan saja di dashboard. Ketika Anda menukar default, perangkat baru mematuhi routing baru segera dan perangkat yang ada mengikuti aturan prioritas normal saat mereka check in berikutnya.
+
 ## Menyiapkan Channel
 
-Setiap aplikasi dilengkapi dengan channel default bernama "Production" yang tidak dapat dihapus. Untuk menambahkan channel baru:
+Selama onboarding Anda membuat channel pertama (kebanyakan tim menamakannya "Production"), tetapi tidak ada yang terkunci—Anda dapat mengganti nama atau menghapus channel kapan saja. Untuk menambahkan channel tambahan nanti:
 
 1. Buka bagian "Channels" di dashboard Capgo
 2. Klik tombol "New Channel"
@@ -26,9 +67,9 @@ Nama channel bisa apa saja yang Anda inginkan. Strategi yang umum adalah menyesu
 
 ## Mengkonfigurasi Channel di Aplikasi Anda
 
-Dengan channel Anda yang telah dibuat, Anda perlu mengkonfigurasi aplikasi untuk mendengarkan channel yang sesuai. Dalam contoh ini, kita akan menggunakan channel `Development`
+Dengan channel Anda yang telah dibuat, Anda perlu mengkonfigurasi aplikasi untuk mendengarkan channel yang sesuai. Dalam contoh ini, kita akan menggunakan channel `Development`.
 
-Buka file `capacitor.config.ts` (atau `capacitor.config.json`) Anda. Di bagian `plugins`, atur properti `channel` dari plugin `CapacitorUpdater` ke nama channel yang Anda inginkan:
+Buka file `capacitor.config.ts` (atau `capacitor.config.json`) Anda. Di bagian `plugins`, secara opsional atur `defaultChannel` untuk **build test** (internal/QA). Untuk build produksi, lebih baik menghilangkannya agar perangkat menggunakan Cloud Default kecuali secara eksplisit di-override.
 
 ```ts
 import { CapacitorConfig } from '@capacitor/cli';
@@ -36,7 +77,9 @@ import { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   plugins: {
     CapacitorUpdater: {
+      // Untuk build QA/TestFlight – tester mulai di channel Development secara otomatis.
       defaultChannel: 'Development',
+      // Build produksi biasanya menghilangkan ini agar pengguna terhubung ke Cloud Default channel.
     },
   },
 };
@@ -45,9 +88,93 @@ const config: CapacitorConfig = {
 Selanjutnya, build aplikasi web Anda dan jalankan `npx cap sync` untuk menyalin file konfigurasi yang diperbarui ke proyek iOS dan Android Anda. Jika Anda melewatkan langkah sinkronisasi ini, proyek native Anda akan terus menggunakan channel yang sebelumnya dikonfigurasi.
 
 <Aside type="caution">
+Urutan pemilihan channel: Force > Override (`setChannel` / dashboard) > Config `defaultChannel` > Cloud Default.
 
-Properti `defaultChannel` akan selalu menimpa channel default cloud. Tapi Anda masih dapat memaksa deviceId ke channel di Cloud
+Gunakan `defaultChannel` hanya di build test/internal; hilangkan untuk produksi agar pengguna mengikuti Cloud Default (jika diatur) daripada menduplikasi routing di config native.
 
+Anda masih dapat memaksa (pin) perangkat atau menerapkan override nanti—itu segera menggantikan nilai config.
+
+> Nama channel bersifat case sensitive.
+</Aside>
+
+## Opsi dan Strategi Channel
+
+Channel memiliki beberapa opsi yang mengontrol siapa yang dapat menerima pembaruan dan bagaimana pembaruan dikirim. Yang paling penting ada di bawah. Anda dapat mengkonfigurasinya dari web app, CLI, atau Public API.
+
+- Channel default: Secara opsional tandai channel atau channel spesifik platform tempat perangkat baru terhubung. Lihat "Perilaku Channel Default" untuk skenario routing.
+- Filter platform: Aktifkan atau nonaktifkan pengiriman ke perangkat `iOS` dan/atau `Android` per channel.
+- Nonaktifkan auto downgrade di bawah native: Mencegah pengiriman pembaruan ketika versi aplikasi native perangkat lebih baru dari bundle channel (misalnya, perangkat di 1.2.3 sementara channel memiliki 1.2.2).
+- Izinkan build development: Izinkan pembaruan ke build development (berguna untuk pengujian).
+- Izinkan perangkat emulator: Izinkan pembaruan ke emulator/simulator (berguna untuk pengujian).
+- Izinkan self-assignment perangkat: Memungkinkan aplikasi beralih ke channel ini saat runtime menggunakan `setChannel`. Jika dinonaktifkan, `setChannel` akan gagal untuk channel ini.
+
+### Strategi Nonaktifkan Auto Update
+
+Gunakan ini untuk membatasi jenis pembaruan apa yang akan dikirim channel secara otomatis. Opsi:
+
+- major: Blokir pembaruan cross-major (0.0.0 → 1.0.0). Pembaruan minor dan patch masih diizinkan.
+- minor: Blokir pembaruan cross-minor (misalnya, 1.1.0 → 1.2.0) dan major. Pembaruan patch masih diizinkan. Catatan: tidak memblokir 0.1.0 → 1.1.0.
+- patch: Sangat ketat. Hanya mengizinkan versi patch yang meningkat dalam major dan minor yang sama. Contoh: 0.0.311 → 0.0.314 ✅, 0.1.312 → 0.0.314 ❌, 1.0.312 → 0.0.314 ❌.
+- metadata: Memerlukan metadata versi pembaruan minimum di setiap bundle. Konfigurasikan via CLI menggunakan `--min-update-version` atau `--auto-min-update-version`. Jika tidak ada, channel ditandai salah konfigurasi dan pembaruan akan ditolak sampai diatur.
+- none: Izinkan semua pembaruan sesuai kompatibilitas semver.
+
+Pelajari detail dan contoh lebih lanjut di strategi Nonaktifkan pembaruan di /docs/cli/commands/#disable-updates-strategy.
+
+Contoh (CLI):
+
+```bash
+# Blokir pembaruan major di channel Production
+npx @capgo/cli@latest channel set production com.example.app \
+  --disable-auto-update major
+
+# Izinkan perangkat untuk self-assign ke channel Beta
+npx @capgo/cli@latest channel set beta com.example.app --self-assign
+```
+
+### Menggunakan setChannel() dari Aplikasi Anda
+
+Metode `setChannel()` memungkinkan aplikasi Anda untuk beralih channel secara programatik saat runtime. Ini sangat berguna untuk:
+
+- Menu QA/debug di mana tester dapat beralih antar channel
+- Alur opt-in program beta
+- Implementasi feature flag
+- Skenario A/B testing
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+// Beralih ke channel beta
+await CapacitorUpdater.setChannel({ channel: 'beta' });
+
+// Secara opsional memicu pemeriksaan pembaruan segera setelah beralih
+await CapacitorUpdater.setChannel({
+  channel: 'beta',
+  triggerAutoUpdate: true
+});
+```
+
+<Aside type="note" title="Cara setChannel() Bekerja (v5.34.0+ / v6.34.0+ / v7.34.0+ / v8.0.0+)">
+Ketika `setChannel()` dipanggil:
+
+1. **Validasi backend (read-only)**: Permintaan dikirim ke backend Capgo untuk memvalidasi bahwa channel diizinkan (memeriksa izin self-assignment)
+2. **Update penyimpanan lokal**: Jika validasi berhasil, channel disimpan ke penyimpanan lokal perangkat sebagai `defaultChannel`
+3. **Efek instan**: Pemeriksaan pembaruan berikutnya menggunakan channel baru segera (tidak menunggu replikasi)
+
+**Mengapa ini penting:** Di versi lama, `setChannel()` menyimpan override channel ke database backend (sama seperti perubahan Dashboard atau API). Perangkat harus menunggu replikasi backend (hingga 2 menit) sebelum perubahan channel berlaku. Sekarang, `setChannel()` hanya membaca dari backend (untuk validasi) dan menyimpan secara lokal, membuat pergantian channel menjadi instan.
+
+**Catatan keamanan:** Bahkan jika izin channel berubah setelah diatur secara lokal (misalnya, self-assignment dinonaktifkan), backend akan tetap memvalidasi channel selama pemeriksaan pembaruan, memastikan keamanan tetap terjaga.
+
+**Perbandingan metode perubahan channel:**
+
+| Metode | Waktu Efek | Disimpan Di Mana | Kasus Penggunaan |
+|--------|------------|------------------|------------------|
+| `setChannel()` dari plugin | **Instan** | Perangkat saja (lokal) | Pergantian channel yang diinisiasi pengguna dalam aplikasi |
+| Override perangkat Dashboard | Hingga 2 menit | Database backend | Perubahan yang diinisiasi admin untuk perangkat tertentu |
+| Penugasan channel API | Hingga 2 menit | Database backend | Integrasi backend otomatis |
+
+Untuk pengalaman pengguna terbaik saat membangun UI pergantian channel, selalu gunakan metode `setChannel()` plugin.
+
+Versi minimum untuk pergantian channel lokal saja: **5.34.0**, **6.34.0**, **7.34.0**, atau **8.0.0** (tergantung versi major Anda). Setiap nomor versi minor sesuai dengan set fitur yang sama di semua versi major (misalnya, X.34.0 menyertakan fitur yang sama apakah X adalah 5, 6, 7, atau 8). Lihat [instalasi plugin](/docs/getting-started/add-an-app/) untuk tag versi.
 </Aside>
 
 ## Menetapkan Bundle ke Channel
@@ -66,20 +193,20 @@ Anda juga dapat menetapkan build ke channel dari bagian "Bundles" di dashboard C
 
 Penting untuk dicatat bahwa bundle di Capgo bersifat global untuk aplikasi Anda, tidak spesifik untuk channel individual. Bundle yang sama dapat ditetapkan ke beberapa channel.
 
-Saat memversikan bundle Anda, kami merekomendasikan menggunakan semantic versioning [semver](https://semver.org/) dengan pengidentifikasi pre-release untuk build khusus channel. Misalnya, rilis beta mungkin diversion sebagai `123-beta1`.
+Saat memversikan bundle Anda, kami merekomendasikan menggunakan semantic versioning [semver](https://semver.org/) dengan pengidentifikasi pre-release untuk build khusus channel. Misalnya, rilis beta mungkin diversion sebagai `1.2.3-beta.1`.
 
 Pendekatan ini memiliki beberapa keuntungan:
 
-- Dengan jelas mengkomunikasikan hubungan antara build. `123-beta1` jelas merupakan pre-release dari `123`
+- Dengan jelas mengkomunikasikan hubungan antara build. `1.2.3-beta.1` jelas merupakan pre-release dari `1.2.3`
 - Memungkinkan penggunaan kembali nomor versi di beberapa channel, mengurangi kebingungan
-- Memungkinkan jalur rollback yang jelas. Jika Anda perlu melakukan rollback dari `123`, Anda tahu `122` adalah rilis stabil sebelumnya
+- Memungkinkan jalur rollback yang jelas. Jika Anda perlu melakukan rollback dari `1.2.3`, Anda tahu `1.2.2` adalah rilis stabil sebelumnya
 
 Berikut contoh bagaimana Anda mungkin menyelaraskan versi bundle Anda dengan pengaturan channel yang umum:
 
-- Channel `Development`: `123-dev1`, `123-dev2`, dll
-- Channel `QA`: `123-qa1`, `123-qa2`, dll
-- Channel `Staging`: `123-rc1`, `123-rc2`, dll
-- Channel `Production`: `123`, `124`, dll
+- Channel `Development`: `1.2.3-dev.1`, `1.2.3-dev.2`, dll.
+- Channel `QA`: `1.2.3-qa.1`, `1.2.3-qa.2`, dll.
+- Channel `Staging`: `1.2.3-rc.1`, `1.2.3-rc.2`, dll.
+- Channel `Production`: `1.2.3`, `1.2.4`, dll.
 
 Menggunakan semver dengan pengidentifikasi pre-release adalah pendekatan yang direkomendasikan, tetapi tidak wajib. Yang terpenting adalah menemukan skema versioning yang dengan jelas mengkomunikasikan hubungan antara build Anda dan selaras dengan proses pengembangan tim Anda.
 
@@ -114,3 +241,14 @@ Sekarang setelah Anda memahami channel, Anda siap untuk mulai menerapkan live up
 4. Luncurkan aplikasi dan tunggu pembaruannya!
 
 Untuk panduan yang lebih detail, lihat panduan [Menerapkan Live Update](/docs/getting-started/deploy/). Selamat memperbarui!
+
+## Penggunaan Channel Lanjutan: Segmentasi Pengguna
+
+Channel dapat digunakan untuk lebih dari sekadar tahap pengembangan. Ini adalah alat yang kuat untuk segmentasi pengguna, memungkinkan fitur seperti:
+
+- Feature flag untuk tier pengguna yang berbeda
+- A/B testing
+- Rollout fitur bertahap
+- Program beta testing
+
+Pelajari cara mengimplementasikan kasus penggunaan lanjutan ini di panduan kami: [How to Segment Users by Plan and Channels for Feature Flags and A/B Testing](/blog/how-to-segment-users-by-plan-and-channels/).

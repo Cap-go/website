@@ -1,5 +1,6 @@
 ---
 title: Kanäle
+description: "Erfahren Sie, wie Sie Live Update-Kanäle in Capgo verwalten und konfigurieren, um nahtlose App-Updates zu ermöglichen, indem Sie spezifische JS-Bundle-Builds an Geräte weiterleiten, die für diese Kanäle konfiguriert sind."
 sidebar:
   order: 2
 locale: de
@@ -7,11 +8,51 @@ locale: de
 
 import { Aside, Steps } from '@astrojs/starlight/components';
 
-Ein Live-Update-Kanal verweist auf einen bestimmten JS-Bundle-Build Ihrer App, der mit allen Geräten geteilt wird, die für Updates auf diesen Kanal eingestellt sind. Wenn Sie das [Capgo Live Updates SDK](/docs/getting-started/quickstart/) in Ihrer App installieren, prüft jede native Binary, die für diesen Kanal konfiguriert ist, beim App-Start auf verfügbare Updates. Sie können den Build, auf den ein Kanal verweist, jederzeit ändern und bei Bedarf auch auf vorherige Builds zurücksetzen.
+Ein Live Update-Kanal verweist auf einen bestimmten JS-Bundle-Build Ihrer App, der mit allen Geräten geteilt wird, die für Updates auf diesen Kanal eingestellt sind. Wenn Sie das [Capgo Live Updates SDK](/docs/getting-started/quickstart/) in Ihrer App installieren, prüft jede native Binary, die für diesen Kanal konfiguriert ist, beim App-Start auf verfügbare Updates. Sie können den Build, auf den ein Kanal verweist, jederzeit ändern und bei Bedarf auch auf vorherige Builds zurücksetzen.
+
+## Wie ein Gerät einen Kanal auswählt (Priorität)
+
+Wenn ein Gerät nach einem Update sucht, entscheidet Capgo in dieser strikten Reihenfolge, welcher Kanal verwendet wird (höchste Priorität zuerst):
+
+1. **Erzwungene Gerätezuordnung (Dashboard)** – Ordnen Sie ein bestimmtes Gerät manuell einem Kanal zu. Verwenden Sie dies für dringendes Debugging oder kontrolliertes Testen mit einem einzelnen echten Benutzer. Dies hat immer Vorrang.
+2. **Cloud-Override (pro Gerät) über Dashboard oder API** – Wird erstellt, wenn Sie den Kanal des Geräts im Dashboard oder über die API ändern. Verwenden Sie dies für QA-Benutzer, die zwischen Feature-/PR-Kanälen wechseln, oder um ein Benutzerproblem zu reproduzieren. Eine Neuinstallation der Binary löscht dies nicht; das Löschen des Geräteeintrags schon.
+
+<Aside type="tip" title="Sofortiger Kanalwechsel mit setChannel()">
+**Ab Plugin-Version 5.34.0, 6.34.0, 7.34.0 oder 8.0.0** (je nach Ihrer Hauptversion) funktioniert `setChannel()` anders: Es kontaktiert das Backend, um zu **validieren**, dass der Kanal erlaubt ist (prüft, ob Selbstzuweisung für diesen Kanal aktiviert ist), und speichert den Kanal dann **lokal auf dem Gerät** als `defaultChannel`. Das bedeutet, der neue Kanal wird **sofort** für die nächste Update-Prüfung wirksam – kein Warten auf Replikation.
+
+Zuvor speicherte `setChannel()` den Kanal-Override in der Backend-Datenbank (wie Dashboard- oder API-Änderungen), und Geräte mussten auf die Datenreplikation warten (bis zu 2 Minuten), bevor der neue Kanal erkannt wurde. Das neue Verhalten liest nur vom Backend (zur Validierung) und speichert lokal, was Kanalwechsel sofort macht.
+
+**Hinweis:** Selbst wenn ein Kanal nach dem lokalen Setzen nicht mehr erlaubt ist, validiert das Backend den Kanal weiterhin bei Update-Prüfungen, sodass die Sicherheit gewährleistet bleibt.
+
+**Wichtig:** Wenn Kanaländerungen über das Dashboard oder die API vorgenommen werden, gibt es immer noch eine Replikationsverzögerung von bis zu 2 Minuten, bevor alle Edge-Server die Änderung widerspiegeln. Für sofortige Kanalwechsel verwenden Sie `setChannel()` aus Ihrem App-Code – es validiert mit dem Backend und setzt dann den Kanal lokal für sofortige Wirkung.
+</Aside>
+
+3. **Capacitor-Konfig `defaultChannel` (Test-Build-Standard)** – Wenn in `capacitor.config.*` vorhanden und kein Force/Override existiert, startet die App auf diesem Kanal (z.B. `beta`, `qa`, `pr-123`). Gedacht für TestFlight-/interne Builds, damit Tester automatisch auf einem Pre-Release-Kanal landen. Produktions-Builds lassen dies normalerweise leer.
+4. **Cloud-Standardkanal (Hauptpfad ~99% der Benutzer)** – Wenn Sie im Dashboard einen Standardkanal markieren, werden alle normalen Endbenutzer (kein Force, kein Override, kein Config-defaultChannel) hier angehängt. Ändern Sie ihn, um sofort auszurollen oder zurückzusetzen – keine neue Binary nötig. Wenn Sie plattformspezifische Standards haben (einen nur für iOS, einen nur für Android), landet jedes Gerät auf dem Standard, der seiner Plattform entspricht. Den Cloud-Standard leer zu lassen ist erlaubt; in diesem Fall muss das Gerät über Schritte 1-3 zugeordnet werden, um Updates zu erhalten.
+
+Best Practice:
+- Behandeln Sie 1-3 als Ausnahme-/Test-Layer; wenn Sie einen Cloud-Standard setzen, sollten echte Benutzer darüber fließen. Wenn Sie keinen setzen, seien Sie bewusst darüber, wie Benutzer zugeordnet werden (typischerweise über `defaultChannel` in der Konfig oder gerätespezifische Overrides).
+- Konfigurieren Sie `defaultChannel` nur in Binaries, die Sie explizit an Tester versenden. Lassen Sie es leer, um die Produktionslogik zentral im Dashboard zu halten.
+- Verwenden Sie `setChannel()` sparsam in der Produktion – hauptsächlich für QA oder gezielte Diagnosen.
+
+Wenn ein Kanal für die Plattform deaktiviert ist (iOS/Android-Schalter), wenn er sonst gewählt würde, überspringt der Auswahlprozess ihn und fährt in der Liste fort.
+
+> Zusammenfassung: Force > Override > Config `defaultChannel` > Cloud-Standard.
+
+## Standardkanal-Verhalten
+
+Das Setzen eines Cloud-Standards ist optional, dient aber normalerweise als Auffangpfad für neue Geräte. Ohne einen erhalten nur Geräte Updates, die über erzwungene Zuordnungen, Overrides oder einen `defaultChannel` in der Capacitor-Konfig zugeordnet sind. Wenn Sie Standards markieren möchten, beachten Sie diese Muster:
+
+- **Einzelner Standard (am häufigsten)** – Wenn der Kanal sowohl iOS als auch Android aktiviert hat, wird er zum einzigen Standard; jedes Gerät ohne Overrides wird hier angehängt.
+- **Plattformspezifische Standards** – Wenn Sie Kanäle nach Plattform aufteilen (z.B. `ios-production` nur mit iOS aktiviert und `android-production` nur mit Android aktiviert), markieren Sie jeden als Standard für seine Plattform. iOS-Geräte gehen zum iOS-Standard, Android-Geräte zum Android-Standard.
+
+Denken Sie daran, dass der Cloud-Standard und `defaultChannel` in `capacitor.config.*` beide dieselbe Entscheidungsebene belegen. Wenn Sie einen Cloud-Standard setzen, müssen Sie den Wert nicht in Ihrer Capacitor-Konfig duplizieren – lassen Sie `defaultChannel` für Produktions-Builds leer. Reservieren Sie `defaultChannel` für Binaries, die Sie absichtlich an Tester oder QA versenden, wenn sie auf einem Nicht-Produktionskanal starten sollen, auch wenn der Cloud-Standard anders ist.
+
+Sie können Standards jederzeit im Dashboard ändern. Wenn Sie einen Standard wechseln, folgen neue Geräte sofort der neuen Weiterleitung und bestehende Geräte folgen beim nächsten Check-in den normalen Prioritätsregeln.
 
 ## Einrichten eines Kanals
 
-Jede App wird mit einem Standardkanal namens "Production" ausgeliefert, der nicht gelöscht werden kann. So fügen Sie neue Kanäle hinzu:
+Während des Onboardings erstellen Sie den ersten Kanal (die meisten Teams nennen ihn "Production"), aber nichts ist gesperrt – Sie können jeden Kanal jederzeit umbenennen oder löschen. Um später zusätzliche Kanäle hinzuzufügen:
 
 1. Gehen Sie zum Bereich "Channels" im Capgo Dashboard
 2. Klicken Sie auf den Button "New Channel"
@@ -28,7 +69,7 @@ Kanalnamen können frei gewählt werden. Eine gängige Strategie ist es, Kanäle
 
 Nachdem Sie Ihre Kanäle erstellt haben, müssen Sie Ihre App so konfigurieren, dass sie auf den entsprechenden Kanal hört. In diesem Beispiel verwenden wir den `Development`-Kanal.
 
-Öffnen Sie Ihre `capacitor.config.ts` (oder `capacitor.config.json`) Datei. Setzen Sie unter dem `plugins`-Abschnitt die `channel`-Eigenschaft des `CapacitorUpdater`-Plugins auf den Namen Ihres gewünschten Kanals:
+Öffnen Sie Ihre `capacitor.config.ts` (oder `capacitor.config.json`) Datei. Setzen Sie unter dem `plugins`-Abschnitt optional `defaultChannel` für **Test-Builds** (intern / QA). Für Produktions-Builds bevorzugen Sie, es wegzulassen, damit Geräte den Cloud-Standard verwenden, es sei denn, sie werden explizit überschrieben.
 
 ```ts
 import { CapacitorConfig } from '@capacitor/cli';
@@ -36,7 +77,9 @@ import { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   plugins: {
     CapacitorUpdater: {
+      // Für einen QA/TestFlight-Build – Tester starten automatisch auf dem Development-Kanal.
       defaultChannel: 'Development',
+      // Produktions-Builds lassen dies normalerweise weg, damit Benutzer sich an den Cloud-Standardkanal anhängen.
     },
   },
 };
@@ -45,9 +88,93 @@ const config: CapacitorConfig = {
 Bauen Sie anschließend Ihre Web-App und führen Sie `npx cap sync` aus, um die aktualisierte Konfigurationsdatei in Ihre iOS- und Android-Projekte zu kopieren. Wenn Sie diesen Sync-Schritt überspringen, verwenden Ihre nativen Projekte weiterhin den Kanal, für den sie zuvor konfiguriert waren.
 
 <Aside type="caution">
+Kanalauswahlreihenfolge: Force > Override (`setChannel` / Dashboard) > Config `defaultChannel` > Cloud-Standard.
 
-Die `defaultChannel`-Eigenschaft überschreibt immer den Cloud-Standardkanal. Sie können jedoch die deviceId weiterhin in der Cloud einem Kanal zuweisen.
+Verwenden Sie `defaultChannel` nur in Test-/internen Builds; lassen Sie es für die Produktion weg, damit Benutzer dem Cloud-Standard folgen (wenn gesetzt), anstatt die Weiterleitung in der nativen Konfig zu duplizieren.
 
+Sie können ein Gerät später noch erzwingen (pinnen) oder einen Override anwenden – diese überschreiben sofort den Konfig-Wert.
+
+> Kanalnamen unterscheiden Groß- und Kleinschreibung.
+</Aside>
+
+## Kanaloptionen und Strategien
+
+Kanäle haben mehrere Optionen, die steuern, wer Updates erhalten kann und wie Updates geliefert werden. Die wichtigsten sind unten aufgeführt. Sie können diese über die Web-App, die CLI oder die Public API konfigurieren.
+
+- Standardkanal: Markieren Sie optional den Kanal oder plattformspezifische Kanäle, an die sich neue Geräte anhängen. Siehe "Standardkanal-Verhalten" für Weiterleitungsszenarien.
+- Plattformfilter: Aktivieren oder deaktivieren Sie die Zustellung an `iOS`- und/oder `Android`-Geräte pro Kanal.
+- Auto-Downgrade unter Native deaktivieren: Verhindert das Senden eines Updates, wenn die native App-Version des Geräts neuer ist als das Bundle des Kanals (z.B. Gerät auf 1.2.3, während der Kanal 1.2.2 hat).
+- Development-Builds erlauben: Ermöglicht Updates für Development-Builds (nützlich zum Testen).
+- Emulator-Geräte erlauben: Ermöglicht Updates für Emulatoren/Simulatoren (nützlich zum Testen).
+- Geräte-Selbstzuweisung erlauben: Ermöglicht der App, zur Laufzeit mit `setChannel` zu diesem Kanal zu wechseln. Wenn deaktiviert, schlägt `setChannel` für diesen Kanal fehl.
+
+### Strategien zum Deaktivieren automatischer Updates
+
+Verwenden Sie dies, um einzuschränken, welche Arten von Updates der Kanal automatisch liefert. Optionen:
+
+- major: Blockiert kanalübergreifende Major-Updates (0.0.0 → 1.0.0). Minor- und Patch-Updates sind weiterhin erlaubt.
+- minor: Blockiert kanalübergreifende Minor-Updates (z.B. 1.1.0 → 1.2.0) und Majors. Patch-Updates sind weiterhin erlaubt. Hinweis: Blockiert nicht 0.1.0 → 1.1.0.
+- patch: Sehr strikt. Erlaubt nur steigende Patch-Versionen innerhalb desselben Major und Minor. Beispiele: 0.0.311 → 0.0.314 ✅, 0.1.312 → 0.0.314 ❌, 1.0.312 → 0.0.314 ❌.
+- metadata: Erfordert eine minimale Update-Version-Metadaten für jedes Bundle. Konfigurieren Sie über CLI mit `--min-update-version` oder `--auto-min-update-version`. Wenn fehlend, wird der Kanal als fehlkonfiguriert markiert und Updates werden abgelehnt, bis es gesetzt ist.
+- none: Erlaubt alle Updates gemäß semver-Kompatibilität.
+
+Erfahren Sie mehr Details und Beispiele unter Strategie zum Deaktivieren von Updates unter /docs/cli/commands/#disable-updates-strategy.
+
+Beispiel (CLI):
+
+```bash
+# Major-Updates auf dem Production-Kanal blockieren
+npx @capgo/cli@latest channel set production com.example.app \
+  --disable-auto-update major
+
+# Geräten erlauben, sich selbst dem Beta-Kanal zuzuweisen
+npx @capgo/cli@latest channel set beta com.example.app --self-assign
+```
+
+### setChannel() aus Ihrer App verwenden
+
+Die `setChannel()`-Methode ermöglicht Ihrer App, zur Laufzeit programmatisch den Kanal zu wechseln. Dies ist besonders nützlich für:
+
+- QA/Debug-Menüs, in denen Tester zwischen Kanälen wechseln können
+- Beta-Programm-Opt-in-Flows
+- Feature-Flag-Implementierungen
+- A/B-Test-Szenarien
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+// Zum Beta-Kanal wechseln
+await CapacitorUpdater.setChannel({ channel: 'beta' });
+
+// Optional eine sofortige Update-Prüfung nach dem Wechsel auslösen
+await CapacitorUpdater.setChannel({
+  channel: 'beta',
+  triggerAutoUpdate: true
+});
+```
+
+<Aside type="note" title="Wie setChannel() funktioniert (v5.34.0+ / v6.34.0+ / v7.34.0+ / v8.0.0+)">
+Wenn `setChannel()` aufgerufen wird:
+
+1. **Backend-Validierung (nur Lesen)**: Eine Anfrage wird an das Capgo-Backend gesendet, um zu validieren, dass der Kanal erlaubt ist (prüft Selbstzuweisungsberechtigungen)
+2. **Lokale Speicheraktualisierung**: Wenn die Validierung erfolgreich ist, wird der Kanal im lokalen Speicher des Geräts als `defaultChannel` gespeichert
+3. **Sofortige Wirkung**: Die nächste Update-Prüfung verwendet den neuen Kanal sofort (kein Warten auf Replikation)
+
+**Warum das wichtig ist:** In älteren Versionen speicherte `setChannel()` den Kanal-Override in der Backend-Datenbank (wie Dashboard- oder API-Änderungen). Geräte mussten auf die Backend-Replikation warten (bis zu 2 Minuten), bevor die Kanaländerung wirksam wurde. Jetzt liest `setChannel()` nur vom Backend (zur Validierung) und speichert lokal, was Kanalwechsel sofort macht.
+
+**Sicherheitshinweis:** Selbst wenn sich die Berechtigungen eines Kanals nach dem lokalen Setzen ändern (z.B. Selbstzuweisung wird deaktiviert), validiert das Backend den Kanal weiterhin bei Update-Prüfungen, um die Sicherheit zu gewährleisten.
+
+**Vergleich der Kanaländerungsmethoden:**
+
+| Methode | Wirkungszeit | Wo gespeichert | Anwendungsfall |
+|---------|--------------|----------------|----------------|
+| `setChannel()` vom Plugin | **Sofort** | Nur Gerät (lokal) | Benutzer-initiierter Kanalwechsel in der App |
+| Dashboard-Geräte-Override | Bis zu 2 Min | Backend-Datenbank | Admin-initiierte Änderungen für bestimmte Geräte |
+| API-Kanalzuweisung | Bis zu 2 Min | Backend-Datenbank | Automatisierte Backend-Integrationen |
+
+Für die beste Benutzererfahrung beim Erstellen von Kanalwechsel-UIs verwenden Sie immer die `setChannel()`-Methode des Plugins.
+
+Mindestversionen für lokalen Kanalwechsel: **5.34.0**, **6.34.0**, **7.34.0** oder **8.0.0** (je nach Ihrer Hauptversion). Jede Minor-Versionsnummer entspricht demselben Funktionsumfang über alle Hauptversionen hinweg (z.B. X.34.0 enthält dieselben Funktionen, ob X 5, 6, 7 oder 8 ist). Siehe [Plugin-Installation](/docs/getting-started/add-an-app/) für Versions-Tags.
 </Aside>
 
 ## Zuweisen eines Bundles zu einem Kanal
@@ -81,6 +208,8 @@ Hier ist ein Beispiel, wie Sie Ihre Bundle-Versionen mit einem typischen Kanal-S
 - `Staging`-Kanal: `1.2.3-rc.1`, `1.2.3-rc.2`, etc.
 - `Production`-Kanal: `1.2.3`, `1.2.4`, etc.
 
+Die Verwendung von semver mit Pre-Release-Kennungen ist ein empfohlener Ansatz, aber nicht strikt erforderlich. Der Schlüssel ist, ein Versionierungsschema zu finden, das die Beziehungen zwischen Ihren Builds klar kommuniziert und mit dem Entwicklungsprozess Ihres Teams übereinstimmt.
+
 ## Zurücksetzen eines Live-Updates
 
 Wenn Sie ein Live-Update bereitstellen, das einen Fehler einführt oder aus anderen Gründen zurückgesetzt werden muss, können Sie einfach zu einem vorherigen Build zurückkehren. Vom "Channels"-Bereich des Dashboards aus:
@@ -112,3 +241,14 @@ Nachdem Sie die Kanäle verstanden haben, können Sie mit der Bereitstellung von
 4. Starten Sie die App und warten Sie auf das Update!
 
 Eine detailliertere Anleitung finden Sie im [Deploying Live Updates](/docs/getting-started/deploy/) Guide. Viel Spaß beim Aktualisieren!
+
+## Erweiterte Kanalnutzung: Benutzersegmentierung
+
+Kanäle können für mehr als nur Entwicklungsphasen verwendet werden. Sie sind ein leistungsstarkes Werkzeug für die Benutzersegmentierung und ermöglichen Funktionen wie:
+
+- Feature-Flags für verschiedene Benutzerstufen
+- A/B-Tests
+- Schrittweise Feature-Rollouts
+- Beta-Test-Programme
+
+Erfahren Sie, wie Sie diese erweiterten Anwendungsfälle in unserem Leitfaden implementieren: [How to Segment Users by Plan and Channels for Feature Flags and A/B Testing](/blog/how-to-segment-users-by-plan-and-channels/).

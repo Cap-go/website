@@ -49,9 +49,29 @@ Capgoを開始する前に、以下を確認してください：
 
 2. このコマンドでアプリをアカウントに追加: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
 
-3. アプリにプラグインをインストール: <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
+3. アプリにプラグインをインストール: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
 
-4. アプリでできるだけ早く初期化メソッドを呼び出す: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
+   <Aside type="note" title="古いCapacitorバージョン用のインストール">
+   上記のコマンドは、Capacitor 8用の最新バージョン（v8.x）をインストールします。古いCapacitorバージョンの場合は、適切なnpmタグを使用してください：
+
+   ```bash
+   # Capacitor 7
+   npm i @capgo/capacitor-updater@lts-v7
+
+   # Capacitor 6
+   npm i @capgo/capacitor-updater@lts-v6
+
+   # Capacitor 5
+   npm i @capgo/capacitor-updater@lts-v5
+   ```
+
+   各プラグインのメジャーバージョンはCapacitorのメジャーバージョンに対応しています（v8 → Capacitor 8、v7 → Capacitor 7、v6 → Capacitor 6、v5 → Capacitor 5）。マイナーバージョンはすべてのメジャーバージョンで同じ機能セットを共有しています（例：5.34.0、6.34.0、7.34.0、8.34.0はすべて同じ機能を含みます）。
+   </Aside>
+
+4. `capacitor.config`でプラグインを設定: <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
+  [利用可能なすべてのオプションを見る](/docs/plugin/settings/)。提供されない場合、この情報は推測されます。
+
+5. アプリでできるだけ早く初期化メソッドを呼び出す: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
 
 5. ライブアップデートをデプロイ <LinkCard href="/docs/getting-started/deploy/" title="ライブアップデートをデプロイ" description="アプリにライブアップデートをデプロイする方法を学ぶ" />
 

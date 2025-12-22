@@ -51,6 +51,23 @@ Init 명령어가 작동하지 않는 경우, 수동으로 앱을 추가할 수 
 
 3. 앱에 플러그인을 설치하세요: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
 
+   <Aside type="note" title="이전 Capacitor 버전용 설치">
+   위 명령어는 Capacitor 8용 최신 버전 (v8.x)을 설치합니다. 이전 Capacitor 버전의 경우 해당 npm 태그를 사용하세요:
+
+   ```bash
+   # Capacitor 7
+   npm i @capgo/capacitor-updater@lts-v7
+
+   # Capacitor 6
+   npm i @capgo/capacitor-updater@lts-v6
+
+   # Capacitor 5
+   npm i @capgo/capacitor-updater@lts-v5
+   ```
+
+   각 플러그인 주요 버전은 Capacitor 주요 버전과 일치합니다 (v8 → Capacitor 8, v7 → Capacitor 7, v6 → Capacitor 6, v5 → Capacitor 5). 모든 주요 버전의 동일한 마이너 버전은 같은 기능 세트를 공유합니다 (예: 5.34.0, 6.34.0, 7.34.0, 8.34.0 모두 동일한 기능 포함).
+   </Aside>
+
 4. 앱 설정 파일에서 플러그인을 구성하세요 <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
   [사용 가능한 모든 옵션 보기](/docs/plugin/settings/). 제공되지 않으면 이 정보가 유추됩니다.
 

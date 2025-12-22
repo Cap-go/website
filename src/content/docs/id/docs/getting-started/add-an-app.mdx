@@ -49,9 +49,29 @@ Jika perintah init tidak berhasil, Anda dapat menambahkan aplikasi secara manual
 
 2. Tambahkan aplikasi ke akun Anda dengan perintah ini: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
 
-3. Pasang plugin di aplikasi Anda: <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
+3. Pasang plugin di aplikasi Anda: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
 
-4. Panggil metode init sedini mungkin di aplikasi Anda: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
+   <Aside type="note" title="Instalasi untuk versi Capacitor lama">
+   Perintah di atas menginstal versi terbaru (v8.x) untuk Capacitor 8. Untuk versi Capacitor lama, gunakan tag npm yang sesuai:
+
+   ```bash
+   # Capacitor 7
+   npm i @capgo/capacitor-updater@lts-v7
+
+   # Capacitor 6
+   npm i @capgo/capacitor-updater@lts-v6
+
+   # Capacitor 5
+   npm i @capgo/capacitor-updater@lts-v5
+   ```
+
+   Setiap versi mayor plugin sesuai dengan versi mayor Capacitor (v8 → Capacitor 8, v7 → Capacitor 7, v6 → Capacitor 6, v5 → Capacitor 5). Versi minor berbagi set fitur yang sama di semua versi mayor (misal, 5.34.0, 6.34.0, 7.34.0, dan 8.34.0 semua menyertakan fitur yang sama).
+   </Aside>
+
+4. Konfigurasi plugin di `capacitor.config` Anda <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
+  [Lihat semua opsi yang tersedia](/docs/plugin/settings/). Informasi ini akan disimpulkan jika tidak disediakan.
+
+5. Panggil metode init sedini mungkin di aplikasi Anda: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
 
 5. Deploy live update <LinkCard href="/docs/getting-started/deploy/" title="Deploy live update" description="Pelajari cara deploy live update ke aplikasi Anda" />
 

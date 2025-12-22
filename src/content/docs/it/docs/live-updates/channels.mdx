@@ -1,5 +1,6 @@
 ---
 title: Canali
+description: "Scopri come gestire e configurare i canali Live Update in Capgo, abilitando aggiornamenti dell'app senza interruzioni indirizzando build specifiche del bundle JS ai dispositivi configurati per quei canali."
 sidebar:
   order: 2
 locale: it
@@ -9,9 +10,49 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 Un canale Live Update punta a una specifica build del bundle JS della tua app che sarà condivisa con qualsiasi dispositivo configurato per ascoltare quel canale per gli aggiornamenti. Quando [installi l'SDK Capgo Live Updates](/docs/getting-started/quickstart/) nella tua app, ogni binario nativo configurato su quel canale controllerà gli aggiornamenti disponibili ogni volta che l'app viene avviata. Puoi cambiare la build a cui punta un canale in qualsiasi momento e puoi anche tornare a build precedenti se necessario.
 
+## Come un dispositivo sceglie un canale (precedenza)
+
+Quando un dispositivo controlla un aggiornamento, Capgo decide quale canale usare in questo ordine rigoroso (priorità più alta prima):
+
+1. **Mappatura dispositivo forzata (Dashboard)** – Collega manualmente un ID dispositivo specifico a un canale. Usa per debug urgente o test controllati con un singolo utente reale. Questo vince sempre.
+2. **Override cloud (per-dispositivo) via Dashboard o API** – Creato quando cambi il canale del dispositivo nella dashboard o via API. Usa per utenti QA che passano tra canali feature/PR o per riprodurre un problema utente. La reinstallazione del binario non lo cancella; eliminare la voce del dispositivo sì.
+
+<Aside type="tip" title="Cambio Canale Istantaneo con setChannel()">
+**A partire dalla versione plugin 5.34.0, 6.34.0, 7.34.0 o 8.0.0** (a seconda della tua versione major), `setChannel()` funziona diversamente: contatta il backend per **validare** che il canale sia permesso (verificando se l'auto-assegnazione è abilitata per quel canale), poi memorizza il canale **localmente sul dispositivo** come `defaultChannel`. Questo significa che il nuovo canale ha effetto **istantaneamente** per il prossimo controllo aggiornamenti—nessuna attesa per la replica.
+
+In precedenza, `setChannel()` salvava l'override del canale nel database backend (come le modifiche Dashboard o API), e i dispositivi dovevano aspettare la replica dei dati (fino a 2 minuti) prima che il nuovo canale fosse riconosciuto. Il nuovo comportamento legge solo dal backend (per la validazione) e memorizza localmente, rendendo i cambi di canale istantanei.
+
+**Nota:** Anche se un canale diventa non permesso dopo essere stato impostato localmente, il backend validerà comunque il canale durante i controlli aggiornamenti, quindi la sicurezza è mantenuta.
+
+**Importante:** Quando le modifiche al canale vengono fatte via Dashboard o API, c'è comunque un ritardo di replica fino a 2 minuti prima che tutti i server edge riflettano il cambiamento. Per il cambio canale istantaneo, usa `setChannel()` dal codice della tua app—valida con il backend, poi imposta il canale localmente per effetto immediato.
+</Aside>
+
+3. **Capacitor config `defaultChannel` (default build di test)** – Se presente in `capacitor.config.*` e non esiste nessun force/override, l'app parte su questo canale (es. `beta`, `qa`, `pr-123`). Pensato per build TestFlight/interne così i tester atterrano automaticamente su un canale pre-release. Le build di produzione tipicamente lasciano questo non impostato.
+4. **Cloud Default Channel (percorso principale ~99% degli utenti)** – Se contrassegni un canale default nella dashboard, tutti gli utenti finali normali (nessun force, nessun override, nessun config defaultChannel) si collegano qui. Cambialo per rollout o rollback istantaneo—nessun nuovo binario. Se hai default specifici per piattaforma (uno solo iOS, uno solo Android), ogni dispositivo atterra sul default che corrisponde alla sua piattaforma. Lasciare il cloud default non impostato è permesso; in quel caso il dispositivo deve corrispondere ai passaggi 1-3 per ricevere aggiornamenti.
+
+Best practice:
+- Tratta 1-3 come layer di eccezione/test; quando imposti un cloud default, gli utenti reali dovrebbero confluire lì. Se scegli di non impostarne uno, sii intenzionale su come gli utenti si collegano (tipicamente via `defaultChannel` nel config o override per-dispositivo).
+- Configura `defaultChannel` solo nei binari che distribuisci esplicitamente ai tester. Lasciarlo non impostato mantiene la logica di produzione centralizzata nella dashboard.
+- Usa `setChannel()` con parsimonia in produzione—principalmente per QA o diagnostica mirata.
+
+Se un canale è disabilitato per la piattaforma (toggle iOS/Android) quando altrimenti sarebbe scelto, il processo di selezione lo salta e continua nella lista.
+
+> Riepilogo: Force > Override > Config `defaultChannel` > Cloud Default.
+
+## Comportamento del Canale Default
+
+Impostare un cloud default è opzionale, ma di solito serve come percorso catch-all per i nuovi dispositivi. Senza uno, solo i dispositivi che corrispondono a mappature forzate, override o un `defaultChannel` nel config Capacitor riceveranno aggiornamenti. Quando scegli di contrassegnare i default, tieni a mente questi pattern:
+
+- **Default singolo (più comune)** – Se il canale ha sia iOS che Android abilitati, diventa l'unico default; qualsiasi dispositivo senza override si collegherà qui.
+- **Default specifici per piattaforma** – Se dividi i canali per piattaforma (per esempio, `ios-production` con solo iOS abilitato e `android-production` con solo Android abilitato), contrassegna ciascuno come default per la sua piattaforma. I dispositivi iOS vanno al default iOS, i dispositivi Android vanno al default Android.
+
+Ricorda che il cloud default e `defaultChannel` in `capacitor.config.*` occupano entrambi lo stesso layer decisionale. Se imposti un cloud default, non hai bisogno di duplicare il valore nel tuo config Capacitor—lascia `defaultChannel` vuoto per le build di produzione. Riserva `defaultChannel` per binari che distribuisci intenzionalmente a tester o QA quando vuoi che partano su un canale non-produzione anche se il cloud default è diverso.
+
+Puoi cambiare i default in qualsiasi momento nella dashboard. Quando scambi un default, i nuovi dispositivi obbediscono al nuovo routing immediatamente e i dispositivi esistenti seguono le normali regole di precedenza la prossima volta che fanno check-in.
+
 ## Configurare un Canale
 
-Ogni app viene fornita con un canale predefinito chiamato "Production" che non può essere eliminato. Per aggiungere nuovi canali:
+Durante l'onboarding crei il primo canale (la maggior parte dei team lo chiama "Production"), ma nulla è bloccato—puoi rinominare o eliminare qualsiasi canale in qualsiasi momento. Per aggiungere canali aggiuntivi in seguito:
 
 1. Vai alla sezione "Channels" della dashboard Capgo
 2. Clicca sul pulsante "New Channel"
@@ -26,9 +67,9 @@ I nomi dei canali possono essere qualsiasi cosa tu desideri. Una strategia comun
 
 ## Configurare il Canale nella Tua App
 
-Con i tuoi canali creati, devi configurare la tua app per ascoltare il canale appropriato. In questo esempio, useremo il canale `Development`
+Con i tuoi canali creati, devi configurare la tua app per ascoltare il canale appropriato. In questo esempio, useremo il canale `Development`.
 
-Apri il tuo file `capacitor.config.ts` (o `capacitor.config.json`). Nella sezione `plugins`, imposta la proprietà `channel` del plugin `CapacitorUpdater` con il nome del canale desiderato:
+Apri il tuo file `capacitor.config.ts` (o `capacitor.config.json`). Nella sezione `plugins`, imposta opzionalmente `defaultChannel` per **build di test** (interne/QA). Per le build di produzione, preferisci ometterlo così i dispositivi usano il Cloud Default a meno che non siano esplicitamente sovrascritti.
 
 ```ts
 import { CapacitorConfig } from '@capacitor/cli';
@@ -36,7 +77,9 @@ import { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   plugins: {
     CapacitorUpdater: {
+      // Per una build QA/TestFlight – i tester partono automaticamente sul canale Development.
       defaultChannel: 'Development',
+      // Le build di produzione di solito omettono questo così gli utenti si collegano al Cloud Default channel.
     },
   },
 };
@@ -45,9 +88,93 @@ const config: CapacitorConfig = {
 Successivamente, compila la tua web app ed esegui `npx cap sync` per copiare il file di configurazione aggiornato nei tuoi progetti iOS e Android. Se salti questo passaggio di sincronizzazione, i tuoi progetti nativi continueranno a utilizzare il canale per cui erano precedentemente configurati.
 
 <Aside type="caution">
+Ordine di selezione canale: Force > Override (`setChannel` / dashboard) > Config `defaultChannel` > Cloud Default.
 
-La proprietà `defaultChannel` sovrascriverà sempre il canale predefinito del cloud. Ma puoi ancora forzare il deviceId a un canale nel Cloud
+Usa `defaultChannel` solo nelle build di test/interne; omettilo per la produzione così gli utenti seguono il Cloud Default (quando impostato) invece di duplicare il routing nel config nativo.
 
+Puoi comunque forzare (pinnare) un dispositivo o applicare un override in seguito—questi sostituiscono immediatamente il valore del config.
+
+> I nomi dei canali sono case sensitive.
+</Aside>
+
+## Opzioni e Strategie dei Canali
+
+I canali hanno diverse opzioni che controllano chi può ricevere aggiornamenti e come gli aggiornamenti vengono consegnati. Le più importanti sono sotto. Puoi configurarle dalla web app, dalla CLI o dalla Public API.
+
+- Canale default: Contrassegna opzionalmente il canale o i canali specifici per piattaforma a cui si collegano i nuovi dispositivi. Vedi "Comportamento del Canale Default" per scenari di routing.
+- Filtri piattaforma: Abilita o disabilita la consegna a dispositivi `iOS` e/o `Android` per canale.
+- Disabilita auto downgrade sotto native: Impedisce l'invio di un aggiornamento quando la versione native dell'app del dispositivo è più recente del bundle del canale (per esempio, dispositivo su 1.2.3 mentre il canale ha 1.2.2).
+- Permetti build di development: Permetti aggiornamenti alle build di development (utile per il testing).
+- Permetti dispositivi emulatore: Permetti aggiornamenti a emulatori/simulatori (utile per il testing).
+- Permetti auto-assegnazione dispositivo: Permette all'app di passare a questo canale a runtime usando `setChannel`. Se disabilitato, `setChannel` fallirà per questo canale.
+
+### Strategie per Disabilitare Auto Update
+
+Usa questo per limitare quali tipi di aggiornamenti il canale consegnerà automaticamente. Opzioni:
+
+- major: Blocca aggiornamenti cross-major (0.0.0 → 1.0.0). Aggiornamenti minor e patch ancora permessi.
+- minor: Blocca aggiornamenti cross-minor (es., 1.1.0 → 1.2.0) e major. Aggiornamenti patch ancora permessi. Nota: non blocca 0.1.0 → 1.1.0.
+- patch: Molto restrittivo. Permette solo versioni patch crescenti all'interno dello stesso major e minor. Esempi: 0.0.311 → 0.0.314 ✅, 0.1.312 → 0.0.314 ❌, 1.0.312 → 0.0.314 ❌.
+- metadata: Richiede un metadata di versione minima di aggiornamento su ogni bundle. Configura via CLI usando `--min-update-version` o `--auto-min-update-version`. Se mancante, il canale è contrassegnato come mal configurato e gli aggiornamenti saranno rifiutati finché non viene impostato.
+- none: Permetti tutti gli aggiornamenti secondo la compatibilità semver.
+
+Scopri più dettagli ed esempi nella strategia Disabilita aggiornamenti su /docs/cli/commands/#disable-updates-strategy.
+
+Esempio (CLI):
+
+```bash
+# Blocca aggiornamenti major sul canale Production
+npx @capgo/cli@latest channel set production com.example.app \
+  --disable-auto-update major
+
+# Permetti ai dispositivi di auto-assegnarsi al canale Beta
+npx @capgo/cli@latest channel set beta com.example.app --self-assign
+```
+
+### Usare setChannel() dalla Tua App
+
+Il metodo `setChannel()` permette alla tua app di cambiare canale programmaticamente a runtime. Questo è particolarmente utile per:
+
+- Menu QA/debug dove i tester possono passare tra canali
+- Flussi di opt-in per programmi beta
+- Implementazioni di feature flag
+- Scenari di A/B testing
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+// Passa al canale beta
+await CapacitorUpdater.setChannel({ channel: 'beta' });
+
+// Opzionalmente attiva un controllo aggiornamenti immediato dopo il cambio
+await CapacitorUpdater.setChannel({
+  channel: 'beta',
+  triggerAutoUpdate: true
+});
+```
+
+<Aside type="note" title="Come Funziona setChannel() (v5.34.0+ / v6.34.0+ / v7.34.0+ / v8.0.0+)">
+Quando `setChannel()` viene chiamato:
+
+1. **Validazione backend (solo lettura)**: Una richiesta viene inviata al backend Capgo per validare che il canale sia permesso (verificando i permessi di auto-assegnazione)
+2. **Aggiornamento storage locale**: Se la validazione passa, il canale viene salvato nello storage locale del dispositivo come `defaultChannel`
+3. **Effetto istantaneo**: Il prossimo controllo aggiornamenti usa il nuovo canale immediatamente (nessuna attesa per la replica)
+
+**Perché questo conta:** Nelle versioni precedenti, `setChannel()` salvava l'override del canale nel database backend (come le modifiche Dashboard o API). I dispositivi dovevano aspettare la replica del backend (fino a 2 minuti) prima che il cambio canale avesse effetto. Ora, `setChannel()` legge solo dal backend (per la validazione) e memorizza localmente, rendendo i cambi di canale istantanei.
+
+**Nota sulla sicurezza:** Anche se i permessi di un canale cambiano dopo essere stato impostato localmente (es., l'auto-assegnazione viene disabilitata), il backend validerà comunque il canale durante i controlli aggiornamenti, assicurando che la sicurezza sia mantenuta.
+
+**Confronto dei metodi di cambio canale:**
+
+| Metodo | Tempo di Effetto | Dove Memorizzato | Caso d'Uso |
+|--------|------------------|------------------|------------|
+| `setChannel()` dal plugin | **Istantaneo** | Solo dispositivo (locale) | Cambio canale iniziato dall'utente in-app |
+| Override dispositivo Dashboard | Fino a 2 min | Database backend | Modifiche iniziate dall'admin per dispositivi specifici |
+| Assegnazione canale API | Fino a 2 min | Database backend | Integrazioni backend automatizzate |
+
+Per la migliore esperienza utente quando costruisci UI per il cambio canale, usa sempre il metodo `setChannel()` del plugin.
+
+Versioni minime per il cambio canale solo locale: **5.34.0**, **6.34.0**, **7.34.0** o **8.0.0** (a seconda della tua versione major). Ogni numero di versione minor corrisponde allo stesso set di funzionalità su tutte le versioni major (es., X.34.0 include le stesse funzionalità che X sia 5, 6, 7 o 8). Vedi [installazione plugin](/docs/getting-started/add-an-app/) per i tag delle versioni.
 </Aside>
 
 ## Assegnare un Bundle a un Canale
@@ -81,6 +208,8 @@ Ecco un esempio di come potresti allineare le versioni dei bundle con una tipica
 - Canale `Staging`: `1.2.3-rc.1`, `1.2.3-rc.2`, ecc.
 - Canale `Production`: `1.2.3`, `1.2.4`, ecc.
 
+Usare semver con identificatori di pre-release è un approccio raccomandato, ma non strettamente richiesto. La chiave è trovare uno schema di versionamento che comunichi chiaramente le relazioni tra le tue build e si allinei con il processo di sviluppo del tuo team.
+
 ## Rollback di un Aggiornamento Live
 
 Se distribuisci un aggiornamento live che introduce un bug o che necessita di essere revocato, puoi facilmente tornare a una build precedente. Dalla sezione "Channels" della dashboard:
@@ -112,3 +241,14 @@ Ora che hai compreso i canali, sei pronto per iniziare a distribuire aggiornamen
 4. Avviare l'app e attendere l'aggiornamento!
 
 Per una guida più dettagliata, consulta la guida [Distribuire Aggiornamenti Live](/docs/getting-started/deploy/). Buon aggiornamento!
+
+## Utilizzo Avanzato dei Canali: Segmentazione Utenti
+
+I canali possono essere utilizzati per più che solo le fasi di sviluppo. Sono uno strumento potente per la segmentazione degli utenti, abilitando funzionalità come:
+
+- Feature flag per diversi tier di utenti
+- A/B testing
+- Rollout graduali delle funzionalità
+- Programmi di beta testing
+
+Scopri come implementare questi casi d'uso avanzati nella nostra guida: [How to Segment Users by Plan and Channels for Feature Flags and A/B Testing](/blog/how-to-segment-users-by-plan-and-channels/).

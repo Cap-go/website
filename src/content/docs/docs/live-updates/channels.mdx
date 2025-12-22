@@ -14,7 +14,17 @@ A Live Update channel points to a specific JS bundle build of your app that will
 When a device checks for an update, Capgo decides which channel to use in this strict order (highest priority first):
 
 1. **Forced device mapping (Dashboard)** – Manually pin a specific device ID to a channel. Use for urgent debugging or controlled testing with a single real user. This always wins.
-2. **Cloud override (per‑device) via `setChannel()` or Dashboard** – Created when your app calls `setChannel()` (often exposed in a QA/debug menu) or you change the device's channel in the dashboard. Use for QA users switching between feature / PR channels or to reproduce a user issue. Reinstalling the binary does not clear it; deleting the device entry does.
+2. **Cloud override (per‑device) via Dashboard or API** – Created when you change the device's channel in the dashboard or via API. Use for QA users switching between feature / PR channels or to reproduce a user issue. Reinstalling the binary does not clear it; deleting the device entry does.
+
+<Aside type="tip" title="Instant Channel Switching with setChannel()">
+**Starting from plugin version 5.34.0, 6.34.0, 7.34.0, or 8.0.0** (depending on your major version), `setChannel()` works differently: it contacts the backend to **validate** that the channel is allowed (checking if self-assignment is enabled for that channel), then stores the channel **locally on the device** as `defaultChannel`. This means the new channel takes effect **instantly** for the next update check—no waiting for replication.
+
+Previously, `setChannel()` saved the channel override to the backend database (like Dashboard or API changes), and devices had to wait for data replication (up to 2 minutes) before the new channel was recognized. The new behavior only reads from the backend (for validation) and stores locally, making channel switches instant.
+
+**Note:** Even if a channel becomes disallowed after being set locally, the backend will still validate the channel during update checks, so security is maintained.
+
+**Important:** When channel changes are made via the Dashboard or API, there is still a replication lag of up to 2 minutes before all edge servers reflect the change. For instant channel switching, use `setChannel()` from your app code—it validates with the backend, then sets the channel locally for immediate effect.
+</Aside>
 3. **Capacitor config `defaultChannel` (test build default)** – If present in `capacitor.config.*` and no force/override exists, the app starts on this channel (e.g. `beta`, `qa`, `pr-123`). Intended for TestFlight / internal builds so testers land on a pre‑release channel automatically. Production builds typically leave this unset.
 4. **Cloud Default Channel (primary path ~99% of users)** – If you mark a default channel in the dashboard, all normal end‑users (no force, no override, no config defaultChannel) attach here. Change it to roll out or roll back instantly—no new binary. If you have platform-specific defaults (one iOS-only, one Android-only), each device lands on the default matching its platform. Leaving the cloud default unset is allowed; in that case the device must match on steps 1–3 to receive updates.
 
@@ -120,6 +130,51 @@ npx @capgo/cli@latest channel set production com.example.app \
 npx @capgo/cli@latest channel set beta com.example.app --self-assign
 ```
 
+### Using setChannel() from Your App
+
+The `setChannel()` method allows your app to programmatically switch channels at runtime. This is particularly useful for:
+
+- QA/debug menus where testers can switch between channels
+- Beta program opt-in flows
+- Feature flag implementations
+- A/B testing scenarios
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+// Switch to the beta channel
+await CapacitorUpdater.setChannel({ channel: 'beta' });
+
+// Optionally trigger an immediate update check after switching
+await CapacitorUpdater.setChannel({
+  channel: 'beta',
+  triggerAutoUpdate: true
+});
+```
+
+<Aside type="note" title="How setChannel() Works (v5.34.0+ / v6.34.0+ / v7.34.0+ / v8.0.0+)">
+When `setChannel()` is called:
+
+1. **Backend validation (read-only)**: A request is sent to the Capgo backend to validate the channel is allowed (checking self-assignment permissions)
+2. **Local storage update**: If validation passes, the channel is saved to the device's local storage as `defaultChannel`
+3. **Instant effect**: The next update check uses the new channel immediately (no waiting for replication)
+
+**Why this matters:** In older versions, `setChannel()` saved the channel override to the backend database (same as Dashboard or API changes). Devices had to wait for backend replication (up to 2 minutes) before the channel change took effect. Now, `setChannel()` only reads from the backend (for validation) and stores locally, making channel switches instant.
+
+**Security note:** Even if a channel's permissions change after being set locally (e.g., self-assignment is disabled), the backend will still validate the channel during update checks, ensuring security is maintained.
+
+**Comparison of channel change methods:**
+
+| Method | Effect Time | Persisted Where | Use Case |
+|--------|-------------|-----------------|----------|
+| `setChannel()` from plugin | **Instant** | Device only (local) | User-initiated channel switching in-app |
+| Dashboard device override | Up to 2 min | Backend database | Admin-initiated changes for specific devices |
+| API channel assignment | Up to 2 min | Backend database | Automated backend integrations |
+
+For the best user experience when building channel-switching UIs, always use the plugin's `setChannel()` method.
+
+Minimum versions for local-only channel switching: **5.34.0**, **6.34.0**, **7.34.0**, or **8.0.0** (depending on your major version). Each minor version number corresponds to the same feature set across all major versions (e.g., X.34.0 includes the same features whether X is 5, 6, 7, or 8). See [plugin installation](/docs/getting-started/add-an-app/) for version tags.
+</Aside>
 
 ## Assigning a Bundle to a Channel
 
