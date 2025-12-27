@@ -425,11 +425,13 @@ Get Latest bundle available from update Url
 setChannel(options: SetChannelOptions) => Promise<ChannelRes>
 ```
 
-Sets the channel for this device. The channel has to allow for self assignment for this to work.
-Do not use this method to set the channel at boot.
-This method is to set the channel after the app is ready, and user interacted.
-If you want to set the channel at boot, use the {@link PluginsConfig} to set the default channel.
-This methods send to Capgo backend a request to link the device ID to the channel. Capgo can accept or refuse depending of the setting of your channel.
+Sets the channel for this device. The channel must have `allow_device_self_set` enabled for this to work.
+
+**Important notes:**
+- Do not use this method to set the channel at boot. Use the `defaultChannel` in your Capacitor config instead.
+- This method is intended for use after the app is ready and the user has interacted (e.g., opting into a beta program).
+- **Public channels cannot be self-assigned.** If a channel is marked as `public`, calling `setChannel()` will return an error. To use a public channel, call `unsetChannel()` instead - the device will automatically fall back to the matching public channel.
+- Use `listChannels()` to discover which channels are available and whether they allow self-assignment.
 
 | Param         | Type                                                            | Description                                                                      |
 | ------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------- |
@@ -448,7 +450,11 @@ This methods send to Capgo backend a request to link the device ID to the channe
 unsetChannel(options: UnsetChannelOptions) => Promise<void>
 ```
 
-Unset the channel for this device. The device will then return to the default channel
+Unset the channel override for this device. After calling this method, the device will automatically receive updates from the **public channel** that matches its conditions (platform, device type, build type).
+
+This is useful when:
+- You want to move a device back to the default update track
+- You want to use a public channel (since public channels cannot be self-assigned via `setChannel()`)
 
 | Param         | Type                                                                |
 | ------------- | ------------------------------------------------------------------- |
@@ -480,7 +486,11 @@ Get the channel for this device
 listChannels() => Promise<ListChannelsResult>
 ```
 
-List all channels available for this device that allow self-assignment
+List all channels available for this device. Returns channels that are compatible with the device's current environment (platform, emulator/real device, dev/prod build) and are either public or allow self-assignment.
+
+Each channel in the result includes:
+- `public`: If `true`, this is a **default channel**. You cannot self-assign to it using `setChannel()`. Instead, if you remove your channel assignment using `unsetChannel()`, the device will automatically receive updates from this public channel.
+- `allow_self_set`: If `true`, this is a **self-assignable channel**. You can explicitly assign the device to this channel using `setChannel()`.
 
 **Returns:** <code>Promise&lt;<a href="#listchannelsresult">ListChannelsResult</a>&gt;</code>
 
@@ -1001,8 +1011,8 @@ If you don't use backend, you need to provide the URL and version of the bundle.
 | -------------------- | -------------------- | ----------------------------------------------- | ----- |
 | **`id`**             | <code>string</code>  | The channel ID                                  | 7.5.0 |
 | **`name`**           | <code>string</code>  | The channel name                                | 7.5.0 |
-| **`public`**         | <code>boolean</code> | Whether this is a public channel                | 7.5.0 |
-| **`allow_self_set`** | <code>boolean</code> | Whether devices can self-assign to this channel | 7.5.0 |
+| **`public`**         | <code>boolean</code> | If true, this is a default/fallback channel. Devices cannot self-assign to public channels. Instead, when a device removes its channel override (using `unsetChannel()`), it will automatically receive updates from the matching public channel. | 7.5.0 |
+| **`allow_self_set`** | <code>boolean</code> | If true, devices can explicitly self-assign to this channel using `setChannel()`. This is typically used for beta testing, A/B testing, or opt-in update tracks. | 7.5.0 |
 
 
 ### SetCustomIdOptions
