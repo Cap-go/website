@@ -13,196 +13,318 @@ import * as m from '@/paraglide/messages'
         {m.explore_common_questions({}, { locale: Astro.locals.locale })}
       </p>
     </div>
-    <div class="grid grid-cols-1 gap-y-16 gap-x-20 mt-12 md:grid-cols-2 md:mt-20">
-      <div class="flex items-start">
-        <div class="flex justify-center items-center w-8 h-8 bg-gray-700 rounded-full shrink-0">
-          <span class="text-lg font-semibold text-white">?</span>
-        </div>
-        <div class="ml-4">
-          <p class="text-xl font-semibold text-white">{m.how_are_mau_counted({}, { locale: Astro.locals.locale })}</p>
-          <p class="mt-4 text-base text-gray-400">
-            {m.mau_counting_explanation({}, { locale: Astro.locals.locale })}
-          </p>
-          <p class="mt-4 text-base text-gray-400">
-            {m.capgo_usage_explanation({}, { locale: Astro.locals.locale })}
-            <a class="border-b-2 border-blue-600 hover:text-gray-200 focus:text-gray-200" href={getRelativeLocaleUrl(Astro.locals.locale, 'blog/how-your-usage-is-counted')}>
-              {m.here({}, { locale: Astro.locals.locale })}
-            </a>
-          </p>
-        </div>
+    <!-- Plan Features & Limits -->
+    <div class="mt-16 max-w-3xl mx-auto">
+      <div class="mb-8 text-center">
+        <h3 class="text-2xl font-semibold text-white hover:text-blue-400 transition-colors duration-200 cursor-default mb-2">Plan Features & Limits</h3>
+        <p class="text-gray-400 text-sm">Everything you need to know about your plan's capabilities</p>
       </div>
-      <div class="flex items-start">
-        <div class="flex justify-center items-center w-8 h-8 bg-gray-700 rounded-full shrink-0">
-          <span class="text-lg font-semibold text-white">?</span>
-        </div>
-        <div class="ml-4">
-          <p class="text-xl font-semibold text-white">{m.what_does_storage_mean({}, { locale: Astro.locals.locale })}</p>
-          <p class="mt-4 text-base text-gray-400">
-            {m.storage_explanation({}, { locale: Astro.locals.locale })}
-          </p>
-        </div>
-      </div>
-      <div class="flex items-start">
-        <div class="flex justify-center items-center w-8 h-8 bg-gray-700 rounded-full shrink-0">
-          <span class="text-lg font-semibold text-white">?</span>
-        </div>
-        <div class="ml-4">
-          <p class="text-xl font-semibold text-white">{m.how_is_bandwidth_counted({}, { locale: Astro.locals.locale })}</p>
-          <p class="mt-4 text-base text-gray-400">
-            {m.bandwidth_explanation({}, { locale: Astro.locals.locale })}
-          </p>
-        </div>
-      </div>
-      <div class="flex items-start">
-        <div class="flex justify-center items-center w-8 h-8 bg-gray-700 rounded-full shrink-0">
-          <span class="text-lg font-semibold text-white">?</span>
-        </div>
-        <div class="ml-4">
-          <p class="text-xl font-semibold text-white">
-            {m.do_you_offer_annual_billing_and_ach_payment_options({}, { locale: Astro.locals.locale })}
-          </p>
-          <p class="mt-4 text-base text-gray-400">
-            {m.ach_available_for_enterprise_annual_payments({}, { locale: Astro.locals.locale })}
-          </p>
-        </div>
-      </div>
-      <div class="flex items-start">
-        <div class="flex justify-center items-center w-8 h-8 bg-gray-700 rounded-full shrink-0">
-          <span class="text-lg font-semibold text-white">?</span>
-        </div>
-        <div class="ml-4">
-          <p class="text-xl font-semibold text-white">{m.unsure_about_active_users({}, { locale: Astro.locals.locale })}</p>
-          <p class="mt-4 text-base text-gray-400">
-            {m.free_trial_explanation({}, { locale: Astro.locals.locale })}
-          </p>
-        </div>
-      </div>
-      <div class="flex items-start">
-        <div class="flex justify-center items-center w-8 h-8 bg-gray-700 rounded-full shrink-0">
-          <span class="text-lg font-semibold text-white">?</span>
-        </div>
-        <div class="ml-4">
-          <p class="text-xl font-semibold text-white">
-            {m.do_you_offer_discounts_for_students_non_profits_or_startups({}, { locale: Astro.locals.locale })}
-          </p>
-          <p class="mt-4 text-base text-gray-400">
-            {m.no_discounts_available_at_this_time({}, { locale: Astro.locals.locale })}
-          </p>
-        </div>
-      </div>
-      <div class="flex items-start">
-        <div class="flex justify-center items-center w-8 h-8 bg-gray-700 rounded-full shrink-0">
-          <span class="text-lg font-semibold text-white">?</span>
-        </div>
-        <div class="ml-4">
-          <p class="text-xl font-semibold text-white">
-            {m.do_you_have_purchasing_power_parity_pricing({}, { locale: Astro.locals.locale })}
-          </p>
-          <p class="mt-4 text-base text-gray-400">
-            {m.no_ppp_available_at_this_time({}, { locale: Astro.locals.locale })}
-          </p>
-        </div>
-      </div>
-      <div class="flex items-start">
-        <div class="flex justify-center items-center w-8 h-8 bg-gray-700 rounded-full shrink-0">
-          <span class="text-lg font-semibold text-white">?</span>
-        </div>
-        <div class="ml-4">
-          <p class="text-xl font-semibold text-white">{m.what_happens_if_i_reach_the_mau_limit({}, { locale: Astro.locals.locale })}</p>
-          <p class="mt-4 text-base text-gray-400">
-            {m.what_happens_if_i_reach_the_mau_limit_answer({}, { locale: Astro.locals.locale })}
-          </p>
-        </div>
-      </div>
-      <div class="flex items-start">
-        <div class="flex justify-center items-center w-8 h-8 bg-gray-700 rounded-full shrink-0">
-          <span class="text-lg font-semibold text-white">?</span>
-        </div>
-        <div class="ml-4">
-          <p class="text-xl font-semibold text-white">{m.what_happens_if_i_reach_the_storage_limit({}, { locale: Astro.locals.locale })}</p>
-          <p class="mt-4 text-base text-gray-400">
-            {m.what_happens_if_i_reach_the_storage_limit_answer({}, { locale: Astro.locals.locale })}
-          </p>
-        </div>
-      </div>
-      <div class="flex items-start">
-        <div class="flex justify-center items-center w-8 h-8 bg-gray-700 rounded-full shrink-0">
-          <span class="text-lg font-semibold text-white">?</span>
-        </div>
-        <div class="ml-4">
-          <p class="text-xl font-semibold text-white">{m.what_happens_if_i_reach_the_bandwidth_limit({}, { locale: Astro.locals.locale })}</p>
-          <p class="mt-4 text-base text-gray-400">
-            {m.what_happens_if_i_reach_the_bandwidth_limit_answer({}, { locale: Astro.locals.locale })}
-          </p>
-        </div>
-      </div>
-      <div class="flex items-start">
-        <div class="flex justify-center items-center w-8 h-8 bg-gray-700 rounded-full shrink-0">
-          <span class="text-lg font-semibold text-white">?</span>
-        </div>
-        <div class="ml-4">
-          <p class="text-xl font-semibold text-white">{m.can_i_change_my_plan_at_any_time({}, { locale: Astro.locals.locale })}</p>
-          <p class="mt-4 text-base text-gray-400">
-            {m.can_i_change_my_plan_answer({}, { locale: Astro.locals.locale })}
-          </p>
-        </div>
-      </div>
-      <div class="flex items-start">
-        <div class="flex justify-center items-center w-8 h-8 bg-gray-700 rounded-full shrink-0">
-          <span class="text-lg font-semibold text-white">?</span>
-        </div>
-        <div class="ml-4">
-          <p class="text-xl font-semibold text-white">{m.what_payment_methods_do_you_accept({}, { locale: Astro.locals.locale })}</p>
-          <p class="mt-4 text-base text-gray-400">
-            {m.what_payment_methods_answer({}, { locale: Astro.locals.locale })}
-          </p>
-        </div>
-      </div>
-      <div class="flex items-start">
-        <div class="flex justify-center items-center w-8 h-8 bg-gray-700 rounded-full shrink-0">
-          <span class="text-lg font-semibold text-white">?</span>
-        </div>
-        <div class="ml-4">
-          <p class="text-xl font-semibold text-white">{m.can_i_use_credits_without_subscription({}, { locale: Astro.locals.locale })}</p>
-          <p class="mt-4 text-base text-gray-400">
-            {m.can_i_use_credits_without_subscription_answer({}, { locale: Astro.locals.locale })}
-          </p>
-        </div>
-      </div>
-      <div class="flex items-start">
-        <div class="flex justify-center items-center w-8 h-8 bg-gray-700 rounded-full shrink-0">
-          <span class="text-lg font-semibold text-white">?</span>
-        </div>
-        <div class="ml-4">
-          <p class="text-xl font-semibold text-white">{m.do_you_offer_refunds({}, { locale: Astro.locals.locale })}</p>
-          <p class="mt-4 text-base text-gray-400">
-            {m.do_you_offer_refunds_answer({}, { locale: Astro.locals.locale })}
-          </p>
-        </div>
-      </div>
-      <div class="flex items-start">
-        <div class="flex justify-center items-center w-8 h-8 bg-gray-700 rounded-full shrink-0">
-          <span class="text-lg font-semibold text-white">?</span>
-        </div>
-        <div class="ml-4">
-          <p class="text-xl font-semibold text-white">{m.are_there_any_setup_fees_or_hidden_costs({}, { locale: Astro.locals.locale })}</p>
-          <p class="mt-4 text-base text-gray-400">
-            {m.are_there_any_setup_fees_answer({}, { locale: Astro.locals.locale })}
-          </p>
-        </div>
-      </div>
-      <div class="flex items-start">
-        <div class="flex justify-center items-center w-8 h-8 bg-gray-700 rounded-full shrink-0">
-          <span class="text-lg font-semibold text-white">?</span>
-        </div>
-        <div class="ml-4">
-          <p class="text-xl font-semibold text-white">{m.can_i_cancel_at_any_time({}, { locale: Astro.locals.locale })}</p>
-          <p class="mt-4 text-base text-gray-400">
-            {m.cancellation_policy_details({}, { locale: Astro.locals.locale })}
-          </p>
-        </div>
+      
+      <div class="space-y-1 bg-gray-800/20 rounded-2xl overflow-hidden border border-gray-800">
+        <details class="group border-b border-gray-800 last:border-b-0 open:bg-blue-950/20 open:border-blue-600/30" id="faq-mau">
+          <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.how_are_mau_counted({}, { locale: Astro.locals.locale })}</span>
+            <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-8 pb-6 pt-2 bg-blue-950/10">
+            <div class="text-gray-200 leading-relaxed space-y-3">
+              <p>{m.mau_counting_explanation({}, { locale: Astro.locals.locale })}</p>
+              <p>
+                {m.capgo_usage_explanation({}, { locale: Astro.locals.locale })}
+                <a class="text-blue-400 hover:text-blue-300 transition-colors underline decoration-1 underline-offset-2" href={getRelativeLocaleUrl(Astro.locals.locale, 'blog/how-your-usage-is-counted')}>
+                  {m.here({}, { locale: Astro.locals.locale })}
+                </a>
+              </p>
+            </div>
+          </div>
+        </details>
+
+        <details class="group border-b border-gray-800 last:border-b-0" id="faq-storage">
+          <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.storage_what_is_it_used_for({}, { locale: Astro.locals.locale })}</span>
+            <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-8 pb-6 pt-2">
+            <div class="text-gray-200 leading-relaxed">
+              {m.storage_detailed_explanation({}, { locale: Astro.locals.locale })}
+            </div>
+          </div>
+        </details>
+
+        <details class="group border-b border-gray-800 last:border-b-0" id="faq-bandwidth">
+          <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.how_is_bandwidth_counted({}, { locale: Astro.locals.locale })}</span>
+            <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-8 pb-6 pt-2 bg-blue-950/10">
+            <div class="text-gray-200 leading-relaxed">
+              {m.bandwidth_explanation({}, { locale: Astro.locals.locale })}
+            </div>
+          </div>
+        </details>
+
+        <details class="group border-b border-gray-800 last:border-b-0" id="faq-build-time">
+          <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.what_does_build_time_refer_to({}, { locale: Astro.locals.locale })}</span>
+            <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-8 pb-6 pt-2 bg-blue-950/10">
+            <div class="text-gray-200 leading-relaxed">
+              {m.build_time_explanation({}, { locale: Astro.locals.locale })}
+            </div>
+          </div>
+        </details>
+
+        <details class="group border-b border-gray-800 last:border-b-0 open:bg-blue-950/20 open:border-blue-600/30">
+          <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.what_happens_if_i_reach_the_mau_limit({}, { locale: Astro.locals.locale })}</span>
+            <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-8 pb-6 pt-2 bg-blue-950/10">
+            <div class="text-gray-200 leading-relaxed">
+              {m.what_happens_if_i_reach_the_mau_limit_answer({}, { locale: Astro.locals.locale })}
+            </div>
+          </div>
+        </details>
+
+        <details class="group border-b border-gray-800 last:border-b-0 open:bg-blue-950/20 open:border-blue-600/30">
+          <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.what_happens_if_i_reach_the_storage_limit({}, { locale: Astro.locals.locale })}</span>
+            <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-8 pb-6 pt-2 bg-blue-950/10">
+            <div class="text-gray-200 leading-relaxed">
+              {m.what_happens_if_i_reach_the_storage_limit_answer({}, { locale: Astro.locals.locale })}
+            </div>
+          </div>
+        </details>
+
+        <details class="group border-b border-gray-800 last:border-b-0 open:bg-blue-950/20 open:border-blue-600/30">
+          <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.what_happens_if_i_reach_the_bandwidth_limit({}, { locale: Astro.locals.locale })}</span>
+            <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-8 pb-6 pt-2 bg-blue-950/10">
+            <div class="text-gray-200 leading-relaxed">
+              {m.what_happens_if_i_reach_the_bandwidth_limit_answer({}, { locale: Astro.locals.locale })}
+            </div>
+          </div>
+        </details>
       </div>
     </div>
+
+    <!-- Billing & Payments -->
+    <div class="mt-16 max-w-3xl mx-auto">
+      <div class="mb-8 text-center">
+        <h3 class="text-2xl font-semibold text-white hover:text-blue-400 transition-colors duration-200 cursor-default mb-2">Billing & Payments</h3>
+        <p class="text-gray-400 text-sm">Everything about pricing, payments, and subscriptions</p>
+      </div>
+      
+      <div class="space-y-1 bg-gray-800/20 rounded-2xl overflow-hidden border border-gray-800">
+        <details class="group border-b border-gray-800 last:border-b-0 open:bg-blue-950/20 open:border-blue-600/30">
+          <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.do_you_offer_annual_billing_and_ach_payment_options({}, { locale: Astro.locals.locale })}</span>
+            <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-8 pb-6 pt-2 bg-blue-950/10">
+            <div class="text-gray-200 leading-relaxed">
+              {m.ach_available_for_enterprise_annual_payments({}, { locale: Astro.locals.locale })}
+            </div>
+          </div>
+        </details>
+
+        <details class="group border-b border-gray-800 last:border-b-0 open:bg-blue-950/20 open:border-blue-600/30">
+          <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.what_payment_methods_do_you_accept({}, { locale: Astro.locals.locale })}</span>
+            <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-8 pb-6 pt-2 bg-blue-950/10">
+            <div class="text-gray-200 leading-relaxed">
+              {m.what_payment_methods_answer({}, { locale: Astro.locals.locale })}
+            </div>
+          </div>
+        </details>
+
+        <details class="group border-b border-gray-800 last:border-b-0 open:bg-blue-950/20 open:border-blue-600/30">
+          <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.can_i_change_my_plan_at_any_time({}, { locale: Astro.locals.locale })}</span>
+            <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-8 pb-6 pt-2 bg-blue-950/10">
+            <div class="text-gray-200 leading-relaxed">
+              {m.can_i_change_my_plan_answer({}, { locale: Astro.locals.locale })}
+            </div>
+          </div>
+        </details>
+
+        <details class="group border-b border-gray-800 last:border-b-0 open:bg-blue-950/20 open:border-blue-600/30">
+          <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.can_i_cancel_at_any_time({}, { locale: Astro.locals.locale })}</span>
+            <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-8 pb-6 pt-2 bg-blue-950/10">
+            <div class="text-gray-200 leading-relaxed">
+              {m.cancellation_policy_details({}, { locale: Astro.locals.locale })}
+            </div>
+          </div>
+        </details>
+
+        <details class="group border-b border-gray-800 last:border-b-0 open:bg-blue-950/20 open:border-blue-600/30">
+          <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.do_you_offer_refunds({}, { locale: Astro.locals.locale })}</span>
+            <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-8 pb-6 pt-2 bg-blue-950/10">
+            <div class="text-gray-200 leading-relaxed">
+              {m.do_you_offer_refunds_answer({}, { locale: Astro.locals.locale })}
+            </div>
+          </div>
+        </details>
+
+        <details class="group border-b border-gray-800 last:border-b-0 open:bg-blue-950/20 open:border-blue-600/30">
+          <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.are_there_any_setup_fees_or_hidden_costs({}, { locale: Astro.locals.locale })}</span>
+            <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-8 pb-6 pt-2 bg-blue-950/10">
+            <div class="text-gray-200 leading-relaxed">
+              {m.are_there_any_setup_fees_answer({}, { locale: Astro.locals.locale })}
+            </div>
+          </div>
+        </details>
+
+        <details class="group border-b border-gray-800 last:border-b-0 open:bg-blue-950/20 open:border-blue-600/30">
+          <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.can_i_use_credits_without_subscription({}, { locale: Astro.locals.locale })}</span>
+            <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-8 pb-6 pt-2 bg-blue-950/10">
+            <div class="text-gray-200 leading-relaxed">
+              {m.can_i_use_credits_without_subscription_answer({}, { locale: Astro.locals.locale })}
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- Trial & Support -->
+    <div class="mt-16 max-w-3xl mx-auto">
+      <div class="mb-8 text-center">
+        <h3 class="text-2xl font-semibold text-white hover:text-blue-400 transition-colors duration-200 cursor-default mb-2">Trial & Support</h3>
+        <p class="text-gray-400 text-sm">Free trials, discounts, and getting help</p>
+      </div>
+      
+      <div class="space-y-1 bg-gray-800/20 rounded-2xl overflow-hidden border border-gray-800">
+        <details class="group border-b border-gray-800 last:border-b-0 open:bg-blue-950/20 open:border-blue-600/30">
+          <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.unsure_about_active_users({}, { locale: Astro.locals.locale })}</span>
+            <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-8 pb-6 pt-2 bg-blue-950/10">
+            <div class="text-gray-200 leading-relaxed">
+              {m.free_trial_explanation({}, { locale: Astro.locals.locale })}
+            </div>
+          </div>
+        </details>
+
+        <details class="group border-b border-gray-800 last:border-b-0 open:bg-blue-950/20 open:border-blue-600/30">
+          <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.do_you_offer_discounts_for_students_non_profits_or_startups({}, { locale: Astro.locals.locale })}</span>
+            <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-8 pb-6 pt-2 bg-blue-950/10">
+            <div class="text-gray-200 leading-relaxed">
+              {m.no_discounts_available_at_this_time({}, { locale: Astro.locals.locale })}
+            </div>
+          </div>
+        </details>
+
+        <details class="group border-b border-gray-800 last:border-b-0 open:bg-blue-950/20 open:border-blue-600/30">
+          <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.do_you_have_purchasing_power_parity_pricing({}, { locale: Astro.locals.locale })}</span>
+            <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-8 pb-6 pt-2 bg-blue-950/10">
+            <div class="text-gray-200 leading-relaxed">
+              {m.no_ppp_available_at_this_time({}, { locale: Astro.locals.locale })}
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- Security & Compliance -->
+    <div class="mt-16 max-w-3xl mx-auto">
+      <div class="mb-8 text-center">
+        <h3 class="text-2xl font-semibold text-white hover:text-blue-400 transition-colors duration-200 cursor-default mb-2">Security & Compliance</h3>
+        <p class="text-gray-400 text-sm">Enterprise security features and certifications</p>
+      </div>
+      
+      <div class="space-y-1 bg-gray-800/20 rounded-2xl overflow-hidden border border-gray-800">
+        <details class="group border-b border-gray-800 last:border-b-0 open:bg-blue-950/20 open:border-blue-600/30" id="faq-soc2">
+          <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.soc2_what_does_it_mean({}, { locale: Astro.locals.locale })}</span>
+            <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-8 pb-6 pt-2 bg-blue-950/10">
+            <div class="text-gray-200 leading-relaxed">
+              {m.soc2_explanation({}, { locale: Astro.locals.locale })}
+            </div>
+          </div>
+        </details>
+
+        <details class="group border-b border-gray-800 last:border-b-0 open:bg-blue-950/20 open:border-blue-600/30">
+          <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.can_i_use_soc2_with_other_plans({}, { locale: Astro.locals.locale })}</span>
+            <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-8 pb-6 pt-2 bg-blue-950/10">
+            <div class="text-gray-200 leading-relaxed">
+              {m.soc2_enterprise_only({}, { locale: Astro.locals.locale })}
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
     <div class="flex justify-center items-center mt-12 md:mt-20">
       <div class="py-4 px-8 text-center bg-gray-800 rounded-full">
         <p class="text-gray-50">
