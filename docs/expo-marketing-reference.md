@@ -1,6 +1,38 @@
 # Expo Marketing Messaging Reference
 
-This document catalogs powerful marketing phrases, patterns, and messaging strategies from Expo's solution pages that can be referenced and adapted for Capgo solution pages.
+This document catalogs powerful marketing phrases, patterns, and messaging strategies from Expo's solution pages that have been adapted and applied across Capgo's website.
+
+## Applied Changes Summary
+
+The following Expo-style messaging improvements have been applied across the website:
+
+### Homepage (index.astro)
+- **Hero subtitle**: "Ship fixes in minutes, not weeks. Push updates to users. No app store delays. No user friction. Just ship."
+- **Problem/solution**: "Your team can't afford days-long app store delays. Ship updates the moment they're ready."
+- **Instant updates**: "Your users are waiting. Ship updates in minutes, not weeks."
+- **Main CTA**: Changed from "Start free" to "Start shipping"
+
+### Live Updates Page
+- **Hero title**: "Ship Faster. Break Nothing."
+- **Hero subtitle**: Added "Ship updates with confidence" intro
+
+### Pricing Page
+- **Main headline**: "Start Free. Scale to Millions."
+- **Subtitle**: "Every dollar saved extends your runway. No credit card required. Upgrade when you're ready."
+
+### Enterprise Page
+- **Description**: "Scale from thousands to millions of users without rewrites. Enterprise-grade security, 99.9% uptime SLA, and dedicated support."
+
+### Native Build Page
+- **Hero title**: "Stop Buying Mac Minis. Start Shipping."
+- **Hero subtitle**: "Your team can't afford expensive Mac hardware for every developer."
+
+### Alternatives Page
+- **Hero title**: "Choose a Platform That Won't Shut Down"
+- **Hero subtitle**: "Your team needs a live update solution that won't disappear."
+
+### Manifesto
+- **Opening**: "Your team excels at web development - you shouldn't need native mobile experts."
 
 ---
 
