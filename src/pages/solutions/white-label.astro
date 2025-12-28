@@ -1,0 +1,283 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import * as m from '@/paraglide/messages'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+
+const title = `${brand} | ${m.solutions_white_label_title({}, { locale })}`
+const description = m.solutions_white_label_description({}, { locale })
+
+const content = { title, description }
+---
+
+<Layout content={content}>
+  <div>
+    <!-- Hero Section -->
+    <section class="relative py-16 sm:py-20 lg:py-28">
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        {
+          Array.from({ length: 15 }).map((_, i) => (
+            <div
+              class="absolute w-2 h-2 bg-cyan-500 rounded-full opacity-20 animate-pulse"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${2 + Math.random() * 2}s`,
+              }}
+            />
+          ))
+        }
+      </div>
+
+      <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <p class="inline-flex px-4 py-2 text-sm text-cyan-100 border rounded-full font-medium border-cyan-400/40 bg-cyan-500/10">
+            <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+            {m.solutions_white_label({}, { locale })}
+          </p>
+          <h1 class="mt-6 text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+            {m.solutions_white_label_hero_title({}, { locale })}
+          </h1>
+          <p class="max-w-3xl mx-auto mt-6 text-xl leading-relaxed text-gray-300">
+            {m.solutions_white_label_hero_subtitle({}, { locale })}
+          </p>
+
+          <div class="flex flex-col items-center justify-center gap-4 mt-10 sm:flex-row">
+            <a
+              href={getRelativeLocaleUrl(locale, 'register')}
+              class="px-8 py-4 text-base font-semibold text-white transition-all duration-200 bg-cyan-600 rounded-xl hover:bg-cyan-700 focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+            >
+              {m.solutions_get_started({}, { locale })}
+            </a>
+            <a
+              href={getRelativeLocaleUrl(locale, 'docs/plugin/api')}
+              class="px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 border border-gray-600 rounded-xl hover:bg-gray-800 hover:text-white"
+            >
+              {m.solutions_view_docs({}, { locale })}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="py-16 bg-gray-800 sm:py-20">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <div class="p-8 transition-all duration-300 bg-gray-900 border border-gray-700 rounded-2xl hover:border-cyan-500/50">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl ring-1 bg-cyan-500/15 ring-cyan-300/40">
+              <svg class="w-7 h-7 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_white_label_feature1_title({}, { locale })}</h3>
+            <p class="text-gray-400 leading-relaxed">{m.solutions_white_label_feature1_desc({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 transition-all duration-300 bg-gray-900 border border-gray-700 rounded-2xl hover:border-cyan-500/50">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl ring-1 bg-cyan-500/15 ring-cyan-300/40">
+              <svg class="w-7 h-7 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_white_label_feature2_title({}, { locale })}</h3>
+            <p class="text-gray-400 leading-relaxed">{m.solutions_white_label_feature2_desc({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 transition-all duration-300 bg-gray-900 border border-gray-700 rounded-2xl hover:border-cyan-500/50">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl ring-1 bg-cyan-500/15 ring-cyan-300/40">
+              <svg class="w-7 h-7 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_white_label_feature3_title({}, { locale })}</h3>
+            <p class="text-gray-400 leading-relaxed">{m.solutions_white_label_feature3_desc({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 transition-all duration-300 bg-gray-900 border border-gray-700 rounded-2xl hover:border-cyan-500/50">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl ring-1 bg-cyan-500/15 ring-cyan-300/40">
+              <svg class="w-7 h-7 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_white_label_feature4_title({}, { locale })}</h3>
+            <p class="text-gray-400 leading-relaxed">{m.solutions_white_label_feature4_desc({}, { locale })}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="py-16 bg-gray-900 sm:py-20">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="mb-16 text-center">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_white_label_usecases_title({}, { locale })}</h2>
+        </div>
+
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div class="p-8 bg-gray-800 border border-gray-700 rounded-2xl">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl bg-orange-500/15">
+              <svg class="w-7 h-7 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_white_label_usecases_restaurant({}, { locale })}</h3>
+            <p class="text-gray-400">{m.solutions_white_label_usecases_restaurant_desc({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 bg-gray-800 border border-gray-700 rounded-2xl">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl bg-blue-500/15">
+              <svg class="w-7 h-7 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_white_label_usecases_saas({}, { locale })}</h3>
+            <p class="text-gray-400">{m.solutions_white_label_usecases_saas_desc({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 bg-gray-800 border border-gray-700 rounded-2xl">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl bg-purple-500/15">
+              <svg class="w-7 h-7 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_white_label_usecases_platform({}, { locale })}</h3>
+            <p class="text-gray-400">{m.solutions_white_label_usecases_platform_desc({}, { locale })}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mini-App Store Model -->
+    <section class="py-16 bg-gray-800 sm:py-20">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="grid items-center gap-12 lg:grid-cols-2">
+          <div>
+            <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_white_label_miniapp_title({}, { locale })}</h2>
+            <p class="mt-6 text-lg text-gray-300 leading-relaxed">{m.solutions_white_label_miniapp_desc({}, { locale })}</p>
+
+            <ul class="mt-8 space-y-4">
+              <li class="flex items-start gap-3">
+                <div class="flex items-center justify-center w-6 h-6 mt-0.5 rounded-full bg-cyan-500/20 text-cyan-400 text-sm font-bold">1</div>
+                <span class="text-gray-300">{m.solutions_white_label_miniapp_step1({}, { locale })}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="flex items-center justify-center w-6 h-6 mt-0.5 rounded-full bg-cyan-500/20 text-cyan-400 text-sm font-bold">2</div>
+                <span class="text-gray-300">{m.solutions_white_label_miniapp_step2({}, { locale })}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="flex items-center justify-center w-6 h-6 mt-0.5 rounded-full bg-cyan-500/20 text-cyan-400 text-sm font-bold">3</div>
+                <span class="text-gray-300">{m.solutions_white_label_miniapp_step3({}, { locale })}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="flex items-center justify-center w-6 h-6 mt-0.5 rounded-full bg-cyan-500/20 text-cyan-400 text-sm font-bold">4</div>
+                <span class="text-gray-300">{m.solutions_white_label_miniapp_step4({}, { locale })}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="flex items-center justify-center w-6 h-6 mt-0.5 rounded-full bg-cyan-500/20 text-cyan-400 text-sm font-bold">5</div>
+                <span class="text-gray-300">{m.solutions_white_label_miniapp_step5({}, { locale })}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="flex items-center justify-center w-6 h-6 mt-0.5 rounded-full bg-cyan-500/20 text-cyan-400 text-sm font-bold">6</div>
+                <span class="text-gray-300">{m.solutions_white_label_miniapp_step6({}, { locale })}</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="p-6 bg-gray-900 border border-gray-700 rounded-2xl">
+            <div class="flex items-center gap-2 mb-4">
+              <div class="w-3 h-3 bg-gray-500 rounded-full"></div>
+              <div class="w-3 h-3 bg-gray-500 rounded-full"></div>
+              <div class="w-3 h-3 bg-gray-500 rounded-full"></div>
+              <span class="ml-2 text-sm text-gray-500">MiniAppStore.tsx</span>
+            </div>
+            <pre class="overflow-x-auto text-sm text-gray-300"><code>import {'{'} CapacitorUpdater {'}'} from '@capgo/capacitor-updater'
+
+<span class="text-gray-500">// Get list of available mini-apps</span>
+const miniApps = [
+  {'{'} name: 'Games', channel: 'miniapp-games' {'}'},
+  {'{'} name: 'Utilities', channel: 'miniapp-utils' {'}'},
+  {'{'} name: 'Finance', channel: 'miniapp-finance' {'}'},
+]
+
+<span class="text-gray-500">// User selects a mini-app</span>
+async function loadMiniApp(channel: string) {'{'}
+  <span class="text-gray-500">// Switch to the mini-app's channel</span>
+  await CapacitorUpdater.setChannel({'{'}
+    channel: channel
+  {'}'})
+
+  <span class="text-gray-500">// Download starts automatically</span>
+  <span class="text-gray-500">// App reloads with mini-app content</span>
+{'}'}
+
+<span class="text-gray-500">// Return to main app</span>
+async function returnToMainApp() {'{'}
+  await CapacitorUpdater.setChannel({'{'}
+    channel: 'production'
+  {'}'})
+{'}'}</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Unique Technology -->
+    <section class="py-16 bg-gray-900 sm:py-20">
+      <div class="px-4 mx-auto max-w-5xl sm:px-6 lg:px-8">
+        <div class="p-8 bg-gradient-to-r from-cyan-900/50 to-blue-900/50 rounded-2xl border border-cyan-500/30">
+          <div class="flex items-start gap-6">
+            <div class="flex-shrink-0">
+              <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-cyan-500/20">
+                <svg class="w-7 h-7 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+            </div>
+            <div>
+              <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_white_label_tech_title({}, { locale })}</h3>
+              <p class="text-gray-300 leading-relaxed">{m.solutions_white_label_tech_desc({}, { locale })}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gray-900 sm:py-20">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="relative px-8 py-16 overflow-hidden bg-gradient-to-r from-cyan-600 to-cyan-800 rounded-3xl sm:px-16">
+          <div aria-hidden="true" class="absolute inset-0">
+            <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360">
+              <path class="text-cyan-500 text-opacity-40" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"></path>
+              <path class="text-cyan-400 text-opacity-20" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"></path>
+            </svg>
+          </div>
+          <div class="relative text-center">
+            <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_white_label_cta_title({}, { locale })}</h2>
+            <p class="max-w-2xl mx-auto mt-4 text-lg text-cyan-100">{m.solutions_white_label_cta_subtitle({}, { locale })}</p>
+            <div class="flex flex-col items-center justify-center gap-4 mt-8 sm:flex-row">
+              <a
+                href={getRelativeLocaleUrl(locale, 'register')}
+                class="px-8 py-4 text-base font-semibold text-cyan-600 transition-all duration-200 bg-white rounded-xl hover:bg-gray-100"
+              >
+                {m.solutions_get_started({}, { locale })}
+              </a>
+              <a
+                href={getRelativeLocaleUrl(locale, 'pricing')}
+                class="px-8 py-4 text-base font-semibold text-white transition-all duration-200 border rounded-xl border-white/30 hover:bg-white/10"
+              >
+                {m.pricing({}, { locale })}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

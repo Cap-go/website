@@ -1,0 +1,246 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import * as m from '@/paraglide/messages'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+
+const title = `${brand} | ${m.solutions_direct_updates_title({}, { locale })}`
+const description = m.solutions_direct_updates_description({}, { locale })
+
+const content = { title, description }
+---
+
+<Layout content={content}>
+  <div>
+    <!-- Hero Section -->
+    <section class="relative py-16 sm:py-20 lg:py-28">
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        {
+          Array.from({ length: 15 }).map((_, i) => (
+            <div
+              class="absolute w-2 h-2 bg-emerald-500 rounded-full opacity-20 animate-pulse"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${2 + Math.random() * 2}s`,
+              }}
+            />
+          ))
+        }
+      </div>
+
+      <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <p class="inline-flex px-4 py-2 text-sm text-emerald-100 border rounded-full font-medium border-emerald-400/40 bg-emerald-500/10">
+            <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            {m.solutions_direct_updates({}, { locale })}
+          </p>
+          <h1 class="mt-6 text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+            {m.solutions_direct_updates_hero_title({}, { locale })}
+          </h1>
+          <p class="max-w-3xl mx-auto mt-6 text-xl leading-relaxed text-gray-300">
+            {m.solutions_direct_updates_hero_subtitle({}, { locale })}
+          </p>
+
+          <div class="flex flex-col items-center justify-center gap-4 mt-10 sm:flex-row">
+            <a
+              href={getRelativeLocaleUrl(locale, 'register')}
+              class="px-8 py-4 text-base font-semibold text-white transition-all duration-200 bg-emerald-600 rounded-xl hover:bg-emerald-700 focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+            >
+              {m.solutions_get_started({}, { locale })}
+            </a>
+            <a
+              href={getRelativeLocaleUrl(locale, 'docs/plugin/settings')}
+              class="px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 border border-gray-600 rounded-xl hover:bg-gray-800 hover:text-white"
+            >
+              {m.solutions_view_docs({}, { locale })}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="py-16 bg-gray-800 sm:py-20">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <div class="p-8 transition-all duration-300 bg-gray-900 border border-gray-700 rounded-2xl hover:border-emerald-500/50">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl ring-1 bg-emerald-500/15 ring-emerald-300/40">
+              <svg class="w-7 h-7 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_direct_updates_feature1_title({}, { locale })}</h3>
+            <p class="text-gray-400 leading-relaxed">{m.solutions_direct_updates_feature1_desc({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 transition-all duration-300 bg-gray-900 border border-gray-700 rounded-2xl hover:border-emerald-500/50">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl ring-1 bg-emerald-500/15 ring-emerald-300/40">
+              <svg class="w-7 h-7 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_direct_updates_feature2_title({}, { locale })}</h3>
+            <p class="text-gray-400 leading-relaxed">{m.solutions_direct_updates_feature2_desc({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 transition-all duration-300 bg-gray-900 border border-gray-700 rounded-2xl hover:border-emerald-500/50">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl ring-1 bg-emerald-500/15 ring-emerald-300/40">
+              <svg class="w-7 h-7 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_direct_updates_feature3_title({}, { locale })}</h3>
+            <p class="text-gray-400 leading-relaxed">{m.solutions_direct_updates_feature3_desc({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 transition-all duration-300 bg-gray-900 border border-gray-700 rounded-2xl hover:border-emerald-500/50">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl ring-1 bg-emerald-500/15 ring-emerald-300/40">
+              <svg class="w-7 h-7 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_direct_updates_feature4_title({}, { locale })}</h3>
+            <p class="text-gray-400 leading-relaxed">{m.solutions_direct_updates_feature4_desc({}, { locale })}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Speed Section -->
+    <section class="py-16 bg-gray-900 sm:py-20">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="grid items-center gap-12 lg:grid-cols-2">
+          <div>
+            <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_direct_updates_speed_title({}, { locale })}</h2>
+            <p class="mt-6 text-lg text-gray-300 leading-relaxed">{m.solutions_direct_updates_speed_desc({}, { locale })}</p>
+
+            <div class="mt-8 space-y-4">
+              <div class="flex items-center gap-4">
+                <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-500/15">
+                  <svg class="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <span class="text-gray-300">Sub-100ms API responses globally</span>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-500/15">
+                  <svg class="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <span class="text-gray-300">Sub-300ms 5MB bundle downloads</span>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-500/15">
+                  <svg class="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <span class="text-gray-300">Edge CDN on every continent</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 bg-gray-800 border border-gray-700 rounded-2xl">
+            <div class="flex items-center gap-2 mb-4">
+              <div class="w-3 h-3 bg-gray-500 rounded-full"></div>
+              <div class="w-3 h-3 bg-gray-500 rounded-full"></div>
+              <div class="w-3 h-3 bg-gray-500 rounded-full"></div>
+              <span class="ml-2 text-sm text-gray-500">capacitor.config.ts</span>
+            </div>
+            <pre class="overflow-x-auto text-sm text-gray-300"><code>CapacitorUpdater: {'{'}
+  <span class="text-emerald-400">autoUpdate</span>: true,
+  <span class="text-emerald-400">directUpdate</span>: true, <span class="text-gray-500">// Enable instant updates</span>
+{'}'}
+
+<span class="text-gray-500">// In your app initialization:</span>
+import {'{'} CapacitorUpdater {'}'} from '@capgo/capacitor-updater'
+
+<span class="text-gray-500">// User opens app → update downloads → applies immediately</span>
+await CapacitorUpdater.notifyAppReady()</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- When to Use -->
+    <section class="py-16 bg-gray-800 sm:py-20">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="mb-16 text-center">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_direct_updates_when_title({}, { locale })}</h2>
+        </div>
+
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div class="p-8 bg-gray-900 border border-gray-700 rounded-2xl">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl bg-red-500/15">
+              <svg class="w-7 h-7 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_direct_updates_when_critical({}, { locale })}</h3>
+            <p class="text-gray-400">{m.solutions_direct_updates_when_critical_desc({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 bg-gray-900 border border-gray-700 rounded-2xl">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl bg-blue-500/15">
+              <svg class="w-7 h-7 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_direct_updates_when_onboarding({}, { locale })}</h3>
+            <p class="text-gray-400">{m.solutions_direct_updates_when_onboarding_desc({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 bg-gray-900 border border-gray-700 rounded-2xl">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl bg-purple-500/15">
+              <svg class="w-7 h-7 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_direct_updates_when_events({}, { locale })}</h3>
+            <p class="text-gray-400">{m.solutions_direct_updates_when_events_desc({}, { locale })}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gray-900 sm:py-20">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="relative px-8 py-16 overflow-hidden bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-3xl sm:px-16">
+          <div aria-hidden="true" class="absolute inset-0">
+            <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360">
+              <path class="text-emerald-500 text-opacity-40" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"></path>
+              <path class="text-emerald-400 text-opacity-20" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"></path>
+            </svg>
+          </div>
+          <div class="relative text-center">
+            <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_direct_updates_cta_title({}, { locale })}</h2>
+            <p class="max-w-2xl mx-auto mt-4 text-lg text-emerald-100">{m.solutions_direct_updates_cta_subtitle({}, { locale })}</p>
+            <div class="flex flex-col items-center justify-center gap-4 mt-8 sm:flex-row">
+              <a
+                href={getRelativeLocaleUrl(locale, 'register')}
+                class="px-8 py-4 text-base font-semibold text-emerald-600 transition-all duration-200 bg-white rounded-xl hover:bg-gray-100"
+              >
+                {m.solutions_get_started({}, { locale })}
+              </a>
+              <a
+                href={getRelativeLocaleUrl(locale, 'pricing')}
+                class="px-8 py-4 text-base font-semibold text-white transition-all duration-200 border rounded-xl border-white/30 hover:bg-white/10"
+              >
+                {m.pricing({}, { locale })}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

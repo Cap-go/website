@@ -1,0 +1,294 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import * as m from '@/paraglide/messages'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+
+const title = `${brand} | ${m.solutions_production_updates_title({}, { locale })}`
+const description = m.solutions_production_updates_description({}, { locale })
+
+const content = { title, description }
+---
+
+<Layout content={content}>
+  <div>
+    <!-- Hero Section -->
+    <section class="relative py-16 sm:py-20 lg:py-28">
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        {
+          Array.from({ length: 15 }).map((_, i) => (
+            <div
+              class="absolute w-2 h-2 bg-blue-500 rounded-full opacity-20 animate-pulse"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${2 + Math.random() * 2}s`,
+              }}
+            />
+          ))
+        }
+      </div>
+
+      <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <p class="inline-flex px-4 py-2 text-sm text-blue-100 border rounded-full font-medium border-blue-400/40 bg-blue-500/10">
+            <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+            </svg>
+            {m.solutions_production_updates({}, { locale })}
+          </p>
+          <h1 class="mt-6 text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+            {m.solutions_production_updates_hero_title({}, { locale })}
+          </h1>
+          <p class="max-w-3xl mx-auto mt-6 text-xl leading-relaxed text-gray-300">
+            {m.solutions_production_updates_hero_subtitle({}, { locale })}
+          </p>
+
+          <div class="flex flex-col items-center justify-center gap-4 mt-10 sm:flex-row">
+            <a
+              href={getRelativeLocaleUrl(locale, 'register')}
+              class="px-8 py-4 text-base font-semibold text-white transition-all duration-200 bg-blue-600 rounded-xl hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            >
+              {m.solutions_get_started({}, { locale })}
+            </a>
+            <a
+              href={getRelativeLocaleUrl(locale, 'docs/getting-started/quick-start')}
+              class="px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 border border-gray-600 rounded-xl hover:bg-gray-800 hover:text-white"
+            >
+              {m.solutions_view_docs({}, { locale })}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="py-16 bg-gray-800 sm:py-20">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <div class="p-8 transition-all duration-300 bg-gray-900 border border-gray-700 rounded-2xl hover:border-blue-500/50">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl ring-1 bg-blue-500/15 ring-blue-300/40">
+              <svg class="w-7 h-7 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_production_updates_feature1_title({}, { locale })}</h3>
+            <p class="text-gray-400 leading-relaxed">{m.solutions_production_updates_feature1_desc({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 transition-all duration-300 bg-gray-900 border border-gray-700 rounded-2xl hover:border-blue-500/50">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl ring-1 bg-blue-500/15 ring-blue-300/40">
+              <svg class="w-7 h-7 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_production_updates_feature2_title({}, { locale })}</h3>
+            <p class="text-gray-400 leading-relaxed">{m.solutions_production_updates_feature2_desc({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 transition-all duration-300 bg-gray-900 border border-gray-700 rounded-2xl hover:border-blue-500/50">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl ring-1 bg-blue-500/15 ring-blue-300/40">
+              <svg class="w-7 h-7 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_production_updates_feature3_title({}, { locale })}</h3>
+            <p class="text-gray-400 leading-relaxed">{m.solutions_production_updates_feature3_desc({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 transition-all duration-300 bg-gray-900 border border-gray-700 rounded-2xl hover:border-blue-500/50">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl ring-1 bg-blue-500/15 ring-blue-300/40">
+              <svg class="w-7 h-7 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_production_updates_feature4_title({}, { locale })}</h3>
+            <p class="text-gray-400 leading-relaxed">{m.solutions_production_updates_feature4_desc({}, { locale })}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-16 bg-gray-900 sm:py-20">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="mb-16 text-center">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_production_updates_how_title({}, { locale })}</h2>
+        </div>
+
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div class="text-center">
+            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 text-2xl font-bold text-blue-400 border-2 border-blue-400 rounded-full">1</div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_production_updates_step1_title({}, { locale })}</h3>
+            <p class="text-gray-400">{m.solutions_production_updates_step1_desc({}, { locale })}</p>
+          </div>
+
+          <div class="text-center">
+            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 text-2xl font-bold text-blue-400 border-2 border-blue-400 rounded-full">2</div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_production_updates_step2_title({}, { locale })}</h3>
+            <p class="text-gray-400">{m.solutions_production_updates_step2_desc({}, { locale })}</p>
+          </div>
+
+          <div class="text-center">
+            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 text-2xl font-bold text-blue-400 border-2 border-blue-400 rounded-full">3</div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_production_updates_step3_title({}, { locale })}</h3>
+            <p class="text-gray-400">{m.solutions_production_updates_step3_desc({}, { locale })}</p>
+          </div>
+        </div>
+
+        <!-- Code Example -->
+        <div class="max-w-3xl mx-auto mt-16">
+          <div class="p-6 bg-gray-800 border border-gray-700 rounded-2xl">
+            <div class="flex items-center gap-2 mb-4">
+              <div class="w-3 h-3 bg-gray-500 rounded-full"></div>
+              <div class="w-3 h-3 bg-gray-500 rounded-full"></div>
+              <div class="w-3 h-3 bg-gray-500 rounded-full"></div>
+              <span class="ml-2 text-sm text-gray-500">Terminal</span>
+            </div>
+            <pre class="overflow-x-auto text-sm text-gray-300"><code><span class="text-gray-500"># Install the plugin</span>
+npm install @capgo/capacitor-updater
+
+<span class="text-gray-500"># Build your app</span>
+npm run build
+
+<span class="text-gray-500"># Upload to Capgo</span>
+npx @capgo/cli bundle upload
+
+<span class="text-green-400">✔</span> Bundle uploaded successfully
+<span class="text-green-400">✔</span> 23,847 devices will receive update on next launch</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="py-16 bg-gray-800 sm:py-20">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="mb-16 text-center">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_social_proof_title({}, { locale })}</h2>
+          <p class="max-w-2xl mx-auto mt-4 text-lg text-gray-400">{m.solutions_social_proof_desc({}, { locale })}</p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div class="p-8 text-center bg-gray-900 border border-gray-700 rounded-2xl">
+            <div class="mb-2 text-4xl font-bold text-blue-400">500M+</div>
+            <p class="text-gray-400">{m.solutions_stat_updates({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 text-center bg-gray-900 border border-gray-700 rounded-2xl">
+            <div class="mb-2 text-4xl font-bold text-emerald-400">2,000+</div>
+            <p class="text-gray-400">{m.solutions_stat_apps({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 text-center bg-gray-900 border border-gray-700 rounded-2xl">
+            <div class="mb-2 text-4xl font-bold text-purple-400">99.9%</div>
+            <p class="text-gray-400">{m.solutions_stat_uptime({}, { locale })}</p>
+          </div>
+        </div>
+
+        <!-- Testimonial -->
+        <div class="max-w-3xl mx-auto mt-16">
+          <div class="p-8 bg-gray-900 border border-gray-700 rounded-2xl">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="flex items-center justify-center w-12 h-12 bg-blue-500/20 rounded-full">
+                <svg class="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              </div>
+              <div>
+                <div class="font-semibold text-white">Click & Boat</div>
+                <div class="text-sm text-gray-400">Production App</div>
+              </div>
+            </div>
+            <blockquote class="text-lg italic text-gray-300 leading-relaxed">
+              "{m.testimonial_consulting({}, { locale })}"
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Global Infrastructure Stats -->
+    <section class="py-16 bg-gray-900 sm:py-20">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="mb-16 text-center">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_production_updates_stats_title({}, { locale })}</h2>
+          <p class="max-w-2xl mx-auto mt-4 text-lg text-gray-400">{m.solutions_global_infra_desc({}, { locale })}</p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div class="p-8 text-center bg-gray-800 border border-gray-700 rounded-2xl">
+            <div class="mb-2 text-4xl font-bold text-blue-400">{m.solutions_production_updates_stats_sub100ms({}, { locale })}</div>
+            <p class="text-gray-400">{m.solutions_production_updates_stats_sub100ms_desc({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 text-center bg-gray-800 border border-gray-700 rounded-2xl">
+            <div class="mb-2 text-4xl font-bold text-emerald-400">{m.solutions_production_updates_stats_sub300ms({}, { locale })}</div>
+            <p class="text-gray-400">{m.solutions_production_updates_stats_sub300ms_desc({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 text-center bg-gray-800 border border-gray-700 rounded-2xl">
+            <div class="mb-2 text-4xl font-bold text-purple-400">{m.solutions_production_updates_stats_continents({}, { locale })}</div>
+            <p class="text-gray-400">{m.solutions_production_updates_stats_continents_desc({}, { locale })}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Unique Technology -->
+    <section class="py-16 bg-gray-800 sm:py-20">
+      <div class="px-4 mx-auto max-w-5xl sm:px-6 lg:px-8">
+        <div class="p-8 bg-gradient-to-r from-blue-900/50 to-purple-900/50 rounded-2xl border border-blue-500/30">
+          <div class="flex items-start gap-6">
+            <div class="flex-shrink-0">
+              <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-blue-500/20">
+                <svg class="w-7 h-7 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+            </div>
+            <div>
+              <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_unique_tech({}, { locale })}</h3>
+              <p class="text-gray-300 leading-relaxed">{m.solutions_unique_tech_desc({}, { locale })}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gray-900 sm:py-20">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="relative px-8 py-16 overflow-hidden bg-gradient-to-r from-blue-600 to-blue-800 rounded-3xl sm:px-16">
+          <div aria-hidden="true" class="absolute inset-0">
+            <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360">
+              <path class="text-blue-500 text-opacity-40" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"></path>
+              <path class="text-blue-400 text-opacity-20" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"></path>
+            </svg>
+          </div>
+          <div class="relative text-center">
+            <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_production_updates_cta_title({}, { locale })}</h2>
+            <p class="max-w-2xl mx-auto mt-4 text-lg text-blue-100">{m.solutions_production_updates_cta_subtitle({}, { locale })}</p>
+            <div class="flex flex-col items-center justify-center gap-4 mt-8 sm:flex-row">
+              <a
+                href={getRelativeLocaleUrl(locale, 'register')}
+                class="px-8 py-4 text-base font-semibold text-blue-600 transition-all duration-200 bg-white rounded-xl hover:bg-gray-100"
+              >
+                {m.solutions_get_started({}, { locale })}
+              </a>
+              <a
+                href={getRelativeLocaleUrl(locale, 'pricing')}
+                class="px-8 py-4 text-base font-semibold text-white transition-all duration-200 border rounded-xl border-white/30 hover:bg-white/10"
+              >
+                {m.pricing({}, { locale })}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
