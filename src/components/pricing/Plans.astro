@@ -152,7 +152,9 @@ function buildTimeDisplay(buildTimeSeconds: number) {
                     {numberWithSpaces(plan.mau)}
                     {plan.name === 'Enterprise' ? '+' : ''}
                   </span>{' '}
-                  {m.monthly_active_users({}, { locale: Astro.locals.locale })}
+                  <a href="#faq-mau" class="text-gray-900 hover:text-blue-600 transition-colors border-b border-dotted border-gray-400 hover:border-blue-600" title="Learn more about Monthly Active Users">
+                    {m.monthly_active_users({}, { locale: Astro.locals.locale })}
+                  </a>
                 </span>
               </li>
               <li class="flex items-center">
@@ -164,8 +166,10 @@ function buildTimeDisplay(buildTimeSeconds: number) {
                     {numberWithSpaces(plan.bandwidth)}
                     {plan.name === 'Enterprise' ? '+' : ''}
                   </span>{' '}
-                  GiB/{m.month({}, { locale: Astro.locals.locale })}
-                  {m.of_bandwidth({}, { locale: Astro.locals.locale })}
+                  GiB/{m.month({}, { locale: Astro.locals.locale })}{' '}
+                  <a href="#faq-bandwidth" class="text-gray-900 hover:text-blue-600 transition-colors border-b border-dotted border-gray-400 hover:border-blue-600" title="Learn more about Bandwidth">
+                    {m.of_bandwidth({}, { locale: Astro.locals.locale })}
+                  </a>
                 </span>
               </li>
               <li class="flex items-center">
@@ -177,7 +181,10 @@ function buildTimeDisplay(buildTimeSeconds: number) {
                     {numberWithSpaces(plan.storage)}
                     {plan.name === 'Enterprise' ? '+' : ''}
                   </span>{' '}
-                  GiB {m.of_storage({}, { locale: Astro.locals.locale })}
+                  GiB{' '}
+                  <a href="#faq-storage" class="text-gray-900 hover:text-blue-600 transition-colors border-b border-dotted border-gray-400 hover:border-blue-600" title="Learn more about Storage">
+                    {m.of_storage({}, { locale: Astro.locals.locale })}
+                  </a>
                 </span>
               </li>
               {plan.build_time_unit && plan.build_time_unit > 0 && (
@@ -186,10 +193,10 @@ function buildTimeDisplay(buildTimeSeconds: number) {
                     <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
                   </svg>
                   <span>
-                    <span class="font-bold">
+                    <a href="#faq-build-time" class="font-bold text-gray-900 hover:text-blue-600 transition-colors border-b border-dotted border-gray-400 hover:border-blue-600" title="Learn more about Build Time">
                       {buildTimeDisplay(plan.build_time_unit)}
                       {plan.name === 'Enterprise' ? '+' : ''}
-                    </span>
+                    </a>
                   </span>
                 </li>
               )}
@@ -257,7 +264,11 @@ function buildTimeDisplay(buildTimeSeconds: number) {
                     <svg class="w-5 h-5 mr-2 text-blue-600 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
                       <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
                     </svg>
-                    <span>{m.soc2_compliance({}, { locale: Astro.locals.locale })}</span>
+                    <span>
+                      <a href="#faq-soc2" class="text-gray-900 hover:text-blue-600 transition-colors border-b border-dotted border-gray-400 hover:border-blue-600" title="Learn more about SOC 2">
+                        {m.soc2_compliance({}, { locale: Astro.locals.locale })}
+                      </a>
+                    </span>
                   </li>
                 </>
               )}
@@ -306,7 +317,42 @@ function buildTimeDisplay(buildTimeSeconds: number) {
         }
       })
     }
-    yearlyRadio.addEventListener('change', () => updatePrices(true))
-    monthlyRadio.addEventListener('change', () => updatePrices(false))
+    
+    // Handle FAQ info icon clicks
+    document.querySelectorAll('a[href^="#faq-"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault()
+        const targetId = link.getAttribute('href').substring(1)
+        const targetElement = document.getElementById(targetId)
+        
+        if (targetElement) {
+          // Smooth scroll to the FAQ section
+          targetElement.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center' 
+          })
+          
+          // Auto-open the details element after scrolling
+          setTimeout(() => {
+            if (!targetElement.open) {
+              targetElement.open = true
+            }
+            
+            // Add temporary highlight effect
+            targetElement.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.5)'
+            targetElement.style.borderRadius = '12px'
+            targetElement.style.transition = 'box-shadow 0.3s ease'
+            
+            // Remove highlight after 2 seconds
+            setTimeout(() => {
+              targetElement.style.boxShadow = 'none'
+            }, 2000)
+          }, 500)
+        }
+      })
+    })
+    
+    yearlyRadio?.addEventListener('change', () => updatePrices(true))
+    monthlyRadio?.addEventListener('change', () => updatePrices(false))
   })
 </script>
