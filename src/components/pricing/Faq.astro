@@ -43,15 +43,14 @@ import * as m from '@/paraglide/messages'
 
         <details class="group border-b border-gray-800 last:border-b-0" id="faq-storage">
           <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
-            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">What is storage used for and how does it work?</span>
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.storage_what_is_it_used_for({}, { locale: Astro.locals.locale })}</span>
             <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
           <div class="px-8 pb-6 pt-2">
-            <div class="text-gray-200 leading-relaxed space-y-3">
-              <p>Storage is used to store your app update bundles, which contain web assets (HTML, CSS, JavaScript), version metadata, and checksums. It keeps all uploaded versions to support instant rollbacks, multiple release channels (production, beta, staging), and deployment history.</p>
-              <p>Storage usage grows with each OTA update since every update is stored as a full bundle. Typical usage is 2 GB for a few apps with limited history, and 10–20 GB for multiple apps with frequent releases.</p>
+            <div class="text-gray-200 leading-relaxed">
+              {m.storage_detailed_explanation({}, { locale: Astro.locals.locale })}
             </div>
           </div>
         </details>
@@ -72,14 +71,14 @@ import * as m from '@/paraglide/messages'
 
         <details class="group border-b border-gray-800 last:border-b-0" id="faq-build-time">
           <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
-            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">What does "build time" refer to in the plans?</span>
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.what_does_build_time_refer_to({}, { locale: Astro.locals.locale })}</span>
             <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
           <div class="px-8 pb-6 pt-2 bg-blue-950/10">
             <div class="text-gray-200 leading-relaxed">
-              Build time refers to the time Capgo spends building your native app in the cloud using Capgo Build, our cloud-based solution for iOS and Android. It allows you to build your app from any computer without needing a Mac, simplifies CI/CD workflows, and enables teammates who are not familiar with native builds to generate builds reliably. Using the Capgo CLI, you can trigger builds in a simple and reproducible way, often faster and easier than managing your own CI/CD setup.
+              {m.build_time_explanation({}, { locale: Astro.locals.locale })}
             </div>
           </div>
         </details>
@@ -298,28 +297,28 @@ import * as m from '@/paraglide/messages'
       <div class="space-y-1 bg-gray-800/20 rounded-2xl overflow-hidden border border-gray-800">
         <details class="group border-b border-gray-800 last:border-b-0 open:bg-blue-950/20 open:border-blue-600/30" id="faq-soc2">
           <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
-            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">SOC 2: what does it mean?</span>
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.soc2_what_does_it_mean({}, { locale: Astro.locals.locale })}</span>
             <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
           <div class="px-8 pb-6 pt-2 bg-blue-950/10">
             <div class="text-gray-200 leading-relaxed">
-              SOC 2 refers to SOC 2 Type II certification, a recognized security compliance standard. Capgo is SOC 2 Type II certified, meaning its systems and processes are independently audited to ensure high standards of security, availability, and confidentiality, including data protection, access controls, service reliability, and safe data handling. In practice, this means Capgo follows enterprise-grade security practices and can be used by companies with compliance requirements, corporate clients, and B2B or regulated environments. SOC 2 included in the Enterprise tier.
+              {m.soc2_explanation({}, { locale: Astro.locals.locale })}
             </div>
           </div>
         </details>
 
         <details class="group border-b border-gray-800 last:border-b-0 open:bg-blue-950/20 open:border-blue-600/30">
           <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
-            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">Can I use SOC 2 compliance with Solo, Maker, or Team plans?</span>
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.can_i_use_soc2_with_other_plans({}, { locale: Astro.locals.locale })}</span>
             <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
           <div class="px-8 pb-6 pt-2 bg-blue-950/10">
             <div class="text-gray-200 leading-relaxed">
-              For now, it's only available on the Enterprise plan.
+              {m.soc2_enterprise_only({}, { locale: Astro.locals.locale })}
             </div>
           </div>
         </details>

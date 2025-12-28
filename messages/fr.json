@@ -2638,5 +2638,13 @@
   "your_live_update_solution_for_capacitor_apps": "Votre solution de mises à jour en direct pour les applications Capacitor",
   "youre_in_good_company": "Vous êtes en bonne compagnie.",
   "zero_trust_security": "Sécurité Zéro-Confiance",
-  "zero_vendor_lockin_pay_provider_directly": "aucune dépendance à un fournisseur, payez votre fournisseur directement."
+  "zero_vendor_lockin_pay_provider_directly": "aucune dépendance à un fournisseur, payez votre fournisseur directement.",
+  "what_does_build_time_refer_to": "Que signifie \"temps de construction\" dans les plans ?",
+  "build_time_explanation": "Le temps de construction fait référence au temps que Capgo passe à construire votre application native dans le cloud en utilisant Capgo Build, notre solution cloud pour iOS et Android. Cela vous permet de construire votre application depuis n'importe quel ordinateur sans avoir besoin d'un Mac, simplifie les workflows CI/CD et permet aux coéquipiers qui ne sont pas familiers avec les builds natifs de générer des builds de manière fiable.",
+  "soc2_what_does_it_mean": "SOC 2 : que signifie-t-il ?",
+  "soc2_explanation": "SOC 2 fait référence à la certification SOC 2 Type II, une norme de conformité de sécurité reconnue. Capgo est certifié SOC 2 Type II, ce qui signifie que ses systèmes et processus sont audités de manière indépendante pour garantir des normes élevées de sécurité, disponibilité et confidentialité.",
+  "storage_what_is_it_used_for": "À quoi sert le stockage et comment fonctionne-t-il ?",
+  "storage_detailed_explanation": "Le stockage est utilisé pour stocker vos bundles de mise à jour d'application, qui contiennent des assets web (HTML, CSS, JavaScript), des métadonnées de version et des checksums. Il conserve toutes les versions téléchargées pour prendre en charge les rollbacks instantanés, plusieurs canaux de diffusion et l'historique de déploiement.",
+  "can_i_use_soc2_with_other_plans": "Puis-je utiliser la conformité SOC 2 avec les plans Solo, Maker ou Team ?",
+  "soc2_enterprise_only": "Pour l'instant, il n'est disponible que sur le plan Enterprise."
 }

@@ -2640,5 +2640,13 @@
   "your_live_update_solution_for_capacitor_apps": "Your Live Update Solution for Capacitor Apps",
   "youre_in_good_company": "You're in good company.",
   "zero_trust_security": "Zero-Trust Security",
-  "zero_vendor_lockin_pay_provider_directly": "zero vendor lock-in, pay your provider directly."
+  "zero_vendor_lockin_pay_provider_directly": "zero vendor lock-in, pay your provider directly.",
+  "what_does_build_time_refer_to": "What does \"build time\" refer to in the plans?",
+  "build_time_explanation": "Build time refers to the time Capgo spends building your native app in the cloud using Capgo Build, our cloud-based solution for iOS and Android. It allows you to build your app from any computer without needing a Mac, simplifies CI/CD workflows, and enables teammates who are not familiar with native builds to generate builds reliably. Using the Capgo CLI, you can trigger builds in a simple and reproducible way, often faster and easier than managing your own CI/CD setup.",
+  "soc2_what_does_it_mean": "SOC 2: what does it mean?",
+  "soc2_explanation": "SOC 2 refers to SOC 2 Type II certification, a recognized security compliance standard. Capgo is SOC 2 Type II certified, meaning its systems and processes are independently audited to ensure high standards of security, availability, and confidentiality, including data protection, access controls, service reliability, and safe data handling. In practice, this means Capgo follows enterprise-grade security practices and can be used by companies with compliance requirements, corporate clients, and B2B or regulated environments. SOC 2 included in the Enterprise tier.",
+  "storage_what_is_it_used_for": "What is storage used for and how does it work?",
+  "storage_detailed_explanation": "Storage is used to store your app update bundles, which contain web assets (HTML, CSS, JavaScript), version metadata, and checksums. It keeps all uploaded versions to support instant rollbacks, multiple release channels (production, beta, staging), and deployment history. Storage usage grows with each OTA update since every update is stored as a full bundle. Typical usage is 2 GB for a few apps with limited history, and 10–20 GB for multiple apps with frequent releases.",
+  "can_i_use_soc2_with_other_plans": "Can I use SOC 2 compliance with Solo, Maker, or Team plans?",
+  "soc2_enterprise_only": "For now, it's only available on the Enterprise plan."
 }
