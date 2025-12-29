@@ -114,70 +114,47 @@ content.ldJSON['@graph'].push(enterpriseService)
 
 <Layout content={content}>
   <!-- Hero Section -->
-  <section class="relative py-16 bg-gray-900 sm:py-20">
-    <!-- Animated teleport lines -->
+  <section class="relative py-20 sm:py-28 lg:py-36 overflow-hidden">
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      {
-        Array.from({ length: 20 }).map((_, i) => (
-          <div
-            class="absolute w-full teleport-line-animation"
-            style={{
-              top: `${i * 5 - 2}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              height: `${Math.random() * 1 + 1}px`,
-              opacity: Math.random() * 0.5 + 0.3,
-            }}
-          />
-        ))
-      }
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-full">
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+      </div>
     </div>
 
     <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div class="text-center">
-        <!-- Badge -->
-        <p class="inline-flex px-4 py-2 mb-8 text-base bg-gray-900 border border-gray-200 rounded-full font-pj">
-          <span class="text-gray-200">
-            {m.enterprise_ready()}
-          </span>
-        </p>
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="inline-flex items-center px-4 py-2 text-sm font-medium text-blue-200 border rounded-full border-blue-400/40 bg-blue-500/10 mb-8">
+          <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg>
+          {m.enterprise_ready()}
+        </div>
 
-        <h1 class="mb-8 text-3xl font-bold leading-tight text-white sm:text-4xl sm:leading-tight lg:leading-tight xl:text-6xl font-pj">
-          <span class="text-gray-200">
-            {m.deliver_updates({}, { locale: Astro.locals.locale })}
-          </span>
+        <h1 class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+          {m.deliver_updates({}, { locale: Astro.locals.locale })}
           <br />
-          <span class="text-white">{m.at_scale({}, { locale: Astro.locals.locale })}</span>
+          {m.at_scale({}, { locale: Astro.locals.locale })}
         </h1>
 
-        <h2 class="max-w-4xl mx-auto mt-6 text-base text-xl leading-7 text-gray-400 font-inter">
+        <p class="max-w-3xl mx-auto mt-8 text-xl leading-relaxed text-gray-300">
           {m.deploy_ota({}, { locale: Astro.locals.locale })}
-        </h2>
+        </p>
 
         <div class="flex flex-col items-center justify-center gap-4 mt-10 sm:flex-row">
-          <div class="relative inline-flex group" role="presentation">
-            <div
-              class="absolute -inset-px rounded-xl opacity-70 duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200 transitiona-all animate-tilt bg-[#44BCFF] blur-lg"
-            >
-            </div>
-            <a
-              href="https://cal.com/team/capgo/demo"
-              target="_blank"
-              class="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 border border-blue-500 rounded-xl hover:bg-gray-900 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none font-pj"
-              role="button"
-            >
-              {m.request_demo({}, { locale: Astro.locals.locale })}
-              <svg class="w-5 h-5 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-              </svg>
-            </a>
-          </div>
-
+          <a
+            href="https://cal.com/team/capgo/demo"
+            target="_blank"
+            class="px-8 py-4 text-base font-semibold text-white transition-all duration-200 bg-blue-600 rounded-xl hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-lg shadow-blue-500/25"
+          >
+            {m.request_demo({}, { locale: Astro.locals.locale })}
+          </a>
           <a
             href="https://cal.com/team/capgo/capgo-enterprise-inquiry"
             target="_blank"
-            class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-transparent border border-gray-200 rounded-xl hover:bg-gray-800 focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:outline-none font-pj"
+            class="px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 border border-gray-600 rounded-xl hover:bg-gray-800 hover:text-white"
           >
-            <span>{m.contact_sales({}, { locale: Astro.locals.locale })}</span>
+            {m.contact_sales({}, { locale: Astro.locals.locale })}
           </a>
         </div>
       </div>
@@ -945,46 +922,3 @@ content.ldJSON['@graph'].push(enterpriseService)
     </div>
   </section>
 </Layout>
-
-<style is:global>
-  /* Reuse animations from index.astro */
-  .teleport-line-animation {
-    left: -100%;
-    background-color: rgba(56, 189, 248, 0.3);
-    animation: teleport-line 5s cubic-bezier(0.1, 0.9, 0.2, 1) infinite;
-  }
-
-  @keyframes teleport-line {
-    0% {
-      transform: translateX(0) scaleX(0.1);
-      opacity: 0;
-    }
-    10% {
-      opacity: 0.5;
-    }
-    100% {
-      transform: translateX(200%) scaleX(1);
-      opacity: 0;
-    }
-  }
-
-  .data-stream-animation {
-    top: -100%;
-    background-color: rgba(56, 189, 248, 0.3);
-    animation: data-stream 8s linear infinite;
-  }
-
-  @keyframes data-stream {
-    0% {
-      transform: translateY(0);
-      opacity: 0;
-    }
-    10% {
-      opacity: 0.5;
-    }
-    100% {
-      transform: translateY(200%);
-      opacity: 0;
-    }
-  }
-</style>
