@@ -2639,6 +2639,7 @@
   "youre_in_good_company": "Du bist in guter Gesellschaft.",
   "zero_trust_security": "Zero-Trust-Sicherheit",
   "zero_vendor_lockin_pay_provider_directly": "Null Anbieterbindung, zahlen Sie Ihren Anbieter direkt.",
+
   "solutions_by_app_type": "Nach App-Typ",
   "solutions_by_use_case": "Nach Anwendungsfall",
   "solutions_production_updates": "Produktions-Updates",
@@ -3511,4 +3512,15 @@
   "solutions_by_team": "Nach Team",
   "solutions_by_industry": "Nach Branche",
   "solutions_testimonial": "Kundenstimme"
+
+,
+  "what_does_build_time_refer_to": "Was bedeutet \"Build-Zeit\" in den Plänen?",
+  "build_time_explanation": "Build-Zeit bezieht sich auf die Zeit, die Capgo für das Erstellen Ihrer nativen App in der Cloud mit Capgo Build verbringt, unserer Cloud-basierten Lösung für iOS und Android. Es ermöglicht Ihnen, Ihre App von jedem Computer aus zu erstellen, ohne einen Mac zu benötigen, vereinfacht CI/CD-Workflows und ermöglicht es Teammitgliedern, die nicht mit nativen Builds vertraut sind, zuverlässig Builds zu generieren.",
+  "soc2_what_does_it_mean": "SOC 2: Was bedeutet das?",
+  "soc2_explanation": "SOC 2 bezieht sich auf die SOC 2 Typ II Zertifizierung, einen anerkannten Sicherheits-Compliance-Standard. Capgo ist SOC 2 Typ II zertifiziert, was bedeutet, dass seine Systeme und Prozesse unabhängig auditiert werden, um hohe Standards für Sicherheit, Verfügbarkeit und Vertraulichkeit zu gewährleisten.",
+  "storage_what_is_it_used_for": "Wofür wird Speicher verwendet und wie funktioniert es?",
+  "storage_detailed_explanation": "Speicher wird verwendet, um Ihre App-Update-Bundles zu speichern, die Web-Assets (HTML, CSS, JavaScript), Versionsdaten und Checksums enthalten. Es bewahrt alle hochgeladenen Versionen auf, um sofortige Rollbacks, mehrere Release-Kanäle und den Bereitstellungsverlauf zu unterstützen.",
+  "can_i_use_soc2_with_other_plans": "Kann ich SOC 2 Compliance mit Solo-, Maker- oder Team-Plänen verwenden?",
+  "soc2_enterprise_only": "Derzeit ist es nur im Enterprise-Plan verfügbar."
+
 }

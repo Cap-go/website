@@ -1,0 +1,178 @@
+---
+title: "2FA Enforcement"
+description: "Learn how to enforce Two-Factor Authentication (2FA) for all members of your organization to enhance security and protect your apps."
+sidebar:
+  order: 10
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Two-Factor Authentication (2FA) enforcement allows organization administrators to require all members to have 2FA enabled on their accounts before accessing organization resources. This ensures a higher level of security for your apps and data.
+
+## Overview
+
+When 2FA enforcement is enabled for an organization:
+- All members must have 2FA enabled on their Capgo account
+- Members without 2FA will be denied access to the organization's apps
+- Both the web dashboard and CLI will enforce this requirement
+- New members must enable 2FA before they can access organization resources
+
+<Aside type="tip">
+
+2FA enforcement is particularly important for:
+- Enterprise organizations with strict security policies
+- Teams handling sensitive user data
+- Organizations in regulated industries (healthcare, finance, etc.)
+- Companies requiring SOC 2 or ISO 27001 compliance
+
+</Aside>
+
+## How It Works
+
+### Web Dashboard
+When you try to access an organization that requires 2FA, and you don't have it enabled:
+1. You'll see an access denied message
+2. You'll be directed to enable 2FA in your account settings
+3. Once enabled, you can access the organization normally
+
+### CLI Access
+When using the Capgo CLI to interact with apps in an organization that requires 2FA:
+
+```
+🔐 Access Denied: Two-Factor Authentication Required
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This organization requires all members to have 2FA enabled.
+
+To regain access:
+  1. Go to https://web.capgo.app/settings/account
+  2. Enable Two-Factor Authentication on your account
+  3. Try your command again
+```
+
+## Enabling 2FA Enforcement
+
+<Aside type="caution">
+
+Before enabling 2FA enforcement:
+- Ensure you have 2FA enabled on your own account
+- Notify all organization members to enable 2FA
+- Members without 2FA will immediately lose access
+
+</Aside>
+
+### Via Web Dashboard
+
+<Steps>
+
+1. Navigate to your organization settings
+2. Go to the **Security** section
+3. Toggle **Require 2FA for all members**
+4. Confirm the action
+
+</Steps>
+
+### Via CLI
+
+You can enable 2FA enforcement using the Capgo CLI:
+
+```shell
+# Enable 2FA enforcement for an organization
+npx @capgo/cli organisation set YOUR_ORG_ID --enforce-2fa
+
+# Disable 2FA enforcement
+npx @capgo/cli organisation set YOUR_ORG_ID --no-enforce-2fa
+```
+
+When enabling via CLI, you'll be shown:
+- Which members don't have 2FA enabled
+- A warning if you yourself don't have 2FA enabled
+- A confirmation prompt before applying the change
+
+## Checking Member 2FA Status
+
+### Via CLI
+
+You can list all organization members and their 2FA status:
+
+```shell
+npx @capgo/cli organisation members YOUR_ORG_ID
+```
+
+This will display:
+- Member email and role
+- Whether they have 2FA enabled
+- A summary of how many members need to enable 2FA
+
+### Via Web Dashboard
+
+In your organization settings, you can see whether each member has 2FA enabled.
+
+## Setting Up 2FA on Your Account
+
+If you need to enable 2FA on your account, see our [Two-Factor Authentication setup guide](/docs/webapp/mfa/).
+
+## Best Practices
+
+### Before Enabling Enforcement
+- **Communicate in advance**: Give members at least a week's notice before enabling enforcement
+- **Provide support**: Share the [2FA setup guide](/docs/webapp/mfa/) with your team
+- **Check readiness**: Use `npx @capgo/cli organisation members` to see who still needs to enable 2FA
+
+### After Enabling Enforcement
+- **Monitor access issues**: Be available to help members who get locked out
+- **Keep backup codes**: Remind members to save their 2FA backup codes
+- **Review regularly**: Periodically check that all members maintain 2FA
+
+### For CI/CD Pipelines
+- **Use API keys**: CI/CD systems should use API keys, not user accounts
+- **API key owners**: Ensure the user who created CI/CD API keys has 2FA enabled
+- **Rotate keys**: Regularly rotate API keys used in automated systems
+
+## Troubleshooting
+
+### "Access Denied: Two-Factor Authentication Required"
+
+**Problem**: You're seeing this error when trying to access an organization.
+
+**Solution**:
+1. Go to [Account Settings](https://web.capgo.app/settings/account)
+2. Enable 2FA on your account
+3. Try accessing the organization again
+
+### "Cannot enable 2FA enforcement"
+
+**Problem**: You can't enable 2FA enforcement for your organization.
+
+**Solution**:
+- Ensure you have `super_admin` rights in the organization
+- Enable 2FA on your own account first
+- Contact support if the issue persists
+
+### CLI Commands Failing
+
+**Problem**: CLI commands fail with 2FA-related errors.
+
+**Solution**:
+- Verify your API key is valid: `npx @capgo/cli doctor`
+- Ensure the API key owner has 2FA enabled
+- Re-authenticate if using login-based auth: `npx @capgo/cli login`
+
+## Compliance
+
+2FA enforcement helps your organization meet various compliance requirements:
+
+| Standard | Requirement | How 2FA Helps |
+|----------|-------------|---------------|
+| **SOC 2** | Access controls | Ensures strong authentication for all users |
+| **ISO 27001** | Information security | Adds a layer of identity verification |
+| **HIPAA** | Access management | Protects against unauthorized access |
+| **GDPR** | Data protection | Reduces risk of account compromise |
+| **PCI DSS** | Authentication controls | Meets multi-factor authentication requirements |
+
+## Next Steps
+
+- [Set up 2FA on your account](/docs/webapp/mfa/)
+- [Learn about organization management](/docs/webapp/organization-system/)
+- [Configure API keys for CI/CD](/docs/webapp/api-keys/)
+

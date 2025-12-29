@@ -2639,6 +2639,7 @@
   "youre_in_good_company": "Estás en buena compañía.",
   "zero_trust_security": "Seguridad de Cero Confianza",
   "zero_vendor_lockin_pay_provider_directly": "cero bloqueo de proveedor, paga directamente a tu proveedor.",
+
   "solutions_by_app_type": "Por tipo de app",
   "solutions_by_use_case": "Por caso de uso",
   "solutions_production_updates": "Actualizaciones de producción",
@@ -3511,4 +3512,15 @@
   "solutions_by_team": "Por equipo",
   "solutions_by_industry": "Por industria",
   "solutions_testimonial": "Testimonio de cliente"
+
+,
+  "what_does_build_time_refer_to": "¿Qué significa \"tiempo de construcción\" en los planes?",
+  "build_time_explanation": "El tiempo de construcción se refiere al tiempo que Capgo dedica a construir tu aplicación nativa en la nube usando Capgo Build, nuestra solución basada en la nube para iOS y Android. Te permite construir tu aplicación desde cualquier computadora sin necesidad de una Mac, simplifica los flujos de trabajo CI/CD y permite a los compañeros de equipo que no están familiarizados con las construcciones nativas generar builds de manera confiable.",
+  "soc2_what_does_it_mean": "SOC 2: ¿qué significa?",
+  "soc2_explanation": "SOC 2 se refiere a la certificación SOC 2 Tipo II, un estándar de cumplimiento de seguridad reconocido. Capgo está certificado SOC 2 Tipo II, lo que significa que sus sistemas y procesos son auditados de forma independiente para garantizar altos estándares de seguridad, disponibilidad y confidencialidad.",
+  "storage_what_is_it_used_for": "¿Para qué se usa el almacenamiento y cómo funciona?",
+  "storage_detailed_explanation": "El almacenamiento se usa para guardar tus bundles de actualización de aplicación, que contienen assets web (HTML, CSS, JavaScript), metadatos de versión y checksums. Mantiene todas las versiones subidas para soportar rollbacks instantáneos, múltiples canales de lanzamiento y historial de implementación.",
+  "can_i_use_soc2_with_other_plans": "¿Puedo usar el cumplimiento SOC 2 con los planes Solo, Maker o Team?",
+  "soc2_enterprise_only": "Por ahora, solo está disponible en el plan Enterprise."
+
 }
