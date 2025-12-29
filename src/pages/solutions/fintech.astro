@@ -1,0 +1,382 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import * as m from '@/paraglide/messages'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+
+const title = `${brand} | ${m.solutions_fintech_title({}, { locale })}`
+const description = m.solutions_fintech_description({}, { locale })
+
+const content = { title, description }
+---
+
+<Layout content={content}>
+  <div>
+    <!-- Hero Section -->
+    <section class="relative py-20 sm:py-28 lg:py-36 overflow-hidden">
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-full">
+          <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-3xl"></div>
+          <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+        </div>
+      </div>
+
+      <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="inline-flex items-center px-4 py-2 text-sm font-medium text-green-200 border rounded-full border-green-400/40 bg-green-500/10 mb-8">
+            <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {m.solutions_fintech_badge({}, { locale })}
+          </div>
+
+          <h1 class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+            {m.solutions_fintech_hero_title({}, { locale })}
+          </h1>
+
+          <p class="max-w-3xl mx-auto mt-8 text-xl leading-relaxed text-gray-300">
+            {m.solutions_fintech_hero_subtitle({}, { locale })}
+          </p>
+
+          <div class="flex flex-col items-center justify-center gap-4 mt-10 sm:flex-row">
+            <a
+              href={getRelativeLocaleUrl(locale, 'register')}
+              class="px-8 py-4 text-base font-semibold text-white transition-all duration-200 bg-green-600 rounded-xl hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 shadow-lg shadow-green-500/25"
+            >
+              {m.solutions_start_free_trial({}, { locale })}
+            </a>
+            <a
+              href={getRelativeLocaleUrl(locale, 'book_demo')}
+              class="px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 border border-gray-600 rounded-xl hover:bg-gray-800 hover:text-white"
+            >
+              {m.solutions_talk_to_team({}, { locale })}
+            </a>
+          </div>
+
+          <!-- Compliance badges -->
+          <div class="flex flex-wrap items-center justify-center gap-6 mt-12 text-sm text-gray-400">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              {m.solutions_fintech_badge_soc2({}, { locale })}
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              {m.solutions_fintech_badge_gdpr({}, { locale })}
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              {m.solutions_fintech_badge_e2e({}, { locale })}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Fintech Reality -->
+    <section class="py-20 bg-gray-800">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-sm font-semibold tracking-wide text-red-400 uppercase mb-4">{m.solutions_fintech_reality_label({}, { locale })}</h2>
+          <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_fintech_reality_title({}, { locale })}</h3>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <!-- Nightmare Scenario -->
+          <div class="bg-gray-900 rounded-2xl p-8 border border-red-500/30">
+            <h4 class="text-xl font-bold text-red-400 mb-6 flex items-center gap-2">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              {m.solutions_fintech_nightmare_title({}, { locale })}
+            </h4>
+            <div class="space-y-4 text-gray-300">
+              <p>{m.solutions_fintech_nightmare_para1({}, { locale })}</p>
+              <p>{m.solutions_fintech_nightmare_para2({}, { locale })}</p>
+              <p class="text-red-300 font-medium">{m.solutions_fintech_nightmare_para3({}, { locale })}</p>
+            </div>
+          </div>
+
+          <!-- Pain Points -->
+          <div class="space-y-4">
+            <div class="bg-gray-900 rounded-xl p-6 border border-gray-700">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-white mb-1">{m.solutions_fintech_pain1_title({}, { locale })}</h4>
+                  <p class="text-gray-400 text-sm">{m.solutions_fintech_pain1_desc({}, { locale })}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-gray-900 rounded-xl p-6 border border-gray-700">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-white mb-1">{m.solutions_fintech_pain2_title({}, { locale })}</h4>
+                  <p class="text-gray-400 text-sm">{m.solutions_fintech_pain2_desc({}, { locale })}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-gray-900 rounded-xl p-6 border border-gray-700">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-white mb-1">{m.solutions_fintech_pain3_title({}, { locale })}</h4>
+                  <p class="text-gray-400 text-sm">{m.solutions_fintech_pain3_desc({}, { locale })}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-gray-900 rounded-xl p-6 border border-gray-700">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-white mb-1">{m.solutions_fintech_pain4_title({}, { locale })}</h4>
+                  <p class="text-gray-400 text-sm">{m.solutions_fintech_pain4_desc({}, { locale })}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How We Solve It -->
+    <section class="py-20 bg-gray-900">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-sm font-semibold tracking-wide text-green-400 uppercase mb-4">{m.solutions_fintech_solution_label({}, { locale })}</h2>
+          <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_fintech_solution_title({}, { locale })}</h3>
+          <p class="mt-4 text-xl text-gray-400">{m.solutions_fintech_solution_subtitle({}, { locale })}</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Solution 1: Instant Security Patches -->
+          <div class="bg-gray-800 rounded-2xl p-8 border border-gray-700">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-white">{m.solutions_fintech_sol1_title({}, { locale })}</h3>
+            </div>
+            <p class="text-gray-300 mb-6">{m.solutions_fintech_sol1_desc({}, { locale })}</p>
+            <div class="bg-gray-900 rounded-xl p-4">
+              <pre class="text-sm text-gray-300 overflow-x-auto"><code><span class="text-gray-500"># Critical security fix at 2:00 AM</span>
+npm run build
+npx @capgo/cli bundle upload --channel production
+
+<span class="text-green-400">✔</span> 100% of users patched by 6:00 AM
+<span class="text-green-400">✔</span> No app store review needed
+<span class="text-green-400">✔</span> Full audit trail for compliance</code></pre>
+            </div>
+          </div>
+
+          <!-- Solution 2: Compliance-Ready -->
+          <div class="bg-gray-800 rounded-2xl p-8 border border-gray-700">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-white">{m.solutions_fintech_sol2_title({}, { locale })}</h3>
+            </div>
+            <p class="text-gray-300 mb-6">{m.solutions_fintech_sol2_desc({}, { locale })}</p>
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2 text-gray-400">
+                <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                {m.solutions_fintech_sol2_point1({}, { locale })}
+              </li>
+              <li class="flex items-center gap-2 text-gray-400">
+                <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                {m.solutions_fintech_sol2_point2({}, { locale })}
+              </li>
+              <li class="flex items-center gap-2 text-gray-400">
+                <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                {m.solutions_fintech_sol2_point3({}, { locale })}
+              </li>
+            </ul>
+          </div>
+
+          <!-- Solution 3: End-to-End Encryption -->
+          <div class="bg-gray-800 rounded-2xl p-8 border border-gray-700">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-white">{m.solutions_fintech_sol3_title({}, { locale })}</h3>
+            </div>
+            <p class="text-gray-300 mb-6">{m.solutions_fintech_sol3_desc({}, { locale })}</p>
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2 text-gray-400">
+                <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                {m.solutions_fintech_sol3_point1({}, { locale })}
+              </li>
+              <li class="flex items-center gap-2 text-gray-400">
+                <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                {m.solutions_fintech_sol3_point2({}, { locale })}
+              </li>
+              <li class="flex items-center gap-2 text-gray-400">
+                <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                {m.solutions_fintech_sol3_point3({}, { locale })}
+              </li>
+            </ul>
+          </div>
+
+          <!-- Solution 4: Instant Rollback -->
+          <div class="bg-gray-800 rounded-2xl p-8 border border-gray-700">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 bg-amber-500/20 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-white">{m.solutions_fintech_sol4_title({}, { locale })}</h3>
+            </div>
+            <p class="text-gray-300 mb-6">{m.solutions_fintech_sol4_desc({}, { locale })}</p>
+            <div class="bg-gray-900 rounded-xl p-4">
+              <div class="flex items-center justify-between p-3 bg-gray-800 rounded-lg mb-2">
+                <span class="text-gray-400">{m.solutions_fintech_sol4_detect({}, { locale })}</span>
+                <span class="text-red-400">{m.solutions_fintech_sol4_detect_time({}, { locale })}</span>
+              </div>
+              <div class="flex items-center justify-between p-3 bg-gray-800 rounded-lg mb-2">
+                <span class="text-gray-400">{m.solutions_fintech_sol4_rollback({}, { locale })}</span>
+                <span class="text-amber-400">{m.solutions_fintech_sol4_rollback_time({}, { locale })}</span>
+              </div>
+              <div class="flex items-center justify-between p-3 bg-green-500/10 rounded-lg border border-green-500/30">
+                <span class="text-green-300">{m.solutions_fintech_sol4_resolved({}, { locale })}</span>
+                <span class="text-green-400">{m.solutions_fintech_sol4_resolved_time({}, { locale })}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust & Compliance -->
+    <section class="py-20 bg-gray-800">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_fintech_trust_title({}, { locale })}</h2>
+          <p class="mt-4 text-xl text-gray-400">{m.solutions_fintech_trust_subtitle({}, { locale })}</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div class="p-8 text-center bg-gray-900 border border-gray-700 rounded-2xl">
+            <img src="/soc2.svg" alt="SOC 2" class="h-16 mx-auto mb-4 opacity-80" />
+            <h4 class="text-lg font-bold text-white mb-2">{m.solutions_fintech_cert1_title({}, { locale })}</h4>
+            <p class="text-gray-400 text-sm">{m.solutions_fintech_cert1_desc({}, { locale })}</p>
+          </div>
+          <div class="p-8 text-center bg-gray-900 border border-gray-700 rounded-2xl">
+            <img src="/gdpr.svg" alt="GDPR" class="h-16 mx-auto mb-4 opacity-80" />
+            <h4 class="text-lg font-bold text-white mb-2">{m.solutions_fintech_cert2_title({}, { locale })}</h4>
+            <p class="text-gray-400 text-sm">{m.solutions_fintech_cert2_desc({}, { locale })}</p>
+          </div>
+          <div class="p-8 text-center bg-gray-900 border border-gray-700 rounded-2xl">
+            <svg class="w-16 h-16 mx-auto mb-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            <h4 class="text-lg font-bold text-white mb-2">{m.solutions_fintech_cert3_title({}, { locale })}</h4>
+            <p class="text-gray-400 text-sm">{m.solutions_fintech_cert3_desc({}, { locale })}</p>
+          </div>
+        </div>
+
+        <!-- Open Source Advantage -->
+        <div class="max-w-3xl mx-auto bg-gray-900 rounded-2xl p-8 border border-green-500/30">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="text-xl font-bold text-white mb-2">{m.solutions_fintech_opensource_title({}, { locale })}</h4>
+              <p class="text-gray-300 mb-4">{m.solutions_fintech_opensource_desc({}, { locale })}</p>
+              <a href="https://github.com/Cap-go/capgo" class="inline-flex items-center gap-2 text-green-400 hover:underline">
+                {m.solutions_fintech_opensource_cta({}, { locale })}
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 bg-gray-900">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="relative px-8 py-16 overflow-hidden bg-gradient-to-r from-green-600 to-emerald-700 rounded-3xl sm:px-16">
+          <div aria-hidden="true" class="absolute inset-0">
+            <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360">
+              <path class="text-green-500 text-opacity-40" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"></path>
+              <path class="text-emerald-400 text-opacity-20" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"></path>
+            </svg>
+          </div>
+          <div class="relative text-center">
+            <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_fintech_cta_title({}, { locale })}</h2>
+            <p class="max-w-2xl mx-auto mt-4 text-lg text-green-100">{m.solutions_fintech_cta_subtitle({}, { locale })}</p>
+            <div class="flex flex-col items-center justify-center gap-4 mt-8 sm:flex-row">
+              <a
+                href={getRelativeLocaleUrl(locale, 'register')}
+                class="px-8 py-4 text-base font-semibold text-green-600 transition-all duration-200 bg-white rounded-xl hover:bg-gray-100 shadow-lg"
+              >
+                {m.solutions_start_free_trial({}, { locale })}
+              </a>
+              <a
+                href={getRelativeLocaleUrl(locale, 'book_demo')}
+                class="px-8 py-4 text-base font-semibold text-white transition-all duration-200 border rounded-xl border-white/30 hover:bg-white/10"
+              >
+                {m.solutions_schedule_demo({}, { locale })}
+              </a>
+            </div>
+            <p class="mt-6 text-sm text-green-200">{m.solutions_fintech_cta_note({}, { locale })}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

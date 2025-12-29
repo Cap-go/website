@@ -1,0 +1,317 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import * as m from '@/paraglide/messages'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+
+const title = `${brand} | ${m.solutions_version_targeting_title({}, { locale })}`
+const description = m.solutions_version_targeting_description({}, { locale })
+
+const content = { title, description }
+---
+
+<Layout content={content}>
+  <div>
+    <!-- Hero Section -->
+    <section class="relative py-16 sm:py-20 lg:py-28">
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        {
+          Array.from({ length: 15 }).map((_, i) => (
+            <div
+              class="absolute w-2 h-2 bg-rose-500 rounded-full opacity-20 animate-pulse"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${2 + Math.random() * 2}s`,
+              }}
+            />
+          ))
+        }
+      </div>
+
+      <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <p class="inline-flex px-4 py-2 text-sm text-rose-100 border rounded-full font-medium border-rose-400/40 bg-rose-500/10">
+            <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+            </svg>
+            {m.solutions_version_targeting({}, { locale })}
+          </p>
+          <h1 class="mt-6 text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+            {m.solutions_version_targeting_hero_title({}, { locale })}
+          </h1>
+          <p class="max-w-3xl mx-auto mt-6 text-xl leading-relaxed text-gray-300">
+            {m.solutions_version_targeting_hero_subtitle({}, { locale })}
+          </p>
+
+          <div class="flex flex-col items-center justify-center gap-4 mt-10 sm:flex-row">
+            <a
+              href={getRelativeLocaleUrl(locale, 'register')}
+              class="px-8 py-4 text-base font-semibold text-white transition-all duration-200 bg-rose-600 rounded-xl hover:bg-rose-700 focus:ring-2 focus:ring-rose-500 focus:ring-offset-2"
+            >
+              {m.solutions_get_started({}, { locale })}
+            </a>
+            <a
+              href={getRelativeLocaleUrl(locale, 'docs/live-updates/channels')}
+              class="px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 border border-gray-600 rounded-xl hover:bg-gray-800 hover:text-white"
+            >
+              {m.solutions_view_docs({}, { locale })}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="py-16 bg-gray-800 sm:py-20">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <div class="p-8 transition-all duration-300 bg-gray-900 border border-gray-700 rounded-2xl hover:border-rose-500/50">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl ring-1 bg-rose-500/15 ring-rose-300/40">
+              <svg class="w-7 h-7 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_version_targeting_feature1_title({}, { locale })}</h3>
+            <p class="text-gray-400 leading-relaxed">{m.solutions_version_targeting_feature1_desc({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 transition-all duration-300 bg-gray-900 border border-gray-700 rounded-2xl hover:border-rose-500/50">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl ring-1 bg-rose-500/15 ring-rose-300/40">
+              <svg class="w-7 h-7 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_version_targeting_feature2_title({}, { locale })}</h3>
+            <p class="text-gray-400 leading-relaxed">{m.solutions_version_targeting_feature2_desc({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 transition-all duration-300 bg-gray-900 border border-gray-700 rounded-2xl hover:border-rose-500/50">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl ring-1 bg-rose-500/15 ring-rose-300/40">
+              <svg class="w-7 h-7 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_version_targeting_feature3_title({}, { locale })}</h3>
+            <p class="text-gray-400 leading-relaxed">{m.solutions_version_targeting_feature3_desc({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 transition-all duration-300 bg-gray-900 border border-gray-700 rounded-2xl hover:border-rose-500/50">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl ring-1 bg-rose-500/15 ring-rose-300/40">
+              <svg class="w-7 h-7 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_version_targeting_feature4_title({}, { locale })}</h3>
+            <p class="text-gray-400 leading-relaxed">{m.solutions_version_targeting_feature4_desc({}, { locale })}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AppFlow Migration -->
+    <section class="py-16 bg-gray-900 sm:py-20">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="grid items-center gap-12 lg:grid-cols-2">
+          <div>
+            <div class="inline-flex px-3 py-1 mb-6 text-xs font-semibold tracking-wide text-rose-400 uppercase border rounded-full border-rose-400/30 bg-rose-500/10">
+              AppFlow Migration
+            </div>
+            <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_version_targeting_appflow_title({}, { locale })}</h2>
+            <p class="mt-6 text-lg text-gray-300 leading-relaxed">{m.solutions_version_targeting_appflow_desc({}, { locale })}</p>
+
+            <ul class="mt-8 space-y-4">
+              <li class="flex items-start gap-3">
+                <div class="flex items-center justify-center w-6 h-6 mt-0.5 rounded-full bg-rose-500/20 text-rose-400 text-sm font-bold">1</div>
+                <span class="text-gray-300">{m.solutions_version_targeting_appflow_step1({}, { locale })}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="flex items-center justify-center w-6 h-6 mt-0.5 rounded-full bg-rose-500/20 text-rose-400 text-sm font-bold">2</div>
+                <span class="text-gray-300">{m.solutions_version_targeting_appflow_step2({}, { locale })}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="flex items-center justify-center w-6 h-6 mt-0.5 rounded-full bg-rose-500/20 text-rose-400 text-sm font-bold">3</div>
+                <span class="text-gray-300">{m.solutions_version_targeting_appflow_step3({}, { locale })}</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="flex items-center justify-center w-6 h-6 mt-0.5 rounded-full bg-rose-500/20 text-rose-400 text-sm font-bold">4</div>
+                <span class="text-gray-300">{m.solutions_version_targeting_appflow_step4({}, { locale })}</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="p-6 bg-gray-800 border border-gray-700 rounded-2xl">
+            <div class="flex items-center gap-2 mb-4">
+              <div class="w-3 h-3 bg-gray-500 rounded-full"></div>
+              <div class="w-3 h-3 bg-gray-500 rounded-full"></div>
+              <div class="w-3 h-3 bg-gray-500 rounded-full"></div>
+              <span class="ml-2 text-sm text-gray-500">capacitor.config.ts</span>
+            </div>
+            <pre class="overflow-x-auto text-sm text-gray-300"><code><span class="text-gray-500">// Set channel based on native version</span>
+import {'{'} CapacitorConfig {'}'} from '@capacitor/cli'
+import {'{'} version {'}'} from './package.json'
+
+const config: CapacitorConfig = {'{'}
+  plugins: {'{'}
+    CapacitorUpdater: {'{'}
+      <span class="text-rose-400">defaultChannel</span>: `native-${'{'}version{'}'}`,
+    {'}'}
+  {'}'}
+{'}'}
+
+<span class="text-gray-500">// Upload to specific version channels</span>
+<span class="text-gray-500"># Push to all 1.5.x versions</span>
+npx @capgo/cli bundle upload --channel native-1.5.0
+npx @capgo/cli bundle upload --channel native-1.5.1
+npx @capgo/cli bundle upload --channel native-1.5.2
+
+<span class="text-gray-500"># Skip older versions that can't support new features</span>
+<span class="text-gray-500"># native-1.4.x devices stay on their current bundle</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Common Scenarios -->
+    <section class="py-16 bg-gray-800 sm:py-20">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="mb-16 text-center">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_version_targeting_scenarios_title({}, { locale })}</h2>
+        </div>
+
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div class="p-8 bg-gray-900 border border-gray-700 rounded-2xl">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl bg-red-500/15">
+              <svg class="w-7 h-7 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_version_targeting_scenarios_breaking({}, { locale })}</h3>
+            <p class="text-gray-400">{m.solutions_version_targeting_scenarios_breaking_desc({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 bg-gray-900 border border-gray-700 rounded-2xl">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl bg-amber-500/15">
+              <svg class="w-7 h-7 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_version_targeting_scenarios_gradual({}, { locale })}</h3>
+            <p class="text-gray-400">{m.solutions_version_targeting_scenarios_gradual_desc({}, { locale })}</p>
+          </div>
+
+          <div class="p-8 bg-gray-900 border border-gray-700 rounded-2xl">
+            <div class="flex items-center justify-center w-14 h-14 mb-6 rounded-xl bg-gray-500/15">
+              <svg class="w-7 h-7 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.solutions_version_targeting_scenarios_sunset({}, { locale })}</h3>
+            <p class="text-gray-400">{m.solutions_version_targeting_scenarios_sunset_desc({}, { locale })}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual Diagram -->
+    <section class="py-16 bg-gray-900 sm:py-20">
+      <div class="px-4 mx-auto max-w-5xl sm:px-6 lg:px-8">
+        <div class="mb-12 text-center">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">Version-to-Channel Mapping</h2>
+          <p class="mt-4 text-lg text-gray-400">Each native version points to its own channel for precise update control</p>
+        </div>
+
+        <div class="p-8 bg-gray-800 border border-gray-700 rounded-2xl">
+          <div class="space-y-6">
+            <!-- Version 2.0 -->
+            <div class="flex items-center gap-4">
+              <div class="flex-shrink-0 w-32">
+                <div class="px-4 py-2 text-center text-white bg-rose-600 rounded-lg">
+                  <div class="text-sm font-medium">Native 2.0</div>
+                </div>
+              </div>
+              <div class="flex-1 h-1 bg-rose-500/50"></div>
+              <div class="flex-shrink-0 w-40">
+                <div class="px-4 py-2 text-center text-white bg-gray-700 rounded-lg">
+                  <div class="text-sm font-medium">native-2.0.0</div>
+                  <div class="text-xs text-gray-400">Latest bundle</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Version 1.5 -->
+            <div class="flex items-center gap-4">
+              <div class="flex-shrink-0 w-32">
+                <div class="px-4 py-2 text-center text-white bg-amber-600 rounded-lg">
+                  <div class="text-sm font-medium">Native 1.5</div>
+                </div>
+              </div>
+              <div class="flex-1 h-1 bg-amber-500/50"></div>
+              <div class="flex-shrink-0 w-40">
+                <div class="px-4 py-2 text-center text-white bg-gray-700 rounded-lg">
+                  <div class="text-sm font-medium">native-1.5.0</div>
+                  <div class="text-xs text-gray-400">Latest bundle</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Version 1.4 -->
+            <div class="flex items-center gap-4">
+              <div class="flex-shrink-0 w-32">
+                <div class="px-4 py-2 text-center text-white bg-gray-600 rounded-lg">
+                  <div class="text-sm font-medium">Native 1.4</div>
+                </div>
+              </div>
+              <div class="flex-1 h-1 bg-gray-500/50"></div>
+              <div class="flex-shrink-0 w-40">
+                <div class="px-4 py-2 text-center text-gray-300 bg-gray-700 rounded-lg">
+                  <div class="text-sm font-medium">native-1.4.0</div>
+                  <div class="text-xs text-gray-500">No new updates</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="mt-8 text-center text-gray-400">
+            Push updates to 2.0 and 1.5 channels only. Users on 1.4 stay stable on their last working bundle.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gray-900 sm:py-20">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="relative px-8 py-16 overflow-hidden bg-gradient-to-r from-rose-600 to-rose-800 rounded-3xl sm:px-16">
+          <div aria-hidden="true" class="absolute inset-0">
+            <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360">
+              <path class="text-rose-500 text-opacity-40" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"></path>
+              <path class="text-rose-400 text-opacity-20" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"></path>
+            </svg>
+          </div>
+          <div class="relative text-center">
+            <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_version_targeting_cta_title({}, { locale })}</h2>
+            <p class="max-w-2xl mx-auto mt-4 text-lg text-rose-100">{m.solutions_version_targeting_cta_subtitle({}, { locale })}</p>
+            <div class="flex flex-col items-center justify-center gap-4 mt-8 sm:flex-row">
+              <a
+                href={getRelativeLocaleUrl(locale, 'register')}
+                class="px-8 py-4 text-base font-semibold text-rose-600 transition-all duration-200 bg-white rounded-xl hover:bg-gray-100"
+              >
+                {m.solutions_get_started({}, { locale })}
+              </a>
+              <a
+                href={getRelativeLocaleUrl(locale, 'pricing')}
+                class="px-8 py-4 text-base font-semibold text-white transition-all duration-200 border rounded-xl border-white/30 hover:bg-white/10"
+              >
+                {m.pricing({}, { locale })}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

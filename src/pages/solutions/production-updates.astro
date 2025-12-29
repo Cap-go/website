@@ -1,0 +1,740 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import * as m from '@/paraglide/messages'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+
+const title = `${brand} | ${m.solutions_production_updates_title({}, { locale })}`
+const description = m.solutions_production_updates_description({}, { locale })
+
+const content = { title, description }
+---
+
+<Layout content={content}>
+  <div>
+    <!-- Hero Section with Problem Statement -->
+    <section class="relative py-20 sm:py-28 lg:py-36 overflow-hidden">
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-full">
+          <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+          <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+        </div>
+      </div>
+
+      <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="inline-flex items-center px-4 py-2 text-sm font-medium text-blue-200 border rounded-full border-blue-400/40 bg-blue-500/10 mb-8">
+            <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+            </svg>
+            {m.solutions_production_updates({}, { locale })}
+          </div>
+
+          <h1 class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+            {m.solutions_production_updates_hero_title({}, { locale })}
+          </h1>
+
+          <p class="max-w-3xl mx-auto mt-8 text-xl leading-relaxed text-gray-300">
+            {m.solutions_production_updates_hero_subtitle({}, { locale })}
+          </p>
+
+          <div class="flex flex-col items-center justify-center gap-4 mt-10 sm:flex-row">
+            <a
+              href={getRelativeLocaleUrl(locale, 'register')}
+              class="px-8 py-4 text-base font-semibold text-white transition-all duration-200 bg-blue-600 rounded-xl hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-lg shadow-blue-500/25"
+            >
+              {m.solutions_start_free_trial({}, { locale })}
+            </a>
+            <a
+              href={getRelativeLocaleUrl(locale, 'book_demo')}
+              class="px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 border border-gray-600 rounded-xl hover:bg-gray-800 hover:text-white"
+            >
+              {m.solutions_talk_to_team({}, { locale })}
+            </a>
+          </div>
+
+          <!-- Trust Badges -->
+          <div class="flex flex-wrap items-center justify-center gap-6 mt-12 text-sm text-gray-400">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              {m.solutions_no_credit_card({}, { locale })}
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              {m.solutions_setup_minutes({}, { locale })}
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              {m.solutions_app_store_compliant({}, { locale })}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Problem: Detailed Pain Point Section -->
+    <section class="py-20 bg-gray-800">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-sm font-semibold tracking-wide text-red-400 uppercase mb-4">{m.solutions_the_problem({}, { locale })}</h2>
+          <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_production_problem_title({}, { locale })}</h3>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <!-- Problem Visualization -->
+          <div class="bg-gray-900 rounded-2xl p-8 border border-red-500/30">
+            <h4 class="text-xl font-bold text-white mb-6">{m.solutions_traditional_workflow({}, { locale })}</h4>
+
+            <div class="space-y-6">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
+                  <span class="text-red-400 font-bold">1</span>
+                </div>
+                <div>
+                  <p class="font-semibold text-white">{m.solutions_problem_step1_title({}, { locale })}</p>
+                  <p class="text-gray-400 text-sm mt-1">{m.solutions_problem_step1_desc({}, { locale })}</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
+                  <span class="text-red-400 font-bold">2</span>
+                </div>
+                <div>
+                  <p class="font-semibold text-white">{m.solutions_problem_step2_title({}, { locale })}</p>
+                  <p class="text-gray-400 text-sm mt-1">{m.solutions_problem_step2_desc({}, { locale })}</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
+                  <span class="text-red-400 font-bold">3</span>
+                </div>
+                <div>
+                  <p class="font-semibold text-white">{m.solutions_problem_step3_title({}, { locale })}</p>
+                  <p class="text-gray-400 text-sm mt-1">{m.solutions_problem_step3_desc({}, { locale })}</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
+                  <span class="text-red-400 font-bold">4</span>
+                </div>
+                <div>
+                  <p class="font-semibold text-white">{m.solutions_problem_step4_title({}, { locale })}</p>
+                  <p class="text-gray-400 text-sm mt-1">{m.solutions_problem_step4_desc({}, { locale })}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 p-4 bg-red-500/10 rounded-xl border border-red-500/30">
+              <p class="text-red-300 font-medium">{m.solutions_problem_result({}, { locale })}</p>
+            </div>
+          </div>
+
+          <!-- Real World Impact -->
+          <div>
+            <h4 class="text-xl font-bold text-white mb-6">{m.solutions_real_cost({}, { locale })}</h4>
+
+            <div class="space-y-6">
+              <div class="p-6 bg-gray-900 rounded-xl border border-gray-700">
+                <div class="flex items-center gap-4 mb-3">
+                  <div class="w-12 h-12 rounded-full bg-red-500/20 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-2xl font-bold text-white">3-7 {m.solutions_days({}, { locale })}</p>
+                    <p class="text-gray-400">{m.solutions_avg_review_time({}, { locale })}</p>
+                  </div>
+                </div>
+                <p class="text-gray-400 text-sm">{m.solutions_review_time_explanation({}, { locale })}</p>
+              </div>
+
+              <div class="p-6 bg-gray-900 rounded-xl border border-gray-700">
+                <div class="flex items-center gap-4 mb-3">
+                  <div class="w-12 h-12 rounded-full bg-red-500/20 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-2xl font-bold text-white">23%</p>
+                    <p class="text-gray-400">{m.solutions_user_churn({}, { locale })}</p>
+                  </div>
+                </div>
+                <p class="text-gray-400 text-sm">{m.solutions_churn_explanation({}, { locale })}</p>
+              </div>
+
+              <div class="p-6 bg-gray-900 rounded-xl border border-gray-700">
+                <div class="flex items-center gap-4 mb-3">
+                  <div class="w-12 h-12 rounded-full bg-red-500/20 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-2xl font-bold text-white">$47,000</p>
+                    <p class="text-gray-400">{m.solutions_avg_cost_per_bug({}, { locale })}</p>
+                  </div>
+                </div>
+                <p class="text-gray-400 text-sm">{m.solutions_bug_cost_explanation({}, { locale })}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Solution: How Capgo Works -->
+    <section class="py-20 bg-gray-900">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-sm font-semibold tracking-wide text-green-400 uppercase mb-4">{m.solutions_the_solution({}, { locale })}</h2>
+          <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_production_solution_title({}, { locale })}</h3>
+          <p class="mt-4 text-xl text-gray-400">{m.solutions_production_solution_subtitle({}, { locale })}</p>
+        </div>
+
+        <!-- Solution Visualization -->
+        <div class="bg-gray-800 rounded-2xl p-8 border border-green-500/30 max-w-4xl mx-auto mb-16">
+          <h4 class="text-xl font-bold text-white mb-6 text-center">{m.solutions_with_capgo({}, { locale })}</h4>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="text-center p-6 bg-gray-900 rounded-xl">
+              <div class="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
+                <span class="text-green-400 font-bold text-xl">1</span>
+              </div>
+              <p class="font-semibold text-white mb-2">{m.solutions_solution_step1_title({}, { locale })}</p>
+              <p class="text-gray-400 text-sm">{m.solutions_solution_step1_desc({}, { locale })}</p>
+              <p class="text-green-400 font-medium mt-3">{m.solutions_solution_step1_time({}, { locale })}</p>
+            </div>
+
+            <div class="text-center p-6 bg-gray-900 rounded-xl">
+              <div class="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
+                <span class="text-green-400 font-bold text-xl">2</span>
+              </div>
+              <p class="font-semibold text-white mb-2">{m.solutions_solution_step2_title({}, { locale })}</p>
+              <p class="text-gray-400 text-sm">{m.solutions_solution_step2_desc({}, { locale })}</p>
+              <p class="text-green-400 font-medium mt-3">{m.solutions_solution_step2_time({}, { locale })}</p>
+            </div>
+
+            <div class="text-center p-6 bg-gray-900 rounded-xl">
+              <div class="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
+                <span class="text-green-400 font-bold text-xl">3</span>
+              </div>
+              <p class="font-semibold text-white mb-2">{m.solutions_solution_step3_title({}, { locale })}</p>
+              <p class="text-gray-400 text-sm">{m.solutions_solution_step3_desc({}, { locale })}</p>
+              <p class="text-green-400 font-medium mt-3">{m.solutions_solution_step3_time({}, { locale })}</p>
+            </div>
+          </div>
+
+          <div class="mt-8 p-4 bg-green-500/10 rounded-xl border border-green-500/30 text-center">
+            <p class="text-green-300 font-medium">{m.solutions_solution_result({}, { locale })}</p>
+          </div>
+        </div>
+
+        <!-- Code Example -->
+        <div class="max-w-3xl mx-auto">
+          <div class="p-6 bg-gray-800 border border-gray-700 rounded-2xl">
+            <div class="flex items-center gap-2 mb-4">
+              <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+              <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+              <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+              <span class="ml-2 text-sm text-gray-500">Terminal</span>
+            </div>
+            <pre class="overflow-x-auto text-sm text-gray-300"><code><span class="text-gray-500"># One-time setup (5 minutes)</span>
+npm install @capgo/capacitor-updater
+npx cap sync
+
+<span class="text-gray-500"># Deploy an update (30 seconds)</span>
+npm run build
+npx @capgo/cli bundle upload
+
+<span class="text-green-400">✔</span> Bundle uploaded successfully (2.3 MB)
+<span class="text-green-400">✔</span> 47,382 devices will receive update on next launch
+<span class="text-green-400">✔</span> Average rollout time: 4 hours
+
+<span class="text-gray-500"># That's it. No app store. No review. No waiting.</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Real Business Scenario -->
+    <section class="py-20 bg-gray-800">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-sm font-semibold tracking-wide text-blue-400 uppercase mb-4">{m.solutions_real_world({}, { locale })}</h2>
+          <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_scenario_title({}, { locale })}</h3>
+        </div>
+
+        <div class="bg-gray-900 rounded-2xl p-8 lg:p-12 border border-gray-700 max-w-5xl mx-auto">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- The Story -->
+            <div>
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center">
+                  <svg class="w-6 h-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="text-xl font-bold text-white">{m.solutions_scenario_company({}, { locale })}</h4>
+                  <p class="text-gray-400">{m.solutions_scenario_industry({}, { locale })}</p>
+                </div>
+              </div>
+
+              <div class="space-y-6 text-gray-300">
+                <p>{m.solutions_scenario_para1({}, { locale })}</p>
+                <p>{m.solutions_scenario_para2({}, { locale })}</p>
+                <p>{m.solutions_scenario_para3({}, { locale })}</p>
+              </div>
+            </div>
+
+            <!-- The Results -->
+            <div class="bg-gray-800 rounded-xl p-6">
+              <h4 class="text-lg font-bold text-white mb-6">{m.solutions_scenario_results({}, { locale })}</h4>
+
+              <div class="space-y-4">
+                <div class="flex items-center justify-between p-4 bg-gray-900 rounded-lg">
+                  <span class="text-gray-400">{m.solutions_scenario_metric1_label({}, { locale })}</span>
+                  <span class="text-2xl font-bold text-green-400">{m.solutions_scenario_metric1_value({}, { locale })}</span>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-gray-900 rounded-lg">
+                  <span class="text-gray-400">{m.solutions_scenario_metric2_label({}, { locale })}</span>
+                  <span class="text-2xl font-bold text-green-400">{m.solutions_scenario_metric2_value({}, { locale })}</span>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-gray-900 rounded-lg">
+                  <span class="text-gray-400">{m.solutions_scenario_metric3_label({}, { locale })}</span>
+                  <span class="text-2xl font-bold text-green-400">{m.solutions_scenario_metric3_value({}, { locale })}</span>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-gray-900 rounded-lg">
+                  <span class="text-gray-400">{m.solutions_scenario_metric4_label({}, { locale })}</span>
+                  <span class="text-2xl font-bold text-green-400">{m.solutions_scenario_metric4_value({}, { locale })}</span>
+                </div>
+              </div>
+
+              <div class="mt-6 p-4 bg-blue-500/10 rounded-lg border border-blue-500/30">
+                <p class="text-blue-300 text-sm italic">"{m.solutions_scenario_quote({}, { locale })}"</p>
+                <p class="text-gray-400 text-sm mt-2">— {m.solutions_scenario_quote_author({}, { locale })}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Benefits with Deep Explanation -->
+    <section class="py-20 bg-gray-900">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_why_teams_choose({}, { locale })}</h2>
+          <p class="mt-4 text-xl text-gray-400">{m.solutions_benefits_subtitle({}, { locale })}</p>
+        </div>
+
+        <div class="space-y-8">
+          <!-- Benefit 1: Silent Updates -->
+          <div class="bg-gray-800 rounded-2xl p-8 lg:p-10 border border-gray-700">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div class="lg:col-span-2">
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.465a5 5 0 001.897-7.72m-3.732 9.143a9 9 0 010-12.728" />
+                    </svg>
+                  </div>
+                  <h3 class="text-xl font-bold text-white">{m.solutions_benefit1_title({}, { locale })}</h3>
+                </div>
+                <p class="text-gray-300 mb-4">{m.solutions_benefit1_desc({}, { locale })}</p>
+                <ul class="space-y-2">
+                  <li class="flex items-start gap-2 text-gray-400">
+                    <svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    {m.solutions_benefit1_point1({}, { locale })}
+                  </li>
+                  <li class="flex items-start gap-2 text-gray-400">
+                    <svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    {m.solutions_benefit1_point2({}, { locale })}
+                  </li>
+                  <li class="flex items-start gap-2 text-gray-400">
+                    <svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    {m.solutions_benefit1_point3({}, { locale })}
+                  </li>
+                </ul>
+              </div>
+              <div class="bg-gray-900 rounded-xl p-6 flex flex-col justify-center">
+                <p class="text-4xl font-bold text-blue-400 mb-2">95%</p>
+                <p class="text-gray-400">{m.solutions_benefit1_stat({}, { locale })}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Benefit 2: Automatic Rollback -->
+          <div class="bg-gray-800 rounded-2xl p-8 lg:p-10 border border-gray-700">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div class="lg:col-span-2">
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
+                    </svg>
+                  </div>
+                  <h3 class="text-xl font-bold text-white">{m.solutions_benefit2_title({}, { locale })}</h3>
+                </div>
+                <p class="text-gray-300 mb-4">{m.solutions_benefit2_desc({}, { locale })}</p>
+                <ul class="space-y-2">
+                  <li class="flex items-start gap-2 text-gray-400">
+                    <svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    {m.solutions_benefit2_point1({}, { locale })}
+                  </li>
+                  <li class="flex items-start gap-2 text-gray-400">
+                    <svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    {m.solutions_benefit2_point2({}, { locale })}
+                  </li>
+                  <li class="flex items-start gap-2 text-gray-400">
+                    <svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    {m.solutions_benefit2_point3({}, { locale })}
+                  </li>
+                </ul>
+              </div>
+              <div class="bg-gray-900 rounded-xl p-6 flex flex-col justify-center">
+                <p class="text-4xl font-bold text-purple-400 mb-2">&lt;10s</p>
+                <p class="text-gray-400">{m.solutions_benefit2_stat({}, { locale })}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Benefit 3: App Store Compliant -->
+          <div class="bg-gray-800 rounded-2xl p-8 lg:p-10 border border-gray-700">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div class="lg:col-span-2">
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <h3 class="text-xl font-bold text-white">{m.solutions_benefit3_title({}, { locale })}</h3>
+                </div>
+                <p class="text-gray-300 mb-4">{m.solutions_benefit3_desc({}, { locale })}</p>
+                <ul class="space-y-2">
+                  <li class="flex items-start gap-2 text-gray-400">
+                    <svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    {m.solutions_benefit3_point1({}, { locale })}
+                  </li>
+                  <li class="flex items-start gap-2 text-gray-400">
+                    <svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    {m.solutions_benefit3_point2({}, { locale })}
+                  </li>
+                  <li class="flex items-start gap-2 text-gray-400">
+                    <svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    {m.solutions_benefit3_point3({}, { locale })}
+                  </li>
+                </ul>
+              </div>
+              <div class="bg-gray-900 rounded-xl p-6 flex flex-col justify-center">
+                <p class="text-4xl font-bold text-green-400 mb-2">100%</p>
+                <p class="text-gray-400">{m.solutions_benefit3_stat({}, { locale })}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="py-20 bg-gray-800">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_when_to_use({}, { locale })}</h2>
+          <p class="mt-4 text-xl text-gray-400">{m.solutions_use_cases_subtitle({}, { locale })}</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-gray-900 rounded-xl p-6 border border-gray-700 hover:border-blue-500/50 transition-colors">
+            <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+              </svg>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">{m.solutions_usecase1_title({}, { locale })}</h4>
+            <p class="text-gray-400 text-sm">{m.solutions_usecase1_desc({}, { locale })}</p>
+          </div>
+
+          <div class="bg-gray-900 rounded-xl p-6 border border-gray-700 hover:border-blue-500/50 transition-colors">
+            <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">{m.solutions_usecase2_title({}, { locale })}</h4>
+            <p class="text-gray-400 text-sm">{m.solutions_usecase2_desc({}, { locale })}</p>
+          </div>
+
+          <div class="bg-gray-900 rounded-xl p-6 border border-gray-700 hover:border-blue-500/50 transition-colors">
+            <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">{m.solutions_usecase3_title({}, { locale })}</h4>
+            <p class="text-gray-400 text-sm">{m.solutions_usecase3_desc({}, { locale })}</p>
+          </div>
+
+          <div class="bg-gray-900 rounded-xl p-6 border border-gray-700 hover:border-blue-500/50 transition-colors">
+            <div class="w-12 h-12 bg-amber-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+              </svg>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">{m.solutions_usecase4_title({}, { locale })}</h4>
+            <p class="text-gray-400 text-sm">{m.solutions_usecase4_desc({}, { locale })}</p>
+          </div>
+
+          <div class="bg-gray-900 rounded-xl p-6 border border-gray-700 hover:border-blue-500/50 transition-colors">
+            <div class="w-12 h-12 bg-rose-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+              </svg>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">{m.solutions_usecase5_title({}, { locale })}</h4>
+            <p class="text-gray-400 text-sm">{m.solutions_usecase5_desc({}, { locale })}</p>
+          </div>
+
+          <div class="bg-gray-900 rounded-xl p-6 border border-gray-700 hover:border-blue-500/50 transition-colors">
+            <div class="w-12 h-12 bg-cyan-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">{m.solutions_usecase6_title({}, { locale })}</h4>
+            <p class="text-gray-400 text-sm">{m.solutions_usecase6_desc({}, { locale })}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Global Infrastructure -->
+    <section class="py-20 bg-gray-900">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_infrastructure_title({}, { locale })}</h2>
+          <p class="mt-4 text-xl text-gray-400">{m.solutions_infrastructure_subtitle({}, { locale })}</p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div class="p-6 text-center bg-gray-800 rounded-xl border border-gray-700">
+            <div class="text-3xl font-bold text-blue-400 mb-2">&lt;100ms</div>
+            <p class="text-gray-400 text-sm">{m.solutions_infra_api({}, { locale })}</p>
+          </div>
+          <div class="p-6 text-center bg-gray-800 rounded-xl border border-gray-700">
+            <div class="text-3xl font-bold text-green-400 mb-2">&lt;300ms</div>
+            <p class="text-gray-400 text-sm">{m.solutions_infra_download({}, { locale })}</p>
+          </div>
+          <div class="p-6 text-center bg-gray-800 rounded-xl border border-gray-700">
+            <div class="text-3xl font-bold text-purple-400 mb-2">6</div>
+            <p class="text-gray-400 text-sm">{m.solutions_infra_continents({}, { locale })}</p>
+          </div>
+          <div class="p-6 text-center bg-gray-800 rounded-xl border border-gray-700">
+            <div class="text-3xl font-bold text-amber-400 mb-2">99.9%</div>
+            <p class="text-gray-400 text-sm">{m.solutions_infra_uptime({}, { locale })}</p>
+          </div>
+        </div>
+
+        <!-- Security Badges -->
+        <div class="flex flex-wrap items-center justify-center gap-8 mt-12">
+          <div class="flex flex-col items-center gap-2">
+            <img src="/soc2.svg" alt="SOC 2" class="h-12 opacity-80" />
+            <span class="text-xs text-gray-500">SOC 2 Type II</span>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <img src="/gdpr.svg" alt="GDPR" class="h-12 opacity-80" />
+            <span class="text-xs text-gray-500">GDPR Compliant</span>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <img src="/soc1.svg" alt="SOC 1" class="h-12 opacity-80" />
+            <span class="text-xs text-gray-500">SOC 1</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="py-20 bg-gray-800">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_trusted_by_title({}, { locale })}</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div class="p-8 text-center bg-gray-900 border border-gray-700 rounded-2xl">
+            <div class="text-5xl font-bold text-blue-400 mb-2">500M+</div>
+            <p class="text-gray-400">{m.solutions_stat_updates({}, { locale })}</p>
+          </div>
+          <div class="p-8 text-center bg-gray-900 border border-gray-700 rounded-2xl">
+            <div class="text-5xl font-bold text-green-400 mb-2">2,000+</div>
+            <p class="text-gray-400">{m.solutions_stat_apps({}, { locale })}</p>
+          </div>
+          <div class="p-8 text-center bg-gray-900 border border-gray-700 rounded-2xl">
+            <div class="text-5xl font-bold text-purple-400 mb-2">4+</div>
+            <p class="text-gray-400">{m.solutions_stat_years({}, { locale })}</p>
+          </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div class="p-8 bg-gray-900 border border-gray-700 rounded-2xl">
+            <div class="flex items-center gap-1 mb-4">
+              {Array.from({ length: 5 }).map(() => (
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              ))}
+            </div>
+            <p class="text-gray-300 italic mb-6">"{m.solutions_testimonial1({}, { locale })}"</p>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center">
+                <span class="text-blue-400 font-bold">M</span>
+              </div>
+              <div>
+                <p class="font-semibold text-white">{m.solutions_testimonial1_author({}, { locale })}</p>
+                <p class="text-sm text-gray-400">{m.solutions_testimonial1_role({}, { locale })}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-8 bg-gray-900 border border-gray-700 rounded-2xl">
+            <div class="flex items-center gap-1 mb-4">
+              {Array.from({ length: 5 }).map(() => (
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              ))}
+            </div>
+            <p class="text-gray-300 italic mb-6">"{m.solutions_testimonial2({}, { locale })}"</p>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-purple-500/20 rounded-full flex items-center justify-center">
+                <span class="text-purple-400 font-bold">S</span>
+              </div>
+              <div>
+                <p class="font-semibold text-white">{m.solutions_testimonial2_author({}, { locale })}</p>
+                <p class="text-sm text-gray-400">{m.solutions_testimonial2_role({}, { locale })}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Solutions -->
+    <section class="py-20 bg-gray-800">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-2xl font-bold text-white sm:text-3xl">{m.solutions_related_by_role({}, { locale })}</h2>
+          <p class="mt-4 text-gray-400">{m.solutions_related_subtitle({}, { locale })}</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+          <a href={getRelativeLocaleUrl(locale, 'solutions/enterprise')} class="p-6 bg-gray-900 rounded-xl border border-gray-700 hover:border-blue-500/50 transition-all group">
+            <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center mb-3">
+              <svg class="w-5 h-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-white group-hover:text-blue-400 transition-colors">{m.solutions_enterprise_short({}, { locale })}</h3>
+            <p class="text-sm text-gray-400 mt-1">{m.solutions_enterprise_tagline({}, { locale })}</p>
+          </a>
+
+          <a href={getRelativeLocaleUrl(locale, 'solutions/startups')} class="p-6 bg-gray-900 rounded-xl border border-gray-700 hover:border-blue-500/50 transition-all group">
+            <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center mb-3">
+              <svg class="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-white group-hover:text-blue-400 transition-colors">{m.solutions_startups_short({}, { locale })}</h3>
+            <p class="text-sm text-gray-400 mt-1">{m.solutions_startups_tagline({}, { locale })}</p>
+          </a>
+
+          <a href={getRelativeLocaleUrl(locale, 'solutions/solo-developers')} class="p-6 bg-gray-900 rounded-xl border border-gray-700 hover:border-blue-500/50 transition-all group">
+            <div class="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center mb-3">
+              <svg class="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-white group-hover:text-blue-400 transition-colors">{m.solutions_solo_short({}, { locale })}</h3>
+            <p class="text-sm text-gray-400 mt-1">{m.solutions_solo_tagline({}, { locale })}</p>
+          </a>
+
+          <a href={getRelativeLocaleUrl(locale, 'solutions/agencies')} class="p-6 bg-gray-900 rounded-xl border border-gray-700 hover:border-blue-500/50 transition-all group">
+            <div class="w-10 h-10 bg-amber-500/20 rounded-lg flex items-center justify-center mb-3">
+              <svg class="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-white group-hover:text-blue-400 transition-colors">{m.solutions_agencies_short({}, { locale })}</h3>
+            <p class="text-sm text-gray-400 mt-1">{m.solutions_agencies_tagline({}, { locale })}</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 bg-gray-900">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="relative px-8 py-16 overflow-hidden bg-gradient-to-r from-blue-600 to-blue-800 rounded-3xl sm:px-16">
+          <div aria-hidden="true" class="absolute inset-0">
+            <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360">
+              <path class="text-blue-500 text-opacity-40" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"></path>
+              <path class="text-blue-400 text-opacity-20" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"></path>
+            </svg>
+          </div>
+          <div class="relative text-center">
+            <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_final_cta_title({}, { locale })}</h2>
+            <p class="max-w-2xl mx-auto mt-4 text-lg text-blue-100">{m.solutions_final_cta_subtitle({}, { locale })}</p>
+            <div class="flex flex-col items-center justify-center gap-4 mt-8 sm:flex-row">
+              <a
+                href={getRelativeLocaleUrl(locale, 'register')}
+                class="px-8 py-4 text-base font-semibold text-blue-600 transition-all duration-200 bg-white rounded-xl hover:bg-gray-100 shadow-lg"
+              >
+                {m.solutions_start_free_trial({}, { locale })}
+              </a>
+              <a
+                href={getRelativeLocaleUrl(locale, 'book_demo')}
+                class="px-8 py-4 text-base font-semibold text-white transition-all duration-200 border rounded-xl border-white/30 hover:bg-white/10"
+              >
+                {m.solutions_schedule_demo({}, { locale })}
+              </a>
+            </div>
+            <p class="mt-6 text-sm text-blue-200">{m.solutions_final_cta_note({}, { locale })}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
