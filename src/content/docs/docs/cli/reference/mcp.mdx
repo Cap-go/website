@@ -1,0 +1,253 @@
+---
+title: "\U0001F916 mcp"
+description: "\U0001F916 Start the Capgo MCP (Model Context Protocol) server for AI agent integration."
+sidebar_label: mcp
+sidebar:
+  order: 12
+---
+
+import { Steps, Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+
+🤖 Start the Capgo MCP (Model Context Protocol) server for AI agent integration.
+
+The MCP server exposes Capgo functionality as tools that AI agents (like Claude, Cursor, or other MCP-compatible clients) can use to manage your live updates programmatically.
+
+```bash
+npx @capgo/cli@latest mcp
+```
+
+<Aside type="tip">
+The MCP server requires authentication. Run `npx @capgo/cli login` first to save your API key.
+</Aside>
+
+## What is MCP?
+
+[Model Context Protocol (MCP)](https://modelcontextprotocol.io/) is an open standard that enables AI assistants to interact with external tools and services. By running the Capgo MCP server, you allow AI agents to:
+
+- Upload and manage app bundles
+- Create and configure distribution channels
+- Monitor device statistics and logs
+- Request native builds
+- And more...
+
+## Setup
+
+<Tabs>
+<TabItem label="Claude Desktop">
+
+Add the following to your `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "capgo": {
+      "command": "npx",
+      "args": ["@capgo/cli", "mcp"]
+    }
+  }
+}
+```
+
+**Config file locations:**
+- **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+
+</TabItem>
+<TabItem label="Cursor">
+
+Add the following to your `.cursor/mcp.json` in your project root:
+
+```json
+{
+  "mcpServers": {
+    "capgo": {
+      "command": "npx",
+      "args": ["@capgo/cli", "mcp"]
+    }
+  }
+}
+```
+
+</TabItem>
+<TabItem label="Other Clients">
+
+For other MCP-compatible clients, configure them to run:
+
+```bash
+npx @capgo/cli mcp
+```
+
+The server communicates via stdio (standard input/output).
+
+</TabItem>
+</Tabs>
+
+## Available Tools
+
+The MCP server exposes 21 tools organized into categories:
+
+### 📱 App Management
+
+| Tool | Description |
+| ---- | ----------- |
+| `capgo_list_apps` | List all apps registered in your Capgo Cloud account |
+| `capgo_add_app` | Register a new app in Capgo Cloud |
+| `capgo_update_app` | Update settings for an existing app |
+| `capgo_delete_app` | Delete an app from Capgo Cloud |
+
+### 📦 Bundle Management
+
+| Tool | Description |
+| ---- | ----------- |
+| `capgo_upload_bundle` | Upload a new app bundle for distribution |
+| `capgo_list_bundles` | List all bundles uploaded for an app |
+| `capgo_delete_bundle` | Delete a specific bundle |
+| `capgo_cleanup_bundles` | Delete old bundles, keeping only recent versions |
+| `capgo_check_compatibility` | Check bundle compatibility with a channel |
+
+### 📢 Channel Management
+
+| Tool | Description |
+| ---- | ----------- |
+| `capgo_list_channels` | List all channels for an app |
+| `capgo_add_channel` | Create a new distribution channel |
+| `capgo_update_channel` | Update channel settings and linked bundle |
+| `capgo_delete_channel` | Delete a channel |
+| `capgo_get_current_bundle` | Get the current bundle linked to a channel |
+
+### 🏢 Organization Management
+
+| Tool | Description |
+| ---- | ----------- |
+| `capgo_list_organizations` | List all organizations you have access to |
+| `capgo_add_organization` | Create a new organization for team collaboration |
+
+### 🔧 Account & Diagnostics
+
+| Tool | Description |
+| ---- | ----------- |
+| `capgo_get_account_id` | Get the account ID for the current API key |
+| `capgo_doctor` | Run diagnostics on the Capgo installation |
+| `capgo_get_stats` | Get device statistics and logs for debugging |
+
+### 🏗️ Build Management
+
+| Tool | Description |
+| ---- | ----------- |
+| `capgo_request_build` | Request a native iOS/Android build from Capgo Cloud |
+
+### 🔐 Encryption
+
+| Tool | Description |
+| ---- | ----------- |
+| `capgo_generate_encryption_keys` | Generate RSA key pair for end-to-end encryption |
+
+## Tool Parameters
+
+### capgo_upload_bundle
+
+Upload a new app bundle to Capgo Cloud for distribution.
+
+| Parameter | Type | Required | Description |
+| --------- | ---- | -------- | ----------- |
+| `appId` | string | Yes | App ID in reverse domain format (e.g., com.example.app) |
+| `path` | string | Yes | Path to the build folder to upload |
+| `bundle` | string | No | Bundle version number |
+| `channel` | string | No | Channel to link the bundle to |
+| `comment` | string | No | Comment or release notes for this version |
+| `minUpdateVersion` | string | No | Minimum version required to update to this version |
+| `autoMinUpdateVersion` | boolean | No | Automatically set min update version based on native packages |
+| `encrypt` | boolean | No | Enable encryption for the bundle |
+
+### capgo_update_channel
+
+Update channel settings including linked bundle and targeting options.
+
+| Parameter | Type | Required | Description |
+| --------- | ---- | -------- | ----------- |
+| `appId` | string | Yes | App ID |
+| `channelId` | string | Yes | Channel name/ID to update |
+| `bundle` | string | No | Bundle version to link to this channel |
+| `state` | string | No | Channel state: "default" or "normal" |
+| `downgrade` | boolean | No | Allow downgrading to versions below native |
+| `ios` | boolean | No | Enable updates for iOS devices |
+| `android` | boolean | No | Enable updates for Android devices |
+| `selfAssign` | boolean | No | Allow device self-assignment |
+| `disableAutoUpdate` | string | No | Block updates by type: major, minor, metadata, patch, or none |
+| `dev` | boolean | No | Enable updates for development builds |
+| `emulator` | boolean | No | Enable updates for emulators |
+| `device` | boolean | No | Enable updates for physical devices |
+| `prod` | boolean | No | Enable updates for production builds |
+
+### capgo_get_stats
+
+Get device statistics and logs from Capgo backend for debugging.
+
+| Parameter | Type | Required | Description |
+| --------- | ---- | -------- | ----------- |
+| `appId` | string | Yes | App ID to get stats for |
+| `deviceIds` | string[] | No | Filter by specific device IDs |
+| `limit` | number | No | Maximum number of results to return |
+| `rangeStart` | string | No | Start date/time for range filter (ISO string) |
+| `rangeEnd` | string | No | End date/time for range filter (ISO string) |
+
+### capgo_cleanup_bundles
+
+Delete old bundles, keeping only recent versions.
+
+| Parameter | Type | Required | Description |
+| --------- | ---- | -------- | ----------- |
+| `appId` | string | Yes | App ID to cleanup bundles for |
+| `keep` | number | No | Number of versions to keep (default: 4) |
+| `bundle` | string | No | Bundle version pattern to cleanup |
+| `force` | boolean | No | Force removal without confirmation |
+| `ignoreChannel` | boolean | No | Delete bundles even if linked to channels |
+
+### capgo_request_build
+
+Request a native iOS/Android build from Capgo Cloud.
+
+| Parameter | Type | Required | Description |
+| --------- | ---- | -------- | ----------- |
+| `appId` | string | Yes | App ID to build |
+| `platform` | string | Yes | Target platform: "ios" or "android" |
+| `path` | string | No | Path to project directory |
+
+<Aside>
+Build credentials should be pre-saved using the CLI before requesting builds via MCP.
+</Aside>
+
+## Example Conversations
+
+Once configured, you can ask your AI assistant things like:
+
+- "List all my Capgo apps"
+- "Upload the build in ./dist to the production channel for com.example.app"
+- "Create a new staging channel for my app"
+- "What's the current bundle on the production channel?"
+- "Clean up old bundles, keep only the last 3 versions"
+- "Show me device stats for the last 24 hours"
+
+The AI will use the appropriate MCP tools to complete these tasks.
+
+## Troubleshooting
+
+### Authentication Issues
+
+If you get authentication errors, make sure you've logged in:
+
+```bash
+npx @capgo/cli login YOUR_API_KEY
+```
+
+### Server Not Starting
+
+Ensure you have Node.js 18+ installed and can run npx commands.
+
+### Tool Not Found
+
+Make sure you're using the latest version of @capgo/cli:
+
+```bash
+npx @capgo/cli@latest mcp
+```
