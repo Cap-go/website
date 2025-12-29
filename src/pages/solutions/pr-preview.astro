@@ -273,7 +273,7 @@ const content = { title, description }
 
       <span class="text-gray-500"># Create a channel named after your PR</span>
       - name: Create PR Channel
-        run: npx @capgo/cli channel create pr-${'${{ github.event.pull_request.number }}'}
+        run: npx @capgo/cli channel add pr-${'${{ github.event.pull_request.number }}'}
 
       <span class="text-gray-500"># Upload the build to that channel</span>
       - name: Upload to Capgo
@@ -292,6 +292,48 @@ const content = { title, description }
             {'}'})</code></pre>
           </div>
           <p class="text-center text-gray-500 mt-4">{m.solutions_pr_setup_time({}, { locale })}</p>
+        </div>
+
+        <!-- How Testers Switch Channels -->
+        <div class="mt-16 max-w-4xl mx-auto">
+          <h3 class="text-2xl font-bold text-white text-center mb-8">{m.solutions_pr_how_testers_switch({}, { locale })}</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Option 1: Shake Menu -->
+            <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h4 class="text-lg font-bold text-white">{m.solutions_pr_shake_menu({}, { locale })}</h4>
+              </div>
+              <p class="text-gray-400 text-sm mb-4">{m.solutions_pr_shake_menu_desc({}, { locale })}</p>
+              <pre class="bg-gray-900 rounded-lg p-3 text-sm overflow-x-auto"><code class="text-gray-300"><span class="text-gray-500">// capacitor.config.ts</span>
+CapacitorUpdater: {'{'}
+  shakeMenu: true <span class="text-gray-500">// Enable for testing</span>
+{'}'}</code></pre>
+            </div>
+
+            <!-- Option 2: setChannel API -->
+            <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                </div>
+                <h4 class="text-lg font-bold text-white">{m.solutions_pr_programmatic({}, { locale })}</h4>
+              </div>
+              <p class="text-gray-400 text-sm mb-4">{m.solutions_pr_programmatic_desc({}, { locale })}</p>
+              <pre class="bg-gray-900 rounded-lg p-3 text-sm overflow-x-auto"><code class="text-gray-300"><span class="text-gray-500">// Switch channel from your app</span>
+import {'{'} CapacitorUpdater {'}'} from '@capgo/capacitor-updater'
+
+await CapacitorUpdater.setChannel({'{'}
+  channel: 'pr-123'
+{'}'})</code></pre>
+            </div>
+          </div>
         </div>
       </div>
     </section>
