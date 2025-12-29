@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
+import RolloutIllustration from '@/components/solutions/RolloutIllustration.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -191,6 +192,9 @@ const content = { title, description }
               </svg>
               {m.solutions_solo_after_title({}, { locale })}
             </h4>
+            <div class="mb-6">
+              <RolloutIllustration class="text-violet-500" />
+            </div>
             <ul class="space-y-4">
               <li class="flex items-start gap-3 text-gray-300">
                 <svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">

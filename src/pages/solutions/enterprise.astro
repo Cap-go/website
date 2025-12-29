@@ -2,6 +2,9 @@
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
+import AgencyDashboardIllustration from '@/components/solutions/AgencyDashboardIllustration.astro'
+import RolloutIllustration from '@/components/solutions/RolloutIllustration.astro'
+import SecurityIllustration from '@/components/solutions/SecurityIllustration.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -180,22 +183,10 @@ const content = { title, description }
                   </li>
                 </ul>
               </div>
-              <div class="bg-gray-900 rounded-xl p-6">
-                <div class="flex items-center gap-2 mb-4">
-                  <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                  <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                  <span class="ml-2 text-sm text-gray-500">Organization Dashboard</span>
+              <div class="bg-gray-900 rounded-xl p-6 flex items-center justify-center">
+                <div class="w-full max-w-sm">
+                  <AgencyDashboardIllustration class="text-green-500" />
                 </div>
-                <pre class="overflow-x-auto text-sm text-gray-300"><code>📱 Your Organization
-├── 🏢 Corporate App     <span class="text-green-400">v2.4.1</span>  ✓ 12,450 users
-├── 📊 Analytics App     <span class="text-green-400">v1.8.0</span>  ✓ 3,200 users
-├── 🛒 E-commerce App    <span class="text-green-400">v3.1.2</span>  ✓ 45,000 users
-├── 📝 Internal Tools    <span class="text-green-400">v1.2.0</span>  ✓ 850 users
-└── 🎯 Marketing App     <span class="text-green-400">v2.0.5</span>  ✓ 8,300 users
-
-<span class="text-gray-500"># Deploy to all apps at once</span>
-npx @capgo/cli bundle upload --org enterprise-corp</code></pre>
               </div>
             </div>
           </div>
@@ -203,36 +194,9 @@ npx @capgo/cli bundle upload --org enterprise-corp</code></pre>
           <!-- Solution 2: Staged Rollouts -->
           <div class="bg-gray-800 rounded-2xl p-8 lg:p-10 border border-gray-700">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              <div class="order-2 lg:order-1 bg-gray-900 rounded-xl p-6">
-                <div class="space-y-4">
-                  <div class="flex items-center justify-between p-3 bg-gray-800 rounded-lg">
-                    <div class="flex items-center gap-3">
-                      <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                      <span class="text-white font-medium">Internal QA</span>
-                    </div>
-                    <span class="text-green-400">100% deployed</span>
-                  </div>
-                  <div class="flex items-center justify-between p-3 bg-gray-800 rounded-lg">
-                    <div class="flex items-center gap-3">
-                      <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                      <span class="text-white font-medium">Beta Users</span>
-                    </div>
-                    <span class="text-green-400">100% deployed</span>
-                  </div>
-                  <div class="flex items-center justify-between p-3 bg-gray-800 rounded-lg">
-                    <div class="flex items-center gap-3">
-                      <div class="w-3 h-3 bg-yellow-500 rounded-full animate-pulse"></div>
-                      <span class="text-white font-medium">Production 10%</span>
-                    </div>
-                    <span class="text-yellow-400">Rolling out...</span>
-                  </div>
-                  <div class="flex items-center justify-between p-3 bg-gray-800 rounded-lg opacity-50">
-                    <div class="flex items-center gap-3">
-                      <div class="w-3 h-3 bg-gray-600 rounded-full"></div>
-                      <span class="text-white font-medium">Production 100%</span>
-                    </div>
-                    <span class="text-gray-500">Pending</span>
-                  </div>
+              <div class="order-2 lg:order-1 bg-gray-900 rounded-xl p-6 flex items-center justify-center">
+                <div class="w-full max-w-sm">
+                  <RolloutIllustration class="text-blue-500" />
                 </div>
               </div>
               <div class="order-1 lg:order-2">
@@ -303,24 +267,10 @@ npx @capgo/cli bundle upload --org enterprise-corp</code></pre>
                   </li>
                 </ul>
               </div>
-              <div class="bg-gray-900 rounded-xl p-6">
-                <div class="flex flex-wrap gap-4 justify-center">
-                  <div class="flex flex-col items-center gap-2 p-4 bg-gray-800 rounded-lg">
-                    <img src="/soc2.svg" alt="SOC 2" class="h-12 opacity-80" />
-                    <span class="text-xs text-gray-400">SOC 2 Type II</span>
-                  </div>
-                  <div class="flex flex-col items-center gap-2 p-4 bg-gray-800 rounded-lg">
-                    <img src="/gdpr.svg" alt="GDPR" class="h-12 opacity-80" />
-                    <span class="text-xs text-gray-400">GDPR Compliant</span>
-                  </div>
-                  <div class="flex flex-col items-center gap-2 p-4 bg-gray-800 rounded-lg">
-                    <svg class="w-12 h-12 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
-                    <span class="text-xs text-gray-400">End-to-End Encryption</span>
-                  </div>
+              <div class="bg-gray-900 rounded-xl p-6 flex items-center justify-center">
+                <div class="w-full max-w-sm">
+                  <SecurityIllustration class="text-purple-500" />
                 </div>
-                <p class="text-center text-gray-500 text-sm mt-4">{m.solutions_enterprise_sol3_audit({}, { locale })}</p>
               </div>
             </div>
           </div>

@@ -1,0 +1,37 @@
+---
+const { class: className, ...props } = Astro.props
+---
+<svg viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg" class:list={["w-full h-auto drop-shadow-2xl", className]} {...props}>
+  <!-- Shield Background -->
+  <path d="M300 40 C300 40 100 90 100 200 C100 320 300 380 300 380 C300 380 500 320 500 200 C500 90 300 40 300 40 Z" class="fill-gray-900 stroke-gray-700" stroke-width="2"/>
+  
+  <!-- Circuit Pattern on Shield -->
+  <path d="M300 80 V340" stroke="currentColor" stroke-width="2" class="text-current opacity-10"/>
+  <path d="M150 200 H450" stroke="currentColor" stroke-width="2" class="text-current opacity-10"/>
+  <circle cx="300" cy="200" r="80" class="stroke-current text-current opacity-10" stroke-width="2" fill="none"/>
+  
+  <!-- Central Lock -->
+  <g transform="translate(260, 160)">
+    <path d="M15 30 V15 A25 25 0 0 1 65 15 V30" stroke="currentColor" stroke-width="8" stroke-linecap="round" class="text-current"/>
+    <rect x="0" y="30" width="80" height="60" rx="8" class="text-current fill-current"/>
+    <circle cx="40" cy="60" r="6" fill="white"/>
+    <path d="M40 60 V70" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Badges -->
+  <g transform="translate(140, 140)">
+    <circle cx="0" cy="0" r="30" class="fill-gray-800 stroke-gray-600" stroke-width="1"/>
+    <text x="0" y="4" text-anchor="middle" class="fill-gray-300 text-xs font-bold font-mono">SOC2</text>
+  </g>
+  
+  <g transform="translate(460, 140)">
+    <circle cx="0" cy="0" r="30" class="fill-gray-800 stroke-gray-600" stroke-width="1"/>
+    <text x="0" y="4" text-anchor="middle" class="fill-gray-300 text-xs font-bold font-mono">GDPR</text>
+  </g>
+  
+  <g transform="translate(300, 300)">
+    <circle cx="0" cy="0" r="30" class="fill-gray-800 stroke-gray-600" stroke-width="1"/>
+    <path d="M-8 0 L-2 6 L8 -6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-green-500"/>
+  </g>
+</svg>
+

@@ -1,0 +1,41 @@
+---
+const { class: className, ...props } = Astro.props
+---
+<svg viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg" class:list={["w-full h-auto drop-shadow-2xl", className]} {...props}>
+  <!-- Code Window -->
+  <rect x="50" y="50" width="500" height="300" rx="12" class="fill-gray-900 stroke-gray-700" stroke-width="2"/>
+  
+  <!-- Header -->
+  <circle cx="80" cy="70" r="6" class="fill-red-500/50"/>
+  <circle cx="100" cy="70" r="6" class="fill-yellow-500/50"/>
+  <circle cx="120" cy="70" r="6" class="fill-green-500/50"/>
+  
+  <!-- Content -->
+  <g transform="translate(80, 110)">
+    <rect x="0" y="0" width="200" height="10" rx="2" class="fill-gray-600"/>
+    <rect x="0" y="25" width="150" height="10" rx="2" class="fill-gray-600"/>
+    <rect x="0" y="50" width="250" height="10" rx="2" class="fill-gray-600"/>
+    
+    <!-- Bug -->
+    <g transform="translate(0, 80)">
+      <rect x="0" y="0" width="300" height="40" rx="4" class="fill-red-500/10 stroke-red-500/30" stroke-width="1"/>
+      <rect x="20" y="15" width="200" height="10" rx="2" class="fill-red-400/50"/>
+      <text x="240" y="24" class="fill-red-400 font-mono text-sm">BUG</text>
+    </g>
+    
+    <!-- Fix (Arrow pointing to new version) -->
+    <path d="M150 130 V150" stroke="currentColor" stroke-width="2" marker-end="url(#arrow)" class="text-gray-500"/>
+    
+    <!-- Fixed Version -->
+    <g transform="translate(0, 160)">
+      <rect x="0" y="0" width="300" height="40" rx="4" class="fill-green-500/10 stroke-green-500/30" stroke-width="1"/>
+      <rect x="20" y="15" width="200" height="10" rx="2" class="fill-green-400/50"/>
+      <text x="240" y="24" class="fill-green-400 font-mono text-sm">FIXED</text>
+    </g>
+  </g>
+  
+  <!-- Tools -->
+  <circle cx="450" cy="150" r="40" class="fill-gray-800 stroke-current text-current opacity-20" stroke-width="2"/>
+  <path d="M430 150 L450 170 L470 130" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="text-current"/>
+</svg>
+

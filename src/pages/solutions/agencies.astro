@@ -2,6 +2,9 @@
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
+import AgencyDashboardIllustration from '@/components/solutions/AgencyDashboardIllustration.astro'
+import WhiteLabelIllustration from '@/components/solutions/WhiteLabelIllustration.astro'
+import HandoffIllustration from '@/components/solutions/HandoffIllustration.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -174,26 +177,10 @@ const content = { title, description }
                   </li>
                 </ul>
               </div>
-              <div class="bg-gray-900 rounded-xl p-6">
-                <div class="flex items-center gap-2 mb-4">
-                  <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                  <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                  <span class="ml-2 text-sm text-gray-500">Agency Dashboard</span>
+              <div class="bg-gray-900 rounded-xl p-6 flex items-center justify-center">
+                <div class="w-full max-w-sm">
+                  <AgencyDashboardIllustration class="text-amber-500" />
                 </div>
-                <pre class="overflow-x-auto text-sm text-gray-300"><code>📱 Your Agency Portfolio
-├── 🏪 Client: RetailCo      <span class="text-green-400">3 apps</span>
-│   ├── iOS Consumer App     <span class="text-green-400">v2.4.1</span>
-│   ├── Android Consumer     <span class="text-green-400">v2.4.1</span>
-│   └── Staff App            <span class="text-green-400">v1.8.0</span>
-├── 🍔 Client: FoodChain     <span class="text-green-400">2 apps</span>
-│   ├── Customer App         <span class="text-green-400">v3.1.2</span>
-│   └── Driver App           <span class="text-green-400">v2.0.5</span>
-└── 🏥 Client: HealthPlus    <span class="text-green-400">1 app</span>
-    └── Patient Portal       <span class="text-green-400">v1.2.0</span>
-
-<span class="text-gray-500"># Deploy updates per client</span>
-npx @capgo/cli bundle upload --org retailco</code></pre>
               </div>
             </div>
           </div>
@@ -201,20 +188,9 @@ npx @capgo/cli bundle upload --org retailco</code></pre>
           <!-- White Label -->
           <div class="bg-gray-800 rounded-2xl p-8 lg:p-10 border border-gray-700">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              <div class="order-2 lg:order-1 bg-gray-900 rounded-xl p-6">
-                <div class="space-y-4">
-                  <div class="p-4 bg-gray-800 rounded-lg border-l-4 border-amber-500">
-                    <p class="text-white font-medium">{m.solutions_agencies_whitelabel_example1({}, { locale })}</p>
-                    <p class="text-gray-400 text-sm mt-1">updates.youragency.com/retailco</p>
-                  </div>
-                  <div class="p-4 bg-gray-800 rounded-lg border-l-4 border-blue-500">
-                    <p class="text-white font-medium">{m.solutions_agencies_whitelabel_example2({}, { locale })}</p>
-                    <p class="text-gray-400 text-sm mt-1">updates.youragency.com/foodchain</p>
-                  </div>
-                  <div class="p-4 bg-gray-800 rounded-lg border-l-4 border-green-500">
-                    <p class="text-white font-medium">{m.solutions_agencies_whitelabel_example3({}, { locale })}</p>
-                    <p class="text-gray-400 text-sm mt-1">updates.youragency.com/healthplus</p>
-                  </div>
+              <div class="order-2 lg:order-1 bg-gray-900 rounded-xl p-6 flex items-center justify-center">
+                <div class="w-full max-w-sm">
+                  <WhiteLabelIllustration class="text-purple-500" />
                 </div>
               </div>
               <div class="order-1 lg:order-2">
@@ -285,23 +261,10 @@ npx @capgo/cli bundle upload --org retailco</code></pre>
                   </li>
                 </ul>
               </div>
-              <div class="bg-gray-900 rounded-xl p-6 text-center">
-                <div class="flex justify-center gap-4 mb-6">
-                  <div class="w-16 h-16 bg-amber-500/20 rounded-full flex items-center justify-center">
-                    <svg class="w-8 h-8 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5" />
-                    </svg>
-                  </div>
-                  <svg class="w-8 h-8 text-gray-600 self-center" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                  <div class="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center">
-                    <svg class="w-8 h-8 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                  </div>
+              <div class="bg-gray-900 rounded-xl p-6 flex items-center justify-center">
+                <div class="w-full max-w-sm">
+                  <HandoffIllustration class="text-green-500" />
                 </div>
-                <p class="text-gray-400">{m.solutions_agencies_handoff_visual({}, { locale })}</p>
               </div>
             </div>
           </div>

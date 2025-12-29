@@ -1,0 +1,39 @@
+---
+const { class: className, ...props } = Astro.props
+---
+<svg viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg" class:list={["w-full h-auto drop-shadow-2xl", className]} {...props}>
+  <!-- Browser Window -->
+  <rect x="50" y="40" width="500" height="320" rx="12" class="fill-gray-900 stroke-gray-700" stroke-width="2"/>
+  
+  <!-- Address Bar Area -->
+  <path d="M50 52C50 45.3726 55.3726 40 62 40H538C544.627 40 550 45.3726 550 52V80H50V52Z" class="fill-gray-800"/>
+  <circle cx="70" cy="60" r="4" class="fill-red-500/50"/>
+  <circle cx="85" cy="60" r="4" class="fill-yellow-500/50"/>
+  <circle cx="100" cy="60" r="4" class="fill-green-500/50"/>
+  
+  <!-- Address Bar Input -->
+  <rect x="140" y="50" width="320" height="20" rx="6" class="fill-gray-900 stroke-gray-700" stroke-width="1"/>
+  <text x="160" y="64" class="text-xs fill-gray-400 font-mono" style="font-size: 10px;">updates.youragency.com</text>
+  
+  <!-- Content Area -->
+  <rect x="150" y="120" width="300" height="180" rx="8" class="fill-gray-800/50 stroke-gray-700" stroke-width="1"/>
+  
+  <!-- Logo Placeholder -->
+  <circle cx="300" cy="170" r="24" class="text-current fill-current opacity-20"/>
+  
+  <!-- Text Lines -->
+  <rect x="220" y="210" width="160" height="12" rx="3" class="text-current fill-current opacity-40"/>
+  <rect x="240" y="235" width="120" height="8" rx="2" class="fill-gray-600"/>
+  <rect x="260" y="260" width="80" height="24" rx="4" class="text-current fill-current opacity-80"/>
+  
+  <!-- Paint Brush / Customization Indicator -->
+  <g transform="translate(420, 280) rotate(-15)">
+    <rect x="0" y="0" width="40" height="60" rx="4" class="fill-gray-700 stroke-gray-600" stroke-width="2"/>
+    <path d="M0 0 H40 V20 H0 Z" class="text-current fill-current opacity-90"/>
+    <path d="M20 60 V100" stroke="gray" stroke-width="6" stroke-linecap="round" class="stroke-gray-500"/>
+  </g>
+  
+  <!-- Sparkles -->
+  <path d="M480 150 L485 140 L490 150 L500 155 L490 160 L485 170 L480 160 L470 155 Z" class="text-current fill-current opacity-60"/>
+</svg>
+

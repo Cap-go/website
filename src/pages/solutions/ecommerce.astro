@@ -2,6 +2,10 @@
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
+import RolloutIllustration from '@/components/solutions/RolloutIllustration.astro'
+import ABTestIllustration from '@/components/solutions/ABTestIllustration.astro'
+import BugFixIllustration from '@/components/solutions/BugFixIllustration.astro'
+import WhiteLabelIllustration from '@/components/solutions/WhiteLabelIllustration.astro'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -169,15 +173,10 @@ const content = { title, description }
               <h3 class="text-xl font-bold text-white">{m.solutions_ecommerce_sol1_title({}, { locale })}</h3>
             </div>
             <p class="text-gray-300 mb-6">{m.solutions_ecommerce_sol1_desc({}, { locale })}</p>
-            <div class="bg-gray-900 rounded-xl p-4">
-              <pre class="text-sm text-gray-300 overflow-x-auto"><code><span class="text-gray-500"># Flash sale starts in 2 hours</span>
-<span class="text-gray-500"># Push promo banner and discount logic</span>
-
-npm run build
-npx @capgo/cli bundle upload
-
-<span class="text-rose-400">✔</span> 45,000 users updated before sale starts
-<span class="text-rose-400">✔</span> Zero app store review wait</code></pre>
+            <div class="bg-gray-900 rounded-xl p-6 flex items-center justify-center">
+              <div class="w-full max-w-sm">
+                <RolloutIllustration class="text-rose-500" />
+              </div>
             </div>
           </div>
 
@@ -192,26 +191,11 @@ npx @capgo/cli bundle upload
               <h3 class="text-xl font-bold text-white">{m.solutions_ecommerce_sol2_title({}, { locale })}</h3>
             </div>
             <p class="text-gray-300 mb-6">{m.solutions_ecommerce_sol2_desc({}, { locale })}</p>
-            <ul class="space-y-2">
-              <li class="flex items-center gap-2 text-gray-400">
-                <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                {m.solutions_ecommerce_sol2_point1({}, { locale })}
-              </li>
-              <li class="flex items-center gap-2 text-gray-400">
-                <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                {m.solutions_ecommerce_sol2_point2({}, { locale })}
-              </li>
-              <li class="flex items-center gap-2 text-gray-400">
-                <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                {m.solutions_ecommerce_sol2_point3({}, { locale })}
-              </li>
-            </ul>
+            <div class="bg-gray-900 rounded-xl p-6 flex items-center justify-center">
+              <div class="w-full max-w-sm">
+                <ABTestIllustration class="text-purple-500" />
+              </div>
+            </div>
           </div>
 
           <!-- Solution 3: Fix Cart Issues Instantly -->
@@ -225,18 +209,9 @@ npx @capgo/cli bundle upload
               <h3 class="text-xl font-bold text-white">{m.solutions_ecommerce_sol3_title({}, { locale })}</h3>
             </div>
             <p class="text-gray-300 mb-6">{m.solutions_ecommerce_sol3_desc({}, { locale })}</p>
-            <div class="bg-gray-900 rounded-xl p-4">
-              <div class="flex items-center gap-3 mb-3">
-                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-                <span class="text-gray-400">{m.solutions_ecommerce_sol3_before({}, { locale })}</span>
-              </div>
-              <div class="flex items-center gap-3 mb-3">
-                <div class="w-3 h-3 bg-amber-500 rounded-full"></div>
-                <span class="text-gray-400">{m.solutions_ecommerce_sol3_during({}, { locale })}</span>
-              </div>
-              <div class="flex items-center gap-3">
-                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                <span class="text-green-300">{m.solutions_ecommerce_sol3_after({}, { locale })}</span>
+            <div class="bg-gray-900 rounded-xl p-6 flex items-center justify-center">
+              <div class="w-full max-w-sm">
+                <BugFixIllustration class="text-amber-500" />
               </div>
             </div>
           </div>
@@ -252,26 +227,11 @@ npx @capgo/cli bundle upload
               <h3 class="text-xl font-bold text-white">{m.solutions_ecommerce_sol4_title({}, { locale })}</h3>
             </div>
             <p class="text-gray-300 mb-6">{m.solutions_ecommerce_sol4_desc({}, { locale })}</p>
-            <ul class="space-y-2">
-              <li class="flex items-center gap-2 text-gray-400">
-                <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                {m.solutions_ecommerce_sol4_point1({}, { locale })}
-              </li>
-              <li class="flex items-center gap-2 text-gray-400">
-                <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                {m.solutions_ecommerce_sol4_point2({}, { locale })}
-              </li>
-              <li class="flex items-center gap-2 text-gray-400">
-                <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                {m.solutions_ecommerce_sol4_point3({}, { locale })}
-              </li>
-            </ul>
+            <div class="bg-gray-900 rounded-xl p-6 flex items-center justify-center">
+              <div class="w-full max-w-sm">
+                <WhiteLabelIllustration class="text-blue-500" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
