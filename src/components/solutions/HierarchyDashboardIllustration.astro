@@ -1,0 +1,86 @@
+---
+const { class: className, ...props } = Astro.props
+---
+<svg viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg" class:list={["w-full h-auto drop-shadow-2xl", className]} {...props}>
+  <!-- Window Frame -->
+  <rect x="50" y="20" width="500" height="360" rx="8" class="fill-gray-900 stroke-gray-700" stroke-width="2"/>
+  
+  <!-- Title Bar -->
+  <path d="M50 28C50 23.5817 53.5817 20 58 20H542C546.418 20 550 23.5817 550 28V50H50V28Z" class="fill-gray-800"/>
+  <circle cx="70" cy="35" r="4" class="fill-red-500/50"/>
+  <circle cx="85" cy="35" r="4" class="fill-yellow-500/50"/>
+  <circle cx="100" cy="35" r="4" class="fill-green-500/50"/>
+  
+  <!-- Content Area -->
+  <g transform="translate(80, 80)">
+    
+    <!-- Client 1 / Org 1 -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="440" height="40" rx="4" class="fill-gray-800 stroke-gray-700" stroke-width="1"/>
+      <!-- Icon -->
+      <rect x="15" y="10" width="20" height="20" rx="4" class="fill-gray-700"/>
+      <!-- Name -->
+      <rect x="50" y="15" width="120" height="10" rx="2" class="fill-gray-300"/>
+      <!-- Badge -->
+      <rect x="360" y="12" width="60" height="16" rx="8" class="fill-green-900/30 stroke-green-500/50" stroke-width="1"/>
+      <rect x="375" y="17" width="30" height="6" rx="2" class="fill-green-500"/>
+      
+      <!-- Tree connector -->
+      <path d="M25 40 V60" stroke="currentColor" stroke-width="2" class="text-gray-600"/>
+    </g>
+
+    <!-- App 1 (Child of Client 1) -->
+    <g transform="translate(40, 60)">
+      <rect x="0" y="0" width="380" height="36" rx="4" class="fill-gray-800/50 stroke-gray-700/50" stroke-width="1"/>
+      <rect x="15" y="10" width="16" height="16" rx="3" class="text-current fill-current opacity-20"/>
+      <rect x="45" y="13" width="100" height="10" rx="2" class="fill-gray-400"/>
+      <rect x="300" y="10" width="60" height="16" rx="4" class="fill-gray-700"/>
+      <rect x="310" y="15" width="40" height="6" rx="2" class="text-current fill-current opacity-60"/>
+      
+      <!-- Tree connector -->
+      <path d="M-15 -20 V18 H0" stroke="currentColor" stroke-width="2" class="text-gray-600" fill="none" rx="4"/>
+      <path d="M25 36 V45" stroke="currentColor" stroke-width="2" class="text-gray-600"/>
+    </g>
+
+    <!-- App 2 (Child of Client 1) -->
+    <g transform="translate(40, 110)">
+      <rect x="0" y="0" width="380" height="36" rx="4" class="fill-gray-800/50 stroke-gray-700/50" stroke-width="1"/>
+      <rect x="15" y="10" width="16" height="16" rx="3" class="text-current fill-current opacity-20"/>
+      <rect x="45" y="13" width="100" height="10" rx="2" class="fill-gray-400"/>
+      <rect x="300" y="10" width="60" height="16" rx="4" class="fill-gray-700"/>
+      <rect x="310" y="15" width="40" height="6" rx="2" class="text-current fill-current opacity-60"/>
+
+      <!-- Tree connector -->
+      <path d="M-15 -50 V18 H0" stroke="currentColor" stroke-width="2" class="text-gray-600" fill="none"/>
+    </g>
+    
+    <!-- Client 2 / Org 2 -->
+    <g transform="translate(0, 170)">
+      <rect x="0" y="0" width="440" height="40" rx="4" class="fill-gray-800 stroke-gray-700" stroke-width="1"/>
+      <!-- Icon -->
+      <rect x="15" y="10" width="20" height="20" rx="4" class="fill-gray-700"/>
+      <!-- Name -->
+      <rect x="50" y="15" width="140" height="10" rx="2" class="fill-gray-300"/>
+       <!-- Badge -->
+      <rect x="360" y="12" width="60" height="16" rx="8" class="fill-blue-900/30 stroke-blue-500/50" stroke-width="1"/>
+      <rect x="375" y="17" width="30" height="6" rx="2" class="fill-blue-500"/>
+      
+      <!-- Tree connector -->
+      <path d="M25 40 V60" stroke="currentColor" stroke-width="2" class="text-gray-600"/>
+    </g>
+    
+     <!-- App 3 (Child of Client 2) -->
+    <g transform="translate(40, 230)">
+      <rect x="0" y="0" width="380" height="36" rx="4" class="fill-gray-800/50 stroke-gray-700/50" stroke-width="1"/>
+      <rect x="15" y="10" width="16" height="16" rx="3" class="text-current fill-current opacity-20"/>
+      <rect x="45" y="13" width="90" height="10" rx="2" class="fill-gray-400"/>
+      <rect x="300" y="10" width="60" height="16" rx="4" class="fill-gray-700"/>
+      <rect x="310" y="15" width="40" height="6" rx="2" class="text-current fill-current opacity-60"/>
+      
+      <!-- Tree connector -->
+      <path d="M-15 -20 V18 H0" stroke="currentColor" stroke-width="2" class="text-gray-600" fill="none"/>
+    </g>
+    
+  </g>
+</svg>
+

@@ -2,48 +2,79 @@
 const { class: className, ...props } = Astro.props
 ---
 <svg viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg" class:list={["w-full h-auto drop-shadow-2xl", className]} {...props}>
-  <!-- Window Frame -->
-  <rect x="50" y="20" width="500" height="360" rx="12" class="fill-gray-900/90 stroke-gray-700" stroke-width="2"/>
-  
-  <!-- Title Bar -->
-  <path d="M50 32C50 25.3726 55.3726 20 62 20H538C544.627 20 550 25.3726 550 32V50H50V32Z" class="fill-gray-800"/>
-  <circle cx="70" cy="35" r="4" class="fill-red-500/50"/>
-  <circle cx="85" cy="35" r="4" class="fill-yellow-500/50"/>
-  <circle cx="100" cy="35" r="4" class="fill-green-500/50"/>
+  <!-- Main Dashboard Window -->
+  <rect x="20" y="20" width="560" height="360" rx="12" class="fill-gray-900 stroke-gray-700" stroke-width="2"/>
   
   <!-- Sidebar -->
-  <rect x="50" y="50" width="120" height="330" class="fill-gray-800/50"/>
-  <rect x="70" y="80" width="80" height="8" rx="2" class="text-current fill-current opacity-20"/>
-  <rect x="70" y="100" width="60" height="8" rx="2" class="text-current fill-current opacity-10"/>
-  <rect x="70" y="120" width="70" height="8" rx="2" class="text-current fill-current opacity-10"/>
+  <path d="M20 32C20 25.3726 25.3726 20 32 20H160V380H32C25.3726 380 20 374.627 20 368V32Z" class="fill-gray-800/50"/>
+  <rect x="40" y="50" width="80" height="10" rx="2" class="fill-gray-700"/>
+  <rect x="40" y="80" width="100" height="8" rx="2" class="fill-gray-700/50"/>
+  <rect x="40" y="100" width="90" height="8" rx="2" class="fill-gray-700/50"/>
+  <rect x="40" y="120" width="80" height="8" rx="2" class="fill-gray-700/50"/>
+
+  <!-- Main Content Area Header -->
+  <rect x="180" y="40" width="380" height="40" rx="4" class="fill-gray-800"/>
+  <rect x="200" y="55" width="120" height="10" rx="2" class="text-current fill-current opacity-40"/>
   
-  <!-- Main Area -->
-  <rect x="190" y="80" width="340" height="40" rx="4" class="fill-gray-800"/>
-  <rect x="210" y="95" width="100" height="10" rx="2" class="text-current fill-current opacity-30"/>
+  <!-- Org/Client Group 1 -->
+  <g transform="translate(180, 100)">
+    <rect x="0" y="0" width="380" height="110" rx="6" class="fill-gray-800/30 stroke-gray-700" stroke-width="1"/>
+    <!-- Header -->
+    <path d="M0 6C0 2.686 2.686 0 6 0H374C377.314 0 380 2.686 380 6V30H0V6Z" class="fill-gray-800"/>
+    <circle cx="20" cy="15" r="4" class="text-current fill-current opacity-60"/>
+    <rect x="35" y="11" width="100" height="8" rx="2" class="text-white fill-current opacity-80"/>
+    <rect x="300" y="11" width="60" height="8" rx="2" class="text-green-400 fill-current opacity-80"/>
+    
+    <!-- App Row 1 -->
+    <g transform="translate(20, 45)">
+      <rect x="0" y="0" width="30" height="30" rx="4" class="fill-gray-700"/>
+      <rect x="40" y="5" width="80" height="8" rx="2" class="fill-gray-400"/>
+      <rect x="40" y="19" width="40" height="6" rx="2" class="fill-gray-600"/>
+      <rect x="240" y="8" width="80" height="14" rx="7" class="fill-green-500/20"/>
+      <rect x="260" y="12" width="40" height="6" rx="2" class="fill-green-400"/>
+    </g>
+    
+    <!-- App Row 2 -->
+    <g transform="translate(20, 80)">
+      <rect x="0" y="0" width="30" height="30" rx="4" class="fill-gray-700"/>
+      <rect x="40" y="5" width="80" height="8" rx="2" class="fill-gray-400"/>
+      <rect x="40" y="19" width="40" height="6" rx="2" class="fill-gray-600"/>
+      <rect x="240" y="8" width="80" height="14" rx="7" class="fill-green-500/20"/>
+      <rect x="260" y="12" width="40" height="6" rx="2" class="fill-green-400"/>
+    </g>
+  </g>
+
+  <!-- Org/Client Group 2 -->
+  <g transform="translate(180, 225)">
+    <rect x="0" y="0" width="380" height="80" rx="6" class="fill-gray-800/30 stroke-gray-700" stroke-width="1"/>
+    <!-- Header -->
+    <path d="M0 6C0 2.686 2.686 0 6 0H374C377.314 0 380 2.686 380 6V30H0V6Z" class="fill-gray-800"/>
+    <circle cx="20" cy="15" r="4" class="text-current fill-current opacity-60"/>
+    <rect x="35" y="11" width="100" height="8" rx="2" class="text-white fill-current opacity-80"/>
+    
+    <!-- App Row 1 -->
+    <g transform="translate(20, 45)">
+      <rect x="0" y="0" width="30" height="30" rx="4" class="fill-gray-700"/>
+      <rect x="40" y="5" width="80" height="8" rx="2" class="fill-gray-400"/>
+      <rect x="40" y="19" width="40" height="6" rx="2" class="fill-gray-600"/>
+      <rect x="240" y="8" width="80" height="14" rx="7" class="fill-yellow-500/20"/>
+      <rect x="250" y="12" width="60" height="6" rx="2" class="fill-yellow-400"/>
+    </g>
+  </g>
   
-  <!-- App Card 1 -->
-  <rect x="190" y="140" width="160" height="120" rx="6" class="fill-gray-800 stroke-gray-700" stroke-width="1"/>
-  <circle cx="215" cy="165" r="12" class="text-current fill-current opacity-20"/>
-  <rect x="240" y="158" width="80" height="8" rx="2" class="text-current fill-current opacity-40"/>
-  <rect x="240" y="172" width="50" height="6" rx="2" class="fill-gray-600"/>
-  <!-- Chart Line -->
-  <path d="M210 220 L240 210 L270 230 L300 200 L330 210" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-current opacity-60"/>
-  
-  <!-- App Card 2 -->
-  <rect x="370" y="140" width="160" height="120" rx="6" class="fill-gray-800 stroke-gray-700" stroke-width="1"/>
-  <circle cx="395" cy="165" r="12" class="text-current fill-current opacity-20"/>
-  <rect x="420" y="158" width="80" height="8" rx="2" class="text-current fill-current opacity-40"/>
-  <rect x="420" y="172" width="50" height="6" rx="2" class="fill-gray-600"/>
-  <rect x="390" y="210" width="120" height="6" rx="2" class="fill-gray-700"/>
-  <rect x="390" y="225" width="80" height="6" rx="2" class="fill-gray-700"/>
-  
-  <!-- Floating Element (Notification/Update) -->
-  <g transform="translate(420, 240)">
-    <rect x="0" y="0" width="160" height="60" rx="8" class="fill-gray-700 shadow-xl stroke-gray-600" stroke-width="1"/>
-    <circle cx="25" cy="30" r="10" class="text-green-400 fill-current opacity-20"/>
-    <path d="M20 30L23 33L30 26" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-400"/>
-    <rect x="45" y="20" width="80" height="8" rx="2" class="fill-gray-300"/>
-    <rect x="45" y="34" width="60" height="6" rx="2" class="fill-gray-500"/>
+  <!-- CLI Terminal Overlay (Bottom Right) -->
+  <g transform="translate(340, 280)">
+    <rect x="0" y="0" width="240" height="100" rx="6" class="fill-black stroke-gray-600 shadow-2xl" stroke-width="1"/>
+    <circle cx="15" cy="15" r="3" class="fill-red-500"/>
+    <circle cx="25" cy="15" r="3" class="fill-yellow-500"/>
+    <circle cx="35" cy="15" r="3" class="fill-green-500"/>
+    
+    <text x="15" y="45" class="fill-green-400 font-mono text-xs font-bold">$</text>
+    <text x="30" y="45" class="fill-gray-300 font-mono text-xs">capgo bundle upload</text>
+    
+    <text x="15" y="65" class="fill-gray-500 font-mono text-xs">Uploading...</text>
+    <rect x="15" y="75" width="100" height="4" rx="2" class="fill-gray-700"/>
+    <rect x="15" y="75" width="70" height="4" rx="2" class="fill-green-400"/>
+    <text x="125" y="78" class="fill-green-400 font-mono text-xs">70%</text>
   </g>
 </svg>
-
