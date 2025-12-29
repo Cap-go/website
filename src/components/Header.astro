@@ -152,6 +152,15 @@ const totalStars = getTotalStars()
                       </svg>
                       {m.solutions_healthcare_short({}, { locale: Astro.locals.locale })}
                     </a>
+                    <a
+                      href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/qsr')}
+                      class="flex gap-3 items-center px-2 py-2 text-sm text-gray-300 rounded-lg transition-colors hover:bg-gray-700 hover:text-white"
+                    >
+                      <svg class="w-5 h-5 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      {m.solutions_qsr_short({}, { locale: Astro.locals.locale })}
+                    </a>
                   </div>
                   <!-- By Use Case Column -->
                   <div>
@@ -364,6 +373,12 @@ const totalStars = getTotalStars()
             class="block px-3 py-2 text-sm text-gray-400 rounded-md hover:text-white hover:bg-gray-600"
           >
             {m.solutions_healthcare_short({}, { locale: Astro.locals.locale })}
+          </a>
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/qsr')}
+            class="block px-3 py-2 text-sm text-gray-400 rounded-md hover:text-white hover:bg-gray-600"
+          >
+            {m.solutions_qsr_short({}, { locale: Astro.locals.locale })}
           </a>
           <p class="px-3 py-1 text-xs font-semibold tracking-wider text-gray-500 uppercase">{m.solutions_by_use_case({}, { locale: Astro.locals.locale })}</p>
           <a
