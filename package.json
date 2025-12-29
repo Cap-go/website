@@ -57,7 +57,7 @@
     "@iconify-json/carbon": "^1.2.14",
     "@iconify-json/twemoji": "^1.2.4",
     "@inlang/cli": "^3.0.12",
-    "@inlang/paraglide-js": "2.7.0",
+    "@inlang/paraglide-js": "2.7.1",
     "@types/js-yaml": "^4.0.9",
     "@types/marked": "^6.0.0",
     "@types/node": "^24.9.1",
