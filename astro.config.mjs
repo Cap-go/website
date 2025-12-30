@@ -91,6 +91,7 @@ export default defineConfig({
         locales: localeNames,
       },
       filter: filterSitemapByDefaultLocale({ defaultLocale }),
+      lastmod: new Date(),
     }),
     starlight({
       title: 'Capgo',
