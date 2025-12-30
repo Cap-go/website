@@ -116,6 +116,8 @@ export default defineConfig({
         locales: localeNames,
       },
       filter: filterSitemapByDefaultLocale({ defaultLocale }),
+      changefreq: 'weekly',
+      priority: 0.7,
       lastmod: new Date(),
       serialize(item) {
         // Extract blog slug from URL like https://capgo.app/blog/my-post/
