@@ -9,7 +9,7 @@ import starlightLlmsTxt from 'starlight-llms-txt'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import config from './configs.json'
 import { glob } from 'glob'
-import { readFileSync, statSync } from 'fs'
+import { readFileSync, statSync } from 'node:fs'
 import { defaultLocale, localeNames, locales } from './src/services/locale'
 
 // Build a map of page paths to their lastmod dates for sitemap
