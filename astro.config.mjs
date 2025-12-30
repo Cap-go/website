@@ -116,6 +116,7 @@ export default defineConfig({
         locales: localeNames,
       },
       filter: filterSitemapByDefaultLocale({ defaultLocale }),
+      lastmod: new Date(),
       serialize(item) {
         // Extract blog slug from URL like https://capgo.app/blog/my-post/
         const blogMatch = item.url.match(/\/blog\/([^/]+)\/?$/)
