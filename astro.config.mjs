@@ -1,14 +1,39 @@
+import fs from 'node:fs'
+import path from 'node:path'
 import sitemap from '@astrojs/sitemap'
 import starlight from '@astrojs/starlight'
 import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import tailwindcss from '@tailwindcss/vite'
 import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
 import { defineConfig, envField } from 'astro/config'
+import matter from 'gray-matter'
 import starlightImageZoom from 'starlight-image-zoom'
 import starlightLlmsTxt from 'starlight-llms-txt'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import config from './configs.json'
 import { defaultLocale, localeNames, locales } from './src/services/locale'
+
+// Build a map of blog slugs to their updated_at dates
+function getBlogDates() {
+  const blogDir = path.join(process.cwd(), 'src/content/blog/en')
+  const dates = new Map()
+
+  if (!fs.existsSync(blogDir)) return dates
+
+  const files = fs.readdirSync(blogDir).filter((f) => f.endsWith('.md'))
+  for (const file of files) {
+    try {
+      const content = fs.readFileSync(path.join(blogDir, file), 'utf-8')
+      const { data } = matter(content)
+      if (data.slug && data.updated_at) {
+        dates.set(data.slug, new Date(data.updated_at))
+      }
+    } catch {}
+  }
+  return dates
+}
+
+const blogDates = getBlogDates()
 
 const docsExpludes = locales.map((locale) => `${locale}/**`)
 
@@ -91,7 +116,21 @@ export default defineConfig({
         locales: localeNames,
       },
       filter: filterSitemapByDefaultLocale({ defaultLocale }),
-      lastmod: new Date(),
+      serialize(item) {
+        // Extract blog slug from URL like https://capgo.app/blog/my-post/
+        const blogMatch = item.url.match(/\/blog\/([^/]+)\/?$/)
+        if (blogMatch) {
+          const slug = blogMatch[1]
+          const date = blogDates.get(slug)
+          if (date) {
+            item.lastmod = date
+            return item
+          }
+        }
+        // Default to current build time for non-blog pages
+        item.lastmod = new Date()
+        return item
+      },
     }),
     starlight({
       title: 'Capgo',
