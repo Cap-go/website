@@ -1,39 +1,58 @@
-import fs from 'node:fs'
-import path from 'node:path'
 import sitemap from '@astrojs/sitemap'
 import starlight from '@astrojs/starlight'
 import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import tailwindcss from '@tailwindcss/vite'
 import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
 import { defineConfig, envField } from 'astro/config'
-import matter from 'gray-matter'
 import starlightImageZoom from 'starlight-image-zoom'
 import starlightLlmsTxt from 'starlight-llms-txt'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import config from './configs.json'
+import { glob } from 'glob'
+import { readFileSync, statSync } from 'fs'
 import { defaultLocale, localeNames, locales } from './src/services/locale'
 
-// Build a map of blog slugs to their updated_at dates
-function getBlogDates() {
-  const blogDir = path.join(process.cwd(), 'src/content/blog/en')
-  const dates = new Map()
+// Build a map of page paths to their lastmod dates for sitemap
+function getPageLastModDates() {
+  const lastModMap = new Map()
 
-  if (!fs.existsSync(blogDir)) return dates
-
-  const files = fs.readdirSync(blogDir).filter((f) => f.endsWith('.md'))
-  for (const file of files) {
-    try {
-      const content = fs.readFileSync(path.join(blogDir, file), 'utf-8')
-      const { data } = matter(content)
-      if (data.slug && data.updated_at) {
-        dates.set(data.slug, new Date(data.updated_at))
+  // Get blog post dates from frontmatter
+  const blogFiles = glob.sync('src/content/blog/**/*.md')
+  for (const file of blogFiles) {
+    const content = readFileSync(file, 'utf-8')
+    const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/)
+    if (frontmatterMatch) {
+      const frontmatter = frontmatterMatch[1]
+      const updatedAtMatch = frontmatter.match(/updated_at:\s*(.+)/)
+      const slugMatch = frontmatter.match(/slug:\s*(.+)/)
+      if (updatedAtMatch && slugMatch) {
+        const slug = slugMatch[1].trim()
+        const updatedAt = updatedAtMatch[1].trim()
+        lastModMap.set(`/blog/${slug}`, new Date(updatedAt))
+        lastModMap.set(`/blog/${slug}/`, new Date(updatedAt))
       }
-    } catch {}
+    }
   }
-  return dates
+
+  // Get static page dates from file modification time
+  const pageFiles = glob.sync('src/pages/**/*.astro')
+  for (const file of pageFiles) {
+    const stat = statSync(file)
+    // Convert file path to URL path
+    let urlPath = file
+      .replace('src/pages', '')
+      .replace('/index.astro', '/')
+      .replace('.astro', '/')
+    if (!urlPath.endsWith('/')) urlPath += '/'
+    if (!lastModMap.has(urlPath)) {
+      lastModMap.set(urlPath, stat.mtime)
+    }
+  }
+
+  return lastModMap
 }
 
-const blogDates = getBlogDates()
+const pageLastModDates = getPageLastModDates()
 
 const docsExpludes = locales.map((locale) => `${locale}/**`)
 
@@ -120,18 +139,12 @@ export default defineConfig({
       priority: 0.7,
       lastmod: new Date(),
       serialize(item) {
-        // Extract blog slug from URL like https://capgo.app/blog/my-post/
-        const blogMatch = item.url.match(/\/blog\/([^/]+)\/?$/)
-        if (blogMatch) {
-          const slug = blogMatch[1]
-          const date = blogDates.get(slug)
-          if (date) {
-            item.lastmod = date
-            return item
-          }
+        // Check if this URL matches a page with a known lastmod date
+        const urlPath = new URL(item.url).pathname
+        const lastmod = pageLastModDates.get(urlPath)
+        if (lastmod) {
+          item.lastmod = lastmod.toISOString()
         }
-        // Default to current build time for non-blog pages
-        item.lastmod = new Date()
         return item
       },
     }),
