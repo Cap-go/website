@@ -1,5 +1,5 @@
 ---
-slug: comprendiendo-el-manifiesto-de-privacidad-de-apple
+slug: understanding-apples-privacy-manifest
 title: Memahami Manifes Privasi Apple
 description: >-
   Pelajari lebih lanjut tentang manifes privasi wajib Apple, pentingnya untuk

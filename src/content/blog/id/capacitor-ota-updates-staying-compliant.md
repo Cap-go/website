@@ -1,5 +1,5 @@
 ---
-slug: mises-a-jour-ota-dans-capacitor-en-restant-conforme
+slug: capacitor-ota-updates-staying-compliant
 title: 'Pembaruan OTA Capacitor: Tetap Patuh'
 description: >-
   Pelajari cara mengimplementasikan pembaruan OTA untuk aplikasi Capacitor

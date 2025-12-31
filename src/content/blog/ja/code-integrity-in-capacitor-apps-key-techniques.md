@@ -1,5 +1,5 @@
 ---
-slug: integrità-del-codice-nelle-app-capacitor-tecniche-chiave
+slug: code-integrity-in-capacitor-apps-key-techniques
 title: Capacitor アプリのコード整合性：主要なテクニック
 description: アプリストアのガイドラインに準拠しながら、OTAアップデート、暗号化に焦点を当てて、モバイルアプリのコード整合性を確保するための重要な手法を探ります。
 author: Martin Donadieu

@@ -1,5 +1,5 @@
 ---
-slug: activar-modo-desarrollador-ios16
+slug: enable-ios-developer-mode-ios16
 title: Cara Mengaktifkan Mode Pengembang di iOS 16 untuk Pengujian Aplikasi
 description: >-
   Panduan langkah demi langkah untuk mengaktifkan Mode Pengembang di iOS 16 ke

@@ -1,5 +1,5 @@
 ---
-slug: applications-capacitor-et-lois-sur-les-donnees-russes-conseils-de-conformite
+slug: capacitor-apps-and-russias-data-laws-compliance-tips
 title: 'Aplikasi Capacitor dan Undang-Undang Data Rusia: Panduan Kepatuhan'
 description: >-
   Temukan tips penting untuk kepatuhan pengembangan aplikasi di Rusia, termasuk

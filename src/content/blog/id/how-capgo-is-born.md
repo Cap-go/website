@@ -1,5 +1,5 @@
 ---
-slug: comment-est-né-capgo
+slug: how-capgo-is-born
 title: Kelahiran Capgo
 description: Kisah Tentang Bagaimana Saya Memulai Perjalanan Ini dan Membangun Capgo
 author: Martin Donadieu

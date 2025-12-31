@@ -1,5 +1,5 @@
 ---
-slug: application-mobile-vue-capacitor
+slug: vue-mobile-app-capacitor
 title: Membuat Aplikasi Mobile dengan Vue dan Capacitor
 description: >-
   Pelajari cara membuat aplikasi mobile dengan Vue, Capacitor dan opsional

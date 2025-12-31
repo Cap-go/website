@@ -1,5 +1,5 @@
 ---
-slug: ccpa-conformite-pour-applications-mobiles
+slug: ccpa-compliance-for-mobile-apps
 title: Kepatuhan CCPA untuk Aplikasi Seluler
 description: >-
   Temukan langkah-langkah paling penting bagi pengembang aplikasi mobile untuk

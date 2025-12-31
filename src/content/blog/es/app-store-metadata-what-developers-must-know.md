@@ -1,5 +1,5 @@
 ---
-slug: Was Entwickler über App Store Metadaten wissen müssen
+slug: app-store-metadata-what-developers-must-know
 title: 'Metadatos de la App Store: Lo que los desarrolladores deben saber'
 description: >-
   Descubra cómo los metadatos efectivos de la App Store pueden mejorar la

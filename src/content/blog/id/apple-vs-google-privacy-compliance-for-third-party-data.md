@@ -1,5 +1,5 @@
 ---
-slug: protection-confidentialite-apple-google-conformite-donnees-tierces
+slug: apple-vs-google-privacy-compliance-for-third-party-data
 title: 'Apple vs. Google: Kepatuhan Privasi untuk Data Pihak Ketiga'
 description: >-
   Jelajahi strategi privasi yang kontras dari dua perusahaan teknologi besar dan

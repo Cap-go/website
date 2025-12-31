@@ -1,5 +1,5 @@
 ---
-slug: sicherheits-checkliste-für-ota-updates-in-capacitor-apps
+slug: ota-security-checklist-for-capacitor-apps
 title: Lista de verificación de seguridad OTA para aplicaciones Capacitor
 description: >-
   Conozca las medidas de seguridad importantes para las actualizaciones OTA en

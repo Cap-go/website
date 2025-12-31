@@ -1,5 +1,5 @@
 ---
-slug: gestion-des-clés-sous-la-réglementation-chinoise-sur-le-chiffrement
+slug: key-management-under-chinas-encryption-rules
 title: Manajemen Kunci Berdasarkan Peraturan Enkripsi China
 description: >-
   Memahami hukum pengelolaan kunci enkripsi Tiongkok sangat penting untuk

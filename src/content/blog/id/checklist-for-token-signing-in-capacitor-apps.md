@@ -1,5 +1,5 @@
 ---
-slug: lista-de-verificación-para-la-firma-de-tokens-en-aplicaciones-capacitor
+slug: checklist-for-token-signing-in-capacitor-apps
 title: Daftar Periksa untuk Token Signing di Aplikasi Capacitor
 description: >-
   Ikuti daftar periksa lengkap ini untuk menandatangani token secara aman di

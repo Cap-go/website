@@ -1,5 +1,5 @@
 ---
-slug: auto-hospedado-capgo
+slug: self-hosted-capgo
 title: Capgo yang Dihosting Sendiri
 description: >-
   Auto-hosting Capgo memungkinkan Anda untuk menerapkan pembaruan langsung

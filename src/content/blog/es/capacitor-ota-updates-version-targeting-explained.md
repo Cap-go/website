@@ -1,5 +1,5 @@
 ---
-slug: Erklärung zum Capacitor OTA Update Versions-Targeting
+slug: capacitor-ota-updates-version-targeting-explained
 title: 'Actualizaciones OTA de Capacitor: Versionado explicado'
 description: >-
   Descubra cómo la segmentación por versiones para actualizaciones OTA garantiza

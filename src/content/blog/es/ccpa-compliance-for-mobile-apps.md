@@ -1,5 +1,5 @@
 ---
-slug: ccpa-compliance-für-mobile-apps
+slug: ccpa-compliance-for-mobile-apps
 title: Conformidad con la CCPA para aplicaciones móviles
 description: >-
   Descubra los pasos más importantes para los desarrolladores de aplicaciones

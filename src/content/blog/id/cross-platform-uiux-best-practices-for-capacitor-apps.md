@@ -1,5 +1,5 @@
 ---
-slug: pratiques-recommandees-ui-ux-multiplateforme-pour-les-applications-capacitor
+slug: cross-platform-uiux-best-practices-for-capacitor-apps
 title: 'UI/UX Lintas Platform: Praktik Terbaik untuk Aplikasi Capacitor'
 description: >-
   Pelajari praktik terbaik untuk membuat UI/UX yang mulus dan lintas platform

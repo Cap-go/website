@@ -1,5 +1,5 @@
 ---
-slug: construire-une-application-mobile-native-avec-nuxt-3-et-capacitor
+slug: building-a-native-mobile-app-with-nuxt-3-and-capacitor
 title: Membuat Aplikasi Mobile dengan Nuxt 3 dan Capacitor
 description: >-
   Cara membuat aplikasi mobile dengan Nuxt 3, Capacitor dan mengimplementasikan

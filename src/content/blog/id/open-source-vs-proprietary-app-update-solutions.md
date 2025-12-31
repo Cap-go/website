@@ -1,5 +1,5 @@
 ---
-slug: Solutions de mise à jour d'applications open source vs propriétaires
+slug: open-source-vs-proprietary-app-update-solutions
 title: Solusi open source vs proprietary untuk update aplikasi
 description: >-
   Pelajari perbedaan antara solusi pembaruan aplikasi open source dan

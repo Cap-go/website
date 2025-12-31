@@ -1,5 +1,5 @@
 ---
-slug: sicurezza-della-chiave-api-per-la-conformità-con-app-store
+slug: api-key-security-for-app-store-compliance
 title: API キー セキュリティのストア コンプライアンス
 description: アプリストアのガイドラインを遵守し、ユーザーデータを保護するために、APIキーの保存、転送、管理を含む重要な保護戦略について学びましょう。
 author: Martin Donadieu

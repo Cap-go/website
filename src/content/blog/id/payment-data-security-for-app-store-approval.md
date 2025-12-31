@@ -1,5 +1,5 @@
 ---
-slug: zahlungsdaten-sicherheit-fuer-app-store-genehmigung
+slug: payment-data-security-for-app-store-approval
 title: Keamanan Data Pembayaran untuk Persetujuan App Store
 description: >-
   Pastikan aplikasi Anda memenuhi persyaratan keamanan untuk data pembayaran

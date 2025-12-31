@@ -1,5 +1,5 @@
 ---
-slug: migrating-cordova-zu-capacitor
+slug: migrating-cordova-to-capacitor
 title: 'Migrasi Aplikasi Web dari Cordova ke Capacitor: Panduan Langkah demi Langkah'
 description: >-
   Panduan langkah demi langkah ini akan membantu Anda melakukan migrasi aplikasi

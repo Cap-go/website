@@ -1,5 +1,5 @@
 ---
-slug: guide-de-debogage-des-applications-capacitor
+slug: ultimate-guide-to-debugging-capacitor-apps
 title: Panduan Lengkap Pemecahan Masalah Aplikasi Capacitor
 description: >-
   Temukan strategi yang efektif dan alat penting untuk melakukan debug aplikasi

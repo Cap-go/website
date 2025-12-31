@@ -1,5 +1,5 @@
 ---
-slug: so-werden-ota-updates-mit-schlüsselverwaltung-gesichert
+slug: how-to-secure-ota-updates-with-key-management
 title: Cómo asegurar las actualizaciones OTA con gestión de claves
 description: >-
   Aprenda cómo la gestión efectiva de claves y el cifrado pueden asegurar las

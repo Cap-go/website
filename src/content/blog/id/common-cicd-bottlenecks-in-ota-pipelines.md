@@ -1,5 +1,5 @@
 ---
-slug: problemes-frequents-dans-le-pipeline-cicd-pour-les-mises-a-jour-ota
+slug: common-cicd-bottlenecks-in-ota-pipelines
 title: Penyempitan Umum CI/CD dalam Pipeline OTA
 description: >-
   Pelajari cara mengatasi tantangan umum dalam pipeline CI/CD OTA untuk

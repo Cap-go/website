@@ -1,5 +1,5 @@
 ---
-slug: so-passen-sie-build-skripte-mit-capacitor-cli-an
+slug: how-to-customize-build-scripts-with-capacitor-cli
 title: Menyesuaikan Skrip Build dengan CLI Capacitor
 description: >-
   Pelajari cara menyesuaikan skrip build dengan CLI Capacitor untuk penerapan

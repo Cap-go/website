@@ -1,5 +1,5 @@
 ---
-slug: comment-la-conformite-ccpa-impacte-les-applications
+slug: how-ccpa-enforcement-impacts-apps
 title: Bagaimana CCPA Mempengaruhi Aplikasi
 description: >-
   CCPA mengubah cara aplikasi seluler menangani data pengguna, dengan fokus pada

@@ -1,5 +1,5 @@
 ---
-slug: mejores-prácticas-actualizaciones-ota-staging
+slug: staging-ota-updates-best-practices
 title: 'Mises à jour OTA par étapes : bonnes pratiques'
 description: >-
   Découvrez les meilleures pratiques pour implémenter les mises à jour OTA, en

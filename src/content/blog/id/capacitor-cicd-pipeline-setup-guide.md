@@ -1,5 +1,5 @@
 ---
-slug: guide-configuration-pipeline-cicd-capacitor
+slug: capacitor-cicd-pipeline-setup-guide
 title: Panduan Konfigurasi Pipeline CI/CD Capacitor
 description: >-
   Otomatiskan proses kompilasi, pengujian, dan penerapan aplikasi Capacitor Anda

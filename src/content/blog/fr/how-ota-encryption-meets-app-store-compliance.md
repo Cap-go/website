@@ -1,5 +1,5 @@
 ---
-slug: cómo-el-cifrado-ota-cumple-con-las-normas-de-la-app-store
+slug: how-ota-encryption-meets-app-store-compliance
 title: Comment le chiffrement OTA respecte les règles de l'App Store
 description: >-
   Découvrez comment le chiffrement OTA sécurise les mises à jour des

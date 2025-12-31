@@ -1,5 +1,5 @@
 ---
-slug: capgo-fonctionne-t-il-avec-cordova
+slug: do-capgo-work-for-cordova
 title: >-
   Mengapa Capgo tidak mendukung Cordova: Perbarui aplikasi Anda untuk mengakses
   pembaruan langsung

@@ -1,5 +1,5 @@
 ---
-slug: mises-à-jour-en-direct-sur-apple
+slug: do-apple-allow-live-updates
 title: >-
   Apple tidak mengizinkan aplikasi untuk didistribusikan secara live update
   tanpa melalui peninjauan App Store terlebih dahulu.

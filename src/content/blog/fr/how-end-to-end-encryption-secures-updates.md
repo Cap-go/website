@@ -1,5 +1,5 @@
 ---
-slug: wie-ende-zu-ende-verschlüsselung-updates-sichert
+slug: how-end-to-end-encryption-secures-updates
 title: La sécurisation des mises à jour avec le chiffrement de bout en bout
 description: >-
   Découvrez comment le chiffrement de bout en bout sécurise les mises à jour

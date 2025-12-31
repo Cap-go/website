@@ -1,5 +1,5 @@
 ---
-slug: Was Sie über Capacitor-Plugins wissen müssen
+slug: capacitor-plugins-what-you-need-to-know
 title: 'Plugins de Capacitor: Lo que necesitas saber'
 description: >-
   Aprende cómo utilizar los plugins de Capacitor para el desarrollo de

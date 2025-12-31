@@ -1,5 +1,5 @@
 ---
-slug: herramientas-principales-para-depurar-actualizaciones-ota-en-capacitor
+slug: top-tools-for-debugging-ota-updates-in-capacitor
 title: Alat Utama untuk Debug Pembaruan OTA di Capacitor
 description: >-
   Jelajahi alat-alat penting dan strategi untuk melakukan debug pembaruan OTA

@@ -1,5 +1,5 @@
 ---
-slug: comment-les-mises-a-jour-ota-affectent-la-securite-de-l-app-store
+slug: how-ota-updates-affect-app-store-security
 title: Bagaimana OTA Update Mempengaruhi Keamanan App Store
 description: >-
   Pembaruan OTA menyederhanakan peningkatan aplikasi, namun memiliki risiko

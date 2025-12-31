@@ -1,5 +1,5 @@
 ---
-slug: guide-étape-par-étape-pour-l'initialisation-d'une-application-capacitor
+slug: capacitor-app-initialization-step-by-step-guide
 title: Panduan Memulai Capacitor Secara Bertahap
 description: >-
   Pelajari cara mengonfigurasi dan mendeploy aplikasi mobile secara efisien

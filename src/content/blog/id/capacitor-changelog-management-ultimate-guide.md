@@ -1,5 +1,5 @@
 ---
-slug: guía-definitiva-manejo-changelog-capacitor
+slug: capacitor-changelog-management-ultimate-guide
 title: 'Mengelola Log Perubahan Capacitor: Panduan Lengkap'
 description: >-
   Pelajari cara pengelolaan catatan perubahan yang efektif untuk aplikasi

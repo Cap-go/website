@@ -1,5 +1,5 @@
 ---
-slug: configuración-del-proyecto-cli-de-capacitor
+slug: capacitor-cli-project-setup-guide
 title: 'Guide de configuration du projet : CLI Capacitor'
 description: >-
   Apprenez à configurer Capacitor CLI pour créer des applications natives iOS et

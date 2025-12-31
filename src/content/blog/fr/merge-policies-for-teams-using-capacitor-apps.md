@@ -1,5 +1,5 @@
 ---
-slug: Directrices de fusión para equipos que utilizan aplicaciones Capacitor
+slug: merge-policies-for-teams-using-capacitor-apps
 title: Directives de fusion pour les équipes avec des applications Capacitor
 description: >-
   Apprenez à créer des politiques de fusion efficaces pour les applications

@@ -1,5 +1,5 @@
 ---
-slug: about-open-source
+slug: open-source
 title: Pelajari apa itu open source dan mengapa itu penting!
 description: >-
   Selama perjalanan pemrograman Anda, Anda mungkin pernah mendengar istilah

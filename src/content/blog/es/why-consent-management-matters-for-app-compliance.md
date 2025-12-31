@@ -1,5 +1,5 @@
 ---
-slug: warum-einwilligungsmanagement-für-app-konformität-wichtig-ist
+slug: why-consent-management-matters-for-app-compliance
 title: >-
   Por qué es importante la gestión del consentimiento para la conformidad de las
   aplicaciones

@@ -1,5 +1,5 @@
 ---
-slug: android-desactiver-talkback
+slug: turn-off-android-talkback
 title: Cara Menonaktifkan dan Menggunakan TalkBack di Perangkat Android
 description: >-
   Instruksi langkah demi langkah untuk mengaktifkan dan menavigasi dengan

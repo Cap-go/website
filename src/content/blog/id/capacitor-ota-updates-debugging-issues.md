@@ -1,5 +1,5 @@
 ---
-slug: dépannage-des-mises-à-jour-capacitor-ota
+slug: capacitor-ota-updates-debugging-issues
 title: Debugging Pembaruan OTA Capacitor
 description: >-
   Pelajari cara menyelesaikan masalah pembaruan OTA secara efektif, memastikan

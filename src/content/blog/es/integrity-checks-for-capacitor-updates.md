@@ -1,5 +1,5 @@
 ---
-slug: Integritätsprüfungen für Capacitor-Updates
+slug: integrity-checks-for-capacitor-updates
 title: Comprobaciones de integridad para actualizaciones de Capacitor
 description: >-
   Aprende cómo implementar actualizaciones OTA seguras para aplicaciones

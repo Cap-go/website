@@ -1,5 +1,5 @@
 ---
-slug: Directives de fusion pour les équipes utilisant des applications Capacitor
+slug: merge-policies-for-teams-using-capacitor-apps
 title: Petunjuk penggabungan untuk tim dengan aplikasi Capacitor
 description: >-
   Pelajari cara membuat kebijakan penggabungan yang efektif untuk aplikasi

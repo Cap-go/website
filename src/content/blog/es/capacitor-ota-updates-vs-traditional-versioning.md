@@ -1,5 +1,5 @@
 ---
-slug: Capacitor OTA-Updates vs. traditionelle Versionierung
+slug: capacitor-ota-updates-vs-traditional-versioning
 title: Actualizaciones OTA de Capacitor vs Versionamiento Tradicional
 description: >-
   Descubre cómo las actualizaciones OTA de Capacitor revolucionan la

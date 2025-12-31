@@ -1,5 +1,5 @@
 ---
-slug: Guide d'intégration de Capgo avec GitHub Actions
+slug: capgo-integration-with-github-actions-guide
 title: 'Integrasi Capgo dengan GitHub Actions: Panduan'
 description: >-
   Integrasikan Capgo dengan GitHub Actions untuk pembaruan aplikasi yang

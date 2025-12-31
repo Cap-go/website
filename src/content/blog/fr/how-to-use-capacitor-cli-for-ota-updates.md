@@ -1,5 +1,5 @@
 ---
-slug: so-verwenden-sie-die-capacitor-cli-für-ota-updates
+slug: how-to-use-capacitor-cli-for-ota-updates
 title: Comment utiliser l'interface CLI de Capacitor pour les mises à jour OTA
 description: >-
   Découvrez comment utiliser l'interface de ligne de commande Capacitor pour les

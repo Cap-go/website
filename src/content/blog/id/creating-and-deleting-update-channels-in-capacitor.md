@@ -1,5 +1,5 @@
 ---
-slug: creation-et-suppression-de-canaux-de-mise-a-jour-dans-capacitor
+slug: creating-and-deleting-update-channels-in-capacitor
 title: Membuat dan Menghapus Saluran Pembaruan di Capacitor
 description: >-
   Pelajari cara membuat, mengelola, dan menghapus kanal pembaruan di Capacitor

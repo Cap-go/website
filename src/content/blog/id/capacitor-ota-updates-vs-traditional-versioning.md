@@ -1,5 +1,5 @@
 ---
-slug: Mises à jour OTA de Capacitor vs Versionnement traditionnel
+slug: capacitor-ota-updates-vs-traditional-versioning
 title: Pembaruan OTA Capacitor vs. Penerapan Versi Tradisional
 description: >-
   Pelajari bagaimana pembaruan OTA Capacitor merevolusi distribusi aplikasi,

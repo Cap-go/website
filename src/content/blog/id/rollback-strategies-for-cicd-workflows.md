@@ -1,5 +1,5 @@
 ---
-slug: stratégies-de-restauration-pour-les-workflows-cicd
+slug: rollback-strategies-for-cicd-workflows
 title: Strategi Rollback untuk Alur Kerja CI/CD
 description: >-
   Jelajahi strategi rollback yang efektif untuk alur kerja CI/CD dan temukan

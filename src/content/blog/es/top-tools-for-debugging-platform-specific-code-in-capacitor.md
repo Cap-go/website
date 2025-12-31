@@ -1,5 +1,5 @@
 ---
-slug: top-tools-für-das-debugging-von-plattformspezifischem-code-in-capacitor
+slug: top-tools-for-debugging-platform-specific-code-in-capacitor
 title: >-
   Herramientas principales para depurar código específico de plataforma en
   Capacitor

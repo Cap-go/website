@@ -1,5 +1,5 @@
 ---
-slug: guide-complet-de-capacitor
+slug: capacitor-comprehensive-guide
 title: 'Capacitor : Panduan Lengkap'
 description: >-
   Capacitor adalah alat yang ampuh yang memungkinkan developer web untuk membuat

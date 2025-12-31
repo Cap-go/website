@@ -1,5 +1,5 @@
 ---
-slug: bonnes-pratiques-pour-l-approbation-des-mises-a-jour-ota
+slug: user-consent-for-ota-updates-best-practices
 title: 'Persetujuan Pengguna untuk Update OTA: Praktik Terbaik'
 description: >-
   Pelajari lebih lanjut tentang praktik terbaik untuk mendapatkan persetujuan

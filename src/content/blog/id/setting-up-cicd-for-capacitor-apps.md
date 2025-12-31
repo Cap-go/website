@@ -1,5 +1,5 @@
 ---
-slug: einrichten-von-cicd-für-capacitor-apps
+slug: setting-up-cicd-for-capacitor-apps
 title: Menyiapkan CI/CD untuk Aplikasi Capacitor
 description: >-
   Pelajari cara mengoptimalkan rilis aplikasi Anda untuk iOS dan Android

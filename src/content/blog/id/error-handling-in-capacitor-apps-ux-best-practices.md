@@ -1,5 +1,5 @@
 ---
-slug: gestion-des-erreurs-dans-les-applications-capacitor-meilleures-pratiques-ux
+slug: error-handling-in-capacitor-apps-ux-best-practices
 title: 'Penanganan Error dalam Aplikasi Capacitor: Praktik Terbaik UX'
 description: >-
   Penanganan kesalahan yang efektif dalam aplikasi meningkatkan pengalaman

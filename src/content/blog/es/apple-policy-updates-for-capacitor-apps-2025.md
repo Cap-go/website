@@ -1,5 +1,5 @@
 ---
-slug: apple-policy-updates-für-capacitor-apps-2025
+slug: apple-policy-updates-for-capacitor-apps-2025
 title: Actualizaciones de la Política de Apple para Aplicaciones de Capacitor 2025
 description: >-
   Las pautas de la App Store de Apple para 2025 establecen nuevos estándares de

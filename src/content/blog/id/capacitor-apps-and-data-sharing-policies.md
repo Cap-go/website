@@ -1,5 +1,5 @@
 ---
-slug: les-applications-capacitor-et-les-politiques-de-partage-de-données
+slug: capacitor-apps-and-data-sharing-policies
 title: Aplikasi Capacitor dan Kebijakan Berbagi Data
 description: >-
   Pelajari kebijakan penting tentang berbagi data untuk aplikasi Capacitor untuk

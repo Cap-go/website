@@ -1,5 +1,5 @@
 ---
-slug: wie-delta-updates-die-payload-größe-reduzieren
+slug: how-delta-updates-reduce-payload-size
 title: Comment les mises à jour Delta réduisent la taille de la Payload
 description: >-
   Découvrez comment les mises à jour Delta améliorent les performances des

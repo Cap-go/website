@@ -1,5 +1,5 @@
 ---
-slug: comandos-cli-comunes-de-capacitor-problemas-y-soluciones
+slug: capacitor-cli-commands-common-issues-and-fixes
 title: 'Perintah CLI Capacitor: Masalah dan Solusi Umum'
 description: >-
   Selesaikan masalah umum CLI Capacitor dengan solusi praktis untuk plugin,

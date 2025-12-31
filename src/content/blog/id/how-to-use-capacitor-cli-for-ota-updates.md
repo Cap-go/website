@@ -1,5 +1,5 @@
 ---
-slug: comment-utiliser-capacitor-cli-pour-les-mises-à-jour-ota
+slug: how-to-use-capacitor-cli-for-ota-updates
 title: Cara Menggunakan CLI Capacitor untuk Pembaruan OTA
 description: >-
   Pelajari cara menggunakan Command Line Interface Capacitor untuk pembaruan

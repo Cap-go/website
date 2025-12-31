@@ -1,5 +1,5 @@
 ---
-slug: Versionsunterschiede zwischen Capacitor und Appflow
+slug: capacitor-vs-appflow-versioning-differences
 title: 'Capacitor vs. Appflow: Diferencias en el versionamiento'
 description: >-
   Descubre las diferencias en el versionado entre métodos manuales y

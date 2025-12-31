@@ -1,5 +1,5 @@
 ---
-slug: gestion-des-dependances-dans-les-projets-capacitor
+slug: managing-dependencies-in-capacitor-projects
 title: Mengelola Dependensi dalam Proyek Capacitor
 description: >-
   Temukan strategi penting untuk mengelola dependensi dalam proyek Capacitor

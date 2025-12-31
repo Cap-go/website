@@ -1,5 +1,5 @@
 ---
-slug: compilation-android-capacitor-automatique-avec-github-action
+slug: automatic-capacitor-android-build-github-action
 title: Pembuatan Otomatis Android dengan Capacitor melalui GitHub Actions
 description: >-
   Cara Menyiapkan Pipeline CI/CD untuk Aplikasi Android Capacitor Menggunakan

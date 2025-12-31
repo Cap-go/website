@@ -1,5 +1,5 @@
 ---
-slug: différences-clés-entre-les-plugins-capacitor-cicd-et-appflow
+slug: capacitor-cicd-plugins-vs-appflow-key-differences
 title: 'Plugin CI/CD Capacitor vs Appflow: Perbedaan Utama'
 description: >-
   Jelajahi perbedaan antara plugin CI/CD Capacitor dan Appflow, termasuk biaya,

@@ -1,5 +1,5 @@
 ---
-slug: Preisreduzierung bei Capgo
+slug: capgo-price-reduction
 title: >-
   Reducción de precios de Capgo: Haciendo las actualizaciones en vivo aún más
   accesibles

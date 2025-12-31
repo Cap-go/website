@@ -1,5 +1,5 @@
 ---
-slug: Open-Source vs proprietäre App-Update-Lösungen
+slug: open-source-vs-proprietary-app-update-solutions
 title: Solutions open source vs propriétaires pour la mise à jour d'applications
 description: >-
   Explorez les différences entre les solutions de mise à jour d'applications

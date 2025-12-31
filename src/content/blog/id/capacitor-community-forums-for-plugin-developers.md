@@ -1,5 +1,5 @@
 ---
-slug: foros-de-la-comunidad-capacitor-para-desarrolladores-de-plugins
+slug: capacitor-community-forums-for-plugin-developers
 title: Forum Komunitas Capacitor untuk Pengembang Plugin
 description: >-
   Jelajahi forum-forum penting untuk pengembang plugin Capacitor untuk

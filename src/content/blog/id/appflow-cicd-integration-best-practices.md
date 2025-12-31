@@ -1,5 +1,5 @@
 ---
-slug: pratiques-recommandées-pour-l'intégration-cicd-appflow
+slug: appflow-cicd-integration-best-practices
 title: 'Integrasi CI/CD Appflow: Praktik Terbaik'
 description: >-
   Jelajahi praktik terbaik untuk mengintegrasikan solusi CI/CD dalam

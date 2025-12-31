@@ -1,5 +1,5 @@
 ---
-slug: actualizaciones-en-tiempo-real-con-segmentación-de-usuarios
+slug: real-time-updates-with-user-segmentation
 title: Pembaruan Real-time dengan Segmentasi Pengguna
 description: >-
   Pelajari bagaimana pembaruan real-time dan segmentasi pengguna dapat

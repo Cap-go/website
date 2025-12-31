@@ -1,5 +1,5 @@
 ---
-slug: comment-les-mises-à-jour-delta-réduisent-la-taille-de-la-charge-utile
+slug: how-delta-updates-reduce-payload-size
 title: Cara Update Delta Mengurangi Ukuran Payload
 description: >-
   Pelajari bagaimana pembaruan Delta meningkatkan kinerja aplikasi dengan

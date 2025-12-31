@@ -1,5 +1,5 @@
 ---
-slug: wie-cicd-tools-ota-updates-auslösen
+slug: how-cicd-tools-trigger-ota-updates
 title: Les outils CI/CD déclenchent des mises à jour OTA
 description: >-
   Découvrez comment les outils CI/CD améliorent les mises à jour OTA et

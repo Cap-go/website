@@ -1,5 +1,5 @@
 ---
-slug: Bewährte Methoden zur Versionierung von Capacitor OTA-Updates
+slug: capacitor-ota-updates-versioning-best-practices
 title: 'Actualizaciones OTA de Capacitor: Mejores prácticas para el versionado'
 description: >-
   Aprende sobre las mejores prácticas para administrar las actualizaciones OTA

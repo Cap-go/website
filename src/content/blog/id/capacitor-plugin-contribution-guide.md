@@ -1,5 +1,5 @@
 ---
-slug: guide-de-contribution-plugin-capacitor
+slug: capacitor-plugin-contribution-guide
 title: Panduan Kontribusi Plugin Capacitor
 description: >-
   Pelajari cara berkontribusi secara efektif untuk plugin Capacitor dengan

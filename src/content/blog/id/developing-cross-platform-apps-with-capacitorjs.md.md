@@ -1,5 +1,5 @@
 ---
-slug: développement-applications-multiplateformes-avec-capacitorjs
+slug: developing-cross-platform-apps-with-capacitorjs
 title: >-
   Mengembangkan Aplikasi Multiplatform dengan CapacitorJS: Panduan Langkah demi
   Langkah

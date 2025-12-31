@@ -1,5 +1,5 @@
 ---
-slug: integrar-universal-links-capacitor-nextjs
+slug: integrate-universal-links-capacitor-nextjs
 title: Cara Mengintegrasikan Universal Links di Next.js dengan Capacitor
 description: >-
   Pelajari langkah demi langkah cara mengatur universal links untuk aplikasi

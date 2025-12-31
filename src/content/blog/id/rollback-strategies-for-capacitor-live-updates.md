@@ -1,5 +1,5 @@
 ---
-slug: estrategias-de-rollback-para-actualizaciones-en-vivo-de-capacitor
+slug: rollback-strategies-for-capacitor-live-updates
 title: Strategi Rollback untuk Capacitor Live Updates
 description: >-
   Pelajari lebih lanjut tentang strategi pembalikan yang efektif untuk pembaruan

@@ -1,5 +1,5 @@
 ---
-slug: wie-man-die-capgo-dokumentation-für-ota-updates-verwendet
+slug: how-to-use-capgo-documentation-for-ota-updates
 title: Comment utiliser la documentation Capgo pour les mises à jour OTA
 description: >-
   Découvrez comment implémenter des mises à jour sécurisées Over-the-Air dans

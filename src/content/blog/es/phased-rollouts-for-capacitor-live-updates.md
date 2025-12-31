@@ -1,5 +1,5 @@
 ---
-slug: kontrollierte-bereitstellung-für-capacitor-live-updates
+slug: phased-rollouts-for-capacitor-live-updates
 title: Distribución de lanzamiento para actualizaciones en vivo de Capacitor
 description: >-
   Aprende cómo los lanzamientos graduales mejoran las actualizaciones de

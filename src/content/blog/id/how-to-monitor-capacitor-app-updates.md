@@ -1,5 +1,5 @@
 ---
-slug: comment-surveiller-les-mises-à-jour-de-l'application-capacitor
+slug: how-to-monitor-capacitor-app-updates
 title: Memantau Pembaruan Aplikasi Capacitor
 description: >-
   Temukan strategi efektif untuk memantau pembaruan aplikasi Capacitor,

@@ -1,5 +1,5 @@
 ---
-slug: top-api-security-standards-für-app-store-konformität
+slug: top-api-security-standards-for-app-store-compliance
 title: >-
   Estándares de seguridad de API principales para el cumplimiento de la App
   Store

@@ -1,5 +1,5 @@
 ---
-slug: Explication des scripts npm pour les mises à jour OTA Capacitor
+slug: npm-scripts-for-capacitor-ota-updates-explained
 title: Script NPM untuk Capacitor OTA Update Dijelaskan
 description: >-
   Pelajari cara mengotomatiskan pembaruan OTA untuk aplikasi Capacitor Anda

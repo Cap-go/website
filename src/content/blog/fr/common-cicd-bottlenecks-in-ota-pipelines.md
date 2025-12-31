@@ -1,5 +1,5 @@
 ---
-slug: häufige-engpässe-bei-der-cicd-pipeline-für-ota-aktualisierungen
+slug: common-cicd-bottlenecks-in-ota-pipelines
 title: Goulots d'étranglement courants de CI/CD dans les pipelines OTA
 description: >-
   Découvrez comment surmonter les défis courants dans les pipelines CI/CD OTA

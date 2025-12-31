@@ -1,5 +1,5 @@
 ---
-slug: wie-man-ota-updates-für-capacitor-apps-plant
+slug: how-to-schedule-ota-updates-for-capacitor-apps
 title: Comment planifier les mises à jour OTA pour les applications Capacitor
 description: >-
   Découvrez comment planifier efficacement les mises à jour OTA pour votre

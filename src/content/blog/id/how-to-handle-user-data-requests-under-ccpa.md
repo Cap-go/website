@@ -1,5 +1,5 @@
 ---
-slug: como-procesar-solicitudes-de-usuarios-segun-ccpa
+slug: how-to-handle-user-data-requests-under-ccpa
 title: Pengelolaan Permintaan Data Pengguna Sesuai CCPA
 description: >-
   Pelajari cara mengelola permintaan pengguna secara efektif untuk pemrosesan

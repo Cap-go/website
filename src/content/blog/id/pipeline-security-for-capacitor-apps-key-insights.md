@@ -1,5 +1,5 @@
 ---
-slug: seguridad-de-la-pipeline-para-apps-de-capacitor-conclusiones-importantes
+slug: pipeline-security-for-capacitor-apps-key-insights
 title: 'Keamanan Pipeline untuk Aplikasi Capacitor: Pengetahuan Penting'
 description: >-
   Pelajari strategi penting untuk mengamankan pipeline aplikasi Capacitor, mulai

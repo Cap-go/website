@@ -1,5 +1,5 @@
 ---
-slug: comment-gerer-les-donnees-utilisateur-dans-les-applications-capacitor
+slug: how-to-handle-user-data-in-capacitor-apps
 title: Mengelola Data Pengguna dalam Aplikasi Capacitor
 description: >-
   Pelajari strategi efektif untuk mengelola data pengguna dalam aplikasi

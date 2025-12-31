@@ -1,5 +1,5 @@
 ---
-slug: Der ultimative Leitfaden zur OTA-Update-Sicherheit für Capacitor-Apps
+slug: ultimate-guide-to-ota-update-security-for-capacitor-apps
 title: >-
   Guide ultime sur la sécurité des mises à jour OTA pour les applications
   Capacitor

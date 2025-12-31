@@ -1,5 +1,5 @@
 ---
-slug: comment-le-chiffrement-de-bout-en-bout-protège-les-mises-à-jour
+slug: how-end-to-end-encryption-secures-updates
 title: Mengamankan Pembaruan dengan Enkripsi End-to-end
 description: >-
   Pelajari bagaimana enkripsi end-to-end mengamankan pembaruan OTA, menjamin

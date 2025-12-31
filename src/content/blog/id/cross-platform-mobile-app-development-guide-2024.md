@@ -1,5 +1,5 @@
 ---
-slug: guide-du-développement-d'applications-mobiles-multiplateformes-2024
+slug: cross-platform-mobile-app-development-guide-2024
 title: Panduan Lengkap Pengembangan Aplikasi Mobile Cross-Platform di 2024
 description: >-
   Temukan praktik dan framework terbaik untuk pengembangan aplikasi mobile

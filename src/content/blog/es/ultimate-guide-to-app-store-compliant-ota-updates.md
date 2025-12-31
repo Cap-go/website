@@ -1,5 +1,5 @@
 ---
-slug: ultimative-anleitung-für-app-store-konforme-ota-updates
+slug: ultimate-guide-to-app-store-compliant-ota-updates
 title: Guía definitiva para actualizaciones OTA compatibles con la App Store
 description: >-
   Aprende cómo gestionar eficazmente las actualizaciones Over-The-Air mientras

@@ -1,5 +1,5 @@
 ---
-slug: guide-sur-la-politique-de-confidentialité-pour-les-apps-capacitor
+slug: privacy-manifest-for-capacitor-apps-guide
 title: 'Kebijakan Privasi untuk Aplikasi Capacitor: Panduan'
 description: >-
   Pelajari cara membuat Kebijakan Privasi untuk aplikasi Anda guna memenuhi

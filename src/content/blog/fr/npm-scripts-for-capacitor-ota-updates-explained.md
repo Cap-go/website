@@ -1,5 +1,5 @@
 ---
-slug: npm-scripts-für-capacitor-ota-updates-erklärt
+slug: npm-scripts-for-capacitor-ota-updates-explained
 title: Scripts NPM pour les mises à jour Capacitor OTA expliqués
 description: >-
   Découvrez comment automatiser les mises à jour OTA pour votre application

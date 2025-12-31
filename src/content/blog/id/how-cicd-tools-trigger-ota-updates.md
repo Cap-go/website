@@ -1,5 +1,5 @@
 ---
-slug: comment-declencher-des-mises-a-jour-ota-avec-les-outils-cicd
+slug: how-cicd-tools-trigger-ota-updates
 title: Pemicu Alat CI/CD untuk Pembaruan OTA
 description: >-
   Pelajari cara alat CI/CD meningkatkan pembaruan OTA dan memastikan deployment

@@ -1,5 +1,5 @@
 ---
-slug: crear-aplicaciones-móviles-react-con-capacitor
+slug: create-react-mobile-apps-with-capacitor
 title: Membuat Aplikasi Mobile dengan React dan Capacitor
 description: >-
   Pelajari cara membangun aplikasi seluler menggunakan React, Capacitor, dan

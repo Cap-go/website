@@ -1,5 +1,5 @@
 ---
-slug: mises-à-jour-en-temps-réel-des-métriques-pour-les-applications-capacitor
+slug: real-time-update-metrics-for-capacitor-apps
 title: Metrik Pembaruan Real-Time untuk Aplikasi Capacitor
 description: >-
   Pelajari cara melacak kinerja pembaruan aplikasi Anda secara efektif,

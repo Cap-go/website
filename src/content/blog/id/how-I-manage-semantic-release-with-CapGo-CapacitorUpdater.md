@@ -1,5 +1,5 @@
 ---
-slug: como-rapido-cloud-maneja-semantic-rerlease-con-CapGo-CapacitorUpdater
+slug: how-I-manage-semantic-release-with-CapGo-CapacitorUpdater
 title: >-
   Bagaimana Rapido Cloud mengelola semantic release dengan Capgo
   CapacitorUpdater

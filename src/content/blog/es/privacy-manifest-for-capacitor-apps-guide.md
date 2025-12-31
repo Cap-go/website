@@ -1,5 +1,5 @@
 ---
-slug: datenschutz-manifest-für-capacitor-apps-leitfaden
+slug: privacy-manifest-for-capacitor-apps-guide
 title: 'Manifiesto de privacidad para aplicaciones Capacitor: Guía'
 description: >-
   Aprende cómo crear un Manifiesto de Privacidad para tu aplicación para cumplir

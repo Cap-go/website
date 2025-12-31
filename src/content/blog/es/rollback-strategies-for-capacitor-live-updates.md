@@ -1,5 +1,5 @@
 ---
-slug: rollback-strategien-für-capacitor-live-updates
+slug: rollback-strategies-for-capacitor-live-updates
 title: Estrategias de Rollback para Capacitor Live Updates
 description: >-
   Aprende más sobre estrategias efectivas de reversión para actualizaciones en

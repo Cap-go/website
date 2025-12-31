@@ -1,5 +1,5 @@
 ---
-slug: guide-d'intégration-cicd-mises-à-jour-ota-capacitor
+slug: capacitor-ota-updates-cicd-integration-guide
 title: 'Pembaruan OTA Capacitor: Panduan Integrasi CI/CD'
 description: >-
   Pelajari cara mengintegrasikan pembaruan OTA ke dalam pipeline CI/CD Anda

@@ -1,5 +1,5 @@
 ---
-slug: guía-completa-de-capacitor
+slug: capacitor-comprehensive-guide
 title: 'Capacitor : Un Guide Complet'
 description: >-
   CapacitorJS est un outil puissant qui permet aux développeurs web de créer des

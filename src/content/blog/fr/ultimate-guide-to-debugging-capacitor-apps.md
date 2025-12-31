@@ -1,5 +1,5 @@
 ---
-slug: guía-para-depurar-aplicaciones-capacitor
+slug: ultimate-guide-to-debugging-capacitor-apps
 title: Guide ultime de dépannage des applications Capacitor
 description: >-
   Découvrez des stratégies efficaces et des outils essentiels pour déboguer des

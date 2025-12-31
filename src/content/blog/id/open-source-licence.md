@@ -1,5 +1,5 @@
 ---
-slug: Licences open source
+slug: open-source-licence
 title: Memahami Lisensi Perangkat Lunak Open Source
 description: >-
   Dalam lisensi perangkat lunak open source, terdapat dua kategori utama.

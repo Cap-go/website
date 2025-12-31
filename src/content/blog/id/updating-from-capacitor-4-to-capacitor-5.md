@@ -1,5 +1,5 @@
 ---
-slug: mise-a-jour-de-capacitor-4-vers-capacitor-5
+slug: updating-from-capacitor-4-to-capacitor-5
 title: 'Memperbarui Capacitor 4 ke Capacitor 5: Panduan Langkah demi Langkah'
 description: >-
   Pelajari cara memperbarui proyek Capacitor 4 Anda ke Capacitor 5 dengan

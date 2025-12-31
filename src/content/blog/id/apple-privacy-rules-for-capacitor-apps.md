@@ -1,5 +1,5 @@
 ---
-slug: règles-de-confidentialité-d'apple-pour-les-applications-capacitor
+slug: apple-privacy-rules-for-capacitor-apps
 title: Aturan Privasi Apple untuk Aplikasi Capacitor
 description: >-
   Pelajari cara mematuhi aturan privasi Apple untuk pengembangan aplikasi dengan

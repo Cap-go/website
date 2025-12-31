@@ -1,5 +1,5 @@
 ---
-slug: integrite-du-code-dans-les-applications-capacitor-techniques-cles
+slug: code-integrity-in-capacitor-apps-key-techniques
 title: 'Integritas Kode dalam Aplikasi Capacitor: Teknik-Teknik Utama'
 description: >-
   Pelajari teknik-teknik penting untuk memastikan integritas kode dalam aplikasi

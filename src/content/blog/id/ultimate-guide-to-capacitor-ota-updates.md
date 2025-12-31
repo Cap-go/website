@@ -1,5 +1,5 @@
 ---
-slug: das-ultimative-handbuch-für-capacitor-ota-updates
+slug: ultimate-guide-to-capacitor-ota-updates
 title: Panduan Lengkap untuk Pembaruan OTA Capacitor
 description: >-
   Pelajari cara Capacitor OTA Updates memungkinkan pembaruan aplikasi secara

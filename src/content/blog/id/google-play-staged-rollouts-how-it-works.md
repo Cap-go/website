@@ -1,5 +1,5 @@
 ---
-slug: comment-fonctionnent-les-deploiements-progressifs-google-play
+slug: google-play-staged-rollouts-how-it-works
 title: 'Pengenalan Langkah demi Langkah ke Google Play: Bagaimana Cara Kerjanya'
 description: >-
   Pelajari cara mengelola pembaruan aplikasi secara efektif dengan penerapan

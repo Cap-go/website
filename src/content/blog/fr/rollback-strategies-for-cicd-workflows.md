@@ -1,5 +1,5 @@
 ---
-slug: rollback-strategien-für-cicd-workflows
+slug: rollback-strategies-for-cicd-workflows
 title: Stratégies de rollback pour les workflows CI/CD
 description: >-
   Explorez des stratégies de rollback efficaces pour les workflows CI/CD et

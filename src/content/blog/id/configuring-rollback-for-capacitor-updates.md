@@ -1,5 +1,5 @@
 ---
-slug: konfiguration-des-rollbacks-fuer-capacitor-updates
+slug: configuring-rollback-for-capacitor-updates
 title: Konfigurasi Rollback untuk Pembaruan Capacitor
 description: >-
   Pelajari cara mengkonfigurasi opsi rollback untuk pembaruan Capacitor untuk

@@ -1,5 +1,5 @@
 ---
-slug: guia-paso-a-paso-para-registrar-icp-para-aplicaciones-moviles-en-china
+slug: icp-filing-for-mobile-apps-in-china-step-by-step-guide
 title: 'Pendaftaran ICP untuk Aplikasi Mobile di China: Panduan Langkah demi Langkah'
 description: >-
   Pelajari langkah-langkah penting untuk pengajuan ICP bagi aplikasi mobile di

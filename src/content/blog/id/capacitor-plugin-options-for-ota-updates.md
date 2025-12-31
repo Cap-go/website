@@ -1,5 +1,5 @@
 ---
-slug: options-du-plugin-capacitor-pour-les-mises-a-jour-ota
+slug: capacitor-plugin-options-for-ota-updates
 title: Opsi Plugin Capacitor untuk Pembaruan OTA
 description: >-
   Jelajahi keuntungan dan pilihan pembaruan OTA untuk aplikasi Capacitor,

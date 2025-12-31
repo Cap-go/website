@@ -1,5 +1,5 @@
 ---
-slug: fondements-plugin-android-natif-bridge-capacitor
+slug: capacitor-native-bridge-android-plugin-basics
 title: Dasar Plugin Android untuk Jembatan Native Capacitor
 description: >-
   Pelajari cara membuat plugin Android berkinerja tinggi dengan Capacitor Native

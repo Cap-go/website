@@ -1,5 +1,5 @@
 ---
-slug: Comparaison entre les déploiements progressifs et les versions complètes
+slug: staged-rollouts-vs-full-releases-comparison
 title: 'Deployment Progresif vs. Full Version: Sebuah Perbandingan'
 description: >-
   Jelajahi perbedaan antara penerapan bertahap dan rilis penuh untuk menentukan

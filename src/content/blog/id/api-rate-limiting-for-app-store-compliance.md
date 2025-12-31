@@ -1,5 +1,5 @@
 ---
-slug: limitation-du-taux-api-pour-la-conformité-app-store
+slug: api-rate-limiting-for-app-store-compliance
 title: Pembatasan Rate API untuk Kepatuhan App Store
 description: >-
   Pelajari tentang pembatasan tingkat API dan pentingnya hal tersebut untuk

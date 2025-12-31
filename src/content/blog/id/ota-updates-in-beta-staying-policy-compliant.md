@@ -1,5 +1,5 @@
 ---
-slug: mises-à-jour-ota-en-version-beta-rester-conforme-aux-directives
+slug: ota-updates-in-beta-staying-policy-compliant
 title: 'Pembaruan OTA dalam beta: tetap mematuhi aturan'
 description: >-
   Pelajari cara mengelola pembaruan OTA secara efektif dalam pengujian beta

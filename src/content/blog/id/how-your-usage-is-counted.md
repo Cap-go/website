@@ -1,5 +1,5 @@
 ---
-slug: cómo-se-cuenta-tu-uso
+slug: how-your-usage-is-counted
 title: Bagaimana Penggunaan Anda Dihitung di Capgo
 description: >-
   Pahami cara Capgo menghitung penggunaan Anda dan gunakan dengan cara terbaik.

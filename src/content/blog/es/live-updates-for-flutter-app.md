@@ -1,5 +1,5 @@
 ---
-slug: live-updates-für-flutter-app
+slug: live-updates-for-flutter-app
 title: Actualización en vivo de Flutter
 description: >-
   ¿Es posible enviar actualizaciones en vivo a aplicaciones Flutter sin revisión

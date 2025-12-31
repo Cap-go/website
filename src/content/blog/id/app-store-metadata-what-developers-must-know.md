@@ -1,5 +1,5 @@
 ---
-slug: métadonnées-app-store-ce-que-les-développeurs-doivent-savoir
+slug: app-store-metadata-what-developers-must-know
 title: 'Metadata App Store: Apa yang Perlu Diketahui Developer'
 description: >-
   Pelajari bagaimana metadata yang efektif di App Store dapat meningkatkan

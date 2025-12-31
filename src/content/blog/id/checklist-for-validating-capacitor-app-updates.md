@@ -1,5 +1,5 @@
 ---
-slug: liste-de-verification-pour-valider-les-mises-a-jour-des-applications-capacitor
+slug: checklist-for-validating-capacitor-app-updates
 title: Checklist untuk validasi update aplikasi Capacitor
 description: >-
   Pastikan pembaruan aplikasi yang mulus dengan daftar periksa praktis ini untuk

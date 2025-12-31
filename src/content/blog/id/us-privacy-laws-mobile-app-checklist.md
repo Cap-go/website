@@ -1,5 +1,5 @@
 ---
-slug: liste-de-controle-lois-confidentialite-usa-applications-mobiles
+slug: us-privacy-laws-mobile-app-checklist
 title: 'Undang-undang Privasi AS: Daftar Periksa untuk Aplikasi Seluler'
 description: >-
   Pastikan untuk mematuhi undang-undang privasi AS dalam aplikasi seluler Anda

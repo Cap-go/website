@@ -1,5 +1,5 @@
 ---
-slug: Wie Capacitor Plattform-Unterschiede handhabt
+slug: how-capacitor-handles-platform-differences
 title: Bagaimana Capacitor Menangani Perbedaan Platform
 description: >-
   Pelajari cara mengelola perbedaan platform dalam pengembangan aplikasi seluler

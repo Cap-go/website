@@ -1,5 +1,5 @@
 ---
-slug: mises-à-jour-en-direct-pour-application-flutter
+slug: live-updates-for-flutter-app
 title: Update Flutter Secara Live
 description: >-
   Apakah mungkin mengirim pembaruan langsung ke aplikasi Flutter tanpa melalui

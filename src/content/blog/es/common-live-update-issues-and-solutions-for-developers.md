@@ -1,5 +1,5 @@
 ---
-slug: häufige-live-update-probleme-und-lösungen-für-entwickler
+slug: common-live-update-issues-and-solutions-for-developers
 title: Problemas y soluciones comunes de actualizaciones en vivo para desarrolladores
 description: >-
   Aprenda más sobre las soluciones para desafíos comunes en actualizaciones en

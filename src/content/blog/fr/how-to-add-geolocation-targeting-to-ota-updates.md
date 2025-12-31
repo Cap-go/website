@@ -1,5 +1,5 @@
 ---
-slug: wie-man-geolokalisierung-für-ota-updates-hinzufügt
+slug: how-to-add-geolocation-targeting-to-ota-updates
 title: Comment ajouter le ciblage de géolocalisation aux mises à jour OTA
 description: >-
   Découvrez comment implémenter le ciblage par géolocalisation dans les mises à

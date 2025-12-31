@@ -1,5 +1,5 @@
 ---
-slug: capacitor-ota-updates-cible-ios-vs-android
+slug: capacitor-ota-updates-targeting-ios-vs-android
 title: 'Pembaruan OTA Capacitor: Menargetkan iOS vs Android'
 description: >-
   Jelajahi perbedaan strategi pembaruan OTA untuk iOS dan Android, dengan fokus

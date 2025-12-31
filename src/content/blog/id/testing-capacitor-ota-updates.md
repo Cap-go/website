@@ -1,5 +1,5 @@
 ---
-slug: Pruebas de actualizaciones OTA de Capacitor
+slug: testing-capacitor-ota-updates
 title: Pengujian Pembaruan OTA Capacitor
 description: >-
   Pelajari cara menguji pembaruan OTA secara efektif untuk aplikasi Capacitor

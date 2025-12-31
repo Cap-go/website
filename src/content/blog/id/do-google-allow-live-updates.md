@@ -1,5 +1,5 @@
 ---
-slug: mises-à-jour-en-direct-autorisées-par-google
+slug: do-google-allow-live-updates
 title: >-
   Apakah Google mengizinkan pengiriman pembaruan langsung ke aplikasi tanpa
   peninjauan Play Store?

@@ -1,5 +1,5 @@
 ---
-slug: rollback-mechanismen-in-capacitor-plugins
+slug: rollback-mechanisms-in-capacitor-plugins
 title: Mekanisme Rollback di Plugin Capacitor
 description: >-
   Periksa mekanisme rollback dalam plugin Capacitor untuk memastikan stabilitas

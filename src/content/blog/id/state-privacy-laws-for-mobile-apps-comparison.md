@@ -1,5 +1,5 @@
 ---
-slug: lois-etatiques-sur-la-confidentialite-des-applications-mobiles-comparaison
+slug: state-privacy-laws-for-mobile-apps-comparison
 title: 'Undang-Undang Privasi Aplikasi Seluler berdasarkan Negara: Sebuah Perbandingan'
 description: >-
   Pelajari perbedaan utama antara undang-undang privasi aplikasi seluler di

@@ -1,5 +1,5 @@
 ---
-slug: schlüsselverwaltung-unter-chinas-verschlüsselungsvorschriften
+slug: key-management-under-chinas-encryption-rules
 title: Gestion des clés selon la réglementation chinoise sur le chiffrement
 description: >-
   La compréhension des lois chinoises sur la gestion des clés de chiffrement est

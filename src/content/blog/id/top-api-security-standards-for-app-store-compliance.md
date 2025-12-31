@@ -1,5 +1,5 @@
 ---
-slug: normes-de-securite-des-api-principales-pour-la-conformite-de-l-app-store
+slug: top-api-security-standards-for-app-store-compliance
 title: Standar Keamanan API Utama untuk Kepatuhan App Store
 description: >-
   Pelajari standar keamanan API utama untuk memastikan aplikasi Anda memenuhi

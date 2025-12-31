@@ -1,5 +1,5 @@
 ---
-slug: comment-ajouter-la-geolocalisation-pour-les-mises-a-jour-ota
+slug: how-to-add-geolocation-targeting-to-ota-updates
 title: Cara Menambahkan Penargetan Geolokasi ke Update OTA
 description: >-
   Pelajari cara mengimplementasikan penargetan geolokasi dalam pembaruan OTA

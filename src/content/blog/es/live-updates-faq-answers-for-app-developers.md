@@ -1,5 +1,5 @@
 ---
-slug: live-updates-faq-antworten-für-app-entwickler
+slug: live-updates-faq-answers-for-app-developers
 title: >-
   Preguntas frecuentes sobre actualizaciones en vivo: respuestas para
   desarrolladores de aplicaciones

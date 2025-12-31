@@ -1,5 +1,5 @@
 ---
-slug: comment-le-chiffrement-ota-est-conforme-aux-normes-app-store
+slug: how-ota-encryption-meets-app-store-compliance
 title: Bagaimana Enkripsi OTA Mematuhi Aturan App Store
 description: >-
   Pelajari bagaimana enkripsi OTA mengamankan pembaruan aplikasi dan memastikan

@@ -1,5 +1,5 @@
 ---
-slug: mejores-prácticas-para-aprobación-de-actualizaciones-ota
+slug: user-consent-for-ota-updates-best-practices
 title: 'Consentement de l''utilisateur pour les mises à jour OTA : Meilleures pratiques'
 description: >-
   Apprenez-en davantage sur les meilleures pratiques pour obtenir le

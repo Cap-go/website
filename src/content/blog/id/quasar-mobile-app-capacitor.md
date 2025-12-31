@@ -1,5 +1,5 @@
 ---
-slug: mise-à-jour-en-direct-avec-quasar-et-capacitor
+slug: quasar-mobile-app-capacitor
 title: 'Membuat aplikasi mobile dengan live update, Quasar dan Capacitor.'
 description: >-
   Cara membuat aplikasi mobile dengan Quasar, Capacitor dan mengimplementasikan

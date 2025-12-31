@@ -1,5 +1,5 @@
 ---
-slug: Comment faire une version majeure dans Capgo
+slug: how-to-release-major-version-in-capgo
 title: Cara mempublikasikan versi major baru di capgo
 description: >-
   Memahami bagaimana dan kapan perlu merilis versi besar dari aplikasi Anda

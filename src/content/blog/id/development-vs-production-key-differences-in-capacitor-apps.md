@@ -1,5 +1,5 @@
 ---
-slug: différences-entre-développement-et-production-dans-les-applications-capacitor
+slug: development-vs-production-key-differences-in-capacitor-apps
 title: Perbedaan Kunci Untuk Aplikasi Capacitor Dalam Mode Development vs. Production
 description: >-
   Memahami perbedaan penting antara lingkungan pengembangan dan produksi dalam

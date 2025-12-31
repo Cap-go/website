@@ -1,5 +1,5 @@
 ---
-slug: guide-approbation-app-store-capacitor-ota-updates
+slug: capacitor-ota-updates-app-store-approval-guide
 title: 'Pembaruan OTA Capacitor: Panduan Validasi App Store'
 description: >-
   Pelajari cara menavigasi pedoman App Store dan Play Store untuk pembaruan OTA

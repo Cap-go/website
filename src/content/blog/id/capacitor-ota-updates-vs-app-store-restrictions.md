@@ -1,5 +1,5 @@
 ---
-slug: mises-à-jour-ota-de-capacitor-vs-restrictions-app-store
+slug: capacitor-ota-updates-vs-app-store-restrictions
 title: Pembaruan OTA Capacitor vs Pembatasan App Store
 description: >-
   Pelajari bagaimana pembaruan OTA memberikan penerapan aplikasi yang lebih
