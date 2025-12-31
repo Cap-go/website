@@ -135,7 +135,47 @@ export interface ServiceLdJson extends BaseLdJson {
   }
 }
 
-export type LdJsonType = NewsArticleLdJson | WebPageLdJson | SoftwareApplicationLdJson | ProductLdJson | ServiceLdJson | OrganizationLdJson
+export interface FAQPageLdJson extends BaseLdJson {
+  '@type': 'FAQPage'
+  mainEntity: Array<{
+    '@type': 'Question'
+    name: string
+    acceptedAnswer: {
+      '@type': 'Answer'
+      text: string
+    }
+  }>
+}
+
+export interface WebSiteLdJson extends BaseLdJson {
+  '@type': 'WebSite'
+  potentialAction?: {
+    '@type': 'SearchAction'
+    target: {
+      '@type': 'EntryPoint'
+      urlTemplate: string
+    }
+    'query-input': string
+  }
+}
+
+export interface ItemListLdJson extends BaseLdJson {
+  '@type': 'ItemList'
+  itemListElement: Array<{
+    '@type': 'ListItem'
+    position: number
+    item: {
+      '@type': string
+      name: string
+      url?: string
+      image?: string
+      description?: string
+      [key: string]: any
+    }
+  }>
+}
+
+export type LdJsonType = NewsArticleLdJson | WebPageLdJson | SoftwareApplicationLdJson | ProductLdJson | ServiceLdJson | OrganizationLdJson | FAQPageLdJson | WebSiteLdJson | ItemListLdJson
 
 /**
  * Create a complete Organization schema for Capgo
@@ -456,5 +496,109 @@ export function createLdJsonGraph(
   return {
     '@context': 'https://schema.org',
     '@graph': graph,
+  }
+}
+
+/**
+ * Create a FAQPage schema for FAQ sections
+ */
+export function createFAQPageLdJson(
+  config: RuntimeConfig['public'],
+  options: {
+    url: string
+    questions: Array<{
+      question: string
+      answer: string
+    }>
+  },
+): FAQPageLdJson {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${options.url}#faqpage`,
+    url: options.url,
+    mainEntity: options.questions.map((q) => ({
+      '@type': 'Question',
+      name: q.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: q.answer,
+      },
+    })),
+  }
+}
+
+/**
+ * Create a WebSite schema for the homepage with optional search action
+ */
+export function createWebSiteLdJson(
+  config: RuntimeConfig['public'],
+  options?: {
+    hasSearchAction?: boolean
+    searchUrl?: string
+  },
+): WebSiteLdJson {
+  const schema: WebSiteLdJson = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${config.baseUrl}/#website`,
+    url: config.baseUrl,
+    name: config.brand,
+    description: config.blog_description,
+    inLanguage: 'en',
+  }
+
+  if (options?.hasSearchAction && options.searchUrl) {
+    schema.potentialAction = {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: options.searchUrl,
+      },
+      'query-input': 'required name=search_term_string',
+    }
+  }
+
+  return schema
+}
+
+/**
+ * Create an ItemList schema for ranking/list pages
+ */
+export function createItemListLdJson(
+  config: RuntimeConfig['public'],
+  options: {
+    url: string
+    name: string
+    description?: string
+    items: Array<{
+      name: string
+      url?: string
+      image?: string
+      description?: string
+      itemType?: string
+      additionalProperties?: Record<string, any>
+    }>
+  },
+): ItemListLdJson {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${options.url}#itemlist`,
+    url: options.url,
+    name: options.name,
+    description: options.description,
+    itemListElement: options.items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': item.itemType || 'Thing',
+        name: item.name,
+        url: item.url,
+        image: item.image,
+        description: item.description,
+        ...item.additionalProperties,
+      },
+    })),
   }
 }

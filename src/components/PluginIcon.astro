@@ -8,7 +8,11 @@ interface Props {
 const { icon: Icon, name, className = "" } = Astro.props;
 ---
 
-<div class={`relative flex h-14 w-14 items-center justify-center rounded-xl bg-azure-500 shadow-lg ${className}`}>
-  <div class="absolute inset-0 bg-white rounded-xl opacity-20"></div>
-  <Icon class="relative w-8 h-8 text-white drop-shadow-md" />
+<div
+  role="img"
+  aria-label={`${name} plugin icon`}
+  class={`relative flex h-14 w-14 items-center justify-center rounded-xl bg-azure-500 shadow-lg ${className}`}
+>
+  <div class="absolute inset-0 bg-white rounded-xl opacity-20" aria-hidden="true"></div>
+  <Icon class="relative w-8 h-8 text-white drop-shadow-md" aria-hidden="true" />
 </div>

@@ -4,7 +4,7 @@ import CreditPricing from '@/components/pricing/CreditPricing.astro'
 import Faq from '@/components/pricing/Faq.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import Plans from '@/components/pricing/Plans.astro'
-import { createLdJsonGraph, createProductLdJson } from '@/lib/ldJson'
+import { createLdJsonGraph, createProductLdJson, createFAQPageLdJson } from '@/lib/ldJson'
 import type { Database } from '@/services/supabase.types'
 import * as m from '@/paraglide/messages'
 import Enterprise from '@/components/enterprise.astro'
@@ -54,8 +54,22 @@ if (plans.length > 0) {
     }),
   )
 
-  // Create ldJSON graph with organization and products
-  content['ldJSON'] = createLdJsonGraph(
+  // Create FAQ schema for pricing FAQs
+  const faqSchema = createFAQPageLdJson(Astro.locals.runtimeConfig.public, {
+    url: pricingUrl,
+    questions: [
+      { question: 'How are MAU counted?', answer: 'MAU (Monthly Active Users) are counted as unique users who open your app at least once in a 30-day period. Each unique device is counted once per month.' },
+      { question: 'What is storage used for?', answer: 'Storage is used for your app bundles and assets. Each version of your app you upload counts towards your storage limit.' },
+      { question: 'How is bandwidth counted?', answer: 'Bandwidth is counted when users download updates. Each download of your app bundle uses bandwidth from your plan.' },
+      { question: 'What happens if I reach my MAU limit?', answer: 'If you reach your MAU limit, new users will still receive updates but you may need to upgrade your plan to continue tracking all users.' },
+      { question: 'Can I change my plan at any time?', answer: 'Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately and billing is prorated.' },
+      { question: 'Do you offer refunds?', answer: 'We offer a 14-day money-back guarantee on all plans. Contact support for refund requests.' },
+      { question: 'What payment methods do you accept?', answer: 'We accept all major credit cards, debit cards, and for Enterprise plans, ACH transfers and wire payments.' },
+    ],
+  })
+
+  // Create ldJSON graph with organization, products, and FAQ
+  const ldJsonGraph = createLdJsonGraph(
     Astro.locals.runtimeConfig.public,
     planProducts[0], // Use first plan as main entity
     {
@@ -67,6 +81,13 @@ if (plans.length > 0) {
       ],
     },
   )
+
+  // Add FAQ schema to the graph
+  if (ldJsonGraph['@graph']) {
+    ldJsonGraph['@graph'].push(faqSchema)
+  }
+
+  content['ldJSON'] = ldJsonGraph
 }
 ---
 

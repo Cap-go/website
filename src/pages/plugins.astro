@@ -428,28 +428,30 @@ const formatCount = (count: number): string => {
             <input
               type="text"
               id="plugin-search"
+              aria-label="Search plugins by name or description"
               placeholder="Search plugins by name or description..."
               class="py-4 px-6 w-full text-white placeholder-gray-400 bg-white/5 rounded-xl border border-gray-700 backdrop-blur-sm transition-all duration-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
             />
-            <svg class="absolute top-1/2 right-4 w-5 h-5 text-gray-400 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg aria-hidden="true" class="absolute top-1/2 right-4 w-5 h-5 text-gray-400 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
           </div>
           <div class="relative w-full sm:w-auto">
             <select
               id="plugin-sort"
+              aria-label="Sort plugins by"
               class="py-4 px-6 pr-10 w-full text-white bg-white/5 rounded-xl border border-gray-700 backdrop-blur-sm transition-all duration-200 appearance-none cursor-pointer focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 sm:w-48"
             >
               <option value="downloads">Downloads</option>
               <option value="stars">GitHub Stars</option>
               <option value="alphabetical">Alphabetical</option>
             </select>
-            <svg class="absolute top-1/2 right-4 w-5 h-5 text-gray-400 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg aria-hidden="true" class="absolute top-1/2 right-4 w-5 h-5 text-gray-400 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </div>
         </div>
-        <div id="search-results-count" class="mb-4 text-sm text-center text-gray-400"></div>
+        <div id="search-results-count" aria-live="polite" aria-atomic="true" class="mb-4 text-sm text-center text-gray-400"></div>
 
         <div id="plugins-grid" class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {

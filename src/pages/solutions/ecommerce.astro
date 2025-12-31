@@ -6,6 +6,7 @@ import RolloutIllustration from '@/components/solutions/RolloutIllustration.astr
 import ABTestIllustration from '@/components/solutions/ABTestIllustration.astro'
 import BugFixIllustration from '@/components/solutions/BugFixIllustration.astro'
 import WhiteLabelIllustration from '@/components/solutions/WhiteLabelIllustration.astro'
+import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -13,7 +14,19 @@ const brand = Astro.locals.runtimeConfig.public.brand
 const title = `${brand} | ${m.solutions_ecommerce_title({}, { locale })}`
 const description = m.solutions_ecommerce_description({}, { locale })
 
-const content = { title, description }
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description: description,
+  url: Astro.url.href,
+  serviceType: 'Software Development Service',
+  areaServed: ['Worldwide'],
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+})
+
+const content = { title, description, ldJSON }
 ---
 
 <Layout content={content}>
