@@ -10,12 +10,97 @@ interface Sponsor {
   tier?: string
 }
 
-const fetchSponsors = async () => {
+const fetchSponsors = async (): Promise<Sponsor[]> => {
+  const query = `
+    query {
+      riderx: user(login: "riderx") {
+        sponsorshipsAsMaintainer(first: 100) {
+          nodes {
+            sponsorEntity {
+              ... on User {
+                login
+                name
+                url
+                avatarUrl
+              }
+              ... on Organization {
+                login
+                avatarUrl
+                url
+                name
+              }
+            }
+            isActive
+            tier {
+              monthlyPriceInDollars
+            }
+          }
+        }
+      }
+      capgo: organization(login: "Cap-go") {
+        sponsorshipsAsMaintainer(first: 100) {
+          nodes {
+            sponsorEntity {
+              ... on User {
+                login
+                name
+                avatarUrl
+                url
+              }
+              ... on Organization {
+                login
+                avatarUrl
+                url
+                name
+              }
+            }
+            isActive
+            tier {
+              monthlyPriceInDollars
+            }
+          }
+        }
+      }
+    }
+  `
+
   try {
-    const siteUrl = import.meta.env.SITE
-    const response = await fetch(`${siteUrl}/sponsors.json`)
-    if (!response.ok) return []
-    return (await response.json()) as Sponsor[]
+    const response = await fetch('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${import.meta.env.PERSONAL_ACCESS_TOKEN}`,
+      },
+      body: JSON.stringify({ query }),
+    })
+    const data = await response.json()
+    if (data.errors) {
+      console.error('GraphQL Errors:', data.errors)
+      return []
+    }
+    const allSponsors = [...(data.data.riderx?.sponsorshipsAsMaintainer.nodes || []), ...(data.data.capgo?.sponsorshipsAsMaintainer.nodes || [])]
+    const calculateTier = (sponsorship: any) => {
+      const tier = sponsorship.tier.monthlyPriceInDollars
+      if (tier >= 100) {
+        return 'platinum'
+      } else if (tier >= 50) {
+        return 'gold'
+      } else if (tier >= 25) {
+        return 'silver'
+      } else {
+        return 'baker'
+      }
+    }
+    return allSponsors.map((sponsorship) => {
+      const sponsor = sponsorship.sponsorEntity
+      return {
+        id: sponsor.login,
+        name: sponsor.name || sponsor.login,
+        imageUrl: sponsor.avatarUrl,
+        url: sponsor.url,
+        tier: calculateTier(sponsorship),
+      }
+    })
   } catch (error) {
     console.error('Error fetching sponsors:', error)
     return []
@@ -23,7 +108,6 @@ const fetchSponsors = async () => {
 }
 
 const sponsors = await fetchSponsors()
-if (sponsors.length === 0) return new Response(null, { status: 404 })
 const bakerSponsors = sponsors.filter((sponsor) => sponsor.tier === 'baker')
 const silverSponsors = sponsors.filter((sponsor) => sponsor.tier === 'silver')
 const goldSponsors = sponsors.filter((sponsor) => sponsor.tier === 'gold')
