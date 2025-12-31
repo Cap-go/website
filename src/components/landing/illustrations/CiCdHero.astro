@@ -1,0 +1,55 @@
+<svg viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+  <defs>
+    <linearGradient id="red-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EF4444" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#EF4444" stop-opacity="0.05" />
+    </linearGradient>
+  </defs>
+
+  <!-- Central Pipeline Hub -->
+  <g transform="translate(400, 300)">
+     <circle r="120" fill="url(#red-gradient)" stroke="#F87171" stroke-width="2" stroke-dasharray="8 8">
+        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="20s" repeatCount="indefinite" />
+     </circle>
+     
+     <circle r="80" fill="#1F2937" stroke="#EF4444" stroke-width="4" />
+     <path d="M-40 0 L-20 20 L40 -40" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <!-- Orbiting Nodes -->
+  <!-- Git -->
+  <g transform="translate(400, 300)">
+    <g transform="translate(0, -200)">
+       <circle r="30" fill="#1F2937" stroke="#EF4444" stroke-width="2" />
+       <path d="M-10 10 L0 -10 L10 10" stroke="#F87171" stroke-width="2" fill="none" />
+       <circle cx="0" cy="-10" r="3" fill="#F87171" />
+       <circle cx="-10" cy="10" r="3" fill="#F87171" />
+       <circle cx="10" cy="10" r="3" fill="#F87171" />
+    </g>
+    <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="10s" repeatCount="indefinite" />
+  </g>
+
+  <!-- Build -->
+  <g transform="translate(400, 300)">
+    <g transform="translate(173, 100)">
+       <circle r="30" fill="#1F2937" stroke="#EF4444" stroke-width="2" />
+       <rect x="-10" y="-10" width="20" height="20" fill="#F87171" />
+    </g>
+    <animateTransform attributeName="transform" type="rotate" from="120" to="480" dur="10s" repeatCount="indefinite" />
+  </g>
+
+  <!-- Deploy -->
+  <g transform="translate(400, 300)">
+    <g transform="translate(-173, 100)">
+       <circle r="30" fill="#1F2937" stroke="#EF4444" stroke-width="2" />
+       <path d="M0 -10 L0 10 M-10 0 L10 0" stroke="#F87171" stroke-width="4" />
+    </g>
+    <animateTransform attributeName="transform" type="rotate" from="240" to="600" dur="10s" repeatCount="indefinite" />
+  </g>
+
+  <!-- Connecting Lines -->
+  <path d="M400 100 L 400 220" stroke="#EF4444" stroke-width="2" stroke-dasharray="4 4" opacity="0.5" />
+  <path d="M573 400 L 470 340" stroke="#EF4444" stroke-width="2" stroke-dasharray="4 4" opacity="0.5" />
+  <path d="M227 400 L 330 340" stroke="#EF4444" stroke-width="2" stroke-dasharray="4 4" opacity="0.5" />
+
+</svg>

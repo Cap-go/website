@@ -2,76 +2,87 @@
 import Layout from '@/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import * as m from '@/paraglide/messages'
+import CiCdHeroIllustration from '@/components/landing/illustrations/CiCdHero.astro'
+import ProfessionalSetupIllustration from '@/components/landing/illustrations/ProfessionalSetup.astro'
+import PushToBuildIllustration from '@/components/landing/illustrations/PushToBuild.astro'
+import DeployToStoresIllustration from '@/components/landing/illustrations/DeployToStores.astro'
+import FeatureSection from '@/components/landing/FeatureSection.astro'
 
 const pageTitle = 'Mobile CI/CD Setup | Capgo'
 const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automate iOS and Android builds with GitHub Actions, GitLab CI, Jenkins, and more.'
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
-  <div>
+  <div class="overflow-x-hidden">
     <!-- Hero Section -->
-    <section class="overflow-hidden relative py-20 bg-gray-900 sm:py-24 lg:py-32">
+    <section class="overflow-hidden relative py-12 sm:py-16 lg:py-20 bg-gray-900">
       <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="text-center">
-          <!-- Badge -->
-          <div class="inline-flex items-center py-2 px-4 mb-8 text-sm font-medium text-gray-100 rounded-full ring-1 ring-inset bg-gray-800/40 ring-white/15">
-            <svg class="mr-2 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
-            </svg>
-            Stop Manual Native Builds
-          </div>
-
-          <h1 class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
-            <span class="text-gray-100">Still Building iOS & Android</span><br />
-            <span class="text-gray-200"> Apps Manually? </span>
-          </h1>
-
-          <p class="mx-auto mt-6 max-w-4xl text-xl leading-relaxed text-gray-300">
-            <span class="font-semibold text-gray-100">Hours wasted on manual builds.</span> Different environments causing bugs. Team members waiting for builds. Your productivity suffers
-            with every manual deployment.
-          </p>
-
-          <div class="mx-auto mt-8 max-w-3xl">
-            <div class="p-6 rounded-2xl border border-gray-700 bg-gray-800/50 backdrop-blur-sm">
-              <h3 class="mb-4 text-2xl font-bold text-white">
-                What if builds happened <span class="text-gray-100">automatically on every commit?</span>
-              </h3>
-              <p class="text-lg text-gray-300">
-                Expert CI/CD setup for native mobile apps. Automated iOS & Android builds, signing, and distribution. No more manual build processes.
-              </p>
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+          <!-- Hero Text -->
+          <div class="max-w-2xl text-center lg:text-left mx-auto lg:mx-0">
+            <!-- Badge -->
+            <div class="inline-flex items-center py-2 px-4 mb-8 text-sm font-medium text-gray-100 rounded-full ring-1 ring-inset bg-gray-800/40 ring-white/15">
+              <svg class="mr-2 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+              </svg>
+              Stop Manual Native Builds
             </div>
-          </div>
 
-          <!-- CTA Buttons -->
-          <div class="flex flex-col gap-4 justify-center mt-10 sm:flex-row">
-            <div class="inline-flex relative group" role="presentation">
-              <div class="absolute -inset-px rounded-xl transition-opacity duration-300 pointer-events-none group-hover:opacity-90 bg-white/20 opacity-65 blur-lg"></div>
+            <h1 class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+              <span class="text-gray-100">Still Building iOS & Android</span><br />
+              <span class="text-gray-200"> Apps Manually? </span>
+            </h1>
+
+            <p class="mx-auto lg:mx-0 mt-6 max-w-xl text-xl leading-relaxed text-gray-300">
+              <span class="font-semibold text-gray-100">Hours wasted on manual builds.</span> Different environments causing bugs. Team members waiting for builds. Your productivity suffers with every manual deployment.
+            </p>
+
+            <div class="mx-auto lg:mx-0 mt-8 max-w-lg">
+              <div class="p-6 rounded-2xl border border-gray-700 bg-gray-800/50 backdrop-blur-sm text-left">
+                <h3 class="mb-4 text-2xl font-bold text-white">
+                  What if builds happened <span class="text-gray-100">automatically on every commit?</span>
+                </h3>
+                <p class="text-lg text-gray-300">
+                  Expert CI/CD setup for native mobile apps. Automated iOS & Android builds, signing, and distribution. No more manual build processes.
+                </p>
+              </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col gap-4 justify-center lg:justify-start mt-10 sm:flex-row">
+              <div class="inline-flex relative group" role="presentation">
+                <div class="absolute -inset-px rounded-xl transition-opacity duration-300 pointer-events-none group-hover:opacity-90 bg-white/20 opacity-65 blur-lg"></div>
+                <a
+                  href="https://cal.com/team/capgo/mobile-ci-cd-done-for-you"
+                  class="inline-flex relative justify-center items-center py-4 px-8 text-lg font-bold text-white bg-gray-900 rounded-xl border border-red-500 transition-all duration-200 hover:bg-red-600 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:outline-none"
+                >
+                  Get CI/CD Setup
+                  <svg class="ml-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                  </svg>
+                </a>
+              </div>
               <a
-                href="https://cal.com/team/capgo/mobile-ci-cd-done-for-you"
-                class="inline-flex relative justify-center items-center py-4 px-8 text-lg font-bold text-white bg-gray-900 rounded-xl border border-red-500 transition-all duration-200 hover:bg-red-600 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:outline-none"
+                href="#how-it-works"
+                class="inline-flex justify-center items-center py-4 px-8 text-lg font-medium text-white bg-gray-800 rounded-xl border border-gray-600 transition-all duration-200 hover:bg-gray-700"
               >
-                Get CI/CD Setup
-                <svg class="ml-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                </svg>
+                See How It Works
               </a>
             </div>
-            <a
-              href="#how-it-works"
-              class="inline-flex justify-center items-center py-4 px-8 text-lg font-medium text-white bg-gray-800 rounded-xl border border-gray-600 transition-all duration-200 hover:bg-gray-700"
-            >
-              See How It Works
-            </a>
           </div>
 
-          <p class="mt-6 text-sm text-gray-400">
-            <span class="text-gray-100">✓</span> Automated native builds • <span class="text-gray-100">✓</span> iOS & Android CI/CD • <span class="text-gray-100">✓</span> Expert setup
-            service
-          </p>
+          <!-- Hero Illustration -->
+          <div class="relative lg:h-auto h-[400px] w-full flex items-center justify-center">
+             <div class="w-full max-w-lg">
+                <CiCdHeroIllustration />
+             </div>
+             <!-- Background Blur -->
+             <div class="absolute -inset-4 bg-red-500/20 blur-3xl -z-10 rounded-full opacity-30"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -89,7 +100,7 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
           <!-- Problem Side -->
           <div class="relative">
             <div class="absolute inset-0 rounded-2xl bg-red-500/5 blur-xl"></div>
-            <div class="relative p-8 bg-white rounded-2xl border-2 border-red-200 shadow-lg">
+            <div class="relative p-8 bg-white rounded-2xl border-2 border-red-200 shadow-lg h-full">
               <div class="flex items-center mb-6">
                 <div class="flex justify-center items-center w-12 h-12 bg-red-500 rounded-xl">
                   <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -152,17 +163,13 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
                   </div>
                 </div>
               </div>
-
-              <div class="p-4 mt-6 bg-red-50 rounded-xl">
-                <p class="font-semibold text-center text-red-800">Result: Slow releases, team bottlenecks, wasted developer time</p>
-              </div>
             </div>
           </div>
 
           <!-- Solution Side -->
           <div class="relative">
             <div class="absolute inset-0 rounded-2xl bg-green-500/10 blur-xl"></div>
-            <div class="relative p-8 bg-white rounded-2xl border-2 border-green-200 shadow-lg">
+            <div class="relative p-8 bg-white rounded-2xl border-2 border-green-200 shadow-lg h-full">
               <div class="flex items-center mb-6">
                 <div class="flex justify-center items-center w-12 h-12 bg-green-500 rounded-xl">
                   <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -221,111 +228,42 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
                   </div>
                 </div>
               </div>
-
-              <div class="p-4 mt-6 bg-green-50 rounded-xl">
-                <p class="font-semibold text-center text-green-800">Result: Efficient team, reliable builds, faster release cycles</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Platforms Support -->
-        <div class="text-center">
-          <h3 class="mb-8 text-2xl font-bold text-gray-900">Works with your existing CI/CD setup</h3>
-          <div class="flex flex-wrap gap-8 justify-center items-center opacity-60">
-            <div class="flex items-center space-x-2">
-              <svg class="w-8 h-8 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-                ></path>
-              </svg>
-              <span class="font-medium text-gray-700">GitHub Actions</span>
-            </div>
-            <div class="flex items-center space-x-2">
-              <svg class="w-8 h-8 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                  d="M23.955 13.587l-1.342-4.135-2.664-8.189c-.135-.423-.73-.423-.867 0L16.418 9.45H7.582L4.919 1.263c-.135-.423-.73-.423-.867 0L1.388 9.452.046 13.587c-.121.375.014.793.331 1.023L12 23.054l11.623-8.443c.318-.235.453-.653.332-1.024"
-                ></path>
-              </svg>
-              <span class="font-medium text-gray-700">GitLab CI</span>
-            </div>
-            <div class="flex items-center space-x-2">
-              <img src="/icons/jenkins.svg" alt="Jenkins" class="w-8 h-8" />
-              <span class="font-medium text-gray-700">Jenkins</span>
-            </div>
-            <div class="flex items-center space-x-2">
-              <img src="/icons/circleci.svg" alt="CircleCI" class="w-8 h-8" />
-              <span class="font-medium text-gray-700">CircleCI</span>
-            </div>
-            <div class="flex items-center space-x-2">
-              <span class="font-medium text-gray-600">+ Any CI/CD platform</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- How It Works Section -->
-    <section id="how-it-works" class="py-16 bg-gray-900 sm:py-20 lg:py-24">
-      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="mb-16 text-center">
-          <h2 class="text-3xl font-bold leading-tight text-white sm:text-4xl">
-            From Code to App Stores <span class="text-green-400">Automatically</span>
-          </h2>
-          <p class="mx-auto mt-4 max-w-3xl text-lg text-gray-300">
-            <span class="text-gray-100">Stop manual builds</span> and certificate management. Here's how CI/CD transforms your workflow:
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
-          <!-- Step 1 -->
-          <div class="text-center">
-            <div class="flex justify-center items-center mx-auto mb-6 w-16 h-16 rounded-2xl ring-2 bg-gray-700/40 ring-white/15">
-              <span class="text-2xl font-bold text-gray-100">1</span>
-            </div>
-            <h3 class="mb-4 text-xl font-bold text-white">Professional Setup</h3>
-            <p class="text-gray-300">
-              We configure Fastlane with your CI/CD platform. <span class="font-semibold text-gray-100"
-                >Complete automation for iOS & Android builds, signing, and distribution.</span
-              >
-            </p>
-            <div class="mt-4 text-sm text-gray-100">✓ No Mac required for iOS builds</div>
+    <!-- How It Works (Replaced with Features) -->
+    <div id="how-it-works" class="bg-gray-900">
+        <!-- Professional Setup -->
+        <FeatureSection 
+          title="Professional Setup"
+          description="We configure Fastlane with your CI/CD platform. Complete automation for iOS & Android builds, signing, and distribution. No Mac required for iOS builds."
+        >
+          <div slot="illustration">
+            <ProfessionalSetupIllustration />
           </div>
+        </FeatureSection>
 
-          <!-- Step 2 -->
-          <div class="text-center">
-            <div class="flex justify-center items-center mx-auto mb-6 w-16 h-16 rounded-2xl ring-2 bg-gray-700/40 ring-white/15">
-              <span class="text-2xl font-bold text-gray-100">2</span>
-            </div>
-            <h3 class="mb-4 text-xl font-bold text-white">Push Code, Get Builds</h3>
-            <p class="text-gray-300">
-              Git push triggers native builds automatically. <span class="font-semibold text-gray-100">iOS and Android apps built, signed, and ready for testing.</span>
-            </p>
-            <div class="mt-4 text-sm text-gray-100">✓ Consistent builds every time</div>
+        <!-- Push Code, Get Builds -->
+        <FeatureSection 
+          title="Push Code, Get Builds"
+          description="Git push triggers native builds automatically. iOS and Android apps built, signed, and ready for testing. Consistent builds every time."
+          reverse={true}
+        >
+          <div slot="illustration">
+            <PushToBuildIllustration />
           </div>
+        </FeatureSection>
 
-          <!-- Step 3 -->
-          <div class="text-center">
-            <div class="flex justify-center items-center mx-auto mb-6 w-16 h-16 rounded-2xl ring-2 bg-gray-700/40 ring-white/15">
-              <span class="text-2xl font-bold text-gray-100">3</span>
-            </div>
-            <h3 class="mb-4 text-xl font-bold text-white">Deploy to Stores Seamlessly</h3>
-            <p class="text-gray-300">
-              Automatically upload to TestFlight & Play Console. <span class="font-semibold text-gray-100">Ready for review without manual uploads or form filling.</span>
-            </p>
-            <div class="mt-4 text-sm text-gray-100">✓ Focus on coding, not deployment</div>
-          </div>
-        </div>
-
-        <!-- Urgency CTA -->
-        <div class="mt-16 text-center">
-          <div class="p-8 mx-auto max-w-2xl rounded-2xl border border-gray-700 bg-gray-800/50 backdrop-blur-sm">
-            <h3 class="mb-4 text-2xl font-bold text-white">How much time are you wasting on manual builds?</h3>
-            <p class="mb-6 text-gray-300">
-              Every manual build is hours of developer time lost. Inconsistent environments cause bugs that take days to debug.
-              <span class="font-semibold text-gray-100">Your team's productivity is suffering.</span>
-            </p>
-            <div class="inline-flex relative group">
+        <!-- Deploy to Stores -->
+        <FeatureSection 
+          title="Deploy to Stores Seamlessly"
+          description="Automatically upload to TestFlight & Play Console. Ready for review without manual uploads or form filling. Focus on coding, not deployment."
+        >
+          <div slot="cta">
+             <div class="inline-flex relative group">
               <div class="absolute -inset-px rounded-xl opacity-60 transition-all duration-300 pointer-events-none group-hover:-inset-1 bg-white/20 blur-lg group-hover:opacity-85">
               </div>
               <a
@@ -339,11 +277,13 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
               </a>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+          <div slot="illustration">
+            <DeployToStoresIllustration />
+          </div>
+        </FeatureSection>
+    </div>
 
-    <!-- Build Progress Visualization Section -->
+    <!-- Build Progress Visualization Section (Kept as is, it's already visual) -->
     <section class="py-16 bg-gray-50 sm:py-20 lg:py-24">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="mb-16 text-center">
@@ -417,497 +357,76 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
               </div>
             </div>
           </div>
-
-          <!-- Android Build Terminal -->
-          <div class="overflow-hidden bg-gray-900 rounded-xl border border-gray-700 shadow-2xl">
-            <div class="flex justify-between items-center py-3 px-4 bg-gray-800">
-              <div class="flex items-center space-x-3">
-                <div class="flex space-x-2">
-                  <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                  <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                </div>
-                <span class="font-mono text-sm text-gray-300">Android Build - GitLab CI</span>
-              </div>
-              <div class="flex items-center space-x-2">
-                <svg class="w-4 h-4 text-green-400 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10"></circle>
-                </svg>
-                <span class="text-sm text-green-400">Running</span>
-              </div>
-            </div>
-            <div class="p-6 font-mono text-sm">
-              <div class="space-y-2">
-                <div class="text-gray-500">$ git push origin main</div>
-                <div class="text-gray-300">
-                  <span class="text-green-400">✓</span> Pipeline #1847 started
-                </div>
-                <div class="mt-4 text-gray-300">
-                  <span class="text-orange-400">[Build Android]</span> Preparing Docker image...
-                </div>
-                <div class="text-gray-300">
-                  <span class="text-green-400">✓</span> Using image: cimg/android:2023.11
-                </div>
-                <div class="mt-2 text-gray-300">
-                  <span class="text-orange-400">[Gradle]</span> Starting build...
-                </div>
-                <div class="text-gray-400">> Task :app:preBuild UP-TO-DATE</div>
-                <div class="text-gray-400">> Task :app:preReleaseBuild UP-TO-DATE</div>
-                <div class="text-gray-400">> Task :app:compileReleaseJavaWithJavac</div>
-                <div class="text-gray-400">> Task :app:bundleRelease</div>
-                <div class="mt-2 text-gray-300">
-                  <span class="text-green-400">BUILD SUCCESSFUL</span> in 1m 42s
-                </div>
-                <div class="text-gray-300">
-                  <span class="text-green-400">✓</span> Generated app-release.aab
-                </div>
-                <div class="mt-2 text-gray-300">
-                  <span class="text-orange-400">[Play Console]</span> Uploading to Google Play...
-                </div>
-                <div class="text-gray-300">
-                  <span class="text-green-400">✓</span> AAB uploaded to internal testing track
-                </div>
-                <div class="text-gray-300">
-                  <span class="text-green-400">✓</span> Release 1.2.45 created
-                </div>
-                <div class="mt-2 text-gray-300">
-                  <span class="text-green-400">✓</span>
-                  <span class="font-bold">Android deployment complete!</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Summary Stats -->
-        <div class="grid grid-cols-1 gap-6 mt-12 sm:grid-cols-3">
-          <div class="p-6 text-center bg-white rounded-xl border border-gray-200 shadow-sm">
-            <div class="text-3xl font-bold text-gray-900">0</div>
-            <div class="mt-1 text-sm text-gray-600">Manual Steps Required</div>
-          </div>
-          <div class="p-6 text-center bg-white rounded-xl border border-gray-200 shadow-sm">
-            <div class="text-3xl font-bold text-gray-900">100%</div>
-            <div class="mt-1 text-sm text-gray-600">Build Success Rate</div>
-          </div>
-          <div class="p-6 text-center bg-white rounded-xl border border-gray-200 shadow-sm">
-            <div class="text-3xl font-bold text-gray-900">5 min</div>
-            <div class="mt-1 text-sm text-gray-600">Average Build Time</div>
-          </div>
         </div>
       </div>
     </section>
 
-    <!-- Benefits Section -->
+    <!-- Pricing Section -->
     <section class="py-16 bg-gray-900 sm:py-20 lg:py-24">
-      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="mb-16 text-center">
-          <h2 class="text-3xl font-bold leading-tight text-white sm:text-4xl">Why Automate with CI/CD?</h2>
-          <p class="mx-auto mt-4 max-w-3xl text-lg text-gray-300">Transform your mobile deployment workflow with these powerful benefits</p>
-        </div>
-
-        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
-          <!-- Faster Deployments -->
-          <div class="relative group">
-            <div class="absolute inset-0 rounded-2xl transition-all duration-300 bg-gray-800/40 blur-xl group-hover:bg-gray-700/60"></div>
-            <div class="relative p-8 rounded-2xl border border-gray-600/40 bg-gray-800/80 backdrop-blur-sm">
-              <div class="flex items-center mb-6">
-                <div class="flex justify-center items-center w-12 h-12 rounded-xl ring-1 bg-gray-700/40 ring-white/15">
-                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                  </svg>
-                </div>
-                <h3 class="ml-4 text-xl font-bold text-white">Automated Native Builds</h3>
-              </div>
-              <p class="mb-4 text-gray-300">Push code and get native iOS and Android builds automatically. No manual Xcode or Android Studio required - builds run in the cloud.</p>
-              <div class="flex items-center text-sm text-gray-100">
-                <svg class="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Build iOS apps without owning a Mac
-              </div>
-            </div>
-          </div>
-
-          <!-- Zero Downtime -->
-          <div class="relative group">
-            <div class="absolute inset-0 rounded-2xl transition-all duration-300 bg-gray-800/40 blur-xl group-hover:bg-gray-700/15"></div>
-            <div class="relative p-8 rounded-2xl border border-gray-600/40 bg-gray-800/80 backdrop-blur-sm">
-              <div class="flex items-center mb-6">
-                <div class="flex justify-center items-center w-12 h-12 rounded-xl ring-1 bg-gray-700/40 ring-white/15">
-                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                  </svg>
-                </div>
-                <h3 class="ml-4 text-xl font-bold text-white">Zero Downtime Updates</h3>
-              </div>
-              <p class="mb-4 text-gray-300">Updates happen in the background while your app is running. Users never experience interruptions or forced updates.</p>
-              <div class="flex items-center text-sm text-gray-100">
-                <svg class="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Seamless background installation
-              </div>
-            </div>
-          </div>
-
-          <!-- Automated Testing -->
-          <div class="relative group">
-            <div class="absolute inset-0 rounded-2xl transition-all duration-300 bg-gray-800/40 blur-xl group-hover:bg-gray-700/60"></div>
-            <div class="relative p-8 rounded-2xl border border-gray-600/40 bg-gray-800/80 backdrop-blur-sm">
-              <div class="flex items-center mb-6">
-                <div class="flex justify-center items-center w-12 h-12 rounded-xl ring-1 bg-gray-700/40 ring-white/15">
-                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
-                  </svg>
-                </div>
-                <h3 class="ml-4 text-xl font-bold text-white">Automated Quality Gates</h3>
-              </div>
-              <p class="mb-4 text-gray-300">Only deploy when tests pass. Integrate with your existing test suites and quality checks for bulletproof releases.</p>
-              <div class="flex items-center text-sm text-gray-100">
-                <svg class="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Deploy only when tests pass
-              </div>
-            </div>
-          </div>
-
-          <!-- Rollback Safety -->
-          <div class="relative group">
-            <div class="absolute inset-0 rounded-2xl transition-all duration-300 bg-gray-800/40 blur-xl group-hover:bg-gray-700/50"></div>
-            <div class="relative p-8 rounded-2xl border border-red-500/20 bg-gray-800/80 backdrop-blur-sm">
-              <div class="flex items-center mb-6">
-                <div class="flex justify-center items-center w-12 h-12 rounded-xl ring-1 bg-gray-700/40 ring-white/15">
-                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                  </svg>
-                </div>
-                <h3 class="ml-4 text-xl font-bold text-white">Instant Rollback Safety</h3>
-              </div>
-              <p class="mb-4 text-gray-300">
-                Build artifacts are automatically versioned and stored. Revert to any previous build instantly if issues are discovered after deployment.
-              </p>
-              <div class="flex items-center text-sm text-gray-100">
-                <svg class="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Complete build history and artifact storage
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Advanced Features Section -->
-    <section class="py-16 bg-gray-50 sm:py-20 lg:py-24">
-      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="mb-16 text-center">
-          <h2 class="text-3xl font-bold leading-tight text-gray-900 sm:text-4xl">Advanced CI/CD Features</h2>
-          <p class="mx-auto mt-4 max-w-3xl text-lg text-gray-600">Take your deployment strategy to the next level with these powerful features</p>
-        </div>
-
-        <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          <!-- Multi-Environment -->
-          <div class="p-8 bg-white rounded-2xl border border-gray-200 shadow-sm">
-            <div class="flex justify-center items-center mb-6 w-12 h-12 rounded-xl ring-1 bg-blue-500/10 ring-blue-500/20">
-              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-              </svg>
-            </div>
-            <h3 class="mb-4 text-xl font-bold text-gray-900">Multi-Environment Deployment</h3>
-            <p class="mb-4 text-gray-600">Deploy to different channels based on branch, environment, or custom conditions. Perfect for staging, beta, and production workflows.</p>
-            <ul class="space-y-2 text-sm text-gray-500">
-              <li class="flex items-center">
-                <svg class="mr-2 w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Branch-based deployments
-              </li>
-              <li class="flex items-center">
-                <svg class="mr-2 w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Environment-specific channels
-              </li>
-              <li class="flex items-center">
-                <svg class="mr-2 w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Conditional deployments
-              </li>
-            </ul>
-          </div>
-
-          <!-- Gradual Rollouts -->
-          <div class="p-8 bg-white rounded-2xl border border-gray-200 shadow-sm">
-            <div class="flex justify-center items-center mb-6 w-12 h-12 rounded-xl ring-1 bg-purple-500/10 ring-purple-500/20">
-              <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                ></path>
-              </svg>
-            </div>
-            <h3 class="mb-4 text-xl font-bold text-gray-900">Gradual Rollouts</h3>
-            <p class="mb-4 text-gray-600">Start with a small percentage of users and gradually increase. Monitor metrics and automatically halt problematic deployments.</p>
-            <ul class="space-y-2 text-sm text-gray-500">
-              <li class="flex items-center">
-                <svg class="mr-2 w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Percentage-based rollouts
-              </li>
-              <li class="flex items-center">
-                <svg class="mr-2 w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Automatic halt on errors
-              </li>
-              <li class="flex items-center">
-                <svg class="mr-2 w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Metrics-based decisions
-              </li>
-            </ul>
-          </div>
-
-          <!-- API Integration -->
-          <div class="p-8 bg-white rounded-2xl border border-gray-200 shadow-sm">
-            <div class="flex justify-center items-center mb-6 w-12 h-12 rounded-xl ring-1 bg-green-500/10 ring-green-500/20">
-              <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 002 2z"></path>
-              </svg>
-            </div>
-            <h3 class="mb-4 text-xl font-bold text-gray-900">REST API Integration</h3>
-            <p class="mb-4 text-gray-600">Full API access for custom integrations. Build your own deployment tools or integrate with existing systems.</p>
-            <ul class="space-y-2 text-sm text-gray-500">
-              <li class="flex items-center">
-                <svg class="mr-2 w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Complete REST API
-              </li>
-              <li class="flex items-center">
-                <svg class="mr-2 w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Custom integrations
-              </li>
-              <li class="flex items-center">
-                <svg class="mr-2 w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Webhook notifications
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Expert CI/CD Setup Service -->
-    <section class="overflow-hidden relative py-12 bg-gray-900 sm:py-16 lg:py-20">
-      <!-- Floating Orbs -->
-      <div class="absolute left-10 top-20 w-64 h-64 rounded-full animate-pulse bg-gray-800/40 blur-3xl"></div>
-      <div class="absolute right-10 bottom-20 w-48 h-48 rounded-full animate-pulse bg-gray-800/40 blur-3xl" style="animation-delay: 2s;"></div>
-      <div class="absolute top-1/2 left-1/4 w-32 h-32 rounded-full animate-pulse bg-indigo-500/10 blur-3xl" style="animation-delay: 4s;"></div>
-
-      <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <!-- Header -->
-        <div class="mx-auto max-w-4xl text-center">
-          <div class="inline-flex items-center py-2 px-4 mb-8 text-sm font-medium text-gray-100 rounded-full ring-1 ring-inset bg-gray-800/40 ring-white/15">
-            <svg class="mr-2 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
-              ></path>
-            </svg>
-            Expert CI/CD Setup
-          </div>
-
-          <h2 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-            <span class="text-gray-200"> Effortless CI/CD Solutions </span>
-          </h2>
-
-          <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-300">
-            Configure your CI/CD pipeline with our expert team. <span class="font-medium text-gray-100">Own the complete setup with zero vendor lock-in</span> - no hosting or maintenance
-            charges from us.
-          </p>
-        </div>
-
-        <!-- Features Grid -->
-        <div class="grid grid-cols-1 gap-6 mt-12 sm:mt-16 lg:grid-cols-2 lg:gap-6">
-          <!-- Feature 1: Seamless Integration -->
-          <div class="relative group">
-            <div class="relative p-6 bg-gray-800 rounded-2xl border transition-all duration-300 border-white/10 hover:border-white/20">
-              <div class="flex justify-center items-center w-12 h-12 rounded-xl ring-1 bg-gray-700/40 ring-white/15">
-                <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
-                </svg>
-              </div>
-              <h3 class="mt-4 text-xl font-bold text-white">Seamless Integration</h3>
-              <p class="mt-3 text-sm leading-relaxed text-gray-300">
-                We set up your CI/CD workflow to work seamlessly with your current development process. No need to switch platforms or learn new tools.
-              </p>
-            </div>
-          </div>
-
-          <!-- Feature 2: Tailored Configuration -->
-          <div class="relative group">
-            <div class="relative p-6 bg-gray-800 rounded-2xl border transition-all duration-300 border-white/10 hover:border-white/20">
-              <div class="flex justify-center items-center w-12 h-12 rounded-xl ring-1 bg-gray-700/40 ring-white/15">
-                <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
-                  ></path>
-                  <circle cx="12" cy="12" r="3"></circle>
-                </svg>
-              </div>
-              <h3 class="mt-4 text-xl font-bold text-white">Tailored Configuration</h3>
-              <p class="mt-3 text-sm leading-relaxed text-gray-300">
-                Our team customizes the CI/CD setup to match your specific project requirements, ensuring optimal performance and efficiency.
-              </p>
-            </div>
-          </div>
-
-          <!-- Feature 3: Platform Independence (Highlighted) -->
-          <div class="relative lg:col-span-1 group">
-            <div class="relative p-6 bg-gray-800 rounded-2xl border-2 transition-all duration-300 border-yellow-500/30 hover:border-yellow-500/40">
-              <div class="absolute top-3 right-3">
-                <div class="inline-flex items-center py-1 px-2 text-xs font-medium text-yellow-300 rounded-full bg-yellow-500/20">Most Popular</div>
-              </div>
-              <div class="flex justify-center items-center w-12 h-12 rounded-xl ring-1 bg-gray-700/40 ring-yellow-500/30">
-                <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
-                  <path d="M2 12h20"></path>
-                </svg>
-              </div>
-              <h3 class="mt-4 text-xl font-bold text-white">Platform Independence</h3>
-              <p class="mt-3 text-sm leading-relaxed text-gray-300">
-                Adapt configuration to your infrastructure. <span class="font-medium text-gray-100">Own the complete pipeline, modify anytime</span> - zero vendor lock-in, pay your
-                provider directly.
-              </p>
-            </div>
-          </div>
-
-          <!-- Feature 4: Expert Guidance -->
-          <div class="relative lg:col-span-1 group">
-            <div class="relative p-8 bg-gray-800 rounded-2xl border transition-all duration-300 border-white/10 hover:border-white/20">
-              <div class="flex justify-center items-center w-16 h-16 rounded-2xl ring-1 bg-gray-700/40 ring-white/15">
-                <svg class="w-8 h-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
-                  <path d="M9 18h6"></path>
-                  <path d="M10 22h4"></path>
-                </svg>
-              </div>
-              <h3 class="mt-6 text-2xl font-bold text-white">Expert Guidance</h3>
-              <p class="mt-4 leading-relaxed text-gray-300">
-                Benefit from our deep expertise in mobile app CI/CD best practices, without the need to build and maintain a complex system yourself.
-              </p>
-              <div class="flex items-center mt-6">
-                <div class="flex justify-center items-center w-10 h-10 rounded-full bg-gray-700/40">
-                  <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                </div>
-                <p class="ml-3 font-medium text-gray-200">We've already setup CI/CD for 50+ apps</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Pricing Section -->
-        <div class="relative mt-20">
-          <div class="relative p-8 rounded-3xl border lg:p-12 border-white/10 bg-gray-800/50 backdrop-blur-sm">
-            <div class="text-center">
-              <div class="inline-flex items-center py-2 px-4 mb-6 text-sm font-medium text-gray-200 rounded-full ring-1 ring-inset bg-gray-800/50 ring-white/15">
-                <svg class="mr-2 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
-                </svg>
-                Pricing
-              </div>
-
-              <h3 class="mb-6 text-3xl font-bold text-white">Smart Investment, Massive Savings</h3>
-
-              <div class="grid grid-cols-1 gap-6 mb-8 md:grid-cols-3">
-                <!-- Managed Solutions Cost -->
-                <div class="p-6 rounded-2xl border border-red-500/20 bg-gray-800/40">
-                  <div class="mb-2 text-sm font-medium text-gray-100">Managed Solutions</div>
-                  <div class="text-2xl font-bold text-gray-200">$499/month</div>
-                  <div class="mt-1 text-sm text-gray-200/70">Appflow or similar</div>
-                </div>
-
-                <!-- Our Solution -->
-                <div class="relative p-6 rounded-2xl border border-green-500/20 bg-green-500/10">
-                  <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <span class="py-1 px-3 text-xs font-bold text-white bg-gray-700 rounded-full">Best Value</span>
+        <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="relative p-8 rounded-3xl border lg:p-12 border-white/10 bg-gray-800/50 backdrop-blur-sm">
+                <div class="text-center">
+                  <div class="inline-flex items-center py-2 px-4 mb-6 text-sm font-medium text-gray-200 rounded-full ring-1 ring-inset bg-gray-800/50 ring-white/15">
+                    <svg class="mr-2 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                    </svg>
+                    Pricing
                   </div>
-                  <div class="mb-2 text-sm font-medium text-gray-100">Our Setup - You Own It</div>
-                  <div class="text-2xl font-bold text-gray-200">$2,600 + $30/mo</div>
-                  <div class="mt-1 text-sm text-gray-200/70">Setup fee + GitHub/GitLab CI</div>
+    
+                  <h3 class="mb-6 text-3xl font-bold text-white">Smart Investment, Massive Savings</h3>
+    
+                  <div class="grid grid-cols-1 gap-6 mb-8 md:grid-cols-3">
+                    <!-- Managed Solutions Cost -->
+                    <div class="p-6 rounded-2xl border border-red-500/20 bg-gray-800/40">
+                      <div class="mb-2 text-sm font-medium text-gray-100">Managed Solutions</div>
+                      <div class="text-2xl font-bold text-gray-200">$499/month</div>
+                      <div class="mt-1 text-sm text-gray-200/70">Appflow or similar</div>
+                    </div>
+    
+                    <!-- Our Solution -->
+                    <div class="relative p-6 rounded-2xl border border-green-500/20 bg-green-500/10">
+                      <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                        <span class="py-1 px-3 text-xs font-bold text-white bg-gray-700 rounded-full">Best Value</span>
+                      </div>
+                      <div class="mb-2 text-sm font-medium text-gray-100">Our Setup - You Own It</div>
+                      <div class="text-2xl font-bold text-gray-200">$2,600 + $30/mo</div>
+                      <div class="mt-1 text-sm text-gray-200/70">Setup fee + GitHub/GitLab CI</div>
+                    </div>
+    
+                    <!-- Savings -->
+                    <div class="p-6 rounded-2xl border border-gray-600/40 bg-gray-800/40">
+                      <div class="mb-2 text-sm font-medium text-gray-100">5-Year Savings</div>
+                      <div class="text-2xl font-bold text-gray-200">$25,340</div>
+                      <div class="mt-1 text-sm text-gray-200/70">Massive cost reduction</div>
+                    </div>
+                  </div>
+    
+                  <div class="mx-auto mb-8 space-y-3 max-w-3xl text-gray-300">
+                    <p>One-time setup fee of $2,600 saves you $25,340+ over 5 years vs managed solutions.</p>
+                    <p><span class="font-medium text-gray-100">Own your setup with zero vendor lock-in</span></p>
+                    <p>Break even in just 6 months, then pure savings.</p>
+                  </div>
+    
+                  <!-- CTA Button -->
+                  <div class="inline-flex relative group">
+                    <div class="absolute -inset-px rounded-2xl opacity-60 transition-opacity duration-300 pointer-events-none bg-white/20 blur-lg group-hover:opacity-85"></div>
+                    <a
+                      href="https://cal.com/team/capgo/mobile-ci-cd-done-for-you"
+                      class="inline-flex relative justify-center items-center py-4 px-8 text-lg font-bold text-white bg-gray-900 rounded-2xl border border-blue-500 transition-all duration-200 hover:bg-gray-900 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
+                    >
+                      Get Started Today
+                      <svg class="ml-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                      </svg>
+                    </a>
+                  </div>
                 </div>
-
-                <!-- Savings -->
-                <div class="p-6 rounded-2xl border border-gray-600/40 bg-gray-800/40">
-                  <div class="mb-2 text-sm font-medium text-gray-100">5-Year Savings</div>
-                  <div class="text-2xl font-bold text-gray-200">$25,340</div>
-                  <div class="mt-1 text-sm text-gray-200/70">Massive cost reduction</div>
-                </div>
               </div>
-
-              <div class="mx-auto mb-8 space-y-3 max-w-3xl text-gray-300">
-                <p>One-time setup fee of $2,600 saves you $25,340+ over 5 years vs managed solutions.</p>
-                <p><span class="font-medium text-gray-100">Own your setup with zero vendor lock-in</span></p>
-                <p>Break even in just 6 months, then pure savings.</p>
-              </div>
-
-              <!-- CTA Button -->
-              <div class="inline-flex relative group">
-                <div class="absolute -inset-px rounded-2xl opacity-60 transition-opacity duration-300 pointer-events-none bg-white/20 blur-lg group-hover:opacity-85"></div>
-                <a
-                  href="https://cal.com/team/capgo/mobile-ci-cd-done-for-you"
-                  class="inline-flex relative justify-center items-center py-4 px-8 text-lg font-bold text-white bg-gray-900 rounded-2xl border border-blue-500 transition-all duration-200 hover:bg-gray-900 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
-                >
-                  Get Started Today
-                  <svg class="ml-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
 
     <!-- CTA Section -->

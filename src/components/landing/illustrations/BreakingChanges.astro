@@ -1,0 +1,41 @@
+<svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+  <defs>
+    <linearGradient id="shield-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Grid -->
+  <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#374151" stroke-width="0.5" opacity="0.3"/>
+  </pattern>
+  <rect width="400" height="300" fill="url(#grid)" />
+
+  <!-- Shield -->
+  <g transform="translate(150, 50)">
+    <path d="M50 0 C50 0, 100 20, 100 60 C100 120, 50 150, 50 150 C50 150, 0 120, 0 60 C0 20, 50 0, 50 0Z" 
+          fill="url(#shield-gradient)" stroke="#60A5FA" stroke-width="2" />
+    
+    <!-- Shield Checkmark -->
+    <path d="M30 70 L45 85 L70 50" stroke="#60A5FA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <!-- Incoming Bad Update (Blocked) -->
+  <g transform="translate(50, 120)">
+    <rect x="0" y="0" width="40" height="40" rx="4" fill="#EF4444" opacity="0.8">
+      <animate attributeName="x" values="0;80" dur="1.5s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.8;0" dur="1.5s" repeatCount="indefinite" />
+    </rect>
+    <path d="M10 10 L30 30 M30 10 L10 30" stroke="#FFFFFF" stroke-width="2" transform="translate(0, 0)">
+       <animateTransform attributeName="transform" type="translate" values="0,0;80,0" dur="1.5s" repeatCount="indefinite" />
+    </path>
+  </g>
+  
+  <!-- "Bug" Text -->
+  <text x="30" y="100" fill="#EF4444" font-family="monospace" font-size="12">v2.0.1 (Broken)</text>
+  
+  <!-- Protected App -->
+  <rect x="180" y="220" width="80" height="10" rx="2" fill="#10B981" />
+  <text x="220" y="245" text-anchor="middle" fill="#10B981" font-family="monospace" font-size="12">Stable v2.0.0</text>
+</svg>

@@ -1,0 +1,37 @@
+<svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+  <!-- Git Commit Node -->
+  <g transform="translate(50, 150)">
+    <circle r="20" fill="#1F2937" stroke="#EF4444" stroke-width="2" />
+    <text x="0" y="5" text-anchor="middle" fill="#FFFFFF" font-family="monospace" font-size="10">git</text>
+  </g>
+  
+  <!-- Connection 1 -->
+  <line x1="70" y1="150" x2="130" y2="150" stroke="#EF4444" stroke-width="2" stroke-dasharray="4 4">
+    <animate attributeName="stroke-dashoffset" values="8;0" dur="1s" repeatCount="indefinite" />
+  </line>
+
+  <!-- Build Server -->
+  <g transform="translate(160, 150)">
+    <rect x="-30" y="-30" width="60" height="60" rx="8" fill="#1F2937" stroke="#EF4444" stroke-width="2" />
+    <!-- Gear -->
+    <circle r="15" stroke="#F87171" stroke-width="2" fill="none" stroke-dasharray="4 4">
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="3s" repeatCount="indefinite" />
+    </circle>
+  </g>
+
+  <!-- Connection 2 -->
+  <line x1="190" y1="150" x2="250" y2="150" stroke="#EF4444" stroke-width="2" stroke-dasharray="4 4">
+    <animate attributeName="stroke-dashoffset" values="8;0" dur="1s" repeatCount="indefinite" />
+  </line>
+
+  <!-- App Artefact -->
+  <g transform="translate(280, 150)">
+    <rect x="-20" y="-30" width="40" height="60" rx="4" fill="#1F2937" stroke="#EF4444" stroke-width="2" />
+    <path d="M-10 0 L0 10 L10 -10" stroke="#EF4444" stroke-width="3" fill="none" />
+  </g>
+
+  <!-- Success Check -->
+  <circle cx="340" cy="150" r="10" fill="#10B981">
+     <animate attributeName="r" values="10;12;10" dur="2s" repeatCount="indefinite" />
+  </circle>
+</svg>
