@@ -1,8 +1,6 @@
 ---
 slug: building-a-native-mobile-app-with-nextjs-and-capacitor
-title: >-
-  2025 Build Native Mobile Apps with Next.js 15 and Capacitor: A Step-by-Step
-  Guide
+title: Build Native Apps with Next.js 15 + Capacitor (2025)
 description: >-
   Learn how to create native mobile apps using Next.js 15, Capacitor, Tailwind CSS 4, and Konsta UI 5 in this
   guide. Discover the latest best practices for

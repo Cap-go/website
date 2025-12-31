@@ -1,6 +1,6 @@
 ---
 slug: enable-ios-developer-mode-ios16
-title: Comment activer le mode développeur sur iOS 16 pour les tests d'application
+title: "Mode développeur iOS 16 : activer pour tests d’app"
 description: >-
   Guide étape par étape pour activer le mode développeur sur iOS 16 et supérieur
   afin d'exécuter des builds de distribution internes et des builds de
@@ -20,7 +20,7 @@ published: true
 locale: fr
 next_blog: ''
 ---
-# Comment activer le mode développeur sur iOS 16 pour les tests d'application
+# Mode développeur iOS 16 : activer pour tests d'app
 
 Pour les développeurs et testeurs travaillant avec iOS 16 et versions supérieures, activer le mode développeur est une étape cruciale pour exécuter des builds de distribution internes et des builds de développement local directement sur un iPhone ou un iPad. Ce guide vous expliquera le processus d'activation du mode développeur sur votre appareil iOS.
 

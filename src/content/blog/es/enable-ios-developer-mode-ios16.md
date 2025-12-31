@@ -1,6 +1,6 @@
 ---
 slug: enable-ios-developer-mode-ios16
-title: Cómo habilitar el modo desarrollador en iOS 16 para pruebas de aplicaciones
+title: Cómo activar el modo desarrollador en iOS 16 (pruebas)
 description: >-
   Guía paso a paso para habilitar el Modo Desarrollador en iOS 16 y superior
   para ejecutar compilaciones de distribución interna y compilaciones de
@@ -20,7 +20,7 @@ published: true
 locale: es
 next_blog: ''
 ---
-# Cómo Habilitar el Modo Desarrollador en iOS 16 para Pruebas de Aplicaciones
+# Cómo activar el modo desarrollador en iOS 16 (pruebas)
 
 Para desarrolladores y testers que trabajan con iOS 16 y versiones superiores, habilitar el Modo Desarrollador es un paso crucial para ejecutar compilaciones de distribución interna y compilaciones de desarrollo local directamente en un iPhone o iPad. Esta guía te llevará a través del proceso de activación del Modo Desarrollador en tu dispositivo iOS.
 

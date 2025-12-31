@@ -1,5 +1,9 @@
 ---
-const { head } = Astro.locals.starlightRoute
+import type { StarlightRouteData } from '@astrojs/starlight/route-data'
+import * as m from '@/paraglide/messages'
+
+const { head, entry } = Astro.locals.starlightRoute as StarlightRouteData
+
 const xDefault = head.find(({ tag: Tag, attrs }) => Tag === 'link' && attrs?.rel === 'alternate' && attrs?.hreflang === 'en')
 if (xDefault && !head.find(({ tag: Tag, attrs }) => Tag === 'link' && attrs?.rel === 'alternate' && attrs?.hreflang === 'x-default')) {
   head.push({
@@ -8,6 +12,83 @@ if (xDefault && !head.find(({ tag: Tag, attrs }) => Tag === 'link' && attrs?.rel
       rel: 'alternate',
       hreflang: 'x-default',
       href: xDefault?.attrs?.href,
+    },
+  })
+}
+
+const messageLocale = Astro.locals.locale as any
+const defaultDescription = m.website_description({}, { locale: messageLocale })
+
+const brand = Astro.locals.runtimeConfig?.public?.brand || 'Capgo'
+const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+const normalizeWhitespace = (value: string) => value.replace(/\s+/g, ' ').trim()
+
+const buildSeoTitle = (input: string) => {
+  const maxLength = 60
+  const minLength = 50
+  const separator = ' | '
+
+  const maxCoreLength = maxLength - separator.length - brand.length
+  const minCoreLength = minLength - separator.length - brand.length
+
+  let core = normalizeWhitespace(input)
+
+  const brandPrefix = new RegExp(`^${escapeRegExp(brand)}\\s*[|\\-–—:]\\s*`, 'i')
+  const brandSuffix = new RegExp(`\\s*[|\\-–—:]\\s*${escapeRegExp(brand)}\\s*$`, 'i')
+
+  core = normalizeWhitespace(core.replace(brandPrefix, '').replace(brandSuffix, ''))
+
+  const path = Astro.url.pathname
+  const sectionDescriptor = (() => {
+    if (path.startsWith('/docs/cli/')) return 'Capacitor Live Updates CLI Docs'
+    if (path.startsWith('/docs/plugins/')) return 'Capacitor Plugin Docs & Examples'
+    if (path.startsWith('/docs/webapp/')) return 'Capacitor Live Updates Web App Docs'
+    return 'Capacitor Live Updates Documentation'
+  })()
+
+  if (core.length > 0 && core.length < minCoreLength) {
+    const expanded = `${core} - ${sectionDescriptor}`
+    core = normalizeWhitespace(expanded)
+  }
+
+  if (core.length > maxCoreLength) {
+    const truncated = core.slice(0, Math.max(0, maxCoreLength - 1)).trimEnd().replace(/[\s,.:;\-–—]+$/, '')
+    core = truncated ? `${truncated}…` : core.slice(0, maxCoreLength)
+  }
+
+  if (!core) core = brand
+
+  return `${core}${separator}${brand}`
+}
+
+const titleIndex = head.findIndex(({ tag }) => tag === 'title')
+if (titleIndex !== -1) {
+  const raw = typeof head[titleIndex].content === 'string' ? head[titleIndex].content : ''
+  head[titleIndex].content = buildSeoTitle(raw)
+}
+const entryData = (entry?.data as Record<string, unknown> | undefined) ?? undefined
+
+const entryTitle = typeof entryData?.title === 'string' ? entryData.title : ''
+const entryDescription = typeof entryData?.description === 'string' ? entryData.description : typeof entryData?.summary === 'string' ? entryData.summary : ''
+
+let metaDescription = (entryDescription || entryTitle || defaultDescription).replace(/\s+/g, ' ').replace(/"/g, "'").trim()
+
+if (metaDescription && metaDescription !== defaultDescription && metaDescription.length < 120) {
+  metaDescription = `${metaDescription} — ${defaultDescription}`
+}
+
+const maxDescriptionLength = 159
+if (metaDescription.length > maxDescriptionLength) {
+  metaDescription = `${metaDescription.substring(0, maxDescriptionLength - 3)}...`
+}
+
+const hasMetaDescription = head.some(({ tag, attrs }) => tag === 'meta' && attrs?.name === 'description')
+if (!hasMetaDescription && metaDescription) {
+  head.push({
+    tag: 'meta',
+    attrs: {
+      name: 'description',
+      content: metaDescription,
     },
   })
 }

@@ -9,8 +9,30 @@ import type { Database } from '@/services/supabase.types'
 import * as m from '@/paraglide/messages'
 import Enterprise from '@/components/enterprise.astro'
 
-const title = [Astro.locals.runtimeConfig.public.brand, m.pricing({}, { locale: Astro.locals.locale })].join(' | ')
-const description = m.pricing_description({}, { locale: Astro.locals.locale })
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+const description = m.pricing_description({}, { locale })
+
+const makeSeoTitle = (primary: string, descriptionText: string) => {
+  const normalizedPrimary = primary.replace(/\s+/g, ' ').trim()
+  const normalizedDescription = descriptionText.replace(/\s+/g, ' ').trim().replace(/[.!?]\s*$/, '')
+  const base = `${brand} | ${normalizedPrimary}`
+
+  if (base.length >= 50 && base.length <= 60) return base
+  if (base.length > 60) return base.slice(0, 60).trimEnd()
+
+  const separator = ' — '
+  const available = 60 - base.length - separator.length
+  if (available <= 0) return base
+
+  const snippetRaw = normalizedDescription.slice(0, available)
+  const lastSpace = snippetRaw.lastIndexOf(' ')
+  const snippet = (lastSpace > available * 0.6 ? snippetRaw.slice(0, lastSpace) : snippetRaw).trim().replace(/[,:;\-–—]\s*$/, '')
+
+  return snippet ? `${base}${separator}${snippet}` : base
+}
+
+const title = makeSeoTitle(m.pricing({}, { locale }), description)
 
 const content: { title: string; description: string; ldJSON?: any } = { title, description }
 
