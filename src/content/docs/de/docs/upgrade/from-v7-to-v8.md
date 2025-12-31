@@ -16,28 +16,7 @@ Folgen Sie zuerst dem Migrations-Leitfaden von Capacitor:
 
 ## iOS-Mindestversionsanforderung
 
-Das iOS-Mindest-Deployment-Ziel wurde auf **15.5** erhöht, um sicherzustellen, dass iOS-Geräte mit [CVE-2022-36943](https://nvd.nist.gov/vuln/detail/CVE-2022-36943) ausgeschlossen werden. Dies ist die Mindestversion der iOS-Zip-Bibliothek, die den Sicherheits-Fix implementiert hat.
-
-### Swift Package Manager (SPM) Workaround
-
-Capacitor hat derzeit einen Bug ([ionic-team/capacitor#7556](https://github.com/ionic-team/capacitor/issues/7556)), der es nicht ermöglicht, das iOS-Deployment-Ziel auf 15.5 zu setzen, wenn SPM verwendet wird.
-
-Wenn Sie SPM-Unterstützung benötigen, können Sie vorübergehend unseren Fork verwenden:
-
-**GitHub:** [https://github.com/Cap-go/capacitor-plus](https://github.com/Cap-go/capacitor-plus)
-
-Um ihn zu verwenden, ersetzen Sie das CLI-Paket `@capacitor/cli` durch `@capacitor-plus/cli`:
-
-```bash
-npm uninstall @capacitor/cli
-npm install @capacitor-plus/cli
-```
-
-Verwenden Sie dann das CLI wie gewohnt:
-
-```bash
-npx capacitor sync
-```
+Das iOS-Mindest-Deployment-Ziel wurde auf **15** erhöht, um sicherzustellen, dass iOS-Geräte mit [CVE-2022-36943](https://nvd.nist.gov/vuln/detail/CVE-2022-36943) ausgeschlossen werden. Dies ist die Mindestversion der iOS-Zip-Bibliothek, die den Sicherheits-Fix implementiert hat.
 
 ## Installation
 
@@ -80,8 +59,7 @@ Die Konfiguration bleibt dieselbe wie bei v7. Ihre bestehenden `capacitor.config
 ## Migrations-Checkliste
 
 - [ ] Dem v8-[Migrations-Leitfaden](https://capacitorjs.com/docs/updating/8-0) von Capacitor folgen, auf Breaking Changes prüfen
-- [ ] iOS-Mindest-Deployment-Ziel auf 15.5 erhöhen (erforderlich für CVE-2022-36943-Fix)
-- [ ] Bei SPM-Nutzung vorübergehend auf [@capacitor-plus/cli](https://github.com/Cap-go/capacitor-plus) wechseln, bis [ionic-team/capacitor#7556](https://github.com/ionic-team/capacitor/issues/7556) behoben ist
+- [ ] iOS-Mindest-Deployment-Ziel auf 15 erhöhen (erforderlich für CVE-2022-36943-Fix)
 - [ ] @capgo/capacitor-updater auf ^8.0.0 aktualisieren
 - [ ] `npx cap sync` ausführen
 - [ ] Ihre App gründlich auf iOS und Android testen
