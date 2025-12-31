@@ -10,7 +10,11 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 import config from './configs.json'
 import { glob } from 'glob'
 import { readFileSync, statSync } from 'node:fs'
+import os from 'node:os'
 import { defaultLocale, localeNames, locales } from './src/services/locale'
+
+// Get CPU count for optimal parallelization
+const CPU_COUNT = os.cpus().length
 
 // Build a map of page paths to their lastmod dates for sitemap
 function getPageLastModDates() {
@@ -61,25 +65,35 @@ export default defineConfig({
   site: `https://${config.base_domain.prod}`,
   output: 'static',
   build: {
-    // Increase concurrency for faster builds on larger runners
-    // GitHub Actions ubuntu-latest-8-core has 8 cores
-    // Netlify large builders have 8 cores
-    concurrency: 8,
-    // Enable build caching
+    // Optimal concurrency based on benchmarks: CPU_COUNT is usually best
+    // Too high causes memory contention, too low underutilizes cores
+    concurrency: CPU_COUNT,
+    // Skip HTML compression - let CDN handle it for faster builds
+    compressHTML: false,
+    // Inline small stylesheets for performance
     inlineStylesheets: 'auto',
   },
   vite: {
     build: {
+      // Target modern JS to reduce transpilation overhead
+      target: 'es2022',
       // Increase chunk size warning limit
       chunkSizeWarningLimit: 1000,
-      // Enable minification
+      // Use esbuild for fastest minification (or disable for even faster builds)
       minify: 'esbuild',
-      // Optimize dependencies
+      // Reduce chunk fragmentation overhead
       rollupOptions: {
         output: {
           manualChunks: undefined,
         },
+        // Maximize parallel file operations
+        maxParallelFileOps: CPU_COUNT * 3,
       },
+    },
+    // Optimize dependency pre-bundling
+    optimizeDeps: {
+      // Force include heavy deps to pre-bundle them once
+      include: ['mermaid'],
     },
   },
   env: {
