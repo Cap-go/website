@@ -7,7 +7,7 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-18T00:00:00.000Z
-updated_at: 2023-09-18T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /open_source_licence.webp
 head_image_alt: オープンソースライセンス
 keywords: >-

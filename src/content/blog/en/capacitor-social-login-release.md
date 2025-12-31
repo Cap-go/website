@@ -8,7 +8,7 @@ author: WcaleNieWolny
 author_image_url: 'https://avatars.githubusercontent.com/u/50914789?v=4'
 author_url: 'https://github.com/WcaleNieWolny/WcaleNieWolny'
 created_at: 2024-10-08T00:00:00.000Z
-updated_at: 2024-10-08T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /social_login_plugin_blog.webp
 head_image_alt: Capgo organization system illusatration
 keywords: Oauth, social login, mobile app development, live updates, OTA updates, continuous integration, mobile app updates

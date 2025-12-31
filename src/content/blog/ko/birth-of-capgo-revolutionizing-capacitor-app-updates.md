@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-07-13T00:00:00.000Z
-updated_at: 2024-07-13T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /capgo-birth-story.webp
 head_image_alt: Capgo의 아이디어에서 제품으로의 진화를 시각적으로 표현한 것입니다.
 keywords: >-

@@ -10,7 +10,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z
-updated_at: 2022-01-13T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /apple_appstore.webp
 head_image_alt: Illustration de dérivation de Capacitor
 keywords: 'Apple, live updates, OTA updates, continuous integration, mobile app updates'
