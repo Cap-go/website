@@ -1,5 +1,5 @@
 ---
-slug: android-talkback-deaktivieren
+slug: turn-off-android-talkback
 title: Así es como desactivar y usar TalkBack en dispositivos Android
 description: >-
   Instrucciones paso a paso para activar y navegar con TalkBack, el lector de
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-11-27T00:00:00.000Z
-updated_at: 2023-11-27T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /android_talkback.webp
 head_image_alt: Activar TalkBack en Android
 keywords: >-

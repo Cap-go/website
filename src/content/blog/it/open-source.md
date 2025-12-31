@@ -1,5 +1,5 @@
 ---
-slug: about-open-source
+slug: open-source
 title: Scopri cos'è l'open source e perché è importante!
 description: >-
   Durante il tuo percorso di programmazione, potresti aver sentito parlare del
@@ -8,7 +8,7 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-16T00:00:00.000Z
-updated_at: 2023-09-16T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /open_source_main.webp
 head_image_alt: open source
 keywords: >-

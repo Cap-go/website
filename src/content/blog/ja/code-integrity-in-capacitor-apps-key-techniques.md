@@ -1,12 +1,12 @@
 ---
-slug: integrità-del-codice-nelle-app-capacitor-tecniche-chiave
+slug: code-integrity-in-capacitor-apps-key-techniques
 title: Capacitor アプリのコード整合性：主要なテクニック
 description: アプリストアのガイドラインに準拠しながら、OTAアップデート、暗号化に焦点を当てて、モバイルアプリのコード整合性を確保するための重要な手法を探ります。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-02-09T06:50:58.883Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67a7f90344f489ae95339b05-1739083872712.jpg
 head_image_alt: モバイル開発

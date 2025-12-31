@@ -1,5 +1,5 @@
 ---
-slug: release-of-a-brand-new-capacitor-social-login
+slug: capacitor-social-login-release
 title: 브랜드 뉴 Capacitor 소셜 로그인 플러그인 출시
 description: >-
   Capacitor 소셜 로그인 플러그인은 iOS, Android 및 웹에서 Google, Facebook 및 Apple로 로그인할 수 있게
@@ -8,7 +8,7 @@ author: WcaleNieWolny
 author_image_url: 'https://avatars.githubusercontent.com/u/50914789?v=4'
 author_url: 'https://github.com/WcaleNieWolny/WcaleNieWolny'
 created_at: 2024-10-08T00:00:00.000Z
-updated_at: 2024-10-08T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /social_login_plugin_blog.webp
 head_image_alt: Capgo 조직 시스템 일러스트레이션
 keywords: >-

@@ -1,5 +1,5 @@
 ---
-slug: integrar-universal-links-capacitor-nextjs
+slug: integrate-universal-links-capacitor-nextjs
 title: Cara Mengintegrasikan Universal Links di Next.js dengan Capacitor
 description: >-
   Pelajari langkah demi langkah cara mengatur universal links untuk aplikasi
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-12-14T00:00:00.000Z
-updated_at: 2023-12-14T00:00:00.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: /deeplink_next_capacitor.webp
 head_image_alt: Tautan Universal Capacitor
 keywords: >-

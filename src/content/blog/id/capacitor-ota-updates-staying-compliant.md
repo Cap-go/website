@@ -1,5 +1,5 @@
 ---
-slug: mises-a-jour-ota-dans-capacitor-en-restant-conforme
+slug: capacitor-ota-updates-staying-compliant
 title: 'Pembaruan OTA Capacitor: Tetap Patuh'
 description: >-
   Pelajari cara mengimplementasikan pembaruan OTA untuk aplikasi Capacitor
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-28T03:37:02.530Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e61434a2c14cac42f85a37-1743133034618.jpg
 head_image_alt: Pengembangan Seluler

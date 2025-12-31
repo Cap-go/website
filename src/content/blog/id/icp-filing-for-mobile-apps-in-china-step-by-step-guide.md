@@ -1,5 +1,5 @@
 ---
-slug: guia-paso-a-paso-para-registrar-icp-para-aplicaciones-moviles-en-china
+slug: icp-filing-for-mobile-apps-in-china-step-by-step-guide
 title: 'Pendaftaran ICP untuk Aplikasi Mobile di China: Panduan Langkah demi Langkah'
 description: >-
   Pelajari langkah-langkah penting untuk pengajuan ICP bagi aplikasi mobile di
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-26T01:51:04.423Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e344e910051fda3b61d655-1742953875704.jpg
 head_image_alt: Pengembangan Seluler

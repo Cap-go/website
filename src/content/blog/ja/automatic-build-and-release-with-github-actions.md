@@ -1,5 +1,5 @@
 ---
-slug: build-e-release-automatico-con-github-actions
+slug: automatic-build-and-release-with-github-actions
 title: Githubアクションによるアプリの自動ビルドとリリース
 description: >-
   Github actionsを使用して無料でCI/CDパイプラインを作成し、mainにプッシュするたびにIonic Capacitor
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-03-23T00:00:00.000Z
-updated_at: 2025-12-04T21:45:51.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /github_actions.webp
 head_image_alt: Github アクション図
 keywords: 'Github actions, CI/CD, automatic build, automatic release, mobile app updates'

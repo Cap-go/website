@@ -1,5 +1,5 @@
 ---
-slug: mises-à-jour-en-direct-autorisées-par-google
+slug: do-google-allow-live-updates
 title: >-
   Apakah Google mengizinkan pengiriman pembaruan langsung ke aplikasi tanpa
   peninjauan Play Store?
@@ -10,7 +10,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z
-updated_at: 2023-06-29T00:00:00.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: /playstore.webp
 head_image_alt: Ilustrasi bypass Capacitor
 keywords: 'Google, live updates, OTA updates, continuous integration, mobile app updates'

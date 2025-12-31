@@ -1,5 +1,5 @@
 ---
-slug: conformità-ccpa-per-app-mobili
+slug: ccpa-compliance-for-mobile-apps
 title: モバイルアプリのCCPA準拠
 description: >-
   モバイルアプリ開発者向けのCCPA（カリフォルニア州消費者プライバシー法）への準拠のための重要なステップを探り、ユーザーデータを保護し、プライバシーの権利を維持します。
@@ -7,7 +7,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-27T00:40:38.043Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/680d75de5a08fca89179eb81-1745714676586.jpg
 head_image_alt: モバイル開発

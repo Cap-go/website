@@ -1,5 +1,5 @@
 ---
-slug: wie-mobile-apps-die-datenschutzgesetze-der-usa-einhalten
+slug: how-mobile-apps-stay-compliant-with-us-privacy-laws
 title: Cómo las aplicaciones móviles cumplen con las leyes de privacidad de EE. UU.
 description: >-
   Descubra cómo las aplicaciones móviles pueden cumplir con los requisitos de
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-06T03:14:22.038Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67c8efd008fcceb00021f6ac-1741230902559.jpg
 head_image_alt: Desarrollo Móvil

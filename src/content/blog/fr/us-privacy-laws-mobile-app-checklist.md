@@ -1,5 +1,5 @@
 ---
-slug: lista-de-verificacion-leyes-privacidad-eeuu-apps-moviles
+slug: us-privacy-laws-mobile-app-checklist
 title: >-
   Lois sur la confidentialité aux États-Unis : Liste de vérification pour les
   applications mobiles
@@ -11,7 +11,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-23T05:58:21.536Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67df9ec1ffe25179c9af3a48-1742709514062.jpg
 head_image_alt: Développement Mobile

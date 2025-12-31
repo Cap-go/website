@@ -1,5 +1,5 @@
 ---
-slug: guía-definitiva-manejo-changelog-capacitor
+slug: capacitor-changelog-management-ultimate-guide
 title: 'Mengelola Log Perubahan Capacitor: Panduan Lengkap'
 description: >-
   Pelajari cara pengelolaan catatan perubahan yang efektif untuk aplikasi
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-27T02:52:04.098Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e4b3f310051fda3b6385d9-1743043942012.jpg
 head_image_alt: Pengembangan Mobile

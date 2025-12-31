@@ -1,5 +1,5 @@
 ---
-slug: comment-utiliser-capacitor-cli-pour-les-mises-à-jour-ota
+slug: how-to-use-capacitor-cli-for-ota-updates
 title: Cara Menggunakan CLI Capacitor untuk Pembaruan OTA
 description: >-
   Pelajari cara menggunakan Command Line Interface Capacitor untuk pembaruan
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-05T02:35:09.479Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67f08966ebbb9dc80643aea5-1743820535214.jpg
 head_image_alt: Pengembangan Mobile

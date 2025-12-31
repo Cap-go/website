@@ -1,12 +1,12 @@
 ---
-slug: guida-step-by-step-per-la-registrazione-icp-delle-app-mobili-in-cina
+slug: icp-filing-for-mobile-apps-in-china-step-by-step-guide
 title: 中国でのモバイルアプリのICP（インターネットコンテンツプロバイダー）：ステップバイステップガイド
 description: モバイルアプリの中国でのICP登録に必要な重要なステップについて、必要な書類とコンプライアンス戦略を含め、成功した運営のために解説します。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-26T01:51:04.423Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e344e910051fda3b61d655-1742953875704.jpg
 head_image_alt: モバイル開発

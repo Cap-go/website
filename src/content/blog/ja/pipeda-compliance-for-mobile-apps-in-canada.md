@@ -1,12 +1,12 @@
 ---
-slug: la-conformita-pipeda-per-app-mobili-in-canada
+slug: pipeda-compliance-for-mobile-apps-in-canada
 title: カナダにおけるモバイルアプリのPIPEDA準拠
 description: モバイルアプリがPIPEDAに従ってカナダのプライバシー法を遵守し、ユーザーデータを保護して信頼を高める方法を学びましょう。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-01T03:38:09.282Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67eb5b27283d21cbd67d62bd-1743478700916.jpg
 head_image_alt: モバイル開発

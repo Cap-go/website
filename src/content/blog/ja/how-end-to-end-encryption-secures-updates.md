@@ -1,12 +1,12 @@
 ---
-slug: come-la-crittografia-end-to-end-protegge-gli-aggiornamenti
+slug: how-end-to-end-encryption-secures-updates
 title: エンドツーエンド暗号化によるアップデートの保護について
 description: エンドツーエンドの暗号化がOTAアップデートをどのように保護し、アプリの整合性とユーザーの信頼を確保し、不正アクセスや改ざんを防止するかを探ります。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-14T04:10:31.003Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67fc6fa4af1a45e500bc7deb-1744604001503.jpg
 head_image_alt: モバイル開発

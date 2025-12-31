@@ -1,5 +1,5 @@
 ---
-slug: birth-of-capgo-my-challenging-journey-as-a-solo-maker
+slug: birth-of-capgo-revolutionizing-capacitor-app-updates
 title: GitHubのIssueがビジネスへと進化した方法
 description: >-
   CapacitorアプリのためのイノベーティブなライブアップデートシステムCapgoの開発背景にある試練と成功、そして必要性から生まれ、コミュニティのフィードバックによって形作られた軌跡をご紹介します。
@@ -7,7 +7,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-07-13T00:00:00.000Z
-updated_at: 2024-07-13T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /capgo-birth-story.webp
 head_image_alt: Capgoのアイデアから製品までの進化を視覚的に表現
 keywords: >-

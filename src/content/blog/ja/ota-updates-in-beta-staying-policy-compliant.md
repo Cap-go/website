@@ -1,12 +1,12 @@
 ---
-slug: aggiornamenti-ota-in-beta-rispettare-policy
+slug: ota-updates-in-beta-staying-policy-compliant
 title: OTAアップデートのベータ版：ポリシーの順守
 description: アプリストアのポリシーに準拠し、ユーザーのセキュリティを向上させながら、ベータテストでのOTAアップデートを効果的に管理する方法をご紹介します。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-01T02:04:08.266Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67eb2df2283d21cbd67cfdb5-1743499666588.jpg
 head_image_alt: モバイル開発

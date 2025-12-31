@@ -1,5 +1,5 @@
 ---
-slug: open-source-licecing
+slug: open-source-licence
 title: Understanding Open-Source Software Licenses
 description: >-
   When it comes to open-source software licenses, there are two broad categories.
@@ -9,7 +9,7 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-18T00:00:00.000Z
-updated_at: 2023-09-18T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /open_source_licence.webp
 head_image_alt: Open Source Licence
 keywords: Open Source, Capgo, philosophy, mobile app development, live updates, OTA updates, continuous integration, mobile app updates

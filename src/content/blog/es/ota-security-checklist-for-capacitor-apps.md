@@ -1,5 +1,5 @@
 ---
-slug: sicherheits-checkliste-für-ota-updates-in-capacitor-apps
+slug: ota-security-checklist-for-capacitor-apps
 title: Lista de verificación de seguridad OTA para aplicaciones Capacitor
 description: >-
   Conozca las medidas de seguridad importantes para las actualizaciones OTA en
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-11T13:52:41.166Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67f910732e221594daf2250f-1744379572627.jpg
 head_image_alt: Desarrollo móvil

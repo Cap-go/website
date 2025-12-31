@@ -1,12 +1,12 @@
 ---
-slug: come-risolvere-errori-di-compilazione-android-in-capacitor
+slug: how-to-resolve-android-build-errors-in-capacitor
 title: Capacitorでのビルドエラーを解決する方法
 description: Android の Capacitor でのビルドエラーの解決方法を、設定の問題から依存関係の競合、ProGuard の問題まで詳しく説明します。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-29T03:02:04.382Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e75df8283d21cbd679ae1b-1743217335938.jpg
 head_image_alt: モバイル開発

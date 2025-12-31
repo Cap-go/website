@@ -1,5 +1,5 @@
 ---
-slug: wie-fuegt-man-abhaengigkeiten-in-capacitor-plugins-hinzu
+slug: how-to-add-dependencies-in-capacitor-plugins
 title: Cómo agregar dependencias a los plugins de Capacitor
 description: >-
   Aprenda cómo optimizar la gestión de dependencias en plugins de Capacitor a
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-27T02:08:04.837Z
-updated_at: 2025-03-27T02:08:34.795Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e4966a10051fda3b63500a-1743041314795.jpg
 head_image_alt: Desarrollo móvil

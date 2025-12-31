@@ -1,5 +1,5 @@
 ---
-slug: guide-d'intégration-cicd-mises-à-jour-ota-capacitor
+slug: capacitor-ota-updates-cicd-integration-guide
 title: 'Pembaruan OTA Capacitor: Panduan Integrasi CI/CD'
 description: >-
   Pelajari cara mengintegrasikan pembaruan OTA ke dalam pipeline CI/CD Anda
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-17T01:02:12.522Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/6800475b28980901df1e541b-1744851846737.jpg
 head_image_alt: Pengembangan Mobile

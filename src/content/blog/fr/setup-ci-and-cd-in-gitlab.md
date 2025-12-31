@@ -1,5 +1,5 @@
 ---
-slug: configuracion-ci-y-cd-gitlab
+slug: setup-ci-and-cd-in-gitlab
 title: Construction et Lancement Automatique d'Apps avec GitLab
 description: >-
   Créez votre propre pipeline CI/CD avec GitLab gratuitement et déployez votre
@@ -8,7 +8,7 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-14T00:00:00.000Z
-updated_at: 2023-09-14T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /CI_CD_in_Gitlab.webp
 head_image_alt: CI/CD dans GitLab
 keywords: 'GitLab, CI/CD, automatic build, automatic release, mobile app updates'

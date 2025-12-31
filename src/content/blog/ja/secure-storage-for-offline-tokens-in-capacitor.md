@@ -1,12 +1,12 @@
 ---
-slug: memorizzazione-sicura-per-token-offline-in-capacitor
+slug: secure-storage-for-offline-tokens-in-capacitor
 title: Capacitor でのオフライントークンのセキュアな保存
 description: モバイルアプリケーションで暗号化と生体認証を使用して、認証トークンをオフラインで安全に保存する方法を学びます。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-19T02:09:43.027Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/6802fa419291ae98c5002559-1745028797889.jpg
 head_image_alt: モバイル開発

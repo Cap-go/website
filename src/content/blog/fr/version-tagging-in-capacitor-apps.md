@@ -1,5 +1,5 @@
 ---
-slug: etiquetado-de-versiones-en-aplicaciones-capacitor
+slug: version-tagging-in-capacitor-apps
 title: Identification des versions dans les applications Capacitor
 description: >-
   Apprenez les concepts de base du contrôle de version dans les applications
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-26T03:19:04.753Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e36d7410051fda3b6230a0-1742959155569.jpg
 head_image_alt: Développement Mobile

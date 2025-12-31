@@ -1,5 +1,5 @@
 ---
-slug: gestionar-compilacion-dev-y-prod-con-github-actions
+slug: manage-dev-and-prod-build-with-github-actions
 title: Gérez le développement et la construction de production avec GitHub actions
 description: >-
   Utilisez Capgo pour publier votre devbuild sur un canal spécifique, et
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-16T00:00:00.000Z
-updated_at: 2025-12-04T21:45:51.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /capgo_ci-cd-illustration.webp
 head_image_alt: Illustration des builds de canal
 keywords: >-

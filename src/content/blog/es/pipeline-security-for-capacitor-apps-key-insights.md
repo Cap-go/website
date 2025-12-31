@@ -1,5 +1,5 @@
 ---
-slug: sicherheit-der-pipeline-für-capacitor-apps-wichtige-erkenntnisse
+slug: pipeline-security-for-capacitor-apps-key-insights
 title: 'Seguridad de Pipeline para aplicaciones Capacitor: Conocimientos importantes'
 description: >-
   Aprende estrategias importantes para asegurar los pipelines de aplicaciones
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-21T03:16:36.231Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/68059152360079f947b84e10-1745205430503.jpg
 head_image_alt: Desarrollo móvil

@@ -1,5 +1,5 @@
 ---
-slug: protection-confidentialite-apple-google-conformite-donnees-tierces
+slug: apple-vs-google-privacy-compliance-for-third-party-data
 title: 'Apple vs. Google: Kepatuhan Privasi untuk Data Pihak Ketiga'
 description: >-
   Jelajahi strategi privasi yang kontras dari dua perusahaan teknologi besar dan
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-27T02:14:50.081Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/680d81465a08fca8917a02c4-1745720205882.jpg
 head_image_alt: Mobile Development

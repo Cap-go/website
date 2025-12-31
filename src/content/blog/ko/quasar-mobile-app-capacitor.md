@@ -1,12 +1,12 @@
 ---
-slug: live-update-with-quasar-and-capacitor
+slug: quasar-mobile-app-capacitor
 title: '실시간 업데이트, Quasar 및 Capacitor를 사용한 모바일 앱 개발.'
 description: Quasar와 Capacitor를 사용하여 모바일 앱을 만들고 라이브 업데이트를 구현하는 방법.
 author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikDhabal'
 created_at: 2023-09-14T00:00:00.000Z
-updated_at: 2025-10-31T17:55:22.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /quasar_capgo.webp
 head_image_alt: Quasar 및 Capgo 설명
 keywords: >-

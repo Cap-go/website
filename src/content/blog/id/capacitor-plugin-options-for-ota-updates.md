@@ -1,5 +1,5 @@
 ---
-slug: options-du-plugin-capacitor-pour-les-mises-a-jour-ota
+slug: capacitor-plugin-options-for-ota-updates
 title: Opsi Plugin Capacitor untuk Pembaruan OTA
 description: >-
   Jelajahi keuntungan dan pilihan pembaruan OTA untuk aplikasi Capacitor,
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-16T02:50:46.694Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549-1744774247069.jpg
 head_image_alt: Pengembangan Mobile

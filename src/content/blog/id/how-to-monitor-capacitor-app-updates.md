@@ -1,5 +1,5 @@
 ---
-slug: comment-surveiller-les-mises-à-jour-de-l'application-capacitor
+slug: how-to-monitor-capacitor-app-updates
 title: Memantau Pembaruan Aplikasi Capacitor
 description: >-
   Temukan strategi efektif untuk memantau pembaruan aplikasi Capacitor,
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-02-16T02:14:06.413Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67b133684899b66d1dc8f1ac-1739672065689.jpg
 head_image_alt: Pengembangan Mobile

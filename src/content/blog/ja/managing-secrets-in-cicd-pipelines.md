@@ -1,12 +1,12 @@
 ---
-slug: gestione-dei-segreti-nelle-pipeline-cicd
+slug: managing-secrets-in-cicd-pipelines
 title: CI/CDパイプラインでのシークレット管理
 description: CIパイプラインで機密情報を安全に扱い、セキュリティを向上させ、漏洩や法令遵守の問題を防ぐための効果的な戦略を学びましょう。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-20T00:50:40.782Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/68043aae6000445eb1a64c9e-1745110261303.jpg
 head_image_alt: テクノロジー

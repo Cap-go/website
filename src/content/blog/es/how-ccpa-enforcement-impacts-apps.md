@@ -1,5 +1,5 @@
 ---
-slug: wie-sich-die-durchsetzung-des-ccpa-auf-apps-auswirkt
+slug: how-ccpa-enforcement-impacts-apps
 title: Cómo la aplicación de la CCPA afecta a las aplicaciones
 description: >-
   El CCPA está cambiando la forma en que las aplicaciones móviles gestionan los
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-02-27T16:48:49.867Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67c0870dcd608d64ca3e5184-1740674966680.jpg
 head_image_alt: Desarrollo móvil

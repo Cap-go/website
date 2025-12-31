@@ -1,5 +1,5 @@
 ---
-slug: costruire-una-app-mobile-nativa-con-nextjs-e-capacitor
+slug: building-a-native-mobile-app-with-nextjs-and-capacitor
 title: 2024 Next.js 14とCapacitorでネイティブモバイルアプリを作成する：ステップバイステップガイド
 description: >-
   Next.js
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-02-21T00:00:00.000Z
-updated_at: 2024-09-19T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /next_capgo.webp
 head_image_alt: Next.js 14とCapacitorのイラストレーション
 keywords: >-

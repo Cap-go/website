@@ -1,5 +1,5 @@
 ---
-slug: wie-segmentieren-sie-benutzer-nach-plan-und-kanälen
+slug: how-to-segment-users-by-plan-and-channels
 title: Cómo usar los Channels para Feature Flags y pruebas A/B
 description: >-
   Aprenda cómo utilizar los canales de CapGo para Feature Flags y pruebas A/B
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-04-15T00:00:00.000Z
-updated_at: 2025-04-15T00:00:00.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: /capgo-feature-image.webp
 head_image_alt: Ilustración de indicadores de funciones de canal de Capgo
 keywords: 'channels, feature flags, a/b testing, capacitor, capgo'

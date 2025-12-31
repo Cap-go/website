@@ -1,5 +1,5 @@
 ---
-slug: von-microsoft-app-center-zu-capgo
+slug: moving-from-microsoft-app-center-to-capgo
 title: >-
   Passer de Microsoft App Center à Capgo pour les mises à jour d'applications en
   direct
@@ -11,7 +11,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-03-21T00:00:00.000Z
-updated_at: 2023-06-29T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /app_center.webp
 head_image_alt: Illustration de Microsoft App Center
 keywords: >-

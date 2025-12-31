@@ -1,5 +1,5 @@
 ---
-slug: dépannage-des-mises-à-jour-capacitor-ota
+slug: capacitor-ota-updates-debugging-issues
 title: Debugging Pembaruan OTA Capacitor
 description: >-
   Pelajari cara menyelesaikan masalah pembaruan OTA secara efektif, memastikan
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-16T03:16:07.345Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67ff1c0bb0912f75a97f349a-1744775417719.jpg
 head_image_alt: Pengembangan Mobile

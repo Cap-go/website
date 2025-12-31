@@ -1,5 +1,5 @@
 ---
-slug: Reducción de precios en Capgo
+slug: capgo-price-reduction
 title: >-
   Réduction des prix de Capgo : Rendre les mises à jour en direct encore plus
   accessibles
@@ -11,7 +11,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-03-05T00:00:00.000Z
-updated_at: 2025-12-13T14:46:32.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: /capgo-feature-image.webp
 head_image_alt: Annonce de baisse des prix de Capgo
 keywords: 'capgo, price reduction, live updates, mobile app development, capacitor'

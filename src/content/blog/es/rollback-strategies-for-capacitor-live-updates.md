@@ -1,5 +1,5 @@
 ---
-slug: rollback-strategien-für-capacitor-live-updates
+slug: rollback-strategies-for-capacitor-live-updates
 title: Estrategias de Rollback para Capacitor Live Updates
 description: >-
   Aprende más sobre estrategias efectivas de reversión para actualizaciones en
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-25T03:35:36.644Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/680afd1e5a08fca891778b0c-1745552174598.jpg
 head_image_alt: Desarrollo Móvil

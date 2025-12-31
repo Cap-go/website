@@ -1,5 +1,5 @@
 ---
-slug: live-update-with-quasar-und-capacitor
+slug: quasar-mobile-app-capacitor
 title: >-
   Créer des applications mobiles avec des mises à jour en direct, Quasar et
   Capacitor.
@@ -10,7 +10,7 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikDhabal'
 created_at: 2023-09-14T00:00:00.000Z
-updated_at: 2023-09-14T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /quasar_capgo.webp
 head_image_alt: Illustration de Quasar et Capgo
 keywords: >-

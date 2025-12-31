@@ -1,5 +1,5 @@
 ---
-slug: como-administrar-datos-de-usuario-en-aplicaciones-capacitor
+slug: how-to-handle-user-data-in-capacitor-apps
 title: Comment gérer les données utilisateur dans les applications Capacitor
 description: >-
   Apprenez des stratégies efficaces pour gérer les données des utilisateurs dans
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-02-18T04:43:56.186Z
-updated_at: 2025-03-18T13:13:58.671Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67b3d6e4147c4c67492d1b20-1739853969789.jpg
 head_image_alt: Développement mobile

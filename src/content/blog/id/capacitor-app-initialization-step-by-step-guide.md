@@ -1,5 +1,5 @@
 ---
-slug: guide-étape-par-étape-pour-l'initialisation-d'une-application-capacitor
+slug: capacitor-app-initialization-step-by-step-guide
 title: Panduan Memulai Capacitor Secara Bertahap
 description: >-
   Pelajari cara mengonfigurasi dan mendeploy aplikasi mobile secara efisien
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-28T03:11:03.831Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e6018fa2c14cac42f82293-1743131474608.jpg
 head_image_alt: Pengembangan Mobile

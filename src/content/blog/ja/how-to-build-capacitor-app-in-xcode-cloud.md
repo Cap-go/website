@@ -1,12 +1,12 @@
 ---
-slug: come-costruire-un-app-capacitor-in-xcode-cloud
+slug: how-to-build-capacitor-app-in-xcode-cloud
 title: Xcode Cloudでのアプリ開発のためのIonic Capacitorの設定
 description: CapacitorJSアプリをコンパイルするためにXcode cloudを使用し、MacOSの必要性を回避します。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-09-01T00:00:00.000Z
-updated_at: 2023-06-29T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /xcode_cloud.webp
 head_image_alt: CapacitorのためのビルドをiCloud上で管理する
 keywords: >-

@@ -1,5 +1,5 @@
 ---
-slug: Open-Source vs proprietäre App-Update-Lösungen
+slug: open-source-vs-proprietary-app-update-solutions
 title: Solutions open source vs propriétaires pour la mise à jour d'applications
 description: >-
   Explorez les différences entre les solutions de mise à jour d'applications
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-02-08T03:39:09.600Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67a6a42ecd7a7d94bc55e8db-1738985966262.jpg
 head_image_alt: Développement mobile

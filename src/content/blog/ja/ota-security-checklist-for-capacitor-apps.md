@@ -1,12 +1,12 @@
 ---
-slug: lista-di-controllo-della-sicurezza-ota-per-app-capacitor
+slug: ota-security-checklist-for-capacitor-apps
 title: Capacitorアプリ用OTAセキュリティチェックリスト
 description: アプリのOTAアップデートにおける重要なセキュリティ対策（暗号化、アクセス制御、緊急対応戦略を含む）について学びましょう。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-11T13:52:41.166Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67f910732e221594daf2250f-1744379572627.jpg
 head_image_alt: モバイル開発

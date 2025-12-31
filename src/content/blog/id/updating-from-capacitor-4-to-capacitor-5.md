@@ -1,5 +1,5 @@
 ---
-slug: mise-a-jour-de-capacitor-4-vers-capacitor-5
+slug: updating-from-capacitor-4-to-capacitor-5
 title: 'Memperbarui Capacitor 4 ke Capacitor 5: Panduan Langkah demi Langkah'
 description: >-
   Pelajari cara memperbarui proyek Capacitor 4 Anda ke Capacitor 5 dengan
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-09T00:00:00.000Z
-updated_at: 2023-06-29T00:00:00.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: /capacitor-5-update.webp
 head_image_alt: Ilustrasi Pembaruan dari Capacitor 4 ke 5
 keywords: >-

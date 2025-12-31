@@ -1,5 +1,5 @@
 ---
-slug: gestione-dei-conflitti-di-versione-in-capacitor-live-updates
+slug: capacitor-live-updates-handling-version-conflicts
 title: Capacitorのライブアップデート：バージョンの競合管理
 description: >-
   アプリの安定したパフォーマンスとスムーズなユーザーエクスペリエンスを確保するため、リアルタイムアップデートにおけるバージョンの競合を管理する方法を学びましょう。
@@ -7,7 +7,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-24T03:09:18.971Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94-1745464174874.jpg
 head_image_alt: モバイル開発

@@ -1,5 +1,5 @@
 ---
-slug: apple-policy-updates-für-capacitor-apps-2025
+slug: apple-policy-updates-for-capacitor-apps-2025
 title: Actualizaciones de la Política de Apple para Aplicaciones de Capacitor 2025
 description: >-
   Las pautas de la App Store de Apple para 2025 establecen nuevos estándares de
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-03T03:02:24.801Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67edf689ebbb9dc80640b580-1743649359050.jpg
 head_image_alt: Desarrollo móvil

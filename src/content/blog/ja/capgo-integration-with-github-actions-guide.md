@@ -1,12 +1,12 @@
 ---
-slug: integrazione-di-capgo-con-guida-alle-github-actions
+slug: capgo-integration-with-github-actions-guide
 title: 'Capgo と GitHub Actions の統合: ガイド'
 description: GitHubアクションでCapgoを統合し、効率的で安全な低コストのアプリ更新を実現し、開発ワークフローを改善します。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-16T02:24:50.565Z
-updated_at: 2025-11-24T15:08:57.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67d61b378b902ec211cf87e9-1742091902582.jpg
 head_image_alt: モバイル開発

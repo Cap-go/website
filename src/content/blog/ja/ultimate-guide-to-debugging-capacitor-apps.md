@@ -1,12 +1,12 @@
 ---
-slug: guida-completa-al-debugging-delle-app-capacitor
+slug: ultimate-guide-to-debugging-capacitor-apps
 title: Capacitorアプリのデバッグ完全ガイド
 description: Capacitor アプリのデバッグに関する効果的な戦略と重要なツールを学び、すべてのプラットフォームで最適なパフォーマンスを確保しましょう。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-18T13:36:18.163Z
-updated_at: 2025-03-18T13:36:30.097Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67d9725755129a55bd6984fe-1742304990097.jpg
 head_image_alt: モバイル開発

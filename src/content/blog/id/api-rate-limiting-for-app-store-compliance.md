@@ -1,5 +1,5 @@
 ---
-slug: limitation-du-taux-api-pour-la-conformité-app-store
+slug: api-rate-limiting-for-app-store-compliance
 title: Pembatasan Rate API untuk Kepatuhan App Store
 description: >-
   Pelajari tentang pembatasan tingkat API dan pentingnya hal tersebut untuk
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-02T03:23:39.305Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67ecaaaa7747adc4bca8d9b6-1743564231231.jpg
 head_image_alt: Pengembangan Mobile

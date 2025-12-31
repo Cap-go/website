@@ -1,5 +1,5 @@
 ---
-slug: gestione-degli-errori-nelle-app-capacitor-best-practice-ux
+slug: error-handling-in-capacitor-apps-ux-best-practices
 title: Capacitorアプリのエラー処理：UXベストプラクティス
 description: >-
   エラーハンドリングを効果的に行うことで、明確なコミュニケーション、迅速な修正、すべてのプラットフォームでの一貫した処理を通じてユーザーエクスペリエンスを向上させることができます。
@@ -7,7 +7,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-14T04:41:14.278Z
-updated_at: 2025-04-14T04:41:25.630Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67fc8d0aaf1a45e500bcc0f5-1744605685630.jpg
 head_image_alt: モバイル開発

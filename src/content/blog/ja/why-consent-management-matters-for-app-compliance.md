@@ -1,5 +1,5 @@
 ---
-slug: perche-la-gestione-del-consenso-e-importante-per-la-conformita-delle-app
+slug: why-consent-management-matters-for-app-compliance
 title: アプリのコンプライアンスにおいて同意管理が重要な理由
 description: >-
   アプリのプライバシー法への準拠に関して、同意管理を理解することは不可欠です。ユーザーの同意を管理し、コンプライアンスを維持するための効果的な戦略を学びましょう。
@@ -7,7 +7,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-25T01:04:25.029Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce-1745543110199.jpg
 head_image_alt: モバイル開発

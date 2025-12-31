@@ -1,5 +1,5 @@
 ---
-slug: monitoreo-de-actualizaciones-ota-en-aplicaciones-capacitor
+slug: monitor-ota-updates-in-capacitor-apps
 title: Surveiller les Mises à Jour OTA dans les Applications Capacitor
 description: >-
   Apprenez à surveiller efficacement les mises à jour OTA dans les applications
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-05T01:34:45.665Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988-1743816897363.jpg
 head_image_alt: Développement Mobile

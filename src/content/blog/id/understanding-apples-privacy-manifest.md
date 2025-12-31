@@ -1,5 +1,5 @@
 ---
-slug: comprendiendo-el-manifiesto-de-privacidad-de-apple
+slug: understanding-apples-privacy-manifest
 title: Memahami Manifes Privasi Apple
 description: >-
   Pelajari lebih lanjut tentang manifes privasi wajib Apple, pentingnya untuk
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-18T02:23:31.365Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92-1744943188853.jpg
 head_image_alt: Pengembangan Mobile

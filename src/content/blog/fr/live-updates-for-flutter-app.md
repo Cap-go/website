@@ -1,5 +1,5 @@
 ---
-slug: actualizaciones-en-vivo-para-aplicacion-flutter
+slug: live-updates-for-flutter-app
 title: Mise à jour en direct de Flutter
 description: >-
   Est-il possible d'envoyer des mises à jour en direct aux applications Flutter
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-12-16T00:00:00.000Z
-updated_at: 2023-06-29T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /bypass_illustration.webp
 head_image_alt: Illustration de contournement de Capacitor
 keywords: >-

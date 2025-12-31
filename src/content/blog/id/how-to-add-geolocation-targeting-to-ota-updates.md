@@ -1,5 +1,5 @@
 ---
-slug: comment-ajouter-la-geolocalisation-pour-les-mises-a-jour-ota
+slug: how-to-add-geolocation-targeting-to-ota-updates
 title: Cara Menambahkan Penargetan Geolokasi ke Update OTA
 description: >-
   Pelajari cara mengimplementasikan penargetan geolokasi dalam pembaruan OTA
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-02-23T04:39:40.995Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67ba891fbfa83cf6a92e8bd2-1740285846827.jpg
 head_image_alt: Pengembangan Mobile

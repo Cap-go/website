@@ -1,5 +1,5 @@
 ---
-slug: auto-hospedado-capgo
+slug: self-hosted-capgo
 title: Capgo yang Dihosting Sendiri
 description: >-
   Auto-hosting Capgo memungkinkan Anda untuk menerapkan pembaruan langsung
@@ -8,7 +8,7 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-20T00:00:00.000Z
-updated_at: 2023-09-20T00:00:00.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: /self-hosted-capgo.webp
 head_image_alt: capgo self hosted
 keywords: >-

@@ -1,5 +1,5 @@
 ---
-slug: leitfaden-zum-debuggen-von-capacitor-apps
+slug: ultimate-guide-to-debugging-capacitor-apps
 title: Guía definitiva para la solución de problemas en aplicaciones Capacitor
 description: >-
   Aprende estrategias efectivas y herramientas esenciales para depurar
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-18T13:36:18.163Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67d9725755129a55bd6984fe-1742304990097.jpg
 head_image_alt: Desarrollo móvil

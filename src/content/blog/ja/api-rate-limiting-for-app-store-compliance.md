@@ -1,12 +1,12 @@
 ---
-slug: limitazione-della-frequenza-delle-api-per-conformità-app-store
+slug: api-rate-limiting-for-app-store-compliance
 title: API頻度制限のApp Store対応
 description: APIレート制限の手法とアプリストアのコンプライアンス、セキュリティ、システムパフォーマンスにおけるその重要性について学びましょう。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-02T03:23:39.305Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67ecaaaa7747adc4bca8d9b6-1743564231231.jpg
 head_image_alt: モバイル開発

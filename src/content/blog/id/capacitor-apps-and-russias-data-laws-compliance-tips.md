@@ -1,5 +1,5 @@
 ---
-slug: applications-capacitor-et-lois-sur-les-donnees-russes-conseils-de-conformite
+slug: capacitor-apps-and-russias-data-laws-compliance-tips
 title: 'Aplikasi Capacitor dan Undang-Undang Data Rusia: Panduan Kepatuhan'
 description: >-
   Temukan tips penting untuk kepatuhan pengembangan aplikasi di Rusia, termasuk
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-25T03:05:27.312Z
-updated_at: 2025-04-25T03:06:23.310Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/680ae0495a08fca891774cdd-1745550383310.jpg
 head_image_alt: Pengembangan Mobile

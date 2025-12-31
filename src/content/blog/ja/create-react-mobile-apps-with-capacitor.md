@@ -1,5 +1,5 @@
 ---
-slug: crea-app-mobile-react-con-capacitor
+slug: create-react-mobile-apps-with-capacitor
 title: モバイルアプリをReactとCapacitorで構築する
 description: >-
   Reactとキャパシター（Capacitor）を使用してモバイルアプリを作成し、Konsta
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-02-21T00:00:00.000Z
-updated_at: 2023-03-10T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /react_capacitor.webp
 head_image_alt: Capacitor と React の説明
 keywords: >-

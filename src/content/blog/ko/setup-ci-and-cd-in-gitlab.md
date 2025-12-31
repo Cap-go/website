@@ -1,5 +1,5 @@
 ---
-slug: setup-ci-and-cd-gitlab
+slug: setup-ci-and-cd-in-gitlab
 title: GitLab으로 앱 자동 빌드 및 릴리스하기
 description: >-
   Crea la tua pipeline CI/CD con GitLab gratuitamente e distribuisci la tua
@@ -8,7 +8,7 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-14T00:00:00.000Z
-updated_at: 2023-09-14T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /CI_CD_in_Gitlab.webp
 head_image_alt: GitLab의 CI/CD
 keywords: 'GitLab, CI/CD, automatic build, automatic release, mobile app updates'

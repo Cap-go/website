@@ -1,5 +1,5 @@
 ---
-slug: migrating-cordova-zu-capacitor
+slug: migrating-cordova-to-capacitor
 title: 'Migrasi Aplikasi Web dari Cordova ke Capacitor: Panduan Langkah demi Langkah'
 description: >-
   Panduan langkah demi langkah ini akan membantu Anda melakukan migrasi aplikasi
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-07T00:00:00.000Z
-updated_at: 2025-10-31T17:55:22.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: /migrating-cordova-to-capacitor.webp
 head_image_alt: Ilustrasi Migrasi Cordova ke Capacitor
 keywords: >-

@@ -1,5 +1,5 @@
 ---
-slug: création-dune-application-mobile-native-avec-nextjs-et-capacitor
+slug: building-a-native-mobile-app-with-nextjs-and-capacitor
 title: >-
   Membangun Aplikasi Mobile Native dengan Next.js 14 dan Capacitor: Panduan
   Langkah demi Langkah 2024
@@ -11,7 +11,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-02-21T00:00:00.000Z
-updated_at: 2024-09-19T00:00:00.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: /next_capgo.webp
 head_image_alt: Ilustrasi Next.js 14 dan Capacitor
 keywords: >-

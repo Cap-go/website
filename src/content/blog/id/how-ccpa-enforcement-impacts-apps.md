@@ -1,5 +1,5 @@
 ---
-slug: comment-la-conformite-ccpa-impacte-les-applications
+slug: how-ccpa-enforcement-impacts-apps
 title: Bagaimana CCPA Mempengaruhi Aplikasi
 description: >-
   CCPA mengubah cara aplikasi seluler menangani data pengguna, dengan fokus pada
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-02-27T16:48:49.867Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67c0870dcd608d64ca3e5184-1740674966680.jpg
 head_image_alt: Pengembangan Mobile

@@ -1,12 +1,12 @@
 ---
-slug: come-inviare-una-versione-specifica-agli-utenti
+slug: how-to-send-specific-version-to-users
 title: 特定のユーザーまたはグループに更新を送信する方法
 description: TestFlight や Google のベータプロセスを使用せずにベータ版を試すことができます。Ionic アプリにボタンを追加するだけで完了です！
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-17T00:00:00.000Z
-updated_at: 2023-06-29T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /capgo_select_update.webp
 head_image_alt: TestFlight 代替案のイラスト
 keywords: >-

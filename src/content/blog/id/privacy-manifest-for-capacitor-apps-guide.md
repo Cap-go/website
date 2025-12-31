@@ -1,5 +1,5 @@
 ---
-slug: guide-sur-la-politique-de-confidentialité-pour-les-apps-capacitor
+slug: privacy-manifest-for-capacitor-apps-guide
 title: 'Kebijakan Privasi untuk Aplikasi Capacitor: Panduan'
 description: >-
   Pelajari cara membuat Kebijakan Privasi untuk aplikasi Anda guna memenuhi
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-02T03:07:47.047Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776-1743563280473.jpg
 head_image_alt: Pengembangan Mobile

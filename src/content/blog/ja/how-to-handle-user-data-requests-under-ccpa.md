@@ -1,12 +1,12 @@
 ---
-slug: come-gestire-le-richieste-dei-dati-degli-utenti-secondo-il-ccpa
+slug: how-to-handle-user-data-requests-under-ccpa
 title: CCPAに基づくユーザーデータリクエストの処理方法
 description: CCPAに基づいてユーザーデータのリクエストを効果的に管理し、ユーザーのプライバシー権を尊重しながらコンプライアンスを確保する方法をご紹介します。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-06T01:02:16.662Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67f1c538ebbb9dc80644b1ad-1743901348104.jpg
 head_image_alt: モバイル開発

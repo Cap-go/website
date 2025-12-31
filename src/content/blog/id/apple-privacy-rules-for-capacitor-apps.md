@@ -1,5 +1,5 @@
 ---
-slug: règles-de-confidentialité-d'apple-pour-les-applications-capacitor
+slug: apple-privacy-rules-for-capacitor-apps
 title: Aturan Privasi Apple untuk Aplikasi Capacitor
 description: >-
   Pelajari cara mematuhi aturan privasi Apple untuk pengembangan aplikasi dengan
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-31T01:48:03.832Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e9dc69283d21cbd67b72cf-1743385695606.jpg
 head_image_alt: Pengembangan Mobile

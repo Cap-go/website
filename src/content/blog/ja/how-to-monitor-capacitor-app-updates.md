@@ -1,12 +1,12 @@
 ---
-slug: come-monitorare-gli-aggiornamenti-delle-app-capacitor
+slug: how-to-monitor-capacitor-app-updates
 title: Capacitor アプリの更新を監視する方法
 description: Capacitorアプリの更新を監視するための効果的な戦略を学び、安定性、セキュリティ、ユーザー体験を向上させましょう。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-02-16T02:14:06.413Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67b133684899b66d1dc8f1ac-1739672065689.jpg
 head_image_alt: モバイル開発

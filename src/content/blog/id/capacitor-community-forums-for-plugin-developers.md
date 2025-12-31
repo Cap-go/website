@@ -1,5 +1,5 @@
 ---
-slug: foros-de-la-comunidad-capacitor-para-desarrolladores-de-plugins
+slug: capacitor-community-forums-for-plugin-developers
 title: Forum Komunitas Capacitor untuk Pengembang Plugin
 description: >-
   Jelajahi forum-forum penting untuk pengembang plugin Capacitor untuk
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-19T03:15:19.291Z
-updated_at: 2025-03-19T03:15:43.434Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67da1574cfd1b2222c56b5cd-1742354143434.jpg
 head_image_alt: Pengembangan Aplikasi Mobile

@@ -1,12 +1,12 @@
 ---
-slug: criteri-di-unione-per-team-utilizzando-app-capacitor
+slug: merge-policies-for-teams-using-capacitor-apps
 title: Capacitor アプリを使用するチームのためのユニオンポリシー
 description: Capacitorアプリのマージポリシーを効果的に確立し、コード品質、シンプルな更新、コンフリクト管理を確保する方法をご紹介します。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-24T03:30:15.213Z
-updated_at: 2025-04-24T03:30:26.956Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/6809ac119bd9ce97f26bdef5-1745465426956.jpg
 head_image_alt: モバイル開発

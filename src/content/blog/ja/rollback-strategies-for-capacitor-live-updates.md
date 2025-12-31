@@ -1,12 +1,12 @@
 ---
-slug: strategie-di-ripristino-per-gli-aggiornamenti-live-di-capacitor
+slug: rollback-strategies-for-capacitor-live-updates
 title: Capacitorのライブアップデートのロールバック戦略
 description: アプリの安定性を確保し、更新中のユーザーの中断を最小限に抑えるため、Capacitorのライブアップデートに関する効果的なロールバック戦略について学びます。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-25T03:35:36.644Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/680afd1e5a08fca891778b0c-1745552174598.jpg
 head_image_alt: モバイル開発

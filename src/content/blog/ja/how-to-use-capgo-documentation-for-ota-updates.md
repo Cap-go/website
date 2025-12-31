@@ -1,5 +1,5 @@
 ---
-slug: come-utilizzare-la-documentazione-di-capgo-per-gli-aggiornamenti-ota
+slug: how-to-use-capgo-documentation-for-ota-updates
 title: Capgoのドキュメントを使用したOTAアップデートの方法
 description: >-
   Capgoの包括的なドキュメントとステップバイステップガイドで、CapacitorアプリへのセキュアなOver-the-Airアップデートの実装方法を学びましょう。
@@ -7,7 +7,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-02-19T03:56:01.854Z
-updated_at: 2025-03-18T13:13:59.127Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67b53306eac600a2c6713dad-1740671704703.jpg
 head_image_alt: モバイル開発

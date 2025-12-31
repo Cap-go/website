@@ -1,12 +1,12 @@
 ---
-slug: google-play-distribuzione-scaglionata-come-funziona
+slug: google-play-staged-rollouts-how-it-works
 title: 'Google Play でのローリングアップデート: その仕組み'
 description: Google Play での段階的なリリースを通じてアプリのアップデートを効果的に管理し、安定性を確保してリスクを最小限に抑える方法を学びましょう。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-22T00:36:08.727Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67ddfefb74046f25829c1f7f-1742603807186.jpg
 head_image_alt: モバイル開発

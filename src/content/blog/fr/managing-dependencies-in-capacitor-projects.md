@@ -1,5 +1,5 @@
 ---
-slug: gestion-de-dependencias-en-proyectos-capacitor
+slug: managing-dependencies-in-capacitor-projects
 title: Gestion des Dépendances dans les Projets Capacitor
 description: >-
   Découvrez des stratégies essentielles pour gérer les dépendances dans les
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-02-24T08:30:17.609Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67bbc47be5225d66b70936da-1740386039142.jpg
 head_image_alt: Développement Mobile

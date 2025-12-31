@@ -1,5 +1,5 @@
 ---
-slug: how-rapido-cloud-manage-semantic-rerlease-with-Capgo-CapacitorUpdater
+slug: how-I-manage-semantic-release-with-CapGo-CapacitorUpdater
 title: How Rapido Cloud manage Semantic Release with Capgo CapacitorUpdater
 description: >-
   This is how I set up semantic release to manage releases of my applications
@@ -8,7 +8,7 @@ author: Rupert Barrow
 author_image_url: 'https://avatars.githubusercontent.com/u/48629751?v=4'
 author_url: 'https://linkedin.com/in/rbarrow'
 created_at: 2024-09-22T00:00:00.000Z
-updated_at: 2025-11-24T15:08:57.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /rapido_cloud_study_case.webp
 head_image_alt: Study case rapido cloud
 keywords: semantic release, semantic-release, Capgo, CapacitorUpdater, mobile app development, live updates, OTA updates, continuous integration, mobile app updates

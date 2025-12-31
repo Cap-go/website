@@ -1,12 +1,12 @@
 ---
-slug: testing-gli-aggiornamenti-ota-di-capacitor-con-scenari-di-prova
+slug: testing-capacitor-ota-updates-with-mock-scenarios
 title: Capacitorのシミュレートされたシナリオによるプログレッシブアップデートのテスト
 description: Capacitorアプリのアップデートを信頼性の高い方法でテストし、ユーザー満足度を向上させるためのOTAの効果的なテスト方法を学びましょう。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-19T03:53:13.485Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67da3972cfd1b2222c56f23a-1742356439850.jpg
 head_image_alt: モバイル開発

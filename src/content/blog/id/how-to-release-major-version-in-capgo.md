@@ -1,5 +1,5 @@
 ---
-slug: Comment faire une version majeure dans Capgo
+slug: how-to-release-major-version-in-capgo
 title: Cara mempublikasikan versi major baru di capgo
 description: >-
   Memahami bagaimana dan kapan perlu merilis versi besar dari aplikasi Anda
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-08-30T00:00:00.000Z
-updated_at: 2023-06-29T00:00:00.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: /capgo-feature-image.webp
 head_image_alt: Sistem Versi Utama Capgo
 keywords: >-

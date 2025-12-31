@@ -1,12 +1,12 @@
 ---
-slug: aggiornamento-automatico-con-quasar-e-capacitor
+slug: quasar-mobile-app-capacitor
 title: モバイルアプリのリアルタイム更新、QuasarとCapacitorでの開発
 description: Quasar、Capacitor を使用したモバイルアプリの作成方法とリアルタイム更新の実装方法
 author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikDhabal'
 created_at: 2023-09-14T00:00:00.000Z
-updated_at: 2025-10-31T17:55:22.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /quasar_capgo.webp
 head_image_alt: Quasarと Capgoのイラストレーション
 keywords: >-

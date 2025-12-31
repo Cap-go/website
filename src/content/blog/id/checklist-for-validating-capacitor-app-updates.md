@@ -1,5 +1,5 @@
 ---
-slug: liste-de-verification-pour-valider-les-mises-a-jour-des-applications-capacitor
+slug: checklist-for-validating-capacitor-app-updates
 title: Checklist untuk validasi update aplikasi Capacitor
 description: >-
   Pastikan pembaruan aplikasi yang mulus dengan daftar periksa praktis ini untuk
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-20T01:48:44.409Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/680445af6000445eb1a661a6-1745113809661.jpg
 head_image_alt: Pengembangan Perangkat Seluler

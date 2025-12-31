@@ -1,5 +1,5 @@
 ---
-slug: wie-rbac-ota-updates-in-capacitor-apps-absichert
+slug: how-rbac-secures-ota-updates-in-capacitor-apps
 title: Cómo RBAC asegura las actualizaciones OTA en aplicaciones Capacitor
 description: >-
   Descubra cómo el control de acceso basado en roles mejora la seguridad de las
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-23T02:26:25.949Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/680839e8fe5cbf0502ddad36-1745375221230.jpg
 head_image_alt: Desarrollo Móvil

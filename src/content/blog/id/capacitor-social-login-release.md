@@ -1,5 +1,5 @@
 ---
-slug: release-of-a-brand-new-capacitor-social-login
+slug: capacitor-social-login-release
 title: Rilis plugin Login Sosial Capacitor yang sepenuhnya baru
 description: >-
   Plugin Login Sosial Capacitor adalah plugin yang memungkinkan Anda untuk masuk
@@ -8,7 +8,7 @@ author: WcaleNieWolny
 author_image_url: 'https://avatars.githubusercontent.com/u/50914789?v=4'
 author_url: 'https://github.com/WcaleNieWolny/WcaleNieWolny'
 created_at: 2024-10-08T00:00:00.000Z
-updated_at: 2024-10-08T00:00:00.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: /social_login_plugin_blog.webp
 head_image_alt: Ilustrasi sistem organisasi Capgo
 keywords: >-

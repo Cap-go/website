@@ -1,5 +1,5 @@
 ---
-slug: birth-of-capgo-my-challenging-journey-as-a-solo-maker
+slug: birth-of-capgo-revolutionizing-capacitor-app-updates
 title: Bagaimana Sebuah Issue GitHub Berevolusi Menjadi Bisnis
 description: >-
   Temukan berbagai tantangan dan pencapaian dalam menciptakan Capgo, sebuah
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-07-13T00:00:00.000Z
-updated_at: 2024-07-13T00:00:00.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: /capgo-birth-story.webp
 head_image_alt: Representasi visual dari evolusi Capgo dari ide menjadi produk
 keywords: >-

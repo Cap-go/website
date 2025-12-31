@@ -1,5 +1,5 @@
 ---
-slug: actualizaciones-ota-en-cicd-consejos-de-seguridad-y-cumplimiento
+slug: ota-updates-in-cicd-security-and-compliance-tips
 title: 'Mises à jour OTA en CI/CD: Conseils de Sécurité et de Conformité'
 description: >-
   Découvrez les stratégies essentielles de sécurité et de conformité pour les
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-29T03:24:03.406Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e7635c283d21cbd679bdb8-1743218655903.jpg
 head_image_alt: Développement Mobile

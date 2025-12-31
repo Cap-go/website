@@ -1,5 +1,5 @@
 ---
-slug: Integritätsprüfungen für Capacitor-Updates
+slug: integrity-checks-for-capacitor-updates
 title: Comprobaciones de integridad para actualizaciones de Capacitor
 description: >-
   Aprende cómo implementar actualizaciones OTA seguras para aplicaciones
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-02-25T02:39:56.412Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67bd178e258ce8f57ea75e3e-1740451235493.jpg
 head_image_alt: Desarrollo móvil

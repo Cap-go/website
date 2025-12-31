@@ -1,5 +1,5 @@
 ---
-slug: activar-modo-desarrollador-ios16
+slug: enable-ios-developer-mode-ios16
 title: Cara Mengaktifkan Mode Pengembang di iOS 16 untuk Pengujian Aplikasi
 description: >-
   Panduan langkah demi langkah untuk mengaktifkan Mode Pengembang di iOS 16 ke
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-11-27T00:00:00.000Z
-updated_at: 2023-11-27T00:00:00.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: /enable-ios-developer-mode-ios16.webp
 head_image_alt: Mengaktifkan Mode Pengembang iOS di iPhone
 keywords: >-

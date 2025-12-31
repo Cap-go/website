@@ -1,5 +1,5 @@
 ---
-slug: creando-aplicaciones-moviles-con-sveltekit-y-capacitor
+slug: creating-mobile-apps-with-sveltekit-and-capacitor
 title: Création d'applications mobiles avec SvelteKit et Capacitor
 description: >-
   Apprenez à créer une application mobile en utilisant SvelteKit, Capacitor et
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-04T00:00:00.000Z
-updated_at: 2023-06-04T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /sveltekit_capacitor.webp
 head_image_alt: Illustration de SvelteKit et Capgo
 keywords: >-

@@ -1,5 +1,5 @@
 ---
-slug: configuracion-del-entorno-local-de-capacitor
+slug: setting-up-capacitor-local-environment
 title: Configuration de l'Environnement Local de Capacitor
 description: >-
   Apprenez à configurer rapidement un environnement local Capacitor pour créer
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-03T01:01:07.065Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67edd19cebbb9dc8064069d2-1743642078509.jpg
 head_image_alt: Développement mobile

@@ -1,12 +1,12 @@
 ---
-slug: opzioni-plugin-capacitor-per-aggiornamenti-ota
+slug: capacitor-plugin-options-for-ota-updates
 title: プラグイン Capacitor の OTA アップデートのオプション
 description: Capacitorアプリ向けのOTAアップデートの利点とオプションを探り、スムーズなデプロイメントのための最適なプラグインとその機能を紹介します。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-16T02:50:46.694Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549-1744774247069.jpg
 head_image_alt: モバイルアプリ開発

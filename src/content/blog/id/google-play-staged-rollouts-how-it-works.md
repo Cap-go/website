@@ -1,5 +1,5 @@
 ---
-slug: comment-fonctionnent-les-deploiements-progressifs-google-play
+slug: google-play-staged-rollouts-how-it-works
 title: 'Pengenalan Langkah demi Langkah ke Google Play: Bagaimana Cara Kerjanya'
 description: >-
   Pelajari cara mengelola pembaruan aplikasi secara efektif dengan penerapan
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-22T00:36:08.727Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67ddfefb74046f25829c1f7f-1742603807186.jpg
 head_image_alt: Pengembangan Seluler

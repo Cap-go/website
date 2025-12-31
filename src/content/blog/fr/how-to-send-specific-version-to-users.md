@@ -1,5 +1,5 @@
 ---
-slug: como-enviar-una-version-especifica-a-usuarios
+slug: how-to-send-specific-version-to-users
 title: Comment envoyer une mise à jour spécifique à un utilisateur ou un groupe
 description: >-
   Permettez à vos utilisateurs de tester la version bêta sans passer par
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-17T00:00:00.000Z
-updated_at: 2023-06-29T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /capgo_select_update.webp
 head_image_alt: Alternative à TestFlight illustration
 keywords: >-

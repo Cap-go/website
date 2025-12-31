@@ -1,5 +1,5 @@
 ---
-slug: actualizar-sus-aplicaciones-capacitor-sin-problemas-con-capacitor-updater
+slug: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 title: Mettez à jour vos applications Capacitor sans problème avec Capacitor-updater
 description: >-
   Salutations à la communauté Capacitor Ionic, aujourd'hui je vais vous aider à
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-02-27T00:00:00.000Z
-updated_at: 2025-10-31T17:55:22.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /update_flow.webp
 head_image_alt: Développement de Capacitor rechercher des alternatives
 keywords: >-

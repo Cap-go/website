@@ -1,5 +1,5 @@
 ---
-slug: mejores-practicas-de-rendimiento-para-actualizaciones-ota-en-capacitor
+slug: capacitor-ota-updates-best-practices-for-performance
 title: 'Mises à jour OTA de Capacitor : Meilleures pratiques pour les performances'
 description: >-
   Optimisez les mises à jour OTA dans les applications Capacitor pour améliorer
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-02-22T03:27:12.915Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67b91e17bfa83cf6a92d5d6e-1740194854799.jpg
 head_image_alt: Développement Mobile

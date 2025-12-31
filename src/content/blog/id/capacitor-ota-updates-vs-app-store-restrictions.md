@@ -1,5 +1,5 @@
 ---
-slug: mises-à-jour-ota-de-capacitor-vs-restrictions-app-store
+slug: capacitor-ota-updates-vs-app-store-restrictions
 title: Pembaruan OTA Capacitor vs Pembatasan App Store
 description: >-
   Pelajari bagaimana pembaruan OTA memberikan penerapan aplikasi yang lebih
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-19T00:43:15.626Z
-updated_at: 2025-10-31T17:55:22.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67da0b3b31389773b3feea04-1742345039375.jpg
 head_image_alt: Pengembangan Mobile

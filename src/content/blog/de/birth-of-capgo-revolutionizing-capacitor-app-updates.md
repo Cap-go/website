@@ -1,5 +1,5 @@
 ---
-slug: birth-of-capgo-my-challenging-journey-as-a-solo-maker
+slug: birth-of-capgo-revolutionizing-capacitor-app-updates
 title: Wie aus einem GitHub-Problem ein Unternehmen entstand
 description: >-
   Entdecken Sie die Herausforderungen und Erfolge bei der Entwicklung von Capgo,
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-07-13T00:00:00.000Z
-updated_at: 2024-07-13T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /capgo-birth-story.webp
 head_image_alt: Eine visuelle Darstellung der Entwicklung von Capgo von der Idee zum Produkt
 tag: development

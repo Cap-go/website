@@ -1,12 +1,12 @@
 ---
-slug: capacitor-live-updates-rimanere-conformi-alle-regole-di-apple
+slug: capacitor-live-updates-staying-compliant-with-apple
 title: 'Capacitor Live Updates: Apple のガイドラインに準拠する'
 description: モバイルアプリのアップデートを効率的に実装し、厳格なガイドラインに従って拒否を防ぐ方法を学びましょう。
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-12T03:03:33.472Z
-updated_at: 2025-03-18T13:14:16.420Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67d0d3f9cf9d4dc0b2c0bff2-1741748627082.jpg
 head_image_alt: モバイル開発

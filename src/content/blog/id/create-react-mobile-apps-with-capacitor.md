@@ -1,5 +1,5 @@
 ---
-slug: crear-aplicaciones-móviles-react-con-capacitor
+slug: create-react-mobile-apps-with-capacitor
 title: Membuat Aplikasi Mobile dengan React dan Capacitor
 description: >-
   Pelajari cara membangun aplikasi seluler menggunakan React, Capacitor, dan
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-02-21T00:00:00.000Z
-updated_at: 2023-03-10T00:00:00.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: /react_capacitor.webp
 head_image_alt: Ilustrasi React dan Capacitor
 keywords: >-

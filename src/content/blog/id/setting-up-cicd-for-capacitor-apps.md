@@ -1,5 +1,5 @@
 ---
-slug: einrichten-von-cicd-für-capacitor-apps
+slug: setting-up-cicd-for-capacitor-apps
 title: Menyiapkan CI/CD untuk Aplikasi Capacitor
 description: >-
   Pelajari cara mengoptimalkan rilis aplikasi Anda untuk iOS dan Android
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-02-11T06:22:21.536Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67aa9923b771216988320bf2-1739254956493.jpg
 head_image_alt: Pengembangan Mobile

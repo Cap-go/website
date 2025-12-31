@@ -1,5 +1,5 @@
 ---
-slug: das-performance-monitoring-in-capacitor-einrichten
+slug: set-up-performance-monitoring-in-capacitor
 title: Configuración del monitoreo de rendimiento en Capacitor
 description: >-
   Aprenda cómo configurar el monitoreo de rendimiento en su aplicación usando
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-23T05:36:41.635Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67df674387fa49042c75b4e1-1742708253934.jpg
 head_image_alt: Desarrollo móvil

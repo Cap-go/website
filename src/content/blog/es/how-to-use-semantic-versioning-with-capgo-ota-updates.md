@@ -1,5 +1,5 @@
 ---
-slug: wie-man-semantic-versioning-mit-capgo-ota-updates-verwendet
+slug: how-to-use-semantic-versioning-with-capgo-ota-updates
 title: Cómo usar el versionado semántico con Capgo OTA Updates
 description: >-
   Aprende cómo optimizar las actualizaciones de aplicaciones y el control de
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-03T04:48:38.491Z
-updated_at: 2025-10-31T17:55:22.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67c4f6356c9ebce91891f4e6-1740977344964.jpg
 head_image_alt: Desarrollo móvil

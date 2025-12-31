@@ -1,5 +1,5 @@
 ---
-slug: wie-man-ota-updates-für-capacitor-apps-plant
+slug: how-to-schedule-ota-updates-for-capacitor-apps
 title: Comment planifier les mises à jour OTA pour les applications Capacitor
 description: >-
   Découvrez comment planifier efficacement les mises à jour OTA pour votre
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-21T04:03:25.616Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67dcd7fb83b63ee70fa0b90f-1742529933736.jpg
 head_image_alt: Développement Mobile

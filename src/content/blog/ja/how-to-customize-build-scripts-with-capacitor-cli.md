@@ -1,5 +1,5 @@
 ---
-slug: come-personalizzare-gli-script-di-build-con-capacitor-cli
+slug: how-to-customize-build-scripts-with-capacitor-cli
 title: Capacitor CLIでビルドスクリプトをカスタマイズする方法
 description: >-
   Capacitor
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-02T01:58:36.984Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67ec7f117747adc4bca87873-1743559128944.jpg
 head_image_alt: モバイル開発

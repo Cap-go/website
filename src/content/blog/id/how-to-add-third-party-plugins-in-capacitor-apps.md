@@ -1,5 +1,5 @@
 ---
-slug: Cómo agregar plugins de terceros en aplicaciones Capacitor
+slug: how-to-add-third-party-plugins-in-capacitor-apps
 title: Cara Menambahkan Plugin Pihak Ketiga pada Aplikasi Capacitor
 description: >-
   Pelajari cara meningkatkan aplikasi Capacitor Anda dengan mengintegrasikan
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-18T14:04:24.780Z
-updated_at: 2025-10-31T17:55:22.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67d977fb55129a55bd698926-1742306685762.jpg
 head_image_alt: Pengembangan Mobile

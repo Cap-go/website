@@ -1,5 +1,5 @@
 ---
-slug: comment-résoudre-les-erreurs-de-compilation-android-dans-capacitor
+slug: how-to-resolve-android-build-errors-in-capacitor
 title: Mengatasi Error Kompilasi Android di Capacitor
 description: >-
   Pelajari cara mengatasi kesalahan kompilasi Android di Capacitor dengan cepat,
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-29T03:02:04.382Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e75df8283d21cbd679ae1b-1743217335938.jpg
 head_image_alt: Pengembangan Seluler

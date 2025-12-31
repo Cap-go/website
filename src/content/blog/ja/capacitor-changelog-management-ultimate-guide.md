@@ -1,5 +1,5 @@
 ---
-slug: gestione-dei-changelog-di-capacitor-guida-completa
+slug: capacitor-changelog-management-ultimate-guide
 title: Capacitorのチェンジログ管理：完全ガイド
 description: >-
   Capacitor
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-27T02:52:04.098Z
-updated_at: 2025-03-27T02:52:22.012Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e4b3f310051fda3b6385d9-1743043942012.jpg
 head_image_alt: モバイル開発

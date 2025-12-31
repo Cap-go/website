@@ -1,5 +1,5 @@
 ---
-slug: Wie Capacitor Plattform-Unterschiede handhabt
+slug: how-capacitor-handles-platform-differences
 title: Bagaimana Capacitor Menangani Perbedaan Platform
 description: >-
   Pelajari cara mengelola perbedaan platform dalam pengembangan aplikasi seluler
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-25T02:08:36.160Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e200987856e801f1f26fa8-1742868536741.jpg
 head_image_alt: Pengembangan Mobile

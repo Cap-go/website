@@ -1,5 +1,5 @@
 ---
-slug: release-of-a-brand-new-capacitor-social-login
+slug: capacitor-social-login-release
 title: Lanzamiento de un nuevo complemento de inicio de sesión social para Capacitor
 description: >-
   El plugin Capacitor Social Login es un plugin que te permite iniciar sesión
@@ -8,7 +8,7 @@ author: WcaleNieWolny
 author_image_url: 'https://avatars.githubusercontent.com/u/50914789?v=4'
 author_url: 'https://github.com/WcaleNieWolny/WcaleNieWolny'
 created_at: 2024-10-08T00:00:00.000Z
-updated_at: 2024-10-08T00:00:00.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: /social_login_plugin_blog.webp
 head_image_alt: Ilustración del sistema de organización de Capgo
 keywords: >-

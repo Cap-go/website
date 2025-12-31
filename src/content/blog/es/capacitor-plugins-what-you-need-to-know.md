@@ -1,5 +1,5 @@
 ---
-slug: Was Sie über Capacitor-Plugins wissen müssen
+slug: capacitor-plugins-what-you-need-to-know
 title: 'Plugins de Capacitor: Lo que necesitas saber'
 description: >-
   Aprende cómo utilizar los plugins de Capacitor para el desarrollo de
@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-02-10T22:09:04.610Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67a9581f762bb46adb44912d-1739225358216.jpg
 head_image_alt: Desarrollo móvil

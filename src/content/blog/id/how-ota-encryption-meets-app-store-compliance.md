@@ -1,5 +1,5 @@
 ---
-slug: comment-le-chiffrement-ota-est-conforme-aux-normes-app-store
+slug: how-ota-encryption-meets-app-store-compliance
 title: Bagaimana Enkripsi OTA Mematuhi Aturan App Store
 description: >-
   Pelajari bagaimana enkripsi OTA mengamankan pembaruan aplikasi dan memastikan
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-02-14T05:12:26.952Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67ae8c28192afc208a60fcea-1739509966039.jpg
 head_image_alt: Pengembangan Seluler

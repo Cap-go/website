@@ -1,5 +1,5 @@
 ---
-slug: plugin-base-native-bridge-android-di-capacitor
+slug: capacitor-native-bridge-android-plugin-basics
 title: Capacitorのネイティブブリッジ：Androidプラグインの基本概念
 description: >-
   Capacitor Native
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-29T02:39:06.030Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-12-31T01:33:21.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c-1743215957623.jpg
 head_image_alt: モバイル開発
