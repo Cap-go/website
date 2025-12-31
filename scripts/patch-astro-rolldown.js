@@ -43,48 +43,10 @@ if (existsSync(pluginPath)) {
   }
 }
 
-// Patch 2: Replace transformWithEsbuild with transformWithOxc in compile.js
-const compilePath = resolve('node_modules/astro/dist/vite-plugin-astro/compile.js');
-
-if (existsSync(compilePath)) {
-  let content = readFileSync(compilePath, 'utf-8');
-
-  if (!content.includes('transformWithOxc')) {
-    // Replace import
-    let patched = content.replace(
-      'import { transformWithEsbuild } from "vite";',
-      'import { transformWithOxc } from "vite";'
-    );
-
-    // Replace first usage (main compile)
-    patched = patched.replace(
-      /esbuildResult = await transformWithEsbuild\(transformResult\.code, compileProps\.filename, \{[\s\S]*?\.\.\.compileProps\.viteConfig\.esbuild,[\s\S]*?loader: "ts",[\s\S]*?sourcemap: "external",[\s\S]*?tsconfigRaw: \{[\s\S]*?compilerOptions: \{[\s\S]*?\/\/ Ensure client:only imports are treeshaken[\s\S]*?verbatimModuleSyntax: false,[\s\S]*?importsNotUsedAsValues: "remove"[\s\S]*?\}[\s\S]*?\}[\s\S]*?\}\);/,
-      `esbuildResult = await transformWithOxc(transformResult.code, compileProps.filename, {
-      lang: "ts",
-      sourcemap: true
-    });`
-    );
-
-    // Replace second usage (error handling)
-    patched = patched.replace(
-      /await transformWithEsbuild\(frontmatter, id, \{[\s\S]*?loader: "ts",[\s\S]*?target: "esnext",[\s\S]*?sourcemap: false[\s\S]*?\}\);/,
-      `await transformWithOxc(frontmatter, id, {
-        lang: "ts",
-        sourcemap: false
-      });`
-    );
-
-    if (patched !== content) {
-      writeFileSync(compilePath, patched);
-      console.log('✓ Patched Astro compile.js to use transformWithOxc');
-      patchCount++;
-    } else {
-      console.log('! Could not patch compile.js - pattern may have changed');
-    }
-  } else {
-    console.log('• Astro compile.js already uses transformWithOxc');
-  }
-}
+// Note: We no longer patch compile.js to use transformWithOxc because
+// oxc has incomplete support for TypeScript namespace declarations.
+// Rolldown-vite still provides significant build performance improvements
+// even without this patch, as it uses oxc for bundling.
 
 if (patchCount === 0) {
   console.log('All Astro patches already applied');
