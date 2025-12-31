@@ -1,7 +1,6 @@
 import { useRuntimeConfig } from '@/config/app'
 import type { Database } from '@/services/supabase.types'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
-import ky from 'ky'
 
 let supaClient: SupabaseClient<Database> = null as any
 
@@ -21,18 +20,17 @@ let config: CapgoConfig = getLocalConfig()
 
 export async function getRemoteConfig() {
   const runtimeConfig = useRuntimeConfig()
-  // call host + /api/private/config and parse the result as json using ky
   const localConfig = getLocalConfig()
-  const data = await ky
-    .get(`${runtimeConfig.public.baseApiUrl}/private/config`)
-    .then((res) => res.json<CapgoConfig>())
-    .then((d) => ({ ...localConfig, ...d }) as CapgoConfig)
-    .catch(() => {
-      console.log('Local config', localConfig)
-      return localConfig as CapgoConfig
-    })
-  config = data
-  return data
+  try {
+    const res = await fetch(`${runtimeConfig.public.baseApiUrl}/private/config`)
+    if (!res.ok) throw new Error('Failed to fetch config')
+    const remoteConfig = await res.json() as CapgoConfig
+    config = { ...localConfig, ...remoteConfig }
+  } catch {
+    console.log('Local config', localConfig)
+    config = localConfig
+  }
+  return config
 }
 
 export function useSupabase() {
