@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
+import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
@@ -9,7 +10,19 @@ const brand = Astro.locals.runtimeConfig.public.brand
 const title = `${brand} | ${m.solutions_direct_updates_title({}, { locale })}`
 const description = m.solutions_direct_updates_description({}, { locale })
 
-const content = { title, description }
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description: description,
+  url: Astro.url.href,
+  serviceType: 'Software Development Service',
+  areaServed: ['Worldwide'],
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+})
+
+const content = { title, description, ldJSON }
 ---
 
 <Layout content={content}>

@@ -17,6 +17,13 @@ const {
   keywords = m.website_keywords({}, { locale: Astro.locals.locale }),
   audio = null,
   alternateVersions = generateAlternateVersions(Astro),
+  // Article-specific props for blog posts
+  ogType = 'website',
+  articlePublishedTime = null,
+  articleModifiedTime = null,
+  articleSection = null,
+  articleTags = null,
+  robots = 'index, follow',
 } = Astro.props
 
 const localeName_to_OGP = {
@@ -128,9 +135,8 @@ const makeFontPath = (name: string) => join(process.cwd(), 'public', 'fonts', na
 <!-- Open Graph / Facebook -->
 <meta property="og:url" content={url} />
 <meta property="og:title" content={title} />
-<meta property="og:type" content="website" />
+<meta property="og:type" content={ogType} />
 <meta property="og:locale" content={localeOGP} />
-<meta property="og:type" content="website" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="627" />
 <meta property="og:image:alt" content={titleFix} />
@@ -138,7 +144,11 @@ const makeFontPath = (name: string) => join(process.cwd(), 'public', 'fonts', na
 <meta property="og:image" content={image_unsecure} />
 <meta property="og:image:type" content="image/webp" />
 <meta property="og:article:author" content={author} />
-<meta name="robots" content="index, follow" />
+{articlePublishedTime && <meta property="article:published_time" content={articlePublishedTime} />}
+{articleModifiedTime && <meta property="article:modified_time" content={articleModifiedTime} />}
+{articleSection && <meta property="article:section" content={articleSection} />}
+{articleTags && articleTags.map((tag: string) => <meta property="article:tag" content={tag} />)}
+<meta name="robots" content={robots} />
 {
   audio && (
     <>

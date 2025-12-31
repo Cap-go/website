@@ -6,11 +6,19 @@ import 'toastify-js/src/toastify.css'
 const captchaKey = import.meta.env.CLOUDFLARE_TURNSTILE_SITE_KEY
 const CLOUDFLARE_TURNSTILE_SITE_KEY = captchaKey
 const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
+
+const title = `${Astro.locals.runtimeConfig.public.brand} | ${m.register_title({}, { locale: Astro.locals.locale })}`
+const description = m.register_description ? m.register_description({}, { locale: Astro.locals.locale }) : 'Create your free Capgo account and start deploying live updates to your Capacitor apps in minutes.'
+const content = {
+  title,
+  description,
+  keywords: 'Capgo register, sign up, create account, Capacitor live updates, OTA updates',
+}
 ---
 
 {enableCaptcha && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />}
 
-<Layout>
+<Layout content={content}>
   <section class="flex overflow-hidden justify-center items-center p-4 min-h-screen bg-slate-900">
     <div class="relative w-full max-w-4xl">
       <div class="absolute inset-0 transform -translate-x-4">
@@ -124,7 +132,7 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
               <span class="py-1 px-2 text-white bg-gray-900 rounded-full">{m.testimonial_highlight({}, { locale: Astro.locals.locale })}</span>
             </p>
             <div class="flex items-center mb-4">
-              <img src="/avatar-male-2.webp" alt="User" class="mr-4 w-12 h-12 rounded-full" />
+              <img src="/avatar-male-2.webp" alt="Jermaine, a Capgo customer" class="mr-4 w-12 h-12 rounded-full" />
               <div>
                 <cite class="font-bold text-white">Jermaine</cite>
                 <p class="text-gray-400">{m.testimonial_description({}, { locale: Astro.locals.locale })}</p>

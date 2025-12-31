@@ -76,7 +76,23 @@ const alternateVersions = entries
 
 const { Content, headings } = await render(entry)
 
-const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object; keywords?: string[]; alternateVersions?: any[] } = {}
+const dateModified = entry.data.updated_at
+const datePublished = entry.data.created_at
+
+const content: {
+  title?: string
+  description?: string
+  image?: string
+  author?: string
+  ldJSON?: Object
+  keywords?: string[]
+  alternateVersions?: any[]
+  ogType?: string
+  articlePublishedTime?: string
+  articleModifiedTime?: string
+  articleSection?: string
+  articleTags?: string[]
+} = {}
 
 if (entry.data.title) content['title'] = entry.data.title
 if (entry.data.description) content['description'] = entry.data.description
@@ -88,8 +104,15 @@ if (entry.data.author) content['author'] = entry.data.author || 'Capgo'
 if (entry.data.keywords) content['keywords'] = entry.data.keywords.split(',') || []
 if (alternateVersions.length > 0) content['alternateVersions'] = alternateVersions
 
-const dateModified = entry.data.updated_at
-const datePublished = entry.data.created_at
+// Add article-specific OG tags for better social sharing
+content['ogType'] = 'article'
+content['articlePublishedTime'] = new Date(datePublished).toISOString()
+content['articleModifiedTime'] = new Date(dateModified).toISOString()
+if (entry.data.tag) {
+  const tags = entry.data.tag.split(',').map((t: string) => t.trim())
+  content['articleSection'] = tags[0]
+  content['articleTags'] = tags
+}
 
 // Create improved ldJSON using helper function
 const articleUrl = getRelativeLocaleUrl(Astro.locals.locale, `/blog/${entry.data.slug}/`)

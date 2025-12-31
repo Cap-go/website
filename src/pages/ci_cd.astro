@@ -2,12 +2,25 @@
 import Layout from '@/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import * as m from '@/paraglide/messages'
+import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 
 const pageTitle = 'Mobile CI/CD Setup | Capgo'
 const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automate iOS and Android builds with GitHub Actions, GitLab CI, Jenkins, and more.'
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: pageTitle,
+  description: pageDescription,
+  url: Astro.url.href,
+  serviceType: 'Software Development Service',
+  areaServed: ['Worldwide'],
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+})
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
+<Layout content={{ title: pageTitle, description: pageDescription, ldJSON }}>
   <div>
     <!-- Hero Section -->
     <section class="overflow-hidden relative py-20 bg-gray-900 sm:py-24 lg:py-32">
