@@ -47,8 +47,9 @@ jobs:
             ${{ runner.os }}-astro-
 
       - run: bun install
-
+      - run: bun run build:prepare
       - run: bun run build
+      - run: bun run build:after
         env:
           PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
