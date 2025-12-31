@@ -12,7 +12,7 @@
 /llms-full.txt/ /llms-full.txt 301
 /llm.txt/ /llms.txt 301
 /docs/plugin/cloud-mode/getting-started/ /docs/getting-started/quickstart 301
-/en/* /:splat 302
+/en/* /:splat 301
 /login/ /register/ 302
 /robots.txt/ /robots.txt 301
 /docs/plugin/* /docs/plugins/updater/:splat 301
