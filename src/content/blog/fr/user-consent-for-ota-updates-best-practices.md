@@ -10,7 +10,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-26T03:12:16.361Z
-updated_at: 2025-04-26T03:14:26.325Z
+updated_at: 2025-12-31T01:19:38.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/680c46c45a08fca89178f92d-1745637266325.jpg
 head_image_alt: Développement mobile
