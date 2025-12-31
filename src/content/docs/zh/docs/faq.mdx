@@ -166,7 +166,13 @@ Play Store 提供了两个与更新工具相关的限制。
 1.  更新必须使用解释器或虚拟机（Capgo 在 WebView 中使用 JavaScript）。[https://support.google.com/googleplay/android-developer/answer/9888379?hl=en](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en)
 
 ```
-<span><span>    通过 Google Play 分发的应用不得使用除 Google Play 更新机制之外的任何方法修改、替换或更新自身</span><br></span><span><span>    。同样，应用不得从除 Google Play 之外的来源下载可执行代码（例如 dex、JAR、.so 文件）</span><br></span><span><span>    。*此限制不适用于在虚拟机或解释器中运行的代码*</span><br></span><span><span>    ，其中任何一个都提供对 Android API 的间接访问（例如 WebView 或浏览器中的 JavaScript）</span><br></span><span><span>    。</span><br></span><span><span></span><br></span><span><span>    在运行时加载的具有解释语言（JavaScript、Python、Lua 等）的应用或第三方代码（如 SDK）（例如，未与应用打包）</span><br></span><span><span>    不得允许潜在违反 Google Play 政策。</span><br></span>
+    通过 Google Play 分发的应用不得使用除 Google Play 更新机制之外的任何方法修改、替换或更新自身。
+    同样，应用不得从除 Google Play 之外的来源下载可执行代码（例如 dex、JAR、.so 文件）。
+    *此限制不适用于在虚拟机或解释器中运行的代码*，
+    其中任何一个都提供对 Android API 的间接访问（例如 WebView 或浏览器中的 JavaScript）。
+
+    在运行时加载的具有解释语言（JavaScript、Python、Lua 等）的应用或第三方代码（如 SDK）（例如，未与应用打包）
+    不得允许潜在违反 Google Play 政策。
 ```
 
 2.  对应用的更改不得具有欺骗性（例如通过更新更改应用的目的）。[https://support.google.com/googleplay/android-developer/answer/9888077](https://support.google.com/googleplay/android-developer/answer/9888077/) 请向您的用户清楚地说明您通过应用提供的内容，并且不要通过使用 Capgo 进行重大行为更改来违反他们的期望。
@@ -184,7 +190,11 @@ Microsoft 还发布了关于其 React Native "codepush" 库如何符合应用商
 与 Play Store 类似，App Store 提供了技术和政策限制。
 
 ```
-<span><span>3.2.2</span><br></span><span><span>... 解释的代码可以下载到应用程序，但前提是</span><br></span><span><span>此类代码：</span><br></span><span><span>(a) 不会通过提供与提交给 App Store 的应用程序的预期和宣传目的不一致的功能来更改应用程序的主要目的</span><br></span><span><span>，</span><br></span><span><span>(b) 不会为其他代码或应用程序创建商店或店面，并且</span><br></span><span><span>(c) 不会绕过操作系统的签名、沙盒或其他安全功能。</span><br></span>
+3.2.2
+... 解释的代码可以下载到应用程序，但前提是此类代码：
+(a) 不会通过提供与提交给 App Store 的应用程序的预期和宣传目的不一致的功能来更改应用程序的主要目的，
+(b) 不会为其他代码或应用程序创建商店或店面，并且
+(c) 不会绕过操作系统的签名、沙盒或其他安全功能。
 ```
 
 Capgo 在 WebView 中使用 JavaScript 以符合 iOS 上更新的仅解释器限制。只要您的应用程序不通过更新进行欺骗性行为（例如通过更新更改应用的目的），通过 Capgo（或任何其他代码推送解决方案）进行更新是标准行业实践，并符合 App Store 准则。

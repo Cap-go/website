@@ -156,7 +156,17 @@ Der Play Store bietet zwei Einschränkungen in Bezug auf Update-Tools:
 1. Updates müssen einen Interpreter oder eine virtuelle Maschine verwenden (Capgo verwendet die Dart Virtual Machine) [https://support.google.com/googleplay/android-developer/answer/9888379?hl=en](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en)
 
 ```
-<span><span>    Eine über Google Play verteilte App darf sich nicht selbst modifizieren, ersetzen oder aktualisieren</span><br></span><span><span>    mit anderen Methoden als dem Update-Mechanismus von Google Play. Ebenso darf eine App</span><br></span><span><span>    keinen ausführbaren Code (wie dex-, JAR-, .so-Dateien) von einer</span><br></span><span><span>    anderen Quelle als Google Play herunterladen. *Diese Einschränkung gilt nicht für Code,</span><br></span><span><span>    der in einer virtuellen Maschine oder einem Interpreter läuft*, wo entweder</span><br></span><span><span>    indirekten Zugriff auf Android-APIs bietet (wie JavaScript in einer WebView oder</span><br></span><span><span>    Browser)</span><br></span><span><span></span><br></span><span><span>    Apps oder Drittanbieter-Code, wie SDKs, mit interpretierten Sprachen (JavaScript,</span><br></span><span><span>    Python, Lua, etc.), die zur Laufzeit geladen werden (zum Beispiel nicht mit der</span><br></span><span><span>    App gebündelt), dürfen keine potenziellen Verstöße gegen Google Play-Richtlinien ermöglichen</span><br></span>
+    Eine über Google Play verteilte App darf sich nicht selbst modifizieren, ersetzen oder aktualisieren
+    mit anderen Methoden als dem Update-Mechanismus von Google Play. Ebenso darf eine App
+    keinen ausführbaren Code (wie dex-, JAR-, .so-Dateien) von einer
+    anderen Quelle als Google Play herunterladen. *Diese Einschränkung gilt nicht für Code,
+    der in einer virtuellen Maschine oder einem Interpreter läuft*, wo entweder
+    indirekten Zugriff auf Android-APIs bietet (wie JavaScript in einer WebView oder
+    Browser)
+
+    Apps oder Drittanbieter-Code, wie SDKs, mit interpretierten Sprachen (JavaScript,
+    Python, Lua, etc.), die zur Laufzeit geladen werden (zum Beispiel nicht mit der
+    App gebündelt), dürfen keine potenziellen Verstöße gegen Google Play-Richtlinien ermöglichen
 ```
 
 2. Änderungen an der App dürfen nicht täuschend sein (z.B. Ändern des Zwecks der App durch ein Update) [https://support.google.com/googleplay/android-developer/answer/9888077](https://support.google.com/googleplay/android-developer/answer/9888077/) Bitte seien Sie transparent gegenüber Ihren Benutzern bezüglich dessen, was Sie mit Ihrer Anwendung bereitstellen, und verletzen Sie nicht ihre Erwartungen durch wesentliche Verhaltensänderungen durch die Verwendung von Capgo.
@@ -174,7 +184,15 @@ Ja.
 Ähnlich wie der Play Store bietet der App Store sowohl technische als auch Richtlinien-Einschränkungen.
 
 ```
-<span><span>3.2.2</span><br></span><span><span>interpretierter Code kann in eine Anwendung heruntergeladen werden, jedoch nur solange</span><br></span><span><span>dieser Code:</span><br></span><span><span>(a) den primären Zweck der Anwendung nicht durch Bereitstellung von</span><br></span><span><span>Funktionen oder Funktionalität ändert, die nicht mit dem beabsichtigten und</span><br></span><span><span>beworbenen Zweck der Anwendung, wie sie im App Store eingereicht wurde, übereinstimmen,</span><br></span><span><span>(b) keinen Store oder Storefront für anderen Code oder Anwendungen erstellt, und</span><br></span><span><span>(c) keine Signierung, Sandbox oder andere Sicherheitsfunktionen des Betriebssystems umgeht</span><br></span>
+3.2.2
+interpretierter Code kann in eine Anwendung heruntergeladen werden, jedoch nur solange
+dieser Code:
+(a) den primären Zweck der Anwendung nicht durch Bereitstellung von
+Funktionen oder Funktionalität ändert, die nicht mit dem beabsichtigten und
+beworbenen Zweck der Anwendung, wie sie im App Store eingereicht wurde, übereinstimmen,
+(b) keinen Store oder Storefront für anderen Code oder Anwendungen erstellt, und
+(c) keine Signierung, Sandbox oder andere Sicherheitsfunktionen des Betriebssystems umgeht
+```
 
 Capgo verwendet einen benutzerdefinierten Dart-Interpreter, um die Interpreter-Only-Beschränkung für Updates auf iOS einzuhalten. Solange Ihre Anwendung kein täuschendes Verhalten durch Updates zeigt (z.B. Änderung des App-Zwecks durch Update), ist das Aktualisieren über Capgo (oder eine andere Code-Push-Lösung) gängige Branchenpraxis und entspricht den App Store-Richtlinien.
 

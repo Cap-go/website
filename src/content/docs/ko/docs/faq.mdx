@@ -156,7 +156,17 @@ Play Store는 업데이트 도구와 관련하여 두 가지 제한 사항을 �
 1. 업데이트는 인터프리터 또는 가상 머신을 사용해야 합니다(Capgo는 Dart Virtual Machine 사용) [https://support.google.com/googleplay/android-developer/answer/9888379?hl=en](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en)
 
 ```
-<span><span>    An app distributed via Google Play may not modify, replace, or update itself</span><br></span><span><span>    using any method other than Google Play's update mechanism. Likewise, an app</span><br></span><span><span>    may not download executable code (such as dex, JAR, .so files) from a</span><br></span><span><span>    source other than Google Play. *This restriction does not apply to code</span><br></span><span><span>    that runs in a virtual machine or an interpreter* where either provides</span><br></span><span><span>    indirect access to Android APIs (such as JavaScript in a webview or</span><br></span><span><span>    browser)</span><br></span><span><span></span><br></span><span><span>    Apps or third-party code, like SDKs, with interpreted languages (JavaScript,</span><br></span><span><span>    Python, Lua, etc.) loaded at run time (for example, not packaged with the</span><br></span><span><span>    app) must not allow potential violations of Google Play policies</span><br></span>
+    An app distributed via Google Play may not modify, replace, or update itself
+    using any method other than Google Play's update mechanism. Likewise, an app
+    may not download executable code (such as dex, JAR, .so files) from a
+    source other than Google Play. *This restriction does not apply to code
+    that runs in a virtual machine or an interpreter* where either provides
+    indirect access to Android APIs (such as JavaScript in a webview or
+    browser)
+
+    Apps or third-party code, like SDKs, with interpreted languages (JavaScript,
+    Python, Lua, etc.) loaded at run time (for example, not packaged with the
+    app) must not allow potential violations of Google Play policies
 ```
 
 2. 앱의 변경 사항은 기만적이어서는 안 됩니다(예: 업데이트를 통한 앱의 목적 변경) [https://support.google.com/googleplay/android-developer/answer/9888077](https://support.google.com/googleplay/android-developer/answer/9888077/) 앱을 통해 제공하는 내용에 대해 사용자에게 명확히 알리고 Capgo를 통한 중요한 동작 변경으로 사용자의 기대를 위반하지 마세요.
@@ -174,7 +184,12 @@ Microsoft도 그들의 react native "codepush" 라이브러리가 앱 스토어�
 Play Store와 마찬가지로 App Store도 기술적 및 정책적 제한 사항을 제공합니다.
 
 ```
-<span><span>3.2.2</span><br></span><span><span>해석된 코드는 애플리케이션에 다운로드될 수 있지만 다음과 같은 코드인 경우에만 가능합니다:<br></span><span><span>(a) App Store에 제출된 애플리케이션의 의도된 목적과 일치하지 않는 기능을 제공함으로써 애플리케이션의 주요 목적을 변경하지 않음<br></span><span><span>(b) 다른 코드나 애플리케이션을 위한 스토어나 상점을 만들지 않음<br></span><span><span>(c) OS의 서명, 샌드박스 또는 기타 보안 기능을 우회하지 않음<br></span>
+3.2.2
+해석된 코드는 애플리케이션에 다운로드될 수 있지만 다음과 같은 코드인 경우에만 가능합니다:
+(a) App Store에 제출된 애플리케이션의 의도된 목적과 일치하지 않는 기능을 제공함으로써 애플리케이션의 주요 목적을 변경하지 않음
+(b) 다른 코드나 애플리케이션을 위한 스토어나 상점을 만들지 않음
+(c) OS의 서명, 샌드박스 또는 기타 보안 기능을 우회하지 않음
+```
 
 Capgo는 iOS에서 업데이트를 위한 인터프리터 전용 제한을 준수하기 위해 커스텀 Dart 인터프리터를 사용합니다. 업데이트를 통해 기만적인 행위(예: 업데이트를 통한 앱 목적 변경)를 하지 않는 한, Capgo(또는 다른 코드 푸시 솔루션)를 통한 업데이트는 업계의 표준 관행이며 App Store 가이드라인을 준수합니다.
 

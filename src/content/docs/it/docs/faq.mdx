@@ -156,7 +156,17 @@ Il Play Store offre due restrizioni relative agli strumenti di aggiornamento:
 1. Gli aggiornamenti devono utilizzare un interprete o una macchina virtuale (Capgo usa la Dart Virtual Machine) [https://support.google.com/googleplay/android-developer/answer/9888379?hl=en](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en)
 
 ```
-<span><span>    Un'app distribuita tramite Google Play non può modificare, sostituire o aggiornare se stessa</span><br></span><span><span>    utilizzando qualsiasi metodo diverso dal meccanismo di aggiornamento di Google Play. Allo stesso modo, un'app</span><br></span><span><span>    non può scaricare codice eseguibile (come file dex, JAR, so) da una</span><br></span><span><span>    fonte diversa da Google Play. *Questa restrizione non si applica al codice</span><br></span><span><span>    che viene eseguito in una macchina virtuale o un interprete* dove entrambi forniscono</span><br></span><span><span>    accesso indiretto alle API Android (come JavaScript in una webview o</span><br></span><span><span>    browser)</span><br></span><span><span></span><br></span><span><span>    Le app o il codice di terze parti, come SDK, con linguaggi interpretati (JavaScript,</span><br></span><span><span>    Python, Lua, ecc.) caricati in runtime (ad esempio, non inclusi nell'</span><br></span><span><span>    app) non devono consentire potenziali violazioni delle policy di Google Play</span><br></span>
+    Un'app distribuita tramite Google Play non può modificare, sostituire o aggiornare se stessa
+    utilizzando qualsiasi metodo diverso dal meccanismo di aggiornamento di Google Play. Allo stesso modo, un'app
+    non può scaricare codice eseguibile (come file dex, JAR, so) da una
+    fonte diversa da Google Play. *Questa restrizione non si applica al codice
+    che viene eseguito in una macchina virtuale o un interprete* dove entrambi forniscono
+    accesso indiretto alle API Android (come JavaScript in una webview o
+    browser)
+
+    Le app o il codice di terze parti, come SDK, con linguaggi interpretati (JavaScript,
+    Python, Lua, ecc.) caricati in runtime (ad esempio, non inclusi nell'
+    app) non devono consentire potenziali violazioni delle policy di Google Play
 ```
 
 2. Le modifiche all'app non devono essere ingannevoli (es. cambiare lo scopo dell'app tramite aggiornamento) [https://support.google.com/googleplay/android-developer/answer/9888077](https://support.google.com/googleplay/android-developer/answer/9888077/) Per favore sii chiaro con i tuoi utenti su cosa stai fornendo con la tua applicazione e non violare le loro aspettative con cambiamenti comportamentali significativi attraverso l'uso di Capgo.
@@ -174,7 +184,15 @@ Sì.
 Simile al Play Store, l'App Store offre sia restrizioni tecniche che politiche.
 
 ```
-<span><span>3.2.2</span><br></span><span><span>Il codice interpretato può essere scaricato in un'Applicazione solo se</span><br></span><span><span>tale codice:</span><br></span><span><span>(a) non modifica lo scopo principale dell'Applicazione fornendo</span><br></span><span><span>funzionalità o caratteristiche che sono incompatibili con lo scopo previsto e</span><br></span><span><span>pubblicizzato dell'Applicazione come inviata all'App Store,</span><br></span><span><span>(b) non crea un negozio o vetrina per altro codice o applicazioni, e</span><br></span><span><span>(c) non aggira la firma, il sandbox o altre funzionalità di sicurezza del sistema operativo</span><br></span>
+3.2.2
+Il codice interpretato può essere scaricato in un'Applicazione solo se
+tale codice:
+(a) non modifica lo scopo principale dell'Applicazione fornendo
+funzionalità o caratteristiche che sono incompatibili con lo scopo previsto e
+pubblicizzato dell'Applicazione come inviata all'App Store,
+(b) non crea un negozio o vetrina per altro codice o applicazioni, e
+(c) non aggira la firma, il sandbox o altre funzionalità di sicurezza del sistema operativo
+```
 
 Capgo utilizza un interprete Dart personalizzato per rispettare la restrizione solo interprete per gli aggiornamenti su iOS. Fintanto che la tua applicazione non ha comportamenti ingannevoli tramite gli aggiornamenti (es. modificare lo scopo dell'app tramite aggiornamento), l'aggiornamento tramite Capgo (o qualsiasi altra soluzione di code push) è una pratica standard del settore e conforme alle linee guida dell'App Store.
 

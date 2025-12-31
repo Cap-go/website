@@ -156,7 +156,17 @@ Play Store menawarkan dua pembatasan terkait alat pembaruan:
 1. Pembaruan harus menggunakan interpreter atau mesin virtual (Capgo menggunakan Dart Virtual Machine) [https://support.google.com/googleplay/android-developer/answer/9888379?hl=en](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en)
 
 ```
-<span><span>    Aplikasi yang didistribusikan melalui Google Play tidak boleh memodifikasi, mengganti, atau memperbarui dirinya sendiri</span><br></span><span><span>    menggunakan metode selain mekanisme pembaruan Google Play. Demikian juga, aplikasi</span><br></span><span><span>    tidak boleh mengunduh kode yang dapat dieksekusi (seperti file dex, JAR, so) dari</span><br></span><span><span>    sumber selain Google Play. *Pembatasan ini tidak berlaku untuk kode</span><br></span><span><span>    yang berjalan di mesin virtual atau interpreter* di mana keduanya menyediakan</span><br></span><span><span>    akses tidak langsung ke API Android (seperti JavaScript di webview atau</span><br></span><span><span>    browser)</span><br></span><span><span></span><br></span><span><span>    Aplikasi atau kode pihak ketiga, seperti SDK, dengan bahasa yang diinterpretasikan (JavaScript,</span><br></span><span><span>    Python, Lua, dll) yang dimuat saat runtime (misalnya, tidak dikemas dengan</span><br></span><span><span>    aplikasi) tidak boleh mengizinkan potensi pelanggaran kebijakan Google Play</span><br></span>
+    Aplikasi yang didistribusikan melalui Google Play tidak boleh memodifikasi, mengganti, atau memperbarui dirinya sendiri
+    menggunakan metode selain mekanisme pembaruan Google Play. Demikian juga, aplikasi
+    tidak boleh mengunduh kode yang dapat dieksekusi (seperti file dex, JAR, so) dari
+    sumber selain Google Play. *Pembatasan ini tidak berlaku untuk kode
+    yang berjalan di mesin virtual atau interpreter* di mana keduanya menyediakan
+    akses tidak langsung ke API Android (seperti JavaScript di webview atau
+    browser)
+
+    Aplikasi atau kode pihak ketiga, seperti SDK, dengan bahasa yang diinterpretasikan (JavaScript,
+    Python, Lua, dll) yang dimuat saat runtime (misalnya, tidak dikemas dengan
+    aplikasi) tidak boleh mengizinkan potensi pelanggaran kebijakan Google Play
 ```
 
 2. Perubahan pada aplikasi tidak boleh menipu (misalnya mengubah tujuan aplikasi melalui pembaruan) [https://support.google.com/googleplay/android-developer/answer/9888077](https://support.google.com/googleplay/android-developer/answer/9888077/) Harap jelaskan kepada pengguna Anda tentang apa yang Anda sediakan dengan aplikasi Anda dan jangan melanggar ekspektasi mereka dengan perubahan perilaku yang signifikan melalui penggunaan Capgo.
@@ -174,7 +184,15 @@ Ya.
 Mirip dengan Play Store, App Store menawarkan pembatasan teknis dan kebijakan
 
 ```
-<span><span>3.2.2</span><br></span><span><span>kode yang diinterpretasikan dapat diunduh ke Aplikasi hanya selama</span><br></span><span><span>kode tersebut:</span><br></span><span><span>(a) tidak mengubah tujuan utama Aplikasi dengan menyediakan</span><br></span><span><span>fitur atau fungsionalitas yang tidak sesuai dengan tujuan yang dimaksudkan dan</span><br></span><span><span>diiklankan dari Aplikasi sebagaimana yang diserahkan ke App Store,</span><br></span><span><span>(b) tidak membuat toko atau storefront untuk kode atau aplikasi lain, dan</span><br></span><span><span>(c) tidak memotong signing, sandbox, atau fitur keamanan lain dari OS</span><br></span>
+3.2.2
+... kode yang diinterpretasikan dapat diunduh ke Aplikasi hanya selama
+kode tersebut:
+(a) tidak mengubah tujuan utama Aplikasi dengan menyediakan
+fitur atau fungsionalitas yang tidak sesuai dengan tujuan yang dimaksudkan dan
+diiklankan dari Aplikasi sebagaimana yang diserahkan ke App Store,
+(b) tidak membuat toko atau storefront untuk kode atau aplikasi lain, dan
+(c) tidak memotong signing, sandbox, atau fitur keamanan lain dari OS
+```
 
 Capgo menggunakan interpreter Dart khusus untuk mematuhi pembatasan interpreter-only untuk pembaruan di iOS. Selama aplikasi Anda tidak melakukan perilaku yang menipu melalui pembaruan (misalnya mengubah tujuan aplikasi melalui pembaruan), memperbarui melalui Capgo (atau solusi code push lainnya) adalah praktik standar industri dan mematuhi pedoman App Store.
 

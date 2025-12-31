@@ -165,7 +165,17 @@ The Play Store offers two restrictions relating to update tools.
 1.  Updates must use an interpreter or virtual machine (Capgo uses JavaScript in a WebView). [https://support.google.com/googleplay/android-developer/answer/9888379?hl=en](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en)
 
 ```
-<span><span>    An app distributed via Google Play may not modify, replace, or update itself</span><br></span><span><span>    using any method other than Google Play's update mechanism. Likewise, an app</span><br></span><span><span>    may not download executable code (such as dex, JAR, .so files) from a</span><br></span><span><span>    source other than Google Play. *This restriction does not apply to code</span><br></span><span><span>    that runs in a virtual machine or an interpreter* where either provides</span><br></span><span><span>    indirect access to Android APIs (such as JavaScript in a webview or</span><br></span><span><span>    browser).</span><br></span><span><span></span><br></span><span><span>    Apps or third-party code, like SDKs, with interpreted languages (JavaScript,</span><br></span><span><span>    Python, Lua, etc.) loaded at run time (for example, not packaged with the</span><br></span><span><span>    app) must not allow potential violations of Google Play policies.</span><br></span>
+    An app distributed via Google Play may not modify, replace, or update itself
+    using any method other than Google Play's update mechanism. Likewise, an app
+    may not download executable code (such as dex, JAR, .so files) from a
+    source other than Google Play. *This restriction does not apply to code
+    that runs in a virtual machine or an interpreter* where either provides
+    indirect access to Android APIs (such as JavaScript in a webview or
+    browser).
+
+    Apps or third-party code, like SDKs, with interpreted languages (JavaScript,
+    Python, Lua, etc.) loaded at run time (for example, not packaged with the
+    app) must not allow potential violations of Google Play policies.
 ```
 
 2.  Changes to the app must not be deceptive (e.g. changing the purpose of the app via update). [https://support.google.com/googleplay/android-developer/answer/9888077](https://support.google.com/googleplay/android-developer/answer/9888077/) Please be clear with your users about what you are providing with your application and do not violate their expectations with significant behavioral changes through the use of Capgo.
@@ -183,7 +193,14 @@ Yes.
 Similar to the Play Store, the App Store offers both technical and policy restrictions.
 
 ```
-<span><span>3.2.2</span><br></span><span><span>... interpreted code may be downloaded to an Application but only so long as</span><br></span><span><span>such code:</span><br></span><span><span>(a) does not change the primary purpose of the Application by providing</span><br></span><span><span>features or functionality that are inconsistent with the intended and</span><br></span><span><span>advertised purpose of the Application as submitted to the App Store,</span><br></span><span><span>(b) does not create a store or storefront for other code or applications, and</span><br></span><span><span>(c) does not bypass signing, sandbox, or other security features of the OS.</span><br></span>
+3.2.2
+... interpreted code may be downloaded to an Application but only so long as
+such code:
+(a) does not change the primary purpose of the Application by providing
+features or functionality that are inconsistent with the intended and
+advertised purpose of the Application as submitted to the App Store,
+(b) does not create a store or storefront for other code or applications, and
+(c) does not bypass signing, sandbox, or other security features of the OS.
 ```
 
 Capgo uses JavaScript in a WebView to comply with the interpreter-only restriction for updates on iOS. So long as your application is not engaging in deceptive behavior via updates (e.g. changing the purpose of the app via update), updating via Capgo (or any other code push solution) is standard industry practice and compliant with App Store guidelines.

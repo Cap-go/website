@@ -156,7 +156,17 @@ Play Storeは更新ツールに関して2つの制限を設けています。
 1. 更新はインタープリターまたは仮想マシンを使用する必要があります（CapgoはDart Virtual Machineを使用します） [https://support.google.com/googleplay/android-developer/answer/9888379?hl=en](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en)
 
 ```
-<span><span>    Google Play経由で配布されるアプリは、Google Playの更新メカニズム以外の方法で</span><br></span><span><span>    自身を変更、置換、更新することはできません。同様に、アプリは</span><br></span><span><span>    Google Play以外のソースから実行可能コード（dex、JAR、soファイルなど）を</span><br></span><span><span>    ダウンロードすることはできません。*この制限は、Android APIへの</span><br></span><span><span>    間接的なアクセスを提供する仮想マシンまたはインタープリターで実行される</span><br></span><span><span>    コード（webviewまたはブラウザのJavaScriptなど）には適用されません*</span><br></span><span><span></span><br></span><span><span>    実行時にロードされる（つまり、アプリにパッケージングされていない）</span><br></span><span><span>    インタープリター言語（JavaScript、Python、Luaなど）を使用するアプリまたは</span><br></span><span><span>    サードパーティのコード（SDKなど）は、Google Playポリシーの違反の</span><br></span><span><span>    可能性を許可してはなりません</span><br></span>
+    Google Play経由で配布されるアプリは、Google Playの更新メカニズム以外の方法で
+    自身を変更、置換、更新することはできません。同様に、アプリは
+    Google Play以外のソースから実行可能コード（dex、JAR、soファイルなど）を
+    ダウンロードすることはできません。*この制限は、Android APIへの
+    間接的なアクセスを提供する仮想マシンまたはインタープリターで実行される
+    コード（webviewまたはブラウザのJavaScriptなど）には適用されません*
+
+    実行時にロードされる（つまり、アプリにパッケージングされていない）
+    インタープリター言語（JavaScript、Python、Luaなど）を使用するアプリまたは
+    サードパーティのコード（SDKなど）は、Google Playポリシーの違反の
+    可能性を許可してはなりません
 ```
 
 2. アプリの変更は欺瞞的であってはなりません（例：更新を通じてアプリの目的を変更するなど） [https://support.google.com/googleplay/android-developer/answer/9888077](https://support.google.com/googleplay/android-developer/answer/9888077/) アプリケーションで提供するものについてユーザーに明確に説明し、Capgoを使用して重要な動作変更を行うことでユーザーの期待を裏切らないようにしてください。
@@ -174,7 +184,12 @@ Microsoftも、彼らのReact Native "codepush"ライブラリがアププスト
 Play Storeと同様に、App Storeも技術的およびポリシーの制限を設けています。
 
 ```
-<span><span>3.2.2</span><br></span><span><span>解釈されたコードはアプリケーションにダウンロードできますが、以下の条件を満たす場合に限ります:<br><br>(a) App Storeに提出された際のアプリケーションの意図された目的や宣伝された目的と矛盾する機能を提供することにより、アプリケーションの主要な目的を変更しない<br><br>(b) 他のコードやアプリケーション用のストアやストアフロントを作成しない<br><br>(c) OSの署名、サンドボックス、その他のセキュリティ機能を迂回しない
+3.2.2
+解釈されたコードはアプリケーションにダウンロードできますが、以下の条件を満たす場合に限ります:
+(a) App Storeに提出された際のアプリケーションの意図された目的や宣伝された目的と矛盾する機能を提供することにより、アプリケーションの主要な目的を変更しない
+(b) 他のコードやアプリケーション用のストアやストアフロントを作成しない
+(c) OSの署名、サンドボックス、その他のセキュリティ機能を迂回しない
+```
 
 CapgoはiOS上での更新に関する解釈専用の制限に準拠するために、カスタムのDartインタプリタを使用します。更新を通じて不正な動作(例:更新によりアプリの目的を変更する)を行わない限り、Capgo(または他のコードプッシュソリューション)を通じた更新は標準的な業界慣行であり、App Storeのガイドラインに準拠しています。
 
