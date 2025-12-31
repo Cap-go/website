@@ -1,5 +1,5 @@
 ---
-slug: birth-of-capgo-my-challenging-journey-as-a-solo-maker
+slug: birth-of-capgo-revolutionizing-capacitor-app-updates
 title: How a GitHub Issue Evolved into a business
 description: >-
   Discover the trials and triumphs behind creating Capgo, an innovative live

@@ -1,5 +1,5 @@
 ---
-slug: differenze-chiave-tra-sviluppo-e-produzione-nelle-app-capacitor
+slug: development-vs-production-key-differences-in-capacitor-apps
 title: Capacitorアプリの開発と本番環境における主な違い
 description: Capacitorアプリの開発環境と本番環境の重要な違いを理解し、パフォーマンスとセキュリティを向上させましょう。
 author: Martin Donadieu

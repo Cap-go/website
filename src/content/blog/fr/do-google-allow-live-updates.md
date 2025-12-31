@@ -1,5 +1,5 @@
 ---
-slug: actualizaciones-en-vivo-permitidas-por-google
+slug: do-google-allow-live-updates
 title: >-
   Google autorise-t-il l'envoi de mises à jour en direct aux applications sans
   examen du Play Store ?

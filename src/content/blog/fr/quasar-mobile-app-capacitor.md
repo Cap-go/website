@@ -1,5 +1,5 @@
 ---
-slug: live-update-with-quasar-und-capacitor
+slug: quasar-mobile-app-capacitor
 title: >-
   Créer des applications mobiles avec des mises à jour en direct, Quasar et
   Capacitor.

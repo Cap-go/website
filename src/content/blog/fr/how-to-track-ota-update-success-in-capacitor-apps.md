@@ -1,5 +1,5 @@
 ---
-slug: wie-man-ota-update-erfolge-in-capacitor-apps-verfolgt
+slug: how-to-track-ota-update-success-in-capacitor-apps
 title: Suivi des mises à jour OTA réussies dans les applications Capacitor
 description: >-
   Découvrez comment surveiller efficacement le succès des mises à jour OTA dans

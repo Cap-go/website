@@ -1,5 +1,5 @@
 ---
-slug: aggiornamenti-ota-in-beta-rispettare-policy
+slug: ota-updates-in-beta-staying-policy-compliant
 title: OTAアップデートのベータ版：ポリシーの順守
 description: アプリストアのポリシーに準拠し、ユーザーのセキュリティを向上させながら、ベータテストでのOTAアップデートを効果的に管理する方法をご紹介します。
 author: Martin Donadieu

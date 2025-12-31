@@ -1,5 +1,5 @@
 ---
-slug: transferencia-de-datos-de-web-a-android-con-el-puente-nativo-de-capacitor
+slug: capacitor-native-bridge-web-to-android-data-transfer
 title: 'Pont natif Capacitor : Transfert de données de Web vers Android'
 description: >-
   Apprenez à transférer efficacement des données entre les applications web et

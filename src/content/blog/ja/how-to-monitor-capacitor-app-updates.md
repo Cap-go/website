@@ -1,5 +1,5 @@
 ---
-slug: come-monitorare-gli-aggiornamenti-delle-app-capacitor
+slug: how-to-monitor-capacitor-app-updates
 title: Capacitor アプリの更新を監視する方法
 description: Capacitorアプリの更新を監視するための効果的な戦略を学び、安定性、セキュリティ、ユーザー体験を向上させましょう。
 author: Martin Donadieu

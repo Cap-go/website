@@ -1,5 +1,5 @@
 ---
-slug: google-play-distribuzione-scaglionata-come-funziona
+slug: google-play-staged-rollouts-how-it-works
 title: 'Google Play でのローリングアップデート: その仕組み'
 description: Google Play での段階的なリリースを通じてアプリのアップデートを効果的に管理し、安定性を確保してリスクを最小限に抑える方法を学びましょう。
 author: Martin Donadieu

@@ -1,5 +1,5 @@
 ---
-slug: actualizaciones-en-vivo-para-aplicacion-flutter
+slug: live-updates-for-flutter-app
 title: Mise à jour en direct de Flutter
 description: >-
   Est-il possible d'envoyer des mises à jour en direct aux applications Flutter

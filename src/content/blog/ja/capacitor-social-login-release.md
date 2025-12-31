@@ -1,5 +1,5 @@
 ---
-slug: release-of-a-brand-new-capacitor-social-login
+slug: capacitor-social-login-release
 title: Capacitor ソーシャルログインプラグインの新リリース
 description: >-
   Capacitor Social Loginプラグインは、iOS、Android、Webで

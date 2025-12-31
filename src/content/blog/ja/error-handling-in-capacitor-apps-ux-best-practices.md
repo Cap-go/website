@@ -1,5 +1,5 @@
 ---
-slug: gestione-degli-errori-nelle-app-capacitor-best-practice-ux
+slug: error-handling-in-capacitor-apps-ux-best-practices
 title: Capacitorアプリのエラー処理：UXベストプラクティス
 description: >-
   エラーハンドリングを効果的に行うことで、明確なコミュニケーション、迅速な修正、すべてのプラットフォームでの一貫した処理を通じてユーザーエクスペリエンスを向上させることができます。

@@ -1,5 +1,5 @@
 ---
-slug: wie-man-benutzeranfragen-nach-ccpa-verarbeitet
+slug: how-to-handle-user-data-requests-under-ccpa
 title: Gestión de solicitudes de datos de usuarios según la CCPA
 description: >-
   Aprenda cómo gestionar de manera efectiva las solicitudes de los usuarios para

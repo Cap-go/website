@@ -1,5 +1,5 @@
 ---
-slug: alternativa-chiusura-appflow
+slug: appflow-shutdown-alternative
 title: Ionic AppFlowのシャットダウン - モバイルアプリ開発の次のステップは？
 description: >-
   Ionic

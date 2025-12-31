@@ -1,5 +1,5 @@
 ---
-slug: google-und-apple-datenschutz-compliance-fuer-drittanbieterdaten
+slug: apple-vs-google-privacy-compliance-for-third-party-data
 title: 'Apple vs. Google: Cumplimiento de privacidad para datos de terceros'
 description: >-
   Descubra las estrategias de privacidad opuestas de dos grandes empresas

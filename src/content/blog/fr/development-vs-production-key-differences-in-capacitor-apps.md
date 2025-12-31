@@ -1,5 +1,5 @@
 ---
-slug: entwicklung-vs-produktiv-unterschiede-in-capacitor-apps
+slug: development-vs-production-key-differences-in-capacitor-apps
 title: >-
   Développement vs. Production : Différences essentielles dans les applications
   Capacitor

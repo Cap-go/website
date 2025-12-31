@@ -1,5 +1,5 @@
 ---
-slug: colli-di-bottiglia-comuni-cicd-nelle-pipeline-ota
+slug: common-cicd-bottlenecks-in-ota-pipelines
 title: CI/CD パイプラインにおける一般的な OTA のボトルネック
 description: CIパイプラインやOTAアップデートにおける一般的な課題を克服し、アップデートの効率性、セキュリティ、ユーザー満足度を向上させる方法について学びましょう。
 author: Martin Donadieu

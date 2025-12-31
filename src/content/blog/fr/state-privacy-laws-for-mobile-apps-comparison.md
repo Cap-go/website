@@ -1,5 +1,5 @@
 ---
-slug: leyes-estatales-de-privacidad-para-apps-moviles-comparativa
+slug: state-privacy-laws-for-mobile-apps-comparison
 title: >-
   Lois sur la confidentialité des applications mobiles par État : Une
   comparaison

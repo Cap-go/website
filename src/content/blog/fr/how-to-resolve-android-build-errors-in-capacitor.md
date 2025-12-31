@@ -1,5 +1,5 @@
 ---
-slug: como-resolver-errores-de-compilacion-de-android-en-capacitor
+slug: how-to-resolve-android-build-errors-in-capacitor
 title: Comment Résoudre les Erreurs de Compilation Android dans Capacitor
 description: >-
   Découvrez comment résoudre rapidement les erreurs de compilation Android dans

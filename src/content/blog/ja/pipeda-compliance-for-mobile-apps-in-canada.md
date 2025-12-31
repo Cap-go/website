@@ -1,5 +1,5 @@
 ---
-slug: la-conformita-pipeda-per-app-mobili-in-canada
+slug: pipeda-compliance-for-mobile-apps-in-canada
 title: カナダにおけるモバイルアプリのPIPEDA準拠
 description: モバイルアプリがPIPEDAに従ってカナダのプライバシー法を遵守し、ユーザーデータを保護して信頼を高める方法を学びましょう。
 author: Martin Donadieu

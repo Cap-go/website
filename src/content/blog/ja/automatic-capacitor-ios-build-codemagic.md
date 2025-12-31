@@ -1,5 +1,5 @@
 ---
-slug: creazione-automatica-capacitor-ios-codemagic
+slug: automatic-capacitor-ios-build-codemagic
 title: CodemagicでのCapacitor iOSの自動ビルド
 description: iOSアプリ開発のためのCIおよびCDを5分で設定 - CodemagicでIonicアプリを管理する方法（2024）
 author: Martin Donadieu

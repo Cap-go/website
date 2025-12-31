@@ -1,5 +1,5 @@
 ---
-slug: checkliste-zur-validierung-von-capacitor-app-aktualisierungen
+slug: checklist-for-validating-capacitor-app-updates
 title: >-
   Lista de verificación para validar actualizaciones de aplicaciones de
   Capacitor

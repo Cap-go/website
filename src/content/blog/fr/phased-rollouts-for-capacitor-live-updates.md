@@ -1,5 +1,5 @@
 ---
-slug: despliegue-controlado-para-capacitor-live-updates
+slug: phased-rollouts-for-capacitor-live-updates
 title: Distribution de mise à jour en direct pour Capacitor
 description: >-
   Découvrez comment les déploiements progressifs améliorent les mises à jour

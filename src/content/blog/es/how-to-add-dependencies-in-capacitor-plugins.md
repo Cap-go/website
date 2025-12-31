@@ -1,5 +1,5 @@
 ---
-slug: wie-fuegt-man-abhaengigkeiten-in-capacitor-plugins-hinzu
+slug: how-to-add-dependencies-in-capacitor-plugins
 title: Cómo agregar dependencias a los plugins de Capacitor
 description: >-
   Aprenda cómo optimizar la gestión de dependencias en plugins de Capacitor a

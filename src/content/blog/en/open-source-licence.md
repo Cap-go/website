@@ -1,5 +1,5 @@
 ---
-slug: open-source-licecing
+slug: open-source-licence
 title: Understanding Open-Source Software Licenses
 description: >-
   When it comes to open-source software licenses, there are two broad categories.

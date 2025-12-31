@@ -1,5 +1,5 @@
 ---
-slug: errores-comunes-en-la-segmentacion-de-atributos-personalizados
+slug: common-mistakes-in-custom-attribute-segmentation
 title: Erreurs courantes dans la segmentation par attributs personnalisés
 description: >-
   Découvrez les principaux obstacles à la segmentation des attributs

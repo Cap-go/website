@@ -1,5 +1,5 @@
 ---
-slug: integrazione-di-capgo-con-guida-alle-github-actions
+slug: capgo-integration-with-github-actions-guide
 title: 'Capgo と GitHub Actions の統合: ガイド'
 description: GitHubアクションでCapgoを統合し、効率的で安全な低コストのアプリ更新を実現し、開発ワークフローを改善します。
 author: Martin Donadieu

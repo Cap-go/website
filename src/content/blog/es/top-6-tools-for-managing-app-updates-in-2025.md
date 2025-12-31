@@ -1,5 +1,5 @@
 ---
-slug: top-6-tools-fuer-app-aktualisierungen-management-in-2025
+slug: top-6-tools-for-managing-app-updates-in-2025
 title: >-
   Las 6 mejores herramientas para la gestión de actualizaciones de aplicaciones
   en 2025

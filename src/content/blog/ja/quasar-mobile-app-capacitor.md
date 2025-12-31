@@ -1,5 +1,5 @@
 ---
-slug: aggiornamento-automatico-con-quasar-e-capacitor
+slug: quasar-mobile-app-capacitor
 title: モバイルアプリのリアルタイム更新、QuasarとCapacitorでの開発
 description: Quasar、Capacitor を使用したモバイルアプリの作成方法とリアルタイム更新の実装方法
 author: Anik Dhabal Babu

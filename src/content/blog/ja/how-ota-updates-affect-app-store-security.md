@@ -1,5 +1,5 @@
 ---
-slug: come-gli-aggiornamenti-ota-influenzano-la-sicurezza-dell-app-store
+slug: how-ota-updates-affect-app-store-security
 title: アプリストアのセキュリティにOTAアップデートが与える影響について
 description: >-
   OTA

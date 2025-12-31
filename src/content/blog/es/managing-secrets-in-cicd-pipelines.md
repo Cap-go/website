@@ -1,5 +1,5 @@
 ---
-slug: verwaltung-von-geheimnissen-in-cicd-pipelines
+slug: managing-secrets-in-cicd-pipelines
 title: Gestión de secretos en pipelines CI/CD
 description: >-
   Aprende estrategias efectivas para gestionar secretos en pipelines CI/CD para

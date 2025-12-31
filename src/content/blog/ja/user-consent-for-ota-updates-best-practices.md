@@ -1,5 +1,5 @@
 ---
-slug: consenso-utente-per-aggiornamenti-ota-best-practices
+slug: user-consent-for-ota-updates-best-practices
 title: ユーザーのOTAアップデート同意：ベストプラクティス
 description: >-
   OTAアップデートに対するユーザーの同意を得るためのベストプラクティスを学び、アプリのアップデート時のコンプライアンス、セキュリティ、およびユーザーの信頼を確保します。

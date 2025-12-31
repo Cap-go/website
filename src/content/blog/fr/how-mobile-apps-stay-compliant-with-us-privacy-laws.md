@@ -1,5 +1,5 @@
 ---
-slug: como-las-aplicaciones-moviles-cumplen-con-las-leyes-de-privacidad-de-eeuu
+slug: how-mobile-apps-stay-compliant-with-us-privacy-laws
 title: >-
   Comment les applications mobiles se conforment aux lois sur la confidentialité
   aux États-Unis

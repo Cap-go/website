@@ -1,5 +1,5 @@
 ---
-slug: open-source-licecing
+slug: open-source-licence
 title: Comprendre les licences de logiciels open source
 description: >-
   En matière de licences de logiciels open source, il existe deux grandes

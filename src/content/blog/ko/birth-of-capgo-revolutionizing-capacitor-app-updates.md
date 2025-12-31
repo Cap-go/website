@@ -1,5 +1,5 @@
 ---
-slug: birth-of-capgo-my-challenging-journey-as-a-solo-maker
+slug: birth-of-capgo-revolutionizing-capacitor-app-updates
 title: GitHub 이슈가 어떻게 비즈니스로 발전했는가
 description: >-
   Capgo를 만드는 과정에서의 시련과 승리를 발견하세요. Capgo는 필요에서 탄생한 라이브 업데이트 시스템으로, Capacitor 앱을

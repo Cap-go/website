@@ -1,5 +1,5 @@
 ---
-slug: como-administrar-datos-de-usuario-en-aplicaciones-capacitor
+slug: how-to-handle-user-data-in-capacitor-apps
 title: Comment gérer les données utilisateur dans les applications Capacitor
 description: >-
   Apprenez des stratégies efficaces pour gérer les données des utilisateurs dans

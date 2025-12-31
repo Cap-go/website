@@ -1,5 +1,5 @@
 ---
-slug: pruebas-de-cumplimiento-en-cicd-para-apps-capacitor
+slug: compliance-checks-in-cicd-for-capacitor-apps
 title: Tests de Conformité CI/CD pour les Applications Capacitor
 description: >-
   Assurez-vous de la conformité des standards de vos applications Capacitor

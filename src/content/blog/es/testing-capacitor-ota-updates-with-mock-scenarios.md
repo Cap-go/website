@@ -1,5 +1,5 @@
 ---
-slug: testing-von-capacitor-ota-updates-mit-mock-szenarien
+slug: testing-capacitor-ota-updates-with-mock-scenarios
 title: Pruebas de actualizaciones OTA de Capacitor con escenarios simulados
 description: >-
   Aprende cómo probar efectivamente las actualizaciones OTA en aplicaciones

@@ -1,5 +1,5 @@
 ---
-slug: problemi-comuni-e-soluzioni-di-aggiornamenti-live-per-sviluppatori
+slug: common-live-update-issues-and-solutions-for-developers
 title: リアルタイム更新に関する開発者向けの一般的な問題と解決策
 description: >-
   リアルタイムアップデートの一般的な課題に対する解決策を探り、ネットワークの問題、バージョンの競合、デバイスの互換性などを含め、ユーザーエクスペリエンスを向上させます。

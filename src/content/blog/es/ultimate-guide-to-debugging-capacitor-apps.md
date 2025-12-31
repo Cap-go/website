@@ -1,5 +1,5 @@
 ---
-slug: leitfaden-zum-debuggen-von-capacitor-apps
+slug: ultimate-guide-to-debugging-capacitor-apps
 title: Guía definitiva para la solución de problemas en aplicaciones Capacitor
 description: >-
   Aprende estrategias efectivas y herramientas esenciales para depurar

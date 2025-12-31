@@ -1,5 +1,5 @@
 ---
-slug: capacitor-vs-appflow-ota-update-loesungen-im-vergleich
+slug: capacitor-vs-appflow-ota-update-solutions-compared
 title: 'Capacitor vs Appflow: Comparación de soluciones de actualización OTA'
 description: >-
   Compare las soluciones de actualización OTA para encontrar la mejor opción

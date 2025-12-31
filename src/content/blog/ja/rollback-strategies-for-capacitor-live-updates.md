@@ -1,5 +1,5 @@
 ---
-slug: strategie-di-ripristino-per-gli-aggiornamenti-live-di-capacitor
+slug: rollback-strategies-for-capacitor-live-updates
 title: Capacitorのライブアップデートのロールバック戦略
 description: アプリの安定性を確保し、更新中のユーザーの中断を最小限に抑えるため、Capacitorのライブアップデートに関する効果的なロールバック戦略について学びます。
 author: Martin Donadieu

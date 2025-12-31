@@ -1,5 +1,5 @@
 ---
-slug: regole-di-privacy-apple-per-app-capacitor
+slug: apple-privacy-rules-for-capacitor-apps
 title: Capacitorアプリのプライバシーに関するAppleのルール
 description: Apple のアプリ開発におけるプライバシールールに準拠するために、ユーザーの同意、データの透明性、セキュアなアップデートの実装方法を学びましょう。
 author: Martin Donadieu

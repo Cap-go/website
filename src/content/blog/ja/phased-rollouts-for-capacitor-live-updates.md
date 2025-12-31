@@ -1,5 +1,5 @@
 ---
-slug: rollout-graduali-per-aggiornamenti-live-di-capacitor
+slug: phased-rollouts-for-capacitor-live-updates
 title: Capacitorでライブアップデートのロールアウトを段階的に行う
 description: >-
   段階的なアプリのリリースが、戦略的なセグメンテーションを通じてリスクを最小限に抑え、品質を向上させ、ユーザー満足度を確保しながら、アップデートを改善する方法を学びましょう。

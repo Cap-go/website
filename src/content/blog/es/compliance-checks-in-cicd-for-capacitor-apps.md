@@ -1,5 +1,5 @@
 ---
-slug: compliance-pruefungen-in-cicd-fuer-capacitor-apps
+slug: compliance-checks-in-cicd-for-capacitor-apps
 title: Pruebas de Cumplimiento en CI/CD para Aplicaciones Capacitor
 description: >-
   Garantice el cumplimiento de los estándares de conformidad de sus aplicaciones

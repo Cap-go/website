@@ -1,5 +1,5 @@
 ---
-slug: aggiornamento-da-capacitor-4-a-capacitor-5
+slug: updating-from-capacitor-4-to-capacitor-5
 title: Capacitor 4からCapacitor 5へのアップグレード：ステップバイステップガイド
 description: Capacitor 4からCapacitor 5へ、必要なプラグインやツールの更新を含め、最小限の変更でプロジェクトをアップグレードする方法をご紹介します。
 author: Martin Donadieu

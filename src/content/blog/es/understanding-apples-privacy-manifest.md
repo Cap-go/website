@@ -1,5 +1,5 @@
 ---
-slug: das-datenschutzmanifest-von-apple-verstehen
+slug: understanding-apples-privacy-manifest
 title: Comprender el manifiesto de privacidad de Apple
 description: >-
   Aprenda más sobre el manifiesto obligatorio de privacidad de Apple, su

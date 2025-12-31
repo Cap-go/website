@@ -1,5 +1,5 @@
 ---
-slug: opzioni-plugin-capacitor-per-aggiornamenti-ota
+slug: capacitor-plugin-options-for-ota-updates
 title: プラグイン Capacitor の OTA アップデートのオプション
 description: Capacitorアプリ向けのOTAアップデートの利点とオプションを探り、スムーズなデプロイメントのための最適なプラグインとその機能を紹介します。
 author: Martin Donadieu

@@ -1,5 +1,5 @@
 ---
-slug: actualizaciones-ota-de-capacitor-vs-metodos-de-prueba-tradicionales
+slug: capacitor-ota-updates-vs-traditional-testing-methods
 title: Mises à jour OTA de Capacitor vs. méthodes de test traditionnelles
 description: >-
   Découvrez les différences entre les mises à jour OTA de Capacitor et les

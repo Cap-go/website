@@ -1,5 +1,5 @@
 ---
-slug: come-profilare-app-multi-piattaforma-con-capacitor
+slug: how-to-profile-cross-platform-apps-with-capacitor
 title: Capacitorでクロスプラットフォームアプリをプロファイリングする方法
 description: >-
   Capacitor で作成したクロスプラットフォームアプリのプロファイリングと最適化を行い、iOS、Android、Web

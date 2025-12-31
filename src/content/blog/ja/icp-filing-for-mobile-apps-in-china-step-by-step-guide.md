@@ -1,5 +1,5 @@
 ---
-slug: guida-step-by-step-per-la-registrazione-icp-delle-app-mobili-in-cina
+slug: icp-filing-for-mobile-apps-in-china-step-by-step-guide
 title: 中国でのモバイルアプリのICP（インターネットコンテンツプロバイダー）：ステップバイステップガイド
 description: モバイルアプリの中国でのICP登録に必要な重要なステップについて、必要な書類とコンプライアンス戦略を含め、成功した運営のために解説します。
 author: Martin Donadieu

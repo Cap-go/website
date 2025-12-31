@@ -1,5 +1,5 @@
 ---
-slug: configurazione-ambiente-locale-capacitor
+slug: setting-up-capacitor-local-environment
 title: Capacitorローカル環境の設定
 description: >-
   iOS や Android のアプリを Web テクノロジーを使用して作成するための Capacitor

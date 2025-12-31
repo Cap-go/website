@@ -1,5 +1,5 @@
 ---
-slug: come-utilizzare-il-semantic-versioning-con-gli-aggiornamenti-capgo-ota
+slug: how-to-use-semantic-versioning-with-capgo-ota-updates
 title: OTAアップデートでセマンティックバージョニングを使用する方法
 description: >-
   Semantic Versioning と Capgo の OTA アップデートを使用して、Capacitor

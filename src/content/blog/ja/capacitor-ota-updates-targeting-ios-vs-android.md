@@ -1,5 +1,5 @@
 ---
-slug: aggiornamenti-ota-su-ios-vs-android-tramite-capacitor
+slug: capacitor-ota-updates-targeting-ios-vs-android
 title: 'Capacitor OTAアップデート: iOS と Android の違い'
 description: iOS と Android の OTA アップデート戦略の違いを詳しく見て、配布、セキュリティ、ユーザー要件に焦点を当てます。
 author: Martin Donadieu

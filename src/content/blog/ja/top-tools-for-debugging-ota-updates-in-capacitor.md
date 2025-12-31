@@ -1,5 +1,5 @@
 ---
-slug: strumenti-migliori-per-il-debugging-degli-aggiornamenti-ota-in-capacitor
+slug: top-tools-for-debugging-ota-updates-in-capacitor
 title: CapacitorのOTAアップデートをデバッグするための最適なツール
 description: Capacitorアプリのすべてのプラットフォームで、OTAアップデートの効果的なデバッグに必要なツールと戦略を探ります。
 author: Martin Donadieu

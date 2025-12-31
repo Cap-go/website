@@ -1,5 +1,5 @@
 ---
-slug: gestire-build-dev-e-prod-con-github-actions
+slug: manage-dev-and-prod-build-with-github-actions
 title: GitHubアクションで開発とプロダクションビルドを管理する
 description: >-
   Capgo を使用して devbuild を特定のチャンネルにリリースし、Apple と Google のレビューを待たずに、チームが Capacitor

@@ -1,5 +1,5 @@
 ---
-slug: come-risolvere-errori-di-compilazione-android-in-capacitor
+slug: how-to-resolve-android-build-errors-in-capacitor
 title: Capacitorでのビルドエラーを解決する方法
 description: Android の Capacitor でのビルドエラーの解決方法を、設定の問題から依存関係の競合、ProGuard の問題まで詳しく説明します。
 author: Martin Donadieu

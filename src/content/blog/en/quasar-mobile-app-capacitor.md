@@ -1,5 +1,5 @@
 ---
-slug: live-update-with-quasar-and-capacitor
+slug: quasar-mobile-app-capacitor
 title: 'Creating Mobile Apps with live updates, Quasar and Capacitor.'
 description: 'How to create a mobile app with Quasar, Capacitor and implement live updates.'
 author: Anik Dhabal Babu

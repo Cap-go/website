@@ -1,5 +1,5 @@
 ---
-slug: wie-sich-das-chinesische-cybersicherheitsgesetz-auf-app-entwickler-auswirkt
+slug: how-chinas-cybersecurity-law-impacts-app-developers
 title: >-
   Cómo la ley de ciberseguridad china afecta a los desarrolladores de
   aplicaciones

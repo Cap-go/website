@@ -1,5 +1,5 @@
 ---
-slug: come-inviare-una-versione-specifica-agli-utenti
+slug: how-to-send-specific-version-to-users
 title: 特定のユーザーまたはグループに更新を送信する方法
 description: TestFlight や Google のベータプロセスを使用せずにベータ版を試すことができます。Ionic アプリにボタンを追加するだけで完了です！
 author: Martin Donadieu

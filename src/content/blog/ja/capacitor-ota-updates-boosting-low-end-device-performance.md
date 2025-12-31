@@ -1,5 +1,5 @@
 ---
-slug: aggiornamenti-ota-capacitor-migliorare-prestazioni-dispositivi-basso-livello
+slug: capacitor-ota-updates-boosting-low-end-device-performance
 title: 'Capacitor OTA アップデート: ローエンドデバイスのパフォーマンス改善'
 description: >-
   OTA

@@ -1,5 +1,5 @@
 ---
-slug: como-evitar-la-revision-de-la-app-store
+slug: how-to-bypass-app-store-review
 title: >-
   Comment mettre à jour les applications Capacitor JS sans passer par la
   révision de l'App Store.

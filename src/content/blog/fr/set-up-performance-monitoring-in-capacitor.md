@@ -1,5 +1,5 @@
 ---
-slug: configuracion-de-monitoreo-de-rendimiento-das-en-capacitor
+slug: set-up-performance-monitoring-in-capacitor
 title: Configuration de la surveillance des performances dans Capacitor
 description: >-
   Apprenez à configurer la surveillance des performances dans votre application

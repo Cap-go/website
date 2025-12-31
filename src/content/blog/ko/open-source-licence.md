@@ -1,5 +1,5 @@
 ---
-slug: open-source-licecing
+slug: open-source-licence
 title: 오픈소스 소프트웨어 라이선스 이해하기
 description: >-
   오픈소스 소프트웨어 라이선스에는 크게 두 가지 범주가 있습니다. 일부 라이선스는 카피레프트 라이선스 범주에 속하고, 다른 라이선스는 허용적

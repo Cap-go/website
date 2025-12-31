@@ -1,5 +1,5 @@
 ---
-slug: about-open-source
+slug: open-source
 title: Learn about what open source is and why it’s important!
 description: >-
   During your programming journey, you might have heard of the term "Open

@@ -1,5 +1,5 @@
 ---
-slug: von-microsoft-app-center-zu-capgo
+slug: moving-from-microsoft-app-center-to-capgo
 title: >-
   Passer de Microsoft App Center à Capgo pour les mises à jour d'applications en
   direct

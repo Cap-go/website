@@ -1,5 +1,5 @@
 ---
-slug: opzioni-hosting-cloud-aggiornamenti-ota-capacitor-confrontate
+slug: capacitor-ota-updates-cloud-hosting-options-compared
 title: Cloud ホスティングによるCapacitorの OTAアップデートの比較
 description: >-
   Capacitor の OTA アップデートに最適なクラウドホスティングのオプションを探り、AWS、Google

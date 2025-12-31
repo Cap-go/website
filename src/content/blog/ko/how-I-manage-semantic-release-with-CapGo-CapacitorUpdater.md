@@ -1,5 +1,5 @@
 ---
-slug: how-rapido-cloud-manage-semantic-rerlease-with-CapGo-CapacitorUpdater
+slug: how-I-manage-semantic-release-with-CapGo-CapacitorUpdater
 title: Capgo CapacitorUpdater와 함께 Rapido Cloud가 시맨틱 릴리스를 관리하는 방법
 description: >-
   CapGo CapacitorUpdater를 사용하는 내 애플리케이션의 릴리스를 관리하기 위해 semantic release를 설정하는

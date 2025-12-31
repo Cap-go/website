@@ -1,5 +1,5 @@
 ---
-slug: build-e-release-automatico-con-github-actions
+slug: automatic-build-and-release-with-github-actions
 title: Githubアクションによるアプリの自動ビルドとリリース
 description: >-
   Github actionsを使用して無料でCI/CDパイプラインを作成し、mainにプッシュするたびにIonic Capacitor

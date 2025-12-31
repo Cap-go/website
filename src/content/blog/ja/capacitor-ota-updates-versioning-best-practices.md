@@ -1,5 +1,5 @@
 ---
-slug: best-practice-versioning-per-aggiornamenti-ota-in-capacitor
+slug: capacitor-ota-updates-versioning-best-practices
 title: Capacitor OTAアップデート：バージョニングのベストプラクティス
 description: >-
   Capacitor の OTA

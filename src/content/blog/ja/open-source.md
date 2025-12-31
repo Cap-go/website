@@ -1,5 +1,5 @@
 ---
-slug: about-open-source
+slug: open-source
 title: オープンソースとは何か、そしてなぜそれが重要なのかを学びましょう！
 description: プログラミングの旅の途中で、「オープンソース」という用語を聞いたことがあるかもしれません。しかし、それは実際には何を意味するのでしょうか？
 author: Anik Dhabal Babu

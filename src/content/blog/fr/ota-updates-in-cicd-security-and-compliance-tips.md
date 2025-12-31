@@ -1,5 +1,5 @@
 ---
-slug: actualizaciones-ota-en-cicd-consejos-de-seguridad-y-cumplimiento
+slug: ota-updates-in-cicd-security-and-compliance-tips
 title: 'Mises à jour OTA en CI/CD: Conseils de Sécurité et de Conformité'
 description: >-
   Découvrez les stratégies essentielles de sécurité et de conformité pour les

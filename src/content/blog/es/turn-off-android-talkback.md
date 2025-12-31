@@ -1,5 +1,5 @@
 ---
-slug: android-talkback-deaktivieren
+slug: turn-off-android-talkback
 title: Así es como desactivar y usar TalkBack en dispositivos Android
 description: >-
   Instrucciones paso a paso para activar y navegar con TalkBack, el lector de

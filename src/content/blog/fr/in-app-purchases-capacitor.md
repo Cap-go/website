@@ -1,5 +1,5 @@
 ---
-slug: compras-in-app-capacitor
+slug: in-app-purchases-capacitor
 title: Achats intégrés à l'application pour Capacitor
 description: >-
   Comment implémenter les achats in-app pour les applications Capacitor en

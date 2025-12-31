@@ -1,5 +1,5 @@
 ---
-slug: release-of-a-brand-new-capacitor-social-login
+slug: capacitor-social-login-release
 title: Publication d'un nouveau plugin Capacitor Social Login
 description: >-
   Le plugin Capacitor Social Login est un plugin qui permet de se connecter avec

@@ -1,5 +1,5 @@
 ---
-slug: actualizaciones-en-vivo-en-apple
+slug: do-apple-allow-live-updates
 title: >-
   Apple n'autorise pas la diffusion de mises à jour en direct des applications
   sans examen préalable de l'App Store.

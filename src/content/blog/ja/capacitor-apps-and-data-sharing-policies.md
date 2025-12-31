@@ -1,5 +1,5 @@
 ---
-slug: condivisione-dati-e-politiche-delle-app-capacitor
+slug: capacitor-apps-and-data-sharing-policies
 title: アプリCapacitorとデータ共有ポリシー
 description: App Storeの共有データポリシーに関するCapacitorアプリのコンプライアンスを確保するために必要なポリシーについて説明します。
 author: Martin Donadieu

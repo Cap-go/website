@@ -1,5 +1,5 @@
 ---
-slug: best-practice-di-performance-per-aggiornamenti-ota-su-capacitor
+slug: capacitor-ota-updates-best-practices-for-performance
 title: CapacitorのOTAアップデート：パフォーマンスのベストプラクティス
 description: >-
   Capacitorアプリケーションにおけるパフォーマンスとユーザーエクスペリエンスを向上させるため、ファイルサイズ、コード読み込み、セキュリティに関するベストプラクティスでOTAアップデートを最適化します。

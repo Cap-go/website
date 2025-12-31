@@ -1,5 +1,5 @@
 ---
-slug: ota-updates-im-beta-zustand-richtlinienkonform-bleiben
+slug: ota-updates-in-beta-staying-policy-compliant
 title: 'Mises à jour OTA en version bêta : rester conforme aux règles'
 description: >-
   Découvrez comment gérer efficacement les mises à jour OTA dans les tests bêta

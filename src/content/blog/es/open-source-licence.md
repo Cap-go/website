@@ -1,5 +1,5 @@
 ---
-slug: open-source-licecing
+slug: open-source-licence
 title: Comprendiendo las Licencias de Software de Código Abierto
 description: >-
   Cuando se trata de licencias de software de código abierto, hay dos categorías

@@ -1,5 +1,5 @@
 ---
-slug: creazione-di-app-mobile-con-sveltekit-e-capacitor
+slug: creating-mobile-apps-with-sveltekit-and-capacitor
 title: モバイルアプリケーションの作成：SvelteKitとCapacitor
 description: SvelteKitとCapacitorを使用してモバイルアプリを作成し、Konsta UIでネイティブUIを強化する方法を学びましょう。
 author: Martin Donadieu

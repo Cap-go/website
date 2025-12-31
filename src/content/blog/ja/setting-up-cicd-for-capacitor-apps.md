@@ -1,5 +1,5 @@
 ---
-slug: configurazione-cicd-per-app-capacitor
+slug: setting-up-cicd-for-capacitor-apps
 title: CapacitorアプリのCI/CD設定
 description: iOS と Android アプリのリリースを CI/CD パイプラインを使用して最適化し、効率性を向上させ、エラーを減らす方法をご紹介します。
 author: Martin Donadieu

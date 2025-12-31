@@ -1,5 +1,5 @@
 ---
-slug: wie-man-aar-dateien-in-capacitor-plugins-verwendet
+slug: how-to-use-aar-files-in-capacitor-plugins
 title: Comment utiliser des fichiers AAR dans les plugins Capacitor
 description: >-
   Découvrez comment intégrer des fichiers AAR dans les plugins Capacitor pour

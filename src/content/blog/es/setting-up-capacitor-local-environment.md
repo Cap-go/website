@@ -1,5 +1,5 @@
 ---
-slug: einrichten-der-lokalen-capacitor-umgebung
+slug: setting-up-capacitor-local-environment
 title: Configuración del Entorno Local de Capacitor
 description: >-
   Aprenda a configurar rápidamente un entorno local de Capacitor para crear

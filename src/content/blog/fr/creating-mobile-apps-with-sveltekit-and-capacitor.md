@@ -1,5 +1,5 @@
 ---
-slug: creando-aplicaciones-moviles-con-sveltekit-y-capacitor
+slug: creating-mobile-apps-with-sveltekit-and-capacitor
 title: Création d'applications mobiles avec SvelteKit et Capacitor
 description: >-
   Apprenez à créer une application mobile en utilisant SvelteKit, Capacitor et

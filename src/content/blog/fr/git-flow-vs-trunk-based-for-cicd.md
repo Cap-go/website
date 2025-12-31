@@ -1,5 +1,5 @@
 ---
-slug: git-flow-vs-trunk-based-para-cicd
+slug: git-flow-vs-trunk-based-for-cicd
 title: Git Flow vs. Trunk-Based pour CI/CD
 description: >-
   Explorez les différences entre Git Flow et Trunk-Based Development pour des

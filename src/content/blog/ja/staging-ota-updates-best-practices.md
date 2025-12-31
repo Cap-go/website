@@ -1,5 +1,5 @@
 ---
-slug: prassi-consigliate-per-gli-aggiornamenti-ota-di-staging
+slug: staging-ota-updates-best-practices
 title: OTAアップデートのステージング：ベストプラクティス
 description: >-
   アプリのスムーズな展開とユーザー体験の向上を確保するための、効果的なテストとロールバック戦略を用いたOTAアップデート配信のベストプラクティスを学びましょう。

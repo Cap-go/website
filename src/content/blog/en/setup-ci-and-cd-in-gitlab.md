@@ -1,5 +1,5 @@
 ---
-slug: setup-ci-and-cd-gitlab
+slug: setup-ci-and-cd-in-gitlab
 title: Automatic build and release app with GitLab
 description: >-
   Create your own CI/CD pipeline with GitLab for free, deploy your Ionic

@@ -1,5 +1,5 @@
 ---
-slug: opciones-del-complemento-capacitor-para-actualizaciones-ota
+slug: capacitor-plugin-options-for-ota-updates
 title: Options du Plugin Capacitor pour les Mises à jour OTA
 description: >-
   Explorez les avantages et les options de mises à jour OTA pour les

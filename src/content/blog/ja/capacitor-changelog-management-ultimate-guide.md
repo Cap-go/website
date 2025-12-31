@@ -1,5 +1,5 @@
 ---
-slug: gestione-dei-changelog-di-capacitor-guida-completa
+slug: capacitor-changelog-management-ultimate-guide
 title: Capacitorのチェンジログ管理：完全ガイド
 description: >-
   Capacitor

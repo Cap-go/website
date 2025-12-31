@@ -1,5 +1,5 @@
 ---
-slug: manifiesto-de-privacidad-para-apps-de-capacitor-guia
+slug: privacy-manifest-for-capacitor-apps-guide
 title: 'Déclaration de confidentialité pour les applications Capacitor : Guide'
 description: >-
   Découvrez comment créer une Politique de Confidentialité pour votre

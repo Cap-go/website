@@ -1,5 +1,5 @@
 ---
-slug: aggiornamenti-in-diretta-autohospitati
+slug: self-hosted-live-updates
 title: ライブ自己ホスト型アップデート
 description: CapgoのLive Updatesの次のイテレーションとなるセルフホストLive Updatesの発表をお知らせできることを嬉しく思います！
 author: Martin Donadieu

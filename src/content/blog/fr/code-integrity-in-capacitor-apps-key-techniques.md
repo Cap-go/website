@@ -1,5 +1,5 @@
 ---
-slug: integridad-del-codigo-en-aplicaciones-capacitor-tecnicas-clave
+slug: code-integrity-in-capacitor-apps-key-techniques
 title: 'Intégrité du Code dans les Applications Capacitor : Techniques Clés'
 description: >-
   Explorez les techniques essentielles pour garantir l'intégrité du code dans

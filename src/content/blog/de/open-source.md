@@ -1,5 +1,5 @@
 ---
-slug: about-open-source
+slug: open-source
 title: 'Erfahren Sie, was Open Source ist und warum es wichtig ist!'
 description: >-
   Während Ihres Programmier-Lernprozesses sind Sie möglicherweise auf den

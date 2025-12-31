@@ -1,5 +1,5 @@
 ---
-slug: monitoreo-de-actualizaciones-ota-en-aplicaciones-capacitor
+slug: monitor-ota-updates-in-capacitor-apps
 title: Surveiller les Mises à Jour OTA dans les Applications Capacitor
 description: >-
   Apprenez à surveiller efficacement les mises à jour OTA dans les applications

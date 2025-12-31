@@ -1,5 +1,5 @@
 ---
-slug: fehlerprotokollierung-tools-fuer-capacitor-ota-updates
+slug: error-logging-tools-for-capacitor-ota-updates
 title: Herramientas de registro de errores para Actualizaciones OTA de Capacitor
 description: >-
   Explore las principales herramientas de registro de errores para las

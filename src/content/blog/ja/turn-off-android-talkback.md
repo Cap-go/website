@@ -1,5 +1,5 @@
 ---
-slug: disattiva-android-talkback
+slug: turn-off-android-talkback
 title: Androidデバイスでのトークバックの無効化と使用方法
 description: Android の視覚障害者向け組み込み型スクリーンリーダーである TalkBack の有効化とナビゲーションのステップバイステップガイド。
 author: Martin Donadieu

@@ -1,5 +1,5 @@
 ---
-slug: come-personalizzare-gli-script-di-build-con-capacitor-cli
+slug: how-to-customize-build-scripts-with-capacitor-cli
 title: Capacitor CLIでビルドスクリプトをカスタマイズする方法
 description: >-
   Capacitor

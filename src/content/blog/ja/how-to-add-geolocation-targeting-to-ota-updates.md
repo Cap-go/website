@@ -1,5 +1,5 @@
 ---
-slug: come-aggiungere-il-targeting-geolocalizzato-agli-aggiornamenti-ota
+slug: how-to-add-geolocation-targeting-to-ota-updates
 title: OTAアップデートに地理位置情報ターゲティングを追加する方法
 description: >-
   位置情報に基づいたターゲティングをOTAアップデートに実装して、位置特有の機能とタイムリーな更新によりユーザーエンゲージメントを向上させる方法をご覧ください。

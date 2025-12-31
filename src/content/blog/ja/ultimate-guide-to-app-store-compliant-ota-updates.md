@@ -1,5 +1,5 @@
 ---
-slug: guida-definitiva-agli-aggiornamenti-ota-conformi-all-app-store
+slug: ultimate-guide-to-app-store-compliant-ota-updates
 title: App Store 準拠OTAアップデートの完全ガイド
 description: >-
   App Store のガイドラインに従って Over-The-Air

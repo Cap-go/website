@@ -1,5 +1,5 @@
 ---
-slug: como-agregar-dependencias-en-plugins-de-capacitor
+slug: how-to-add-dependencies-in-capacitor-plugins
 title: Comment ajouter des dépendances aux plugins Capacitor
 description: >-
   Apprenez à optimiser la gestion des dépendances dans les plugins Capacitor à

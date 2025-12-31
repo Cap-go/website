@@ -1,5 +1,5 @@
 ---
-slug: datenschutzgesetze-der-bundesstaaten-fuer-mobile-apps-vergleich
+slug: state-privacy-laws-for-mobile-apps-comparison
 title: 'Leyes de privacidad estatales para aplicaciones móviles: Una comparación'
 description: >-
   Explore las principales diferencias en las leyes de privacidad para

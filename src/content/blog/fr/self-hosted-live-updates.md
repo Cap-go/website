@@ -1,5 +1,5 @@
 ---
-slug: selbst-gehostete-live-updates
+slug: self-hosted-live-updates
 title: Mises à jour en direct auto-hébergées
 description: >-
   Je suis ravi d'annoncer Self-hosted Live Updates, la prochaine itération de

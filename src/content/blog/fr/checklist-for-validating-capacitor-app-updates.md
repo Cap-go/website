@@ -1,5 +1,5 @@
 ---
-slug: lista-de-verificacion-para-validar-actualizaciones-de-aplicaciones-capacitor
+slug: checklist-for-validating-capacitor-app-updates
 title: Liste de vérification pour valider les mises à jour des applications Capacitor
 description: >-
   Assurez des mises à jour fluides des applications avec cette liste de contrôle

@@ -1,5 +1,5 @@
 ---
-slug: wie-chinas-datenschutzgesetze-die-app-store-einreichungen-beeinflussen
+slug: how-chinas-data-laws-impact-app-store-submissions
 title: >-
   Cómo las leyes de privacidad de datos de China afectan a las presentaciones en
   la App Store

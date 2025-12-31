@@ -1,5 +1,5 @@
 ---
-slug: about-open-source
+slug: open-source
 title: ¡Aprende sobre qué es el código abierto y por qué es importante!
 description: >-
   Durante tu viaje de programación, es posible que hayas oído el término "Código

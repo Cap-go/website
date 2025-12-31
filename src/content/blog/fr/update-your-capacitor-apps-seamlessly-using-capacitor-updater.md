@@ -1,5 +1,5 @@
 ---
-slug: actualizar-sus-aplicaciones-capacitor-sin-problemas-con-capacitor-updater
+slug: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 title: Mettez à jour vos applications Capacitor sans problème avec Capacitor-updater
 description: >-
   Salutations à la communauté Capacitor Ionic, aujourd'hui je vais vous aider à

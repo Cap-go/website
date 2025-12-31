@@ -1,5 +1,5 @@
 ---
-slug: lista-de-verificacion-leyes-privacidad-eeuu-apps-moviles
+slug: us-privacy-laws-mobile-app-checklist
 title: >-
   Lois sur la confidentialité aux États-Unis : Liste de vérification pour les
   applications mobiles

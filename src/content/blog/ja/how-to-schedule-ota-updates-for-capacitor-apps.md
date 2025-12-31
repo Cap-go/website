@@ -1,5 +1,5 @@
 ---
-slug: come-pianificare-aggiornamenti-ota-per-app-capacitor
+slug: how-to-schedule-ota-updates-for-capacitor-apps
 title: Capacitor アプリの OTA アップデートを計画する方法
 description: アプリのバグ修正を迅速に行い、ユーザー体験を向上させるための効果的なOTAアップデートの計画方法を学びましょう。
 author: Martin Donadieu

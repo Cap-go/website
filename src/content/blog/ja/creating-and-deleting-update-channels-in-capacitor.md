@@ -1,5 +1,5 @@
 ---
-slug: creazione-ed-eliminazione-dei-canali-di-aggiornamento-in-capacitor
+slug: creating-and-deleting-update-channels-in-capacitor
 title: Capacitor での更新チャンネルの作成と削除
 description: Capacitorでアップデートチャンネルを作成、管理、削除する方法を学び、アプリのアップデートを簡素化し、ユーザーエクスペリエンスを向上させましょう。
 author: Martin Donadieu

@@ -1,5 +1,5 @@
 ---
-slug: gestion-de-dependencias-en-proyectos-capacitor
+slug: managing-dependencies-in-capacitor-projects
 title: Gestion des Dépendances dans les Projets Capacitor
 description: >-
   Découvrez des stratégies essentielles pour gérer les dépendances dans les

@@ -1,5 +1,5 @@
 ---
-slug: mejores-practicas-de-rendimiento-para-actualizaciones-ota-en-capacitor
+slug: capacitor-ota-updates-best-practices-for-performance
 title: 'Mises à jour OTA de Capacitor : Meilleures pratiques pour les performances'
 description: >-
   Optimisez les mises à jour OTA dans les applications Capacitor pour améliorer

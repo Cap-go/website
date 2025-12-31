@@ -1,5 +1,5 @@
 ---
-slug: crea-app-mobile-react-con-capacitor
+slug: create-react-mobile-apps-with-capacitor
 title: モバイルアプリをReactとCapacitorで構築する
 description: >-
   Reactとキャパシター（Capacitor）を使用してモバイルアプリを作成し、Konsta

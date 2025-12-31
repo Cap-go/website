@@ -1,5 +1,5 @@
 ---
-slug: aggiornamenti-capacitor-ota-vs-metodi-di-test-tradizionali
+slug: capacitor-ota-updates-vs-traditional-testing-methods
 title: CapacitorのOTAアップデート対従来のテスト方法
 description: Capacitor の OTA アップデートと従来のテスト方法の違いを探り、アプリ開発における固有のメリットとデメリットを明らかにします。
 author: Martin Donadieu

@@ -1,5 +1,5 @@
 ---
-slug: wie-rbac-ota-updates-in-capacitor-apps-absichert
+slug: how-rbac-secures-ota-updates-in-capacitor-apps
 title: Cómo RBAC asegura las actualizaciones OTA en aplicaciones Capacitor
 description: >-
   Descubra cómo el control de acceso basado en roles mejora la seguridad de las

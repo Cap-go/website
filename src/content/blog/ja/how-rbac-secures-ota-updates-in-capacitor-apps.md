@@ -1,5 +1,5 @@
 ---
-slug: come-rbac-protegge-gli-aggiornamenti-ota-nelle-app-capacitor
+slug: how-rbac-secures-ota-updates-in-capacitor-apps
 title: Capacitorアプリにおける、RBACがOTAアップデートをどのように保護するか
 description: >-
   モバイルアプリのOTAアップデートにおいて、ロールベースのアクセス制御がセキュリティを向上させ、脆弱性から保護し、コンプライアンスを確保する方法について学びましょう。

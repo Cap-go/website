@@ -1,5 +1,5 @@
 ---
-slug: come-funziona-la-versione-in-capgo
+slug: how-version-work-in-capgo
 title: Capgoでのバージョニングの仕組み
 description: >-
   Capacitor アプリのバージョン管理方法を Capgo でどのように行うかを理解し、最大限に活用しましょう。major、minor、patch

@@ -1,5 +1,5 @@
 ---
-slug: wie-man-semantic-versioning-mit-capgo-ota-updates-verwendet
+slug: how-to-use-semantic-versioning-with-capgo-ota-updates
 title: Cómo usar el versionado semántico con Capgo OTA Updates
 description: >-
   Aprende cómo optimizar las actualizaciones de aplicaciones y el control de

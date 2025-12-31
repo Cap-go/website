@@ -1,5 +1,5 @@
 ---
-slug: capgo-per-aggiornamenti-ota-sicuri-app-store
+slug: capgo-for-app-store-safe-ota-updates
 title: CapgoによるApp Store向けの安全なOTAアップデート
 description: >-
   アプリストアの遅延なしにアプリのリアルタイムで安全な更新を可能にするプラットフォームの仕組みを探り、開発効率とコンプライアンスを向上させる方法について説明します。

@@ -1,5 +1,5 @@
 ---
-slug: capacitor-live-updates-rimanere-conformi-alle-regole-di-apple
+slug: capacitor-live-updates-staying-compliant-with-apple
 title: 'Capacitor Live Updates: Apple のガイドラインに準拠する'
 description: モバイルアプリのアップデートを効率的に実装し、厳格なガイドラインに従って拒否を防ぐ方法を学びましょう。
 author: Martin Donadieu

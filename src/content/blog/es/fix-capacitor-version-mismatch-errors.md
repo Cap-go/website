@@ -1,5 +1,5 @@
 ---
-slug: korrigiere-capacitor-versionskonflikte
+slug: fix-capacitor-version-mismatch-errors
 title: Corregir conflictos de versiones de Capacitor
 description: >-
   Aprenda cómo resolver rápidamente los conflictos de versiones en las

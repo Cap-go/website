@@ -1,5 +1,5 @@
 ---
-slug: release-of-a-brand-new-capacitor-social-login
+slug: capacitor-social-login-release
 title: 브랜드 뉴 Capacitor 소셜 로그인 플러그인 출시
 description: >-
   Capacitor 소셜 로그인 플러그인은 iOS, Android 및 웹에서 Google, Facebook 및 Apple로 로그인할 수 있게

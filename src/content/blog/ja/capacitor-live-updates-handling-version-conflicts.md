@@ -1,5 +1,5 @@
 ---
-slug: gestione-dei-conflitti-di-versione-in-capacitor-live-updates
+slug: capacitor-live-updates-handling-version-conflicts
 title: Capacitorのライブアップデート：バージョンの競合管理
 description: >-
   アプリの安定したパフォーマンスとスムーズなユーザーエクスペリエンスを確保するため、リアルタイムアップデートにおけるバージョンの競合を管理する方法を学びましょう。

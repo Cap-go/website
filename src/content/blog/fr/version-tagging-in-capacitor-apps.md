@@ -1,5 +1,5 @@
 ---
-slug: etiquetado-de-versiones-en-aplicaciones-capacitor
+slug: version-tagging-in-capacitor-apps
 title: Identification des versions dans les applications Capacitor
 description: >-
   Apprenez les concepts de base du contrôle de version dans les applications

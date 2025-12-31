@@ -1,5 +1,5 @@
 ---
-slug: como-los-ota-updates-afectan-la-seguridad-de-la-app-store
+slug: how-ota-updates-affect-app-store-security
 title: Comment les mises à jour OTA affectent la sécurité de l'App Store
 description: >-
   Les mises à jour OTA simplifient les améliorations des applications, mais

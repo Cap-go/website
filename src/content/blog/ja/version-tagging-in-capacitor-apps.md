@@ -1,5 +1,5 @@
 ---
-slug: versioning-delle-app-in-capacitor
+slug: version-tagging-in-capacitor-apps
 title: Capacitor アプリのバージョンタグの割り当て
 description: Capacitorアプリのバージョンタギングの基本要素を学び、アップデート、同期、自動化のベストプラクティスを理解しましょう。
 author: Martin Donadieu

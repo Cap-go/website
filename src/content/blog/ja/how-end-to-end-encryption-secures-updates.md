@@ -1,5 +1,5 @@
 ---
-slug: come-la-crittografia-end-to-end-protegge-gli-aggiornamenti
+slug: how-end-to-end-encryption-secures-updates
 title: エンドツーエンド暗号化によるアップデートの保護について
 description: エンドツーエンドの暗号化がOTAアップデートをどのように保護し、アプリの整合性とユーザーの信頼を確保し、不正アクセスや改ざんを防止するかを探ります。
 author: Martin Donadieu

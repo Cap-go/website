@@ -1,5 +1,5 @@
 ---
-slug: das-performance-monitoring-in-capacitor-einrichten
+slug: set-up-performance-monitoring-in-capacitor
 title: Configuración del monitoreo de rendimiento en Capacitor
 description: >-
   Aprenda cómo configurar el monitoreo de rendimiento en su aplicación usando

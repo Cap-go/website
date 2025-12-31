@@ -1,5 +1,5 @@
 ---
-slug: git-flow-contro-trunk-based-per-cicd
+slug: git-flow-vs-trunk-based-for-cicd
 title: Git フローと CI/CD のためのトランクベース開発
 description: CI/CD ワークフローのための Git Flow と Trunk-Based Development の違いを探り、それぞれの長所と短所を明らかにします。
 author: Martin Donadieu

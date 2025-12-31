@@ -1,5 +1,5 @@
 ---
-slug: guida-approvazione-app-store-aggiornamenti-ota-capacitor
+slug: capacitor-ota-updates-app-store-approval-guide
 title: Capacitor OTAアップデート：アプリストア承認ガイド
 description: >-
   App Store と Play Store のガイドラインに従って、Capacitor アプリの OTA

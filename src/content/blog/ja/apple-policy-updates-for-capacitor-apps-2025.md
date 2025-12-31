@@ -1,5 +1,5 @@
 ---
-slug: aggiornamenti-policy-apple-per-app-capacitor-2025
+slug: apple-policy-updates-for-capacitor-apps-2025
 title: Apple のアプリポリシー 2025 年の Capacitor アップデート
 description: >-
   Appleの2025年のApp Store

@@ -1,5 +1,5 @@
 ---
-slug: about-open-source
+slug: open-source
 title: 오픈 소스가 무엇이며 왜 중요한지 알아보세요!
 description: 프로그래밍을 공부하다 보면 "오픈 소스"라는 용어를 들어보셨을 것입니다. 하지만 이것이 실제로 의미하는 것은 무엇일까요?
 author: Anik Dhabal Babu

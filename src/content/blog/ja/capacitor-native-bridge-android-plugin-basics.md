@@ -1,5 +1,5 @@
 ---
-slug: plugin-base-native-bridge-android-di-capacitor
+slug: capacitor-native-bridge-android-plugin-basics
 title: Capacitorのネイティブブリッジ：Androidプラグインの基本概念
 description: >-
   Capacitor Native

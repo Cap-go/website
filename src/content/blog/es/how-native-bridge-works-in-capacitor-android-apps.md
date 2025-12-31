@@ -1,5 +1,5 @@
 ---
-slug: wie-die-native-bridge-in-capacitor-android-apps-funktioniert
+slug: how-native-bridge-works-in-capacitor-android-apps
 title: Así funciona el Native Bridge en aplicaciones Android de Capacitor
 description: >-
   Aprende cómo el puente nativo en aplicaciones Android mejora la comunicación

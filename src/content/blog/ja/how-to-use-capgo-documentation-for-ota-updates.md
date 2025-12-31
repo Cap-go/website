@@ -1,5 +1,5 @@
 ---
-slug: come-utilizzare-la-documentazione-di-capgo-per-gli-aggiornamenti-ota
+slug: how-to-use-capgo-documentation-for-ota-updates
 title: Capgoのドキュメントを使用したOTAアップデートの方法
 description: >-
   Capgoの包括的なドキュメントとステップバイステップガイドで、CapacitorアプリへのセキュアなOver-the-Airアップデートの実装方法を学びましょう。

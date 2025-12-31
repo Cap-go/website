@@ -1,5 +1,5 @@
 ---
-slug: wie-capacitor-web-und-nativen-code-verbindet
+slug: how-capacitor-bridges-web-and-native-code
 title: Cómo Capacitor conecta código web y nativo
 description: >-
   Descubra cómo un puente nativo permite una comunicación fluida entre el código

@@ -1,5 +1,5 @@
 ---
-slug: come-aggirare-controllo-app-store
+slug: how-to-bypass-app-store-review
 title: App Store のレビュープロセスなしで Capacitor JS アプリをアップデートする方法
 description: >-
   Capgoの機能を使用して、iOSのIonicアプリにリアルタイムでコードアップデートを配信し、かつAppleのガイドラインに完全に準拠するにはどうすればよいですか？

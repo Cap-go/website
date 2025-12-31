@@ -1,5 +1,5 @@
 ---
-slug: wie-sich-die-durchsetzung-des-ccpa-auf-apps-auswirkt
+slug: how-ccpa-enforcement-impacts-apps
 title: Cómo la aplicación de la CCPA afecta a las aplicaciones
 description: >-
   El CCPA está cambiando la forma en que las aplicaciones móviles gestionan los

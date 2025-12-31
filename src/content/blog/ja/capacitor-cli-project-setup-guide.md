@@ -1,5 +1,5 @@
 ---
-slug: guida-configurazione-progetto-capacitor-cli
+slug: capacitor-cli-project-setup-guide
 title: Capacitor CLIを使用したプロジェクト設定ガイド
 description: Capacitor CLIを使用して、Webテクノロジーを使用してネイティブのiOSおよびAndroidアプリを作成する方法を、簡単な手順で説明します。
 author: Martin Donadieu

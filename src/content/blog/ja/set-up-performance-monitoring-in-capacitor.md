@@ -1,5 +1,5 @@
 ---
-slug: impostazione-del-monitoraggio-delle-prestazioni-in-capacitor
+slug: set-up-performance-monitoring-in-capacitor
 title: Capacitorでのパフォーマンスモニタリングの設定
 description: Firebase と Sentry を使用してアプリのパフォーマンスモニタリングを設定し、効率性とユーザー満足度を向上させる方法を学びましょう。
 author: Martin Donadieu

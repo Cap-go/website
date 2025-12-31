@@ -1,5 +1,5 @@
 ---
-slug: so-funktionieren-die-gestaffelten-google-play-rollouts
+slug: google-play-staged-rollouts-how-it-works
 title: 'Introduction pas à pas à Google Play : Comment ça marche'
 description: >-
   Découvrez comment gérer efficacement les mises à jour d'applications avec des

@@ -1,5 +1,5 @@
 ---
-slug: perche-la-gestione-del-consenso-e-importante-per-la-conformita-delle-app
+slug: why-consent-management-matters-for-app-compliance
 title: アプリのコンプライアンスにおいて同意管理が重要な理由
 description: >-
   アプリのプライバシー法への準拠に関して、同意管理を理解することは不可欠です。ユーザーの同意を管理し、コンプライアンスを維持するための効果的な戦略を学びましょう。
