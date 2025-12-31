@@ -4,13 +4,13 @@ import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import tailwindcss from '@tailwindcss/vite'
 import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
 import { defineConfig, envField } from 'astro/config'
+import { glob } from 'glob'
+import { readFileSync, statSync } from 'node:fs'
+import os from 'node:os'
 import starlightImageZoom from 'starlight-image-zoom'
 import starlightLlmsTxt from 'starlight-llms-txt'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import config from './configs.json'
-import { glob } from 'glob'
-import { readFileSync, statSync } from 'node:fs'
-import os from 'node:os'
 import { defaultLocale, localeNames, locales } from './src/services/locale'
 
 // Get CPU count for optimal parallelization
@@ -43,10 +43,7 @@ function getPageLastModDates() {
   for (const file of pageFiles) {
     const stat = statSync(file)
     // Convert file path to URL path
-    let urlPath = file
-      .replace('src/pages', '')
-      .replace('/index.astro', '/')
-      .replace('.astro', '/')
+    let urlPath = file.replace('src/pages', '').replace('/index.astro', '/').replace('.astro', '/')
     if (!urlPath.endsWith('/')) urlPath += '/'
     if (!lastModMap.has(urlPath)) {
       lastModMap.set(urlPath, stat.mtime)
@@ -115,11 +112,11 @@ export default defineConfig({
   },
   redirects: {
     '/docs/getting-started/': {
-      status: 302,
+      status: 301,
       destination: '/docs/plugins/updater/cloud-mode/getting-started/',
     },
     '/docs/plugins/updater/cloud-mode/getting-started/': {
-      status: 302,
+      status: 301,
       destination: '/docs/getting-started/quickstart/',
     },
   },
@@ -177,7 +174,8 @@ export default defineConfig({
       disable404Route: true,
       logo: {
         src: '~public/capgo_logo.webp',
-        replacesTitle: true
+        alt: 'Capgo - Live Updates for Capacitor Apps',
+        replacesTitle: true,
       },
       markdown: { headingLinks: true },
       customCss: ['./src/css/docs.css'],

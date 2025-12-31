@@ -32,7 +32,7 @@ const content = {
       <div class="grid overflow-hidden relative z-10 bg-white rounded-lg shadow-xl md:grid-cols-2">
         <div class="p-6 space-y-6">
           <div>
-            <h2 class="text-4xl font-bold text-gray-900">{m.register_title({}, { locale: Astro.locals.locale })}</h2>
+            <h1 class="text-4xl font-bold text-gray-900">{m.register_title({}, { locale: Astro.locals.locale })}</h1>
             <p class="text-sm text-gray-500">
               {m.already_have_account({}, { locale: Astro.locals.locale })}
               <a href="https://console.capgo.app/login/" target="_blank" class="text-gray-200 hover:underline">{m.sign_in({}, { locale: Astro.locals.locale })}</a>

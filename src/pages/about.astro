@@ -5,7 +5,7 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
 import { createLdJsonGraph, createCapgoOrganization, createPersonLdJson } from '@/lib/ldJson'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.about_capgo({}, { locale: Astro.locals.locale })].join(' | ')
-const description = m.about_capgo({}, { locale: Astro.locals.locale })
+const description = m.about_capgo_description({}, { locale: Astro.locals.locale })
 
 // Create enhanced organization schema with founder details
 const organization = createCapgoOrganization(Astro.locals.runtimeConfig.public)
@@ -17,7 +17,11 @@ organization.founder = createPersonLdJson('Martin Donadieu', 'https://x.com/mart
 const enhancedOrg = {
   ...organization,
   foundingDate: '2022-12-01',
-  numberOfEmployees: '1-10',
+  numberOfEmployees: {
+    '@type': 'QuantitativeValue',
+    minValue: 1,
+    maxValue: 10,
+  },
   location: {
     '@type': 'Place',
     name: 'Madeira, Portugal',
@@ -28,9 +32,6 @@ const enhancedOrg = {
     },
   },
   knowsAbout: ['Capacitor Development', 'Mobile App Updates', 'Over-the-Air Updates', 'JavaScript', 'TypeScript', 'iOS Development', 'Android Development'],
-  slogan: 'Instant updates for Capacitor apps',
-  mission: 'To empower developers with instant, reliable over-the-air updates for Capacitor applications, making app deployment seamless and efficient.',
-  awards: ['Largest ecosystem of open-source plugins for Capacitor'],
 }
 
 // Create comprehensive LD+JSON for about page
@@ -84,7 +85,7 @@ content.ldJSON['@graph'].push(organization.founder)
     </div>
     <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="mx-auto max-w-xl text-center xl:max-w-3xl">
-        <h2 class="text-3xl font-bold text-white sm:text-4xl xl:text-5xl font-pj">{m.about_capgo({}, { locale: Astro.locals.locale })}</h2>
+        <h1 class="text-3xl font-bold text-white sm:text-4xl xl:text-5xl font-pj">{m.about_capgo({}, { locale: Astro.locals.locale })}</h1>
         <p class="mx-auto mt-4 max-w-xl text-base leading-7 text-gray-100 sm:mt-8 font-pj">{m.your_live_update_solution_for_capacitor_apps({}, { locale: Astro.locals.locale })}</p>
       </div>
     </div>

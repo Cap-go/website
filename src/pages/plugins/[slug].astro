@@ -118,7 +118,7 @@ const { slug: id } = Astro.params
 
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
 
-if (plugin.title) content['title'] = plugin.title
+if (plugin.title) content['title'] = `${plugin.title} - Capacitor Plugin | Capgo`
 if (plugin.description) content['description'] = plugin.description
 
 // Create improved ldJSON using helper function for SoftwareApplication

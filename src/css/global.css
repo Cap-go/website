@@ -223,6 +223,12 @@ body,
   }
 }
 
+/* Hide duplicate H1 in blog/prose content - titles are already rendered in page templates */
+.blog.prose > h1:first-child:not(:where(.not-content *)),
+.prose.prose-invert > h1:first-child:not(:where(.not-content *)) {
+  display: none;
+}
+
 .blog.prose table:not(:where(.not-content *)) {
   display: block;
   overflow: auto;

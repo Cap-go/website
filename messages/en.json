@@ -14,6 +14,7 @@
   "aasa_tester": "AASA Tester",
   "about": "About",
   "about_capgo": "About Capgo",
+  "about_capgo_description": "Learn about Capgo, the live update solution for Capacitor apps built by Martin Donadieu. Delivering instant OTA updates to mobile apps since 2022.",
   "access_control": "Capgo inherits secure access control and authentication from the Supabase and Cloudflare platforms it is built on.",
   "access_maintain_enterprise_plugins": "Access and maintain our enterprise-grade Capacitor plugins with priority support and dedicated maintenance.",
   "ach_available_for_enterprise_annual_payments": "ACH is available only for annual payments from Enterprise plan customers. Contact us for more information.",
@@ -1035,6 +1036,7 @@
   "download_time_globally": "Download 5MB bundle from our global CDN",
   "downloads": "Downloads",
   "dp": "Data Policy",
+  "dp_description": "Capgo Data Processing Agreement and GDPR compliance documentation for enterprise customers using our live update platform.",
   "dpa": "Data Protection Agreement",
   "dpa_contact_1": "If you have any questions about this Privacy Policy, You can contact us:",
   "dpa_contact_2": "By visiting this page on the website:",
@@ -2053,6 +2055,7 @@
   "read_our_disclaimer": "Read our disclaimer",
   "read_our_eula": "Read our End-User License Agreement",
   "read_our_privacy_policy": "Read our Privacy Policy",
+  "read_our_privacy_policy_description": "Capgo Privacy Policy - Learn how we protect your data and respect user privacy in our live update service for Capacitor apps.",
   "read_our_return_policy": "Read our Return Policy",
   "read_our_security_policy": "We invite you to thoroughly review our comprehensive Security Policy, which outlines the measures we take to protect your data and ensure the integrity of our services.",
   "read_our_sla_policy": "We invite you to read our comprehensive Service Level Agreement (SLA) Policy, which outlines the standards and commitments we adhere to in delivering our services.",
@@ -2746,6 +2749,7 @@
   "support_policy_sla_title": "Service Level Agreement",
   "support_policy_team_participation": "Note that Capgo team members may participate in community channels at their discretion, but there's no guarantee of response unless submitted through official channels.",
   "support_policy_title": "Capgo Customer Support",
+  "support_policy_description": "Capgo customer support policy and response times. Learn about our support channels, SLA, and how we help you succeed with live updates.",
   "support_policy_troubleshooting_1": "Providing workarounds or solutions for known issues",
   "support_policy_troubleshooting_2": "Answering general how-to questions and directing to documentation",
   "support_policy_troubleshooting_3": "Troubleshooting supported features (Live Updates, App Management, Analytics) showing unexpected behavior on Capgo, independent of the user's application code",
@@ -3147,7 +3151,6 @@
   "youre_in_good_company": "You're in good company.",
   "zero_trust_security": "Zero-Trust Security",
   "zero_vendor_lockin_pay_provider_directly": "zero vendor lock-in, pay your provider directly.",
-
 
   "solutions_enterprise_title": "Enterprise Live Updates",
   "solutions_enterprise_description": "Ship updates across multiple apps without breaking production. Built for enterprise teams.",
@@ -3643,8 +3646,7 @@
   "solutions_healthcare_short": "Healthcare",
   "solutions_qsr_short": "Quick Service",
   "solutions_by_team": "By Team",
-  "solutions_by_industry": "By Industry"
-,
+  "solutions_by_industry": "By Industry",
   "what_does_build_time_refer_to": "What does \"build time\" refer to in the plans?",
   "build_time_explanation": "Build time refers to the time Capgo spends building your native app in the cloud using Capgo Build, our cloud-based solution for iOS and Android. It allows you to build your app from any computer without needing a Mac, simplifies CI/CD workflows, and enables teammates who are not familiar with native builds to generate builds reliably. Using the Capgo CLI, you can trigger builds in a simple and reproducible way, often faster and easier than managing your own CI/CD setup.",
   "soc2_what_does_it_mean": "SOC 2: what does it mean?",
@@ -3654,4 +3656,3 @@
   "can_i_use_soc2_with_other_plans": "Can I use SOC 2 compliance with Solo, Maker, or Team plans?",
   "soc2_enterprise_only": "For now, it's only available on the Enterprise plan."
 }
-

@@ -4,7 +4,7 @@ import * as m from '@/paraglide/messages'
 import { defaultLocale } from '@/services/locale'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.privacy_policy({}, { locale: Astro.locals.locale })].join(' | ')
-const description = m.read_our_privacy_policy({}, { locale: Astro.locals.locale })
+const description = m.read_our_privacy_policy_description({}, { locale: Astro.locals.locale })
 
 const content = { title, description }
 
