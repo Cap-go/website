@@ -1,7 +1,7 @@
 ---
 slug: capgo-2025-year-in-review
-title: "Capgo 2025 Year in Review: From 20 to 79 Plugins and Enterprise-Ready"
-description: 2025 was transformational for Capgo - 59 new Capacitor plugins, enterprise security features, and global infrastructure. Here's how we became the go-to platform for Capacitor development.
+title: "Capgo 2025 Year in Review: From 20 to 78 Plugins and Enterprise-Ready"
+description: 2025 was transformational for Capgo - 58 new Capacitor plugins, enterprise security features, and global infrastructure. Here's how we became the go-to platform for Capacitor development.
 author: Michael (WcaleNieWolny)
 author_image_url: 'https://avatars.githubusercontent.com/u/50914789?v=4'
 author_url: 'https://github.com/WcaleNieWolny/WcaleNieWolny'
@@ -18,7 +18,7 @@ next_blog: ''
 
 What a year. As 2025 comes to a close, we're looking back at twelve months that completely transformed Capgo from a solid OTA update platform into the comprehensive Capacitor ecosystem you rely on today.
 
-The numbers tell part of the story: **59 new Capacitor plugins** created, growing our catalog from 20 to 79 plugins (that's 295% growth). Enterprise security features that make Capgo ready for the most demanding organizations. A global infrastructure spanning 7+ regions with automatic failover.
+The numbers tell part of the story: **58 new Capacitor plugins** created, growing our catalog from 20 to 78 plugins (that's 290% growth). Enterprise security features that make Capgo ready for the most demanding organizations. A global infrastructure spanning 7+ regions with automatic failover.
 
 But the real story is what these changes mean for you: faster development, better security, and plugins for nearly every use case you can imagine.
 
@@ -39,7 +39,6 @@ The foundation was set. Little did we know what was coming.
 **April through June** saw the plugin ecosystem start to expand. Six new plugins joined the catalog, each solving real problems developers face:
 
 - **capacitor-llm** (June) - Run large language models locally on iOS and Android with Apple Intelligence support
-- **capacitor-ffmpeg** (June) - Process videos and media directly on-device
 - **capacitor-jw-player** (April) - Native video playback with JW Player SDK
 - **capacitor-appinsights** (June) - Azure App Insights integration
 - **capacitor-android-usagestatsmanager** (April) - Track app usage stats natively on Android
@@ -47,7 +46,7 @@ The foundation was set. Little did we know what was coming.
 
 The AI wave was hitting mobile, and we were ready with local LLM support. Video processing moved to the edge. Developer tooling got smarter.
 
-**Q2 Plugin Count:** 6 new plugins
+**Q2 Plugin Count:** 5 new plugins
 
 ## Q3: The Acceleration
 
@@ -261,6 +260,21 @@ Jordan architected and built our complete credit-based billing infrastructure. C
 
 **Enhanced Channel Management** (December 31)
 Channel ID and device ID now included in all request payloads. Better tracking, better analytics, easier debugging when issues arise.
+
+### Developer Infrastructure Revolution
+
+**Capgo Cloud Build** (November 19)
+We launched a game-changing feature: **build native apps directly in the cloud without Xcode or Android Studio**. Built on 3 years of internal expertise, Capgo Cloud Build lets you run a single CLI command to build iOS and Android apps on dedicated infrastructure.
+
+Key capabilities:
+- **One-command builds** - No local Xcode (30+ GB) or Android Studio required
+- **Cross-platform builds** - Build iOS apps from Linux/Windows, eliminating the Mac requirement
+- **Battle-tested infrastructure** - Using the same system we've relied on for thousands of internal builds
+- **Real-time log streaming** - Watch your builds happen with instant terminal feedback
+- **Direct App Store submission** - Build and submit to TestFlight or Play Store in one step
+- **Secure credential handling** - Credentials stored locally, never on our servers
+
+This is like Expo EAS Build, but specifically optimized for Capacitor. After years of building apps for clients, we made our proven infrastructure available to everyone.
 
 ### Infrastructure & Reliability
 
