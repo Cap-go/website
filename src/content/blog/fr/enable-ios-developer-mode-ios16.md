@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-11-27T00:00:00.000Z
-updated_at: 2025-12-31T17:43:28.000Z
+updated_at: 2026-01-01T17:10:20.000Z
 head_image: /enable-ios-developer-mode-ios16.webp
 head_image_alt: Activation du mode développeur iOS sur iPhone
 keywords: >-

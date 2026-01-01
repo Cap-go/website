@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-21T00:00:00.000Z
-updated_at: 2026-01-01T14:43:03.000Z
+updated_at: 2026-01-01T17:10:20.000Z
 head_image: /vue_angular_react.webp
 head_image_alt: Image of a person working on a computer
 keywords: Vue, Angular, React, offline screen, network API, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates

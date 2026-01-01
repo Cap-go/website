@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-02-21T00:00:00.000Z
-updated_at: 2025-12-31T17:43:28.000Z
+updated_at: 2026-01-01T17:10:20.000Z
 head_image: /next_capgo.webp
 head_image_alt: Next.js 15 and Capacitor illustration
 keywords: Next.js 15, Capacitor, Tailwind CSS 4, Konsta UI 5, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
