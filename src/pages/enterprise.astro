@@ -13,11 +13,16 @@ const locale = Astro.locals.locale
 const title = [Astro.locals.runtimeConfig.public.brand, 'Enterprise'].join(' | ')
 const description = 'Enterprise-grade live updates for Capacitor apps. Built for teams that need advanced security, compliance, and dedicated support at scale.'
 
+// Build absolute URLs for structured data (Schema.org requires absolute URLs)
+const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
+const enterpriseUrl = `${baseUrl}${getRelativeLocaleUrl(Astro.locals.locale, 'enterprise/')}`
+const homeUrl = `${baseUrl}${getRelativeLocaleUrl(Astro.locals.locale, '/')}`
+
 // Create enterprise service schema
 const enterpriseService = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: 'Capgo Enterprise - Professional Live Updates',
   description: 'Enterprise-grade live update platform for Capacitor applications with advanced security, compliance features, and dedicated support for large-scale deployments.',
-  url: getRelativeLocaleUrl(Astro.locals.locale, 'enterprise/'),
+  url: enterpriseUrl,
   serviceType: 'Enterprise Software Service',
   areaServed: ['Worldwide'],
 })
@@ -26,7 +31,7 @@ const enterpriseService = createServiceLdJson(Astro.locals.runtimeConfig.public,
 const enterpriseProduct = createProductLdJson(Astro.locals.runtimeConfig.public, {
   name: 'Capgo Enterprise Plan',
   description: 'Complete enterprise solution with advanced security, compliance, dedicated support, and unlimited scalability for professional teams.',
-  url: getRelativeLocaleUrl(Astro.locals.locale, 'enterprise/'),
+  url: enterpriseUrl,
   sku: 'capgo-enterprise',
   offers: [
     {
@@ -91,18 +96,18 @@ const enhancedEnterpriseProduct = {
 const content = {
   title,
   description,
-  image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png`,
+  image: `${baseUrl}/capgo_social.png`,
   ldJSON: createLdJsonGraph(Astro.locals.runtimeConfig.public, enhancedEnterpriseProduct, {
     includeOrganization: true,
     includeBreadcrumbs: true,
     breadcrumbs: [
       {
         name: 'Home',
-        url: getRelativeLocaleUrl(Astro.locals.locale, '/'),
+        url: homeUrl,
       },
       {
         name: 'Enterprise',
-        url: getRelativeLocaleUrl(Astro.locals.locale, 'enterprise/'),
+        url: enterpriseUrl,
       },
     ],
   }),

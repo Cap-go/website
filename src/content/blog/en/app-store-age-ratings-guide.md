@@ -1,6 +1,6 @@
 ---
 slug: app-store-age-ratings-guide
-title: The Complete Guide to App Store Age Ratings for iOS and Android in 2025
+title: App Store Age Ratings Guide for iOS and Android
 description: A comprehensive guide to understanding and setting age ratings for your mobile apps on both the Apple App Store and Google Play Store, including the new 2025 iOS rating system updates.
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4

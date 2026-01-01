@@ -1,6 +1,6 @@
 ---
 slug: do-google-allow-live-updates
-title: Do Google allow to send live update to Apps without the App Store review.
+title: Does Google Allow Live Updates Without Store Review?
 description: >-
   How can you push code updates to production Android apps and be fully
   compliant with Google’s guidelines? 

@@ -1,6 +1,6 @@
 ---
 slug: introducing-end-to-end-security-to-capacitor-updater-with-code-signing
-title: Introducing end to end encryption to capacitor-updater with code signing
+title: E2E Encryption for Capacitor Updater via Code Signing
 description: >-
   Using RSA + AES cryptography to encrypt updates, designed for the enterprise
   and high security apps

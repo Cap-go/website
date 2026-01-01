@@ -8,7 +8,7 @@ sidebar:
 
 ## What can I do with the api keys?
 
-An API key can be regenerated, or removed or a new one can be added.
+An API key can be regenerated, or removed or a new one can be added. You can also set expiration dates and create encrypted keys for enhanced security.
 
 ## How to see all api keys?
 
@@ -27,6 +27,41 @@ and then select the permissions you want to give to the new API key. You can sel
  - All - The API key will be able to do everything
 
 <figure><img src="/apikeys-select-perm.webp" alt="select perm" /><figcaption></figcaption></figure>
+
+## Encrypted API Keys
+
+When creating a new API key, you can choose to create an **encrypted key**. Encrypted keys provide enhanced security:
+
+- The key is hashed using SHA-256 before being stored in the database
+- **The plain key is only shown once** when you create it - make sure to copy and save it immediately
+- After creation, the key cannot be retrieved or viewed again
+- If you lose an encrypted key, you must create a new one
+
+This is the recommended approach for production environments as it ensures that even if the database is compromised, your actual API keys remain secure.
+
+## API Key Expiration
+
+You can set an **expiration date** for your API keys. This is a security best practice that limits the window of exposure if a key is compromised.
+
+### Setting an expiration date
+
+When creating or editing an API key, you can optionally set an expiration date. Once the expiration date passes:
+
+- The API key will no longer work for authentication
+- Any requests using the expired key will be rejected
+- Expired keys are automatically cleaned up after 30 days
+
+### Organization policies
+
+Organizations can enforce expiration policies:
+
+- **Require expiration**: All API keys must have an expiration date
+- **Maximum expiration period**: Limit how far in the future an expiration date can be set (e.g., maximum 90 days)
+- **Enforce secure API keys**: Require all new API keys to be created as encrypted/hashed keys
+
+If your organization has these policies enabled, you will be required to set an appropriate expiration date when creating new keys.
+
+For more information on configuring organization-wide API key policies, see [Organization Security](/docs/webapp/organization-security/).
 
 ## How to remove an api key?
 

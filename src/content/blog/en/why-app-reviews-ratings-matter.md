@@ -1,6 +1,6 @@
 ---
 slug: why-app-reviews-ratings-matter
-title: Why App Reviews and Ratings Matter - Complete Guide to Boosting Your App's Success
+title: "Why App Reviews and Ratings Matter: Success Guide"
 description: Discover why app reviews and ratings are critical for your app's success, how they impact rankings and downloads, and proven strategies to get more positive reviews using native in-app prompts.
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4

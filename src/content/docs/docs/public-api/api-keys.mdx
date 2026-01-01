@@ -23,13 +23,38 @@ Please take a look at the following diagram to better understand how API keys wo
 
 You can create subkeys with limited access to specific apps or organizations. This is useful for restricting access to certain resources while still allowing operations on others. Use the `limited_to_apps` and `limited_to_orgs` parameters when creating a key to define these restrictions.
 
+## Encrypted Keys
+
+You can create **encrypted (hashed) API keys** for enhanced security. When creating an encrypted key:
+
+- The key is hashed using SHA-256 before being stored in the database
+- **The plain key is returned only once** in the creation response - save it immediately
+- The key cannot be retrieved or viewed again after creation
+- If you lose an encrypted key, you must create a new one
+
+Use the `hashed: true` parameter when creating a key to enable encryption. This is the recommended approach for production environments.
+
+## Key Expiration
+
+API keys can have an **expiration date** to limit the window of exposure if a key is compromised. When an expiration date is set:
+
+- The key stops working after the specified date and time
+- Requests using expired keys will be rejected with an error
+- Expired keys are automatically cleaned up after 30 days
+
+Organizations can enforce expiration policies:
+- **Require expiration**: All API keys must have an expiration date
+- **Maximum expiration period**: Limit how far in the future an expiration date can be set
+
 ## Security Best Practices
 
 1. **Principle of Least Privilege**: Always use the most restrictive mode that still allows your integration to function
-2. **Regular Rotation**: Rotate your API keys periodically
-3. **Secure Storage**: Store API keys securely and never commit them to version control
-4. **Monitoring**: Monitor API key usage and revoke any compromised keys immediately
-5. **Limited Subkeys**: Use subkeys with limited rights for specific integrations to minimize risk
+2. **Use Encrypted Keys**: Create hashed keys for production to protect against database breaches
+3. **Set Expiration Dates**: Use expiration dates to limit the lifetime of your keys
+4. **Regular Rotation**: Rotate your API keys periodically
+5. **Secure Storage**: Store API keys securely and never commit them to version control
+6. **Monitoring**: Monitor API key usage and revoke any compromised keys immediately
+7. **Limited Subkeys**: Use subkeys with limited rights for specific integrations to minimize risk
 
 ## Endpoints
 
@@ -45,15 +70,18 @@ Retrieve all API keys associated with your account.
 interface ApiKey {
   created_at: string | null
   id: number
-  key: string
+  key: string | null  // null for encrypted keys
   mode: 'read' | 'write' | 'upload' | 'all'
   name: string
   updated_at: string | null
   user_id: string
   limited_to_apps?: string[]
   limited_to_orgs?: string[]
+  expires_at?: string | null  // ISO 8601 date, null means never expires
 }
 ```
+
+> **Note**: For encrypted keys, the `key` field will be `null` in GET responses since the plain key is only shown once during creation.
 
 #### Example Request
 
@@ -95,7 +123,7 @@ curl -H "authorization: your-api-key" https://api.capgo.app/apikey/
 
 Create a new API key for a specific organization.
 
-#### Query Parameters
+#### Request Body
 
 ```typescript
 interface ApiKeyCreate {
@@ -103,10 +131,12 @@ interface ApiKeyCreate {
   mode: 'read' | 'write' | 'upload' | 'all'
   limited_to_apps?: string[]
   limited_to_orgs?: string[]
+  hashed?: boolean       // Create an encrypted key (recommended for production)
+  expires_at?: string    // ISO 8601 date for key expiration
 }
 ```
 
-#### Example Request
+#### Example Request (Standard Key)
 
 ```bash
 curl -X POST \
@@ -120,7 +150,22 @@ curl -X POST \
   https://api.capgo.app/apikey/
 ```
 
-#### Example Response
+#### Example Request (Encrypted Key with Expiration)
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Secure CI Key",
+    "mode": "upload",
+    "hashed": true,
+    "expires_at": "2025-06-01T00:00:00Z"
+  }' \
+  https://api.capgo.app/apikey/
+```
+
+#### Example Response (Standard Key)
 
 ```json
 {
@@ -135,6 +180,24 @@ curl -X POST \
   }
 }
 ```
+
+#### Example Response (Encrypted Key)
+
+```json
+{
+  "apikey": {
+    "id": 4,
+    "key": "ak_abc123...",
+    "mode": "upload",
+    "name": "Secure CI Key",
+    "created_at": "2024-02-12T00:00:00Z",
+    "user_id": "user_123",
+    "expires_at": "2025-06-01T00:00:00Z"
+  }
+}
+```
+
+> **Important**: For encrypted keys, the `key` value in this response is the **only time** you will see the plain key. Save it immediately in a secure location. Subsequent GET requests will return `null` for the `key` field.
 
 ### DELETE
 
@@ -187,6 +250,30 @@ Common error scenarios and their responses:
 // Permission denied
 {
   "error": "Insufficient permissions to manage API keys",
+  "status": "KO"
+}
+
+// Expired API key used for authentication
+{
+  "error": "API key has expired",
+  "status": "KO"
+}
+
+// Invalid expiration date (in the past)
+{
+  "error": "Expiration date must be in the future",
+  "status": "KO"
+}
+
+// Organization requires expiration
+{
+  "error": "Organization policy requires an expiration date for API keys",
+  "status": "KO"
+}
+
+// Expiration exceeds organization limit
+{
+  "error": "Expiration date exceeds organization maximum of 90 days",
   "status": "KO"
 }
 ``` 

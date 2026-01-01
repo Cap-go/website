@@ -1,6 +1,6 @@
 ---
 slug: capacitor-edge-to-edge-display-native-config
-title: How to Enable Edge-to-Edge Display in Capacitor Without Hacks or Plugins
+title: Edge-to-Edge Display in Capacitor Without Plugins
 description: Learn how to properly configure edge-to-edge display in your Capacitor apps using the official adjustMarginsForEdgeToEdge config option - no plugins or hacks needed.
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
