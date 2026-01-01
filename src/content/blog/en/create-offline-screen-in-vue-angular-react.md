@@ -1,8 +1,6 @@
 ---
 slug: create-offline-screen-in-vue-angular-react
-title: >-
-  How to Create an Offline Screen in Vue, Angular, and React Applications using
-  the Network API and Capacitor
+title: Offline Screen in Vue, Angular, React with Capacitor
 description: >-
   Learn how to implement an offline screen in Vue, Angular, or React
   applications using the Network API and Capacitor. Improve the user experience
@@ -11,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-21T00:00:00.000Z
-updated_at: 2022-06-21T00:00:00.000Z
+updated_at: 2026-01-01T14:43:03.000Z
 head_image: /vue_angular_react.webp
 head_image_alt: Image of a person working on a computer
 keywords: Vue, Angular, React, offline screen, network API, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates

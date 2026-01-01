@@ -6,15 +6,21 @@ import { join } from 'node:path'
 import * as m from '@/paraglide/messages'
 import { generateAlternateVersions } from '@/lib/alternateVersions'
 
+const rawLocale = (Astro.locals.locale || 'en').toString().toLowerCase()
+// Paraglide message functions use a narrower locale union than the app router.
+// Cast once here to avoid repeating casts and keep runtime behavior unchanged.
+const messageLocale = Astro.locals.locale as any
+
+
 const {
   ldJSON = structuredData,
-  title = m.website_title({}, { locale: Astro.locals.locale }),
-  description = m.website_description({}, { locale: Astro.locals.locale }),
+  title = m.website_title({}, { locale: messageLocale }),
+  description = m.website_description({}, { locale: messageLocale }),
   url = Astro.url,
-  image = `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png`,
+  image = `${Astro.locals.runtimeConfig?.public?.baseUrl || Astro.url.origin}/capgo_social.png`,
   canonical = Astro.url,
   author = `Martin DONADIEU`,
-  keywords = m.website_keywords({}, { locale: Astro.locals.locale }),
+  keywords = m.website_keywords({}, { locale: messageLocale }),
   audio = null,
   alternateVersions = generateAlternateVersions(Astro),
   // Article-specific props for blog posts
@@ -27,26 +33,61 @@ const {
 } = Astro.props
 
 const localeName_to_OGP = {
-  en: 'en_EN',
+  en: 'en_US',
+  de: 'de_DE',
   es: 'es_ES',
+  fr: 'fr_FR',
   id: 'id_ID',
   it: 'it_IT',
   ja: 'ja_JP',
   ko: 'ko_KR',
+  pl: 'pl_PL',
+  zh: 'zh_CN',
+} as const
+
+const localeOGP = localeName_to_OGP[rawLocale as keyof typeof localeName_to_OGP] ?? localeName_to_OGP.en
+
+const toStringUrl = (value: unknown): string | null => {
+  if (!value) return null
+  if (typeof value === 'string') return value
+  if (value instanceof URL) return value.toString()
+  if (typeof (value as any)?.toString === 'function') return (value as any).toString()
+  return null
 }
 
-const localeOGP = localeName_to_OGP[Astro.locals.locale.toLowerCase() as keyof typeof localeName_to_OGP]
+const titleString = typeof title === 'string' && title.trim().length > 0 ? title : m.website_title({}, { locale: messageLocale })
+const descriptionString =
+  typeof description === 'string' && description.trim().length > 0 ? description : m.website_description({}, { locale: messageLocale })
 
-let displayDescription = description
+const urlString = toStringUrl(url) || Astro.url.toString()
+const canonicalString = toStringUrl(canonical) || urlString
+
+const baseUrl = Astro.locals.runtimeConfig?.public?.baseUrl || Astro.url.origin
+const rawImage = typeof image === 'string' ? image : toStringUrl(image)
+const imageUrl = rawImage ? new URL(rawImage, baseUrl).toString() : new URL('/capgo_social.png', baseUrl).toString()
+
+const getImageMimeType = (img: string): string | null => {
+  const withoutQuery = img.split('?')[0].toLowerCase()
+  if (withoutQuery.endsWith('.png')) return 'image/png'
+  if (withoutQuery.endsWith('.jpg') || withoutQuery.endsWith('.jpeg')) return 'image/jpeg'
+  if (withoutQuery.endsWith('.webp')) return 'image/webp'
+  if (withoutQuery.endsWith('.gif')) return 'image/gif'
+  if (withoutQuery.endsWith('.svg')) return 'image/svg+xml'
+  return null
+}
+
+const imageMimeType = getImageMimeType(imageUrl)
+
+let displayDescription = descriptionString
 
 const descSize = 170
 
-if (description.length > descSize) displayDescription = `${description.substring(0, descSize - 3)}...`
+if (displayDescription.length > descSize) displayDescription = `${displayDescription.substring(0, descSize - 3)}...`
 
-const image_unsecure = image.replace('https://', 'http://')
-const titleFix = title || (image.split('/').pop() || '.').split('.')[0]
+const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
 
 const makeFontPath = (name: string) => join(process.cwd(), 'public', 'fonts', name)
+
 ---
 
 <AstroFont
@@ -108,7 +149,7 @@ const makeFontPath = (name: string) => join(process.cwd(), 'public', 'fonts', na
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta property="keywords" content={keywords} />
 
-<link rel="canonical" href={canonical} />
+<link rel="canonical" href={canonicalString} />
 <link rel="apple-touch-icon" href="/capgo.webp?v=2" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -127,22 +168,22 @@ const makeFontPath = (name: string) => join(process.cwd(), 'public', 'fonts', na
 }
 
 <!-- Primary Meta Tags -->
-<title set:html={title} />
-<meta name="title" content={title} />
+<title set:html={titleString} />
+<meta name="title" content={titleString} />
 <meta name="author" content={author} />
 <meta name="description" content={displayDescription} />
 
 <!-- Open Graph / Facebook -->
-<meta property="og:url" content={url} />
-<meta property="og:title" content={title} />
+<meta property="og:url" content={urlString} />
+<meta property="og:title" content={titleString} />
 <meta property="og:type" content={ogType} />
 <meta property="og:locale" content={localeOGP} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:image:secure_url" content={imageUrl} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="627" />
 <meta property="og:image:alt" content={titleFix} />
-<meta property="og:image:secure" content={image} />
-<meta property="og:image" content={image_unsecure} />
-<meta property="og:image:type" content="image/webp" />
+{imageMimeType && <meta property="og:image:type" content={imageMimeType} />}
 <meta property="og:article:author" content={author} />
 {articlePublishedTime && <meta property="article:published_time" content={articlePublishedTime} />}
 {articleModifiedTime && <meta property="article:modified_time" content={articleModifiedTime} />}

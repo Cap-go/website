@@ -13,7 +13,7 @@
 /llm.txt/ /llms.txt 301
 /docs/plugin/cloud-mode/getting-started/ /docs/getting-started/quickstart 301
 /en/* /:splat 301
-/login/ /register/ 302
+/login/ /register/ 301
 /robots.txt/ /robots.txt 301
 /docs/plugin/* /docs/plugins/updater/:splat 301
 /docs/plugins/updater/self-hosted/contributing.mdx /docs/plugins/updater/local-dev/contributing.mdx 301

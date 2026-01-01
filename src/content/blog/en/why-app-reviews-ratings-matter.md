@@ -1,12 +1,12 @@
 ---
 slug: why-app-reviews-ratings-matter
-title: Why App Reviews and Ratings Matter - Complete Guide to Boosting Your App's Success
+title: "Why App Reviews and Ratings Matter: Success Guide"
 description: Discover why app reviews and ratings are critical for your app's success, how they impact rankings and downloads, and proven strategies to get more positive reviews using native in-app prompts.
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-10-30T00:00:00.000Z
-updated_at: 2025-10-30T04:34:11.000Z
+updated_at: 2026-01-01T14:43:03.000Z
 head_image: /app-reviews-ratings-guide.webp
 head_image_alt: App Store Reviews and Ratings
 keywords: app reviews, app ratings, app store optimization, ASO, user reviews, app ranking, in-app review, capacitor rating plugin, app store ratings, play store reviews

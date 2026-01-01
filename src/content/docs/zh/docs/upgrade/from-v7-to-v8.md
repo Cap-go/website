@@ -16,28 +16,7 @@ sidebar:
 
 ## iOS最低版本要求
 
-iOS最低部署目标已提升至**15.5**，以确保排除存在[CVE-2022-36943](https://nvd.nist.gov/vuln/detail/CVE-2022-36943)漏洞的iOS设备。这是实施了安全修复的iOS zip库的最低版本。
-
-### Swift Package Manager (SPM) 解决方案
-
-Capacitor目前存在一个bug（[ionic-team/capacitor#7556](https://github.com/ionic-team/capacitor/issues/7556)），在使用SPM时无法将iOS部署目标设置为15.5。
-
-如果您需要SPM支持，可以临时使用我们的分支：
-
-**GitHub:** [https://github.com/Cap-go/capacitor-plus](https://github.com/Cap-go/capacitor-plus)
-
-使用方法是将CLI包 `@capacitor/cli` 替换为 `@capacitor-plus/cli`：
-
-```bash
-npm uninstall @capacitor/cli
-npm install @capacitor-plus/cli
-```
-
-然后像往常一样使用CLI：
-
-```bash
-npx capacitor sync
-```
+iOS最低部署目标已提升至**15**，以确保排除存在[CVE-2022-36943](https://nvd.nist.gov/vuln/detail/CVE-2022-36943)漏洞的iOS设备。这是实施了安全修复的iOS zip库的最低版本。
 
 ## 安装
 
@@ -80,8 +59,7 @@ capacitor-updater版本8带来了与Capacitor 8的完全兼容性，确保您的
 ## 迁移检查清单
 
 - [ ] 遵循Capacitor的v8[迁移指南](https://capacitorjs.com/docs/updating/8-0)，检查破坏性更改
-- [ ] 将iOS最低部署目标提升至15.5（CVE-2022-36943修复所需）
-- [ ] 如果使用SPM，在[ionic-team/capacitor#7556](https://github.com/ionic-team/capacitor/issues/7556)修复之前临时切换到[@capacitor-plus/cli](https://github.com/Cap-go/capacitor-plus)
+- [ ] 将iOS最低部署目标提升至15（CVE-2022-36943修复所需）
 - [ ] 将@capgo/capacitor-updater更新至^8.0.0
 - [ ] 运行`npx cap sync`
 - [ ] 在iOS和Android上全面测试您的应用

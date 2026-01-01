@@ -1,12 +1,12 @@
 ---
 slug: setup-stripe-payment-in-us-capacitor
-title: Implementing Stripe Payment Links in Capacitor Apps Following New Apple Guidelines
+title: Stripe Payments in Capacitor: New Apple Guidelines
 description: Learn how to implement Stripe Payment Links in your Capacitor app to process digital goods payments in compliance with new Apple guidelines effective May 1, 2025.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-05-01T00:00:00.000Z
-updated_at: 2025-11-21T17:43:20.000Z
+updated_at: 2026-01-01T14:43:03.000Z
 head_image: /stripe_apple.webp
 head_image_alt: Stripe payment implementation in Capacitor apps
 keywords: capacitor, stripe, payment links, app store guidelines, iOS, digital goods, in-app purchases, external payments

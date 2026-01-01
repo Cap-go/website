@@ -34,20 +34,25 @@ const enhancedOrg = {
   knowsAbout: ['Capacitor Development', 'Mobile App Updates', 'Over-the-Air Updates', 'JavaScript', 'TypeScript', 'iOS Development', 'Android Development'],
 }
 
+// Build absolute URLs for structured data (Schema.org requires absolute URLs)
+const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
+const aboutUrl = `${baseUrl}${getRelativeLocaleUrl(Astro.locals.locale, '/about/')}`
+const homeUrl = `${baseUrl}${getRelativeLocaleUrl(Astro.locals.locale, '/')}`
+
 // Create comprehensive LD+JSON for about page
 const content = {
   title,
   description,
-  image: `${Astro.locals.runtimeConfig.public.baseUrl}/app_demo.webp`,
+  image: `${baseUrl}/app_demo.webp`,
   ldJSON: createLdJsonGraph(
     Astro.locals.runtimeConfig.public,
     {
       '@context': 'https://schema.org',
       '@type': 'WebPage',
-      '@id': getRelativeLocaleUrl(Astro.locals.locale, '/about/#aboutpage'),
+      '@id': `${aboutUrl}#aboutpage`,
       name: title,
       description: 'Learn about Capgo, the live update solution for Capacitor apps, and meet founder Martin Donadieu.',
-      url: getRelativeLocaleUrl(Astro.locals.locale, '/about/'),
+      url: aboutUrl,
       breadcrumb: {
         '@type': 'BreadcrumbList',
         itemListElement: [
@@ -55,13 +60,13 @@ const content = {
             '@type': 'ListItem',
             position: 1,
             name: 'Home',
-            item: getRelativeLocaleUrl(Astro.locals.locale, '/'),
+            item: homeUrl,
           },
           {
             '@type': 'ListItem',
             position: 2,
             name: 'About',
-            item: getRelativeLocaleUrl(Astro.locals.locale, '/about/'),
+            item: aboutUrl,
           },
         ],
       },

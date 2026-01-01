@@ -1,6 +1,6 @@
 ---
 slug: introducing-end-to-end-security-to-capacitor-updater-with-code-signing
-title: Introducing end to end encryption to capacitor-updater with code signing
+title: E2E Encryption for Capacitor Updater via Code Signing
 description: >-
   Using RSA + AES cryptography to encrypt updates, designed for the enterprise
   and high security apps
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-11-27T00:00:00.000Z
-updated_at: 2024-08-27T00:00:00.000Z
+updated_at: 2026-01-01T14:43:03.000Z
 head_image: /secure_upload.webp
 head_image_alt: Secure upload Capgo
 keywords: E2E, code signing, RSA, AES, mobile app development, live updates, OTA updates, continuous integration, mobile app updates

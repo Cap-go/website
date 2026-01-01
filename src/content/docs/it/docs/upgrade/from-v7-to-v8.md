@@ -16,28 +16,7 @@ Prima segui la guida alla migrazione di Capacitor:
 
 ## Requisito versione minima iOS
 
-L'obiettivo di distribuzione minimo per iOS è stato aumentato a **15.5** per garantire che i dispositivi iOS con [CVE-2022-36943](https://nvd.nist.gov/vuln/detail/CVE-2022-36943) siano esclusi. Questa è la versione minima della libreria zip iOS che ha implementato la correzione di sicurezza.
-
-### Soluzione alternativa Swift Package Manager (SPM)
-
-Capacitor attualmente ha un bug ([ionic-team/capacitor#7556](https://github.com/ionic-team/capacitor/issues/7556)) che non permette di impostare l'obiettivo di distribuzione iOS a 15.5 quando si usa SPM.
-
-Se hai bisogno del supporto SPM, puoi usare temporaneamente il nostro fork:
-
-**GitHub:** [https://github.com/Cap-go/capacitor-plus](https://github.com/Cap-go/capacitor-plus)
-
-Per usarlo, sostituisci il pacchetto CLI `@capacitor/cli` con `@capacitor-plus/cli`:
-
-```bash
-npm uninstall @capacitor/cli
-npm install @capacitor-plus/cli
-```
-
-Poi usa il CLI come al solito:
-
-```bash
-npx capacitor sync
-```
+L'obiettivo di distribuzione minimo per iOS è stato aumentato a **15** per garantire che i dispositivi iOS con [CVE-2022-36943](https://nvd.nist.gov/vuln/detail/CVE-2022-36943) siano esclusi. Questa è la versione minima della libreria zip iOS che ha implementato la correzione di sicurezza.
 
 ## Installazione
 
@@ -80,8 +59,7 @@ La configurazione rimane la stessa di v7. Le tue impostazioni `capacitor.config`
 ## Lista di controllo della migrazione
 
 - [ ] Seguire la [guida alla migrazione](https://capacitorjs.com/docs/updating/8-0) v8 di Capacitor, verificare le modifiche incompatibili
-- [ ] Aumentare l'obiettivo di distribuzione minimo iOS a 15.5 (richiesto per la correzione CVE-2022-36943)
-- [ ] Se usi SPM, passare temporaneamente a [@capacitor-plus/cli](https://github.com/Cap-go/capacitor-plus) fino a quando [ionic-team/capacitor#7556](https://github.com/ionic-team/capacitor/issues/7556) non sarà risolto
+- [ ] Aumentare l'obiettivo di distribuzione minimo iOS a 15 (richiesto per la correzione CVE-2022-36943)
 - [ ] Aggiornare @capgo/capacitor-updater a ^8.0.0
 - [ ] Eseguire `npx cap sync`
 - [ ] Testare accuratamente la tua app su iOS e Android

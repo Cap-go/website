@@ -1,6 +1,6 @@
 ---
 slug: do-apple-allow-live-updates
-title: Do apple allow to send live update to Apps without the App Store review.
+title: Does Apple Allow Live Updates Without Store Review?
 description: >-
   How can you push code updates to production iOS apps and be fully compliant
   with Apple’s guidelines? 
@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z
-updated_at: 2022-01-13T00:00:00.000Z
+updated_at: 2026-01-01T14:43:03.000Z
 head_image: /apple_appstore.webp
 head_image_alt: Capacitor bypass illustration
 keywords: Apple, live updates, OTA updates, continuous integration, mobile app updates

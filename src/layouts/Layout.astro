@@ -5,7 +5,7 @@ import SEO from '@/components/SEO.astro'
 import PostHog from '@/components/posthog.astro'
 import '@/css/global.css'
 
-const { content } = Astro.props
+const content = Astro.props.content ?? {}
 
 const isLocalhost = Astro.url.origin.includes('localhost:')
 ---

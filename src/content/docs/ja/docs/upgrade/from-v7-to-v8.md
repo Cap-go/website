@@ -16,28 +16,7 @@ sidebar:
 
 ## iOS最小バージョン要件
 
-iOSの最小デプロイメントターゲットが**15.5**に引き上げられ、[CVE-2022-36943](https://nvd.nist.gov/vuln/detail/CVE-2022-36943)の脆弱性を持つiOSデバイスが除外されるようになりました。これは、セキュリティ修正が実装されたiOS zipライブラリの最小バージョンです。
-
-### Swift Package Manager（SPM）の回避策
-
-Capacitorには現在、SPMを使用する際にiOSデプロイメントターゲットを15.5に設定できないバグ（[ionic-team/capacitor#7556](https://github.com/ionic-team/capacitor/issues/7556)）があります。
-
-SPMサポートが必要な場合は、一時的に私たちのフォークを使用できます：
-
-**GitHub:** [https://github.com/Cap-go/capacitor-plus](https://github.com/Cap-go/capacitor-plus)
-
-使用するには、CLIパッケージ `@capacitor/cli` を `@capacitor-plus/cli` に置き換えます：
-
-```bash
-npm uninstall @capacitor/cli
-npm install @capacitor-plus/cli
-```
-
-その後、通常通りCLIを使用します：
-
-```bash
-npx capacitor sync
-```
+iOSの最小デプロイメントターゲットが**15**に引き上げられ、[CVE-2022-36943](https://nvd.nist.gov/vuln/detail/CVE-2022-36943)の脆弱性を持つiOSデバイスが除外されるようになりました。これは、セキュリティ修正が実装されたiOS zipライブラリの最小バージョンです。
 
 ## インストール
 
@@ -80,8 +59,7 @@ capacitor-updaterのバージョン8は、Capacitor 8との完全な互換性を
 ## 移行チェックリスト
 
 - [ ] Capacitorのv8[移行ガイド](https://capacitorjs.com/docs/updating/8-0)に従い、破壊的変更を確認
-- [ ] iOS最小デプロイメントターゲットを15.5に引き上げ（CVE-2022-36943修正に必要）
-- [ ] SPMを使用している場合、[ionic-team/capacitor#7556](https://github.com/ionic-team/capacitor/issues/7556)が修正されるまで一時的に[@capacitor-plus/cli](https://github.com/Cap-go/capacitor-plus)に切り替え
+- [ ] iOS最小デプロイメントターゲットを15に引き上げ（CVE-2022-36943修正に必要）
 - [ ] @capgo/capacitor-updaterを^8.0.0に更新
 - [ ] `npx cap sync`を実行
 - [ ] iOSとAndroidでアプリを徹底的にテスト
