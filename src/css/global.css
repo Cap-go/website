@@ -15,7 +15,7 @@ body,
 }
 
 .calc-label {
-  @apply mt-0 mt-5 text-sm font-bold tracking-widest uppercase;
+  @apply mt-5 text-sm font-bold tracking-widest uppercase;
 }
 
 @theme {
