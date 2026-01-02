@@ -22,7 +22,7 @@ hero:
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
 <CardGrid stagger>
   <Card title="Bidirectional Messaging" icon="rocket">
@@ -34,7 +34,27 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
   <Card title="Application Context" icon="laptop">
     Sync app state with latest-value-only semantics for efficient updates
   </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/watch/getting-started/) to master the plugin in just a few minutes.
+  <Card title="SwiftUI Ready" icon="seti:swift">
+    Includes watch-side SDK with ObservableObject support for reactive SwiftUI apps
   </Card>
+</CardGrid>
+
+## Documentation
+
+<CardGrid>
+  <LinkCard
+    title="Getting Started"
+    description="Install the plugin and learn the basic API for iPhone-Watch communication."
+    href="/docs/plugins/watch/getting-started/"
+  />
+  <LinkCard
+    title="Watch App Setup"
+    description="Complete step-by-step guide to creating a watchOS app in Xcode from scratch."
+    href="/docs/plugins/watch/watch-app-setup/"
+  />
+  <LinkCard
+    title="Examples & Use Cases"
+    description="Real-world examples: fitness tracker, smart home remote, notification center, and data sync."
+    href="/docs/plugins/watch/examples/"
+  />
 </CardGrid>

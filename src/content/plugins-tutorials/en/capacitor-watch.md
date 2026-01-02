@@ -328,9 +328,126 @@ export class WatchService {
 - On Web, all methods throw unavailable errors
 - Use `getInfo()` to check `isSupported` before calling other methods
 
-## watchOS App Implementation
+## Creating Your watchOS App
 
-Your watchOS companion app needs to implement WatchConnectivity. See the plugin documentation for a complete SwiftUI example.
+The most important step is creating a companion watchOS app. Here's a quick guide:
+
+### Step 1: Add watchOS Target in Xcode
+
+1. Open your iOS project in Xcode (open `ios/App/App.xcworkspace`)
+2. Go to **File → New → Target**
+3. Select **watchOS → App**
+4. Name it (e.g., "MyWatch") and configure:
+   - Language: Swift
+   - User Interface: SwiftUI
+   - Deployment Target: watchOS 9.0+
+5. Click **Finish**
+
+### Step 2: Add CapgoWatchSDK
+
+1. In Xcode: **File → Add Package Dependencies**
+2. Enter: `https://github.com/Cap-go/capacitor-watch.git`
+3. Add `CapgoWatchSDK` to your **watch target only**
+
+### Step 3: Implement the Watch App
+
+Create `MyWatchApp.swift`:
+
+```swift
+import SwiftUI
+import CapgoWatchSDK
+
+@main
+struct MyWatchApp: App {
+    init() {
+        WatchConnector.shared.activate()
+    }
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+```
+
+Create `ContentView.swift`:
+
+```swift
+import SwiftUI
+import CapgoWatchSDK
+
+struct ContentView: View {
+    @ObservedObject var connector = WatchConnector.shared
+
+    var body: some View {
+        VStack(spacing: 16) {
+            // Connection status
+            HStack {
+                Circle()
+                    .fill(connector.isReachable ? Color.green : Color.red)
+                    .frame(width: 12, height: 12)
+                Text(connector.isReachable ? "Connected" : "Disconnected")
+            }
+
+            // Send button
+            Button("Send to Phone") {
+                connector.sendMessage(["action": "hello", "time": Date().timeIntervalSince1970])
+            }
+            .disabled(!connector.isReachable)
+
+            // Last received message
+            if !connector.lastMessage.isEmpty {
+                Text("Last: \(formatMessage(connector.lastMessage))")
+                    .font(.caption)
+            }
+        }
+        .padding()
+    }
+
+    private func formatMessage(_ msg: [String: Any]) -> String {
+        msg.map { "\($0.key): \($0.value)" }.joined(separator: ", ")
+    }
+}
+```
+
+### Step 4: Build and Test
+
+1. Select your watch scheme in Xcode
+2. Choose an Apple Watch simulator
+3. Press Run (Cmd + R)
+4. Both iPhone and Watch simulators will launch
+
+### Key WatchConnector Features
+
+The `WatchConnector` class provides:
+
+```swift
+// Check connection status
+connector.isReachable      // Bool - can send messages now
+connector.isActivated      // Bool - session is active
+connector.lastMessage      // [String: Any] - last received message
+connector.applicationContext // [String: Any] - current context
+
+// Send messages
+connector.sendMessage(["key": "value"])
+
+// Send with reply callback
+connector.sendMessage(["request": "data"]) { reply in
+    print("Got reply: \(reply)")
+}
+
+// Async/await version
+let reply = try await connector.sendMessage(["request": "data"])
+
+// Update application context
+try connector.updateApplicationContext(["state": "active"])
+
+// Transfer user info (queued delivery)
+connector.transferUserInfo(["important": "data"])
+```
+
+For a complete step-by-step guide with screenshots, see the [Watch App Setup Guide](https://capgo.app/docs/plugins/watch/watch-app-setup/).
 
 ## Conclusion
 

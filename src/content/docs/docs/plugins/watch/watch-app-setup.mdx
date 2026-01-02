@@ -1,0 +1,464 @@
+---
+title: Creating a watchOS App
+description: Complete step-by-step guide to creating an Apple Watch app for your Capacitor iOS project with bidirectional communication.
+sidebar:
+  order: 3
+---
+
+import { Steps, Tabs, TabItem, Aside, FileTree } from '@astrojs/starlight/components';
+
+This guide walks you through creating a watchOS companion app from scratch, including project setup in Xcode, integrating the CapgoWatchSDK, and building a functional watch app with SwiftUI.
+
+## Prerequisites
+
+Before you begin, ensure you have:
+
+- **Xcode 15 or later** (download from Mac App Store)
+- **macOS Sonoma or later** (for latest watchOS SDK)
+- **An existing Capacitor iOS project** (run `npx cap add ios` if you haven't)
+- **Apple Developer account** (free account works for development)
+
+## Project Structure Overview
+
+After completing this guide, your project will have this structure:
+
+<FileTree>
+- ios/
+  - App/
+    - App/ (your main iOS app)
+    - App.xcodeproj
+    - App.xcworkspace (use this to open the project)
+    - Podfile
+  - MyWatch/ (new watch app)
+    - MyWatch/ (watch app source)
+      - MyWatchApp.swift
+      - ContentView.swift
+      - Assets.xcassets/
+    - MyWatch.xcodeproj
+</FileTree>
+
+## Step 1: Open Your iOS Project in Xcode
+
+<Steps>
+1. Navigate to your Capacitor project's `ios/App` folder
+2. Open `App.xcworkspace` (not `.xcodeproj`) by double-clicking it
+3. Wait for Xcode to index the project
+</Steps>
+
+<Aside type="caution">
+Always open the `.xcworkspace` file, not `.xcodeproj`. The workspace includes CocoaPods dependencies that your project needs.
+</Aside>
+
+## Step 2: Add a watchOS Target
+
+<Steps>
+1. In Xcode, go to **File → New → Target...**
+
+2. In the template chooser:
+   - Select **watchOS** tab at the top
+   - Choose **App**
+   - Click **Next**
+
+3. Configure your watch app:
+   - **Product Name**: `MyWatch` (or your preferred name)
+   - **Team**: Select your Apple Developer team
+   - **Organization Identifier**: Should match your iOS app (e.g., `app.capgo`)
+   - **Bundle Identifier**: Will be auto-generated (e.g., `app.capgo.myapp.watchkitapp`)
+   - **Language**: Swift
+   - **User Interface**: SwiftUI
+   - **Watch App Type**: App (not App for Existing iOS App)
+   - Uncheck **Include Notification Scene** (unless you need it)
+   - Uncheck **Include Complication** (unless you need it)
+
+4. Click **Finish**
+
+5. When prompted "Activate 'MyWatch' scheme?", click **Activate**
+</Steps>
+
+## Step 3: Configure Watch App Settings
+
+<Steps>
+1. In the Project Navigator (left sidebar), select your project (the blue icon at the top)
+
+2. Select your watch target (e.g., "MyWatch") from the targets list
+
+3. Go to the **General** tab:
+   - **Display Name**: The name shown under the app icon (e.g., "My App")
+   - **Bundle Identifier**: Should end with `.watchkitapp`
+   - **Version**: Match your iOS app version
+   - **Build**: Match your iOS app build number
+
+4. Go to **Signing & Capabilities** tab:
+   - Enable **Automatically manage signing**
+   - Select your **Team**
+   - Xcode will create provisioning profiles automatically
+
+5. Set **Deployment Info**:
+   - **Minimum Deployments**: watchOS 9.0 or later
+</Steps>
+
+## Step 4: Add CapgoWatchSDK via Swift Package Manager
+
+The CapgoWatchSDK provides a ready-to-use `WatchConnector` class for communication.
+
+<Steps>
+1. In Xcode, go to **File → Add Package Dependencies...**
+
+2. In the search field, enter:
+   ```
+   https://github.com/Cap-go/capacitor-watch.git
+   ```
+
+3. Press Enter and wait for Xcode to fetch the package
+
+4. Configure the package:
+   - **Dependency Rule**: "Up to Next Major Version" with "8.0.0"
+   - Click **Add Package**
+
+5. Choose which products to add:
+   - **IMPORTANT**: Only select `CapgoWatchSDK`
+   - Make sure it's added to your **watch target** (e.g., "MyWatch"), not the iOS app
+   - Click **Add Package**
+</Steps>
+
+<Aside type="tip">
+The `CapgoWatchSDK` is specifically designed for watchOS apps. It provides `WatchConnector`, an ObservableObject that handles all WatchConnectivity complexities for you.
+</Aside>
+
+## Step 5: Implement the Watch App
+
+Now let's create the watch app code. Replace the auto-generated files with the following:
+
+### 5.1 Create the App Entry Point
+
+Edit `MyWatch/MyWatchApp.swift`:
+
+```swift
+import SwiftUI
+import CapgoWatchSDK
+
+@main
+struct MyWatchApp: App {
+    init() {
+        // Activate WatchConnectivity when app launches
+        WatchConnector.shared.activate()
+    }
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+```
+
+### 5.2 Create the Main View
+
+Edit `MyWatch/ContentView.swift`:
+
+```swift
+import SwiftUI
+import CapgoWatchSDK
+
+struct ContentView: View {
+    // Observe the WatchConnector for automatic UI updates
+    @ObservedObject var connector = WatchConnector.shared
+
+    // Local state
+    @State private var messageText = ""
+    @State private var statusMessage = "Ready"
+
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 16) {
+                // Connection Status
+                ConnectionStatusView(connector: connector)
+
+                Divider()
+
+                // Message Input
+                TextField("Message", text: $messageText)
+                    .textFieldStyle(.roundedBorder)
+
+                // Send Buttons
+                HStack {
+                    Button("Send") {
+                        sendMessage()
+                    }
+                    .disabled(!connector.isReachable || messageText.isEmpty)
+
+                    Button("Request") {
+                        sendWithReply()
+                    }
+                    .disabled(!connector.isReachable || messageText.isEmpty)
+                }
+
+                Divider()
+
+                // Status
+                Text(statusMessage)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+
+                // Last Received Message
+                if !connector.lastMessage.isEmpty {
+                    VStack(alignment: .leading) {
+                        Text("Last Message:")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        Text(formatMessage(connector.lastMessage))
+                            .font(.caption2)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
+            .padding()
+        }
+    }
+
+    private func sendMessage() {
+        connector.sendMessage(["text": messageText, "timestamp": Date().timeIntervalSince1970])
+        statusMessage = "Message sent"
+        messageText = ""
+    }
+
+    private func sendWithReply() {
+        connector.sendMessage(["text": messageText, "needsReply": true]) { reply in
+            DispatchQueue.main.async {
+                statusMessage = "Reply: \(formatMessage(reply))"
+            }
+        }
+        messageText = ""
+    }
+
+    private func formatMessage(_ message: [String: Any]) -> String {
+        message.map { "\($0.key): \($0.value)" }.joined(separator: ", ")
+    }
+}
+
+// Separate view for connection status
+struct ConnectionStatusView: View {
+    @ObservedObject var connector: WatchConnector
+
+    var body: some View {
+        HStack {
+            Circle()
+                .fill(connector.isReachable ? Color.green : Color.red)
+                .frame(width: 12, height: 12)
+
+            Text(connector.isReachable ? "Connected" : "Disconnected")
+                .font(.headline)
+
+            Spacer()
+
+            if connector.isActivated {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(.green)
+            }
+        }
+    }
+}
+
+#Preview {
+    ContentView()
+}
+```
+
+## Step 6: Configure iOS App for WatchConnectivity
+
+Your iOS app also needs WatchConnectivity capability.
+
+<Steps>
+1. In the Project Navigator, select your project
+
+2. Select your **iOS App target** (not the watch target)
+
+3. Go to **Signing & Capabilities** tab
+
+4. Click **+ Capability**
+
+5. Search for and add **WatchConnectivity** (if available) or it may be added automatically
+
+6. The Capacitor plugin handles the iOS side automatically, but ensure your Info.plist has:
+   ```xml
+   <key>WKCompanionAppBundleIdentifier</key>
+   <string>app.capgo.myapp.watchkitapp</string>
+   ```
+</Steps>
+
+## Step 7: Build and Run
+
+### Run on Simulator
+
+<Steps>
+1. Select your watch scheme from the scheme selector (top of Xcode window)
+
+2. Choose a watch simulator:
+   - Click on the device selector next to the scheme
+   - Select an Apple Watch simulator (e.g., "Apple Watch Series 9 (45mm)")
+
+3. Click the **Run** button (▶️) or press `Cmd + R`
+
+4. The iOS Simulator will launch with both iPhone and Apple Watch
+</Steps>
+
+### Run on Physical Device
+
+<Steps>
+1. Connect your iPhone via USB
+
+2. Ensure your Apple Watch is paired with that iPhone
+
+3. Select your watch scheme
+
+4. Select your physical Apple Watch from the device list
+
+5. Click **Run**
+
+6. First time: You may need to trust your computer on both devices
+</Steps>
+
+<Aside type="tip">
+To debug both apps simultaneously:
+1. Run the iOS app first
+2. Then run the watch app with "Debug → Attach to Process" for the watch
+</Aside>
+
+## Step 8: Test Communication
+
+### From iPhone (Capacitor) to Watch
+
+In your Capacitor app:
+
+```typescript
+import { CapgoWatch } from '@capgo/capacitor-watch';
+
+// Check connection
+const info = await CapgoWatch.getInfo();
+console.log('Watch reachable:', info.isReachable);
+
+// Send a message
+if (info.isReachable) {
+  await CapgoWatch.sendMessage({
+    data: { action: 'update', value: 'Hello from iPhone!' }
+  });
+}
+```
+
+### From Watch to iPhone
+
+The watch app uses `WatchConnector`:
+
+```swift
+// Send message (fire and forget)
+WatchConnector.shared.sendMessage(["action": "buttonTapped"])
+
+// Send message with reply
+WatchConnector.shared.sendMessage(["request": "getData"]) { reply in
+    print("Got reply: \(reply)")
+}
+```
+
+### Handle Messages on iPhone
+
+```typescript
+// Listen for messages from watch
+await CapgoWatch.addListener('messageReceived', (event) => {
+  console.log('Message from watch:', event.message);
+  // { action: 'buttonTapped' }
+});
+
+// Handle messages that need a reply
+await CapgoWatch.addListener('messageReceivedWithReply', async (event) => {
+  console.log('Request from watch:', event.message);
+
+  // Send reply back
+  await CapgoWatch.replyToMessage({
+    callbackId: event.callbackId,
+    data: { status: 'success', items: ['item1', 'item2'] }
+  });
+});
+```
+
+## Advanced: Custom Delegate for More Control
+
+If you need more control, implement `WatchConnectorDelegate`:
+
+```swift
+import SwiftUI
+import CapgoWatchSDK
+
+class WatchHandler: WatchConnectorDelegate {
+    func didReceiveMessage(_ message: [String: Any]) {
+        print("Received: \(message)")
+        // Handle incoming message
+    }
+
+    func didReceiveMessageWithReply(_ message: [String: Any],
+                                     replyHandler: @escaping ([String: Any]) -> Void) {
+        print("Received request: \(message)")
+        // Process and send reply
+        replyHandler(["status": "processed"])
+    }
+
+    func didReceiveApplicationContext(_ context: [String: Any]) {
+        print("Context updated: \(context)")
+    }
+
+    func didReceiveUserInfo(_ userInfo: [String: Any]) {
+        print("User info received: \(userInfo)")
+    }
+
+    func reachabilityDidChange(_ isReachable: Bool) {
+        print("Reachability changed: \(isReachable)")
+    }
+
+    func activationDidComplete(with state: WCSessionActivationState) {
+        print("Activation completed: \(state.rawValue)")
+    }
+}
+
+// In your app setup:
+let handler = WatchHandler()
+WatchConnector.shared.delegate = handler
+WatchConnector.shared.activate()
+```
+
+## Troubleshooting
+
+### Watch App Not Appearing on Watch
+
+1. Ensure bundle IDs are correctly related (watch app bundle ID should be iOS app bundle ID + `.watchkitapp`)
+2. Check that both apps are signed with the same team
+3. On physical device: Open Watch app on iPhone → My Watch → scroll to find your app → toggle ON
+
+### Messages Not Being Received
+
+1. Verify both apps have WCSession activated
+2. Check `isReachable` before sending messages
+3. For guaranteed delivery, use `transferUserInfo` instead of `sendMessage`
+4. Ensure listeners are registered before the other device sends messages
+
+### "Session Not Activated" Error
+
+1. Call `WatchConnector.shared.activate()` early in app lifecycle
+2. On iOS, the plugin activates automatically - ensure plugin is imported
+3. Check that WatchConnectivity capability is added to iOS target
+
+### Build Errors with CapgoWatchSDK
+
+1. Ensure the package is added to the **watch target**, not iOS target
+2. Clean build folder: **Product → Clean Build Folder** (Cmd + Shift + K)
+3. Reset package caches: **File → Packages → Reset Package Caches**
+
+### Simulator Issues
+
+1. Reset the simulators: **Device → Erase All Content and Settings**
+2. Ensure iOS and watchOS simulators are compatible pairs
+3. Both simulators need to be running for communication to work
+
+## Next Steps
+
+- [API Reference](/docs/plugins/watch/getting-started/#api-reference) - Complete API documentation
+- [Communication Patterns](/docs/plugins/watch/getting-started/#communication-patterns) - When to use each method
+- [Example App](https://github.com/Cap-go/capacitor-watch/tree/main/example-app) - Full working example
