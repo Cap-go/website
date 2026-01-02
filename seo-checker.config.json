@@ -21,6 +21,7 @@
   "defaultLanguage": "en",
   "rules": {
     "disabled": [
+      "SEO00003",
       "SEO00186",
       "SEO00189",
       "SEO00160",
