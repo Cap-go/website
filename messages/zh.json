@@ -2078,6 +2078,7 @@
   "real_time_statistics": "实时统计",
   "register": "注册",
   "register_code": "注册码",
+  "register_description": "创建您的免费Capgo账户，并在几分钟内开始向您的Capacitor应用程序部署实时更新。",
   "register_title": "注册Capgo",
   "register_tos_notice": "通过注册，您接受我们的<a href=\"https://capgo.app/tos/\" target=\"_blank\" rel=\"noopener noreferrer\">服务条款</a>。",
   "reimbursement_policy": "我们将在收到退回商品的14天内向您报销。我们将使用与您下订单时相同的支付方式，您不会因此次退款而产生任何费用。",
