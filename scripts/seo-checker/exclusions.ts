@@ -12,14 +12,19 @@ import type { SEOIssue, ExclusionRule, SEOCheckerConfig } from './types'
  */
 function matchGlob(pattern: string, path: string): boolean {
   // Escape special regex chars except * and **
-  let regexPattern = pattern
+  const regexPattern = pattern
     .replace(/[.+^${}()|[\]\\]/g, '\\$&')
     .replace(/\*\*/g, '<<<GLOBSTAR>>>')
     .replace(/\*/g, '[^/]*')
     .replace(/<<<GLOBSTAR>>>/g, '.*')
 
-  const regex = new RegExp(`^${regexPattern}$`)
-  return regex.test(path)
+  try {
+    const regex = new RegExp(`^${regexPattern}$`)
+    return regex.test(path)
+  } catch {
+    // Invalid regex pattern - skip this match
+    return false
+  }
 }
 
 /**
@@ -46,8 +51,13 @@ export function shouldExcludeIssue(issue: SEOIssue, exclusions: ExclusionRule[])
 
     // Element pattern match
     if (rule.elementPattern && issue.element) {
-      const regex = new RegExp(rule.elementPattern)
-      if (!regex.test(issue.element)) {
+      try {
+        const regex = new RegExp(rule.elementPattern)
+        if (!regex.test(issue.element)) {
+          continue
+        }
+      } catch {
+        // Invalid regex pattern - skip this rule
         continue
       }
     }
