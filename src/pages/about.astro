@@ -449,7 +449,11 @@ content.ldJSON['@graph'].push(organization.founder)
 
         <div class="mt-6 text-center">
           <div class="inline-flex relative group">
-            <div class="absolute -inset-px rounded-xl opacity-60 transition-opacity duration-300 group-hover:opacity-80 bg-gray-800/40 blur-lg" aria-hidden="true"></div>
+            <div
+              class="absolute -inset-4 rounded-xl opacity-60 transition-opacity duration-300 group-hover:opacity-80"
+              style="background: radial-gradient(ellipse at center, rgba(31, 41, 55, 0.4) 0%, rgba(31, 41, 55, 0.2) 40%, rgba(31, 41, 55, 0) 70%);"
+              aria-hidden="true"
+            ></div>
             <a
               href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
               aria-label={m.get_quote_now({}, { locale: Astro.locals.locale })}
