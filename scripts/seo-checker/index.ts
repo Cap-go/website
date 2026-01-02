@@ -232,19 +232,46 @@ async function run(): Promise<void> {
   console.log('')
 
   // Scan dist folder
+  const scanStart = Date.now()
   const siteData = await scanDistFolder(config)
-  console.log(`Found ${siteData.pages.size} pages, ${siteData.imageFiles.size} images`)
+  console.log(`Found ${siteData.pages.size} pages, ${siteData.imageFiles.size} images (${Date.now() - scanStart}ms)`)
 
-  // Run checks on all pages
+  // Run checks on all pages - PARALLEL BATCH PROCESSING
+  const checkStart = Date.now()
+  const pages = Array.from(siteData.pages.values())
+  const BATCH_SIZE = 500
+
   let allIssues: SEOIssue[] = []
   let totalLinks = 0
   let totalImages = 0
 
-  for (const [, page] of siteData.pages) {
-    const pageIssues = runPageChecks(page, config, siteData)
-    allIssues.push(...pageIssues)
-    totalLinks += page.links.length
-    totalImages += page.images.length
+  // Process pages in parallel batches
+  for (let i = 0; i < pages.length; i += BATCH_SIZE) {
+    const batch = pages.slice(i, i + BATCH_SIZE)
+
+    // Run checks for batch in parallel
+    const batchResults = await Promise.all(
+      batch.map(page => {
+        return new Promise<{ issues: SEOIssue[]; links: number; images: number }>((resolve) => {
+          // Use setImmediate to allow other operations to proceed
+          setImmediate(() => {
+            const issues = runPageChecks(page, config, siteData)
+            resolve({
+              issues,
+              links: page.links.length,
+              images: page.images.length,
+            })
+          })
+        })
+      })
+    )
+
+    // Aggregate results
+    for (const result of batchResults) {
+      allIssues.push(...result.issues)
+      totalLinks += result.links
+      totalImages += result.images
+    }
 
     // Check max issues limit
     if (config.maxIssues && allIssues.length >= config.maxIssues) {
@@ -253,17 +280,18 @@ async function run(): Promise<void> {
     }
   }
 
-  // Run site-wide duplicate checks
-  const duplicateIssues = checkDuplicates(siteData, config)
-  allIssues.push(...duplicateIssues)
+  console.log(`Page checks completed (${Date.now() - checkStart}ms)`)
 
-  // Run robots.txt checks
-  const robotsIssues = checkRobotsTxt(config)
-  allIssues.push(...robotsIssues)
+  // Run site-wide checks in parallel
+  const siteCheckStart = Date.now()
+  const [duplicateIssues, robotsIssues, sitemapIssues] = await Promise.all([
+    Promise.resolve(checkDuplicates(siteData, config)),
+    Promise.resolve(checkRobotsTxt(config)),
+    Promise.resolve(checkSitemap(config, siteData)),
+  ])
 
-  // Run sitemap checks
-  const sitemapIssues = checkSitemap(config, siteData)
-  allIssues.push(...sitemapIssues)
+  allIssues.push(...duplicateIssues, ...robotsIssues, ...sitemapIssues)
+  console.log(`Site-wide checks completed (${Date.now() - siteCheckStart}ms)`)
 
   // Filter disabled rules
   allIssues = filterDisabledRules(allIssues, config)
