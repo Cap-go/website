@@ -1,0 +1,40 @@
+---
+title: "@capgo/capacitor-watch"
+description: Capacitor plugin for bidirectional communication between iPhone and Apple Watch using WatchConnectivity framework.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Enable seamless two-way communication between your iPhone app and Apple Watch companion app.
+  image:
+    file: ~public/icons/plugins/watch.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/watch/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-watch/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Bidirectional Messaging" icon="rocket">
+    Send and receive messages between iPhone and Apple Watch in real-time
+  </Card>
+  <Card title="Background Transfers" icon="setting">
+    Queue reliable data transfers that deliver even when the watch is offline
+  </Card>
+  <Card title="Application Context" icon="laptop">
+    Sync app state with latest-value-only semantics for efficient updates
+  </Card>
+  <Card title="Comprehensive Documentation" icon="open-book">
+    Check the [Documentation](/docs/plugins/watch/getting-started/) to master the plugin in just a few minutes.
+  </Card>
+</CardGrid>

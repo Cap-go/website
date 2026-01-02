@@ -1,0 +1,310 @@
+---
+title: Getting Started
+description: Learn how to install and configure the Capacitor Watch plugin for bidirectional communication between iPhone and Apple Watch.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-watch" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configure the plugin**
+
+   **Basic Usage Example:**
+   ```typescript
+   import { CapgoWatch } from '@capgo/capacitor-watch';
+
+   // Check watch connectivity status
+   const info = await CapgoWatch.getInfo();
+   console.log('Watch paired:', info.isPaired);
+   console.log('Watch reachable:', info.isReachable);
+
+   // Listen for messages from watch
+   await CapgoWatch.addListener('messageReceived', (event) => {
+     console.log('Message from watch:', event.message);
+   });
+   ```
+
+   **Send a Message to Watch:**
+   ```typescript
+   // Check if watch is reachable first
+   const info = await CapgoWatch.getInfo();
+   if (info.isReachable) {
+     await CapgoWatch.sendMessage({
+       data: { action: 'refresh', timestamp: Date.now() }
+     });
+   }
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       **Required iOS Setup:**
+
+       1. Add the WatchConnectivity capability to your iOS app in Xcode
+       2. Create a watchOS app target in your Xcode project
+       3. Implement WatchConnectivity in your watchOS app (see Watch App Implementation below)
+
+       The plugin automatically activates the WCSession when the plugin loads.
+     </TabItem>
+     <TabItem label="Android">
+       Apple Watch is only supported on iOS. On Android, all methods will reject with "Apple Watch is only supported on iOS" error. The `getInfo()` method returns `isSupported: false`.
+     </TabItem>
+   </Tabs>
+
+4. **Handle messages that require a reply**
+   ```typescript
+   // Listen for messages that need a response
+   await CapgoWatch.addListener('messageReceivedWithReply', async (event) => {
+     console.log('Request from watch:', event.message);
+
+     // Process the request
+     const result = await processWatchRequest(event.message);
+
+     // Send reply back to watch
+     await CapgoWatch.replyToMessage({
+       callbackId: event.callbackId,
+       data: { result }
+     });
+   });
+   ```
+
+5. **Sync application state**
+   ```typescript
+   // Update application context (latest value only)
+   await CapgoWatch.updateApplicationContext({
+     context: {
+       theme: 'dark',
+       userId: '123',
+       lastSync: Date.now()
+     }
+   });
+
+   // Listen for context updates from watch
+   await CapgoWatch.addListener('applicationContextReceived', (event) => {
+     console.log('Context from watch:', event.context);
+   });
+   ```
+
+6. **Transfer user info reliably**
+   ```typescript
+   // Queue data for reliable delivery (even when watch is offline)
+   await CapgoWatch.transferUserInfo({
+     userInfo: {
+       recordId: '456',
+       action: 'created',
+       data: { name: 'Item 1' }
+     }
+   });
+
+   // Listen for user info transfers
+   await CapgoWatch.addListener('userInfoReceived', (event) => {
+     console.log('User info from watch:', event.userInfo);
+   });
+   ```
+
+7. **Monitor connectivity**
+   ```typescript
+   // Track reachability changes
+   await CapgoWatch.addListener('reachabilityChanged', (event) => {
+     console.log('Watch reachable:', event.isReachable);
+     if (event.isReachable) {
+       // Watch is now available for interactive messaging
+     }
+   });
+
+   // Track session activation state
+   await CapgoWatch.addListener('activationStateChanged', (event) => {
+     // 0 = notActivated, 1 = inactive, 2 = activated
+     console.log('Session state:', event.state);
+   });
+   ```
+</Steps>
+
+## Watch App Implementation
+
+Your watchOS app needs to implement WatchConnectivity. Here's a SwiftUI example:
+
+```swift
+import SwiftUI
+import WatchConnectivity
+
+@main
+struct MyWatchApp: App {
+    init() {
+        WatchViewModel.shared.activate()
+    }
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+
+class WatchViewModel: NSObject, ObservableObject, WCSessionDelegate {
+    static let shared = WatchViewModel()
+
+    @Published var lastMessage: [String: Any] = [:]
+
+    func activate() {
+        guard WCSession.isSupported() else { return }
+        WCSession.default.delegate = self
+        WCSession.default.activate()
+    }
+
+    // Send message to iPhone
+    func sendToPhone(_ data: [String: Any]) {
+        guard WCSession.default.isReachable else {
+            print("iPhone not reachable")
+            return
+        }
+        WCSession.default.sendMessage(data, replyHandler: nil)
+    }
+
+    // Send message with reply
+    func sendToPhoneWithReply(_ data: [String: Any], completion: @escaping ([String: Any]) -> Void) {
+        guard WCSession.default.isReachable else { return }
+        WCSession.default.sendMessage(data, replyHandler: completion)
+    }
+
+    // Receive message from iPhone
+    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
+        DispatchQueue.main.async {
+            self.lastMessage = message
+        }
+    }
+
+    // Receive application context
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
+        DispatchQueue.main.async {
+            self.lastMessage = applicationContext
+        }
+    }
+
+    // Required delegate methods
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        print("Watch session activated: \(activationState.rawValue)")
+    }
+}
+```
+
+## API Reference
+
+### Methods
+
+#### `sendMessage(options: SendMessageOptions)`
+Send an interactive message to the watch. Requires watch to be reachable.
+
+**Parameters:**
+- `data`: Object - The data to send to the watch
+
+#### `updateApplicationContext(options: UpdateContextOptions)`
+Update application context. Only latest value is kept.
+
+**Parameters:**
+- `context`: Object - The context data to sync
+
+#### `transferUserInfo(options: TransferUserInfoOptions)`
+Queue user info for reliable delivery.
+
+**Parameters:**
+- `userInfo`: Object - The user info to transfer
+
+#### `replyToMessage(options: ReplyMessageOptions)`
+Reply to a message that requested a response.
+
+**Parameters:**
+- `callbackId`: string - The callback ID from messageReceivedWithReply event
+- `data`: Object - The reply data
+
+#### `getInfo()`
+Get watch connectivity status.
+
+**Returns:** `WatchInfo` object with:
+- `isSupported`: boolean - Whether WatchConnectivity is available
+- `isPaired`: boolean - Whether a watch is paired
+- `isWatchAppInstalled`: boolean - Whether watch app is installed
+- `isReachable`: boolean - Whether watch is reachable
+- `activationState`: number - Session state (0/1/2)
+
+#### `getPluginVersion()`
+Get the native plugin version.
+
+### Events
+
+| Event | Description |
+|-------|-------------|
+| `messageReceived` | Simple message from watch |
+| `messageReceivedWithReply` | Message expecting a reply (includes callbackId) |
+| `applicationContextReceived` | Context update from watch |
+| `userInfoReceived` | User info transfer from watch |
+| `reachabilityChanged` | Watch connectivity changed |
+| `activationStateChanged` | Session activation state changed |
+
+## Communication Patterns
+
+### Immediate Messaging (`sendMessage`)
+- Requires watch to be reachable
+- Best for interactive, time-sensitive communication
+- Fails immediately if watch is not available
+
+### Application Context (`updateApplicationContext`)
+- Latest value only - previous values are overwritten
+- Best for syncing current app state
+- Delivered when watch becomes available
+
+### User Info Transfer (`transferUserInfo`)
+- Queued and delivered in order
+- Best for important data that must be delivered
+- Works even when watch is temporarily unreachable
+
+## Platform Notes
+
+### iOS
+- Requires iOS 15.0 or later
+- Uses WatchConnectivity framework
+- Session automatically activates on plugin load
+- Supports background delivery for context and user info
+
+### Android
+- Not supported (Apple Watch is iOS-only)
+- All methods reject with appropriate error
+- `getInfo()` returns `isSupported: false`
+
+### Web
+- Not supported
+- All methods reject with unavailable error
+- `getInfo()` returns `isSupported: false`
+
+## Common Use Cases
+
+1. **Data Sync**: Keep watch and phone data in sync
+2. **Remote Control**: Control phone features from watch
+3. **Notifications**: Send custom notifications to watch
+4. **Health Data**: Share fitness and health metrics
+5. **Media Control**: Control music playback from watch
+6. **Smart Home**: Control devices from your wrist
+
+## Troubleshooting
+
+**Watch not reachable:**
+- Ensure watch is within Bluetooth range
+- Check that both apps are running
+- Verify WCSession is activated on both sides
+
+**Messages not received:**
+- Check that listeners are registered before sending
+- Verify the watch app implements WCSessionDelegate
+- Use `transferUserInfo` for guaranteed delivery
+
+**Session not activating:**
+- Ensure WatchConnectivity capability is added in Xcode
+- Check that watch app has the companion bundle ID
+- Verify both apps target compatible OS versions
