@@ -13638,5 +13638,156 @@
     "tags": [
       "spellcheckschema"
     ]
+  },
+  {
+    "id": "SEO01153",
+    "category": "Robots",
+    "name": "Missing robots.txt file",
+    "scope": "site",
+    "severity": "warning",
+    "fixHint": "Add a robots.txt file to the root of your site.",
+    "tags": [
+      "robots",
+      "crawlability"
+    ]
+  },
+  {
+    "id": "SEO01154",
+    "category": "Robots",
+    "name": "robots.txt has syntax errors",
+    "scope": "site",
+    "severity": "error",
+    "fixHint": "Fix syntax errors in robots.txt.",
+    "tags": [
+      "robots",
+      "crawlability"
+    ]
+  },
+  {
+    "id": "SEO01155",
+    "category": "Robots",
+    "name": "robots.txt missing Sitemap directive",
+    "scope": "site",
+    "severity": "notice",
+    "fixHint": "Add Sitemap: directive to robots.txt for better discoverability.",
+    "tags": [
+      "robots",
+      "sitemap"
+    ]
+  },
+  {
+    "id": "SEO01156",
+    "category": "Robots",
+    "name": "robots.txt blocks all crawlers (Disallow: /)",
+    "scope": "site",
+    "severity": "warning",
+    "fixHint": "Review if blocking all crawlers is intentional.",
+    "tags": [
+      "robots",
+      "crawlability"
+    ]
+  },
+  {
+    "id": "SEO01157",
+    "category": "Robots",
+    "name": "robots.txt Sitemap URL does not match baseUrl",
+    "scope": "site",
+    "severity": "warning",
+    "fixHint": "Ensure Sitemap URL uses the correct domain.",
+    "tags": [
+      "robots",
+      "sitemap"
+    ]
+  },
+  {
+    "id": "SEO01158",
+    "category": "Sitemaps",
+    "name": "Missing sitemap.xml file",
+    "scope": "site",
+    "severity": "warning",
+    "fixHint": "Add a sitemap.xml file for better discoverability.",
+    "tags": [
+      "sitemap",
+      "crawlability"
+    ]
+  },
+  {
+    "id": "SEO01159",
+    "category": "Sitemaps",
+    "name": "sitemap.xml has invalid XML syntax",
+    "scope": "site",
+    "severity": "error",
+    "fixHint": "Fix XML syntax errors in sitemap.",
+    "tags": [
+      "sitemap"
+    ]
+  },
+  {
+    "id": "SEO01160",
+    "category": "Sitemaps",
+    "name": "Sitemap URL references non-existent page",
+    "scope": "site",
+    "severity": "warning",
+    "fixHint": "Remove or fix URLs that point to non-existent pages.",
+    "tags": [
+      "sitemap"
+    ]
+  },
+  {
+    "id": "SEO01161",
+    "category": "Sitemaps",
+    "name": "Sitemap URL uses HTTP instead of HTTPS",
+    "scope": "site",
+    "severity": "warning",
+    "fixHint": "Use HTTPS URLs in sitemap for security.",
+    "tags": [
+      "sitemap",
+      "security"
+    ]
+  },
+  {
+    "id": "SEO01162",
+    "category": "Sitemaps",
+    "name": "Sitemap has duplicate URLs",
+    "scope": "site",
+    "severity": "notice",
+    "fixHint": "Remove duplicate URLs from sitemap.",
+    "tags": [
+      "sitemap"
+    ]
+  },
+  {
+    "id": "SEO01163",
+    "category": "Sitemaps",
+    "name": "Sitemap lastmod date is invalid",
+    "scope": "site",
+    "severity": "notice",
+    "fixHint": "Use valid ISO 8601 date format for lastmod.",
+    "tags": [
+      "sitemap"
+    ]
+  },
+  {
+    "id": "SEO01164",
+    "category": "Sitemaps",
+    "name": "Sitemap URL has trailing slash inconsistency",
+    "scope": "site",
+    "severity": "notice",
+    "fixHint": "Ensure URLs consistently use or omit trailing slashes.",
+    "tags": [
+      "sitemap"
+    ]
+  },
+  {
+    "id": "SEO01165",
+    "category": "Robots",
+    "name": "robots.txt references non-existent sitemap",
+    "scope": "site",
+    "severity": "warning",
+    "fixHint": "Update robots.txt to reference the correct sitemap URL.",
+    "tags": [
+      "robots",
+      "sitemap"
+    ]
   }
 ]

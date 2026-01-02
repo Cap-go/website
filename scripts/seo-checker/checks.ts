@@ -1468,6 +1468,375 @@ export function checkDuplicates(siteData: SiteData, config: SEOCheckerConfig): S
 }
 
 /**
+ * Check robots.txt file
+ * SEO01153-01157, SEO01165
+ */
+export function checkRobotsTxt(config: SEOCheckerConfig): SEOIssue[] {
+  const issues: SEOIssue[] = []
+  const robotsPath = path.join(config.distPath, 'robots.txt')
+
+  // SEO01153: Missing robots.txt
+  if (!fileExists(robotsPath)) {
+    const rule = getRule('SEO01153')
+    if (rule) {
+      issues.push({
+        ruleId: 'SEO01153',
+        ruleName: rule.name,
+        category: rule.category,
+        severity: rule.severity,
+        file: 'robots.txt',
+        relativePath: 'robots.txt',
+        fixHint: rule.fixHint,
+        fingerprint: 'SEO01153::robots.txt',
+      })
+    }
+    return issues
+  }
+
+  // Read and parse robots.txt
+  const fs = require('node:fs')
+  const content = fs.readFileSync(robotsPath, 'utf-8')
+  const lines = content.split('\n')
+
+  let hasUserAgent = false
+  let hasSitemap = false
+  let hasDisallowAll = false
+  const sitemapUrls: string[] = []
+
+  for (const line of lines) {
+    const trimmed = line.trim()
+    if (trimmed === '' || trimmed.startsWith('#')) continue
+
+    const colonIndex = trimmed.indexOf(':')
+    if (colonIndex === -1) {
+      // SEO01154: Syntax error - line without colon
+      const rule = getRule('SEO01154')
+      if (rule) {
+        issues.push({
+          ruleId: 'SEO01154',
+          ruleName: rule.name,
+          category: rule.category,
+          severity: rule.severity,
+          file: 'robots.txt',
+          relativePath: 'robots.txt',
+          element: trimmed.substring(0, 50),
+          fixHint: rule.fixHint,
+          fingerprint: `SEO01154::${trimmed.substring(0, 30)}`,
+        })
+      }
+      continue
+    }
+
+    const directive = trimmed.substring(0, colonIndex).toLowerCase().trim()
+    const value = trimmed.substring(colonIndex + 1).trim()
+
+    if (directive === 'user-agent') {
+      hasUserAgent = true
+    } else if (directive === 'sitemap') {
+      hasSitemap = true
+      sitemapUrls.push(value)
+
+      // SEO01157: Sitemap URL doesn't match baseUrl
+      if (!value.startsWith(config.baseUrl)) {
+        const rule = getRule('SEO01157')
+        if (rule) {
+          issues.push({
+            ruleId: 'SEO01157',
+            ruleName: rule.name,
+            category: rule.category,
+            severity: rule.severity,
+            file: 'robots.txt',
+            relativePath: 'robots.txt',
+            element: value,
+            actual: value,
+            expected: config.baseUrl,
+            fixHint: rule.fixHint,
+            fingerprint: `SEO01157::${value}`,
+          })
+        }
+      }
+    } else if (directive === 'disallow' && value === '/') {
+      hasDisallowAll = true
+    }
+  }
+
+  // SEO01155: Missing Sitemap directive
+  if (!hasSitemap) {
+    const rule = getRule('SEO01155')
+    if (rule) {
+      issues.push({
+        ruleId: 'SEO01155',
+        ruleName: rule.name,
+        category: rule.category,
+        severity: rule.severity,
+        file: 'robots.txt',
+        relativePath: 'robots.txt',
+        fixHint: rule.fixHint,
+        fingerprint: 'SEO01155::robots.txt',
+      })
+    }
+  }
+
+  // SEO01156: Blocks all crawlers
+  if (hasDisallowAll) {
+    const rule = getRule('SEO01156')
+    if (rule) {
+      issues.push({
+        ruleId: 'SEO01156',
+        ruleName: rule.name,
+        category: rule.category,
+        severity: rule.severity,
+        file: 'robots.txt',
+        relativePath: 'robots.txt',
+        element: 'Disallow: /',
+        fixHint: rule.fixHint,
+        fingerprint: 'SEO01156::robots.txt',
+      })
+    }
+  }
+
+  // SEO01165: Sitemap in robots.txt doesn't exist
+  for (const sitemapUrl of sitemapUrls) {
+    // Convert URL to file path
+    const sitemapPath = sitemapUrl.replace(config.baseUrl, '').replace(/^\//, '')
+    const fullPath = path.join(config.distPath, sitemapPath)
+
+    if (!fileExists(fullPath)) {
+      const rule = getRule('SEO01165')
+      if (rule) {
+        issues.push({
+          ruleId: 'SEO01165',
+          ruleName: rule.name,
+          category: rule.category,
+          severity: rule.severity,
+          file: 'robots.txt',
+          relativePath: 'robots.txt',
+          element: sitemapUrl,
+          fixHint: rule.fixHint,
+          fingerprint: `SEO01165::${sitemapUrl}`,
+        })
+      }
+    }
+  }
+
+  return issues
+}
+
+/**
+ * Check sitemap.xml files
+ * SEO01158-01164
+ */
+export function checkSitemap(config: SEOCheckerConfig, siteData: SiteData): SEOIssue[] {
+  const issues: SEOIssue[] = []
+  const fs = require('node:fs')
+
+  // Check for sitemap files - could be sitemap.xml, sitemap-index.xml, or sitemap-0.xml
+  const possibleSitemaps = ['sitemap.xml', 'sitemap-index.xml', 'sitemap-0.xml']
+  let foundSitemap = false
+  let sitemapFiles: string[] = []
+
+  for (const name of possibleSitemaps) {
+    const sitemapPath = path.join(config.distPath, name)
+    if (fileExists(sitemapPath)) {
+      foundSitemap = true
+      sitemapFiles.push(sitemapPath)
+    }
+  }
+
+  // SEO01158: Missing sitemap
+  if (!foundSitemap) {
+    const rule = getRule('SEO01158')
+    if (rule) {
+      issues.push({
+        ruleId: 'SEO01158',
+        ruleName: rule.name,
+        category: rule.category,
+        severity: rule.severity,
+        file: 'sitemap.xml',
+        relativePath: 'sitemap.xml',
+        fixHint: rule.fixHint,
+        fingerprint: 'SEO01158::sitemap.xml',
+      })
+    }
+    return issues
+  }
+
+  // Process each sitemap file
+  const seenUrls = new Set<string>()
+  const urlsWithTrailingSlash = new Set<string>()
+  const urlsWithoutTrailingSlash = new Set<string>()
+
+  for (const sitemapPath of sitemapFiles) {
+    const relativePath = path.relative(config.distPath, sitemapPath)
+    let content: string
+
+    try {
+      content = fs.readFileSync(sitemapPath, 'utf-8')
+    } catch {
+      continue
+    }
+
+    // Basic XML validation
+    if (!content.includes('<?xml') && !content.includes('<urlset') && !content.includes('<sitemapindex')) {
+      const rule = getRule('SEO01159')
+      if (rule) {
+        issues.push({
+          ruleId: 'SEO01159',
+          ruleName: rule.name,
+          category: rule.category,
+          severity: rule.severity,
+          file: sitemapPath,
+          relativePath,
+          fixHint: rule.fixHint,
+          fingerprint: `SEO01159::${relativePath}`,
+        })
+      }
+      continue
+    }
+
+    // If it's a sitemap index, find referenced sitemaps
+    if (content.includes('<sitemapindex')) {
+      const locMatches = content.matchAll(/<loc>([^<]+)<\/loc>/g)
+      for (const match of locMatches) {
+        const loc = match[1]
+        const sitemapName = loc.replace(config.baseUrl, '').replace(/^\//, '')
+        const referencedPath = path.join(config.distPath, sitemapName)
+        if (fileExists(referencedPath) && !sitemapFiles.includes(referencedPath)) {
+          sitemapFiles.push(referencedPath)
+        }
+      }
+      continue
+    }
+
+    // Parse URLs from sitemap
+    const urlMatches = content.matchAll(/<url>\s*<loc>([^<]+)<\/loc>(?:\s*<lastmod>([^<]*)<\/lastmod>)?/g)
+
+    for (const match of urlMatches) {
+      const url = match[1]
+      const lastmod = match[2]
+
+      // SEO01161: HTTP instead of HTTPS
+      if (config.baseUrl.startsWith('https://') && url.startsWith('http://')) {
+        const rule = getRule('SEO01161')
+        if (rule) {
+          issues.push({
+            ruleId: 'SEO01161',
+            ruleName: rule.name,
+            category: rule.category,
+            severity: rule.severity,
+            file: sitemapPath,
+            relativePath,
+            element: url.substring(0, 80),
+            fixHint: rule.fixHint,
+            fingerprint: `SEO01161::${url.substring(0, 50)}`,
+          })
+        }
+      }
+
+      // SEO01162: Duplicate URLs
+      if (seenUrls.has(url)) {
+        const rule = getRule('SEO01162')
+        if (rule) {
+          issues.push({
+            ruleId: 'SEO01162',
+            ruleName: rule.name,
+            category: rule.category,
+            severity: rule.severity,
+            file: sitemapPath,
+            relativePath,
+            element: url.substring(0, 80),
+            fixHint: rule.fixHint,
+            fingerprint: `SEO01162::${url.substring(0, 50)}`,
+          })
+        }
+      }
+      seenUrls.add(url)
+
+      // Track trailing slash consistency
+      if (url.endsWith('/')) {
+        urlsWithTrailingSlash.add(url)
+      } else {
+        urlsWithoutTrailingSlash.add(url)
+      }
+
+      // SEO01163: Invalid lastmod date
+      if (lastmod && lastmod.trim() !== '') {
+        const datePattern = /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})?)?$/
+        if (!datePattern.test(lastmod.trim())) {
+          const rule = getRule('SEO01163')
+          if (rule) {
+            issues.push({
+              ruleId: 'SEO01163',
+              ruleName: rule.name,
+              category: rule.category,
+              severity: rule.severity,
+              file: sitemapPath,
+              relativePath,
+              element: `${url.substring(0, 40)} - lastmod: ${lastmod}`,
+              fixHint: rule.fixHint,
+              fingerprint: `SEO01163::${url.substring(0, 30)}::${lastmod}`,
+            })
+          }
+        }
+      }
+
+      // SEO01160: URL references non-existent page
+      if (url.startsWith(config.baseUrl)) {
+        const urlPath = url.replace(config.baseUrl, '').replace(/^\//, '').replace(/\/$/, '')
+        const possiblePaths = [
+          path.join(config.distPath, urlPath, 'index.html'),
+          path.join(config.distPath, urlPath + '.html'),
+          path.join(config.distPath, urlPath),
+        ]
+
+        const exists = possiblePaths.some(p => fileExists(p))
+        if (!exists && urlPath !== '') {
+          const rule = getRule('SEO01160')
+          if (rule) {
+            issues.push({
+              ruleId: 'SEO01160',
+              ruleName: rule.name,
+              category: rule.category,
+              severity: rule.severity,
+              file: sitemapPath,
+              relativePath,
+              element: url.substring(0, 80),
+              fixHint: rule.fixHint,
+              fingerprint: `SEO01160::${url.substring(0, 50)}`,
+            })
+          }
+        }
+      }
+    }
+  }
+
+  // SEO01164: Trailing slash inconsistency (only report if there's a mix)
+  if (urlsWithTrailingSlash.size > 0 && urlsWithoutTrailingSlash.size > 0) {
+    // Only report if the inconsistency is significant (more than 10% of URLs differ)
+    const total = urlsWithTrailingSlash.size + urlsWithoutTrailingSlash.size
+    const minority = Math.min(urlsWithTrailingSlash.size, urlsWithoutTrailingSlash.size)
+    if (minority > total * 0.1) {
+      const rule = getRule('SEO01164')
+      if (rule) {
+        issues.push({
+          ruleId: 'SEO01164',
+          ruleName: rule.name,
+          category: rule.category,
+          severity: rule.severity,
+          file: 'sitemap',
+          relativePath: 'sitemap',
+          actual: `${urlsWithTrailingSlash.size} with trailing slash, ${urlsWithoutTrailingSlash.size} without`,
+          fixHint: rule.fixHint,
+          fingerprint: 'SEO01164::sitemap',
+        })
+      }
+    }
+  }
+
+  return issues
+}
+
+/**
  * Validate BCP47 language code
  */
 function isValidBCP47(lang: string): boolean {

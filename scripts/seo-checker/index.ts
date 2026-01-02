@@ -19,7 +19,7 @@ import * as fs from 'node:fs'
 import * as path from 'node:path'
 import type { SEOCheckerConfig, CheckResult, Severity, SEOIssue } from './types'
 import { scanDistFolder } from './parser'
-import { runPageChecks, checkDuplicates } from './checks'
+import { runPageChecks, checkDuplicates, checkRobotsTxt, checkSitemap } from './checks'
 import { filterExcludedIssues, filterDisabledRules, loadExclusionsFromFile } from './exclusions'
 import { printReport, writeReport, formatJsonReport } from './reporter'
 
@@ -256,6 +256,14 @@ async function run(): Promise<void> {
   // Run site-wide duplicate checks
   const duplicateIssues = checkDuplicates(siteData, config)
   allIssues.push(...duplicateIssues)
+
+  // Run robots.txt checks
+  const robotsIssues = checkRobotsTxt(config)
+  allIssues.push(...robotsIssues)
+
+  // Run sitemap checks
+  const sitemapIssues = checkSitemap(config, siteData)
+  allIssues.push(...sitemapIssues)
 
   // Filter disabled rules
   allIssues = filterDisabledRules(allIssues, config)
