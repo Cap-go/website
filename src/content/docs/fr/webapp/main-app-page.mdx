@@ -1,54 +1,113 @@
 ---
-locale: fr
-title: "Application Page"
-description: "What does the Application page of the Capgo webapp shows? And what you can do with it."
-sidebar: 
+title: "Page de l'application"
+description: "Que montre la page de l'application de Capgo webapp ? Et que pouvez-vous faire avec."
+sidebar:
   order: 5
+locale: fr
 ---
 
-## What does the Application page shows?
+## Que montre la page de l'application ?
 
-First, let's take a look at the main page of the Application:
+Tout d'abord, jetons un œil à la page principale de l'application :
 
-In Capgo, an Application represents your mobile Application integrated with Capgo's live Mise à jour system. It allows you to manage Mises à jour, Canaux, and Appareils seamlessly.
+Dans Capgo, une application représente votre application mobile intégrée au système de mise à jour en direct de Capgo. Elle vous permet de gérer les mises à jour, les canaux et les appareils de manière transparente.
 
-<figure><img src="/main-app-page.webp" alt="Main page screenshot" /><figcaption></figcaption></figure>
+<figure><img src="/main-app-page.webp" alt="Capture d'écran de la page principale" /><figcaption></figcaption></figure>
 
-Let's take a closer look at this. The main Application page is divided into several key areas:
+Examinons cela de plus près. La page principale de l'application est divisée en plusieurs zones clés :
 
-1.  **Top Navigation Bar:** Provides access to different sections of your Application management:
-    *   **Overview (1):** The current view, displaying key metrics and summaries.
-    *   **Information (2):** Displays your app's core settings and details (see "App Information" section below).
-    *   **[Bundles (3)](/docs/webapp/bundles/):** Manage your app's versions and releases.
-    *   **[Channels (4)](/docs/webapp/channels/):** Configure and manage different update channels (e.g., production, beta).
-    *   **[Devices (5)](/docs/webapp/devices/):** View and manage registered devices, including setting specific overrides.
-    *   **[Logs (6)](/docs/webapp/logs/):** Access detailed logs and error reports for your app.
+1.  **Barre de navigation supérieure :** Fournit l'accès aux différentes sections de la gestion de votre application :
+    *   **Tableau de bord (1) :** La vue actuelle, affichant les métriques clés et les résumés.
+    *   **Informations (2) :** Affiche les paramètres de base et les détails de votre application (voir la section "Informations de l'application" ci-dessous).
+    *   **[Bundles (3)](/docs/webapp/bundles/) :** Gérez les versions et les releases de votre application.
+    *   **[Canaux (4)](/docs/webapp/channels/) :** Configurez et gérez différents canaux de mise à jour (ex., production, beta).
+    *   **[Appareils (5)](/docs/webapp/devices/) :** Consultez et gérez les appareils enregistrés, y compris la définition de remplacements spécifiques.
+    *   **[Logs (6)](/docs/webapp/logs/) :** Accédez aux logs détaillés et aux rapports d'erreurs de votre application.
+    *   **Builds (7) :** Consultez et gérez les builds de votre application.
 
-2.  **Statistiques Display:** Visualizes Important metrics for the last billing period (data reflects Utilisation from your billing day, not the 1st of the month):
-    *   **Monthly Active Users (7):** Tracks the number of unique active users over time.
-    *   **Storage (8):** Shows the current storage consumption.
-    *   **Bandwidth (9):** Displays the bandwidth usage.
-    *   **Active Device by Bundle (10):** (Beta) Shows the distribution of active devices across different app bundles.
+2.  **Affichage des statistiques :** Visualise les métriques importantes pour la dernière période de facturation (les données reflètent l'utilisation à partir de votre jour de facturation, pas le 1er du mois) :
+    *   **Utilisateurs actifs mensuels (8) :** Suit le nombre d'utilisateurs actifs uniques au fil du temps.
+    *   **Stockage (9) :** Affiche la consommation de stockage actuelle.
+    *   **Bande passante (10) :** Affiche l'utilisation de la bande passante.
+    *   **Bundle actif (11) :** Affiche la distribution des appareils actifs sur différents bundles d'application.
 
-3.  **Summary Cards:** Offers a quick Aperçu of key counts:
-    *   **Channels (11):** Total number of configured channels.
-    *   **Bundles (12):** Total number of app bundles.
-    *   **Devices (13):** Total number of registered devices.
-    *   **Updates (14):** Total number of updates performed.
+3.  **Cartes de résumé :** Offre un aperçu rapide des comptages clés :
+    *   **Téléchargements de bundles (12) :** Nombre total de bundles d'application téléchargés.
+    *   **Statistiques de mises à jour (13) :** Nombre total de mises à jour effectuées, y compris les requêtes, installations et échecs.
+    *   **Statistiques de déploiement (14) :** Nombre total de déploiements.
 
-## Application Information
+4.  **Options d'affichage (15-18) :** Contrôles pour filtrer et visualiser les statistiques :
+    *   **Quotidien (15) :** Voir les statistiques quotidiennes.
+    *   **Cumulatif (16) :** Voir les statistiques cumulatives au fil du temps.
+    *   **Période de facturation (17) :** Voir les statistiques pour la période de facturation actuelle.
+    *   **Plage de dates (18) :** Sélectionner une plage de dates personnalisée (ex., 30 derniers jours).
 
-This section corresponds to the "Information" tab (2) in the top navigation bar. Here you can view and manage crucial details and Paramètres for your Application.
+## Informations de l'application
 
-<figure><img src="/app_info.webp" alt="App Information Page" /><figcaption>App Information Page</figcaption></figure>
+Cette section correspond à l'onglet "Informations" (1) dans la barre de navigation supérieure. Ici, vous pouvez consulter et gérer les détails et paramètres cruciaux de votre application.
 
-Here's a breakdown of the Disponible fields and actions:
+<figure><img src="/app_info.webp" alt="Page d'informations de l'application" /><figcaption>Page d'informations de l'application</figcaption></figure>
 
-*   **App Icon:** Displays your application's icon. You can click the "Change" button to upload a new icon.
-*   **App ID:** A unique identifier for your application within Capgo. This ID is not editable.
-*   **App Name:** The display name for your application. You can modify this as needed.
-*   **Default Upload Channel:** Specifies the default channel to which new bundles will be uploaded. You can click the edit icon to select a different default channel.
-*   **Auto Delete Bundles Not Used (after x seconds):** This setting allows you to automatically delete old bundles that haven't been used for a specified duration (in seconds). This helps manage storage and keep your bundle list clean. `2592000` seconds is equivalent to 30 days.
-*   **Transfer the application to another organisation:** This section provides an option to initiate the transfer of your application to a different organization you are a part of.
-*   **Delete App Button:** Permanently deletes your application from Capgo. This action is irreversible and will remove all associated data, bundles, channels, and devices.
-*   **Update Button:** Saves any changes you've made to the editable fields on this page (e.g., App Name, Default Upload Channel, Auto Delete Bundles setting).
+Voici un aperçu des champs et actions disponibles :
+
+*   **Icône de l'application (2) :** Affiche l'icône de votre application. Vous pouvez cliquer sur le bouton "Modifier" pour télécharger une nouvelle icône.
+*   **ID de l'application (3) :** Un identifiant unique pour votre application dans Capgo. Cet ID n'est pas modifiable.
+*   **Nom de l'application (4) :** Le nom d'affichage de votre application. Vous pouvez le modifier selon vos besoins.
+*   **Canal de téléchargement par défaut (5) :** Spécifie le canal par défaut vers lequel les nouveaux bundles seront téléchargés. Vous pouvez cliquer sur l'icône de modification pour sélectionner un canal par défaut différent.
+*   **Canal de téléchargement par défaut (6) :** Spécifie le canal par défaut à partir duquel les appareils téléchargeront les mises à jour. Vous pouvez cliquer sur l'icône de modification pour sélectionner un canal par défaut différent. Voir la section [Configuration du Canal par Défaut](#configuration-du-canal-par-défaut) ci-dessous pour des informations détaillées.
+*   **Supprimer automatiquement les bundles non utilisés (après x secondes) (7) :** Ce paramètre vous permet de supprimer automatiquement les anciens bundles qui n'ont pas été utilisés pendant une durée spécifiée (en secondes). Définissez sur `0` pour désactiver la suppression automatique. Cela aide à gérer le stockage et à garder votre liste de bundles propre.
+*   **Exposer les métadonnées du bundle au plugin (8) :** Lorsqu'il est activé, les champs lien du bundle et commentaire seront envoyés au plugin Capacitor Updater. Cette fonctionnalité nécessite la version 7.35.0 ou supérieure du plugin.
+*   **Transférer la propriété de l'application (9) :** Cette section fournit une option pour initier le transfert de votre application vers une autre organisation dont vous faites partie.
+*   **Bouton Supprimer l'application :** Supprime définitivement votre application de Capgo. Cette action est irréversible et supprimera toutes les données associées, bundles, canaux et appareils.
+*   **Bouton Mettre à jour :** Enregistre toutes les modifications que vous avez apportées aux champs modifiables de cette page (ex., Nom de l'application, Canal de téléchargement par défaut, paramètre de suppression automatique des bundles).
+
+## Configuration du Canal par Défaut
+
+Le **Canal de téléchargement par défaut** est l'un des paramètres les plus importants pour votre application. Il détermine de quel canal les nouveaux appareils recevront les mises à jour lorsqu'ils se connectent pour la première fois à Capgo.
+
+### Comment fonctionnent les canaux par défaut
+
+Lorsqu'un appareil demande une mise à jour à Capgo, le système détermine quel canal utiliser selon l'ordre de priorité suivant (priorité la plus élevée en premier) :
+
+1. **Mappage d'appareil forcé** : Si l'ID de l'appareil est explicitement forcé vers un canal dans les paramètres du canal, ce canal gagne toujours.
+2. **Override cloud** : Si l'appareil a été assigné à un canal via `setChannel()` ou manuellement dans le tableau de bord, cet override est utilisé.
+3. **`defaultChannel` de Capacitor config** : Si défini dans votre fichier `capacitor.config.*`, ceci est utilisé pour les builds de test/beta.
+4. **Canal de téléchargement par défaut** : Le paramètre configuré ici—c'est ce que ~99% de vos utilisateurs de production utiliseront.
+
+### Canaux par défaut spécifiques à la plateforme
+
+Vous pouvez configurer **deux canaux par défaut séparés**—un pour iOS et un pour Android. C'est utile quand :
+
+- Vous voulez déployer des mises à jour sur une plateforme avant l'autre
+- Vous avez besoin de stratégies de mise à jour différentes par plateforme
+- Vous testez une nouvelle version sur une plateforme tout en gardant l'autre stable
+
+Pour configurer des valeurs par défaut spécifiques à la plateforme :
+1. Créez deux canaux (ex., `production-ios` et `production-android`)
+2. Dans les paramètres de chaque canal, activez uniquement la plateforme pertinente (toggle iOS ou Android)
+3. Marquez les deux canaux comme "Par défaut" - Capgo le permet quand les canaux ciblent différentes plateformes
+
+Lorsqu'un appareil demande une mise à jour :
+- Les appareils iOS recevront les mises à jour du canal par défaut activé pour iOS
+- Les appareils Android recevront les mises à jour du canal par défaut activé pour Android
+
+### Canal par défaut unique (Recommandé pour la plupart des applications)
+
+Pour la plupart des applications, un seul canal par défaut qui supporte les deux plateformes est l'approche la plus simple :
+1. Créez un canal (ex., `production`)
+2. Assurez-vous que les toggles iOS et Android sont activés
+3. Marquez-le comme le canal par défaut
+
+Cela garantit un comportement cohérent sur toutes les plateformes et simplifie votre workflow de release.
+
+### Changer le canal par défaut
+
+Quand vous changez le canal par défaut :
+- **Les nouveaux appareils** commenceront immédiatement à recevoir les mises à jour du nouveau canal par défaut
+- **Les appareils existants** qui ont déjà une assignation de canal (via override ou forçage) ne changeront PAS automatiquement
+- Pour déplacer les appareils existants, vous devez soit :
+  - Utiliser `setChannel()` pour les override programmatiquement
+  - Les forcer vers le nouveau canal dans le tableau de bord
+  - Supprimer leurs entrées d'appareil (ils se ré-enregistreront avec le nouveau canal par défaut)
+
+> **Conseil** : Testez toujours votre nouveau canal par défaut avec un petit groupe d'appareils forcés avant de le rendre par défaut pour tous les utilisateurs.

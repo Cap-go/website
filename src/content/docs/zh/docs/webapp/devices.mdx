@@ -1,6 +1,6 @@
 ---
 title: "设备"
-description: "利用设备页面有效管理和配置设备的综合指南,包括过滤选项和各个设备的详细配置设置"
+description: "利用设备页面有效管理和配置设备的综合指南，包括过滤选项和各个设备的详细配置设置。"
 sidebar:
   order: 7
 locale: zh
@@ -11,28 +11,30 @@ locale: zh
 :::
 
 ## 显示所有设备列表
-首先,让我们看一下设备页面。您可以通过[点击您的应用](/docs/webapp/main-page)然后[点击设备标签](/docs/webapp/main-app-page)来访问它。
+首先，让我们看一下设备页面。您可以通过[点击您的应用](/docs/webapp/main-page)然后[点击设备标签](/docs/webapp/main-app-page)来访问它。
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/devices.webp" alt="设备列表" /><figcaption></figcaption></figure>
 
-## 仅显示开发人员设备
-您可能想仅显示被覆盖的设备(具有[自定义频道](/docs/plugin/api/#setchannel)或自定义版本的设备)
-要执行此操作,请点击 `过滤器`,然后点击 `覆盖`。应该看起来像这样:
-
-<figure><img style="margin-left: auto; margin-right: auto" src="/overwrite-filter.webp" alt="过滤设备" /><figcaption></figcaption></figure>
+1. **设备标签** - 点击导航栏中的此标签以访问设备页面
+2. **过滤器** - 点击按以下条件过滤设备：
+   - **覆盖** - 仅显示具有[自定义频道](/docs/plugin/api/#setchannel)或自定义版本的设备
+   - **自定义 ID** - 仅显示设置了自定义标识符的设备
 
 ## 配置设备
 
-要配置特定设备,请在表格中点击它,然后您应该看到类似这样的内容:
+要配置特定设备，请在表格中点击它，然后您应该看到类似这样的内容：
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/device-specific.webp" alt="显示一个设备" /><figcaption></figcaption></figure>
 
-首先是 `自定义 ID`。这是一个非常有用的字段,可帮助您将设备连接到您可以为自己的用户识别的 ID。
+1. **Information** - 查看设备详情，包括设备 ID、最后更新、平台、插件版本、版本、内置版本、操作系统版本，以及是否为生产应用
+2. **Deployments** - 查看此设备的部署历史
+3. **Logs** - 查看与此设备相关的日志
+4. **频道覆盖** - 为此特定设备覆盖频道。如果设置，此设备将不使用公共（默认）频道，只接收所选频道的更新
+
+### 自定义 ID
+
+`自定义 ID` 是一个非常有用的字段，可帮助您将设备连接到您可以为自己的用户识别的 ID。
 
 使用它可以轻松识别哪个设备属于哪个用户。
 
-您可以从 WebUI 或使用 `CapacitorUpdater.setCustomId({ customId: user });` 从设备设置它
-
-接下来是强制版本。如果设置了此项,则此设备将**始终**接收此版本。它优先于频道。
-
-最后是自定义频道。如果设置了此项,则此设备将不关心公共(默认)频道,只使用这个频道。
+自定义 ID 只能从设备本身使用 `CapacitorUpdater.setCustomId({ customId: user });` 设置。

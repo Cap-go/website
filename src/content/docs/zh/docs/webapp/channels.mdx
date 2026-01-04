@@ -83,48 +83,26 @@ If you later change the dashboard default to `production`, devices already on an
 
 ## 管理频道
 
-点击频道名称将打开一个模态框,您可以在其中管理频道。(图中的 `3`)
-此页面应该看起来像这样:
+点击频道名称将打开一个模态框,您可以在其中管理频道设置（图中的 `3`）。
 
-<figure><img src="/manage_channel_main.webp" alt="manage channel" /><figcaption></figcaption></figure>
+<figure><img src="/channel_settings.webp" alt="频道设置" /><figcaption></figcaption></figure>
 
-Let's go through the different sections.
-
-First the `Bundle number` (`1` in the image). This is the current version for that channel. When asked to serve an update this channel will always attempt to respond with that version.* [^1]
-Clicking on it should take you to the [bundle](/docs/webapp/bundles/) page.
-
-Second the `Shared to` (`2` in the image) page. I recommend against ever using this. A new and better system is in the works.
-
-Now the forced devices (`3` in the image). This is a list of devices that will always get updates from this channel. This is useful for testing purposes. You can add force a device to a channel from the [devices](/docs/webapp/devices/) page.
-
-Lastly the settings (`4` in the image). This is where you can manage how the channels behave.
-After you click on it you should see something like this:
-
-<figure><img src="/channel_settings.webp" alt="setting of channel" /><figcaption></figcaption></figure>
-
-The list of settings is long, but I will do my best to explain them all.
+频道设置页面包含频道的所有配置选项。让我们逐一了解每个设置。
 
 ---
-First the `Default channel` **THIS IS PROBABLY THE MOST IMPORTANT ONE**.\
-If a channel is marked as default, then it will be used as the default channel for all new devices.\
-In different terms: If you have a new user Capgo will try to serve them the latest version of this default channel (unless the device is forced or has an override as described above).
-Only 1 channel can be set to default at a time. If you try to break this rule you will be asked to confirm your action.
-
-<figure><img style="margin-left: auto; margin-right: auto" src="/confirm-make-default.webp" alt="confirm make change" /><figcaption></figcaption></figure>
-
-After you confirm the old default channel will be unmarked as default and the new one will be marked as default.
+首先是`默认频道`切换开关。启用后,此频道将成为新设备的默认频道。有关默认频道工作方式的完整说明（包括如何设置特定平台的默认值,一个用于 iOS,一个用于 Android）,请参阅[默认频道配置](/docs/webapp/main-app-page/#默认频道配置)部分。
 
 ---
-Second the `IOS` setting. This is relatively simple. If this is false then IOS devices will not be allowed to download updates from this channel.
+第二是 `IOS` 设置。这相对简单。如果设为 false,则 iOS 设备将无法从此频道下载更新。
 
-Third is the `Android` setting. This is similar to `IOS`. If this is false then Android devices will not be allowed to download updates from this channel.
+第三是 `Android` 设置。这与 `IOS` 类似。如果设为 false,则 Android 设备将无法从此频道下载更新。
 
-Fourth is the `Disable auto downgrade under native` setting. If this is true then it will be impossible to downgrade from a native version. This means that if you have uploaded a `1.2.0` version to the app store or play store and try to set the channel version to `1.1.0` then the update (downgrade) will fail.
+第四是`禁用原生版本以下的自动降级`设置。如果设为 true,则无法从原生版本降级。这意味着如果您已将 `1.2.0` 版本上传到 App Store 或 Play Store 并尝试将频道版本设置为 `1.1.0`,则更新（降级）将失败。
 
-Fifth is the `Disable auto update`. This setting is quite complex, and you can learn more about it [here](/docs/cli/commands/#disable-updates-strategy)
+第五是`禁用自动更新`。此设置相当复杂,您可以在[此处](/docs/cli/commands/#disable-updates-strategy)了解更多信息。
 
-As for `Allow development build`. If this is true then development builds will be allowed to download updates from this channel. If not then any update request that has the `prod` set to false will be rejected. This is mostly useful for testing purposes.
+关于`允许开发构建`。如果设为 true,则开发构建将被允许从此频道下载更新。否则,任何将 `prod` 设置为 false 的更新请求都将被拒绝。这主要用于测试目的。
 
-Seventh is the `Allow Emulators`. If this is false then Capgo will disallow any update request that comes from an emulator. This is mostly useful for testing purposes.
+第七是`允许模拟器`。如果设为 false,则 Capgo 将拒绝来自模拟器的任何更新请求。这主要用于测试目的。
 
-Eight is the `Allow devices to self associate`. If this is true then the [setChannel](/docs/plugin/api/#setchannel) method will be available. If this is set to false and you try to call the [setChannel](/docs/plugin/api/#setchannel) method with this channel then the call will fail.
+第八是`允许设备自行关联`。如果设为 true,则 [setChannel](/docs/plugin/api/#setchannel) 方法将可用。如果设为 false 并且您尝试使用此频道调用 [setChannel](/docs/plugin/api/#setchannel) 方法,则调用将失败。

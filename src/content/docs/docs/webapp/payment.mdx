@@ -1,6 +1,6 @@
 ---
 title: "Payment system"
-description: "Managing payments in your Capgo account. In this section we show you how to manage your Card and plan for Capgo"
+description: "Managing payments in your Capgo account. In this section we show you how to manage your Card, plan, and credits for Capgo"
 sidebar:
   order: 10
 ---
@@ -9,18 +9,56 @@ sidebar:
 
 This page aims to answer some questions about the payment system in capgo.
 
+## Plans
+
 #### Q: How can I upgrade my capgo plan?
-A: You can upgrade your capgo plan by going to [the settings](/docs/webapp/settings/#how-to-get-to-the-settings-page) and clicking on the **Plans** button.
+A: You can upgrade your capgo plan by going to [the settings](/docs/webapp/settings/#how-to-get-to-the-settings-page) and clicking on the **Plans** tab (1).
 
-<figure><img src="/plans-button.webp" alt="Choose plan" /><figcaption></figcaption></figure>
+<figure><img src="/plans-subscribe.webp" alt="Plans page" /><figcaption></figcaption></figure>
 
-Then you can select the plan that best fits your needs and click on **Subscribe**
+On this page you can:
+- Toggle between **Monthly Plan** and **Yearly** billing (with a 20% discount for yearly)
+- Choose from four plans: **Solo**, **Maker**, **Team**, or **Enterprise**
+- Click **Subscribe** (2) on the plan that best fits your needs
 
-<figure><img src="/plans-subscribe.webp" alt="Subscribe to plan" /><figcaption></figcaption></figure>
+Each plan shows:
+- Monthly price and annual billing total
+- Monthly active users included and overage pricing
+- Storage and bandwidth allowances
+- Build minutes/hours
+- Features like dedicated support, custom domain, and SOC II compliance
 
-Then a stripe page will open up. There, you can enter your payment information.
+If you don't want to commit to a plan, you can use **credits** instead - click "Learn about credits" to see how pay-as-you-go works.
 
-<figure><img src="/plans-stripe.webp" alt="Stripe portal" /><figcaption></figcaption></figure>
+After clicking Subscribe, a Stripe checkout page will open where you can enter your payment information securely.
+
+## Credits
+
+Credits provide a flexible alternative to upgrading your plan. They're useful when:
+
+- **Temporary spikes** - You're temporarily going above your plan limits (e.g., a viral moment, seasonal traffic) and don't want to upgrade permanently
+- **Plan mismatch** - The next plan tier doesn't fit your needs for other reasons (maybe you need more bandwidth but not more MAU)
+- **Pay-as-you-go preference** - You prefer paying only for what you use beyond your base plan
+
+#### Q: How do I access the Credits page?
+A: Go to [the settings](/docs/webapp/settings/#how-to-get-to-the-settings-page) and click on the **Credits** tab (1).
+
+<figure><img src="/buy_credits.webp" alt="Credits page" /><figcaption></figcaption></figure>
+
+The Credits page shows:
+
+1. **Credits tab** - Navigate here from the Organization settings
+2. **Credits Balance** - Shows your available credits (e.g., 0.00 / 0.00) and credits used in the current period
+3. **Credits Used (USD)** - The estimated dollar value of credits consumed during the current billing period, plus available credits remaining
+4. **Need more credits?** - Purchase additional credits instantly to keep your users receiving updates without disruption. Choose from preset amounts ($50, $100, $500, $5000) or enter a custom amount. The estimated total including taxes is shown before checkout
+5. **Credit pricing** - Expand this section to see the pricing tiers for different usage types (MAU, storage, bandwidth)
+6. **Credit transactions** - View your credit purchase and usage history
+
+#### Q: How do I buy credits?
+A: On the Credits page, select the amount you want to purchase (or use the dropdown for custom amounts), then click **Buy credits**. You'll be redirected to Stripe checkout where you can adjust the quantity and complete payment.
+
+#### Q: When are credits used?
+A: Credits are automatically consumed when you exceed your plan limits for monthly active users, storage, or bandwidth. They provide a flexible way to handle overages without service interruption
 
 #### Q: Are payments secure?
 A: Yes, payments are fully managed by stripe. Capgo never gets access to your credit card details. Stripe takes security very seriously. [Learn more about stripe security policy](https://stripe.com/docs/security/)

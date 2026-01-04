@@ -1,26 +1,113 @@
 ---
-title: メインアプリページ
-description: Apa yang ditampilkan pada halaman utama?
+title: "Halaman Aplikasi"
+description: "Apa yang ditampilkan halaman aplikasi Capgo webapp? Dan apa yang dapat Anda lakukan dengannya."
 sidebar:
   order: 5
 locale: id
 ---
 
-## Apa yang ditampilkan di halaman utama?
+## Apa yang ditampilkan halaman aplikasi?
 
 Pertama, mari kita lihat halaman utama aplikasi:
 
-<figure><img src="/main-app-page.webp" alt="Main page screeshot" /><figcaption></figcaption></figure>
+Di Capgo, sebuah aplikasi mewakili aplikasi mobile Anda yang terintegrasi dengan sistem pembaruan langsung Capgo. Ini memungkinkan Anda mengelola pembaruan, channel, dan perangkat dengan mulus.
 
-Mari kita lihat lebih detail
+<figure><img src="/main-app-page.webp" alt="Screenshot halaman utama" /><figcaption></figcaption></figure>
 
-Pertama statistik. Statistik sedang dirombak sehingga belum bisa didokumentasikan saat ini. Kami akan menambahkan bagian statistik ketika sudah sepenuhnya beroperasi.
+Mari kita lihat lebih dekat. Halaman utama aplikasi dibagi menjadi beberapa area utama:
 
-Kedua, mari kita lihat semua menu yang tersedia dan fungsinya
+1.  **Bilah Navigasi Atas:** Menyediakan akses ke berbagai bagian manajemen aplikasi Anda:
+    *   **Dashboard (1):** Tampilan saat ini, menampilkan metrik utama dan ringkasan.
+    *   **Informasi (2):** Menampilkan pengaturan inti dan detail aplikasi Anda (lihat bagian "Informasi Aplikasi" di bawah).
+    *   **[Bundles (3)](/docs/webapp/bundles/):** Kelola versi dan rilis aplikasi Anda.
+    *   **[Channels (4)](/docs/webapp/channels/):** Konfigurasikan dan kelola berbagai channel pembaruan (mis., produksi, beta).
+    *   **[Devices (5)](/docs/webapp/devices/):** Lihat dan kelola perangkat terdaftar, termasuk pengaturan override spesifik.
+    *   **[Logs (6)](/docs/webapp/logs/):** Akses log detail dan laporan error untuk aplikasi Anda.
+    *   **Builds (7):** Lihat dan kelola build aplikasi Anda.
 
-<figure><img src="/app-multiple-sections.webp" alt="Multiple sections screeshot" /><figcaption></figcaption></figure>
+2.  **Tampilan Statistik:** Memvisualisasikan metrik penting untuk periode penagihan terakhir (data mencerminkan penggunaan dari tanggal penagihan Anda, bukan dari tanggal 1 setiap bulan):
+    *   **Pengguna Aktif Bulanan (8):** Melacak jumlah pengguna aktif unik dari waktu ke waktu.
+    *   **Penyimpanan (9):** Menunjukkan konsumsi penyimpanan saat ini.
+    *   **Bandwidth (10):** Menampilkan penggunaan bandwidth.
+    *   **Bundle Aktif (11):** Menunjukkan distribusi perangkat aktif di berbagai bundle aplikasi.
 
-Tombol pertama akan membawa Anda ke halaman [channels](/docs/webapp/channels/). Anda dapat membuat/menghapus/mengkonfigurasi channel aplikasi di sana\
-Tombol kedua akan membawa Anda ke halaman [bundles](/docs/webapp/bundles/). Anda dapat melihat semua versi aplikasi di sana
-Tombol kedua akan membawa Anda ke halaman [device](/docs/webapp/devices/). Anda dapat melihat semua perangkat di sana. Anda juga dapat mengatur pengaturan khusus perangkat dari sana
-Tombol kedua akan membawa Anda ke halaman [updates](/docs/webapp/logs/). Anda dapat melihat statistik detail (log) dan kesalahan yang dialami aplikasi Anda dari sana
+3.  **Kartu Ringkasan:** Menawarkan gambaran cepat tentang jumlah utama:
+    *   **Upload Bundle (12):** Total jumlah bundle aplikasi yang diunggah.
+    *   **Statistik Pembaruan (13):** Total jumlah pembaruan yang dilakukan, termasuk permintaan, instalasi, dan kegagalan.
+    *   **Statistik Deployment (14):** Total jumlah deployment.
+
+4.  **Opsi Tampilan (15-18):** Kontrol untuk memfilter dan melihat statistik:
+    *   **Harian (15):** Lihat statistik secara harian.
+    *   **Kumulatif (16):** Lihat statistik kumulatif dari waktu ke waktu.
+    *   **Periode Penagihan (17):** Lihat statistik untuk periode penagihan saat ini.
+    *   **Rentang Tanggal (18):** Pilih rentang tanggal kustom (mis., 30 hari terakhir).
+
+## Informasi Aplikasi
+
+Bagian ini sesuai dengan tab "Informasi" (1) di bilah navigasi atas. Di sini Anda dapat melihat dan mengelola detail dan pengaturan penting untuk aplikasi Anda.
+
+<figure><img src="/app_info.webp" alt="Halaman Informasi Aplikasi" /><figcaption>Halaman Informasi Aplikasi</figcaption></figure>
+
+Berikut adalah rincian field dan aksi yang tersedia:
+
+*   **Ikon Aplikasi (2):** Menampilkan ikon aplikasi Anda. Anda dapat mengklik tombol "Ubah" untuk mengunggah ikon baru.
+*   **ID Aplikasi (3):** Pengenal unik untuk aplikasi Anda di dalam Capgo. ID ini tidak dapat diedit.
+*   **Nama Aplikasi (4):** Nama tampilan untuk aplikasi Anda. Anda dapat memodifikasi ini sesuai kebutuhan.
+*   **Channel Upload Default (5):** Menentukan channel default ke mana bundle baru akan diunggah. Anda dapat mengklik ikon edit untuk memilih channel default yang berbeda.
+*   **Channel Download Default (6):** Menentukan channel default dari mana perangkat akan mengunduh pembaruan. Anda dapat mengklik ikon edit untuk memilih channel default yang berbeda. Lihat bagian [Konfigurasi Channel Default](#konfigurasi-channel-default) di bawah untuk informasi detail.
+*   **Hapus Otomatis Bundle yang Tidak Digunakan (setelah x detik) (7):** Pengaturan ini memungkinkan Anda untuk secara otomatis menghapus bundle lama yang tidak digunakan selama durasi tertentu (dalam detik). Atur ke `0` untuk menonaktifkan penghapusan otomatis. Ini membantu mengelola penyimpanan dan menjaga daftar bundle Anda tetap bersih.
+*   **Ekspos Metadata Bundle ke Plugin (8):** Ketika diaktifkan, field link bundle dan komentar akan dikirim ke plugin Capacitor Updater. Fitur ini memerlukan plugin versi 7.35.0 atau lebih tinggi.
+*   **Transfer Kepemilikan Aplikasi (9):** Bagian ini menyediakan opsi untuk memulai transfer aplikasi Anda ke organisasi berbeda yang Anda ikuti.
+*   **Tombol Hapus Aplikasi:** Menghapus aplikasi Anda secara permanen dari Capgo. Tindakan ini tidak dapat dibatalkan dan akan menghapus semua data terkait, bundle, channel, dan perangkat.
+*   **Tombol Perbarui:** Menyimpan perubahan apa pun yang telah Anda buat pada field yang dapat diedit di halaman ini (mis., Nama Aplikasi, Channel Upload Default, pengaturan Hapus Otomatis Bundle).
+
+## Konfigurasi Channel Default
+
+**Channel Download Default** adalah salah satu pengaturan terpenting untuk aplikasi Anda. Ini menentukan dari channel mana perangkat baru akan menerima pembaruan saat pertama kali terhubung ke Capgo.
+
+### Cara Kerja Channel Default
+
+Ketika perangkat meminta pembaruan dari Capgo, sistem menentukan channel mana yang akan digunakan berdasarkan urutan prioritas berikut (prioritas tertinggi lebih dulu):
+
+1. **Pemetaan perangkat paksa**: Jika ID perangkat secara eksplisit dipaksa ke channel dalam pengaturan channel, channel tersebut selalu menang.
+2. **Override cloud**: Jika perangkat telah ditetapkan ke channel melalui `setChannel()` atau secara manual di dashboard, override tersebut yang digunakan.
+3. **`defaultChannel` Capacitor config**: Jika diatur dalam file `capacitor.config.*` Anda, ini digunakan untuk build test/beta.
+4. **Channel Download Default**: Pengaturan yang dikonfigurasi di sini—inilah yang akan digunakan ~99% pengguna produksi Anda.
+
+### Channel Default Khusus Platform
+
+Anda dapat mengkonfigurasi **dua channel default terpisah**—satu untuk iOS dan satu untuk Android. Ini berguna ketika:
+
+- Anda ingin meluncurkan pembaruan ke satu platform sebelum yang lain
+- Anda membutuhkan strategi pembaruan yang berbeda per platform
+- Anda sedang menguji versi baru di satu platform sambil menjaga yang lain tetap stabil
+
+Untuk mengatur default khusus platform:
+1. Buat dua channel (mis., `production-ios` dan `production-android`)
+2. Di pengaturan setiap channel, aktifkan hanya platform yang relevan (toggle iOS atau Android)
+3. Tandai kedua channel sebagai "Default" - Capgo mengizinkan ini ketika channel menargetkan platform yang berbeda
+
+Ketika perangkat meminta pembaruan:
+- Perangkat iOS akan menerima pembaruan dari channel default yang diaktifkan untuk iOS
+- Perangkat Android akan menerima pembaruan dari channel default yang diaktifkan untuk Android
+
+### Channel Default Tunggal (Direkomendasikan untuk Kebanyakan Aplikasi)
+
+Untuk kebanyakan aplikasi, satu channel default yang mendukung kedua platform adalah pendekatan paling sederhana:
+1. Buat satu channel (mis., `production`)
+2. Pastikan toggle iOS dan Android diaktifkan
+3. Tandai sebagai channel default
+
+Ini memastikan perilaku konsisten di semua platform dan menyederhanakan workflow release Anda.
+
+### Mengubah Channel Default
+
+Ketika Anda mengubah channel default:
+- **Perangkat baru** akan segera mulai menerima pembaruan dari default baru
+- **Perangkat yang ada** yang sudah memiliki penetapan channel (melalui override atau paksa) TIDAK akan beralih secara otomatis
+- Untuk memindahkan perangkat yang ada, Anda perlu:
+  - Menggunakan `setChannel()` untuk mengoverride mereka secara programatis
+  - Memaksa mereka ke channel baru di dashboard
+  - Menghapus entri perangkat mereka (mereka akan mendaftar ulang dengan default baru)
+
+> **Tips**: Selalu uji channel default baru Anda dengan sekelompok kecil perangkat paksa sebelum menjadikannya default untuk semua pengguna.

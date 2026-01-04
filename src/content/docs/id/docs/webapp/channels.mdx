@@ -34,48 +34,26 @@ Menghapus channel sangat mudah. Cukup klik ikon sampah dan konfirmasi penghapusa
 
 ## Mengelola Channel
 
-Mengklik nama channel akan membuka modal di mana Anda dapat mengelola channel (`3` dalam gambar)
-Halaman ini seharusnya terlihat seperti ini:
+Mengklik nama channel akan membuka modal di mana Anda dapat mengelola pengaturan channel (`3` dalam gambar).
 
-<figure><img src="/manage_channel_main.webp" alt="manage channel" /><figcaption></figcaption></figure>
+<figure><img src="/channel_settings.webp" alt="Pengaturan channel" /><figcaption></figcaption></figure>
 
-Mari kita bahas bagian-bagian yang berbeda
-
-Pertama `Bundle number` (`1` dalam gambar). Ini adalah versi saat ini untuk channel tersebut. Ketika diminta untuk memberikan pembaruan, channel ini akan selalu mencoba merespon dengan versi tersebut* [^1]
-Mengkliknya akan membawa Anda ke halaman [bundle](/docs/webapp/bundles/)
-
-Kedua halaman `Shared to` (`2` dalam gambar). Saya sarankan untuk tidak menggunakannya. Sistem baru dan lebih baik sedang dikembangkan
-
-Sekarang forced devices (`3` dalam gambar). Ini adalah daftar perangkat yang akan selalu mendapatkan pembaruan dari channel ini. Ini berguna untuk tujuan pengujian. Anda dapat memaksa perangkat ke channel dari halaman [devices](/docs/webapp/devices/)
-
-Terakhir pengaturan (`4` dalam gambar). Di sinilah Anda dapat mengatur bagaimana channel berperilaku
-Setelah Anda mengkliknya, Anda seharusnya melihat sesuatu seperti ini:
-
-<figure><img src="/channel_settings.webp" alt="setting of channel" /><figcaption></figcaption></figure>
-
-Daftar pengaturan cukup panjang, tapi saya akan berusaha menjelaskan semuanya
+Halaman pengaturan channel berisi semua opsi konfigurasi untuk channel Anda. Mari kita bahas setiap pengaturan.
 
 ---
-Pertama `Default channel` **INI MUNGKIN YANG PALING PENTING**\
-Jika channel ditandai sebagai default, maka akan digunakan sebagai channel default untuk semua perangkat baru\
-Dalam istilah lain: Jika Anda memiliki pengguna baru, capgo akan mencoba memberikan versi terbaru dari channel default ini
-Hanya 1 channel yang dapat diatur sebagai default pada satu waktu. Jika Anda mencoba melanggar aturan ini, Anda akan diminta untuk mengkonfirmasi tindakan Anda
-
-<figure><img style="margin-left: auto; margin-right: auto" src="/confirm-make-default.webp" alt="confirm make change" /><figcaption></figcaption></figure>
-
-Setelah Anda mengkonfirmasi, channel default lama akan tidak ditandai sebagai default dan yang baru akan ditandai sebagai default
+Pertama toggle `Channel default`. Ketika diaktifkan, channel ini menjadi default untuk perangkat baru. Untuk penjelasan lengkap tentang cara kerja channel default, termasuk cara mengatur default khusus platform (satu untuk iOS, satu untuk Android), lihat bagian [Konfigurasi Channel Default](/docs/webapp/main-app-page/#konfigurasi-channel-default).
 
 ---
-Kedua pengaturan `IOS`. Ini cukup sederhana. Jika ini false maka perangkat IOS tidak akan diizinkan mengunduh pembaruan dari channel ini
+Kedua pengaturan `IOS`. Ini cukup sederhana. Jika ini false maka perangkat iOS tidak akan diizinkan mengunduh pembaruan dari channel ini.
 
-Ketiga adalah pengaturan `Android`. Ini mirip dengan `IOS`. Jika ini false maka perangkat Android tidak akan diizinkan mengunduh pembaruan dari channel ini
+Ketiga adalah pengaturan `Android`. Ini mirip dengan `IOS`. Jika ini false maka perangkat Android tidak akan diizinkan mengunduh pembaruan dari channel ini.
 
-Keempat adalah pengaturan `Disable auto downgrade under native`. Jika ini true maka akan tidak mungkin untuk menurunkan versi dari versi native. Ini berarti jika Anda telah mengunggah versi `120` ke app store atau play store dan mencoba mengatur versi channel ke `110` maka pembaruan (downgrade) akan gagal
+Keempat adalah pengaturan `Nonaktifkan downgrade otomatis di bawah native`. Jika ini true maka akan tidak mungkin untuk menurunkan versi dari versi native. Ini berarti jika Anda telah mengunggah versi `1.2.0` ke App Store atau Play Store dan mencoba mengatur versi channel ke `1.1.0` maka pembaruan (downgrade) akan gagal.
 
-Kelima adalah `Disable auto update`. Pengaturan ini cukup kompleks, dan Anda dapat mempelajari lebih lanjut tentang hal ini [di sini](/docs/cli/commands/#disable-updates-strategy)
+Kelima adalah `Nonaktifkan pembaruan otomatis`. Pengaturan ini cukup kompleks, dan Anda dapat mempelajari lebih lanjut tentang hal ini [di sini](/docs/cli/commands/#disable-updates-strategy)
 
-Untuk `Allow develoment build`. Jika ini true maka build pengembangan akan diizinkan mengunduh pembaruan dari channel ini. Jika tidak maka setiap permintaan pembaruan yang memiliki `prod` diatur ke false akan ditolak. Ini sebagian besar berguna untuk tujuan pengujian
+Untuk `Izinkan build pengembangan`. Jika ini true maka build pengembangan akan diizinkan mengunduh pembaruan dari channel ini. Jika tidak maka setiap permintaan pembaruan yang memiliki `prod` diatur ke false akan ditolak. Ini sebagian besar berguna untuk tujuan pengujian.
 
-Ketujuh adalah `Allow Emulators`. Jika ini false maka capgo akan menolak setiap permintaan pembaruan yang berasal dari emulator. Ini sebagian besar berguna untuk tujuan pengujian
+Ketujuh adalah `Izinkan Emulator`. Jika ini false maka Capgo akan menolak setiap permintaan pembaruan yang berasal dari emulator. Ini sebagian besar berguna untuk tujuan pengujian.
 
-Kedelapan adalah `Allow devices to self associate`. Jika ini true maka metode [setChannel](/docs/plugin/api/#setchannel) akan tersedia. Jika ini diatur ke false dan Anda mencoba memanggil metode [setChannel](/docs/plugin/api/#setchannel) dengan channel ini maka panggilan akan gagal
+Kedelapan adalah `Izinkan perangkat untuk mengasosiasi sendiri`. Jika ini true maka metode [setChannel](/docs/plugin/api/#setchannel) akan tersedia. Jika ini diatur ke false dan Anda mencoba memanggil metode [setChannel](/docs/plugin/api/#setchannel) dengan channel ini maka panggilan akan gagal.

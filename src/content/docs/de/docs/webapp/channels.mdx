@@ -34,36 +34,14 @@ Das Löschen eines Kanals ist unkompliziert. Klicken Sie einfach auf das Papierk
 
 ## Einen Kanal verwalten
 
-Wenn Sie auf den Kanalnamen klicken, öffnet sich ein Modal, in dem Sie den Kanal verwalten können (`3` im Bild).
-Diese Seite sollte etwa so aussehen:
+Wenn Sie auf den Kanalnamen klicken, öffnet sich ein Modal, in dem Sie die Kanaleinstellungen verwalten können (`3` im Bild).
 
-<figure><img src="/manage_channel_main.webp" alt="manage channel" /><figcaption></figcaption></figure>
+<figure><img src="/channel_settings.webp" alt="Kanaleinstellungen" /><figcaption></figcaption></figure>
 
-Gehen wir die verschiedenen Abschnitte durch:
-
-Zuerst die `Bundle-Nummer` (`1` im Bild). Dies ist die aktuelle Version für diesen Kanal. Wenn nach einem Update gefragt wird, wird dieser Kanal immer versuchen, mit dieser Version zu antworten* [^1]
-Ein Klick darauf sollte Sie zur [Bundle](/docs/webapp/bundles/)-Seite führen.
-
-Zweitens die `Geteilt mit`-Seite (`2` im Bild). Ich rate davon ab, dies jemals zu verwenden. Ein neues und besseres System ist in Arbeit.
-
-Nun die erzwungenen Geräte (`3` im Bild). Dies ist eine Liste von Geräten, die immer Updates von diesem Kanal erhalten werden. Dies ist nützlich für Testzwecke. Sie können ein Gerät von der [Geräte](/docs/webapp/devices/)-Seite aus zu einem Kanal zwingen.
-
-Zuletzt die Einstellungen (`4` im Bild). Hier können Sie verwalten, wie sich die Kanäle verhalten.
-Nachdem Sie darauf geklickt haben, sollten Sie etwa Folgendes sehen:
-
-<figure><img src="/channel_settings.webp" alt="setting of channel" /><figcaption></figcaption></figure>
-
-Die Liste der Einstellungen ist lang, aber ich werde mein Bestes geben, sie alle zu erklären:
+Die Kanaleinstellungsseite enthält alle Konfigurationsoptionen für Ihren Kanal. Gehen wir jede Einstellung durch.
 
 ---
-Erstens der `Standardkanal` **DIES IST WAHRSCHEINLICH DER WICHTIGSTE**\
-Wenn ein Kanal als Standard markiert ist, wird er als Standardkanal für alle neuen Geräte verwendet.\
-Anders ausgedrückt: Wenn Sie einen neuen Benutzer haben, wird Capgo versuchen, ihm die neueste Version dieses Standardkanals zu liefern.
-Nur 1 Kanal kann gleichzeitig als Standard festgelegt werden. Wenn Sie versuchen, diese Regel zu brechen, werden Sie gebeten, Ihre Aktion zu bestätigen.
-
-<figure><img style="margin-left: auto; margin-right: auto" src="/confirm-make-default.webp" alt="confirm make change" /><figcaption></figcaption></figure>
-
-Nach der Bestätigung wird der alte Standardkanal nicht mehr als Standard markiert und der neue wird als Standard markiert.
+Erstens der `Standardkanal`-Schalter. Wenn aktiviert, wird dieser Kanal zum Standard für neue Geräte. Eine umfassende Erklärung, wie Standardkanäle funktionieren, einschließlich der Einrichtung plattformspezifischer Standards (einer für iOS, einer für Android), finden Sie im Abschnitt [Standardkanal-Konfiguration](/docs/webapp/main-app-page/#standardkanal-konfiguration).
 
 ---
 Zweitens die `iOS`-Einstellung. Dies ist relativ einfach. Wenn dies falsch ist, dürfen iOS-Geräte keine Updates von diesem Kanal herunterladen.

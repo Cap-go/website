@@ -14,11 +14,10 @@ First, let's take a look at the devices page. You can access it by [clicking on 
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/devices.webp" alt="devices list" /><figcaption></figcaption></figure>
 
-## Show only developer devices
-You might want to show only the overwritten devices (Devices that have a [custom channel](/docs/plugin/api/#setchannel) or a custom version)
-To do that click on `Filters` and then on `Override`. It should look something like this:
-
-<figure><img style="margin-left: auto; margin-right: auto" src="/overwrite-filter.webp" alt="filter devices" /><figcaption></figcaption></figure>
+1. **Devices tab** - Click this tab in the navigation bar to access the devices page
+2. **Filters** - Click to filter devices by:
+   - **Override** - Show only devices that have a [custom channel](/docs/plugin/api/#setchannel) or a custom version
+   - **Custom ID** - Show only devices with a custom identifier set
 
 ## Configuring a device
 
@@ -26,12 +25,15 @@ To configure a specific device click on it in the table and then you should see 
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/device-specific.webp" alt="show one device" /><figcaption></figcaption></figure>
 
-First the `Custom ID`. This is a very useful field that helps you connect the device to an ID you can recognize for your own users. 
+1. **Information** - View device details including Device ID, Last update, Platform, Plugin version, Version, Version builtin, OS version, and whether it's a Production app
+2. **Deployments** - View the deployment history for this device
+3. **Logs** - View logs associated with this device
+4. **Channel override** - Override the channel for this specific device. If set, this device will not use the public (default) channel and will only receive updates from the selected channel
 
-Use it to easily identify which device belongs to which user. 
+### Custom ID
 
-You can set it from the WebUI or from the device with `CapacitorUpdater.setCustomId({ customId: user });`
+The `Custom ID` is a very useful field that helps you connect the device to an ID you can recognize for your own users.
 
-Next the force version. If this is set then this device will **ALWAYS** receive this version. It takes precedence over the channel.
+Use it to easily identify which device belongs to which user.
 
-Lastly the custom channel. If this is set then this device will not care about the public (default) channel and just use this one.
+Custom ID can only be set from the device itself using `CapacitorUpdater.setCustomId({ customId: user });`
