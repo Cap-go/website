@@ -32,6 +32,7 @@
       },
       "devDependencies": {
         "@astrojs/check": "^0.9.6",
+        "@capgo/seo-checker": "^0.0.1",
         "@dotenvx/dotenvx": "^1.51.4",
         "@iconify-json/carbon": "^1.2.15",
         "@iconify-json/twemoji": "^1.2.5",
@@ -140,6 +141,8 @@
     "@babel/types": ["@babel/types@7.28.5", "", { "dependencies": { "@babel/helper-string-parser": "^7.27.1", "@babel/helper-validator-identifier": "^7.28.5" } }, "sha512-qQ5m48eI/MFLQ5PxQj4PFaprjyCTLI37ElWMmNs0K8Lk3dVeOdNpB3ks8jc7yM5CDmVC73eMVk/trk3fgmrUpA=="],
 
     "@braintree/sanitize-url": ["@braintree/sanitize-url@7.1.1", "", {}, "sha512-i1L7noDNxtFyL5DmZafWy1wRVhGehQmzZaz1HiN5e7iylJMSZR7ekOV7NsIqa5qBldlLrsKv4HbgFUVlQrz8Mw=="],
+
+    "@capgo/seo-checker": ["@capgo/seo-checker@0.0.1", "", { "dependencies": { "cheerio": "^1.0.0" }, "bin": { "seo-checker": "dist/cli.js" } }, "sha512-c2mQZA7/JAse9gJp3lNZsb4VLKp7BDn/vKuZEz/IhjULxThVWeG5D4MWQ68ZIcN1tW2m8LDBd6PUZ7NcD7Pj2Q=="],
 
     "@capsizecss/unpack": ["@capsizecss/unpack@3.0.1", "", { "dependencies": { "fontkit": "^2.0.2" } }, "sha512-8XqW8xGn++Eqqbz3e9wKuK7mxryeRjs4LOHLxbh2lwKeSbuNR4NFifDZT4KzvjU6HMOPbiNTsWpniK5EJfTWkg=="],
 
