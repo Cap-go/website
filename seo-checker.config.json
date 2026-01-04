@@ -80,7 +80,7 @@
     "thresholdOverrides": {}
   },
   "exclusions": [],
-  "failOn": ["error"],
+  "failOn": ["error", "warning"],
   "maxIssues": 0,
   "outputFormat": "console"
 }
