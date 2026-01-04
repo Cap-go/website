@@ -1,54 +1,113 @@
 ---
 title: "应用页面"
-description: "Capgo Web 应用的应用页面显示什么?以及您可以用它做什么"
+description: "Capgo Web 应用的应用页面显示什么？以及您可以用它做什么。"
 sidebar:
   order: 5
 locale: zh
 ---
 
-## 应用页面显示什么?
+## 应用页面显示什么？
 
-首先,让我们看一下应用的主页面:
+首先，让我们看一下应用的主页面：
 
-在 Capgo 中,应用代表与 Capgo 实时更新系统集成的移动应用程序。它允许您无缝管理更新、频道和设备。
+在 Capgo 中，应用代表与 Capgo 实时更新系统集成的移动应用程序。它允许您无缝管理更新、频道和设备。
 
 <figure><img src="/main-app-page.webp" alt="主页面截图" /><figcaption></figcaption></figure>
 
-让我们仔细看看这个。主应用页面分为几个关键区域:
+让我们仔细看看这个。主应用页面分为几个关键区域：
 
-1.  **顶部导航栏:** 提供对应用管理不同部分的访问:
-    *   **概览 (1):** 当前视图,显示关键指标和摘要。
-    *   **信息 (2):** 显示应用的核心设置和详细信息(参见下面的"应用信息"部分)。
+1.  **顶部导航栏:** 提供对应用管理不同部分的访问：
+    *   **仪表板 (1):** 当前视图，显示关键指标和摘要。
+    *   **信息 (2):** 显示应用的核心设置和详细信息（参见下面的"应用信息"部分）。
     *   **[Bundle (3)](/docs/webapp/bundles/):** 管理应用的版本和发布。
-    *   **[频道 (4)](/docs/webapp/channels/):** 配置和管理不同的更新频道(例如,生产、beta)。
-    *   **[设备 (5)](/docs/webapp/devices/):** 查看和管理注册的设备,包括设置特定的覆盖。
+    *   **[频道 (4)](/docs/webapp/channels/):** 配置和管理不同的更新频道（例如，生产、beta）。
+    *   **[设备 (5)](/docs/webapp/devices/):** 查看和管理注册的设备，包括设置特定的覆盖。
     *   **[日志 (6)](/docs/webapp/logs/):** 访问应用的详细日志和错误报告。
+    *   **构建 (7):** 查看和管理应用构建。
 
-2.  **统计显示:** 可视化上一个计费周期的重要指标(数据反映从您的计费日期开始的使用情况,而不是从每月的第 1 天开始):
-    *   **月活跃用户 (7):** 跟踪一段时间内的独特活跃用户数量。
-    *   **存储 (8):** 显示当前存储消耗。
-    *   **带宽 (9):** 显示带宽使用情况。
-    *   **按 Bundle 的活跃设备 (10):** (Beta)显示不同应用 bundle 的活跃设备分布。
+2.  **统计显示:** 可视化上一个计费周期的重要指标（数据反映从您的计费日期开始的使用情况，而不是从每月的第 1 天开始）：
+    *   **月活跃用户 (8):** 跟踪一段时间内的独特活跃用户数量。
+    *   **存储 (9):** 显示当前存储消耗。
+    *   **带宽 (10):** 显示带宽使用情况。
+    *   **活跃 Bundle (11):** 显示不同应用 bundle 的活跃设备分布。
 
-3.  **摘要卡片:** 提供关键计数的快速概览:
-    *   **频道 (11):** 配置的频道总数。
-    *   **Bundle (12):** 应用 bundle 总数。
-    *   **设备 (13):** 注册设备总数。
-    *   **更新 (14):** 执行的更新总数。
+3.  **摘要卡片:** 提供关键计数的快速概览：
+    *   **Bundle 上传 (12):** 已上传的应用 bundle 总数。
+    *   **更新统计 (13):** 执行的更新总数，包括请求、安装和失败。
+    *   **部署统计 (14):** 部署总数。
+
+4.  **显示选项 (15-18):** 用于过滤和查看统计信息的控件：
+    *   **每日 (15):** 按日查看统计信息。
+    *   **累计 (16):** 查看随时间累积的统计信息。
+    *   **计费周期 (17):** 查看当前计费周期的统计信息。
+    *   **日期范围 (18):** 选择自定义日期范围（例如，最近 30 天）。
 
 ## 应用信息
 
-此部分对应于顶部导航栏中的"信息"标签 (2)。在这里,您可以查看和管理应用程序的关键详细信息和设置。
+此部分对应于顶部导航栏中的"信息"标签 (1)。在这里，您可以查看和管理应用程序的关键详细信息和设置。
 
-<figure><img src="/app_info.webp" alt="App Information Page" /><figcaption>App Information Page</figcaption></figure>
+<figure><img src="/app_info.webp" alt="应用信息页面" /><figcaption>应用信息页面</figcaption></figure>
 
-Here's a breakdown of the available fields and actions:
+以下是可用字段和操作的详细说明：
 
-*   **App Icon:** Displays your application's icon. You can click the "Change" button to upload a new icon.
-*   **App ID:** A unique identifier for your application within Capgo. This ID is not editable.
-*   **App Name:** The display name for your application. You can modify this as needed.
-*   **Default Upload Channel:** Specifies the default channel to which new bundles will be uploaded. You can click the edit icon to select a different default channel.
-*   **Auto Delete Bundles Not Used (after x seconds):** This setting allows you to automatically delete old bundles that haven't been used for a specified duration (in seconds). This helps manage storage and keep your bundle list clean. `2592000` seconds is equivalent to 30 days.
-*   **Transfer the application to another organisation:** This section provides an option to initiate the transfer of your application to a different organization you are a part of.
-*   **Delete App Button:** Permanently deletes your application from Capgo. This action is irreversible and will remove all associated data, bundles, channels, and devices.
-*   **Update Button:** Saves any changes you've made to the editable fields on this page (e.g., App Name, Default Upload Channel, Auto Delete Bundles setting).
+*   **应用图标 (2):** 显示您的应用程序图标。您可以点击"更改"按钮上传新图标。
+*   **应用 ID (3):** Capgo 中应用程序的唯一标识符。此 ID 不可编辑。
+*   **应用名称 (4):** 应用程序的显示名称。您可以根据需要修改。
+*   **默认上传频道 (5):** 指定新 bundle 将上传到的默认频道。您可以点击编辑图标选择不同的默认频道。
+*   **默认下载频道 (6):** 指定设备将从中下载更新的默认频道。您可以点击编辑图标选择不同的默认频道。有关详细信息，请参阅下面的[默认频道配置](#默认频道配置)部分。
+*   **自动删除未使用的 Bundle（x 秒后） (7):** 此设置允许您自动删除在指定时间（以秒为单位）内未使用的旧 bundle。设置为 `0` 以禁用自动删除。这有助于管理存储并保持 bundle 列表整洁。
+*   **向插件公开 Bundle 元数据 (8):** 启用后，bundle 链接和评论字段将发送到 Capacitor Updater 插件。此功能需要插件版本 7.35.0 或更高版本。
+*   **转移应用所有权 (9):** 此部分提供了一个选项，用于启动将您的应用程序转移到您所属的其他组织。
+*   **删除应用按钮:** 从 Capgo 永久删除您的应用程序。此操作不可逆，将删除所有相关数据、bundle、频道和设备。
+*   **更新按钮:** 保存您对此页面可编辑字段所做的任何更改（例如，应用名称、默认上传频道、自动删除 Bundle 设置）。
+
+## 默认频道配置
+
+**默认下载频道**是您应用最重要的设置之一。它决定了新设备首次连接到 Capgo 时将从哪个频道接收更新。
+
+### 默认频道的工作原理
+
+当设备向 Capgo 请求更新时，系统根据以下优先级顺序（最高优先级优先）决定使用哪个频道：
+
+1. **强制设备映射**：如果设备 ID 在频道设置中被明确强制到某个频道，则该频道始终优先。
+2. **云覆盖**：如果设备通过 `setChannel()` 或在仪表板中手动分配到某个频道，则使用该覆盖。
+3. **Capacitor 配置 `defaultChannel`**：如果在 `capacitor.config.*` 文件中设置，则用于测试/beta 构建。
+4. **默认下载频道**：此处配置的设置—约 99% 的生产用户将使用此设置。
+
+### 平台特定的默认频道
+
+您可以配置**两个单独的默认频道**—一个用于 iOS，一个用于 Android。这在以下情况下很有用：
+
+- 您想先向一个平台推出更新
+- 您需要针对不同平台采用不同的更新策略
+- 您正在一个平台上测试新版本，同时保持另一个平台稳定
+
+设置平台特定的默认值：
+1. 创建两个频道（例如 `production-ios` 和 `production-android`）
+2. 在每个频道的设置中，仅启用相关平台（iOS 或 Android 开关）
+3. 将两个频道都标记为"默认"- 当频道针对不同平台时，Capgo 允许这样做
+
+当设备请求更新时：
+- iOS 设备将从启用 iOS 的默认频道接收更新
+- Android 设备将从启用 Android 的默认频道接收更新
+
+### 单一默认频道（推荐用于大多数应用）
+
+对于大多数应用程序，支持两个平台的单一默认频道是最简单的方法：
+1. 创建一个频道（例如 `production`）
+2. 确保 iOS 和 Android 开关都已启用
+3. 将其标记为默认频道
+
+这确保了所有平台上的一致行为，并简化了您的发布工作流程。
+
+### 更改默认频道
+
+当您更改默认频道时：
+- **新设备**将立即开始从新默认频道接收更新
+- **现有设备**如果已有频道分配（通过覆盖或强制），将不会自动切换
+- 要移动现有设备，您需要：
+  - 使用 `setChannel()` 以编程方式覆盖它们
+  - 在仪表板中将它们强制到新频道
+  - 删除它们的设备条目（它们将使用新默认值重新注册）
+
+> **提示**：在将新默认频道设为所有用户的默认值之前，始终先用一小组强制设备测试它。

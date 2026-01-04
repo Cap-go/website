@@ -54,6 +54,7 @@ import FolderIcon from 'astro-heroicons/mini/Folder.astro'
 import SunIcon from 'astro-heroicons/mini/Sun.astro'
 import StarIcon from 'astro-heroicons/mini/Star.astro'
 import FolderOpenIcon from 'astro-heroicons/mini/FolderOpen.astro'
+import ClockIcon from 'astro-heroicons/mini/Clock.astro'
 
 export interface Action {
   icon?: any
@@ -836,5 +837,13 @@ export const actions = [
     href: 'https://github.com/Cap-go/capacitor-file-picker/',
     title: 'File Picker',
     icon: FolderOpenIcon,
+  },
+  {
+    name: '@capgo/capacitor-watch',
+    author: 'github.com/Cap-go',
+    description: 'Apple Watch communication with bidirectional messaging between iPhone and watchOS apps',
+    href: 'https://github.com/Cap-go/capacitor-watch/',
+    title: 'Watch',
+    icon: ClockIcon,
   },
 ]

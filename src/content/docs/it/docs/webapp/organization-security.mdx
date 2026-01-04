@@ -1,0 +1,299 @@
+---
+title: "Sicurezza dell'Organizzazione"
+description: "Configura politiche di sicurezza complete per la tua organizzazione, inclusa l'applicazione della 2FA, politiche sulle password e controlli delle chiavi API per proteggere le tue app e i tuoi dati."
+sidebar:
+  order: 9
+---
+
+import { Aside, Steps, Badge } from '@astrojs/starlight/components';
+
+Capgo fornisce controlli di sicurezza completi che consentono agli amministratori dell'organizzazione di applicare politiche di sicurezza a tutti i membri. Queste funzionalità ti aiutano a soddisfare i requisiti di conformità, proteggere i dati sensibili e mantenere una solida postura di sicurezza.
+
+## Panoramica
+
+Le impostazioni di Sicurezza dell'Organizzazione consentono ai super admin di configurare:
+
+- **Applicazione dell'Autenticazione a Due Fattori (2FA)** - Richiedere a tutti i membri di abilitare la 2FA
+- **Politica sulle Password** - Impostare requisiti di complessità delle password
+- **Sicurezza delle Chiavi API** - Applicare chiavi API sicure e politiche di scadenza
+
+![Impostazioni di Sicurezza dell'Organizzazione](/org_security.webp)
+
+La pagina Sicurezza è organizzata in sezioni chiaramente etichettate:
+1. **Scheda Sicurezza** - Accedi a tutte le impostazioni di sicurezza dalla barra laterale delle impostazioni dell'Organizzazione
+2. **Applicazione 2FA** - Toggle e visualizzazione dello stato per i requisiti di autenticazione a due fattori
+3. **Politica sulle Password** - Configura le regole di complessità delle password per i membri dell'organizzazione
+4. **Politica sulle Chiavi API** - Impostazioni per chiavi API sicure e requisiti di scadenza
+5. **Scadenza delle Chiavi API** - Controlla se le chiavi API devono avere date di scadenza
+
+<Aside type="note">
+
+Solo gli utenti con ruolo **super_admin** possono configurare le impostazioni di sicurezza dell'organizzazione. Altri membri possono visualizzare il proprio stato di conformità ma non possono modificare le politiche.
+
+</Aside>
+
+## Accesso alle Impostazioni di Sicurezza
+
+<Steps>
+
+1. Naviga alle impostazioni della tua organizzazione cliccando su **Impostazioni** nella barra laterale
+2. Clicca sulla scheda **Organizzazione** nella parte superiore della pagina delle impostazioni
+3. Seleziona la scheda **Sicurezza** dalla barra di navigazione dell'organizzazione (evidenziata con un'icona a scudo)
+
+</Steps>
+
+## Applicazione dell'Autenticazione a Due Fattori (2FA)
+
+L'applicazione della 2FA richiede che tutti i membri dell'organizzazione abbiano l'autenticazione a due fattori abilitata sui loro account. Questo aggiunge un livello critico di sicurezza richiedendo sia una password che un codice di verifica.
+
+### Cosa Succede Quando la 2FA è Applicata
+
+- I membri senza 2FA sono **immediatamente bloccati** dall'accesso alle app dell'organizzazione
+- Sia la dashboard web che la CLI applicano questo requisito
+- I nuovi membri devono abilitare la 2FA prima di poter accedere alle risorse dell'organizzazione
+- Il sistema traccia quali membri hanno la 2FA abilitata in tempo reale
+
+### Comprendere il Pannello dello Stato 2FA
+
+La pagina Sicurezza visualizza un pannello completo **Stato 2FA dei Membri** che mostra:
+
+- **Membri Totali** - Il numero totale di membri nella tua organizzazione
+- **2FA Abilitata** (indicatore verde) - Membri che hanno abilitato con successo l'autenticazione a due fattori
+- **2FA Non Abilitata** (indicatore di avviso arancione) - Membri che devono ancora configurare la 2FA
+
+Quando i membri non hanno la 2FA abilitata, appaiono in un riquadro di avviso **Membri Senza 2FA**. Questo riquadro mostra:
+- L'indirizzo email di ogni membro e il loro ruolo nell'organizzazione
+- Un pulsante **Copia Lista Email** per copiare rapidamente tutti gli indirizzi email interessati per la comunicazione
+
+### Abilitare l'Applicazione della 2FA
+
+<Steps>
+
+1. Naviga su **Impostazioni Organizzazione > Sicurezza**
+2. Individua la sezione **Richiedi 2FA per Tutti i Membri** nella parte superiore della pagina
+3. Esamina il pannello **Stato 2FA dei Membri** per vedere quali membri saranno interessati
+4. Se ci sono membri senza 2FA, usa il pulsante **Copia Lista Email** per notificarli prima dell'abilitazione
+5. Attiva l'interruttore accanto a **Richiedi 2FA per Tutti i Membri** per abilitare l'applicazione
+6. L'interruttore mostrerà lo stato **Disabilitato** o **Abilitato** sul lato destro
+
+</Steps>
+
+<Aside type="caution">
+
+Prima di abilitare l'applicazione della 2FA:
+- Notifica i membri interessati in anticipo e condividi la [guida alla configurazione della 2FA](/docs/webapp/mfa/)
+- Dai loro tempo per abilitare la 2FA sui loro account
+- I membri senza 2FA perderanno l'accesso immediatamente quando abiliti l'applicazione
+- Considera di contattare i membri elencati nel riquadro di avviso "Membri Senza 2FA"
+
+</Aside>
+
+### Supporto CLI per l'Applicazione della 2FA
+
+Puoi anche gestire l'applicazione della 2FA tramite la CLI:
+
+```shell
+# Abilita applicazione 2FA
+npx @capgo/cli organization set YOUR_ORG_ID --enforce-2fa
+
+# Disabilita applicazione 2FA
+npx @capgo/cli organization set YOUR_ORG_ID --no-enforce-2fa
+
+# Controlla lo stato 2FA dei membri
+npx @capgo/cli organization members YOUR_ORG_ID
+```
+
+Per informazioni dettagliate sull'applicazione della 2FA, consulta la [guida all'Applicazione della 2FA](/docs/webapp/2fa-enforcement/).
+
+## Politica sulle Password
+
+Le politiche sulle password ti consentono di applicare requisiti di complessità delle password per tutti i membri dell'organizzazione. Quando la password di un membro non soddisfa i requisiti della politica, deve aggiornare la propria password prima di accedere alle risorse dell'organizzazione.
+
+La sezione Politica sulle Password (contrassegnata con l'indicatore **3** nell'immagine di panoramica) fornisce un semplice toggle per applicare i requisiti delle password in tutta l'organizzazione.
+
+### Come Funziona la Politica sulle Password
+
+Quando abiliti la politica sulle password:
+- Tutti i membri dell'organizzazione devono soddisfare i requisiti di complessità delle password
+- Gli utenti che non soddisfano i requisiti saranno bloccati fino a quando non aggiorneranno la loro password
+- La politica si applica a tutti i membri indipendentemente dal loro ruolo
+
+### Abilitare la Politica sulle Password
+
+<Steps>
+
+1. Vai su **Impostazioni Organizzazione > Sicurezza**
+2. Scorri verso il basso per trovare la sezione **Politica sulle Password**
+3. Leggi la descrizione: "Richiedi ai membri dell'organizzazione di utilizzare password che soddisfino requisiti specifici di complessità"
+4. Attiva l'interruttore **Applica Politica sulle Password** per abilitarla
+5. La descrizione dell'interruttore afferma: "Quando abilitato, tutti i membri dell'organizzazione devono soddisfare i requisiti delle password per accedere all'organizzazione"
+
+</Steps>
+
+### Requisiti delle Password Disponibili
+
+| Impostazione | Descrizione | Intervallo |
+|--------------|-------------|------------|
+| **Lunghezza Minima** | Numero minimo di caratteri richiesti | 6-128 caratteri |
+| **Richiedi Maiuscola** | La password deve contenere almeno una lettera maiuscola (A-Z) | Attivo/Disattivo |
+| **Richiedi Numero** | La password deve contenere almeno una cifra (0-9) | Attivo/Disattivo |
+| **Richiedi Carattere Speciale** | La password deve contenere almeno un carattere speciale (!@#$%^&*, ecc.) | Attivo/Disattivo |
+
+### Tracciamento della Conformità dei Membri
+
+Quando una politica sulle password è attiva, puoi monitorare la conformità:
+
+- **Membri Totali**: Numero di membri nella tua organizzazione
+- **Conformi**: Membri le cui password soddisfano i requisiti della politica
+- **Non Conformi**: Membri che devono aggiornare le loro password
+
+I membri non conformi sono elencati con i loro indirizzi email. Puoi copiare la lista email per notificarli della politica e delle modifiche alle password richieste.
+
+<Aside type="tip">
+
+Quando abiliti una politica sulle password per la prima volta, i membri con password non conformi saranno invitati a cambiare la loro password al prossimo accesso. Non saranno immediatamente bloccati, ma il loro accesso potrebbe essere limitato fino a quando non si conformeranno.
+
+</Aside>
+
+### Best Practice per le Politiche sulle Password
+
+- **Inizia con requisiti ragionevoli**: Un minimo di 10-12 caratteri con maiuscole/minuscole miste e numeri fornisce una buona sicurezza senza essere eccessivamente restrittivo
+- **Comunica i cambiamenti**: Notifica il tuo team prima di abilitare nuovi requisiti per le password
+- **Concedi tempo per la transizione**: Dai ai membri tempo per aggiornare le loro password
+- **Considera i gestori di password**: Raccomanda ai membri del team di utilizzare gestori di password per generare e memorizzare password forti
+
+## Sicurezza delle Chiavi API
+
+Capgo fornisce due controlli di sicurezza per le chiavi API: applicare chiavi API sicure (hash) e richiedere date di scadenza. La sezione Politica sulle Chiavi API (contrassegnata con l'indicatore **4** nell'immagine di panoramica) è identificata da un'icona a forma di chiave.
+
+### Applica Chiavi API Sicure
+
+La prima opzione nella sezione Politica sulle Chiavi API è **Applica Chiavi API Sicure**. Quando abilitata, questa impostazione richiede che tutte le chiavi API nella tua organizzazione siano create utilizzando il formato sicuro/hash.
+
+Le chiavi API hash sono più sicure perché:
+
+- Il valore effettivo della chiave non viene mai memorizzato sui nostri server
+- Solo tu (e i tuoi sistemi) avete accesso alla chiave completa
+- Anche se il nostro database fosse compromesso, le tue chiavi non potrebbero essere utilizzate
+
+La descrizione dell'interruttore afferma: "Quando abilitato, solo le chiavi API sicure (hash) possono accedere a questa organizzazione. Le chiavi API in testo semplice saranno rifiutate."
+
+<Aside type="note">
+
+Le chiavi API legacy esistenti (non hash) continueranno a funzionare, ma i membri non potranno creare nuove chiavi non hash quando questa politica è abilitata.
+
+</Aside>
+
+### Abilitare le Chiavi API Sicure
+
+<Steps>
+
+1. Vai su **Impostazioni Organizzazione > Sicurezza**
+2. Scorri verso il basso per trovare la sezione **Politica sulle Chiavi API** (cerca l'icona della chiave)
+3. Individua l'interruttore **Applica Chiavi API Sicure**
+4. Attiva l'interruttore per abilitare l'applicazione delle chiavi API sicure
+5. Le chiavi esistenti non sono interessate; la politica si applica alla creazione di nuove chiavi
+
+</Steps>
+
+### Politica di Scadenza delle Chiavi API
+
+La seconda opzione (contrassegnata con l'indicatore **5** nell'immagine di panoramica) è **Richiedi Scadenza delle Chiavi API**. Puoi richiedere che tutte le chiavi API abbiano una data di scadenza, limitando il loro periodo di validità.
+
+Questa è una best practice di sicurezza che:
+
+- Limita la finestra di esposizione se una chiave viene compromessa
+- Garantisce la rotazione regolare delle chiavi
+- Aiuta a soddisfare i requisiti di conformità per la gestione delle credenziali
+
+La descrizione dell'interruttore afferma: "Quando abilitato, tutte le chiavi API per questa organizzazione devono avere una data di scadenza"
+
+### Configurare la Politica di Scadenza
+
+<Steps>
+
+1. Vai su **Impostazioni Organizzazione > Sicurezza**
+2. Trova la sezione **Politica sulle Chiavi API**
+3. Individua l'interruttore **Richiedi Scadenza delle Chiavi API** (sotto Applica Chiavi API Sicure)
+4. Attiva l'interruttore per abilitare il requisito di scadenza
+5. Una volta abilitato, imposta i **Giorni massimi di scadenza** (1-365 giorni)
+   - Questo limita quanto in futuro possono essere impostate le date di scadenza
+   - Esempio: Impostare 90 giorni significa che le chiavi possono scadere al massimo 90 giorni dalla creazione
+
+</Steps>
+
+<Aside type="caution">
+
+Quando abiliti il requisito di scadenza:
+- Le nuove chiavi API devono avere una data di scadenza
+- Le chiavi esistenti senza scadenza continuano a funzionare
+- Considera di verificare le chiavi esistenti e ruotare quelle senza scadenza
+
+</Aside>
+
+### Politiche sulle Chiavi API Raccomandate
+
+| Caso d'Uso | Chiavi Sicure | Scadenza | Giorni Max. |
+|------------|---------------|----------|-------------|
+| **Sviluppo** | Raccomandato | Opzionale | 30-90 |
+| **Pipeline CI/CD** | Richiesto | Richiesto | 90-180 |
+| **Produzione** | Richiesto | Richiesto | 30-90 |
+| **Enterprise/Conformità** | Richiesto | Richiesto | 30-60 |
+
+## Conformità e Audit
+
+Le funzionalità di sicurezza dell'organizzazione ti aiutano a soddisfare vari requisiti di conformità:
+
+| Standard | Funzionalità Rilevanti |
+|----------|------------------------|
+| **SOC 2** | Applicazione 2FA, politiche sulle password, controlli delle chiavi API |
+| **ISO 27001** | Tutte le funzionalità di sicurezza aiutano a dimostrare il controllo degli accessi |
+| **HIPAA** | Autenticazione forte e gestione degli accessi |
+| **GDPR** | Protezione dei dati tramite controlli degli accessi |
+| **PCI DSS** | Autenticazione multifattore, password forti |
+
+### Monitoraggio dello Stato di Conformità
+
+La dashboard Sicurezza fornisce visibilità in tempo reale su:
+- Quanti membri hanno la 2FA abilitata
+- Conformità alla politica sulle password nella tua organizzazione
+- Adozione della sicurezza delle chiavi API
+
+Usa la funzionalità "Copia lista email" per esportare facilmente liste di membri non conformi per comunicazioni mirate.
+
+## Risoluzione dei Problemi
+
+### "Accesso Negato: Politica di sicurezza non soddisfatta"
+
+**Problema**: Un membro non può accedere all'organizzazione.
+
+**Soluzioni**:
+1. Controlla se la 2FA è applicata - il membro deve [abilitare la 2FA](/docs/webapp/mfa/)
+2. Controlla se la politica sulle password è attiva - il membro deve aggiornare la propria password
+3. Verifica lo stato di conformità del membro nella dashboard Sicurezza
+
+### Impossibile abilitare le funzionalità di sicurezza
+
+**Problema**: Gli interruttori di sicurezza sono disabilitati o non rispondono.
+
+**Soluzioni**:
+- Assicurati di avere il ruolo **super_admin** nell'organizzazione
+- Controlla la tua connessione di rete
+- Prova ad aggiornare la pagina
+- Contatta il supporto se il problema persiste
+
+### Creazione della chiave API fallita
+
+**Problema**: Impossibile creare nuove chiavi API.
+
+**Soluzioni**:
+- Se le chiavi sicure sono applicate, assicurati di utilizzare il flusso di creazione delle chiavi sicure
+- Se la scadenza è richiesta, imposta una data di scadenza nell'intervallo consentito
+- Controlla l'impostazione dei giorni massimi di scadenza
+
+## Prossimi Passi
+
+- [Configura la 2FA sul tuo account](/docs/webapp/mfa/)
+- [Scopri i dettagli sull'applicazione della 2FA](/docs/webapp/2fa-enforcement/)
+- [Gestisci le chiavi API](/docs/webapp/api-keys/)
+- [Gestione dell'organizzazione](/docs/webapp/organization-system/)

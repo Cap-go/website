@@ -11,7 +11,12 @@ The Logs page provides a detailed history of update events and diagnostic inform
 
 From there you should see a page similar to this, displaying a list of log entries:
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/logs.webp" alt="show logs" /><figcaption>Logs Page Overview</figcaption></figure>
+<figure><img style="margin-left: auto; margin-right: auto" src="/logs.webp" alt="Logs page overview showing the main interface" /><figcaption>Logs Page Overview</figcaption></figure>
+
+The logs page interface includes:
+1. **Logs Tab** - The navigation tab to access the logs view
+2. **Reload Button** - Refresh the logs list with the latest data
+3. **Time Range & Actions Filters** - Filter logs by date range and action type (see sections below)
 
 Each row shows:
 - **Timestamp** (UTC)
@@ -20,6 +25,35 @@ Each row shows:
 - **Version name** (bundle or `builtin`)
 
 Click a row to jump to the device detail page for the full history.
+
+### Filtering by Date Range
+
+You can filter logs by a specific time period using the date picker:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/logs_date_range.webp" alt="Date range picker for filtering logs" /><figcaption>Date Range Filter</figcaption></figure>
+
+1. **Quick Presets** - Select common time ranges: Last 1h, 3h, 6h, or 12h
+2. **Start Time** - Set a custom start time for the range
+3. **End Time** - Set a custom end time for the range
+4. **Calendar** - Pick specific dates using the calendar view
+
+Click "Select" to apply your chosen date range, or "Cancel" to dismiss the picker.
+
+### Filtering by Action Type
+
+The Actions dropdown lets you filter logs by specific event types:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/logs_filters.webp" alt="Actions filter dropdown for filtering logs by event type" /><figcaption>Actions Filter</figcaption></figure>
+
+Available action filters include:
+- **Device heartbeat** - Periodic health checks from devices
+- **Version deletion requested** - When a bundle version is deleted
+- **Reset to default version** - When a device reverts to the builtin bundle
+- **Version installed successfully** - Successful bundle installation
+- **New version sent to device** - When Capgo sends an update to a device
+- **Version installation failed** - When bundle installation fails
+
+Use the search box at the top to quickly find specific action types. You can select multiple actions to show logs matching any of the selected types.
 
 ### Sample log snippet (fake data)
 

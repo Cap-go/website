@@ -1,0 +1,299 @@
+---
+title: "Seguridad de la Organización"
+description: "Configure políticas de seguridad integrales para su organización, incluyendo la aplicación de 2FA, políticas de contraseñas y controles de claves API para proteger sus aplicaciones y datos."
+sidebar:
+  order: 9
+---
+
+import { Aside, Steps, Badge } from '@astrojs/starlight/components';
+
+Capgo proporciona controles de seguridad integrales que permiten a los administradores de la organización aplicar políticas de seguridad en todos los miembros. Estas funciones le ayudan a cumplir con los requisitos de cumplimiento, proteger datos sensibles y mantener una postura de seguridad sólida.
+
+## Resumen
+
+La configuración de Seguridad de la Organización permite a los super administradores configurar:
+
+- **Aplicación de Autenticación de Dos Factores (2FA)** - Requerir que todos los miembros habiliten 2FA
+- **Política de Contraseñas** - Establecer requisitos de complejidad de contraseñas
+- **Seguridad de Claves API** - Aplicar claves API seguras y políticas de expiración
+
+![Configuración de Seguridad de la Organización](/org_security.webp)
+
+La página de Seguridad está organizada en secciones claramente etiquetadas:
+1. **Pestaña de Seguridad** - Acceda a todas las configuraciones de seguridad desde la barra lateral de configuración de la Organización
+2. **Aplicación de 2FA** - Interruptor y visualización de estado para los requisitos de autenticación de dos factores
+3. **Política de Contraseñas** - Configure las reglas de complejidad de contraseñas para los miembros de la organización
+4. **Política de Claves API** - Configuraciones para claves API seguras y requisitos de expiración
+5. **Expiración de Claves API** - Controle si las claves API deben tener fechas de expiración
+
+<Aside type="note">
+
+Solo los usuarios con el rol **super_admin** pueden configurar las configuraciones de seguridad de la organización. Otros miembros pueden ver su estado de cumplimiento pero no pueden modificar las políticas.
+
+</Aside>
+
+## Acceder a la Configuración de Seguridad
+
+<Steps>
+
+1. Navegue a la configuración de su organización haciendo clic en **Configuración** en la barra lateral
+2. Haga clic en la pestaña **Organización** en la parte superior de la página de configuración
+3. Seleccione la pestaña **Seguridad** de la barra de navegación de la organización (resaltada con un icono de escudo)
+
+</Steps>
+
+## Aplicación de Autenticación de Dos Factores (2FA)
+
+La aplicación de 2FA requiere que todos los miembros de la organización tengan habilitada la autenticación de dos factores en sus cuentas. Esto añade una capa crítica de seguridad al requerir tanto una contraseña como un código de verificación.
+
+### Qué Sucede Cuando se Aplica 2FA
+
+- Los miembros sin 2FA son **bloqueados inmediatamente** del acceso a las aplicaciones de la organización
+- Tanto el panel web como la CLI aplican este requisito
+- Los nuevos miembros deben habilitar 2FA antes de poder acceder a los recursos de la organización
+- El sistema rastrea qué miembros tienen 2FA habilitado en tiempo real
+
+### Comprender el Panel de Estado de 2FA
+
+La página de Seguridad muestra un panel completo de **Estado de 2FA de los Miembros** que muestra:
+
+- **Total de Miembros** - El número total de miembros en su organización
+- **2FA Habilitado** (indicador verde) - Miembros que han habilitado exitosamente la autenticación de dos factores
+- **2FA No Habilitado** (indicador de advertencia naranja) - Miembros que aún necesitan configurar 2FA
+
+Cuando los miembros no tienen 2FA habilitado, aparecen en un cuadro de advertencia **Miembros Sin 2FA**. Este cuadro muestra:
+- La dirección de correo electrónico de cada miembro y su rol en la organización
+- Un botón **Copiar Lista de Correos** para copiar rápidamente todas las direcciones de correo afectadas para comunicación
+
+### Habilitar la Aplicación de 2FA
+
+<Steps>
+
+1. Navegue a **Configuración de la Organización > Seguridad**
+2. Localice la sección **Requerir 2FA para Todos los Miembros** en la parte superior de la página
+3. Revise el panel **Estado de 2FA de los Miembros** para ver qué miembros serán afectados
+4. Si hay miembros sin 2FA, use el botón **Copiar Lista de Correos** para notificarles antes de habilitar
+5. Active el interruptor junto a **Requerir 2FA para Todos los Miembros** para habilitar la aplicación
+6. El interruptor mostrará el estado **Deshabilitado** o **Habilitado** en el lado derecho
+
+</Steps>
+
+<Aside type="caution">
+
+Antes de habilitar la aplicación de 2FA:
+- Notifique a los miembros afectados con anticipación y comparta la [guía de configuración de 2FA](/docs/webapp/mfa/)
+- Deles tiempo para habilitar 2FA en sus cuentas
+- Los miembros sin 2FA perderán el acceso inmediatamente cuando habilite la aplicación
+- Considere contactar a los miembros listados en el cuadro de advertencia "Miembros Sin 2FA"
+
+</Aside>
+
+### Soporte de CLI para la Aplicación de 2FA
+
+También puede gestionar la aplicación de 2FA a través de la CLI:
+
+```shell
+# Habilitar aplicación de 2FA
+npx @capgo/cli organization set YOUR_ORG_ID --enforce-2fa
+
+# Deshabilitar aplicación de 2FA
+npx @capgo/cli organization set YOUR_ORG_ID --no-enforce-2fa
+
+# Verificar estado de 2FA de los miembros
+npx @capgo/cli organization members YOUR_ORG_ID
+```
+
+Para información detallada sobre la aplicación de 2FA, consulte la [guía de Aplicación de 2FA](/docs/webapp/2fa-enforcement/).
+
+## Política de Contraseñas
+
+Las políticas de contraseñas le permiten aplicar requisitos de complejidad de contraseñas para todos los miembros de la organización. Cuando la contraseña de un miembro no cumple con los requisitos de la política, debe actualizar su contraseña antes de acceder a los recursos de la organización.
+
+La sección de Política de Contraseñas (marcada con el indicador **3** en la imagen de resumen) proporciona un interruptor simple para aplicar requisitos de contraseña en toda su organización.
+
+### Cómo Funciona la Política de Contraseñas
+
+Cuando habilita la política de contraseñas:
+- Todos los miembros de la organización deben cumplir con los requisitos de complejidad de contraseñas
+- Los usuarios que no cumplan los requisitos serán bloqueados hasta que actualicen su contraseña
+- La política se aplica a todos los miembros independientemente de su rol
+
+### Habilitar la Política de Contraseñas
+
+<Steps>
+
+1. Vaya a **Configuración de la Organización > Seguridad**
+2. Desplácese hacia abajo para encontrar la sección **Política de Contraseñas**
+3. Lea la descripción: "Requerir que los miembros de la organización usen contraseñas que cumplan requisitos específicos de complejidad"
+4. Active el interruptor **Aplicar Política de Contraseñas** para habilitarla
+5. La descripción del interruptor indica: "Cuando está habilitado, todos los miembros de la organización deben cumplir con los requisitos de contraseña para acceder a la organización"
+
+</Steps>
+
+### Requisitos de Contraseña Disponibles
+
+| Configuración | Descripción | Rango |
+|---------------|-------------|-------|
+| **Longitud Mínima** | Número mínimo de caracteres requeridos | 6-128 caracteres |
+| **Requerir Mayúscula** | La contraseña debe contener al menos una letra mayúscula (A-Z) | Activado/Desactivado |
+| **Requerir Número** | La contraseña debe contener al menos un dígito (0-9) | Activado/Desactivado |
+| **Requerir Carácter Especial** | La contraseña debe contener al menos un carácter especial (!@#$%^&*, etc.) | Activado/Desactivado |
+
+### Seguimiento de Cumplimiento de Miembros
+
+Cuando una política de contraseñas está activa, puede monitorear el cumplimiento:
+
+- **Total de Miembros**: Número de miembros en su organización
+- **Cumple**: Miembros cuyas contraseñas cumplen con los requisitos de la política
+- **No Cumple**: Miembros que necesitan actualizar sus contraseñas
+
+Los miembros que no cumplen se listan con sus direcciones de correo electrónico. Puede copiar la lista de correos para notificarles sobre la política y los cambios de contraseña requeridos.
+
+<Aside type="tip">
+
+Al habilitar una política de contraseñas por primera vez, los miembros con contraseñas que no cumplen serán solicitados a cambiar su contraseña en su próximo inicio de sesión. No serán bloqueados inmediatamente, pero su acceso puede estar restringido hasta que cumplan.
+
+</Aside>
+
+### Mejores Prácticas para Políticas de Contraseñas
+
+- **Comience con requisitos razonables**: Un mínimo de 10-12 caracteres con mayúsculas/minúsculas y números proporciona buena seguridad sin ser excesivamente restrictivo
+- **Comunique los cambios**: Notifique a su equipo antes de habilitar nuevos requisitos de contraseña
+- **Permita tiempo de transición**: Dé a los miembros tiempo para actualizar sus contraseñas
+- **Considere administradores de contraseñas**: Recomiende que los miembros del equipo usen administradores de contraseñas para generar y almacenar contraseñas seguras
+
+## Seguridad de Claves API
+
+Capgo proporciona dos controles de seguridad para claves API: aplicar claves API seguras (hasheadas) y requerir fechas de expiración. La sección de Política de Claves API (marcada con el indicador **4** en la imagen de resumen) se identifica por un icono de llave.
+
+### Aplicar Claves API Seguras
+
+La primera opción en la sección de Política de Claves API es **Aplicar Claves API Seguras**. Cuando está habilitada, esta configuración requiere que todas las claves API en su organización se creen usando el formato seguro/hasheado.
+
+Las claves API hasheadas son más seguras porque:
+
+- El valor real de la clave nunca se almacena en nuestros servidores
+- Solo usted (y sus sistemas) tienen acceso a la clave completa
+- Incluso si nuestra base de datos fuera comprometida, sus claves no podrían ser utilizadas
+
+La descripción del interruptor indica: "Cuando está habilitado, solo las claves API seguras (hasheadas) pueden acceder a esta organización. Las claves API en texto plano serán rechazadas."
+
+<Aside type="note">
+
+Las claves API heredadas existentes (no hasheadas) continuarán funcionando, pero los miembros no podrán crear nuevas claves no hasheadas cuando esta política esté habilitada.
+
+</Aside>
+
+### Habilitar Claves API Seguras
+
+<Steps>
+
+1. Vaya a **Configuración de la Organización > Seguridad**
+2. Desplácese hacia abajo para encontrar la sección **Política de Claves API** (busque el icono de llave)
+3. Localice el interruptor **Aplicar Claves API Seguras**
+4. Active el interruptor para habilitar la aplicación de claves API seguras
+5. Las claves existentes no se ven afectadas; la política se aplica a la creación de nuevas claves
+
+</Steps>
+
+### Política de Expiración de Claves API
+
+La segunda opción (marcada con el indicador **5** en la imagen de resumen) es **Requerir Expiración de Claves API**. Puede requerir que todas las claves API tengan una fecha de expiración, limitando su período de validez.
+
+Esta es una mejor práctica de seguridad que:
+
+- Limita la ventana de exposición si una clave es comprometida
+- Asegura la rotación regular de claves
+- Ayuda a cumplir con los requisitos de cumplimiento para la gestión de credenciales
+
+La descripción del interruptor indica: "Cuando está habilitado, todas las claves API para esta organización deben tener una fecha de expiración"
+
+### Configurar la Política de Expiración
+
+<Steps>
+
+1. Vaya a **Configuración de la Organización > Seguridad**
+2. Encuentre la sección **Política de Claves API**
+3. Localice el interruptor **Requerir Expiración de Claves API** (debajo de Aplicar Claves API Seguras)
+4. Active el interruptor para habilitar el requisito de expiración
+5. Una vez habilitado, establezca los **Días máximos de expiración** (1-365 días)
+   - Esto limita qué tan lejos en el futuro se pueden establecer las fechas de expiración
+   - Ejemplo: Establecer 90 días significa que las claves pueden expirar como máximo 90 días desde su creación
+
+</Steps>
+
+<Aside type="caution">
+
+Cuando habilite el requisito de expiración:
+- Las nuevas claves API deben tener una fecha de expiración
+- Las claves existentes sin expiración continúan funcionando
+- Considere auditar las claves existentes y rotar aquellas sin expiración
+
+</Aside>
+
+### Políticas de Claves API Recomendadas
+
+| Caso de Uso | Claves Seguras | Expiración | Días Máx. |
+|-------------|----------------|------------|-----------|
+| **Desarrollo** | Recomendado | Opcional | 30-90 |
+| **Pipelines CI/CD** | Requerido | Requerido | 90-180 |
+| **Producción** | Requerido | Requerido | 30-90 |
+| **Enterprise/Cumplimiento** | Requerido | Requerido | 30-60 |
+
+## Cumplimiento y Auditoría
+
+Las funciones de seguridad de la organización le ayudan a cumplir con varios requisitos de cumplimiento:
+
+| Estándar | Funciones Relevantes |
+|----------|----------------------|
+| **SOC 2** | Aplicación de 2FA, políticas de contraseñas, controles de claves API |
+| **ISO 27001** | Todas las funciones de seguridad ayudan a demostrar el control de acceso |
+| **HIPAA** | Autenticación fuerte y gestión de acceso |
+| **GDPR** | Protección de datos a través de controles de acceso |
+| **PCI DSS** | Autenticación multifactor, contraseñas seguras |
+
+### Monitorear el Estado de Cumplimiento
+
+El panel de Seguridad proporciona visibilidad en tiempo real de:
+- Cuántos miembros tienen 2FA habilitado
+- Cumplimiento de la política de contraseñas en su organización
+- Adopción de seguridad de claves API
+
+Use la función "Copiar lista de correos" para exportar fácilmente listas de miembros que no cumplen para comunicación dirigida.
+
+## Solución de Problemas
+
+### "Acceso Denegado: Política de seguridad no cumplida"
+
+**Problema**: Un miembro no puede acceder a la organización.
+
+**Soluciones**:
+1. Verifique si 2FA está aplicado - el miembro necesita [habilitar 2FA](/docs/webapp/mfa/)
+2. Verifique si la política de contraseñas está activa - el miembro necesita actualizar su contraseña
+3. Verifique el estado de cumplimiento del miembro en el panel de Seguridad
+
+### No se pueden habilitar las funciones de seguridad
+
+**Problema**: Los interruptores de seguridad están deshabilitados o no responden.
+
+**Soluciones**:
+- Asegúrese de tener el rol **super_admin** en la organización
+- Verifique su conexión de red
+- Intente actualizar la página
+- Contacte al soporte si el problema persiste
+
+### La creación de claves API falla
+
+**Problema**: No se pueden crear nuevas claves API.
+
+**Soluciones**:
+- Si las claves seguras están aplicadas, asegúrese de usar el flujo de creación de claves seguras
+- Si se requiere expiración, establezca una fecha de expiración dentro del rango permitido
+- Verifique la configuración de días máximos de expiración
+
+## Próximos Pasos
+
+- [Configurar 2FA en su cuenta](/docs/webapp/mfa/)
+- [Aprender sobre los detalles de aplicación de 2FA](/docs/webapp/2fa-enforcement/)
+- [Gestionar claves API](/docs/webapp/api-keys/)
+- [Gestión de la organización](/docs/webapp/organization-system/)

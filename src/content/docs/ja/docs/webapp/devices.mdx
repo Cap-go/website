@@ -1,30 +1,40 @@
 ---
 title: デバイス
-description: デバイスの使用方法
+description: "デバイスページを使用してデバイスを効果的に管理・設定するための包括的なガイド。フィルターオプションや個々のデバイスの詳細な設定を含みます。"
 sidebar:
   order: 7
 locale: ja
 ---
 
+:::note[データ保持]
+デバイスデータは最後のデバイスアクティビティから**90日間**保持されます。この期間内にCapgoに接続していないデバイスは自動的にリストから削除されます。アクティブなデバイスは更新を確認する際に継続的に追跡されます。
+:::
+
 ## すべてのデバイスの一覧を表示する
-まず、デバイスページを見てみましょう。[アプリをクリックして](/docs/webapp/main-page)、[デバイスタブをクリックする](/docs/webapp/main-app-page)ことでアクセスできます。
+まず、デバイスページを見てみましょう。[アプリをクリック](/docs/webapp/main-page)してから、[デバイスタブをクリック](/docs/webapp/main-app-page)することでアクセスできます。
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/devices.webp" alt="devices list" /><figcaption></figcaption></figure>
+<figure><img style="margin-left: auto; margin-right: auto" src="/devices.webp" alt="デバイス一覧" /><figcaption></figcaption></figure>
 
-## 開発者デバイスのみを表示する
-[カスタムチャンネル](/docs/plugin/api/#setchannel)やカスタムバージョンを持つ上書きされたデバイスのみを表示したい場合があります。
-それには`Filters`をクリックし、`Override`をクリックします。次のように表示されるはずです：
-
-<figure><img style="margin-left: auto; margin-right: auto" src="/overwrite-filter.webp" alt="filter devices" /><figcaption></figcaption></figure>
+1. **デバイスタブ** - ナビゲーションバーのこのタブをクリックしてデバイスページにアクセスします
+2. **フィルター** - クリックしてデバイスをフィルタリングします：
+   - **オーバーライド** - [カスタムチャンネル](/docs/plugin/api/#setchannel)またはカスタムバージョンを持つデバイスのみを表示します
+   - **カスタムID** - カスタム識別子が設定されたデバイスのみを表示します
 
 ## デバイスの設定
 
 特定のデバイスを設定するには、テーブル内でそのデバイスをクリックすると、次のような画面が表示されます：
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/device-specific.webp" alt="show one device" /><figcaption></figcaption></figure>
+<figure><img style="margin-left: auto; margin-right: auto" src="/device-specific.webp" alt="1つのデバイスを表示" /><figcaption></figcaption></figure>
 
-まず`Custom ID`ですが、これは実際にはあまり有用ではなく、現時点では何もしません。無視して構いません。
+1. **Information** - デバイスID、最終更新、プラットフォーム、プラグインバージョン、バージョン、ビルトインバージョン、OSバージョン、本番アプリかどうかなどのデバイス詳細を表示します
+2. **Deployments** - このデバイスのデプロイメント履歴を表示します
+3. **Logs** - このデバイスに関連するログを表示します
+4. **チャンネルオーバーライド** - この特定のデバイスのチャンネルをオーバーライドします。設定すると、このデバイスはパブリック（デフォルト）チャンネルを使用せず、選択したチャンネルからのみ更新を受け取ります
 
-次にforce versionです。これが設定されている場合、このデバイスは**常に**このバージョンを受け取ります。これはチャンネルよりも優先されます。
+### カスタムID
 
-最後にカスタムチャンネルです。これが設定されている場合、このデバイスはパブリック（デフォルト）チャンネルを無視し、このチャンネルのみを使用します。
+`カスタムID`は、デバイスを自分のユーザーとして認識できるIDに接続するのに役立つ非常に便利なフィールドです。
+
+どのデバイスがどのユーザーに属しているかを簡単に識別するために使用してください。
+
+カスタムIDは`CapacitorUpdater.setCustomId({ customId: user });`を使用してデバイス自体からのみ設定できます。

@@ -82,36 +82,14 @@ Deleting a channel is straight forward. Just click on the trash icon and confirm
 
 ## Managing a channel
 
-Clicking on the channel name will open a modal where you can manage the channel. (`3` in the image)
-This page should look something like this:
+Clicking on the channel name will open a modal where you can manage the channel settings. (`3` in the image)
 
-<figure><img src="/manage_channel_main.webp" alt="manage channel" /><figcaption></figcaption></figure>
+<figure><img src="/channel_settings.webp" alt="Channel settings" /><figcaption></figcaption></figure>
 
-Let's go through the different sections.
-
-First the `Bundle number` (`1` in the image). This is the current version for that channel. When asked to serve an update this channel will always attempt to respond with that version.* [^1]
-Clicking on it should take you to the [bundle](/docs/webapp/bundles/) page.
-
-Second the `Shared to` (`2` in the image) page. I recommend against ever using this. A new and better system is in the works.
-
-Now the forced devices (`3` in the image). This is a list of devices that will always get updates from this channel. This is useful for testing purposes. You can add force a device to a channel from the [devices](/docs/webapp/devices/) page.
-
-Lastly the settings (`4` in the image). This is where you can manage how the channels behave.
-After you click on it you should see something like this:
-
-<figure><img src="/channel_settings.webp" alt="setting of channel" /><figcaption></figcaption></figure>
-
-The list of settings is long, but I will do my best to explain them all.
+The channel settings page contains all the configuration options for your channel. Let's go through each setting.
 
 ---
-First the `Default channel` **THIS IS PROBABLY THE MOST IMPORTANT ONE**.\
-If a channel is marked as default, then it will be used as the default channel for all new devices.\
-In different terms: If you have a new user Capgo will try to serve them the latest version of this default channel (unless the device is forced or has an override as described above).
-Only 1 channel can be set to default at a time. If you try to break this rule you will be asked to confirm your action.
-
-<figure><img style="margin-left: auto; margin-right: auto" src="/confirm-make-default.webp" alt="confirm make change" /><figcaption></figcaption></figure>
-
-After you confirm the old default channel will be unmarked as default and the new one will be marked as default.
+First the `Default channel` toggle. When enabled, this channel becomes the default for new devices. For a comprehensive explanation of how default channels work, including how to set up platform-specific defaults (one for iOS, one for Android), see the [Default Channel Configuration](/docs/webapp/main-app-page/#default-channel-configuration) section.
 
 ---
 Second the `IOS` setting. This is relatively simple. If this is false then IOS devices will not be allowed to download updates from this channel.

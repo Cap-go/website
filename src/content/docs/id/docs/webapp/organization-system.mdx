@@ -1,6 +1,6 @@
 ---
-title: 조직 시스템
-description: Mengelola organisasi di akun capgo Anda.
+title: "Sistem Organisasi"
+description: "Panduan lengkap tentang mengelola dan mengorganisir tim dan aplikasi dalam akun Capgo Anda, memastikan kolaborasi yang aman dan kontrol akses yang efisien untuk semua anggota yang terlibat."
 sidebar:
   order: 11
 locale: id
@@ -8,72 +8,120 @@ locale: id
 
 ## Apa itu sistem organisasi?
 
-Sistem organisasi adalah sistem di capgo yang memungkinkan Anda untuk berbagi aplikasi secara aman dengan anggota tim Anda
+Sistem organisasi adalah sistem di Capgo yang memungkinkan Anda untuk berbagi aplikasi secara aman dengan anggota tim Anda.
 
-### Q: Bagaimana cara mengakses info organisasi saya?
+## Gambaran Umum Pengaturan Organisasi
 
-Untuk mengakses info organisasi Anda, silakan pergi ke [pengaturan](/docs/webapp/settings/#how-to-get-to-the-settings-page) lalu klik `Organization settings`
+<figure><img src="/orgs-settings.webp" alt="Pengaturan Organisasi" /><figcaption></figcaption></figure>
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-settings.webp" alt="Org settings" /><figcaption></figcaption></figure>
+| Nomor | Elemen | Deskripsi |
+|-------|--------|-----------|
+| 1 | Pengaturan | Akses pengaturan dari menu sidebar |
+| 2 | Tab Organisasi | Beralih ke pengaturan organisasi (vs. pengaturan akun pribadi) |
+| 3 | Umum | Lihat dan edit nama organisasi, logo, dan email manajemen |
+| 4 | Anggota | Kelola anggota tim dan izin mereka |
+| 5 | Keamanan | Konfigurasikan kebijakan keamanan (2FA, persyaratan kata sandi) |
+| 6 | Log Audit | Lihat log aktivitas organisasi Anda |
+| 7 | Paket | Lihat dan kelola paket langganan Anda |
+| 8 | Penggunaan | Pantau statistik penggunaan organisasi Anda |
+| 9 | Kredit | Lihat dan beli kredit tambahan |
+| 10 | Webhooks | Konfigurasikan integrasi webhook |
+| 11 | Tagihan | Kelola informasi tagihan dan faktur |
+| 12 | Pemilih Organisasi | Beralih antar organisasi yang berbeda |
 
-### Q: Bagaimana cara mengganti organisasi yang saya lihat?
+### Cara mengakses pengaturan organisasi
 
-Untuk melihat pengaturan organisasi yang berbeda, silakan klik pemilih organisasi di dekat nama Anda
+1. Klik **Pengaturan** (1) di sidebar kiri
+2. Pilih tab **Organisasi** (2) di bagian atas
+3. Gunakan tab (3-11) untuk navigasi antara bagian pengaturan yang berbeda
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/org-selector.webp" alt="Org selector" /><figcaption></figcaption></figure>
+### Cara mengganti organisasi
 
-Jika Anda tidak dapat melihat ini, kemungkinan Anda tidak berada di halaman pengaturan
+Klik dropdown **Pemilih Organisasi** (12) di dekat bagian kiri atas sidebar untuk melihat dan beralih antar organisasi yang Anda miliki aksesnya.
 
-### Q: Bagaimana cara melihat anggota organisasi saya?
+## Mengelola Anggota
 
-Silakan klik `members`
-<figure><img style="margin-left: auto; margin-right: auto" src="/org-show-members.webp" alt="Org Show members" /><figcaption></figcaption></figure>
+<figure><img src="/org-show-members.webp" alt="Anggota Organisasi" /><figcaption></figcaption></figure>
 
-### Q: Bagaimana cara mengundang pengguna ke organisasi?
+Bagian Anggota menampilkan semua pengguna yang memiliki akses ke organisasi Anda dengan:
+- **Anggota**: Avatar, nama, dan email pengguna
+- **Peran**: Tingkat izin saat ini (baca, unggah, tulis, admin, super admin)
+- **Tindakan**: Edit atau hapus anggota
 
-Silakan klik `Add member`
-<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-add-member.webp" alt="Org add member" /><figcaption></figcaption></figure>
+### Cara mengundang anggota baru
 
-Kemudian pop-out akan muncul - silakan masukkan alamat email pengguna
+<figure><img src="/orgs-add-member.webp" alt="Undang Anggota" /><figcaption></figcaption></figure>
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/invite-to-org-email-enter.webp" alt="Invite to org" /><figcaption></figcaption></figure>
+1. Klik tombol **+ Tambah** (1)
+2. Masukkan alamat email pengguna di modal (2)
+3. Klik **Undang**
 
-Lalu klik `invite` Pop-out lain akan muncul, kali ini menanyakan tentang izin yang harus dimiliki pengguna yang diundang
+### Memilih izin
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/select-perm-orgs.webp" alt="Select perm for org" /><figcaption></figcaption></figure>
+<figure><img src="/select-perm-orgs.webp" alt="Pilih Izin" /><figcaption></figcaption></figure>
 
-Berikut adalah rincian semua izin:
+Setelah memasukkan email, pilih tingkat izin untuk pengguna yang diundang:
+- **Baca** - Akses hanya baca
+- **Unggah** - Dapat mengunggah versi baru
+- **Tulis** - Dapat mengubah pengaturan dan konten
+- **Admin** - Akses penuh kecuali tagihan dan penghapusan
+- **Super admin** - Kontrol penuh organisasi
 
-| Izin                              | Read | Upload | Write | Admin | Super Admin |
+### Menyelesaikan undangan
+
+<figure><img src="/invite_org_user.webp" alt="Formulir Undangan" /><figcaption></figcaption></figure>
+
+Isi detail yang tersisa:
+- **Email** - Sudah terisi dari langkah sebelumnya
+- **Peran** - Menampilkan tingkat izin yang dipilih
+- **Nama depan** - Opsional: nama depan undangan
+- **Nama belakang** - Opsional: nama belakang undangan
+- **Captcha** - Verifikasi bahwa Anda manusia
+
+Klik **Kirim undangan** untuk menyelesaikan proses.
+
+## Rincian Izin
+
+| Izin                              | Baca | Unggah | Tulis | Admin | Super Admin |
 |-----------------------------------|------|--------|-------|-------|-------------|
-| Tampilkan statistik aplikasi      |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
-| Tampilkan channel aplikasi        |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
-| Tampilkan perangkat               |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
-| Tampilkan log                     |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
-| Tampilkan bundle                  |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
-| Hapus aplikasi                    |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
-| Hapus channel                     |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
-| Hapus versi                       |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
-| Ubah pengaturan org               |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
-| Kelola pengguna org               |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
-| Ubah pengaturan channel           |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
-| Unggah versi baru                 |   ❌  |    ✅   |   ✅   |   ✅   |   ✅   |
-| Ubah perangkat                    |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
-| Ubah versi saat ini channel       |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
-| Buat channel baru                 |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
-| Ubah versi (metadata)             |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
-| Kelola penagihan                  |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
-| Hapus versi secara tidak aman     |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
+| Tampilkan statistik aplikasi      |   ✅  |    ✅   |   ✅   |   ✅   |      ✅      |
+| Tampilkan channel aplikasi        |   ✅  |    ✅   |   ✅   |   ✅   |      ✅      |
+| Tampilkan perangkat               |   ✅  |    ✅   |   ✅   |   ✅   |      ✅      |
+| Tampilkan log                     |   ✅  |    ✅   |   ✅   |   ✅   |      ✅      |
+| Tampilkan bundle                  |   ✅  |    ✅   |   ✅   |   ✅   |      ✅      |
+| Hapus aplikasi                    |   ❌  |    ❌   |   ❌   |   ❌   |      ✅      |
+| Hapus channel                     |   ❌  |    ❌   |   ❌   |   ✅   |      ✅      |
+| Hapus versi                       |   ❌  |    ❌   |   ✅   |   ✅   |      ✅      |
+| Ubah pengaturan org               |   ❌  |    ❌   |   ❌   |   ✅   |      ✅      |
+| Kelola pengguna org               |   ❌  |    ❌   |   ❌   |   ✅   |      ✅      |
+| Ubah pengaturan channel           |   ❌  |    ❌   |   ✅   |   ✅   |      ✅      |
+| Unggah versi baru                 |   ❌  |    ✅   |   ✅   |   ✅   |      ✅      |
+| Ubah perangkat                    |   ❌  |    ❌   |   ✅   |   ✅   |      ✅      |
+| Ubah versi saat ini channel       |   ❌  |    ❌   |   ✅   |   ✅   |      ✅      |
+| Buat channel baru                 |   ❌  |    ❌   |   ❌   |   ✅   |      ✅      |
+| Ubah versi (metadata)             |   ❌  |    ❌   |   ✅   |   ✅   |      ✅      |
+| Kelola penagihan                  |   ❌  |    ❌   |   ❌   |   ❌   |      ✅      |
+| Hapus versi secara tidak aman     |   ❌  |    ❌   |   ❌   |   ❌   |      ✅      |
 
-### Q: Bagaimana penagihan dilakukan dalam organisasi?
+## Tagihan
 
-Siapa pun dengan izin **super admin** dapat mengelola penagihan untuk organisasi tertentu
-Paket terhubung ke organisasi dan bukan ke akun pribadi Anda
+Siapa pun dengan izin **super admin** dapat mengelola penagihan untuk organisasi tertentu. Paket terhubung ke organisasi dan bukan ke akun pribadi Anda.
 
 :::danger
 ⚠️ Membeli paket HANYA akan mempengaruhi organisasi yang saat ini Anda pilih
 :::
 
-### Q: Bisakah saya membuat lebih dari satu organisasi?
+## FAQ
 
-Tidak, belum bisa
+### Bisakah saya membuat lebih dari satu organisasi?
+
+Tidak, belum bisa.
+
+### Bagaimana cara mengkonfigurasi kebijakan keamanan untuk organisasi saya?
+
+Super admin dapat mengkonfigurasi kebijakan keamanan komprehensif termasuk:
+- **Penegakan 2FA** - Mewajibkan semua anggota mengaktifkan autentikasi dua faktor
+- **Kebijakan Kata Sandi** - Menetapkan persyaratan kompleksitas kata sandi (panjang, huruf besar, angka, karakter khusus)
+- **Keamanan Kunci API** - Menegakkan kunci API yang aman/hash dan kebijakan kedaluwarsa
+
+Lihat dokumentasi [Keamanan Organisasi](/docs/webapp/organization-security/) untuk instruksi konfigurasi terperinci.

@@ -81,50 +81,28 @@ You can learn more À propos it [here](/docs/CLI/Commandes/#Désactiver-Mises à
 
 Deleting a channel is straight forward. Just click on the trash icon and confirm the deletion. (`2` in the image)
 
-## Managing a Canal
+## Gérer un canal
 
-Clicking on the channel name will open a modal where you can manage the channel. (`3` in the image)
-This page should look something like this:
+Cliquer sur le nom du canal ouvrira un modal où vous pouvez gérer les paramètres du canal (`3` dans l'image).
 
-<figure><img src="/manage_channel_main.webp" alt="manage channel" /><figcaption></figcaption></figure>
+<figure><img src="/channel_settings.webp" alt="Paramètres du canal" /><figcaption></figcaption></figure>
 
-Let's go through the different sections.
-
-First the `Bundle number` (`1` in the image). This is the current version for that channel. When asked to serve an update this channel will always attempt to respond with that version.* [^1]
-Clicking on it should take you to the [Bundle](/docs/webapp/Bundles/) page.
-
-Second the `Shared to` (`2` in the image) page. I recommend against ever using this. A new and better system is in the works.
-
-Now the forced devices (`3` in the image). This is a list of devices that will always get updates from this channel. This is useful for testing purposes. You can add force a device to a channel from the [devices](/docs/webapp/devices/) page.
-
-Lastly the settings (`4` in the image). This is where you can manage how the channels behave.
-After you click on it you should see something like this:
-
-<figure><img src="/channel_settings.webp" alt="setting of channel" /><figcaption></figcaption></figure>
-
-The list of Paramètres is long, but I will do my best to explain them all.
+La page des paramètres du canal contient toutes les options de configuration pour votre canal. Passons en revue chaque paramètre.
 
 ---
-First the `Default channel` **THIS IS PROBABLY THE MOST IMPORTANT ONE**.\
-If a Canal is marked as default, then it will be used as the default Canal for all Nouveau Appareils.\
-In different terms: If you have a Nouveau Utilisateur Capgo will try to serve them the latest Version of this default Canal (unless the Appareil is forced or has an override as described above).
-Only 1 Canal can be set to default at a time. If you try to break this rule you will be asked to confirm your action.
-
-<figure><img style="margin-left: auto; margin-right: auto" src="/confirm-make-default.webp" alt="confirm make change" /><figcaption></figcaption></figure>
-
-After you confirm the old default Canal will be unmarked as default and the Nouveau one will be marked as default.
+Premièrement le toggle `Canal par défaut`. Lorsqu'il est activé, ce canal devient le canal par défaut pour les nouveaux appareils. Pour une explication complète du fonctionnement des canaux par défaut, y compris comment configurer des valeurs par défaut spécifiques à chaque plateforme (une pour iOS, une pour Android), consultez la section [Configuration du Canal par Défaut](/docs/webapp/main-app-page/#configuration-du-canal-par-défaut).
 
 ---
-Second the `IOS` setting. This is relatively simple. If this is false then IOS devices will not be allowed to download updates from this channel.
+Deuxièmement le paramètre `IOS`. C'est relativement simple. Si c'est faux, les appareils iOS ne pourront pas télécharger les mises à jour depuis ce canal.
 
-Third is the `Android` setting. This is similar to `IOS`. If this is false then Android devices will not be allowed to download updates from this channel.
+Troisièmement le paramètre `Android`. C'est similaire à `IOS`. Si c'est faux, les appareils Android ne pourront pas télécharger les mises à jour depuis ce canal.
 
-Fourth is the `Disable auto downgrade under native` setting. If this is true then it will be impossible to downgrade from a native version. This means that if you have uploaded a `1.2.0` version to the app store or play store and try to set the channel version to `1.1.0` then the update (downgrade) will fail.
+Quatrièmement le paramètre `Désactiver le downgrade automatique sous natif`. Si c'est vrai, il sera impossible de rétrograder depuis une version native. Cela signifie que si vous avez uploadé une version `1.2.0` sur l'App Store ou le Play Store et essayez de définir la version du canal à `1.1.0`, la mise à jour (rétrogradation) échouera.
 
-Fifth is the `Disable auto update`. This setting is quite complex, and you can learn more about it [here](/docs/cli/commands/#disable-updates-strategy)
+Cinquièmement `Désactiver la mise à jour automatique`. Ce paramètre est assez complexe, et vous pouvez en apprendre plus [ici](/docs/cli/commands/#disable-updates-strategy)
 
-As for `Allow development build`. If this is true then development builds will be allowed to download updates from this channel. If not then any update request that has the `prod` set to false will be rejected. This is mostly useful for testing purposes.
+Pour `Autoriser les builds de développement`. Si c'est vrai, les builds de développement pourront télécharger les mises à jour depuis ce canal. Sinon, toute demande de mise à jour avec `prod` défini à faux sera rejetée. C'est principalement utile pour les tests.
 
-Seventh is the `Allow Emulators`. If this is false then Capgo will disallow any update request that comes from an emulator. This is mostly useful for testing purposes.
+Septièmement `Autoriser les Émulateurs`. Si c'est faux, Capgo refusera toute demande de mise à jour provenant d'un émulateur. C'est principalement utile pour les tests.
 
-Eight is the `Allow devices to self associate`. If this is true then the [setChannel](/docs/plugin/api/#setchannel) method will be available. If this is set to false and you try to call the [setChannel](/docs/plugin/api/#setchannel) method with this channel then the call will fail.
+Huitièmement `Autoriser les appareils à s'auto-associer`. Si c'est vrai, la méthode [setChannel](/docs/plugin/api/#setchannel) sera disponible. Si c'est défini à faux et que vous essayez d'appeler la méthode [setChannel](/docs/plugin/api/#setchannel) avec ce canal, l'appel échouera.

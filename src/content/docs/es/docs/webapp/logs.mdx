@@ -1,17 +1,193 @@
 ---
-title: 로그
-description: Aprende cómo usar la página de registros
+title: "Registros"
+description: "Comprende y utiliza los registros de aplicaciones de Capgo para diagnósticos y seguimiento de las acciones de tus dispositivos con las actualizaciones."
 sidebar:
   order: 8
 locale: es
 ---
 
-## Mostrar todos los registros
-Primero, echemos un vistazo a la página de registros. Puedes acceder a ella [haciendo clic en tu aplicación](/docs/webapp/main-page) y luego [haciendo clic en la pestaña de actualizaciones](/docs/webapp/main-app-page)
-Desde allí deberías ver una página como esta:
+## Comprendiendo los registros de aplicaciones
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/Registros.webp" alt="show Registros" /><figcaption></figcaption></figure>
+La página de Registros proporciona un historial detallado de eventos de actualización e información de diagnóstico para tu aplicación. Esto es crucial para monitorear el proceso de actualización, solucionar problemas y comprender cómo interactúan tus dispositivos con Capgo. Puedes acceder a ella [haciendo clic en tu aplicación](/docs/webapp/main-page) y luego [haciendo clic en la pestaña "Registros" (anteriormente llamada "actualizaciones" en algunas capturas de pantalla o documentación más antiguas)](/docs/webapp/main-app-page).
+
+Desde allí deberías ver una página similar a esta, mostrando una lista de entradas de registro:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/logs.webp" alt="Vista general de la página de registros mostrando la interfaz principal" /><figcaption>Vista general de la página de registros</figcaption></figure>
+
+La interfaz de la página de registros incluye:
+1. **Pestaña de Registros** - La pestaña de navegación para acceder a la vista de registros
+2. **Botón Recargar** - Actualiza la lista de registros con los datos más recientes
+3. **Filtros de Rango de Tiempo y Acciones** - Filtra registros por rango de fechas y tipo de acción (ver secciones a continuación)
+
+Cada fila muestra:
+- **Marca de tiempo** (UTC)
+- **ID del dispositivo**
+- **Código de acción** (qué sucedió)
+- **Nombre de versión** (bundle o `builtin`)
+
+Haz clic en una fila para ir a la página de detalles del dispositivo para el historial completo.
+
+### Filtrar por rango de fechas
+
+Puedes filtrar registros por un período de tiempo específico usando el selector de fechas:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/logs_date_range.webp" alt="Selector de rango de fechas para filtrar registros" /><figcaption>Filtro de rango de fechas</figcaption></figure>
+
+1. **Preajustes rápidos** - Selecciona rangos de tiempo comunes: Última 1h, 3h, 6h o 12h
+2. **Hora de inicio** - Establece una hora de inicio personalizada para el rango
+3. **Hora de fin** - Establece una hora de fin personalizada para el rango
+4. **Calendario** - Selecciona fechas específicas usando la vista de calendario
+
+Haz clic en "Seleccionar" para aplicar tu rango de fechas elegido, o "Cancelar" para cerrar el selector.
+
+### Filtrar por tipo de acción
+
+El menú desplegable de Acciones te permite filtrar registros por tipos de eventos específicos:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/logs_filters.webp" alt="Menú desplegable de filtro de acciones para filtrar registros por tipo de evento" /><figcaption>Filtro de acciones</figcaption></figure>
+
+Los filtros de acción disponibles incluyen:
+- **Latido del dispositivo** - Verificaciones de salud periódicas de los dispositivos
+- **Eliminación de versión solicitada** - Cuando se elimina una versión de bundle
+- **Restablecer a versión predeterminada** - Cuando un dispositivo vuelve al bundle incorporado
+- **Versión instalada exitosamente** - Instalación exitosa del bundle
+- **Nueva versión enviada al dispositivo** - Cuando Capgo envía una actualización a un dispositivo
+- **Instalación de versión fallida** - Cuando falla la instalación del bundle
+
+Usa el cuadro de búsqueda en la parte superior para encontrar rápidamente tipos de acción específicos. Puedes seleccionar múltiples acciones para mostrar registros que coincidan con cualquiera de los tipos seleccionados.
+
+### Fragmento de registro de ejemplo (datos ficticios)
+
+| Hora (UTC) | ID Dispositivo | Acción | Versión | Qué te dice |
+|------------|----------------|--------|---------|-------------|
+| 2025-01-14 10:00:01 | `A1B2C3` | `get` | 2.4.1 | El dispositivo preguntó a Capgo si hay una actualización disponible |
+| 2025-01-14 10:00:03 | `A1B2C3` | `download_manifest_start` | 2.4.1 | Se inició la descarga del manifiesto; el SDK está a punto de descargar archivos |
+| 2025-01-14 10:00:07 | `A1B2C3` | `download_40` | 2.4.1 | La descarga del bundle está al 40% completada |
+| 2025-01-14 10:00:12 | `A1B2C3` | `download_zip_complete` | 2.4.1 | Descarga del zip finalizada |
+| 2025-01-14 10:00:13 | `A1B2C3` | `set` | 2.4.1 | Bundle instalado y marcado para ejecutar en el próximo inicio |
+| 2025-01-14 10:05:00 | `B9C8D7` | `disableAutoUpdateToMajor` | 1.9.0 | La política del canal bloqueó un salto a 2.x |
+| 2025-01-14 10:05:05 | `B9C8D7` | `rateLimited` | builtin | El dispositivo alcanzó el límite de solicitudes; el SDK espera hasta reiniciar |
+
+## Escenarios de ejemplo de registros
+
+Para ayudarte a entender qué te dicen los registros, aquí hay secuencias de ejemplo que muestran recorridos reales de actualización de dispositivos:
+
+### Flujo de actualización exitoso
+
+Así es como se ve una actualización saludable en tus registros:
+
+| Hora | ID Dispositivo | Acción | Versión | Qué significa |
+|------|----------------|--------|---------|---------------|
+| 10:00:01 | `a1b2c3d4` | `get` | 1.2.0 | El dispositivo verificó actualizaciones y recibió info de la versión 1.2.0 |
+| 10:00:02 | `a1b2c3d4` | `download_10` | 1.2.0 | Descarga iniciada, 10% completado |
+| 10:00:03 | `a1b2c3d4` | `download_50` | 1.2.0 | Descarga al 50% |
+| 10:00:05 | `a1b2c3d4` | `download_complete` | 1.2.0 | Descarga finalizada exitosamente |
+| 10:00:06 | `a1b2c3d4` | `set` | 1.2.0 | Bundle instalado y activado |
+
+### Dispositivo ya actualizado
+
+Cuando un dispositivo verifica pero ya tiene la última versión:
+
+| Hora | ID Dispositivo | Acción | Versión | Qué significa |
+|------|----------------|--------|---------|---------------|
+| 14:30:00 | `e5f6g7h8` | `noNew` | 1.2.0 | El dispositivo ya está en la última versión, no se necesita actualización |
+
+### Actualización fallida con reversión
+
+Cuando una actualización falla y el dispositivo revierte:
+
+| Hora | ID Dispositivo | Acción | Versión | Qué significa |
+|------|----------------|--------|---------|---------------|
+| 11:15:00 | `i9j0k1l2` | `get` | 1.3.0 | El dispositivo recibió info de actualización |
+| 11:15:02 | `i9j0k1l2` | `download_complete` | 1.3.0 | Descarga completada |
+| 11:15:03 | `i9j0k1l2` | `set` | 1.3.0 | Bundle fue establecido |
+| 11:15:10 | `i9j0k1l2` | `update_fail` | 1.3.0 | La app falló o no se llamó a `notifyAppReady()` - se activó reversión |
+| 11:15:11 | `i9j0k1l2` | `reset` | builtin | El dispositivo volvió a la versión incorporada |
+
+**Acción necesaria**: Verifica que tu app llame a `notifyAppReady()` después de una inicialización exitosa. Consulta [la documentación del plugin](/docs/plugin/api/#notifyappready) para más detalles.
+
+### Fallo de descarga
+
+Cuando problemas de red impiden la descarga:
+
+| Hora | ID Dispositivo | Acción | Versión | Qué significa |
+|------|----------------|--------|---------|---------------|
+| 09:45:00 | `m3n4o5p6` | `get` | 1.2.0 | El dispositivo recibió info de actualización |
+| 09:45:01 | `m3n4o5p6` | `download_30` | 1.2.0 | Descarga iniciada pero... |
+| 09:45:15 | `m3n4o5p6` | `download_fail` | 1.2.0 | Descarga fallida (tiempo de espera de red, conexión perdida, etc.) |
+
+**Acción necesaria**: El dispositivo reintentará automáticamente en el próximo inicio de la app. No se requiere acción a menos que esto ocurra frecuentemente.
+
+### Límite del plan alcanzado
+
+Cuando tu cuenta alcanza su límite de dispositivos:
+
+| Hora | ID Dispositivo | Acción | Versión | Qué significa |
+|------|----------------|--------|---------|---------------|
+| 16:00:00 | `q7r8s9t0` | `needPlanUpgrade` | - | Este dispositivo no recibirá actualizaciones hasta que actualices o se reinicie el ciclo de facturación |
+
+**Acción necesaria**: [Actualiza tu plan](/docs/webapp/settings/) o espera al próximo ciclo de facturación.
+
+### Configuración del canal bloqueando actualizaciones
+
+Cuando la configuración del canal impide una actualización:
+
+| Hora | ID Dispositivo | Acción | Versión | Qué significa |
+|------|----------------|--------|---------|---------------|
+| 12:00:00 | `u1v2w3x4` | `disableAutoUpdateToMajor` | 2.0.0 | El dispositivo en v1.x no puede auto-actualizar a v2.x (salto de versión mayor bloqueado) |
+| 12:05:00 | `y5z6a7b8` | `disableEmulator` | 1.2.0 | Emulador detectado, y el canal bloquea emuladores |
+| 12:10:00 | `c9d0e1f2` | `disableDevBuild` | 1.2.0 | Build de desarrollo detectado, y el canal bloquea builds de desarrollo |
+
+**Acción necesaria**: Estas son protecciones intencionales. Si deseas permitir estas actualizaciones, modifica tu [configuración del canal](/docs/webapp/channels/).
+
+## Códigos de registro (enum del backend de Capgo)
+
+Estos códigos provienen del enum `stats_action` usado por la API del dashboard (`capgo/src/types/supabase.types.ts`). Si ves un nuevo código en la UI, fue emitido por el SDK o backend y validado contra esta lista.
+
+**Ruta feliz y ciclo de vida**
+
+| Código(s) | Significado |
+|-----------|-------------|
+| `get` | El dispositivo preguntó a Capgo por el manifiesto del canal actual |
+| `download_manifest_start`, `download_manifest_complete` | Descarga del manifiesto comenzó / terminó (para bundles delta o multi-archivo) |
+| `download_zip_start`, `download_zip_complete` | Descarga del archivo zip comenzó / terminó |
+| `download_10` … `download_90` | Hitos de progreso de descarga |
+| `download_complete` | Bundle completo descargado |
+| `set` | Bundle preparado para el próximo inicio |
+| `reset` | El dispositivo volvió al bundle incorporado |
+| `delete` | Bundle eliminado del almacenamiento local |
+| `uninstall` | Desinstalación de app detectada |
+| `app_moved_to_foreground`, `app_moved_to_background` | Eventos del ciclo de vida de la app registrados por el SDK |
+| `ping` | Verificación de salud/latido del dispositivo |
+| `setChannel`, `getChannel` | Canal sobrescrito o obtenido via llamada del SDK |
+
+**Bloqueos de configuración o política**
+
+| Código(s) | Por qué se bloqueó la actualización |
+|-----------|-------------------------------------|
+| `disableAutoUpdate`, `disableAutoUpdateToMajor`, `disableAutoUpdateToMinor`, `disableAutoUpdateToPatch`, `disableAutoUpdateMetadata`, `disableAutoUpdateUnderNative` | La estrategia del canal prohíbe este salto de semver |
+| `disablePlatformIos`, `disablePlatformAndroid` | La plataforma está deshabilitada en el canal |
+| `disableDevBuild`, `disableEmulator` | Builds de desarrollo o emuladores no permitidos |
+| `cannotUpdateViaPrivateChannel`, `NoChannelOrOverride`, `channelMisconfigured` | La selección del canal o sobrescritura falló |
+| `missingBundle`, `cannotGetBundle` | El manifiesto hace referencia a un bundle que Capgo no puede servir |
+| `needPlanUpgrade` | La organización alcanzó su límite de plan/dispositivos |
+| `rateLimited` | Demasiadas solicitudes; el SDK limita hasta reiniciar |
+| `blocked_by_server_url`, `backend_refusal`, `InvalidIp` | Una regla del lado del servidor bloqueó la solicitud |
+
+**Fallos de descarga / integridad / instalación**
+
+| Código(s) | Significado |
+|-----------|-------------|
+| `download_fail` | La descarga del bundle falló (error de red o respuesta) |
+| `download_manifest_file_fail`, `download_manifest_checksum_fail`, `download_manifest_brotli_fail` | El archivo del manifiesto no pudo ser recuperado o validado |
+| `checksum_fail`, `checksum_required` | La verificación de integridad falló o falta el checksum |
+| `unzip_fail`, `directory_path_fail`, `canonical_path_fail`, `windows_path_fail` | La validación del sistema de archivos o descompresión falló |
+| `decrypt_fail` | La desencriptación falló (bundle encriptado) |
+| `update_fail` | Bundle instalado pero la app nunca llamó a `notifyAppReady()`; se activó reversión |
+| `download_zip_*` sin `set` subsecuente | Descarga terminó pero la fase de instalación nunca se completó |
+
+➡️ ¿Necesitas guía más profunda por código? Consulta **[Referencia completa de códigos de registro y guía de depuración](/docs/plugins/updater/debugging/#understanding-cloud-logs)**.
 
 ## Obtener más detalles sobre un registro
 
-Si haces clic en un registro, te llevará a una [página de dispositivos](/docs/webapp/devices/)
+Si haces clic en una entrada de registro específica, normalmente te llevará a la [página del dispositivo](/docs/webapp/devices/). Esto te permite ver el historial completo de ese dispositivo en particular, lo cual puede ser muy útil para diagnosticar problemas específicos del dispositivo o entender su recorrido de actualización.

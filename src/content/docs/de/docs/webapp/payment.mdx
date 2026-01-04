@@ -1,6 +1,6 @@
 ---
-title: Zahlungssystem
-description: Zahlungsverwaltung in Ihrem Capgo-Konto.
+title: "Zahlungssystem"
+description: "Zahlungsverwaltung in Ihrem Capgo-Konto. In diesem Abschnitt zeigen wir Ihnen, wie Sie Ihre Karte, Ihren Plan und Ihre Credits für Capgo verwalten"
 sidebar:
   order: 10
 locale: de
@@ -8,33 +8,71 @@ locale: de
 
 ## Worum geht es?
 
-Diese Seite beantwortet einige Fragen zum Zahlungssystem in capgo
+Diese Seite beantwortet einige Fragen zum Zahlungssystem in capgo.
+
+## Pläne
 
 #### F: Wie kann ich meinen capgo-Plan upgraden?
-A: Sie können Ihren capgo-Plan upgraden, indem Sie zu [den Einstellungen](/docs/webapp/settings/#how-to-get-to-the-settings-page) gehen und auf die Schaltfläche **Pläne** klicken
+A: Sie können Ihren capgo-Plan upgraden, indem Sie zu [den Einstellungen](/docs/webapp/settings/#how-to-get-to-the-settings-page) gehen und auf den **Pläne**-Tab (1) klicken.
 
-<figure><img src="/plans-button.webp" alt="Choose plan" /><figcaption></figcaption></figure>
+<figure><img src="/plans-subscribe.webp" alt="Pläne-Seite" /><figcaption></figcaption></figure>
 
-Dann können Sie den Plan auswählen, der am besten zu Ihren Bedürfnissen passt, und auf **Abonnieren** klicken
+Auf dieser Seite können Sie:
+- Zwischen **Monatlicher Plan** und **Jährlich** wechseln (mit 20% Rabatt für jährliche Zahlung)
+- Aus vier Plänen wählen: **Solo**, **Maker**, **Team** oder **Enterprise**
+- Auf **Abonnieren** (2) bei dem Plan klicken, der am besten zu Ihren Bedürfnissen passt
 
-<figure><img src="/plans-subscribe.webp" alt="Subscribe to plan" /><figcaption></figcaption></figure>
+Jeder Plan zeigt:
+- Monatlicher Preis und jährlicher Gesamtbetrag
+- Enthaltene monatlich aktive Benutzer und Überschreitungspreise
+- Speicher- und Bandbreitenkontingente
+- Build-Minuten/Stunden
+- Funktionen wie dedizierter Support, benutzerdefinierte Domain und SOC II-Konformität
 
-Danach öffnet sich eine Stripe-Seite. Dort können Sie Ihre Zahlungsinformationen eingeben
+Wenn Sie sich nicht auf einen Plan festlegen möchten, können Sie stattdessen **Credits** verwenden - klicken Sie auf "Mehr über Credits erfahren", um zu sehen, wie die nutzungsbasierte Abrechnung funktioniert.
 
-<figure><img src="/plans-stripe.webp" alt="Stripe portal" /><figcaption></figcaption></figure>
+Nach dem Klicken auf Abonnieren öffnet sich eine Stripe-Checkout-Seite, auf der Sie Ihre Zahlungsinformationen sicher eingeben können.
+
+## Credits
+
+Credits bieten eine flexible Alternative zum Upgrade Ihres Plans. Sie sind nützlich, wenn:
+
+- **Temporäre Spitzen** - Sie vorübergehend über Ihre Planlimits hinausgehen (z.B. ein viraler Moment, saisonaler Traffic) und nicht dauerhaft upgraden möchten
+- **Plan-Mismatch** - Der nächste Plan-Tier aus anderen Gründen nicht zu Ihren Bedürfnissen passt (vielleicht benötigen Sie mehr Bandbreite, aber nicht mehr MAU)
+- **Pay-as-you-go Präferenz** - Sie lieber nur für das bezahlen, was Sie über Ihren Basisplan hinaus nutzen
+
+#### F: Wie greife ich auf die Credits-Seite zu?
+A: Gehen Sie zu [den Einstellungen](/docs/webapp/settings/#how-to-get-to-the-settings-page) und klicken Sie auf den **Credits**-Tab (1).
+
+<figure><img src="/buy_credits.webp" alt="Credits-Seite" /><figcaption></figcaption></figure>
+
+Die Credits-Seite zeigt:
+
+1. **Credits-Tab** - Navigieren Sie hier von den Organisationseinstellungen aus
+2. **Credits-Guthaben** - Zeigt Ihre verfügbaren Credits (z.B. 0,00 / 0,00) und die in der aktuellen Periode verwendeten Credits
+3. **Verwendete Credits (USD)** - Der geschätzte Dollarwert der während der aktuellen Abrechnungsperiode verbrauchten Credits, plus verbleibende verfügbare Credits
+4. **Mehr Credits benötigt?** - Kaufen Sie sofort zusätzliche Credits, um Ihre Benutzer ohne Unterbrechung weiterhin Updates zu ermöglichen. Wählen Sie aus voreingestellten Beträgen ($50, $100, $500, $5000) oder geben Sie einen benutzerdefinierten Betrag ein. Der geschätzte Gesamtbetrag inkl. Steuern wird vor dem Checkout angezeigt
+5. **Credit-Preise** - Erweitern Sie diesen Abschnitt, um die Preisstufen für verschiedene Nutzungsarten (MAU, Speicher, Bandbreite) zu sehen
+6. **Credit-Transaktionen** - Sehen Sie Ihre Credit-Kauf- und Nutzungshistorie ein
+
+#### F: Wie kaufe ich Credits?
+A: Wählen Sie auf der Credits-Seite den gewünschten Betrag aus (oder verwenden Sie das Dropdown für benutzerdefinierte Beträge) und klicken Sie dann auf **Credits kaufen**. Sie werden zur Stripe-Checkout-Seite weitergeleitet, wo Sie die Menge anpassen und die Zahlung abschließen können.
+
+#### F: Wann werden Credits verwendet?
+A: Credits werden automatisch verbraucht, wenn Sie Ihre Planlimits für monatlich aktive Benutzer, Speicher oder Bandbreite überschreiten. Sie bieten eine flexible Möglichkeit, Überschreitungen ohne Serviceunterbrechung zu handhaben.
 
 #### F: Sind die Zahlungen sicher?
-A: Ja, Zahlungen werden vollständig von Stripe verwaltet. Capgo erhält niemals Zugriff auf Ihre Kreditkartendaten. Stripe nimmt Sicherheit sehr ernst. [Mehr über Stripes Sicherheitsrichtlinien erfahren](https://stripecom/docs/security/)
+A: Ja, Zahlungen werden vollständig von Stripe verwaltet. Capgo erhält niemals Zugriff auf Ihre Kreditkartendaten. Stripe nimmt Sicherheit sehr ernst. [Mehr über Stripes Sicherheitsrichtlinien erfahren](https://stripe.com/docs/security/)
 
 #### F: Wird capgo meinen Plan automatisch upgraden, wenn ich das Limit überschreite?
-A: Nein, capgo wird niemals Ihren Plan ändern
+A: Nein, capgo wird niemals Ihren Plan ändern.
 
 #### F: Wird capgo mir eine E-Mail senden, wenn mein Plan seine Grenzen erreicht?
-A: Ja, capgo wird Ihnen eine E-Mail mit Informationen über die Nutzung senden
+A: Ja, capgo wird Ihnen eine E-Mail mit Informationen über die Nutzung senden.
 
 #### F: Wird der von mir gekaufte Plan die Organisationen beeinflussen, zu denen ich eingeladen wurde?
-A: Nein, der Plan wird nur die Organisation beeinflussen, die Sie aktuell ausgewählt haben
-Bitte beachten Sie [die Organisations-Dokumentation](/docs/webapp/organization-system/#q-how-is-billing-done-within-orgs)
+A: Nein, der Plan wird nur die Organisation beeinflussen, die Sie aktuell ausgewählt haben.
+Bitte beachten Sie [die Organisations-Dokumentation](/docs/webapp/organization-system/#q-how-is-billing-done-within-orgs).
 
 #### F: Was, wenn ich einen maßgeschneiderten Plan benötige?
 A: [Bitte kontaktieren Sie den capgo-Support direkt](/docs/getting-help#support-by-chat)
