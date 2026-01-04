@@ -20,6 +20,7 @@ export interface OrganizationLdJson extends BaseLdJson {
   logo?: {
     '@type': 'ImageObject'
     url: string
+    contentUrl?: string
     width?: number
     height?: number
   }
@@ -190,6 +191,7 @@ export function createCapgoOrganization(config: RuntimeConfig['public']): Organi
     logo: {
       '@type': 'ImageObject',
       url: `${config.baseUrl}/icon.webp`,
+      contentUrl: `${config.baseUrl}/icon.webp`,
       width: 512,
       height: 512,
     },
