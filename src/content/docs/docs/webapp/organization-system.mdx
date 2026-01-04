@@ -5,44 +5,81 @@ sidebar:
   order: 11
 ---
 
-
 ## What is the organization system?
 
-The organization system is a system in capgo that allows you to securely share your apps with members of your team.
+The organization system is a system in Capgo that allows you to securely share your apps with members of your team.
 
-### Q: How can I access my organization's info?
+## Organization Settings Overview
 
-In order to access your organization's info, please go to [settings](/docs/webapp/settings/#how-to-get-to-the-settings-page) and then click on the `Organization settings`
+<figure><img src="/organization_settings.webp" alt="Organization Settings" /><figcaption></figcaption></figure>
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-settings.webp" alt="Org settings" /><figcaption></figcaption></figure>
+| Number | Element | Description |
+|--------|---------|-------------|
+| 1 | Settings | Access settings from the sidebar menu |
+| 2 | Organization Tab | Switch to organization settings (vs personal Account settings) |
+| 3 | General | View and edit organization name, logo, and management email |
+| 4 | Members | Manage team members and their permissions |
+| 5 | Security | Configure security policies (2FA, password requirements) |
+| 6 | Audit Logs | View activity logs for your organization |
+| 7 | Plans | View and manage your subscription plan |
+| 8 | Usage | Monitor your organization's usage statistics |
+| 9 | Credits | View and purchase additional credits |
+| 10 | Webhooks | Configure webhook integrations |
+| 11 | Billing | Manage billing information and invoices |
+| 12 | Organization Selector | Switch between different organizations |
 
-### Q: How can I change the organization I am viewing?
+### How to access organization settings
 
-To view the settings of a different organization, please click on the organization selector near your name.
+1. Click on **Settings** (1) in the left sidebar
+2. Select the **Organization** tab (2) at the top
+3. Use the tabs (3-11) to navigate between different settings sections
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/org-selector.webp" alt="Org selector" /><figcaption></figcaption></figure>
+### How to switch organizations
 
-If you cannot see this, then you are likely not on the settings page.
+Click on the **Organization Selector** (12) dropdown near the top left of the sidebar to view and switch between organizations you have access to.
 
-### Q: How can I see the members of my organization?
+## Managing Members
 
-Please click on the `members`
-<figure><img style="margin-left: auto; margin-right: auto" src="/org-show-members.webp" alt="Org Show members" /><figcaption></figcaption></figure>
+<figure><img src="/org-show-members.webp" alt="Organization Members" /><figcaption></figcaption></figure>
 
-### Q: How can I invite a user to an organization?
+The Members section displays all users who have access to your organization with their:
+- **Member**: User avatar, name, and email
+- **Role**: Current permission level (read, upload, write, admin, super admin)
+- **Actions**: Edit or remove members
 
-Please click on `Add member`
-<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-add-member.webp" alt="Org add member" /><figcaption></figcaption></figure>
+### How to invite a new member
 
-Then a pop-out will showup - please enter the user's email address.
+<figure><img src="/orgs-add-member.webp" alt="Invite Member" /><figcaption></figcaption></figure>
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/invite-to-org-email-enter.webp" alt="Invite to org" /><figcaption></figcaption></figure>
+1. Click the **+ Add** button (1)
+2. Enter the user's email address in the modal (2)
+3. Click **Invite**
 
-Then click `invite`. Another popout will show up, this time asking you about the permission that the invited user should have.
+### Selecting permissions
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/select-perm-orgs.webp" alt="Select perm for org" /><figcaption></figcaption></figure>
+<figure><img src="/select-perm-orgs.webp" alt="Select Permissions" /><figcaption></figcaption></figure>
 
-Here is a breakdown of all the permissions:
+After entering the email, select the permission level for the invited user:
+- **Read** - View-only access
+- **Upload** - Can upload new versions
+- **Write** - Can modify settings and content
+- **Admin** - Full access except billing and deletion
+- **Super admin** - Complete organization control
+
+### Complete the invitation
+
+<figure><img src="/invite_org_user.webp" alt="Invite Form" /><figcaption></figcaption></figure>
+
+Fill in the remaining details:
+- **Email** - Pre-filled from previous step
+- **Role** - Shows the selected permission level
+- **First name** - Optional: invitee's first name
+- **Last name** - Optional: invitee's last name
+- **Captcha** - Verify you are human
+
+Click **Send invitation** to complete the process.
+
+## Permission Breakdown
 
 | Permission                        | Read | Upload | Write | Admin | Super Admin |
 |-----------------------------------|------|--------|-------|-------|-------------|
@@ -59,27 +96,27 @@ Here is a breakdown of all the permissions:
 | Alter channel settings            |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
 | Upload new version                |   ❌  |    ✅   |   ✅   |   ✅   |   ✅   |
 | Alter devices                     |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
-| Change channel's  current version |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
+| Change channel's current version  |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
 | Create new channel                |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
-| Alter version  (metadata)         |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
+| Alter version (metadata)          |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
 | Manage billing                    |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
-| Delete a version unsafely      |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
+| Delete a version unsafely         |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
 
+## Billing
 
-### Q: How is billing done within orgs?
-
-Anyone with a **super admin** permission can manage the billing for a given organization.
-Plans are linked to a organization and not to your personal account.
+Anyone with a **super admin** permission can manage the billing for a given organization. Plans are linked to an organization and not to your personal account.
 
 :::danger
-⚠️ Buying a plan will ONLY affect the organizations that you have currently selected  
+⚠️ Buying a plan will ONLY affect the organization that you have currently selected
 :::
 
-### Q: Can I create more than one organization?
+## FAQ
+
+### Can I create more than one organization?
 
 No, not yet.
 
-### Q: How can I configure security policies for my organization?
+### How can I configure security policies for my organization?
 
 Super admins can configure comprehensive security policies including:
 - **2FA Enforcement** - Require all members to enable two-factor authentication
@@ -87,4 +124,3 @@ Super admins can configure comprehensive security policies including:
 - **API Key Security** - Enforce secure/hashed API keys and expiration policies
 
 See the [Organization Security](/docs/webapp/organization-security/) documentation for detailed configuration instructions.
-

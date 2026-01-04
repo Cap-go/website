@@ -1,6 +1,6 @@
 ---
-title: Sistema di organizzazione
-description: Gestione delle organizzazioni nel tuo account capgo.
+title: "Sistema di organizzazione"
+description: "Una guida dettagliata sulla gestione e organizzazione dei tuoi team e applicazioni all'interno del tuo account Capgo, garantendo una collaborazione sicura e un controllo degli accessi efficiente per tutti i membri coinvolti."
 sidebar:
   order: 11
 locale: it
@@ -8,72 +8,120 @@ locale: it
 
 ## Che cos'è il sistema delle organizzazioni?
 
-Il sistema delle organizzazioni è un sistema in capgo che ti permette di condividere in modo sicuro le tue app con i membri del tuo team
+Il sistema delle organizzazioni è un sistema in Capgo che ti permette di condividere in modo sicuro le tue app con i membri del tuo team.
 
-### D: Come posso accedere alle informazioni della mia organizzazione?
+## Panoramica delle impostazioni dell'organizzazione
 
-Per accedere alle informazioni della tua organizzazione, vai su [impostazioni](/docs/webapp/settings/#how-to-get-to-the-settings-page) e poi clicca su `Impostazioni organizzazione`
+<figure><img src="/organization_settings.webp" alt="Impostazioni dell'organizzazione" /><figcaption></figcaption></figure>
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-settings.webp" alt="Org settings" /><figcaption></figcaption></figure>
+| Numero | Elemento | Descrizione |
+|--------|----------|-------------|
+| 1 | Impostazioni | Accedi alle impostazioni dal menu laterale |
+| 2 | Tab Organizzazione | Passa alle impostazioni dell'organizzazione (vs. impostazioni personali dell'account) |
+| 3 | Generale | Visualizza e modifica nome dell'organizzazione, logo ed email di gestione |
+| 4 | Membri | Gestisci i membri del team e i loro permessi |
+| 5 | Sicurezza | Configura le politiche di sicurezza (2FA, requisiti password) |
+| 6 | Log di audit | Visualizza i log delle attività della tua organizzazione |
+| 7 | Piani | Visualizza e gestisci il tuo piano di abbonamento |
+| 8 | Utilizzo | Monitora le statistiche di utilizzo della tua organizzazione |
+| 9 | Crediti | Visualizza e acquista crediti aggiuntivi |
+| 10 | Webhooks | Configura le integrazioni webhook |
+| 11 | Fatturazione | Gestisci informazioni di fatturazione e fatture |
+| 12 | Selettore organizzazione | Passa tra diverse organizzazioni |
 
-### D: Come posso cambiare l'organizzazione che sto visualizzando?
+### Come accedere alle impostazioni dell'organizzazione
 
-Per visualizzare le impostazioni di un'organizzazione diversa, clicca sul selettore dell'organizzazione vicino al tuo nome
+1. Clicca su **Impostazioni** (1) nella barra laterale sinistra
+2. Seleziona il tab **Organizzazione** (2) in alto
+3. Usa i tab (3-11) per navigare tra le diverse sezioni delle impostazioni
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/org-selector.webp" alt="Org selector" /><figcaption></figcaption></figure>
+### Come cambiare organizzazione
 
-Se non riesci a vederlo, probabilmente non sei nella pagina delle impostazioni
+Clicca sul menu a discesa **Selettore organizzazione** (12) vicino all'angolo in alto a sinistra della barra laterale per visualizzare e passare tra le organizzazioni a cui hai accesso.
 
-### D: Come posso vedere i membri della mia organizzazione?
+## Gestione dei membri
 
-Clicca su `membri`
-<figure><img style="margin-left: auto; margin-right: auto" src="/org-show-members.webp" alt="Org Show members" /><figcaption></figcaption></figure>
+<figure><img src="/org-show-members.webp" alt="Membri dell'organizzazione" /><figcaption></figcaption></figure>
 
-### D: Come posso invitare un utente a un'organizzazione?
+La sezione Membri mostra tutti gli utenti che hanno accesso alla tua organizzazione con:
+- **Membro**: Avatar, nome ed email dell'utente
+- **Ruolo**: Livello di permesso attuale (lettura, caricamento, scrittura, admin, super admin)
+- **Azioni**: Modifica o rimuovi membri
 
-Clicca su `Aggiungi membro`
-<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-add-member.webp" alt="Org add member" /><figcaption></figcaption></figure>
+### Come invitare un nuovo membro
 
-Apparirà un pop-out - inserisci l'indirizzo email dell'utente
+<figure><img src="/orgs-add-member.webp" alt="Invita membro" /><figcaption></figcaption></figure>
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/invite-to-org-email-enter.webp" alt="Invite to org" /><figcaption></figcaption></figure>
+1. Clicca sul pulsante **+ Aggiungi** (1)
+2. Inserisci l'indirizzo email dell'utente nel modal (2)
+3. Clicca su **Invita**
 
-Poi clicca su `invita` Apparirà un altro pop-out, questa volta ti chiederà i permessi che l'utente invitato dovrebbe avere
+### Selezione dei permessi
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/select-perm-orgs.webp" alt="Select perm for org" /><figcaption></figcaption></figure>
+<figure><img src="/select-perm-orgs.webp" alt="Seleziona permessi" /><figcaption></figcaption></figure>
 
-Ecco una panoramica di tutti i permessi:
+Dopo aver inserito l'email, seleziona il livello di permesso per l'utente invitato:
+- **Lettura** - Accesso in sola lettura
+- **Caricamento** - Può caricare nuove versioni
+- **Scrittura** - Può modificare impostazioni e contenuti
+- **Admin** - Accesso completo tranne fatturazione ed eliminazione
+- **Super admin** - Controllo completo dell'organizzazione
+
+### Completare l'invito
+
+<figure><img src="/invite_org_user.webp" alt="Modulo di invito" /><figcaption></figcaption></figure>
+
+Compila i dettagli rimanenti:
+- **Email** - Precompilata dal passaggio precedente
+- **Ruolo** - Mostra il livello di permesso selezionato
+- **Nome** - Opzionale: nome dell'invitato
+- **Cognome** - Opzionale: cognome dell'invitato
+- **Captcha** - Verifica di essere umano
+
+Clicca su **Invia invito** per completare il processo.
+
+## Dettaglio dei permessi
 
 | Permesso                          | Lettura | Caricamento | Scrittura | Admin | Super Admin |
-|-----------------------------------|---------|-------------|-----------|--------|-------------|
-| Mostra statistiche app            |    ✅    |      ✅      |     ✅     |    ✅    |      ✅      |
-| Mostra canali app                 |    ✅    |      ✅      |     ✅     |    ✅    |      ✅      |
-| Mostra dispositivi                |    ✅    |      ✅      |     ✅     |    ✅    |      ✅      |
-| Mostra log                        |    ✅    |      ✅      |     ✅     |    ✅    |      ✅      |
-| Mostra bundle                     |    ✅    |      ✅      |     ✅     |    ✅    |      ✅      |
-| Elimina app                       |    ❌    |      ❌      |     ❌     |    ❌    |      ✅      |
-| Elimina canale                    |    ❌    |      ❌      |     ❌     |    ✅    |      ✅      |
-| Elimina versione                  |    ❌    |      ❌      |     ✅     |    ✅    |      ✅      |
-| Modifica impostazioni org         |    ❌    |      ❌      |     ❌     |    ✅    |      ✅      |
-| Gestisci utenti org               |    ❌    |      ❌      |     ❌     |    ✅    |      ✅      |
-| Modifica impostazioni canale      |    ❌    |      ❌      |     ✅     |    ✅    |      ✅      |
-| Carica nuova versione             |    ❌    |      ✅      |     ✅     |    ✅    |      ✅      |
-| Modifica dispositivi              |    ❌    |      ❌      |     ✅     |    ✅    |      ✅      |
-| Cambia versione corrente canale   |    ❌    |      ❌      |     ✅     |    ✅    |      ✅      |
-| Crea nuovo canale                 |    ❌    |      ❌      |     ❌     |    ✅    |      ✅      |
-| Modifica versione (metadata)      |    ❌    |      ❌      |     ✅     |    ✅    |      ✅      |
-| Gestisci fatturazione             |    ❌    |      ❌      |     ❌     |    ❌    |      ✅      |
-| Elimina versione in modo non sicuro |    ❌    |      ❌      |     ❌     |    ❌    |      ✅      |
+|-----------------------------------|---------|-------------|-----------|-------|-------------|
+| Mostra statistiche app            |    ✅    |      ✅      |     ✅     |   ✅   |      ✅      |
+| Mostra canali app                 |    ✅    |      ✅      |     ✅     |   ✅   |      ✅      |
+| Mostra dispositivi                |    ✅    |      ✅      |     ✅     |   ✅   |      ✅      |
+| Mostra log                        |    ✅    |      ✅      |     ✅     |   ✅   |      ✅      |
+| Mostra bundle                     |    ✅    |      ✅      |     ✅     |   ✅   |      ✅      |
+| Elimina app                       |    ❌    |      ❌      |     ❌     |   ❌   |      ✅      |
+| Elimina canale                    |    ❌    |      ❌      |     ❌     |   ✅   |      ✅      |
+| Elimina versione                  |    ❌    |      ❌      |     ✅     |   ✅   |      ✅      |
+| Modifica impostazioni org         |    ❌    |      ❌      |     ❌     |   ✅   |      ✅      |
+| Gestisci utenti org               |    ❌    |      ❌      |     ❌     |   ✅   |      ✅      |
+| Modifica impostazioni canale      |    ❌    |      ❌      |     ✅     |   ✅   |      ✅      |
+| Carica nuova versione             |    ❌    |      ✅      |     ✅     |   ✅   |      ✅      |
+| Modifica dispositivi              |    ❌    |      ❌      |     ✅     |   ✅   |      ✅      |
+| Cambia versione corrente canale   |    ❌    |      ❌      |     ✅     |   ✅   |      ✅      |
+| Crea nuovo canale                 |    ❌    |      ❌      |     ❌     |   ✅   |      ✅      |
+| Modifica versione (metadata)      |    ❌    |      ❌      |     ✅     |   ✅   |      ✅      |
+| Gestisci fatturazione             |    ❌    |      ❌      |     ❌     |   ❌   |      ✅      |
+| Elimina versione in modo non sicuro |    ❌    |      ❌      |     ❌     |   ❌   |      ✅      |
 
-### D: Come funziona la fatturazione nelle organizzazioni?
+## Fatturazione
 
-Chiunque abbia il permesso di **super admin** può gestire la fatturazione per una determinata organizzazione
-I piani sono collegati a un'organizzazione e non al tuo account personale
+Chiunque abbia il permesso di **super admin** può gestire la fatturazione per una determinata organizzazione. I piani sono collegati a un'organizzazione e non al tuo account personale.
 
 :::danger
-⚠️ L'acquisto di un piano influenzerà SOLO le organizzazioni che hai attualmente selezionato  
+⚠️ L'acquisto di un piano influenzerà SOLO l'organizzazione che hai attualmente selezionato
 :::
 
-### D: Posso creare più di un'organizzazione?
+## FAQ
 
-No, non ancora
+### Posso creare più di un'organizzazione?
+
+No, non ancora.
+
+### Come posso configurare le politiche di sicurezza per la mia organizzazione?
+
+I super admin possono configurare politiche di sicurezza complete tra cui:
+- **Applicazione 2FA** - Richiedere a tutti i membri di abilitare l'autenticazione a due fattori
+- **Politica password** - Impostare requisiti di complessità della password (lunghezza, maiuscole, numeri, caratteri speciali)
+- **Sicurezza chiavi API** - Applicare chiavi API sicure/hash e politiche di scadenza
+
+Consulta la documentazione [Sicurezza dell'organizzazione](/docs/webapp/organization-security/) per istruzioni di configurazione dettagliate.

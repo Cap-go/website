@@ -1,6 +1,6 @@
 ---
-title: Organisationssystem
-description: Organisation in deinem Capgo Account verwalten
+title: "Organisationssystem"
+description: "Eine detaillierte Anleitung zur Verwaltung und Organisation Ihrer Teams und Anwendungen in Ihrem Capgo-Konto, um sichere Zusammenarbeit und effiziente Zugriffskontrolle für alle beteiligten Mitglieder zu gewährleisten."
 sidebar:
   order: 11
 locale: de
@@ -10,70 +10,118 @@ locale: de
 
 Das Organisationssystem ist ein System in Capgo, das es Ihnen ermöglicht, Ihre Apps sicher mit Mitgliedern Ihres Teams zu teilen.
 
-### F: Wie kann ich auf die Informationen meiner Organisation zugreifen?
+## Übersicht der Organisationseinstellungen
 
-Um auf die Informationen Ihrer Organisation zuzugreifen, gehen Sie bitte zu [Einstellungen](/docs/webapp/settings/#how-to-get-to-the-settings-page) und klicken Sie dann auf `Organisationseinstellungen`
+<figure><img src="/organization_settings.webp" alt="Organisationseinstellungen" /><figcaption></figcaption></figure>
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-settings.webp" alt="Org settings" /><figcaption></figcaption></figure>
+| Nummer | Element | Beschreibung |
+|--------|---------|--------------|
+| 1 | Einstellungen | Zugriff auf Einstellungen über das Seitenleistenmenü |
+| 2 | Organisation-Tab | Wechsel zu Organisationseinstellungen (vs. persönliche Kontoeinstellungen) |
+| 3 | Allgemein | Organisationsname, Logo und Management-E-Mail anzeigen und bearbeiten |
+| 4 | Mitglieder | Teammitglieder und deren Berechtigungen verwalten |
+| 5 | Sicherheit | Sicherheitsrichtlinien konfigurieren (2FA, Passwortanforderungen) |
+| 6 | Audit-Logs | Aktivitätsprotokolle Ihrer Organisation anzeigen |
+| 7 | Pläne | Abonnementplan anzeigen und verwalten |
+| 8 | Nutzung | Nutzungsstatistiken Ihrer Organisation überwachen |
+| 9 | Credits | Zusätzliche Credits anzeigen und kaufen |
+| 10 | Webhooks | Webhook-Integrationen konfigurieren |
+| 11 | Abrechnung | Rechnungsinformationen und Rechnungen verwalten |
+| 12 | Organisationsauswahl | Zwischen verschiedenen Organisationen wechseln |
 
-### F: Wie kann ich die Organisation wechseln, die ich gerade ansehe?
+### So greifen Sie auf die Organisationseinstellungen zu
 
-Um die Einstellungen einer anderen Organisation anzusehen, klicken Sie bitte auf den Organisationsauswähler neben Ihrem Namen
+1. Klicken Sie auf **Einstellungen** (1) in der linken Seitenleiste
+2. Wählen Sie den **Organisation**-Tab (2) oben aus
+3. Verwenden Sie die Tabs (3-11), um zwischen verschiedenen Einstellungsbereichen zu navigieren
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/org-selector.webp" alt="Org selector" /><figcaption></figcaption></figure>
+### So wechseln Sie Organisationen
 
-Wenn Sie dies nicht sehen können, befinden Sie sich wahrscheinlich nicht auf der Einstellungsseite
+Klicken Sie auf das **Organisationsauswahl**-Dropdown (12) oben links in der Seitenleiste, um Organisationen anzuzeigen und zwischen ihnen zu wechseln, auf die Sie Zugriff haben.
 
-### F: Wie kann ich die Mitglieder meiner Organisation sehen?
+## Mitglieder verwalten
 
-Bitte klicken Sie auf `Mitglieder`
-<figure><img style="margin-left: auto; margin-right: auto" src="/org-show-members.webp" alt="Org Show members" /><figcaption></figcaption></figure>
+<figure><img src="/org-show-members.webp" alt="Organisationsmitglieder" /><figcaption></figcaption></figure>
 
-### F: Wie kann ich einen Benutzer zu einer Organisation einladen?
+Der Mitgliederbereich zeigt alle Benutzer an, die Zugriff auf Ihre Organisation haben, mit:
+- **Mitglied**: Benutzer-Avatar, Name und E-Mail
+- **Rolle**: Aktuelle Berechtigungsstufe (Lesen, Upload, Schreiben, Admin, Super Admin)
+- **Aktionen**: Mitglieder bearbeiten oder entfernen
 
-Bitte klicken Sie auf `Mitglied hinzufügen`
-<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-add-member.webp" alt="Org add member" /><figcaption></figcaption></figure>
+### So laden Sie ein neues Mitglied ein
 
-Dann erscheint ein Popup - bitte geben Sie die E-Mail-Adresse des Benutzers ein
+<figure><img src="/orgs-add-member.webp" alt="Mitglied einladen" /><figcaption></figcaption></figure>
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/invite-to-org-email-enter.webp" alt="Invite to org" /><figcaption></figcaption></figure>
+1. Klicken Sie auf die **+ Hinzufügen**-Schaltfläche (1)
+2. Geben Sie die E-Mail-Adresse des Benutzers im Modal ein (2)
+3. Klicken Sie auf **Einladen**
 
-Klicken Sie dann auf `Einladen`. Ein weiteres Popup erscheint, das Sie nach den Berechtigungen fragt, die der eingeladene Benutzer haben soll
+### Berechtigungen auswählen
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/select-perm-orgs.webp" alt="Select perm for org" /><figcaption></figcaption></figure>
+<figure><img src="/select-perm-orgs.webp" alt="Berechtigungen auswählen" /><figcaption></figcaption></figure>
 
-Hier ist eine Übersicht aller Berechtigungen:
+Nach Eingabe der E-Mail wählen Sie die Berechtigungsstufe für den eingeladenen Benutzer:
+- **Lesen** - Nur Lesezugriff
+- **Upload** - Kann neue Versionen hochladen
+- **Schreiben** - Kann Einstellungen und Inhalte ändern
+- **Admin** - Vollzugriff außer Abrechnung und Löschung
+- **Super Admin** - Vollständige Organisationskontrolle
+
+### Einladung abschließen
+
+<figure><img src="/invite_org_user.webp" alt="Einladungsformular" /><figcaption></figcaption></figure>
+
+Füllen Sie die restlichen Details aus:
+- **E-Mail** - Aus dem vorherigen Schritt vorausgefüllt
+- **Rolle** - Zeigt die ausgewählte Berechtigungsstufe an
+- **Vorname** - Optional: Vorname des Eingeladenen
+- **Nachname** - Optional: Nachname des Eingeladenen
+- **Captcha** - Bestätigen Sie, dass Sie ein Mensch sind
+
+Klicken Sie auf **Einladung senden**, um den Vorgang abzuschließen.
+
+## Berechtigungsübersicht
 
 | Berechtigung                      | Lesen | Upload | Schreiben | Admin | Super Admin |
-|-----------------------------------|-------|---------|-----------|--------|-------------|
-| App-Statistiken anzeigen          |   ✅   |    ✅    |     ✅     |    ✅    |      ✅      |
-| App-Kanäle anzeigen               |   ✅   |    ✅    |     ✅     |    ✅    |      ✅      |
-| Geräte anzeigen                   |   ✅   |    ✅    |     ✅     |    ✅    |      ✅      |
-| Logs anzeigen                     |   ✅   |    ✅    |     ✅     |    ✅    |      ✅      |
-| Bundles anzeigen                  |   ✅   |    ✅    |     ✅     |    ✅    |      ✅      |
-| App löschen                       |   ❌   |    ❌    |     ❌     |    ❌    |      ✅      |
-| Kanal löschen                     |   ❌   |    ❌    |     ❌     |    ✅    |      ✅      |
-| Version löschen                   |   ❌   |    ❌    |     ✅     |    ✅    |      ✅      |
-| Org-Einstellungen ändern         |   ❌   |    ❌    |     ❌     |    ✅    |      ✅      |
-| Org-Benutzer verwalten           |   ❌   |    ❌    |     ❌     |    ✅    |      ✅      |
-| Kanaleinstellungen ändern        |   ❌   |    ❌    |     ✅     |    ✅    |      ✅      |
-| Neue Version hochladen           |   ❌   |    ✅    |     ✅     |    ✅    |      ✅      |
-| Geräte ändern                    |   ❌   |    ❌    |     ✅     |    ✅    |      ✅      |
-| Aktuelle Version des Kanals ändern |   ❌   |    ❌    |     ✅     |    ✅    |      ✅      |
-| Neuen Kanal erstellen            |   ❌   |    ❌    |     ❌     |    ✅    |      ✅      |
-| Version ändern (Metadaten)       |   ❌   |    ❌    |     ✅     |    ✅    |      ✅      |
-| Abrechnung verwalten             |   ❌   |    ❌    |     ❌     |    ❌    |      ✅      |
-| Version unsicher löschen        |   ❌   |    ❌    |     ❌     |    ❌    |      ✅      |
+|-----------------------------------|-------|--------|-----------|-------|-------------|
+| App-Statistiken anzeigen          |   ✅   |    ✅   |     ✅     |   ✅   |      ✅      |
+| App-Kanäle anzeigen               |   ✅   |    ✅   |     ✅     |   ✅   |      ✅      |
+| Geräte anzeigen                   |   ✅   |    ✅   |     ✅     |   ✅   |      ✅      |
+| Logs anzeigen                     |   ✅   |    ✅   |     ✅     |   ✅   |      ✅      |
+| Bundles anzeigen                  |   ✅   |    ✅   |     ✅     |   ✅   |      ✅      |
+| App löschen                       |   ❌   |    ❌   |     ❌     |   ❌   |      ✅      |
+| Kanal löschen                     |   ❌   |    ❌   |     ❌     |   ✅   |      ✅      |
+| Version löschen                   |   ❌   |    ❌   |     ✅     |   ✅   |      ✅      |
+| Org-Einstellungen ändern          |   ❌   |    ❌   |     ❌     |   ✅   |      ✅      |
+| Org-Benutzer verwalten            |   ❌   |    ❌   |     ❌     |   ✅   |      ✅      |
+| Kanaleinstellungen ändern         |   ❌   |    ❌   |     ✅     |   ✅   |      ✅      |
+| Neue Version hochladen            |   ❌   |    ✅   |     ✅     |   ✅   |      ✅      |
+| Geräte ändern                     |   ❌   |    ❌   |     ✅     |   ✅   |      ✅      |
+| Aktuelle Version des Kanals ändern|   ❌   |    ❌   |     ✅     |   ✅   |      ✅      |
+| Neuen Kanal erstellen             |   ❌   |    ❌   |     ❌     |   ✅   |      ✅      |
+| Version ändern (Metadaten)        |   ❌   |    ❌   |     ✅     |   ✅   |      ✅      |
+| Abrechnung verwalten              |   ❌   |    ❌   |     ❌     |   ❌   |      ✅      |
+| Version unsicher löschen          |   ❌   |    ❌   |     ❌     |   ❌   |      ✅      |
 
-### F: Wie funktioniert die Abrechnung innerhalb von Organisationen?
+## Abrechnung
 
-Jeder mit einer **Super Admin**-Berechtigung kann die Abrechnung für eine bestimmte Organisation verwalten.
-Pläne sind mit einer Organisation und nicht mit Ihrem persönlichen Konto verknüpft.
+Jeder mit einer **Super Admin**-Berechtigung kann die Abrechnung für eine bestimmte Organisation verwalten. Pläne sind mit einer Organisation und nicht mit Ihrem persönlichen Konto verknüpft.
 
 :::danger
 ⚠️ Der Kauf eines Plans wirkt sich NUR auf die Organisation aus, die Sie aktuell ausgewählt haben
 :::
 
-### F: Kann ich mehr als eine Organisation erstellen?
+## FAQ
 
-Nein, noch nicht
+### Kann ich mehr als eine Organisation erstellen?
+
+Nein, noch nicht.
+
+### Wie kann ich Sicherheitsrichtlinien für meine Organisation konfigurieren?
+
+Super Admins können umfassende Sicherheitsrichtlinien konfigurieren, einschließlich:
+- **2FA-Durchsetzung** - Alle Mitglieder müssen die Zwei-Faktor-Authentifizierung aktivieren
+- **Passwortrichtlinie** - Anforderungen an die Passwortkomplexität festlegen (Länge, Großbuchstaben, Zahlen, Sonderzeichen)
+- **API-Schlüssel-Sicherheit** - Sichere/gehashte API-Schlüssel und Ablaufrichtlinien durchsetzen
+
+Siehe die [Organisationssicherheit](/docs/webapp/organization-security/) Dokumentation für detaillierte Konfigurationsanweisungen.

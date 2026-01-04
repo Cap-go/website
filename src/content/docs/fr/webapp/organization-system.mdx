@@ -1,82 +1,127 @@
 ---
-locale: fr
-title: "Organisation system"
-description: "A detailed Guide on managing and organizing your teams and applications within your Capgo Compte, ensuring secure collaboration and efficient access control for all Membres involved."
-sidebar: 
+title: "Système d'organisation"
+description: "Un guide détaillé sur la gestion et l'organisation de vos équipes et applications au sein de votre compte Capgo, assurant une collaboration sécurisée et un contrôle d'accès efficace pour tous les membres impliqués."
+sidebar:
   order: 11
+locale: fr
 ---
 
+## Qu'est-ce que le système d'organisation ?
 
-## What is the Organisation system?
+Le système d'organisation est un système dans Capgo qui vous permet de partager vos applications en toute sécurité avec les membres de votre équipe.
 
-The Organisation system is a system in capgo that allows you to securely share your apps with Membres of your team.
+## Aperçu des paramètres de l'organisation
 
-### Q: How can I access my Organisation's Info?
+<figure><img src="/organization_settings.webp" alt="Paramètres de l'organisation" /><figcaption></figcaption></figure>
 
-In order to access your organization's info, please go to [settings](/docs/webapp/settings/#how-to-get-to-the-settings-page) and then click on the `Organization settings`
+| Numéro | Élément | Description |
+|--------|---------|-------------|
+| 1 | Paramètres | Accéder aux paramètres depuis le menu latéral |
+| 2 | Onglet Organisation | Basculer vers les paramètres de l'organisation (vs. paramètres personnels du compte) |
+| 3 | Général | Afficher et modifier le nom de l'organisation, le logo et l'e-mail de gestion |
+| 4 | Membres | Gérer les membres de l'équipe et leurs permissions |
+| 5 | Sécurité | Configurer les politiques de sécurité (2FA, exigences de mot de passe) |
+| 6 | Journaux d'audit | Afficher les journaux d'activité de votre organisation |
+| 7 | Plans | Afficher et gérer votre plan d'abonnement |
+| 8 | Utilisation | Surveiller les statistiques d'utilisation de votre organisation |
+| 9 | Crédits | Afficher et acheter des crédits supplémentaires |
+| 10 | Webhooks | Configurer les intégrations de webhooks |
+| 11 | Facturation | Gérer les informations de facturation et les factures |
+| 12 | Sélecteur d'organisation | Basculer entre différentes organisations |
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-settings.webp" alt="Org settings" /><figcaption></figcaption></figure>
+### Comment accéder aux paramètres de l'organisation
 
-### Q: How can I change the Organisation I am viewing?
+1. Cliquez sur **Paramètres** (1) dans la barre latérale gauche
+2. Sélectionnez l'onglet **Organisation** (2) en haut
+3. Utilisez les onglets (3-11) pour naviguer entre les différentes sections de paramètres
 
-To view the Paramètres of a different Organisation, please click on the Organisation selector near your name.
+### Comment changer d'organisation
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/org-selector.webp" alt="Org selector" /><figcaption></figcaption></figure>
+Cliquez sur le menu déroulant **Sélecteur d'organisation** (12) près du coin supérieur gauche de la barre latérale pour afficher et basculer entre les organisations auxquelles vous avez accès.
 
-If you cannot see this, then you are likely not on the Paramètres page.
+## Gestion des membres
 
-### Q: How can I see the Membres of my Organisation?
+<figure><img src="/org-show-members.webp" alt="Membres de l'organisation" /><figcaption></figcaption></figure>
 
-Please click on the `members`
-<figure><img style="margin-left: auto; margin-right: auto" src="/org-show-members.webp" alt="Org Show members" /><figcaption></figcaption></figure>
+La section Membres affiche tous les utilisateurs qui ont accès à votre organisation avec :
+- **Membre** : Avatar, nom et e-mail de l'utilisateur
+- **Rôle** : Niveau de permission actuel (lecture, téléchargement, écriture, admin, super admin)
+- **Actions** : Modifier ou supprimer des membres
 
-### Q: How can I invite a Utilisateur to an Organisation?
+### Comment inviter un nouveau membre
 
-Please click on `Add member`
-<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-add-member.webp" alt="Org add member" /><figcaption></figcaption></figure>
+<figure><img src="/orgs-add-member.webp" alt="Inviter un membre" /><figcaption></figcaption></figure>
 
-Then a pop-out will showup - please enter the Utilisateur's email address.
+1. Cliquez sur le bouton **+ Ajouter** (1)
+2. Entrez l'adresse e-mail de l'utilisateur dans la fenêtre modale (2)
+3. Cliquez sur **Inviter**
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/invite-to-org-email-enter.webp" alt="Invite to org" /><figcaption></figcaption></figure>
+### Sélection des permissions
 
-Then click `invite`. Another popout will show up, this time asking you about the permission that the invited user should have.
+<figure><img src="/select-perm-orgs.webp" alt="Sélectionner les permissions" /><figcaption></figcaption></figure>
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/select-perm-orgs.webp" alt="Select perm for org" /><figcaption></figcaption></figure>
+Après avoir entré l'e-mail, sélectionnez le niveau de permission pour l'utilisateur invité :
+- **Lecture** - Accès en lecture seule
+- **Téléchargement** - Peut télécharger de nouvelles versions
+- **Écriture** - Peut modifier les paramètres et le contenu
+- **Admin** - Accès complet sauf facturation et suppression
+- **Super admin** - Contrôle complet de l'organisation
 
-Here is a breakdown of all the permissions:
+### Compléter l'invitation
 
-| Permission                        | Read | Télécharger | Write | Admin | Super Admin |
-|-----------------------------------|------|--------|-------|-------|-------------|
-| Show Application stats                    |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
-| Show Application Canaux                 |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
-| Show Appareils                      |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
-| Show Journaux                         |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
-| Show Bundles                      |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
-| Supprimer Application                        |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
-| Supprimer Canal                    |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
-| Supprimer Version                    |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
-| Change org's Paramètres             |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
-| Manage org Utilisateurs                  |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
-| Alter Canal Paramètres            |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
-| Télécharger Nouveau Version                |   ❌  |    ✅   |   ✅   |   ✅   |   ✅   |
-| Alter Appareils                     |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
-| Change Canal's  current Version |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
-| Créer Nouveau Canal                |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
-| Alter Version  (metadata)         |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
-| Manage billing                    |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
-| Supprimer a Version unsafely      |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
+<figure><img src="/invite_org_user.webp" alt="Formulaire d'invitation" /><figcaption></figcaption></figure>
 
+Remplissez les détails restants :
+- **E-mail** - Pré-rempli à partir de l'étape précédente
+- **Rôle** - Affiche le niveau de permission sélectionné
+- **Prénom** - Optionnel : prénom de l'invité
+- **Nom** - Optionnel : nom de l'invité
+- **Captcha** - Vérifiez que vous êtes humain
 
-### Q: How is billing done within orgs?
+Cliquez sur **Envoyer l'invitation** pour terminer le processus.
 
-Anyone with a **super admin** permission can manage the billing for a given Organisation.
-Plans are linked to a Organisation and not to your personal Compte.
+## Détail des permissions
+
+| Permission                        | Lecture | Téléchargement | Écriture | Admin | Super Admin |
+|-----------------------------------|---------|----------------|----------|-------|-------------|
+| Afficher les stats de l'app       |    ✅    |       ✅        |    ✅     |   ✅   |      ✅      |
+| Afficher les canaux de l'app      |    ✅    |       ✅        |    ✅     |   ✅   |      ✅      |
+| Afficher les appareils            |    ✅    |       ✅        |    ✅     |   ✅   |      ✅      |
+| Afficher les journaux             |    ✅    |       ✅        |    ✅     |   ✅   |      ✅      |
+| Afficher les bundles              |    ✅    |       ✅        |    ✅     |   ✅   |      ✅      |
+| Supprimer l'app                   |    ❌    |       ❌        |    ❌     |   ❌   |      ✅      |
+| Supprimer le canal                |    ❌    |       ❌        |    ❌     |   ✅   |      ✅      |
+| Supprimer la version              |    ❌    |       ❌        |    ✅     |   ✅   |      ✅      |
+| Modifier les paramètres de l'org  |    ❌    |       ❌        |    ❌     |   ✅   |      ✅      |
+| Gérer les utilisateurs de l'org   |    ❌    |       ❌        |    ❌     |   ✅   |      ✅      |
+| Modifier les paramètres du canal  |    ❌    |       ❌        |    ✅     |   ✅   |      ✅      |
+| Télécharger une nouvelle version  |    ❌    |       ✅        |    ✅     |   ✅   |      ✅      |
+| Modifier les appareils            |    ❌    |       ❌        |    ✅     |   ✅   |      ✅      |
+| Changer la version actuelle       |    ❌    |       ❌        |    ✅     |   ✅   |      ✅      |
+| Créer un nouveau canal            |    ❌    |       ❌        |    ❌     |   ✅   |      ✅      |
+| Modifier la version (métadonnées) |    ❌    |       ❌        |    ✅     |   ✅   |      ✅      |
+| Gérer la facturation              |    ❌    |       ❌        |    ❌     |   ❌   |      ✅      |
+| Supprimer une version (non sûr)   |    ❌    |       ❌        |    ❌     |   ❌   |      ✅      |
+
+## Facturation
+
+Toute personne avec une permission **super admin** peut gérer la facturation pour une organisation donnée. Les plans sont liés à une organisation et non à votre compte personnel.
 
 :::danger
-⚠️ Buying a plan will ONLY affect the organizations that you have currently selected  
+⚠️ L'achat d'un plan n'affectera QUE l'organisation que vous avez actuellement sélectionnée
 :::
 
-### Q: Can I Créer more than one Organisation?
+## FAQ
 
-No, not yet.
+### Puis-je créer plus d'une organisation ?
 
+Non, pas encore.
+
+### Comment puis-je configurer les politiques de sécurité pour mon organisation ?
+
+Les super admins peuvent configurer des politiques de sécurité complètes, notamment :
+- **Application de la 2FA** - Exiger que tous les membres activent l'authentification à deux facteurs
+- **Politique de mot de passe** - Définir les exigences de complexité du mot de passe (longueur, majuscules, chiffres, caractères spéciaux)
+- **Sécurité des clés API** - Appliquer des clés API sécurisées/hachées et des politiques d'expiration
+
+Consultez la documentation [Sécurité de l'organisation](/docs/webapp/organization-security/) pour des instructions de configuration détaillées.

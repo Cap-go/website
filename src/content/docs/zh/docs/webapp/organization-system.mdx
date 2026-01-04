@@ -1,82 +1,127 @@
 ---
 title: "组织系统"
-description: "管理和组织 Capgo 帐户中的团队和应用程序的详细指南,确保所有参与成员的安全协作和高效访问控制"
+description: "关于在 Capgo 帐户中管理和组织团队和应用程序的详细指南，确保所有参与成员的安全协作和高效访问控制。"
 sidebar:
   order: 11
 locale: zh
 ---
 
+## 什么是组织系统？
 
-## 什么是组织系统?
+组织系统是 Capgo 中的一个系统，允许您与团队成员安全地共享应用。
 
-组织系统是 Capgo 中的一个系统,允许您与团队成员安全地共享应用。
+## 组织设置概述
 
-### 问:如何访问我的组织信息?
+<figure><img src="/organization_settings.webp" alt="组织设置" /><figcaption></figcaption></figure>
 
-要访问您的组织信息,请转到[设置](/docs/webapp/settings/#how-to-get-to-the-settings-page),然后点击 `组织设置`
+| 编号 | 元素 | 描述 |
+|------|------|------|
+| 1 | 设置 | 从侧边栏菜单访问设置 |
+| 2 | 组织选项卡 | 切换到组织设置（与个人帐户设置相比） |
+| 3 | 常规 | 查看和编辑组织名称、徽标和管理邮箱 |
+| 4 | 成员 | 管理团队成员及其权限 |
+| 5 | 安全 | 配置安全策略（2FA、密码要求） |
+| 6 | 审计日志 | 查看组织的活动日志 |
+| 7 | 计划 | 查看和管理订阅计划 |
+| 8 | 用量 | 监控组织的使用统计 |
+| 9 | 积分 | 查看和购买额外积分 |
+| 10 | Webhooks | 配置 webhook 集成 |
+| 11 | 计费 | 管理计费信息和发票 |
+| 12 | 组织选择器 | 在不同组织之间切换 |
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-settings.webp" alt="组织设置" /><figcaption></figcaption></figure>
+### 如何访问组织设置
 
-### 问:如何更改我正在查看的组织?
+1. 点击左侧边栏中的**设置**（1）
+2. 选择顶部的**组织**选项卡（2）
+3. 使用选项卡（3-11）在不同设置部分之间导航
 
-要查看不同组织的设置,请点击您名字附近的组织选择器。
+### 如何切换组织
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/org-selector.webp" alt="Org selector" /><figcaption></figcaption></figure>
+点击侧边栏左上角附近的**组织选择器**（12）下拉菜单，查看并切换到您有权访问的组织。
 
-If you cannot see this, then you are likely not on the settings page.
+## 管理成员
 
-### Q: How can I see the members of my organization?
+<figure><img src="/org-show-members.webp" alt="组织成员" /><figcaption></figcaption></figure>
 
-Please click on the `members`
-<figure><img style="margin-left: auto; margin-right: auto" src="/org-show-members.webp" alt="Org Show members" /><figcaption></figcaption></figure>
+成员部分显示所有有权访问您组织的用户：
+- **成员**：用户头像、姓名和邮箱
+- **角色**：当前权限级别（读取、上传、写入、管理员、超级管理员）
+- **操作**：编辑或删除成员
 
-### Q: How can I invite a user to an organization?
+### 如何邀请新成员
 
-Please click on `Add member`
-<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-add-member.webp" alt="Org add member" /><figcaption></figcaption></figure>
+<figure><img src="/orgs-add-member.webp" alt="邀请成员" /><figcaption></figcaption></figure>
 
-Then a pop-out will showup - please enter the user's email address.
+1. 点击 **+ 添加** 按钮（1）
+2. 在弹窗中输入用户的邮箱地址（2）
+3. 点击**邀请**
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/invite-to-org-email-enter.webp" alt="Invite to org" /><figcaption></figcaption></figure>
+### 选择权限
 
-Then click `invite`. Another popout will show up, this time asking you about the permission that the invited user should have.
+<figure><img src="/select-perm-orgs.webp" alt="选择权限" /><figcaption></figcaption></figure>
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/select-perm-orgs.webp" alt="Select perm for org" /><figcaption></figcaption></figure>
+输入邮箱后，为受邀用户选择权限级别：
+- **读取** - 只读访问
+- **上传** - 可以上传新版本
+- **写入** - 可以修改设置和内容
+- **管理员** - 除计费和删除外的完全访问
+- **超级管理员** - 完全控制组织
 
-Here is a breakdown of all the permissions:
+### 完成邀请
 
-| Permission                        | Read | Upload | Write | Admin | Super Admin |
-|-----------------------------------|------|--------|-------|-------|-------------|
-| Show app stats                    |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
-| Show app channels                 |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
-| Show devices                      |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
-| Show logs                         |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
-| Show bundles                      |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
-| Delete app                        |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
-| Delete channel                    |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
-| Delete version                    |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
-| Change org's settings             |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
-| Manage org users                  |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
-| Alter channel settings            |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
-| Upload new version                |   ❌  |    ✅   |   ✅   |   ✅   |   ✅   |
-| Alter devices                     |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
-| Change channel's  current version |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
-| Create new channel                |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
-| Alter version  (metadata)         |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
-| Manage billing                    |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
-| Delete a version unsafely      |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
+<figure><img src="/invite_org_user.webp" alt="邀请表单" /><figcaption></figcaption></figure>
 
+填写剩余详细信息：
+- **邮箱** - 从上一步预填充
+- **角色** - 显示选择的权限级别
+- **名字** - 可选：受邀者的名字
+- **姓氏** - 可选：受邀者的姓氏
+- **验证码** - 验证您是人类
 
-### Q: How is billing done within orgs?
+点击**发送邀请**完成流程。
 
-Anyone with a **super admin** permission can manage the billing for a given organization.
-Plans are linked to a organization and not to your personal account.
+## 权限明细
+
+| 权限                        | 读取 | 上传 | 写入 | 管理员 | 超级管理员 |
+|-----------------------------|------|------|------|--------|------------|
+| 显示应用统计                |   ✅  |   ✅  |   ✅  |    ✅   |      ✅     |
+| 显示应用频道                |   ✅  |   ✅  |   ✅  |    ✅   |      ✅     |
+| 显示设备                    |   ✅  |   ✅  |   ✅  |    ✅   |      ✅     |
+| 显示日志                    |   ✅  |   ✅  |   ✅  |    ✅   |      ✅     |
+| 显示包                      |   ✅  |   ✅  |   ✅  |    ✅   |      ✅     |
+| 删除应用                    |   ❌  |   ❌  |   ❌  |    ❌   |      ✅     |
+| 删除频道                    |   ❌  |   ❌  |   ❌  |    ✅   |      ✅     |
+| 删除版本                    |   ❌  |   ❌  |   ✅  |    ✅   |      ✅     |
+| 更改组织设置                |   ❌  |   ❌  |   ❌  |    ✅   |      ✅     |
+| 管理组织用户                |   ❌  |   ❌  |   ❌  |    ✅   |      ✅     |
+| 修改频道设置                |   ❌  |   ❌  |   ✅  |    ✅   |      ✅     |
+| 上传新版本                  |   ❌  |   ✅  |   ✅  |    ✅   |      ✅     |
+| 修改设备                    |   ❌  |   ❌  |   ✅  |    ✅   |      ✅     |
+| 更改频道当前版本            |   ❌  |   ❌  |   ✅  |    ✅   |      ✅     |
+| 创建新频道                  |   ❌  |   ❌  |   ❌  |    ✅   |      ✅     |
+| 修改版本（元数据）          |   ❌  |   ❌  |   ✅  |    ✅   |      ✅     |
+| 管理计费                    |   ❌  |   ❌  |   ❌  |    ❌   |      ✅     |
+| 不安全地删除版本            |   ❌  |   ❌  |   ❌  |    ❌   |      ✅     |
+
+## 计费
+
+拥有**超级管理员**权限的用户可以管理特定组织的计费。计划与组织关联，而不是与您的个人帐户关联。
 
 :::danger
-⚠️ Buying a plan will ONLY affect the organizations that you have currently selected  
+⚠️ 购买计划将仅影响您当前选择的组织
 :::
 
-### Q: Can I create more than one organization?
+## 常见问题
 
-No, not yet.
+### 我可以创建多个组织吗？
 
+不可以，目前还不行。
+
+### 如何为我的组织配置安全策略？
+
+超级管理员可以配置全面的安全策略，包括：
+- **强制 2FA** - 要求所有成员启用双因素认证
+- **密码策略** - 设置密码复杂性要求（长度、大写字母、数字、特殊字符）
+- **API 密钥安全** - 强制使用安全/哈希的 API 密钥和过期策略
+
+有关详细配置说明，请参阅[组织安全](/docs/webapp/organization-security/)文档。
