@@ -1,0 +1,419 @@
+---
+title: Getting Started
+description: Learn how to install and use the Intent Launcher plugin to launch Android intents and system settings in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-intent-launcher" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Usage
+
+Import the plugin and use its methods to launch intents:
+
+```typescript
+import { IntentLauncher, ActivityAction } from '@capgo/capacitor-intent-launcher';
+
+// Open WiFi settings
+const openWifiSettings = async () => {
+  await IntentLauncher.startActivityAsync({
+    action: ActivityAction.WIFI_SETTINGS
+  });
+};
+
+// Open location settings
+const openLocationSettings = async () => {
+  await IntentLauncher.startActivityAsync({
+    action: ActivityAction.LOCATION_SOURCE_SETTINGS
+  });
+};
+
+// Open app details page
+const openAppSettings = async () => {
+  await IntentLauncher.startActivityAsync({
+    action: ActivityAction.APPLICATION_DETAILS_SETTINGS,
+    data: 'package:com.example.myapp'
+  });
+};
+```
+
+## API Reference
+
+### startActivityAsync(options)
+
+Start an Android activity for the given action.
+
+```typescript
+interface IntentLauncherParams {
+  action: string;                    // Activity action (use ActivityAction enum)
+  category?: string;                 // Intent category
+  className?: string;                // Component class name
+  data?: string;                     // URI data
+  extra?: Record<string, unknown>;   // Extra key-value data
+  flags?: number;                    // Intent flags bitmask
+  packageName?: string;              // Component package name
+  type?: string;                     // MIME type
+}
+
+interface IntentLauncherResult {
+  resultCode: ResultCode;            // Result from activity
+  data?: string;                     // Optional URI data returned
+  extra?: Record<string, unknown>;   // Optional extra data returned
+}
+
+const result = await IntentLauncher.startActivityAsync({
+  action: ActivityAction.WIFI_SETTINGS
+});
+```
+
+### openApplication(options)
+
+Open an application by its package name.
+
+```typescript
+interface OpenApplicationOptions {
+  packageName: string;
+}
+
+// Open Gmail
+await IntentLauncher.openApplication({
+  packageName: 'com.google.android.gm'
+});
+```
+
+### getApplicationIconAsync(options)
+
+Get an application's icon as base64-encoded PNG.
+
+```typescript
+interface GetApplicationIconOptions {
+  packageName: string;
+}
+
+interface GetApplicationIconResult {
+  icon: string; // base64 PNG with data:image/png;base64, prefix
+}
+
+const { icon } = await IntentLauncher.getApplicationIconAsync({
+  packageName: 'com.google.android.gm'
+});
+
+// Use in img tag
+// <img src={icon} alt="App icon" />
+```
+
+### getPluginVersion()
+
+Get the current plugin version.
+
+```typescript
+const { version } = await IntentLauncher.getPluginVersion();
+```
+
+## Common Activity Actions
+
+### Settings Actions
+
+```typescript
+import { IntentLauncher, ActivityAction } from '@capgo/capacitor-intent-launcher';
+
+// Network settings
+await IntentLauncher.startActivityAsync({ action: ActivityAction.WIFI_SETTINGS });
+await IntentLauncher.startActivityAsync({ action: ActivityAction.BLUETOOTH_SETTINGS });
+await IntentLauncher.startActivityAsync({ action: ActivityAction.AIRPLANE_MODE_SETTINGS });
+await IntentLauncher.startActivityAsync({ action: ActivityAction.DATA_ROAMING_SETTINGS });
+
+// Security settings
+await IntentLauncher.startActivityAsync({ action: ActivityAction.SECURITY_SETTINGS });
+await IntentLauncher.startActivityAsync({ action: ActivityAction.PRIVACY_SETTINGS });
+
+// App settings
+await IntentLauncher.startActivityAsync({ action: ActivityAction.APPLICATION_SETTINGS });
+await IntentLauncher.startActivityAsync({ action: ActivityAction.MANAGE_APPLICATIONS_SETTINGS });
+
+// Display & Sound
+await IntentLauncher.startActivityAsync({ action: ActivityAction.DISPLAY_SETTINGS });
+await IntentLauncher.startActivityAsync({ action: ActivityAction.SOUND_SETTINGS });
+
+// Location
+await IntentLauncher.startActivityAsync({ action: ActivityAction.LOCATION_SOURCE_SETTINGS });
+
+// Battery
+await IntentLauncher.startActivityAsync({ action: ActivityAction.BATTERY_SAVER_SETTINGS });
+await IntentLauncher.startActivityAsync({ action: ActivityAction.IGNORE_BATTERY_OPTIMIZATION_SETTINGS });
+
+// Notifications
+await IntentLauncher.startActivityAsync({ action: ActivityAction.APP_NOTIFICATION_SETTINGS });
+await IntentLauncher.startActivityAsync({ action: ActivityAction.NOTIFICATION_LISTENER_SETTINGS });
+```
+
+### Intent Actions
+
+```typescript
+// View a URL
+await IntentLauncher.startActivityAsync({
+  action: ActivityAction.VIEW,
+  data: 'https://example.com'
+});
+
+// Make a phone call
+await IntentLauncher.startActivityAsync({
+  action: ActivityAction.DIAL,
+  data: 'tel:+1234567890'
+});
+
+// Send email
+await IntentLauncher.startActivityAsync({
+  action: ActivityAction.SENDTO,
+  data: 'mailto:example@email.com'
+});
+
+// Share text
+await IntentLauncher.startActivityAsync({
+  action: ActivityAction.SEND,
+  type: 'text/plain',
+  extra: {
+    'android.intent.extra.TEXT': 'Hello from my app!'
+  }
+});
+```
+
+## Complete Example
+
+```typescript
+import {
+  IntentLauncher,
+  ActivityAction,
+  ResultCode
+} from '@capgo/capacitor-intent-launcher';
+import { Capacitor } from '@capacitor/core';
+
+export class IntentService {
+  private isAndroid = Capacitor.getPlatform() === 'android';
+
+  /**
+   * Open app settings page for the current app
+   */
+  async openAppSettings(packageName: string) {
+    if (!this.isAndroid) {
+      console.warn('Intent Launcher is Android-only');
+      return;
+    }
+
+    await IntentLauncher.startActivityAsync({
+      action: ActivityAction.APPLICATION_DETAILS_SETTINGS,
+      data: `package:${packageName}`
+    });
+  }
+
+  /**
+   * Open WiFi settings
+   */
+  async openWifiSettings() {
+    if (!this.isAndroid) return;
+
+    await IntentLauncher.startActivityAsync({
+      action: ActivityAction.WIFI_SETTINGS
+    });
+  }
+
+  /**
+   * Open location settings
+   */
+  async openLocationSettings() {
+    if (!this.isAndroid) return;
+
+    const result = await IntentLauncher.startActivityAsync({
+      action: ActivityAction.LOCATION_SOURCE_SETTINGS
+    });
+
+    return result.resultCode === ResultCode.Success;
+  }
+
+  /**
+   * Request battery optimization exemption
+   */
+  async requestBatteryExemption(packageName: string) {
+    if (!this.isAndroid) return;
+
+    await IntentLauncher.startActivityAsync({
+      action: ActivityAction.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
+      data: `package:${packageName}`
+    });
+  }
+
+  /**
+   * Open another app
+   */
+  async openApp(packageName: string) {
+    if (!this.isAndroid) return;
+
+    try {
+      await IntentLauncher.openApplication({ packageName });
+    } catch (error) {
+      console.error(`App ${packageName} not installed or cannot be opened`);
+      throw error;
+    }
+  }
+
+  /**
+   * Get app icon for display
+   */
+  async getAppIcon(packageName: string): Promise<string | null> {
+    if (!this.isAndroid) return null;
+
+    try {
+      const { icon } = await IntentLauncher.getApplicationIconAsync({
+        packageName
+      });
+      return icon || null;
+    } catch {
+      return null;
+    }
+  }
+
+  /**
+   * Share text content
+   */
+  async shareText(text: string, title?: string) {
+    if (!this.isAndroid) return;
+
+    await IntentLauncher.startActivityAsync({
+      action: ActivityAction.SEND,
+      type: 'text/plain',
+      extra: {
+        'android.intent.extra.TEXT': text,
+        ...(title && { 'android.intent.extra.SUBJECT': title })
+      }
+    });
+  }
+
+  /**
+   * Open URL in browser
+   */
+  async openUrl(url: string) {
+    if (!this.isAndroid) return;
+
+    await IntentLauncher.startActivityAsync({
+      action: ActivityAction.VIEW,
+      data: url
+    });
+  }
+
+  /**
+   * Open dialer with number
+   */
+  async openDialer(phoneNumber: string) {
+    if (!this.isAndroid) return;
+
+    await IntentLauncher.startActivityAsync({
+      action: ActivityAction.DIAL,
+      data: `tel:${phoneNumber}`
+    });
+  }
+
+  /**
+   * Send email
+   */
+  async composeEmail(to: string, subject?: string, body?: string) {
+    if (!this.isAndroid) return;
+
+    const extra: Record<string, string> = {};
+    if (subject) extra['android.intent.extra.SUBJECT'] = subject;
+    if (body) extra['android.intent.extra.TEXT'] = body;
+
+    await IntentLauncher.startActivityAsync({
+      action: ActivityAction.SENDTO,
+      data: `mailto:${to}`,
+      extra
+    });
+  }
+}
+
+// Usage
+const intentService = new IntentService();
+
+// Open settings
+await intentService.openWifiSettings();
+await intentService.openLocationSettings();
+
+// Open another app
+await intentService.openApp('com.google.android.gm');
+
+// Get app icon
+const icon = await intentService.getAppIcon('com.google.android.gm');
+
+// Share content
+await intentService.shareText('Check out this app!', 'App Recommendation');
+```
+
+## Result Codes
+
+```typescript
+enum ResultCode {
+  Success = -1,   // Activity completed successfully
+  Canceled = 0,   // Activity was canceled
+  FirstUser = 1   // Custom result code
+}
+```
+
+## Best Practices
+
+1. **Check platform first**
+   ```typescript
+   import { Capacitor } from '@capacitor/core';
+
+   if (Capacitor.getPlatform() !== 'android') {
+     console.warn('Intent Launcher is Android-only');
+     return;
+   }
+   ```
+
+2. **Handle errors for missing apps**
+   ```typescript
+   try {
+     await IntentLauncher.openApplication({
+       packageName: 'com.example.app'
+     });
+   } catch (error) {
+     // App not installed
+     console.error('App not found');
+   }
+   ```
+
+3. **Use proper URI format for app settings**
+   ```typescript
+   // Correct
+   data: 'package:com.example.app'
+
+   // Not correct
+   data: 'com.example.app'
+   ```
+
+## Platform Notes
+
+### Android
+- Full support for all intent actions
+- Access to system settings and other apps
+- Can receive result codes from activities
+
+### iOS
+- **Not supported** - iOS does not have an equivalent to Android intents
+- Use iOS-specific methods like opening Settings URL scheme
+
+### Web
+- **Not supported** - No intent system on web
+
+## Requirements
+
+- **Capacitor 8.0.0** or higher
