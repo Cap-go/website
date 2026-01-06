@@ -322,6 +322,8 @@
   "can_i_use_credits_without_subscription": "Bisakah saya menggunakan kredit tanpa berlangganan aktif?",
   "can_i_use_credits_without_subscription_answer": "Tidak. Kredit hanya dapat digunakan atau dibeli dengan langganan yang aktif. Anda memerlukan rencana aktif untuk menggunakan kredit untuk menutupi penggunaan di luar batas rencana Anda. Kredit adalah prabayar dan berlaku selama 1 tahun sejak tanggal pembelian.",
   "can_i_use_soc2_with_other_plans": "Dapatkah saya menggunakan kepatuhan SOC 2 dengan rencana Solo, Maker, atau Tim?",
+  "capacitor_config_changes_answer": "Tidak, perubahan pada capacitor.config.ts tidak dapat dikirim melalui pembaruan langsung Capgo. File konfigurasi Capacitor dibaca pada waktu build native dan dikompilasi ke dalam binary aplikasi native. Ini berarti setiap perubahan pada capacitor.config.ts (seperti konfigurasi plugin, ID aplikasi, pengaturan server, atau opsi plugin native) memerlukan rilis native baru melalui App Store atau Google Play. Capgo hanya dapat memperbarui aset web (HTML, CSS, JavaScript) yang dimuat saat runtime.",
+  "capacitor_config_changes_question": "Dapatkah saya memperbarui perubahan capacitor.config.ts melalui Capgo?",
   "cancellation_deadline": "Batas waktu untuk membatalkan Pesanan adalah 14 hari sejak tanggal Anda menerima Barang atau tanggal pihak ketiga yang Anda tunjuk, yang bukan merupakan pengangkut, mengambil alih produk yang dikirim.",
   "cancellation_link": "Dengan mengunjungi halaman ini di situs web kami:",
   "cancellation_period": "Anda berhak untuk membatalkan Pesanan Anda dalam waktu 14 hari tanpa memberikan alasan apapun untuk melakukannya.",

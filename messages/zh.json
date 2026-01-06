@@ -322,6 +322,8 @@
   "can_i_use_credits_without_subscription": "我可以在没有活跃订阅的情况下使用积分吗？",
   "can_i_use_credits_without_subscription_answer": "不。只有在订阅有效时才能使用或购买积分。您需要一个活跃的计划来使用积分以覆盖超出您计划限制的使用量。积分是预付的，自购买之日起有效期为1年。",
   "can_i_use_soc2_with_other_plans": "我可以在Solo，Maker或Team计划中使用SOC 2合规性吗？",
+  "capacitor_config_changes_answer": "不可以，capacitor.config.ts的更改无法通过Capgo实时更新发送。Capacitor配置文件在原生构建时读取并编译到原生应用二进制文件中。这意味着对capacitor.config.ts的任何更改（如插件配置、应用ID、服务器设置或原生插件选项）都需要通过App Store或Google Play发布新的原生版本。Capgo只能更新在运行时加载的Web资源（HTML、CSS、JavaScript）。",
+  "capacitor_config_changes_question": "我可以通过Capgo更新capacitor.config.ts的更改吗？",
   "cancellation_deadline": "取消订单的截止日期是您收到货物之日起14天，或者您指定的非承运人第三方接收产品交付之日起14天。",
   "cancellation_link": "通过访问我们网站上的这个页面：",
   "cancellation_period": "您有权在14天内无需给出任何理由取消您的订单。",

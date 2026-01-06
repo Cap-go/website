@@ -3665,6 +3665,9 @@
   "can_i_use_soc2_with_other_plans": "Can I use SOC 2 compliance with Solo, Maker, or Team plans?",
   "soc2_enterprise_only": "For now, it's only available on the Enterprise plan.",
 
+  "capacitor_config_changes_question": "Can I update capacitor.config.ts changes via Capgo?",
+  "capacitor_config_changes_answer": "No, changes to capacitor.config.ts cannot be sent through Capgo live updates. The Capacitor configuration file is read at native build time and compiled into the native app binary. This means any changes to capacitor.config.ts (such as plugin configurations, app ID, server settings, or native plugin options) require a new native release through the App Store or Google Play. Capgo can only update web assets (HTML, CSS, JavaScript) that are loaded at runtime.",
+
   "page_not_found": "Page Not Found",
   "error_404": "Error 404",
   "page_not_found_title": "Page Not Found - Error 404",

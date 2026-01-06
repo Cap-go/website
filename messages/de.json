@@ -322,6 +322,8 @@
   "can_i_use_credits_without_subscription": "Kann ich Credits ohne ein aktives Abonnement nutzen?",
   "can_i_use_credits_without_subscription_answer": "Nein. Credits können nur verwendet oder gekauft werden, wenn ein aktives Abonnement besteht. Sie benötigen einen aktiven Plan, um Credits für die Nutzung über Ihre Plangrenzen hinaus zu verwenden. Credits sind im Voraus bezahlt und ab dem Kaufdatum 1 Jahr gültig.",
   "can_i_use_soc2_with_other_plans": "Kann ich SOC 2 Compliance mit Solo-, Maker- oder Team-Plänen verwenden?",
+  "capacitor_config_changes_answer": "Nein, Änderungen an capacitor.config.ts können nicht über Capgo Live-Updates gesendet werden. Die Capacitor-Konfigurationsdatei wird zur nativen Build-Zeit gelesen und in die native App-Binary kompiliert. Das bedeutet, dass Änderungen an capacitor.config.ts (wie Plugin-Konfigurationen, App-ID, Server-Einstellungen oder native Plugin-Optionen) eine neue native Version über den App Store oder Google Play erfordern. Capgo kann nur Web-Assets (HTML, CSS, JavaScript) aktualisieren, die zur Laufzeit geladen werden.",
+  "capacitor_config_changes_question": "Kann ich Änderungen an capacitor.config.ts über Capgo aktualisieren?",
   "cancellation_deadline": "Die Frist für die Stornierung einer Bestellung beträgt 14 Tage ab dem Datum, an dem Sie die Waren erhalten haben oder an dem ein von Ihnen beauftragter Dritter, der nicht der Spediteur ist, Besitz an dem gelieferten Produkt ergreift.",
   "cancellation_link": "Durch den Besuch dieser Seite auf unserer Website:",
   "cancellation_period": "Sie haben das Recht, Ihre Bestellung innerhalb von 14 Tagen ohne Angabe von Gründen zu stornieren.",

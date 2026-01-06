@@ -322,6 +322,8 @@
   "can_i_use_credits_without_subscription": "Posso utilizzare i crediti senza un abbonamento attivo?",
   "can_i_use_credits_without_subscription_answer": "No. I crediti possono essere utilizzati o acquistati solo con un abbonamento attivo. Hai bisogno di un piano attivo per utilizzare i crediti per coprire l'uso oltre i limiti del tuo piano. I crediti sono prepagati e validi per 1 anno dalla data di acquisto.",
   "can_i_use_soc2_with_other_plans": "Posso utilizzare la conformità SOC 2 con i piani Solo, Maker o Team?",
+  "capacitor_config_changes_answer": "No, le modifiche a capacitor.config.ts non possono essere inviate tramite gli aggiornamenti live di Capgo. Il file di configurazione di Capacitor viene letto al momento della compilazione nativa e compilato nel binario dell'app nativa. Ciò significa che qualsiasi modifica a capacitor.config.ts (come configurazioni dei plugin, ID dell'app, impostazioni del server o opzioni dei plugin nativi) richiede una nuova versione nativa tramite l'App Store o Google Play. Capgo può aggiornare solo le risorse web (HTML, CSS, JavaScript) che vengono caricate in fase di esecuzione.",
+  "capacitor_config_changes_question": "Posso aggiornare le modifiche di capacitor.config.ts tramite Capgo?",
   "cancellation_deadline": "Il termine per annullare un ordine è di 14 giorni dalla data in cui hai ricevuto le merci o dalla data in cui una terza parte da te designata, che non è il vettore, prende possesso del prodotto consegnato.",
   "cancellation_link": "Al visitar esta página en nuestro sitio web:",
   "cancellation_period": "Vous avez le droit d'annuler votre commande dans un délai de 14 jours sans avoir à fournir de motif.",

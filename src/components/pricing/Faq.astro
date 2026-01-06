@@ -124,6 +124,20 @@ import * as m from '@/paraglide/messages'
             </div>
           </div>
         </details>
+
+        <details class="group border-b border-gray-800 last:border-b-0 open:bg-blue-950/20 open:border-blue-600/30" id="faq-capacitor-config">
+          <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.capacitor_config_changes_question({}, { locale: Astro.locals.locale })}</span>
+            <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-8 pb-6 pt-2 bg-blue-950/10">
+            <div class="text-gray-200 leading-relaxed">
+              {m.capacitor_config_changes_answer({}, { locale: Astro.locals.locale })}
+            </div>
+          </div>
+        </details>
       </div>
     </div>
 

@@ -322,6 +322,8 @@
   "can_i_use_credits_without_subscription": "アクティブなサブスクリプションがなくてもクレジットを使用できますか？",
   "can_i_use_credits_without_subscription_answer": "いいえ、クレジットはアクティブなサブスクリプションがある場合にのみ使用または購入できます。プランの制限を超えた利用分をカバーするためにクレジットを使用するには、アクティブなプランが必要です。クレジットは前払いであり、購入日から1年間有効です。",
   "can_i_use_soc2_with_other_plans": "Solo、Maker、またはTeamプランでSOC 2コンプライアンスを使用できますか？",
+  "capacitor_config_changes_answer": "いいえ、capacitor.config.tsの変更はCapgoのライブアップデートで送信できません。Capacitor設定ファイルはネイティブビルド時に読み込まれ、ネイティブアプリのバイナリにコンパイルされます。つまり、capacitor.config.tsへの変更（プラグイン設定、アプリID、サーバー設定、ネイティブプラグインオプションなど）は、App StoreまたはGoogle Playを通じて新しいネイティブリリースが必要です。Capgoは実行時にロードされるWebアセット（HTML、CSS、JavaScript）のみを更新できます。",
+  "capacitor_config_changes_question": "Capgo経由でcapacitor.config.tsの変更を更新できますか？",
   "cancellation_deadline": "注文のキャンセル期限は、あなたが商品を受け取った日、またはあなたが指名した、運送業者ではない第三者が配達された商品を受け取った日から14日間です。",
   "cancellation_link": "当社のウェブサイトのこのページを訪れることによって：",
   "cancellation_period": "あなたは理由を述べることなく、14日以内に注文をキャンセルする権利があります。",

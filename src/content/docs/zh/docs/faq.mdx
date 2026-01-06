@@ -99,6 +99,15 @@ MAU 是"月活跃用户"。在 Capgo 的上下文中，这实际上是指月活�
 
 此外，Capgo 不支持更改原生代码（例如 Android 上的 Java/Kotlin 或 iOS 上的 Objective-C/Swift）。如果您更改了原生代码，该工具将在尝试更新期间警告您。
 
+### 我可以通过 Capgo 更新 capacitor.config.ts 的更改吗？[](https://capgo.app/docs/faq/#can-i-update-capacitorconfigts-changes-via-capgo "Direct link to Can I update capacitor.config.ts changes via Capgo?")
+
+不可以。`capacitor.config.ts` 的更改无法通过 Capgo 实时更新发送。Capacitor 配置文件在原生构建时读取并编译到原生应用二进制文件中。这意味着对 `capacitor.config.ts` 的任何更改（如插件配置、应用 ID、服务器设置或原生插件选项）都需要通过 App Store 或 Google Play 发布新的原生版本。
+
+Capgo 只能更新在运行时加载的 Web 资源（HTML、CSS、JavaScript）。如果您需要更改 Capacitor 配置，您必须：
+1. 在本地更新 `capacitor.config.ts`
+2. 重新构建原生应用（`npx cap sync` 后进行原生构建）
+3. 将新的二进制文件提交到应用商店
+
 ### Capgo 会为我提交到商店吗？[](https://capgo.app/docs/faq/#does-capgo-submit-to-the-stores-for-me "Capgo 会为我提交到商店吗的直接链接")
 
 Capgo 目前不支持代表您提交到应用商店。我们计划在将来添加此功能，但目前您需要继续使用现有流程提交到应用商店。

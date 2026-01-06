@@ -322,6 +322,8 @@
   "can_i_use_credits_without_subscription": "¿Puedo usar créditos sin una suscripción activa?",
   "can_i_use_credits_without_subscription_answer": "No. Los créditos solo pueden usarse o comprarse con una suscripción activa. Necesitas un plan activo para usar créditos para cubrir el uso más allá de los límites de tu plan. Los créditos son prepagados y válidos por 1 año desde la fecha de compra.",
   "can_i_use_soc2_with_other_plans": "¿Puedo usar el cumplimiento SOC 2 con los planes Solo, Maker o Team?",
+  "capacitor_config_changes_answer": "No, los cambios en capacitor.config.ts no pueden enviarse a través de las actualizaciones en vivo de Capgo. El archivo de configuración de Capacitor se lee en el momento de la compilación nativa y se compila en el binario de la aplicación nativa. Esto significa que cualquier cambio en capacitor.config.ts (como configuraciones de plugins, ID de la aplicación, configuraciones del servidor u opciones de plugins nativos) requiere una nueva versión nativa a través del App Store o Google Play. Capgo solo puede actualizar activos web (HTML, CSS, JavaScript) que se cargan en tiempo de ejecución.",
+  "capacitor_config_changes_question": "¿Puedo actualizar cambios de capacitor.config.ts a través de Capgo?",
   "cancellation_deadline": "El plazo para cancelar un pedido es de 14 días a partir de la fecha en la que usted recibió los productos o en la que un tercero que haya nombrado, que no sea el transportista, toma posesión del producto entregado.",
   "cancellation_link": "Al visitar esta página en nuestro sitio web:",
   "cancellation_period": "Tienes derecho a cancelar tu Pedido dentro de los 14 días sin necesidad de dar ninguna razón para hacerlo.",
