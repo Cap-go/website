@@ -4,7 +4,7 @@
   "scripts": {
     "postinstall": "node scripts/patch-astro-rolldown.js",
     "astro": "astro",
-    "dev": "bun run fix_code_languages_all && astro dev",
+    "dev": "export NODE_OPTIONS='--max-old-space-size=8192'; bun run fix_code_languages_all && astro dev",
     "start": "astro dev",
     "repair_sitemap": "bun run scripts/repair_sitemap.tsx",
     "fetch:stars": "bun run scripts/fetch-github-stars.ts",
