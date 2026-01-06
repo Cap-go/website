@@ -67,7 +67,7 @@ if (plans.length > 0) {
       sku: plan.id.toString(),
       offers: [
         {
-          price: (plan as any).price_monthly?.toString() || plan.price_m?.toString() || '0',
+          price: plan.price_m?.toString() || '0',
           priceCurrency: 'USD',
           availability: 'https://schema.org/InStock',
           priceValidUntil: (plan as any).trial_days ? new Date(Date.now() + (plan as any).trial_days * 24 * 60 * 60 * 1000).toISOString().split('T')[0] : undefined,
