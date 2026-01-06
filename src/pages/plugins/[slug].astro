@@ -2,7 +2,7 @@
 import type { Plugin } from '@/config/plugins'
 import { actions } from '@/config/plugins'
 import Layout from '@/layouts/Layout.astro'
-import { createSoftwareApplicationLdJson, validateLdJson } from '@/lib/ldJson'
+import { createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import * as m from '@/paraglide/messages'
 import { getSlug } from '@/services/github'
 import { defaultLocale } from '@/services/locale'
@@ -140,15 +140,8 @@ content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.p
     : undefined,
 })
 
-// Validate ldJSON in development
-if (import.meta.env.DEV) {
-  const validation = validateLdJson(content['ldJSON'])
-  if (!validation.isValid) {
-    console.warn('Plugin ldJSON validation errors:', validation.errors)
-  }
-}
 
-const { title, description, githubStars, npmDownloads, href, name, readme, tutorial, icon } = plugin
+const { title, description, githubStars, npmDownloads, href, name, tutorial, icon } = plugin
 ---
 
 <Layout {content}>

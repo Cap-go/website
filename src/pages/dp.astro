@@ -8,7 +8,7 @@ const description = m.dp_description({}, { locale: Astro.locals.locale })
 
 const content = { title, description }
 
-const domain = import.meta.env.PUBLIC_BASE_URL
+const domain = import.meta.env.PUBLIC_BASE_URL ?? ''
 ---
 
 <Layout content={content}

@@ -35,7 +35,7 @@ const content = {
       <!-- Animated background elements -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
         {
-          Array.from({ length: 12 }).map((_, i) => (
+          Array.from({ length: 12 }).map(() => (
             <div
               class="absolute w-2 h-2 bg-blue-500 rounded-full opacity-20 animate-pulse"
               style={{

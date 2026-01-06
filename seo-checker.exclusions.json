@@ -1,5 +1,0 @@
-{
-  "$schema": "./seo-checker.exclusions.schema.json",
-  "description": "SEO Checker Exclusions - Add specific issues to exclude from the SEO check",
-  "exclusions": []
-}

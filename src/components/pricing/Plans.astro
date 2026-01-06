@@ -287,7 +287,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
   </div>
 </section>
 
-<script define:vars={{ pricing }}>
+<script is:inline define:vars={{ pricing }}>
   document.addEventListener('DOMContentLoaded', () => {
     const yearlyRadio = document.getElementById('yearly')
     const monthlyRadio = document.getElementById('monthly')

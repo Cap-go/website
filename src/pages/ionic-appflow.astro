@@ -226,12 +226,11 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-appflo
             id="wall-of-love-Ngmn41b"
             src="https://senja.io/p/capgo/Ngmn41b?hideNavigation=true&embed=true"
             aria-label="Wall of Love"
-            frameborder="0"
-            scrolling="no"
+            style="border: 0; overflow: hidden;"
             width="100%"
             class="min-h-100"
           ></iframe>
-          <script type="text/javascript">
+          <script is:inline>
             document.addEventListener('DOMContentLoaded', function () {
               if (typeof iFrameResize === 'function') {
                 iFrameResize({ log: false, checkOrigin: false }, '#wall-of-love-Ngmn41b')

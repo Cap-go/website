@@ -8,9 +8,7 @@ const description = m.read_our_eula({}, { locale: Astro.locals.locale })
 
 const content = { title, description }
 
-const config = Astro.locals.runtimeConfig
-const brand = config.public.brand
-const domain = config.public.baseUrl
+const domain = Astro.locals.runtimeConfig.public.baseUrl
 ---
 
 <Layout content={content}>

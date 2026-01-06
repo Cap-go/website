@@ -1,189 +1,35 @@
 import type { RuntimeConfig } from '@/config/app'
+import type {
+  Organization,
+  Person,
+  NewsArticle,
+  WebPage,
+  SoftwareApplication,
+  Product,
+  Service,
+  FAQPage,
+  WebSite,
+  ItemList,
+  BreadcrumbList,
+  WithContext,
+  Graph,
+  Thing,
+} from 'schema-dts'
 
-export interface BaseLdJson {
-  '@context': string
-  '@type': string
-  '@id'?: string
-  url?: string
-  name?: string
-  description?: string
-  image?: string[]
-  datePublished?: string
-  dateModified?: string
-  inLanguage?: string
-}
+// Re-export schema-dts types for external use
+export type { Organization, Person, NewsArticle, WebPage, SoftwareApplication, Product, Service, FAQPage, WebSite, ItemList, BreadcrumbList, WithContext, Graph, Thing }
 
-export interface OrganizationLdJson extends BaseLdJson {
-  '@type': 'Organization'
-  name: string
-  url: string
-  logo?: {
-    '@type': 'ImageObject'
-    url: string
-    contentUrl?: string
-    width?: number
-    height?: number
-  }
-  sameAs?: string[]
-  contactPoint?: {
-    '@type': 'ContactPoint'
-    contactType: string
-    email?: string
-    telephone?: string
-  }
-}
+// Type for standalone schemas with @context
+export type LdJsonType = WithContext<Organization | Person | NewsArticle | WebPage | SoftwareApplication | Product | Service | FAQPage | WebSite | ItemList | BreadcrumbList>
 
-export interface PersonLdJson extends BaseLdJson {
-  '@type': 'Person'
-  name: string
-  url?: string
-  sameAs?: string[]
-  jobTitle?: string
-  worksFor?: OrganizationLdJson
-}
-
-export interface NewsArticleLdJson extends BaseLdJson {
-  '@type': 'NewsArticle'
-  headline: string
-  articleBody: string
-  articleSection?: string[]
-  keywords?: string[]
-  author: PersonLdJson | PersonLdJson[]
-  publisher: OrganizationLdJson
-  mainEntityOfPage: {
-    '@type': 'WebPage'
-    '@id': string
-  }
-  wordCount?: number
-  timeRequired?: string
-  aggregateRating?: {
-    '@type': 'AggregateRating'
-    ratingValue: number
-    reviewCount: number
-  }
-}
-
-export interface WebPageLdJson extends BaseLdJson {
-  '@type': 'WebPage'
-  headline?: string
-  mainEntityOfPage?: {
-    '@type': 'WebPage'
-    '@id': string
-  }
-}
-
-export interface SoftwareApplicationLdJson extends BaseLdJson {
-  '@type': 'SoftwareApplication'
-  applicationCategory: string
-  operatingSystem?: string
-  softwareVersion?: string
-  downloadUrl?: string
-  aggregateRating?: {
-    '@type': 'AggregateRating'
-    ratingValue: number
-    reviewCount: number
-  }
-  offers?: {
-    '@type': 'Offer'
-    price: string
-    priceCurrency: string
-    availability: string
-    priceValidUntil?: string
-  }
-}
-
-export interface ProductLdJson extends BaseLdJson {
-  '@type': 'Product'
-  brand?: OrganizationLdJson
-  sku?: string
-  mpn?: string
-  offers: {
-    '@type': 'Offer'
-    price: string
-    priceCurrency: string
-    availability: string
-    priceValidUntil?: string
-    url?: string
-  }[]
-  aggregateRating?: {
-    '@type': 'AggregateRating'
-    ratingValue: number
-    reviewCount: number
-  }
-}
-
-export interface ServiceLdJson extends BaseLdJson {
-  '@type': 'Service'
-  serviceType: string
-  provider: OrganizationLdJson
-  areaServed?: string[]
-  hasOfferCatalog?: {
-    '@type': 'OfferCatalog'
-    name: string
-    itemListElement: {
-      '@type': 'Offer'
-      itemOffered: {
-        '@type': 'Service'
-        name: string
-        description?: string
-      }
-      priceSpecification: {
-        '@type': 'PriceSpecification'
-        price: string
-        priceCurrency: string
-      }
-    }[]
-  }
-}
-
-export interface FAQPageLdJson extends BaseLdJson {
-  '@type': 'FAQPage'
-  mainEntity: Array<{
-    '@type': 'Question'
-    name: string
-    acceptedAnswer: {
-      '@type': 'Answer'
-      text: string
-    }
-  }>
-}
-
-export interface WebSiteLdJson extends BaseLdJson {
-  '@type': 'WebSite'
-  potentialAction?: {
-    '@type': 'SearchAction'
-    target: {
-      '@type': 'EntryPoint'
-      urlTemplate: string
-    }
-    'query-input': string
-  }
-}
-
-export interface ItemListLdJson extends BaseLdJson {
-  '@type': 'ItemList'
-  itemListElement: Array<{
-    '@type': 'ListItem'
-    position: number
-    item: {
-      '@type': string
-      name: string
-      url?: string
-      image?: string
-      description?: string
-      [key: string]: any
-    }
-  }>
-}
-
-export type LdJsonType = NewsArticleLdJson | WebPageLdJson | SoftwareApplicationLdJson | ProductLdJson | ServiceLdJson | OrganizationLdJson | FAQPageLdJson | WebSiteLdJson | ItemListLdJson
+// Type for graph items (Thing without @context requirement)
+export type GraphItem = Thing
 
 /**
  * Create a complete Organization schema for Capgo
  */
-export function createCapgoOrganization(config: RuntimeConfig['public']): OrganizationLdJson {
+export function createCapgoOrganization(config: RuntimeConfig['public']): Organization {
   return {
-    '@context': 'https://schema.org',
     '@type': 'Organization',
     '@id': `${config.baseUrl}/#organization`,
     name: 'Capgo',
@@ -192,8 +38,8 @@ export function createCapgoOrganization(config: RuntimeConfig['public']): Organi
       '@type': 'ImageObject',
       url: `${config.baseUrl}/icon.webp`,
       contentUrl: `${config.baseUrl}/icon.webp`,
-      width: 512,
-      height: 512,
+      width: '512',
+      height: '512',
     },
     sameAs: ['https://twitter.com/Capgo_app', 'https://github.com/Cap-go', 'https://www.linkedin.com/company/capgo'],
     description: config.blog_description,
@@ -208,15 +54,14 @@ export function createCapgoOrganization(config: RuntimeConfig['public']): Organi
 /**
  * Create a Person schema for blog authors
  */
-export function createPersonLdJson(name: string, url?: string, image?: string, jobTitle?: string): PersonLdJson {
-  const person: PersonLdJson = {
-    '@context': 'https://schema.org',
+export function createPersonLdJson(name: string, url?: string, image?: string, jobTitle?: string): Person {
+  const person: Person = {
     '@type': 'Person',
     name,
   }
 
   if (url) person.url = url
-  if (image) person.image = [image]
+  if (image) person.image = image
   if (jobTitle) person.jobTitle = jobTitle
 
   return person
@@ -238,15 +83,14 @@ export function createNewsArticleLdJson(
     authorUrl?: string
     authorImage?: string
     keywords?: string[]
-    articleSection?: string[]
+    articleSection?: string
     articleBody?: string
     locale?: string
   },
-): NewsArticleLdJson {
+): NewsArticle {
   const organization = createCapgoOrganization(config)
 
-  const article: NewsArticleLdJson = {
-    '@context': 'https://schema.org',
+  const article: NewsArticle = {
     '@type': 'NewsArticle',
     '@id': `${options.url}#newsarticle`,
     url: options.url,
@@ -265,7 +109,7 @@ export function createNewsArticleLdJson(
     },
   }
 
-  if (options.keywords) article.keywords = options.keywords
+  if (options.keywords) article.keywords = options.keywords.join(', ')
   if (options.articleSection) article.articleSection = options.articleSection
 
   return article
@@ -280,6 +124,7 @@ export function createSoftwareApplicationLdJson(
     name: string
     description: string
     url: string
+    image?: string
     applicationCategory: string
     operatingSystem?: string
     softwareVersion?: string
@@ -294,30 +139,35 @@ export function createSoftwareApplicationLdJson(
       availability: string
     }
   },
-): SoftwareApplicationLdJson {
-  const app: SoftwareApplicationLdJson = {
-    '@context': 'https://schema.org',
+): SoftwareApplication {
+  const app: SoftwareApplication = {
     '@type': 'SoftwareApplication',
     '@id': `${options.url}#softwareapplication`,
     name: options.name,
     description: options.description,
     url: options.url,
+    image: options.image || `${config.baseUrl}/capgo_social.png`,
     applicationCategory: options.applicationCategory,
   }
 
   if (options.operatingSystem) app.operatingSystem = options.operatingSystem
   if (options.softwareVersion) app.softwareVersion = options.softwareVersion
   if (options.downloadUrl) app.downloadUrl = options.downloadUrl
-  if (options.aggregateRating)
+  if (options.aggregateRating) {
     app.aggregateRating = {
       '@type': 'AggregateRating',
-      ...options.aggregateRating,
+      ratingValue: options.aggregateRating.ratingValue,
+      reviewCount: options.aggregateRating.reviewCount,
     }
-  if (options.offers)
+  }
+  if (options.offers) {
     app.offers = {
       '@type': 'Offer',
-      ...options.offers,
+      price: options.offers.price,
+      priceCurrency: options.offers.priceCurrency,
+      availability: options.offers.availability as 'https://schema.org/InStock' | 'https://schema.org/OutOfStock',
     }
+  }
 
   return app
 }
@@ -331,6 +181,7 @@ export function createProductLdJson(
     name: string
     description: string
     url: string
+    image?: string
     sku?: string
     brand?: string
     offers: {
@@ -344,36 +195,37 @@ export function createProductLdJson(
       reviewCount: number
     }
   },
-): ProductLdJson {
-  const organization = createCapgoOrganization(config)
-
-  return {
-    '@context': 'https://schema.org',
+): Product {
+  const product: Product = {
     '@type': 'Product',
     '@id': `${options.url}#product`,
     name: options.name,
     description: options.description,
     url: options.url,
-    brand: options.brand
-      ? {
-          '@context': 'https://schema.org',
-          '@type': 'Organization',
-          name: options.brand,
-          url: options.url,
-        }
-      : organization,
-    sku: options.sku,
+    image: options.image || `${config.baseUrl}/capgo_social.png`,
+    brand: {
+      '@type': 'Brand',
+      name: options.brand || 'Capgo',
+    },
     offers: options.offers.map((offer) => ({
-      '@type': 'Offer',
-      ...offer,
+      '@type': 'Offer' as const,
+      price: offer.price,
+      priceCurrency: offer.priceCurrency,
+      availability: offer.availability as 'https://schema.org/InStock' | 'https://schema.org/OutOfStock',
+      priceValidUntil: offer.priceValidUntil,
     })),
-    aggregateRating: options.aggregateRating
-      ? {
-          '@type': 'AggregateRating',
-          ...options.aggregateRating,
-        }
-      : undefined,
   }
+
+  if (options.sku) product.sku = options.sku
+  if (options.aggregateRating) {
+    product.aggregateRating = {
+      '@type': 'AggregateRating',
+      ratingValue: options.aggregateRating.ratingValue,
+      reviewCount: options.aggregateRating.reviewCount,
+    }
+  }
+
+  return product
 }
 
 /**
@@ -388,11 +240,10 @@ export function createServiceLdJson(
     serviceType: string
     areaServed?: string[]
   },
-): ServiceLdJson {
+): Service {
   const organization = createCapgoOrganization(config)
 
   return {
-    '@context': 'https://schema.org',
     '@type': 'Service',
     '@id': `${options.url}#service`,
     name: options.name,
@@ -405,107 +256,10 @@ export function createServiceLdJson(
 }
 
 /**
- * Validate ldJSON structure
- */
-export function validateLdJson(data: any): { isValid: boolean; errors: string[] } {
-  const errors: string[] = []
-
-  if (!data) {
-    errors.push('ldJSON data is null or undefined')
-    return { isValid: false, errors }
-  }
-
-  if (!data['@context']) {
-    errors.push('Missing @context field')
-  } else if (data['@context'] !== 'https://schema.org') {
-    errors.push('Invalid @context - should be https://schema.org')
-  }
-
-  if (!data['@type']) {
-    errors.push('Missing @type field')
-  }
-
-  // Type-specific validation
-  switch (data['@type']) {
-    case 'NewsArticle':
-      if (!data.headline) errors.push('NewsArticle missing headline')
-      if (!data.author) errors.push('NewsArticle missing author')
-      if (!data.publisher) errors.push('NewsArticle missing publisher')
-      break
-
-    case 'SoftwareApplication':
-      if (!data.name) errors.push('SoftwareApplication missing name')
-      if (!data.applicationCategory) errors.push('SoftwareApplication missing applicationCategory')
-      break
-
-    case 'Product':
-      if (!data.name) errors.push('Product missing name')
-      if (!data.offers) errors.push('Product missing offers')
-      break
-
-    case 'Organization':
-      if (!data.name) errors.push('Organization missing name')
-      break
-  }
-
-  return {
-    isValid: errors.length === 0,
-    errors,
-  }
-}
-
-/**
- * Create a complete ldJSON graph with organization and webpage
- */
-export function createLdJsonGraph(
-  config: RuntimeConfig['public'],
-  mainEntity: LdJsonType,
-  options?: {
-    includeOrganization?: boolean
-    includeBreadcrumbs?: boolean
-    breadcrumbs?: Array<{ name: string; url: string }>
-  },
-) {
-  const graph: any[] = []
-
-  // Add main entity
-  graph.push(mainEntity)
-
-  // Add organization if requested
-  if (options?.includeOrganization) {
-    graph.push(createCapgoOrganization(config))
-  }
-
-  // Add breadcrumbs if requested
-  if (options?.includeBreadcrumbs && options.breadcrumbs) {
-    graph.push({
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      '@id': `${config.baseUrl}/#breadcrumb`,
-      itemListElement: options.breadcrumbs.map((crumb, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        item: {
-          '@type': 'WebPage',
-          '@id': crumb.url,
-          url: crumb.url,
-          name: crumb.name,
-        },
-      })),
-    })
-  }
-
-  return {
-    '@context': 'https://schema.org',
-    '@graph': graph,
-  }
-}
-
-/**
  * Create a FAQPage schema for FAQ sections
  */
 export function createFAQPageLdJson(
-  config: RuntimeConfig['public'],
+  _config: RuntimeConfig['public'],
   options: {
     url: string
     questions: Array<{
@@ -513,20 +267,39 @@ export function createFAQPageLdJson(
       answer: string
     }>
   },
-): FAQPageLdJson {
+): FAQPage {
   return {
-    '@context': 'https://schema.org',
     '@type': 'FAQPage',
     '@id': `${options.url}#faqpage`,
     url: options.url,
     mainEntity: options.questions.map((q) => ({
-      '@type': 'Question',
+      '@type': 'Question' as const,
       name: q.question,
       acceptedAnswer: {
-        '@type': 'Answer',
+        '@type': 'Answer' as const,
         text: q.answer,
       },
     })),
+  }
+}
+
+/**
+ * Create a WebPage schema
+ */
+export function createWebPageLdJson(
+  _config: RuntimeConfig['public'],
+  options: {
+    name: string
+    description: string
+    url: string
+  },
+): WebPage {
+  return {
+    '@type': 'WebPage',
+    '@id': `${options.url}#webpage`,
+    name: options.name,
+    description: options.description,
+    url: options.url,
   }
 }
 
@@ -539,9 +312,8 @@ export function createWebSiteLdJson(
     hasSearchAction?: boolean
     searchUrl?: string
   },
-): WebSiteLdJson {
-  const schema: WebSiteLdJson = {
-    '@context': 'https://schema.org',
+): WebSite {
+  const schema: WebSite = {
     '@type': 'WebSite',
     '@id': `${config.baseUrl}/#website`,
     url: config.baseUrl,
@@ -553,11 +325,7 @@ export function createWebSiteLdJson(
   if (options?.hasSearchAction && options.searchUrl) {
     schema.potentialAction = {
       '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: options.searchUrl,
-      },
-      'query-input': 'required name=search_term_string',
+      target: options.searchUrl,
     }
   }
 
@@ -568,7 +336,7 @@ export function createWebSiteLdJson(
  * Create an ItemList schema for ranking/list pages
  */
 export function createItemListLdJson(
-  config: RuntimeConfig['public'],
+  _config: RuntimeConfig['public'],
   options: {
     url: string
     name: string
@@ -578,29 +346,108 @@ export function createItemListLdJson(
       url?: string
       image?: string
       description?: string
-      itemType?: string
-      additionalProperties?: Record<string, any>
     }>
   },
-): ItemListLdJson {
+): ItemList {
   return {
-    '@context': 'https://schema.org',
     '@type': 'ItemList',
     '@id': `${options.url}#itemlist`,
     url: options.url,
     name: options.name,
     description: options.description,
     itemListElement: options.items.map((item, index) => ({
-      '@type': 'ListItem',
+      '@type': 'ListItem' as const,
       position: index + 1,
       item: {
-        '@type': item.itemType || 'Thing',
+        '@type': 'Thing' as const,
         name: item.name,
         url: item.url,
         image: item.image,
         description: item.description,
-        ...item.additionalProperties,
       },
     })),
+  }
+}
+
+/**
+ * Create a complete ldJSON graph with organization and webpage
+ */
+export function createLdJsonGraph(
+  config: RuntimeConfig['public'],
+  mainEntity: Thing,
+  options?: {
+    includeOrganization?: boolean
+    includeBreadcrumbs?: boolean
+    breadcrumbs?: Array<{ name: string; url: string }>
+    additionalEntities?: Thing[]
+  },
+): Graph {
+  const graph: Thing[] = []
+
+  // Add main entity
+  graph.push(mainEntity)
+
+  // Add organization if requested
+  if (options?.includeOrganization) {
+    graph.push(createCapgoOrganization(config))
+  }
+
+  // Add breadcrumbs if requested
+  if (options?.includeBreadcrumbs && options.breadcrumbs) {
+    const breadcrumb: BreadcrumbList = {
+      '@type': 'BreadcrumbList',
+      '@id': `${config.baseUrl}/#breadcrumb`,
+      itemListElement: options.breadcrumbs.map((crumb, index) => ({
+        '@type': 'ListItem' as const,
+        position: index + 1,
+        item: {
+          '@type': 'WebPage' as const,
+          '@id': crumb.url,
+          url: crumb.url,
+          name: crumb.name,
+        },
+      })),
+    }
+    graph.push(breadcrumb)
+  }
+
+  // Add any additional entities
+  if (options?.additionalEntities) {
+    graph.push(...options.additionalEntities)
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': graph,
+  }
+}
+
+/**
+ * Validate ldJSON structure (basic validation)
+ * Note: With schema-dts types, most validation happens at compile time
+ */
+export function validateLdJson(data: unknown): { isValid: boolean; errors: string[] } {
+  const errors: string[] = []
+
+  if (!data || typeof data !== 'object') {
+    errors.push('ldJSON data is null or not an object')
+    return { isValid: false, errors }
+  }
+
+  const obj = data as Record<string, unknown>
+
+  if (!obj['@context'] && !obj['@graph']) {
+    errors.push('Missing @context field')
+  } else if (obj['@context'] && obj['@context'] !== 'https://schema.org') {
+    errors.push('Invalid @context - should be https://schema.org')
+  }
+
+  if (!obj['@type'] && !obj['@graph']) {
+    errors.push('Missing @type field')
+  }
+
+  return {
+    isValid: errors.length === 0,
+    errors,
   }
 }

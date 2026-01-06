@@ -60,6 +60,7 @@ jobs:
             ${{ runner.os }}-astro-
 
       - run: bun install
+      - run: bunx astro check
       - run: bun run build:prepare
       - run: bun run build
         env:

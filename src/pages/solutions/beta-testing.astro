@@ -33,6 +33,7 @@ const content = { title, description, ldJSON }
         {
           Array.from({ length: 15 }).map((_, i) => (
             <div
+              id={`${i}`}
               class="absolute w-2 h-2 bg-amber-500 rounded-full opacity-20 animate-pulse"
               style={{
                 top: `${Math.random() * 100}%`,

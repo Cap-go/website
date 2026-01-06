@@ -52,7 +52,6 @@ credits = await creditsResponse.json()
 
 // Filter plans
 const plans = plansAll.length ? plansAll.filter((p) => p.name !== 'Free') : []
-const payg = plansAll.length ? plansAll.filter((p) => p.name === 'Enterprise')[0] : undefined
 
 // Create ldJSON for pricing plans
 if (plans.length > 0) {
@@ -91,7 +90,8 @@ if (plans.length > 0) {
   })
 
   // Create ldJSON graph with organization, products, and FAQ
-  const ldJsonGraph = createLdJsonGraph(
+  // Pass all additional products and FAQ schema via additionalEntities parameter
+  content['ldJSON'] = createLdJsonGraph(
     Astro.locals.runtimeConfig.public,
     planProducts[0], // Use first plan as main entity
     {
@@ -101,15 +101,9 @@ if (plans.length > 0) {
         { name: 'Home', url: getRelativeLocaleUrl(Astro.locals.locale, '/') },
         { name: 'Pricing', url: pricingUrl },
       ],
+      additionalEntities: [...planProducts.slice(1), faqSchema],
     },
   )
-
-  // Add FAQ schema to the graph
-  if (ldJsonGraph['@graph']) {
-    ldJsonGraph['@graph'].push(faqSchema)
-  }
-
-  content['ldJSON'] = ldJsonGraph
 }
 ---
 

@@ -169,6 +169,505 @@ export default defineConfig({
           projectName: 'capgo',
           description: 'Capgo is set of tools for Capacitorjs apps, plugins live app updates with cloud hosting, more than 90 plugins for any problems.',
           exclude: docsExpludes,
+          customSets: [
+            {
+              label: 'Capgo CLI',
+              description: 'full reference documentation for capgo CLI to upload and manage your live updates',
+              paths: ['cli/**'],
+            },
+            {
+              label: 'Plugin Live updates',
+              description: 'full reference documentation for plugin live updates',
+              paths: ['live-updates/**', 'plugins/updater/**'],
+            },
+            {
+              label: 'Console Tutorial',
+              description: 'step-by-step tutorial to get started with Capgo Console and live updates',
+              paths: ['webapp/**'],
+            },
+            {
+              label: 'Public API',
+              description: 'full reference documentation for public API',
+              paths: ['public-api/**'],
+            },
+            // Individual plugin documentation sets
+            {
+              label: 'Plugin Accelerometer',
+              description: 'accelerometer sensor plugin for detecting device motion and orientation',
+              paths: ['plugins/accelerometer/**'],
+            },
+            {
+              label: 'Plugin AdMob',
+              description: 'Google AdMob plugin for mobile advertising integration',
+              paths: ['plugins/admob/**'],
+            },
+            {
+              label: 'Plugin Age Signals',
+              description: 'Android age signals plugin for age verification',
+              paths: ['plugins/age-signals/**'],
+            },
+            {
+              label: 'Plugin Alarm',
+              description: 'alarm and notification scheduling plugin',
+              paths: ['plugins/alarm/**'],
+            },
+            {
+              label: 'Plugin Android Inline Install',
+              description: 'Android inline app installation plugin',
+              paths: ['plugins/android-inline-install/**'],
+            },
+            {
+              label: 'Plugin Android Usage Stats',
+              description: 'Android usage statistics manager plugin',
+              paths: ['plugins/android-usagestatsmanager/**'],
+            },
+            {
+              label: 'Plugin Android Kiosk',
+              description: 'Android kiosk mode plugin for locked-down device experiences',
+              paths: ['plugins/android-kiosk/**'],
+            },
+            {
+              label: 'Plugin AppInsights',
+              description: 'Microsoft Application Insights analytics plugin',
+              paths: ['plugins/appinsights/**'],
+            },
+            {
+              label: 'Plugin Audio Recorder',
+              description: 'audio recording plugin for capturing microphone input',
+              paths: ['plugins/audio-recorder/**'],
+            },
+            {
+              label: 'Plugin Audio Session',
+              description: 'iOS audio session configuration plugin',
+              paths: ['plugins/audiosession/**'],
+            },
+            {
+              label: 'Plugin Autofill Save Password',
+              description: 'autofill and password save plugin for credential management',
+              paths: ['plugins/autofill-save-password/**'],
+            },
+            {
+              label: 'Plugin Background Geolocation',
+              description: 'background location tracking plugin',
+              paths: ['plugins/background-geolocation/**'],
+            },
+            {
+              label: 'Plugin Barometer',
+              description: 'barometric pressure sensor plugin',
+              paths: ['plugins/barometer/**'],
+            },
+            {
+              label: 'Plugin Bluetooth Low Energy',
+              description: 'Bluetooth Low Energy (BLE) plugin for device communication',
+              paths: ['plugins/bluetooth-low-energy/**'],
+            },
+            {
+              label: 'Plugin Brightness',
+              description: 'screen brightness control plugin',
+              paths: ['plugins/brightness/**'],
+            },
+            {
+              label: 'Plugin Camera Preview',
+              description: 'camera preview plugin for live camera feed',
+              paths: ['plugins/camera-preview/**'],
+            },
+            {
+              label: 'Plugin Capacitor+',
+              description: 'Capacitor+ enhanced runtime plugin',
+              paths: ['plugins/capacitor-plus/**'],
+            },
+            {
+              label: 'Plugin Compass',
+              description: 'digital compass plugin for device orientation',
+              paths: ['plugins/compass/**'],
+            },
+            {
+              label: 'Plugin Contacts',
+              description: 'contacts access plugin for reading device contacts',
+              paths: ['plugins/contacts/**'],
+            },
+            {
+              label: 'Plugin Crisp',
+              description: 'Crisp chat integration plugin',
+              paths: ['plugins/crisp/**'],
+            },
+            {
+              label: 'Plugin Data Storage SQLite',
+              description: 'SQLite data storage plugin for local database',
+              paths: ['plugins/data-storage-sqlite/**'],
+            },
+            {
+              label: 'Plugin Document Scanner',
+              description: 'document scanning plugin with OCR capabilities',
+              paths: ['plugins/document-scanner/**'],
+            },
+            {
+              label: 'Plugin Downloader',
+              description: 'file download manager plugin',
+              paths: ['plugins/downloader/**'],
+            },
+            {
+              label: 'Plugin Env',
+              description: 'environment variables plugin',
+              paths: ['plugins/env/**'],
+            },
+            {
+              label: 'Plugin Fast SQL',
+              description: 'high-performance SQL database plugin',
+              paths: ['plugins/fast-sql/**'],
+            },
+            {
+              label: 'Plugin FFmpeg',
+              description: 'FFmpeg media processing plugin',
+              paths: ['plugins/ffmpeg/**'],
+            },
+            {
+              label: 'Plugin File',
+              description: 'file system access plugin',
+              paths: ['plugins/file/**'],
+            },
+            {
+              label: 'Plugin File Compressor',
+              description: 'file compression plugin',
+              paths: ['plugins/file-compressor/**'],
+            },
+            {
+              label: 'Plugin File Picker',
+              description: 'file picker plugin for selecting files',
+              paths: ['plugins/file-picker/**'],
+            },
+            {
+              label: 'Plugin Flash',
+              description: 'device flashlight control plugin',
+              paths: ['plugins/flash/**'],
+            },
+            {
+              label: 'Plugin GTM',
+              description: 'Google Tag Manager integration plugin',
+              paths: ['plugins/gtm/**'],
+            },
+            {
+              label: 'Plugin Health',
+              description: 'health data access plugin for HealthKit and Google Fit',
+              paths: ['plugins/health/**'],
+            },
+            {
+              label: 'Plugin Home Indicator',
+              description: 'iOS home indicator visibility control plugin',
+              paths: ['plugins/home-indicator/**'],
+            },
+            {
+              label: 'Plugin iBeacon',
+              description: 'iBeacon proximity detection plugin',
+              paths: ['plugins/ibeacon/**'],
+            },
+            {
+              label: 'Plugin InAppBrowser',
+              description: 'in-app browser plugin for opening web content',
+              paths: ['plugins/inappbrowser/**'],
+            },
+            {
+              label: 'Plugin In App Review',
+              description: 'in-app review prompt plugin for app store ratings',
+              paths: ['plugins/in-app-review/**'],
+            },
+            {
+              label: 'Plugin Intent Launcher',
+              description: 'Android intent launcher plugin',
+              paths: ['plugins/intent-launcher/**'],
+            },
+            {
+              label: 'Plugin Is Root',
+              description: 'root/jailbreak detection plugin',
+              paths: ['plugins/is-root/**'],
+            },
+            {
+              label: 'Plugin IVS Player',
+              description: 'Amazon IVS video player plugin',
+              paths: ['plugins/ivs-player/**'],
+            },
+            {
+              label: 'Plugin JW Player',
+              description: 'JW Player video integration plugin',
+              paths: ['plugins/jw-player/**'],
+            },
+            {
+              label: 'Plugin Keep Awake',
+              description: 'screen wake lock plugin to prevent sleep',
+              paths: ['plugins/keep-awake/**'],
+            },
+            {
+              label: 'Plugin Launch Navigator',
+              description: 'native maps navigation plugin',
+              paths: ['plugins/launch-navigator/**'],
+            },
+            {
+              label: 'Plugin Light Sensor',
+              description: 'ambient light sensor plugin',
+              paths: ['plugins/light-sensor/**'],
+            },
+            {
+              label: 'Plugin Live Reload',
+              description: 'development live reload plugin',
+              paths: ['plugins/live-reload/**'],
+            },
+            {
+              label: 'Plugin LLM',
+              description: 'on-device large language model plugin',
+              paths: ['plugins/llm/**'],
+            },
+            {
+              label: 'Plugin Media Session',
+              description: 'media session and playback controls plugin',
+              paths: ['plugins/media-session/**'],
+            },
+            {
+              label: 'Plugin Mute',
+              description: 'device mute state detection plugin',
+              paths: ['plugins/mute/**'],
+            },
+            {
+              label: 'Plugin Mux Player',
+              description: 'Mux video player integration plugin',
+              paths: ['plugins/mux-player/**'],
+            },
+            {
+              label: 'Plugin Native Audio',
+              description: 'native audio playback plugin',
+              paths: ['plugins/native-audio/**'],
+            },
+            {
+              label: 'Plugin Native Biometric',
+              description: 'biometric authentication plugin for fingerprint and face ID',
+              paths: ['plugins/native-biometric/**'],
+            },
+            {
+              label: 'Plugin Native Geocoder',
+              description: 'native geocoding plugin for address lookup',
+              paths: ['plugins/nativegeocoder/**'],
+            },
+            {
+              label: 'Plugin Native Market',
+              description: 'app store deep linking plugin',
+              paths: ['plugins/native-market/**'],
+            },
+            {
+              label: 'Plugin Native Purchases',
+              description: 'in-app purchases and subscriptions plugin',
+              paths: ['plugins/native-purchases/**'],
+            },
+            {
+              label: 'Plugin Navigation Bar',
+              description: 'Android navigation bar customization plugin',
+              paths: ['plugins/navigation-bar/**'],
+            },
+            {
+              label: 'Plugin NFC',
+              description: 'NFC reading and writing plugin',
+              paths: ['plugins/nfc/**'],
+            },
+            {
+              label: 'Plugin Pay',
+              description: 'Apple Pay and Google Pay integration plugin',
+              paths: ['plugins/pay/**'],
+            },
+            {
+              label: 'Plugin PDF Generator',
+              description: 'PDF generation plugin',
+              paths: ['plugins/pdf-generator/**'],
+            },
+            {
+              label: 'Plugin Pedometer',
+              description: 'step counting pedometer plugin',
+              paths: ['plugins/pedometer/**'],
+            },
+            {
+              label: 'Plugin Persistent Account',
+              description: 'persistent account storage plugin',
+              paths: ['plugins/persistent-account/**'],
+            },
+            {
+              label: 'Plugin Photo Library',
+              description: 'photo library access plugin',
+              paths: ['plugins/photo-library/**'],
+            },
+            {
+              label: 'Plugin Printer',
+              description: 'printing plugin for documents and images',
+              paths: ['plugins/printer/**'],
+            },
+            {
+              label: 'Plugin RealtimeKit',
+              description: 'real-time communication plugin',
+              paths: ['plugins/realtimekit/**'],
+            },
+            {
+              label: 'Plugin Ricoh 360 Camera',
+              description: 'Ricoh 360 camera integration plugin',
+              paths: ['plugins/ricoh360-camera/**'],
+            },
+            {
+              label: 'Plugin Screen Orientation',
+              description: 'screen orientation control plugin',
+              paths: ['plugins/screen-orientation/**'],
+            },
+            {
+              label: 'Plugin Screen Recorder',
+              description: 'screen recording plugin',
+              paths: ['plugins/screen-recorder/**'],
+            },
+            {
+              label: 'Plugin Shake',
+              description: 'shake gesture detection plugin',
+              paths: ['plugins/shake/**'],
+            },
+            {
+              label: 'Plugin Share Target',
+              description: 'share target plugin for receiving shared content',
+              paths: ['plugins/share-target/**'],
+            },
+            {
+              label: 'Plugin SIM',
+              description: 'SIM card information plugin',
+              paths: ['plugins/sim/**'],
+            },
+            {
+              label: 'Plugin Social Login',
+              description: 'social authentication plugin for Google, Apple, Facebook login',
+              paths: ['plugins/social-login/**'],
+            },
+            {
+              label: 'Plugin Speech Recognition',
+              description: 'speech-to-text recognition plugin',
+              paths: ['plugins/speech-recognition/**'],
+            },
+            {
+              label: 'Plugin Speech Synthesis',
+              description: 'text-to-speech synthesis plugin',
+              paths: ['plugins/speech-synthesis/**'],
+            },
+            {
+              label: 'Plugin StreamCall',
+              description: 'Stream video calling plugin',
+              paths: ['plugins/streamcall/**'],
+            },
+            {
+              label: 'Plugin Text Interaction',
+              description: 'text selection and interaction plugin',
+              paths: ['plugins/textinteraction/**'],
+            },
+            {
+              label: 'Plugin Twilio Voice',
+              description: 'Twilio voice calling plugin',
+              paths: ['plugins/twilio-voice/**'],
+            },
+            {
+              label: 'Plugin Uploader',
+              description: 'file upload plugin with background support',
+              paths: ['plugins/uploader/**'],
+            },
+            {
+              label: 'Plugin Video Player',
+              description: 'native video player plugin',
+              paths: ['plugins/video-player/**'],
+            },
+            {
+              label: 'Plugin Video Thumbnails',
+              description: 'video thumbnail generation plugin',
+              paths: ['plugins/video-thumbnails/**'],
+            },
+            {
+              label: 'Plugin Volume Buttons',
+              description: 'volume button event detection plugin',
+              paths: ['plugins/volume-buttons/**'],
+            },
+            {
+              label: 'Plugin Watch',
+              description: 'Apple Watch and Wear OS integration plugin',
+              paths: ['plugins/watch/**'],
+            },
+            {
+              label: 'Plugin WeChat',
+              description: 'WeChat integration plugin',
+              paths: ['plugins/wechat/**'],
+            },
+            {
+              label: 'Plugin Webview Guardian',
+              description: 'webview security and protection plugin',
+              paths: ['plugins/webview-guardian/**'],
+            },
+            {
+              label: 'Plugin WiFi',
+              description: 'WiFi network information plugin',
+              paths: ['plugins/wifi/**'],
+            },
+            {
+              label: 'Plugin YouTube Player',
+              description: 'YouTube video player plugin',
+              paths: ['plugins/youtube-player/**'],
+            },
+            {
+              label: 'Plugin Zip',
+              description: 'file compression and extraction plugin',
+              paths: ['plugins/zip/**'],
+            },
+            // Firebase plugins
+            {
+              label: 'Plugin Firebase Analytics',
+              description: 'Firebase Analytics integration plugin',
+              paths: ['plugins/firebase-analytics/**'],
+            },
+            {
+              label: 'Plugin Firebase App',
+              description: 'Firebase core app plugin',
+              paths: ['plugins/firebase-app/**'],
+            },
+            {
+              label: 'Plugin Firebase App Check',
+              description: 'Firebase App Check security plugin',
+              paths: ['plugins/firebase-app-check/**'],
+            },
+            {
+              label: 'Plugin Firebase Authentication',
+              description: 'Firebase Authentication plugin',
+              paths: ['plugins/firebase-authentication/**'],
+            },
+            {
+              label: 'Plugin Firebase Crashlytics',
+              description: 'Firebase Crashlytics crash reporting plugin',
+              paths: ['plugins/firebase-crashlytics/**'],
+            },
+            {
+              label: 'Plugin Firebase Firestore',
+              description: 'Firebase Firestore database plugin',
+              paths: ['plugins/firebase-firestore/**'],
+            },
+            {
+              label: 'Plugin Firebase Functions',
+              description: 'Firebase Cloud Functions plugin',
+              paths: ['plugins/firebase-functions/**'],
+            },
+            {
+              label: 'Plugin Firebase Messaging',
+              description: 'Firebase Cloud Messaging push notifications plugin',
+              paths: ['plugins/firebase-messaging/**'],
+            },
+            {
+              label: 'Plugin Firebase Performance',
+              description: 'Firebase Performance Monitoring plugin',
+              paths: ['plugins/firebase-performance/**'],
+            },
+            {
+              label: 'Plugin Firebase Remote Config',
+              description: 'Firebase Remote Config plugin',
+              paths: ['plugins/firebase-remote-config/**'],
+            },
+            {
+              label: 'Plugin Firebase Storage',
+              description: 'Firebase Cloud Storage plugin',
+              paths: ['plugins/firebase-storage/**'],
+            },
+          ],
         }),
       ],
       disable404Route: true,
@@ -918,7 +1417,7 @@ export default defineConfig({
           ],
         },
         {
-          label: 'Web app',
+          label: 'Console',
           collapsed: true,
           autogenerate: { directory: 'docs/webapp' },
         },

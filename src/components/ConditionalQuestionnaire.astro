@@ -1,5 +1,4 @@
 ---
-import { Aside } from '@astrojs/starlight/components'
 import FrameworkSelector from '@/components/FrameworkSelector.astro'
 
 // Question flow data structure
@@ -895,14 +894,9 @@ export default component$(() => {
   }
 </style>
 
-<script define:vars={{ questionFlow }}>
+<script is:inline define:vars={{ questionFlow }}>
   document.addEventListener('DOMContentLoaded', function () {
     let currentFramework = ''
-
-    // Get step elements
-    const step2 = document.getElementById('step-2')
-    const step3 = document.getElementById('step-3')
-    const step4 = document.getElementById('step-4')
 
     // Listen for framework selection
     document.addEventListener('frameworkSelected', function (event) {

@@ -106,7 +106,7 @@ const content = {
   title,
   description,
   image: `${baseUrl}/capgo_social.png`,
-  ldJSON: createLdJsonGraph(Astro.locals.runtimeConfig.public, enhancedEnterpriseProduct, {
+  ldJSON: createLdJsonGraph(Astro.locals.runtimeConfig.public, enhancedEnterpriseProduct as import('schema-dts').Thing, {
     includeOrganization: true,
     includeBreadcrumbs: true,
     breadcrumbs: [
@@ -119,11 +119,9 @@ const content = {
         url: enterpriseUrl,
       },
     ],
+    additionalEntities: [enterpriseService],
   }),
 }
-
-// Add the enterprise service as additional entity
-content.ldJSON['@graph'].push(enterpriseService)
 ---
 
 <Layout content={content}>

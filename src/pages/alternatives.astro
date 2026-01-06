@@ -26,27 +26,6 @@ const content = {
   image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png`,
   ldJSON,
 }
-
-const alternatives = [
-  {
-    name: 'Ionic Appflow',
-    url: getRelativeLocaleUrl(locale, 'ionic-appflow'),
-    status: m.alternatives_appflow_status({}, { locale }),
-    pricing: m.alternatives_appflow_pricing({}, { locale }),
-  },
-  {
-    name: 'Microsoft CodePush',
-    url: '#codepush',
-    status: m.alternatives_status_deprecated({}, { locale }),
-    pricing: m.alternatives_codepush_pricing({}, { locale }),
-  },
-  {
-    name: 'Capawesome Cloud',
-    url: getRelativeLocaleUrl(locale, 'capwesome'),
-    status: m.alternatives_status_active({}, { locale }),
-    pricing: m.alternatives_capawesome_pricing({}, { locale }),
-  },
-]
 ---
 
 <Layout content={content}>

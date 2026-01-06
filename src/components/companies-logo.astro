@@ -1,6 +1,10 @@
 ---
 import * as m from '@/paraglide/messages'
 
+// Helper to get dynamic message keys
+type MessageFn = (args: Record<string, never>, options: { locale: string }) => string
+const messages = m as unknown as Record<string, MessageFn>
+
 const partnerLogos = [
   {
     name: 'Kick',
@@ -131,7 +135,7 @@ const partnerLogos = [
                     <div class="flex relative justify-center items-center h-16">
                       <img loading="lazy" class="w-auto h-auto max-h-12 transition-transform hover:scale-105" src={company.logo} alt={company.alt} aria-label={company.name} />
                       <span class="absolute -top-3 -right-3 py-0.5 px-2.5 font-semibold text-white whitespace-nowrap rounded-full border shadow-md border-white/60 bg-slate-900 text-[10px]">
-                        {m[company.badgeKey]({}, { locale: Astro.locals.locale })}
+                        {messages[company.badgeKey]({}, { locale: Astro.locals.locale })}
                       </span>
                     </div>
                   </div>

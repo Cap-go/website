@@ -7,6 +7,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "~public/*": ["./public/*"]
-    }
-  }
+    },
+    "types": ["bun-types"]
+  },
+  "exclude": ["scripts/**/*"]
 }
