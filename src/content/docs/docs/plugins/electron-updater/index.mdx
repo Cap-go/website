@@ -1,0 +1,107 @@
+---
+title: "@capgo/electron-updater"
+description: OTA (Over-The-Air) live updates for Electron applications. 100% feature parity with @capgo/capacitor-updater.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 2
+  label: "Introduction"
+hero:
+  tagline: Push instant updates to your Electron desktop apps without rebuilding binaries. Same reliable live update system now for desktop.
+  actions:
+    - text: Get started
+      link: /docs/plugins/electron-updater/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/electron-updater/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard, Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip">
+  New to Capgo? The Electron Updater brings the same powerful live update capabilities from mobile to desktop. If you're already using `@capgo/capacitor-updater`, you'll feel right at home.
+</Aside>
+
+## Why Electron Updater?
+
+Electron's built-in auto-updater requires shipping a full new binary for every update. This plugin solves that by enabling JavaScript/HTML/CSS updates without rebuilding.
+
+<CardGrid stagger>
+  <Card title="Instant Updates" icon="rocket">
+    Push JavaScript, HTML, and CSS updates directly to users without rebuilding the entire app binary.
+  </Card>
+  <Card title="Delta Updates" icon="starlight">
+    Only download changed files, making updates ultra-fast and bandwidth-efficient.
+  </Card>
+  <Card title="Rollback Protection" icon="approve-check">
+    Automatic rollback if an update fails, keeping your app stable for users.
+  </Card>
+  <Card title="End-to-End Encryption" icon="seti:lock">
+    Secure update delivery with RSA session keys and AES bundle encryption.
+  </Card>
+</CardGrid>
+
+## Key Features
+
+- **Live Updates** - Push updates instantly without app store delays
+- **Auto-Update** - Automatic update checking and installation
+- **Rollback Protection** - Automatic rollback if `notifyAppReady()` isn't called
+- **Bundle Management** - Full control over downloaded bundles
+- **Channel System** - Deploy to different user groups (production, beta, staging)
+- **Delay Conditions** - Control when updates are applied (background, kill, date, native version)
+- **Debug Menu** - Built-in debug tools accessible via `Ctrl+Shift+D` / `Cmd+Shift+D`
+- **Statistics Reporting** - Track update success rates and user versions
+
+## Feature Parity with Capacitor Updater
+
+The Electron Updater maintains 100% API compatibility with `@capgo/capacitor-updater`. The same methods, events, and configuration options work across both platforms:
+
+| Feature | Capacitor | Electron |
+|---------|-----------|----------|
+| Live Updates | Yes | Yes |
+| Channels | Yes | Yes |
+| Rollback Protection | Yes | Yes |
+| End-to-End Encryption | Yes | Yes |
+| Statistics | Yes | Yes |
+| Delay Conditions | Yes | Yes |
+| Debug Menu | Shake device | Keyboard shortcut |
+
+## Installation
+
+```bash
+npm install @capgo/electron-updater
+```
+
+## Quick Links
+
+<LinkCard
+  title="Getting Started"
+  description="Complete setup guide for adding live updates to your Electron app."
+  href="/docs/plugins/electron-updater/getting-started/"
+/>
+
+<LinkCard
+  title="API Reference"
+  description="All available methods, events, and configuration options."
+  href="/docs/plugins/electron-updater/api/"
+/>
+
+<LinkCard
+  title="Capacitor Updater Docs"
+  description="The mobile counterpart - same API, same concepts, for Capacitor apps."
+  href="/docs/plugins/updater/"
+/>
+
+## Documentation
+
+- **[Getting Started](/docs/plugins/electron-updater/getting-started/)** - Setup and configuration guide
+- **[API Reference](/docs/plugins/electron-updater/api/)** - All methods, events, and options
+- **[Migration from Capacitor](/docs/plugins/electron-updater/migration/)** - Moving from Capacitor to Electron
+
+## Community
+
+Join the [Discord](https://discord.gg/VnYRvBfgA6) to get help and connect with other developers.

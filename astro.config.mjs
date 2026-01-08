@@ -177,8 +177,8 @@ export default defineConfig({
             },
             {
               label: 'Plugin Live updates',
-              description: 'full reference documentation for plugin live updates',
-              paths: ['live-updates/**', 'plugins/updater/**'],
+              description: 'full reference documentation for plugin live updates for Capacitor and Electron',
+              paths: ['live-updates/**', 'plugins/updater/**', 'plugins/electron-updater/**'],
             },
             {
               label: 'Console Tutorial',

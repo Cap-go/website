@@ -1,0 +1,457 @@
+---
+title: "Electron Updater API Reference"
+description: Complete API reference for @capgo/electron-updater - all methods, events, and configuration options.
+sidebar:
+  order: 2
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+This page documents all available methods, events, and configuration options for the Electron Updater.
+
+## Core Methods
+
+### notifyAppReady()
+
+**Must be called on every app launch.** Confirms the bundle loaded successfully and prevents automatic rollback.
+
+```typescript
+await updater.notifyAppReady();
+```
+
+<Aside type="caution">
+  If not called within `appReadyTimeout` (default 10 seconds), the update is considered failed and the app rolls back to the previous version.
+</Aside>
+
+### download(options)
+
+Download a bundle from a URL.
+
+```typescript
+const bundle = await updater.download({
+  url: 'https://example.com/bundle.zip',
+  version: '1.0.1',
+  checksum: 'sha256-hash', // Optional but recommended
+  sessionKey: '...', // For encrypted bundles
+});
+```
+
+**Parameters:**
+| Option | Type | Required | Description |
+|--------|------|----------|-------------|
+| `url` | string | Yes | URL to download the bundle from |
+| `version` | string | Yes | Version identifier for the bundle |
+| `checksum` | string | No | SHA256 checksum for verification |
+| `sessionKey` | string | No | Session key for encrypted bundles |
+
+**Returns:** `BundleInfo` object with `id`, `version`, `status`
+
+### next(options)
+
+Queue a bundle to be loaded on next app restart.
+
+```typescript
+await updater.next({ id: 'bundle-id' });
+```
+
+**Parameters:**
+| Option | Type | Required | Description |
+|--------|------|----------|-------------|
+| `id` | string | Yes | Bundle ID to queue |
+
+### set(options)
+
+Immediately switch to a bundle and reload the app.
+
+```typescript
+await updater.set({ id: 'bundle-id' });
+```
+
+**Parameters:**
+| Option | Type | Required | Description |
+|--------|------|----------|-------------|
+| `id` | string | Yes | Bundle ID to activate |
+
+### reload()
+
+Manually reload the app with the current bundle.
+
+```typescript
+await updater.reload();
+```
+
+### delete(options)
+
+Delete a bundle from storage.
+
+```typescript
+await updater.delete({ id: 'bundle-id' });
+```
+
+**Parameters:**
+| Option | Type | Required | Description |
+|--------|------|----------|-------------|
+| `id` | string | Yes | Bundle ID to delete |
+
+### reset(options)
+
+Reset to builtin version or last successful bundle.
+
+```typescript
+// Reset to builtin
+await updater.reset({ toLastSuccessful: false });
+
+// Reset to last successful bundle
+await updater.reset({ toLastSuccessful: true });
+```
+
+**Parameters:**
+| Option | Type | Required | Description |
+|--------|------|----------|-------------|
+| `toLastSuccessful` | boolean | No | If true, reset to last successful bundle instead of builtin |
+
+## Bundle Information
+
+### current()
+
+Get information about the current bundle and native version.
+
+```typescript
+const info = await updater.current();
+// { bundle: { id, version, status }, native: '1.0.0' }
+```
+
+### list(options)
+
+List all downloaded bundles.
+
+```typescript
+const bundles = await updater.list();
+// [{ id, version, status, downloaded, checksum }, ...]
+```
+
+### getNextBundle()
+
+Get the bundle queued for next restart.
+
+```typescript
+const next = await updater.getNextBundle();
+// { id, version, status } or null
+```
+
+### getFailedUpdate()
+
+Get information about the last failed update (useful for debugging rollbacks).
+
+```typescript
+const failed = await updater.getFailedUpdate();
+// { id, version, reason } or null
+```
+
+### getBuiltinVersion()
+
+Get the version shipped with the app binary.
+
+```typescript
+const version = await updater.getBuiltinVersion();
+// '1.0.0'
+```
+
+## Update Checking
+
+### getLatest(options)
+
+Check the server for the latest available version.
+
+```typescript
+const latest = await updater.getLatest();
+
+if (latest.url && !latest.error) {
+  // Update available
+  console.log('New version:', latest.version);
+  console.log('Download URL:', latest.url);
+} else if (latest.error) {
+  console.error('Error checking updates:', latest.error);
+}
+```
+
+**Returns:**
+| Property | Type | Description |
+|----------|------|-------------|
+| `url` | string | Download URL (empty if no update) |
+| `version` | string | Available version |
+| `checksum` | string | SHA256 checksum |
+| `sessionKey` | string | Encryption session key |
+| `error` | string | Error message if check failed |
+| `message` | string | Server message |
+
+## Channel Management
+
+### setChannel(options)
+
+Assign the device to a specific channel.
+
+```typescript
+await updater.setChannel({ channel: 'beta' });
+```
+
+### unsetChannel(options)
+
+Remove channel assignment and use default.
+
+```typescript
+await updater.unsetChannel();
+```
+
+### getChannel()
+
+Get the current channel assignment.
+
+```typescript
+const channel = await updater.getChannel();
+// { channel: 'production', status: 'set' }
+```
+
+### listChannels()
+
+List all available channels for this app.
+
+```typescript
+const channels = await updater.listChannels();
+// ['production', 'beta', 'staging']
+```
+
+## Delay Conditions
+
+Control when downloaded updates are applied.
+
+### setMultiDelay(options)
+
+Set conditions that must be met before an update is applied.
+
+```typescript
+// Wait for app to be backgrounded
+await updater.setMultiDelay({
+  delayConditions: [{ kind: 'background' }]
+});
+
+// Wait until specific date
+await updater.setMultiDelay({
+  delayConditions: [{ kind: 'date', value: '2024-12-25T00:00:00Z' }]
+});
+
+// Wait for app to be killed and restarted
+await updater.setMultiDelay({
+  delayConditions: [{ kind: 'kill' }]
+});
+
+// Multiple conditions (all must be met)
+await updater.setMultiDelay({
+  delayConditions: [
+    { kind: 'background' },
+    { kind: 'date', value: '2024-12-25T00:00:00Z' }
+  ]
+});
+```
+
+**Delay Condition Types:**
+| Kind | Value | Description |
+|------|-------|-------------|
+| `background` | Optional duration (ms) | Wait for app to be backgrounded |
+| `kill` | - | Wait for app to be killed and restarted |
+| `date` | ISO date string | Wait until specific date/time |
+| `nativeVersion` | Version string | Wait for native app update |
+
+### cancelDelay()
+
+Clear all delay conditions and apply update immediately on next check.
+
+```typescript
+await updater.cancelDelay();
+```
+
+## Device Identification
+
+### getDeviceId()
+
+Get the unique device identifier.
+
+```typescript
+const deviceId = await updater.getDeviceId();
+// 'uuid-xxxx-xxxx-xxxx'
+```
+
+### setCustomId(options)
+
+Set a custom identifier for the device (useful for analytics).
+
+```typescript
+await updater.setCustomId({ customId: 'user-123' });
+```
+
+## Configuration
+
+### setUpdateUrl(options)
+
+Change the update server URL at runtime.
+
+```typescript
+await updater.setUpdateUrl({ url: 'https://my-server.com/updates' });
+```
+
+<Aside>
+  Requires `allowModifyUrl: true` in the constructor options.
+</Aside>
+
+### setStatsUrl(options)
+
+Change the statistics reporting URL.
+
+```typescript
+await updater.setStatsUrl({ url: 'https://my-server.com/stats' });
+```
+
+### setChannelUrl(options)
+
+Change the channel management URL.
+
+```typescript
+await updater.setChannelUrl({ url: 'https://my-server.com/channel' });
+```
+
+### setAppId(options)
+
+Change the App ID at runtime.
+
+```typescript
+await updater.setAppId({ appId: 'com.example.newapp' });
+```
+
+<Aside>
+  Requires `allowModifyAppId: true` in the constructor options.
+</Aside>
+
+### getAppId()
+
+Get the current App ID.
+
+```typescript
+const appId = await updater.getAppId();
+```
+
+## Debug
+
+### setDebugMenu(options)
+
+Enable or disable the debug menu.
+
+```typescript
+await updater.setDebugMenu({ enabled: true });
+```
+
+### isDebugMenuEnabled()
+
+Check if the debug menu is enabled.
+
+```typescript
+const enabled = await updater.isDebugMenuEnabled();
+```
+
+## Events
+
+Listen to update events using `addListener`:
+
+```typescript
+updater.addListener('eventName', (event) => {
+  // Handle event
+});
+```
+
+### Available Events
+
+| Event | Payload | Description |
+|-------|---------|-------------|
+| `download` | `{ percent, status }` | Download progress updates |
+| `updateAvailable` | `{ bundle }` | New update available |
+| `noNeedUpdate` | `{ message }` | Already up-to-date |
+| `downloadComplete` | `{ bundle }` | Download finished successfully |
+| `downloadFailed` | `{ bundle, error }` | Download failed |
+| `breakingAvailable` | `{ bundle }` | Incompatible update available (requires native update) |
+| `updateFailed` | `{ bundle, reason }` | Update installation failed |
+| `appReloaded` | `{}` | App was reloaded |
+| `appReady` | `{}` | `notifyAppReady()` was called |
+
+### Example: Full Event Handling
+
+```typescript
+// Progress tracking
+updater.addListener('download', (event) => {
+  updateProgressBar(event.percent);
+});
+
+// Update available notification
+updater.addListener('updateAvailable', (event) => {
+  showNotification(`Update ${event.bundle.version} available!`);
+});
+
+// Handle completion
+updater.addListener('downloadComplete', async (event) => {
+  // Queue for next restart
+  await updater.next({ id: event.bundle.id });
+  showNotification('Update will apply on next restart');
+});
+
+// Handle failures
+updater.addListener('updateFailed', (event) => {
+  console.error('Update failed:', event.reason);
+  reportError(event);
+});
+```
+
+## Constructor Options
+
+Full configuration options for `ElectronUpdater`:
+
+```typescript
+const updater = new ElectronUpdater({
+  // Required
+  appId: 'com.example.app',
+
+  // Version override
+  version: '1.0.0', // Override builtin version detection
+
+  // Server URLs
+  updateUrl: 'https://plugin.capgo.app/updates',
+  channelUrl: 'https://plugin.capgo.app/channel_self',
+  statsUrl: 'https://plugin.capgo.app/stats',
+
+  // Behavior
+  autoUpdate: true,           // Enable automatic update checks
+  appReadyTimeout: 10000,     // Milliseconds before rollback (default: 10000)
+  autoDeleteFailed: true,     // Auto-delete failed bundles
+  autoDeletePrevious: true,   // Auto-delete old bundles
+  resetWhenUpdate: true,      // Reset to builtin on native update
+
+  // Channels
+  defaultChannel: 'production',
+
+  // Direct Update Mode
+  directUpdate: false,        // 'atInstall' | 'onLaunch' | 'always' | false
+
+  // Security
+  publicKey: '...',           // RSA public key for E2E encryption
+
+  // Dynamic Configuration
+  allowModifyUrl: false,      // Allow runtime URL changes
+  allowModifyAppId: false,    // Allow runtime App ID changes
+  persistCustomId: false,     // Persist custom ID across updates
+  persistModifyUrl: false,    // Persist URL changes
+
+  // Debug
+  debugMenu: false,           // Enable debug menu (Ctrl+Shift+D)
+  disableJSLogging: false,    // Disable console logs
+
+  // Periodic Updates
+  periodCheckDelay: 0,        // Seconds between auto-checks (0 = disabled, min 600)
+});
+```
