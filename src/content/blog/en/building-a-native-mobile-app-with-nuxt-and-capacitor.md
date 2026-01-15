@@ -1,166 +1,207 @@
 ---
 slug: building-a-native-mobile-app-with-nuxt-and-capacitor
-title: '2025 Guide: Creating Mobile Apps with Nuxt 4 and Capacitor'
-description: How to create a mobile app with Nuxt 4, Capacitor, Tailwind CSS 4, and implement native UI with Konsta UI 5.
+title: Convert Your Nuxt App to iOS & Android with Capacitor 8
+description: >-
+  Transform your existing Nuxt 4 web application into native iOS and Android
+  mobile apps using Capacitor 8. A complete guide to configuring static generation,
+  adding native plugins, and deploying to app stores.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-03T00:00:00.000Z
-updated_at: 2025-01-20T00:00:00.000Z
+updated_at: 2026-01-15T00:00:00.000Z
 head_image: /nuxt_capgo.webp
-head_image_alt: Nuxt 4 and Capgo illustration
-keywords: Nuxt 4, Capacitor, Tailwind CSS 4, Konsta UI 5, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
+head_image_alt: Nuxt 4 and Capacitor illustration
+keywords: Nuxt 4, Capacitor 8, convert web app to mobile, iOS, Android, mobile app development, static generation, native plugins, Vue
 tag: Tutorial
 published: true
 locale: en
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 
-In this tutorial, we will start with a new [Nuxt 4](https://nuxt.com/) app and move into native land using Capacitor and eventually also add [Konsta UI v5](https://konstaui.com/) for an improved Tailwind CSS 4 mobile UI, although the last step is completely optional.
+## Introduction
 
-By using Capacitor, you can easily convert your Nuxt 4 web application into a native mobile app without requiring significant modifications or learning a new skill like React Native. 
+Have an existing Nuxt web application? In this guide, you'll learn how to transform it into native iOS and Android mobile apps using [Capacitor](https://capacitorjs.com/) 8 — the latest version with improved performance and new features.
 
-With just a few simple steps, most Nuxt 4 applications can be transformed into mobile apps. 
+Capacitor wraps your web app in a native container, giving you access to device APIs like camera, filesystem, and push notifications while keeping your existing Vue codebase. Unlike Flutter or React Native, you don't need to rewrite anything — your Nuxt code runs as-is.
 
-This tutorial will guide you through the process, starting with a new Nuxt 4 app and then incorporating Capacitor to move into the realm of native mobile apps. Additionally, you can optionally use [Konsta UI v5](https://konstaui.com/) to enhance your mobile UI with Tailwind CSS 4.
+**What you'll learn:**
+- Configure your existing Nuxt app for static generation
+- Add Capacitor 8 with essential native plugins
+- Build and test on iOS and Android simulators
+- Enable live reload for faster development
+- Optionally add Konsta UI for native-looking components
 
-## About Capacitor
+> Looking to start a new project from scratch? Check out our guide on [Building a Nuxt Mobile App from Scratch](/blog/nuxt-mobile-app-capacitor-from-scratch/).
 
-CapacitorJS is truly a game-changer! You can effortlessly incorporate it into any web project, and it will wrap your application into a native webview, generating the native Xcode and Android Studio project for you. Plus, its plugins provide access to native device features like the camera via a JS bridge.
+### Benefits of Using Nuxt and Capacitor
 
-With Capacitor, you get a fantastic native mobile app without any complicated setup or steep learning curve. Its slim API and streamlined functionality make it a breeze to integrate into your project. Trust me, you'll be amazed at how effortless it is to achieve a fully functional native app with Capacitor!
+- **Code Reusability**: Share your Vue components and logic between web and mobile apps.
+- **Performance**: Nuxt's static generation creates optimized bundles perfect for mobile.
+- **Native Capabilities**: Access device features like camera, geolocation, and filesystem through Capacitor plugins.
+- **Simplified Development**: Use familiar Vue/Nuxt patterns without learning native development.
 
-## Preparing Your Nuxt 4 App
+## Prerequisites
 
-To create a new Nuxt 4 app, run the following command:
+Before you begin, make sure you have:
 
-```shell
-npx nuxi@latest init my-app
-cd my-app
-npm install
-```
+- **Node.js 18+** installed
+- An existing **Nuxt 4** application
+- **Xcode** (for iOS development, macOS only)
+- **Android Studio** (for Android development)
 
-### Nuxt 4 Directory Structure
+## Configuring Your Nuxt App for Mobile
 
-Nuxt 4 introduces a new default directory structure. The main application code now lives in the `app/` directory:
+The first step is to configure your Nuxt app for static generation. Capacitor needs static HTML/JS/CSS files to bundle into the native app.
 
-```
-my-app/
-  app/
-    assets/
-    components/
-    composables/
-    layouts/
-    middleware/
-    pages/
-    plugins/
-    utils/
-    app.vue
-  public/
-  server/
-  nuxt.config.ts
-  package.json
-```
-
-This new structure improves performance and provides better IDE type-safety by separating server and app contexts.
-
-In order to create a native mobile app, we require an **export** of our project. Thus, let's include a straightforward script in our **package.json** that can be utilized to build and copy the Nuxt project:
+Make sure your `package.json` has the generate script:
 
 ```json
 {
   "scripts": {
-    // ...
-    "generate": "nuxt generate"
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "mobile": "bun run generate && bunx cap sync",
+    "mobile:ios": "bun run mobile && bunx cap open ios",
+    "mobile:android": "bun run mobile && bunx cap open android"
   }
 }
 ```
 
-After executing the command `generate`, you should be able to spot a fresh `.output/public` folder at your project's root. In Nuxt 4, this is the new location for static output (previously `dist`).
+**Important:** If you're using server-side features (API routes, server middleware, etc.), you'll need to refactor those to use client-side alternatives or external APIs.
 
-This folder will be used by Capacitor later on, but for now, we must set it up correctly.
-
-## Adding Capacitor to Your Nuxt 4 App
-
-To package any web app into a native mobile container, we must follow a few initial steps, but afterward it's as simple as executing a single `sync` command.
-
-Firstly, we can install the [Capacitor CLI](https://capacitorjs.com/docs/cli/) as a development dependency, and then set it up within our project. During the setup, you can press “enter” to accept the default values for name and bundle ID.
-
-Next, we need to install the core package and the relevant packages for the iOS and Android platforms.
-
-Finally, we can add the platforms, and Capacitor will create folders for each platform at the root of our project:
+Test the static generation by running:
 
 ```shell
-# Install the Capacitor CLI locally
-npm install -D @capacitor/cli
-
-# Initialize Capacitor in your Nuxt project
-npx cap init
-
-# Install the required packages
-npm install @capacitor/core @capacitor/ios @capacitor/android
-
-# Add the native platforms
-npx cap add ios
-npx cap add android
+bun run generate
 ```
 
-By this point, you should be able to observe new **ios** and **android** folders in your Nuxt 4 project.
+You should see a `.output/public` folder with your static files. This is what Capacitor will bundle into your native app.
 
-**Those are real native projects!**
+## Adding Capacitor 8 to Your Project
 
-To access the Android project later, you must install [Android Studio](https://developer.android.com/studio/). For iOS, you need a Mac and should install [Xcode](https://developer.apple.com/xcode/).
+To package your Nuxt app into a native mobile container, follow these steps:
 
-Additionally, you should find a **capacitor.config.ts** file in your project, which contains some fundamental Capacitor settings utilized during the sync. The only thing you need to pay attention to is the **webDir**, which must point to the result of your build command. Currently, it is inaccurate.
+1. Install Capacitor core and CLI:
 
-For Nuxt 4, the static generation output is located at `.output/public` instead of the old `dist` directory.
+```shell
+bun add @capacitor/core
+bun add -D @capacitor/cli
+```
 
-To rectify this, open the **capacitor.config.ts** file and update the **webDir**:
+2. Install common Capacitor plugins you'll likely need:
+
+```shell
+bun add @capacitor/app @capacitor/keyboard @capacitor/splash-screen @capacitor/status-bar @capacitor/preferences
+```
+
+These plugins provide essential features:
+- **@capacitor/app**: Handle app lifecycle events (foreground/background, deep links)
+- **@capacitor/keyboard**: Control keyboard behavior on mobile
+- **@capacitor/splash-screen**: Manage the native splash screen
+- **@capacitor/status-bar**: Style the device status bar
+- **@capacitor/preferences**: Key-value storage (like localStorage but native)
+
+3. Initialize Capacitor with your project details:
+
+```shell
+bunx cap init my-app com.example.myapp --web-dir .output/public
+```
+
+Replace `my-app` with your app name and `com.example.myapp` with your app ID (reverse domain notation).
+
+4. Create or update the `capacitor.config.ts` file with the proper configuration:
 
 ```typescript
-import { CapacitorConfig } from '@capacitor/cli';
+import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.example.app',
+  appId: 'com.example.myapp',
   appName: 'my-app',
-  webDir: '.output/public'
+  webDir: '.output/public',
+  plugins: {
+    SplashScreen: {
+      launchShowDuration: 2000,
+      launchAutoHide: true,
+      androidScaleType: 'CENTER_CROP',
+      splashFullScreen: true,
+      splashImmersive: true,
+    },
+    Keyboard: {
+      resize: 'body',
+      resizeOnFullScreen: true,
+    },
+    StatusBar: {
+      style: 'dark',
+    },
+  },
 };
 
 export default config;
 ```
 
-You can try it out by executing the following commands:
+5. Install native platforms:
 
 ```shell
-npm run generate
-npx cap sync
+bun add @capacitor/ios @capacitor/android
 ```
 
-The first command `npm run generate` will simply build your Nuxt 4 project and copy the static build, while the second command `npx cap sync` will sync all the web code into the right places of the native platforms so they can be displayed in an app.
+6. Add the native platform folders:
 
-Additionally, the sync command might update the native platforms and install plugins, so when you install a new [Capacitor plugins](https://capacitorjs.com/docs/plugins/) it’s time to run `npx cap sync` again.
+```shell
+bunx cap add ios
+bunx cap add android
+```
 
-Without noticing, you are now actually done, so let’s see the app on a device!
+Capacitor will create `ios` and `android` folders at the root of your project containing the native projects.
 
-## Build and Deploy native apps
+To build the Android project, you need [Android Studio](https://developer.android.com/studio). For iOS, you need a Mac with [Xcode](https://developer.apple.com/xcode/).
+
+7. Build and sync your project:
+
+```shell
+bun run mobile
+```
+
+This runs your custom script that generates the static Nuxt build and syncs the files with the native platforms.
+
+## Building and Deploying Native Apps
+
+To build and deploy your native mobile app, follow these steps:
 
 To develop iOS apps, you need to have **Xcode** installed, and for Android apps, you need to have **Android Studio** installed. Moreover, if you plan to distribute your app on the app store, you need to enroll in the Apple Developer Program for iOS and the Google Play Console for Android.
 
-If you're new to native mobile development, you can use the Capacitor CLI to easily open both native projects:
+1. Open the native projects:
 
+For iOS:
 ```shell
-npx cap open ios
-npx cap open android
+bun run mobile:ios
 ```
 
-Once you've set up your native projects, deploying your app to a connected device is easy. In Android Studio, you just need to wait for everything to be ready, and you can deploy your app to a connected device without changing any settings. Here's an example: 
+For Android:
+```shell
+bun run mobile:android
+```
+
+Or directly with Capacitor CLI:
+```shell
+bunx cap open ios
+bunx cap open android
+```
+
+2. Build and run the app:
 
 ![android-studio-run](/android-studio-run.webp)
 
-In Xcode, you need to set up your signing account to deploy your app to a real device instead of just the simulator. If you haven't done this before, Xcode guides you through the process (but again, you need to be enrolled in the Developer Program). After that, you can simply hit play to run the app on your connected device, which you can select at the top. Here's an example:
+- In Android Studio, wait for the project to be ready, and then click on the "Run" button to deploy the app to a connected device or emulator.
 
 ![xcode-run](/xcode-run.webp)
 
-Congratulations! You have successfully deployed your Nuxt 4 web app to a mobile device. Here's an example:
+- In Xcode, set up your signing account to deploy the app to a real device. If you haven't done this before, Xcode will guide you through the process (note that you need to be enrolled in the Apple Developer Program). Once set up, click on the "Play" button to run the app on your connected device.
+
+Congratulations! You have successfully deployed your Nuxt web app to a mobile device.
 
 <div class="mx-auto" style="width: 50%;">
   <img src="/nuxtjs-mobile-app.webp" alt="nuxtjs-mobile-app">
@@ -170,145 +211,154 @@ But hold on, there's also a faster way to do this during development...
 
 ## Capacitor Live Reload
 
-By now, you're probably used to having hot reload with all modern frameworks, and the good news is that you can have the same functionality **on a mobile device** with minimal effort!
+During development, you can take advantage of live reloading to see changes instantly on your mobile device. To enable this feature, follow these steps:
 
-Enable access to your locally hosted application with live reload **on your network** by having the Capacitor app load the content from the specific URL.
+1. Find your local IP address:
 
-The first step is to figure out your local IP address. If you're using a Mac, you can find this out by running the following command in the terminal:
+- On macOS, run the following command in the terminal:
+  ```shell
+  ipconfig getifaddr en0
+  ```
 
-```shell
-ipconfig getifaddr en0
-```
+- On Windows, run:
+  ```shell
+  ipconfig
+  ```
+  Look for the IPv4 address in the output.
 
-On Windows, run :
+2. Update your `capacitor.config.ts` to point to your development server:
 
-```shell
-ipconfig
-```
-
-Then look for the IPv4 address.
-
-We can instruct Capacitor to load the app directly from the server by adding another entry to our `capacitor.config.ts` file:
-
-```javascript
-import { CapacitorConfig } from '@capacitor/cli';
+```typescript
+import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.example.app',
   appName: 'my-app',
   webDir: '.output/public',
-  bundledWebRuntime: false,
   server: {
-    url: 'http://192.168.x.xx:3000',
-    cleartext: true
-  }
+    url: 'http://YOUR_IP_ADDRESS:3000',
+    cleartext: true,
+  },
+  plugins: {
+    // ... your plugin config
+  },
 };
 
 export default config;
 ```
 
-Be sure to use **the correct IP and port**, I have used the default Nuxt 4 port in this example.
+Replace `YOUR_IP_ADDRESS` with your local IP address (e.g., `192.168.1.100`).
 
-Now, we can apply these changes by copying them over to our native project:
+3. Apply the changes to your native project:
 
 ```shell
-npx cap copy
+bunx cap copy
 ```
 
-The `copy` command is similar to `sync`, but it will only **copy over the changes made to the web folder** and configuration, without updating the native project.
+The `copy` command copies the web folder and configuration changes to the native project without updating the entire project.
 
-You can now deploy your app one more time through Android Studio or Xcode. After that, if you change something in your Nuxt app, **the app will automatically reload** and show the changes!
+4. Start your Nuxt dev server and rebuild in Xcode/Android Studio:
 
-**Keep in mind** that if you install new plugins such as the camera, it still requires a rebuild of your native project. This is because native files are changed, and it can't be done on the fly.
+```shell
+bun run dev
+```
 
-Note that you should use the correct IP and port in your configuration. The code block above shows the default Nuxt 4 port for demonstration purposes.
+Now, whenever you make changes to your Nuxt app, the mobile app will automatically reload to reflect those changes.
+
+**Note:** If you install new plugins or make changes to native files, you'll need to rebuild the native project since live reloading only applies to web code changes.
 
 ## Using Capacitor Plugins
 
-Let's take a look at how to use a Capacitor plugin in action, which we've mentioned a few times before. To do this, we can install a fairly simple plugin by running:
+Capacitor plugins allow you to access native device features from your Nuxt app. Let's explore how to use the [Share plugin](https://capacitorjs.com/docs/apis/share/) as an example:
+
+1. Install the Share plugin:
 
 ```shell
-npm i @capacitor/share
+bun add @capacitor/share
 ```
 
-There's nothing fancy about the [Share plugin](https://capacitorjs.com/docs/apis/share/), but it anyway brings up the native share dialog! For this we now only need to import the package and call the according `share()` function from our app. 
+2. Create or update a page to use the Share plugin. In Nuxt 4, pages go in `app/pages/`:
 
-In Nuxt 4, pages go in the `app/pages/` directory, so let's create **app/pages/index.vue** with this content:
-
-```html
+```vue
 <template>
-  <div>
-    <p>Welcome to Nuxt 4 and Capacitor!</p>
-    <button @click="share">Share now!</button>
+  <div class="p-6">
+    <h1 class="text-2xl font-bold mb-4">Welcome to Nuxt + Capacitor!</h1>
+    <button
+      @click="shareContent"
+      class="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold"
+    >
+      Share now!
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { Share } from '@capacitor/share';
 
-async function share() {
+async function shareContent() {
   await Share.share({
-    title: 'Open Youtube',
-    text: 'Check new video on youtube',
-    url: 'https://www.youtube.com',
-    dialogTitle: 'Share with friends'
+    title: 'Check this out!',
+    text: 'Built with Nuxt and Capacitor',
+    url: 'https://capacitorjs.com',
+    dialogTitle: 'Share with friends',
   });
 }
 </script>
 ```
 
-As mentioned earlier, when installing new plugins, we need to perform a sync operation and then redeploy the app to our device. To do this, run the following command:
+3. Sync the changes with the native project:
 
-```
-npx cap sync
+```shell
+bun run mobile
 ```
 
-After hitting the button, you can witness the beautiful native share dialog in action!
+Or just sync without rebuilding:
+```shell
+bunx cap sync
+```
+
+4. Rebuild and run the app on your device.
+
+Now, when you click the "Share now!" button, the native share dialog will appear.
 
 ## Adding Konsta UI v5 with Tailwind CSS 4
 
-To use Konsta UI v5 in your Nuxt 4 app, you need to have [Tailwind CSS 4 installed](https://tailwindcss.com/docs/installation/framework-guides/nuxt/) and to install the package:
+To make the button look more mobile-friendly, you can add Konsta UI for native-looking iOS and Android components.
+
+You need to have [Tailwind CSS 4 already installed](https://tailwindcss.com/docs/installation/framework-guides/nuxt).
+
+1. Install the required packages:
 
 ```shell
-npm i konsta
+bun add konsta
+bun add tailwindcss @tailwindcss/vite
 ```
 
-Install Tailwind for Nuxt (Vite plugin):
+2. Configure the Vite plugin in `nuxt.config.ts`:
 
-```shell
-npm install tailwindcss @tailwindcss/vite
-```
-
-Configure the Vite plugin and add global CSS in `nuxt.config.ts`:
-
-```ts
-import tailwindcss from '@tailwindcss/vite'
+```typescript
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
+  compatibilityDate: '2025-01-15',
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   vite: {
     plugins: [tailwindcss()],
   },
-})
+});
 ```
 
-Create `app/assets/css/main.css` and import Tailwind & Konsta UI theme:
+3. Create `app/assets/css/main.css`:
 
 ```css
 @import 'tailwindcss';
-/* import Konsta UI v5 theme */
 @import 'konsta/theme.css';
 ```
 
-Konsta UI v5 is already imported via CSS (`@import 'konsta/theme.css'`), no Tailwind config file is required in v4.
+4. Wrap your app with the Konsta UI `App` component in `app/app.vue`:
 
-Now we need to set up the main [App](https://konstaui.com/vue/app/) component so we can set some global parameters (like `theme`).
-
-We need to wrap the whole app with `App` in the `app.vue`:
-
-```html
+```vue
 <template>
   <App theme="ios">
     <NuxtPage />
@@ -320,45 +370,19 @@ import { App } from 'konsta/vue';
 </script>
 ```
 
-### Roboto Font for Material Design
+5. Update your page to use Konsta UI components:
 
-Konsta UI v5 uses system font for iOS theme and Roboto font for Material Design theme. If you're developing a web app, add the Roboto font to your app:
-
-In your `nuxt.config.ts`, add the font links to the app head:
-
-```javascript
-export default defineNuxtConfig({
-  app: {
-    head: {
-      link: [
-        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true },
-        {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap'
-        }
-      ]
-    }
-  }
-})
-```
-
-### Example Page
-
-Now when everything is set up, we can use Konsta UI v5 Vue components in our Nuxt 4 pages.
-
-For example, let's create `app/pages/index.vue` with the following content:
-
-```html
+```vue
 <template>
   <Page>
     <Navbar title="My App" />
 
     <Block strong>
       <p>
-        Here is your Nuxt 4 & Konsta UI app. Let's see what we have here.
+        Here is your Nuxt & Konsta UI app. Let's see what we have here.
       </p>
     </Block>
+
     <BlockTitle>Navigation</BlockTitle>
     <List>
       <ListItem href="/about/" title="About" />
@@ -380,15 +404,32 @@ import {
   Button,
   List,
   ListItem,
-  Link,
   BlockTitle,
 } from 'konsta/vue';
 </script>
 ```
 
-If the live reload is out of sync after installing all the necessary components, try restarting everything. Once you have done that, you should see a mobile app with a somewhat native look, built with Nuxt 4, Capacitor, Tailwind CSS 4, and Konsta UI v5!
+6. Add Roboto font for Material Design theme in `nuxt.config.ts`:
 
-You should see the following page as a result:
+```typescript
+export default defineNuxtConfig({
+  app: {
+    head: {
+      link: [
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap',
+        },
+      ],
+    },
+  },
+  // ... rest of config
+});
+```
+
+Your Nuxt app should now have a native-looking mobile UI:
 
 <div class="mx-auto" style="width: 50%;">
   <img src="/konsta-nuxt.webp" alt="konsta-nuxt">
@@ -396,12 +437,28 @@ You should see the following page as a result:
 
 ## Conclusion
 
-Capacitor is an excellent option for building native applications based on an existing web project, offering a simple way to share code and maintain a consistent UI. 
+You've successfully converted your existing Nuxt web application into native iOS and Android apps using Capacitor 8. Your Vue codebase now runs natively on mobile devices with access to device APIs.
 
-And with the addition of [Capgo](https://capgo.app/), it's even easier to add live updates to your app, ensuring that your users always have access to the latest features and bug fixes.
+**What you accomplished:**
+- Configured Nuxt for static generation
+- Added Capacitor 8 with essential plugins
+- Built and deployed to iOS and Android simulators
+- Enabled live reload for development
+- Optionally added Konsta UI for native-looking components
 
-If you would like to learn how to add Capgo to your Next.js app, take a look at the next article :
+**Next steps:**
+- Set up [Capgo](https://capgo.app/) for over-the-air updates without app store resubmission
+- Add more native plugins like Camera, Geolocation, or Push Notifications
+- Configure app icons and splash screens for production
+- Prepare your app for App Store and Google Play submission
 
-## Credits
+> Starting a brand new project? Check out [Building a Nuxt Mobile App from Scratch](/blog/nuxt-mobile-app-capacitor-from-scratch/) for a guided walkthrough.
 
-Thanks a lot to Simon, this article is based on [this article](https://devdactic.com/nextjs-and-capacitor/) rewritten for Nuxt 4 and adapted.
+## Resources
+
+- [Nuxt Documentation](https://nuxt.com/docs)
+- [Capacitor 8 Documentation](https://capacitorjs.com/docs)
+- [Konsta UI Vue Documentation](https://konstaui.com/vue)
+- [Capgo - Live Updates for Capacitor Apps](https://capgo.app/)
+
+Learn how Capgo can help you build better apps faster, [sign up for a free account](/register/) today.
