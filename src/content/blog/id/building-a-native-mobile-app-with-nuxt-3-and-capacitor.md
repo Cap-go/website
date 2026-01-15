@@ -211,7 +211,7 @@ Tidak ada yang istimewa tentang [Share plugin](https://capacitorjs.com/docs/apis
 ```html
 <template>
   <div>
-    <h1>Welcome to Nuxt 3 and Capacitor!</h1>
+    <p>Welcome to Nuxt 3 and Capacitor!</p>
     <button @click="share">Share now!</button>
   </div>
 </template>
