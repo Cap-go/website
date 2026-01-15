@@ -6,7 +6,7 @@ author: Michael (WcaleNieWolny)
 author_image_url: 'https://avatars.githubusercontent.com/u/50914789?v=4'
 author_url: 'https://github.com/WcaleNieWolny/WcaleNieWolny'
 created_at: 2025-12-31T00:00:00.000Z
-updated_at: 2025-12-31T00:00:00.000Z
+updated_at: 2026-01-15T23:09:26.000Z
 head_image: /capgo-2025-recap-blog-post-img.webp
 head_image_alt: Capgo 2025 Year in Review
 keywords: Capgo, year in review, 2025, enterprise features, security, OTA updates, Capacitor, plugins
