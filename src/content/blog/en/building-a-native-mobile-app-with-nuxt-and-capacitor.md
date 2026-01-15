@@ -238,7 +238,7 @@ In Nuxt 4, pages go in the `app/pages/` directory, so let's create **app/pages/i
 ```html
 <template>
   <div>
-    <h1>Welcome to Nuxt 4 and Capacitor!</h1>
+    <p>Welcome to Nuxt 4 and Capacitor!</p>
     <button @click="share">Share now!</button>
   </div>
 </template>
