@@ -146,6 +146,6 @@ AGPL adalah lisensi yang bermasalah bagi Google, karena mereka tidak siap untuk 
 
 Tujuan AGPL adalah untuk memaksimalkan kebebasan pengguna dan mendorong perusahaan untuk berkontribusi pada open-source. Saya adalah aplikasi mandiri yang menghadap pengguna. Saya bukan pustaka atau bagian dari proyek yang lebih besar. Saya tidak mencari donasi dari Google, jadi kami senang menggunakan lisensi AGPL. Ini adalah lisensi yang tepat untuk Capgo.
 
-# Kesimpulan
+## Kesimpulan
 
 Ada banyak faktor yang perlu dipertimbangkan saat memilih lisensi perangkat lunak open-source. Namun, ada pilihan populer di kalangan komunitas pengembang. Lisensi permisif yang umum termasuk MIT License, Apache License, dan BSD License. Beberapa lisensi copyleft yang umum termasuk GNU General Public License dan Mozilla Public License.

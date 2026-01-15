@@ -145,6 +145,6 @@ AGPL is a license Google has a problem with, as they’re not prepared to divulg
 
 The goal of the AGPL is to maximize user freedom and to encourage companies to contribute to open-source. I'm a user facing, standalone application. I'm not a library or a piece of a bigger project. I'm not looking for Google’s donations, so we’re happy to be AGPL-licensed. It is the right license for Capgo.
 
-# Conclusion
+## Conclusion
 
 There are many factors to consider when choosing an open-source software license. Yet, there are certainly popular choices among the developer community. Common permissive licenses include the MIT License, Apache License, and BSD License. Some common copyleft licenses include the GNU General Public License and the Mozilla Public License.
