@@ -70,6 +70,10 @@ const navigation: Record<string, NavigationItem[]> = {
       name: m.pricing({}, { locale: Astro.locals.locale }),
       href: getRelativeLocaleUrl(Astro.locals.locale, 'pricing'),
     },
+    {
+      name: 'App store publishing costs',
+      href: getRelativeLocaleUrl(Astro.locals.locale, 'cost/cost-to-publish-app-on-app-store'),
+    },
     { name: m.blog({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'blog') },
     {
       name: () => m.all_systems_normal({}, { locale: Astro.locals.locale }),
