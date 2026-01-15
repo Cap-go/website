@@ -74,7 +74,7 @@ Después de la inicialización, integra la funcionalidad de actualización OTA e
 
 Para seguridad a nivel empresarial, Capgo proporciona opciones tanto en la nube como auto-alojadas.
 
-Cuando la integración esté completa, compila tu app y activa actualizaciones usando el CLI de Capgo. Como Capgo funciona perfectamente con Capacitor 6 y 7, soporta una amplia gama de entornos de desarrollo modernos.
+Cuando la integración esté completa, compila tu app y activa actualizaciones usando el CLI de Capgo. Como Capgo funciona perfectamente con Capacitor 8, soporta una amplia gama de entornos de desarrollo modernos.
 
 Estos pasos sientan las bases para pruebas exhaustivas de actualizaciones OTA, que se cubrirán en la siguiente sección sobre Métodos de Prueba.
 

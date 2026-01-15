@@ -90,7 +90,7 @@ Laut Capgo halten sich 95% der Nutzer innerhalb von 24 Stunden an Updates. Mit �
 Bevor Sie mit der Erstellung des Manifests beginnen, stellen Sie sicher, dass Sie Folgendes haben:
 
 -   Xcode 15 oder höher installiert
--   Ein Capacitor 5.0+ Projekt eingerichtet
+-   Ein Capacitor 8.0+ Projekt eingerichtet
 -   Zugriff auf die `Info.plist`-Datei Ihrer App
 -   Ein grundlegendes Verständnis der JSON-Struktur
 -   Dokumentation über die Datenerfassungspraktiken Ihrer App

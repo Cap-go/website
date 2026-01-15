@@ -76,7 +76,7 @@ Erfahren Sie, wie Sie Apples Datenschutzregeln in Ihrer Capacitor-App mit dieser
 Stellen Sie vor Beginn Folgendes sicher:
 
 -   Sie haben **Xcode 15 oder höher** für Privacy Manifest-Unterstützung.
--   Capacitor 6 oder 7 ist installiert.
+-   Capacitor 8 ist installiert.
 -   Das iOS-Deployment-Target ist auf **iOS 14.5 oder höher** eingestellt.
 -   Ihre App enthält eine korrekt konfigurierte `Info.plist`-Datei.
 -   Sie haben einen **Apple Developer Account** mit gültigen Zertifikaten.

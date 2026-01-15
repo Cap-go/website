@@ -207,7 +207,7 @@ Getting started with Capgo is straightforward. You can initialize it with a simp
 npx @capgo/cli init
 ```
 
-This feature streamlines the update process, keeping your app up-to-date without the delays of traditional review cycles. Capgo is compatible with both Capacitor 6 and 7, making it a flexible choice for your existing setup.
+This feature streamlines the update process, keeping your app up-to-date without the delays of traditional review cycles. Capgo is compatible with both Capacitor 8, making it a flexible choice for your existing setup.
 
 | **Feature** | **Description** | **Benefit** |
 | --- | --- | --- |

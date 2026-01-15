@@ -158,7 +158,7 @@ When transitioning to a new major version, follow these steps:
     ```
     
 
-Capgo provides live updates for Capacitor 6 and 7, allowing you to apply fixes without needing app store approvals [\[1\]](https://capgo.app/).
+Capgo provides live updates for Capacitor 8, allowing you to apply fixes without needing app store approvals [\[1\]](https://capgo.app/).
 
 ## Avoiding Future Version Conflicts
 

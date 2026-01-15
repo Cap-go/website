@@ -215,7 +215,7 @@ Dokumentasi resmi Capacitor adalah sumber daya utama. Ini mencakup referensi API
 
 ![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
 
-Capgo membuat pembaruan aplikasi instan menjadi sederhana. Telah mengirimkan 23,5 juta pembaruan di 750 aplikasi produksi, dengan tingkat keberhasilan 82%. Mengesankan, 95% pengguna aktif menerima pembaruan dalam 24 jam. CDN globalnya dapat mengunduh bundle 5MB hanya dalam 114ms. Capgo mendukung Capacitor 6 dan 7, menawarkan kemampuan pembaruan parsial [\[1\]](https://capgo.app/).
+Capgo membuat pembaruan aplikasi instan menjadi sederhana. Telah mengirimkan 23,5 juta pembaruan di 750 aplikasi produksi, dengan tingkat keberhasilan 82%. Mengesankan, 95% pengguna aktif menerima pembaruan dalam 24 jam. CDN globalnya dapat mengunduh bundle 5MB hanya dalam 114ms. Capgo mendukung Capacitor 8, menawarkan kemampuan pembaruan parsial [\[1\]](https://capgo.app/).
 
 > "Kami menerapkan pengembangan agile dan @Capgo sangat penting dalam memberikan layanan secara berkelanjutan kepada pengguna kami!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 

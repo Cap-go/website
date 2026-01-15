@@ -112,7 +112,7 @@ CAPGO_APP_ID=your_app_id
 
 ### Compatibility and Reliability
 
-The Capgo CLI supports Capacitor 6 and 7, ensuring it works with the latest versions while maintaining dependable update functionality.
+The Capgo CLI supports Capacitor 8, ensuring it works with the latest versions while maintaining dependable update functionality.
 
 | Script Command | Purpose | When to Use |
 | --- | --- | --- |

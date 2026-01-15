@@ -156,7 +156,7 @@ Sejak 2022, lanskap keamanan CI/CD telah mengalami kemajuan signifikan, dan Capg
 
 > "Kami saat ini mencoba @Capgo sejak Appcenter menghentikan dukungan pembaruan langsung pada aplikasi hibrida dan @AppFlow terlalu mahal." - Simon Flack[\[1\]](https://capgo.app)
 
-Biaya pengaturan CI/CD satu kali Capgo sebesar $2,600 menawarkan penghematan jangka panjang, dengan estimasi penghematan $26,100 dalam lima tahun[\[1\]](https://capgo.app). Dukungan untuk Capacitor 6 & 7, bersama dengan fitur untuk manajemen organisasi yang fleksibel, menjadikannya pilihan yang sangat baik untuk tim kecil dan perusahaan besar, terutama yang memprioritaskan langkah-langkah keamanan yang kuat.
+Biaya pengaturan CI/CD satu kali Capgo sebesar $2,600 menawarkan penghematan jangka panjang, dengan estimasi penghematan $26,100 dalam lima tahun[\[1\]](https://capgo.app). Dukungan untuk Capacitor 8, bersama dengan fitur untuk manajemen organisasi yang fleksibel, menjadikannya pilihan yang sangat baik untuk tim kecil dan perusahaan besar, terutama yang memprioritaskan langkah-langkah keamanan yang kuat.
 
 ## Kesimpulan: Meningkatkan CI/CD dengan Rotasi Token
 

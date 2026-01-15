@@ -80,7 +80,7 @@ Atur izin untuk pengelolaan saluran yang aman dan efisien:
 | Developer | Akses terbatas | Menerapkan dan menguji pembaruan |
 | Viewer | Hanya baca | Memantau status pembaruan |
 
-Tetapkan peran kepada tim Anda berdasarkan tanggung jawab mereka. Capgo bekerja dengan lancar baik dengan Capacitor 6 maupun 7, memastikan sesuai dengan berbagai kebutuhan proyek.
+Tetapkan peran kepada tim Anda berdasarkan tanggung jawab mereka. Capgo bekerja dengan lancar dengan Capacitor 8, memastikan sesuai dengan berbagai kebutuhan proyek.
 
 Untuk kenyamanan tambahan, Capgo terintegrasi dengan alat CI/CD populer seperti [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/), dan [Jenkins](https://www.jenkins.io/). Pastikan sistem build Anda siap untuk menangani manajemen saluran pembaruan.
 

@@ -207,7 +207,7 @@ Capgo proporciona herramientas clave para gestionar efectivamente las actualizac
 | Control de Versiones | Revertir rápidamente a versiones anteriores | Capacidad de reversión instantánea |
 | Integración CI/CD | Automatizar despliegues a través de herramientas Git | Integración de flujo de trabajo optimizada |
 
-Capgo es compatible con Capacitor 6 y 7 y ofrece opciones de despliegue tanto en la nube como [auto-alojado](https://capgo.app/blog/self-hosted-capgo/). Esta flexibilidad asegura una gestión precisa de actualizaciones mientras se mantiene el cumplimiento con los requisitos de la tienda de aplicaciones [\[1\]](https://capgo.app/).
+Capgo es compatible con Capacitor 8 y ofrece opciones de despliegue tanto en la nube como [auto-alojado](https://capgo.app/blog/self-hosted-capgo/). Esta flexibilidad asegura una gestión precisa de actualizaciones mientras se mantiene el cumplimiento con los requisitos de la tienda de aplicaciones [\[1\]](https://capgo.app/).
 
 ## Resumen
 

@@ -89,7 +89,7 @@ Para finalizar la configuración, define estas variables de entorno:
 
 ### Compatibilidad y Confiabilidad
 
-El CLI de Capgo es compatible con Capacitor 6 y 7, asegurando que funcione con las últimas versiones mientras mantiene una funcionalidad de actualización confiable
+El CLI de Capgo es compatible con Capacitor 8, asegurando que funcione con las últimas versiones mientras mantiene una funcionalidad de actualización confiable
 
 | Comando Script | Propósito | Cuándo Usar |
 | --- | --- | --- |

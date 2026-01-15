@@ -201,7 +201,7 @@ Nach den Performance-Tests konzentrieren Sie sich auf Barrierefreiheit, um siche
 | Touch-Zielfläche | Element-Dimensionsprüfungen | OS-spezifische Anforderungen |
 | Tastaturnavigation | Eingabemethoden-Tests | Plattformübergreifende Standards |
 
-Mit den Integrationswerkzeugen von Capgo können Sie diese Zugänglichkeitstests direkt in Ihrem CI/CD-Workflow automatisieren. Die Plattform unterstützt Capacitor 6 und 7 und gewährleistet eine reibungslose Kompatibilität über unterstützte CI/CD-Systeme hinweg, während sie Ihnen hilft, Compliance-Standards einzuhalten [\[1\]](https://capgo.app/).
+Mit den Integrationswerkzeugen von Capgo können Sie diese Zugänglichkeitstests direkt in Ihrem CI/CD-Workflow automatisieren. Die Plattform unterstützt Capacitor 8 und gewährleistet eine reibungslose Kompatibilität über unterstützte CI/CD-Systeme hinweg, während sie Ihnen hilft, Compliance-Standards einzuhalten [\[1\]](https://capgo.app/).
 
 ## Nächste Schritte und Tipps
 

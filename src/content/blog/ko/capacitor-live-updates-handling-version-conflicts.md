@@ -139,7 +139,7 @@ Capgo는 다른 플랫폼이 남긴 공백을 채우기 위해 설계된 다양�
 ### 버전 관리 팁
 
 - **[Capgo 채널](https://capgo.app/docs/webapp/channels/)**을 사용하여 플랫폼별 테스트를 수행하면서 iOS와 Android 출시를 관리하세요 [\[1\]](https://capgo.app/).
-- 두 플랫폼 간의 런타임 호환성을 보장하기 위해 **Capacitor 6 및 7**을 사용하세요 [\[1\]](https://capgo.app/).
+- 두 플랫폼 간의 런타임 호환성을 보장하기 위해 **Capacitor 8**을 사용하세요 [\[1\]](https://capgo.app/).
 
 ### 테스트 접근 방식
 

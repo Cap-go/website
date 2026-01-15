@@ -117,7 +117,7 @@ CAPGO_APP_ID=your_app_id
 
 ### Compatibilité et fiabilité
 
-Le CLI Capgo prend en charge Capacitor 6 et 7, garantissant qu'il fonctionne avec les dernières versions tout en maintenant une fonctionnalité de mise à jour fiable.
+Le CLI Capgo prend en charge Capacitor 8, garantissant qu'il fonctionne avec les dernières versions tout en maintenant une fonctionnalité de mise à jour fiable.
 
 | Commande de script | Objectif | Quand l'utiliser |
 | --- | --- | --- |

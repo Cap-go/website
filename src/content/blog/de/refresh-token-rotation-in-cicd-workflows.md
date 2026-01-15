@@ -226,7 +226,7 @@ Seit 2022 hat sich die CI/CD-Sicherheitslandschaft erheblich weiterentwickelt, u
 
 > "Wir probieren derzeit @Capgo aus, da Appcenter den Support für Live-Updates bei hybriden Apps eingestellt hat und @AppFlow viel zu teuer ist." - Simon Flack[\[1\]](https://capgo.app)
 
-Die einmalige CI/CD-Einrichtungsgebühr von Capgo in Höhe von 2.600 USD bietet langfristige Einsparungen, mit geschätzten 26.100 USD, die über fünf Jahre eingespart werden[\[1\]](https://capgo.app). Die Unterstützung für Capacitor 6 & 7 sowie Funktionen für flexibles Organisationsmanagement machen es zu einer ausgezeichneten Option für kleine Teams und große Unternehmen, insbesondere für solche, die robuste Sicherheitsmaßnahmen priorisieren.
+Die einmalige CI/CD-Einrichtungsgebühr von Capgo in Höhe von 2.600 USD bietet langfristige Einsparungen, mit geschätzten 26.100 USD, die über fünf Jahre eingespart werden[\[1\]](https://capgo.app). Die Unterstützung für Capacitor 8 sowie Funktionen für flexibles Organisationsmanagement machen es zu einer ausgezeichneten Option für kleine Teams und große Unternehmen, insbesondere für solche, die robuste Sicherheitsmaßnahmen priorisieren.
 
 ## Fazit: Verbesserung von CI/CD mit Token-Rotation
 

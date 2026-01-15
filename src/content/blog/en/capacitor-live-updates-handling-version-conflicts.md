@@ -138,7 +138,7 @@ This section builds on the live update tools overview, focusing on strategies to
 ### Version Control Tips
 
 -   Use **[Capgo channels](https://capgo.app/docs/webapp/channels/)** to manage iOS and Android rollouts while conducting platform-specific tests [\[1\]](https://capgo.app/).
--   Stick to **Capacitor 6 and 7** to ensure runtime compatibility across both platforms [\[1\]](https://capgo.app/).
+-   Stick to **Capacitor 8** to ensure runtime compatibility across both platforms [\[1\]](https://capgo.app/).
 
 ### Testing Approaches
 

@@ -206,7 +206,7 @@ Capgo bietet wichtige Werkzeuge zur effektiven Verwaltung von App-Updates und Me
 | Versionskontrolle | Schnelles Zurücksetzen auf vorherige Versionen | Sofortige Rückrollfähigkeit |
 | CI/CD-Integration | Automatisierung von Bereitstellungen über Git-Tools | Optimierte Workflow-Integration |
 
-Capgo unterstützt Capacitor 6 und 7 und bietet sowohl cloudbasierte als auch [selbst gehostete Bereitstellungs](https://capgo.app/blog/self-hosted-capgo/) Optionen an. Diese Flexibilität gewährleistet eine präzise Aktualisierungsverwaltung und bleibt dabei konform mit den Anforderungen der App-Stores [\[1\]](https://capgo.app/).
+Capgo unterstützt Capacitor 8 und bietet sowohl cloudbasierte als auch [selbst gehostete Bereitstellungs](https://capgo.app/blog/self-hosted-capgo/) Optionen an. Diese Flexibilität gewährleistet eine präzise Aktualisierungsverwaltung und bleibt dabei konform mit den Anforderungen der App-Stores [\[1\]](https://capgo.app/).
 
 ## Zusammenfassung
 

@@ -95,7 +95,7 @@ Follow these steps to configure platform-specific settings:
 
 > "We rolled out Capgo OTA updates in production for our user base of +5000. We're seeing very smooth operation almost all our users are up to date within minutes of the OTA being deployed to @Capgo." - colenso [\[1\]](https://capgo.app/)
 
-These steps ensure your project is compatible with Capacitor v6/v7 and ready for seamless OTA updates.
+These steps ensure your project is compatible with Capacitor v8 and ready for seamless OTA updates.
 
 ## OTA Update Implementation Steps
 
@@ -103,7 +103,7 @@ Here's a step-by-step guide to implementing Over-The-Air (OTA) updates using Cap
 
 ### Setting Up Capacitor CLI
 
-Before you begin, make sure your project is compatible with Capacitor 6 or 7.
+Before you begin, make sure your project is compatible with Capacitor 8.
 
 ### Adding OTA Updates
 

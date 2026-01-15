@@ -196,7 +196,7 @@ Follow these steps to get started with Capgo:
 -   Enable error tracking to catch and fix issues early.
 -   Keep the rollback feature ready to quickly address any problems.
 
-Capgo is compatible with Capacitor 6 and 7, integrates smoothly with CI/CD pipelines, and complies with Apple and Google store requirements.
+Capgo is compatible with Capacitor 8, integrates smoothly with CI/CD pipelines, and complies with Apple and Google store requirements.
 
 ## Common Issues and Tips
 

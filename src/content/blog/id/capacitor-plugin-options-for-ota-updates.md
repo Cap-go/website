@@ -62,7 +62,7 @@ Berikut yang ditawarkan Capgo:
 -   **Analitik real-time dan pelacakan kesalahan**
 -   **Integrasi CI/CD yang lancar**
 -   **Pilihan cloud atau self-hosted**
--   **Kompatibel dengan Capacitor 6 & 7**
+-   **Kompatibel dengan Capacitor 8**
 
 Plugin lain juga melayani kebutuhan dan wilayah tertentu.
 

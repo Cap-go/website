@@ -198,7 +198,7 @@ Ensure all technical systems are set up to meet compliance standards.
 
 Confirm your development environment includes:
 
--   Compatibility with Capacitor 6 and 7
+-   Compatibility with Capacitor 8
 -   Flexible hosting capabilities
 -   End-to-end encryption
 -   Integrated analytics

@@ -218,6 +218,6 @@ Los costos pueden variar ampliamente según tus necesidades. Por ejemplo, ejecut
 
 ### **Requisitos Técnicos**
 
-Al elegir una plataforma, asegúrate de que soporte tu **[versión de Capacitor](https://capgo.app/plugins/ivs-player/)** específica (por ejemplo, Capacitor 6 o 7) y ofrezca características esenciales como análisis, seguimiento de errores, opciones de reversión para control de versiones e integración CI/CD sin problemas. Estas características aseguran operaciones fluidas a medida que tu aplicación escala.
+Al elegir una plataforma, asegúrate de que soporte tu **[versión de Capacitor](https://capgo.app/plugins/ivs-player/)** específica (por ejemplo, Capacitor 8) y ofrezca características esenciales como análisis, seguimiento de errores, opciones de reversión para control de versiones e integración CI/CD sin problemas. Estas características aseguran operaciones fluidas a medida que tu aplicación escala.
 
 La mejor plataforma alcanzará el equilibrio correcto entre rendimiento, seguridad y costo. Aprovecha las pruebas gratuitas - como la prueba de 15 días de Capgo - para ver si la plataforma se alinea con tus necesidades [\[1\]](https://capgo.app/).

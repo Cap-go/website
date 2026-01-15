@@ -79,7 +79,7 @@ Richten Sie Berechtigungen für sichere und effiziente Kanalverwaltung ein:
 | Entwickler | Eingeschränkter Zugriff | Updates bereitstellen und testen |
 | Betrachter | Nur-Lesen | Update-Status überwachen |
 
-Weisen Sie Ihrem Team Rollen basierend auf ihren Verantwortlichkeiten zu. Capgo funktioniert nahtlos mit Capacitor 6 und 7 und passt sich so verschiedenen Projektanforderungen an.
+Weisen Sie Ihrem Team Rollen basierend auf ihren Verantwortlichkeiten zu. Capgo funktioniert nahtlos mit Capacitor 8 und passt sich so verschiedenen Projektanforderungen an.
 
 Für zusätzlichen Komfort integriert sich Capgo mit beliebten CI/CD-Tools wie [GitHub Actions](https://docsgithubcom/actions), [GitLab CI](https://docsgitlabcom/ee/ci/) und [Jenkins](https://wwwjenkinsio/). Stellen Sie nur sicher, dass Ihr Build-System bereit ist, die Update-Kanalverwaltung zu handhaben.
 

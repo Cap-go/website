@@ -130,7 +130,7 @@ Después de examinar las comparaciones detalladas de características y precios,
 
 ### Principales Diferencias
 
-Capgo y Appflow se desvían significativamente en términos de disponibilidad futura, estructura de precios y enfoque técnico. Capgo se destaca con características como **cifrado de extremo a extremo**, soporte para **Capacitor 6 y 7**, y la flexibilidad de opciones de **despliegue en la nube y auto alojado**. Estos factores brindan a los desarrolladores más control y soluciones rentables, especialmente considerando el cierre planeado de Appflow en 2026 [\[1\]](https://capgo.app).
+Capgo y Appflow se desvían significativamente en términos de disponibilidad futura, estructura de precios y enfoque técnico. Capgo se destaca con características como **cifrado de extremo a extremo**, soporte para **Capacitor 8**, y la flexibilidad de opciones de **despliegue en la nube y auto alojado**. Estos factores brindan a los desarrolladores más control y soluciones rentables, especialmente considerando el cierre planeado de Appflow en 2026 [\[1\]](https://capgo.app).
 
 | Aspecto | Capgo | Appflow |
 | --- | --- | --- |

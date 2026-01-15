@@ -114,7 +114,7 @@ CHANNEL=production
 
 ### Compatibilità e affidabilità
 
-La CLI di Capgo supporta Capacitor 6 e 7, assicurando che funzioni con le ultime versioni mantenendo una funzionalità di aggiornamento affidabile.
+La CLI di Capgo supporta Capacitor 8, assicurando che funzioni con le ultime versioni mantenendo una funzionalità di aggiornamento affidabile.
 
 | Comando Script | Scopo | Quando usarlo |
 | --- | --- | --- |

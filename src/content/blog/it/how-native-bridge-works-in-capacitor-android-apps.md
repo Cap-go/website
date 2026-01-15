@@ -34,7 +34,7 @@ next_blog: ''
     -   **Da JavaScript ad Android:** Invia richieste serializzate ai metodi Android nativi
     -   **Da Android a JavaScript:** Utilizza callback per la trasmissione di eventi, risposte dirette e aggiornamenti di stato
 -   **Requisiti di configurazione:**
-    -   Usa Capacitor 6x o 7x
+    -   Usa Capacitor 8.x
     -   Configura [Gradle](https://gradleorg/), `AndroidManifestxml` e risorse web
 -   **Suggerimenti per l'ottimizzazione:**
     -   Usa aggiornamenti parziali per ridurre la banda

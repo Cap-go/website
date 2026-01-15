@@ -224,7 +224,7 @@ Depuis 2022, le paysage de la sécurité CI/CD a connu des avancées significati
 
 > "Nous essayons actuellement @Capgo depuis qu'Appcenter a arrêté le support des mises à jour en direct sur les applications hybrides et que @AppFlow est beaucoup trop cher." - Simon Flack[\[1\]](https://capgo.app)
 
-Les frais de configuration uniques de Capgo de 2 600 $ offrent des économies à long terme, avec une estimation de 26 100 $ économisés sur cinq ans[\[1\]](https://capgo.app). Son support pour Capacitor 6 & 7, ainsi que ses fonctionnalités pour une gestion flexible des organisations, en font une excellente option pour les petites équipes et les grandes entreprises, en particulier celles qui accordent la priorité à des mesures de sécurité robustes.
+Les frais de configuration uniques de Capgo de 2 600 $ offrent des économies à long terme, avec une estimation de 26 100 $ économisés sur cinq ans[\[1\]](https://capgo.app). Son support pour Capacitor 8, ainsi que ses fonctionnalités pour une gestion flexible des organisations, en font une excellente option pour les petites équipes et les grandes entreprises, en particulier celles qui accordent la priorité à des mesures de sécurité robustes.
 
 ## Conclusion : Améliorer CI/CD avec la Rotation des Tokens
 

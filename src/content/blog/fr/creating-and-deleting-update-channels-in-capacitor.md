@@ -80,7 +80,7 @@ Configurez les autorisations pour une gestion des canaux sécurisée et efficace
 | Développeur | Accès limité | Déployer et tester les mises à jour |
 | Spectateur | Lecture seule | Surveiller les statuts des mises à jour |
 
-Assignez des rôles à votre équipe en fonction de leurs responsabilités. Capgo fonctionne sans problème avec Capacitor 6 et 7, garantissant qu'il s'adapte à divers besoins de projet.
+Assignez des rôles à votre équipe en fonction de leurs responsabilités. Capgo fonctionne sans problème avec Capacitor 8, garantissant qu'il s'adapte à divers besoins de projet.
 
 Pour plus de commodité, Capgo s'intègre avec des outils CI/CD populaires comme [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/), et [Jenkins](https://www.jenkins.io/). Assurez-vous simplement que votre système de construction est prêt à gérer la gestion des canaux de mise à jour.
 

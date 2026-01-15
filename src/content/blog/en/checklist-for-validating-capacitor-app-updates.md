@@ -71,7 +71,7 @@ Configure Capgo with these steps [\[1\]](https://capgo.app/):
 -   Configure rollback options for better control.
 -   Choose between cloud or [self-hosted deployment](https://capgo.app/blog/self-hosted-capgo/), based on your needs.
 
-For enterprise use, Capgo offers compatibility with Capacitor 6 and 7, and supports both cloud and self-hosted deployments [\[1\]](https://capgo.app/). Once this setup is complete, move on to feature and device testing.
+For enterprise use, Capgo offers compatibility with Capacitor 8, and supports both cloud and self-hosted deployments [\[1\]](https://capgo.app/). Once this setup is complete, move on to feature and device testing.
 
 ## Main Testing Checklist
 

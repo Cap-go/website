@@ -77,7 +77,7 @@ npx @capgo/cli init
 | 開発者 | 制限付きアクセス | アップデートのデプロイとテスト |
 | 閲覧者 | 読み取り専用 | アップデートステータスの監視 |
 
-チームメンバーの責任に基づいてロールを割り当てます。CapgoはCapacitor 6と7の両方でシームレスに動作し、様々なプロジェクトのニーズに対応します。
+チームメンバーの責任に基づいてロールを割り当てます。CapgoはCapacitor 8でシームレスに動作し、様々なプロジェクトのニーズに対応します。
 
 さらに便利なことに、Capgoは[GitHub Actions](https://docs.github.com/actions)、[GitLab CI](https://docs.gitlab.com/ee/ci/)、[Jenkins](https://www.jenkins.io/)などの人気のCI/CDツールと統合できます。ビルドシステムがアップデートチャネル管理を処理できる状態であることを確認してください。
 

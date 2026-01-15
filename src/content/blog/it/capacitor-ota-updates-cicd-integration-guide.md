@@ -54,7 +54,7 @@ Ecco i componenti principali necessari per gli aggiornamenti OTA in una configur
 
 | Componente | Scopo | Caratteristiche Principali |
 | --- | --- | --- |
-| App Capacitor | App base | Funziona con Capacitor 6 e 7 |
+| App Capacitor | App base | Funziona con Capacitor 8 |
 | Repository Git | Tracciamento codice | Monitora modifiche e aggiornamenti del codice |
 | Piattaforma CI/CD | Automazione | Supporta GitHub Actions, [GitLab CI](https://docsgitlabcom/ee/ci/), o [Jenkins](https://wwwjenkinsio/) |
 | Servizio Aggiornamenti OTA | Distribuzione | Gestisce aggiornamenti live e rollback |

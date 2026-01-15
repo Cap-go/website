@@ -63,7 +63,7 @@ Untuk memprofilkan aplikasi Capacitor secara efektif, Anda memerlukan alat, pera
 Pastikan Anda memiliki hal berikut:
 
 -   **Nodejs v16+** dengan **npm v8+** untuk mengelola paket
--   **Capacitor CLI (v50+)** untuk membangun dan mendeploy aplikasi
+-   **Capacitor CLI (v8+)** untuk membangun dan mendeploy aplikasi
 -   **Xcode 14+** untuk pengembangan dan profiling iOS
 -   **Android Studio Electric Eel** (atau lebih baru) untuk pengembangan Android
 -   **Chrome DevTools** untuk profiling kinerja web

@@ -80,7 +80,7 @@ Configura los permisos para una gestión segura y eficiente de canales:
 | Desarrollador | Acceso limitado | Desplegar y probar actualizaciones |
 | Visor | Solo lectura | Monitorear estados de actualización |
 
-Asigna roles a tu equipo según sus responsabilidades. Capgo funciona perfectamente con Capacitor 6 y 7, asegurando que se adapte a diferentes necesidades de proyecto.
+Asigna roles a tu equipo según sus responsabilidades. Capgo funciona perfectamente con Capacitor 8, asegurando que se adapte a diferentes necesidades de proyecto.
 
 Para mayor comodidad, Capgo se integra con herramientas populares de CI/CD como [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/), y [Jenkins](https://www.jenkins.io/). Solo asegúrate de que tu sistema de construcción esté listo para manejar la gestión de canales de actualización.
 

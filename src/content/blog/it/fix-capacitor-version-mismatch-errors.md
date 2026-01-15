@@ -133,7 +133,7 @@ Quando passi a una nuova versione principale, segui questi passaggi:
     [[CODE_BLOCK]]
     
 
-Capgo fornisce aggiornamenti live per Capacitor 6 e 7, permettendoti di applicare correzioni senza necessità di approvazioni dell'app store [\[1\]](https://capgo.app/)
+Capgo fornisce aggiornamenti live per Capacitor 8, permettendoti di applicare correzioni senza necessità di approvazioni dell'app store [\[1\]](https://capgo.app/)
 
 ## Evitare futuri conflitti di versione
 

@@ -204,7 +204,7 @@ Capgo는 앱 업데이트 및 메타데이터를 효과적으로 관리하기 �
 | 버전 관리 | 이전 버전으로 빠르게 되돌리기 | 즉각적인 롤백 기능 |
 | CI/CD 통합 | Git 도구를 통한 배포 자동화 | 간소화된 워크플로우 통합 |
 
-Capgo는 Capacitor 6 및 7을 지원하며, 클라우드 기반 및 [자가 호스팅 배포](https://capgo.app/blog/self-hosted-capgo/) 옵션을 제공합니다. 이러한 유연성은 앱 스토어 요구 사항을 준수하면서 정확한 업데이트 관리를 보장합니다 [\[1\]](https://capgo.app/).
+Capgo는 Capacitor 8을 지원하며, 클라우드 기반 및 [자가 호스팅 배포](https://capgo.app/blog/self-hosted-capgo/) 옵션을 제공합니다. 이러한 유연성은 앱 스토어 요구 사항을 준수하면서 정확한 업데이트 관리를 보장합니다 [\[1\]](https://capgo.app/).
 
 ## 요약
 

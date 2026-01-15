@@ -59,7 +59,7 @@ Wenn Sie diese Schritte befolgen, sind Sie bereit, Android-Apps mit Capacitor zu
 Um mit der Android-Entwicklung zu beginnen, müssen Sie diese wichtigen Werkzeuge installieren:
 
 -   **Android Studio**: Dies ist die offizielle IDE für die Android-Entwicklung. Es enthält alle notwendigen Werkzeuge und Funktionen zum Erstellen von Android-Apps.
--   **Java Development Kit (JDK)**: Wird benötigt, um Java-Code zu kompilieren und auszuführen. Um die Kompatibilität mit Capacitor 6 und 7 sicherzustellen, verwenden Sie die JDK-Version 17 oder höher.
+-   **Java Development Kit (JDK)**: Wird benötigt, um Java-Code zu kompilieren und auszuführen. Um die Kompatibilität mit Capacitor 8 sicherzustellen, verwenden Sie die JDK-Version 17 oder höher.
 -   **Node.js**: Eine JavaScript-Laufzeitumgebung, die die Build-Prozesse und CLI-Tools von Capacitor antreibt. Installieren Sie die neueste LTS (Long-Term Support)-Version für die beste Erfahrung.
 -   **Capacitor CLI**: Ein Kommandozeilenwerkzeug zum Verwalten von Capacitor-Projekten, einschließlich Hinzufügen von Plattformen, Erstellen und Bereitstellen von Apps.
 

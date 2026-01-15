@@ -74,7 +74,7 @@ Configurez Capgo avec ces étapes [\[1\]](https://capgo.app/) :
 -   Configurez les options de restauration pour un meilleur contrôle.
 -   Choisissez entre un déploiement cloud ou [auto-hébergé](https://capgo.app/blog/self-hosted-capgo/), selon vos besoins.
 
-Pour un usage entreprise, Capgo offre la compatibilité avec Capacitor 6 et 7, et prend en charge les déploiements cloud et auto-hébergés [\[1\]](https://capgo.app/). Une fois cette configuration terminée, passez aux tests des fonctionnalités et des appareils.
+Pour un usage entreprise, Capgo offre la compatibilité avec Capacitor 8, et prend en charge les déploiements cloud et auto-hébergés [\[1\]](https://capgo.app/). Une fois cette configuration terminée, passez aux tests des fonctionnalités et des appareils.
 
 ## Liste de contrôle principale des tests
 

@@ -432,7 +432,7 @@ Voici ce que Capgo apporte :
 
 Capgo s'intègre facilement dans votre flux de travail Capacitor, assurant des mises à jour sécurisées et continues. Il fonctionne avec des outils tels que **GitHub Actions, GitLab CI, et** [**Jenkins**](https://www.jenkins.io/), automatisant les mises à jour et les déploiements de plugins pour gagner du temps et réduire l'effort manuel.
 
-Pour les équipes gérant plusieurs plugins, le système de canaux prend en charge les tests bêta avant les sorties plus larges. Les analyses en temps réel fournissent des informations sur la performance des mises à jour et le suivi des erreurs. Capgo est compatible avec **Capacitor 6 et 7**, prend en charge les intégrations API personnalisées et offre des options auto-hébergées pour des besoins spécialisés.
+Pour les équipes gérant plusieurs plugins, le système de canaux prend en charge les tests bêta avant les sorties plus larges. Les analyses en temps réel fournissent des informations sur la performance des mises à jour et le suivi des erreurs. Capgo est compatible avec **Capacitor 8**, prend en charge les intégrations API personnalisées et offre des options auto-hébergées pour des besoins spécialisés.
 
 ## Résumé
 

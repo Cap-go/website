@@ -163,7 +163,7 @@ Lors de la transition vers une nouvelle version majeure, suivez ces étapes :
     ```
     
 
-Capgo fournit des mises à jour en direct pour Capacitor 6 et 7, vous permettant d'appliquer des corrections sans avoir besoin d'approbations de la boutique d'applications [\[1\]](https://capgo.app/).
+Capgo fournit des mises à jour en direct pour Capacitor 8, vous permettant d'appliquer des corrections sans avoir besoin d'approbations de la boutique d'applications [\[1\]](https://capgo.app/).
 
 ## Éviter les Conflits de Version Futurs
 

@@ -93,7 +93,7 @@ Selon Capgo, 95% des utilisateurs sont conformes aux mises à jour dans les 24 h
 Avant de commencer à créer le manifeste, assurez-vous d'avoir :
 
 -   Xcode 15 ou supérieur installé
--   Un projet Capacitor 5.0+ configuré
+-   Un projet Capacitor 8.0+ configuré
 -   Accès au fichier `Info.plist` de votre application
 -   Une compréhension basique de la structure JSON
 -   La documentation détaillant les pratiques de collecte de données de votre application

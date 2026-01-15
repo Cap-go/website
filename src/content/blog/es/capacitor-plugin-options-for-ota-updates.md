@@ -63,7 +63,7 @@ Esto es lo que ofrece Capgo:
 -   **Análisis en tiempo real y seguimiento de errores**
 -   **Integración fluida con CI/CD**
 -   **Opción de nube o auto-alojamiento**
--   **Compatibilidad con Capacitor 6 y 7**
+-   **Compatibilidad con Capacitor 8**
 
 Otros plugins también atienden necesidades y regiones específicas.
 

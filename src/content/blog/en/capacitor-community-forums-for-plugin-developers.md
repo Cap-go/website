@@ -210,7 +210,7 @@ Capacitor's official documentation is a go-to resource. It includes API referenc
 
 ![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
 
-Capgo makes instant app updates simple. It has delivered 23.5 million updates across 750 production apps, with an 82% success rate. Impressively, 95% of active users receive updates within 24 hours. Its global CDN can download a 5MB bundle in just 114ms. Capgo supports Capacitor 6 and 7, offering partial update capabilities [\[1\]](https://capgo.app/).
+Capgo makes instant app updates simple. It has delivered 23.5 million updates across 750 production apps, with an 82% success rate. Impressively, 95% of active users receive updates within 24 hours. Its global CDN can download a 5MB bundle in just 114ms. Capgo supports Capacitor 8, offering partial update capabilities [\[1\]](https://capgo.app/).
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 

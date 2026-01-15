@@ -91,7 +91,7 @@ Secondo Capgo, il 95% degli utenti si adegua agli aggiornamenti entro 24 ore. Co
 Prima di iniziare a costruire il manifest, assicurati di avere:
 
 -   Xcode 15 o successivo installato
--   Un progetto Capacitor 5.0+ configurato
+-   Un progetto Capacitor 8.0+ configurato
 -   Accesso al file `Info.plist` della tua app
 -   Una comprensione base della struttura JSON
 -   Documentazione che delinea le pratiche di raccolta dati della tua app
