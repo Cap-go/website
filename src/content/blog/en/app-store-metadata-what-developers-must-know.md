@@ -202,7 +202,7 @@ Capgo provides key tools to manage app updates and metadata effectively:
 | Version Control | Quickly revert to previous versions | Instant rollback capability |
 | CI/CD Integration | Automate deployments through Git tools | Streamlined workflow integration |
 
-Capgo supports Capacitor 6 and 7 and offers both cloud-based and [self-hosted deployment](https://capgo.app/blog/self-hosted-capgo/) options. This flexibility ensures precise update management while staying compliant with app store requirements [\[1\]](https://capgo.app/).
+Capgo supports Capacitor 8 and offers both cloud-based and [self-hosted deployment](https://capgo.app/blog/self-hosted-capgo/) options. This flexibility ensures precise update management while staying compliant with app store requirements [\[1\]](https://capgo.app/).
 
 ## Summary
 

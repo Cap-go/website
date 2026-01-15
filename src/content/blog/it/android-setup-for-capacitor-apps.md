@@ -60,7 +60,7 @@ Seguendo questi passaggi, sarai pronto a sviluppare, testare e distribuire app A
 Per iniziare con lo sviluppo Android, dovrai installare questi strumenti chiave:
 
 -   **Android Studio**: Questo è l'IDE ufficiale per lo sviluppo Android. Include tutti gli strumenti e le funzionalità necessarie per creare app Android
--   **Java Development Kit (JDK)**: Necessario per compilare ed eseguire codice Java. Per garantire la compatibilità con Capacitor 6 e 7, usa JDK versione 17 o successiva
+-   **Java Development Kit (JDK)**: Necessario per compilare ed eseguire codice Java. Per garantire la compatibilità con Capacitor 8, usa JDK versione 17 o successiva
 -   **Nodejs**: Un ambiente di runtime JavaScript che alimenta i processi di build e gli strumenti CLI di Capacitor. Installa l'ultima versione LTS (Long-Term Support) per la migliore esperienza
 -   **Capacitor CLI**: Uno strumento da riga di comando per gestire progetti Capacitor, inclusa l'aggiunta di piattaforme, build e distribuzione delle app
 

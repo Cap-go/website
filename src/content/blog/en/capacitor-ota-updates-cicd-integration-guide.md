@@ -51,7 +51,7 @@ Here are the main components you'll need for OTA updates in a CI/CD setup:
 
 | Component | Purpose | Key Features |
 | --- | --- | --- |
-| Capacitor App | Base app | Works with Capacitor 6 & 7 |
+| Capacitor App | Base app | Works with Capacitor 8 |
 | Git Repository | Code tracking | Monitors code changes and updates |
 | CI/CD Platform | Automation | Supports GitHub Actions, [GitLab CI](https://docs.gitlab.com/ee/ci/), or [Jenkins](https://www.jenkins.io/) |
 | OTA Update Service | Distribution | Handles live updates and rollbacks |

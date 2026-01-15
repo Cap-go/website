@@ -201,7 +201,7 @@ Stellen Sie sicher, dass alle technischen Systeme die Compliance-Standards erfü
 
 Bestätigen Sie, dass Ihre Entwicklungsumgebung Folgendes enthält:
 
--   Kompatibilität mit Capacitor 6 und 7
+-   Kompatibilität mit Capacitor 8
 -   Flexible Hosting-Möglichkeiten
 -   Ende-zu-Ende-Verschlüsselung
 -   Integrierte Analysen

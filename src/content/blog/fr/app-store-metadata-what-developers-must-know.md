@@ -207,7 +207,7 @@ Capgo fournit des outils clés pour gérer efficacement les mises à jour d'appl
 | Contrôle de Version | Revenir rapidement aux versions précédentes | Capacité de rollback instantané |
 | Intégration CI/CD | Automatiser les déploiements via des outils Git | Intégration de flux de travail simplifiée |
 
-Capgo prend en charge Capacitor 6 et 7 et offre à la fois des options de déploiement basées sur le cloud et [auto-hébergées](https://capgo.app/blog/self-hosted-capgo/). Cette flexibilité garantit une gestion précise des mises à jour tout en restant conforme aux exigences des magasins d'applications [\[1\]](https://capgo.app/).
+Capgo prend en charge Capacitor 8 et offre à la fois des options de déploiement basées sur le cloud et [auto-hébergées](https://capgo.app/blog/self-hosted-capgo/). Cette flexibilité garantit une gestion précise des mises à jour tout en restant conforme aux exigences des magasins d'applications [\[1\]](https://capgo.app/).
 
 ## Résumé
 

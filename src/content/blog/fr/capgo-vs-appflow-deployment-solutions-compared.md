@@ -130,7 +130,7 @@ Après avoir examiné les comparaisons détaillées des fonctionnalités et des 
 
 ### Principales Différences
 
-Capgo et Appflow divergent de manière significative en termes de disponibilité future, de structure tarifaire, et d'approche technique. Capgo se distingue par des caractéristiques comme **le cryptage de bout en bout**, le support de **Capacitor 6 & 7**, et la flexibilité des **options de déploiement cloud et auto-hébergées**. Ces facteurs offrent aux développeurs plus de contrôle et des solutions rentables, surtout en tenant compte de la fermeture prévue d'Appflow en 2026 [\[1\]](https://capgo.app).
+Capgo et Appflow divergent de manière significative en termes de disponibilité future, de structure tarifaire, et d'approche technique. Capgo se distingue par des caractéristiques comme **le cryptage de bout en bout**, le support de **Capacitor 8**, et la flexibilité des **options de déploiement cloud et auto-hébergées**. Ces facteurs offrent aux développeurs plus de contrôle et des solutions rentables, surtout en tenant compte de la fermeture prévue d'Appflow en 2026 [\[1\]](https://capgo.app).
 
 | Aspect | Capgo | Appflow |
 | --- | --- | --- |

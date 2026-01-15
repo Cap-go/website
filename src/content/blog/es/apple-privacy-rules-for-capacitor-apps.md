@@ -76,7 +76,7 @@ Aprende cómo implementar las reglas de privacidad de Apple en tu aplicación de
 Antes de comenzar, asegúrate de lo siguiente:
 
 -   Tienes **Xcode 15 o posterior** para soporte del manifiesto de privacidad.
--   Capacitor 6 o 7 está instalado.
+-   Capacitor 8 está instalado.
 -   El objetivo de despliegue de iOS está configurado en **iOS 14.5 o posterior**.
 -   Tu aplicación incluye un archivo `Info.plist` correctamente configurado.
 -   Tienes una **cuenta de desarrollador de Apple** con certificados válidos.

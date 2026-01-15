@@ -55,7 +55,7 @@ Aquí están los componentes principales que necesitarás para actualizaciones O
 
 | Componente | Propósito | Características Clave |
 | --- | --- | --- |
-| App Capacitor | App base | Funciona con Capacitor 6 y 7 |
+| App Capacitor | App base | Funciona con Capacitor 8 |
 | Repositorio Git | Seguimiento de código | Monitorea cambios y actualizaciones de código |
 | Plataforma CI/CD | Automatización | Soporta GitHub Actions, [GitLab CI](https://docsgitlabcom/ee/ci/), o [Jenkins](https://wwwjenkinsio/) |
 | Servicio de Actualización OTA | Distribución | Maneja actualizaciones en vivo y rollbacks |

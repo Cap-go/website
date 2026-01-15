@@ -73,7 +73,7 @@ Konfigurasi Capgo dengan langkah-langkah berikut [\[1\]](https://capgo.app/):
 -   Konfigurasi opsi rollback untuk kontrol yang lebih baik.
 -   Pilih antara penerapan cloud atau [self-hosted](https://capgo.app/blog/self-hosted-capgo/), berdasarkan kebutuhan Anda.
 
-Untuk penggunaan enterprise, Capgo menawarkan kompatibilitas dengan Capacitor 6 dan 7, serta mendukung penerapan cloud dan self-hosted [\[1\]](https://capgo.app/). Setelah persiapan ini selesai, lanjutkan ke pengujian fitur dan perangkat.
+Untuk penggunaan enterprise, Capgo menawarkan kompatibilitas dengan Capacitor 8, serta mendukung penerapan cloud dan self-hosted [\[1\]](https://capgo.app/). Setelah persiapan ini selesai, lanjutkan ke pengujian fitur dan perangkat.
 
 ## Daftar Periksa Pengujian Utama
 

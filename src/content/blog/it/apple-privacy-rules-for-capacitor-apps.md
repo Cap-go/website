@@ -76,7 +76,7 @@ Découvrez comment mettre en œuvre les règles de confidentialité d'Apple dans
 Avant de commencer, assurez-vous des éléments suivants :
 
 -  Vous disposez de **Xcode 15 ou version ultérieure** pour le support du manifeste de confidentialité.
--  Capacitor 6 ou 7 est installé.
+-  Capacitor 8 est installé.
 -  La cible de déploiement iOS est définie sur **iOS 14.5 ou version ultérieure**.
 -  Votre application inclut un fichier `Info.plist` correctement configuré.
 -  Vous avez un **compte développeur Apple** avec des certificats valides.

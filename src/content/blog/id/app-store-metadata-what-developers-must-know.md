@@ -207,7 +207,7 @@ Capgo menyediakan alat-alat utama untuk mengelola pembaruan dan metadata aplikas
 | Kontrol Versi | Kembali ke versi sebelumnya dengan cepat | Kemampuan rollback instan |
 | Integrasi CI/CD | Mengotomatisasi deployment melalui Git | Integrasi alur kerja yang efisien |
 
-Capgo mendukung Capacitor 6 dan 7 dan menawarkan opsi deployment berbasis cloud dan [self-hosted](https://capgo.app/blog/self-hosted-capgo/). Fleksibilitas ini memastikan manajemen pembaruan yang tepat sambil tetap mematuhi persyaratan app store [\[1\]](https://capgo.app/).
+Capgo mendukung Capacitor 8 dan menawarkan opsi deployment berbasis cloud dan [self-hosted](https://capgo.app/blog/self-hosted-capgo/). Fleksibilitas ini memastikan manajemen pembaruan yang tepat sambil tetap mematuhi persyaratan app store [\[1\]](https://capgo.app/).
 
 ## Ringkasan
 

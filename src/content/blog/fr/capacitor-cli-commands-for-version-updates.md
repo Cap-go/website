@@ -212,7 +212,7 @@ Commencer avec Capgo est simple. Vous pouvez l'initialiser avec une commande sim
 npx @capgo/cli init
 ```
 
-Cette fonctionnalité rationalise le processus de mise à jour, gardant votre application à jour sans les délais des cycles de révision traditionnels. Capgo est compatible avec Capacitor 6 et 7, ce qui en fait un choix flexible pour votre configuration existante.
+Cette fonctionnalité rationalise le processus de mise à jour, gardant votre application à jour sans les délais des cycles de révision traditionnels. Capgo est compatible avec Capacitor 8, ce qui en fait un choix flexible pour votre configuration existante.
 
 | **Fonctionnalité** | **Description** | **Avantage** |
 | --- | --- | --- |

@@ -201,7 +201,7 @@ Después de las pruebas de rendimiento, enfócate en la accesibilidad para asegu
 | Tamaño de Objetivo Táctil | Verificaciones de dimensiones de elementos | Requisitos específicos del SO |
 | Navegación por Teclado | Pruebas de método de entrada | Estándares multiplataforma |
 
-Con las herramientas de integración de Capgo, puedes automatizar estas pruebas de accesibilidad directamente dentro de tu flujo de trabajo CI/CD. La plataforma es compatible con Capacitor 6 y 7, asegurando una compatibilidad fluida en los sistemas CI/CD soportados mientras te ayuda a cumplir con los estándares de conformidad [\[1\]](https://capgo.app/).
+Con las herramientas de integración de Capgo, puedes automatizar estas pruebas de accesibilidad directamente dentro de tu flujo de trabajo CI/CD. La plataforma es compatible con Capacitor 8, asegurando una compatibilidad fluida en los sistemas CI/CD soportados mientras te ayuda a cumplir con los estándares de conformidad [\[1\]](https://capgo.app/).
 
 ## Siguientes Pasos y Consejos
 

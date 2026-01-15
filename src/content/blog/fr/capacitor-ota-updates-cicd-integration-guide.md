@@ -56,7 +56,7 @@ Voici les composants principaux dont vous aurez besoin pour les mises à jour OT
 
 | Composant | Objectif | Fonctionnalités clés |
 | --- | --- | --- |
-| Application Capacitor | Application de base | Fonctionne avec Capacitor 6 & 7 |
+| Application Capacitor | Application de base | Fonctionne avec Capacitor 8 |
 | Dépôt Git | Suivi du code | Surveille les changements et mises à jour du code |
 | Plateforme CI/CD | Automatisation | Supporte GitHub Actions, [GitLab CI](https://docs.gitlab.com/ee/ci/), ou [Jenkins](https://www.jenkins.io/) |
 | Service de mise à jour OTA | Distribution | Gère les mises à jour en direct et les retours en arrière |

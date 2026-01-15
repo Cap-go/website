@@ -198,7 +198,7 @@ After performance testing, focus on accessibility to make sure your app is usabl
 | Touch Target Size | Element dimension checks | OS-specific requirements |
 | Keyboard Navigation | Input method testing | Cross-platform standards |
 
-With Capgo's integration tools, you can automate these accessibility tests directly within your CI/CD workflow. The platform supports Capacitor 6 and 7, ensuring smooth compatibility across supported CI/CD systems while helping you meet compliance standards [\[1\]](https://capgo.app/).
+With Capgo's integration tools, you can automate these accessibility tests directly within your CI/CD workflow. The platform supports Capacitor 8, ensuring smooth compatibility across supported CI/CD systems while helping you meet compliance standards [\[1\]](https://capgo.app/).
 
 ## Next Steps and Tips
 

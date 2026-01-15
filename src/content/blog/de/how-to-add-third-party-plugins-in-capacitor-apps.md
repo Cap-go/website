@@ -425,7 +425,7 @@ Hier ist, was Capgo bietet:
 
 Capgo integriert sich nahtlos in Ihren Capacitor-Workflow und gewährleistet sichere und kontinuierliche Updates. Es arbeitet mit Tools wie **GitHub Actions, GitLab CI und** [**Jenkins**](https://www.jenkins.io/) zusammen, automatisiert Plugin-Updates und Bereitstellungen, um Zeit zu sparen und manuelle Arbeit zu reduzieren.
 
-Für Teams, die mehrere Plugins verwalten, unterstützt das Kanalsystem Beta-Tests vor breiteren Veröffentlichungen. Echtzeit-Analysen bieten Einblicke in die Update-Performance und Fehlerverfolgung. Capgo ist kompatibel mit **Capacitor 6 und 7**, unterstützt benutzerdefinierte API-Integrationen und bietet Self-Hosted-Optionen für spezielle Anforderungen.
+Für Teams, die mehrere Plugins verwalten, unterstützt das Kanalsystem Beta-Tests vor breiteren Veröffentlichungen. Echtzeit-Analysen bieten Einblicke in die Update-Performance und Fehlerverfolgung. Capgo ist kompatibel mit **Capacitor 8**, unterstützt benutzerdefinierte API-Integrationen und bietet Self-Hosted-Optionen für spezielle Anforderungen.
 
 ## Zusammenfassung
 

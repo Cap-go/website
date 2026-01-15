@@ -211,7 +211,7 @@ Memulai dengan Capgo sangatlah mudah. Anda dapat memulainya dengan perintah sede
 npx @capgo/cli init
 ```
 
-Fitur ini menyederhanakan proses pembaruan, menjaga aplikasi Anda tetap terbaru tanpa penundaan siklus review tradisional. Capgo kompatibel dengan kedua versi Capacitor 6 dan 7, menjadikannya pilihan fleksibel untuk pengaturan Anda yang sudah ada.
+Fitur ini menyederhanakan proses pembaruan, menjaga aplikasi Anda tetap terbaru tanpa penundaan siklus review tradisional. Capgo kompatibel dengan kedua versi Capacitor 8, menjadikannya pilihan fleksibel untuk pengaturan Anda yang sudah ada.
 
 | **Fitur** | **Deskripsi** | **Manfaat** |
 | --- | --- | --- |

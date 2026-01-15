@@ -76,7 +76,7 @@ Configura Capgo con estos pasos [\[1\]](https://capgo.app/):
 -   Configura opciones de reversión para mejor control.
 -   Elige entre implementación en la nube o [auto-alojada](https://capgo.app/blog/self-hosted-capgo/), según tus necesidades.
 
-Para uso empresarial, Capgo ofrece compatibilidad con Capacitor 6 y 7, y soporta implementaciones tanto en la nube como auto-alojadas [\[1\]](https://capgo.app/). Una vez completada esta configuración, pasa a las pruebas de características y dispositivos.
+Para uso empresarial, Capgo ofrece compatibilidad con Capacitor 8, y soporta implementaciones tanto en la nube como auto-alojadas [\[1\]](https://capgo.app/). Una vez completada esta configuración, pasa a las pruebas de características y dispositivos.
 
 ## Lista Principal de Pruebas
 

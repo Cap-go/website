@@ -56,7 +56,7 @@ Hier sind die Hauptkomponenten, die Sie für OTA-Updates in einer CI/CD-Einricht
 
 | Komponente | Zweck | Hauptfunktionen |
 | --- | --- | --- |
-| Capacitor App | Basis-App | Funktioniert mit Capacitor 6 & 7 |
+| Capacitor App | Basis-App | Funktioniert mit Capacitor 8 |
 | Git Repository | Code-Tracking | Überwacht Code-Änderungen und Updates |
 | CI/CD Plattform | Automatisierung | Unterstützt GitHub Actions, [GitLab CI](https://docs.gitlab.com/ee/ci/) oder [Jenkins](https://www.jenkins.io/) |
 | OTA Update Service | Verteilung | Handhabt Live-Updates und Rollbacks |

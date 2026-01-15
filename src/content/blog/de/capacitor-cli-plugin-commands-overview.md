@@ -140,7 +140,7 @@ Capgo-Nutzer profitieren von erweiterten Funktionen wie kontrollierten Rollouts.
 
 -   95% der Updates werden innerhalb von 24 Stunden abgeschlossen [\[1\]](https://capgo.app/)
 -   82% Erfolgsquote weltweit für Updates [\[1\]](https://capgo.app/)
--   Kompatibilität mit Capacitor 6 und 7 Versionen [\[1\]](https://capgo.app/)
+-   Kompatibilität mit Capacitor 8 Versionen [\[1\]](https://capgo.app/)
 
 Um reibungslose Updates sicherzustellen:
 

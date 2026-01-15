@@ -61,7 +61,7 @@ Per profilare efficacemente le app Capacitor, avrai bisogno degli strumenti, sof
 Assicurati di avere quanto segue:
 
 -   **Node.js v16+** con **npm v8+** per gestire i pacchetti
--   **Capacitor CLI (v5.0+)** per costruire e distribuire app
+-   **Capacitor CLI (v8+)** per costruire e distribuire app
 -   **Xcode 14+** per sviluppo e profiling iOS
 -   **Android Studio Electric Eel** (o più recente) per lo sviluppo Android
 -   **Chrome DevTools** per il profiling delle prestazioni web

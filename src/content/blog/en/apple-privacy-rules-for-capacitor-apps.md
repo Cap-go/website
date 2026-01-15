@@ -71,7 +71,7 @@ Learn how to implement Apple's privacy rules in your Capacitor app with this ste
 Before you begin, ensure the following:
 
 -   You have **Xcode 15 or later** for privacy manifest support.
--   Capacitor 6 or 7 is installed.
+-   Capacitor 8 is installed.
 -   The iOS deployment target is set to **iOS 14.5 or later**.
 -   Your app includes a properly configured `Info.plist` file.
 -   You have an **Apple Developer account** with valid certificates.

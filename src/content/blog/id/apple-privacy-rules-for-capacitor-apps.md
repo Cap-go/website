@@ -75,7 +75,7 @@ Pelajari cara menerapkan aturan privasi Apple dalam aplikasi Capacitor Anda deng
 Sebelum Anda memulai, pastikan hal berikut:
 
 -   Anda memiliki **Xcode 15 atau lebih baru** untuk dukungan manifes privasi.
--   Capacitor 6 atau 7 telah terinstal.
+-   Capacitor 8 telah terinstal.
 -   Target penerapan iOS diatur ke **iOS 14.5 atau lebih baru**.
 -   Aplikasi Anda menyertakan file `Info.plist` yang dikonfigurasi dengan benar.
 -   Anda memiliki **akun Apple Developer** dengan sertifikat yang valid.

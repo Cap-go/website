@@ -114,7 +114,7 @@ Befolgen Sie diese Schritte beim Übergang zu einer neuen Hauptversion:
 3.  **Abhängigkeiten aktualisieren**: Aktualisieren Sie Ihre Capacitor-Pakete auf die erforderlichen Versionen. Zum Beispiel:
     
 
-Capgo bietet Live-Updates für Capacitor 6 und 7, wodurch Sie Korrekturen ohne App-Store-Genehmigungen anwenden können [\[1\]](https://capgo.app/).
+Capgo bietet Live-Updates für Capacitor 8, wodurch Sie Korrekturen ohne App-Store-Genehmigungen anwenden können [\[1\]](https://capgo.app/).
 
 ## Zukünftige Versionskonflikte vermeiden
 

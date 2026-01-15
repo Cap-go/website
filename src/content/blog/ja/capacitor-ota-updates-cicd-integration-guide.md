@@ -53,7 +53,7 @@ CI/CD セットアップで OTA 更新に必要な主なコンポーネントは
 
 | コンポーネント | 目的 | 主な機能 |
 | --- | --- | --- |
-| Capacitor アプリ | ベースアプリ | Capacitor 6 および 7 で動作 |
+| Capacitor アプリ | ベースアプリ | Capacitor 8 で動作 |
 | Git リポジトリ | コードトラッキング | コードの変更と更新を監視 |
 | CI/CD プラットフォーム | 自動化 | GitHub Actions、[GitLab CI](https://docs.gitlab.com/ee/ci/)、または [Jenkins](https://www.jenkins.io/) をサポート |
 | OTA 更新サービス | 配信 | ライブ更新とロールバックを処理 |

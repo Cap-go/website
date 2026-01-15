@@ -192,7 +192,7 @@ npx cap open android # Opens Android Studio
 -   Aktivieren Sie Fehlerverfolgung, um Probleme frühzeitig zu erkennen und zu beheben.
 -   Halten Sie die Rollback-Funktion bereit, um schnell auf Probleme reagieren zu können.
 
-Capgo ist kompatibel mit Capacitor 6 und 7, integriert sich nahtlos in CI/CD-Pipelines und erfüllt die Anforderungen von Apple- und Google-Stores.
+Capgo ist kompatibel mit Capacitor 8, integriert sich nahtlos in CI/CD-Pipelines und erfüllt die Anforderungen von Apple- und Google-Stores.
 
 ## Häufige Probleme und Tipps
 

@@ -116,7 +116,7 @@ Saat beralih ke versi major baru, ikuti langkah-langkah ini:
 3.  **Perbarui Dependensi**: Tingkatkan paket Capacitor Anda ke versi yang diperlukan. Contoh:
     
 
-Capgo menyediakan pembaruan langsung untuk Capacitor 6 dan 7, memungkinkan Anda menerapkan perbaikan tanpa perlu persetujuan app store [\[1\]](https://capgo.app/).
+Capgo menyediakan pembaruan langsung untuk Capacitor 8, memungkinkan Anda menerapkan perbaikan tanpa perlu persetujuan app store [\[1\]](https://capgo.app/).
 
 ## Menghindari Konflik Versi di Masa Depan
 

@@ -47,7 +47,7 @@ next_blog: ''
 
 | Plugin-Name | Capacitor-Version | Funktionen | Am besten geeignet für |
 | --- | --- | --- | --- |
-| `@aparajita/capacitor-biometric-auth` | Capacitor 7 | Native Biometrie, Geräte-Anmeldedaten | Neue Projekte mit Capacitor 7 |
+| `@aparajita/capacitor-biometric-auth` | Capacitor 8 | Native Biometrie, Geräte-Anmeldedaten | Neue Projekte mit Capacitor 8 |
 | `capacitor-native-biometric` | Capacitor 3, 4 | Sichere Anmeldedatenspeicherung, Keychain/Keystore | Anmeldedatenverwaltung |
 | Alle Versionen | Biometrische und Geräte-Anmeldedaten Unterstützung | Flexible Authentifizierungsoptionen |
 
@@ -74,7 +74,7 @@ Bevor Sie mit der Implementierung beginnen, stellen Sie sicher, dass folgende We
 
 Wählen Sie ein [biometrisches Plugin](https://capgo.app/plugins/capacitor-native-biometric/) basierend auf Ihrer Capacitor-Version:
 
--   **@aparajita/capacitor-biometric-auth** für Capacitor 7
+-   **@aparajita/capacitor-biometric-auth** für Capacitor 8
 -   **capacitor-native-biometric** für Capacitor 3 und 4
 
 ### Android-Setup-Schritte
@@ -143,7 +143,7 @@ Bei der Auswahl eines biometrischen Authentifizierungs-Plugins für Ihre Capacit
 
 | Plugin-Name | Capacitor-Version | Hauptfunktionen | Am besten geeignet für |
 | --- | --- | --- | --- |
-| @aparajita/capacitor-biometric-auth | Capacitor 7 | Native Biometrie, Geräte-Anmeldedaten, umfassende API | Neue Projekte mit Capacitor 7 |
+| @aparajita/capacitor-biometric-auth | Capacitor 8 | Native Biometrie, Geräte-Anmeldedaten, umfassende API | Neue Projekte mit Capacitor 8 |
 | capacitor-native-biometric | Capacitor 3, 4 | Sichere Anmeldedatenspeicherung, Keychain/Keystore Integration | Bestehende Projekte, die Anmeldedatenverwaltung benötigen |
 | Alle Versionen | Biometrische und Geräte-Anmeldedaten Authentifizierung, übersichtliche API | Projekte, die flexible Authentifizierungsoptionen benötigen |
 

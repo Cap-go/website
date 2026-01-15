@@ -56,7 +56,7 @@ Berikut komponen utama yang Anda perlukan untuk pembaruan OTA dalam pengaturan C
 
 | Komponen | Tujuan | Fitur Utama |
 | --- | --- | --- |
-| Aplikasi Capacitor | Aplikasi dasar | Bekerja dengan Capacitor 6 & 7 |
+| Aplikasi Capacitor | Aplikasi dasar | Bekerja dengan Capacitor 8 |
 | Repositori Git | Pelacakan kode | Memantau perubahan dan pembaruan kode |
 | Platform CI/CD | Otomatisasi | Mendukung GitHub Actions, [GitLab CI](https://docs.gitlab.com/ee/ci/), atau [Jenkins](https://www.jenkins.io/) |
 | Layanan Update OTA | Distribusi | Menangani pembaruan langsung dan rollback |

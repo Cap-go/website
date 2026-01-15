@@ -46,7 +46,7 @@ First, install the Capgo plugin by running:
 npx @capgo/cli init
 ```
 
-This plugin works seamlessly with Capacitor 6 and 7, making it compatible with a range of app versions.
+This plugin works seamlessly with Capacitor 8, making it compatible with a range of app versions.
 
 ### Managing Update Versions
 

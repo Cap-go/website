@@ -46,7 +46,7 @@ Both platforms demand attention to build environments, security, and deployment.
 
 ### iOS Build Setup
 
-Developing for iOS requires **macOS**, as it's the only operating system that supports Xcode. For Capacitor 7, you'll need **Xcode 16.0 or newer** [\[3\]](https://capacitorjs.com/docs/getting-started/environment-setup), along with the following tools and resources:
+Developing for iOS requires **macOS**, as it's the only operating system that supports Xcode. For Capacitor 8, you'll need **Xcode 16.0 or newer** [\[3\]](https://capacitorjs.com/docs/getting-started/environment-setup), along with the following tools and resources:
 
 | Component | Requirement | Purpose |
 | --- | --- | --- |

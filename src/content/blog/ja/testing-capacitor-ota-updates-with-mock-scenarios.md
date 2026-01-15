@@ -45,7 +45,7 @@ Capgoのようなツールでのテストにより、アップデートがスム
 | ソフトウェア | 目的 | バージョン要件 |
 | --- | --- | --- |
 | **Node.js** | ランタイム環境 | 最新のLTSバージョン |
-| **Capacitor CLI** | アプリ開発 | Capacitor 6または7 |
+| **Capacitor CLI** | アプリ開発 | Capacitor 8 |
 | **[Capgo CLI](https://capgo.app/docs/cli/commands)** | OTA管理 | 最新バージョン |
 
 以下のコマンドでCapgo CLIをインストールします：

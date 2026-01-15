@@ -56,7 +56,7 @@ next_blog: ''
 Android 개발을 시작하려면 다음과 같은 주요 도구를 설치해야 합니다:
 
 -   **Android Studio**: Android 개발을 위한 공식 IDE입니다. Android 앱 빌드에 필요한 모든 도구와 기능이 포함되어 있습니다.
--   **Java Development Kit (JDK)**: Java 코드 컴파일 및 실행에 필요합니다. Capacitor 6과 7의 호환성을 보장하기 위해 JDK 버전 17 이상을 사용하세요.
+-   **Java Development Kit (JDK)**: Java 코드 컴파일 및 실행에 필요합니다. Capacitor 8의 호환성을 보장하기 위해 JDK 버전 17 이상을 사용하세요.
 -   **Node.js**: Capacitor의 빌드 프로세스와 CLI 도구를 구동하는 JavaScript 런타임 환경입니다. 최상의 경험을 위해 최신 LTS(Long-Term Support) 버전을 설치하세요.
 -   **Capacitor CLI**: 플랫폼 추가, 빌드, 앱 배포를 포함한 Capacitor 프로젝트 관리를 위한 명령줄 도구입니다.
 

@@ -75,7 +75,7 @@ Set up permissions for secure and efficient channel management:
 | Developer | Limited access | Deploy and test updates |
 | Viewer | Read-only | Monitor update statuses |
 
-Assign roles to your team based on their responsibilities. Capgo works seamlessly with both Capacitor 6 and 7, ensuring it fits various project needs.
+Assign roles to your team based on their responsibilities. Capgo works seamlessly with both Capacitor 8, ensuring it fits various project needs.
 
 For added convenience, Capgo integrates with popular CI/CD tools like [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/), and [Jenkins](https://www.jenkins.io/). Just make sure your build system is ready to handle update channel management.
 

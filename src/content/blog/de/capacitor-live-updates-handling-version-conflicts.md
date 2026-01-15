@@ -141,7 +141,7 @@ Dieser Abschnitt baut auf der Übersicht über Live-Update-Tools auf und konzent
 ### Tipps zur Versionskontrolle
 
 -   Verwenden Sie **[Capgo-Kanäle](https://capgo.app/docs/webapp/channels/)**, um iOS- und Android-Rollouts zu verwalten, während plattformspezifische Tests durchgeführt werden [\[1\]](https://capgo.app/).
--   Halten Sie sich an **Capacitor 6 und 7**, um die Laufzeitkompatibilität zwischen beiden Plattformen sicherzustellen [\[1\]](https://capgo.app/).
+-   Halten Sie sich an **Capacitor 8**, um die Laufzeitkompatibilität zwischen beiden Plattformen sicherzustellen [\[1\]](https://capgo.app/).
 
 ### Testansätze
 

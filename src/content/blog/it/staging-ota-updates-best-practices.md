@@ -199,7 +199,7 @@ Iniziare con Capgo per lo staging è semplice. Prima, installa il plugin Capgo u
 npx @capgo/cli init
 ```
 
-Capgo funziona sia con **Capacitor 6 che 7**, assicurando che si adatti a vari workflow di sviluppo. Per ambienti di staging, segui questi passi:
+Capgo funziona con **Capacitor 8**, assicurando che si adatti a vari workflow di sviluppo. Per ambienti di staging, segui questi passi:
 
 -   **Configura canali di aggiornamento separati** per staging e produzione per mantenere gli ambienti distinti.
 -   **Abilita il monitoraggio dettagliato degli errori** per individuare i problemi tempestivamente.

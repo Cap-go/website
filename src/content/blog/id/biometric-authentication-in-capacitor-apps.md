@@ -47,7 +47,7 @@ next_blog: ''
 
 | Nama Plugin | Versi Capacitor | Fitur | Terbaik Untuk |
 | --- | --- | --- | --- |
-| `@aparajita/capacitor-biometric-auth` | Capacitor 7 | Biometrik asli, kredensial perangkat | Proyek baru menggunakan Capacitor 7 |
+| `@aparajita/capacitor-biometric-auth` | Capacitor 8 | Biometrik asli, kredensial perangkat | Proyek baru menggunakan Capacitor 8 |
 | `capacitor-native-biometric` | Capacitor 3, 4 | Penyimpanan kredensial aman, Keychain/Keystore | Manajemen kredensial |
 | Semua versi | Dukungan biometrik dan kredensial perangkat | Opsi otentikasi fleksibel |
 
@@ -74,7 +74,7 @@ Sebelum mendalami implementasi, pastikan alat dan dependensi berikut siap:
 
 Pilih [plugin biometrik](https://capgo.app/plugins/capacitor-native-biometric/) berdasarkan versi Capacitor Anda:
 
--   **@aparajita/capacitor-biometric-auth** untuk Capacitor 7
+-   **@aparajita/capacitor-biometric-auth** untuk Capacitor 8
 -   **capacitor-native-biometric** untuk Capacitor 3 dan 4
 
 ### Langkah-langkah Pengaturan Android

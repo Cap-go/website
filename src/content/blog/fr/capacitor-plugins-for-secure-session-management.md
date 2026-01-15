@@ -60,7 +60,7 @@ Le plugin fonctionne parfaitement avec l'authentification biométrique, offrant 
 
 ### Performance et support communautaire
 
-En mai 2025, le plugin a acquis une solide réputation au sein de l'écosystème Capacitor, avec 128 étoiles et 22 forks sur GitHub. Il est entièrement compatible avec Capacitor 6+, permettant aux développeurs d'implémenter un stockage sécurisé tout en profitant des dernières fonctionnalités du framework.
+En mai 2025, le plugin a acquis une solide réputation au sein de l'écosystème Capacitor, avec 128 étoiles et 22 forks sur GitHub. Il est entièrement compatible avec Capacitor 8+, permettant aux développeurs d'implémenter un stockage sécurisé tout en profitant des dernières fonctionnalités du framework.
 
 ## 4. Identity Vault
 

@@ -59,7 +59,7 @@ Dengan mengikuti langkah-langkah ini, Anda akan siap untuk mengembangkan, menguj
 Untuk memulai pengembangan Android, Anda perlu menginstal alat-alat utama ini:
 
 -   **Android Studio**: Ini adalah IDE resmi untuk pengembangan Android. Termasuk semua alat dan fitur yang diperlukan untuk membangun aplikasi Android.
--   **Java Development Kit (JDK)**: Diperlukan untuk mengompilasi dan menjalankan kode Java. Untuk memastikan kompatibilitas dengan Capacitor 6 dan 7, gunakan JDK versi 17 atau lebih baru.
+-   **Java Development Kit (JDK)**: Diperlukan untuk mengompilasi dan menjalankan kode Java. Untuk memastikan kompatibilitas dengan Capacitor 8, gunakan JDK versi 17 atau lebih baru.
 -   **Node.js**: Lingkungan runtime JavaScript yang mendukung proses build dan alat CLI Capacitor. Instal versi LTS (Long-Term Support) terbaru untuk pengalaman terbaik.
 -   **Capacitor CLI**: Alat command-line untuk mengelola proyek Capacitor, termasuk menambahkan platform, membangun, dan mendeploy aplikasi.
 

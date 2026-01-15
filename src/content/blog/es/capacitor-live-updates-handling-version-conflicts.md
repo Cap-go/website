@@ -142,7 +142,7 @@ Esta sección se basa en la descripción general de las herramientas de actualiz
 ### Consejos de Control de Versiones
 
 -   Usa los **[canales de Capgo](https://capgo.app/docs/webapp/channels/)** para gestionar los lanzamientos de iOS y Android mientras realizas pruebas específicas de plataforma [\[1\]](https://capgo.app/)
--   Mantente con **Capacitor 6 y 7** para garantizar la compatibilidad en tiempo de ejecución en ambas plataformas [\[1\]](https://capgo.app/)
+-   Mantente con **Capacitor 8** para garantizar la compatibilidad en tiempo de ejecución en ambas plataformas [\[1\]](https://capgo.app/)
 
 ### Enfoques de Pruebas
 

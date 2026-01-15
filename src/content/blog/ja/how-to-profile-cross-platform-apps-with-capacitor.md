@@ -61,7 +61,7 @@ Capacitorアプリを効果的にプロファイリングするには、適切�
 以下のものを用意してください：
 
 -   パッケージ管理用の**Node.js v16+**と**npm v8+**
--   アプリのビルドとデプロイ用の**Capacitor CLI (v5.0+)**
+-   アプリのビルドとデプロイ用の**Capacitor CLI (v8+)**
 -   iOS開発とプロファイリング用の**Xcode 14+**
 -   Android開発用の**Android Studio Electric Eel**（またはそれ以降）
 -   Webパフォーマンスプロファイリング用の**Chrome DevTools**

@@ -211,6 +211,6 @@ Costs can vary widely depending on your needs. For example, Capgo's OTA updates 
 
 ### **Technical Requirements**
 
-When choosing a platform, make sure it supports your specific **[Capacitor version](https://capgo.app/plugins/ivs-player/)** (e.g., Capacitor 6 or 7) and offers essential features like analytics, error tracking, rollback options for version control, and seamless CI/CD integration. These features ensure smooth operations as your app scales.
+When choosing a platform, make sure it supports your specific **[Capacitor version](https://capgo.app/plugins/ivs-player/)** (e.g., Capacitor 8) and offers essential features like analytics, error tracking, rollback options for version control, and seamless CI/CD integration. These features ensure smooth operations as your app scales.
 
 The best platform will strike the right balance between performance, security, and cost. Take advantage of free trials - like Capgo's 15-day trial - to see if the platform aligns with your needs [\[1\]](https://capgo.app/).

@@ -142,7 +142,7 @@ Bagian ini membangun pada tinjauan alat live update, berfokus pada strategi untu
 ### Tips Kontrol Versi
 
 -   Gunakan **[kanal Capgo](https://capgo.app/docs/webapp/channels/)** untuk mengelola peluncuran iOS dan Android sambil melakukan pengujian khusus platform [\[1\]](https://capgo.app/).
--   Tetap pada **Capacitor 6 dan 7** untuk memastikan kompatibilitas runtime di kedua platform [\[1\]](https://capgo.app/).
+-   Tetap pada **Capacitor 8** untuk memastikan kompatibilitas runtime di kedua platform [\[1\]](https://capgo.app/).
 
 ### Pendekatan Pengujian
 

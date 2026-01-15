@@ -57,7 +57,7 @@ Here’s what Capgo offers:
 -   **Real-time analytics and error tracking**
 -   **Smooth CI/CD integration**
 -   **Choice of cloud or self-hosted options**
--   **Compatibility with Capacitor 6 & 7**
+-   **Compatibility with Capacitor 8**
 
 ### [Appflow](https://ionic.io/appflow/) by [Ionic](https://ionicframework.com/)
 

@@ -158,7 +158,7 @@ npx cap sync
     npm install @capacitor/core@7.0.0 @capacitor/ios@7.0.0 @capacitor/android@7.0.0
     ```
 
-Capgo は、Capacitor 6 および 7 のライブ更新を提供しており、アプリストアの承認なしに修正を適用できます [\[1\]](https://capgo.app/) 。
+Capgo は、Capacitor 8 のライブ更新を提供しており、アプリストアの承認なしに修正を適用できます [\[1\]](https://capgo.app/) 。
 
 ## 将来のバージョン競合を避ける
 

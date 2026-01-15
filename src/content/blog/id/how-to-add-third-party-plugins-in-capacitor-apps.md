@@ -327,7 +327,7 @@ Berikut yang ditawarkan Capgo:
 
 Capgo terintegrasi dengan mudah ke dalam alur kerja Capacitor Anda, memastikan pembaruan yang aman dan berkelanjutan. Ini bekerja dengan alat seperti **GitHub Actions, GitLab CI, dan** [**Jenkins**](https://www.jenkins.io/), mengotomatisasi pembaruan plugin dan deployment untuk menghemat waktu dan mengurangi upaya manual.
 
-Untuk tim yang menangani beberapa plugin, sistem kanal mendukung pengujian beta sebelum rilis yang lebih luas. Analitik real-time memberikan wawasan tentang kinerja pembaruan dan pelacakan kesalahan. Capgo kompatibel dengan **Capacitor 6 dan 7**, mendukung integrasi API kustom, dan menawarkan opsi self-hosted untuk kebutuhan khusus.
+Untuk tim yang menangani beberapa plugin, sistem kanal mendukung pengujian beta sebelum rilis yang lebih luas. Analitik real-time memberikan wawasan tentang kinerja pembaruan dan pelacakan kesalahan. Capgo kompatibel dengan **Capacitor 8**, mendukung integrasi API kustom, dan menawarkan opsi self-hosted untuk kebutuhan khusus.
 
 ## Ringkasan
 

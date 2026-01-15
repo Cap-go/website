@@ -34,7 +34,7 @@ next_blog: ''
   - **JavaScript zu Android:** Sendet serialisierte Anfragen an native Android-Methoden.
   - **Android zu JavaScript:** Verwendet Callbacks für Event-Broadcasting, direkte Antworten und Statusaktualisierungen.
 - **Einrichtungsanforderungen:**
-  - Verwendung von Capacitor 6.x oder 7.x.
+  - Verwendung von Capacitor 8.x.
   - Konfiguration von [Gradle](https://gradle.org/), `AndroidManifest.xml` und Web-Assets.
 - **Optimierungstipps:**
   - Nutzung von Teilaktualisierungen zur Reduzierung der Bandbreite.
@@ -246,7 +246,7 @@ Durch die nahtlose Integration mit der Native Bridge ermöglicht Capgo Entwickle
 
 ### Capgo Update-Verwaltung
 
-Capgos Update-Verwaltungssystem ist darauf ausgelegt, direkt mit der Native Bridge zu arbeiten und eine reibungslose und zuverlässige Bereitstellung von Updates zu gewährleisten. Es unterstützt sowohl Capacitor 6 als auch 7 und bietet Entwicklern damit Flexibilität in ihren Projekten.
+Capgos Update-Verwaltungssystem ist darauf ausgelegt, direkt mit der Native Bridge zu arbeiten und eine reibungslose und zuverlässige Bereitstellung von Updates zu gewährleisten. Es unterstützt Capacitor 8 und bietet Entwicklern damit Flexibilität in ihren Projekten.
 
 So beginnen Sie mit Capgo:
 

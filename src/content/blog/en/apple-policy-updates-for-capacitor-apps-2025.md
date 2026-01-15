@@ -76,7 +76,7 @@ This method allows for quick development and reliable updates while staying comp
 
 ### Plugin Maintenance
 
-Make sure to update your Capacitor framework to version 5.0 or later to meet Apple's updated SDK requirements. Staying compliant means regularly testing your apps with the latest iOS SDK and Xcode versions. If you're using Capgo's platform, the process is easier thanks to automated compatibility checks and instant deployment features. These tools work seamlessly with Capacitor 6 and 7. Developers also face similar challenges when transitioning PWAs into native apps.
+Make sure to update your Capacitor framework to version 5.0 or later to meet Apple's updated SDK requirements. Staying compliant means regularly testing your apps with the latest iOS SDK and Xcode versions. If you're using Capgo's platform, the process is easier thanks to automated compatibility checks and instant deployment features. These tools work seamlessly with Capacitor 8. Developers also face similar challenges when transitioning PWAs into native apps.
 
 ### PWA to Native Migration
 

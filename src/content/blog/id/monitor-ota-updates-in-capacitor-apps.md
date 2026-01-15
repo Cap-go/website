@@ -50,7 +50,7 @@ Pertama, instal plugin Capgo dengan menjalankan:
 npx @capgo/cli init
 ```
 
-Plugin ini berfungsi dengan baik dengan Capacitor 6 dan 7, sehingga kompatibel dengan berbagai versi aplikasi.
+Plugin ini berfungsi dengan baik dengan Capacitor 8, sehingga kompatibel dengan berbagai versi aplikasi.
 
 ### Mengelola Versi Pembaruan
 

@@ -25,7 +25,7 @@ next_blog: ''
 
 -   **Apa Itu Pembaruan OTA?** Mereka mendorong perubahan langsung ke perangkat pengguna, melewati peninjauan app store. Ini menghemat waktu dan cepat mengatasi masalah.
 -   **Mengapa Pengujian Penting:** Pembaruan yang tidak diuji dengan baik dapat membuat aplikasi rusak atau melanggar kepatuhan. Dengan pengujian yang tepat, 95% pembaruan berhasil dalam 24 jam.
--   **Alat yang Diperlukan:** Capacitor CLI (v6+), [Node.js](https://nodejs.org/en) (v16+), Plugin [Capgo](https://capgo.app/), dan kerangka pengujian seperti [Cypress](https://www.cypress.io/).
+-   **Alat yang Diperlukan:** Capacitor CLI (v8+), [Node.js](https://nodejs.org/en) (v16+), Plugin [Capgo](https://capgo.app/), dan kerangka pengujian seperti [Cypress](https://www.cypress.io/).
 -   **Langkah Pengujian:**
     1.  Konfigurasi lingkungan pengujian dan pengaturan Capgo.
     2.  Validasi proses pembaruan seperti deteksi, unduhan, instalasi, dan rollback.
@@ -74,7 +74,7 @@ Setelah inisialisasi, integrasikan fungsionalitas pembaruan OTA ke dalam aplikas
 
 Untuk keamanan tingkat enterprise, Capgo menyediakan opsi berbasis cloud dan self-hosted.
 
-Ketika integrasi selesai, build aplikasi Anda dan picu pembaruan menggunakan CLI Capgo. Karena Capgo bekerja sempurna dengan Capacitor 6 dan 7, ini mendukung berbagai lingkungan pengembangan modern.
+Ketika integrasi selesai, build aplikasi Anda dan picu pembaruan menggunakan CLI Capgo. Karena Capgo bekerja sempurna dengan Capacitor 8, ini mendukung berbagai lingkungan pengembangan modern.
 
 Langkah-langkah ini meletakkan dasar untuk pengujian pembaruan OTA yang menyeluruh, yang akan dibahas di bagian selanjutnya tentang Metode Pengujian.
 

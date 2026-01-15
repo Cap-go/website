@@ -139,7 +139,7 @@ Pengguna Capgo mendapatkan manfaat dari fitur canggih seperti peluncuran terkend
 
 - 95% pembaruan diselesaikan dalam 24 jam [\[1\]](https://capgo.app/)
 - 82% tingkat keberhasilan secara global untuk pembaruan [\[1\]](https://capgo.app/)
-- Kompatibilitas dengan versi Capacitor 6 dan 7 [\[1\]](https://capgo.app/)
+- Kompatibilitas dengan versi Capacitor 8 [\[1\]](https://capgo.app/)
 
 Untuk memastikan pembaruan berjalan lancar:
 

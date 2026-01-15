@@ -201,7 +201,7 @@ Après les tests de performance, concentrez-vous sur l'accessibilité pour garan
 | Taille des zones tactiles | Vérification des dimensions des éléments | Exigences spécifiques au système d'exploitation |
 | Navigation au clavier | Test des méthodes de saisie | Standards multi-plateformes |
 
-Avec les outils d'intégration de Capgo, vous pouvez automatiser ces tests d'accessibilité directement dans votre workflow CI/CD. La plateforme prend en charge Capacitor 6 et 7, assurant une compatibilité fluide avec les systèmes CI/CD pris en charge tout en vous aidant à respecter les normes de conformité [\[1\]](https://capgo.app/).
+Avec les outils d'intégration de Capgo, vous pouvez automatiser ces tests d'accessibilité directement dans votre workflow CI/CD. La plateforme prend en charge Capacitor 8, assurant une compatibilité fluide avec les systèmes CI/CD pris en charge tout en vous aidant à respecter les normes de conformité [\[1\]](https://capgo.app/).
 
 ## Prochaines étapes et conseils
 

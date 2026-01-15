@@ -47,7 +47,7 @@ Untuk menguji [pembaruan OTA Capacitor](https://capgo.app/ja/), Anda memerlukan 
 | Perangkat Lunak | Tujuan | Persyaratan Versi |
 | --- | --- | --- |
 | **Node.js** | Lingkungan runtime | Versi LTS terbaru |
-| **Capacitor CLI** | Pengembangan aplikasi | Capacitor 6 atau 7 |
+| **Capacitor CLI** | Pengembangan aplikasi | Capacitor 8 |
 | **[Capgo CLI](https://capgo.app/docs/cli/commands)** | Manajemen OTA | Versi terbaru |
 
 Instal Capgo CLI dengan menjalankan:

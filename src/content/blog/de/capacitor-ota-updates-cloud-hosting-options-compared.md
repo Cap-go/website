@@ -216,6 +216,6 @@ Die Kosten können je nach Bedarf stark variieren. Zum Beispiel können CI/CD-Op
 
 ### **Technische Anforderungen**
 
-Bei der Auswahl einer Plattform stellen Sie sicher, dass sie Ihre spezifische **[Capacitor-Version](https://capgo.app/plugins/ivs-player/)** (z.B. Capacitor 6 oder 7) unterstützt und wesentliche Funktionen wie Analytik, Fehlerverfolgung, Rollback-Optionen für Versionskontrolle und nahtlose CI/CD-Integration bietet. Diese Funktionen gewährleisten reibungslose Abläufe beim Skalieren Ihrer App.
+Bei der Auswahl einer Plattform stellen Sie sicher, dass sie Ihre spezifische **[Capacitor-Version](https://capgo.app/plugins/ivs-player/)** (z.B. Capacitor 8) unterstützt und wesentliche Funktionen wie Analytik, Fehlerverfolgung, Rollback-Optionen für Versionskontrolle und nahtlose CI/CD-Integration bietet. Diese Funktionen gewährleisten reibungslose Abläufe beim Skalieren Ihrer App.
 
 Die beste Plattform wird die richtige Balance zwischen Leistung, Sicherheit und Kosten finden. Nutzen Sie kostenlose Testversionen - wie Capgos 15-Tage-Test - um zu sehen, ob die Plattform zu Ihren Bedürfnissen passt [\[1\]](https://capgo.app/).

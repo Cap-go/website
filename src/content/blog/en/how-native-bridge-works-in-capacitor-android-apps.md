@@ -29,7 +29,7 @@ next_blog: ''
     -   **JavaScript to Android:** Sends serialized requests to native Android methods.
     -   **Android to JavaScript:** Uses callbacks for event broadcasting, direct responses, and state updates.
 -   **Setup Requirements:**
-    -   Use Capacitor 6.x or 7.x.
+    -   Use Capacitor 8.x.
     -   Configure [Gradle](https://gradle.org/), `AndroidManifest.xml`, and web assets.
 -   **Optimization Tips:**
     -   Use partial updates to reduce bandwidth.
@@ -241,7 +241,7 @@ By integrating seamlessly with the native bridge, Capgo allows developers to pus
 
 ### Capgo Update Management
 
-Capgo’s update management system is designed to work directly with the native bridge, ensuring smooth and reliable deployment of updates. It supports both Capacitor 6 and 7, providing developers with flexibility in their projects.
+Capgo’s update management system is designed to work directly with the native bridge, ensuring smooth and reliable deployment of updates. It supports both Capacitor 8, providing developers with flexibility in their projects.
 
 To get started with Capgo:
 

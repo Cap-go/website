@@ -48,7 +48,7 @@ Para probar las [actualizaciones OTA de Capacitor](https://capgo.app/ja/), neces
 | Software | Propósito | Requisitos de Versión |
 | --- | --- | --- |
 | **Node.js** | Entorno de ejecución | Última versión LTS |
-| **Capacitor CLI** | Desarrollo de aplicaciones | Capacitor 6 o 7 |
+| **Capacitor CLI** | Desarrollo de aplicaciones | Capacitor 8 |
 | **[Capgo CLI](https://capgo.app/docs/cli/commands)** | Gestión OTA | Última versión |
 
 Instala el CLI de Capgo ejecutando:

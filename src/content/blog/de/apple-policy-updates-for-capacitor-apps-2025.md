@@ -81,7 +81,7 @@ Diese Methode ermöglicht eine schnelle Entwicklung und zuverlässige Updates, w
 
 ### Plugin-Wartung
 
-Stellen Sie sicher, dass Sie Ihr Capacitor-Framework auf Version 5.0 oder höher aktualisieren, um den aktualisierten SDK-Anforderungen von Apple zu entsprechen. Konform zu bleiben bedeutet, Ihre Apps regelmäßig mit den neuesten iOS SDK- und Xcode-Versionen zu testen. Wenn Sie die Plattform von Capgo verwenden, ist der Prozess dank automatisierter Kompatibilitätsprüfungen und sofortiger Bereitstellungsfunktionen einfacher. Diese Tools funktionieren nahtlos mit Capacitor 6 und 7. Auch Entwickler stehen ähnlichen Herausforderungen gegenüber, wenn sie PWAs in native Apps umwandeln.
+Stellen Sie sicher, dass Sie Ihr Capacitor-Framework auf Version 5.0 oder höher aktualisieren, um den aktualisierten SDK-Anforderungen von Apple zu entsprechen. Konform zu bleiben bedeutet, Ihre Apps regelmäßig mit den neuesten iOS SDK- und Xcode-Versionen zu testen. Wenn Sie die Plattform von Capgo verwenden, ist der Prozess dank automatisierter Kompatibilitätsprüfungen und sofortiger Bereitstellungsfunktionen einfacher. Diese Tools funktionieren nahtlos mit Capacitor 8. Auch Entwickler stehen ähnlichen Herausforderungen gegenüber, wenn sie PWAs in native Apps umwandeln.
 
 ### PWA zu Native Migration
 

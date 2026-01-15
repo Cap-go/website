@@ -143,7 +143,7 @@ Cette section s'appuie sur l'aperçu des outils de mise à jour en direct, en se
 ### Conseils de Contrôle des Versions
 
 - Utilisez les **[canaux Capgo](https://capgo.app/docs/webapp/channels/)** pour gérer les déploiements iOS et Android tout en réalisant des tests spécifiques aux plateformes [\[1\]](https://capgo.app/).
-- Adoptez **Capacitor 6 et 7** pour garantir la compatibilité d'exécution entre les deux plateformes [\[1\]](https://capgo.app/).
+- Adoptez **Capacitor 8** pour garantir la compatibilité d'exécution entre les deux plateformes [\[1\]](https://capgo.app/).
 
 ### Approches de Test
 

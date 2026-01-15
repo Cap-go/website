@@ -25,7 +25,7 @@ next_blog: ''
 
 -   **Was sind OTA-Updates?** Sie übertragen Änderungen direkt auf die Geräte der Nutzer und umgehen App Store Überprüfungen. Dies spart Zeit und behebt Probleme schnell.
 -   **Warum Tests wichtig sind:** Schlecht getestete Updates können Apps zum Absturz bringen oder Compliance-Probleme verursachen. Mit korrektem Testing sind 95% der Updates innerhalb von 24 Stunden erfolgreich.
--   **Benötigte Tools:** Capacitor CLI (v6+), [Node.js](https://nodejs.org/en) (v16+), [Capgo](https://capgo.app/) Plugin und ein Test-Framework wie [Cypress](https://www.cypress.io/).
+-   **Benötigte Tools:** Capacitor CLI (v8+), [Node.js](https://nodejs.org/en) (v16+), [Capgo](https://capgo.app/) Plugin und ein Test-Framework wie [Cypress](https://www.cypress.io/).
 -   **Test-Schritte:**
     1.  Konfigurieren Sie Ihre Testumgebung und Capgo-Einstellungen.
     2.  Validieren Sie Update-Prozesse wie Erkennung, Download, Installation und Rollback.
@@ -74,7 +74,7 @@ Nach der Initialisierung integrieren Sie die OTA-Update-Funktionalität in Ihre 
 
 Für Unternehmenssicherheit bietet Capgo sowohl Cloud-basierte als auch selbst-gehostete Optionen.
 
-Nach abgeschlossener Integration bauen Sie Ihre App und lösen Updates über die Capgo CLI aus. Da Capgo nahtlos mit Capacitor 6 und 7 funktioniert, unterstützt es eine breite Palette moderner Entwicklungsumgebungen.
+Nach abgeschlossener Integration bauen Sie Ihre App und lösen Updates über die Capgo CLI aus. Da Capgo nahtlos mit Capacitor 8 funktioniert, unterstützt es eine breite Palette moderner Entwicklungsumgebungen.
 
 Diese Schritte legen den Grundstein für gründliche OTA-Update-Tests, die im nächsten Abschnitt zu Testmethoden behandelt werden.
 

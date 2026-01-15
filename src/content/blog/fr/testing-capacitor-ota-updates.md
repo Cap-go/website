@@ -26,7 +26,7 @@ next_blog: ''
 
 -   **Que sont les mises à jour OTA ?** Elles déploient des changements en direct directement sur les appareils des utilisateurs, évitant les validations des app stores Cela économise du temps et résout rapidement les problèmes
 -   **Pourquoi les tests sont importants :** Des mises à jour mal testées peuvent planter les applications ou enfreindre la conformité Avec des tests appropriés, 95% des mises à jour réussissent en 24 heures
--   **Outils nécessaires :** Capacitor CLI (v6+), [Nodejs](https://nodejsorg/en) (v16+), Plugin [Capgo](https://capgo.app/), et un framework de test comme [Cypress](https://wwwcypressio/)
+-   **Outils nécessaires :** Capacitor CLI (v8+), [Nodejs](https://nodejsorg/en) (v16+), Plugin [Capgo](https://capgo.app/), et un framework de test comme [Cypress](https://wwwcypressio/)
 -   **Étapes de test :**
     1. Configurer votre environnement de test et les paramètres Capgo
     2. Valider les processus de mise à jour comme la détection, le téléchargement, l'installation et le rollback
@@ -73,7 +73,7 @@ Après l'initialisation, intégrez la fonctionnalité de mise à jour OTA dans v
 
 Pour la sécurité de niveau entreprise, Capgo propose des options cloud et auto-hébergées
 
-Une fois l'intégration terminée, construisez votre application et déclenchez les mises à jour en utilisant le CLI Capgo Comme Capgo fonctionne parfaitement avec Capacitor 6 et 7, il prend en charge une large gamme d'environnements de développement modernes
+Une fois l'intégration terminée, construisez votre application et déclenchez les mises à jour en utilisant le CLI Capgo Comme Capgo fonctionne parfaitement avec Capacitor 8, il prend en charge une large gamme d'environnements de développement modernes
 
 Ces étapes posent les bases pour des tests approfondis des mises à jour OTA, qui seront abordés dans la prochaine section sur les méthodes de test
 
