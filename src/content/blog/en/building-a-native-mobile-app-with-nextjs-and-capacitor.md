@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-02-21T00:00:00.000Z
-updated_at: 2026-01-15T00:00:00.000Z
+updated_at: 2026-01-15T23:07:27.000Z
 head_image: /next_capgo.webp
 head_image_alt: Next.js 15 and Capacitor illustration
 keywords: Next.js 15, Capacitor 8, convert web app to mobile, iOS, Android, mobile app development, static export, native plugins
