@@ -58,8 +58,16 @@
   }
 </script>
 
-<div style="width: 100%; padding: 1rem 0; display: flex; justify-content: center;">
-  <pre class="mermaid" style="width: 100%; max-width: 900px;">
+<div
+  style="width: 100%; padding: 1rem 0; display: flex; justify-content: center;"
+  aria-live="polite"
+>
+  <pre
+    class="mermaid"
+    style="width: 100%; max-width: 900px;"
+    role="img"
+    aria-label="Capgo Cloud Build process flow diagram"
+  >
 flowchart LR
     A[Your Machine] -->|1. Zip Project| B[Local Temp]
     B -->|2. Upload| C[Capgo Cloud]
