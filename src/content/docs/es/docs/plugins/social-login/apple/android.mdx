@@ -6,8 +6,16 @@ sidebar:
 locale: es
 ---
 
-import AndroidAppleLoginGraph from '@/components/AndroidAppleLoginGraph.astro'
+import MermaidGraph from '@/components/MermaidGraph.astro';
 import { Steps } from '@astrojs/starlight/components';
+
+export const appleLoginFlowGraph = `flowchart TD
+    A("await SocialLogin.login()") -->|Handled in the plugin|B(Generate the login URL)
+    B --> |Pass the link| C(Open the Chrome browser)
+    C --> D(Wait for the user to login)
+    D --> |Apple redirects to your backend|E(Handle the data returned from Apple)
+    E --> F(Redirect back to the app)
+    F --> G(Return to JS)`;
 
 Apple login on android is hacky. Apple has no official support for `Sign in with Apple` on Android, so the solution is slightly hacky.
 
@@ -20,7 +28,7 @@ Android currently uses a chrome tabs to display an OAuth2 website. This approach
 
 Let me use a diagram to explain the flow on android:
 
-<AndroidAppleLoginGraph />
+<MermaidGraph graph={appleLoginFlowGraph} ariaLabel="Apple Login flow diagram on Android" fullWidth={false} />
 
 Now that you are aware of the challlanges and the flow, let's begin the configuration.
 

@@ -6,6 +6,14 @@ sidebar:
 ---
 
 import { Steps, Card, CardGrid } from '@astrojs/starlight/components';
+import MermaidGraph from '@/components/MermaidGraph.astro';
+
+export const buildProcessFlowGraph = `flowchart LR
+    A[Your Machine] -->|1. Zip Project| B[Local Temp]
+    B -->|2. Upload| C[Capgo Cloud]
+    C -->|3. Build| D[Build Server]
+    D -->|4. Logs Stream| A
+    D -->|5. Cleanup| E[Auto Delete]`;
 
 Get started with Capgo Cloud Build and create your first iOS or Android native build in minutes.
 
@@ -128,14 +136,7 @@ Before you begin, ensure you have:
 
 When you run the build command, here's what happens:
 
-```mermaid
-graph LR
-    A[Your Machine] -->|1. Zip Project| B[Local Temp]
-    B -->|2. Upload| C[Capgo Cloud]
-    C -->|3. Build| D[Build Server]
-    D -->|4. Logs Stream| A
-    D -->|5. Cleanup| E[Auto Delete]
-```
+<MermaidGraph graph={buildProcessFlowGraph} ariaLabel="Capgo Cloud Build process flow diagram" />
 
 1. **Local Preparation** - Your project is zipped (excluding `node_modules` and dotfiles)
 2. **Upload** - The zip is uploaded to secure cloud storage (Cloudflare R2)
