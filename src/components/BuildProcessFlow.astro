@@ -1,0 +1,70 @@
+---
+---
+
+<script>
+  import mermaid from 'mermaid'
+
+  function initializeMermaid() {
+    const isDarkTheme = document.documentElement.dataset.theme === 'dark'
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: isDarkTheme ? 'dark' : 'default',
+      fontSize: 18,
+    })
+  }
+
+  function saveOriginalContent() {
+    document.querySelectorAll('.mermaid').forEach((element) => {
+      if (!element.getAttribute('data-original-content')) {
+        element.setAttribute('data-original-content', element.innerHTML)
+      }
+    })
+  }
+
+  function resetAndRender() {
+    document.querySelectorAll('.mermaid').forEach((element) => {
+      const originalContent = element.getAttribute('data-original-content')
+      if (originalContent) {
+        element.removeAttribute('data-processed')
+        element.innerHTML = originalContent
+      }
+    })
+
+    const isDarkTheme = document.documentElement.dataset.theme === 'dark'
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: isDarkTheme ? 'dark' : 'default',
+      fontSize: 18,
+    })
+
+    mermaid.run()
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initializeMermaid()
+    saveOriginalContent()
+  })
+
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === 'data-theme') {
+        resetAndRender()
+      }
+    })
+  })
+
+  if (typeof document !== 'undefined') {
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+  }
+</script>
+
+<div style="width: 100%; padding: 1rem 0; display: flex; justify-content: center;">
+  <pre class="mermaid" style="width: 100%; max-width: 900px;">
+flowchart LR
+    A[Your Machine] -->|1. Zip Project| B[Local Temp]
+    B -->|2. Upload| C[Capgo Cloud]
+    C -->|3. Build| D[Build Server]
+    D -->|4. Logs Stream| A
+    D -->|5. Cleanup| E[Auto Delete]
+  </pre>
+</div>
