@@ -86,10 +86,10 @@ Your source code stays on your machine. Only the platform-specific native code i
 
 Capgo Build is designed with zero credential storage:
 
-- **Runtime-only credentials** - Certificates and keystores exist only in memory during the build, never written to disk
+- **Runtime-only credentials** - Certificates and keystores are never stored in Capgo. They are uploaded and removed immediately after the build finishes.
 - **Ephemeral environments** - Each build runs in isolation and is destroyed after completion
 - **No log storage** - Build logs stream to your terminal only, never stored on Capgo servers
-- **Minimal upload** - Only the native platform you request is uploaded, not your full codebase
+- **Minimal upload** - Only the native platform you request is uploaded, not your full codebase. [See exactly what gets uploaded](/docs/cli/cloud-build/getting-started/#what-gets-built)
 
 ## Pricing
 
