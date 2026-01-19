@@ -38,7 +38,41 @@ There are some advantages to doing a manual build first:
 - You will create the appstore record if you haven't done it yet
 - You will be able to figure out any issues with the build process linked to your app code
 
-Let's begin:
+Before we can begin, you must have the deployment certificate installed on your local machine.
+This is quite a bit complex, but I will explain it bellow.
+
+### Setting up the deployment certificate
+
+<Steps>
+1. Open Xcode
+2. Click on `XCode` -> `Settings`
+    Alternatively, you can use the shortcut `Cmd + ,`
+
+    ![Xcode settings](/native-build-assets/xcode-settings.webp)
+3. Go to `Apple Accounts`
+    ![Xcode apple accounts](/native-build-assets/xcode-apple-accounts.webp)
+4. Find the Apple Account that is added to the Apple Developer Account
+    ![Xcode selected apple account](/native-build-assets/xcode-selected-account.webp)
+5. Find the team that you will use to deploy the app
+    ![Xcode find team](/native-build-assets/xcode-find-team.webp)
+6. Click on the `Manage Certificates` button
+    ![Xcode manage certificates](/native-build-assets/xcode-manage-certificates.webp)
+7. Make sure you can see the deployment certificate in the list
+    ![Xcode deployment certificate](/native-build-assets/xcode-deployment-certificate.webp)
+8. If you do not, you need to create a new certificate
+
+    :::note
+      Apple limits the numbers of deployment certificates you can have to 3. If you have more than 3 certificates, you need to delete one in order to create a new one. I will not convert that in the tutorial.
+    :::
+
+    1. Click on the `+` button and then on `Apple distribution`
+        ![Xcode add certificate](/native-build-assets/xcode-add-certificate.webp)
+    2. The certificate will be created automatically. You can see it in the list. Look at the previous step to confirm that you see it.
+</Steps>
+
+Now that you have the deployment certificate installed, you can begin the build process.
+
+### Manual build to Testflight
 
 <Steps>
   1. Open the app in Xcode
@@ -85,6 +119,8 @@ You may instinctively think that all is good now and that you will be able to se
 
 Let's start with the first one:
 
+### Adding yourself to TestFlight
+
 <Steps>
   1. Go to the [Appstore Connect](https://appstoreconnect.apple.com/) page
     ![Appstore Connect login page](/native-build-assets/appstore-connect-login.webp)
@@ -122,6 +158,8 @@ Let's start with the first one:
 Congratilations 🎉
 You have added yourself to testflight. Now, there is just one more thing 
 you need to do before you can configure Capgo Native Build.
+
+### Setting up the compliance information
 
 You now need to promise Apple that your app doesn't use any non-standard (like a custom algorithm) encryption. If you app does use any non-standard encryption, I suggest reading the [Apple documentation](https://developer.apple.com/help/app-store-connect/manage-app-information/overview-of-export-compliance) on how to handle this.
 There are two ways to do this:
@@ -166,6 +204,8 @@ As for the second one, here are the steps:
 [Here](https://developer.apple.com/documentation/security/complying-with-encryption-export-regulations) is the official Apple documentation on how to inform Apple of your compliance with encryption export regulations.
 :::
 
+### Installing the TestFlight app and accepting the invitation
+
 Now, you are **ALMOST** ready to test your app in Testflight.
 Before, you need to do the following things:
 
@@ -196,3 +236,5 @@ As for accepting the invitation, you will receive an email from Apple with a lin
 
 Congratulations 🎉
 You have accepted the invitation to test your app in Testflight. Now, you can configure Capgo Native Build to build and submit your app to Testflight.
+
+
