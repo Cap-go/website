@@ -209,6 +209,42 @@ if (plans.length > 0) {
         {m.we_don_t_bill_you_automatically_until_your_confirmation({}, { locale: Astro.locals.locale })}<br />
         {m.we_don_t_store_or_sell_your_data_to_anyone({}, { locale: Astro.locals.locale })}
       </p>
+
+      <!-- Premium Support Section -->
+      <div class="mt-16 mb-16 max-w-4xl mx-auto">
+        <div class="bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl p-8 lg:p-10 border border-orange-200 shadow-lg">
+          <div class="flex flex-col lg:flex-row items-center gap-8">
+            <div class="flex-shrink-0">
+              <div class="w-20 h-20 bg-orange-100 rounded-2xl flex items-center justify-center">
+                <svg class="w-10 h-10 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              </div>
+            </div>
+            <div class="flex-1 text-center lg:text-left">
+              <h3 class="text-2xl font-bold text-gray-900 mb-2">Premium Support for Capacitor Apps</h3>
+              <p class="text-gray-600 mb-4">
+                App crashing? Deployment stuck? We come in and save the day. Get 4 hours of expert support monthly at €250/hour.
+              </p>
+              <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+                <div class="flex items-baseline gap-1">
+                  <span class="text-3xl font-bold text-gray-900">€1,000</span>
+                  <span class="text-gray-500">/month</span>
+                </div>
+                <a
+                  href={getRelativeLocaleUrl(Astro.locals.locale, 'premium-support')}
+                  class="inline-flex items-center px-6 py-3 text-base font-semibold text-white bg-orange-600 rounded-xl hover:bg-orange-700 transition-colors shadow-md"
+                >
+                  Learn More
+                  <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <Faq />
   </section>
