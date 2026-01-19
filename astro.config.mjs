@@ -723,6 +723,11 @@ export default defineConfig({
           ],
         },
         {
+          label: 'Cloud',
+          collapsed: true,
+          autogenerate: { directory: 'docs/cloud' }
+        },
+        {
           label: 'Live Updates',
           collapsed: true,
           autogenerate: { directory: 'docs/live-updates' },
