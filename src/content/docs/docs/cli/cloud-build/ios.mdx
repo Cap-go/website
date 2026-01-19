@@ -238,3 +238,121 @@ Congratulations 🎉
 You have accepted the invitation to test your app in Testflight. Now, you can configure Capgo Native Build to build and submit your app to Testflight.
 
 
+## Configuring Capgo Native Build
+
+There are a few things you need to configure in Capgo Native Build to be able to build and submit your app to Testflight.
+Here is a list of the things you will pass to the Capgo CLI:
+
+| Parameter | Description |
+|-----------|-------------|
+| `--platform` | The platform to build for (`ios`) |
+| `--apple-team-id` | Your Apple Developer Team ID (found in [Apple Developer Portal](https://developer.apple.com/account)) |
+| `--apple-key` | Path to your App Store Connect API Key file (`.p8` file) |
+| `--apple-key-id` | The Key ID of your App Store Connect API Key |
+| `--apple-issuer-id` | Your App Store Connect Issuer ID |
+| `--certificate` | Path to your distribution certificate (`.p12` file) |
+| `--provisioning-profile` | Path to your provisioning profile (`.mobileprovision` file) |
+| `--apple-profile-name` | The name of your provisioning profile |
+
+Example command:
+
+```bash
+npx @capgo/cli build credentials save \
+  --platform ios \
+  --apple-team-id YOUR_TEAM_ID \
+  --apple-key '/path/to/AuthKey_XXXXX.p8' \
+  --apple-key-id YOUR_KEY_ID \
+  --apple-issuer-id YOUR_ISSUER_ID \
+  --certificate '/path/to/certificate.p12' \
+  --provisioning-profile '/path/to/profile.mobileprovision' \
+  --apple-profile-name your-profile-name
+```
+
+
+### Team ID
+
+Let's start with the team ID. Finding it is quite easy.
+
+<Steps>
+   1. Go to [Apple Developer Account](https://developer.apple.com/account/) and scroll down
+   
+   2. Find the `Team ID`
+      <img src="/native-build-assets/apple_dev_team_id.png" alt="Team ID location in developer account" />
+</Steps>
+
+
+### Apple key, Apple key ID and Apple issuer ID
+
+Now, let's move on to the Apple key.
+
+<Steps>
+   1. Go to [Appstore Connect user and access page](https://appstoreconnect.apple.com/access/users/)
+      :::note
+      For me the link sometimes doesn't work. Reload the page it doesn't work for you.
+      :::
+   2. Select the correct team in the dropdown
+      1. Click on your name in the top right corner
+      2. Click on the team you want to use
+        ![Apple Developer keys team selection](/native-build-assets/apple-developer-select-team.webp)
+  3. Click on the `Integrations` button
+      ![Appstore Connect integrations button](/native-build-assets/appstore-connect-integrations-button.webp)
+  4. Find the `issuer`
+      :::caution
+      This **IS TO BE SAVED** - you will need it later
+      :::
+
+      Click on the `copy` button to copy the issuer
+      ![Appstore Connect copy issuer](/native-build-assets/appstore-connect-copy-issuer.webp)
+  5. Click on the plus button
+    ![Appstore Connect add key button](/native-build-assets/appstore-connect-add-key-button.webp)
+  6. Set the name of the key and set the access to `App manager` and click on the `Generate` button
+    ![Appstore Connect add key name, set access to app manager and generate button](/native-build-assets/appstore-connect-add-key-name.webp)
+  7. Save the key ID
+      :::caution
+      This **IS TO BE SAVED** - you will need it later
+      :::
+
+      ![Appstore Connect copy key ID](/native-build-assets/appstore-connect-copy-key-id.webp)
+  8. Download the key
+      :::caution
+      This **IS TO BE SAVED** - you will need it later
+      :::
+
+      :::danger
+      **NEVER SHARE THE KEY WITH ANYONE - USE IT ONLY IN THE CAPGO CLI**
+      :::
+
+      ![Appstore Connect download key](/native-build-assets/appstore-connect-download-key.webp)
+
+      ![Appstore Connect download key warning](/native-build-assets/appstore-connect-download-key-warning.webp)
+</Steps>
+
+Congratulations 🎉
+You have created the Apple key, Apple key ID and Apple issuer ID.
+
+### Certificate
+
+Now, you are ready to export the certificate. As you remember, one of the first steps of this guide was setting up the deployment certificate.
+
+However, Apple in their infinite wisdom, decided that the way you export the certificate is quite different from the way you create them 🙃
+Let's get into setting it up:
+
+<Steps>
+   1. Open Keychain Access
+      1. Click `Command + Space` to open the search bar
+      2. Search for `Keychain Access`
+      3. Click on the `Keychain Access` app
+
+
+      <video 
+        src="/native-build-assets/open-keychain-macos.mp4" 
+        controls 
+        autoplay 
+        loop 
+        muted 
+        playsinline 
+        aria-label="Demonstrati
+        
+        on of opening Keychain Access on macOS"
+      ></video>
+</Steps>
