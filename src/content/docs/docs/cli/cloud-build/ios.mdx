@@ -355,4 +355,100 @@ Let's get into setting it up:
         
         on of opening Keychain Access on macOS"
       ></video>
+  2. Select the `login` category and click on the `My Certificates` button
+    ![Keychain Access login category](/native-build-assets/keychain-access-login-category.webp)
+  3. Find your certificate in the list
+    
+      The certificate should be named `Apple Distribution: [Your Name/Company] (your team ID)`
+      ![Keychain Access find certificate](/native-build-assets/keychain-access-find-certificate.webp)
+  4. Right-click on the certificate and select `Export`
+    ![Keychain Access export certificate](/native-build-assets/keychain-access-export-certificate.webp)
+  5. Save the certificate as a `.p12` file
+      :::caution
+      This **IS TO BE SAVED** - you will need it later
+      :::
+
+      1. Make sure to select a good name for the certificate file
+      2. Make sure the file format is set to `Personal Information Exchange (.p12)`
+      3. Click on the `Save` button
+
+      ![Keychain Access save certificate dialog](/native-build-assets/keychain-access-save-certificate.webp)
+  6. When asked for the password, **DO NOT SET IT**
+
+      Click on the `OK` button without setting a password
+
+      ![Keychain Access save certificate without password](/native-build-assets/keychain-access-save-certificate-password-dialog.webp)
+  7. When asked for the "login keychain password", give the password you use to login to your Mac
+
+      Give the password you use to login to your Mac. Then, click on the `Allow` button.
+
+      ![Keychain Access save certificate login keychain password](/native-build-assets/keychain-access-save-certificate-login-keychain-password.webp)
 </Steps>
+
+Congratulations 🎉
+You have exported the certificate.
+
+### Provisioning profile
+
+Now, you are ready to export the provisioning profile. I promise, this this the last thing you will need to get from Apple.
+
+<Steps>
+   1. Go to [Apple Developer Profiles](https://developer.apple.com/account/resources/profiles/list)
+   2. Select the correct team in the dropdown
+      1. Click on your name in the top right corner
+      2. Click on the team you want to use
+        ![Apple Developer keys team selection](/native-build-assets/apple-developer-select-team.webp)
+  3. Make sure you are on the correct page
+      It should look like this, if it doesn't click on `profiles` in the sidebar
+    
+      ![Apple Developer profiles page](/native-build-assets/apple-developer-profiles-page.webp)
+  4. Click on the `+` button
+    ![Apple Developer add profile button](/native-build-assets/apple-developer-add-profile-button.webp)
+  5. Select the profile type
+      Select `App Store Connect` and click on the `Continue` button
+      
+      ![Apple Developer select profile type](/native-build-assets/apple-developer-select-profile-type.webp)
+  6. Select the app you want to build
+
+      Find your app in the dropdown and click on the `Continue` button
+
+      ![Apple Developer select app](/native-build-assets/apple-developer-select-app.webp)
+  7. Select the correct deployment certificate
+
+      Select the certificate you exported in the previous step and click on the `Continue` button
+
+      ![Apple Developer select deployment certificate](/native-build-assets/apple-developer-select-deployment-certificate.webp)
+
+      If you are unsure which certificate to select, come back to keychain access and find the certificate you exported. Then look at the expiration date.
+      
+      ![Apple Developer select deployment certificate expiration date](/native-build-assets/apple-developer-select-deployment-certificate-expiration-date.webp)
+  8. Name the profile
+
+      Give the profile a name and click on the `Generate` button
+
+      :::caution
+      This name **IS TO BE SAVED** - you will need it later
+      :::
+
+      ![Apple Developer name profile](/native-build-assets/apple-developer-name-profile.webp)
+  9. Download the profile
+
+      Click on the `Download` button to download the profile
+
+      :::caution
+      This file **IS TO BE SAVED** - you will need it later
+      :::
+
+      ![Apple Developer download profile](/native-build-assets/apple-developer-name-provisioning-profile.webp)
+</Steps>
+
+Congratulations 🎉
+You have now got everything you need to configure Capgo Native Build.
+
+:::caution
+Never commit the credentials you just created to your repository.
+Keep them safe! 🔒
+:::
+
+### Running the configuration command
+
