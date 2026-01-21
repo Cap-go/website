@@ -31,11 +31,11 @@ Build and submit iOS apps to TestFlight and the App Store using Capgo's dedicate
 
 ## The first manual build
 
-Before we can start thinking about building the app with Capgo, we should first set it up, and do a first testflight build by hand.
+Before we can start thinking about building the app with Capgo, we should first set it up, and do a first TestFlight build by hand.
 There are some advantages to doing a manual build first:
 
 - You will setup the distribution certificate on your local machine
-- You will create the appstore record if you haven't done it yet
+- You will create the App Store record if you haven't done it yet
 - You will be able to figure out any issues with the build process linked to your app code
 
 Before we can begin, you must have the deployment certificate installed on your local machine.
@@ -112,56 +112,56 @@ Now that you have the deployment certificate installed, you can begin the build 
 </Steps>  
 
 
-You may instinctively think that all is good now and that you will be able to see your app in Testflight now, but there are a few more things needed to be done before you can see your app in Testflight:
+You may instinctively think that all is good now and that you will be able to see your app in TestFlight now, but there are a few more things needed to be done before you can see your app in TestFlight:
 
   1. You need to add yourself to TestFlight
-  2. You need to promise Apple that your app doesn't use any non-standard (like a custom algorithm) encryption. If you app does use any non-standard encryption, I suggest reading the [Apple documentation](https://developer.apple.com/help/app-store-connect/manage-app-information/overview-of-export-compliance) on how to handle this.
+  2. You need to promise Apple that your app doesn't use any non-standard (like a custom algorithm) encryption. If your app does use any non-standard encryption, I suggest reading the [Apple documentation](https://developer.apple.com/help/app-store-connect/manage-app-information/overview-of-export-compliance) on how to handle this.
 
 Let's start with the first one:
 
 ### Adding yourself to TestFlight
 
 <Steps>
-  1. Go to the [Appstore Connect](https://appstoreconnect.apple.com/) page
-    ![Appstore Connect login page](/native-build-assets/appstore-connect-login.webp)
+  1. Go to the [App Store Connect](https://appstoreconnect.apple.com/) page
+    ![App Store Connect login page](/native-build-assets/appstore-connect-login.webp)
   2. Sign in with your Apple Developer account
   3. Select the team that you used when you created the app record. If you are only in one developer account, can skip this step.
-    ![Appstore Connect team selection](/native-build-assets/appstore-connect-select-team.webp)
+    ![App Store Connect team selection](/native-build-assets/appstore-connect-select-team.webp)
   4. Click on the `Apps` button
-    ![Appstore Connect apps button](/native-build-assets/appstore-connect-apps-button.webp)
+    ![App Store Connect apps button](/native-build-assets/appstore-connect-apps-button.webp)
   5. Find the app you created in the previous step and click on it
-    ![Appstore Connect app selection](/native-build-assets/appstore-connect-select-app.webp)
+    ![App Store Connect app selection](/native-build-assets/appstore-connect-select-app.webp)
   6. Click on the `TestFlight` button
-    ![Appstore Connect testflight button](/native-build-assets/appstore-connect-testflight-button.webp)
+    ![App Store Connect testflight button](/native-build-assets/appstore-connect-testflight-button.webp)
   7. Click on the `Internal Testers plus` button
-    ![Appstore Connect internal testers plus button](/native-build-assets/appstore-connect-testflight-internal-testing-plus.webp)
+    ![App Store Connect internal testers plus button](/native-build-assets/appstore-connect-testflight-internal-testing-plus.webp)
   8. Create a new group
 
       I like to name the group "internal". You can name it whatever you want.
 
-      ![Appstore Connect create new group](/native-build-assets/appstore-connect-testflight-internal-create-group.webp)
+      ![App Store Connect create new group](/native-build-assets/appstore-connect-testflight-internal-create-group.webp)
   9. Click on `Invite testers` button
-    ![Appstore Connect invite testers button](/native-build-assets/appstore-connect-testflight-internal-invite-testers.webp)
+    ![App Store Connect invite testers button](/native-build-assets/appstore-connect-testflight-internal-invite-testers.webp)
   10. Add yourself to the group
 
       Find yourself in the list and select the checkbox next to your name. (You may need to refresh the page to see yourself)
       Then, click on the `Add` button.
 
-      ![Appstore Connect invite tester checkbox](/native-build-assets/appstore-connect-testflight-internal-invite-tester-checkbox.webp)
+      ![App Store Connect invite tester checkbox](/native-build-assets/appstore-connect-testflight-internal-invite-tester-checkbox.webp)
   11. Verify that you are added to the group
 
       Now, you should see yourself in the group.
 
-      ![Appstore Connect verify tester](/native-build-assets/appstore-connect-testflight-internal-verify-tester.webp)
+      ![App Store Connect verify tester](/native-build-assets/appstore-connect-testflight-internal-verify-tester.webp)
 </Steps>
 
-Congratilations 🎉
-You have added yourself to testflight. Now, there is just one more thing 
+Congratulations 🎉
+You have added yourself to TestFlight. Now, there is just one more thing 
 you need to do before you can configure Capgo Native Build.
 
 ### Setting up the compliance information
 
-You now need to promise Apple that your app doesn't use any non-standard (like a custom algorithm) encryption. If you app does use any non-standard encryption, I suggest reading the [Apple documentation](https://developer.apple.com/help/app-store-connect/manage-app-information/overview-of-export-compliance) on how to handle this.
+You now need to promise Apple that your app doesn't use any non-standard (like a custom algorithm) encryption. If your app does use any non-standard encryption, I suggest reading the [Apple documentation](https://developer.apple.com/help/app-store-connect/manage-app-information/overview-of-export-compliance) on how to handle this.
 There are two ways to do this:
 
 1. You can do this by hand every time you build your app.
@@ -170,20 +170,20 @@ There are two ways to do this:
 Let's start with the first one:
 
 <Steps>
-  1. Follow all the steps from the previous section to find the TestFlight section in AppStore Connect
+  1. Follow all the steps from the previous section to find the TestFlight section in App Store Connect
   2. Click on `Builds -> iOS`
-    ![Appstore Connect builds iOS button](/native-build-assets/appstore-connect-builds-ios-button.webp)
+    ![App Store Connect builds iOS button](/native-build-assets/appstore-connect-builds-ios-button.webp)
   3. Find the build with missing compliance information and click on `Manage`
-    ![Appstore Connect manage build](/native-build-assets/appstore-connect-manage-build.webp)
+    ![App Store Connect manage build](/native-build-assets/appstore-connect-manage-build.webp)
   4. Select the option that best describes your app
 
       For me, this is `none`, but it might be different for you.
       After, click save
 
-      ![Appstore Connect save compliance information](/native-build-assets/appstore-connect-manage-build-compliance.webp)
+      ![App Store Connect save compliance information](/native-build-assets/appstore-connect-manage-build-compliance.webp)
   5. Your app should now say `ready to test`
 
-      ![Appstore Connect ready to test](/native-build-assets/appstore-connect-ready-to-test.webp)
+      ![App Store Connect ready to test](/native-build-assets/appstore-connect-ready-to-test.webp)
 </Steps>
 
 As for the second one, here are the steps:
@@ -206,13 +206,13 @@ As for the second one, here are the steps:
 
 ### Installing the TestFlight app and accepting the invitation
 
-Now, you are **ALMOST** ready to test your app in Testflight.
+Now, you are **ALMOST** ready to test your app in TestFlight.
 Before, you need to do the following things:
 
 1. Download the [TestFlight app](https://apps.apple.com/us/app/testflight/id899247664) from the App Store on your iOS/iPadOS device
 2. Accept the invitation to test your app
 
-I will skip the details of how to install the TestFlight app on your device. If you are not sure how to install an app, google has some great guides on how to do it.
+I will skip the details of how to install the TestFlight app on your device. If you are not sure how to install an app, Google has some great guides on how to do it.
 
 As for accepting the invitation, you will receive an email from Apple with a link to accept the invitation.
 
@@ -235,12 +235,12 @@ As for accepting the invitation, you will receive an email from Apple with a lin
 </Steps>
 
 Congratulations 🎉
-You have accepted the invitation to test your app in Testflight. Now, you can configure Capgo Native Build to build and submit your app to Testflight.
+You have accepted the invitation to test your app in TestFlight. Now, you can configure Capgo Native Build to build and submit your app to TestFlight.
 
 
 ## Configuring Capgo Native Build
 
-There are a few things you need to configure in Capgo Native Build to be able to build and submit your app to Testflight.
+There are a few things you need to configure in Capgo Native Build to be able to build and submit your app to TestFlight.
 Here is a list of the things you will pass to the Capgo CLI:
 
 | Parameter | Description |
@@ -286,33 +286,33 @@ Let's start with the team ID. Finding it is quite easy.
 Now, let's move on to the Apple key.
 
 <Steps>
-   1. Go to [Appstore Connect user and access page](https://appstoreconnect.apple.com/access/users/)
+   1. Go to [App Store Connect user and access page](https://appstoreconnect.apple.com/access/users/)
       :::note
-      For me the link sometimes doesn't work. Reload the page it doesn't work for you.
+      For me the link sometimes doesn't work. Reload the page if it doesn't work for you.
       :::
    2. Select the correct team in the dropdown
       1. Click on your name in the top right corner
       2. Click on the team you want to use
         ![Apple Developer keys team selection](/native-build-assets/apple-developer-select-team.webp)
   3. Click on the `Integrations` button
-      ![Appstore Connect integrations button](/native-build-assets/appstore-connect-integrations-button.webp)
+      ![App Store Connect integrations button](/native-build-assets/appstore-connect-integrations-button.webp)
   4. Find the `issuer`
       :::caution
       This **IS TO BE SAVED** - you will need it later
       :::
 
       Click on the `copy` button to copy the issuer
-      ![Appstore Connect copy issuer](/native-build-assets/appstore-connect-copy-issuer.webp)
+      ![App Store Connect copy issuer](/native-build-assets/appstore-connect-copy-issuer.webp)
   5. Click on the plus button
-    ![Appstore Connect add key button](/native-build-assets/appstore-connect-add-key-button.webp)
+    ![App Store Connect add key button](/native-build-assets/appstore-connect-add-key-button.webp)
   6. Set the name of the key and set the access to `App manager` and click on the `Generate` button
-    ![Appstore Connect add key name, set access to app manager and generate button](/native-build-assets/appstore-connect-add-key-name.webp)
+    ![App Store Connect add key name, set access to app manager and generate button](/native-build-assets/appstore-connect-add-key-name.webp)
   7. Save the key ID
       :::caution
       This **IS TO BE SAVED** - you will need it later
       :::
 
-      ![Appstore Connect copy key ID](/native-build-assets/appstore-connect-copy-key-id.webp)
+      ![App Store Connect copy key ID](/native-build-assets/appstore-connect-copy-key-id.webp)
   8. Download the key
       :::caution
       This **IS TO BE SAVED** - you will need it later
@@ -322,9 +322,9 @@ Now, let's move on to the Apple key.
       **NEVER SHARE THE KEY WITH ANYONE - USE IT ONLY IN THE CAPGO CLI**
       :::
 
-      ![Appstore Connect download key](/native-build-assets/appstore-connect-download-key.webp)
+      ![App Store Connect download key](/native-build-assets/appstore-connect-download-key.webp)
 
-      ![Appstore Connect download key warning](/native-build-assets/appstore-connect-download-key-warning.webp)
+      ![App Store Connect download key warning](/native-build-assets/appstore-connect-download-key-warning.webp)
 </Steps>
 
 Congratulations 🎉
@@ -388,7 +388,7 @@ You have exported the certificate.
 
 ### Provisioning profile
 
-Now, you are ready to export the provisioning profile. I promise, this this the last thing you will need to get from Apple.
+Now, you are ready to export the provisioning profile. I promise, this is the last thing you will need to get from Apple.
 
 <Steps>
    1. Go to [Apple Developer Profiles](https://developer.apple.com/account/resources/profiles/list)
