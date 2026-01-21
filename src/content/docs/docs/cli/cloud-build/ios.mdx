@@ -457,14 +457,25 @@ The command you will need to run is:
 ```bash
 npx @capgo/cli build credentials save \
   --platform ios \
-  --apple-team-id UVTJ336J2D \  # <-- Replace with your Apple Team ID from previous step
-  --apple-key ./capgo-tutorial/AuthKey_66FGQZB566.p8 \  # <-- Replace with path to your downloaded .p8 key file
-  --apple-key-id 66FGQZB566 \  # <-- Replace with your Apple Key ID from previous step
-  --apple-issuer-id 0cd4db4a-5598-45b8-9d32-75cdf127d005 \  # <-- Replace with your Apple Issuer ID from previous step
-  --certificate ./capgo-tutorial/capgo-build-tutorial-certificate.p12 \  # <-- Replace with path to your exported certificate
-  --provisioning-profile ./capgo-tutorial/capgo_native_build_tutorial.mobileprovision \  # <-- Replace with path to your downloaded provisioning profile
-  --apple-profile-name capgo_native_build_tutorial  # <-- Replace with the provisioning profile name you set previously
+  --apple-team-id UVTJ336J2D \
+  --apple-key ./capgo-tutorial/AuthKey_66FGQZB566.p8 \
+  --apple-key-id 66FGQZB566 \
+  --apple-issuer-id 0cd4db4a-5598-45b8-9d32-75cdf127d005 \
+  --certificate ./capgo-tutorial/capgo-build-tutorial-certificate.p12 \
+  --provisioning-profile ./capgo-tutorial/capgo_native_build_tutorial.mobileprovision \
+  --apple-profile-name capgo_native_build_tutorial
 ```
+
+:::note[Replace placeholder values]
+Replace the placeholder values above with your actual credentials gathered in the previous steps:
+- `--apple-team-id`: Your Apple Team ID
+- `--apple-key`: Path to your downloaded `.p8` key file
+- `--apple-key-id`: Your Apple Key ID
+- `--apple-issuer-id`: Your Apple Issuer ID
+- `--certificate`: Path to your exported `.p12` certificate
+- `--provisioning-profile`: Path to your downloaded `.mobileprovision` file
+- `--apple-profile-name`: The provisioning profile name you set previously
+:::
 
 If all went well, you will see the following output:
 
