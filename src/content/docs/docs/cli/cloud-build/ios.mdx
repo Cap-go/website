@@ -18,8 +18,8 @@ Build and submit iOS apps to TestFlight and the App Store using Capgo's dedicate
 
  - A Capgo account with an active subscription
  - Your app already registered in Capgo (run `npx @capgo/cli@latest app add` if not)
- - A Mac computer with Xcode installed (it's possible to setup the build on a linux/windows machine, but it's yet documented)
- - Valid Apple Developer account ($99/year) (You must have admin or owner rights on the Applle Developer account)
+ - A Mac computer with Xcode installed (it's possible to setup the build on a linux/windows machine, but it's not yet documented)
+ - Valid Apple Developer account ($99/year) (You must have admin or owner rights on the Apple Developer account)
  - Your app must be able to build successfully via Xcode
  - A Capacitor app
  - A configured icon for the app. Apps without an icon cannot be uploaded to the App Store.
@@ -257,7 +257,7 @@ Here is a list of the things you will pass to the Capgo CLI:
 Example command:
 
 ```bash
-npx @capgo/cli build credentials save \
+npx @capgo/cli@latest build credentials save \
   --platform ios \
   --apple-team-id YOUR_TEAM_ID \
   --apple-key '/path/to/AuthKey_XXXXX.p8' \
@@ -371,11 +371,11 @@ Let's get into setting it up:
       3. Click on the `Save` button
 
       ![Keychain Access save certificate dialog](/native-build-assets/keychain-access-save-certificate.webp)
-  6. When asked for the password, **DO NOT SET IT**
+  6. When asked for the password, you can either:
+      - Skip the password (recommended for simplicity): Click `OK` without entering a password
+      - Set a password: If you prefer to protect your certificate with a password, you can set one here. Password-protected `.p12` files are fully supported by the Capgo CLI - just provide the password using the `--p12-password` option when running configuration command.
 
-      Click on the `OK` button without setting a password
-
-      ![Keychain Access save certificate without password](/native-build-assets/keychain-access-save-certificate-password-dialog.webp)
+      ![Keychain Access save certificate password dialog](/native-build-assets/keychain-access-save-certificate-password-dialog.webp)
   7. When asked for the "login keychain password", give the password you use to login to your Mac
 
       Give the password you use to login to your Mac. Then, click on the `Allow` button.
@@ -455,7 +455,7 @@ You have done it! You have now got everything you need to configure Capgo Native
 The command you will need to run is:
 
 ```bash
-npx @capgo/cli build credentials save \
+npx @capgo/cli@latest build credentials save \
   --platform ios \
   --apple-team-id UVTJ336J2D \
   --apple-key ./capgo-tutorial/AuthKey_66FGQZB566.p8 \
