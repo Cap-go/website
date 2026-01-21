@@ -38,41 +38,41 @@ There are some advantages to doing a manual build first:
 - You will create the App Store record if you haven't done it yet
 - You will be able to figure out any issues with the build process linked to your app code
 
-Before we can begin, you must have the deployment certificate installed on your local machine.
-This is quite a bit complex, but I will explain it bellow.
+Before we can begin, you must have the distribution certificate installed on your local machine.
+This is quite a bit complex, but I will explain it below.
 
-### Setting up the deployment certificate
+### Setting up the distribution certificate
 
 <Steps>
 1. Open Xcode
-2. Click on `XCode` -> `Settings`
+2. Click on `Xcode` -> `Settings...`
     Alternatively, you can use the shortcut `Cmd + ,`
 
     ![Xcode settings](/native-build-assets/xcode-settings.webp)
-3. Go to `Apple Accounts`
-    ![Xcode apple accounts](/native-build-assets/xcode-apple-accounts.webp)
+3. Go to `Accounts`
+    ![Xcode Accounts tab](/native-build-assets/xcode-apple-accounts.webp)
 4. Find the Apple Account that is added to the Apple Developer Account
     ![Xcode selected apple account](/native-build-assets/xcode-selected-account.webp)
 5. Find the team that you will use to deploy the app
     ![Xcode find team](/native-build-assets/xcode-find-team.webp)
-6. Click on the `Manage Certificates` button
+6. Click on the `Manage Certificates...` button
     ![Xcode manage certificates](/native-build-assets/xcode-manage-certificates.webp)
-7. Make sure you can see the deployment certificate in the list
-    ![Xcode deployment certificate](/native-build-assets/xcode-deployment-certificate.webp)
+7. Make sure you can see the distribution certificate in the list
+    ![Xcode distribution certificate](/native-build-assets/xcode-deployment-certificate.webp)
 8. If you do not, you need to create a new certificate
 
     :::note
-      Apple limits the numbers of deployment certificates you can have to 3. If you have more than 3 certificates, you need to delete one in order to create a new one. I will not convert that in the tutorial.
+      Apple limits the number of distribution certificates you can have to 3. If you have more than 3 certificates, you need to delete one in order to create a new one. I will not cover that in the tutorial.
     :::
 
-    1. Click on the `+` button and then on `Apple distribution`
+    1. Click on the `+` button and then on `Apple Distribution`
         ![Xcode add certificate](/native-build-assets/xcode-add-certificate.webp)
     2. The certificate will be created automatically. You can see it in the list. Look at the previous step to confirm that you see it.
 </Steps>
 
-Now that you have the deployment certificate installed, you can begin the build process.
+Now that you have the distribution certificate installed, you can begin the build process.
 
-### Manual build to Testflight
+### Manual build to TestFlight
 
 <Steps>
   1. Open the app in Xcode
@@ -332,7 +332,7 @@ You have created the Apple key, Apple key ID and Apple issuer ID.
 
 ### Certificate
 
-Now, you are ready to export the certificate. As you remember, one of the first steps of this guide was setting up the deployment certificate.
+Now, you are ready to export the certificate. As you remember, one of the first steps of this guide was setting up the distribution certificate.
 
 However, Apple in their infinite wisdom, decided that the way you export the certificate is quite different from the way you create them 🙃
 Let's get into setting it up:
@@ -411,15 +411,15 @@ Now, you are ready to export the provisioning profile. I promise, this is the la
       Find your app in the dropdown and click on the `Continue` button
 
       ![Apple Developer select app](/native-build-assets/apple-developer-select-app.webp)
-  7. Select the correct deployment certificate
+7. Select the correct distribution certificate
 
-      Select the certificate you exported in the previous step and click on the `Continue` button
+       Select the certificate you exported in the previous step and click on the `Continue` button
 
-      ![Apple Developer select deployment certificate](/native-build-assets/apple-developer-select-deployment-certificate.webp)
+       ![Apple Developer select distribution certificate](/native-build-assets/apple-developer-select-deployment-certificate.webp)
 
-      If you are unsure which certificate to select, come back to keychain access and find the certificate you exported. Then look at the expiration date.
-      
-      ![Apple Developer select deployment certificate expiration date](/native-build-assets/apple-developer-select-deployment-certificate-expiration-date.webp)
+       If you are unsure which certificate to select, come back to Keychain Access and find the certificate you exported. Then look at the expiration date.
+       
+       ![Apple Developer select distribution certificate expiration date](/native-build-assets/apple-developer-select-deployment-certificate-expiration-date.webp)
   8. Name the profile
 
       Give the profile a name and click on the `Generate` button
