@@ -5,7 +5,8 @@ sidebar:
   order: 1
 ---
 
-import { Steps, Card, CardGrid } from '@astrojs/starlight/components';
+
+import { Steps, Card, CardGrid, Aside } from '@astrojs/starlight/components';
 import MermaidGraph from '@/components/MermaidGraph.astro';
 
 export const buildProcessFlowGraph = `flowchart LR
@@ -170,18 +171,49 @@ iOS builds require signing certificates and provisioning profiles. See [iOS Buil
 
 ## What Gets Built
 
-**Important:** Capgo Cloud Build only builds the **native parts** of your app (iOS and Android native code).
+Capgo Build only uploads the **minimum files needed** to compile your native app. Your full source code never leaves your machine.
 
-You are responsible for:
-- Building your web assets (`npm run build`)
-- Running `npx cap sync` before the build
-- Ensuring all dependencies are in `package.json`
+### What Gets Uploaded
 
-We handle:
+| Included | Description |
+|----------|-------------|
+| `ios/` or `android/` | The native platform folder you're building |
+| `package.json`, `package-lock.json` | Dependency manifest |
+| `capacitor.config.*` | Capacitor configuration |
+| `resources/` | App icons, splash screens |
+| Native plugin code | Only the `ios/` or `android/` subfolder of each Capacitor plugin |
+
+### What's NOT Uploaded
+
+| Excluded | Why |
+|----------|-----|
+| `node_modules/` (most of it) | Only native plugin code is included, not JS dependencies |
+| `src/` | Your web source code stays local |
+| `dist/`, `www/`, `build/` (root level) | Already synced into the native folder via `cap sync` |
+| `.git/` | Version control history |
+| `.gradle/`, `.idea/`, `.swiftpm/` | Build caches and IDE settings |
+| `.env`, secrets | Never uploaded |
+
+<Aside>
+Your built web assets (JS, CSS, HTML) **are** uploaded - but as part of the native folder. When you run `npx cap sync`, your web build is copied into `ios/App/App/public/` or `android/app/src/main/assets/public/`. That's why running `cap sync` before building is required.
+</Aside>
+
+### Your Responsibilities
+
+Before running `npx @capgo/cli build`:
+
+1. **Build your web assets** - Run `npm run build` (or your framework's build command)
+2. **Sync to native** - Run `npx cap sync` to copy web assets into the native project
+3. **Commit dependencies** - Ensure all native plugins are in `package.json`
+
+### What Capgo Build Handles
+
 - Native iOS compilation (Xcode, Fastlane)
 - Native Android compilation (Gradle)
-- Code signing
+- Code signing with your credentials
 - App store submission (if configured)
+
+<div style="border-top: 1px solid var(--sl-color-gray-5); margin: 2rem 0;"></div>
 
 ## Build Time & Costs
 
@@ -224,13 +256,21 @@ npx @capgo/cli@latest build com.example.app \
 
 ### Multi-Platform Builds
 
-Build for both platforms simultaneously:
+Build for both platforms by running two commands:
 
 ```bash
+# iOS build
 npx @capgo/cli@latest build com.example.app \
-  --platform both \
+  --platform ios \
+  --build-mode release
+
+# Android build
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
   --build-mode release
 ```
+
+In CI/CD, you can run these in parallel jobs for faster builds.
 
 ## Next Steps
 

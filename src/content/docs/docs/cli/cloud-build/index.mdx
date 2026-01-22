@@ -1,0 +1,127 @@
+---
+title: Introduction to Capgo Build
+description: Build iOS and Android apps in the cloud without local setup. No Mac required for iOS builds.
+sidebar:
+  order: 0
+  label: Introduction
+---
+
+import { Card, CardGrid, Aside, LinkCard } from '@astrojs/starlight/components';
+
+Capgo Build is a cloud-based native app compilation service for Capacitor apps. It lets you build iOS and Android apps without maintaining local development environments - no Xcode, no Android Studio, no Mac hardware required.
+
+## What Capgo Build Does
+
+Capgo Build compiles the **native parts** of your Capacitor app in the cloud:
+
+- **iOS builds** run on dedicated Apple Silicon (Mac Mini M4) machines
+- **Android builds** run in isolated Docker containers
+- **Automatic code signing** handles certificates, provisioning profiles, and keystores
+- **Direct store submission** uploads signed apps to App Store Connect and Google Play
+
+You trigger builds with a single CLI command that works from anywhere - your local machine, GitHub Actions, GitLab CI, or any CI/CD pipeline.
+
+## When to Use Capgo Build vs Live Updates
+
+Capgo offers two complementary features for updating your app. Here's when to use each:
+
+| Scenario | Live Updates | Capgo Build |
+|----------|:------------:|:-----------:|
+| Bug fix in JavaScript/TypeScript code | ✓ | |
+| UI changes (HTML, CSS, images) | ✓ | |
+| Updating web dependencies | ✓ | |
+| Adding or removing a Capacitor plugin | | ✓ |
+| Updating a native SDK version | | ✓ |
+| Changing native permissions (Info.plist, AndroidManifest) | | ✓ |
+| Updating Capacitor version | | ✓ |
+| Modifying native code (Swift, Kotlin, Java) | | ✓ |
+| Changing app icon or splash screen | | ✓ |
+| First app store submission | | ✓ |
+
+<Aside>
+**Live Updates** push JavaScript changes instantly without app store review. **Capgo Build** creates new native binaries when you change native code. Most teams use Live Updates daily and Capgo Build occasionally when native changes are needed.
+</Aside>
+
+## Why Use Capgo Build
+
+<CardGrid>
+  <Card title="No Mac Required for iOS" icon="laptop">
+    Build and ship iOS apps without Mac hardware. Anyone on Windows, Linux, or any CI/CD system can trigger iOS builds and publish to TestFlight.
+  </Card>
+
+  <Card title="Skip Local Environment Setup" icon="rocket">
+    No need to install Xcode, Android Studio, or manage SDK versions. Capgo Build handles all native tooling - you just run the CLI command.
+  </Card>
+
+  <Card title="Centralized Credentials" icon="setting">
+    Store your certificates and keystores in your CI/CD secrets once. Any team member can trigger builds without needing signing credentials on their local machine.
+  </Card>
+
+  <Card title="Works With Any CI/CD" icon="github">
+    A single CLI command integrates with any pipeline. GitHub Actions, GitLab CI, Jenkins - trigger builds as part of your existing workflow.
+  </Card>
+
+  <Card title="Real-Time Build Logs" icon="list-format">
+    Watch your build progress live in your terminal. Logs stream via Server-Sent Events so you can debug issues instantly as they happen.
+  </Card>
+
+  <Card title="Direct Store Submission" icon="approve-check">
+    Signed apps upload directly to App Store Connect and Google Play. No manual steps between build completion and store submission.
+  </Card>
+</CardGrid>
+
+## How It Works
+
+When you run the build command:
+
+1. **Upload** - The CLI zips only what's needed (native platform folder + native dependencies) and uploads to secure cloud storage
+2. **Build** - Your app compiles on dedicated infrastructure using Fastlane
+3. **Sign** - Certificates and keystores are applied (they exist only in memory during the build)
+4. **Submit** - Signed apps are uploaded directly to App Store Connect or Google Play
+5. **Cleanup** - All build artifacts and credentials are automatically deleted
+
+Your source code stays on your machine. Only the platform-specific native code is uploaded.
+
+## Security Model
+
+Capgo Build is designed with zero credential storage:
+
+- **Runtime-only credentials** - Certificates and keystores are never stored in Capgo. They are uploaded and removed immediately after the build finishes.
+- **Ephemeral environments** - Each build runs in isolation and is destroyed after completion
+- **No log storage** - Build logs stream to your terminal only, never stored on Capgo servers
+- **Minimal upload** - Only the native platform you request is uploaded, not your full codebase. [See exactly what gets uploaded](/docs/cli/cloud-build/getting-started/#what-gets-built)
+
+## Pricing
+
+Build time is the only cost:
+
+- Build minutes are included in your Capgo plan
+- Extra minutes available via credit system
+- iOS builds run on Mac Mini M4 (2x cost multiplier due to hardware costs)
+- Android builds run in Docker containers (1x cost)
+- No storage fees
+
+## Next Steps
+
+<CardGrid>
+  <LinkCard 
+    title="Getting Started" 
+    description="Create your first build and see Capgo Build in action."
+    href="/docs/cli/cloud-build/getting-started/"
+  />
+  <LinkCard 
+    title="Credentials Setup" 
+    description="Configure certificates for iOS and keystores for Android."
+    href="/docs/cli/cloud-build/credentials/"
+  />
+  <LinkCard 
+    title="iOS Builds" 
+    description="Complete guide to building and submitting iOS apps."
+    href="/docs/cli/cloud-build/ios/"
+  />
+  <LinkCard 
+    title="Android Builds" 
+    description="Complete guide to building and submitting Android apps."
+    href="/docs/cli/cloud-build/android/"
+  />
+</CardGrid>
