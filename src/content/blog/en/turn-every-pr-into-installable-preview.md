@@ -7,7 +7,7 @@ author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-01-22T00:00:00.000Z
 updated_at: 2026-01-22T00:00:00.000Z
-head_image: /capgo_pr_preview.webp
+head_image: /capgo_ci-cd-illustration.webp
 head_image_alt: Capgo PR preview illustration
 keywords: pr preview, pull request, OTA updates, capacitor, capgo, live updates, QA testing, feature preview, github actions
 tag: Tutorial
@@ -73,20 +73,23 @@ jobs:
       - name: Build
         run: bun run build
 
-      # Create a channel named after your PR
+      # Create a channel named after your PR (may already exist on synchronize)
       - name: Create PR Channel
-        run: bunx @capgo/cli channel add pr-${{ github.event.pull_request.number }} --self-assign
+        id: create_channel
+        continue-on-error: true
+        run: bunx @capgo/cli@latest channel add pr-${{ github.event.pull_request.number }} --self-assign
         env:
           CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
 
       # Upload the build to that channel
       - name: Upload to Capgo
-        run: bunx @capgo/cli bundle upload --channel pr-${{ github.event.pull_request.number }}
+        run: bunx @capgo/cli@latest bundle upload --channel pr-${{ github.event.pull_request.number }}
         env:
           CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
 
-      # Post a comment with testing instructions
+      # Post a comment with testing instructions (only on PR open)
       - name: Comment on PR
+        if: github.event.action == 'opened'
         uses: actions/github-script@v7
         with:
           script: |
@@ -117,9 +120,14 @@ Enable the shake menu in your Capacitor config:
 
 ```typescript
 // capacitor.config.ts
-CapacitorUpdater: {
-  shakeMenu: true
-}
+const config: CapacitorConfig = {
+  // ... your other config
+  plugins: {
+    CapacitorUpdater: {
+      shakeMenu: true
+    }
+  }
+};
 ```
 
 Testers shake their device, select the PR channel from the list, and the app updates. When done testing, they shake again and switch back to production.
@@ -160,7 +168,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete PR Channel
-        run: bunx @capgo/cli channel delete pr-${{ github.event.pull_request.number }}
+        run: bunx @capgo/cli@latest channel delete pr-${{ github.event.pull_request.number }}
         env:
           CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
 ```
