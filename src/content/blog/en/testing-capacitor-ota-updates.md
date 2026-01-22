@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-12T02:57:37.246Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62-1744426677476.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, Capacitor, testing, Capgo, mobile app deployment, security, performance, version control
@@ -20,7 +20,7 @@ next_blog: ''
 
 -   **What Are OTA Updates?** They push live changes directly to users' devices, skipping app store reviews. This saves time and quickly addresses issues.
 -   **Why Testing Matters:** Poorly tested updates can crash apps or break compliance. With proper testing, 95% of updates succeed within 24 hours.
--   **Tools You'll Need:** Capacitor CLI (v6+), [Node.js](https://nodejs.org/en) (v16+), [Capgo](https://capgo.app/) Plugin, and a testing framework like [Cypress](https://www.cypress.io/).
+-   **Tools You'll Need:** Capacitor CLI (v8+), [Node.js](https://nodejs.org/en) (v16+), [Capgo](https://capgo.app/) Plugin, and a testing framework like [Cypress](https://www.cypress.io/).
 -   **Steps to Test:**
     1.  Configure your test environment and Capgo settings.
     2.  Validate update processes like detection, download, installation, and rollback.
@@ -69,7 +69,7 @@ After initialization, integrate the OTA update functionality into your app. This
 
 For enterprise-level security, Capgo provides both cloud-based and self-hosted options.
 
-When the integration is complete, build your app and trigger updates using the Capgo CLI. Since Capgo works seamlessly with Capacitor 6 and 7, it supports a wide range of modern development environments.
+When the integration is complete, build your app and trigger updates using the Capgo CLI. Since Capgo works seamlessly with Capacitor 8, it supports a wide range of modern development environments.
 
 These steps lay the groundwork for thorough OTA update testing, which will be covered in the next section on Testing Methods.
 

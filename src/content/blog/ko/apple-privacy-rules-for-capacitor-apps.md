@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-31T01:48:03.832Z
-updated_at: 2025-03-31T01:48:15.606Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e9dc69283d21cbd67b72cf-1743385695606.jpg
 head_image_alt: 모바일 개발
@@ -71,7 +71,7 @@ next_blog: ''
 시작하기 전에 다음을 확인하세요:
 
 - **Xcode 15 이상**이 있어야 프라이버시 매니페스트 지원.
-- Capacitor 6 또는 7이 설치되어 있어야 합니다.
+- Capacitor 8이 설치되어 있어야 합니다.
 - iOS 배포 대상이 **iOS 14.5 이상**으로 설정되어 있어야 합니다.
 - 앱에는 적절하게 구성된 `Info.plist` 파일이 포함되어 있어야 합니다.
 - 유효한 인증서를 가진 **애플 개발자 계정**이 있어야 합니다.

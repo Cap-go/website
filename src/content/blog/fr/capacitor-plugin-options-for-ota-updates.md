@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-16T02:50:46.694Z
-updated_at: 2025-12-31T01:33:21.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549-1744774247069.jpg
 head_image_alt: Développement Mobile
@@ -63,7 +63,7 @@ Voici ce que Capgo propose :
 -   **Analytiques en temps réel et suivi des erreurs**
 -   **Intégration CI/CD fluide**
 -   **Choix entre cloud ou auto-hébergement**
--   **Compatibilité avec Capacitor 6 & 7**
+-   **Compatibilité avec Capacitor 8**
 
 D'autres plugins répondent également à des besoins et régions spécifiques.
 

@@ -1,6 +1,6 @@
 ---
-title: Sistem pembayaran
-description: Manajemen pembayaran di akun Capgo Anda.
+title: "Sistem pembayaran"
+description: "Manajemen pembayaran di akun Capgo Anda. Di bagian ini kami menunjukkan cara mengelola kartu, paket, dan kredit Anda untuk Capgo"
 sidebar:
   order: 10
 locale: id
@@ -8,36 +8,74 @@ locale: id
 
 ## Tentang apa ini?
 
-Halaman ini bertujuan untuk menjawab beberapa pertanyaan tentang sistem pembayaran di capgo
+Halaman ini bertujuan untuk menjawab beberapa pertanyaan tentang sistem pembayaran di Capgo.
 
-#### Q: Bagaimana cara meningkatkan paket capgo saya?
-A: Anda dapat meningkatkan paket capgo dengan membuka [pengaturan](/docs/webapp/settings/#how-to-get-to-the-settings-page) dan mengklik tombol **Plans**
+## Paket
 
-<figure><img src="/plans-button.webp" alt="Choose plan" /><figcaption></figcaption></figure>
+#### Q: Bagaimana cara meningkatkan paket Capgo saya?
+A: Anda dapat meningkatkan paket Capgo dengan membuka [pengaturan](/docs/webapp/settings/#how-to-get-to-the-settings-page) dan mengklik tab **Paket** (1).
 
-Kemudian Anda dapat memilih paket yang paling sesuai dengan kebutuhan Anda dan klik **Subscribe**
+<figure><img src="/plans-subscribe.webp" alt="Halaman paket" /><figcaption></figcaption></figure>
 
-<figure><img src="/plans-subscribe.webp" alt="Subscribe to plan" /><figcaption></figcaption></figure>
+Di halaman ini Anda dapat:
+- Beralih antara **Paket Bulanan** dan **Tahunan** (dengan diskon 20% untuk pembayaran tahunan)
+- Memilih dari empat paket: **Solo**, **Maker**, **Team**, atau **Enterprise**
+- Klik **Berlangganan** (2) pada paket yang paling sesuai dengan kebutuhan Anda
 
-Kemudian halaman stripe akan terbuka. Di sana, Anda dapat memasukkan informasi pembayaran Anda
+Setiap paket menampilkan:
+- Harga bulanan dan total tagihan tahunan
+- Pengguna aktif bulanan yang termasuk dan harga kelebihan
+- Alokasi penyimpanan dan bandwidth
+- Menit/jam build
+- Fitur seperti dukungan khusus, domain kustom, dan kepatuhan SOC II
 
-<figure><img src="/plans-stripe.webp" alt="Stripe portal" /><figcaption></figcaption></figure>
+Jika Anda tidak ingin berkomitmen pada paket, Anda dapat menggunakan **kredit** sebagai gantinya - klik "Pelajari tentang kredit" untuk melihat cara kerja pembayaran sesuai penggunaan.
+
+Setelah mengklik Berlangganan, halaman checkout Stripe akan terbuka di mana Anda dapat memasukkan informasi pembayaran dengan aman.
+
+## Kredit
+
+Kredit memberikan alternatif fleksibel untuk meningkatkan paket Anda. Mereka berguna ketika:
+
+- **Lonjakan sementara** - Anda sementara melampaui batas paket Anda (misalnya, momen viral, lalu lintas musiman) dan tidak ingin meningkatkan secara permanen
+- **Paket tidak cocok** - Tingkat paket berikutnya tidak sesuai dengan kebutuhan Anda karena alasan lain (mungkin Anda membutuhkan lebih banyak bandwidth tetapi tidak lebih banyak MAU)
+- **Preferensi pay-as-you-go** - Anda lebih suka membayar hanya untuk apa yang Anda gunakan melebihi paket dasar Anda
+
+#### Q: Bagaimana cara mengakses halaman Kredit?
+A: Buka [pengaturan](/docs/webapp/settings/#how-to-get-to-the-settings-page) dan klik tab **Kredit** (1).
+
+<figure><img src="/buy_credits.webp" alt="Halaman kredit" /><figcaption></figcaption></figure>
+
+Halaman Kredit menampilkan:
+
+1. **Tab Kredit** - Navigasi ke sini dari pengaturan Organisasi
+2. **Saldo Kredit** - Menampilkan kredit yang tersedia (misalnya 0,00 / 0,00) dan kredit yang digunakan dalam periode saat ini
+3. **Kredit Digunakan (USD)** - Perkiraan nilai dolar dari kredit yang dikonsumsi selama periode penagihan saat ini, ditambah sisa kredit yang tersedia
+4. **Butuh lebih banyak kredit?** - Beli kredit tambahan secara instan untuk menjaga pengguna Anda tetap menerima pembaruan tanpa gangguan. Pilih dari jumlah preset ($50, $100, $500, $5000) atau masukkan jumlah kustom. Perkiraan total termasuk pajak ditampilkan sebelum checkout
+5. **Harga kredit** - Perluas bagian ini untuk melihat tingkat harga untuk berbagai jenis penggunaan (MAU, penyimpanan, bandwidth)
+6. **Transaksi kredit** - Lihat riwayat pembelian dan penggunaan kredit Anda
+
+#### Q: Bagaimana cara membeli kredit?
+A: Di halaman Kredit, pilih jumlah yang ingin Anda beli (atau gunakan dropdown untuk jumlah kustom), lalu klik **Beli kredit**. Anda akan diarahkan ke checkout Stripe di mana Anda dapat menyesuaikan kuantitas dan menyelesaikan pembayaran.
+
+#### Q: Kapan kredit digunakan?
+A: Kredit secara otomatis dikonsumsi ketika Anda melebihi batas paket Anda untuk pengguna aktif bulanan, penyimpanan, atau bandwidth. Mereka menyediakan cara fleksibel untuk menangani kelebihan tanpa gangguan layanan.
 
 #### Q: Apakah pembayaran aman?
-A: Ya, pembayaran sepenuhnya dikelola oleh stripe. Capgo tidak pernah mendapatkan akses ke detail kartu kredit Anda. Stripe sangat serius menangani keamanan. [Pelajari lebih lanjut tentang kebijakan keamanan stripe](https://stripecom/docs/security/)
+A: Ya, pembayaran sepenuhnya dikelola oleh Stripe. Capgo tidak pernah mendapatkan akses ke detail kartu kredit Anda. Stripe sangat serius menangani keamanan. [Pelajari lebih lanjut tentang kebijakan keamanan Stripe](https://stripe.com/docs/security/)
 
-#### Q: Apakah capgo akan secara otomatis meningkatkan paket saya ketika melebihi batas?
-A: Tidak, capgo tidak akan pernah mengubah paket Anda
+#### Q: Apakah Capgo akan secara otomatis meningkatkan paket saya ketika saya melebihi batas?
+A: Tidak, Capgo tidak akan pernah mengubah paket Anda.
 
-#### Q: Apakah capgo akan mengirimkan email ketika paket saya mendekati batasnya?
-A: Ya, capgo akan mengirimkan email yang menginformasikan tentang penggunaan Anda
+#### Q: Apakah Capgo akan mengirimkan email ketika paket saya mendekati batasnya?
+A: Ya, Capgo akan mengirimkan email yang menginformasikan tentang penggunaan Anda.
 
 #### Q: Apakah paket yang saya beli akan mempengaruhi organisasi yang saya diundang?
 A: Tidak, paket hanya akan mempengaruhi organisasi yang saat ini Anda pilih.
-Silakan merujuk ke [dokumentasi organisasi](/docs/webapp/organization-system/#q-how-is-billing-done-within-orgs)
+Silakan merujuk ke [dokumentasi organisasi](/docs/webapp/organization-system/#q-how-is-billing-done-within-orgs).
 
 #### Q: Bagaimana jika saya membutuhkan paket yang lebih disesuaikan?
-A: [Silakan hubungi dukungan capgo secara langsung](/docs/getting-help#support-by-chat)
+A: [Silakan hubungi dukungan Capgo secara langsung](/docs/getting-help#support-by-chat)
 
-#### Q: Bagaimana kebijakan pengembalian dana untuk capgo?
+#### Q: Bagaimana kebijakan pengembalian dana untuk Capgo?
 A: Kebijakan pengembalian dana dapat ditemukan [di sini](https://capgo.app/return/)

@@ -1,38 +1,40 @@
 ---
 locale: fr
 title: "Appareils"
-description: "A comprehensive Guide on utilizing the Appareils page to manage and configure your Appareils effectively, including filtering Options and detailed Configuration Paramètres for individual Appareils."
-sidebar: 
+description: "Un guide complet sur l'utilisation de la page Appareils pour gérer et configurer efficacement vos appareils, incluant les options de filtrage et les paramètres de configuration détaillés pour chaque appareil."
+sidebar:
   order: 7
 ---
 
-:::Remarque[Data Retention]
-Appareil data is retained for **90 days** from the last Appareil activity. Appareils that haven't connected to Capgo within this period will be automatically removed from the list. Actif Appareils are continuously tracked as they Vérifier for Mises à jour.
+:::note[Conservation des Données]
+Les données des appareils sont conservées pendant **90 jours** à compter de la dernière activité de l'appareil. Les appareils qui ne se sont pas connectés à Capgo pendant cette période seront automatiquement supprimés de la liste. Les appareils actifs sont continuellement suivis lorsqu'ils vérifient les mises à jour.
 :::
 
-## Show the list of all Appareils
-First, let's take a look at the Appareils page. You can access it by [clicking on your Application](/docs/webapp/main-page) and then [clicking on the Appareils tab](/docs/webapp/main-Application-page).
+## Afficher la liste de tous les appareils
+Commençons par regarder la page des appareils. Vous pouvez y accéder en [cliquant sur votre application](/docs/webapp/main-page) puis en [cliquant sur l'onglet appareils](/docs/webapp/main-app-page).
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/devices.webp" alt="devices list" /><figcaption></figcaption></figure>
+<figure><img style="margin-left: auto; margin-right: auto" src="/devices.webp" alt="liste des appareils" /><figcaption></figcaption></figure>
 
-## Show only developer Appareils
-You might want to show only the overwritten Appareils (Appareils that have a [custom Canal](/docs/plugin/api/#setchannel) or a custom Version)
-To do that click on `Filters` and then on `Override`. It should look something like this:
+1. **Onglet Appareils** - Cliquez sur cet onglet dans la barre de navigation pour accéder à la page des appareils
+2. **Filtres** - Cliquez pour filtrer les appareils par :
+   - **Substitution** - Affiche uniquement les appareils qui ont un [canal personnalisé](/docs/plugin/api/#setchannel) ou une version personnalisée
+   - **ID Personnalisé** - Affiche uniquement les appareils avec un identifiant personnalisé défini
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/overwrite-filter.webp" alt="filter devices" /><figcaption></figcaption></figure>
+## Configurer un appareil
 
-## Configuring a Appareil
+Pour configurer un appareil spécifique, cliquez dessus dans le tableau et vous devriez voir quelque chose comme ceci :
 
-To configure a specific Appareil click on it in the table and then you should see something like this:
+<figure><img style="margin-left: auto; margin-right: auto" src="/device-specific.webp" alt="afficher un appareil" /><figcaption></figcaption></figure>
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/device-specific.webp" alt="show one device" /><figcaption></figcaption></figure>
+1. **Information** - Affiche les détails de l'appareil incluant l'ID de l'appareil, Dernière mise à jour, Plateforme, Version du plugin, Version, Version builtin, Version de l'OS, et si c'est une application de Production
+2. **Deployments** - Affiche l'historique des déploiements pour cet appareil
+3. **Logs** - Affiche les journaux associés à cet appareil
+4. **Substitution de canal** - Remplace le canal pour cet appareil spécifique. Si défini, cet appareil n'utilisera pas le canal public (par défaut) et ne recevra que les mises à jour du canal sélectionné
 
-First the `Custom ID`. This is a very useful field that helps you connect the device to an ID you can recognize for your own users. 
+### ID Personnalisé
 
-Use it to easily identify which Appareil belongs to which Utilisateur. 
+L'`ID Personnalisé` est un champ très utile qui vous aide à connecter l'appareil à un ID que vous pouvez reconnaître pour vos propres utilisateurs.
 
-You can set it from the WebUI or from the device with `CapacitorUpdater.setCustomId({ customId: user });`
+Utilisez-le pour identifier facilement quel appareil appartient à quel utilisateur.
 
-Suivant the force Version. If this is set then this Appareil will **ALWAYS** receive this Version. It takes precedence over the Canal.
-
-Lastly the custom Canal. If this is set then this Appareil will not care À propos the public (default) Canal and just use this one.
+L'ID personnalisé ne peut être défini que depuis l'appareil lui-même en utilisant `CapacitorUpdater.setCustomId({ customId: user });`

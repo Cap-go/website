@@ -11,7 +11,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-17T03:46:56.267Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67d76b8ea5ba8bcd0fc6ad5f-1742183228777.jpg
 head_image_alt: Desarrollo Móvil
@@ -218,6 +218,6 @@ Los costos pueden variar ampliamente según tus necesidades. Por ejemplo, ejecut
 
 ### **Requisitos Técnicos**
 
-Al elegir una plataforma, asegúrate de que soporte tu **[versión de Capacitor](https://capgo.app/plugins/ivs-player/)** específica (por ejemplo, Capacitor 6 o 7) y ofrezca características esenciales como análisis, seguimiento de errores, opciones de reversión para control de versiones e integración CI/CD sin problemas. Estas características aseguran operaciones fluidas a medida que tu aplicación escala.
+Al elegir una plataforma, asegúrate de que soporte tu **[versión de Capacitor](https://capgo.app/plugins/ivs-player/)** específica (por ejemplo, Capacitor 8) y ofrezca características esenciales como análisis, seguimiento de errores, opciones de reversión para control de versiones e integración CI/CD sin problemas. Estas características aseguran operaciones fluidas a medida que tu aplicación escala.
 
 La mejor plataforma alcanzará el equilibrio correcto entre rendimiento, seguridad y costo. Aprovecha las pruebas gratuitas - como la prueba de 15 días de Capgo - para ver si la plataforma se alinea con tus necesidades [\[1\]](https://capgo.app/).

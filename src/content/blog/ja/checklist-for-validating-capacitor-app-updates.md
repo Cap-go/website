@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-20T01:48:44.409Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/680445af6000445eb1a661a6-1745113809661.jpg
 head_image_alt: モバイル開発
@@ -71,6 +71,6 @@ iOS、Android、Webプラットフォーム用の個別のテスト環境を、C
 -   より良いコントロールのためのロールバックオプションを設定。
 -   ニーズに応じてクラウドまたは[セルフホスト展開](https://capgo.app/blog/self-hosted-capgo/)を選択。
 
-企業利用の場合、CapgoはCapacitor 6および7との互換性があり、クラウドとセルフホストの両方の展開をサポートしています[\[1\]](https://capgo.app/) 。このセットアップが完了したら、機能とデバイスのテストに進みます。
+企業利用の場合、CapgoはCapacitor 8との互換性があり、クラウドとセルフホストの両方の展開をサポートしています[\[1\]](https://capgo.app/) 。このセットアップが完了したら、機能とデバイスのテストに進みます。
 
 [テキストは長いため、残りの部分は分割して翻訳を続けます。必要であればお申し付けください]

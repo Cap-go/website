@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-20T01:48:44.409Z
-updated_at: 2025-12-31T01:33:21.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/680445af6000445eb1a661a6-1745113809661.jpg
 head_image_alt: Développement mobile
@@ -74,7 +74,7 @@ Configurez Capgo avec ces étapes [\[1\]](https://capgo.app/) :
 -   Configurez les options de restauration pour un meilleur contrôle.
 -   Choisissez entre un déploiement cloud ou [auto-hébergé](https://capgo.app/blog/self-hosted-capgo/), selon vos besoins.
 
-Pour un usage entreprise, Capgo offre la compatibilité avec Capacitor 6 et 7, et prend en charge les déploiements cloud et auto-hébergés [\[1\]](https://capgo.app/). Une fois cette configuration terminée, passez aux tests des fonctionnalités et des appareils.
+Pour un usage entreprise, Capgo offre la compatibilité avec Capacitor 8, et prend en charge les déploiements cloud et auto-hébergés [\[1\]](https://capgo.app/). Une fois cette configuration terminée, passez aux tests des fonctionnalités et des appareils.
 
 ## Liste de contrôle principale des tests
 

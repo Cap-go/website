@@ -1,0 +1,43 @@
+---
+title: "@capgo/capacitor-light-sensor"
+description: Access the device's ambient light sensor to measure illuminance levels in your Capacitor app.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Read ambient light levels in lux from the device's light sensor with real-time updates and configurable sampling rates. Requires Capacitor 8+.
+  image:
+    file: ~public/icons/plugins/light-sensor.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/light-sensor/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-light-sensor/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Real-time Updates" icon="rocket">
+    Receive continuous light sensor readings with configurable update intervals
+  </Card>
+  <Card title="Event-driven API" icon="puzzle">
+    Subscribe to light changes with easy-to-use event listeners
+  </Card>
+  <Card title="Configurable Sampling" icon="setting">
+    Adjust update frequency from 200ms to custom intervals
+  </Card>
+  <Card title="Battery Efficient" icon="sun">
+    Start and stop sensor on demand to conserve battery
+  </Card>
+  <Card title="Comprehensive Documentation" icon="open-book">
+    Check the [Documentation](/docs/plugins/light-sensor/getting-started/) to master the plugin in just a few minutes.
+  </Card>
+</CardGrid>

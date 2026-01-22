@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-05-12T04:31:38.871Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68214ae55e3fe4823b5f6cab-1747024366276.jpg
 head_image_alt: 소프트웨어 개발
@@ -225,7 +225,7 @@ Capgo로 토큰 회전을 설정하는 것은 직관적이며, CLI 도구 덕분
 
 > "Appcenter가 하이브리드 앱에 대한 실시간 업데이트 지원을 중단하고 @AppFlow의 비용이 너무 비싸기 때문에 현재 @Capgo를 사용해 보려 하고 있습니다." - Simon Flack[\[1\]](https://capgo.app)
 
-Capgo의 CI/CD 설정 비용은 $2,600로 장기적으로 절감 효과를 제공하며, 5년 동안 약 $26,100의 절감을 예상됩니다[\[1\]](https://capgo.app). Capacitor 6 및 7을 지원하며 유연한 조직 관리를 위한 기능이 갖추어져 있어, 보안 조치를 우선시하는 소규모 팀과 대규모 기업 모두에게 훌륭한 선택입니다.
+Capgo의 CI/CD 설정 비용은 $2,600로 장기적으로 절감 효과를 제공하며, 5년 동안 약 $26,100의 절감을 예상됩니다[\[1\]](https://capgo.app). Capacitor 8을 지원하며 유연한 조직 관리를 위한 기능이 갖추어져 있어, 보안 조치를 우선시하는 소규모 팀과 대규모 기업 모두에게 훌륭한 선택입니다.
 
 ## 결론: 토큰 회전으로 CI/CD 개선하기
 

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-19T03:53:13.485Z
-updated_at: 2025-12-31T01:33:21.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67da3972cfd1b2222c56f23a-1742356439850.jpg
 head_image_alt: モバイル開発
@@ -45,7 +45,7 @@ Capgoのようなツールでのテストにより、アップデートがスム
 | ソフトウェア | 目的 | バージョン要件 |
 | --- | --- | --- |
 | **Node.js** | ランタイム環境 | 最新のLTSバージョン |
-| **Capacitor CLI** | アプリ開発 | Capacitor 6または7 |
+| **Capacitor CLI** | アプリ開発 | Capacitor 8 |
 | **[Capgo CLI](https://capgo.app/docs/cli/commands)** | OTA管理 | 最新バージョン |
 
 以下のコマンドでCapgo CLIをインストールします：

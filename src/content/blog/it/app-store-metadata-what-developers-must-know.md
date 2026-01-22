@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-28T01:52:31.369Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e5e83da2c14cac42f7f5e4-1743126762355.jpg
 head_image_alt: Sviluppo Mobile
@@ -207,7 +207,7 @@ Capgo fornisce strumenti chiave per gestire efficacemente gli aggiornamenti dell
 | Controllo versione | Ripristino rapido alle versioni precedenti | Capacità di rollback istantaneo |
 | Integrazione CI/CD | Automatizzare i deployment attraverso strumenti Git | Integrazione del flusso di lavoro ottimizzata |
 
-Capgo supporta Capacitor 6 e 7 e offre opzioni di deployment sia cloud che [self-hosted](https://capgo.app/blog/self-hosted-capgo/). Questa flessibilità garantisce una gestione precisa degli aggiornamenti mantenendo la conformità con i requisiti degli app store [\[1\]](https://capgo.app/).
+Capgo supporta Capacitor 8 e offre opzioni di deployment sia cloud che [self-hosted](https://capgo.app/blog/self-hosted-capgo/). Questa flessibilità garantisce una gestione precisa degli aggiornamenti mantenendo la conformità con i requisiti degli app store [\[1\]](https://capgo.app/).
 
 ## Riepilogo
 

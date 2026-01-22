@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-05-12T04:31:38.871Z
-updated_at: 2025-05-12T04:32:46.276Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68214ae55e3fe4823b5f6cab-1747024366276.jpg
 head_image_alt: Pengembangan Perangkat Lunak
@@ -156,7 +156,7 @@ Sejak 2022, lanskap keamanan CI/CD telah mengalami kemajuan signifikan, dan Capg
 
 > "Kami saat ini mencoba @Capgo sejak Appcenter menghentikan dukungan pembaruan langsung pada aplikasi hibrida dan @AppFlow terlalu mahal." - Simon Flack[\[1\]](https://capgo.app)
 
-Biaya pengaturan CI/CD satu kali Capgo sebesar $2,600 menawarkan penghematan jangka panjang, dengan estimasi penghematan $26,100 dalam lima tahun[\[1\]](https://capgo.app). Dukungan untuk Capacitor 6 & 7, bersama dengan fitur untuk manajemen organisasi yang fleksibel, menjadikannya pilihan yang sangat baik untuk tim kecil dan perusahaan besar, terutama yang memprioritaskan langkah-langkah keamanan yang kuat.
+Biaya pengaturan CI/CD satu kali Capgo sebesar $2,600 menawarkan penghematan jangka panjang, dengan estimasi penghematan $26,100 dalam lima tahun[\[1\]](https://capgo.app). Dukungan untuk Capacitor 8, bersama dengan fitur untuk manajemen organisasi yang fleksibel, menjadikannya pilihan yang sangat baik untuk tim kecil dan perusahaan besar, terutama yang memprioritaskan langkah-langkah keamanan yang kuat.
 
 ## Kesimpulan: Meningkatkan CI/CD dengan Rotasi Token
 

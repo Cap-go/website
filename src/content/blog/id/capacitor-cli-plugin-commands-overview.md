@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-27T03:14:02.984Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e4be0410051fda3b63a692-1743045267566.jpg
 head_image_alt: Pengembangan Mobile
@@ -139,7 +139,7 @@ Pengguna Capgo mendapatkan manfaat dari fitur canggih seperti peluncuran terkend
 
 - 95% pembaruan diselesaikan dalam 24 jam [\[1\]](https://capgo.app/)
 - 82% tingkat keberhasilan secara global untuk pembaruan [\[1\]](https://capgo.app/)
-- Kompatibilitas dengan versi Capacitor 6 dan 7 [\[1\]](https://capgo.app/)
+- Kompatibilitas dengan versi Capacitor 8 [\[1\]](https://capgo.app/)
 
 Untuk memastikan pembaruan berjalan lancar:
 

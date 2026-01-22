@@ -1,0 +1,303 @@
+---
+title: Sécurité de l'Organisation
+description: >-
+  Configurez des politiques de sécurité complètes pour votre organisation, y
+  compris l'application de la 2FA, les politiques de mots de passe et les
+  contrôles de clés API pour protéger vos applications et données.
+sidebar:
+  order: 9
+locale: fr
+---
+
+import { Aside, Steps, Badge } from '@astrojs/starlight/components';
+
+Capgo fournit des contrôles de sécurité complets qui permettent aux administrateurs d'organisation d'appliquer des politiques de sécurité à tous les membres. Ces fonctionnalités vous aident à répondre aux exigences de conformité, protéger les données sensibles et maintenir une posture de sécurité solide.
+
+## Aperçu
+
+Les paramètres de Sécurité de l'Organisation permettent aux super administrateurs de configurer :
+
+- **Application de l'Authentification à Deux Facteurs (2FA)** - Exiger que tous les membres activent la 2FA
+- **Politique de Mots de Passe** - Définir les exigences de complexité des mots de passe
+- **Sécurité des Clés API** - Appliquer des clés API sécurisées et des politiques d'expiration
+
+![Paramètres de Sécurité de l'Organisation](/org_security.webp)
+
+La page Sécurité est organisée en sections clairement identifiées :
+1. **Onglet Sécurité** - Accédez à tous les paramètres de sécurité depuis la barre latérale des paramètres de l'Organisation
+2. **Application de la 2FA** - Bouton bascule et affichage du statut pour les exigences d'authentification à deux facteurs
+3. **Politique de Mots de Passe** - Configurez les règles de complexité des mots de passe pour les membres de l'organisation
+4. **Politique de Clés API** - Paramètres pour les clés API sécurisées et les exigences d'expiration
+5. **Expiration des Clés API** - Contrôlez si les clés API doivent avoir des dates d'expiration
+
+<Aside type="note">
+
+Seuls les utilisateurs avec le rôle **super_admin** peuvent configurer les paramètres de sécurité de l'organisation. Les autres membres peuvent voir leur statut de conformité mais ne peuvent pas modifier les politiques.
+
+</Aside>
+
+## Accéder aux Paramètres de Sécurité
+
+<Steps>
+
+1. Accédez aux paramètres de votre organisation en cliquant sur **Paramètres** dans la barre latérale
+2. Cliquez sur l'onglet **Organisation** en haut de la page des paramètres
+3. Sélectionnez l'onglet **Sécurité** dans la barre de navigation de l'organisation (mis en évidence avec une icône de bouclier)
+
+</Steps>
+
+## Application de l'Authentification à Deux Facteurs (2FA)
+
+L'application de la 2FA exige que tous les membres de l'organisation aient l'authentification à deux facteurs activée sur leurs comptes. Cela ajoute une couche de sécurité critique en exigeant à la fois un mot de passe et un code de vérification.
+
+### Ce qui se Passe Quand la 2FA est Appliquée
+
+- Les membres sans 2FA sont **immédiatement bloqués** de l'accès aux applications de l'organisation
+- Le tableau de bord web et la CLI appliquent tous deux cette exigence
+- Les nouveaux membres doivent activer la 2FA avant de pouvoir accéder aux ressources de l'organisation
+- Le système suit quels membres ont la 2FA activée en temps réel
+
+### Comprendre le Panneau de Statut 2FA
+
+La page Sécurité affiche un panneau complet **Statut 2FA des Membres** qui montre :
+
+- **Total des Membres** - Le nombre total de membres dans votre organisation
+- **2FA Activée** (indicateur vert) - Membres qui ont activé avec succès l'authentification à deux facteurs
+- **2FA Non Activée** (indicateur d'avertissement orange) - Membres qui doivent encore configurer la 2FA
+
+Lorsque des membres n'ont pas activé la 2FA, ils apparaissent dans une boîte d'avertissement **Membres Sans 2FA**. Cette boîte affiche :
+- L'adresse e-mail de chaque membre et son rôle dans l'organisation
+- Un bouton **Copier la Liste des E-mails** pour copier rapidement toutes les adresses e-mail concernées pour la communication
+
+### Activer l'Application de la 2FA
+
+<Steps>
+
+1. Accédez à **Paramètres de l'Organisation > Sécurité**
+2. Localisez la section **Exiger la 2FA pour Tous les Membres** en haut de la page
+3. Examinez le panneau **Statut 2FA des Membres** pour voir quels membres seront affectés
+4. S'il y a des membres sans 2FA, utilisez le bouton **Copier la Liste des E-mails** pour les notifier avant l'activation
+5. Activez le bouton bascule à côté de **Exiger la 2FA pour Tous les Membres** pour activer l'application
+6. Le bouton bascule affichera le statut **Désactivé** ou **Activé** sur le côté droit
+
+</Steps>
+
+<Aside type="caution">
+
+Avant d'activer l'application de la 2FA :
+- Notifiez les membres concernés à l'avance et partagez le [guide de configuration 2FA](/docs/webapp/mfa/)
+- Donnez-leur le temps d'activer la 2FA sur leurs comptes
+- Les membres sans 2FA perdront l'accès immédiatement lorsque vous activerez l'application
+- Envisagez de contacter les membres listés dans la boîte d'avertissement "Membres Sans 2FA"
+
+</Aside>
+
+### Support CLI pour l'Application de la 2FA
+
+Vous pouvez également gérer l'application de la 2FA via la CLI :
+
+```shell
+# Activer l'application de la 2FA
+npx @capgo/cli organization set YOUR_ORG_ID --enforce-2fa
+
+# Désactiver l'application de la 2FA
+npx @capgo/cli organization set YOUR_ORG_ID --no-enforce-2fa
+
+# Vérifier le statut 2FA des membres
+npx @capgo/cli organization members YOUR_ORG_ID
+```
+
+Pour des informations détaillées sur l'application de la 2FA, consultez le [guide d'Application de la 2FA](/docs/webapp/2fa-enforcement/).
+
+## Politique de Mots de Passe
+
+Les politiques de mots de passe vous permettent d'appliquer des exigences de complexité de mot de passe pour tous les membres de l'organisation. Lorsque le mot de passe d'un membre ne répond pas aux exigences de la politique, il doit mettre à jour son mot de passe avant d'accéder aux ressources de l'organisation.
+
+La section Politique de Mots de Passe (marquée avec l'indicateur **3** dans l'image d'aperçu) fournit un bouton bascule simple pour appliquer les exigences de mot de passe dans toute votre organisation.
+
+### Comment Fonctionne la Politique de Mots de Passe
+
+Lorsque vous activez la politique de mots de passe :
+- Tous les membres de l'organisation doivent répondre aux exigences de complexité de mot de passe
+- Les utilisateurs qui ne répondent pas aux exigences seront verrouillés jusqu'à ce qu'ils mettent à jour leur mot de passe
+- La politique s'applique à tous les membres quel que soit leur rôle
+
+### Activer la Politique de Mots de Passe
+
+<Steps>
+
+1. Allez dans **Paramètres de l'Organisation > Sécurité**
+2. Faites défiler vers le bas pour trouver la section **Politique de Mots de Passe**
+3. Lisez la description : "Exiger que les membres de l'organisation utilisent des mots de passe répondant à des exigences de complexité spécifiques"
+4. Activez le bouton bascule **Appliquer la Politique de Mots de Passe** pour l'activer
+5. La description du bouton bascule indique : "Lorsqu'activé, tous les membres de l'organisation doivent répondre aux exigences de mot de passe pour accéder à l'organisation"
+
+</Steps>
+
+### Exigences de Mot de Passe Disponibles
+
+| Paramètre | Description | Plage |
+|-----------|-------------|-------|
+| **Longueur Minimale** | Nombre minimum de caractères requis | 6-128 caractères |
+| **Exiger une Majuscule** | Le mot de passe doit contenir au moins une lettre majuscule (A-Z) | Activé/Désactivé |
+| **Exiger un Chiffre** | Le mot de passe doit contenir au moins un chiffre (0-9) | Activé/Désactivé |
+| **Exiger un Caractère Spécial** | Le mot de passe doit contenir au moins un caractère spécial (!@#$%^&*, etc.) | Activé/Désactivé |
+
+### Suivi de la Conformité des Membres
+
+Lorsqu'une politique de mots de passe est active, vous pouvez surveiller la conformité :
+
+- **Total des Membres** : Nombre de membres dans votre organisation
+- **Conformes** : Membres dont les mots de passe répondent aux exigences de la politique
+- **Non Conformes** : Membres qui doivent mettre à jour leurs mots de passe
+
+Les membres non conformes sont listés avec leurs adresses e-mail. Vous pouvez copier la liste des e-mails pour les notifier de la politique et des changements de mot de passe requis.
+
+<Aside type="tip">
+
+Lors de l'activation d'une politique de mots de passe pour la première fois, les membres avec des mots de passe non conformes seront invités à changer leur mot de passe lors de leur prochaine connexion. Ils ne seront pas immédiatement verrouillés, mais leur accès peut être restreint jusqu'à ce qu'ils se conforment.
+
+</Aside>
+
+### Meilleures Pratiques pour les Politiques de Mots de Passe
+
+- **Commencez par des exigences raisonnables** : Un minimum de 10-12 caractères avec des majuscules/minuscules et des chiffres offre une bonne sécurité sans être excessivement restrictif
+- **Communiquez les changements** : Notifiez votre équipe avant d'activer de nouvelles exigences de mot de passe
+- **Accordez du temps de transition** : Donnez aux membres le temps de mettre à jour leurs mots de passe
+- **Envisagez les gestionnaires de mots de passe** : Recommandez aux membres de l'équipe d'utiliser des gestionnaires de mots de passe pour générer et stocker des mots de passe forts
+
+## Sécurité des Clés API
+
+Capgo fournit deux contrôles de sécurité pour les clés API : appliquer des clés API sécurisées (hachées) et exiger des dates d'expiration. La section Politique de Clés API (marquée avec l'indicateur **4** dans l'image d'aperçu) est identifiée par une icône de clé.
+
+### Appliquer des Clés API Sécurisées
+
+La première option dans la section Politique de Clés API est **Appliquer des Clés API Sécurisées**. Lorsqu'elle est activée, ce paramètre exige que toutes les clés API de votre organisation soient créées en utilisant le format sécurisé/haché.
+
+Les clés API hachées sont plus sécurisées car :
+
+- La valeur réelle de la clé n'est jamais stockée sur nos serveurs
+- Seuls vous (et vos systèmes) avez accès à la clé complète
+- Même si notre base de données était compromise, vos clés ne pourraient pas être utilisées
+
+La description du bouton bascule indique : "Lorsqu'activé, seules les clés API sécurisées (hachées) peuvent accéder à cette organisation. Les clés API en texte clair seront rejetées."
+
+<Aside type="note">
+
+Les clés API héritées existantes (non hachées) continueront à fonctionner, mais les membres ne pourront pas créer de nouvelles clés non hachées lorsque cette politique est activée.
+
+</Aside>
+
+### Activer les Clés API Sécurisées
+
+<Steps>
+
+1. Allez dans **Paramètres de l'Organisation > Sécurité**
+2. Faites défiler vers le bas pour trouver la section **Politique de Clés API** (cherchez l'icône de clé)
+3. Localisez le bouton bascule **Appliquer des Clés API Sécurisées**
+4. Activez le bouton bascule pour activer l'application des clés API sécurisées
+5. Les clés existantes ne sont pas affectées ; la politique s'applique à la création de nouvelles clés
+
+</Steps>
+
+### Politique d'Expiration des Clés API
+
+La deuxième option (marquée avec l'indicateur **5** dans l'image d'aperçu) est **Exiger l'Expiration des Clés API**. Vous pouvez exiger que toutes les clés API aient une date d'expiration, limitant leur période de validité.
+
+C'est une meilleure pratique de sécurité qui :
+
+- Limite la fenêtre d'exposition si une clé est compromise
+- Assure une rotation régulière des clés
+- Aide à répondre aux exigences de conformité pour la gestion des identifiants
+
+La description du bouton bascule indique : "Lorsqu'activé, toutes les clés API de cette organisation doivent avoir une date d'expiration"
+
+### Configurer la Politique d'Expiration
+
+<Steps>
+
+1. Allez dans **Paramètres de l'Organisation > Sécurité**
+2. Trouvez la section **Politique de Clés API**
+3. Localisez le bouton bascule **Exiger l'Expiration des Clés API** (sous Appliquer des Clés API Sécurisées)
+4. Activez le bouton bascule pour activer l'exigence d'expiration
+5. Une fois activé, définissez les **Jours d'expiration maximum** (1-365 jours)
+   - Cela limite jusqu'où dans le futur les dates d'expiration peuvent être définies
+   - Exemple : Définir 90 jours signifie que les clés peuvent expirer au maximum 90 jours après leur création
+
+</Steps>
+
+<Aside type="caution">
+
+Lorsque vous activez l'exigence d'expiration :
+- Les nouvelles clés API doivent avoir une date d'expiration
+- Les clés existantes sans expiration continuent à fonctionner
+- Envisagez d'auditer les clés existantes et de faire tourner celles sans expiration
+
+</Aside>
+
+### Politiques de Clés API Recommandées
+
+| Cas d'Utilisation | Clés Sécurisées | Expiration | Jours Max. |
+|-------------------|-----------------|------------|------------|
+| **Développement** | Recommandé | Optionnel | 30-90 |
+| **Pipelines CI/CD** | Requis | Requis | 90-180 |
+| **Production** | Requis | Requis | 30-90 |
+| **Enterprise/Conformité** | Requis | Requis | 30-60 |
+
+## Conformité et Audit
+
+Les fonctionnalités de sécurité de l'organisation vous aident à répondre à diverses exigences de conformité :
+
+| Standard | Fonctionnalités Pertinentes |
+|----------|------------------------------|
+| **SOC 2** | Application de la 2FA, politiques de mots de passe, contrôles de clés API |
+| **ISO 27001** | Toutes les fonctionnalités de sécurité aident à démontrer le contrôle d'accès |
+| **HIPAA** | Authentification forte et gestion des accès |
+| **RGPD** | Protection des données via les contrôles d'accès |
+| **PCI DSS** | Authentification multifacteur, mots de passe forts |
+
+### Surveiller le Statut de Conformité
+
+Le tableau de bord Sécurité fournit une visibilité en temps réel sur :
+- Combien de membres ont la 2FA activée
+- La conformité à la politique de mots de passe dans votre organisation
+- L'adoption de la sécurité des clés API
+
+Utilisez la fonctionnalité "Copier la liste des e-mails" pour exporter facilement les listes de membres non conformes pour une communication ciblée.
+
+## Dépannage
+
+### "Accès Refusé : Politique de sécurité non respectée"
+
+**Problème** : Un membre ne peut pas accéder à l'organisation.
+
+**Solutions** :
+1. Vérifiez si la 2FA est appliquée - le membre doit [activer la 2FA](/docs/webapp/mfa/)
+2. Vérifiez si une politique de mots de passe est active - le membre doit mettre à jour son mot de passe
+3. Vérifiez le statut de conformité du membre dans le tableau de bord Sécurité
+
+### Impossible d'activer les fonctionnalités de sécurité
+
+**Problème** : Les boutons bascule de sécurité sont désactivés ou ne répondent pas.
+
+**Solutions** :
+- Assurez-vous d'avoir le rôle **super_admin** dans l'organisation
+- Vérifiez votre connexion réseau
+- Essayez de rafraîchir la page
+- Contactez le support si le problème persiste
+
+### La création de clé API échoue
+
+**Problème** : Impossible de créer de nouvelles clés API.
+
+**Solutions** :
+- Si les clés sécurisées sont appliquées, assurez-vous d'utiliser le flux de création de clés sécurisées
+- Si l'expiration est requise, définissez une date d'expiration dans la plage autorisée
+- Vérifiez le paramètre de jours d'expiration maximum
+
+## Prochaines Étapes
+
+- [Configurer la 2FA sur votre compte](/docs/webapp/mfa/)
+- [En savoir plus sur les détails de l'application de la 2FA](/docs/webapp/2fa-enforcement/)
+- [Gérer les clés API](/docs/webapp/api-keys/)
+- [Gestion de l'organisation](/docs/webapp/organization-system/)

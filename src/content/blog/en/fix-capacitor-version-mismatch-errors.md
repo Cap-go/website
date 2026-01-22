@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-31T04:35:04.064Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572-1743395716448.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, version mismatch, troubleshooting, mobile development, software updates
@@ -158,7 +158,7 @@ When transitioning to a new major version, follow these steps:
     ```
     
 
-Capgo provides live updates for Capacitor 6 and 7, allowing you to apply fixes without needing app store approvals [\[1\]](https://capgo.app/).
+Capgo provides live updates for Capacitor 8, allowing you to apply fixes without needing app store approvals [\[1\]](https://capgo.app/).
 
 ## Avoiding Future Version Conflicts
 

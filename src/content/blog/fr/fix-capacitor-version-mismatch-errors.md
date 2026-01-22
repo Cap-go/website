@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-31T04:35:04.064Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572-1743395716448.jpg
 head_image_alt: Développement mobile
@@ -163,7 +163,7 @@ Lors de la transition vers une nouvelle version majeure, suivez ces étapes :
     ```
     
 
-Capgo fournit des mises à jour en direct pour Capacitor 6 et 7, vous permettant d'appliquer des corrections sans avoir besoin d'approbations de la boutique d'applications [\[1\]](https://capgo.app/).
+Capgo fournit des mises à jour en direct pour Capacitor 8, vous permettant d'appliquer des corrections sans avoir besoin d'approbations de la boutique d'applications [\[1\]](https://capgo.app/).
 
 ## Éviter les Conflits de Version Futurs
 

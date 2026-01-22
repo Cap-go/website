@@ -9,7 +9,7 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-18T00:00:00.000Z
-updated_at: 2025-12-31T01:33:21.000Z
+updated_at: 2026-01-15T02:30:12.000Z
 head_image: /open_source_licence.webp
 head_image_alt: Open Source Licence
 keywords: Open Source, Capgo, philosophy, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -145,6 +145,6 @@ AGPL is a license Google has a problem with, as they’re not prepared to divulg
 
 The goal of the AGPL is to maximize user freedom and to encourage companies to contribute to open-source. I'm a user facing, standalone application. I'm not a library or a piece of a bigger project. I'm not looking for Google’s donations, so we’re happy to be AGPL-licensed. It is the right license for Capgo.
 
-# Conclusion
+## Conclusion
 
 There are many factors to consider when choosing an open-source software license. Yet, there are certainly popular choices among the developer community. Common permissive licenses include the MIT License, Apache License, and BSD License. Some common copyleft licenses include the GNU General Public License and the Mozilla Public License.

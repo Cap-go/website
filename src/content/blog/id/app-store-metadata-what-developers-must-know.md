@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-28T01:52:31.369Z
-updated_at: 2025-12-31T01:19:38.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e5e83da2c14cac42f7f5e4-1743126762355.jpg
 head_image_alt: Pengembangan Mobile
@@ -207,7 +207,7 @@ Capgo menyediakan alat-alat utama untuk mengelola pembaruan dan metadata aplikas
 | Kontrol Versi | Kembali ke versi sebelumnya dengan cepat | Kemampuan rollback instan |
 | Integrasi CI/CD | Mengotomatisasi deployment melalui Git | Integrasi alur kerja yang efisien |
 
-Capgo mendukung Capacitor 6 dan 7 dan menawarkan opsi deployment berbasis cloud dan [self-hosted](https://capgo.app/blog/self-hosted-capgo/). Fleksibilitas ini memastikan manajemen pembaruan yang tepat sambil tetap mematuhi persyaratan app store [\[1\]](https://capgo.app/).
+Capgo mendukung Capacitor 8 dan menawarkan opsi deployment berbasis cloud dan [self-hosted](https://capgo.app/blog/self-hosted-capgo/). Fleksibilitas ini memastikan manajemen pembaruan yang tepat sambil tetap mematuhi persyaratan app store [\[1\]](https://capgo.app/).
 
 ## Ringkasan
 

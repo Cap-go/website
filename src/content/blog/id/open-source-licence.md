@@ -9,7 +9,7 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-18T00:00:00.000Z
-updated_at: 2025-12-31T01:19:38.000Z
+updated_at: 2026-01-15T02:30:12.000Z
 head_image: /open_source_licence.webp
 head_image_alt: Lisensi Open Source
 keywords: >-
@@ -146,6 +146,6 @@ AGPL adalah lisensi yang bermasalah bagi Google, karena mereka tidak siap untuk 
 
 Tujuan AGPL adalah untuk memaksimalkan kebebasan pengguna dan mendorong perusahaan untuk berkontribusi pada open-source. Saya adalah aplikasi mandiri yang menghadap pengguna. Saya bukan pustaka atau bagian dari proyek yang lebih besar. Saya tidak mencari donasi dari Google, jadi kami senang menggunakan lisensi AGPL. Ini adalah lisensi yang tepat untuk Capgo.
 
-# Kesimpulan
+## Kesimpulan
 
 Ada banyak faktor yang perlu dipertimbangkan saat memilih lisensi perangkat lunak open-source. Namun, ada pilihan populer di kalangan komunitas pengembang. Lisensi permisif yang umum termasuk MIT License, Apache License, dan BSD License. Beberapa lisensi copyleft yang umum termasuk GNU General Public License dan Mozilla Public License.

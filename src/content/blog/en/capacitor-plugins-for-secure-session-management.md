@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-16T12:14:04.681Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6827226c0209458b3ff58b06-1747397705731.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, session management, biometric authentication, secure storage, Firebase Auth, Identity Vault, mobile security
@@ -175,7 +175,7 @@ The plugin works seamlessly with biometric authentication, offering an additiona
 
 ### Performance and Community Support
 
-As of May 2025, the plugin has garnered a solid reputation within the Capacitor ecosystem, with 128 stars and 22 forks on GitHub. It’s fully compatible with Capacitor 6+, enabling developers to implement secure storage while taking advantage of the latest framework features.
+As of May 2025, the plugin has garnered a solid reputation within the Capacitor ecosystem, with 128 stars and 22 forks on GitHub. It’s fully compatible with Capacitor 8+, enabling developers to implement secure storage while taking advantage of the latest framework features.
 
 ## 4\. Identity Vault
 

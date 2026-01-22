@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-05-14T05:13:56.152Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68240bea59ff61289922287e-1747199824736.jpg
 head_image_alt: モバイル開発
@@ -44,7 +44,7 @@ next_blog: ''
 
 | プラグイン名 | Capacitorバージョン | 機能 | 最適な用途 |
 | --- | --- | --- | --- |
-| `@aparajita/capacitor-biometric-auth` | Capacitor 7 | ネイティブ生体認証、デバイス認証情報 | Capacitor 7を使用する新規プロジェクト |
+| `@aparajita/capacitor-biometric-auth` | Capacitor 8 | ネイティブ生体認証、デバイス認証情報 | Capacitor 8を使用する新規プロジェクト |
 | `capacitor-native-biometric` | Capacitor 3, 4 | 安全な認証情報保存、Keychain/Keystore | 認証情報管理 |
 | 全バージョン | 生体認証とデバイス認証情報のサポート | 柔軟な認証オプション |
 
@@ -70,7 +70,7 @@ next_blog: ''
 
 Capacitorバージョンに基づいて[生体認証プラグイン](https://capgo.app/plugins/capacitor-native-biometric/)を選択してください：
 
--   Capacitor 7用の**@aparajita/capacitor-biometric-auth**
+-   Capacitor 8用の**@aparajita/capacitor-biometric-auth**
 -   Capacitor 3と4用の**capacitor-native-biometric**
 
 ### Androidセットアップ手順
@@ -140,7 +140,7 @@ Capacitorアプリ用の生体認証プラグインを選択する際は、プ�
 
 | プラグイン名 | Capacitorバージョン | 主な機能 | 最適な用途 |
 | --- | --- | --- | --- |
-| @aparajita/capacitor-biometric-auth | Capacitor 7 | ネイティブ生体認証、デバイス認証情報、包括的なAPI | Capacitor 7で始める新規プロジェクト |
+| @aparajita/capacitor-biometric-auth | Capacitor 8 | ネイティブ生体認証、デバイス認証情報、包括的なAPI | Capacitor 8で始める新規プロジェクト |
 | capacitor-native-biometric | Capacitor 3, 4 | 安全な認証情報保存、Keychain/Keystore統合 | 認証情報管理が必要な既存プロジェクト |
 | 全バージョン | 生体認証とデバイス認証情報認証、クリーンなAPI | 柔軟な認証オプションが必要なプロジェクト |
 

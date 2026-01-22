@@ -3,7 +3,6 @@ import * as m from '@/paraglide/messages'
 import { locales } from '@/services/locale'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
-const brand = Astro.locals.runtimeConfig.public.brand
 const year = new Date().getFullYear()
 
 // Map locale codes to flag emojis
@@ -71,6 +70,14 @@ const navigation: Record<string, NavigationItem[]> = {
       name: m.pricing({}, { locale: Astro.locals.locale }),
       href: getRelativeLocaleUrl(Astro.locals.locale, 'pricing'),
     },
+    {
+      name: 'Premium Support',
+      href: getRelativeLocaleUrl(Astro.locals.locale, 'premium-support'),
+    },
+    {
+      name: 'App store publishing costs',
+      href: getRelativeLocaleUrl(Astro.locals.locale, 'cost/cost-to-publish-app-on-app-store'),
+    },
     { name: m.blog({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'blog') },
     {
       name: () => m.all_systems_normal({}, { locale: Astro.locals.locale }),
@@ -104,19 +111,14 @@ const navigation: Record<string, NavigationItem[]> = {
     { name: m.capwesome_nav_label({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'capwesome') },
   ],
   legal: [
-    { name: m.privacy({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'privacy'), rel: 'nofollow' },
-    { name: m.support_policy({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'support-policy'), rel: 'nofollow' },
-    { name: m.sla({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'sla'), rel: 'nofollow' },
-    { name: m.aup({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'aup'), rel: 'nofollow' },
-    { name: m.terms({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'tos'), rel: 'nofollow' },
-    { name: m.security_txt({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'security'), rel: 'nofollow' },
-    // {
-    //   name: m.privacy({}, { locale: Astro.locals.locale }),
-    //   href: 'https://www.privacyboard.co/company/capgo/',
-    //   target: '_blank',
-    // },
-    { name: m.dp({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'dp'), rel: 'nofollow' },
-    { name: m.dpa({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'dpa'), rel: 'nofollow' },
+    { name: m.privacy({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'privacy') },
+    { name: m.support_policy({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'support-policy') },
+    { name: m.sla({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'sla') },
+    { name: m.aup({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'aup') },
+    { name: m.terms({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'tos') },
+    { name: m.security_txt({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'security') },
+    { name: m.dp({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'dp') },
+    { name: m.dpa({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'dpa') },
   ],
   hero: [
     {
@@ -164,7 +166,7 @@ const navigation: Record<string, NavigationItem[]> = {
         <span class="block text-zinc-500">{m.footer_tagline_part2({}, { locale: Astro.locals.locale })}</span>
       </h2>
       <a href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')} class="inline-flex justify-center items-center py-3 px-6 text-base font-medium text-white bg-blue-600 rounded-md border border-transparent shadow-sm hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none">
-        Install Plugin
+        {m.install_plugin({}, { locale: Astro.locals.locale })}
       </a>
     </div>
 
@@ -232,7 +234,7 @@ const navigation: Record<string, NavigationItem[]> = {
         </ul>
       </div>
       <div>
-        <h3 class="mb-4 text-sm font-semibold tracking-wider text-white uppercase">Compare</h3>
+        <h3 class="mb-4 text-sm font-semibold tracking-wider text-white uppercase">{m.compare({}, { locale: Astro.locals.locale })}</h3>
         <ul role="list" class="space-y-3">
           {navigation.compare.map((item) => (
             <li>
@@ -267,12 +269,12 @@ const navigation: Record<string, NavigationItem[]> = {
                   <span class="inline-flex absolute w-full h-full bg-green-400 rounded-full opacity-75 animate-ping"></span>
                   <span class="inline-flex relative w-2 h-2 bg-green-500 rounded-full"></span>
                 </span>
-                All systems normal: 99% uptime
+                {m.all_systems_normal_uptime({}, { locale: Astro.locals.locale })}
              </a>
              <div class="flex gap-4">
-               <img src="/soc2.svg" alt="SOC 2 Compliant" class="w-auto h-12 opacity-80 transition-opacity hover:opacity-100" />
-               <img src="/soc1.svg" alt="SOC 1 Compliant" class="w-auto h-12 opacity-80 transition-opacity hover:opacity-100" />
-               <img src="/gdpr.svg" alt="GDPR Compliant" class="w-auto h-12 opacity-80 transition-opacity hover:opacity-100" />
+               <img src="/soc2.svg" alt={m.soc2_compliant({}, { locale: Astro.locals.locale })} class="w-auto h-12 opacity-80 transition-opacity hover:opacity-100" />
+               <img src="/soc1.svg" alt={m.soc1_compliant({}, { locale: Astro.locals.locale })} class="w-auto h-12 opacity-80 transition-opacity hover:opacity-100" />
+               <img src="/gdpr.svg" alt={m.gdpr_compliant({}, { locale: Astro.locals.locale })} class="w-auto h-12 opacity-80 transition-opacity hover:opacity-100" />
              </div>
              <p class="max-w-md text-xs text-zinc-500">
                 {m.enterprise_security_audit_desc({}, { locale: Astro.locals.locale })}
@@ -299,7 +301,7 @@ const navigation: Record<string, NavigationItem[]> = {
             </div>
 
             <p class="text-xs tracking-wider uppercase text-zinc-500">
-                &copy; {year} CAPGO, Digital shift OU. ALL RIGHTS RESERVED.
+                &copy; {year} {m.copyright_notice({}, { locale: Astro.locals.locale })}
             </p>
         </div>
     </div>

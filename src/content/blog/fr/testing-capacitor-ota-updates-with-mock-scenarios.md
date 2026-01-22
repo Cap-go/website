@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-19T03:53:13.485Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67da3972cfd1b2222c56f23a-1742356439850.jpg
 head_image_alt: Développement mobile
@@ -48,7 +48,7 @@ Pour tester les [mises à jour OTA de Capacitor](https://capgo.app/ja/), vous au
 | Logiciel | Objectif | Exigences de version |
 | --- | --- | --- |
 | **Node.js** | Environnement d'exécution | Dernière version LTS |
-| **Capacitor CLI** | Développement d'application | Capacitor 6 ou 7 |
+| **Capacitor CLI** | Développement d'application | Capacitor 8 |
 | **[Capgo CLI](https://capgo.app/docs/cli/commands)** | Gestion OTA | Dernière version |
 
 Installez le Capgo CLI en exécutant :

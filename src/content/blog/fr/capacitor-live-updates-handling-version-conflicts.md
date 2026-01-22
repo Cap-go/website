@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-24T03:09:18.971Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94-1745464174874.jpg
 head_image_alt: Développement Mobile
@@ -143,7 +143,7 @@ Cette section s'appuie sur l'aperçu des outils de mise à jour en direct, en se
 ### Conseils de Contrôle de Version
 
 -   Utilisez les **[canaux Capgo](https://capgo.app/docs/webapp/channels/)** pour gérer les déploiements iOS et Android tout en effectuant des tests spécifiques à la plateforme [\[1\]](https://capgo.app/).
--   Respectez **Capacitor 6 et 7** pour garantir la compatibilité d'exécution sur les deux plateformes [\[1\]](https://capgo.app/).
+-   Respectez **Capacitor 8** pour garantir la compatibilité d'exécution sur les deux plateformes [\[1\]](https://capgo.app/).
 
 ### Approches de Test
 

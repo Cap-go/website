@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-12T02:57:37.246Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62-1744426677476.jpg
 head_image_alt: 모바일 개발
@@ -24,7 +24,7 @@ next_blog: ''
 
 - **OTA 업데이트란?** 앱 스토어 리뷰를 건너뛰고 사용자 기기에 직접 변경사항을 전달합니다. 시간을 절약하고 문제를 신속하게 해결합니다.
 - **테스트가 중요한 이유:** 제대로 테스트되지 않은 업데이트는 앱 충돌이나 규정 위반을 일으킬 수 있습니다. 적절한 테스트를 통해 24시간 이내에 95%의 업데이트가 성공합니다.
-- **필요한 도구:** Capacitor CLI (v6+), [Node.js](https://nodejs.org/en) (v16+), [Capgo](https://capgo.app/) 플러그인, [Cypress](https://www.cypress.io/)와 같은 테스트 프레임워크.
+- **필요한 도구:** Capacitor CLI (v8+), [Node.js](https://nodejs.org/en) (v16+), [Capgo](https://capgo.app/) 플러그인, [Cypress](https://www.cypress.io/)와 같은 테스트 프레임워크.
 - **테스트 단계:**
     1. 테스트 환경과 Capgo 설정을 구성합니다.
     2. 감지, 다운로드, 설치, 롤백과 같은 업데이트 프로세스를 검증합니다.
@@ -73,7 +73,7 @@ npx @capgo/cli init
 
 엔터프라이즈급 보안을 위해 Capgo는 클라우드 기반과 자체 호스팅 옵션을 모두 제공합니다.
 
-통합이 완료되면 앱을 빌드하고 Capgo CLI를 사용하여 업데이트를 트리거하세요. Capgo는 Capacitor 6과 7을 원활하게 지원하므로 다양한 최신 개발 환경을 지원합니다.
+통합이 완료되면 앱을 빌드하고 Capgo CLI를 사용하여 업데이트를 트리거하세요. Capgo는 Capacitor 8을 원활하게 지원하므로 다양한 최신 개발 환경을 지원합니다.
 
 이러한 단계는 다음 섹션인 테스트 방법에서 다룰 철저한 OTA 업데이트 테스트의 기반을 마련합니다.
 

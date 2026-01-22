@@ -1,18 +1,18 @@
 ---
 slug: building-a-native-mobile-app-with-nextjs-and-capacitor
-title: Build Native Apps with Next.js 15 + Capacitor (2025)
+title: Convert Your Next.js App to iOS & Android with Capacitor 8
 description: >-
-  Learn how to create native mobile apps using Next.js 15, Capacitor, Tailwind CSS 4, and Konsta UI 5 in this
-  guide. Discover the latest best practices for
-  building high-performance, feature-rich mobile applications with modern UI frameworks.
+  Transform your existing Next.js 15 web application into native iOS and Android
+  mobile apps using Capacitor 8. A complete guide to configuring static export,
+  adding native plugins, and deploying to app stores.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-02-21T00:00:00.000Z
-updated_at: 2026-01-01T17:10:20.000Z
+updated_at: 2026-01-15T23:07:27.000Z
 head_image: /next_capgo.webp
 head_image_alt: Next.js 15 and Capacitor illustration
-keywords: Next.js 15, Capacitor, Tailwind CSS 4, Konsta UI 5, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
+keywords: Next.js 15, Capacitor 8, convert web app to mobile, iOS, Android, mobile app development, static export, native plugins
 tag: Tutorial
 published: true
 locale: en
@@ -21,9 +21,18 @@ next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 
 ## Introduction
 
-In this tutorial, we'll explore how to create native mobile apps using the powerful combination of [Next.js](https://nextjs.org/) 15 and [Capacitor](https://capacitorjs.com/) in 2025. By leveraging the latest versions of these technologies, you can build high-performance, feature-rich mobile applications with ease. We'll also demonstrate how to enhance the mobile UI using [Konsta UI](https://konstaui.com/) v5 and Tailwind CSS 4, although this step is optional.
+Have an existing Next.js web application? In this guide, you'll learn how to transform it into native iOS and Android mobile apps using [Capacitor](https://capacitorjs.com/) 8 — the latest version with improved performance and new features.
 
-Next.js, a popular React framework, provides a solid foundation for building web applications, while Capacitor allows you to transform your Next.js app into a native mobile app without significant modifications or the need to learn new skills like React Native. This tutorial will guide you through the process, starting with setting up a new Next.js app and integrating Capacitor to create a native mobile experience.
+Capacitor wraps your web app in a native container, giving you access to device APIs like camera, filesystem, and push notifications while keeping your existing React codebase. Unlike React Native, you don't need to rewrite anything — your Next.js code runs as-is.
+
+**What you'll learn:**
+- Configure your existing Next.js app for static export
+- Add Capacitor 8 with essential native plugins
+- Build and test on iOS and Android simulators
+- Enable live reload for faster development
+- Optionally add Konsta UI for native-looking components
+
+> Looking to start a new project from scratch? Check out our guide on [Building a Next.js Mobile App from Scratch](/blog/nextjs-mobile-app-capacitor-from-scratch/).
 
 ### Benefits of Using Next.js and Capacitor
 
@@ -32,44 +41,25 @@ Next.js, a popular React framework, provides a solid foundation for building web
 - **Native Capabilities**: Capacitor provides access to native device features like the camera, geolocation, and more, allowing you to build feature-rich mobile apps.
 - **Simplified Development**: With Capacitor, you can develop and test your mobile app using familiar web technologies, reducing the learning curve and streamlining the development process.
 
-## Preparing Your Next.js App
+## Prerequisites
 
-To get started, let's create a new Next.js application using the `create-next-app` command:
+Before you begin, make sure you have:
 
-```shell
-npx create-next-app@latest my-app
-```
+- **Node.js 18+** installed
+- An existing **Next.js 15+** application
+- **Xcode** (for iOS development, macOS only)
+- **Android Studio** (for Android development)
 
-This command will set up a blank Next.js project with the recommended configuration for the latest version.
+## Configuring Your Next.js App for Mobile
 
-Next, navigate to the project directory:
+The first step is to configure your Next.js app for static export. Capacitor needs static HTML/JS/CSS files to bundle into the native app.
 
-```shell
-cd my-app
-```
-
-To create a native mobile app, we need to generate a static export of our Next.js project. Update the `package.json` file to include a script for building and exporting the project:
-
-```json
-{
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "static": "NEXT_PUBLIC_IS_MOBILE=true next build"
-  }
-}
-```
-
-Running the `npm run static` command may result in errors due to image optimization incompatibility. To resolve this, open the `next.config.js` file and modify it as follows:
+Open your `next.config.js` (or `next.config.ts`) file and add the export configuration:
 
 ```javascript
 /** @type {import('next').NextConfig} */
-const isMobile = process.env.NEXT_PUBLIC_IS_MOBILE === 'true';
 const nextConfig = {
-    ...(isMobile ? {output: 'export'} : {}),
-  reactStrictMode: true,
+  output: 'export',
   images: {
     unoptimized: true,
   },
@@ -78,64 +68,113 @@ const nextConfig = {
 module.exports = nextConfig;
 ```
 
-Now, running `npm run static` should work without any issues, and you will find a new `out` folder at the root of your project. This folder will be used by Capacitor in the next steps.
+The `output: 'export'` setting tells Next.js to generate static HTML files, and `images: { unoptimized: true }` bypasses Next.js image optimization which requires a server.
 
-## Adding Capacitor to Your Next.js 15 App
+**Important:** If you're using features that require a server (API routes, server components with data fetching, etc.), you'll need to refactor those to use client-side alternatives or external APIs.
 
-To package your Next.js app into a native mobile container, follow these steps:
-
-1. Install the [Capacitor CLI](https://capacitorjs.com/docs/cli/) as a development dependency:
-
-```shell
-npm install -D @capacitor/cli
-```
-
-2. Initialize Capacitor in your Next.js project:
-
-```shell
-npx cap init
-```
-
-During the initialization process, you can press "Enter" to accept the default values for the app name and bundle ID.
-
-3. Install the required Capacitor packages:
-
-```shell
-npm install @capacitor/core @capacitor/ios @capacitor/android
-```
-
-4. Add the native platforms:
-
-```shell
-npx cap add ios
-npx cap add android
-```
-
-Capacitor will create folders for each platform (`ios` and `android`) at the root of your project. These folders contain the native projects for iOS and Android, respectively.
-
-To access and build the Android project, you need to have [Android Studio](https://developer.android.com/studio) installed. For iOS development, you need a Mac with [Xcode](https://developer.apple.com/xcode/) installed.
-
-5. Configure Capacitor:
-
-Open the `capacitor.config.ts` file and update the `webDir` property to point to the output directory of your Next.js build:
+Add mobile-specific scripts to your `package.json`:
 
 ```json
 {
-  "appId": "com.example.app",
-  "appName": "my-app",
-  "webDir": "out",
-  "bundledWebRuntime": false
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "mobile": "bun run build && bunx cap sync",
+    "mobile:ios": "bun run mobile && bunx cap open ios",
+    "mobile:android": "bun run mobile && bunx cap open android"
+  }
 }
 ```
 
-6. Build and sync your project:
+Test the static export by running:
 
 ```shell
-npm run static
-npx cap sync
+bun run build
 ```
 
-The `npm run static` command builds your Next.js project and exports the static files, while `npx cap sync` synchronizes the web code with the native platforms.
+You should see an `out` folder at the root of your project. This contains all the static files that Capacitor will bundle into your native app.
+
+## Adding Capacitor 8 to Your Project
+
+To package your Next.js app into a native mobile container, follow these steps:
+
+1. Install Capacitor core and CLI:
+
+```shell
+bun add @capacitor/core
+bun add -D @capacitor/cli
+```
+
+2. Install common Capacitor plugins you'll likely need:
+
+```shell
+bun add @capacitor/app @capacitor/keyboard @capacitor/splash-screen @capacitor/preferences
+```
+
+These plugins provide essential features:
+- **@capacitor/app**: Handle app lifecycle events (foreground/background, URLs)
+- **@capacitor/keyboard**: Control keyboard behavior on mobile
+- **@capacitor/splash-screen**: Manage the native splash screen
+- **@capacitor/preferences**: Store key-value data persistently
+
+3. Initialize Capacitor with your project details:
+
+```shell
+bunx cap init my-app com.example.myapp --web-dir out
+```
+
+Replace `my-app` with your app name and `com.example.myapp` with your app ID (reverse domain notation).
+
+4. Create or update the `capacitor.config.ts` file with the proper configuration:
+
+```typescript
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.example.myapp',
+  appName: 'my-app',
+  webDir: 'out',
+  plugins: {
+    SplashScreen: {
+      launchShowDuration: 2000,
+      launchAutoHide: true,
+      androidScaleType: 'CENTER_CROP',
+      showSpinner: false,
+      splashFullScreen: true,
+      splashImmersive: true,
+    },
+  },
+};
+
+export default config;
+```
+
+5. Install native platforms:
+
+```shell
+bun add @capacitor/ios @capacitor/android
+```
+
+6. Add the native platform folders:
+
+```shell
+bunx cap add ios
+bunx cap add android
+```
+
+Capacitor will create `ios` and `android` folders at the root of your project containing the native projects.
+
+To build the Android project, you need [Android Studio](https://developer.android.com/studio). For iOS, you need a Mac with [Xcode](https://developer.apple.com/xcode/).
+
+7. Build and sync your project:
+
+```shell
+bun run mobile
+```
+
+This runs your custom script that builds the Next.js project and syncs the static files with the native platforms.
 
 ## Building and Deploying Native Apps
 
@@ -146,12 +185,18 @@ To develop iOS apps, you need to have **Xcode** installed, and for Android apps,
 
 For iOS:
 ```shell
-npx cap open ios
+bun run mobile:ios
 ```
 
 For Android:
 ```shell
-npx cap open android
+bun run mobile:android
+```
+
+Or directly with Capacitor CLI:
+```shell
+bunx cap open ios
+bunx cap open android
 ```
 
 2. Build and run the app:
@@ -187,16 +232,15 @@ During development, you can take advantage of live reloading to see changes inst
   ```
   Look for the IPv4 address in the output.
 
-2. Update the `capacitor.config.ts` file to include the server configuration:
+2. Update your `capacitor.config.ts` to point to your development server:
 
-```javascript
-import { CapacitorConfig } from '@capacitor/cli';
+```typescript
+import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.example.app',
   appName: 'my-app',
   webDir: 'out',
-  bundledWebRuntime: false,
   server: {
     url: 'http://YOUR_IP_ADDRESS:3000',
     cleartext: true,
@@ -206,12 +250,12 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-Replace `YOUR_IP_ADDRESS` with your local IP address.
+Replace `YOUR_IP_ADDRESS` with your local IP address (e.g., `192.168.1.100`).
 
 3. Apply the changes to your native project:
 
 ```shell
-npx cap copy
+bunx cap copy
 ```
 
 The `copy` command copies the web folder and configuration changes to the native project without updating the entire project.
@@ -229,7 +273,7 @@ Capacitor plugins allow you to access native device features from your Next.js a
 1. Install the Share plugin:
 
 ```shell
-npm i @capacitor/share
+bun add @capacitor/share
 ```
 
 2. Update the `pages/index.js` file to use the Share plugin:
@@ -277,7 +321,12 @@ export default function Home() {
 As mentioned earlier, when installing new plugins, we need to perform a sync operation and then redeploy the app to our device. To do this, run the following command:
 
 ```shell
-npx cap sync
+bun run mobile
+```
+
+Or just sync without rebuilding:
+```shell
+bunx cap sync
 ```
 
 4. Rebuild and run the app on your device.
@@ -304,7 +353,7 @@ To enhance the mobile UI of your Next.js app, you can use [Konsta UI v5](https:/
 1. Install the required packages (Konsta UI v5):
 
 ```shell
-npm i konsta
+bun add konsta
 ```
 
 2. Import Konsta UI theme in your main CSS file (e.g., `styles/globals.css`):
@@ -416,21 +465,28 @@ To ensure optimal performance of your Next.js and Capacitor app, consider the fo
 
 ## Conclusion
 
-In this tutorial, we explored how to build native mobile apps using Next.js and Capacitor. By leveraging the power of these technologies, you can create high-performance, feature-rich mobile applications with ease.
+You've successfully converted your existing Next.js web application into native iOS and Android apps using Capacitor 8. Your web codebase now runs natively on mobile devices with access to device APIs.
 
-We covered the steps to set up a Next.js app, integrate Capacitor, and build and deploy the app to mobile devices. Additionally, we discussed using Capacitor plugins, adding Konsta UI for an enhanced mobile UI, and performance optimization techniques.
+**What you accomplished:**
+- Configured Next.js for static export
+- Added Capacitor 8 with essential plugins
+- Built and deployed to iOS and Android simulators
+- Enabled live reload for development
+- Optionally added Konsta UI for native-looking components
 
-To take your Next.js and Capacitor app to the next level, consider exploring [Capgo](https://capgo.app/) for seamless live updates, ensuring your users always have access to the latest features and bug fixes.
+**Next steps:**
+- Set up [Capgo](https://capgo.app/) for over-the-air updates without app store resubmission
+- Add more native plugins like Camera, Geolocation, or Push Notifications
+- Configure app icons and splash screens for production
+- Prepare your app for App Store and Google Play submission
 
-By following the best practices and techniques outlined in this guide, you'll be well-equipped to build stunning native mobile apps using Next.js and Capacitor.
+> Starting a brand new project? Check out [Building a Next.js Mobile App from Scratch](/blog/nextjs-mobile-app-capacitor-from-scratch/) for a guided walkthrough.
 
 ## Resources
 
 - [Next.js Documentation](https://nextjs.org/docs)
-- [Capacitor Documentation](https://capacitorjs.com/docs)
+- [Capacitor 8 Documentation](https://capacitorjs.com/docs)
 - [Konsta UI v5 Documentation](https://konstaui.com/docs)
 - [Capgo - Live Updates for Capacitor Apps](https://capgo.app/)
-
-Happy app building!
 
 Learn how Capgo can help you build better apps faster, [sign up for a free account](/register/) today.

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-20T01:48:44.409Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: https://assets.seobotai.com/capgo.app/680445af6000445eb1a661a6-1745113809661.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, app updates, OTA updates, testing checklist, mobile development
@@ -71,7 +71,7 @@ Configure Capgo with these steps [\[1\]](https://capgo.app/):
 -   Configure rollback options for better control.
 -   Choose between cloud or [self-hosted deployment](https://capgo.app/blog/self-hosted-capgo/), based on your needs.
 
-For enterprise use, Capgo offers compatibility with Capacitor 6 and 7, and supports both cloud and self-hosted deployments [\[1\]](https://capgo.app/). Once this setup is complete, move on to feature and device testing.
+For enterprise use, Capgo offers compatibility with Capacitor 8, and supports both cloud and self-hosted deployments [\[1\]](https://capgo.app/). Once this setup is complete, move on to feature and device testing.
 
 ## Main Testing Checklist
 

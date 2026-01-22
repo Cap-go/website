@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-21T03:02:38.679Z
-updated_at: 2025-12-31T01:33:21.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67dcb1f883b63ee70fa08665-1742526177947.jpg
 head_image_alt: モバイル開発
@@ -77,7 +77,7 @@ npx @capgo/cli init
 | 開発者 | 制限付きアクセス | アップデートのデプロイとテスト |
 | 閲覧者 | 読み取り専用 | アップデートステータスの監視 |
 
-チームメンバーの責任に基づいてロールを割り当てます。CapgoはCapacitor 6と7の両方でシームレスに動作し、様々なプロジェクトのニーズに対応します。
+チームメンバーの責任に基づいてロールを割り当てます。CapgoはCapacitor 8でシームレスに動作し、様々なプロジェクトのニーズに対応します。
 
 さらに便利なことに、Capgoは[GitHub Actions](https://docs.github.com/actions)、[GitLab CI](https://docs.gitlab.com/ee/ci/)、[Jenkins](https://www.jenkins.io/)などの人気のCI/CDツールと統合できます。ビルドシステムがアップデートチャネル管理を処理できる状態であることを確認してください。
 

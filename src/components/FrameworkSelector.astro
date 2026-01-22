@@ -1,32 +1,50 @@
 ---
 // FrameworkSelector.astro - Framework selection buttons for conditional steps
+import * as m from '@/paraglide/messages'
+
 interface FrameworkOption {
   id: string
-  name: string
+  nameKey: string
   icon: string
 }
 
 const frameworks: FrameworkOption[] = [
-  { id: 'js', name: 'JS + DOM API', icon: '/icons/js.svg' },
-  { id: 'ts', name: 'TS + DOM API', icon: '/icons/ts.svg' },
-  { id: 'react', name: 'React', icon: '/icons/react.svg' },
-  { id: 'angular', name: 'Angular', icon: '/icons/angular.svg' },
-  { id: 'vue', name: 'Vue', icon: '/icons/vue.svg' },
-  { id: 'svelte', name: 'Svelte', icon: '/icons/svelte.svg' },
-  { id: 'qwik', name: 'Qwik', icon: '/icons/qwik.svg' },
+  { id: 'js', nameKey: 'framework_js_dom', icon: '/icons/js.svg' },
+  { id: 'ts', nameKey: 'framework_ts_dom', icon: '/icons/ts.svg' },
+  { id: 'react', nameKey: 'framework_react', icon: '/icons/react.svg' },
+  { id: 'angular', nameKey: 'framework_angular', icon: '/icons/angular.svg' },
+  { id: 'vue', nameKey: 'framework_vue', icon: '/icons/vue.svg' },
+  { id: 'svelte', nameKey: 'framework_svelte', icon: '/icons/svelte.svg' },
+  { id: 'qwik', nameKey: 'framework_qwik', icon: '/icons/qwik.svg' },
 ]
+
+const getFrameworkName = (key: string) => {
+  const translations: Record<string, string> = {
+    framework_js_dom: m.framework_js_dom({}, { locale: Astro.locals.locale }),
+    framework_ts_dom: m.framework_ts_dom({}, { locale: Astro.locals.locale }),
+    framework_react: m.framework_react({}, { locale: Astro.locals.locale }),
+    framework_angular: m.framework_angular({}, { locale: Astro.locals.locale }),
+    framework_vue: m.framework_vue({}, { locale: Astro.locals.locale }),
+    framework_svelte: m.framework_svelte({}, { locale: Astro.locals.locale }),
+    framework_qwik: m.framework_qwik({}, { locale: Astro.locals.locale }),
+  }
+  return translations[key] || key
+}
 ---
 
 <div class="framework-selector">
   {
-    frameworks.map((framework) => (
-      <button class="framework-button" data-framework={framework.id} aria-label={`Select ${framework.name}`}>
-        <div class="framework-icon">
-          <img src={framework.icon} alt={framework.name} />
-        </div>
-        <div class="framework-name">{framework.name}</div>
-      </button>
-    ))
+    frameworks.map((framework) => {
+      const name = getFrameworkName(framework.nameKey)
+      return (
+        <button class="framework-button" data-framework={framework.id} aria-label={`Select ${name}`}>
+          <div class="framework-icon">
+            <img src={framework.icon} alt={name} />
+          </div>
+          <div class="framework-name">{name}</div>
+        </button>
+      )
+    })
   }
 </div>
 

@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-20T01:48:44.409Z
-updated_at: 2025-12-31T01:19:38.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/680445af6000445eb1a661a6-1745113809661.jpg
 head_image_alt: Pengembangan Perangkat Seluler
@@ -73,7 +73,7 @@ Konfigurasi Capgo dengan langkah-langkah berikut [\[1\]](https://capgo.app/):
 -   Konfigurasi opsi rollback untuk kontrol yang lebih baik.
 -   Pilih antara penerapan cloud atau [self-hosted](https://capgo.app/blog/self-hosted-capgo/), berdasarkan kebutuhan Anda.
 
-Untuk penggunaan enterprise, Capgo menawarkan kompatibilitas dengan Capacitor 6 dan 7, serta mendukung penerapan cloud dan self-hosted [\[1\]](https://capgo.app/). Setelah persiapan ini selesai, lanjutkan ke pengujian fitur dan perangkat.
+Untuk penggunaan enterprise, Capgo menawarkan kompatibilitas dengan Capacitor 8, serta mendukung penerapan cloud dan self-hosted [\[1\]](https://capgo.app/). Setelah persiapan ini selesai, lanjutkan ke pengujian fitur dan perangkat.
 
 ## Daftar Periksa Pengujian Utama
 

@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-22T02:26:08.446Z
-updated_at: 2025-03-22T02:26:20.581Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67de087b13cee397379a0b94-1742610380581.jpg
 head_image_alt: Sviluppo Mobile
@@ -34,7 +34,7 @@ next_blog: ''
     -   **Da JavaScript ad Android:** Invia richieste serializzate ai metodi Android nativi
     -   **Da Android a JavaScript:** Utilizza callback per la trasmissione di eventi, risposte dirette e aggiornamenti di stato
 -   **Requisiti di configurazione:**
-    -   Usa Capacitor 6x o 7x
+    -   Usa Capacitor 8.x
     -   Configura [Gradle](https://gradleorg/), `AndroidManifestxml` e risorse web
 -   **Suggerimenti per l'ottimizzazione:**
     -   Usa aggiornamenti parziali per ridurre la banda

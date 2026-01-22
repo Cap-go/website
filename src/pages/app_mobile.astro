@@ -11,9 +11,6 @@ const content = {
   description,
   image: `${Astro.locals.runtimeConfig.public.baseUrl}/app_demo.webp`,
 }
-
-const config = Astro.locals.runtimeConfig
-const brand = config.public.brand
 ---
 
 <Layout content={content}>

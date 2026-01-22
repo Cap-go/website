@@ -16,38 +16,97 @@ In Capgo, an app represents your mobile application integrated with Capgo's live
 Let's take a closer look at this. The main app page is divided into several key areas:
 
 1.  **Top Navigation Bar:** Provides access to different sections of your app management:
-    *   **Overview (1):** The current view, displaying key metrics and summaries.
+    *   **Dashboard (1):** The current view, displaying key metrics and summaries.
     *   **Information (2):** Displays your app's core settings and details (see "App Information" section below).
     *   **[Bundles (3)](/docs/webapp/bundles/):** Manage your app's versions and releases.
     *   **[Channels (4)](/docs/webapp/channels/):** Configure and manage different update channels (e.g., production, beta).
     *   **[Devices (5)](/docs/webapp/devices/):** View and manage registered devices, including setting specific overrides.
     *   **[Logs (6)](/docs/webapp/logs/):** Access detailed logs and error reports for your app.
+    *   **Builds (7):** View and manage your app builds.
 
 2.  **Statistics Display:** Visualizes important metrics for the last billing period (data reflects usage from your billing day, not the 1st of the month):
-    *   **Monthly Active Users (7):** Tracks the number of unique active users over time.
-    *   **Storage (8):** Shows the current storage consumption.
-    *   **Bandwidth (9):** Displays the bandwidth usage.
-    *   **Active Device by Bundle (10):** (Beta) Shows the distribution of active devices across different app bundles.
+    *   **Monthly Active Users (8):** Tracks the number of unique active users over time.
+    *   **Storage (9):** Shows the current storage consumption.
+    *   **Bandwidth (10):** Displays the bandwidth usage.
+    *   **Active Bundle (11):** Shows the distribution of active devices across different app bundles.
 
 3.  **Summary Cards:** Offers a quick overview of key counts:
-    *   **Channels (11):** Total number of configured channels.
-    *   **Bundles (12):** Total number of app bundles.
-    *   **Devices (13):** Total number of registered devices.
-    *   **Updates (14):** Total number of updates performed.
+    *   **Bundle Uploads (12):** Total number of app bundles uploaded.
+    *   **Updates Statistics (13):** Total number of updates performed, including requests, installs, and failures.
+    *   **Deployment Statistics (14):** Total number of deployments.
+
+4.  **Display Options (15-18):** Controls for filtering and viewing the statistics:
+    *   **Daily (15):** View statistics on a daily basis.
+    *   **Cumulative (16):** View cumulative statistics over time.
+    *   **Billing Period (17):** View statistics for the current billing period.
+    *   **Date Range (18):** Select a custom date range (e.g., last 30 days).
 
 ## App Information
 
-This section corresponds to the "Information" tab (2) in the top navigation bar. Here you can view and manage crucial details and settings for your application.
+This section corresponds to the "Information" tab (1) in the top navigation bar. Here you can view and manage crucial details and settings for your application.
 
 <figure><img src="/app_info.webp" alt="App Information Page" /><figcaption>App Information Page</figcaption></figure>
 
 Here's a breakdown of the available fields and actions:
 
-*   **App Icon:** Displays your application's icon. You can click the "Change" button to upload a new icon.
-*   **App ID:** A unique identifier for your application within Capgo. This ID is not editable.
-*   **App Name:** The display name for your application. You can modify this as needed.
-*   **Default Upload Channel:** Specifies the default channel to which new bundles will be uploaded. You can click the edit icon to select a different default channel.
-*   **Auto Delete Bundles Not Used (after x seconds):** This setting allows you to automatically delete old bundles that haven't been used for a specified duration (in seconds). This helps manage storage and keep your bundle list clean. `2592000` seconds is equivalent to 30 days.
-*   **Transfer the application to another organisation:** This section provides an option to initiate the transfer of your application to a different organization you are a part of.
+*   **App Icon (2):** Displays your application's icon. You can click the "Change" button to upload a new icon.
+*   **App ID (3):** A unique identifier for your application within Capgo. This ID is not editable.
+*   **App Name (4):** The display name for your application. You can modify this as needed.
+*   **Default Upload Channel (5):** Specifies the default channel to which new bundles will be uploaded. You can click the edit icon to select a different default channel.
+*   **Default Download Channel (6):** Specifies the default channel from which devices will download updates. You can click the edit icon to select a different default channel. See the [Default Channel Configuration](#default-channel-configuration) section below for detailed information.
+*   **Auto Delete Bundles Not Used (after x seconds) (7):** This setting allows you to automatically delete old bundles that haven't been used for a specified duration (in seconds). Set to `0` to disable auto-deletion. This helps manage storage and keep your bundle list clean.
+*   **Expose Bundle Metadata to Plugin (8):** When enabled, bundle link and comment fields will be sent to the Capacitor Updater plugin. This feature requires plugin version 7.35.0 or higher.
+*   **Transfer App Ownership (9):** This section provides an option to initiate the transfer of your application to a different organization you are a part of.
 *   **Delete App Button:** Permanently deletes your application from Capgo. This action is irreversible and will remove all associated data, bundles, channels, and devices.
 *   **Update Button:** Saves any changes you've made to the editable fields on this page (e.g., App Name, Default Upload Channel, Auto Delete Bundles setting).
+
+## Default Channel Configuration
+
+The **Default Download Channel** is one of the most important settings for your app. It determines which channel new devices will receive updates from when they first connect to Capgo.
+
+### How Default Channels Work
+
+When a device requests an update from Capgo, the system determines which channel to use based on the following precedence (highest priority first):
+
+1. **Forced device mapping**: If the device ID is explicitly forced to a channel in the channel settings, that channel always wins.
+2. **Cloud override**: If the device has been assigned to a channel via `setChannel()` or manually in the dashboard, that override is used.
+3. **Capacitor config `defaultChannel`**: If set in your `capacitor.config.*` file, this is used for test/beta builds.
+4. **Default Download Channel**: The setting configured here—this is what ~99% of your production users will use.
+
+### Platform-Specific Default Channels
+
+You can configure **two separate default channels**—one for iOS and one for Android. This is useful when:
+
+- You want to roll out updates to one platform before the other
+- You need different update strategies per platform
+- You're testing a new version on one platform while keeping the other stable
+
+To set up platform-specific defaults:
+1. Create two channels (e.g., `production-ios` and `production-android`)
+2. In each channel's settings, enable only the relevant platform (iOS or Android toggle)
+3. Mark both channels as "Default" - Capgo allows this when channels target different platforms
+
+When a device requests an update:
+- iOS devices will receive updates from the iOS-enabled default channel
+- Android devices will receive updates from the Android-enabled default channel
+
+### Single Default Channel (Recommended for Most Apps)
+
+For most applications, a single default channel that supports both platforms is the simplest approach:
+1. Create one channel (e.g., `production`)
+2. Ensure both iOS and Android toggles are enabled
+3. Mark it as the default channel
+
+This ensures consistent behavior across all platforms and simplifies your release workflow.
+
+### Changing the Default Channel
+
+When you change the default channel:
+- **New devices** will immediately start receiving updates from the new default
+- **Existing devices** that already have a channel assignment (via override or force) will NOT automatically switch
+- To move existing devices, you need to either:
+  - Use `setChannel()` to override them programmatically
+  - Force them to the new channel in the dashboard
+  - Delete their device entries (they'll re-register with the new default)
+
+> **Tip**: Always test your new default channel with a small group of forced devices before making it the default for all users.

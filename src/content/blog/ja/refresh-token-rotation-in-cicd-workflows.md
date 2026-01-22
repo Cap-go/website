@@ -7,7 +7,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-05-12T04:31:38.871Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68214ae55e3fe4823b5f6cab-1747024366276.jpg
 head_image_alt: ソフトウェア開発
@@ -224,7 +224,7 @@ Capgoを使用したトークンローテーションの設定は簡単で、CLI
 
 > "現在、Appcenterがハイブリッドアプリのライブ更新をサポートしなくなり、AppFlowのコストが高すぎるため、@Capgoを試しています。" - Simon Flack [\[1\]](https://capgo.app)
 
-Capgoの一度限りのCI/CD設定料金2600ドルは長期的な節約を提供し、5年間で約26,100ドルを節約できると見込まれています [\[1\]](https://capgo.app)。Capacitor 6 & 7のサポートと、柔軟な組織管理の機能は、小さなチームや大企業にとって優れた選択肢となります。特に堅牢なセキュリティ対策を優先する場合においては。
+Capgoの一度限りのCI/CD設定料金2600ドルは長期的な節約を提供し、5年間で約26,100ドルを節約できると見込まれています [\[1\]](https://capgo.app)。Capacitor 8のサポートと、柔軟な組織管理の機能は、小さなチームや大企業にとって優れた選択肢となります。特に堅牢なセキュリティ対策を優先する場合においては。
 
 ## 結論：トークンローテーションでCI/CDを改善する
 

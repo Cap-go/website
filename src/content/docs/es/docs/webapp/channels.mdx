@@ -34,36 +34,14 @@ Eliminar un canal es sencillo. Solo haz clic en el ícono de la papelera y confi
 
 ## Gestionar un canal
 
-Hacer clic en el nombre del canal abrirá un modal donde puedes gestionar el canal (`3` en la imagen)
-Esta página debería verse algo así:
+Hacer clic en el nombre del canal abrirá un modal donde puedes gestionar la configuración del canal (`3` en la imagen).
 
-<figure><img src="/manage_channel_main.webp" alt="manage Canal" /><figcaption></figcaption></figure>
+<figure><img src="/channel_settings.webp" alt="Configuración del canal" /><figcaption></figcaption></figure>
 
-Veamos las diferentes secciones
-
-Primero el `Número de paquete` (`1` en la imagen). Esta es la versión actual para ese canal. Cuando se solicite servir una actualización, este canal siempre intentará responder con esa versión* [^1]
-Al hacer clic en él deberías ir a la página de [paquetes](/docs/webapp/bundles/)
-
-Segundo la página `Compartido con` (`2` en la imagen). Recomiendo no usar esto nunca. Un sistema nuevo y mejor está en desarrollo
-
-Ahora los dispositivos forzados (`3` en la imagen). Esta es una lista de dispositivos que siempre obtendrán actualizaciones de este canal. Esto es útil para propósitos de prueba. Puedes forzar un dispositivo a un canal desde la página de [dispositivos](/docs/webapp/devices/)
-
-Por último la configuración (`4` en la imagen). Aquí es donde puedes gestionar cómo se comportan los canales
-Después de hacer clic en él deberías ver algo como esto:
-
-<figure><img src="/channel_settings.webp" alt="setting of Canal" /><figcaption></figcaption></figure>
-
-La lista de configuraciones es larga, pero haré mi mejor esfuerzo para explicarlas todas
+La página de configuración del canal contiene todas las opciones de configuración para tu canal. Veamos cada configuración.
 
 ---
-Primero el `Canal predeterminado` **ESTA ES PROBABLEMENTE LA MÁS IMPORTANTE**\
-Si un canal está marcado como predeterminado, entonces se usará como el canal predeterminado para todos los dispositivos nuevos\
-En otros términos: Si tienes un nuevo usuario, Capgo intentará servirle la última versión de este canal predeterminado
-Solo 1 canal puede ser establecido como predeterminado a la vez. Si intentas romper esta regla se te pedirá confirmar tu acción
-
-<figure><img style="margin-left: auto; margin-right: auto" src="/confirm-make-Predeterminado.webp" alt="confirm make change" /><figcaption></figcaption></figure>
-
-Después de confirmar, el antiguo canal predeterminado se desmarcará como predeterminado y el nuevo será marcado como predeterminado
+Primero el toggle de `Canal predeterminado`. Cuando está habilitado, este canal se convierte en el predeterminado para nuevos dispositivos. Para una explicación completa de cómo funcionan los canales predeterminados, incluyendo cómo configurar valores predeterminados específicos por plataforma (uno para iOS, uno para Android), consulta la sección [Configuración del Canal Predeterminado](/docs/webapp/main-app-page/#configuración-del-canal-predeterminado).
 
 ---
 Segundo la configuración de `IOS`. Esto es relativamente simple. Si es falso, entonces los dispositivos IOS no podrán descargar actualizaciones de este canal

@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-24T02:36:18.433Z
-updated_at: 2025-12-31T01:33:21.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e0a31ca2808c1172f2bc74-1742783814915.jpg
 head_image_alt: Desarrollo móvil
@@ -201,7 +201,7 @@ Después de las pruebas de rendimiento, enfócate en la accesibilidad para asegu
 | Tamaño de Objetivo Táctil | Verificaciones de dimensiones de elementos | Requisitos específicos del SO |
 | Navegación por Teclado | Pruebas de método de entrada | Estándares multiplataforma |
 
-Con las herramientas de integración de Capgo, puedes automatizar estas pruebas de accesibilidad directamente dentro de tu flujo de trabajo CI/CD. La plataforma es compatible con Capacitor 6 y 7, asegurando una compatibilidad fluida en los sistemas CI/CD soportados mientras te ayuda a cumplir con los estándares de conformidad [\[1\]](https://capgo.app/).
+Con las herramientas de integración de Capgo, puedes automatizar estas pruebas de accesibilidad directamente dentro de tu flujo de trabajo CI/CD. La plataforma es compatible con Capacitor 8, asegurando una compatibilidad fluida en los sistemas CI/CD soportados mientras te ayuda a cumplir con los estándares de conformidad [\[1\]](https://capgo.app/).
 
 ## Siguientes Pasos y Consejos
 

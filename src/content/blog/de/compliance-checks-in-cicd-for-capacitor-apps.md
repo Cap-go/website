@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-24T02:36:18.433Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e0a31ca2808c1172f2bc74-1742783814915.jpg
 head_image_alt: Mobile Entwicklung
@@ -201,7 +201,7 @@ Nach den Performance-Tests konzentrieren Sie sich auf Barrierefreiheit, um siche
 | Touch-Zielfläche | Element-Dimensionsprüfungen | OS-spezifische Anforderungen |
 | Tastaturnavigation | Eingabemethoden-Tests | Plattformübergreifende Standards |
 
-Mit den Integrationswerkzeugen von Capgo können Sie diese Zugänglichkeitstests direkt in Ihrem CI/CD-Workflow automatisieren. Die Plattform unterstützt Capacitor 6 und 7 und gewährleistet eine reibungslose Kompatibilität über unterstützte CI/CD-Systeme hinweg, während sie Ihnen hilft, Compliance-Standards einzuhalten [\[1\]](https://capgo.app/).
+Mit den Integrationswerkzeugen von Capgo können Sie diese Zugänglichkeitstests direkt in Ihrem CI/CD-Workflow automatisieren. Die Plattform unterstützt Capacitor 8 und gewährleistet eine reibungslose Kompatibilität über unterstützte CI/CD-Systeme hinweg, während sie Ihnen hilft, Compliance-Standards einzuhalten [\[1\]](https://capgo.app/).
 
 ## Nächste Schritte und Tipps
 

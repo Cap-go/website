@@ -1,26 +1,113 @@
 ---
-title: Pagina principale dell'app
-description: What is shown on the main page?
+title: "Pagina dell'applicazione"
+description: "Cosa mostra la pagina dell'applicazione di Capgo webapp? E cosa puoi farci."
 sidebar:
   order: 5
 locale: it
 ---
 
-## Cosa mostra la pagina principale?
+## Cosa mostra la pagina dell'applicazione?
 
-Per prima cosa, diamo un'occhiata alla pagina principale dell'app:
+Prima di tutto, diamo un'occhiata alla pagina principale dell'app:
 
-<figure><img src="/main-app-page.webp" alt="Main page screeshot" /><figcaption></figcaption></figure>
+In Capgo, un'app rappresenta la tua applicazione mobile integrata con il sistema di aggiornamenti live di Capgo. Ti permette di gestire aggiornamenti, canali e dispositivi senza problemi.
 
-Analizziamola più nel dettaglio
+<figure><img src="/main-app-page.webp" alt="Screenshot della pagina principale" /><figcaption></figcaption></figure>
 
-Prima le statistiche. Le statistiche sono in fase di revisione quindi non possono essere documentate in questo momento. Aggiungeremo una sezione statistiche quando saranno pienamente operative.
+Analizziamola più nel dettaglio. La pagina principale dell'app è divisa in diverse aree chiave:
 
-Secondo, diamo un'occhiata a tutti i menu disponibili e cosa fanno
+1.  **Barra di navigazione superiore:** Fornisce accesso a diverse sezioni della gestione della tua app:
+    *   **Dashboard (1):** La vista corrente, che mostra metriche chiave e riepiloghi.
+    *   **Informazioni (2):** Mostra le impostazioni principali e i dettagli della tua app (vedi la sezione "Informazioni dell'applicazione" sotto).
+    *   **[Bundles (3)](/docs/webapp/bundles/):** Gestisci le versioni e i rilasci della tua app.
+    *   **[Canali (4)](/docs/webapp/channels/):** Configura e gestisci diversi canali di aggiornamento (es., produzione, beta).
+    *   **[Dispositivi (5)](/docs/webapp/devices/):** Visualizza e gestisci i dispositivi registrati, incluse le impostazioni di override specifiche.
+    *   **[Logs (6)](/docs/webapp/logs/):** Accedi ai log dettagliati e ai report degli errori per la tua app.
+    *   **Builds (7):** Visualizza e gestisci le build della tua app.
 
-<figure><img src="/app-multiple-sections.webp" alt="Multiple sections screeshot" /><figcaption></figcaption></figure>
+2.  **Visualizzazione statistiche:** Visualizza metriche importanti per l'ultimo periodo di fatturazione (i dati riflettono l'utilizzo dal giorno di fatturazione, non dal 1° del mese):
+    *   **Utenti attivi mensili (8):** Traccia il numero di utenti attivi unici nel tempo.
+    *   **Storage (9):** Mostra il consumo attuale di storage.
+    *   **Bandwidth (10):** Mostra l'utilizzo della bandwidth.
+    *   **Bundle attivo (11):** Mostra la distribuzione dei dispositivi attivi tra diversi bundle dell'app.
 
-Il primo pulsante ti porterà alla pagina dei [canali](/docs/webapp/channels/) dove puoi creare/eliminare/configurare i canali dell'app\
-Il secondo pulsante ti porterà alla pagina dei [bundle](/docs/webapp/bundles/) dove puoi vedere tutte le versioni dell'app
-Il secondo pulsante ti porterà alla pagina dei [dispositivi](/docs/webapp/devices/) dove puoi vedere tutti i dispositivi. Puoi anche impostare sovrascritture specifiche per dispositivo da lì
-Il secondo pulsante ti porterà alla pagina degli [aggiornamenti](/docs/webapp/logs/) dove puoi vedere le statistiche dettagliate (log) e gli errori che la tua app sta riscontrando
+3.  **Schede riepilogative:** Offre una panoramica rapida dei conteggi chiave:
+    *   **Upload bundle (12):** Numero totale di bundle dell'app caricati.
+    *   **Statistiche aggiornamenti (13):** Numero totale di aggiornamenti effettuati, incluse richieste, installazioni e fallimenti.
+    *   **Statistiche deployment (14):** Numero totale di deployment.
+
+4.  **Opzioni di visualizzazione (15-18):** Controlli per filtrare e visualizzare le statistiche:
+    *   **Giornaliero (15):** Visualizza statistiche su base giornaliera.
+    *   **Cumulativo (16):** Visualizza statistiche cumulative nel tempo.
+    *   **Periodo di fatturazione (17):** Visualizza statistiche per il periodo di fatturazione corrente.
+    *   **Intervallo date (18):** Seleziona un intervallo di date personalizzato (es., ultimi 30 giorni).
+
+## Informazioni dell'applicazione
+
+Questa sezione corrisponde alla scheda "Informazioni" (1) nella barra di navigazione superiore. Qui puoi visualizzare e gestire dettagli cruciali e impostazioni per la tua applicazione.
+
+<figure><img src="/app_info.webp" alt="Pagina Informazioni dell'applicazione" /><figcaption>Pagina Informazioni dell'applicazione</figcaption></figure>
+
+Ecco una descrizione dei campi e delle azioni disponibili:
+
+*   **Icona dell'app (2):** Mostra l'icona della tua applicazione. Puoi cliccare il pulsante "Cambia" per caricare una nuova icona.
+*   **ID App (3):** Un identificatore unico per la tua applicazione all'interno di Capgo. Questo ID non è modificabile.
+*   **Nome App (4):** Il nome visualizzato per la tua applicazione. Puoi modificarlo secondo necessità.
+*   **Canale di upload predefinito (5):** Specifica il canale predefinito su cui verranno caricati i nuovi bundle. Puoi cliccare l'icona di modifica per selezionare un canale predefinito diverso.
+*   **Canale di download predefinito (6):** Specifica il canale predefinito da cui i dispositivi scaricheranno gli aggiornamenti. Puoi cliccare l'icona di modifica per selezionare un canale predefinito diverso. Vedi la sezione [Configurazione del Canale Predefinito](#configurazione-del-canale-predefinito) sotto per informazioni dettagliate.
+*   **Elimina automaticamente bundle non utilizzati (dopo x secondi) (7):** Questa impostazione ti permette di eliminare automaticamente i vecchi bundle che non sono stati utilizzati per una durata specificata (in secondi). Imposta a `0` per disabilitare l'eliminazione automatica. Questo aiuta a gestire lo storage e mantenere pulita la lista dei bundle.
+*   **Esponi metadati bundle al plugin (8):** Quando abilitato, i campi link e commento del bundle verranno inviati al plugin Capacitor Updater. Questa funzionalità richiede la versione 7.35.0 o superiore del plugin.
+*   **Trasferisci proprietà dell'app (9):** Questa sezione fornisce un'opzione per iniziare il trasferimento della tua applicazione a un'organizzazione diversa di cui fai parte.
+*   **Pulsante Elimina App:** Elimina permanentemente la tua applicazione da Capgo. Questa azione è irreversibile e rimuoverà tutti i dati associati, bundle, canali e dispositivi.
+*   **Pulsante Aggiorna:** Salva tutte le modifiche che hai apportato ai campi modificabili in questa pagina (es., Nome App, Canale di upload predefinito, impostazione Elimina automaticamente bundle).
+
+## Configurazione del Canale Predefinito
+
+Il **Canale di download predefinito** è una delle impostazioni più importanti per la tua app. Determina da quale canale i nuovi dispositivi riceveranno gli aggiornamenti quando si connettono per la prima volta a Capgo.
+
+### Come funzionano i canali predefiniti
+
+Quando un dispositivo richiede un aggiornamento da Capgo, il sistema determina quale canale usare in base al seguente ordine di precedenza (priorità più alta per prima):
+
+1. **Mappatura dispositivo forzata**: Se l'ID del dispositivo è esplicitamente forzato a un canale nelle impostazioni del canale, quel canale vince sempre.
+2. **Override cloud**: Se il dispositivo è stato assegnato a un canale tramite `setChannel()` o manualmente nella dashboard, viene usato quell'override.
+3. **`defaultChannel` di Capacitor config**: Se impostato nel tuo file `capacitor.config.*`, viene usato per le build di test/beta.
+4. **Canale di download predefinito**: L'impostazione configurata qui—questo è ciò che userà ~99% dei tuoi utenti di produzione.
+
+### Canali predefiniti specifici per piattaforma
+
+Puoi configurare **due canali predefiniti separati**—uno per iOS e uno per Android. Questo è utile quando:
+
+- Vuoi distribuire aggiornamenti a una piattaforma prima dell'altra
+- Hai bisogno di strategie di aggiornamento diverse per piattaforma
+- Stai testando una nuova versione su una piattaforma mantenendo l'altra stabile
+
+Per configurare valori predefiniti specifici per piattaforma:
+1. Crea due canali (es., `production-ios` e `production-android`)
+2. Nelle impostazioni di ogni canale, abilita solo la piattaforma pertinente (toggle iOS o Android)
+3. Contrassegna entrambi i canali come "Predefinito" - Capgo lo permette quando i canali puntano a piattaforme diverse
+
+Quando un dispositivo richiede un aggiornamento:
+- I dispositivi iOS riceveranno aggiornamenti dal canale predefinito abilitato per iOS
+- I dispositivi Android riceveranno aggiornamenti dal canale predefinito abilitato per Android
+
+### Canale predefinito singolo (Raccomandato per la maggior parte delle app)
+
+Per la maggior parte delle applicazioni, un singolo canale predefinito che supporta entrambe le piattaforme è l'approccio più semplice:
+1. Crea un canale (es., `production`)
+2. Assicurati che i toggle iOS e Android siano abilitati
+3. Contrassegnalo come canale predefinito
+
+Questo garantisce un comportamento coerente su tutte le piattaforme e semplifica il tuo workflow di release.
+
+### Cambiare il canale predefinito
+
+Quando cambi il canale predefinito:
+- **I nuovi dispositivi** inizieranno immediatamente a ricevere aggiornamenti dal nuovo predefinito
+- **I dispositivi esistenti** che hanno già un'assegnazione di canale (tramite override o forzatura) NON cambieranno automaticamente
+- Per spostare i dispositivi esistenti, devi:
+  - Usare `setChannel()` per sovrascriverli programmaticamente
+  - Forzarli al nuovo canale nella dashboard
+  - Eliminare le loro voci dispositivo (si ri-registreranno con il nuovo predefinito)
+
+> **Suggerimento**: Testa sempre il tuo nuovo canale predefinito con un piccolo gruppo di dispositivi forzati prima di renderlo predefinito per tutti gli utenti.

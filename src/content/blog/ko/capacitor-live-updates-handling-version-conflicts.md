@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-24T03:09:18.971Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94-1745464174874.jpg
 head_image_alt: 모바일 개발
@@ -139,7 +139,7 @@ Capgo는 다른 플랫폼이 남긴 공백을 채우기 위해 설계된 다양�
 ### 버전 관리 팁
 
 - **[Capgo 채널](https://capgo.app/docs/webapp/channels/)**을 사용하여 플랫폼별 테스트를 수행하면서 iOS와 Android 출시를 관리하세요 [\[1\]](https://capgo.app/).
-- 두 플랫폼 간의 런타임 호환성을 보장하기 위해 **Capacitor 6 및 7**을 사용하세요 [\[1\]](https://capgo.app/).
+- 두 플랫폼 간의 런타임 호환성을 보장하기 위해 **Capacitor 8**을 사용하세요 [\[1\]](https://capgo.app/).
 
 ### 테스트 접근 방식
 

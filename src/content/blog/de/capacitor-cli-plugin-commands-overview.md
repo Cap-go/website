@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-27T03:14:02.984Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e4be0410051fda3b63a692-1743045267566.jpg
 head_image_alt: Mobile Entwicklung
@@ -140,7 +140,7 @@ Capgo-Nutzer profitieren von erweiterten Funktionen wie kontrollierten Rollouts.
 
 -   95% der Updates werden innerhalb von 24 Stunden abgeschlossen [\[1\]](https://capgo.app/)
 -   82% Erfolgsquote weltweit für Updates [\[1\]](https://capgo.app/)
--   Kompatibilität mit Capacitor 6 und 7 Versionen [\[1\]](https://capgo.app/)
+-   Kompatibilität mit Capacitor 8 Versionen [\[1\]](https://capgo.app/)
 
 Um reibungslose Updates sicherzustellen:
 

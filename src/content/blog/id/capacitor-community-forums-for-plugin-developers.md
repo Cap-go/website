@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-19T03:15:19.291Z
-updated_at: 2025-12-31T01:19:38.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67da1574cfd1b2222c56b5cd-1742354143434.jpg
 head_image_alt: Pengembangan Aplikasi Mobile
@@ -215,7 +215,7 @@ Dokumentasi resmi Capacitor adalah sumber daya utama. Ini mencakup referensi API
 
 ![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
 
-Capgo membuat pembaruan aplikasi instan menjadi sederhana. Telah mengirimkan 23,5 juta pembaruan di 750 aplikasi produksi, dengan tingkat keberhasilan 82%. Mengesankan, 95% pengguna aktif menerima pembaruan dalam 24 jam. CDN globalnya dapat mengunduh bundle 5MB hanya dalam 114ms. Capgo mendukung Capacitor 6 dan 7, menawarkan kemampuan pembaruan parsial [\[1\]](https://capgo.app/).
+Capgo membuat pembaruan aplikasi instan menjadi sederhana. Telah mengirimkan 23,5 juta pembaruan di 750 aplikasi produksi, dengan tingkat keberhasilan 82%. Mengesankan, 95% pengguna aktif menerima pembaruan dalam 24 jam. CDN globalnya dapat mengunduh bundle 5MB hanya dalam 114ms. Capgo mendukung Capacitor 8, menawarkan kemampuan pembaruan parsial [\[1\]](https://capgo.app/).
 
 > "Kami menerapkan pengembangan agile dan @Capgo sangat penting dalam memberikan layanan secara berkelanjutan kepada pengguna kami!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 

@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-18T03:02:50.225Z
-updated_at: 2025-04-18T03:04:53.935Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/6801ba663c6b972ab5067847-1744945493935.jpg
 head_image_alt: Mobile Entwicklung
@@ -192,7 +192,7 @@ npx cap open android # Opens Android Studio
 -   Aktivieren Sie Fehlerverfolgung, um Probleme frühzeitig zu erkennen und zu beheben.
 -   Halten Sie die Rollback-Funktion bereit, um schnell auf Probleme reagieren zu können.
 
-Capgo ist kompatibel mit Capacitor 6 und 7, integriert sich nahtlos in CI/CD-Pipelines und erfüllt die Anforderungen von Apple- und Google-Stores.
+Capgo ist kompatibel mit Capacitor 8, integriert sich nahtlos in CI/CD-Pipelines und erfüllt die Anforderungen von Apple- und Google-Stores.
 
 ## Häufige Probleme und Tipps
 

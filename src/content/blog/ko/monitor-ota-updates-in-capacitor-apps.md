@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-05T01:34:45.665Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988-1743816897363.jpg
 head_image_alt: 모바일 개발
@@ -48,7 +48,7 @@ Capgo는 이미 **750개의 앱에서 2,350만 건의 업데이트**를 관리�
 npx @capgo/cli init
 ```
 
-이 플러그인은 Capacitor 6과 7에서 원활하게 작동하여 다양한 앱 버전과 호환됩니다.
+이 플러그인은 Capacitor 8에서 원활하게 작동하여 다양한 앱 버전과 호환됩니다.
 
 ### 업데이트 버전 관리 
 

@@ -1,17 +1,193 @@
 ---
-title: Protokolle
-description: So lernen Sie die Protokollseite kennen
+title: "Protokolle"
+description: "Verstehen und nutzen Sie die Anwendungsprotokolle von Capgo für Diagnose und Verfolgung der Aktionen Ihrer Geräte mit den Updates."
 sidebar:
   order: 8
 locale: de
 ---
 
-## Alle Logs anzeigen
-Schauen wir uns zunächst die Logs-Seite an. Sie können darauf zugreifen, indem Sie [auf Ihre App klicken](/docs/webapp/main-page) und dann [auf den Updates-Tab klicken](/docs/webapp/main-app-page)
-Von dort aus sollten Sie eine Seite wie diese sehen:
+## Anwendungsprotokolle verstehen
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/logs.webp" alt="show logs" /><figcaption></figcaption></figure>
+Die Protokollseite bietet eine detaillierte Historie von Update-Ereignissen und Diagnoseinformationen für Ihre Anwendung. Dies ist entscheidend für die Überwachung des Update-Prozesses, die Fehlerbehebung und das Verständnis, wie Ihre Geräte mit Capgo interagieren. Sie können darauf zugreifen, indem Sie [auf Ihre App klicken](/docs/webapp/main-page) und dann [auf den "Protokolle"-Tab klicken (in einigen älteren Screenshots oder Dokumentationen zuvor als "Updates" bezeichnet)](/docs/webapp/main-app-page).
 
-## Weitere Details zu einem Log erhalten
+Von dort aus sollten Sie eine Seite wie diese sehen, die eine Liste von Protokolleinträgen anzeigt:
 
-Wenn Sie auf ein Log klicken, gelangen Sie zur [Geräte-Seite](/docs/webapp/devices/)
+<figure><img style="margin-left: auto; margin-right: auto" src="/logs.webp" alt="Protokollseite Übersicht der Hauptschnittstelle" /><figcaption>Protokollseite Übersicht</figcaption></figure>
+
+Die Protokollseiten-Oberfläche umfasst:
+1. **Protokolle-Tab** - Der Navigations-Tab zum Zugriff auf die Protokollansicht
+2. **Neu laden-Schaltfläche** - Aktualisiert die Protokollliste mit den neuesten Daten
+3. **Zeitbereich & Aktionsfilter** - Filtern Sie Protokolle nach Datumsbereich und Aktionstyp (siehe Abschnitte unten)
+
+Jede Zeile zeigt:
+- **Zeitstempel** (UTC)
+- **Geräte-ID**
+- **Aktionscode** (was passiert ist)
+- **Versionsname** (Bundle oder `builtin`)
+
+Klicken Sie auf eine Zeile, um zur Geräte-Detailseite für die vollständige Historie zu springen.
+
+### Nach Datumsbereich filtern
+
+Sie können Protokolle nach einem bestimmten Zeitraum mit dem Datumsauswähler filtern:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/logs_date_range.webp" alt="Datumsbereichsauswahl zum Filtern von Protokollen" /><figcaption>Datumsbereichsfilter</figcaption></figure>
+
+1. **Schnellauswahl** - Wählen Sie gängige Zeitbereiche: Letzte 1h, 3h, 6h oder 12h
+2. **Startzeit** - Legen Sie eine benutzerdefinierte Startzeit für den Bereich fest
+3. **Endzeit** - Legen Sie eine benutzerdefinierte Endzeit für den Bereich fest
+4. **Kalender** - Wählen Sie bestimmte Daten mit der Kalenderansicht
+
+Klicken Sie auf "Auswählen", um den gewählten Datumsbereich anzuwenden, oder "Abbrechen", um die Auswahl zu schließen.
+
+### Nach Aktionstyp filtern
+
+Das Aktionen-Dropdown ermöglicht es Ihnen, Protokolle nach bestimmten Ereignistypen zu filtern:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/logs_filters.webp" alt="Aktionsfilter-Dropdown zum Filtern von Protokollen nach Ereignistyp" /><figcaption>Aktionsfilter</figcaption></figure>
+
+Verfügbare Aktionsfilter umfassen:
+- **Geräte-Heartbeat** - Periodische Gesundheitsprüfungen von Geräten
+- **Versionslöschung angefordert** - Wenn eine Bundle-Version gelöscht wird
+- **Auf Standardversion zurücksetzen** - Wenn ein Gerät zum eingebauten Bundle zurückkehrt
+- **Version erfolgreich installiert** - Erfolgreiche Bundle-Installation
+- **Neue Version an Gerät gesendet** - Wenn Capgo ein Update an ein Gerät sendet
+- **Versionsinstallation fehlgeschlagen** - Wenn die Bundle-Installation fehlschlägt
+
+Verwenden Sie das Suchfeld oben, um bestimmte Aktionstypen schnell zu finden. Sie können mehrere Aktionen auswählen, um Protokolle anzuzeigen, die einem der ausgewählten Typen entsprechen.
+
+### Beispiel-Protokollausschnitt (Testdaten)
+
+| Zeit (UTC) | Geräte-ID | Aktion | Version | Was es bedeutet |
+|------------|-----------|--------|---------|-----------------|
+| 2025-01-14 10:00:01 | `A1B2C3` | `get` | 2.4.1 | Gerät hat Capgo gefragt, ob ein Update verfügbar ist |
+| 2025-01-14 10:00:03 | `A1B2C3` | `download_manifest_start` | 2.4.1 | Manifest-Abruf gestartet; SDK ist dabei, Dateien herunterzuladen |
+| 2025-01-14 10:00:07 | `A1B2C3` | `download_40` | 2.4.1 | Bundle-Download ist zu 40% abgeschlossen |
+| 2025-01-14 10:00:12 | `A1B2C3` | `download_zip_complete` | 2.4.1 | Zip-Download abgeschlossen |
+| 2025-01-14 10:00:13 | `A1B2C3` | `set` | 2.4.1 | Bundle installiert und für nächsten Start markiert |
+| 2025-01-14 10:05:00 | `B9C8D7` | `disableAutoUpdateToMajor` | 1.9.0 | Kanal-Richtlinie hat einen Sprung zu 2.x blockiert |
+| 2025-01-14 10:05:05 | `B9C8D7` | `rateLimited` | builtin | Gerät hat das Anfragelimit erreicht; SDK wartet bis zum Neustart |
+
+## Beispiel-Protokollszenarien
+
+Um Ihnen zu helfen zu verstehen, was die Protokolle aussagen, hier sind Beispielsequenzen, die echte Geräte-Update-Verläufe zeigen:
+
+### Erfolgreicher Update-Ablauf
+
+So sieht ein gesundes Update in Ihren Protokollen aus:
+
+| Zeit | Geräte-ID | Aktion | Version | Was es bedeutet |
+|------|-----------|--------|---------|-----------------|
+| 10:00:01 | `a1b2c3d4` | `get` | 1.2.0 | Gerät hat nach Updates gesucht und Version 1.2.0 Info erhalten |
+| 10:00:02 | `a1b2c3d4` | `download_10` | 1.2.0 | Download gestartet, 10% abgeschlossen |
+| 10:00:03 | `a1b2c3d4` | `download_50` | 1.2.0 | Download bei 50% |
+| 10:00:05 | `a1b2c3d4` | `download_complete` | 1.2.0 | Download erfolgreich abgeschlossen |
+| 10:00:06 | `a1b2c3d4` | `set` | 1.2.0 | Bundle installiert und aktiviert |
+
+### Gerät bereits aktuell
+
+Wenn ein Gerät prüft, aber bereits die neueste Version hat:
+
+| Zeit | Geräte-ID | Aktion | Version | Was es bedeutet |
+|------|-----------|--------|---------|-----------------|
+| 14:30:00 | `e5f6g7h8` | `noNew` | 1.2.0 | Gerät ist bereits auf der neuesten Version, kein Update nötig |
+
+### Fehlgeschlagenes Update mit Rollback
+
+Wenn ein Update fehlschlägt und das Gerät zurückrollt:
+
+| Zeit | Geräte-ID | Aktion | Version | Was es bedeutet |
+|------|-----------|--------|---------|-----------------|
+| 11:15:00 | `i9j0k1l2` | `get` | 1.3.0 | Gerät hat Update-Info erhalten |
+| 11:15:02 | `i9j0k1l2` | `download_complete` | 1.3.0 | Download abgeschlossen |
+| 11:15:03 | `i9j0k1l2` | `set` | 1.3.0 | Bundle wurde gesetzt |
+| 11:15:10 | `i9j0k1l2` | `update_fail` | 1.3.0 | App abgestürzt oder `notifyAppReady()` wurde nicht aufgerufen - Rollback ausgelöst |
+| 11:15:11 | `i9j0k1l2` | `reset` | builtin | Gerät ist zur eingebauten Version zurückgekehrt |
+
+**Aktion erforderlich**: Prüfen Sie, ob Ihre App `notifyAppReady()` nach erfolgreicher Initialisierung aufruft. Siehe [Plugin-Dokumentation](/docs/plugin/api/#notifyappready) für Details.
+
+### Download-Fehler
+
+Wenn Netzwerkprobleme den Download verhindern:
+
+| Zeit | Geräte-ID | Aktion | Version | Was es bedeutet |
+|------|-----------|--------|---------|-----------------|
+| 09:45:00 | `m3n4o5p6` | `get` | 1.2.0 | Gerät hat Update-Info erhalten |
+| 09:45:01 | `m3n4o5p6` | `download_30` | 1.2.0 | Download gestartet aber... |
+| 09:45:15 | `m3n4o5p6` | `download_fail` | 1.2.0 | Download fehlgeschlagen (Netzwerk-Timeout, Verbindung verloren, etc.) |
+
+**Aktion erforderlich**: Das Gerät wird beim nächsten App-Start automatisch erneut versuchen. Keine Aktion erforderlich, es sei denn, dies passiert häufig.
+
+### Plan-Limit erreicht
+
+Wenn Ihr Konto sein Geräte-Limit erreicht:
+
+| Zeit | Geräte-ID | Aktion | Version | Was es bedeutet |
+|------|-----------|--------|---------|-----------------|
+| 16:00:00 | `q7r8s9t0` | `needPlanUpgrade` | - | Dieses Gerät erhält keine Updates, bis Sie upgraden oder der Abrechnungszyklus zurückgesetzt wird |
+
+**Aktion erforderlich**: [Upgraden Sie Ihren Plan](/docs/webapp/settings/) oder warten Sie auf den nächsten Abrechnungszyklus.
+
+### Kanal-Konfiguration blockiert Updates
+
+Wenn Kanal-Einstellungen ein Update verhindern:
+
+| Zeit | Geräte-ID | Aktion | Version | Was es bedeutet |
+|------|-----------|--------|---------|-----------------|
+| 12:00:00 | `u1v2w3x4` | `disableAutoUpdateToMajor` | 2.0.0 | Gerät auf v1.x kann nicht automatisch auf v2.x aktualisieren (Major-Version-Sprung blockiert) |
+| 12:05:00 | `y5z6a7b8` | `disableEmulator` | 1.2.0 | Emulator erkannt, und Kanal blockiert Emulatoren |
+| 12:10:00 | `c9d0e1f2` | `disableDevBuild` | 1.2.0 | Dev-Build erkannt, und Kanal blockiert Dev-Builds |
+
+**Aktion erforderlich**: Dies sind beabsichtigte Schutzmaßnahmen. Wenn Sie diese Updates zulassen möchten, ändern Sie Ihre [Kanal-Einstellungen](/docs/webapp/channels/).
+
+## Protokollcodes (Capgo Backend Enum)
+
+Diese Codes stammen aus dem `stats_action` Enum, das von der Dashboard-API verwendet wird (`capgo/src/types/supabase.types.ts`). Wenn Sie einen neuen Code in der UI sehen, wurde er vom SDK oder Backend ausgegeben und gegen diese Liste validiert.
+
+**Happy Path & Lebenszyklus**
+
+| Code(s) | Bedeutung |
+|---------|-----------|
+| `get` | Gerät hat Capgo nach dem aktuellen Kanal-Manifest gefragt |
+| `download_manifest_start`, `download_manifest_complete` | Manifest-Download begann / beendet (für Delta- oder Multi-Datei-Bundles) |
+| `download_zip_start`, `download_zip_complete` | Zip-Archiv-Download begann / beendet |
+| `download_10` … `download_90` | Download-Fortschritt-Meilensteine |
+| `download_complete` | Gesamtes Bundle heruntergeladen |
+| `set` | Bundle für nächsten Start bereitgestellt |
+| `reset` | Gerät ist zum eingebauten Bundle zurückgekehrt |
+| `delete` | Bundle aus lokalem Speicher entfernt |
+| `uninstall` | App-Deinstallation erkannt |
+| `app_moved_to_foreground`, `app_moved_to_background` | App-Lebenszyklus-Ereignisse vom SDK aufgezeichnet |
+| `ping` | Gesundheits-/Heartbeat-Check vom Gerät |
+| `setChannel`, `getChannel` | Kanal überschrieben oder via SDK-Aufruf abgerufen |
+
+**Konfigurations- oder Richtlinien-Blockierungen**
+
+| Code(s) | Warum das Update blockiert wurde |
+|---------|----------------------------------|
+| `disableAutoUpdate`, `disableAutoUpdateToMajor`, `disableAutoUpdateToMinor`, `disableAutoUpdateToPatch`, `disableAutoUpdateMetadata`, `disableAutoUpdateUnderNative` | Kanal-Strategie verbietet diesen Semver-Sprung |
+| `disablePlatformIos`, `disablePlatformAndroid` | Plattform ist auf dem Kanal deaktiviert |
+| `disableDevBuild`, `disableEmulator` | Dev-Builds oder Emulatoren nicht erlaubt |
+| `cannotUpdateViaPrivateChannel`, `NoChannelOrOverride`, `channelMisconfigured` | Kanal-Auswahl oder Override fehlgeschlagen |
+| `missingBundle`, `cannotGetBundle` | Manifest verweist auf ein Bundle, das Capgo nicht bereitstellen kann |
+| `needPlanUpgrade` | Organisation hat ihr Plan-/Geräte-Limit erreicht |
+| `rateLimited` | Zu viele Anfragen; SDK drosselt bis zum Neustart |
+| `blocked_by_server_url`, `backend_refusal`, `InvalidIp` | Server-seitige Regel hat die Anfrage blockiert |
+
+**Download / Integrität / Installations-Fehler**
+
+| Code(s) | Bedeutung |
+|---------|-----------|
+| `download_fail` | Bundle-Download fehlgeschlagen (Netzwerk- oder Antwort-Fehler) |
+| `download_manifest_file_fail`, `download_manifest_checksum_fail`, `download_manifest_brotli_fail` | Manifest-Datei konnte nicht abgerufen oder validiert werden |
+| `checksum_fail`, `checksum_required` | Integritätsprüfung fehlgeschlagen oder Prüfsumme fehlt |
+| `unzip_fail`, `directory_path_fail`, `canonical_path_fail`, `windows_path_fail` | Dateisystem- oder Entpack-Validierung fehlgeschlagen |
+| `decrypt_fail` | Entschlüsselung fehlgeschlagen (verschlüsseltes Bundle) |
+| `update_fail` | Bundle installiert, aber App hat nie `notifyAppReady()` aufgerufen; Rollback ausgelöst |
+| `download_zip_*` ohne nachfolgendes `set` | Download beendet, aber Installationsphase nie abgeschlossen |
+
+➡️ Benötigen Sie tiefergehende Anleitung pro Code? Siehe **[Vollständige Protokollcode-Referenz und Debugging-Anleitung](/docs/plugins/updater/debugging/#understanding-cloud-logs)**.
+
+## Mehr Details zu einem Protokoll erhalten
+
+Wenn Sie auf einen bestimmten Protokolleintrag klicken, werden Sie typischerweise zur [Geräte-Seite](/docs/webapp/devices/) weitergeleitet. Dies ermöglicht es Ihnen, die vollständige Historie für dieses bestimmte Gerät zu sehen, was sehr hilfreich sein kann, um gerätespezifische Probleme zu diagnostizieren oder seinen Update-Verlauf zu verstehen.

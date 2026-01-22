@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-21T03:02:38.679Z
-updated_at: 2025-12-31T01:19:38.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67dcb1f883b63ee70fa08665-1742526177947.jpg
 head_image_alt: Pengembangan Mobile
@@ -80,7 +80,7 @@ Atur izin untuk pengelolaan saluran yang aman dan efisien:
 | Developer | Akses terbatas | Menerapkan dan menguji pembaruan |
 | Viewer | Hanya baca | Memantau status pembaruan |
 
-Tetapkan peran kepada tim Anda berdasarkan tanggung jawab mereka. Capgo bekerja dengan lancar baik dengan Capacitor 6 maupun 7, memastikan sesuai dengan berbagai kebutuhan proyek.
+Tetapkan peran kepada tim Anda berdasarkan tanggung jawab mereka. Capgo bekerja dengan lancar dengan Capacitor 8, memastikan sesuai dengan berbagai kebutuhan proyek.
 
 Untuk kenyamanan tambahan, Capgo terintegrasi dengan alat CI/CD populer seperti [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/), dan [Jenkins](https://www.jenkins.io/). Pastikan sistem build Anda siap untuk menangani manajemen saluran pembaruan.
 

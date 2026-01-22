@@ -1,0 +1,242 @@
+---
+title: "Getting Started with Electron Updater"
+description: Complete setup guide for adding Capgo live updates to your Electron application.
+sidebar:
+  order: 1
+---
+
+import { Steps, Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+
+This guide walks you through setting up `@capgo/electron-updater` in your Electron application to enable live JavaScript/HTML/CSS updates.
+
+<Aside type="tip">
+  Already using Capgo with Capacitor? The Electron Updater uses the same Capgo Cloud backend, so you can manage both mobile and desktop apps from the same dashboard.
+</Aside>
+
+## Prerequisites
+
+- Electron 20.0.0 or higher
+- Node.js 18 or higher
+- A Capgo account (sign up at [capgo.app](https://capgo.app))
+
+## Installation
+
+<Steps>
+
+1. Install the package:
+
+   ```bash
+   npm install @capgo/electron-updater
+   ```
+
+2. Get your App ID from the Capgo dashboard. If you haven't created an app yet, run:
+
+   ```bash
+   npx @capgo/cli@latest init
+   ```
+
+</Steps>
+
+## Setup
+
+The Electron Updater requires setup in three places: main process, preload script, and renderer process.
+
+### Main Process
+
+```typescript
+// main.ts
+import { app, BrowserWindow } from 'electron';
+import * as path from 'path';
+import {
+  ElectronUpdater,
+  setupIPCHandlers,
+  setupEventForwarding,
+} from '@capgo/electron-updater';
+
+// Create updater instance with your Capgo App ID
+const updater = new ElectronUpdater({
+  appId: 'YOUR_CAPGO_APP_ID', // e.g., 'com.example.myapp'
+  autoUpdate: true,
+});
+
+app.whenReady().then(async () => {
+  const mainWindow = new BrowserWindow({
+    width: 1200,
+    height: 800,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: true,
+    },
+  });
+
+  // Initialize updater with window and builtin path
+  const builtinPath = path.join(__dirname, 'www/index.html');
+  await updater.initialize(mainWindow, builtinPath);
+
+  // Setup IPC communication between main and renderer
+  setupIPCHandlers(updater);
+  setupEventForwarding(updater, mainWindow);
+
+  // Load the current bundle (either builtin or downloaded update)
+  await mainWindow.loadFile(updater.getCurrentBundlePath());
+});
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
+});
+```
+
+### Preload Script
+
+```typescript
+// preload.ts
+import { exposeUpdaterAPI } from '@capgo/electron-updater/preload';
+
+// Expose the updater API to the renderer process
+exposeUpdaterAPI();
+```
+
+### Renderer Process
+
+```typescript
+// renderer.ts (or in your app's entry point)
+import { requireUpdater } from '@capgo/electron-updater/renderer';
+
+const updater = requireUpdater();
+
+// CRITICAL: Call this on every app launch!
+// This confirms the bundle loaded successfully and prevents rollback
+await updater.notifyAppReady();
+
+console.log('App ready, current bundle:', await updater.current());
+```
+
+<Aside type="caution">
+  You **must** call `notifyAppReady()` within 10 seconds of app launch (configurable via `appReadyTimeout`). If not called, the updater assumes the update failed and rolls back to the previous version.
+</Aside>
+
+## Checking for Updates
+
+With `autoUpdate: true`, the updater automatically checks for updates. You can also trigger manual checks:
+
+```typescript
+// Check for updates manually
+const latest = await updater.getLatest();
+
+if (latest.url && !latest.error) {
+  console.log('Update available:', latest.version);
+
+  // Download the update
+  const bundle = await updater.download({
+    url: latest.url,
+    version: latest.version,
+    checksum: latest.checksum,
+  });
+
+  console.log('Downloaded bundle:', bundle.id);
+
+  // Option 1: Queue for next restart
+  await updater.next({ id: bundle.id });
+
+  // Option 2: Apply immediately and reload
+  // await updater.set({ id: bundle.id });
+}
+```
+
+## Listening to Events
+
+Track update progress and status with events:
+
+```typescript
+// Download progress
+updater.addListener('download', (event) => {
+  console.log(`Download progress: ${event.percent}%`);
+});
+
+// Update available
+updater.addListener('updateAvailable', (event) => {
+  console.log('New version available:', event.bundle.version);
+});
+
+// Download completed
+updater.addListener('downloadComplete', (event) => {
+  console.log('Download finished:', event.bundle.id);
+});
+
+// Update failed
+updater.addListener('updateFailed', (event) => {
+  console.error('Update failed:', event.bundle.version);
+});
+```
+
+## Deploying Updates
+
+Use the Capgo CLI to upload updates:
+
+```bash
+# Build your app
+npm run build
+
+# Upload to Capgo
+npx @capgo/cli@latest bundle upload --channel=production
+```
+
+Your Electron app will automatically detect and download the new bundle on next check.
+
+## Debug Menu
+
+Enable the debug menu during development:
+
+```typescript
+const updater = new ElectronUpdater({
+  appId: 'YOUR_CAPGO_APP_ID',
+  debugMenu: true, // Enable debug menu
+});
+```
+
+Press `Ctrl+Shift+D` (or `Cmd+Shift+D` on Mac) to open the debug menu and:
+- View current bundle information
+- Switch between available bundles
+- Reset to builtin version
+- View device and channel info
+
+## Configuration Options
+
+```typescript
+const updater = new ElectronUpdater({
+  // Required
+  appId: 'com.example.app',
+
+  // Server URLs (defaults to Capgo Cloud)
+  updateUrl: 'https://plugin.capgo.app/updates',
+  channelUrl: 'https://plugin.capgo.app/channel_self',
+  statsUrl: 'https://plugin.capgo.app/stats',
+
+  // Behavior
+  autoUpdate: true,           // Enable auto-updates
+  appReadyTimeout: 10000,     // MS before rollback (default: 10s)
+  autoDeleteFailed: true,     // Delete failed bundles
+  autoDeletePrevious: true,   // Delete old bundles after successful update
+
+  // Channels
+  defaultChannel: 'production',
+
+  // Security
+  publicKey: '...',           // For end-to-end encryption
+
+  // Debug
+  debugMenu: false,           // Enable debug menu
+  disableJSLogging: false,    // Disable console logs
+
+  // Periodic Updates
+  periodCheckDelay: 0,        // Seconds between checks (0 = disabled, min 600)
+});
+```
+
+## Next Steps
+
+- [API Reference](/docs/plugins/electron-updater/api/) - Explore all available methods
+- [Channels](/docs/live-updates/channels/) - Learn about deployment channels
+- [Rollbacks](/docs/live-updates/rollbacks/) - Understand rollback protection

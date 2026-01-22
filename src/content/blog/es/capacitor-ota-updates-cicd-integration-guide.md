@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-17T01:02:12.522Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/6800475b28980901df1e541b-1744851846737.jpg
 head_image_alt: Desarrollo Móvil
@@ -55,7 +55,7 @@ Aquí están los componentes principales que necesitarás para actualizaciones O
 
 | Componente | Propósito | Características Clave |
 | --- | --- | --- |
-| App Capacitor | App base | Funciona con Capacitor 6 y 7 |
+| App Capacitor | App base | Funciona con Capacitor 8 |
 | Repositorio Git | Seguimiento de código | Monitorea cambios y actualizaciones de código |
 | Plataforma CI/CD | Automatización | Soporta GitHub Actions, [GitLab CI](https://docsgitlabcom/ee/ci/), o [Jenkins](https://wwwjenkinsio/) |
 | Servicio de Actualización OTA | Distribución | Maneja actualizaciones en vivo y rollbacks |

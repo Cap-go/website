@@ -1,0 +1,303 @@
+---
+title: Organisationssicherheit
+description: >-
+  Konfigurieren Sie umfassende Sicherheitsrichtlinien für Ihre Organisation,
+  einschließlich 2FA-Durchsetzung, Passwortrichtlinien und
+  API-Schlüsselkontrollen zum Schutz Ihrer Apps und Daten.
+sidebar:
+  order: 9
+locale: de
+---
+
+import { Aside, Steps, Badge } from '@astrojs/starlight/components';
+
+Capgo bietet umfassende Sicherheitskontrollen, die Organisationsadministratoren ermöglichen, Sicherheitsrichtlinien für alle Mitglieder durchzusetzen. Diese Funktionen helfen Ihnen, Compliance-Anforderungen zu erfüllen, sensible Daten zu schützen und eine starke Sicherheitslage aufrechtzuerhalten.
+
+## Übersicht
+
+Die Organisationssicherheitseinstellungen ermöglichen Super-Admins die Konfiguration von:
+
+- **Zwei-Faktor-Authentifizierung (2FA) Durchsetzung** - Alle Mitglieder zur Aktivierung von 2FA verpflichten
+- **Passwortrichtlinie** - Anforderungen an die Passwortkomplexität festlegen
+- **API-Schlüssel-Sicherheit** - Sichere API-Schlüssel und Ablaufrichtlinien durchsetzen
+
+![Organisationssicherheitseinstellungen](/org_security.webp)
+
+Die Sicherheitsseite ist in klar gekennzeichnete Abschnitte unterteilt:
+1. **Sicherheits-Tab** - Zugriff auf alle Sicherheitseinstellungen über die Seitenleiste der Organisationseinstellungen
+2. **2FA-Durchsetzung** - Umschalter und Statusanzeige für Zwei-Faktor-Authentifizierungsanforderungen
+3. **Passwortrichtlinie** - Konfiguration der Passwortkomplexitätsregeln für Organisationsmitglieder
+4. **API-Schlüssel-Richtlinie** - Einstellungen für sichere API-Schlüssel und Ablaufanforderungen
+5. **API-Schlüssel-Ablauf** - Kontrolle, ob API-Schlüssel ein Ablaufdatum haben müssen
+
+<Aside type="note">
+
+Nur Benutzer mit der Rolle **super_admin** können Organisationssicherheitseinstellungen konfigurieren. Andere Mitglieder können ihren Compliance-Status einsehen, aber die Richtlinien nicht ändern.
+
+</Aside>
+
+## Zugriff auf Sicherheitseinstellungen
+
+<Steps>
+
+1. Navigieren Sie zu Ihren Organisationseinstellungen, indem Sie in der Seitenleiste auf **Einstellungen** klicken
+2. Klicken Sie oben auf der Einstellungsseite auf den Tab **Organisation**
+3. Wählen Sie den Tab **Sicherheit** aus der Organisationsnavigationsleiste (hervorgehoben mit einem Schild-Symbol)
+
+</Steps>
+
+## Zwei-Faktor-Authentifizierung (2FA) Durchsetzung
+
+Die 2FA-Durchsetzung erfordert, dass alle Organisationsmitglieder die Zwei-Faktor-Authentifizierung für ihre Konten aktiviert haben. Dies fügt eine kritische Sicherheitsebene hinzu, indem sowohl ein Passwort als auch ein Verifizierungscode erforderlich sind.
+
+### Was passiert, wenn 2FA durchgesetzt wird
+
+- Mitglieder ohne 2FA werden **sofort blockiert** und können nicht auf Organisations-Apps zugreifen
+- Sowohl das Web-Dashboard als auch die CLI setzen diese Anforderung durch
+- Neue Mitglieder müssen 2FA aktivieren, bevor sie auf Organisationsressourcen zugreifen können
+- Das System verfolgt in Echtzeit, welche Mitglieder 2FA aktiviert haben
+
+### Das 2FA-Status-Panel verstehen
+
+Die Sicherheitsseite zeigt ein umfassendes **Mitglieder 2FA-Status** Panel, das anzeigt:
+
+- **Gesamtmitglieder** - Die Gesamtzahl der Mitglieder in Ihrer Organisation
+- **2FA aktiviert** (grüner Indikator) - Mitglieder, die die Zwei-Faktor-Authentifizierung erfolgreich aktiviert haben
+- **2FA nicht aktiviert** (orangefarbener Warnindikator) - Mitglieder, die 2FA noch einrichten müssen
+
+Wenn Mitglieder 2FA nicht aktiviert haben, erscheinen sie in einem **Mitglieder ohne 2FA** Warnfeld. Dieses Feld zeigt:
+- Die E-Mail-Adresse jedes Mitglieds und seine Rolle in der Organisation
+- Eine **E-Mail-Liste kopieren** Schaltfläche, um alle betroffenen E-Mail-Adressen schnell für die Kommunikation zu kopieren
+
+### 2FA-Durchsetzung aktivieren
+
+<Steps>
+
+1. Navigieren Sie zu **Organisationseinstellungen > Sicherheit**
+2. Suchen Sie den Abschnitt **2FA für alle Mitglieder erforderlich** oben auf der Seite
+3. Überprüfen Sie das **Mitglieder 2FA-Status** Panel, um zu sehen, welche Mitglieder betroffen sein werden
+4. Wenn es Mitglieder ohne 2FA gibt, verwenden Sie die **E-Mail-Liste kopieren** Schaltfläche, um sie vor der Aktivierung zu benachrichtigen
+5. Schalten Sie den Schalter neben **2FA für alle Mitglieder erforderlich** um, um die Durchsetzung zu aktivieren
+6. Der Schalter zeigt den Status **Deaktiviert** oder **Aktiviert** auf der rechten Seite an
+
+</Steps>
+
+<Aside type="caution">
+
+Vor der Aktivierung der 2FA-Durchsetzung:
+- Benachrichtigen Sie betroffene Mitglieder im Voraus und teilen Sie die [2FA-Einrichtungsanleitung](/docs/webapp/mfa/)
+- Geben Sie ihnen Zeit, 2FA für ihre Konten zu aktivieren
+- Mitglieder ohne 2FA verlieren sofort den Zugang, wenn Sie die Durchsetzung aktivieren
+- Erwägen Sie, die im Warnfeld "Mitglieder ohne 2FA" aufgelisteten Mitglieder zu kontaktieren
+
+</Aside>
+
+### CLI-Unterstützung für 2FA-Durchsetzung
+
+Sie können die 2FA-Durchsetzung auch über die CLI verwalten:
+
+```shell
+# 2FA-Durchsetzung aktivieren
+npx @capgo/cli organization set YOUR_ORG_ID --enforce-2fa
+
+# 2FA-Durchsetzung deaktivieren
+npx @capgo/cli organization set YOUR_ORG_ID --no-enforce-2fa
+
+# Mitglieder-2FA-Status prüfen
+npx @capgo/cli organization members YOUR_ORG_ID
+```
+
+Für detaillierte Informationen zur 2FA-Durchsetzung siehe die [2FA-Durchsetzungsanleitung](/docs/webapp/2fa-enforcement/).
+
+## Passwortrichtlinie
+
+Passwortrichtlinien ermöglichen es Ihnen, Anforderungen an die Passwortkomplexität für alle Organisationsmitglieder durchzusetzen. Wenn das Passwort eines Mitglieds die Richtlinienanforderungen nicht erfüllt, muss es sein Passwort aktualisieren, bevor es auf Organisationsressourcen zugreifen kann.
+
+Der Abschnitt Passwortrichtlinie (mit Indikator **3** im Übersichtsbild markiert) bietet einen einfachen Schalter zur Durchsetzung von Passwortanforderungen in Ihrer gesamten Organisation.
+
+### Wie die Passwortrichtlinie funktioniert
+
+Wenn Sie die Passwortrichtlinie aktivieren:
+- Alle Organisationsmitglieder müssen die Anforderungen an die Passwortkomplexität erfüllen
+- Benutzer, die die Anforderungen nicht erfüllen, werden gesperrt, bis sie ihr Passwort aktualisieren
+- Die Richtlinie gilt für alle Mitglieder unabhängig von ihrer Rolle
+
+### Passwortrichtlinie aktivieren
+
+<Steps>
+
+1. Gehen Sie zu **Organisationseinstellungen > Sicherheit**
+2. Scrollen Sie nach unten, um den Abschnitt **Passwortrichtlinie** zu finden
+3. Lesen Sie die Beschreibung: "Organisationsmitglieder zur Verwendung von Passwörtern verpflichten, die bestimmte Komplexitätsanforderungen erfüllen"
+4. Schalten Sie den **Passwortrichtlinie durchsetzen** Schalter ein, um sie zu aktivieren
+5. Die Schalterbeschreibung lautet: "Wenn aktiviert, müssen alle Organisationsmitglieder die Passwortanforderungen erfüllen, um auf die Organisation zugreifen zu können"
+
+</Steps>
+
+### Verfügbare Passwortanforderungen
+
+| Einstellung | Beschreibung | Bereich |
+|-------------|--------------|---------|
+| **Mindestlänge** | Mindestanzahl erforderlicher Zeichen | 6-128 Zeichen |
+| **Großbuchstabe erforderlich** | Passwort muss mindestens einen Großbuchstaben (A-Z) enthalten | Ein/Aus |
+| **Zahl erforderlich** | Passwort muss mindestens eine Ziffer (0-9) enthalten | Ein/Aus |
+| **Sonderzeichen erforderlich** | Passwort muss mindestens ein Sonderzeichen (!@#$%^&*, etc.) enthalten | Ein/Aus |
+
+### Mitglieder-Compliance-Tracking
+
+Wenn eine Passwortrichtlinie aktiv ist, können Sie die Compliance überwachen:
+
+- **Gesamtmitglieder**: Anzahl der Mitglieder in Ihrer Organisation
+- **Konform**: Mitglieder, deren Passwörter die Richtlinienanforderungen erfüllen
+- **Nicht konform**: Mitglieder, die ihre Passwörter aktualisieren müssen
+
+Nicht konforme Mitglieder werden mit ihren E-Mail-Adressen aufgelistet. Sie können die E-Mail-Liste kopieren, um sie über die Richtlinie und erforderliche Passwortänderungen zu informieren.
+
+<Aside type="tip">
+
+Wenn Sie eine Passwortrichtlinie zum ersten Mal aktivieren, werden Mitglieder mit nicht konformen Passwörtern bei ihrer nächsten Anmeldung aufgefordert, ihr Passwort zu ändern. Sie werden nicht sofort gesperrt, aber ihr Zugriff kann eingeschränkt werden, bis sie die Anforderungen erfüllen.
+
+</Aside>
+
+### Best Practices für Passwortrichtlinien
+
+- **Mit vernünftigen Anforderungen beginnen**: Eine Mindestlänge von 10-12 Zeichen mit Groß-/Kleinschreibung und Zahlen bietet gute Sicherheit ohne übermäßig restriktiv zu sein
+- **Änderungen kommunizieren**: Benachrichtigen Sie Ihr Team, bevor Sie neue Passwortanforderungen aktivieren
+- **Übergangszeit einplanen**: Geben Sie den Mitgliedern Zeit, ihre Passwörter zu aktualisieren
+- **Passwort-Manager empfehlen**: Empfehlen Sie Teammitgliedern die Verwendung von Passwort-Managern zur Generierung und Speicherung sicherer Passwörter
+
+## API-Schlüssel-Sicherheit
+
+Capgo bietet zwei Sicherheitskontrollen für API-Schlüssel: Durchsetzung sicherer (gehashter) API-Schlüssel und Anforderung von Ablaufdaten. Der Abschnitt API-Schlüssel-Richtlinie (mit Indikator **4** im Übersichtsbild markiert) ist durch ein Schlüssel-Symbol gekennzeichnet.
+
+### Sichere API-Schlüssel durchsetzen
+
+Die erste Option im Abschnitt API-Schlüssel-Richtlinie ist **Sichere API-Schlüssel durchsetzen**. Wenn aktiviert, erfordert diese Einstellung, dass alle API-Schlüssel in Ihrer Organisation im sicheren/gehashten Format erstellt werden.
+
+Gehashte API-Schlüssel sind sicherer, weil:
+
+- Der tatsächliche Schlüsselwert niemals auf unseren Servern gespeichert wird
+- Nur Sie (und Ihre Systeme) Zugriff auf den vollständigen Schlüssel haben
+- Selbst wenn unsere Datenbank kompromittiert würde, könnten Ihre Schlüssel nicht verwendet werden
+
+Die Schalterbeschreibung lautet: "Wenn aktiviert, können nur sichere (gehashte) API-Schlüssel auf diese Organisation zugreifen. Klartext-API-Schlüssel werden abgelehnt."
+
+<Aside type="note">
+
+Bestehende Legacy-API-Schlüssel (nicht gehasht) funktionieren weiterhin, aber Mitglieder können keine neuen nicht gehashten Schlüssel erstellen, wenn diese Richtlinie aktiviert ist.
+
+</Aside>
+
+### Sichere API-Schlüssel aktivieren
+
+<Steps>
+
+1. Gehen Sie zu **Organisationseinstellungen > Sicherheit**
+2. Scrollen Sie nach unten, um den Abschnitt **API-Schlüssel-Richtlinie** zu finden (achten Sie auf das Schlüssel-Symbol)
+3. Suchen Sie den Schalter **Sichere API-Schlüssel durchsetzen**
+4. Schalten Sie den Schalter um, um die Durchsetzung sicherer API-Schlüssel zu aktivieren
+5. Bestehende Schlüssel sind nicht betroffen; die Richtlinie gilt für die Erstellung neuer Schlüssel
+
+</Steps>
+
+### API-Schlüssel-Ablaufrichtlinie
+
+Die zweite Option (mit Indikator **5** im Übersichtsbild markiert) ist **API-Schlüssel-Ablauf erforderlich**. Sie können verlangen, dass alle API-Schlüssel ein Ablaufdatum haben, wodurch ihre Gültigkeitsdauer begrenzt wird.
+
+Dies ist eine bewährte Sicherheitspraxis, die:
+
+- Das Expositionsfenster begrenzt, wenn ein Schlüssel kompromittiert wird
+- Regelmäßige Schlüsselrotation sicherstellt
+- Hilft, Compliance-Anforderungen für das Credential-Management zu erfüllen
+
+Die Schalterbeschreibung lautet: "Wenn aktiviert, müssen alle API-Schlüssel für diese Organisation ein Ablaufdatum haben"
+
+### Ablaufrichtlinie konfigurieren
+
+<Steps>
+
+1. Gehen Sie zu **Organisationseinstellungen > Sicherheit**
+2. Finden Sie den Abschnitt **API-Schlüssel-Richtlinie**
+3. Suchen Sie den Schalter **API-Schlüssel-Ablauf erforderlich** (unter Sichere API-Schlüssel durchsetzen)
+4. Schalten Sie den Schalter um, um die Ablaufanforderung zu aktivieren
+5. Nach der Aktivierung setzen Sie die **Maximalen Ablauftage** (1-365 Tage)
+   - Dies begrenzt, wie weit in der Zukunft Ablaufdaten gesetzt werden können
+   - Beispiel: Die Einstellung von 90 Tagen bedeutet, dass Schlüssel höchstens 90 Tage ab Erstellung ablaufen können
+
+</Steps>
+
+<Aside type="caution">
+
+Wenn Sie die Ablaufanforderung aktivieren:
+- Neue API-Schlüssel müssen ein Ablaufdatum haben
+- Bestehende Schlüssel ohne Ablaufdatum funktionieren weiterhin
+- Erwägen Sie, bestehende Schlüssel zu überprüfen und solche ohne Ablaufdatum zu rotieren
+
+</Aside>
+
+### Empfohlene API-Schlüssel-Richtlinien
+
+| Anwendungsfall | Sichere Schlüssel | Ablauf | Max. Tage |
+|----------------|-------------------|--------|-----------|
+| **Entwicklung** | Empfohlen | Optional | 30-90 |
+| **CI/CD-Pipelines** | Erforderlich | Erforderlich | 90-180 |
+| **Produktion** | Erforderlich | Erforderlich | 30-90 |
+| **Enterprise/Compliance** | Erforderlich | Erforderlich | 30-60 |
+
+## Compliance und Auditing
+
+Organisationssicherheitsfunktionen helfen Ihnen, verschiedene Compliance-Anforderungen zu erfüllen:
+
+| Standard | Relevante Funktionen |
+|----------|----------------------|
+| **SOC 2** | 2FA-Durchsetzung, Passwortrichtlinien, API-Schlüsselkontrollen |
+| **ISO 27001** | Alle Sicherheitsfunktionen helfen beim Nachweis der Zugriffskontrolle |
+| **HIPAA** | Starke Authentifizierung und Zugriffsverwaltung |
+| **DSGVO** | Datenschutz durch Zugriffskontrollen |
+| **PCI DSS** | Multi-Faktor-Authentifizierung, sichere Passwörter |
+
+### Compliance-Status überwachen
+
+Das Sicherheits-Dashboard bietet Echtzeit-Einblick in:
+- Wie viele Mitglieder 2FA aktiviert haben
+- Passwortrichtlinien-Compliance in Ihrer Organisation
+- Übernahme der API-Schlüssel-Sicherheit
+
+Verwenden Sie die Funktion "E-Mail-Liste kopieren", um Listen nicht konformer Mitglieder einfach für gezielte Kommunikation zu exportieren.
+
+## Fehlerbehebung
+
+### "Zugriff verweigert: Sicherheitsrichtlinie nicht erfüllt"
+
+**Problem**: Ein Mitglied kann nicht auf die Organisation zugreifen.
+
+**Lösungen**:
+1. Prüfen Sie, ob 2FA durchgesetzt wird - das Mitglied muss [2FA aktivieren](/docs/webapp/mfa/)
+2. Prüfen Sie, ob eine Passwortrichtlinie aktiv ist - das Mitglied muss sein Passwort aktualisieren
+3. Überprüfen Sie den Compliance-Status des Mitglieds im Sicherheits-Dashboard
+
+### Sicherheitsfunktionen können nicht aktiviert werden
+
+**Problem**: Sicherheitsschalter sind deaktiviert oder reagieren nicht.
+
+**Lösungen**:
+- Stellen Sie sicher, dass Sie die Rolle **super_admin** in der Organisation haben
+- Überprüfen Sie Ihre Netzwerkverbindung
+- Versuchen Sie, die Seite zu aktualisieren
+- Kontaktieren Sie den Support, wenn das Problem weiterhin besteht
+
+### API-Schlüsselerstellung schlägt fehl
+
+**Problem**: Neue API-Schlüssel können nicht erstellt werden.
+
+**Lösungen**:
+- Wenn sichere Schlüssel durchgesetzt werden, stellen Sie sicher, dass Sie den Erstellungsablauf für sichere Schlüssel verwenden
+- Wenn ein Ablaufdatum erforderlich ist, setzen Sie ein Ablaufdatum innerhalb des zulässigen Bereichs
+- Überprüfen Sie die Einstellung für die maximalen Ablauftage
+
+## Nächste Schritte
+
+- [2FA für Ihr Konto einrichten](/docs/webapp/mfa/)
+- [Details zur 2FA-Durchsetzung erfahren](/docs/webapp/2fa-enforcement/)
+- [API-Schlüssel verwalten](/docs/webapp/api-keys/)
+- [Organisationsverwaltung](/docs/webapp/organization-system/)

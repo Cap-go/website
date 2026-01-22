@@ -1,0 +1,261 @@
+---
+title: Getting Started
+description: Learn how to install and use the Video Thumbnails plugin to generate thumbnails from videos in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-video-thumbnails" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Usage
+
+Import the plugin and use its methods to generate video thumbnails:
+
+```typescript
+import { CapgoVideoThumbnails } from '@capgo/capacitor-video-thumbnails';
+
+// Generate thumbnail from local video
+const generateFromLocal = async () => {
+  const result = await CapgoVideoThumbnails.getThumbnail({
+    sourceUri: 'file:///path/to/video.mp4',
+    time: 5000, // 5 seconds into the video
+    quality: 0.8
+  });
+
+  console.log('Thumbnail URI:', result.uri);
+  console.log('Dimensions:', result.width, 'x', result.height);
+};
+
+// Generate thumbnail from remote video
+const generateFromRemote = async () => {
+  const result = await CapgoVideoThumbnails.getThumbnail({
+    sourceUri: 'https://example.com/video.mp4',
+    time: 0, // First frame
+    quality: 1.0
+  });
+
+  return result.uri;
+};
+```
+
+## API Reference
+
+### getThumbnail(options)
+
+Generate a thumbnail image from a video file.
+
+```typescript
+interface VideoThumbnailsOptions {
+  sourceUri: string;              // Video file path or URL
+  time?: number;                  // Position in milliseconds (default: 0)
+  quality?: number;               // 0.0 to 1.0 (default: 1.0)
+  headers?: Record<string, string>; // HTTP headers for remote URLs
+}
+
+interface VideoThumbnailsResult {
+  uri: string;    // Local path to generated thumbnail
+  width: number;  // Thumbnail width in pixels
+  height: number; // Thumbnail height in pixels
+}
+
+const result = await CapgoVideoThumbnails.getThumbnail({
+  sourceUri: 'file:///path/to/video.mp4',
+  time: 5000,
+  quality: 0.8
+});
+```
+
+### getPluginVersion()
+
+Get the current plugin version.
+
+```typescript
+const { version } = await CapgoVideoThumbnails.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+## Complete Example
+
+```typescript
+import { CapgoVideoThumbnails } from '@capgo/capacitor-video-thumbnails';
+
+export class VideoThumbnailService {
+  /**
+   * Generate a thumbnail from a video at a specific time
+   */
+  async generateThumbnail(
+    videoPath: string,
+    timeMs: number = 0,
+    quality: number = 0.8
+  ): Promise<string> {
+    try {
+      const result = await CapgoVideoThumbnails.getThumbnail({
+        sourceUri: videoPath,
+        time: timeMs,
+        quality: quality
+      });
+
+      return result.uri;
+    } catch (error) {
+      console.error('Failed to generate thumbnail:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Generate thumbnail from authenticated remote video
+   */
+  async generateFromAuthenticatedUrl(
+    videoUrl: string,
+    authToken: string
+  ): Promise<string> {
+    const result = await CapgoVideoThumbnails.getThumbnail({
+      sourceUri: videoUrl,
+      time: 0,
+      quality: 1.0,
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    });
+
+    return result.uri;
+  }
+
+  /**
+   * Generate multiple thumbnails at different timestamps
+   */
+  async generateThumbnailStrip(
+    videoPath: string,
+    count: number,
+    videoDurationMs: number
+  ): Promise<string[]> {
+    const thumbnails: string[] = [];
+    const interval = videoDurationMs / (count + 1);
+
+    for (let i = 1; i <= count; i++) {
+      const time = Math.round(interval * i);
+      const result = await CapgoVideoThumbnails.getThumbnail({
+        sourceUri: videoPath,
+        time: time,
+        quality: 0.6 // Lower quality for preview strip
+      });
+      thumbnails.push(result.uri);
+    }
+
+    return thumbnails;
+  }
+
+  /**
+   * Generate thumbnail with dimensions info
+   */
+  async generateWithMetadata(videoPath: string) {
+    const result = await CapgoVideoThumbnails.getThumbnail({
+      sourceUri: videoPath,
+      time: 1000, // 1 second
+      quality: 1.0
+    });
+
+    return {
+      thumbnailUri: result.uri,
+      aspectRatio: result.width / result.height,
+      width: result.width,
+      height: result.height
+    };
+  }
+}
+
+// Usage in a React/Vue/Angular component
+const thumbnailService = new VideoThumbnailService();
+
+async function displayVideoPreview(videoPath: string) {
+  const thumbnailUri = await thumbnailService.generateThumbnail(videoPath, 2000);
+
+  // Use in img tag
+  // <img src={thumbnailUri} alt="Video preview" />
+  return thumbnailUri;
+}
+
+// Generate preview for video picker
+async function handleVideoSelected(videoUri: string) {
+  const metadata = await thumbnailService.generateWithMetadata(videoUri);
+
+  console.log(`Video aspect ratio: ${metadata.aspectRatio}`);
+  console.log(`Thumbnail: ${metadata.thumbnailUri}`);
+
+  return metadata;
+}
+```
+
+## Best Practices
+
+1. **Use appropriate quality**
+   - For thumbnails in lists: 0.5 - 0.7
+   - For preview images: 0.8 - 1.0
+   - Lower quality = smaller file size and faster generation
+
+2. **Handle errors gracefully**
+   ```typescript
+   try {
+     const result = await CapgoVideoThumbnails.getThumbnail({
+       sourceUri: videoPath,
+       time: 5000
+     });
+   } catch (error) {
+     console.error('Thumbnail generation failed:', error);
+     // Show placeholder image
+   }
+   ```
+
+3. **Cache thumbnails**
+   Store generated thumbnail URIs to avoid regenerating them:
+   ```typescript
+   const thumbnailCache = new Map<string, string>();
+
+   async function getCachedThumbnail(videoPath: string): Promise<string> {
+     if (thumbnailCache.has(videoPath)) {
+       return thumbnailCache.get(videoPath)!;
+     }
+
+     const result = await CapgoVideoThumbnails.getThumbnail({
+       sourceUri: videoPath
+     });
+
+     thumbnailCache.set(videoPath, result.uri);
+     return result.uri;
+   }
+   ```
+
+4. **Choose appropriate timestamps**
+   - Avoid 0ms for videos that may have black intro frames
+   - Use 1000-2000ms for better preview content
+
+## Platform Notes
+
+### iOS
+- Uses AVAssetImageGenerator for thumbnail extraction
+- Supports local files and remote URLs
+- Returns JPEG images
+
+### Android
+- Uses MediaMetadataRetriever for thumbnail extraction
+- Supports local files and remote URLs
+- Returns JPEG or PNG images
+
+### Web
+- Uses HTML5 video element with canvas capture
+- Requires CORS headers for remote videos
+- May have limitations with some video formats
+
+## Requirements
+
+- **Capacitor 8.0.0** or higher

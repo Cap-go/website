@@ -1,0 +1,253 @@
+---
+title: Getting Started
+description: Learn how to install and use the Brightness plugin to control screen brightness in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-brightness" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Android Configuration
+
+To modify system-wide brightness on Android, add the WRITE_SETTINGS permission to your `AndroidManifest.xml`:
+
+```xml
+<uses-permission android:name="android.permission.WRITE_SETTINGS" />
+```
+
+## Usage
+
+Import the plugin and use its methods to control brightness:
+
+```typescript
+import { CapgoBrightness } from '@capgo/capacitor-brightness';
+
+// Get current brightness
+const getBrightness = async () => {
+  const { brightness } = await CapgoBrightness.getBrightness();
+  console.log('Current brightness:', brightness);
+};
+
+// Set brightness (0 to 1)
+const setBrightness = async (level: number) => {
+  await CapgoBrightness.setBrightness({ brightness: level });
+};
+
+// Check if API is available
+const checkAvailable = async () => {
+  const { available } = await CapgoBrightness.isAvailable();
+  console.log('Brightness API available:', available);
+};
+```
+
+## API Reference
+
+### getBrightness()
+
+Get the current brightness level of the device's main screen.
+
+```typescript
+const { brightness } = await CapgoBrightness.getBrightness();
+// Returns: { brightness: number } (0 to 1)
+```
+
+### setBrightness(options)
+
+Set the brightness level of the device's main screen.
+
+```typescript
+interface SetBrightnessOptions {
+  brightness: number; // 0.0 to 1.0
+}
+
+await CapgoBrightness.setBrightness({ brightness: 0.75 });
+```
+
+### getSystemBrightness() (Android only)
+
+Get the system-wide screen brightness.
+
+```typescript
+const { brightness } = await CapgoBrightness.getSystemBrightness();
+```
+
+### setSystemBrightness(options) (Android only)
+
+Set the system-wide screen brightness. Requires WRITE_SETTINGS permission.
+
+```typescript
+await CapgoBrightness.setSystemBrightness({ brightness: 0.5 });
+```
+
+### getSystemBrightnessMode() (Android only)
+
+Get the current system brightness mode (automatic or manual).
+
+```typescript
+import { BrightnessMode } from '@capgo/capacitor-brightness';
+
+const { mode } = await CapgoBrightness.getSystemBrightnessMode();
+if (mode === BrightnessMode.AUTOMATIC) {
+  console.log('Auto-brightness is enabled');
+}
+```
+
+### setSystemBrightnessMode(options) (Android only)
+
+Set the system brightness mode.
+
+```typescript
+import { BrightnessMode } from '@capgo/capacitor-brightness';
+
+// Enable automatic brightness
+await CapgoBrightness.setSystemBrightnessMode({ mode: BrightnessMode.AUTOMATIC });
+
+// Enable manual brightness
+await CapgoBrightness.setSystemBrightnessMode({ mode: BrightnessMode.MANUAL });
+```
+
+### isUsingSystemBrightness() (Android only)
+
+Check if the current activity is using system-wide brightness.
+
+```typescript
+const { isUsing } = await CapgoBrightness.isUsingSystemBrightness();
+```
+
+### restoreSystemBrightness() (Android only)
+
+Reset brightness to use system-wide value.
+
+```typescript
+await CapgoBrightness.restoreSystemBrightness();
+```
+
+### isAvailable()
+
+Check if the Brightness API is available.
+
+```typescript
+const { available } = await CapgoBrightness.isAvailable();
+```
+
+### checkPermissions()
+
+Check permissions for system brightness access.
+
+```typescript
+const status = await CapgoBrightness.checkPermissions();
+// Returns: { brightness: 'granted' | 'denied' | 'prompt' | 'prompt-with-rationale' }
+```
+
+### requestPermissions()
+
+Request permissions for system brightness. Opens system settings on Android.
+
+```typescript
+const status = await CapgoBrightness.requestPermissions();
+```
+
+## Complete Example
+
+```typescript
+import { CapgoBrightness, BrightnessMode } from '@capgo/capacitor-brightness';
+
+export class BrightnessService {
+  private originalBrightness: number | null = null;
+
+  async init() {
+    const { available } = await CapgoBrightness.isAvailable();
+    if (!available) {
+      throw new Error('Brightness API not available');
+    }
+
+    // Store original brightness
+    const { brightness } = await CapgoBrightness.getBrightness();
+    this.originalBrightness = brightness;
+  }
+
+  async setMaxBrightness() {
+    await CapgoBrightness.setBrightness({ brightness: 1.0 });
+  }
+
+  async setMinBrightness() {
+    await CapgoBrightness.setBrightness({ brightness: 0.0 });
+  }
+
+  async restore() {
+    if (this.originalBrightness !== null) {
+      await CapgoBrightness.setBrightness({
+        brightness: this.originalBrightness
+      });
+    }
+  }
+
+  // Android-specific: Enable auto-brightness
+  async enableAutoBrightness() {
+    const status = await CapgoBrightness.checkPermissions();
+    if (status.brightness !== 'granted') {
+      await CapgoBrightness.requestPermissions();
+    }
+
+    await CapgoBrightness.setSystemBrightnessMode({
+      mode: BrightnessMode.AUTOMATIC
+    });
+  }
+}
+```
+
+## Best Practices
+
+1. **Check availability first**
+   ```typescript
+   const { available } = await CapgoBrightness.isAvailable();
+   if (!available) {
+     // Show fallback UI or disable brightness features
+   }
+   ```
+
+2. **Restore brightness on exit**
+   Always restore the original brightness when your app goes to background or when the feature is no longer needed.
+
+3. **Request permissions on Android**
+   For system-wide brightness control, request WRITE_SETTINGS permission before calling system methods.
+
+4. **Handle errors gracefully**
+   ```typescript
+   try {
+     await CapgoBrightness.setBrightness({ brightness: 0.8 });
+   } catch (error) {
+     console.error('Failed to set brightness:', error);
+   }
+   ```
+
+## Platform Notes
+
+### iOS
+- Brightness changes persist until the device is locked
+- Only app-specific brightness is supported
+- Uses `UIScreen.main.brightness` API
+
+### Android
+- App-specific brightness only applies to the current activity
+- System-wide brightness requires WRITE_SETTINGS permission
+- Supports automatic brightness mode toggle
+- Uses WindowManager for app brightness, Settings.System for system brightness
+
+### Web
+- Limited support depending on browser capabilities
+- May require user interaction for some browsers
+
+## Requirements
+
+- **Capacitor 8.0.0** or higher

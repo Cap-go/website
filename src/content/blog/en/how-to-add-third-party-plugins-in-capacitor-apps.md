@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-18T14:04:24.780Z
-updated_at: 2025-10-31T17:55:22.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: https://assets.seobotai.com/capgo.app/67d977fb55129a55bd698926-1742306685762.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, third-party plugins, mobile app development, plugin installation, app updates
@@ -428,7 +428,7 @@ Here’s what Capgo brings to the table:
 
 Capgo integrates effortlessly into your Capacitor workflow, ensuring secure and continuous updates. It works with tools like **GitHub Actions, GitLab CI, and** [**Jenkins**](https://www.jenkins.io/), automating plugin updates and deployments to save time and reduce manual effort.
 
-For teams handling multiple plugins, the channel system supports beta testing before wider releases. Real-time analytics provide insights into update performance and error tracking. Capgo is compatible with **Capacitor 6 and 7**, supports custom API integrations, and offers self-hosted options for specialized needs.
+For teams handling multiple plugins, the channel system supports beta testing before wider releases. Real-time analytics provide insights into update performance and error tracking. Capgo is compatible with **Capacitor 8**, supports custom API integrations, and offers self-hosted options for specialized needs.
 
 ## Summary
 

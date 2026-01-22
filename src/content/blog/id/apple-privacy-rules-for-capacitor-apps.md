@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-31T01:48:03.832Z
-updated_at: 2025-12-31T01:19:38.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e9dc69283d21cbd67b72cf-1743385695606.jpg
 head_image_alt: Pengembangan Mobile
@@ -75,7 +75,7 @@ Pelajari cara menerapkan aturan privasi Apple dalam aplikasi Capacitor Anda deng
 Sebelum Anda memulai, pastikan hal berikut:
 
 -   Anda memiliki **Xcode 15 atau lebih baru** untuk dukungan manifes privasi.
--   Capacitor 6 atau 7 telah terinstal.
+-   Capacitor 8 telah terinstal.
 -   Target penerapan iOS diatur ke **iOS 14.5 atau lebih baru**.
 -   Aplikasi Anda menyertakan file `Info.plist` yang dikonfigurasi dengan benar.
 -   Anda memiliki **akun Apple Developer** dengan sertifikat yang valid.

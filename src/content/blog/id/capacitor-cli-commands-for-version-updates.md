@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-05-11T21:28:20.329Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682028f45e3fe4823b5e5a52-1746998980056.jpg
 head_image_alt: Pengembangan Seluler
@@ -211,7 +211,7 @@ Memulai dengan Capgo sangatlah mudah. Anda dapat memulainya dengan perintah sede
 npx @capgo/cli init
 ```
 
-Fitur ini menyederhanakan proses pembaruan, menjaga aplikasi Anda tetap terbaru tanpa penundaan siklus review tradisional. Capgo kompatibel dengan kedua versi Capacitor 6 dan 7, menjadikannya pilihan fleksibel untuk pengaturan Anda yang sudah ada.
+Fitur ini menyederhanakan proses pembaruan, menjaga aplikasi Anda tetap terbaru tanpa penundaan siklus review tradisional. Capgo kompatibel dengan kedua versi Capacitor 8, menjadikannya pilihan fleksibel untuk pengaturan Anda yang sudah ada.
 
 | **Fitur** | **Deskripsi** | **Manfaat** |
 | --- | --- | --- |

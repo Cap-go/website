@@ -1,17 +1,193 @@
 ---
-title: Log
-description: Pelajari cara menggunakan halaman log
+title: "Log"
+description: "Pahami dan gunakan log aplikasi Capgo untuk diagnostik dan melacak aksi perangkat Anda dengan pembaruan."
 sidebar:
   order: 8
 locale: id
 ---
 
-## Tampilkan semua log
-Pertama, mari kita lihat halaman log. Anda dapat mengaksesnya dengan [mengklik aplikasi Anda](/docs/webapp/main-page) dan kemudian [mengklik tab pembaruan](/docs/webapp/main-app-page)
-Dari sana Anda akan melihat halaman seperti ini:
+## Memahami Log Aplikasi
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/logs.webp" alt="show logs" /><figcaption></figcaption></figure>
+Halaman Log menyediakan riwayat detail dari event pembaruan dan informasi diagnostik untuk aplikasi Anda. Ini penting untuk memantau proses pembaruan, menyelesaikan masalah, dan memahami bagaimana perangkat Anda berinteraksi dengan Capgo. Anda dapat mengaksesnya dengan [mengklik aplikasi Anda](/docs/webapp/main-page) dan kemudian [mengklik tab "Log" (sebelumnya disebut "pembaruan" di beberapa screenshot atau dokumentasi lama)](/docs/webapp/main-app-page).
 
-## Mendapatkan detail lebih lanjut tentang log
+Dari sana Anda akan melihat halaman seperti ini, menampilkan daftar entri log:
 
-Jika Anda mengklik sebuah log, itu akan membawa Anda ke [halaman perangkat](/docs/webapp/devices/)
+<figure><img style="margin-left: auto; margin-right: auto" src="/logs.webp" alt="Gambaran halaman log menunjukkan antarmuka utama" /><figcaption>Gambaran Halaman Log</figcaption></figure>
+
+Antarmuka halaman log mencakup:
+1. **Tab Log** - Tab navigasi untuk mengakses tampilan log
+2. **Tombol Muat Ulang** - Menyegarkan daftar log dengan data terbaru
+3. **Filter Rentang Waktu & Aksi** - Filter log berdasarkan rentang tanggal dan tipe aksi (lihat bagian di bawah)
+
+Setiap baris menunjukkan:
+- **Timestamp** (UTC)
+- **ID Perangkat**
+- **Kode aksi** (apa yang terjadi)
+- **Nama versi** (bundle atau `builtin`)
+
+Klik baris untuk melompat ke halaman detail perangkat untuk riwayat lengkap.
+
+### Filter berdasarkan Rentang Tanggal
+
+Anda dapat memfilter log berdasarkan periode waktu tertentu menggunakan pemilih tanggal:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/logs_date_range.webp" alt="Pemilih rentang tanggal untuk memfilter log" /><figcaption>Filter Rentang Tanggal</figcaption></figure>
+
+1. **Preset Cepat** - Pilih rentang waktu umum: 1 jam, 3 jam, 6 jam, atau 12 jam terakhir
+2. **Waktu Mulai** - Atur waktu mulai kustom untuk rentang
+3. **Waktu Selesai** - Atur waktu selesai kustom untuk rentang
+4. **Kalender** - Pilih tanggal tertentu menggunakan tampilan kalender
+
+Klik "Pilih" untuk menerapkan rentang tanggal yang dipilih, atau "Batal" untuk menutup pemilih.
+
+### Filter berdasarkan Tipe Aksi
+
+Dropdown Aksi memungkinkan Anda memfilter log berdasarkan tipe event tertentu:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/logs_filters.webp" alt="Dropdown filter aksi untuk memfilter log berdasarkan tipe event" /><figcaption>Filter Aksi</figcaption></figure>
+
+Filter aksi yang tersedia meliputi:
+- **Heartbeat perangkat** - Pemeriksaan kesehatan periodik dari perangkat
+- **Penghapusan versi diminta** - Ketika versi bundle dihapus
+- **Reset ke versi default** - Ketika perangkat kembali ke bundle bawaan
+- **Versi berhasil diinstal** - Instalasi bundle berhasil
+- **Versi baru dikirim ke perangkat** - Ketika Capgo mengirim pembaruan ke perangkat
+- **Instalasi versi gagal** - Ketika instalasi bundle gagal
+
+Gunakan kotak pencarian di atas untuk menemukan tipe aksi tertentu dengan cepat. Anda dapat memilih beberapa aksi untuk menampilkan log yang cocok dengan salah satu tipe yang dipilih.
+
+### Cuplikan log contoh (data palsu)
+
+| Waktu (UTC) | ID Perangkat | Aksi | Versi | Apa artinya |
+|-------------|--------------|------|-------|-------------|
+| 2025-01-14 10:00:01 | `A1B2C3` | `get` | 2.4.1 | Perangkat bertanya ke Capgo apakah pembaruan tersedia |
+| 2025-01-14 10:00:03 | `A1B2C3` | `download_manifest_start` | 2.4.1 | Pengunduhan manifest dimulai; SDK akan mengunduh file |
+| 2025-01-14 10:00:07 | `A1B2C3` | `download_40` | 2.4.1 | Pengunduhan bundle 40% selesai |
+| 2025-01-14 10:00:12 | `A1B2C3` | `download_zip_complete` | 2.4.1 | Pengunduhan zip selesai |
+| 2025-01-14 10:00:13 | `A1B2C3` | `set` | 2.4.1 | Bundle terinstal dan ditandai untuk dijalankan berikutnya |
+| 2025-01-14 10:05:00 | `B9C8D7` | `disableAutoUpdateToMajor` | 1.9.0 | Kebijakan channel memblokir lompatan ke 2.x |
+| 2025-01-14 10:05:05 | `B9C8D7` | `rateLimited` | builtin | Perangkat mencapai batas permintaan; SDK menunggu sampai restart |
+
+## Skenario Log Contoh
+
+Untuk membantu Anda memahami apa yang disampaikan log, berikut adalah urutan contoh yang menunjukkan perjalanan pembaruan perangkat nyata:
+
+### Alur Pembaruan Sukses
+
+Ini adalah tampilan pembaruan yang sehat di log Anda:
+
+| Waktu | ID Perangkat | Aksi | Versi | Artinya |
+|-------|--------------|------|-------|---------|
+| 10:00:01 | `a1b2c3d4` | `get` | 1.2.0 | Perangkat memeriksa pembaruan dan menerima info versi 1.2.0 |
+| 10:00:02 | `a1b2c3d4` | `download_10` | 1.2.0 | Pengunduhan dimulai, 10% selesai |
+| 10:00:03 | `a1b2c3d4` | `download_50` | 1.2.0 | Pengunduhan di 50% |
+| 10:00:05 | `a1b2c3d4` | `download_complete` | 1.2.0 | Pengunduhan berhasil selesai |
+| 10:00:06 | `a1b2c3d4` | `set` | 1.2.0 | Bundle terinstal dan diaktifkan |
+
+### Perangkat Sudah Terbaru
+
+Ketika perangkat memeriksa tapi sudah memiliki versi terbaru:
+
+| Waktu | ID Perangkat | Aksi | Versi | Artinya |
+|-------|--------------|------|-------|---------|
+| 14:30:00 | `e5f6g7h8` | `noNew` | 1.2.0 | Perangkat sudah di versi terbaru, tidak perlu pembaruan |
+
+### Pembaruan Gagal dengan Rollback
+
+Ketika pembaruan gagal dan perangkat kembali:
+
+| Waktu | ID Perangkat | Aksi | Versi | Artinya |
+|-------|--------------|------|-------|---------|
+| 11:15:00 | `i9j0k1l2` | `get` | 1.3.0 | Perangkat menerima info pembaruan |
+| 11:15:02 | `i9j0k1l2` | `download_complete` | 1.3.0 | Pengunduhan selesai |
+| 11:15:03 | `i9j0k1l2` | `set` | 1.3.0 | Bundle ditetapkan |
+| 11:15:10 | `i9j0k1l2` | `update_fail` | 1.3.0 | App crash atau `notifyAppReady()` tidak dipanggil - rollback dipicu |
+| 11:15:11 | `i9j0k1l2` | `reset` | builtin | Perangkat kembali ke versi bawaan |
+
+**Tindakan diperlukan**: Periksa apakah app Anda memanggil `notifyAppReady()` setelah inisialisasi berhasil. Lihat [dokumentasi plugin](/docs/plugin/api/#notifyappready) untuk detail.
+
+### Kegagalan Pengunduhan
+
+Ketika masalah jaringan mencegah pengunduhan:
+
+| Waktu | ID Perangkat | Aksi | Versi | Artinya |
+|-------|--------------|------|-------|---------|
+| 09:45:00 | `m3n4o5p6` | `get` | 1.2.0 | Perangkat menerima info pembaruan |
+| 09:45:01 | `m3n4o5p6` | `download_30` | 1.2.0 | Pengunduhan dimulai tapi... |
+| 09:45:15 | `m3n4o5p6` | `download_fail` | 1.2.0 | Pengunduhan gagal (timeout jaringan, koneksi terputus, dll.) |
+
+**Tindakan diperlukan**: Perangkat akan mencoba lagi secara otomatis saat app diluncurkan berikutnya. Tidak perlu tindakan kecuali ini sering terjadi.
+
+### Batas Plan Tercapai
+
+Ketika akun Anda mencapai batas perangkat:
+
+| Waktu | ID Perangkat | Aksi | Versi | Artinya |
+|-------|--------------|------|-------|---------|
+| 16:00:00 | `q7r8s9t0` | `needPlanUpgrade` | - | Perangkat ini tidak akan menerima pembaruan sampai Anda upgrade atau siklus tagihan reset |
+
+**Tindakan diperlukan**: [Upgrade plan Anda](/docs/webapp/settings/) atau tunggu siklus tagihan berikutnya.
+
+### Konfigurasi Channel Memblokir Pembaruan
+
+Ketika pengaturan channel mencegah pembaruan:
+
+| Waktu | ID Perangkat | Aksi | Versi | Artinya |
+|-------|--------------|------|-------|---------|
+| 12:00:00 | `u1v2w3x4` | `disableAutoUpdateToMajor` | 2.0.0 | Perangkat di v1.x tidak bisa auto-update ke v2.x (lompatan versi mayor diblokir) |
+| 12:05:00 | `y5z6a7b8` | `disableEmulator` | 1.2.0 | Emulator terdeteksi, dan channel memblokir emulator |
+| 12:10:00 | `c9d0e1f2` | `disableDevBuild` | 1.2.0 | Dev build terdeteksi, dan channel memblokir dev build |
+
+**Tindakan diperlukan**: Ini adalah perlindungan yang disengaja. Jika Anda ingin mengizinkan pembaruan ini, ubah [pengaturan channel](/docs/webapp/channels/) Anda.
+
+## Kode Log (enum backend Capgo)
+
+Kode-kode ini berasal dari enum `stats_action` yang digunakan oleh API dashboard (`capgo/src/types/supabase.types.ts`). Jika Anda melihat kode baru di UI, itu dipancarkan oleh SDK atau backend dan divalidasi terhadap daftar ini.
+
+**Happy path & lifecycle**
+
+| Kode | Arti |
+|------|------|
+| `get` | Perangkat bertanya ke Capgo untuk manifest channel saat ini |
+| `download_manifest_start`, `download_manifest_complete` | Pengunduhan manifest dimulai / selesai (untuk bundle delta atau multi-file) |
+| `download_zip_start`, `download_zip_complete` | Pengunduhan arsip zip dimulai / selesai |
+| `download_10` … `download_90` | Milestone progres pengunduhan |
+| `download_complete` | Seluruh bundle terunduh |
+| `set` | Bundle disiapkan untuk peluncuran berikutnya |
+| `reset` | Perangkat kembali ke bundle bawaan |
+| `delete` | Bundle dihapus dari penyimpanan lokal |
+| `uninstall` | Uninstall app terdeteksi |
+| `app_moved_to_foreground`, `app_moved_to_background` | Event lifecycle app yang dicatat oleh SDK |
+| `ping` | Pemeriksaan kesehatan/heartbeat dari perangkat |
+| `setChannel`, `getChannel` | Channel ditimpa atau diambil via panggilan SDK |
+
+**Blokir konfigurasi atau kebijakan**
+
+| Kode | Mengapa pembaruan diblokir |
+|------|----------------------------|
+| `disableAutoUpdate`, `disableAutoUpdateToMajor`, `disableAutoUpdateToMinor`, `disableAutoUpdateToPatch`, `disableAutoUpdateMetadata`, `disableAutoUpdateUnderNative` | Strategi channel melarang lompatan semver ini |
+| `disablePlatformIos`, `disablePlatformAndroid` | Platform dinonaktifkan di channel |
+| `disableDevBuild`, `disableEmulator` | Dev build atau emulator tidak diizinkan |
+| `cannotUpdateViaPrivateChannel`, `NoChannelOrOverride`, `channelMisconfigured` | Pemilihan channel atau override gagal |
+| `missingBundle`, `cannotGetBundle` | Manifest merujuk ke bundle yang tidak bisa dilayani Capgo |
+| `needPlanUpgrade` | Organisasi mencapai batas plan/perangkat |
+| `rateLimited` | Terlalu banyak permintaan; SDK membatasi sampai restart |
+| `blocked_by_server_url`, `backend_refusal`, `InvalidIp` | Aturan sisi server memblokir permintaan |
+
+**Kegagalan pengunduhan / integritas / instalasi**
+
+| Kode | Arti |
+|------|------|
+| `download_fail` | Pengunduhan bundle gagal (error jaringan atau respons) |
+| `download_manifest_file_fail`, `download_manifest_checksum_fail`, `download_manifest_brotli_fail` | File manifest tidak bisa diambil atau divalidasi |
+| `checksum_fail`, `checksum_required` | Pemeriksaan integritas gagal atau checksum hilang |
+| `unzip_fail`, `directory_path_fail`, `canonical_path_fail`, `windows_path_fail` | Validasi file system atau unzip gagal |
+| `decrypt_fail` | Dekripsi gagal (bundle terenkripsi) |
+| `update_fail` | Bundle terinstal tapi app tidak pernah memanggil `notifyAppReady()`; rollback dipicu |
+| `download_zip_*` tanpa `set` berikutnya | Pengunduhan selesai tapi fase instalasi tidak pernah selesai |
+
+➡️ Butuh panduan lebih dalam per kode? Lihat **[Referensi Lengkap Kode Log dan Panduan Debugging](/docs/plugins/updater/debugging/#understanding-cloud-logs)**.
+
+## Mendapatkan Detail Lebih Lanjut tentang Log
+
+Jika Anda mengklik entri log tertentu, biasanya akan membawa Anda ke [halaman perangkat](/docs/webapp/devices/). Ini memungkinkan Anda melihat riwayat lengkap untuk perangkat tertentu, yang sangat membantu untuk mendiagnosis masalah khusus perangkat atau memahami perjalanan pembaruannya.

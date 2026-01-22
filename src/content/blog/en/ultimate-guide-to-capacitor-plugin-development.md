@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-25T06:22:55.260Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6832a665d3b96619818090ef-1748154227922.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, mobile apps, plugin development, iOS, Android, JavaScript, web technologies, security, performance, testing
@@ -342,7 +342,7 @@ These features make Capgo a powerful tool for developers looking to streamline t
 
 ### Adding Capgo to Your Plugin Workflow
 
-Integrating Capgo into your Capacitor project is straightforward. The platform supports Capacitor 6 and 7, as well as standard CI/CD tools. Once the SDK is added, updates can be deployed with a single CLI command. Capgo also allows channel-based distribution, enabling you to target specific user groups - like beta testers, premium subscribers, or users in specific regions. This feature is perfect for testing updates on a smaller scale before rolling them out to everyone.
+Integrating Capgo into your Capacitor project is straightforward. The platform supports Capacitor 8, as well as standard CI/CD tools. Once the SDK is added, updates can be deployed with a single CLI command. Capgo also allows channel-based distribution, enabling you to target specific user groups - like beta testers, premium subscribers, or users in specific regions. This feature is perfect for testing updates on a smaller scale before rolling them out to everyone.
 
 Capgo also includes automated rollback capabilities. If an update causes issues, you can revert to the previous version instantly, bypassing app store delays. NASA's OSIRIS-REx team highlighted this feature when they said:
 
@@ -365,7 +365,7 @@ Here’s a quick comparison:
 | **Status** | Active | Shutting down 2026 | Discontinued 2024 |
 | **Pricing** | $12–$249/month | $5,000+/year | Free (discontinued) |
 | **Encryption** | End-to-end | Code signing only | Basic |
-| **Platform Support** | Capacitor 6 & 7 | Ionic/Capacitor | React Native |
+| **Platform Support** | Capacitor 8 | Ionic/Capacitor | React Native |
 
 Capgo’s **open source model** is another major advantage. Being fully open source eliminates vendor lock-in and provides transparency into how updates are handled [\[23\]](https://capgo.app). For teams using agile development, speed and reliability are critical. As Rodrigo Mantica noted:
 

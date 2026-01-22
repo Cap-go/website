@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-05-14T05:13:56.152Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68240bea59ff61289922287e-1747199824736.jpg
 head_image_alt: Développement Mobile
@@ -47,7 +47,7 @@ next_blog: ''
 
 | Nom du plugin | Version Capacitor | Fonctionnalités | Idéal pour |
 | --- | --- | --- | --- |
-| `@aparajita/capacitor-biometric-auth` | Capacitor 7 | Biométrie native, identifiants de l'appareil | Nouveaux projets utilisant Capacitor 7 |
+| `@aparajita/capacitor-biometric-auth` | Capacitor 8 | Biométrie native, identifiants de l'appareil | Nouveaux projets utilisant Capacitor 8 |
 | `capacitor-native-biometric` | Capacitor 3, 4 | Stockage sécurisé des identifiants, Keychain/Keystore | Gestion des identifiants |
 | Toutes versions | Support biométrique et identifiants de l'appareil | Options d'authentification flexibles |
 
@@ -73,7 +73,7 @@ Avant de plonger dans l'implémentation, assurez-vous que les outils et dépenda
 
 Choisissez un [plugin biométrique](https://capgo.app/plugins/capacitor-native-biometric/) selon votre version de Capacitor :
 
--   **@aparajita/capacitor-biometric-auth** pour Capacitor 7
+-   **@aparajita/capacitor-biometric-auth** pour Capacitor 8
 -   **capacitor-native-biometric** pour Capacitor 3 et 4  
 
 ### Étapes de configuration Android
@@ -140,7 +140,7 @@ Lors du choix d'un plugin d'authentification biométrique pour votre application
 
 | Nom du plugin | Version Capacitor | Fonctionnalités clés | Idéal pour |
 | --- | --- | --- | --- |
-| @aparajita/capacitor-biometric-auth | Capacitor 7 | Biométrie native, identifiants de l'appareil, API complète | Nouveaux projets démarrant avec Capacitor 7 |
+| @aparajita/capacitor-biometric-auth | Capacitor 8 | Biométrie native, identifiants de l'appareil, API complète | Nouveaux projets démarrant avec Capacitor 8 |
 | capacitor-native-biometric | Capacitor 3, 4 | Stockage sécurisé des identifiants, intégration Keychain/Keystore | Projets établis nécessitant la gestion des identifiants |
 | Toutes versions | Authentification biométrique et par identifiants de l'appareil, API claire | Projets nécessitant des options d'authentification flexibles |
 

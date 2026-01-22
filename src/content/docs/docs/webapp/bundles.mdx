@@ -1,6 +1,6 @@
 ---
 title: "Bundles"
-description: "Learn how to manage bundles in Capgo, What is a bundle how to manage it, there is mulple things you can do this them, they are the most important part of Capgo"
+description: "Learn how to manage bundles in Capgo. A bundle is a specific version of your application's code and assets. Discover how to view, link to channels, download, and delete bundles."
 sidebar:
   order: 7
 ---
@@ -11,9 +11,18 @@ In Capgo, a bundle represents a specific version of your application's code and 
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/bundles.webp" alt="bundle list" /><figcaption></figcaption></figure>
 
+The bundles list displays:
+- **Name**: The bundle version number
+- **Created at**: When the bundle was uploaded
+- **Channel**: Which channel (if any) the bundle is currently linked to
+- **Size**: The bundle file size
+- **Action**: Quick actions including link to channel (gear icon) and delete (trash icon)
+
+You can use the **Reload** button to refresh the list, **+ Add** to upload a new bundle, and **Filters** to narrow down the displayed bundles. A search box allows you to find bundles by name.
+
 ## Delete a bundle
 
-They are two ways a bundle can be deleted:
+There are two ways a bundle can be deleted:
 
  - Normally
  - Unsafely
@@ -38,29 +47,46 @@ Once you see the list of all bundles click on the one you want to manage. After 
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/bundle-info.webp" alt="bundle info" /><figcaption></figcaption></figure>
 
-Let's go through all of the elements on this page.
+The bundle detail page has three tabs:
 
----
+1. **Information**: Shows all bundle metadata and properties
+2. **Dependencies**: Lists the dependencies included in this bundle
+3. **History**: Shows the history of changes for this bundle
 
-First you can see a `Channel`. This lets you know which channel this bundle is for. You can change the channel by clicking on it.
-Once you click on it you should see something like this:
+### Bundle Information
+
+The Information tab displays the following details:
+
+- **Bundle number**: The version identifier (e.g., 12.87.1)
+- **ID**: The unique internal identifier for this bundle
+- **Created at**: When the bundle was first uploaded
+- **Updated at**: When the bundle was last modified
+- **Checksum**: The bundle's integrity hash (click to copy)
+- **Channel**: The channel this bundle is linked to (click to open channel or change it)
+- **Encryption**: Whether the bundle is encrypted
+- **CLI version**: The version of Capgo CLI used to upload this bundle
+- **Zip app bundle**: The compressed bundle size (click to download)
+- **Manifest**: The manifest file size
+- **Status**: Whether the bundle is Active or Inactive (click trash icon to delete)
+
+### Linking a bundle to a channel
+
+Click on the gear icon next to the Channel row or in the Action column to open the channel linking modal:
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/bundle-change.webp" alt="bundle change" /><figcaption></figcaption></figure>
 
+The modal provides:
+1. **Search channel**: Filter available channels by name
+2. **Current bundle**: Shows the bundle version being linked
+3. **Available channels**: List of all channels with their details (ID, visibility, platforms, creation date). Channels marked as "current" indicate where this bundle is already linked. Public channels show a link icon.
+4. **Set bundle to channel**: Confirms the selection and assigns this bundle to the selected channel
+
 **Set bundle to channel:** Assigns this bundle as the active version for a chosen channel. Devices subscribed to that channel will then receive this bundle.
-**Open channel:** Navigates you to the dedicated page for the channel currently associated with this bundle, where you can manage channel-specific settings.
-**Unlink bundle from channel:** Removes the association between this bundle and its current channel. This means devices on that channel will no longer receive this specific bundle (unless it's re-linked or another bundle is set for that channel).
 
-:::warning
-The `Unlink bundle from channel` action only affects the association with the channel currently displayed for this bundle (e.g., "dev" in the screenshot). If this bundle is also active on other channels, those links will remain. You'll need to manage unlinking from other channels separately, for example, by navigating to the respective channel's configuration page.
-:::
+To open a channel's dedicated page, click on the channel name link in the Channel row.
 
----
+To unlink a bundle from a channel, navigate to the channel's configuration page.
 
-Next, you can see the `Size`. If you click on it you will be able to download this bundle.
-It should look something like this:
-<figure><img style="margin-left: auto; margin-right: auto" src="/download-bundle.webp" alt="download bundle" /><figcaption></figcaption></figure>
+### Downloading a bundle
 
----
-
-Finally, the **Devices** section lists all devices that are currently using this specific bundle version. This can be helpful for understanding the rollout status and impact of this bundle.
+To download a bundle, click on the **Zip app bundle** size value in the Information tab. A confirmation dialog will appear, and upon confirmation, the bundle will be downloaded directly to your device.

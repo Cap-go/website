@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-12T04:31:38.871Z
-updated_at: 2025-11-13T20:57:27.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68214ae55e3fe4823b5f6cab-1747024366276.jpg
 head_image_alt: Software Development
 keywords: token rotation, CI/CD security, refresh tokens, credential management, secure deployments
@@ -221,7 +221,7 @@ Since 2022, the CI/CD security landscape has seen significant advancements, and 
 
 > "We are currently giving a try to @Capgo since Appcenter stopped live updates support on hybrid apps and @AppFlow is way too expensive." - Simon Flack[\[1\]](https://capgo.app)
 
-Capgo's affordable OTA update plans starting at $12/month offer long-term savings, with an estimated $26,100 saved over five years[\[1\]](https://capgo.app). For teams needing automated CI/CD to build native apps, an optional one-time setup service is available for $2,600. Its support for Capacitor 6 & 7, along with features for flexible organization management, makes it an excellent option for small teams and large enterprises alike, especially those prioritizing robust security measures.
+Capgo's affordable OTA update plans starting at $12/month offer long-term savings, with an estimated $26,100 saved over five years[\[1\]](https://capgo.app). For teams needing automated CI/CD to build native apps, an optional one-time setup service is available for $2,600. Its support for Capacitor 8, along with features for flexible organization management, makes it an excellent option for small teams and large enterprises alike, especially those prioritizing robust security measures.
 
 ## Conclusion: Improving CI/CD with Token Rotation
 

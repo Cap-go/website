@@ -1,30 +1,40 @@
 ---
 title: Dispositivi
-description: How to use Device page
+description: "Una guida completa sull'utilizzo della pagina dispositivi per gestire e configurare efficacemente i tuoi dispositivi, incluse le opzioni di filtro e le impostazioni di configurazione dettagliate per i singoli dispositivi."
 sidebar:
   order: 7
 locale: it
 ---
 
+:::note[Conservazione dei Dati]
+I dati dei dispositivi vengono conservati per **90 giorni** dall'ultima attività del dispositivo. I dispositivi che non si sono connessi a Capgo entro questo periodo verranno automaticamente rimossi dall'elenco. I dispositivi attivi vengono continuamente tracciati mentre verificano gli aggiornamenti.
+:::
+
 ## Mostra l'elenco di tutti i dispositivi
-Prima di tutto, diamo un'occhiata alla pagina dei dispositivi. Puoi accedervi [cliccando sulla tua app](/docs/webapp/main-page) e poi [cliccando sulla scheda dispositivi](/docs/webapp/main-app-page)
+Prima di tutto, diamo un'occhiata alla pagina dei dispositivi. Puoi accedervi [cliccando sulla tua app](/docs/webapp/main-page) e poi [cliccando sulla scheda dispositivi](/docs/webapp/main-app-page).
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/devices.webp" alt="devices list" /><figcaption></figcaption></figure>
+<figure><img style="margin-left: auto; margin-right: auto" src="/devices.webp" alt="elenco dispositivi" /><figcaption></figcaption></figure>
 
-## Mostra solo i dispositivi sviluppatore
-Potresti voler mostrare solo i dispositivi sovrascritti (Dispositivi che hanno un [canale personalizzato](/docs/plugin/api/#setchannel) o una versione personalizzata)
-Per farlo, clicca su `Filtri` e poi su `Override`. Dovrebbe apparire qualcosa del genere:
-
-<figure><img style="margin-left: auto; margin-right: auto" src="/overwrite-filter.webp" alt="filter devices" /><figcaption></figcaption></figure>
+1. **Scheda Dispositivi** - Clicca questa scheda nella barra di navigazione per accedere alla pagina dei dispositivi
+2. **Filtri** - Clicca per filtrare i dispositivi per:
+   - **Override** - Mostra solo i dispositivi che hanno un [canale personalizzato](/docs/plugin/api/#setchannel) o una versione personalizzata
+   - **ID Personalizzato** - Mostra solo i dispositivi con un identificatore personalizzato impostato
 
 ## Configurazione di un dispositivo
 
 Per configurare un dispositivo specifico, cliccalo nella tabella e dovresti vedere qualcosa del genere:
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/device-specific.webp" alt="show one device" /><figcaption></figcaption></figure>
+<figure><img style="margin-left: auto; margin-right: auto" src="/device-specific.webp" alt="mostra un dispositivo" /><figcaption></figcaption></figure>
 
-Prima il `Custom ID`. Questo non è realmente così utile e al momento non fa nulla. Puoi ignorarlo
+1. **Information** - Visualizza i dettagli del dispositivo inclusi ID Dispositivo, Ultimo aggiornamento, Piattaforma, Versione plugin, Versione, Versione builtin, Versione OS, e se è un'app di Produzione
+2. **Deployments** - Visualizza lo storico dei deployment per questo dispositivo
+3. **Logs** - Visualizza i log associati a questo dispositivo
+4. **Override canale** - Sostituisce il canale per questo dispositivo specifico. Se impostato, questo dispositivo non utilizzerà il canale pubblico (predefinito) e riceverà solo aggiornamenti dal canale selezionato
 
-Poi la versione forzata. Se questa è impostata, questo dispositivo riceverà **SEMPRE** questa versione. Ha la precedenza sul canale
+### ID Personalizzato
 
-Infine il canale personalizzato. Se questo è impostato, questo dispositivo non terrà conto del canale pubblico (predefinito) e userà solo questo
+L'`ID Personalizzato` è un campo molto utile che ti aiuta a collegare il dispositivo a un ID che puoi riconoscere per i tuoi utenti.
+
+Usalo per identificare facilmente quale dispositivo appartiene a quale utente.
+
+L'ID personalizzato può essere impostato solo dal dispositivo stesso usando `CapacitorUpdater.setCustomId({ customId: user });`

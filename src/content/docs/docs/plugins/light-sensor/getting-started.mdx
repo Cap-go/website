@@ -1,0 +1,291 @@
+---
+title: Getting Started
+description: Learn how to install and use the Light Sensor plugin to read ambient light levels in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-light-sensor" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Android Configuration
+
+For high sampling rates (below 200ms) on Android 12+, add the HIGH_SAMPLING_RATE_SENSORS permission to your `AndroidManifest.xml`:
+
+```xml
+<uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS" />
+```
+
+## Usage
+
+Import the plugin and use its methods to read light sensor data:
+
+```typescript
+import { LightSensor } from '@capgo/capacitor-light-sensor';
+
+// Check if sensor is available
+const checkAvailable = async () => {
+  const { available } = await LightSensor.isAvailable();
+  console.log('Light sensor available:', available);
+  return available;
+};
+
+// Start listening to light changes
+const startListening = async () => {
+  // Add listener first
+  await LightSensor.addListener('lightSensorChange', (data) => {
+    console.log('Illuminance:', data.illuminance, 'lux');
+    console.log('Timestamp:', data.timestamp);
+  });
+
+  // Start the sensor
+  await LightSensor.start({ updateInterval: 500 });
+};
+
+// Stop listening
+const stopListening = async () => {
+  await LightSensor.stop();
+  await LightSensor.removeAllListeners();
+};
+```
+
+## API Reference
+
+### isAvailable()
+
+Check if the light sensor is available on the current device.
+
+```typescript
+const { available } = await LightSensor.isAvailable();
+// Returns: { available: boolean }
+// Note: Always returns false on iOS (light sensor API not available)
+```
+
+### start(options?)
+
+Start listening to light sensor updates.
+
+```typescript
+interface StartOptions {
+  updateInterval?: number; // milliseconds, default: 200
+}
+
+await LightSensor.start({ updateInterval: 500 });
+```
+
+### stop()
+
+Stop listening to light sensor updates.
+
+```typescript
+await LightSensor.stop();
+```
+
+### addListener(eventName, callback)
+
+Add a listener for light sensor change events.
+
+```typescript
+interface LightSensorMeasurement {
+  illuminance: number; // light level in lux
+  timestamp: number;   // seconds since epoch
+}
+
+const handle = await LightSensor.addListener('lightSensorChange', (data) => {
+  console.log('Light level:', data.illuminance, 'lux');
+});
+
+// To remove this specific listener later:
+handle.remove();
+```
+
+### removeAllListeners()
+
+Remove all listeners for light sensor events.
+
+```typescript
+await LightSensor.removeAllListeners();
+```
+
+### checkPermissions()
+
+Check permission status for high sampling rate sensors.
+
+```typescript
+const status = await LightSensor.checkPermissions();
+// Returns: { highSamplingRate: 'granted' | 'denied' | 'prompt' | 'prompt-with-rationale' }
+```
+
+### requestPermissions()
+
+Request permission for high sampling rate sensors.
+
+```typescript
+const status = await LightSensor.requestPermissions();
+```
+
+### getPluginVersion()
+
+Get the current plugin version.
+
+```typescript
+const { version } = await LightSensor.getPluginVersion();
+```
+
+## Complete Example
+
+```typescript
+import { LightSensor, LightSensorMeasurement } from '@capgo/capacitor-light-sensor';
+import type { PluginListenerHandle } from '@capacitor/core';
+
+export class LightSensorService {
+  private listener: PluginListenerHandle | null = null;
+  private isRunning = false;
+
+  async init(): Promise<boolean> {
+    const { available } = await LightSensor.isAvailable();
+    if (!available) {
+      console.warn('Light sensor not available on this device');
+      return false;
+    }
+    return true;
+  }
+
+  async start(
+    callback: (illuminance: number) => void,
+    intervalMs: number = 500
+  ) {
+    if (this.isRunning) return;
+
+    // Check for high sampling rate permission if needed
+    if (intervalMs < 200) {
+      const status = await LightSensor.checkPermissions();
+      if (status.highSamplingRate !== 'granted') {
+        await LightSensor.requestPermissions();
+      }
+    }
+
+    this.listener = await LightSensor.addListener(
+      'lightSensorChange',
+      (data: LightSensorMeasurement) => {
+        callback(data.illuminance);
+      }
+    );
+
+    await LightSensor.start({ updateInterval: intervalMs });
+    this.isRunning = true;
+  }
+
+  async stop() {
+    if (!this.isRunning) return;
+
+    await LightSensor.stop();
+
+    if (this.listener) {
+      this.listener.remove();
+      this.listener = null;
+    }
+
+    this.isRunning = false;
+  }
+
+  // Utility: Get light level description
+  getLightDescription(lux: number): string {
+    if (lux < 1) return 'Very dark';
+    if (lux < 50) return 'Dark';
+    if (lux < 200) return 'Dim';
+    if (lux < 400) return 'Normal indoor';
+    if (lux < 1000) return 'Bright indoor';
+    if (lux < 10000) return 'Overcast daylight';
+    if (lux < 25000) return 'Daylight';
+    return 'Direct sunlight';
+  }
+}
+
+// Usage in a component
+const lightService = new LightSensorService();
+
+async function setupLightSensor() {
+  const available = await lightService.init();
+
+  if (available) {
+    await lightService.start((illuminance) => {
+      const description = lightService.getLightDescription(illuminance);
+      console.log(`Light: ${illuminance} lux (${description})`);
+
+      // Example: Auto-adjust UI theme based on light
+      if (illuminance < 50) {
+        // Switch to dark theme
+      } else {
+        // Switch to light theme
+      }
+    });
+  }
+}
+
+// Cleanup when done
+async function cleanup() {
+  await lightService.stop();
+}
+```
+
+## Best Practices
+
+1. **Check availability first**
+   ```typescript
+   const { available } = await LightSensor.isAvailable();
+   if (!available) {
+     // Provide fallback behavior
+   }
+   ```
+
+2. **Stop when not needed**
+   Always stop the sensor when it's not in use to conserve battery:
+   ```typescript
+   // When component unmounts or app goes to background
+   await LightSensor.stop();
+   await LightSensor.removeAllListeners();
+   ```
+
+3. **Use appropriate intervals**
+   - For UI updates: 500ms - 1000ms is usually sufficient
+   - For games/real-time: 200ms
+   - Faster than 200ms requires HIGH_SAMPLING_RATE_SENSORS permission
+
+4. **Handle errors gracefully**
+   ```typescript
+   try {
+     await LightSensor.start({ updateInterval: 500 });
+   } catch (error) {
+     console.error('Failed to start light sensor:', error);
+   }
+   ```
+
+## Platform Notes
+
+### Android
+- Uses Android's TYPE_LIGHT sensor
+- Minimum interval of 200ms unless HIGH_SAMPLING_RATE_SENSORS permission is granted (Android 12+)
+- Returns illuminance in lux
+
+### iOS
+- **Not supported** - iOS does not expose the ambient light sensor API to third-party apps
+- `isAvailable()` always returns `false`
+
+### Web
+- Limited support depending on browser
+- Uses AmbientLightSensor API where available
+- Requires HTTPS and user permission
+
+## Requirements
+
+- **Capacitor 8.0.0** or higher

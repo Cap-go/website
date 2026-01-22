@@ -89,6 +89,15 @@ MAUは「月間アクティブユーザー」です。過去30日以内にサー
 
 また、Capgoはネイティブコード(AndroidのJava/KotlinやiOSのObjective-C/Swiftなど)の変更をサポートしていません。ネイティブコードを変更しようとすると、アップデート時にツールが警告を表示します。
 
+### Capgo経由でcapacitor.config.tsの変更を更新できますか?[](https://capgo.app/docs/faq/#can-i-update-capacitorconfigts-changes-via-capgo "Direct link to Can I update capacitor.config.ts changes via Capgo?")
+
+いいえ。`capacitor.config.ts`の変更はCapgoのライブアップデートで送信できません。Capacitor設定ファイルはネイティブビルド時に読み込まれ、ネイティブアプリのバイナリにコンパイルされます。つまり、`capacitor.config.ts`への変更（プラグイン設定、アプリID、サーバー設定、ネイティブプラグインオプションなど）は、App StoreまたはGoogle Playを通じて新しいネイティブリリースが必要です。
+
+Capgoは実行時にロードされるWebアセット（HTML、CSS、JavaScript）のみを更新できます。Capacitor設定を変更する必要がある場合は:
+1. ローカルで`capacitor.config.ts`を更新
+2. ネイティブアプリを再ビルド（`npx cap sync`の後にネイティブビルド）
+3. 新しいバイナリをアプリストアに提出
+
 ### Capgoはストアへの提出を代行しますか?
 
 現在、Capgoはアプリストアへの提出を代行するサポートは行っていません。将来的には追加する予定ですが、現時点では既存のプロセスを使用してアプリストアに提出する必要があります。

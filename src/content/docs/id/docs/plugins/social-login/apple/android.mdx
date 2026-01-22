@@ -5,8 +5,16 @@ description: Panduan ini memberikan panduan komprehensif tentang pengaturan Logi
 sidebar:
     order: 3
 ---
-import AndroidAppleLoginGraph from '@/components/AndroidAppleLoginGraph.astro'
+import MermaidGraph from '@/components/MermaidGraph.astro';
 import { Steps } from '@astrojs/starlight/components';
+
+export const appleLoginFlowGraph = `flowchart TD
+    A("await SocialLogin.login()") -->|Handled in the plugin|B(Generate the login URL)
+    B --> |Pass the link| C(Open the Chrome browser)
+    C --> D(Wait for the user to login)
+    D --> |Apple redirects to your backend|E(Handle the data returned from Apple)
+    E --> F(Redirect back to the app)
+    F --> G(Return to JS)`;
 
 Login Apple di Android agak rumit. Apple tidak memiliki dukungan resmi untuk `Sign in with Apple` di Android, jadi solusinya sedikit rumit.
 
@@ -19,7 +27,7 @@ Android saat ini menggunakan tab Chrome untuk menampilkan situs web OAuth2. Pend
 
 Mari saya gunakan diagram untuk menjelaskan alur di Android:
 
-<AndroidAppleLoginGraph />
+<MermaidGraph graph={appleLoginFlowGraph} ariaLabel="Apple Login flow diagram on Android" fullWidth={false} />
 
 Sekarang setelah Anda mengetahui tantangan dan alurnya, mari kita mulai konfigurasi.
 

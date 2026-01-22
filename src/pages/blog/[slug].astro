@@ -3,7 +3,7 @@ import Blog from '@/components/Blog.astro'
 import GetStarted from '@/components/GetStarted.astro'
 import { formatTime } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
-import { createNewsArticleLdJson, validateLdJson } from '@/lib/ldJson'
+import { createNewsArticleLdJson } from '@/lib/ldJson'
 import * as m from '@/paraglide/messages'
 import type { GetStaticPaths } from 'astro'
 import type { CollectionEntry } from 'astro:content'
@@ -128,18 +128,11 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
   authorUrl: entry.data.author_url,
   authorImage: entry.data.author_image_url,
   keywords: entry.data.keywords ? entry.data.keywords.split(',').map((k) => k.trim()) : undefined,
-  articleSection: entry.data.tag ? entry.data.tag.split(',').map((t) => t.trim()) : undefined,
+  articleSection: entry.data.tag ? entry.data.tag.split(',')[0]?.trim() : undefined,
   articleBody: striptags(entry.rendered?.html || ''),
   locale: Astro.locals.locale,
 })
 
-// Validate ldJSON in development
-if (import.meta.env.DEV) {
-  const validation = validateLdJson(content['ldJSON'])
-  if (!validation.isValid) {
-    console.warn('ldJSON validation errors:', validation.errors)
-  }
-}
 ---
 
 <Layout content={content}>

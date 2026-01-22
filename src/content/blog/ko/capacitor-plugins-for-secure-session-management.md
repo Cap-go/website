@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-05-16T12:14:04.681Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6827226c0209458b3ff58b06-1747397705731.jpg
 head_image_alt: 모바일 개발
@@ -60,7 +60,7 @@ next_blog: ''
 
 ### 성능 및 커뮤니티 지원
 
-2025년 5월 기준으로 이 플러그인은 GitHub에서 128개의 스타와 22개의 포크를 기록하며 Capacitor 생태계에서 확고한 평판을 얻었습니다. Capacitor 6+ 와 완벽하게 호환되어 개발자가 최신 프레임워크 기능을 활용하면서 안전한 스토리지를 구현할 수 있습니다.
+2025년 5월 기준으로 이 플러그인은 GitHub에서 128개의 스타와 22개의 포크를 기록하며 Capacitor 생태계에서 확고한 평판을 얻었습니다. Capacitor 8+ 와 완벽하게 호환되어 개발자가 최신 프레임워크 기능을 활용하면서 안전한 스토리지를 구현할 수 있습니다.
 
 ## 4\. Identity Vault
 

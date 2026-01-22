@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-11T21:28:20.329Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682028f45e3fe4823b5e5a52-1746998980056.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, CLI, app updates, mobile development, iOS, Android, migration, Capgo, plugins
@@ -207,7 +207,7 @@ Getting started with Capgo is straightforward. You can initialize it with a simp
 npx @capgo/cli init
 ```
 
-This feature streamlines the update process, keeping your app up-to-date without the delays of traditional review cycles. Capgo is compatible with both Capacitor 6 and 7, making it a flexible choice for your existing setup.
+This feature streamlines the update process, keeping your app up-to-date without the delays of traditional review cycles. Capgo is compatible with both Capacitor 8, making it a flexible choice for your existing setup.
 
 | **Feature** | **Description** | **Benefit** |
 | --- | --- | --- |

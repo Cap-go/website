@@ -3,12 +3,21 @@ import Layout from '@/layouts/Layout.astro'
 import Testimonials from '@/components/Testimonials.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import * as m from '@/paraglide/messages'
+import type { Database } from '@/services/supabase.types'
 import { createLdJsonGraph, createServiceLdJson, createProductLdJson } from '@/lib/ldJson'
 import HierarchyDashboardIllustration from '@/components/solutions/HierarchyDashboardIllustration.astro'
 import RolloutIllustration from '@/components/solutions/RolloutIllustration.astro'
 import SecurityIllustration from '@/components/solutions/SecurityIllustration.astro'
 
 const locale = Astro.locals.locale
+const config = Astro.locals.runtimeConfig
+
+let plansAll: Database['public']['Tables']['plans']['Row'][] = []
+const payg = plansAll.length ? plansAll.filter((p) => p.name === 'Enterprise')[0] : undefined
+
+// Fetch plans data
+const response = await fetch(`${config.public.baseApiUrl}/private/plans`)
+plansAll = await response.json()
 
 const title = [Astro.locals.runtimeConfig.public.brand, 'Enterprise'].join(' | ')
 const description = 'Enterprise-grade live updates for Capacitor apps. Built for teams that need advanced security, compliance, and dedicated support at scale.'
@@ -35,7 +44,7 @@ const enterpriseProduct = createProductLdJson(Astro.locals.runtimeConfig.public,
   sku: 'capgo-enterprise',
   offers: [
     {
-      price: '0',
+      price: payg?.price_m?.toString() || '0',
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock',
       priceValidUntil: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
@@ -97,7 +106,7 @@ const content = {
   title,
   description,
   image: `${baseUrl}/capgo_social.png`,
-  ldJSON: createLdJsonGraph(Astro.locals.runtimeConfig.public, enhancedEnterpriseProduct, {
+  ldJSON: createLdJsonGraph(Astro.locals.runtimeConfig.public, enhancedEnterpriseProduct as import('schema-dts').Thing, {
     includeOrganization: true,
     includeBreadcrumbs: true,
     breadcrumbs: [
@@ -110,11 +119,9 @@ const content = {
         url: enterpriseUrl,
       },
     ],
+    additionalEntities: [enterpriseService],
   }),
 }
-
-// Add the enterprise service as additional entity
-content.ldJSON['@graph'].push(enterpriseService)
 ---
 
 <Layout content={content}>
@@ -323,19 +330,19 @@ content.ldJSON['@graph'].push(enterpriseService)
               <p class="text-gray-300 mb-4">{m.solutions_enterprise_sol1_desc({}, { locale })}</p>
               <ul class="space-y-2">
                 <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <svg class="w-5 h-5 text-green-400 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
                   {m.solutions_enterprise_sol1_point1({}, { locale })}
                 </li>
                 <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <svg class="w-5 h-5 text-green-400 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
                   {m.solutions_enterprise_sol1_point2({}, { locale })}
                 </li>
                 <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <svg class="w-5 h-5 text-green-400 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
                   {m.solutions_enterprise_sol1_point3({}, { locale })}
@@ -370,19 +377,19 @@ content.ldJSON['@graph'].push(enterpriseService)
               <p class="text-gray-300 mb-4">{m.solutions_enterprise_sol2_desc({}, { locale })}</p>
               <ul class="space-y-2">
                 <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <svg class="w-5 h-5 text-green-400 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
                   {m.solutions_enterprise_sol2_point1({}, { locale })}
                 </li>
                 <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <svg class="w-5 h-5 text-green-400 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
                   {m.solutions_enterprise_sol2_point2({}, { locale })}
                 </li>
                 <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <svg class="w-5 h-5 text-green-400 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
                   {m.solutions_enterprise_sol2_point3({}, { locale })}
@@ -407,19 +414,19 @@ content.ldJSON['@graph'].push(enterpriseService)
               <p class="text-gray-300 mb-4">{m.solutions_enterprise_sol3_desc({}, { locale })}</p>
               <ul class="space-y-2">
                 <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <svg class="w-5 h-5 text-green-400 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
                   {m.solutions_enterprise_sol3_point1({}, { locale })}
                 </li>
                 <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <svg class="w-5 h-5 text-green-400 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
                   {m.solutions_enterprise_sol3_point2({}, { locale })}
                 </li>
                 <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <svg class="w-5 h-5 text-green-400 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
                   {m.solutions_enterprise_sol3_point3({}, { locale })}
@@ -897,7 +904,8 @@ content.ldJSON['@graph'].push(enterpriseService)
         <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <div class="relative inline-flex group" role="presentation">
             <div
-              class="absolute -inset-px rounded-xl opacity-70 duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200 transitiona-all animate-tilt bg-[#44BCFF] blur-lg"
+              class="absolute -inset-4 rounded-xl opacity-70 duration-1000 group-hover:-inset-5 group-hover:opacity-100 group-hover:duration-200 transition-all"
+              style="background: radial-gradient(ellipse at center, rgba(68, 188, 255, 0.6) 0%, rgba(68, 188, 255, 0.3) 40%, rgba(68, 188, 255, 0) 70%);"
             >
             </div>
             <a

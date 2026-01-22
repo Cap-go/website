@@ -33,6 +33,7 @@ const content = { title, description, ldJSON }
         {
           Array.from({ length: 15 }).map((_, i) => (
             <div
+              id={`${i}`}
               class="absolute w-2 h-2 bg-rose-500 rounded-full opacity-20 animate-pulse"
               style={{
                 top: `${Math.random() * 100}%`,
@@ -241,13 +242,13 @@ npx @capgo/cli bundle upload --channel native-1.5.2
           <div class="space-y-6">
             <!-- Version 2.0 -->
             <div class="flex items-center gap-4">
-              <div class="flex-shrink-0 w-32">
+              <div class="shrink-0 w-32">
                 <div class="px-4 py-2 text-center text-white bg-rose-600 rounded-lg">
                   <div class="text-sm font-medium">Native 2.0</div>
                 </div>
               </div>
               <div class="flex-1 h-1 bg-rose-500/50"></div>
-              <div class="flex-shrink-0 w-40">
+              <div class="shrink-0 w-40">
                 <div class="px-4 py-2 text-center text-white bg-gray-700 rounded-lg">
                   <div class="text-sm font-medium">native-2.0.0</div>
                   <div class="text-xs text-gray-400">Latest bundle</div>
@@ -257,13 +258,13 @@ npx @capgo/cli bundle upload --channel native-1.5.2
 
             <!-- Version 1.5 -->
             <div class="flex items-center gap-4">
-              <div class="flex-shrink-0 w-32">
+              <div class="shrink-0 w-32">
                 <div class="px-4 py-2 text-center text-white bg-amber-600 rounded-lg">
                   <div class="text-sm font-medium">Native 1.5</div>
                 </div>
               </div>
               <div class="flex-1 h-1 bg-amber-500/50"></div>
-              <div class="flex-shrink-0 w-40">
+              <div class="shrink-0 w-40">
                 <div class="px-4 py-2 text-center text-white bg-gray-700 rounded-lg">
                   <div class="text-sm font-medium">native-1.5.0</div>
                   <div class="text-xs text-gray-400">Latest bundle</div>
@@ -273,13 +274,13 @@ npx @capgo/cli bundle upload --channel native-1.5.2
 
             <!-- Version 1.4 -->
             <div class="flex items-center gap-4">
-              <div class="flex-shrink-0 w-32">
+              <div class="shrink-0 w-32">
                 <div class="px-4 py-2 text-center text-white bg-gray-600 rounded-lg">
                   <div class="text-sm font-medium">Native 1.4</div>
                 </div>
               </div>
               <div class="flex-1 h-1 bg-gray-500/50"></div>
-              <div class="flex-shrink-0 w-40">
+              <div class="shrink-0 w-40">
                 <div class="px-4 py-2 text-center text-gray-300 bg-gray-700 rounded-lg">
                   <div class="text-sm font-medium">native-1.4.0</div>
                   <div class="text-xs text-gray-500">No new updates</div>
@@ -298,7 +299,7 @@ npx @capgo/cli bundle upload --channel native-1.5.2
     <!-- CTA Section -->
     <section class="py-16 bg-gray-900 sm:py-20">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="relative px-8 py-16 overflow-hidden bg-gradient-to-r from-rose-600 to-rose-800 rounded-3xl sm:px-16">
+        <div class="relative px-8 py-16 overflow-hidden bg-linear-to-r from-rose-600 to-rose-800 rounded-3xl sm:px-16">
           <div aria-hidden="true" class="absolute inset-0">
             <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360">
               <path class="text-rose-500 text-opacity-40" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"></path>

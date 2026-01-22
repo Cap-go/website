@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-21T03:02:38.679Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67dcb1f883b63ee70fa08665-1742526177947.jpg
 head_image_alt: Sviluppo Mobile
@@ -79,7 +79,7 @@ Configura i permessi per una gestione sicura ed efficiente dei canali:
 | Developer | Accesso limitato | Distribuire e testare gli aggiornamenti |
 | Viewer | Sola lettura | Monitorare lo stato degli aggiornamenti |
 
-Assegna i ruoli al tuo team in base alle loro responsabilità. Capgo funziona perfettamente sia con Capacitor 6 che 7, assicurando di adattarsi a varie esigenze di progetto.
+Assegna i ruoli al tuo team in base alle loro responsabilità. Capgo funziona perfettamente con Capacitor 8, assicurando di adattarsi a varie esigenze di progetto.
 
 Per maggiore comodità, Capgo si integra con popolari strumenti CI/CD come [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/) e [Jenkins](https://www.jenkins.io/). Assicurati solo che il tuo sistema di build sia pronto per gestire i canali di aggiornamento.
 

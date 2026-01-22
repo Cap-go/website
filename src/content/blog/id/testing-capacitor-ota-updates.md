@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-12T02:57:37.246Z
-updated_at: 2025-12-31T01:19:38.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62-1744426677476.jpg
 head_image_alt: Pengembangan Seluler
@@ -25,7 +25,7 @@ next_blog: ''
 
 -   **Apa Itu Pembaruan OTA?** Mereka mendorong perubahan langsung ke perangkat pengguna, melewati peninjauan app store. Ini menghemat waktu dan cepat mengatasi masalah.
 -   **Mengapa Pengujian Penting:** Pembaruan yang tidak diuji dengan baik dapat membuat aplikasi rusak atau melanggar kepatuhan. Dengan pengujian yang tepat, 95% pembaruan berhasil dalam 24 jam.
--   **Alat yang Diperlukan:** Capacitor CLI (v6+), [Node.js](https://nodejs.org/en) (v16+), Plugin [Capgo](https://capgo.app/), dan kerangka pengujian seperti [Cypress](https://www.cypress.io/).
+-   **Alat yang Diperlukan:** Capacitor CLI (v8+), [Node.js](https://nodejs.org/en) (v16+), Plugin [Capgo](https://capgo.app/), dan kerangka pengujian seperti [Cypress](https://www.cypress.io/).
 -   **Langkah Pengujian:**
     1.  Konfigurasi lingkungan pengujian dan pengaturan Capgo.
     2.  Validasi proses pembaruan seperti deteksi, unduhan, instalasi, dan rollback.
@@ -74,7 +74,7 @@ Setelah inisialisasi, integrasikan fungsionalitas pembaruan OTA ke dalam aplikas
 
 Untuk keamanan tingkat enterprise, Capgo menyediakan opsi berbasis cloud dan self-hosted.
 
-Ketika integrasi selesai, build aplikasi Anda dan picu pembaruan menggunakan CLI Capgo. Karena Capgo bekerja sempurna dengan Capacitor 6 dan 7, ini mendukung berbagai lingkungan pengembangan modern.
+Ketika integrasi selesai, build aplikasi Anda dan picu pembaruan menggunakan CLI Capgo. Karena Capgo bekerja sempurna dengan Capacitor 8, ini mendukung berbagai lingkungan pengembangan modern.
 
 Langkah-langkah ini meletakkan dasar untuk pengujian pembaruan OTA yang menyeluruh, yang akan dibahas di bagian selanjutnya tentang Metode Pengujian.
 

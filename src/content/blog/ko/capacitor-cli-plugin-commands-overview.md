@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-27T03:14:02.984Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e4be0410051fda3b63a692-1743045267566.jpg
 head_image_alt: 모바일 개발
@@ -137,7 +137,7 @@ Capgo 사용자는 제어된 출시와 같은 고급 기능의 혜택을 받습�
 
 -   24시간 내 95%의 업데이트 완료 [\[1\]](https://capgo.app/)
 -   전 세계적으로 82%의 업데이트 성공률 [\[1\]](https://capgo.app/)
--   Capacitor 6 및 7 버전과의 호환성 [\[1\]](https://capgo.app/)
+-   Capacitor 8 버전과의 호환성 [\[1\]](https://capgo.app/)
 
 원활한 업데이트를 위해:
 

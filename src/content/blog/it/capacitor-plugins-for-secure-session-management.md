@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-05-16T12:14:04.681Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6827226c0209458b3ff58b06-1747397705731.jpg
 head_image_alt: Sviluppo Mobile
@@ -77,7 +77,7 @@ Il plugin funziona perfettamente con l'autenticazione biometrica, offrendo un ul
 
 ### Prestazioni e Supporto della Community
 
-A maggio 2025, il plugin ha ottenuto una solida reputazione nell'ecosistema Capacitor, con 128 stelle e 22 fork su GitHub. È completamente compatibile con Capacitor 6+, permettendo agli sviluppatori di implementare l'archiviazione sicura sfruttando le funzionalità più recenti del framework.
+A maggio 2025, il plugin ha ottenuto una solida reputazione nell'ecosistema Capacitor, con 128 stelle e 22 fork su GitHub. È completamente compatibile con Capacitor 8+, permettendo agli sviluppatori di implementare l'archiviazione sicura sfruttando le funzionalità più recenti del framework.
 
 ## 4\. Identity Vault
 

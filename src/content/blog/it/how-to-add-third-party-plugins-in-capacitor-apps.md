@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-18T14:04:24.780Z
-updated_at: 2025-10-31T17:55:22.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67d977fb55129a55bd698926-1742306685762.jpg
 head_image_alt: Desenvolvimento Móvel
@@ -328,7 +328,7 @@ Aqui está o que o Capgo traz à mesa:
 
 O Capgo se integra perfeitamente ao seu fluxo de trabalho do Capacitor, garantindo atualizações seguras e contínuas. Ele funciona com ferramentas como **GitHub Actions, GitLab CI, e** [**Jenkins**](https://www.jenkins.io/), automatizando atualizações e implantações de plugins para economizar tempo e reduzir o esforço manual.
 
-Para equipes que lidam com múltiplos plugins, o sistema de canais suporta testes beta antes de lançamentos mais amplos. Análises em tempo real fornecem insights sobre o desempenho da atualização e rastreamento de erros. O Capgo é compatível com **Capacitor 6 e 7**, suporta integrações de API personalizadas e oferece opções auto-hospedadas para necessidades especializadas.
+Para equipes que lidam com múltiplos plugins, o sistema de canais suporta testes beta antes de lançamentos mais amplos. Análises em tempo real fornecem insights sobre o desempenho da atualização e rastreamento de erros. O Capgo é compatível com **Capacitor 8**, suporta integrações de API personalizadas e oferece opções auto-hospedadas para necessidades especializadas.
 
 ## Resumo
 

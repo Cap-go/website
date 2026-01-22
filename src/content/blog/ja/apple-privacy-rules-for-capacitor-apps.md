@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-31T01:48:03.832Z
-updated_at: 2025-12-31T01:33:21.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e9dc69283d21cbd67b72cf-1743385695606.jpg
 head_image_alt: モバイル開発
@@ -73,7 +73,7 @@ Appleはプライバシー要件を段階的に更新します。アプリが最
 開始する前に、以下を確認してください：
 
 -   プライバシーマニフェストのサポートのために**Xcode 15以降**を使用。
--   Capacitor 6または7がインストールされている。
+-   Capacitor 8がインストールされている。
 -   iOSデプロイメントターゲットが**iOS 14.5以降**に設定されている。
 -   アプリに適切に設定された`Info.plist`ファイルが含まれている。
 -   有効な証明書を持つ**Apple Developer アカウント**を所有している。

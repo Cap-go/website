@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-05T02:35:09.479Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67f08966ebbb9dc80643aea5-1743820535214.jpg
 head_image_alt: Desarrollo Móvil
@@ -100,7 +100,7 @@ Sigue estos pasos para configurar ajustes específicos de la plataforma:
 
 > "Desplegamos actualizaciones OTA de Capgo en producción para nuestra base de usuarios de +5000. Estamos viendo un funcionamiento muy fluido, casi todos nuestros usuarios están al día en minutos desde que se desplega la OTA a @Capgo." - colenso [\[1\]](https://capgo.app/)
 
-Estos pasos aseguran que tu proyecto sea compatible con Capacitor v6/v7 y esté listo para actualizaciones OTA sin problemas.
+Estos pasos aseguran que tu proyecto sea compatible con Capacitor v8 y esté listo para actualizaciones OTA sin problemas.
 
 ## Pasos de implementación de actualizaciones OTA
 
@@ -108,7 +108,7 @@ Aquí tienes una guía paso a paso para implementar actualizaciones Over-The-Air
 
 ### Configurando Capacitor CLI
 
-Antes de comenzar, asegúrate de que tu proyecto sea compatible con Capacitor 6 o 7.
+Antes de comenzar, asegúrate de que tu proyecto sea compatible con Capacitor 8.
 
 ### Agregando actualizaciones OTA
 

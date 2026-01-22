@@ -89,6 +89,15 @@ MAU는 "월간 활성 사용자"입니다. 지난 30일 동안 서버에 접속�
 
 또한 Capgo는 네이티브 코드(예: Android의 Java/Kotlin 또는 iOS의 Objective-C/Swift) 변경을 지원하지 않습니다. 네이티브 코드를 변경한 경우 업데이트를 시도하는 동안 도구가 경고를 표시합니다.
 
+### Capgo를 통해 capacitor.config.ts 변경 사항을 업데이트할 수 있나요?[](https://capgo.app/docs/faq/#can-i-update-capacitorconfigts-changes-via-capgo "Direct link to Can I update capacitor.config.ts changes via Capgo?")
+
+아니요. `capacitor.config.ts`의 변경 사항은 Capgo 라이브 업데이트를 통해 전송할 수 없습니다. Capacitor 구성 파일은 네이티브 빌드 시점에 읽혀 네이티브 앱 바이너리로 컴파일됩니다. 즉, `capacitor.config.ts`의 변경 사항(플러그인 구성, 앱 ID, 서버 설정 또는 네이티브 플러그인 옵션 등)은 App Store 또는 Google Play를 통한 새로운 네이티브 릴리스가 필요합니다.
+
+Capgo는 런타임에 로드되는 웹 자산(HTML, CSS, JavaScript)만 업데이트할 수 있습니다. Capacitor 구성을 변경해야 하는 경우:
+1. 로컬에서 `capacitor.config.ts` 업데이트
+2. 네이티브 앱 재빌드 (`npx cap sync` 후 네이티브 빌드)
+3. 앱 스토어에 새 바이너리 제출
+
 ### Capgo가 스토어에 제출해 주나요?
 
 Capgo는 현재 앱 스토어에 자동으로 제출하는 기능을 지원하지 않습니다. 향후 이 기능을 추가할 계획이지만, 현재는 기존 프로세스를 계속 사용하여 앱 스토어에 제출해야 합니다.

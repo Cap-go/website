@@ -18,7 +18,6 @@ import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson
 import AppflowShutdown from '@/components/AppflowShutdown.astro'
 
 const config = Astro.locals.runtimeConfig
-const locale = Astro.locals.locale
 
 const stats = {
   stars: shortNumber(645),
@@ -94,11 +93,9 @@ const content = {
         url: `${config.public.baseUrl}/docs/`,
       },
     ],
+    additionalEntities: [capgoSoftware],
   }),
 }
-
-// Add the SoftwareApplication to the graph
-content.ldJSON['@graph'].push(capgoSoftware)
 
 ---
 

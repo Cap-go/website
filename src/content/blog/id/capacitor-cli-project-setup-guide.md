@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-18T03:02:50.225Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/6801ba663c6b972ab5067847-1744945493935.jpg
 head_image_alt: Pengembangan Mobile
@@ -200,7 +200,7 @@ Ikuti langkah-langkah berikut untuk memulai dengan Capgo:
 -   Aktifkan pelacakan kesalahan untuk menangkap dan memperbaiki masalah lebih awal.
 -   Siapkan fitur rollback untuk cepat menangani masalah.
 
-Capgo kompatibel dengan Capacitor 6 dan 7, terintegrasi dengan lancar dengan pipeline CI/CD, dan mematuhi persyaratan toko Apple dan Google.
+Capgo kompatibel dengan Capacitor 8, terintegrasi dengan lancar dengan pipeline CI/CD, dan mematuhi persyaratan toko Apple dan Google.
 
 ## Masalah Umum dan Tips
 

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-17T01:02:12.522Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/6800475b28980901df1e541b-1744851846737.jpg
 head_image_alt: 모바일 개발
@@ -59,7 +59,7 @@ CI/CD 설정의 OTA 업데이트에 필요한 주요 구성 요소입니다:
 
 | 구성 요소 | 목적 | 주요 기능 |
 | --- | --- | --- |
-| Capacitor 앱 | 기본 앱 | Capacitor 6 & 7 지원 |
+| Capacitor 앱 | 기본 앱 | Capacitor 8 지원 |
 | Git 저장소 | 코드 추적 | 코드 변경 및 업데이트 모니터링 |
 | CI/CD 플랫폼 | 자동화 | GitHub Actions, [GitLab CI](https://docs.gitlab.com/ee/ci/), 또는 [Jenkins](https://www.jenkins.io/) 지원 |
 | OTA 업데이트 서비스 | 배포 | 실시간 업데이트 및 롤백 처리 |

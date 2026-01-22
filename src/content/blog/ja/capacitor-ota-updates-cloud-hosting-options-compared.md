@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-17T03:46:56.267Z
-updated_at: 2025-12-31T01:33:21.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67d76b8ea5ba8bcd0fc6ad5f-1742183228777.jpg
 head_image_alt: モバイル開発
@@ -213,6 +213,6 @@ Capgoのスピード、セキュリティ、使いやすさの組み合わせは
 
 ### **技術要件**
 
-プラットフォームを選択する際は、特定の**[Capacitorバージョン](https://capgo.app/plugins/ivs-player/)**（Capacitor 6や7など）をサポートし、アナリティクス、エラートラッキング、バージョン管理のためのロールバックオプション、シームレスなCI/CD統合などの必須機能を提供していることを確認してください。これらの機能は、アプリの規模が拡大する際にスムーズな運用を確保します。
+プラットフォームを選択する際は、特定の**[Capacitorバージョン](https://capgo.app/plugins/ivs-player/)**（Capacitor 8）をサポートし、アナリティクス、エラートラッキング、バージョン管理のためのロールバックオプション、シームレスなCI/CD統合などの必須機能を提供していることを確認してください。これらの機能は、アプリの規模が拡大する際にスムーズな運用を確保します。
 
 最適なプラットフォームは、パフォーマンス、セキュリティ、コストの適切なバランスを取ります。Capgoの15日間の無料トライアルなどを活用して、プラットフォームがニーズに合っているかどうかを確認してください[\[1\]](https://capgo.app/) 。

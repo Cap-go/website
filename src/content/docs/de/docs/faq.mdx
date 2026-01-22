@@ -89,6 +89,15 @@ Wie oben erwähnt, sollte Capgo nicht verwendet werden, um gegen App Store-Richt
 
 Außerdem unterstützt Capgo keine Änderungen am nativen Code (z.B. Java/Kotlin auf Android oder Objective-C/Swift auf iOS). Das Tool warnt Sie während eines Aktualisierungsversuchs, wenn Sie nativen Code geändert haben.
 
+### Kann ich Änderungen an capacitor.config.ts über Capgo aktualisieren?[](https://capgo.app/docs/faq/#can-i-update-capacitorconfigts-changes-via-capgo "Direct link to Can I update capacitor.config.ts changes via Capgo?")
+
+Nein. Änderungen an `capacitor.config.ts` können nicht über Capgo Live-Updates gesendet werden. Die Capacitor-Konfigurationsdatei wird zur nativen Build-Zeit gelesen und in die native App-Binary kompiliert. Das bedeutet, dass Änderungen an `capacitor.config.ts` (wie Plugin-Konfigurationen, App-ID, Server-Einstellungen oder native Plugin-Optionen) eine neue native Version über den App Store oder Google Play erfordern.
+
+Capgo kann nur Web-Assets (HTML, CSS, JavaScript) aktualisieren, die zur Laufzeit geladen werden. Wenn Sie Ihre Capacitor-Konfiguration ändern müssen:
+1. Aktualisieren Sie `capacitor.config.ts` lokal
+2. Bauen Sie Ihre native App neu (`npx cap sync` gefolgt von einem nativen Build)
+3. Reichen Sie die neue Binary bei den App Stores ein
+
 ### Reicht Capgo die Apps für mich bei den Stores ein?
 
 Capgo unterstützt derzeit nicht das Einreichen bei den App Stores in Ihrem Namen. Wir planen, dies in Zukunft hinzuzufügen, aber vorerst müssen Sie weiterhin Ihre bestehenden Prozesse für die Einreichung bei den App Stores verwenden.

@@ -26,27 +26,6 @@ const content = {
   image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png`,
   ldJSON,
 }
-
-const alternatives = [
-  {
-    name: 'Ionic Appflow',
-    url: getRelativeLocaleUrl(locale, 'ionic-appflow'),
-    status: m.alternatives_appflow_status({}, { locale }),
-    pricing: m.alternatives_appflow_pricing({}, { locale }),
-  },
-  {
-    name: 'Microsoft CodePush',
-    url: '#codepush',
-    status: m.alternatives_status_deprecated({}, { locale }),
-    pricing: m.alternatives_codepush_pricing({}, { locale }),
-  },
-  {
-    name: 'Capawesome Cloud',
-    url: getRelativeLocaleUrl(locale, 'capwesome'),
-    status: m.alternatives_status_active({}, { locale }),
-    pricing: m.alternatives_capawesome_pricing({}, { locale }),
-  },
-]
 ---
 
 <Layout content={content}>
@@ -88,7 +67,7 @@ const alternatives = [
       <div class="space-y-6">
         <!-- Open & Transparent -->
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-          <h3 class="mb-3 text-xl font-semibold text-emerald-400">
+          <h3 class="mb-3 text-xl font-semibold text-gray-100">
             {m.alternatives_open_transparent_title({}, { locale })}
           </h3>
           <p class="mb-2 text-gray-300">
@@ -105,7 +84,7 @@ const alternatives = [
 
         <!-- Been Doing It -->
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-          <h3 class="mb-3 text-xl font-semibold text-blue-400">
+          <h3 class="mb-3 text-xl font-semibold text-gray-100">
             {m.alternatives_been_doing_title({}, { locale })}
           </h3>
           <p class="text-gray-300">
@@ -115,7 +94,7 @@ const alternatives = [
 
         <!-- Biggest Plugin Provider -->
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-          <h3 class="mb-3 text-xl font-semibold text-purple-400">
+          <h3 class="mb-3 text-xl font-semibold text-gray-100">
             {m.alternatives_biggest_plugin_title({}, { locale })}
           </h3>
           <p class="mb-2 text-gray-300">
@@ -128,7 +107,7 @@ const alternatives = [
 
         <!-- Family Business -->
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-          <h3 class="mb-3 text-xl font-semibold text-yellow-400">
+          <h3 class="mb-3 text-xl font-semibold text-gray-100">
             {m.alternatives_family_business_title({}, { locale })}
           </h3>
           <p class="mb-2 text-gray-300">
@@ -142,7 +121,7 @@ const alternatives = [
 
         <!-- Bootstrapped & Profitable -->
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-          <h3 class="mb-3 text-xl font-semibold text-green-400">
+          <h3 class="mb-3 text-xl font-semibold text-gray-100">
             {m.alternatives_bootstrapped_title({}, { locale })}
           </h3>
           <p class="mb-2 text-gray-300">
@@ -155,7 +134,7 @@ const alternatives = [
 
         <!-- Human Support -->
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-          <h3 class="mb-3 text-xl font-semibold text-pink-400">
+          <h3 class="mb-3 text-xl font-semibold text-gray-100">
             {m.alternatives_human_support_title({}, { locale })}
           </h3>
           <p class="mb-2 text-gray-300">
@@ -274,16 +253,16 @@ const alternatives = [
     </div>
 
     <!-- What We're NOT Good At -->
-    <div class="mb-16 rounded-lg border-2 border-yellow-600 bg-yellow-950/20 p-8">
-      <h2 class="mb-4 text-2xl font-bold text-yellow-400">
+    <div class="mb-16 rounded-lg border border-gray-600 bg-gray-800/50 p-8">
+      <h2 class="mb-4 text-2xl font-bold text-gray-100">
         {m.alternatives_not_good_at_title({}, { locale })}
       </h2>
       <div class="space-y-3 text-gray-300">
         <p>
-          <strong class="text-yellow-300">{m.alternatives_not_good_at_ci_cd_label({}, { locale })}</strong> {m.alternatives_not_good_at_ci_cd({}, { locale })}
+          <strong class="text-gray-100">{m.alternatives_not_good_at_ci_cd_label({}, { locale })}</strong> {m.alternatives_not_good_at_ci_cd({}, { locale })}
         </p>
         <p>
-          <strong class="text-yellow-300">{m.alternatives_not_good_at_docs_label({}, { locale })}</strong> {m.alternatives_not_good_at_docs({}, { locale })}
+          <strong class="text-gray-100">{m.alternatives_not_good_at_docs_label({}, { locale })}</strong> {m.alternatives_not_good_at_docs({}, { locale })}
         </p>
       </div>
     </div>

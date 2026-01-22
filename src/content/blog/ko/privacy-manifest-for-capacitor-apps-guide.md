@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-02T03:07:47.047Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776-1743563280473.jpg
 head_image_alt: 모바일 개발
@@ -88,7 +88,7 @@ Capgo에 따르면, 사용자의 95%가 24시간 이내에 업데이트를 준�
 매니페스트 구축을 시작하기 전에 다음 사항을 확인하세요:
 
 -   Xcode 15 이상 설치
--   Capacitor 5.0+ 프로젝트 설정
+-   Capacitor 8.0+ 프로젝트 설정
 -   앱의 `Info.plist` 파일에 대한 접근
 -   JSON 구조에 대한 기본 이해
 -   앱의 데이터 수집 관행을 설명하는 문서

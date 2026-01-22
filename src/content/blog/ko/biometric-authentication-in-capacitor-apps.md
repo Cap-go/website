@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-05-14T05:13:56.152Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68240bea59ff61289922287e-1747199824736.jpg
 head_image_alt: 모바일 개발
@@ -44,7 +44,7 @@ next_blog: ''
 
 | 플러그인 이름 | Capacitor 버전 | 기능 | 최적 사용처 |
 | --- | --- | --- | --- |
-| `@aparajita/capacitor-biometric-auth` | Capacitor 7 | 네이티브 생체인식, 기기 자격증명 | Capacitor 7을 사용하는 새 프로젝트 |
+| `@aparajita/capacitor-biometric-auth` | Capacitor 8 | 네이티브 생체인식, 기기 자격증명 | Capacitor 8을 사용하는 새 프로젝트 |
 | `capacitor-native-biometric` | Capacitor 3, 4 | 보안 자격증명 저장, Keychain/Keystore | 자격증명 관리 |
 | 모든 버전 | 생체인식 및 기기 자격증명 지원 | 유연한 인증 옵션 |
 
@@ -71,7 +71,7 @@ next_blog: ''
 
 Capacitor 버전에 따라 [생체인식 플러그인](https://capgo.app/plugins/capacitor-native-biometric/)을 선택하세요:
 
--   Capacitor 7용 **@aparajita/capacitor-biometric-auth**
+-   Capacitor 8용 **@aparajita/capacitor-biometric-auth**
 -   Capacitor 3 및 4용 **capacitor-native-biometric**
 
 ### Android 설정 단계
@@ -140,7 +140,7 @@ Capacitor 앱용 생체 인증 플러그인을 선택할 때는 프로젝트의 
 
 | 플러그인 이름 | Capacitor 버전 | 주요 기능 | 최적 사용처 |
 | --- | --- | --- | --- |
-| @aparajita/capacitor-biometric-auth | Capacitor 7 | 네이티브 생체인식, 기기 자격증명, 포괄적 API | Capacitor 7로 시작하는 새 프로젝트 |
+| @aparajita/capacitor-biometric-auth | Capacitor 8 | 네이티브 생체인식, 기기 자격증명, 포괄적 API | Capacitor 8로 시작하는 새 프로젝트 |
 | capacitor-native-biometric | Capacitor 3, 4 | 보안 자격증명 저장, Keychain/Keystore 통합 | 자격증명 관리가 필요한 기존 프로젝트 |
 | 모든 버전 | 생체인식 및 기기 자격증명 인증, 깔끔한 API | 유연한 인증 옵션이 필요한 프로젝트 |
 

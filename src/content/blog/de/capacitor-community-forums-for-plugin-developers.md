@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-19T03:15:19.291Z
-updated_at: 2025-03-19T03:15:43.434Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67da1574cfd1b2222c56b5cd-1742354143434.jpg
 head_image_alt: Mobile Entwicklung
@@ -214,7 +214,7 @@ Die offizielle Dokumentation von Capacitor ist eine wichtige Ressource. Sie enth
 
 ![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
 
-Capgo macht sofortige App-Updates einfach. Es hat 23,5 Millionen Updates über 750 Produktions-Apps bereitgestellt, mit einer Erfolgsquote von 82 %. Beeindruckenderweise erhalten 95 % der aktiven Nutzer innerhalb von 24 Stunden Updates. Sein globales CDN kann ein 5 MB-Bündel in nur 114 ms herunterladen. Capgo unterstützt Capacitor 6 und 7 und bietet die Möglichkeit von partiellen Updates [\[1\]](https://capgo.app/).
+Capgo macht sofortige App-Updates einfach. Es hat 23,5 Millionen Updates über 750 Produktions-Apps bereitgestellt, mit einer Erfolgsquote von 82 %. Beeindruckenderweise erhalten 95 % der aktiven Nutzer innerhalb von 24 Stunden Updates. Sein globales CDN kann ein 5 MB-Bündel in nur 114 ms herunterladen. Capgo unterstützt Capacitor 8 und bietet die Möglichkeit von partiellen Updates [\[1\]](https://capgo.app/).
 
 > "Wir praktizieren agile Entwicklung und @Capgo ist entscheidend für die kontinuierliche Lieferung an unsere Nutzer!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 

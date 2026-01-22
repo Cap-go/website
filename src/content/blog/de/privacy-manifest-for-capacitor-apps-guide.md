@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-02T03:07:47.047Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776-1743563280473.jpg
 head_image_alt: Mobile Entwicklung
@@ -90,7 +90,7 @@ Laut Capgo halten sich 95% der Nutzer innerhalb von 24 Stunden an Updates. Mit �
 Bevor Sie mit der Erstellung des Manifests beginnen, stellen Sie sicher, dass Sie Folgendes haben:
 
 -   Xcode 15 oder höher installiert
--   Ein Capacitor 5.0+ Projekt eingerichtet
+-   Ein Capacitor 8.0+ Projekt eingerichtet
 -   Zugriff auf die `Info.plist`-Datei Ihrer App
 -   Ein grundlegendes Verständnis der JSON-Struktur
 -   Dokumentation über die Datenerfassungspraktiken Ihrer App

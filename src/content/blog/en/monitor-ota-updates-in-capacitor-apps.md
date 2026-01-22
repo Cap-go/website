@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-05T01:34:45.665Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988-1743816897363.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, app monitoring, error tracking, real-time analytics, mobile app development
@@ -46,7 +46,7 @@ First, install the Capgo plugin by running:
 npx @capgo/cli init
 ```
 
-This plugin works seamlessly with Capacitor 6 and 7, making it compatible with a range of app versions.
+This plugin works seamlessly with Capacitor 8, making it compatible with a range of app versions.
 
 ### Managing Update Versions
 

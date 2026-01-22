@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-17T03:46:56.267Z
-updated_at: 2025-11-13T20:57:27.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: https://assets.seobotai.com/capgo.app/67d76b8ea5ba8bcd0fc6ad5f-1742183228777.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, OTA updates, cloud hosting, AWS, Google Cloud, Azure, Capgo, mobile app updates, deployment
@@ -211,6 +211,6 @@ Costs can vary widely depending on your needs. For example, Capgo's OTA updates 
 
 ### **Technical Requirements**
 
-When choosing a platform, make sure it supports your specific **[Capacitor version](https://capgo.app/plugins/ivs-player/)** (e.g., Capacitor 6 or 7) and offers essential features like analytics, error tracking, rollback options for version control, and seamless CI/CD integration. These features ensure smooth operations as your app scales.
+When choosing a platform, make sure it supports your specific **[Capacitor version](https://capgo.app/plugins/ivs-player/)** (e.g., Capacitor 8) and offers essential features like analytics, error tracking, rollback options for version control, and seamless CI/CD integration. These features ensure smooth operations as your app scales.
 
 The best platform will strike the right balance between performance, security, and cost. Take advantage of free trials - like Capgo's 15-day trial - to see if the platform aligns with your needs [\[1\]](https://capgo.app/).

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-02T03:07:47.047Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776-1743563280473.jpg
 head_image_alt: Mobile Development
 keywords: Privacy Manifest, Capacitor, App Store compliance, user data protection, app development, privacy standards
@@ -86,7 +86,7 @@ According to Capgo, 95% of users comply with updates within 24 hours. With over 
 Before you start building the manifest, make sure you have:
 
 -   Xcode 15 or later installed
--   A Capacitor 5.0+ project set up
+-   A Capacitor 8.0+ project set up
 -   Access to your app's `Info.plist` file
 -   A basic understanding of JSON structure
 -   Documentation outlining your app's data collection practices

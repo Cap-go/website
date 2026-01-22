@@ -33,6 +33,7 @@ const content = { title, description, ldJSON }
         {
           Array.from({ length: 15 }).map((_, i) => (
             <div
+              id={`${i}`}
               class="absolute w-2 h-2 bg-amber-500 rounded-full opacity-20 animate-pulse"
               style={{
                 top: `${Math.random() * 100}%`,
@@ -283,7 +284,7 @@ App.addListener('appUrlOpen', async (data) => {'{'}
     <!-- CTA Section -->
     <section class="py-16 bg-gray-900 sm:py-20">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="relative px-8 py-16 overflow-hidden bg-gradient-to-r from-amber-600 to-amber-800 rounded-3xl sm:px-16">
+        <div class="relative px-8 py-16 overflow-hidden bg-linear-to-r from-amber-600 to-amber-800 rounded-3xl sm:px-16">
           <div aria-hidden="true" class="absolute inset-0">
             <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360">
               <path class="text-amber-500 text-opacity-40" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"></path>

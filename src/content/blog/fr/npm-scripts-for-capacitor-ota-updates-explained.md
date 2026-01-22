@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-13T01:07:05.331Z
-updated_at: 2025-12-31T01:19:38.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266-1744506438251.jpg
 head_image_alt: Développement Mobile
@@ -117,7 +117,7 @@ CAPGO_APP_ID=your_app_id
 
 ### Compatibilité et fiabilité
 
-Le CLI Capgo prend en charge Capacitor 6 et 7, garantissant qu'il fonctionne avec les dernières versions tout en maintenant une fonctionnalité de mise à jour fiable.
+Le CLI Capgo prend en charge Capacitor 8, garantissant qu'il fonctionne avec les dernières versions tout en maintenant une fonctionnalité de mise à jour fiable.
 
 | Commande de script | Objectif | Quand l'utiliser |
 | --- | --- | --- |

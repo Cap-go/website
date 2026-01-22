@@ -31,48 +31,26 @@ locale: ja
 
 ## チャンネルの管理
 
-チャンネル名をクリックすると、チャンネルを管理できるモーダルが開きます(画像の`3.`)。
-このページは以下のように表示されます：
+チャンネル名をクリックすると、チャンネル設定を管理できるモーダルが開きます（画像の`3`）。
 
-<figure><img src="/manage_channel_main.webp" alt="manage channel" /><figcaption></figcaption></figure>
+<figure><img src="/channel_settings.webp" alt="チャンネル設定" /><figcaption></figcaption></figure>
 
-各セクションを見ていきましょう。
-
-まず`Bundle number`(画像の`1.`)です。これはそのチャンネルの現在のバージョンです。アップデートを提供する際、このチャネルは常にそのバージョンを提供しようとします* [^1]。
-クリックすると[bundle](/docs/webapp/bundles/)ページに移動します。
-
-次に`Shared to`(画像の`2.`)ページです。これは使用を推奨しません。新しい、より良いシステムが開発中です。
-
-続いて強制デバイス(画像の`3.`)です。これは常にこのチャンネルからアップデートを受け取るデバイスのリストです。テスト目的で便利です。[devices](/docs/webapp/devices/)ページからデバイスをチャンネルに強制的に追加できます。
-
-最後に設定(画像の`4.`)です。ここでチャンネルの動作を管理できます。
-クリックすると以下のように表示されます：
-
-<figure><img src="/channel_settings.webp" alt="setting of channel" /><figcaption></figcaption></figure>
-
-設定リストは長いですが、すべて説明します。
+チャンネル設定ページには、チャンネルのすべての設定オプションが含まれています。各設定を見ていきましょう。
 
 ---
-まず`Default channel`です。**これが最も重要な設定です**\
-チャンネルがデフォルトとしてマークされている場合、すべての新しいデバイスのデフォルトチャンネルとして使用されます。\
-言い換えると：新しいユーザーがいる場合、capgoはこのデフォルトチャンネルの最新バージョンを提供しようとします。
-デフォルトに設定できるチャンネルは1つだけです。この規則を破ろうとすると、確認を求められます。
-
-<figure><img style="margin-left: auto; margin-right: auto" src="/confirm-make-default.webp" alt="confirm make change" /><figcaption></figcaption></figure>
-
-確認後、古いデフォルトチャンネルのマークが解除され、新しいものがデフォルトとしてマークされます。
+まず`デフォルトチャンネル`トグルです。有効にすると、このチャンネルが新しいデバイスのデフォルトになります。デフォルトチャンネルの仕組みの詳細な説明（iOSとAndroidそれぞれにプラットフォーム固有のデフォルトを設定する方法を含む）については、[デフォルトチャンネル設定](/docs/webapp/main-app-page/#デフォルトチャンネル設定)セクションを参照してください。
 
 ---
 次に`IOS`設定です。これは単純で、falseの場合、iOSデバイスはこのチャンネルからアップデートをダウンロードできません。
 
 3番目は`Android`設定です。これは`IOS`と同様で、falseの場合、Androidデバイスはこのチャンネルからアップデートをダウンロードできません。
 
-4番目は`Disable auto downgrade under native`設定です。これがtrueの場合、ネイティブバージョンからのダウングレードは不可能になります。つまり、App StoreやPlay Storeにバージョン`120`をアップロードし、チャンネルバージョンを`110`に設定しようとすると、アップデート(ダウングレード)は失敗します。
+4番目は`ネイティブ以下への自動ダウングレードを無効化`設定です。これがtrueの場合、ネイティブバージョンからのダウングレードは不可能になります。つまり、App StoreやPlay Storeにバージョン`1.2.0`をアップロードし、チャンネルバージョンを`1.1.0`に設定しようとすると、アップデート（ダウングレード）は失敗します。
 
-5番目は`Disable auto update`です。この設定は複雑で、詳細は[こちら](/docs/cli/commands/#disable-updates-strategy)で確認できます。
+5番目は`自動アップデートを無効化`です。この設定は複雑で、詳細は[こちら](/docs/cli/commands/#disable-updates-strategy)で確認できます。
 
-`Allow develoment build`について、これがtrueの場合、開発ビルドはこのチャンネルからアップデートをダウンロードできます。falseの場合、`prod`がfalseに設定されているすべてのアップデートリクエストは拒否されます。これは主にテスト目的で役立ちます。
+`開発ビルドを許可`について、これがtrueの場合、開発ビルドはこのチャンネルからアップデートをダウンロードできます。falseの場合、`prod`がfalseに設定されているすべてのアップデートリクエストは拒否されます。これは主にテスト目的で役立ちます。
 
-7番目は`Allow Emulators`です。falseの場合、capgoはエミュレータからのアップデートリクエストを拒否します。これは主にテスト目的で役立ちます。
+7番目は`エミュレータを許可`です。falseの場合、Capgoはエミュレータからのアップデートリクエストを拒否します。これは主にテスト目的で役立ちます。
 
-8番目は`Allow devices to self associate`です。これがtrueの場合、[setChannel](/docs/plugin/api/#setchannel)メソッドが利用可能になります。falseに設定されている場合にこのチャンネルで[setChannel](/docs/plugin/api/#setchannel)メソッドを呼び出そうとすると、呼び出しは失敗します。
+8番目は`デバイスの自己関連付けを許可`です。これがtrueの場合、[setChannel](/docs/plugin/api/#setchannel)メソッドが利用可能になります。falseに設定されている場合にこのチャンネルで[setChannel](/docs/plugin/api/#setchannel)メソッドを呼び出そうとすると、呼び出しは失敗します。

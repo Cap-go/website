@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-31T04:35:04.064Z
-updated_at: 2025-03-31T04:35:16.448Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572-1743395716448.jpg
 head_image_alt: Sviluppo Mobile
@@ -133,7 +133,7 @@ Quando passi a una nuova versione principale, segui questi passaggi:
     [[CODE_BLOCK]]
     
 
-Capgo fornisce aggiornamenti live per Capacitor 6 e 7, permettendoti di applicare correzioni senza necessità di approvazioni dell'app store [\[1\]](https://capgo.app/)
+Capgo fornisce aggiornamenti live per Capacitor 8, permettendoti di applicare correzioni senza necessità di approvazioni dell'app store [\[1\]](https://capgo.app/)
 
 ## Evitare futuri conflitti di versione
 

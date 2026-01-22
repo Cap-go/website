@@ -84,10 +84,10 @@ You can enable 2FA enforcement using the Capgo CLI:
 
 ```shell
 # Enable 2FA enforcement for an organization
-npx @capgo/cli organisation set YOUR_ORG_ID --enforce-2fa
+npx @capgo/cli organization set YOUR_ORG_ID --enforce-2fa
 
 # Disable 2FA enforcement
-npx @capgo/cli organisation set YOUR_ORG_ID --no-enforce-2fa
+npx @capgo/cli organization set YOUR_ORG_ID --no-enforce-2fa
 ```
 
 When enabling via CLI, you'll be shown:
@@ -102,7 +102,7 @@ When enabling via CLI, you'll be shown:
 You can list all organization members and their 2FA status:
 
 ```shell
-npx @capgo/cli organisation members YOUR_ORG_ID
+npx @capgo/cli organization members YOUR_ORG_ID
 ```
 
 This will display:
@@ -123,7 +123,7 @@ If you need to enable 2FA on your account, see our [Two-Factor Authentication se
 ### Before Enabling Enforcement
 - **Communicate in advance**: Give members at least a week's notice before enabling enforcement
 - **Provide support**: Share the [2FA setup guide](/docs/webapp/mfa/) with your team
-- **Check readiness**: Use `npx @capgo/cli organisation members` to see who still needs to enable 2FA
+- **Check readiness**: Use `npx @capgo/cli organization members` to see who still needs to enable 2FA
 
 ### After Enabling Enforcement
 - **Monitor access issues**: Be available to help members who get locked out

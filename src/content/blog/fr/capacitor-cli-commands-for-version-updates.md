@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-05-11T21:28:20.329Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682028f45e3fe4823b5e5a52-1746998980056.jpg
 head_image_alt: Développement mobile
@@ -212,7 +212,7 @@ Commencer avec Capgo est simple. Vous pouvez l'initialiser avec une commande sim
 npx @capgo/cli init
 ```
 
-Cette fonctionnalité rationalise le processus de mise à jour, gardant votre application à jour sans les délais des cycles de révision traditionnels. Capgo est compatible avec Capacitor 6 et 7, ce qui en fait un choix flexible pour votre configuration existante.
+Cette fonctionnalité rationalise le processus de mise à jour, gardant votre application à jour sans les délais des cycles de révision traditionnels. Capgo est compatible avec Capacitor 8, ce qui en fait un choix flexible pour votre configuration existante.
 
 | **Fonctionnalité** | **Description** | **Avantage** |
 | --- | --- | --- |

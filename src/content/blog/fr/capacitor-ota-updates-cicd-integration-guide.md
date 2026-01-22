@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-17T01:02:12.522Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/6800475b28980901df1e541b-1744851846737.jpg
 head_image_alt: Développement Mobile
@@ -56,7 +56,7 @@ Voici les composants principaux dont vous aurez besoin pour les mises à jour OT
 
 | Composant | Objectif | Fonctionnalités clés |
 | --- | --- | --- |
-| Application Capacitor | Application de base | Fonctionne avec Capacitor 6 & 7 |
+| Application Capacitor | Application de base | Fonctionne avec Capacitor 8 |
 | Dépôt Git | Suivi du code | Surveille les changements et mises à jour du code |
 | Plateforme CI/CD | Automatisation | Supporte GitHub Actions, [GitLab CI](https://docs.gitlab.com/ee/ci/), ou [Jenkins](https://www.jenkins.io/) |
 | Service de mise à jour OTA | Distribution | Gère les mises à jour en direct et les retours en arrière |

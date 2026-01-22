@@ -27,8 +27,8 @@ import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
   <Card title="3-Step Integration" icon="pencil">
     Get started with just `npx @capgo/cli@latest init [APIKEY]` and start pushing updates immediately with our simple integration.
   </Card>
-  <Card title="Advanced Features" icon="setting">
-    Channels for A/B testing, automatic rollbacks, update analytics, encrypted bundles, and enterprise-grade security features.
+  <Card title="Mobile & Desktop" icon="laptop">
+    Same live update system for Capacitor mobile apps and Electron desktop apps. One platform, all your apps.
   </Card>
   <Card title="Complete Guide" icon="open-book">
     Learn everything from [quick setup](/docs/getting-started/quickstart/) to advanced deployment strategies in our comprehensive documentation.
@@ -38,22 +38,27 @@ import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 ## 📚 What's in This Documentation
 
 <CardGrid>
-  <LinkCard 
+  <LinkCard
     title="Capgo Cloud Setup"
     description="Complete guides for integrating live updates, managing channels, CI/CD integration, and monitoring your deployments."
     href="/docs/getting-started/quickstart/"
   />
-  <LinkCard 
-    title="20+ Capacitor Plugins" 
+  <LinkCard
+    title="Electron Updater"
+    description="Live updates for Electron desktop apps. Same powerful system, now for desktop applications."
+    href="/docs/plugins/electron-updater/"
+  />
+  <LinkCard
+    title="20+ Capacitor Plugins"
     description="Explore our collection of production-ready plugins for biometrics, purchases, camera, storage, and more native features."
     href="/docs/plugins/"
   />
-  <LinkCard 
+  <LinkCard
     title="CLI & Public API"
     description="Automate your workflow with our CLI tools and integrate Capgo into your existing systems with our REST API."
     href="/docs/cli/overview/"
   />
-  <LinkCard 
+  <LinkCard
     title="Enterprise Solutions"
     description="Dedicated support, SLAs, custom features, and advanced security options for teams that need more."
     href="/enterprise/"

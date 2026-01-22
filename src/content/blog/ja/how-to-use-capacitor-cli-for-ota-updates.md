@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-05T02:35:09.479Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67f08966ebbb9dc80643aea5-1743820535214.jpg
 head_image_alt: モバイル開発
@@ -98,7 +98,7 @@ OTAアップデート用のCapgoプラグインを追加することから始め
 
 > "5000人以上のユーザーベースを持つ本番環境でCapgo OTAアップデートを展開しました。非常にスムーズに動作しており、OTAが@Capgoにデプロイされてから数分以内にほぼすべてのユーザーが最新状態になっています" - colenso [\[1\]](https://capgo.app/)
 
-これらの手順により、プロジェクトがCapacitor v6/v7と互換性を持ち、シームレスなOTAアップデートの準備が整います。
+これらの手順により、プロジェクトがCapacitor v8と互換性を持ち、シームレスなOTAアップデートの準備が整います。
 
 ## OTAアップデート実装手順
 

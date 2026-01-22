@@ -1,0 +1,303 @@
+---
+title: Keamanan Organisasi
+description: >-
+  Konfigurasi kebijakan keamanan komprehensif untuk organisasi Anda termasuk
+  penerapan 2FA, kebijakan kata sandi, dan kontrol kunci API untuk melindungi
+  aplikasi dan data Anda.
+sidebar:
+  order: 9
+locale: id
+---
+
+import { Aside, Steps, Badge } from '@astrojs/starlight/components';
+
+Capgo menyediakan kontrol keamanan komprehensif yang memungkinkan administrator organisasi untuk menerapkan kebijakan keamanan di semua anggota. Fitur-fitur ini membantu Anda memenuhi persyaratan kepatuhan, melindungi data sensitif, dan mempertahankan postur keamanan yang kuat.
+
+## Gambaran Umum
+
+Pengaturan Keamanan Organisasi memungkinkan super admin untuk mengkonfigurasi:
+
+- **Penerapan Autentikasi Dua Faktor (2FA)** - Mewajibkan semua anggota untuk mengaktifkan 2FA
+- **Kebijakan Kata Sandi** - Menetapkan persyaratan kompleksitas kata sandi
+- **Keamanan Kunci API** - Menerapkan kunci API yang aman dan kebijakan kedaluwarsa
+
+![Pengaturan Keamanan Organisasi](/org_security.webp)
+
+Halaman Keamanan diorganisir dalam bagian-bagian yang diberi label dengan jelas:
+1. **Tab Keamanan** - Akses semua pengaturan keamanan dari sidebar pengaturan Organisasi
+2. **Penerapan 2FA** - Toggle dan tampilan status untuk persyaratan autentikasi dua faktor
+3. **Kebijakan Kata Sandi** - Konfigurasi aturan kompleksitas kata sandi untuk anggota organisasi
+4. **Kebijakan Kunci API** - Pengaturan untuk kunci API yang aman dan persyaratan kedaluwarsa
+5. **Kedaluwarsa Kunci API** - Kontrol apakah kunci API harus memiliki tanggal kedaluwarsa
+
+<Aside type="note">
+
+Hanya pengguna dengan peran **super_admin** yang dapat mengkonfigurasi pengaturan keamanan organisasi. Anggota lain dapat melihat status kepatuhan mereka tetapi tidak dapat mengubah kebijakan.
+
+</Aside>
+
+## Mengakses Pengaturan Keamanan
+
+<Steps>
+
+1. Navigasi ke pengaturan organisasi Anda dengan mengklik **Pengaturan** di sidebar
+2. Klik tab **Organisasi** di bagian atas halaman pengaturan
+3. Pilih tab **Keamanan** dari bar navigasi organisasi (ditandai dengan ikon perisai)
+
+</Steps>
+
+## Penerapan Autentikasi Dua Faktor (2FA)
+
+Penerapan 2FA mewajibkan semua anggota organisasi untuk mengaktifkan autentikasi dua faktor pada akun mereka. Ini menambahkan lapisan keamanan kritis dengan mewajibkan kata sandi dan kode verifikasi.
+
+### Apa yang Terjadi Ketika 2FA Diterapkan
+
+- Anggota tanpa 2FA **langsung diblokir** dari mengakses aplikasi organisasi
+- Dashboard web dan CLI sama-sama menerapkan persyaratan ini
+- Anggota baru harus mengaktifkan 2FA sebelum dapat mengakses sumber daya organisasi
+- Sistem melacak anggota mana yang telah mengaktifkan 2FA secara real-time
+
+### Memahami Panel Status 2FA
+
+Halaman Keamanan menampilkan panel **Status 2FA Anggota** yang komprehensif yang menunjukkan:
+
+- **Total Anggota** - Jumlah total anggota di organisasi Anda
+- **2FA Diaktifkan** (indikator hijau) - Anggota yang telah berhasil mengaktifkan autentikasi dua faktor
+- **2FA Tidak Diaktifkan** (indikator peringatan oranye) - Anggota yang masih perlu mengatur 2FA
+
+Ketika anggota tidak mengaktifkan 2FA, mereka muncul di kotak peringatan **Anggota Tanpa 2FA**. Kotak ini menunjukkan:
+- Alamat email setiap anggota dan peran mereka di organisasi
+- Tombol **Salin Daftar Email** untuk dengan cepat menyalin semua alamat email yang terpengaruh untuk komunikasi
+
+### Mengaktifkan Penerapan 2FA
+
+<Steps>
+
+1. Navigasi ke **Pengaturan Organisasi > Keamanan**
+2. Temukan bagian **Wajibkan 2FA untuk Semua Anggota** di bagian atas halaman
+3. Tinjau panel **Status 2FA Anggota** untuk melihat anggota mana yang akan terpengaruh
+4. Jika ada anggota tanpa 2FA, gunakan tombol **Salin Daftar Email** untuk memberitahu mereka sebelum mengaktifkan
+5. Aktifkan toggle di sebelah **Wajibkan 2FA untuk Semua Anggota** untuk mengaktifkan penerapan
+6. Toggle akan menunjukkan status **Dinonaktifkan** atau **Diaktifkan** di sisi kanan
+
+</Steps>
+
+<Aside type="caution">
+
+Sebelum mengaktifkan penerapan 2FA:
+- Beritahu anggota yang terpengaruh terlebih dahulu dan bagikan [panduan pengaturan 2FA](/docs/webapp/mfa/)
+- Beri mereka waktu untuk mengaktifkan 2FA di akun mereka
+- Anggota tanpa 2FA akan kehilangan akses segera ketika Anda mengaktifkan penerapan
+- Pertimbangkan untuk menghubungi anggota yang terdaftar di kotak peringatan "Anggota Tanpa 2FA"
+
+</Aside>
+
+### Dukungan CLI untuk Penerapan 2FA
+
+Anda juga dapat mengelola penerapan 2FA melalui CLI:
+
+```shell
+# Aktifkan penerapan 2FA
+npx @capgo/cli organization set YOUR_ORG_ID --enforce-2fa
+
+# Nonaktifkan penerapan 2FA
+npx @capgo/cli organization set YOUR_ORG_ID --no-enforce-2fa
+
+# Periksa status 2FA anggota
+npx @capgo/cli organization members YOUR_ORG_ID
+```
+
+Untuk informasi detail tentang penerapan 2FA, lihat [panduan Penerapan 2FA](/docs/webapp/2fa-enforcement/).
+
+## Kebijakan Kata Sandi
+
+Kebijakan kata sandi memungkinkan Anda menerapkan persyaratan kompleksitas kata sandi untuk semua anggota organisasi. Ketika kata sandi anggota tidak memenuhi persyaratan kebijakan, mereka harus memperbarui kata sandi mereka sebelum mengakses sumber daya organisasi.
+
+Bagian Kebijakan Kata Sandi (ditandai dengan indikator **3** di gambar gambaran umum) menyediakan toggle sederhana untuk menerapkan persyaratan kata sandi di seluruh organisasi Anda.
+
+### Cara Kerja Kebijakan Kata Sandi
+
+Ketika Anda mengaktifkan kebijakan kata sandi:
+- Semua anggota organisasi harus memenuhi persyaratan kompleksitas kata sandi
+- Pengguna yang tidak memenuhi persyaratan akan dikunci sampai mereka memperbarui kata sandi mereka
+- Kebijakan berlaku untuk semua anggota terlepas dari peran mereka
+
+### Mengaktifkan Kebijakan Kata Sandi
+
+<Steps>
+
+1. Pergi ke **Pengaturan Organisasi > Keamanan**
+2. Gulir ke bawah untuk menemukan bagian **Kebijakan Kata Sandi**
+3. Baca deskripsi: "Wajibkan anggota organisasi untuk menggunakan kata sandi yang memenuhi persyaratan kompleksitas tertentu"
+4. Aktifkan toggle **Terapkan Kebijakan Kata Sandi** untuk mengaktifkannya
+5. Deskripsi toggle menyatakan: "Ketika diaktifkan, semua anggota organisasi harus memenuhi persyaratan kata sandi untuk mengakses organisasi"
+
+</Steps>
+
+### Persyaratan Kata Sandi yang Tersedia
+
+| Pengaturan | Deskripsi | Rentang |
+|------------|-----------|---------|
+| **Panjang Minimum** | Jumlah karakter minimum yang diperlukan | 6-128 karakter |
+| **Wajib Huruf Besar** | Kata sandi harus berisi setidaknya satu huruf besar (A-Z) | Aktif/Nonaktif |
+| **Wajib Angka** | Kata sandi harus berisi setidaknya satu digit (0-9) | Aktif/Nonaktif |
+| **Wajib Karakter Khusus** | Kata sandi harus berisi setidaknya satu karakter khusus (!@#$%^&*, dll.) | Aktif/Nonaktif |
+
+### Pelacakan Kepatuhan Anggota
+
+Ketika kebijakan kata sandi aktif, Anda dapat memantau kepatuhan:
+
+- **Total Anggota**: Jumlah anggota di organisasi Anda
+- **Patuh**: Anggota yang kata sandinya memenuhi persyaratan kebijakan
+- **Tidak Patuh**: Anggota yang perlu memperbarui kata sandi mereka
+
+Anggota yang tidak patuh tercantum dengan alamat email mereka. Anda dapat menyalin daftar email untuk memberitahu mereka tentang kebijakan dan perubahan kata sandi yang diperlukan.
+
+<Aside type="tip">
+
+Ketika mengaktifkan kebijakan kata sandi untuk pertama kalinya, anggota dengan kata sandi yang tidak patuh akan diminta untuk mengubah kata sandi mereka pada login berikutnya. Mereka tidak akan langsung dikunci, tetapi akses mereka mungkin dibatasi sampai mereka patuh.
+
+</Aside>
+
+### Praktik Terbaik untuk Kebijakan Kata Sandi
+
+- **Mulai dengan persyaratan yang wajar**: Minimum 10-12 karakter dengan huruf besar/kecil campuran dan angka memberikan keamanan yang baik tanpa terlalu membatasi
+- **Komunikasikan perubahan**: Beritahu tim Anda sebelum mengaktifkan persyaratan kata sandi baru
+- **Berikan waktu transisi**: Beri anggota waktu untuk memperbarui kata sandi mereka
+- **Pertimbangkan pengelola kata sandi**: Rekomendasikan anggota tim menggunakan pengelola kata sandi untuk menghasilkan dan menyimpan kata sandi yang kuat
+
+## Keamanan Kunci API
+
+Capgo menyediakan dua kontrol keamanan untuk kunci API: menerapkan kunci API yang aman (di-hash) dan mewajibkan tanggal kedaluwarsa. Bagian Kebijakan Kunci API (ditandai dengan indikator **4** di gambar gambaran umum) diidentifikasi oleh ikon kunci.
+
+### Terapkan Kunci API yang Aman
+
+Opsi pertama di bagian Kebijakan Kunci API adalah **Terapkan Kunci API yang Aman**. Ketika diaktifkan, pengaturan ini mewajibkan semua kunci API di organisasi Anda dibuat menggunakan format aman/di-hash.
+
+Kunci API yang di-hash lebih aman karena:
+
+- Nilai kunci sebenarnya tidak pernah disimpan di server kami
+- Hanya Anda (dan sistem Anda) yang memiliki akses ke kunci lengkap
+- Bahkan jika database kami dikompromikan, kunci Anda tidak dapat digunakan
+
+Deskripsi toggle menyatakan: "Ketika diaktifkan, hanya kunci API yang aman (di-hash) yang dapat mengakses organisasi ini. Kunci API teks biasa akan ditolak."
+
+<Aside type="note">
+
+Kunci API warisan yang ada (tidak di-hash) akan terus berfungsi, tetapi anggota tidak akan dapat membuat kunci baru yang tidak di-hash ketika kebijakan ini diaktifkan.
+
+</Aside>
+
+### Mengaktifkan Kunci API yang Aman
+
+<Steps>
+
+1. Pergi ke **Pengaturan Organisasi > Keamanan**
+2. Gulir ke bawah untuk menemukan bagian **Kebijakan Kunci API** (cari ikon kunci)
+3. Temukan toggle **Terapkan Kunci API yang Aman**
+4. Aktifkan toggle untuk mengaktifkan penerapan kunci API yang aman
+5. Kunci yang ada tidak terpengaruh; kebijakan berlaku untuk pembuatan kunci baru
+
+</Steps>
+
+### Kebijakan Kedaluwarsa Kunci API
+
+Opsi kedua (ditandai dengan indikator **5** di gambar gambaran umum) adalah **Wajibkan Kedaluwarsa Kunci API**. Anda dapat mewajibkan semua kunci API memiliki tanggal kedaluwarsa, membatasi periode validitasnya.
+
+Ini adalah praktik keamanan terbaik yang:
+
+- Membatasi jendela paparan jika kunci dikompromikan
+- Memastikan rotasi kunci secara teratur
+- Membantu memenuhi persyaratan kepatuhan untuk manajemen kredensial
+
+Deskripsi toggle menyatakan: "Ketika diaktifkan, semua kunci API untuk organisasi ini harus memiliki tanggal kedaluwarsa"
+
+### Mengkonfigurasi Kebijakan Kedaluwarsa
+
+<Steps>
+
+1. Pergi ke **Pengaturan Organisasi > Keamanan**
+2. Temukan bagian **Kebijakan Kunci API**
+3. Temukan toggle **Wajibkan Kedaluwarsa Kunci API** (di bawah Terapkan Kunci API yang Aman)
+4. Aktifkan toggle untuk mengaktifkan persyaratan kedaluwarsa
+5. Setelah diaktifkan, atur **Hari kedaluwarsa maksimum** (1-365 hari)
+   - Ini membatasi seberapa jauh di masa depan tanggal kedaluwarsa dapat ditetapkan
+   - Contoh: Menetapkan 90 hari berarti kunci dapat kedaluwarsa paling lama 90 hari dari pembuatan
+
+</Steps>
+
+<Aside type="caution">
+
+Ketika Anda mengaktifkan persyaratan kedaluwarsa:
+- Kunci API baru harus memiliki tanggal kedaluwarsa
+- Kunci yang ada tanpa kedaluwarsa terus berfungsi
+- Pertimbangkan untuk mengaudit kunci yang ada dan merotasi yang tanpa kedaluwarsa
+
+</Aside>
+
+### Kebijakan Kunci API yang Direkomendasikan
+
+| Kasus Penggunaan | Kunci Aman | Kedaluwarsa | Hari Maks. |
+|------------------|------------|-------------|------------|
+| **Pengembangan** | Direkomendasikan | Opsional | 30-90 |
+| **Pipeline CI/CD** | Diperlukan | Diperlukan | 90-180 |
+| **Produksi** | Diperlukan | Diperlukan | 30-90 |
+| **Enterprise/Kepatuhan** | Diperlukan | Diperlukan | 30-60 |
+
+## Kepatuhan dan Audit
+
+Fitur keamanan organisasi membantu Anda memenuhi berbagai persyaratan kepatuhan:
+
+| Standar | Fitur Relevan |
+|---------|---------------|
+| **SOC 2** | Penerapan 2FA, kebijakan kata sandi, kontrol kunci API |
+| **ISO 27001** | Semua fitur keamanan membantu menunjukkan kontrol akses |
+| **HIPAA** | Autentikasi kuat dan manajemen akses |
+| **GDPR** | Perlindungan data melalui kontrol akses |
+| **PCI DSS** | Autentikasi multi-faktor, kata sandi kuat |
+
+### Memantau Status Kepatuhan
+
+Dashboard Keamanan memberikan visibilitas real-time ke:
+- Berapa banyak anggota yang mengaktifkan 2FA
+- Kepatuhan kebijakan kata sandi di organisasi Anda
+- Adopsi keamanan kunci API
+
+Gunakan fitur "Salin daftar email" untuk dengan mudah mengekspor daftar anggota yang tidak patuh untuk komunikasi yang ditargetkan.
+
+## Pemecahan Masalah
+
+### "Akses Ditolak: Kebijakan keamanan tidak terpenuhi"
+
+**Masalah**: Seorang anggota tidak dapat mengakses organisasi.
+
+**Solusi**:
+1. Periksa apakah 2FA diterapkan - anggota perlu [mengaktifkan 2FA](/docs/webapp/mfa/)
+2. Periksa apakah kebijakan kata sandi aktif - anggota perlu memperbarui kata sandi mereka
+3. Verifikasi status kepatuhan anggota di dashboard Keamanan
+
+### Tidak dapat mengaktifkan fitur keamanan
+
+**Masalah**: Toggle keamanan dinonaktifkan atau tidak merespons.
+
+**Solusi**:
+- Pastikan Anda memiliki peran **super_admin** di organisasi
+- Periksa koneksi jaringan Anda
+- Coba segarkan halaman
+- Hubungi dukungan jika masalah berlanjut
+
+### Pembuatan kunci API gagal
+
+**Masalah**: Tidak dapat membuat kunci API baru.
+
+**Solusi**:
+- Jika kunci aman diterapkan, pastikan Anda menggunakan alur pembuatan kunci aman
+- Jika kedaluwarsa diperlukan, tetapkan tanggal kedaluwarsa dalam rentang yang diizinkan
+- Periksa pengaturan hari kedaluwarsa maksimum
+
+## Langkah Selanjutnya
+
+- [Siapkan 2FA di akun Anda](/docs/webapp/mfa/)
+- [Pelajari tentang detail penerapan 2FA](/docs/webapp/2fa-enforcement/)
+- [Kelola kunci API](/docs/webapp/api-keys/)
+- [Manajemen organisasi](/docs/webapp/organization-system/)

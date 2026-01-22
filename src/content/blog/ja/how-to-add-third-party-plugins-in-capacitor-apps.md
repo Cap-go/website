@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-18T14:04:24.780Z
-updated_at: 2025-10-31T17:55:22.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67d977fb55129a55bd698926-1742306685762.jpg
 head_image_alt: モバイル開発
@@ -314,7 +314,7 @@ Capgoが提供する機能：
 
 Capgoは、Capacitorワークフローにシームレスに統合され、安全で継続的なアップデートを保証します。**GitHub Actions、GitLab CI、**[**Jenkins**](https://www.jenkins.io/)などのツールと連携し、プラグインのアップデートとデプロイメントを自動化して時間を節約し、手動の作業を削減します。
 
-複数のプラグインを扱うチームにとって、チャンネルシステムは広範なリリース前のベータテストをサポートします。リアルタイム分析により、アップデートのパフォーマンスとエラー追跡に関する洞察が得られます。Capgoは**Capacitor 6および7**と互換性があり、カスタムAPI統合をサポートし、特殊なニーズに対応するためのセルフホストオプションを提供します。
+複数のプラグインを扱うチームにとって、チャンネルシステムは広範なリリース前のベータテストをサポートします。リアルタイム分析により、アップデートのパフォーマンスとエラー追跡に関する洞察が得られます。Capgoは**Capacitor 8**と互換性があり、カスタムAPI統合をサポートし、特殊なニーズに対応するためのセルフホストオプションを提供します。
 
 ## まとめ
 

@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-02T03:07:47.047Z
-updated_at: 2025-12-31T01:19:38.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776-1743563280473.jpg
 head_image_alt: Pengembangan Mobile
@@ -90,7 +90,7 @@ Menurut Capgo, 95% pengguna mematuhi pembaruan dalam 24 jam. Dengan lebih dari 2
 Sebelum Anda mulai membangun manifest, pastikan Anda memiliki:
 
 -   Xcode 15 atau versi lebih baru terinstal
--   Proyek Capacitor 5.0+ yang sudah diatur
+-   Proyek Capacitor 8.0+ yang sudah diatur
 -   Akses ke file `Info.plist` aplikasi Anda
 -   Pemahaman dasar tentang struktur JSON
 -   Dokumentasi yang menguraikan praktik pengumpulan data aplikasi Anda

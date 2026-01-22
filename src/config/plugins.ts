@@ -54,6 +54,9 @@ import FolderIcon from 'astro-heroicons/mini/Folder.astro'
 import SunIcon from 'astro-heroicons/mini/Sun.astro'
 import StarIcon from 'astro-heroicons/mini/Star.astro'
 import FolderOpenIcon from 'astro-heroicons/mini/FolderOpen.astro'
+import ClockIcon from 'astro-heroicons/mini/Clock.astro'
+import EyeIcon from 'astro-heroicons/mini/Eye.astro'
+import FilmIcon from 'astro-heroicons/mini/Film.astro'
 
 export interface Action {
   icon?: any
@@ -836,5 +839,45 @@ export const actions = [
     href: 'https://github.com/Cap-go/capacitor-file-picker/',
     title: 'File Picker',
     icon: FolderOpenIcon,
+  },
+  {
+    name: '@capgo/capacitor-watch',
+    author: 'github.com/Cap-go',
+    description: 'Apple Watch communication with bidirectional messaging between iPhone and watchOS apps',
+    href: 'https://github.com/Cap-go/capacitor-watch/',
+    title: 'Watch',
+    icon: ClockIcon,
+  },
+  {
+    name: '@capgo/capacitor-brightness',
+    author: 'github.com/Cap-go',
+    description: 'Control device screen brightness programmatically with support for app-specific and system-wide control',
+    href: 'https://github.com/Cap-go/capacitor-brightness/',
+    title: 'Brightness',
+    icon: SunIcon,
+  },
+  {
+    name: '@capgo/capacitor-light-sensor',
+    author: 'github.com/Cap-go',
+    description: 'Access the ambient light sensor to measure illuminance levels in lux with real-time updates',
+    href: 'https://github.com/Cap-go/capacitor-light-sensor/',
+    title: 'Light Sensor',
+    icon: EyeIcon,
+  },
+  {
+    name: '@capgo/capacitor-video-thumbnails',
+    author: 'github.com/Cap-go',
+    description: 'Generate thumbnail images from local and remote video files at specific timestamps',
+    href: 'https://github.com/Cap-go/capacitor-video-thumbnails/',
+    title: 'Video Thumbnails',
+    icon: FilmIcon,
+  },
+  {
+    name: '@capgo/capacitor-intent-launcher',
+    author: 'github.com/Cap-go',
+    description: 'Launch Android intents, open system settings, and interact with other apps using the Intent system',
+    href: 'https://github.com/Cap-go/capacitor-intent-launcher/',
+    title: 'Intent Launcher',
+    icon: RocketLaunchIcon,
   },
 ]

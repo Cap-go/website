@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-05-12T04:31:38.871Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68214ae55e3fe4823b5f6cab-1747024366276.jpg
 head_image_alt: Desarrollo de Software
@@ -226,7 +226,7 @@ Desde 2022, el panorama de seguridad de CI/CD ha visto avances significativos, y
 
 > "Actualmente estamos probando @Capgo desde que Appcenter dejó de soportar actualizaciones en vivo en aplicaciones híbridas y @AppFlow es demasiado caro." - Simon Flack[\[1\]](https://capgo.app)
 
-La tarifa única de configuración de CI/CD de Capgo de $2,600 ofrece ahorros a largo plazo, con un estimado de $26,100 ahorrados en cinco años[\[1\]](https://capgo.app). Su apoyo para Capacitor 6 y 7, junto con características para la gestión flexible de organizaciones, lo convierte en una excelente opción para pequeños equipos y grandes empresas por igual, especialmente aquellos que priorizan medidas de seguridad robustas.
+La tarifa única de configuración de CI/CD de Capgo de $2,600 ofrece ahorros a largo plazo, con un estimado de $26,100 ahorrados en cinco años[\[1\]](https://capgo.app). Su apoyo para Capacitor 8, junto con características para la gestión flexible de organizaciones, lo convierte en una excelente opción para pequeños equipos y grandes empresas por igual, especialmente aquellos que priorizan medidas de seguridad robustas.
 
 ## Conclusión: Mejorando CI/CD con Rotación de Tokens
 

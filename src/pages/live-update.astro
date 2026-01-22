@@ -35,7 +35,7 @@ const content = {
       <!-- Animated background elements -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
         {
-          Array.from({ length: 12 }).map((_, i) => (
+          Array.from({ length: 12 }).map(() => (
             <div
               class="absolute w-2 h-2 bg-blue-500 rounded-full opacity-20 animate-pulse"
               style={{
@@ -738,6 +738,14 @@ npx @capgo/cli bundle upload <span class="text-cyan-400">--partial</span>
         </div>
 
         <div class="flex flex-wrap justify-center gap-6">
+          <div class="relative flex flex-col items-center w-40 p-6 bg-gray-800 border border-blue-500/50 rounded-2xl">
+            <span class="absolute px-2 py-0.5 text-xs font-bold text-white bg-blue-500 rounded-full -top-2">{m.live_update_lts_electron_new({}, { locale })}</span>
+            <svg class="w-10 h-10 text-blue-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+            <span class="mt-2 text-sm font-medium text-gray-300">{m.live_update_lts_electron({}, { locale })}</span>
+            <span class="mt-1 text-xs text-blue-400">{m.live_update_lts_supported({}, { locale })}</span>
+          </div>
           <div class="flex flex-col items-center w-40 p-6 bg-gray-800 border border-gray-700 rounded-2xl">
             <span class="text-4xl font-bold text-blue-400">8</span>
             <span class="mt-2 text-sm font-medium text-gray-300">{m.live_update_lts_capacitor8({}, { locale })}</span>
@@ -936,7 +944,7 @@ npx @capgo/cli bundle upload <span class="text-cyan-400">--partial</span>
     <!-- CTA Section -->
     <div class="relative py-16 bg-gray-900 sm:py-20">
       <div class="max-w-md px-4 mx-auto sm:px-6 sm:max-w-3xl lg:px-8 lg:max-w-7xl">
-        <div class="relative px-6 py-12 overflow-hidden shadow-xl bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl sm:py-24 sm:px-12">
+        <div class="relative px-6 py-12 overflow-hidden shadow-xl bg-linear-to-r from-blue-600 to-blue-800 rounded-2xl sm:py-24 sm:px-12">
           <div aria-hidden="true" class="absolute inset-0 -mt-72 sm:-mt-32 md:mt-0">
             <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360">
               <path class="text-blue-500 text-opacity-40" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"></path>

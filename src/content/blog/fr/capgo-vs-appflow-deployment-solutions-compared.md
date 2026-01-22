@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-05-12T07:21:36.178Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68217b4a5e3fe4823b5fc0bc-1747034661995.jpg
 head_image_alt: Développement Mobile
@@ -130,7 +130,7 @@ Après avoir examiné les comparaisons détaillées des fonctionnalités et des 
 
 ### Principales Différences
 
-Capgo et Appflow divergent de manière significative en termes de disponibilité future, de structure tarifaire, et d'approche technique. Capgo se distingue par des caractéristiques comme **le cryptage de bout en bout**, le support de **Capacitor 6 & 7**, et la flexibilité des **options de déploiement cloud et auto-hébergées**. Ces facteurs offrent aux développeurs plus de contrôle et des solutions rentables, surtout en tenant compte de la fermeture prévue d'Appflow en 2026 [\[1\]](https://capgo.app).
+Capgo et Appflow divergent de manière significative en termes de disponibilité future, de structure tarifaire, et d'approche technique. Capgo se distingue par des caractéristiques comme **le cryptage de bout en bout**, le support de **Capacitor 8**, et la flexibilité des **options de déploiement cloud et auto-hébergées**. Ces facteurs offrent aux développeurs plus de contrôle et des solutions rentables, surtout en tenant compte de la fermeture prévue d'Appflow en 2026 [\[1\]](https://capgo.app).
 
 | Aspect | Capgo | Appflow |
 | --- | --- | --- |

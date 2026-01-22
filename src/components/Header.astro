@@ -11,12 +11,12 @@ const totalStars = getTotalStars()
   <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
     <div class="relative flex items-center justify-between">
       <div class="flex items-center shrink-0">
-        <a href={getRelativeLocaleUrl(Astro.locals.locale)} aria-label="Capgo home" class="flex items-center pr-3 text-4xl font-medium font-prompt">
+        <a href={getRelativeLocaleUrl(Astro.locals.locale)} aria-label={m.capgo_home({}, { locale: Astro.locals.locale })} class="flex items-center pr-3 text-4xl font-medium font-prompt">
           <img class="w-auto pr-1 h-18" loading="eager" height="72" width="133" alt={`${brand} logo`} aria-label={`${brand} logo`} src="/capgo_logo.webp" />
         </a>
       </div>
       <div class="flex lg:hidden">
-        <button type="button" class="text-white" aria-label="Expand menu" id="menu-toggle">
+        <button type="button" class="text-white" aria-label={m.expand_menu({}, { locale: Astro.locals.locale })} id="menu-toggle">
           <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
@@ -27,7 +27,7 @@ const totalStars = getTotalStars()
           <!-- Docs -->
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}
-            aria-label="Docs"
+            aria-label={m.docs({}, { locale: Astro.locals.locale })}
             class="text-base font-medium transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
           >
             {m.docs({}, { locale: Astro.locals.locale })}
@@ -37,7 +37,7 @@ const totalStars = getTotalStars()
             <button
               type="button"
               class="flex items-center text-base font-medium transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
-              aria-label="Products"
+              aria-label={m.products({}, { locale: Astro.locals.locale })}
             >
               {m.products({}, { locale: Astro.locals.locale })}
               <svg class="ml-1 w-4 h-4 transition-transform group-hover:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -72,7 +72,7 @@ const totalStars = getTotalStars()
             <button
               type="button"
               class="flex items-center text-base font-medium transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
-              aria-label="Solutions"
+              aria-label={m.solutions({}, { locale: Astro.locals.locale })}
             >
               {m.solutions({}, { locale: Astro.locals.locale })}
               <svg class="ml-1 w-4 h-4 transition-transform group-hover:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -209,7 +209,7 @@ const totalStars = getTotalStars()
           <!-- Enterprise -->
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'enterprise')}
-            aria-label="Enterprise"
+            aria-label={m.enterprise_title({}, { locale: Astro.locals.locale })}
             class="text-base font-medium transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
           >
             {m.enterprise_title({}, { locale: Astro.locals.locale })}
@@ -217,7 +217,7 @@ const totalStars = getTotalStars()
           <!-- Pricing -->
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'pricing')}
-            aria-label="Pricing"
+            aria-label={m.pricing({}, { locale: Astro.locals.locale })}
             class="text-base font-medium transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
           >
             {m.pricing({}, { locale: Astro.locals.locale })}
@@ -225,7 +225,7 @@ const totalStars = getTotalStars()
           <!-- Blog -->
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'blog')}
-            aria-label="Blog"
+            aria-label={m.blog({}, { locale: Astro.locals.locale })}
             class="text-base font-medium transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
           >
             {m.blog({}, { locale: Astro.locals.locale })}
@@ -234,7 +234,7 @@ const totalStars = getTotalStars()
         <div class="flex items-center ml-auto space-x-4">
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
-            aria-label="GitHub Stars"
+            aria-label={m.github_stars({}, { locale: Astro.locals.locale })}
             class="flex gap-2 items-center py-1.5 px-3 text-sm font-medium text-gray-300 bg-gray-800 rounded-md transition-colors hover:bg-gray-700"
           >
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -244,7 +244,7 @@ const totalStars = getTotalStars()
           </a>
           <a
             href="https://console.capgo.app/login/"
-            aria-label="Login"
+            aria-label={m.login({}, { locale: Astro.locals.locale })}
             target="_blank"
             class="text-base font-medium transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
           >
@@ -253,7 +253,7 @@ const totalStars = getTotalStars()
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
             target="_blank"
-            aria-label="Register"
+            aria-label={m.register({}, { locale: Astro.locals.locale })}
             class="px-5 py-2 text-base font-semibold leading-7 text-gray-300 transition-all duration-200 bg-transparent border border-gray-300 rounded-xl hover:text-white hover:bg-gray-500 focus:text-white focus:bg-gray-500 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none font-pj"
             role="button"
           >
@@ -268,7 +268,7 @@ const totalStars = getTotalStars()
       <!-- GitHub Stars -->
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
-        aria-label="GitHub Stars"
+        aria-label={m.github_stars({}, { locale: Astro.locals.locale })}
         class="flex gap-2 items-center px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-600"
       >
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

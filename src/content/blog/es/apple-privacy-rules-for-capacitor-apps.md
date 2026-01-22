@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-31T01:48:03.832Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e9dc69283d21cbd67b72cf-1743385695606.jpg
 head_image_alt: Desarrollo Móvil
@@ -76,7 +76,7 @@ Aprende cómo implementar las reglas de privacidad de Apple en tu aplicación de
 Antes de comenzar, asegúrate de lo siguiente:
 
 -   Tienes **Xcode 15 o posterior** para soporte del manifiesto de privacidad.
--   Capacitor 6 o 7 está instalado.
+-   Capacitor 8 está instalado.
 -   El objetivo de despliegue de iOS está configurado en **iOS 14.5 o posterior**.
 -   Tu aplicación incluye un archivo `Info.plist` correctamente configurado.
 -   Tienes una **cuenta de desarrollador de Apple** con certificados válidos.

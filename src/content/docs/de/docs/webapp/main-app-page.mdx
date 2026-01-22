@@ -1,26 +1,113 @@
 ---
-title: Hauptseite der App
-description: Was zeigt die Hauptseite an?
+title: "App-Seite"
+description: "Was zeigt die App-Seite der Capgo-Webapp? Und was können Sie damit tun."
 sidebar:
   order: 5
 locale: de
 ---
 
-## Was zeigt die Hauptseite an?
+## Was zeigt die App-Seite?
 
-Schauen wir uns zunächst die Hauptseite der App an:
+Zunächst werfen wir einen Blick auf die Hauptseite der App:
 
-<figure><img src="/main-app-page.webp" alt="Main page screeshot" /><figcaption></figcaption></figure>
+In Capgo repräsentiert eine App Ihre mobile Anwendung, die mit dem Live-Update-System von Capgo integriert ist. Sie ermöglicht es Ihnen, Updates, Kanäle und Geräte nahtlos zu verwalten.
 
-Lass uns dies genauer betrachten
+<figure><img src="/main-app-page.webp" alt="Hauptseiten-Screenshot" /><figcaption></figcaption></figure>
 
-Zuerst die Statistiken. Die Statistiken werden derzeit überarbeitet, daher können sie zu diesem Zeitpunkt nicht dokumentiert werden. Wir werden einen Statistik-Abschnitt hinzufügen, sobald sie vollständig funktionsfähig sind.
+Schauen wir uns das genauer an. Die Haupt-App-Seite ist in mehrere Schlüsselbereiche unterteilt:
 
-Zweitens, schauen wir uns alle verfügbaren Menüs und ihre Funktionen an
+1.  **Obere Navigationsleiste:** Bietet Zugang zu verschiedenen Bereichen Ihrer App-Verwaltung:
+    *   **Dashboard (1):** Die aktuelle Ansicht, die wichtige Metriken und Zusammenfassungen anzeigt.
+    *   **Informationen (2):** Zeigt die Kerneinstellungen und Details Ihrer App an (siehe Abschnitt "App-Informationen" unten).
+    *   **[Bundles (3)](/docs/webapp/bundles/):** Verwalten Sie die Versionen und Releases Ihrer App.
+    *   **[Kanäle (4)](/docs/webapp/channels/):** Konfigurieren und verwalten Sie verschiedene Update-Kanäle (z.B. Produktion, Beta).
+    *   **[Geräte (5)](/docs/webapp/devices/):** Anzeigen und Verwalten registrierter Geräte, einschließlich spezifischer Überschreibungen.
+    *   **[Logs (6)](/docs/webapp/logs/):** Zugriff auf detaillierte Logs und Fehlerberichte für Ihre App.
+    *   **Builds (7):** Anzeigen und Verwalten Ihrer App-Builds.
 
-<figure><img src="/app-multiple-sections.webp" alt="Multiple sections screeshot" /><figcaption></figcaption></figure>
+2.  **Statistik-Anzeige:** Visualisiert wichtige Metriken für den letzten Abrechnungszeitraum (Daten spiegeln die Nutzung ab Ihrem Abrechnungstag wider, nicht ab dem 1. des Monats):
+    *   **Monatlich aktive Benutzer (8):** Verfolgt die Anzahl der einzigartigen aktiven Benutzer über die Zeit.
+    *   **Speicher (9):** Zeigt den aktuellen Speicherverbrauch.
+    *   **Bandbreite (10):** Zeigt die Bandbreitennutzung an.
+    *   **Aktives Bundle (11):** Zeigt die Verteilung aktiver Geräte über verschiedene App-Bundles.
 
-Die erste Schaltfläche führt Sie zur [channels](/docs/webapp/channels/) Seite. Dort können Sie die Kanäle der App erstellen/löschen/konfigurieren\
-Die zweite Schaltfläche führt Sie zur [bundles](/docs/webapp/bundles/) Seite. Dort können Sie alle Versionen der App sehen
-Die zweite Schaltfläche führt Sie zur [device](/docs/webapp/devices/) Seite. Dort können Sie alle Geräte sehen. Sie können dort auch gerätespezifische Überschreibungen festlegen
-Die zweite Schaltfläche führt Sie zur [updates](/docs/webapp/logs/) Seite. Dort können Sie die detaillierten Statistiken (Logs) und Fehler sehen, die Ihre App erfährt
+3.  **Zusammenfassungskarten:** Bietet einen schnellen Überblick über wichtige Zahlen:
+    *   **Bundle-Uploads (12):** Gesamtzahl der hochgeladenen App-Bundles.
+    *   **Update-Statistiken (13):** Gesamtzahl der durchgeführten Updates, einschließlich Anfragen, Installationen und Fehler.
+    *   **Deployment-Statistiken (14):** Gesamtzahl der Deployments.
+
+4.  **Anzeigeoptionen (15-18):** Steuerelemente zum Filtern und Anzeigen der Statistiken:
+    *   **Täglich (15):** Statistiken auf täglicher Basis anzeigen.
+    *   **Kumulativ (16):** Kumulative Statistiken über die Zeit anzeigen.
+    *   **Abrechnungszeitraum (17):** Statistiken für den aktuellen Abrechnungszeitraum anzeigen.
+    *   **Datumsbereich (18):** Einen benutzerdefinierten Datumsbereich auswählen (z.B. letzte 30 Tage).
+
+## App-Informationen
+
+Dieser Abschnitt entspricht dem Tab "Informationen" (1) in der oberen Navigationsleiste. Hier können Sie wichtige Details und Einstellungen für Ihre Anwendung anzeigen und verwalten.
+
+<figure><img src="/app_info.webp" alt="App-Informationen-Seite" /><figcaption>App-Informationen-Seite</figcaption></figure>
+
+Hier ist eine Aufschlüsselung der verfügbaren Felder und Aktionen:
+
+*   **App-Symbol (2):** Zeigt das Symbol Ihrer Anwendung an. Sie können auf die Schaltfläche "Ändern" klicken, um ein neues Symbol hochzuladen.
+*   **App-ID (3):** Eine eindeutige Kennung für Ihre Anwendung innerhalb von Capgo. Diese ID ist nicht bearbeitbar.
+*   **App-Name (4):** Der Anzeigename für Ihre Anwendung. Sie können diesen bei Bedarf ändern.
+*   **Standard-Upload-Kanal (5):** Gibt den Standardkanal an, in den neue Bundles hochgeladen werden. Sie können auf das Bearbeiten-Symbol klicken, um einen anderen Standardkanal auszuwählen.
+*   **Standard-Download-Kanal (6):** Gibt den Standardkanal an, von dem Geräte Updates herunterladen. Sie können auf das Bearbeiten-Symbol klicken, um einen anderen Standardkanal auszuwählen. Siehe den Abschnitt [Standardkanal-Konfiguration](#standardkanal-konfiguration) unten für detaillierte Informationen.
+*   **Bundles automatisch löschen, die nicht verwendet werden (nach x Sekunden) (7):** Diese Einstellung ermöglicht es Ihnen, alte Bundles automatisch zu löschen, die für eine bestimmte Dauer (in Sekunden) nicht verwendet wurden. Setzen Sie auf `0`, um das automatische Löschen zu deaktivieren. Dies hilft bei der Speicherverwaltung und hält Ihre Bundle-Liste sauber.
+*   **Bundle-Metadaten dem Plugin bereitstellen (8):** Wenn aktiviert, werden Bundle-Link und Kommentarfelder an das Capacitor Updater Plugin gesendet. Diese Funktion erfordert Plugin-Version 7.35.0 oder höher.
+*   **App-Eigentum übertragen (9):** Dieser Abschnitt bietet eine Option, die Übertragung Ihrer Anwendung an eine andere Organisation zu initiieren, der Sie angehören.
+*   **App löschen-Schaltfläche:** Löscht Ihre Anwendung dauerhaft aus Capgo. Diese Aktion ist unwiderruflich und entfernt alle zugehörigen Daten, Bundles, Kanäle und Geräte.
+*   **Aktualisieren-Schaltfläche:** Speichert alle Änderungen, die Sie an den bearbeitbaren Feldern auf dieser Seite vorgenommen haben (z.B. App-Name, Standard-Upload-Kanal, Einstellung für automatisches Bundle-Löschen).
+
+## Standardkanal-Konfiguration
+
+Der **Standard-Download-Kanal** ist eine der wichtigsten Einstellungen für Ihre App. Er bestimmt, von welchem Kanal neue Geräte Updates erhalten, wenn sie sich zum ersten Mal mit Capgo verbinden.
+
+### Wie Standardkanäle funktionieren
+
+Wenn ein Gerät ein Update von Capgo anfordert, bestimmt das System anhand der folgenden Prioritätsreihenfolge (höchste Priorität zuerst), welcher Kanal verwendet wird:
+
+1. **Erzwungene Gerätezuordnung**: Wenn die Geräte-ID explizit einem Kanal in den Kanaleinstellungen zugeordnet ist, gewinnt dieser Kanal immer.
+2. **Cloud-Override**: Wenn dem Gerät über `setChannel()` oder manuell im Dashboard ein Kanal zugewiesen wurde, wird dieser Override verwendet.
+3. **Capacitor-Config `defaultChannel`**: Falls in Ihrer `capacitor.config.*`-Datei gesetzt, wird dies für Test-/Beta-Builds verwendet.
+4. **Standard-Download-Kanal**: Die hier konfigurierte Einstellung—diese wird von ~99% Ihrer Produktionsnutzer verwendet.
+
+### Plattformspezifische Standardkanäle
+
+Sie können **zwei separate Standardkanäle** konfigurieren—einen für iOS und einen für Android. Dies ist nützlich, wenn:
+
+- Sie Updates für eine Plattform vor der anderen ausrollen möchten
+- Sie unterschiedliche Update-Strategien pro Plattform benötigen
+- Sie eine neue Version auf einer Plattform testen, während die andere stabil bleibt
+
+So richten Sie plattformspezifische Standardkanäle ein:
+1. Erstellen Sie zwei Kanäle (z.B. `production-ios` und `production-android`)
+2. Aktivieren Sie in den Einstellungen jedes Kanals nur die relevante Plattform (iOS- oder Android-Schalter)
+3. Markieren Sie beide Kanäle als "Standard" - Capgo erlaubt dies, wenn Kanäle unterschiedliche Plattformen ansprechen
+
+Wenn ein Gerät ein Update anfordert:
+- iOS-Geräte erhalten Updates vom iOS-aktivierten Standardkanal
+- Android-Geräte erhalten Updates vom Android-aktivierten Standardkanal
+
+### Einzelner Standardkanal (Empfohlen für die meisten Apps)
+
+Für die meisten Anwendungen ist ein einzelner Standardkanal, der beide Plattformen unterstützt, der einfachste Ansatz:
+1. Erstellen Sie einen Kanal (z.B. `production`)
+2. Stellen Sie sicher, dass sowohl iOS- als auch Android-Schalter aktiviert sind
+3. Markieren Sie ihn als Standardkanal
+
+Dies gewährleistet konsistentes Verhalten über alle Plattformen hinweg und vereinfacht Ihren Release-Workflow.
+
+### Ändern des Standardkanals
+
+Wenn Sie den Standardkanal ändern:
+- **Neue Geräte** beginnen sofort, Updates vom neuen Standard zu erhalten
+- **Bestehende Geräte**, die bereits eine Kanalzuweisung haben (über Override oder Zwang), wechseln NICHT automatisch
+- Um bestehende Geräte zu verschieben, müssen Sie entweder:
+  - `setChannel()` verwenden, um sie programmatisch zu überschreiben
+  - Sie im Dashboard zum neuen Kanal zwingen
+  - Ihre Geräteeinträge löschen (sie registrieren sich dann mit dem neuen Standard neu)
+
+> **Tipp**: Testen Sie Ihren neuen Standardkanal immer zuerst mit einer kleinen Gruppe erzwungener Geräte, bevor Sie ihn zum Standard für alle Nutzer machen.

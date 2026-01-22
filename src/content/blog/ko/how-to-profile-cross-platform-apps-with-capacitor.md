@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-19T02:37:04.938Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60-1745030245432.jpg
 head_image_alt: 모바일 개발
@@ -61,7 +61,7 @@ Capacitor 앱을 효과적으로 프로파일링하려면 적절한 도구, 소�
 다음 항목이 있는지 확인하세요:
 
 -   패키지 관리를 위한 **Node.js v16+** 및 **npm v8+**
--   앱 빌드 및 배포를 위한 **Capacitor CLI (v5.0+)**
+-   앱 빌드 및 배포를 위한 **Capacitor CLI (v8+)**
 -   iOS 개발 및 프로파일링을 위한 **Xcode 14+**
 -   Android 개발을 위한 **Android Studio Electric Eel**(또는 최신 버전)
 -   웹 성능 프로파일링을 위한 **Chrome DevTools**

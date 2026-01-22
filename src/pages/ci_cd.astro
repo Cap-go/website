@@ -1,7 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import * as m from '@/paraglide/messages'
 import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 
 const pageTitle = 'Mobile CI/CD Setup | Capgo'
@@ -62,7 +61,10 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
           <!-- CTA Buttons -->
           <div class="flex flex-col gap-4 justify-center mt-10 sm:flex-row">
             <div class="inline-flex relative group" role="presentation">
-              <div class="absolute -inset-px rounded-xl transition-opacity duration-300 pointer-events-none group-hover:opacity-90 bg-white/20 opacity-65 blur-lg"></div>
+              <div
+                class="absolute -inset-4 rounded-xl transition-opacity duration-300 pointer-events-none group-hover:opacity-90 opacity-65"
+                style="background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0) 70%);"
+              ></div>
               <a
                 href="https://cal.com/team/capgo/mobile-ci-cd-done-for-you"
                 class="inline-flex relative justify-center items-center py-4 px-8 text-lg font-bold text-white bg-gray-900 rounded-xl border border-red-500 transition-all duration-200 hover:bg-red-600 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:outline-none"
@@ -339,7 +341,10 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
               <span class="font-semibold text-gray-100">Your team's productivity is suffering.</span>
             </p>
             <div class="inline-flex relative group">
-              <div class="absolute -inset-px rounded-xl opacity-60 transition-all duration-300 pointer-events-none group-hover:-inset-1 bg-white/20 blur-lg group-hover:opacity-85">
+              <div
+                class="absolute -inset-4 rounded-xl opacity-60 transition-all duration-300 pointer-events-none group-hover:-inset-5 group-hover:opacity-85"
+                style="background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0) 70%);"
+              >
               </div>
               <a
                 href="https://cal.com/team/capgo/mobile-ci-cd-done-for-you"
@@ -906,7 +911,10 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
 
               <!-- CTA Button -->
               <div class="inline-flex relative group">
-                <div class="absolute -inset-px rounded-2xl opacity-60 transition-opacity duration-300 pointer-events-none bg-white/20 blur-lg group-hover:opacity-85"></div>
+                <div
+                  class="absolute -inset-4 rounded-2xl opacity-60 transition-opacity duration-300 pointer-events-none group-hover:opacity-85"
+                  style="background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0) 70%);"
+                ></div>
                 <a
                   href="https://cal.com/team/capgo/mobile-ci-cd-done-for-you"
                   class="inline-flex relative justify-center items-center py-4 px-8 text-lg font-bold text-white bg-gray-900 rounded-2xl border border-blue-500 transition-all duration-200 hover:bg-gray-900 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
@@ -932,7 +940,10 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
 
           <div class="flex flex-col gap-4 justify-center mt-10 sm:flex-row">
             <div class="inline-flex relative group" role="presentation">
-              <div class="absolute -inset-px rounded-xl opacity-60 transition-opacity duration-300 pointer-events-none group-hover:opacity-90 bg-white/20 blur-lg"></div>
+              <div
+                class="absolute -inset-4 rounded-xl opacity-60 transition-opacity duration-300 pointer-events-none group-hover:opacity-90"
+                style="background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0) 70%);"
+              ></div>
               <a
                 href="https://cal.com/team/capgo/mobile-ci-cd-done-for-you"
                 class="inline-flex relative justify-center items-center py-4 px-8 text-lg font-bold text-white bg-gray-900 rounded-xl border border-red-500 transition-all duration-200 hover:bg-red-600 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:outline-none"

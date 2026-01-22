@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-24T03:09:18.971Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94-1745464174874.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, live updates, version conflicts, app performance, error tracking, rollback, mobile development
@@ -138,7 +138,7 @@ This section builds on the live update tools overview, focusing on strategies to
 ### Version Control Tips
 
 -   Use **[Capgo channels](https://capgo.app/docs/webapp/channels/)** to manage iOS and Android rollouts while conducting platform-specific tests [\[1\]](https://capgo.app/).
--   Stick to **Capacitor 6 and 7** to ensure runtime compatibility across both platforms [\[1\]](https://capgo.app/).
+-   Stick to **Capacitor 8** to ensure runtime compatibility across both platforms [\[1\]](https://capgo.app/).
 
 ### Testing Approaches
 

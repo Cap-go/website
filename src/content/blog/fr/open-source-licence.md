@@ -9,7 +9,7 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-18T00:00:00.000Z
-updated_at: 2025-12-31T01:33:21.000Z
+updated_at: 2026-01-15T02:30:12.000Z
 head_image: /open_source_licence.webp
 head_image_alt: Licence Open Source
 keywords: >-
@@ -151,6 +151,6 @@ AGPL est une licence avec laquelle Google a un problème, car ils ne sont pas pr
 
 L'objectif de l'AGPL est de maximiser la liberté des utilisateurs et d'encourager les entreprises à contribuer à l'open-source. Je suis une application autonome orientée utilisateur. Je ne suis pas une bibliothèque ou une partie d'un projet plus grand. Je ne recherche pas les dons de Google, donc nous sommes heureux d'être sous licence AGPL. C'est la licence appropriée pour Capgo.
 
-# Conclusion
+## Conclusion
 
 Il y a de nombreux facteurs à prendre en compte lors du choix d'une licence de logiciel open-source. Pourtant, il existe certainement des choix populaires au sein de la communauté des développeurs. Les licences permissives courantes incluent la Licence MIT, la Licence Apache et la Licence BSD. Certaines licences copyleft courantes incluent la GNU General Public License et la Mozilla Public License.

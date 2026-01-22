@@ -89,6 +89,15 @@ Seperti di atas, Capgo tidak boleh digunakan untuk melanggar kebijakan app store
 
 Juga Capgo tidak mendukung perubahan kode native (misalnya Java/Kotlin di Android atau Objective-C/Swift di iOS). Alat akan memperingatkan Anda selama percobaan pembaruan jika Anda telah mengubah kode native.
 
+### Dapatkah saya memperbarui perubahan capacitor.config.ts melalui Capgo?[](https://capgo.app/docs/faq/#can-i-update-capacitorconfigts-changes-via-capgo "Direct link to Can I update capacitor.config.ts changes via Capgo?")
+
+Tidak. Perubahan pada `capacitor.config.ts` tidak dapat dikirim melalui pembaruan langsung Capgo. File konfigurasi Capacitor dibaca pada waktu build native dan dikompilasi ke dalam binary aplikasi native. Ini berarti setiap perubahan pada `capacitor.config.ts` (seperti konfigurasi plugin, ID aplikasi, pengaturan server, atau opsi plugin native) memerlukan rilis native baru melalui App Store atau Google Play.
+
+Capgo hanya dapat memperbarui aset web (HTML, CSS, JavaScript) yang dimuat saat runtime. Jika Anda perlu mengubah konfigurasi Capacitor, Anda harus:
+1. Memperbarui `capacitor.config.ts` secara lokal
+2. Membangun ulang aplikasi native Anda (`npx cap sync` diikuti dengan build native)
+3. Mengirimkan binary baru ke app store
+
 ### Apakah Capgo mengirimkan ke store untuk saya?[](https://capgo.app/docs/faq/#does-capgo-submit-to-the-stores-for-me "Direct link to Does Capgo submit to the stores for me?")
 
 Capgo saat ini tidak mendukung pengiriman ke app store atas nama Anda. Kami memiliki rencana untuk menambahkan ini di masa depan, tetapi untuk saat ini Anda perlu terus menggunakan proses yang ada untuk mengirim ke app store.

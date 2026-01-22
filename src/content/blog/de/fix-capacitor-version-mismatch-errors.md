@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-31T04:35:04.064Z
-updated_at: 2025-03-31T04:35:16.448Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572-1743395716448.jpg
 head_image_alt: Mobile Entwicklung
@@ -114,7 +114,7 @@ Befolgen Sie diese Schritte beim Übergang zu einer neuen Hauptversion:
 3.  **Abhängigkeiten aktualisieren**: Aktualisieren Sie Ihre Capacitor-Pakete auf die erforderlichen Versionen. Zum Beispiel:
     
 
-Capgo bietet Live-Updates für Capacitor 6 und 7, wodurch Sie Korrekturen ohne App-Store-Genehmigungen anwenden können [\[1\]](https://capgo.app/).
+Capgo bietet Live-Updates für Capacitor 8, wodurch Sie Korrekturen ohne App-Store-Genehmigungen anwenden können [\[1\]](https://capgo.app/).
 
 ## Zukünftige Versionskonflikte vermeiden
 

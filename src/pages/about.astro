@@ -2,20 +2,38 @@
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import { createLdJsonGraph, createCapgoOrganization, createPersonLdJson } from '@/lib/ldJson'
+import { createLdJsonGraph, createPersonLdJson, createWebPageLdJson } from '@/lib/ldJson'
+import type { Thing } from 'schema-dts'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.about_capgo({}, { locale: Astro.locals.locale })].join(' | ')
 const description = m.about_capgo_description({}, { locale: Astro.locals.locale })
 
-// Create enhanced organization schema with founder details
-const organization = createCapgoOrganization(Astro.locals.runtimeConfig.public)
+const config = Astro.locals.runtimeConfig.public
 
-// Add founder information to organization
-organization.founder = createPersonLdJson('Martin Donadieu', 'https://x.com/martindonadieu', `${Astro.locals.runtimeConfig.public.baseUrl}/martindonadieu.webp`, 'Founder & CEO')
+// Create founder Person schema
+const founder = createPersonLdJson('Martin Donadieu', 'https://x.com/martindonadieu', `${config.baseUrl}/martindonadieu.webp`, 'Founder & CEO')
 
-// Enhanced organization with additional properties
-const enhancedOrg = {
-  ...organization,
+// Create enhanced organization with all properties as a plain object
+const enhancedOrg: Thing = {
+  '@type': 'Organization',
+  '@id': `${config.baseUrl}/#organization`,
+  name: 'Capgo',
+  url: config.baseUrl,
+  logo: {
+    '@type': 'ImageObject',
+    url: `${config.baseUrl}/icon.webp`,
+    contentUrl: `${config.baseUrl}/icon.webp`,
+    width: '512',
+    height: '512',
+  },
+  sameAs: ['https://twitter.com/Capgo_app', 'https://github.com/Cap-go', 'https://www.linkedin.com/company/capgo'],
+  description: config.blog_description,
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'technical support',
+    email: 'support@capgo.app',
+  },
+  founder: founder,
   foundingDate: '2022-12-01',
   numberOfEmployees: {
     '@type': 'QuantitativeValue',
@@ -39,6 +57,13 @@ const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
 const aboutUrl = `${baseUrl}${getRelativeLocaleUrl(Astro.locals.locale, '/about/')}`
 const homeUrl = `${baseUrl}${getRelativeLocaleUrl(Astro.locals.locale, '/')}`
 
+// Create about page WebPage schema
+const aboutPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description: 'Learn about Capgo, the live update solution for Capacitor apps, and meet founder Martin Donadieu.',
+  url: aboutUrl,
+})
+
 // Create comprehensive LD+JSON for about page
 const content = {
   title,
@@ -46,41 +71,18 @@ const content = {
   image: `${baseUrl}/app_demo.webp`,
   ldJSON: createLdJsonGraph(
     Astro.locals.runtimeConfig.public,
-    {
-      '@context': 'https://schema.org',
-      '@type': 'WebPage',
-      '@id': `${aboutUrl}#aboutpage`,
-      name: title,
-      description: 'Learn about Capgo, the live update solution for Capacitor apps, and meet founder Martin Donadieu.',
-      url: aboutUrl,
-      breadcrumb: {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: 'Home',
-            item: homeUrl,
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: 'About',
-            item: aboutUrl,
-          },
-        ],
-      },
-    },
+    aboutPage,
     {
       includeOrganization: false, // We're including the enhanced org as mainEntity
-      includeBreadcrumbs: false, // We're including custom breadcrumbs
+      includeBreadcrumbs: true,
+      breadcrumbs: [
+        { name: 'Home', url: homeUrl },
+        { name: 'About', url: aboutUrl },
+      ],
+      additionalEntities: [enhancedOrg, founder],
     },
   ),
 }
-
-// Add the enhanced organization and founder as separate entities
-content.ldJSON['@graph'].push(enhancedOrg)
-content.ldJSON['@graph'].push(organization.founder)
 ---
 
 <Layout content={content}>
@@ -256,7 +258,7 @@ content.ldJSON['@graph'].push(organization.founder)
           <p class="text-sm text-gray-400">Monthly MRR</p>
         </div>
         <div class="p-4 text-center bg-gray-800 rounded-lg">
-          <p class="text-3xl font-bold text-white">5M+</p>
+          <p class="text-3xl font-bold text-white">50M+</p>
           <p class="text-sm text-gray-400">End Users</p>
         </div>
         <div class="p-4 text-center bg-gray-800 rounded-lg">
@@ -449,7 +451,11 @@ content.ldJSON['@graph'].push(organization.founder)
 
         <div class="mt-6 text-center">
           <div class="inline-flex relative group">
-            <div class="absolute -inset-px rounded-xl opacity-60 transition-opacity duration-300 group-hover:opacity-80 bg-gray-800/40 blur-lg" aria-hidden="true"></div>
+            <div
+              class="absolute -inset-4 rounded-xl opacity-60 transition-opacity duration-300 group-hover:opacity-80"
+              style="background: radial-gradient(ellipse at center, rgba(31, 41, 55, 0.4) 0%, rgba(31, 41, 55, 0.2) 40%, rgba(31, 41, 55, 0) 70%);"
+              aria-hidden="true"
+            ></div>
             <a
               href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
               aria-label={m.get_quote_now({}, { locale: Astro.locals.locale })}

@@ -1,43 +1,81 @@
 ---
 title: "支付系统"
-description: "管理 Capgo 帐户中的支付。在本节中,我们将向您展示如何管理 Capgo 的卡和计划"
+description: "管理 Capgo 帐户中的支付。在本节中，我们将向您展示如何管理 Capgo 的卡、计划和积分"
 sidebar:
   order: 10
 locale: zh
 ---
 
-## 这是关于什么的?
+## 这是关于什么的？
 
 本页面旨在回答有关 Capgo 支付系统的一些问题。
 
-#### 问:如何升级我的 Capgo 计划?
-答:您可以通过转到[设置](/docs/webapp/settings/#how-to-get-to-the-settings-page)并点击 **计划**按钮来升级您的 Capgo 计划。
+## 计划
 
-<figure><img src="/plans-button.webp" alt="选择计划" /><figcaption></figcaption></figure>
+#### 问：如何升级我的 Capgo 计划？
+答：您可以通过转到[设置](/docs/webapp/settings/#how-to-get-to-the-settings-page)并点击**计划**选项卡(1)来升级您的 Capgo 计划。
 
-然后,您可以选择最适合您需求的计划并点击 **订阅**
+<figure><img src="/plans-subscribe.webp" alt="计划页面" /><figcaption></figcaption></figure>
 
-<figure><img src="/plans-subscribe.webp" alt="订阅计划" /><figcaption></figcaption></figure>
+在此页面上，您可以：
+- 在**月度计划**和**年度**之间切换（年付可享受20%折扣）
+- 从四个计划中选择：**Solo**、**Maker**、**Team** 或 **Enterprise**
+- 点击最适合您需求的计划上的**订阅**(2)
 
-然后将打开一个 Stripe 页面。在那里,您可以输入您的支付信息。
+每个计划显示：
+- 月度价格和年度账单总额
+- 包含的月活跃用户数和超额定价
+- 存储和带宽配额
+- 构建分钟/小时
+- 专属支持、自定义域名和 SOC II 合规等功能
 
-<figure><img src="/plans-stripe.webp" alt="Stripe portal" /><figcaption></figcaption></figure>
+如果您不想承诺某个计划，可以使用**积分**代替 - 点击"了解积分"查看按需付费的工作方式。
 
-#### Q: Are payments secure?
-A: Yes, payments are fully managed by stripe. Capgo never gets access to your credit card details. Stripe takes security very seriously. [Learn more about stripe security policy](https://stripe.com/docs/security/)
+点击订阅后，将打开 Stripe 结账页面，您可以在那里安全地输入支付信息。
 
-#### Q: Will capgo automatically upgrade my plan when I exceed the limit?
-A: No, capgo will never change your plan.
+## 积分
 
-#### Q: Will cagpo send me an email when my plan is near its limits?
-A: Yes, capgo will send you an email informing you about the usage.
+积分为升级计划提供了灵活的替代方案。在以下情况下很有用：
 
-#### Q: Will the plan I purchase affect the organizations I am invited to?
-A: No, the plan will only affect the organization you have currently selected. 
-Please refeer to [the organization documentation](/docs/webapp/organization-system/#q-how-is-billing-done-within-orgs).
+- **临时高峰** - 您暂时超出计划限制（例如，病毒式传播时刻、季节性流量），不想永久升级
+- **计划不匹配** - 下一级计划因其他原因不符合您的需求（也许您需要更多带宽但不需要更多 MAU）
+- **按需付费偏好** - 您更喜欢只为超出基本计划的使用量付费
 
-#### Q: What if I need a more tailored plan?
-A: [Please contact capgo's support directly](/docs/getting-help#support-by-chat)
+#### 问：如何访问积分页面？
+答：转到[设置](/docs/webapp/settings/#how-to-get-to-the-settings-page)并点击**积分**选项卡(1)。
 
-#### Q: What is the refund policy for capgo?
-A:  A refund policy can be found [here](https://capgo.app/return/)
+<figure><img src="/buy_credits.webp" alt="积分页面" /><figcaption></figcaption></figure>
+
+积分页面显示：
+
+1. **积分选项卡** - 从组织设置导航到此处
+2. **积分余额** - 显示您的可用积分（例如 0.00 / 0.00）和当前期间使用的积分
+3. **已使用积分（USD）** - 当前计费期间消耗的积分的估计美元价值，以及剩余可用积分
+4. **需要更多积分？** - 立即购买额外积分，让您的用户继续不间断地接收更新。从预设金额（$50、$100、$500、$5000）中选择或输入自定义金额。结账前会显示含税估计总额
+5. **积分定价** - 展开此部分以查看不同使用类型（MAU、存储、带宽）的定价等级
+6. **积分交易** - 查看您的积分购买和使用历史
+
+#### 问：如何购买积分？
+答：在积分页面上，选择您想购买的金额（或使用下拉菜单选择自定义金额），然后点击**购买积分**。您将被重定向到 Stripe 结账页面，在那里可以调整数量并完成支付。
+
+#### 问：积分何时使用？
+答：当您超出月活跃用户、存储或带宽的计划限制时，积分会自动消耗。它们提供了一种灵活的方式来处理超额，而不会中断服务。
+
+#### 问：支付安全吗？
+答：是的，支付完全由 Stripe 管理。Capgo 永远不会访问您的信用卡详细信息。Stripe 非常重视安全性。[了解更多关于 Stripe 安全政策](https://stripe.com/docs/security/)
+
+#### 问：当我超出限制时，Capgo 会自动升级我的计划吗？
+答：不会，Capgo 永远不会更改您的计划。
+
+#### 问：当我的计划接近限制时，Capgo 会发送电子邮件吗？
+答：是的，Capgo 会发送电子邮件通知您使用情况。
+
+#### 问：我购买的计划会影响我被邀请加入的组织吗？
+答：不会，计划只会影响您当前选择的组织。
+请参阅[组织文档](/docs/webapp/organization-system/#q-how-is-billing-done-within-orgs)。
+
+#### 问：如果我需要更定制的计划怎么办？
+答：[请直接联系 Capgo 支持](/docs/getting-help#support-by-chat)
+
+#### 问：Capgo 的退款政策是什么？
+答：退款政策可以在[这里](https://capgo.app/return/)找到。

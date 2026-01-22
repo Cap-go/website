@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-05-11T21:28:20.329Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682028f45e3fe4823b5e5a52-1746998980056.jpg
 head_image_alt: モバイル開発
@@ -209,7 +209,7 @@ Capgoを始めるのは簡単です。単純なコマンドで初期化できま
 npx @capgo/cli init
 ```
 
-この機能は、従来のレビューサイクルの遅延なしに、アプリを最新の状態に保つ更新プロセスを合理化します。Capgoは、既存のセットアップに柔軟に対応できるCapacitor 6および7の両方に対応しています。
+この機能は、従来のレビューサイクルの遅延なしに、アプリを最新の状態に保つ更新プロセスを合理化します。Capgoは、既存のセットアップに柔軟に対応できるCapacitor 8の両方に対応しています。
 
 | **機能** | **説明** | **利点** |
 | --- | --- | --- |

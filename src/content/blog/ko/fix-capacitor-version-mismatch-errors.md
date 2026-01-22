@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-31T04:35:04.064Z
-updated_at: 2025-03-31T04:35:16.448Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572-1743395716448.jpg
 head_image_alt: 모바일 개발
@@ -116,7 +116,7 @@ next_blog: ''
 3. **종속성 업데이트**: Capacitor 패키지를 필요한 버전으로 업그레이드하세요. 예를 들어:
     
 
-Capgo는 Capacitor 6 및 7에 대한 실시간 업데이트를 제공하여 앱 스토어 승인 없이도 수정사항을 적용할 수 있게 합니다 [\[1\]](https://capgo.app/).
+Capgo는 Capacitor 8에 대한 실시간 업데이트를 제공하여 앱 스토어 승인 없이도 수정사항을 적용할 수 있게 합니다 [\[1\]](https://capgo.app/).
 
 ## 향후 버전 충돌 방지하기
 

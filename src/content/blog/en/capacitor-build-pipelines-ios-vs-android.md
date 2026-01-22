@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-18T20:31:21.521Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682a1cea5642a17d106e7413-1747600359936.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, iOS development, Android development, build pipelines, security, deployment, mobile apps, developer accounts
@@ -46,7 +46,7 @@ Both platforms demand attention to build environments, security, and deployment.
 
 ### iOS Build Setup
 
-Developing for iOS requires **macOS**, as it's the only operating system that supports Xcode. For Capacitor 7, you'll need **Xcode 16.0 or newer** [\[3\]](https://capacitorjs.com/docs/getting-started/environment-setup), along with the following tools and resources:
+Developing for iOS requires **macOS**, as it's the only operating system that supports Xcode. For Capacitor 8, you'll need **Xcode 16.0 or newer** [\[3\]](https://capacitorjs.com/docs/getting-started/environment-setup), along with the following tools and resources:
 
 | Component | Requirement | Purpose |
 | --- | --- | --- |

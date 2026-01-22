@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-13T01:07:05.331Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266-1744506438251.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, npm scripts, OTA updates, CI/CD, mobile app deployment, automation, app version management, security
@@ -112,7 +112,7 @@ CAPGO_APP_ID=your_app_id
 
 ### Compatibility and Reliability
 
-The Capgo CLI supports Capacitor 6 and 7, ensuring it works with the latest versions while maintaining dependable update functionality.
+The Capgo CLI supports Capacitor 8, ensuring it works with the latest versions while maintaining dependable update functionality.
 
 | Script Command | Purpose | When to Use |
 | --- | --- | --- |

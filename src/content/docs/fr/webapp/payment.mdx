@@ -1,43 +1,81 @@
 ---
-locale: fr
-title: "Payment system"
-description: "Managing payments in your Capgo Compte. In this section we show you how to manage your Card and plan for Capgo"
-sidebar: 
+title: "Système de paiement"
+description: "Gestion des paiements dans votre compte Capgo. Dans cette section, nous vous montrons comment gérer votre carte, votre plan et vos crédits pour Capgo"
+sidebar:
   order: 10
+locale: fr
 ---
 
-## What is this À propos?
+## De quoi s'agit-il ?
 
-This page aims to answer some questions À propos the payment system in capgo.
+Cette page vise à répondre à certaines questions sur le système de paiement dans Capgo.
 
-#### Q: How can I Mise à niveau my capgo plan?
-A: You can Mise à niveau your capgo plan by going to [the Paramètres](/docs/webapp/Paramètres/#how-to-get-to-the-Paramètres-page) and clicking on the **Plans** button.
+## Plans
 
-<figure><img src="/plans-button.webp" alt="Choose plan" /><figcaption></figcaption></figure>
+#### Q : Comment puis-je mettre à niveau mon plan Capgo ?
+R : Vous pouvez mettre à niveau votre plan Capgo en allant dans [les paramètres](/docs/webapp/settings/#how-to-get-to-the-settings-page) et en cliquant sur l'onglet **Plans** (1).
 
-Then you can select the plan that best fits your needs and click on **Subscribe**
+<figure><img src="/plans-subscribe.webp" alt="Page des plans" /><figcaption></figcaption></figure>
 
-<figure><img src="/plans-subscribe.webp" alt="Subscribe to plan" /><figcaption></figcaption></figure>
+Sur cette page, vous pouvez :
+- Basculer entre **Plan Mensuel** et **Annuel** (avec une réduction de 20% pour le paiement annuel)
+- Choisir parmi quatre plans : **Solo**, **Maker**, **Team** ou **Enterprise**
+- Cliquer sur **S'abonner** (2) sur le plan qui correspond le mieux à vos besoins
 
-Then a stripe page will open up. There, you can enter your payment Information.
+Chaque plan affiche :
+- Prix mensuel et total de facturation annuelle
+- Utilisateurs actifs mensuels inclus et tarifs de dépassement
+- Allocations de stockage et de bande passante
+- Minutes/heures de build
+- Fonctionnalités comme le support dédié, le domaine personnalisé et la conformité SOC II
 
-<figure><img src="/plans-stripe.webp" alt="Stripe portal" /><figcaption></figcaption></figure>
+Si vous ne voulez pas vous engager sur un plan, vous pouvez utiliser des **crédits** à la place - cliquez sur "En savoir plus sur les crédits" pour voir comment fonctionne le paiement à l'usage.
 
-#### Q: Are payments secure?
-A: Yes, payments are fully managed by stripe. Capgo never gets access to your credit card details. Stripe takes Sécurité very seriously. [Learn more À propos stripe Sécurité policy](https://stripe.com/docs/Sécurité/)
+Après avoir cliqué sur S'abonner, une page de paiement Stripe s'ouvrira où vous pourrez entrer vos informations de paiement en toute sécurité.
 
-#### Q: Will capgo automatically Mise à niveau my plan when I exceed the limit?
-A: No, capgo will never change your plan.
+## Crédits
 
-#### Q: Will cagpo send me an email when my plan is near its limits?
-A: Yes, capgo will send you an email informing you À propos the Utilisation.
+Les crédits offrent une alternative flexible à la mise à niveau de votre plan. Ils sont utiles quand :
 
-#### Q: Will the plan I purchase affect the organizations I am invited to?
-A: No, the plan will only affect the Organisation you have currently selected. 
-Please refeer to [the Organisation Documentation](/docs/webapp/Organisation-system/#q-how-is-billing-done-within-orgs).
+- **Pics temporaires** - Vous dépassez temporairement les limites de votre plan (par exemple, un moment viral, un trafic saisonnier) et vous ne voulez pas mettre à niveau de façon permanente
+- **Plan inadapté** - Le niveau de plan supérieur ne correspond pas à vos besoins pour d'autres raisons (peut-être avez-vous besoin de plus de bande passante mais pas de plus de MAU)
+- **Préférence pay-as-you-go** - Vous préférez ne payer que ce que vous utilisez au-delà de votre plan de base
 
-#### Q: What if I need a more tailored plan?
-A: [Please Contact capgo's Support directly](/docs/getting-Aide#Support-by-chat)
+#### Q : Comment accéder à la page des Crédits ?
+R : Allez dans [les paramètres](/docs/webapp/settings/#how-to-get-to-the-settings-page) et cliquez sur l'onglet **Crédits** (1).
 
-#### Q: What is the refund policy for capgo?
-A:  A refund policy can be found [here](https://capgo.Application/return/)
+<figure><img src="/buy_credits.webp" alt="Page des crédits" /><figcaption></figcaption></figure>
+
+La page des Crédits affiche :
+
+1. **Onglet Crédits** - Naviguez ici depuis les paramètres de l'Organisation
+2. **Solde de Crédits** - Affiche vos crédits disponibles (ex. 0.00 / 0.00) et les crédits utilisés pendant la période en cours
+3. **Crédits Utilisés (USD)** - La valeur estimée en dollars des crédits consommés pendant la période de facturation en cours, plus les crédits disponibles restants
+4. **Besoin de plus de crédits ?** - Achetez instantanément des crédits supplémentaires pour que vos utilisateurs continuent à recevoir des mises à jour sans interruption. Choisissez parmi des montants prédéfinis (50$, 100$, 500$, 5000$) ou entrez un montant personnalisé. Le total estimé taxes incluses est affiché avant le paiement
+5. **Tarification des crédits** - Développez cette section pour voir les niveaux de tarification pour différents types d'utilisation (MAU, stockage, bande passante)
+6. **Transactions de crédits** - Consultez votre historique d'achats et d'utilisation de crédits
+
+#### Q : Comment acheter des crédits ?
+R : Sur la page des Crédits, sélectionnez le montant que vous souhaitez acheter (ou utilisez le menu déroulant pour des montants personnalisés), puis cliquez sur **Acheter des crédits**. Vous serez redirigé vers le paiement Stripe où vous pourrez ajuster la quantité et finaliser le paiement.
+
+#### Q : Quand les crédits sont-ils utilisés ?
+R : Les crédits sont automatiquement consommés lorsque vous dépassez les limites de votre plan pour les utilisateurs actifs mensuels, le stockage ou la bande passante. Ils offrent un moyen flexible de gérer les dépassements sans interruption de service.
+
+#### Q : Les paiements sont-ils sécurisés ?
+R : Oui, les paiements sont entièrement gérés par Stripe. Capgo n'a jamais accès aux détails de votre carte de crédit. Stripe prend la sécurité très au sérieux. [En savoir plus sur la politique de sécurité de Stripe](https://stripe.com/docs/security/)
+
+#### Q : Capgo mettra-t-il automatiquement à niveau mon plan lorsque je dépasse la limite ?
+R : Non, Capgo ne changera jamais votre plan.
+
+#### Q : Capgo m'enverra-t-il un email lorsque mon plan approche de ses limites ?
+R : Oui, Capgo vous enverra un email pour vous informer de l'utilisation.
+
+#### Q : Le plan que j'achète affectera-t-il les organisations auxquelles je suis invité ?
+R : Non, le plan n'affectera que l'organisation que vous avez actuellement sélectionnée.
+Veuillez vous référer à [la documentation de l'organisation](/docs/webapp/organization-system/#q-how-is-billing-done-within-orgs).
+
+#### Q : Et si j'ai besoin d'un plan plus personnalisé ?
+R : [Veuillez contacter directement le support Capgo](/docs/getting-help#support-by-chat)
+
+#### Q : Quelle est la politique de remboursement de Capgo ?
+R : La politique de remboursement peut être trouvée [ici](https://capgo.app/return/)

@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-22T02:26:08.446Z
-updated_at: 2025-12-31T01:33:21.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67de087b13cee397379a0b94-1742610380581.jpg
 head_image_alt: Desarrollo móvil
@@ -34,7 +34,7 @@ next_blog: ''
     -   **JavaScript a Android:** Envía solicitudes serializadas a métodos nativos de Android.
     -   **Android a JavaScript:** Utiliza callbacks para transmisión de eventos, respuestas directas y actualizaciones de estado.
 -   **Requisitos de Configuración:**
-    -   Usar Capacitor 6.x o 7.x.
+    -   Usar Capacitor 8.x.
     -   Configurar [Gradle](https://gradle.org/), `AndroidManifest.xml`, y assets web.
 -   **Consejos de Optimización:**
     -   Usar actualizaciones parciales para reducir el ancho de banda.
@@ -251,7 +251,7 @@ El sistema de canales es especialmente útil para probar actualizaciones con gru
 
 ### Gestión de Actualizaciones de Capgo
 
-El sistema de gestión de actualizaciones de Capgo está diseñado para trabajar directamente con el puente nativo, asegurando un despliegue de actualizaciones suave y confiable. Soporta tanto Capacitor 6 como 7, proporcionando flexibilidad a los desarrolladores en sus proyectos.
+El sistema de gestión de actualizaciones de Capgo está diseñado para trabajar directamente con el puente nativo, asegurando un despliegue de actualizaciones suave y confiable. Soporta Capacitor 8, proporcionando flexibilidad a los desarrolladores en sus proyectos.
 
 Para comenzar con Capgo:
 

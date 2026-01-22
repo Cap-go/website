@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-31T04:35:04.064Z
-updated_at: 2025-12-31T01:19:38.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572-1743395716448.jpg
 head_image_alt: Pengembangan Seluler
@@ -116,7 +116,7 @@ Saat beralih ke versi major baru, ikuti langkah-langkah ini:
 3.  **Perbarui Dependensi**: Tingkatkan paket Capacitor Anda ke versi yang diperlukan. Contoh:
     
 
-Capgo menyediakan pembaruan langsung untuk Capacitor 6 dan 7, memungkinkan Anda menerapkan perbaikan tanpa perlu persetujuan app store [\[1\]](https://capgo.app/).
+Capgo menyediakan pembaruan langsung untuk Capacitor 8, memungkinkan Anda menerapkan perbaikan tanpa perlu persetujuan app store [\[1\]](https://capgo.app/).
 
 ## Menghindari Konflik Versi di Masa Depan
 

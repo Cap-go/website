@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-15T01:20:29.530Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67fda45772a40527486bdcbd-1744680128983.jpg
 head_image_alt: Sviluppo Mobile
@@ -199,7 +199,7 @@ Iniziare con Capgo per lo staging è semplice. Prima, installa il plugin Capgo u
 npx @capgo/cli init
 ```
 
-Capgo funziona sia con **Capacitor 6 che 7**, assicurando che si adatti a vari workflow di sviluppo. Per ambienti di staging, segui questi passi:
+Capgo funziona con **Capacitor 8**, assicurando che si adatti a vari workflow di sviluppo. Per ambienti di staging, segui questi passi:
 
 -   **Configura canali di aggiornamento separati** per staging e produzione per mantenere gli ambienti distinti.
 -   **Abilita il monitoraggio dettagliato degli errori** per individuare i problemi tempestivamente.

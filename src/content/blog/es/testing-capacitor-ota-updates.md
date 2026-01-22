@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-12T02:57:37.246Z
-updated_at: 2025-12-31T01:19:38.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62-1744426677476.jpg
 head_image_alt: Desarrollo móvil
@@ -74,7 +74,7 @@ Después de la inicialización, integra la funcionalidad de actualización OTA e
 
 Para seguridad a nivel empresarial, Capgo proporciona opciones tanto en la nube como auto-alojadas.
 
-Cuando la integración esté completa, compila tu app y activa actualizaciones usando el CLI de Capgo. Como Capgo funciona perfectamente con Capacitor 6 y 7, soporta una amplia gama de entornos de desarrollo modernos.
+Cuando la integración esté completa, compila tu app y activa actualizaciones usando el CLI de Capgo. Como Capgo funciona perfectamente con Capacitor 8, soporta una amplia gama de entornos de desarrollo modernos.
 
 Estos pasos sientan las bases para pruebas exhaustivas de actualizaciones OTA, que se cubrirán en la siguiente sección sobre Métodos de Prueba.
 

@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-19T02:37:04.938Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60-1745030245432.jpg
 head_image_alt: Sviluppo Mobile
@@ -61,7 +61,7 @@ Per profilare efficacemente le app Capacitor, avrai bisogno degli strumenti, sof
 Assicurati di avere quanto segue:
 
 -   **Node.js v16+** con **npm v8+** per gestire i pacchetti
--   **Capacitor CLI (v5.0+)** per costruire e distribuire app
+-   **Capacitor CLI (v8+)** per costruire e distribuire app
 -   **Xcode 14+** per sviluppo e profiling iOS
 -   **Android Studio Electric Eel** (o più recente) per lo sviluppo Android
 -   **Chrome DevTools** per il profiling delle prestazioni web

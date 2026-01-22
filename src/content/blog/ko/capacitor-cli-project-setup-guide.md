@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-18T03:02:50.225Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/6801ba663c6b972ab5067847-1744945493935.jpg
 head_image_alt: 모바일 개발
@@ -199,7 +199,7 @@ Capgo를 시작하려면 다음 단계를 따르세요:
 -   문제를 조기에 발견하고 수정하기 위해 오류 추적을 활성화하세요.
 -   문제를 빠르게 해결하기 위해 롤백 기능을 준비하세요.
 
-Capgo는 Capacitor 6과 7을 지원하며, CI/CD 파이프라인과 원활하게 통합되고, Apple과 Google 스토어 요구사항을 준수합니다.
+Capgo는 Capacitor 8을 지원하며, CI/CD 파이프라인과 원활하게 통합되고, Apple과 Google 스토어 요구사항을 준수합니다.
 
 ## 일반적인 문제와 팁
 

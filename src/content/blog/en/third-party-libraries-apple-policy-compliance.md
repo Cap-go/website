@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-24T07:38:44.198Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68316df8d3b96619817fa763-1748072385825.jpg
 head_image_alt: Mobile Development
 keywords: Apple App Store, compliance, third-party libraries, privacy manifests, SDK guidelines, security, development
@@ -130,7 +130,7 @@ Privacy manifests are critical files that outline how your app and its SDKs hand
 
 **Setting Up Privacy Manifests in Capacitor**
 
-To include privacy manifests in your project, make sure you're using a compatible Capacitor version, such as Capacitor 6.0.0 or later [\[12\]](https://capacitorjs.com/docs/v5/ios/privacy-manifest).
+To include privacy manifests in your project, make sure you're using a compatible Capacitor version, such as Capacitor 8.0.0 or later [\[12\]](https://capacitorjs.com/docs/v5/ios/privacy-manifest).
 
 The privacy manifest file, named `PrivacyInfo.xcprivacy`, can be embedded in apps and third-party SDKs distributed as XCFrameworks, Swift packages, or framework bundles [\[15\]](https://stackoverflow.com/questions/77400419/necessity-of-privacy-manifest-for-third-party-sdk-in-app-review). This file specifies the types of data collected by the SDK, the purpose of each data type, whether it's linked to the user, and if it's used for tracking [\[11\]](https://developer.apple.com/videos/play/wwdc2023/10060).
 

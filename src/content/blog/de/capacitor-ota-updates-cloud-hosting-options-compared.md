@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-17T03:46:56.267Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67d76b8ea5ba8bcd0fc6ad5f-1742183228777.jpg
 head_image_alt: Mobile Entwicklung
@@ -216,6 +216,6 @@ Die Kosten können je nach Bedarf stark variieren. Zum Beispiel können CI/CD-Op
 
 ### **Technische Anforderungen**
 
-Bei der Auswahl einer Plattform stellen Sie sicher, dass sie Ihre spezifische **[Capacitor-Version](https://capgo.app/plugins/ivs-player/)** (z.B. Capacitor 6 oder 7) unterstützt und wesentliche Funktionen wie Analytik, Fehlerverfolgung, Rollback-Optionen für Versionskontrolle und nahtlose CI/CD-Integration bietet. Diese Funktionen gewährleisten reibungslose Abläufe beim Skalieren Ihrer App.
+Bei der Auswahl einer Plattform stellen Sie sicher, dass sie Ihre spezifische **[Capacitor-Version](https://capgo.app/plugins/ivs-player/)** (z.B. Capacitor 8) unterstützt und wesentliche Funktionen wie Analytik, Fehlerverfolgung, Rollback-Optionen für Versionskontrolle und nahtlose CI/CD-Integration bietet. Diese Funktionen gewährleisten reibungslose Abläufe beim Skalieren Ihrer App.
 
 Die beste Plattform wird die richtige Balance zwischen Leistung, Sicherheit und Kosten finden. Nutzen Sie kostenlose Testversionen - wie Capgos 15-Tage-Test - um zu sehen, ob die Plattform zu Ihren Bedürfnissen passt [\[1\]](https://capgo.app/).

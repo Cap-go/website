@@ -1,6 +1,6 @@
 ---
-title: Sistem pembayaran
-description: Administración de pagos en tu cuenta Capgo.
+title: "Sistema de pagos"
+description: "Gestión de pagos en tu cuenta Capgo. En esta sección te mostramos cómo administrar tu tarjeta, plan y créditos para Capgo"
 sidebar:
   order: 10
 locale: es
@@ -8,36 +8,74 @@ locale: es
 
 ## ¿De qué trata esto?
 
-Esta página pretende responder algunas preguntas sobre el sistema de pago en Capgo
+Esta página pretende responder algunas preguntas sobre el sistema de pago en Capgo.
+
+## Planes
 
 #### P: ¿Cómo puedo actualizar mi plan de Capgo?
-R: Puedes actualizar tu plan de Capgo yendo a [la configuración](/docs/webapp/settings/#how-to-get-to-the-settings-page) y haciendo clic en el botón **Planes**
+R: Puedes actualizar tu plan de Capgo yendo a [la configuración](/docs/webapp/settings/#how-to-get-to-the-settings-page) y haciendo clic en la pestaña **Planes** (1).
 
-<figure><img src="/plans-button.webp" alt="Elegir plan" /><figcaption></figcaption></figure>
+<figure><img src="/plans-subscribe.webp" alt="Página de planes" /><figcaption></figcaption></figure>
 
-Luego puedes seleccionar el plan que mejor se adapte a tus necesidades y hacer clic en **Suscribirse**
+En esta página puedes:
+- Alternar entre **Plan Mensual** y **Anual** (con un 20% de descuento para pagos anuales)
+- Elegir entre cuatro planes: **Solo**, **Maker**, **Team** o **Enterprise**
+- Hacer clic en **Suscribirse** (2) en el plan que mejor se adapte a tus necesidades
 
-<figure><img src="/plans-subscribe.webp" alt="Subscribe A plan" /><figcaption></figcaption></figure>
+Cada plan muestra:
+- Precio mensual y total de facturación anual
+- Usuarios activos mensuales incluidos y precios por excedente
+- Límites de almacenamiento y ancho de banda
+- Minutos/horas de compilación
+- Características como soporte dedicado, dominio personalizado y cumplimiento SOC II
 
-Entonces se abrirá una página de stripe. Allí, puedes ingresar tu información de pago
+Si no quieres comprometerte con un plan, puedes usar **créditos** en su lugar - haz clic en "Conocer sobre créditos" para ver cómo funciona el pago por uso.
 
-<figure><img src="/plans-stripe.webp" alt="Stripe portal" /><figcaption></figcaption></figure>
+Después de hacer clic en Suscribirse, se abrirá una página de pago de Stripe donde podrás ingresar tu información de pago de forma segura.
+
+## Créditos
+
+Los créditos proporcionan una alternativa flexible a actualizar tu plan. Son útiles cuando:
+
+- **Picos temporales** - Estás superando temporalmente los límites de tu plan (por ejemplo, un momento viral, tráfico estacional) y no quieres actualizar permanentemente
+- **Plan no adecuado** - El siguiente nivel de plan no se ajusta a tus necesidades por otras razones (quizás necesitas más ancho de banda pero no más MAU)
+- **Preferencia de pago por uso** - Prefieres pagar solo por lo que usas más allá de tu plan base
+
+#### P: ¿Cómo accedo a la página de Créditos?
+R: Ve a [la configuración](/docs/webapp/settings/#how-to-get-to-the-settings-page) y haz clic en la pestaña **Créditos** (1).
+
+<figure><img src="/buy_credits.webp" alt="Página de créditos" /><figcaption></figcaption></figure>
+
+La página de Créditos muestra:
+
+1. **Pestaña de Créditos** - Navega aquí desde la configuración de la Organización
+2. **Saldo de Créditos** - Muestra tus créditos disponibles (ej. 0.00 / 0.00) y los créditos usados en el período actual
+3. **Créditos Usados (USD)** - El valor estimado en dólares de los créditos consumidos durante el período de facturación actual, más los créditos disponibles restantes
+4. **¿Necesitas más créditos?** - Compra créditos adicionales instantáneamente para mantener a tus usuarios recibiendo actualizaciones sin interrupción. Elige entre cantidades predefinidas ($50, $100, $500, $5000) o ingresa una cantidad personalizada. El total estimado incluyendo impuestos se muestra antes del pago
+5. **Precios de créditos** - Expande esta sección para ver los niveles de precios para diferentes tipos de uso (MAU, almacenamiento, ancho de banda)
+6. **Transacciones de créditos** - Consulta tu historial de compras y uso de créditos
+
+#### P: ¿Cómo compro créditos?
+R: En la página de Créditos, selecciona la cantidad que deseas comprar (o usa el menú desplegable para cantidades personalizadas), luego haz clic en **Comprar créditos**. Serás redirigido al checkout de Stripe donde podrás ajustar la cantidad y completar el pago.
+
+#### P: ¿Cuándo se usan los créditos?
+R: Los créditos se consumen automáticamente cuando excedes los límites de tu plan para usuarios activos mensuales, almacenamiento o ancho de banda. Proporcionan una forma flexible de manejar los excedentes sin interrupción del servicio.
 
 #### P: ¿Son seguros los pagos?
-R: Sí, los pagos son completamente gestionados por stripe. Capgo nunca tiene acceso a los detalles de tu tarjeta de crédito. Stripe toma la seguridad muy en serio [Aprende más sobre la política de seguridad de stripe](https://stripecom/docs/security/)
+R: Sí, los pagos son completamente gestionados por Stripe. Capgo nunca tiene acceso a los detalles de tu tarjeta de crédito. Stripe toma la seguridad muy en serio. [Aprende más sobre la política de seguridad de Stripe](https://stripe.com/docs/security/)
 
 #### P: ¿Capgo actualizará automáticamente mi plan cuando exceda el límite?
-R: No, Capgo nunca cambiará tu plan
+R: No, Capgo nunca cambiará tu plan.
 
 #### P: ¿Capgo me enviará un correo electrónico cuando mi plan esté cerca de sus límites?
-R: Sí, Capgo te enviará un correo electrónico informándote sobre el uso
+R: Sí, Capgo te enviará un correo electrónico informándote sobre el uso.
 
 #### P: ¿El plan que compre afectará a las organizaciones a las que estoy invitado?
-R: No, el plan solo afectará a la organización que tienes seleccionada actualmente
-Por favor, consulta [la documentación de la organización](/docs/webapp/organization-system/#q-how-is-billing-done-within-orgs)
+R: No, el plan solo afectará a la organización que tienes seleccionada actualmente.
+Por favor, consulta [la documentación de la organización](/docs/webapp/organization-system/#q-how-is-billing-done-within-orgs).
 
 #### P: ¿Qué sucede si necesito un plan más personalizado?
-R: [Por favor contacta directamente con el soporte de capgo](/docs/getting-help#support-by-chat)
+R: [Por favor contacta directamente con el soporte de Capgo](/docs/getting-help#support-by-chat)
 
 #### P: ¿Cuál es la política de reembolso de Capgo?
 R: Puedes encontrar la política de reembolso [aquí](https://capgo.app/return/)

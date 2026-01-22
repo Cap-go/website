@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-24T02:36:18.433Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: https://assets.seobotai.com/capgo.app/67e0a31ca2808c1172f2bc74-1742783814915.jpg
 head_image_alt: Mobile Development
 keywords: CI/CD, compliance checks, Capacitor apps, mobile security, automated testing
@@ -198,7 +198,7 @@ After performance testing, focus on accessibility to make sure your app is usabl
 | Touch Target Size | Element dimension checks | OS-specific requirements |
 | Keyboard Navigation | Input method testing | Cross-platform standards |
 
-With Capgo's integration tools, you can automate these accessibility tests directly within your CI/CD workflow. The platform supports Capacitor 6 and 7, ensuring smooth compatibility across supported CI/CD systems while helping you meet compliance standards [\[1\]](https://capgo.app/).
+With Capgo's integration tools, you can automate these accessibility tests directly within your CI/CD workflow. The platform supports Capacitor 8, ensuring smooth compatibility across supported CI/CD systems while helping you meet compliance standards [\[1\]](https://capgo.app/).
 
 ## Next Steps and Tips
 

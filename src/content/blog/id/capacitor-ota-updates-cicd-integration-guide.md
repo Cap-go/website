@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-17T01:02:12.522Z
-updated_at: 2025-12-31T01:19:38.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/6800475b28980901df1e541b-1744851846737.jpg
 head_image_alt: Pengembangan Mobile
@@ -56,7 +56,7 @@ Berikut komponen utama yang Anda perlukan untuk pembaruan OTA dalam pengaturan C
 
 | Komponen | Tujuan | Fitur Utama |
 | --- | --- | --- |
-| Aplikasi Capacitor | Aplikasi dasar | Bekerja dengan Capacitor 6 & 7 |
+| Aplikasi Capacitor | Aplikasi dasar | Bekerja dengan Capacitor 8 |
 | Repositori Git | Pelacakan kode | Memantau perubahan dan pembaruan kode |
 | Platform CI/CD | Otomatisasi | Mendukung GitHub Actions, [GitLab CI](https://docs.gitlab.com/ee/ci/), atau [Jenkins](https://www.jenkins.io/) |
 | Layanan Update OTA | Distribusi | Menangani pembaruan langsung dan rollback |

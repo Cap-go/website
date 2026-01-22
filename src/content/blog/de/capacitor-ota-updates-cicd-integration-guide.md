@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-17T01:02:12.522Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/6800475b28980901df1e541b-1744851846737.jpg
 head_image_alt: Mobile Entwicklung
@@ -56,7 +56,7 @@ Hier sind die Hauptkomponenten, die Sie für OTA-Updates in einer CI/CD-Einricht
 
 | Komponente | Zweck | Hauptfunktionen |
 | --- | --- | --- |
-| Capacitor App | Basis-App | Funktioniert mit Capacitor 6 & 7 |
+| Capacitor App | Basis-App | Funktioniert mit Capacitor 8 |
 | Git Repository | Code-Tracking | Überwacht Code-Änderungen und Updates |
 | CI/CD Plattform | Automatisierung | Unterstützt GitHub Actions, [GitLab CI](https://docs.gitlab.com/ee/ci/) oder [Jenkins](https://www.jenkins.io/) |
 | OTA Update Service | Verteilung | Handhabt Live-Updates und Rollbacks |

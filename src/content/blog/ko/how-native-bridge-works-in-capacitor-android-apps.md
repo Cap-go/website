@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-22T02:26:08.446Z
-updated_at: 2025-03-22T02:26:20.581Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67de087b13cee397379a0b94-1742610380581.jpg
 head_image_alt: 모바일 개발
@@ -31,7 +31,7 @@ next_blog: ''
     -   **JavaScript에서 Android로:** 직렬화된 요청을 네이티브 Android 메서드로 전송.
     -   **Android에서 JavaScript로:** 이벤트 브로드캐스팅, 직접 응답, 상태 업데이트를 위해 콜백 사용.
 -   **설정 요구사항:**
-    -   Capacitor 6.x 또는 7.x 사용.
+    -   Capacitor 8.x 사용.
     -   [Gradle](https://gradle.org/), `AndroidManifest.xml`, 웹 에셋 구성.
 -   **최적화 팁:**
     -   대역폭 감소를 위한 부분 업데이트 사용.
@@ -222,7 +222,7 @@ Capgo는 네이티브 브리지를 사용하여 높은 성능을 유지하면서
 
 ### Capgo 업데이트 관리
 
-Capgo의 업데이트 관리 시스템은 네이티브 브리지와 직접 작동하도록 설계되어 원활하고 안정적인 업데이트 배포를 보장합니다. Capacitor 6과 7을 모두 지원하여 개발자에게 프로젝트에서의 유연성을 제공합니다.
+Capgo의 업데이트 관리 시스템은 네이티브 브리지와 직접 작동하도록 설계되어 원활하고 안정적인 업데이트 배포를 보장합니다. Capacitor 8을 모두 지원하여 개발자에게 프로젝트에서의 유연성을 제공합니다.
 
 Capgo 시작하기:
 

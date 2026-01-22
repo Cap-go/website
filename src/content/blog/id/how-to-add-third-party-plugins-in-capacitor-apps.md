@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-18T14:04:24.780Z
-updated_at: 2025-12-31T01:19:38.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67d977fb55129a55bd698926-1742306685762.jpg
 head_image_alt: Pengembangan Mobile
@@ -327,7 +327,7 @@ Berikut yang ditawarkan Capgo:
 
 Capgo terintegrasi dengan mudah ke dalam alur kerja Capacitor Anda, memastikan pembaruan yang aman dan berkelanjutan. Ini bekerja dengan alat seperti **GitHub Actions, GitLab CI, dan** [**Jenkins**](https://www.jenkins.io/), mengotomatisasi pembaruan plugin dan deployment untuk menghemat waktu dan mengurangi upaya manual.
 
-Untuk tim yang menangani beberapa plugin, sistem kanal mendukung pengujian beta sebelum rilis yang lebih luas. Analitik real-time memberikan wawasan tentang kinerja pembaruan dan pelacakan kesalahan. Capgo kompatibel dengan **Capacitor 6 dan 7**, mendukung integrasi API kustom, dan menawarkan opsi self-hosted untuk kebutuhan khusus.
+Untuk tim yang menangani beberapa plugin, sistem kanal mendukung pengujian beta sebelum rilis yang lebih luas. Analitik real-time memberikan wawasan tentang kinerja pembaruan dan pelacakan kesalahan. Capgo kompatibel dengan **Capacitor 8**, mendukung integrasi API kustom, dan menawarkan opsi self-hosted untuk kebutuhan khusus.
 
 ## Ringkasan
 

@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-17T03:46:56.267Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67d76b8ea5ba8bcd0fc6ad5f-1742183228777.jpg
 head_image_alt: 모바일 개발
@@ -214,6 +214,6 @@ Capgo의 속도, 보안 및 사용 편의성의 조합은 OTA 업데이트 워�
 
 ### **기술 요구사항**
 
-플랫폼을 선택할 때는 특정 **[Capacitor 버전](https://capgo.app/plugins/ivs-player/)**(예: Capacitor 6 또는 7)을 지원하고 분석, 오류 추적, 버전 제어를 위한 롤백 옵션, 원활한 CI/CD 통합과 같은 필수 기능을 제공하는지 확인하세요. 이러한 기능들은 앱이 확장됨에 따라 원활한 운영을 보장합니다.
+플랫폼을 선택할 때는 특정 **[Capacitor 버전](https://capgo.app/plugins/ivs-player/)**(예: Capacitor 8)을 지원하고 분석, 오류 추적, 버전 제어를 위한 롤백 옵션, 원활한 CI/CD 통합과 같은 필수 기능을 제공하는지 확인하세요. 이러한 기능들은 앱이 확장됨에 따라 원활한 운영을 보장합니다.
 
 최상의 플랫폼은 성능, 보안 및 비용 사이의 적절한 균형을 제공할 것입니다. Capgo의 15일 무료 평가판과 같은 무료 평가판을 활용하여 플랫폼이 귀하의 요구사항과 일치하는지 확인하세요 [\[1\]](https://capgo.app/)

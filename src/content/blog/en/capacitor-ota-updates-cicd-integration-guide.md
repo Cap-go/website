@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-17T01:02:12.522Z
-updated_at: 2025-12-12T11:31:04.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: https://assets.seobotai.com/capgo.app/6800475b28980901df1e541b-1744851846737.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, OTA updates, CI/CD, app deployment, automation, mobile development, versioning, error tracking
@@ -51,7 +51,7 @@ Here are the main components you'll need for OTA updates in a CI/CD setup:
 
 | Component | Purpose | Key Features |
 | --- | --- | --- |
-| Capacitor App | Base app | Works with Capacitor 6 & 7 |
+| Capacitor App | Base app | Works with Capacitor 8 |
 | Git Repository | Code tracking | Monitors code changes and updates |
 | CI/CD Platform | Automation | Supports GitHub Actions, [GitLab CI](https://docs.gitlab.com/ee/ci/), or [Jenkins](https://www.jenkins.io/) |
 | OTA Update Service | Distribution | Handles live updates and rollbacks |

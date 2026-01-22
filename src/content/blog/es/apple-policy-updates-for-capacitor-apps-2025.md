@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-03T03:02:24.801Z
-updated_at: 2025-12-31T01:19:38.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67edf689ebbb9dc80640b580-1743649359050.jpg
 head_image_alt: Desarrollo móvil
@@ -81,7 +81,7 @@ Este método permite un desarrollo rápido y actualizaciones confiables mientras
 
 ### Mantenimiento de Plugins
 
-Asegúrate de actualizar tu framework Capacitor a la versión 5.0 o posterior para cumplir con los requisitos actualizados del SDK de Apple. Mantenerse en cumplimiento significa probar regularmente tus aplicaciones con las últimas versiones del SDK de iOS y Xcode. Si estás usando la plataforma de Capgo, el proceso es más fácil gracias a las verificaciones automatizadas de compatibilidad y funciones de implementación instantánea. Estas herramientas funcionan perfectamente con Capacitor 6 y 7. Los desarrolladores también enfrentan desafíos similares al convertir PWAs en aplicaciones nativas.
+Asegúrate de actualizar tu framework Capacitor a la versión 5.0 o posterior para cumplir con los requisitos actualizados del SDK de Apple. Mantenerse en cumplimiento significa probar regularmente tus aplicaciones con las últimas versiones del SDK de iOS y Xcode. Si estás usando la plataforma de Capgo, el proceso es más fácil gracias a las verificaciones automatizadas de compatibilidad y funciones de implementación instantánea. Estas herramientas funcionan perfectamente con Capacitor 8. Los desarrolladores también enfrentan desafíos similares al convertir PWAs en aplicaciones nativas.
 
 ### Migración de PWA a Nativo
 

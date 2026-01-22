@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-24T02:36:18.433Z
-updated_at: 2025-10-22T12:30:10.000Z
+updated_at: 2026-01-15T19:03:50.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e0a31ca2808c1172f2bc74-1742783814915.jpg
 head_image_alt: 모바일 개발
@@ -174,7 +174,7 @@ CI/CD 파이프라인에서 테스트를 자동화하는 것은 Capacitor 앱이
 
 대상 테스트를 통해 
 
-Capgo의 통합 도구를 사용하면 CI/CD 워크플로우 내에서 이러한 접근성 테스트를 직접 자동화할 수 있습니다. 이 플랫폼은 Capacitor 6과 7을 지원하여 지원되는 CI/CD 시스템에서 원활한 호환성을 보장하면서 규정 준수 표준을 충족하도록 도와줍니다 [\[1\]](https://capgo.app/).
+Capgo의 통합 도구를 사용하면 CI/CD 워크플로우 내에서 이러한 접근성 테스트를 직접 자동화할 수 있습니다. 이 플랫폼은 Capacitor 8을 지원하여 지원되는 CI/CD 시스템에서 원활한 호환성을 보장하면서 규정 준수 표준을 충족하도록 도와줍니다 [\[1\]](https://capgo.app/).
 
 ## 다음 단계와 팁
 
