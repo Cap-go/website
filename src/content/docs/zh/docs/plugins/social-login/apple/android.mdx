@@ -5,8 +5,16 @@ description: 本指南提供了在 iOS 设备上使用 Capacitor 设置 Apple �
 sidebar:
     order: 3
 ---
-import AndroidAppleLoginGraph from '@/components/AndroidAppleLoginGraph.astro'
+import MermaidGraph from '@/components/MermaidGraph.astro';
 import { Steps } from '@astrojs/starlight/components';
+
+export const appleLoginFlowGraph = `flowchart TD
+    A("await SocialLogin.login()") -->|Handled in the plugin|B(Generate the login URL)
+    B --> |Pass the link| C(Open the Chrome browser)
+    C --> D(Wait for the user to login)
+    D --> |Apple redirects to your backend|E(Handle the data returned from Apple)
+    E --> F(Redirect back to the app)
+    F --> G(Return to JS)`;
 
 Android 上的 Apple 登录比较复杂。Apple 没有官方支持 Android 上的 `Sign in with Apple`,因此解决方案略显取巧。
 
@@ -19,7 +27,7 @@ Android 目前使用 chrome 标签页显示 OAuth2 网站。这种方法面临�
 
 让我用一张图表来解释 Android 上的流程:
 
-<AndroidAppleLoginGraph />
+<MermaidGraph graph={appleLoginFlowGraph} ariaLabel="Apple Login flow diagram on Android" fullWidth={false} />
 
 现在你已经了解了挑战和流程,让我们开始配置。
 
