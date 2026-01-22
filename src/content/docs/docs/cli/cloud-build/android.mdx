@@ -93,4 +93,62 @@ Before we can start building the app with Capgo, we need to build the app manual
 </Steps>
 
 
-## 
+## Configuring Capgo Native Build (Android)
+
+| Requirement | Flag | Description | Required |
+| --- | --- | --- | --- |
+| Keystore file | `--keystore <path>` | Path to your `.jks`/`.keystore` file used to sign the APK/AAB. | Yes |
+| Keystore alias | `--keystore-alias <alias>` | Alias name of the key inside the keystore. | Yes |
+| Keystore key password | `--keystore-key-password <password>` | Password for the key. If key/store passwords match, you can provide only one. | Look at the note below |
+| Keystore store password | `--keystore-store-password <password>` | Password for the keystore. If key/store passwords match, you can provide only one. | Look at the note below |
+| Google Play service account | `--play-config <path>` | JSON service account file for Play Store uploads. | Yes |
+
+```bash
+npx @capgo/cli build credentials save --platform android \
+  --keystore ./path/to/keystore.jks \
+  --keystore-alias "your-alias" \
+  --keystore-key-password "key-password" \
+  --keystore-store-password "store-password" \
+  --play-config ./play-store-service-account.json
+```
+
+:::note
+If key and store passwords are identical, provide only one of `--keystore-key-password` or `--keystore-store-password`.
+:::
+
+### Keystore, keystore password, keystore key password, keystore alias
+
+If you have followed the [manual build instructions](/docs/cli/cloud-build/android/#building-the-app-manually-with-android-studio), you should have the keystore already generated.
+If you have not followed the instructions, please follow them to generate the keystore.
+
+### Google Play service account
+
+Generating the Google Play service account is a manual and complex process.
+Yet, it is required to upload your app to Google Play. Plese keep in mind the following things:
+ - You **NEED** to be the [owner of the Developer Account](https://support.google.com/googleplay/android-developer/thread/238025575?hl=en&msgid=238033420). Otherwise, you will not be able to setup the service account.
+ - You will need to create a new Google Cloud Project (seperate from your Google Play Account)
+
+Let's begin.
+
+<Steps>
+  1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+  2. Click on the project selector
+      <img src="/social-login-assets/google_cons_project_selector.png" alt="Google Console Project Selector" />
+  3. If you already have a project, select it. Otherwise, create a new project:
+      :::note
+      Images copied from the Social Login Tutorial, use a name that is appropiate for your project.
+      :::
+      1. Click on `New project`
+          <img src="/social-login-assets/google_cons_new_project_btn.png" alt="New Project button in Google Console" />
+      2. Name your project and click `Create`
+          <img src="/social-login-assets/google_cons_name_projec.png" alt="Project naming screen showing name field and Create button" />
+      3. Ensure that you are on the right project
+          <img src="/social-login-assets/google_cons_right_proj.png" alt="Project name showing in the selector indicating correct project selection" />
+  4. Let's click on the search bar and search for `service accounts` and click on it
+      <img src="/social-login-assets/google_cons_search.png" alt="Google Console search bar" />
+      ![Google Console search bar](/native-build-assets/google-console-search-bar.webp)
+</Steps>
+
+### Saving the credentials
+
+You can save the credentials using the following command:
