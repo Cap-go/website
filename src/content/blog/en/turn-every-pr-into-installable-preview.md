@@ -132,26 +132,63 @@ const config: CapacitorConfig = {
 
 Testers shake their device, select the PR channel from the list, and the app updates. When done testing, they shake again and switch back to production.
 
-### Option 2: Programmatic Switching
+### Option 2: Custom Channel Selector UI
 
-Build a channel switcher into your app (useful for internal testers):
+Build a channel switcher into your app that lists available PR channels and lets testers pick one. This uses two key APIs:
+
+- `listChannels()` - Fetches all channels with self-assignment enabled
+- `setChannel()` - Switches the device to the selected channel
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
 
-async function switchToPreview(prNumber: number) {
+// Get all available channels (including PR channels)
+async function getAvailableChannels() {
+  const { channels } = await CapacitorUpdater.listChannels();
+
+  // Filter to show only PR channels
+  const prChannels = channels.filter(c => c.name.startsWith('pr-'));
+
+  return prChannels;
+}
+
+// Switch to a specific PR channel
+async function switchToChannel(channelName: string) {
   await CapacitorUpdater.setChannel({
-    channel: `pr-${prNumber}`,
-    triggerAutoUpdate: true
+    channel: channelName,
+    triggerAutoUpdate: true  // Immediately check for updates
   });
 }
 
+// Return to production
 async function switchBackToProduction() {
   await CapacitorUpdater.unsetChannel({});
 }
+
+// Get current channel
+async function getCurrentChannel() {
+  const { channel } = await CapacitorUpdater.getChannel();
+  return channel;
+}
 ```
 
-For a complete example of building a channel switcher UI, see [our channel surfing article](/blog/how-capgo-channel-switching-works/).
+With these building blocks, you can create a simple UI:
+
+```typescript
+// Example: List PR channels and let user select
+const channels = await getAvailableChannels();
+const current = await getCurrentChannel();
+
+// Display channels in your UI
+channels.forEach(channel => {
+  console.log(`${channel.name} ${channel.name === current ? '(current)' : ''}`);
+});
+
+// When user selects a channel
+await switchToChannel('pr-123');
+```
+
+For a complete React component example, see [our channel surfing article](/blog/how-capgo-channel-switching-works/).
 
 ## Cleaning Up PR Channels
 
