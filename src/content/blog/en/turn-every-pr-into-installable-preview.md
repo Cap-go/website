@@ -116,7 +116,7 @@ There are two ways for testers to switch to a PR channel:
 
 ### Option 1: Shake Menu (Simplest)
 
-Enable the shake menu in your Capacitor config:
+Enable the shake menu with channel selector in your Capacitor config:
 
 ```typescript
 // capacitor.config.ts
@@ -124,13 +124,20 @@ const config: CapacitorConfig = {
   // ... your other config
   plugins: {
     CapacitorUpdater: {
-      shakeMenu: true
+      shakeMenu: true,
+      allowShakeChannelSelector: true
     }
   }
 };
 ```
 
-Testers shake their device, select the PR channel from the list, and the app updates. When done testing, they shake again and switch back to production.
+Testers shake their device to open the debug menu, which shows a list of available channels with a search bar. They find their PR channel (e.g., `pr-123`), tap to select it, and the app automatically downloads and applies the update. When done testing, they shake again and switch back to production.
+
+The shake menu handles the entire flow automatically:
+1. Fetches all self-assignable channels via `listChannels()`
+2. Displays channels with search to find specific PRs
+3. Downloads the update after selection
+4. Prompts to reload with "Reload Now" / "Later" options
 
 ### Option 2: Custom Channel Selector UI
 
