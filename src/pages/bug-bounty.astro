@@ -1,0 +1,114 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import * as m from '@/paraglide/messages'
+import { createWebPageLdJson, createLdJsonGraph } from '@/lib/ldJson'
+
+const title = [Astro.locals.runtimeConfig.public.brand, m.bug_bounty_program({}, { locale: Astro.locals.locale })].join(' | ')
+const description = m.bug_bounty_description({}, { locale: Astro.locals.locale })
+const keywords = ['bug bounty', 'security', 'vulnerability disclosure', 'capgo', 'capacitor', 'open source', 'security research']
+
+const pageUrl = new URL(Astro.url.pathname, Astro.locals.runtimeConfig.public.baseUrl).href
+const webPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: pageUrl,
+})
+
+const ldJson = createLdJsonGraph(Astro.locals.runtimeConfig.public, webPage, {
+  includeOrganization: true,
+})
+
+const content = { title, description, keywords, ldJson }
+
+const repositories = [
+  {
+    name: m.bug_bounty_repo_landing({}, { locale: Astro.locals.locale }),
+    desc: m.bug_bounty_repo_landing_desc({}, { locale: Astro.locals.locale }),
+    url: 'https://github.com/Cap-go/capgo',
+    securityUrl: 'https://github.com/Cap-go/capgo/security/advisories/new',
+  },
+  {
+    name: m.bug_bounty_repo_cli({}, { locale: Astro.locals.locale }),
+    desc: m.bug_bounty_repo_cli_desc({}, { locale: Astro.locals.locale }),
+    url: 'https://github.com/Cap-go/CLI',
+    securityUrl: 'https://github.com/Cap-go/CLI/security/advisories/new',
+  },
+  {
+    name: m.bug_bounty_repo_updater({}, { locale: Astro.locals.locale }),
+    desc: m.bug_bounty_repo_updater_desc({}, { locale: Astro.locals.locale }),
+    url: 'https://github.com/Cap-go/capacitor-updater',
+    securityUrl: 'https://github.com/Cap-go/capacitor-updater/security/advisories/new',
+  },
+]
+---
+
+<Layout content={content}>
+  <div class="py-8 m-auto prose-sm prose prose-invert">
+    <h1>{m.bug_bounty_program({}, { locale: Astro.locals.locale })}</h1>
+
+    <p>{m.bug_bounty_intro({}, { locale: Astro.locals.locale })}</p>
+
+    <h2>{m.bug_bounty_open_source_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.bug_bounty_open_source_desc({}, { locale: Astro.locals.locale })}</p>
+
+    <p>
+      <strong>{m.bug_bounty_org({}, { locale: Astro.locals.locale })}:</strong>{' '}
+      <a href="https://github.com/Cap-go" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">
+        github.com/Cap-go
+      </a>
+    </p>
+
+    <div class="not-prose grid gap-4 my-6">
+      {repositories.map((repo) => (
+        <div class="p-4 rounded-lg border border-zinc-700 bg-zinc-800/50">
+          <h3 class="text-lg font-semibold text-white mb-1">{repo.name}</h3>
+          <p class="text-sm text-zinc-400 mb-3">{repo.desc}</p>
+          <div class="flex gap-4 text-sm">
+            <a href={repo.url} target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">
+              {m.bug_bounty_view_repository({}, { locale: Astro.locals.locale })}
+            </a>
+            <a href={repo.securityUrl} target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300">
+              {m.bug_bounty_report_security_issue({}, { locale: Astro.locals.locale })}
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <h2>{m.bug_bounty_requirements_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.bug_bounty_requirements_intro({}, { locale: Astro.locals.locale })}</p>
+    <ul>
+      <li>{m.bug_bounty_requirement_1({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.bug_bounty_requirement_2({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.bug_bounty_requirement_3({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.bug_bounty_requirement_4({}, { locale: Astro.locals.locale })}</li>
+    </ul>
+
+    <div class="not-prose my-6 p-4 rounded-lg border border-amber-700/50 bg-amber-900/20">
+      <p class="text-amber-200 text-sm">
+        <strong class="text-amber-100">{m.bug_bounty_important_label({}, { locale: Astro.locals.locale })}:</strong> {m.bug_bounty_important_note({}, { locale: Astro.locals.locale })}
+      </p>
+    </div>
+
+    <h2>{m.bug_bounty_how_to_report_title({}, { locale: Astro.locals.locale })}</h2>
+    <ol>
+      <li>{m.bug_bounty_how_to_report_step_1({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.bug_bounty_how_to_report_step_2({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.bug_bounty_how_to_report_step_3({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.bug_bounty_how_to_report_step_4({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.bug_bounty_how_to_report_step_5({}, { locale: Astro.locals.locale })}</li>
+    </ol>
+
+    <h2>{m.bug_bounty_out_of_scope_title({}, { locale: Astro.locals.locale })}</h2>
+    <ul>
+      <li>{m.bug_bounty_out_of_scope_1({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.bug_bounty_out_of_scope_2({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.bug_bounty_out_of_scope_3({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.bug_bounty_out_of_scope_4({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.bug_bounty_out_of_scope_5({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.bug_bounty_out_of_scope_6({}, { locale: Astro.locals.locale })}</li>
+    </ul>
+
+    <p>{m.bug_bounty_contact({}, { locale: Astro.locals.locale })}</p>
+  </div>
+</Layout>
