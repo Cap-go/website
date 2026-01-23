@@ -1,11 +1,24 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
+import { createWebPageLdJson, createLdJsonGraph } from '@/lib/ldJson'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.bug_bounty_program({}, { locale: Astro.locals.locale })].join(' | ')
 const description = m.bug_bounty_description({}, { locale: Astro.locals.locale })
+const keywords = ['bug bounty', 'security', 'vulnerability disclosure', 'capgo', 'capacitor', 'open source', 'security research']
 
-const content = { title, description }
+const pageUrl = new URL(Astro.url.pathname, Astro.locals.runtimeConfig.public.baseUrl).href
+const webPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: pageUrl,
+})
+
+const ldJson = createLdJsonGraph(Astro.locals.runtimeConfig.public, webPage, {
+  includeOrganization: true,
+})
+
+const content = { title, description, keywords, ldJson }
 
 const repositories = [
   {
@@ -52,10 +65,10 @@ const repositories = [
           <p class="text-sm text-zinc-400 mb-3">{repo.desc}</p>
           <div class="flex gap-4 text-sm">
             <a href={repo.url} target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">
-              View Repository
+              {m.bug_bounty_view_repository({}, { locale: Astro.locals.locale })}
             </a>
             <a href={repo.securityUrl} target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300">
-              Report Security Issue
+              {m.bug_bounty_report_security_issue({}, { locale: Astro.locals.locale })}
             </a>
           </div>
         </div>
@@ -73,7 +86,7 @@ const repositories = [
 
     <div class="not-prose my-6 p-4 rounded-lg border border-amber-700/50 bg-amber-900/20">
       <p class="text-amber-200 text-sm">
-        <strong class="text-amber-100">Important:</strong> {m.bug_bounty_important_note({}, { locale: Astro.locals.locale })}
+        <strong class="text-amber-100">{m.bug_bounty_important_label({}, { locale: Astro.locals.locale })}:</strong> {m.bug_bounty_important_note({}, { locale: Astro.locals.locale })}
       </p>
     </div>
 
