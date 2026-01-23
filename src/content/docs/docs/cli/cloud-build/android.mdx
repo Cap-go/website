@@ -133,20 +133,48 @@ Let's begin.
 <Steps>
   1. Go to [Google Cloud Console](https://console.cloud.google.com/)
   2. Click on the project selector
-      <img src="/social-login-assets/google_cons_project_selector.png" alt="Google Console Project Selector" />
+      ![Google Console Project Selector](/social-login-assets/google_cons_project_selector.png)
   3. If you already have a project, select it. Otherwise, create a new project:
       :::note
       Images copied from the Social Login Tutorial, use a name that is appropiate for your project.
       :::
       1. Click on `New project`
-          <img src="/social-login-assets/google_cons_new_project_btn.png" alt="New Project button in Google Console" />
+          ![New Project button in Google Console](/social-login-assets/google_cons_new_project_btn.png)
       2. Name your project and click `Create`
-          <img src="/social-login-assets/google_cons_name_projec.png" alt="Project naming screen showing name field and Create button" />
+          ![Project naming screen showing name field and Create button](/social-login-assets/google_cons_name_projec.png)
       3. Ensure that you are on the right project
-          <img src="/social-login-assets/google_cons_right_proj.png" alt="Project name showing in the selector indicating correct project selection" />
+          ![Project name showing in the selector indicating correct project selection](/social-login-assets/google_cons_right_proj.png)
   4. Let's click on the search bar and search for `service accounts` and click on it
-      <img src="/social-login-assets/google_cons_search.png" alt="Google Console search bar" />
+      ![Google Console search bar](/social-login-assets/google_cons_search.png)
       ![Google Console search bar](/native-build-assets/google-console-search-bar.webp)
+  5. Let's click on `Create service account`
+      ![Create Service Account button in Google Console](/native-build-assets/google_cons_create_service_account_btn.webp)
+  6. Fill in the form for the service account and click on `Done`
+      1. I recommend setting the name to `Capgo Native Build Service Account`
+      2. For the Service Account ID, I recommend setting it to `capgo-native-build-service-acc`
+      3. As for the description, you don't have to fill it it, but I recommend filling it with `Allows Capgo Native Build to build and submit the app to the Play Store`
+  
+      ![Google Console fill in the form for the service account](/native-build-assets/google-console-fill-in-the-form-for-the-service-account.webp)
+  7. Click on the newly created service account
+      You should now see the newly created service account in the list. Click on it.
+      ![Google Console newly created service account](/native-build-assets/google-console-newly-created-service-account.webp)
+  8. Click on the `Keys` tab
+      ![Keys tab in Google Console](/native-build-assets/google_cons_keys_tab.webp)
+  9. Click on `Add Key` and `Create new key`
+      ![Add Key button in Google Console](/native-build-assets/google_cons_add_key_btn.webp)
+      ![Google Console add key and create new key](/native-build-assets/google-console-add-key-and-create-new-key.webp)
+  10. Click on `JSON` and `Create`
+      ![Create Key button in Google Console](/native-build-assets/google_cons_create_key_btn.webp)
+      ![Google Console create key](/native-build-assets/google-console-create-key.webp)
+
+      :::caution
+      Clicking on `Create` will create a new key and it will download the JSON file to your local machine.
+
+      You need to save the JSON file in a safe place. It **WILL** be used later.
+      :::
+  11. Download the JSON file
+      The JSON file should have been downloaded automatically. You can click on `close` to close the window.
+      ![Google Console download key](/native-build-assets/google-console-download-key.webp)
 </Steps>
 
 ### Saving the credentials
