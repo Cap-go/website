@@ -275,7 +275,7 @@
   "bug_bounty_how_to_report_step_4": "Sertakan path file dan nomor baris yang tepat di mana kerentanan ada",
   "bug_bounty_how_to_report_step_5": "Berikan langkah-langkah detail untuk mereproduksi masalah dan jelaskan dampak keamanannya",
   "bug_bounty_how_to_report_title": "Cara Melaporkan",
-  "bug_bounty_important_note": "Jika Anda tidak dapat memberikan baris kode yang tepat di GitHub di mana masalah ada, laporan Anda tidak akan memenuhi syarat untuk program Bug Bounty. Laporan harus diajukan hanya melalui GitHub Security Advisory.",
+  "bug_bounty_important_note": "Jika Anda tidak dapat memberikan baris kode yang tepat di GitHub di mana masalah ada, laporan Anda tidak akan memenuhi syarat untuk program Bug Bounty. Laporan harus diajukan hanya melalui GitHub Security Advisory. Pembayaran dilakukan melalui Algora.io. Buat akun di sana agar kami dapat membayar Anda langsung melalui platform.",
   "bug_bounty_intro": "Capgo berkomitmen pada keamanan dan transparansi. Semua kode kami adalah open source, dan kami menyambut peneliti keamanan untuk membantu kami mengidentifikasi kerentanan dalam basis kode kami.",
   "bug_bounty_open_source_desc": "Setiap repositori di organisasi Capgo adalah open source. Anda dapat meninjau, mengaudit, dan berkontribusi pada kode kami.",
   "bug_bounty_open_source_title": "Kode Open Source",

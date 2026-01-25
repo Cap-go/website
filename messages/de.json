@@ -275,7 +275,7 @@
   "bug_bounty_how_to_report_step_4": "Geben Sie den genauen Dateipfad und die Zeilennummer(n) an, wo die Schwachstelle existiert",
   "bug_bounty_how_to_report_step_5": "Beschreiben Sie detailliert die Schritte zur Reproduktion und erläutern Sie die Sicherheitsauswirkungen",
   "bug_bounty_how_to_report_title": "So melden Sie",
-  "bug_bounty_important_note": "Wenn Sie nicht die genaue Codezeile in GitHub angeben können, wo das Problem existiert, ist Ihr Bericht nicht für das Bug Bounty Programm berechtigt. Berichte müssen ausschließlich über GitHub Security Advisory eingereicht werden.",
+  "bug_bounty_important_note": "Wenn Sie nicht die genaue Codezeile in GitHub angeben können, wo das Problem existiert, ist Ihr Bericht nicht für das Bug Bounty Programm berechtigt. Berichte müssen ausschließlich über GitHub Security Advisory eingereicht werden. Auszahlungen erfolgen über Algora.io. Bitte erstellen Sie dort ein Konto, damit wir Sie direkt über die Plattform bezahlen können.",
   "bug_bounty_intro": "Capgo setzt sich für Sicherheit und Transparenz ein. Unser gesamter Code ist Open Source, und wir begrüßen Sicherheitsforscher, die uns helfen, Schwachstellen in unserer Codebasis zu identifizieren.",
   "bug_bounty_open_source_desc": "Jedes Repository in der Capgo Organisation ist Open Source. Sie können unseren Code überprüfen, auditieren und dazu beitragen.",
   "bug_bounty_open_source_title": "Open Source Code",

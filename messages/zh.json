@@ -275,7 +275,7 @@
   "bug_bounty_how_to_report_step_4": "包含漏洞存在的精确文件路径和行号",
   "bug_bounty_how_to_report_step_5": "提供详细的重现步骤并解释安全影响",
   "bug_bounty_how_to_report_title": "如何报告",
-  "bug_bounty_important_note": "如果您无法提供问题所在的GitHub中精确的代码行，您的报告将不符合漏洞赏金计划的资格。报告必须仅通过GitHub Security Advisory提交。",
+  "bug_bounty_important_note": "如果您无法提供问题所在的GitHub中精确的代码行，您的报告将不符合漏洞赏金计划的资格。报告必须仅通过GitHub Security Advisory提交。奖励将通过 Algora.io 支付。请在该平台创建账户，我们将直接在平台上向您付款。",
   "bug_bounty_intro": "Capgo致力于安全和透明。我们所有的代码都是开源的，我们欢迎安全研究人员帮助我们识别代码库中的漏洞。",
   "bug_bounty_open_source_desc": "Capgo组织中的每个仓库都是开源的。您可以审查、审计和贡献我们的代码。",
   "bug_bounty_open_source_title": "开源代码",
