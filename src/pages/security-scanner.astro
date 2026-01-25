@@ -5,7 +5,7 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
 
-const title = `${brand} | Capsec - Capacitor Security Scanner`
+const title = `${brand} | Capacitor Security Scanner`
 const description = 'Free security scanner for Capacitor & Ionic apps. Detect vulnerabilities, hardcoded secrets, and security misconfigurations with 62+ security rules.'
 
 const content = { title, description }
@@ -51,9 +51,9 @@ const content = { title, description }
           <div class="max-w-md mx-auto mt-10">
             <div class="flex items-center gap-3 px-6 py-4 rounded-lg bg-gradient-to-r from-slate-800 to-slate-900">
               <span class="text-slate-400">$</span>
-              <code class="text-cyan-400">bunx capsec scan</code>
+              <code class="text-cyan-400">bunx @capgo/capacitor-sec scan</code>
               <button
-                onclick="navigator.clipboard.writeText('bunx capsec scan')"
+                onclick="navigator.clipboard.writeText('bunx @capgo/capacitor-sec scan')"
                 class="ml-auto text-slate-400 hover:text-white transition"
               >
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -232,7 +232,7 @@ const content = { title, description }
           <div>
             <h2 class="text-3xl font-bold text-white sm:text-4xl">CI/CD Integration</h2>
             <p class="mt-4 text-lg text-gray-300">
-              Integrate capsec into your development workflow. Run security checks on every pull request and deployment.
+              Integrate capacitor-sec into your development workflow. Run security checks on every pull request and deployment.
             </p>
 
             <div class="mt-8 space-y-4">
@@ -271,7 +271,7 @@ const content = { title, description }
         <span class="text-purple-400">uses:</span> oven-sh/setup-bun@v1
 
       - <span class="text-purple-400">name:</span> Run Security Scan
-        <span class="text-purple-400">run:</span> bunx capsec scan --ci</code></pre>
+        <span class="text-purple-400">run:</span> bunx @capgo/capacitor-sec scan --ci</code></pre>
           </div>
         </div>
       </div>
@@ -286,7 +286,7 @@ const content = { title, description }
         </p>
 
         <div class="inline-block px-8 py-4 mt-8 mb-8 rounded-lg bg-gradient-to-r from-slate-800 to-slate-900">
-          <code class="text-lg"><span class="text-slate-400">$</span> <span class="text-cyan-400">bunx capsec scan</span></code>
+          <code class="text-lg"><span class="text-slate-400">$</span> <span class="text-cyan-400">bunx @capgo/capacitor-sec scan</span></code>
         </div>
 
         <div class="flex justify-center gap-4">
@@ -297,7 +297,7 @@ const content = { title, description }
             View on GitHub
           </a>
           <a
-            href="https://www.npmjs.com/package/capsec"
+            href="https://www.npmjs.com/package/@capgo/capacitor-sec"
             class="px-8 py-3 font-bold text-white transition rounded-lg bg-slate-700 hover:bg-slate-600"
           >
             View on npm

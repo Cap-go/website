@@ -59,6 +59,10 @@ const navigation: Record<string, NavigationItem[]> = {
       name: m.semver_tester({}, { locale: Astro.locals.locale }),
       href: getRelativeLocaleUrl(Astro.locals.locale, 'semver_tester'),
     },
+    {
+      name: 'Security Scanner',
+      href: getRelativeLocaleUrl(Astro.locals.locale, 'security-scanner'),
+    },
   ],
   support: [
     {
