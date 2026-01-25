@@ -1,0 +1,416 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+
+const title = `${brand} | Capacitor Skills for AI Agents`
+const description = 'Open-source skills for AI agents to build better Capacitor apps. Best practices, debugging, plugins, security, and more.'
+
+const content = { title, description }
+
+const skills = [
+  {
+    name: 'Capacitor Plugins',
+    description: 'Complete guide to all Capgo plugins and their use cases',
+    icon: '🔌',
+    category: 'Core',
+  },
+  {
+    name: 'Best Practices',
+    description: 'Production patterns for file structure, config, and architecture',
+    icon: '✨',
+    category: 'Core',
+  },
+  {
+    name: 'Capgo Live Updates',
+    description: 'Deploy updates instantly without app store review',
+    icon: '🚀',
+    category: 'Core',
+  },
+  {
+    name: 'Security',
+    description: 'Scan for vulnerabilities with Capsec security scanner',
+    icon: '🔐',
+    category: 'Security',
+  },
+  {
+    name: 'Debugging',
+    description: 'Debug Capacitor apps on iOS, Android, and web',
+    icon: '🐛',
+    category: 'Development',
+  },
+  {
+    name: 'iOS & Android Logs',
+    description: 'Access native logs with Xcode, ADB, and MCP automation',
+    icon: '📱',
+    category: 'Development',
+  },
+  {
+    name: 'MCP Integration',
+    description: 'Automate Capacitor workflows with AI agents',
+    icon: '🤖',
+    category: 'Development',
+  },
+  {
+    name: 'Testing',
+    description: 'Unit, E2E, and native testing strategies',
+    icon: '🧪',
+    category: 'Quality',
+  },
+  {
+    name: 'CI/CD',
+    description: 'Automated builds and deployments with GitHub Actions',
+    icon: '⚙️',
+    category: 'DevOps',
+  },
+  {
+    name: 'App Store',
+    description: 'Publishing to Apple App Store and Google Play',
+    icon: '📦',
+    category: 'DevOps',
+  },
+  {
+    name: 'CocoaPods to SPM',
+    description: 'Migrate iOS dependencies to Swift Package Manager',
+    icon: '🍎',
+    category: 'Migration',
+  },
+  {
+    name: 'Ionic Design',
+    description: 'Build native-feeling UIs with Ionic components',
+    icon: '🎨',
+    category: 'UI',
+  },
+  {
+    name: 'Konsta UI',
+    description: 'iOS and Material Design components for React/Vue/Svelte',
+    icon: '📐',
+    category: 'UI',
+  },
+  {
+    name: 'Tailwind CSS',
+    description: 'Utility-first styling for Capacitor apps',
+    icon: '🎯',
+    category: 'UI',
+  },
+  {
+    name: 'Safe Area',
+    description: 'Handle notches, home indicators, and status bars',
+    icon: '📏',
+    category: 'UI',
+  },
+  {
+    name: 'Splash Screen',
+    description: 'Configure launch screens for iOS and Android',
+    icon: '🖼️',
+    category: 'UI',
+  },
+  {
+    name: 'Push Notifications',
+    description: 'FCM and APNs integration for mobile push',
+    icon: '🔔',
+    category: 'Features',
+  },
+  {
+    name: 'Deep Linking',
+    description: 'Universal Links and App Links implementation',
+    icon: '🔗',
+    category: 'Features',
+  },
+  {
+    name: 'Offline First',
+    description: 'Build apps that work without internet',
+    icon: '📴',
+    category: 'Features',
+  },
+  {
+    name: 'Keyboard',
+    description: 'Handle keyboard events and layout shifts',
+    icon: '⌨️',
+    category: 'Features',
+  },
+  {
+    name: 'Performance',
+    description: 'Optimize bundle size, rendering, and memory',
+    icon: '⚡',
+    category: 'Quality',
+  },
+  {
+    name: 'Accessibility',
+    description: 'Screen readers, WCAG compliance, and inclusive design',
+    icon: '♿',
+    category: 'Quality',
+  },
+]
+
+const categories = [...new Set(skills.map(s => s.category))]
+---
+
+<Layout content={content}>
+  <div class="min-h-screen bg-gray-900">
+    <!-- Hero Section -->
+    <section class="relative py-16 sm:py-24">
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        {Array.from({ length: 12 }).map(() => (
+          <div
+            class="absolute w-2 h-2 bg-blue-500 rounded-full opacity-20 animate-pulse"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 2}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm text-blue-100 border rounded-full border-blue-400/40 bg-blue-500/10">
+            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+            22 Skills Available
+          </div>
+
+          <h1 class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+            AI Agent Skills for
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-green-400">
+              Capacitor Apps
+            </span>
+          </h1>
+
+          <p class="max-w-2xl mx-auto mt-6 text-xl text-gray-300">
+            Open-source skills that help AI agents build better Capacitor applications. Best practices, debugging, plugins, security, and more.
+          </p>
+
+          <!-- GitHub Link -->
+          <div class="flex justify-center gap-4 mt-10">
+            <a
+              href="https://github.com/Cap-go/capacitor-skills"
+              class="px-8 py-3 font-bold text-white transition bg-blue-600 rounded-lg hover:bg-blue-700"
+            >
+              View on GitHub
+            </a>
+            <a
+              href="https://vercel.com/changelog/introducing-skills-the-open-agent-skills-ecosystem"
+              target="_blank"
+              class="px-8 py-3 font-bold text-white transition rounded-lg bg-slate-700 hover:bg-slate-600"
+            >
+              About Skills
+            </a>
+          </div>
+
+          <!-- Features Pills -->
+          <div class="flex flex-wrap items-center justify-center gap-6 mt-8 text-sm text-slate-400">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Open Source
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              AI Agent Ready
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Capacitor Focused
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section class="py-16 bg-gray-800/50">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="mb-12 text-center">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">Installation</h2>
+          <p class="max-w-2xl mx-auto mt-4 text-lg text-gray-400">
+            Add Capacitor Skills to your AI agent in seconds
+          </p>
+        </div>
+
+        <!-- Quick Install Command -->
+        <div class="max-w-2xl mx-auto mb-12">
+          <div class="flex items-center gap-3 px-6 py-4 rounded-lg bg-gradient-to-r from-slate-800 to-slate-900">
+            <span class="text-slate-400">$</span>
+            <code class="text-cyan-400">npx skills add capgo/capacitor-skills</code>
+            <button
+              onclick="navigator.clipboard.writeText('npx skills add capgo/capacitor-skills')"
+              class="ml-auto transition text-slate-400 hover:text-white"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <p class="mb-8 text-center text-slate-400">Or configure manually:</p>
+
+        <div class="grid gap-8 lg:grid-cols-2">
+          <!-- Claude Code -->
+          <div class="p-6 border bg-slate-900 rounded-xl border-slate-800">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">🤖</span>
+              <h3 class="text-xl font-bold text-white">Claude Code</h3>
+            </div>
+            <p class="mb-4 text-slate-400">Add to your <code class="px-2 py-1 rounded bg-slate-800 text-cyan-400">.claude/settings.json</code>:</p>
+            <div class="p-4 overflow-x-auto rounded-lg bg-slate-800">
+              <pre class="text-sm"><code class="text-gray-300">{`{
+  "skills": [
+    "https://github.com/Cap-go/capacitor-skills"
+  ]
+}`}</code></pre>
+            </div>
+          </div>
+
+          <!-- Cursor -->
+          <div class="p-6 border bg-slate-900 rounded-xl border-slate-800">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">📝</span>
+              <h3 class="text-xl font-bold text-white">Cursor</h3>
+            </div>
+            <p class="mb-4 text-slate-400">Add to your <code class="px-2 py-1 rounded bg-slate-800 text-cyan-400">.cursor/settings.json</code>:</p>
+            <div class="p-4 overflow-x-auto rounded-lg bg-slate-800">
+              <pre class="text-sm"><code class="text-gray-300">{`{
+  "skills": [
+    "https://github.com/Cap-go/capacitor-skills"
+  ]
+}`}</code></pre>
+            </div>
+          </div>
+
+          <!-- Windsurf -->
+          <div class="p-6 border bg-slate-900 rounded-xl border-slate-800">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">🏄</span>
+              <h3 class="text-xl font-bold text-white">Windsurf</h3>
+            </div>
+            <p class="mb-4 text-slate-400">Add to your <code class="px-2 py-1 rounded bg-slate-800 text-cyan-400">.windsurf/settings.json</code>:</p>
+            <div class="p-4 overflow-x-auto rounded-lg bg-slate-800">
+              <pre class="text-sm"><code class="text-gray-300">{`{
+  "skills": [
+    "https://github.com/Cap-go/capacitor-skills"
+  ]
+}`}</code></pre>
+            </div>
+          </div>
+
+          <!-- Git Clone -->
+          <div class="p-6 border bg-slate-900 rounded-xl border-slate-800">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">📦</span>
+              <h3 class="text-xl font-bold text-white">Manual Clone</h3>
+            </div>
+            <p class="mb-4 text-slate-400">Clone locally and reference the skills folder:</p>
+            <div class="p-4 overflow-x-auto rounded-lg bg-slate-800">
+              <pre class="text-sm"><code class="text-gray-300">git clone https://github.com/Cap-go/capacitor-skills.git</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Grid -->
+    <section class="py-16">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="mb-12 text-center">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">Available Skills</h2>
+          <p class="max-w-2xl mx-auto mt-4 text-lg text-gray-400">
+            Each skill provides focused guidance for specific Capacitor development tasks
+          </p>
+        </div>
+
+        {categories.map(category => (
+          <div class="mb-12">
+            <h3 class="mb-6 text-xl font-bold text-blue-400">{category}</h3>
+            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {skills.filter(s => s.category === category).map(skill => (
+                <div class="p-6 transition border bg-slate-900 rounded-xl border-slate-800 hover:border-blue-500/50">
+                  <div class="flex items-center gap-3 mb-3">
+                    <span class="text-2xl">{skill.icon}</span>
+                    <h4 class="text-lg font-bold text-white">{skill.name}</h4>
+                  </div>
+                  <p class="text-slate-400">{skill.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-16">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="mb-12 text-center">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl">How Skills Work</h2>
+          <p class="max-w-2xl mx-auto mt-4 text-lg text-gray-400">
+            Skills provide structured knowledge that AI agents can use to help you build apps
+          </p>
+        </div>
+
+        <div class="grid gap-8 md:grid-cols-3">
+          <div class="p-8 text-center border bg-slate-900 rounded-xl border-slate-800">
+            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-blue-500/20">
+              <span class="text-3xl">1</span>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">Ask Your Agent</h3>
+            <p class="text-slate-400">Ask about Capacitor development, debugging, plugins, or best practices</p>
+          </div>
+
+          <div class="p-8 text-center border bg-slate-900 rounded-xl border-slate-800">
+            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-blue-500/20">
+              <span class="text-3xl">2</span>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">Skills Activate</h3>
+            <p class="text-slate-400">Relevant skills are loaded with up-to-date guidance and code examples</p>
+          </div>
+
+          <div class="p-8 text-center border bg-slate-900 rounded-xl border-slate-800">
+            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-blue-500/20">
+              <span class="text-3xl">3</span>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-white">Get Expert Help</h3>
+            <p class="text-slate-400">Receive accurate, Capacitor-specific guidance tailored to your needs</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gray-800/50">
+      <div class="px-4 mx-auto text-center max-w-7xl sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">Contribute to Capacitor Skills</h2>
+        <p class="max-w-2xl mx-auto mt-4 text-lg text-gray-400">
+          Help improve AI-assisted Capacitor development. Add new skills, update existing ones, or report issues.
+        </p>
+
+        <div class="flex justify-center gap-4 mt-8">
+          <a
+            href="https://github.com/Cap-go/capacitor-skills"
+            class="px-8 py-3 font-bold text-white transition bg-blue-600 rounded-lg hover:bg-blue-700"
+          >
+            Contribute on GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Note -->
+    <section class="py-8 border-t border-slate-800">
+      <div class="px-4 mx-auto text-center max-w-7xl sm:px-6 lg:px-8">
+        <p class="text-sm text-slate-500">
+          Built with love by the <a href={getRelativeLocaleUrl(locale, '')} class="text-blue-400 hover:underline">Capgo</a> team
+        </p>
+      </div>
+    </section>
+  </div>
+</Layout>
