@@ -275,7 +275,7 @@
   "bug_bounty_how_to_report_step_4": "脆弱性が存在する正確なファイルパスと行番号を含めてください",
   "bug_bounty_how_to_report_step_5": "問題を再現する詳細な手順を提供し、セキュリティへの影響を説明してください",
   "bug_bounty_how_to_report_title": "報告方法",
-  "bug_bounty_important_note": "問題が存在するGitHub上の正確なコード行を提供できない場合、あなたの報告はバグ報奨金プログラムの対象外となります。報告はGitHub Security Advisoryを通じてのみ提出する必要があります。",
+  "bug_bounty_important_note": "問題が存在するGitHub上の正確なコード行を提供できない場合、あなたの報告はバグ報奨金プログラムの対象外となります。報告はGitHub Security Advisoryを通じてのみ提出する必要があります。報酬の支払いはAlgora.ioで行います。そこでアカウントを作成していただき、プラットフォーム上で直接お支払いします。",
   "bug_bounty_intro": "Capgoはセキュリティと透明性に取り組んでいます。私たちのコードはすべてオープンソースであり、セキュリティ研究者の方々がコードベースの脆弱性を特定するお手伝いをしていただくことを歓迎しています。",
   "bug_bounty_open_source_desc": "Capgo組織内のすべてのリポジトリはオープンソースです。コードのレビュー、監査、貢献が可能です。",
   "bug_bounty_open_source_title": "オープンソースコード",
