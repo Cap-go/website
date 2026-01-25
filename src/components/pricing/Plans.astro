@@ -104,11 +104,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
             </div>
             <p class="mt-8" data-yearly-price style={yearly ? '' : 'display: none'}>
               <span class="text-gray-900">
-                {plan.name === 'Enterprise' ? (
-                  <span>{m.billed_monthly({}, { locale: Astro.locals.locale })}</span>
-                ) : (
-                  <span>{m.billed_annually_at({}, { locale: Astro.locals.locale })} ${plan.price_y}</span>
-                )}
+                <span>{m.billed_annually_at({}, { locale: Astro.locals.locale })} $<span data-yearly-total>{numberWithSpaces(plan.price_y)}</span></span>
               </span>
             </p>
             <p class="mt-8" data-monthly-price style={yearly ? 'display: none' : ''}>
