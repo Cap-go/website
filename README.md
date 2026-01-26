@@ -20,6 +20,11 @@
 
 This is the source code for the Capgo website, built with [Astro](https://astro.build/).
 
+## Documentation
+
+- Live docs: https://capgo.app/docs/
+- Source files: `src/content/docs/docs` (English) and `src/content/docs/<locale>/docs` (localized)
+
 ## Development
 
 To start the development server, run:
@@ -39,27 +44,29 @@ The source code is licensed under the GNU AFFERO GENERAL PUBLIC license. See the
 
 ## 🚀 Project Structure
 
-Inside of your Astro project, you'll see the following folders and files:
+Key folders and files in this repo:
 
 ```
 /
 ├── public/
-│   └── favicon.svg
 ├── src/
 │   ├── components/
-│   │   └── Card.astro
+│   ├── content/
+│   │   ├── docs/              # Capgo documentation content (console guides, plugin docs, how-tos)
+│   │   ├── blog/              # Blog posts by locale
+│   │   ├── plugins-tutorials/ # Plugin tutorials by locale
+│   │   └── i18n/              # Starlight UI translations
 │   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
+│   ├── pages/                 # Marketing pages + JSON endpoints
+│   ├── assets/
+│   ├── css/
+│   ├── config/
+│   └── content.config.ts      # Content collections config
+├── messages/                  # Paraglide UI strings
 └── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
+Astro routes live in `src/pages/`. The docs site is powered by Starlight and content collections from `src/content`.
 
 ## 🧞 Commands
 

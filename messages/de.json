@@ -2912,5 +2912,18 @@
   "your_live_update_solution_for_capacitor_apps": "Ihre Live-Update-Lösung für Capacitor-Apps",
   "youre_in_good_company": "Du bist in guter Gesellschaft.",
   "zero_trust_security": "Zero-Trust-Sicherheit",
-  "zero_vendor_lockin_pay_provider_directly": "Null Anbieterbindung, zahlen Sie Ihren Anbieter direkt."
+  "zero_vendor_lockin_pay_provider_directly": "Null Anbieterbindung, zahlen Sie Ihren Anbieter direkt.",
+  "copy_page": "Seite kopieren",
+  "copy_page_options": "Optionen zum Kopieren der Seite",
+  "copy_page_as_markdown": "Seite als Markdown für LLMs kopieren",
+  "view_as_markdown": "Als Markdown ansehen",
+  "view_page_as_plain_text": "Diese Seite als Klartext ansehen",
+  "view_raw_on_github": "Rohdatei auf GitHub ansehen",
+  "open_raw_on_github": "Die rohe Markdown-Datei auf GitHub öffnen",
+  "open_in_chatgpt": "In ChatGPT öffnen",
+  "open_in_claude": "In Claude öffnen",
+  "open_in_perplexity": "In Perplexity öffnen",
+  "ask_questions_about_page": "Fragen zu dieser Seite stellen",
+  "copied": "Kopiert!",
+  "failed_to_copy": "Kopieren fehlgeschlagen"
 }
