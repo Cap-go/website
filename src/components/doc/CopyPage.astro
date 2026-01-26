@@ -215,6 +215,7 @@ const translations = {
           document.body.appendChild(textarea)
           textarea.focus()
           textarea.select()
+          // @ts-expect-error execCommand is deprecated but used as fallback for older browsers
           const success = document.execCommand('copy')
           document.body.removeChild(textarea)
 

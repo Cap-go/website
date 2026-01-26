@@ -1,7 +1,10 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const messagesDir = path.join(process.cwd(), 'messages');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const messagesDir = path.join(__dirname, 'messages');
 const files = fs.readdirSync(messagesDir).filter(f => f.endsWith('.json'));
 
 const newKeys = {

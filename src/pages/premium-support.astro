@@ -7,8 +7,8 @@ import { createServiceLdJson, createLdJsonGraph, createFAQPageLdJson } from '@/l
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
 
-const title = `${brand} | Premium Support for Capacitor Apps`
-const description = 'Get expert emergency support for your Capacitor app. 4 hours of prepaid support for €1000/month. We help with deployment issues, crashes, and native-side problems.'
+const title = `${brand} | ${m.ps_title({}, { locale })}`
+const description = m.ps_description({}, { locale })
 
 const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
 const pageUrl = `${baseUrl}${getRelativeLocaleUrl(locale, 'premium-support/')}`
@@ -25,11 +25,11 @@ const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
 const faqSchema = createFAQPageLdJson(Astro.locals.runtimeConfig.public, {
   url: pageUrl,
   questions: [
-    { question: 'What is included in the Premium Support retainer?', answer: '4 hours of prepaid expert support per month for deployment issues, app crashes, native code problems, and Capacitor-related questions.' },
-    { question: 'How quickly will you respond?', answer: 'We prioritize premium support requests and typically respond within hours during business days.' },
-    { question: 'What happens if I don\'t use all 4 hours?', answer: 'Unused hours do not roll over to the next month. The retainer ensures we\'re available when you need us.' },
-    { question: 'Can I get more hours if needed?', answer: 'Yes, additional hours can be purchased at €250/hour beyond your monthly retainer.' },
-    { question: 'What kind of issues can you help with?', answer: 'We help with deployment problems, app crashes, native iOS/Android issues, plugin problems, performance optimization, and any Capacitor-related technical challenges.' },
+    { question: m.ps_faq_q1({}, { locale }), answer: m.ps_faq_a1({}, { locale }) },
+    { question: m.ps_faq_q2({}, { locale }), answer: m.ps_faq_a2({}, { locale }) },
+    { question: m.ps_faq_q3({}, { locale }), answer: m.ps_faq_a3({}, { locale }) },
+    { question: m.ps_faq_q4({}, { locale }), answer: m.ps_faq_a4({}, { locale }) },
+    { question: m.ps_faq_q5({}, { locale }), answer: m.ps_faq_a5({}, { locale }) },
   ],
 })
 
@@ -37,8 +37,8 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
   includeOrganization: true,
   includeBreadcrumbs: true,
   breadcrumbs: [
-    { name: 'Home', url: homeUrl },
-    { name: 'Premium Support', url: pageUrl },
+    { name: m.home({}, { locale }), url: homeUrl },
+    { name: m.ps_premium_support({}, { locale }), url: pageUrl },
   ],
   additionalEntities: [faqSchema],
 })
@@ -48,33 +48,33 @@ const content = { title, description, ldJSON }
 const supportFeatures = [
   {
     icon: 'M13 10V3L4 14h7v7l9-11h-7z',
-    title: 'Emergency Response',
-    description: 'When your app crashes in production or deployment fails, we drop everything to help you fix it fast.',
+    title: m.ps_feature_emergency_title({}, { locale }),
+    description: m.ps_feature_emergency_desc({}, { locale }),
   },
   {
     icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
-    title: 'Native Expertise',
-    description: 'Deep knowledge of iOS, Android, and Capacitor internals. We solve the problems your team can\'t.',
+    title: m.ps_feature_native_title({}, { locale }),
+    description: m.ps_feature_native_desc({}, { locale }),
   },
   {
     icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',
-    title: 'Save Valuable Time',
-    description: 'Stop spending days debugging native issues. Get expert help and ship your features faster.',
+    title: m.ps_feature_time_title({}, { locale }),
+    description: m.ps_feature_time_desc({}, { locale }),
   },
   {
     icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
-    title: 'Direct Access',
-    description: 'Talk directly to our engineers. No ticket queues, no waiting for triage. Real experts, real fast.',
+    title: m.ps_feature_direct_title({}, { locale }),
+    description: m.ps_feature_direct_desc({}, { locale }),
   },
 ]
 
 const helpAreas = [
-  { title: 'Deployment Issues', desc: 'App store rejections, build failures, signing problems' },
-  { title: 'App Crashes', desc: 'Production crashes, memory issues, ANRs on Android' },
-  { title: 'Native Side Problems', desc: 'iOS/Android native code bugs, plugin conflicts' },
-  { title: 'Plugin Issues', desc: 'Capacitor plugin configuration, custom plugin debugging' },
-  { title: 'Performance', desc: 'App optimization, startup time, memory usage' },
-  { title: 'Live Updates', desc: 'Capgo integration, update failures, rollback issues' },
+  { title: m.ps_help_deployment_title({}, { locale }), desc: m.ps_help_deployment_desc({}, { locale }) },
+  { title: m.ps_help_crashes_title({}, { locale }), desc: m.ps_help_crashes_desc({}, { locale }) },
+  { title: m.ps_help_native_title({}, { locale }), desc: m.ps_help_native_desc({}, { locale }) },
+  { title: m.ps_help_plugin_title({}, { locale }), desc: m.ps_help_plugin_desc({}, { locale }) },
+  { title: m.ps_help_performance_title({}, { locale }), desc: m.ps_help_performance_desc({}, { locale }) },
+  { title: m.ps_help_updates_title({}, { locale }), desc: m.ps_help_updates_desc({}, { locale }) },
 ]
 ---
 
@@ -94,34 +94,34 @@ const helpAreas = [
           <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
           </svg>
-          Premium Support Retainer
+          {m.ps_retainer_badge({}, { locale })}
         </div>
 
         <h1 class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
-          Expert Help When
+          {m.ps_hero_title_1({}, { locale })}
           <br />
-          <span class="text-orange-400">You Need It Most</span>
+          <span class="text-orange-400">{m.ps_hero_title_2({}, { locale })}</span>
         </h1>
 
         <p class="max-w-3xl mx-auto mt-8 text-xl leading-relaxed text-gray-300">
-          Your app crashed in production? Deployment stuck? Native side acting weird?
+          {m.ps_hero_subtitle({}, { locale })}
           <br class="hidden sm:block" />
-          <strong class="text-white">We come in and save the day.</strong>
+          <strong class="text-white">{m.ps_hero_subtitle_strong({}, { locale })}</strong>
         </p>
 
         <div class="mt-10 p-8 bg-gray-800/50 rounded-2xl border border-gray-700 max-w-2xl mx-auto">
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
             <div class="text-center">
-              <div class="text-5xl font-bold text-white">€1,000</div>
-              <div class="text-gray-400 mt-1">per month</div>
+              <div class="text-5xl font-bold text-white">{m.ps_price({}, { locale })}</div>
+              <div class="text-gray-400 mt-1">{m.ps_per_month({}, { locale })}</div>
             </div>
             <div class="hidden sm:block w-px h-16 bg-gray-600"></div>
             <div class="text-center">
-              <div class="text-5xl font-bold text-orange-400">4 hours</div>
-              <div class="text-gray-400 mt-1">of expert support</div>
+              <div class="text-5xl font-bold text-orange-400">{m.ps_hours({}, { locale })}</div>
+              <div class="text-gray-400 mt-1">{m.ps_of_expert_support({}, { locale })}</div>
             </div>
           </div>
-          <p class="mt-4 text-gray-400 text-sm">€250/hour effective rate &bull; Additional hours available at the same rate</p>
+          <p class="mt-4 text-gray-400 text-sm">{m.ps_rate_info({}, { locale })}</p>
         </div>
 
         <div class="flex flex-col items-center justify-center gap-4 mt-10 sm:flex-row">
@@ -130,7 +130,7 @@ const helpAreas = [
             target="_blank"
             class="px-8 py-4 text-base font-semibold text-white transition-all duration-200 bg-orange-600 rounded-xl hover:bg-orange-700 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 shadow-lg shadow-orange-500/25"
           >
-            Subscribe Now
+            {m.ps_subscribe_now({}, { locale })}
             <svg class="inline-block w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
             </svg>
@@ -140,7 +140,7 @@ const helpAreas = [
             target="_blank"
             class="px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 border border-gray-600 rounded-xl hover:bg-gray-800 hover:text-white"
           >
-            Talk to Us First
+            {m.ps_talk_first({}, { locale })}
           </a>
         </div>
       </div>
@@ -151,9 +151,9 @@ const helpAreas = [
   <section class="py-20 bg-gray-800">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto text-center mb-16">
-        <h2 class="text-sm font-semibold tracking-wide text-red-400 uppercase mb-4">The Reality</h2>
-        <h3 class="text-3xl font-bold text-white sm:text-4xl">When Things Go Wrong With Mobile Apps</h3>
-        <p class="mt-4 text-xl text-gray-400">You know the feeling...</p>
+        <h2 class="text-sm font-semibold tracking-wide text-red-400 uppercase mb-4">{m.ps_reality({}, { locale })}</h2>
+        <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.ps_when_things_go_wrong({}, { locale })}</h3>
+        <p class="mt-4 text-xl text-gray-400">{m.ps_you_know_the_feeling({}, { locale })}</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -163,8 +163,8 @@ const helpAreas = [
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
           </div>
-          <h4 class="text-xl font-bold text-white mb-3">Production Crash</h4>
-          <p class="text-gray-400">Your app starts crashing for thousands of users. The stack trace points to native code you don't understand.</p>
+          <h4 class="text-xl font-bold text-white mb-3">{m.ps_problem_crash_title({}, { locale })}</h4>
+          <p class="text-gray-400">{m.ps_problem_crash_desc({}, { locale })}</p>
         </div>
 
         <div class="bg-gray-900 rounded-2xl p-8 border border-red-500/20">
@@ -173,8 +173,8 @@ const helpAreas = [
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
             </svg>
           </div>
-          <h4 class="text-xl font-bold text-white mb-3">Deployment Blocked</h4>
-          <p class="text-gray-400">Apple or Google rejected your update. The error message is cryptic. Your deadline is tomorrow.</p>
+          <h4 class="text-xl font-bold text-white mb-3">{m.ps_problem_blocked_title({}, { locale })}</h4>
+          <p class="text-gray-400">{m.ps_problem_blocked_desc({}, { locale })}</p>
         </div>
 
         <div class="bg-gray-900 rounded-2xl p-8 border border-red-500/20">
@@ -183,8 +183,8 @@ const helpAreas = [
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <h4 class="text-xl font-bold text-white mb-3">No Clue What's Wrong</h4>
-          <p class="text-gray-400">Something broke after the last update. Your web team doesn't know native. Days of debugging ahead.</p>
+          <h4 class="text-xl font-bold text-white mb-3">{m.ps_problem_confused_title({}, { locale })}</h4>
+          <p class="text-gray-400">{m.ps_problem_confused_desc({}, { locale })}</p>
         </div>
       </div>
     </div>
@@ -194,9 +194,9 @@ const helpAreas = [
   <section class="py-20 bg-gray-900">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto text-center mb-16">
-        <h2 class="text-sm font-semibold tracking-wide text-green-400 uppercase mb-4">The Solution</h2>
-        <h3 class="text-3xl font-bold text-white sm:text-4xl">Expert Backup On Standby</h3>
-        <p class="mt-4 text-xl text-gray-400">With Premium Support, you have Capacitor experts ready to jump in when you need help.</p>
+        <h2 class="text-sm font-semibold tracking-wide text-green-400 uppercase mb-4">{m.ps_solution({}, { locale })}</h2>
+        <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.ps_expert_backup({}, { locale })}</h3>
+        <p class="mt-4 text-xl text-gray-400">{m.ps_expert_backup_desc({}, { locale })}</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -219,8 +219,8 @@ const helpAreas = [
   <section class="py-20 bg-gray-800">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto text-center mb-16">
-        <h2 class="text-3xl font-bold text-white sm:text-4xl">What We Help With</h2>
-        <p class="mt-4 text-xl text-gray-400">Any Capacitor or mobile app problem your team is struggling with.</p>
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.ps_what_we_help({}, { locale })}</h2>
+        <p class="mt-4 text-xl text-gray-400">{m.ps_what_we_help_desc({}, { locale })}</p>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -245,25 +245,25 @@ const helpAreas = [
   <section class="py-20 bg-gray-900">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto text-center mb-16">
-        <h2 class="text-3xl font-bold text-white sm:text-4xl">How It Works</h2>
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.ps_how_it_works({}, { locale })}</h2>
       </div>
 
       <div class="max-w-4xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div class="text-center">
             <div class="flex justify-center items-center mx-auto mb-6 w-16 h-16 text-2xl font-bold text-white bg-orange-600 rounded-full">1</div>
-            <h4 class="text-xl font-bold text-white mb-2">Subscribe</h4>
-            <p class="text-gray-400">Sign up for €1,000/month. You get 4 hours of expert support ready to use.</p>
+            <h4 class="text-xl font-bold text-white mb-2">{m.ps_step1_title({}, { locale })}</h4>
+            <p class="text-gray-400">{m.ps_step1_desc({}, { locale })}</p>
           </div>
           <div class="text-center">
             <div class="flex justify-center items-center mx-auto mb-6 w-16 h-16 text-2xl font-bold text-white bg-orange-600 rounded-full">2</div>
-            <h4 class="text-xl font-bold text-white mb-2">Reach Out</h4>
-            <p class="text-gray-400">When you hit a problem, contact us via email or Discord. Describe the issue.</p>
+            <h4 class="text-xl font-bold text-white mb-2">{m.ps_step2_title({}, { locale })}</h4>
+            <p class="text-gray-400">{m.ps_step2_desc({}, { locale })}</p>
           </div>
           <div class="text-center">
             <div class="flex justify-center items-center mx-auto mb-6 w-16 h-16 text-2xl font-bold text-white bg-orange-600 rounded-full">3</div>
-            <h4 class="text-xl font-bold text-white mb-2">We Fix It</h4>
-            <p class="text-gray-400">Our experts jump in, diagnose the problem, and help you solve it fast.</p>
+            <h4 class="text-xl font-bold text-white mb-2">{m.ps_step3_title({}, { locale })}</h4>
+            <p class="text-gray-400">{m.ps_step3_desc({}, { locale })}</p>
           </div>
         </div>
       </div>
@@ -276,14 +276,14 @@ const helpAreas = [
       <div class="max-w-3xl mx-auto">
         <div class="bg-gray-900 rounded-2xl p-8 lg:p-12 border border-orange-500/30">
           <div class="text-center mb-8">
-            <h2 class="text-3xl font-bold text-white mb-2">Premium Support Retainer</h2>
-            <p class="text-gray-400">Peace of mind for your Capacitor app</p>
+            <h2 class="text-3xl font-bold text-white mb-2">{m.ps_retainer_badge({}, { locale })}</h2>
+            <p class="text-gray-400">{m.ps_peace_of_mind({}, { locale })}</p>
           </div>
 
           <div class="flex flex-col md:flex-row items-center justify-center gap-8 mb-8">
             <div class="text-center">
-              <div class="text-6xl font-bold text-white">€1,000</div>
-              <div class="text-gray-400">/month</div>
+              <div class="text-6xl font-bold text-white">{m.ps_price({}, { locale })}</div>
+              <div class="text-gray-400">/{m.month({}, { locale })}</div>
             </div>
             <div class="hidden md:block w-px h-24 bg-gray-700"></div>
             <div class="space-y-3 text-left">
@@ -291,31 +291,31 @@ const helpAreas = [
                 <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                 </svg>
-                4 hours of expert support included
+                {m.ps_benefit_hours({}, { locale })}
               </div>
               <div class="flex items-center gap-2 text-gray-300">
                 <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                 </svg>
-                Priority response time
+                {m.ps_benefit_priority({}, { locale })}
               </div>
               <div class="flex items-center gap-2 text-gray-300">
                 <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                 </svg>
-                Direct access to engineers
+                {m.ps_benefit_direct({}, { locale })}
               </div>
               <div class="flex items-center gap-2 text-gray-300">
                 <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                 </svg>
-                Additional hours at €250/hr
+                {m.ps_benefit_additional({}, { locale })}
               </div>
               <div class="flex items-center gap-2 text-gray-300">
                 <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                 </svg>
-                Cancel anytime
+                {m.ps_benefit_cancel({}, { locale })}
               </div>
             </div>
           </div>
@@ -326,12 +326,12 @@ const helpAreas = [
               target="_blank"
               class="inline-flex items-center px-8 py-4 text-lg font-semibold text-white bg-orange-600 rounded-xl hover:bg-orange-700 transition-colors shadow-lg shadow-orange-500/25"
             >
-              Subscribe Now
+              {m.ps_subscribe_now({}, { locale })}
               <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
               </svg>
             </a>
-            <p class="mt-4 text-sm text-gray-500">Secure payment via Stripe</p>
+            <p class="mt-4 text-sm text-gray-500">{m.ps_secure_payment({}, { locale })}</p>
           </div>
         </div>
       </div>
@@ -342,32 +342,32 @@ const helpAreas = [
   <section class="py-20 bg-gray-900">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-white text-center mb-12">Frequently Asked Questions</h2>
+        <h2 class="text-3xl font-bold text-white text-center mb-12">{m.ps_faq_title({}, { locale })}</h2>
 
         <div class="space-y-6">
           <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-            <h3 class="text-lg font-semibold text-white mb-2">What if I need more than 4 hours?</h3>
-            <p class="text-gray-400">Additional hours are billed at €250/hour. Most companies find 4 hours sufficient for a typical month, but some months you might need more help, and that's totally fine.</p>
+            <h3 class="text-lg font-semibold text-white mb-2">{m.ps_faq_q1({}, { locale })}</h3>
+            <p class="text-gray-400">{m.ps_faq_a1({}, { locale })}</p>
           </div>
 
           <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-            <h3 class="text-lg font-semibold text-white mb-2">Do unused hours roll over?</h3>
-            <p class="text-gray-400">No, hours don't roll over to the next month. The retainer ensures we're available and prioritize your requests when you need help. Think of it as insurance for your app.</p>
+            <h3 class="text-lg font-semibold text-white mb-2">{m.ps_faq_q2({}, { locale })}</h3>
+            <p class="text-gray-400">{m.ps_faq_a2({}, { locale })}</p>
           </div>
 
           <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-            <h3 class="text-lg font-semibold text-white mb-2">How quickly do you respond?</h3>
-            <p class="text-gray-400">We aim to respond within hours during business days. For critical production issues, we prioritize getting you help as fast as possible.</p>
+            <h3 class="text-lg font-semibold text-white mb-2">{m.ps_faq_q3({}, { locale })}</h3>
+            <p class="text-gray-400">{m.ps_faq_a3({}, { locale })}</p>
           </div>
 
           <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-            <h3 class="text-lg font-semibold text-white mb-2">What's the difference from regular support?</h3>
-            <p class="text-gray-400">Regular support is for Capgo product questions. Premium Support is for any Capacitor app problem - deployment issues, crashes, native bugs, performance - anything your team needs expert help with.</p>
+            <h3 class="text-lg font-semibold text-white mb-2">{m.ps_faq_q4({}, { locale })}</h3>
+            <p class="text-gray-400">{m.ps_faq_a4({}, { locale })}</p>
           </div>
 
           <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-            <h3 class="text-lg font-semibold text-white mb-2">Do I need to be a Capgo customer?</h3>
-            <p class="text-gray-400">No! Premium Support is available to any company with a Capacitor app, whether you use Capgo or not.</p>
+            <h3 class="text-lg font-semibold text-white mb-2">{m.ps_faq_q5({}, { locale })}</h3>
+            <p class="text-gray-400">{m.ps_faq_a5({}, { locale })}</p>
           </div>
         </div>
       </div>
@@ -377,7 +377,7 @@ const helpAreas = [
   <!-- Testimonial / Trust Section -->
   <section class="py-20 bg-gray-800">
     <div class="px-4 mx-auto max-w-4xl text-center">
-      <h2 class="text-3xl font-bold text-white mb-8">Companies Trust Our Expertise</h2>
+      <h2 class="text-3xl font-bold text-white mb-8">{m.ps_trust_title({}, { locale })}</h2>
       <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center justify-center opacity-70">
         <img class="h-10 object-contain mx-auto grayscale" src="/nana-logo-transparent.webp" alt="Nana" />
         <img class="h-10 object-contain mx-auto grayscale" src="/snowqueen.webp" alt="Snowqueen" />
@@ -398,13 +398,13 @@ const helpAreas = [
     <div class="relative px-6 mx-auto max-w-7xl lg:px-8">
       <div class="text-center">
         <h2 class="mb-6 text-4xl font-bold text-white sm:text-5xl">
-          Stop Losing Sleep Over
+          {m.ps_cta_title_1({}, { locale })}
           <br />
-          <span class="text-orange-400">Native App Problems</span>
+          <span class="text-orange-400">{m.ps_cta_title_2({}, { locale })}</span>
         </h2>
 
         <p class="max-w-2xl mx-auto mt-6 mb-10 text-xl text-gray-300">
-          Have Capacitor experts on standby. When something breaks, we fix it fast.
+          {m.ps_cta_subtitle({}, { locale })}
         </p>
 
         <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -413,7 +413,7 @@ const helpAreas = [
             target="_blank"
             class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-orange-600 rounded-xl hover:bg-orange-700 shadow-lg shadow-orange-500/25"
           >
-            Get Premium Support - €1,000/mo
+            {m.ps_cta_button({}, { locale })}
             <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
             </svg>
@@ -421,7 +421,7 @@ const helpAreas = [
         </div>
 
         <p class="mt-6 text-sm text-gray-400">
-          Questions? <a href="https://cal.com/team/capgo/premium-support" target="_blank" class="text-orange-400 hover:underline">Schedule a call</a> to learn more.
+          {m.ps_questions({}, { locale })} <a href="https://cal.com/team/capgo/premium-support" target="_blank" class="text-orange-400 hover:underline">{m.ps_schedule_call({}, { locale })}</a> {m.ps_to_learn_more({}, { locale })}
         </p>
       </div>
     </div>
