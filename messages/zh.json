@@ -2912,5 +2912,18 @@
   "your_live_update_solution_for_capacitor_apps": "您的电容器应用实时更新解决方案",
   "youre_in_good_company": "你处在好的环境中。",
   "zero_trust_security": "零信任安全性",
-  "zero_vendor_lockin_pay_provider_directly": "零供应商锁定，直接向您的提供商支付。"
+  "zero_vendor_lockin_pay_provider_directly": "零供应商锁定，直接向您的提供商支付。",
+  "copy_page": "复制页面",
+  "copy_page_options": "页面复制选项",
+  "copy_page_as_markdown": "为 LLM 复制页面为 Markdown",
+  "view_as_markdown": "查看 Markdown",
+  "view_page_as_plain_text": "以纯文本查看此页面",
+  "view_raw_on_github": "在 GitHub 查看 raw",
+  "open_raw_on_github": "在 GitHub 打开 raw Markdown 文件",
+  "open_in_chatgpt": "在 ChatGPT 中打开",
+  "open_in_claude": "在 Claude 中打开",
+  "open_in_perplexity": "在 Perplexity 中打开",
+  "ask_questions_about_page": "就此页面提问",
+  "copied": "已复制！",
+  "failed_to_copy": "复制失败"
 }

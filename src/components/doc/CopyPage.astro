@@ -2,7 +2,7 @@
 import type { StarlightRouteData } from '@astrojs/starlight/route-data'
 import * as m from '@/paraglide/messages'
 
-const { entry } = Astro.locals.starlightRoute as StarlightRouteData
+const { entry, editUrl } = Astro.locals.starlightRoute as StarlightRouteData
 const pageSlug = entry?.slug || ''
 
 const translations = {
@@ -11,6 +11,8 @@ const translations = {
   copyPageAsMarkdown: m.copy_page_as_markdown({}, { locale: Astro.locals.locale }),
   viewAsMarkdown: m.view_as_markdown({}, { locale: Astro.locals.locale }),
   viewPageAsPlainText: m.view_page_as_plain_text({}, { locale: Astro.locals.locale }),
+  viewRawOnGithub: m.view_raw_on_github({}, { locale: Astro.locals.locale }),
+  openRawOnGithub: m.open_raw_on_github({}, { locale: Astro.locals.locale }),
   openInChatgpt: m.open_in_chatgpt({}, { locale: Astro.locals.locale }),
   openInClaude: m.open_in_claude({}, { locale: Astro.locals.locale }),
   openInPerplexity: m.open_in_perplexity({}, { locale: Astro.locals.locale }),
@@ -51,6 +53,21 @@ const translations = {
       <div>
         <div class="menu-item-title">{translations.viewAsMarkdown}</div>
         <div class="menu-item-subtitle">{translations.viewPageAsPlainText}</div>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="external-icon">
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+        <polyline points="15 3 21 3 21 9"/>
+        <line x1="10" x2="21" y1="14" y2="3"/>
+      </svg>
+    </a>
+
+    <a class="menu-item view-github-raw" role="menuitem" target="_blank" rel="noopener noreferrer" hidden>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <text x="2" y="18" font-size="16" font-weight="bold" fill="currentColor">GH</text>
+      </svg>
+      <div>
+        <div class="menu-item-title">{translations.viewRawOnGithub}</div>
+        <div class="menu-item-subtitle">{translations.openRawOnGithub}</div>
       </div>
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="external-icon">
         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
@@ -110,7 +127,7 @@ const translations = {
   </div>
 </div>
 
-<script is:inline define:vars={{ translations }}>
+<script is:inline define:vars={{ translations, editUrl: editUrl?.toString() ?? '' }}>
   // Toggle menu visibility
   const buttons = document.querySelectorAll('.copy-page-button')
   buttons.forEach((button) => {
@@ -233,6 +250,28 @@ const translations = {
     if (pageSlug) {
       // Link to the local .md file served by vite-plugin-static-copy
       link.href = `/${pageSlug}.md`
+    }
+  })
+
+  // View raw on GitHub
+  function getRawGithubUrl() {
+    if (!editUrl) return ''
+    if (editUrl.includes('/edit/')) {
+      return editUrl.replace('/edit/', '/raw/')
+    }
+    if (editUrl.includes('/blob/')) {
+      return editUrl.replace('/blob/', '/raw/')
+    }
+    return editUrl
+  }
+
+  document.querySelectorAll('.view-github-raw').forEach((link) => {
+    const rawUrl = getRawGithubUrl()
+    if (rawUrl) {
+      link.href = rawUrl
+      link.hidden = false
+    } else {
+      link.hidden = true
     }
   })
 

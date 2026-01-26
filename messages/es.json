@@ -2912,5 +2912,18 @@
   "your_live_update_solution_for_capacitor_apps": "Tu solución de actualización en vivo para aplicaciones de condensador",
   "youre_in_good_company": "Estás en buena compañía.",
   "zero_trust_security": "Seguridad de Cero Confianza",
-  "zero_vendor_lockin_pay_provider_directly": "cero bloqueo de proveedor, paga directamente a tu proveedor."
+  "zero_vendor_lockin_pay_provider_directly": "cero bloqueo de proveedor, paga directamente a tu proveedor.",
+  "copy_page": "Copiar página",
+  "copy_page_options": "Opciones para copiar la página",
+  "copy_page_as_markdown": "Copiar página como Markdown para LLMs",
+  "view_as_markdown": "Ver como Markdown",
+  "view_page_as_plain_text": "Ver esta página como texto sin formato",
+  "view_raw_on_github": "Ver raw en GitHub",
+  "open_raw_on_github": "Abrir el archivo Markdown raw en GitHub",
+  "open_in_chatgpt": "Abrir en ChatGPT",
+  "open_in_claude": "Abrir en Claude",
+  "open_in_perplexity": "Abrir en Perplexity",
+  "ask_questions_about_page": "Hacer preguntas sobre esta página",
+  "copied": "¡Copiado!",
+  "failed_to_copy": "Error al copiar"
 }

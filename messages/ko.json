@@ -2912,5 +2912,18 @@
   "your_live_update_solution_for_capacitor_apps": "Capacitor 앱을 위한 실시간 업데이트 솔루션",
   "youre_in_good_company": "당신은 좋은 동료와 함께 있습니다.",
   "zero_trust_security": "제로 트러스트 보안",
-  "zero_vendor_lockin_pay_provider_directly": "공급 업체에 대한 제로 잠금, 공급 업체에 직접 지불하세요."
+  "zero_vendor_lockin_pay_provider_directly": "공급 업체에 대한 제로 잠금, 공급 업체에 직접 지불하세요.",
+  "copy_page": "페이지 복사",
+  "copy_page_options": "페이지 복사 옵션",
+  "copy_page_as_markdown": "LLM용 Markdown으로 페이지 복사",
+  "view_as_markdown": "Markdown으로 보기",
+  "view_page_as_plain_text": "이 페이지를 일반 텍스트로 보기",
+  "view_raw_on_github": "GitHub에서 raw 보기",
+  "open_raw_on_github": "GitHub에서 raw Markdown 파일 열기",
+  "open_in_chatgpt": "ChatGPT에서 열기",
+  "open_in_claude": "Claude에서 열기",
+  "open_in_perplexity": "Perplexity에서 열기",
+  "ask_questions_about_page": "이 페이지에 대해 질문하기",
+  "copied": "복사됨!",
+  "failed_to_copy": "복사 실패"
 }

@@ -2912,5 +2912,18 @@
   "your_live_update_solution_for_capacitor_apps": "Votre solution de mises à jour en direct pour les applications Capacitor",
   "youre_in_good_company": "Vous êtes en bonne compagnie.",
   "zero_trust_security": "Sécurité Zéro-Confiance",
-  "zero_vendor_lockin_pay_provider_directly": "aucune dépendance à un fournisseur, payez votre fournisseur directement."
+  "zero_vendor_lockin_pay_provider_directly": "aucune dépendance à un fournisseur, payez votre fournisseur directement.",
+  "copy_page": "Copier la page",
+  "copy_page_options": "Options de copie de la page",
+  "copy_page_as_markdown": "Copier la page en Markdown pour les LLMs",
+  "view_as_markdown": "Voir en Markdown",
+  "view_page_as_plain_text": "Voir cette page en texte brut",
+  "view_raw_on_github": "Voir le raw sur GitHub",
+  "open_raw_on_github": "Ouvrir le fichier Markdown raw sur GitHub",
+  "open_in_chatgpt": "Ouvrir dans ChatGPT",
+  "open_in_claude": "Ouvrir dans Claude",
+  "open_in_perplexity": "Ouvrir dans Perplexity",
+  "ask_questions_about_page": "Poser des questions sur cette page",
+  "copied": "Copié !",
+  "failed_to_copy": "Échec de la copie"
 }
