@@ -369,10 +369,16 @@ export class AuthService {
         }
       });
 
-      // Sign in to Supabase with the token
+      // GoogleLoginResponse is a union type - must check responseType to access tokens
+      const googleResult = result.result;
+      if (!googleResult || googleResult.responseType !== 'online') {
+        throw new Error('Google login failed or returned offline response');
+      }
+
+      // Sign in to Supabase with the ID token (not accessToken)
       const { data, error } = await supabase.auth.signInWithIdToken({
         provider: 'google',
-        token: result.result?.accessToken.token!,
+        token: googleResult.idToken!,
       });
 
       if (error) throw error;
@@ -414,9 +420,15 @@ export class AuthService {
         }
       });
 
+      const fbResult = result.result;
+      if (!fbResult?.accessToken?.token) {
+        throw new Error('Facebook login failed - no access token received');
+      }
+
+      // Facebook uses accessToken for Supabase authentication
       const { data, error } = await supabase.auth.signInWithIdToken({
         provider: 'facebook',
-        token: result.result?.accessToken.token!,
+        token: fbResult.accessToken.token,
       });
 
       if (error) throw error;
