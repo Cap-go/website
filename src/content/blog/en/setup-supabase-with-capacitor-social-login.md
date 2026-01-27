@@ -361,7 +361,6 @@ export class AuthService {
 
   async signInWithGoogle() {
     try {
-      // Get token from social login plugin
       const result = await SocialLogin.login({
         provider: 'google',
         options: {
@@ -369,20 +368,30 @@ export class AuthService {
         }
       });
 
-      // GoogleLoginResponse is a union type - must check responseType to access tokens
       const googleResult = result.result;
-      if (!googleResult || googleResult.responseType !== 'online') {
-        throw new Error('Google login failed or returned offline response');
+      if (!googleResult) {
+        throw new Error('Google login failed');
       }
 
-      // Sign in to Supabase with the ID token (not accessToken)
-      const { data, error } = await supabase.auth.signInWithIdToken({
-        provider: 'google',
-        token: googleResult.idToken!,
-      });
-
-      if (error) throw error;
-      return data;
+      // GoogleLoginResponse is a union type - check responseType to determine flow
+      if (googleResult.responseType === 'online') {
+        // Online mode: use idToken directly with Supabase
+        const { data, error } = await supabase.auth.signInWithIdToken({
+          provider: 'google',
+          token: googleResult.idToken!,
+        });
+        if (error) throw error;
+        return data;
+      } else {
+        // Offline mode: exchange serverAuthCode on your backend
+        // Your backend should exchange the code for tokens and create a Supabase session
+        const response = await fetch('/api/auth/google', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ serverAuthCode: googleResult.serverAuthCode })
+        });
+        return response.json();
+      }
     } catch (error) {
       console.error('Google sign-in error:', error);
       throw error;
