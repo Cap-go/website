@@ -75,10 +75,12 @@ jobs:
           npm run test
           npm run build
 
-             - name: Deploy to Capgo
+      - name: Deploy to Capgo
          run: |
            npm install -g @capgo/cli
-           npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel production
+           npx @capgo/cli bundle upload --channel production
+          env:
+            CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
            # 对于加密上传,添加: --key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"
 ```
 

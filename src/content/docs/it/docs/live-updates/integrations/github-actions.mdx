@@ -78,7 +78,9 @@ jobs:
              - name: Distribuzione su Capgo
          run: |
            npm install -g @capgo/cli
-           npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel production
+           npx @capgo/cli bundle upload --channel production
+          env:
+            CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
            # Per caricamenti crittografati, aggiungi: --key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"
 ```
 
