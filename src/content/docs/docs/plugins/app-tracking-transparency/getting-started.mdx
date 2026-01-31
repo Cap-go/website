@@ -1,0 +1,147 @@
+---
+title: Getting Started
+description: Learn how to install and use the App Tracking Transparency plugin to handle iOS tracking permissions in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-app-tracking-transparency" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## iOS Setup
+
+Add the `NSUserTrackingUsageDescription` key to your `Info.plist` file:
+
+```xml
+<key>NSUserTrackingUsageDescription</key>
+<string>This identifier will be used to deliver personalized ads to you.</string>
+```
+
+The string should explain why you need tracking permission. This message will be displayed to users when requesting permission.
+
+## Usage
+
+Import the plugin and use its methods to handle tracking authorization:
+
+```typescript
+import { AppTrackingTransparency } from '@capgo/capacitor-app-tracking-transparency';
+
+// Check current tracking status
+const checkStatus = async () => {
+  const { status } = await AppTrackingTransparency.getStatus();
+  console.log('Tracking status:', status);
+};
+
+// Request tracking permission
+const requestPermission = async () => {
+  const { status } = await AppTrackingTransparency.requestPermission();
+  console.log('User chose:', status);
+};
+```
+
+## API Reference
+
+### getStatus()
+
+Gets the current tracking authorization status without prompting the user.
+
+```typescript
+const { status } = await AppTrackingTransparency.getStatus();
+// Returns: 'authorized' | 'denied' | 'notDetermined' | 'restricted'
+```
+
+### requestPermission()
+
+Requests user authorization to access app-related data for tracking. Displays the native iOS tracking permission dialog.
+
+```typescript
+const { status } = await AppTrackingTransparency.requestPermission();
+// Returns: 'authorized' | 'denied' | 'notDetermined' | 'restricted'
+```
+
+:::note
+This method will only show the dialog once. Subsequent calls return the stored authorization status without showing the dialog.
+:::
+
+## Complete Example
+
+```typescript
+import { AppTrackingTransparency } from '@capgo/capacitor-app-tracking-transparency';
+
+export class TrackingService {
+  async requestTrackingIfNeeded(): Promise<boolean> {
+    // Check current status first
+    const { status } = await AppTrackingTransparency.getStatus();
+
+    if (status === 'notDetermined') {
+      // User hasn't been asked yet, show the dialog
+      const result = await AppTrackingTransparency.requestPermission();
+      return result.status === 'authorized';
+    }
+
+    return status === 'authorized';
+  }
+
+  async isTrackingAuthorized(): Promise<boolean> {
+    const { status } = await AppTrackingTransparency.getStatus();
+    return status === 'authorized';
+  }
+}
+```
+
+## Status Values
+
+| Status | Description |
+| --- | --- |
+| `authorized` | User has authorized tracking |
+| `denied` | User has denied tracking |
+| `notDetermined` | User hasn't been asked yet |
+| `restricted` | Tracking is restricted (e.g., parental controls) |
+
+## Platform Notes
+
+### iOS
+- Requires iOS 14.0+
+- Uses Apple's `ATTrackingManager` framework
+- The permission dialog is shown only once per app install
+
+### Android
+- Returns `authorized` status automatically
+- No permission dialog is shown (ATT is iOS-only)
+
+### Web
+- Returns `authorized` status for development purposes
+
+## Best Practices
+
+1. **Request at the right time**
+   Don't request permission on app launch. Wait until the user reaches a feature that benefits from tracking, and explain the value first.
+
+2. **Check before requesting**
+   Always check `getStatus()` before calling `requestPermission()` to avoid unnecessary API calls.
+
+3. **Handle all statuses**
+   ```typescript
+   const { status } = await AppTrackingTransparency.getStatus();
+   switch (status) {
+     case 'authorized':
+       // Enable personalized features
+       break;
+     case 'denied':
+     case 'restricted':
+       // Use non-personalized alternatives
+       break;
+     case 'notDetermined':
+       // Consider requesting permission
+       break;
+   }
+   ```

@@ -56,6 +56,7 @@ import StarIcon from 'astro-heroicons/mini/Star.astro'
 import FolderOpenIcon from 'astro-heroicons/mini/FolderOpen.astro'
 import ClockIcon from 'astro-heroicons/mini/Clock.astro'
 import EyeIcon from 'astro-heroicons/mini/Eye.astro'
+import EyeSlashIcon from 'astro-heroicons/mini/EyeSlash.astro'
 import FilmIcon from 'astro-heroicons/mini/Film.astro'
 
 export interface Action {
@@ -391,6 +392,14 @@ export const actions = [
     href: 'https://github.com/Cap-go/capacitor-is-root/',
     title: 'Is Root',
     icon: ShieldCheckIcon,
+  },
+  {
+    name: '@capgo/capacitor-app-tracking-transparency',
+    author: 'github.com/Cap-go',
+    description: 'Request and check iOS App Tracking Transparency permission for IDFA access',
+    href: 'https://github.com/Cap-go/capacitor-app-tracking-transparency/',
+    title: 'App Tracking Transparency',
+    icon: EyeSlashIcon,
   },
   {
     name: '@capgo/capacitor-launch-navigator',
