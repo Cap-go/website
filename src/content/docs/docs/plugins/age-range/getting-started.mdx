@@ -1,0 +1,200 @@
+---
+title: Getting Started
+description: Learn how to install and use the Age Range plugin for cross-platform age detection in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-age-range" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## iOS Setup
+
+### Requirements
+
+- iOS 15+ (plugin compiles and runs, returns `NOT_AVAILABLE` on older versions)
+- iOS 26+ for actual age range functionality (DeclaredAgeRange framework)
+- Xcode 26+
+
+### Entitlement
+
+Add the `com.apple.developer.declared-age-range` entitlement to your app:
+
+1. In Xcode, select your target → **Signing & Capabilities**
+2. Click **+ Capability** → search for **Declared Age Range**
+3. Enable it
+
+Or add manually to your `*.entitlements` file:
+
+```xml
+<key>com.apple.developer.declared-age-range</key>
+<true/>
+```
+
+### How it works on iOS
+
+`requestAgeRange()` presents a system dialog where the user (or their guardian via Family Sharing) declares their age range. The `ageGates` option controls the age boundaries shown (default: `[13, 16, 18]`).
+
+## Android Setup
+
+### Requirements
+
+- Android API 24+ (minSdk)
+- Google Play Store installed and up to date
+
+### How it works on Android
+
+The plugin queries **Google Play Age Signals API** in the background — no user prompt is shown. The Play Store determines the user's age verification status from their Google account.
+
+No additional permissions or manifest changes are needed.
+
+## Usage
+
+Import the plugin and request the user's age range:
+
+```typescript
+import { AgeRange } from '@capgo/capacitor-age-range';
+
+const result = await AgeRange.requestAgeRange();
+
+switch (result.status) {
+  case 'SHARING':
+    console.log('Age range:', result.ageLower, '-', result.ageUpper);
+    console.log('Source:', result.declarationSource);
+    break;
+  case 'DECLINED_SHARING':
+    console.log('User declined to share age');
+    break;
+  case 'NOT_AVAILABLE':
+    console.log('Age range API not available on this device');
+    break;
+  case 'ERROR':
+    console.log('Error requesting age range');
+    break;
+}
+```
+
+## API Reference
+
+### requestAgeRange(options?)
+
+Requests the user's age range from the platform.
+
+```typescript
+const result = await AgeRange.requestAgeRange({
+  ageGates: [13, 16, 18] // iOS only, ignored on Android
+});
+```
+
+#### Options
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `ageGates` | `number[]` | `[13, 16, 18]` | Age thresholds for the iOS system dialog. Ignored on Android. |
+
+#### Result
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `status` | `string` | `SHARING`, `DECLINED_SHARING`, `NOT_AVAILABLE`, or `ERROR` |
+| `ageLower` | `number?` | Lower bound of the age range |
+| `ageUpper` | `number?` | Upper bound (absent for highest bracket, e.g. 18+) |
+| `declarationSource` | `string?` | `SELF_DECLARED`, `GUARDIAN_DECLARED`, `VERIFIED`, or `UNKNOWN` |
+| `androidUserStatus` | `string?` | Android-only. Google Play user status |
+| `mostRecentApprovalDate` | `string?` | Android-only. Date of most recent guardian approval |
+| `installId` | `string?` | Android-only. Supervised install identifier |
+
+### getPluginVersion()
+
+Returns the native plugin version.
+
+```typescript
+const { version } = await AgeRange.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+## Complete Example
+
+```typescript
+import { AgeRange } from '@capgo/capacitor-age-range';
+
+export class AgeVerificationService {
+  async checkAgeRange(): Promise<{ isAdult: boolean; ageRange?: string }> {
+    const result = await AgeRange.requestAgeRange({
+      ageGates: [13, 16, 18]
+    });
+
+    if (result.status === 'SHARING') {
+      const isAdult = (result.ageLower ?? 0) >= 18;
+      const upper = result.ageUpper ? `-${result.ageUpper}` : '+';
+      const ageRange = `${result.ageLower}${upper}`;
+
+      return { isAdult, ageRange };
+    }
+
+    // User declined or API not available
+    return { isAdult: false };
+  }
+
+  async isAgeRangeAvailable(): Promise<boolean> {
+    const result = await AgeRange.requestAgeRange();
+    return result.status !== 'NOT_AVAILABLE';
+  }
+}
+```
+
+## Platform Response Mapping
+
+### Android (Google Play Age Signals)
+
+| Android UserStatus | → status | → declarationSource |
+| --- | --- | --- |
+| VERIFIED | SHARING | VERIFIED |
+| SUPERVISED | SHARING | GUARDIAN_DECLARED |
+| SUPERVISED_APPROVAL_PENDING | SHARING | GUARDIAN_DECLARED |
+| SUPERVISED_APPROVAL_DENIED | SHARING | GUARDIAN_DECLARED |
+| UNKNOWN / EMPTY | DECLINED_SHARING | — |
+
+### iOS (DeclaredAgeRange)
+
+| iOS Response | → status | → declarationSource |
+| --- | --- | --- |
+| .sharing (selfDeclared) | SHARING | SELF_DECLARED |
+| .sharing (guardianDeclared) | SHARING | GUARDIAN_DECLARED |
+| .declinedSharing | DECLINED_SHARING | — |
+
+## Platform Notes
+
+### iOS
+- Requires iOS 26+ for the DeclaredAgeRange framework
+- On older iOS versions, returns `NOT_AVAILABLE`
+- Requires `com.apple.developer.declared-age-range` entitlement
+- Shows a system dialog to the user
+
+### Android
+- Uses Google Play Age Signals API (background check, no dialog)
+- Requires Google Play Store to be installed and up to date
+- Returns detailed error codes if Play Store is unavailable
+
+### Web
+- Not supported. Throws `'AgeRange does not have web implementation'`
+
+## Best Practices
+
+1. **Handle all statuses**
+   Always check the `status` field before reading age data. The `ageLower` and `ageUpper` fields are only present when `status` is `SHARING`.
+
+2. **Provide fallbacks**
+   When the API returns `NOT_AVAILABLE` or `ERROR`, implement a fallback (e.g., self-declaration form or feature gating).
+
+3. **Use appropriate age gates**
+   Choose age gates that match your app's requirements. Common values: `[13]` for COPPA, `[13, 18]` for adult content, `[13, 16, 18]` for EU Digital Services Act.

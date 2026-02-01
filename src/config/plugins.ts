@@ -554,6 +554,14 @@ export const actions = [
     icon: TagIcon,
   },
   {
+    name: '@capgo/capacitor-age-range',
+    author: 'github.com/Cap-go',
+    description: 'Cross-platform age range detection using Google Play Age Signals (Android) and Apple DeclaredAgeRange (iOS)',
+    href: 'https://github.com/Cap-go/capacitor-age-range/',
+    title: 'Age Range',
+    icon: UserGroupIcon,
+  },
+  {
     name: '@capgo/capacitor-android-age-signals',
     author: 'github.com/Cap-go',
     description: 'Google Play Age Signals API wrapper - detect supervised accounts and verified users',
