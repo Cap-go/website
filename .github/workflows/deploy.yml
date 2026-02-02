@@ -18,7 +18,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v6
       - name: Check for Typos
-        uses: crate-ci/typos@v1.42.2
+        uses: crate-ci/typos@v1.42.3
 
   build:
     # Use a larger runner for faster builds
