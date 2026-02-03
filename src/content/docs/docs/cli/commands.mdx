@@ -148,7 +148,7 @@ Optionally, you can give:
 * `--channel <channel>` Channel to link to.
 * `--external <url>` Link to external URL instead of uploading to Capgo Cloud.
 * `--iv-session-key <key>` Set the IV and session key for bundle URL external.
-* `--s3-endpoint <s3Endpoint>` URL of S3 endpoint. Do not work with Partial upload, or external option.
+* `--s3-endpoint <s3Endpoint>` URL of S3 endpoint. Does not work with delta uploads or the external option.
 * `--s3-region <region>` Region for your S3 bucket. 
 * `--s3-apikey <apikey>` API key for your S3 endpoint.
 * `--s3-apisecret <apisecret>` API secret for your S3 endpoint.
@@ -169,7 +169,8 @@ Optionally, you can give:
 * `--ignore-metadata-check` Ignores the metadata (node_modules) check when uploading.
 * `--ignore-checksum-check` Ignores the checksum check when uploading.
 * `--timeout <timeout>` Timeout for the upload process in seconds.
-* `--delta` Uploads delta files alongside the full bundle (legacy flag – identical to `--partial`).
+* `--delta` Uploads Delta (manifest) files alongside the full bundle.
+* `--delta-only` Uploads only Delta (manifest) updates, skipping the full bundle.
 * `--tus` Upload the bundle using tus protocol.
 * `--multipart` Uses multipart protocol to upload data to S3, Deprecated, use TUS instead.
 * `--encrypted-checksum <encryptedChecksum>` An encrypted checksum (signature). Used only when uploading an external bundle.

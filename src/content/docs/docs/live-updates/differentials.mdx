@@ -1,6 +1,6 @@
 ---
 title: Delta updates
-description: "Learn how Capgo's differential updates optimize data transfer by only sending changed files, enhancing performance on slower networks."
+description: "Learn how Capgo's Delta (manifest) updates optimize data transfer by only sending changed files, enhancing performance on slower networks."
 sidebar:
   order: 4
 ---
@@ -12,53 +12,57 @@ This is especially beneficial for users on slower or metered network connections
 
 A second benefit is when the app have large assets who change rarely, like images or videos, compare to zipped JS files it will be downloaded only once.
 
-## How Differential Updates Work
+## How Delta (Manifest) Updates Work
 
-Differential updates in Capgo are handled by the Capgo plugin installed in your app. When you upload a new version of your app using the `--partial` flag, Capgo does the following:
+Delta (manifest) updates in Capgo are handled by the Capgo plugin installed in your app. When you upload a new version of your app using the `--delta` flag, Capgo does the following:
 
 1. Each file in your build is uploaded individually
 2. Checksums are generated for each file
 3. A new json manifest is created, listing all files and their checksums
 4. This manifest is uploaded to the Capgo database
 
-When a device running your app checks for an update, the Capgo plugin receives the new manifest from the server. It compares this manifest to the one it currently has, identifying which files have changed based on the checksums and files path.
+When a device running your app checks for an update, the Capgo plugin receives the new manifest from the server. It compares this manifest to the one it currently has, identifying which files have changed based on the checksums and file paths.
 
 The plugin then downloads only the changed files, rather than the entire JS bundle. It reconstructs the new version of the app by combining these downloaded files with the unchanged files it already has.
 
 <Aside title="Manifest">
-
-In case of differential updates, the device stores all downloaded files in a common cache, Capgo will never clean it but the OS can at any time.
-
+In case of Delta (manifest) updates, the device stores all downloaded files in a common cache. Capgo never cleans it, but the OS can at any time.
 </Aside>
 
-## Enabling Differential Updates
+## Enabling Delta (Manifest) Updates
 
-To enable differential updates for your Capgo app, simply use the `--partial` flag when uploading a new version:
-
-## Enforcing Differential Updates
-
-If you want to ensure that all uploads are differential updates and prevent any accidental full bundle uploads, you can use the `--partial-only` flag:
+To enable Delta (manifest) updates for your Capgo app, simply use the `--delta` flag when uploading a new version:
 
 ```shell
-npx @capgo/cli@latest bundle upload --partial-only
+npx @capgo/cli@latest bundle upload --delta
 ```
 
-When `--partial-only` is used, Capgo will only upload individual files and generate a manifest. Any device who do not support partial will not be able to download the update.
+If `directUpdate` is enabled in your `capacitor.config`, the CLI detects it. In non-interactive environments it sends Delta (manifest) updates automatically, and in interactive environments it prompts you to confirm before uploading.
 
-You might want to use `--partial-only` if:
+## Enforcing Delta (Manifest) Updates
 
-- You always want to use differential updates and never want to allow full bundle uploads
-- You're setting up a CI/CD pipeline and want to ensure all automated uploads are differential
+If you want to ensure that all uploads are Delta (manifest) updates and prevent any accidental full bundle uploads, you can use the `--delta-only` flag:
+
+```shell
+npx @capgo/cli@latest bundle upload --delta-only
+```
+
+When `--delta-only` is used, Capgo will only upload individual files and generate a manifest. Any device that does not support Delta (manifest) updates will not be able to download the update.
+
+You might want to use `--delta-only` if:
+
+- You always want to use Delta (manifest) updates and never want to allow full bundle uploads
+- You're setting up a CI/CD pipeline and want to ensure all automated uploads are Delta (manifest)
 - Your app is large and bandwidth is constrained, so you need to minimize upload/download sizes
 
-If you need to do a full bundle upload while `--partial-only` is set, simply run the upload command without `--partial-only`. This will override the setting for that single upload, allowing you to push a complete bundle when needed.
+If you need to do a full bundle upload while `--delta-only` is set, simply run the upload command without `--delta-only`. This will override the setting for that single upload, allowing you to push a complete bundle when needed.
 
 ## Troubleshooting
 
-If differential updates don't seem to be working (i.e. devices are always downloading the full JS bundle even for small changes), double check that:
+If Delta (manifest) updates don't seem to be working (i.e. devices are always downloading the full JS bundle even for small changes), double check that:
 
-- You're using the `--partial` flag every time you upload a new version
-- If using `--partial-only`, make sure you haven't accidentally omitted the `--partial` flag
+- You're using the `--delta` flag every time you upload a new version
+- If using `--delta-only`, make sure you haven't accidentally omitted the `--delta` flag
 - Your device is running the latest version of the Capgo plugin
 - Your device has a stable network connection and can reach the Capgo servers
 
@@ -72,9 +76,8 @@ You can also use the Capgo webapp to check the details of your last upload:
   ![bundle type](/bundle_type.webp)
 </Steps>
 
-If you continue to have trouble, please reach out to Capgo support for further assistance. They can check the server logs to confirm that your partial uploads are being processed correctly and that devices are receiving the updated manifests.
+If you continue to have trouble, please reach out to Capgo support for further assistance. They can check the server logs to confirm that your Delta (manifest) uploads are being processed correctly and that devices are receiving the updated manifests.
 
-That's it! The `--partial` flag tells Capgo to perform the individual file uploads and manifest generation needed for differential updates.
+That's it! The `--delta` flag tells Capgo to perform the individual file uploads and manifest generation needed for Delta (manifest) updates.
 
-Note that you need to use `--partial` every time you upload a new version that you want to be delivered as a differential update. If you omit the flag, Capgo will upload the entire JS bundle as a single file, and devices will download the whole bundle even if only a small part has changed.
-
+Note that you need to use `--delta` every time you upload a new version that you want to be delivered as a Delta (manifest) update. If you omit the flag, Capgo will upload the entire JS bundle as a single file, and devices will download the whole bundle even if only a small part has changed.
