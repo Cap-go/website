@@ -1,0 +1,44 @@
+---
+title: "@capgo/capacitor-video-thumbnails"
+locale: zh
+description: 在 Capacitor 应用中从视频文件指定时间点生成缩略图。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "简介"
+hero:
+  tagline: 从本地或远程视频文件中提取高质量缩略图,可自定义质量和时间点。需要 Capacitor 8+。
+  image:
+    file: ~public/icons/plugins/video-thumbnails.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/video-thumbnails/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-video-thumbnails/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="简单 API" icon="rocket">
+    一次方法调用即可生成缩略图
+  </Card>
+  <Card title="跨平台" icon="puzzle">
+    适用于 iOS、Android 与 Web 平台
+  </Card>
+  <Card title="远程视频" icon="external">
+    可从本地文件或远程 URL 提取缩略图
+  </Card>
+  <Card title="质量控制" icon="setting">
+    自定义缩略图质量与时间点选择
+  </Card>
+  <Card title="全面文档" icon="open-book">
+    查看[文档](/docs/plugins/video-thumbnails/getting-started/)以在几分钟内掌握插件。
+  </Card>
+</CardGrid>

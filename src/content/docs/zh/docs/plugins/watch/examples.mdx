@@ -1,0 +1,768 @@
+---
+title: 示例与用例
+description: 使用 Capacitor 构建 Apple Watch 应用的真实示例与模式。
+sidebar:
+  order: 4
+locale: zh
+---
+
+import { Tabs, TabItem, Aside, Code } from '@astrojs/starlight/components';
+
+本指南提供使用 `@capgo/capacitor-watch` 的常见 Apple Watch 应用模式示例。
+
+## 示例 1:健康与健身追踪
+
+在手表与手机之间同步训练数据。
+
+<Tabs>
+  <TabItem label="Watch (SwiftUI)">
+```swift
+import SwiftUI
+import CapgoWatchSDK
+
+struct WorkoutView: View {
+    @ObservedObject var connector = WatchConnector.shared
+    @State private var heartRate: Double = 0
+    @State private var calories: Double = 0
+    @State private var isTracking = false
+
+    var body: some View {
+        VStack(spacing: 12) {
+            // Heart Rate Display
+            HStack {
+                Image(systemName: "heart.fill")
+                    .foregroundColor(.red)
+                Text("\(Int(heartRate)) BPM")
+                    .font(.title2)
+            }
+
+            // Calories
+            HStack {
+                Image(systemName: "flame.fill")
+                    .foregroundColor(.orange)
+                Text("\(Int(calories)) cal")
+            }
+
+            // Start/Stop Button
+            Button(isTracking ? "Stop" : "Start") {
+                toggleTracking()
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(isTracking ? .red : .green)
+        }
+        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
+            if isTracking {
+                updateMetrics()
+            }
+        }
+    }
+
+    private func toggleTracking() {
+        isTracking.toggle()
+        if isTracking {
+            // Notify phone that workout started
+            connector.sendMessage([
+                "event": "workoutStarted",
+                "timestamp": Date().timeIntervalSince1970
+            ])
+        } else {
+            // Send final summary to phone
+            do {
+                try connector.updateApplicationContext([
+                    "workoutComplete": true,
+                    "totalCalories": calories,
+                    "avgHeartRate": heartRate,
+                    "endTime": Date().timeIntervalSince1970
+                ])
+            } catch {
+                print("Failed to update context: \(error)")
+            }
+        }
+    }
+
+    private func updateMetrics() {
+        // Simulate heart rate (in real app, use HealthKit)
+        heartRate = Double.random(in: 120...160)
+        calories += Double.random(in: 0.1...0.3)
+
+        // Send real-time updates if phone is reachable
+        if connector.isReachable {
+            connector.sendMessage([
+                "heartRate": heartRate,
+                "calories": calories,
+                "timestamp": Date().timeIntervalSince1970
+            ])
+        }
+    }
+}
+```
+  </TabItem>
+  <TabItem label="Phone (Capacitor)">
+```typescript
+import { CapgoWatch } from '@capgo/capacitor-watch';
+
+class WorkoutTracker {
+  private heartRateData: number[] = [];
+  private totalCalories = 0;
+
+  async initialize() {
+    // Listen for real-time workout updates
+    await CapgoWatch.addListener('messageReceived', (event) => {
+      const { heartRate, calories, timestamp } = event.message;
+
+      if (heartRate) {
+        this.heartRateData.push(heartRate);
+        this.updateUI(heartRate, calories);
+      }
+
+      if (event.message.event === 'workoutStarted') {
+        this.onWorkoutStarted(timestamp);
+      }
+    });
+
+    // Listen for workout completion via context
+    await CapgoWatch.addListener('applicationContextReceived', (event) => {
+      if (event.context.workoutComplete) {
+        this.onWorkoutComplete(event.context);
+      }
+    });
+  }
+
+  private onWorkoutStarted(timestamp: number) {
+    console.log('Workout started at:', new Date(timestamp * 1000));
+    this.heartRateData = [];
+    this.totalCalories = 0;
+  }
+
+  private onWorkoutComplete(data: any) {
+    const avgHeartRate = data.avgHeartRate;
+    const totalCalories = data.totalCalories;
+
+    // Save to your backend
+    this.saveWorkout({
+      avgHeartRate,
+      totalCalories,
+      endTime: data.endTime,
+      heartRateHistory: this.heartRateData
+    });
+  }
+
+  private updateUI(heartRate: number, calories: number) {
+    // Update your app's UI
+    document.getElementById('heart-rate')!.textContent = `${Math.round(heartRate)} BPM`;
+    document.getElementById('calories')!.textContent = `${Math.round(calories)} cal`;
+  }
+
+  private async saveWorkout(data: any) {
+    // Save to your backend
+    console.log('Saving workout:', data);
+  }
+}
+
+const tracker = new WorkoutTracker();
+tracker.initialize();
+```
+  </TabItem>
+</Tabs>
+
+## 示例 2:智能家居遥控
+
+通过手表控制智能家居设备。
+
+<Tabs>
+  <TabItem label="Watch (SwiftUI)">
+```swift
+import SwiftUI
+import CapgoWatchSDK
+
+struct SmartHomeView: View {
+    @ObservedObject var connector = WatchConnector.shared
+    @State private var devices: [SmartDevice] = []
+    @State private var isLoading = false
+
+    var body: some View {
+        NavigationView {
+            Group {
+                if isLoading {
+                    ProgressView("Loading...")
+                } else if devices.isEmpty {
+                    Text("No devices")
+                        .foregroundColor(.secondary)
+                } else {
+                    List(devices) { device in
+                        DeviceRow(device: device, onToggle: { toggleDevice(device) })
+                    }
+                }
+            }
+            .navigationTitle("Home")
+            .toolbar {
+                Button(action: refreshDevices) {
+                    Image(systemName: "arrow.clockwise")
+                }
+            }
+        }
+        .onAppear {
+            refreshDevices()
+        }
+        .onChange(of: connector.lastMessage) { message in
+            handleMessage(message)
+        }
+    }
+
+    private func refreshDevices() {
+        guard connector.isReachable else {
+            // Load from cached context
+            loadFromContext()
+            return
+        }
+
+        isLoading = true
+        connector.sendMessage(["action": "getDevices"]) { reply in
+            DispatchQueue.main.async {
+                isLoading = false
+                if let deviceList = reply["devices"] as? [[String: Any]] {
+                    devices = deviceList.compactMap { SmartDevice(from: $0) }
+                }
+            }
+        }
+    }
+
+    private func toggleDevice(_ device: SmartDevice) {
+        connector.sendMessage([
+            "action": "toggleDevice",
+            "deviceId": device.id,
+            "newState": !device.isOn
+        ]) { reply in
+            DispatchQueue.main.async {
+                if reply["success"] as? Bool == true {
+                    // Update local state
+                    if let index = devices.firstIndex(where: { $0.id == device.id }) {
+                        devices[index].isOn.toggle()
+                    }
+                }
+            }
+        }
+    }
+
+    private func loadFromContext() {
+        if let deviceList = connector.applicationContext["devices"] as? [[String: Any]] {
+            devices = deviceList.compactMap { SmartDevice(from: $0) }
+        }
+    }
+
+    private func handleMessage(_ message: [String: Any]) {
+        // Handle push updates from phone
+        if let update = message["deviceUpdate"] as? [String: Any],
+           let deviceId = update["id"] as? String,
+           let isOn = update["isOn"] as? Bool {
+            if let index = devices.firstIndex(where: { $0.id == deviceId }) {
+                devices[index].isOn = isOn
+            }
+        }
+    }
+}
+
+struct SmartDevice: Identifiable {
+    let id: String
+    let name: String
+    let type: String
+    var isOn: Bool
+
+    init?(from dict: [String: Any]) {
+        guard let id = dict["id"] as? String,
+              let name = dict["name"] as? String,
+              let type = dict["type"] as? String,
+              let isOn = dict["isOn"] as? Bool else {
+            return nil
+        }
+        self.id = id
+        self.name = name
+        self.type = type
+        self.isOn = isOn
+    }
+}
+
+struct DeviceRow: View {
+    let device: SmartDevice
+    let onToggle: () -> Void
+
+    var body: some View {
+        HStack {
+            Image(systemName: iconName)
+                .foregroundColor(device.isOn ? .yellow : .gray)
+            Text(device.name)
+            Spacer()
+            Toggle("", isOn: .constant(device.isOn))
+                .labelsHidden()
+                .onTapGesture { onToggle() }
+        }
+    }
+
+    var iconName: String {
+        switch device.type {
+        case "light": return device.isOn ? "lightbulb.fill" : "lightbulb"
+        case "thermostat": return "thermometer"
+        case "lock": return device.isOn ? "lock.fill" : "lock.open"
+        default: return "power"
+        }
+    }
+}
+```
+  </TabItem>
+  <TabItem label="Phone (Capacitor)">
+```typescript
+import { CapgoWatch } from '@capgo/capacitor-watch';
+
+interface SmartDevice {
+  id: string;
+  name: string;
+  type: string;
+  isOn: boolean;
+}
+
+class SmartHomeController {
+  private devices: SmartDevice[] = [];
+
+  async initialize() {
+    // Handle requests from watch
+    await CapgoWatch.addListener('messageReceivedWithReply', async (event) => {
+      const { action, deviceId, newState } = event.message;
+
+      let response: any = { success: false };
+
+      switch (action) {
+        case 'getDevices':
+          response = { devices: this.devices };
+          break;
+
+        case 'toggleDevice':
+          const success = await this.toggleDevice(deviceId, newState);
+          response = { success };
+          break;
+      }
+
+      await CapgoWatch.replyToMessage({
+        callbackId: event.callbackId,
+        data: response
+      });
+    });
+
+    // Load initial devices
+    await this.loadDevices();
+
+    // Keep watch updated with device states
+    await this.syncDevicesToWatch();
+  }
+
+  private async loadDevices() {
+    // Load from your smart home API
+    this.devices = [
+      { id: '1', name: 'Living Room', type: 'light', isOn: true },
+      { id: '2', name: 'Bedroom', type: 'light', isOn: false },
+      { id: '3', name: 'Thermostat', type: 'thermostat', isOn: true },
+      { id: '4', name: 'Front Door', type: 'lock', isOn: true }
+    ];
+  }
+
+  private async toggleDevice(deviceId: string, newState: boolean): Promise<boolean> {
+    try {
+      // Call your smart home API
+      const device = this.devices.find(d => d.id === deviceId);
+      if (device) {
+        device.isOn = newState;
+
+        // Push update to watch
+        const info = await CapgoWatch.getInfo();
+        if (info.isReachable) {
+          await CapgoWatch.sendMessage({
+            data: {
+              deviceUpdate: { id: deviceId, isOn: newState }
+            }
+          });
+        }
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error('Failed to toggle device:', error);
+      return false;
+    }
+  }
+
+  private async syncDevicesToWatch() {
+    // Update application context for offline access
+    await CapgoWatch.updateApplicationContext({
+      context: { devices: this.devices }
+    });
+  }
+
+  // Call this when devices change on the phone
+  async onDeviceStateChanged(deviceId: string, isOn: boolean) {
+    const device = this.devices.find(d => d.id === deviceId);
+    if (device) {
+      device.isOn = isOn;
+      await this.syncDevicesToWatch();
+    }
+  }
+}
+
+const controller = new SmartHomeController();
+controller.initialize();
+```
+  </TabItem>
+</Tabs>
+
+## 示例 3:通知中心
+
+向手表发送自定义通知。
+
+<Tabs>
+  <TabItem label="Phone (Capacitor)">
+```typescript
+import { CapgoWatch } from '@capgo/capacitor-watch';
+
+class NotificationService {
+  async sendNotification(title: string, body: string, data?: any) {
+    const info = await CapgoWatch.getInfo();
+
+    if (info.isReachable) {
+      // Send immediately if watch is reachable
+      await CapgoWatch.sendMessage({
+        data: {
+          type: 'notification',
+          title,
+          body,
+          data,
+          timestamp: Date.now()
+        }
+      });
+    } else {
+      // Queue for later delivery
+      await CapgoWatch.transferUserInfo({
+        userInfo: {
+          type: 'notification',
+          title,
+          body,
+          data,
+          timestamp: Date.now()
+        }
+      });
+    }
+  }
+
+  async sendUrgentAlert(message: string) {
+    // Use sendMessage for urgent alerts (requires watch to be reachable)
+    const info = await CapgoWatch.getInfo();
+
+    if (!info.isReachable) {
+      console.warn('Watch not reachable for urgent alert');
+      return false;
+    }
+
+    await CapgoWatch.sendMessage({
+      data: {
+        type: 'urgentAlert',
+        message,
+        haptic: 'warning',
+        timestamp: Date.now()
+      }
+    });
+
+    return true;
+  }
+}
+
+// Usage
+const notifications = new NotificationService();
+
+// Regular notification (queued if watch unavailable)
+await notifications.sendNotification(
+  'Order Update',
+  'Your order has shipped!',
+  { orderId: '12345' }
+);
+
+// Urgent alert (requires watch to be active)
+const sent = await notifications.sendUrgentAlert('Security alert: New login detected');
+```
+  </TabItem>
+  <TabItem label="Watch (SwiftUI)">
+```swift
+import SwiftUI
+import WatchKit
+import CapgoWatchSDK
+
+struct NotificationView: View {
+    @ObservedObject var connector = WatchConnector.shared
+    @State private var notifications: [WatchNotification] = []
+    @State private var showAlert = false
+    @State private var alertMessage = ""
+
+    var body: some View {
+        NavigationView {
+            List(notifications) { notification in
+                NotificationRow(notification: notification)
+            }
+            .navigationTitle("Notifications")
+        }
+        .onReceive(connector.$lastMessage) { message in
+            handleMessage(message)
+        }
+        .alert("Alert", isPresented: $showAlert) {
+            Button("OK") { }
+        } message: {
+            Text(alertMessage)
+        }
+    }
+
+    private func handleMessage(_ message: [String: Any]) {
+        guard let type = message["type"] as? String else { return }
+
+        switch type {
+        case "notification":
+            let notification = WatchNotification(
+                id: UUID().uuidString,
+                title: message["title"] as? String ?? "",
+                body: message["body"] as? String ?? "",
+                timestamp: Date(timeIntervalSince1970: (message["timestamp"] as? Double ?? 0) / 1000)
+            )
+            notifications.insert(notification, at: 0)
+
+            // Play haptic
+            WKInterfaceDevice.current().play(.notification)
+
+        case "urgentAlert":
+            alertMessage = message["message"] as? String ?? "Alert"
+            showAlert = true
+
+            // Play strong haptic for urgent alerts
+            if let hapticType = message["haptic"] as? String {
+                switch hapticType {
+                case "warning":
+                    WKInterfaceDevice.current().play(.notification)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        WKInterfaceDevice.current().play(.notification)
+                    }
+                default:
+                    WKInterfaceDevice.current().play(.notification)
+                }
+            }
+
+        default:
+            break
+        }
+    }
+}
+
+struct WatchNotification: Identifiable {
+    let id: String
+    let title: String
+    let body: String
+    let timestamp: Date
+}
+
+struct NotificationRow: View {
+    let notification: WatchNotification
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(notification.title)
+                .font(.headline)
+            Text(notification.body)
+                .font(.caption)
+                .foregroundColor(.secondary)
+            Text(notification.timestamp, style: .relative)
+                .font(.caption2)
+                .foregroundColor(.secondary)
+        }
+        .padding(.vertical, 4)
+    }
+}
+```
+  </TabItem>
+</Tabs>
+
+## 示例 4:数据同步服务
+
+在手机与手表之间保持数据同步。
+
+```typescript
+import { CapgoWatch } from '@capgo/capacitor-watch';
+
+class DataSyncService {
+  private syncQueue: any[] = [];
+  private isSyncing = false;
+
+  async initialize() {
+    // Listen for sync requests from watch
+    await CapgoWatch.addListener('messageReceivedWithReply', async (event) => {
+      if (event.message.action === 'sync') {
+        const data = await this.getDataForSync(event.message.lastSyncTime);
+        await CapgoWatch.replyToMessage({
+          callbackId: event.callbackId,
+          data: { items: data, syncTime: Date.now() }
+        });
+      }
+    });
+
+    // Listen for data from watch
+    await CapgoWatch.addListener('userInfoReceived', (event) => {
+      this.handleWatchData(event.userInfo);
+    });
+
+    // Monitor connectivity for sync opportunities
+    await CapgoWatch.addListener('reachabilityChanged', (event) => {
+      if (event.isReachable && this.syncQueue.length > 0) {
+        this.processSyncQueue();
+      }
+    });
+  }
+
+  // Push important data to watch (guaranteed delivery)
+  async pushToWatch(data: any) {
+    await CapgoWatch.transferUserInfo({
+      userInfo: {
+        type: 'dataUpdate',
+        data,
+        timestamp: Date.now()
+      }
+    });
+  }
+
+  // Update shared state (latest value only)
+  async updateSharedState(state: any) {
+    await CapgoWatch.updateApplicationContext({
+      context: {
+        ...state,
+        lastUpdated: Date.now()
+      }
+    });
+  }
+
+  // Queue data for sync when watch becomes available
+  queueForSync(data: any) {
+    this.syncQueue.push(data);
+    this.attemptSync();
+  }
+
+  private async attemptSync() {
+    const info = await CapgoWatch.getInfo();
+    if (info.isReachable) {
+      await this.processSyncQueue();
+    }
+  }
+
+  private async processSyncQueue() {
+    if (this.isSyncing || this.syncQueue.length === 0) return;
+
+    this.isSyncing = true;
+
+    while (this.syncQueue.length > 0) {
+      const item = this.syncQueue.shift();
+      await CapgoWatch.transferUserInfo({ userInfo: item });
+    }
+
+    this.isSyncing = false;
+  }
+
+  private async getDataForSync(lastSyncTime: number): Promise<any[]> {
+    // Return data modified since lastSyncTime
+    // This would query your database/API
+    return [];
+  }
+
+  private handleWatchData(data: any) {
+    console.log('Received from watch:', data);
+    // Process and save data from watch
+  }
+}
+```
+
+## 最佳实践
+
+### 1. 选择合适的传输方式
+
+| 方法 | 使用场景 | 交付方式 |
+|--------|----------|----------|
+| `sendMessage` | 交互、时效性强 | 立即(不可达时失败) |
+| `updateApplicationContext` | 当前应用状态 | 仅最新值 |
+| `transferUserInfo` | 重要数据 | 队列保证送达 |
+
+### 2. 优雅处理离线
+
+```typescript
+async function smartSend(data: any, important: boolean) {
+  const info = await CapgoWatch.getInfo();
+
+  if (info.isReachable) {
+    // Send immediately
+    await CapgoWatch.sendMessage({ data });
+  } else if (important) {
+    // Queue for later
+    await CapgoWatch.transferUserInfo({ userInfo: data });
+  } else {
+    // Update context (will be available when watch opens app)
+    await CapgoWatch.updateApplicationContext({ context: data });
+  }
+}
+```
+
+### 3. 最小化数据体积
+
+```swift
+// Bad - sending large objects
+connector.sendMessage(["user": fullUserObject])
+
+// Good - send only what's needed
+connector.sendMessage([
+    "userId": user.id,
+    "name": user.displayName,
+    "avatarUrl": user.avatarUrl
+])
+```
+
+### 4. 合理使用触觉反馈
+
+```swift
+import WatchKit
+
+// Success feedback
+WKInterfaceDevice.current().play(.success)
+
+// Failure feedback
+WKInterfaceDevice.current().play(.failure)
+
+// Navigation feedback
+WKInterfaceDevice.current().play(.click)
+
+// Notification
+WKInterfaceDevice.current().play(.notification)
+```
+
+### 5. 在手表端缓存
+
+```swift
+class DataCache {
+    private let defaults = UserDefaults.standard
+
+    func save(_ data: [String: Any], forKey key: String) {
+        if let encoded = try? JSONSerialization.data(withJSONObject: data) {
+            defaults.set(encoded, forKey: key)
+        }
+    }
+
+    func load(forKey key: String) -> [String: Any]? {
+        guard let data = defaults.data(forKey: key),
+              let dict = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            return nil
+        }
+        return dict
+    }
+}
+```
+
+## 下一步
+
+- [Watch App Setup](/docs/plugins/watch/watch-app-setup/) - 创建您的第一个 watch 应用
+- [API Reference](/docs/plugins/watch/getting-started/#api-reference) - 完整 API 文档
+- [GitHub Repository](https://github.com/Cap-go/capacitor-watch) - 源码与问题反馈

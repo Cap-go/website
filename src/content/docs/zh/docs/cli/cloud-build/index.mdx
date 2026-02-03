@@ -1,0 +1,128 @@
+---
+title: Capgo Build 简介
+description: 在云端构建 iOS 和 Android 应用,无需本地环境。iOS 构建不需要 Mac。
+sidebar:
+  order: 0
+  label: 简介
+locale: zh
+---
+
+import { Card, CardGrid, Aside, LinkCard } from '@astrojs/starlight/components';
+
+Capgo Build 是面向 Capacitor 应用的云端原生应用编译服务。它让您在不维护本地开发环境的情况下构建 iOS 和 Android 应用 - 无需 Xcode、无需 Android Studio、无需 Mac 硬件。
+
+## Capgo Build 能做什么
+
+Capgo Build 在云端编译您 Capacitor 应用的**原生部分**:
+
+- **iOS 构建** 在专用 Apple Silicon (Mac Mini M4) 机器上运行
+- **Android 构建** 在隔离的 Docker 容器中运行
+- **自动代码签名** 处理证书、Provisioning Profile 和 Keystore
+- **直接提交商店** 将签名后的应用上传到 App Store Connect 和 Google Play
+
+您只需一条 CLI 命令即可在任何地方触发构建 - 本地机器、GitHub Actions、GitLab CI 或任何 CI/CD 流水线。
+
+## 何时使用 Capgo Build vs 实时更新
+
+Capgo 提供两种互补的更新能力。下表说明何时使用哪一种:
+
+| 场景 | 实时更新 | Capgo Build |
+|----------|:------------:|:-----------:|
+| JavaScript/TypeScript 代码的 Bug 修复 | ✓ | |
+| UI 改动(HTML、CSS、图片) | ✓ | |
+| 更新 Web 依赖 | ✓ | |
+| 添加或移除 Capacitor 插件 | | ✓ |
+| 更新原生 SDK 版本 | | ✓ |
+| 修改原生权限(Info.plist、AndroidManifest) | | ✓ |
+| 更新 Capacitor 版本 | | ✓ |
+| 修改原生代码(Swift、Kotlin、Java) | | ✓ |
+| 修改应用图标或启动画面 | | ✓ |
+| 首次提交应用商店 | | ✓ |
+
+<Aside>
+**实时更新** 可在无需商店审核的情况下即时推送 JavaScript 变更。**Capgo Build** 在您更改原生代码时生成新的原生二进制。大多数团队会每天使用实时更新,在需要原生变更时偶尔使用 Capgo Build。
+</Aside>
+
+## 为什么使用 Capgo Build
+
+<CardGrid>
+  <Card title="iOS 无需 Mac" icon="laptop">
+    不用 Mac 硬件也能构建并发布 iOS 应用。Windows、Linux 或任何 CI/CD 系统都可触发 iOS 构建并发布到 TestFlight。
+  </Card>
+
+  <Card title="跳过本地环境配置" icon="rocket">
+    无需安装 Xcode、Android Studio 或管理 SDK 版本。Capgo Build 处理所有原生工具链 - 您只需运行 CLI 命令。
+  </Card>
+
+  <Card title="集中管理凭证" icon="setting">
+    在 CI/CD 的密钥中保存证书和 keystore 一次即可。团队成员无需本地签名凭证也能触发构建。
+  </Card>
+
+  <Card title="适配任意 CI/CD" icon="github">
+    一条 CLI 命令即可集成到任意流水线。GitHub Actions、GitLab CI、Jenkins - 可直接在现有流程中触发构建。
+  </Card>
+
+  <Card title="实时构建日志" icon="list-format">
+    在终端实时查看构建进度。日志通过 Server-Sent Events 流式输出,出错时可立即定位问题。
+  </Card>
+
+  <Card title="直接提交商店" icon="approve-check">
+    签名后的应用可直接上传到 App Store Connect 和 Google Play。构建完成到提交商店之间无需手动步骤。
+  </Card>
+</CardGrid>
+
+## 工作原理
+
+运行构建命令后:
+
+1. **上传** - CLI 仅打包必需内容(原生平台目录 + 原生依赖)并上传到安全的云存储
+2. **构建** - 应用在专用基础设施上使用 Fastlane 编译
+3. **签名** - 应用证书和 keystore 会被应用(仅在构建期间存在于内存中)
+4. **提交** - 签名后的应用直接上传到 App Store Connect 或 Google Play
+5. **清理** - 所有构建产物和凭证都会自动删除
+
+您的源码保留在本地。仅上传平台相关的原生代码。
+
+## 安全模型
+
+Capgo Build 以零凭证存储为设计目标:
+
+- **仅运行时凭证** - Capgo 不会存储证书和 keystore。它们在构建完成后会立即删除。
+- **一次性环境** - 每次构建都在隔离环境中运行,完成后销毁
+- **不存储日志** - 构建日志仅流式输出到您的终端,不会存储在 Capgo 服务器上
+- **最小化上传** - 仅上传您请求的原生平台,而不是整个代码库。[查看具体上传内容](/docs/cli/cloud-build/getting-started/#what-gets-built)
+
+## 定价
+
+仅按构建时间计费:
+
+- 构建分钟数包含在您的 Capgo 计划中
+- 额外分钟数可通过积分系统购买
+- iOS 构建运行在 Mac Mini M4 上(因硬件成本有 2x 计费系数)
+- Android 构建在 Docker 容器中运行(1x 计费)
+- 无存储费用
+
+## 下一步
+
+<CardGrid>
+  <LinkCard 
+    title="入门指南" 
+    description="创建您的第一个构建并体验 Capgo Build。"
+    href="/docs/cli/cloud-build/getting-started/"
+  />
+  <LinkCard 
+    title="凭证配置" 
+    description="配置 iOS 证书和 Android keystore。"
+    href="/docs/cli/cloud-build/credentials/"
+  />
+  <LinkCard 
+    title="iOS 构建" 
+    description="完整的 iOS 构建与提交指南。"
+    href="/docs/cli/cloud-build/ios/"
+  />
+  <LinkCard 
+    title="Android 构建" 
+    description="完整的 Android 构建与提交指南。"
+    href="/docs/cli/cloud-build/android/"
+  />
+</CardGrid>

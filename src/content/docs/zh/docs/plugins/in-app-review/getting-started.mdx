@@ -1,0 +1,211 @@
+---
+title: 开始使用
+description: 了解如何安装并使用 In-App Review 插件,在 Capacitor 应用中请求应用商店评价。
+sidebar:
+  order: 2
+locale: zh
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-in-app-review" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步原生项目**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 用法
+
+导入插件并在应用中合适的时机请求评价:
+
+```typescript
+import { CapgoInAppReview } from '@capgo/capacitor-in-app-review';
+
+// 在用户流程的自然节点请求评价
+const requestReview = async () => {
+  try {
+    await CapgoInAppReview.requestReview();
+    console.log('Review requested successfully');
+  } catch (error) {
+    console.error('Failed to request review:', error);
+  }
+};
+```
+
+## API 参考
+
+### requestReview()
+
+触发原生应用内评价对话框。
+
+```typescript
+await CapgoInAppReview.requestReview();
+```
+
+**重要说明:**
+- 该方法调用并不一定每次都显示弹窗
+- Apple 与 Google 都有频率限制
+- 无法保证用户一定会看到评价提示
+- 即便弹窗未显示,方法也会成功返回
+- 不要在用户点击按钮等即时动作后触发
+
+### getPluginVersion()
+
+返回原生插件版本。
+
+```typescript
+const { version } = await CapgoInAppReview.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+## 最佳实践
+
+### 何时请求评价
+
+选择用户最可能有正面体验的时机:
+
+```typescript
+// 好的示例:
+// - 用户完成一关游戏后
+// - 成功完成一个任务后
+// - 用户多次使用应用后
+// - 一次积极交互后
+
+// 示例:跟踪使用情况,在达到里程碑后请求评价
+let taskCompletedCount = 0;
+
+const onTaskComplete = async () => {
+  taskCompletedCount++;
+
+  // 用户完成 5 个任务后请求评价
+  if (taskCompletedCount === 5) {
+    await CapgoInAppReview.requestReview();
+  }
+};
+```
+
+### 不要在这些时机请求
+
+```typescript
+// 不好的示例 - 请勿这样做:
+// - 应用启动时
+// - 响应“给我们评分”按钮点击时
+// - 发生错误或负面体验后
+// - 过于频繁(尊重平台配额)
+```
+
+### 跟踪请求次数
+
+由于平台控制弹窗是否显示,建议记录请求:
+
+```typescript
+import { CapgoInAppReview } from '@capgo/capacitor-in-app-review';
+import { Preferences } from '@capacitor/preferences';
+
+const requestReviewIfAppropriate = async () => {
+  const lastRequest = await Preferences.get({ key: 'lastReviewRequest' });
+  const daysSinceLastRequest = lastRequest.value
+    ? (Date.now() - parseInt(lastRequest.value)) / (1000 * 60 * 60 * 24)
+    : Infinity;
+
+  // 至少间隔 30 天
+  if (daysSinceLastRequest >= 30) {
+    await CapgoInAppReview.requestReview();
+    await Preferences.set({
+      key: 'lastReviewRequest',
+      value: Date.now().toString()
+    });
+  }
+};
+```
+
+## 平台说明
+
+### iOS
+
+- 使用 `SKStoreReviewController`
+- 系统会自动限制在 **365 天内最多显示 3 次**
+- 受 App Store 策略影响,弹窗可能不会出现
+- 测试:开发环境下弹窗会显示,但不会提交评价
+
+### Android
+
+- 使用 **Play In-App Review API**
+- Google Play 会限制用户看到弹窗的频率
+- **调试构建不会显示**
+- 测试需要:
+  - 应用需从 Play Store 安装(内部测试通道可用)
+  - 设备上有 Google 账号
+
+## 完整示例
+
+```typescript
+import { CapgoInAppReview } from '@capgo/capacitor-in-app-review';
+import { Preferences } from '@capacitor/preferences';
+
+export class ReviewService {
+  private static REVIEW_REQUEST_KEY = 'lastReviewRequest';
+  private static MIN_DAYS_BETWEEN_REQUESTS = 30;
+  private static MIN_APP_LAUNCHES = 5;
+
+  async checkAndRequestReview(): Promise<boolean> {
+    const shouldRequest = await this.shouldRequestReview();
+
+    if (shouldRequest) {
+      try {
+        await CapgoInAppReview.requestReview();
+        await this.recordReviewRequest();
+        return true;
+      } catch (error) {
+        console.error('Review request failed:', error);
+        return false;
+      }
+    }
+
+    return false;
+  }
+
+  private async shouldRequestReview(): Promise<boolean> {
+    // 检查应用启动次数
+    const launchCount = await this.getAppLaunchCount();
+    if (launchCount < ReviewService.MIN_APP_LAUNCHES) {
+      return false;
+    }
+
+    // 检查距离上次请求的天数
+    const lastRequest = await Preferences.get({ key: ReviewService.REVIEW_REQUEST_KEY });
+    if (lastRequest.value) {
+      const daysSince = (Date.now() - parseInt(lastRequest.value)) / (1000 * 60 * 60 * 24);
+      if (daysSince < ReviewService.MIN_DAYS_BETWEEN_REQUESTS) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  private async getAppLaunchCount(): Promise<number> {
+    const count = await Preferences.get({ key: 'appLaunchCount' });
+    return count.value ? parseInt(count.value) : 0;
+  }
+
+  private async recordReviewRequest(): Promise<void> {
+    await Preferences.set({
+      key: ReviewService.REVIEW_REQUEST_KEY,
+      value: Date.now().toString()
+    });
+  }
+
+  async incrementLaunchCount(): Promise<void> {
+    const current = await this.getAppLaunchCount();
+    await Preferences.set({
+      key: 'appLaunchCount',
+      value: (current + 1).toString()
+    });
+  }
+}
+```

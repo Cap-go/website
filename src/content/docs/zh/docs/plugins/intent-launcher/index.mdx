@@ -1,0 +1,44 @@
+---
+title: "@capgo/capacitor-intent-launcher"
+locale: zh
+description: 在 Capacitor 应用中启动 Android Intent 并打开系统设置。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "简介"
+hero:
+  tagline: 使用 Android Intent 系统启动活动、打开系统设置并与其他应用交互。需要 Capacitor 8+。
+  image:
+    file: ~public/icons/plugins/intent-launcher.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/intent-launcher/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-intent-launcher/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="系统设置" icon="setting">
+    直接从应用打开任意 Android 系统设置页面
+  </Card>
+  <Card title="启动应用" icon="external">
+    通过包名打开已安装的其他应用
+  </Card>
+  <Card title="Intent 动作" icon="rocket">
+    执行 65+ 预定义 Android intent 动作
+  </Card>
+  <Card title="应用图标" icon="puzzle">
+    以 base64 图片获取应用图标
+  </Card>
+  <Card title="全面文档" icon="open-book">
+    查看[文档](/docs/plugins/intent-launcher/getting-started/)以在几分钟内掌握插件。
+  </Card>
+</CardGrid>

@@ -1,0 +1,465 @@
+---
+title: 创建 watchOS 应用
+description: 为您的 Capacitor iOS 项目创建 Apple Watch 应用的完整分步指南,支持双向通信。
+sidebar:
+  order: 3
+locale: zh
+---
+
+import { Steps, Tabs, TabItem, Aside, FileTree } from '@astrojs/starlight/components';
+
+本指南将带您从零开始创建 watchOS 伴生应用,包括在 Xcode 中进行项目设置、集成 CapgoWatchSDK,并使用 SwiftUI 构建可运行的手表应用。
+
+## 前置条件
+
+开始前请确保:
+
+- **Xcode 15 或更高版本**(从 Mac App Store 下载)
+- **macOS Sonoma 或更高版本**(用于最新 watchOS SDK)
+- **已有 Capacitor iOS 项目**(如未创建请运行 `npx cap add ios`)
+- **Apple Developer 账号**(免费账号即可用于开发)
+
+## 项目结构概览
+
+完成本指南后,项目结构如下:
+
+<FileTree>
+- ios/
+  - App/
+    - App/ (主 iOS 应用)
+    - App.xcodeproj
+    - App.xcworkspace (请使用此文件打开项目)
+    - Podfile
+  - MyWatch/ (新的 watch 应用)
+    - MyWatch/ (watch 应用源码)
+      - MyWatchApp.swift
+      - ContentView.swift
+      - Assets.xcassets/
+    - MyWatch.xcodeproj
+</FileTree>
+
+## 第 1 步:在 Xcode 中打开 iOS 项目
+
+<Steps>
+1. 进入 Capacitor 项目的 `ios/App` 目录
+2. 双击打开 `App.xcworkspace`(不是 `.xcodeproj`)
+3. 等待 Xcode 完成索引
+</Steps>
+
+<Aside type="caution">
+请始终打开 `.xcworkspace`,不要打开 `.xcodeproj`。Workspace 包含 CocoaPods 依赖,这是项目所需的。
+</Aside>
+
+## 第 2 步:添加 watchOS Target
+
+<Steps>
+1. 在 Xcode 中选择 **File → New → Target...**
+
+2. 在模板选择器中:
+   - 选择顶部 **watchOS** 标签
+   - 选择 **App**
+   - 点击 **Next**
+
+3. 配置 watch 应用:
+   - **Product Name**:`MyWatch`(或自定义名称)
+   - **Team**:选择您的 Apple Developer 团队
+   - **Organization Identifier**:应与 iOS 应用一致(例如 `app.capgo`)
+   - **Bundle Identifier**:自动生成(例如 `app.capgo.myapp.watchkitapp`)
+   - **Language**:Swift
+   - **User Interface**:SwiftUI
+   - **Watch App Type**:App(不要选择 App for Existing iOS App)
+   - 取消勾选 **Include Notification Scene**(除非需要)
+   - 取消勾选 **Include Complication**(除非需要)
+
+4. 点击 **Finish**
+
+5. 出现 "Activate 'MyWatch' scheme?" 时,点击 **Activate**
+</Steps>
+
+## 第 3 步:配置 Watch 应用设置
+
+<Steps>
+1. 在 Project Navigator(左侧栏)选择项目(顶部蓝色图标)
+
+2. 在 targets 列表中选择 watch target(例如 "MyWatch")
+
+3. 进入 **General** 选项卡:
+   - **Display Name**:应用图标下显示的名称(例如 "My App")
+   - **Bundle Identifier**:应以 `.watchkitapp` 结尾
+   - **Version**:与 iOS 应用版本一致
+   - **Build**:与 iOS 应用构建号一致
+
+4. 进入 **Signing & Capabilities** 选项卡:
+   - 启用 **Automatically manage signing**
+   - 选择 **Team**
+   - Xcode 会自动创建 provisioning profiles
+
+5. 设置 **Deployment Info**:
+   - **Minimum Deployments**:watchOS 9.0 或更高
+</Steps>
+
+## 第 4 步:通过 Swift Package Manager 添加 CapgoWatchSDK
+
+CapgoWatchSDK 提供可直接使用的 `WatchConnector` 类用于通信。
+
+<Steps>
+1. 在 Xcode 中选择 **File → Add Package Dependencies...**
+
+2. 在搜索框输入:
+   ```
+   https://github.com/Cap-go/capacitor-watch.git
+   ```
+
+3. 回车并等待 Xcode 拉取包
+
+4. 配置包:
+   - **Dependency Rule**:选择 "Up to Next Major Version" 并填写 "8.0.0"
+   - 点击 **Add Package**
+
+5. 选择要添加的产品:
+   - **重要**:只选择 `CapgoWatchSDK`
+   - 确保添加到 **watch target**(例如 "MyWatch"),而非 iOS 应用
+   - 点击 **Add Package**
+</Steps>
+
+<Aside type="tip">
+`CapgoWatchSDK` 专为 watchOS 应用设计。它提供 `WatchConnector`(ObservableObject),为您处理所有 WatchConnectivity 复杂细节。
+</Aside>
+
+## 第 5 步:实现 Watch 应用
+
+接下来编写 watch 应用代码。请用以下内容替换自动生成的文件:
+
+### 5.1 创建应用入口
+
+编辑 `MyWatch/MyWatchApp.swift`:
+
+```swift
+import SwiftUI
+import CapgoWatchSDK
+
+@main
+struct MyWatchApp: App {
+    init() {
+        // 应用启动时激活 WatchConnectivity
+        WatchConnector.shared.activate()
+    }
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+```
+
+### 5.2 创建主视图
+
+编辑 `MyWatch/ContentView.swift`:
+
+```swift
+import SwiftUI
+import CapgoWatchSDK
+
+struct ContentView: View {
+    // 监听 WatchConnector 以自动更新 UI
+    @ObservedObject var connector = WatchConnector.shared
+
+    // 本地状态
+    @State private var messageText = ""
+    @State private var statusMessage = "Ready"
+
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 16) {
+                // 连接状态
+                ConnectionStatusView(connector: connector)
+
+                Divider()
+
+                // 消息输入
+                TextField("Message", text: $messageText)
+                    .textFieldStyle(.roundedBorder)
+
+                // 发送按钮
+                HStack {
+                    Button("Send") {
+                        sendMessage()
+                    }
+                    .disabled(!connector.isReachable || messageText.isEmpty)
+
+                    Button("Request") {
+                        sendWithReply()
+                    }
+                    .disabled(!connector.isReachable || messageText.isEmpty)
+                }
+
+                Divider()
+
+                // 状态
+                Text(statusMessage)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+
+                // 最后一条消息
+                if !connector.lastMessage.isEmpty {
+                    VStack(alignment: .leading) {
+                        Text("Last Message:")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        Text(formatMessage(connector.lastMessage))
+                            .font(.caption2)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
+            .padding()
+        }
+    }
+
+    private func sendMessage() {
+        connector.sendMessage(["text": messageText, "timestamp": Date().timeIntervalSince1970])
+        statusMessage = "Message sent"
+        messageText = ""
+    }
+
+    private func sendWithReply() {
+        connector.sendMessage(["text": messageText, "needsReply": true]) { reply in
+            DispatchQueue.main.async {
+                statusMessage = "Reply: \(formatMessage(reply))"
+            }
+        }
+        messageText = ""
+    }
+
+    private func formatMessage(_ message: [String: Any]) -> String {
+        message.map { "\($0.key): \($0.value)" }.joined(separator: ", ")
+    }
+}
+
+// 连接状态的独立视图
+struct ConnectionStatusView: View {
+    @ObservedObject var connector: WatchConnector
+
+    var body: some View {
+        HStack {
+            Circle()
+                .fill(connector.isReachable ? Color.green : Color.red)
+                .frame(width: 12, height: 12)
+
+            Text(connector.isReachable ? "Connected" : "Disconnected")
+                .font(.headline)
+
+            Spacer()
+
+            if connector.isActivated {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(.green)
+            }
+        }
+    }
+}
+
+#Preview {
+    ContentView()
+}
+```
+
+## 第 6 步:为 iOS 应用配置 WatchConnectivity
+
+iOS 应用也需要 WatchConnectivity capability。
+
+<Steps>
+1. 在 Project Navigator 中选择项目
+
+2. 选择 **iOS App target**(不是 watch target)
+
+3. 进入 **Signing & Capabilities** 选项卡
+
+4. 点击 **+ Capability**
+
+5. 搜索并添加 **WatchConnectivity**(如可用,也可能自动添加)
+
+6. Capacitor 插件会自动处理 iOS 端,但请确保 Info.plist 中包含:
+   ```xml
+   <key>WKCompanionAppBundleIdentifier</key>
+   <string>app.capgo.myapp.watchkitapp</string>
+   ```
+</Steps>
+
+## 第 7 步:构建并运行
+
+### 在模拟器运行
+
+<Steps>
+1. 在 Xcode 顶部 scheme 选择器中选择 watch scheme
+
+2. 选择 watch 模拟器:
+   - 点击 scheme 旁的设备选择器
+   - 选择 Apple Watch 模拟器(例如 "Apple Watch Series 9 (45mm)")
+
+3. 点击 **Run** 按钮(▶️)或按 `Cmd + R`
+
+4. iOS 模拟器将同时启动 iPhone 与 Apple Watch
+</Steps>
+
+### 在真机运行
+
+<Steps>
+1. 通过 USB 连接 iPhone
+
+2. 确保 Apple Watch 已与该 iPhone 配对
+
+3. 选择 watch scheme
+
+4. 在设备列表中选择您的 Apple Watch 真机
+
+5. 点击 **Run**
+
+6. 第一次运行时,可能需要在两台设备上信任该电脑
+</Steps>
+
+<Aside type="tip">
+同时调试两个应用:
+1. 先运行 iOS 应用
+2. 然后在 watch 应用中使用 "Debug → Attach to Process" 进行调试
+</Aside>
+
+## 第 8 步:测试通信
+
+### 从 iPhone (Capacitor) 到 Watch
+
+在 Capacitor 应用中:
+
+```typescript
+import { CapgoWatch } from '@capgo/capacitor-watch';
+
+// 检查连接状态
+const info = await CapgoWatch.getInfo();
+console.log('Watch reachable:', info.isReachable);
+
+// 发送消息
+if (info.isReachable) {
+  await CapgoWatch.sendMessage({
+    data: { action: 'update', value: 'Hello from iPhone!' }
+  });
+}
+```
+
+### 从 Watch 到 iPhone
+
+watch 应用使用 `WatchConnector`:
+
+```swift
+// 发送消息(不等待回复)
+WatchConnector.shared.sendMessage(["action": "buttonTapped"])
+
+// 发送需要回复的消息
+WatchConnector.shared.sendMessage(["request": "getData"]) { reply in
+    print("Got reply: \(reply)")
+}
+```
+
+### 在 iPhone 端处理消息
+
+```typescript
+// 监听来自手表的消息
+await CapgoWatch.addListener('messageReceived', (event) => {
+  console.log('Message from watch:', event.message);
+  // { action: 'buttonTapped' }
+});
+
+// 处理需要回复的消息
+await CapgoWatch.addListener('messageReceivedWithReply', async (event) => {
+  console.log('Request from watch:', event.message);
+
+  // 回复手表
+  await CapgoWatch.replyToMessage({
+    callbackId: event.callbackId,
+    data: { status: 'success', items: ['item1', 'item2'] }
+  });
+});
+```
+
+## 高级:自定义 Delegate 获取更多控制
+
+如需更细粒度控制,可实现 `WatchConnectorDelegate`:
+
+```swift
+import SwiftUI
+import CapgoWatchSDK
+
+class WatchHandler: WatchConnectorDelegate {
+    func didReceiveMessage(_ message: [String: Any]) {
+        print("Received: \(message)")
+        // 处理收到的消息
+    }
+
+    func didReceiveMessageWithReply(_ message: [String: Any],
+                                     replyHandler: @escaping ([String: Any]) -> Void) {
+        print("Received request: \(message)")
+        // 处理并回复
+        replyHandler(["status": "processed"])
+    }
+
+    func didReceiveApplicationContext(_ context: [String: Any]) {
+        print("Context updated: \(context)")
+    }
+
+    func didReceiveUserInfo(_ userInfo: [String: Any]) {
+        print("User info received: \(userInfo)")
+    }
+
+    func reachabilityDidChange(_ isReachable: Bool) {
+        print("Reachability changed: \(isReachable)")
+    }
+
+    func activationDidComplete(with state: WCSessionActivationState) {
+        print("Activation completed: \(state.rawValue)")
+    }
+}
+
+// In your app setup:
+let handler = WatchHandler()
+WatchConnector.shared.delegate = handler
+WatchConnector.shared.activate()
+```
+
+## 故障排除
+
+### Watch 应用未出现在手表上
+
+1. 确保 bundle ID 关联正确(手表应用 bundle ID 应为 iOS 应用 bundle ID + `.watchkitapp`)
+2. 确保两个应用使用同一团队签名
+3. 真机上:在 iPhone 打开 Watch 应用 → My Watch → 向下找到应用 → 开启
+
+### 消息未收到
+
+1. 确保两端 WCSession 已激活
+2. 发送前检查 `isReachable`
+3. 需要保证送达时使用 `transferUserInfo` 替代 `sendMessage`
+4. 确保在对方发送前已注册监听器
+
+### "Session Not Activated" 错误
+
+1. 在应用生命周期早期调用 `WatchConnector.shared.activate()`
+2. iOS 端插件会自动激活 - 确认已导入插件
+3. 确认 iOS target 添加了 WatchConnectivity capability
+
+### CapgoWatchSDK 构建错误
+
+1. 确保包添加到 **watch target**,而不是 iOS target
+2. 清理构建目录:**Product → Clean Build Folder** (Cmd + Shift + K)
+3. 重置包缓存:**File → Packages → Reset Package Caches**
+
+### 模拟器问题
+
+1. 重置模拟器:**Device → Erase All Content and Settings**
+2. 确保 iOS 与 watchOS 模拟器是兼容配对
+3. 两个模拟器都需运行以进行通信
+
+## 下一步
+
+- [API Reference](/docs/plugins/watch/getting-started/#api-reference) - 完整 API 文档
+- [Communication Patterns](/docs/plugins/watch/getting-started/#communication-patterns) - 何时使用各方法
+- [Example App](https://github.com/Cap-go/capacitor-watch/tree/main/example-app) - 完整示例项目

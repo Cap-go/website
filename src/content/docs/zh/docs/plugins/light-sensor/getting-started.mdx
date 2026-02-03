@@ -1,0 +1,292 @@
+---
+title: 开始使用
+description: 了解如何安装并使用 Light Sensor 插件,在 Capacitor 应用中读取环境光照度。
+sidebar:
+  order: 2
+locale: zh
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-light-sensor" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步原生项目**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Android 配置
+
+在 Android 12+ 上若需更高采样率(低于 200ms),请在 `AndroidManifest.xml` 中添加 HIGH_SAMPLING_RATE_SENSORS 权限:
+
+```xml
+<uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS" />
+```
+
+## 用法
+
+导入插件并使用其方法读取光线传感器数据:
+
+```typescript
+import { LightSensor } from '@capgo/capacitor-light-sensor';
+
+// 检查传感器是否可用
+const checkAvailable = async () => {
+  const { available } = await LightSensor.isAvailable();
+  console.log('Light sensor available:', available);
+  return available;
+};
+
+// 开始监听光线变化
+const startListening = async () => {
+  // 先添加监听器
+  await LightSensor.addListener('lightSensorChange', (data) => {
+    console.log('Illuminance:', data.illuminance, 'lux');
+    console.log('Timestamp:', data.timestamp);
+  });
+
+  // 启动传感器
+  await LightSensor.start({ updateInterval: 500 });
+};
+
+// 停止监听
+const stopListening = async () => {
+  await LightSensor.stop();
+  await LightSensor.removeAllListeners();
+};
+```
+
+## API 参考
+
+### isAvailable()
+
+检查当前设备是否支持光线传感器。
+
+```typescript
+const { available } = await LightSensor.isAvailable();
+// Returns: { available: boolean }
+// Note: 在 iOS 上始终返回 false(无法访问光线传感器 API)
+```
+
+### start(options?)
+
+开始监听光线传感器更新。
+
+```typescript
+interface StartOptions {
+  updateInterval?: number; // 毫秒,默认:200
+}
+
+await LightSensor.start({ updateInterval: 500 });
+```
+
+### stop()
+
+停止监听光线传感器更新。
+
+```typescript
+await LightSensor.stop();
+```
+
+### addListener(eventName, callback)
+
+添加光线传感器变化事件监听器。
+
+```typescript
+interface LightSensorMeasurement {
+  illuminance: number; // 光照度(lux)
+  timestamp: number;   // 自纪元以来的秒数
+}
+
+const handle = await LightSensor.addListener('lightSensorChange', (data) => {
+  console.log('Light level:', data.illuminance, 'lux');
+});
+
+// 之后移除此监听器:
+handle.remove();
+```
+
+### removeAllListeners()
+
+移除所有光线传感器事件监听器。
+
+```typescript
+await LightSensor.removeAllListeners();
+```
+
+### checkPermissions()
+
+检查高采样率传感器权限状态。
+
+```typescript
+const status = await LightSensor.checkPermissions();
+// Returns: { highSamplingRate: 'granted' | 'denied' | 'prompt' | 'prompt-with-rationale' }
+```
+
+### requestPermissions()
+
+请求高采样率传感器权限。
+
+```typescript
+const status = await LightSensor.requestPermissions();
+```
+
+### getPluginVersion()
+
+获取当前插件版本。
+
+```typescript
+const { version } = await LightSensor.getPluginVersion();
+```
+
+## 完整示例
+
+```typescript
+import { LightSensor, LightSensorMeasurement } from '@capgo/capacitor-light-sensor';
+import type { PluginListenerHandle } from '@capacitor/core';
+
+export class LightSensorService {
+  private listener: PluginListenerHandle | null = null;
+  private isRunning = false;
+
+  async init(): Promise<boolean> {
+    const { available } = await LightSensor.isAvailable();
+    if (!available) {
+      console.warn('Light sensor not available on this device');
+      return false;
+    }
+    return true;
+  }
+
+  async start(
+    callback: (illuminance: number) => void,
+    intervalMs: number = 500
+  ) {
+    if (this.isRunning) return;
+
+    // 如需高采样率,检查权限
+    if (intervalMs < 200) {
+      const status = await LightSensor.checkPermissions();
+      if (status.highSamplingRate !== 'granted') {
+        await LightSensor.requestPermissions();
+      }
+    }
+
+    this.listener = await LightSensor.addListener(
+      'lightSensorChange',
+      (data: LightSensorMeasurement) => {
+        callback(data.illuminance);
+      }
+    );
+
+    await LightSensor.start({ updateInterval: intervalMs });
+    this.isRunning = true;
+  }
+
+  async stop() {
+    if (!this.isRunning) return;
+
+    await LightSensor.stop();
+
+    if (this.listener) {
+      this.listener.remove();
+      this.listener = null;
+    }
+
+    this.isRunning = false;
+  }
+
+  // 工具方法:获取光照描述
+  getLightDescription(lux: number): string {
+    if (lux < 1) return 'Very dark';
+    if (lux < 50) return 'Dark';
+    if (lux < 200) return 'Dim';
+    if (lux < 400) return 'Normal indoor';
+    if (lux < 1000) return 'Bright indoor';
+    if (lux < 10000) return 'Overcast daylight';
+    if (lux < 25000) return 'Daylight';
+    return 'Direct sunlight';
+  }
+}
+
+// Usage in a component
+const lightService = new LightSensorService();
+
+async function setupLightSensor() {
+  const available = await lightService.init();
+
+  if (available) {
+    await lightService.start((illuminance) => {
+      const description = lightService.getLightDescription(illuminance);
+      console.log(`Light: ${illuminance} lux (${description})`);
+
+      // 示例:根据光照自动调整 UI 主题
+      if (illuminance < 50) {
+        // 切换为深色主题
+      } else {
+        // 切换为浅色主题
+      }
+    });
+  }
+}
+
+// Cleanup when done
+async function cleanup() {
+  await lightService.stop();
+}
+```
+
+## 最佳实践
+
+1. **先检查可用性**
+   ```typescript
+   const { available } = await LightSensor.isAvailable();
+   if (!available) {
+     // 提供回退方案
+   }
+   ```
+
+2. **不需要时停止**
+   传感器不用时请停止以节省电量:
+   ```typescript
+   // 组件卸载或应用进入后台时
+   await LightSensor.stop();
+   await LightSensor.removeAllListeners();
+   ```
+
+3. **使用合适的间隔**
+   - UI 更新:500ms - 1000ms 通常足够
+   - 游戏/实时:200ms
+   - 低于 200ms 需要 HIGH_SAMPLING_RATE_SENSORS 权限
+
+4. **优雅处理错误**
+   ```typescript
+   try {
+     await LightSensor.start({ updateInterval: 500 });
+   } catch (error) {
+     console.error('Failed to start light sensor:', error);
+   }
+   ```
+
+## 平台说明
+
+### Android
+- 使用 Android 的 TYPE_LIGHT 传感器
+- 若未授予 HIGH_SAMPLING_RATE_SENSORS 权限,最小间隔为 200ms (Android 12+)
+- 返回 lux 单位的照度
+
+### iOS
+- **不支持** - iOS 不向第三方应用暴露环境光传感器 API
+- `isAvailable()` 始终返回 `false`
+
+### Web
+- 依赖浏览器,支持有限
+- 可用时使用 AmbientLightSensor API
+- 需要 HTTPS 与用户授权
+
+## 要求
+
+- **Capacitor 8.0.0** 或更高版本

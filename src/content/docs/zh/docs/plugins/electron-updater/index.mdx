@@ -1,0 +1,108 @@
+---
+title: "@capgo/electron-updater"
+locale: zh
+description: 为 Electron 应用提供 OTA(Over-The-Air) 实时更新。与 @capgo/capacitor-updater 100% 功能对齐。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 2
+  label: "简介"
+hero:
+  tagline: 无需重建二进制即可为 Electron 桌面应用推送即时更新。可靠的实时更新系统现已支持桌面端。
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/electron-updater/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/electron-updater/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard, Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip">
+  初次使用 Capgo? Electron Updater 将移动端强大的实时更新能力带到桌面端。如果您已在使用 `@capgo/capacitor-updater`,将会非常熟悉。
+</Aside>
+
+## 为什么选择 Electron Updater?
+
+Electron 内置的自动更新需要每次发布完整的新二进制包。此插件通过允许 JavaScript/HTML/CSS 更新来解决该问题,无需重建应用。
+
+<CardGrid stagger>
+  <Card title="即时更新" icon="rocket">
+    直接向用户推送 JavaScript、HTML 和 CSS 更新,无需重建整个应用二进制。
+  </Card>
+  <Card title="增量更新" icon="starlight">
+    仅下载变更文件,更新更快且更节省带宽。
+  </Card>
+  <Card title="回滚保护" icon="approve-check">
+    更新失败时自动回滚,保持应用稳定。
+  </Card>
+  <Card title="端到端加密" icon="seti:lock">
+    使用 RSA 会话密钥与 AES 包加密,安全交付更新。
+  </Card>
+</CardGrid>
+
+## 关键特性
+
+- **实时更新** - 无需商店延迟即可即时推送更新
+- **自动更新** - 自动检查并安装更新
+- **回滚保护** - 未调用 `notifyAppReady()` 时自动回滚
+- **包管理** - 完整控制下载的包
+- **渠道系统** - 面向不同用户组发布(production、beta、staging)
+- **延迟条件** - 控制更新何时应用(后台、杀进程、日期、原生版本)
+- **调试菜单** - 内置调试工具,可通过 `Ctrl+Shift+D` / `Cmd+Shift+D` 打开
+- **统计上报** - 跟踪更新成功率与用户版本分布
+
+## 与 Capacitor Updater 的功能对齐
+
+Electron Updater 与 `@capgo/capacitor-updater` 保持 100% API 兼容。相同的方法、事件与配置选项可跨平台使用:
+
+| 功能 | Capacitor | Electron |
+|---------|-----------|----------|
+| 实时更新 | Yes | Yes |
+| 渠道 | Yes | Yes |
+| 回滚保护 | Yes | Yes |
+| 端到端加密 | Yes | Yes |
+| 统计 | Yes | Yes |
+| 延迟条件 | Yes | Yes |
+| 调试菜单 | 摇动设备 | 键盘快捷键 |
+
+## 安装
+
+```bash
+npm install @capgo/electron-updater
+```
+
+## 快速链接
+
+<LinkCard
+  title="入门指南"
+  description="为 Electron 应用添加实时更新的完整配置指南。"
+  href="/docs/plugins/electron-updater/getting-started/"
+/>
+
+<LinkCard
+  title="API 参考"
+  description="所有可用的方法、事件与配置选项。"
+  href="/docs/plugins/electron-updater/api/"
+/>
+
+<LinkCard
+  title="Capacitor Updater 文档"
+  description="移动端对等插件 - 相同 API、相同概念,适用于 Capacitor 应用。"
+  href="/docs/plugins/updater/"
+/>
+
+## 文档
+
+- **[入门指南](/docs/plugins/electron-updater/getting-started/)** - 安装与配置说明
+- **[API 参考](/docs/plugins/electron-updater/api/)** - 方法、事件与选项
+- **[从 Capacitor 迁移](/docs/plugins/electron-updater/migration/)** - 从 Capacitor 迁移到 Electron
+
+## 社区
+
+加入 [Discord](https://discord.gg/VnYRvBfgA6) 获取帮助并与其他开发者交流。

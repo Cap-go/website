@@ -1,0 +1,201 @@
+---
+title: 开始使用
+description: 了解如何在 Capacitor 应用中安装并使用 Age Range 插件进行跨平台年龄检测。
+sidebar:
+  order: 2
+locale: zh
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-age-range" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步原生项目**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## iOS 设置
+
+### 要求
+
+- iOS 15+ (插件可编译并运行,在旧版本上返回 `NOT_AVAILABLE`)
+- iOS 26+ 才能提供实际年龄区间功能(DeclaredAgeRange 框架)
+- Xcode 26+
+
+### 权限
+
+将 `com.apple.developer.declared-age-range` entitlement 添加到您的应用:
+
+1. 在 Xcode 中选择 target → **Signing & Capabilities**
+2. 点击 **+ Capability** → 搜索 **Declared Age Range**
+3. 启用它
+
+或手动添加到您的 `*.entitlements` 文件:
+
+```xml
+<key>com.apple.developer.declared-age-range</key>
+<true/>
+```
+
+### iOS 工作原理
+
+`requestAgeRange()` 会显示系统对话框,用户(或通过家庭共享的监护人)选择其年龄区间。`ageGates` 选项控制显示的年龄分段(默认: `[13, 16, 18]`)。
+
+## Android 设置
+
+### 要求
+
+- Android API 24+ (minSdk)
+- 已安装并保持最新的 Google Play Store
+
+### Android 工作原理
+
+插件在后台查询 **Google Play Age Signals API** — 不会显示用户提示。Play Store 根据用户的 Google 账号判断其年龄验证状态。
+
+不需要额外权限或 manifest 修改。
+
+## 用法
+
+导入插件并请求用户年龄区间:
+
+```typescript
+import { AgeRange } from '@capgo/capacitor-age-range';
+
+const result = await AgeRange.requestAgeRange();
+
+switch (result.status) {
+  case 'SHARING':
+    console.log('Age range:', result.ageLower, '-', result.ageUpper);
+    console.log('Source:', result.declarationSource);
+    break;
+  case 'DECLINED_SHARING':
+    console.log('User declined to share age');
+    break;
+  case 'NOT_AVAILABLE':
+    console.log('Age range API not available on this device');
+    break;
+  case 'ERROR':
+    console.log('Error requesting age range');
+    break;
+}
+```
+
+## API 参考
+
+### requestAgeRange(options?)
+
+从平台请求用户年龄区间。
+
+```typescript
+const result = await AgeRange.requestAgeRange({
+  ageGates: [13, 16, 18] // 仅 iOS,Android 会忽略
+});
+```
+
+#### 选项
+
+| 选项 | 类型 | 默认值 | 描述 |
+| --- | --- | --- | --- |
+| `ageGates` | `number[]` | `[13, 16, 18]` | iOS 系统对话框的年龄阈值。Android 会忽略。 |
+
+#### 结果
+
+| 属性 | 类型 | 描述 |
+| --- | --- | --- |
+| `status` | `string` | `SHARING`、`DECLINED_SHARING`、`NOT_AVAILABLE` 或 `ERROR` |
+| `ageLower` | `number?` | 年龄区间下限 |
+| `ageUpper` | `number?` | 年龄区间上限(最高分段如 18+ 时缺失) |
+| `declarationSource` | `string?` | `SELF_DECLARED`、`GUARDIAN_DECLARED`、`VERIFIED` 或 `UNKNOWN` |
+| `androidUserStatus` | `string?` | 仅 Android。Google Play 用户状态 |
+| `mostRecentApprovalDate` | `string?` | 仅 Android。最近一次监护人批准日期 |
+| `installId` | `string?` | 仅 Android。受监管安装标识 |
+
+### getPluginVersion()
+
+返回原生插件版本。
+
+```typescript
+const { version } = await AgeRange.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+## 完整示例
+
+```typescript
+import { AgeRange } from '@capgo/capacitor-age-range';
+
+export class AgeVerificationService {
+  async checkAgeRange(): Promise<{ isAdult: boolean; ageRange?: string }> {
+    const result = await AgeRange.requestAgeRange({
+      ageGates: [13, 16, 18]
+    });
+
+    if (result.status === 'SHARING') {
+      const isAdult = (result.ageLower ?? 0) >= 18;
+      const upper = result.ageUpper ? `-${result.ageUpper}` : '+';
+      const ageRange = `${result.ageLower}${upper}`;
+
+      return { isAdult, ageRange };
+    }
+
+    // 用户拒绝或 API 不可用
+    return { isAdult: false };
+  }
+
+  async isAgeRangeAvailable(): Promise<boolean> {
+    const result = await AgeRange.requestAgeRange();
+    return result.status !== 'NOT_AVAILABLE';
+  }
+}
+```
+
+## 平台响应映射
+
+### Android (Google Play Age Signals)
+
+| Android UserStatus | → status | → declarationSource |
+| --- | --- | --- |
+| VERIFIED | SHARING | VERIFIED |
+| SUPERVISED | SHARING | GUARDIAN_DECLARED |
+| SUPERVISED_APPROVAL_PENDING | SHARING | GUARDIAN_DECLARED |
+| SUPERVISED_APPROVAL_DENIED | SHARING | GUARDIAN_DECLARED |
+| UNKNOWN / EMPTY | DECLINED_SHARING | — |
+
+### iOS (DeclaredAgeRange)
+
+| iOS Response | → status | → declarationSource |
+| --- | --- | --- |
+| .sharing (selfDeclared) | SHARING | SELF_DECLARED |
+| .sharing (guardianDeclared) | SHARING | GUARDIAN_DECLARED |
+| .declinedSharing | DECLINED_SHARING | — |
+
+## 平台说明
+
+### iOS
+- 需要 iOS 26+ 才能使用 DeclaredAgeRange 框架
+- 在旧版本 iOS 上返回 `NOT_AVAILABLE`
+- 需要 `com.apple.developer.declared-age-range` entitlement
+- 会向用户显示系统对话框
+
+### Android
+- 使用 Google Play Age Signals API(后台检查,无对话框)
+- 需要安装并更新 Google Play Store
+- 若 Play Store 不可用将返回详细错误码
+
+### Web
+- 不支持,会抛出 `'AgeRange does not have web implementation'`
+
+## 最佳实践
+
+1. **处理所有状态**
+   在读取年龄数据之前始终检查 `status` 字段。只有当 `status` 为 `SHARING` 时 `ageLower` 与 `ageUpper` 才存在。
+
+2. **提供回退方案**
+   当 API 返回 `NOT_AVAILABLE` 或 `ERROR` 时实现回退方案(如自我声明表单或功能限制)。
+
+3. **使用合适的年龄分段**
+   选择符合应用要求的年龄阈值。常见值: COPPA 用 `[13]`,成人内容用 `[13, 18]`,欧盟 DSA 可用 `[13, 16, 18]`。

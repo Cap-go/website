@@ -1,0 +1,531 @@
+---
+title: 通用 OAuth2 配置
+description: 本指南提供使用 Capacitor 设置通用 OAuth2 认证的完整流程,支持 GitHub、Azure AD、Auth0、Okta 等多种提供方及任何兼容 OAuth2 的服务器。
+sidebar:
+    order: 5
+locale: zh
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## 介绍
+
+Capgo Social Login 插件支持通用 OAuth2 认证,允许您接入任何兼容 OAuth2 的提供方,包括:
+
+- GitHub
+- Azure AD / Microsoft Entra ID
+- Auth0
+- Okta
+- Keycloak
+- 自定义 OAuth2 服务器
+- 任何 OpenID Connect (OIDC) 提供方
+
+**关键特性**: 支持**同时配置多个 OAuth2 提供方**,每个都有独立设置。
+
+## 前置条件
+
+开始前,您需要:
+
+- OAuth2 提供方的客户端 ID(应用 ID)
+- 授权端点 URL
+- 令牌端点 URL(授权码流程需要)
+- 在提供方后台配置好的重定向 URL
+
+## 多提供方配置
+
+插件支持一次配置多个 OAuth2 提供方。每个提供方通过唯一 key 标识(例如 `github`、`azure`、`auth0`):
+
+```typescript
+import { SocialLogin } from '@capgo/capacitor-social-login';
+
+await SocialLogin.initialize({
+  oauth2: {
+    // GitHub OAuth2
+    github: {
+      appId: 'your-github-client-id',
+      authorizationBaseUrl: 'https://github.com/login/oauth/authorize',
+      accessTokenEndpoint: 'https://github.com/login/oauth/access_token',
+      redirectUrl: 'myapp://oauth/github',
+      scope: 'read:user user:email',
+      pkceEnabled: true,
+    },
+    // Azure AD OAuth2
+    azure: {
+      appId: 'your-azure-client-id',
+      authorizationBaseUrl: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
+      accessTokenEndpoint: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
+      redirectUrl: 'myapp://oauth/azure',
+      scope: 'openid profile email',
+      pkceEnabled: true,
+      resourceUrl: 'https://graph.microsoft.com/v1.0/me',
+    },
+    // Auth0 OAuth2
+    auth0: {
+      appId: 'your-auth0-client-id',
+      authorizationBaseUrl: 'https://your-tenant.auth0.com/authorize',
+      accessTokenEndpoint: 'https://your-tenant.auth0.com/oauth/token',
+      redirectUrl: 'myapp://oauth/auth0',
+      scope: 'openid profile email offline_access',
+      pkceEnabled: true,
+      additionalParameters: {
+        audience: 'https://your-api.example.com',
+      },
+    },
+  },
+});
+```
+
+## 配置选项
+
+| 选项 | 类型 | 必填 | 描述 |
+|--------|------|----------|-------------|
+| `appId` | string | Yes | 提供方的 OAuth2 Client ID |
+| `authorizationBaseUrl` | string | Yes | 授权端点 URL |
+| `accessTokenEndpoint` | string | No* | 令牌端点 URL(*授权码流程必填) |
+| `redirectUrl` | string | Yes | OAuth 回调 URL |
+| `responseType` | `'code'` \| `'token'` | No | OAuth 流程类型(默认:`'code'`) |
+| `pkceEnabled` | boolean | No | 启用 PKCE(默认:`true`) |
+| `scope` | string | No | 默认请求的 scopes |
+| `resourceUrl` | string | No | 认证后拉取用户信息的 URL |
+| `additionalParameters` | `Record<string, string>` | No | 授权 URL 的额外参数 |
+| `additionalResourceHeaders` | `Record<string, string>` | No | 请求资源的额外 headers |
+| `logoutUrl` | string | No | 退出登录时打开的 URL |
+| `logsEnabled` | boolean | No | 启用调试日志(默认:`false`) |
+
+## 使用 OAuth2 登录
+
+### 登录
+
+```typescript
+// 使用 GitHub 登录
+const githubResult = await SocialLogin.login({
+  provider: 'oauth2',
+  options: {
+    providerId: 'github',  // 必填:与 initialize() 中的 key 一致
+  },
+});
+
+// 使用 Azure AD 登录
+const azureResult = await SocialLogin.login({
+  provider: 'oauth2',
+  options: {
+    providerId: 'azure',
+    scope: 'openid profile email',  // 可选:覆盖默认 scopes
+  },
+});
+
+console.log('Access Token:', azureResult.result.accessToken?.token);
+console.log('ID Token:', azureResult.result.idToken);
+console.log('User Data:', azureResult.result.resourceData);
+```
+
+### 登录响应
+
+登录响应包含:
+
+```typescript
+interface OAuth2LoginResponse {
+  providerId: string;          // 登录使用的 provider ID
+  accessToken: {
+    token: string;             // access token
+    tokenType: string;         // 通常为 'bearer'
+    expires?: string;          // 过期时间戳
+    refreshToken?: string;     // refresh token(如有)
+  } | null;
+  idToken: string | null;      // JWT ID token(OIDC 提供方)
+  refreshToken: string | null; // refresh token
+  resourceData: Record<string, unknown> | null;  // resourceUrl 返回的用户资料
+  scope: string[];             // 授权的 scopes
+  tokenType: string;           // token 类型
+  expiresIn: number | null;    // 过期秒数
+}
+```
+
+### 检查登录状态
+
+```typescript
+const status = await SocialLogin.isLoggedIn({
+  provider: 'oauth2',
+  providerId: 'github',  // OAuth2 必填
+});
+console.log('Is logged in:', status.isLoggedIn);
+```
+
+### 退出登录
+
+```typescript
+await SocialLogin.logout({
+  provider: 'oauth2',
+  providerId: 'github',  // OAuth2 必填
+});
+```
+
+### 刷新 Token
+
+```typescript
+await SocialLogin.refresh({
+  provider: 'oauth2',
+  options: {
+    providerId: 'github',  // OAuth2 必填
+  },
+});
+```
+
+### 获取授权码 / Access Token
+
+```typescript
+const authCode = await SocialLogin.getAuthorizationCode({
+  provider: 'oauth2',
+  providerId: 'github',
+});
+console.log('Access Token:', authCode.accessToken);
+```
+
+## 提供方专用配置
+
+### GitHub
+
+<Steps>
+1. 在 GitHub 创建 OAuth App
+
+   进入 [GitHub Developer Settings](https://github.com/settings/developers) 并创建新的 OAuth App。
+
+2. 配置 OAuth App
+
+   - **Application name**: 您的应用名称
+   - **Homepage URL**: 应用主页
+   - **Authorization callback URL**: 重定向 URL(例如 `myapp://oauth/github`)
+
+3. 获取 Client ID
+
+   从 OAuth App 设置中复制 Client ID。
+
+4. 在应用中初始化
+
+   ```typescript
+   await SocialLogin.initialize({
+     oauth2: {
+       github: {
+         appId: 'your-github-client-id',
+         authorizationBaseUrl: 'https://github.com/login/oauth/authorize',
+         accessTokenEndpoint: 'https://github.com/login/oauth/access_token',
+         redirectUrl: 'myapp://oauth/github',
+         scope: 'read:user user:email',
+         pkceEnabled: true,
+         resourceUrl: 'https://api.github.com/user',
+       },
+     },
+   });
+   ```
+</Steps>
+
+### Azure AD / Microsoft Entra ID
+
+<Steps>
+1. 在 Azure Portal 注册应用
+
+   前往 [Azure Portal](https://portal.azure.com) > Azure Active Directory > App registrations > New registration。
+
+2. 配置应用
+
+   - **Name**: 您的应用名称
+   - **Supported account types**: 根据需求选择
+   - **Redirect URI**: 选择 "Mobile and desktop applications" 并添加重定向 URL
+
+3. 获取 Application (client) ID
+
+   从 Overview 页面复制 Application (client) ID。
+
+4. 在应用中初始化
+
+   ```typescript
+   await SocialLogin.initialize({
+     oauth2: {
+       azure: {
+         appId: 'your-azure-client-id',
+         authorizationBaseUrl: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
+         accessTokenEndpoint: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
+         redirectUrl: 'myapp://oauth/azure',
+         scope: 'openid profile email User.Read',
+         pkceEnabled: true,
+         resourceUrl: 'https://graph.microsoft.com/v1.0/me',
+       },
+     },
+   });
+   ```
+
+   :::note
+   单租户应用请将 `common` 替换为您的租户 ID。
+   :::
+</Steps>
+
+### Auth0
+
+<Steps>
+1. 在 Auth0 创建应用
+
+   前往 [Auth0 Dashboard](https://manage.auth0.com) > Applications > Create Application。
+
+2. 配置应用
+
+   - **Name**: 您的应用名称
+   - **Application Type**: Native
+   - **Allowed Callback URLs**: 您的重定向 URL
+
+3. 获取 Client ID 与 Domain
+
+   从 Settings 标签页复制 Client ID 与 Domain。
+
+4. 在应用中初始化
+
+   ```typescript
+   await SocialLogin.initialize({
+     oauth2: {
+       auth0: {
+         appId: 'your-auth0-client-id',
+         authorizationBaseUrl: 'https://your-tenant.auth0.com/authorize',
+         accessTokenEndpoint: 'https://your-tenant.auth0.com/oauth/token',
+         redirectUrl: 'myapp://oauth/auth0',
+         scope: 'openid profile email offline_access',
+         pkceEnabled: true,
+         additionalParameters: {
+           audience: 'https://your-api.example.com', // 可选:用于 API 访问
+         },
+         logoutUrl: 'https://your-tenant.auth0.com/v2/logout?client_id=your-auth0-client-id',
+       },
+     },
+   });
+   ```
+</Steps>
+
+### Okta
+
+<Steps>
+1. 在 Okta 创建应用
+
+   前往 Okta Admin Console > Applications > Create App Integration。
+
+2. 配置应用
+
+   - **Sign-in method**: OIDC
+   - **Application type**: Native Application
+   - **Sign-in redirect URIs**: 您的重定向 URL
+
+3. 获取 Client ID
+
+   从应用设置中复制 Client ID。
+
+4. 在应用中初始化
+
+   ```typescript
+   await SocialLogin.initialize({
+     oauth2: {
+       okta: {
+         appId: 'your-okta-client-id',
+         authorizationBaseUrl: 'https://your-domain.okta.com/oauth2/default/v1/authorize',
+         accessTokenEndpoint: 'https://your-domain.okta.com/oauth2/default/v1/token',
+         redirectUrl: 'myapp://oauth/okta',
+         scope: 'openid profile email offline_access',
+         pkceEnabled: true,
+         resourceUrl: 'https://your-domain.okta.com/oauth2/default/v1/userinfo',
+       },
+     },
+   });
+   ```
+</Steps>
+
+## 平台特定配置
+
+### iOS
+
+<Steps>
+1. 配置 URL Scheme
+
+   在 `ios/App/App/Info.plist` 中添加自定义 URL scheme:
+
+   ```xml
+   <key>CFBundleURLTypes</key>
+   <array>
+     <dict>
+       <key>CFBundleURLSchemes</key>
+       <array>
+         <string>myapp</string>
+       </array>
+     </dict>
+   </array>
+   ```
+
+2. 处理 Universal Links(可选)
+
+   如需通用链接,请在 Xcode 项目中配置 Associated Domains。
+</Steps>
+
+:::note
+**iOS 认证**: 插件使用 `ASWebAuthenticationSession`,提供安全、系统托管的认证流程。
+:::
+
+### Android
+
+<Steps>
+1. 配置 Intent Filter
+
+   在 `android/app/src/main/AndroidManifest.xml` 中为重定向 URL 添加 intent filter:
+
+   ```xml
+   <activity
+       android:name="ee.forgr.capacitor.social.login.OAuth2LoginActivity"
+       android:exported="true"
+       android:launchMode="singleTask">
+       <intent-filter>
+           <action android:name="android.intent.action.VIEW" />
+           <category android:name="android.intent.category.DEFAULT" />
+           <category android:name="android.intent.category.BROWSABLE" />
+           <data android:scheme="myapp" android:host="oauth" />
+       </intent-filter>
+   </activity>
+   ```
+
+   :::note
+   该 intent filter 通常已由插件注册。仅当需要自定义配置时才添加。
+   :::
+</Steps>
+
+### Web
+
+Web 应用的 OAuth2 通常使用弹窗流程:
+
+```typescript
+// 初始化为适用于 Web 的重定向 URL
+await SocialLogin.initialize({
+  oauth2: {
+    github: {
+      appId: 'your-github-client-id',
+      authorizationBaseUrl: 'https://github.com/login/oauth/authorize',
+      accessTokenEndpoint: 'https://github.com/login/oauth/access_token',
+      redirectUrl: 'http://localhost:3000/oauth/callback', // Web redirect
+      scope: 'read:user user:email',
+      pkceEnabled: true,
+    },
+  },
+});
+```
+
+:::warning
+Web 端可能需要处理 token 端点的 CORS 问题。可考虑使用后端代理进行 token 交换。
+:::
+
+## 安全最佳实践
+
+<Steps>
+1. **始终使用 PKCE**
+
+   PKCE(Proof Key for Code Exchange) 可防止授权码拦截攻击。保持 `pkceEnabled: true`(默认)。
+
+2. **使用授权码流程**
+
+   优先使用 `responseType: 'code'` 而不是 `'token'`(隐式流程)。授权码流程更安全。
+
+3. **在后端校验 Token**
+
+   在信任 access token 和 ID token 之前,务必在您的后端服务器进行校验。
+
+4. **使用 HTTPS**
+
+   生产环境中,重定向 URL 与所有端点必须使用 HTTPS。
+
+5. **安全存储 Token**
+
+   原生端可使用 [@capgo/capacitor-persistent-account](https://github.com/Cap-go/capacitor-persistent-account) 安全存储 token。
+
+6. **轮换 Refresh Token**
+
+   若提供方支持,启用 refresh token 轮换以提升安全性。
+</Steps>
+
+## 故障排除
+
+### 常见问题
+
+1. **"providerId is required" 错误**
+
+   确保在所有 OAuth2 方法调用中都传入 `providerId`:
+
+   ```typescript
+   // 正确
+   await SocialLogin.login({
+     provider: 'oauth2',
+     options: { providerId: 'github' },
+   });
+
+   // 错误 - 缺少 providerId
+   await SocialLogin.login({
+     provider: 'oauth2',
+     options: {},
+   });
+   ```
+
+2. **"OAuth2 provider 'xxx' not configured" 错误**
+
+   登录前先初始化对应的提供方:
+
+   ```typescript
+   // 先初始化
+   await SocialLogin.initialize({
+     oauth2: {
+       github: { /* config */ },
+     },
+   });
+
+   // 再登录
+   await SocialLogin.login({
+     provider: 'oauth2',
+     options: { providerId: 'github' },
+   });
+   ```
+
+3. **Redirect URL 不匹配**
+
+   - 确认 OAuth 提供方后台配置的 redirect URL 与代码中完全一致
+   - 检查是否有多余斜杠和协议(http vs https)
+   - 对于移动应用,确保 URL scheme 已注册
+
+4. **Token 交换失败**
+
+   - 确认 `accessTokenEndpoint` 正确
+   - 检查提供方是否需要 client secret(公有客户端通常不需要)
+   - 启用 `logsEnabled: true` 查看详细日志
+
+5. **未处理用户取消**
+
+   使用 try-catch 包裹登录调用以处理取消:
+
+   ```typescript
+   try {
+     const result = await SocialLogin.login({
+       provider: 'oauth2',
+       options: { providerId: 'github' },
+     });
+   } catch (error) {
+     if (error.message.includes('cancelled')) {
+       console.log('User cancelled login');
+     } else {
+       console.error('Login failed:', error);
+     }
+   }
+   ```
+
+### 调试模式
+
+启用调试日志以排查问题:
+
+```typescript
+await SocialLogin.initialize({
+  oauth2: {
+    github: {
+      // ... other config
+      logsEnabled: true,  // Enable debug logs
+    },
+  },
+});
+```
+
+这将输出 OAuth 流程的详细日志,包括授权 URL 与 token 交换过程。

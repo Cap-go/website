@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-age-range"
+locale: zh
+description: 使用 Google Play Age Signals(Android) 和 Apple DeclaredAgeRange(iOS) 为 Capacitor 应用提供跨平台年龄区间检测。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "简介"
+hero:
+  tagline: 通过统一 API 检测跨平台用户年龄区间。Android 使用 Google Play Age Signals,iOS 使用 Apple DeclaredAgeRange,满足 COPPA/KOSA 合规。
+  image:
+    file: ~public/icons/plugins/age-range.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/age-range/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-age-range/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="跨平台" icon="rocket">
+    单一 API 封装 Google Play Age Signals(Android) 与 Apple DeclaredAgeRange(iOS)
+  </Card>
+  <Card title="隐私友好" icon="puzzle">
+    不收集生日 — 仅返回年龄区间,尊重用户隐私
+  </Card>
+  <Card title="合规要求" icon="rocket">
+    满足 COPPA、KOSA 以及地区性年龄适配设计要求
+  </Card>
+  <Card title="全面文档" icon="open-book">
+    查看[文档](/docs/plugins/age-range/getting-started/)以在几分钟内掌握插件。
+  </Card>
+</CardGrid>

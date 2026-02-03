@@ -1,0 +1,356 @@
+---
+title: 开始使用
+description: 了解如何安装并使用 File Picker 插件,在 Capacitor 应用中选择文件、图片、视频与目录。
+sidebar:
+  order: 2
+locale: zh
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-file-picker" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步原生项目**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 要求
+
+- iOS:iOS 15.0+
+- Android:API 24+ (Android 7.0+)
+- Web:支持 File API 的现代浏览器
+
+## 基本用法
+
+### 选择文件
+
+```typescript
+import { FilePicker } from '@capgo/capacitor-file-picker';
+
+// 选择任意文件
+const pickFiles = async () => {
+  const result = await FilePicker.pickFiles({
+    limit: 5 // 最多 5 个文件
+  });
+
+  for (const file of result.files) {
+    console.log('File name:', file.name);
+    console.log('File path:', file.path);
+    console.log('MIME type:', file.mimeType);
+    console.log('Size:', file.size);
+  }
+};
+
+// 选择特定文件类型
+const pickPDFs = async () => {
+  const result = await FilePicker.pickFiles({
+    types: ['application/pdf'],
+    limit: 1
+  });
+  return result.files[0];
+};
+```
+
+### 选择图片
+
+```typescript
+import { FilePicker } from '@capgo/capacitor-file-picker';
+
+const pickImages = async () => {
+  const result = await FilePicker.pickImages({
+    limit: 10,
+    ordered: true // 显示选择顺序徽标(iOS 15+)
+  });
+
+  for (const image of result.files) {
+    console.log('Image:', image.name);
+    console.log('Dimensions:', image.width, 'x', image.height);
+    console.log('Path:', image.path);
+  }
+};
+```
+
+### 选择视频
+
+```typescript
+import { FilePicker } from '@capgo/capacitor-file-picker';
+
+const pickVideos = async () => {
+  const result = await FilePicker.pickVideos({
+    limit: 3,
+    skipTranscoding: true // 在 iOS 上跳过视频转码
+  });
+
+  for (const video of result.files) {
+    console.log('Video:', video.name);
+    console.log('Duration:', video.duration, 'seconds');
+    console.log('Dimensions:', video.width, 'x', video.height);
+  }
+};
+```
+
+### 选择媒体(图片 + 视频)
+
+```typescript
+import { FilePicker } from '@capgo/capacitor-file-picker';
+
+const pickMedia = async () => {
+  const result = await FilePicker.pickMedia({
+    limit: 0 // 不限数量
+  });
+
+  return result.files;
+};
+```
+
+### 选择目录
+
+```typescript
+import { FilePicker } from '@capgo/capacitor-file-picker';
+
+const pickDirectory = async () => {
+  const result = await FilePicker.pickDirectory();
+  console.log('Selected directory:', result.path);
+  return result.path;
+};
+```
+
+## API 参考
+
+### pickFiles(options?)
+
+从设备选择一个或多个文件。
+
+```typescript
+interface PickFilesOptions {
+  types?: string[];     // MIME 类型或扩展名:['image/*'], ['application/pdf']
+  limit?: number;       // 最大数量(0 = 不限)
+  readData?: boolean;   // 返回 base64 数据
+}
+
+const result = await FilePicker.pickFiles(options);
+// Returns: { files: PickedFile[] }
+```
+
+### pickImages(options?)
+
+从相册选择图片。仅 Android/iOS。
+
+```typescript
+interface PickMediaOptions {
+  limit?: number;           // 最大数量(0 = 不限)
+  readData?: boolean;       // 返回 base64 数据
+  skipTranscoding?: boolean; // iOS:跳过转码
+  ordered?: boolean;        // iOS 15+:显示选择顺序
+}
+
+const result = await FilePicker.pickImages(options);
+```
+
+### pickVideos(options?)
+
+从相册选择视频。仅 Android/iOS。
+
+```typescript
+const result = await FilePicker.pickVideos(options);
+```
+
+### pickMedia(options?)
+
+从相册选择图片或视频。仅 Android/iOS。
+
+```typescript
+const result = await FilePicker.pickMedia(options);
+```
+
+### pickDirectory()
+
+选择目录。仅 Android/iOS。
+
+```typescript
+const result = await FilePicker.pickDirectory();
+// Returns: { path: string }
+```
+
+### convertHeicToJpeg(options)
+
+将 HEIC 图片转换为 JPEG。仅 iOS。
+
+```typescript
+interface ConvertHeicToJpegOptions {
+  path: string;      // HEIC 文件路径
+  quality?: number;  // 0.0 - 1.0 (默认: 0.9)
+}
+
+const result = await FilePicker.convertHeicToJpeg({
+  path: '/path/to/image.heic',
+  quality: 0.8
+});
+// Returns: { path: string } - 转换后的 JPEG 路径
+```
+
+### copyFile(options)
+
+将文件复制到新位置。
+
+```typescript
+interface CopyFileOptions {
+  from: string;        // 源路径
+  to: string;          // 目标路径
+  overwrite?: boolean; // 如存在则覆盖(默认: false)
+}
+
+await FilePicker.copyFile({
+  from: '/path/to/source.jpg',
+  to: '/path/to/destination.jpg',
+  overwrite: true
+});
+```
+
+### checkPermissions() / requestPermissions()
+
+检查或请求文件访问权限。仅 Android。
+
+```typescript
+const status = await FilePicker.checkPermissions();
+// Returns: { readExternalStorage: 'granted' | 'denied' | 'prompt' }
+
+const newStatus = await FilePicker.requestPermissions();
+```
+
+## PickedFile 接口
+
+```typescript
+interface PickedFile {
+  name: string;       // 文件名
+  path: string;       // 文件路径
+  mimeType: string;   // MIME 类型
+  size: number;       // 字节大小
+  data?: string;      // Base64 数据(若 readData 为 true)
+  blob?: Blob;        // Blob 实例(仅 Web)
+  width?: number;     // 宽度像素(图片/视频)
+  height?: number;    // 高度像素(图片/视频)
+  duration?: number;  // 时长(秒,视频)
+  modifiedAt?: number; // 最后修改时间戳
+}
+```
+
+## 完整示例
+
+```typescript
+import { FilePicker } from '@capgo/capacitor-file-picker';
+import { Capacitor } from '@capacitor/core';
+
+export class FilePickerService {
+  async pickProfileImage(): Promise<string | null> {
+    try {
+      const result = await FilePicker.pickImages({
+        limit: 1
+      });
+
+      if (result.files.length === 0) {
+        return null;
+      }
+
+      const file = result.files[0];
+
+      // 如需在 iOS 上将 HEIC 转为 JPEG
+      if (Capacitor.getPlatform() === 'ios' &&
+          file.mimeType === 'image/heic') {
+        const converted = await FilePicker.convertHeicToJpeg({
+          path: file.path,
+          quality: 0.9
+        });
+        return converted.path;
+      }
+
+      return file.path;
+    } catch (error) {
+      console.error('Failed to pick image:', error);
+      return null;
+    }
+  }
+
+  async pickDocuments(): Promise<PickedFile[]> {
+    const result = await FilePicker.pickFiles({
+      types: [
+        'application/pdf',
+        'application/msword',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      ],
+      limit: 10
+    });
+
+    return result.files;
+  }
+
+  async pickAndReadFile(): Promise<{ name: string; data: string } | null> {
+    const result = await FilePicker.pickFiles({
+      limit: 1,
+      readData: true
+    });
+
+    if (result.files.length === 0) return null;
+
+    const file = result.files[0];
+    return {
+      name: file.name,
+      data: file.data! // Base64 编码数据
+    };
+  }
+
+  async getVideoForUpload(): Promise<{
+    path: string;
+    duration: number;
+    dimensions: { width: number; height: number };
+  } | null> {
+    const result = await FilePicker.pickVideos({
+      limit: 1,
+      skipTranscoding: false // 确保格式兼容
+    });
+
+    if (result.files.length === 0) return null;
+
+    const video = result.files[0];
+    return {
+      path: video.path,
+      duration: video.duration || 0,
+      dimensions: {
+        width: video.width || 0,
+        height: video.height || 0
+      }
+    };
+  }
+}
+```
+
+## 平台说明
+
+### iOS
+
+- 需要 iOS 15.0+
+- 图片/视频使用 `PHPickerViewController`
+- 文件使用 `UIDocumentPickerViewController`
+- HEIC 图片可通过 `convertHeicToJpeg()` 转为 JPEG
+- `ordered` 选项显示选择顺序徽标(iOS 15+)
+- `skipTranscoding` 可避免自动视频格式转换
+
+### Android
+
+- 需要 API 24+ (Android 7.0+)
+- 文件选择使用 `Intent.ACTION_OPEN_DOCUMENT`
+- 媒体选择使用 MediaStore 的 `Intent.ACTION_PICK`
+- 需要时会自动请求权限
+- 在选择前可用 `checkPermissions()` 检查权限
+
+### Web
+
+- 使用原生 `<input type="file">` 元素
+- `blob` 属性返回 `Blob` 对象
+- Web 不支持 `pickDirectory()`
+- Web 不支持 HEIC 转换
+- 部分元数据(尺寸、时长)可能不可用

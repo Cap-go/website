@@ -1,0 +1,254 @@
+---
+title: "🤖 mcp"
+description: "🤖 启动 Capgo MCP (Model Context Protocol) 服务器以进行 AI 代理集成。"
+sidebar_label: mcp
+sidebar:
+  order: 12
+locale: zh
+---
+
+import { Steps, Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+
+🤖 启动 Capgo MCP (Model Context Protocol) 服务器以进行 AI 代理集成。
+
+MCP 服务器将 Capgo 的功能以工具形式暴露给 AI 代理(如 Claude、Cursor 或其他兼容 MCP 的客户端),以便通过程序化方式管理您的实时更新。
+
+```bash
+npx @capgo/cli@latest mcp
+```
+
+<Aside type="tip">
+MCP 服务器需要身份验证。请先运行 `npx @capgo/cli login` 保存您的 API key。
+</Aside>
+
+## 什么是 MCP?
+
+[Model Context Protocol (MCP)](https://modelcontextprotocol.io/) 是一个开放标准,允许 AI 助手与外部工具和服务交互。通过运行 Capgo MCP 服务器,您可以让 AI 代理:
+
+- 上传和管理应用包
+- 创建和配置分发渠道
+- 监控设备统计和日志
+- 请求原生构建
+- 以及更多...
+
+## 设置
+
+<Tabs>
+<TabItem label="Claude Desktop">
+
+将以下内容添加到 `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "capgo": {
+      "command": "npx",
+      "args": ["@capgo/cli", "mcp"]
+    }
+  }
+}
+```
+
+**配置文件位置:**
+- **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+
+</TabItem>
+<TabItem label="Cursor">
+
+将以下内容添加到项目根目录的 `.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "capgo": {
+      "command": "npx",
+      "args": ["@capgo/cli", "mcp"]
+    }
+  }
+}
+```
+
+</TabItem>
+<TabItem label="Other Clients">
+
+对于其他兼容 MCP 的客户端,配置它们运行:
+
+```bash
+npx @capgo/cli mcp
+```
+
+服务器通过 stdio(标准输入/输出)通信。
+
+</TabItem>
+</Tabs>
+
+## 可用工具
+
+MCP 服务器提供 21 个工具,按类别组织:
+
+### 📱 应用管理
+
+| 工具 | 描述 |
+| ---- | ----------- |
+| `capgo_list_apps` | 列出您 Capgo Cloud 账号下的所有应用 |
+| `capgo_add_app` | 在 Capgo Cloud 中注册新应用 |
+| `capgo_update_app` | 更新现有应用的设置 |
+| `capgo_delete_app` | 从 Capgo Cloud 中删除应用 |
+
+### 📦 包管理
+
+| 工具 | 描述 |
+| ---- | ----------- |
+| `capgo_upload_bundle` | 上传新的应用包用于分发 |
+| `capgo_list_bundles` | 列出应用已上传的所有包 |
+| `capgo_delete_bundle` | 删除指定的包 |
+| `capgo_cleanup_bundles` | 删除旧包,仅保留最近版本 |
+| `capgo_check_compatibility` | 检查包与渠道的兼容性 |
+
+### 📢 渠道管理
+
+| 工具 | 描述 |
+| ---- | ----------- |
+| `capgo_list_channels` | 列出应用的所有渠道 |
+| `capgo_add_channel` | 创建新的分发渠道 |
+| `capgo_update_channel` | 更新渠道设置和关联包 |
+| `capgo_delete_channel` | 删除渠道 |
+| `capgo_get_current_bundle` | 获取渠道当前关联的包 |
+
+### 🏢 组织管理
+
+| 工具 | 描述 |
+| ---- | ----------- |
+| `capgo_list_organizations` | 列出您有访问权限的所有组织 |
+| `capgo_add_organization` | 创建新的组织用于团队协作 |
+
+### 🔧 账号与诊断
+
+| 工具 | 描述 |
+| ---- | ----------- |
+| `capgo_get_account_id` | 获取当前 API key 对应的账号 ID |
+| `capgo_doctor` | 运行 Capgo 安装诊断 |
+| `capgo_get_stats` | 获取设备统计与日志以便排查问题 |
+
+### 🏗️ 构建管理
+
+| 工具 | 描述 |
+| ---- | ----------- |
+| `capgo_request_build` | 从 Capgo Cloud 请求 iOS/Android 原生构建 |
+
+### 🔐 加密
+
+| 工具 | 描述 |
+| ---- | ----------- |
+| `capgo_generate_encryption_keys` | 生成用于端到端加密的 RSA 密钥对 |
+
+## 工具参数
+
+### capgo_upload_bundle
+
+上传新的应用包到 Capgo Cloud 进行分发。
+
+| 参数 | 类型 | 必填 | 描述 |
+| --------- | ---- | -------- | ----------- |
+| `appId` | string | Yes | 反向域名格式的 App ID(例如 com.example.app) |
+| `path` | string | Yes | 要上传的构建目录路径 |
+| `bundle` | string | No | 包版本号 |
+| `channel` | string | No | 要关联的渠道 |
+| `comment` | string | No | 此版本的备注或发布说明 |
+| `minUpdateVersion` | string | No | 更新到此版本所需的最低版本 |
+| `autoMinUpdateVersion` | boolean | No | 基于原生包自动设置最低更新版本 |
+| `encrypt` | boolean | No | 为包启用加密 |
+
+### capgo_update_channel
+
+更新渠道设置,包括关联包与定向选项。
+
+| 参数 | 类型 | 必填 | 描述 |
+| --------- | ---- | -------- | ----------- |
+| `appId` | string | Yes | App ID |
+| `channelId` | string | Yes | 要更新的渠道名称/ID |
+| `bundle` | string | No | 要关联到此渠道的包版本 |
+| `state` | string | No | 渠道状态:"default" 或 "normal" |
+| `downgrade` | boolean | No | 允许降级到低于原生版本 |
+| `ios` | boolean | No | 为 iOS 设备启用更新 |
+| `android` | boolean | No | 为 Android 设备启用更新 |
+| `selfAssign` | boolean | No | 允许设备自分配 |
+| `disableAutoUpdate` | string | No | 按类型阻止更新: major、minor、metadata、patch 或 none |
+| `dev` | boolean | No | 为开发构建启用更新 |
+| `emulator` | boolean | No | 为模拟器启用更新 |
+| `device` | boolean | No | 为真机启用更新 |
+| `prod` | boolean | No | 为生产构建启用更新 |
+
+### capgo_get_stats
+
+从 Capgo 后端获取设备统计和日志用于排查问题。
+
+| 参数 | 类型 | 必填 | 描述 |
+| --------- | ---- | -------- | ----------- |
+| `appId` | string | Yes | 需要获取统计的 App ID |
+| `deviceIds` | string[] | No | 按指定设备 ID 过滤 |
+| `limit` | number | No | 返回结果的最大数量 |
+| `rangeStart` | string | No | 过滤范围的开始日期/时间(ISO 字符串) |
+| `rangeEnd` | string | No | 过滤范围的结束日期/时间(ISO 字符串) |
+
+### capgo_cleanup_bundles
+
+删除旧包,仅保留最近版本。
+
+| 参数 | 类型 | 必填 | 描述 |
+| --------- | ---- | -------- | ----------- |
+| `appId` | string | Yes | 需要清理包的 App ID |
+| `keep` | number | No | 保留版本数量(默认: 4) |
+| `bundle` | string | No | 要清理的包版本模式 |
+| `force` | boolean | No | 强制删除不需确认 |
+| `ignoreChannel` | boolean | No | 即使包已关联渠道也删除 |
+
+### capgo_request_build
+
+从 Capgo Cloud 请求 iOS/Android 原生构建。
+
+| 参数 | 类型 | 必填 | 描述 |
+| --------- | ---- | -------- | ----------- |
+| `appId` | string | Yes | 要构建的 App ID |
+| `platform` | string | Yes | 目标平台:"ios" 或 "android" |
+| `path` | string | No | 项目目录路径 |
+
+<Aside>
+通过 MCP 请求构建前,请先使用 CLI 预先保存构建凭证。
+</Aside>
+
+## 示例对话
+
+配置完成后,您可以这样询问您的 AI 助手:
+
+- "列出我的所有 Capgo 应用"
+- "将 ./dist 中的构建上传到 com.example.app 的 production 渠道"
+- "为我的应用创建一个新的 staging 渠道"
+- "production 渠道当前关联的包是什么?"
+- "清理旧包,只保留最近 3 个版本"
+- "显示过去 24 小时的设备统计"
+
+AI 将使用相应的 MCP 工具完成这些任务。
+
+## 故障排除
+
+### 认证问题
+
+如果出现认证错误,请确保已登录:
+
+```bash
+npx @capgo/cli login YOUR_API_KEY
+```
+
+### 服务器无法启动
+
+确保已安装 Node.js 18+ 并可以运行 npx 命令。
+
+### 找不到工具
+
+确保使用最新版本的 @capgo/cli:
+
+```bash
+npx @capgo/cli@latest mcp
+```

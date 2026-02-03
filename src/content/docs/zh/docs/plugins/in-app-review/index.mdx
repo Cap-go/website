@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-in-app-review"
+locale: zh
+description: 在不离开应用的情况下提示用户提交应用商店评分与评论。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "简介"
+hero:
+  tagline: 在 iOS 和 Android 上请求原生应用商店评分,无需将用户跳转出您的应用。
+  image:
+    file: ~public/icons/plugins/in-app-review.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/in-app-review/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-in-app-review/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="原生体验" icon="rocket">
+    使用 iOS 的 SKStoreReviewController 与 Android 的 Play In-App Review API,呈现原生评分弹窗
+  </Card>
+  <Card title="无需跳转" icon="puzzle">
+    用户留在应用内完成评价 - 不跳转 App Store 或 Play Store
+  </Card>
+  <Card title="平台合规" icon="approve-check">
+    自动遵循 Apple 与 Google 的评分提示规范
+  </Card>
+  <Card title="简单 API" icon="open-book">
+    只需一个方法调用即可请求评分 - 查看[文档](/docs/plugins/in-app-review/getting-started/)即可开始。
+  </Card>
+</CardGrid>

@@ -1,0 +1,61 @@
+---
+title: "@capgo/capacitor-watch"
+locale: zh
+description: 使用 WatchConnectivity 框架在 iPhone 与 Apple Watch 之间进行双向通信的 Capacitor 插件。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "简介"
+hero:
+  tagline: 在您的 iPhone 应用与 Apple Watch 伴生应用之间实现顺畅的双向通信。
+  image:
+    file: ~public/icons/plugins/watch.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/watch/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-watch/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="双向消息" icon="rocket">
+    在 iPhone 与 Apple Watch 之间实时发送与接收消息
+  </Card>
+  <Card title="后台传输" icon="setting">
+    排队可靠的数据传输,即使手表离线也能送达
+  </Card>
+  <Card title="应用上下文" icon="laptop">
+    使用仅保留最新值的语义同步应用状态,高效更新
+  </Card>
+  <Card title="SwiftUI 就绪" icon="seti:swift">
+    提供手表端 SDK,支持 ObservableObject 以构建响应式 SwiftUI 应用
+  </Card>
+</CardGrid>
+
+## 文档
+
+<CardGrid>
+  <LinkCard
+    title="入门指南"
+    description="安装插件并学习 iPhone-Apple Watch 通信的基础 API。"
+    href="/docs/plugins/watch/getting-started/"
+  />
+  <LinkCard
+    title="Watch 应用设置"
+    description="从零开始在 Xcode 中创建 watchOS 应用的完整分步指南。"
+    href="/docs/plugins/watch/watch-app-setup/"
+  />
+  <LinkCard
+    title="示例与用例"
+    description="真实示例:健身追踪器、智能家居遥控、通知中心与数据同步。"
+    href="/docs/plugins/watch/examples/"
+  />
+</CardGrid>
