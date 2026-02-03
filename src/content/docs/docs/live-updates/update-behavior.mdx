@@ -95,20 +95,22 @@ Note that the `kill` condition currently triggers the update after the first kil
 
 For critical updates or apps with very simple state, you may want to apply an update as soon as it's downloaded, without waiting for a background or kill event. Capgo supports this via the `directUpdate` configuration option.
 
-<Aside type="tip" title="Recommended: Use Delta Updates with Direct Update">
-When using `directUpdate`, we **strongly recommend** enabling [Delta Updates](/docs/live-updates/differentials/) to minimize download times and improve the user experience. Delta Updates only download changed files instead of the entire bundle, which is especially important when updates are applied immediately while users are actively using your app.
+<Aside type="tip" title="Recommended: Use Delta (Manifest) Updates with Direct Update">
+When using `directUpdate`, we **strongly recommend** enabling [Delta (manifest) Updates](/docs/live-updates/differentials/) to minimize download times and improve the user experience. Delta (manifest) updates only download changed files instead of the entire bundle, which is especially important when updates are applied immediately while users are actively using your app.
 
 **Why this matters for Direct Updates:**
 - **Faster updates**: Smaller downloads mean updates complete quickly, reducing the time users see loading screens
 - **Better mobile experience**: Users on cellular networks or slower connections won't face long wait times
 - **Lower bandwidth usage**: Only changed files are downloaded, saving data for both you and your users
 
-To enable Delta Updates, simply use the `--partial` flag when uploading bundles:
+When `directUpdate` is enabled in your `capacitor.config`, the CLI detects it. In non-interactive environments it sends Delta (manifest) updates automatically, and in interactive environments it prompts you to confirm before uploading. Use `--no-delta` to force a full bundle upload.
+
+To enable Delta (manifest) updates, simply use the `--delta` flag when uploading bundles:
 ```shell
-npx @capgo/cli@latest bundle upload --partial
+npx @capgo/cli@latest bundle upload --delta
 ```
 
-Learn more in the [Delta Updates documentation](/docs/live-updates/differentials/).
+Learn more in the [Delta (manifest) Updates documentation](/docs/live-updates/differentials/).
 </Aside>
 
 `directUpdate` is set in your `capacitor.config.ts` file, not in JavaScript code. It supports three values:

@@ -61,16 +61,17 @@ npx @capgo/cli@latest bundle upload com.example.app --path ./dist --channel prod
 | **--zip** | <code>boolean</code> | Upload the bundle using zip to Capgo cloud (legacy) |
 | **--tus** | <code>boolean</code> | Upload the bundle using TUS to Capgo cloud |
 | **--tus-chunk-size** | <code>string</code> | Chunk size in bytes for TUS resumable uploads (default: auto) |
-| **--partial** | <code>boolean</code> | [DEPRECATED] Use --delta instead. Upload incremental updates |
-| **--partial-only** | <code>boolean</code> | [DEPRECATED] Use --delta-only instead. Upload only incremental updates, skip full bundle |
-| **--delta** | <code>boolean</code> | Upload incremental/differential updates to reduce bandwidth |
-| **--delta-only** | <code>boolean</code> | Upload only delta updates without full bundle (useful for large apps) |
+| **--delta** | <code>boolean</code> | Upload Delta (manifest) updates to reduce bandwidth |
+| **--delta-only** | <code>boolean</code> | Upload only Delta (manifest) updates without full bundle (useful for large apps) |
+| **--no-delta** | <code>boolean</code> | Disable Delta (manifest) uploads (useful if `directUpdate` is enabled but you want a full bundle) |
+| **--partial** | <code>boolean</code> | [DEPRECATED] Alias for --delta |
+| **--partial-only** | <code>boolean</code> | [DEPRECATED] Alias for --delta-only |
 | **--encrypted-checksum** | <code>string</code> | An encrypted checksum (signature). Used only when uploading an external bundle. |
 | **--auto-set-bundle** | <code>boolean</code> | Set the bundle in capacitor.config.json |
 | **--dry-upload** | <code>boolean</code> | Dry upload the bundle process, mean it will not upload the files but add the row in database (Used by Capgo for internal testing) |
 | **--package-json** | <code>string</code> | Paths to package.json files for monorepos (comma-separated) |
 | **--node-modules** | <code>string</code> | Paths to node_modules directories for monorepos (comma-separated) |
-| **--encrypt-partial** | <code>boolean</code> | Encrypt delta update files (auto-enabled for updater > 6.14.4) |
+| **--encrypt-partial** | <code>boolean</code> | Encrypt Delta (manifest) update files (auto-enabled for updater > 6.14.4) |
 | **--delete-linked-bundle-on-upload** | <code>boolean</code> | Locates the currently linked bundle in the channel you are trying to upload to, and deletes it |
 | **--no-brotli-patterns** | <code>string</code> | Files to exclude from Brotli compression (comma-separated globs, e.g., "*.jpg,*.png") |
 | **--disable-brotli** | <code>boolean</code> | Completely disable brotli compression even if updater version supports it |
@@ -254,4 +255,3 @@ npx @capgo/cli@latest bundle zip com.example.app --path ./dist
 | **--no-code-check** | <code>boolean</code> | Ignore checking if notifyAppReady() is called in source code and index present in root folder |
 | **--key-v2** | <code>boolean</code> | Use encryption v2 |
 | **--package-json** | <code>string</code> | Paths to package.json files for monorepos (comma-separated) |
-
