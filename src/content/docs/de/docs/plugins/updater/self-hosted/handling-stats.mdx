@@ -59,6 +59,16 @@ interface AppInfosStats {
 
 You can also totally disable it, with an empty string. Keep in mind, statistics are made private friendly and help me to understand how people use the plugin, to resolve issues and improve it.
 
+## Erwartetes Verhalten bei keiner Aktualisierung
+
+Wenn dein Update-Endpoint keine neue Version hat, sollte er mit einem Fehler-Payload wie folgt antworten:
+
+```json
+{ "error": "no_new_version_available", "message": "No new version available" }
+```
+
+Der `error`-Code muss exakt `no_new_version_available` sein. Die `message` kann beliebig sein (nur für Logs/Debugging). Dieses Verhalten ist erwartet und wird trotzdem mit HTTP `200` zurückgegeben. Wenn dein Endpoint stattdessen ein `200` ohne `url` zurückgibt, behandelt das Plugin das als Download-Fehler und sendet `download_fail`.
+
 ## Implementation Example
 
 Here is an example of code in JavaScript to save the stats of the plugin:

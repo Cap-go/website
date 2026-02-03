@@ -57,6 +57,16 @@ interface AppInfosStats {
 
 빈 문자열로 완전히 비활성화할 수도 있습니다. 통계는 프라이버시 친화적으로 만들어지며 사람들이 플러그인을 어떻게 사용하는지 이해하고 문제를 해결하고 개선하는 데 도움이 된다는 점을 명심하세요.
 
+## 업데이트 없음의 기대 동작
+
+업데이트 엔드포인트에 새 버전이 없을 때는 다음과 같은 에러 페이로드로 응답해야 합니다:
+
+```json
+{ "error": "no_new_version_available", "message": "No new version available" }
+```
+
+`error` 코드는 반드시 `no_new_version_available` 여야 합니다. `message`는 어떤 문자열이든 가능하며(로그/디버그용) 기대되는 동작입니다. 이 응답은 HTTP `200`으로 반환됩니다. `url` 없이 `200`을 반환하면 플러그인이 다운로드 실패로 처리하고 `download_fail`을 전송합니다.
+
 ## 구현 예제
 
 다음은 플러그인의 통계를 저장하는 JavaScript 코드 예제입니다:

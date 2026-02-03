@@ -57,6 +57,16 @@ interface AppInfosStats {
 
 您也可以使用空字符串完全禁用它。请记住,统计信息对隐私友好,并帮助我了解人们如何使用插件,以解决问题并改进它。
 
+## 无更新时的期望行为
+
+当你的更新端点没有新版本时，应返回如下错误负载：
+
+```json
+{ "error": "no_new_version_available", "message": "No new version available" }
+```
+
+`error` 代码必须严格为 `no_new_version_available`。`message` 可以是任意字符串（仅用于日志/调试）。这是期望的行为，并且仍然以 HTTP `200` 返回。如果你的端点返回 `200` 但没有 `url`，插件会将其视为下载失败并发送 `download_fail`。
+
 ## 实现示例
 
 这是保存插件统计信息的 JavaScript 代码示例:

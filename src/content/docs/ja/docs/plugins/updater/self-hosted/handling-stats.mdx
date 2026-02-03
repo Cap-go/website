@@ -59,6 +59,16 @@ interface AppInfosStats {
 
 You can also totally disable it, with an empty string. Keep in mind, statistics are made private friendly and help me to understand how people use the plugin, to resolve issues and improve it.
 
+## 更新がない場合の期待される挙動
+
+更新エンドポイントに新しいバージョンがない場合は、次のようなエラーペイロードで応答する必要があります:
+
+```json
+{ "error": "no_new_version_available", "message": "No new version available" }
+```
+
+`error` コードは必ず `no_new_version_available` にしてください。`message` は任意の文字列で構いません（ログ/デバッグ用）。これは期待される挙動で、HTTP `200` で返します。`url` なしの `200` を返すと、プラグインはダウンロード失敗として扱い `download_fail` を送信します。
+
 ## Implementation Example
 
 Here is an example of code in JavaScript to save the stats of the plugin:

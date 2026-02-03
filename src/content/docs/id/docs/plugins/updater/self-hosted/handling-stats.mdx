@@ -57,6 +57,16 @@ interface AppInfosStats {
 
 Anda juga dapat sepenuhnya menonaktifkannya, dengan string kosong. Ingat, statistik dibuat dengan ramah privasi dan membantu saya memahami bagaimana orang menggunakan plugin, untuk menyelesaikan masalah dan meningkatkannya.
 
+## Perilaku yang diharapkan saat tidak ada pembaruan
+
+Saat endpoint pembaruan Anda tidak memiliki versi baru, ia harus merespons dengan payload error seperti:
+
+```json
+{ "error": "no_new_version_available", "message": "No new version available" }
+```
+
+Kode `error` harus persis `no_new_version_available`. `message` boleh berupa string apa pun (hanya untuk log/debug). Ini adalah perilaku yang diharapkan dan tetap dikembalikan dengan HTTP `200`. Jika endpoint Anda malah mengembalikan `200` tanpa `url`, plugin akan menganggapnya sebagai kegagalan unduh dan mengirim `download_fail`.
+
 ## Contoh Implementasi
 
 Berikut adalah contoh kode dalam JavaScript untuk menyimpan statistik plugin:
