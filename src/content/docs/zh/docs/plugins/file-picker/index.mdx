@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-file-picker"
+locale: zh
+description: 在 iOS 与 Android 上以完整原生支持选择文件、图片、视频与目录。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "简介"
+hero:
+  tagline: 功能全面的文件选择插件,在 iOS 和 Android 上原生支持选择文件、图片、视频与目录。
+  image:
+    file: ~public/icons/plugins/file-picker.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/file-picker/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-file-picker/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="多文件支持" icon="puzzle">
+    通过单一 API 选择文件、图片、视频或目录
+  </Card>
+  <Card title="丰富元数据" icon="information">
+    获取文件大小、尺寸、时长等信息
+  </Card>
+  <Card title="HEIC 转换" icon="rocket">
+    在 iOS 上将 HEIC 图片转换为 JPEG,提高兼容性
+  </Card>
+  <Card title="跨平台" icon="laptop">
+    适用于 iOS、Android 与 Web,并进行平台优化
+  </Card>
+</CardGrid>

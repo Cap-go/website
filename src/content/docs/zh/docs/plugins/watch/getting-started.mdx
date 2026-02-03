@@ -1,0 +1,311 @@
+---
+title: 开始使用
+description: 了解如何安装并配置 Capacitor Watch 插件,在 iPhone 与 Apple Watch 之间进行双向通信。
+sidebar:
+  order: 2
+locale: zh
+---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-watch" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步原生项目**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **配置插件**
+
+   **基础用法示例:**
+   ```typescript
+   import { CapgoWatch } from '@capgo/capacitor-watch';
+
+   // 检查手表连接状态
+   const info = await CapgoWatch.getInfo();
+   console.log('Watch paired:', info.isPaired);
+   console.log('Watch reachable:', info.isReachable);
+
+   // 监听来自手表的消息
+   await CapgoWatch.addListener('messageReceived', (event) => {
+     console.log('Message from watch:', event.message);
+   });
+   ```
+
+   **向手表发送消息:**
+   ```typescript
+   // 先检查手表是否可达
+   const info = await CapgoWatch.getInfo();
+   if (info.isReachable) {
+     await CapgoWatch.sendMessage({
+       data: { action: 'refresh', timestamp: Date.now() }
+     });
+   }
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       **iOS 必需设置:**
+
+       1. 在 Xcode 中为 iOS 应用添加 WatchConnectivity capability
+       2. 在 Xcode 项目中创建 watchOS app target
+       3. 在 watchOS app 中实现 WatchConnectivity(参见下方 Watch App Implementation)
+
+       插件在加载时会自动激活 WCSession。
+     </TabItem>
+     <TabItem label="Android">
+       Apple Watch 仅支持 iOS。在 Android 上,所有方法都会以 "Apple Watch is only supported on iOS" 错误拒绝。`getInfo()` 会返回 `isSupported: false`。
+     </TabItem>
+   </Tabs>
+
+4. **处理需要回复的消息**
+   ```typescript
+   // 监听需要回复的消息
+   await CapgoWatch.addListener('messageReceivedWithReply', async (event) => {
+     console.log('Request from watch:', event.message);
+
+     // 处理请求
+     const result = await processWatchRequest(event.message);
+
+     // 回复手表
+     await CapgoWatch.replyToMessage({
+       callbackId: event.callbackId,
+       data: { result }
+     });
+   });
+   ```
+
+5. **同步应用状态**
+   ```typescript
+   // 更新应用上下文(仅保留最新值)
+   await CapgoWatch.updateApplicationContext({
+     context: {
+       theme: 'dark',
+       userId: '123',
+       lastSync: Date.now()
+     }
+   });
+
+   // 监听来自手表的上下文更新
+   await CapgoWatch.addListener('applicationContextReceived', (event) => {
+     console.log('Context from watch:', event.context);
+   });
+   ```
+
+6. **可靠传输用户信息**
+   ```typescript
+   // 将数据排队以可靠投递(即使手表离线)
+   await CapgoWatch.transferUserInfo({
+     userInfo: {
+       recordId: '456',
+       action: 'created',
+       data: { name: 'Item 1' }
+     }
+   });
+
+   // 监听用户信息传输
+   await CapgoWatch.addListener('userInfoReceived', (event) => {
+     console.log('User info from watch:', event.userInfo);
+   });
+   ```
+
+7. **监控连接状态**
+   ```typescript
+   // 监听可达性变化
+   await CapgoWatch.addListener('reachabilityChanged', (event) => {
+     console.log('Watch reachable:', event.isReachable);
+     if (event.isReachable) {
+       // 手表现在可用于交互式消息
+     }
+   });
+
+   // 监听 session 激活状态
+   await CapgoWatch.addListener('activationStateChanged', (event) => {
+     // 0 = notActivated, 1 = inactive, 2 = activated
+     console.log('Session state:', event.state);
+   });
+   ```
+</Steps>
+
+## Watch 应用实现
+
+您的 watchOS 应用需要实现 WatchConnectivity。以下是一个 SwiftUI 示例:
+
+```swift
+import SwiftUI
+import WatchConnectivity
+
+@main
+struct MyWatchApp: App {
+    init() {
+        WatchViewModel.shared.activate()
+    }
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+
+class WatchViewModel: NSObject, ObservableObject, WCSessionDelegate {
+    static let shared = WatchViewModel()
+
+    @Published var lastMessage: [String: Any] = [:]
+
+    func activate() {
+        guard WCSession.isSupported() else { return }
+        WCSession.default.delegate = self
+        WCSession.default.activate()
+    }
+
+    // Send message to iPhone
+    func sendToPhone(_ data: [String: Any]) {
+        guard WCSession.default.isReachable else {
+            print("iPhone not reachable")
+            return
+        }
+        WCSession.default.sendMessage(data, replyHandler: nil)
+    }
+
+    // Send message with reply
+    func sendToPhoneWithReply(_ data: [String: Any], completion: @escaping ([String: Any]) -> Void) {
+        guard WCSession.default.isReachable else { return }
+        WCSession.default.sendMessage(data, replyHandler: completion)
+    }
+
+    // Receive message from iPhone
+    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
+        DispatchQueue.main.async {
+            self.lastMessage = message
+        }
+    }
+
+    // Receive application context
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
+        DispatchQueue.main.async {
+            self.lastMessage = applicationContext
+        }
+    }
+
+    // Required delegate methods
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        print("Watch session activated: \(activationState.rawValue)")
+    }
+}
+```
+
+## API 参考
+
+### 方法
+
+#### `sendMessage(options: SendMessageOptions)`
+向手表发送交互式消息。要求手表可达。
+
+**参数:**
+- `data`: Object - 要发送给手表的数据
+
+#### `updateApplicationContext(options: UpdateContextOptions)`
+更新应用上下文。仅保留最新值。
+
+**参数:**
+- `context`: Object - 要同步的上下文数据
+
+#### `transferUserInfo(options: TransferUserInfoOptions)`
+将用户信息排队以可靠投递。
+
+**参数:**
+- `userInfo`: Object - 要传输的用户信息
+
+#### `replyToMessage(options: ReplyMessageOptions)`
+回复需要响应的消息。
+
+**参数:**
+- `callbackId`: string - messageReceivedWithReply 事件中的 callback ID
+- `data`: Object - 回复数据
+
+#### `getInfo()`
+获取手表连接状态。
+
+**返回:** `WatchInfo` 对象,包含:
+- `isSupported`: boolean - 是否支持 WatchConnectivity
+- `isPaired`: boolean - 是否已配对
+- `isWatchAppInstalled`: boolean - 是否安装了手表应用
+- `isReachable`: boolean - 手表是否可达
+- `activationState`: number - Session 状态(0/1/2)
+
+#### `getPluginVersion()`
+获取原生插件版本。
+
+### 事件
+
+| 事件 | 描述 |
+|-------|-------------|
+| `messageReceived` | 来自手表的普通消息 |
+| `messageReceivedWithReply` | 需要回复的消息(包含 callbackId) |
+| `applicationContextReceived` | 来自手表的上下文更新 |
+| `userInfoReceived` | 来自手表的用户信息传输 |
+| `reachabilityChanged` | 手表连接状态变化 |
+| `activationStateChanged` | Session 激活状态变化 |
+
+## 通信模式
+
+### 即时消息 (`sendMessage`)
+- 需要手表可达
+- 适用于交互式、时效性强的通信
+- 手表不可达时会立即失败
+
+### 应用上下文 (`updateApplicationContext`)
+- 仅保留最新值,旧值会被覆盖
+- 适用于同步当前应用状态
+- 手表可用时送达
+
+### 用户信息传输 (`transferUserInfo`)
+- 按顺序排队并投递
+- 适用于必须送达的重要数据
+- 即使手表暂时不可达也可投递
+
+## 平台说明
+
+### iOS
+- 需要 iOS 15.0 或更高版本
+- 使用 WatchConnectivity 框架
+- 插件加载时会自动激活 session
+- 支持上下文与用户信息的后台投递
+
+### Android
+- 不支持(Apple Watch 仅 iOS)
+- 所有方法都会返回相应错误
+- `getInfo()` 返回 `isSupported: false`
+
+### Web
+- 不支持
+- 所有方法会返回不可用错误
+- `getInfo()` 返回 `isSupported: false`
+
+## 常见用例
+
+1. **数据同步**: 保持手表与手机数据同步
+2. **远程控制**: 从手表控制手机功能
+3. **通知**: 向手表发送自定义通知
+4. **健康数据**: 共享健身与健康指标
+5. **媒体控制**: 从手表控制音乐播放
+6. **智能家居**: 从手腕控制设备
+
+## 故障排除
+
+**手表不可达:**
+- 确保手表在蓝牙范围内
+- 检查两个应用是否都在运行
+- 验证两端 WCSession 是否已激活
+
+**消息未收到:**
+- 确保发送前已注册监听器
+- 验证手表应用实现了 WCSessionDelegate
+- 对需要保证送达的数据使用 `transferUserInfo`
+
+**Session 未激活:**
+- 确保在 Xcode 中添加了 WatchConnectivity capability
+- 检查手表应用是否拥有 companion bundle ID
+- 确保两端目标系统版本兼容

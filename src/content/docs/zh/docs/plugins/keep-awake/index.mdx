@@ -1,0 +1,47 @@
+---
+title: "@capgo/capacitor-keep-awake"
+locale: zh
+description: 使用这个简单的 Capacitor 插件防止设备屏幕变暗或休眠。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "简介"
+hero:
+  tagline: 以编程方式保持屏幕常亮,适用于视频播放器、导航应用、游戏与演示场景。
+  image:
+    file: ~public/icons/plugins/keep-awake.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/keep-awake/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-keep-awake/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="简单 API" icon="rocket">
+    一次调用即可保持常亮或允许休眠
+  </Card>
+  <Card title="跨平台" icon="puzzle">
+    适用于 iOS、Android 与 Web 平台
+  </Card>
+  <Card title="轻量" icon="star">
+    零依赖,占用极小
+  </Card>
+  <Card title="状态查询" icon="magnifier">
+    随时查询当前唤醒锁状态
+  </Card>
+  <Card title="平台检测" icon="setting">
+    使用前检查是否支持唤醒锁
+  </Card>
+  <Card title="全面文档" icon="open-book">
+    查看[文档](/docs/plugins/keep-awake/getting-started/)以在几分钟内掌握插件。
+  </Card>
+</CardGrid>

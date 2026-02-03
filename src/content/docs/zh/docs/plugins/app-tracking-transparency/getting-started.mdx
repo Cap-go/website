@@ -1,0 +1,148 @@
+---
+title: 开始使用
+description: 了解如何安装并使用 App Tracking Transparency 插件,在 Capacitor 应用中处理 iOS 跟踪权限。
+sidebar:
+  order: 2
+locale: zh
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-app-tracking-transparency" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步原生项目**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## iOS 设置
+
+将 `NSUserTrackingUsageDescription` 键添加到 `Info.plist`:
+
+```xml
+<key>NSUserTrackingUsageDescription</key>
+<string>This identifier will be used to deliver personalized ads to you.</string>
+```
+
+该字符串应说明您为何需要跟踪权限。请求权限时这段文字会显示给用户。
+
+## 用法
+
+导入插件并使用其方法处理跟踪授权:
+
+```typescript
+import { AppTrackingTransparency } from '@capgo/capacitor-app-tracking-transparency';
+
+// 检查当前跟踪状态
+const checkStatus = async () => {
+  const { status } = await AppTrackingTransparency.getStatus();
+  console.log('Tracking status:', status);
+};
+
+// 请求跟踪权限
+const requestPermission = async () => {
+  const { status } = await AppTrackingTransparency.requestPermission();
+  console.log('User chose:', status);
+};
+```
+
+## API 参考
+
+### getStatus()
+
+获取当前跟踪授权状态,不会提示用户。
+
+```typescript
+const { status } = await AppTrackingTransparency.getStatus();
+// Returns: 'authorized' | 'denied' | 'notDetermined' | 'restricted'
+```
+
+### requestPermission()
+
+请求用户授权访问用于跟踪的应用相关数据。会显示 iOS 原生权限对话框。
+
+```typescript
+const { status } = await AppTrackingTransparency.requestPermission();
+// Returns: 'authorized' | 'denied' | 'notDetermined' | 'restricted'
+```
+
+:::note
+该方法只会显示一次对话框。之后的调用将返回已保存的授权状态,不会再次弹窗。
+:::
+
+## 完整示例
+
+```typescript
+import { AppTrackingTransparency } from '@capgo/capacitor-app-tracking-transparency';
+
+export class TrackingService {
+  async requestTrackingIfNeeded(): Promise<boolean> {
+    // 先检查当前状态
+    const { status } = await AppTrackingTransparency.getStatus();
+
+    if (status === 'notDetermined') {
+      // 用户尚未被询问,显示对话框
+      const result = await AppTrackingTransparency.requestPermission();
+      return result.status === 'authorized';
+    }
+
+    return status === 'authorized';
+  }
+
+  async isTrackingAuthorized(): Promise<boolean> {
+    const { status } = await AppTrackingTransparency.getStatus();
+    return status === 'authorized';
+  }
+}
+```
+
+## 状态值
+
+| Status | 描述 |
+| --- | --- |
+| `authorized` | 用户已允许跟踪 |
+| `denied` | 用户拒绝跟踪 |
+| `notDetermined` | 用户尚未被询问 |
+| `restricted` | 跟踪被限制(例如家长控制) |
+
+## 平台说明
+
+### iOS
+- 需要 iOS 14.0+
+- 使用 Apple 的 `ATTrackingManager` 框架
+- 权限弹窗在每次安装中只显示一次
+
+### Android
+- 自动返回 `authorized`
+- 不会显示权限弹窗(ATT 仅适用于 iOS)
+
+### Web
+- 为开发目的返回 `authorized`
+
+## 最佳实践
+
+1. **在合适的时机请求**
+   不要在应用启动时请求权限。等用户进入能从跟踪中获益的功能后再请求,并先说明价值。
+
+2. **请求前先检查**
+   在调用 `requestPermission()` 前始终使用 `getStatus()` 检查,避免不必要的调用。
+
+3. **处理所有状态**
+   ```typescript
+   const { status } = await AppTrackingTransparency.getStatus();
+   switch (status) {
+     case 'authorized':
+       // 启用个性化功能
+       break;
+     case 'denied':
+     case 'restricted':
+       // 使用非个性化替代方案
+       break;
+     case 'notDetermined':
+       // 考虑请求权限
+       break;
+   }
+   ```

@@ -1,0 +1,262 @@
+---
+title: 开始使用
+description: 了解如何安装并使用 Video Thumbnails 插件,在 Capacitor 应用中从视频生成缩略图。
+sidebar:
+  order: 2
+locale: zh
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-video-thumbnails" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步原生项目**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 用法
+
+导入插件并使用其方法生成视频缩略图:
+
+```typescript
+import { CapgoVideoThumbnails } from '@capgo/capacitor-video-thumbnails';
+
+// 从本地视频生成缩略图
+const generateFromLocal = async () => {
+  const result = await CapgoVideoThumbnails.getThumbnail({
+    sourceUri: 'file:///path/to/video.mp4',
+    time: 5000, // 视频第 5 秒
+    quality: 0.8
+  });
+
+  console.log('Thumbnail URI:', result.uri);
+  console.log('Dimensions:', result.width, 'x', result.height);
+};
+
+// 从远程视频生成缩略图
+const generateFromRemote = async () => {
+  const result = await CapgoVideoThumbnails.getThumbnail({
+    sourceUri: 'https://example.com/video.mp4',
+    time: 0, // 第一帧
+    quality: 1.0
+  });
+
+  return result.uri;
+};
+```
+
+## API 参考
+
+### getThumbnail(options)
+
+从视频文件生成缩略图。
+
+```typescript
+interface VideoThumbnailsOptions {
+  sourceUri: string;              // 视频文件路径或 URL
+  time?: number;                  // 毫秒位置(默认: 0)
+  quality?: number;               // 0.0 - 1.0 (默认: 1.0)
+  headers?: Record<string, string>; // 远程 URL 的 HTTP 头
+}
+
+interface VideoThumbnailsResult {
+  uri: string;    // 生成缩略图的本地路径
+  width: number;  // 缩略图宽度(像素)
+  height: number; // 缩略图高度(像素)
+}
+
+const result = await CapgoVideoThumbnails.getThumbnail({
+  sourceUri: 'file:///path/to/video.mp4',
+  time: 5000,
+  quality: 0.8
+});
+```
+
+### getPluginVersion()
+
+获取当前插件版本。
+
+```typescript
+const { version } = await CapgoVideoThumbnails.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+## 完整示例
+
+```typescript
+import { CapgoVideoThumbnails } from '@capgo/capacitor-video-thumbnails';
+
+export class VideoThumbnailService {
+  /**
+   * 在指定时间点生成视频缩略图
+   */
+  async generateThumbnail(
+    videoPath: string,
+    timeMs: number = 0,
+    quality: number = 0.8
+  ): Promise<string> {
+    try {
+      const result = await CapgoVideoThumbnails.getThumbnail({
+        sourceUri: videoPath,
+        time: timeMs,
+        quality: quality
+      });
+
+      return result.uri;
+    } catch (error) {
+      console.error('Failed to generate thumbnail:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * 从需要鉴权的远程视频生成缩略图
+   */
+  async generateFromAuthenticatedUrl(
+    videoUrl: string,
+    authToken: string
+  ): Promise<string> {
+    const result = await CapgoVideoThumbnails.getThumbnail({
+      sourceUri: videoUrl,
+      time: 0,
+      quality: 1.0,
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    });
+
+    return result.uri;
+  }
+
+  /**
+   * 在不同时间点生成多张缩略图
+   */
+  async generateThumbnailStrip(
+    videoPath: string,
+    count: number,
+    videoDurationMs: number
+  ): Promise<string[]> {
+    const thumbnails: string[] = [];
+    const interval = videoDurationMs / (count + 1);
+
+    for (let i = 1; i <= count; i++) {
+      const time = Math.round(interval * i);
+      const result = await CapgoVideoThumbnails.getThumbnail({
+        sourceUri: videoPath,
+        time: time,
+        quality: 0.6 // 预览条使用较低质量
+      });
+      thumbnails.push(result.uri);
+    }
+
+    return thumbnails;
+  }
+
+  /**
+   * 生成缩略图并获取尺寸信息
+   */
+  async generateWithMetadata(videoPath: string) {
+    const result = await CapgoVideoThumbnails.getThumbnail({
+      sourceUri: videoPath,
+      time: 1000, // 1 秒
+      quality: 1.0
+    });
+
+    return {
+      thumbnailUri: result.uri,
+      aspectRatio: result.width / result.height,
+      width: result.width,
+      height: result.height
+    };
+  }
+}
+
+// Usage in a React/Vue/Angular component
+const thumbnailService = new VideoThumbnailService();
+
+async function displayVideoPreview(videoPath: string) {
+  const thumbnailUri = await thumbnailService.generateThumbnail(videoPath, 2000);
+
+  // Use in img tag
+  // <img src={thumbnailUri} alt="Video preview" />
+  return thumbnailUri;
+}
+
+// Generate preview for video picker
+async function handleVideoSelected(videoUri: string) {
+  const metadata = await thumbnailService.generateWithMetadata(videoUri);
+
+  console.log(`Video aspect ratio: ${metadata.aspectRatio}`);
+  console.log(`Thumbnail: ${metadata.thumbnailUri}`);
+
+  return metadata;
+}
+```
+
+## 最佳实践
+
+1. **使用合适的质量**
+   - 列表缩略图:0.5 - 0.7
+   - 预览图片:0.8 - 1.0
+   - 质量越低文件越小,生成更快
+
+2. **优雅处理错误**
+   ```typescript
+   try {
+     const result = await CapgoVideoThumbnails.getThumbnail({
+       sourceUri: videoPath,
+       time: 5000
+     });
+   } catch (error) {
+     console.error('Thumbnail generation failed:', error);
+     // 显示占位图
+   }
+   ```
+
+3. **缓存缩略图**
+   保存生成的缩略图 URI,避免重复生成:
+   ```typescript
+   const thumbnailCache = new Map<string, string>();
+
+   async function getCachedThumbnail(videoPath: string): Promise<string> {
+     if (thumbnailCache.has(videoPath)) {
+       return thumbnailCache.get(videoPath)!;
+     }
+
+     const result = await CapgoVideoThumbnails.getThumbnail({
+       sourceUri: videoPath
+     });
+
+     thumbnailCache.set(videoPath, result.uri);
+     return result.uri;
+   }
+   ```
+
+4. **选择合适时间点**
+   - 避免 0ms(可能是黑屏开头)
+   - 使用 1000-2000ms 获得更好的预览
+
+## 平台说明
+
+### iOS
+- 使用 AVAssetImageGenerator 提取缩略图
+- 支持本地文件与远程 URL
+- 返回 JPEG 图片
+
+### Android
+- 使用 MediaMetadataRetriever 提取缩略图
+- 支持本地文件与远程 URL
+- 返回 JPEG 或 PNG 图片
+
+### Web
+- 使用 HTML5 video 元素与 canvas 截图
+- 远程视频需 CORS 头
+- 某些视频格式可能受限
+
+## 要求
+
+- **Capacitor 8.0.0** 或更高版本

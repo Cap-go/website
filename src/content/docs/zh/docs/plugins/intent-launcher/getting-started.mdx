@@ -1,0 +1,420 @@
+---
+title: 开始使用
+description: 了解如何安装并使用 Intent Launcher 插件,在 Capacitor 应用中启动 Android intent 与系统设置。
+sidebar:
+  order: 2
+locale: zh
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-intent-launcher" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步原生项目**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 用法
+
+导入插件并使用其方法启动 intent:
+
+```typescript
+import { IntentLauncher, ActivityAction } from '@capgo/capacitor-intent-launcher';
+
+// 打开 WiFi 设置
+const openWifiSettings = async () => {
+  await IntentLauncher.startActivityAsync({
+    action: ActivityAction.WIFI_SETTINGS
+  });
+};
+
+// 打开定位设置
+const openLocationSettings = async () => {
+  await IntentLauncher.startActivityAsync({
+    action: ActivityAction.LOCATION_SOURCE_SETTINGS
+  });
+};
+
+// 打开应用详情页
+const openAppSettings = async () => {
+  await IntentLauncher.startActivityAsync({
+    action: ActivityAction.APPLICATION_DETAILS_SETTINGS,
+    data: 'package:com.example.myapp'
+  });
+};
+```
+
+## API 参考
+
+### startActivityAsync(options)
+
+为给定 action 启动 Android activity。
+
+```typescript
+interface IntentLauncherParams {
+  action: string;                    // Activity action (use ActivityAction enum)
+  category?: string;                 // Intent category
+  className?: string;                // Component class name
+  data?: string;                     // URI data
+  extra?: Record<string, unknown>;   // Extra key-value data
+  flags?: number;                    // Intent flags bitmask
+  packageName?: string;              // Component package name
+  type?: string;                     // MIME type
+}
+
+interface IntentLauncherResult {
+  resultCode: ResultCode;            // Result from activity
+  data?: string;                     // Optional URI data returned
+  extra?: Record<string, unknown>;   // Optional extra data returned
+}
+
+const result = await IntentLauncher.startActivityAsync({
+  action: ActivityAction.WIFI_SETTINGS
+});
+```
+
+### openApplication(options)
+
+通过包名打开应用。
+
+```typescript
+interface OpenApplicationOptions {
+  packageName: string;
+}
+
+// 打开 Gmail
+await IntentLauncher.openApplication({
+  packageName: 'com.google.android.gm'
+});
+```
+
+### getApplicationIconAsync(options)
+
+获取应用图标(base64 编码 PNG)。
+
+```typescript
+interface GetApplicationIconOptions {
+  packageName: string;
+}
+
+interface GetApplicationIconResult {
+  icon: string; // base64 PNG with data:image/.png;base64, prefix
+}
+
+const { icon } = await IntentLauncher.getApplicationIconAsync({
+  packageName: 'com.google.android.gm'
+});
+
+// 在 img 标签中使用
+// <img src={icon} alt="App icon" />
+```
+
+### getPluginVersion()
+
+获取当前插件版本。
+
+```typescript
+const { version } = await IntentLauncher.getPluginVersion();
+```
+
+## 常见 Activity Actions
+
+### 设置相关
+
+```typescript
+import { IntentLauncher, ActivityAction } from '@capgo/capacitor-intent-launcher';
+
+// 网络设置
+await IntentLauncher.startActivityAsync({ action: ActivityAction.WIFI_SETTINGS });
+await IntentLauncher.startActivityAsync({ action: ActivityAction.BLUETOOTH_SETTINGS });
+await IntentLauncher.startActivityAsync({ action: ActivityAction.AIRPLANE_MODE_SETTINGS });
+await IntentLauncher.startActivityAsync({ action: ActivityAction.DATA_ROAMING_SETTINGS });
+
+// 安全设置
+await IntentLauncher.startActivityAsync({ action: ActivityAction.SECURITY_SETTINGS });
+await IntentLauncher.startActivityAsync({ action: ActivityAction.PRIVACY_SETTINGS });
+
+// 应用设置
+await IntentLauncher.startActivityAsync({ action: ActivityAction.APPLICATION_SETTINGS });
+await IntentLauncher.startActivityAsync({ action: ActivityAction.MANAGE_APPLICATIONS_SETTINGS });
+
+// 显示与声音
+await IntentLauncher.startActivityAsync({ action: ActivityAction.DISPLAY_SETTINGS });
+await IntentLauncher.startActivityAsync({ action: ActivityAction.SOUND_SETTINGS });
+
+// 位置
+await IntentLauncher.startActivityAsync({ action: ActivityAction.LOCATION_SOURCE_SETTINGS });
+
+// 电池
+await IntentLauncher.startActivityAsync({ action: ActivityAction.BATTERY_SAVER_SETTINGS });
+await IntentLauncher.startActivityAsync({ action: ActivityAction.IGNORE_BATTERY_OPTIMIZATION_SETTINGS });
+
+// 通知
+await IntentLauncher.startActivityAsync({ action: ActivityAction.APP_NOTIFICATION_SETTINGS });
+await IntentLauncher.startActivityAsync({ action: ActivityAction.NOTIFICATION_LISTENER_SETTINGS });
+```
+
+### Intent Actions
+
+```typescript
+// 打开 URL
+await IntentLauncher.startActivityAsync({
+  action: ActivityAction.VIEW,
+  data: 'https://example.com'
+});
+
+// 拨打电话
+await IntentLauncher.startActivityAsync({
+  action: ActivityAction.DIAL,
+  data: 'tel:+1234567890'
+});
+
+// 发送邮件
+await IntentLauncher.startActivityAsync({
+  action: ActivityAction.SENDTO,
+  data: 'mailto:example@email.com'
+});
+
+// 分享文本
+await IntentLauncher.startActivityAsync({
+  action: ActivityAction.SEND,
+  type: 'text/plain',
+  extra: {
+    'android.intent.extra.TEXT': 'Hello from my app!'
+  }
+});
+```
+
+## 完整示例
+
+```typescript
+import {
+  IntentLauncher,
+  ActivityAction,
+  ResultCode
+} from '@capgo/capacitor-intent-launcher';
+import { Capacitor } from '@capacitor/core';
+
+export class IntentService {
+  private isAndroid = Capacitor.getPlatform() === 'android';
+
+  /**
+   * 打开当前应用的设置页
+   */
+  async openAppSettings(packageName: string) {
+    if (!this.isAndroid) {
+      console.warn('Intent Launcher is Android-only');
+      return;
+    }
+
+    await IntentLauncher.startActivityAsync({
+      action: ActivityAction.APPLICATION_DETAILS_SETTINGS,
+      data: `package:${packageName}`
+    });
+  }
+
+  /**
+   * 打开 WiFi 设置
+   */
+  async openWifiSettings() {
+    if (!this.isAndroid) return;
+
+    await IntentLauncher.startActivityAsync({
+      action: ActivityAction.WIFI_SETTINGS
+    });
+  }
+
+  /**
+   * 打开定位设置
+   */
+  async openLocationSettings() {
+    if (!this.isAndroid) return;
+
+    const result = await IntentLauncher.startActivityAsync({
+      action: ActivityAction.LOCATION_SOURCE_SETTINGS
+    });
+
+    return result.resultCode === ResultCode.Success;
+  }
+
+  /**
+   * 请求电池优化豁免
+   */
+  async requestBatteryExemption(packageName: string) {
+    if (!this.isAndroid) return;
+
+    await IntentLauncher.startActivityAsync({
+      action: ActivityAction.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
+      data: `package:${packageName}`
+    });
+  }
+
+  /**
+   * 打开其他应用
+   */
+  async openApp(packageName: string) {
+    if (!this.isAndroid) return;
+
+    try {
+      await IntentLauncher.openApplication({ packageName });
+    } catch (error) {
+      console.error(`App ${packageName} not installed or cannot be opened`);
+      throw error;
+    }
+  }
+
+  /**
+   * 获取应用图标
+   */
+  async getAppIcon(packageName: string): Promise<string | null> {
+    if (!this.isAndroid) return null;
+
+    try {
+      const { icon } = await IntentLauncher.getApplicationIconAsync({
+        packageName
+      });
+      return icon || null;
+    } catch {
+      return null;
+    }
+  }
+
+  /**
+   * 分享文本内容
+   */
+  async shareText(text: string, title?: string) {
+    if (!this.isAndroid) return;
+
+    await IntentLauncher.startActivityAsync({
+      action: ActivityAction.SEND,
+      type: 'text/plain',
+      extra: {
+        'android.intent.extra.TEXT': text,
+        ...(title && { 'android.intent.extra.SUBJECT': title })
+      }
+    });
+  }
+
+  /**
+   * 在浏览器中打开 URL
+   */
+  async openUrl(url: string) {
+    if (!this.isAndroid) return;
+
+    await IntentLauncher.startActivityAsync({
+      action: ActivityAction.VIEW,
+      data: url
+    });
+  }
+
+  /**
+   * 打开拨号器
+   */
+  async openDialer(phoneNumber: string) {
+    if (!this.isAndroid) return;
+
+    await IntentLauncher.startActivityAsync({
+      action: ActivityAction.DIAL,
+      data: `tel:${phoneNumber}`
+    });
+  }
+
+  /**
+   * 发送邮件
+   */
+  async composeEmail(to: string, subject?: string, body?: string) {
+    if (!this.isAndroid) return;
+
+    const extra: Record<string, string> = {};
+    if (subject) extra['android.intent.extra.SUBJECT'] = subject;
+    if (body) extra['android.intent.extra.TEXT'] = body;
+
+    await IntentLauncher.startActivityAsync({
+      action: ActivityAction.SENDTO,
+      data: `mailto:${to}`,
+      extra
+    });
+  }
+}
+
+// Usage
+const intentService = new IntentService();
+
+// Open settings
+await intentService.openWifiSettings();
+await intentService.openLocationSettings();
+
+// Open another app
+await intentService.openApp('com.google.android.gm');
+
+// Get app icon
+const icon = await intentService.getAppIcon('com.google.android.gm');
+
+// Share content
+await intentService.shareText('Check out this app!', 'App Recommendation');
+```
+
+## 结果码
+
+```typescript
+enum ResultCode {
+  Success = -1,   // Activity completed successfully
+  Canceled = 0,   // Activity was canceled
+  FirstUser = 1   // Custom result code
+}
+```
+
+## 最佳实践
+
+1. **先检查平台**
+   ```typescript
+   import { Capacitor } from '@capacitor/core';
+
+   if (Capacitor.getPlatform() !== 'android') {
+     console.warn('Intent Launcher is Android-only');
+     return;
+   }
+   ```
+
+2. **处理应用不存在的错误**
+   ```typescript
+   try {
+     await IntentLauncher.openApplication({
+       packageName: 'com.example.app'
+     });
+   } catch (error) {
+     // App not installed
+     console.error('App not found');
+   }
+   ```
+
+3. **应用设置使用正确 URI 格式**
+   ```typescript
+   // Correct
+   data: 'package:com.example.app'
+
+   // Not correct
+   data: 'com.example.app'
+   ```
+
+## 平台说明
+
+### Android
+- 完整支持所有 intent actions
+- 可访问系统设置与其他应用
+- 可接收 activity 的结果码
+
+### iOS
+- **不支持** - iOS 没有与 Android intents 等价的系统
+- 使用 iOS 特定方法,例如打开 Settings 的 URL scheme
+
+### Web
+- **不支持** - Web 无 intent 系统
+
+## 要求
+
+- **Capacitor 8.0.0** 或更高版本

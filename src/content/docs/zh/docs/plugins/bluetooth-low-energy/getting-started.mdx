@@ -1,0 +1,366 @@
+---
+title: 开始使用
+description: 了解如何安装并使用 Bluetooth Low Energy 插件,在 Capacitor 应用中与 BLE 设备通信。
+sidebar:
+  order: 2
+locale: zh
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-bluetooth-low-energy" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步原生项目**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## iOS 设置
+
+在 `Info.plist` 中添加以下内容:
+
+```xml
+<key>NSBluetoothAlwaysUsageDescription</key>
+<string>This app uses Bluetooth to communicate with BLE devices.</string>
+<key>NSBluetoothPeripheralUsageDescription</key>
+<string>This app uses Bluetooth to communicate with BLE devices.</string>
+```
+
+如需后台 BLE 支持,添加:
+
+```xml
+<key>UIBackgroundModes</key>
+<array>
+    <string>bluetooth-central</string>
+    <string>bluetooth-peripheral</string>
+</array>
+```
+
+## Android 设置
+
+开箱即用。插件会自动添加所需权限。对于 Android 12+,需要请求运行时权限:
+
+```typescript
+await BluetoothLowEnergy.requestPermissions();
+```
+
+## Web 设置
+
+在 Chrome 与基于 Chromium 的浏览器中通过 Web Bluetooth API 工作。需要 HTTPS 且扫描设备需要用户交互。
+
+## 基本用法
+
+```typescript
+import { BluetoothLowEnergy } from '@capgo/capacitor-bluetooth-low-energy';
+
+// 初始化插件
+await BluetoothLowEnergy.initialize();
+
+// 请求权限 (Android 12+)
+await BluetoothLowEnergy.requestPermissions();
+
+// 检查蓝牙是否可用且已启用
+const { available } = await BluetoothLowEnergy.isAvailable();
+const { enabled } = await BluetoothLowEnergy.isEnabled();
+
+if (!available || !enabled) {
+  console.log('Bluetooth is not available or not enabled');
+  return;
+}
+
+// 开始扫描设备
+BluetoothLowEnergy.addListener('deviceScanned', (event) => {
+  console.log('Found device:', event.device.name, event.device.deviceId);
+});
+
+await BluetoothLowEnergy.startScan({
+  services: ['180d'], // 按心率服务 UUID 过滤
+  timeout: 10000, // 10 秒
+});
+```
+
+## 连接设备
+
+```typescript
+// 连接设备
+await BluetoothLowEnergy.connect({
+  deviceId: 'AA:BB:CC:DD:EE:FF',
+});
+
+// 监听连接事件
+BluetoothLowEnergy.addListener('deviceConnected', (event) => {
+  console.log('Connected to:', event.deviceId);
+});
+
+BluetoothLowEnergy.addListener('deviceDisconnected', (event) => {
+  console.log('Disconnected from:', event.deviceId);
+});
+
+// 发现服务
+await BluetoothLowEnergy.discoverServices({
+  deviceId: 'AA:BB:CC:DD:EE:FF',
+});
+
+// 获取已发现服务
+const { services } = await BluetoothLowEnergy.getServices({
+  deviceId: 'AA:BB:CC:DD:EE:FF',
+});
+
+console.log('Services:', services);
+```
+
+## 读取与写入特征
+
+```typescript
+// 读取特征
+const { value } = await BluetoothLowEnergy.readCharacteristic({
+  deviceId: 'AA:BB:CC:DD:EE:FF',
+  service: '180d',
+  characteristic: '2a37',
+});
+
+console.log('Value:', value); // 字节数组
+
+// 写入特征
+await BluetoothLowEnergy.writeCharacteristic({
+  deviceId: 'AA:BB:CC:DD:EE:FF',
+  service: '180d',
+  characteristic: '2a39',
+  value: [0x01], // 字节数组
+  type: 'withResponse',
+});
+```
+
+## 订阅通知
+
+```typescript
+// 监听特征变化
+BluetoothLowEnergy.addListener('characteristicChanged', (event) => {
+  console.log('Characteristic changed:', event.characteristic);
+  console.log('New value:', event.value);
+});
+
+// 开启通知
+await BluetoothLowEnergy.startCharacteristicNotifications({
+  deviceId: 'AA:BB:CC:DD:EE:FF',
+  service: '180d',
+  characteristic: '2a37',
+});
+
+// 完成后关闭通知
+await BluetoothLowEnergy.stopCharacteristicNotifications({
+  deviceId: 'AA:BB:CC:DD:EE:FF',
+  service: '180d',
+  characteristic: '2a37',
+});
+```
+
+## 完整示例 - 心率监测
+
+```typescript
+import { BluetoothLowEnergy } from '@capgo/capacitor-bluetooth-low-energy';
+
+const HEART_RATE_SERVICE = '180d';
+const HEART_RATE_MEASUREMENT = '2a37';
+
+export class HeartRateMonitor {
+  private deviceId: string | null = null;
+
+  async init() {
+    await BluetoothLowEnergy.initialize();
+
+    const { available } = await BluetoothLowEnergy.isAvailable();
+    if (!available) {
+      throw new Error('Bluetooth not available');
+    }
+
+    await BluetoothLowEnergy.requestPermissions();
+  }
+
+  async scan(): Promise<string[]> {
+    const devices: string[] = [];
+
+    BluetoothLowEnergy.addListener('deviceScanned', (event) => {
+      if (event.device.name && !devices.includes(event.device.deviceId)) {
+        devices.push(event.device.deviceId);
+        console.log('Found:', event.device.name);
+      }
+    });
+
+    await BluetoothLowEnergy.startScan({
+      services: [HEART_RATE_SERVICE],
+      timeout: 5000,
+    });
+
+    return devices;
+  }
+
+  async connect(deviceId: string) {
+    this.deviceId = deviceId;
+
+    await BluetoothLowEnergy.connect({ deviceId });
+    await BluetoothLowEnergy.discoverServices({ deviceId });
+  }
+
+  async startMonitoring(callback: (heartRate: number) => void) {
+    if (!this.deviceId) throw new Error('Not connected');
+
+    BluetoothLowEnergy.addListener('characteristicChanged', (event) => {
+      if (event.characteristic === HEART_RATE_MEASUREMENT) {
+        // 从 BLE 心率测量格式解析心率
+        const flags = event.value[0];
+        const is16Bit = (flags & 0x01) !== 0;
+        const heartRate = is16Bit
+          ? (event.value[2] << 8) | event.value[1]
+          : event.value[1];
+        callback(heartRate);
+      }
+    });
+
+    await BluetoothLowEnergy.startCharacteristicNotifications({
+      deviceId: this.deviceId,
+      service: HEART_RATE_SERVICE,
+      characteristic: HEART_RATE_MEASUREMENT,
+    });
+  }
+
+  async disconnect() {
+    if (this.deviceId) {
+      await BluetoothLowEnergy.disconnect({ deviceId: this.deviceId });
+      this.deviceId = null;
+    }
+  }
+}
+```
+
+## API 参考
+
+### 核心方法
+
+| 方法 | 描述 |
+|--------|-------------|
+| `initialize()` | 初始化 BLE 插件(其他调用之前必需) |
+| `isAvailable()` | 检查设备是否支持蓝牙 |
+| `isEnabled()` | 检查蓝牙是否已启用 |
+| `checkPermissions()` | 检查当前权限状态 |
+| `requestPermissions()` | 请求蓝牙权限 |
+
+### 扫描
+
+| 方法 | 描述 |
+|--------|-------------|
+| `startScan(options?)` | 开始扫描 BLE 设备 |
+| `stopScan()` | 停止扫描 |
+
+### 连接
+
+| 方法 | 描述 |
+|--------|-------------|
+| `connect(options)` | 连接 BLE 设备 |
+| `disconnect(options)` | 断开设备连接 |
+| `getConnectedDevices()` | 获取已连接设备列表 |
+| `createBond(options)` | 创建配对(Android only) |
+| `isBonded(options)` | 检查设备是否已配对(Android only) |
+
+### 服务发现
+
+| 方法 | 描述 |
+|--------|-------------|
+| `discoverServices(options)` | 发现已连接设备的服务 |
+| `getServices(options)` | 获取已发现服务 |
+
+### 特征
+
+| 方法 | 描述 |
+|--------|-------------|
+| `readCharacteristic(options)` | 读取特征值 |
+| `writeCharacteristic(options)` | 写入特征值 |
+| `startCharacteristicNotifications(options)` | 订阅通知 |
+| `stopCharacteristicNotifications(options)` | 取消通知 |
+
+### 描述符
+
+| 方法 | 描述 |
+|--------|-------------|
+| `readDescriptor(options)` | 读取描述符值 |
+| `writeDescriptor(options)` | 写入描述符值 |
+
+### 高级
+
+| 方法 | 描述 |
+|--------|-------------|
+| `readRssi(options)` | 读取已连接设备的信号强度 |
+| `requestMtu(options)` | 请求 MTU 大小变更(Android) |
+| `requestConnectionPriority(options)` | 请求连接优先级(Android) |
+| `startAdvertising(options)` | 作为外设开始广播 |
+| `stopAdvertising()` | 停止广播 |
+| `startForegroundService(options)` | 启动前台服务(Android) |
+| `stopForegroundService()` | 停止前台服务(Android) |
+
+### 事件
+
+| 事件 | 描述 |
+|-------|-------------|
+| `deviceScanned` | 扫描发现设备时触发 |
+| `deviceConnected` | 连接设备时触发 |
+| `deviceDisconnected` | 断开连接时触发 |
+| `characteristicChanged` | 特征值变化时触发 |
+
+## 最佳实践
+
+1. **先初始化**
+   ```typescript
+   await BluetoothLowEnergy.initialize();
+   ```
+
+2. **扫描前检查权限**
+   ```typescript
+   const { bluetooth } = await BluetoothLowEnergy.checkPermissions();
+   if (bluetooth !== 'granted') {
+     await BluetoothLowEnergy.requestPermissions();
+   }
+   ```
+
+3. **优雅处理断连**
+   ```typescript
+   BluetoothLowEnergy.addListener('deviceDisconnected', async (event) => {
+     // 尝试重连或通知用户
+   });
+   ```
+
+4. **使用后清理监听器**
+   ```typescript
+   await BluetoothLowEnergy.removeAllListeners();
+   ```
+
+5. **长时间运行操作使用前台服务(Android)**
+   ```typescript
+   await BluetoothLowEnergy.startForegroundService({
+     title: 'BLE Active',
+     body: 'Connected to device',
+     smallIcon: 'ic_notification',
+   });
+   ```
+
+## 平台说明
+
+### iOS
+- 需要 iOS 10.0+
+- 使用 CoreBluetooth 框架
+- 在启用适当权限后支持后台模式
+- 设备 ID 为 UUID(非 MAC 地址)
+
+### Android
+- 需要 Android 5.0 (API 21)+
+- Android 12+ 需要 BLUETOOTH_SCAN 与 BLUETOOTH_CONNECT 权限
+- 设备 ID 为 MAC 地址
+- 扫描可能需要开启定位服务
+
+### Web
+- 需要 Chrome/Chromium 与 Web Bluetooth API
+- 必须通过 HTTPS 提供
+- 需要用户交互才能开始扫描
+- 能力较原生实现有限

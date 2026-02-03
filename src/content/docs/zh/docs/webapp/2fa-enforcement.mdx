@@ -1,0 +1,184 @@
+---
+title: "强制 2FA"
+description: "了解如何为组织的所有成员强制开启双因素认证(2FA),以提升安全性并保护您的应用。"
+sidebar:
+  order: 11
+locale: zh
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+<Aside type="tip">
+
+本页详细介绍 2FA 强制策略。若需查看组织安全的完整概览(包括密码策略与 API key 控制),请参阅[组织安全](/docs/webapp/organization-security/)。
+
+</Aside>
+
+强制双因素认证(2FA)允许组织管理员要求所有成员在访问组织资源之前启用 2FA。这能为您的应用与数据提供更高的安全等级。
+
+## 概览
+
+当为组织启用 2FA 强制策略后:
+- 所有成员必须在其 Capgo 账号上启用 2FA
+- 未启用 2FA 的成员将无法访问组织的应用
+- Web 控制台与 CLI 都会强制执行该要求
+- 新成员必须先启用 2FA 才能访问组织资源
+
+<Aside type="tip">
+
+2FA 强制策略在以下场景尤为重要:
+- 有严格安全政策的企业组织
+- 处理敏感用户数据的团队
+- 受监管行业(医疗、金融等)的组织
+- 需要满足 SOC 2 或 ISO 27001 合规的公司
+
+</Aside>
+
+## 工作原理
+
+### Web 控制台
+当您尝试访问要求 2FA 的组织,但尚未启用 2FA 时:
+1. 您会看到访问被拒绝的提示
+2. 系统会引导您到账号设置中开启 2FA
+3. 启用后即可正常访问组织
+
+### CLI 访问
+当使用 Capgo CLI 与要求 2FA 的组织中的应用交互时:
+
+```
+🔐 Access Denied: Two-Factor Authentication Required
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This organization requires all members to have 2FA enabled.
+
+To regain access:
+  1. Go to https://web.capgo.app/settings/account
+  2. Enable Two-Factor Authentication on your account
+  3. Try your command again
+```
+
+## 启用 2FA 强制策略
+
+<Aside type="caution">
+
+在启用 2FA 强制策略前:
+- 确保您自己的账号已启用 2FA
+- 通知所有组织成员启用 2FA
+- 未启用 2FA 的成员将立即失去访问权限
+
+</Aside>
+
+### 通过 Web 控制台
+
+<Steps>
+
+1. 进入组织设置
+2. 打开 **Security** 部分
+3. 切换 **Require 2FA for all members**
+4. 确认操作
+
+</Steps>
+
+### 通过 CLI
+
+您可以使用 Capgo CLI 启用 2FA 强制策略:
+
+```shell
+# 为组织启用 2FA 强制策略
+npx @capgo/cli organization set YOUR_ORG_ID --enforce-2fa
+
+# 禁用 2FA 强制策略
+npx @capgo/cli organization set YOUR_ORG_ID --no-enforce-2fa
+```
+
+通过 CLI 启用时,您将看到:
+- 哪些成员未启用 2FA
+- 如果您自己未启用 2FA 的警告
+- 在应用更改前的确认提示
+
+## 查看成员 2FA 状态
+
+### 通过 CLI
+
+您可以列出组织所有成员及其 2FA 状态:
+
+```shell
+npx @capgo/cli organization members YOUR_ORG_ID
+```
+
+将显示:
+- 成员邮箱与角色
+- 是否启用 2FA
+- 需要启用 2FA 的成员数量汇总
+
+### 通过 Web 控制台
+
+在组织设置中,您可以查看每位成员是否启用了 2FA。
+
+## 在账号中启用 2FA
+
+如果需要为账号启用 2FA,请参阅[双因素认证设置指南](/docs/webapp/mfa/)。
+
+## 最佳实践
+
+### 启用前
+- **提前沟通**: 启用前至少提前一周通知成员
+- **提供支持**: 与团队共享[2FA 设置指南](/docs/webapp/mfa/)
+- **检查准备情况**: 使用 `npx @capgo/cli organization members` 查看仍需启用 2FA 的成员
+
+### 启用后
+- **关注访问问题**: 及时协助被锁定的成员
+- **保留备用码**: 提醒成员保存 2FA 备用码
+- **定期复查**: 定期确认所有成员都持续启用 2FA
+
+### 面向 CI/CD 流水线
+- **使用 API key**: CI/CD 系统应使用 API key,而非用户账号
+- **API key 所有者**: 确保创建 CI/CD API key 的用户已启用 2FA
+- **轮换密钥**: 定期轮换自动化系统使用的 API key
+
+## 故障排除
+
+### “Access Denied: Two-Factor Authentication Required”
+
+**问题**: 访问组织时出现该错误。
+
+**解决方案**:
+1. 前往[账号设置](https://web.capgo.app/settings/account)
+2. 在账号中启用 2FA
+3. 再次访问组织
+
+### “Cannot enable 2FA enforcement”
+
+**问题**: 无法为组织启用 2FA 强制策略。
+
+**解决方案**:
+- 确保您在组织中拥有 `super_admin` 权限
+- 先在您的账号中启用 2FA
+- 若问题仍未解决,请联系支持
+
+### CLI 命令失败
+
+**问题**: CLI 命令因 2FA 相关错误失败。
+
+**解决方案**:
+- 验证 API key 是否有效: `npx @capgo/cli doctor`
+- 确保 API key 所有者已启用 2FA
+- 如果使用登录认证,请重新登录: `npx @capgo/cli login`
+
+## 合规
+
+2FA 强制策略可帮助组织满足多项合规要求:
+
+| 标准 | 要求 | 2FA 如何帮助 |
+|----------|-------------|---------------|
+| **SOC 2** | 访问控制 | 确保所有用户采用强身份验证 |
+| **ISO 27001** | 信息安全 | 增加身份验证层级 |
+| **HIPAA** | 访问管理 | 防止未授权访问 |
+| **GDPR** | 数据保护 | 降低账号被攻破风险 |
+| **PCI DSS** | 身份验证控制 | 满足多因素认证要求 |
+
+## 下一步
+
+- [为账号设置 2FA](/docs/webapp/mfa/)
+- [了解组织管理](/docs/webapp/organization-system/)
+- [为 CI/CD 配置 API key](/docs/webapp/api-keys/)

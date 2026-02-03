@@ -1,0 +1,458 @@
+---
+title: "Electron Updater API 参考"
+description: @capgo/electron-updater 的完整 API 参考 - 所有方法、事件与配置选项。
+sidebar:
+  order: 2
+locale: zh
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+本页记录 Electron Updater 的所有可用方法、事件与配置选项。
+
+## 核心方法
+
+### notifyAppReady()
+
+**每次应用启动都必须调用。**确认 bundle 成功加载并防止自动回滚。
+
+```typescript
+await updater.notifyAppReady();
+```
+
+<Aside type="caution">
+  如果在 `appReadyTimeout`(默认 10 秒)内未调用,更新将被视为失败并回滚到上一版本。
+</Aside>
+
+### download(options)
+
+从 URL 下载 bundle。
+
+```typescript
+const bundle = await updater.download({
+  url: 'https://example.com/bundle.zip',
+  version: '1.0.1',
+  checksum: 'sha256-hash', // Optional but recommended
+  sessionKey: '...', // For encrypted bundles
+});
+```
+
+**参数:**
+| 选项 | 类型 | 必填 | 描述 |
+|--------|------|----------|-------------|
+| `url` | string | Yes | 下载 bundle 的 URL |
+| `version` | string | Yes | bundle 的版本标识 |
+| `checksum` | string | No | 用于校验的 SHA256 校验和 |
+| `sessionKey` | string | No | 加密 bundle 的会话密钥 |
+
+**返回:** `BundleInfo` 对象,包含 `id`、`version`、`status`
+
+### next(options)
+
+将 bundle 排队,在下次应用重启时加载。
+
+```typescript
+await updater.next({ id: 'bundle-id' });
+```
+
+**参数:**
+| 选项 | 类型 | 必填 | 描述 |
+|--------|------|----------|-------------|
+| `id` | string | Yes | 要排队的 bundle ID |
+
+### set(options)
+
+立即切换到指定 bundle 并重载应用。
+
+```typescript
+await updater.set({ id: 'bundle-id' });
+```
+
+**参数:**
+| 选项 | 类型 | 必填 | 描述 |
+|--------|------|----------|-------------|
+| `id` | string | Yes | 要激活的 bundle ID |
+
+### reload()
+
+使用当前 bundle 手动重载应用。
+
+```typescript
+await updater.reload();
+```
+
+### delete(options)
+
+从存储中删除 bundle。
+
+```typescript
+await updater.delete({ id: 'bundle-id' });
+```
+
+**参数:**
+| 选项 | 类型 | 必填 | 描述 |
+|--------|------|----------|-------------|
+| `id` | string | Yes | 要删除的 bundle ID |
+
+### reset(options)
+
+重置为内置版本或最近一次成功的 bundle。
+
+```typescript
+// 重置为内置版本
+await updater.reset({ toLastSuccessful: false });
+
+// 重置为最近一次成功的 bundle
+await updater.reset({ toLastSuccessful: true });
+```
+
+**参数:**
+| 选项 | 类型 | 必填 | 描述 |
+|--------|------|----------|-------------|
+| `toLastSuccessful` | boolean | No | 若为 true,重置到最近成功的 bundle,否则重置到内置版本 |
+
+## Bundle 信息
+
+### current()
+
+获取当前 bundle 与原生版本信息。
+
+```typescript
+const info = await updater.current();
+// { bundle: { id, version, status }, native: '1.0.0' }
+```
+
+### list(options)
+
+列出已下载的所有 bundle。
+
+```typescript
+const bundles = await updater.list();
+// [{ id, version, status, downloaded, checksum }, ...]
+```
+
+### getNextBundle()
+
+获取已排队将在下次重启加载的 bundle。
+
+```typescript
+const next = await updater.getNextBundle();
+// { id, version, status } or null
+```
+
+### getFailedUpdate()
+
+获取最近一次失败更新的信息(用于排查回滚)。
+
+```typescript
+const failed = await updater.getFailedUpdate();
+// { id, version, reason } or null
+```
+
+### getBuiltinVersion()
+
+获取随应用二进制包一起发布的版本。
+
+```typescript
+const version = await updater.getBuiltinVersion();
+// '1.0.0'
+```
+
+## 更新检查
+
+### getLatest(options)
+
+检查服务器上的最新可用版本。
+
+```typescript
+const latest = await updater.getLatest();
+
+if (latest.url && !latest.error) {
+  // 有可用更新
+  console.log('New version:', latest.version);
+  console.log('Download URL:', latest.url);
+} else if (latest.error) {
+  console.error('Error checking updates:', latest.error);
+}
+```
+
+**返回:**
+| 属性 | 类型 | 描述 |
+|----------|------|-------------|
+| `url` | string | 下载 URL(无更新则为空) |
+| `version` | string | 可用版本 |
+| `checksum` | string | SHA256 校验和 |
+| `sessionKey` | string | 加密会话密钥 |
+| `error` | string | 检查失败时的错误信息 |
+| `message` | string | 服务器消息 |
+
+## 渠道管理
+
+### setChannel(options)
+
+将设备分配到指定渠道。
+
+```typescript
+await updater.setChannel({ channel: 'beta' });
+```
+
+### unsetChannel(options)
+
+移除渠道分配并使用默认渠道。
+
+```typescript
+await updater.unsetChannel();
+```
+
+### getChannel()
+
+获取当前渠道分配。
+
+```typescript
+const channel = await updater.getChannel();
+// { channel: 'production', status: 'set' }
+```
+
+### listChannels()
+
+列出该应用的所有可用渠道。
+
+```typescript
+const channels = await updater.listChannels();
+// ['production', 'beta', 'staging']
+```
+
+## 延迟条件
+
+控制已下载更新何时应用。
+
+### setMultiDelay(options)
+
+设置在应用更新前必须满足的条件。
+
+```typescript
+// 等待应用进入后台
+await updater.setMultiDelay({
+  delayConditions: [{ kind: 'background' }]
+});
+
+// 等待到指定日期
+await updater.setMultiDelay({
+  delayConditions: [{ kind: 'date', value: '2024-12-25T00:00:00Z' }]
+});
+
+// 等待应用被杀死并重启
+await updater.setMultiDelay({
+  delayConditions: [{ kind: 'kill' }]
+});
+
+// 多个条件(全部满足才应用)
+await updater.setMultiDelay({
+  delayConditions: [
+    { kind: 'background' },
+    { kind: 'date', value: '2024-12-25T00:00:00Z' }
+  ]
+});
+```
+
+**延迟条件类型:**
+| 类型 | 值 | 描述 |
+|------|-------|-------------|
+| `background` | 可选时长(ms) | 等待应用进入后台 |
+| `kill` | - | 等待应用被杀死并重启 |
+| `date` | ISO 日期字符串 | 等待到指定日期/时间 |
+| `nativeVersion` | 版本字符串 | 等待原生应用更新 |
+
+### cancelDelay()
+
+清除所有延迟条件,并在下次检查时立即应用更新。
+
+```typescript
+await updater.cancelDelay();
+```
+
+## 设备标识
+
+### getDeviceId()
+
+获取唯一设备标识。
+
+```typescript
+const deviceId = await updater.getDeviceId();
+// 'uuid-xxxx-xxxx-xxxx'
+```
+
+### setCustomId(options)
+
+为设备设置自定义标识(用于分析)。
+
+```typescript
+await updater.setCustomId({ customId: 'user-123' });
+```
+
+## 配置
+
+### setUpdateUrl(options)
+
+在运行时更改更新服务器 URL。
+
+```typescript
+await updater.setUpdateUrl({ url: 'https://my-server.com/updates' });
+```
+
+<Aside>
+  需要在构造函数选项中设置 `allowModifyUrl: true`。
+</Aside>
+
+### setStatsUrl(options)
+
+更改统计上报 URL。
+
+```typescript
+await updater.setStatsUrl({ url: 'https://my-server.com/stats' });
+```
+
+### setChannelUrl(options)
+
+更改渠道管理 URL。
+
+```typescript
+await updater.setChannelUrl({ url: 'https://my-server.com/channel' });
+```
+
+### setAppId(options)
+
+在运行时更改 App ID。
+
+```typescript
+await updater.setAppId({ appId: 'com.example.newapp' });
+```
+
+<Aside>
+  需要在构造函数选项中设置 `allowModifyAppId: true`。
+</Aside>
+
+### getAppId()
+
+获取当前 App ID。
+
+```typescript
+const appId = await updater.getAppId();
+```
+
+## 调试
+
+### setDebugMenu(options)
+
+启用或禁用调试菜单。
+
+```typescript
+await updater.setDebugMenu({ enabled: true });
+```
+
+### isDebugMenuEnabled()
+
+检查调试菜单是否启用。
+
+```typescript
+const enabled = await updater.isDebugMenuEnabled();
+```
+
+## 事件
+
+使用 `addListener` 监听更新事件:
+
+```typescript
+updater.addListener('eventName', (event) => {
+  // Handle event
+});
+```
+
+### 可用事件
+
+| 事件 | 载荷 | 描述 |
+|-------|---------|-------------|
+| `download` | `{ percent, status }` | 下载进度更新 |
+| `updateAvailable` | `{ bundle }` | 有新更新可用 |
+| `noNeedUpdate` | `{ message }` | 已是最新版本 |
+| `downloadComplete` | `{ bundle }` | 下载完成 |
+| `downloadFailed` | `{ bundle, error }` | 下载失败 |
+| `breakingAvailable` | `{ bundle }` | 有不兼容更新可用(需要原生更新) |
+| `updateFailed` | `{ bundle, reason }` | 更新安装失败 |
+| `appReloaded` | `{}` | 应用已重载 |
+| `appReady` | `{}` | 已调用 `notifyAppReady()` |
+
+### 示例:完整事件处理
+
+```typescript
+// 进度跟踪
+updater.addListener('download', (event) => {
+  updateProgressBar(event.percent);
+});
+
+// 更新可用通知
+updater.addListener('updateAvailable', (event) => {
+  showNotification(`Update ${event.bundle.version} available!`);
+});
+
+// 处理完成
+updater.addListener('downloadComplete', async (event) => {
+  // 排队下次重启应用
+  await updater.next({ id: event.bundle.id });
+  showNotification('Update will apply on next restart');
+});
+
+// 处理失败
+updater.addListener('updateFailed', (event) => {
+  console.error('Update failed:', event.reason);
+  reportError(event);
+});
+```
+
+## 构造函数选项
+
+`ElectronUpdater` 的完整配置选项:
+
+```typescript
+const updater = new ElectronUpdater({
+  // Required
+  appId: 'com.example.app',
+
+  // Version override
+  version: '1.0.0', // Override builtin version detection
+
+  // Server URLs
+  updateUrl: 'https://plugin.capgo.app/updates',
+  channelUrl: 'https://plugin.capgo.app/channel_self',
+  statsUrl: 'https://plugin.capgo.app/stats',
+
+  // Behavior
+  autoUpdate: true,           // Enable automatic update checks
+  appReadyTimeout: 10000,     // Milliseconds before rollback (default: 10000)
+  autoDeleteFailed: true,     // Auto-delete failed bundles
+  autoDeletePrevious: true,   // Auto-delete old bundles
+  resetWhenUpdate: true,      // Reset to builtin on native update
+
+  // Channels
+  defaultChannel: 'production',
+
+  // Direct Update Mode
+  directUpdate: false,        // 'atInstall' | 'onLaunch' | 'always' | false
+
+  // Security
+  publicKey: '...',           // RSA public key for E2E encryption
+
+  // Dynamic Configuration
+  allowModifyUrl: false,      // Allow runtime URL changes
+  allowModifyAppId: false,    // Allow runtime App ID changes
+  persistCustomId: false,     // Persist custom ID across updates
+  persistModifyUrl: false,    // Persist URL changes
+
+  // Debug
+  debugMenu: false,           // Enable debug menu (Ctrl+Shift+D)
+  disableJSLogging: false,    // Disable console logs
+
+  // Periodic Updates
+  periodCheckDelay: 0,        // Seconds between auto-checks (0 = disabled, min 600)
+});
+```

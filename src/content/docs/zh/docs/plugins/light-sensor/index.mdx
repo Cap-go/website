@@ -1,0 +1,44 @@
+---
+title: "@capgo/capacitor-light-sensor"
+locale: zh
+description: 在 Capacitor 应用中访问设备环境光传感器,测量照度。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "简介"
+hero:
+  tagline: 通过设备光线传感器以 lux 读取环境光,支持实时更新与可配置采样频率。需要 Capacitor 8+。
+  image:
+    file: ~public/icons/plugins/light-sensor.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/light-sensor/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-light-sensor/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="实时更新" icon="rocket">
+    可配置更新间隔,连续接收光照读数
+  </Card>
+  <Card title="事件驱动 API" icon="puzzle">
+    通过易用的事件监听器订阅光照变化
+  </Card>
+  <Card title="可配置采样" icon="setting">
+    可将更新频率设置为 200ms 或自定义间隔
+  </Card>
+  <Card title="省电" icon="sun">
+    按需启动与停止传感器以节省电量
+  </Card>
+  <Card title="全面文档" icon="open-book">
+    查看[文档](/docs/plugins/light-sensor/getting-started/)以在几分钟内掌握插件。
+  </Card>
+</CardGrid>

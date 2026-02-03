@@ -1,0 +1,44 @@
+---
+title: "@capgo/capacitor-brightness"
+locale: zh
+description: 通过该 Capacitor 插件在 iOS 与 Android 上以编程方式控制屏幕亮度。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "简介"
+hero:
+  tagline: 以编程方式调整屏幕亮度,支持应用级与系统级亮度控制。需要 Capacitor 8+。
+  image:
+    file: ~public/icons/plugins/brightness.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/brightness/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-brightness/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="简单 API" icon="rocket">
+    通过直观的方法获取与设置亮度
+  </Card>
+  <Card title="跨平台" icon="puzzle">
+    适用于 iOS、Android 与 Web 平台
+  </Card>
+  <Card title="系统级控制" icon="setting">
+    Android 支持系统级亮度设置
+  </Card>
+  <Card title="自动模式" icon="sun">
+    在 Android 上切换自动与手动亮度模式
+  </Card>
+  <Card title="全面文档" icon="open-book">
+    查看[文档](/docs/plugins/brightness/getting-started/)以在几分钟内掌握插件。
+  </Card>
+</CardGrid>

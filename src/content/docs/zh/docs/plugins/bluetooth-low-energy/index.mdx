@@ -1,0 +1,47 @@
+---
+title: "@capgo/capacitor-bluetooth-low-energy"
+locale: zh
+description: 面向 Capacitor 的完整 BLE 插件,支持扫描、连接、读写与通知。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "简介"
+hero:
+  tagline: 功能齐全的低功耗蓝牙插件,可在 iOS、Android 与 Web 上扫描、连接并与 BLE 外设通信。
+  image:
+    file: ~public/icons/plugins/bluetooth-low-energy.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/bluetooth-low-energy/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-bluetooth-low-energy/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="完整 BLE 支持" icon="rocket">
+    扫描、连接、读取、写入并接收 BLE 设备通知
+  </Card>
+  <Card title="外设模式" icon="setting">
+    作为 BLE 服务器并广播服务(Android/iOS)
+  </Card>
+  <Card title="跨平台" icon="puzzle">
+    适用于 iOS、Android 与 Web(Chrome Web Bluetooth API)
+  </Card>
+  <Card title="后台支持" icon="star">
+    Android 前台服务,iOS 后台模式
+  </Card>
+  <Card title="服务发现" icon="magnifier">
+    自动发现服务、特征与描述符
+  </Card>
+  <Card title="全面文档" icon="open-book">
+    查看[文档](/docs/plugins/bluetooth-low-energy/getting-started/)以在几分钟内掌握插件。
+  </Card>
+</CardGrid>

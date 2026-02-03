@@ -1,0 +1,294 @@
+---
+title: 开始使用
+description: 了解如何安装并使用 Keep Awake 插件,防止 Capacitor 应用中的屏幕变暗。
+sidebar:
+  order: 2
+locale: zh
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-keep-awake" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步原生项目**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 平台设置
+
+### iOS
+
+开箱即用。使用 `UIApplication.shared.isIdleTimerDisabled` 控制屏幕休眠。
+
+### Android
+
+开箱即用。使用 `WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON` 标志。无需权限。
+
+### Web
+
+在支持 Screen Wake Lock API 的现代浏览器中可用。先调用 `isSupported()` 检查当前浏览器是否支持。
+
+## 基本用法
+
+导入插件并使用其方法控制屏幕唤醒锁:
+
+```typescript
+import { KeepAwake } from '@capgo/capacitor-keep-awake';
+
+// 检查是否支持 keep awake
+const checkSupport = async () => {
+  const { isSupported } = await KeepAwake.isSupported();
+  console.log('Keep awake supported:', isSupported);
+};
+
+// 保持屏幕常亮
+const keepScreenOn = async () => {
+  await KeepAwake.keepAwake();
+  console.log('Screen will stay on');
+};
+
+// 允许屏幕休眠
+const allowScreenSleep = async () => {
+  await KeepAwake.allowSleep();
+  console.log('Screen can now sleep');
+};
+
+// 检查当前状态
+const checkStatus = async () => {
+  const { isKeptAwake } = await KeepAwake.isKeptAwake();
+  console.log('Screen is kept awake:', isKeptAwake);
+};
+```
+
+## API 参考
+
+### keepAwake()
+
+防止设备屏幕变暗/休眠。
+
+```typescript
+await KeepAwake.keepAwake();
+```
+
+### allowSleep()
+
+允许设备屏幕变暗(禁用 keep awake)。
+
+```typescript
+await KeepAwake.allowSleep();
+```
+
+### isSupported()
+
+检查当前平台是否支持 keep awake 功能。
+
+```typescript
+const { isSupported } = await KeepAwake.isSupported();
+// Returns: { isSupported: boolean }
+```
+
+### isKeptAwake()
+
+检查设备当前是否处于保持唤醒状态。
+
+```typescript
+const { isKeptAwake } = await KeepAwake.isKeptAwake();
+// Returns: { isKeptAwake: boolean }
+```
+
+### getPluginVersion()
+
+获取原生插件版本。
+
+```typescript
+const { version } = await KeepAwake.getPluginVersion();
+// Returns: { version: string }
+```
+
+## 完整示例 - 视频播放器
+
+```typescript
+import { KeepAwake } from '@capgo/capacitor-keep-awake';
+
+export class VideoPlayerService {
+  private isPlaying = false;
+
+  async init() {
+    const { isSupported } = await KeepAwake.isSupported();
+    if (!isSupported) {
+      console.warn('Keep awake not supported on this platform');
+    }
+  }
+
+  async onVideoPlay() {
+    this.isPlaying = true;
+    try {
+      await KeepAwake.keepAwake();
+      console.log('Screen will stay on during playback');
+    } catch (error) {
+      console.error('Failed to keep screen awake:', error);
+    }
+  }
+
+  async onVideoPause() {
+    this.isPlaying = false;
+    try {
+      await KeepAwake.allowSleep();
+      console.log('Screen can now dim');
+    } catch (error) {
+      console.error('Failed to allow sleep:', error);
+    }
+  }
+
+  async onVideoEnd() {
+    this.isPlaying = false;
+    await KeepAwake.allowSleep();
+  }
+
+  // 组件/页面销毁时调用
+  async cleanup() {
+    if (this.isPlaying) {
+      await KeepAwake.allowSleep();
+    }
+  }
+}
+```
+
+## 完整示例 - 导航应用
+
+```typescript
+import { KeepAwake } from '@capgo/capacitor-keep-awake';
+import { App } from '@capacitor/app';
+
+export class NavigationService {
+  private isNavigating = false;
+
+  async startNavigation() {
+    this.isNavigating = true;
+
+    // 导航期间保持屏幕常亮
+    await KeepAwake.keepAwake();
+
+    // 处理应用进入后台
+    App.addListener('appStateChange', async ({ isActive }) => {
+      if (!isActive && this.isNavigating) {
+        // 应用进入后台 - 屏幕管理由系统处理
+      } else if (isActive && this.isNavigating) {
+        // 返回前台 - 确保屏幕常亮
+        await KeepAwake.keepAwake();
+      }
+    });
+  }
+
+  async stopNavigation() {
+    this.isNavigating = false;
+    await KeepAwake.allowSleep();
+  }
+}
+```
+
+## 完整示例 - 演示模式
+
+```typescript
+import { KeepAwake } from '@capgo/capacitor-keep-awake';
+
+export class PresentationMode {
+  private isPresenting = false;
+
+  async togglePresentationMode() {
+    const { isSupported } = await KeepAwake.isSupported();
+
+    if (!isSupported) {
+      alert('Presentation mode not available on this device');
+      return;
+    }
+
+    const { isKeptAwake } = await KeepAwake.isKeptAwake();
+
+    if (isKeptAwake) {
+      await KeepAwake.allowSleep();
+      this.isPresenting = false;
+      console.log('Presentation mode OFF');
+    } else {
+      await KeepAwake.keepAwake();
+      this.isPresenting = true;
+      console.log('Presentation mode ON');
+    }
+  }
+
+  async forceExit() {
+    if (this.isPresenting) {
+      await KeepAwake.allowSleep();
+      this.isPresenting = false;
+    }
+  }
+}
+```
+
+## 最佳实践
+
+1. **先检查支持情况**
+   使用前务必确认是否支持 keep awake:
+   ```typescript
+   const { isSupported } = await KeepAwake.isSupported();
+   if (!isSupported) {
+     // 友好处理 - 该平台不支持此功能
+   }
+   ```
+
+2. **结束后允许休眠**
+   当功能不再需要时,务必调用 `allowSleep()`:
+   ```typescript
+   // 在 cleanup/destroy 生命周期中
+   async ngOnDestroy() {
+     await KeepAwake.allowSleep();
+   }
+   ```
+
+3. **优雅处理错误**
+   ```typescript
+   try {
+     await KeepAwake.keepAwake();
+   } catch (error) {
+     console.error('Failed to keep screen awake:', error);
+   }
+   ```
+
+4. **考虑电量影响**
+   常亮会加速耗电。仅在必要时启用,不需要时及时关闭。
+
+5. **处理应用生命周期**
+   应用前后台切换时注意管理唤醒锁状态。
+
+## 使用场景
+
+- **视频播放器** - 播放时保持屏幕常亮
+- **导航应用** - 逐段导航时防止变暗
+- **游戏** - 游戏过程中保持屏幕激活
+- **演示** - 幻灯片播放期间保持常亮
+- **阅读应用** - 阅读时保持屏幕亮起
+- **烹饪应用** - 烹饪时保持菜谱可见
+- **健身应用** - 训练过程中保持指引可见
+- **自助终端模式** - 防止空闲屏幕变暗
+
+## 平台说明
+
+### iOS
+- 使用 `UIApplication.shared.isIdleTimerDisabled`
+- 支持 Capacitor 支持的所有 iOS 版本
+- 无需权限
+
+### Android
+- 使用 `WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON`
+- 支持 Capacitor 支持的所有 Android 版本
+- 无需权限
+
+### Web
+- 使用 Screen Wake Lock API (`navigator.wakeLock`)
+- 需要安全上下文(HTTPS)
+- 并非所有浏览器都支持 - 使用 `isSupported()` 检查
+- 当标签页不可见时,浏览器可能释放唤醒锁
