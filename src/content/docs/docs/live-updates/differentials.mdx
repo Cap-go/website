@@ -37,7 +37,7 @@ To enable Delta (manifest) updates for your Capgo app, simply use the `--delta` 
 npx @capgo/cli@latest bundle upload --delta
 ```
 
-If `directUpdate` is enabled in your `capacitor.config`, the CLI detects it. In non-interactive environments it sends Delta (manifest) updates automatically, and in interactive environments it prompts you to confirm before uploading.
+If `directUpdate` is enabled in your `capacitor.config`, the CLI detects it. In non-interactive environments it sends Delta (manifest) updates automatically, and in interactive environments it prompts you to confirm before uploading. Use `--no-delta` to force a full bundle upload.
 
 ## Enforcing Delta (Manifest) Updates
 

@@ -171,6 +171,7 @@ Optionally, you can give:
 * `--timeout <timeout>` Timeout for the upload process in seconds.
 * `--delta` Uploads Delta (manifest) files alongside the full bundle.
 * `--delta-only` Uploads only Delta (manifest) updates, skipping the full bundle.
+* `--no-delta` Disables Delta (manifest) uploads (useful if `directUpdate` is enabled but you want a full bundle).
 * `--tus` Upload the bundle using tus protocol.
 * `--multipart` Uses multipart protocol to upload data to S3, Deprecated, use TUS instead.
 * `--encrypted-checksum <encryptedChecksum>` An encrypted checksum (signature). Used only when uploading an external bundle.

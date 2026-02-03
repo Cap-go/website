@@ -63,6 +63,7 @@ npx @capgo/cli@latest bundle upload com.example.app --path ./dist --channel prod
 | **--tus-chunk-size** | <code>string</code> | Chunk size in bytes for TUS resumable uploads (default: auto) |
 | **--delta** | <code>boolean</code> | Upload Delta (manifest) updates to reduce bandwidth |
 | **--delta-only** | <code>boolean</code> | Upload only Delta (manifest) updates without full bundle (useful for large apps) |
+| **--no-delta** | <code>boolean</code> | Disable Delta (manifest) uploads (useful if `directUpdate` is enabled but you want a full bundle) |
 | **--partial** | <code>boolean</code> | [DEPRECATED] Alias for --delta |
 | **--partial-only** | <code>boolean</code> | [DEPRECATED] Alias for --delta-only |
 | **--encrypted-checksum** | <code>string</code> | An encrypted checksum (signature). Used only when uploading an external bundle. |

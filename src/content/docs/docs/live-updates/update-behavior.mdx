@@ -103,7 +103,7 @@ When using `directUpdate`, we **strongly recommend** enabling [Delta (manifest) 
 - **Better mobile experience**: Users on cellular networks or slower connections won't face long wait times
 - **Lower bandwidth usage**: Only changed files are downloaded, saving data for both you and your users
 
-When `directUpdate` is enabled in your `capacitor.config`, the CLI detects it. In non-interactive environments it sends Delta (manifest) updates automatically, and in interactive environments it prompts you to confirm before uploading.
+When `directUpdate` is enabled in your `capacitor.config`, the CLI detects it. In non-interactive environments it sends Delta (manifest) updates automatically, and in interactive environments it prompts you to confirm before uploading. Use `--no-delta` to force a full bundle upload.
 
 To enable Delta (manifest) updates, simply use the `--delta` flag when uploading bundles:
 ```shell
