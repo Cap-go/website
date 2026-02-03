@@ -33,7 +33,7 @@
       },
       "devDependencies": {
         "@astrojs/check": "^0.9.6",
-        "@capgo/seo-checker": "^0.0.9",
+        "@capgo/seo-checker": "^0.0.13",
         "@dotenvx/dotenvx": "^1.51.4",
         "@iconify-json/carbon": "^1.2.15",
         "@iconify-json/twemoji": "^1.2.5",
@@ -148,7 +148,7 @@
 
     "@braintree/sanitize-url": ["@braintree/sanitize-url@7.1.1", "", {}, "sha512-i1L7noDNxtFyL5DmZafWy1wRVhGehQmzZaz1HiN5e7iylJMSZR7ekOV7NsIqa5qBldlLrsKv4HbgFUVlQrz8Mw=="],
 
-    "@capgo/seo-checker": ["@capgo/seo-checker@0.0.9", "", { "dependencies": { "ajv": "^8.17.1", "cheerio": "^1.0.0", "schema-org-json-schemas": "^2.1.4" }, "bin": { "seo-checker": "dist/cli.js" } }, "sha512-jFjEmKmyJFHm4UDzoMgh8S1OYfDtpG/Qjm9odejXH4A7IFHJltu48MsZmrZ7AdGDscJkhQBwltBTqYN637Bp/w=="],
+    "@capgo/seo-checker": ["@capgo/seo-checker@0.0.13", "", { "dependencies": { "ajv": "^8.17.1", "cheerio": "^1.0.0", "schema-org-json-schemas": "^2.1.4" }, "bin": { "seo-checker": "dist/cli.js" } }, "sha512-A5Een5f10LwSYOdf8ivRe9z7rtH1HlFIMUYX4YyYeaMY46aYe5Qu5RiA9leJMYHOg1cNvUDGZ/7P8TuHGyQSiA=="],
 
     "@capsizecss/unpack": ["@capsizecss/unpack@3.0.1", "", { "dependencies": { "fontkit": "^2.0.2" } }, "sha512-8XqW8xGn++Eqqbz3e9wKuK7mxryeRjs4LOHLxbh2lwKeSbuNR4NFifDZT4KzvjU6HMOPbiNTsWpniK5EJfTWkg=="],
 
