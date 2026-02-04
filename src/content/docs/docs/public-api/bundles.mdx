@@ -1,6 +1,6 @@
 ---
 title: "Bundles"
-description: "Detailed guide for managing Capgo Bundles, covering listing, deleting, versioning, and storage optimization for app update packages."
+description: "Detailed guide for managing Capgo Bundles, covering listing, deleting, bundle (version) management, and storage optimization for app update packages."
 sidebar:
   order: 8
 ---
@@ -9,8 +9,8 @@ Bundles are the core update packages in Capgo. Each bundle contains the web asse
 
 ## Understanding Bundles
 
-A bundle represents a specific version of your app's web content and includes:
-- **Version**: Semantic version number of the bundle
+A bundle represents a specific bundle (version) of your app's web content and includes:
+- **Bundle (version)**: Semantic version number for the bundle
 - **Checksum**: Unique hash to verify bundle integrity
 - **Storage Info**: Details about where and how the bundle is stored
 - **Native Requirements**: Minimum native app version requirements
@@ -39,6 +39,8 @@ npm install adm-zip @tomasklaen/checksum
 ```
 
 #### Create Zip Bundle with JavaScript (Same as Capgo CLI)
+
+Note: In the examples below, `version` refers to the bundle (version) name used by the API.
 
 ```javascript
 const fs = require('node:fs');
@@ -172,7 +174,7 @@ Register the external bundle with Capgo using direct API calls:
 async function registerWithCapgo(appId, version, bundleUrl, checksum, apiKey) {
   const fetch = require('node-fetch');
   
-  // Create bundle version
+  // Create bundle (version)
   const response = await fetch('https://api.capgo.app/bundle/', {
     method: 'POST',
     headers: {
@@ -203,7 +205,7 @@ async function registerWithCapgo(appId, version, bundleUrl, checksum, apiKey) {
 | Parameter | Description | Required |
 |-----------|-------------|----------|
 | `app_id` | Your app identifier | Yes |
-| `version` | Semantic version (e.g., "1.2.3") | Yes |
+| `version` | Bundle (version) semantic version (e.g., "1.2.3") | Yes |
 | `external_url` | **Publicly accessible** HTTPS URL where bundle can be downloaded (no auth required) | Yes |
 | `checksum` | SHA256 checksum of the zip file | Yes |
 
@@ -334,10 +336,10 @@ main();
 
 ## Best Practices
 
-1. **Version Management**: Use semantic versioning consistently
+1. **Bundle (version) Management**: Use semantic versioning consistently
 2. **Storage Optimization**: Remove unused bundles periodically
-3. **Version Compatibility**: Set appropriate minimum native version requirements
-4. **Backup Strategy**: Maintain backups of critical bundle versions
+3. **Bundle (version) Compatibility**: Set appropriate minimum native version requirements
+4. **Backup Strategy**: Maintain backups of critical bundles (versions)
 
 ## Endpoints
 
@@ -513,7 +515,7 @@ Update bundle metadata such as link and comment information.
 ```typescript
 interface UpdateMetadataBody {
   app_id: string
-  version_id: number
+  version_id: number // bundle (version) id
   link?: string
   comment?: string
 }
@@ -546,14 +548,14 @@ curl -X POST \
 
 `https://api.capgo.app/bundle/`
 
-Set a bundle to a specific channel. This links a bundle version to a channel for distribution.
+Set a bundle to a specific channel. This links a bundle (version) to a channel for distribution.
 
 #### Request Body
 
 ```typescript
 interface SetChannelBody {
   app_id: string
-  version_id: number
+  version_id: number // bundle (version) id
   channel_id: number
 }
 ```
@@ -592,7 +594,7 @@ Common error scenarios and their responses:
   "status": "KO"
 }
 
-// Invalid version format
+// Invalid bundle (version) format
 {
   "error": "Invalid version format",
   "status": "KO"
@@ -613,9 +615,9 @@ Common error scenarios and their responses:
 
 ## Common Use Cases
 
-1. **Cleanup Old Versions**
+1. **Cleanup Old Bundles (Versions)**
 ```typescript
-// Delete outdated beta versions
+// Delete outdated beta bundles (versions)
 {
   "app_id": "app_123",
   "version": "1.0.0-beta.1"
@@ -634,5 +636,5 @@ Common error scenarios and their responses:
 
 1. **Retention Policy**: Define how long to keep old bundles
 2. **Size Management**: Monitor bundle sizes and storage usage
-3. **Backup Strategy**: Consider backing up critical versions
+3. **Backup Strategy**: Consider backing up critical bundles (versions)
 4. **Cost Optimization**: Remove unnecessary bundles to optimize storage costs 
