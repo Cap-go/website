@@ -90,6 +90,15 @@ const repositories = [
       </p>
     </div>
 
+    <h2>{m.bug_bounty_conduct_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.bug_bounty_conduct_intro({}, { locale: Astro.locals.locale })}</p>
+    <ul>
+      <li>{m.bug_bounty_conduct_rule_1({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.bug_bounty_conduct_rule_2({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.bug_bounty_conduct_rule_3({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.bug_bounty_conduct_rule_4({}, { locale: Astro.locals.locale })}</li>
+    </ul>
+
     <h2>{m.bug_bounty_how_to_report_title({}, { locale: Astro.locals.locale })}</h2>
     <ol>
       <li>{m.bug_bounty_how_to_report_step_1({}, { locale: Astro.locals.locale })}</li>
