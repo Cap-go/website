@@ -3035,5 +3035,11 @@
   "appflow_support_open_title": "Open source plugins. Optional paid support.",
   "appflow_support_open_desc": "Every Capgo plugin is open source, so you can audit, fork, and self-host if you want. If you need guaranteed response times or migration help, paid support is optional - <a href=\"{url}\" class=\"text-emerald-300 hover:underline\">see support options</a>.",
   "appflow_enterprise_help_title": "Enterprise plugins and paid help (optional)",
-  "appflow_enterprise_help_desc": "If your Appflow stack includes Ionic enterprise plugins, use the <a href=\"{pluginsUrl}\" class=\"text-emerald-300 hover:underline\">Ionic Enterprise Plugins guide</a>. Paid support is available on demand - <a href=\"{supportUrl}\" class=\"text-emerald-300 hover:underline\">see support options</a>. Need a hands-on migration? We offer paid migration services - <a href=\"{migrationUrl}\" class=\"text-emerald-300 hover:underline\">learn more</a>."
+  "appflow_enterprise_help_desc": "If your Appflow stack includes Ionic enterprise plugins, use the <a href=\"{pluginsUrl}\" class=\"text-emerald-300 hover:underline\">Ionic Enterprise Plugins guide</a>. Paid support is available on demand - <a href=\"{supportUrl}\" class=\"text-emerald-300 hover:underline\">see support options</a>. Need a hands-on migration? We offer paid migration services - <a href=\"{migrationUrl}\" class=\"text-emerald-300 hover:underline\">learn more</a>.",
+  "subprocessors": "Subprocessors",
+  "subprocessors_description": "List of third-party subprocessors used to deliver Capgo.",
+  "subprocessors_title": "Subprocessors",
+  "subprocessors_intro": "Capgo relies on trusted third-party subprocessors to provide, secure, and improve the service. The list below describes the vendors and how they are used.",
+  "subprocessors_table_vendor": "Subprocessor",
+  "subprocessors_table_purpose": "Purpose"
 }

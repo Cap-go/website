@@ -1,0 +1,88 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import * as m from '@/paraglide/messages'
+import { defaultLocale } from '@/services/locale'
+
+const locale = Astro.locals.locale
+const title = [Astro.locals.runtimeConfig.public.brand, m.subprocessors({}, { locale })].join(' | ')
+const description = m.subprocessors_description({}, { locale })
+
+const content = { title, description }
+
+const subprocessors = [
+  {
+    name: 'Supabase',
+    purpose: 'Primary database',
+  },
+  {
+    name: 'Cloudflare',
+    purpose: 'Edge CDN, Workers runtime, Durable Objects, and security services',
+  },
+  {
+    name: 'PlanetScale',
+    purpose: 'Read replicas for database scaling',
+  },
+  {
+    name: 'GitHub',
+    purpose: 'Source code hosting',
+  },
+  {
+    name: 'CodeRabbit',
+    purpose: 'Automated code review',
+  },
+  {
+    name: 'SonarCloud',
+    purpose: 'Static code analysis and quality checks',
+  },
+  {
+    name: 'Sentry',
+    purpose: 'Error monitoring and performance tracking',
+  },
+  {
+    name: 'Stripe',
+    purpose: 'Payments and billing',
+  },
+  {
+    name: 'Bento',
+    purpose: 'Email marketing and lifecycle messaging',
+  },
+  {
+    name: 'Depot',
+    purpose: 'Build acceleration and caching',
+  },
+]
+---
+
+<Layout content={content}>
+  <div class="py-8 m-auto prose-sm prose prose-invert">
+    {
+      locale !== defaultLocale && (
+        <span class="text-xs">
+          Note: This is an automatically translated page from its English source. Only the English version should be used for legal actions. Please refer to the English source for
+          legal matters.
+        </span>
+      )
+    }
+    <h1>{m.subprocessors_title({}, { locale })}</h1>
+    <p><em>{m.last_update({}, { locale })}: February 4, 2026</em></p>
+    <p>{m.subprocessors_intro({}, { locale })}</p>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>{m.subprocessors_table_vendor({}, { locale })}</th>
+            <th>{m.subprocessors_table_purpose({}, { locale })}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {subprocessors.map((item) => (
+            <tr>
+              <td>{item.name}</td>
+              <td>{item.purpose}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</Layout>
