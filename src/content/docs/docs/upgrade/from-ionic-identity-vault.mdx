@@ -1,0 +1,36 @@
+---
+title: Migrate from Ionic Identity Vault
+description: Replace Ionic Identity Vault with Capgo Native Biometric and secure storage plugins.
+sidebar:
+  order: 11
+---
+
+Ionic Identity Vault combines biometric gating with encrypted storage. Capgo replaces that stack with Native Biometric for user verification plus Fast SQL or Data Storage SQLite for encrypted persistence.
+
+## Capgo replacements at a glance
+
+| Ionic enterprise plugin | Capgo replacement | Migration guide |
+| --- | --- | --- |
+| Secure Storage | [@capgo/capacitor-fast-sql](/docs/plugins/fast-sql/) or [@capgo/capacitor-data-storage-sqlite](/docs/plugins/data-storage-sqlite/) | [Secure Storage migration](/docs/upgrade/from-ionic-secure-storage) |
+| Auth Connect | [@capgo/capacitor-social-login](/docs/plugins/social-login/) | [Auth Connect migration](/docs/upgrade/from-ionic-auth-connect) |
+| Identity Vault | [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) | You are here |
+
+## Migration steps
+
+1. **Install Native Biometric** and sync native code.
+
+```bash
+npm install @capgo/capacitor-native-biometric
+npx cap sync
+```
+
+2. **Pick a secure storage plugin** (Fast SQL or Data Storage SQLite) to persist tokens or secrets.
+3. **Gate sensitive reads/writes** with a biometric prompt before accessing the stored data.
+4. **Migrate stored secrets** on first launch by reading from Identity Vault and writing them into the new SQLite store.
+5. **Remove Ionic Identity Vault** from your dependencies and native configuration.
+
+## Next steps
+
+- [Native Biometric getting started](/docs/plugins/native-biometric/getting-started/)
+- [Secure Storage migration](/docs/upgrade/from-ionic-secure-storage)
+- [Auth Connect migration](/docs/upgrade/from-ionic-auth-connect)

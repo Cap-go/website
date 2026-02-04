@@ -1,0 +1,36 @@
+---
+title: Migrate from Ionic Auth Connect
+description: Move from Ionic Auth Connect to Capgo Social Login with OAuth2 support.
+sidebar:
+  order: 10
+---
+
+Ionic Auth Connect handles enterprise OAuth and OIDC flows. Capgo's Social Login plugin provides provider-native sign-in for Google, Apple, Facebook, Twitter, and generic OAuth2 providers.
+
+## Capgo replacements at a glance
+
+| Ionic enterprise plugin | Capgo replacement | Migration guide |
+| --- | --- | --- |
+| Secure Storage | [@capgo/capacitor-fast-sql](/docs/plugins/fast-sql/) or [@capgo/capacitor-data-storage-sqlite](/docs/plugins/data-storage-sqlite/) | [Secure Storage migration](/docs/upgrade/from-ionic-secure-storage) |
+| Auth Connect | [@capgo/capacitor-social-login](/docs/plugins/social-login/) | You are here |
+| Identity Vault | [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) | [Identity Vault migration](/docs/upgrade/from-ionic-identity-vault) |
+
+## Migration steps
+
+1. **Inventory your providers** (Google, Apple, Facebook, Azure AD, Auth0, Okta, etc.) and the redirect URLs you currently use.
+2. **Install Social Login** and sync native code.
+
+```bash
+npm install @capgo/capacitor-social-login
+npx cap sync
+```
+
+3. **Configure each provider** using the Social Login docs (client IDs, bundle IDs, OAuth redirect URIs).
+4. **Update your auth flow** to call Social Login provider methods instead of Auth Connect. Store refresh tokens in a secure store (Fast SQL or Data Storage SQLite) if you rely on long-lived sessions.
+5. **Remove Ionic Auth Connect** from your dependencies and native configuration.
+
+## Next steps
+
+- [Social Login getting started](/docs/plugins/social-login/getting-started/)
+- [Secure Storage migration](/docs/upgrade/from-ionic-secure-storage)
+- [Identity Vault migration](/docs/upgrade/from-ionic-identity-vault)

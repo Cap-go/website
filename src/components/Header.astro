@@ -64,6 +64,12 @@ const totalStars = getTotalStars()
                 >
                   {m.plugins({}, { locale: Astro.locals.locale })}
                 </a>
+                <a
+                  href={getRelativeLocaleUrl(Astro.locals.locale, 'ionic-enterprise-plugins')}
+                  class="block px-4 py-2 text-sm text-gray-300 transition-colors hover:bg-gray-700 hover:text-white"
+                >
+                  {m.solutions_ionic_plugins_short({}, { locale: Astro.locals.locale })}
+                </a>
               </div>
             </div>
           </div>
@@ -201,6 +207,15 @@ const totalStars = getTotalStars()
                       </svg>
                       {m.solutions_beta_testing({}, { locale: Astro.locals.locale })}
                     </a>
+                    <a
+                      href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/ionic-enterprise-plugins')}
+                      class="flex gap-3 items-center px-2 py-2 text-sm text-gray-300 rounded-lg transition-colors hover:bg-gray-700 hover:text-white"
+                    >
+                      <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.104 0 2-.896 2-2V7a2 2 0 10-4 0v2c0 1.104.896 2 2 2zm6 0h-1V9a5 5 0 00-10 0v2H6a2 2 0 00-2 2v7a2 2 0 002 2h12a2 2 0 002-2v-7a2 2 0 00-2-2z" />
+                      </svg>
+                      {m.solutions_ionic_plugins_short({}, { locale: Astro.locals.locale })}
+                    </a>
                   </div>
                 </div>
               </div>
@@ -315,6 +330,12 @@ const totalStars = getTotalStars()
           >
             {m.plugins({}, { locale: Astro.locals.locale })}
           </a>
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'ionic-enterprise-plugins')}
+            class="block px-3 py-2 text-sm text-gray-400 rounded-md hover:text-white hover:bg-gray-600"
+          >
+            {m.solutions_ionic_plugins_short({}, { locale: Astro.locals.locale })}
+          </a>
         </div>
       </div>
       <!-- Solutions Section -->
@@ -404,6 +425,12 @@ const totalStars = getTotalStars()
             class="block px-3 py-2 text-sm text-gray-400 rounded-md hover:text-white hover:bg-gray-600"
           >
             {m.solutions_beta_testing({}, { locale: Astro.locals.locale })}
+          </a>
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/ionic-enterprise-plugins')}
+            class="block px-3 py-2 text-sm text-gray-400 rounded-md hover:text-white hover:bg-gray-600"
+          >
+            {m.solutions_ionic_plugins_short({}, { locale: Astro.locals.locale })}
           </a>
         </div>
       </div>
