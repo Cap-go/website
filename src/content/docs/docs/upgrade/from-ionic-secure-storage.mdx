@@ -1,0 +1,49 @@
+---
+title: Migrate from Ionic Secure Storage
+description: Replace Ionic Secure Storage with Capgo Fast SQL or Data Storage SQLite.
+sidebar:
+  order: 9
+---
+
+Ionic Secure Storage is an enterprise plugin for encrypted key-value data. Capgo provides two SQLite-based options depending on your data model and performance needs.
+
+## Capgo replacements at a glance
+
+| Ionic enterprise plugin | Capgo replacement | Migration guide |
+| --- | --- | --- |
+| Secure Storage | [@capgo/capacitor-fast-sql](/docs/plugins/fast-sql/) or [@capgo/capacitor-data-storage-sqlite](/docs/plugins/data-storage-sqlite/) | You are here |
+| Auth Connect | [@capgo/capacitor-social-login](/docs/plugins/social-login/) | [Auth Connect migration](/docs/upgrade/from-ionic-auth-connect) |
+| Identity Vault | [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) | [Identity Vault migration](/docs/upgrade/from-ionic-identity-vault) |
+
+## Choose your storage plugin
+
+- **Fast SQL**: Best for large datasets, sync workflows, or when you want full SQL control and high throughput.
+- **Data Storage SQLite**: Best for simple key-value storage with optional encryption and minimal setup.
+
+If you are unsure, start with Data Storage SQLite for key-value secrets and move to Fast SQL when you need structured data or high-volume writes.
+
+## Migration steps
+
+1. **Pick the storage plugin** that matches your data model.
+2. **Install the plugin** and sync native code.
+
+```bash
+# Option A: Fast SQL
+npm install @capgo/capacitor-fast-sql
+
+# Option B: Data Storage SQLite
+npm install @capgo/capacitor-data-storage-sqlite
+
+npx cap sync
+```
+
+3. **Update storage calls** to the new API surface. Use the Fast SQL or Data Storage SQLite docs for the exact read/write methods.
+4. **Migrate existing data** on first launch by reading values from Ionic Secure Storage and writing them into the new SQLite store.
+5. **Remove Ionic Secure Storage** from your dependencies and native configuration.
+
+## Next steps
+
+- [Fast SQL getting started](/docs/plugins/fast-sql/getting-started/)
+- [Data Storage SQLite getting started](/docs/plugins/data-storage-sqlite/getting-started/)
+- [Auth Connect migration](/docs/upgrade/from-ionic-auth-connect)
+- [Identity Vault migration](/docs/upgrade/from-ionic-identity-vault)

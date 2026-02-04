@@ -14,6 +14,9 @@ const content = {
 }
 
 const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-appflow-to-capgo/')
+const enterprisePluginsUrl = getRelativeLocaleUrl(locale, 'ionic-enterprise-plugins')
+const supportUrl = getRelativeLocaleUrl(locale, 'premium-support')
+const migrationServicesUrl = getRelativeLocaleUrl(locale, 'consulting')
 ---
 
 <Layout content={content}>
@@ -186,6 +189,20 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-appflo
           </div>
           <p class="text-gray-400 text-sm" set:html={m.appflow_migration_stuck({}, { locale })}></p>
         </div>
+      </div>
+
+      <!-- Enterprise Plugins & Paid Help -->
+      <div class="mb-16 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-8">
+        <h2 class="mb-4 text-2xl font-bold text-white sm:text-3xl">
+          {m.appflow_enterprise_help_title({}, { locale })}
+        </h2>
+        <p
+          class="text-gray-200 leading-relaxed"
+          set:html={m.appflow_enterprise_help_desc(
+            { pluginsUrl: enterprisePluginsUrl, supportUrl, migrationUrl: migrationServicesUrl },
+            { locale }
+          )}
+        ></p>
       </div>
 
       <!-- Testimonials -->
