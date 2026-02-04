@@ -43,6 +43,8 @@ For getting a specific app:
 
 #### Response Type
 
+Note: `last_version` refers to the last bundle (version) uploaded for the app.
+
 ```typescript
 interface App {
   app_id: string
@@ -50,7 +52,7 @@ interface App {
   default_upload_channel: string
   icon_url: string
   id: string | null
-  last_version: string | null
+  last_version: string | null // last bundle (version) name
   name: string | null
   owner_org: string
   retention: number

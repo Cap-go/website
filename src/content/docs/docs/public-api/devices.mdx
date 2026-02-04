@@ -1,11 +1,11 @@
 ---
 title: "Devices"
-description: "Docs for managing devices via Capgo API, covering tracking, versioning, and channel assignments for app installations."
+description: "Docs for managing devices via Capgo API, covering tracking, bundle (version) assignment, and channel management for app installations."
 sidebar:
   order: 7
 ---
 
-Devices represent individual installations of your app that are managed by Capgo. The Devices API allows you to track and manage devices, including their versions, channels, and update status.
+Devices represent individual installations of your app that are managed by Capgo. The Devices API allows you to track and manage devices, including their bundles (versions), channels, and update status.
 
 :::note[Data Retention]
 Device data is retained for **90 days** from the last device activity. Devices that haven't connected to Capgo within this period will be automatically removed from the system. Active devices are continuously tracked as they check for updates.
@@ -15,14 +15,14 @@ Device data is retained for **90 days** from the last device activity. Devices t
 
 Each device has unique characteristics and states:
 - **Platform**: iOS or Android
-- **Version**: Current bundle version and native build version
+- **Bundle (version)**: Current bundle (version) and native build version
 - **Environment**: Production or development, emulator or physical device
 - **Channel**: Current update channel assignment
 - **Custom ID**: Optional identifier for your own tracking purposes
 
 ## Best Practices
 
-1. **Version Tracking**: Monitor device versions to ensure update adoption
+1. **Bundle (version) Tracking**: Monitor device bundle (version) adoption to ensure update uptake
 2. **Channel Management**: Assign devices to appropriate channels based on testing needs
 3. **Environment Awareness**: Handle different environments (prod/dev/emulator) appropriately
 4. **Custom Identification**: Use custom IDs to integrate with your existing systems
@@ -33,7 +33,7 @@ Each device has unique characteristics and states:
 
 `https://api.capgo.app/device/`
 
-Link a device to a specific version or channel.
+Link a device to a specific bundle (version) or channel.
 
 #### Request Body
 
@@ -41,7 +41,7 @@ Link a device to a specific version or channel.
 interface DeviceLink {
   app_id: string
   device_id: string
-  version_id?: string // version name
+  version_id?: string // bundle (version) name
   channel?: string    // channel name
 }
 ```
@@ -111,8 +111,8 @@ interface Device {
   updated_at: string;
   device_id: string;
   custom_id: string;
-  version?: number;
-  version_name: string | null;
+  version?: number; // bundle (version) id
+  version_name: string | null; // bundle (version) name
   channel?: string;
   app_id: string;
   platform: "ios" | "android";
@@ -134,8 +134,8 @@ interface Device {
   updated_at: string;
   device_id: string;
   custom_id: string;
-  version?: number;
-  version_name: string | null;
+  version?: number; // bundle (version) id
+  version_name: string | null; // bundle (version) name
   channel?: string;
   app_id: string;
   platform: "ios" | "android";
@@ -245,7 +245,7 @@ Common error scenarios and their responses:
   "status": "KO"
 }
 
-// Invalid version
+// Invalid bundle (version)
 {
   "error": "Version not found",
   "status": "KO"
@@ -291,7 +291,7 @@ Common error scenarios and their responses:
 
 ## Tips for Device Management
 
-1. **Monitoring**: Regularly check device status and version distribution
+1. **Monitoring**: Regularly check device status and bundle (version) distribution
 2. **Testing**: Use custom IDs to identify test devices easily
 3. **Troubleshooting**: Track device updates and channel assignments
-4. **Version Control**: Monitor native app versions to ensure compatibility 
+4. **Native Version Control**: Monitor native app versions to ensure compatibility 

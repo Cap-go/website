@@ -1,6 +1,6 @@
 ---
 title: "Channels"
-description: "Guide to managing app update channels in Capgo, covering version control, platform targeting, and update policies."
+description: "Guide to managing app update channels in Capgo, covering bundle (version) control, platform targeting, and update policies."
 sidebar:
   order: 6
 ---
@@ -11,7 +11,7 @@ Channels are the core mechanism for managing app updates in Capgo. They allow yo
 
 A channel represents a distribution track for your app updates. Each channel can be configured with specific rules and constraints:
 
-- **Version Control**: Specify which version users receive
+- **Bundle (version) Control**: Specify which bundle (version) users receive
 - **Platform Targeting**: Target specific platforms (iOS/Android)
 - **Update Policies**: Control how updates are delivered
 - **Device Restrictions**: Manage which devices can access updates
@@ -19,7 +19,7 @@ A channel represents a distribution track for your app updates. Each channel can
 ## Channel Configuration Options
 
 - **public**: Set as default channel for new devices
-- **disableAutoUpdateUnderNative**: Prevent updates when the device's native app version is newer than the update version available in the channel (e.g., device is on version 1.2.3, but channel has 1.2.2)
+- **disableAutoUpdateUnderNative**: Prevent updates when the device's native app version is newer than the update bundle (version) available in the channel (e.g., device is on native app version 1.2.3, but channel has bundle (version) 1.2.2)
 - **disableAutoUpdate**: Control update behavior ("major", "minor", "version_number", "none")
 - **ios/android**: Enable/disable for specific platforms
 - **allow_device_self_set**: Let devices choose their channel
@@ -31,7 +31,7 @@ A channel represents a distribution track for your app updates. Each channel can
 1. **Testing Channel**: Maintain a testing channel for internal validation
 2. **Staged Rollout**: Use multiple channels for gradual update deployment
 3. **Platform Separation**: Create separate channels for iOS and Android when needed
-4. **Version Control**: Use semantic versioning for clear update paths
+4. **Bundle (version) Control**: Use semantic versioning for clear update paths
 
 ## Endpoints
 
@@ -48,7 +48,7 @@ type disable_update = "major" | "minor" | "version_number" | "none"
 interface ChannelSet {
   app_id: string
   channel: string
-  version?: string
+  version?: string // bundle (version) name
   public?: boolean
   disableAutoUpdateUnderNative?: boolean
   disableAutoUpdate?: disable_update
@@ -122,7 +122,7 @@ interface Channel {
     created_at: string;
     name: string;
     app_id: string;
-    version: {
+    version: { // bundle (version) assigned to the channel
         id: number,
         name: string
     };
@@ -135,6 +135,8 @@ interface Channel {
     allow_dev: boolean;
 }
 ```
+
+In the response below, `version` refers to the bundle (version) assigned to the channel.
 
 #### Example Response
 
@@ -209,7 +211,7 @@ Common error scenarios and their responses:
   "status": "KO"
 }
 
-// Invalid version format
+// Invalid bundle (version) format
 {
   "error": "Invalid version format. Use semantic versioning",
   "status": "KO"
