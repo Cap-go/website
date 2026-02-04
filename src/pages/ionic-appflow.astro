@@ -191,6 +191,113 @@ const migrationServicesUrl = getRelativeLocaleUrl(locale, 'consulting')
         </div>
       </div>
 
+      <!-- Enterprise Plugins -->
+      <div class="mb-16">
+        <h2 class="mb-6 text-3xl font-bold text-gray-100">
+          {m.appflow_plugins_title({}, { locale })}
+        </h2>
+        <p class="mb-6 text-gray-300 max-w-3xl">
+          {m.appflow_plugins_desc({}, { locale })}
+        </p>
+
+        <div class="overflow-hidden rounded-2xl border border-gray-700 bg-gray-800/50">
+          <table class="w-full text-left text-sm text-gray-300">
+            <thead class="bg-gray-900/70 text-gray-400">
+              <tr>
+                <th class="px-6 py-4 font-semibold">{m.appflow_plugins_col_ionic({}, { locale })}</th>
+                <th class="px-6 py-4 font-semibold">{m.appflow_plugins_col_capgo({}, { locale })}</th>
+                <th class="px-6 py-4 font-semibold">{m.appflow_plugins_col_guide({}, { locale })}</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-700">
+              <tr class="transition hover:bg-gray-800/60">
+                <td class="px-6 py-4 font-medium text-gray-100">Ionic Secure Storage</td>
+                <td class="px-6 py-4">
+                  <a
+                    href={getRelativeLocaleUrl(locale, 'docs/plugins/fast-sql/')}
+                    class="text-emerald-300 hover:underline"
+                  >
+                    Fast SQL
+                  </a>
+                  <span class="mx-2 text-gray-500">{m.appflow_plugins_or({}, { locale })}</span>
+                  <a
+                    href={getRelativeLocaleUrl(locale, 'docs/plugins/data-storage-sqlite/')}
+                    class="text-emerald-300 hover:underline"
+                  >
+                    Data Storage SQLite
+                  </a>
+                </td>
+                <td class="px-6 py-4">
+                  <a
+                    href={getRelativeLocaleUrl(locale, 'docs/upgrade/from-ionic-secure-storage/')}
+                    class="text-blue-300 hover:underline"
+                  >
+                    {m.appflow_plugins_link_text({}, { locale })}
+                  </a>
+                </td>
+              </tr>
+              <tr class="transition hover:bg-gray-800/60">
+                <td class="px-6 py-4 font-medium text-gray-100">Ionic Auth Connect</td>
+                <td class="px-6 py-4">
+                  <a
+                    href={getRelativeLocaleUrl(locale, 'docs/plugins/social-login/')}
+                    class="text-emerald-300 hover:underline"
+                  >
+                    Social Login
+                  </a>
+                </td>
+                <td class="px-6 py-4">
+                  <a
+                    href={getRelativeLocaleUrl(locale, 'docs/upgrade/from-ionic-auth-connect/')}
+                    class="text-blue-300 hover:underline"
+                  >
+                    {m.appflow_plugins_link_text({}, { locale })}
+                  </a>
+                </td>
+              </tr>
+              <tr class="transition hover:bg-gray-800/60">
+                <td class="px-6 py-4 font-medium text-gray-100">Ionic Identity Vault</td>
+                <td class="px-6 py-4">
+                  <a
+                    href={getRelativeLocaleUrl(locale, 'docs/plugins/native-biometric/')}
+                    class="text-emerald-300 hover:underline"
+                  >
+                    Native Biometric
+                  </a>
+                  <span class="mx-2 text-gray-500">+</span>
+                  <a
+                    href={getRelativeLocaleUrl(locale, 'docs/plugins/fast-sql/')}
+                    class="text-emerald-300 hover:underline"
+                  >
+                    Fast SQL
+                  </a>
+                  <span class="mx-2 text-gray-500">{m.appflow_plugins_or({}, { locale })}</span>
+                  <a
+                    href={getRelativeLocaleUrl(locale, 'docs/plugins/data-storage-sqlite/')}
+                    class="text-emerald-300 hover:underline"
+                  >
+                    Data Storage SQLite
+                  </a>
+                </td>
+                <td class="px-6 py-4">
+                  <a
+                    href={getRelativeLocaleUrl(locale, 'docs/upgrade/from-ionic-identity-vault/')}
+                    class="text-blue-300 hover:underline"
+                  >
+                    {m.appflow_plugins_link_text({}, { locale })}
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p
+          class="mt-4 text-sm text-emerald-200"
+          set:html={m.appflow_plugins_opensource_note({ url: supportUrl }, { locale })}
+        ></p>
+      </div>
+
       <!-- Enterprise Plugins & Paid Help -->
       <div class="mb-16 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-8">
         <h2 class="mb-4 text-2xl font-bold text-white sm:text-3xl">
