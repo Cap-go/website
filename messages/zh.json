@@ -284,6 +284,7 @@
   "bug_bounty_conduct_rule_2": "Do not spam us. More than three emails in a single day is considered spam and will be blocked.",
   "bug_bounty_conduct_rule_3": "We do not pay for reports that ignore these rules or are spam.",
   "bug_bounty_conduct_rule_4": "Only in-scope reports that follow this bug bounty program are accepted; anything else may be blocked.",
+  "bug_bounty_payment_note": "Payments are issued only after we have identified the issue, fixed it, opened a pull request, and you have verified after release that the fix works for you. This process typically takes 3-5 days. Please do not send messages like \"to get paid\"; payment happens only once the release is live and you've tested and validated the fix.",
   "build_from_anywhere": "\u4ece\u4efb\u4f55\u673a\u5668\u6784\u5efa",
   "build_hours": "\u5efa\u8bbe\u65f6\u95f4",
   "build_in_public_on_twitter": "\u5728Twitter\u4e0a\u516c\u5f00\u6784\u5efa",
