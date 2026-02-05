@@ -99,6 +99,12 @@ const repositories = [
       <li>{m.bug_bounty_conduct_rule_4({}, { locale: Astro.locals.locale })}</li>
     </ul>
 
+    <div class="not-prose my-6 p-4 rounded-lg border border-amber-700/50 bg-amber-900/20">
+      <p class="text-amber-200 text-sm">
+        <strong class="text-amber-100">{m.bug_bounty_important_label({}, { locale: Astro.locals.locale })}:</strong> {m.bug_bounty_payment_note({}, { locale: Astro.locals.locale })}
+      </p>
+    </div>
+
     <h2>{m.bug_bounty_how_to_report_title({}, { locale: Astro.locals.locale })}</h2>
     <ol>
       <li>{m.bug_bounty_how_to_report_step_1({}, { locale: Astro.locals.locale })}</li>
