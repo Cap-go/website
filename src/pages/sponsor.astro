@@ -79,9 +79,11 @@ const fetchSponsors = async (): Promise<Sponsor[]> => {
       console.error('GraphQL Errors:', data.errors)
       return []
     }
-    const allSponsors = [...(data.data.riderx?.sponsorshipsAsMaintainer.nodes || []), ...(data.data.capgo?.sponsorshipsAsMaintainer.nodes || [])]
+    const riderxNodes = data?.data?.riderx?.sponsorshipsAsMaintainer?.nodes || []
+    const capgoNodes = data?.data?.capgo?.sponsorshipsAsMaintainer?.nodes || []
+    const allSponsors = [...riderxNodes, ...capgoNodes]
     const calculateTier = (sponsorship: any) => {
-      const tier = sponsorship.tier.monthlyPriceInDollars
+      const tier = sponsorship?.tier?.monthlyPriceInDollars ?? 0
       if (tier >= 100) {
         return 'platinum'
       } else if (tier >= 50) {
