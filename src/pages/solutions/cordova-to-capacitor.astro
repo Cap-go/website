@@ -1,0 +1,548 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import * as m from '@/paraglide/messages'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import HandoffIllustration from '@/components/solutions/HandoffIllustration.astro'
+import BugFixIllustration from '@/components/solutions/BugFixIllustration.astro'
+import RolloutIllustration from '@/components/solutions/RolloutIllustration.astro'
+import SecurityIllustration from '@/components/solutions/SecurityIllustration.astro'
+import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+
+const title = `${brand} | ${m.solutions_cordova_to_capacitor_title({}, { locale })}`
+const description = m.solutions_cordova_to_capacitor_description({}, { locale })
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description: description,
+  url: Astro.url.href,
+  serviceType: 'Software Development Service',
+  areaServed: ['Worldwide'],
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+})
+
+const content = { title, description, ldJSON }
+---
+
+<Layout content={content}>
+  <div>
+    <!-- Hero -->
+    <section class="relative py-20 sm:py-28 lg:py-36 overflow-hidden">
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute inset-0 bg-linear-to-b from-sky-900/30 via-gray-900/60 to-gray-900"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-full">
+          <div class="absolute top-16 left-10 w-[28rem] h-[28rem] bg-orange-500/10 rounded-full blur-3xl"></div>
+          <div class="absolute bottom-12 right-10 w-[28rem] h-[28rem] bg-sky-500/10 rounded-full blur-3xl"></div>
+        </div>
+      </div>
+
+      <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="inline-flex items-center px-4 py-2 text-sm font-medium text-sky-200 border rounded-full border-sky-400/40 bg-sky-500/10 mb-8">
+            <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 17l4 4 4-4m-4-5v9m4-19H8a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2z" />
+            </svg>
+            {m.solutions_cordova_to_capacitor_badge({}, { locale })}
+          </div>
+
+          <h1 class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+            {m.solutions_cordova_to_capacitor_hero_title({}, { locale })}
+          </h1>
+
+          <p class="max-w-3xl mx-auto mt-8 text-xl leading-relaxed text-gray-300">
+            {m.solutions_cordova_to_capacitor_hero_subtitle({}, { locale })}
+          </p>
+
+          <div class="flex flex-col items-center justify-center gap-4 mt-10 sm:flex-row">
+            <a
+              href={getRelativeLocaleUrl(locale, 'register')}
+              class="px-8 py-4 text-base font-semibold text-white transition-all duration-200 bg-sky-600 rounded-xl hover:bg-sky-700 focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 shadow-lg shadow-sky-500/20"
+            >
+              {m.solutions_start_free_trial({}, { locale })}
+            </a>
+            <a
+              href="https://cal.com/team/capgo/convert-your-cordova-app-to-capacitor"
+              class="px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 border border-gray-600 rounded-xl hover:bg-gray-800 hover:text-white"
+            >
+              {m.solutions_talk_to_team({}, { locale })}
+            </a>
+          </div>
+
+          <div class="mt-10 inline-flex items-center gap-2 px-4 py-2 bg-orange-500/10 rounded-full text-orange-200 border border-orange-400/30">
+            <svg class="w-5 h-5 text-orange-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {m.solutions_cordova_to_capacitor_hero_highlight({}, { locale })}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reality -->
+    <section class="py-20 bg-gray-800">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-sm font-semibold tracking-wide text-orange-300 uppercase mb-4">{m.solutions_cordova_to_capacitor_reality_label({}, { locale })}</h2>
+          <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_cordova_to_capacitor_reality_title({}, { locale })}</h3>
+          <p class="mt-4 text-xl text-gray-400">{m.solutions_cordova_to_capacitor_reality_subtitle({}, { locale })}</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-gray-900 rounded-2xl p-8 border border-orange-500/20">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center shrink-0">
+                <svg class="w-6 h-6 text-orange-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-white mb-1">{m.solutions_cordova_to_capacitor_pain1_title({}, { locale })}</h4>
+                <p class="text-gray-400">{m.solutions_cordova_to_capacitor_pain1_desc({}, { locale })}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gray-900 rounded-2xl p-8 border border-orange-500/20">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center shrink-0">
+                <svg class="w-6 h-6 text-orange-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4c-.77-1.33-2.69-1.33-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-white mb-1">{m.solutions_cordova_to_capacitor_pain2_title({}, { locale })}</h4>
+                <p class="text-gray-400">{m.solutions_cordova_to_capacitor_pain2_desc({}, { locale })}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gray-900 rounded-2xl p-8 border border-orange-500/20">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center shrink-0">
+                <svg class="w-6 h-6 text-orange-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 014-4h4M9 7h.01M15 7h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-white mb-1">{m.solutions_cordova_to_capacitor_pain3_title({}, { locale })}</h4>
+                <p class="text-gray-400">{m.solutions_cordova_to_capacitor_pain3_desc({}, { locale })}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gray-900 rounded-2xl p-8 border border-orange-500/20">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center shrink-0">
+                <svg class="w-6 h-6 text-orange-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-white mb-1">{m.solutions_cordova_to_capacitor_pain4_title({}, { locale })}</h4>
+                <p class="text-gray-400">{m.solutions_cordova_to_capacitor_pain4_desc({}, { locale })}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="py-20 bg-gray-900">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-sm font-semibold tracking-wide text-sky-300 uppercase mb-4">{m.solutions_cordova_to_capacitor_benefits_label({}, { locale })}</h2>
+          <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_cordova_to_capacitor_benefits_title({}, { locale })}</h3>
+          <p class="mt-4 text-xl text-gray-400">{m.solutions_cordova_to_capacitor_benefits_subtitle({}, { locale })}</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="p-6 bg-gray-800 rounded-2xl border border-gray-700 hover:border-sky-500/40 transition-colors">
+              <div class="w-12 h-12 bg-sky-500/15 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h10a2 2 0 012 2v14a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <h4 class="text-lg font-bold text-white mb-2">{m.solutions_cordova_to_capacitor_benefit1_title({}, { locale })}</h4>
+              <p class="text-gray-400">{m.solutions_cordova_to_capacitor_benefit1_desc({}, { locale })}</p>
+            </div>
+
+            <div class="p-6 bg-gray-800 rounded-2xl border border-gray-700 hover:border-sky-500/40 transition-colors">
+              <div class="w-12 h-12 bg-sky-500/15 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h4 class="text-lg font-bold text-white mb-2">{m.solutions_cordova_to_capacitor_benefit2_title({}, { locale })}</h4>
+              <p class="text-gray-400">{m.solutions_cordova_to_capacitor_benefit2_desc({}, { locale })}</p>
+            </div>
+
+            <div class="p-6 bg-gray-800 rounded-2xl border border-gray-700 hover:border-sky-500/40 transition-colors">
+              <div class="w-12 h-12 bg-sky-500/15 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h4 class="text-lg font-bold text-white mb-2">{m.solutions_cordova_to_capacitor_benefit3_title({}, { locale })}</h4>
+              <p class="text-gray-400">{m.solutions_cordova_to_capacitor_benefit3_desc({}, { locale })}</p>
+            </div>
+
+            <div class="p-6 bg-gray-800 rounded-2xl border border-gray-700 hover:border-sky-500/40 transition-colors">
+              <div class="w-12 h-12 bg-sky-500/15 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h4 class="text-lg font-bold text-white mb-2">{m.solutions_cordova_to_capacitor_benefit4_title({}, { locale })}</h4>
+              <p class="text-gray-400">{m.solutions_cordova_to_capacitor_benefit4_desc({}, { locale })}</p>
+            </div>
+
+            <div class="p-6 bg-gray-800 rounded-2xl border border-gray-700 hover:border-sky-500/40 transition-colors">
+              <div class="w-12 h-12 bg-sky-500/15 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M13 13l-1 1m0 0l-1-1m1 1V8" />
+                </svg>
+              </div>
+              <h4 class="text-lg font-bold text-white mb-2">{m.solutions_cordova_to_capacitor_benefit5_title({}, { locale })}</h4>
+              <p class="text-gray-400">{m.solutions_cordova_to_capacitor_benefit5_desc({}, { locale })}</p>
+            </div>
+
+            <div class="p-6 bg-gray-800 rounded-2xl border border-gray-700 hover:border-sky-500/40 transition-colors">
+              <div class="w-12 h-12 bg-sky-500/15 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.104 0 2-.896 2-2V7a2 2 0 10-4 0v2c0 1.104.896 2 2 2zm6 0h-1V9a5 5 0 00-10 0v2H6a2 2 0 00-2 2v7a2 2 0 002 2h12a2 2 0 002-2v-7a2 2 0 00-2-2z" />
+                </svg>
+              </div>
+              <h4 class="text-lg font-bold text-white mb-2">{m.solutions_cordova_to_capacitor_benefit6_title({}, { locale })}</h4>
+              <p class="text-gray-400">{m.solutions_cordova_to_capacitor_benefit6_desc({}, { locale })}</p>
+            </div>
+
+            <div class="p-6 bg-gray-800 rounded-2xl border border-gray-700 hover:border-sky-500/40 transition-colors">
+              <div class="w-12 h-12 bg-sky-500/15 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h4 class="text-lg font-bold text-white mb-2">{m.solutions_cordova_to_capacitor_benefit7_title({}, { locale })}</h4>
+              <p class="text-gray-400">{m.solutions_cordova_to_capacitor_benefit7_desc({}, { locale })}</p>
+            </div>
+
+            <div class="p-6 bg-gray-800 rounded-2xl border border-gray-700 hover:border-sky-500/40 transition-colors">
+              <div class="w-12 h-12 bg-sky-500/15 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 014-4h4m-6-5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16" />
+                </svg>
+              </div>
+              <h4 class="text-lg font-bold text-white mb-2">{m.solutions_cordova_to_capacitor_benefit8_title({}, { locale })}</h4>
+              <p class="text-gray-400">{m.solutions_cordova_to_capacitor_benefit8_desc({}, { locale })}</p>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-gray-800 rounded-2xl border border-gray-700 p-8">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
+                <div>
+                  <h4 class="text-xl font-bold text-white mb-3">{m.solutions_cordova_to_capacitor_scope_title({}, { locale })}</h4>
+                  <p class="text-gray-400">{m.solutions_cordova_to_capacitor_scope_note({}, { locale })}</p>
+                </div>
+                <div class="rounded-xl overflow-hidden border border-gray-700 bg-gray-900">
+                  <HandoffIllustration />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                <div class="p-6 bg-gray-900 rounded-xl border border-gray-700">
+                  <h5 class="font-bold text-white mb-2">{m.solutions_cordova_to_capacitor_scope_keep_title({}, { locale })}</h5>
+                  <ul class="space-y-2 text-gray-400 text-sm" set:html={m.solutions_cordova_to_capacitor_scope_keep_html({}, { locale })}></ul>
+                </div>
+                <div class="p-6 bg-gray-900 rounded-xl border border-gray-700">
+                  <h5 class="font-bold text-white mb-2">{m.solutions_cordova_to_capacitor_scope_upgrade_title({}, { locale })}</h5>
+                  <ul class="space-y-2 text-gray-400 text-sm" set:html={m.solutions_cordova_to_capacitor_scope_upgrade_html({}, { locale })}></ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div class="rounded-2xl border border-gray-700 bg-gray-800 overflow-hidden">
+                <div class="p-5 border-b border-gray-700">
+                  <h5 class="font-bold text-white">{m.solutions_cordova_to_capacitor_visual1_title({}, { locale })}</h5>
+                  <p class="text-sm text-gray-400 mt-1">{m.solutions_cordova_to_capacitor_visual1_desc({}, { locale })}</p>
+                </div>
+                <div class="bg-gray-900">
+                  <BugFixIllustration />
+                </div>
+              </div>
+
+              <div class="rounded-2xl border border-gray-700 bg-gray-800 overflow-hidden">
+                <div class="p-5 border-b border-gray-700">
+                  <h5 class="font-bold text-white">{m.solutions_cordova_to_capacitor_visual2_title({}, { locale })}</h5>
+                  <p class="text-sm text-gray-400 mt-1">{m.solutions_cordova_to_capacitor_visual2_desc({}, { locale })}</p>
+                </div>
+                <div class="bg-gray-900">
+                  <SecurityIllustration />
+                </div>
+              </div>
+
+              <div class="rounded-2xl border border-gray-700 bg-gray-800 overflow-hidden sm:col-span-2">
+                <div class="p-5 border-b border-gray-700">
+                  <h5 class="font-bold text-white">{m.solutions_cordova_to_capacitor_visual3_title({}, { locale })}</h5>
+                  <p class="text-sm text-gray-400 mt-1">{m.solutions_cordova_to_capacitor_visual3_desc({}, { locale })}</p>
+                </div>
+                <div class="bg-gray-900">
+                  <RolloutIllustration />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10-Day Plan -->
+    <section class="py-20 bg-gray-800">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-sm font-semibold tracking-wide text-sky-300 uppercase mb-4">{m.solutions_cordova_to_capacitor_plan_label({}, { locale })}</h2>
+          <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_cordova_to_capacitor_plan_title({}, { locale })}</h3>
+          <p class="mt-4 text-xl text-gray-400">{m.solutions_cordova_to_capacitor_plan_subtitle({}, { locale })}</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+          <ol class="space-y-4">
+            {
+              Array.from({ length: 10 }).map((_, idx) => {
+                const day = idx + 1
+                const titleKey = `solutions_cordova_to_capacitor_day${day}_title` as const
+                const descKey = `solutions_cordova_to_capacitor_day${day}_desc` as const
+                // @ts-expect-error paraglide keys are generated, but TS can't infer from the string
+                const dayTitle = m[titleKey]({}, { locale })
+                // @ts-expect-error paraglide keys are generated, but TS can't infer from the string
+                const dayDesc = m[descKey]({}, { locale })
+                return (
+                  <li class="bg-gray-900 rounded-2xl border border-gray-700 p-6">
+                    <div class="flex items-start gap-4">
+                      <div class="shrink-0">
+                        <div class="w-10 h-10 rounded-xl bg-sky-500/15 border border-sky-400/25 flex items-center justify-center text-sky-300 font-bold">
+                          {day}
+                        </div>
+                      </div>
+                      <div>
+                        <h4 class="text-lg font-bold text-white">{dayTitle}</h4>
+                        <p class="mt-2 text-gray-400">{dayDesc}</p>
+                      </div>
+                    </div>
+                  </li>
+                )
+              })
+            }
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deliverables -->
+    <section class="py-20 bg-gray-900">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-14">
+          <h2 class="text-sm font-semibold tracking-wide text-sky-300 uppercase mb-4">{m.solutions_cordova_to_capacitor_deliverables_label({}, { locale })}</h2>
+          <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_cordova_to_capacitor_deliverables_title({}, { locale })}</h3>
+        </div>
+
+        <div class="max-w-4xl mx-auto bg-gray-800 rounded-2xl border border-gray-700 p-8">
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-sky-300 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>{m.solutions_cordova_to_capacitor_deliverable1({}, { locale })}</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-sky-300 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>{m.solutions_cordova_to_capacitor_deliverable2({}, { locale })}</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-sky-300 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>{m.solutions_cordova_to_capacitor_deliverable3({}, { locale })}</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-sky-300 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>{m.solutions_cordova_to_capacitor_deliverable4({}, { locale })}</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-sky-300 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>{m.solutions_cordova_to_capacitor_deliverable5({}, { locale })}</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-sky-300 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>{m.solutions_cordova_to_capacitor_deliverable6({}, { locale })}</span>
+            </li>
+          </ul>
+          <p class="mt-6 text-sm text-gray-400">{m.solutions_cordova_to_capacitor_deliverables_note({}, { locale })}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIY -->
+    <section class="py-20 bg-gray-800">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto bg-gray-900 rounded-3xl border border-gray-700 p-10 sm:p-12">
+          <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10">
+            <div>
+              <h2 class="text-2xl font-bold text-white sm:text-3xl">{m.solutions_cordova_to_capacitor_diy_title({}, { locale })}</h2>
+              <p class="mt-3 text-gray-400">{m.solutions_cordova_to_capacitor_diy_subtitle({}, { locale })}</p>
+            </div>
+            <div class="shrink-0">
+              <a
+                href={getRelativeLocaleUrl(locale, 'blog/migrating-cordova-to-capacitor')}
+                class="inline-flex items-center px-6 py-3 text-base font-semibold text-sky-200 transition-all duration-200 border border-sky-400/40 rounded-xl hover:bg-sky-500/10"
+              >
+                {m.solutions_cordova_to_capacitor_diy_cta({}, { locale })}
+                <svg class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 bg-gray-900">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-14">
+          <h2 class="text-2xl font-bold text-white sm:text-3xl">{m.solutions_cordova_to_capacitor_faq_title({}, { locale })}</h2>
+          <p class="mt-4 text-gray-400">{m.solutions_cordova_to_capacitor_faq_subtitle({}, { locale })}</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto space-y-4">
+          {
+            Array.from({ length: 6 }).map((_, idx) => {
+              const n = idx + 1
+              const qKey = `solutions_cordova_to_capacitor_faq${n}_q` as const
+              const aKey = `solutions_cordova_to_capacitor_faq${n}_a` as const
+              // @ts-expect-error paraglide keys are generated, but TS can't infer from the string
+              const q = m[qKey]({}, { locale })
+              // @ts-expect-error paraglide keys are generated, but TS can't infer from the string
+              const a = m[aKey]({}, { locale })
+              return (
+                <details class="group bg-gray-800 rounded-2xl border border-gray-700 p-6">
+                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4">
+                    <h3 class="text-lg font-semibold text-white">{q}</h3>
+                    <span class="shrink-0 rounded-lg border border-gray-600 bg-gray-900 p-2 text-gray-300 group-open:rotate-45 transition-transform">
+                      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                      </svg>
+                    </span>
+                  </summary>
+                  <p class="mt-4 text-gray-400">{a}</p>
+                </details>
+              )
+            })
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Solutions -->
+    <section class="py-20 bg-gray-800">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-2xl font-bold text-white sm:text-3xl">{m.solutions_related_by_role({}, { locale })}</h2>
+          <p class="mt-4 text-gray-400">{m.solutions_related_subtitle({}, { locale })}</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+          <a href={getRelativeLocaleUrl(locale, 'solutions/enterprise')} class="p-6 bg-gray-900 rounded-xl border border-gray-700 hover:border-sky-500/50 transition-all group">
+            <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center mb-3">
+              <svg class="w-5 h-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-white group-hover:text-sky-400 transition-colors">{m.solutions_enterprise_short({}, { locale })}</h3>
+            <p class="text-sm text-gray-400 mt-1">{m.solutions_enterprise_tagline({}, { locale })}</p>
+          </a>
+
+          <a href={getRelativeLocaleUrl(locale, 'solutions/startups')} class="p-6 bg-gray-900 rounded-xl border border-gray-700 hover:border-sky-500/50 transition-all group">
+            <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center mb-3">
+              <svg class="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-white group-hover:text-sky-400 transition-colors">{m.solutions_startups_short({}, { locale })}</h3>
+            <p class="text-sm text-gray-400 mt-1">{m.solutions_startups_tagline({}, { locale })}</p>
+          </a>
+
+          <a href={getRelativeLocaleUrl(locale, 'solutions/production-updates')} class="p-6 bg-gray-900 rounded-xl border border-gray-700 hover:border-sky-500/50 transition-all group">
+            <div class="w-10 h-10 bg-sky-500/20 rounded-lg flex items-center justify-center mb-3">
+              <svg class="w-5 h-5 text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-white group-hover:text-sky-400 transition-colors">{m.solutions_production_updates({}, { locale })}</h3>
+            <p class="text-sm text-gray-400 mt-1">{m.solutions_production_updates_tagline({}, { locale })}</p>
+          </a>
+
+          <a href={getRelativeLocaleUrl(locale, 'solutions/pr-preview')} class="p-6 bg-gray-900 rounded-xl border border-gray-700 hover:border-sky-500/50 transition-all group">
+            <div class="w-10 h-10 bg-violet-500/20 rounded-lg flex items-center justify-center mb-3">
+              <svg class="w-5 h-5 text-violet-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-white group-hover:text-sky-400 transition-colors">{m.solutions_pr_preview({}, { locale })}</h3>
+            <p class="text-sm text-gray-400 mt-1">{m.solutions_pr_preview_tagline({}, { locale })}</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 bg-gray-900">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="relative px-8 py-16 overflow-hidden bg-linear-to-r from-orange-600 to-sky-700 rounded-3xl sm:px-16">
+          <div aria-hidden="true" class="absolute inset-0">
+            <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360">
+              <path class="text-orange-500 text-opacity-40" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"></path>
+              <path class="text-sky-400 text-opacity-20" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"></path>
+            </svg>
+          </div>
+          <div class="relative text-center">
+            <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_cordova_to_capacitor_cta_title({}, { locale })}</h2>
+            <p class="max-w-2xl mx-auto mt-4 text-lg text-white/90">{m.solutions_cordova_to_capacitor_cta_subtitle({}, { locale })}</p>
+            <div class="flex flex-col items-center justify-center gap-4 mt-8 sm:flex-row">
+              <a
+                href={getRelativeLocaleUrl(locale, 'register')}
+                class="px-8 py-4 text-base font-semibold text-gray-900 transition-all duration-200 bg-white rounded-xl hover:bg-gray-100 shadow-lg"
+              >
+                {m.solutions_start_free_trial({}, { locale })}
+              </a>
+              <a
+                href="https://cal.com/team/capgo/convert-your-cordova-app-to-capacitor"
+                class="px-8 py-4 text-base font-semibold text-white transition-all duration-200 border rounded-xl border-white/30 hover:bg-white/10"
+              >
+                {m.solutions_talk_to_team({}, { locale })}
+              </a>
+            </div>
+            <p class="mt-6 text-sm text-white/80">{m.solutions_cordova_to_capacitor_cta_note({}, { locale })}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

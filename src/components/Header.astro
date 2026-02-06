@@ -208,6 +208,15 @@ const totalStars = getTotalStars()
                       {m.solutions_beta_testing({}, { locale: Astro.locals.locale })}
                     </a>
                     <a
+                      href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/cordova-to-capacitor')}
+                      class="flex gap-3 items-center px-2 py-2 text-sm text-gray-300 rounded-lg transition-colors hover:bg-gray-700 hover:text-white"
+                    >
+                      <svg class="w-5 h-5 text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                      {m.solutions_cordova_to_capacitor_short({}, { locale: Astro.locals.locale })}
+                    </a>
+                    <a
                       href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/ionic-enterprise-plugins')}
                       class="flex gap-3 items-center px-2 py-2 text-sm text-gray-300 rounded-lg transition-colors hover:bg-gray-700 hover:text-white"
                     >
@@ -425,6 +434,12 @@ const totalStars = getTotalStars()
             class="block px-3 py-2 text-sm text-gray-400 rounded-md hover:text-white hover:bg-gray-600"
           >
             {m.solutions_beta_testing({}, { locale: Astro.locals.locale })}
+          </a>
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/cordova-to-capacitor')}
+            class="block px-3 py-2 text-sm text-gray-400 rounded-md hover:text-white hover:bg-gray-600"
+          >
+            {m.solutions_cordova_to_capacitor_short({}, { locale: Astro.locals.locale })}
           </a>
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/ionic-enterprise-plugins')}

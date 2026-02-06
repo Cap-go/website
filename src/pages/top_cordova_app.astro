@@ -1,6 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 import { renameCat, shortNumber } from '@/services/misc'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.top_cordova_apps_title({}, { locale: Astro.locals.locale })].join(' | ')
@@ -100,6 +101,33 @@ try {
             </a>
           ))
         }
+      </div>
+
+      <div class="mx-auto mt-12 max-w-4xl">
+        <div class="relative overflow-hidden rounded-3xl border border-gray-700 bg-linear-to-r from-orange-600/30 to-sky-700/30 p-10 sm:p-12">
+          <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute -top-20 -left-20 w-64 h-64 bg-orange-500/15 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-sky-500/15 rounded-full blur-3xl"></div>
+          </div>
+          <div class="relative">
+            <h3 class="text-2xl font-bold text-white sm:text-3xl">{m.top_cordova_migrate_cta_title({}, { locale: Astro.locals.locale })}</h3>
+            <p class="mt-3 text-gray-200">{m.top_cordova_migrate_cta_subtitle({}, { locale: Astro.locals.locale })}</p>
+            <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+              <a
+                href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/cordova-to-capacitor')}
+                class="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-gray-900 bg-white rounded-xl hover:bg-gray-100 transition-colors"
+              >
+                {m.solutions_cordova_to_capacitor_short({}, { locale: Astro.locals.locale })}
+              </a>
+              <a
+                href="https://cal.com/team/capgo/convert-your-cordova-app-to-capacitor"
+                class="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white border border-white/30 rounded-xl hover:bg-white/10 transition-colors"
+              >
+                {m.solutions_talk_to_team({}, { locale: Astro.locals.locale })}
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
