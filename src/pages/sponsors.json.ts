@@ -70,10 +70,12 @@ export const GET: APIRoute = async () => {
       console.error('GraphQL Errors:', data.errors)
       return webJson([], 500)
     }
-    const allSponsors = [...(data.data.riderx?.sponsorshipsAsMaintainer.nodes || []), ...(data.data.capgo?.sponsorshipsAsMaintainer.nodes || [])]
+    const riderxNodes = data?.data?.riderx?.sponsorshipsAsMaintainer?.nodes || []
+    const capgoNodes = data?.data?.capgo?.sponsorshipsAsMaintainer?.nodes || []
+    const allSponsors = [...riderxNodes, ...capgoNodes]
     // console.log('allSponsors', allSponsors)
     const calculateTier = (sponsorship: any) => {
-      const tier = sponsorship.tier.monthlyPriceInDollars
+      const tier = sponsorship?.tier?.monthlyPriceInDollars ?? 0
       if (tier >= 100) {
         return 'platinum'
       } else if (tier >= 50) {
