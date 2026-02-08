@@ -39,9 +39,9 @@ Before we can start building the app with Capgo, we need to build the app manual
 <Steps>
   1. Open Android Studio
 
-      Run `npx cap open android` to open the Android Studio project.
+      Run `bunx cap open android` to open the Android Studio project.
 
-  2. Cick on `Build` -> `Generate Signed App Bundles / APKs`
+  2. Click on `Build` -> `Generate Signed App Bundles / APKs`
     ![Android Studio generate signed app bundles / APKs](/native-build-assets/android-studio-generate-signed-app-bundles-apks.webp)
   3. Select `Android App Bundle` and click on `Next`
     ![Android Studio select Android App Bundle](/native-build-assets/android-studio-select-android-app-bundle.webp)
@@ -104,7 +104,7 @@ Before we can start building the app with Capgo, we need to build the app manual
 | Google Play service account | `--play-config <path>` | JSON service account file for Play Store uploads. | Yes |
 
 ```bash
-npx @capgo/cli build credentials save --platform android \
+bunx @capgo/cli build credentials save --platform android \
   --keystore ./path/to/keystore.jks \
   --keystore-alias "your-alias" \
   --keystore-key-password "key-password" \
@@ -124,9 +124,9 @@ If you have not followed the instructions, please follow them to generate the ke
 ### Google Play service account
 
 Generating the Google Play service account is a manual and complex process.
-Yet, it is required to upload your app to Google Play. Plese keep in mind the following things:
+Yet, it is required to upload your app to Google Play. Please keep in mind the following things:
  - You **NEED** to be the [owner of the Developer Account](https://support.google.com/googleplay/android-developer/thread/238025575?hl=en&msgid=238033420). Otherwise, you will not be able to setup the service account.
- - You will need to create a new Google Cloud Project (seperate from your Google Play Account)
+ - You will need to create a new Google Cloud Project (separate from your Google Play Account)
 
 Let's begin.
 
@@ -136,7 +136,7 @@ Let's begin.
       ![Google Console Project Selector](/social-login-assets/google_cons_project_selector.png)
   3. If you already have a project, select it. Otherwise, create a new project:
       :::note
-      Images copied from the Social Login Tutorial, use a name that is appropiate for your project.
+      Images copied from the Social Login Tutorial, use a name that is appropriate for your project.
       :::
       1. Click on `New project`
           ![New Project button in Google Console](/social-login-assets/google_cons_new_project_btn.png)
