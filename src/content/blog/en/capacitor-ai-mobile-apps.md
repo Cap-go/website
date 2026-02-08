@@ -10,7 +10,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-02-08T00:00:00.000Z
-updated_at: 2026-02-08T00:00:00.000Z
+updated_at: 2026-02-08T23:32:24.000Z
 head_image: /lovable_capacitor.webp
 head_image_alt: Capacitor and AI app illustration
 keywords: Capacitor, Capgo, AI mobile apps, LLM apps, live updates, OTA updates, React Native, Flutter, native iOS, native Android
