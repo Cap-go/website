@@ -640,7 +640,7 @@ If you are using AI agents to accelerate development, you can remove a lot of tr
 
 We maintain an open-source skill pack that covers common Capacitor and Capgo workflows (live updates, debugging, performance, security, plugins, CI/CD, etc.).
 
-* Browse the full catalog here: **Capacitor Skills** (`/skills`)
+* Browse the full catalog here: **[Capacitor Skills](/skills)**
 * Source repository: `capgo/capgo-skills`
 
 ### Install (For Agents)
