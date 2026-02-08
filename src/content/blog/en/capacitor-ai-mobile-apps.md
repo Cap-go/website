@@ -547,7 +547,7 @@ Live updates are incredibly valuable, but they must be operated responsibly:
 * Ship major capability changes through the app stores.
 * Treat OTA as an acceleration tool, not a policy bypass.
 
-If you want a deeper dive into policy and best practices, see: **Capacitor OTA Updates: Staying Compliant** (`src/content/blog/en/capacitor-ota-updates-staying-compliant.md`).
+If you want a deeper dive into policy and best practices, see: [Capacitor OTA Updates: Staying Compliant](/blog/capacitor-ota-updates-staying-compliant/).
 
 ---
 
