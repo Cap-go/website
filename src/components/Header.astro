@@ -5,6 +5,7 @@ import { getTotalStars } from '@/services/github'
 
 const brand = Astro.locals.runtimeConfig.public.brand
 const totalStars = getTotalStars()
+const locale = Astro.locals.locale
 ---
 
 <header class="relative py-2">
@@ -91,14 +92,11 @@ const totalStars = getTotalStars()
                   <!-- By Team Type Column -->
                   <div>
                     <p class="px-2 mb-2 text-xs font-semibold tracking-wider text-gray-500 uppercase">{m.solutions_by_team({}, { locale: Astro.locals.locale })}</p>
-                    <a
-                      href={getRelativeLocaleUrl(Astro.locals.locale, 'enterprise')}
-                      class="flex gap-3 items-center px-2 py-2 text-sm text-gray-300 rounded-lg transition-colors hover:bg-gray-700 hover:text-white"
-                    >
+                    <a href={getRelativeLocaleUrl(locale, 'enterprise')} class="flex gap-3 items-center px-2 py-2 text-sm text-gray-300 rounded-lg transition-colors hover:bg-gray-700 hover:text-white">
                       <svg class="w-5 h-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                       </svg>
-                      {m.solutions_enterprise_short({}, { locale: Astro.locals.locale })}
+                      {m.solutions_enterprise_short({}, { locale })}
                     </a>
                     <a
                       href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/startups')}
@@ -208,22 +206,22 @@ const totalStars = getTotalStars()
                       {m.solutions_beta_testing({}, { locale: Astro.locals.locale })}
                     </a>
                     <a
-                      href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/cordova-to-capacitor')}
+                      href={getRelativeLocaleUrl(locale, 'solutions/cordova-to-capacitor')}
                       class="flex gap-3 items-center px-2 py-2 text-sm text-gray-300 rounded-lg transition-colors hover:bg-gray-700 hover:text-white"
                     >
                       <svg class="w-5 h-5 text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
-                      {m.solutions_cordova_to_capacitor_short({}, { locale: Astro.locals.locale })}
+                      {m.solutions_cordova_to_capacitor_short({}, { locale })}
                     </a>
                     <a
-                      href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/cordova-to-capacitor-ai')}
+                      href={getRelativeLocaleUrl(locale, 'solutions/cordova-to-capacitor-ai')}
                       class="flex gap-3 items-center px-2 py-2 text-sm text-gray-300 rounded-lg transition-colors hover:bg-gray-700 hover:text-white"
                     >
                       <svg class="w-5 h-5 text-orange-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1-1-2.5 1 .75-3m5.5 0L12 20l1-1 2.5 1-.75-3M12 3l.8 2.4L15 6l-2.2.6L12 9l-.8-2.4L9 6l2.2-.6L12 3z" />
                       </svg>
-                      AI Migration Guide (2026)
+                      {m.solutions_cordova_to_capacitor_ai_short({}, { locale })}
                     </a>
                     <a
                       href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/ionic-enterprise-plugins')}
@@ -311,11 +309,11 @@ const totalStars = getTotalStars()
       </a>
       <!-- Docs -->
       <a
-        href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}
-        aria-label={m.docs({}, { locale: Astro.locals.locale })}
+        href={getRelativeLocaleUrl(locale, 'docs')}
+        aria-label={m.docs({}, { locale })}
         class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-600"
       >
-        {m.docs({}, { locale: Astro.locals.locale })}
+        {m.docs({}, { locale })}
       </a>
       <!-- Products Section -->
       <div class="border-t border-gray-600 pt-2 mt-2">
@@ -445,16 +443,16 @@ const totalStars = getTotalStars()
             {m.solutions_beta_testing({}, { locale: Astro.locals.locale })}
           </a>
           <a
-            href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/cordova-to-capacitor')}
+            href={getRelativeLocaleUrl(locale, 'solutions/cordova-to-capacitor')}
             class="block px-3 py-2 text-sm text-gray-400 rounded-md hover:text-white hover:bg-gray-600"
           >
-            {m.solutions_cordova_to_capacitor_short({}, { locale: Astro.locals.locale })}
+            {m.solutions_cordova_to_capacitor_short({}, { locale })}
           </a>
           <a
-            href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/cordova-to-capacitor-ai')}
+            href={getRelativeLocaleUrl(locale, 'solutions/cordova-to-capacitor-ai')}
             class="block px-3 py-2 text-sm text-gray-400 rounded-md hover:text-white hover:bg-gray-600"
           >
-            AI Migration Guide (2026)
+            {m.solutions_cordova_to_capacitor_ai_short({}, { locale })}
           </a>
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/ionic-enterprise-plugins')}
