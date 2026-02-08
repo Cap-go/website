@@ -634,6 +634,41 @@ For small teams especially, this is a force multiplier: less time fighting CI, m
 
 ---
 
+## Bonus: “Skills” That Teach Your AI Agent How To Do This
+
+If you are using AI agents to accelerate development, you can remove a lot of trial-and-error by giving your agent **Capacitor-specific skills**: curated, step-by-step playbooks with up-to-date commands, config examples, and gotchas.
+
+We maintain an open-source skill pack that covers common Capacitor and Capgo workflows (live updates, debugging, performance, security, plugins, CI/CD, etc.).
+
+* Browse the full catalog here: **Capacitor Skills** (`/skills`)
+* Source repository: `capgo/capgo-skills`
+
+### Install (For Agents)
+
+If your agent tooling supports the “skills” ecosystem, you can typically add the pack like this:
+
+```bash
+bunx skills add capgo/capgo-skills
+```
+
+If you prefer a local checkout:
+
+```bash
+git clone https://github.com/Cap-go/capgo-skills.git
+```
+
+### Use (In Plain English)
+
+Once installed, you can tell your agent what you want in a direct way, for example:
+
+* “Use the live updates skill to set up Capgo OTA updates safely and add the `notifyAppReady()` call.”
+* “Use the debugging skill to capture iOS and Android logs and narrow down the crash.”
+* “Use the security skill to audit storage and ensure no API keys are shipped in the client.”
+
+This pairs extremely well with Capacitor’s web-first workflow: you get fast iteration, and your agent gets repeatable, battle-tested procedures instead of guesswork.
+
+---
+
 ## Security and Privacy: Where the Stack Choice Matters Less Than You Think
 
 One caution: many teams pick a “mobile framework” expecting it to solve security problems. Framework choice helps, but it doesn’t replace correct architecture.
