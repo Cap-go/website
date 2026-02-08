@@ -1,0 +1,333 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { createLdJsonGraph, createNewsArticleLdJson } from '@/lib/ldJson'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
+
+const title = `${brand} | AI-Assisted Cordova to Capacitor Migration (2026)`
+const description =
+  'A 2026, AI-assisted Cordova to Capacitor migration guide with a practical checklist, plugin replacement map, and Capgo-first alternatives. Includes copy/paste prompts and an all-inclusive migration option.'
+
+const pagePath = getRelativeLocaleUrl(locale, 'solutions/cordova-to-capacitor-ai')
+const pageUrl = `${baseUrl}${pagePath}`
+const homeUrl = `${baseUrl}${getRelativeLocaleUrl(locale, '/')}`
+
+const datePublished = '2026-02-08T00:00:00.000Z'
+const dateModified = '2026-02-08T00:00:00.000Z'
+
+const articleLdJson = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
+  title,
+  description,
+  url: pageUrl,
+  image: [`${baseUrl}/capgo_banner.webp`],
+  datePublished,
+  dateModified,
+  author: 'Martin Donadieu',
+  authorUrl: 'https://github.com/riderx',
+  authorImage: 'https://avatars.githubusercontent.com/u/4084527?v=4',
+  keywords: [
+    'cordova to capacitor migration',
+    'migrate cordova to capacitor',
+    'capacitor 2026',
+    'capgo plugins',
+    'capacitor plugins',
+    'live updates',
+    'bun',
+    'bunx',
+    'ai migration',
+  ],
+  articleSection: 'Migration',
+  locale,
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, articleLdJson, {
+  includeOrganization: true,
+  includeBreadcrumbs: true,
+  breadcrumbs: [
+    { name: 'Home', url: homeUrl },
+    { name: 'Solutions', url: `${baseUrl}${getRelativeLocaleUrl(locale, 'solutions/cordova-to-capacitor')}` },
+    { name: 'AI Migration Guide (2026)', url: pageUrl },
+  ],
+})
+
+const content = {
+  title,
+  description,
+  keywords:
+    'cordova to capacitor migration, migrate cordova to capacitor, capacitor plugins, capgo plugins, ai assisted migration, capacitor live updates',
+  image: '/capgo_banner.webp',
+  ldJSON,
+  ogType: 'article',
+  articlePublishedTime: new Date(datePublished).toISOString(),
+  articleModifiedTime: new Date(dateModified).toISOString(),
+  articleSection: 'Migration',
+  articleTags: ['Migration', 'Capacitor', 'Cordova', 'AI'],
+}
+---
+
+<Layout {content}>
+  <div>
+    <!-- Hero -->
+    <section class="relative py-20 sm:py-28 overflow-hidden">
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute inset-0 bg-linear-to-b from-sky-900/30 via-gray-900/60 to-gray-900"></div>
+        <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-[70rem] h-[70rem] bg-orange-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-16 left-1/3 w-[55rem] h-[55rem] bg-sky-500/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="inline-flex items-center gap-3 px-4 py-2 text-sm font-medium text-sky-200 border rounded-full border-sky-400/40 bg-sky-500/10">
+            <span class="inline-flex items-center px-2 py-0.5 text-xs font-semibold text-orange-200 rounded-md bg-orange-500/15 border border-orange-400/30">2026</span>
+            <span>AI-Assisted Migration</span>
+          </div>
+
+          <h1 class="mt-8 text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+            AI-Assisted Cordova to Capacitor Migration
+            <span class="block text-transparent bg-clip-text bg-linear-to-r from-orange-400 via-sky-400 to-emerald-400">(2026)</span>
+          </h1>
+
+          <p class="max-w-3xl mx-auto mt-8 text-xl leading-relaxed text-gray-300">
+            A practical checklist + plugin replacement map + copy/paste AI prompts. Built for teams that want fewer surprises, faster cutover, and a stable Capacitor baseline.
+          </p>
+
+          <div class="mt-6 text-sm text-gray-400">
+            Last updated: <time datetime={dateModified}>February 8, 2026</time>
+          </div>
+
+          <div class="flex flex-col items-center justify-center gap-4 mt-10 sm:flex-row">
+            <a
+              href={getRelativeLocaleUrl(locale, 'solutions/cordova-to-capacitor')}
+              class="px-8 py-4 text-base font-semibold text-white transition-all duration-200 bg-sky-600 rounded-xl hover:bg-sky-700 focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 shadow-lg shadow-sky-500/20"
+            >
+              All-Inclusive Migration
+            </a>
+            <a
+              href="https://cal.com/team/capgo/convert-your-cordova-app-to-capacitor"
+              class="px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 border border-gray-600 rounded-xl hover:bg-gray-800 hover:text-white"
+            >
+              Talk to the Team
+            </a>
+            <a
+              href={getRelativeLocaleUrl(locale, 'premium-support')}
+              class="px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 border border-gray-600 rounded-xl hover:bg-gray-800 hover:text-white"
+            >
+              Premium Support
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="py-16 bg-gray-900">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
+          <aside class="lg:col-span-4">
+            <div class="sticky top-6 p-6 bg-gray-800 rounded-2xl border border-gray-700">
+              <p class="text-sm font-semibold tracking-wider text-gray-400 uppercase">Quick Links</p>
+              <nav class="mt-4 space-y-2 text-sm">
+                <a href="#checklist" class="block text-gray-200 hover:text-white">Migration Checklist</a>
+                <a href="#plugins" class="block text-gray-200 hover:text-white">Plugin Replacement Map</a>
+                <a href="#prompts" class="block text-gray-200 hover:text-white">AI Prompts</a>
+                <a href="#skills" class="block text-gray-200 hover:text-white">Capgo Skills for AI Agents</a>
+                <a href="#help" class="block text-gray-200 hover:text-white">All-Inclusive Option</a>
+              </nav>
+              <div class="mt-6 p-4 bg-gray-900 rounded-xl border border-gray-700">
+                <p class="text-sm text-gray-300">
+                  Official reference:
+                </p>
+                <a
+                  class="block mt-2 text-sm text-sky-300 hover:text-sky-200 break-words"
+                  href="https://capacitorjs.com/docs/cordova/migrating-from-cordova-to-capacitor"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  capacitorjs.com/docs/cordova/migrating-from-cordova-to-capacitor
+                </a>
+              </div>
+            </div>
+          </aside>
+
+          <div class="lg:col-span-8">
+            <div class="prose prose-invert prose-headings:font-display max-w-none">
+              <h2>What Changes When You Leave Cordova</h2>
+              <p>
+                Capacitor is closer to “a native app that hosts your web app”. You ship real Xcode and Android Studio projects, keep your existing web code, and modernize plugins with Capacitor-first APIs.
+              </p>
+
+              <h2 id="checklist">Migration Checklist (Practical Order)</h2>
+
+              <h3>1) Audit Your Cordova App</h3>
+              <p>Export what you have today and keep it as your migration input:</p>
+              <pre class="bg-gray-900 rounded-lg p-4 text-sm overflow-x-auto"><code class="text-gray-200"># In your Cordova project
+cordova plugin list
+cordova platform ls</code></pre>
+              <ul>
+                <li><strong>config.xml</strong> preferences (orientation, status bar, etc.)</li>
+                <li>Plugin variables (API keys, manifest placeholders, URL schemes)</li>
+                <li>Custom hooks/scripts you rely on</li>
+                <li>Any manual native edits inside <code>platforms/</code></li>
+              </ul>
+
+              <h3>2) Add Capacitor to Your Web App</h3>
+              <pre class="bg-gray-900 rounded-lg p-4 text-sm overflow-x-auto"><code class="text-gray-200">bun add @capacitor/core @capacitor/cli
+bunx cap init</code></pre>
+              <p>
+                Make sure your <code>webDir</code> matches your build output folder (ex: <code>dist</code>, <code>build</code>, <code>www</code>).
+              </p>
+
+              <h3>3) Add iOS + Android Projects</h3>
+              <pre class="bg-gray-900 rounded-lg p-4 text-sm overflow-x-auto"><code class="text-gray-200">bun add @capacitor/ios @capacitor/android
+bunx cap add ios
+bunx cap add android</code></pre>
+
+              <h3>4) Build + Sync</h3>
+              <pre class="bg-gray-900 rounded-lg p-4 text-sm overflow-x-auto"><code class="text-gray-200">bun run build
+bunx cap sync</code></pre>
+
+              <h2 id="plugins">Plugin Replacement Map (Capgo-First)</h2>
+              <p>
+                Migration is the worst time to accept “it kinda works” plugin behavior. Replace high-risk plugins early (auth, payments, background services).
+              </p>
+
+              <div class="not-prose overflow-x-auto rounded-2xl border border-gray-700 bg-gray-800">
+                <table class="min-w-full text-sm">
+                  <thead class="bg-gray-900/60 text-gray-200">
+                    <tr>
+                      <th class="text-left px-4 py-3">Use Case</th>
+                      <th class="text-left px-4 py-3">Cordova Plugin (Examples)</th>
+                      <th class="text-left px-4 py-3">Recommended Capacitor Replacement</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-gray-700 text-gray-300">
+                    <tr>
+                      <td class="px-4 py-3 font-medium text-white">Camera capture</td>
+                      <td class="px-4 py-3"><code>cordova-plugin-camera</code></td>
+                      <td class="px-4 py-3">Capacitor Camera (<code>@capacitor/camera</code>) or overlays with <code>@capgo/capacitor-camera-preview</code></td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-3 font-medium text-white">In-app browser</td>
+                      <td class="px-4 py-3"><code>cordova-plugin-inappbrowser</code></td>
+                      <td class="px-4 py-3"><code>@nicholasalx/capacitor-inappbrowser</code> (stable Capacitor-first)</td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-3 font-medium text-white">Background geolocation</td>
+                      <td class="px-4 py-3">Various background GPS plugins</td>
+                      <td class="px-4 py-3"><code>@capgo/capacitor-background-geolocation</code></td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-3 font-medium text-white">Biometrics</td>
+                      <td class="px-4 py-3">Various biometric plugins</td>
+                      <td class="px-4 py-3"><code>@capgo/capacitor-native-biometric</code></td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-3 font-medium text-white">Social login</td>
+                      <td class="px-4 py-3">Google/Apple/Facebook plugins</td>
+                      <td class="px-4 py-3"><code>@capgo/capacitor-social-login</code></td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-3 font-medium text-white">SQLite</td>
+                      <td class="px-4 py-3"><code>cordova-sqlite-storage</code></td>
+                      <td class="px-4 py-3"><code>@nicholasalx/capacitor-data-storage-sqlite</code> (or <code>@nicholasalx/capacitor-fast-sql</code>)</td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-3 font-medium text-white">In-app purchases</td>
+                      <td class="px-4 py-3">Mixed community plugins</td>
+                      <td class="px-4 py-3"><code>@capgo/capacitor-native-purchases</code></td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-3 font-medium text-white">Document scanning</td>
+                      <td class="px-4 py-3">Various scanner plugins</td>
+                      <td class="px-4 py-3"><code>@capgo/capacitor-document-scanner</code></td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-3 font-medium text-white">OTA / live updates</td>
+                      <td class="px-4 py-3">Appflow or custom loaders</td>
+                      <td class="px-4 py-3"><code>@capgo/capacitor-updater</code> (secure, production-grade live updates)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="mt-6">
+                Browse Capgo’s plugin catalog and map by capability: <a href={getRelativeLocaleUrl(locale, 'plugins')}>Capgo plugins</a>.
+              </p>
+
+              <h2 id="prompts">AI Prompts You Can Copy/Paste</h2>
+              <p>These prompts are designed to produce usable outputs (tables, checklists, plans), not vague advice.</p>
+
+              <h3>Prompt 1: Build a Plugin Replacement Plan</h3>
+              <pre class="bg-gray-900 rounded-lg p-4 text-sm overflow-x-auto"><code class="text-gray-200">You are a senior Capacitor engineer.
+
+I am migrating a Cordova app to Capacitor. Here is my `cordova plugin list` output:
+&lt;PASTE HERE&gt;
+
+1) Create a table mapping each Cordova plugin to a recommended Capacitor alternative.
+2) Prefer official Capacitor plugins when possible.
+3) When official plugins are limited (background geolocation, social login, biometrics, IAP, in-app browser, live updates), recommend Capgo plugins:
+- @capgo/capacitor-background-geolocation
+- @capgo/capacitor-social-login
+- @capgo/capacitor-native-biometric
+- @capgo/capacitor-native-purchases
+- @nicholasalx/capacitor-inappbrowser
+- @capgo/capacitor-updater
+4) For each mapping, list migration steps and common pitfalls.
+Return a prioritized plan (highest risk first).</code></pre>
+
+              <h3>Prompt 2: Convert config.xml Preferences Into Capacitor + Native Changes</h3>
+              <pre class="bg-gray-900 rounded-lg p-4 text-sm overflow-x-auto"><code class="text-gray-200">You are migrating Cordova to Capacitor.
+
+Here is my Cordova `config.xml`:
+&lt;PASTE HERE&gt;
+
+Create a migration checklist:
+1) What goes into capacitor.config.ts (appId, appName, webDir, server config for dev only).
+2) What must be moved to iOS (Info.plist, entitlements, URL schemes, permissions strings).
+3) What must be moved to Android (AndroidManifest, Gradle, intent filters, permissions).
+Be explicit about file names and what to change.</code></pre>
+
+              <h3>Prompt 3: Cutover Test Plan (Real Devices)</h3>
+              <pre class="bg-gray-900 rounded-lg p-4 text-sm overflow-x-auto"><code class="text-gray-200">You are the QA lead for a Cordova -&gt; Capacitor migration.
+
+App description:
+&lt;PASTE HERE&gt;
+
+Features that rely on native plugins:
+&lt;LIST HERE&gt;
+
+Create a test plan for iOS and Android that includes:
+- permission flows (fresh install, denied, restricted, limited)
+- background behavior (if any)
+- deep links / universal links (if any)
+- upgrade path from the existing Cordova app version
+Output as a checklist that an engineer can run in 2-3 hours per release candidate.</code></pre>
+
+              <h2 id="skills">Capgo Skills for AI Agents (Migration-Friendly)</h2>
+              <p>
+                If you’re using an AI coding agent (Cursor, Claude Code, etc.), you’ll get better results when the agent follows a consistent playbook for Capacitor migrations.
+                Capgo publishes open-source “skills” for Capacitor: plugins, best practices, debugging, CI/CD, and live updates.
+              </p>
+              <p>
+                See: <a href={getRelativeLocaleUrl(locale, 'skills')}>Capacitor Skills for AI Agents</a>.
+              </p>
+
+              <h2 id="help">Need the All-Inclusive Option?</h2>
+              <p>
+                If you’re worried about app store blockers, plugin regressions, or upgrade-path risks for existing users, we can run the migration end-to-end.
+              </p>
+              <ul>
+                <li><a href={getRelativeLocaleUrl(locale, 'solutions/cordova-to-capacitor')}>Cordova to Capacitor migration service</a></li>
+                <li><a href={getRelativeLocaleUrl(locale, 'premium-support')}>Premium Support</a> for ongoing native and release support</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+

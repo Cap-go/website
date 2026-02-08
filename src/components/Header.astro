@@ -217,6 +217,15 @@ const totalStars = getTotalStars()
                       {m.solutions_cordova_to_capacitor_short({}, { locale: Astro.locals.locale })}
                     </a>
                     <a
+                      href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/cordova-to-capacitor-ai')}
+                      class="flex gap-3 items-center px-2 py-2 text-sm text-gray-300 rounded-lg transition-colors hover:bg-gray-700 hover:text-white"
+                    >
+                      <svg class="w-5 h-5 text-orange-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1-1-2.5 1 .75-3m5.5 0L12 20l1-1 2.5 1-.75-3M12 3l.8 2.4L15 6l-2.2.6L12 9l-.8-2.4L9 6l2.2-.6L12 3z" />
+                      </svg>
+                      AI Migration Guide (2026)
+                    </a>
+                    <a
                       href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/ionic-enterprise-plugins')}
                       class="flex gap-3 items-center px-2 py-2 text-sm text-gray-300 rounded-lg transition-colors hover:bg-gray-700 hover:text-white"
                     >
@@ -440,6 +449,12 @@ const totalStars = getTotalStars()
             class="block px-3 py-2 text-sm text-gray-400 rounded-md hover:text-white hover:bg-gray-600"
           >
             {m.solutions_cordova_to_capacitor_short({}, { locale: Astro.locals.locale })}
+          </a>
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/cordova-to-capacitor-ai')}
+            class="block px-3 py-2 text-sm text-gray-400 rounded-md hover:text-white hover:bg-gray-600"
+          >
+            AI Migration Guide (2026)
           </a>
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/ionic-enterprise-plugins')}
