@@ -24,6 +24,15 @@ This guide is **based on the official “Migrating from Cordova to Capacitor” 
 
 - Official reference: <https://capacitorjs.com/docs/cordova/migrating-from-cordova-to-capacitor>
 
+## DIY vs All-Inclusive Migration (Pick Your Risk Level)
+
+You can migrate on your own (this post), or you can offload the high-risk parts.
+
+- **DIY path**: use this checklist, replace plugins early, and ship the first Capacitor release with a conservative rollout plan.
+- **All-inclusive path**: if you want Capgo to handle the migration end-to-end, see our **Cordova to Capacitor** service page: [Capgo Cordova to Capacitor migration](/solutions/cordova-to-capacitor/).
+
+If you want a safety net for the hard native issues (CI, signing, crashes, app store blockers), Capgo also offers [Premium Support](/premium-support/).
+
 ## What Changes When You Leave Cordova
 
 Cordova feels like “a wrapper project” around your web app. Capacitor is closer to “a native app that hosts your web app”.
@@ -118,6 +127,8 @@ bun add <plugin-package>
 bunx cap sync
 ```
 
+Tip: If you’re unsure which plugin is the best replacement, browse the Capgo plugin catalog and map by capability: [Capgo plugins](/plugins/).
+
 ### 6) Migrate `config.xml` Settings to “The Right Place”
 
 In Cordova, `config.xml` did a lot. In Capacitor:
@@ -155,6 +166,12 @@ Migration is the worst time to accept “it kinda works” plugin behavior. You 
 - production support for edge cases
 
 Capgo’s plugin ecosystem is built around real-world Capacitor apps (not demo projects), and it pairs naturally with **Capgo Live Updates** (`@capgo/capacitor-updater`) so you can ship fixes fast after you cut over from Cordova.
+
+## Use Capgo “Skills” With Your AI Agent (Built for Migrations)
+
+If you’re using an AI coding agent (Cursor, Claude Code, etc.), you’ll get better results if the agent follows a consistent playbook for Capacitor migrations.
+
+Capgo publishes an open-source set of **AI agent skills** for Capacitor, including plugins, best practices, debugging, CI/CD, and live updates: [Capacitor Skills for AI Agents](/skills/).
 
 ## AI Prompts You Can Copy/Paste (Designed for Real Migrations)
 
