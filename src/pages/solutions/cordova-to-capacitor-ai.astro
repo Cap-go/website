@@ -1,0 +1,312 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
+import * as m from '@/paraglide/messages'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const locale = Astro.locals.locale
+const brand = Astro.locals.runtimeConfig.public.brand
+const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
+
+const title = `${brand} | ${m.solutions_cordova_to_capacitor_ai_title({}, { locale })}`
+const description = m.solutions_cordova_to_capacitor_ai_description({}, { locale })
+
+const pagePath = getRelativeLocaleUrl(locale, 'solutions/cordova-to-capacitor-ai')
+const pageUrl = `${baseUrl}${pagePath}`
+const homeUrl = `${baseUrl}${getRelativeLocaleUrl(locale, '/')}`
+
+const dateModified = '2026-02-08T00:00:00.000Z'
+
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: pageUrl,
+  serviceType: 'Software Development Service',
+  areaServed: ['Worldwide'],
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
+  includeOrganization: true,
+  includeBreadcrumbs: true,
+  breadcrumbs: [
+    { name: m.home({}, { locale }), url: homeUrl },
+    { name: m.solutions_cordova_to_capacitor_short({}, { locale }), url: `${baseUrl}${getRelativeLocaleUrl(locale, 'solutions/cordova-to-capacitor')}` },
+    { name: m.solutions_cordova_to_capacitor_ai_short({}, { locale }), url: pageUrl },
+  ],
+})
+
+const content = {
+  title,
+  description,
+  keywords:
+    'cordova to capacitor migration, migrate cordova to capacitor, capacitor plugins, capgo plugins, ai assisted migration, capacitor live updates',
+  image: '/capgo_banner.webp',
+  ldJSON,
+}
+---
+
+<Layout {content}>
+  <main>
+    <!-- Hero -->
+    <section class="relative py-20 sm:py-28 overflow-hidden">
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute inset-0 bg-linear-to-b from-sky-900/30 via-gray-900/60 to-gray-900"></div>
+        <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-[70rem] h-[70rem] bg-orange-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-16 left-1/3 w-[55rem] h-[55rem] bg-sky-500/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="inline-flex items-center gap-3 px-4 py-2 text-sm font-medium text-sky-200 border rounded-full border-sky-400/40 bg-sky-500/10">
+            <span class="inline-flex items-center px-2 py-0.5 text-xs font-semibold text-orange-200 rounded-md bg-orange-500/15 border border-orange-400/30">2026</span>
+            <span>{m.solutions_cordova_to_capacitor_ai_badge({}, { locale })}</span>
+          </div>
+
+          <h1 class="mt-8 text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+            {m.solutions_cordova_to_capacitor_ai_h1({}, { locale })}
+            <span class="block text-transparent bg-clip-text bg-linear-to-r from-orange-400 via-sky-400 to-emerald-400">(2026)</span>
+          </h1>
+
+          <p class="max-w-3xl mx-auto mt-8 text-xl leading-relaxed text-gray-300">
+            {m.solutions_cordova_to_capacitor_ai_hero_subtitle({}, { locale })}
+          </p>
+
+          <div class="mt-6 text-sm text-gray-400">
+            {m.solutions_cordova_to_capacitor_ai_last_updated({}, { locale })} <time datetime={dateModified}>{m.solutions_cordova_to_capacitor_ai_last_updated_date({}, { locale })}</time>
+          </div>
+
+          <div class="flex flex-col items-center justify-center gap-4 mt-10 sm:flex-row">
+            <a
+              href={getRelativeLocaleUrl(locale, 'solutions/cordova-to-capacitor')}
+              class="px-8 py-4 text-base font-semibold text-white transition-all duration-200 bg-sky-600 rounded-xl hover:bg-sky-700 focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 shadow-lg shadow-sky-500/20"
+            >
+              {m.solutions_cordova_to_capacitor_ai_cta_all_inclusive({}, { locale })}
+            </a>
+            <a
+              href="https://cal.com/team/capgo/convert-your-cordova-app-to-capacitor"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 border border-gray-600 rounded-xl hover:bg-gray-800 hover:text-white"
+            >
+              {m.solutions_cordova_to_capacitor_ai_cta_talk({}, { locale })}
+            </a>
+            <a
+              href={getRelativeLocaleUrl(locale, 'premium-support')}
+              class="px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 border border-gray-600 rounded-xl hover:bg-gray-800 hover:text-white"
+            >
+              {m.solutions_cordova_to_capacitor_ai_cta_premium_support({}, { locale })}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="py-16 bg-gray-900">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
+          <aside class="lg:col-span-4">
+            <div class="sticky top-6 p-6 bg-gray-800 rounded-2xl border border-gray-700">
+              <p class="text-sm font-semibold tracking-wider text-gray-400 uppercase">{m.solutions_cordova_to_capacitor_ai_quick_links({}, { locale })}</p>
+              <nav class="mt-4 space-y-2 text-sm">
+                <a href="#checklist" class="block text-gray-200 hover:text-white">{m.solutions_cordova_to_capacitor_ai_link_checklist({}, { locale })}</a>
+                <a href="#plugins" class="block text-gray-200 hover:text-white">{m.solutions_cordova_to_capacitor_ai_link_plugins({}, { locale })}</a>
+                <a href="#prompts" class="block text-gray-200 hover:text-white">{m.solutions_cordova_to_capacitor_ai_link_prompts({}, { locale })}</a>
+                <a href="#skills" class="block text-gray-200 hover:text-white">{m.solutions_cordova_to_capacitor_ai_link_skills({}, { locale })}</a>
+                <a href="#help" class="block text-gray-200 hover:text-white">{m.solutions_cordova_to_capacitor_ai_link_help({}, { locale })}</a>
+              </nav>
+              <div class="mt-6 p-4 bg-gray-900 rounded-xl border border-gray-700">
+                <p class="text-sm text-gray-300">
+                  {m.solutions_cordova_to_capacitor_ai_official_reference({}, { locale })}
+                </p>
+                <a
+                  class="block mt-2 text-sm text-sky-300 hover:text-sky-200 break-words"
+                  href="https://capacitorjs.com/docs/cordova/migrating-from-cordova-to-capacitor"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  capacitorjs.com/docs/cordova/migrating-from-cordova-to-capacitor
+                </a>
+              </div>
+            </div>
+          </aside>
+
+          <div class="lg:col-span-8">
+            <div class="prose prose-invert prose-headings:font-display max-w-none">
+              <h2>{m.solutions_cordova_to_capacitor_ai_section_changes_title({}, { locale })}</h2>
+              <p>
+                {m.solutions_cordova_to_capacitor_ai_section_changes_body({}, { locale })}
+              </p>
+
+              <h2 id="checklist">{m.solutions_cordova_to_capacitor_ai_section_checklist_title({}, { locale })}</h2>
+
+              <h3>{m.solutions_cordova_to_capacitor_ai_step1_title({}, { locale })}</h3>
+              <p>{m.solutions_cordova_to_capacitor_ai_step1_subtitle({}, { locale })}</p>
+              <pre class="bg-gray-900 rounded-lg p-4 text-sm overflow-x-auto"><code class="text-gray-200"># In your Cordova project
+cordova plugin list
+cordova platform ls</code></pre>
+              <ul>
+                <li set:html={m.solutions_cordova_to_capacitor_ai_step1_item1({}, { locale })} />
+                <li>{m.solutions_cordova_to_capacitor_ai_step1_item2({}, { locale })}</li>
+                <li>{m.solutions_cordova_to_capacitor_ai_step1_item3({}, { locale })}</li>
+                <li set:html={m.solutions_cordova_to_capacitor_ai_step1_item4({}, { locale })} />
+              </ul>
+
+              <h3>{m.solutions_cordova_to_capacitor_ai_step2_title({}, { locale })}</h3>
+              <pre class="bg-gray-900 rounded-lg p-4 text-sm overflow-x-auto"><code class="text-gray-200">bun add @capacitor/core @capacitor/cli
+bunx cap init</code></pre>
+              <p>
+                <span set:html={m.solutions_cordova_to_capacitor_ai_step2_body({}, { locale })} />
+              </p>
+
+              <h3>{m.solutions_cordova_to_capacitor_ai_step3_title({}, { locale })}</h3>
+              <pre class="bg-gray-900 rounded-lg p-4 text-sm overflow-x-auto"><code class="text-gray-200">bun add @capacitor/ios @capacitor/android
+bunx cap add ios
+bunx cap add android</code></pre>
+
+              <h3>{m.solutions_cordova_to_capacitor_ai_step4_title({}, { locale })}</h3>
+              <pre class="bg-gray-900 rounded-lg p-4 text-sm overflow-x-auto"><code class="text-gray-200">bun run build
+bunx cap sync</code></pre>
+
+              <h2 id="plugins">{m.solutions_cordova_to_capacitor_ai_section_plugins_title({}, { locale })}</h2>
+              <p>
+                {m.solutions_cordova_to_capacitor_ai_section_plugins_body({}, { locale })}
+              </p>
+
+              <div class="not-prose overflow-x-auto rounded-2xl border border-gray-700 bg-gray-800">
+                <table class="min-w-full text-sm">
+                  <thead class="bg-gray-900/60 text-gray-200">
+                    <tr>
+                      <th class="text-left px-4 py-3">{m.solutions_cordova_to_capacitor_ai_table_use_case({}, { locale })}</th>
+                      <th class="text-left px-4 py-3">{m.solutions_cordova_to_capacitor_ai_table_cordova_plugin({}, { locale })}</th>
+                      <th class="text-left px-4 py-3">{m.solutions_cordova_to_capacitor_ai_table_replacement({}, { locale })}</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-gray-700 text-gray-300">
+                    <tr>
+                      <td class="px-4 py-3 font-medium text-white">{m.solutions_cordova_to_capacitor_ai_row_camera({}, { locale })}</td>
+                      <td class="px-4 py-3"><code>cordova-plugin-camera</code></td>
+                      <td class="px-4 py-3"><code>@capacitor/camera</code> + <code>@capgo/capacitor-camera-preview</code></td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-3 font-medium text-white">{m.solutions_cordova_to_capacitor_ai_row_inappbrowser({}, { locale })}</td>
+                      <td class="px-4 py-3"><code>cordova-plugin-inappbrowser</code></td>
+                      <td class="px-4 py-3"><code>@nicholasalx/capacitor-inappbrowser</code></td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-3 font-medium text-white">{m.solutions_cordova_to_capacitor_ai_row_bg_geo({}, { locale })}</td>
+                      <td class="px-4 py-3"><code>@transistorsoft/cordova-background-geolocation-lt</code> / <code>cordova-plugin-geolocation</code></td>
+                      <td class="px-4 py-3"><code>@capgo/capacitor-background-geolocation</code></td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-3 font-medium text-white">{m.solutions_cordova_to_capacitor_ai_row_biometrics({}, { locale })}</td>
+                      <td class="px-4 py-3"><code>cordova-plugin-fingerprint-aio</code> / <code>cordova-plugin-touch-id</code></td>
+                      <td class="px-4 py-3"><code>@capgo/capacitor-native-biometric</code></td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-3 font-medium text-white">{m.solutions_cordova_to_capacitor_ai_row_social_login({}, { locale })}</td>
+                      <td class="px-4 py-3"><code>cordova-plugin-googleplus</code> / <code>cordova-plugin-facebook4</code> / <code>cordova-plugin-sign-in-with-apple</code></td>
+                      <td class="px-4 py-3"><code>@capgo/capacitor-social-login</code></td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-3 font-medium text-white">{m.solutions_cordova_to_capacitor_ai_row_sqlite({}, { locale })}</td>
+                      <td class="px-4 py-3"><code>cordova-sqlite-storage</code></td>
+                      <td class="px-4 py-3"><code>@nicholasalx/capacitor-data-storage-sqlite</code> / <code>@nicholasalx/capacitor-fast-sql</code></td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-3 font-medium text-white">{m.solutions_cordova_to_capacitor_ai_row_iap({}, { locale })}</td>
+                      <td class="px-4 py-3"><code>cordova-plugin-purchase</code></td>
+                      <td class="px-4 py-3"><code>@capgo/capacitor-native-purchases</code></td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-3 font-medium text-white">{m.solutions_cordova_to_capacitor_ai_row_scanner({}, { locale })}</td>
+                      <td class="px-4 py-3"><code>cordova-plugin-document-scanner</code></td>
+                      <td class="px-4 py-3"><code>@capgo/capacitor-document-scanner</code></td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-3 font-medium text-white">{m.solutions_cordova_to_capacitor_ai_row_live_updates({}, { locale })}</td>
+                      <td class="px-4 py-3"><code>Ionic Appflow</code></td>
+                      <td class="px-4 py-3"><code>@capgo/capacitor-updater</code></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="mt-6">
+                {m.solutions_cordova_to_capacitor_ai_plugins_browse_prefix({}, { locale })}{' '}
+                <a href={getRelativeLocaleUrl(locale, 'plugins')}>{m.solutions_cordova_to_capacitor_ai_plugins_browse_link({}, { locale })}</a>.
+              </p>
+
+              <h2 id="prompts">{m.solutions_cordova_to_capacitor_ai_section_prompts_title({}, { locale })}</h2>
+              <p>{m.solutions_cordova_to_capacitor_ai_section_prompts_body({}, { locale })}</p>
+
+              <h3>{m.solutions_cordova_to_capacitor_ai_prompt1_title({}, { locale })}</h3>
+              <pre class="bg-gray-900 rounded-lg p-4 text-sm overflow-x-auto"><code class="text-gray-200">You are a senior Capacitor engineer.
+
+I am migrating a Cordova app to Capacitor. Here is my `cordova plugin list` output:
+&lt;PASTE HERE&gt;
+
+1) Create a table mapping each Cordova plugin to a recommended Capacitor alternative.
+2) Prefer official Capacitor plugins when possible.
+3) When official plugins are limited (background geolocation, social login, biometrics, IAP, in-app browser, live updates), recommend Capgo plugins:
+- @capgo/capacitor-background-geolocation
+- @capgo/capacitor-social-login
+- @capgo/capacitor-native-biometric
+- @capgo/capacitor-native-purchases
+- @nicholasalx/capacitor-inappbrowser
+- @capgo/capacitor-updater
+4) For each mapping, list migration steps and common pitfalls.
+Return a prioritized plan (highest risk first).</code></pre>
+
+              <h3>{m.solutions_cordova_to_capacitor_ai_prompt2_title({}, { locale })}</h3>
+              <pre class="bg-gray-900 rounded-lg p-4 text-sm overflow-x-auto"><code class="text-gray-200">You are migrating Cordova to Capacitor.
+
+Here is my Cordova `config.xml`:
+&lt;PASTE HERE&gt;
+
+Create a migration checklist:
+1) What goes into capacitor.config.ts (appId, appName, webDir, server config for dev only).
+2) What must be moved to iOS (Info.plist, entitlements, URL schemes, permissions strings).
+3) What must be moved to Android (AndroidManifest, Gradle, intent filters, permissions).
+Be explicit about file names and what to change.</code></pre>
+
+              <h3>{m.solutions_cordova_to_capacitor_ai_prompt3_title({}, { locale })}</h3>
+              <pre class="bg-gray-900 rounded-lg p-4 text-sm overflow-x-auto"><code class="text-gray-200">You are the QA lead for a Cordova -&gt; Capacitor migration.
+
+App description:
+&lt;PASTE HERE&gt;
+
+Features that rely on native plugins:
+&lt;LIST HERE&gt;
+
+Create a test plan for iOS and Android that includes:
+- permission flows (fresh install, denied, restricted, limited)
+- background behavior (if any)
+- deep links / universal links (if any)
+- upgrade path from the existing Cordova app version
+Output as a checklist that an engineer can run in 2-3 hours per release candidate.</code></pre>
+
+              <h2 id="skills">{m.solutions_cordova_to_capacitor_ai_section_skills_title({}, { locale })}</h2>
+              <p>
+                {m.solutions_cordova_to_capacitor_ai_section_skills_body({}, { locale })}
+              </p>
+              <p>
+                {m.solutions_cordova_to_capacitor_ai_skills_see_prefix({}, { locale })}{' '}
+                <a href={getRelativeLocaleUrl(locale, 'skills')}>{m.solutions_cordova_to_capacitor_ai_skills_see_link({}, { locale })}</a>.
+              </p>
+
+              <h2 id="help">{m.solutions_cordova_to_capacitor_ai_section_help_title({}, { locale })}</h2>
+              <p>
+                {m.solutions_cordova_to_capacitor_ai_section_help_body({}, { locale })}
+              </p>
+              <ul>
+                <li><a href={getRelativeLocaleUrl(locale, 'solutions/cordova-to-capacitor')}>{m.solutions_cordova_to_capacitor_ai_help_item1({}, { locale })}</a></li>
+                <li><a href={getRelativeLocaleUrl(locale, 'premium-support')}>{m.solutions_cordova_to_capacitor_ai_help_item2({}, { locale })}</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

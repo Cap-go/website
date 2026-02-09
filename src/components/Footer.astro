@@ -43,6 +43,10 @@ const navigation: Record<string, NavigationItem[]> = {
       name: m.documentation({}, { locale: Astro.locals.locale }),
       href: getRelativeLocaleUrl(Astro.locals.locale, 'docs'),
     },
+    {
+      name: m.solutions_cordova_to_capacitor_ai_short({}, { locale: Astro.locals.locale }),
+      href: getRelativeLocaleUrl(Astro.locals.locale, 'solutions/cordova-to-capacitor-ai'),
+    },
     { name: m.ci_cd_integration({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'ci_cd') },
     {
       name: m.awesome_capacitor({}, { locale: Astro.locals.locale }),
