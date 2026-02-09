@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { createLdJsonGraph, createNewsArticleLdJson } from '@/lib/ldJson'
+import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import * as m from '@/paraglide/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
@@ -15,35 +15,17 @@ const pagePath = getRelativeLocaleUrl(locale, 'solutions/cordova-to-capacitor-ai
 const pageUrl = `${baseUrl}${pagePath}`
 const homeUrl = `${baseUrl}${getRelativeLocaleUrl(locale, '/')}`
 
-const datePublished = '2026-02-08T00:00:00.000Z'
 const dateModified = '2026-02-08T00:00:00.000Z'
 
-const articleLdJson = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
-  title,
+const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
   description,
   url: pageUrl,
-  image: [`${baseUrl}/capgo_banner.webp`],
-  datePublished,
-  dateModified,
-  author: 'Martin Donadieu',
-  authorUrl: 'https://github.com/riderx',
-  authorImage: 'https://avatars.githubusercontent.com/u/4084527?v=4',
-  keywords: [
-    'cordova to capacitor migration',
-    'migrate cordova to capacitor',
-    'capacitor 2026',
-    'capgo plugins',
-    'capacitor plugins',
-    'live updates',
-    'bun',
-    'bunx',
-    'ai migration',
-  ],
-  articleSection: 'Migration',
-  locale,
+  serviceType: 'Software Development Service',
+  areaServed: ['Worldwide'],
 })
 
-const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, articleLdJson, {
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJson, {
   includeOrganization: true,
   includeBreadcrumbs: true,
   breadcrumbs: [
@@ -60,16 +42,11 @@ const content = {
     'cordova to capacitor migration, migrate cordova to capacitor, capacitor plugins, capgo plugins, ai assisted migration, capacitor live updates',
   image: '/capgo_banner.webp',
   ldJSON,
-  ogType: 'article',
-  articlePublishedTime: new Date(datePublished).toISOString(),
-  articleModifiedTime: new Date(dateModified).toISOString(),
-  articleSection: 'Migration',
-  articleTags: ['Migration', 'Capacitor', 'Cordova', 'AI'],
 }
 ---
 
 <Layout {content}>
-  <div>
+  <main>
     <!-- Hero -->
     <section class="relative py-20 sm:py-28 overflow-hidden">
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
@@ -107,6 +84,8 @@ const content = {
             </a>
             <a
               href="https://cal.com/team/capgo/convert-your-cordova-app-to-capacitor"
+              target="_blank"
+              rel="noopener noreferrer"
               class="px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 border border-gray-600 rounded-xl hover:bg-gray-800 hover:text-white"
             >
               {m.solutions_cordova_to_capacitor_ai_cta_talk({}, { locale })}
@@ -144,7 +123,7 @@ const content = {
                   class="block mt-2 text-sm text-sky-300 hover:text-sky-200 break-words"
                   href="https://capacitorjs.com/docs/cordova/migrating-from-cordova-to-capacitor"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                 >
                   capacitorjs.com/docs/cordova/migrating-from-cordova-to-capacitor
                 </a>
@@ -207,47 +186,47 @@ bunx cap sync</code></pre>
                     <tr>
                       <td class="px-4 py-3 font-medium text-white">{m.solutions_cordova_to_capacitor_ai_row_camera({}, { locale })}</td>
                       <td class="px-4 py-3"><code>cordova-plugin-camera</code></td>
-                      <td class="px-4 py-3">Capacitor Camera (<code>@capacitor/camera</code>) or overlays with <code>@capgo/capacitor-camera-preview</code></td>
+                      <td class="px-4 py-3"><code>@capacitor/camera</code> + <code>@capgo/capacitor-camera-preview</code></td>
                     </tr>
                     <tr>
                       <td class="px-4 py-3 font-medium text-white">{m.solutions_cordova_to_capacitor_ai_row_inappbrowser({}, { locale })}</td>
                       <td class="px-4 py-3"><code>cordova-plugin-inappbrowser</code></td>
-                      <td class="px-4 py-3"><code>@nicholasalx/capacitor-inappbrowser</code> (stable Capacitor-first)</td>
+                      <td class="px-4 py-3"><code>@nicholasalx/capacitor-inappbrowser</code></td>
                     </tr>
                     <tr>
                       <td class="px-4 py-3 font-medium text-white">{m.solutions_cordova_to_capacitor_ai_row_bg_geo({}, { locale })}</td>
-                      <td class="px-4 py-3">Various background GPS plugins</td>
+                      <td class="px-4 py-3"><code>@transistorsoft/cordova-background-geolocation-lt</code> / <code>cordova-plugin-geolocation</code></td>
                       <td class="px-4 py-3"><code>@capgo/capacitor-background-geolocation</code></td>
                     </tr>
                     <tr>
                       <td class="px-4 py-3 font-medium text-white">{m.solutions_cordova_to_capacitor_ai_row_biometrics({}, { locale })}</td>
-                      <td class="px-4 py-3">Various biometric plugins</td>
+                      <td class="px-4 py-3"><code>cordova-plugin-fingerprint-aio</code> / <code>cordova-plugin-touch-id</code></td>
                       <td class="px-4 py-3"><code>@capgo/capacitor-native-biometric</code></td>
                     </tr>
                     <tr>
                       <td class="px-4 py-3 font-medium text-white">{m.solutions_cordova_to_capacitor_ai_row_social_login({}, { locale })}</td>
-                      <td class="px-4 py-3">Google/Apple/Facebook plugins</td>
+                      <td class="px-4 py-3"><code>cordova-plugin-googleplus</code> / <code>cordova-plugin-facebook4</code> / <code>cordova-plugin-sign-in-with-apple</code></td>
                       <td class="px-4 py-3"><code>@capgo/capacitor-social-login</code></td>
                     </tr>
                     <tr>
                       <td class="px-4 py-3 font-medium text-white">{m.solutions_cordova_to_capacitor_ai_row_sqlite({}, { locale })}</td>
                       <td class="px-4 py-3"><code>cordova-sqlite-storage</code></td>
-                      <td class="px-4 py-3"><code>@nicholasalx/capacitor-data-storage-sqlite</code> (or <code>@nicholasalx/capacitor-fast-sql</code>)</td>
+                      <td class="px-4 py-3"><code>@nicholasalx/capacitor-data-storage-sqlite</code> / <code>@nicholasalx/capacitor-fast-sql</code></td>
                     </tr>
                     <tr>
                       <td class="px-4 py-3 font-medium text-white">{m.solutions_cordova_to_capacitor_ai_row_iap({}, { locale })}</td>
-                      <td class="px-4 py-3">Mixed community plugins</td>
+                      <td class="px-4 py-3"><code>cordova-plugin-purchase</code></td>
                       <td class="px-4 py-3"><code>@capgo/capacitor-native-purchases</code></td>
                     </tr>
                     <tr>
                       <td class="px-4 py-3 font-medium text-white">{m.solutions_cordova_to_capacitor_ai_row_scanner({}, { locale })}</td>
-                      <td class="px-4 py-3">Various scanner plugins</td>
+                      <td class="px-4 py-3"><code>cordova-plugin-document-scanner</code></td>
                       <td class="px-4 py-3"><code>@capgo/capacitor-document-scanner</code></td>
                     </tr>
                     <tr>
                       <td class="px-4 py-3 font-medium text-white">{m.solutions_cordova_to_capacitor_ai_row_live_updates({}, { locale })}</td>
-                      <td class="px-4 py-3">Appflow or custom loaders</td>
-                      <td class="px-4 py-3"><code>@capgo/capacitor-updater</code> (secure, production-grade live updates)</td>
+                      <td class="px-4 py-3"><code>Ionic Appflow</code></td>
+                      <td class="px-4 py-3"><code>@capgo/capacitor-updater</code></td>
                     </tr>
                   </tbody>
                 </table>
@@ -329,5 +308,5 @@ Output as a checklist that an engineer can run in 2-3 hours per release candidat
         </div>
       </div>
     </section>
-  </div>
+  </main>
 </Layout>
