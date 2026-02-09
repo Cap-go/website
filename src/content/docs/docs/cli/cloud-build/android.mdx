@@ -5,7 +5,7 @@ sidebar:
   order: 3
 ---
 
-import { Steps, Aside, Card, CardGrid } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
 
 Build and submit Android apps to Google Play Store using Capgo's dedicated infrastructure.
 
@@ -18,7 +18,7 @@ Build and submit Android apps to Google Play Store using Capgo's dedicated infra
 
   - You need to have an active Google Developer account
   - You need to have Android Studio installed
-  - Your app must be able to build successfully with Android Studio]
+  - Your app must be able to build successfully with Android Studio
 
 :::note
  I will use the following app for the tutorial: https://github.com/Cap-go/capgo-native-build-tutorial-app
@@ -45,50 +45,54 @@ Before we can start building the app with Capgo, we need to build the app manual
     ![Android Studio generate signed app bundles / APKs](/native-build-assets/android-studio-generate-signed-app-bundles-apks.webp)
   3. Select `Android App Bundle` and click on `Next`
     ![Android Studio select Android App Bundle](/native-build-assets/android-studio-select-android-app-bundle.webp)
-  4. Generate the keystore file
+</Steps>
 
-      Right now, you are missing the keystore file. This file is used to sign your app, which lets Google know that it's you who built the app.
-      To generate it, we will use the GUI method provided by Android Studio.
-      There is also a way to do this with the command line, but we will not cover that in this tutorial.
+### Creating a Keystore
 
-      <Steps>
-        1. Click on `Create new`
-          ![Android Studio create new keystore](/native-build-assets/android-studio-create-new-keystore.webp)
-        2. Fill in the Key Store path
-          ![Android Studio fill in key store path](/native-build-assets/android-studio-fill-in-key-store-path.webp)
+Right now, you are missing the keystore file. This file is used to sign your app, which lets Google know that it's you who built the app.
+To generate it, we will use the GUI method provided by Android Studio.
+There is also a way to do this with the command line, but we will not cover that in this tutorial.
 
-            :::caution
-            This **IS TO BE SAVED** - it will be used later
-            :::
-        3. Set the Key Store password
-          ![Android Studio set key store password](/native-build-assets/android-studio-set-key-store-password.webp)
+<Steps>
+  1. Click on `Create new`
+    ![Android Studio create new keystore](/native-build-assets/android-studio-create-new-keystore.webp)
+  2. Fill in the Key Store path
+    ![Android Studio fill in key store path](/native-build-assets/android-studio-fill-in-key-store-path.webp)
 
-            :::note
-            I recommend to use the same password for the Key Store and the Key Alias.
-            :::
+      :::caution
+      This **IS TO BE SAVED** - it will be used later
+      :::
+  3. Set the Key Store password
+    ![Android Studio set key store password](/native-build-assets/android-studio-set-key-store-password.webp)
 
-            :::caution
-            This **IS TO BE SAVED** - it will be used later
-            :::
-        4. Fill the rest of the form
-        
-            1. Keep the Key Alias as is (key0)
-            2. Fill the certificate details. I have filled it with fake details, but you should fill it with your own details.
+      :::note
+      I recommend using the same password for the Key Store and the Key Alias.
+      :::
 
-            ![Android Studio fill rest of the form](/native-build-assets/android-studio-fill-rest-of-the-form.webp)
-        5. Click on `OK`
-          ![Android Studio click on OK](/native-build-assets/android-studio-click-on-ok.webp)
-      </Steps>
-  5. Make sure all of the details for the keystore have been filled in correctly and click on `Next`
+      :::caution
+      This **IS TO BE SAVED** - it will be used later
+      :::
+  4. Fill the rest of the form
+
+      1. Keep the Key Alias as is (key0)
+      2. Fill the certificate details. I have filled it with fake details, but you should fill it with your own details.
+
+      ![Android Studio fill rest of the form](/native-build-assets/android-studio-fill-rest-of-the-form.webp)
+  5. Click on `OK`
+    ![Android Studio click on OK](/native-build-assets/android-studio-click-on-ok.webp)
+</Steps>
+
+<Steps>
+  1. Make sure all of the details for the keystore have been filled in correctly and click on `Next`
     ![Android Studio make sure all of the details for the keystore have been filled in correctly](/native-build-assets/android-studio-make-sure-all-of-the-details-for-the-keystore-have-been-filled-in-correctly.webp)
-  6. Select the `release` build variant and click on `Create`
+  2. Select the `release` build variant and click on `Create`
     ![Android Studio select release build variant](/native-build-assets/android-studio-select-release-build-variant.webp)
-  7. After the build succeed, you should see the following screen
+  3. After the build succeeds, you should see the following screen
     ![Android Studio after build succeed](/native-build-assets/android-studio-after-build-succeed.webp)
   
-      1. This popout indicated that the build succeeded.
+      1. This popup indicates that the build succeeded.
       2. Click on the `locate` button - this will open the file explorer and you should see the build there.
-  8. Make sure you can see the build in the file explorer
+  4. Make sure you can see the build in the file explorer
     ![Android Studio make sure you can see the build in the file explorer](/native-build-assets/android-studio-make-sure-you-can-see-the-build-in-the-file-explorer.webp)
 </Steps>
 
@@ -136,7 +140,7 @@ Let's begin.
       ![Google Console Project Selector](/social-login-assets/google_cons_project_selector.png)
   3. If you already have a project, select it. Otherwise, create a new project:
       :::note
-      Images copied from the Social Login Tutorial, use a name that is appropriate for your project.
+      The screenshots below are illustrative - use a name appropriate for your project.
       :::
       1. Click on `New project`
           ![New Project button in Google Console](/social-login-assets/google_cons_new_project_btn.png)
@@ -152,7 +156,7 @@ Let's begin.
   6. Fill in the form for the service account and click on `Done`
       1. I recommend setting the name to `Capgo Native Build Service Account`
       2. For the Service Account ID, I recommend setting it to `capgo-native-build-service-acc`
-      3. As for the description, you don't have to fill it it, but I recommend filling it with `Allows Capgo Native Build to build and submit the app to the Play Store`
+      3. As for the description, you don't have to fill it in, but I recommend filling it with `Allows Capgo Native Build to build and submit the app to the Play Store`
   
       ![Google Console fill in the form for the service account](/native-build-assets/google-console-fill-in-the-form-for-the-service-account.webp)
   7. Click on the newly created service account
@@ -161,11 +165,9 @@ Let's begin.
   8. Click on the `Keys` tab
       ![Keys tab in Google Console](/native-build-assets/google_cons_keys_tab.webp)
   9. Click on `Add Key` and `Create new key`
-      ![Add Key button in Google Console](/native-build-assets/google_cons_add_key_btn.webp)
       ![Google Console add key and create new key](/native-build-assets/google-console-add-key-and-create-new-key.webp)
   10. Click on `JSON` and `Create`
       ![Create Key button in Google Console](/native-build-assets/google_cons_create_key_btn.webp)
-      ![Google Console create key](/native-build-assets/google-console-create-key.webp)
 
       :::caution
       Clicking on `Create` will create a new key and it will download the JSON file to your local machine.
@@ -180,3 +182,12 @@ Let's begin.
 ### Saving the credentials
 
 You can save the credentials using the following command:
+
+```bash
+bunx @capgo/cli build credentials save --platform android \
+  --keystore ./path/to/keystore.jks \
+  --keystore-alias "your-alias" \
+  --keystore-key-password "key-password" \
+  --keystore-store-password "store-password" \
+  --play-config ./play-store-service-account.json
+```
