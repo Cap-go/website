@@ -124,6 +124,29 @@ const repositories = [
       <li>{m.bug_bounty_out_of_scope_6({}, { locale: Astro.locals.locale })}</li>
     </ul>
 
+    <h2>{m.bug_bounty_supabase_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.bug_bounty_supabase_intro({}, { locale: Astro.locals.locale })}</p>
+
+    <h3>{m.bug_bounty_supabase_examples_title({}, { locale: Astro.locals.locale })}</h3>
+    <div class="not-prose grid gap-4 my-6 md:grid-cols-2">
+      <div class="p-4 rounded-lg border border-zinc-700 bg-zinc-800/50">
+        <h4 class="text-base font-semibold text-white mb-2">{m.bug_bounty_supabase_not_valid_title({}, { locale: Astro.locals.locale })}</h4>
+        <ul class="list-disc pl-5 text-sm text-zinc-300 space-y-1">
+          <li>{m.bug_bounty_supabase_not_valid_1({}, { locale: Astro.locals.locale })}</li>
+          <li>{m.bug_bounty_supabase_not_valid_2({}, { locale: Astro.locals.locale })}</li>
+          <li>{m.bug_bounty_supabase_not_valid_3({}, { locale: Astro.locals.locale })}</li>
+        </ul>
+      </div>
+      <div class="p-4 rounded-lg border border-zinc-700 bg-zinc-800/50">
+        <h4 class="text-base font-semibold text-white mb-2">{m.bug_bounty_supabase_valid_title({}, { locale: Astro.locals.locale })}</h4>
+        <ul class="list-disc pl-5 text-sm text-zinc-300 space-y-1">
+          <li>{m.bug_bounty_supabase_valid_1({}, { locale: Astro.locals.locale })}</li>
+          <li>{m.bug_bounty_supabase_valid_2({}, { locale: Astro.locals.locale })}</li>
+          <li>{m.bug_bounty_supabase_valid_3({}, { locale: Astro.locals.locale })}</li>
+        </ul>
+      </div>
+    </div>
+
     <p>{m.bug_bounty_contact({}, { locale: Astro.locals.locale })}</p>
   </div>
 </Layout>
