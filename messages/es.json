@@ -234,7 +234,7 @@
   "awesome_capacitor": "Asombroso Capacitor",
   "bandwidth": "Ancho de banda",
   "bandwidth_explanation": "En Capgo, medimos el ancho de banda mediante el seguimiento de la cantidad de datos transmitidos entre la ubicación de almacenamiento y los dispositivos del usuario a través de servidores en el borde. Esto nos ayuda a ofrecer actualizaciones en tiempo real.",
-  "bandwidth_gb": "Ancho de banda<br />(GiB)",
+  "bandwidth_gb": "Ancho de banda (GiB)",
   "beautiful_native_experience": "Hermosa experiencia nativa",
   "before_submitting_a_pr": "Antes de enviar un PR a cualquiera de los repositorios, por favor asegúrate de que lo siguiente esté hecho:",
   "benefit_from_our_deep_expertise_in_mobile_app_ci_cd_best_practices_without_the_need_to_build_and_maintain_a_complex_system_yourself": "Benefíciese de nuestra profunda experiencia en las mejores prácticas de CI/CD para aplicaciones móviles, sin necesidad de construir y mantener un sistema complejo por su cuenta.",
