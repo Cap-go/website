@@ -1,0 +1,119 @@
+---
+title: 업데이트 유형
+description: "Capgo가 제공하는 모든 OTA 업데이트 유형에 대한 포괄적인 참조: 적용 시점, 지연 조건, 버전 차단 및 전달 방법."
+sidebar:
+  order: 2
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Capgo는 여러 유형의 무선(OTA) 업데이트를 지원합니다. 이 페이지에서는 앱에 적합한 조합을 선택할 수 있도록 모든 유형을 나열하고 설명합니다.
+
+## 적용 시점
+
+업데이트가 다운로드된 후 **언제** 적용되는지를 제어합니다.
+
+| 유형 | 설명 | 사용 사례 |
+|------|-------------|----------|
+| **기본값** | 백그라운드에서 다운로드하고 사용자가 앱을 백그라운드로 전환하거나 종료할 때 적용 | 대부분의 앱; 최소한의 중단 |
+| **directUpdate: `atInstall`** | 새로 설치하거나 앱 스토어 업데이트 시에만 즉시 적용 | 신규 사용자는 최신 버전을 받고 기존 사용자는 기본 흐름 사용 |
+| **directUpdate: `onLaunch`** | 설치, 스토어 업데이트 또는 앱 종료 후 즉시 적용 | 최신성과 세션 안정성 간의 균형 |
+| **directUpdate: `always`** | 업데이트가 다운로드될 때마다 즉시 적용(재개 시 포함) | 중요한 수정, 단순한 상태를 가진 앱 |
+
+`capacitor.config.ts`에서 구성:
+
+```typescript
+plugins: {
+  CapacitorUpdater: {
+    directUpdate: false, // default
+    // or: 'atInstall' | 'onLaunch' | 'always'
+  }
+}
+```
+
+<Aside type="tip">
+전체 세부 정보 및 스플래시 화면 처리는 [업데이트 동작](/docs/live-updates/update-behavior/)을 참조하세요.
+</Aside>
+
+## 지연 조건
+
+업데이트가 설치되기 **전에** 충족되어야 하는 조건입니다. `setMultiDelay`를 사용하여 조건을 결합할 수 있습니다(모든 조건이 충족되어야 함).
+
+| 조건 | 설명 | 예시 |
+|-----------|-------------|---------|
+| **date** | 특정 날짜/시간 이후까지 대기 | 서버 측 릴리스와 조율 |
+| **background** | 앱이 백그라운드로 전환된 후 최소 기간(ms) 대기 | 빠른 앱 전환 중 적용 방지 |
+| **nativeVersion** | 최소 네이티브 바이너리 버전 필요 | 호환되지 않는 네이티브 코드에서 업데이트 차단 |
+| **kill** | 다음 앱 종료 이벤트까지 대기 | 완전한 재시작 시에만 적용 |
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+await CapacitorUpdater.setMultiDelay({
+  delayConditions: [
+    { kind: 'date', value: '2023-06-01T00:00:00.000Z' },
+    { kind: 'background', value: '60000' },
+  ],
+});
+```
+
+<Aside type="danger">
+`kill` 조건은 다른 조건들처럼 다음 백그라운드가 아닌 첫 번째 종료 이벤트 후에 트리거됩니다. 이는 향후 릴리스에서 수정될 예정입니다.
+</Aside>
+
+## 버전 차단 (채널 정책)
+
+채널이 자동으로 전달할 **semver 업데이트**를 제어합니다. 채널에서 `--disable-auto-update`를 통해 설정합니다.
+
+| 전략 | 차단 | 허용 | 사용 사례 |
+|----------|--------|--------|----------|
+| **none** | 없음 | 모든 업데이트 | 기본값; 완전 자동 업데이트 |
+| **major** | 0.0.0 → 1.0.0 | 동일한 메이저 버전 (예: 1.x → 1.y) | 이전 네이티브 버전에 주요 변경사항이 도달하는 것을 방지 |
+| **minor** | 0.0.0 → 1.1.0, 1.1.0 → 1.2.0 | 동일한 마이너 버전 (예: 1.2.x → 1.2.y) | 메이저 버전 내에서 더 엄격한 제어 |
+| **patch** | 패치 증가를 제외한 모든 변경 | 0.0.311 → 0.0.314만 허용 | 매우 엄격; 패치 전용 업데이트 |
+| **metadata** | `min_update_version` 없는 업데이트 | 명시적 호환성 메타데이터가 있는 업데이트 | 번들별 맞춤 호환성 규칙 |
+
+```bash
+npx @capgo/cli channel set production --disable-auto-update major
+```
+
+<Aside type="caution">
+`patch` 및 `metadata`는 신중한 설정이 필요합니다. 자세한 내용은 [CLI 명령](/docs/cli/commands/#disable-updates-strategy) 및 [버전 타겟팅](/docs/live-updates/version-targeting/)을 참조하세요.
+</Aside>
+
+## 전달 유형
+
+**번들이 기기로 전송되는** 방법입니다.
+
+| 유형 | 설명 | 사용 시기 |
+|------|-------------|-------------|
+| **전체 번들** | 전체 JS 번들이 다운로드됨 | 첫 설치, 대규모 변경 또는 델타를 사용할 수 없을 때 |
+| **델타 (매니페스트)** | 변경된 파일만 다운로드됨 | 대부분의 업데이트; 더 빠르고 대역폭 친화적 |
+
+```bash
+# 전체 번들 (기본값)
+npx @capgo/cli bundle upload --channel production
+
+# 델타 업데이트
+npx @capgo/cli bundle upload --channel production --delta
+```
+
+<Aside type="tip">
+`directUpdate`를 사용할 때는 [델타 업데이트](/docs/live-updates/differentials/)를 활성화하여 다운로드 시간을 최소화하고 UX를 개선하세요.
+</Aside>
+
+## 빠른 참조
+
+| 카테고리 | 유형 |
+|----------|-------|
+| **적용 시점** | 기본값, `atInstall`, `onLaunch`, `always` |
+| **지연 조건** | `date`, `background`, `nativeVersion`, `kill` |
+| **버전 차단** | `none`, `major`, `minor`, `patch`, `metadata` |
+| **전달** | 전체 번들, 델타 (매니페스트) |
+
+## 관련 문서
+
+- [업데이트 동작](/docs/live-updates/update-behavior/) — 적용 시점 및 지연 구성
+- [버전 타겟팅](/docs/live-updates/version-targeting/) — 채널 기반 버전 라우팅
+- [델타 (매니페스트) 업데이트](/docs/live-updates/differentials/) — 부분 다운로드 활성화
+- [채널](/docs/live-updates/channels/) — 채널 구성 및 우선순위

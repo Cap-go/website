@@ -16,6 +16,7 @@ import AutomationFeatures from '@/components/landing/AutomationFeatures.astro'
 import BuiltForDevelopers from '@/components/BuiltForDevelopers.astro'
 import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import AppflowShutdown from '@/components/AppflowShutdown.astro'
+import UpdateTypesSection from '@/components/landing/UpdateTypesSection.astro'
 
 const config = Astro.locals.runtimeConfig
 
@@ -109,6 +110,7 @@ const content = {
     <DeviceLogs />
     <AutomationFeatures />
     <GlobalInfrastructure />
+    <UpdateTypesSection />
     <BuiltForDevelopers />
     <SharedNumbers />
     <Testimonials />

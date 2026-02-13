@@ -1,0 +1,119 @@
+---
+title: Update Types
+description: "A comprehensive reference of all OTA update types Capgo provides: apply timing, delay conditions, version blocking, and delivery methods."
+sidebar:
+  order: 2
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Capgo supports several types of over-the-air (OTA) updates. This page lists and explains all of them so you can choose the right combination for your app.
+
+## Apply Timing
+
+Controls **when** an update is applied after it is downloaded.
+
+| Type | Description | Use Case |
+|------|-------------|----------|
+| **Default** | Download in background, apply when user backgrounds or kills the app | Most apps; minimal disruption |
+| **directUpdate: `atInstall`** | Apply immediately only on fresh install or app store update | New users get latest; existing users use default flow |
+| **directUpdate: `onLaunch`** | Apply immediately on install, store update, or after app kill | Balance between freshness and session stability |
+| **directUpdate: `always`** | Apply immediately whenever an update is downloaded (including on resume) | Critical fixes, apps with simple state |
+
+Configure in `capacitor.config.ts`:
+
+```typescript
+plugins: {
+  CapacitorUpdater: {
+    directUpdate: false, // default
+    // or: 'atInstall' | 'onLaunch' | 'always'
+  }
+}
+```
+
+<Aside type="tip">
+For full details and splashscreen handling, see [Update Behavior](/docs/live-updates/update-behavior/).
+</Aside>
+
+## Delay Conditions
+
+Conditions that must be met **before** an update is installed. Use `setMultiDelay` to combine them (all conditions must be satisfied).
+
+| Condition | Description | Example |
+|-----------|-------------|---------|
+| **date** | Wait until after a specific date/time | Coordinate with server-side release |
+| **background** | Wait a minimum duration (ms) after app is backgrounded | Avoid applying during quick app switches |
+| **nativeVersion** | Require a minimum native binary version | Block updates on incompatible native code |
+| **kill** | Wait until the next app kill event | Apply only on full restart |
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+await CapacitorUpdater.setMultiDelay({
+  delayConditions: [
+    { kind: 'date', value: '2023-06-01T00:00:00.000Z' },
+    { kind: 'background', value: '60000' },
+  ],
+});
+```
+
+<Aside type="danger">
+The `kill` condition triggers after the first kill event, not the next background like the others. This will be fixed in a future release.
+</Aside>
+
+## Version Blocking (Channel Policy)
+
+Controls which **semver updates** a channel will auto-deliver. Set via `--disable-auto-update` on channels.
+
+| Strategy | Blocks | Allows | Use Case |
+|----------|--------|--------|----------|
+| **none** | Nothing | All updates | Default; full auto-update |
+| **major** | 0.0.0 → 1.0.0 | Same major (e.g. 1.x → 1.y) | Prevent breaking changes from reaching old native |
+| **minor** | 0.0.0 → 1.1.0, 1.1.0 → 1.2.0 | Same minor (e.g. 1.2.x → 1.2.y) | Stricter control within major |
+| **patch** | Any change except patch bump | Only 0.0.311 → 0.0.314 | Very strict; patch-only updates |
+| **metadata** | Updates without `min_update_version` | Updates with explicit compatibility metadata | Custom compatibility rules per bundle |
+
+```bash
+npx @capgo/cli channel set production --disable-auto-update major
+```
+
+<Aside type="caution">
+`patch` and `metadata` require careful setup. See [CLI commands](/docs/cli/commands/#disable-updates-strategy) and [Version Targeting](/docs/live-updates/version-targeting/) for details.
+</Aside>
+
+## Delivery Types
+
+How the **bundle is transferred** to the device.
+
+| Type | Description | When to Use |
+|------|-------------|-------------|
+| **Full bundle** | Entire JS bundle is downloaded | First install, large changes, or when delta is unavailable |
+| **Delta (manifest)** | Only changed files are downloaded | Most updates; faster and bandwidth-friendly |
+
+```bash
+# Full bundle (default)
+npx @capgo/cli bundle upload --channel production
+
+# Delta updates
+npx @capgo/cli bundle upload --channel production --delta
+```
+
+<Aside type="tip">
+When using `directUpdate`, enable [Delta updates](/docs/live-updates/differentials/) to minimize download time and improve UX.
+</Aside>
+
+## Quick Reference
+
+| Category | Types |
+|----------|-------|
+| **Apply timing** | Default, `atInstall`, `onLaunch`, `always` |
+| **Delay conditions** | `date`, `background`, `nativeVersion`, `kill` |
+| **Version blocking** | `none`, `major`, `minor`, `patch`, `metadata` |
+| **Delivery** | Full bundle, Delta (manifest) |
+
+## Related
+
+- [Update Behavior](/docs/live-updates/update-behavior/) — Configure apply timing and delays
+- [Version Targeting](/docs/live-updates/version-targeting/) — Channel-based version routing
+- [Delta (manifest) Updates](/docs/live-updates/differentials/) — Enable partial downloads
+- [Channels](/docs/live-updates/channels/) — Channel configuration and precedence
