@@ -2,8 +2,8 @@
 title: Ajouter une App
 description: Aggiungi un'app al tuo account Capgo e installa il plugin nella tua app
 sidebar:
-  order: 2
-prev: false
+  order: 3
+prev: true
 next: true
 locale: it
 ---
@@ -34,7 +34,7 @@ Prima di iniziare con Capgo, assicurati di avere:
 1. Crea il tuo account su [https://capgo.app/register](https://capgo.app/register)
 ![signup screenshot](/signup.webp "signup screenshot")
 
-2. Usa il comando Init per iniziare <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Ti verranno presentate una serie di domande. Fornisci le risposte necessarie per completare la configurazione automatica<Aside type="tip">Seguendo questi passaggi, sarai operativo in pochissimo tempo. Se hai bisogno di ulteriore assistenza durante il processo, il nostro team di supporto è [qui per aiutarti](https://support.capgo.app) Buon onboarding!</Aside>
+2. Usa il comando Init per iniziare <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Ti verranno presentate una serie di domande. Fornisci le risposte necessarie per completare la configurazione automatica<Aside type="tip">Seguendo questi passaggi, sarai operativo in pochissimo tempo. Se hai bisogno di ulteriore assistenza durante il processo, il nostro team di supporto è [qui per aiutarti](https://support.capgo.app) Buon onboarding!</Aside><LinkCard href="/docs/getting-started/onboarding/" title="Guida Dettagliata all'Onboarding" description="Vedi la guida completa passo dopo passo per il processo di onboarding CLI" />
 
 3. Distribuisci un aggiornamento live <LinkCard href="/docs/getting-started/deploy/" title="Deploy a live update" description="Impara come distribuire un aggiornamento live alla tua app" />
 
@@ -67,7 +67,7 @@ Nel caso in cui il comando init non funzioni, puoi aggiungere manualmente un'app
    ```
 
    Ogni versione maggiore del plugin corrisponde alla versione maggiore di Capacitor (v8 → Capacitor 8, v7 → Capacitor 7, v6 → Capacitor 6, v5 → Capacitor 5). Le versioni minori condividono lo stesso set di funzionalità su tutte le versioni maggiori (es., 5.34.0, 6.34.0, 7.34.0 e 8.34.0 includono le stesse funzionalità).
-   </Aside>
+   </Aside><LinkCard href="/docs/getting-started/onboarding/" title="Guida Dettagliata all'Onboarding" description="Vedi la guida completa passo dopo passo per il processo di onboarding CLI" />
 
 4. Configura il plugin nel tuo `capacitor.config` <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
   [Vedi tutte le opzioni disponibili](/docs/plugin/settings/). Queste informazioni verranno dedotte se non fornite.

@@ -2,8 +2,8 @@
 title: Ajouter une App
 description: Tambahkan aplikasi ke akun Capgo dan instal plugin ke aplikasi tersebut
 sidebar:
-  order: 2
-prev: false
+  order: 3
+prev: true
 next: true
 locale: id
 ---
@@ -33,7 +33,7 @@ Sebelum memulai dengan Capgo, pastikan Anda memiliki:
 1. Buat akun Anda di [https://capgo.app/register](https://capgo.app/register)
 ![signup screenshot](/signup.webp "signup screenshot")
 
-2. Gunakan perintah Init untuk memulai <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Anda akan diberikan beberapa pertanyaan. Berikan jawaban yang diperlukan untuk menyelesaikan setup otomatis<Aside type="tip">Dengan mengikuti langkah-langkah ini, Anda akan siap menggunakan dalam waktu singkat. Jika Anda membutuhkan bantuan selama proses, tim support kami [siap membantu](https://support.capgo.app) Selamat mencoba!</Aside>
+2. Gunakan perintah Init untuk memulai <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Anda akan diberikan beberapa pertanyaan. Berikan jawaban yang diperlukan untuk menyelesaikan setup otomatis<Aside type="tip">Dengan mengikuti langkah-langkah ini, Anda akan siap menggunakan dalam waktu singkat. Jika Anda membutuhkan bantuan selama proses, tim support kami [siap membantu](https://support.capgo.app) Selamat mencoba!</Aside><LinkCard href="/docs/getting-started/onboarding/" title="Panduan Onboarding Terperinci" description="Lihat panduan lengkap langkah demi langkah untuk proses onboarding CLI" />
 
 3. Deploy live update <LinkCard href="/docs/getting-started/deploy/" title="Deploy live update" description="Pelajari cara deploy live update ke aplikasi Anda" />
 
@@ -66,7 +66,7 @@ Jika perintah init tidak berhasil, Anda dapat menambahkan aplikasi secara manual
    ```
 
    Setiap versi mayor plugin sesuai dengan versi mayor Capacitor (v8 → Capacitor 8, v7 → Capacitor 7, v6 → Capacitor 6, v5 → Capacitor 5). Versi minor berbagi set fitur yang sama di semua versi mayor (misal, 5.34.0, 6.34.0, 7.34.0, dan 8.34.0 semua menyertakan fitur yang sama).
-   </Aside>
+   </Aside><LinkCard href="/docs/getting-started/onboarding/" title="Panduan Onboarding Terperinci" description="Lihat panduan lengkap langkah demi langkah untuk proses onboarding CLI" />
 
 4. Konfigurasi plugin di `capacitor.config` Anda <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
   [Lihat semua opsi yang tersedia](/docs/plugin/settings/). Informasi ini akan disimpulkan jika tidak disediakan.

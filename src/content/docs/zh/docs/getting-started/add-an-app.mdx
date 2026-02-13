@@ -3,8 +3,8 @@ title: "添加应用"
 description: "将应用添加到您的 Capgo 账户，并在您的应用中安装插件"
 locale: zh
 sidebar:
-  order: 2
-prev: false
+  order: 3
+prev: true
 next: true
 ---
 
@@ -34,7 +34,7 @@ import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
 1. 在 [https://capgo.app/register](https://capgo.app/register) 创建您的账户。
 ![注册截图](/signup.webp "注册截图")
 
-2. 使用 Init 命令开始 <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> 您将看到一系列问题。提供必要的答案以完成自动设置。<Aside type="tip">通过遵循这些步骤，您将很快启动并运行。如果您在此过程中需要任何进一步的帮助，我们的支持团队[随时为您提供帮助](https://support.capgo.app)。祝您入门顺利！</Aside>
+2. 使用 Init 命令开始 <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> 您将看到一系列问题。提供必要的答案以完成自动设置。<Aside type="tip">通过遵循这些步骤，您将很快启动并运行。如果您在此过程中需要任何进一步的帮助，我们的支持团队[随时为您提供帮助](https://support.capgo.app)。祝您入门顺利！</Aside><LinkCard href="/docs/getting-started/onboarding/" title="详细的入门指南" description="查看CLI入门流程的完整分步指南" />
 
 3. 部署实时更新 <LinkCard href="/docs/getting-started/deploy/" title="部署实时更新" description="了解如何将实时更新部署到您的应用" />
 
@@ -67,7 +67,7 @@ import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
    ```
 
    每个插件主版本对应 Capacitor 主版本（v8 → Capacitor 8，v7 → Capacitor 7，v6 → Capacitor 6，v5 → Capacitor 5）。所有主版本的相同次版本号具有相同的功能集（例如，5.34.0、6.34.0、7.34.0 和 8.34.0 都包含相同的功能）。
-   </Aside>
+   </Aside><LinkCard href="/docs/getting-started/onboarding/" title="详细的入门指南" description="查看CLI入门流程的完整分步指南" />
 
 4. 在您的 `capacitor.config` 中配置插件 <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
   [查看所有可用选项](/docs/plugin/settings/)。如果未提供，此信息将被推断。

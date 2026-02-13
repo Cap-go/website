@@ -2,8 +2,8 @@
 title: アプリを追加する
 description: Capgoアカウントにアプリを追加し、プラグインをアプリにインストールする
 sidebar:
-  order: 2
-prev: false
+  order: 3
+prev: true
 next: true
 locale: ja
 ---
@@ -33,7 +33,7 @@ Capgoを開始する前に、以下を確認してください：
 1. [https://capgo.app/register](https://capgo.app/register)でアカウントを作成
 ![signup screenshot](/signup.webp "signup screenshot")
 
-2. 初期化コマンドを使用して開始 <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> 一連の質問が表示されます。自動セットアップを完了するために必要な回答を提供してください。<Aside type="tip">これらの手順に従えば、すぐに使用開始できます。プロセス中にさらなるサポートが必要な場合は、サポートチームが[お手伝いします](https://support.capgo.app)。セットアップをお楽しみください！</Aside>
+2. 初期化コマンドを使用して開始 <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> 一連の質問が表示されます。自動セットアップを完了するために必要な回答を提供してください。<Aside type="tip">これらの手順に従えば、すぐに使用開始できます。プロセス中にさらなるサポートが必要な場合は、サポートチームが[お手伝いします](https://support.capgo.app)。セットアップをお楽しみください！</Aside><LinkCard href="/docs/getting-started/onboarding/" title="詳細なオンボーディングガイド" description="CLIオンボーディングプロセスの完全なステップバイステップガイドをご覧ください" />
 
 3. ライブアップデートをデプロイ <LinkCard href="/docs/getting-started/deploy/" title="ライブアップデートをデプロイ" description="アプリにライブアップデートをデプロイする方法を学ぶ" />
 
@@ -66,7 +66,7 @@ Capgoを開始する前に、以下を確認してください：
    ```
 
    各プラグインのメジャーバージョンはCapacitorのメジャーバージョンに対応しています（v8 → Capacitor 8、v7 → Capacitor 7、v6 → Capacitor 6、v5 → Capacitor 5）。マイナーバージョンはすべてのメジャーバージョンで同じ機能セットを共有しています（例：5.34.0、6.34.0、7.34.0、8.34.0はすべて同じ機能を含みます）。
-   </Aside>
+   </Aside><LinkCard href="/docs/getting-started/onboarding/" title="詳細なオンボーディングガイド" description="CLIオンボーディングプロセスの完全なステップバイステップガイドをご覧ください" />
 
 4. `capacitor.config`でプラグインを設定: <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
   [利用可能なすべてのオプションを見る](/docs/plugin/settings/)。提供されない場合、この情報は推測されます。
