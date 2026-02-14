@@ -430,3 +430,373 @@ starlight-theme-select label select:hover {
 .header .logo {
   background-color: transparent !important;
 }
+
+/* FrameworkSelector + ConditionalQuestionnaire styles — MUST live here.
+   Astro drops component <style> blocks from MDX content pages during build. */
+
+.framework-selector {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 600px;
+  gap: 10px;
+  margin: 1rem auto;
+  justify-content: center;
+  align-items: stretch;
+  width: 100%;
+}
+
+.framework-selector .framework-button {
+  flex: 0 0 calc(25% - 7.5px);
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 2px solid var(--sl-color-gray-5);
+  border-radius: 8px;
+  background-color: var(--sl-color-black);
+  color: var(--sl-color-white);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding: 12px;
+  position: relative;
+  overflow: hidden;
+  height: 120px;
+  max-width: 140px;
+  box-sizing: border-box;
+  margin: 0 !important;
+  --framework-border: var(--sl-color-blue);
+  --framework-border-rgb: 62, 138, 204;
+}
+
+.framework-selector .framework-button:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  border-color: var(--framework-border);
+  background-color: hsl(224, 10%, 10%);
+}
+
+:root[data-theme='light'] .framework-selector .framework-button:hover {
+  background-color: hsl(224, 10%, 95%);
+}
+
+.framework-selector .framework-button:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.1s ease;
+}
+
+.framework-selector .framework-button.selected {
+  border-color: var(--framework-border);
+  background-color: var(--framework-border);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(var(--framework-border-rgb), 0.4);
+}
+
+.framework-selector .framework-button:hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(var(--framework-border-rgb), 0.12);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.framework-selector .framework-button[data-framework='js'] {
+  --framework-border: #fbbf24;
+  --framework-border-rgb: 251, 191, 36;
+}
+.framework-selector .framework-button[data-framework='js'].selected {
+  color: black;
+}
+.framework-selector .framework-button[data-framework='ts'] {
+  --framework-border: #2563eb;
+  --framework-border-rgb: 37, 99, 235;
+}
+.framework-selector .framework-button[data-framework='react'] {
+  --framework-border: #61dafb;
+  --framework-border-rgb: 97, 218, 251;
+}
+.framework-selector .framework-button[data-framework='angular'] {
+  --framework-border: #ef4444;
+  --framework-border-rgb: 239, 68, 68;
+}
+.framework-selector .framework-button[data-framework='vue'] {
+  --framework-border: #4fc08d;
+  --framework-border-rgb: 79, 192, 141;
+}
+.framework-selector .framework-button[data-framework='svelte'] {
+  --framework-border: #ff6b35;
+  --framework-border-rgb: 255, 107, 53;
+}
+.framework-selector .framework-button[data-framework='qwik'] {
+  --framework-border: #ac7ef4;
+  --framework-border-rgb: 172, 126, 244;
+}
+
+.framework-selector .framework-icon {
+  position: relative;
+  z-index: 2;
+  height: 2.5rem;
+  width: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.framework-selector .framework-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.framework-selector .framework-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.2;
+  position: relative;
+  z-index: 2;
+  height: 2.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .framework-selector .framework-button {
+    flex: 0 0 calc(50% - 5px);
+    height: 100px;
+  }
+  .framework-selector .framework-icon {
+    height: 2rem;
+    width: 2rem;
+  }
+  .framework-selector .framework-name {
+    font-size: 0.75rem;
+    height: 2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .framework-selector .framework-button {
+    flex: 0 0 calc(100% - 0px);
+    max-width: 200px;
+  }
+}
+
+/* ConditionalQuestionnaire */
+.sl-steps {
+  --bullet-size: calc(var(--sl-line-height) * 1rem);
+  --bullet-margin: 0.375rem;
+  list-style: none;
+  counter-reset: steps-counter var(--sl-steps-start, 0);
+  padding-inline-start: 0;
+}
+
+.sl-steps > ol {
+  list-style: none;
+  padding-inline-start: 0;
+  margin: 0;
+}
+
+.sl-steps > ol > li {
+  counter-increment: steps-counter;
+  position: relative;
+  padding-inline-start: calc(var(--bullet-size) + 1rem);
+  padding-bottom: 1px;
+  min-height: calc(var(--bullet-size) + var(--bullet-margin));
+}
+
+.sl-steps > ol > li + li {
+  margin-top: 0;
+}
+
+.sl-steps > ol > li::before {
+  content: counter(steps-counter);
+  position: absolute;
+  top: 0;
+  inset-inline-start: 0;
+  width: var(--bullet-size);
+  height: var(--bullet-size);
+  line-height: var(--bullet-size);
+  font-size: var(--sl-text-xs);
+  font-weight: 600;
+  text-align: center;
+  color: var(--sl-color-white);
+  background-color: var(--sl-color-gray-6);
+  border-radius: 99rem;
+  box-shadow: inset 0 0 0 1px var(--sl-color-gray-5);
+}
+
+.sl-steps > ol > li::after {
+  --guide-width: 1px;
+  content: '';
+  position: absolute;
+  top: calc(var(--bullet-size) + var(--bullet-margin));
+  bottom: var(--bullet-margin);
+  inset-inline-start: calc((var(--bullet-size) - var(--guide-width)) / 2);
+  width: var(--guide-width);
+  background-color: var(--sl-color-hairline-light);
+}
+
+.sl-steps > ol > li > :first-child {
+  --lh: calc(1em * var(--sl-line-height));
+  --shift-y: calc(0.5 * (var(--bullet-size) - var(--lh)));
+  transform: translateY(var(--shift-y));
+  margin-bottom: var(--shift-y);
+}
+
+.question-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.question-btn {
+  background: var(--sl-color-gray-6);
+  color: var(--sl-color-gray-1);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.375rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--sl-font);
+  font-size: var(--sl-text-sm);
+  margin: 0;
+}
+
+.question-btn:hover {
+  border-color: var(--sl-color-blue);
+  background-color: var(--sl-color-gray-5);
+}
+
+.question-btn.selected {
+  border-color: var(--sl-color-blue);
+  background-color: var(--sl-color-blue);
+  color: white;
+}
+
+.script-type-buttons {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.script-type-buttons .question-btn {
+  font-family: monospace;
+}
+
+.react-framework-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.react-framework-buttons .framework-button {
+  flex: 0 0 calc(25% - 7.5px);
+  max-width: 200px;
+  min-height: 120px;
+  padding: 1rem;
+  border: 2px solid var(--sl-color-gray-5);
+  border-radius: 8px;
+  background-color: var(--sl-color-black);
+  color: var(--sl-color-white);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0;
+}
+
+.react-framework-buttons .framework-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.react-framework-buttons .framework-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.react-framework-buttons .framework-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.react-framework-buttons .framework-button:hover {
+  border-color: var(--sl-color-blue);
+  background-color: var(--sl-color-gray-6);
+}
+
+.react-framework-buttons .framework-button.selected {
+  border-color: var(--sl-color-blue);
+  background-color: var(--sl-color-blue);
+  color: white;
+}
+
+.questionnaire-warning {
+  margin-top: 1rem;
+}
+
+.questionnaire-code {
+  margin-top: 1rem;
+}
+
+.questionnaire-code pre {
+  background: var(--sl-color-gray-6);
+  border-radius: 0.375rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.questionnaire-code code {
+  font-family: var(--sl-font-mono);
+  font-size: var(--sl-text-sm);
+  color: var(--sl-color-gray-1);
+  white-space: pre-wrap;
+  line-height: 1.1;
+  display: block;
+}
+
+.questionnaire-code .diff-line {
+  padding: 0 0.5rem;
+  margin: 0;
+  line-height: 1.1;
+  min-height: 1.1em;
+}
+
+.questionnaire-code .diff-added {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+  border-left: 3px solid #22c55e;
+  padding: 0 calc(0.5rem - 3px);
+  line-height: 1.1;
+  min-height: 1.1em;
+}
+
+.questionnaire-code .diff-removed {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border-left: 3px solid #ef4444;
+  padding: 0 calc(0.5rem - 3px);
+  line-height: 1.1;
+  min-height: 1.1em;
+}
