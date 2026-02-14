@@ -498,6 +498,11 @@ starlight-theme-select label select:hover {
   box-shadow: 0 4px 12px rgba(var(--framework-border-rgb), 0.4);
 }
 
+.framework-selector .framework-button:focus-visible {
+  outline: 2px solid var(--sl-color-blue);
+  outline-offset: 2px;
+}
+
 .framework-selector .framework-button:hover::before {
   content: '';
   position: absolute;
@@ -593,8 +598,9 @@ starlight-theme-select label select:hover {
   }
 }
 
-/* ConditionalQuestionnaire */
-.sl-steps {
+/* ConditionalQuestionnaire — scoped to #questionnaire-steps to avoid
+   overriding Starlight's own .sl-steps rules on other pages. */
+#questionnaire-steps .sl-steps {
   --bullet-size: calc(var(--sl-line-height) * 1rem);
   --bullet-margin: 0.375rem;
   list-style: none;
@@ -602,13 +608,13 @@ starlight-theme-select label select:hover {
   padding-inline-start: 0;
 }
 
-.sl-steps > ol {
+#questionnaire-steps .sl-steps > ol {
   list-style: none;
   padding-inline-start: 0;
   margin: 0;
 }
 
-.sl-steps > ol > li {
+#questionnaire-steps .sl-steps > ol > li {
   counter-increment: steps-counter;
   position: relative;
   padding-inline-start: calc(var(--bullet-size) + 1rem);
@@ -616,11 +622,11 @@ starlight-theme-select label select:hover {
   min-height: calc(var(--bullet-size) + var(--bullet-margin));
 }
 
-.sl-steps > ol > li + li {
+#questionnaire-steps .sl-steps > ol > li + li {
   margin-top: 0;
 }
 
-.sl-steps > ol > li::before {
+#questionnaire-steps .sl-steps > ol > li::before {
   content: counter(steps-counter);
   position: absolute;
   top: 0;
@@ -637,7 +643,7 @@ starlight-theme-select label select:hover {
   box-shadow: inset 0 0 0 1px var(--sl-color-gray-5);
 }
 
-.sl-steps > ol > li::after {
+#questionnaire-steps .sl-steps > ol > li::after {
   --guide-width: 1px;
   content: '';
   position: absolute;
@@ -648,7 +654,7 @@ starlight-theme-select label select:hover {
   background-color: var(--sl-color-hairline-light);
 }
 
-.sl-steps > ol > li > :first-child {
+#questionnaire-steps .sl-steps > ol > li > :first-child {
   --lh: calc(1em * var(--sl-line-height));
   --shift-y: calc(0.5 * (var(--bullet-size) - var(--lh)));
   transform: translateY(var(--shift-y));
@@ -684,6 +690,11 @@ starlight-theme-select label select:hover {
   border-color: var(--sl-color-blue);
   background-color: var(--sl-color-blue);
   color: white;
+}
+
+.question-btn:focus-visible {
+  outline: 2px solid var(--sl-color-blue);
+  outline-offset: 2px;
 }
 
 .script-type-buttons {
@@ -753,6 +764,11 @@ starlight-theme-select label select:hover {
   border-color: var(--sl-color-blue);
   background-color: var(--sl-color-blue);
   color: white;
+}
+
+.react-framework-buttons .framework-button:focus-visible {
+  outline: 2px solid var(--sl-color-blue);
+  outline-offset: 2px;
 }
 
 .questionnaire-warning {
