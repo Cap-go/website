@@ -676,8 +676,8 @@ starlight-theme-select label select:hover {
   padding: 0.75rem 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: var(--sl-font);
-  font-size: var(--sl-text-sm);
+  font-family: inherit;
+  font-size: var(--sl-text-body);
   margin: 0;
 }
 
