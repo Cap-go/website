@@ -497,4 +497,38 @@ At this point, you have successfully built your app and it is ready to be submit
 
 ## Troubleshooting
 
+
+### Provisioning profile doesn't include the XYZ capability.
+
+Sometimes, you might see the following error:
+```
+Provisioning profile "YOUR_PROVISINING_PROFILE_NAME" doesn't include the XYZ capability. (in target 'App' from project 'App')"
+```
+
+This happens because you have enabled a new capability after the provisioning profile was created.
+The old provisioning profile does not include the new capability yet.
+
+To fix this, you need to regenerate the provisioning profile.
+
+<Steps>
+   1. Open [Apple Developer Portal](https://developer.apple.com/account/)
+   2. Select the correct team in the dropdown
+      ![Apple Developer keys team selection](/native-build-assets/apple-developer-select-team-2.webp)
+  3. Click on the `Profiles` button
+    ![Apple Developer profiles button](/native-build-assets/apple-developer-profiles-button.webp)
+  4. Find the provisioning profile you want to regenerate
+    ![Apple Developer find profile](/native-build-assets/pple-developer-find-profile.webp)
+  5. Click on the `Edit` button
+    ![Apple Developer edit profile](/native-build-assets/apple-developer-edit-profile.webp)
+  6. Click on the `Save` button
+    ![Apple Developer save profile](/native-build-assets/apple-developer-save-profile.webp)
+  7. Click on the `Download` button
+    ![Apple Developer download profile](/native-build-assets/apple-developer-download-profile.webp)
+  8. [Re-run the Capgo Native Build setup command](/docs/cli/cloud-build/ios/#running-the-configuration-command) with the newly downloaded profile.
+</Steps>
+
+This should fix the issue.
+
+### Other issues
+
 If for whatever reason you are having issues either with Capgo Native Build, configuring the credentials or building the app, please don't hesitate to reach via our [support](https://support.capgo.app/).
