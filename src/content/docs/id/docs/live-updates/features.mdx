@@ -1,0 +1,514 @@
+---
+title: Features
+description: "Complete reference of all Capgo Live Update capabilities, from core update system to advanced deployment controls, analytics, and team collaboration features."
+sidebar:
+  order: 2
+locale: id
+---
+
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
+
+This page provides a comprehensive overview of all features available in Capgo Live Updates. Each feature includes a brief description and links to detailed documentation.
+
+## Core Update System
+
+### Over-the-Air (OTA) Updates
+Deploy JavaScript, HTML, CSS, and asset updates directly to users without app store approval. Updates are downloaded in the background and applied on next app restart.
+
+**Key capabilities:**
+- Background downloads
+- Automatic installation
+- No user interruption
+- Cross-platform support (iOS, Android, Electron)
+
+[Learn more about update behavior →](/docs/live-updates/update-behavior/)
+
+---
+
+### Delta Updates (Differential Updates)
+Only download files that have changed between versions, reducing bandwidth usage by up to 95% and speeding up update delivery.
+
+**Key capabilities:**
+- Automatic file-level diffing
+- Checksum-based verification
+- Manifest comparison
+- Intelligent fallback to full updates when needed
+
+[Learn more about delta updates →](/docs/live-updates/differentials/)
+
+---
+
+### Automatic Rollback
+If an update fails to load or causes crashes, the system automatically reverts to the last known working version.
+
+**Key capabilities:**
+- Crash detection
+- Timeout detection
+- Automatic reversion
+- No user intervention required
+
+[Learn more about rollbacks →](/docs/live-updates/rollbacks/)
+
+---
+
+### Checksum Validation & Fallback
+Verifies bundle integrity via checksums and automatically falls back to the last known working version if corruption is detected.
+
+**Key capabilities:**
+- Checksum validation on download
+- Corruption detection
+- Automatic fallback to last working bundle
+- Manual recovery tools available
+
+---
+
+### Breaking Update Detection
+Prevents incompatible updates from being applied to devices running older native code versions.
+
+**Key capabilities:**
+- Native version compatibility checking
+- Plugin dependency validation
+- Automatic blocking of incompatible updates
+- Clear error messaging
+
+[Learn more about version targeting →](/docs/live-updates/version-targeting/)
+
+---
+
+## Deployment Control
+
+### Channel System
+Organize and manage updates across different environments and user segments with flexible channel configurations.
+
+**Key capabilities:**
+- Unlimited custom channels (production, staging, beta, etc.)
+- Per-channel bundle assignments
+- Channel-specific targeting rules
+- Device self-assignment
+- Channel override per device
+
+[Learn more about channels →](/docs/live-updates/channels/)
+
+---
+
+### Device Targeting
+Target specific devices, versions, or user segments for phased rollouts and controlled deployments.
+
+**Key capabilities:**
+- Version-based targeting
+- Device-specific overrides
+- Platform filtering (iOS, Android)
+- Custom metadata filtering
+- Emulator/dev build blocking
+
+---
+
+### Channel Policies
+Configure rules and restrictions for how updates are delivered on each channel.
+
+**Key capabilities:**
+- Disable auto-updates
+- Block major version updates
+- Disable updates on emulators
+- Disable updates in development builds
+- Platform-specific policies (iOS-only, Android-only)
+
+[Learn more about channel policies →](/docs/live-updates/channels/#channel-policies)
+
+---
+
+## Developer Tools
+
+### Bundle Preview
+Preview bundles in a live web environment before deploying to devices, accessible from the web dashboard.
+
+**Location:** Web Dashboard → App → Bundle → Preview tab
+
+---
+
+### Live Debugging
+Real-time monitoring of update events for specific devices via CLI, showing check, download, install, and error events.
+
+**Usage:**
+```bash
+npx @capgo/cli app debug [appId]
+```
+
+**Shows:**
+- Update checks
+- Download progress
+- Installation status
+- Error messages
+- Policy blocks
+
+---
+
+### Bundle Manifest Viewer
+Inspect the complete manifest of any bundle including file list, checksums, and metadata.
+
+**Location:** Web Dashboard → App → Bundle → Manifest tab
+
+**Shows:**
+- File list with checksums
+- Bundle metadata
+- Native version compatibility
+- Plugin dependencies
+
+---
+
+### Native Plugin Dependencies
+View all native Capacitor plugins included in each bundle to track dependency changes across versions.
+
+**Location:** Web Dashboard → App → Bundle → Dependencies tab
+
+**Shows:**
+- Plugin names and versions
+- Dependency additions/removals
+- Compatibility warnings
+
+---
+
+### CLI Integration
+Comprehensive command-line interface for automated deployments and CI/CD integration.
+
+**Key commands:**
+- `bundle upload` - Upload new bundles
+- `bundle list` - List all bundles
+- `bundle delete` - Delete bundles
+- `bundle cleanup` - Clean up old bundles
+- `channel set` - Configure channels
+- `app debug` - Live debugging
+
+[View full CLI reference →](/docs/cli/reference/)
+
+---
+
+### Bundle Encryption
+End-to-end encryption for bundles with AES-256 encryption, protecting your code in transit and at rest.
+
+**Key capabilities:**
+- RSA key pair generation
+- AES-256 bundle encryption
+- Code signature verification
+- Encryption key management
+
+[Learn more about encryption →](/docs/live-updates/encryption/)
+
+---
+
+### Bundle Cleanup & Retention
+Automatically clean up old bundles based on retention policies to manage storage usage.
+
+**Key capabilities:**
+- Configurable retention count
+- Automatic cleanup via CLI
+- Scheduled cleanup jobs
+- Storage usage tracking
+
+**Usage:**
+```bash
+npx @capgo/cli bundle cleanup --keep=10
+```
+
+---
+
+## Analytics & Monitoring
+
+### Update Statistics
+Track update adoption rates, success rates, and deployment progress across your user base.
+
+**Metrics available:**
+- Download success rate
+- Installation success rate
+- Error rates by type
+- Update adoption over time
+- Version distribution
+
+**Location:** Web Dashboard → App → Statistics
+
+---
+
+### Device Logs
+Per-device event logs showing complete update lifecycle from check to installation.
+
+**Event types:**
+- Update checks
+- Download start/complete/fail
+- Install start/complete/fail
+- Rollback events
+- Policy blocks
+
+**Location:** 
+- Web Dashboard → App → Device → Logs
+- Web Dashboard → App → Logs (all devices)
+
+[Learn more about logs →](/docs/webapp/logs/)
+
+---
+
+### Bundle Usage Analytics
+Detailed analytics on which bundles are active, download counts, and storage usage.
+
+**Metrics:**
+- Active installations per bundle
+- Download counts
+- Storage usage per bundle
+- Bandwidth usage
+
+---
+
+### Channel Statistics
+Track performance and adoption metrics per channel.
+
+**Metrics:**
+- Devices per channel
+- Update success rates per channel
+- Deployment history
+- Error rates by channel
+
+**Location:** Web Dashboard → App → Channel → Statistics
+
+---
+
+### Deployment History
+Complete audit trail of all bundle deployments, channel assignments, and configuration changes.
+
+**Tracked events:**
+- Bundle uploads
+- Channel assignments
+- Policy changes
+- Device overrides
+
+**Location:** Web Dashboard → App → Channel → History
+
+---
+
+## Security & Compliance
+
+### End-to-End Encryption
+Encrypt bundles at rest and in transit with industry-standard AES-256 encryption.
+
+[Learn more about encryption →](/docs/live-updates/encryption/)
+
+---
+
+### Code Signing
+Verify bundle integrity with cryptographic signatures to prevent tampering.
+
+---
+
+### SOC 2 Type II Compliance
+Infrastructure and processes certified to SOC 2 Type II standards for enterprise security.
+
+---
+
+### App Store Compliance
+Fully compliant with Apple App Store and Google Play Store policies for OTA updates.
+
+[Learn more about compliance →](/docs/live-updates/compliance/)
+
+---
+
+### 2FA Enforcement (Organization-level)
+Require two-factor authentication for all organization members to access the dashboard and API.
+
+**Location:** Web Dashboard → Organization → Security
+
+[Learn more about 2FA →](/docs/webapp/2fa-enforcement/)
+
+---
+
+### Encrypted Bundles Enforcement
+Require all bundles to be encrypted at the organization level.
+
+**Location:** Web Dashboard → Organization → Security
+
+---
+
+## Team Collaboration
+
+### Role-Based Access Control (RBAC)
+Granular permissions for organization and app-level access control.
+
+**Organization roles:**
+- `super_admin` - Full access
+- `admin` - Admin access
+- `read` - Read-only access
+- `upload` - Upload-only access
+
+**App roles:**
+- `app_developer` - Full app access
+- `app_uploader` - Upload bundles only
+- `app_reader` - Read-only access
+
+**Location:** 
+- Web Dashboard → Organization → Members
+- Web Dashboard → App → Access
+
+[Learn more about RBAC →](/docs/webapp/organization-system/#roles-and-permissions)
+
+---
+
+### Audit Logs
+Complete audit trail of all organization and app activities for compliance and security.
+
+**Logged events:**
+- User actions (login, logout, permission changes)
+- Bundle operations (upload, delete, assign)
+- Channel operations (create, update, delete)
+- Organization changes (settings, members)
+
+**Location:** Web Dashboard → Organization → Audit Logs
+
+---
+
+### Webhooks
+Receive real-time notifications about events in your apps via HTTP webhooks.
+
+**Supported events:**
+- `apps` - App created/updated/deleted
+- `app_versions` - Bundle uploaded/deleted
+- `channels` - Channel created/updated/deleted
+- `org_users` - Member added/removed
+- `orgs` - Organization updated
+
+**Features:**
+- Custom webhook URLs
+- Event filtering
+- Delivery logs
+- Retry mechanism
+- Test functionality
+
+**Location:** Web Dashboard → Organization → Webhooks
+
+---
+
+### Multi-User Collaboration
+Invite team members to your organization with specific roles and permissions.
+
+**Features:**
+- Email invitations
+- Role assignment
+- Member management
+- Access revocation
+
+**Location:** Web Dashboard → Organization → Members
+
+---
+
+### API Key Management
+Create, manage, and revoke API keys with optional expiration dates and hashed storage.
+
+**Key capabilities:**
+- Per-app or per-organization keys
+- Optional expiration dates
+- Hashed storage (irreversible)
+- Key rotation support
+
+**Location:** Web Dashboard → API Keys
+
+[Learn more about API keys →](/docs/public-api/#authentication)
+
+---
+
+### Password Policies
+Organization-level password requirements to enforce security standards.
+
+**Configurable policies:**
+- Minimum length
+- Require uppercase
+- Require numbers
+- Require special characters
+
+**Location:** Web Dashboard → Organization → Security
+
+---
+
+## Platform Support
+
+### Multi-Platform Support
+Support for iOS, Android, and Electron apps with a single SDK.
+
+**Supported platforms:**
+- iOS (Capacitor 5, 6, 7, 8)
+- Android (Capacitor 5, 6, 7, 8)
+- Electron (NEW in 2025)
+
+---
+
+### Long-Term Support
+Continued support for older Capacitor versions to maintain compatibility with legacy apps.
+
+**Currently supported:**
+- Capacitor 8 (latest)
+- Capacitor 7
+- Capacitor 6
+- Capacitor 5
+
+---
+
+### Custom Storage Backends
+Use your own storage infrastructure (S3, R2, etc.) instead of Capgo's default storage.
+
+[Learn more about custom storage →](/docs/live-updates/custom-storage/)
+
+---
+
+### China Configuration
+Special configuration for apps distributed in mainland China to comply with local regulations.
+
+[Learn more about China configuration →](/docs/live-updates/china-configuration/)
+
+---
+
+## Advanced Features
+
+### Custom Update Behavior
+Configure when and how updates are checked and applied via the SDK.
+
+**Configurable options:**
+- Check interval (`periodCheckDelay` - minimum 600 seconds)
+- Direct update timing (`directUpdate` - atInstall, onLaunch, always)
+- Auto-update enable/disable (`autoUpdate`)
+- Network requirements (Android only - via WorkManager)
+
+[Learn more about update behavior →](/docs/live-updates/update-behavior/)
+
+---
+
+### Update Types
+Different update types for different use cases, from instant updates to user-controlled installations.
+
+**Available types:**
+- Background updates (default)
+- Immediate updates
+- User-prompted updates
+- Conditional updates
+
+[Learn more about update types →](/docs/live-updates/update-types/)
+
+---
+
+### Credit System
+Usage-based billing with credits for bandwidth, storage, and other resources.
+
+**Features:**
+- Credit usage tracking
+- Usage alerts
+- Top-up via Stripe
+- Credit ledger
+
+**Location:** Web Dashboard → Organization → Credits
+
+---
+
+## Getting Started
+
+Ready to start using these features? Follow our [Quickstart Guide](/docs/getting-started/quickstart/) to set up your first app with Capgo Live Updates.
+
+## Need Help?
+
+- [Join our Discord](https://discord.capgo.app) for community support
+- [Check the FAQ](/docs/faq/) for common questions
+- [Browse API documentation](/docs/public-api/) for API integration
+- [Contact support](https://capgo.app/consulting/) for enterprise assistance
