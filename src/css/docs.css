@@ -431,8 +431,11 @@ starlight-theme-select label select:hover {
   background-color: transparent !important;
 }
 
-/* FrameworkSelector + ConditionalQuestionnaire styles — MUST live here.
-   Astro drops component <style> blocks from MDX content pages during build. */
+/* FrameworkSelector + ConditionalQuestionnaire styles.
+   These MUST live in this file (included via Starlight customCss config).
+   Astro drops component <style> blocks from MDX content pages during
+   static build — the HTML gets scoped class names but zero CSS rules
+   end up in the built CSS files. */
 
 .framework-selector {
   display: flex;
