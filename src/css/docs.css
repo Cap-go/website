@@ -787,7 +787,7 @@ starlight-theme-select label select:hover {
 }
 
 .questionnaire-code code {
-  font-family: var(--sl-font-mono);
+  font-family: var(--sl-font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
   font-size: var(--sl-text-sm);
   color: var(--sl-color-gray-1);
   white-space: pre-wrap;
