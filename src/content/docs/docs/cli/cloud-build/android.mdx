@@ -159,30 +159,30 @@ Now that you have created the internal testing group, you can upload the app to 
       ![Google Play Console create new release](/native-build-assets/google-play-console-create-new-release.webp)
   4. Click on `Upload`
       ![Google Play Console upload](/native-build-assets/google-play-console-upload.webp)
-  5. Select the APK file
-        ![Google Play Console select APK file](/native-build-assets/google-play-console-select-apk-file.webp)
+  5. Select the AAB (or APK) file
+        ![Google Play Console select AAB (or APK) file](/native-build-assets/google-play-console-select-apk-file.webp)
 
         :::caution
-        Make sure you select the APK file that you built manually with Android Studio. If this file doesn't use the same keystore as the one you will use for the Capgo build, the Capgo Native Build will fail.
+        Make sure you select the AAB (or APK) file that you built manually with Android Studio. If this file doesn't use the same keystore as the one you will use for the Capgo build, the Capgo Native Build will fail.
         :::
-  5. Wait for the APK file to be uploaded
-  6. Click on `Next`
+  6. Wait for the AAB (or APK) file to be uploaded
+  7. Click on `Next`
       ![Google Play Console next](/native-build-assets/google-play-console-next-step.webp)
-  7. Fix the errors
+  8. Fix the errors
 
       Personally, at this stage I see this error
 
       ![Google Play Console big scary warning](/native-build-assets/google-play-console-big-scary-warning.webp)
 
       This is because I haven't verified my phone number yet. I will do that and continue the tutorial.
-  8. Click on `Save and publish`
+  9. Click on `Save and publish`
         This will publish the app to the internal testing group.
         ![Google Play Console save and publish](/native-build-assets/google-play-console-save-and-publish.webp)
-  9. Confirm the publication
+  10. Confirm the publication
         ![Google Play Console confirm publication](/native-build-assets/google-play-console-confirm-publication.webp)
-  10. Make sure the app is published
+  11. Make sure the app is published
         ![Google Play Console make sure the app is published](/native-build-assets/google-play-console-make-sure-the-app-is-published.webp)
-  11. Get your temporary app name
+  12. Get your temporary app name
         ![Google Play Console get your temporary app name](/native-build-assets/google-play-console-get-your-temporary-app-name.webp) 
 </Steps>
 
@@ -208,7 +208,7 @@ Now that you have uploaded the app to the internal testing group, you can accept
         2. Click on the `install` button
             ![Google Play Console install app](/native-build-assets/google-play-console-install-app.webp)
         3. Open the app and confirm it has downloaded successfully
-            <video src="/native-build-assets/screen-20260215-072439-1771136671038.mp4" controls autoplay muted loop playsinline title="App downloaded successfully from Play Store internal testing" aria-label="Video: confirming the app has downloaded successfully from the Play Store internal testing track" />
+            <video src="/native-build-assets/screen-20260215-072439-1771136671038.mp4" controls autoPlay muted loop playsInline title="App downloaded successfully from Play Store internal testing" aria-label="Video: confirming the app has downloaded successfully from the Play Store internal testing track" />
 
 
       :::caution
@@ -307,8 +307,7 @@ Let's begin.
 
 ### Granting Play Store API access to the service account
 
-Now, it is important to note that the newly created service account does not have access to the Play Store API. We need to grant it access to the Play Store API.
-In order to do that, we will go to the Play Store Console and grant it access to the Play Store API.
+The newly created service account does not yet have access to the Play Store API. To grant it, head to the Play Store Console.
 
 <Steps>
   1. Go to [Google Play Console](https://play.google.com/console/)
