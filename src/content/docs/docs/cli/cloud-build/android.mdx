@@ -109,7 +109,7 @@ There is also a way to do this with the command line, but we will not cover that
   4. Choose the app name and the language
     ![Google Play Console choose the app name and the language](/native-build-assets/google-play-console-choose-the-app-name-and-the-language.webp)
   5. Select the app category and if the app is paid or free
-    ![Google Play Console select the app category and if the app is paid or free](/native-build-assets/oogle-play-console-select-the-app-category-and-if-the-app-is-paid-or-free.webp)
+    ![Google Play Console select the app category and if the app is paid or free](/native-build-assets/google-play-console-select-the-app-category-and-if-the-app-is-paid-or-free.webp)
   6. Accept the terms and conditions
       ![Google Play Console accept the terms and conditions](/native-build-assets/google-play-console-accept-the-terms-and-conditions.webp)
       
@@ -319,7 +319,11 @@ The newly created service account does not yet have access to the Play Store API
     ![Google Play Console invite new users](/native-build-assets/google-play-console-invite-new-users.webp)
   5. Copy the email address of the service account
     ![Google Play Console copy email address of the service account](/native-build-assets/google-play-console-copy-email-address-of-the-service-account.webp)
-  6. Go to `Account permissions` and grant the correct permissions
+  6. Go to `Account permissions` and grant the minimum required permissions:
+      - In `App permissions`, grant access to your app.
+      - In `Releases`, enable `Create, edit, and roll out releases`.
+      - If your workflow uses Play App Signing, enable the related signing permission.
+      - If you are unsure, use `Admin` only during setup, then reduce permissions afterward.
     ![Google Play Console grant permissions](/native-build-assets/google-play-console-grant-permissions.webp)
   7. Click on `Invite user`
     ![Google Play Console invite user](/native-build-assets/google-play-console-invite-user.webp)
