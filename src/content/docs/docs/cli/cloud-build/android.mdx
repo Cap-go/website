@@ -82,6 +82,8 @@ There is also a way to do this with the command line, but we will not cover that
     ![Android Studio click on OK](/native-build-assets/android-studio-click-on-ok.webp)
 </Steps>
 
+### Finishing the manual build
+
 <Steps>
   1. Make sure all of the details for the keystore have been filled in correctly and click on `Next`
     ![Android Studio make sure all of the details for the keystore have been filled in correctly](/native-build-assets/android-studio-make-sure-all-of-the-details-for-the-keystore-have-been-filled-in-correctly.webp)
@@ -96,8 +98,127 @@ There is also a way to do this with the command line, but we will not cover that
     ![Android Studio make sure you can see the build in the file explorer](/native-build-assets/android-studio-make-sure-you-can-see-the-build-in-the-file-explorer.webp)
 </Steps>
 
+### Creating the app on the Play Store Console
+
+<Steps>
+  1. Go to [Google Play Console](https://play.google.com/console/)
+  2. Select the correct developer account
+    ![Google Play Console select correct developer account](/native-build-assets/google-play-console-select-correct-developer-account.webp)
+  3. Click on `Create app`
+    ![Google Play Console create app](/native-build-assets/google-play-console-create-app.webp)
+  4. Choose the app name and the language
+    ![Google Play Console choose the app name and the language](/native-build-assets/google-play-console-choose-the-app-name-and-the-language.webp)
+  5. Select the app category and if the app is paid or free
+    ![Google Play Console select the app category and if the app is paid or free](/native-build-assets/google-play-console-select-the-app-category-and-if-the-app-is-paid-or-free.webp)
+  6. Accept the terms and conditions
+      ![Google Play Console accept the terms and conditions](/native-build-assets/google-play-console-accept-the-terms-and-conditions.webp)
+      
+      :::caution
+      Make sure you read the terms and conditions before accepting them.
+      :::
+  7. Click on `Create`
+    ![Google Play Console click on create](/native-build-assets/google-play-console-click-on-create.webp)
+</Steps>
+
+### Creating the internal testing group
+
+Now that you have created the app, you can create an internal testing group. Since I won't actually publish the app for everyone on Play Store, I will need to create an internal testing group.
+However, if you are going to publish the app for everyone, you can likely skip this step, although I don't recommend it.
+
+<Steps>
+  1. Go to `internal testing`
+      Click on `Test and release` -> `Testing` -> `Internal testing`
+
+      ![Google Play Console internal testing](/native-build-assets/google-play-console-internal-testing.webp)
+  2. Click on `Testers`
+      ![Google Play Console testers](/native-build-assets/google-play-console-testers.webp)
+  3. Click on `Create email list`
+      ![Google Play Console create email list](/native-build-assets/google-play-console-create-email-list.webp)
+  4. Name the email list 
+      ![Google Play Console name the email list](/native-build-assets/google-play-console-name-the-email-list.webp)
+  5. Add the email addresses of the testers
+      ![Google Play Console add the email addresses of the testers](/native-build-assets/google-play-console-add-the-email-addresses-of-the-testers.webp)
+  6. Press `Enter` and click on `Save`
+      ![Google Play Console press enter and click on save](/native-build-assets/google-play-console-press-enter-and-click-on-save.webp)
+  7. Click on `Create group`
+      ![Google Play Console create group](/native-build-assets/google-play-console-create-group.webp)
+  8. Make sure that the new list is selected and click on `Save`
+      ![Google Play Console make sure that the new list is selected and click on save](/native-build-assets/google-play-console-make-sure-that-the-new-list-is-selected-and-click-on-save.webp)
+</Steps>
+
+### Uploading the app to the internal testing group
+
+Now that you have created the internal testing group, you can upload the app to the internal testing group.
+
+<Steps>
+  1. Go to `Test and release` -> `Testing` -> `Internal testing`
+      ![Google Play Console internal testing](/native-build-assets/google-play-console-internal-testing.webp)
+  2. Click on the `Releases` button
+      ![Google Play Console releases button](/native-build-assets/google-play-console-releases-button.webp)
+  3. Click on `Create new release`
+      ![Google Play Console create new release](/native-build-assets/google-play-console-create-new-release.webp)
+  4. Click on `Upload`
+      ![Google Play Console upload](/native-build-assets/google-play-console-upload.webp)
+  5. Select the AAB (or APK) file
+        ![Google Play Console select AAB (or APK) file](/native-build-assets/google-play-console-select-apk-file.webp)
+
+        :::caution
+        Make sure you select the AAB (or APK) file that you built manually with Android Studio. If this file doesn't use the same keystore as the one you will use for the Capgo build, the Capgo Native Build will fail.
+        :::
+  6. Wait for the AAB (or APK) file to be uploaded
+  7. Click on `Next`
+      ![Google Play Console next](/native-build-assets/google-play-console-next-step.webp)
+  8. Fix the errors
+
+      Personally, at this stage I see this error
+
+      ![Google Play Console big scary warning](/native-build-assets/google-play-console-big-scary-warning.webp)
+
+      This is because I haven't verified my phone number yet. I will do that and continue the tutorial.
+  9. Click on `Save and publish`
+        This will publish the app to the internal testing group.
+        ![Google Play Console save and publish](/native-build-assets/google-play-console-save-and-publish.webp)
+  10. Confirm the publication
+        ![Google Play Console confirm publication](/native-build-assets/google-play-console-confirm-publication.webp)
+  11. Make sure the app is published
+        ![Google Play Console make sure the app is published](/native-build-assets/google-play-console-make-sure-the-app-is-published.webp)
+  12. Get your temporary app name
+        ![Google Play Console get your temporary app name](/native-build-assets/google-play-console-get-your-temporary-app-name.webp) 
+</Steps>
+
+
+### Accept the invitation to internal testing group
+
+Now that you have uploaded the app to the internal testing group, you can accept the invitation to the internal testing group.
+
+<Steps>
+  1. Go to `Test and release` -> `Testing` -> `Internal testing`
+      ![Google Play Console internal testing](/native-build-assets/google-play-console-internal-testing.webp)
+  2. Click on `Testers`
+      ![Google Play Console testers](/native-build-assets/google-play-console-testers.webp)
+  3. Click on `Copy link`
+      ![Google Play Console copy link](/native-build-assets/google-play-console-copy-link.webp)
+  4. Send the link to your phone, open it in the browser and click on `Accept`
+      ![Google Play Console accept invitation](/native-build-assets/google-play-console-accept-invitation.webp)
+  5. Confirm the invitation has been accepted and click on "download it on Play Store"
+      ![Google Play Console download it on Play Store](/native-build-assets/google-play-console-download-it-on-play-store.webp)
+  6. Install the app
+        1. If you had installed the app before using Android Studio, click on the `uninstall` button
+            ![Google Play Console uninstall app](/native-build-assets/google-play-console-uninstall-app.webp)
+        2. Click on the `install` button
+            ![Google Play Console install app](/native-build-assets/google-play-console-install-app.webp)
+        3. Open the app and confirm it has downloaded successfully
+            <video src="/native-build-assets/screen-20260215-072439-1771136671038.mp4" controls autoPlay muted loop playsInline title="App downloaded successfully from Play Store internal testing" aria-label="Video: confirming the app has downloaded successfully from the Play Store internal testing track" />
+
+
+      :::caution
+      If you do not see the app in Play Store, make sure you have selected the correct account in Play Store.
+      :::
+</Steps>
 
 ## Configuring Capgo Native Build (Android)
+
+Now, you are ready to start the setup of Capgo Native Build. Congratulations 🎉!
 
 | Requirement | Flag | Description | Required |
 | --- | --- | --- | --- |
@@ -162,6 +283,11 @@ Let's begin.
   7. Click on the newly created service account
       You should now see the newly created service account in the list. Click on it.
       ![Google Console newly created service account](/native-build-assets/google-console-newly-created-service-account.webp)
+
+
+      :::note
+      Copy this email address as well, you will need it later.
+      :::
   8. Click on the `Keys` tab
       ![Keys tab in Google Console](/native-build-assets/google_cons_keys_tab.webp)
   9. Click on `Add Key` and `Create new key`
@@ -179,8 +305,37 @@ Let's begin.
       ![Google Console download key](/native-build-assets/google-console-download-key.webp)
 </Steps>
 
+### Granting Play Store API access to the service account
+
+The newly created service account does not yet have access to the Play Store API. To grant it, head to the Play Store Console.
+
+<Steps>
+  1. Go to [Google Play Console](https://play.google.com/console/)
+  2. Select the correct developer account
+    ![Google Play Console select correct developer account](/native-build-assets/google-play-console-select-correct-developer-account.webp)
+  3. Click on `Users and permissions`
+    ![Google Play Console users and permissions](/native-build-assets/google-play-console-users-and-permissions.webp)
+  4. Click on `Invite new users`
+    ![Google Play Console invite new users](/native-build-assets/google-play-console-invite-new-users.webp)
+  5. Copy the email address of the service account
+    ![Google Play Console copy email address of the service account](/native-build-assets/google-play-console-copy-email-address-of-the-service-account.webp)
+  6. Go to `Account permissions` and grant the minimum required permissions:
+      - In `App permissions`, grant access to your app.
+      - In `Releases`, enable `Create, edit, and roll out releases`.
+      - If your workflow uses Play App Signing, enable the related signing permission.
+      - If you are unsure, use `Admin` only during setup, then reduce permissions afterward.
+    ![Google Play Console grant permissions](/native-build-assets/google-play-console-grant-permissions.webp)
+  7. Click on `Invite user`
+    ![Google Play Console invite user](/native-build-assets/google-play-console-invite-user.webp)
+  8. Confirm the invitation
+    ![Google Play Console confirm invitation](/native-build-assets/google-play-console-confirm-invitation.webp)
+  9. Confirm that the user has been invited
+    ![Google Play Console confirm that the user has been invited](/native-build-assets/google-play-console-confirm-that-the-user-has-been-invited.webp)
+</Steps>
+
 ### Saving the credentials
 
+You are now ready to save the credentials and run your first build.
 You can save the credentials using the following command:
 
 ```bash
@@ -191,3 +346,14 @@ bunx @capgo/cli build credentials save --platform android \
   --keystore-store-password "store-password" \
   --play-config ./play-store-service-account.json
 ```
+
+### Running the build
+
+Congratulations 🎉! You are now ready to run your first build.
+
+Run:
+```bash
+bunx @capgo/cli build com.example.app --platform android
+```
+
+And this will start the build process 🍾🥂
