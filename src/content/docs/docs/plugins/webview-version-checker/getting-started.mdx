@@ -1,0 +1,75 @@
+---
+title: Getting Started
+description: Learn how to install and use WebView Version Checker in your Capacitor Android app.
+sidebar:
+  order: 2
+---
+
+import { PackageManagers } from 'starlight-package-managers'
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-webview-version-checker" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Add plugin config**
+   Configure automatic checks and prompt behavior in `capacitor.config.ts`.
+</Steps>
+
+## Simple config-only setup
+
+```ts
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    WebviewVersionChecker: {
+      autoCheckOnLoad: true,
+      autoCheckOnResume: true,
+      autoPromptOnOutdated: true,
+    },
+  },
+};
+
+export default config;
+```
+
+## Advanced usage with JavaScript
+
+```ts
+import { WebviewVersionChecker } from '@capgo/capacitor-webview-version-checker';
+
+await WebviewVersionChecker.addListener('webViewOutdated', (status) => {
+  console.log('Outdated WebView detected', status);
+});
+
+await WebviewVersionChecker.check({
+  minimumMajorVersion: 124,
+  showPromptOnOutdated: true,
+});
+```
+
+## Why use this plugin instead of only Capacitor config
+
+Capacitor supports static minimum checks:
+
+```ts
+android: {
+  minWebViewVersion: 124,
+},
+server: {
+  errorPath: 'unsupported-webview.html',
+}
+```
+
+This plugin adds runtime events and native prompt UX, so users can still open and use the app while being encouraged to update.
+
+## Android provider handling
+
+The plugin supports both WebView provider models used by Capacitor on Android:
+
+- Android 5-6 and 10+: Android System WebView (`com.google.android.webview`)
+- Android 7-9: Google Chrome (`com.android.chrome`)

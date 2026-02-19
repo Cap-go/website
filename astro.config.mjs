@@ -602,6 +602,11 @@ export default defineConfig({
               paths: ['docs/plugins/webview-guardian/**'],
             },
             {
+              label: 'Plugin Webview Version Checker',
+              description: 'Android WebView version validation plugin',
+              paths: ['docs/plugins/webview-version-checker/**'],
+            },
+            {
               label: 'Plugin WiFi',
               description: 'WiFi network information plugin',
               paths: ['docs/plugins/wifi/**'],
@@ -1398,6 +1403,14 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/wechat/' },
                 { label: 'Getting started', link: '/docs/plugins/wechat/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'WebView Version Checker',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/webview-version-checker/' },
+                { label: 'Getting started', link: '/docs/plugins/webview-version-checker/getting-started' },
               ],
               collapsed: true,
             },

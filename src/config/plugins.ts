@@ -698,6 +698,15 @@ export const actions = [
     icon: ShieldExclamationIcon,
   },
   {
+    name: '@capgo/capacitor-webview-version-checker',
+    author: 'github.com/Cap-go',
+    description:
+      'Capacitor plugin for checking Android WebView version freshness and guiding users to native update flows',
+    href: 'https://github.com/Cap-go/capacitor-webview-version-checker/',
+    title: 'WebView Version Checker',
+    icon: ShieldExclamationIcon,
+  },
+  {
     name: '@capgo/capacitor-firebase-analytics',
     author: 'github.com/Cap-go',
     description: 'Capacitor plugin for Firebase Analytics',

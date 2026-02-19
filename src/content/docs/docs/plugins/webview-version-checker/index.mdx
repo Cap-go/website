@@ -1,0 +1,40 @@
+---
+title: "@capgo/capacitor-webview-version-checker"
+description: Capacitor plugin for checking Android WebView version freshness, emitting runtime status events, and showing native update prompts.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Detect outdated Android WebView versions at runtime and guide users to updates with native UX.
+  image:
+    file: ~public/icons/plugins/webview-version-checker.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/webview-version-checker/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-webview-version-checker/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Runtime version check" icon="rocket">
+    Check the active Android WebView provider version while the app is running.
+  </Card>
+  <Card title="Native update prompt" icon="setting">
+    Show a native modal and redirect users to the correct Play Store destination.
+  </Card>
+  <Card title="Event-driven API" icon="open-book">
+    Listen for `webViewLatest`, `webViewOutdated`, and `statusChanged` to drive app logic.
+  </Card>
+  <Card title="Soft enforcement" icon="heart">
+    Let users continue using the app while still pushing them to update their WebView.
+  </Card>
+</CardGrid>
