@@ -42,10 +42,27 @@ await WebviewVersionChecker.addListener('webViewOutdated', (status) => {
 
 const status = await WebviewVersionChecker.check({
   minimumMajorVersion: 124,
+  minimumDeviceSharePercent: 3,
   showPromptOnOutdated: true,
 });
 
 console.log('Current status', status);
+```
+
+## Device-share compatibility mode
+
+You can use a Browserslist-style threshold with your own dataset:
+
+```ts
+await WebviewVersionChecker.check({
+  minimumDeviceSharePercent: 3,
+  versionShareByMajor: {
+    '137': 58.2,
+    '136': 21.3,
+    '135': 4.6,
+    '134': 2.1,
+  },
+});
 ```
 
 ## Platform notes

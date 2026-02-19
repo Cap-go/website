@@ -1,0 +1,54 @@
+---
+title: Android Setup
+description: Android-specific setup for @capgo/capacitor-webview-version-checker.
+sidebar:
+  order: 3
+---
+
+This plugin is Android-first and performs native WebView provider version checks.
+
+## Android support matrix
+
+- API 22+ (Android 5.1 or later)
+- Android 5-6 and 10+: Android System WebView provider
+- Android 7-9: Google Chrome provider
+
+## Basic plugin config
+
+```ts
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    WebviewVersionChecker: {
+      autoCheckOnLoad: true,
+      autoCheckOnResume: true,
+      autoPromptOnOutdated: true,
+    },
+  },
+};
+
+export default config;
+```
+
+## Device-share threshold mode
+
+```ts
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    WebviewVersionChecker: {
+      minimumDeviceSharePercent: 3,
+      versionShareByMajor: {
+        '137': 58.2,
+        '136': 21.3,
+        '135': 4.6,
+        '134': 2.1,
+      },
+    },
+  },
+};
+
+export default config;
+```

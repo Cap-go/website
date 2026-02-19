@@ -1411,6 +1411,8 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/webview-version-checker/' },
                 { label: 'Getting started', link: '/docs/plugins/webview-version-checker/getting-started' },
+                { label: 'Android setup', link: '/docs/plugins/webview-version-checker/android' },
+                { label: 'iOS', link: '/docs/plugins/webview-version-checker/ios' },
               ],
               collapsed: true,
             },

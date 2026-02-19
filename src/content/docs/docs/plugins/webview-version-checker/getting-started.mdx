@@ -37,6 +37,29 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
+## Device-share threshold mode (for example `3%`)
+
+```ts
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    WebviewVersionChecker: {
+      minimumDeviceSharePercent: 3,
+      versionShareByMajor: {
+        '137': 58.2,
+        '136': 21.3,
+        '135': 4.6,
+        '134': 2.1,
+      },
+      autoPromptOnOutdated: true,
+    },
+  },
+};
+
+export default config;
+```
+
 ## Advanced usage with JavaScript
 
 ```ts
@@ -48,6 +71,7 @@ await WebviewVersionChecker.addListener('webViewOutdated', (status) => {
 
 await WebviewVersionChecker.check({
   minimumMajorVersion: 124,
+  minimumDeviceSharePercent: 3,
   showPromptOnOutdated: true,
 });
 ```
