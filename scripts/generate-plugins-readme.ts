@@ -144,6 +144,19 @@ Capgo is the Expo for Capacitor, providing SDKs, plugins, cloud updates, and nat
 
 💬 Join us on [Discord](https://discord.capgo.app) to chat with the Capgo community, discuss the release, or ask questions.
 
+## Community Plugin Option
+
+Got a plugin and want to keep building without carrying maintenance alone? We can host it under the Capgo name and share maintenance with you.
+
+- Co-maintained with the original open-source maintainer and Capgo
+- Better visibility through Capgo distribution and ecosystem reach
+- Shared maintenance burden so plugins stay healthy over time
+- Capgo support on quality standards, release process, CI, and maintenance best practices
+- Original makers keep owning the direction while getting operational support
+
+We are pro AI and welcome AI contributions.
+Our philosophy: build fast, fix fast.
+
 ## Who’s using Capgo?
 
 Capgo is trusted by teams worldwide, from startups to large companies building production Capacitor apps.  
