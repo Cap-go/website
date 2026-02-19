@@ -347,6 +347,77 @@ bunx @capgo/cli build credentials save --platform android \
   --play-config ./play-store-service-account.json
 ```
 
+### CI/CD setup (GitHub Actions)
+
+If you already completed [Keystore, keystore password, keystore key password, keystore alias](#keystore-keystore-password-keystore-key-password-keystore-alias) and [Google Play service account](#google-play-service-account), you already have everything needed for CI/CD.
+This section only covers how to pass those values as GitHub Actions secrets and environment variables.
+
+#### 1) Convert credential files to single-line base64
+
+```bash
+# Android keystore (.jks or .keystore)
+base64 -i ./path/to/keystore.jks | tr -d '\n' > keystore_base64.txt
+
+# Google Play service account JSON
+base64 -i ./play-store-service-account.json | tr -d '\n' > play_config_base64.txt
+```
+
+:::tip
+GitHub secrets should be single-line values. `tr -d '\n'` removes line breaks from base64 output.
+:::
+
+#### 2) Create repository secrets
+
+In `GitHub > Repository > Settings > Secrets and variables > Actions`, add:
+
+| Secret name | Value |
+|-----------|-------|
+| `CAPGO_TOKEN` | Your Capgo API token |
+| `APP_ID` | Your Capgo app ID (example: `com.example.app`) |
+| `ANDROID_KEYSTORE_FILE` | Content of `keystore_base64.txt` |
+| `KEYSTORE_KEY_ALIAS` | Keystore alias from [Keystore, keystore password, keystore key password, keystore alias](#keystore-keystore-password-keystore-key-password-keystore-alias) |
+| `KEYSTORE_KEY_PASSWORD` | Keystore key password |
+| `KEYSTORE_STORE_PASSWORD` | Keystore store password |
+| `PLAY_CONFIG_JSON` | Content of `play_config_base64.txt` |
+
+:::note
+If key and store passwords are the same, you can provide just one of `KEYSTORE_KEY_PASSWORD` or `KEYSTORE_STORE_PASSWORD`.
+:::
+
+#### 3) Use env vars in your GitHub Actions workflow
+
+```yaml
+# .github/workflows/android-build.yml
+name: Android Cloud Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  android-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Request Android build with Capgo
+        run: bunx @capgo/cli@latest build ${{ secrets.APP_ID }} --platform android
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
+```
+
+:::tip
+With this setup, CI sends credentials through environment variables only. You do not need to commit signing files or upload them as workflow artifacts.
+:::
+
 ### Running the build
 
 Congratulations 🎉! You are now ready to run your first build.

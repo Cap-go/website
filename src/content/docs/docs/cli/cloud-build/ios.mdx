@@ -481,6 +481,80 @@ If all went well, you will see the following output:
 
 ![Capgo CLI credentials save output](/native-build-assets/credentials-save.gif)
 
+### CI/CD setup (GitHub Actions)
+
+If you already completed [Team ID](#team-id), [Apple key, Apple key ID and Apple issuer ID](#apple-key-apple-key-id-and-apple-issuer-id), [Certificate](#certificate), and [Provisioning profile](#provisioning-profile), you already have everything needed for CI/CD.
+This section only covers how to pass those values as GitHub Actions secrets and environment variables.
+
+#### 1) Convert credential files to single-line base64
+
+```bash
+# Distribution certificate (.p12)
+base64 -i ./capgo-tutorial/capgo-build-tutorial-certificate.p12 | tr -d '\n' > certificate_base64.txt
+
+# Provisioning profile (.mobileprovision)
+base64 -i ./capgo-tutorial/capgo_native_build_tutorial.mobileprovision | tr -d '\n' > profile_base64.txt
+
+# App Store Connect API key (.p8)
+base64 -i ./capgo-tutorial/AuthKey_66FGQZB566.p8 | tr -d '\n' > apple_key_base64.txt
+```
+
+:::tip
+GitHub secrets should be single-line values. `tr -d '\n'` removes line breaks from base64 output.
+:::
+
+#### 2) Create repository secrets
+
+In `GitHub > Repository > Settings > Secrets and variables > Actions`, add:
+
+| Secret name | Value |
+|-----------|-------|
+| `CAPGO_TOKEN` | Your Capgo API token |
+| `APP_STORE_CONNECT_TEAM_ID` | Team ID from [Team ID](#team-id) |
+| `APPLE_KEY_ID` | Key ID from [Apple key, Apple key ID and Apple issuer ID](#apple-key-apple-key-id-and-apple-issuer-id) |
+| `APPLE_ISSUER_ID` | Issuer ID from [Apple key, Apple key ID and Apple issuer ID](#apple-key-apple-key-id-and-apple-issuer-id) |
+| `BUILD_CERTIFICATE_BASE64` | Content of `certificate_base64.txt` |
+| `BUILD_PROVISION_PROFILE_BASE64` | Content of `profile_base64.txt` |
+| `APPLE_KEY_CONTENT` | Content of `apple_key_base64.txt` |
+| `APPLE_PROFILE_NAME` (optional) | Profile name from [Provisioning profile](#provisioning-profile) |
+| `P12_PASSWORD` (optional) | Your `.p12` password if set during export |
+
+#### 3) Use env vars in your GitHub Actions workflow
+
+```yaml
+# .github/workflows/ios-build.yml
+name: iOS Cloud Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  ios-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Request iOS build with Capgo
+        run: bunx @capgo/cli@latest build request --platform ios
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
+          APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
+          APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
+          APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
+          APPLE_PROFILE_NAME: ${{ secrets.APPLE_PROFILE_NAME }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+```
+
+<Aside type="tip">
+With this setup, CI sends credentials through environment variables only. You do not need to commit signing files or upload them as workflow artifacts.
+</Aside>
 
 ### Running the build
 
