@@ -322,6 +322,14 @@ export const actions = [
     icon: ChartBarIcon,
   },
   {
+    name: '@capgo/capacitor-app-attest',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor plugin for cross-platform device attestation using Apple App Attest and Google Play Integrity Standard',
+    href: 'https://github.com/Cap-go/capacitor-app-attest/',
+    title: 'App Attest',
+    icon: ShieldCheckIcon,
+  },
+  {
     name: '@capgo/capacitor-audiosession',
     author: 'github.com/Cap-go',
     description: 'Configure iOS audio session for background playback, mixing, and routing control',

@@ -232,6 +232,11 @@ export default defineConfig({
               paths: ['docs/plugins/appinsights/**'],
             },
             {
+              label: 'Plugin App Attest',
+              description: 'cross-platform app attestation plugin using Apple App Attest and Google Play Integrity Standard',
+              paths: ['docs/plugins/app-attest/**'],
+            },
+            {
               label: 'Plugin Audio Recorder',
               description: 'audio recording plugin for capturing microphone input',
               paths: ['docs/plugins/audio-recorder/**'],
@@ -836,6 +841,16 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/appinsights/' },
                 { label: 'Getting started', link: '/docs/plugins/appinsights/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'App Attest',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/app-attest/' },
+                { label: 'Getting started', link: '/docs/plugins/app-attest/getting-started' },
+                { label: 'iOS setup', link: '/docs/plugins/app-attest/ios' },
+                { label: 'Android setup', link: '/docs/plugins/app-attest/android' },
               ],
               collapsed: true,
             },
