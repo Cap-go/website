@@ -1,0 +1,110 @@
+---
+title: Getting Started
+description: Learn how to install and launch Persona inquiries in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-persona" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## iOS Setup
+
+Persona can require camera, location, and bluetooth depending on your inquiry template. Add usage descriptions in `Info.plist`:
+
+```xml
+<key>NSCameraUsageDescription</key>
+<string>This app uses the camera for identity verification.</string>
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>This app uses location to support identity verification.</string>
+<key>NSBluetoothAlwaysUsageDescription</key>
+<string>This app uses bluetooth to improve identity verification checks.</string>
+```
+
+## Android Setup
+
+No extra Java/Kotlin wiring is required. The plugin already configures Persona's Android Maven repository and dependency.
+
+## Basic Usage
+
+```ts
+import { Persona } from '@capgo/capacitor-persona';
+
+await Persona.addListener('inquiryComplete', (result) => {
+  console.log('Inquiry complete', result.inquiryId, result.status);
+});
+
+await Persona.addListener('inquiryCanceled', (result) => {
+  console.log('Inquiry canceled', result.inquiryId, result.sessionToken);
+});
+
+await Persona.addListener('inquiryError', (result) => {
+  console.error('Inquiry error', result.error, result.errorCode, result.cause);
+});
+
+await Persona.startInquiry({
+  templateId: 'itmpl_EXAMPLE',
+  environment: 'sandbox',
+  referenceId: 'user_123',
+  fields: {
+    name_first: 'Alex',
+    is_verified_user: true,
+  },
+});
+```
+
+## Resume an Existing Inquiry
+
+When resuming a flow created on your backend, pass `inquiryId` with a valid `sessionToken`:
+
+```ts
+await Persona.startInquiry({
+  inquiryId: 'inq_123',
+  sessionToken: 'usertok_abc',
+  environment: 'production',
+});
+```
+
+## API Reference
+
+### `startInquiry(options)`
+
+Launches Persona inquiry UI.
+
+Key options:
+- `templateId`: Recommended for new inquiries.
+- `templateVersion`: Use a specific template version.
+- `inquiryId` + `sessionToken`: Resume an existing inquiry.
+- `environment`: `'production' | 'sandbox'` (default: `'production'`).
+- `fields`: Key/value map to pre-write inquiry fields.
+
+### Events
+
+- `inquiryComplete`: Inquiry reached a completed state.
+- `inquiryCanceled`: User exited the inquiry.
+- `inquiryError`: Persona returned an unrecoverable error.
+
+## Best Practices
+
+1. **Use webhooks for critical decisions**  
+   Treat client callbacks as UX signals. Base compliance or account decisions on Persona webhook events from your backend.
+
+2. **Validate options before launch**  
+   Ensure you pass either `templateId`, `templateVersion`, or `inquiryId`.
+
+3. **Handle cancellation and errors**  
+   Always listen for `inquiryCanceled` and `inquiryError` so users can recover gracefully.
+
+## Platform Notes
+
+- **iOS**: Requires usage descriptions in `Info.plist` for template-dependent checks.
+- **Android**: Uses Persona SDK v2 and launches inquiry via native activity contract.
+- **Web**: Not supported; the web implementation throws an unavailable error.

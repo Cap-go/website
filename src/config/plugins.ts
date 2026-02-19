@@ -570,6 +570,14 @@ export const actions = [
     icon: UserGroupIcon,
   },
   {
+    name: '@capgo/capacitor-persona',
+    author: 'github.com/Cap-go',
+    description: 'Launch Persona identity verification inquiries with native iOS and Android SDKs',
+    href: 'https://github.com/Cap-go/capacitor-persona/',
+    title: 'Persona',
+    icon: UserCircleIcon,
+  },
+  {
     name: '@capgo/capacitor-android-age-signals',
     author: 'github.com/Cap-go',
     description: 'Google Play Age Signals API wrapper - detect supervised accounts and verified users',

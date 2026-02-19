@@ -487,6 +487,11 @@ export default defineConfig({
               paths: ['docs/plugins/pedometer/**'],
             },
             {
+              label: 'Plugin Persona',
+              description: 'Persona identity verification inquiry plugin',
+              paths: ['docs/plugins/persona/**'],
+            },
+            {
               label: 'Plugin Persistent Account',
               description: 'persistent account storage plugin',
               paths: ['docs/plugins/persistent-account/**'],
@@ -1219,6 +1224,14 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/pedometer/' },
                 { label: 'Getting started', link: '/docs/plugins/pedometer/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Persona',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/persona/' },
+                { label: 'Getting started', link: '/docs/plugins/persona/getting-started' },
               ],
               collapsed: true,
             },
