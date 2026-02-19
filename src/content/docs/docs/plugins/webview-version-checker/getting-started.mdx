@@ -15,11 +15,30 @@ import { Steps } from '@astrojs/starlight/components';
 2. **Sync native projects**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Add plugin config**
-   Configure automatic checks and prompt behavior in `capacitor.config.ts`.
+3. **Optional: add plugin config**
+   You can run with defaults (`WebviewVersionChecker: {}`) or customize prompt and threshold behavior in `capacitor.config.ts`.
 </Steps>
 
-## Simple config-only setup
+## Default behavior (main use case)
+
+By default, this plugin uses a Browserslist-style compatibility rule:
+- `minimumDeviceSharePercent` defaults to `3`
+- the share dataset is bundled at build time from caniuse data
+- no runtime dataset URL call is needed for the default flow
+
+```ts
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    WebviewVersionChecker: {},
+  },
+};
+
+export default config;
+```
+
+## Simple config-only setup (show native prompt)
 
 ```ts
 import type { CapacitorConfig } from '@capacitor/cli';
@@ -27,8 +46,6 @@ import type { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   plugins: {
     WebviewVersionChecker: {
-      autoCheckOnLoad: true,
-      autoCheckOnResume: true,
       autoPromptOnOutdated: true,
     },
   },
@@ -37,7 +54,7 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-## Device-share threshold mode (for example `3%`)
+## Advanced threshold mode (custom dataset)
 
 ```ts
 import type { CapacitorConfig } from '@capacitor/cli';
@@ -60,6 +77,15 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
+Use this only if you want compatibility based on real-world share instead of only a fixed version.
+
+- `minimumDeviceSharePercent: 3` means the installed major version must represent at least 3% in your dataset.
+- `versionShareByMajor` is your custom map: major version => percentage.
+- If you prefer remote data, use `versionShareApiUrl` with one of:
+  - `{ "versionShareByMajor": { "137": 54.2, "136": 23.8 } }`
+  - `{ "shareByMajor": { "137": 54.2, "136": 23.8 } }`
+  - `{ "versions": [{ "major": 137, "share": 54.2 }, { "version": "136.0.0.0", "percent": 23.8 }] }`
+
 ## Advanced usage with JavaScript
 
 ```ts
@@ -71,7 +97,6 @@ await WebviewVersionChecker.addListener('webViewOutdated', (status) => {
 
 await WebviewVersionChecker.check({
   minimumMajorVersion: 124,
-  minimumDeviceSharePercent: 3,
   showPromptOnOutdated: true,
 });
 ```
@@ -90,6 +115,11 @@ server: {
 ```
 
 This plugin adds runtime events and native prompt UX, so users can still open and use the app while being encouraged to update.
+
+Evaluation order:
+1. Device-share threshold mode (`minimumDeviceSharePercent` + dataset), if provided
+2. Latest version mode (`latestVersion` / `latestVersionApiUrl`)
+3. Minimum major fallback (`minimumMajorVersion`)
 
 ## Android provider handling
 

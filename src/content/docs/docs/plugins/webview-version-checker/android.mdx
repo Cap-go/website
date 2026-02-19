@@ -13,6 +13,25 @@ This plugin is Android-first and performs native WebView provider version checks
 - Android 5-6 and 10+: Android System WebView provider
 - Android 7-9: Google Chrome provider
 
+## Default behavior (main use case)
+
+The default mode is Browserslist-style compatibility:
+- `minimumDeviceSharePercent` defaults to `3`
+- dataset is bundled at build time from caniuse data
+- no runtime dataset URL call is required unless you set `versionShareApiUrl`
+
+```ts
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    WebviewVersionChecker: {},
+  },
+};
+
+export default config;
+```
+
 ## Basic plugin config
 
 ```ts
@@ -21,8 +40,6 @@ import type { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   plugins: {
     WebviewVersionChecker: {
-      autoCheckOnLoad: true,
-      autoCheckOnResume: true,
       autoPromptOnOutdated: true,
     },
   },
@@ -31,7 +48,7 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-## Device-share threshold mode
+## Advanced threshold mode (custom dataset)
 
 ```ts
 import type { CapacitorConfig } from '@capacitor/cli';
@@ -52,3 +69,13 @@ const config: CapacitorConfig = {
 
 export default config;
 ```
+
+`versionShareByMajor` explanation:
+- key = major WebView version (example `137`)
+- value = share percent (`0..100`)
+- `minimumDeviceSharePercent: 3` means "compatible only if current major version >= 3% share in the dataset"
+
+You can also provide the dataset through `versionShareApiUrl` with:
+- `{ "versionShareByMajor": { "137": 54.2, "136": 23.8 } }`
+- `{ "shareByMajor": { "137": 54.2, "136": 23.8 } }`
+- `{ "versions": [{ "major": 137, "share": 54.2 }, { "version": "136.0.0.0", "percent": 23.8 }] }`
