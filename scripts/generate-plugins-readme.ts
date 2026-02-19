@@ -153,9 +153,11 @@ Got a plugin and want to keep building without carrying maintenance alone? We ca
 - Shared maintenance burden so plugins stay healthy over time
 - Capgo support on quality standards, release process, CI, and maintenance best practices
 - Original makers keep owning the direction while getting operational support
+- Examples already in this model: [Background Geolocation](https://github.com/Cap-go/capacitor-background-geolocation/), [Social Login](https://github.com/Cap-go/capacitor-social-login/), and [In App Browser](https://github.com/Cap-go/capacitor-inappbrowser/)
 
 We are pro AI and welcome AI contributions.
 Our philosophy: build fast, fix fast.
+Contact us to co-maintain your plugin: [martin@capgo.app](mailto:martin@capgo.app)
 
 ## Who’s using Capgo?
 
