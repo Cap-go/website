@@ -516,7 +516,7 @@ In `GitHub > Repository > Settings > Secrets and variables > Actions`, add:
 | `BUILD_CERTIFICATE_BASE64` | Content of `certificate_base64.txt` |
 | `BUILD_PROVISION_PROFILE_BASE64` | Content of `profile_base64.txt` |
 | `APPLE_KEY_CONTENT` | Content of `apple_key_base64.txt` |
-| `APPLE_PROFILE_NAME` (optional) | Profile name from [Provisioning profile](#provisioning-profile) |
+| `APPLE_PROFILE_NAME` | Provisioning profile name from [Provisioning profile](#provisioning-profile). Required unless you pass `--apple-profile-name`; otherwise builds fail. |
 | `P12_PASSWORD` (optional) | Your `.p12` password if set during export |
 
 #### 3) Use env vars in your GitHub Actions workflow
