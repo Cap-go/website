@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-02-19T14:30:00.000Z
-updated_at: 2026-02-19T15:35:00.000Z
+updated_at: 2026-02-20T02:55:43.000Z
 head_image: https://assets.seobotai.com/capgo.app/680053ff28980901df1e733b-1744889496415.jpg
 head_image_alt: Android Build Compatibility
 keywords: Capacitor plugin build error, AGP 9, Android Gradle Plugin 9, proguard-android.txt not found, proguard-android-optimize.txt, fix AGP 9 build error, Gradle build failed, Capacitor Android build error, R8 ProGuard rules, Capgo plugins, Android plugin migration, Capacitor plugin AGP 9 fix
