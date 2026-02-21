@@ -85,7 +85,7 @@ That is why AGP 9 compatibility fixes are important: they keep your plugin layer
 
 Many plugin templates historically used:
 
-```gradle
+```kotlin
 proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 ```
 
@@ -110,7 +110,7 @@ For AGP 9 compatibility, switching to `proguard-android-optimize.txt` is the pra
 
 Update plugin and app module Gradle files:
 
-```gradle
+```kotlin
 proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 ```
 
@@ -218,13 +218,13 @@ Fix tracked plugin source, not transient dependency directories.
 
 Replace:
 
-```gradle
+```kotlin
 getDefaultProguardFile('proguard-android.txt')
 ```
 
 With:
 
-```gradle
+```kotlin
 getDefaultProguardFile('proguard-android-optimize.txt')
 ```
 
