@@ -11,7 +11,7 @@ import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
 1. **Install the package**
-   <PackageManagers pkg="@capgo/home-indicator" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@capgo/capacitor-home-indicator" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 2. **Sync with native projects**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
@@ -20,7 +20,7 @@ import { PackageManagers } from 'starlight-package-managers'
 
    **Hide Home Indicator:**
    ```typescript
-   import { HomeIndicator } from '@capgo/home-indicator';
+   import { HomeIndicator } from '@capgo/capacitor-home-indicator';
 
    // Hide the home indicator
    await HomeIndicator.hide();
@@ -45,76 +45,57 @@ import { PackageManagers } from 'starlight-package-managers'
      </TabItem>
    </Tabs>
 
-4. **Auto-hide configuration**
+ 4. **Advanced usage**
    ```typescript
-   import { HomeIndicator } from '@capgo/home-indicator';
-
-   // Configure auto-hide behavior
-   await HomeIndicator.setAutoHidden({
-     autoHidden: true // Enable auto-hide
-   });
-
-   // The home indicator will automatically hide after a few seconds
-   // and reappear when the user touches the screen
-   ```
-
-5. **Advanced usage**
-   ```typescript
-   import { HomeIndicator } from '@capgo/home-indicator';
+   import { HomeIndicator } from '@capgo/capacitor-home-indicator';
    import { App } from '@capacitor/app';
 
    export class ImmersiveMode {
-     private isImmersive = false;
+      private isImmersive = false;
 
-     async enterImmersiveMode() {
-       this.isImmersive = true;
-       
-       // Hide home indicator
-       await HomeIndicator.hide();
-       
-       // Enable auto-hide for better UX
-       await HomeIndicator.setAutoHidden({ autoHidden: true });
-       
-       // Hide status bar for full immersion
-       // StatusBar.hide(); // If using @capacitor/status-bar
-     }
+      async enterImmersiveMode() {
+        this.isImmersive = true;
 
-     async exitImmersiveMode() {
-       this.isImmersive = false;
-       
-       // Show home indicator
-       await HomeIndicator.show();
-       
-       // Disable auto-hide
-       await HomeIndicator.setAutoHidden({ autoHidden: false });
-       
-       // Show status bar
-       // StatusBar.show(); // If using @capacitor/status-bar
-     }
+        // Hide home indicator
+        await HomeIndicator.hide();
 
-     async toggleImmersiveMode() {
-       const { hidden } = await HomeIndicator.isHidden();
-       
-       if (hidden) {
-         await this.exitImmersiveMode();
-       } else {
-         await this.enterImmersiveMode();
-       }
-     }
+        // Hide status bar for full immersion
+        // StatusBar.hide(); // If using @capacitor/status-bar
+      }
 
-     setupAppLifecycle() {
-       // Handle app state changes
-       App.addListener('appStateChange', async ({ isActive }) => {
-         if (!isActive && this.isImmersive) {
-           // App went to background, might want to show indicator
-           await HomeIndicator.show();
-         } else if (isActive && this.isImmersive) {
-           // App came to foreground, restore immersive mode
-           await HomeIndicator.hide();
-         }
-       });
-     }
-   }
+      async exitImmersiveMode() {
+        this.isImmersive = false;
+
+        // Show home indicator
+        await HomeIndicator.show();
+
+        // Show status bar
+        // StatusBar.show(); // If using @capacitor/status-bar
+      }
+
+      async toggleImmersiveMode() {
+        const { hidden } = await HomeIndicator.isHidden();
+
+        if (hidden) {
+          await this.exitImmersiveMode();
+        } else {
+          await this.enterImmersiveMode();
+        }
+      }
+
+      setupAppLifecycle() {
+        // Handle app state changes
+        App.addListener('appStateChange', async ({ isActive }) => {
+          if (!isActive && this.isImmersive) {
+            // App went to background, might want to show indicator
+            await HomeIndicator.show();
+          } else if (isActive && this.isImmersive) {
+            // App came to foreground, restore immersive mode
+            await HomeIndicator.hide();
+          }
+        });
+      }
+    }
    ```
 </Steps>
 
@@ -137,21 +118,9 @@ Check if the home indicator is currently hidden.
 
 **Returns:** `Promise<{ hidden: boolean }>`
 
-#### `setAutoHidden(options: { autoHidden: boolean })`
-Configure auto-hide behavior for the home indicator.
-
-**Parameters:**
-- `options.autoHidden`: boolean - Enable or disable auto-hide
-
-**Returns:** `Promise<void>`
-
 ### Interfaces
 
 ```typescript
-interface AutoHiddenOptions {
-  autoHidden: boolean;
-}
-
 interface HiddenResult {
   hidden: boolean;
 }
@@ -162,7 +131,6 @@ interface HiddenResult {
 ### iOS
 - Only works on devices with home indicator (iPhone X and later)
 - Requires iOS 11.0 or later
-- Auto-hide makes the indicator translucent and hides after inactivity
 - The indicator reappears when users swipe from the bottom
 
 ### Android
@@ -188,14 +156,8 @@ interface HiddenResult {
    });
    ```
 
-2. **Auto-Hide for Games**: Use auto-hide for better gaming experience
-   ```typescript
-   // For games, auto-hide provides the best balance
-   await HomeIndicator.setAutoHidden({ autoHidden: true });
-   ```
-
-3. **Respect System Gestures**: Don't interfere with system navigation
-4. **Save State**: Remember user's preference for immersive mode
+2. **Respect System Gestures**: Don't interfere with system navigation
+3. **Save State**: Remember user's preference for immersive mode
 
 ## Troubleshooting
 
@@ -204,10 +166,5 @@ interface HiddenResult {
 - Check iOS version is 11.0 or higher
 - Ensure the app has focus
 
-**Auto-hide not working:**
-- Auto-hide requires user interaction to activate
-- The indicator becomes translucent, not completely hidden
-
 **Indicator reappears unexpectedly:**
 - This is normal iOS behavior for system gestures
-- Use auto-hide for less intrusive behavior
