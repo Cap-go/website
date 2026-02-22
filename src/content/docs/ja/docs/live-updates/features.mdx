@@ -1,0 +1,512 @@
+---
+title: 関数
+description: Capgo Live Update のすべての機能に関する完全なリファレンス。集中型更新システムから高度な配布制御、分析、チームのコラボレーション機能まで。
+sidebar:
+  order: 2
+locale: ja
+---
+
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
+
+このページは Capgo Live Updates で利用可能な全機能の概要を包括的に提供します。各機能には簡単な説明と詳細ドキュメントへのリンクが含まれています。
+
+## Core Update System
+
+### Over-the-Air (OTA) Updates
+アプリストアの承認を得ることなく、JavaScript、HTML、CSS、およびアセットの更新を直接ユーザーに配信します。更新はバックグラウンドでダウンロードされ、次回アプリを再起動したときに適用されます。
+
+**主な機能:**
+- バックグラウンドダウンロード
+- 自動インストール
+- ユーザーへの中断なし
+- クロスプラットフォーム対応（iOS、Android、Electron）
+
+[更新動作の詳細について詳しく見る →](/docs/live-updates/update-behavior/)
+
+---
+
+### Delta Updates (Differential Updates)
+バージョン間で変更されたファイルのみをダウンロードし、帯域幅の使用を最大95%削減し、更新配信を高速化します。
+
+**主な機能:**
+- 自動ファイルレベル差分検出
+- チェックサムベースの検証
+- マニフェスト比較
+- 必要に応じて全更新へのインテリジェントなフォールバック
+
+[デルタ更新について詳しく見る →](/docs/live-updates/differentials/)
+
+---
+
+### Automatic Rollback
+更新のロードに失敗した場合やクラッシュの原因となった場合、システムは自動的に前回の動作が確認できているバージョンへ戻します。
+
+**主な機能:**
+- クラッシュ検出
+- タイムアウト検出
+- 自動リバージョン
+- ユーザー介入不要
+
+[ロールバックについて詳しく見る →](/docs/live-updates/rollbacks/)
+
+---
+
+### Checksum Validation & Fallback
+ダウンロード時のチェックサム検証を行い、破損が検出された場合は自動的に前回の動作可能なバージョンへフォールバックします。
+
+**主な機能:**
+- ダウンロード時のチェックサム検証
+- 破損検出
+- 最後に動作していたバンドルへの自動フォールバック
+- 手動回復ツールあり
+
+---
+
+### Breaking Update Detection
+古いネイティブコードバージョンを実行しているデバイスに、互換性のない更新が適用されるのを防ぎます。
+
+**主な機能:**
+- ネイティブ版互換性の検証
+- プラグイン依存関係の検証
+- 互換性のない更新の自動ブロック
+- 明確なエラーメッセージ
+
+[バージョンターゲティングについて詳しく見る →](/docs/live-updates/version-targeting/)
+
+---
+
+## Deployment Control
+
+### Channel System
+柔軟なチャネル設定を用いて、異なる環境やユーザーセグメント全体で更新を整理・管理します。
+
+**主な機能:**
+- 無制限のカスタムチャネル（本番、ステージング、ベータ など）
+- チャネルごとのバンドル割り当て
+- チャネル別ターゲティングルール
+- デバイス自身による割り当て
+- デバイスごとのチャネルオーバーライド
+
+[チャンネルについて詳しく見る →](/docs/live-updates/channels/)
+
+---
+
+### Device Targeting
+段階的なロールアウトと制御された配布のために、特定のデバイス、バージョン、またはユーザーセグメントをターゲットにします。
+
+**主な機能:**
+- バージョンベースのターゲティング
+- デバイス別オーバーライド
+- プラットフォームフィルタリング（iOS、Android）
+- カスタムメタデータによるフィルタリング
+- エミュレータ/開発ビルドのブロック
+
+---
+
+### Channel Policies
+各チャネルでの更新の配信方法に関するルールと制限を構成します。
+
+**主な機能:**
+- 自動更新の無効化
+- メジャーバージョン更新のブロック
+- エミュレータでの更新を無効化
+- 開発ビルドでの更新を無効化
+- プラットフォーム別ポリシー（iOSのみ、Androidのみ）
+
+[チャネルポリシーについて詳しく見る →](/docs/live-updates/channels/#channel-policies)
+
+---
+
+## Developer Tools
+
+### Bundle Preview
+デバイスにデプロイする前に、Webダッシュボードからアクセス可能なライブWeb環境でバンドルをプレビューします。
+
+**Location:** Web Dashboard → App → Bundle → Preview tab
+
+---
+
+### Live Debugging
+CLIを介して特定のデバイスの更新イベントをリアルタイムで監視し、チェック、ダウンロード、インストール、およびエラーイベントを表示します。
+
+**Usage:**
+```bash
+npx @capgo/cli app debug [appId]
+```
+
+**Shows:**
+- Update checks
+- Download progress
+- Installation status
+- Error messages
+- Policy blocks
+
+---
+
+### Bundle Manifest Viewer
+ファイルリスト、チェックサム、メタデータを含む、任意のバンドルの完全なマニフェストを検査します。
+
+**Location:** Web Dashboard → App → Bundle → Manifest tab
+
+**Shows:**
+- チェックサム付きファイルリスト
+- バンドルメタデータ
+- ネイティブ版互換性
+- プラグイン依存関係
+
+---
+
+### Native Plugin Dependencies
+各バンドルに含まれるネイティブ Capacitor プラグインをすべて表示して、バージョン間の依存関係の変更を追跡します。
+
+**Location:** Web Dashboard → App → Bundle → Dependencies tab
+
+**Shows:**
+- プラグイン名とバージョン
+- 依存関係の追加/削除
+- 互換性警告
+
+---
+
+### CLI Integration
+自動デプロイと CI/CD 統合のための総合的なコマンドラインインターフェース。
+
+**主なコマンド:**
+- `bundle upload` - 新しいバンドルをアップロード
+- `bundle list` - すべてのバンドルをリスト表示
+- `bundle delete` - バンドルを削除
+- `bundle cleanup` - 古いバンドルをクリーンアップ
+- `channel set` - チャンネルを構成
+- `app debug` - ライブデバッグ
+
+[完全な CLI リファレンスを見る →](/docs/cli/reference/)
+
+---
+
+### Bundle Encryption
+AES-256 暗号化によるエンドツーエンドのバンドル暗号化。転送中および保存時のコードを保護します。
+
+**主な機能:**
+- RSA キーペアの生成
+- AES-256 バンドル暗号化
+- コード署名検証
+- 暗号化鍵の管理
+
+[暗号化について詳しく見る →](/docs/live-updates/encryption/)
+
+---
+
+### Bundle Cleanup & Retention
+保持ポリシーに基づいて古いバンドルを自動でクリーンアップし、ストレージ使用量を管理します。
+
+**主な機能:**
+- 設定可能な保持件数
+- CLIによる自動クリーンアップ
+- スケジュール済みクリーンアップジョブ
+- ストレージ使用量の追跡
+
+**Usage:**
+```bash
+npx @capgo/cli bundle cleanup --keep=10
+```
+
+---
+
+## Analytics & Monitoring
+
+### Update Statistics
+更新の採用率、成功率、デプロイの進捗をユーザー基盤全体で追跡します。
+
+**利用可能な指標:**
+- ダウンロード成功率
+- インストール成功率
+- 種別別のエラー率
+- 時間経過に伴う更新採用
+- バージョン分布
+
+**Location:** Web Dashboard → App → Statistics
+
+---
+
+### Device Logs
+デバイスごとのイベントログで、チェックからインストールまでの完全な更新ライフサイクルを表示します。
+
+**Event types:**
+- 更新チェック
+- ダウンロード開始/完了/失敗
+- インストール開始/完了/失敗
+- ロールバックイベント
+- ポリシーブロック
+
+**Location:** 
+- Web Dashboard → App → Device → Logs
+- Web Dashboard → App → Logs (all devices)
+
+[ログについて詳しく見る →](/docs/webapp/logs/)
+
+---
+
+### Bundle Usage Analytics
+どのバンドルがアクティブか、ダウンロード数、ストレージ使用量に関する詳細な分析。
+
+** Metrics: **
+- バンドルごとのアクティブインストール数
+- ダウンロード回数
+- バンドルごとのストレージ使用量
+- 帯域幅使用量
+
+---
+
+### Channel Statistics
+チャネルごとのパフォーマンスと採用指標を追跡します。
+
+**Metrics:**
+- チャンネルごとのデバイス数
+- チャンネル別の更新成功率
+- デプロイ履歴
+- チャンネル別のエラー率
+
+**Location:** Web Dashboard → App → Channel → Statistics
+
+---
+
+### Deployment History
+すべてのバンドルデプロイ、チャンネル割り当て、設定変更の完全な監査証跡。
+
+**Tracked events:**
+- バンドルアップロード
+- チャンネル割り当て
+- ポリシー変更
+- デバイスのオーバーライド
+
+**Location:** Web Dashboard → App → Channel → History
+
+---
+
+## Security & Compliance
+
+### End-to-End Encryption
+転送中および保存時のバンドルを業界標準の AES-256 暗号化で保護します。
+
+[暗号化について詳しく見る →](/docs/live-updates/encryption/)
+
+---
+
+### Code Signing
+改ざんを防ぐために、暗号署名でバンドルの整合性を検証します。
+
+---
+
+### SOC 2 Type II Compliance
+エンタープライズセキュリティのための SOC 2 Type II 基準に適合したインフラとプロセス。
+
+---
+
+### App Store Compliance
+OTA 更新のため、Apple App Store および Google Play Store のポリシーに完全準拠。
+
+[コンプライアンスについて詳しく見る →](/docs/live-updates/compliance/)
+
+---
+
+### 2FA Enforcement (Organization-level)
+ダッシュボードと API へアクセスする全組織メンバーに対して、二要素認証を要求します。
+
+**Location:** Web Dashboard → Organization → Security
+
+[2FA について詳しく見る →](/docs/webapp/2fa-enforcement/)
+
+---
+
+### Encrypted Bundles Enforcement
+組織レベルで全バンドルを暗号化することを必須にします。**場所:** Webダッシュボード → 組織 → セキュリティ
+
+---
+
+## チームコラボレーション
+
+### ロールベースのアクセス制御 (RBAC)
+組織およびアプリレベルのアクセス制御の細かな権限
+
+**組織のロール:**
+- `super_admin` - 完全アクセス
+- `admin` - 管理者アクセス
+- `read` - 読み取り専用アクセス
+- `upload` - アップロード専用アクセス
+
+**アプリのロール:**
+- `app_developer` - アプリ全体へのアクセス
+- `app_uploader` - バンドルのアップロードのみ
+- `app_reader` - 読み取り専用アクセス
+
+**場所:** 
+- Webダッシュボード → 組織 → メンバー
+- Webダッシュボード → アプリ → アクセス
+
+[RBAC について詳しく知る →](/docs/webapp/organization-system/#roles-and-permissions)
+
+---
+
+### 監査ログ
+組織およびアプリのすべての活動をコンプライアンスとセキュリティのために完全に監査する履歴。
+
+**記録イベント:**
+- ユーザーの操作（ログイン、ログアウト、権限変更）
+- バンドル操作（アップロード、削除、割り当て）
+- チャンネル操作（作成、更新、削除）
+- 組織の変更（設定、メンバー）
+
+**場所:** Webダッシュボード → 組織 → 監査ログ
+
+---
+
+### Webhook
+リアルタイム通知を受け取る HTTP ウェブフック経由でのアプリのイベント。
+
+**サポートされているイベント:**
+- `apps` - アプリ作成/更新/削除
+- `app_versions` - バンドルのアップロード/削除
+- `channels` - チャンネル作成/更新/削除
+- `org_users` - メンバーの追加/削除
+- `orgs` - 組織の更新
+
+**機能:**
+- カスタム Webhook URL
+- イベントフィルタリング
+- 配信ログ
+- リトライ機構
+- テスト機能
+
+**場所:** Webダッシュボード → 組織 → Webhooks
+
+---
+
+### 複数ユーザーによる協働
+特定のロールと権限を用いて組織にチームメンバーを招待します。
+
+**機能:**
+- メール招待
+- ロール割り当て
+- メンバー管理
+- アクセスの取り消し
+
+**場所:** Webダッシュボード → 組織 → メンバー
+
+---
+
+### API キー管理
+任意の有効期限日とハッシュ化ストレージを伴う API キーを作成、管理、取り消す。
+
+**キーの機能:**
+- アプリごとまたは組織ごとのキー
+- オプションの有効期限日
+- ハッシュ化保存（不可逆）
+- キーローテーション対応
+
+**場所:** Webダッシュボード → API キー
+
+[API キーの詳しい情報 →](/docs/public-api/#authentication)
+
+---
+
+### パスワードポリシー
+組織レベルのパスワード要件を通じてセキュリティ基準を強制します。
+
+**設定可能なポリシー:**
+- 最小長さ
+- 大文字を含む
+- 数字を含む
+- 特殊文字を含む
+
+**場所:** Webダッシュボード → 組織 → セキュリティ
+
+---
+
+## プラットフォームサポート
+
+### マルチプラットフォーム対応
+1つのSDKで iOS、Android、Electron アプリをサポートします。
+
+**サポートされているプラットフォーム:**
+- iOS (Capacitor 5, 6, 7, 8)
+- Android (Capacitor 5, 6, 7, 8)
+- Electron（2025年に新規対応）
+
+---
+
+### 長期サポート
+古い Capacitor バージョンの継続サポートにより、レガシーアプリとの互換性を維持します。
+
+**現在サポートされている:**
+- Capacitor 8 (最新)
+- Capacitor 7
+- Capacitor 6
+- Capacitor 5
+
+---
+
+### カスタムストレージバックエンド
+Capgo のデフォルトストレージの代わりに、独自のストレージインフラストラクチャ（S3、R2 など）を使用します。
+
+[カスタムストレージの詳細 →](/docs/live-updates/custom-storage/)
+
+---
+
+### 中国設定
+本土中国で配布されるアプリを現地規制に準拠させるための特別な設定。
+
+[中国設定の詳細 →](/docs/live-updates/china-configuration/)
+
+---
+
+## 高度な機能
+
+### カスタム更新動作
+SDKを介して、更新をいつどのようにチェックし適用するかを構成します。
+
+**設定可能なオプション:**
+- チェック間隔 (`periodCheckDelay` - 最小 600 秒)
+- 直接更新タイミング (`directUpdate` - atInstall, onLaunch, always)
+- 自動更新の有効化/無効化 (`autoUpdate`)
+- ネットワーク要件（Android のみ - WorkManager）
+
+[更新動作の詳細 →](/docs/live-updates/update-behavior/)
+
+---
+
+### 更新タイプ
+異なるユースケースに対して、瞬時の更新からユーザー制御のインストールまで、さまざまな更新タイプ。
+
+**利用可能なタイプ:**
+- バックグラウンド更新（デフォルト）
+- 即時更新
+- ユーザー承認型更新
+- 条件付き更新
+
+[更新タイプの詳細 →](/docs/live-updates/update-types/)
+
+---
+
+### クレジットシステム
+帯域幅、ストレージ、その他リソースに対するクレジットを用いた従量課金。
+
+**機能:**
+- クレジット使用量の追跡
+- 使用量アラート
+- Stripe でのチャージ（トップアップ）
+- クレジット台帳
+
+**場所:** Webダッシュボード → 組織 → クレジット
+
+---
+
+## はじめに
+
+これらの機能の使用を始める準備はできましたか？ Capgo Live Updates で最初のアプリを設定するには、[クイックスタートガイド](/docs/getting-started/quickstart/)に従ってください。
+
+## ヘルプが必要？
+
+- コミュニティサポートのための [Discord に参加](https://discord.capgo.app)
+- よくある質問は [FAQ を確認](/docs/faq/)
+- API 統合のため [API ドキュメントを参照](/docs/public-api/)
+- エンタープライズサポートの問い合わせ先 [サポートに連絡](https://capgo.app/consulting/)
