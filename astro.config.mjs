@@ -3,12 +3,13 @@ import starlight from '@astrojs/starlight'
 import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import tailwindcss from '@tailwindcss/vite'
 import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
-import { defineConfig, envField } from 'astro/config'
+import { defineConfig } from 'astro/config'
 import { glob } from 'glob'
 import { readFileSync, statSync } from 'node:fs'
 import os from 'node:os'
 import starlightImageZoom from 'starlight-image-zoom'
 import starlightLlmsTxt from 'starlight-llms-txt'
+import starlightDocSearch from '@astrojs/starlight-docsearch'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import config from './configs.json'
 import { defaultLocale, localeNames, locales } from './src/services/locale'
@@ -93,23 +94,6 @@ export default defineConfig({
       include: ['mermaid'],
     },
   },
-  env: {
-    validateSecrets: true,
-    schema: {
-      ORAMA_CLOUD_ENDPOINT: envField.string({
-        context: 'client',
-        access: 'public',
-        optional: true,
-        default: '',
-      }),
-      ORAMA_CLOUD_API_KEY: envField.string({
-        context: 'client',
-        access: 'public',
-        optional: true,
-        default: '',
-      }),
-    },
-  },
   redirects: {
     '/docs/getting-started/': {
       status: 301,
@@ -164,6 +148,11 @@ export default defineConfig({
       pagefind: false,
       prerender: true,
       plugins: [
+        starlightDocSearch({
+          appId: 'R0TIQUJRSN',
+          apiKey: '039b8d50eaa068b9ff8726d912c6f388',
+          indexName: 'capgo',
+        }),
         starlightImageZoom({ showCaptions: false }),
         starlightLlmsTxt({
           projectName: 'capgo',
@@ -697,7 +686,6 @@ export default defineConfig({
       editLink: { baseUrl: 'https://github.com/Cap-go/website/edit/main/' },
       components: {
         Head: './src/components/doc/Head.astro',
-        Search: './src/components/doc/Search.astro',
         LanguageSelect: './src/components/doc/LanguageSelect.astro',
         PageTitle: './src/components/doc/PageTitle.astro',
       },
