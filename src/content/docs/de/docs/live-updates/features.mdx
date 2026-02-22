@@ -1,6 +1,9 @@
 ---
 title: Funktionen
-description: "Vollständige Referenz aller Capgo Live Update-Funktionen, vom Kern-Update-System bis zu erweiterten Bereitstellungssteuerungen, Analysen und Team-Kollaborationsfunktionen."
+description: >-
+  Vollständige Referenz aller Capgo Live Update-Funktionen, vom
+  Kern-Update-System bis hin zu fortgeschrittenen Bereitstellungskontrollen,
+  Analytik und Funktionen zur Teamzusammenarbeit.
 sidebar:
   order: 2
 locale: de
@@ -10,505 +13,504 @@ import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
 
 Diese Seite bietet einen umfassenden Überblick über alle in Capgo Live Updates verfügbaren Funktionen. Jede Funktion enthält eine kurze Beschreibung und Links zur detaillierten Dokumentation.
 
-## Core Update System
+## Kern-Update-System
 
 ### Over-the-Air (OTA) Updates
-Deploy JavaScript, HTML, CSS, and asset updates directly to users without app store approval. Updates are downloaded in the background and applied on next app restart.
+Bereitstellung von JavaScript-, HTML-, CSS- und Asset-Updates direkt an die Benutzer ohne Genehmigung durch den App-Store. Updates werden im Hintergrund heruntergeladen und beim nächsten Neustart der App angewendet.
 
-**Key capabilities:**
-- Background downloads
-- Automatic installation
-- No user interruption
-- Cross-platform support (iOS, Android, Electron)
+**Kernfunktionen:**
+- Downloads im Hintergrund
+- Automatische Installation
+- Keine Unterbrechung durch den Benutzer
+- Plattformübergreifende Unterstützung (iOS, Android, Electron)
 
-[Learn more about update behavior →](/docs/live-updates/update-behavior/)
-
----
-
-### Delta Updates (Differential Updates)
-Only download files that have changed between versions, reducing bandwidth usage by up to 95% and speeding up update delivery.
-
-**Key capabilities:**
-- Automatic file-level diffing
-- Checksum-based verification
-- Manifest comparison
-- Intelligent fallback to full updates when needed
-
-[Learn more about delta updates →](/docs/live-updates/differentials/)
+[Weitere Informationen zum Verhalten von Updates →](/docs/live-updates/update-behavior/)
 
 ---
 
-### Automatic Rollback
-If an update fails to load or causes crashes, the system automatically reverts to the last known working version.
+### Delta Updates (Differenzielle Updates)
+Nur Dateien herunterladen, die sich zwischen Versionen geändert haben, wodurch der Bandbreitenverbrauch um bis zu 95 % reduziert und die Bereitstellung von Updates beschleunigt wird.
 
-**Key capabilities:**
-- Crash detection
-- Timeout detection
-- Automatic reversion
-- No user intervention required
+**Kernfunktionen:**
+- Automatischer Unterschied-Vergleich auf Dateiebene
+- Prüfum Basis auf Checksummen
+- Manifest-Vergleich
+- Intelligenter Rückgriff auf vollständige Updates bei Bedarf
 
-[Learn more about rollbacks →](/docs/live-updates/rollbacks/)
+[Weitere Informationen zu Differenz-Updates →](/docs/live-updates/differentials/)
 
 ---
 
-### Checksum Validation & Fallback
-Verifies bundle integrity via checksums and automatically falls back to the last known working version if corruption is detected.
+### Automatisches Rollback
+Wenn ein Update nicht lädt oder Abstürze verursacht, setzt das System automatisch auf die zuletzt bekannte funktionierende Version zurück.
 
-**Key capabilities:**
-- Checksum validation on download
-- Corruption detection
-- Automatic fallback to last working bundle
-- Manual recovery tools available
+**Kernfunktionen:**
+- Crash-Erkennung
+- Timeout-Erkennung
+- Automatische Rückkehr
+- Keine Benutzereingriffe erforderlich
+
+[Weitere Informationen zu Rollbacks →](/docs/live-updates/rollbacks/)
+
+---
+
+### Prüfsummen-Validierung & Fallback
+Überprüft die Integrität des Bundles anhand von Checksummen und fällt bei erkanntem Schaden automatisch auf die zuletzt funktionierende Version zurück.
+
+**Kernfunktionen:**
+- Prüfsummen-Validierung beim Download
+- Erkennung von Beschädigungen
+- Automatischer Fallback auf das zuletzt funktionierende Bundle
+- Manuelle Wiederherstellungswerkzeuge verfügbar
 
 ---
 
 ### Breaking Update Detection
-Prevents incompatible updates from being applied to devices running older native code versions.
+Verhindert, dass inkompatible Updates auf Geräten mit älteren nativen Code-Versionen angewendet werden.
 
-**Key capabilities:**
-- Native version compatibility checking
-- Plugin dependency validation
-- Automatic blocking of incompatible updates
-- Clear error messaging
+**Kernfunktionen:**
+- Prüfung der Kompatibilität nativer Versionen
+- Validierung von Plugin-Abhängigkeiten
+- Automatisches Blockieren inkompatibler Updates
+- Klare Fehlermeldungen
 
-[Learn more about version targeting →](/docs/live-updates/version-targeting/)
-
----
-
-## Deployment Control
-
-### Channel System
-Organize and manage updates across different environments and user segments with flexible channel configurations.
-
-**Key capabilities:**
-- Unlimited custom channels (production, staging, beta, etc.)
-- Per-channel bundle assignments
-- Channel-specific targeting rules
-- Device self-assignment
-- Channel override per device
-
-[Learn more about channels →](/docs/live-updates/channels/)
+[Weitere Informationen zur Versionszielausrichtung →](/docs/live-updates/version-targeting/)
 
 ---
 
-### Device Targeting
-Target specific devices, versions, or user segments for phased rollouts and controlled deployments.
+## Deployment-Kontrolle
 
-**Key capabilities:**
-- Version-based targeting
-- Device-specific overrides
-- Platform filtering (iOS, Android)
-- Custom metadata filtering
-- Emulator/dev build blocking
+### Kanal-System
+Organisieren und verwalten Sie Updates über verschiedene Umgebungen und Benutzersegmente hinweg mit flexiblen Kanal-Konfigurationen.
 
----
+**Kernfunktionen:**
+- Unbegrenzte benutzerdefinierte Kanäle (Produktion, Staging, Beta usw.)
+- Bündelzuweisungen pro Kanal
+- Kanalspezifische Zielregeln
+- Geräte-Selbstzuordnung
+- Kanalkonflikt pro Gerät
 
-### Channel Policies
-Configure rules and restrictions for how updates are delivered on each channel.
-
-**Key capabilities:**
-- Disable auto-updates
-- Block major version updates
-- Disable updates on emulators
-- Disable updates in development builds
-- Platform-specific policies (iOS-only, Android-only)
-
-[Learn more about channel policies →](/docs/live-updates/channels/#channel-policies)
+[Weitere Informationen zu Kanälen →](/docs/live-updates/channels/)
 
 ---
 
-## Developer Tools
+### Geräte-Zielauswahl
+Gezielte Ansprache bestimmter Geräte, Versionen oder Benutzersegmente für gestaffelte Rollouts und kontrollierte Bereitstellungen.
 
-### Bundle Preview
-Preview bundles in a live web environment before deploying to devices, accessible from the web dashboard.
-
-**Location:** Web Dashboard → App → Bundle → Preview tab
+**Kernfunktionen:**
+- Versionsbasierte Zielauswahl
+- Gerätebezogene Überschreibungen
+- Plattform-Filterung (iOS, Android)
+- Benutzerdefinierte Metadaten-Filterung
+- Emulator- bzw. Entwicklungsbuild-Sperrung
 
 ---
 
-### Live Debugging
-Real-time monitoring of update events for specific devices via CLI, showing check, download, install, and error events.
+### Kanalrichtlinien
+Richten Sie Regeln und Einschränkungen dafür ein, wie Updates auf jedem Kanal ausgeliefert werden.
 
-**Usage:**
+**Kernfunktionen:**
+- Auto-Updates deaktivieren
+- Großversions-Updates blockieren
+- Updates auf Emulatoren deaktivieren
+- Updates in Entwicklungs-Builds deaktivieren
+- Plattformabhängige Richtlinien (nur iOS, nur Android)
+
+[Weitere Informationen zu Kanalrichtlinien →](/docs/live-updates/channels/#channel-policies)
+
+---
+
+## Entwicklertools
+
+### Bundle-Vorschau
+Vorschau von Bundles in einer Live-Web-Umgebung vor dem Bereitstellen auf Geräten, zugänglich über das Web-Dashboard.
+
+**Standort:** Web Dashboard → App → Bundle → Vorschau-Reiter
+
+---
+
+### Live-Debugging
+Echtzeit-Überwachung von Update-Ereignissen für bestimmte Geräte über die CLI, zeigt Prüf-, Download-, Installations- und Fehlerereignisse.
+
+**Verwendung:**
 ```bash
 npx @capgo/cli app debug [appId]
 ```
 
-**Shows:**
-- Update checks
-- Download progress
-- Installation status
-- Error messages
-- Policy blocks
+**Zeigt an:**
+- Update-Prüfungen
+- Download-Fortschritt
+- Installationsstatus
+- Fehlermeldungen
+- Richtlinienblockaden
 
 ---
 
-### Bundle Manifest Viewer
-Inspect the complete manifest of any bundle including file list, checksums, and metadata.
+### Bundle-Manifest-Viewer
+Untersuchen Sie das vollständige Manifest eines Bundles einschließlich Dateiliste, Checksummen und Metadaten.
 
-**Location:** Web Dashboard → App → Bundle → Manifest tab
+**Standort:** Web Dashboard → App → Bundle → Manifest-Reiter
 
-**Shows:**
-- File list with checksums
-- Bundle metadata
-- Native version compatibility
-- Plugin dependencies
-
----
-
-### Native Plugin Dependencies
-View all native Capacitor plugins included in each bundle to track dependency changes across versions.
-
-**Location:** Web Dashboard → App → Bundle → Dependencies tab
-
-**Shows:**
-- Plugin names and versions
-- Dependency additions/removals
-- Compatibility warnings
+**Zeigt an:**
+- Dateiliste mit Checksums
+- Bundle-Metadaten
+- Native Version-Kompatibilität
+- Plugin-Abhängigkeiten
 
 ---
 
-### CLI Integration
-Comprehensive command-line interface for automated deployments and CI/CD integration.
+### Native Plugin-Abhängigkeiten
+Zeigen Sie alle nativen Capacitor-Plugins, die in jedem Bundle enthalten sind, um Abhängigkeitsänderungen über Versionen hinweg zu verfolgen.
 
-**Key commands:**
-- `bundle upload` - Upload new bundles
-- `bundle list` - List all bundles
-- `bundle delete` - Delete bundles
-- `bundle cleanup` - Clean up old bundles
-- `channel set` - Configure channels
-- `app debug` - Live debugging
+**Standort:** Web Dashboard → App → Bundle → Dependencies Reiter
 
-[View full CLI reference →](/docs/cli/reference/)
+**Zeigt an:**
+- Plugin-Namen und Versionen
+- Abhängigkeits-Hinzufügungen/-Entfernungen
+- Kompatibilitätswarnungen
 
 ---
 
-### Bundle Encryption
-End-to-end encryption for bundles with AES-256 encryption, protecting your code in transit and at rest.
+### CLI-Integration
+Umfassende Kommandozeilen-Schnittstelle für automatisierte Bereitstellungen und CI/CD-Integration.
 
-**Key capabilities:**
-- RSA key pair generation
-- AES-256 bundle encryption
-- Code signature verification
-- Encryption key management
+**Kernbefehle:**
+- `bundle upload` - Neue Bundles hochladen
+- `bundle list` - Alle Bundles auflisten
+- `bundle delete` - Bundles löschen
+- `bundle cleanup` - Alte Bundles bereinigen
+- `channel set` - Kanäle konfigurieren
+- `app debug` - Live-Debugging
 
-[Learn more about encryption →](/docs/live-updates/encryption/)
+[Vollständige CLI-Referenz ansehen →](/docs/cli/reference/)
 
 ---
 
-### Bundle Cleanup & Retention
-Automatically clean up old bundles based on retention policies to manage storage usage.
+### Bundle-Verschlüsselung
+End-to-End-Verschlüsselung für Bundles mit AES-256-Verschlüsselung, schützt Ihren Code während der Übertragung und im Ruhezustand.
 
-**Key capabilities:**
-- Configurable retention count
-- Automatic cleanup via CLI
-- Scheduled cleanup jobs
-- Storage usage tracking
+**Kernfunktionen:**
+- Generierung eines RSA-Schlüsselpaares
+- AES-256 Bundle-Verschlüsselung
+- Signaturüberprüfung des Codes
+- Verwaltung von Verschlüsselungsschlüsseln
 
-**Usage:**
+[Weitere Informationen zur Verschlüsselung →](/docs/live-updates/encryption/)
+
+---
+
+### Bundle-Bereinigung & Aufbewahrung
+Bereinigt automatisch alte Bundles basierend auf Aufbewahrungsrichtlinien, um den Speicherverbrauch zu verwalten.
+
+**Kernfunktionen:**
+- Konfigurierbare Aufbewahrungsanzahl
+- Automatische Bereinigung über CLI
+- Geplante Bereinigungsaufträge
+- Speicherverbrauch-Überwachung
+
+**Verwendung:**
 ```bash
 npx @capgo/cli bundle cleanup --keep=10
 ```
 
 ---
 
-## Analytics & Monitoring
+## Analytik & Überwachung
 
-### Update Statistics
-Track update adoption rates, success rates, and deployment progress across your user base.
+### Update-Statistiken
+Verfolgen Sie Akzeptanzraten von Updates, Erfolgsquoten und Bereitstellungsfortschritt in Ihrer Benutzerbasis.
 
-**Metrics available:**
-- Download success rate
-- Installation success rate
-- Error rates by type
-- Update adoption over time
-- Version distribution
+**Verfügbare Kennzahlen:**
+- Erfolgsquote beim Herunterladen
+- Erfolgsquote bei der Installation
+- Fehlerquoten nach Typ
+- Update-Adoption im Zeitverlauf
+- Versionsverteilung
 
-**Location:** Web Dashboard → App → Statistics
+**Standort:** Web Dashboard → App → Statistics
 
 ---
 
-### Device Logs
-Per-device event logs showing complete update lifecycle from check to installation.
+### Geräte-Protokolle
+Ereignisprotokolle pro Gerät, die den gesamten Update-Zyklus von Prüfung bis Installation zeigen.
 
-**Event types:**
-- Update checks
-- Download start/complete/fail
-- Install start/complete/fail
-- Rollback events
-- Policy blocks
+**Ereignistypen:**
+- Update-Prüfungen
+- Download-Start/Abschluss/Fehler
+- Installationsstart/Abschluss/Fehler
+- Rollback-Ereignisse
+- Richtlinienblockaden
 
-**Location:** 
+**Standort:** 
 - Web Dashboard → App → Device → Logs
-- Web Dashboard → App → Logs (all devices)
+- Web Dashboard → App → Logs (alle Geräte)
 
-[Learn more about logs →](/docs/webapp/logs/)
-
----
-
-### Bundle Usage Analytics
-Detailed analytics on which bundles are active, download counts, and storage usage.
-
-**Metrics:**
-- Active installations per bundle
-- Download counts
-- Storage usage per bundle
-- Bandwidth usage
+[Weitere Informationen zu Protokollen →](/docs/webapp/logs/)
 
 ---
 
-### Channel Statistics
-Track performance and adoption metrics per channel.
+### Bundle-Nutzungsanalytik
+Detaillierte Analysen darüber, welche Bundles aktiv sind, Download-Anzahlen und Speicherverbrauch.
 
-**Metrics:**
-- Devices per channel
-- Update success rates per channel
-- Deployment history
-- Error rates by channel
-
-**Location:** Web Dashboard → App → Channel → Statistics
+**Kennzahlen:**
+- Aktive Installationen pro Bundle
+- Download-Anzahlen
+- Speicherverbrauch pro Bundle
+- Bandbreitennutzung
 
 ---
 
-### Deployment History
-Complete audit trail of all bundle deployments, channel assignments, and configuration changes.
+### Kanalstatistiken
+Verfolgen Sie Leistungs- und Akzeptanzmetriken pro Kanal.
 
-**Tracked events:**
-- Bundle uploads
-- Channel assignments
-- Policy changes
-- Device overrides
+**Kennzahlen:**
+- Geräte pro Kanal
+- Erfolgsquoten bei Updates pro Kanal
+- Bereitstellungshistorie
+- Fehlerquoten nach Kanal
 
-**Location:** Web Dashboard → App → Channel → History
-
----
-
-## Security & Compliance
-
-### End-to-End Encryption
-Encrypt bundles at rest and in transit with industry-standard AES-256 encryption.
-
-[Learn more about encryption →](/docs/live-updates/encryption/)
+**Standort:** Web Dashboard → App → Channel → Statistics
 
 ---
 
-### Code Signing
-Verify bundle integrity with cryptographic signatures to prevent tampering.
+### Bereitstellungshistorie
+Vollständige Audit-Trails aller Bundle-Bereitstellungen, Kanalzuweisungen und Konfigurationsänderungen.
+
+**Verfolgte Ereignisse:**
+- Bundle-Uploads
+- Kanalzuweisungen
+- Richtlinienänderungen
+- Geräteüberschreibungen
+
+**Standort:** Web Dashboard → App → Channel → History
 
 ---
 
-### SOC 2 Type II Compliance
-Infrastructure and processes certified to SOC 2 Type II standards for enterprise security.
+## Sicherheit & Compliance
+
+### End-to-End-Verschlüsselung
+Verschlüsselt Bundles im Ruhezustand und während der Übertragung mit der AES-256-Verschlüsselung gemäß Industriestandard.
+
+[Weitere Informationen zur Verschlüsselung →](/docs/live-updates/encryption/)
 
 ---
 
-### App Store Compliance
-Fully compliant with Apple App Store and Google Play Store policies for OTA updates.
-
-[Learn more about compliance →](/docs/live-updates/compliance/)
+### Code-Signierung
+Überprüfen Sie die Integrität von Bundles mithilfe kryptografischer Signaturen, um Manipulationen zu verhindern.
 
 ---
 
-### 2FA Enforcement (Organization-level)
-Require two-factor authentication for all organization members to access the dashboard and API.
-
-**Location:** Web Dashboard → Organization → Security
-
-[Learn more about 2FA →](/docs/webapp/2fa-enforcement/)
+### SOC 2 Typ II-Compliance
+Infrastruktur und Prozesse zertifiziert nach SOC 2 Type II Standards für Unternehmenssicherheit.
 
 ---
 
-### Encrypted Bundles Enforcement
-Require all bundles to be encrypted at the organization level.
+### App-Store-Compliance
+Vollständige Einhaltung der Richtlinien des Apple App Store und des Google Play Store für OTA-Updates.
 
-**Location:** Web Dashboard → Organization → Security
+[Weitere Informationen zur Compliance →](/docs/live-updates/compliance/)
 
 ---
 
-## Team Collaboration
+### 2FA-Verpflichtung (Organisationsebene)
+Erfordern Sie eine Zwei-Faktor-Authentifizierung für alle Organisationsmitglieder, um auf das Dashboard und die API zuzugreifen.
 
-### Role-Based Access Control (RBAC)
-Granular permissions for organization and app-level access control.
+**Standort:** Web Dashboard → Organization → Security
 
-**Organization roles:**
-- `super_admin` - Full access
-- `admin` - Admin access
-- `read` - Read-only access
-- `upload` - Upload-only access
+[Weitere Informationen zur 2FA →](/docs/webapp/2fa-enforcement/)
 
-**App roles:**
-- `app_developer` - Full app access
-- `app_uploader` - Upload bundles only
-- `app_reader` - Read-only access
+---
 
-**Location:** 
-- Web Dashboard → Organization → Members
-- Web Dashboard → App → Access
+### Durchsetzung verschlüsselter Bundles
+Verlangen Sie, dass alle Bundles auf Organisationsebene verschlüsselt sind.**Standort:** Web Dashboard → Organisation → Sicherheit
+
+---
+
+## Teamzusammenarbeit
+
+### Rollenbasierte Zugriffskontrolle (RBAC)
+Genaue Berechtigungen für die Organisations- und App-Ebene der Zugriffskontrolle
+
+**Organisationsrollen:**
+1. `super_admin` - Voller Zugriff
+2. `admin` - Administrativer Zugriff
+3. `read` - Nur-Lesezugriff
+4. `upload` - Nur-Upload-Zugriff
+
+**App-Rollen:**
+1. `app_developer` - Voller App-Zugriff
+2. `app_uploader` - Nur Upload von Bundles
+3. `app_reader` - Nur-Lesezugriff
+
+**Standort:** 
+1. Web Dashboard → Organisation → Mitglieder
+2. Web Dashboard → App → Zugriff
 
 [Learn more about RBAC →](/docs/webapp/organization-system/#roles-and-permissions)
 
 ---
 
-### Audit Logs
-Complete audit trail of all organization and app activities for compliance and security.
+### Audit-Protokolle
+Vollständige Audit-Spur aller Aktivitäten der Organisation und der Apps zur Einhaltung von Vorschriften und Sicherheit.
 
-**Logged events:**
-- User actions (login, logout, permission changes)
-- Bundle operations (upload, delete, assign)
-- Channel operations (create, update, delete)
-- Organization changes (settings, members)
+**Protokollierte Ereignisse:**
+1. Benutzeraktionen (Anmeldung, Abmeldung, Berechtigungsänderungen)
+2. Bundle-Operationen (Upload, Löschen, Zuweisen)
+3. Kanal-Operationen (Erstellen, Aktualisieren, Löschen)
+4. Organisationsänderungen (Einstellungen, Mitglieder)
 
-**Location:** Web Dashboard → Organization → Audit Logs
+**Standort:** Web Dashboard → Organisation → Audit Logs
 
 ---
 
 ### Webhooks
-Receive real-time notifications about events in your apps via HTTP webhooks.
+Echtzeit-Benachrichtigungen über Ereignisse in Ihren Apps per HTTP-Webhooks empfangen.
 
-**Supported events:**
-- `apps` - App created/updated/deleted
-- `app_versions` - Bundle uploaded/deleted
-- `channels` - Channel created/updated/deleted
-- `org_users` - Member added/removed
-- `orgs` - Organization updated
+**Unterstützte Ereignisse:**
+1. `apps` - App erstellt/aktualisiert/gelöscht
+2. `app_versions` - Bundle hochgeladen/gelöscht
+3. `channels` - Kanal erstellt/aktualisiert/gelöscht
+4. `org_users` - Mitglied hinzugefügt/entfernt
+5. `orgs` - Organisation aktualisiert
 
-**Features:**
-- Custom webhook URLs
-- Event filtering
-- Delivery logs
-- Retry mechanism
-- Test functionality
+**Funktionen:**
+1. Custom webhook URLs
+2. Ereignis-Filterung
+3. Zustellungsprotokolle
+4. Wiederholungsmechanismus
+5. Testfunktionalität
 
-**Location:** Web Dashboard → Organization → Webhooks
-
----
-
-### Multi-User Collaboration
-Invite team members to your organization with specific roles and permissions.
-
-**Features:**
-- Email invitations
-- Role assignment
-- Member management
-- Access revocation
-
-**Location:** Web Dashboard → Organization → Members
+**Standort:** Web Dashboard → Organisation → Webhooks
 
 ---
 
-### API Key Management
-Create, manage, and revoke API keys with optional expiration dates and hashed storage.
+### Mehrbenutzer-Zusammenarbeit
+Laden Sie Teammitglieder in Ihre Organisation mit bestimmten Rollen und Berechtigungen ein.
 
-**Key capabilities:**
-- Per-app or per-organization keys
-- Optional expiration dates
-- Hashed storage (irreversible)
-- Key rotation support
+**Funktionen:**
+1. Einladungen per E-Mail
+2. Rollenzuweisung
+3. Mitgliederverwaltung
+4. Zugriff entziehen
 
-**Location:** Web Dashboard → API Keys
+**Standort:** Web Dashboard → Organisation → Mitglieder
+
+---
+
+### API-Schlüssel-Verwaltung
+Erstellen, verwalten und widerrufen Sie API-Schlüssel mit optionalen Ablaufdaten und gehashter Speicherung.
+
+**Schlüssel-Funktionen:**
+1. Pro-App- oder Organisationsschlüssel
+2. Optionale Ablaufdaten
+3. Gehashte Speicherung (irreversibel)
+4. Schlüsselrotation unterstützt
+
+**Standort:** Web Dashboard → API Keys
 
 [Learn more about API keys →](/docs/public-api/#authentication)
 
 ---
 
-### Password Policies
-Organization-level password requirements to enforce security standards.
+### Passwortrichtlinien
+Organisationsweite Passwortrichtlinien zur Durchsetzung von Sicherheitsstandards.
 
-**Configurable policies:**
-- Minimum length
-- Require uppercase
-- Require numbers
-- Require special characters
+**Konfigurierbare Richtlinien:**
+1. Mindestlänge
+2. Großbuchstaben erforderlich
+3. Zahlen erforderlich
+4. Sonderzeichen erforderlich
 
-**Location:** Web Dashboard → Organization → Security
-
----
-
-## Platform Support
-
-### Multi-Platform Support
-Support for iOS, Android, and Electron apps with a single SDK.
-
-**Supported platforms:**
-- iOS (Capacitor 5, 6, 7, 8)
-- Android (Capacitor 5, 6, 7, 8)
-- Electron (NEW in 2025)
+**Standort:** Web Dashboard → Organisation → Security
 
 ---
 
-### Long-Term Support
-Continued support for older Capacitor versions to maintain compatibility with legacy apps.
+## Plattformunterstützung
 
-**Currently supported:**
-- Capacitor 8 (latest)
-- Capacitor 7
-- Capacitor 6
-- Capacitor 5
+### Plattformübergreifende Unterstützung
+Unterstützung für iOS-, Android- und Electron-Apps mit einem einzigen SDK.
+
+**Unterstützte Plattformen:**
+1. iOS (Capacitor 5, 6, 7, 8)
+2. Android (Capacitor 5, 6, 7, 8)
+3. Electron (NEU im Jahr 2025)
 
 ---
 
-### Custom Storage Backends
-Use your own storage infrastructure (S3, R2, etc.) instead of Capgo's default storage.
+### Langzeitunterstützung
+Fortlaufende Unterstützung älterer Capacitor-Versionen zur Aufrechterhaltung der Kompatibilität mit Legacy-Apps.
+
+**Derzeit unterstützt:**
+1. Capacitor 8 (neueste)
+2. Capacitor 7
+3. Capacitor 6
+4. Capacitor 5
+
+---
+
+### Eigene Speicher-Backends
+Verwenden Sie Ihre eigene Speicherinfrastruktur (S3, R2, etc.) statt Capgo's Standard-Speicher.
 
 [Learn more about custom storage →](/docs/live-updates/custom-storage/)
 
 ---
 
-### China Configuration
-Special configuration for apps distributed in mainland China to comply with local regulations.
+### China-Konfiguration
+Spezielle Konfiguration für Apps, die in Festlandchina verteilt werden, um lokale Vorschriften einzuhalten.
 
 [Learn more about China configuration →](/docs/live-updates/china-configuration/)
 
 ---
 
-## Advanced Features
+## Erweiterte Funktionen
 
-### Custom Update Behavior
-Configure when and how updates are checked and applied via the SDK.
+### Benutzerdefiniertes Update-Verhalten
+Konfigurieren Sie, wann und wie Updates über das SDK geprüft und angewendet werden.
 
-**Configurable options:**
-- Check interval (`periodCheckDelay` - minimum 600 seconds)
-- Direct update timing (`directUpdate` - atInstall, onLaunch, always)
-- Auto-update enable/disable (`autoUpdate`)
-- Network requirements (Android only - via WorkManager)
+**Konfigurierbare Optionen:**
+1. Prüfintervall (`periodCheckDelay` - Mindestwert 600 Sekunden)
+2. Direktes Update-Timing (`directUpdate` - atInstall, onLaunch, always)
+3. Auto-Update aktivieren/deaktivieren (`autoUpdate`)
+4. Netzwerk-Anforderungen (nur Android - über WorkManager)
 
 [Learn more about update behavior →](/docs/live-updates/update-behavior/)
 
 ---
 
-### Update Types
-Different update types for different use cases, from instant updates to user-controlled installations.
+### Update-Typen
+Verschiedene Update-Typen für unterschiedliche Anwendungsfälle, von Sofort-Updates bis hin zu benutzerkontrollierten Installationen.
 
-**Available types:**
-- Background updates (default)
-- Immediate updates
-- User-prompted updates
-- Conditional updates
+**Verfügbare Typen:**
+1. Hintergrund-Updates (Standard)
+2. Sofort-Updates
+3. Vom Benutzer bestätigte Updates
+4. Bedingte Updates
 
 [Learn more about update types →](/docs/live-updates/update-types/)
 
 ---
 
-### Credit System
-Usage-based billing with credits for bandwidth, storage, and other resources.
+### Kreditsystem
+Nutzungsbasierte Abrechnung mit Guthaben für Bandbreite, Speicher und andere Ressourcen.
 
-**Features:**
-- Credit usage tracking
-- Usage alerts
-- Top-up via Stripe
-- Credit ledger
+**Funktionen:**
+1. Kreditnutzung verfolgen
+2. Nutzungsbenachrichtigungen
+3. Aufladen via Stripe
+4. Kreditbuchführung
 
-**Location:** Web Dashboard → Organization → Credits
+**Standort:** Web Dashboard → Organisation → Credits
 
 ---
 
-## Getting Started
+## Erste Schritte
 
-Ready to start using these features? Follow our [Quickstart Guide](/docs/getting-started/quickstart/) to set up your first app with Capgo Live Updates.
+Bereit, diese Funktionen zu nutzen? Befolgen Sie unseren [Quickstart Guide](/docs/getting-started/quickstart/) um Ihre erste App mit Capgo Live Updates einzurichten.
 
-## Need Help?
+## Hilfe benötigt?
 
-- [Join our Discord](https://discord.capgo.app) for community support
-- [Check the FAQ](/docs/faq/) for common questions
-- [Browse API documentation](/docs/public-api/) for API integration
-- [Contact support](https://capgo.app/consulting/) for enterprise assistance
+- [Join our Discord](https://discord.capgo.app) für Community-Support
+- [Check the FAQ](/docs/faq/) für häufig gestellte Fragen
+- [Browse API documentation](/docs/public-api/) für API-Integration
+- [Contact support](https://capgo.app/consulting/) für Unternehmensunterstützung
+.

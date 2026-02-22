@@ -1,6 +1,9 @@
 ---
-title: Fitur
-description: "Referensi lengkap semua kemampuan Capgo Live Update, dari sistem pembaruan inti hingga kontrol penerapan lanjutan, analitik, dan fitur kolaborasi tim."
+title: Fungsi
+description: >-
+  Referensi lengkap untuk semua fitur Capgo Live Update, mulai dari sistem
+  pembaruan pusat hingga kontrol penyebaran lanjutan, analitik dan fungsi
+  kolaborasi tim.
 sidebar:
   order: 2
 locale: id
@@ -8,237 +11,237 @@ locale: id
 
 import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
 
-Halaman ini memberikan gambaran menyeluruh tentang semua fitur yang tersedia di Capgo Live Updates. Setiap fitur mencakup deskripsi singkat dan tautan ke dokumentasi terperinci.
+Halaman ini memberikan gambaran menyeluruh tentang semua fitur yang tersedia di Capgo Live Updates. Setiap fitur mencakup deskripsi singkat dan tautan ke dokumentasi rinci.
 
-## Core Update System
+## Sistem Pembaruan Inti
 
-### Over-the-Air (OTA) Updates
-Deploy JavaScript, HTML, CSS, and asset updates directly to users without app store approval. Updates are downloaded in the background and applied on next app restart.
+### Pembaruan Over-the-Air (OTA)
+Men-deploy pembaruan JavaScript, HTML, CSS, dan aset langsung ke pengguna tanpa persetujuan toko aplikasi. Pembaruan diunduh di latar belakang dan diterapkan pada saat memulai ulang aplikasi berikutnya.
 
-**Key capabilities:**
-- Background downloads
-- Automatic installation
-- No user interruption
-- Cross-platform support (iOS, Android, Electron)
+**Kemampuan utama:**
+- Unduhan latar belakang
+- Instalasi otomatis
+- Tidak mengganggu pengguna
+- Dukungan lintas platform (iOS, Android, Electron)
 
 [Learn more about update behavior →](/docs/live-updates/update-behavior/)
 
 ---
 
-### Delta Updates (Differential Updates)
-Only download files that have changed between versions, reducing bandwidth usage by up to 95% and speeding up update delivery.
+### Pembaruan Delta (Pembaruan Diferensial)
+Hanya mengunduh file yang telah berubah antara versi, mengurangi penggunaan bandwidth hingga 95% dan mempercepat penyampaian pembaruan.
 
-**Key capabilities:**
-- Automatic file-level diffing
-- Checksum-based verification
-- Manifest comparison
-- Intelligent fallback to full updates when needed
+**Kemampuan utama:**
+- Perbedaan tingkat berkas otomatis
+- Verifikasi berbasis checksum
+- Perbandingan manifest
+- Cadangan cerdas ke pembaruan penuh jika diperlukan
 
 [Learn more about delta updates →](/docs/live-updates/differentials/)
 
 ---
 
-### Automatic Rollback
-If an update fails to load or causes crashes, the system automatically reverts to the last known working version.
+### Rollback Otomatis
+Jika pembaruan gagal dimuat atau menyebabkan crash, sistem secara otomatis kembali ke versi terakhir yang dikenal berfungsi.
 
-**Key capabilities:**
-- Crash detection
-- Timeout detection
-- Automatic reversion
-- No user intervention required
+**Kemampuan utama:**
+- Deteksi crash
+- Deteksi timeout
+- Pemulihan otomatis
+- Tidak diperlukan intervensi pengguna
 
 [Learn more about rollbacks →](/docs/live-updates/rollbacks/)
 
 ---
 
-### Checksum Validation & Fallback
-Verifies bundle integrity via checksums and automatically falls back to the last known working version if corruption is detected.
+### Validasi Checksum & Cadangan
+Memverifikasi integritas bundle melalui checksum dan secara otomatis kembali ke versi terakhir yang berfungsi jika korupsi terdeteksi.
 
-**Key capabilities:**
-- Checksum validation on download
-- Corruption detection
-- Automatic fallback to last working bundle
-- Manual recovery tools available
+**Kemampuan utama:**
+- Validasi checksum saat unduhan
+- Deteksi korupsi
+- Cadangan otomatis ke bundle terakhir yang berfungsi
+- Alat pemulihan manual tersedia
 
 ---
 
-### Breaking Update Detection
-Prevents incompatible updates from being applied to devices running older native code versions.
+### Deteksi Pembaruan yang Mengganggu
+Mencegah pembaruan yang tidak kompatibel diterapkan pada perangkat yang menjalankan versi kode native lebih lama.
 
-**Key capabilities:**
-- Native version compatibility checking
-- Plugin dependency validation
-- Automatic blocking of incompatible updates
-- Clear error messaging
+**Kemampuan utama:**
+- Pemeriksaan kecocokan versi native
+- Validasi dependensi plugin
+- Pemblokiran otomatis pembaruan yang tidak kompatibel
+- Pesan kesalahan yang jelas
 
 [Learn more about version targeting →](/docs/live-updates/version-targeting/)
 
 ---
 
-## Deployment Control
+## Kontrol Penyebaran
 
-### Channel System
-Organize and manage updates across different environments and user segments with flexible channel configurations.
+### Sistem Kanal
+Atur dan kelola pembaruan di berbagai lingkungan dan segmen pengguna dengan konfigurasi kanal yang fleksibel.
 
-**Key capabilities:**
-- Unlimited custom channels (production, staging, beta, etc.)
-- Per-channel bundle assignments
-- Channel-specific targeting rules
-- Device self-assignment
-- Channel override per device
+**Kemampuan utama:**
+- Kanal kustom tidak terbatas (produksi, staging, beta, dll.)
+- Penugasan bundle per kanal
+- Aturan penargetan khusus kanal
+- Penugasan perangkat sendiri
+- Override kanal per perangkat
 
 [Learn more about channels →](/docs/live-updates/channels/)
 
 ---
 
-### Device Targeting
-Target specific devices, versions, or user segments for phased rollouts and controlled deployments.
+### Penargetan Perangkat
+Targetkan perangkat tertentu, versi, atau segmen pengguna untuk peluncuran bertahap dan penyebaran terkontrol.
 
-**Key capabilities:**
-- Version-based targeting
-- Device-specific overrides
-- Platform filtering (iOS, Android)
-- Custom metadata filtering
-- Emulator/dev build blocking
+**Kemampuan utama:**
+- Penargetan berbasis versi
+- Override khusus perangkat
+- Penyaringan platform (iOS, Android)
+- Penyaringan metadata kustom
+- Pemblokiran emulator/build pengembang
 
 ---
 
-### Channel Policies
-Configure rules and restrictions for how updates are delivered on each channel.
+### Kebijakan Kanal
+Konfigurasikan aturan dan batasan untuk bagaimana pembaruan didistribusikan pada setiap kanal.
 
-**Key capabilities:**
-- Disable auto-updates
-- Block major version updates
-- Disable updates on emulators
-- Disable updates in development builds
-- Platform-specific policies (iOS-only, Android-only)
+**Kemampuan utama:**
+- Nonaktifkan pembaruan otomatis
+- Blok pembaruan versi mayor
+- Nonaktifkan pembaruan pada emulator
+- Nonaktifkan pembaruan pada build pengembangan
+- Kebijakan khusus platform (hanya iOS, hanya Android)
 
 [Learn more about channel policies →](/docs/live-updates/channels/#channel-policies)
 
 ---
 
-## Developer Tools
+## Alat Pengembang
 
-### Bundle Preview
-Preview bundles in a live web environment before deploying to devices, accessible from the web dashboard.
+### Pratinjau Bundel
+Pratinjau bundel di lingkungan web langsung sebelum menyebarkannya ke perangkat, dapat diakses dari dashboard web.
 
-**Location:** Web Dashboard → App → Bundle → Preview tab
+**Lokasi:** Web Dashboard → App → Bundle → Preview tab
 
 ---
 
-### Live Debugging
-Real-time monitoring of update events for specific devices via CLI, showing check, download, install, and error events.
+### Debugging Langsung
+Pemantauan waktu nyata terhadap peristiwa pembaruan untuk perangkat tertentu melalui CLI, menampilkan periksa, unduhan, instalasi, dan peristiwa kesalahan.
 
-**Usage:**
+**Penggunaan:**
 ```bash
 npx @capgo/cli app debug [appId]
 ```
 
-**Shows:**
-- Update checks
-- Download progress
-- Installation status
-- Error messages
-- Policy blocks
+**Menampilkan:**
+- Pemeriksaan pembaruan
+- Kemajuan unduhan
+- Status instalasi
+- Pesan kesalahan
+- Pemblokiran kebijakan
 
 ---
 
-### Bundle Manifest Viewer
-Inspect the complete manifest of any bundle including file list, checksums, and metadata.
+### Penampil Manifest Bundel
+Memeriksa manifest lengkap dari bundel mana pun termasuk daftar file, checksum, dan metadata.
 
-**Location:** Web Dashboard → App → Bundle → Manifest tab
+**Lokasi:** Web Dashboard → App → Bundle → Manifest tab
 
-**Shows:**
-- File list with checksums
-- Bundle metadata
-- Native version compatibility
-- Plugin dependencies
-
----
-
-### Native Plugin Dependencies
-View all native Capacitor plugins included in each bundle to track dependency changes across versions.
-
-**Location:** Web Dashboard → App → Bundle → Dependencies tab
-
-**Shows:**
-- Plugin names and versions
-- Dependency additions/removals
-- Compatibility warnings
+**Menampilkan:**
+- Daftar file dengan checksum
+- Metadata bundel
+- Kompatibilitas versi native
+- Dependensi plugin
 
 ---
 
-### CLI Integration
-Comprehensive command-line interface for automated deployments and CI/CD integration.
+### Dependensi Plugin Native
+Lihat semua plugin Capacitor asli yang disertakan dalam setiap bundel untuk melacak perubahan dependensi antar versi.
 
-**Key commands:**
-- `bundle upload` - Upload new bundles
-- `bundle list` - List all bundles
-- `bundle delete` - Delete bundles
-- `bundle cleanup` - Clean up old bundles
-- `channel set` - Configure channels
-- `app debug` - Live debugging
+**Lokasi:** Web Dashboard → App → Bundle → Dependencies tab
+
+**Menampilkan:**
+- Nama plugin dan versi
+- Penambahan/penghapusan dependensi
+- Peringatan kompatibilitas
+
+---
+
+### Integrasi CLI
+Antarmuka baris perintah yang komprehensif untuk penyebaran otomatis dan integrasi CI/CD.
+
+**Perintah penting:**
+- `bundle upload` - Unggah bundel baru
+- `bundle list` - Daftar semua bundel
+- `bundle delete` - Hapus bundel
+- `bundle cleanup` - Bersihkan bundel lama
+- `channel set` - Konfigurasikan kanal
+- `app debug` - Debugging langsung
 
 [View full CLI reference →](/docs/cli/reference/)
 
 ---
 
-### Bundle Encryption
-End-to-end encryption for bundles with AES-256 encryption, protecting your code in transit and at rest.
+### Enkripsi Bundel
+Enkripsi end-to-end untuk bundel dengan enkripsi AES-256, melindungi kode Anda saat ditransit dan saat disimpan.
 
-**Key capabilities:**
-- RSA key pair generation
-- AES-256 bundle encryption
-- Code signature verification
-- Encryption key management
+**Kemampuan utama:**
+- Pembuatan pasangan kunci RSA
+- Enkripsi bundel AES-256
+- Verifikasi tanda tangan kode
+- Manajemen kunci enkripsi
 
 [Learn more about encryption →](/docs/live-updates/encryption/)
 
 ---
 
-### Bundle Cleanup & Retention
-Automatically clean up old bundles based on retention policies to manage storage usage.
+### Pembersihan & Retensi Bundel
+Membersihkan bundel lama secara otomatis berdasarkan kebijakan retensi untuk mengelola penggunaan penyimpanan.
 
-**Key capabilities:**
-- Configurable retention count
-- Automatic cleanup via CLI
-- Scheduled cleanup jobs
-- Storage usage tracking
+**Kemampuan utama:**
+- Jumlah retensi yang dapat dikonfigurasi
+- Pembersihan otomatis melalui CLI
+- Pekerjaan pembersihan terjadwal
+- Pelacakan penggunaan penyimpanan
 
-**Usage:**
+**Penggunaan:**
 ```bash
 npx @capgo/cli bundle cleanup --keep=10
 ```
 
 ---
 
-## Analytics & Monitoring
+## Analitik & Pemantauan
 
-### Update Statistics
-Track update adoption rates, success rates, and deployment progress across your user base.
+### Statistik Pembaruan
+Melacak tingkat adopsi pembaruan, tingkat keberhasilan, dan kemajuan penyebaran di seluruh basis pengguna Anda.
 
-**Metrics available:**
-- Download success rate
-- Installation success rate
-- Error rates by type
-- Update adoption over time
-- Version distribution
+**Metrik yang tersedia:**
+- Tingkat keberhasilan unduhan
+- Tingkat keberhasilan instalasi
+- Tingkat kesalahan berdasarkan jenis
+- Adopsi pembaruan seiring waktu
+- Distribusi versi
 
-**Location:** Web Dashboard → App → Statistics
+**Lokasi:** Web Dashboard → App → Statistics
 
 ---
 
-### Device Logs
-Per-device event logs showing complete update lifecycle from check to installation.
+### Log Perangkat
+Log per perangkat yang menunjukkan seluruh siklus hidup pembaruan mulai dari pemeriksaan hingga instalasi.
 
-**Event types:**
-- Update checks
-- Download start/complete/fail
-- Install start/complete/fail
-- Rollback events
-- Policy blocks
+**Jenis peristiwa:**
+- Pemeriksaan pembaruan
+- Mulai/selesai/gagal unduhan
+- Mulai/selesai/gagal instalasi
+- Peristiwa rollback
+- Pemblokiran kebijakan
 
-**Location:** 
+**Lokasi:** 
 - Web Dashboard → App → Device → Logs
 - Web Dashboard → App → Logs (all devices)
 
@@ -246,269 +249,266 @@ Per-device event logs showing complete update lifecycle from check to installati
 
 ---
 
-### Bundle Usage Analytics
-Detailed analytics on which bundles are active, download counts, and storage usage.
+### Analitik Penggunaan Bundel
+Analitik rinci tentang bundel mana yang aktif, jumlah unduhan, dan penggunaan penyimpanan.
 
-**Metrics:**
-- Active installations per bundle
-- Download counts
-- Storage usage per bundle
-- Bandwidth usage
-
----
-
-### Channel Statistics
-Track performance and adoption metrics per channel.
-
-**Metrics:**
-- Devices per channel
-- Update success rates per channel
-- Deployment history
-- Error rates by channel
-
-**Location:** Web Dashboard → App → Channel → Statistics
+**Metrik:**
+- Instalasi aktif per bundel
+- Jumlah unduhan
+- Penggunaan penyimpanan per bundel
+- Penggunaan bandwidth
 
 ---
 
-### Deployment History
-Complete audit trail of all bundle deployments, channel assignments, and configuration changes.
+### Statistik Kanal
+Lacak kinerja dan metrik adopsi per kanal.
 
-**Tracked events:**
-- Bundle uploads
-- Channel assignments
-- Policy changes
-- Device overrides
+**Metrik:**
+- Perangkat per kanal
+- Tingkat keberhasilan pembaruan per kanal
+- Riwayat penyebaran
+- Tingkat kesalahan per kanal
 
-**Location:** Web Dashboard → App → Channel → History
+**Lokasi:** Web Dashboard → App → Channel → Statistics
 
 ---
 
-## Security & Compliance
+### Riwayat Penyebaran
+Jejak audit lengkap dari semua penyebaran bundel, penugasan kanal, dan perubahan konfigurasi.
 
-### End-to-End Encryption
-Encrypt bundles at rest and in transit with industry-standard AES-256 encryption.
+**Peristiwa yang ditelusuri:**
+- Unggahan bundel
+- Penugasan kanal
+- Perubahan kebijakan
+- Penyesuaian perangkat
+
+**Lokasi:** Web Dashboard → App → Channel → History
+
+---
+
+## Keamanan & Kepatuhan
+
+### Enkripsi End-to-End
+Enkripsi bundel saat disimpan dan saat ditransfer dengan enkripsi AES-256 standar industri.
 
 [Learn more about encryption →](/docs/live-updates/encryption/)
 
 ---
 
-### Code Signing
-Verify bundle integrity with cryptographic signatures to prevent tampering.
+### Penandatanganan Kode
+Memverifikasi integritas bundel dengan tanda tangan kriptografis untuk mencegah perubahan tidak sah.
 
 ---
 
-### SOC 2 Type II Compliance
-Infrastructure and processes certified to SOC 2 Type II standards for enterprise security.
+### Kepatuhan SOC 2 Type II
+Infrastruktur dan proses bersertifikat sesuai standar SOC 2 Type II untuk keamanan perusahaan.
 
 ---
 
-### App Store Compliance
-Fully compliant with Apple App Store and Google Play Store policies for OTA updates.
+### Kepatuhan App Store
+Sepenuhnya mematuhi kebijakan Apple App Store dan Google Play Store untuk pembaruan OTA.
 
 [Learn more about compliance →](/docs/live-updates/compliance/)
 
 ---
 
-### 2FA Enforcement (Organization-level)
-Require two-factor authentication for all organization members to access the dashboard and API.
-
-**Location:** Web Dashboard → Organization → Security
+### Penegakan 2FA (Tingkat Organisasi)
+Wajibkan autentikasi dua faktor untuk semua anggota organisasi agar dapat mengakses dashboard dan API.
 
 [Learn more about 2FA →](/docs/webapp/2fa-enforcement/)
 
 ---
 
-### Encrypted Bundles Enforcement
-Require all bundles to be encrypted at the organization level.
-
-**Location:** Web Dashboard → Organization → Security
+### Penegakan Bundel Terenkripsi
+Wajibkan semua bundel untuk dienkripsi pada tingkat organisasi.**Lokasi:** Web Dashboard → Organisasi → Keamanan
 
 ---
 
-## Team Collaboration
+## Kolaborasi Tim
 
-### Role-Based Access Control (RBAC)
-Granular permissions for organization and app-level access control.
+### Kontrol Akses Berbasis Peran (RBAC)
+Izin granular untuk kontrol akses tingkat organisasi dan tingkat aplikasi
 
-**Organization roles:**
-- `super_admin` - Full access
-- `admin` - Admin access
-- `read` - Read-only access
-- `upload` - Upload-only access
+**Peran organisasi:**
+- `super_admin` - Akses penuh
+- `admin` - Akses Admin
+- `read` - Akses hanya baca
+- `upload` - Akses hanya unggah
 
-**App roles:**
-- `app_developer` - Full app access
-- `app_uploader` - Upload bundles only
-- `app_reader` - Read-only access
+**Peran aplikasi:**
+- `app_developer` - Akses penuh aplikasi
+- `app_uploader` - Hanya mengunggah bundel
+- `app_reader` - Akses hanya baca
 
-**Location:** 
-- Web Dashboard → Organization → Members
-- Web Dashboard → App → Access
+**Lokasi:** 
+- Web Dashboard → Organisasi → Anggota
+- Web Dashboard → Aplikasi → Akses
 
-[Learn more about RBAC →](/docs/webapp/organization-system/#roles-and-permissions)
+[Pelajari lebih lanjut tentang RBAC →](/docs/webapp/organization-system/#roles-and-permissions)
 
 ---
 
 ### Audit Logs
-Complete audit trail of all organization and app activities for compliance and security.
+Jejak audit lengkap dari semua aktivitas organisasi dan aplikasi untuk kepatuhan dan keamanan.
 
-**Logged events:**
-- User actions (login, logout, permission changes)
-- Bundle operations (upload, delete, assign)
-- Channel operations (create, update, delete)
-- Organization changes (settings, members)
+**Peristiwa yang dicatat:**
+- Tindakan pengguna (masuk, keluar, perubahan izin)
+- Operasi bundel (mengunggah, menghapus, menetapkan)
+- Operasi saluran (membuat, memperbarui, menghapus)
+- Perubahan organisasi (pengaturan, anggota)
 
-**Location:** Web Dashboard → Organization → Audit Logs
+**Lokasi:** Web Dashboard → Organisasi → Audit Logs
 
 ---
 
 ### Webhooks
-Receive real-time notifications about events in your apps via HTTP webhooks.
+Terima notifikasi waktu nyata tentang peristiwa di aplikasi Anda melalui webhook HTTP.
 
-**Supported events:**
-- `apps` - App created/updated/deleted
-- `app_versions` - Bundle uploaded/deleted
-- `channels` - Channel created/updated/deleted
-- `org_users` - Member added/removed
-- `orgs` - Organization updated
+**Peristiwa yang Didukung:**
+- `apps` - Aplikasi dibuat/diperbarui/dihapus
+- `app_versions` - Bundel diunggah/dihapus
+- `channels` - Saluran dibuat/diperbarui/dihapus
+- `org_users` - Anggota ditambahkan/dihapus
+- `orgs` - Organisasi diperbarui
 
-**Features:**
-- Custom webhook URLs
-- Event filtering
-- Delivery logs
-- Retry mechanism
-- Test functionality
+**Fitur:**
+- URL webhook kustom
+- Penyaringan peristiwa
+- Log pengiriman
+- Mekanisme percobaan ulang
+- Fungsi pengujian
 
-**Location:** Web Dashboard → Organization → Webhooks
-
----
-
-### Multi-User Collaboration
-Invite team members to your organization with specific roles and permissions.
-
-**Features:**
-- Email invitations
-- Role assignment
-- Member management
-- Access revocation
-
-**Location:** Web Dashboard → Organization → Members
+**Lokasi:** Web Dashboard → Organisasi → Webhooks
 
 ---
 
-### API Key Management
-Create, manage, and revoke API keys with optional expiration dates and hashed storage.
+### Kolaborasi Multi-Pengguna
+Undang anggota tim ke organisasi Anda dengan peran dan izin tertentu.
 
-**Key capabilities:**
-- Per-app or per-organization keys
-- Optional expiration dates
-- Hashed storage (irreversible)
-- Key rotation support
+**Fitur:**
+- Undangan melalui email
+- Penetapan peran
+- Manajemen anggota
+- Penarikan akses
 
-**Location:** Web Dashboard → API Keys
-
-[Learn more about API keys →](/docs/public-api/#authentication)
+**Lokasi:** Web Dashboard → Organisasi → Anggota
 
 ---
 
-### Password Policies
-Organization-level password requirements to enforce security standards.
+### Manajemen Kunci API
+Buat, kelola, dan cabut kunci API dengan tanggal kedaluwarsa opsional dan penyimpanan ber-hash.
 
-**Configurable policies:**
-- Minimum length
-- Require uppercase
-- Require numbers
-- Require special characters
+**Kemampuan kunci:**
+- Kunci per-aplikasi atau per-organisasi
+- Tanggal kedaluwarsa opsional
+- Penyimpanan ber-hash (tidak dapat dipulihkan)
+- Dukungan rotasi kunci
 
-**Location:** Web Dashboard → Organization → Security
+**Lokasi:** Web Dashboard → Kunci API
+
+[Pelajari lebih lanjut tentang kunci API →](/docs/public-api/#authentication)
+
+---
+
+### Kebijakan Kata Sandi
+Persyaratan kata sandi tingkat organisasi untuk menegakkan standar keamanan.
+
+**Kebijakan yang dapat diatur:**
+- Panjang minimum
+- Wajib huruf kapital
+- Wajib angka
+- Wajib karakter khusus
+
+**Lokasi:** Web Dashboard → Organisasi → Keamanan
 
 ---
 
 ## Platform Support
 
-### Multi-Platform Support
-Support for iOS, Android, and Electron apps with a single SDK.
+### Dukungan Multi-Platform
+Dukungan untuk iOS, Android, dan aplikasi Electron dengan satu SDK.
 
-**Supported platforms:**
+**Platform yang Didukung:**
 - iOS (Capacitor 5, 6, 7, 8)
 - Android (Capacitor 5, 6, 7, 8)
-- Electron (NEW in 2025)
+- Electron (BARU pada 2025)
 
 ---
 
-### Long-Term Support
-Continued support for older Capacitor versions to maintain compatibility with legacy apps.
+### Dukungan Jangka Panjang
+Dukungan berkelanjutan untuk versi Capacitor yang lebih lama untuk menjaga kompatibilitas dengan aplikasi lama.
 
-**Currently supported:**
-- Capacitor 8 (latest)
+**Saat ini didukung:**
+- Capacitor 8 (terbaru)
 - Capacitor 7
 - Capacitor 6
 - Capacitor 5
 
 ---
 
-### Custom Storage Backends
-Use your own storage infrastructure (S3, R2, etc.) instead of Capgo's default storage.
+### Backend Penyimpanan Kustom
+Gunakan infrastruktur penyimpanan Anda sendiri (S3, R2, dll.) sebagai pengganti penyimpanan bawaan Capgo.
 
-[Learn more about custom storage →](/docs/live-updates/custom-storage/)
-
----
-
-### China Configuration
-Special configuration for apps distributed in mainland China to comply with local regulations.
-
-[Learn more about China configuration →](/docs/live-updates/china-configuration/)
+[Pelajari lebih lanjut tentang penyimpanan kustom →](/docs/live-updates/custom-storage/)
 
 ---
 
-## Advanced Features
+### Konfigurasi China
+Konfigurasi khusus untuk aplikasi yang didistribusikan di daratan Tiongkok guna mematuhi peraturan setempat.
 
-### Custom Update Behavior
-Configure when and how updates are checked and applied via the SDK.
-
-**Configurable options:**
-- Check interval (`periodCheckDelay` - minimum 600 seconds)
-- Direct update timing (`directUpdate` - atInstall, onLaunch, always)
-- Auto-update enable/disable (`autoUpdate`)
-- Network requirements (Android only - via WorkManager)
-
-[Learn more about update behavior →](/docs/live-updates/update-behavior/)
+[Pelajari lebih lanjut tentang konfigurasi China →](/docs/live-updates/china-configuration/)
 
 ---
 
-### Update Types
-Different update types for different use cases, from instant updates to user-controlled installations.
+## Fitur Lanjutan
 
-**Available types:**
-- Background updates (default)
-- Immediate updates
-- User-prompted updates
-- Conditional updates
+### Perilaku Pembaruan Kustom
+Atur kapan dan bagaimana pembaruan diperiksa dan diterapkan melalui SDK.
 
-[Learn more about update types →](/docs/live-updates/update-types/)
+**Opsi yang dapat dikonfigurasi:**
+- Interval pemeriksaan (`periodCheckDelay` - minimum 600 detik)
+- Waktu pembaruan langsung (`directUpdate` - atInstall, onLaunch, always)
+- Aktifkan/nonaktifkan pembaruan otomatis (`autoUpdate`)
+- Persyaratan jaringan (Android saja - melalui WorkManager)
+
+[Pelajari lebih lanjut tentang perilaku pembaruan →](/docs/live-updates/update-behavior/)
 
 ---
 
-### Credit System
-Usage-based billing with credits for bandwidth, storage, and other resources.
+### Jenis Pembaruan
+Berbagai jenis pembaruan untuk berbagai kasus penggunaan, mulai dari pembaruan instan hingga instalasi yang dikendalikan pengguna.
 
-**Features:**
-- Credit usage tracking
-- Usage alerts
-- Top-up via Stripe
-- Credit ledger
+**Jenis yang Tersedia:**
+- Pembaruan latar belakang (default)
+- Pembaruan langsung
+- Pembaruan yang dipicu pengguna
+- Pembaruan bersyarat
 
-**Location:** Web Dashboard → Organization → Credits
+[Pelajari lebih lanjut tentang jenis pembaruan →](/docs/live-updates/update-types/)
+
+---
+
+### Sistem Kredit
+Penagihan berbasis penggunaan dengan kredit untuk bandwidth, penyimpanan, dan sumber daya lainnya.
+
+**Fitur:**
+- Pelacakan penggunaan kredit
+- Peringatan penggunaan
+- Isi ulang melalui Stripe
+- Buku kredit
+
+**Lokasi:** Web Dashboard → Organisasi → Kredit
 
 ---
 
 ## Getting Started
 
-Ready to start using these features? Follow our [Quickstart Guide](/docs/getting-started/quickstart/) to set up your first app with Capgo Live Updates.
+Siap untuk mulai menggunakan fitur-fitur ini? Ikuti [Panduan Quickstart](/docs/getting-started/quickstart/) untuk menyiapkan aplikasi pertama Anda dengan Capgo Live Updates.
 
-## Need Help?
+## Butuh Bantuan?
 
-- [Join our Discord](https://discord.capgo.app) for community support
-- [Check the FAQ](/docs/faq/) for common questions
-- [Browse API documentation](/docs/public-api/) for API integration
-- [Contact support](https://capgo.app/consulting/) for enterprise assistance
+- [Gabung dengan Discord kami](https://discord.capgo.app) untuk dukungan komunitas
+- [Cek FAQ](/docs/faq/) untuk pertanyaan umum
+- [Telusuri dokumentasi API](/docs/public-api/) untuk integrasi API
+- [Hubungi dukungan](https://capgo.app/consulting/) untuk bantuan perusahaan
+.

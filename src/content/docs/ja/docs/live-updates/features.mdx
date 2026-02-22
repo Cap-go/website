@@ -1,6 +1,6 @@
 ---
-title: 機能
-description: "コアアップデートシステムから高度なデプロイメント制御、分析、チームコラボレーション機能まで、Capgo Live Updateのすべての機能の完全なリファレンス。"
+title: 関数
+description: Capgo Live Update のすべての機能に関する完全なリファレンス。集中型更新システムから高度な配布制御、分析、チームのコラボレーション機能まで。
 sidebar:
   order: 2
 locale: ja
@@ -8,126 +8,126 @@ locale: ja
 
 import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
 
-このページでは、Capgo Live Updatesで利用可能なすべての機能の包括的な概要を提供します。各機能には簡単な説明と詳細なドキュメントへのリンクが含まれています。
+このページは Capgo Live Updates で利用可能な全機能の概要を包括的に提供します。各機能には簡単な説明と詳細ドキュメントへのリンクが含まれています。
 
 ## Core Update System
 
 ### Over-the-Air (OTA) Updates
-Deploy JavaScript, HTML, CSS, and asset updates directly to users without app store approval. Updates are downloaded in the background and applied on next app restart.
+アプリストアの承認を得ることなく、JavaScript、HTML、CSS、およびアセットの更新を直接ユーザーに配信します。更新はバックグラウンドでダウンロードされ、次回アプリを再起動したときに適用されます。
 
-**Key capabilities:**
-- Background downloads
-- Automatic installation
-- No user interruption
-- Cross-platform support (iOS, Android, Electron)
+**主な機能:**
+- バックグラウンドダウンロード
+- 自動インストール
+- ユーザーへの中断なし
+- クロスプラットフォーム対応（iOS、Android、Electron）
 
-[Learn more about update behavior →](/docs/live-updates/update-behavior/)
+[更新動作の詳細について詳しく見る →](/docs/live-updates/update-behavior/)
 
 ---
 
 ### Delta Updates (Differential Updates)
-Only download files that have changed between versions, reducing bandwidth usage by up to 95% and speeding up update delivery.
+バージョン間で変更されたファイルのみをダウンロードし、帯域幅の使用を最大95%削減し、更新配信を高速化します。
 
-**Key capabilities:**
-- Automatic file-level diffing
-- Checksum-based verification
-- Manifest comparison
-- Intelligent fallback to full updates when needed
+**主な機能:**
+- 自動ファイルレベル差分検出
+- チェックサムベースの検証
+- マニフェスト比較
+- 必要に応じて全更新へのインテリジェントなフォールバック
 
-[Learn more about delta updates →](/docs/live-updates/differentials/)
+[デルタ更新について詳しく見る →](/docs/live-updates/differentials/)
 
 ---
 
 ### Automatic Rollback
-If an update fails to load or causes crashes, the system automatically reverts to the last known working version.
+更新のロードに失敗した場合やクラッシュの原因となった場合、システムは自動的に前回の動作が確認できているバージョンへ戻します。
 
-**Key capabilities:**
-- Crash detection
-- Timeout detection
-- Automatic reversion
-- No user intervention required
+**主な機能:**
+- クラッシュ検出
+- タイムアウト検出
+- 自動リバージョン
+- ユーザー介入不要
 
-[Learn more about rollbacks →](/docs/live-updates/rollbacks/)
+[ロールバックについて詳しく見る →](/docs/live-updates/rollbacks/)
 
 ---
 
 ### Checksum Validation & Fallback
-Verifies bundle integrity via checksums and automatically falls back to the last known working version if corruption is detected.
+ダウンロード時のチェックサム検証を行い、破損が検出された場合は自動的に前回の動作可能なバージョンへフォールバックします。
 
-**Key capabilities:**
-- Checksum validation on download
-- Corruption detection
-- Automatic fallback to last working bundle
-- Manual recovery tools available
+**主な機能:**
+- ダウンロード時のチェックサム検証
+- 破損検出
+- 最後に動作していたバンドルへの自動フォールバック
+- 手動回復ツールあり
 
 ---
 
 ### Breaking Update Detection
-Prevents incompatible updates from being applied to devices running older native code versions.
+古いネイティブコードバージョンを実行しているデバイスに、互換性のない更新が適用されるのを防ぎます。
 
-**Key capabilities:**
-- Native version compatibility checking
-- Plugin dependency validation
-- Automatic blocking of incompatible updates
-- Clear error messaging
+**主な機能:**
+- ネイティブ版互換性の検証
+- プラグイン依存関係の検証
+- 互換性のない更新の自動ブロック
+- 明確なエラーメッセージ
 
-[Learn more about version targeting →](/docs/live-updates/version-targeting/)
+[バージョンターゲティングについて詳しく見る →](/docs/live-updates/version-targeting/)
 
 ---
 
 ## Deployment Control
 
 ### Channel System
-Organize and manage updates across different environments and user segments with flexible channel configurations.
+柔軟なチャネル設定を用いて、異なる環境やユーザーセグメント全体で更新を整理・管理します。
 
-**Key capabilities:**
-- Unlimited custom channels (production, staging, beta, etc.)
-- Per-channel bundle assignments
-- Channel-specific targeting rules
-- Device self-assignment
-- Channel override per device
+**主な機能:**
+- 無制限のカスタムチャネル（本番、ステージング、ベータ など）
+- チャネルごとのバンドル割り当て
+- チャネル別ターゲティングルール
+- デバイス自身による割り当て
+- デバイスごとのチャネルオーバーライド
 
-[Learn more about channels →](/docs/live-updates/channels/)
+[チャンネルについて詳しく見る →](/docs/live-updates/channels/)
 
 ---
 
 ### Device Targeting
-Target specific devices, versions, or user segments for phased rollouts and controlled deployments.
+段階的なロールアウトと制御された配布のために、特定のデバイス、バージョン、またはユーザーセグメントをターゲットにします。
 
-**Key capabilities:**
-- Version-based targeting
-- Device-specific overrides
-- Platform filtering (iOS, Android)
-- Custom metadata filtering
-- Emulator/dev build blocking
+**主な機能:**
+- バージョンベースのターゲティング
+- デバイス別オーバーライド
+- プラットフォームフィルタリング（iOS、Android）
+- カスタムメタデータによるフィルタリング
+- エミュレータ/開発ビルドのブロック
 
 ---
 
 ### Channel Policies
-Configure rules and restrictions for how updates are delivered on each channel.
+各チャネルでの更新の配信方法に関するルールと制限を構成します。
 
-**Key capabilities:**
-- Disable auto-updates
-- Block major version updates
-- Disable updates on emulators
-- Disable updates in development builds
-- Platform-specific policies (iOS-only, Android-only)
+**主な機能:**
+- 自動更新の無効化
+- メジャーバージョン更新のブロック
+- エミュレータでの更新を無効化
+- 開発ビルドでの更新を無効化
+- プラットフォーム別ポリシー（iOSのみ、Androidのみ）
 
-[Learn more about channel policies →](/docs/live-updates/channels/#channel-policies)
+[チャネルポリシーについて詳しく見る →](/docs/live-updates/channels/#channel-policies)
 
 ---
 
 ## Developer Tools
 
 ### Bundle Preview
-Preview bundles in a live web environment before deploying to devices, accessible from the web dashboard.
+デバイスにデプロイする前に、Webダッシュボードからアクセス可能なライブWeb環境でバンドルをプレビューします。
 
 **Location:** Web Dashboard → App → Bundle → Preview tab
 
 ---
 
 ### Live Debugging
-Real-time monitoring of update events for specific devices via CLI, showing check, download, install, and error events.
+CLIを介して特定のデバイスの更新イベントをリアルタイムで監視し、チェック、ダウンロード、インストール、およびエラーイベントを表示します。
 
 **Usage:**
 ```bash
@@ -144,66 +144,66 @@ npx @capgo/cli app debug [appId]
 ---
 
 ### Bundle Manifest Viewer
-Inspect the complete manifest of any bundle including file list, checksums, and metadata.
+ファイルリスト、チェックサム、メタデータを含む、任意のバンドルの完全なマニフェストを検査します。
 
 **Location:** Web Dashboard → App → Bundle → Manifest tab
 
 **Shows:**
-- File list with checksums
-- Bundle metadata
-- Native version compatibility
-- Plugin dependencies
+- チェックサム付きファイルリスト
+- バンドルメタデータ
+- ネイティブ版互換性
+- プラグイン依存関係
 
 ---
 
 ### Native Plugin Dependencies
-View all native Capacitor plugins included in each bundle to track dependency changes across versions.
+各バンドルに含まれるネイティブ Capacitor プラグインをすべて表示して、バージョン間の依存関係の変更を追跡します。
 
 **Location:** Web Dashboard → App → Bundle → Dependencies tab
 
 **Shows:**
-- Plugin names and versions
-- Dependency additions/removals
-- Compatibility warnings
+- プラグイン名とバージョン
+- 依存関係の追加/削除
+- 互換性警告
 
 ---
 
 ### CLI Integration
-Comprehensive command-line interface for automated deployments and CI/CD integration.
+自動デプロイと CI/CD 統合のための総合的なコマンドラインインターフェース。
 
-**Key commands:**
-- `bundle upload` - Upload new bundles
-- `bundle list` - List all bundles
-- `bundle delete` - Delete bundles
-- `bundle cleanup` - Clean up old bundles
-- `channel set` - Configure channels
-- `app debug` - Live debugging
+**主なコマンド:**
+- `bundle upload` - 新しいバンドルをアップロード
+- `bundle list` - すべてのバンドルをリスト表示
+- `bundle delete` - バンドルを削除
+- `bundle cleanup` - 古いバンドルをクリーンアップ
+- `channel set` - チャンネルを構成
+- `app debug` - ライブデバッグ
 
-[View full CLI reference →](/docs/cli/reference/)
+[完全な CLI リファレンスを見る →](/docs/cli/reference/)
 
 ---
 
 ### Bundle Encryption
-End-to-end encryption for bundles with AES-256 encryption, protecting your code in transit and at rest.
+AES-256 暗号化によるエンドツーエンドのバンドル暗号化。転送中および保存時のコードを保護します。
 
-**Key capabilities:**
-- RSA key pair generation
-- AES-256 bundle encryption
-- Code signature verification
-- Encryption key management
+**主な機能:**
+- RSA キーペアの生成
+- AES-256 バンドル暗号化
+- コード署名検証
+- 暗号化鍵の管理
 
-[Learn more about encryption →](/docs/live-updates/encryption/)
+[暗号化について詳しく見る →](/docs/live-updates/encryption/)
 
 ---
 
 ### Bundle Cleanup & Retention
-Automatically clean up old bundles based on retention policies to manage storage usage.
+保持ポリシーに基づいて古いバンドルを自動でクリーンアップし、ストレージ使用量を管理します。
 
-**Key capabilities:**
-- Configurable retention count
-- Automatic cleanup via CLI
-- Scheduled cleanup jobs
-- Storage usage tracking
+**主な機能:**
+- 設定可能な保持件数
+- CLIによる自動クリーンアップ
+- スケジュール済みクリーンアップジョブ
+- ストレージ使用量の追跡
 
 **Usage:**
 ```bash
@@ -215,69 +215,69 @@ npx @capgo/cli bundle cleanup --keep=10
 ## Analytics & Monitoring
 
 ### Update Statistics
-Track update adoption rates, success rates, and deployment progress across your user base.
+更新の採用率、成功率、デプロイの進捗をユーザー基盤全体で追跡します。
 
-**Metrics available:**
-- Download success rate
-- Installation success rate
-- Error rates by type
-- Update adoption over time
-- Version distribution
+**利用可能な指標:**
+- ダウンロード成功率
+- インストール成功率
+- 種別別のエラー率
+- 時間経過に伴う更新採用
+- バージョン分布
 
 **Location:** Web Dashboard → App → Statistics
 
 ---
 
 ### Device Logs
-Per-device event logs showing complete update lifecycle from check to installation.
+デバイスごとのイベントログで、チェックからインストールまでの完全な更新ライフサイクルを表示します。
 
 **Event types:**
-- Update checks
-- Download start/complete/fail
-- Install start/complete/fail
-- Rollback events
-- Policy blocks
+- 更新チェック
+- ダウンロード開始/完了/失敗
+- インストール開始/完了/失敗
+- ロールバックイベント
+- ポリシーブロック
 
 **Location:** 
 - Web Dashboard → App → Device → Logs
 - Web Dashboard → App → Logs (all devices)
 
-[Learn more about logs →](/docs/webapp/logs/)
+[ログについて詳しく見る →](/docs/webapp/logs/)
 
 ---
 
 ### Bundle Usage Analytics
-Detailed analytics on which bundles are active, download counts, and storage usage.
+どのバンドルがアクティブか、ダウンロード数、ストレージ使用量に関する詳細な分析。
 
-**Metrics:**
-- Active installations per bundle
-- Download counts
-- Storage usage per bundle
-- Bandwidth usage
+** Metrics: **
+- バンドルごとのアクティブインストール数
+- ダウンロード回数
+- バンドルごとのストレージ使用量
+- 帯域幅使用量
 
 ---
 
 ### Channel Statistics
-Track performance and adoption metrics per channel.
+チャネルごとのパフォーマンスと採用指標を追跡します。
 
 **Metrics:**
-- Devices per channel
-- Update success rates per channel
-- Deployment history
-- Error rates by channel
+- チャンネルごとのデバイス数
+- チャンネル別の更新成功率
+- デプロイ履歴
+- チャンネル別のエラー率
 
 **Location:** Web Dashboard → App → Channel → Statistics
 
 ---
 
 ### Deployment History
-Complete audit trail of all bundle deployments, channel assignments, and configuration changes.
+すべてのバンドルデプロイ、チャンネル割り当て、設定変更の完全な監査証跡。
 
 **Tracked events:**
-- Bundle uploads
-- Channel assignments
-- Policy changes
-- Device overrides
+- バンドルアップロード
+- チャンネル割り当て
+- ポリシー変更
+- デバイスのオーバーライド
 
 **Location:** Web Dashboard → App → Channel → History
 
@@ -286,229 +286,227 @@ Complete audit trail of all bundle deployments, channel assignments, and configu
 ## Security & Compliance
 
 ### End-to-End Encryption
-Encrypt bundles at rest and in transit with industry-standard AES-256 encryption.
+転送中および保存時のバンドルを業界標準の AES-256 暗号化で保護します。
 
-[Learn more about encryption →](/docs/live-updates/encryption/)
+[暗号化について詳しく見る →](/docs/live-updates/encryption/)
 
 ---
 
 ### Code Signing
-Verify bundle integrity with cryptographic signatures to prevent tampering.
+改ざんを防ぐために、暗号署名でバンドルの整合性を検証します。
 
 ---
 
 ### SOC 2 Type II Compliance
-Infrastructure and processes certified to SOC 2 Type II standards for enterprise security.
+エンタープライズセキュリティのための SOC 2 Type II 基準に適合したインフラとプロセス。
 
 ---
 
 ### App Store Compliance
-Fully compliant with Apple App Store and Google Play Store policies for OTA updates.
+OTA 更新のため、Apple App Store および Google Play Store のポリシーに完全準拠。
 
-[Learn more about compliance →](/docs/live-updates/compliance/)
+[コンプライアンスについて詳しく見る →](/docs/live-updates/compliance/)
 
 ---
 
 ### 2FA Enforcement (Organization-level)
-Require two-factor authentication for all organization members to access the dashboard and API.
+ダッシュボードと API へアクセスする全組織メンバーに対して、二要素認証を要求します。
 
 **Location:** Web Dashboard → Organization → Security
 
-[Learn more about 2FA →](/docs/webapp/2fa-enforcement/)
+[2FA について詳しく見る →](/docs/webapp/2fa-enforcement/)
 
 ---
 
 ### Encrypted Bundles Enforcement
-Require all bundles to be encrypted at the organization level.
-
-**Location:** Web Dashboard → Organization → Security
+組織レベルで全バンドルを暗号化することを必須にします。**場所:** Webダッシュボード → 組織 → セキュリティ
 
 ---
 
-## Team Collaboration
+## チームコラボレーション
 
-### Role-Based Access Control (RBAC)
-Granular permissions for organization and app-level access control.
+### ロールベースのアクセス制御 (RBAC)
+組織およびアプリレベルのアクセス制御の細かな権限
 
-**Organization roles:**
-- `super_admin` - Full access
-- `admin` - Admin access
-- `read` - Read-only access
-- `upload` - Upload-only access
+**組織のロール:**
+- `super_admin` - 完全アクセス
+- `admin` - 管理者アクセス
+- `read` - 読み取り専用アクセス
+- `upload` - アップロード専用アクセス
 
-**App roles:**
-- `app_developer` - Full app access
-- `app_uploader` - Upload bundles only
-- `app_reader` - Read-only access
+**アプリのロール:**
+- `app_developer` - アプリ全体へのアクセス
+- `app_uploader` - バンドルのアップロードのみ
+- `app_reader` - 読み取り専用アクセス
 
-**Location:** 
-- Web Dashboard → Organization → Members
-- Web Dashboard → App → Access
+**場所:** 
+- Webダッシュボード → 組織 → メンバー
+- Webダッシュボード → アプリ → アクセス
 
-[Learn more about RBAC →](/docs/webapp/organization-system/#roles-and-permissions)
-
----
-
-### Audit Logs
-Complete audit trail of all organization and app activities for compliance and security.
-
-**Logged events:**
-- User actions (login, logout, permission changes)
-- Bundle operations (upload, delete, assign)
-- Channel operations (create, update, delete)
-- Organization changes (settings, members)
-
-**Location:** Web Dashboard → Organization → Audit Logs
+[RBAC について詳しく知る →](/docs/webapp/organization-system/#roles-and-permissions)
 
 ---
 
-### Webhooks
-Receive real-time notifications about events in your apps via HTTP webhooks.
+### 監査ログ
+組織およびアプリのすべての活動をコンプライアンスとセキュリティのために完全に監査する履歴。
 
-**Supported events:**
-- `apps` - App created/updated/deleted
-- `app_versions` - Bundle uploaded/deleted
-- `channels` - Channel created/updated/deleted
-- `org_users` - Member added/removed
-- `orgs` - Organization updated
+**記録イベント:**
+- ユーザーの操作（ログイン、ログアウト、権限変更）
+- バンドル操作（アップロード、削除、割り当て）
+- チャンネル操作（作成、更新、削除）
+- 組織の変更（設定、メンバー）
 
-**Features:**
-- Custom webhook URLs
-- Event filtering
-- Delivery logs
-- Retry mechanism
-- Test functionality
-
-**Location:** Web Dashboard → Organization → Webhooks
+**場所:** Webダッシュボード → 組織 → 監査ログ
 
 ---
 
-### Multi-User Collaboration
-Invite team members to your organization with specific roles and permissions.
+### Webhook
+リアルタイム通知を受け取る HTTP ウェブフック経由でのアプリのイベント。
 
-**Features:**
-- Email invitations
-- Role assignment
-- Member management
-- Access revocation
+**サポートされているイベント:**
+- `apps` - アプリ作成/更新/削除
+- `app_versions` - バンドルのアップロード/削除
+- `channels` - チャンネル作成/更新/削除
+- `org_users` - メンバーの追加/削除
+- `orgs` - 組織の更新
 
-**Location:** Web Dashboard → Organization → Members
+**機能:**
+- カスタム Webhook URL
+- イベントフィルタリング
+- 配信ログ
+- リトライ機構
+- テスト機能
 
----
-
-### API Key Management
-Create, manage, and revoke API keys with optional expiration dates and hashed storage.
-
-**Key capabilities:**
-- Per-app or per-organization keys
-- Optional expiration dates
-- Hashed storage (irreversible)
-- Key rotation support
-
-**Location:** Web Dashboard → API Keys
-
-[Learn more about API keys →](/docs/public-api/#authentication)
+**場所:** Webダッシュボード → 組織 → Webhooks
 
 ---
 
-### Password Policies
-Organization-level password requirements to enforce security standards.
+### 複数ユーザーによる協働
+特定のロールと権限を用いて組織にチームメンバーを招待します。
 
-**Configurable policies:**
-- Minimum length
-- Require uppercase
-- Require numbers
-- Require special characters
+**機能:**
+- メール招待
+- ロール割り当て
+- メンバー管理
+- アクセスの取り消し
 
-**Location:** Web Dashboard → Organization → Security
+**場所:** Webダッシュボード → 組織 → メンバー
 
 ---
 
-## Platform Support
+### API キー管理
+任意の有効期限日とハッシュ化ストレージを伴う API キーを作成、管理、取り消す。
 
-### Multi-Platform Support
-Support for iOS, Android, and Electron apps with a single SDK.
+**キーの機能:**
+- アプリごとまたは組織ごとのキー
+- オプションの有効期限日
+- ハッシュ化保存（不可逆）
+- キーローテーション対応
 
-**Supported platforms:**
+**場所:** Webダッシュボード → API キー
+
+[API キーの詳しい情報 →](/docs/public-api/#authentication)
+
+---
+
+### パスワードポリシー
+組織レベルのパスワード要件を通じてセキュリティ基準を強制します。
+
+**設定可能なポリシー:**
+- 最小長さ
+- 大文字を含む
+- 数字を含む
+- 特殊文字を含む
+
+**場所:** Webダッシュボード → 組織 → セキュリティ
+
+---
+
+## プラットフォームサポート
+
+### マルチプラットフォーム対応
+1つのSDKで iOS、Android、Electron アプリをサポートします。
+
+**サポートされているプラットフォーム:**
 - iOS (Capacitor 5, 6, 7, 8)
 - Android (Capacitor 5, 6, 7, 8)
-- Electron (NEW in 2025)
+- Electron（2025年に新規対応）
 
 ---
 
-### Long-Term Support
-Continued support for older Capacitor versions to maintain compatibility with legacy apps.
+### 長期サポート
+古い Capacitor バージョンの継続サポートにより、レガシーアプリとの互換性を維持します。
 
-**Currently supported:**
-- Capacitor 8 (latest)
+**現在サポートされている:**
+- Capacitor 8 (最新)
 - Capacitor 7
 - Capacitor 6
 - Capacitor 5
 
 ---
 
-### Custom Storage Backends
-Use your own storage infrastructure (S3, R2, etc.) instead of Capgo's default storage.
+### カスタムストレージバックエンド
+Capgo のデフォルトストレージの代わりに、独自のストレージインフラストラクチャ（S3、R2 など）を使用します。
 
-[Learn more about custom storage →](/docs/live-updates/custom-storage/)
-
----
-
-### China Configuration
-Special configuration for apps distributed in mainland China to comply with local regulations.
-
-[Learn more about China configuration →](/docs/live-updates/china-configuration/)
+[カスタムストレージの詳細 →](/docs/live-updates/custom-storage/)
 
 ---
 
-## Advanced Features
+### 中国設定
+本土中国で配布されるアプリを現地規制に準拠させるための特別な設定。
 
-### Custom Update Behavior
-Configure when and how updates are checked and applied via the SDK.
-
-**Configurable options:**
-- Check interval (`periodCheckDelay` - minimum 600 seconds)
-- Direct update timing (`directUpdate` - atInstall, onLaunch, always)
-- Auto-update enable/disable (`autoUpdate`)
-- Network requirements (Android only - via WorkManager)
-
-[Learn more about update behavior →](/docs/live-updates/update-behavior/)
+[中国設定の詳細 →](/docs/live-updates/china-configuration/)
 
 ---
 
-### Update Types
-Different update types for different use cases, from instant updates to user-controlled installations.
+## 高度な機能
 
-**Available types:**
-- Background updates (default)
-- Immediate updates
-- User-prompted updates
-- Conditional updates
+### カスタム更新動作
+SDKを介して、更新をいつどのようにチェックし適用するかを構成します。
 
-[Learn more about update types →](/docs/live-updates/update-types/)
+**設定可能なオプション:**
+- チェック間隔 (`periodCheckDelay` - 最小 600 秒)
+- 直接更新タイミング (`directUpdate` - atInstall, onLaunch, always)
+- 自動更新の有効化/無効化 (`autoUpdate`)
+- ネットワーク要件（Android のみ - WorkManager）
 
----
-
-### Credit System
-Usage-based billing with credits for bandwidth, storage, and other resources.
-
-**Features:**
-- Credit usage tracking
-- Usage alerts
-- Top-up via Stripe
-- Credit ledger
-
-**Location:** Web Dashboard → Organization → Credits
+[更新動作の詳細 →](/docs/live-updates/update-behavior/)
 
 ---
 
-## Getting Started
+### 更新タイプ
+異なるユースケースに対して、瞬時の更新からユーザー制御のインストールまで、さまざまな更新タイプ。
 
-Ready to start using these features? Follow our [Quickstart Guide](/docs/getting-started/quickstart/) to set up your first app with Capgo Live Updates.
+**利用可能なタイプ:**
+- バックグラウンド更新（デフォルト）
+- 即時更新
+- ユーザー承認型更新
+- 条件付き更新
 
-## Need Help?
+[更新タイプの詳細 →](/docs/live-updates/update-types/)
 
-- [Join our Discord](https://discord.capgo.app) for community support
-- [Check the FAQ](/docs/faq/) for common questions
-- [Browse API documentation](/docs/public-api/) for API integration
-- [Contact support](https://capgo.app/consulting/) for enterprise assistance
+---
+
+### クレジットシステム
+帯域幅、ストレージ、その他リソースに対するクレジットを用いた従量課金。
+
+**機能:**
+- クレジット使用量の追跡
+- 使用量アラート
+- Stripe でのチャージ（トップアップ）
+- クレジット台帳
+
+**場所:** Webダッシュボード → 組織 → クレジット
+
+---
+
+## はじめに
+
+これらの機能の使用を始める準備はできましたか？ Capgo Live Updates で最初のアプリを設定するには、[クイックスタートガイド](/docs/getting-started/quickstart/)に従ってください。
+
+## ヘルプが必要？
+
+- コミュニティサポートのための [Discord に参加](https://discord.capgo.app)
+- よくある質問は [FAQ を確認](/docs/faq/)
+- API 統合のため [API ドキュメントを参照](/docs/public-api/)
+- エンタープライズサポートの問い合わせ先 [サポートに連絡](https://capgo.app/consulting/)
