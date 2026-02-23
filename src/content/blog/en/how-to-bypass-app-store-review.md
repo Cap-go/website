@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z
-updated_at: 2026-02-23T00:00:00.000Z
+updated_at: 2026-02-23T02:14:43.000Z
 head_image: /bypass_illustration.webp
 head_image_alt: Capacitor bypass illustration
 keywords: Apple App Store, Google Play, Capacitor, Capgo, OTA updates, live updates, app store review
