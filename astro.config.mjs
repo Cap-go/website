@@ -103,6 +103,10 @@ export default defineConfig({
       status: 301,
       destination: '/docs/getting-started/quickstart/',
     },
+    '/docs/plugins/updater/commonProblems/': {
+      status: 301,
+      destination: '/docs/plugins/updater/commonproblems/',
+    },
   },
   i18n: {
     locales,
