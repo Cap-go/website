@@ -1,0 +1,33 @@
+---
+locale: fr
+title: 🔑 Connexion
+description: 🔑 Enregistrer your Capgo Clé API to your machine or local folder for easier access to Capgo Cloud services.
+sidebar_label: Connexion
+sidebar: 
+  order: 3
+---
+
+🔑 Enregistrer your Capgo Clé API to your machine or local folder for easier access to Capgo Cloud services.
+
+**Alias:** `l`
+
+```bash
+npx @capgo/cli@latest login
+```
+
+Use --apikey=******** in any Commande to override it.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest login YOUR_API_KEY
+```
+
+## <a id="Options"></a> Options
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **--local** | <code>boolean</code> | Only Enregistrer in local folder, git ignored for Sécurité. |
+| **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo Développement) |
+| **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
+

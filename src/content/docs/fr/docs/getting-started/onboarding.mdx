@@ -1,0 +1,554 @@
+---
+title: Guide d'Intégration CLI
+description: >-
+  Guide complet étape par étape pour intégrer votre application avec Capgo en
+  utilisant la CLI interactive
+sidebar:
+  order: 2
+next: true
+prev: true
+locale: fr
+---
+
+import { Aside, Card, CardGrid } from '@astrojs/starlight/components';
+
+## Aperçu Rapide
+
+La CLI Capgo fournit une intégration interactive qui configure les mises à jour en direct pour votre application Capacitor. Vous allez :
+
+1. ✅ Enregistrer votre application dans Capgo
+2. 🔌 Installer et configurer le plugin de mise à jour
+3. 🚀 Déployer votre première mise à jour en direct
+4. 📱 Tester la mise à jour sur votre appareil
+
+**Temps estimé :** 10-20 minutes (varie selon votre vitesse Internet et le temps de compilation)
+
+<Aside type="tip">
+L'intégration est entièrement reprise - quittez à tout moment et continuez plus tard là où vous vous êtes arrêté.
+</Aside>
+
+## Démarrer l'Intégration
+
+Exécutez la commande d'intégration avec votre clé API :
+
+```bash
+npx @capgo/cli@latest init [APIKEY]
+```
+
+Vous verrez le message de bienvenue :
+
+```
+Capgo onboarding 🛫
+```
+
+## Ce Qui Se Passe Pendant l'Intégration
+
+La CLI vous guidera à travers 13 étapes interactives :
+
+**Phase de Configuration (Étapes 1-6) :**
+- Vérifier votre environnement de développement (Xcode/Android Studio)
+- Ajouter votre application à Capgo et créer un canal de production
+- Installer le plugin `@capgo/capacitor-updater`
+- Injecter le code requis dans votre application
+- Optionnellement activer le chiffrement de bout en bout
+- Choisir une plateforme pour les tests (iOS ou Android)
+
+**Phase de Test (Étapes 7-12) :**
+- Compiler votre application et l'exécuter sur un appareil/simulateur
+- Effectuer un changement de code visible (automatique ou manuel)
+- Télécharger le bundle mis à jour vers Capgo
+- Voir la mise à jour en direct apparaître sur votre appareil en temps réel
+
+**Finalisation (Étape 13) :**
+- Votre application est prête pour les mises à jour en direct ! 🎉
+
+## Le Processus d'Intégration en 13 Étapes
+
+### Étape 1 : Vérifier les Prérequis
+
+La CLI vérifie votre environnement de développement pour s'assurer que vous avez les outils nécessaires installés.
+
+**Ce qui est vérifié :**
+- **Xcode** (macOS uniquement) - pour le développement iOS
+- **Android SDK** - pour le développement Android
+
+**Résultats possibles :**
+
+✅ **Les deux environnements trouvés :**
+```
+✅ Xcode detected - iOS development ready
+✅ Android SDK detected - Android development ready
+```
+
+⚠️ **Aucun environnement trouvé :**
+```
+⚠️ Xcode not found
+⚠️ Android SDK not found
+❌ No development environment detected
+
+📱 To develop mobile apps with Capacitor, you need:
+   • For iOS: Xcode (macOS only) - https://developer.apple.com/xcode/
+   • For Android: Android Studio - https://developer.android.com/studio
+```
+
+<Aside type="caution">
+Si aucun environnement de développement n'est détecté, on vous demandera si vous souhaitez continuer. Il est recommandé d'installer au moins une plateforme avant de continuer.
+</Aside>
+
+### Étape 2 : Ajouter Votre Application
+
+La CLI vous connectera à Capgo et ajoutera votre application à votre compte.
+
+```
+(spinner) Running: npm @capgo/cli@latest login ***
+Login Done ✅
+
+❓ Add {appId} in Capgo?
+```
+
+**Si votre ID d'application est déjà pris :**
+
+La CLI suggérera des alternatives :
+```
+❌ App ID "com.example.app" is already taken
+💡 Here are some suggestions:
+   1. com.example.app2
+   2. com.example.app3
+   3. com.example.app.new
+   4. com.example.app.app
+
+❓ What would you like to do?
+```
+
+Vous pouvez choisir une suggestion ou entrer un ID d'application personnalisé.
+
+<Aside type="note">
+Les IDs d'application doivent suivre la notation de domaine inversé (ex., `com.example.myapp`)
+</Aside>
+
+### Étape 3 : Créer un Canal de Production
+
+Les canaux vous permettent de gérer différents flux de mise à jour pour votre application.
+
+```
+❓ Create default channel production for {appId} in Capgo?
+```
+
+<Aside type="tip">
+**Ne vous inquiétez pas !** Ceci est uniquement pour les tests locaux pendant l'intégration. Créer un canal de "production" ne signifie pas que vos mises à jour seront envoyées immédiatement aux clients. Vous avez un contrôle total sur le moment où les mises à jour sont déployées. Sélectionnez **Oui** sauf si vous avez des exigences spécifiques de canal.
+</Aside>
+
+**Si vous sélectionnez Oui :**
+```
+(spinner) Running: npm @capgo/cli@latest channel add production {appId} --default
+Channel add Done ✅  (or "Channel already added ✅")
+```
+
+Un canal de production sera créé et défini par défaut. C'est l'option recommandée pour la plupart des utilisateurs.
+
+**Si vous sélectionnez Non :**
+```
+If you change your mind, run it for yourself with: "npm @capgo/cli@latest channel add production {appId} --default"
+```
+
+Vous devrez créer et configurer les canaux manuellement plus tard. Alternativement, vous pouvez :
+- Définir le canal dans votre fichier `capacitor.config.ts`
+- Utiliser la méthode JavaScript `setChannel()` pour définir le canal dynamiquement
+- Configurer les canaux plus tard depuis la console web Capgo
+
+### Étape 4 : Installer le Plugin de Mise à Jour
+
+La CLI installera le plugin `@capgo/capacitor-updater` compatible avec votre version de Capacitor.
+
+```
+❓ Automatic Install "@capgo/capacitor-updater" dependency in {appId}?
+```
+
+**Compatibilité des versions :**
+
+- **Capacitor 5** : Installe `@capgo/capacitor-updater` v5
+- **Capacitor 6** : Installe `@capgo/capacitor-updater` v6
+- **Capacitor 7** : Installe `@capgo/capacitor-updater` v7
+- **Capacitor 8+** : Installe la dernière version
+
+<Aside type="caution">
+Capgo ne prend en charge que Capacitor v5 et supérieur. Si vous utilisez une version antérieure, vous devrez d'abord mettre à jour.
+</Aside>
+
+**Option de mises à jour instantanées :**
+
+Après l'installation, on vous demandera :
+```
+❓ Do you want to set instant updates in {appId}?
+   Read more: https://capgo.app/docs/live-updates/update-behavior/#applying-updates-immediately
+```
+
+<Aside type="tip">
+**Que sont les mises à jour instantanées ?** Avec les mises à jour instantanées activées, votre application applique les mises à jour immédiatement lorsqu'elle est mise en arrière-plan et rouverte. Cela fonctionne de manière transparente car Capgo peut distribuer des mises à jour dans le monde entier en moins de 300ms. Sans cela (mode standard), les mises à jour se téléchargent en arrière-plan et s'appliquent au prochain redémarrage de l'application. Les mises à jour instantanées sont idéales pour une itération plus rapide pendant le développement et les corrections de bugs critiques en production.
+</Aside>
+
+**Si vous sélectionnez Oui :**
+- Les mises à jour seront configurées pour s'appliquer immédiatement lorsque l'application est mise en arrière-plan et rouverte
+- `directUpdate: 'always'` et `autoSplashscreen: true` seront ajoutés à votre configuration
+- Votre `capacitor.config.ts` sera mis à jour automatiquement
+- **Les mises à jour Delta** seront automatiquement activées - cela envoie uniquement les fichiers qui ont changé entre les mises à jour au lieu du bundle complet, rendant les mises à jour beaucoup plus rapides
+
+**Si vous sélectionnez Non :**
+- Les mises à jour utiliseront le comportement standard (téléchargement en arrière-plan, application au prochain redémarrage)
+- Vous pouvez toujours activer les mises à jour instantanées plus tard en modifiant votre `capacitor.config.ts`
+
+### Étape 5 : Ajouter le Code d'Intégration
+
+La CLI injectera automatiquement le code requis dans votre fichier d'application principal.
+
+```
+❓ Automatic Add "CapacitorUpdater.notifyAppReady()" code and import in {appId}?
+```
+
+**Ce qui est ajouté :**
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+CapacitorUpdater.notifyAppReady()
+```
+
+**Détection du type de projet :**
+
+- **Nuxt.js** : Crée `plugins/capacitorUpdater.client.ts`
+- **Autres frameworks** : Ajoute à votre fichier d'entrée principal
+
+<Aside type="tip">
+**Si l'injection automatique échoue**, vous pouvez ajouter le code manuellement à votre fichier d'application principal :
+
+**Pour Nuxt.js :**
+Créez `plugins/capacitorUpdater.client.ts` :
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+export default defineNuxtPlugin(() => {
+  CapacitorUpdater.notifyAppReady()
+})
+```
+
+**Pour les autres frameworks :**
+Ajoutez à votre fichier d'entrée principal (ex., `main.ts`, `index.js`, `App.tsx`) :
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+CapacitorUpdater.notifyAppReady()
+```
+
+Placez ce code après vos imports et avant l'initialisation de votre application. Pour plus de détails, consultez le [guide Ajouter une Application](/docs/getting-started/add-an-app/).
+</Aside>
+
+### Étape 6 : Configurer le Chiffrement (Optionnel)
+
+Le chiffrement de bout en bout ajoute une couche de sécurité supplémentaire pour vos mises à jour.
+
+```
+🔐 End-to-end encryption
+   ✅ Use this for: Banking, healthcare, or apps with legal encryption requirements
+   ⚠️  Note: Makes debugging harder - skip if you don't need it
+
+❓ Enable end-to-end encryption for {appId} updates?
+```
+
+<Aside type="note">
+Le chiffrement n'est disponible que pour Capacitor v6 et supérieur.
+</Aside>
+
+Si vous activez le chiffrement, la CLI :
+1. Générera des clés de chiffrement
+2. Proposera de synchroniser votre configuration Capacitor
+
+### Étape 7 : Sélectionner la Plateforme
+
+Choisissez avec quelle plateforme tester pendant l'intégration.
+
+```
+📱 Platform selection for onboarding
+   This is just for testing during onboarding - your app will work on all platforms
+
+❓ Which platform do you want to test with during this onboarding?
+   Options:
+   - iOS
+   - Android
+```
+
+<Aside type="tip">
+Cela n'affecte que le processus d'intégration. Votre application finale prendra en charge toutes les plateformes.
+</Aside>
+
+### Étape 8 : Compiler Votre Projet
+
+La CLI compilera votre application et la synchronisera avec Capacitor.
+
+```
+❓ Automatic build {appId} with "npm run build"?
+```
+
+**Ce qui se passe :**
+1. Détecte votre type de projet
+2. Exécute votre script de compilation
+3. Exécute `npx cap sync {platform}`
+
+**Si le script de compilation manque :**
+
+On vous demandera si vous souhaitez ignorer la compilation ou ajouter un script de compilation à votre `package.json`.
+
+### Étape 9 : Exécuter sur l'Appareil
+
+Testez la version initiale de votre application sur un appareil ou un simulateur.
+
+```
+❓ Run {appId} on {PLATFORM} device now to test the initial version?
+```
+
+Si vous sélectionnez **Oui** :
+```
+(spinner) Running: npx cap run {platform}
+(device picker appears)
+App started ✅
+📱 Your app should now be running on your {platform} device with Capgo integrated
+🔄 This is your baseline version - we'll create an update next
+```
+
+### Étape 10 : Effectuer un Changement de Test
+
+Il est maintenant temps de tester le système de mise à jour de Capgo en effectuant un changement visible.
+
+```
+🎯 Now let's test Capgo by making a visible change and deploying an update!
+
+❓ How would you like to test the update?
+   Options:
+   - Auto: Let Capgo CLI make a visible change for you
+   - Manual: I'll make changes myself
+```
+
+**Mode automatique :**
+La CLI modifiera automatiquement vos fichiers pour ajouter une bannière de test visible ou un changement.
+
+**Mode manuel :**
+Vous effectuez vos propres changements (ex., changer du texte, des couleurs ou ajouter des éléments).
+
+**Gestion des versions :**
+```
+❓ How do you want to handle the version for this update?
+   Options:
+   - Auto: Bump patch version ({currentVersion} → {nextVersion})
+   - Manual: I'll provide the version number
+```
+
+**Compiler avec les changements :**
+```
+❓ Build {appId} with changes before uploading?
+```
+
+<Aside type="tip">
+Si vous devez compiler manuellement dans un autre terminal, sélectionnez "Non" et compilez vous-même, puis continuez.
+</Aside>
+
+### Étape 11 : Télécharger le Bundle
+
+Téléchargez votre bundle d'application mis à jour vers Capgo.
+
+```
+❓ Upload the updated {appId} bundle (v{version}) to Capgo?
+```
+
+La CLI exécute :
+```bash
+npx @capgo/cli@latest bundle upload
+```
+
+<Aside type="tip">
+**Mises à jour Delta avec Direct Update :** Si vous avez activé les mises à jour instantanées (Direct Update) à l'étape 4, la CLI demandera automatiquement si vous souhaitez activer les mises à jour delta. Les mises à jour delta envoient uniquement les fichiers qui ont changé entre les versions au lieu du bundle complet. Comme généralement seuls quelques fichiers changent entre les mises à jour, cela rend les téléchargements beaucoup plus rapides. Sélectionnez **Oui** pour la meilleure expérience avec les mises à jour instantanées.
+</Aside>
+
+**Invite de mises à jour delta (si Direct Update est activé) :**
+```
+💡 Direct Update (instant updates) is enabled in your config
+   Delta updates send only changed files instead of the full bundle
+
+❓ Enable delta updates for this upload? (Recommended with Direct Update)
+```
+
+<Aside type="caution">
+Pour les monorepos, vous devrez peut-être fournir des chemins supplémentaires vers votre `package.json` et `node_modules`.
+</Aside>
+
+**Succès :**
+```
+✅ Update v{version} uploaded successfully!
+🎉 Your updated bundle is now available on Capgo
+```
+
+### Étape 12 : Tester la Mise à Jour sur l'Appareil
+
+Il est temps de voir la mise à jour en action !
+
+```
+🧪 Time to test the Capgo update system!
+📱 Go to your device where the app is running
+```
+
+**Pour les mises à jour instantanées :**
+```
+🔄 IMPORTANT: Background your app (swipe up/press home button) and then reopen it
+⏱️  The update should be downloaded and applied automatically
+```
+
+**Pour les mises à jour standard :**
+```
+📱 With standard updates, you will need to:
+   1. Background the app (swipe up/press home button) to start download
+   2. Wait a few seconds for download to complete
+   3. Background and foreground again to see the update
+```
+
+**Surveiller les journaux :**
+```
+❓ Monitor Capgo logs to verify the update worked?
+```
+
+Si vous sélectionnez **Oui**, vous verrez les journaux en direct de votre appareil montrant le processus de mise à jour.
+
+### Étape 13 : Finalisation
+
+```
+Welcome onboard ✈️!
+```
+
+Félicitations ! Vous avez configuré avec succès les mises à jour en direct Capgo pour votre application.
+
+## Ce Que Vous Avez Accompli
+
+Après avoir terminé l'intégration, vous avez :
+
+<CardGrid>
+  <Card title="✅ Application Enregistrée" icon="rocket">
+    Votre application est enregistrée dans Capgo avec un canal de production
+  </Card>
+  <Card title="✅ Plugin Installé" icon="puzzle">
+    Le plugin Capacitor Updater est installé et configuré
+  </Card>
+  <Card title="✅ Code Intégré" icon="seti:config">
+    Le code d'intégration est ajouté à votre application
+  </Card>
+  <Card title="✅ Mise à Jour Testée" icon="approve-check">
+    Vous avez déployé et reçu avec succès une mise à jour en direct
+  </Card>
+</CardGrid>
+
+## Flux de Travail Quotidien
+
+Pour les mises à jour suivantes, utilisez :
+
+```bash
+npm run build
+npx @capgo/cli@latest bundle upload --channel=production
+```
+
+Pour plus d'options de déploiement, consultez [Déployer une Mise à Jour en Direct](/docs/getting-started/deploy/).
+
+## Reprendre l'Intégration
+
+Si vous quittez le processus d'intégration, vous pouvez reprendre à tout moment :
+
+```bash
+npx @capgo/cli@latest init [APIKEY]
+```
+
+Vous verrez :
+```
+You have already got to the step {stepNumber}/13 in the previous session
+❓ Would you like to continue from where you left off?
+```
+
+<Aside type="tip">
+La progression est enregistrée localement, vous pouvez donc quitter et reprendre le processus d'intégration en toute sécurité.
+</Aside>
+
+## Dépannage
+
+### Aucun Environnement de Développement
+
+**Problème :** Ni Xcode ni Android SDK n'est détecté.
+
+**Solution :**
+- **Pour iOS** : Installez [Xcode](https://developer.apple.com/xcode/) (macOS uniquement)
+- **Pour Android** : Installez [Android Studio](https://developer.android.com/studio)
+
+### ID d'Application Déjà Pris
+
+**Problème :** Votre ID d'application est déjà enregistré.
+
+**Solution :** Choisissez l'une des alternatives suggérées ou entrez un ID d'application personnalisé en notation de domaine inversé.
+
+### Script de Compilation Manquant
+
+**Problème :** Aucun script de compilation trouvé dans `package.json`.
+
+**Solution :** Ajoutez un script de compilation à votre `package.json` :
+```json
+{
+  "scripts": {
+    "build": "your-build-command"
+  }
+}
+```
+
+### Injection Automatique Échouée
+
+**Problème :** La CLI ne peut pas injecter automatiquement le code d'intégration.
+
+**Solution :** Ajoutez le code manuellement à votre fichier principal :
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+CapacitorUpdater.notifyAppReady()
+```
+
+### Version de Capacitor Trop Ancienne
+
+**Problème :** Votre version de Capacitor est inférieure à v5.
+
+**Solution :** Mettez à jour Capacitor vers v5 ou supérieur :
+- [Mise à jour vers Capacitor 5](https://capacitorjs.com/docs/updating/5-0)
+- [Mise à jour vers Capacitor 6](https://capacitorjs.com/docs/updating/6-0)
+- [Mise à jour vers Capacitor 7](https://capacitorjs.com/docs/updating/7-0)
+
+## Prochaines Étapes
+
+Maintenant que vous avez terminé l'intégration, explorez ces sujets :
+
+<CardGrid>
+  <a href="/docs/getting-started/deploy/"><Card title="Déployer des Mises à Jour" icon="rocket">
+    Apprenez à déployer des mises à jour depuis le tableau de bord Capgo
+  </Card></a>
+  <a href="/docs/live-updates/update-types/"><Card title="Types de Mises à Jour" icon="book">
+    Référence de tous les types de mises à jour OTA : timing d'application, conditions de délai, blocage de version et livraison
+  </Card></a>
+  <a href="/docs/getting-started/cicd-integration/"><Card title="Intégration CI/CD" icon="setting">
+    Automatisez vos déploiements de mise à jour avec CI/CD
+  </Card></a>
+  <a href="/docs/live-updates/channels/"><Card title="Canaux" icon="list-format">
+    Gérez plusieurs flux de mise à jour avec les canaux
+  </Card></a>
+  <a href="/docs/live-updates/encryption/"><Card title="Chiffrement" icon="approve-check-circle">
+    Sécurisez vos mises à jour avec le chiffrement de bout en bout
+  </Card></a>
+  <a href="/docs/live-updates/update-behavior/"><Card title="Comportement des Mises à Jour" icon="setting">
+    Personnalisez quand et comment les mises à jour sont appliquées (direct, delta, etc.)
+  </Card></a>
+</CardGrid>
+
+## Obtenir de l'Aide
+
+Si vous rencontrez des problèmes pendant l'intégration :
+
+- Consultez le [Guide de Dépannage](/docs/getting-started/troubleshooting/)
+- Rejoignez la [Communauté Discord](https://discord.capgo.app)
+- Consultez la [FAQ](/docs/faq/)
+- Contactez le [Support](/docs/getting-help/)
