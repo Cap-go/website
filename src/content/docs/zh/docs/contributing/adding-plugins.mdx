@@ -30,7 +30,7 @@ import { Steps, Aside } from '@astrojs/starlight/components';
 | `/src/content/docs/docs/plugins/index.mdx` | 包含分类的插件索引页面 |
 | `/astro.config.mjs` | 侧边栏导航配置 |
 | `/src/content/docs/docs/plugins/[plugin-name]/` | 插件文档目录 |
-| `/src/content/plugins-tutorials/en/` | 英文教程文件 |
+| `/src/content/plugins/en/` | 英文教程文件 |
 
 ## 分步指南
 
@@ -207,7 +207,7 @@ import { Steps, Aside } from '@astrojs/starlight/components';
 
 7. ### 创建教程文件
 
-   创建 `/src/content/plugins-tutorials/en/your-plugin-name.md`：
+   创建 `/src/content/plugins/en/your-plugin-name.md`：
 
    ```markdown
    ---
@@ -257,7 +257,7 @@ src/content/docs/docs/plugins/your-plugin-name/
 ├── index.mdx           # 包含 hero 和功能卡的概述页面
 └── getting-started.mdx # 安装和使用指南
 
-src/content/plugins-tutorials/en/
+src/content/plugins/en/
 └── your-plugin-name.md # 全面的教程
 ```
 
@@ -323,7 +323,7 @@ src/content/docs/docs/plugins/your-plugin-name/
 - [ ] 已创建插件文档目录
 - [ ] 已创建 `index.mdx` 概述页面
 - [ ] 已创建 `getting-started.mdx` 指南
-- [ ] 已在 `/src/content/plugins-tutorials/en/` 中创建教程
+- [ ] 已在 `/src/content/plugins/en/` 中创建教程
 - [ ] 已包含安装说明
 - [ ] 已记录 iOS 配置
 - [ ] 已记录 Android 配置
@@ -375,13 +375,13 @@ src/content/docs/docs/plugins/your-plugin-name/
    ```
 
 2. 查看生成的翻译：
-   - `/src/content/plugins-tutorials/de/` (德语)
-   - `/src/content/plugins-tutorials/es/` (西班牙语)
-   - `/src/content/plugins-tutorials/fr/` (法语)
-   - `/src/content/plugins-tutorials/it/` (意大利语)
-   - `/src/content/plugins-tutorials/ja/` (日语)
-   - `/src/content/plugins-tutorials/ko/` (韩语)
-   - `/src/content/plugins-tutorials/id/` (印度尼西亚语)
+   - `/src/content/plugins/de/` (德语)
+   - `/src/content/plugins/es/` (西班牙语)
+   - `/src/content/plugins/fr/` (法语)
+   - `/src/content/plugins/it/` (意大利语)
+   - `/src/content/plugins/ja/` (日语)
+   - `/src/content/plugins/ko/` (韩语)
+   - `/src/content/plugins/id/` (印度尼西亚语)
 
 ## 测试您的更改
 

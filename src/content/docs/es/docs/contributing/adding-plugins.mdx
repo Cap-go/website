@@ -30,7 +30,7 @@ When adding a new plugin to the Capgo ecosystem, you need to update several file
 | `/src/content/docs/docs/plugins/index.mdx` | Plugin index page with categories |
 | `/astro.config.mjs` | Sidebar navigation configuration |
 | `/src/content/docs/docs/plugins/[plugin-name]/` | Plugin documentation directory |
-| `/src/content/plugins-tutorials/en/` | English tutorial files |
+| `/src/content/plugins/en/` | English tutorial files |
 
 ## Step-by-Step Guide
 
@@ -207,7 +207,7 @@ When adding a new plugin to the Capgo ecosystem, you need to update several file
 
 7. ### Create Tutorial File
 
-   Create `/src/content/plugins-tutorials/en/your-plugin-name.md`:
+   Create `/src/content/plugins/en/your-plugin-name.md`:
 
    ```markdown
    ---
@@ -257,7 +257,7 @@ src/content/docs/docs/plugins/your-plugin-name/
 ├── index.mdx           # Overview page with hero and feature cards
 └── getting-started.mdx # Installation and usage guide
 
-src/content/plugins-tutorials/en/
+src/content/plugins/en/
 └── your-plugin-name.md # Comprehensive tutorial
 ```
 
@@ -323,7 +323,7 @@ Use this checklist when adding a new plugin:
 - [ ] Created plugin documentation directory
 - [ ] Created `index.mdx` overview page
 - [ ] Created `getting-started.mdx` guide
-- [ ] Created tutorial in `/src/content/plugins-tutorials/en/`
+- [ ] Created tutorial in `/src/content/plugins/en/`
 - [ ] Included installation instructions
 - [ ] Documented iOS configuration
 - [ ] Documented Android configuration
@@ -375,13 +375,13 @@ The website supports multiple languages. After creating English documentation:
    ```
 
 2. Review generated translations in:
-   - `/src/content/plugins-tutorials/de/` (German)
-   - `/src/content/plugins-tutorials/es/` (Spanish)
-   - `/src/content/plugins-tutorials/fr/` (French)
-   - `/src/content/plugins-tutorials/it/` (Italian)
-   - `/src/content/plugins-tutorials/ja/` (Japanese)
-   - `/src/content/plugins-tutorials/ko/` (Korean)
-   - `/src/content/plugins-tutorials/id/` (Indonesian)
+   - `/src/content/plugins/de/` (German)
+   - `/src/content/plugins/es/` (Spanish)
+   - `/src/content/plugins/fr/` (French)
+   - `/src/content/plugins/it/` (Italian)
+   - `/src/content/plugins/ja/` (Japanese)
+   - `/src/content/plugins/ko/` (Korean)
+   - `/src/content/plugins/id/` (Indonesian)
 
 ## Testing Your Changes
 
