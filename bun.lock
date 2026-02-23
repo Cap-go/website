@@ -10,7 +10,7 @@
         "@astrojs/starlight": "0.37.6",
         "@astrojs/starlight-docsearch": "^0.6.0",
         "@astrojs/starlight-tailwind": "^4.0.2",
-        "@std/semver": "npm:@jsr/std__semver@1.0.6",
+        "@std/semver": "npm:@jsr/std__semver@1.0.8",
         "@supabase/supabase-js": "^2.89.0",
         "@tailwindcss/typography": "^0.5.19",
         "@tailwindcss/vite": "^4.1.18",
@@ -544,7 +544,7 @@
 
     "@sqlite.org/sqlite-wasm": ["@sqlite.org/sqlite-wasm@3.48.0-build4", "", { "bin": { "sqlite-wasm": "bin/index.js" } }, "sha512-hI6twvUkzOmyGZhQMza1gpfqErZxXRw6JEsiVjUbo7tFanVD+8Oil0Ih3l2nGzHdxPI41zFmfUQG7GHqhciKZQ=="],
 
-    "@std/semver": ["@jsr/std__semver@1.0.6", "https://npm.jsr.io/~/11/@jsr/std__semver/1.0.6.tgz", {}, "sha512-MXgSPv8WEB7ygO32CHPi4Yg6CoywGdi+aRlgBU9heWdyhASrpJwn+RMuKxOyWxCg5qYQz+oApbqm8CblnT+l5Q=="],
+    "@std/semver": ["@jsr/std__semver@1.0.8", "https://npm.jsr.io/~/11/@jsr/std__semver/1.0.8.tgz", {}, "sha512-YhkykPU2Majz66e+rQbP0okYc7kKv+U32aguLPCXZZAL+vEVmBA+khHjPHhLBpWR073gzU3WHqGRgB7a/aXCjg=="],
 
     "@supabase/auth-js": ["@supabase/auth-js@2.89.0", "", { "dependencies": { "tslib": "2.8.1" } }, "sha512-wiWZdz8WMad8LQdJMWYDZ2SJtZP5MwMqzQq3ehtW2ngiI3UTgbKiFrvMUUS3KADiVlk4LiGfODB2mrYx7w2f8w=="],
 
