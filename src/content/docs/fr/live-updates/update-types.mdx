@@ -1,0 +1,119 @@
+---
+title: Types de mise à jour
+description: "Une référence complète de tous les types de mises à jour OTA fournis par Capgo : timing d'application, conditions de délai, blocage de version et méthodes de livraison."
+sidebar:
+  order: 2
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Capgo prend en charge plusieurs types de mises à jour over-the-air (OTA). Cette page liste et explique tous ces types afin que vous puissiez choisir la bonne combinaison pour votre application.
+
+## Timing d'application
+
+Contrôle **quand** une mise à jour est appliquée après son téléchargement.
+
+| Type | Description | Cas d'usage |
+|------|-------------|----------|
+| **Par défaut** | Téléchargement en arrière-plan, application lorsque l'utilisateur met l'app en arrière-plan ou la ferme | La plupart des apps ; perturbation minimale |
+| **directUpdate: `atInstall`** | Application immédiate uniquement lors d'une nouvelle installation ou mise à jour depuis le store | Les nouveaux utilisateurs obtiennent la dernière version ; les utilisateurs existants utilisent le flux par défaut |
+| **directUpdate: `onLaunch`** | Application immédiate lors de l'installation, mise à jour du store, ou après fermeture de l'app | Équilibre entre fraîcheur et stabilité de session |
+| **directUpdate: `always`** | Application immédiate dès qu'une mise à jour est téléchargée (y compris lors de la reprise) | Corrections critiques, apps avec état simple |
+
+Configuration dans `capacitor.config.ts` :
+
+```typescript
+plugins: {
+  CapacitorUpdater: {
+    directUpdate: false, // default
+    // or: 'atInstall' | 'onLaunch' | 'always'
+  }
+}
+```
+
+<Aside type="tip">
+Pour tous les détails et la gestion du splashscreen, consultez [Comportement des mises à jour](/docs/live-updates/update-behavior/).
+</Aside>
+
+## Conditions de délai
+
+Conditions qui doivent être remplies **avant** qu'une mise à jour soit installée. Utilisez `setMultiDelay` pour les combiner (toutes les conditions doivent être satisfaites).
+
+| Condition | Description | Exemple |
+|-----------|-------------|---------|
+| **date** | Attendre jusqu'après une date/heure spécifique | Coordonner avec une version côté serveur |
+| **background** | Attendre une durée minimale (ms) après la mise en arrière-plan de l'app | Éviter l'application lors de changements rapides d'app |
+| **nativeVersion** | Requérir une version binaire native minimale | Bloquer les mises à jour sur du code natif incompatible |
+| **kill** | Attendre jusqu'au prochain événement de fermeture de l'app | Appliquer uniquement lors d'un redémarrage complet |
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+await CapacitorUpdater.setMultiDelay({
+  delayConditions: [
+    { kind: 'date', value: '2023-06-01T00:00:00.000Z' },
+    { kind: 'background', value: '60000' },
+  ],
+});
+```
+
+<Aside type="danger">
+La condition `kill` se déclenche après le premier événement de fermeture, pas lors de la prochaine mise en arrière-plan comme les autres. Cela sera corrigé dans une future version.
+</Aside>
+
+## Blocage de version (Politique de canal)
+
+Contrôle quelles **mises à jour semver** un canal livrera automatiquement. Défini via `--disable-auto-update` sur les canaux.
+
+| Stratégie | Bloque | Autorise | Cas d'usage |
+|----------|--------|--------|----------|
+| **none** | Rien | Toutes les mises à jour | Par défaut ; mise à jour automatique complète |
+| **major** | 0.0.0 → 1.0.0 | Même majeure (ex. 1.x → 1.y) | Empêcher les changements cassants d'atteindre l'ancien natif |
+| **minor** | 0.0.0 → 1.1.0, 1.1.0 → 1.2.0 | Même mineure (ex. 1.2.x → 1.2.y) | Contrôle plus strict au sein d'une majeure |
+| **patch** | Tout changement sauf incrémentation de patch | Seulement 0.0.311 → 0.0.314 | Très strict ; mises à jour de patch uniquement |
+| **metadata** | Mises à jour sans `min_update_version` | Mises à jour avec métadonnées de compatibilité explicites | Règles de compatibilité personnalisées par bundle |
+
+```bash
+npx @capgo/cli channel set production --disable-auto-update major
+```
+
+<Aside type="caution">
+`patch` et `metadata` nécessitent une configuration minutieuse. Consultez [Commandes CLI](/docs/cli/commands/#disable-updates-strategy) et [Ciblage de version](/docs/live-updates/version-targeting/) pour plus de détails.
+</Aside>
+
+## Types de livraison
+
+Comment le **bundle est transféré** vers l'appareil.
+
+| Type | Description | Quand l'utiliser |
+|------|-------------|-------------|
+| **Bundle complet** | L'ensemble du bundle JS est téléchargé | Première installation, changements importants, ou lorsque le delta n'est pas disponible |
+| **Delta (manifest)** | Seuls les fichiers modifiés sont téléchargés | La plupart des mises à jour ; plus rapide et économe en bande passante |
+
+```bash
+# Bundle complet (par défaut)
+npx @capgo/cli bundle upload --channel production
+
+# Mises à jour delta
+npx @capgo/cli bundle upload --channel production --delta
+```
+
+<Aside type="tip">
+Lors de l'utilisation de `directUpdate`, activez les [mises à jour Delta](/docs/live-updates/differentials/) pour minimiser le temps de téléchargement et améliorer l'UX.
+</Aside>
+
+## Référence rapide
+
+| Catégorie | Types |
+|----------|-------|
+| **Timing d'application** | Par défaut, `atInstall`, `onLaunch`, `always` |
+| **Conditions de délai** | `date`, `background`, `nativeVersion`, `kill` |
+| **Blocage de version** | `none`, `major`, `minor`, `patch`, `metadata` |
+| **Livraison** | Bundle complet, Delta (manifest) |
+
+## Liens connexes
+
+- [Comportement des mises à jour](/docs/live-updates/update-behavior/) — Configurer le timing d'application et les délais
+- [Ciblage de version](/docs/live-updates/version-targeting/) — Routage de version basé sur les canaux
+- [Mises à jour Delta (manifest)](/docs/live-updates/differentials/) — Activer les téléchargements partiels
+- [Canaux](/docs/live-updates/channels/) — Configuration et priorité des canaux

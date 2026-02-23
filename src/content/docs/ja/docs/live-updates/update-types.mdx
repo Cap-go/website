@@ -1,0 +1,119 @@
+---
+title: アップデートタイプ
+description: "Capgoが提供するすべてのOTAアップデートタイプの包括的なリファレンス：適用タイミング、遅延条件、バージョンブロック、配信方法。"
+sidebar:
+  order: 2
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Capgoは、いくつかのタイプのOTA（Over-The-Air）アップデートをサポートしています。このページでは、アプリに適した組み合わせを選択できるように、それらすべてをリストアップして説明します。
+
+## 適用タイミング
+
+アップデートがダウンロードされた後、**いつ**適用されるかを制御します。
+
+| タイプ | 説明 | ユースケース |
+|------|-------------|----------|
+| **デフォルト** | バックグラウンドでダウンロードし、ユーザーがアプリをバックグラウンドに移行または終了したときに適用 | ほとんどのアプリ；最小限の中断 |
+| **directUpdate: `atInstall`** | 新規インストールまたはアプリストアアップデート時のみ即座に適用 | 新規ユーザーは最新版を取得；既存ユーザーはデフォルトフローを使用 |
+| **directUpdate: `onLaunch`** | インストール、ストアアップデート、またはアプリ終了後に即座に適用 | 最新性とセッション安定性のバランス |
+| **directUpdate: `always`** | アップデートがダウンロードされたときは常に即座に適用（再開時を含む） | 重要な修正、シンプルな状態を持つアプリ |
+
+`capacitor.config.ts`で設定：
+
+```typescript
+plugins: {
+  CapacitorUpdater: {
+    directUpdate: false, // default
+    // or: 'atInstall' | 'onLaunch' | 'always'
+  }
+}
+```
+
+<Aside type="tip">
+詳細とスプラッシュスクリーンの処理については、[アップデート動作](/docs/live-updates/update-behavior/)を参照してください。
+</Aside>
+
+## 遅延条件
+
+アップデートがインストールされる**前に**満たされる必要がある条件。`setMultiDelay`を使用してそれらを組み合わせます（すべての条件が満たされる必要があります）。
+
+| 条件 | 説明 | 例 |
+|-----------|-------------|---------|
+| **date** | 特定の日時まで待機 | サーバー側のリリースと調整 |
+| **background** | アプリがバックグラウンドに移行してから最小期間（ミリ秒）待機 | 素早いアプリ切り替え中の適用を回避 |
+| **nativeVersion** | 最小ネイティブバイナリバージョンを要求 | 互換性のないネイティブコードでのアップデートをブロック |
+| **kill** | 次のアプリ終了イベントまで待機 | 完全な再起動時のみ適用 |
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+await CapacitorUpdater.setMultiDelay({
+  delayConditions: [
+    { kind: 'date', value: '2023-06-01T00:00:00.000Z' },
+    { kind: 'background', value: '60000' },
+  ],
+});
+```
+
+<Aside type="danger">
+`kill`条件は、他の条件のように次のバックグラウンド移行ではなく、最初の終了イベント後にトリガーされます。これは将来のリリースで修正される予定です。
+</Aside>
+
+## バージョンブロック（チャネルポリシー）
+
+チャネルが自動配信する**semverアップデート**を制御します。チャネルで`--disable-auto-update`を使用して設定します。
+
+| 戦略 | ブロック | 許可 | ユースケース |
+|----------|--------|--------|----------|
+| **none** | なし | すべてのアップデート | デフォルト；完全な自動アップデート |
+| **major** | 0.0.0 → 1.0.0 | 同じメジャー（例：1.x → 1.y） | 破壊的変更が古いネイティブに到達するのを防ぐ |
+| **minor** | 0.0.0 → 1.1.0、1.1.0 → 1.2.0 | 同じマイナー（例：1.2.x → 1.2.y） | メジャー内でのより厳格な制御 |
+| **patch** | パッチバンプ以外のすべての変更 | 0.0.311 → 0.0.314のみ | 非常に厳格；パッチのみのアップデート |
+| **metadata** | `min_update_version`のないアップデート | 明示的な互換性メタデータを持つアップデート | バンドルごとのカスタム互換性ルール |
+
+```bash
+npx @capgo/cli channel set production --disable-auto-update major
+```
+
+<Aside type="caution">
+`patch`と`metadata`は慎重なセットアップが必要です。詳細については、[CLIコマンド](/docs/cli/commands/#disable-updates-strategy)と[バージョンターゲティング](/docs/live-updates/version-targeting/)を参照してください。
+</Aside>
+
+## 配信タイプ
+
+**バンドルがデバイスに転送される**方法。
+
+| タイプ | 説明 | 使用するタイミング |
+|------|-------------|-------------|
+| **フルバンドル** | JSバンドル全体がダウンロードされる | 初回インストール、大きな変更、またはデルタが利用できない場合 |
+| **デルタ（マニフェスト）** | 変更されたファイルのみがダウンロードされる | ほとんどのアップデート；高速で帯域幅に優しい |
+
+```bash
+# フルバンドル（デフォルト）
+npx @capgo/cli bundle upload --channel production
+
+# デルタアップデート
+npx @capgo/cli bundle upload --channel production --delta
+```
+
+<Aside type="tip">
+`directUpdate`を使用する場合は、[デルタアップデート](/docs/live-updates/differentials/)を有効にして、ダウンロード時間を最小限に抑え、UXを向上させてください。
+</Aside>
+
+## クイックリファレンス
+
+| カテゴリ | タイプ |
+|----------|-------|
+| **適用タイミング** | デフォルト、`atInstall`、`onLaunch`、`always` |
+| **遅延条件** | `date`、`background`、`nativeVersion`、`kill` |
+| **バージョンブロック** | `none`、`major`、`minor`、`patch`、`metadata` |
+| **配信** | フルバンドル、デルタ（マニフェスト） |
+
+## 関連
+
+- [アップデート動作](/docs/live-updates/update-behavior/) — 適用タイミングと遅延の設定
+- [バージョンターゲティング](/docs/live-updates/version-targeting/) — チャネルベースのバージョンルーティング
+- [デルタ（マニフェスト）アップデート](/docs/live-updates/differentials/) — 部分ダウンロードの有効化
+- [チャネル](/docs/live-updates/channels/) — チャネル設定と優先順位

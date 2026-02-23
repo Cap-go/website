@@ -1,0 +1,119 @@
+---
+title: Jenis Pembaruan
+description: "Referensi komprehensif dari semua jenis pembaruan OTA yang disediakan Capgo: waktu penerapan, kondisi penundaan, pemblokiran versi, dan metode pengiriman."
+sidebar:
+  order: 2
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Capgo mendukung beberapa jenis pembaruan over-the-air (OTA). Halaman ini mencantumkan dan menjelaskan semuanya sehingga Anda dapat memilih kombinasi yang tepat untuk aplikasi Anda.
+
+## Waktu Penerapan
+
+Mengontrol **kapan** pembaruan diterapkan setelah diunduh.
+
+| Jenis | Deskripsi | Kasus Penggunaan |
+|------|-------------|----------|
+| **Default** | Unduh di latar belakang, terapkan saat pengguna memindahkan aplikasi ke latar belakang atau menutup aplikasi | Sebagian besar aplikasi; gangguan minimal |
+| **directUpdate: `atInstall`** | Terapkan segera hanya pada instalasi baru atau pembaruan app store | Pengguna baru mendapatkan versi terbaru; pengguna yang ada menggunakan alur default |
+| **directUpdate: `onLaunch`** | Terapkan segera pada instalasi, pembaruan store, atau setelah aplikasi ditutup | Keseimbangan antara kesegaran dan stabilitas sesi |
+| **directUpdate: `always`** | Terapkan segera kapan pun pembaruan diunduh (termasuk saat resume) | Perbaikan kritis, aplikasi dengan state sederhana |
+
+Konfigurasi di `capacitor.config.ts`:
+
+```typescript
+plugins: {
+  CapacitorUpdater: {
+    directUpdate: false, // default
+    // or: 'atInstall' | 'onLaunch' | 'always'
+  }
+}
+```
+
+<Aside type="tip">
+Untuk detail lengkap dan penanganan splashscreen, lihat [Perilaku Pembaruan](/docs/live-updates/update-behavior/).
+</Aside>
+
+## Kondisi Penundaan
+
+Kondisi yang harus dipenuhi **sebelum** pembaruan diinstal. Gunakan `setMultiDelay` untuk menggabungkannya (semua kondisi harus terpenuhi).
+
+| Kondisi | Deskripsi | Contoh |
+|-----------|-------------|---------|
+| **date** | Tunggu hingga setelah tanggal/waktu tertentu | Koordinasi dengan rilis sisi server |
+| **background** | Tunggu durasi minimum (ms) setelah aplikasi dipindahkan ke latar belakang | Hindari penerapan selama perpindahan aplikasi cepat |
+| **nativeVersion** | Memerlukan versi biner native minimum | Blokir pembaruan pada kode native yang tidak kompatibel |
+| **kill** | Tunggu hingga event penutupan aplikasi berikutnya | Terapkan hanya pada restart penuh |
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+await CapacitorUpdater.setMultiDelay({
+  delayConditions: [
+    { kind: 'date', value: '2023-06-01T00:00:00.000Z' },
+    { kind: 'background', value: '60000' },
+  ],
+});
+```
+
+<Aside type="danger">
+Kondisi `kill` dipicu setelah event kill pertama, bukan background berikutnya seperti yang lain. Ini akan diperbaiki dalam rilis mendatang.
+</Aside>
+
+## Pemblokiran Versi (Kebijakan Channel)
+
+Mengontrol **pembaruan semver** mana yang akan dikirimkan secara otomatis oleh channel. Atur melalui `--disable-auto-update` pada channel.
+
+| Strategi | Memblokir | Mengizinkan | Kasus Penggunaan |
+|----------|--------|--------|----------|
+| **none** | Tidak ada | Semua pembaruan | Default; pembaruan otomatis penuh |
+| **major** | 0.0.0 → 1.0.0 | Major yang sama (mis. 1.x → 1.y) | Mencegah perubahan breaking mencapai native lama |
+| **minor** | 0.0.0 → 1.1.0, 1.1.0 → 1.2.0 | Minor yang sama (mis. 1.2.x → 1.2.y) | Kontrol lebih ketat dalam major |
+| **patch** | Perubahan apa pun kecuali kenaikan patch | Hanya 0.0.311 → 0.0.314 | Sangat ketat; pembaruan patch saja |
+| **metadata** | Pembaruan tanpa `min_update_version` | Pembaruan dengan metadata kompatibilitas eksplisit | Aturan kompatibilitas kustom per bundle |
+
+```bash
+npx @capgo/cli channel set production --disable-auto-update major
+```
+
+<Aside type="caution">
+`patch` dan `metadata` memerlukan pengaturan yang cermat. Lihat [Perintah CLI](/docs/cli/commands/#disable-updates-strategy) dan [Penargetan Versi](/docs/live-updates/version-targeting/) untuk detail.
+</Aside>
+
+## Jenis Pengiriman
+
+Bagaimana **bundle ditransfer** ke perangkat.
+
+| Jenis | Deskripsi | Kapan Digunakan |
+|------|-------------|-------------|
+| **Full bundle** | Seluruh bundle JS diunduh | Instalasi pertama, perubahan besar, atau saat delta tidak tersedia |
+| **Delta (manifest)** | Hanya file yang berubah yang diunduh | Sebagian besar pembaruan; lebih cepat dan hemat bandwidth |
+
+```bash
+# Full bundle (default)
+npx @capgo/cli bundle upload --channel production
+
+# Delta updates
+npx @capgo/cli bundle upload --channel production --delta
+```
+
+<Aside type="tip">
+Saat menggunakan `directUpdate`, aktifkan [Pembaruan Delta](/docs/live-updates/differentials/) untuk meminimalkan waktu unduh dan meningkatkan UX.
+</Aside>
+
+## Referensi Cepat
+
+| Kategori | Jenis |
+|----------|-------|
+| **Waktu penerapan** | Default, `atInstall`, `onLaunch`, `always` |
+| **Kondisi penundaan** | `date`, `background`, `nativeVersion`, `kill` |
+| **Pemblokiran versi** | `none`, `major`, `minor`, `patch`, `metadata` |
+| **Pengiriman** | Full bundle, Delta (manifest) |
+
+## Terkait
+
+- [Perilaku Pembaruan](/docs/live-updates/update-behavior/) — Konfigurasi waktu penerapan dan penundaan
+- [Penargetan Versi](/docs/live-updates/version-targeting/) — Routing versi berbasis channel
+- [Pembaruan Delta (manifest)](/docs/live-updates/differentials/) — Aktifkan unduhan parsial
+- [Channel](/docs/live-updates/channels/) — Konfigurasi dan prioritas channel

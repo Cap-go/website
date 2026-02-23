@@ -1,0 +1,119 @@
+---
+title: 更新类型
+description: "Capgo 提供的所有 OTA 更新类型的综合参考：应用时机、延迟条件、版本阻止和交付方法。"
+sidebar:
+  order: 2
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Capgo 支持多种类型的空中下载（OTA）更新。本页列出并解释了所有这些类型，以便您可以为应用选择正确的组合。
+
+## 应用时机
+
+控制更新下载后**何时**应用。
+
+| 类型 | 描述 | 使用场景 |
+|------|-------------|----------|
+| **默认** | 在后台下载，当用户将应用切换到后台或关闭应用时应用 | 大多数应用；最小干扰 |
+| **directUpdate: `atInstall`** | 仅在全新安装或应用商店更新时立即应用 | 新用户获得最新版本；现有用户使用默认流程 |
+| **directUpdate: `onLaunch`** | 在安装、商店更新或应用关闭后立即应用 | 在新鲜度和会话稳定性之间取得平衡 |
+| **directUpdate: `always`** | 只要下载更新就立即应用（包括恢复时） | 关键修复、状态简单的应用 |
+
+在 `capacitor.config.ts` 中配置：
+
+```typescript
+plugins: {
+  CapacitorUpdater: {
+    directUpdate: false, // default
+    // or: 'atInstall' | 'onLaunch' | 'always'
+  }
+}
+```
+
+<Aside type="tip">
+有关完整详细信息和启动画面处理，请参阅[更新行为](/docs/live-updates/update-behavior/)。
+</Aside>
+
+## 延迟条件
+
+在安装更新**之前**必须满足的条件。使用 `setMultiDelay` 组合它们（必须满足所有条件）。
+
+| 条件 | 描述 | 示例 |
+|-----------|-------------|---------|
+| **date** | 等待到特定日期/时间之后 | 与服务器端发布协调 |
+| **background** | 应用切换到后台后等待最小持续时间（毫秒） | 避免在快速应用切换期间应用 |
+| **nativeVersion** | 需要最低原生二进制版本 | 阻止在不兼容的原生代码上更新 |
+| **kill** | 等待到下一次应用关闭事件 | 仅在完全重启时应用 |
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+await CapacitorUpdater.setMultiDelay({
+  delayConditions: [
+    { kind: 'date', value: '2023-06-01T00:00:00.000Z' },
+    { kind: 'background', value: '60000' },
+  ],
+});
+```
+
+<Aside type="danger">
+`kill` 条件在第一次关闭事件后触发，而不是像其他条件那样在下一次后台切换时触发。这将在未来版本中修复。
+</Aside>
+
+## 版本阻止（频道策略）
+
+控制频道将自动交付哪些 **semver 更新**。通过频道上的 `--disable-auto-update` 设置。
+
+| 策略 | 阻止 | 允许 | 使用场景 |
+|----------|--------|--------|----------|
+| **none** | 无 | 所有更新 | 默认；完全自动更新 |
+| **major** | 0.0.0 → 1.0.0 | 相同主版本（例如 1.x → 1.y） | 防止破坏性更改到达旧原生版本 |
+| **minor** | 0.0.0 → 1.1.0, 1.1.0 → 1.2.0 | 相同次版本（例如 1.2.x → 1.2.y） | 主版本内更严格的控制 |
+| **patch** | 除补丁升级外的任何更改 | 仅 0.0.311 → 0.0.314 | 非常严格；仅补丁更新 |
+| **metadata** | 没有 `min_update_version` 的更新 | 具有明确兼容性元数据的更新 | 每个包的自定义兼容性规则 |
+
+```bash
+npx @capgo/cli channel set production --disable-auto-update major
+```
+
+<Aside type="caution">
+`patch` 和 `metadata` 需要仔细设置。有关详细信息，请参阅 [CLI 命令](/docs/cli/commands/#disable-updates-strategy)和[版本定位](/docs/live-updates/version-targeting/)。
+</Aside>
+
+## 交付类型
+
+**包如何传输**到设备。
+
+| 类型 | 描述 | 何时使用 |
+|------|-------------|-------------|
+| **完整包** | 下载整个 JS 包 | 首次安装、大型更改或增量不可用时 |
+| **增量（清单）** | 仅下载更改的文件 | 大多数更新；更快且带宽友好 |
+
+```bash
+# 完整包（默认）
+npx @capgo/cli bundle upload --channel production
+
+# 增量更新
+npx @capgo/cli bundle upload --channel production --delta
+```
+
+<Aside type="tip">
+使用 `directUpdate` 时，启用[增量更新](/docs/live-updates/differentials/)以最小化下载时间并改善用户体验。
+</Aside>
+
+## 快速参考
+
+| 类别 | 类型 |
+|----------|-------|
+| **应用时机** | 默认、`atInstall`、`onLaunch`、`always` |
+| **延迟条件** | `date`、`background`、`nativeVersion`、`kill` |
+| **版本阻止** | `none`、`major`、`minor`、`patch`、`metadata` |
+| **交付** | 完整包、增量（清单） |
+
+## 相关内容
+
+- [更新行为](/docs/live-updates/update-behavior/) — 配置应用时机和延迟
+- [版本定位](/docs/live-updates/version-targeting/) — 基于频道的版本路由
+- [增量（清单）更新](/docs/live-updates/differentials/) — 启用部分下载
+- [频道](/docs/live-updates/channels/) — 频道配置和优先级
