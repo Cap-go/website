@@ -1,0 +1,18 @@
+---
+title: iOS
+description: iOS support notes for @capgo/capacitor-webview-version-checker.
+sidebar:
+  order: 4
+---
+
+`@capgo/capacitor-webview-version-checker` currently targets Android runtime checks.
+
+## Why
+
+The plugin is designed for Android WebView provider compatibility flows:
+
+- Detect active WebView provider package and version
+- Compare against latest/minimum rules or device-share threshold
+- Offer native prompt routing to provider update destination
+
+iOS does not use the same update-provider model, so this plugin does not expose equivalent native enforcement there.
