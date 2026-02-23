@@ -41,7 +41,7 @@
     "@astrojs/starlight": "0.37.6",
     "@astrojs/starlight-docsearch": "^0.6.0",
     "@astrojs/starlight-tailwind": "^4.0.2",
-    "@std/semver": "npm:@jsr/std__semver@1.0.6",
+    "@std/semver": "npm:@jsr/std__semver@1.0.8",
     "@supabase/supabase-js": "^2.89.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.18",
