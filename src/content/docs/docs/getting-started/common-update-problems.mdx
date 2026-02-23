@@ -10,7 +10,7 @@ When an update check fails, Capgo usually returns an `error` code and a `message
 ## Read this first
 
 - `no_new_version_available` is a normal state, not a failure.
-- Most "update found but not applied" cases are policy/configuration refusals, not cache lag.
+- Many "update found but not applied" reports are policy/configuration refusals rather than cache lag, especially when the response includes an explicit `error` code.
 - Use `npx @capgo/cli@latest app debug` while reproducing the issue to see request/response details.
 
 ## Common failure codes
@@ -25,12 +25,25 @@ Your channel blocks major upgrades (`disable_auto_update = major`) and the targe
 
 `version: 1.0.8` with `old: 0.0.0` means the device reports baseline `0.0.0`, so major upgrades are rejected.
 
-**Fix**
+**How to interpret it**
 
-1. Set `plugins.CapacitorUpdater.version` in `capacitor.config.*` to the native version installed on the device (for example `1.0.0`).
-2. Run `npx cap sync`.
-3. Rebuild and reinstall the native app once so the new baseline is used.
-4. Or relax channel policy if major auto-updates are intentional.
+The backend compares major versions using device baseline `old` and target `version`.
+
+- If target is `1.0.1`, baseline major must be `1` (for example `1.0.0`).
+- If target is `10.0.1`, baseline major must be `10` (for example `10.0.0`).
+
+**Fix option A (recommended): align device baseline major**
+
+Set `plugins.CapacitorUpdater.version` in `capacitor.config.*` so its **MAJOR** matches the bundle MAJOR you want to deliver (for example `1.0.0` for `1.0.1`, `10.0.0` for `10.0.1`).
+
+Then apply this config to the installed app once:
+
+1. Run `npx cap sync`.
+2. Rebuild and reinstall the native app.
+
+**Fix option B: relax channel policy**
+
+Allow cross-major auto-updates in channel settings (only if that rollout strategy is intentional).
 
 Related docs:
 - [Version Targeting: Disable Auto-Update Across Major Versions](/docs/live-updates/version-targeting/#disable-auto-update-across-major-versions)
