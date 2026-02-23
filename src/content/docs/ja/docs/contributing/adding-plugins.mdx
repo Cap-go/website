@@ -30,7 +30,7 @@ import { Steps, Aside } from '@astrojs/starlight/components';
 | `/src/content/docs/docs/plugins/index.mdx` | カテゴリ付きプラグインインデックスページ |
 | `/astro.config.mjs` | サイドバーナビゲーション設定 |
 | `/src/content/docs/docs/plugins/[plugin-name]/` | プラグインドキュメントディレクトリ |
-| `/src/content/plugins/en/` | 英語チュートリアルファイル |
+| `/src/content/plugins-tutorials/en/` | 英語チュートリアルファイル |
 
 ## ステップバイステップガイド
 
@@ -207,7 +207,7 @@ import { Steps, Aside } from '@astrojs/starlight/components';
 
 7. ### チュートリアルファイルを作成
 
-   `/src/content/plugins/en/your-plugin-name.md`を作成:
+   `/src/content/plugins-tutorials/en/your-plugin-name.md`を作成:
 
    ```markdown
    ---
@@ -323,7 +323,7 @@ src/content/docs/docs/plugins/your-plugin-name/
 - [ ] プラグインドキュメントディレクトリを作成
 - [ ] `index.mdx`概要ページを作成
 - [ ] `getting-started.mdx`ガイドを作成
-- [ ] `/src/content/plugins/en/`にチュートリアルを作成
+- [ ] `/src/content/plugins-tutorials/en/`にチュートリアルを作成
 - [ ] インストール手順を含める
 - [ ] iOS設定をドキュメント化
 - [ ] Android設定をドキュメント化
@@ -375,13 +375,13 @@ src/content/docs/docs/plugins/your-plugin-name/
    ```
 
 2. 生成された翻訳を確認:
-   - `/src/content/plugins/de/`（ドイツ語）
-   - `/src/content/plugins/es/`（スペイン語）
-   - `/src/content/plugins/fr/`（フランス語）
-   - `/src/content/plugins/it/`（イタリア語）
-   - `/src/content/plugins/ja/`（日本語）
-   - `/src/content/plugins/ko/`（韓国語）
-   - `/src/content/plugins/id/`（インドネシア語）
+   - `/src/content/plugins-tutorials/de/`（ドイツ語）
+   - `/src/content/plugins-tutorials/es/`（スペイン語）
+   - `/src/content/plugins-tutorials/fr/`（フランス語）
+   - `/src/content/plugins-tutorials/it/`（イタリア語）
+   - `/src/content/plugins-tutorials/ja/`（日本語）
+   - `/src/content/plugins-tutorials/ko/`（韓国語）
+   - `/src/content/plugins-tutorials/id/`（インドネシア語）
 
 ## 変更のテスト
 
