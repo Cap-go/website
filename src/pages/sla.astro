@@ -95,27 +95,27 @@ const content = { title, description }
       </tr>
       <tr>
         <td>{m.urgent_support_title({}, { locale: Astro.locals.locale })}</td>
-        <td>{m.urgent_team_response({}, { locale: Astro.locals.locale })}</td>
-        <td>{m.urgent_enterprise_response({}, { locale: Astro.locals.locale })}</td>
-        <td>{m.urgent_priority_response({}, { locale: Astro.locals.locale })}</td>
+        <td set:html={m.urgent_team_response({}, { locale: Astro.locals.locale })} />
+        <td set:html={m.urgent_enterprise_response({}, { locale: Astro.locals.locale })} />
+        <td set:html={m.urgent_priority_response({}, { locale: Astro.locals.locale })} />
       </tr>
       <tr>
         <td>{m.high_support_title({}, { locale: Astro.locals.locale })}</td>
-        <td>{m.high_team_response({}, { locale: Astro.locals.locale })}</td>
-        <td>{m.high_enterprise_response({}, { locale: Astro.locals.locale })}</td>
-        <td>{m.high_priority_response({}, { locale: Astro.locals.locale })}</td>
+        <td set:html={m.high_team_response({}, { locale: Astro.locals.locale })} />
+        <td set:html={m.high_enterprise_response({}, { locale: Astro.locals.locale })} />
+        <td set:html={m.high_priority_response({}, { locale: Astro.locals.locale })} />
       </tr>
       <tr>
         <td>{m.normal_support_title({}, { locale: Astro.locals.locale })}</td>
-        <td>{m.normal_team_response({}, { locale: Astro.locals.locale })}</td>
-        <td>{m.normal_enterprise_response({}, { locale: Astro.locals.locale })}</td>
-        <td>{m.normal_priority_response({}, { locale: Astro.locals.locale })}</td>
+        <td set:html={m.normal_team_response({}, { locale: Astro.locals.locale })} />
+        <td set:html={m.normal_enterprise_response({}, { locale: Astro.locals.locale })} />
+        <td set:html={m.normal_priority_response({}, { locale: Astro.locals.locale })} />
       </tr>
       <tr>
         <td>{m.low_support_title({}, { locale: Astro.locals.locale })}</td>
-        <td>{m.low_team_response({}, { locale: Astro.locals.locale })}</td>
-        <td>{m.low_enterprise_response({}, { locale: Astro.locals.locale })}</td>
-        <td>{m.low_priority_response({}, { locale: Astro.locals.locale })}</td>
+        <td set:html={m.low_team_response({}, { locale: Astro.locals.locale })} />
+        <td set:html={m.low_enterprise_response({}, { locale: Astro.locals.locale })} />
+        <td set:html={m.low_priority_response({}, { locale: Astro.locals.locale })} />
       </tr>
     </table>
     <p>{m.business_hours_note({}, { locale: Astro.locals.locale })}</p>
