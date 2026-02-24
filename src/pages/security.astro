@@ -36,6 +36,18 @@ const content = { title, description }
       <li>{m.security_out_of_scope_10({}, { locale: Astro.locals.locale })}</li>
       <li>{m.security_out_of_scope_11({}, { locale: Astro.locals.locale })}</li>
     </ul>
+    <h2>Known Supabase Auth Limitations</h2>
+    <p>
+      Some findings are repeatedly reported and tied to Supabase Auth behavior. These are only reviewed when reproduced in a shared Supabase demo project configured like ours, and when a Supabase-side
+      configuration fix exists without changing Capgo security rules.
+    </p>
+    <ul>
+      <li>Reports must include a reproducible demo Supabase project, with steps, that matches our settings and demonstrates the behavior.</li>
+      <li>Reports must include the exact Supabase setting/config change that fixes the behavior while keeping our existing rules/policies intact.</li>
+      <li>Account/email flows are validated against the Supabase project settings (for example, whether email verification is disabled and capture flow is used).</li>
+      <li>Password and email/password update flows may depend on current Supabase Auth session and re-verification settings.</li>
+      <li>If a demo project proves a concrete Supabase-side fix with no Capgo policy change, we review it as actionable.</li>
+    </ul>
     <h2>{m.security_testing_guidelines_title({}, { locale: Astro.locals.locale })}</h2>
     <ul>
       <li>
