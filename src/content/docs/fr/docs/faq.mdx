@@ -64,7 +64,7 @@ See details in the React Natif Problème: [facebook/react-Natif#50510](https://g
 
 ### Does code Pousser work with large applications?
 
-Yes. There is no limit on the size of the Application that can be updated with code Pousser. As noted [below](https://capgo.app/docs/faq/#what-types-of-changes-does-capgo-code-Pousser-Support), Capgo can change any JS code in your Application regardless of size.
+Yes. There is no limit on the size of the Application that can be updated with code Pousser. As noted [below](/fr/docs/faq/#what-types-of-changes-does-capgo-code-Pousser-Support), Capgo can change any JS code in your Application regardless of size.
 
 To Remarque: A bigger size make it harder for Utilisateurs to Télécharger Mises à jour. We recommend keeping your Application as small as possible.
 
@@ -76,7 +76,7 @@ We've seen a variety of uses, including:
 -   Shipping bug fixes to Utilisateurs on older versions of your Application.
 -   Shipping constantly (e.g. every hour).
 
-Remarque that most Application stores prohibit shipping code that changes the behavior of the Application in a significant way. Please see [below](https://capgo.app/docs/faq/#how-does-this-relate-to-the-appplay-store-review-process-or-policies) for more Information.
+Remarque that most Application stores prohibit shipping code that changes the behavior of the Application in a significant way. Please see [below](/fr/docs/faq/#how-does-this-relate-to-the-appplay-store-review-process-or-policies) for more Information.
 
 ### What counts as a "MAU" for Capgo?
 
@@ -95,7 +95,7 @@ Remarque: TestFlight downloads and Canal switches in Android may still generate 
 
 ### What can't we use Capgo code Pousser for?
 
-As above, Capgo should not be used to violate Application Store polices. Please see [below](https://capgo.app/docs/faq/#does-capgo-comply-with-play-store-guidelines) for more Information.
+As above, Capgo should not be used to violate Application Store polices. Please see [below](/fr/docs/faq/#does-capgo-comply-with-play-store-guidelines) for more Information.
 
 Also Capgo does not Support changing Natif code (e.g. Java/Kotlin on Android or Objective-C/Swift on iOS). The tool will warn you during an attempted Mise à jour if you have changed Natif code.
 
@@ -164,7 +164,7 @@ Developers are bound by their agreements with store providers when they choose t
 
 Microsoft also publishes a Guide on how their Solution complies with the Application stores: [https://github.com/microsoft/react-Natif-code-Pousser#store-guideline-compliance](https://github.com/microsoft/react-Natif-code-Pousser/#store-guideline-compliance)
 
-Code Pousser is a widely used technique throughout the Application stores. All of the large apps I'm aware of use code Pousser. The major policy to be aware of is not to change the behavior of the Application in a significant way. Please see [below](https://capgo.app/docs/faq/#does-capgo-comply-with-play-store-guidelines) for more Information.
+Code Pousser is a widely used technique throughout the Application stores. All of the large apps I'm aware of use code Pousser. The major policy to be aware of is not to change the behavior of the Application in a significant way. Please see [below](/fr/docs/faq/#does-capgo-comply-with-play-store-guidelines) for more Information.
 
 ### Does Capgo comply with Play Store guidelines?
 
@@ -286,7 +286,7 @@ Requests sent from the Application to Capgo servers include:
 
 -   app\_id (specified `capacitor.config.json`)
 -   channel (optional in `capacitor.config.json`)
--   release\_version (versionName from AndroidManifest.xml or CFBundleShortVersionString from Info.plist or `capacitor.config.json` if set in [`CapacitorUpdater.version`](/docs/plugin/settings/#version) )
+-   release\_version (versionName from AndroidManifest.xml or CFBundleShortVersionString from Info.plist or `capacitor.config.json` if set in [`CapacitorUpdater.version`](/fr/docs/plugin/settings/#version) )
 -   version\_number (generated as part of `npx @capgo/cli@latest bundle upload`)
 -   os_version (e.g. '11.2.1')
 -   platform (e.g. 'android', needed to send down the right patch) That's it. The code for this is in `updater/library/src/network.rs`
@@ -335,7 +335,7 @@ Yes you can can at any time in your Tableau de bord: [https://console.capgo.app/
 ### Stats and Analyse
 
 The stats in your Tableau de bord are updated every midnight UTC.
-The stats are calculated based on the number of [MAU](https://capgo.app/docs/faq/#what-is-the-difference-between-a-Bundle-and-a-Libération "Direct link to What is the difference between a Bundle and a Libération?") that have been installed on your Appareils.
+The stats are calculated based on the number of [MAU](/fr/docs/faq/#what-is-the-difference-between-a-Bundle-and-a-Libération "Direct link to What is the difference between a Bundle and a Libération?") that have been installed on your Appareils.
 
 ## How Appareil ID is generated
 
