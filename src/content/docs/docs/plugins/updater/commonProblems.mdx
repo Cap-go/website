@@ -177,6 +177,27 @@ No valid channel was resolved for the device.
 Related docs:
 - [Channels](/docs/live-updates/channels/)
 
+### `on_premise_app`
+
+**Cause**
+
+The backend returned HTTP 429 with `on_premise_app`. This happens in three situations:
+
+1. **App ID does not exist in Capgo** — the `app_id` sent by the device is not registered, so the backend has no record of it.
+2. **App is flagged as on-premise** — the app exists but is configured for self-hosted updates, so the Capgo cloud endpoint refuses to serve it.
+3. **Organization plan is cancelled** — the app's organization no longer has an active subscription.
+
+**Common mistake**
+
+A typo in `plugins.CapacitorUpdater.appId` (in `capacitor.config.ts`) or a mismatch with the app ID registered in the Capgo dashboard. The backend cannot distinguish "unknown app" from "on-premise app", so it returns the same error code.
+
+**Fix**
+
+- Verify the `app_id` matches exactly what is shown in the Capgo dashboard (case-sensitive).
+- If the app is not registered yet, run `npx @capgo/cli@latest app add`.
+- If the app is intentionally on-premise, set `plugins.CapacitorUpdater.updateUrl` to your self-hosted update endpoint instead of the Capgo cloud URL.
+- If the organization plan expired, renew or upgrade the plan.
+
 ## Quick diagnostic checklist
 
 1. Confirm app ID and channel are correct for the build.
