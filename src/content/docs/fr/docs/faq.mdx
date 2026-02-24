@@ -286,12 +286,12 @@ Requests sent from the Application to Capgo servers include:
 
 -   app\_id (specified `capacitor.config.json`)
 -   channel (optional in `capacitor.config.json`)
--   release\_version (versionName from AndroidManifest.xml or CFBundleShortVersionString from Info.plist or `capacitor.config.json` if set in [`CapacitorUpdater.version`](/fr/docs/plugin/settings/#version) )
+-   release\_version (versionName from AndroidManifest.xml or CFBundleShortVersionString from Info.plist or `capacitor.config.json` if set in [`CapacitorUpdater.version`](/fr/docs/plugin/settings/#version))
 -   version\_number (generated as part of `npx @capgo/cli@latest bundle upload`)
 -   os_version (e.g. '11.2.1')
 -   platform (e.g. 'android', needed to send down the right patch) That's it. The code for this is in `updater/library/src/network.rs`
--   Appareil\_id (generated on the Appareil on first run, used to de-duplicate per-Appareil installs and allow us to charge based on Utilisateurs installed to (e.g. monthly Actif Utilisateurs), rather than total patches or total patch installs)
--   custom\_id ( optional, set at runtime by the developer, used for you to link a Appareil to a Utilisateur in your system)
+-   device\_id (generated on the Appareil on first run, used to de-duplicate per-Appareil installs and allow us to charge based on Utilisateurs installed to (e.g. monthly Actif Utilisateurs), rather than total patches or total patch installs)
+-   custom\_id (optional, set at runtime by the developer, used for you to link a Appareil to a Utilisateur in your system)
 
 ### What platforms does Capgo Support?
 
