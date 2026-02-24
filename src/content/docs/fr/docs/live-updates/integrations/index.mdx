@@ -1,82 +1,82 @@
 ---
 locale: fr
-title: CI/CD Integrations
-description: "Integrate Capgo Mises à jour en direct with your favorite CI/CD platform for automated Déploiement workflows."
-sidebar: 
+title: Intégrations CI/CD
+description: "Intégrez les mises à jour en direct Capgo à votre plateforme CI/CD préférée pour automatiser vos déploiements."
+sidebar:
   order: 3
 ---
 
 import { Aside, LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-Automate your Capgo Mises à jour en direct Déploiement process by integrating with popular CI/CD platforms. These integrations allow you to automatically Déployer Application Mises à jour whenever you Pousser code changes, Test Fonctionnalité branches, and manage multiple Déploiement environments.
+Automatisez vos déploiements Capgo en intégrant votre pipeline CI/CD. Ces guides permettent de publier automatiquement vos mises à jour d'application à chaque push, de tester les branches de fonctionnalités et de gérer plusieurs environnements.
 
-## Disponible Integrations
+## Intégrations disponibles
 
-Choose your CI/CD platform to get started with automated deployments:
+Choisissez votre plateforme CI/CD pour démarrer :
 
 <CardGrid>
   <LinkCard
     title="Azure DevOps"
-    description="Integrate with Azure DevOps Pipelines for automated builds, Test, and Déploiement workflows."
+    description="Intégrez Azure DevOps Pipelines pour automatiser les builds, les tests et les déploiements."
     href="/fr/docs/live-updates/integrations/azure-devops/"
   />
   <LinkCard
     title="GitLab CI/CD"
-    description="Set up GitLab CI/CD pipelines to automatically Déployer your Application Mises à jour with comprehensive environment management."
+    description="Configurez des pipelines GitLab CI/CD pour déployer automatiquement vos mises à jour avec une gestion fine des environnements."
     href="/fr/docs/live-updates/integrations/gitlab-ci/"
   />
   <LinkCard
     title="GitHub Actions"
-    description="Use GitHub Actions for powerful automation with multi-Canal deployments and environment protection."
+    description="Utilisez GitHub Actions pour automatiser vos workflows avec déploiements multi-canaux et protections d'environnement."
     href="/fr/docs/live-updates/integrations/github-actions/"
   />
   <LinkCard
     title="Bitbucket Pipelines"
-    description="Déployer with Bitbucket Pipelines using simple or advanced configurations for multiple environments."
+    description="Déployez avec Bitbucket Pipelines via des configurations simples ou avancées pour plusieurs environnements."
     href="/fr/docs/live-updates/integrations/bitbucket-pipeline/"
   />
 </CardGrid>
 
-## What You'll Get
+## Ce que vous obtenez
 
-All integration guides include:
+Tous les guides d'intégration incluent :
 
-- **Simple Configuration**: Basic Configuration to get started quickly
-- **Advanced Workflows**: Multi-environment deployments with staging and Production
-- **Fonctionnalité Branch Test**: Automatic Déploiement of Fonctionnalité branches to Test Canaux
-- **Sécurité Best Practices**: Secure secret management and environment protection
-- **Monitoring**: Notifications and logging for Déploiement status
+- **Configuration simple**: mise en place rapide
+- **Workflows avancés**: déploiements multi-environnements (staging / production)
+- **Tests de branches de fonctionnalités**: déploiement automatique sur des canaux de test
+- **Bonnes pratiques de sécurité**: gestion sécurisée des secrets et protections d'environnement
+- **Monitoring**: notifications et logs de statut de déploiement
 
 <Aside type="tip">
 
-**New to CI/CD?** Start with the simple configuration for your platform, then gradually add more advanced features like multi-channel deployments and automated testing as your needs grow.
+**Nouveau en CI/CD ?** Commencez par la configuration simple de votre plateforme, puis ajoutez progressivement les options avancées (multi-canaux, tests automatiques, etc.).
 
 </Aside>
 
-## Common Fonctionnalités
+## Fonctionnalités communes
 
-Each integration supports:
+Chaque intégration prend en charge :
 
-- **Automated Builds**: Trigger deployments on code changes
-- **Multi-Canal Support**: Déployer to different Canaux (Développement, staging, Production)
-- **Tirer Request/Merge Request Test**: Test changes in isolated environments
-- **Chiffrement Support**: Secure deployments with Capgo's Chiffrement Fonctionnalité
-- **Environment Protection**: Manual approvals and restricted access for Production
-- **Notifications**: Slack, email, and other notification integrations
+- **Builds automatisés**: déclencher les déploiements à chaque changement de code
+- **Support multi-canaux**: déployer vers différents canaux (développement, staging, production)
+- **Pull Request/Merge Request Test**: tester les changements dans des environnements isolés
+- **Support du chiffrement**: sécuriser les déploiements avec la fonctionnalité de chiffrement Capgo
+- **Protection des environnements**: validations manuelles et accès restreint pour la production
+- **Notifications**: Slack, email et autres intégrations
 
-## Prerequisites
+## Prérequis
 
-Before setting up any integration, ensure you have:
+Avant de configurer une intégration, vérifiez que vous avez :
 
-- A Capgo Compte with an Application configured
-- Your Application's source code in a Git repository
-- A Capgo API token from [console.capgo.app/apikeys](https://console.capgo.app/apikeys)
-- Node.js and npm/yarn configured in your project
+- Un compte Capgo avec une application configurée
+- Le code source de votre application dans un dépôt Git
+- Un token API Capgo depuis [console.capgo.app/apikeys](https://console.capgo.app/apikeys)
+- Node.js et votre gestionnaire de paquets configurés dans le projet
 
-## Related Documentation
+## Documentation liée
 
-- [Canaux](/docs/live-updates/channels/) - Learn how to manage different Déploiement environments
-- [Chiffrement](/docs/live-updates/encryption/) - Secure your deployments with end-to-end Chiffrement
-- [Mise à jour Behavior](/docs/live-updates/update-behavior/) - Customize how Mises à jour are applied to your apps
+- [Canaux](/fr/docs/live-updates/channels/) - Gérer des environnements de déploiement distincts
+- [Chiffrement](/fr/docs/live-updates/encryption/) - Sécuriser vos déploiements de bout en bout
+- [Comportement des mises à jour](/fr/docs/live-updates/update-behavior/) - Personnaliser l'application des mises à jour
 
-Choose your CI/CD platform above to Démarrer automating your Capgo deployments!
+Choisissez votre plateforme CI/CD ci-dessus pour démarrer l'automatisation de vos déploiements Capgo.

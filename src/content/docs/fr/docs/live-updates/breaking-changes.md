@@ -1,25 +1,25 @@
 ---
 locale: fr
-title: "Breaking Changes"
-description: "Comment gerer les changements incompatibles avec des canaux versionnes"
+title: "Changements incompatibles"
+description: "Comment gérer les changements incompatibles avec des canaux versionnés"
 sidebar:
   order: 6
 ---
 
-Cette page explique comment gerer les changements incompatibles (breaking changes) avec Capgo en utilisant des canaux par version majeure.
+Cette page explique comment gérer les changements incompatibles (breaking changes) avec Capgo en utilisant des canaux par version majeure.
 
-## Scenario type
+## Scénario type
 
 Vous avez:
 
-- Application 1.2.3 (ancienne generation) sur le canal `production`
-- Application 2.0.0 (nouvelle generation) sur le canal `v2`
-- Mise a jour OTA 1.2.4 compatible 1.x
-- Mise a jour OTA 2.0.1 compatible 2.x
+- Application 1.2.3 (ancienne génération) sur le canal `production`
+- Application 2.0.0 (nouvelle génération) sur le canal `v2`
+- Mise à jour OTA 1.2.4 compatible 1.x
+- Mise à jour OTA 2.0.1 compatible 2.x
 
-## Strategie recommandee
+## Stratégie recommandée
 
-Definissez un `defaultChannel` par version majeure. Cela vous permet de controler precisement quels utilisateurs recoivent quelles mises a jour.
+Définissez un `defaultChannel` par version majeure. Cela vous permet de contrôler précisément quels utilisateurs reçoivent quelles mises à jour.
 
 ```ts
 // Releases 1.x
@@ -34,19 +34,19 @@ defaultChannel: 'v3'
 
 :::tip[Conseil]
 Avantages:
-- controle clair du routage des utilisateurs
-- separation nette entre generations d'apps
-- mises a jour ciblees sans logique complexe cote client
+- contrôle clair du routage des utilisateurs
+- séparation nette entre générations d'apps
+- mises à jour ciblées sans logique complexe côté client
 :::
 
-## 1. Creer un canal pour la nouvelle version
+## 1. Créer un canal pour la nouvelle version
 
 ```bash
 # Create channel for version 2.x
 npx @capgo/cli channel create v2
 ```
 
-## 2. Mettre a jour la config Capacitor pour 2.0.0
+## 2. Mettre à jour la config Capacitor pour 2.0.0
 
 Avant de publier la version store 2.0.0:
 
@@ -68,12 +68,12 @@ export default config;
 ```
 
 :::note[Remarque]
-Si vous n'aviez pas configure `defaultChannel` en 1.x, ces utilisateurs restent generalement sur `production`.
+Si vous n'aviez pas configuré `defaultChannel` en 1.x, ces utilisateurs restent généralement sur `production`.
 :::
 
-## 3. Maintenir des branches code separees
+## 3. Maintenir des branches code séparées
 
-Gardez une branche par generation native incompatible.
+Gardez une branche par génération native incompatible.
 
 ```bash
 # Create and maintain a branch for version 1.x updates
@@ -85,7 +85,7 @@ git checkout main
 ```
 
 :::caution[Avertissement]
-N'envoyez jamais a une app 1.x un bundle qui depend d'APIs natives uniquement presentes en 2.x.
+N'envoyez jamais à une app 1.x un bundle qui dépend d'APIs natives uniquement présentes en 2.x.
 :::
 
 ## 4. Uploader vers le bon canal
@@ -100,7 +100,7 @@ git checkout main
 npx @capgo/cli bundle upload --channel v2
 ```
 
-## 5. Autoriser l'auto-assignment si necessaire
+## 5. Autoriser l'auto-assignment si nécessaire
 
 ```bash
 npx @capgo/cli channel set v2 --self-assign
@@ -108,10 +108,10 @@ npx @capgo/cli channel set v2 --self-assign
 
 ## 6. Publier la version store
 
-Publiez la version 2.0.0. Les utilisateurs qui installent cette version basculent automatiquement sur `v2` grace a `defaultChannel`.
+Publiez la version 2.0.0. Les utilisateurs qui installent cette version basculent automatiquement sur `v2` grâce à `defaultChannel`.
 
 :::note[Remarque]
-Aucun changement runtime supplementaire n'est necessaire si `defaultChannel` est deja embarque dans le binaire.
+Aucun changement runtime supplémentaire n'est nécessaire si `defaultChannel` est déjà embarqué dans le binaire.
 :::
 
 ## Passage aux versions suivantes
@@ -140,12 +140,12 @@ Vous obtenez alors un routage clair:
 - `v2` -> utilisateurs 2.x
 - `v3` -> utilisateurs 3.x
 
-## 7. Nettoyage apres migration
+## 7. Nettoyage après migration
 
-Quand la base utilisateur 1.x est negligeable:
+Quand la base utilisateur 1.x est négligeable:
 
-1. retirez `defaultChannel` des futurs binaires si necessaire
-2. supprimez les canaux/branches obsoletes
+1. retirez `defaultChannel` des futurs binaires si nécessaire
+2. supprimez les canaux/branches obsolètes
 
 ```bash
 npx @capgo/cli channel delete v2
@@ -157,7 +157,7 @@ git push origin --delete v1-maintenance
 ```
 
 :::tip[Conseil]
-Gardez une convention stricte canal <-> version majeure pour eviter les erreurs de diffusion.
+Gardez une convention stricte canal <-> version majeure pour éviter les erreurs de diffusion.
 :::
 
 :::caution[Avertissement]
@@ -165,12 +165,12 @@ Testez chaque bundle dans le canal cible avant promotion.
 :::
 
 :::note[Remarque]
-Supprimer un canal dont certains appareils ont encore l'override force un retour au canal de fallback selon vos regles de selection.
+Supprimer un canal dont certains appareils ont encore l'override force un retour au canal de fallback selon vos règles de sélection.
 :::
 
-## Maintenir les mises a jour 1.x
+## Maintenir les mises à jour 1.x
 
-Pour continuer a corriger la 1.x:
+Pour continuer à corriger la 1.x:
 
 1. basculez sur `v1-maintenance`
 2. appliquez des changements compatibles 1.x

@@ -1,39 +1,39 @@
 ---
 locale: fr
 title: Restaurations
-description: "Apprenez a revenir rapidement a une version precedente avec Capgo et a securiser vos deploiements grace aux mecanismes de rollback."
+description: "Apprenez à revenir rapidement à une version précédente avec Capgo et à sécuriser vos déploiements grâce aux mécanismes de rollback."
 sidebar:
   order: 5
 ---
 
 import { Aside, Steps } from '@astrojs/starlight/components';
 
-Les mises a jour en direct permettent d'aller vite, mais il faut aussi pouvoir revenir en arriere proprement si une version pose probleme.
+Les mises à jour en direct permettent d'aller vite, mais il faut aussi pouvoir revenir en arrière proprement si une version pose problème.
 
 Capgo propose des restaurations manuelles et une protection automatique.
 
 ## Protection automatique
 
-Capgo inclut un mecanisme de securite: si une erreur JavaScript critique survient avant `notifyAppReady()`, le plugin revient automatiquement a la version precedente fonctionnelle.
+Capgo inclut un mécanisme de sécurité : si une erreur JavaScript critique survient avant `notifyAppReady()`, le plugin revient automatiquement à la version précédente fonctionnelle.
 
 ### Fonctionnement
 
-Apres installation d'une mise a jour, Capgo attend l'appel a `notifyAppReady()` dans un delai configure.
+Après installation d'une mise à jour, Capgo attend l'appel à `notifyAppReady()` dans un délai configuré.
 
-Cet appel confirme que:
+Cet appel confirme que :
 
-- le bundle s'est charge sans erreur critique
-- les fonctions essentielles de l'application sont operationnelles
-- la mise a jour peut rester active
+- le bundle s'est chargé sans erreur critique
+- les fonctions essentielles de l'application sont opérationnelles
+- la mise à jour peut rester active
 
-Si `notifyAppReady()` n'est pas appelee:
+Si `notifyAppReady()` n'est pas appelée :
 
-1. Capgo considere la mise a jour comme en echec
-2. Capgo restaure automatiquement la version precedente
-3. Capgo marque la version defectueuse pour eviter sa reapplication
+1. Capgo considère la mise à jour comme un échec
+2. Capgo restaure automatiquement la version précédente
+3. Capgo marque la version défectueuse pour éviter sa réapplication
 
 <Aside type="tip">
-Appelez `notifyAppReady()` apres l'initialisation de vos composants critiques.
+Appelez `notifyAppReady()` après l'initialisation de vos composants critiques.
 </Aside>
 
 ```javascript
@@ -42,9 +42,9 @@ import { CapacitorUpdater } from '@capgo/capacitor-updater'
 await CapacitorUpdater.notifyAppReady()
 ```
 
-## Configurer le delai d'attente
+## Configurer le délai d'attente
 
-Vous pouvez regler le timeout avec `appReadyTimeout`:
+Vous pouvez régler le timeout avec `appReadyTimeout` :
 
 ```json
 {
@@ -56,47 +56,47 @@ Vous pouvez regler le timeout avec `appReadyTimeout`:
 }
 ```
 
-La valeur est en millisecondes. Augmentez-la si votre application initialise beaucoup de services au demarrage.
+La valeur est en millisecondes. Augmentez-la si votre application initialise beaucoup de services au démarrage.
 
-## Revenir a un bundle precedent
+## Revenir à un bundle précédent
 
-Chaque bundle assigne a un canal reste dans l'historique. Vous pouvez revenir a n'importe quel bundle precedent.
+Chaque bundle assigné à un canal reste dans l'historique. Vous pouvez revenir à n'importe quel bundle précédent.
 
 ![Interface de restauration](/rollback_ui.webp)
 
-### Methode principale (historique du canal)
+### Méthode principale (historique du canal)
 
 <Steps>
 
 1. Connectez-vous au [Tableau de bord Capgo](https://app.capgo.app).
 2. Ouvrez la section **Canaux**.
-3. Selectionnez le canal cible.
+3. Sélectionnez le canal cible.
 4. Ouvrez l'onglet **Historique**.
 5. Choisissez le bundle de retour.
-6. Definissez-le comme bundle actif.
+6. Définissez-le comme bundle actif.
 7. Confirmez l'action.
 
 </Steps>
 
-### Methode alternative (icone couronne)
+### Méthode alternative (icône couronne)
 
 <Steps>
 
-1. Dans la vue du canal, reperez le bundle voulu.
-2. Cliquez sur l'icone couronne pour le rendre actif. ![Options de gestion du canal](/select_bundle.webp)
+1. Dans la vue du canal, repérez le bundle voulu.
+2. Cliquez sur l'icône couronne pour le rendre actif. ![Options de gestion du canal](/select_bundle.webp)
 3. Confirmez la restauration.
 
 </Steps>
 
 <Aside type="note">
-Une restauration ne s'applique qu'au canal selectionne. Repetez l'operation pour les autres canaux si necessaire.
+Une restauration ne s'applique qu'au canal sélectionné. Répétez l'opération pour les autres canaux si nécessaire.
 </Aside>
 
-Au prochain check, les appareils de ce canal recevront le bundle restaure comme une nouvelle mise a jour.
+Au prochain check, les appareils de ce canal recevront le bundle restauré comme une nouvelle mise à jour.
 
-## Delier un canal
+## Délier un canal
 
-Si vous devez geler temporairement les diffusions:
+Si vous devez geler temporairement les diffusions :
 
 <Steps>
 1. Ouvrez le canal dans le tableau de bord.
@@ -104,11 +104,11 @@ Si vous devez geler temporairement les diffusions:
 3. Confirmez.
 </Steps>
 
-Un canal delie ne distribue plus de nouvelles mises a jour tant qu'il n'est pas relie a un bundle.
+Un canal délié ne distribue plus de nouvelles mises à jour tant qu'il n'est pas relié à un bundle.
 
-## Forcer le bundle integre (built-in)
+## Forcer le bundle intégré (built-in)
 
-En cas de probleme severe, vous pouvez forcer le retour au bundle web inclus dans le binaire natif publie en store.
+En cas de problème sévère, vous pouvez forcer le retour au bundle web inclus dans le binaire natif publié en store.
 
 <Steps>
 
@@ -118,19 +118,19 @@ En cas de probleme severe, vous pouvez forcer le retour au bundle web inclus dan
 
 </Steps>
 
-Tous les appareils de ce canal reviendront au bundle integre lors de leur prochain check.
+Tous les appareils de ce canal reviendront au bundle intégré lors de leur prochain check.
 
 <Aside type="caution">
-Action globale: verifiez l'impact sur tous les utilisateurs du canal avant execution.
+Action globale : vérifiez l'impact sur tous les utilisateurs du canal avant exécution.
 </Aside>
 
-## Supervision et plan de reponse
+## Supervision et plan de réponse
 
-Pour limiter l'impact d'une version defectueuse:
+Pour limiter l'impact d'une version défectueuse :
 
-- surveillez les crashs et retours utilisateurs juste apres diffusion
-- utilisez des canaux de preproduction pour valider avant production
-- formalisez qui decide d'un rollback et dans quels cas
+- surveillez les crashs et retours utilisateurs juste après diffusion
+- utilisez des canaux de préproduction pour valider avant production
+- formalisez qui décide d'un rollback et dans quels cas
 - communiquez clairement en cas d'incident majeur
 
-Avec cette discipline, vous gardez la vitesse des OTA tout en conservant un filet de securite robuste.
+Avec cette discipline, vous gardez la vitesse des OTA tout en conservant un filet de sécurité robuste.
