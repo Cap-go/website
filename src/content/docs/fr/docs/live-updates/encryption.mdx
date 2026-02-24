@@ -1,134 +1,106 @@
 ---
 locale: fr
 title: Chiffrement
-description: "Learn how Capgo's end-to-end Chiffrement secures your Application Bundles during transmission and storage, protecting your code and Utilisateur data."
-sidebar: 
+description: "Mettez en place le chiffrement de bout en bout des bundles Capgo pour proteger votre code pendant le transfert et le stockage."
+sidebar:
   order: 5
 ---
 
 import { Aside, Steps } from '@astrojs/starlight/components';
 
-Capgo provides robust end-to-end Chiffrement for your Application Bundles, ensuring that your JavaScript code and assets are protected during transmission and storage. This Chiffrement system is designed to give you Terminé control over your Application's Sécurité while maintaining the convenience of Mises à jour en direct.
+Capgo propose un chiffrement de bout en bout pour vos bundles OTA. Vos assets et votre code JavaScript restent proteges pendant l'upload, le transit et l'installation.
 
-## Aperçu
+## Apercu
 
-Capgo's Chiffrement system uses industry-standard cryptographic methods to protect your Bundles from unauthorized access. When Chiffrement is enabled, your Bundles are Chiffré before leaving your Développement environment and remain Chiffré until they're decrypted by your Application on the Utilisateur's Appareil.
+Le systeme utilise des primitives cryptographiques standard pour garantir:
 
-**True End-to-End Encryption**: Unlike other OTA update platforms that only sign updates (leaving the code publicly readable), Capgo provides true end-to-end encryption. This means only your users can decrypt your updates - no one else, including Capgo itself. Your bundle content remains completely private and unreadable throughout the entire delivery process.
+- la confidentialite du contenu
+- l'integrite des fichiers
+- l'authenticite des mises a jour
 
-<Aside type="tip">
-
-Chiffrement is particularly Important for:
-- Apps handling sensitive data or business logic
-- Entreprise applications with compliance requirements
-- Apps deployed in regulated industries
-- Organizations with strict Sécurité policies
-
-</Aside>
-
-## How Chiffrement Works
-
-Capgo uses a hybrid Chiffrement approach that combines RSA and AES Chiffrement for optimal Sécurité and performance:
-
-![Capgo Chiffrement Flow](/encryption_flow.webp)
-
-### 1. Key Generation
-- **Private Key**: Generated and stored securely in your Développement environment (used for Chiffrement)
-- **Public Key**: Derived from your private key and stored in your Application's Capacitor config (used for decryption)
-- **Session Keys**: Random AES keys generated for each Bundle Télécharger
-
-### 2. Chiffrement Process
-1. A random AES session key is generated for each Bundle Télécharger
-2. Your Bundle is Chiffré using the AES session key
-3. The Bundle checksum is calculated
-4. Both the AES session key and checksum are Chiffré together using your RSA private key (creating the "signature")
-5. The Chiffré Bundle and Chiffré signature are stored
-
-The checksum is Chiffré alongside the AES key to prevent tampering. Since only your RSA private key can Créer this signature, and only the corresponding public key can decrypt it, this ensures that both the AES session key and the expected checksum are authentic and haven't been modified by an attacker.
-
-### 3. Decryption Process
-1. Your Application downloads the Chiffré Bundle and Chiffré signature
-2. The Capgo SDK uses your RSA public key (stored in the Application) to decrypt the signature
-3. This reveals the AES session key and the original checksum
-4. The AES session key is used to decrypt the Bundle
-5. A checksum of the decrypted Bundle is calculated and compared with the original checksum for integrity verification
-
-This process ensures that even if an attacker intercepts the Chiffré Bundle, they cannot modify the AES session key or provide a fake checksum, because they would need your private key to Créer a valid signature that the public key can decrypt.
+**Difference clef:** contrairement a une simple signature de bundle, le contenu lui-meme est chiffre. Meme Capgo ne peut pas lire votre code en clair.
 
 <Aside type="tip">
-
-RSA cannot encrypt large amounts of data efficiently, so AES is used for the actual Bundle Chiffrement while RSA secures the AES key and provides integrity verification through checksum signing.
-
+Le chiffrement est particulierement utile pour les applications sensibles (finance, sante, B2B, logique metier proprietaire).
 </Aside>
 
-## Capgo vs Other Platforms
+## Comment fonctionne le chiffrement
 
-| Fonctionnalité | Capgo | Other OTA Platforms |
-|---------|-------|-------------------|
-| **Bundle Content** | Fully Chiffré (unreadable) | Publicly readable |
-| **Sécurité Method** | True end-to-end Chiffrement | Code signing only |
-| **Privacy Level** | Zero-knowledge (even Capgo can't read your code) | Platform can access your code |
-| **Protection** | Content + integrity + authenticity | Integrity + authenticity only |
+Capgo utilise une approche hybride RSA + AES.
 
-**Why This Matters:**
-- **Code signing** only verifies that Mises à jour haven't been tampered with and come from the right source
-- **End-to-end Chiffrement** ensures that your actual code content remains private and unreadable during transmission and storage
-- With Capgo's true end-to-end Chiffrement, only your Utilisateurs can decrypt Mises à jour - no one else, including Capgo itself
+![Capgo Encryption Flow](/encryption_flow.webp)
 
-## Chiffrement Methods
+### 1. Generation des cles
 
-Capgo uses Chiffrement V2 as the standard Chiffrement method:
+- **Cle privee**: utilisee par la CLI au moment de l'upload chiffre
+- **Cle publique**: enregistree dans la configuration de l'application
+- **Cle de session AES**: generee pour chaque upload
 
-### Chiffrement V2 (Current Standard)
-- Uses RSA-4096 for enhanced Sécurité
-- AES-256-GCM for authenticated Chiffrement
-- Provides integrity verification
-- Better performance and Sécurité
+### 2. Chiffrement
 
-### Chiffrement V1 (Obsolète)
-- Uses RSA-2048 for key Chiffrement
-- AES-256-CBC for Bundle Chiffrement
-- **No longer Disponible in the current CLI**
-- Legacy apps using V1 must Migrer to V2
+1. Generation d'une cle de session AES
+2. Chiffrement du bundle avec AES
+3. Calcul du checksum du bundle chiffre/dechiffre selon le flux
+4. Chiffrement RSA des metadonnees de verification (cle de session + checksum)
+5. Stockage du bundle chiffre + signature/metadonnees
+
+### 3. Dechiffrement cote app
+
+1. L'app telecharge bundle + metadonnees
+2. Le SDK lit la cle publique embarquee
+3. Le SDK recupere les informations necessaires au dechiffrement
+4. Le bundle est dechiffre localement
+5. Le checksum est verifie
+
+<Aside type="tip">
+AES chiffre les gros volumes efficacement; RSA protege la cle AES et les donnees de verification.
+</Aside>
+
+## Capgo vs plateformes OTA classiques
+
+| Fonctionnalite | Capgo | Plateformes OTA classiques |
+|---|---|---|
+| Contenu bundle | Chiffre de bout en bout | Souvent lisible en clair |
+| Garantie | Confidentialite + integrite + authenticite | Integrite + authenticite |
+| Confidentialite code | Elevee | Limitee |
+
+## Versions de chiffrement
+
+### Chiffrement V2 (standard)
+
+- RSA-4096
+- AES-256-GCM
+- verification d'integrite
+- meilleur niveau de securite
+
+### Chiffrement V1 (obsolete)
+
+- non supporte par la CLI actuelle
+- migration requise vers V2
 
 <Aside type="danger">
-
-Chiffrement V1 is no longer supported in the current Capgo CLI. If you're using V1 Chiffrement, you must Migrer to V2. See the [Migration Guide](/docs/Mise à niveau/Chiffrement-v1-to-v2/) for detailed instructions.
-
+Si vous etes encore en V1, migrez vers V2. Guide de migration: [Migration guide](/docs/upgrade/encryption-v1-to-v2/).
 </Aside>
 
-## Setting Up Chiffrement
+## Mise en place
 
-### Step 1: Generate Chiffrement Keys
-
-First, generate your Chiffrement keys using the Capgo CLI:
+### Etape 1: generer les cles
 
 ```shell
 # Generate new encryption keys (creates files in current directory)
 npx @capgo/cli@latest key create
 ```
 
-This creates:
-- `.capgo_key_v2`: Your private key (keep this secure!)
-- `.capgo_key_v2.pub`: Your public key (used by your app)
+Fichiers generes:
 
-These files are created in the current directory where you run the Commande.
+- `.capgo_key_v2` (privee, ne jamais commit)
+- `.capgo_key_v2.pub` (publique)
 
 <Aside type="caution">
-
-**Important Storage Notes:**
-- **Private Key (`.capgo_key_v2`)**: Never commit this to version control. This file should be kept secure and used only for encryption during bundle uploads.
-- **Public Key (`.capgo_key_v2.pub`)**: This is safe to commit to version control as it's a backup of your public key.
-- **File Location**: Keys are created in the current directory where you run the `key create` command.
-- **Public Key in Config**: You must run `key save` to store the public key in your Capacitor config for the mobile app to use.
-
-For Production use, store the private key securely (environment variables, key management services) and Retirer it from your local project after Configuration.
-
+Conservez la cle privee dans un coffre de secrets (CI/CD, KMS, Vault). Ne la versionnez jamais.
 </Aside>
 
-### Step 2: Enregistrer Your Public Key to Capacitor Config (Required)
-
-You **must** Enregistrer your public key to the Capacitor config so your mobile Application can decrypt Bundles:
+### Etape 2: enregistrer la cle publique (obligatoire)
 
 ```shell
 # Save public key from file to Capacitor config (required)
@@ -138,207 +110,142 @@ npx @capgo/cli@latest key save --key ./.capgo_key_v2.pub
 npx @capgo/cli@latest key save --key-data "$CAPGO_PUBLIC_KEY"
 ```
 
-### Step 3: Synchroniser Capacitor Platform (Required)
-
-After saving the public key, you **must** Synchroniser the Capacitor platform to copy the updated config to the Natif layer:
+### Etape 3: synchroniser les plateformes natives
 
 ```shell
-# Sync the platform to copy config to native
 npx cap sync
 ```
 
 <Aside type="caution">
-
-**Required Steps**: 
-1. The `key save` command stores the public key in your Capacitor config
-2. `npx cap sync` copies this config to the native layer where the mobile app can access it
-3. Without both steps, your Application won't be able to decrypt Chiffré Mises à jour
-
+Sans `key save` + `cap sync`, l'application native ne pourra pas dechiffrer les bundles.
 </Aside>
 
-## Encrypting Bundles
+## Chiffrer les bundles
 
-### Method 1: Encrypt During Télécharger
-
-The simplest way is to encrypt during the Télécharger process:
+### Methode 1: chiffrement direct a l'upload
 
 ```shell
 # Upload with automatic encryption
 npx @capgo/cli@latest bundle upload --key-v2
-
-# For external storage, you must encrypt first (see Manual Encryption Workflow below)
 ```
 
-### Method 2: Manual Chiffrement Workflow
-
-For more control, you can manually encrypt Bundles:
+### Methode 2: workflow manuel
 
 <Steps>
 
-1. **Créer a zip Bundle:**
-   ```shell
-   npx @capgo/cli@latest bundle zip com.example.app --path ./dist --key-v2
-   ```
+1. Creer le zip:
 
-2. **Encrypt the Bundle:**
-   ```shell
-   npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM_FROM_STEP_1
-   ```
-
-3. **Télécharger to your storage (e.g., S3) and register with Capgo:**
-   ```shell
-   # First upload the encrypted bundle to your storage (e.g., AWS S3)
-   aws s3 cp ./encrypted-bundle.zip s3://your-bucket/encrypted-bundle.zip
-   
-   # Then register with Capgo using the external URL
-   npx @capgo/cli@latest bundle upload --external https://your-storage.com/encrypted-bundle.zip --iv-session-key IV_SESSION_KEY_FROM_STEP_2
-   ```
-
-</Steps>
-
-## Key Management
-
-### Storing Keys Securely
-
-**Private Key Options:**
-
-1. **File-based (local Développement):**
-   ```shell
-   # Key stored as .capgo_key_v2 file in project root
-   npx @capgo/cli@latest bundle upload --key-v2
-   ```
-
-2. **Environment variable (CI/CD):**
-   ```shell
-   # Store in environment variable for CI
-   export CAPGO_PRIVATE_KEY="$(cat .capgo_key_v2)"
-   npx @capgo/cli@latest bundle upload --key-data-v2 "$CAPGO_PRIVATE_KEY"
-   ```
-
-**Public Key Setup (Required):**
 ```shell
-# Must save public key to Capacitor config for mobile app
-npx @capgo/cli@latest key save --key ./.capgo_key_v2.pub
+npx @capgo/cli@latest bundle zip com.example.app --path ./dist --key-v2
 ```
 
-**Production Environment:**
-- Store private keys in secure key management services (AWS KMS, Azure Key Vault, etc.)
-- Use CI/CD secret management for private keys
-- Never commit private keys to Version control
+2. Chiffrer:
 
-**Key Usage:**
-- **Private Key**: Used by CLI for Chiffrement during Bundle Télécharger (keep secure)
-- **Public Key**: Stored in Application Configuration for decryption on Appareil (safe to commit)
+```shell
+npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM_FROM_STEP_1
+```
 
-### Key Rotation
+3. Uploader sur votre stockage puis enregistrer l'URL:
 
-Regularly rotate your Chiffrement keys for enhanced Sécurité:
-
-<Steps>
-
-1. **Generate Nouveau keys:**
-   ```shell
-   # Navigate to desired directory first, then create keys
-   mkdir ./new-keys && cd ./new-keys
-   npx @capgo/cli@latest key create
-   ```
-
-2. **Enregistrer the Nouveau public key to Capacitor config:**
-   ```shell
-   npx @capgo/cli@latest key save --key ./new-keys/.capgo_key_v2.pub
-   ```
-
-3. **Mise à jour your Application Configuration** with the Nouveau public key
-
-4. **Déployer the updated Application** before uploading Chiffré Bundles with the Nouveau key
+```shell
+aws s3 cp ./encrypted-bundle.zip s3://your-bucket/encrypted-bundle.zip
+npx @capgo/cli@latest bundle upload --external https://your-storage.com/encrypted-bundle.zip --iv-session-key IV_SESSION_KEY_FROM_STEP_2
+```
 
 </Steps>
 
-## Sécurité Best Practices
+## Gestion des cles
 
-### Key Sécurité
-- **Never share private keys** between environments or team Membres
-- **Use different keys** for different environments (dev, staging, Production)
-- **Rotate keys regularly** (recommended: every 6-12 months)
-- **Store keys securely** using proper key management systems
+### Stockage recommande
 
-### Bundle Sécurité
-- **Always verify** Bundle integrity after decryption
-- **Monitor** for unusual Télécharger patterns or failures
-- **Use HTTPS** for all Bundle URLs (required for mobile apps)
-- **Implement** proper Erreur handling for decryption failures
+- local dev: fichier temporaire
+- CI/CD: variable secrete ou manager de secrets
+- production: KMS / Vault / Key Vault
 
-### Access Control
-- **Limit access** to Chiffrement keys to authorized personnel only
-- **Use role-based access** for key management operations
-- **Audit** key Utilisation and access regularly
-- **Implement** proper backup and recovery procedures
+Exemple CI/CD:
 
-## Dépannage Chiffrement
+```shell
+export CAPGO_PRIVATE_KEY="$(cat .capgo_key_v2)"
+npx @capgo/cli@latest bundle upload --key-data-v2 "$CAPGO_PRIVATE_KEY"
+```
 
-### Problèmes courants
+### Rotation des cles
 
-**Decryption failures:**
-- Verify the private key matches the public key used for Chiffrement
-- Check that the `ivSessionKey` is correct
-- Ensure you're using Chiffrement V2 (V1 is no longer supported)
+<Steps>
 
-**Key-related errors:**
-- Confirm the private key format is correct (PEM format)
-- Verify the key hasn't been corrupted during storage/transfer
-- Vérifier that the key has proper permissions in your Application Configuration
+1. Generer de nouvelles cles:
 
-**Performance issues:**
-- Large Bundles may take longer to encrypt/decrypt
-- Consider using differential Mises à jour to reduce Bundle sizes
-- Monitor Appareil performance during decryption
+```shell
+mkdir ./new-keys && cd ./new-keys
+npx @capgo/cli@latest key create
+```
 
-### Débogage Commandes
+2. Enregistrer la nouvelle cle publique:
 
-Vérifier Chiffrement status:
+```shell
+npx @capgo/cli@latest key save --key ./new-keys/.capgo_key_v2.pub
+```
+
+3. Publier une version native embarquant la nouvelle cle publique.
+
+4. Basculer les futurs uploads sur la nouvelle cle privee.
+
+</Steps>
+
+## Bonnes pratiques de securite
+
+- une cle privee par environnement (dev/staging/prod)
+- rotation periodique
+- audit des acces aux secrets
+- HTTPS obligatoire pour les URLs de bundles externes
+- supervision des erreurs de dechiffrement
+
+## Depannage
+
+Problemes frequents:
+
+- cle privee/c publique non correspondantes
+- `ivSessionKey` invalide
+- oubli de `key save` ou de `cap sync`
+- tentative d'utilisation V1
+
+Commandes utiles:
+
 ```shell
 npx @capgo/cli@latest app debug
 ```
 
-Test Chiffrement/decryption workflow:
 ```shell
-# Test the complete workflow: zip → encrypt → decrypt → unzip
+# Test workflow
 npx @capgo/cli@latest bundle zip com.example.app --key-v2
 npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM --json
 npx @capgo/cli@latest bundle decrypt ./encrypted-bundle.zip IV_SESSION_KEY
 ```
 
-## Compliance and Standards
+## Conformite
 
-Capgo's Chiffrement implementation follows industry standards:
+Le schema cryptographique est compatible avec des exigences de securite enterprise:
 
-- **AES-256**: FIPS 140-2 approved Chiffrement algorithm
-- **RSA-4096**: Strong asymmetric Chiffrement for key protection
-- **GCM Mode**: Provides both confidentiality and authenticity
-- **Secure Random**: Cryptographically secure random number generation
+- AES-256
+- RSA-4096
+- mode GCM
+- generation aleatoire securisee
 
-This makes Capgo suitable for applications requiring compliance with:
-- GDPR (General Data Protection Regulation)
-- HIPAA (Health Insurance Portability and Accountability Act)
-- SOC 2 (Service Organisation Control 2)
-- ISO 27001 (Information Sécurité Management)
+References frequentes:
 
-## Performance Considerations
+- GDPR
+- HIPAA
+- SOC 2 (Service Organization Control 2)
+- ISO 27001
 
-### Chiffrement Overhead
-- **Bundle size**: Chiffré Bundles are slightly larger (~1-2% overhead)
-- **Processing time**: Chiffrement/decryption adds minimal latency
-- **Memory Utilisation**: Temporary increase during Chiffrement/decryption operations
+## Impact performance
 
-### Optimization Tips
-- Use differential Mises à jour to minimize Chiffré data transfer
-- Optimize your Bundle size by converting images to WebP format
-- Minimize JavaScript and CSS files before bundling
-- Retirer unused dependencies and code
-- Monitor Appareil performance on older/slower Appareils
+- leger surcout de taille bundle
+- leger surcout CPU au chiffrement/dechiffrement
+- benefice significatif si combine aux mises a jour differentielles
 
-## Suivant Steps
+## Etapes suivantes
 
-- Learn À propos [Custom Storage](/docs/live-Mises à jour/custom-storage/) to use Chiffrement with your own infrastructure
-- Explore [Canaux](/docs/live-Mises à jour/Canaux/) to manage Chiffré Bundles across environments
-- Set up [CI/CD Integration](/docs/getting-started/cicd-integration/) to automate Chiffré deployments
+- Decouvrir [Custom Storage](/docs/live-updates/custom-storage/) pour l'hebergement externe
+- Gerer les [Canaux](/docs/live-updates/channels/) pour piloter les deploiements
+- Mettre en place la [CI/CD Integration](/docs/getting-started/cicd-integration/) pour automatiser les releases

@@ -8,7 +8,7 @@ sidebar:
 
 import { Aside, Steps } from '@astrojs/starlight/components';
 
-A Live Mise à jour Canal points to a specific JS Bundle Construction of your Application that will be shared with any Appareils configured to listen to that Canal for Mises à jour. When you [Installer the Capgo Mises à jour en direct SDK](/docs/getting-started/Démarrage rapide/) in your Application, any Natif binary configured to that Canal will Vérifier for Disponible Mises à jour whenever the Application is launched. You can change the Construction a Canal points to at any time and can also roll Retour to Précédent builds if needed.
+A Live Mise à jour Canal points to a specific JS Bundle Construction of your Application that will be shared with any Appareils configured to listen to that Canal for Mises à jour. When you [Installer the Capgo Mises à jour en direct SDK](/docs/getting-started/quickstart/) in your Application, any Natif binary configured to that Canal will Vérifier for Disponible Mises à jour whenever the Application is launched. You can change the Construction a Canal points to at any time and can also roll Retour to Précédent builds if needed.
 
 ## How a Appareil picks a Canal (precedence)
 
@@ -118,7 +118,7 @@ Use this to restrict which kinds of Mises à jour the Canal will automatically d
 - metadata: Require a minimum update version metadata on each bundle. Configure via CLI using `--min-update-version` or `--auto-min-update-version`. If missing, the channel is marked misconfigured and updates will be rejected until set.
 - none: Allow all Mises à jour according to semver compatibility.
 
-Learn more details and Exemples in Désactiver Mises à jour strategy at /docs/CLI/Commandes/#Désactiver-Mises à jour-strategy.
+Learn more details and Exemples in Désactiver Mises à jour strategy at /docs/cli/commands/#disable-updates-strategy.
 
 Exemple (CLI):
 
@@ -195,7 +195,7 @@ Now that you understand Canaux, you're ready to Démarrer deploying Mises à jou
 3. Télécharger a Construction and assign it to that Canal
 4. Launch the Application and wait for the Mise à jour!
 
-For a more detailed walkthrough, see the [Deploying Mises à jour en direct](/docs/getting-started/Déployer/) Guide. Happy updating!
+For a more detailed walkthrough, see the [Deploying Mises à jour en direct](/docs/getting-started/deploy/) Guide. Happy updating!
 
 ## Advanced Canal Utilisation: Utilisateur Segmentation
 
@@ -206,4 +206,4 @@ Canaux can be used for more than just Développement stages. They're a powerful 
 - Gradual Fonctionnalité rollouts
 - Bêta Test programs
 
-Learn how to implement these advanced use cases in our Guide: [How to Segment Utilisateurs by Plan and Canaux for Fonctionnalité Flags and A/B Test](/blog/how-to-segment-Utilisateurs-by-plan-and-Canaux/).
+Learn how to implement these advanced use cases in our Guide: [How to Segment Utilisateurs by Plan and Canaux for Fonctionnalité Flags and A/B Test](/blog/how-to-segment-users-by-plan-and-channels/).

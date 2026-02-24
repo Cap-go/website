@@ -1,54 +1,54 @@
 ---
 locale: fr
 title: "Breaking Changes"
-description: "How to handle breaking changes with versioned Canaux"
-sidebar: 
+description: "Comment gerer les changements incompatibles avec des canaux versionnes"
+sidebar:
   order: 6
 ---
 
-This Documentation explains how to handle breaking changes in your Application using versioned Canaux. This approach allows you to maintain different versions of your Application while ensuring Utilisateurs receive compatible Mises à jour.
+Cette page explique comment gerer les changements incompatibles (breaking changes) avec Capgo en utilisant des canaux par version majeure.
 
-## Exemple Scenario
+## Scenario type
 
-Let's say you have:
-- Application Version 1.2.3 (old Version) - uses Production Canal
-- Application Version 2.0.0 (Nouveau Version with breaking changes) - uses v2 Canal
-- Live Mise à jour 1.2.4 (compatible with 1.2.3)
-- Live Mise à jour 2.0.1 (compatible with 2.0.0)
+Vous avez:
 
-## Strategy: Always Use defaultChannel for Major Versions
+- Application 1.2.3 (ancienne generation) sur le canal `production`
+- Application 2.0.0 (nouvelle generation) sur le canal `v2`
+- Mise a jour OTA 1.2.4 compatible 1.x
+- Mise a jour OTA 2.0.1 compatible 2.x
 
-**Recommended approach:** Set a `defaultChannel` for every major version. This ensures you can always push updates to specific user groups without relying on dynamic channel assignment.
+## Strategie recommandee
+
+Definissez un `defaultChannel` par version majeure. Cela vous permet de controler precisement quels utilisateurs recoivent quelles mises a jour.
 
 ```ts
-// Version 1.x releases
+// Releases 1.x
 defaultChannel: 'v1'
 
-// Version 2.x releases  
+// Releases 2.x
 defaultChannel: 'v2'
 
-// Version 3.x releases (future)
+// Releases 3.x
 defaultChannel: 'v3'
 ```
 
-:::Conseil
-**Benefits of this approach:**
-- **Always have control** over which Utilisateurs receive Mises à jour
-- **No dynamic Canal switching** needed in your Application code
-- **Clear separation** between different Application versions
-- **Flexibility** to Pousser Mises à jour to any specific Version group
+:::tip[Conseil]
+Avantages:
+- controle clair du routage des utilisateurs
+- separation nette entre generations d'apps
+- mises a jour ciblees sans logique complexe cote client
 :::
 
-## 1. Créer Canal for Nouveau Version
+## 1. Creer un canal pour la nouvelle version
 
 ```bash
 # Create channel for version 2.x
 npx @capgo/cli channel create v2
 ```
 
-## 2. Mise à jour Capacitor Config for Version 2.0.0
+## 2. Mettre a jour la config Capacitor pour 2.0.0
 
-Mise à jour your Capacitor config before Construction Version 2.0.0 for the Application Store:
+Avant de publier la version store 2.0.0:
 
 ```ts
 // capacitor.config.ts
@@ -59,8 +59,7 @@ const config: CapacitorConfig = {
   appName: 'Example App',
   plugins: {
     CapacitorUpdater: {
-      // ... other options
-      defaultChannel: 'v2' // All 2.0.0 users will use v2 channel
+      defaultChannel: 'v2'
     }
   }
 };
@@ -68,61 +67,56 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-:::Remarque
-**For version 1.x:** If you didn't set a `defaultChannel` initially, version 1.x users are on the `production` channel. For future major versions, always set a specific channel like `v3`, `v4`, etc.
+:::note[Remarque]
+Si vous n'aviez pas configure `defaultChannel` en 1.x, ces utilisateurs restent generalement sur `production`.
 :::
 
-## 3. Manage Separate Code Branches
+## 3. Maintenir des branches code separees
 
-Créer separate git branches to maintain compatibility between Application versions:
+Gardez une branche par generation native incompatible.
 
 ```bash
 # Create and maintain a branch for version 1.x updates
 git checkout -b v1-maintenance
 git push origin v1-maintenance
 
-# Your main branch continues with version 2.x development
+# Main branch for 2.x
 git checkout main
 ```
 
-:::Avertissement
-**Critical:** Never push JavaScript bundles to older apps that expect native code/APIs they don't have. Always build updates from the appropriate branch:
-- **v1-maintenance branch**: For Mises à jour to 1.x apps (Production Canal)
-- **main branch**: For Mises à jour to 2.x apps (v2 Canal)
+:::caution[Avertissement]
+N'envoyez jamais a une app 1.x un bundle qui depend d'APIs natives uniquement presentes en 2.x.
 :::
 
-## 4. Télécharger Bundles to Respective Canaux
+## 4. Uploader vers le bon canal
 
 ```bash
-# For 1.x updates: Build from v1-maintenance branch
+# Updates for 1.x apps
 git checkout v1-maintenance
-# Make your 1.x compatible changes here
 npx @capgo/cli bundle upload --channel production
 
-# For 2.x updates: Build from main branch  
+# Updates for 2.x apps
 git checkout main
-# Make your 2.x changes here
 npx @capgo/cli bundle upload --channel v2
 ```
 
-## 5. Activer Self-Assignment
+## 5. Autoriser l'auto-assignment si necessaire
 
 ```bash
-# Allow apps to self-assign to v2 channel
 npx @capgo/cli channel set v2 --self-assign
 ```
 
-## 6. Déployer to Application Store
+## 6. Publier la version store
 
-Construction and Déployer Version 2.0.0 to the Application Store. All Utilisateurs who Télécharger this Version (whether Nouveau Utilisateurs or existing Utilisateurs upgrading) will automatically use the v2 Canal because it's configured in the Application Bundle.
+Publiez la version 2.0.0. Les utilisateurs qui installent cette version basculent automatiquement sur `v2` grace a `defaultChannel`.
 
-:::Remarque
-**No code changes needed!** Since `defaultChannel: 'v2'` is bundled with the app store version, all users downloading version 2.0.0 will automatically use the correct channel.
+:::note[Remarque]
+Aucun changement runtime supplementaire n'est necessaire si `defaultChannel` est deja embarque dans le binaire.
 :::
 
-## Scaling to Future Versions
+## Passage aux versions suivantes
 
-When you Libération Version 3.0.0 with more breaking changes:
+Pour 3.0.0:
 
 ```bash
 # Create channel for version 3.x
@@ -132,72 +126,64 @@ npx @capgo/cli channel create v3
 ```ts
 // capacitor.config.ts for version 3.0.0
 const config: CapacitorConfig = {
-  // ...
   plugins: {
     CapacitorUpdater: {
-      defaultChannel: 'v3' // Version 3.x users
+      defaultChannel: 'v3'
     }
   }
 };
 ```
 
-Now you can Pousser Mises à jour to any Version:
-- `production` channel → Version 1.x users
-- `v2` channel → Version 2.x users  
-- `v3` channel → Version 3.x users
+Vous obtenez alors un routage clair:
 
-## 7. Cleanup (After Migration)
+- `production` -> utilisateurs 1.x
+- `v2` -> utilisateurs 2.x
+- `v3` -> utilisateurs 3.x
 
-Once all Utilisateurs have migrated to Version 2.x (count 3-4 months):
+## 7. Nettoyage apres migration
 
-1. Remove `defaultChannel` from your Capacitor config
-2. Supprimer the v2 Canal:
+Quand la base utilisateur 1.x est negligeable:
+
+1. retirez `defaultChannel` des futurs binaires si necessaire
+2. supprimez les canaux/branches obsoletes
 
 ```bash
 npx @capgo/cli channel delete v2
 ```
-
-3. Supprimer the v1-maintenance branch:
 
 ```bash
 git branch -d v1-maintenance
 git push origin --delete v1-maintenance
 ```
 
-:::Conseil
-This approach ensures Utilisateurs only receive Mises à jour compatible with their Application Version
+:::tip[Conseil]
+Gardez une convention stricte canal <-> version majeure pour eviter les erreurs de diffusion.
 :::
 
-:::Avertissement
-Always Test Mises à jour thoroughly in each Canal before Déploiement
+:::caution[Avertissement]
+Testez chaque bundle dans le canal cible avant promotion.
 :::
 
-:::Remarque
-You can safely Supprimer the v2 Canal in Capgo even if some Utilisateurs still have the Canal override. They will automatically receive Mises à jour from the Production Canal instead.
+:::note[Remarque]
+Supprimer un canal dont certains appareils ont encore l'override force un retour au canal de fallback selon vos regles de selection.
 :::
 
-## Maintaining Version 1.x Mises à jour
+## Maintenir les mises a jour 1.x
 
-To send Mises à jour compatible with Version 1.x:
+Pour continuer a corriger la 1.x:
 
-1. Switch to the v1-maintenance branch:
+1. basculez sur `v1-maintenance`
+2. appliquez des changements compatibles 1.x
+3. uploadez sur `production`
+
 ```bash
 git checkout v1-maintenance
-```
-
-2. Make your changes and commit:
-```bash
-# Make 1.x compatible changes
 git add .
 git commit -m "Fix for v1.x"
 git push origin v1-maintenance
-```
-
-3. Construction and Télécharger to Production Canal:
-```bash
 npx @capgo/cli bundle upload --channel production
 ```
 
-:::Conseil
-Keep your v1-maintenance branch up to date with bug fixes that are compatible with Version 1.x, but never merge breaking changes from main
-::: 
+:::tip[Conseil]
+Ne mergez pas des changements cassants de `main` dans la branche 1.x.
+:::
