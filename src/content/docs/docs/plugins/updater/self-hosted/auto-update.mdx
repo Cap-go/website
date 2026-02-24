@@ -42,7 +42,7 @@ The plugin will do a POST call to your API each time the app is open, with this 
 
 ```typescript
 interface AppInfos {
-    "platform": "ios" | "android",
+    "platform": "ios" | "android" | "electron",
     "device_id": "UUID_of_device_unique_by_install",
     "app_id": "APPID_FROM_CAPACITOR_CONFIG",
     "custom_id": "your_custom_id_set_on_runtime",

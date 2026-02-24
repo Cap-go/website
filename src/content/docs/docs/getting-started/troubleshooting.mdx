@@ -77,7 +77,7 @@ The debug command is especially useful for identifying issues with the update do
 
 ### Debugging with Native Logs
 
-In addition to the Capgo debug command, the native logs on Android and iOS can provide valuable troubleshooting information, especially for issues on the native side of the update process.
+In addition to the Capgo debug command, the native logs on Android, iOS, and Electron can provide valuable troubleshooting information, especially for issues on the native side of the update process.
 
 #### Android Logs
 
@@ -126,7 +126,7 @@ iOS-specific issues you might identify in the logs include:
 - Insufficient storage space for the update bundle
 - Failure to properly extract or apply the update bundle
 
-On both platforms, the native logs provide a lower-level view into the update process, with more details on the native implementation. They are especially useful for identifying issues that occur outside of the Capgo JavaScript layer.
+Across platforms, the native logs provide a lower-level view into the update process, with more details on the native implementation. They are especially useful for identifying issues that occur outside of the Capgo JavaScript layer.
 
 When troubleshooting a tricky live update problem, it's a good idea to capture both the Capgo debug logs and the native logs for a comprehensive picture of what's happening. The two logs together will give you the best chance of identifying and resolving the issue.
 

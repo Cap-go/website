@@ -14,7 +14,7 @@ Device data is retained for **90 days** from the last device activity. Devices t
 ## Understanding Devices
 
 Each device has unique characteristics and states:
-- **Platform**: iOS or Android
+- **Platform**: iOS, Android, or Electron
 - **Bundle (version)**: Current bundle (version) and native build version
 - **Environment**: Production or development, emulator or physical device
 - **Channel**: Current update channel assignment
@@ -115,7 +115,7 @@ interface Device {
   version_name: string | null; // bundle (version) name
   channel?: string;
   app_id: string;
-  platform: "ios" | "android";
+  platform: "ios" | "android" | "electron";
   plugin_version: string;
   os_version: string;
   version_build: string;
@@ -138,7 +138,7 @@ interface Device {
   version_name: string | null; // bundle (version) name
   channel?: string;
   app_id: string;
-  platform: "ios" | "android";
+  platform: "ios" | "android" | "electron";
   plugin_version: string;
   os_version: string;
   version_build: string;
