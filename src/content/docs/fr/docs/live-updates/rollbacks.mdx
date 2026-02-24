@@ -1,0 +1,136 @@
+---
+locale: fr
+title: Restaurations
+description: "Apprenez à revenir rapidement à une version précédente avec Capgo et à sécuriser vos déploiements grâce aux mécanismes de rollback."
+sidebar:
+  order: 5
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Les mises à jour en direct permettent d'aller vite, mais il faut aussi pouvoir revenir en arrière proprement si une version pose problème.
+
+Capgo propose des restaurations manuelles et une protection automatique.
+
+## Protection automatique
+
+Capgo inclut un mécanisme de sécurité : si une erreur JavaScript critique survient avant `notifyAppReady()`, le plugin revient automatiquement à la version précédente fonctionnelle.
+
+### Fonctionnement
+
+Après installation d'une mise à jour, Capgo attend l'appel à `notifyAppReady()` dans un délai configuré.
+
+Cet appel confirme que :
+
+- le bundle s'est chargé sans erreur critique
+- les fonctions essentielles de l'application sont opérationnelles
+- la mise à jour peut rester active
+
+Si `notifyAppReady()` n'est pas appelée :
+
+1. Capgo considère la mise à jour comme un échec
+2. Capgo restaure automatiquement la version précédente
+3. Capgo marque la version défectueuse pour éviter sa réapplication
+
+<Aside type="tip">
+Appelez `notifyAppReady()` après l'initialisation de vos composants critiques.
+</Aside>
+
+```javascript
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+await CapacitorUpdater.notifyAppReady()
+```
+
+## Configurer le délai d'attente
+
+Vous pouvez régler le timeout avec `appReadyTimeout` :
+
+```json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "appReadyTimeout": 10000
+    }
+  }
+}
+```
+
+La valeur est en millisecondes. Augmentez-la si votre application initialise beaucoup de services au démarrage.
+
+## Revenir à un bundle précédent
+
+Chaque bundle assigné à un canal reste dans l'historique. Vous pouvez revenir à n'importe quel bundle précédent.
+
+![Interface de restauration](/rollback_ui.webp)
+
+### Méthode principale (historique du canal)
+
+<Steps>
+
+1. Connectez-vous au [Tableau de bord Capgo](https://app.capgo.app).
+2. Ouvrez la section **Canaux**.
+3. Sélectionnez le canal cible.
+4. Ouvrez l'onglet **Historique**.
+5. Choisissez le bundle de retour.
+6. Définissez-le comme bundle actif.
+7. Confirmez l'action.
+
+</Steps>
+
+### Méthode alternative (icône couronne)
+
+<Steps>
+
+1. Dans la vue du canal, repérez le bundle voulu.
+2. Cliquez sur l'icône couronne pour le rendre actif. ![Options de gestion du canal](/select_bundle.webp)
+3. Confirmez la restauration.
+
+</Steps>
+
+<Aside type="note">
+Une restauration ne s'applique qu'au canal sélectionné. Répétez l'opération pour les autres canaux si nécessaire.
+</Aside>
+
+Au prochain check, les appareils de ce canal recevront le bundle restauré comme une nouvelle mise à jour.
+
+## Délier un canal
+
+Si vous devez geler temporairement les diffusions :
+
+<Steps>
+1. Ouvrez le canal dans le tableau de bord.
+2. Cliquez sur **Unlink**.
+3. Confirmez.
+</Steps>
+
+Un canal délié ne distribue plus de nouvelles mises à jour tant qu'il n'est pas relié à un bundle.
+
+## Forcer le bundle intégré (built-in)
+
+En cas de problème sévère, vous pouvez forcer le retour au bundle web inclus dans le binaire natif publié en store.
+
+<Steps>
+
+1. Ouvrez le canal dans le tableau de bord.
+2. Cliquez sur **Built-in Bundle**.
+3. Confirmez.
+
+</Steps>
+
+Tous les appareils de ce canal reviendront au bundle intégré lors de leur prochain check.
+
+<Aside type="caution">
+Action globale : vérifiez l'impact sur tous les utilisateurs du canal avant exécution.
+</Aside>
+
+## Supervision et plan de réponse
+
+Pour limiter l'impact d'une version défectueuse :
+
+- surveillez les crashs et retours utilisateurs juste après diffusion
+- utilisez des canaux de préproduction pour valider avant production
+- formalisez qui décide d'un rollback et dans quels cas
+- communiquez clairement en cas d'incident majeur
+
+Avec cette discipline, vous gardez la vitesse des OTA tout en conservant un filet de sécurité robuste.
