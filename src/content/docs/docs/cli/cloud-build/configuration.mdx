@@ -11,18 +11,20 @@ import MermaidGraph from '@/components/MermaidGraph.astro';
 
 export const precedenceGraph = `flowchart LR
     A["🔧 CLI Flag"] -->|overrides| B["🌍 Environment Variable"]
-    B -->|overrides| C["💾 Saved Credentials"]
+    B -->|overrides| C["📁 Local Credentials"]
+    C -->|overrides| D["🏠 Global Credentials"]
     style A fill:#6366f1,color:#fff,stroke:#4f46e5
     style B fill:#8b5cf6,color:#fff,stroke:#7c3aed
-    style C fill:#a78bfa,color:#fff,stroke:#8b5cf6`;
+    style C fill:#a78bfa,color:#fff,stroke:#8b5cf6
+    style D fill:#c4b5fd,color:#1e1b4b,stroke:#a78bfa`;
 
 Complete reference for every Cloud Build configuration option. Use this page to find the CLI flag, environment variable, or credential key for any build setting.
 
 ## Configuration Precedence
 
-Every build option can be set in three ways. When the same option is set in multiple places, higher-priority sources win:
+Every build option can be set in multiple ways. When the same option is set in multiple places, higher-priority sources win:
 
-<MermaidGraph graph={precedenceGraph} ariaLabel="Configuration precedence: CLI flags override environment variables, which override saved credentials" />
+<MermaidGraph graph={precedenceGraph} ariaLabel="Configuration precedence: CLI flags override environment variables, which override local credentials, which override global credentials" />
 
 **Example:** If your saved credentials have `SKIP_BUILD_NUMBER_BUMP=true` but you pass `--no-skip-build-number-bump` on the CLI, the CLI flag wins and build numbers will be auto-incremented.
 
@@ -227,8 +229,8 @@ bunx @capgo/cli build credentials save \
 
 | Flag | Location | Use Case |
 |------|----------|----------|
-| *(default)* | `~/.capgo-credentials/` | Global — shared across all projects on your machine |
-| `--local` | `.capgo-credentials.json` in project root | Per-project — useful if you have multiple apps |
+| *(default)* | `~/.capgo-credentials/credentials.json` | Global — shared across all projects on your machine |
+| `--local` | `.capgo-credentials.json` in project root | Per-project — overrides global when both exist |
 
 <Aside type="caution">
 Add `.capgo-credentials.json` to your `.gitignore` if using local credentials. Never commit credentials to version control.
