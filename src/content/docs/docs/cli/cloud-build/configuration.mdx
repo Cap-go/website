@@ -232,6 +232,8 @@ bunx @capgo/cli build credentials save \
 | *(default)* | `~/.capgo-credentials/credentials.json` | Global — shared across all projects on your machine |
 | `--local` | `.capgo-credentials.json` in project root | Per-project — overrides global when both exist |
 
+Credentials are keyed by **app ID** (e.g. `com.example.myapp`), so a single credentials file can store settings for multiple apps without conflicts. Each app's credentials are further split by platform (`ios` / `android`).
+
 <Aside type="caution">
 Add `.capgo-credentials.json` to your `.gitignore` if using local credentials. Never commit credentials to version control.
 </Aside>
