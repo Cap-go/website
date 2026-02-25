@@ -130,7 +130,7 @@ iOS-specific issues you might identify in the logs include:
 
 For Electron apps, check both the main process and renderer process output:
 
-1. Run the Electron app from your terminal using your normal launch command (for example `npm run electron:dev` or `npm run electron:serve`) and watch the terminal output for startup, update checks, and network errors.
+1. Run the Electron app from your terminal using your normal launch command (for example `bun run electron:dev` or `bun run electron:serve`) and watch the terminal output for startup, update checks, and network errors.
 2. Open DevTools in the renderer window (View → Toggle Developer Tools) and inspect console logs and failed network requests while reproducing the update flow.
 3. For packaged apps, check OS log tools for crashes or startup failures:
    - **macOS**: open `Console.app` and filter on your app name
