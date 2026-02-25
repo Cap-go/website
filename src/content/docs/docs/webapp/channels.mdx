@@ -16,7 +16,7 @@ When a device asks Capgo for an update, the channel it will use is decided in th
 
 Why the **cloud default** is the main path:
 - Instant rollout or rollback without rebuilding or re‑publishing native binaries.
-- One place to manage both iOS & Android behavior.
+- One place to manage iOS, Android, and Electron behavior.
 - Safer: you can confirm bundles exist and settings are correct before switching default.
 - Auditable changes (team members can see who changed what in the UI / logs).
 Design principle: Layers above (force / override / config) are *exceptions* (debug single user, QA switching, test build defaults). Normal users flow to the cloud default.
@@ -33,7 +33,7 @@ Devices stay on their current channel unless you:
 - Call `setChannel()` (creating/replacing the cloud override) or change it manually in the dashboard.
 - Remove / archive the channel they are on (then they will fall back through the precedence again at next check).
 
-If a channel is disabled for a platform (see iOS / Android toggles) and would otherwise have been selected, the selection skips it and falls back to the next rule.
+If a channel is disabled for a platform (see iOS / Android / Electron toggles) and would otherwise have been selected, the selection skips it and falls back to the next rule.
 
 > Note: Setting `defaultChannel` means changing it requires a new binary; use it intentionally for test/QA, not for general production control.
 
@@ -89,16 +89,18 @@ Clicking on the channel name will open a modal where you can manage the channel 
 The channel settings page contains all the configuration options for your channel. Let's go through each setting.
 
 ---
-First the `Default channel` toggle. When enabled, this channel becomes the default for new devices. For a comprehensive explanation of how default channels work, including how to set up platform-specific defaults (one for iOS, one for Android), see the [Default Channel Configuration](/docs/webapp/main-app-page/#default-channel-configuration) section.
+First the `Default channel` toggle. When enabled, this channel becomes the default for new devices. For a comprehensive explanation of how default channels work, including how to set up platform-specific defaults (one for iOS, one for Android, and one for Electron), see the [Default Channel Configuration](/docs/webapp/main-app-page/#default-channel-configuration) section.
 
 ---
 Second the `IOS` setting. This is relatively simple. If this is false then IOS devices will not be allowed to download updates from this channel.
 
 Third is the `Android` setting. This is similar to `IOS`. If this is false then Android devices will not be allowed to download updates from this channel.
 
-Fourth is the `Disable auto downgrade under native` setting. If this is true then it will be impossible to downgrade from a native version. This means that if you have uploaded a `1.2.0` version to the app store or play store and try to set the channel version to `1.1.0` then the update (downgrade) will fail.
+Fourth is the `Electron` setting. This is similar to `IOS` and `Android`. If this is false then Electron apps will not be allowed to download updates from this channel.
 
-Fifth is the `Disable auto update`. This setting is quite complex, and you can learn more about it [here](/docs/cli/commands/#disable-updates-strategy)
+Fifth is the `Disable auto downgrade under native` setting. If this is true then it will be impossible to downgrade from a native version. This means that if you have uploaded a `1.2.0` version to the app store or play store and try to set the channel version to `1.1.0` then the update (downgrade) will fail.
+
+Sixth is the `Disable auto update`. This setting is quite complex, and you can learn more about it [here](/docs/cli/commands/#disable-updates-strategy)
 
 As for `Allow development build`. If this is true then development builds will be allowed to download updates from this channel. If not then any update request that has the `prod` set to false will be rejected. This is mostly useful for testing purposes.
 

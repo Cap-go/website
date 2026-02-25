@@ -75,15 +75,15 @@ When a device requests an update from Capgo, the system determines which channel
 
 ### Platform-Specific Default Channels
 
-You can configure **two separate default channels**—one for iOS and one for Android. This is useful when:
+You can configure platform-specific default channels—for example one for iOS, one for Android, and one for Electron. This is useful when:
 
 - You want to roll out updates to one platform before the other
 - You need different update strategies per platform
 - You're testing a new version on one platform while keeping the other stable
 
 To set up platform-specific defaults:
-1. Create two channels (e.g., `production-ios` and `production-android`)
-2. In each channel's settings, enable only the relevant platform (iOS or Android toggle)
+1. Create separate channels for each platform (for example `production-ios`, `production-android`, and `production-electron`)
+2. In each channel's settings, enable only the relevant platform (iOS, Android, or Electron toggle)
 3. Mark both channels as "Default" - Capgo allows this when channels target different platforms
 
 When a device requests an update:
@@ -92,9 +92,9 @@ When a device requests an update:
 
 ### Single Default Channel (Recommended for Most Apps)
 
-For most applications, a single default channel that supports both platforms is the simplest approach:
+For most applications, a single default channel that supports all three core platforms is the simplest approach:
 1. Create one channel (e.g., `production`)
-2. Ensure both iOS and Android toggles are enabled
+2. Ensure iOS, Android, and Electron toggles are enabled
 3. Mark it as the default channel
 
 This ensures consistent behavior across all platforms and simplifies your release workflow.

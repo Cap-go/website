@@ -48,7 +48,7 @@ When the plugin calls `listChannels()`, it sends a GET request to retrieve all c
 // Query parameters:
 interface ListChannelsRequest {
   app_id: string
-  platform: "ios" | "android"
+  platform: "ios" | "android" | "electron"
   is_emulator: boolean
   is_prod: boolean
   key_id?: string
@@ -101,7 +101,7 @@ When the plugin calls `getChannel()`, it sends a PUT request to retrieve the dev
 interface GetChannelRequest {
   device_id: string
   app_id: string
-  platform: "ios" | "android"
+  platform: "ios" | "android" | "electron"
   plugin_version: string
   version_build: string
   version_code: string
@@ -135,7 +135,7 @@ interface SetChannelRequest {
   device_id: string
   app_id: string
   channel: string
-  platform: "ios" | "android"
+  platform: "ios" | "android" | "electron"
   plugin_version: string
   version_build: string
   version_code: string
@@ -186,7 +186,7 @@ When the plugin calls `unsetChannel()`, it sends a DELETE request to remove the 
 interface UnsetChannelRequest {
   device_id: string
   app_id: string
-  platform: "ios" | "android"
+  platform: "ios" | "android" | "electron"
   plugin_version: string
   version_build: string
   version_code: string
@@ -203,7 +203,7 @@ interface ChannelRequest {
   device_id: string
   app_id: string
   channel?: string
-  platform: "ios" | "android"
+  platform: "ios" | "android" | "electron"
   plugin_version: string
   version_build: string
   version_code: string
@@ -302,8 +302,15 @@ async function setDeviceChannel(
   
   if (platform === "android" && !channelConfig.android) {
     return {
-      status: "error",
+      status: "error", 
       error: "Channel not available for Android" 
+    }
+  }
+  
+  if (platform === "electron" && !channelConfig.electron) {
+    return {
+      status: "error", 
+      error: "Channel not available for Electron" 
     }
   }
   
@@ -339,6 +346,7 @@ interface ChannelConfig {
   // Platform targeting
   ios: boolean              // Allow updates to iOS devices
   android: boolean          // Allow updates to Android devices
+  electron: boolean         // Allow updates to Electron apps
 
   // Device type restrictions
   allow_emulator: boolean   // Allow updates on emulator/simulator devices
@@ -362,7 +370,7 @@ interface ChannelConfig {
 
 When listing compatible channels (GET request), you should filter channels based on these conditions:
 
-1. **Platform check**: Channel must allow the device's platform (`ios` or `android`)
+1. **Platform check**: Channel must allow the device's platform (`ios`, `android`, or `electron`)
 2. **Device type check**:
    - If `is_emulator=true`: Channel must have `allow_emulator=true`
    - If `is_emulator=false`: Channel must have `allow_device=true`
@@ -374,7 +382,7 @@ When listing compatible channels (GET request), you should filter channels based
 ```typescript
 // Example filtering logic
 function getCompatibleChannels(
-  platform: 'ios' | 'android',
+  platform: 'ios' | 'android' | 'electron',
   isEmulator: boolean,
   isProd: boolean,
   channels: ChannelConfig[]
@@ -413,6 +421,7 @@ CREATE TABLE channels (
   -- Platform targeting
   ios BOOLEAN DEFAULT true,
   android BOOLEAN DEFAULT true,
+  electron BOOLEAN DEFAULT true,
 
   -- Device type restrictions
   allow_emulator BOOLEAN DEFAULT true,   -- Allow emulator/simulator devices
