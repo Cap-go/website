@@ -6,7 +6,7 @@ sidebar:
   label: Configuration Options
 ---
 
-import { Aside, Steps } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
 import MermaidGraph from '@/components/MermaidGraph.astro';
 
 export const precedenceGraph = `flowchart LR
@@ -113,7 +113,7 @@ These options work for both iOS and Android builds.
 | `--skip-build-number-bump` | `SKIP_BUILD_NUMBER_BUMP` | `SKIP_BUILD_NUMBER_BUMP` | `false` | Skip automatic build number / version code incrementing |
 | `--no-skip-build-number-bump` | — | — | — | Explicitly re-enable auto-increment (overrides saved credentials) |
 
-By default, Capgo Build automatically increments build numbers:
+By default, Capgo Cloud Build automatically increments build numbers:
 - **iOS:** Fetches latest build number from App Store Connect, increments by 1
 - **Android:** Fetches max `versionCode` from Google Play, increments by 1
 
@@ -133,7 +133,7 @@ When `--skip-build-number-bump` is set, the build uses whatever version is alrea
 
 | CLI Flag | Env Variable | Default | Description |
 |----------|-------------|---------|-------------|
-| `-a, --apikey <key>` | `CAPGO_APIKEY` | — | Capgo API key for authentication |
+| `-a, --apikey <key>` | `CAPGO_TOKEN` | — | Capgo API key for authentication |
 | `--supa-host <host>` | — | — | Custom Supabase host (self-hosting only) |
 | `--supa-anon <key>` | — | — | Custom Supabase anon key (self-hosting only) |
 
@@ -189,7 +189,7 @@ BUILD_OUTPUT_UPLOAD_ENABLED="true"     # Upload IPA/APK/AAB
 BUILD_OUTPUT_RETENTION_SECONDS="3600"  # 1 hour download link
 
 # Authentication
-CAPGO_APIKEY="your-api-key"
+CAPGO_TOKEN="your-api-key"
 ```
 
 ---
@@ -202,7 +202,7 @@ Instead of passing flags or env vars every time, save credentials once:
 
 ```bash
 # Save iOS credentials
-npx @capgo/cli build credentials save \
+bunx @capgo/cli build credentials save \
   --platform ios \
   --certificate ./dist_cert.p12 \
   --provisioning-profile ./profile.mobileprovision \
@@ -214,7 +214,7 @@ npx @capgo/cli build credentials save \
   --apple-team-id TEAM123456
 
 # Save Android credentials
-npx @capgo/cli build credentials save \
+bunx @capgo/cli build credentials save \
   --platform android \
   --keystore ./release.keystore \
   --keystore-alias my-key \
@@ -238,13 +238,13 @@ Add `.capgo-credentials.json` to your `.gitignore` if using local credentials. N
 
 ```bash
 # List saved credentials
-npx @capgo/cli build credentials list
+bunx @capgo/cli build credentials list
 
 # Update a specific option without re-entering everything
-npx @capgo/cli build credentials update --skip-build-number-bump
+bunx @capgo/cli build credentials update --skip-build-number-bump
 
 # Clear saved credentials
-npx @capgo/cli build credentials clear --platform ios
+bunx @capgo/cli build credentials clear --platform ios
 ```
 
 ---
@@ -264,14 +264,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm install
-      - run: npx cap sync ios
-      - run: npx @capgo/cli build request --platform ios
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install
+      - run: bunx cap sync ios
+      - run: bunx @capgo/cli build request --platform ios
         env:
-          CAPGO_APIKEY: ${{ secrets.CAPGO_APIKEY }}
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
           BUILD_CERTIFICATE_BASE64: ${{ secrets.IOS_CERTIFICATE }}
           BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.IOS_PROFILE }}
           P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
@@ -285,14 +283,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm install
-      - run: npx cap sync android
-      - run: npx @capgo/cli build request --platform android
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install
+      - run: bunx cap sync android
+      - run: bunx @capgo/cli build request --platform android
         env:
-          CAPGO_APIKEY: ${{ secrets.CAPGO_APIKEY }}
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
           ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE }}
           KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
           KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
@@ -304,7 +300,7 @@ jobs:
 
 ```bash
 # Build iOS with all options inline
-npx @capgo/cli build request \
+bunx @capgo/cli build request \
   --platform ios \
   --build-mode release \
   --skip-build-number-bump \
@@ -312,7 +308,7 @@ npx @capgo/cli build request \
   --apikey YOUR_API_KEY
 
 # Build Android, skip version bump, no output upload
-npx @capgo/cli build request \
+bunx @capgo/cli build request \
   --platform android \
   --skip-build-number-bump \
   --no-output-upload \
@@ -325,13 +321,13 @@ Combine saved credentials with CLI overrides:
 
 ```bash
 # Save base credentials once
-npx @capgo/cli build credentials save --platform ios \
+bunx @capgo/cli build credentials save --platform ios \
   --certificate ./cert.p12 \
   --provisioning-profile ./profile.mobileprovision \
   --output-upload
 
 # Override specific options per-build
-npx @capgo/cli build request --platform ios \
+bunx @capgo/cli build request --platform ios \
   --skip-build-number-bump \
   --output-retention 2d
 ```
