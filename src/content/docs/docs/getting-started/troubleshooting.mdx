@@ -126,6 +126,19 @@ iOS-specific issues you might identify in the logs include:
 - Insufficient storage space for the update bundle
 - Failure to properly extract or apply the update bundle
 
+#### Electron Logs
+
+For Electron apps, check both the main process and renderer process output:
+
+1. Run the Electron app from your terminal using your normal launch command (for example `npm run electron:dev` or `npm run electron:serve`) and watch the terminal output for startup, update checks, and network errors.
+2. Open DevTools in the renderer window (View → Toggle Developer Tools) and inspect console logs and failed network requests while reproducing the update flow.
+3. For packaged apps, check OS log tools for crashes or startup failures:
+   - **macOS**: open `Console.app` and filter on your app name
+   - **Windows**: open **Event Viewer** → **Windows Logs** → **Application**
+   - **Linux**: use your desktop log viewer or `journalctl` for your app process
+
+When debugging updates, compare messages from both main-process and renderer-process logs to separate Electron bootstrap issues from Capgo update lifecycle issues.
+
 Across platforms, the native logs provide a lower-level view into the update process, with more details on the native implementation. They are especially useful for identifying issues that occur outside of the Capgo JavaScript layer.
 
 When troubleshooting a tricky live update problem, it's a good idea to capture both the Capgo debug logs and the native logs for a comprehensive picture of what's happening. The two logs together will give you the best chance of identifying and resolving the issue.
