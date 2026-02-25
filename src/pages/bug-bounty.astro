@@ -147,18 +147,15 @@ const repositories = [
       </div>
     </div>
 
-    <h3>Known Supabase Auth Limitations (Already Reported)</h3>
-    <p>
-      We only review these findings when they can be reproduced in a shared Supabase demo project that mirrors our setup. In this workflow, the behavior must be confirmed as a
-      Supabase Auth default/capability and fixed in Supabase configuration only, without changing Capgo security rules.
-    </p>
+    <h3>{m.bug_bounty_supabase_limitations_title({}, { locale: Astro.locals.locale })}</h3>
+    <p>{m.bug_bounty_supabase_limitations_intro({}, { locale: Astro.locals.locale })}</p>
     <ul>
       <li>
-        Provide a reproducible case and the exact Supabase setting/config change in the demo project that resolves the issue while keeping your existing rule set intact.
+        {m.bug_bounty_supabase_limitations_1({}, { locale: Astro.locals.locale })}
       </li>
-      <li>Email verification behavior is expected to follow your Supabase Auth project settings (for example, whether email confirmation is disabled and capture-based auth is used).</li>
-      <li>Password update and account-recovery flows may not always require old-password re-entry or re-verification if Supabase Auth is configured that way.</li>
-      <li>If the issue is in this list but you can show a concrete Supabase-side fix in the provided project, then we can consider it in scope.</li>
+      <li>{m.bug_bounty_supabase_limitations_2({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.bug_bounty_supabase_limitations_3({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.bug_bounty_supabase_limitations_4({}, { locale: Astro.locals.locale })}</li>
     </ul>
 
     <p>{m.bug_bounty_contact({}, { locale: Astro.locals.locale })}</p>
