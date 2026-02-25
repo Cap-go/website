@@ -59,11 +59,10 @@ For CI/CD pipelines, environment variables are usually the most convenient. For 
 
 ### iOS Build Settings
 
-| CLI Flag | Env Variable | Default | Description |
-|----------|-------------|---------|-------------|
-| `--ios-scheme <scheme>` | `CAPGO_IOS_SCHEME` | `App` | Xcode scheme to build |
-| `--ios-target <target>` | `CAPGO_IOS_TARGET` | `App` | Xcode target for reading build settings |
-| — | `CAPGO_IOS_SOURCE_DIR` | `ios` | iOS source directory relative to project root |
+| CLI Flag | Env Variable | Credential Key | Default | Description |
+|----------|-------------|----------------|---------|-------------|
+| `--ios-scheme <scheme>` | `CAPGO_IOS_SCHEME` | `CAPGO_IOS_SCHEME` | `App` | Xcode scheme to build |
+| `--ios-target <target>` | `CAPGO_IOS_TARGET` | `CAPGO_IOS_TARGET` | `App` | Xcode target for reading build settings |
 
 ---
 
@@ -86,11 +85,10 @@ For CI/CD pipelines, environment variables are usually the most convenient. For 
 
 ### Android Build Settings
 
-| CLI Flag | Env Variable | Default | Description |
-|----------|-------------|---------|-------------|
-| — | `CAPGO_ANDROID_SOURCE_DIR` | `android` | Android source directory relative to project root |
-| — | `PLAY_STORE_TRACK` | `internal` | Google Play release track (`internal`, `alpha`, `beta`, `production`) |
-| — | `PLAY_STORE_RELEASE_STATUS` | `draft` | Release status on Google Play (`draft`, `completed`) |
+| Env Variable | Default | Description |
+|-------------|---------|-------------|
+| `PLAY_STORE_TRACK` | `internal` | Google Play release track (`internal`, `alpha`, `beta`, `production`) |
+| `PLAY_STORE_RELEASE_STATUS` | `draft` | Release status on Google Play (`draft`, `completed`) |
 
 ---
 
@@ -163,7 +161,6 @@ APP_STORE_CONNECT_TEAM_ID="TEAM123456"
 # Optional iOS settings
 CAPGO_IOS_SCHEME="App"
 CAPGO_IOS_TARGET="App"
-CAPGO_IOS_SOURCE_DIR="ios"
 ```
 
 ### Android
@@ -179,7 +176,6 @@ KEYSTORE_STORE_PASSWORD="<store password>"
 PLAY_CONFIG_JSON="<base64-encoded service account JSON>"
 
 # Optional Android settings
-CAPGO_ANDROID_SOURCE_DIR="android"
 PLAY_STORE_TRACK="internal"
 PLAY_STORE_RELEASE_STATUS="draft"
 ```
