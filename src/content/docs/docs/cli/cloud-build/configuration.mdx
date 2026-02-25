@@ -7,6 +7,14 @@ sidebar:
 ---
 
 import { Aside, Steps } from '@astrojs/starlight/components';
+import MermaidGraph from '@/components/MermaidGraph.astro';
+
+export const precedenceGraph = `flowchart LR
+    A["🔧 CLI Flag"] -->|overrides| B["🌍 Environment Variable"]
+    B -->|overrides| C["💾 Saved Credentials"]
+    style A fill:#6366f1,color:#fff,stroke:#4f46e5
+    style B fill:#8b5cf6,color:#fff,stroke:#7c3aed
+    style C fill:#a78bfa,color:#fff,stroke:#8b5cf6`;
 
 Complete reference for every Cloud Build configuration option. Use this page to find the CLI flag, environment variable, or credential key for any build setting.
 
@@ -14,10 +22,7 @@ Complete reference for every Cloud Build configuration option. Use this page to 
 
 Every build option can be set in three ways. When the same option is set in multiple places, higher-priority sources win:
 
-```
-CLI flag  >  Environment variable  >  Saved credentials
-(highest)                              (lowest)
-```
+<MermaidGraph graph={precedenceGraph} ariaLabel="Configuration precedence: CLI flags override environment variables, which override saved credentials" />
 
 **Example:** If your saved credentials have `SKIP_BUILD_NUMBER_BUMP=true` but you pass `--no-skip-build-number-bump` on the CLI, the CLI flag wins and build numbers will be auto-incremented.
 
