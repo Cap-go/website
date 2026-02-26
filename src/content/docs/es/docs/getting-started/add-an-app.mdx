@@ -34,11 +34,15 @@ Antes de comenzar con Capgo, asegúrate de tener:
 1. Crea tu cuenta en [https://capgo.app/register](https://capgo.app/register).
 ![captura de pantalla de registro](/signup.webp "captura de pantalla de registro")
 
-2. Usa el comando Init para comenzar <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Se te presentará una serie de preguntas. Proporciona las respuestas necesarias para completar la configuración automatizada.<Aside type="tip">Siguiendo estos pasos, estarás en funcionamiento en poco tiempo. Si necesitas más asistencia durante el proceso, nuestro equipo de soporte está [aquí para ayudar](https://support.capgo.app). ¡Feliz incorporación!</Aside><LinkCard href="/docs/getting-started/onboarding/" title="Guía Detallada de Incorporación" description="Vea la guía completa paso a paso para el proceso de incorporación CLI" /><LinkCard href="/docs/getting-started/onboarding/" title="Guía Detallada de Incorporación" description="Vea la guía completa paso a paso para el proceso de incorporación CLI" />
+2. Usa el comando Init para comenzar <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Se te presentará una serie de preguntas. Proporciona las respuestas necesarias para completar la configuración automatizada.
 
-3. Implementa una actualización en vivo <LinkCard href="/docs/getting-started/Desplegar/" title="Implementar una actualización en vivo" description="Aprende cómo implementar una actualización en vivo en tu aplicación" />
+3. Implementa una actualización en vivo
 
 </Steps>
+
+<Aside type="tip">Siguiendo estos pasos, estarás en funcionamiento en poco tiempo. Si necesitas más asistencia durante el proceso, nuestro equipo de soporte está [aquí para ayudar](https://support.capgo.app). ¡Feliz incorporación!</Aside>
+<LinkCard href="/docs/getting-started/onboarding/" title="Guía Detallada de Incorporación" description="Vea la guía completa paso a paso para el proceso de incorporación CLI" />
+<LinkCard href="/docs/getting-started/Desplegar/" title="Implementar una actualización en vivo" description="Aprende cómo implementar una actualización en vivo en tu aplicación" />
 
 ### Configuración manual
 
@@ -52,28 +56,28 @@ En caso de que el comando init no funcione para ti, puedes añadir manualmente u
 
 3. Instala el Plugin en tu aplicación: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
 
-   <Aside type="note" title="Instalación para versiones anteriores de Capacitor">
-   El comando anterior instala la última versión (v8.x) para Capacitor 8. Para versiones anteriores de Capacitor, usa la etiqueta npm apropiada:
-
-   ```bash
-   # Capacitor 7
-   npm i @capgo/capacitor-updater@lts-v7
-
-   # Capacitor 6
-   npm i @capgo/capacitor-updater@lts-v6
-
-   # Capacitor 5
-   npm i @capgo/capacitor-updater@lts-v5
-   ```
-
-   Cada versión mayor del plugin corresponde a la versión mayor de Capacitor (v8 → Capacitor 8, v7 → Capacitor 7, v6 → Capacitor 6, v5 → Capacitor 5). Las versiones menores comparten el mismo conjunto de características en todas las versiones mayores (ej., 5.34.0, 6.34.0, 7.34.0, y 8.34.0 incluyen las mismas características).
-   </Aside>
-
 4. Configura el Plugin en tu `capacitor.config` <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="JSON" />
   [Ver todas las opciones disponibles](/docs/plugin/settings/). Esta información se inferirá si no se proporciona.
 
 5. Llama al método init lo más temprano posible en tu aplicación: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="TypeScript" />
 
-6. Implementa una actualización en vivo <LinkCard href="/docs/getting-started/Desplegar/" title="Implementar una actualización en vivo" description="Aprende cómo implementar una actualización en vivo en tu aplicación" />
+6. Implementa una actualización en vivo
 
 </Steps>
+
+<Aside type="note" title="Instalación para versiones anteriores de Capacitor">
+El comando anterior instala la última versión (v8.x) para Capacitor 8. Para versiones anteriores de Capacitor, usa la etiqueta npm apropiada:
+
+```bash
+# Capacitor 7
+npm i @capgo/capacitor-updater@lts-v7
+
+# Capacitor 6
+npm i @capgo/capacitor-updater@lts-v6
+
+# Capacitor 5
+npm i @capgo/capacitor-updater@lts-v5
+```
+
+Cada versión mayor del plugin corresponde a la versión mayor de Capacitor (v8 → Capacitor 8, v7 → Capacitor 7, v6 → Capacitor 6, v5 → Capacitor 5). Las versiones menores comparten el mismo conjunto de características en todas las versiones mayores (ej., 5.34.0, 6.34.0, 7.34.0, y 8.34.0 incluyen las mismas características).
+</Aside>
