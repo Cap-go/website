@@ -571,7 +571,11 @@ At this point, you have successfully built your app and it is ready to be submit
 
 ## Ad-Hoc Distribution Mode
 
-By default, Capgo builds iOS apps for App Store distribution (TestFlight + App Store). If you need ad-hoc builds instead (for internal testing, enterprise distribution, or CI artifact collection), you can use the `--ios-distribution` flag.
+By default, Capgo builds iOS apps for App Store distribution (TestFlight + App Store). If you need ad-hoc builds instead (for internal testing or CI artifact collection), you can use the `--ios-distribution` flag.
+
+<Aside type="note">
+Ad-hoc distribution is **not** the same as Enterprise (In-House) distribution. Enterprise distribution requires a separate Apple Developer Enterprise account and uses different provisioning profiles. Capgo currently supports `app_store` and `ad_hoc` modes only.
+</Aside>
 
 ### When to use ad-hoc mode
 
