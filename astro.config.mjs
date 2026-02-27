@@ -103,6 +103,10 @@ export default defineConfig({
       status: 301,
       destination: '/docs/getting-started/quickstart/',
     },
+    '/docs/plugins/updater/commonProblems/': {
+      status: 301,
+      destination: '/docs/plugins/updater/commonproblems/',
+    },
   },
   i18n: {
     locales,
@@ -750,6 +754,7 @@ export default defineConfig({
                 { label: 'Configuration', link: '/docs/plugins/updater/settings' },
                 { label: 'notifyAppReady call placement', link: '/docs/plugins/updater/notify-app-ready' },
                 { label: 'Known Issues', link: '/docs/plugins/updater/known-issues' },
+                { label: 'Common Update Problems', link: '/docs/plugins/updater/commonproblems' },
                 { label: 'Debugging', link: '/docs/plugins/updater/debugging' },
                 { label: 'Cordova Migration', link: '/docs/plugins/updater/cordova' },
                 {

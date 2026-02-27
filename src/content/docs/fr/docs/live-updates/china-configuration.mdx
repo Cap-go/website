@@ -1,0 +1,188 @@
+---
+locale: fr
+title: Utiliser Capgo en Chine
+description: "Configurez Capgo pour la Chine avec des URLs régionales adaptées afin d'améliorer la fiabilité et les performances des mises à jour OTA."
+sidebar:
+  order: 11
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Si vous déployez votre application pour des utilisateurs en Chine, il est recommandé d'utiliser les endpoints régionaux de Capgo pour des mises à jour plus stables.
+
+## Pourquoi utiliser des URLs dédiées à la Chine
+
+Les contraintes réseau (latence, filtrage, routage international) peuvent dégrader l'accès aux infrastructures hors région. Capgo fournit des URLs optimisées pour cette zone afin de réduire les échecs et d'accélérer les téléchargements.
+
+## Configuration
+
+Vous devez définir trois URLs dans `capacitor.config.ts`.
+
+<Steps>
+
+1. Ouvrez `capacitor.config.ts`.
+
+2. Configurez le plugin `CapacitorUpdater`:
+
+   ```typescript
+   import { CapacitorConfig } from '@capacitor/cli';
+   
+   const config: CapacitorConfig = {
+     plugins: {
+       CapacitorUpdater: {
+         autoUpdate: true,
+         updateUrl: 'https://updater.capgo.com.cn/updates',
+         statsUrl: 'https://updater.capgo.com.cn/stats',
+         channelUrl: 'https://updater.capgo.com.cn/channel_self',
+       },
+     },
+   };
+   
+   export default config;
+   ```
+
+3. Rebuild et synchronisez:
+
+   ```shell
+   npm run build
+   npx cap sync
+   ```
+
+</Steps>
+
+## Détail des URLs
+
+- `updateUrl`: vérification et téléchargement des mises à jour
+- `statsUrl`: envoi des métriques d'usage
+- `channelUrl`: résolution du canal associé à l'appareil
+
+<Aside type="tip">
+Configurez les trois URLs ensemble pour garantir un fonctionnement complet.
+</Aside>
+
+## Paramètres recommandés pour la Chine
+
+### Désactiver `directUpdate`
+
+Nous recommandons `directUpdate: false` pour éviter des expériences dégradées en cas de réseau instable.
+
+```typescript
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      directUpdate: false,
+      updateUrl: 'https://updater.capgo.com.cn/updates',
+      statsUrl: 'https://updater.capgo.com.cn/stats',
+      channelUrl: 'https://updater.capgo.com.cn/channel_self',
+    },
+  },
+};
+```
+
+<Aside type="caution">
+Même avec une infrastructure optimisée, la qualité réseau peut varier. Le mode non direct est plus robuste dans la majorité des cas.
+</Aside>
+
+## Exemple complet
+
+```typescript
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.example.app',
+  appName: 'My App',
+  webDir: 'dist',
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      directUpdate: false,
+      updateUrl: 'https://updater.capgo.com.cn/updates',
+      statsUrl: 'https://updater.capgo.com.cn/stats',
+      channelUrl: 'https://updater.capgo.com.cn/channel_self',
+    },
+  },
+};
+
+export default config;
+```
+
+## Vérifier la configuration
+
+<Steps>
+
+1. Uploadez un bundle de test:
+
+    ```shell
+    npx @capgo/cli@latest bundle upload --channel=production
+    ```
+
+2. Installez l'application sur un appareil de test.
+
+3. Surveillez le processus:
+
+    ```shell
+    npx @capgo/cli@latest app debug
+    ```
+
+4. Vérifiez que les requêtes partent bien vers `updater.capgo.com.cn`.
+
+</Steps>
+
+<Aside type="note">
+Le comportement d'application des mises à jour reste identique. Voir [Comportement des mises à jour](/fr/docs/live-updates/update-behavior/).
+</Aside>
+
+## Déploiement multi-région
+
+Si vous servez des utilisateurs en Chine et hors Chine, vous pouvez conserver ces URLs pour tous. Le domaine `.cn` est résolu globalement.
+
+### Option unique globale
+
+Vous pouvez utiliser une configuration unique pour tous les utilisateurs:
+
+```typescript
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      directUpdate: false,
+      updateUrl: 'https://updater.capgo.com.cn/updates',
+      statsUrl: 'https://updater.capgo.com.cn/stats',
+      channelUrl: 'https://updater.capgo.com.cn/channel_self',
+    },
+  },
+};
+```
+
+Cette approche simplifie fortement l'exploitation.
+
+### Option par région
+
+Si vous voulez optimiser par zone géographique:
+
+- maintenez des variantes d'app
+- injectez les URLs par environnement
+- segmentez par canaux
+
+Besoin d'aide: [support@capgo.app](mailto:support@capgo.app) ou [Discord Communauté](https://discord.capgo.app).
+
+## Dépannage
+
+En cas de problème:
+
+1. vérifiez les 3 URLs dans `capacitor.config.ts`
+2. testez l'accès réseau à `updater.capgo.com.cn`
+3. inspectez les logs avec `npx @capgo/cli@latest app debug`
+4. testez un nouvel upload pour valider la chaîne complète
+5. contactez [support@capgo.app](mailto:support@capgo.app) ou [Discord Communauté](https://discord.capgo.app)
+
+<Aside type="caution">
+N'utilisez pas les endpoints internationaux si vous ciblez ce mode de configuration régional.
+</Aside>
+
+## Étapes suivantes
+
+- Découvrir [Comportement des mises à jour](/fr/docs/live-updates/update-behavior/)
+- Explorer les [Canaux](/fr/docs/live-updates/channels/)
+- Configurer le [Chiffrement](/fr/docs/live-updates/encryption/)

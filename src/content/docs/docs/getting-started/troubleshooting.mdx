@@ -77,7 +77,7 @@ The debug command is especially useful for identifying issues with the update do
 
 ### Debugging with Native Logs
 
-In addition to the Capgo debug command, the native logs on Android and iOS can provide valuable troubleshooting information, especially for issues on the native side of the update process.
+In addition to the Capgo debug command, the native logs on Android, iOS, and Electron can provide valuable troubleshooting information, especially for issues on the native side of the update process.
 
 #### Android Logs
 
@@ -126,7 +126,20 @@ iOS-specific issues you might identify in the logs include:
 - Insufficient storage space for the update bundle
 - Failure to properly extract or apply the update bundle
 
-On both platforms, the native logs provide a lower-level view into the update process, with more details on the native implementation. They are especially useful for identifying issues that occur outside of the Capgo JavaScript layer.
+#### Electron Logs
+
+For Electron apps, check both the main process and renderer process output:
+
+1. Run the Electron app from your terminal using your normal launch command (for example `bun run electron:dev` or `bun run electron:serve`) and watch the terminal output for startup, update checks, and network errors.
+2. Open DevTools in the renderer window (View → Toggle Developer Tools) and inspect console logs and failed network requests while reproducing the update flow.
+3. For packaged apps, check OS log tools for crashes or startup failures:
+   - **macOS**: open `Console.app` and filter on your app name
+   - **Windows**: open **Event Viewer** → **Windows Logs** → **Application**
+   - **Linux**: use your desktop log viewer or `journalctl` for your app process
+
+When debugging updates, compare messages from both main-process and renderer-process logs to separate Electron bootstrap issues from Capgo update lifecycle issues.
+
+Across platforms, the native logs provide a lower-level view into the update process, with more details on the native implementation. They are especially useful for identifying issues that occur outside of the Capgo JavaScript layer.
 
 When troubleshooting a tricky live update problem, it's a good idea to capture both the Capgo debug logs and the native logs for a comprehensive picture of what's happening. The two logs together will give you the best chance of identifying and resolving the issue.
 
@@ -139,6 +152,14 @@ If you've uploaded a bundle but aren't seeing the changes on your device:
 - Look for any errors in the native logs that might indicate a problem applying the update
 
 Refer to the [deploying live updates](/docs/getting-started/deploy) guide for more details on the update process. If you're still stuck, use the `npx @capgo/cli@latest app debug` command and native logs to get more visibility into what's happening.
+
+### Common update failure codes
+
+If your logs show backend errors such as `disable_auto_update_to_major`, `semver_error`, or `cannot_update_via_private_channel`, use the dedicated guide:
+
+- [Common Update Problems](/docs/plugins/updater/commonproblems/)
+
+It explains what each common code means, why it happens, and how to fix it.
 
 ## SDK Installation
 

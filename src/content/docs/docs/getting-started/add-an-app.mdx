@@ -33,11 +33,16 @@ Before getting started with Capgo, make sure you have:
 1. Create your account at [https://capgo.app/register](https://capgo.app/register).
 ![signup screenshot](/signup.webp "signup screenshot")
 
-2. Use the Init commands to get started <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> You will be presented with a series of questions. Provide the necessary answers to complete the automated setup.<Aside type="tip">By following these steps, you'll be up and running in no time. If you need any further assistance during the process, our support team is [here to help](https://support.capgo.app). Happy onboarding!</Aside><LinkCard href="/docs/getting-started/onboarding/" title="Detailed Onboarding Guide" description="See the complete step-by-step guide for the CLI onboarding process" />
+2. Use the Init commands to get started <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> You will be presented with a series of questions. Provide the necessary answers to complete the automated setup.
 
-3. Deploy a live update <LinkCard href="/docs/getting-started/deploy/" title="Deploy a live update" description="Learn how to deploy a live update to your app" />
+3. Deploy a live update
 
 </Steps>
+
+<Aside type="tip">By following these steps, you'll be up and running in no time. If you need any further assistance during the process, our support team is [here to help](https://support.capgo.app). Happy onboarding!</Aside>
+
+<LinkCard href="/docs/getting-started/onboarding/" title="Detailed Onboarding Guide" description="See the complete step-by-step guide for the CLI onboarding process" />
+<LinkCard href="/docs/getting-started/deploy/" title="Deploy a live update" description="Learn how to deploy a live update to your app" />
 
 ### Manual setup
 
@@ -51,28 +56,28 @@ In case the init command doesn't work for you, you can manually add an app.
 
 3. Install the plugin in your app: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
 
-   <Aside type="note" title="Installing for older Capacitor versions">
-   The command above installs the latest version (v8.x) for Capacitor 8. For older Capacitor versions, use the appropriate npm tag:
-
-   ```bash
-   # Capacitor 7
-   npm i @capgo/capacitor-updater@lts-v7
-
-   # Capacitor 6
-   npm i @capgo/capacitor-updater@lts-v6
-
-   # Capacitor 5
-   npm i @capgo/capacitor-updater@lts-v5
-   ```
-
-   Each plugin major version matches the Capacitor major version (v8 → Capacitor 8, v7 → Capacitor 7, v6 → Capacitor 6, v5 → Capacitor 5). Minor versions share the same feature set across all major versions (e.g., 5.34.0, 6.34.0, 7.34.0, and 8.34.0 all include the same features).
-   </Aside>
-
 4. Configure the plugin in your `capacitor.config` <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
   [See all option available](/docs/plugin/settings/). This information will be infer if not provided.
 
 5. Call the init method as early as possible in your app: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
 
-6. Deploy a live update <LinkCard href="/docs/getting-started/deploy/" title="Deploy a live update" description="Learn how to deploy a live update to your app" />
+6. Deploy a live update
 
 </Steps>
+
+<Aside type="note" title="Installing for older Capacitor versions">
+The command above (step 3) installs the latest version (v8.x) for Capacitor 8. For older Capacitor versions, use the appropriate npm tag:
+
+```bash
+# Capacitor 7
+npm i @capgo/capacitor-updater@lts-v7
+
+# Capacitor 6
+npm i @capgo/capacitor-updater@lts-v6
+
+# Capacitor 5
+npm i @capgo/capacitor-updater@lts-v5
+```
+
+Each plugin major version matches the Capacitor major version (v8 → Capacitor 8, v7 → Capacitor 7, v6 → Capacitor 6, v5 → Capacitor 5). Minor versions share the same feature set across all major versions (e.g., 5.34.0, 6.34.0, 7.34.0, and 8.34.0 all include the same features).
+</Aside>

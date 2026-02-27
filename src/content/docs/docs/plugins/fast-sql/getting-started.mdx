@@ -189,3 +189,66 @@ try {
   console.error('Fast SQL error:', error);
 }
 ```
+
+## Common SQL Patterns
+
+### Check if Table Exists
+
+```typescript
+const result = await db.query(
+  "SELECT name FROM sqlite_master WHERE type='table' AND name=?",
+  ['users']
+);
+
+const tableExists = result.length > 0;
+```
+
+### Get Table Schema
+
+```typescript
+const schema = await db.query('PRAGMA table_info(users)');
+console.log('Columns:', schema);
+```
+
+### Count Rows
+
+```typescript
+const result = await db.query('SELECT COUNT(*) as count FROM users');
+const count = result[0].count;
+```
+
+### Pagination
+
+```typescript
+const pageSize = 20;
+const page = 1;
+const offset = (page - 1) * pageSize;
+
+const users = await db.query(
+  'SELECT * FROM users ORDER BY created_at DESC LIMIT ? OFFSET ?',
+  [pageSize, offset]
+);
+```
+
+## Performance Tips
+
+1. **Use Transactions** for multiple operations - significantly faster than individual commits
+2. **Use Batch Operations** for bulk inserts - more efficient than loops
+3. **Create Indexes** on frequently queried columns
+4. **Use Prepared Statements** with parameters (?) - prevents SQL injection and improves performance
+5. **Use HTTP Protocol Directly** for very large result sets
+6. **Close Connections** when not in use to free resources
+
+## Next Steps
+
+Check out the [complete tutorial](/plugins/capacitor-fast-sql) for advanced patterns including:
+- Database service architecture
+- Migration systems
+- Sync engines
+- Complex queries and joins
+- Performance optimization
+
+## Related Documentation
+
+- [Migrate from Ionic Secure Storage](/docs/upgrade/from-ionic-secure-storage/)
+- [Ionic enterprise plugins migration solution](/solutions/ionic-enterprise-plugins/)

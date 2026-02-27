@@ -1,0 +1,86 @@
+---
+locale: fr
+title: Mises à jour différentielles
+description: "Comprenez comment les mises à jour différentielles de Capgo accélèrent les déploiements en ne téléchargeant que les fichiers modifiés."
+sidebar:
+  order: 4
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Le système de mises à jour en direct de Capgo peut livrer vos mises à jour plus rapidement en ne transférant que les fichiers modifiés, au lieu d'un bundle JavaScript complet.
+
+C'est particulièrement utile pour les utilisateurs avec une connexion lente ou limitée en données. Vous réduisez la bande passante et le temps de téléchargement.
+
+Autre avantage : si votre application contient de gros assets qui changent rarement (images, vidéos), ils ne sont téléchargés qu'une fois.
+
+## Comment ça fonctionne
+
+Les mises à jour différentielles sont gérées par le plugin Capgo installé dans votre application.
+
+Quand vous envoyez une nouvelle version avec l'option `--partial`, Capgo :
+
+1. envoie les fichiers individuellement
+2. calcule un checksum pour chaque fichier
+3. génère un nouveau manifest JSON avec les chemins et checksums
+4. enregistre ce manifest côté serveur
+
+Quand un appareil vérifie les mises à jour, le plugin compare le nouveau manifest au manifest local pour identifier uniquement les fichiers modifiés.
+
+Le plugin télécharge alors seulement ces fichiers, puis reconstruit la nouvelle version en réutilisant les fichiers inchangés déjà présents sur l'appareil.
+
+<Aside title="Manifest">
+
+Avec les mises à jour différentielles, les fichiers téléchargés sont gardés dans un cache commun. Capgo ne le nettoie pas lui-même, mais l'OS peut le faire.
+
+</Aside>
+
+## Activer les mises à jour différentielles
+
+Pour activer les mises à jour différentielles, utilisez l'option `--partial` lors de l'upload :
+
+```shell
+npx @capgo/cli@latest bundle upload --partial
+```
+
+## Forcer le mode différentiel
+
+Si vous voulez interdire les uploads complets par erreur, utilisez `--partial-only` :
+
+```shell
+npx @capgo/cli@latest bundle upload --partial-only
+```
+
+Avec `--partial-only`, Capgo n'envoie que les fichiers individuels + manifest. Les appareils qui ne supportent pas le mode partiel ne pourront pas appliquer la mise à jour.
+
+Ce mode est utile si :
+
+- vous voulez imposer les mises à jour différentielles
+- vous automatisez les uploads en CI/CD
+- votre application est volumineuse et vous voulez minimiser les transferts
+
+Si vous devez exceptionnellement faire un upload complet, exécutez la commande sans `--partial-only`.
+
+## Dépannage
+
+Si vous constatez que les appareils téléchargent encore des bundles complets :
+
+- vérifiez que vous utilisez bien `--partial` à chaque upload
+- en mode `--partial-only`, vérifiez que le flag n'a pas été oublié
+- confirmez que les appareils utilisent une version récente du plugin Capgo
+- vérifiez la connectivité réseau vers les serveurs Capgo
+
+Vous pouvez aussi vérifier le type de bundle dans la webapp :
+
+<Steps>
+1. Ouvrez la [webapp](https://app.capgo.app)
+2. Ouvrez votre application
+3. Cliquez sur le nombre de Bundles dans la barre de stats
+4. Sélectionnez le dernier bundle
+5. Vérifiez le champ `Partial`
+   ![Type de bundle](/bundle_type.webp)
+</Steps>
+
+Si le problème persiste, contactez le support Capgo pour vérifier les logs serveur et confirmer que les manifests sont bien traités.
+
+En résumé : utilisez `--partial` à chaque upload que vous souhaitez livrer en mode différentiel. Sans ce flag, Capgo enverra un bundle complet.

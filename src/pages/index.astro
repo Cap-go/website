@@ -43,7 +43,7 @@ const description = m.ship_updates_fixes_changes_and_features({}, { locale: Astr
 // Create comprehensive LD+JSON for homepage
 const capgoService = createServiceLdJson(config.public, {
   name: 'Capgo - Live Updates for Capacitor Apps',
-  description: 'Instant over-the-air / CodePush updates for Capacitor mobile applications. Deploy OTA, bug fixes, feature updates, and improvements without app store delays.',
+  description: 'Instant over-the-air / CodePush updates for Capacitor mobile and Electron applications. Deploy OTA, bug fixes, feature updates, and improvements without release delays.',
   url: config.public.baseUrl,
   serviceType: 'Software Development Service',
   areaServed: ['Worldwide'],
@@ -52,10 +52,10 @@ const capgoService = createServiceLdJson(config.public, {
 // Create SoftwareApplication schema for the Capgo platform
 const capgoSoftware = createSoftwareApplicationLdJson(config.public, {
   name: 'Capgo Live Update Platform',
-  description: 'Professional live update platform for Capacitor developers. Deploy updates instantly to iOS and Android apps.',
+  description: 'Professional live update platform for Capacitor developers. Deploy updates instantly to iOS, Android, and Electron apps.',
   url: config.public.baseUrl,
   applicationCategory: 'DeveloperApplication',
-  operatingSystem: 'Web, iOS, Android',
+  operatingSystem: 'Web, iOS, Android, Electron',
   softwareVersion: '1.0',
   aggregateRating: {
     ratingValue: 4.8,
