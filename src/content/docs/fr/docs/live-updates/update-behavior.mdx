@@ -1,0 +1,157 @@
+---
+locale: fr
+title: Comportement des mises à jour
+description: "Comprenez quand et comment Capgo applique les mises à jour OTA, et comment personnaliser ce comportement selon vos besoins."
+sidebar:
+  order: 3
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Quand vous publiez une mise à jour Capgo, vous voulez la livrer vite, sans casser l'expérience utilisateur. Cette page explique le comportement par défaut, puis les options avancées.
+
+## Flux par défaut
+
+Par défaut, Capgo applique ce flux :
+
+<Steps>
+
+1. Au lancement, le plugin vérifie si une mise à jour est disponible.
+2. Si oui, elle est téléchargée en arrière-plan.
+3. Une fois le téléchargement terminé, Capgo attend que l'application passe en arrière-plan ou soit fermée.
+4. Au prochain lancement, la nouvelle version est activée.
+
+</Steps>
+
+Ce mode minimise les interruptions : pas de popup intrusive, pas d'attente forcée en plein usage.
+
+<Aside type="tip">
+Capgo vérifie aussi les mises à jour quand l'application revient du background.
+</Aside>
+
+## Pourquoi ce choix
+
+Appliquer la mise à jour entre deux sessions permet de :
+
+- éviter d'interrompre l'utilisateur pendant une action
+- garder une expérience stable en session
+- déployer fréquemment sans effet brutal
+
+Point d'attention : si l'utilisateur passe rapidement en arrière-plan puis revient, un état non sauvegardé peut être perdu.
+
+Bonnes pratiques :
+
+- sauvegarder l'état fréquemment
+- restaurer l'état au retour en foreground
+- éviter les mises à jour trop lourdes et trop fréquentes
+
+## Contrôler le moment d'application
+
+Si vous avez besoin d'un contrôle fin (ex : synchronisation avec un changement serveur), utilisez `setMultiDelay` :
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+await CapacitorUpdater.setMultiDelay({
+  delayConditions: [
+    {
+      kind: 'date',
+      value: '2023-06-01T00:00:00.000Z',
+    },
+    {
+      kind: 'background',
+      value: '60000',
+    },
+  ],
+});
+```
+
+Exemple : la mise à jour n'est installée qu'après la date indiquée ET après au moins 60s en background.
+
+Conditions disponibles :
+
+- `date`: attendre une date/heure
+- `background`: attendre une durée minimale en background
+- `nativeVersion`: exiger une version native minimale
+- `kill`: attendre l'événement de fermeture de l'app
+
+<Aside type="danger">
+La condition `kill` a un comportement spécifique : elle se déclenche au premier événement de fermeture détecté. Testez ce point dans vos scénarios critiques.
+</Aside>
+
+## Appliquer immédiatement avec `directUpdate`
+
+Pour des correctifs critiques, vous pouvez appliquer la mise à jour dès qu'elle est téléchargée via `directUpdate`.
+
+<Aside type="tip" title="Recommandé : activer les mises à jour différentielles">
+Avec `directUpdate`, activez les mises à jour différentielles pour réduire les temps de téléchargement.
+
+```shell
+npx @capgo/cli@latest bundle upload --partial
+```
+
+En savoir plus : [Documentation des mises à jour différentielles](/fr/docs/live-updates/differentials/).
+</Aside>
+
+`directUpdate` se configure dans `capacitor.config.ts` (pas en runtime JS). Valeurs possibles :
+
+- `false` (défaut): flux standard
+- `'atInstall'`: mise à jour immédiate uniquement à l'installation / mise à jour store
+- `'onLaunch'`: immédiate à l'installation, mise à jour store ou relance après fermeture
+- `'always'`: immédiate dans tous les cas
+- `true` (déprécié): équivalent à `'always'`
+
+```typescript
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      directUpdate: 'always',
+      autoSplashscreen: true,
+      keepUrlPathAfterReload: true,
+    },
+    SplashScreen: {
+      launchAutoHide: false,
+    },
+  },
+};
+
+export default config;
+```
+
+<Aside type="note">
+`directUpdate` n'applique une mise à jour que lorsqu'une vérification est déclenchée (au démarrage, et au retour de background par défaut).
+</Aside>
+
+## Gestion automatique du splashscreen
+
+Depuis les versions récentes du plugin, `autoSplashscreen` simplifie la gestion visuelle :
+
+- le splash est masqué automatiquement après application
+- le splash est aussi masqué si aucune mise à jour n'est nécessaire
+
+Si vous avez besoin d'un contrôle complet, laissez `autoSplashscreen: false` et gérez manuellement :
+
+```js
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+import { SplashScreen } from '@capacitor/splash-screen';
+
+CapacitorUpdater.addListener('appReady', () => {
+  SplashScreen.hide();
+});
+
+CapacitorUpdater.notifyAppReady();
+```
+
+## Recommandations pratiques
+
+Si vous activez `directUpdate` :
+
+- conservez `launchAutoHide: false`
+- activez `keepUrlPathAfterReload: true`
+- sauvegardez/restaurez l'état utilisateur
+- testez les transitions (flicker, perte de route, reprise de session)
+
+Dans la plupart des cas, le comportement par défaut reste le meilleur compromis entre rapidité de diffusion et stabilité UX.

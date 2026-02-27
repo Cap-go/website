@@ -322,6 +322,14 @@ export const actions = [
     icon: ChartBarIcon,
   },
   {
+    name: '@capgo/capacitor-app-attest',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor plugin for cross-platform device attestation using Apple App Attest and Google Play Integrity Standard',
+    href: 'https://github.com/Cap-go/capacitor-app-attest/',
+    title: 'App Attest',
+    icon: ShieldCheckIcon,
+  },
+  {
     name: '@capgo/capacitor-audiosession',
     author: 'github.com/Cap-go',
     description: 'Configure iOS audio session for background playback, mixing, and routing control',
@@ -562,6 +570,14 @@ export const actions = [
     icon: UserGroupIcon,
   },
   {
+    name: '@capgo/capacitor-persona',
+    author: 'github.com/Cap-go',
+    description: 'Launch Persona identity verification inquiries with native iOS and Android SDKs',
+    href: 'https://github.com/Cap-go/capacitor-persona/',
+    title: 'Persona',
+    icon: UserCircleIcon,
+  },
+  {
     name: '@capgo/capacitor-android-age-signals',
     author: 'github.com/Cap-go',
     description: 'Google Play Age Signals API wrapper - detect supervised accounts and verified users',
@@ -687,6 +703,15 @@ export const actions = [
     description: 'Detect when the WebView was killed in the background and relaunch it on foreground',
     href: 'https://github.com/Cap-go/capacitor-webview-guardian/',
     title: 'WebView Guardian',
+    icon: ShieldExclamationIcon,
+  },
+  {
+    name: '@capgo/capacitor-webview-version-checker',
+    author: 'github.com/Cap-go',
+    description:
+      'Capacitor plugin for checking Android WebView version freshness and guiding users to native update flows',
+    href: 'https://github.com/Cap-go/capacitor-webview-version-checker/',
+    title: 'WebView Version Checker',
     icon: ShieldExclamationIcon,
   },
   {

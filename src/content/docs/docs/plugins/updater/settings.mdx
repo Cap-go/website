@@ -18,7 +18,7 @@ To have more fine-grained control over the update system, you can configure it w
 
 > Allow the plugin to modify the updateUrl, statsUrl and channelUrl dynamically from the JavaScript side.
 
-Only available for Android and iOS.
+Available on Android, iOS, and Electron.
 
 Default: `false`
 
@@ -37,7 +37,7 @@ Default: `false`
 
 > Configure the app id for the app in the config.
 
-Only available for Android and iOS.
+Available on Android, iOS, and Electron.
 
 Default: `undefined`
 
@@ -56,7 +56,7 @@ Default: `undefined`
 
 > Configure the number of milliseconds the native plugin should wait before considering an update 'failed'.
 
-Only available for Android and iOS.
+Available on Android, iOS, and Electron.
 
 Default: `10000` (10 seconds)
 
@@ -75,7 +75,7 @@ Default: `10000` (10 seconds)
 
 > Configure whether the plugin should automatically delete failed bundles.
 
-Only available for Android and iOS.
+Available on Android, iOS, and Electron.
 
 Default: `true`
 
@@ -94,7 +94,7 @@ Default: `true`
 
 > Configure whether the plugin should automatically delete previous bundles after a successful update.
 
-Only available for Android and iOS.
+Available on Android, iOS, and Electron.
 
 Default: `true`
 
@@ -117,7 +117,7 @@ Default: `true`
 > Requires the @capacitor/splash-screen plugin to be installed and configured with launchAutoHide: false.
 > Requires autoUpdate and directUpdate to be enabled.
 
-Only available for Android and iOS.
+Available on Android, iOS, and Electron.
 
 Default: `false`
 
@@ -138,7 +138,7 @@ Default: `false`
 
 > Configure whether the plugin should use Auto Update via an update server.
 
-Only available for Android and iOS.
+Available on Android, iOS, and Electron.
 
 Default: `true`
 
@@ -157,7 +157,7 @@ Default: `true`
 
 > Configure the URL / endpoint for channel operations.
 
-Only available for Android and iOS.
+Available on Android, iOS, and Electron.
 
 Default: `https://plugin.capgo.app/channel_self`
 
@@ -177,7 +177,7 @@ Default: `https://plugin.capgo.app/channel_self`
 > Set the default channel for the app in the config. Case sensitive.
 > This setting will override the default channel set in the cloud, but will still respect overrides made in the cloud.
 
-Only available for Android and iOS.
+Available on Android, iOS, and Electron.
 
 Default: `undefined`
 
@@ -205,7 +205,7 @@ Options:
 - `'always'`: Direct update in all previous cases (app installed, updated from store, after app kill or app resume), never act as directUpdate = false
 - `true`: (deprecated) Same as "always" for backward compatibility
 
-Only available for Android and iOS.
+Available on Android, iOS, and Electron.
 
 Default: `false`
 
@@ -225,7 +225,7 @@ Default: `false`
 
 > Disable the JavaScript logging of the plugin. If true, the plugin will not log to the JavaScript console. Only the native log will be done.
 
-Only available for Android and iOS.
+Available on Android, iOS, and Electron.
 
 Default: `false`
 
@@ -248,7 +248,7 @@ Default: `false`
 When a reload is triggered, 'window.history' will be cleared.
 </Aside>
 
-Only available for Android and iOS.
+Available on Android, iOS, and Electron.
 
 Default: `false`
 
@@ -268,7 +268,7 @@ Default: `false`
 > Configure the delay period for period update check. The unit is in seconds.
 > Cannot be less than 600 seconds (10 minutes).
 
-Only available for Android and iOS.
+Available on Android, iOS, and Electron.
 
 Default: `600` (10 minutes)
 
@@ -287,7 +287,7 @@ Default: `600` (10 minutes)
 
 > Configure the public key for end to end live update encryption Version 2.
 
-Only available for Android and iOS.
+Available on Android, iOS, and Electron.
 
 Default: `undefined`
 
@@ -306,7 +306,7 @@ Default: `undefined`
 
 > Automatically delete previous downloaded bundles when a newer native app bundle is installed to the device.
 
-Only available for Android and iOS.
+Available on Android, iOS, and Electron.
 
 Default: `true`
 
@@ -325,7 +325,7 @@ Default: `true`
 
 > Configure the number of milliseconds the native plugin should wait before considering API timeout.
 
-Only available for Android and iOS.
+Available on Android, iOS, and Electron.
 
 Default: `20` (20 seconds)
 
@@ -344,7 +344,7 @@ Default: `20` (20 seconds)
 
 > Enable shake gesture to show update menu for debugging/testing purposes.
 
-Only available for Android and iOS.
+Available on Android, iOS, and Electron.
 
 Default: `false`
 
@@ -363,7 +363,7 @@ Default: `false`
 
 > Configure the URL / endpoint to which update statistics are sent.
 
-Only available for Android and iOS. Set to "" to disable stats reporting.
+Available on Android, iOS, and Electron. Set to "" to disable stats reporting.
 
 Default: `https://plugin.capgo.app/stats`
 
@@ -382,7 +382,7 @@ Default: `https://plugin.capgo.app/stats`
 
 > Configure the URL / endpoint to which update checks are sent.
 
-Only available for Android and iOS.
+Available on Android, iOS, and Electron.
 
 Default: `https://plugin.capgo.app/updates`
 
@@ -402,7 +402,7 @@ Default: `https://plugin.capgo.app/updates`
 > Configure the current version of the app. This will be used for the first update request.
 > If not set, the plugin will get the version from the native code.
 
-Only available for Android and iOS.
+Available on Android, iOS, and Electron.
 
 Default: `undefined`
 

@@ -2,7 +2,7 @@
 title: iOS Builds
 description: Configure and build iOS apps with Capgo Cloud Build
 sidebar:
-  order: 2
+  order: 3
 ---
 
 import { Steps, Aside, Card, CardGrid } from '@astrojs/starlight/components';
@@ -481,6 +481,80 @@ If all went well, you will see the following output:
 
 ![Capgo CLI credentials save output](/native-build-assets/credentials-save.gif)
 
+### CI/CD setup (GitHub Actions)
+
+If you already completed [Team ID](#team-id), [Apple key, Apple key ID and Apple issuer ID](#apple-key-apple-key-id-and-apple-issuer-id), [Certificate](#certificate), and [Provisioning profile](#provisioning-profile), you already have everything needed for CI/CD.
+This section only covers how to pass those values as GitHub Actions secrets and environment variables.
+
+#### 1) Convert credential files to single-line base64
+
+```bash
+# Distribution certificate (.p12)
+base64 -i ./capgo-tutorial/capgo-build-tutorial-certificate.p12 | tr -d '\n' > certificate_base64.txt
+
+# Provisioning profile (.mobileprovision)
+base64 -i ./capgo-tutorial/capgo_native_build_tutorial.mobileprovision | tr -d '\n' > profile_base64.txt
+
+# App Store Connect API key (.p8)
+base64 -i ./capgo-tutorial/AuthKey_66FGQZB566.p8 | tr -d '\n' > apple_key_base64.txt
+```
+
+:::tip
+GitHub secrets should be single-line values. `tr -d '\n'` removes line breaks from base64 output.
+:::
+
+#### 2) Create repository secrets
+
+In `GitHub > Repository > Settings > Secrets and variables > Actions`, add:
+
+| Secret name | Value |
+|-----------|-------|
+| `CAPGO_TOKEN` | Your Capgo API token |
+| `APP_STORE_CONNECT_TEAM_ID` | Team ID from [Team ID](#team-id) |
+| `APPLE_KEY_ID` | Key ID from [Apple key, Apple key ID and Apple issuer ID](#apple-key-apple-key-id-and-apple-issuer-id) |
+| `APPLE_ISSUER_ID` | Issuer ID from [Apple key, Apple key ID and Apple issuer ID](#apple-key-apple-key-id-and-apple-issuer-id) |
+| `BUILD_CERTIFICATE_BASE64` | Content of `certificate_base64.txt` |
+| `BUILD_PROVISION_PROFILE_BASE64` | Content of `profile_base64.txt` |
+| `APPLE_KEY_CONTENT` | Content of `apple_key_base64.txt` |
+| `APPLE_PROFILE_NAME` | Provisioning profile name from [Provisioning profile](#provisioning-profile). Required unless you pass `--apple-profile-name`; otherwise builds fail. |
+| `P12_PASSWORD` (optional) | Your `.p12` password if set during export |
+
+#### 3) Use env vars in your GitHub Actions workflow
+
+```yaml
+# .github/workflows/ios-build.yml
+name: iOS Cloud Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  ios-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Request iOS build with Capgo
+        run: bunx @capgo/cli@latest build request --platform ios
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
+          APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
+          APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
+          APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
+          APPLE_PROFILE_NAME: ${{ secrets.APPLE_PROFILE_NAME }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+```
+
+<Aside type="tip">
+With this setup, CI sends credentials through environment variables only. You do not need to commit signing files or upload them as workflow artifacts.
+</Aside>
 
 ### Running the build
 
@@ -494,6 +568,112 @@ npx @capgo/cli@latest build request --platform ios
 
 Congratulations 🎉
 At this point, you have successfully built your app and it is ready to be submitted to the App Store.
+
+## Ad-Hoc Distribution Mode
+
+By default, Capgo builds iOS apps for App Store distribution (TestFlight + App Store). If you need ad-hoc builds instead (for internal testing or CI artifact collection), you can use the `--ios-distribution` flag.
+
+<Aside type="note">
+Ad-hoc distribution is **not** the same as Enterprise (In-House) distribution. Enterprise distribution requires a separate Apple Developer Enterprise account and uses different provisioning profiles. Capgo currently supports `app_store` and `ad_hoc` modes only.
+</Aside>
+
+### When to use ad-hoc mode
+
+- You want to distribute IPAs directly to registered devices (no TestFlight)
+- You don't have or don't want to use an App Store Connect API key
+- You want to collect build artifacts via `--output-upload` without submitting to the App Store
+
+### Requirements
+
+Ad-hoc builds have **fewer requirements** than App Store builds:
+
+| Credential | Required? |
+|-----------|-----------|
+| Distribution certificate (`.p12`) | Yes |
+| Ad-hoc provisioning profile (`.mobileprovision`) | Yes |
+| Team ID (`--apple-team-id`) | Yes |
+| App Store Connect API key (`.p8`) | **No** |
+| Apple Key ID / Issuer ID | **No** |
+
+<Aside type="caution">
+Without an App Store Connect API key, build number auto-increment uses a timestamp-based fallback. To suppress the warning, pass `--skip-build-number-bump`.
+</Aside>
+
+### Creating an ad-hoc provisioning profile
+
+Follow the same steps as [Provisioning profile](#provisioning-profile), but in step 5, select **Ad Hoc** instead of **App Store**:
+
+1. Go to [Apple Developer Profiles](https://developer.apple.com/account/resources/profiles/list)
+2. Click the `+` button
+3. Select **Ad Hoc** and click Continue
+4. Select your app and distribution certificate
+5. Select the devices you want to register
+6. Name and download the profile
+
+### Saving ad-hoc credentials
+
+```bash
+npx @capgo/cli@latest build credentials save \
+  --platform ios \
+  --ios-distribution ad_hoc \
+  --apple-team-id YOUR_TEAM_ID \
+  --certificate './certificate.p12' \
+  --provisioning-profile './adhoc_profile.mobileprovision' \
+  --apple-profile-name your-adhoc-profile-name
+```
+
+No `--apple-key`, `--apple-key-id`, or `--apple-issuer-id` needed.
+
+### Running an ad-hoc build
+
+```bash
+npx @capgo/cli@latest build request \
+  --platform ios \
+  --ios-distribution ad_hoc
+```
+
+To collect the IPA as a build artifact, add `--output-upload`:
+
+```bash
+npx @capgo/cli@latest build request \
+  --platform ios \
+  --ios-distribution ad_hoc \
+  --output-upload
+```
+
+### CI/CD with ad-hoc builds
+
+For GitHub Actions, you need fewer secrets than App Store builds:
+
+```yaml
+# .github/workflows/ios-adhoc-build.yml
+name: iOS Ad-Hoc Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ios-adhoc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Request iOS ad-hoc build
+        run: bunx @capgo/cli@latest build request --platform ios --ios-distribution ad_hoc --output-upload
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64_ADHOC }}
+          APPLE_PROFILE_NAME: ${{ secrets.APPLE_PROFILE_NAME }}
+          CAPGO_IOS_DISTRIBUTION: ad_hoc
+```
+
+<Aside type="tip">
+Notice that `APPLE_KEY_ID`, `APPLE_ISSUER_ID`, and `APPLE_KEY_CONTENT` are not needed for ad-hoc builds.
+</Aside>
 
 ## Troubleshooting
 

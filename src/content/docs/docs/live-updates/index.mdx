@@ -9,11 +9,11 @@ next: false
 
 import { Steps, CardGrid, Card, Aside } from '@astrojs/starlight/components';
 
-Use Capgo's Live Updates feature to update the JavaScript bundles of your app remotely, in real-time. Push JS updates directly to your users without going through the app store review process to instantly fix bugs and ship new features.
+Use Capgo's Live Updates feature to update the JavaScript bundles of your app remotely, in real-time. Push JS updates directly to your users on iOS, Android, and Electron without going through store-level review cycles to fix bugs and ship new features faster.
 
 <Aside>
 
-Live Updates are limited to JavaScript bundle changes. If you need to update native code, such as adding or removing a plugin or changing native project configuration, you'll need to submit a new native binary build to the app stores.
+Live Updates are limited to JavaScript bundle changes. If you need to update native code, such as adding or removing a plugin or changing native project configuration, you'll need to submit a new binary build through the usual platform distribution process.
 
 </Aside>
 
@@ -66,6 +66,12 @@ See the [Deploying Live Updates](/docs/getting-started/deploy) guide for more de
 ## Next Steps
 
 <CardGrid stagger>
+  <a href="/docs/live-updates/update-types/">
+    <Card title="Update Types" icon="book">
+      Reference of all OTA update types: apply timing, delay conditions, version blocking, and delivery.
+    </Card>
+  </a>
+
   <a href="/docs/live-updates/channels/">
     <Card title="Channels" icon="bars">
       Learn how to use channels to manage different release tracks and target updates to specific users.

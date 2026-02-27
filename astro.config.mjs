@@ -3,12 +3,13 @@ import starlight from '@astrojs/starlight'
 import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import tailwindcss from '@tailwindcss/vite'
 import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
-import { defineConfig, envField } from 'astro/config'
+import { defineConfig } from 'astro/config'
 import { glob } from 'glob'
 import { readFileSync, statSync } from 'node:fs'
 import os from 'node:os'
 import starlightImageZoom from 'starlight-image-zoom'
 import starlightLlmsTxt from 'starlight-llms-txt'
+import starlightDocSearch from '@astrojs/starlight-docsearch'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import config from './configs.json'
 import { defaultLocale, localeNames, locales } from './src/services/locale'
@@ -93,23 +94,6 @@ export default defineConfig({
       include: ['mermaid'],
     },
   },
-  env: {
-    validateSecrets: true,
-    schema: {
-      ORAMA_CLOUD_ENDPOINT: envField.string({
-        context: 'client',
-        access: 'public',
-        optional: true,
-        default: '',
-      }),
-      ORAMA_CLOUD_API_KEY: envField.string({
-        context: 'client',
-        access: 'public',
-        optional: true,
-        default: '',
-      }),
-    },
-  },
   redirects: {
     '/docs/getting-started/': {
       status: 301,
@@ -118,6 +102,10 @@ export default defineConfig({
     '/docs/plugins/updater/cloud-mode/getting-started/': {
       status: 301,
       destination: '/docs/getting-started/quickstart/',
+    },
+    '/docs/plugins/updater/commonProblems/': {
+      status: 301,
+      destination: '/docs/plugins/updater/commonproblems/',
     },
   },
   i18n: {
@@ -164,6 +152,11 @@ export default defineConfig({
       pagefind: false,
       prerender: true,
       plugins: [
+        starlightDocSearch({
+          appId: 'R0TIQUJRSN',
+          apiKey: '039b8d50eaa068b9ff8726d912c6f388',
+          indexName: 'capgo',
+        }),
         starlightImageZoom({ showCaptions: false }),
         starlightLlmsTxt({
           projectName: 'capgo',
@@ -230,6 +223,11 @@ export default defineConfig({
               label: 'Plugin AppInsights',
               description: 'Microsoft Application Insights analytics plugin',
               paths: ['docs/plugins/appinsights/**'],
+            },
+            {
+              label: 'Plugin App Attest',
+              description: 'cross-platform app attestation plugin using Apple App Attest and Google Play Integrity Standard',
+              paths: ['docs/plugins/app-attest/**'],
             },
             {
               label: 'Plugin Audio Recorder',
@@ -482,6 +480,11 @@ export default defineConfig({
               paths: ['docs/plugins/pedometer/**'],
             },
             {
+              label: 'Plugin Persona',
+              description: 'Persona identity verification inquiry plugin',
+              paths: ['docs/plugins/persona/**'],
+            },
+            {
               label: 'Plugin Persistent Account',
               description: 'persistent account storage plugin',
               paths: ['docs/plugins/persistent-account/**'],
@@ -597,6 +600,11 @@ export default defineConfig({
               paths: ['docs/plugins/webview-guardian/**'],
             },
             {
+              label: 'Plugin Webview Version Checker',
+              description: 'Android WebView version validation plugin',
+              paths: ['docs/plugins/webview-version-checker/**'],
+            },
+            {
               label: 'Plugin WiFi',
               description: 'WiFi network information plugin',
               paths: ['docs/plugins/wifi/**'],
@@ -682,7 +690,6 @@ export default defineConfig({
       editLink: { baseUrl: 'https://github.com/Cap-go/website/edit/main/' },
       components: {
         Head: './src/components/doc/Head.astro',
-        Search: './src/components/doc/Search.astro',
         LanguageSelect: './src/components/doc/LanguageSelect.astro',
         PageTitle: './src/components/doc/PageTitle.astro',
       },
@@ -747,6 +754,7 @@ export default defineConfig({
                 { label: 'Configuration', link: '/docs/plugins/updater/settings' },
                 { label: 'notifyAppReady call placement', link: '/docs/plugins/updater/notify-app-ready' },
                 { label: 'Known Issues', link: '/docs/plugins/updater/known-issues' },
+                { label: 'Common Update Problems', link: '/docs/plugins/updater/commonproblems' },
                 { label: 'Debugging', link: '/docs/plugins/updater/debugging' },
                 { label: 'Cordova Migration', link: '/docs/plugins/updater/cordova' },
                 {
@@ -836,6 +844,16 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/appinsights/' },
                 { label: 'Getting started', link: '/docs/plugins/appinsights/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'App Attest',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/app-attest/' },
+                { label: 'Getting started', link: '/docs/plugins/app-attest/getting-started' },
+                { label: 'iOS setup', link: '/docs/plugins/app-attest/ios' },
+                { label: 'Android setup', link: '/docs/plugins/app-attest/android' },
               ],
               collapsed: true,
             },
@@ -1203,6 +1221,14 @@ export default defineConfig({
               collapsed: true,
             },
             {
+              label: 'Persona',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/persona/' },
+                { label: 'Getting started', link: '/docs/plugins/persona/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
               label: 'Persistent Account',
               items: [
                 { label: 'Overview', link: '/docs/plugins/persistent-account/' },
@@ -1383,6 +1409,16 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/wechat/' },
                 { label: 'Getting started', link: '/docs/plugins/wechat/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'WebView Version Checker',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/webview-version-checker/' },
+                { label: 'Getting started', link: '/docs/plugins/webview-version-checker/getting-started' },
+                { label: 'Android setup', link: '/docs/plugins/webview-version-checker/android' },
+                { label: 'iOS', link: '/docs/plugins/webview-version-checker/ios' },
               ],
               collapsed: true,
             },

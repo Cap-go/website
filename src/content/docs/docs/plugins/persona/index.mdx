@@ -1,0 +1,40 @@
+---
+title: "@capgo/capacitor-persona"
+description: Launch Persona identity verification inquiries with native iOS and Android SDKs in your Capacitor app.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Start Persona inquiry flows natively on iOS and Android, prefill fields, and handle complete/cancel/error events in one Capacitor API.
+  image:
+    file: ~public/icons/plugins/persona.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/persona/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-persona/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Native Persona SDKs" icon="rocket">
+    Uses Persona iOS and Android SDKs for secure identity verification flows.
+  </Card>
+  <Card title="One launch API" icon="puzzle">
+    Start inquiries by template ID, template version, or existing inquiry/session token.
+  </Card>
+  <Card title="Event-driven results" icon="open-book">
+    Listen for `inquiryComplete`, `inquiryCanceled`, and `inquiryError` to power your UX.
+  </Card>
+  <Card title="Prefilled fields" icon="setting">
+    Pass trusted context fields (for example IDs and profile attributes) when launching.
+  </Card>
+</CardGrid>

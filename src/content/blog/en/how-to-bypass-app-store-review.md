@@ -1,52 +1,111 @@
 ---
 slug: how-to-bypass-app-store-review
-title: How to update Capacitor JS Apps without the App Store review.
+title: How to update Capacitor JS apps without repeat store review
 description: >-
-  How can Capgo Feature allow you to push code updates to live iOS Ionic apps
-  and be fully compliant with Apple’s guidelines? 
+  A practical, policy-aware playbook for shipping Capacitor JavaScript updates on
+  iOS and Android without submitting a full app review for every small fix.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-01-13T00:00:00.000Z
-updated_at: 2022-01-13T00:00:00.000Z
+updated_at: 2026-02-23T02:14:43.000Z
 head_image: /bypass_illustration.webp
 head_image_alt: Capacitor bypass illustration
-keywords: Apple, App Store, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
+keywords: Apple App Store, Google Play, Capacitor, Capgo, OTA updates, live updates, app store review
 tag: Tutorial
 published: true
 locale: en
-next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
+next_blog: app-store-vs-direct-updates-what-developers-need-to-know
 ---
+
 _Glad you asked._
 
-My lawyers asked me to let you know that this isn't legal advice, but you don't need a law degree to understand the wording in Apple's official guidelines. Apple’s guidelines explicitly permit you to push executable code directly to your app, bypassing the App Store, under these three conditions:
+I am not giving legal advice. I am sharing what’s practical and widely used across teams shipping Capacitor apps safely.
 
-* The code is run by Apple's built-in WebKit framework
-* The code does not provide, unlock or enable additional features or functionality
-* The user doesn't see the update is happening
+The important distinction is this:
 
-With Capgo capacitor plugin, you can only update and modify your HTML CSS and JavaScript, so we’re good on the first condition.
+- **Native submission** is still required for new native behavior and major capabilities.
+- **Live updates** are for JavaScript/web fixes and adjustments inside your existing app scope.
 
-On a side note, the ability for apps to update themselves without the App Store has been around for a quite a while.
-Only for apps created using JavaScript frameworks such as Facebook's React Native and services such as Expo.
+Both iOS and Android can use this model, but you must treat it as a **policy-safe workflow**, not a loophole.
 
-A proof that React Native is not more Native than Capacitor 😆
+## What Apple and Google allow in simple terms
 
-Capgo is simply the first affordable solution that provides the ability to push code-level updates to native Capacitor apps.
-The second condition, no new features or functionality, is really up to you.
+You can treat Apple and Google as sharing a similar boundary:
 
-Capgo isn't intended to push new features or functionality. It is meant to tweak or fix them, avoiding the minor releases needed to fix bugs, add logging or tracking, update messages, force users to upgrade, etc.
+1. You can deliver code interpreted by the embedded web layer (HTML/CSS/JS) without resubmitting.
+2. You should not use that channel for major feature additions that change app purpose.
+3. You should not alter critical security or distribution controls through JS alone.
 
-For new features or functionality, you need to release through the app store. For your information, Ionic AppFlow (the alternative for big corporate) is installed on over 50 million iOS devices and there's never been an app rejected because it uses it.
+Apple’s official guidance around WebKit/JavaScript updates is the core of this model. Google is typically less restrictive for web-based updates, but the same principle applies: keep native changes in a native release.
 
-I'm just saying that because it's good to know that thousands of other developers are using live updates, so you're not alone.
+## What Capgo is good for
 
-Apple and Google have their set of own rules on how to update apps.
+Capgo is for:
 
-For Apple, [take a look at paragraph 3.3.2](https://developer.apple.com/programs/information/Apple_Developer_Program_Information_8_12_15.pdf/).
-\[…\] The only exception to the foregoing is scripts and code downloaded and run by Apple's built-in WebKit framework or JavascriptCore \[…\] __TLDR__: we should use OTA updates only to fix bugs or make improvements, without making significant changes.
+- hotfixing web bugs,
+- safe UI copy / style / flow fixes,
+- minor logic corrections in existing pages,
+- fast experimentation for internal QA.
 
-__Google__ Play is less restrictive – they say that apps installed from Google Play with JavaScript bundles [aren’t restricted](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en) to update by Google services only.
+Capgo is not for:
 
+- adding permissions or new native capabilities,
+- shipping new core capabilities that should go through review,
+- changing signing, encryption, or package identity behavior.
 
-Check my next article for more information on how to install Capgo to bypass review.
+## Recommended release strategy
+
+Think in two tracks:
+
+### Track 1: native track (store review)
+
+Use your normal Capacitor release process for:
+
+- new plugin updates,
+- app shell or manifest changes,
+- permissions updates,
+- platform-specific functionality changes.
+
+These require:
+
+```bash
+bun run build
+bunx cap sync
+# then App Store / Google Play submission flow
+```
+
+### Track 2: JS track (Capgo)
+
+For safe, small runtime changes:
+
+```bash
+bun run build
+bunx @capgo/cli deploy --channel staging
+bunx @capgo/cli deploy --channel production
+```
+
+This gives you fast iteration without new binary uploads while keeping the binary
+itself stable.
+
+## How to avoid “oops, this needed a native release”
+
+Before every Capgo rollout, run this quick gate:
+
+1. Does the change require a new native dependency or permission?
+2. Does it change the app’s advertised capabilities?
+3. Does it alter authentication/security boundaries?
+4. Can we describe it as a non-breaking JavaScript fix?
+
+If the answer is yes to (1)-(3), submit a native release.
+If yes only to (4), send through Capgo.
+
+## What this means for compliance teams
+
+- You keep app review bandwidth for meaningful changes.
+- You preserve rollback control and fast patching.
+- You reduce production risk by testing updates in channels before full rollout.
+
+This is the same approach people use on large Capacitor programs in production: fast updates for JS-only fixes, native review only for real binaries.
+
+If you want to go deeper, pair this with a strict environment strategy based on channels so QA never receives production mistakes. That is the Capgo-native way to keep staging, beta, and production clean.

@@ -9,7 +9,7 @@ If you have questions not answered here, please ask! Both filing an issue or ask
 
 ### What is "code push"?[](https://capgo.app/docs/#what-is-code-push "Direct link to What is \"code push\"?")
 
-Code push, also referred to as "over the air updates" (OTA) is a cloud service enabling Capacitor developers to deploy updates to their apps in production. Capgo currently works on Android and iOS and will eventually work everywhere Capacitor works.
+Code push, also referred to as "over-the-air updates" (OTA) is a cloud service enabling Capacitor developers to deploy updates to their apps in production. Capgo currently works on Android, iOS, and Electron.
 
 "Code Push" is a reference to the name of a deploy feature used by the React Native community from [Microsoft](https://appcenter.ms/) and [Expo](https://expo.dev/), neither of which support Capacitor.
 
@@ -143,7 +143,7 @@ If you have a use case for code push with web, we'd love to know!
 
 Yes.
 
-So far we've focused on Android and iOS support, but code push will eventually work everywhere Capacitor works. We're ensuring we've built all the infrastructure needed to provide code push reliably and safely before expanding to more platforms.
+So far we've focused on Android, iOS, and Electron support, and code push is production-ready on all three.
 
 ### What OS versions does Capgo support?[](https://capgo.app/docs/faq/#what-os-versions-does-capgo-support "Direct link to What OS versions does Capgo support?")
 
@@ -159,7 +159,7 @@ Capgo tracks Capacitor stable and generally updates within a few hours of any st
 
 ### How does this relate to the App/Play Store review process or policies?[](https://capgo.app/docs/faq/#how-does-this-relate-to-the-appplay-store-review-process-or-policies "Direct link to How does this relate to the App/Play Store review process or policies?")
 
-Developers are bound by their agreements with store providers when they choose to use those stores. Code push is designed to allow developers to update their apps and still comply with store policies on iOS and Android. Similar to the variety of commercial products available to do so with React Native (e.g. [Microsoft](https://appcenter.ms/), [Expo](https://expo.dev/)).
+Developers are bound by their agreements with store providers when they choose to use those stores. Code push is designed to allow developers to update their apps and still comply with store policies on iOS, Android, and Electron delivery channels. Similar to the variety of commercial products available to do so with React Native (e.g. [Microsoft](https://appcenter.ms/), [Expo](https://expo.dev/)).
 
 Microsoft also publishes a guide on how their solution complies with the app stores: [https://github.com/microsoft/react-native-code-push#store-guideline-compliance](https://github.com/microsoft/react-native-code-push/#store-guideline-compliance)
 
@@ -294,9 +294,9 @@ Requests sent from the app to Capgo servers include:
 
 ### What platforms does Capgo support?[](https://capgo.app/docs/faq/#what-platforms-does-capgo-support "Direct link to What platforms does Capgo support?")
 
-Currently, Capgo supports iOS and Android. Both are production ready.
+Currently, Capgo supports Android, iOS, and Electron. All are production-ready.
 
-Use of Capgo for iOS or Android can be independent decisions. You can set in your channel to ship to Android and an ipa built to the App Store or vice versa.
+Use of Capgo for iOS, Android, or Electron can be independent decisions. You can set your channel strategy for Android and an ipa built to the App Store, or Electron channels, as needed.
 
 Capgo can (relatively easily) be made to support desktop or embedded targets. If those are important to you, please let us know.
 

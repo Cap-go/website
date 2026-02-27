@@ -1,0 +1,339 @@
+---
+title: Configuration Options
+description: Complete reference for all Cloud Build CLI flags, environment variables, and credential keys
+sidebar:
+  order: 2
+  label: Configuration Options
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import MermaidGraph from '@/components/MermaidGraph.astro';
+
+export const precedenceGraph = `flowchart LR
+    A["🔧 CLI Flag"] -->|overrides| B["🌍 Environment Variable"]
+    B -->|overrides| C["📁 Local Credentials"]
+    C -->|overrides| D["🏠 Global Credentials"]
+    style A fill:#6366f1,color:#fff,stroke:#4f46e5
+    style B fill:#8b5cf6,color:#fff,stroke:#7c3aed
+    style C fill:#a78bfa,color:#fff,stroke:#8b5cf6
+    style D fill:#c4b5fd,color:#1e1b4b,stroke:#a78bfa`;
+
+Complete reference for every Cloud Build configuration option. Use this page to find the CLI flag, environment variable, or credential key for any build setting.
+
+## Configuration Precedence
+
+Every build option can be set in multiple ways. When the same option is set in multiple places, higher-priority sources win:
+
+<MermaidGraph graph={precedenceGraph} ariaLabel="Configuration precedence: CLI flags override environment variables, which override local credentials, which override global credentials" />
+
+**Example:** If your saved credentials have `SKIP_BUILD_NUMBER_BUMP=true` but you pass `--no-skip-build-number-bump` on the CLI, the CLI flag wins and build numbers will be auto-incremented.
+
+<Aside type="tip">
+For CI/CD pipelines, environment variables are usually the most convenient. For local development, saved credentials (via `build credentials save`) avoid repeating flags every time.
+</Aside>
+
+---
+
+## iOS Options
+
+### Code Signing
+
+| CLI Flag | Env Variable | Credential Key | Default | Description |
+|----------|-------------|----------------|---------|-------------|
+| `--build-certificate-base64 <cert>` | `BUILD_CERTIFICATE_BASE64` | `BUILD_CERTIFICATE_BASE64` | — | Base64-encoded `.p12` distribution certificate |
+| `--build-provision-profile-base64 <profile>` | `BUILD_PROVISION_PROFILE_BASE64` | `BUILD_PROVISION_PROFILE_BASE64` | — | Base64-encoded `.mobileprovision` provisioning profile |
+| `--build-provision-profile-base64-prod <profile>` | `BUILD_PROVISION_PROFILE_BASE64_PROD` | `BUILD_PROVISION_PROFILE_BASE64_PROD` | — | Production provisioning profile (optional, for App Store distribution) |
+| `--p12-password <password>` | `P12_PASSWORD` | `P12_PASSWORD` | — | Password for the `.p12` certificate (omit if certificate has no password) |
+
+### App Store Connect Authentication
+
+| CLI Flag | Env Variable | Credential Key | Default | Description |
+|----------|-------------|----------------|---------|-------------|
+| `--apple-key-id <id>` | `APPLE_KEY_ID` | `APPLE_KEY_ID` | — | App Store Connect API Key ID |
+| `--apple-issuer-id <id>` | `APPLE_ISSUER_ID` | `APPLE_ISSUER_ID` | — | App Store Connect Issuer ID (UUID) |
+| `--apple-key-content <content>` | `APPLE_KEY_CONTENT` | `APPLE_KEY_CONTENT` | — | Base64-encoded App Store Connect API key (`.p8` file) |
+| `--apple-profile-name <name>` | `APPLE_PROFILE_NAME` | `APPLE_PROFILE_NAME` | — | Provisioning profile name as shown in Apple Developer portal |
+| `--app-store-connect-team-id <id>` | `APP_STORE_CONNECT_TEAM_ID` | `APP_STORE_CONNECT_TEAM_ID` | — | App Store Connect Team ID |
+
+<Aside type="note">
+**Alternative authentication:** You can also use Apple ID + app-specific password instead of API keys. Pass `--apple-id <email>` and `--apple-app-specific-password <password>` (env vars: `APPLE_ID`, `APPLE_APP_SPECIFIC_PASSWORD`). API keys are recommended for CI/CD.
+</Aside>
+
+### iOS Build Settings
+
+| CLI Flag | Env Variable | Credential Key | Default | Description |
+|----------|-------------|----------------|---------|-------------|
+| `--ios-scheme <scheme>` | `CAPGO_IOS_SCHEME` | `CAPGO_IOS_SCHEME` | `App` | Xcode scheme to build |
+| `--ios-target <target>` | `CAPGO_IOS_TARGET` | `CAPGO_IOS_TARGET` | `App` | Xcode target for reading build settings |
+
+---
+
+## Android Options
+
+### Keystore Signing
+
+| CLI Flag | Env Variable | Credential Key | Default | Description |
+|----------|-------------|----------------|---------|-------------|
+| `--android-keystore-file <keystore>` | `ANDROID_KEYSTORE_FILE` | `ANDROID_KEYSTORE_FILE` | — | Base64-encoded keystore file (`.keystore` or `.jks`) |
+| `--keystore-key-alias <alias>` | `KEYSTORE_KEY_ALIAS` | `KEYSTORE_KEY_ALIAS` | `key0` | Keystore key alias |
+| `--keystore-key-password <password>` | `KEYSTORE_KEY_PASSWORD` | `KEYSTORE_KEY_PASSWORD` | — | Keystore key password (falls back to store password if not set) |
+| `--keystore-store-password <password>` | `KEYSTORE_STORE_PASSWORD` | `KEYSTORE_STORE_PASSWORD` | — | Keystore store password |
+
+### Google Play Configuration
+
+| CLI Flag | Env Variable | Credential Key | Default | Description |
+|----------|-------------|----------------|---------|-------------|
+| `--play-config-json <json>` | `PLAY_CONFIG_JSON` | `PLAY_CONFIG_JSON` | — | Base64-encoded Google Play service account JSON key |
+
+### Android Build Settings
+
+| Env Variable | Default | Description |
+|-------------|---------|-------------|
+| `PLAY_STORE_TRACK` | `internal` | Google Play release track (`internal`, `alpha`, `beta`, `production`) |
+| `PLAY_STORE_RELEASE_STATUS` | `draft` | Release status on Google Play (`draft`, `completed`) |
+
+---
+
+## Build Control Options
+
+These options work for both iOS and Android builds.
+
+### Build Mode
+
+| CLI Flag | Default | Description |
+|----------|---------|-------------|
+| `--platform <platform>` | — | **Required.** `ios` or `android` |
+| `--build-mode <mode>` | `release` | `debug` or `release` |
+| `--build-config <json>` | — | Additional JSON build configuration |
+| `--path <path>` | `.` | Project directory |
+| `--verbose` | `false` | Enable verbose build logging |
+
+### Build Number Control
+
+| CLI Flag | Env Variable | Credential Key | Default | Description |
+|----------|-------------|----------------|---------|-------------|
+| `--skip-build-number-bump` | `SKIP_BUILD_NUMBER_BUMP` | `SKIP_BUILD_NUMBER_BUMP` | `false` | Skip automatic build number / version code incrementing |
+| `--no-skip-build-number-bump` | — | — | — | Explicitly re-enable auto-increment (overrides saved credentials) |
+
+By default, Capgo Cloud Build automatically increments build numbers:
+- **iOS:** Fetches latest build number from App Store Connect, increments by 1
+- **Android:** Fetches max `versionCode` from Google Play, increments by 1
+
+When `--skip-build-number-bump` is set, the build uses whatever version is already in your project files (Xcode project or `build.gradle`).
+
+### Output Upload
+
+| CLI Flag | Env Variable | Credential Key | Default | Description |
+|----------|-------------|----------------|---------|-------------|
+| `--output-upload` | `BUILD_OUTPUT_UPLOAD_ENABLED` | `BUILD_OUTPUT_UPLOAD_ENABLED` | `false` | Upload build outputs (IPA/APK/AAB) to Capgo storage. When set via env var, use `BUILD_OUTPUT_UPLOAD_ENABLED=true`. |
+| `--no-output-upload` | `BUILD_OUTPUT_UPLOAD_ENABLED` | — | — | Disable output upload. When set via env var, use `BUILD_OUTPUT_UPLOAD_ENABLED=false`. |
+| `--output-retention <duration>` | `BUILD_OUTPUT_RETENTION_SECONDS` | `BUILD_OUTPUT_RETENTION_SECONDS` | `1h` | How long download links remain active |
+
+**Retention format:** Use human-readable durations like `1h`, `6h`, `2d`, `7d`. Minimum is 1 hour, maximum is 7 days. When set via env var, use seconds (e.g., `3600` for 1 hour).
+
+### Authentication
+
+| CLI Flag | Env Variable | Default | Description |
+|----------|-------------|---------|-------------|
+| `-a, --apikey <key>` | `CAPGO_TOKEN` | — | Capgo API key for authentication |
+| `--supa-host <host>` | — | — | Custom Supabase host (self-hosting only) |
+| `--supa-anon <key>` | — | — | Custom Supabase anon key (self-hosting only) |
+
+---
+
+## Environment Variable Quick Reference
+
+Copy-paste ready for your CI/CD pipeline. All variables are optional — only set what you need.
+
+### iOS
+
+```bash
+# Code signing (required for iOS builds)
+BUILD_CERTIFICATE_BASE64="<base64-encoded .p12>"
+BUILD_PROVISION_PROFILE_BASE64="<base64-encoded .mobileprovision>"
+P12_PASSWORD="<certificate password>"
+
+# App Store Connect (required for store submission)
+APPLE_KEY_ID="ABC1234567"
+APPLE_ISSUER_ID="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+APPLE_KEY_CONTENT="<base64-encoded .p8 key>"
+APPLE_PROFILE_NAME="My App Distribution Profile"
+APP_STORE_CONNECT_TEAM_ID="TEAM123456"
+
+# Optional iOS settings
+CAPGO_IOS_SCHEME="App"
+CAPGO_IOS_TARGET="App"
+```
+
+### Android
+
+```bash
+# Keystore signing (required for Android builds)
+ANDROID_KEYSTORE_FILE="<base64-encoded .keystore>"
+KEYSTORE_KEY_ALIAS="my-key-alias"
+KEYSTORE_KEY_PASSWORD="<key password>"
+KEYSTORE_STORE_PASSWORD="<store password>"
+
+# Google Play (required for store submission)
+PLAY_CONFIG_JSON="<base64-encoded service account JSON>"
+
+# Optional Android settings
+PLAY_STORE_TRACK="internal"
+PLAY_STORE_RELEASE_STATUS="draft"
+```
+
+### Build Control
+
+```bash
+# Build behavior
+SKIP_BUILD_NUMBER_BUMP="true"          # Skip auto-increment
+BUILD_OUTPUT_UPLOAD_ENABLED="true"     # Upload IPA/APK/AAB
+BUILD_OUTPUT_RETENTION_SECONDS="3600"  # 1 hour download link
+
+# Authentication
+CAPGO_TOKEN="your-api-key"
+```
+
+---
+
+## Credential Storage
+
+### Save Credentials Locally
+
+Instead of passing flags or env vars every time, save credentials once:
+
+```bash
+# Save iOS credentials
+bunx @capgo/cli build credentials save \
+  --platform ios \
+  --certificate ./dist_cert.p12 \
+  --provisioning-profile ./profile.mobileprovision \
+  --p12-password "cert-password" \
+  --apple-key ./AuthKey.p8 \
+  --apple-key-id ABC1234567 \
+  --apple-issuer-id xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
+  --apple-profile-name "My App Profile" \
+  --apple-team-id TEAM123456
+
+# Save Android credentials
+bunx @capgo/cli build credentials save \
+  --platform android \
+  --keystore ./release.keystore \
+  --keystore-alias my-key \
+  --keystore-key-password "key-pass" \
+  --keystore-store-password "store-pass" \
+  --play-config ./play-service-account.json
+```
+
+### Storage Locations
+
+| Flag | Location | Use Case |
+|------|----------|----------|
+| *(default)* | `~/.capgo-credentials/credentials.json` | Global — shared across all projects on your machine |
+| `--local` | `.capgo-credentials.json` in project root | Per-project — overrides global when both exist |
+
+Credentials are keyed by **app ID** (e.g. `com.example.myapp`), so a single credentials file can store settings for multiple apps without conflicts. Each app's credentials are further split by platform (`ios` / `android`).
+
+<Aside type="caution">
+Add `.capgo-credentials.json` to your `.gitignore` if using local credentials. Never commit credentials to version control.
+</Aside>
+
+### Manage Saved Credentials
+
+```bash
+# List saved credentials
+bunx @capgo/cli build credentials list
+
+# Update a specific option without re-entering everything
+bunx @capgo/cli build credentials update --skip-build-number-bump
+
+# Clear saved credentials
+bunx @capgo/cli build credentials clear --platform ios
+```
+
+---
+
+## Examples
+
+### GitHub Actions
+
+```yaml
+name: Build and Submit
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-ios:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install
+      - run: bunx cap sync ios
+      - run: bunx @capgo/cli build request --platform ios
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.IOS_CERTIFICATE }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.IOS_PROFILE }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
+          APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
+          APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
+          APPLE_PROFILE_NAME: ${{ secrets.APPLE_PROFILE_NAME }}
+          APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
+
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install
+      - run: bunx cap sync android
+      - run: bunx @capgo/cli build request --platform android
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
+```
+
+### Using CLI Flags Directly
+
+```bash
+# Build iOS with all options inline
+bunx @capgo/cli build request \
+  --platform ios \
+  --build-mode release \
+  --skip-build-number-bump \
+  --output-retention 6h \
+  --apikey YOUR_API_KEY
+
+# Build Android, skip version bump, no output upload
+bunx @capgo/cli build request \
+  --platform android \
+  --skip-build-number-bump \
+  --no-output-upload \
+  --apikey YOUR_API_KEY
+```
+
+### Mixed Configuration
+
+Combine saved credentials with CLI overrides:
+
+```bash
+# Save base credentials once
+bunx @capgo/cli build credentials save --platform ios \
+  --certificate ./cert.p12 \
+  --provisioning-profile ./profile.mobileprovision \
+  --output-upload
+
+# Override specific options per-build
+bunx @capgo/cli build request --platform ios \
+  --skip-build-number-bump \
+  --output-retention 2d
+```
+
+The saved credentials provide signing details while CLI flags override build behavior for this specific run.

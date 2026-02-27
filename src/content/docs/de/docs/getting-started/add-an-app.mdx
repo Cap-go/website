@@ -33,11 +33,15 @@ Bevor Sie mit Capgo beginnen, stellen Sie sicher, dass Sie:
 1. Erstellen Sie Ihr Konto unter [https://capgo.app/register](https://capgo.app/register).
 ![signup screenshot](/signup.webp "signup screenshot")
 
-2. Verwenden Sie die Init-Befehle, um zu beginnen <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Es werden Ihnen eine Reihe von Fragen gestellt. Beantworten Sie diese, um das automatische Setup abzuschließen.<Aside type="tip">Wenn Sie diese Schritte befolgen, sind Sie in kürzester Zeit einsatzbereit. Falls Sie während des Prozesses weitere Unterstützung benötigen, ist unser Support-Team [hier um zu helfen](https://support.capgo.app). Viel Spaß beim Onboarding!</Aside><LinkCard href="/docs/getting-started/onboarding/" title="Detaillierter Onboarding-Leitfaden" description="Sehen Sie den vollständigen Schritt-für-Schritt-Leitfaden für den CLI-Onboarding-Prozess" />
+2. Verwenden Sie die Init-Befehle, um zu beginnen <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Es werden Ihnen eine Reihe von Fragen gestellt. Beantworten Sie diese, um das automatische Setup abzuschließen.
 
-3. Stellen Sie ein Live-Update bereit <LinkCard href="/docs/getting-started/deploy/" title="Stellen Sie ein Live-Update bereit" description="Erfahren Sie, wie Sie ein Live-Update für Ihre App bereitstellen" />
+3. Stellen Sie ein Live-Update bereit
 
 </Steps>
+
+<Aside type="tip">Wenn Sie diese Schritte befolgen, sind Sie in kürzester Zeit einsatzbereit. Falls Sie während des Prozesses weitere Unterstützung benötigen, ist unser Support-Team [hier um zu helfen](https://support.capgo.app). Viel Spaß beim Onboarding!</Aside>
+<LinkCard href="/docs/getting-started/onboarding/" title="Detaillierter Onboarding-Leitfaden" description="Sehen Sie den vollständigen Schritt-für-Schritt-Leitfaden für den CLI-Onboarding-Prozess" />
+<LinkCard href="/docs/getting-started/deploy/" title="Stellen Sie ein Live-Update bereit" description="Erfahren Sie, wie Sie ein Live-Update für Ihre App bereitstellen" />
 
 ### Manuelles Setup
 
@@ -51,28 +55,28 @@ Falls der Init-Befehl für Sie nicht funktioniert, können Sie eine App manuell 
 
 3. Installieren Sie das Plugin in Ihrer App: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
 
-   <Aside type="note" title="Installation für ältere Capacitor-Versionen">
-   Der obige Befehl installiert die neueste Version (v8.x) für Capacitor 8. Für ältere Capacitor-Versionen verwenden Sie den entsprechenden npm-Tag:
-
-   ```bash
-   # Capacitor 7
-   npm i @capgo/capacitor-updater@lts-v7
-
-   # Capacitor 6
-   npm i @capgo/capacitor-updater@lts-v6
-
-   # Capacitor 5
-   npm i @capgo/capacitor-updater@lts-v5
-   ```
-
-   Jede Plugin-Hauptversion entspricht der Capacitor-Hauptversion (v8 → Capacitor 8, v7 → Capacitor 7, v6 → Capacitor 6, v5 → Capacitor 5). Minor-Versionen teilen denselben Funktionsumfang über alle Hauptversionen (z.B. 5.34.0, 6.34.0, 7.34.0 und 8.34.0 enthalten dieselben Funktionen).
-   </Aside>
-
 4. Konfigurieren Sie das Plugin in Ihrer `capacitor.config` <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
   [Siehe alle verfügbaren Optionen](/docs/plugin/settings/). Diese Informationen werden abgeleitet, wenn sie nicht bereitgestellt werden.
 
 5. Rufen Sie die Init-Methode so früh wie möglich in Ihrer App auf: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
 
-6. Stellen Sie ein Live-Update bereit <LinkCard href="/docs/getting-started/deploy/" title="Stellen Sie ein Live-Update bereit" description="Erfahren Sie, wie Sie ein Live-Update für Ihre App bereitstellen" />
+6. Stellen Sie ein Live-Update bereit
 
 </Steps>
+
+<Aside type="note" title="Installation für ältere Capacitor-Versionen">
+Der obige Befehl installiert die neueste Version (v8.x) für Capacitor 8. Für ältere Capacitor-Versionen verwenden Sie den entsprechenden npm-Tag:
+
+```bash
+# Capacitor 7
+npm i @capgo/capacitor-updater@lts-v7
+
+# Capacitor 6
+npm i @capgo/capacitor-updater@lts-v6
+
+# Capacitor 5
+npm i @capgo/capacitor-updater@lts-v5
+```
+
+Jede Plugin-Hauptversion entspricht der Capacitor-Hauptversion (v8 → Capacitor 8, v7 → Capacitor 7, v6 → Capacitor 6, v5 → Capacitor 5). Minor-Versionen teilen denselben Funktionsumfang über alle Hauptversionen (z.B. 5.34.0, 6.34.0, 7.34.0 und 8.34.0 enthalten dieselben Funktionen).
+</Aside>
