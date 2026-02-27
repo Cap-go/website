@@ -135,22 +135,22 @@ npx @capgo/cli@latest bundle upload --key-v2
 
 1. Créer le zip:
 
-```shell
-npx @capgo/cli@latest bundle zip com.example.app --path ./dist --key-v2
-```
+    ```shell
+    npx @capgo/cli@latest bundle zip com.example.app --path ./dist --key-v2
+    ```
 
 2. Chiffrer:
 
-```shell
-npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM_FROM_STEP_1
-```
+    ```shell
+    npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM_FROM_STEP_1
+    ```
 
 3. Uploader sur votre stockage puis enregistrer l'URL:
 
-```shell
-aws s3 cp ./encrypted-bundle.zip s3://your-bucket/encrypted-bundle.zip
-npx @capgo/cli@latest bundle upload --external https://your-storage.com/encrypted-bundle.zip --iv-session-key IV_SESSION_KEY_FROM_STEP_2
-```
+    ```shell
+    aws s3 cp ./encrypted-bundle.zip s3://your-bucket/encrypted-bundle.zip
+    npx @capgo/cli@latest bundle upload --external https://your-storage.com/encrypted-bundle.zip --iv-session-key IV_SESSION_KEY_FROM_STEP_2
+    ```
 
 </Steps>
 
@@ -175,16 +175,16 @@ npx @capgo/cli@latest bundle upload --key-data-v2 "$CAPGO_PRIVATE_KEY"
 
 1. Générer de nouvelles clés:
 
-```shell
-mkdir ./new-keys && cd ./new-keys
-npx @capgo/cli@latest key create
-```
+    ```shell
+    mkdir ./new-keys && cd ./new-keys
+    npx @capgo/cli@latest key create
+    ```
 
 2. Enregistrer la nouvelle clé publique:
 
-```shell
-npx @capgo/cli@latest key save --key ./new-keys/.capgo_key_v2.pub
-```
+    ```shell
+    npx @capgo/cli@latest key save --key ./new-keys/.capgo_key_v2.pub
+    ```
 
 3. Publier une version native embarquant la nouvelle clé publique.
 
