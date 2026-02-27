@@ -3266,11 +3266,11 @@
   "your_live_update_solution_for_capacitor_apps": "Your Live Update Solution for Capacitor Apps",
   "youre_in_good_company": "You're in good company.",
   "zero_trust_security": "Zero-Trust Security",
-  "zero_vendor_lockin_pay_provider_directly": "zero vendor lock-in, pay your provider directly."
-}
+  "zero_vendor_lockin_pay_provider_directly": "zero vendor lock-in, pay your provider directly.",
   "capgo_availability_faq_title": "What happens when Capgo is down, canceled, or I exceed my plan limits?",
   "capgo_availability_faq_intro": "Your app continues to work normally even when Capgo is unavailable. Here is what happens in different scenarios:",
   "capgo_availability_faq_capgo_down": "Capgo is down: App ignores updates, existing updates stay on device",
   "capgo_availability_faq_canceled": "Subscription canceled: Existing updates remain, no new updates are downloaded",
   "capgo_availability_faq_limits": "Above plan limits: Updates stop until you upgrade or add credits",
-  "capgo_availability_faq_link": "Learn more in our documentation",
+  "capgo_availability_faq_link": "Learn more in our documentation"
+}
