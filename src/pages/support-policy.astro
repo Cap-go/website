@@ -68,6 +68,29 @@ const content = { title, description }
     </p>
     <h2>{m.support_policy_premium_support_title({}, { locale: Astro.locals.locale })}</h2>
     <p>{m.support_policy_premium_support_desc({}, { locale: Astro.locals.locale })}</p>
+
+    <h2 id="service-disruption-and-ending">Service disruption and plan ending</h2>
+    <p>
+      The update system is designed to fail safe. If Capgo is unavailable, the app keeps running and no user-facing freeze is introduced by the update check.
+    </p>
+    <p>
+      In every update mode, if the plugin cannot get an answer from the update service within 3 seconds, it cancels the request and opens the app normally.
+    </p>
+    <ul>
+      <li>
+        <strong>If Capgo is down:</strong> in background mode, this is usually invisible to users. In direct mode, the service may return a 500-style result when reachable; if the server is simply too slow, the plugin waits up to 3 seconds, cancels the query, and continues normal app startup.
+      </li>
+      <li>
+        <strong>If payment is stopped or billing is canceled:</strong> the last successfully installed update remains on each phone, but no new updates are downloaded.
+      </li>
+      <li>
+        <strong>If traffic goes beyond your plan:</strong> no devices (new or old) will receive additional updates until the plan is back in scope.
+      </li>
+    </ul>
+    <p>
+      In every scenario above, your app remains usable with the last installed version, and updates are simply skipped until service resumes.
+    </p>
+
     <p><a href="mailto:martin@capgo.app">martin@capgo.app</a></p>
   </div>
 </Layout>
