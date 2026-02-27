@@ -249,20 +249,20 @@ import * as m from '@/paraglide/messages'
 
         <details class="group border-b border-gray-800 last:border-b-0 open:bg-blue-950/20 open:border-blue-600/30" id="faq-cancel">
           <summary class="flex items-center justify-between px-8 py-6 cursor-pointer hover:bg-gray-800/30 group-open:bg-blue-900/20 transition-all duration-200">
-            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">What happens when Capgo is down, canceled, or I exceed my plan limits?</span>
-            <svg class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <span class="text-lg font-medium text-white group-hover:text-blue-400 group-open:text-blue-400 transition-colors duration-200 pr-4">{m.capgo_availability_faq_title({}, { locale: Astro.locals.locale })}</span>
+            <svg aria-hidden="true" class="w-5 h-5 text-gray-400 group-open:text-blue-400 group-open:rotate-180 transition-all duration-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
           <div class="px-8 pb-6 pt-2 bg-blue-950/10">
             <div class="text-gray-200 leading-relaxed">
-              <p class="mb-3">Your app continues to work normally even when Capgo is unavailable. Here's what happens in different scenarios:</p>
+              <p class="mb-3">{m.capgo_availability_faq_intro({}, { locale: Astro.locals.locale })}</p>
               <ul class="list-disc list-inside space-y-2 mb-4">
-                <li><strong>Capgo is down:</strong> App ignores updates, existing updates stay on device</li>
-                <li><strong>Subscription canceled:</strong> Existing updates remain, no new updates are downloaded</li>
-                <li><strong>Above plan limits:</strong> Updates stop until you upgrade or add credits</li>
+                <li><strong>Capgo is down:</strong> {m.capgo_availability_faq_capgo_down({}, { locale: Astro.locals.locale })}</li>
+                <li><strong>Subscription canceled:</strong> {m.capgo_availability_faq_canceled({}, { locale: Astro.locals.locale })}</li>
+                <li><strong>Above plan limits:</strong> {m.capgo_availability_faq_limits({}, { locale: Astro.locals.locale })}</li>
               </ul>
-              <a href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/capgo-availability')} class="text-blue-400 hover:text-blue-300 transition-colors underline">Learn more in our documentation →</a>
+              <a href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/capgo-availability')} class="text-blue-400 hover:text-blue-300 transition-colors underline">{m.capgo_availability_faq_link({}, { locale: Astro.locals.locale })} →</a>
             </div>
           </div>
         </details>
