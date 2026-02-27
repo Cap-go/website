@@ -5,8 +5,8 @@ sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps, Card, CardGrid } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { Code, Card, CardGrid } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 import MicroCard from '@/components/MicroCard.astro'
 
@@ -17,27 +17,135 @@ import MicroCard from '@/components/MicroCard.astro'
 2. **Sync with native projects**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure the plugin**
-   <div class="flex flex-nowrap gap-4 h-full">
-      <div style="display: flex; gap: 1rem; width: 100% !important; max-width: 100% !important; flex-wrap: wrap;">
-         <MicroCard href="/docs/plugins/social-login/google/general/" title="Google" customIcon="/icons/google.svg">
-            Configure Google Sign-In for your app
-         </MicroCard>
-         <MicroCard href="/docs/plugins/social-login/facebook/" title="Facebook" icon="facebook">
-            Set up Facebook Login integration
-         </MicroCard>
-         <MicroCard href="/docs/plugins/social-login/apple/general/" title="Apple" icon="apple">
-            Enable Sign in with Apple
-         </MicroCard>
-         <MicroCard href="/docs/plugins/social-login/oauth2/" title="OAuth2" icon="external">
-            Generic OAuth2 for GitHub, Azure, Auth0, and more
-         </MicroCard>
-      </div>
-   </div>
+3. **Initialize in app startup**
+
+   ```typescript
+   import { SocialLogin } from '@capgo/capacitor-social-login';
+
+   await SocialLogin.initialize({
+     google: {
+       webClientId: 'your-google-web-client-id',
+       iOSServerClientId: 'your-google-server-client-id',
+       mode: 'online',
+     },
+     apple: {
+       clientId: 'your-apple-service-id',
+       useProperTokenExchange: true,
+       useBroadcastChannel: true,
+     },
+     facebook: {
+       appId: 'your-facebook-app-id',
+     },
+     twitter: {
+       clientId: 'your-twitter-client-id',
+       redirectUrl: 'myapp://oauth/twitter',
+     },
+     oauth2: {
+       github: {
+         appId: 'your-github-client-id',
+         authorizationBaseUrl: 'https://github.com/login/oauth/authorize',
+         accessTokenEndpoint: 'https://github.com/login/oauth/access_token',
+         redirectUrl: 'myapp://oauth/github',
+         scope: 'read:user user:email',
+         pkceEnabled: true,
+       },
+     },
+   });
+   ```
 </Steps>
 
-## Related Documentation
+## Core flow examples
+
+### Login
+
+```typescript
+await SocialLogin.login({
+  provider: 'google',
+  options: { scopes: ['profile', 'email'] },
+});
+
+await SocialLogin.login({
+  provider: 'oauth2',
+  options: {
+    providerId: 'github',
+    scope: 'read:user user:email',
+  },
+});
+```
+
+### Session checks
+
+```typescript
+const status = await SocialLogin.isLoggedIn({ provider: 'google' });
+await SocialLogin.logout({ provider: 'google' });
+```
+
+### Auth codes and refresh
+
+```typescript
+// For providers that support this mode
+const authCodeResult = await SocialLogin.getAuthorizationCode({ provider: 'google' });
+await SocialLogin.refresh({ provider: 'google', options: {} as never });
+```
+
+### Advanced helpers
+
+```typescript
+const jwt = await SocialLogin.decodeIdToken({
+  idToken: 'eyJhbGciOi...',
+});
+
+const { date } = await SocialLogin.getAccessTokenExpirationDate({
+  accessTokenExpirationDate: Date.now() + 3600 * 1000,
+});
+
+const expired = await SocialLogin.isAccessTokenExpired({
+  accessTokenExpirationDate: Date.now() + 1000,
+});
+
+const active = await SocialLogin.isRefreshTokenAvailable({ refreshToken: 'a-token' });
+```
+
+## Provider-specific notes
+
+### Google offline mode
+
+`google.mode: 'offline'` returns `serverAuthCode` from login. In this mode logout, isLoggedIn, getAuthorizationCode, and refresh are not available.
+
+### Apple
+
+Set `useProperTokenExchange: true` for strict token handling and `useBroadcastChannel: true` for Android simplified setup.
+
+### OAuth2 web redirect flow
+
+Use `OAuth2LoginOptions.flow: 'redirect'` for web flows that navigate away from the page.
+
+## Provider configuration in Capacitor
+
+You can disable unused providers to reduce native binaries:
+
+```typescript
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.example.app',
+  appName: 'My App',
+  webDir: 'dist',
+  plugins: {
+    SocialLogin: {
+      providers: {
+        google: true,
+        facebook: true,
+        apple: true,
+        twitter: false,
+      },
+    },
+  },
+};
+```
+
+## Related documentation
 
 - [Migrate from Ionic Auth Connect](/docs/upgrade/from-ionic-auth-connect/)
+- [Migrate legacy providers](/docs/plugins/social-login/migrations/google/)
 - [Ionic enterprise plugins migration solution](/solutions/ionic-enterprise-plugins/)
-

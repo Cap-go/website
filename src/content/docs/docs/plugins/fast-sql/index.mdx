@@ -26,24 +26,21 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid stagger>
   <Card title="Custom HTTP Protocol" icon="rocket">
-    Bypasses Capacitor's bridge for up to 25x faster performance ⚡
+    Bypasses Capacitor's bridge for faster large-result and batch workloads.
   </Card>
-  <Card title="Full SQLite Support" icon="list-format">
-    Complete SQL support with transactions and batch operations 📊
+  <Card title="Transaction support" icon="list-format">
+    Supports `transaction()`, explicit begin/commit/rollback, and isolation levels.
   </Card>
-  <Card title="Sync-Friendly" icon="random">
-    Designed for local sync systems like CRDTs and operational transforms 🔄
+  <Card title="Batch + BLOB support" icon="random">
+    Execute multiple statements in one request and store binary data.
   </Card>
-  <Card title="Cross-Platform" icon="laptop">
-    iOS, Android, and Web using sql.js + IndexedDB 🌐
+  <Card title="Key-value convenience" icon="document">
+    Use `KeyValueStore` for simple mobile-first key/value persistence.
   </Card>
-  <Card title="Transaction Support" icon="approve-check-circle">
-    ACID transactions with configurable isolation levels 🔒
-  </Card>
-  <Card title="Binary Data" icon="document">
-    Native support for Uint8Array/BLOB storage 📁
+  <Card title="Connection management" icon="globe">
+    Track open databases, disconnect explicitly, or close all in one call.
   </Card>
   <Card title="Getting Started" icon="open-book">
-    Check the [Getting Started Guide](/docs/plugins/fast-sql/getting-started/) to install and configure the plugin.
+    Check the getting started guide to install and configure the plugin.
   </Card>
 </CardGrid>
