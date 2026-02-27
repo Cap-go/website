@@ -24,29 +24,29 @@ Vous devez définir trois URLs dans `capacitor.config.ts`.
 
 2. Configurez le plugin `CapacitorUpdater`:
 
-```typescript
-import { CapacitorConfig } from '@capacitor/cli';
-
-const config: CapacitorConfig = {
-  plugins: {
-    CapacitorUpdater: {
-      autoUpdate: true,
-      updateUrl: 'https://updater.capgo.com.cn/updates',
-      statsUrl: 'https://updater.capgo.com.cn/stats',
-      channelUrl: 'https://updater.capgo.com.cn/channel_self',
-    },
-  },
-};
-
-export default config;
-```
+   ```typescript
+   import { CapacitorConfig } from '@capacitor/cli';
+   
+   const config: CapacitorConfig = {
+     plugins: {
+       CapacitorUpdater: {
+         autoUpdate: true,
+         updateUrl: 'https://updater.capgo.com.cn/updates',
+         statsUrl: 'https://updater.capgo.com.cn/stats',
+         channelUrl: 'https://updater.capgo.com.cn/channel_self',
+       },
+     },
+   };
+   
+   export default config;
+   ```
 
 3. Rebuild et synchronisez:
 
-```shell
-npm run build
-npx cap sync
-```
+   ```shell
+   npm run build
+   npx cap sync
+   ```
 
 </Steps>
 
@@ -113,17 +113,17 @@ export default config;
 
 1. Uploadez un bundle de test:
 
-```shell
-npx @capgo/cli@latest bundle upload --channel=production
-```
+    ```shell
+    npx @capgo/cli@latest bundle upload --channel=production
+    ```
 
 2. Installez l'application sur un appareil de test.
 
 3. Surveillez le processus:
 
-```shell
-npx @capgo/cli@latest app debug
-```
+    ```shell
+    npx @capgo/cli@latest app debug
+    ```
 
 4. Vérifiez que les requêtes partent bien vers `updater.capgo.com.cn`.
 

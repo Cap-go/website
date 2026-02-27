@@ -1,0 +1,72 @@
+---
+title: What Happens When Capgo is Unavailable
+description: Understanding Capgo behavior when service is down, canceled, or when you exceed plan limits
+---
+
+# What Happens When Capgo is Unavailable
+
+Capgo is designed to be resilient and non-blocking. Your app continues to work even when Capgo services are temporarily unavailable. This document explains what happens in various scenarios.
+
+## When Capgo Service is Down
+
+If Capgo's servers are temporarily unavailable or experiencing an outage:
+
+- **Your app continues to work normally** — Users can still open and use your app
+- **Updates are not downloaded** — The automatic update check fails silently
+- **No error is shown to users** — The update process gracefully fails in the background
+- **Existing updates remain** — Any previously downloaded updates stay on the device
+- **Updates resume automatically** — Once service is restored, normal update behavior resumes
+
+Capgo is designed with a "fail-safe" approach: if update services are unavailable, your app simply ignores the update and continues functioning normally.
+
+## When You Cancel Capgo
+
+After canceling your Capgo subscription:
+
+- **Existing updates remain on user devices** — Users who already downloaded updates keep those versions
+- **No new updates are downloaded** — The app stops checking for and downloading updates
+- **App functionality is unaffected** — Your app continues to work without any changes
+- **Historical data is retained** — Your dashboard and analytics data remains accessible for a period
+- **You can reactivate anytime** — Resubscribing restores full update functionality immediately
+
+The update mechanism gracefully degrades — your app becomes "static" but fully functional after cancellation.
+
+## When You Exceed Your Plan Limits
+
+If you exceed your plan's MAU (Monthly Active Users), bandwidth, or storage limits:
+
+### MAU Limits
+- **New users may not receive updates** — The update check continues but may be throttled
+- **Existing users are unaffected** — Users who already have updates continue using them
+- **Analytics may be incomplete** — New user tracking might be paused
+
+### Bandwidth Limits
+- **Update downloads stop** — Users won't receive new updates until you add credits or upgrade
+- **App remains functional** — Existing app version continues to work
+- **No error to users** — Update failures are silent and non-blocking
+
+### Storage Limits
+- **New uploads may fail** — You won't be able to upload new app versions
+- **Existing versions remain available** — Previously uploaded bundles still work
+- **You can upgrade or add storage** — Resolving the limit restores full functionality
+
+## Summary Table
+
+| Scenario | App Works | Updates Download | Existing Updates Stay |
+|----------|-----------|------------------|----------------------|
+| Capgo Down | ✅ Yes | ❌ No | ✅ Yes |
+| Subscription Canceled | ✅ Yes | ❌ No | ✅ Yes |
+| MAU Limit Exceeded | ✅ Yes | ⚠️ May stop | ✅ Yes |
+| Bandwidth Limit | ✅ Yes | ❌ No | ✅ Yes |
+| Storage Limit | ✅ Yes | ⚠️ Downloads may be unavailable | ✅ Yes |
+
+## Best Practices
+
+1. **Always test your app offline** — Ensure core functionality works without updates
+2. **Keep a fallback plan** — Have a traditional app store update process as backup
+3. **Monitor your limits** — Keep track of usage to avoid unexpected behavior
+4. **Test cancellation scenarios** — Verify your app behaves correctly when updates stop
+
+## Need Help?
+
+If you have questions about Capgo's availability policies or need assistance, please [contact support](/docs/getting-help).

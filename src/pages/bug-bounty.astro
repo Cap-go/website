@@ -147,6 +147,17 @@ const repositories = [
       </div>
     </div>
 
+    <h3>{m.bug_bounty_supabase_limitations_title({}, { locale: Astro.locals.locale })}</h3>
+    <p>{m.bug_bounty_supabase_limitations_intro({}, { locale: Astro.locals.locale })}</p>
+    <ul>
+      <li>
+        {m.bug_bounty_supabase_limitations_1({}, { locale: Astro.locals.locale })}
+      </li>
+      <li>{m.bug_bounty_supabase_limitations_2({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.bug_bounty_supabase_limitations_3({}, { locale: Astro.locals.locale })}</li>
+      <li>{m.bug_bounty_supabase_limitations_4({}, { locale: Astro.locals.locale })}</li>
+    </ul>
+
     <p>{m.bug_bounty_contact({}, { locale: Astro.locals.locale })}</p>
   </div>
 </Layout>
