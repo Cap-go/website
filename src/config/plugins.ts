@@ -170,6 +170,14 @@ export const actions = [
     icon: GlobeAltIcon,
   },
   {
+    name: '@capgo/capacitor-mqtt',
+    author: 'github.com/Cap-go',
+    description: 'MQTT support for real-time messaging across iOS, Android, and Web.',
+    href: 'https://github.com/Cap-go/capacitor-mqtt/',
+    title: 'MQTT',
+    icon: SignalIcon,
+  },
+  {
     name: '@capgo/capacitor-mute',
     author: 'github.com/Cap-go',
     description: 'Detect device mute switch state for iOS devices to handle audio playback appropriately',

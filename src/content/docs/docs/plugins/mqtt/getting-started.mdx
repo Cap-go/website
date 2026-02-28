@@ -1,0 +1,102 @@
+---
+title: Getting Started
+description: Learn how to install and use MQTT in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-mqtt" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Usage
+
+Import the plugin and connect to an MQTT broker:
+
+```typescript
+import { CapacitorMqtt } from '@capgo/capacitor-mqtt';
+
+await CapacitorMqtt.connect({
+  brokerUrl: 'wss://broker.hivemq.com:8884/mqtt',
+  clientId: `device-${Date.now()}`,
+});
+
+await CapacitorMqtt.subscribe({ topic: 'myapp/events', qos: 1 });
+
+await CapacitorMqtt.publish({
+  topic: 'myapp/events',
+  message: 'hello from app',
+  qos: 1,
+});
+```
+
+## API Reference
+
+### connect(options)
+
+Connect to an MQTT broker.
+
+```typescript
+interface ConnectOptions {
+  brokerUrl: string;
+  clientId: string;
+  username?: string;
+  password?: string;
+  cleanSession?: boolean;
+  keepAliveInterval?: number;
+}
+
+await CapacitorMqtt.connect({
+  brokerUrl: 'wss://broker.hivemq.com:8884/mqtt',
+  clientId: 'my-client-id',
+});
+```
+
+### subscribe(options)
+
+Subscribe to a topic.
+
+```typescript
+await CapacitorMqtt.subscribe({
+  topic: 'myapp/events',
+  qos: 1,
+});
+```
+
+### publish(options)
+
+Publish to a topic.
+
+```typescript
+await CapacitorMqtt.publish({
+  topic: 'myapp/commands',
+  message: JSON.stringify({ command: 'ping' }),
+  qos: 1,
+});
+```
+
+### addListener()
+
+Listen for incoming messages.
+
+```typescript
+const listener = await CapacitorMqtt.addListener('onMessage', (payload) => {
+  console.log(payload.topic, payload.message);
+});
+```
+
+### disconnect()
+
+Disconnect from the broker.
+
+```typescript
+await CapacitorMqtt.disconnect();
+```

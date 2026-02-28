@@ -420,6 +420,11 @@ export default defineConfig({
               paths: ['docs/plugins/media-session/**'],
             },
             {
+              label: 'Plugin MQTT',
+              description: 'MQTT publish/subscribe plugin for real-time communication',
+              paths: ['docs/plugins/mqtt/**'],
+            },
+            {
               label: 'Plugin Mute',
               description: 'device mute state detection plugin',
               paths: ['docs/plugins/mute/**'],
@@ -1102,6 +1107,14 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/media-session/' },
                 { label: 'Getting started', link: '/docs/plugins/media-session/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'MQTT',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/mqtt/' },
+                { label: 'Getting started', link: '/docs/plugins/mqtt/getting-started' },
               ],
               collapsed: true,
             },
