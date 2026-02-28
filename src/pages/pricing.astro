@@ -213,10 +213,10 @@ if (plans.length > 0) {
       <!-- Service disruption policy link -->
       <div class="mt-10 mb-10 text-center">
         <a
-          href={getRelativeLocaleUrl(Astro.locals.locale, 'support-policy#service-disruption-and-ending')}
+          href={getRelativeLocaleUrl(Astro.locals.locale, '/support-policy#service-disruption-and-ending')}
           class="inline-flex items-center text-sm font-semibold text-blue-600 hover:underline"
         >
-          Service disruption and plan ending details
+          {m.support_policy_service_disruption_link_text({}, { locale: Astro.locals.locale })}
           <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
           </svg>
