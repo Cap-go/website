@@ -589,6 +589,11 @@ Ad-hoc builds have **fewer requirements** than App Store builds:
 | App Store Connect API key (`.p8`) | **No** |
 | Apple Key ID / Issuer ID | **No** |
 
+<Aside type="note">
+In `ad_hoc` mode, `--apple-key`, `--apple-key-id`, and `--apple-issuer-id` are not supported and are ignored.
+This is why the two App Store Connect rows above do not show ad-hoc CLI flags; these options apply to `app_store` mode only.
+</Aside>
+
 <Aside type="caution">
 Without an App Store Connect API key, build number auto-increment uses a timestamp-based fallback. To suppress the warning, pass `--skip-build-number-bump`.
 </Aside>
