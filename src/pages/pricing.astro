@@ -210,6 +210,19 @@ if (plans.length > 0) {
         {m.we_don_t_store_or_sell_your_data_to_anyone({}, { locale: Astro.locals.locale })}
       </p>
 
+      <!-- Service disruption policy link -->
+      <div class="mt-10 mb-10 text-center">
+        <a
+          href={getRelativeLocaleUrl(Astro.locals.locale, '/support-policy#service-disruption-and-ending')}
+          class="inline-flex items-center text-sm font-semibold text-blue-600 hover:underline"
+        >
+          {m.support_policy_service_disruption_link_text({}, { locale: Astro.locals.locale })}
+          <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+
       <!-- Premium Support Section -->
       <div class="mt-16 mb-16 max-w-4xl mx-auto">
         <div class="bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl p-8 lg:p-10 border border-orange-200 shadow-lg">

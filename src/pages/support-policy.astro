@@ -68,6 +68,17 @@ const content = { title, description }
     </p>
     <h2>{m.support_policy_premium_support_title({}, { locale: Astro.locals.locale })}</h2>
     <p>{m.support_policy_premium_support_desc({}, { locale: Astro.locals.locale })}</p>
+
+    <h2 id="service-disruption-and-ending">{m.support_policy_service_disruption_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.support_policy_service_disruption_intro({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.support_policy_service_disruption_timeout({}, { locale: Astro.locals.locale })}</p>
+    <ul>
+      <li set:html={m.support_policy_service_disruption_if_capgo_down({}, { locale: Astro.locals.locale })} />
+      <li set:html={m.support_policy_service_disruption_if_billing_stopped({}, { locale: Astro.locals.locale })} />
+      <li set:html={m.support_policy_service_disruption_if_over_limit({}, { locale: Astro.locals.locale })} />
+    </ul>
+    <p>{m.support_policy_service_disruption_outro({}, { locale: Astro.locals.locale })}</p>
+
     <p><a href="mailto:martin@capgo.app">martin@capgo.app</a></p>
   </div>
 </Layout>
