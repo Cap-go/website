@@ -702,20 +702,25 @@ You need one distribution certificate for all targets — only provisioning prof
 
 ### Migration from Single Profile
 
-If you previously used `--provisioning-profile` (single profile), run:
+If you previously used `BUILD_PROVISION_PROFILE_BASE64` (single profile), run:
 
 ```bash
 npx @capgo/cli build credentials migrate --platform ios
 ```
 
-This converts your existing single-profile credentials to the new map format. After migration, add extension profiles:
+This converts your existing single-profile credentials to the new `CAPGO_IOS_PROVISIONING_MAP` format and removes the legacy keys (`BUILD_PROVISION_PROFILE_BASE64`, `APPLE_PROFILE_NAME`).
+
+After migration, add extension profiles with the `update` command (additive merge):
 
 ```bash
-npx @capgo/cli build credentials save \
+npx @capgo/cli build credentials update \
   --platform ios \
-  --ios-provisioning-profile "com.example.app.share-extension=./share_ext_profile.mobileprovision" \
-  # ... other options
+  --ios-provisioning-profile "com.example.app.share-extension=./share_ext_profile.mobileprovision"
 ```
+
+<Aside type="tip">
+Use `update` (not `save`) to add profiles to existing credentials. The `update` command merges new profiles with existing ones. Use `save` only when setting up all credentials from scratch.
+</Aside>
 
 ## Troubleshooting
 
