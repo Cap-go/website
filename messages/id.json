@@ -252,6 +252,7 @@
   "bug_bounty_conduct_rule_2": "Do not spam us. More than three emails in a single day is considered spam and will be blocked.",
   "bug_bounty_conduct_rule_3": "We do not pay for reports that ignore these rules or are spam.",
   "bug_bounty_conduct_rule_4": "Only in-scope reports that follow this bug bounty program are accepted; anything else may be blocked.",
+  "bug_bounty_conduct_rule_5": "Do not ask whether we are a scam or for payment status updates. We may be slow to respond at times, so please keep communication focused and respectful. Reporter records and payout proof are publicly visible for transparency.",
   "bug_bounty_conduct_title": "Response Time and Respect",
   "bug_bounty_contact": "Untuk pertanyaan tentang program Bug Bounty kami, silakan hubungi melalui GitHub Security Advisories.",
   "bug_bounty_description": "Pelajari tentang program Bug Bounty Capgo. Laporkan kerentanan keamanan dalam kode open source kami dengan referensi baris yang tepat untuk potensi hadiah.",
