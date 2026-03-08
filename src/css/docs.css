@@ -375,20 +375,22 @@ body,
   z-index: -1;
 }
 
-/* Sidebar transparent to show gradient */
-.sidebar-pane {
-  background-color: transparent !important;
-  border-inline-end-color: rgba(255, 255, 255, 0.1) !important;
-}
+/* Sidebar transparent to show gradient - desktop only to prevent mobile overlay being see-through */
+@media (min-width: 50rem) {
+  .sidebar-pane {
+    background-color: transparent !important;
+    border-inline-end-color: rgba(255, 255, 255, 0.1) !important;
+  }
 
-/* Dark mode sidebar border */
-:root:not([data-theme='light']) .sidebar-pane {
-  border-inline-end-color: rgba(255, 255, 255, 0.08) !important;
-}
+  /* Dark mode sidebar border */
+  :root:not([data-theme='light']) .sidebar-pane {
+    border-inline-end-color: rgba(255, 255, 255, 0.08) !important;
+  }
 
-/* Light mode sidebar border - more whitish/greyish */
-:root[data-theme='light'] .sidebar-pane {
-  border-inline-end-color: rgba(0, 0, 0, 0.08) !important;
+  /* Light mode sidebar border - more whitish/greyish */
+  :root[data-theme='light'] .sidebar-pane {
+    border-inline-end-color: rgba(0, 0, 0, 0.08) !important;
+  }
 }
 
 /* Top navigation bar - solid gray-900 background for both modes */
