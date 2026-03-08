@@ -375,6 +375,11 @@ export default defineConfig({
               paths: ['docs/plugins/intent-launcher/**'],
             },
             {
+              label: 'Plugin Intercom',
+              description: 'Intercom customer messaging and support plugin for native in-app chat',
+              paths: ['docs/plugins/intercom/**'],
+            },
+            {
               label: 'Plugin Is Root',
               description: 'root/jailbreak detection plugin',
               paths: ['docs/plugins/is-root/**'],
@@ -1051,6 +1056,14 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/inappbrowser/' },
                 { label: 'Getting started', link: '/docs/plugins/inappbrowser/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Intercom',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/intercom/' },
+                { label: 'Getting started', link: '/docs/plugins/intercom/getting-started' },
               ],
               collapsed: true,
             },

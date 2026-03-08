@@ -1,0 +1,78 @@
+---
+title: Getting Started
+description: Learn how to install and start using @capgo/capacitor-intercom in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-intercom" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Add keys in `capacitor.config.ts` (optional)**
+   You can configure Intercom at startup time with this section:
+
+   ```json
+   {
+     "plugins": {
+       "CapgoIntercom": {
+         "iosApiKey": "ios_sdk-xxx",
+         "iosAppId": "your_ios_app_id",
+         "androidApiKey": "android_sdk-xxx",
+         "androidAppId": "your_android_app_id"
+       }
+     }
+   }
+   ```
+</Steps>
+
+## Initialize Intercom
+
+Use `loadWithKeys()` to provide credentials at runtime:
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom'
+
+await CapgoIntercom.loadWithKeys({
+  appId: 'your_app_id',
+  apiKeyIOS: 'ios_sdk-xxx',
+  apiKeyAndroid: 'android_sdk-xxx',
+})
+```
+
+## Use Intercom in your app
+
+Open the messenger and show support UI in one line:
+
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom'
+
+await CapgoIntercom.displayMessenger()
+await CapgoIntercom.displayHelpCenter()
+```
+
+## API quick reference
+
+```typescript
+await CapgoIntercom.registerIdentifiedUser({ email: 'user@example.com' })
+await CapgoIntercom.displayArticle({ articleId: 'article-id' })
+await CapgoIntercom.displayCarousel({ carouselId: 'carousel-id' })
+await CapgoIntercom.displayMessageComposer({ message: 'Hi, I need help' })
+await CapgoIntercom.registerUnidentifiedUser()
+await CapgoIntercom.hideMessenger()
+const { count } = await CapgoIntercom.getUnreadConversationCount()
+```
+
+## Platform notes
+
+- **iOS**: Requires iOS 10+.
+- **Android**: Supports Android 5.0+ (API 21+).
+- Works with both Capacitor and Cordova environments for native apps.
+
+You now have a functional Intercom setup and can start adding event logging, identity sync, and support messaging.
