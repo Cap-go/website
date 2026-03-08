@@ -105,6 +105,14 @@ export const actions = [
     // icon: ChatBubbleLeftIcon,
   },
   {
+    name: '@capgo/capacitor-intercom',
+    author: 'Martin Donadieu',
+    description: 'Intercom native SDK for Capacitor',
+    href: 'https://github.com/Cap-go/capacitor-intercom/',
+    title: 'Intercom',
+    // icon: ChatBubbleLeftIcon,
+  },
+  {
     name: '@capgo/nativegeocoder',
     author: 'Martin Donadieu',
     description: 'Capacitor plugin for native forward and reverse geocoding',
