@@ -292,7 +292,7 @@
   "bug_bounty_supabase_limitations_2": "Email verification behavior is expected to follow your Supabase Auth project settings (for example, whether email confirmation is disabled and capture-based auth is used).",
   "bug_bounty_supabase_limitations_3": "Password update and account-recovery flows may not always require old-password re-entry or re-verification if Supabase Auth is configured that way.",
   "bug_bounty_supabase_limitations_4": "If the issue is in this list but you can show a concrete Supabase-side fix in the provided project, then we can consider it in scope.",
-  "bug_bounty_payment_note": "Payments are issued only after we have identified the issue, fixed it, opened a pull request, and you have verified after release that the fix works for you. This process typically takes 3-5 days. Please do not send messages like \"to get paid\"; payment happens only once the release is live and you've tested and validated the fix.",
+  "bug_bounty_payment_note": "Payments are issued only after we have identified the issue, fixed it, opened a pull request, and you have verified after release that the fix works for you. This process usually takes between 20 and 30 days. Please do not send messages like \"to get paid\"; payment happens only once the release is live and you've tested and validated the fix.",
   "bug_bounty_program": "Program Bug Bounty",
   "bug_bounty_repo_cli": "Capgo CLI",
   "bug_bounty_repo_cli_desc": "Antarmuka baris perintah untuk mengelola deployment dan pembaruan langsung Capgo",

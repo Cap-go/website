@@ -154,6 +154,14 @@ export const actions = [
     icon: ChatBubbleLeftIcon,
   },
   {
+    name: '@capgo/capacitor-intercom',
+    author: 'github.com/Cap-go',
+    description: 'Integrate Intercom live chat, help center, and support workflows in your Capacitor app',
+    href: 'https://github.com/Cap-go/capacitor-intercom/',
+    title: 'Intercom',
+    icon: ChatBubbleLeftIcon,
+  },
+  {
     name: '@capgo/nativegeocoder',
     author: 'github.com/Cap-go',
     description: 'Convert addresses to coordinates and coordinates to addresses using native geocoding',
