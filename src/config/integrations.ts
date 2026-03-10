@@ -13,7 +13,7 @@ export const integrations: IntegrationEntry[] = [
     href: 'https://viasocket.com/integrations/capgo',
     logo: '/logo_viaSocket.svg',
     target: '_blank',
-    rel: 'noopener noreferrer',
+    rel: 'noopener noreferrer nofollow',
     description: 'Real-time socket integration for Capgo workflows.',
   },
   {
@@ -21,7 +21,7 @@ export const integrations: IntegrationEntry[] = [
     href: 'https://docs.codemagic.io/integrations/capgo-integration/',
     logo: '/Codemagic_ios.webp',
     target: '_blank',
-    rel: 'noopener noreferrer',
+    rel: 'noopener noreferrer nofollow',
     description: 'Continuous delivery workflow integration with Capgo for mobile update pipelines.',
   },
 ]
