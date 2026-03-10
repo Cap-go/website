@@ -3281,5 +3281,8 @@
   "capgo_availability_faq_capgo_down": "Capgo is down: App ignores updates, existing updates stay on device",
   "capgo_availability_faq_canceled": "Subscription canceled: Existing updates remain, no new updates are downloaded",
   "capgo_availability_faq_limits": "Above plan limits: Updates stop until you upgrade or add credits",
-  "capgo_availability_faq_link": "Learn more in our documentation"
+  "capgo_availability_faq_link": "Learn more in our documentation",
+  "integrations_badge": "Integrations",
+  "integrations_title": "Capgo Integrations",
+  "integrations_subtitle": "Current Capgo integrations and partner services."
 }
