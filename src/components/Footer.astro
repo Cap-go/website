@@ -2,6 +2,7 @@
 import * as m from '@/paraglide/messages'
 import { locales } from '@/services/locale'
 import { getRelativeLocaleUrl } from 'astro:i18n'
+import { integrations } from '@/config/integrations'
 
 const year = new Date().getFullYear()
 
@@ -197,7 +198,7 @@ const navigation: Record<string, NavigationItem[]> = {
     </div>
 
     <!-- Links Grid -->
-    <div class="grid grid-cols-2 gap-8 mb-12 md:grid-cols-6">
+    <div class="grid grid-cols-2 gap-8 mb-12 md:grid-cols-7">
       <div>
         <h3 class="mb-4 text-sm font-semibold tracking-wider text-white uppercase">{m.products({}, { locale: Astro.locals.locale })}</h3>
         <ul role="list" class="space-y-3">
@@ -266,6 +267,28 @@ const navigation: Record<string, NavigationItem[]> = {
             <li>
               <a href={item.href} rel={item.rel} class="text-sm transition-colors hover:text-white text-zinc-400">
                 {typeof item.name === 'function' ? item.name() : item.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 class="mb-4 text-sm font-semibold tracking-wider text-white uppercase">
+          <a href={getRelativeLocaleUrl(Astro.locals.locale, 'integrations')} class="hover:text-white">
+            Integrations
+          </a>
+        </h3>
+        <ul role="list" class="space-y-3">
+          {integrations.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                target={item.target}
+                rel={item.rel}
+                class="inline-flex items-center text-sm transition-colors hover:text-white text-zinc-400"
+              >
+                <img src={item.logo} alt={item.name} class="w-5 h-5 mr-2 rounded object-contain" />
+                {item.name}
               </a>
             </li>
           ))}
