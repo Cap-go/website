@@ -103,7 +103,9 @@ async function getNonce(): Promise<{ rawNonce: string; nonceDigest: string }> {
 
 ### 2. Google 로그인
 
-이 함수는 플러그인을 초기화하고 Google을 사용하여 로그인합니다.```typescript
+이 함수는 플러그인을 초기화하고 Google을 사용하여 로그인합니다.
+
+```typescript
 await SocialLogin.initialize({
   google: {
     webClientId: 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',

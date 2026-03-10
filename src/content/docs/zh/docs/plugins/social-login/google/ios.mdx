@@ -58,10 +58,10 @@ import { Steps } from '@astrojs/starlight/components';
    9. 单击`OK`
       <img src="/social-login-assets/google_cons_ios_click_ok.png" alt="客户端 ID 上的“确定”按钮已创建确认对话框" />
    
-   10.打开新创建的iOS客户端
+   10. 打开新创建的 iOS 客户端
        <img src="/social-login-assets/google_cons_open_new_ios.png" alt="在凭据列表中新创建的 iOS 客户端" />
    
-   11.复制以下数据
+   11. 复制以下数据
        <img src="/social-login-assets/google_cons_ios_what_to_copy.png" alt="客户端 ID 详细信息显示要复制的客户端 ID 和反向客户端 ID" />
      
        :::注意
@@ -70,12 +70,12 @@ import { Steps } from '@astrojs/starlight/components';
        此图像中的 `nr. 2` 稍后将变为 `YOUR_DOT_REVERSED_IOS_CLIENT_ID`
        :::
 
-2.修改应用程序的Info.plist
+2. 修改应用程序的 Info.plist
    
-   1.打开Xcode并找到`Info.plist`文件
+   1. 打开 Xcode 并找到 `Info.plist` 文件
       <img src="/social-login-assets/xcode_info_file.png" alt="Xcode 项目导航器中的 Info.plist 文件" />
    
-   2.右键单击该文件并将其作为源代码打开
+   2. 右键单击该文件并将其作为源代码打开
       <img src="/social-login-assets/xcode_open_as_src_code.png" alt="显示“打开为源代码”选项的右键菜单" />
    
    3. 在 `Plist` 文件的底部，您将看到 `</dict>` 标签
@@ -105,15 +105,15 @@ import { Steps } from '@astrojs/starlight/components';
    
    6. 使用“Command + S”保存文件
 
-3.修改`AppDelegate.swift`
+3. 修改 `AppDelegate.swift`
    
-   1.打开AppDelegate
+   1. 打开 AppDelegate
       <img src="/social-login-assets/xcode_app_deleg.png" alt="Xcode 项目导航器中的 AppDelegate.swift 文件" />
    
    2. 在文件顶部插入 `import GoogleSignIn`
       <img src="/social-login-assets/xcode_app_deleg_google_sign_in.png" alt="添加了 GoogleSignIn 导入的 AppDelegate.swift" />
    
-   3.找到`func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:])`函数
+   3. 找到 `func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:])` 函数
       <img src="/social-login-assets/xcode_app_deleg_app_fn.png" alt="AppDelegate中原始应用程序的openURL函数" />
    
    4. 将函数修改为如下所示
@@ -140,14 +140,16 @@ import { Steps } from '@astrojs/starlight/components';
 
 4. 在 JavaScript/TypeScript 代码中设置 Google 登录
    
-   1.导入`SocialLogin`和`Capacitor`
+   1. 导入 `SocialLogin` 和 `Capacitor`
      
       ```typescript
       import { SocialLogin } from '@capgo/capacitor-social-login';
       import { Capacitor } from '@capacitor/core';
       ```
    
-   2. 调用initialize方法（应该只调用一次）**基本设置（在线模式 - 建议大多数应用程序使用）：**
+   2. 调用 `initialize` 方法（应该只调用一次）
+
+      **基本设置（在线模式，建议大多数应用程序使用）：**
       ```typescript
       // onMounted is Vue specific
       onMounted(() => {
@@ -187,7 +189,7 @@ import { Steps } from '@astrojs/starlight/components';
       **关于离线模式：** 使用`mode: 'offline'`时，登录响应不会直接包含用户数据。相反，您将收到一个服务器身份验证代码，必须通过后端服务器将其交换为用户信息。请参阅[一般设置指南](/docs/plugins/social-login/google/general/#using-offline-access-with-your-own-backend) 了解实施细节。
       :::
    
-   3.实现登录功能。创建一个按钮并在单击时运行以下代码
+   3. 实现登录功能。创建一个按钮并在单击时运行以下代码
      
       **对于在线模式：**
       ```typescript

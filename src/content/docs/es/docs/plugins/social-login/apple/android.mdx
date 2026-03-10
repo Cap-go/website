@@ -1,27 +1,141 @@
 ---
-title: Apple inicia sesión en Android
+title: Inicio de sesión con Apple en Android
 description: >-
-  Esta guía proporciona un tutorial completo sobre cómo configurar Apple Iniciar
-  sesión usando Capacitor para dispositivos iOS, detallando cada paso para
-  garantizar un proceso de integración fluido.
+  Esta guía explica paso a paso cómo configurar el inicio de sesión con Apple
+  usando Capacitor en Android, incluyendo el flujo completo y la configuración
+  necesaria del backend.
 sidebar:
   order: 3
 locale: es
 ---
-<img src="/social-login-assets/apple_dev_serv_create_next.png" alt="Configuración de campos de dominio y URL de retorno" />
+import MermaidGraph from '@/components/MermaidGraph.astro';
+import { Steps } from '@astrojs/starlight/components';
 
-        :::nota
-        Este backend **tiene** que ejecutarse en HTTPS. En cuanto a las "URL de retorno", es posible que desee volver a ellas después de leer la siguiente sección de este tutorial y después de configurar el backend. Para los fines de este tutorial, usaré `https://xyz.wcaleniewolny.me/login/callback` para la URL de retorno y `xyz.wcaleniewolny.me` el dominio. Pulsa siguiente.
-        :::
+export const appleLoginFlowGraph = `flowchart TD
+    A("await SocialLogin.login()") -->|Handled in the plugin|B(Generate the login URL)
+    B --> |Pass the link| C(Open the Chrome browser)
+    C --> D(Wait for the user to login)
+    D --> |Apple redirects to your backend|E(Handle the data returned from Apple)
+    E --> F(Redirect back to the app)
+    F --> G(Return to JS)`;
 
-    10. Confirme los datos y haga clic en `Done`
-        <img src="/social-login-assets/apple_dev_serv_conf_done.png" alt="Confirmación de la configuración del dominio y de la URL de retorno" />
+El inicio de sesión con Apple en Android es algo improvisado. Apple no ofrece
+soporte oficial para `Sign in with Apple` en Android, así que la solución
+requiere algunos rodeos.
 
-    11. Haga clic en `Continue`
-        <img src="/social-login-assets/apple_dev_cont_serv_creat.png" alt="Botón Continuar para configuración del servicio." />
+Actualmente Android usa una pestaña de Chrome para mostrar un sitio OAuth2.
+Este enfoque implica dos retos principales:
 
-    12. Haga clic en `Save`
-        <img src="/social-login-assets/apple_dev_cont_serv_creat_save.png" alt="Botón Guardar para configuración del servicio." />
+- Configuración compleja
+- Se necesita un backend
+
+## Comprender el flujo en Android
+
+Este diagrama resume el flujo en Android:
+
+<MermaidGraph graph={appleLoginFlowGraph} ariaLabel="Diagrama del flujo de inicio de sesión con Apple en Android" fullWidth={false} />
+
+Ahora que ya conoces las limitaciones y el flujo general, pasemos a la
+configuración.
+
+## Creando el Service ID
+
+<Steps>
+1. Inicia sesión en el [Apple Developer Portal](https://developer.apple.com)
+
+2. Haz clic en `Identifiers`
+
+   <img src="/social-login-assets/apple_dev_portal_iden.png" alt="Sección Identifiers del Apple Developer Portal" />
+
+   Deberías ver una pantalla similar a esta:
+
+   <img src="/social-login-assets/apple_dev_portal_iden_2.png" alt="Pantalla Identifiers del Apple Developer Portal" />
+
+   1. Asegúrate de que este campo dice `App IDs`
+   2. Verifica que puedes encontrar el App ID de tu aplicación
+      :::note
+      Si todavía no configuraste Apple Login para iOS, tendrás que crear ese
+      App ID primero. En mi caso ya existe y usaré
+      `me.wcaleniewolny.test.ionic.vue`. Si no tienes uno, créalo siguiendo la
+      sección [crear la app](#creando-la-aplicación).
+      :::
+
+3. Asegúrate de que la capacidad `Sign in with Apple` está habilitada para tu aplicación
+
+   1. Haz clic en tu app
+      <img src="/social-login-assets/apple_dev_click_on_app.png" alt="Selección de la app en la lista" />
+
+   2. Verifica que la capacidad `Sign in with Apple` esté activada
+      <img src="/social-login-assets/apple_dev_sign_in_with_apple_enabled.png" alt="Casilla de Sign in with Apple habilitada" />
+
+   3. Si no está activada, actívala
+
+4. Vuelve a `All Identifiers`
+   <img src="/social-login-assets/apple_dev_go_back_iden.png" alt="Botón de navegación All Identifiers" />
+
+5. Haz clic en `App IDs` y cambia a `Services IDs`
+   <img src="/social-login-assets/apple_dev_go_to_services_id.png" alt="Navegación a la sección Services IDs" />
+
+6. Crea un identificador nuevo
+
+   1. Haz clic en el botón con el signo `+`
+      <img src="/social-login-assets/apple_dev_iden_add.png" alt="Botón para añadir un nuevo Service ID" />
+
+   2. Selecciona `Service IDs` y haz clic en `Continue`
+      <img src="/social-login-assets/apple_dev_service_and_cont.png" alt="Selección de la opción Service IDs" />
+
+   3. Introduce una descripción y un identificador, luego haz clic en `Continue`
+      <img src="/social-login-assets/apple_dev_reg_service_2.png" alt="Formulario con los detalles del Service ID" />
+
+      :::note
+      Este `identifier` se convertirá en el `clientId` que pasarás a
+      `initialize` y también en `ANDROID_SERVICE_ID` dentro del backend.
+
+      **Guárdalo.**
+      :::
+
+      :::note
+      El Service ID no tiene que coincidir con el App ID, pero recomiendo usar
+      algo como `YOUR_APP_ID.service`. Por ejemplo, mi App ID es
+      `me.wcaleniewolny.test.ionic.vue`, mientras que mi Service ID es
+      `ee.forgr.io.ionic.service2`.
+      :::
+
+   4. Verifica los datos y haz clic en `Register`
+      <img src="/social-login-assets/apple_dev_service_ref_fin.png" alt="Confirmación del registro del Service ID" />
+
+   5. Haz clic en el servicio recién creado
+      <img src="/social-login-assets/apple_dev_open_serv.png" alt="Selección del Service ID recién creado" />
+
+   6. Activa la opción `Sign in with Apple`
+      <img src="/social-login-assets/apple_dev_serv_enable_sign_with_apple.png" alt="Habilitar Sign in with Apple en el Service ID" />
+
+   7. Configura `Sign in with Apple`
+      <img src="/social-login-assets/apple_dev_conf_serv_sign_with_apple.png" alt="Botón Configure para Sign in with Apple" />
+
+   8. Asegúrate de que `Primary App ID` apunte al App ID configurado antes
+      <img src="/social-login-assets/apple_dev_service_prim_id.png" alt="Selector Primary App ID en la configuración del Service ID" />
+
+   9. Añade el dominio donde vas a alojar el backend
+
+      <img src="/social-login-assets/apple_dev_serv_create_next.png" alt="Configuración del dominio y de las Return URLs" />
+
+      :::note
+      Este backend **debe** ejecutarse en HTTPS. En cuanto a las `Return URLs`,
+      quizá quieras volver a este paso después de leer la siguiente sección del
+      tutorial y después de configurar el backend. Para esta guía usaré
+      `https://xyz.wcaleniewolny.me/login/callback` como URL de retorno y
+      `xyz.wcaleniewolny.me` como dominio. Luego pulsa siguiente.
+      :::
+
+   10. Confirma los datos y haz clic en `Done`
+       <img src="/social-login-assets/apple_dev_serv_conf_done.png" alt="Confirmación de la configuración del dominio y la URL de retorno" />
+
+   11. Haz clic en `Continue`
+       <img src="/social-login-assets/apple_dev_cont_serv_creat.png" alt="Botón Continue en la configuración del servicio" />
+
+   12. Haz clic en `Save`
+       <img src="/social-login-assets/apple_dev_cont_serv_creat_save.png" alt="Botón Save en la configuración del servicio" />
 </Steps>
 
 ## Creando la clave

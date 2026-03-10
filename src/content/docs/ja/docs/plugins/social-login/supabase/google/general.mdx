@@ -103,7 +103,9 @@ async function getNonce(): Promise<{ rawNonce: string; nonceDigest: string }> {
 
 ### 2. Google サインイン
 
-この関数はプラグインを初期化し、Google でサインインします。```typescript
+この関数はプラグインを初期化し、Google でサインインします。
+
+```typescript
 await SocialLogin.initialize({
   google: {
     webClientId: 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',

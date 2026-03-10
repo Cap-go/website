@@ -75,25 +75,98 @@ En esta parte, configurará la pantalla de inicio de sesión que muestra Google.
         1. Haga clic en "agregar o eliminar ámbitos". 
             <img src="/social-login-assets/google_cons_add_rm_sco.png" alt="Botón Agregar o eliminar ámbitos en la pantalla de configuración de ámbitos" />
         
-        2. Seleccione los siguientes alcances y haga clic en `update`
-            <img src="/social-login-assets/google_cons_update_scope.png" alt="Cuadro de diálogo de selección de ámbito con ámbitos de correo electrónico y perfil seleccionados" />La idea es bastante simple. Envías una solicitud `GET` simple a `https://www.googleapis.com/oauth2/v3/tokeninfo` y esto te devuelve si el token es válido o no y si lo es, te da el correo electrónico del usuario. También le brinda otra información sobre el token de usuario.
-<img src="/social-login-assets/google_auth_playground_token_info.png" alt="Google OAuth Área de juegos que muestra la respuesta de información del token con detalles del usuario" />
+        2. Seleccione los siguientes ámbitos y haga clic en `update`
+            <img src="/social-login-assets/google_cons_update_scope.png" alt="Cuadro de diálogo de selección de ámbito con ámbitos de correo electrónico y perfil seleccionados" />
+        3. Haga clic en `guardar y continuar`
+            <img src="/social-login-assets/google_cons_scope_save.png" alt="Botón Guardar y continuar en la pantalla de ámbitos" />
+    7. Agregue un usuario de prueba
+        1. Haga clic en `agregar usuarios`
+            <img src="/social-login-assets/google_cons_add_test_usr.png" alt="Botón Agregar usuarios en la sección de usuarios de prueba" />
+        2. Ingrese su correo electrónico de Google, presione Enter y haga clic en `add`
+            <img src="/social-login-assets/google_cons_add_test_usr_2.png" alt="Campo de correo electrónico y botón Agregar para los usuarios de prueba" />
+        3. Haga clic en `guardar y continuar`
+            <img src="/social-login-assets/google_cons_test_usr_save.png" alt="Botón Guardar y continuar en la pantalla de usuarios de prueba" />
+    8. Haga clic en `volver al panel`
+        <img src="/social-login-assets/google_cons_back_to_dahs.png" alt="Botón Volver al panel en la parte inferior de la página de finalización" />
+    9. Envíe su aplicación para verificación
+        :::note
+            Recomiendo encarecidamente enviar la aplicación para verificación. Esto está fuera del alcance de este tutorial. Puede obtener más información [aquí](https://support.google.com/cloud/answer/13463073/). No es necesario para pruebas locales, pero sí para producción.
+        :::
+</Steps>
 
-A partir de ahí, puede emitirle al usuario su propio JWT o emitir algún tipo de cookie de sesión. Las posibilidades son infinitas para la implementación de la autenticación final.
+## Diferencias entre acceso online y acceso offline
 
-Si desea llamar a Google API, le recomiendo encarecidamente que consulte el OAuth 2.0 Playground de [Google](https://developers.google.com/oauthplayground). Desde allí puedes ver fácilmente qué API puedes llamar.
+Existen varias formas de usar Google Login con Capacitor. Esta tabla resume las diferencias entre ambas:
 
-## Usando el acceso sin conexión con tu propio backend
+|                         | Acceso online | Acceso offline |
+|:-----------------------:|:-------------:|:--------------:|
+| Requiere backend        | ❌             | ✅              |
+| Token de acceso duradero| ❌             | ✅              |
+| Configuración sencilla  | ✅             | ❌              |
 
-Para utilizar el acceso en línea necesitará lo siguiente:
+:::note
+**El modo offline** significa que tu backend puede acceder a las APIs de Google incluso cuando el usuario no está usando activamente tu app. Los tokens de larga duración hacen posible esta funcionalidad al permitir que el backend llame a las APIs de Google en nombre del usuario en cualquier momento.
+:::
 
-- Un servidor HTTP
+:::caution
+**El modo offline REQUIERE un servidor backend.** Cuando usas el modo offline, el frontend recibe información mínima, principalmente un código de autenticación del servidor. Sin un backend que intercambie ese código por tokens e información del usuario, el modo offline no aporta datos útiles a tu aplicación frontend.
+:::
 
-En este ejemplo, utilizaré las siguientes tecnologías para proporcionar acceso sin conexión a mi aplicación:
+Si todavía no sabes cuál elegir, considera estos escenarios:
+
+1. Quieres que el usuario inicie sesión y después emitirle un JWT personalizado. Tu app NO llamará a las APIs de Google
+
+   En este caso, elige acceso online.
+
+2. Tu app llamará a algunas APIs de Google desde el cliente, pero nunca desde el backend
+
+   En este caso, elige acceso online.
+
+3. Tu app llamará a algunas APIs de Google desde el backend, pero solo cuando el usuario esté usando activamente la app
+
+   En este caso, elige acceso online.
+
+4. Tu app comprobará periódicamente el calendario del usuario, incluso cuando no esté usando activamente la app
+
+   En este caso, elige acceso offline.
+
+## Un backend de ejemplo para acceso online
+
+En esta parte del tutorial mostraré cómo validar al usuario en tu backend.
+
+Este ejemplo será muy sencillo y estará basado en las siguientes tecnologías:
+
+- [TypeScript](https://www.typescriptlang.org/)
 
 - [Hono](https://hono.dev/)
 
-- [Validador de Hono Zod](https://hono.dev/docs/guides/validation#with-zod)
+- [JavaScript Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch)
+
+Puedes encontrar el código de este ejemplo [aquí](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/141c01d93a85240e31a0d488a89df13c842708b1/index.ts#L135-L153)
+
+Como puedes ver:
+
+<img src="/social-login-assets/vscode_auth_google.png" alt="VS Code mostrando el código de autenticación de Google que verifica tokens" />
+
+La idea es bastante simple. Envías una petición `GET` a `https://www.googleapis.com/oauth2/v3/tokeninfo` y eso te devuelve si el token es válido o no. Si lo es, también te da el correo electrónico del usuario y otra información sobre su token.
+
+<img src="/social-login-assets/google_auth_playground_token_info.png" alt="Google OAuth Playground mostrando la respuesta de tokeninfo con los datos del usuario" />
+
+A partir de ahí, puedes emitir tu propio JWT al usuario o algún tipo de cookie de sesión. Las posibilidades son amplias para la implementación final de autenticación.
+
+Si quieres llamar a las APIs de Google, te recomiendo revisar [Google OAuth 2.0 Playground](https://developers.google.com/oauthplayground). Desde ahí puedes ver fácilmente qué APIs puedes llamar.
+
+## Usando el acceso offline con tu propio backend
+
+Para utilizar el acceso online necesitarás lo siguiente:
+
+- Un servidor HTTP
+
+En este ejemplo, utilizaré las siguientes tecnologías para proporcionar acceso offline en mi aplicación:
+
+- [Hono](https://hono.dev/)
+
+- [Validador Zod de Hono](https://hono.dev/docs/guides/validation#with-zod)
 
 - [Zod](https://zod.dev/)
 
@@ -101,61 +174,62 @@ En este ejemplo, utilizaré las siguientes tecnologías para proporcionar acceso
 
 - [LowDb](https://www.npmjs.com/package/lowdb) (una base de datos simple)
 
-El código para este ejemplo se puede encontrar [aquí](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/aac7a8c909f650a8c2cd7f88c97f5f3c594ce9ba/index.ts#L139-L287)
+El código de este ejemplo se puede encontrar [aquí](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/aac7a8c909f650a8c2cd7f88c97f5f3c594ce9ba/index.ts#L139-L287)
 
 En cuanto al código del cliente, se ve así:
 
-```mecanografiado
+```typescript
 import { Capacitor } from '@capacitor/core';
 import { GoogleLoginOfflineResponse, SocialLogin } from '@capgo/capacitor-social-login';
 import { usePopoutStore } from '@/popoutStore'; // <-- specific to my app
 
-const baseURL = "[redactado]";
+const baseURL = "[redacted]";
 
-función asíncrona fullLogin() {
-  espere SocialLogin.initialize({
+async function fullLogin() {
+  await SocialLogin.initialize({
     google: {
-      webClientId: '[redactado]',  
-      iOSClientId: '[redactado]',
-      iOSServerClientId: 'El mismo valor que webClientId',
-      modo: 'fuera de línea' // <-- importante
+      webClientId: '[redacted]',  
+      iOSClientId: '[redacted]',
+      iOSServerClientId: 'The same value as webClientId',
+      mode: 'offline' // <-- important
     } 
   })
-  respuesta constante = esperar SocialLogin.login({
-    proveedor: 'google',
-    opciones: {
-      forceRefreshToken: verdadero // <-- importante
+  const response = await SocialLogin.login({
+    provider: 'google',
+    options: {
+      forceRefreshToken: true // <-- important
     }
   })
 
-  si (respuesta.proveedor === 'google') {
-    resultado constante = respuesta.resultado como GoogleLoginOfflineResponse
-    const res = esperar a buscar(`${baseURL}/auth/google_offline`, {
-      encabezados: {
-        "Tipo de contenido": "aplicación/json"
+  if (response.provider === 'google') {
+    const result = response.result as GoogleLoginOfflineResponse
+    const res = await fetch(`${baseURL}/auth/google_offline`, {
+      headers: {
+        "Content-Type": "application/json"
       },
-      cuerpo: JSON.stringify({
-        serverAuthCode: resultado.serverAuthCode,
-        plataforma: Capacitor.getPlatform()
+      body: JSON.stringify({
+        serverAuthCode: result.serverAuthCode,
+        platform: Capacitor.getPlatform()
       }),
-      método: "POST"
+      method: "POST"
     })
 
-    si (res.estado! == 200) {
-      popoutStore.popout("Error al iniciar sesión en Google", "verificar consola");
-      volver
+    if (res.status !== 200) {
+      popoutStore.popout("Full google login failed", "check console");
+      return
     }
 
-    const {jwt} = esperar res.json();
-    const información de usuario = esperar a buscar (`${baseURL}/auth/get_google_user`, {
-      encabezados: {
-        Autorización: `Bearer ${jwt}`
+    const { jwt } = await res.json();
+    const userinfo = await fetch(`${baseURL}/auth/get_google_user`, {
+      headers: {
+        Authorization: `Bearer ${jwt}`
       }
     })
-    si (información de usuario.status! == 200) {
-      popoutStore.popout("Falló el inicio de sesión completo de Google (información de usuario)", "verificar consola");
-      volver
+    if (userinfo.status !== 200) {
+      popoutStore.popout("Full google (userinfo) login failed", "check console");
+      return
     }
-    popoutStore.popout("resolución de información de usuario", espera información de usuario.text());
+    popoutStore.popout("userinfo res", await userinfo.text());
   }
 }
+```

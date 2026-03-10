@@ -26,13 +26,13 @@ import { Steps } from '@astrojs/starlight/components';
     2. 单击项目选择器
         <img src="/social-login-assets/google_cons_project_selector.png" alt="Google 控制台项目选择器" />
     3. 如果您还没有项目，请**创建一个新项目**。
-        1.点击“新建项目”
+        1. 点击“新建项目”
             <img src="/social-login-assets/google_cons_new_project_btn.png" alt="Google 控制台中的“新建项目”按钮" />
         2. 为您的项目命名并单击 `Create`
             <img src="/social-login-assets/google_cons_name_projec.png" alt="显示名称字段和创建按钮的项目命名屏幕" />
         3. 确保您从事正确的项目
             <img src="/social-login-assets/google_cons_right_proj.png" alt="选择器中显示的项目名称表明项目选择正确" />
-    4.开始配置`OAuth consent screen`
+    4. 开始配置 `OAuth consent screen`
         1. 点击搜索栏
             <img src="/social-login-assets/google_cons_search.png" alt="Google 控制台搜索栏" />
         2. 搜索`OAuth consent screen`并点击它
@@ -44,7 +44,7 @@ import { Steps } from '@astrojs/starlight/components';
 
             点击 `create`
             <img src="/social-login-assets/google_cons_oauth_const_scr.png" alt="OAuth 同意屏幕用户类型选择，具有外部和内部选项" />
-    5.填写您的应用程序的信息
+    5. 填写您的应用程序信息
             1. 让我们从“应用程序信息”开始
                 <img src="/social-login-assets/google_cons_app_inf.png" alt="应用程序信息部分显示应用程序名称和用户支持电子邮件字段" />
                 
@@ -61,7 +61,7 @@ import { Steps } from '@astrojs/starlight/components';
                     :::注意
                     这不是强制性的，我将跳过这一步
                     :::
-                3.您**应该**配置“应用程序域”
+                3. 您**应该**配置“应用程序域”
                     <img src="/social-login-assets/google_cons_app_doma.png" alt="具有授权域字段的应用程序域配置部分" />
                     :::注意
                     我不会这样做，因为这只是一个简单的演示，不会被发布，但我强烈建议填写此部分。
@@ -76,14 +76,15 @@ import { Steps } from '@astrojs/starlight/components';
             <img src="/social-login-assets/google_cons_add_rm_sco.png" alt="在范围配置屏幕中添加或删除范围按钮" />
         
         2. 选择以下范围并单击 `update`
-            <img src="/social-login-assets/google_cons_update_scope.png" alt="范围选择对话框，其中选择了电子邮件和个人资料范围" />3.点击“保存并继续”
+            <img src="/social-login-assets/google_cons_update_scope.png" alt="范围选择对话框，其中选择了电子邮件和个人资料范围" />
+        3. 点击“保存并继续”
             <img src="/social-login-assets/google_cons_scope_save.png" alt="示波器屏幕中的“保存并继续”按钮" />
-    7.添加测试用户
-        1.点击“添加用户”
+    7. 添加测试用户
+        1. 点击“添加用户”
             <img src="/social-login-assets/google_cons_add_test_usr.png" alt="测试用户部分中的添加用户按钮" />
         2. 输入您的 Google 电子邮件，单击“输入”，然后单击 `add`
             <img src="/social-login-assets/google_cons_add_test_usr_2.png" alt="测试用户的电子邮件输入字段和添加按钮" />
-        3.点击“保存并继续”
+        3. 点击“保存并继续”
             <img src="/social-login-assets/google_cons_test_usr_save.png" alt="测试用户屏幕中的“保存并继续”按钮" />
     8. 单击“返回仪表板”
         <img src="/social-login-assets/google_cons_back_to_dahs.png" alt="返回完成页面底部的仪表板按钮" />
@@ -136,17 +137,19 @@ import { Steps } from '@astrojs/starlight/components';
 
 这个例子非常简单，它将基于以下技术：
 
-- [打字稿](https://www.typescriptlang.org/)
+- [TypeScript](https://www.typescriptlang.org/)
 
 - [霍诺](https://hono.dev/)
 
-- [Javascript 的获取 API](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch)
+- [JavaScript Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch)
 
 您可以在[此处](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/141c01d93a85240e31a0d488a89df13c842708b1/index.ts#L135-L153)找到此示例的代码
 
 正如你所看到的：
 
-<img src="/social-login-assets/vscode_auth_google.png" alt="VS Code 显示用于验证令牌的 Google 身份验证代码" />这个想法相当简单。您向 `https://www.googleapis.com/oauth2/v3/tokeninfo` 发送一个简单的 `GET` 请求，该请求会返回您令牌是否有效，如果有效，则会向您提供用户的电子邮件。它还为您提供了有关用户令牌的一些其他信息
+<img src="/social-login-assets/vscode_auth_google.png" alt="VS Code 显示用于验证令牌的 Google 身份验证代码" />
+
+这个想法相当简单。您向 `https://www.googleapis.com/oauth2/v3/tokeninfo` 发送一个简单的 `GET` 请求，该请求会返回您令牌是否有效，如果有效，则会向您提供用户的电子邮件。它还为您提供了有关用户令牌的一些其他信息
 <img src="/social-login-assets/google_auth_playground_token_info.png" alt="Google OAuth Playground 显示带有用户详细信息的令牌信息响应" />
 
 从那里，您可以向用户发出您自己的 JWT 或发出某种会话 cookie。对于最终的身份验证实施来说，可能性是无限的。
@@ -175,57 +178,58 @@ import { Steps } from '@astrojs/starlight/components';
 
 至于客户端代码，它看起来像这样：
 
-``打字稿
+```typescript
 import { Capacitor } from '@capacitor/core';
 import { GoogleLoginOfflineResponse, SocialLogin } from '@capgo/capacitor-social-login';
 import { usePopoutStore } from '@/popoutStore'; // <-- specific to my app
 
-const baseURL = "[已编辑]";
+const baseURL = "[redacted]";
 
-异步函数 fullLogin() {
-  等待 SocialLogin.initialize({
-    谷歌：{
-      webClientId: '[已编辑]',  
-      iOSClientId: '[已编辑]',
-      iOSServerClientId: '与 webClientId 相同的值',
-      mode: 'offline' // <-- 重要
+async function fullLogin() {
+  await SocialLogin.initialize({
+    google: {
+      webClientId: '[redacted]',  
+      iOSClientId: '[redacted]',
+      iOSServerClientId: 'The same value as webClientId',
+      mode: 'offline' // <-- important
     } 
   })
-  const 响应 = 等待 SocialLogin.login({
-    提供商：“谷歌”，
-    选项：{
-      forceRefreshToken: true // <-- 重要
+  const response = await SocialLogin.login({
+    provider: 'google',
+    options: {
+      forceRefreshToken: true // <-- important
     }
   })
 
   if (response.provider === 'google') {
-    const 结果 = response.result 作为 GoogleLoginOfflineResponse
-    const res = 等待获取(`${baseURL}/auth/google_offline`, {
-      标题：{
-        “内容类型”：“应用程序/json”
+    const result = response.result as GoogleLoginOfflineResponse
+    const res = await fetch(`${baseURL}/auth/google_offline`, {
+      headers: {
+        "Content-Type": "application/json"
       },
-      正文： JSON.stringify({
-        serverAuthCode: 结果.serverAuthCode,
-        平台：Capacitor.getPlatform()
+      body: JSON.stringify({
+        serverAuthCode: result.serverAuthCode,
+        platform: Capacitor.getPlatform()
       }),
-      方法：“发布”
+      method: "POST"
     })
 
     if (res.status !== 200) {
-      popoutStore.popout("完整谷歌登录失败", "检查控制台");
-      返回
+      popoutStore.popout("Full google login failed", "check console");
+      return
     }
 
-    const { jwt } = 等待 res.json();
-    const userinfo = 等待获取(`${baseURL}/auth/get_google_user`, {
-      标题：{
-        授权：`Bearer ${jwt}`
+    const { jwt } = await res.json();
+    const userinfo = await fetch(`${baseURL}/auth/get_google_user`, {
+      headers: {
+        Authorization: `Bearer ${jwt}`
       }
     })
-    if (用户信息.status !== 200) {
-      popoutStore.popout("完整谷歌(用户信息)登录失败", "检查控制台");
-      返回
+    if (userinfo.status !== 200) {
+      popoutStore.popout("Full google (userinfo) login failed", "check console");
+      return
     }
-    popoutStore.popout("userinfo res", wait userinfo.text());
+    popoutStore.popout("userinfo res", await userinfo.text());
   }
 }
+```

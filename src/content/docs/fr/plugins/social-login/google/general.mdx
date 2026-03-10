@@ -80,7 +80,8 @@ Dans cette partie, vous allez configurer l'écran de connexion affiché par Goog
             <img src="/social-login-assets/google_cons_add_rm_sco.png" alt="Bouton Ajouter ou supprimer des étendues dans l’écran de configuration des étendues" />
         
         2. Sélectionnez les étendues suivantes et cliquez sur `update`
-            <img src="/social-login-assets/google_cons_update_scope.png" alt="Boîte de dialogue de sélection de la portée avec les portées de courrier électronique et de profil sélectionnées" />3. Cliquez sur « Enregistrer et continuer »
+            <img src="/social-login-assets/google_cons_update_scope.png" alt="Boîte de dialogue de sélection de la portée avec les portées de courrier électronique et de profil sélectionnées" />
+        3. Cliquez sur « Enregistrer et continuer »
             <img src="/social-login-assets/google_cons_scope_save.png" alt="Bouton Enregistrer et continuer dans l'écran des étendues" />
     7. Ajouter un utilisateur test
         1. Cliquez sur « Ajouter des utilisateurs »
@@ -140,17 +141,19 @@ Dans cette partie du tutoriel, je vais vous montrer comment valider l'utilisateu
 
 Cet exemple sera très simple et il sera basé sur les technologies suivantes :
 
-- [Dactylographié](https://www.typescriptlang.org/)
+- [TypeScript](https://www.typescriptlang.org/)
 
 - [Hono](https://hono.dev/)
 
-- [Récupération Javascript API](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch)
+- [JavaScript Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch)
 
 Vous pouvez trouver le code de cet exemple [ici](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/141c01d93a85240e31a0d488a89df13c842708b1/index.ts#L135-L153)
 
 Comme vous pouvez le constater :
 
-<img src="/social-login-assets/vscode_auth_google.png" alt="Code VS affichant le code d'authentification Google qui vérifie les jetons" />L'idée est plutôt simple. Vous envoyez une simple requête `GET` à `https://www.googleapis.com/oauth2/v3/tokeninfo` et cela vous renvoie si le token est valide ou non et si c'est le cas, il vous donne l'email de l'utilisateur. Il vous donne également d'autres informations sur le jeton utilisateur
+<img src="/social-login-assets/vscode_auth_google.png" alt="Code VS affichant le code d'authentification Google qui vérifie les jetons" />
+
+L'idée est plutôt simple. Vous envoyez une simple requête `GET` à `https://www.googleapis.com/oauth2/v3/tokeninfo` et cela vous renvoie si le token est valide ou non et si c'est le cas, il vous donne l'email de l'utilisateur. Il vous donne également d'autres informations sur le jeton utilisateur
 <img src="/social-login-assets/google_auth_playground_token_info.png" alt="Google OAuth Aire de jeu affichant la réponse aux informations de jeton avec les détails de l'utilisateur" />
 
 À partir de là, vous pouvez attribuer à l'utilisateur votre propre JWT ou émettre une sorte de cookie de session. Les possibilités sont infinies pour l'implémentation finale de l'authentification.
@@ -179,57 +182,58 @@ Le code de cet exemple peut être trouvé [ici](https://github.com/WcaleNieWolny
 
 Quant au code client, il ressemble à ceci :
 
-```dactylographié
+```typescript
 import { Capacitor } from '@capacitor/core';
 import { GoogleLoginOfflineResponse, SocialLogin } from '@capgo/capacitor-social-login';
 import { usePopoutStore } from '@/popoutStore'; // <-- specific to my app
 
-const baseURL = "[expurgé]";
+const baseURL = "[redacted]";
 
-fonction asynchrone fullLogin() {
-  attendre SocialLogin.initialize({
-    google : {
-      webClientId : '[expurgé]',  
-      iOSClientId : '[expurgé]',
-      iOSServerClientId: 'La même valeur que webClientId',
-      mode : 'hors ligne' // <-- important
+async function fullLogin() {
+  await SocialLogin.initialize({
+    google: {
+      webClientId: '[redacted]',  
+      iOSClientId: '[redacted]',
+      iOSServerClientId: 'The same value as webClientId',
+      mode: 'offline' // <-- important
     } 
   })
-  réponse const = attendre SocialLogin.login ({
-    fournisseur : 'google',
-    options : {
-      forceRefreshToken : true // <-- important
+  const response = await SocialLogin.login({
+    provider: 'google',
+    options: {
+      forceRefreshToken: true // <-- important
     }
   })
 
   if (response.provider === 'google') {
-    const result = réponse.result comme GoogleLoginOfflineResponse
-    const res = attendre fetch(`${baseURL}/auth/google_offline`, {
-      en-têtes : {
+    const result = response.result as GoogleLoginOfflineResponse
+    const res = await fetch(`${baseURL}/auth/google_offline`, {
+      headers: {
         "Content-Type": "application/json"
       },
-      corps : JSON.stringify({
-        serverAuthCode : résultat.serverAuthCode,
-        plateforme : Capacitor.getPlatform()
+      body: JSON.stringify({
+        serverAuthCode: result.serverAuthCode,
+        platform: Capacitor.getPlatform()
       }),
-      méthode : "POST"
+      method: "POST"
     })
 
-    si (res.status !== 200) {
-      popoutStore.popout("Échec de la connexion complète à Google", "vérifier la console");
-      retour
+    if (res.status !== 200) {
+      popoutStore.popout("Full google login failed", "check console");
+      return
     }
 
-    const { jwt } = attendre res.json();
-    const userinfo = attendre fetch(`${baseURL}/auth/get_google_user`, {
-      en-têtes : {
-        Autorisation : `Bearer ${jwt}`
+    const { jwt } = await res.json();
+    const userinfo = await fetch(`${baseURL}/auth/get_google_user`, {
+      headers: {
+        Authorization: `Bearer ${jwt}`
       }
     })
-    si (userinfo.status !== 200) {
-      popoutStore.popout("Échec de la connexion complète à Google (informations utilisateur), "vérifier la console");
-      retour
+    if (userinfo.status !== 200) {
+      popoutStore.popout("Full google (userinfo) login failed", "check console");
+      return
     }
-    popoutStore.popout("userinfo res", wait userinfo.text());
+    popoutStore.popout("userinfo res", await userinfo.text());
   }
 }
+```

@@ -579,7 +579,9 @@ addListener(eventName: 'updateFailed', listenerFunc: (state: UpdateFailedEvent) 
 
 --------------------
 
-## addListener('downloadFailed',```typescript
+## addListener('downloadFailed',
+
+```typescript
 addListener(eventName: 'downloadFailed', listenerFunc: (state: DownloadFailedEvent) => void) => Promise<PluginListenerHandle>
 ```
 

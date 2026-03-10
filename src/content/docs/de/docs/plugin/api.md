@@ -641,7 +641,9 @@ Höre auf Update-Fehlschlag-Events in der App. Informiert dich, wenn ein Update 
 
 --------------------
 
-## addListener('downloadFailed',```typescript
+## addListener('downloadFailed',
+
+```typescript
 addListener(eventName: 'downloadFailed', listenerFunc: (state: DownloadFailedEvent) => void) => Promise<PluginListenerHandle>
 ```
 
