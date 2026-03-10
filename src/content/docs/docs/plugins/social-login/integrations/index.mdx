@@ -1,0 +1,74 @@
+---
+title: Integrations
+description: Backend and auth-platform integrations for @capgo/capacitor-social-login, including Better Auth, Firebase, Supabase, and OAuth providers such as Auth0, Okta, Cognito, and Keycloak.
+sidebar:
+  order: 1
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Overview
+
+These guides show how to combine `@capgo/capacitor-social-login` with backend authentication platforms and session layers.
+
+Use these when you want native mobile login on the device but still want a backend or auth service to own users, sessions, and token verification.
+
+## OAuth provider integrations
+
+<CardGrid>
+  <a href="/docs/plugins/social-login/integrations/auth0/">
+    <Card title="Auth0" icon="external">
+      Auth Connect preset and direct OAuth2 examples.
+    </Card>
+  </a>
+  <a href="/docs/plugins/social-login/integrations/azure/">
+    <Card title="Microsoft Entra ID" icon="external">
+      Azure preset support and direct OAuth2 configuration.
+    </Card>
+  </a>
+  <a href="/docs/plugins/social-login/integrations/cognito/">
+    <Card title="AWS Cognito" icon="external">
+      Cognito preset and direct endpoint examples.
+    </Card>
+  </a>
+  <a href="/docs/plugins/social-login/integrations/github/">
+    <Card title="GitHub" icon="external">
+      Generic OAuth2 configuration for GitHub login.
+    </Card>
+  </a>
+  <a href="/docs/plugins/social-login/integrations/keycloak/">
+    <Card title="Keycloak" icon="external">
+      OIDC discovery and direct endpoint examples.
+    </Card>
+  </a>
+  <a href="/docs/plugins/social-login/integrations/okta/">
+    <Card title="Okta" icon="external">
+      Okta preset and direct OAuth2 examples.
+    </Card>
+  </a>
+  <a href="/docs/plugins/social-login/integrations/onelogin/">
+    <Card title="OneLogin" icon="external">
+      OneLogin preset and direct endpoint examples.
+    </Card>
+  </a>
+</CardGrid>
+
+## Backend and session integrations
+
+<CardGrid>
+  <a href="/docs/plugins/social-login/better-auth/">
+    <Card title="Better Auth" icon="setting">
+      Native token handoff examples for Google, Apple, Facebook, and Generic OAuth guidance.
+    </Card>
+  </a>
+  <a href="/docs/plugins/social-login/firebase/introduction/">
+    <Card title="Firebase" icon="pencil">
+      Use native provider login with Firebase Authentication and Firestore.
+    </Card>
+  </a>
+  <a href="/docs/plugins/social-login/supabase/introduction/">
+    <Card title="Supabase" icon="external">
+      Use native provider login with Supabase Auth and PostgreSQL.
+    </Card>
+  </a>
+</CardGrid>

@@ -1,0 +1,59 @@
+---
+title: Keycloak
+description: Integrate Keycloak with @capgo/capacitor-social-login using OIDC discovery or direct OAuth2 endpoint configuration.
+sidebar:
+  order: 6
+---
+
+## Overview
+
+Keycloak works best through the built-in `oauth2` provider with OIDC discovery via `issuerUrl`.
+
+## OIDC discovery example
+
+```typescript
+import { SocialLogin } from '@capgo/capacitor-social-login';
+
+await SocialLogin.initialize({
+  oauth2: {
+    keycloak: {
+      issuerUrl: 'https://sso.example.com/realms/mobile',
+      clientId: 'mobile-app',
+      redirectUrl: 'myapp://oauth/keycloak',
+      scope: 'openid profile email offline_access',
+      pkceEnabled: true,
+    },
+  },
+});
+
+const result = await SocialLogin.login({
+  provider: 'oauth2',
+  options: {
+    providerId: 'keycloak',
+  },
+});
+```
+
+## Direct endpoint example
+
+```typescript
+await SocialLogin.initialize({
+  oauth2: {
+    keycloak: {
+      appId: 'mobile-app',
+      authorizationBaseUrl: 'https://sso.example.com/realms/mobile/protocol/openid-connect/auth',
+      accessTokenEndpoint: 'https://sso.example.com/realms/mobile/protocol/openid-connect/token',
+      redirectUrl: 'myapp://oauth/keycloak',
+      scope: 'openid profile email offline_access',
+      pkceEnabled: true,
+      resourceUrl: 'https://sso.example.com/realms/mobile/protocol/openid-connect/userinfo',
+      logoutUrl: 'https://sso.example.com/realms/mobile/protocol/openid-connect/logout',
+    },
+  },
+});
+```
+
+## Related docs
+
+- [OAuth2 and OIDC providers](/docs/plugins/social-login/oauth2/)
+- [Better Auth integration](/docs/plugins/social-login/better-auth/)

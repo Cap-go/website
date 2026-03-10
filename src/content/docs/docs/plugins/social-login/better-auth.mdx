@@ -1,0 +1,413 @@
+---
+title: Better Auth Integration
+description: Use @capgo/capacitor-social-login with Better Auth for native Google, Apple, and Facebook sign-in, plus Generic OAuth providers.
+sidebar:
+  order: 6
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Overview
+
+Better Auth works well with `@capgo/capacitor-social-login` when you want native sign-in on the device but still want Better Auth to create and manage the session on your backend.
+
+This page focuses on the two integration patterns that fit best:
+
+- Native token handoff for Google, Apple, and Facebook
+- Better Auth Generic OAuth for providers like Auth0, Okta, Keycloak, and custom OIDC servers
+
+## Which pattern to use
+
+### Use native token handoff
+
+Use `SocialLogin.login()` first, then send the returned token to Better Auth with `authClient.signIn.social()` when you use:
+
+- Google
+- Apple
+- Facebook
+
+### Use Better Auth Generic OAuth
+
+Let Better Auth own the full OAuth redirect flow when you use:
+
+- Auth0
+- Okta
+- Keycloak
+- GitHub
+- OneLogin
+- Any custom OAuth2 or OIDC provider
+
+That keeps the session exchange on the Better Auth side and avoids duplicating redirect logic between two systems.
+
+## Better Auth server setup
+
+Start by configuring Better Auth with the social providers you want to support:
+
+```typescript
+import { betterAuth } from 'better-auth';
+
+export const auth = betterAuth({
+  baseURL: process.env.BETTER_AUTH_URL,
+  socialProviders: {
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    },
+    apple: {
+      clientId: process.env.APPLE_CLIENT_ID as string,
+      clientSecret: process.env.APPLE_CLIENT_SECRET as string,
+      appBundleIdentifier: process.env.APPLE_APP_BUNDLE_IDENTIFIER as string,
+    },
+    facebook: {
+      clientId: process.env.FACEBOOK_CLIENT_ID as string,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
+    },
+  },
+  trustedOrigins: ['https://appleid.apple.com'],
+});
+```
+
+:::note
+For Apple on native iOS, Better Auth documents that you should provide `appBundleIdentifier` so the Apple ID token audience matches the bundle identifier used by iOS.
+:::
+
+## Better Auth client setup
+
+```typescript
+import { createAuthClient } from 'better-auth/client';
+
+export const authClient = createAuthClient({
+  baseURL: 'https://auth.example.com',
+});
+```
+
+If you use React, use the Better Auth React client package your app already uses. The token handoff pattern stays the same.
+
+## Google example
+
+This is the cleanest integration path for native mobile Google sign-in:
+
+```typescript
+import { SocialLogin } from '@capgo/capacitor-social-login';
+import { authClient } from '@/lib/auth-client';
+
+const googleResult = await SocialLogin.login({
+  provider: 'google',
+  options: {
+    scopes: ['profile', 'email'],
+  },
+});
+
+if (googleResult.result.responseType !== 'online' || !googleResult.result.idToken) {
+  throw new Error('Google online mode with idToken is required for Better Auth.');
+}
+
+await authClient.signIn.social({
+  provider: 'google',
+  idToken: {
+    token: googleResult.result.idToken,
+    accessToken: googleResult.result.accessToken?.token,
+  },
+  callbackURL: '/dashboard',
+});
+```
+
+## Apple example
+
+For Apple, pass the same nonce to both the native login request and Better Auth:
+
+```typescript
+import { SocialLogin } from '@capgo/capacitor-social-login';
+import { authClient } from '@/lib/auth-client';
+
+const nonce = crypto.randomUUID();
+
+const appleResult = await SocialLogin.login({
+  provider: 'apple',
+  options: {
+    scopes: ['email', 'name'],
+    nonce,
+  },
+});
+
+if (!appleResult.result.idToken) {
+  throw new Error('Apple idToken is required for Better Auth.');
+}
+
+await authClient.signIn.social({
+  provider: 'apple',
+  idToken: {
+    token: appleResult.result.idToken,
+    nonce,
+    accessToken: appleResult.result.accessToken?.token,
+  },
+  callbackURL: '/dashboard',
+});
+```
+
+## Facebook example
+
+Better Auth documents two Facebook handoff modes:
+
+- iOS Limited Login: pass the `idToken`
+- Access-token flow: pass the access token as both `token` and `accessToken`
+
+This works with the response shape from `@capgo/capacitor-social-login`:
+
+```typescript
+import { SocialLogin } from '@capgo/capacitor-social-login';
+import { authClient } from '@/lib/auth-client';
+
+const facebookResult = await SocialLogin.login({
+  provider: 'facebook',
+  options: {
+    permissions: ['email', 'public_profile'],
+  },
+});
+
+const betterAuthToken = facebookResult.result.idToken
+  ? {
+      token: facebookResult.result.idToken,
+    }
+  : facebookResult.result.accessToken?.token
+    ? {
+        token: facebookResult.result.accessToken.token,
+        accessToken: facebookResult.result.accessToken.token,
+      }
+    : null;
+
+if (!betterAuthToken) {
+  throw new Error('Facebook idToken or access token is required for Better Auth.');
+}
+
+await authClient.signIn.social({
+  provider: 'facebook',
+  idToken: betterAuthToken,
+  callbackURL: '/dashboard',
+});
+```
+
+## Generic OAuth providers with Better Auth
+
+For Auth0, Okta, Keycloak, GitHub, Microsoft Entra ID, and similar providers, Better Auth's Generic OAuth plugin is usually the better fit than passing tokens from `SocialLogin.login({ provider: 'oauth2' })`.
+
+### Better Auth server
+
+```typescript
+import { betterAuth } from 'better-auth';
+import { genericOAuth } from 'better-auth/plugins';
+
+export const auth = betterAuth({
+  plugins: [
+    genericOAuth({
+      config: [
+        {
+          providerId: 'keycloak',
+          discoveryUrl: 'https://sso.example.com/realms/mobile/.well-known/openid-configuration',
+          clientId: process.env.KEYCLOAK_CLIENT_ID as string,
+          clientSecret: process.env.KEYCLOAK_CLIENT_SECRET as string,
+        },
+      ],
+    }),
+  ],
+});
+```
+
+### Better Auth client
+
+```typescript
+import { createAuthClient } from 'better-auth/client';
+import { genericOAuthClient } from 'better-auth/client/plugins';
+
+export const authClient = createAuthClient({
+  baseURL: 'https://auth.example.com',
+  plugins: [genericOAuthClient()],
+});
+
+await authClient.signIn.oauth2({
+  providerId: 'keycloak',
+  callbackURL: '/dashboard',
+});
+```
+
+## Provider examples for Better Auth Generic OAuth
+
+Better Auth ships pre-configured helpers for several providers. These are the closest match to the extra provider examples you see in the social-login plugin docs.
+
+### Auth0
+
+```typescript
+import { betterAuth } from 'better-auth';
+import { auth0, genericOAuth } from 'better-auth/plugins';
+
+export const auth = betterAuth({
+  plugins: [
+    genericOAuth({
+      config: [
+        auth0({
+          providerId: 'auth0',
+          domain: 'dev-example.eu.auth0.com',
+          clientId: process.env.AUTH0_CLIENT_ID as string,
+          clientSecret: process.env.AUTH0_CLIENT_SECRET as string,
+          scopes: ['openid', 'profile', 'email', 'offline_access'],
+        }),
+      ],
+    }),
+  ],
+});
+```
+
+```typescript
+await authClient.signIn.oauth2({
+  providerId: 'auth0',
+  callbackURL: '/dashboard',
+});
+```
+
+### Microsoft Entra ID
+
+```typescript
+import { betterAuth } from 'better-auth';
+import { genericOAuth, microsoftEntraId } from 'better-auth/plugins';
+
+export const auth = betterAuth({
+  plugins: [
+    genericOAuth({
+      config: [
+        microsoftEntraId({
+          providerId: 'entra',
+          tenantId: 'common',
+          clientId: process.env.AZURE_CLIENT_ID as string,
+          clientSecret: process.env.AZURE_CLIENT_SECRET as string,
+          scopes: ['openid', 'profile', 'email', 'User.Read'],
+        }),
+      ],
+    }),
+  ],
+});
+```
+
+```typescript
+await authClient.signIn.oauth2({
+  providerId: 'entra',
+  callbackURL: '/dashboard',
+});
+```
+
+### Okta
+
+```typescript
+import { betterAuth } from 'better-auth';
+import { genericOAuth, okta } from 'better-auth/plugins';
+
+export const auth = betterAuth({
+  plugins: [
+    genericOAuth({
+      config: [
+        okta({
+          providerId: 'okta',
+          issuer: 'https://dev-12345.okta.com/oauth2/default',
+          clientId: process.env.OKTA_CLIENT_ID as string,
+          clientSecret: process.env.OKTA_CLIENT_SECRET as string,
+          scopes: ['openid', 'profile', 'email', 'offline_access'],
+        }),
+      ],
+    }),
+  ],
+});
+```
+
+```typescript
+await authClient.signIn.oauth2({
+  providerId: 'okta',
+  callbackURL: '/dashboard',
+});
+```
+
+### Keycloak
+
+```typescript
+import { betterAuth } from 'better-auth';
+import { genericOAuth, keycloak } from 'better-auth/plugins';
+
+export const auth = betterAuth({
+  plugins: [
+    genericOAuth({
+      config: [
+        keycloak({
+          providerId: 'keycloak',
+          issuer: 'https://sso.example.com/realms/mobile',
+          clientId: process.env.KEYCLOAK_CLIENT_ID as string,
+          clientSecret: process.env.KEYCLOAK_CLIENT_SECRET as string,
+          scopes: ['openid', 'profile', 'email', 'offline_access'],
+        }),
+      ],
+    }),
+  ],
+});
+```
+
+```typescript
+await authClient.signIn.oauth2({
+  providerId: 'keycloak',
+  callbackURL: '/dashboard',
+});
+```
+
+### GitHub with manual Generic OAuth config
+
+GitHub does not have a Better Auth helper on the Generic OAuth page, so use manual configuration:
+
+```typescript
+import { betterAuth } from 'better-auth';
+import { genericOAuth } from 'better-auth/plugins';
+
+export const auth = betterAuth({
+  plugins: [
+    genericOAuth({
+      config: [
+        {
+          providerId: 'github',
+          clientId: process.env.GITHUB_CLIENT_ID as string,
+          clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+          authorizationUrl: 'https://github.com/login/oauth/authorize',
+          tokenUrl: 'https://github.com/login/oauth/access_token',
+          userInfoUrl: 'https://api.github.com/user',
+          scopes: ['read:user', 'user:email'],
+          pkce: true,
+        },
+      ],
+    }),
+  ],
+});
+```
+
+```typescript
+await authClient.signIn.oauth2({
+  providerId: 'github',
+  callbackURL: '/dashboard',
+});
+```
+
+## Notes and caveats
+
+<Steps>
+1. **Use Google online mode**
+   Better Auth needs the `idToken`, so `google.mode: 'offline'` is not the right fit for this handoff flow.
+
+2. **Reuse the Apple nonce**
+   Generate it once, send it to Apple native login, then send the same value to Better Auth.
+
+3. **Handle Facebook differently by platform**
+   Limited Login on iOS gives you an ID token. Other flows may only give an access token.
+
+4. **Do not mix Generic OAuth flows unless you have a reason**
+   If Better Auth owns the OAuth provider configuration, let Better Auth own the redirect flow too.
+</Steps>
+
+## Further reading
+
+- [Better Auth Google provider docs](https://better-auth.com/docs/authentication/google)
+- [Better Auth Apple provider docs](https://better-auth.com/docs/authentication/apple)
+- [Better Auth Facebook provider docs](https://better-auth.com/docs/authentication/facebook)
+- [Better Auth Generic OAuth plugin docs](https://better-auth.com/docs/plugins/generic-oauth)
+- [Social Login OAuth2 and OIDC providers](/docs/plugins/social-login/oauth2/)

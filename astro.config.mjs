@@ -1,5 +1,6 @@
 import sitemap from '@astrojs/sitemap'
 import starlight from '@astrojs/starlight'
+import starlightDocSearch from '@astrojs/starlight-docsearch'
 import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import tailwindcss from '@tailwindcss/vite'
 import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
@@ -9,7 +10,6 @@ import { readFileSync, statSync } from 'node:fs'
 import os from 'node:os'
 import starlightImageZoom from 'starlight-image-zoom'
 import starlightLlmsTxt from 'starlight-llms-txt'
-import starlightDocSearch from '@astrojs/starlight-docsearch'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import config from './configs.json'
 import { defaultLocale, localeNames, locales } from './src/services/locale'
@@ -1358,22 +1358,42 @@ export default defineConfig({
                 { label: 'Google', autogenerate: { directory: 'docs/plugins/social-login/google' } },
                 { label: 'Apple', autogenerate: { directory: 'docs/plugins/social-login/apple' } },
                 { label: 'Facebook', link: '/docs/plugins/social-login/facebook' },
-                { label: 'Firebase', autogenerate: { directory: 'docs/plugins/social-login/firebase' } },
+                { label: 'OAuth2', link: '/docs/plugins/social-login/oauth2' },
                 {
-                  label: 'Supabase',
+                  label: 'Integrations',
                   items: [
-                    { label: 'Introduction', link: '/docs/plugins/social-login/supabase/introduction' },
+                    { label: 'Overview', link: '/docs/plugins/social-login/integrations/' },
+                    { label: 'Better Auth', link: '/docs/plugins/social-login/better-auth' },
                     {
-                      label: 'Google',
-                      autogenerate: { directory: 'docs/plugins/social-login/supabase/google' },
-                    },
-                    {
-                      label: 'Apple',
+                      label: 'OAuth Providers',
                       items: [
-                        { label: 'Supabase Apple Login - General Setup', link: '/docs/plugins/social-login/supabase/apple/general' },
-                        { label: 'Supabase Apple Login on iOS Setup', link: '/docs/plugins/social-login/supabase/apple/ios' },
-                        { label: 'Supabase Apple Login on Android Setup', link: '/docs/plugins/social-login/supabase/apple/android' },
-                        { label: 'Supabase Apple Login on Web Setup', link: '/docs/plugins/social-login/supabase/apple/web' },
+                        { label: 'Auth0', link: '/docs/plugins/social-login/integrations/auth0' },
+                        { label: 'Microsoft Entra ID', link: '/docs/plugins/social-login/integrations/azure' },
+                        { label: 'AWS Cognito', link: '/docs/plugins/social-login/integrations/cognito' },
+                        { label: 'GitHub', link: '/docs/plugins/social-login/integrations/github' },
+                        { label: 'Keycloak', link: '/docs/plugins/social-login/integrations/keycloak' },
+                        { label: 'Okta', link: '/docs/plugins/social-login/integrations/okta' },
+                        { label: 'OneLogin', link: '/docs/plugins/social-login/integrations/onelogin' },
+                      ],
+                    },
+                    { label: 'Firebase', autogenerate: { directory: 'docs/plugins/social-login/firebase' } },
+                    {
+                      label: 'Supabase',
+                      items: [
+                        { label: 'Introduction', link: '/docs/plugins/social-login/supabase/introduction' },
+                        {
+                          label: 'Google',
+                          autogenerate: { directory: 'docs/plugins/social-login/supabase/google' },
+                        },
+                        {
+                          label: 'Apple',
+                          items: [
+                            { label: 'Supabase Apple Login - General Setup', link: '/docs/plugins/social-login/supabase/apple/general' },
+                            { label: 'Supabase Apple Login on iOS Setup', link: '/docs/plugins/social-login/supabase/apple/ios' },
+                            { label: 'Supabase Apple Login on Android Setup', link: '/docs/plugins/social-login/supabase/apple/android' },
+                            { label: 'Supabase Apple Login on Web Setup', link: '/docs/plugins/social-login/supabase/apple/web' },
+                          ],
+                        },
                       ],
                     },
                   ],

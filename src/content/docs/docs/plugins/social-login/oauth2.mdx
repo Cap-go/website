@@ -1,76 +1,177 @@
 ---
-title: Generic OAuth2 Setup
-description: This guide provides a comprehensive walkthrough on setting up generic OAuth2 authentication using Capacitor, supporting multiple providers like GitHub, Azure AD, Auth0, Okta, and any OAuth2-compliant server.
+title: Generic OAuth2 Providers
+description: Configure GitHub, Azure AD, Auth0, Okta, Keycloak, and other OAuth2 or OIDC providers with the Capgo Social Login plugin.
 sidebar:
-    order: 5
+  order: 5
 ---
 import { Steps } from '@astrojs/starlight/components';
 
 ## Introduction
 
-The Capgo Social Login plugin supports generic OAuth2 authentication, allowing you to integrate with any OAuth2-compliant provider.
-
-## OIDC and OAuth2 configuration
-
-You can configure provider endpoints manually, or use `issuerUrl` for OpenID Connect discovery.
-
-```typescript
-import { SocialLogin } from '@capgo/capacitor-social-login';
-
-await SocialLogin.initialize({
-  oauth2: {
-    auth0: {
-      issuerUrl: 'https://your-tenant.auth0.com',
-      appId: 'your-client-id',
-      redirectUrl: 'myapp://oauth/auth0',
-      scope: 'openid profile email',
-      pkceEnabled: true,
-      logsEnabled: true,
-    },
-  },
-});
-```
-
-Alternative endpoint fields are supported:
-
-- `authorizationEndpoint` as alias of `authorizationBaseUrl`
-- `tokenEndpoint` as alias of `accessTokenEndpoint`
-- `endSessionEndpoint` as alias of `logoutUrl`
-
-Also available:
-
-- `additionalParameters`, `additionalTokenParameters`, `additionalResourceHeaders`, `additionalLogoutParameters`
-- `logoutUrl`, `postLogoutRedirectUrl`, `scopes` alias
-- `issuerUrl`, `loginHint`, `prompt`
-
-## Provider list
-
-The plugin supports multiple providers at once:
+The Capgo Social Login plugin includes a built-in OAuth2 and OpenID Connect engine. You can use it to connect any standards-based identity provider, including:
 
 - GitHub
 - Azure AD / Microsoft Entra ID
 - Auth0
 - Okta
 - Keycloak
-- Custom OAuth2 servers
+- Custom OAuth2 or OIDC servers
 
-## Configuration Options
+The `oauth2` configuration is multi-provider by design. You can register several providers at once and then select one at login time with `providerId`.
+
+## What you need
+
+Before you configure a provider, collect:
+
+- Your OAuth client ID
+- A redirect URL that matches your app scheme or web callback URL
+- An authorization endpoint
+- A token endpoint for authorization code flow, or an `issuerUrl` for OIDC discovery
+- The scopes your app needs, such as `openid profile email`
+
+## Multi-provider configuration
+
+Use `SocialLogin.initialize()` once during app startup and register every provider you need:
+
+```typescript
+import { SocialLogin } from '@capgo/capacitor-social-login';
+
+await SocialLogin.initialize({
+  oauth2: {
+    github: {
+      appId: 'your-github-client-id',
+      authorizationBaseUrl: 'https://github.com/login/oauth/authorize',
+      accessTokenEndpoint: 'https://github.com/login/oauth/access_token',
+      redirectUrl: 'myapp://oauth/github',
+      scope: 'read:user user:email',
+      pkceEnabled: true,
+      resourceUrl: 'https://api.github.com/user',
+    },
+    azure: {
+      appId: 'your-azure-client-id',
+      authorizationBaseUrl: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
+      accessTokenEndpoint: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
+      redirectUrl: 'myapp://oauth/azure',
+      scope: 'openid profile email User.Read',
+      pkceEnabled: true,
+      resourceUrl: 'https://graph.microsoft.com/v1.0/me',
+    },
+    auth0: {
+      issuerUrl: 'https://your-tenant.auth0.com',
+      appId: 'your-auth0-client-id',
+      redirectUrl: 'myapp://oauth/auth0',
+      scope: 'openid profile email offline_access',
+      pkceEnabled: true,
+      additionalParameters: {
+        audience: 'https://your-api.example.com',
+      },
+    },
+  },
+});
+```
+
+## OIDC discovery and aliases
+
+If your provider exposes an OpenID Connect discovery document, `issuerUrl` is the simplest setup:
+
+```typescript
+await SocialLogin.initialize({
+  oauth2: {
+    keycloak: {
+      issuerUrl: 'https://sso.example.com/realms/mobile',
+      clientId: 'mobile-app',
+      redirectUrl: 'myapp://oauth/keycloak',
+      scope: 'openid profile email offline_access',
+      pkceEnabled: true,
+    },
+  },
+});
+```
+
+The plugin also supports common OAuth and OIDC aliases:
+
+- `clientId` as an alias of `appId`
+- `authorizationEndpoint` as an alias of `authorizationBaseUrl`
+- `tokenEndpoint` as an alias of `accessTokenEndpoint`
+- `endSessionEndpoint` as an alias of `logoutUrl`
+- `scopes` as an alias of `scope`
+
+Also available:
+
+- `additionalParameters` for auth request overrides
+- `additionalTokenParameters` for token exchange overrides
+- `additionalResourceHeaders` for custom resource endpoint headers
+- `additionalLogoutParameters` and `postLogoutRedirectUrl` for logout flows
+- `loginHint`, `prompt`, and `iosPrefersEphemeralSession`
+
+## Auth Connect-compatible presets
+
+If you are migrating from Ionic Auth Connect and want to keep the same provider names, use `SocialLoginAuthConnect`.
+
+```typescript
+import { SocialLoginAuthConnect } from '@capgo/capacitor-social-login';
+
+await SocialLoginAuthConnect.initialize({
+  authConnect: {
+    auth0: {
+      domain: 'https://your-tenant.auth0.com',
+      clientId: 'your-auth0-client-id',
+      redirectUrl: 'myapp://oauth/auth0',
+      audience: 'https://your-api.example.com',
+    },
+    azure: {
+      tenantId: 'common',
+      clientId: 'your-azure-client-id',
+      redirectUrl: 'myapp://oauth/azure',
+    },
+    okta: {
+      issuer: 'https://dev-12345.okta.com/oauth2/default',
+      clientId: 'your-okta-client-id',
+      redirectUrl: 'myapp://oauth/okta',
+    },
+  },
+});
+```
+
+Supported preset provider IDs:
+
+- `auth0`
+- `azure`
+- `cognito`
+- `okta`
+- `onelogin`
+
+If a provider needs custom endpoints, either override them in the preset or bypass presets and configure the provider directly in `oauth2`.
+
+## Configuration options
 
 | Option | Type | Required | Description |
 |--------|------|----------|-------------|
-| `appId` | string | Yes | OAuth2 client identifier |
-| `authorizationBaseUrl` | string | Yes | Authorization endpoint URL |
-| `accessTokenEndpoint` | string | No* | Token endpoint URL (`*` if not using issuer discovery) |
-| `issuerUrl` | string | No | OIDC discovery endpoint |
-| `authorizationEndpoint` | string | No | Alias of `authorizationBaseUrl` |
-| `tokenEndpoint` | string | No | Alias of `accessTokenEndpoint` |
+| `appId` / `clientId` | string | Yes | OAuth2 client identifier |
+| `issuerUrl` | string | No | OIDC discovery base URL |
+| `authorizationBaseUrl` / `authorizationEndpoint` | string | Yes* | Authorization endpoint URL |
+| `accessTokenEndpoint` / `tokenEndpoint` | string | No* | Token endpoint URL |
 | `redirectUrl` | string | Yes | Callback URL |
 | `scope` / `scopes` | string / string[] | No | Requested scopes |
-| `pkceEnabled` | boolean | No | Default true |
-| `responseType` | `'code'` \, `'token'` | No | Default `'code'` |
-| `flow` | `'popup'` \, `'redirect'` | No | Web-only flow for login popup vs full redirect |
+| `pkceEnabled` | boolean | No | Defaults to `true` |
+| `responseType` | `'code'` or `'token'` | No | Defaults to `'code'` |
+| `resourceUrl` | string | No | User info or resource endpoint |
+| `logoutUrl` / `endSessionEndpoint` | string | No | Logout or end-session URL |
+| `postLogoutRedirectUrl` | string | No | Redirect URL after logout |
+| `additionalParameters` | `Record<string, string>` | No | Extra auth request params |
+| `additionalTokenParameters` | `Record<string, string>` | No | Extra token request params |
+| `additionalResourceHeaders` | `Record<string, string>` | No | Extra headers for `resourceUrl` |
+| `additionalLogoutParameters` | `Record<string, string>` | No | Extra logout params |
+| `loginHint` | string | No | Shortcut for `additionalParameters.login_hint` |
+| `prompt` | string | No | Shortcut for `additionalParameters.prompt` |
+| `iosPrefersEphemeralSession` | boolean | No | Prefer ephemeral browser session on iOS |
+| `logsEnabled` | boolean | No | Enable verbose debug logging |
 
-## Using OAuth2 Login
+`authorizationBaseUrl` and `accessTokenEndpoint` are only optional when `issuerUrl` is enough for discovery. Explicit endpoints always win over discovered values.
+
+## Using OAuth2 login
+
+### Login
 
 ```typescript
 const result = await SocialLogin.login({
@@ -83,25 +184,454 @@ const result = await SocialLogin.login({
 });
 ```
 
-### Refresh
+### Redirect flow on web
+
+Use `flow: 'redirect'` if you want a full-page redirect instead of a popup:
 
 ```typescript
-const result = await SocialLogin.refreshToken({
+await SocialLogin.login({
+  provider: 'oauth2',
+  options: {
+    providerId: 'auth0',
+    flow: 'redirect',
+  },
+});
+```
+
+On the page that receives the callback, parse the login result:
+
+```typescript
+const result = await SocialLogin.handleRedirectCallback();
+if (result?.provider === 'oauth2') {
+  console.log(result.result.providerId);
+}
+```
+
+### Login status and logout
+
+```typescript
+const status = await SocialLogin.isLoggedIn({
+  provider: 'oauth2',
+  providerId: 'github',
+});
+
+await SocialLogin.logout({
+  provider: 'oauth2',
+  providerId: 'github',
+});
+```
+
+### Refresh tokens
+
+```typescript
+await SocialLogin.refresh({
+  provider: 'oauth2',
+  options: {
+    providerId: 'github',
+  },
+});
+
+const refreshed = await SocialLogin.refreshToken({
   provider: 'oauth2',
   providerId: 'github',
   refreshToken: 'existing-refresh-token',
 });
 ```
 
-## Security Best Practices
+`refresh()` uses the refresh token stored by the plugin. `refreshToken()` lets you pass a refresh token yourself and returns the fresh OAuth2 response.
+
+### Get the current access token
+
+```typescript
+const code = await SocialLogin.getAuthorizationCode({
+  provider: 'oauth2',
+  providerId: 'github',
+});
+
+console.log(code.accessToken);
+```
+
+## Provider-specific examples
+
+### GitHub example
+
+Use GitHub when you want a simple OAuth app flow and basic profile data:
+
+```typescript
+await SocialLogin.initialize({
+  oauth2: {
+    github: {
+      appId: 'your-github-client-id',
+      authorizationBaseUrl: 'https://github.com/login/oauth/authorize',
+      accessTokenEndpoint: 'https://github.com/login/oauth/access_token',
+      redirectUrl: 'myapp://oauth/github',
+      scope: 'read:user user:email',
+      pkceEnabled: true,
+      resourceUrl: 'https://api.github.com/user',
+    },
+  },
+});
+
+const githubResult = await SocialLogin.login({
+  provider: 'oauth2',
+  options: {
+    providerId: 'github',
+  },
+});
+
+console.log(githubResult.result.accessToken?.token);
+console.log(githubResult.result.resourceData);
+```
+
+### Azure AD / Microsoft Entra ID example
+
+Use Azure when you need Microsoft Graph data such as the user profile:
+
+```typescript
+await SocialLogin.initialize({
+  oauth2: {
+    azure: {
+      appId: 'your-azure-client-id',
+      authorizationBaseUrl: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
+      accessTokenEndpoint: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
+      redirectUrl: 'myapp://oauth/azure',
+      scope: 'openid profile email User.Read',
+      pkceEnabled: true,
+      resourceUrl: 'https://graph.microsoft.com/v1.0/me',
+    },
+  },
+});
+
+const azureResult = await SocialLogin.login({
+  provider: 'oauth2',
+  options: {
+    providerId: 'azure',
+  },
+});
+
+console.log(azureResult.result.idToken);
+console.log(azureResult.result.resourceData);
+```
+
+### Auth0 example
+
+Auth0 is a good fit when you need OIDC plus a custom API audience:
+
+```typescript
+await SocialLogin.initialize({
+  oauth2: {
+    auth0: {
+      appId: 'your-auth0-client-id',
+      authorizationBaseUrl: 'https://your-tenant.auth0.com/authorize',
+      accessTokenEndpoint: 'https://your-tenant.auth0.com/oauth/token',
+      redirectUrl: 'myapp://oauth/auth0',
+      scope: 'openid profile email offline_access',
+      pkceEnabled: true,
+      additionalParameters: {
+        audience: 'https://your-api.example.com',
+      },
+    },
+  },
+});
+
+const auth0Result = await SocialLogin.login({
+  provider: 'oauth2',
+  options: {
+    providerId: 'auth0',
+    flow: 'redirect',
+  },
+});
+```
+
+If you use redirect flow on web, read the result back on the callback page:
+
+```typescript
+const auth0Result = await SocialLogin.handleRedirectCallback();
+if (auth0Result?.provider === 'oauth2') {
+  console.log(auth0Result.result.idToken);
+}
+```
+
+### Okta example
+
+```typescript
+await SocialLogin.initialize({
+  oauth2: {
+    okta: {
+      appId: 'your-okta-client-id',
+      authorizationBaseUrl: 'https://your-domain.okta.com/oauth2/default/v1/authorize',
+      accessTokenEndpoint: 'https://your-domain.okta.com/oauth2/default/v1/token',
+      redirectUrl: 'myapp://oauth/okta',
+      scope: 'openid profile email offline_access',
+      pkceEnabled: true,
+      resourceUrl: 'https://your-domain.okta.com/oauth2/default/v1/userinfo',
+    },
+  },
+});
+
+const oktaResult = await SocialLogin.login({
+  provider: 'oauth2',
+  options: {
+    providerId: 'okta',
+  },
+});
+
+console.log(oktaResult.result.resourceData);
+```
+
+### Keycloak example
+
+Use discovery when your provider publishes `/.well-known/openid-configuration`:
+
+```typescript
+await SocialLogin.initialize({
+  oauth2: {
+    keycloak: {
+      issuerUrl: 'https://sso.example.com/realms/mobile',
+      clientId: 'mobile-app',
+      redirectUrl: 'myapp://oauth/keycloak',
+      scope: 'openid profile email offline_access',
+      pkceEnabled: true,
+    },
+  },
+});
+
+const keycloakResult = await SocialLogin.login({
+  provider: 'oauth2',
+  options: {
+    providerId: 'keycloak',
+  },
+});
+
+console.log(keycloakResult.result.idToken);
+```
+
+## OAuth2 response shape
+
+Successful OAuth2 logins return:
+
+| Field | Description |
+|-------|-------------|
+| `providerId` | The configured provider key used for the login |
+| `accessToken` | Access token payload or `null` |
+| `idToken` | OIDC ID token if the provider returned one |
+| `refreshToken` | Refresh token if the requested scopes allowed it |
+| `resourceData` | Raw JSON fetched from `resourceUrl` |
+| `scope` | Granted scopes |
+| `tokenType` | Usually `bearer` |
+| `expiresIn` | Token lifetime in seconds |
+
+## Provider setup reference
+
+### GitHub
 
 <Steps>
-1. **Enable PKCE**
-   Keep `pkceEnabled: true`.
+1. **Create an OAuth app**
+   Open [GitHub Developer Settings](https://github.com/settings/developers) and create a new OAuth App.
 
-2. **Prefer authorization code**
-   Use `responseType: 'code'` with token endpoint exchange.
+2. **Set the callback URL**
+   Use your app redirect URL, for example `myapp://oauth/github`.
 
-3. **Validate token values**
-   Verify `idToken`, `accessToken`, and expiration on your backend.
+3. **Configure the plugin**
+
+   ```typescript
+   await SocialLogin.initialize({
+     oauth2: {
+       github: {
+         appId: 'your-github-client-id',
+         authorizationBaseUrl: 'https://github.com/login/oauth/authorize',
+         accessTokenEndpoint: 'https://github.com/login/oauth/access_token',
+         redirectUrl: 'myapp://oauth/github',
+         scope: 'read:user user:email',
+         pkceEnabled: true,
+         resourceUrl: 'https://api.github.com/user',
+       },
+     },
+   });
+   ```
 </Steps>
+
+### Azure AD / Microsoft Entra ID
+
+<Steps>
+1. **Register an app**
+   Go to Azure Portal, open `App registrations`, and create a native or mobile app registration.
+
+2. **Add the redirect URI**
+   Add a mobile or desktop redirect URI that matches your app callback URL.
+
+3. **Configure the plugin**
+
+   ```typescript
+   await SocialLogin.initialize({
+     oauth2: {
+       azure: {
+         appId: 'your-azure-client-id',
+         authorizationBaseUrl: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
+         accessTokenEndpoint: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
+         redirectUrl: 'myapp://oauth/azure',
+         scope: 'openid profile email User.Read',
+         pkceEnabled: true,
+         resourceUrl: 'https://graph.microsoft.com/v1.0/me',
+       },
+     },
+   });
+   ```
+
+   :::note
+   Replace `common` with your tenant ID if your app is single-tenant.
+   :::
+</Steps>
+
+### Auth0
+
+<Steps>
+1. **Create a native application**
+   Open the [Auth0 Dashboard](https://manage.auth0.com) and create a Native app.
+
+2. **Set allowed callback URLs**
+   Add the exact redirect URL used by your Capacitor app.
+
+3. **Configure the plugin**
+
+   ```typescript
+   await SocialLogin.initialize({
+     oauth2: {
+       auth0: {
+         appId: 'your-auth0-client-id',
+         authorizationBaseUrl: 'https://your-tenant.auth0.com/authorize',
+         accessTokenEndpoint: 'https://your-tenant.auth0.com/oauth/token',
+         redirectUrl: 'myapp://oauth/auth0',
+         scope: 'openid profile email offline_access',
+         pkceEnabled: true,
+         additionalParameters: {
+           audience: 'https://your-api.example.com',
+         },
+         logoutUrl: 'https://your-tenant.auth0.com/v2/logout',
+       },
+     },
+   });
+   ```
+</Steps>
+
+### Okta
+
+<Steps>
+1. **Create an OIDC native app**
+   In Okta Admin Console, create an OIDC Native Application.
+
+2. **Add your redirect URI**
+   Register the exact callback URL used by your app.
+
+3. **Configure the plugin**
+
+   ```typescript
+   await SocialLogin.initialize({
+     oauth2: {
+       okta: {
+         appId: 'your-okta-client-id',
+         authorizationBaseUrl: 'https://your-domain.okta.com/oauth2/default/v1/authorize',
+         accessTokenEndpoint: 'https://your-domain.okta.com/oauth2/default/v1/token',
+         redirectUrl: 'myapp://oauth/okta',
+         scope: 'openid profile email offline_access',
+         pkceEnabled: true,
+         resourceUrl: 'https://your-domain.okta.com/oauth2/default/v1/userinfo',
+       },
+     },
+   });
+   ```
+</Steps>
+
+### Keycloak and custom OIDC providers
+
+If your provider supports OpenID Connect discovery, prefer `issuerUrl`:
+
+```typescript
+await SocialLogin.initialize({
+  oauth2: {
+    keycloak: {
+      issuerUrl: 'https://sso.example.com/realms/mobile',
+      clientId: 'mobile-app',
+      redirectUrl: 'myapp://oauth/keycloak',
+      scope: 'openid profile email offline_access',
+      pkceEnabled: true,
+    },
+  },
+});
+```
+
+If discovery is not available, configure the authorization and token endpoints manually.
+
+## Platform-specific notes
+
+### iOS
+
+- The plugin uses `ASWebAuthenticationSession`.
+- Set `iosPrefersEphemeralSession: true` if you want a private browser session with no shared cookies.
+
+### Android
+
+- OAuth redirects return through your app scheme and host.
+- Make sure the provider callback URL exactly matches your Android deep link setup.
+- The plugin already handles the OAuth activity. Only add custom intent filters if your app needs a different redirect pattern.
+
+### Web
+
+- Popup flow is the default and works well for single-page apps.
+- Redirect flow is better when the provider blocks popups or your auth rules require top-level navigation.
+- Some providers block direct browser token exchange with CORS. In those cases, use a backend exchange or a provider setup that allows public clients.
+
+## Security best practices
+
+<Steps>
+1. **Use PKCE**
+   Keep `pkceEnabled: true` for public clients.
+
+2. **Prefer authorization code flow**
+   `responseType: 'code'` is safer than implicit flow.
+
+3. **Validate tokens on your backend**
+   Decode and verify issuer, audience, expiration, and signature server-side.
+
+4. **Store refresh tokens securely**
+   For native apps, pair this plugin with [@capgo/capacitor-persistent-account](https://github.com/Cap-go/capacitor-persistent-account).
+
+5. **Use HTTPS everywhere**
+   Production auth endpoints and logout endpoints should always use HTTPS.
+</Steps>
+
+## Troubleshooting
+
+### `providerId is required`
+
+Every OAuth2 method needs the configured provider key:
+
+```typescript
+await SocialLogin.login({
+  provider: 'oauth2',
+  options: { providerId: 'github' },
+});
+```
+
+### `OAuth2 provider "xxx" not configured`
+
+Call `SocialLogin.initialize()` before login and make sure the `providerId` matches the object key under `oauth2`.
+
+### Redirect URL mismatch
+
+- Compare the configured redirect URL in your app and provider dashboard character by character.
+- Watch for trailing slashes, scheme mismatches, and different hosts.
+- Make sure mobile app URL schemes are registered before testing on device.
+
+### No refresh token returned
+
+Most providers only return refresh tokens when you request scopes like `offline_access` or explicitly force consent. Review the provider-specific policy.
+
+### Debugging token exchange
+
+Enable `logsEnabled: true` on the provider config to inspect generated URLs and token exchange details.
+
+## Related docs
+
+- [Social Login getting started](/docs/plugins/social-login/getting-started/)
+- [Ionic Auth Connect migration](/docs/plugins/social-login/migrations/ionic-auth-connect/)

@@ -1,0 +1,63 @@
+---
+title: AWS Cognito
+description: Integrate Amazon Cognito with @capgo/capacitor-social-login using the Auth Connect preset wrapper or direct OAuth2 configuration.
+sidebar:
+  order: 4
+---
+
+## Overview
+
+Amazon Cognito is supported through the `cognito` Auth Connect preset. You can also configure it manually with direct OAuth2 endpoints.
+
+## Auth Connect preset example
+
+```typescript
+import { SocialLoginAuthConnect } from '@capgo/capacitor-social-login';
+
+await SocialLoginAuthConnect.initialize({
+  authConnect: {
+    cognito: {
+      domain: 'https://your-domain.auth.region.amazoncognito.com',
+      clientId: 'your-cognito-client-id',
+      redirectUrl: 'myapp://oauth/cognito',
+    },
+  },
+});
+
+const result = await SocialLoginAuthConnect.login({
+  provider: 'cognito',
+});
+```
+
+## Direct OAuth2 example
+
+```typescript
+import { SocialLogin } from '@capgo/capacitor-social-login';
+
+await SocialLogin.initialize({
+  oauth2: {
+    cognito: {
+      appId: 'your-cognito-client-id',
+      authorizationBaseUrl: 'https://your-domain.auth.region.amazoncognito.com/oauth2/authorize',
+      accessTokenEndpoint: 'https://your-domain.auth.region.amazoncognito.com/oauth2/token',
+      redirectUrl: 'myapp://oauth/cognito',
+      scope: 'openid profile email',
+      pkceEnabled: true,
+      resourceUrl: 'https://your-domain.auth.region.amazoncognito.com/oauth2/userInfo',
+      logoutUrl: 'https://your-domain.auth.region.amazoncognito.com/logout',
+    },
+  },
+});
+
+const result = await SocialLogin.login({
+  provider: 'oauth2',
+  options: {
+    providerId: 'cognito',
+  },
+});
+```
+
+## Related docs
+
+- [Ionic Auth Connect migration](/docs/plugins/social-login/migrations/ionic-auth-connect/)
+- [OAuth2 and OIDC providers](/docs/plugins/social-login/oauth2/)
