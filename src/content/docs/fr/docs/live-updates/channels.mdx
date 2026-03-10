@@ -161,16 +161,19 @@ Lorsque `setChannel()` est appelé :
 
 **Remarque de sécurité :** Même si les autorisations d'un canal changent après avoir été définies localement (par exemple, l'auto-attribution est désactivée), le backend validera toujours le canal lors des vérifications de mise à jour, garantissant ainsi le maintien de la sécurité.
 
-**Comparaison des méthodes de changement de chaîne :**<Steps>
+**Comparaison des méthodes de changement de chaîne :**
 
-1. Cliquez sur le nom de la chaîne que vous souhaitez restaurer
-2. Recherchez la version à laquelle vous souhaitez revenir et cliquez sur l'icône de la couronne.
-![Construction de restauration](/select_bundle.webp)
-3. Confirmez l'action 
+| Méthode | Délai d'effet | Persistance | Cas d'usage |
+| --- | --- | --- | --- |
+| `setChannel()` depuis le plugin | **Instantané** | Appareil uniquement (local) | Changement de canal initié par l'utilisateur dans l'app |
+| Remplacement d'appareil via le tableau de bord | Jusqu'à 2 min | Base de données backend | Changements initiés par un administrateur pour des appareils spécifiques |
+| Attribution de canal via l'API | Jusqu'à 2 min | Base de données backend | Intégrations backend automatisées |
 
-</Steps>
+Pour la meilleure expérience utilisateur lors de la création d'interfaces de changement de canal, utilisez toujours la méthode `setChannel()` du plugin.
 
-La version sélectionnée redeviendra immédiatement la version active pour ce canal. Les applications recevront la version restaurée la prochaine fois qu'elles rechercheront une mise à jour.
+Versions minimales pour le changement de canal local uniquement : **5.34.0**, **6.34.0**, **7.34.0** ou **8.0.0** (selon votre version majeure). Chaque numéro de version mineure correspond au même ensemble de fonctionnalités sur toutes les versions majeures (par exemple, X.34.0 inclut les mêmes fonctionnalités que X soit 5, 6, 7 ou 8). Consultez [l'installation du plugin](/docs/getting-started/add-an-app/) pour les tags de version.
+
+</Aside>
 
 ## Automatisation des déploiements
 
