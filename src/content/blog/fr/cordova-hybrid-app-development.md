@@ -12,7 +12,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-06-02T00:00:00.000Z
-updated_at: 2026-03-10T11:54:01.000Z
+updated_at: 2026-03-10T13:30:16.000Z
 head_image: /what-is-cordova-phone-gap.webp
 head_image_alt: Diagramme expliquant la différence entre les applications hybrides et natives.
 keywords: >-
