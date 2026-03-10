@@ -19,7 +19,7 @@ export const integrations: IntegrationEntry[] = [
   {
     name: 'Codemagic',
     href: 'https://docs.codemagic.io/integrations/capgo-integration/',
-    logo: '/Codemagic_ios.webp',
+    logo: '/codemagic-logo-black.svg',
     target: '_blank',
     rel: 'noopener noreferrer',
     description: 'Continuous delivery workflow integration with Capgo for mobile update pipelines.',

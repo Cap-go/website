@@ -2,7 +2,6 @@
 import * as m from '@/paraglide/messages'
 import { locales } from '@/services/locale'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import { integrations } from '@/config/integrations'
 
 const year = new Date().getFullYear()
 
@@ -36,6 +35,7 @@ const navigation: Record<string, NavigationItem[]> = {
     { name: m.native_build({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'native-build') },
     { name: m.app_mobile({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'app_mobile') },
     { name: m.plugins({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'plugins') },
+    { name: m.integrations_badge({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'integrations') },
     { name: m.cli_and_api({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli') },
   ],
   solutions: [
@@ -170,27 +170,29 @@ const navigation: Record<string, NavigationItem[]> = {
 }
 ---
 
-<footer class="text-white bg-gray-900" aria-labelledby="footer-heading">
+<footer class="bg-gray-900 text-white" aria-labelledby="footer-heading">
   <p id="footer-heading" class="sr-only">{m.footer({}, { locale: Astro.locals.locale })}</p>
-  <div class="relative py-16 px-4 mx-auto max-w-7xl sm:px-6 lg:py-24 lg:px-8">
-    
+  <div class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
     <!-- Top Section: Tagline + Button -->
-    <div class="flex flex-col justify-between items-start mb-12 lg:flex-row lg:items-center">
+    <div class="mb-12 flex flex-col items-start justify-between lg:flex-row lg:items-center">
       <h2 class="mb-6 max-w-2xl text-3xl font-bold tracking-tight text-white md:text-4xl lg:mb-0">
         {m.footer_tagline_part1({}, { locale: Astro.locals.locale })}
         <span class="block text-zinc-500">{m.footer_tagline_part2({}, { locale: Astro.locals.locale })}</span>
       </h2>
-      <a href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')} class="inline-flex justify-center items-center py-3 px-6 text-base font-medium text-white bg-blue-600 rounded-md border border-transparent shadow-sm hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none">
+      <a
+        href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
+        class="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+      >
         {m.install_plugin({}, { locale: Astro.locals.locale })}
       </a>
     </div>
 
     <!-- Middle Section: Hero Icons -->
-    <div class="flex flex-wrap gap-6 pb-12 mb-12 border-b border-zinc-800">
+    <div class="mb-12 flex flex-wrap gap-6 border-b border-zinc-800 pb-12">
       {
         navigation.hero.map((item) => (
-          <a href={item.href} target="_blank" rel="noreferrer" class="flex items-center text-sm transition-colors hover:text-white text-zinc-400">
-            {item.icon && <div class="h-5 w-5 mr-2 text-blue-500 [&>svg]:w-full [&>svg]:h-full" set:html={item.icon} />}
+          <a href={item.href} target="_blank" rel="noreferrer" class="flex items-center text-sm text-zinc-400 transition-colors hover:text-white">
+            {item.icon && <div class="mr-2 h-5 w-5 text-blue-500 [&>svg]:h-full [&>svg]:w-full" set:html={item.icon} />}
             <span>{typeof item.name === 'function' ? item.name() : item.name}</span>
           </a>
         ))
@@ -198,149 +200,152 @@ const navigation: Record<string, NavigationItem[]> = {
     </div>
 
     <!-- Links Grid -->
-    <div class="grid grid-cols-2 gap-8 mb-12 md:grid-cols-7">
+    <div class="mb-12 grid grid-cols-2 gap-8 md:grid-cols-6">
       <div>
         <h3 class="mb-4 text-sm font-semibold tracking-wider text-white uppercase">{m.products({}, { locale: Astro.locals.locale })}</h3>
         <ul role="list" class="space-y-3">
-          {navigation.products.map((item) => (
-            <li>
-              <a href={item.href} target={item.target} class="text-sm transition-colors hover:text-white text-zinc-400">
-                {typeof item.name === 'function' ? item.name() : item.name}
-              </a>
-            </li>
-          ))}
+          {
+            navigation.products.map((item) => (
+              <li>
+                <a href={item.href} target={item.target} class="text-sm text-zinc-400 transition-colors hover:text-white">
+                  {typeof item.name === 'function' ? item.name() : item.name}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
       <div>
         <h3 class="mb-4 text-sm font-semibold tracking-wider text-white uppercase">{m.solutions({}, { locale: Astro.locals.locale })}</h3>
         <ul role="list" class="space-y-3">
-          {navigation.solutions.map((item) => (
-            <li>
-              <a href={item.href} target={item.target} class="text-sm transition-colors hover:text-white text-zinc-400">
-                {typeof item.name === 'function' ? item.name() : item.name}
-              </a>
-            </li>
-          ))}
+          {
+            navigation.solutions.map((item) => (
+              <li>
+                <a href={item.href} target={item.target} class="text-sm text-zinc-400 transition-colors hover:text-white">
+                  {typeof item.name === 'function' ? item.name() : item.name}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
       <div>
         <h3 class="mb-4 text-sm font-semibold tracking-wider text-white uppercase">{m.support({}, { locale: Astro.locals.locale })}</h3>
         <ul role="list" class="space-y-3">
-          {navigation.support.filter(i => !i.href.includes('status.capgo.app') || (typeof i.name === 'function' ? i.name() : i.name) !== m.all_systems_normal({}, { locale: Astro.locals.locale })).map((item) => (
-            <li>
-              <a href={item.href} target={item.target} rel={item.rel} class="text-sm transition-colors hover:text-white text-zinc-400">
-                {item.icon && <span class="inline-block mr-2 w-4 h-4" set:html={typeof item.icon === 'function' ? item.icon() : item.icon} />}
-                {typeof item.name === 'function' ? item.name() : item.name}
-              </a>
-            </li>
-          ))}
+          {
+            navigation.support
+              .filter(
+                (i) => !i.href.includes('status.capgo.app') || (typeof i.name === 'function' ? i.name() : i.name) !== m.all_systems_normal({}, { locale: Astro.locals.locale }),
+              )
+              .map((item) => (
+                <li>
+                  <a href={item.href} target={item.target} rel={item.rel} class="text-sm text-zinc-400 transition-colors hover:text-white">
+                    {item.icon && <span class="mr-2 inline-block h-4 w-4" set:html={typeof item.icon === 'function' ? item.icon() : item.icon} />}
+                    {typeof item.name === 'function' ? item.name() : item.name}
+                  </a>
+                </li>
+              ))
+          }
         </ul>
       </div>
       <div>
         <h3 class="mb-4 text-sm font-semibold tracking-wider text-white uppercase">{m.company({}, { locale: Astro.locals.locale })}</h3>
         <ul role="list" class="space-y-3">
-          {navigation.company.map((item) => (
-            <li>
-              <a href={item.href} class="text-sm transition-colors hover:text-white text-zinc-400">
-                {typeof item.name === 'function' ? item.name() : item.name}
-              </a>
-            </li>
-          ))}
+          {
+            navigation.company.map((item) => (
+              <li>
+                <a href={item.href} class="text-sm text-zinc-400 transition-colors hover:text-white">
+                  {typeof item.name === 'function' ? item.name() : item.name}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
       <div>
         <h3 class="mb-4 text-sm font-semibold tracking-wider text-white uppercase">{m.compare({}, { locale: Astro.locals.locale })}</h3>
         <ul role="list" class="space-y-3">
-          {navigation.compare.map((item) => (
-            <li>
-              <a href={item.href} class="text-sm transition-colors hover:text-white text-zinc-400">
-                {typeof item.name === 'function' ? item.name() : item.name}
-              </a>
-            </li>
-          ))}
+          {
+            navigation.compare.map((item) => (
+              <li>
+                <a href={item.href} class="text-sm text-zinc-400 transition-colors hover:text-white">
+                  {typeof item.name === 'function' ? item.name() : item.name}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
       <div>
         <h3 class="mb-4 text-sm font-semibold tracking-wider text-white uppercase">{m.legal({}, { locale: Astro.locals.locale })}</h3>
         <ul role="list" class="space-y-3">
-          {navigation.legal.map((item) => (
-            <li>
-              <a href={item.href} rel={item.rel} class="text-sm transition-colors hover:text-white text-zinc-400">
-                {typeof item.name === 'function' ? item.name() : item.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <h3 class="mb-4 text-sm font-semibold tracking-wider text-white uppercase">
-          <a href={getRelativeLocaleUrl(Astro.locals.locale, 'integrations')} class="hover:text-white">
-            Integrations
-          </a>
-        </h3>
-        <ul role="list" class="space-y-3">
-          {integrations.map((item) => (
-            <li>
-              <a
-                href={item.href}
-                target={item.target}
-                rel={item.rel}
-                class="inline-flex items-center text-sm transition-colors hover:text-white text-zinc-400"
-              >
-                <img src={item.logo} alt={item.name} class="w-5 h-5 mr-2 rounded object-contain" />
-                {item.name}
-              </a>
-            </li>
-          ))}
+          {
+            navigation.legal.map((item) => (
+              <li>
+                <a href={item.href} rel={item.rel} class="text-sm text-zinc-400 transition-colors hover:text-white">
+                  {typeof item.name === 'function' ? item.name() : item.name}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
     </div>
 
     <!-- Bottom Section -->
-    <div class="flex relative flex-col justify-between items-end pt-8 border-t md:flex-row border-zinc-800">
-        
-        <!-- Status Indicator -->
-        <div class="flex flex-col gap-4 items-start mb-4 md:mb-0">
-             <a href="https://status.capgo.app/" target="_blank" class="flex items-center text-sm hover:text-white text-zinc-400">
-                <span class="flex relative mr-2 w-2 h-2">
-                  <span class="inline-flex absolute w-full h-full bg-green-400 rounded-full opacity-75 animate-ping"></span>
-                  <span class="inline-flex relative w-2 h-2 bg-green-500 rounded-full"></span>
-                </span>
-                {m.all_systems_normal_uptime({}, { locale: Astro.locals.locale })}
-             </a>
-             <div class="flex gap-4">
-               <img src="/soc2.svg" alt={m.soc2_compliant({}, { locale: Astro.locals.locale })} class="w-auto h-12 opacity-80 transition-opacity hover:opacity-100" />
-               <img src="/soc1.svg" alt={m.soc1_compliant({}, { locale: Astro.locals.locale })} class="w-auto h-12 opacity-80 transition-opacity hover:opacity-100" />
-               <img src="/gdpr.svg" alt={m.gdpr_compliant({}, { locale: Astro.locals.locale })} class="w-auto h-12 opacity-80 transition-opacity hover:opacity-100" />
-             </div>
-             <p class="max-w-md text-xs text-zinc-500">
-                {m.enterprise_security_audit_desc({}, { locale: Astro.locals.locale })}
-             </p>
+    <div class="relative flex flex-col items-end justify-between border-t border-zinc-800 pt-8 md:flex-row">
+      <!-- Status Indicator -->
+      <div class="mb-4 flex flex-col items-start gap-4 md:mb-0">
+        <a href="https://status.capgo.app/" target="_blank" class="flex items-center text-sm text-zinc-400 hover:text-white">
+          <span class="relative mr-2 flex h-2 w-2">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
+          </span>
+          {m.all_systems_normal_uptime({}, { locale: Astro.locals.locale })}
+        </a>
+        <div class="flex gap-4">
+          <img src="/soc2.svg" alt={m.soc2_compliant({}, { locale: Astro.locals.locale })} class="h-12 w-auto opacity-80 transition-opacity hover:opacity-100" />
+          <img src="/soc1.svg" alt={m.soc1_compliant({}, { locale: Astro.locals.locale })} class="h-12 w-auto opacity-80 transition-opacity hover:opacity-100" />
+          <img src="/gdpr.svg" alt={m.gdpr_compliant({}, { locale: Astro.locals.locale })} class="h-12 w-auto opacity-80 transition-opacity hover:opacity-100" />
         </div>
+        <p class="max-w-md text-xs text-zinc-500">
+          {m.enterprise_security_audit_desc({}, { locale: Astro.locals.locale })}
+        </p>
+      </div>
 
-        <!-- Language & Copyright -->
-        <div class="flex flex-col gap-6 justify-between items-center w-full md:flex-row md:justify-end md:w-auto">
-            
-            <!-- Language Selector -->
-            <div class="relative">
-                <button type="button" id="language-dropdown-button" class="flex items-center text-sm hover:text-white focus:outline-none text-zinc-400">
-                    <span class="mr-2">{currentFlag}</span> {Astro.locals.locale.toUpperCase()} <span class="ml-1">▼</span>
-                </button>
-                 <div id="language-dropdown" class="hidden absolute left-0 bottom-full z-50 mb-2 w-32 rounded-md ring-1 ring-black ring-opacity-5 shadow-lg focus:outline-none bg-[#1c1c1f]">
-                    <div class="py-1">
-                        {locales.map((item) => (
-                            <a href={getRelativeLocaleUrl(item.toLowerCase(), Astro.url.pathname.replace(`/${Astro.locals.locale}/`, '/'))} class="block py-2 px-4 text-sm hover:text-white text-zinc-400 hover:bg-zinc-800">
-                                {item.toUpperCase()}
-                            </a>
-                        ))}
-                    </div>
-                 </div>
+      <!-- Language & Copyright -->
+      <div class="flex w-full flex-col items-center justify-between gap-6 md:w-auto md:flex-row md:justify-end">
+        <!-- Language Selector -->
+        <div class="relative">
+          <button type="button" id="language-dropdown-button" class="flex items-center text-sm text-zinc-400 hover:text-white focus:outline-none">
+            <span class="mr-2">{currentFlag}</span>
+            {Astro.locals.locale.toUpperCase()}
+            <span class="ml-1">▼</span>
+          </button>
+          <div
+            id="language-dropdown"
+            class="ring-opacity-5 absolute bottom-full left-0 z-50 mb-2 hidden w-32 rounded-md bg-[#1c1c1f] shadow-lg ring-1 ring-black focus:outline-none"
+          >
+            <div class="py-1">
+              {
+                locales.map((item) => (
+                  <a
+                    href={getRelativeLocaleUrl(item.toLowerCase(), Astro.url.pathname.replace(`/${Astro.locals.locale}/`, '/'))}
+                    class="block px-4 py-2 text-sm text-zinc-400 hover:bg-zinc-800 hover:text-white"
+                  >
+                    {item.toUpperCase()}
+                  </a>
+                ))
+              }
             </div>
-
-            <p class="text-xs tracking-wider uppercase text-zinc-500">
-                &copy; {year} {m.copyright_notice({}, { locale: Astro.locals.locale })}
-            </p>
+          </div>
         </div>
+
+        <p class="text-xs tracking-wider text-zinc-500 uppercase">
+          &copy; {year}
+          {m.copyright_notice({}, { locale: Astro.locals.locale })}
+        </p>
+      </div>
     </div>
   </div>
 </footer>
