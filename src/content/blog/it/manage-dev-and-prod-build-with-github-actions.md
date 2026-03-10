@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-16T00:00:00.000Z
-updated_at: 2026-03-10T11:52:35.000Z
+updated_at: 2026-03-10T11:54:01.000Z
 head_image: /capgo_ci-cd-illustration.webp
 head_image_alt: Illustrazione delle build dei canali
 keywords: >-
