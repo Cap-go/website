@@ -20,8 +20,6 @@ published: true
 locale: it
 next_blog: ''
 ---
-Ecco la traduzione in italiano:
-
 Il debug delle app [Capacitor](https://capacitorjs.com/) può essere complesso per la loro natura ibrida, che unisce tecnologie web e native. Questa guida semplifica il processo, coprendo strumenti essenziali, tecniche e suggerimenti per risolvere i problemi in modo efficace.
 
 ### Punti Chiave:

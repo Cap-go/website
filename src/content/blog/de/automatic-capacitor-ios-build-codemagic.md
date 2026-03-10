@@ -117,9 +117,7 @@ Und laden Sie das Zertifikat hoch
 2. Klicken Sie auf den Button **Schlüssel hinzufügen**
 3. Geben Sie den `App Store Connect API-Schlüsselnamen` ein. Dies ist ein lesbarer Name für den Schlüssel, der später in den Anwendungseinstellungen verwendet wird.
 4. Geben Sie die Werte für `Issuer ID` und `Key ID` ein
-5. Klicken Sie auf **Wählen Sie eineHier ist die Übersetzung ins Deutsche:
-
-p8-Datei** oder ziehen Sie die Datei, um den zuvor heruntergeladenen App Store Connect API-Schlüssel hochzuladen
+5. Klicken Sie auf **Wählen Sie eine p8-Datei** oder ziehen Sie die Datei, um den zuvor heruntergeladenen App Store Connect API-Schlüssel hochzuladen
 6. Klicken Sie auf **Speichern**
 
 _Jetzt können wir Codemagic mit dem App Store Connect API-Schlüssel verwalten, großartig!_

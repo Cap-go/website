@@ -20,8 +20,6 @@ published: true
 locale: it
 next_blog: how-to-send-specific-version-to-users
 ---
-Ecco la traduzione in italiano:
-
 Questo tutorial si concentra sull'hosting GitHub, ma puoi adattarlo con piccole modifiche a qualsiasi altra piattaforma CI/CD.
 
 ## Prefazione

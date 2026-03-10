@@ -97,9 +97,7 @@ Android Studio è indispensabile per sviluppare con Capacitor su Android. Config
 ### Passaggi per l'installazione
 
 1. Vai al sito ufficiale Android Developer su [developerandroidcom/studio](https://developerandroidcom/studio)
-2.Ecco la traduzione in italiano:
-
-  Scarica l'ultima versione stabile di Android Studio (202311 o successiva)
+2. Scarica l'ultima versione stabile di Android Studio (2023.1.1 o successiva)
     
 3. Segui il processo di installazione:
     

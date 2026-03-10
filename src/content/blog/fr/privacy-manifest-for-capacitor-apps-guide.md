@@ -21,8 +21,6 @@ published: true
 locale: fr
 next_blog: ''
 ---
-Voici la traduction en français :
-
 **Vous voulez lancer votre application [Capacitor](https://capacitorjs.com/) sur l'[App Store](https://en.wikipedia.org/wiki/App_Store_\(Apple\)) sans délais ?** Commencez par créer un Manifeste de Confidentialité. Apple exige désormais que les développeurs incluent ce document pour garantir que les applications respectent des normes strictes de confidentialité. Voici ce que vous devez savoir :
 
 -   **Qu'est-ce qu'un Manifeste de Confidentialité ?**  

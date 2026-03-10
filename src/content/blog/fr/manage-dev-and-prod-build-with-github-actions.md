@@ -20,8 +20,6 @@ published: true
 locale: fr
 next_blog: how-to-send-specific-version-to-users
 ---
-Voici la traduction en français :
-
 Ce tutoriel se concentre sur l'hébergement GitHub, mais vous pouvez l'adapter avec quelques modifications à n'importe quelle autre plateforme CI/CD.
 
 ## Préface

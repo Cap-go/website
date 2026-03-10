@@ -23,8 +23,6 @@ published: true
 locale: fr
 next_blog: ''
 ---
-Voici la traduction en français :
-
 ## Démystifier Apache Cordova : Un Guide Complet pour le Développement d'Applications Hybrides
 
 Dans le monde actuel axé sur le mobile, il est primordial d'atteindre un large public avec votre application. Mais développer des applications natives séparées pour iOS, Android et d'autres plateformes peut être chronophage et gourmand en ressources. C'est là qu'intervient Apache Cordova, un puissant framework open-source qui permet aux développeurs de créer des applications mobiles multiplateformes en utilisant des technologies web familières comme HTML, CSS et JavaScript.

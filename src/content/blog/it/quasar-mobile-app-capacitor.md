@@ -19,8 +19,6 @@ published: true
 locale: it
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
-Ecco la traduzione in italiano:
-
 In questo tutorial, inizieremo creando una nuova web app usando [Quasar](https://quasar.dev/). Successivamente, impareremo come trasformarla in un'app mobile usando Capacitor. Se vuoi far apparire la tua app migliore su dispositivi mobili.
 
 Con Capacitor, puoi trasformare la tua web app Quasar in un'app mobile senza dover fare molte cose complicate o imparare un modo completamente nuovo di fare app come dovresti fare con qualcosa chiamato React Native.

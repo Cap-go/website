@@ -21,8 +21,6 @@ published: true
 locale: fr
 next_blog: ''
 ---
-Voici la traduction en français :
-
 **Vous souhaitez déployer des mises à jour d'applications instantanément sans attendre l'approbation des app stores ?** Les mises à jour Over-the-Air (OTA) de [Capacitor](https://capacitorjs.com/) vous permettent de le faire, en activant les mises à jour en temps réel du contenu web de votre application. Mais pour garantir des déploiements fluides, vous avez besoin de bonnes pratiques de gestion des versions.
 
 Voici ce que vous apprendrez dans ce guide :

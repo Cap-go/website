@@ -129,8 +129,6 @@ Su iOS e Android, questo processo usa una web view sicura che condivide i cookie
 
 Una volta che gli utenti hanno effettuato l'accesso, gestire i token in modo sicuro è la tua prossima priorità. Questo include archiviare i token in modo sicuro e aggiornarli automaticamente per evitare interruzioni della sessione. Ecco come puoi gestirlo:
 
-Ecco la traduzione in italiano:
-
 -   **Token di Accesso**: Memorizzali in memoria per un accesso rapido e temporaneo.
 -   **Token di Aggiornamento**: Utilizza l'archiviazione sicura, come il plugin `capacitor-secure-storage`, che cripta i token con AES-256 tramite iOS Keychain o [Android Keystore](https://developer.android.com/privacy-and-security/keystore). Questo garantisce che i token rimangano protetti, anche se il dispositivo viene compromesso.
 

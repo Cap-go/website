@@ -348,7 +348,7 @@ Und Variablen werden in GitHub Secrets gesetzt, anstatt sie fest in der Datei zu
 
 Bei GitHub Actions **werden Sie basierend auf den Minuten abgerechnet**, die Sie für die Ausführung Ihres CI/CD-Workflows verwendet haben. Aus Erfahrung dauert es etwa 10-15 Minuten, bis ein Build in App Store Connect verarbeitet werden kann.
 
-Für private Projekte können die geschätzten Kosten pro Build bis zu **$0,08/Min x 15 Min = $1,2** oder mehr betragen, abhängig von der Konfiguration oder den Abhängigkeiten Ihres Projekts.Hier ist die Übersetzung ins Deutsche:
+Für private Projekte können die geschätzten Kosten pro Build bis zu **$0,08/Min x 15 Min = $1,2** oder mehr betragen, abhängig von der Konfiguration oder den Abhängigkeiten Ihres Projekts.
 
 Wenn Sie die gleichen Bedenken bezüglich der Preisgestaltung für private Projekte haben wie ich, können Sie `skip_waiting_for_build_processing` auf `true` belassen.
 

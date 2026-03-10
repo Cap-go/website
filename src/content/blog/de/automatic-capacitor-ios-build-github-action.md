@@ -17,8 +17,6 @@ locale: de
 next_blog: automatic-capacitor-android-build-github-action
 ---
 
-Hier ist die Übersetzung des Textes ins Deutsche:
-
 ## Kontinuierliche Auslieferung für iOS mit Fastlane und GitHub Actions und Zertifikat
 
 ## Voraussetzungen

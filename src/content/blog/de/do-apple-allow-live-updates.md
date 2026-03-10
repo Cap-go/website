@@ -19,8 +19,6 @@ locale: de
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 
-Hier ist die Übersetzung ins Deutsche:
-
 Die Aktualisierung von Capacitor JS-Apps ohne den App Store-Überprüfungsprozess zu durchlaufen, ist unter bestimmten Bedingungen möglich, die in Apples offiziellen Richtlinien beschrieben sind. Es ist jedoch wichtig zu beachten, dass dies keine Rechtsberatung darstellt. Damit Code-Aktualisierungen direkt in eine App gepusht werden können und mit Apples Richtlinien konform bleiben, müssen folgende Bedingungen erfüllt sein:
 
 - Der Code muss vom eingebauten WebKit-Framework von Apple ausgeführt werden
