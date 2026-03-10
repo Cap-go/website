@@ -3238,5 +3238,8 @@
   "your_live_update_solution_for_capacitor_apps": "Votre solution de mises à jour en direct pour les applications Capacitor",
   "youre_in_good_company": "Vous êtes en bonne compagnie.",
   "zero_trust_security": "Sécurité Zéro-Confiance",
-  "zero_vendor_lockin_pay_provider_directly": "aucune dépendance à un fournisseur, payez votre fournisseur directement."
+  "zero_vendor_lockin_pay_provider_directly": "aucune dépendance à un fournisseur, payez votre fournisseur directement.",
+  "integrations_badge": "Integrations",
+  "integrations_title": "Capgo Integrations",
+  "integrations_subtitle": "Current Capgo integrations and partner services."
 }

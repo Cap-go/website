@@ -3238,5 +3238,8 @@
   "your_live_update_solution_for_capacitor_apps": "キャパシタアプリのためのライブアップデートソリューション",
   "youre_in_good_company": "あなたは良い仲間と一緒にいます。",
   "zero_trust_security": "ゼロトラストセキュリティ",
-  "zero_vendor_lockin_pay_provider_directly": "ベンダーロックインゼロ、プロバイダーに直接支払いを行います。"
+  "zero_vendor_lockin_pay_provider_directly": "ベンダーロックインゼロ、プロバイダーに直接支払いを行います。",
+  "integrations_badge": "Integrations",
+  "integrations_title": "Capgo Integrations",
+  "integrations_subtitle": "Current Capgo integrations and partner services."
 }

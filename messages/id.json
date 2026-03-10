@@ -3238,5 +3238,8 @@
   "your_live_update_solution_for_capacitor_apps": "Solusi Pembaruan Langsung Anda untuk Aplikasi Kapasitor",
   "youre_in_good_company": "Anda tidak sendirian.",
   "zero_trust_security": "Keamanan Zero-Trust",
-  "zero_vendor_lockin_pay_provider_directly": "tanpa ketergantungan vendor, bayar langsung ke penyedia Anda."
+  "zero_vendor_lockin_pay_provider_directly": "tanpa ketergantungan vendor, bayar langsung ke penyedia Anda.",
+  "integrations_badge": "Integrations",
+  "integrations_title": "Capgo Integrations",
+  "integrations_subtitle": "Current Capgo integrations and partner services."
 }

@@ -3238,5 +3238,8 @@
   "your_live_update_solution_for_capacitor_apps": "您的电容器应用实时更新解决方案",
   "youre_in_good_company": "你处在好的环境中。",
   "zero_trust_security": "零信任安全性",
-  "zero_vendor_lockin_pay_provider_directly": "零供应商锁定，直接向您的提供商支付。"
+  "zero_vendor_lockin_pay_provider_directly": "零供应商锁定，直接向您的提供商支付。",
+  "integrations_badge": "Integrations",
+  "integrations_title": "Capgo Integrations",
+  "integrations_subtitle": "Current Capgo integrations and partner services."
 }

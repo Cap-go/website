@@ -3238,5 +3238,8 @@
   "your_live_update_solution_for_capacitor_apps": "Tu solución de actualización en vivo para aplicaciones de condensador",
   "youre_in_good_company": "Estás en buena compañía.",
   "zero_trust_security": "Seguridad de Cero Confianza",
-  "zero_vendor_lockin_pay_provider_directly": "cero bloqueo de proveedor, paga directamente a tu proveedor."
+  "zero_vendor_lockin_pay_provider_directly": "cero bloqueo de proveedor, paga directamente a tu proveedor.",
+  "integrations_badge": "Integrations",
+  "integrations_title": "Capgo Integrations",
+  "integrations_subtitle": "Current Capgo integrations and partner services."
 }
