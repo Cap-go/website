@@ -1,35 +1,32 @@
 ---
 title: Organizations
-description: >-
-  Guide to managing organizations in Capgo, covering creation, settings,
-  updates, and retrieval of organization details.
+description: Capgo で組織を管理するためのガイド。組織の詳細の作成、設定、更新、取得について説明します。
 sidebar:
   order: 2
 locale: ja
 ---
+組織は、Capgo の最上位のエンティティです。これにより、アプリ、チームメンバー、リソースを 1 つの傘の下にグループ化できます。各組織には、異なる役割と権限を持つ複数のメンバーが存在できます。
 
-組織は Capgo のトップレベルのエンティティです。アプリ、チーム メンバー、およびリソースを単一の傘の下にグループ化できます。各組織は、異なるロールと権限を持つ複数のメンバーを持つことができます。
+## 一般的な使用例
 
-## Common Use Cases
+- 会社の新しい組織を作成する
+- 組織設定の管理
+- 組織情報の更新
+- 組織の詳細の取得
 
-- Creating a new organization for your company
-- Managing organization settings
-- Updating organization information
-- Retrieving organization details
+## エンドポイント
 
-## Endpoints
-
-### GET
+### 入手
 
 `https://api.capgo.app/organization/`
 
-Retrieve organization information. If `orgId` is provided in the parameters, returns a single organization. Otherwise, returns all accessible organizations.
+組織情報を取得します。パラメータに `orgId` が指定されている場合は、単一の組織を返します。それ以外の場合は、アクセス可能なすべての組織を返します。
 
-#### Query Parameters
+#### クエリパラメータ
 
-- `orgId` (optional): The ID of the specific organization to retrieve
+- `orgId` (オプション): 取得する特定の組織の ID
 
-#### Response Type
+#### 応答タイプ
 
 ```typescript
 interface Organization {
@@ -44,7 +41,7 @@ interface Organization {
 }
 ```
 
-#### Example Request
+#### リクエストの例
 
 ```bash
 # Get all organizations
@@ -54,7 +51,7 @@ curl -H "authorization: your-api-key" https://api.capgo.app/organization/
 curl -H "authorization: your-api-key" https://api.capgo.app/organization/?orgId=org_123
 ```
 
-#### Example Response
+#### 応答例
 
 ```json
 {
@@ -70,13 +67,13 @@ curl -H "authorization: your-api-key" https://api.capgo.app/organization/?orgId=
 }
 ```
 
-### POST
+### 投稿
 
 `https://api.capgo.app/organization/`
 
-Create a new organization.
+新しい組織を作成します。
 
-#### Request Body
+#### リクエスト本文
 
 ```typescript
 interface OrganizationCreate {
@@ -84,7 +81,7 @@ interface OrganizationCreate {
 }
 ```
 
-#### Example Request
+#### リクエストの例
 
 ```bash
 curl -X POST \
@@ -96,7 +93,7 @@ curl -X POST \
   https://api.capgo.app/organization/
 ```
 
-#### Example Response
+#### 応答例
 
 ```json
 {
@@ -105,13 +102,13 @@ curl -X POST \
 }
 ```
 
-### PUT
+### 置く
 
 `https://api.capgo.app/organization/`
 
-Update an existing organization. Requires admin role.
+既存の組織を更新します。管理者の役割が必要です。
 
-#### Request Body
+#### リクエスト本文
 
 ```typescript
 interface OrganizationUpdate {
@@ -122,7 +119,7 @@ interface OrganizationUpdate {
 }
 ```
 
-#### Example Request
+#### リクエストの例
 
 ```bash
 curl -X PUT \
@@ -136,7 +133,7 @@ curl -X PUT \
   https://api.capgo.app/organization/
 ```
 
-#### Example Response
+#### 応答例
 
 ```json
 {
@@ -149,17 +146,17 @@ curl -X PUT \
 }
 ```
 
-### DELETE
+### 削除
 
 `https://api.capgo.app/organization/`
 
-Delete an existing organization. Requires admin role. This action is irreversible and will remove all associated apps, versions, and resources.
+既存の組織を削除します。管理者の役割が必要です。この操作は元に戻すことができず、関連するすべてのアプリ、バンドル (バージョン)、およびリソースが削除されます。
 
-#### Query Parameters
+#### クエリパラメータ
 
-- `orgId`: The ID of the organization to delete
+- `orgId`: 削除する組織のID
 
-#### Example Request
+#### リクエストの例
 
 ```bash
 curl -X DELETE \
@@ -167,7 +164,7 @@ curl -X DELETE \
   https://api.capgo.app/organization/?orgId=org_123
 ```
 
-#### Example Response
+#### 応答例
 
 ```json
 {
@@ -176,9 +173,9 @@ curl -X DELETE \
 }
 ```
 
-## Error Handling
+## エラー処理
 
-Common error scenarios and their responses:
+一般的なエラーのシナリオとその対応:
 
 ```json
 // Invalid API key
@@ -200,9 +197,9 @@ Common error scenarios and their responses:
 }
 ```
 
-## Best Practices
+## ベストプラクティス
 
-1. **Naming**: Use clear, descriptive names for organizations
-2. **Roles**: Assign appropriate roles to team members
-3. **Email**: Use a group email for management_email to avoid issues with personal email changes
-4. **Logo**: Host logos on a reliable CDN and use HTTPS URLs 
+1. **命名**: 組織には明確でわかりやすい名前を使用します。
+2. **役割**: チームメンバーに適切な役割を割り当てます。
+3. **電子メール**: 個人の電子メール変更による問題を避けるために、management_email にはグループ電子メールを使用します。
+4. **ロゴ**: 信頼できる CDN でロゴをホストし、HTTPS URL を使用します。

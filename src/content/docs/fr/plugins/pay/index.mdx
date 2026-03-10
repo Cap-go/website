@@ -1,45 +1,48 @@
 ---
-locale: fr
-title: "@capgo/capacitor-pay"
-description: Present Apple Pay and Google Pay sheets from Capacitor with a unified workflow.
+title: '@capgo/capacitor-pay'
+description: >-
+  Présentez les feuilles de paie Apple et Google de Capacitor avec un flux de
+  travail unifié.
 tableOfContents: false
 next: false
 prev: false
-sidebar: 
+sidebar:
   order: 1
-  label: "Introduction"
-hero: 
-  tagline: Offer Natif Apple Pay and Google Pay checkouts with a single TypeScript API that adapts per platform.
-  image: 
+  label: Introduction
+hero:
+  tagline: >-
+    Proposez des caisses natives Apple Pay et Google Pay avec un seul TypeScript
+    API qui s'adapte à chaque plateforme.
+  image:
     file: ~public/icons/plugins/pay.svg
-  actions: 
-    - text: Get started
+  actions:
+    - text: Commencer
       link: /docs/plugins/pay/getting-started/
       icon: right-arrow
       variant: primary
     - text: Github
-      link: https://github.com/Cap-go/capacitor-pay/
+      link: 'https://github.com/Cap-go/capacitor-pay/'
       icon: external
       variant: minimal
+locale: fr
 ---
-
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-Capgo Pay bridges the latest Apple Pay and Google Pay SDKs so you can deliver one seamless checkout experience across Appareils.
+Capgo Pay relie les dernières versions de Apple Pay et Google Pay SDKs afin que vous puissiez offrir une expérience de paiement transparente sur tous les appareils.
 
 <CardGrid stagger>
-  <Card title="Unified API" icon="pencil">
-    Call `isPayAvailable` and `requestPayment` once and let the plugin handle each platform.
+  <Card title="API unifié" icon="pencil">
+    Appelez `isPayAvailable` et `requestPayment` une fois et laissez le plugin gérer chaque plate-forme.
   </Card>
-  <Card title="Rapid setup" icon="rocket">
-    Ship fully Natif payment sheets without manually wiring platform-specific code.
+  <Card title="Installation rapide" icon="rocket">
+    Expédiez des feuilles de paiement entièrement natives sans câbler manuellement le code spécifique à la plateforme.
   </Card>
-  <Card title="Tokenized payments" icon="approve-check">
-    Receive payment tokens ready for your gateway or PSP integrations.
+  <Card title="Paiements tokenisés" icon="approve-check">
+    Recevez des jetons de paiement prêts pour votre passerelle ou vos intégrations PSP.
   </Card>
-  <Card title="Customizable flows" icon="star">
-    Configure line items, Contact fields, and billing requirements to fit your checkout.
+  <Card title="Flux personnalisables" icon="star">
+    Configurez les éléments de campagne, les champs de contact et les exigences de facturation en fonction de votre paiement.
   </Card>
 </CardGrid>
 
-Dive into the Commencer Guide for Configuration checklists and sample payloads for each platform.
+Plongez dans le guide de démarrage pour découvrir les listes de contrôle de configuration et des exemples de charges utiles pour chaque plate-forme.

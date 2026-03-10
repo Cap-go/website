@@ -1,26 +1,25 @@
 ---
-title: Supabase Google Login on iOS
+title: Supabase Google Masuk pada iOS
 description: >-
-  Learn how to set up Google Sign-In with Supabase Authentication on iOS using
-  the Capacitor Social Login plugin.
+  Pelajari cara menyiapkan Google Masuk dengan Supabase Otentikasi di iOS
+  menggunakan plugin Capacitor Login Sosial.
 sidebar:
   order: 3
 locale: id
 ---
+## Pendahuluan
 
-## Introduction
+Panduan ini akan membantu Anda mengintegrasikan Google Masuk dengan Supabase Otentikasi di iOS. Diasumsikan bahwa Anda telah menyelesaikan:
+ - [penyiapan Google Masuk iOS](/docs/plugins/social-login/google/ios/)
+ - [Supabase Google Login - Pengaturan Umum](/docs/plugins/social-login/supabase/google/general/).
 
-This guide will help you integrate Google Sign-In with Supabase Authentication on iOS. It is assumed that you have already completed:
- -  the [Google Login iOS setup](/docs/plugins/social-login/google/ios/)
- -  the [Supabase Google Login - General Setup](/docs/plugins/social-login/supabase/google/general/).
+## Implementasi
 
-## Implementation
+Implementasi lengkapnya tersedia di file [aplikasi contoh `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts). Panduan ini menjelaskan konsep-konsep utama dan cara menggunakannya.
 
-The complete implementation is available in the [example app's `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) file. This guide explains the key concepts and how to use it.
+### Menggunakan Pembantu Otentikasi
 
-### Using the Authentication Helper
-
-The `authenticateWithGoogleSupabase` function handles the entire authentication flow:
+Fungsi `authenticateWithGoogleSupabase` menangani seluruh alur autentikasi:
 
 ```typescript
 import { authenticateWithGoogleSupabase } from './supabaseAuthUtils';
@@ -34,27 +33,27 @@ if (result.success) {
 }
 ```
 
-## How It Works
+## Cara Kerjanya
 
 For a detailed explanation of how the authentication flow works, including nonce generation, JWT validation, and Supabase sign-in, see the [How It Works section in the General Setup guide](/docs/plugins/social-login/supabase/google/general/#how-it-works).
 
-## Important Caveats
+## Peringatan Penting
 
-### iOS Token Caching and Nonce Issues
+### iOS Masalah Caching Token dan Nonce
 
-:::warning[iOS Nonce Caching Issue]
-On iOS, Google Sign-In can cache tokens, which may cause the nonce validation to fail. The `validateJWTToken` function detects this and automatically handles it:
+:::warning[iOS Masalah Tanpa Caching]
+Pada iOS, Google Masuk dapat menyimpan token dalam cache, yang dapat menyebabkan validasi nonce gagal. Fungsi `validateJWTToken` mendeteksi hal ini dan secara otomatis menanganinya:
 
-1. **Automatic Detection**: The function checks if the nonce in the token matches the expected `nonceDigest`
-2. **Automatic Retry**: If validation fails, it automatically logs out from Google and retries once
-3. **Error Handling**: If the retry also fails, an error is returned
+1. **Deteksi Otomatis**: Fungsi ini memeriksa apakah nonce dalam token cocok dengan `nonceDigest` yang diharapkan
+2. **Coba Ulang Otomatis**: Jika validasi gagal, validasi akan otomatis keluar dari Google dan mencoba lagi satu kali
+3. **Penanganan Kesalahan**: Jika percobaan ulang juga gagal, kesalahan akan dikembalikan
 
-**Why this happens**: iOS Google Sign-In SDK caches tokens for performance. When a cached token is returned, it may have been generated with a different nonce (or no nonce), causing a mismatch.
+**Mengapa ini terjadi**: iOS Google Masuk SDK menyimpan token dalam cache untuk kinerja. Ketika token yang disimpan dalam cache dikembalikan, token tersebut mungkin dibuat dengan nonce yang berbeda (atau tanpa nonce), sehingga menyebabkan ketidakcocokan.
 
-**The solution**: The implementation automatically handles this by logging out and retrying, which forces Google to generate a fresh token with the correct nonce.
+**Solusinya**: Implementasinya secara otomatis menangani hal ini dengan keluar dan mencoba lagi, yang memaksa Google menghasilkan token baru dengan nonce yang benar.
 :::
 
-**Manual Workaround** (if automatic retry doesn't work):
+**Solusi Manual** (jika coba ulang otomatis tidak berhasil):
 
 ```typescript
 // Logout first to clear cached tokens
@@ -64,34 +63,32 @@ await SocialLogin.logout({ provider: 'google' });
 const result = await authenticateWithGoogleSupabase();
 ```
 
-This ensures a fresh token is obtained with the correct nonce.
+Hal ini memastikan token baru diperoleh dengan nonce yang benar.
 
-For the complete code reference, see the [Complete Code Reference section in the General Setup guide](/docs/plugins/social-login/supabase/google/general/#complete-code-reference).
+Untuk referensi kode lengkap, lihat [bagian Referensi Kode Lengkap di panduan Pengaturan Umum](/docs/plugins/social-login/supabase/google/general/#complete-code-reference).
 
-## Important Notes
+## Catatan Penting
 
-### Nonce Handling
+### Penanganan Nonce
 
-The nonce implementation follows the pattern from the [React Native Google Sign In documentation](https://react-native-google-signin.github.io/docs/security#usage-with-supabase):
+Implementasi nonce mengikuti pola dari [dokumentasi Masuk React Native Google](https://react-native-google-signin.github.io/docs/security#usage-with-supabase):
 
-- `rawNonce` goes to Supabase's `signInWithIdToken()`
-- Supabase makes a hash of `rawNonce` and compares it with the `nonceDigest` which is included in the ID token from Google Sign-In
-- `nonceDigest` (SHA-256 hash, hex-encoded) goes to the `nonce` parameter in Google Sign-In APIs
+- `rawNonce` pergi ke `signInWithIdToken()` Supabase
+- Supabase membuat hash `rawNonce` dan membandingkannya dengan `nonceDigest` yang disertakan dalam token ID dari Google Masuk
+- `nonceDigest` (hash SHA-256, dikodekan hex) masuk ke parameter `nonce` di Google Sign-In API
 
-### Automatic Retry Mechanism
+### Mekanisme Coba Ulang Otomatis
 
-The `authenticateWithGoogleSupabase` function includes a `retry` parameter:
-- First call (`retry=false`): If validation fails, automatically logs out and retries once
-- Retry call (`retry=true`): If validation fails again, immediately returns an error
+Fungsi `authenticateWithGoogleSupabase` menyertakan parameter `retry`:
+- Panggilan pertama (`retry=false`): Jika validasi gagal, otomatis logout dan coba lagi satu kali
+- Coba lagi panggilan (`retry=true`): Jika validasi gagal lagi, kesalahan akan segera muncul
 
-This handles the iOS token caching issue automatically.
+Ini menangani masalah cache token iOS secara otomatis.
 
-## Troubleshooting
+## Pemecahan masalah
 
-If authentication fails:
-
-- **Nonce mismatch**: The function automatically retries - check console logs for details. If it persists, manually logout first
+Jika otentikasi gagal:- **Nonce mismatch**: Fungsi ini mencoba ulang secara otomatis - periksa log konsol untuk detailnya. Jika masih berlanjut, logout terlebih dahulu secara manual
 - **Invalid audience**: Verify your Google Client IDs match in both Google Cloud Console and Supabase (both iOS and Web client IDs)
-- **Token validation fails**: Ensure you're using `mode: 'online'` in the initialize call to get an idToken
-- **Info.plist configuration**: Ensure Info.plist has the correct URL schemes and GIDClientID
-- Review the [example app code](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) for reference
+- **Validasi token gagal**: Pastikan Anda menggunakan `mode: 'online'` dalam panggilan inisialisasi untuk mendapatkan idToken
+- **Konfigurasi Info.plist**: Pastikan Info.plist memiliki skema URL dan GIDClientID yang benar
+- Tinjau [contoh kode aplikasi](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) untuk referensi

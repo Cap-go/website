@@ -1,26 +1,27 @@
 ---
-locale: fr
 title: Commencer
-description: Learn how to Installer and use the Compass plugin to read Appareil compass heading in your Capacitor Application.
-sidebar: 
+description: >-
+  Découvrez comment installer et utiliser le plugin Compass pour lire le cap de
+  la boussole de l'appareil dans votre application Capacitor.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Installer the package**
+1. **Installez le package**
    <PackageManagers pkg="@capgo/capacitor-compass" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser with Natif projects**
+2. **Synchronisation avec les projets natifs**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
 ## iOS Configuration
 
-On iOS, compass access requires location permission. Add the following to your `Info.plist`:
+Sur iOS, l'accès à la boussole nécessite une autorisation de localisation. Ajoutez ce qui suit à votre `Info.plist` :
 
 ```xml
 <key>NSLocationWhenInUseUsageDescription</key>
@@ -29,11 +30,11 @@ On iOS, compass access requires location permission. Add the following to your `
 
 ## Android Configuration
 
-No additional Configuration required. The plugin uses the Appareil's magnetometer and accelerometer sensors.
+Aucune configuration supplémentaire requise. Le plugin utilise les capteurs magnétomètre et accéléromètre de l'appareil.
 
 ## Utilisation
 
-Importer the plugin and use its methods to read compass heading:
+Importez le plugin et utilisez ses méthodes pour lire le cap de la boussole :
 
 ```typescript
 import { CapgoCompass } from '@capgo/capacitor-compass';
@@ -76,9 +77,9 @@ const requestPermission = async () => {
 
 ## API Référence
 
-### getCurrentHeading()
+###getCurrentHeading()
 
-Get the current compass heading in degrees.
+Obtenez le cap actuel de la boussole en degrés.
 
 ```typescript
 const result = await CapgoCompass.getCurrentHeading();
@@ -87,7 +88,7 @@ const result = await CapgoCompass.getCurrentHeading();
 
 ### startListening()
 
-Démarrer listening for compass heading changes. Must be called before heading events are emitted.
+Commencez à écouter les changements de cap de la boussole. Doit être appelé avant que les événements de cap ne soient émis.
 
 ```typescript
 await CapgoCompass.startListening();
@@ -95,15 +96,15 @@ await CapgoCompass.startListening();
 
 ### stopListening()
 
-Arrêter listening for compass heading changes.
+Arrêtez d’écouter les changements de cap de la boussole.
 
 ```typescript
 await CapgoCompass.stopListening();
 ```
 
-### addListener('headingChange', callback)
+### addListener('headingChange', rappel)
 
-Ajouter a listener for heading change events.
+Ajoutez un écouteur pour les événements de changement de titre.
 
 ```typescript
 const handle = await CapgoCompass.addListener('headingChange', (event) => {
@@ -114,9 +115,9 @@ const handle = await CapgoCompass.addListener('headingChange', (event) => {
 await handle.remove();
 ```
 
-### removeAllListeners()
+### supprimerAllListeners()
 
-Retirer all registered listeners.
+Supprimez tous les auditeurs enregistrés.
 
 ```typescript
 await CapgoCompass.removeAllListeners();
@@ -124,30 +125,30 @@ await CapgoCompass.removeAllListeners();
 
 ### checkPermissions()
 
-Vérifier current permission status.
+Vérifiez l’état actuel des autorisations.
 
 ```typescript
 const status = await CapgoCompass.checkPermissions();
 // Returns: { compass: 'prompt' | 'granted' | 'denied' }
 ```
 
-### requestPermissions()
+### requêtePermissions()
 
-Request permission to access compass data.
+Demandez l'autorisation d'accéder aux données de la boussole.
 
 ```typescript
 const status = await CapgoCompass.requestPermissions();
 ```
 
-### getPluginVersion()
+###getPluginVersion()
 
-Get the Natif plugin Version.
+Obtenez la version native du plugin.
 
 ```typescript
 const { version } = await CapgoCompass.getPluginVersion();
 ```
 
-## Terminé Exemple
+## Exemple complet
 
 ```typescript
 import { CapgoCompass } from '@capgo/capacitor-compass';
@@ -200,20 +201,20 @@ export class CompassService {
 }
 ```
 
-## Platform Notes
+## Remarques sur la plate-forme
 
 ### iOS
-- Requires iOS 10.0+
-- Uses Core Location for heading data
-- Requires location permission (NSLocationWhenInUseUsageDescription)
-- Heading Mises à jour are continuous when listening is Actif
+- Nécessite iOS 10.0+
+- Utilise Core Location pour les données de cap
+- Nécessite une autorisation de localisation (NSLocationWhenInUseUsageDescription)
+- Les mises à jour des titres sont continues lorsque l'écoute est active
 
 ### Android
-- Requires Android 6.0 (API 23)+
-- Uses accelerometer and magnetometer sensors
-- No special permissions required for compass sensors
-- Heading is calculated from sensor fusion
+- Nécessite Android 6.0 (API 23)+
+- Utilise des capteurs accéléromètres et magnétomètres
+- Aucune autorisation spéciale requise pour les capteurs de boussole
+- Le cap est calculé à partir de la fusion des capteurs
 
-### Web
-- Not supported on web platform
-- Methods will throw errors when called
+###Web
+- Non pris en charge sur la plateforme Web
+- Les méthodes généreront des erreurs lorsqu'elles seront appelées

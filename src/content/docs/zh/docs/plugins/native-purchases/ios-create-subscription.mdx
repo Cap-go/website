@@ -1,164 +1,159 @@
 ---
-title: "创建 iOS 自动续订订阅"
-description: >-
-  Step-by-step guide to creating auto-renewable subscriptions in App Store
-  Connect for the native-purchases plugin.
+title: 创建 iOS 自动续订订阅
+description: 在 App Store Connect 中为本机购买插件创建自动续订订阅的分步指南。
 sidebar:
   order: 8
 locale: zh
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 
-Auto-renewable subscriptions provide recurring access to content, services, or premium features in your iOS app. This guide walks you through creating subscriptions in App Store Connect.
+自动续订订阅可让您定期访问 iOS 应用中的内容、服务或高级功能。本指南将引导您完成在 App Store Connect 中创建订阅的过程。
 
-## Overview
+## 概述
 
-Auto-renewable subscriptions automatically renew at the end of each billing period until users cancel. They're perfect for:
-- Premium content and features
-- Ad-free experiences
-- Cloud storage and sync
-- Streaming services
-- Professional tools and utilities
+自动续订订阅会在每个计费周期结束时自动续订，直到用户取消为止。它们非常适合：
+- 优质内容和功能
+- 无广告体验
+- 云存储和同步
+- 流媒体服务
+- 专业工具和实用程序
 
-## Prerequisites
+## 先决条件
 
-Before creating subscriptions, you must:
-1. [Create a subscription group](/docs/plugins/native-purchases/ios-subscription-group/) to organize your subscriptions
-2. Have an active Apple Developer Program membership
-3. Complete banking and tax information in App Store Connect
+在创建订阅之前，您必须：
+1. [创建订阅群组](/docs/plugins/native-purchases/ios-subscription-group/) 整理您的订阅
+2. 拥有活跃的 Apple 开发者计划会员资格
+3. 在 App Store Connect 中填写完整的银行和税务信息
 
-## Creating a Subscription
+## 创建订阅
 
 <Steps>
 
-1. **Navigate to Subscriptions**
+1. **导航至订阅**
 
-   In App Store Connect, select your app and go to **Monetize > Subscriptions**.
+   在 App Store Connect 中，选择您的应用并转到 **获利 > 订阅**。
 
-   Select your subscription group or create a new one if needed.
+   选择您的订阅组或根据需要创建一个新订阅组。
 
-   ![Navigate to subscriptions](/native-purchases/ios/create-subscription/navigate-to-subscriptions.webp)
+   ![导航至订阅](/native-purchases/ios/create-subscription/navigate-to-subscriptions.webp)
 
-2. **Create New Subscription**
+2. **创建新订阅**
 
-   Click the **+** icon next to your subscription group to add a new subscription.
+   单击订阅组旁边的 **++** 图标以添加新订阅。
 
-3. **Enter Basic Information**
+3. **输入基本信息**
 
-   **Reference Name**: Descriptive name for your internal use (not shown to customers)
-   - Examples: "Premium Monthly", "Ultimate Annual", "Basic Plan"
+   **参考名称**：供您内部使用的描述性名称（不向客户显示）
+   - 示例：“每月保费”、“终极年度”、“基本计划”
 
-   **Product ID**: Unique identifier for this subscription (cannot be changed later)
-   - Format: `com.yourcompany.yourapp.premium_monthly`
-   - Use descriptive, lowercase names with underscores
-   - Required for configuring the native-purchases plugin
+   **产品 ID**：此订阅的唯一标识符（以后无法更改）
+   - 格式：`com.yourcompany.yourapp.premium_monthly`
+   - 使用带有下划线的描述性小写名称
+   - 配置本机购买插件所需
 
-   ![Enter subscription details](/native-purchases/ios/create-subscription/enter-subscription-info.webp)
+   ![输入订阅详细信息](/native-purchases/ios/create-subscription/enter-subscription-info.webp)
 
-4. **Configure Duration**
+4. **配置持续时间**
 
-   Select the subscription duration from available options:
-   - 1 week
-   - 1 month
-   - 2 months
-   - 3 months
-   - 6 months
-   - 1 year
+   从可用选项中选择订阅持续时间：
+   - 1 周
+   - 1个月
+   - 2个月
+   - 3个月
+   - 6个月
+   - 1年
 
-   The duration determines how often users are billed.
+   持续时间决定了用户计费的频率。
 
-5. **Set Up Pricing**
+5. **设置定价**
 
-   Click **Add Subscription Price** to configure pricing:
+   单击 **添加订阅价格** 以配置定价：
 
-   **Base Territory**: Select your primary market (usually your country)
+   **基本领土**：选择您的主要市场（通常是您所在的国家/地区）
 
-   **Price**: Set the subscription price
-   - Apple automatically converts to other currencies
-   - Choose from Apple's price tiers
-   - Consider perceived value and market rates
+   **价格**：设置订阅价格
+   - Apple 自动转换为其他货币
+   - 从 Apple 的价格等级中选择
+   - 考虑感知价值和市场价格
 
-   ![Configure pricing](/native-purchases/ios/create-subscription/configure-pricing.webp)
+   ![配置定价](/native-purchases/ios/create-subscription/configure-pricing.webp)
 
-6. **Family Sharing (Optional)**
+6. **家庭共享（可选）**
 
-   Decide whether to enable Family Sharing, which allows up to 6 family members to access the subscription.
+   决定是否启用家庭共享，最多允许 6 名家庭成员访问订阅。
 
-   :::caution
-   Once Family Sharing is enabled, it cannot be turned off for this product.
+   :::注意
+   一旦启用家庭共享，此产品就无法将其关闭。
    :::
 
-   **Enable if:**
-   - Content is appropriate for family use
-   - You want to increase value proposition
-   - Your business model supports it
+   **启用如果：**
+   - 内容适合家庭使用
+   - 您想要增加价值主张
+   - 你的商业模式支持它
 
-   **Don't enable if:**
-   - Subscription is for individual use only
-   - Content is personalized to the user
-   - You want to maximize revenue per user
+   **如果出现以下情况，请勿启用：**
+   - 订阅仅供个人使用
+   - 内容针对用户进行个性化
+   - 您希望最大化每个用户的收入
 
-7. **Add Localizations**
+7. **添加本地化**
 
-   Add subscription display information in all languages your app supports:
+   添加您的应用程序支持的所有语言的订阅显示信息：
 
-   **Subscription Display Name**: Customer-facing name (e.g., "Premium Monthly")
+   **订阅显示名称**：面向客户的名称（例如“每月高级版”）
 
-   **Description**: Brief description of what the subscription includes
-   - Keep it concise and benefit-focused
-   - Mention key features
-   - Highlight value proposition
+   **描述**：订阅内容的简要描述
+   - 保持简洁并以利益为中心
+   - 提及关键特征
+   - 突出价值主张
 
-   ![Add localizations](/native-purchases/ios/create-subscription/add-localization.webp)
+   ![添加本地化](/native-purchases/ios/create-subscription/add-localization.webp)8. **App Store 宣传图片（可选）**
 
-8. **App Store Promotional Image (Optional)**
+   上传此订阅的宣传图片（312x390 像素）：
+   - 显示在 App Store 订阅页面
+   - 应符合您的应用程序的设计
+   - 为了清楚起见，请包含订阅名称
 
-   Upload a promotional image for this subscription (312x390 pixels):
-   - Shows in the App Store subscription page
-   - Should match your app's design
-   - Include subscription name for clarity
-
-   :::note
-   While images are optional for initial submission, they're required for promotional display in the App Store. You can add them later.
+   :::注意
+   虽然初次提交时图像是可选的，但在 App Store 中进行促销展示时需要它们。您可以稍后添加它们。
    :::
 
-9. **Save and Submit**
+9. **保存并提交**
 
-   Click **Save** to create the subscription.
+   单击 **保存** 创建订阅。
 
-   **For First Subscription:**
-   - Must be submitted with a new app version
-   - Include in your next App Store submission
-   - Cannot submit independently
+   **首次订阅：**
+   - 必须与新的应用程序版本一起提交
+   - 包含在您的下一次 App Store 提交中
+   - 无法独立提交
 
-   **For Subsequent Subscriptions:**
-   - Can be submitted directly from the Subscriptions page
-   - Don't require a new app version
-   - Available after first subscription is approved
+   **对于后续订阅：**
+   - 可以直接从订阅页面提交
+   - 不需要新的应用程序版本
+   - 首次订阅获得批准后可用
 
 </Steps>
 
-## Subscription Status
+## 订阅状态
 
-Your subscription will have one of these statuses:
+您的订阅将具有以下状态之一：
 
-| Status | Description | Can Test? |
-|--------|-------------|-----------|
-| **Missing Metadata** | Incomplete setup | Yes (sandbox) |
-| **Ready to Submit** | Complete but not submitted | Yes (sandbox) |
-| **Waiting for Review** | Submitted to Apple | Yes (sandbox) |
-| **In Review** | Being reviewed by Apple | Yes (sandbox) |
-| **Approved** | Available for purchase | Yes |
-| **Rejected** | Needs changes | Yes (sandbox) |
+|状态 |描述 |可以测试吗？ |
+|--------|-------------|------------|
+| **缺少元数据** |设置不完整|是（沙盒）|
+| **准备提交** |已完成但未提交 |是（沙盒）|
+| **等待审核** |已提交至 Apple |是（沙盒）|
+| **审查中** |正在由 Apple 审核 |是（沙盒）|
+| **已批准** |可供购买 |是的 |
+| **被拒绝** |需要改变|是（沙盒）|
 
 :::tip
-You can test subscriptions in sandbox mode even if they show "Missing Metadata" or "Ready to Submit"!
+即使订阅显示“缺少元数据”或“准备提交”，您也可以在沙盒模式下测试订阅！
 :::
 
-## Using in Your App
+## 在您的应用程序中使用
 
-Once created, reference the subscription in your app using the product ID:
+创建后，使用产品 ID 在应用程序中引用订阅：
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -212,41 +207,41 @@ if (premium?.isActive) {
 }
 ```
 
-## Best Practices
+## 最佳实践
 
-### Pricing Strategy
-- **Monthly plans**: Lower barrier to entry, builds habit
-- **Annual plans**: Better value, higher LTV, lower churn
-- **Multiple tiers**: Basic, Premium, Ultimate for different user segments
-- **Competitive analysis**: Research similar apps' pricing
+### 定价策略
+- **每月计划**：降低进入门槛，养成习惯
+- **年度计划**：更好的价值、更高的生命周期价值、更低的流失率
+- **多层次**：针对不同用户群的基础版、高级版、终极版
+- **竞争分析**：研究类似应用程序的定价
 
-### Product IDs
-- Use consistent naming: `company.app.tier_duration`
-- Include tier and duration in ID: `premium_monthly`, `ultimate_annual`
-- Avoid changing product IDs (they're permanent)
-- Document all product IDs for your team
+### 产品 ID
+- 使用一致的命名：`company.app.tier_duration`
+- 在 ID 中包含等级和持续时间：`premium_monthly`、`ultimate_annual`
+- 避免更改产品 ID（它们是永久性的）
+- 记录您团队的所有产品 ID
 
-### Family Sharing
-- Enable for family-oriented apps (games, educational, entertainment)
-- Consider impact on revenue
-- Test sharing behavior thoroughly
-- Communicate sharing capability in marketing
+### 家庭共享
+- 支持面向家庭的应用程序（游戏、教育、娱乐）
+- 考虑对收入的影响
+- 彻底测试共享行为
+- 沟通营销共享能力
 
-### Localization
-- Translate all subscription names and descriptions
-- Consider regional pricing differences
-- Test display in all supported languages
-- Use culturally appropriate marketing language
+### 本地化
+- 翻译所有订阅名称和描述
+- 考虑区域定价差异
+- 测试所有支持语言的显示
+- 使用适合文化的营销语言
 
-### Promotional Images
-- Maintain consistent visual style
-- Include subscription name and key benefit
-- Update for seasonal promotions
-- Match app's overall design language
+### 宣传图片
+- 保持一致的视觉风格
+- 包括订阅名称和主要好处
+- 季节性促销更新
+- 匹配应用程序的整体设计语言
 
-## Common Subscription Patterns
+## 常见订阅模式
 
-### Single Tier (Freemium)
+### 单层（免费增值）
 ```
 Free App + Premium Subscription
 - Basic: Free (limited features)
@@ -254,7 +249,7 @@ Free App + Premium Subscription
 - Premium Annual: $39.99 (save 33%)
 ```
 
-### Multi-Tier (Good, Better, Best)
+### 多层（好、更好、最好）
 ```
 - Basic Monthly: $4.99
 - Premium Monthly: $9.99
@@ -265,50 +260,48 @@ Free App + Premium Subscription
 - Ultimate Annual: $199.99
 ```
 
-### Consumable + Subscription Hybrid
+### 消耗品 + 订阅混合
 ```
 - Credit packs (consumable)
 - Monthly subscription (unlimited credits)
 - Annual subscription (unlimited + bonus features)
 ```
 
-## Troubleshooting
+## 故障排除
 
-**Subscription not loading in app:**
-- Verify product ID matches exactly (case-sensitive)
-- Check subscription is in subscription group
-- Ensure bundle identifier matches App Store Connect
-- Wait 2-3 hours after creating product
+**订阅未在应用程序中加载：**
+- 验证产品 ID 完全匹配（区分大小写）
+- 检查订阅是否在订阅组中
+- 确保包标识符匹配 App Store Connect
+- 创建产品后等待 2-3 小时**无法提交订阅：**
+- 填写所有必填字段（名称、描述、价格）
+- 添加至少一种本地化
+- 验证银行/税务信息是否获得批准
+- 检查是否首次订阅（需要应用程序版本）
 
-**Cannot submit subscription:**
-- Complete all required fields (name, description, price)
-- Add at least one localization
-- Verify banking/tax info is approved
-- Check if first subscription (requires app version)
+**家庭共享切换已禁用：**
+- 已启用（无法禁用）
+- 检查订阅详细信息
+- 如果卡住，请联系 Apple 支持
 
-**Family Sharing toggle disabled:**
-- Already enabled (cannot be disabled)
-- Check in subscription details
-- Contact Apple Support if stuck
+**价格等级不可用：**
+- 在某些地区可能受到限制
+- 选择替代等级
+- 有关定价问题，请联系 Apple
 
-**Price tier not available:**
-- May be restricted in some territories
-- Choose alternative tier
-- Contact Apple for pricing questions
+**“产品 ID 无效”错误：**
+- 必须是反向域格式
+- 不能包含空格或特殊字符
+- 检查拼写错误
+- 验证所有产品的唯一性
 
-**"Invalid Product ID" error:**
-- Must be reverse domain format
-- Cannot contain spaces or special characters
-- Check for typos
-- Verify uniqueness across all products
+## 后续步骤
 
-## Next Steps
+- [创建介绍性优惠](/docs/plugins/native-purchases/ios-introductory-offer/) 以吸引新订阅者
+- [配置沙盒测试](/docs/plugins/native-purchases/ios-sandbox-testing/) 来测试您的订阅
+- 设置促销优惠以赢回和保留
+- 实施订阅分析跟踪
 
-- [Create an introductory offer](/docs/plugins/native-purchases/ios-introductory-offer/) to attract new subscribers
-- [Configure sandbox testing](/docs/plugins/native-purchases/ios-sandbox-testing/) to test your subscriptions
-- Set up promotional offers for win-back and retention
-- Implement subscription analytics tracking
+## 其他资源
 
-## Additional Resources
-
-For more details, refer to the [official Apple documentation on auto-renewable subscriptions](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers).
+有关更多详细信息，请参阅[有关自动续订订阅的官方 Apple 文档](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers)。

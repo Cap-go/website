@@ -1,10 +1,9 @@
 ---
-title: Google Login on Web
+title: Google Web でログイン
 description: >-
-  This guide provides a comprehensive walkthrough for setting up Google Login on
-  web applications using Capacitor and the @capgo/capacitor-social-login plugin,
-  ensuring a seamless integration process by covering all necessary steps and
-  configurations.
+  このガイドでは、Capacitor と @capgo/capacitor-social-login プラグインを使用して Web アプリケーションで
+  Google
+  ログインをセットアップするための包括的なチュートリアルを提供し、必要なすべての手順と構成をカバーすることでシームレスな統合プロセスを保証します。
 sidebar:
   order: 4
 locale: ja
@@ -13,80 +12,80 @@ import { Steps } from '@astrojs/starlight/components';
 
 ## はじめに
 
-このガイドでは、Web アプリケーション用の Capgo Social Login で Google ログインを設定する方法を学びます。
-すでに[一般的なセットアップガイド](/docs/plugins/social-login/google/general/)を読んでいると仮定しています。
+このガイドでは、Web アプリケーションの Google ログイン、Capgo ソーシャル ログインを設定する方法を学習します。
+[一般セットアップ ガイド](/docs/plugins/social-login/google/general/) はすでにお読みになっていると思います。
 
-## Using Google login on the web
+## ウェブ上で Google ログインを使用する
 
-Using the google login on the web is rather simple.
-In order to use it, you have to do the following:
+ウェブ上で Google ログインを使用するのは非常に簡単です。
+これを使用するには、次のことを行う必要があります。
 
 <Steps>
-1. Create a web client in the Google Console
+1. Google コンソールで Web クライアントを作成します
    
-   :::note
-   If you have already configured Google Login for Android, you can skip this step as you've already created a web client. You can proceed directly to step 2.
+   :::メモ
+   Android の Google ログインをすでに構成している場合は、Web クライアントをすでに作成しているため、この手順をスキップできます。ステップ 2 に直接進むことができます。
    :::
    
-   1. Click on the search bar
-      <img src="/social-login-assets/google_cons_search.png" alt="Google Console search bar" />
+   1. 検索バーをクリックします
+      <img src="/social-login-assets/google_cons_search.png" alt="Google コンソールの検索バー" />
    
-   2. Search for `credentials` and click on the `APIs and Services` option (number 2 on the screenshot)
-      <img src="/social-login-assets/google_cons_cred_search.png" alt="Search results showing credentials option with APIs and Services highlighted" />
+   2. `credentials` を検索し、「API とサービス」オプションをクリックします (スクリーンショットの 2 番)。
+      <img src="/social-login-assets/google_cons_cred_search.png" alt="API とサービスが強調表示された認証情報オプションを示す検索結果" />
    
-   3. Click on the `create credentials`
-      <img src="/social-login-assets/google_cons_create_cred.png" alt="Create credentials button in Google Console" />
+   3. 「資格情報の作成」をクリックします。
+      <img src="/social-login-assets/google_cons_create_cred.png" alt="Google コンソールの認証情報の作成ボタン" />
    
-   4. Select `OAuth client ID`
-      <img src="/social-login-assets/google_cons_cred_oauth.png" alt="OAuth client ID option in credentials creation menu" />
+   4. `OAuth client ID` を選択します
+      <img src="/social-login-assets/google_cons_cred_oauth.png" alt="認証情報作成メニューの OAuth クライアント ID オプション" />
    
-   5. Select the `Application type` as `Web application`
-      <img src="/social-login-assets/google_cons_app_type_web.png" alt="Application type selection with Web option highlighted" />
+   5. 「アプリケーションの種類」として「Web アプリケーション」を選択します。
+      <img src="/social-login-assets/google_cons_app_type_web.png" alt="Web オプションが強調表示されたアプリケーション タイプの選択" />
    
-   6. Name your client and click `Create`
-      <img src="/social-login-assets/google_cons_web_app_create.png" alt="Web client creation form with name field highlighted" />
+   6. クライアントに名前を付けて、`Create` をクリックします。
+      <img src="/social-login-assets/google_cons_web_app_create.png" alt="名前フィールドが強調表示された Web クライアント作成フォーム" />
    
-   7. Copy the client ID, you'll use this as the `webClientId` in your application
-      <img src="/social-login-assets/google_cons_copy_web_client_id.png" alt="Client ID details showing Web client ID to copy" />
+   7. クライアント ID をコピーします。これをアプリケーションで `webClientId` として使用します。
+      <img src="/social-login-assets/google_cons_copy_web_client_id.png" alt="コピーする Web クライアント ID を示すクライアント ID の詳細" />
 
-2. Configure the web client in the Google Console
+2. Google コンソールで Web クライアントを設定する
 
-   1. Please open the [credentials page](https://console.cloud.google.com/apis/credentials) and click on your web client
-      <img src="/social-login-assets/google_cons_open_web_client_id.png" alt="Credentials list showing web client to click" />
+   1. [認証情報ページ](https://console.cloud.google.com/apis/credentials) を開いて、Web クライアントをクリックしてください。
+      <img src="/social-login-assets/google_cons_open_web_client_id.png" alt="クリックする Web クライアントを示す認証情報リスト" />
 
-   2. Now, please add the `Authorized JavaScript origins`. This should include all the addresses that you might use for your app. In might case, I will **ONLY** use localhost, but since I use a custom port I have to add both `http://localhost` and `http://localhost:5173`
+   2. 次に、`Authorized JavaScript origins` を追加してください。これには、アプリに使用する可能性のあるすべてのアドレスが含まれている必要があります。場合によっては、localhost のみを使用しますが、カスタム ポートを使用するため、`http://localhost` と `http://localhost:5173` の両方を追加する必要があります。
     
-      1. Please click on `add URI`
-         <img src="/social-login-assets/google_cons_authorized_js_add_btn.png" alt="Authorized JavaScript origins section with ADD URI button" />
+      1.「URIの追加」をクリックしてください。
+         <img src="/social-login-assets/google_cons_authorized_js_add_btn.png" alt="[ADD URI] ボタンのある承認された JavaScript オリジン セクション" />
     
-      2. Please type your URL
-         <img src="/social-login-assets/google_cons_authorized_js_typed_url.png" alt="ADD URI dialog with localhost URL entered" />
+      2. URL を入力してください
+         <img src="/social-login-assets/google_cons_authorized_js_typed_url.png" alt="localhost URLが入力された「ADD URI」ダイアログ" />
     
-      3. Please repeat until you added all the URLs
+      3. すべての URL を追加するまで繰り返してください
     
-      4. When you finish, your screen should look something like this
-         <img src="/social-login-assets/google_cons_authorized_js_final.png" alt="Authorized JavaScript origins with multiple localhost URLs added" />
+      4. 完了すると、画面は次のようになります。
+         <img src="/social-login-assets/google_cons_authorized_js_final.png" alt="複数のローカルホスト URL が追加された承認された JavaScript オリジン" />
 
-   3. Now, please add some `Authorized redirect URIs`. This will depend on what page do you depend to use the CapacitorSocialLogin plugin on. In my case, I am going to be using it on `http://localhost:5173/auth` 
+   3. ここで、いくつかの「承認されたリダイレクト URI」を追加してください。これは、CapacitorSocialLogin プラグインを使用するためにどのページに依存するかによって異なります。私の場合、`http://localhost:5173/auth` で使用する予定です 
     
-      1. Please click on `ADD URI`
-         <img src="/social-login-assets/google_cons_web_add_redirect_url_1.png" alt="Authorized redirect URIs section with ADD URI button" />
+      1.「URIの追加」をクリックしてください。
+         <img src="/social-login-assets/google_cons_web_add_redirect_url_1.png" alt="「URI の追加」ボタンのある「承認されたリダイレクト URI」セクション" />
     
-      2. Enter your URL and click `ADD URL` again
-         <img src="/social-login-assets/google_cons_web_add_redirect_url_2.png" alt="ADD URI dialog with redirect URL entered" />
+      2. URLを入力し、もう一度「URLを追加」をクリックします。
+         <img src="/social-login-assets/google_cons_web_add_redirect_url_2.png" alt="リダイレクト URL が入力された「URI の追加」ダイアログ" />
 
-   4. Click `save`
-      <img src="/social-login-assets/google_cons_web_app_save.png" alt="Save button at bottom of web client configuration" />
+   4. [`save`] をクリックします。
+      <img src="/social-login-assets/google_cons_web_app_save.png" alt="Web クライアント設定の下部にある [保存] ボタン" />
 
-3. Now, you should be ready to call `login` from JavaScript like so:
+3. これで、次のように JavaScript から `login` を呼び出す準備が整いました。
 
-   1. First, import `SocialLogin`
+   1. まず、`SocialLogin` をインポートします
   
       ```typescript
       import { SocialLogin } from '@capgo/capacitor-social-login';
       ```
 
-   2. Then, call initialize. This should be called ONLY once.
+   2. 次に、initialize を呼び出します。これは 1 回だけ呼び出す必要があります。
   
       ```typescript
       // onMounted is Vue specific
@@ -100,8 +99,8 @@ In order to use it, you have to do the following:
       })
       ```
 
-   :::note[Web Redirect Handling]
-   When using Google login on web, you **MUST** call any function from the plugin when the redirect happens to initialize the plugin so it can handle the redirect and close the popup window. You can call either `isLoggedIn()` OR `initialize()` - both will trigger the redirect handling:
+   :::note[Webリダイレクト処理]
+   Web で Google ログインを使用する場合、リダイレクトが発生してプラグインが初期化されたときにプラグインから関数を呼び出す必要があります**。これにより、プラグインがリダイレクトを処理してポップアップ ウィンドウを閉じることができます。 `isLoggedIn()` または `initialize()` のいずれかを呼び出すことができます。両方ともリダイレクト処理をトリガーします。
 
    ```typescript
    // Option 1: Call isLoggedIn when the redirect page loads
@@ -120,7 +119,7 @@ In order to use it, you have to do the following:
    ```
    :::
 
-   3. Create a login button that calls `SocialLogin.login` when clicked
+   3. クリックすると `SocialLogin.login` を呼び出すログイン ボタンを作成します。
   
       ```typescript
       const res = await SocialLogin.login({
@@ -131,4 +130,3 @@ In order to use it, you have to do the following:
       console.log(JSON.stringify(res));
       ```
 </Steps>
-

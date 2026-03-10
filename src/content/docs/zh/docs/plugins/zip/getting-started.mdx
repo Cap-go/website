@@ -1,28 +1,25 @@
 ---
-title: "快速入门"
-description: >-
-  Learn how to install and use the Zip plugin to compress and extract files in
-  your Capacitor app.
+title: 入门
+description: 了解如何安装和使用 Zip 插件来压缩和提取 Capacitor 应用程序中的文件。
 sidebar:
   order: 2
 locale: zh
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **安装软件包**
    <PackageManagers pkg="@capgo/capacitor-zip" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **与原生项目同步**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Usage
+## 用法
 
-Import the plugin and zip or unzip files:
+导入插件并压缩或解压缩文件：
 
 ```typescript
 import { CapacitorZip } from '@capgo/capacitor-zip';
@@ -46,11 +43,11 @@ const unzipArchive = async () => {
 };
 ```
 
-## API Reference
+## API 参考
 
-### zip(options)
+### zip（选项）
 
-Creates a ZIP archive from a source folder.
+从源文件夹创建 ZIP 存档。
 
 ```typescript
 interface ZipOptions {
@@ -64,9 +61,9 @@ await CapacitorZip.zip({
 });
 ```
 
-### unzip(options)
+### 解压（选项）
 
-Extracts files from a ZIP archive.
+从 ZIP 存档中提取文件。
 
 ```typescript
 interface UnzipOptions {
@@ -80,7 +77,7 @@ await CapacitorZip.unzip({
 });
 ```
 
-## Complete Example
+## 完整示例
 
 ```typescript
 import { CapacitorZip } from '@capgo/capacitor-zip';
@@ -207,9 +204,9 @@ export class ZipService {
 }
 ```
 
-## Advanced Usage
+## 高级用法
 
-### Creating Archives with Progress Tracking
+### 通过进度跟踪创建档案
 
 ```typescript
 const zipWithProgress = async (source: string, destination: string) => {
@@ -225,7 +222,7 @@ const zipWithProgress = async (source: string, destination: string) => {
 };
 ```
 
-### Batch Archive Operations
+### 批量存档操作
 
 ```typescript
 const batchZip = async (folders: string[]) => {
@@ -250,7 +247,7 @@ const batchZip = async (folders: string[]) => {
 };
 ```
 
-### Secure Archive Creation
+### 安全档案创建
 
 ```typescript
 const createSecureBackup = async (dataPath: string) => {
@@ -268,7 +265,7 @@ const createSecureBackup = async (dataPath: string) => {
 };
 ```
 
-### Archive Validation
+### 存档验证
 
 ```typescript
 const validateArchive = async (zipPath: string): Promise<boolean> => {
@@ -296,19 +293,19 @@ const validateArchive = async (zipPath: string): Promise<boolean> => {
 };
 ```
 
-## Best Practices
+## 最佳实践
 
-1. **Path Validation**: Always validate source and destination paths before operations
-2. **Error Handling**: Wrap all zip/unzip operations in try-catch blocks
-3. **Cleanup**: Remove temporary files and folders after operations
-4. **Large Files**: Be cautious with large archives on mobile devices
-5. **Permissions**: Ensure your app has necessary file system permissions
+1. **路径验证**：在操作之前始终验证源路径和目标路径
+2. **错误处理**：将所有zip/unzip操作包装在try-catch块中
+3. **清理**：删除操作后的临时文件和文件夹
+4. **大文件**：谨慎对待移动设备上的大档案
+5. **权限**：确保您的应用程序具有必要的文件系统权限
 
-## Troubleshooting
+## 故障排除
 
-### Common Issues
+### 常见问题
 
-**Zip operation fails**: Ensure source path exists and is accessible
-**Unzip fails**: Check that ZIP file is valid and destination path is writable
-**Out of storage**: Monitor available disk space before operations
-**Permission denied**: Verify file system permissions in your app configuration
+**Zip 操作失败**：确保源路径存在且可访问
+**解压缩失败**：检查 ZIP 文件是否有效且目标路径是否可写
+**存储不足**：在操作之前监视可用磁盘空间
+**权限被拒绝**：验证应用程序配置中的文件系统权限

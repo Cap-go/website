@@ -1,12 +1,11 @@
 ---
-title: "更新 API 端点"
-description: "如何构建更新服务器 API 端点以使用正确的 bundle 信息和校验和响应 Capgo 插件请求"
+title: 更新 API 端点
+description: 如何构建更新服务器 API 端点以使用正确的捆绑信息和校验和响应 Capgo 插件请求
 sidebar:
   order: 6
 locale: zh
 ---
-
-这是向插件发送更新的 JavaScript 代码示例
+以下是 JavaScript 中用于向插件发送更新的代码示例
 
 ```typescript
 interface AppInfos {
@@ -66,7 +65,7 @@ export const handler: Handler = async (event) => {
 
 ## 响应格式
 
-对于**非加密 bundle**,您的端点应返回:
+对于**非加密捆绑包**，您的端点应返回：
 
 ```json
 {
@@ -76,7 +75,7 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-对于**加密 bundle**,您还需要包含会话密钥:
+对于**加密包**，您还需要包含会话密钥：
 
 ```json
 {
@@ -87,7 +86,7 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-如果没有更新或出现错误,请添加 `message` 键和可选的 `error`:
+如果没有更新或错误，请添加 `message` 键和可选的 `error`：
 
 ```json
 {
@@ -99,13 +98,13 @@ export const handler: Handler = async (event) => {
 
 ## 字段说明
 
-- **`checksum`**: 您的 bundle zip 文件的 SHA256 哈希,用于完整性验证
-- **`session_key`**: 仅加密 bundle 需要 - 这是 encrypt 命令返回的 `ivSessionKey`
-- **`version`**: semver 格式的版本标识符
-- **`url`**: 可以下载 bundle 的 HTTPS URL
+- **`checksum`**：捆绑包 zip 文件的 SHA256 哈希值，用于完整性验证
+- **`session_key`**：仅加密包需要 - 这是加密命令返回的 `ivSessionKey`
+- **`version`**：semver 格式的版本标识符
+- **`url`**：可以下载捆绑包的 HTTPS URL
 
-## Bundle 创建
+## 捆绑包创建
 
-要了解如何创建兼容的 bundle 并生成校验和,请参阅[自动更新文档](/docs/plugin/self-hosted/auto-update/#generating-bundle-checksum)。
+要了解如何创建兼容包并生成校验和，请参阅[自动更新文档](/docs/plugin/self-hosted/auto-update/#generating-bundle-checksum)。
 
-对于加密 bundle,请参阅[加密 Bundle 文档](/docs/plugin/self-hosted/encrypted-bundles/),其中说明了完整的加密工作流程。
+对于加密捆绑包，请参阅[加密捆绑包文档](/docs/plugin/self-hosted/encrypted-bundles/)，其中解释了完整的加密工作流程。

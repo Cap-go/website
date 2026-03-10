@@ -1,26 +1,25 @@
 ---
-title: Getting Started
-description: Learn how to install and use the InAppBrowser plugin with URL change events for embedded web content in your Capacitor app.
+title: Empezando
+description: ''
 sidebar:
   order: 2
 locale: es
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Instalar el paquete**
    <PackageManagers pkg="@capgo/inappbrowser" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Sincronización con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Usage
+## Uso
 
-Import the plugin and use its two main entry points:
+Importe el complemento y utilice sus dos puntos de entrada principales:
 
 ```typescript
 import { InAppBrowser, ToolBarType, BackgroundColor } from '@capgo/inappbrowser';
@@ -78,10 +77,10 @@ const closeBrowser = () => InAppBrowser.close();
 const reloadPage = () => InAppBrowser.reload();
 ```
 
-## API Reference
+## API Referencia
 
-### open(options: OpenOptions)
-Opens a URL in a custom tab / SFSafariViewController.
+### abierto(opciones: OpenOptions)
+Abre una URL en una pestaña personalizada/SFSafariViewController.
 
 ```typescript
 interface OpenOptions {
@@ -96,8 +95,8 @@ interface OpenOptions {
 await InAppBrowser.open({ url: 'https://example.com', preventDeeplink: true });
 ```
 
-### openWebView(options: OpenWebViewOptions)
-Loads a full-featured WebView with navigation UI, headers, credentials, scripting and messaging.
+### openWebView (opciones: OpenWebViewOptions)
+Carga un WebView con todas las funciones con interfaz de usuario de navegación, encabezados, credenciales, secuencias de comandos y mensajes.
 
 ```typescript
 interface OpenWebViewOptions {
@@ -158,46 +157,46 @@ await InAppBrowser.openWebView({
 });
 ```
 
-`ToolBarType` values: `activity` (close + share), `compact` (close only), `navigation` (back/forward + close), `blank` (no toolbar). `BackgroundColor` values: `white` or `black`.
+Valores de `ToolBarType`: `activity` (cerrar + compartir), `compact` (solo cerrar), `navigation` (atrás/adelante + cerrar), `blank` (sin barra de herramientas). Valores `BackgroundColor`: `white` o `black`.
 
-### close(options?)
-Closes the WebView/custom tab.
+### cerrar(¿opciones?)
+Cierra la pestaña WebView/personalizado.
 
-**Options:**
-- `isAnimated?: boolean` - Whether to animate the close action
+**Opciones:**
+- `isAnimated?: boolean` - Si se anima la acción de cierre
 
-### reload()
-Reloads the current WebView page.
+### recargar()
+Vuelve a cargar la página WebView actual.
 
-### goBack()
-Goes back in WebView history and returns `{ canGoBack: boolean }`.
+### volver()
+Vuelve al historial de WebView y devuelve `{ canGoBack: boolean }`.
 
 ### `setUrl({ url: string })`
-Replaces the current WebView URL.
+Reemplaza la URL de WebView actual.
 
 ### `executeScript({ code: string })`
-Injects JavaScript into the WebView.
+Inyecta JavaScript en WebView.
 
 ### `postMessage({ detail: Record<string, any> })`
-Sends data from the native app to the WebView (receive in JS via `window.addEventListener('messageFromNative', ...)`).
+Envía datos desde la aplicación nativa a WebView (recibirlos en JS a través de `window.addEventListener('messageFromNative', ...)`).
 
 ### `getCookies({ url, includeHttpOnly? })`
-Returns cookies for the URL.
+Devuelve cookies para la URL.
 
 ### `clearCookies({ url })` / clearAllCookies() / clearCache()
-Cookie and cache management helpers.
+Ayudantes de gestión de cookies y caché.
 
-### updateDimensions(options: DimensionOptions)
-Change WebView size/position at runtime (`width`, `height`, `x`, `y`).
+### actualizarDimensiones(opciones: DimensionOptions)
+Cambie el tamaño/posición de WebView en tiempo de ejecución (`width`, `height`, `x`, `y`).
 
-### removeAllListeners()
-Unregister all listeners for the plugin.
+### eliminarTodos los oyentes()
+Anule el registro de todos los oyentes del complemento.
 
-## Events
+## Eventos
 
-### urlChangeEvent
+### Evento de cambio de URL
 
-Fired when the URL changes in the browser.
+Se activa cuando la URL cambia en el navegador.
 
 ```typescript
 interface UrlChangeEvent {
@@ -210,7 +209,7 @@ InAppBrowser.addListener('urlChangeEvent', (event) => {
 ```
 
 ### messageFromWebview
-Triggered when `window.mobileApp.postMessage(...)` is called inside the WebView.
+Se activa cuando se llama a `window.mobileApp.postMessage(...)` dentro de WebView.
 
 ```typescript
 InAppBrowser.addListener('messageFromWebview', (event) => {
@@ -218,9 +217,9 @@ InAppBrowser.addListener('messageFromWebview', (event) => {
 });
 ```
 
-### closeEvent
+### cerrarEvento
 
-Fired when the browser is closed.
+Se activa cuando se cierra el navegador.
 
 ```typescript
 InAppBrowser.addListener('closeEvent', () => {
@@ -228,8 +227,8 @@ InAppBrowser.addListener('closeEvent', () => {
 });
 ```
 
-### buttonNearDoneClick
-Fired when the custom button added with `buttonNearDone` is pressed.
+### botónCerca de hechoClic
+Se activa cuando se presiona el botón personalizado agregado con `buttonNearDone`.
 
 ```typescript
 InAppBrowser.addListener('buttonNearDoneClick', (event) => {
@@ -237,8 +236,8 @@ InAppBrowser.addListener('buttonNearDoneClick', (event) => {
 });
 ```
 
-### confirmBtnClicked
-Triggered when a confirm dialog (disclaimer or close modal) is accepted.
+### confirmarBtnClicked
+Se activa cuando se acepta un cuadro de diálogo de confirmación (exención de responsabilidad o modo de cierre).
 
 ```typescript
 InAppBrowser.addListener('confirmBtnClicked', (event) => {
@@ -246,17 +245,17 @@ InAppBrowser.addListener('confirmBtnClicked', (event) => {
 });
 ```
 
-### browserPageLoaded / pageLoadError
-Lifecycle events for WebView load success or failure.
+### navegadorPageLoaded / pageLoadError
+Eventos del ciclo de vida para el éxito o el fracaso de la carga de WebView.
 
 ```typescript
 InAppBrowser.addListener('browserPageLoaded', () => console.log('Page loaded'));
 InAppBrowser.addListener('pageLoadError', () => console.log('Page failed to load'));
 ```
 
-## Advanced Usage
+## Uso avanzado
 
-### OAuth Flow Implementation
+### OAuth Implementación de flujo
 
 ```typescript
 import { InAppBrowser } from '@capgo/inappbrowser';
@@ -300,7 +299,7 @@ export class OAuthService {
 }
 ```
 
-### Custom Browser UI
+### Interfaz de usuario personalizada del navegador
 
 ```typescript
 const openCustomBrowser = async () => {
@@ -312,7 +311,7 @@ const openCustomBrowser = async () => {
 };
 ```
 
-### Handling External Links
+### Manejo de enlaces externos
 
 ```typescript
 import { InAppBrowser } from '@capgo/inappbrowser';
@@ -341,16 +340,16 @@ export class LinkHandler {
 }
 ```
 
-## Best Practices
+## Mejores prácticas
 
-1. **Always remove listeners**
+1. **Eliminar siempre a los oyentes**
    ```typescript
    const listener = await InAppBrowser.addListener('urlChangeEvent', handler);
    // When done
    listener.remove();
    ```
 
-2. **Handle browser states**
+2. **Manejar estados del navegador**
    ```typescript
    let browserOpen = false;
 
@@ -364,7 +363,7 @@ export class LinkHandler {
    });
    ```
 
-3. **Validate URLs before opening**
+3. **Valide las URL antes de abrirlas**
    ```typescript
    const isValidUrl = (url: string): boolean => {
      try {
@@ -380,7 +379,7 @@ export class LinkHandler {
    }
    ```
 
-4. **Customize for platform**
+4. **Personalizar según la plataforma**
    ```typescript
    import { Capacitor } from '@capacitor/core';
 
@@ -390,21 +389,21 @@ export class LinkHandler {
    };
    ```
 
-## Platform Notes
+## Notas de plataforma
 
 ### iOS
-- Uses `SFSafariViewController`
-- Supports iOS 11.0+
-- Respects Safe Area insets
-- Supports custom presentation styles
+- Utiliza `SFSafariViewController`
+- Soporta iOS 11.0+
+- Respeta las inserciones del Área Segura
+- Admite estilos de presentación personalizados
 
 ### Android
-- Uses Chrome Custom Tabs
-- Falls back to WebView if Chrome not available
-- Supports Android 5.0 (API 21)+
-- Toolbar customization supported via `toolbarType`, `toolbarColor`, `buttonNearDone`, etc.
+- Utiliza pestañas personalizadas de Chrome
+- Vuelve a WebView si Chrome no está disponible
+- Soporta Android 5.0 (API 21)+
+- Personalización de la barra de herramientas compatible a través de `toolbarType`, `toolbarColor`, `buttonNearDone`, etc.
 
 ### Web
-- Opens in new browser tab/window
-- Limited customization options
-- No URL change events
+- Se abre en una nueva pestaña/ventana del navegador
+- Opciones de personalización limitadas
+- No hay eventos de cambio de URL

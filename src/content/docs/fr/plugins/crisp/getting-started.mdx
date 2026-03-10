@@ -1,31 +1,32 @@
 ---
-locale: fr
 title: Commencer
-description: Learn how to Installer and use the Crisp chat SDK plugin for in-Application customer Support in your Capacitor Application.
-sidebar: 
+description: >-
+  Découvrez comment installer et utiliser le plugin Crisp chat SDK pour le
+  support client intégré à l'application dans votre application Capacitor.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Installer the package**
+1. **Installez le package**
    <PackageManagers pkg="@capgo/capacitor-crisp" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser with Natif projects**
+2. **Synchronisation avec les projets natifs**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Get your Crisp Website ID**
-   - Sign up at [crisp.chat](https://crisp.chat)
-   - Créer a website/project
-   - Find your Website ID in Paramètres > Configuration Instructions
+3. **Obtenez votre identifiant de site Web Crisp**
+   - Inscrivez-vous sur [crisp.chat](https://crisp.chat)
+   - Créer un site/projet
+   - Trouvez l'identifiant de votre site Web dans Paramètres > Instructions de configuration
 </Steps>
 
-## Basic Utilisation
+## Utilisation de base
 
-Importer the plugin and configure it with your Website ID:
+Importez le plugin et configurez-le avec votre identifiant de site Web :
 
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
@@ -60,9 +61,9 @@ const logout = async () => {
 
 ## API Référence
 
-### configure(Options)
+### configurer (options)
 
-Configure Crisp with your website ID and optional Paramètres.
+Configurez Crisp avec l'identifiant de votre site Web et les paramètres facultatifs.
 
 ```typescript
 interface ConfigureOptions {
@@ -77,17 +78,17 @@ await CapacitorCrisp.configure({
 });
 ```
 
-### openMessenger()
+### ouvrirMessenger()
 
-Opens the Crisp chat interface.
+Ouvre l'interface de discussion Crisp.
 
 ```typescript
 await CapacitorCrisp.openMessenger();
 ```
 
-### setUser(Options)
+### setUser (options)
 
-Sets Utilisateur Information for the chat session.
+Définit les informations utilisateur pour la session de discussion.
 
 ```typescript
 interface UserOptions {
@@ -103,9 +104,9 @@ await CapacitorCrisp.setUser({
 });
 ```
 
-### setUserCompany(Options)
+### setUserCompany(options)
 
-Sets company Information for business Utilisateurs.
+Définit les informations sur l’entreprise pour les utilisateurs professionnels.
 
 ```typescript
 interface CompanyOptions {
@@ -132,9 +133,9 @@ await CapacitorCrisp.setUserCompany({
 });
 ```
 
-### pushEvent(Options)
+### pushEvent(options)
 
-Send custom events to track Utilisateur actions.
+Envoyez des événements personnalisés pour suivre les actions des utilisateurs.
 
 ```typescript
 interface EventOptions {
@@ -155,23 +156,23 @@ await CapacitorCrisp.pushEvent({
 
 ### setSessionSegment(segment)
 
-Set a segment to categorize the chat session.
+Définissez un segment pour catégoriser la session de discussion.
 
 ```typescript
 await CapacitorCrisp.setSessionSegment('premium_customer');
 ```
 
-### resetChatSession()
+### réinitialiserChatSession()
 
-Réinitialiser the current chat session (useful for Déconnexion).
+Réinitialisez la session de chat en cours (utile pour vous déconnecter).
 
 ```typescript
 await CapacitorCrisp.resetChatSession();
 ```
 
-## Advanced Fonctionnalités
+## Fonctionnalités avancées
 
-### Custom Utilisateur Data
+### Données utilisateur personnalisées
 
 ```typescript
 // Set multiple custom data fields
@@ -186,9 +187,9 @@ await CapacitorCrisp.setSessionData({
 });
 ```
 
-### Message Preset
+### Message prédéfini
 
-Set a pre-filled message in the chat input:
+Définissez un message pré-rempli dans la saisie du chat :
 
 ```typescript
 await CapacitorCrisp.setMessageText(
@@ -196,16 +197,16 @@ await CapacitorCrisp.setMessageText(
 );
 ```
 
-### Chat Availability
+### Disponibilité du chat
 
-Control when the chat widget is Disponible:
+Contrôlez quand le widget de chat est disponible :
 
 ```typescript
 // Hide chat temporarily
 await CapacitorCrisp.setTokenID('user_token_12345');
 ```
 
-## Terminé Exemple
+## Exemple complet
 
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
@@ -270,18 +271,18 @@ export class ChatService {
 }
 ```
 
-## Styling and Customization
+## Style et personnalisation
 
-Crisp automatically adapts to your Application's theme, but you can customize it further through the Crisp Tableau de bord:
+Crisp s'adapte automatiquement au thème de votre application, mais vous pouvez le personnaliser davantage via le tableau de bord Crisp :
 
-1. Go to your Crisp Tableau de bord
-2. Navigate to Paramètres > Website Paramètres > Chatbox & Email Paramètres
-3. Customize colors, position, and behavior
+1. Accédez à votre tableau de bord Crisp
+2. Accédez à Paramètres > Paramètres du site Web > Paramètres de chatbox et de messagerie.
+3. Personnalisez les couleurs, la position et le comportement
 
-## Best Practices
+## meilleures pratiques
 
-1. **Initialiser early**
-   Configure Crisp during Application Initialisation for immediate availability:
+1. **Initialiser tôt**
+   Configurez Crisp lors de l'initialisation de l'application pour une disponibilité immédiate :
    ```typescript
    import { App } from '@capacitor/app';
    
@@ -294,8 +295,8 @@ Crisp automatically adapts to your Application's theme, but you can customize it
    });
    ```
 
-2. **Set Utilisateur context**
-   Always provide Utilisateur Information when Disponible for better Support:
+2. **Définir le contexte utilisateur**
+   Fournissez toujours les informations utilisateur lorsqu’elles sont disponibles pour une meilleure assistance :
    ```typescript
    if (user.isAuthenticated) {
      await CapacitorCrisp.setUser({
@@ -305,8 +306,8 @@ Crisp automatically adapts to your Application's theme, but you can customize it
    }
    ```
 
-3. **Track Important events**
-   Use events to provide context to Support agents:
+3. **Suivez les événements importants**
+   Utilisez des événements pour fournir du contexte aux agents d'assistance :
    ```typescript
    await CapacitorCrisp.pushEvent({
      name: 'error_occurred',
@@ -318,8 +319,8 @@ Crisp automatically adapts to your Application's theme, but you can customize it
    });
    ```
 
-4. **Handle Déconnexion properly**
-   Always Réinitialiser the session when Utilisateurs Journal out:
+4. **Gérer correctement la déconnexion**
+   Réinitialisez toujours la session lorsque les utilisateurs se déconnectent :
    ```typescript
    async logout() {
      await CapacitorCrisp.resetChatSession();
@@ -327,18 +328,18 @@ Crisp automatically adapts to your Application's theme, but you can customize it
    }
    ```
 
-## Platform Notes
+## Remarques sur la plate-forme
 
 ### iOS
-- Requires iOS 10.0+
-- Uses Natif Crisp iOS SDK
-- Supports Pousser notifications (configure in Crisp Tableau de bord)
+- Nécessite iOS 10.0+
+- Utilise Crisp natif iOS SDK
+- Prend en charge les notifications push (configurer dans le tableau de bord Crisp)
 
 ### Android
-- Requires Android 5.0 (API 21)+
-- Uses Natif Crisp Android SDK
-- Material Design compliant
+- Nécessite Android 5.0 (API 21)+
+- Utilise Crisp natif Android SDK
+- Conforme à la conception matérielle
 
-### Web
-- Falls Retour to Crisp JavaScript SDK
-- Full Fonctionnalité parity with Natif platforms
+###Web
+- Revient à Crisp JavaScript SDK
+- Parité complète des fonctionnalités avec les plateformes natives

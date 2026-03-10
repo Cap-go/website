@@ -1,68 +1,95 @@
 ---
-title: "API Keys"
-description: "Comprehensive documentation for API Keys endpoint, detailing authentication, permissions, and management within Capgo API"
+title: API Claves
+description: >-
+  Documentación completa para el punto final de claves API, que detalla la
+  autenticación, los permisos y la administración dentro de Capgo API
 sidebar:
   order: 9
 locale: es
 ---
+Las claves API se utilizan para autenticar solicitudes en Capgo API. Cada clave puede tener diferentes permisos (modos) para controlar los niveles de acceso. Las claves son específicas de la organización y deben administrarse con cuidado, ya que otorgan acceso a sus recursos Capgo.
 
-API keys are used to authenticate requests to the Capgo API. Each key can have different permissions (modes) to control access levels. Keys are organization-specific and should be managed carefully as they grant access to your Capgo resources.
+## Modos clave
 
-## Key Modes
+- **leer**: solo puede leer datos, no se permiten modificaciones
+- **cargar**: puede leer, modificar y cargar nuevos paquetes
+- **escribir**: puede leer, modificar datos y cargar paquetes
+- **todos**: acceso completo a todas las operaciones
 
-- **read**: Can only read data, no modifications allowed
-- **upload**: Can read, modify, and upload new bundles
-- **write**: Can read, modify data, and upload bundles
-- **all**: Full access to all operations
+Los modos clave siguen un esquema escalonado/gradual. Si tiene una clave de carga y luego crea una clave de escritura, la clave de escritura podrá hacer todo lo que la clave de carga podría hacer.
+Eche un vistazo al siguiente diagrama para comprender mejor cómo funcionan las claves API.
 
-Key modes follow a stepped/gradual schema. If you have an upload key, and then you create a write key, the write key will be able to do everything that the upload key could.
-Please take a look at the following diagram to better understand how API keys work.
+<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="Un diagrama que explica cómo funciona la clave API" /><figcaption></figcaption></figure>
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="A diagram explaining how API key work" /><figcaption></figcaption></figure>
+## Subclaves con derechos limitados
 
-## Subkeys with Limited Rights
+Puede crear subclaves con acceso limitado a aplicaciones u organizaciones específicas. Esto es útil para restringir el acceso a ciertos recursos y al mismo tiempo permitir operaciones en otros. Utilice los parámetros `limited_to_apps` y `limited_to_orgs` al crear una clave para definir estas restricciones.
 
-You can create subkeys with limited access to specific apps or organizations. This is useful for restricting access to certain resources while still allowing operations on others. Use the `limited_to_apps` and `limited_to_orgs` parameters when creating a key to define these restrictions.
+## Claves cifradas
 
-## Security Best Practices
+Puede crear **claves API cifradas (con hash)** para mejorar la seguridad. Al crear una clave cifrada:
 
-1. **Principle of Least Privilege**: Always use the most restrictive mode that still allows your integration to function
-2. **Regular Rotation**: Rotate your API keys periodically
-3. **Secure Storage**: Store API keys securely and never commit them to version control
-4. **Monitoring**: Monitor API key usage and revoke any compromised keys immediately
-5. **Limited Subkeys**: Use subkeys with limited rights for specific integrations to minimize risk
+- La clave se codifica mediante SHA-256 antes de almacenarse en la base de datos.
+- **La clave simple se devuelve solo una vez** en la respuesta de creación; guárdela inmediatamente
+- La clave no se puede recuperar ni ver nuevamente después de su creación.
+- Si pierde una clave cifrada, debe crear una nueva
 
-## Endpoints
+Utilice el parámetro `hashed: true` al crear una clave para habilitar el cifrado. Este es el enfoque recomendado para entornos de producción.
 
-### GET
+## Caducidad de la clave
+
+Las API claves pueden tener una **fecha de vencimiento** para limitar la ventana de exposición si una clave se ve comprometida. Cuando se establece una fecha de vencimiento:
+
+- La clave deja de funcionar después de la fecha y hora especificadas.
+- Las solicitudes que utilicen claves caducadas se rechazarán con un error
+- Las claves caducadas se limpian automáticamente después de 30 días
+
+Las organizaciones pueden hacer cumplir políticas de vencimiento:
+- **Requerir vencimiento**: todas las claves API deben tener una fecha de vencimiento
+- **Periodo de vencimiento máximo**: limita en qué momento en el futuro se puede establecer una fecha de vencimiento
+
+## Mejores prácticas de seguridad
+
+1. **Principio de privilegio mínimo**: utilice siempre el modo más restrictivo que aún permita que su integración funcione
+2. **Utilice claves cifradas**: cree claves hash para producción para protegerse contra violaciones de bases de datos
+3. **Establecer fechas de vencimiento**: use fechas de vencimiento para limitar la vida útil de sus claves
+4. **Rotación regular**: gire sus llaves API periódicamente
+5. **Almacenamiento seguro**: almacene API claves de forma segura y nunca las envíe al control de versiones.
+6. **Monitoreo**: Supervise el uso de claves API y revoque cualquier clave comprometida inmediatamente
+7. **Subclaves limitadas**: utilice subclaves con derechos limitados para integraciones específicas para minimizar el riesgo.
+
+## Puntos finales
+
+### OBTENER
 
 `https://api.capgo.app/apikey/`
 
-Retrieve all API keys associated with your account.
+Recupere todas las API claves asociadas con su cuenta.
 
-#### Response Type
+#### Tipo de respuesta
 
 ```typescript
 interface ApiKey {
   created_at: string | null
   id: number
-  key: string
+  key: string | null  // null for encrypted keys
   mode: 'read' | 'write' | 'upload' | 'all'
   name: string
   updated_at: string | null
   user_id: string
   limited_to_apps?: string[]
   limited_to_orgs?: string[]
+  expires_at?: string | null  // ISO 8601 date, null means never expires
 }
-```
+```> **Note**: For encrypted keys, the `key` field will be `null` in GET responses since the plain key is only shown once during creation.
 
-#### Example Request
+#### Solicitud de ejemplo
 
 ```bash
 curl -H "authorization: your-api-key" https://api.capgo.app/apikey/
 ```
 
-#### Example Response
+#### Ejemplo de respuesta
 
 ```json
 {
@@ -90,13 +117,13 @@ curl -H "authorization: your-api-key" https://api.capgo.app/apikey/
 }
 ```
 
-### POST
+### PUBLICAR
 
 `https://api.capgo.app/apikey/`
 
-Create a new API key for a specific organization.
+Cree una nueva clave API para una organización específica.
 
-#### Query Parameters
+#### Cuerpo de solicitud
 
 ```typescript
 interface ApiKeyCreate {
@@ -104,10 +131,12 @@ interface ApiKeyCreate {
   mode: 'read' | 'write' | 'upload' | 'all'
   limited_to_apps?: string[]
   limited_to_orgs?: string[]
+  hashed?: boolean       // Create an encrypted key (recommended for production)
+  expires_at?: string    // ISO 8601 date for key expiration
 }
 ```
 
-#### Example Request
+#### Solicitud de ejemplo (clave estándar)
 
 ```bash
 curl -X POST \
@@ -121,7 +150,22 @@ curl -X POST \
   https://api.capgo.app/apikey/
 ```
 
-#### Example Response
+#### Solicitud de ejemplo (clave cifrada con caducidad)
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Secure CI Key",
+    "mode": "upload",
+    "hashed": true,
+    "expires_at": "2025-06-01T00:00:00Z"
+  }' \
+  https://api.capgo.app/apikey/
+```
+
+#### Ejemplo de respuesta (clave estándar)
 
 ```json
 {
@@ -137,22 +181,40 @@ curl -X POST \
 }
 ```
 
-### DELETE
+#### Ejemplo de respuesta (clave cifrada)
+
+```json
+{
+  "apikey": {
+    "id": 4,
+    "key": "ak_abc123...",
+    "mode": "upload",
+    "name": "Secure CI Key",
+    "created_at": "2024-02-12T00:00:00Z",
+    "user_id": "user_123",
+    "expires_at": "2025-06-01T00:00:00Z"
+  }
+}
+```
+
+> **Importante**: Para claves cifradas, el valor `key` en esta respuesta es la **única vez** que verá la clave simple. Guárdelo inmediatamente en un lugar seguro. Las solicitudes GET posteriores devolverán `null` para el campo `key`.
+
+### BORRAR
 
 `https://api.capgo.app/apikey/:id/`
 
-Delete an existing API key. Use this to revoke access immediately.
+Elimine una clave API existente. Utilice esto para revocar el acceso inmediatamente.
 
-#### Parameters
-- `id`: The ID of the API key to delete (numeric identifier, not the key string itself)
+#### Parámetros
+- `id`: el ID de la clave API que se va a eliminar (identificador numérico, no la cadena de clave en sí)
 
-#### Example Request
+#### Solicitud de ejemplo
 
 ```bash
 curl -X DELETE -H "authorization: your-api-key" https://api.capgo.app/apikey/1/
 ```
 
-#### Success Response
+#### Respuesta exitosa
 
 ```json
 {
@@ -160,17 +222,17 @@ curl -X DELETE -H "authorization: your-api-key" https://api.capgo.app/apikey/1/
 }
 ```
 
-## Common Use Cases
+## Casos de uso comunes
 
-1. **CI/CD Integration**: Create read-only keys for CI pipelines to check deployment status
-2. **Deployment Automation**: Use upload mode keys for automated deployment scripts
-3. **Monitoring Tools**: Use read mode keys for external monitoring integrations
-4. **Admin Access**: Use all mode keys sparingly for administrative tools
-5. **Limited Access**: Create subkeys with limited rights to specific apps or organizations for third-party integrations
+1. **Integración de CI/CD**: cree claves de solo lectura para canalizaciones de CI para verificar el estado de implementación
+2. **Automatización de implementación**: use claves de modo de carga para scripts de implementación automatizados
+3. **Herramientas de monitoreo**: use teclas de modo de lectura para integraciones de monitoreo externo
+4. **Acceso de administrador**: use todas las teclas de modo con moderación para herramientas administrativas
+5. **Acceso limitado**: cree subclaves con derechos limitados para aplicaciones u organizaciones específicas para integraciones de terceros.
 
-## Error Handling
+## Manejo de errores
 
-Common error scenarios and their responses:
+Escenarios de error comunes y sus respuestas:
 
 ```json
 // Invalid mode
@@ -188,6 +250,30 @@ Common error scenarios and their responses:
 // Permission denied
 {
   "error": "Insufficient permissions to manage API keys",
+  "status": "KO"
+}
+
+// Expired API key used for authentication
+{
+  "error": "API key has expired",
+  "status": "KO"
+}
+
+// Invalid expiration date (in the past)
+{
+  "error": "Expiration date must be in the future",
+  "status": "KO"
+}
+
+// Organization requires expiration
+{
+  "error": "Organization policy requires an expiration date for API keys",
+  "status": "KO"
+}
+
+// Expiration exceeds organization limit
+{
+  "error": "Expiration date exceeds organization maximum of 90 days",
   "status": "KO"
 }
 ```

@@ -1,52 +1,49 @@
 ---
-title: iOS App Store Review Guidelines for IAP
-description: >-
-  Complete guide to passing App Store review with in-app purchases and
-  subscriptions, including common rejection reasons and best practices.
+title: iOS App Store IAP のガイドラインを確認する
+description: 一般的な拒否理由とベスト プラクティスを含む、アプリ内購入とサブスクリプションで App Store レビューに合格するための完全なガイド。
 sidebar:
   order: 10
 locale: ja
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 
-App Store で承認されるには、Apple のガイドラインに注意深く注意が必要です。特にアプリ内購入とサブスクリプションを実装する場合です。このガイドでは、初回提出でレビューに合格するために必要なすべてについて説明します。
+App Store でアプリの承認を得るには、特にアプリ内購入とサブスクリプションを実装する場合、Apple のガイドラインに細心の注意を払う必要があります。このガイドでは、最初の投稿で審査に合格するために知っておく必要のあるすべてのことを説明します。
 
-![iOS App Store Review Process](/native-purchases/review-guides/ios-review-hero.webp)
+![iOS App Store レビュー プロセス](/native-purchases/review-guides/ios-review-hero.webp)
 
-## アプリ内購入要件
+## アプリ内購入の要件
 
-### 価格透明性 (重要)
+### 価格の透明性 (重要)
 
-Apple は購入前に価格を明確かつ前向きに開示することを要求します:
+Apple では、購入前に明確な価格開示が必要です。
 
 **必須要素:**
-- 購入ボタンの前に正確な価格を表示
-- 請求頻度を表示 (例: "$9.99/月")
-- ユーザーが何のお金を得ているのかを明確に述べる
-- 請求がいつ発生するかを示す
+- 購入前に正確な価格を表示ボタン
+- 請求頻度を表示します (例: "$9.99/月")
+- ユーザーがお金を払って得られるものを明確に示します
+- 料金がいつ発生するかを示します
 
-**一般的な却下:**
-> "サブスクリプション価格は明確で事前に行う必要があります。"
+**一般的な拒否:**
+> 「サブスクリプションの価格は明確かつ事前に設定する必要があります。」
 
-:::caution 価格一貫性
-すべての価格は以下と一致する必要があります:
-- App Store メタデータリスト
+:::注意 価格の一貫性
+すべての価格は以下の間で一致する必要があります。
+- App Store メタデータのリスト
 - アプリ内購入画面
 - サブスクリプション管理画面
 
-ストアリスト ($4.99) とアプリ ($5.99) の間に $1 の割引さえあっても、自動却下がトリガーされます。
+ストアの掲載情報 (4.99 ドル) とアプリ (5.99 ドル) に 1 ドルの差異があるだけでも、自動的に拒否されます。
 :::
 
-### サブスクリプション計画プレゼンテーション
+### サブスクリプションプランのプレゼンテーション
 
-**必須開示:**
+**必須開示事項:**
 - 利用可能なすべてのサブスクリプション層が一緒に表示されます
-- ティアごとの機能の明確な比較
-- UI トリックスを通じてプレミアム層に自動デフォルトなし
+- 階層ごとの機能の明確な比較
+- UI トリックによるプレミアム層への自動デフォルト設定なし
 - 簡単に見つけられるキャンセル手順
 
-![UI Design Dos and Don'ts](/native-purchases/review-guides/ui-design-dos-donts.webp)
+![UI デザインの禁止事項](/native-purchases/review-guides/ui-design-dos-donts.webp)
 
 **準拠した UI の例:**
 ```typescript
@@ -55,9 +52,9 @@ import { NativePurchases } from '@capgo/native-purchases';
 function SubscriptionScreen() {
   return (
     <div>
-      <h2>プランを選択してください</h2>
+      <h2>Choose Your Plan</h2>
 
-      {/* すべてのティアを均等に表示 */}
+      {/* Show all tiers equally */}
       <PlanCard
         title="Basic"
         price="$4.99/month"
@@ -67,24 +64,24 @@ function SubscriptionScreen() {
         title="Premium"
         price="$9.99/month"
         features={['All Basic', 'Feature C', 'Feature D']}
-        highlighted={false} // プレミアムを強制しない
+        highlighted={false} // Don't force premium
       />
 
-      {/* クリアなキャンセル情報 */}
+      {/* Clear cancellation info */}
       <Text>
-        設定 > サブスクリプションでいつでもキャンセルできます。
-        一部期間の払い戻しはありません。
+        Cancel anytime in Settings > Subscriptions.
+        No refunds for partial periods.
       </Text>
     </div>
   );
 }
 ```
 
-### 購入を復元
+### 購入を復元する
 
-**必須実装:**
+**必要な実装:**
 
-IAP があるすべてのアプリは、サポートに連絡することなく、ユーザーが以前の購入を復元する方法を提供する必要があります。
+IAP を備えたすべてのアプリは、ユーザーがサポートに連絡せずに以前の購入を復元する方法を提供する必要があります。
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -103,7 +100,7 @@ async function restorePurchases() {
 
     if (activeSub) {
       unlockPremiumFeatures();
-      showMessage('購入が正常に復元されました!');
+      showMessage('Purchases restored successfully!');
       return;
     }
 
@@ -113,274 +110,270 @@ async function restorePurchases() {
     const hasIap = iaps.some((purchase) => purchase.productIdentifier === 'premium_unlock');
 
     showMessage(
-      hasIap ? 'プレミアム購入が復元されました!' : '以前の購入は見つかりませんでした。',
+      hasIap ? 'Premium purchase restored!' : 'No previous purchases found.',
     );
   } catch (error) {
-    showError('購入の復元に失敗しました。もう一度お試しください。');
+    showError('Failed to restore purchases. Please try again.');
   }
 }
 
-// 見えやすい "購入を復元" ボタンを追加
+// Add a visible "Restore Purchases" button
 <Button onClick={restorePurchases}>
-  購入を復元
+  Restore Purchases
 </Button>
 ```
 
-## 一般的な却下理由
+## 一般的な拒否理由
 
 ### 1. アプリのクラッシュまたは機能の破損
 
 **失敗する理由:**
-- アプリは起動時にクラッシュします
-- 購入フローが完了に失敗
-- スクリーンショットに表示されている機能が機能しない
+- 起動時にアプリがクラッシュする
+- 購入フローが完了しない
+- スクリーンショットに示されている機能は動作しません
 
-**防止:**
-- 実デバイスでテスト (シミュレータのみではなく)
-- すべてのサブスクリプション フローをエンドツーエンドでテストしてください
-- レシート検証が機能することを確認
-- ネットワーク エラー処理を確認
+**予防:**
+- (シミュレーターだけでなく) 実際のデバイスでテストします。
+- すべてのサブスクリプション フローをエンドツーエンドでテストする
+- 領収書の検証が機能することを確認する
+- ネットワークエラー処理を確認してください
 
 ### 2. メタデータの不一致
 
 **失敗する理由:**
-- スクリーンショットは現在のビルドに存在しない機能を表示
-- 説明は存在しない機能を述べています
-- メタデータの価格はアプリ内の価格と異なります
+- スクリーンショットには現在のビルドにない機能が表示されます
+- 説明に存在しない機能が記載されている
+- メタデータの価格はアプリ内価格とは異なります
 
-![Metadata Checklist](/native-purchases/review-guides/metadata-checklist.webp)
+![メタデータ チェックリスト](/native-purchases/review-guides/metadata-checklist.webp)
 
-**防止:**
+**予防:**
 ```typescript
-// 各ティアに正確に含まれるものを文書化する
+// Document exactly what's in each tier
 const SUBSCRIPTION_FEATURES = {
   basic: ['Ad-free', 'Cloud sync', 'Basic themes'],
   premium: ['Ad-free', 'Cloud sync', 'All themes', 'Priority support']
 };
 
-// これらを App Store の説明と両方のアプリで使用します
+// Use these in both your app AND App Store description
 ```
 
-### 3. 欠落しているアクセス許可の説明
+### 3. 権限の説明が欠落している
 
 **失敗する理由:**
-- 説明なしにカメラ/場所/健康をリクエスト
-- パーミッションリクエストは複数の画面の深さに埋もれています
-- 曖昧な、または一般的なアクセス許可の説明
+- 説明なしにカメラ/位置情報/健康状態を要求する
+- 許可リクエストは複数の画面の奥深くに埋め込まれます
+- 曖昧または一般的な権限の説明
 
-**防止:**
+**予防:**
 
-`Info.plist` を明確な説明で更新します:
+`Info.plist` を明確な説明で更新します。
 
 ```xml
 <key>NSCameraUsageDescription</key>
-<string>高速サブスクリプションアップグレードの製品バーコードをスキャンするには、カメラアクセスが必要です。</string>
+<string>Camera access is needed to scan product barcodes for quick subscription upgrades.</string>
 
 <key>NSLocationWhenInUseUsageDescription</key>
-<string>位置情報は、プレミアムサブスクリプションで関連する地元のコンテンツを表示するのに役立ちます。</string>
+<string>Location helps us show relevant local content in your Premium subscription.</string>
 ```
 
 ### 4. 誤解を招くマーケティング
 
 **失敗する理由:**
-- 証拠のない "世界で #1 アプリ" のような主張
-- "無制限の機能で隠された制限がある
-- 偽りの緊急タクティクス ("残り 2 つのスポットだけ!")
+- 証拠もなく「世界ナンバー1のアプリ」などと主張する
+- 隠れた制限のある「無制限」機能
+- 偽の緊急戦略 (「あと 2 枠しかありません!」)
 
-![Description Guidelines Examples](/native-purchases/review-guides/description-guidelines-1.webp)
+![記述ガイドラインの例](/native-purchases/review-guides/description-guidelines-1.webp)
 
-![Additional Description Guidelines](/native-purchases/review-guides/description-guidelines-2.webp)
+![追加の説明ガイドライン](/native-purchases/review-guides/description-guidelines-2.webp)
 
-**防止:**
-- 説明では具体的で事実上であることを使用してください
-- 証拠がなければ上級者を避ける
-- 偽りの希少性でユーザーにプレッシャーをかけないでください
+**予防:**
+- 説明は具体的かつ事実に基づいてください
+- 根拠のない最上級の表現は避ける
+- 偽りの希少性でユーザーに圧力をかけないでください
 
-### 5. 隠されたキャンセルプロセス
+### 5. 非表示のキャンセル処理
 
 **失敗する理由:**
-- キャンセル方法について言及がない
-- キャンセルボタンは非表示または曖昧にされています
-- Apple のネイティブフローなしの多段階キャンセル処理
+・キャンセル方法については記載がありません
+- キャンセルボタンが非表示または隠されている
+- Apple のネイティブ フローを使用しない複数ステップのキャンセル プロセス
 
-**防止:**
+**予防:**
 ```typescript
-// 常にユーザーにキャンセルについて通知します
+// Always inform users about cancellation
 function SubscriptionInfo() {
   return (
     <div>
-      <h3>キャンセル方法</h3>
+      <h3>How to Cancel</h3>
       <ol>
-        <li>iPhone 設定を開く</li>
-        <li>上部の名前をタップしてください</li>
-        <li>サブスクリプションをタップしてください</li>
-        <li>このアプリを選択してキャンセルをタップ</li>
+        <li>Open iPhone Settings</li>
+        <li>Tap your name at the top</li>
+        <li>Tap Subscriptions</li>
+        <li>Select this app and tap Cancel</li>
       </ol>
 
-      <p>または、App Store アプリで直接管理します。</p>
+      <p>Or manage directly in the App Store app.</p>
 
       <Button onClick={openSubscriptionManagement}>
-        設定でサブスクリプションを管理
+        Manage Subscription in Settings
       </Button>
     </div>
   );
 }
 
 async function openSubscriptionManagement() {
-  // iOS サブスクリプション管理への直接リンク
+  // Direct link to iOS subscription management
   await NativePurchases.showManageSubscriptions();
 }
-```
+```## プライバシーとデータの使用 (セクション 5.1.1)
 
-## プライバシーとデータ使用 (セクション 5.1.1)
+Apple は、2025 年にプライバシー要件を大幅に強化します。
 
-Apple は 2025 年のプライバシー要件を大幅に厳しくしました。
+### 必要な開示
 
-### 必須開示
+**すべての権限について:**
+1. 必要な理由 (具体的な使用例)
+2. いつ使用するか
+3. データの保存/共有方法
+4. オプションか必須か
 
-**すべての権限の場合:**
-1. 必要な理由 (特定のユースケース)
-2. いつ使用されるか
-3. データがどのように保存/共有されるか
-4. オプションであるか必須であるか
-
-### 例: 正しいアクセス許可フロー
+### 例: 適切な許可フロー
 
 ```typescript
 async function requestCameraPermission() {
-  // 要求する前に説明を表示
+  // Show explanation BEFORE requesting
   await showDialog({
     title: 'Camera Access',
     message: 'We need camera access to let you scan barcodes for quick product lookup. Your photos are never uploaded or stored.',
     buttons: ['Not Now', 'Allow']
   });
 
-  // その後、アクセス許可をリクエスト
+  // Then request permission
   const result = await Camera.requestPermissions();
   return result.camera === 'granted';
 }
 ```
 
-### プライバシーニュートリションラベル
+### プライバシー栄養ラベル
 
-App Store プライバシーラベルが正確に反映されていることを確認:
+App Store プライバシー ラベルが以下を正確に反映していることを確認してください。
 - 購入履歴の収集
-- メールアドレス (領収書用)
-- デバイス ID (不正防止用)
-- 使用データ (分析用)
+・メールアドレス（領収書用）
+- デバイスID（不正行為防止用）
+- 使用状況データ (分析用)
 
 :::warning
-不正確なプライバシーラベルは 2025 年の一般的な却下理由です。データ収集を慎重に監査してください。
+不正確なプライバシー ラベルは、2025 年の一般的な拒否理由です。データ収集を慎重に監査してください。
 :::
 
 ## 提出前チェックリスト
 
-![Pre-Submission Checklist](/native-purchases/review-guides/pre-submission-checklist.webp)
+![提出前チェックリスト](/native-purchases/review-guides/pre-submission-checklist.webp)
 
 <Steps>
 
-1. **すべての購入フローをテスト**
-   - 各サブスクリプション層を購入
-   - 無料試用版をテストする
-   - 紹介オファーが正しく適用されることを確認
-   - 購入を復元をテスト
-   - ファミリー共有を確認 (有効な場合)
-   - 複数のデバイスでテスト
+1. **すべての購入フローをテストする**
+   - 各サブスクリプション層を購入する
+   - 無料トライアルをテストする
+   - 紹介特典が正しく適用されていることを確認する
+   - 購入した復元のテスト
+   - ファミリー共有を確認します (有効な場合)
+   - 複数のデバイスでテストする
 
-2. **価格設定の一貫性を確認**
-   - App Store メタデータがアプリ内の価格と一致することを確認
-   - すべての通貨が正しいことを確認
-   - 無料試用期間が説明と一致することを確認
-   - 紹介オファーの条件が正確であることを確認
+2. **価格の一貫性を確認**
+   - App Store メタデータがアプリ内価格と一致することを確認します
+   - すべての通貨が正しいことを確認してください
+   - 無料トライアル期間が説明と一致していることを確認します
+   - 紹介特典の条件が正確であることを確認してください
 
-3. **すべてのコピーをレビュー**
-   - プレースホルダー テキストを削除します
-   - クレームはテスト可能であることを確認
-   - 文法とスペルを確認
-   - 説明が現在のビルドと一致することを確認
-   - 競合他社の言及を削除
+3. **すべてのコピーを確認**
+   - プレースホルダーテキストを削除する
+   - クレームがテスト可能であることを確認する
+   - 文法とスペルをチェックする
+   - 説明が現在のビルドと一致していることを確認してください
+   - 競合他社への言及を削除する
 
-4. **テストアクセス許可**
-   - 必要なアクセス許可のみをリクエスト
-   - リクエスト前に明確な説明を表示
-   - "拒否" フローをテスト (アプリは引き続き機能する必要があります)
-   - Info.plist の説明が明確であることを確認
+4. **権限のテスト**
+   - 必要な権限のみをリクエストする
+   - 要求する前に明確な説明を示す
+   - 「拒否」フローをテストします (アプリは引き続き動作するはずです)
+   - Info.plist の説明が明確であることを確認します
 
-5. **テストアカウントを準備**
-   - サンドボックステストアカウントを作成
-   - App Review Notes でログイン認証情報を文書化する
-   - テストアカウントがアクティブなサブスクリプションを確認
-   - レビュアーが購入フローを完了できることを確認
+5. **テストアカウントの準備**
+   - サンドボックステストアカウントの作成
+   - ログイン資格情報をアプリレビューメモに文書化します。
+   - テストアカウントにアクティブなサブスクリプションがあることを確認します
+   - レビュー担当者が購入フローを完了できるかテストする
 
-6. **メタデータを確認**
-   - スクリーンショットは現在の UI と一致
-   - アプリプレビュービデオ (ある場合) は現在のバージョンを表示
-   - 説明は機能を正確に説明
-   - 年齢レーティングはコンテンツと一致
-   - プライバシーポリシーはアプリ内でアクセス可能
+6. **メタデータの確認**
+   - スクリーンショットは現在の UI と一致します
+   - アプリのプレビュー ビデオ (存在する場合) には現在のバージョンが表示されます
+   - 説明は機能を正確に説明しています
+   - 年齢レーティングはコンテンツと一致します
+   - アプリ内でプライバシー ポリシーにアクセスできます
 
-7. **詳細なレビューノートを作成**
+7. **詳細なレビューノートを書く**
    ```
-   テストアカウント:
-   メール: reviewer@test.com
-   パスワード: TestPass123!
+   Test Account:
+   Email: reviewer@test.com
+   Password: TestPass123!
 
-   テスト手順:
-   1. 上記のテストアカウントでログイン
-   2. "プレミアムにアップグレード" ボタンをタップ
-   3. "月次プレミアム" サブスクリプションを選択
-   4. 購入を完了する (サンドボックスでは無料)
-   5. プレミアム機能がロック解除されることを確認
+   Testing Instructions:
+   1. Log in with test account above
+   2. Tap "Upgrade to Premium" button
+   3. Select "Monthly Premium" subscription
+   4. Complete purchase (no charge in sandbox)
+   5. Verify premium features unlock
 
-   注: サブスクリプション価格は購入前に明確に表示されます。
-   キャンセル手順は設定 > アカウントにあります。
+   Note: Subscription pricing is clearly shown before purchase.
+   Cancellation instructions are in Settings > Account.
    ```
 
 </Steps>
 
-## レビュータイムライン
+## レビューのタイムライン
 
-![App Store Review Timeline](/native-purchases/review-guides/review-timeline.webp)
+![App Store レビュー タイムライン](/native-purchases/review-guides/review-timeline.webp)
 
-**標準レビュー:** 24-48 時間
-**ピークの時間帯:** 3-5 日 (App Store 休日リリース)
-**週末:** レビューは処理されません
-**急速レビュー:** 重要なバグ修正で利用可能 (App Store Connect 経由でリクエスト)
+**標準レビュー:** 24 ～ 48 時間
+**ピーク期間:** 3 ～ 5 日 (App Store ホリデー リリース)
+**週末:** レビューは処理されていません
+**迅速なレビュー:** 重大なバグ修正に利用可能 (App Store Connect 経由でリクエスト)
 
 :::tip
-週の早い段階で提出して、週末の遅延を回避します。月曜日の提出は通常、水曜日までにレビューされます。
+週末の遅れを避けるため、週の初めに提出してください。月曜日の提出物は通常、水曜日までに審査されます。
 :::
 
-## 2025 ガイドラインアップデート
+## 2025 年のガイドラインの更新
 
 ### 新しい要件
 
-**1. AI 機能開示**
-アプリが任意の機能に AI を使用している場合、以下が必要です:
-- AI 生成コンテンツを明確にラベル付け
-- AI の使用方法を説明
-- コンテンツセーフティ対策を文書化
+**1. AI 機能の開示**
+アプリの機能に AI を使用する場合は、次のことを行う必要があります。
+- AI によって生成されたコンテンツに明確なラベルを付ける
+- AIがどのように使用されるかを説明する
+- 文書内容の安全対策
 
-**2. サブスクリプション明確化の向上**
-- サイドバイサイド計画の比較が必要
-- より安価なオプションを隠す "ダークパターン" なし
-- クリアなダウングレード/アップグレード経路
+**2.サブスクリプションの明確性の強化**
+- プランを並べて比較する必要があります
+- 安価なオプションを隠す「暗いパターン」はありません
+- ダウングレード/アップグレード パスをクリアする
 
-**3. プライバシーの強化**
-- セクション 5.1.1 の執行を増加
-- データ収集の正当化をより詳しく監視
-- 子供のアプリのためのより厳しい要件
+**3.プライバシーの強化**
+- セクション 5.1.1 の施行が強化されました
+- データ収集の正当性についてのさらなる精査
+- 子供向けアプリの要件が厳格化
 
-### 2024 から何が変わったのか
+### 2024 年からの変化- モジュール形式の提出が可能になりました (製品ページを個別に更新します)
+- アプリ内イベントは個別に送信できます
+- 誤解を招くサブスクリプション UI の厳格な適用
+- 暗号通貨/NFT アプリに関する新しいガイダンス
 
-- モジュラー提出が許可されるようになりました (製品ページを独立して更新)
-- アプリ内イベントは個別に提出できます
-- 誤解を招くサブスクリプション UI の実装を厳しく実施
-- 暗号通貨/ NFT アプリの新しいガイダンス
+## ネイティブ購入プラグインのベスト プラクティス
 
-## Native Purchases プラグインのベストプラクティス
-
-### 適切なエラー処理を実装
+### 適切なエラー処理を実装する
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -392,30 +385,30 @@ async function handlePurchase(productId: string) {
       productType: PURCHASE_TYPE.SUBS,
     });
 
-    // 成功
+    // Success
     await validateReceiptOnServer(transaction.receipt);
-    showSuccess('サブスクリプションがアクティベートされました!');
+    showSuccess('Subscription activated!');
     unlockFeatures();
 
   } catch (error: any) {
-    // 特定のエラーケースを処理します
+    // Handle specific error cases
     if (error.code === 'USER_CANCELLED') {
-      // ユーザーがキャンセルしました - エラーを表示しないでください
+      // User cancelled - don't show error
       console.log('Purchase cancelled by user');
     } else if (error.code === 'PAYMENT_PENDING') {
-      showInfo('支払いは保留中です。後で確認してください。');
+      showInfo('Payment is pending. Please check back later.');
     } else if (error.code === 'PRODUCT_ALREADY_PURCHASED') {
-      // 代わりに復元
+      // Restore instead
       await NativePurchases.restorePurchases();
     } else {
-      // ユーザーフレンドリーなエラーを表示
-      showError('購入を完了できません。もう一度お試しください。');
+      // Show user-friendly error
+      showError('Unable to complete purchase. Please try again.');
     }
   }
 }
 ```
 
-### ローディング状態を表示
+### 読み込み状態の表示
 
 ```typescript
 function PurchaseButton({ productId }: { productId: string }) {
@@ -432,106 +425,112 @@ function PurchaseButton({ productId }: { productId: string }) {
 
   return (
     <button onClick={handlePurchase} disabled={loading}>
-      {loading ? '処理中...' : '今すぐサブスクライブ'}
+      {loading ? 'Processing...' : 'Subscribe Now'}
     </button>
   );
 }
 ```
 
-### 利用規約を明確に表示
+### 用語を明確に表示する
 
 ```typescript
 function SubscriptionTerms() {
   return (
     <div className="terms">
       <p>
-        現在の期間の終了の少なくとも 24 時間前にキャンセルされていない限り、サブスクリプションは自動的に更新されます。
+        Subscription automatically renews unless cancelled at least 24 hours
+        before the end of the current period.
       </p>
       <p>
-        現在の期間の終了前の 24 時間以内に、アカウントは更新請求されます。
+        Your account will be charged for renewal within 24 hours prior to
+        the end of the current period.
       </p>
       <p>
-        サブスクリプションはユーザーが管理でき、アカウント設定での購入後にオートリニューアルをオフにすることができます。
+        Subscriptions may be managed by the user and auto-renewal may be
+        turned off in Account Settings after purchase.
       </p>
       <p>
-        <a href="/terms">利用規約</a> |
-        <a href="/privacy">プライバシーポリシー</a>
+        <a href="/terms">Terms of Service</a> |
+        <a href="/privacy">Privacy Policy</a>
       </p>
     </div>
   );
 }
 ```
 
-## アプリが却下された場合
+## アプリが拒否された場合
 
-### 解決ステップ
+### 解決手順
 
 <Steps>
 
-1. **却下を慎重に読む**
-   - 引用された特定のガイドライン (例: 3.1.1、5.1.1) を注記
-   - Apple が正確にフラグを立てた内容を理解する
+1. **拒否内容をよく読んでください**
+   - 引用されている特定のガイドラインに注意してください (例: 3.1.1、5.1.1)
+   - Apple がフラグを立てた内容を正確に理解する
 
-2. **問題を完全に修正**
-   - パッチではなく根本原因を修正する
-   - フィックスを広範囲にテスト
-   - 行ったことを文書化する
+2. **問題を徹底的に修正します**
+   - パッチを適用するだけではなく、根本原因を修正してください
+   - 修正を広範囲にテストする
+   - 変更内容を文書化する
 
 3. **解決センターで対応**
    ```
-   ご意見をありがとうございます。問題に対処しました:
+   Thank you for your feedback. I have addressed the issue:
 
-   問題: サブスクリプション価格が事前にクリアでない
+   Issue: Subscription pricing not clear upfront
 
-   修正: サブスクリプション選択画面に明示的な価格表示を追加しました。購入ボタンの前に "$9.99/月" を表示します。同じ画面にキャンセル手順も追加しました。
+   Fix: Added explicit pricing display on subscription selection
+   screen showing "$9.99/month" before purchase button. Also added
+   cancellation instructions on the same screen.
 
-   変更はこの提出にあり、提供されたテストアカウントを使用してテストすることができます。
+   The changes are in this submission and can be tested using the
+   provided test account.
    ```
 
-4. **すぐに再提出**
-   - 再提出は通常より速くレビューされます
-   - 通常は 24 時間以内
+4. **速やかに再提出してください**
+   - 再提出は通常、より迅速に審査されます
+   - 通常 24 時間以内
 
 </Steps>
 
-### アピールプロセス
+### 上訴プロセス
 
-却下が不正だと思う場合:
+拒否が間違っていると思われる場合は、次のようにします。
 
-![App Store Clarification Process](/native-purchases/review-guides/clarification-process.webp)
+![App Store 明確化プロセス](/native-purchases/review-guides/clarification-process.webp)
 
-1. App Store Connect で "アピール" をクリック
-2. 明確な証拠を提供:
+1. App Store Connect の [異議申し立て] をクリックします。
+2. 明確な証拠を提供します。
    - コンプライアンスを示すスクリーンショット
    - 特定のガイドラインへの参照
-   - 要件をどのように満たすかの説明
-3. プロ意識的かつ事実上であることを使用してください
-4. 機能が見つけにくい場合はテストアカウントを含める
+   - 要件を満たす方法の説明
+3. 専門的かつ事実に基づいて行動する
+4. 機能が見つけにくい場合は、テスト アカウントを含めます
 
-![Request for Documents Example](/native-purchases/review-guides/request-documents.webp)
+![資料請求例](/native-purchases/review-guides/request-documents.webp)
 
-## 追加リソース
+## 追加のリソース
 
-- [Apple App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/)
-- [In-App Purchase Guidelines](https://developer.apple.com/app-store/review/guidelines/#in-app-purchase)
-- [Subscriptions Best Practices](https://developer.apple.com/app-store/subscriptions/)
-- [App Store Connect Help](https://developer.apple.com/help/app-store-connect/)
+- [Apple App Store ガイドラインの確認](https://developer.apple.com/app-store/review/guidelines/)
+- [アプリ内購入ガイドライン](https://developer.apple.com/app-store/review/guidelines/#in-app-purchase)
+- [サブスクリプションのベスト プラクティス](https://developer.apple.com/app-store/subscriptions/)
+- [App Store Connect ヘルプ](https://developer.apple.com/help/app-store-connect/)
 
 ## サポート
 
-まだ問題がある場合:
-- [Native Purchases ドキュメンテーション](/docs/plugins/native-purchases/getting-started/) を確認してください
-- [よくあるトラブルシューティングの問題](/docs/plugins/native-purchases/getting-started/#troubleshooting) を確認してください
-- ガイドラインの明確化については Apple Developer Support にお問い合わせください
+まだ問題が解決しない場合:
+- [ネイティブ購入ドキュメント]を確認してください(/docs/plugins/native-purchases/getting-started/)
+- [一般的なトラブルシューティングの問題] を確認してください(/docs/plugins/native-purchases/getting-started/#troubleshooting)
+- ガイドラインの詳細については、Apple 開発者サポートにお問い合わせください。
 
-### エキスパートの助けが必要ですか?
+### 専門家の助けが必要ですか?
 
-アプリレビューで苦労しているか、個人的な支援が必要ですか? **[チームとのコンサルテーション通話を予約](https://cal.com/team/capgo/capacitor-consulting-services)** 専用サポートを行います:
+アプリのレビューで苦労している場合、または個別のサポートが必要ですか? **[チームへの相談電話を予約](https://cal.com/team/capgo/capacitor-consulting-services)**: 以下の専用サポートをご利用いただけます:
 
-- IAP 実装レビューと最適化
-- App Store レビューの準備と戦略
-- 提出チェックリストレビュー
-- 却下解決とアピール
+- IAP実装のレビューと最適化
+- App Store 準備と戦略を確認する
+- 提出チェックリストのレビュー
+- 拒否の解決と異議申し立て
 - 完全なテストと検証
 
-当社の専門家は数百のアプリをレビューに合格させるのに成功しました!
+当社の専門家は、何百ものアプリが審査に合格するよう支援してきました。

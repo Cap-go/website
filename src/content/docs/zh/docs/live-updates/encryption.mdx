@@ -1,134 +1,131 @@
 ---
-title: "加密"
-description: "了解 Capgo 的端到端加密如何在传输和存储过程中保护应用 bundle,保护代码和用户数据"
+title: Encryption
+description: 了解 Capgo 的端到端加密如何在传输和存储过程中保护您的应用程序包，从而保护您的代码和用户数据。
 sidebar:
   order: 5
 locale: zh
 ---
-
 import { Aside, Steps } from '@astrojs/starlight/components';
 
-Capgo provides robust end-to-end encryption for your app bundles, ensuring that your JavaScript code and assets are protected during transmission and storage. This encryption system is designed to give you complete control over your app's security while maintaining the convenience of live updates.
+Capgo 为您的应用程序包提供强大的端到端加密，确保您的 JavaScript 代码和资产在传输和存储过程中受到保护。该加密系统旨在让您完全控制应用程序的安全性，同时保持实时更新的便利性。
 
-## Overview
+## 概述
 
-Capgo's encryption system uses industry-standard cryptographic methods to protect your bundles from unauthorized access. When encryption is enabled, your bundles are encrypted before leaving your development environment and remain encrypted until they're decrypted by your app on the user's device.
+Capgo 的加密系统使用行业标准的加密方法来保护您的捆绑包免遭未经授权的访问。启用加密后，您的捆绑包会在离开开发环境之前进行加密，并保持加密状态，直到它们被用户设备上的应用程序解密。
 
-**True End-to-End Encryption**: Unlike other OTA update platforms that only sign updates (leaving the code publicly readable), Capgo provides true end-to-end encryption. This means only your users can decrypt your updates - no one else, including Capgo itself. Your bundle content remains completely private and unreadable throughout the entire delivery process.
-
-<Aside type="tip">
-
-Encryption is particularly important for:
-- Apps handling sensitive data or business logic
-- Enterprise applications with compliance requirements
-- Apps deployed in regulated industries
-- Organizations with strict security policies
-
-</Aside>
-
-## How Encryption Works
-
-Capgo uses a hybrid encryption approach that combines RSA and AES encryption for optimal security and performance:
-
-![Capgo Encryption Flow](/encryption_flow.webp)
-
-### 1. Key Generation
-- **Private Key**: Generated and stored securely in your development environment (used for encryption)
-- **Public Key**: Derived from your private key and stored in your app's Capacitor config (used for decryption)
-- **Session Keys**: Random AES keys generated for each bundle upload
-
-### 2. Encryption Process
-1. A random AES session key is generated for each bundle upload
-2. Your bundle is encrypted using the AES session key
-3. The bundle checksum is calculated
-4. Both the AES session key and checksum are encrypted together using your RSA private key (creating the "signature")
-5. The encrypted bundle and encrypted signature are stored
-
-The checksum is encrypted alongside the AES key to prevent tampering. Since only your RSA private key can create this signature, and only the corresponding public key can decrypt it, this ensures that both the AES session key and the expected checksum are authentic and haven't been modified by an attacker.
-
-### 3. Decryption Process
-1. Your app downloads the encrypted bundle and encrypted signature
-2. The Capgo SDK uses your RSA public key (stored in the app) to decrypt the signature
-3. This reveals the AES session key and the original checksum
-4. The AES session key is used to decrypt the bundle
-5. A checksum of the decrypted bundle is calculated and compared with the original checksum for integrity verification
-
-This process ensures that even if an attacker intercepts the encrypted bundle, they cannot modify the AES session key or provide a fake checksum, because they would need your private key to create a valid signature that the public key can decrypt.
+**真正的端到端加密**：与其他仅签署更新（使代码公开可读）的 OTA 更新平台不同，Capgo 提供真正的端到端加密。这意味着只有您的用户可以解密您的更新 - 没有其他人，包括 Capgo 本身。您的捆绑包内容在整个交付过程中保持完全私密且不可读。
 
 <Aside type="tip">
 
-RSA cannot encrypt large amounts of data efficiently, so AES is used for the actual bundle encryption while RSA secures the AES key and provides integrity verification through checksum signing.
+加密对于以下方面尤其重要：
+- 处理敏感数据或业务逻辑的应用程序
+- 具有合规性要求的企业应用
+- 部署在受监管行业的应用程序
+- 具有严格安全政策的组织
 
 </Aside>
 
-## Capgo vs Other Platforms
+## 加密的工作原理
 
-| Feature | Capgo | Other OTA Platforms |
-|---------|-------|-------------------|
-| **Bundle Content** | Fully encrypted (unreadable) | Publicly readable |
-| **Security Method** | True end-to-end encryption | Code signing only |
-| **Privacy Level** | Zero-knowledge (even Capgo can't read your code) | Platform can access your code |
-| **Protection** | Content + integrity + authenticity | Integrity + authenticity only |
+Capgo 使用结合 RSA 和 AES 加密的混合加密方法，以实现最佳安全性和性能：
 
-**Why This Matters:**
-- **Code signing** only verifies that updates haven't been tampered with and come from the right source
-- **End-to-end encryption** ensures that your actual code content remains private and unreadable during transmission and storage
-- With Capgo's true end-to-end encryption, only your users can decrypt updates - no one else, including Capgo itself
+![Capgo 加密流程](/encryption_flow.webp)
 
-## Encryption Methods
+### 1. 密钥生成
+- **私钥**：在您的开发环境中安全地生成并存储（用于加密）
+- **公钥**：源自您的私钥并存储在应用程序的 Capacitor 配置中（用于解密）
+- **会话密钥**：为每个捆绑包上传生成的随机 AES 密钥
 
-Capgo uses Encryption V2 as the standard encryption method:
+### 2. 加密过程
+1. 为每个捆绑包上传生成一个随机 AES 会话密钥
+2.您的捆绑包使用 AES 会话密钥进行加密
+3.计算bundle校验和
+4. AES 会话密钥和校验和均使用您的 RSA 私钥加密（创建“签名”）
+5. 存储加密包和加密签名
 
-### Encryption V2 (Current Standard)
-- Uses RSA-4096 for enhanced security
-- AES-256-GCM for authenticated encryption
-- Provides integrity verification
-- Better performance and security
+校验和与 AES 密钥一起加密以防止篡改。由于只有您的 RSA 私钥可以创建此签名，并且只有相应的公钥可以对其进行解密，因此这可以确保 AES 会话密钥和预期校验和都是真实的，并且没有被攻击者修改。
 
-### Encryption V1 (Deprecated)
-- Uses RSA-2048 for key encryption
-- AES-256-CBC for bundle encryption
-- **No longer available in the current CLI**
-- Legacy apps using V1 must migrate to V2
+### 3.解密过程
+1.您的应用程序下载加密包和加密签名
+2. Capgo SDK 使用您的 RSA 公钥（存储在应用程序中）来解密签名
+3. 这会显示 AES 会话密钥和原始校验和
+4. AES 会话密钥用于解密包
+5. 计算解密包的校验和并与原始校验和进行比较以进行完整性验证
+
+此过程可确保即使攻击者截获加密包，他们也无法修改 AES 会话密钥或提供虚假校验和，因为他们需要您的私钥来创建公钥可以解密的有效签名。
+
+<Aside type="tip">RSA 无法有效地加密大量数据，因此 AES 用于实际的捆绑加密，而 RSA 保护 AES 密钥并通过校验和签名提供完整性验证。
+
+</Aside>
+
+## Capgo 与其他平台比较
+
+|特色 | Capgo |其他 OTA 平台 |
+|--------|---------|--------------------|
+| **捆绑内容** |完全加密（无法读取）|公开可读 |
+| **安全方法** |真正的端到端加密 |仅代码签名 |
+| **隐私级别** |零知识（连 Capgo 都读不懂你的代码）|平台可以访问您的代码 |
+| **保护** |内容+完整性+真实性 |仅诚信+真实性|
+
+**为什么这很重要：**
+- **代码签名**仅验证更新未被篡改并且来自正确的来源
+- **端到端加密**确保您的实际代码内容在传输和存储过程中保持私密且不可读
+- 借助 Capgo 真正的端到端加密，只有您的用户可以解密更新 - 没有其他人，包括 Capgo 本身
+
+## 加密方法
+
+Capgo 使用 Encryption V2 作为标准加密方法：
+
+### 加密 V2（当前标准）
+- 使用 RSA-4096 增强安全性
+- AES-256-GCM 用于验证加密
+- 提供完整性验证
+- 更好的性能和安全性
+
+### 加密 V1（已弃用）
+- 使用 RSA-2048 进行密钥加密
+- 用于捆绑加密的 AES-256-CBC
+- **当前 CLI** 中不再可用
+- 使用V1的旧应用程序必须迁移到V2
 
 <Aside type="danger">
 
-Encryption V1 is no longer supported in the current Capgo CLI. If you're using V1 encryption, you must migrate to V2. See the [migration guide](/docs/upgrade/encryption-v1-to-v2/) for detailed instructions.
+当前 Capgo CLI 不再支持加密 V1。如果您使用 V1 加密，则必须迁移到 V2。有关详细说明，请参阅[迁移指南](/docs/upgrade/encryption-v1-to-v2/)。
 
 </Aside>
 
-## Setting Up Encryption
+## 设置加密
 
-### Step 1: Generate Encryption Keys
+### 第 1 步：生成加密密钥
 
-First, generate your encryption keys using the Capgo CLI:
+首先，使用 Capgo CLI 生成加密密钥：
 
 ```shell
 # Generate new encryption keys (creates files in current directory)
 npx @capgo/cli@latest key create
 ```
 
-This creates:
-- `.capgo_key_v2`: Your private key (keep this secure!)
-- `.capgo_key_v2.pub`: Your public key (used by your app)
+这将创建：
+- `.capgo_key_v2`：您的私钥（请确保安全！）
+- `.capgo_key_v2.pub`：您的公钥（由您的应用程序使用）
 
-These files are created in the current directory where you run the command.
+这些文件是在运行命令的当前目录中创建的。
 
 <Aside type="caution">
 
-**Important Storage Notes:**
-- **Private Key (`.capgo_key_v2`)**: Never commit this to version control. This file should be kept secure and used only for encryption during bundle uploads.
-- **Public Key (`.capgo_key_v2.pub`)**: This is safe to commit to version control as it's a backup of your public key.
-- **File Location**: Keys are created in the current directory where you run the `key create` command.
-- **Public Key in Config**: You must run `key save` to store the public key in your Capacitor config for the mobile app to use.
+**重要存储注意事项：**
+- **私钥 (`.capgo_key_v2`)**：切勿将其提交给版本控制。该文件应保持安全，并且仅用于捆绑包上传期间的加密。
+- **公钥 (`.capgo_key_v2.pub`)**：可以安全地提交版本控制，因为它是公钥的备份。
+- **文件位置**：密钥在您运行“key create”命令的当前目录中创建。
+- **配置中的公钥**：您必须运行“密钥保存”以将公钥存储在您的 Capacitor 配置中以供移动应用程序使用。
 
-For production use, store the private key securely (environment variables, key management services) and remove it from your local project after setup.
+对于生产使用，请安全地存储私钥（环境变量、密钥管理服务）并在设置后将其从本地项目中删除。
 
 </Aside>
 
-### Step 2: Save Your Public Key to Capacitor Config (Required)
+### 步骤 2：将您的公钥保存到 Capacitor 配置（必需）
 
-You **must** save your public key to the Capacitor config so your mobile app can decrypt bundles:
+您**必须**将公钥保存到 Capacitor 配置中，以便您的移动应用程序可以解密捆绑包：
 
 ```shell
 # Save public key from file to Capacitor config (required)
@@ -138,9 +135,7 @@ npx @capgo/cli@latest key save --key ./.capgo_key_v2.pub
 npx @capgo/cli@latest key save --key-data "$CAPGO_PUBLIC_KEY"
 ```
 
-### Step 3: Sync Capacitor Platform (Required)
-
-After saving the public key, you **must** sync the Capacitor platform to copy the updated config to the native layer:
+### 步骤 3：同步 Capacitor 平台（必需）保存公钥后，您**必须**同步 Capacitor 平台以将更新的配置复制到本机层：
 
 ```shell
 # Sync the platform to copy config to native
@@ -149,18 +144,18 @@ npx cap sync
 
 <Aside type="caution">
 
-**Required Steps**: 
-1. The `key save` command stores the public key in your Capacitor config
-2. `npx cap sync` copies this config to the native layer where the mobile app can access it
-3. Without both steps, your app won't be able to decrypt encrypted updates
+**所需步骤**： 
+1. `key save` 命令将公钥存储在您的 Capacitor 配置中
+2. `npx cap sync` 将此配置复制到移动应用程序可以访问它的本机层
+3. 如果没有这两个步骤，您的应用程序将无法解密加密的更新
 
 </Aside>
 
-## Encrypting Bundles
+## 加密包
 
-### Method 1: Encrypt During Upload
+### 方法 1：上传时加密
 
-The simplest way is to encrypt during the upload process:
+最简单的方法是在上传过程中进行加密：
 
 ```shell
 # Upload with automatic encryption
@@ -169,23 +164,23 @@ npx @capgo/cli@latest bundle upload --key-v2
 # For external storage, you must encrypt first (see Manual Encryption Workflow below)
 ```
 
-### Method 2: Manual Encryption Workflow
+### 方法 2：手动加密工作流程
 
-For more control, you can manually encrypt bundles:
+为了获得更多控制，您可以手动加密捆绑包：
 
 <Steps>
 
-1. **Create a zip bundle:**
+1. **创建 zip 包：**
    ```shell
    npx @capgo/cli@latest bundle zip com.example.app --path ./dist --key-v2
    ```
 
-2. **Encrypt the bundle:**
+2. **加密捆绑包：**
    ```shell
    npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM_FROM_STEP_1
    ```
 
-3. **Upload to your storage (e.g., S3) and register with Capgo:**
+3. **上传到您的存储（例如，S3）并注册到 Capgo：**
    ```shell
    # First upload the encrypted bundle to your storage (e.g., AWS S3)
    aws s3 cp ./encrypted-bundle.zip s3://your-bucket/encrypted-bundle.zip
@@ -196,111 +191,109 @@ For more control, you can manually encrypt bundles:
 
 </Steps>
 
-## Key Management
+## 密钥管理
 
-### Storing Keys Securely
+### 安全地存储密钥
 
-**Private Key Options:**
+**私钥选项：**
 
-1. **File-based (local development):**
+1. **基于文件（本地开发）：**
    ```shell
    # Key stored as .capgo_key_v2 file in project root
    npx @capgo/cli@latest bundle upload --key-v2
    ```
 
-2. **Environment variable (CI/CD):**
+2. **环境变量（CI/CD）：**
    ```shell
    # Store in environment variable for CI
    export CAPGO_PRIVATE_KEY="$(cat .capgo_key_v2)"
    npx @capgo/cli@latest bundle upload --key-data-v2 "$CAPGO_PRIVATE_KEY"
    ```
 
-**Public Key Setup (Required):**
+**公钥设置（必需）：**
 ```shell
 # Must save public key to Capacitor config for mobile app
 npx @capgo/cli@latest key save --key ./.capgo_key_v2.pub
 ```
 
-**Production Environment:**
-- Store private keys in secure key management services (AWS KMS, Azure Key Vault, etc.)
-- Use CI/CD secret management for private keys
-- Never commit private keys to version control
+**生产环境：**
+- 将私钥存储在安全密钥管理服务（AWS KMS、Azure Key Vault 等）中
+- 对私钥使用 CI/CD 秘密管理
+- 切勿将私钥提交给版本控制
 
-**Key Usage:**
-- **Private Key**: Used by CLI for encryption during bundle upload (keep secure)
-- **Public Key**: Stored in app configuration for decryption on device (safe to commit)
+**关键用法：**
+- **私钥**：由 CLI 用于在捆绑包上传期间进行加密（保持安全）
+- **公钥**：存储在应用程序配置中，用于在设备上解密（可以安全提交）
 
-### Key Rotation
+### 按键轮换
 
-Regularly rotate your encryption keys for enhanced security:
+定期轮换您的加密密钥以增强安全性：
 
 <Steps>
 
-1. **Generate new keys:**
+1. **生成新密钥：**
    ```shell
    # Navigate to desired directory first, then create keys
    mkdir ./new-keys && cd ./new-keys
    npx @capgo/cli@latest key create
    ```
 
-2. **Save the new public key to Capacitor config:**
+2. **将新公钥保存到 Capacitor config:**
    ```shell
    npx @capgo/cli@latest key save --key ./new-keys/.capgo_key_v2.pub
    ```
 
-3. **Update your app configuration** with the new public key
+3. **使用新的公钥更新您的应用程序配置**
 
-4. **Deploy the updated app** before uploading encrypted bundles with the new key
+4. **部署更新的应用程序**，然后使用新密钥上传加密包
 
 </Steps>
 
-## Security Best Practices
+## 安全最佳实践
 
-### Key Security
-- **Never share private keys** between environments or team members
-- **Use different keys** for different environments (dev, staging, production)
-- **Rotate keys regularly** (recommended: every 6-12 months)
-- **Store keys securely** using proper key management systems
+### 密钥安全
+- **切勿在环境或团队成员之间共享私钥**
+- **针对不同环境（开发、登台、生产）使用不同的密钥**
+- **定期轮换钥匙**（建议：每 6-12 个月一次）
+- **使用适当的密钥管理系统安全地存储密钥**
 
-### Bundle Security
-- **Always verify** bundle integrity after decryption
-- **Monitor** for unusual download patterns or failures
-- **Use HTTPS** for all bundle URLs (required for mobile apps)
-- **Implement** proper error handling for decryption failures
+### 捆绑安全
+- **解密后始终验证**包完整性
+- **监控**异常下载模式或失败
+- **对所有捆绑包 URL 使用 HTTPS**（移动应用程序必需）
+- **针对解密失败实施**正确的错误处理
 
-### Access Control
-- **Limit access** to encryption keys to authorized personnel only
-- **Use role-based access** for key management operations
-- **Audit** key usage and access regularly
-- **Implement** proper backup and recovery procedures
+### 访问控制
+- **仅允许授权人员访问**加密密钥
+- **使用基于角色的访问**进行密钥管理操作
+- **定期审核**密钥使用和访问
+- **实施**正确的备份和恢复程序
 
-## Troubleshooting Encryption
+## 加密故障排除
 
-### Common Issues
+### 常见问题
 
-**Decryption failures:**
-- Verify the private key matches the public key used for encryption
-- Check that the `ivSessionKey` is correct
-- Ensure you're using Encryption V2 (V1 is no longer supported)
+**解密失败：**
+- 验证私钥与用于加密的公钥匹配
+- 检查 `ivSessionKey` 是否正确
+- 确保您使用加密 V2（不再支持 V1）**与键相关的错误：**
+- 确认私钥格式正确（PEM格式）
+- 验证密钥在存储/传输过程中没有损坏
+- 检查该密钥在您的应用程序配置中是否具有适当的权限
 
-**Key-related errors:**
-- Confirm the private key format is correct (PEM format)
-- Verify the key hasn't been corrupted during storage/transfer
-- Check that the key has proper permissions in your app configuration
+**性能问题：**
+- 大包可能需要更长的时间来加密/解密
+- 考虑使用 Delta（清单）更新来减少包大小
+- 解密期间监控设备性能
 
-**Performance issues:**
-- Large bundles may take longer to encrypt/decrypt
-- Consider using differential updates to reduce bundle sizes
-- Monitor device performance during decryption
+### 调试命令
 
-### Debug Commands
-
-Check encryption status:
+检查加密状态：
 ```shell
 npx @capgo/cli@latest app debug
 ```
 
-Test encryption/decryption workflow:
+测试加密/解密工作流程：
 ```shell
 # Test the complete workflow: zip → encrypt → decrypt → unzip
 npx @capgo/cli@latest bundle zip com.example.app --key-v2
@@ -308,37 +301,37 @@ npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM --json
 npx @capgo/cli@latest bundle decrypt ./encrypted-bundle.zip IV_SESSION_KEY
 ```
 
-## Compliance and Standards
+## 合规性和标准
 
-Capgo's encryption implementation follows industry standards:
+Capgo 的加密实现遵循行业标准：
 
-- **AES-256**: FIPS 140-2 approved encryption algorithm
-- **RSA-4096**: Strong asymmetric encryption for key protection
-- **GCM Mode**: Provides both confidentiality and authenticity
-- **Secure Random**: Cryptographically secure random number generation
+- **AES-256**：FIPS 140-2 批准的加密算法
+- **RSA-4096**：用于密钥保护的强非对称加密
+- **GCM 模式**：提供机密性和真实性
+- **安全随机**：加密安全随机数生成
 
-This makes Capgo suitable for applications requiring compliance with:
-- GDPR (General Data Protection Regulation)
-- HIPAA (Health Insurance Portability and Accountability Act)
-- SOC 2 (Service Organization Control 2)
-- ISO 27001 (Information Security Management)
+这使得 Capgo 适合需要符合以下要求的应用程序：
+- GDPR（通用数据保护条例）
+- HIPAA（健康保险流通与责任法案）
+- SOC 2（服务组织控制2）
+- ISO 27001（信息安全管理）
 
-## Performance Considerations
+## 性能考虑因素
 
-### Encryption Overhead
-- **Bundle size**: Encrypted bundles are slightly larger (~1-2% overhead)
-- **Processing time**: Encryption/decryption adds minimal latency
-- **Memory usage**: Temporary increase during encryption/decryption operations
+### 加密开销
+- **捆绑包大小**：加密捆绑包稍大（约 1-2% 开销）
+- **处理时间**：加密/解密增加了最小的延迟
+- **内存使用**：加密/解密操作期间临时增加
 
-### Optimization Tips
-- Use differential updates to minimize encrypted data transfer
-- Optimize your bundle size by converting images to WebP format
-- Minimize JavaScript and CSS files before bundling
-- Remove unused dependencies and code
-- Monitor device performance on older/slower devices
+### 优化技巧
+- 使用 Delta（清单）更新来最大程度地减少加密数据传输
+- 通过将图像转换为 WebP 格式来优化捆绑包大小
+- 捆绑前最小化 JavaScript 和 CSS 文件
+- 删除未使用的依赖项和代码
+- 监控较旧/较慢设备上的设备性能
 
-## Next Steps
+## 后续步骤
 
-- Learn about [Custom Storage](/docs/live-updates/custom-storage/) to use encryption with your own infrastructure
-- Explore [Channels](/docs/live-updates/channels/) to manage encrypted bundles across environments
-- Set up [CI/CD Integration](/docs/getting-started/cicd-integration/) to automate encrypted deployments
+- 了解[自定义存储](/docs/live-updates/custom-storage/)，以便在您自己的基础设施中使用加密
+- 探索[频道](/docs/live-updates/channels/)以管理跨环境的加密包
+- 设置 [CI/CD 集成](/docs/getting-started/cicd-integration/) 以自动执行加密部署

@@ -1,26 +1,25 @@
 ---
-title: Getting Started
+title: はじめる
 description: >-
-  Learn how to install and configure the Capacitor Shake plugin to detect shake
-  gestures and create interactive experiences in your app.
+  Capacitor Shake プラグインをインストールして構成して、シェイク
+  ジェスチャを検出し、アプリでインタラクティブなエクスペリエンスを作成する方法を学びます。
 sidebar:
   order: 2
 locale: ja
 ---
-
 import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **パッケージをインストールします**
    <PackageManagers pkg="@capgo/capacitor-shake" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **ネイティブ プロジェクトと同期**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure the plugin**
+3. **プラグインを設定します**
 
-   **Basic Usage Example:**
+   **基本的な使用例:**
    ```typescript
    import { Shake } from '@capgo/capacitor-shake';
 
@@ -34,7 +33,7 @@ import { PackageManagers } from 'starlight-package-managers'
    });
    ```
 
-   **Sensitivity Configuration:**
+   **感度設定:**
    ```typescript
    // Configure shake sensitivity
    await Shake.start({
@@ -44,14 +43,14 @@ import { PackageManagers } from 'starlight-package-managers'
 
    <Tabs>
      <TabItem label="iOS">
-       No additional setup required for iOS.
+       iOS には追加の設定は必要ありません。
      </TabItem>
      <TabItem label="Android">
-       No additional setup required for Android.
+       Android には追加の設定は必要ありません。
      </TabItem>
    </Tabs>
 
-4. **Stop listening for shakes**
+4. **揺れを聞くのをやめる**
    ```typescript
    // Stop shake detection when not needed
    await Shake.stop();
@@ -63,7 +62,7 @@ import { PackageManagers } from 'starlight-package-managers'
    handle.remove();
    ```
 
-5. **Example implementation**
+5. **実装例**
    ```typescript
    import { Shake } from '@capgo/capacitor-shake';
    import { App } from '@capacitor/app';
@@ -106,26 +105,26 @@ import { PackageManagers } from 'starlight-package-managers'
    ```
 </Steps>
 
-## API Reference
+## API リファレンス
 
-### Methods
+### メソッド
 
 #### `start(options?: ShakeOptions)`
-Start listening for shake gestures.
+シェイクジェスチャーを聞き始めます。
 
-**Parameters:**
-- `options` (optional): Configuration object
-  - `threshold`: number - Sensitivity threshold (default: 3.5)
+**パラメータ:**
+- `options` (オプション): 設定オブジェクト
+  - `threshold`: 数値 - 感度のしきい値 (デフォルト: 3.5)
 
 #### `stop()`
-Stop listening for shake gestures.
+シェイクジェスチャーを聞くのをやめてください。
 
 #### `addListener('shake', callback: () => void)`
-Add a listener for shake events.
+シェイクイベントのリスナーを追加します。
 
-**Returns:** Promise with a handle to remove the listener
+**戻り値:** リスナーを削除するハンドルを指定した Promise
 
-### Interfaces
+### インターフェース
 
 ```typescript
 interface ShakeOptions {
@@ -133,32 +132,32 @@ interface ShakeOptions {
 }
 ```
 
-## Platform Notes
+## プラットフォームに関する注意事項
 
 ### iOS
-- Uses the device's accelerometer to detect shake gestures
-- Works in both foreground and background (if app has background permissions)
+- デバイスの加速度計を使用してシェイク ジェスチャを検出します
+- フォアグラウンドとバックグラウンドの両方で動作します (アプリにバックグラウンド権限がある場合)
 
 ### Android
-- Uses the SensorManager to detect shake events
-- Requires no special permissions
-- Works when app is in foreground
+- SensorManager を使用してシェイク イベントを検出します
+- 特別な権限は必要ありません
+- アプリがフォアグラウンドにあるときに動作します
 
-## 一般的なユースケース
+## 一般的な使用例
 
-1. **デバッグメニュー**: デバイスが揺れたときに開発者オプションを表示
-2. **フィードバック**: フィードバックフォームまたはバグレポートをトリガー
-3. **更新**: アプリデータを更新またはキャッシュをクリア
-4. **ゲーム**: ゲーム制御メカニズムとしてシェイクを使用
-5. **元に戻す**: シェイク-元に戻す機能を実装
+1. **デバッグ メニュー**: デバイスをシェイクしたときに開発者向けオプションを表示します
+2. **フィードバック**: フィードバック フォームまたはバグ レポートをトリガーします。
+3. **更新**: アプリのデータを更新するか、キャッシュをクリアします
+4. **ゲーム**: ゲーム制御メカニズムとしてシェイクを使用する
+5. **元に戻す**: シェイクして元に戻す機能を実装します。
 
-## Troubleshooting
+## トラブルシューティング
 
-**Shake not detected:**
-- Ensure the plugin is started with `Shake.start()`
-- Try adjusting the threshold value (lower = more sensitive)
-- Check that listeners are properly registered
+**シェイクが検出されませんでした:**
+- プラグインが `Shake.start()` で開始されていることを確認してください
+- しきい値を調整してみてください (低いほど感度が高くなります)
+- リスナーが正しく登録されていることを確認します
 
-**Too sensitive/not sensitive enough:**
-- Adjust the `threshold` parameter in `start()` options
-- Values typically range from 2.0 (very sensitive) to 5.0 (less sensitive)
+**敏感すぎる/十分に敏感ではない:**
+- `start()` オプションの `threshold` パラメータを調整します
+- 値の範囲は通常、2.0 (非常に敏感) から 5.0 (あまり敏感ではない) です。

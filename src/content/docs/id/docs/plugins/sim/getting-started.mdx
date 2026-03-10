@@ -1,30 +1,27 @@
 ---
-title: Getting Started
-description: >-
-  Retrieve SIM card details and handle runtime permissions with the Capgo SIM
-  plugin.
+title: Memulai
+description: Ambil detail kartu SIM dan tangani izin runtime dengan plugin SIM Capgo.
 sidebar:
   order: 2
 locale: id
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the plugin**
+1. **Instal pluginnya**
    <PackageManagers pkg="@capgo/capacitor-sim" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync platforms**
+2. **Sinkronisasi platform**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Permissions
+## Izin
 
-- **Android**: Ensure `android.permission.READ_PHONE_STATE` (and on Android 13+, `READ_BASIC_PHONE_STATE`) is granted. Capacitor includes the manifest declarations, but you must request the permission before calling `getSimCards`.
-- **iOS**: Carrier information is available automatically; the platform does not prompt for additional permissions. Be mindful of the limited data returned on iOS 16.4+ due to OS restrictions.
+- **Android**: Pastikan `android.permission.READ_PHONE_STATE` (dan pada Android 13+, `READ_BASIC_PHONE_STATE`) diberikan. Capacitor menyertakan deklarasi manifes, namun Anda harus meminta izin sebelum menelepon `getSimCards`.
+- **iOS**: Informasi operator tersedia secara otomatis; platform tidak meminta izin tambahan. Perhatikan terbatasnya data yang dikembalikan pada iOS 16.4+ karena pembatasan OS.
 
-## Request runtime access (Android)
+## Minta akses waktu proses (Android)
 
 ```typescript
 import { Sim } from '@capgo/capacitor-sim';
@@ -38,7 +35,7 @@ if (status.readSimCard !== 'granted') {
 }
 ```
 
-## Read SIM cards
+## Baca kartu SIM
 
 ```typescript
 const { simCards } = await Sim.getSimCards();
@@ -54,8 +51,8 @@ simCards.forEach((card, index) => {
 });
 ```
 
-## Platform considerations
+## Pertimbangan platform
 
-- **Dual SIM devices**: Iterate through the returned array; each entry corresponds to a slot. When present, `subscriptionId` helps you interact with Android's telephony APIs.
-- **iOS 16.4+**: Apple redacts several carrier attributes. Expect placeholder values (`--`, `65535`) and plan fallbacks in your UI.
-- **Web**: The plugin resolves with empty data because browsers cannot access SIM information.
+- **Perangkat SIM ganda**: Melakukan iterasi melalui array yang dikembalikan; setiap entri sesuai dengan slot. Saat ini, `subscriptionId` membantu Anda berinteraksi dengan API telepon Android.
+- **iOS 16.4+**: Apple menyunting beberapa atribut operator. Harapkan nilai placeholder (`--`, `65535`) dan rencanakan penggantian di UI Anda.
+- **Web**: Plugin mengatasi data kosong karena browser tidak dapat mengakses informasi SIM.

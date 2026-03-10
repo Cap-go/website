@@ -1,52 +1,51 @@
 ---
-title: iOS App Store Review Guidelines for IAP
+title: iOS App Store Pedoman Peninjauan untuk IAP
 description: >-
-  Complete guide to passing App Store review with in-app purchases and
-  subscriptions, including common rejection reasons and best practices.
+  Panduan lengkap untuk lulus ulasan App Store dengan pembelian dalam aplikasi
+  dan langganan, termasuk alasan penolakan umum dan praktik terbaik.
 sidebar:
   order: 10
 locale: id
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 
-Untuk mendapatkan persetujuan aplikasi Anda di App Store memerlukan perhatian cermat terhadap pedoman Apple, terutama saat menerapkan pembelian dalam aplikasi dan langganan. Panduan ini mencakup semua yang perlu Anda ketahui untuk lulus review pada pengajuan pertama Anda.
+Agar aplikasi Anda disetujui di App Store memerlukan perhatian yang cermat terhadap pedoman Apple, terutama saat menerapkan pembelian dalam aplikasi dan langganan. Panduan ini mencakup semua yang perlu Anda ketahui agar dapat lulus tinjauan pada kiriman pertama Anda.
 
-![iOS App Store Review Process](/native-purchases/review-guides/ios-review-hero.webp)
+![iOS App Store Proses Peninjauan](/native-purchases/review-guides/ios-review-hero.webp)
 
 ## Persyaratan Pembelian Dalam Aplikasi
 
 ### Transparansi Harga (Kritis)
 
-Apple memerlukan pengungkapan harga yang sangat jelas sebelum pembelian apa pun:
+Apple memerlukan pengungkapan harga yang jelas sebelum pembelian apa pun:
 
-**Elemen yang Harus Ada:**
+**Elemen yang Harus Dimiliki:**
 - Tampilkan harga pastinya sebelum tombol pembelian
-- Tampilkan frekuensi penagihan (misalnya, "$9.99/bulan")
-- Nyatakan dengan jelas apa yang diperoleh pengguna untuk uang mereka
-- Tunjukkan kapan penagihan akan terjadi
+- Tampilkan frekuensi penagihan (mis., "$9,99/bulan")
+- Nyatakan dengan jelas apa yang diperoleh pengguna dari uang mereka
+- Tunjukkan kapan tagihan akan terjadi
 
 **Penolakan Umum:**
-> "Harga langganan harus jelas dan terbuka."
+> "Harga berlangganan harus jelas dan dimuka."
 
-:::caution Konsistensi Harga
+:::hati-hati Konsistensi Harga
 Semua harga harus cocok di:
-- Daftar metadata App Store
+- App Store daftar metadata
 - Layar pembelian dalam aplikasi
 - Layar manajemen langganan
 
-Bahkan perbedaan $1 antara daftar toko ($4,99) dan aplikasi ($5,99) akan memicu penolakan otomatis.
+Bahkan perbedaan $1 antara listingan toko ($4,99) dan aplikasi ($5,99) akan memicu penolakan otomatis.
 :::
 
-### Presentasi Paket Langganan
+### Presentasi Paket Berlangganan
 
 **Pengungkapan yang Diperlukan:**
-- Semua tingkat langganan yang tersedia ditampilkan bersama
-- Perbandingan fitur yang jelas per tingkat
-- Tidak ada pengaturan default ke tingkat premium melalui trik UI
-- Instruksi pembatalan yang mudah ditemukan
+- Semua tingkatan berlangganan yang tersedia ditampilkan bersama
+- Perbandingan fitur per tingkat yang jelas
+- Tidak ada default otomatis ke tingkat premium melalui trik UI
+- Petunjuk pembatalan yang mudah ditemukan
 
-![UI Design Dos and Don'ts](/native-purchases/review-guides/ui-design-dos-donts.webp)
+![Anjuran dan Larangan Desain UI](/native-purchases/review-guides/ui-design-dos-donts.webp)
 
 **Contoh UI yang Sesuai:**
 ```typescript
@@ -55,34 +54,34 @@ import { NativePurchases } from '@capgo/native-purchases';
 function SubscriptionScreen() {
   return (
     <div>
-      <h2>Pilih Paket Anda</h2>
+      <h2>Choose Your Plan</h2>
 
-      {/* Tampilkan semua tingkat dengan setara */}
+      {/* Show all tiers equally */}
       <PlanCard
         title="Basic"
-        price="$4.99/bulan"
+        price="$4.99/month"
         features={['Feature A', 'Feature B']}
       />
       <PlanCard
         title="Premium"
-        price="$9.99/bulan"
+        price="$9.99/month"
         features={['All Basic', 'Feature C', 'Feature D']}
-        highlighted={false} // Jangan paksa premium
+        highlighted={false} // Don't force premium
       />
 
-      {/* Info pembatalan yang jelas */}
+      {/* Clear cancellation info */}
       <Text>
-        Batalkan kapan saja di Settings > Subscriptions.
-        Tidak ada pengembalian dana untuk periode parsial.
+        Cancel anytime in Settings > Subscriptions.
+        No refunds for partial periods.
       </Text>
     </div>
   );
 }
 ```
 
-### Pulihkan Pembelian
+### Mengembalikan Pembelian
 
-**Implementasi yang Diperlukan:**
+**Penerapan yang Diperlukan:**
 
 Setiap aplikasi dengan IAP harus menyediakan cara bagi pengguna untuk memulihkan pembelian sebelumnya tanpa menghubungi dukungan.
 
@@ -120,53 +119,53 @@ async function restorePurchases() {
   }
 }
 
-// Tambahkan tombol "Restore Purchases" yang terlihat
+// Add a visible "Restore Purchases" button
 <Button onClick={restorePurchases}>
-  Pulihkan Pembelian
+  Restore Purchases
 </Button>
 ```
 
-## Alasan Penolakan Umum
+## Alasan Umum Penolakan
 
-### 1. Aplikasi Crash atau Fungsionalitas Rusak
+### 1. Aplikasi Crash atau Fungsinya Rusak
 
 **Mengapa Gagal:**
-- Aplikasi crash saat diluncurkan
+- Aplikasi mogok saat diluncurkan
 - Alur pembelian gagal diselesaikan
-- Fitur yang ditampilkan di tangkapan layar tidak berfungsi
+- Fitur yang ditampilkan pada tangkapan layar tidak berfungsi
 
 **Pencegahan:**
 - Uji pada perangkat nyata (bukan hanya simulator)
-- Uji semua alur langganan dari awal hingga akhir
-- Verifikasi validasi kwitansi berfungsi
+- Uji semua aliran langganan dari ujung ke ujung
+- Verifikasi validasi tanda terima berfungsi
 - Periksa penanganan kesalahan jaringan
 
 ### 2. Ketidakcocokan Metadata
 
 **Mengapa Gagal:**
-- Tangkapan layar menampilkan fitur yang tidak ada di build saat ini
+- Tangkapan layar menunjukkan fitur yang tidak ada dalam versi saat ini
 - Deskripsi menyebutkan fungsionalitas yang tidak ada
-- Harga di metadata berbeda dari harga dalam aplikasi
+- Harga dalam metadata berbeda dengan harga dalam aplikasi
 
 ![Daftar Periksa Metadata](/native-purchases/review-guides/metadata-checklist.webp)
 
 **Pencegahan:**
 ```typescript
-// Dokumentasikan dengan tepat apa yang ada di setiap tingkat
+// Document exactly what's in each tier
 const SUBSCRIPTION_FEATURES = {
-  basic: ['Tanpa iklan', 'Sinkronisasi cloud', 'Tema dasar'],
-  premium: ['Tanpa iklan', 'Sinkronisasi cloud', 'Semua tema', 'Dukungan prioritas']
+  basic: ['Ad-free', 'Cloud sync', 'Basic themes'],
+  premium: ['Ad-free', 'Cloud sync', 'All themes', 'Priority support']
 };
 
-// Gunakan ini di aplikasi Anda DAN deskripsi App Store
+// Use these in both your app AND App Store description
 ```
 
-### 3. Penjelasan Izin yang Hilang
+### 3. Penjelasan Izin Hilang
 
 **Mengapa Gagal:**
 - Meminta kamera/lokasi/kesehatan tanpa penjelasan
-- Permintaan izin tersembunyi beberapa layar dalam
-- Deskripsi izin yang vague atau generic
+- Permintaan izin mengubur beberapa layar dalam-dalam
+- Deskripsi izin yang tidak jelas atau umum
 
 **Pencegahan:**
 
@@ -174,88 +173,86 @@ Perbarui `Info.plist` Anda dengan penjelasan yang jelas:
 
 ```xml
 <key>NSCameraUsageDescription</key>
-<string>Akses kamera diperlukan untuk memindai barcode produk untuk upgrade langganan cepat.</string>
+<string>Camera access is needed to scan product barcodes for quick subscription upgrades.</string>
 
 <key>NSLocationWhenInUseUsageDescription</key>
-<string>Lokasi membantu kami menampilkan konten lokal yang relevan dalam langganan Premium Anda.</string>
+<string>Location helps us show relevant local content in your Premium subscription.</string>
 ```
 
-### 4. Pemasaran yang Menyesatkan
+### 4. Pemasaran Menyesatkan
 
 **Mengapa Gagal:**
-- Klaim seperti "#1 aplikasi di dunia" tanpa bukti
-- Fitur "Unlimited" yang memiliki batasan tersembunyi
+- Klaim seperti "aplikasi #1 di dunia" tanpa bukti
+- Fitur "Tidak Terbatas" yang memiliki batasan tersembunyi
 - Taktik urgensi palsu ("Hanya tersisa 2 tempat!")
 
-![Contoh Panduan Deskripsi](/native-purchases/review-guides/description-guidelines-1.webp)
+![Contoh Pedoman Deskripsi](/native-purchases/review-guides/description-guidelines-1.webp)
 
-![Panduan Deskripsi Tambahan](/native-purchases/review-guides/description-guidelines-2.webp)
+![Pedoman Deskripsi Tambahan](/native-purchases/review-guides/description-guidelines-2.webp)
 
 **Pencegahan:**
-- Bersifat spesifik dan faktual dalam deskripsi
+- Bersikaplah spesifik dan faktual dalam deskripsi
 - Hindari superlatif tanpa bukti
-- Jangan tekan pengguna dengan kelangkaan palsu
+- Jangan menekan pengguna dengan kelangkaan palsu
 
 ### 5. Proses Pembatalan Tersembunyi
 
 **Mengapa Gagal:**
-- Tidak ada penyebutan tentang cara membatalkan
+- Tidak disebutkan cara membatalkan
 - Tombol pembatalan disembunyikan atau dikaburkan
-- Proses pembatalan multi-langkah tanpa alur native Apple
+- Proses pembatalan multi-langkah tanpa alur asli Apple
 
 **Pencegahan:**
 ```typescript
-// Selalu beritahu pengguna tentang pembatalan
+// Always inform users about cancellation
 function SubscriptionInfo() {
   return (
     <div>
-      <h3>Cara Membatalkan</h3>
+      <h3>How to Cancel</h3>
       <ol>
-        <li>Buka Pengaturan iPhone</li>
-        <li>Ketuk nama Anda di bagian atas</li>
-        <li>Ketuk Langganan</li>
-        <li>Pilih aplikasi ini dan ketuk Batalkan</li>
+        <li>Open iPhone Settings</li>
+        <li>Tap your name at the top</li>
+        <li>Tap Subscriptions</li>
+        <li>Select this app and tap Cancel</li>
       </ol>
 
-      <p>Atau kelola langsung di aplikasi App Store.</p>
+      <p>Or manage directly in the App Store app.</p>
 
       <Button onClick={openSubscriptionManagement}>
-        Kelola Langganan di Pengaturan
+        Manage Subscription in Settings
       </Button>
     </div>
   );
 }
 
 async function openSubscriptionManagement() {
-  // Tautan langsung ke manajemen langganan iOS
+  // Direct link to iOS subscription management
   await NativePurchases.showManageSubscriptions();
 }
-```
+```## Privasi & Penggunaan Data (Bagian 5.1.1)
 
-## Privasi & Penggunaan Data (Bagian 5.1.1)
-
-Apple telah membuat persyaratan privasi jauh lebih ketat pada 2025.
+Apple telah memperketat persyaratan privasi secara signifikan pada tahun 2025.
 
 ### Pengungkapan yang Diperlukan
 
 **Untuk Setiap Izin:**
-1. Mengapa Anda membutuhkannya (kasus penggunaan spesifik)
+1. Mengapa Anda membutuhkannya (kasus penggunaan tertentu)
 2. Kapan akan digunakan
 3. Bagaimana data disimpan/dibagikan
-4. Apakah opsional atau diperlukan
+4. Apakah itu opsional atau wajib
 
-### Contoh: Alur Izin yang Tepat
+### Contoh: Alur Izin yang Benar
 
 ```typescript
 async function requestCameraPermission() {
-  // Tampilkan penjelasan SEBELUM meminta
+  // Show explanation BEFORE requesting
   await showDialog({
-    title: 'Akses Kamera',
-    message: 'Kami memerlukan akses kamera untuk membiarkan Anda memindai barcode untuk pencarian produk cepat. Foto Anda tidak pernah diunggah atau disimpan.',
-    buttons: ['Tidak Sekarang', 'Izinkan']
+    title: 'Camera Access',
+    message: 'We need camera access to let you scan barcodes for quick product lookup. Your photos are never uploaded or stored.',
+    buttons: ['Not Now', 'Allow']
   });
 
-  // Kemudian minta izin
+  // Then request permission
   const result = await Camera.requestPermissions();
   return result.camera === 'granted';
 }
@@ -263,124 +260,122 @@ async function requestCameraPermission() {
 
 ### Label Nutrisi Privasi
 
-Pastikan label privasi App Store Anda secara akurat mencerminkan:
-- Pengumpulan riwayat pembelian
-- Alamat email (untuk kwitansi)
-- ID perangkat (untuk pencegahan penipuan)
+Pastikan label privasi App Store Anda mencerminkan secara akurat:
+- Koleksi riwayat pembelian
+- Alamat email (untuk tanda terima)
+- ID Perangkat (untuk pencegahan penipuan)
 - Data penggunaan (untuk analitik)
 
 :::warning
-Label privasi yang tidak akurat adalah alasan penolakan umum pada 2025. Audit pengumpulan data Anda dengan hati-hati.
+Label privasi yang tidak akurat adalah alasan penolakan yang umum pada tahun 2025. Audit pengumpulan data Anda dengan cermat.
 :::
 
-## Daftar Periksa Pra-Pengajuan
+## Daftar Periksa Pra-Pengiriman
 
-![Daftar Periksa Pra-Pengajuan](/native-purchases/review-guides/pre-submission-checklist.webp)
+![Daftar Periksa Pra-Pengiriman](/native-purchases/review-guides/pre-submission-checklist.webp)
 
 <Steps>
 
 1. **Uji Semua Alur Pembelian**
    - Beli setiap tingkat langganan
    - Uji uji coba gratis
-   - Verifikasi penawaran pengenalan diterapkan dengan benar
-   - Uji pulihkan pembelian
-   - Verifikasi Berbagi Keluarga (jika diaktifkan)
+   - Pastikan penawaran perkenalan berlaku dengan benar
+   - Uji pengembalian pembelian
+   - Verifikasi Keluarga Berbagi (jika diaktifkan)
    - Uji pada beberapa perangkat
 
 2. **Verifikasi Konsistensi Harga**
-   - Periksa metadata App Store cocok dengan harga dalam aplikasi
-   - Verifikasi semua mata uang benar
-   - Konfirmasi durasi uji coba gratis cocok dengan deskripsi
-   - Periksa istilah penawaran pengenalan akurat
+   - Periksa kecocokan metadata App Store dengan harga dalam aplikasi
+   - Pastikan semua mata uang sudah benar
+   - Konfirmasikan durasi uji coba gratis sesuai dengan deskripsi
+   - Periksa apakah ketentuan penawaran perkenalan sudah akurat
 
 3. **Tinjau Semua Salinan**
    - Hapus teks placeholder
    - Verifikasi klaim dapat diuji
    - Periksa tata bahasa dan ejaan
-   - Pastikan deskripsi cocok dengan build saat ini
+   - Pastikan deskripsi sesuai dengan versi saat ini
    - Hapus penyebutan pesaing
 
-4. **Uji Izin**
+4. **Izin Tes**
    - Minta hanya izin yang diperlukan
-   - Tampilkan penjelasan yang jelas sebelum meminta
-   - Uji alur "Tolak" (aplikasi harus tetap berfungsi)
-   - Verifikasi deskripsi Info.plist jelas
+   - Tunjukkan penjelasan yang jelas sebelum meminta
+   - Uji aliran "Tolak" (aplikasi seharusnya tetap berfungsi)
+   - Pastikan deskripsi Info.plist jelas
 
 5. **Siapkan Akun Tes**
-   - Buat akun tes sandbox
-   - Dokumentasikan kredensial login di Catatan Ulasan Aplikasi
-   - Verifikasi akun tes memiliki langganan aktif
-   - Uji bahwa pengulas dapat menyelesaikan alur pembelian
+   - Buat akun pengujian kotak pasir
+   - Dokumen kredensial login di Catatan Tinjauan Aplikasi
+   - Verifikasi akun uji memiliki langganan aktif
+   - Uji apakah pengulas dapat menyelesaikan alur pembelian
 
 6. **Periksa Metadata**
    - Tangkapan layar cocok dengan UI saat ini
    - Video pratinjau aplikasi (jika ada) menunjukkan versi saat ini
-   - Deskripsi secara akurat menggambarkan fitur
-   - Rating usia cocok dengan konten
+   - Deskripsi secara akurat menjelaskan fitur
+   - Peringkat usia cocok dengan konten
    - Kebijakan privasi dapat diakses dalam aplikasi
 
-7. **Tulis Catatan Ulasan Terperinci**
+7. **Tulis Catatan Tinjauan Rinci**
    ```
-   Akun Tes:
+   Test Account:
    Email: reviewer@test.com
    Password: TestPass123!
 
-   Instruksi Pengujian:
-   1. Masuk dengan akun tes di atas
-   2. Ketuk tombol "Upgrade to Premium"
-   3. Pilih langganan "Monthly Premium"
-   4. Lengkapi pembelian (tanpa biaya di sandbox)
-   5. Verifikasi fitur premium terbuka
+   Testing Instructions:
+   1. Log in with test account above
+   2. Tap "Upgrade to Premium" button
+   3. Select "Monthly Premium" subscription
+   4. Complete purchase (no charge in sandbox)
+   5. Verify premium features unlock
 
-   Catatan: Harga langganan ditampilkan dengan jelas sebelum pembelian.
-   Instruksi pembatalan ada di Settings > Account.
+   Note: Subscription pricing is clearly shown before purchase.
+   Cancellation instructions are in Settings > Account.
    ```
 
 </Steps>
 
-## Garis Waktu Ulasan
+## Tinjau Garis Waktu
 
-![Garis Waktu Ulasan App Store](/native-purchases/review-guides/review-timeline.webp)
+![App Store Garis Waktu Peninjauan](/native-purchases/review-guides/review-timeline.webp)
 
 **Ulasan Standar:** 24-48 jam
-**Periode Puncak:** 3-5 hari (rilis liburan App Store)
-**Akhir Pekan:** Tidak ada ulasan diproses
-**Ulasan Dipercepat:** Tersedia untuk perbaikan bug kritis (minta melalui App Store Connect)
+**Periode Puncak:** 3-5 hari (App Store rilis hari libur)
+**Akhir pekan:** Tidak ada ulasan yang diproses
+**Peninjauan yang Dipercepat:** Tersedia untuk perbaikan bug penting (permintaan melalui App Store Connect)
 
 :::tip
-Kirim awal minggu untuk menghindari penundaan akhir pekan. Pengajuan hari Senin biasanya diulas pada Rabu.
+Kirim di awal minggu untuk menghindari penundaan akhir pekan. Pengiriman hari Senin biasanya ditinjau pada hari Rabu.
 :::
 
-## Update Panduan 2025
+## Pembaruan Pedoman 2025
 
 ### Persyaratan Baru
 
-**1. Pengungkapan Fungsionalitas AI**
+**1. Pengungkapan Fungsi AI**
 Jika aplikasi Anda menggunakan AI untuk fitur apa pun, Anda harus:
-- Berikan label jelas untuk konten yang dihasilkan AI
+- Beri label yang jelas pada konten yang dihasilkan AI
 - Jelaskan bagaimana AI digunakan
-- Dokumentasikan tindakan keselamatan konten
+- Dokumentasikan langkah-langkah keamanan konten
 
 **2. Kejelasan Langganan yang Ditingkatkan**
-- Perbandingan rencana berdampingan diperlukan
+- Diperlukan perbandingan rencana berdampingan
 - Tidak ada "pola gelap" yang menyembunyikan opsi yang lebih murah
-- Jalur downgrade/upgrade yang jelas
+- Hapus jalur downgrade/upgrade
 
 **3. Intensifikasi Privasi**
-- Penegakan Bagian 5.1.1 meningkat
-- Pengawasan lebih pada pembenaran pengumpulan data
-- Persyaratan lebih ketat untuk aplikasi anak-anak
+- Penegakan Pasal 5.1.1 ditingkatkan
+- Pengawasan lebih cermat terhadap justifikasi pengumpulan data
+- Persyaratan yang lebih ketat untuk aplikasi anak-anak
 
-### Apa yang Berubah dari 2024
-
-- Pengajuan modular sekarang diperbolehkan (perbarui halaman produk secara independen)
-- Acara dalam aplikasi dapat diajukan secara terpisah
-- Penegakan UI langganan yang menyesatkan lebih ketat
+### Yang Berubah dari tahun 2024- Pengiriman modular sekarang diperbolehkan (perbarui halaman produk secara mandiri)
+- Acara dalam aplikasi dapat dikirimkan secara terpisah
+- Penegakan yang lebih ketat terhadap UI langganan yang menyesatkan
 - Panduan baru tentang aplikasi cryptocurrency/NFT
 
-## Praktik Terbaik untuk Plugin Native Purchases
+## Praktik Terbaik untuk Plugin Pembelian Asli
 
-### Implementasikan Penanganan Kesalahan yang Tepat
+### Menerapkan Penanganan Kesalahan yang Benar
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -392,30 +387,30 @@ async function handlePurchase(productId: string) {
       productType: PURCHASE_TYPE.SUBS,
     });
 
-    // Sukses
+    // Success
     await validateReceiptOnServer(transaction.receipt);
-    showSuccess('Langganan diaktifkan!');
+    showSuccess('Subscription activated!');
     unlockFeatures();
 
   } catch (error: any) {
-    // Tangani kasus kesalahan spesifik
+    // Handle specific error cases
     if (error.code === 'USER_CANCELLED') {
-      // Pengguna membatalkan - jangan tampilkan kesalahan
-      console.log('Pembelian dibatalkan oleh pengguna');
+      // User cancelled - don't show error
+      console.log('Purchase cancelled by user');
     } else if (error.code === 'PAYMENT_PENDING') {
-      showInfo('Pembayaran tertunda. Silakan periksa kembali nanti.');
+      showInfo('Payment is pending. Please check back later.');
     } else if (error.code === 'PRODUCT_ALREADY_PURCHASED') {
-      // Pulihkan sebagai gantinya
+      // Restore instead
       await NativePurchases.restorePurchases();
     } else {
-      // Tampilkan kesalahan yang ramah pengguna
-      showError('Tidak dapat menyelesaikan pembelian. Silakan coba lagi.');
+      // Show user-friendly error
+      showError('Unable to complete purchase. Please try again.');
     }
   }
 }
 ```
 
-### Tampilkan Status Pemuatan
+### Menampilkan Status Pemuatan
 
 ```typescript
 function PurchaseButton({ productId }: { productId: string }) {
@@ -432,33 +427,33 @@ function PurchaseButton({ productId }: { productId: string }) {
 
   return (
     <button onClick={handlePurchase} disabled={loading}>
-      {loading ? 'Memproses...' : 'Berlangganan Sekarang'}
+      {loading ? 'Processing...' : 'Subscribe Now'}
     </button>
   );
 }
 ```
 
-### Tampilkan Istilah dengan Jelas
+### Tunjukkan Ketentuan dengan Jelas
 
 ```typescript
 function SubscriptionTerms() {
   return (
     <div className="terms">
       <p>
-        Langganan secara otomatis diperbaharui kecuali dibatalkan paling lambat 24 jam
-        sebelum akhir periode saat ini.
+        Subscription automatically renews unless cancelled at least 24 hours
+        before the end of the current period.
       </p>
       <p>
-        Akun Anda akan dikenakan biaya untuk pembaruan dalam 24 jam sebelum
-        akhir periode saat ini.
+        Your account will be charged for renewal within 24 hours prior to
+        the end of the current period.
       </p>
       <p>
-        Langganan dapat dikelola oleh pengguna dan pembaruan otomatis dapat
-        dimatikan di Pengaturan Akun setelah pembelian.
+        Subscriptions may be managed by the user and auto-renewal may be
+        turned off in Account Settings after purchase.
       </p>
       <p>
-        <a href="/terms">Syarat Layanan</a> |
-        <a href="/privacy">Kebijakan Privasi</a>
+        <a href="/terms">Terms of Service</a> |
+        <a href="/privacy">Privacy Policy</a>
       </p>
     </div>
   );
@@ -467,77 +462,77 @@ function SubscriptionTerms() {
 
 ## Jika Aplikasi Anda Ditolak
 
-### Langkah untuk Menyelesaikan
+### Langkah-langkah untuk Mengatasinya
 
 <Steps>
 
-1. **Baca penolakan dengan hati-hati**
-   - Catat panduan spesifik yang dikutip (misalnya, 3.1.1, 5.1.1)
+1. **Baca penolakan dengan cermat**
+   - Perhatikan pedoman spesifik yang dikutip (misalnya, 3.1.1, 5.1.1)
    - Pahami dengan tepat apa yang ditandai Apple
 
-2. **Perbaiki masalah secara menyeluruh**
-   - Jangan hanya patch - perbaiki akar penyebabnya
-   - Uji perbaikan secara ekstensif
+2. **Perbaiki masalah ini secara menyeluruh**
+   - Jangan hanya menambal – memperbaiki akar permasalahan
+   - Uji perbaikannya secara ekstensif
    - Dokumentasikan apa yang Anda ubah
 
-3. **Respons di Pusat Resolusi**
+3. **Respon di Pusat Resolusi**
    ```
-   Terima kasih atas masukan Anda. Saya telah mengatasi masalahnya:
+   Thank you for your feedback. I have addressed the issue:
 
-   Masalah: Harga langganan tidak jelas di awal
+   Issue: Subscription pricing not clear upfront
 
-   Perbaikan: Menambahkan tampilan harga eksplisit pada layar pemilihan
-   langganan yang menunjukkan "$9.99/bulan" sebelum tombol pembelian. Juga menambahkan
-   instruksi pembatalan di layar yang sama.
+   Fix: Added explicit pricing display on subscription selection
+   screen showing "$9.99/month" before purchase button. Also added
+   cancellation instructions on the same screen.
 
-   Perubahan ada dalam pengajuan ini dan dapat diuji menggunakan
-   akun tes yang disediakan.
+   The changes are in this submission and can be tested using the
+   provided test account.
    ```
 
-4. **Ajukan kembali dengan cepat**
-   - Pengajuan ulang biasanya ditinjau lebih cepat
-   - Biasanya dalam 24 jam
+4. **Kirim ulang segera**
+   - Pengiriman ulang biasanya ditinjau lebih cepat
+   - Biasanya dalam waktu 24 jam
 
 </Steps>
 
 ### Proses Banding
 
-Jika Anda percaya penolakan tidak benar:
+Jika Anda yakin penolakan tersebut salah:
 
-![Proses Klarifikasi App Store](/native-purchases/review-guides/clarification-process.webp)
+![App Store Proses Klarifikasi](/native-purchases/review-guides/clarification-process.webp)
 
 1. Klik "Banding" di App Store Connect
 2. Berikan bukti yang jelas:
-   - Tangkapan layar yang menunjukkan kepatuhan
-   - Referensi ke pedoman spesifik
+   - Tangkapan layar menunjukkan kepatuhan
+   - Referensi pedoman khusus
    - Penjelasan tentang bagaimana Anda memenuhi persyaratan
 3. Bersikap profesional dan faktual
-4. Sertakan akun tes jika fungsionalitas sulit ditemukan
+4. Sertakan akun pengujian jika fungsinya sulit ditemukan
 
 ![Contoh Permintaan Dokumen](/native-purchases/review-guides/request-documents.webp)
 
 ## Sumber Daya Tambahan
 
-- [Panduan Ulasan App Store Apple](https://developer.apple.com/app-store/review/guidelines/)
-- [Panduan Pembelian Dalam Aplikasi](https://developer.apple.com/app-store/review/guidelines/#in-app-purchase)
+- [Apple App Store Pedoman Peninjauan](https://developer.apple.com/app-store/review/guidelines/)
+- [Pedoman Pembelian Dalam Aplikasi](https://developer.apple.com/app-store/review/guidelines/#in-app-purchase)
 - [Praktik Terbaik Langganan](https://developer.apple.com/app-store/subscriptions/)
-- [Bantuan App Store Connect](https://developer.apple.com/help/app-store-connect/)
+- [App Store Connect Bantuan](https://developer.apple.com/help/app-store-connect/)
 
 ## Dukungan
 
 Jika Anda masih mengalami masalah:
-- Tinjau [dokumentasi Native Purchases](/docs/plugins/native-purchases/getting-started/)
+- Tinjau [dokumentasi Pembelian Asli](/docs/plugins/native-purchases/getting-started/)
 - Periksa [masalah pemecahan masalah umum](/docs/plugins/native-purchases/getting-started/#troubleshooting)
-- Hubungi Dukungan Apple Developer untuk klarifikasi pedoman
+- Hubungi Dukungan Pengembang Apple untuk klarifikasi pedoman
 
 ### Butuh Bantuan Ahli?
 
-Kesulitan dengan ulasan aplikasi atau memerlukan bantuan personal? **[Pesan panggilan konsultasi dengan tim kami](https://cal.com/team/capgo/capacitor-consulting-services)** untuk dukungan khusus dengan:
+Berjuang dengan peninjauan aplikasi atau butuh bantuan yang dipersonalisasi? **[Pesan panggilan konsultasi dengan tim kami](https://cal.com/team/capgo/capacitor-consulting-services)** untuk mendapatkan dukungan khusus dengan:
 
-- Tinjauan dan optimisasi implementasi IAP
-- Persiapan ulasan App Store dan strategi
-- Tinjauan daftar periksa pengajuan
+- Tinjauan dan optimalisasi implementasi IAP
+- App Store meninjau persiapan dan strategi
+- Tinjauan daftar periksa penyerahan
 - Resolusi penolakan dan banding
-- Pengujian dan validasi lengkap
+- Selesaikan pengujian dan validasi
 
-Para ahli kami telah berhasil membantu ratusan aplikasi lulus ulasan!
+Pakar kami telah berhasil membantu ratusan aplikasi lolos peninjauan!

@@ -1,45 +1,46 @@
 ---
 title: Bundles
-description: '앱 업데이트 패키지의 목록 표시, 삭제, 버전 관리 및 스토리지 최적화를 다루는 Capgo Bundles 관리를 위한 상세 가이드.'
+description: 'Capgo 번들 관리에 대한 자세한 가이드로, 앱 업데이트 패키지의 나열, 삭제, 번들(버전) 관리, 저장소 최적화를 다룹니다.'
 sidebar:
   order: 8
 locale: ko
 ---
+번들은 Capgo의 핵심 업데이트 패키지입니다. 각 번들에는 앱 콘텐츠를 구성하는 웹 자산(HTML, CSS, JS)이 포함되어 있습니다. API 번들을 사용하면 이러한 업데이트 패키지 나열 및 삭제를 포함하여 관리할 수 있습니다.
 
-Bundles는 Capgo의 핵심 업데이트 패키지입니다. 각 번들에는 앱의 콘텐츠를 구성하는 웹 자산(HTML, CSS, JS)이 포함됩니다. Bundles API를 사용하면 목록 표시 및 삭제를 포함하여 이러한 업데이트 패키지를 관리할 수 있습니다.
+## 번들 이해하기
 
-## Bundles 이해하기
+번들은 앱 웹 콘텐츠의 특정 번들(버전)을 나타내며 다음을 포함합니다.
+- **번들(버전)**: 번들의 의미론적 버전 번호
+- **체크섬**: 번들 무결성을 확인하기 위한 고유 해시
+- **저장 정보**: 번들이 저장되는 위치와 방법에 대한 세부정보
+- **기본 요구 사항**: 최소 기본 앱 버전 요구 사항
+- **메타데이터**: 생성 시간, 소유권, 기타 추적 정보
 
-번들은 앱의 웹 콘텐츠의 특정 버전을 나타내며 다음을 포함합니다:
-- **Version**: 번들의 시맨틱 버전 번호
-- **Checksum**: 번들 무결성을 검증하기 위한 고유 해시
-- **Storage Info**: 번들이 저장된 위치 및 방법에 대한 세부 정보
-- **Native Requirements**: 네이티브 앱의 최소 버전 요구 사항
-- **Metadata**: 생성 시간, 소유권 및 기타 추적 정보
+## 수동 번들 생성(CLI 제외)
 
-## 수동 Bundle 생성 (CLI 없이)
+Capgo CLI을 사용하지 않고 수동으로 번들을 생성하고 업로드하는 방법은 다음과 같습니다.
 
-Capgo CLI를 사용하지 않고 수동으로 번들을 생성하고 업로드하는 방법:
+### 1단계: 앱 구축
 
-### 단계 1: 앱 빌드하기
-
-먼저 앱의 웹 자산을 빌드합니다:
+먼저 앱의 웹 자산을 구축합니다.
 
 ```bash
 npm run build
 ```
 
-### 단계 2: Capgo CLI와 동일한 패키지를 사용하여 Bundle Zip 생성
+### 2단계: Capgo CLI과 동일한 패키지를 사용하여 번들 Zip 생성
 
-**중요**: 호환성을 보장하기 위해 Capgo CLI가 내부적으로 사용하는 것과 정확히 동일한 JavaScript 패키지를 사용하세요.
+**중요**: 호환성을 보장하기 위해 Capgo CLI가 내부적으로 사용하는 것과 정확히 동일한 JavaScript 패키지를 사용하십시오.
 
-#### 필요한 패키지 설치
+#### 필수 패키지 설치
 
 ```bash
 npm install adm-zip @tomasklaen/checksum
 ```
 
-#### JavaScript로 Zip Bundle 생성 (Capgo CLI와 동일)
+#### JavaScript을 사용하여 Zip 번들 생성(Capgo CLI과 동일)
+
+참고: 아래 예에서 `version`는 API에서 사용되는 번들(버전) 이름을 나타냅니다.
 
 ```javascript
 const fs = require('node:fs');
@@ -119,7 +120,7 @@ async function main() {
 main();
 ```
 
-### 단계 3: CLI와 동일한 패키지를 사용하여 SHA256 체크섬 계산
+### 3단계: CLI과 동일한 패키지를 사용하여 SHA256 체크섬 계산
 
 ```javascript
 const fs = require('node:fs');
@@ -141,9 +142,9 @@ async function main() {
 main();
 ```
 
-### 단계 4: 스토리지에 Bundle 업로드
+### 4단계: 스토리지에 번들 업로드
 
-Upload your zip file to any web-accessible storage:
+웹에서 액세스할 수 있는 저장소에 zip 파일을 업로드하세요.
 
 ```bash
 # Example: Upload to your server via scp
@@ -158,22 +159,22 @@ curl -X POST https://your-storage-api.com/upload \
   -F "file=@my-app-1.2.3.zip"
 ```
 
-**Important**: Your bundle must be **publicly accessible** via HTTPS URL (no authentication required). Capgo's servers need to download the bundle from this URL.
+**중요**: 번들은 HTTPS URL을 통해 **공개적으로 액세스 가능**해야 합니다(인증 필요 없음). Capgo의 서버는 이 URL에서 번들을 다운로드해야 합니다.
 
-Examples of valid public URLs:
+유효한 공개 URL의 예:
 - `https://your-storage.com/bundles/my-app-1.2.3.zip`
 - `https://github.com/username/repo/releases/download/v1.2.3/bundle.zip`
 - `https://cdn.jsdelivr.net/gh/username/repo@v1.2.3/dist.zip`
 
-### 단계 5: Capgo API에 Bundle 등록
+### 5단계: Capgo API에 번들 등록
 
-Register the external bundle with Capgo using direct API calls:
+직접 API 호출을 사용하여 Capgo에 외부 번들을 등록합니다.
 
 ```javascript
 async function registerWithCapgo(appId, version, bundleUrl, checksum, apiKey) {
   const fetch = require('node-fetch');
   
-  // Create bundle version
+  // Create bundle (version)
   const response = await fetch('https://api.capgo.app/bundle/', {
     method: 'POST',
     headers: {
@@ -201,22 +202,22 @@ async function registerWithCapgo(appId, version, bundleUrl, checksum, apiKey) {
 
 #### API 매개변수
 
-| Parameter | Description | Required |
-|-----------|-------------|----------|
-| `app_id` | Your app identifier | Yes |
-| `version` | Semantic version (e.g., "1.2.3") | Yes |
-| `external_url` | **Publicly accessible** HTTPS URL where bundle can be downloaded (no auth required) | Yes |
-| `checksum` | SHA256 checksum of the zip file | Yes |
+| 매개변수 | 설명 | 필수 |
+|------------|-------------|----------|
+| `app_id` | 앱 식별자 | 예 |
+| `version` | 번들(버전) 의미 버전(예: "1.2.3") | 예 |
+| `external_url` | **공개적으로 액세스 가능** 번들을 다운로드할 수 있는 HTTPS URL(인증 필요 없음) | 예 |
+| `checksum` | zip 파일의 SHA256 체크섬 | 예 |
 
-## Bundle 구조 요구사항
+## 번들 구조 요구사항
 
-Your bundle zip must follow these requirements:
+번들 zip은 다음 요구 사항을 따라야 합니다.
 
-1. **Root Index File**: Must have `index.html` at the root level
-2. **Capacitor Integration**: Must call `notifyAppReady()` in your app code
-3. **Asset Paths**: Use relative paths for all assets
+1. **루트 인덱스 파일**: 루트 수준에 `index.html`이 있어야 합니다.
+2. **Capacitor 통합**: 앱 코드에서 `notifyAppReady()`을 호출해야 합니다.
+3. **자산 경로**: 모든 자산에 대해 상대 경로를 사용합니다.
 
-### 유효한 Bundle 구조
+### 유효한 번들 구조
 
 ```
 bundle.zip
@@ -227,9 +228,9 @@ bundle.zip
 └── images/
 ```
 
-## 완전한 수동 워크플로우 예제
+## 완전한 수동 작업흐름 예시
 
-Simple Node.js script to zip, checksum, and upload to Capgo:
+압축, 체크섬 및 Capgo에 업로드하는 간단한 Node.js 스크립트:
 
 ```javascript
 const fs = require('node:fs');
@@ -282,17 +283,17 @@ async function deployToCapgo() {
 deployToCapgo().catch(console.error);
 ```
 
-Install dependencies:
+종속성을 설치합니다.
 
 ```bash
 npm install adm-zip @tomasklaen/checksum node-fetch
 ```
 
-## 체크섬 검증
+## 체크섬 확인
 
-### JavaScript 체크섬 계산 (Capgo CLI와 동일)
+### JavaScript 체크섬 계산(Capgo CLI과 동일)
 
-Use the exact same package and method that Capgo CLI uses internally:
+Capgo CLI가 내부적으로 사용하는 것과 정확히 동일한 패키지 및 방법을 사용하십시오.
 
 ```javascript
 const fs = require('node:fs');
@@ -325,34 +326,32 @@ async function main() {
 }
 
 main();
-```
+```### 체크섬 중요성
 
-### 체크섬의 중요성
+- **번들 무결성**: 전송 중에 번들이 손상되지 않았는지 확인합니다.
+- **API 확인**: Capgo는 번들을 수락하기 전에 체크섬을 확인합니다.
+- **플러그인 확인**: 모바일 플러그인은 업데이트를 적용하기 전에 체크섬을 확인합니다.
 
-- **Bundle Integrity**: Ensures the bundle hasn't been corrupted during transfer
-- **API Verification**: Capgo verifies checksums before accepting bundles
-- **Plugin Verification**: The mobile plugin verifies checksums before applying updates
+## 모범 사례
 
-## Best Practices
+1. **번들(버전) 관리**: 의미론적 버전 관리를 일관되게 사용합니다.
+2. **스토리지 최적화**: 사용하지 않는 번들을 주기적으로 제거
+3. **번들(버전) 호환성**: 적절한 최소 기본 버전 요구 사항을 설정합니다.
+4. **백업 전략**: 중요한 번들(버전)의 백업을 유지합니다.
 
-1. **Version Management**: Use semantic versioning consistently
-2. **Storage Optimization**: Remove unused bundles periodically
-3. **Version Compatibility**: Set appropriate minimum native version requirements
-4. **Backup Strategy**: Maintain backups of critical bundle versions
+## 엔드포인트
 
-## Endpoints
-
-### GET
+### 받기
 
 `https://api.capgo.app/bundle/`
 
-Retrieve bundle information. Returns 50 bundles per page.
+번들 정보를 검색합니다. 페이지당 50개의 번들을 반환합니다.
 
 #### 쿼리 매개변수
-- `app_id`: Required. The ID of your app
-- `page`: Optional. Page number for pagination
+- `app_id`: 필수입니다. 앱의 ID
+- `page`: 선택 사항입니다. 페이지 매김을 위한 페이지 번호
 
-#### 응답 타입
+#### 응답 유형
 
 ```typescript
 interface Bundle {
@@ -409,15 +408,15 @@ curl -H "authorization: your-api-key" \
 }
 ```
 
-### DELETE
+### 삭제
 
 `https://api.capgo.app/bundle/`
 
-Delete one or all bundles for an app. Use with caution as this action cannot be undone.
+앱의 번들 하나 또는 모두를 삭제합니다. 이 작업은 취소할 수 없으므로 주의하여 사용하세요.
 
 #### 쿼리 매개변수
 
-For deleting a specific bundle:
+특정 번들을 삭제하려면:
 ```typescript
 interface BundleDelete {
   app_id: string
@@ -425,14 +424,14 @@ interface BundleDelete {
 }
 ```
 
-For deleting all bundles:
+모든 번들을 삭제하려면:
 ```typescript
 interface BundleDeleteAll {
   app_id: string
 }
 ```
 
-#### 요청 예시s
+#### 요청 예시
 
 ```bash
 # Delete specific bundle
@@ -463,13 +462,13 @@ curl -X DELETE \
 }
 ```
 
-### POST
+### 포스트
 
 `https://api.capgo.app/bundle/`
 
-Create a new bundle with external URL.
+외부 URL을 사용하여 새 번들을 생성합니다.
 
-#### Request Body
+#### 요청 본문
 
 ```typescript
 interface CreateBundleBody {
@@ -503,18 +502,18 @@ curl -X POST \
 }
 ```
 
-### POST (Metadata)
+### POST(메타데이터)
 
 `https://api.capgo.app/bundle/metadata`
 
-Update bundle metadata such as link and comment information.
+링크 및 댓글 정보와 같은 번들 메타데이터를 업데이트합니다.
 
-#### Request Body
+#### 요청 본문
 
 ```typescript
 interface UpdateMetadataBody {
   app_id: string
-  version_id: number
+  version_id: number // bundle (version) id
   link?: string
   comment?: string
 }
@@ -543,18 +542,18 @@ curl -X POST \
 }
 ```
 
-### PUT
+### 넣어
 
 `https://api.capgo.app/bundle/`
 
-Set a bundle to a specific channel. This links a bundle version to a channel for distribution.
+번들을 특정 채널로 설정합니다. 이는 배포용 채널에 번들(버전)을 연결합니다.
 
-#### Request Body
+#### 요청 본문
 
 ```typescript
 interface SetChannelBody {
   app_id: string
-  version_id: number
+  version_id: number // bundle (version) id
   channel_id: number
 }
 ```
@@ -584,7 +583,7 @@ curl -X PUT \
 
 ## 오류 처리
 
-Common error scenarios and their responses:
+일반적인 오류 시나리오 및 대응:
 
 ```json
 // Bundle not found
@@ -593,7 +592,7 @@ Common error scenarios and their responses:
   "status": "KO"
 }
 
-// Invalid version format
+// Invalid bundle (version) format
 {
   "error": "Invalid version format",
   "status": "KO"
@@ -614,16 +613,16 @@ Common error scenarios and their responses:
 
 ## 일반적인 사용 사례
 
-1. **Cleanup Old Versions**
+1. **이전 번들 정리(버전)**
 ```typescript
-// Delete outdated beta versions
+// Delete outdated beta bundles (versions)
 {
   "app_id": "app_123",
   "version": "1.0.0-beta.1"
 }
 ```
 
-2. **App Reset**
+2. **앱 재설정**
 ```typescript
 // Remove all bundles to start fresh
 {
@@ -631,9 +630,9 @@ Common error scenarios and their responses:
 }
 ```
 
-## 스토리지 고려사항
+## 스토리지 고려 사항
 
-1. **Retention Policy**: Define how long to keep old bundles
-2. **Size Management**: Monitor bundle sizes and storage usage
-3. **Backup Strategy**: Consider backing up critical versions
-4. **Cost Optimization**: Remove unnecessary bundles to optimize storage costs 
+1. **보존 정책**: 이전 번들을 보관할 기간을 정의합니다.
+2. **크기 관리**: 번들 크기 및 스토리지 사용량 모니터링
+3. **백업 전략**: 중요한 번들(버전) 백업을 고려하세요.
+4. **비용 최적화**: 불필요한 번들을 제거하여 스토리지 비용 최적화

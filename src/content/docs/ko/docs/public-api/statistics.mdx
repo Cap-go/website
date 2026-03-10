@@ -1,35 +1,34 @@
 ---
-title: Statistics
+title: 통계
 description: >-
-  Detailed guide to Statistics API endpoints, providing insights into Monthly
-  Active Users (MAU), storage, and bandwidth metrics for apps and organizations.
+  통계 API 엔드포인트에 대한 자세한 가이드로, 앱과 조직에 대한 MAU(월간 활성 사용자), 스토리지 및 대역폭 지표에 대한 통찰력을
+  제공합니다.
 sidebar:
   order: 5
 locale: ko
 ---
+통계 엔드포인트는 앱과 조직에 대한 자세한 분석을 제공합니다. 다양한 기간에 걸쳐 MAU(월간 활성 사용자), 스토리지 사용량 및 대역폭 소비를 추적할 수 있습니다. 이 데이터는 앱 성장, 리소스 사용량 및 용량 계획을 모니터링하는 데 필수적입니다.
 
-The Statistics endpoints provide detailed analytics about your apps and organizations. You can track Monthly Active Users (MAU), storage usage, and bandwidth consumption across different time periods. This data is essential for monitoring app growth, resource usage, and planning capacity.
+## 측정항목 이해하기
 
-## Understanding the Metrics
+- **MAU(월간 활성 사용자)**: 지난 30일 동안 앱에 액세스한 고유 기기 수
+- **저장소**: 저장된 모든 번들 및 리소스의 총 크기(바이트)
+- **대역폭**: 번들 다운로드에 대한 총 데이터 전송량(바이트)
 
-- **MAU (Monthly Active Users)**: Number of unique devices that accessed your app in the last 30 days
-- **Storage**: Total size of all bundles and resources stored in bytes
-- **Bandwidth**: Total data transfer for bundle downloads in bytes
+## 모범 사례
 
-## Best Practices
+1. **정기 모니터링**: 정기적으로 통계를 확인하여 성장 및 사용 패턴을 추적합니다.
+2. **리소스 계획**: 용량 계획을 위해 스토리지 및 대역폭 지표를 사용합니다.
+3. **사용자 참여**: MAU를 추적하여 사용자 참여 추세를 이해합니다.
+4. **비용 관리**: 리소스 사용량을 모니터링하여 비용 최적화
 
-1. **Regular Monitoring**: Check statistics periodically to track growth and usage patterns
-2. **Resource Planning**: Use storage and bandwidth metrics for capacity planning
-3. **User Engagement**: Track MAU to understand user engagement trends
-4. **Cost Management**: Monitor resource usage to optimize costs
-
-## Endpoints
+## 엔드포인트
 
 ### GET /statistics/app/:app_id/
 
-Get statistics for a specific app. This endpoint is useful for monitoring individual app performance.
+특정 앱에 대한 통계를 가져옵니다. 이 엔드포인트는 개별 앱 성능을 모니터링하는 데 유용합니다.
 
-#### Query Parameters
+#### 쿼리 매개변수
 
 ```typescript
 interface StatsQuery {
@@ -38,14 +37,14 @@ interface StatsQuery {
 }
 ```
 
-#### Example Request
+#### 요청 예시
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/statistics/app/com.demo.app/?from=2024-01-01&to=2024-02-01"
 ```
 
-#### Example Response
+#### 응답 예시
 
 ```json
 [
@@ -66,9 +65,9 @@ curl -H "authorization: your-api-key" \
 
 ### GET /statistics/org/:org_id/
 
-Get statistics for a specific organization. Useful for monitoring organization-level usage.
+특정 조직에 대한 통계를 얻으십시오. 조직 수준 사용량을 모니터링하는 데 유용합니다.
 
-#### Query Parameters
+#### 쿼리 매개변수
 
 ```typescript
 interface StatsQuery {
@@ -79,14 +78,14 @@ interface StatsQuery {
 }
 ```
 
-#### Example Request
+#### 요청 예시
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/statistics/org/046a36ac-e03c-4590-9257-bd6c9dba9ee8/?from=2024-01-01&to=2024-02-01"
 ```
 
-#### Example Response
+#### 응답 예시
 
 ```json
 [
@@ -105,11 +104,11 @@ curl -H "authorization: your-api-key" \
 ]
 ```
 
-### GET /statistics/user/
+### GET /통계/사용자/
 
-Get aggregated statistics across all organizations you have access to. Perfect for overall usage monitoring.
+액세스 권한이 있는 모든 조직에 걸쳐 집계된 통계를 얻으세요. 전반적인 사용량 모니터링에 적합합니다.
 
-#### Query Parameters
+#### 쿼리 매개변수
 
 ```typescript
 interface StatsQuery {
@@ -118,14 +117,14 @@ interface StatsQuery {
 }
 ```
 
-#### Example Request
+#### 요청 예시
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/statistics/user/?from=2024-01-01&to=2024-02-01"
 ```
 
-#### Example Response
+#### 응답 예시
 
 ```json
 [
@@ -146,9 +145,9 @@ curl -H "authorization: your-api-key" \
 
 ### GET /statistics/app/:app_id/bundle_usage
 
-Get bundle usage statistics for a specific app, showing the distribution of versions among users over a specified period.
+특정 앱에 대한 번들 사용 통계를 받아 특정 기간 동안 사용자 간의 번들(버전) 분포를 보여줍니다.
 
-#### Query Parameters
+#### 쿼리 매개변수
 
 ```typescript
 interface BundleUsageQuery {
@@ -157,14 +156,14 @@ interface BundleUsageQuery {
 }
 ```
 
-#### Example Request
+#### 요청 예시
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/statistics/app/com.demo.app/bundle_usage?from=2024-01-01&to=2024-02-01"
 ```
 
-#### Example Response
+#### 응답 예시
 
 ```json
 {
@@ -182,9 +181,9 @@ curl -H "authorization: your-api-key" \
 }
 ```
 
-## Error Handling
+## 오류 처리
 
-Common error scenarios and their responses:
+일반적인 오류 시나리오 및 대응:
 
 ```json
 // Invalid body
@@ -218,18 +217,18 @@ Common error scenarios and their responses:
 }
 ```
 
-## Common Use Cases
+## 일반적인 사용 사례
 
-1. **Growth Tracking**: Monitor MAU growth over time
-2. **Resource Optimization**: Track storage and bandwidth usage to optimize costs
-3. **Capacity Planning**: Use trends to plan for future resource needs
-4. **Usage Reports**: Generate periodic usage reports for stakeholders
-5. **Version Distribution Analysis**: Understand how users are distributed across different app versions with bundle usage statistics
+1. **성장 추적**: 시간 경과에 따른 MAU 성장 모니터링
+2. **리소스 최적화**: 스토리지 및 대역폭 사용량을 추적하여 비용을 최적화합니다.
+3. **용량 계획**: 추세를 사용하여 향후 리소스 요구 사항을 계획합니다.
+4. **사용 보고서**: 이해관계자를 위한 정기적인 사용 보고서 생성
+5. **번들(버전) 분포 분석**: 번들 사용 통계를 통해 사용자가 다양한 앱 번들(버전)에 어떻게 분포되어 있는지 이해합니다.
 
-## Tips for Analysis
+## 분석을 위한 팁
 
-1. **Compare Periods**: Look at month-over-month or year-over-year trends
-2. **Track Ratios**: Monitor bandwidth per user or storage per app
-3. **Set Alerts**: Create alerts for unusual spikes in usage
-4. **Regular Backups**: Export statistics regularly for historical analysis
-5. **Version Adoption**: Use bundle usage to track adoption rates of new versions
+1. **기간 비교**: 월별 또는 연간 추세를 살펴보세요.
+2. **트랙 비율**: 사용자당 대역폭 또는 앱당 저장 공간을 모니터링합니다.
+3. **알림 설정**: 비정상적인 사용량 급증에 대한 알림 생성
+4. **정기 백업**: 기록 분석을 위해 정기적으로 통계 내보내기
+5. **번들(버전) 채택**: 번들 사용을 사용하여 새 번들(버전)의 채택률을 추적합니다.

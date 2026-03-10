@@ -1,25 +1,24 @@
 ---
-title: "Getting Started with Share Target"
-description: "Learn how to make your app receive shared content from other apps"
+title: Primeros pasos con Share Target
+description: ''
 locale: es
 ---
+Esta guía lo guiará a través de la integración del complemento Capacitor Share Target para permitir que su aplicación reciba contenido compartido de otras aplicaciones.
 
-This guide will walk you through integrating the Capacitor Share Target plugin to enable your app to receive shared content from other applications.
+## Instalación
 
-## Installation
-
-Install the plugin using npm:
+Instale el complemento usando npm:
 
 ```bash
 npm install @capgo/capacitor-share-target
 npx cap sync
 ```
 
-## Android Configuration
+## Android Configuración
 
 Add intent filters to your `AndroidManifest.xml` inside the `<activity>` tag:
 
-### Accept Text Content
+### Aceptar contenido de texto
 
 ```xml
 <intent-filter>
@@ -29,7 +28,7 @@ Add intent filters to your `AndroidManifest.xml` inside the `<activity>` tag:
 </intent-filter>
 ```
 
-### Accept Images
+### Aceptar imágenes
 
 ```xml
 <intent-filter>
@@ -45,7 +44,7 @@ Add intent filters to your `AndroidManifest.xml` inside the `<activity>` tag:
 </intent-filter>
 ```
 
-### Accept All Content Types
+### Aceptar todos los tipos de contenido
 
 ```xml
 <intent-filter>
@@ -61,40 +60,40 @@ Add intent filters to your `AndroidManifest.xml` inside the `<activity>` tag:
 </intent-filter>
 ```
 
-## iOS Configuration
+## iOS Configuración
 
 For iOS, you need to create a Share Extension:
 
-### 1. Create Share Extension in Xcode
+### 1. Crear extensión para compartir en Xcode
 
-1. Open your project in Xcode
-2. Go to **File > New > Target**
-3. Select **Share Extension** and click **Next**
+1. Abra su proyecto en Xcode
+2. Vaya a **Archivo > Nuevo > Destino**
+3. Seleccione **Compartir extensión** y haga clic en **Siguiente**
 4. Name it (e.g., "ShareExtension") and click **Finish**
-5. If prompted, activate the scheme
+5. Si se le solicita, active el esquema.
 
-### 2. Configure App Group
+### 2. Configurar grupo de aplicaciones
 
 1. In your main app target, go to **Signing & Capabilities**
-2. Click **+ Capability** and add **App Groups**
+2. Haga clic en **+ Capacidad** y agregue **Grupos de aplicaciones**
 3. Create or select an app group (e.g., `group.com.yourcompany.yourapp`)
-4. Repeat for the Share Extension target
+4. Repita para el objetivo de Share Extension
 
-### 3. Update Share Extension Code
+### 3. Actualizar el código de extensión para compartir
 
 The Share Extension needs to save shared data to the app group container so your main app can access it.
 
 For detailed iOS setup, see [Apple's Share Extension documentation](https://developer.apple.com/documentation/uikit/uiactivityviewcontroller).
 
-## Basic Usage
+## Uso básico
 
-### Import the Plugin
+### Importar el complemento
 
 ```typescript
 import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
 ```
 
-### Listen for Shared Content
+### Escuche el contenido compartido
 
 ```typescript
 CapacitorShareTarget.addListener('shareReceived', (event) => {
@@ -113,7 +112,7 @@ CapacitorShareTarget.addListener('shareReceived', (event) => {
 });
 ```
 
-## Complete Example
+## Ejemplo completo
 
 Here's a comprehensive example handling different types of shared content:
 
@@ -271,7 +270,7 @@ shareTarget.initialize();
 // shareTarget.cleanup();
 ```
 
-## React Integration
+## Integración de reacción
 
 ```typescript
 import { useEffect } from 'react';
@@ -298,7 +297,7 @@ function App() {
 }
 ```
 
-## Vue Integration
+## Integración de Vue
 
 ```typescript
 import { onMounted, onUnmounted } from 'vue';
@@ -324,9 +323,9 @@ export default {
 };
 ```
 
-## Handling Different Content Types
+## Manejo de diferentes tipos de contenido
 
-### URLs
+### URL
 
 ```typescript
 if (event.texts && event.texts.length > 0) {
@@ -339,7 +338,7 @@ if (event.texts && event.texts.length > 0) {
 }
 ```
 
-### Images
+### Imágenes
 
 ```typescript
 if (event.files) {
@@ -357,7 +356,7 @@ if (event.files) {
 }
 ```
 
-### Multiple Files
+### Múltiples archivos
 
 ```typescript
 if (event.files && event.files.length > 1) {
@@ -372,7 +371,7 @@ if (event.files && event.files.length > 1) {
 }
 ```
 
-## Best Practices
+## Mejores prácticas
 
 1. **Handle Multiple Content Types**: Be prepared to receive text, URLs, and files
 2. **Validate Content**: Check MIME types before processing
@@ -382,19 +381,19 @@ if (event.files && event.files.length > 1) {
 6. **Test Thoroughly**: Test with different apps and content types
 7. **Request Permissions**: Some file types may require additional permissions
 
-## Common Issues
+## Problemas comunes
 
-### Share Not Working on Android
+### Compartir no funciona en Android
 
 Ensure intent filters are correctly configured in `AndroidManifest.xml` within the `<activity>` tag that has `android.intent.action.MAIN`.
 
 ### iOS Share Extension Not Appearing
 
 1. Verify App Group is configured in both targets
-2. Ensure Share Extension is activated
+2. Asegúrese de que Share Extension esté activado
 3. Check that Info.plist in Share Extension has correct configuration
 
-### File Access Errors
+### Errores de acceso a archivos
 
 ```typescript
 try {
@@ -407,7 +406,7 @@ try {
 }
 ```
 
-## Next Steps
+## Próximos pasos
 
 - Explore the [API Reference](https://github.com/Cap-go/capacitor-share-target#api) for complete method documentation
 - Check out the [example app](https://github.com/Cap-go/capacitor-share-target/tree/main/example) for advanced usage

@@ -1,39 +1,42 @@
 ---
+title: Apple connexion sur IOS
+description: >-
+  Ce guide complet vous guidera tout au long du processus de configuration de la
+  connexion Apple à l'aide de Capacitor sur les appareils iOS, garantissant une
+  intégration transparente en couvrant toutes les étapes et configurations
+  nécessaires.
+sidebar:
+  order: 2
 locale: fr
-title: Apple Connexion on iOS
-description: This comprehensive Guide will walk you through the process of setting up Apple Connexion using Capacitor on iOS Appareils, ensuring a seamless integration by covering all necessary steps and configurations.
-sidebar: 
-    order: 2
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 
-Let's break down what you are going to need in order to Configuration Apple Connexion on iOS.
+Décomposons ce dont vous aurez besoin pour configurer la connexion Apple sur IOS.
 
 <Steps>
-1. Configure the capabilities of your Application.
+1. Configurez les capacités de votre application.
 
-    In order to do this, please open Xcode, click on `App`
-    ![Application XCode](/social-Connexion-assets/Application-xcode.png)
+    Pour ce faire, veuillez ouvrir Xcode, cliquer sur `App`
+    ![Application XCode](/social-login-assets/app-xcode.png)
 
-2. Make sure that you select the right target.
+2. Assurez-vous de sélectionner la bonne cible.
 
-    ![XCode Application Target](/social-Connexion-assets/xcode-Application-target.png)
+    ![Cible de l'application XCode](/social-login-assets/xcode-app-target.png)
 
-3. Please make sure that you add the `Sign in with Apple` capability.
+3. Assurez-vous d'ajouter la fonctionnalité `Sign in with Apple`.
 
-    ![Application XCode Ajouter Capability](/social-Connexion-assets/Application-xcode-Ajouter-cap.png)
+    ![App XCode Ajouter une capacité](/social-login-assets/app-xcode-add-cap.png)
 
-    ![Application XCode Ajouter Capability](/social-Connexion-assets/sign-with-apple-cap.png)
+    ![App XCode Ajouter une capacité](/social-login-assets/sign-with-apple-cap.png)
 
-    :::Attention
-    If you don't see the `Sign in with Apple` capability, configure the [Account & Organizational Data Sharing](https://developer.apple.com/account/resources/services/cwa/configure/)
+    :::attention
+    Si vous ne voyez pas la fonctionnalité `Sign in with Apple`, configurez le [Partage des données de compte et d'organisation](https://developer.apple.com/account/resources/services/cwa/configure/)
     :::
 
-4. Initialiser the Apple Connexion in your Application.
+4. Initialisez la connexion Apple dans votre application.
 
-    :::Remarque
-    I am using Vue as my framework, the exact implementation will vary depending on the framework of your choice
+    :::remarque
+    J'utilise Vue comme framework, l'implémentation exacte variera en fonction du framework de votre choix
     :::
 
     ```ts
@@ -45,9 +48,9 @@ Let's break down what you are going to need in order to Configuration Apple Conn
     });
     ```
 
-5. Créer a button that will begin the Connexion process.
+5. Créez un bouton qui lancera le processus de connexion.
 
-    Said button should call the following function:
+    Ce bouton doit appeler la fonction suivante :
 
     ```ts
     async function loginApple() {
@@ -57,11 +60,11 @@ Let's break down what you are going to need in order to Configuration Apple Conn
     })
     ```
 
-6. Run your Application on a **<u>PHYSICAL</u>** Appareil and Test it. 
+6. Exécutez votre application sur un appareil **<u>PHYSICAL</u>** et testez-la. 
 
-    If you followed the steps closely you will see the following screen after clicking your button.
+    Si vous avez suivi attentivement les étapes, vous verrez l'écran suivant après avoir cliqué sur votre bouton.
 
-    ![Apple Sign In prompt on iOS Appareil](/social-Connexion-assets/apple-sign-in-iOS-final.png)
+    ![Apple Invite de connexion sur l'appareil iOS](/social-login-assets/apple-sign-in-ios-final.png)
 </Steps>
 
-That's it! You are all set.
+C'est tout ! Vous êtes prêt.

@@ -1,70 +1,71 @@
 ---
-title: "Known issues"
-description: "Known issues with Capacitor and Capgo, and our updater, this page will help you understand the weird issue you have with our tool"
+title: Problemas conocidos
+description: >-
+  Problemas conocidos con Capacitor y Capgo, y nuestro actualizador. Esta página
+  lo ayudará a comprender el problema extraño que tiene con nuestra herramienta.
 sidebar:
   order: 7
 locale: es
 ---
-
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-## Ionic live reload
+## Recarga en vivo iónica
 
-* When you develop, if you use the Ionic live reload feature from the CLI, it will override the plugin, so you will never see your update.
+* Cuando desarrolle, si utiliza la función de recarga en vivo de Ionic de CLI, anulará el complemento, por lo que nunca verá su actualización.
 
-## Quasar live reload
+## Recarga en vivo de Quasar
 
-* It uses the same system as ionic under the hood, so you will not see your updates.
+* Utiliza el mismo sistema que ionic bajo el capó, por lo que no verás tus actualizaciones.
 
-## Updates fail
+## Las actualizaciones fallan
 
-* This usually happens when large updates (> 20mb) are pushed, a big percentage of users will not get the last version.  
-In the past, users needed to keep the app open until the download was done, now we use background download, but it's still limited to a few seconds.
+* Esto suele suceder cuando se envían actualizaciones grandes (> 20 MB), un gran porcentaje de usuarios no obtendrá la última versión.  
+En el pasado, los usuarios necesitaban mantener la aplicación abierta hasta que se completara la descarga, ahora usamos la descarga en segundo plano, pero aún está limitada a unos segundos.
 
 ## Android
 
-### Cannot download
+### No se puede descargar
 
-We have seen some issues with devices in india, and got user on the call, made them try different DNS servers, and it worked.
+Hemos visto algunos problemas con dispositivos en la India, conseguimos que el usuario participara en la llamada, les hicimos probar diferentes servidores DNS y funcionó.
 
-So if you have the issue, try to use a different DNS server like Cloudflare or Google DNS.
+Entonces, si tiene el problema, intente usar un servidor DNS diferente como Cloudflare o Google DNS.
 
-Cloudflare: 1.1.1.1 and 1.0.0.1
+Nubeflare: 1.1.1.1 y 1.0.0.1
 
-Google DNS: 8.8.8.8 and 8.8.4.4 or dns.google
+Google DNS: 8.8.8.8 y 8.8.4.4 o dns.google
 
 <LinkCard
-	title="How to setup a preferred DNS server on Android?"
+	title=""
 	href="https://www.androidpolice.com/use-preferred-dns-server-android-tutorial/"
 />
 
-### Self Hosted
-When you are pushing a self-hosted update, be mindful you cannot use "HTTP" endpoint as it's against the security policies of Android apps, if you still want to do it, follow this guide:
+### Autohospedado
+Cuando envíe una actualización autohospedada, tenga en cuenta que no puede utilizar el punto final "HTTP", ya que va en contra de las políticas de seguridad de las aplicaciones Android. Si aún desea hacerlo, siga esta guía:
 
 <LinkCard
-	title="How to allow all Network connection types HTTP and HTTPS in Android (9) Pie?"
+	title="¿Cómo permitir todos los tipos de conexión de red HTTP y HTTPS en Android (9) Pie?"
 	href="https://stackoverflow.com/a/51902630/5511370"
 />
 
-### Unzip 
+### Descomprimir 
 
-Unzip issue: DEFLATED entries can have EXT descriptor
+Problema al descomprimir: las entradas DESINFLADAS pueden tener un descriptor EXT
 
-If you zipped your bundle with something different than the CLI, the format or your zip could be incorrect, please use the CLI command `npx @capgo/cli zip BUNDLE_FOLDER`.
+Si comprimiste tu paquete con algo diferente a CLI, el formato o tu zip podrían ser incorrectos, usa el comando CLI `npx @capgo/cli zip BUNDLE_FOLDER`.
 
-This is a known issue of Java:
+Este es un problema conocido de Java:
 
 <LinkCard
-	title="Unzip issue: DEFLATED entries can have EXT descriptor"
+	title="Problema al descomprimir: las entradas DESINFLADAS pueden tener un descriptor EXT"
 	href="https://bugs.openjdk.org/browse/JDK-8143613"
 />
 
 
-### Clearfix issue
+### Problema de solución clara
 
-* If you have issues with usesCleartextTraffic, it's because the plugin follows the good practice recommended by sonar cloud, in 90% of the cases it will work just fine, but with some plugins that causes issues.
+* Si tiene problemas con usesCleartextTraffic, es porque el complemento sigue las buenas prácticas recomendadas por sonar cloud, en el 90% de los casos funcionará bien, pero con algunos complementos eso causa problemas.
 
-To fix it, add in `android/app/src/main/AndroidManifest.xml` in the `<application>` key :
+Para solucionarlo, agregue `android/app/src/main/AndroidManifest.xml` en la clave `<application>`:
 
 ```xml
 tools:replace="android:usesCleartextTraffic"
@@ -73,9 +74,9 @@ xmlns:tools="http://schemas.android.com/tools"
 
 ## IOS
 
-### Privacy manifest
+### Manifiesto de privacidad
 
-Add the `NSPrivacyAccessedAPICategoryUserDefaults` dictionary key to your [Privacy Manifest](https://capacitorjs.com/docs/ios/privacy-manifest) (usually `ios/App/PrivacyInfo.xcprivacy`):
+Agregue la clave del diccionario `NSPrivacyAccessedAPICategoryUserDefaults` a su [Manifiesto de privacidad](https://capacitorjs.com/docs/ios/privacy-manifest) (normalmente `ios/App/PrivacyInfo.xcprivacy`):
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -98,33 +99,33 @@ Add the `NSPrivacyAccessedAPICategoryUserDefaults` dictionary key to your [Priva
 </plist>
 ```
 
-We recommend to declare [`CA92.1`](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401) as the reason for accessing the [`UserDefaults`](https://developer.apple.com/documentation/foundation/userdefaults) API.
+Recomendamos declarar [`CA92.1`](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401) como motivo de acceso al [`UserDefaults`](https://developer.apple.com/documentation/foundation/userdefaults) API.
 
 
-### Network permissions
+### Permisos de red
 
-When using local server for testing update, the app will ask for network permission, it's a normal behavior, it's not the case when you use a remote server.
+Cuando se utiliza un servidor local para probar la actualización, la aplicación solicitará permiso de red, es un comportamiento normal, no es el caso cuando se utiliza un servidor remoto.
 
 
-## Both OS
+## Ambos sistemas operativos
 
-When doing manual mode updates, some events are not easy to catch, for example the update fail triggers just before your JS code reloads, so you will not be able to catch it.
+Al realizar actualizaciones en modo manual, algunos eventos no son fáciles de detectar, por ejemplo, el error de actualización se activa justo antes de que se vuelva a cargar el código JS, por lo que no podrá detectarlo.
 
-One alternative is to list the bundles and check error stats to know if the update fails.
+Una alternativa es enumerar los paquetes y verificar las estadísticas de errores para saber si la actualización falla.
 
-We need to find a better way to handle this in the future, but it's not a priority, since auto mode is the recommended way to do update.
+Necesitamos encontrar una mejor manera de manejar esto en el futuro, pero no es una prioridad, ya que el modo automático es la forma recomendada de realizar la actualización.
 
-PRs are welcome to help us improve this.
+Los RP son bienvenidos para ayudarnos a mejorar esto.
 
 ## CLI
 
-if your CLI has troubles doing anything,
+si tu CLI tiene problemas para hacer algo,
 
-Check if **appId** and **appName** are present in your **capacitor.config.ts**
+Compruebe si **appId** y **appName** están presentes en su **capacitor.config.ts**
 
-Follow the guide of the official doc:
+Siga la guía del documento oficial:
 
 <LinkCard
-	title="Capacitor Configuration"
+	title="Capacitor Configuración"
 	href="https://capacitorjs.com/docs/config"
 />

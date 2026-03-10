@@ -1,26 +1,25 @@
 ---
-locale: fr
 title: Commencer
-description: Learn how to Installer and use the Natif Market plugin to redirect Utilisateurs to Google Play Store or Apple Application Store from your Capacitor Application.
-sidebar: 
+description: ''
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Installer the package**
+1. **Installez le package**
    <PackageManagers pkg="@capgo/native-market" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser with Natif projects**
+2. **Synchronisation avec les projets natifs**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
 ## Utilisation
 
-Importer the plugin and use its methods to redirect Utilisateurs to Application stores:
+Importez le plugin et utilisez ses méthodes pour rediriger les utilisateurs vers les magasins d'applications :
 
 ```typescript
 import { NativeMarket } from '@capgo/native-market';
@@ -47,9 +46,9 @@ const searchInStore = async () => {
 
 ## API Référence
 
-### openStoreListing(Options)
+### openStoreListing (options)
 
-Opens the Application Store listing for the specified Application.
+Ouvre la liste de l’App Store pour l’application spécifiée.
 
 ```typescript
 interface OpenStoreListingOptions {
@@ -57,13 +56,13 @@ interface OpenStoreListingOptions {
 }
 ```
 
-### requestReview()
+### requêteReview()
 
-Requests an in-Application review from the Utilisateur. On iOS 10.3+, this shows the rating dialog without leaving the Application.
+Demande un examen dans l'application à l'utilisateur. Sur iOS 10.3+, cela affiche la boîte de dialogue d'évaluation sans quitter l'application.
 
-### Recherche(Options)
+### recherche(options)
 
-Opens the Application Store with Recherche results.
+Ouvre l'App Store avec les résultats de recherche.
 
 ```typescript
 interface SearchOptions {
@@ -71,35 +70,35 @@ interface SearchOptions {
 }
 ```
 
-## Platform Notes
+## Remarques sur la plate-forme
 
 ### iOS
-- Uses `SKStoreReviewController` for in-app reviews on iOS 10.3+
-- Falls Retour to opening Application Store for older versions
+- Utilise `SKStoreReviewController` pour les avis dans l'application sur iOS 10.3+
+- Revient à l'ouverture de App Store pour les anciennes versions
 
 ### Android
-- Opens Google Play Store
-- Uses in-Application review API when Disponible
+- Ouvre le magasin Google Play
+- Utilise la révision dans l'application API lorsqu'elle est disponible
 
 ## Exemple
 
-```typescript
+```dactylographié
 import { NativeMarket } from '@capgo/native-market';
 import { Capacitor } from '@capacitor/core';
 
 export class AppService {
-  async rateApp() {
-    try {
-      // Try in-app review first
-      await NativeMarket.requestReview();
-    } catch (error) {
-      // Fallback to opening store listing
+  tauxApp asynchrone() {
+    essayez {
+      // Essayez d'abord la révision dans l'application
+      attendre NativeMarket.requestReview();
+    } attraper (erreur) {
+      // Retour à l'ouverture de la fiche Play Store
       const platform = Capacitor.getPlatform();
-      const appId = platform === 'ios' 
-        ? 'id123456789' // Your iOS app ID
-        : 'com.example.app'; // Your Android package name
+      const appId = plateforme === 'ios' 
+        ? 'id123456789' // Votre identifiant d'application iOS
+        : 'com.exemple.app'; // Le nom de votre package Android
         
-      await NativeMarket.openStoreListing({ appId });
+      attendre NativeMarket.openStoreListing({ appId });
     }
   }
 }

@@ -1,83 +1,63 @@
 ---
+title: Premiers pas avec Fast SQL
+description: >-
+  Installez et configurez le plug-in **@capgo/capacitor-fast-sql** pour un accès
+  à la base de données SQLite native hautes performances
 locale: fr
-title: Commencer with Fast SQL
-description: Installer and configure the Fast SQL plugin for high-performance Natif SQLite database access
 ---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps, Card, CardGrid } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
 
-This Guide will Aide you Installer and configure the **@capgo/capacitor-fast-sql** plugin for high-performance SQLite database access.
+<Steps>
+1. **Installez le package**
+   <PackageManagers pkg="@capgo/capacitor-fast-sql" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-## Why Fast SQL?
+2. **Synchronisation avec les projets natifs**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-Traditional SQLite plugins for Capacitor rely on the standard JavaScript bridge to communicate between your web code and Natif code. While this works fine for small operations, the bridge becomes a significant bottleneck when you need to transfer large amounts of data. Every piece of data must be serialized to JSON, sent across the bridge, and then deserialized on the other side. This serialization overhead makes operations with thousands of rows or large binary data incredibly slow.
+3. **Configurer les plateformes**
+   
+   ### iOS
+   Autoriser l'accès au réseau local dans `Info.plist` :
+   ```xml title="ios/App/App/Info.plist"
+   <key>NSAppTransportSecurity</key>
+   <dict>
+       <key>NSAllowsLocalNetworking</key>
+       <true/>
+   </dict>
+   ```
 
-**Fast SQL solves this problem** by establishing a local HTTP server on the device that communicates directly with the native SQLite database. This custom protocol bypasses Capacitor's bridge entirely, eliminating serialization overhead and enabling:
+   ### Android
+   Ajoutez une exception en texte clair pour le trafic localhost :
+   ```xml title="android/app/src/main/AndroidManifest.xml"
+   <application android:networkSecurityConfig="@xml/network_security_config">
+       ...
+   </application>
+   ```
 
-- **Up to 25x faster performance** for batch operations and large datasets
-- **Efficient binary data transfer** without base64 encoding
-- **Streaming large results** without memory issues
-- **Optimal performance for Synchroniser systems** like CRDTs and operational transforms
+   ###Web
+   Installez sql.js pour le stockage Web de secours :
+   ```bash
+   npm install sql.js
+   ```
+</Steps>
 
-This makes Fast SQL ideal for local-first applications, offline Synchroniser systems, and scenarios where you need to replace IndexedDB with a more reliable and performant Solution.
+## Pourquoi Fast SQL ?
 
-## Installation
+Fast SQL évite une sérialisation lourde des ponts en utilisant un transport HTTP local vers SQLite natif, ce qui est beaucoup plus rapide pour les jeux de résultats volumineux et les écritures de style synchronisation.
 
-```bash
-npm install @capgo/capacitor-fast-sql
-npx cap sync
-```
-
-## Platform Configuration
-
-### iOS Configuration
-
-Add the following to your `Info.plist` to allow local networking:
-
-```xml title="ios/App/App/Info.plist"
-<key>NSAppTransportSecurity</key>
-<dict>
-    <key>NSAllowsLocalNetworking</key>
-    <true/>
-</dict>
-```
-
-### Android Configuration
-
-If needed, add to your `AndroidManifest.xml`:
-
-```xml title="android/app/src/main/AndroidManifest.xml"
-<application
-    android:usesCleartextTraffic="true">
-    ...
-</application>
-```
-
-### Web Configuration
-
-For web platform Support, Installer sql.js:
-
-```bash
-npm install sql.js
-```
-
-## Basic Utilisation
-
-### Connecting to a Database
+## Utilisation de base
 
 ```typescript
-import { FastSQL } from '@capgo/capacitor-fast-sql';
+import { FastSQL, IsolationLevel, KeyValueStore } from '@capgo/capacitor-fast-sql';
 
-// Connect to database (creates file if it doesn't exist)
 const db = await FastSQL.connect({
-  database: 'myapp'
+  database: 'myapp',
+  encrypted: false,
+  readOnly: false,
 });
 
-console.log('Connected to database on port:', db.port);
-```
-
-### Creating Tables
-
-```typescript
-// Create a table
 await db.execute(`
   CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -86,224 +66,135 @@ await db.execute(`
     created_at INTEGER DEFAULT (strftime('%s', 'now'))
   )
 `);
+
+await db.run('INSERT INTO users (name, email) VALUES (?, ?)', ['John', 'john@example.com']);
+const users = await db.query('SELECT * FROM users');
 ```
 
-### Inserting Data
+## Méthodes de connexion principales
+
+- `execute(statement, params?)` -> renvoie le résultat SQL complet
+- `query(statement, params?)` -> renvoie `rows`
+- `run(statement, params?)` -> renvoie `{ rowsAffected, insertId }`
+- `executeBatch(operations)` -> renvoie un tableau de résultats
 
 ```typescript
-// Insert single row
-const result = await db.run(
-  'INSERT INTO users (name, email) VALUES (?, ?)',
-  ['John Doe', 'john@example.com']
-);
+import { type SQLBatchOperation } from '@capgo/capacitor-fast-sql';
 
-console.log('Inserted row ID:', result.insertId);
-console.log('Rows affected:', result.rowsAffected);
-```
+const rows = await db.query('SELECT * FROM users WHERE email LIKE ?', ['john%']);
 
-### Querying Data
-
-```typescript
-// Query with parameters
-const users = await db.query(
-  'SELECT * FROM users WHERE name LIKE ?',
-  ['John%']
-);
-
-console.log('Found users:', users);
-
-// users is an array of objects:
-// [{ id: 1, name: 'John Doe', email: 'john@example.com', created_at: 1234567890 }]
-```
-
-### Updating Data
-
-```typescript
-const result = await db.run(
-  'UPDATE users SET email = ? WHERE id = ?',
-  ['newemail@example.com', 1]
-);
-
-console.log('Updated rows:', result.rowsAffected);
-```
-
-### Deleting Data
-
-```typescript
-const result = await db.run(
-  'DELETE FROM users WHERE id = ?',
-  [1]
-);
-
-console.log('Deleted rows:', result.rowsAffected);
+const batch: SQLBatchOperation[] = [
+  { statement: 'INSERT INTO users (name, email) VALUES (?, ?)', params: ['Alice', 'alice@acme.dev'] },
+  { statement: 'INSERT INTO users (name, email) VALUES (?, ?)', params: ['Bob', 'bob@acme.dev'] },
+];
+await db.executeBatch(batch);
 ```
 
 ## Transactions
 
-Transactions ensure atomicity - either all operations succeed or all are rolled Retour:
+### assistant de rappel
 
 ```typescript
+await db.transaction(async (tx) => {
+  await tx.run('UPDATE accounts SET balance = balance - 100 WHERE id = ?', [1]);
+  await tx.run('UPDATE accounts SET balance = balance + 100 WHERE id = ?', [2]);
+});
+```
+
+### contrôle explicite
+
+```typescript
+import { IsolationLevel } from '@capgo/capacitor-fast-sql';
+
+await db.beginTransaction(IsolationLevel.Serializable);
 try {
-  await db.transaction(async (tx) => {
-    // All operations in this block are part of the transaction
-    await tx.run('INSERT INTO accounts (name, balance) VALUES (?, ?)', ['Alice', 1000]);
-    await tx.run('INSERT INTO accounts (name, balance) VALUES (?, ?)', ['Bob', 500]);
-
-    // Transfer money
-    await tx.run('UPDATE accounts SET balance = balance - 100 WHERE name = ?', ['Alice']);
-    await tx.run('UPDATE accounts SET balance = balance + 100 WHERE name = ?', ['Bob']);
-  });
-
-  console.log('Transaction committed successfully!');
+  await db.run('UPDATE wallets SET points = points - 1 WHERE user_id = ?', [42]);
+  await db.commit();
 } catch (error) {
-  console.error('Transaction rolled back:', error);
-  // All changes are automatically rolled back on error
+  await db.rollback();
+  throw error;
 }
 ```
 
-### Transaction Isolation Levels
+Niveaux d'isolement pris en charge :
+- `ReadUncommitted`
+- `ReadCommitted`
+- `RepeatableRead`
+- `Serializable`
+
+## Données binaires (BLOB)
 
 ```typescript
-import { FastSQL, IsolationLevel } from '@capgo/capacitor-fast-sql';
+const imageData = new Uint8Array([0xFF, 0xD8, 0xFF, 0xE0]);
+await db.run('INSERT INTO assets (name, data) VALUES (?, ?)', ['avatar', imageData]);
 
-await db.transaction(async (tx) => {
-  // Your operations
-}, IsolationLevel.Serializable);
+const rows = await db.query('SELECT data FROM assets WHERE name = ?', ['avatar']);
+const retrieved = rows[0].data; // Uint8Array
 ```
 
-Disponible isolation levels:
-- `ReadUncommitted` - Lowest isolation, highest performance
-- `ReadCommitted` - Prevent dirty reads
-- `RepeatableRead` - Prevent non-repeatable reads
-- `Serializable` - Highest isolation, prevents all anomalies
-
-## Batch Operations
-
-Execute multiple statements efficiently:
+## Modes de cryptage et de lecture seule
 
 ```typescript
-const results = await db.executeBatch([
-  {
-    statement: 'INSERT INTO logs (message, level) VALUES (?, ?)',
-    params: ['App started', 'INFO']
-  },
-  {
-    statement: 'INSERT INTO logs (message, level) VALUES (?, ?)',
-    params: ['User logged in', 'INFO']
-  },
-  {
-    statement: 'INSERT INTO logs (message, level) VALUES (?, ?)',
-    params: ['Error occurred', 'ERROR']
-  },
-]);
-
-console.log('Executed', results.length, 'statements');
-```
-
-## Binary Data (BLOBs)
-
-Store and retrieve binary data using Uint8Array:
-
-```typescript
-// Store binary data
-const imageData = new Uint8Array([0xFF, 0xD8, 0xFF, 0xE0, /* ... */]);
-
-await db.run(
-  'INSERT INTO images (name, data) VALUES (?, ?)',
-  ['photo.jpg', imageData]
-);
-
-// Retrieve binary data
-const rows = await db.query('SELECT data FROM images WHERE name = ?', ['photo.jpg']);
-const retrievedData = rows[0].data; // Uint8Array
-```
-
-## Chiffrement (iOS/Android)
-
-Activer SQLCipher Chiffrement for secure storage:
-
-```typescript
-const db = await FastSQL.connect({
+const secureDb = await FastSQL.connect({
   database: 'secure_db',
   encrypted: true,
-  encryptionKey: 'your-secure-encryption-key'
+  encryptionKey: 'replace-with-a-strong-key',
+});
+
+const readOnlyDb = await FastSQL.connect({
+  database: 'public_db',
+  readOnly: true,
 });
 ```
 
-:::Attention
-- Chiffrement is only Disponible on iOS and Android
-- Store Chiffrement keys securely (use Keychain/Keystore)
-- Cannot open Chiffré databases without the correct key
-- Web platform does not Support Chiffrement
-:::
+Sur Android, le mode chiffré utilise SQLCipher ; inclure la dépendance dans l'application `build.gradle`.
 
-## Read-Only Mode
+## KeyValueStore
 
-Open databases in read-only mode to prevent modifications:
+`KeyValueStore` est un wrapper pratique pour les données clé/valeur mobiles.
 
 ```typescript
-const db = await FastSQL.connect({
-  database: 'myapp',
-  readOnly: true
+import { KeyValueStore } from '@capgo/capacitor-fast-sql';
+
+const kv = await KeyValueStore.open({
+  database: 'kv',
+  store: 'session',
+  encrypted: true,
+  encryptionKey: 'super-secret-key',
 });
+
+await kv.set('session', { token: 'abc', expiresAt: Date.now() + 3600_000 });
+const session = await kv.get('session');
+await kv.has('session');
+await kv.keys();
+await kv.remove('session');
+await kv.clear();
+await kv.close();
 ```
 
-## Closing Connections
-
-Always close database connections when done:
+## Cycle de vie de la connexion
 
 ```typescript
 await FastSQL.disconnect('myapp');
+await FastSQL.disconnectAll();
+const openDatabases = FastSQL.getOpenDatabases();
+const same = FastSQL.getConnection('myapp');
 ```
 
-## Direct HTTP Protocol
-
-For maximum performance with large datasets, use the HTTP protocol directly:
+## Gestion des erreurs
 
 ```typescript
-const { port, token } = await FastSQL.getServerInfo({ database: 'myapp' });
-
-// Make direct HTTP requests to localhost:port
-// Include token in Authorization header
-const response = await fetch(`http://localhost:${port}/execute`, {
-  method: 'POST',
-  headers: {
-    'Authorization': `Bearer ${token}`,
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    statement: 'SELECT * FROM users',
-    params: []
-  })
-});
-
-const result = await response.json();
-```
-
-## Erreur Handling
-
-```typescript
-import { FastSQL } from '@capgo/capacitor-fast-sql';
-
 try {
-  const db = await FastSQL.connect({ database: 'myapp' });
-
-  await db.run('INSERT INTO users (name, email) VALUES (?, ?)', ['John', 'john@example.com']);
-
+  await FastSQL.connect({ database: 'myapp' });
+  await db.query('SELECT * FROM unknown_table');
 } catch (error) {
-  if (error.message.includes('UNIQUE constraint failed')) {
-    console.error('Email already exists');
-  } else if (error.message.includes('no such table')) {
-    console.error('Table does not exist');
-  } else {
-    console.error('Database error:', error);
-  }
+  console.error('Fast SQL error:', error);
 }
 ```
 
-## Common SQL Patterns
+## Modèles SQL courants
 
-### Vérifier if Table Exists
+### Vérifiez si la table existe
 
 ```typescript
 const result = await db.query(
@@ -314,14 +205,14 @@ const result = await db.query(
 const tableExists = result.length > 0;
 ```
 
-### Get Table Schema
+### Obtenir le schéma de la table
 
 ```typescript
 const schema = await db.query('PRAGMA table_info(users)');
 console.log('Columns:', schema);
 ```
 
-### Count Rows
+### Compter les lignes
 
 ```typescript
 const result = await db.query('SELECT COUNT(*) as count FROM users');
@@ -341,20 +232,25 @@ const users = await db.query(
 );
 ```
 
-## Performance Tips
+## Conseils sur les performances
 
-1. **Use Transactions** for multiple operations - significantly faster than individual commits
-2. **Use Batch Operations** for bulk inserts - more efficient than loops
-3. **Créer Indexes** on frequently queried columns
-4. **Use Prepared Statements** with Paramètres (?) - prevents SQL injection and improves performance
-5. **Use HTTP Protocol Directly** for very large result sets
-6. **Close Connections** when not in use to free resources
+1. **Utilisez les transactions** pour plusieurs opérations - beaucoup plus rapidement que les validations individuelles
+2. **Utilisez les opérations par lots** pour les insertions en masse - plus efficaces que les boucles
+3. **Créer des index** sur les colonnes fréquemment interrogées
+4. **Utiliser les instructions préparées** avec des paramètres (?) - empêche l'injection SQL et améliore les performances
+5. **Utilisez directement le protocole HTTP** pour les très grands ensembles de résultats
+6. **Fermer les connexions** lorsque vous ne vous en servez pas pour libérer des ressources
 
-## Suivant Steps
+## Prochaines étapes
 
-Vérifier out the [Terminé Tutoriel](/plugins/capacitor-fast-sql) for advanced patterns including:
-- Database service architecture
-- Migration systems
-- Synchroniser engines
-- Complex queries and joins
-- Performance optimization
+Consultez le [tutoriel complet](/plugins/capacitor-fast-sql) pour connaître les modèles avancés, notamment :
+- Architecture des services de base de données
+- Systèmes migratoires
+- Synchroniser les moteurs
+- Requêtes et jointures complexes
+- Optimisation des performances
+
+## Documentation connexe
+
+- [Migrer depuis Ionic Secure Storage](/docs/upgrade/from-ionic-secure-storage/)
+- [Solution de migration de plugins d'entreprise Ionic](/solutions/ionic-enterprise-plugins/)

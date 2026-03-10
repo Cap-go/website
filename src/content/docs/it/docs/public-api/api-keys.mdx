@@ -1,70 +1,95 @@
 ---
-
-title: "API Keys"
-description: "Comprehensive documentation for API Keys endpoint, detailing authentication, permissions, and management within Capgo API"
+title: API Chiavi
+description: >-
+  Documentazione completa per l'endpoint API Keys, con dettagli su
+  autenticazione, autorizzazioni e gestione all'interno di Capgo API
 sidebar:
   order: 9
 locale: it
 ---
+Le chiavi API vengono utilizzate per autenticare le richieste a Capgo API. Ciascuna chiave può avere autorizzazioni (modalità) diverse per controllare i livelli di accesso. Le chiavi sono specifiche dell'organizzazione e devono essere gestite con attenzione poiché concedono l'accesso alle tue risorse Capgo.
 
+## Modalità chiave
 
-API keys are used to authenticate requests to the Capgo API. Each key can have different permissions (modes) to control access levels. Keys are organization-specific and should be managed carefully as they grant access to your Capgo resources.
+- **lettura**: può solo leggere i dati, non sono consentite modifiche
+- **carica**: può leggere, modificare e caricare nuovi bundle
+- **write**: può leggere, modificare dati e caricare pacchetti
+- **all**: accesso completo a tutte le operazioni
 
-## Key Modes
+Le modalità chiave seguono uno schema graduale/graduale. Se disponi di una chiave di caricamento e poi crei una chiave di scrittura, la chiave di scrittura sarà in grado di fare tutto ciò che potrebbe fare la chiave di caricamento.
+Dai un'occhiata al diagramma seguente per comprendere meglio come funzionano le chiavi API.
 
-- **read**: Can only read data, no modifications allowed
-- **upload**: Can read, modify, and upload new bundles
-- **write**: Can read, modify data, and upload bundles
-- **all**: Full access to all operations
+<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="Un diagramma che spiega come funziona la chiave API" /><figcaption></figcaption></figure>
 
-Key modes follow a stepped/gradual schema. If you have an upload key, and then you create a write key, the write key will be able to do everything that the upload key could.
-Please take a look at the following diagram to better understand how API keys work.
+## Sottochiavi con diritti limitati
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="A diagram explaining how API key work" /><figcaption></figcaption></figure>
+Puoi creare sottochiavi con accesso limitato ad app o organizzazioni specifiche. Ciò è utile per limitare l'accesso a determinate risorse pur consentendo operazioni su altre. Utilizza i parametri `limited_to_apps` e `limited_to_orgs` durante la creazione di una chiave per definire queste restrizioni.
 
-## Subkeys with Limited Rights
+## Chiavi crittografate
 
-You can create subkeys with limited access to specific apps or organizations. This is useful for restricting access to certain resources while still allowing operations on others. Use the `limited_to_apps` and `limited_to_orgs` parameters when creating a key to define these restrictions.
+Puoi creare **chiavi API crittografate (con hash)** per una maggiore sicurezza. Quando crei una chiave crittografata:
 
-## Security Best Practices
+- La chiave viene sottoposta ad hashing utilizzando SHA-256 prima di essere archiviata nel database
+- **La chiave semplice viene restituita solo una volta** nella risposta di creazione: salvala immediatamente
+- La chiave non può essere recuperata o visualizzata nuovamente dopo la creazione
+- Se perdi una chiave crittografata, devi crearne una nuova
 
-1. **Principle of Least Privilege**: Always use the most restrictive mode that still allows your integration to function
-2. **Regular Rotation**: Rotate your API keys periodically
-3. **Secure Storage**: Store API keys securely and never commit them to version control
-4. **Monitoring**: Monitor API key usage and revoke any compromised keys immediately
-5. **Limited Subkeys**: Use subkeys with limited rights for specific integrations to minimize risk
+Utilizza il parametro `hashed: true` durante la creazione di una chiave per abilitare la crittografia. Questo è l'approccio consigliato per gli ambienti di produzione.
 
-## Endpoints
+## Scadenza chiave
 
-### GET
+Le chiavi API possono avere una **data di scadenza** per limitare la finestra di esposizione se una chiave viene compromessa. Quando viene impostata una data di scadenza:
+
+- La chiave smette di funzionare dopo la data e l'ora specificate
+- Le richieste che utilizzano chiavi scadute verranno rifiutate con un errore
+- Le chiavi scadute vengono automaticamente cancellate dopo 30 giorni
+
+Le organizzazioni possono applicare policy di scadenza:
+- **Richiedi scadenza**: tutte le chiavi API devono avere una data di scadenza
+- **Periodo di scadenza massimo**: limita l'intervallo nel futuro in cui è possibile impostare una data di scadenza
+
+## Migliori pratiche di sicurezza
+
+1. **Principio del privilegio minimo**: utilizza sempre la modalità più restrittiva che consenta comunque il funzionamento della tua integrazione
+2. **Utilizza chiavi crittografate**: crea chiavi hash per la produzione per proteggerti dalle violazioni del database
+3. **Imposta date di scadenza**: utilizza le date di scadenza per limitare la durata delle tue chiavi
+4. **Rotazione regolare**: ruota periodicamente le tue chiavi API
+5. **Archiviazione sicura**: archivia le chiavi API in modo sicuro e non impegnarle mai nel controllo della versione
+6. **Monitoraggio**: monitora l'utilizzo delle chiavi API e revoca immediatamente eventuali chiavi compromesse
+7. **Sottochiavi limitate**: utilizza sottochiavi con diritti limitati per integrazioni specifiche per ridurre al minimo i rischi
+
+## Endpoint
+
+### OTTIENI
 
 `https://api.capgo.app/apikey/`
 
-Retrieve all API keys associated with your account.
+Recupera tutte le chiavi API associate al tuo account.
 
-#### Response Type
+#### Tipo di risposta
 
 ```typescript
 interface ApiKey {
   created_at: string | null
   id: number
-  key: string
+  key: string | null  // null for encrypted keys
   mode: 'read' | 'write' | 'upload' | 'all'
   name: string
   updated_at: string | null
   user_id: string
   limited_to_apps?: string[]
   limited_to_orgs?: string[]
+  expires_at?: string | null  // ISO 8601 date, null means never expires
 }
-```
+```> **Nota**: per le chiavi crittografate, il campo `key` sarà `null` nelle risposte GET poiché la chiave semplice viene mostrata solo una volta durante la creazione.
 
-#### Example Request
+#### Richiesta di esempio
 
 ```bash
 curl -H "authorization: your-api-key" https://api.capgo.app/apikey/
 ```
 
-#### Example Response
+#### Esempio di risposta
 
 ```json
 {
@@ -96,9 +121,9 @@ curl -H "authorization: your-api-key" https://api.capgo.app/apikey/
 
 `https://api.capgo.app/apikey/`
 
-Create a new API key for a specific organization.
+Crea una nuova chiave API per un'organizzazione specifica.
 
-#### Query Parameters
+#### Richiedi corpo
 
 ```typescript
 interface ApiKeyCreate {
@@ -106,10 +131,12 @@ interface ApiKeyCreate {
   mode: 'read' | 'write' | 'upload' | 'all'
   limited_to_apps?: string[]
   limited_to_orgs?: string[]
+  hashed?: boolean       // Create an encrypted key (recommended for production)
+  expires_at?: string    // ISO 8601 date for key expiration
 }
 ```
 
-#### Example Request
+#### Esempio di richiesta (chiave standard)
 
 ```bash
 curl -X POST \
@@ -123,7 +150,22 @@ curl -X POST \
   https://api.capgo.app/apikey/
 ```
 
-#### Example Response
+#### Esempio di richiesta (chiave crittografata con scadenza)
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Secure CI Key",
+    "mode": "upload",
+    "hashed": true,
+    "expires_at": "2025-06-01T00:00:00Z"
+  }' \
+  https://api.capgo.app/apikey/
+```
+
+#### Esempio di risposta (tasto standard)
 
 ```json
 {
@@ -139,22 +181,40 @@ curl -X POST \
 }
 ```
 
-### DELETE
+#### Esempio di risposta (chiave crittografata)
+
+```json
+{
+  "apikey": {
+    "id": 4,
+    "key": "ak_abc123...",
+    "mode": "upload",
+    "name": "Secure CI Key",
+    "created_at": "2024-02-12T00:00:00Z",
+    "user_id": "user_123",
+    "expires_at": "2025-06-01T00:00:00Z"
+  }
+}
+```
+
+> **Importante**: per le chiavi crittografate, il valore `key` in questa risposta è l'**unica volta** in cui vedrai la chiave semplice. Salvalo immediatamente in un luogo sicuro. Le successive richieste GET restituiranno `null` per il campo `key`.
+
+### ELIMINA
 
 `https://api.capgo.app/apikey/:id/`
 
-Delete an existing API key. Use this to revoke access immediately.
+Elimina una chiave API esistente. Usalo per revocare immediatamente l'accesso.
 
-#### Parameters
-- `id`: The ID of the API key to delete (numeric identifier, not the key string itself)
+#### Parametri
+- `id`: l'ID della chiave API da eliminare (identificatore numerico, non la stringa della chiave stessa)
 
-#### Example Request
+#### Richiesta di esempio
 
 ```bash
 curl -X DELETE -H "authorization: your-api-key" https://api.capgo.app/apikey/1/
 ```
 
-#### Success Response
+#### Risposta riuscita
 
 ```json
 {
@@ -162,17 +222,17 @@ curl -X DELETE -H "authorization: your-api-key" https://api.capgo.app/apikey/1/
 }
 ```
 
-## Common Use Cases
+## Casi d'uso comuni
 
-1. **CI/CD Integration**: Create read-only keys for CI pipelines to check deployment status
-2. **Deployment Automation**: Use upload mode keys for automated deployment scripts
-3. **Monitoring Tools**: Use read mode keys for external monitoring integrations
-4. **Admin Access**: Use all mode keys sparingly for administrative tools
-5. **Limited Access**: Create subkeys with limited rights to specific apps or organizations for third-party integrations
+1. **Integrazione CI/CD**: crea chiavi di sola lettura per le pipeline CI per verificare lo stato della distribuzione
+2. **Automazione della distribuzione**: utilizza le chiavi della modalità di caricamento per gli script di distribuzione automatizzati
+3. **Strumenti di monitoraggio**: utilizza i tasti della modalità di lettura per le integrazioni di monitoraggio esterno
+4. **Accesso amministratore**: utilizzare tutte le chiavi di modalità con parsimonia per gli strumenti amministrativi
+5. **Accesso limitato**: crea sottochiavi con diritti limitati su app o organizzazioni specifiche per integrazioni di terze parti
 
-## Error Handling
+## Gestione degli errori
 
-Common error scenarios and their responses:
+Scenari di errore comuni e relative risposte:
 
 ```json
 // Invalid mode
@@ -192,4 +252,28 @@ Common error scenarios and their responses:
   "error": "Insufficient permissions to manage API keys",
   "status": "KO"
 }
-``` 
+
+// Expired API key used for authentication
+{
+  "error": "API key has expired",
+  "status": "KO"
+}
+
+// Invalid expiration date (in the past)
+{
+  "error": "Expiration date must be in the future",
+  "status": "KO"
+}
+
+// Organization requires expiration
+{
+  "error": "Organization policy requires an expiration date for API keys",
+  "status": "KO"
+}
+
+// Expiration exceeds organization limit
+{
+  "error": "Expiration date exceeds organization maximum of 90 days",
+  "status": "KO"
+}
+```

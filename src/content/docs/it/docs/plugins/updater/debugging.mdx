@@ -1,174 +1,167 @@
 ---
 title: Debugging
 description: >-
-  How to debug your updates of Capgo and understand the issue you can have with
-  your configuration
+  Come eseguire il debug degli aggiornamenti di Capgo e comprendere il problema
+  che potresti riscontrare con la tua configurazione
 sidebar:
   order: 6
 locale: it
 ---
-
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-## Understanding cloud logs:
+## Comprensione dei log cloud:
 
-### Sent from the backend
+Se ricevi un codice di rifiuto del cloud e sono necessarie misure correttive concrete, consulta [Problemi comuni di aggiornamento](/docs/plugins/updater/commonproblems/).
 
-| code                          | Description                                                                                                                                                                 |
-| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **InvalidIp**                                    | The user is located in a Google data center and the update is less than 4 hours old. This is done to prevent Google bots' devices from counting as devices in your account. |
-| **needPlanUpgrade** (previously **needUpgrade**) | Indicates that you have reached the limit of your plan, and the device will not receive updates until you upgrade or until the next month.                                  |
-| **noNew**                                        | The device has the latest available version.                                                                                                                                |
-| **disablePlatformIos**                           | The device is on the iOS platform, but that is disabled in the channel settings.                                                                                            |
-| **disablePlatformAndroid**                       | The device is on the Android platform, but that is disabled in the channel settings.                                                                                        |
-| **disableAutoUpdate**                            | "major" | "minor" | "version_number" | "none"                                       |
-| **disableAutoUpdateUnderNative**                 | The device has version (`1.2.3`), and the channel has an update (`1.2.2`) under the device version to send, but that is disabled in the channel settings.                   |
-| **disableDevBuild**                              | The device has a dev build, but that is disabled in the channel settings.                                                                                                   |
-| **disableEmulator**                              | The device is an emulator, but that is disabled in the channel settings.                                                                                                    |
-| **cannotGetBundle**                          | Failed to generate a valid signed URL for the bundle download. This occurs when the bundle URL generation fails or returns an invalid URL (not starting with http/https) and there's no manifest available as a fallback.                                                                                          |
-| **cannotUpdateViaPrivateChannel**              | The device tried to self-associate with a private channel, but the channel settings don't allow device self-association (`allow_device_self_set` is false) and the channel is not public.                                                                                    |
-| **channelMisconfigured**                       | The channel is configured to disable auto-update by version number (`disable_auto_update: 'version_number'`), but the bundle's `min_update_version` field is null, making it impossible to determine which devices should receive the update.                                                                                                                 |
-| **disableAutoUpdateMetadata**                  | Auto-update is disabled by version number metadata. The channel requires the device's version to be at least `min_update_version`, but the device's current version is lower than this threshold.                                                                                                         |
-| **disableAutoUpdateToMajor**                   | Channel setting `disable_auto_update: 'major'` prevents updates that would increase the major version number (e.g., blocking 1.x.x from updating to 2.x.x).                                                                                             |
-| **disableAutoUpdateToMinor**                   | Channel setting `disable_auto_update: 'minor'` prevents updates that would increase the minor version number (e.g., blocking 1.2.x from updating to 1.3.x).                                                                                             |
-| **disableAutoUpdateToPatch**                   | Channel setting `disable_auto_update: 'patch'` prevents updates that would increase the patch version number, or allows only patch-level updates within the same major.minor version (e.g., 1.2.3 can update to 1.2.4 but not 1.2.2 or 1.3.0).                                                                                             |
-| **missingBundle**                              | The bundle assigned to this channel has no downloadable content. This means the bundle has no `external_url`, no `r2_path`, it's not a built-in version, and there are no manifest entries available for download.                                                                                                                   |
-| **NoChannelOrOverride**                        | No default channel is configured for this app and the device has no specific channel override assigned. At least one must be present for updates to work.                                                                                                     |
-| **rateLimited**                                | The device has been rate limited due to excessive requests.                                                                                                        |
-
-
-### Sent from the device
-
-| code  | Description                                                                       |
+### Inviato dal backend| codice | Descrizione |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Ip non valido** | L'utente si trova in un data center Google e l'aggiornamento risale a meno di 4 ore fa. Questo viene fatto per impedire che i dispositivi dei bot Google vengano conteggiati come dispositivi nel tuo account. |
+| **needPlanUpgrade** (in precedenza **needUpgrade**) | Indica che hai raggiunto il limite del tuo piano e che il dispositivo non riceverà aggiornamenti fino all'aggiornamento o fino al mese successivo.                                  |
+| **noNovità** | Il dispositivo ha l'ultima versione disponibile.                                                                                                                                |
+| **disablePlatformIos** | Il dispositivo si trova sulla piattaforma iOS, ma è disabilitata nelle impostazioni del canale.                                                                                            |
+| **disablePlatformAndroid** | Il dispositivo si trova sulla piattaforma Android, ma è disabilitata nelle impostazioni del canale.                                                                                        |
+| **disabilitaaggiornamento automatico** | "maggiore" | "minore" | "numero_versione" | "nessuno" |
+| **disableAutoUpdateUnderNative** | Il dispositivo ha una versione (`1.2.3`) e il canale ha un aggiornamento (`1.2.2`) nella versione del dispositivo da inviare, ma questo è disabilitato nelle impostazioni del canale.                   |
+| **disableDevBuild** | Il dispositivo ha una build di sviluppo, ma è disabilitata nelle impostazioni del canale.                                                                                                   |
+| **disableEmulator** | Il dispositivo è un emulatore, ma è disabilitato nelle impostazioni del canale.                                                                                                    |
+| **impossibileGetBundle** | Impossibile generare un URL firmato valido per il download del pacchetto. Ciò si verifica quando la generazione dell'URL del bundle non riesce o restituisce un URL non valido (che non inizia con http/https) e non è disponibile alcun manifest come fallback.                                                                                          |
+| **impossibile aggiornare tramite canale privato** | Il dispositivo ha tentato di autoassociarsi a un canale privato, ma le impostazioni del canale non consentono l'autoassociazione del dispositivo (`allow_device_self_set` è falso) e il canale non è pubblico.                                                                                    |
+| **canale non configurato correttamente** | Il canale è configurato per disabilitarele si aggiorna automaticamente in base al numero di versione (`disable_auto_update: 'version_number'`), ma il campo `min_update_version` del bundle è nullo, rendendo impossibile determinare quali dispositivi dovrebbero ricevere l'aggiornamento.                                                                                                                 |
+| **disableAutoUpdateMetadata** | L'aggiornamento automatico è disabilitato dai metadati del numero di versione. Il canale richiede che la versione del dispositivo sia almeno `min_update_version`, ma la versione corrente del dispositivo è inferiore a questa soglia.                                                                                                         |
+| **disableAutoUpdateToMajor** | L'impostazione del canale `disable_auto_update: 'major'` impedisce gli aggiornamenti che aumenterebbero il numero della versione principale (ad esempio, bloccando 1.x.x dall'aggiornamento a 2.x.x).                                                                                             |
+| **disableAutoUpdateToMinor** | L'impostazione del canale `disable_auto_update: 'minor'` impedisce gli aggiornamenti che aumenterebbero il numero di versione secondaria (ad esempio, bloccando 1.2.x dall'aggiornamento a 1.3.x).                                                                                             |
+| **disableAutoUpdateToPatch** | L'impostazione del canale `disable_auto_update: 'patch'` impedisce gli aggiornamenti che aumenterebbero il numero di versione della patch o consente solo aggiornamenti a livello di patch all'interno della stessa versione major.minor (ad esempio, 1.2.3 può essere aggiornato a 1.2.4 ma non 1.2.2 o 1.3.0).                                                                                             |
+| **Pacchetto mancante** | Il bundle assegnato a questo canale non ha contenuti scaricabili. Ciò significa che il bundle non ha `external_url`, né `r2_path`, non è una versione integrata e non ci sono voci manifest disponibili per il download.                                                                                                                   |
+| **NoChannelOrOverride** | Per questa app non è configurato alcun canale predefinito e al dispositivo non è assegnato alcun canale specifico. Almeno uno deve essere presente affinché gli aggiornamenti funzionino.                                                                                                     |
+| **tariffa limitata** | La tariffa del dispositivo è stata limitata a causa delle richieste eccessive.                                                                                                        |
+| **chiave non corrispondente** | La chiave pubblica di crittografia del dispositivo non corrisponde alla chiave pubblica utilizzata per crittografare il pacchetto. Ciò accade quando: (1) la chiave pubblica `capacitor.config.json` della tua app è diversa da quella utilizzata durante il caricamento del pacchetto oppure (2) hai ruotato le chiavi di crittografia ma non hai ancora aggiornato tutti i dispositivi. La risposta include sia `deviceKeyId` che `bundleKeyId` (i primi 4 caratteri di ciascuna chiave pubblica) per aiutare a identificare la mancata corrispondenza. Per risolvere questo problema, assicurati che venga utilizzata la stessa coppia di chiavi sia per il caricamento dei bundle (CLI utilizza la chiave privata) sia nell'app (capacitor.config.json contiene la chiave pubblica). |### Inviato dal dispositivo| codice | Descrizione |
 | --------------------- | --------------------------------------------------------------------------------- |
-| **ping**              | Internal test action used to verify the stats system is working correctly.        |
-| **get**               | Info for downloading the new version has been sent to the device.                 |
-| **delete**            | One bundle has been deleted on the device.                                        |
-| **set**               | A bundle has been set on the device.                                              |
-| **set_fail**          | The bundle failed to set.                                                         |
-| **reset**             | The device reset to the `builtin` bundle.                                         |
-| **download_XX**       | A new bundle has been downloaded - progress indicated by XX% (increments of 10%). |
-| **download_complete** | The new bundle has finished downloading.                                          |
-| **download_manifest_start** | The device started downloading the update manifest.                             |
-| **download_manifest_complete** | The device finished downloading the update manifest.                          |
-| **download_zip_start** | The device started downloading the bundle archive.                                   |
-| **download_zip_complete** | The device finished downloading the bundle archive.                                 |
-| **download_manifest_file_fail** | One manifest entry failed to download; the stats payload puts `version_name` in the form `version:fileName` to pinpoint the asset. |
-| **download_manifest_checksum_fail** | The manifest file failed checksum validation.                           |
-| **download_manifest_brotli_fail** | The manifest file failed to decompress using Brotli.                       |
-| **download_fail**     | The new bundle failed to download.                                                |
-| **update_fail**       | The new bundle has been installed but failed to call `notifyAppReady`.            |
-| **checksum_fail**     | The new bundle failed to validate the checksum. If you're using Capgo Cloud and encounter this error, it typically means your app version is expecting a different checksum type. The latest version of the CLI and plugins (version 5.10.0+, 6.25.0+ or 7+) use SHA256 checksums, while older plugins used CRC32. If you see a checksum fail, check if the checksum is CRC32 (a shorter hash) rather than SHA256. This usually indicates the bundle was uploaded with an old version of the CLI. Verify your bundle version in the Capgo dashboard - bundles created since version 5.10.0/6.25.0/7 should use SHA256. If you're seeing CRC32 checksums, ensure you have the latest plugin version installed locally (the CLI checks your local plugin version to determine which checksum type to upload), then upgrade your CLI and re-upload the bundle.                                   |
-| **windows_path_fail** | The zip has files who contain windows path who are illegal                        |
-| **canonical_path_fail** | The path of files is not canonical                                              |
-| **directory_path_fail** | There is an error in the path of zip files                                         |
-| **unzip_fail**          | unzip failed                                                                   |
-| **low_mem_fail** | Download failed because of low memory in the device                                    |
-| **app_moved_to_background** | The application entered the background state.                                   |
-| **app_moved_to_foreground** | The application entered the foreground state.                                   |
-| **decrypt_fail**        | Failed to decrypt the downloaded bundle.                                          |
-| **getChannel**          | The current channel for the device was queried.                                   |
-| **setChannel**          | A channel was successfully set for the device.                                    |
-| **uninstall**           | The application was uninstalled or Capgo data cleared.                            |
-| **blocked_by_server_url** | Server.url is present in your capacitor config, this make Capacitor serve remote url and ignore local files, while our updater is made to function with local file, Server.url Is consider by Capacitor Makers as bad practice in production and will lead to many issue and plugin not working correctly.                         |
+| **ping** | Azione di test interno utilizzata per verificare che il sistema delle statistiche funzioni correttamente.        |
+| **prendi** | Le informazioni per scaricare la nuova versione sono state inviate al dispositivo.                 |
+| **elimina** | Un pacchetto è stato eliminato dal dispositivo.                                        |
+| **imposta** | Sul dispositivo è stato impostato un pacchetto.                                              |
+| **set_fail** | Impossibile impostare il pacchetto.                                                         |
+| **reimposta** | Il dispositivo è stato reimpostato sul pacchetto `builtin`.                                         |
+| **scarica_XX** | È stato scaricato un nuovo pacchetto: avanzamento indicato dal XX% (incrementi del 10%). |
+| **download_completo** | Il download del nuovo bundle è terminato.                                          |
+| **download_manifest_start** | Il dispositivo ha iniziato a scaricare il manifesto dell'aggiornamento.                             |
+| **download_manifest_complete** | Il dispositivo ha terminato il download del manifesto dell'aggiornamento.                          |
+| **download_zip_start** | Il dispositivo ha iniziato a scaricare l'archivio del bundle.                                   |
+| **download_zip_complete** | Il dispositivo ha terminato il download dell'archivio del bundle.                                 |
+| **download_manifest_file_fail** | Impossibile scaricare una voce manifest; il payload delle statistiche inserisce `version_name` nel modulo `version:fileName` per individuare la risorsa. |
+| **download_manifest_checksum_fail** | Il file manifest non ha superato la convalida del checksum.                           |
+| **download_manifest_brotli_fail** | Impossibile decomprimere il file manifest utilizzando Brotli.                       |
+| **download_fail** | Impossibile scaricare il nuovo bundle.                                                |
+| **update_fail** | Il nuovo bundle è stato installato ma non è stato possibile chiamare `notifyAppReady`.            |
+| **checksum_fail** | Il nuovo bundle non è riuscito a convalidare il checksum. Ciò può verificarsi per diversi motivi: **1) Mancata corrispondenza del tipo di checksum:** l'ultima versione di CLI e dei plugin (versione 5.10.0+, 6.25.0+ o 7+) utilizza checksum SHA256, mentre i plugin più vecchi utilizzavano CRC32. Se vedi un checksum fallire, controlla se il checksum è CRC32 (un hash più breve) anziché SHA256. Questo di solito indica che il pacchetto è stato caricato con una versione precedente di CLI. Verifica la versione del tuo bundle nel dashboard Capgo: i bundle creati a partire dalla versione 5.10.0/6.25.0/7 dovrebbero utilizzare SHA256. Se visualizzi checksum CRC32, assicurati di avere la versione più recente del plug-in installata localmente (CLI controlla la versione del plug-in locale per determinare quale tipo di checksum caricare), quindi aggiorna il tuo CLI e ricarica il pacchetto. **2) Mancata corrispondenza della chiave di crittografia (sulle versioni del plug-in precedenti alla 8.3.0 o 5/6/7.38.0):** Nelle versioni del plug-in precedenti, se la chiave pubblica del dispositivo non corrisponde alla chiave utilizzata per crittografare il pacchetto,la decrittografia fallirà silenziosamente e causerà un errore di checksum. Se utilizzi la crittografia e vedi `checksum_fail`, verifica che la chiave pubblica in `capacitor.config.json` della tua app corrisponda alla chiave privata utilizzata per caricare il pacchetto. L'aggiornamento alla versione del plugin 8.3.0+ (o 5/6/7.38.0+) ti darà invece un errore `keyMismatch` corretto dal server, rendendo questo problema più facile da diagnosticare. |
+| **windows_path_fail** | Lo zip contiene file che contengono percorsi di Windows illegali |
+| **canonical_path_fail** | Il percorso dei file non è canonico |
+| **percorso_directory_fail** | C'è un errore nel percorso dei file zip |
+| **unzip_fail** | decompressione non riuscita |
+| **low_mem_fail** | Download non riuscito a causa della memoria insufficiente nel dispositivo |
+| **app_moved_to_ background** | L'applicazione è entrata nello stato in background.                                   |
+| **app_moved_to_foreground** | L'applicazione è entrata nello stato in primo piano.                                   |
+| **decrypt_fail** | Impossibile decrittografare il pacchetto scaricato.                                          |
+| **getChannel** | È stato interrogato il canale attuale del dispositivo.                                   |
+| **setChannel** | Un canale è stato impostato correttamente per il dispositivo.                                    |
+| **disinstalla** | L'applicazione è stata disinstallata o i dati Capgo sono stati cancellati.                            |
+| **bloccato_da_url_server** | Server.url è presente nella configurazione del condensatore, questo fa sì che Capacitor serva l'URL remoto e ignori i file locali, mentre il nostro programma di aggiornamento è fatto per funzionare con il file locale, Server.url è considerato dai produttori di Capacitor una cattiva pratica in produzione e porterà a molti problemi e il plug-in non funzionerà correttamente.                         |### Stato del pacchetto
 
-### Bundle status
+* `SUCCESS`: installazione del pacchetto completata
+* `ERROR`: installazione o download non riuscito
+* `PENDING`: download completato, in attesa di rilascio
+* `DELETED`: pacchetto eliminato, ancora presentato per le statistiche
+* `DOWNLOADING`: sto scaricando un pacchetto in corso
 
-* `SUCCESS`: install bundle done
-* `ERROR`: install or download failed
-* `PENDING`: Download done, pending release
-* `DELETED`: Bundle deleted, still presented for stats
-* `DOWNLOADING`: Currently downloading a bundle
+## Comprensione dei log del dispositivo:
 
-## Understanding device logs:
+### Comando di debug:
 
-### Debug command:
-
-There is a debug command for Capgo cloud users.
+È disponibile un comando di debug per gli utenti cloud Capgo.
 
 ```bash
 npx @capgo/cli@latest app debug
 ```
 
-This will allow you to check all events happening in the app and find a solution if updates don't happen.
+Ciò ti consentirà di controllare tutti gli eventi che si verificano nell'app e trovare una soluzione se gli aggiornamenti non vengono eseguiti.
 
-### IOS
+###IOS
 
-to find your logs on Xcode
+per trovare i tuoi registri su Xcode
 
 <LinkCard
-    title="Getting the Device Log in Xcode"
+    title="Ottenere il dispositivo Accedi Xcode"
     href="https://intercom.help/deploygate/en/articles/4682692-getting-the-device-log-in-xcode"
 />
 
 ### Android:
 
-to find your logs on Android studio
+per trovare i tuoi registri su Android studio
 
 <LinkCard
-    title="View logs with Logcat"
+    title="Visualizza i log con Logcat"
     href="https://developer.android.com/studio/debug/am-logcat"
 />
 
-### Explanations Logs
+### Spiegazioni Registri
 
-* `Failed to download from` **=>** same as **download\_fail**
-* `notifyAppReady was not called, roll back current bundle` => same as as **update\_fail**
+* `Impossibile scaricare da` **=>** uguale a **download\_fail**
+* `notifyAppReady non è stato chiamato, ripristina il bundle corrente` => come **update\_fail**
 
-## Finding the downloaded bundle in your device
+## Trovare il pacchetto scaricato sul tuo dispositivo
 
 ### iOS
 
-To debug on iOS, you need to dump the app on your computer, you can do it like this:
+Per eseguire il debug su iOS, devi scaricare l'app sul tuo computer, puoi farlo in questo modo:
 
-Xcode has a built-in feature for inspecting the file system of developer-installed apps on an iOS device.
-![Xcode Window menu showing Devices and Simulators option](/ios_debug_update_1.webp)
+Xcode dispone di una funzionalità integrata per ispezionare il file system delle app installate dallo sviluppatore su un dispositivo iOS.
+![Xcode Menu della finestra che mostra l'opzione Dispositivi e simulatori](/ios_debug_update_1.webp)
 
-To achieve this:
+Per raggiungere questo obiettivo:
 
-* Connect your device to your Mac and select Window > Devices in the Xcode menubar.
-* Select your device in the left pane under the Devices section.
-* This will show a list of developer-installed apps for that device.
-* Select the app you want to inspect and then select the 3 dots icon near the bottom of the screen.
-* Here you can view the current file system by selecting download a snapshot of it.
+* Collega il tuo dispositivo al Mac e seleziona Finestra > Dispositivi nella barra dei menu Xcode.
+* Seleziona il tuo dispositivo nel riquadro di sinistra nella sezione Dispositivi.
+* Verrà visualizzato un elenco delle app installate dallo sviluppatore per quel dispositivo.
+* Seleziona l'app che desideri controllare, quindi seleziona l'icona a 3 punti nella parte inferiore dello schermo.
+* Qui è possibile visualizzare il file system corrente selezionando scaricarne un'istantanea.
 
-![Xcode Devices panel showing app container download option](/ios_debug_update_2.webp)
+![Xcode Pannello Dispositivi che mostra l'opzione di download del contenitore dell'app](/ios_debug_update_2.webp)
 
-Selecting Download Container... will download and export a snapshot of the file system as a .xcappdata file that you can browse through.
+Selezionando Scarica contenitore... verrà scaricata ed esportata un'istantanea del file system come file .xcappdata che è possibile sfogliare.
 
-![Downloaded xcappdata file with Show Package Contents context menu](/ios_debug_update_3.webp)
+![File xcappdata scaricato con il menu contestuale Mostra contenuto pacchetto](/ios_debug_update_3.webp)
 
-Right-click on this file and select Show Package Contents to open the folder.
+Fare clic con il tasto destro su questo file e selezionare Mostra contenuto pacchetto per aprire la cartella.
 
-Open the App Data folder, and you should now see a few folders like Documents, Library, tmp, etc.
+Apri la cartella Dati app e ora dovresti vedere alcune cartelle come Documenti, Libreria, tmp, ecc.
 
-![iOS app container folder structure showing Documents and Library folders](/ios_debug_update_4.webp)
+![iOS struttura delle cartelle del contenitore dell'app che mostra le cartelle Documenti e Libreria](/ios_debug_update_4.webp)
 
-Then you will find a version in 2 folders:
+Quindi troverai una versione in 2 cartelle:
 
-`library/NoCloud/ionic_built_snapshots` is necessary after the app reboot
+`library/NoCloud/ionic_built_snapshots` è necessario dopo il riavvio dell'app
 
-and `documents/versions` for hot reload
+e `documents/versions` per la ricarica a caldo
 
 ### Android
 
-To debug on Android, you need to access the device from Android Studio:
+Per eseguire il debug su Android, devi accedere al dispositivo da Android Studio:
 
-* Click View > Tool Windows > Device File Explorer or click the Device File Explorer button in the tool window bar to open the Device File Explorer.
-* Select a device from the dropdown list.
-* Open the path **data/data/APP\_NAME/** where **APP\_NAME is your app ID.**
+* Fare clic su Visualizza > Finestre degli strumenti > Esplora file dispositivo oppure fare clic sul pulsante Esplora file dispositivo nella barra della finestra degli strumenti per aprire Esplora file dispositivo.
+* Seleziona un dispositivo dall'elenco a discesa.
+* Apri il percorso **data/data/APP\_NAME/** dove **APP\_NAME è l'ID della tua app.**
 
-![Android Studio Device File Explorer showing app data directory](/android_debug_update.webp)
+![Android Studio Device File Explorer che mostra la directory dei dati dell'app](/android_debug_update.webp)
 
-Then Find the `versions` folder to see all the versions
+Quindi trova la cartella `versions` per vedere tutte le versioni
 
-:::tip[Did you know?]
-On Android, all versions are stored in one folder, unlike IOS where it has to be duplicated in two locations.
+:::suggerimento[Lo sapevate?]
+Su Android, tutte le versioni sono archiviate in una cartella, a differenza di IOS dove deve essere duplicato in due posizioni.
 :::
 
-## Understanding ios production crash logs
+## Comprensione dei registri di arresto anomalo della produzione iOS
 
 <LinkCard
-    title="How to review your app's crash logs"
+    title="Come esaminare i registri degli arresti anomali della tua app"
     href="https://developer.apple.com/news/?id=nra79npr"
 />

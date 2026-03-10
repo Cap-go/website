@@ -337,7 +337,7 @@ MAU ist eine bessere Lösung als die Anzahl der Installationen für die Preisges
 - **Aktuelles Verhalten**: Die Geräte-ID bleibt nun über App-Neuinstallationen hinweg erhalten. Sie wird sicher im Keychain des Geräts (iOS) oder EncryptedSharedPreferences (Android) gespeichert, sodass wir dasselbe Gerät auch nach Deinstallation/Neuinstallation verfolgen können.
 - **Vorheriges Verhalten** (vor v6.25.0/v7.25.0): Aus Datenschutzgründen im Zusammenhang mit Apple- und Google Store-Richtlinien wurde die Geräte-ID bei jeder App-Neuinstallation zurückgesetzt, was es unmöglich machte, dasselbe Gerät über Neuinstallationen hinweg zu verfolgen.
 
-Die Datenschutzregeln werden von Apple und Google durchgesetzt, und die Implementierung von Capgo entspricht deren Best Practices für die Geräteidentifikation.
+Die Datenschutzregeln werden von Apple und Google durchgesetzt, und die Implementierung von Capgo entspricht deren Bewährte Methoden für die Geräteidentifikation.
 
 Geräte-IDs werden erst in Ihrer Geräteliste angezeigt, wenn sie ihren ersten Patch installiert haben.
 

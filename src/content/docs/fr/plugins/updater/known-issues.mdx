@@ -1,81 +1,83 @@
 ---
-locale: fr
-title: "Problèmes connus"
-description: "Problèmes connus with Capacitor and Capgo, and our updater, this page will Aide you understand the weird Problème you have with our tool"
-sidebar: 
+title: Problèmes connus
+description: >-
+  Problèmes connus avec Capacitor et Capgo, et notre programme de mise à jour,
+  cette page vous aidera à comprendre le problème étrange que vous rencontrez
+  avec notre outil
+sidebar:
   order: 7
+locale: fr
 ---
-
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-## Ionic live reload
+## Rechargement en direct d'Ionic
 
-* When you develop, if you use the Ionic live reload feature from the CLI, it will override the plugin, so you will never see your update.
+* Lorsque vous développez, si vous utilisez la fonctionnalité de rechargement en direct Ionic de CLI, elle remplacera le plugin, vous ne verrez donc jamais votre mise à jour.
 
-## Quasar live reload
+## Rechargement en direct de Quasar
 
-* It uses the same system as ionic under the hood, so you will not see your updates.
+* Il utilise le même système que Ionic sous le capot, vous ne verrez donc pas vos mises à jour.
 
-## Mises à jour fail
+## Les mises à jour échouent
 
-* This usually happens when large updates (> 20mb) are pushed, a big percentage of users will not get the last version.  
-In the past, Utilisateurs needed to keep the Application open until the Télécharger was done, now we use background Télécharger, but it's still limited to a few seconds.
+* Cela se produit généralement lorsque des mises à jour volumineuses (> 20 Mo) sont publiées, un grand pourcentage d'utilisateurs n'obtiendront pas la dernière version.  
+Dans le passé, les utilisateurs devaient garder l'application ouverte jusqu'à ce que le téléchargement soit terminé. Nous utilisons désormais le téléchargement en arrière-plan, mais il est toujours limité à quelques secondes.
 
 ## Android
 
-### Cannot Télécharger
+### Impossible de télécharger
 
-We have seen some issues with Appareils in india, and got Utilisateur on the call, made them try different DNS servers, and it worked.
+Nous avons constaté des problèmes avec les appareils en Inde et avons appelé les utilisateurs, leur avons fait essayer différents serveurs DNS, et cela a fonctionné.
 
-So if you have the Problème, try to use a different DNS server like Cloudflare or Google DNS.
+Donc, si vous rencontrez le problème, essayez d'utiliser un autre serveur DNS comme Cloudflare ou Google DNS.
 
-Cloudflare: 1.1.1.1 and 1.0.0.1
+Cloudflare : 1.1.1.1 et 1.0.0.1
 
-Google DNS: 8.8.8.8 and 8.8.4.4 or dns.google
+Google DNS : 8.8.8.8 et 8.8.4.4 ou dns.google
 
 <LinkCard
-	title="How to Configuration a preferred DNS server on Android?"
+	title="Comment configurer un serveur DNS préféré sur Android ?"
 	href="https://www.androidpolice.com/use-preferred-dns-server-android-tutorial/"
 />
 
-### Self Hosted
-When you are pushing a self-hosted Mise à jour, be mindful you cannot use "HTTP" endpoint as it's against the Sécurité policies of Android apps, if you still want to do it, follow this Guide:
+### Auto-hébergé
+Lorsque vous diffusez une mise à jour auto-hébergée, n'oubliez pas que vous ne pouvez pas utiliser le point de terminaison "HTTP" car cela va à l'encontre des politiques de sécurité des applications Android. Si vous souhaitez toujours le faire, suivez ce guide :
 
 <LinkCard
-	title="How to allow all Network connection types HTTP and HTTPS in Android (9) Pie?"
+	title="Comment autoriser tous les types de connexion réseau HTTP et HTTPS dans Android (9) Pie ?"
 	href="https://stackoverflow.com/a/51902630/5511370"
 />
 
-### Unzip 
+### Décompresser 
 
-Unzip Problème: DEFLATED entries can have EXT descriptor
+Problème de décompression : les entrées DEFLATED peuvent avoir un descripteur EXT
 
-If you zipped your bundle with something different than the CLI, the format or your zip could be incorrect, please use the CLI command `npx @capgo/cli zip BUNDLE_FOLDER`.
+Si vous avez compressé votre bundle avec quelque chose de différent du CLI, le format ou votre zip pourrait être incorrect, veuillez utiliser la commande CLI `npx @capgo/cli zip BUNDLE_FOLDER`.
 
-This is a known Problème of Java:
+Il s'agit d'un problème connu de Java :
 
 <LinkCard
-	title="Unzip Problème: DEFLATED entries can have EXT descriptor"
+	title="Problème de décompression : les entrées DEFLATED peuvent avoir un descripteur EXT"
 	href="https://bugs.openjdk.org/browse/JDK-8143613"
 />
 
 
-### Clearfix Problème
+### Problème Clearfix
 
-* If you have issues with usesCleartextTraffic, it's because the plugin follows the good practice recommended by sonar cloud, in 90% of the cases it will work just fine, but with some plugins that causes issues.
+* Si vous rencontrez des problèmes avecusesCleartextTraffic, c'est que le plugin suit les bonnes pratiques recommandées par sonar cloud, dans 90% des cas cela fonctionnera très bien, mais avec certains plugins cela pose des problèmes.
 
-To fix it, add in `android/app/src/main/AndroidManifest.xml` in the `<application>` key :
+Pour résoudre ce problème, ajoutez `android/app/src/main/AndroidManifest.xml` dans la clé `<application>` :
 
 ```xml
 tools:replace="android:usesCleartextTraffic"
 xmlns:tools="http://schemas.android.com/tools"
 ```
 
-## iOS
+##IOS
 
-### Privacy manifest
+### Manifeste de confidentialité
 
-Add the `NSPrivacyAccessedAPICategoryUserDefaults` dictionary key to your [Privacy Manifest](https://capacitorjs.com/docs/ios/privacy-manifest) (usually `ios/App/PrivacyInfo.xcprivacy`):
+Ajoutez la clé de dictionnaire `NSPrivacyAccessedAPICategoryUserDefaults` à votre [Manifeste de confidentialité](https://capacitorjs.com/docs/ios/privacy-manifest) (généralement `ios/App/PrivacyInfo.xcprivacy`) :
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -98,33 +100,33 @@ Add the `NSPrivacyAccessedAPICategoryUserDefaults` dictionary key to your [Priva
 </plist>
 ```
 
-We recommend to declare [`CA92.1`](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401) as the reason for accessing the [`UserDefaults`](https://developer.apple.com/documentation/foundation/userdefaults) API.
+Nous vous recommandons de déclarer [`CA92.1`](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401) comme motif d'accès au [`UserDefaults`](https://developer.apple.com/documentation/foundation/userdefaults) API.
 
 
-### Network permissions
+### Autorisations réseau
 
-When using local server for Test Mise à jour, the Application will ask for network permission, it's a normal behavior, it's not the case when you use a remote server.
+Lorsque vous utilisez un serveur local pour tester la mise à jour, l'application demandera l'autorisation du réseau, c'est un comportement normal, ce n'est pas le cas lorsque vous utilisez un serveur distant.
 
 
-## Both OS
+## Les deux systèmes d'exploitation
 
-When doing manual mode Mises à jour, some events are not easy to catch, for Exemple the Mise à jour fail triggers just before your JS code reloads, so you will not be able to catch it.
+Lorsque vous effectuez des mises à jour en mode manuel, certains événements ne sont pas faciles à détecter, par exemple l'échec de la mise à jour se déclenche juste avant le rechargement de votre code JS, vous ne pourrez donc pas l'attraper.
 
-One alternative is to list the Bundles and Vérifier Erreur stats to know if the Mise à jour fails.
+Une alternative consiste à répertorier les bundles et à vérifier les statistiques d'erreur pour savoir si la mise à jour échoue.
 
-We need to find a better way to handle this in the future, but it's not a priority, since auto mode is the recommended way to do Mise à jour.
+Nous devons trouver une meilleure façon de gérer cela à l'avenir, mais ce n'est pas une priorité, puisque le mode automatique est la méthode recommandée pour effectuer la mise à jour.
 
-PRs are welcome to Aide us improve this.
+Les PR sont les bienvenus pour nous aider à améliorer cela.
 
 ## CLI
 
-if your CLI has troubles doing anything,
+si votre CLI a du mal à faire quoi que ce soit,
 
-Vérifier if **appId** and **appName** are present in your **capacitor.config.ts**
+Vérifiez si **appId** et **appName** sont présents dans votre **capacitor.config.ts**
 
-Follow the Guide of the official doc:
+Suivez le guide de la doc officielle :
 
 <LinkCard
-	title="Capacitor Configuration"
+	title="CapacitorConfiguration"
 	href="https://capacitorjs.com/docs/config"
 />

@@ -1,32 +1,31 @@
 ---
-title: "Electron Updater API 参考"
-description: "@capgo/electron-updater 的完整 API 参考 - 所有方法、事件与配置选项。"
+title: Electron 更新器 API 参考
+description: '@capgo/electron-updater 的完整 API 参考 - 所有方法、事件和配置选项。'
 sidebar:
   order: 2
 locale: zh
 ---
-
 import { Aside } from '@astrojs/starlight/components';
 
-本页记录 Electron Updater 的所有可用方法、事件与配置选项。
+此页面记录了 Electron Updater 的所有可用方法、事件和配置选项。
 
 ## 核心方法
 
-### notifyAppReady()
+### 通知应用程序就绪()
 
-**每次应用启动都必须调用。**确认 bundle 成功加载并防止自动回滚。
+**必须在每次应用程序启动时调用。** 确认捆绑包已成功加载并防止自动回滚。
 
 ```typescript
 await updater.notifyAppReady();
 ```
 
 <Aside type="caution">
-  如果在 `appReadyTimeout`(默认 10 秒)内未调用,更新将被视为失败并回滚到上一版本。
+  如果在 `appReadyTimeout` （默认 10 秒）内未调用，则认为更新失败，应用程序回滚到之前的版本。
 </Aside>
 
-### download(options)
+### 下载（选项）
 
-从 URL 下载 bundle。
+从 URL 下载捆绑包。
 
 ```typescript
 const bundle = await updater.download({
@@ -37,94 +36,94 @@ const bundle = await updater.download({
 });
 ```
 
-**参数:**
-| 选项 | 类型 | 必填 | 描述 |
-|--------|------|----------|-------------|
-| `url` | string | Yes | 下载 bundle 的 URL |
-| `version` | string | Yes | bundle 的版本标识 |
-| `checksum` | string | No | 用于校验的 SHA256 校验和 |
-| `sessionKey` | string | No | 加密 bundle 的会话密钥 |
+**参数：**
+|选项|类型 |必填 |描述 |
+|--------|------|----------|------------|
+| `url` |字符串|是的 |下载包的 URL |
+| `version` |字符串|是的 |捆绑包的版本标识符 |
+| `checksum` |字符串|没有 |用于验证的 SHA256 校验和 |
+| `sessionKey` |字符串|没有 |加密包的会话密钥 |
 
-**返回:** `BundleInfo` 对象,包含 `id`、`version`、`status`
+**返回：** `BundleInfo` 对象，带有 `id`、`version`、`status`
 
-### next(options)
+### 下一个（选项）
 
-将 bundle 排队,在下次应用重启时加载。
+对要在下次应用程序重新启动时加载的包进行排队。
 
 ```typescript
 await updater.next({ id: 'bundle-id' });
 ```
 
-**参数:**
-| 选项 | 类型 | 必填 | 描述 |
-|--------|------|----------|-------------|
-| `id` | string | Yes | 要排队的 bundle ID |
+**参数：**
+|选项|类型 |必填 |描述 |
+|--------|------|----------|------------|
+| `id` |字符串|是的 |队列中的捆绑 ID |
 
-### set(options)
+### 设置（选项）
 
-立即切换到指定 bundle 并重载应用。
+立即切换到捆绑包并重新加载应用程序。
 
 ```typescript
 await updater.set({ id: 'bundle-id' });
 ```
 
-**参数:**
-| 选项 | 类型 | 必填 | 描述 |
-|--------|------|----------|-------------|
-| `id` | string | Yes | 要激活的 bundle ID |
+**参数：**
+|选项|类型 |必填 |描述 |
+|--------|------|----------|------------|
+| `id` |字符串|是的 |要激活的捆绑包 ID |
 
-### reload()
+### 重新加载()
 
-使用当前 bundle 手动重载应用。
+使用当前包手动重新加载应用程序。
 
 ```typescript
 await updater.reload();
 ```
 
-### delete(options)
+### 删除（选项）
 
-从存储中删除 bundle。
+从存储中删除包。
 
 ```typescript
 await updater.delete({ id: 'bundle-id' });
 ```
 
-**参数:**
-| 选项 | 类型 | 必填 | 描述 |
-|--------|------|----------|-------------|
-| `id` | string | Yes | 要删除的 bundle ID |
+**参数：**
+|选项|类型 |必填 |描述 |
+|--------|------|----------|------------|
+| `id` |字符串|是的 |要删除的捆绑包 ID |
 
-### reset(options)
+### 重置（选项）
 
-重置为内置版本或最近一次成功的 bundle。
+重置为内置版本或上次成功的捆绑包。
 
 ```typescript
-// 重置为内置版本
+// Reset to builtin
 await updater.reset({ toLastSuccessful: false });
 
-// 重置为最近一次成功的 bundle
+// Reset to last successful bundle
 await updater.reset({ toLastSuccessful: true });
 ```
 
-**参数:**
-| 选项 | 类型 | 必填 | 描述 |
-|--------|------|----------|-------------|
-| `toLastSuccessful` | boolean | No | 若为 true,重置到最近成功的 bundle,否则重置到内置版本 |
+**参数：**
+|选项|类型 |必填 |描述 |
+|--------|------|----------|------------|
+| `toLastSuccessful` |布尔 |没有 |如果为 true，则重置为最后一个成功的捆绑包而不是内置 |
 
-## Bundle 信息
+## 捆绑包信息
 
-### current()
+###当前()
 
-获取当前 bundle 与原生版本信息。
+获取有关当前捆绑包和本机版本的信息。
 
 ```typescript
 const info = await updater.current();
 // { bundle: { id, version, status }, native: '1.0.0' }
 ```
 
-### list(options)
+### 列表（选项）
 
-列出已下载的所有 bundle。
+列出所有下载的捆绑包。
 
 ```typescript
 const bundles = await updater.list();
@@ -133,7 +132,7 @@ const bundles = await updater.list();
 
 ### getNextBundle()
 
-获取已排队将在下次重启加载的 bundle。
+让捆绑包排队等待下次重新启动。
 
 ```typescript
 const next = await updater.getNextBundle();
@@ -142,7 +141,7 @@ const next = await updater.getNextBundle();
 
 ### getFailedUpdate()
 
-获取最近一次失败更新的信息(用于排查回滚)。
+获取有关上次失败更新的信息（对于调试回滚很有用）。
 
 ```typescript
 const failed = await updater.getFailedUpdate();
@@ -151,7 +150,7 @@ const failed = await updater.getFailedUpdate();
 
 ### getBuiltinVersion()
 
-获取随应用二进制包一起发布的版本。
+获取应用程序二进制文件附带的版本。
 
 ```typescript
 const version = await updater.getBuiltinVersion();
@@ -160,15 +159,15 @@ const version = await updater.getBuiltinVersion();
 
 ## 更新检查
 
-### getLatest(options)
+### 获取最新（选项）
 
-检查服务器上的最新可用版本。
+检查服务器是否有最新的可用版本。
 
 ```typescript
 const latest = await updater.getLatest();
 
 if (latest.url && !latest.error) {
-  // 有可用更新
+  // Update available
   console.log('New version:', latest.version);
   console.log('Download URL:', latest.url);
 } else if (latest.error) {
@@ -176,46 +175,44 @@ if (latest.url && !latest.error) {
 }
 ```
 
-**返回:**
-| 属性 | 类型 | 描述 |
+**退货：**
+|物业 |类型 |描述 |
 |----------|------|-------------|
-| `url` | string | 下载 URL(无更新则为空) |
-| `version` | string | 可用版本 |
-| `checksum` | string | SHA256 校验和 |
-| `sessionKey` | string | 加密会话密钥 |
-| `error` | string | 检查失败时的错误信息 |
-| `message` | string | 服务器消息 |
+| `url` |字符串|下载地址（无更新则为空） |
+| `version` |字符串|可用版本 |
+| `checksum` |字符串| SHA256 校验和 |
+| `sessionKey` |字符串|加密会话密钥 |
+| `error` |字符串|检查失败时出现错误消息 |
+| `message` |字符串|服务器消息|
 
 ## 渠道管理
 
-### setChannel(options)
+### 设置频道（选项）
 
-将设备分配到指定渠道。
+将设备分配给特定通道。
 
 ```typescript
 await updater.setChannel({ channel: 'beta' });
-```
+```### 取消设置频道（选项）
 
-### unsetChannel(options)
-
-移除渠道分配并使用默认渠道。
+删除通道分配并使用默认值。
 
 ```typescript
 await updater.unsetChannel();
 ```
 
-### getChannel()
+### 获取频道()
 
-获取当前渠道分配。
+获取当前通道分配。
 
 ```typescript
 const channel = await updater.getChannel();
 // { channel: 'production', status: 'set' }
 ```
 
-### listChannels()
+### 列表频道()
 
-列出该应用的所有可用渠道。
+列出此应用程序的所有可用频道。
 
 ```typescript
 const channels = await updater.listChannels();
@@ -224,29 +221,29 @@ const channels = await updater.listChannels();
 
 ## 延迟条件
 
-控制已下载更新何时应用。
+控制何时应用下载的更新。
 
-### setMultiDelay(options)
+### setMultiDelay(选项)
 
-设置在应用更新前必须满足的条件。
+设置应用更新之前必须满足的条件。
 
 ```typescript
-// 等待应用进入后台
+// Wait for app to be backgrounded
 await updater.setMultiDelay({
   delayConditions: [{ kind: 'background' }]
 });
 
-// 等待到指定日期
+// Wait until specific date
 await updater.setMultiDelay({
   delayConditions: [{ kind: 'date', value: '2024-12-25T00:00:00Z' }]
 });
 
-// 等待应用被杀死并重启
+// Wait for app to be killed and restarted
 await updater.setMultiDelay({
   delayConditions: [{ kind: 'kill' }]
 });
 
-// 多个条件(全部满足才应用)
+// Multiple conditions (all must be met)
 await updater.setMultiDelay({
   delayConditions: [
     { kind: 'background' },
@@ -255,36 +252,36 @@ await updater.setMultiDelay({
 });
 ```
 
-**延迟条件类型:**
-| 类型 | 值 | 描述 |
-|------|-------|-------------|
-| `background` | 可选时长(ms) | 等待应用进入后台 |
-| `kill` | - | 等待应用被杀死并重启 |
-| `date` | ISO 日期字符串 | 等待到指定日期/时间 |
-| `nativeVersion` | 版本字符串 | 等待原生应用更新 |
+**延迟条件类型：**
+|亲切 |价值|描述 |
+|------|--------|-------------|
+| `background` |可选持续时间（毫秒）|等待应用程序进入后台 |
+| `kill` | - |等待应用程序被终止并重新启动 |
+| `date` | ISO 日期字符串 |等到特定日期/时间|
+| `nativeVersion` |版本字符串 |等待本机应用程序更新 |
 
-### cancelDelay()
+### 取消延迟()
 
-清除所有延迟条件,并在下次检查时立即应用更新。
+清除所有延迟条件并在下次检查时立即应用更新。
 
 ```typescript
 await updater.cancelDelay();
 ```
 
-## 设备标识
+## 设备识别
 
-### getDeviceId()
+### 获取设备ID()
 
-获取唯一设备标识。
+获取唯一的设备标识符。
 
 ```typescript
 const deviceId = await updater.getDeviceId();
 // 'uuid-xxxx-xxxx-xxxx'
 ```
 
-### setCustomId(options)
+### setCustomId(选项)
 
-为设备设置自定义标识(用于分析)。
+为设备设置自定义标识符（对于分析有用）。
 
 ```typescript
 await updater.setCustomId({ customId: 'user-123' });
@@ -292,7 +289,7 @@ await updater.setCustomId({ customId: 'user-123' });
 
 ## 配置
 
-### setUpdateUrl(options)
+### setUpdateUrl(选项)
 
 在运行时更改更新服务器 URL。
 
@@ -301,40 +298,40 @@ await updater.setUpdateUrl({ url: 'https://my-server.com/updates' });
 ```
 
 <Aside>
-  需要在构造函数选项中设置 `allowModifyUrl: true`。
+  需要在构造函数选项中使用 `allowModifyUrl: true`。
 </Aside>
 
-### setStatsUrl(options)
+### setStatsUrl(选项)
 
-更改统计上报 URL。
+更改统计报告 URL。
 
 ```typescript
 await updater.setStatsUrl({ url: 'https://my-server.com/stats' });
 ```
 
-### setChannelUrl(options)
+### setChannelUrl（选项）
 
-更改渠道管理 URL。
+更改频道管理 URL。
 
 ```typescript
 await updater.setChannelUrl({ url: 'https://my-server.com/channel' });
 ```
 
-### setAppId(options)
+### setAppId(选项)
 
-在运行时更改 App ID。
+在运行时更改应用程序 ID。
 
 ```typescript
 await updater.setAppId({ appId: 'com.example.newapp' });
 ```
 
 <Aside>
-  需要在构造函数选项中设置 `allowModifyAppId: true`。
+  需要在构造函数选项中使用 `allowModifyAppId: true`。
 </Aside>
 
 ### getAppId()
 
-获取当前 App ID。
+获取当前应用程序ID。
 
 ```typescript
 const appId = await updater.getAppId();
@@ -342,7 +339,7 @@ const appId = await updater.getAppId();
 
 ## 调试
 
-### setDebugMenu(options)
+### setDebugMenu（选项）
 
 启用或禁用调试菜单。
 
@@ -358,9 +355,9 @@ await updater.setDebugMenu({ enabled: true });
 const enabled = await updater.isDebugMenuEnabled();
 ```
 
-## 事件
+## 活动
 
-使用 `addListener` 监听更新事件:
+使用 `addListener` 监听更新事件：
 
 ```typescript
 updater.addListener('eventName', (event) => {
@@ -368,41 +365,41 @@ updater.addListener('eventName', (event) => {
 });
 ```
 
-### 可用事件
+### 可用活动
 
-| 事件 | 载荷 | 描述 |
-|-------|---------|-------------|
-| `download` | `{ percent, status }` | 下载进度更新 |
-| `updateAvailable` | `{ bundle }` | 有新更新可用 |
-| `noNeedUpdate` | `{ message }` | 已是最新版本 |
-| `downloadComplete` | `{ bundle }` | 下载完成 |
-| `downloadFailed` | `{ bundle, error }` | 下载失败 |
-| `breakingAvailable` | `{ bundle }` | 有不兼容更新可用(需要原生更新) |
-| `updateFailed` | `{ bundle, reason }` | 更新安装失败 |
-| `appReloaded` | `{}` | 应用已重载 |
-| `appReady` | `{}` | 已调用 `notifyAppReady()` |
+|活动 |有效负载|描述 |
+|--------|---------|-------------|
+| `download` | `{ percent, status }` |下载进度更新 |
+| `updateAvailable` | `{ bundle }` |有新更新可用 |
+| `noNeedUpdate` | `{ message }` |已经是最新的了 |
+| `downloadComplete` | `{ bundle }` |下载成功 |
+| `downloadFailed` | `{ bundle, error }` |下载失败 |
+| `breakingAvailable` | `{ bundle }` |提供不兼容的更新（需要本机更新）|
+| `updateFailed` | `{ bundle, reason }` |更新安装失败 |
+| `appReloaded` | `{}` |应用程序已重新加载 |
+| `appReady` | `{}` | `notifyAppReady()` 被称为 |
 
-### 示例:完整事件处理
+### 示例：完整事件处理
 
 ```typescript
-// 进度跟踪
+// Progress tracking
 updater.addListener('download', (event) => {
   updateProgressBar(event.percent);
 });
 
-// 更新可用通知
+// Update available notification
 updater.addListener('updateAvailable', (event) => {
   showNotification(`Update ${event.bundle.version} available!`);
 });
 
-// 处理完成
+// Handle completion
 updater.addListener('downloadComplete', async (event) => {
-  // 排队下次重启应用
+  // Queue for next restart
   await updater.next({ id: event.bundle.id });
   showNotification('Update will apply on next restart');
 });
 
-// 处理失败
+// Handle failures
 updater.addListener('updateFailed', (event) => {
   console.error('Update failed:', event.reason);
   reportError(event);
@@ -411,7 +408,7 @@ updater.addListener('updateFailed', (event) => {
 
 ## 构造函数选项
 
-`ElectronUpdater` 的完整配置选项:
+`ElectronUpdater` 的完整配置选项：
 
 ```typescript
 const updater = new ElectronUpdater({

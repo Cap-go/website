@@ -1,28 +1,27 @@
 ---
-title: Getting Started
+title: Erste Schritte
 description: >-
-  Learn how to install and use the Zip plugin to compress and extract files in
-  your Capacitor app.
+  Erfahren Sie, wie Sie das Zip-Plugin installieren und verwenden, um Dateien in
+  Ihrer Capacitor-App zu komprimieren und zu extrahieren.
 sidebar:
   order: 2
 locale: de
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Paket installieren**
    <PackageManagers pkg="@capgo/capacitor-zip" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Mit nativen Projekten synchronisieren**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Usage
+## Nutzung
 
-Import the plugin and zip or unzip files:
+Importieren Sie das Plugin und komprimieren oder entpacken Sie die Dateien:
 
 ```typescript
 import { CapacitorZip } from '@capgo/capacitor-zip';
@@ -46,11 +45,11 @@ const unzipArchive = async () => {
 };
 ```
 
-## API Reference
+## API Referenz
 
-### zip(options)
+### zip(Optionen)
 
-Creates a ZIP archive from a source folder.
+Erstellt ein ZIP-Archiv aus einem Quellordner.
 
 ```typescript
 interface ZipOptions {
@@ -64,9 +63,9 @@ await CapacitorZip.zip({
 });
 ```
 
-### unzip(options)
+### entpacken(Optionen)
 
-Extracts files from a ZIP archive.
+Extrahiert Dateien aus einem ZIP-Archiv.
 
 ```typescript
 interface UnzipOptions {
@@ -80,7 +79,7 @@ await CapacitorZip.unzip({
 });
 ```
 
-## Complete Example
+## Vollständiges Beispiel
 
 ```typescript
 import { CapacitorZip } from '@capgo/capacitor-zip';
@@ -207,9 +206,9 @@ export class ZipService {
 }
 ```
 
-## Advanced Usage
+## Erweiterte Nutzung
 
-### Creating Archives with Progress Tracking
+### Erstellen von Archiven mit Fortschrittsverfolgung
 
 ```typescript
 const zipWithProgress = async (source: string, destination: string) => {
@@ -225,7 +224,7 @@ const zipWithProgress = async (source: string, destination: string) => {
 };
 ```
 
-### Batch Archive Operations
+### Batch-Archivierungsvorgänge
 
 ```typescript
 const batchZip = async (folders: string[]) => {
@@ -250,7 +249,7 @@ const batchZip = async (folders: string[]) => {
 };
 ```
 
-### Secure Archive Creation
+### Sichere Archiverstellung
 
 ```typescript
 const createSecureBackup = async (dataPath: string) => {
@@ -268,7 +267,7 @@ const createSecureBackup = async (dataPath: string) => {
 };
 ```
 
-### Archive Validation
+### Archivvalidierung
 
 ```typescript
 const validateArchive = async (zipPath: string): Promise<boolean> => {
@@ -296,19 +295,19 @@ const validateArchive = async (zipPath: string): Promise<boolean> => {
 };
 ```
 
-## Best Practices
+## Bewährte Methoden
 
-1. **Path Validation**: Always validate source and destination paths before operations
-2. **Error Handling**: Wrap all zip/unzip operations in try-catch blocks
-3. **Cleanup**: Remove temporary files and folders after operations
-4. **Large Files**: Be cautious with large archives on mobile devices
-5. **Permissions**: Ensure your app has necessary file system permissions
+1. **Pfadvalidierung**: Validieren Sie immer Quell- und Zielpfade vor Vorgängen
+2. **Fehlerbehandlung**: Wickeln Sie alle Zip-/Unzip-Vorgänge in Try-Catch-Blöcke ein
+3. **Bereinigung**: Entfernen Sie temporäre Dateien und Ordner nach den Vorgängen
+4. **Große Dateien**: Seien Sie vorsichtig bei großen Archiven auf Mobilgeräten
+5. **Berechtigungen**: Stellen Sie sicher, dass Ihre App über die erforderlichen Dateisystemberechtigungen verfügt
 
-## Troubleshooting
+## Fehlerbehebung
 
-### Common Issues
+### Häufige Probleme
 
-**Zip operation fails**: Ensure source path exists and is accessible
-**Unzip fails**: Check that ZIP file is valid and destination path is writable
-**Out of storage**: Monitor available disk space before operations
-**Permission denied**: Verify file system permissions in your app configuration
+**Zip-Vorgang schlägt fehl**: Stellen Sie sicher, dass der Quellpfad vorhanden und zugänglich ist
+**Entpacken schlägt fehl**: Überprüfen Sie, ob die ZIP-Datei gültig ist und der Zielpfad beschreibbar ist
+**Nicht genügend Speicherplatz**: Überwachen Sie den verfügbaren Speicherplatz vor dem Betrieb
+**Berechtigung verweigert**: Überprüfen Sie die Dateisystemberechtigungen in Ihrer App-Konfiguration

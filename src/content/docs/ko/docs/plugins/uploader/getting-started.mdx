@@ -1,25 +1,25 @@
 ---
 title: 시작하기
-locale: ko
-description: Capacitor 앱에서 안정적인 파일 업로드를 위한 Background Uploader 플러그인을 설치하고 사용하는 방법을 알아보세요.
+description: Capacitor 앱에서 안정적인 파일 업로드를 위해 백그라운드 업로더 플러그인을 설치하고 사용하는 방법을 알아보세요.
 sidebar:
   order: 2
+locale: ko
 ---
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **패키지 설치**
    <PackageManagers pkg="@capgo/capacitor-uploader" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **네이티브 프로젝트와 동기화**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure permissions**
+3. **권한 구성**
    
    ### iOS
-   Add background modes to your `Info.plist`:
+   `Info.plist`에 배경 모드를 추가하세요.
    ```xml
    <key>UIBackgroundModes</key>
    <array>
@@ -28,7 +28,7 @@ import { PackageManagers } from 'starlight-package-managers'
    ```
    
    ### Android
-   Add permissions to your `AndroidManifest.xml`:
+   `AndroidManifest.xml`에 권한을 추가하세요.
    ```xml
    <uses-permission android:name="android.permission.INTERNET" />
    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -36,9 +36,9 @@ import { PackageManagers } from 'starlight-package-managers'
    ```
 </Steps>
 
-## Usage
+## 사용법
 
-Import the plugin and use its methods to upload files:
+플러그인을 가져오고 해당 메소드를 사용하여 파일을 업로드하십시오.
 
 ```typescript
 import { Uploader } from '@capgo/capacitor-uploader';
@@ -94,11 +94,11 @@ const getActiveUploads = async () => {
 };
 ```
 
-## API Reference
+## API 참조
 
-### startUpload(options)
+### 시작업로드(옵션)
 
-Starts a new file upload.
+새 파일 업로드를 시작합니다.
 
 ```typescript
 interface UploadOptions {
@@ -114,9 +114,9 @@ interface UploadOptions {
 }
 ```
 
-### cancelUpload(options)
+### 취소업로드(옵션)
 
-Cancels an ongoing upload.
+진행 중인 업로드를 취소합니다.
 
 ```typescript
 interface CancelOptions {
@@ -124,13 +124,13 @@ interface CancelOptions {
 }
 ```
 
-### getUploads()
+### getUpload()
 
-Returns all active uploads.
+모든 활성 업로드를 반환합니다.
 
-### removeUpload(options)
+### 제거업로드(옵션)
 
-Removes an upload from the queue.
+대기열에서 업로드를 제거합니다.
 
 ```typescript
 interface RemoveOptions {
@@ -138,11 +138,11 @@ interface RemoveOptions {
 }
 ```
 
-## Events
+## 이벤트
 
-### events
+### 이벤트
 
-All upload events are delivered through a single `events` listener. The event contains a `name` field to identify the type:
+모든 업로드 이벤트는 단일 `events` 리스너를 통해 전달됩니다. 이벤트에는 유형을 식별하기 위한 `name` 필드가 포함되어 있습니다.
 
 ```typescript
 Uploader.addListener('events', (event: UploadEvent) => {
@@ -168,14 +168,14 @@ Uploader.addListener('events', (event: UploadEvent) => {
 });
 ```
 
-**Event Types:**
-- `uploading` - Progress update with `percent` and `id`
-- `completed` - Upload finished with `id` and `statusCode`
-- `failed` - Upload failed with `id` and `error` message
+**이벤트 유형:**
+- `uploading` - `percent` 및 `id` 진행 상황 업데이트
+- `completed` - `id` 및 `statusCode` 업로드가 완료되었습니다.
+- `failed` - `id` 및 `error` 메시지로 인해 업로드에 실패했습니다.
 
-## Advanced Features
+## 고급 기능
 
-### Multipart Form Upload
+### 멀티파트 양식 업로드
 
 ```typescript
 const uploadWithFormData = async () => {
@@ -194,7 +194,7 @@ const uploadWithFormData = async () => {
 };
 ```
 
-### Binary Upload
+### 바이너리 업로드
 
 ```typescript
 const uploadBinary = async () => {
@@ -209,7 +209,7 @@ const uploadBinary = async () => {
 };
 ```
 
-### Network-Aware Uploading
+### 네트워크 인식 업로드
 
 ```typescript
 import { Network } from '@capacitor/network';
@@ -227,9 +227,9 @@ const smartUpload = async () => {
 };
 ```
 
-## Best Practices
+## 모범 사례
 
-1. **Handle all event types**
+1. **모든 이벤트 유형 처리**
    ```typescript
    const setupUploadHandlers = () => {
      Uploader.addListener('events', (event) => {
@@ -248,7 +248,7 @@ const smartUpload = async () => {
    };
    ```
 
-2. **Clean up listeners**
+2. **청취자 정리**
    ```typescript
    // Add listener
    const listener = await Uploader.addListener('events', handleEvent);
@@ -257,7 +257,7 @@ const smartUpload = async () => {
    listener.remove();
    ```
 
-3. **Retry failed uploads**
+3. **실패한 업로드 재시도**
    ```typescript
    const retryUpload = async (filePath: string, serverUrl: string) => {
      try {
@@ -272,7 +272,7 @@ const smartUpload = async () => {
    };
    ```
 
-4. **Show upload notifications**
+4. **업로드 알림 표시**
    ```typescript
    await Uploader.startUpload({
      filePath: 'file:///path/to/file',
@@ -282,14 +282,14 @@ const smartUpload = async () => {
    });
    ```
 
-## Platform Notes
+## 플랫폼 노트
 
 ### iOS
-- Uses `URLSession` for background uploads
-- Requires background processing capability
-- Uploads continue when app is suspended
+- 백그라운드 업로드에 `URLSession`을 사용합니다.
+- 백그라운드 처리 기능이 필요합니다.
+- 앱이 정지되어도 업로드는 계속됩니다.
 
 ### Android
-- Uses `WorkManager` for reliable uploads
-- Shows foreground service notification during uploads
-- Respects battery optimization settings
+- 안정적인 업로드를 위해 `WorkManager`을 사용합니다.
+- 업로드 중 포그라운드 서비스 알림 표시
+- 배터리 최적화 설정을 존중합니다.

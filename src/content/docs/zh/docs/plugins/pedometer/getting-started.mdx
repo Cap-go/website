@@ -1,44 +1,41 @@
 ---
-title: "计步器快速入门"
-description: >-
-  Learn how to integrate step counting and fitness tracking into your Capacitor
-  app
+title: 计步器入门
+description: 了解如何将步数统计和健身跟踪集成到您的 Capacitor 应用程序中
 locale: zh
 ---
+本指南将引导您将 Capacitor 计步器插件集成到您的应用程序中。
 
-This guide will walk you through integrating the Capacitor Pedometer plugin into your application.
+## 安装
 
-## Installation
-
-Install the plugin using npm:
+使用 npm 安装插件：
 
 ```bash
 npm install @capgo/capacitor-pedometer
 npx cap sync
 ```
 
-## iOS Configuration
+## iOS 配置
 
-Add motion usage description to your `Info.plist`:
+将动作使用说明添加到您的 `Info.plist` 中：
 
 ```xml
 <key>NSMotionUsageDescription</key>
 <string>We need access to your motion data to track steps and activity</string>
 ```
 
-## Android Configuration
+## Android 配置
 
-The plugin automatically adds the `ACTIVITY_RECOGNITION` permission. For Android 10+ (API 29), you need to request this permission at runtime.
+该插件会自动添加 `ACTIVITY_RECOGNITION` 权限。对于 Android 10+ (API 29)，您需要在运行时请求此权限。
 
-## Basic Usage
+## 基本用法
 
-### Import the Plugin
+### 导入插件
 
 ```typescript
 import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
 ```
 
-### Check Availability
+### 检查可用性
 
 ```typescript
 const checkPedometer = async () => {
@@ -51,7 +48,7 @@ const checkPedometer = async () => {
 };
 ```
 
-### Request Permissions
+### 请求权限
 
 ```typescript
 const requestPermission = async () => {
@@ -60,7 +57,7 @@ const requestPermission = async () => {
 };
 ```
 
-### Get Current Measurements
+### 获取当前测量值
 
 ```typescript
 const getMeasurements = async () => {
@@ -76,7 +73,7 @@ const getMeasurements = async () => {
 };
 ```
 
-### Start Real-time Updates
+### 开始实时更新
 
 ```typescript
 // Add listener for real-time updates
@@ -91,14 +88,14 @@ CapacitorPedometer.addListener('measurement', (data) => {
 await CapacitorPedometer.startMeasurementUpdates();
 ```
 
-### Stop Updates
+### 停止更新
 
 ```typescript
 await CapacitorPedometer.stopMeasurementUpdates();
 CapacitorPedometer.removeAllListeners();
 ```
 
-## Complete Example
+## 完整示例
 
 ```typescript
 import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
@@ -167,17 +164,17 @@ await pedometer.initialize();
 await pedometer.startTracking();
 ```
 
-## Best Practices
+## 最佳实践
 
-1. **Check Availability**: Always verify pedometer features before use
-2. **Request Permissions**: Handle permission requests gracefully
-3. **Battery Optimization**: Stop updates when not needed
-4. **Error Handling**: Wrap calls in try-catch blocks
-5. **Background Updates**: Configure background modes for continuous tracking
+1. **检查可用性**：使用前务必验证计步器功能
+2. **请求权限**：优雅地处理权限请求
+3. **电池优化**：不需要时停止更新
+4. **错误处理**：将调用包装在 try-catch 块中
+5. **后台更新**：配置连续跟踪的后台模式
 
-## Common Issues
+## 常见问题
 
-### Permission Denied
+### 权限被拒绝
 
 ```typescript
 const handlePermissionDenied = async () => {
@@ -189,7 +186,7 @@ const handlePermissionDenied = async () => {
 };
 ```
 
-### Not Available on Device
+### 在设备上不可用
 
 ```typescript
 const checkSupport = async () => {
@@ -204,8 +201,8 @@ const checkSupport = async () => {
 };
 ```
 
-## Next Steps
+## 后续步骤
 
-- Explore the [API Reference](https://github.com/Cap-go/capacitor-pedometer#api) for complete documentation
-- Check out the [example app](https://github.com/Cap-go/capacitor-pedometer/tree/main/example)
-- See the [tutorial](/plugins/capacitor-pedometer) for advanced implementation
+- 浏览 [API 参考](https://github.com/Cap-go/capacitor-pedometer#api) 以获取完整文档
+- 查看[示例应用程序](https://github.com/Cap-go/capacitor-pedometer/tree/main/example)
+- 有关高级实现，请参阅[教程](/plugins/capacitor-pedometer)

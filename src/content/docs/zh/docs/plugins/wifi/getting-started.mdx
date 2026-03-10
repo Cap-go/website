@@ -1,27 +1,24 @@
 ---
-title: "快速入门"
-description: >-
-  Learn how to install and use the WiFi plugin to manage network connectivity in
-  your Capacitor app.
+title: 入门
+description: 了解如何安装和使用 WiFi 插件来管理 Capacitor 应用中的网络连接。
 sidebar:
   order: 2
 locale: zh
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **安装软件包**
    <PackageManagers pkg="@capgo/capacitor-wifi" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **与原生项目同步**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure permissions**
+3. **配置权限**
 
-   **Android**: Add to `AndroidManifest.xml`:
+   **Android**：添加到 `AndroidManifest.xml`：
    ```xml
    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -29,16 +26,16 @@ import { PackageManagers } from 'starlight-package-managers'
    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
    ```
 
-   **iOS**: Add to `Info.plist`:
+   **iOS**：添加到 `Info.plist`：
    ```xml
    <key>NSLocationWhenInUseUsageDescription</key>
    <string>We need location access to scan WiFi networks</string>
    ```
 </Steps>
 
-## Usage
+## 用法
 
-Import the plugin and manage WiFi connectivity:
+导入插件并管理 WiFi 连接：
 
 ```typescript
 import { CapacitorWifi } from '@capgo/capacitor-wifi';
@@ -67,11 +64,11 @@ const connectToWifi = async () => {
 };
 ```
 
-## API Reference
+## API 参考
 
 ### getWifiInfo()
 
-Gets information about the currently connected WiFi network.
+获取有关当前连接的 WiFi 网络的信息。
 
 ```typescript
 interface WifiInfo {
@@ -86,9 +83,9 @@ interface WifiInfo {
 const info = await CapacitorWifi.getWifiInfo();
 ```
 
-### scan()
+### 扫描()
 
-Scans for available WiFi networks.
+扫描可用的 WiFi 网络。
 
 ```typescript
 interface WifiNetwork {
@@ -102,9 +99,9 @@ interface WifiNetwork {
 const { networks } = await CapacitorWifi.scan();
 ```
 
-### connect(options)
+### 连接（选项）
 
-Connects to a WiFi network.
+连接到 WiFi 网络。
 
 ```typescript
 interface ConnectOptions {
@@ -119,33 +116,33 @@ await CapacitorWifi.connect({
 });
 ```
 
-### disconnect()
+### 断开连接（）
 
-Disconnects from the current WiFi network.
+与当前 WiFi 网络断开连接。
 
 ```typescript
 await CapacitorWifi.disconnect();
 ```
 
-### getSSID()
+### 获取SSID()
 
-Gets the SSID of the currently connected network.
+获取当前连接网络的SSID。
 
 ```typescript
 const { ssid } = await CapacitorWifi.getSSID();
 console.log('Connected to:', ssid);
 ```
 
-### getIP()
+### 获取IP()
 
-Gets the current device IP address.
+获取当前设备IP地址。
 
 ```typescript
 const { ip } = await CapacitorWifi.getIP();
 console.log('IP Address:', ip);
 ```
 
-## Complete Example
+## 完整示例
 
 ```typescript
 import { CapacitorWifi } from '@capgo/capacitor-wifi';
@@ -259,9 +256,9 @@ export class WifiService {
 }
 ```
 
-## Advanced Usage
+## 高级用法
 
-### Network Quality Assessment
+### 网络质量评估
 
 ```typescript
 const assessNetworkQuality = async () => {
@@ -281,7 +278,7 @@ const assessNetworkQuality = async () => {
 };
 ```
 
-### Auto-Connect to Preferred Networks
+### 自动连接到首选网络
 
 ```typescript
 const autoConnect = async (preferredNetworks: Array<{ ssid: string, password: string }>) => {
@@ -308,7 +305,7 @@ const autoConnect = async (preferredNetworks: Array<{ ssid: string, password: st
 };
 ```
 
-### Network Change Detection
+### 网络变化检测
 
 ```typescript
 class NetworkMonitor {
@@ -343,31 +340,31 @@ class NetworkMonitor {
 }
 ```
 
-## Best Practices
+## 最佳实践
 
-1. **Permissions**: Request location permissions before scanning networks
-2. **Error Handling**: Always wrap WiFi operations in try-catch blocks
-3. **User Feedback**: Show loading indicators during network operations
-4. **Security**: Never store WiFi passwords in plain text
-5. **Testing**: Test on real devices as WiFi APIs may not work in emulators
+1. **权限**：扫描网络前请求位置权限
+2. **错误处理**：始终将 WiFi 操作包装在 try-catch 块中
+3. **用户反馈**：网络运行时显示加载指示器
+4. **安全**：切勿以纯文本形式存储 WiFi 密码
+5. **测试**：在真实设备上进行测试，因为 WiFi API 可能无法在模拟器中运行
 
-## Platform Differences
+## 平台差异
 
 ### iOS
-- Requires location permissions to scan networks
-- Cannot programmatically connect to networks (will open Settings)
-- Limited access to network details
+- 需要位置权限才能扫描网络
+- 无法以编程方式连接到网络（将打开“设置”）
+- 对网络详细信息的访问受到限制
 
 ### Android
-- Full programmatic WiFi control
-- Requires location permissions for network scanning
-- Can connect/disconnect programmatically
+- 完全编程式 WiFi 控制
+- 需要位置权限才能进行网络扫描
+- 可以以编程方式连接/断开连接
 
-## Troubleshooting
+## 故障排除
 
-### Common Issues
+### 常见问题
 
-**Scan returns empty**: Check location permissions are granted
-**Cannot connect to network**: Verify password is correct and network is in range
-**getWifiInfo fails**: Ensure device is connected to a WiFi network
-**Permission denied**: Add required permissions to platform configuration files
+**扫描返回空**：检查位置权限是否已授予
+**无法连接到网络**：验证密码是否正确且网络是否在范围内
+**getWifiInfo 失败**：确保设备已连接到 WiFi 网络
+**权限被拒绝**：向平台配置文件添加所需的权限

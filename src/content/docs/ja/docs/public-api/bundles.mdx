@@ -1,37 +1,36 @@
 ---
 title: Bundles
-description: アプリ更新パッケージのリスト表示、削除、バージョン管理、ストレージ最適化をカバーする、Capgo Bundles管理の詳細ガイド。
+description: Capgo バンドルを管理するための詳細なガイド。リスト、削除、バンドル (バージョン) 管理、アプリ更新パッケージのストレージの最適化について説明します。
 sidebar:
   order: 8
 locale: ja
 ---
+バンドルは、Capgo のコア更新パッケージです。各バンドルには、アプリのコンテンツを構成する Web アセット (HTML、CSS、JS) が含まれています。バンドル API を使用すると、これらの更新パッケージの一覧表示や削除などを管理できます。
 
-Bundlesは、Capgoのコア更新パッケージです。各バンドルには、アプリのコンテンツを構成するWebアセット（HTML、CSS、JS）が含まれています。Bundles APIを使用すると、これらの更新パッケージを管理でき、リスト表示や削除が可能です。
+## バンドルを理解する
 
-## Bundlesを理解する
+バンドルは、アプリの Web コンテンツの特定のバンドル (バージョン) を表し、次のものが含まれます。
+- **バンドル (バージョン)**: バンドルのセマンティック バージョン番号
+- **チェックサム**: バンドルの整合性を検証するための固有のハッシュ
+- **ストレージ情報**: バンドルが保存される場所と方法に関する詳細
+- **ネイティブ要件**: ネイティブ アプリの最小バージョン要件
+- **メタデータ**: 作成時間、所有権、その他の追跡情報
 
-バンドルは、アプリのWebコンテンツの特定バージョンを表し、以下を含みます：
-- **Version**：バンドルのセマンティックバージョン番号
-- **Checksum**：バンドルの整合性を検証するための一意のハッシュ
-- **Storage Info**：バンドルがどこにどのように保存されているかの詳細
-- **Native Requirements**：ネイティブアプリの最小バージョン要件
-- **Metadata**：作成時刻、所有権、その他の追跡情報
+## 手動バンドル作成 (CLI なし)
 
-## 手動によるBundle作成（CLIなし）
+Capgo CLI を使用せずにバンドルを手動で作成してアップロードする方法は次のとおりです。
 
-Capgo CLIを使用せずに手動でバンドルを作成およびアップロードする方法：
+### ステップ 1: アプリを構築する
 
-### ステップ1：アプリをビルドする
-
-まず、アプリのWebアセットをビルドします：
+まず、アプリの Web アセットを構築します。
 
 ```bash
 npm run build
 ```
 
-### ステップ2：Capgo CLIと同じパッケージを使用してBundleのZipを作成する
+### ステップ 2: Capgo CLI と同じパッケージを使用してバンドル ZIP を作成する
 
-**重要**：互換性を確保するために、Capgo CLIが内部で使用しているのとまったく同じJavaScriptパッケージを使用してください。
+**重要**: 互換性を確保するために、Capgo CLI が内部で使用するものとまったく同じ JavaScript パッケージを使用してください。
 
 #### 必要なパッケージをインストールする
 
@@ -39,7 +38,9 @@ npm run build
 npm install adm-zip @tomasklaen/checksum
 ```
 
-#### JavaScriptでZip Bundleを作成する（Capgo CLIと同じ）
+#### JavaScript で Zip バンドルを作成 (Capgo CLI と同じ)
+
+注: 以下の例では、`version` は、API で使用されるバンドル (バージョン) 名を指します。
 
 ```javascript
 const fs = require('node:fs');
@@ -119,7 +120,7 @@ async function main() {
 main();
 ```
 
-### ステップ3：CLIと同じパッケージを使用してSHA256チェックサムを計算する
+### ステップ 3: CLI と同じパッケージを使用して SHA256 チェックサムを計算する
 
 ```javascript
 const fs = require('node:fs');
@@ -141,9 +142,9 @@ async function main() {
 main();
 ```
 
-### ステップ4：Bundleをストレージにアップロードする
+### ステップ 4: バンドルをストレージにアップロードする
 
-Upload your zip file to any web-accessible storage:
+zip ファイルを Web アクセス可能なストレージにアップロードします。
 
 ```bash
 # Example: Upload to your server via scp
@@ -158,22 +159,22 @@ curl -X POST https://your-storage-api.com/upload \
   -F "file=@my-app-1.2.3.zip"
 ```
 
-**Important**: Your bundle must be **publicly accessible** via HTTPS URL (no authentication required). Capgo's servers need to download the bundle from this URL.
+**重要**: バンドルは HTTPS URL 経由で **パブリックにアクセス可能**である必要があります (認証は必要ありません)。 Capgo のサーバーは、この URL からバンドルをダウンロードする必要があります。
 
-Examples of valid public URLs:
+有効なパブリック URL の例:
 - `https://your-storage.com/bundles/my-app-1.2.3.zip`
 - `https://github.com/username/repo/releases/download/v1.2.3/bundle.zip`
 - `https://cdn.jsdelivr.net/gh/username/repo@v1.2.3/dist.zip`
 
-### ステップ5：Capgo APIにBundleを登録する
+### ステップ 5: Capgo API でバンドルを登録する
 
-Register the external bundle with Capgo using direct API calls:
+直接 API 呼び出しを使用して、外部バンドルを Capgo に登録します。
 
 ```javascript
 async function registerWithCapgo(appId, version, bundleUrl, checksum, apiKey) {
   const fetch = require('node-fetch');
   
-  // Create bundle version
+  // Create bundle (version)
   const response = await fetch('https://api.capgo.app/bundle/', {
     method: 'POST',
     headers: {
@@ -199,24 +200,24 @@ async function registerWithCapgo(appId, version, bundleUrl, checksum, apiKey) {
 }
 ```
 
-#### APIパラメータ
+#### API パラメータ
 
-| Parameter | Description | Required |
-|-----------|-------------|----------|
-| `app_id` | Your app identifier | Yes |
-| `version` | Semantic version (e.g., "1.2.3") | Yes |
-| `external_url` | **Publicly accessible** HTTPS URL where bundle can be downloaded (no auth required) | Yes |
-| `checksum` | SHA256 checksum of the zip file | Yes |
+|パラメータ |説明 |必須 |
+|----------|---------------|----------|
+| `app_id` |アプリの識別子 |はい |
+| `version` |バンドル (バージョン) セマンティック バージョン (例: "1.2.3") |はい |
+| `external_url` | **パブリックにアクセス可能** バンドルをダウンロードできる HTTPS URL (認証は必要ありません) |はい |
+| `checksum` | zip ファイルの SHA256 チェックサム |はい |
 
-## Bundle構造要件
+## バンドル構造の要件
 
-Your bundle zip must follow these requirements:
+バンドル zip は次の要件に従う必要があります。
 
-1. **Root Index File**: Must have `index.html` at the root level
-2. **Capacitor Integration**: Must call `notifyAppReady()` in your app code
-3. **Asset Paths**: Use relative paths for all assets
+1. **ルート インデックス ファイル**: ルート レベルに `index.html` が必要です
+2. **Capacitor 統合**: アプリ コードで `notifyAppReady()` を呼び出す必要があります
+3. **アセット パス**: すべてのアセットに相対パスを使用します
 
-### 有効なBundle構造
+### 有効なバンドル構造
 
 ```
 bundle.zip
@@ -229,7 +230,7 @@ bundle.zip
 
 ## 完全な手動ワークフローの例
 
-Simple Node.js script to zip, checksum, and upload to Capgo:
+zip、チェックサム、Capgo にアップロードする単純な Node.js スクリプト:
 
 ```javascript
 const fs = require('node:fs');
@@ -282,17 +283,17 @@ async function deployToCapgo() {
 deployToCapgo().catch(console.error);
 ```
 
-Install dependencies:
+依存関係をインストールします。
 
 ```bash
 npm install adm-zip @tomasklaen/checksum node-fetch
 ```
 
-## チェックサム検証
+## チェックサムの検証
 
-### JavaScriptチェックサム計算（Capgo CLIと同じ）
+### JavaScript チェックサム計算 (Capgo CLI と同じ)
 
-Use the exact same package and method that Capgo CLI uses internally:
+Capgo CLI が内部で使用するものとまったく同じパッケージとメソッドを使用します。
 
 ```javascript
 const fs = require('node:fs');
@@ -325,34 +326,32 @@ async function main() {
 }
 
 main();
-```
+```### チェックサムの重要性
 
-### チェックサムの重要性
+- **バンドルの整合性**: 転送中にバンドルが破損していないことを確認します
+- **API 検証**: Capgo はバンドルを受け入れる前にチェックサムを検証します
+- **プラグインの検証**: モバイル プラグインは、アップデートを適用する前にチェックサムを検証します。
 
-- **Bundle Integrity**: Ensures the bundle hasn't been corrupted during transfer
-- **API Verification**: Capgo verifies checksums before accepting bundles
-- **Plugin Verification**: The mobile plugin verifies checksums before applying updates
+## ベストプラクティス
 
-## Best Practices
+1. **バンドル (バージョン) 管理**: セマンティック バージョニングを一貫して使用する
+2. **ストレージの最適化**: 未使用のバンドルを定期的に削除します
+3. **バンドル (バージョン) の互換性**: 適切なネイティブ バージョンの最小要件を設定します。
+4. **バックアップ戦略**: 重要なバンドル (バージョン) のバックアップを維持します。
 
-1. **Version Management**: Use semantic versioning consistently
-2. **Storage Optimization**: Remove unused bundles periodically
-3. **Version Compatibility**: Set appropriate minimum native version requirements
-4. **Backup Strategy**: Maintain backups of critical bundle versions
+## エンドポイント
 
-## Endpoints
-
-### GET
+### 入手
 
 `https://api.capgo.app/bundle/`
 
-Retrieve bundle information. Returns 50 bundles per page.
+バンドル情報を取得します。ページごとに 50 バンドルを返します。
 
 #### クエリパラメータ
-- `app_id`: Required. The ID of your app
-- `page`: Optional. Page number for pagination
+- `app_id`: 必須。アプリのID
+- `page`: オプション。ページネーションのページ番号
 
-#### レスポンスタイプ
+#### 応答タイプ
 
 ```typescript
 interface Bundle {
@@ -375,7 +374,7 @@ interface Bundle {
 }
 ```
 
-#### リクエスト例
+#### リクエストの例
 
 ```bash
 # Get all bundles
@@ -387,7 +386,7 @@ curl -H "authorization: your-api-key" \
   "https://api.capgo.app/bundle/?app_id=app_123&page=1"
 ```
 
-#### レスポンス例
+#### 応答例
 
 ```json
 {
@@ -409,15 +408,15 @@ curl -H "authorization: your-api-key" \
 }
 ```
 
-### DELETE
+### 削除
 
 `https://api.capgo.app/bundle/`
 
-Delete one or all bundles for an app. Use with caution as this action cannot be undone.
+アプリの 1 つまたはすべてのバンドルを削除します。この操作は元に戻せないため、注意して使用してください。
 
 #### クエリパラメータ
 
-For deleting a specific bundle:
+特定のバンドルを削除するには:
 ```typescript
 interface BundleDelete {
   app_id: string
@@ -425,14 +424,14 @@ interface BundleDelete {
 }
 ```
 
-For deleting all bundles:
+すべてのバンドルを削除するには:
 ```typescript
 interface BundleDeleteAll {
   app_id: string
 }
 ```
 
-#### リクエスト例s
+#### リクエストの例
 
 ```bash
 # Delete specific bundle
@@ -455,7 +454,7 @@ curl -X DELETE \
   https://api.capgo.app/bundle/
 ```
 
-#### 成功レスポンス
+#### 成功の応答
 
 ```json
 {
@@ -463,13 +462,13 @@ curl -X DELETE \
 }
 ```
 
-### POST
+### 投稿
 
 `https://api.capgo.app/bundle/`
 
-Create a new bundle with external URL.
+外部 URL を使用して新しいバンドルを作成します。
 
-#### Request Body
+#### リクエスト本文
 
 ```typescript
 interface CreateBundleBody {
@@ -480,7 +479,7 @@ interface CreateBundleBody {
 }
 ```
 
-#### リクエスト例
+#### リクエストの例
 
 ```bash
 curl -X POST \
@@ -495,7 +494,7 @@ curl -X POST \
   https://api.capgo.app/bundle/
 ```
 
-#### 成功レスポンス
+#### 成功の応答
 
 ```json
 {
@@ -503,24 +502,24 @@ curl -X POST \
 }
 ```
 
-### POST (Metadata)
+### POST (メタデータ)
 
 `https://api.capgo.app/bundle/metadata`
 
-Update bundle metadata such as link and comment information.
+リンクやコメント情報などのバンドルのメタデータを更新します。
 
-#### Request Body
+#### リクエスト本文
 
 ```typescript
 interface UpdateMetadataBody {
   app_id: string
-  version_id: number
+  version_id: number // bundle (version) id
   link?: string
   comment?: string
 }
 ```
 
-#### リクエスト例
+#### リクエストの例
 
 ```bash
 curl -X POST \
@@ -535,7 +534,7 @@ curl -X POST \
   https://api.capgo.app/bundle/metadata
 ```
 
-#### 成功レスポンス
+#### 成功の応答
 
 ```json
 {
@@ -543,23 +542,23 @@ curl -X POST \
 }
 ```
 
-### PUT
+### 置く
 
 `https://api.capgo.app/bundle/`
 
-Set a bundle to a specific channel. This links a bundle version to a channel for distribution.
+バンドルを特定のチャンネルに設定します。これにより、バンドル (バージョン) が配布用のチャネルにリンクされます。
 
-#### Request Body
+#### リクエスト本文
 
 ```typescript
 interface SetChannelBody {
   app_id: string
-  version_id: number
+  version_id: number // bundle (version) id
   channel_id: number
 }
 ```
 
-#### リクエスト例
+#### リクエストの例
 
 ```bash
 curl -X PUT \
@@ -573,7 +572,7 @@ curl -X PUT \
   https://api.capgo.app/bundle/
 ```
 
-#### 成功レスポンス
+#### 成功の応答
 
 ```json
 {
@@ -584,7 +583,7 @@ curl -X PUT \
 
 ## エラー処理
 
-Common error scenarios and their responses:
+一般的なエラーのシナリオとその対応:
 
 ```json
 // Bundle not found
@@ -593,7 +592,7 @@ Common error scenarios and their responses:
   "status": "KO"
 }
 
-// Invalid version format
+// Invalid bundle (version) format
 {
   "error": "Invalid version format",
   "status": "KO"
@@ -614,16 +613,16 @@ Common error scenarios and their responses:
 
 ## 一般的な使用例
 
-1. **Cleanup Old Versions**
+1. **古いバンドル (バージョン) をクリーンアップ**
 ```typescript
-// Delete outdated beta versions
+// Delete outdated beta bundles (versions)
 {
   "app_id": "app_123",
   "version": "1.0.0-beta.1"
 }
 ```
 
-2. **App Reset**
+2. **アプリのリセット**
 ```typescript
 // Remove all bundles to start fresh
 {
@@ -633,7 +632,7 @@ Common error scenarios and their responses:
 
 ## ストレージに関する考慮事項
 
-1. **Retention Policy**: Define how long to keep old bundles
-2. **Size Management**: Monitor bundle sizes and storage usage
-3. **Backup Strategy**: Consider backing up critical versions
-4. **Cost Optimization**: Remove unnecessary bundles to optimize storage costs 
+1. **保存ポリシー**: 古いバンドルを保存する期間を定義します。
+2. **サイズ管理**: バンドルのサイズとストレージの使用状況を監視します。
+3. **バックアップ戦略**: 重要なバンドル (バージョン) のバックアップを検討する
+4. **コストの最適化**: 不要なバンドルを削除してストレージ コストを最適化します。

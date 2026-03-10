@@ -1,48 +1,46 @@
 ---
-title: >-
-  Migration Guide from @capacitor-community/apple-sign-in to
-  @capgo/capacitor-social-login
+title: Apple Migrasi Masuk ke @capgo/social-login
 description: >-
-  This comprehensive guide provides detailed instructions for transitioning from
-  the @capacitor-community/apple-sign-in plugin to the
-  @capgo/capacitor-social-login plugin, ensuring a smooth migration process and
-  improved capabilities.
+  Panduan komprehensif ini memberikan instruksi terperinci untuk melakukan
+  transisi dari plugin @capacitor-community/apple-sign-in ke plugin
+  @capgo/capacitor-social-login, memastikan proses migrasi yang lancar dan
+  peningkatan kemampuan.
 sidebar:
   order: 1
 locale: id
 ---
 import { Steps } from '@astrojs/starlight/components';
 
-## Overview
+## Ikhtisar
 
-This guide outlines the transition from the legacy `@capacitor-community/apple-sign-in` plugin to the modern `@capgo/capacitor-social-login` package. The new plugin provides a unified interface for multiple social authentication providers with improved TypeScript support and active maintenance.
+Panduan ini menguraikan transisi dari plugin `@capacitor-community/apple-sign-in` lama ke paket `@capgo/capacitor-social-login` modern. Plugin baru ini menyediakan antarmuka terpadu untuk beberapa penyedia autentikasi sosial dengan dukungan TypeScript yang ditingkatkan dan pemeliharaan aktif.
 
-## Installation
+## Instalasi
 
 <Steps>
-1. Remove the old package:
+1. Hapus paket lama:
    ```bash
    npm uninstall @capacitor-community/apple-sign-in
    ```
 
-2. Install the new package:
+2. Instal paket baru:
    ```bash
    npm install @capgo/capacitor-social-login
    npx cap sync
    ```
 </Steps>
 
-## Code Changes
+## Perubahan Kode
 
-### Import Changes
+### Impor Perubahan
 ```diff
 - import { SignInWithApple } from '@capacitor-community/apple-sign-in';
 + import { SocialLogin } from '@capgo/capacitor-social-login';
 ```
 
-### Initialization
+### Inisialisasi
 
-**Key Change**: The new plugin requires an initialization step that wasn't needed before.
+**Perubahan Kunci**: Plugin baru memerlukan langkah inisialisasi yang tidak diperlukan sebelumnya.
 
 ```diff
 - // No initialization needed in old package
@@ -60,11 +58,11 @@ This guide outlines the transition from the legacy `@capacitor-community/apple-s
 + });
 ```
 
-**Important Note**: For iOS, you provide basic configuration, while Android requires additional details including a Service ID and backend callback URL for web-based OAuth authentication.
+**Catatan Penting**: Untuk iOS, Anda menyediakan konfigurasi dasar, sedangkan Android memerlukan detail tambahan termasuk ID Layanan dan URL panggilan balik backend untuk autentikasi OAuth berbasis web.
 
-### Sign In
+### Masuk
 
-The login process simplifies from multiple parameters to a cleaner API:
+Proses login disederhanakan dari beberapa parameter menjadi API yang lebih bersih:
 
 ```diff
 - const result = await SignInWithApple.authorize({
@@ -85,11 +83,11 @@ The login process simplifies from multiple parameters to a cleaner API:
 + });
 ```
 
-The new plugin uses `login()` with `provider: 'apple'` and optional scopes rather than passing individual configuration values like `clientId` and `redirectURI`.
+Plugin baru ini menggunakan `login()` dengan `provider: 'apple'` dan cakupan opsional daripada meneruskan nilai konfigurasi individual seperti `clientId` dan `redirectURI`.
 
-### Response Type Changes
+### Perubahan Jenis Respons
 
-Results now include an `accessToken` object with expiration details and a structured `profile` section, replacing the flatter response format of the original package:
+Hasilnya sekarang mencakup objek `accessToken` dengan detail masa berlaku dan bagian `profile` terstruktur, menggantikan format respons yang lebih datar dari paket asli:
 
 ```typescript
 // Old response type
@@ -124,11 +122,11 @@ interface SocialLoginResponse {
 }
 ```
 
-### New Capabilities
+### Kemampuan Baru
 
-The updated plugin introduces functionality that wasn't available in the predecessor:
+Plugin yang diperbarui memperkenalkan fungsionalitas yang tidak tersedia di pendahulunya:
 
-**Checking Login Status**
+**Memeriksa Status Masuk**
 ```diff
 - // Not available in old package
 + const status = await SocialLogin.isLoggedIn({
@@ -136,7 +134,7 @@ The updated plugin introduces functionality that wasn't available in the predece
 + });
 ```
 
-**Logout Functionality**
+**Fungsi Keluar**
 ```diff
 - // Not available in old package
 + await SocialLogin.logout({
@@ -144,49 +142,47 @@ The updated plugin introduces functionality that wasn't available in the predece
 + });
 ```
 
-These methods provide `isLoggedIn()` to verify authentication status and `logout()` functionality.
+Metode ini menyediakan `isLoggedIn()` untuk memverifikasi status autentikasi dan fungsionalitas `logout()`.
 
-## Platform Specific Changes
+## Perubahan Khusus Platform
 
-### iOS Setup
+### iOS Penyiapan
 
-**iOS** maintains familiar setup procedures through Xcode capabilities:
+**iOS** mempertahankan prosedur pengaturan yang sudah dikenal melalui kemampuan Xcode:
 
-1. The iOS setup remains largely the same. You still need to:
-   - Enable "Sign In with Apple" capability in Xcode
-   - Configure your app in the Apple Developer Portal
-   - No additional code changes required for iOS
+1. Penyiapan iOS sebagian besar tetap sama. Anda masih perlu:
+   - Aktifkan kemampuan "Masuk dengan Apple" di Xcode
+   - Konfigurasikan aplikasi Anda di Portal Pengembang Apple
+   - Tidak diperlukan perubahan kode tambahan untuk iOS
 
-### Android Setup
+### Android Penyiapan
 
-**Android** now receives native support via web-based OAuth authentication:
+**Android** kini menerima dukungan asli melalui autentikasi OAuth berbasis web:
 
-The new plugin provides Android support out of the box, but requires additional setup:
+Plugin baru ini langsung menyediakan dukungan Android, namun memerlukan pengaturan tambahan:
 
-1. Create a Services ID in the Apple Developer Portal
-2. Configure a web authentication endpoint
-3. Set up your Android app to handle the OAuth flow
-4. Backend service configuration is required
+1. Buat ID Layanan di Portal Pengembang Apple
+2. Konfigurasikan titik akhir autentikasi web
+3. Siapkan aplikasi Android Anda untuk menangani aliran OAuth
+4. Konfigurasi layanan backend diperlukan
 
-For detailed Android setup instructions, please refer to the [Android Setup Guide](/docs/plugins/social-login/apple/android/).
+Untuk petunjuk penyiapan Android selengkapnya, lihat [Android Panduan Penyiapan](/docs/plugins/social-login/apple/android/).
 
-## Key Advantages
+## Keuntungan Utama
 
-The modernized package provides:
+Paket yang dimodernisasi menyediakan:
 
-1. **Unified APIs** across multiple social providers (Google, Facebook, Apple)
-2. **Improved TypeScript typing** with better type definitions
-3. **Active community maintenance** compared to the deprecated version
-4. **Built-in Android support** through web-based authentication
-5. **Persistent login state management**
-6. **Better error handling** with consistent error types
+1. **API Terpadu** di beberapa penyedia sosial (Google, Facebook, Apple)
+2. **Pengetikan TypeScript yang ditingkatkan** dengan definisi tipe yang lebih baik
+3. **Pemeliharaan komunitas aktif** dibandingkan dengan versi yang tidak digunakan lagi
+4. **Dukungan Android bawaan** melalui autentikasi berbasis web
+5. **Manajemen status login persisten**
+6. **Penanganan kesalahan yang lebih baik** dengan jenis kesalahan yang konsisten
 
-## Breaking Changes
+## Perubahan yang Mengganggu1. **Inisialisasi eksplisit kini diperlukan** - tidak ada konfigurasi default
+2. **Struktur objek respons telah berubah** - format hasil bertingkat
+3. **implementasi Android memerlukan layanan backend** untuk OAuth
+4. **Penanganan penyegaran token berbeda** - manajemen token yang ditingkatkan
+5. **Penanganan kesalahan dan jenis kesalahan telah berubah** - kesalahan yang lebih detail
 
-1. **Explicit initialization is now required** - no default configuration
-2. **Response object structure has changed** - nested result format
-3. **Android implementation requires a backend service** for OAuth
-4. **Token refresh handling is different** - improved token management
-5. **Error handling and error types have changed** - more detailed errors
-
-For more detailed setup instructions, please refer to the [official documentation](/docs/plugins/social-login/apple/general/). 
+Untuk petunjuk pengaturan lebih detail, lihat [dokumentasi resmi](/docs/plugins/social-login/apple/general/).

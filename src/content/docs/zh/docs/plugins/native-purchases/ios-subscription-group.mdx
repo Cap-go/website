@@ -1,131 +1,126 @@
 ---
-title: "创建 iOS 订阅组"
-description: >-
-  Learn how to create and configure subscription groups in App Store Connect for
-  organizing your app's subscription offerings.
+title: 创建 iOS 订阅组
+description: 了解如何在 App Store Connect 中创建和配置订阅组以组织应用的订阅产品。
 sidebar:
   order: 7
 locale: zh
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 
-Subscription groups are essential for organizing and managing multiple subscription levels in your iOS app. Understanding how they work is crucial for implementing upgrade, downgrade, and crossgrade functionality.
+订阅组对于在 iOS 应用中组织和管理多个订阅级别至关重要。了解它们的工作原理对于实现升级、降级和跨级功能至关重要。
 
-## What is a Subscription Group?
+## 什么是订阅组？
 
-A subscription group is a collection of related subscriptions that users can choose between. Users can only subscribe to one subscription within a group at a time. When they switch subscriptions, Apple handles the transition automatically.
+订阅组是用户可以选择的相关订阅的集合。用户一次只能订阅一个组内的一个订阅。当他们切换订阅时，Apple 会自动处理转换。
 
-## Why Subscription Groups Matter
+## 为什么订阅组很重要
 
-Subscription groups enable:
-- **Tiered pricing**: Offer basic, premium, and ultimate plans
-- **Different durations**: Monthly, yearly, and lifetime options
-- **Upgrade/downgrade logic**: Automatic handling of subscription changes
-- **Simplified management**: Group related subscriptions together
+订阅组启用：
+- **分级定价**：提供基本、高级和终极计划
+- **不同的期限**：每月、每年和终身选项
+- **升级/降级逻辑**：自动处理订阅变更
+- **简化管理**：将相关订阅分组在一起
 
-## Subscription Levels
+## 订阅级别
 
-Within a group, each subscription should be ranked from highest value (level 1) to lowest value. This ranking determines how subscription changes are classified:
+在组内，每个订阅应从最高值（级别 1）到最低值进行排名。此排名决定了订阅更改的分类方式：
 
-![Subscription group hierarchy](/native-purchases/ios/subscription-group/subscription-group-hierarchy.webp)
+![订阅组层次结构](/native-purchases/ios/subscription-group/subscription-group-hierarchy.webp)
 
-### Level Examples
+### 级别示例
 
-**Level 1** (Highest Value)
-- Premium Annual ($99.99/year)
-- Ultimate Monthly ($19.99/month)
+**1 级**（最高值）
+- 保费年度（$99.99/年）
+- 终极每月（19.99 美元/月）
 
-**Level 2** (Medium Value)
-- Standard Annual ($49.99/year)
-- Premium Monthly ($9.99/month)
+**2 级**（中等值）
+- 标准年度（49.99 美元/年）
+- 每月高级版（9.99 美元/月）
 
-**Level 3** (Lowest Value)
-- Basic Annual ($29.99/year)
-- Standard Monthly ($4.99/month)
+**3 级**（最低值）
+- 基本年度（$29.99/年）
+- 标准包月（$4.99/月）
 
-## Subscription Change Types
+## 订阅更改类型
 
-Apple automatically handles three types of subscription changes based on the level ranking:
+Apple 根据级别排名自动处理三种类型的订阅更改：
 
-### 1. Upgrade
-Moving to a **higher-tier** subscription (e.g., level 2 → level 1).
+### 1. 升级
+转向**更高级别**订阅（例如，级别 2 → 级别 1）。
 
-**Behavior:**
-- Takes effect **immediately**
-- User receives **prorated refund** for remaining time
-- New subscription starts right away
+**行为：**
+- **立即生效**
+- 用户收到剩余时间的**按比例退款**
+- 新订阅立即开始
 
-**Example:**
+**示例：**
 ```typescript
 // User currently has: Standard Monthly (Level 2)
 // User upgrades to: Premium Annual (Level 1)
 // Result: Immediate access to Premium, refund for unused Standard time
 ```
 
-### 2. Downgrade
-Moving to a **lower-tier** subscription (e.g., level 1 → level 2).
+### 2.降级
+转向**较低层**订阅（例如，级别 1 → 级别 2）。
 
-**Behavior:**
-- Takes effect at **next renewal date**
-- User keeps current subscription until period ends
-- New subscription starts automatically after expiration
+**行为：**
+- 在**下一个续订日期**生效
+- 用户保留当前订阅直到期限结束
+- 新订阅到期后自动开始
 
-**Example:**
+**示例：**
 ```typescript
 // User currently has: Premium Annual (Level 1)
 // User downgrades to: Standard Monthly (Level 2)
 // Result: Premium access continues until annual renewal date, then switches
 ```
 
-### 3. Crossgrade
-Switching to another subscription **at the same tier level**.
+### 3.跨级
+切换到**同一级别**的另一个订阅。
 
-**Behavior depends on duration:**
+**行为取决于持续时间：**
 
-**Different Duration** → Behaves like **downgrade**
-- Takes effect at next renewal date
-- Example: Monthly Premium (Level 1) → Annual Premium (Level 1)
+**不同的持续时间** → 行为类似于 **降级**
+- 在下一个续订日期生效
+- 示例：每月保费（第 1 级）→ 年保费（第 1 级）
 
-**Same Duration** → Behaves like **upgrade**
-- Takes effect immediately
-- Example: Premium Monthly (Level 1) → Ultimate Monthly (Level 1)
+**相同的持续时间** → 行为类似于 **升级**
+- 立即生效
+- 示例：高级每月（级别 1）→ 终极每月（级别 1）
 
-## Creating a Subscription Group
+## 创建订阅组
 
 <Steps>
 
-1. **Navigate to Subscriptions**
+1. **导航至订阅**
 
-   In App Store Connect, select your app and go to **Monetize > Subscriptions**.
+   在 App Store Connect 中，选择您的应用并转到 **获利 > 订阅**。
 
-2. **Create Group**
+2. **创建群组**
 
-   Click **+** next to "Subscription Groups" to create a new group.
+   单击“订阅组”旁边的 ****** 以创建新组。
 
-3. **Name the Group**
+3. **为组命名**
 
-   Choose a descriptive name that reflects the subscriptions it contains:
-   - "Premium Access"
-   - "Cloud Storage Plans"
-   - "Pro Features"
+   选择一个反映其包含的订阅的描述性名称：
+   - “高级访问”
+   - “云存储计划”
+   - “专业功能”
 
-4. **Add Subscriptions**
+4. **添加订阅**
 
-   After creating the group, add individual subscriptions to it. Each subscription will have a level ranking.
+   创建组后，向其中添加个人订阅。每个订阅都会有一个级别排名。
 
-5. **Set Level Rankings**
-
-   Arrange subscriptions from highest value (1) to lowest value. Consider:
-   - Annual plans typically rank higher than monthly
-   - Higher-priced tiers rank above lower-priced ones
-   - Ultimate/premium tiers rank highest
+5. **设置等级排名**将订阅从最高值 (1) 到最低值排列。考虑：
+   - 年度计划的排名通常高于月度计划
+   - 价格较高的级别排名高于价格较低的级别
+   - 终极/高级等级排名最高
 
 </Steps>
 
-## Using in Your App
+## 在您的应用程序中使用
 
-The native-purchases plugin automatically handles subscription group logic:
+本机购买插件自动处理订阅组逻辑：
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -161,9 +156,9 @@ NativePurchases.addListener('transactionUpdated', (transaction) => {
 });
 ```
 
-## Handling Subscription Changes
+## 处理订阅变更
 
-### Detecting Change Type
+### 检测变更类型
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -201,71 +196,71 @@ NativePurchases.addListener('transactionUpdated', (transaction) => {
 });
 ```
 
-### User Communication
+### 用户沟通
 
-Always communicate the change behavior clearly:
+始终清楚地传达变更行为：
 
-**For Upgrades:**
-> "You'll get immediate access to Premium features. We'll prorate your current subscription."
+**对于升级：**
+>“您将立即访问高级功能。我们将按比例分配您当前的订阅。”
 
-**For Downgrades:**
-> "You'll keep Premium access until [renewal date], then switch to Standard."
+**对于降级：**
+> “您将保留高级访问权限直到[续订日期]，然后切换到标准访问权限。”
 
-**For Crossgrades:**
-> "Your plan will change to Annual billing at the next renewal on [date]."
+**对于跨年级：**
+> “您的计划将在 [日期] 的下一次续订时更改为按年计费。”
 
-## Server monitoring
+## 服务器监控
 
-Use Apple's App Store Server Notifications v2 or your own receipt-validation backend to mirror StoreKit changes in your database. Pair server notifications with the `transactionUpdated` listener so both client and backend stay in sync.
+使用 Apple 的 App Store 服务器通知 v2 或您自己的收据验证后端来镜像数据库中的 StoreKit 更改。将服务器通知与 `transactionUpdated` 侦听器配对，以便客户端和后端保持同步。
 
-## Best Practices
+## 最佳实践
 
-### Group Organization
-- Keep related subscriptions in the same group
-- Don't mix unrelated features (e.g., storage and ad removal)
-- Create separate groups for different feature sets
+### 团体组织
+- 将相关订阅保留在同一组中
+- 不要混合不相关的功能（例如存储和广告删除）
+- 为不同的功能集创建单独的组
 
-### Level Ranking Strategy
-- Annual plans → Higher level than monthly (for same tier)
-- Higher-priced tiers → Higher level
-- Consider value, not just price
+### 等级排名策略
+- 年度计划 → 比月度计划更高的级别（同级别）
+- 价格较高的等级→更高级别
+- 考虑价值，而不仅仅是价格
 
-### User Experience
-- Show current subscription clearly
-- Display all available options in the group
-- Indicate which changes are immediate vs. at renewal
-- Allow easy switching between plans
+### 用户体验
+- 清楚地显示当前订阅
+- 显示组中所有可用选项
+- 指出哪些更改是立即更改，哪些是更新时更改
+- 允许在计划之间轻松切换
 
-### Testing
-- Test all upgrade scenarios
-- Test all downgrade scenarios
-- Verify crossgrade behavior
-- Check webhook firing
+### 测试
+- 测试所有升级场景
+- 测试所有降级场景
+- 验证跨级行为
+- 检查 webhook 触发
 
-## Common Scenarios
+## 常见场景
 
-### Scenario 1: Three-Tier Monthly Plans
+### 场景 1：三级包月计划
 ```
 Level 1: Ultimate Monthly ($19.99)
 Level 2: Premium Monthly ($9.99)
 Level 3: Basic Monthly ($4.99)
 ```
 
-- Basic → Premium: Upgrade (immediate)
-- Premium → Ultimate: Upgrade (immediate)
-- Ultimate → Premium: Downgrade (at renewal)
-- Basic → Ultimate: Upgrade (immediate)
+- 基本→高级：升级（立即）
+- 高级→终极：升级（立即）
+- 终极 → 高级：降级（续订时）
+- 基本→终极：升级（立即）
 
-### Scenario 2: Mixed Duration Plans
+### 场景 2：混合期限计划
 ```
 Level 1: Premium Annual ($99.99/year)
 Level 2: Premium Monthly ($9.99/month)
 ```
 
-- Monthly → Annual: Crossgrade (at renewal)
-- Annual → Monthly: Downgrade (at renewal)
+- 每月→每年：Crossgrade（续订时）
+- 年度 → 每月：降级（续订时）
 
-### Scenario 3: Multi-Tier Multi-Duration
+### 场景 3：多层、多持续时间
 ```
 Level 1: Ultimate Annual ($199/year)
 Level 2: Ultimate Monthly ($19.99/month)
@@ -275,29 +270,29 @@ Level 5: Basic Annual ($49/year)
 Level 6: Basic Monthly ($4.99/month)
 ```
 
-This setup provides maximum flexibility while maintaining clear upgrade/downgrade logic.
+此设置提供了最大的灵活性，同时保持清晰的升级/降级逻辑。
 
-## Troubleshooting
+## 故障排除
 
-**Subscription not appearing in group:**
-- Verify it's assigned to the correct group
-- Check that it's in at least "Ready to Submit" status
-- Ensure product ID is correct
+**订阅未出现在组中：**
+- 验证它已分配到正确的组
+- 检查它是否至少处于“准备提交”状态
+- 确保产品ID正确
 
-**Wrong upgrade/downgrade behavior:**
-- Review level rankings (1 = highest)
-- Verify subscription tiers make sense
-- Check that levels are set correctly
+**错误的升级/降级行为：**
+- 评论级别排名（1=最高）
+- 验证订阅级别是否有意义
+- 检查级别设置是否正确
 
-**Products from different groups:**
-- Users can subscribe to multiple groups simultaneously
-- This is intentional - keep related products in same group
+**来自不同组的产品：**
+- 用户可以同时订阅多个群组
+- 这是故意的 - 将相关产品保留在同一组中
 
-**getActiveProducts showing multiple subscriptions:**
-- Check if subscriptions are in different groups
-- Verify user isn't subscribed via Family Sharing
-- Review subscription status in App Store Connect
+**getActiveProducts 显示多个订阅：**
+- 检查订阅是否在不同的组中
+- 验证用户未通过家庭共享订阅
+- 在 App Store Connect 中查看订阅状态
 
-## Additional Resources
+## 其他资源
 
-For more details, refer to the [official Apple documentation on subscription groups](https://developer.apple.com/app-store/subscriptions/).
+有关更多详细信息，请参阅[有关订阅组的官方 Apple 文档](https://developer.apple.com/app-store/subscriptions/)。

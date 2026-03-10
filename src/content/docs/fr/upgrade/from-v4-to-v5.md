@@ -1,16 +1,17 @@
 ---
-locale: fr
-title: "From V4 to V5"
-description: "How to Mise à niveau from V4 to V5, of Capgo updater what are the breaking change you should take care of, it's pretty simple"
-sidebar: 
+title: De la V4 à la V5
+description: >-
+  Comment passer de la V4 à la V5, du programme de mise à jour Capgo, quels sont
+  les changements majeurs dont vous devez vous occuper, c'est assez simple
+sidebar:
   order: 2
+locale: fr
 ---
+## Pourquoi cette mise à jour
 
-## Why this Mise à niveau
+Cette version majeure est là pour suivre la version majeure de Capacitor
 
-This major Version is here to follow Capacitor major Version
-
-First follow the Migration Guide of Capacitor:
+Suivez d’abord le guide de migration de Capacitor :
 
 [https://capacitorjs.com/docs/updating/5-0](https://capacitorjs.com/docs/updating/5-0/)
 
@@ -22,10 +23,10 @@ First follow the Migration Guide of Capacitor:
 
 `npx cap sync`
 
-That it ! Pretty easy !
+C'est ça ! Assez facile !
 
-## Manual mode
+## Mode manuel
 
-If you were getting yourself the Mise à jour with getLatest, there are a tiny change.
-Now if you are up-to-date already it will go into catch.
-Any response different than Mise à jour Disponible will do that.
+Si vous obteniez vous-même la mise à jour avec getLatest, il y a un petit changement.
+Maintenant, si vous êtes déjà à jour, cela ira dans Catch.
+Toute réponse différente de la mise à jour disponible le fera.

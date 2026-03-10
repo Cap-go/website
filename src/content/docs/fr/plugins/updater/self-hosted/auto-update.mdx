@@ -1,28 +1,30 @@
 ---
-locale: fr
-title: "Auto Mise à jour"
-description: "How to use the Mise à jour endpoint of Capgo with the auto-Mise à jour plugin in self-hosted mode, what they are used for and what to expect"
-sidebar: 
+title: Mise à jour automatique
+description: >-
+  Comment utiliser le point de terminaison de mise à jour de Capgo avec le
+  plugin de mise à jour automatique en mode auto-hébergé, à quoi ils servent et
+  à quoi s'attendre
+sidebar:
   order: 4
+locale: fr
 ---
-
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-This Documentation will explain how to run your auto-Mise à jour server.
+Cette documentation vous expliquera comment exécuter votre serveur de mise à jour automatique.
 
-## Serve your Bundle
-Make sure your Bundle is served over HTTPS, and the server has the right CORS headers to allow the Application to Télécharger the Mise à jour.
-e.g. ```https://myserver.com/app/updates/updates.json```
+## Serve your bundle
+Assurez-vous que votre bundle est servi via HTTPS et que le serveur dispose des en-têtes CORS appropriés pour permettre à l'application de télécharger la mise à jour.
+par ex. ```https://myserver.com/app/updates/updates.json```
 
 
-If you're unfamiliar with serving a Bundle, we recommend you try Capgo Cloud or see an Exemple here:
+Si vous n'êtes pas habitué à proposer une offre groupée, nous vous recommandons d'essayer Capgo Cloud ou de consulter un exemple ici :
 <LinkCard
-	title="Serving a Bundle"
+	title="Servir un paquet"
 	href="/docs/self-hosted/auto-update/update-endpoint"
 />
 
-## Configuration
-Add an ``updateUrl`` to your ``capacitor.config.json``.
+##Configuration
+Ajoutez un ``updateUrl`` à votre ``capacitor.config.json``.
 
 ```json
 {
@@ -33,17 +35,17 @@ Add an ``updateUrl`` to your ``capacitor.config.json``.
 	}
 }
 ```
-:::Attention
-When you are pushing a self-hosted Mise à jour, be mindful you cannot use "HTTP" endpoint as it's against the Sécurité policies of Android apps, for Test purposes you can [allow it](https://stackoverflow.com/questions/45940861/Android-8-cleartext-http-traffic-not-permitted).
+:::caution
+Lorsque vous diffusez une mise à jour auto-hébergée, n'oubliez pas que vous ne pouvez pas utiliser le point de terminaison "HTTP", car cela est contraire aux politiques de sécurité des applications Android. À des fins de test, vous pouvez [l'autoriser] (https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-not-permitted).
 :::
 
 ## Mise à jour API
 
-The plugin will do a POST call to your API each time the Application is open, with this body:
+Le plugin effectuera un appel POST à votre API à chaque fois que l'application est ouverte, avec ce corps :
 
 ```typescript
 interface AppInfos {
-    "platform": "ios" | "android",
+    "platform": "ios" | "android" | "electron",
     "device_id": "UUID_of_device_unique_by_install",
     "app_id": "APPID_FROM_CAPACITOR_CONFIG",
     "custom_id": "your_custom_id_set_on_runtime",
@@ -57,7 +59,7 @@ interface AppInfos {
 }
 ```
 
-The server API should respond, in JSON, to the capacitor-updater plugin. With this data if an Mise à jour is necessary:
+Le serveur API doit répondre, en JSON, au plugin condensateur-updater. Avec ces données si une mise à jour est nécessaire :
 
 ```json
 {
@@ -67,37 +69,37 @@ The server API should respond, in JSON, to the capacitor-updater plugin. With th
 }
 ```
 
-In Auto-Mise à jour mode the server should compare the versions and return the right one, if the URL key is present, the plugin starts the Télécharger process.
+En mode mise à jour automatique, le serveur doit comparer les versions et renvoyer la bonne, si la clé URL est présente, le plugin démarre le processus de téléchargement.
 
-If you Ajouter "message" and "Erreur" key, the Version will not be set, and the message will be displayed in Journaux instead.
+Si vous ajoutez les clés « message » et « erreur », la version ne sera pas définie et le message sera affiché dans les journaux à la place.
 
-`version` key should be in [`semver`](https://semver.org/) format.
+La clé `version` doit être au format [`semver`](https://semver.org/).
 
-The zip should have `index.html` as a file at the root, or only one folder at the root with `index.html` inside.
+Le zip doit contenir `index.html` comme fichier à la racine, ou un seul dossier à la racine avec `index.html` à l'intérieur.
 
 
-You can use the Commande of the CLI to zip your Bundle:
+Vous pouvez utiliser la commande du CLI pour compresser votre bundle :
 
 ```bash title="Create a bundle with your files to serve from your server"
 npx @capgo/cli bundle zip --path [/path/to/my/bundle]
 ```
 
-## Generating Bundle Checksum
+## Génération de la somme de contrôle du bundle
 
-**Important:** You must use the Capgo CLI to create your bundle zip file. The Capgo plugin requires a specific zip format and structure that is only guaranteed when using the official CLI tool. Standard zip utilities may create incompatible archives.
+**Important :** Vous devez utiliser le Capgo CLI pour créer votre fichier zip de bundle. Le plugin Capgo nécessite un format et une structure zip spécifiques qui ne sont garantis que lors de l'utilisation de l'outil officiel CLI. Les utilitaires zip standard peuvent créer des archives incompatibles.
 
-To generate the checksum for your bundle, use the Capgo CLI zip command with the `--json` flag:
+Pour générer la somme de contrôle de votre bundle, utilisez la commande zip Capgo CLI avec l'indicateur `--json` :
 
 ```bash title="Create bundle with checksum information"
 npx @capgo/cli bundle zip [appId] --json
 ```
 
-This Commande will:
-- Créer a properly formatted zip file compatible with the Capgo plugin
-- Generate the SHA256 checksum for integrity verification
-- Output Bundle Information in JSON format
+This command will:
+- Créez un fichier zip correctement formaté compatible avec le plugin Capgo
+- Générer la somme de contrôle SHA256 pour la vérification de l'intégrité
+- Informations sur le bundle de sortie au format JSON
 
-Exemple output:
+Exemple de sortie :
 ```json
 {
   "version": "1.2.3",
@@ -106,4 +108,4 @@ Exemple output:
 }
 ```
 
-Use the `checksum` value from this output in your API response to ensure the plugin can verify the bundle integrity before installation.
+Utilisez la valeur `checksum` de cette sortie dans votre réponse API pour vous assurer que le plug-in peut vérifier l'intégrité du bundle avant l'installation.

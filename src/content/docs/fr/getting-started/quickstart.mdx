@@ -1,134 +1,133 @@
 ---
-locale: fr
-title: Aperçu
-description: "Commencer avec Capgo by learning the key concepts and steps to integrate and Déployer Mises à jour en direct to your Application."
-sidebar: 
+title: Overview
+description: >-
+  Commencez avec Capgo en apprenant les concepts et les étapes clés pour
+  intégrer et déployer des mises à jour en direct sur votre application.
+sidebar:
   order: 1
 next: true
 prev: false
+locale: fr
 ---
-
 import { Card, CardGrid, Steps, LinkCard, Aside } from '@astrojs/starlight/components';
 
-The Démarrage rapide Tutoriel will walk you through the key concepts of Capgo! Concepts that will be explored include:
+Le didacticiel de démarrage rapide vous guidera à travers les concepts clés de Capgo ! Les concepts qui seront explorés comprennent :
 
 <Steps>
 
-1. Adding an Application to your Capgo Compte
+1. Ajouter une application à votre compte Capgo
 
-2. Integrating Capgo with your CI/CD
+2. Intégration de Capgo à votre CI/CD
 
-3. Triggering Bundle Télécharger on Capgo by pushing commits 
+3. Déclenchement du téléchargement du bundle sur Capgo en poussant les commits 
 
-4. Configuring and customizing the Capgo Bundle publishing
+4. Configuration et personnalisation de la publication du bundle Capgo
 
-5. Setting up your Application to Activer Mises à jour en direct via Capgo
+5. Configuration de votre application pour activer les mises à jour en direct via Capgo
 
-6. Deploying Mises à jour en direct to your Application from Capgo
+6. Déploiement de mises à jour en direct sur votre application à partir de Capgo
 
 </Steps>
 
-Simply follow the Guide step-by-step, or navigate directly to the Documentation for the component that interests you.
+Suivez simplement le guide étape par étape ou accédez directement à la documentation du composant qui vous intéresse.
 
 
 <CardGrid stagger>
-  <a href="/docs/getting-started/add-an-app/" ><Card title="Start the Tutorial" icon="rocket" >
-    Follow the Démarrage rapide Tutoriel and get up and running with Capgo in no time!
+  <a href="/docs/getting-started/add-an-app/" ><Card title="Démarrer le tutoriel" icon="rocket" >
+    Suivez le didacticiel de démarrage rapide et soyez opérationnel avec Capgo en un rien de temps !
   </Card></a>
-  <a href="/docs/getting-started/onboarding/"><Card title="Guide d'Intégration CLI" icon="list-format">
-    Guide complet étape par étape pour le processus d'intégration CLI interactif.
+  <a href="/docs/getting-started/onboarding/"><Card title="CLI Guide d'intégration" icon="list-format">
+    Guide complet étape par étape pour le processus d'intégration interactif CLI.
   </Card></a>
-  <a href="/docs/getting-started/deploy/"><Card title="Ship updates" icon="pencil">
-    Ship Mises à jour to your Application from the Capgo Tableau de bord.
+  <a href="/docs/getting-started/deploy/"><Card title="Mises à jour des navires" icon="pencil">
+    Envoyez des mises à jour à votre application à partir du tableau de bord Capgo.
   </Card></a>
-  <a href="/docs/getting-started/cicd-integration/"><Card title="Automate updates" icon="setting">
-    Integrate Capgo with your CI/CD and trigger Bundle uploads on Capgo by pushing commits.
+  <a href="/docs/getting-started/cicd-integration/"><Card title="Automatiser les mises à jour" icon="setting">
+    Intégrez Capgo à votre CI/CD et déclenchez les téléchargements de bundles sur Capgo en poussant des commits.
   </Card></a>
-  <a href="/docs/getting-started/troubleshooting/"><Card title="Trouble Shooting" icon="open-book">
-    Problèmes courants and how to solve them.
+  <a href="/docs/getting-started/troubleshooting/"><Card title="Dépannage" icon="open-book">
+    Problèmes courants et comment les résoudre.
   </Card></a>
-  <a href="/docs/getting-started/wrapping-up/"><Card title="Wrap Up" icon="approve-check">
-    Wrap up the Tutoriel and get a quick Aperçu of what you've learned.
+  <a href="/docs/getting-started/wrapping-up/"><Card title="Conclure" icon="approve-check">
+    Terminez le didacticiel et obtenez un aperçu rapide de ce que vous avez appris.
   </Card></a>
 </CardGrid>
 
 <Aside type="tip">
-The Over-the-Air (OTA) Mise à jour Fonctionnalité is applicable only for modifications made to HTML, CSS, and JavaScript files.
+La fonctionnalité de mise à jour Over-the-Air (OTA) s'applique uniquement aux modifications apportées aux fichiers HTML, CSS et JavaScript.
 
-If you make any changes to the Natif code, such as Mises à jour to Capacitor plugins, it is mandatory to resubmit the Application to the Application Store for approval.
+Si vous apportez des modifications au code natif, telles que des mises à jour des plugins Capacitor, il est obligatoire de soumettre à nouveau l'application à l'App Store pour approbation.
 </Aside>
 
-## Join Discord Communauté
+## Rejoignez la communauté Discord
 
-[Join the Capgo Discord Server!](https://discord.capgo.Application)
+[Rejoignez le serveur Discord Capgo !](https://discord.capgo.app)
 
-## Maintenance
+## Entretien
 
-| Plugin Version | Capacitor compatibility | Maintained        |
-| -------------- | ----------------------- | ----------------- |
-| v7.\*.\* (≥7.25.0)       | v7.\*.\*                | ✅ Fully supported                 |
-| v6.\*.\* (≥6.25.0)       | v6.\*.\*                | ✅ Fully supported |
-| v5.\*.\* (≥5.10.0)       | v5.\*.\*                | ✅ Fully supported |
-| v5.\*.\* (\<5.10.0)       | v5.\*.\*                | ⚠️ Obsolète |
+| Version du plugin | Compatibilité Capacitor | Maintenu |
+| ---------- | ----------------------- | ----------------- |
+| v7.\*.\* (≥7.25.0) | v7.\*.\* | ✅ Entièrement pris en charge |
+| v6.\*.\* (≥6.25.0) | v6.\*.\* | ✅ Entièrement pris en charge |
+| v5.\*.\* (≥5.10.0) | v5.\*.\* | ✅ Entièrement pris en charge |
+| v5.\*.\* (\<5.10.0)       | v5.\*.\*                | ⚠️ Deprecated |
 | v4.\*.\*       | v4.\*.\*                | ❌ No longer supported |
 | v3.\*.\*       | v3.\*.\*                | ❌ No longer supported     |
-| >= 8            | v4.\*.\*                | ⚠️ Obsolète due to versioning issues in our CI process     |
+| >= 8 | v4.\*.\* | ⚠️ Obsolète en raison de problèmes de version dans notre processus CI |
 
-## Store Guideline Compliance
+## Conformité aux directives du magasin
 
-Android Google Play and iOS Application Store have corresponding guidelines that have rules you should be aware of before integrating the Capacitor-updater Solution within your Application.
+Android Google Play et iOS App Store ont des directives correspondantes qui contiennent des règles que vous devez connaître avant d'intégrer la solution Capacitor-updater dans votre application.
 
-### Google Play
+### Google jouer
 
-Third paragraph of [Appareil and Network Abuse](https://Support.google.com/googleplay/Android-developer/answer/9888379/?hl=en) topic describe that updating source code by any method other than Google Play's Mise à jour mechanism is restricted. But this restriction does not apply to updating javascript Bundles.
-> This restriction does not apply to code that runs in a virtual machine and has limited access to Android APIs (such as JavaScript in a WebView or browser).
+Le troisième paragraphe de la rubrique [Abus de périphérique et de réseau] (https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en) décrit que la mise à jour du code source par toute méthode autre que le mécanisme de mise à jour de Google Play est restreinte. Mais cette restriction ne s'applique pas à la mise à jour des bundles javascript.
+> Cette restriction ne s'applique pas au code qui s'exécute dans une machine virtuelle et a un accès limité aux API Android (telles que JavaScript dans une vue Web ou un navigateur).Cela permet pleinement à Capacitor-updater car il met à jour uniquement les bundles JS et ne mettra pas à jour le code natif.
 
-That fully allows Capacitor-updater as it Mises à jour just the JS Bundles and won't Mise à jour Natif code.
+### App Store
 
-### Application Store
+Le paragraphe **3.3.2**, puisque depuis 2015 [Apple Developer Program License Agreement](https://developer.apple.com/programs/ios/information/) autorise entièrement l'exécution de mises à jour en direct de JavaScript et des actifs - et dans sa dernière version (20170605) [téléchargeable ici](https://developer.apple.com/terms/), cette décision est encore plus large :
 
-Paragraph **3.3.2**, since Retour in 2015's [Apple Developer Program Licence Agreement](https://developer.apple.com/programs/iOS/Information/) fully allows performing over-the-air Mises à jour of JavaScript and assets -  and in its latest Version (20170605) [downloadable here](https://developer.apple.com/terms/) this ruling is even broader:
+> Le code interprété peut être téléchargé sur une application, mais seulement tant que ce code : (a) ne modifie pas l'objectif principal de l'application en fournissant des caractéristiques ou des fonctionnalités qui sont incompatibles avec l'objectif prévu et annoncé de l'application tel que soumis au App Store, (b) ne crée pas de magasin ou de vitrine pour d'autres codes ou applications, et (c) ne contourne pas la signature, le bac à sable ou d'autres fonctionnalités de sécurité du système d'exploitation.
 
-> Interpreted code may be downloaded to an Application but only so long as such code: (a) does not change the primary purpose of the Application by providing Fonctionnalités or functionality that are inconsistent with the intended and advertised purpose of the Application as submitted to the Application Store, (b) does not Créer a store or storefront for other code or applications, and (c) does not bypass signing, sandbox, or other Sécurité Fonctionnalités of the OS.
+Capacitor Updater vous permet de suivre ces règles en totale conformité tant que la mise à jour que vous diffusez ne s'écarte pas de manière significative de votre produit par rapport à son intention originale approuvée par App Store.
 
-Capacitor Updater allows you to follow these rules in full compliance so long as the Mise à jour you Pousser does not significantly deviate your product from its original Application Store approved intent.
+Pour rester davantage en conformité avec les directives de Apple, nous suggérons que les applications distribuées par App Store n'activent pas le scénario « Forcer la mise à jour », car dans les [App Store Directives de révision](https://developer.apple.com/app-store/review/guidelines/) indiquent que :
 
-To further remain in compliance with Apple's guidelines we suggest that App Store-distributed apps do not enable the `Force update` scenario, since in the [App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) state that:
+> Les applications ne doivent pas forcer les utilisateurs à évaluer l'application, à la réviser, à télécharger d'autres applications ou à d'autres actions similaires afin d'accéder aux fonctionnalités, au contenu ou à l'utilisation de l'application.
 
-> Apps must not force Utilisateurs to rate the Application, review the Application, Télécharger other apps, or other similar actions in order to access functionality, content, or use of the Application.
+Ce n'est pas un problème pour le comportement par défaut de la mise à jour en arrière-plan, car cela n'obligera pas l'utilisateur à appliquer la nouvelle version jusqu'à la prochaine fermeture de l'application, mais au moins vous devez être conscient de ce rôle si vous décidez de l'afficher.
 
-This is not a problem for the default behavior of background Mise à jour, since it won't force the Utilisateur to apply the Nouveau Version until Suivant time they close the Application, but at least you should be aware of that role if you decide to show it.
+##Open source
 
-## Open source
+Le plugin est sous la licence LGPL-3.0 et le back-end est la licence AGPL-3.0.
 
-The plugin is under the LGPL-3.0 Licence and the Retour-end is AGPL-3.0 Licence.
-
-> 💡 LGPL-3.0 means if someone modifies the code of the plugin, it’s mandatory to publish it, in open-source with the same licensing. If you use the code without modification, that doesn’t concern you. See the Problème below for more details Vérifier the link 👇
+> 💡 LGPL-3.0 signifie que si quelqu'un modifie le code du plugin, il est obligatoire de le publier, en open-source avec la même licence. Si vous utilisez le code sans modification, cela ne vous concerne pas. Voir le numéro ci-dessous pour plus de détails, consultez le lien 👇
 
 <LinkCard
-	title="Licensing?"
+	title="Licence ?"
 	href="https://github.com/Cap-go/capacitor-updater/issues/7"
 />
 
 
 <LinkCard
-	title="Try GPTS Capgo to Get Aide instead of reading  the docs"
+	title="Essayez GPTS Capgo pour obtenir de l'aide au lieu de lire la documentation."
 	href="https://chat.openai.com/g/g-3dMwHbF2w-capgo-doc-gpt"
 />
 
 
-> You can include it in your Application without worrying
+> Vous pouvez l'inclure dans votre application sans vous inquiéter
 
-## Final Notes
+## Notes finales
 
-If you self-host and find this tool useful, please consider supporting my work by becoming a [GitHub sponsor](https://github.com/sponsors/riderx/).
+Si vous êtes auto-hébergeur et trouvez cet outil utile, pensez à soutenir mon travail en devenant un [GitHub sponsor](https://github.com/sponsors/riderx/).
 
-I made a bet to open-source all the code I built here instead of paywalling it. By opening it up instead of fighting and hiding, I believe we can make the world a better place.
+J'ai fait le pari d'ouvrir en source tout le code que j'ai construit ici au lieu de le payer. En l’ouvrant au lieu de se battre et de se cacher, je crois que nous pouvons rendre le monde meilleur.
 
-To make this possible, it's necessary for all of us to do our part, including you 🥹. If Capgo cloud doesn't meet your needs, you can Retour a bootstrapped Maker [here](https://github.com/sponsors/riderx/) on your own terms.
+Pour rendre cela possible, il est nécessaire que nous tous fassions notre part, y compris vous 🥹. Si le cloud Capgo ne répond pas à vos besoins, vous pouvez sauvegarder un Maker amorcé [ici] (https://github.com/sponsors/riderx/) selon vos propres conditions.
 
-## Simple Maths
+## Mathématiques simples
 
-The price of the basic plan: $14*12 = $168 a year.
-While average dev/hour = $60.
-That means that 3 hours wasted of dev time on self-host allows you to pay for a whole year, if you spent more than 3 hours you're losing money ^^
+Le prix du forfait de base : 14$*12 = 168$ par an.
+Alors que le développement moyen/heure = 60 $.
+Cela veut dire que 3 heures perdues en développement sur auto-hébergeur vous permettent de payer pour une année entière, si vous avez passé plus de 3 heures vous perdez de l'argent ^^

@@ -1,38 +1,39 @@
 ---
-title: Getting Started
-description: Learn how to install and use the NFC plugin to read and write NFC tags in your Capacitor app.
+title: Empezando
+description: >-
+  Aprenda a instalar y utilizar el complemento NFC para leer y escribir
+  etiquetas NFC en su aplicación Capacitor.
 sidebar:
   order: 2
 locale: es
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Instalar el paquete**
    <PackageManagers pkg="@capgo/capacitor-nfc" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Sincronización con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Configuration
+## Configuración
 
-### iOS Configuration
+### iOS Configuración
 
-Add the NFC usage description to your `Info.plist`:
+Agregue la descripción de uso de NFC a su `Info.plist`:
 
 ```xml
 <key>NFCReaderUsageDescription</key>
 <string>This app needs NFC access to read and write tags</string>
 ```
 
-Enable the Near Field Communication Tag Reading capability in your Xcode project.
+Habilite la capacidad de lectura de etiquetas de comunicación de campo cercano en su proyecto Xcode.
 
-### Android Configuration
+### Android Configuración
 
-Add the NFC permission to your `AndroidManifest.xml`:
+Agregue el permiso NFC a su `AndroidManifest.xml`:
 
 ```xml
 <manifest>
@@ -41,9 +42,9 @@ Add the NFC permission to your `AndroidManifest.xml`:
 </manifest>
 ```
 
-## Usage
+## Uso
 
-### Start Scanning for NFC Tags
+### Comience a escanear en busca de etiquetas NFC
 
 ```typescript
 import { CapacitorNfc } from '@capgo/capacitor-nfc';
@@ -60,7 +61,7 @@ const listener = await CapacitorNfc.addListener('nfcEvent', (event) => {
 });
 ```
 
-### Read NFC Tag
+### Leer etiqueta NFC
 
 ```typescript
 await CapacitorNfc.addListener('nfcEvent', (event) => {
@@ -83,7 +84,7 @@ await CapacitorNfc.addListener('nfcEvent', (event) => {
 });
 ```
 
-### Write to NFC Tag
+### Escribir en etiqueta NFC
 
 ```typescript
 // Prepare a text record
@@ -107,7 +108,7 @@ await CapacitorNfc.write({
 console.log('Tag written successfully');
 ```
 
-### Write URL to NFC Tag
+### Escribir URL en etiqueta NFC
 
 ```typescript
 const url = 'https://capgo.app';
@@ -126,28 +127,28 @@ await CapacitorNfc.write({
 });
 ```
 
-### Erase NFC Tag
+### Borrar etiqueta NFC
 
 ```typescript
 await CapacitorNfc.erase();
 console.log('Tag erased');
 ```
 
-### Make Tag Read-Only
+### Hacer que la etiqueta sea de solo lectura
 
 ```typescript
 await CapacitorNfc.makeReadOnly();
 console.log('Tag is now read-only');
 ```
 
-### Stop Scanning
+### Detener escaneo
 
 ```typescript
 await listener.remove();
 await CapacitorNfc.stopScanning();
 ```
 
-### Check NFC Status
+### Verificar estado de NFC
 
 ```typescript
 const { status } = await CapacitorNfc.getStatus();
@@ -160,7 +161,7 @@ if (status === 'NFC_DISABLED') {
 }
 ```
 
-### Android Beam (P2P Sharing)
+### Android Haz (compartir P2P)
 
 ```typescript
 // Share data via Android Beam
@@ -181,11 +182,11 @@ await CapacitorNfc.share(message);
 await CapacitorNfc.unshare();
 ```
 
-## API Reference
+## API Referencia
 
-### startScanning(options?)
+### iniciar escaneo (¿opciones?)
 
-Start listening for NFC tags.
+Empiece a escuchar las etiquetas NFC.
 
 ```typescript
 interface StartScanningOptions {
@@ -197,17 +198,17 @@ interface StartScanningOptions {
 await CapacitorNfc.startScanning(options);
 ```
 
-### stopScanning()
+### detener el escaneo()
 
-Stop the NFC scanning session.
+Detenga la sesión de escaneo NFC.
 
 ```typescript
 await CapacitorNfc.stopScanning();
 ```
 
-### write(options)
+### escribir (opciones)
 
-Write NDEF records to the last discovered tag.
+Escriba registros NDEF en la última etiqueta descubierta.
 
 ```typescript
 interface WriteTagOptions {
@@ -225,60 +226,60 @@ interface NdefRecord {
 await CapacitorNfc.write(options);
 ```
 
-### erase()
+### borrar()
 
-Erase the last discovered tag.
+Borre la última etiqueta descubierta.
 
 ```typescript
 await CapacitorNfc.erase();
 ```
 
-### makeReadOnly()
+### hacerSoloLectura()
 
-Make the last discovered tag read-only (permanent).
+Haga que la última etiqueta descubierta sea de solo lectura (permanente).
 
 ```typescript
 await CapacitorNfc.makeReadOnly();
 ```
 
-### share(options)
+### compartir (opciones)
 
-Share NDEF message via Android Beam (Android only).
+Comparta el mensaje NDEF a través de Android Beam (solo Android).
 
 ```typescript
 await CapacitorNfc.share({ records: [...] });
 ```
 
-### unshare()
+### dejar de compartir()
 
-Stop sharing (Android only).
+Dejar de compartir (solo Android).
 
 ```typescript
 await CapacitorNfc.unshare();
 ```
 
-### getStatus()
+### obtener estado()
 
-Get current NFC adapter status.
+Obtenga el estado actual del adaptador NFC.
 
 ```typescript
 const { status } = await CapacitorNfc.getStatus();
 // Returns: 'NFC_OK' | 'NO_NFC' | 'NFC_DISABLED' | 'NDEF_PUSH_DISABLED'
 ```
 
-### showSettings()
+### mostrar configuración()
 
-Open system NFC settings.
+Abra la configuración NFC del sistema.
 
 ```typescript
 await CapacitorNfc.showSettings();
 ```
 
-## Events
+## Eventos
 
-### nfcEvent
+### evento nfc
 
-Fired when an NFC tag is discovered.
+Se activa cuando se descubre una etiqueta NFC.
 
 ```typescript
 interface NfcEvent {
@@ -297,9 +298,9 @@ interface NfcTag {
 }
 ```
 
-### nfcStateChange
+### cambio de estado nfc
 
-Fired when NFC adapter availability changes (Android only).
+Se activa cuando cambia la disponibilidad del adaptador NFC (solo Android).
 
 ```typescript
 interface NfcStateChangeEvent {
@@ -308,7 +309,7 @@ interface NfcStateChangeEvent {
 }
 ```
 
-## Complete Example
+## Ejemplo completo
 
 ```typescript
 import { CapacitorNfc } from '@capgo/capacitor-nfc';
@@ -399,58 +400,56 @@ export class NfcService {
 }
 ```
 
-## NDEF Record Types
+## Tipos de registros NDEF
 
-### TNF (Type Name Format)
+### TNF (formato de nombre de tipo)
 
-- `0x00`: Empty
-- `0x01`: Well-known (e.g., Text, URI)
-- `0x02`: MIME media type
-- `0x03`: Absolute URI
-- `0x04`: External type
-- `0x05`: Unknown
-- `0x06`: Unchanged
-- `0x07`: Reserved
+- `0x00`: Vacío
+- `0x01`: conocido (p. ej., texto, URI)
+- `0x02`: tipo de medio MIME
+- `0x03`: URI absoluta
+- `0x04`: tipo externo
+- `0x05`: Desconocido
+- `0x06`: Sin cambios
+- `0x07`: Reservado
 
-### Common Record Types
+### Tipos de registros comunes
 
-- **Text**: `type: [0x54]` ('T')
+- **Texto**: `type: [0x54]` ('T')
 - **URI**: `type: [0x55]` ('U')
-- **Smart Poster**: `type: [0x53, 0x70]` ('Sp')
+- **Póster inteligente**: `type: [0x53, 0x70]` ('Sp')
 
-### URI Prefixes
+### Prefijos URI
 
-- `0x00`: (no prefix)
+- `0x00`: (sin prefijo)
 - `0x01`: `https://`
 - `0x02`: `https://`
 - `0x03`: `http://`
 - `0x04`: `https://www.`
 
-## Best Practices
+## Mejores prácticas
 
-1. **Check NFC Status**: Always verify NFC is available and enabled
-2. **Handle Permissions**: Request NFC permissions appropriately
-3. **Stop Scanning**: Always stop scanning when done to save battery
-4. **Error Handling**: Wrap NFC operations in try-catch blocks
-5. **Test on Devices**: NFC features don't work on simulators/emulators
+1. **Verificar estado de NFC**: Verifique siempre que NFC esté disponible y habilitado
+2. **Manejar permisos**: solicite permisos NFC de forma adecuada
+3. **Detener escaneo**: Detenga siempre el escaneo cuando haya terminado para ahorrar batería
+4. **Manejo de errores**: envuelva las operaciones NFC en bloques try-catch
+5. **Prueba en dispositivos**: las funciones NFC no funcionan en simuladores/emuladores
 
-## Platform Notes
+## Notas de plataforma
 
 ### iOS
-- Requires iOS 11.0+
-- Uses Core NFC framework
-- Supports background tag reading (iOS 13+)
-- Limited to reading NDEF-formatted tags
-- Cannot write tags in background
-- Requires NFCReaderUsageDescription in Info.plist
-
-### Android
-- Requires Android 4.4 (API 19)+
-- Uses Android NFC API
-- Supports both foreground and background tag reading
-- Can write to tags
-- Supports Android Beam (P2P) on devices with NFC
-- Requires NFC permission in AndroidManifest.xml
+- Requiere iOS 11.0+
+- Utiliza el marco Core NFC
+- Admite lectura de etiquetas en segundo plano (iOS 13+)
+- Limitado a leer etiquetas con formato NDEF
+- No se pueden escribir etiquetas en segundo plano.
+- Requiere NFCReaderUsageDescription en Info.plist### Android
+- Requiere Android 4.4 (API 19)+
+- Utiliza Android NFC API
+- Admite lectura de etiquetas tanto en primer plano como en segundo plano
+- Puede escribir en etiquetas
+- Admite Android Beam (P2P) en dispositivos con NFC
+- Requiere permiso NFC en AndroidManifest.xml
 
 ### Web
-- Not supported on web platform
+- No compatible con la plataforma web

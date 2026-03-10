@@ -1,18 +1,19 @@
 ---
-locale: fr
-title: "Events"
-description: "All events you can listen to in the Capacitor Updater plugin for monitoring Mise à jour status and progress"
-sidebar: 
+title: Events
+description: >-
+  Tous les événements que vous pouvez écouter dans le plugin Capacitor Updater
+  pour surveiller l'état et la progression de la mise à jour.
+sidebar:
   order: 9
+locale: fr
 ---
-
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
-The Capacitor Updater plugin provides several events you can listen to for monitoring the Mise à jour process and responding to different states.
+Le plugin Capacitor Updater fournit plusieurs événements que vous pouvez écouter pour surveiller le processus de mise à jour et répondre aux différents états.
 
-## Event Listener Configuration
+## Configuration de l'écouteur d'événement
 
-To listen to events, use the `addListener` method on the `CapacitorUpdater` object:
+Pour écouter les événements, utilisez la méthode `addListener` sur l'objet `CapacitorUpdater` :
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
@@ -29,11 +30,11 @@ listener.remove();
 await CapacitorUpdater.removeAllListeners();
 ```
 
-## Disponible Events
+## Événements disponibles
 
 ### `download`
 
-Fired during the Bundle Télécharger process. Provides Télécharger progress Information.
+Lancé pendant le processus de téléchargement du bundle. Fournit des informations sur la progression du téléchargement.
 
 ```typescript
 CapacitorUpdater.addListener('download', (event) => {
@@ -42,17 +43,17 @@ CapacitorUpdater.addListener('download', (event) => {
 });
 ```
 
-**Event Data:**
-- `percent`: number - Download progress percentage (0-100)
-- `bundle`: BundleInfo - Information about the bundle being downloaded
+**Données d'événement :**
+- `percent` : numéro - Pourcentage de progression du téléchargement (0-100)
+- `bundle` : BundleInfo - Informations sur le bundle en cours de téléchargement
 
 <Aside>
-This event fires multiple times during Télécharger to Signaler progress.
+Cet événement se déclenche plusieurs fois pendant le téléchargement pour signaler la progression.
 </Aside>
 
 ### `noNeedUpdate`
 
-Fired when a Vérifier for Mises à jour determines that no Mise à jour is needed.
+Lancé lorsqu'une vérification des mises à jour détermine qu'aucune mise à jour n'est nécessaire.
 
 ```typescript
 CapacitorUpdater.addListener('noNeedUpdate', (event) => {
@@ -61,12 +62,12 @@ CapacitorUpdater.addListener('noNeedUpdate', (event) => {
 });
 ```
 
-**Event Data:**
-- `bundle`: BundleInfo - Information about the current bundle
+**Données d'événement :**
+- `bundle` : BundleInfo - Informations sur le forfait actuel
 
 ### `updateAvailable`
 
-Fired when a Nouveau Mise à jour is Disponible for Télécharger.
+Lancé lorsqu'une nouvelle mise à jour est disponible en téléchargement.
 
 ```typescript
 CapacitorUpdater.addListener('updateAvailable', (event) => {
@@ -76,12 +77,12 @@ CapacitorUpdater.addListener('updateAvailable', (event) => {
 });
 ```
 
-**Event Data:**
-- `bundle`: BundleInfo - Information about the available update bundle
+**Données d'événement :**
+- `bundle` : BundleInfo - Informations sur le bundle de mise à jour disponible
 
 ### `downloadComplete`
 
-Fired when a Bundle Télécharger has completed successfully.
+Lancé lorsqu'un téléchargement de bundle s'est terminé avec succès.
 
 ```typescript
 CapacitorUpdater.addListener('downloadComplete', (event) => {
@@ -91,12 +92,12 @@ CapacitorUpdater.addListener('downloadComplete', (event) => {
 });
 ```
 
-**Event Data:**
-- `bundle`: BundleInfo - Information about the downloaded bundle
+**Données d'événement :**
+- `bundle` : BundleInfo - Informations sur le bundle téléchargé
 
 ### `majorAvailable`
 
-Fired when a major Mise à jour is Disponible but blocked by auto-Mise à jour Paramètres.
+Lancé lorsqu'une mise à jour majeure est disponible mais bloqué par les paramètres de mise à jour automatique.
 
 ```typescript
 CapacitorUpdater.addListener('majorAvailable', (event) => {
@@ -105,16 +106,16 @@ CapacitorUpdater.addListener('majorAvailable', (event) => {
 });
 ```
 
-**Event Data:**
-- `version`: string - The version number of the major update
+**Données d'événement :**
+- `version` : string - Le numéro de version de la mise à jour majeure
 
 <Aside type="tip">
-Major Mises à jour typically require Utilisateur confirmation or Application Store Mises à jour. Use this event to notify Utilisateurs appropriately.
+Les mises à jour majeures nécessitent généralement une confirmation de l'utilisateur ou des mises à jour de l'App Store. Utilisez cet événement pour informer les utilisateurs de manière appropriée.
 </Aside>
 
 ### `updateFailed`
 
-Fired when an Mise à jour has Échoué to Installer at the Suivant Application Démarrer.
+Déclenché lorsqu'une mise à jour n'a pas pu être installée au prochain démarrage de l'application.
 
 ```typescript
 CapacitorUpdater.addListener('updateFailed', (event) => {
@@ -124,12 +125,12 @@ CapacitorUpdater.addListener('updateFailed', (event) => {
 });
 ```
 
-**Event Data:**
-- `bundle`: BundleInfo - Information about the bundle that failed to install
+**Données d'événement :**
+- `bundle` : BundleInfo - Informations sur le bundle dont l'installation a échoué
 
 ### `downloadFailed`
 
-Fired when a Bundle Télécharger has Échoué.
+Lancé lorsqu'un téléchargement de bundle a échoué.
 
 ```typescript
 CapacitorUpdater.addListener('downloadFailed', (event) => {
@@ -138,12 +139,12 @@ CapacitorUpdater.addListener('downloadFailed', (event) => {
 });
 ```
 
-**Event Data:**
-- `version`: string - The version that failed to download
+**Données d'événement :**
+- `version` : chaîne - La version dont le téléchargement a échoué
 
 ### `appReloaded`
 
-Fired when the Application has been reloaded.
+Lancé lorsque l'application a été rechargée.
 
 ```typescript
 CapacitorUpdater.addListener('appReloaded', () => {
@@ -152,11 +153,11 @@ CapacitorUpdater.addListener('appReloaded', () => {
 });
 ```
 
-**Event Data:** None
+**Données d'événement :** Aucune
 
 ### `appReady`
 
-Fired when the Application is ready to use after an Mise à jour.
+Déclenché lorsque l'application est prête à être utilisée après une mise à jour.
 
 ```typescript
 CapacitorUpdater.addListener('appReady', (event) => {
@@ -166,17 +167,17 @@ CapacitorUpdater.addListener('appReady', (event) => {
 });
 ```
 
-**Event Data:**
-- `bundle`: BundleInfo - Information about the current bundle
-- `status`: string - The ready status
+**Données d'événement :**
+- `bundle` : BundleInfo - Informations sur le forfait actuel
+- `status` : string - L'état prêt
 
 <Aside type="caution">
-Remember to call `notifyAppReady()` within the configured timeout (default 10 seconds) to prevent automatic rollback.
+N'oubliez pas d'appeler `notifyAppReady()` dans le délai d'expiration configuré (10 secondes par défaut) pour empêcher la restauration automatique.
 </Aside>
 
-## BundleInfo Object
+## Objet BundleInfo
 
-Many events include a `BundleInfo` object with the following properties:
+De nombreux événements incluent un objet `BundleInfo` avec les propriétés suivantes :
 
 ```typescript
 interface BundleInfo {
@@ -188,19 +189,19 @@ interface BundleInfo {
 }
 ```
 
-Where `BundleStatus` can be:
-- `'success'` - Bundle downloaded successfully
-- `'error'` - Bundle download/installation failed
-- `'pending'` - Bundle is pending to be set as next
-- `'downloading'` - Bundle is currently downloading
+Où `BundleStatus` peut être :
+- ``succès'` - Bundle téléchargé avec succès
+- ``erreur'` - Le téléchargement/l'installation du bundle a échoué
+- ``en attente'` - Le bundle est en attente d'être défini comme suivant
+- ``téléchargement'` - Le bundle est en cours de téléchargement
 
-## Exemple: Terminé Mise à jour Flow
+## Exemple : terminer le flux de mise à jour
 
-Here's an Exemple of handling the Terminé Mise à jour flow with events:
+Voici un exemple de gestion du flux de mise à jour complet avec des événements :
 
 <Aside type="caution">
-This `UpdateManager` class does not include the `CapacitorUpdater.notifyAppReady()` call required for auto-update flow.
-Please see the [placing notifyAppReady call correctly](/docs/plugins/updater/auto-Mise à jour#placing-notifyappready-call-correctly) docs for more Information.
+Cette classe `UpdateManager` n'inclut pas l'appel `CapacitorUpdater.notifyAppReady()` requis pour le flux de mise à jour automatique.
+Veuillez consulter la documentation [placer correctement l'appel notifyAppReady] (/docs/plugins/updater/auto-update#placing-notifyappready-call-correctly) pour plus d'informations.
 </Aside>
 
 ```typescript
@@ -279,14 +280,12 @@ export class UpdateManager {
 }
 ```
 
-## Best Practices
+## meilleures pratiques1. **Toujours appeler `notifyAppReady()`** : lorsque vous utilisez la mise à jour automatique, appelez toujours cette méthode après l'initialisation de votre application pour empêcher la restauration.
 
-1. **Always call `notifyAppReady()`**: When using auto-update, always call this method after your app initializes to prevent rollback.
+2. **Gérez les échecs avec élégance** : implémentez une gestion appropriée des erreurs pour les échecs de téléchargement et de mise à jour.
 
-2. **Handle failures gracefully**: Implement proper Erreur handling for Télécharger and Mise à jour failures.
+3. **Fournir des commentaires aux utilisateurs** : utilisez l'événement de progression du téléchargement pour afficher la progression de la mise à jour aux utilisateurs.
 
-3. **Provide Utilisateur Retour**: Use the Télécharger progress event to show Mise à jour progress to Utilisateurs.
+4. **Nettoyer les écouteurs** : supprimez les écouteurs d'événements lorsqu'ils ne sont plus nécessaires pour éviter les fuites de mémoire.
 
-4. **Clean up listeners**: Retirer event listeners when they're no longer needed to prevent memory leaks.
-
-5. **Test Mise à jour scenarios**: Test various Mise à jour scenarios including failures, Restaurations, and major Mises à jour.
+5. **Testez les scénarios de mise à jour** : testez divers scénarios de mise à jour, notamment les échecs, les restaurations et les mises à jour majeures.

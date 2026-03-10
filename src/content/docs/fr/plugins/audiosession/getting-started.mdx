@@ -1,25 +1,26 @@
 ---
-locale: fr
 title: Commencer
-description: Configure the AudioSession plugin to react to iOS audio route changes and interruptions.
-sidebar: 
+description: >-
+  Configurez le plugin AudioSession pour réagir aux changements et interruptions
+  de la route audio iOS.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
-> ℹ️ **Platform Support:** The audio session API is Disponible on iOS. Calls on Android and the web resolve without effect so you can keep shared logic.
+> ℹ️ **Prise en charge de la plateforme :** La session audio API est disponible sur iOS. Les appels à Android et au Web sont résolus sans effet afin que vous puissiez conserver une logique partagée.
 
 <Steps>
-1. **Installer the package**
+1. **Installez le package**
    <PackageManagers pkg="@capgo/capacitor-plugin-audiosession" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser iOS platform**
+2. **Synchroniser la plateforme iOS**
    <PackageManagers type="exec" pkg="cap" args="sync ios" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Inspect Disponible outputs
+## Inspecter les sorties disponibles
 
 ```typescript
 import { AudioSession, AudioSessionPorts } from '@capgo/capacitor-plugin-audiosession';
@@ -31,7 +32,7 @@ if (outputs.includes(AudioSessionPorts.BLUETOOTH_A2DP)) {
 }
 ```
 
-## Override to speaker mode
+## Passer en mode haut-parleur
 
 ```typescript
 import { AudioSession, OutputOverrideType } from '@capgo/capacitor-plugin-audiosession';
@@ -42,7 +43,7 @@ await AudioSession.overrideOutput(OutputOverrideType.speaker);
 await AudioSession.overrideOutput(OutputOverrideType.default);
 ```
 
-## Listen for route and interruption events
+## Écoutez les événements d'itinéraire et d'interruption
 
 ```typescript
 import { AudioSession, RouteChangeReasons, InterruptionTypes } from '@capgo/capacitor-plugin-audiosession';
@@ -66,7 +67,7 @@ await routeListener.remove();
 await interruptionListener.remove();
 ```
 
-## Entitlements
+## Droits
 
-- **iOS**: Add any required background audio modes (e.g. `audio`, `voice`) inside `ios/App/App/Info.plist` if your app plays audio in the background.
-- **Other platforms**: No additional Configuration is necessary; methods will resolve with empty results.
+- **iOS** : ajoutez tous les modes audio d'arrière-plan requis (par exemple `audio`, `voice`) dans `ios/App/App/Info.plist` si votre application lit de l'audio en arrière-plan.
+- **Autres plates-formes** : Aucune configuration supplémentaire n'est nécessaire ; les méthodes se résoudront avec des résultats vides.

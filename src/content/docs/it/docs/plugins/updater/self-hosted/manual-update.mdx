@@ -1,16 +1,17 @@
 ---
-
-title: "Manual Update"
-description: "A detailed guide on utilizing the manual update plugin within a self-hosted environment, providing comprehensive instructions on configuration and usage to effectively manage updates without relying on automatic processes."
+title: Aggiornamento manuale
+description: >-
+  Una guida dettagliata sull'utilizzo del plug-in di aggiornamento manuale
+  all'interno di un ambiente self-hosted, che fornisce istruzioni complete sulla
+  configurazione e sull'utilizzo per gestire in modo efficace gli aggiornamenti
+  senza fare affidamento su processi automatici.
 sidebar:
   order: 3
 locale: it
 ---
+##Configurazione
 
-
-## Configuration
-
-Add this to your ``capacitor.config.json``, to disable auto-update.
+Aggiungilo al tuo ``capacitor.config.json``, per disabilitare l'aggiornamento automatico.
 ```tsx
 // capacitor.config.json
 {
@@ -24,16 +25,16 @@ Add this to your ``capacitor.config.json``, to disable auto-update.
 }
 ```
 
-## Usage
+## Utilizzo
 
-You can use this example or re-create the logic in your app.
+Puoi utilizzare questo esempio o ricreare la logica nella tua app.
 
 :::caution
-We are forcing the user to update the app with a static version declared in the code. This is not recommended, you should use a dynamic version from your server.
+Stiamo costringendo l'utente ad aggiornare l'app con una versione statica dichiarata nel codice. Questo non è raccomandato, dovresti utilizzare una versione dinamica dal tuo server.
 :::
 
 :::danger
-We are not doing any version checking, decryption or checksum validation in this example. You should do that on your own.
+In questo esempio non stiamo eseguendo alcun controllo della versione, decrittografia o convalida del checksum. You should do that on your own.
 :::
 
 ```tsx
@@ -66,5 +67,5 @@ App.addListener('appStateChange', async(state) => {
 
 
 :::note
-If this seems like a lot of work consider trying [Capgo trial](https://capgo.app/register/). It will handle all of this for you.
+Se ti sembra un lavoro impegnativo, prova a provare la [Capgo prova](https://capgo.app/register/). Gestirà tutto questo per te.
 :::

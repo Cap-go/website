@@ -1,24 +1,31 @@
 ---
-locale: fr
-title: Migrer from AppFlow to Capgo
-description: Detailed walkthrough for moving an Ionic AppFlow project to Capgo. Each step maps to the standard AppFlow Migration tasks so you can compare line by line—and see which ones Capgo already handles for you.
-sidebar: 
+title: Migrer d'AppFlow vers Capgo
+description: >-
+  Procédure pas à pas détaillée pour déplacer un projet Ionic AppFlow vers
+  Capgo. Chaque étape correspond aux tâches de migration AppFlow standard afin
+  que vous puissiez comparer ligne par ligne et voir celles que Capgo gère déjà
+  pour vous.
+sidebar:
   order: 7
+locale: fr
 ---
+> 🚦 Ionic a annoncé que les produits commerciaux d'AppFlow, y compris les mises à jour en direct, prenaient fin. Les projets existants peuvent être exécutés jusqu'au **31 décembre 2027**, mais aucun nouveau client n'est accepté et aucune nouvelle fonctionnalité n'est prévue. Ce guide vous guide à travers les actions requises pour migrer vers Capgo et met en évidence l'automatisation native dont vous bénéficiez.
 
-> 🚦 Ionic announced that AppFlow’s commercial products—including Mises à jour en direct—are winding down. Existing projects can run until **31 December 2027**, but no Nouveau customers are accepted and no Nouveau Fonctionnalités are planned. This Guide walks you through the actions required to Migrer to Capgo and highlights the Natif automation you gain.
+## Aperçu de la migration
 
-## Migration Aperçu
+Capgo gère les canaux, la conservation des offres groupées, les restaurations, les analyses et les téléchargements CLI pour vous. La migration se résume à l'installation du plugin, à l'appel de `CapacitorUpdater.notifyAppReady()` et, si vous le souhaitez, à la configuration des commandes manuelles facultatives. Les sections ci-dessous parcourent directement chaque tâche.
 
-Capgo handles channels, bundle retention, rollbacks, analytics, and CLI uploads for you. Migration boils down to installing the plugin, calling `CapacitorUpdater.notifyAppReady()`, and—if desired—configuring optional manual controls. The sections below walk through each task directly.
+:::tip[Ciblage de versions comme AppFlow]
+Si vous comptez sur la correspondance de version automatique d'AppFlow (fournir des mises à jour compatibles basées sur la version native), Capgo offre la même fonctionnalité avec un contrôle amélioré. Consultez le [Guide de ciblage de versions](/docs/live-updates/version-targeting) pour connaître les stratégies détaillées sur la gestion des mises à jour sur plusieurs versions d'application.
+:::
 
-## Step 0 – Capture your current AppFlow Configuration
+## Étape 0 – Capturez votre configuration AppFlow actuelle
 
-- Remarque your AppFlow **Application ID**, existing Canaux, and signing keys.
-- Exporter any Bundle history you want to archive.
-- If you are using GitHub Actions or another CI provider, keep those pipelines—they will keep working with Capgo.
+- Notez votre AppFlow **App ID**, vos chaînes existantes et vos clés de signature.
+- Exportez tout historique de bundle que vous souhaitez archiver.
+- Si vous utilisez GitHub Actions ou un autre fournisseur CI, conservez ces pipelines : ils continueront à fonctionner avec Capgo.
 
-## Step 1 – Replace the AppFlow SDK with Capgo
+## Étape 1 – Remplacez AppFlow SDK par Capgo
 
 ```bash
 npm uninstall @capacitor/live-updates
@@ -26,11 +33,11 @@ npm install @capgo/capacitor-updater
 npx cap sync
 ```
 
-That’s it. Capgo Bundles the Natif code for both iOS and Android; no extra JavaScript helpers are required.
+C'est tout. Capgo regroupe le code natif de iOS et Android ; aucune aide JavaScript supplémentaire n'est requise.
 
-## Step 2 – Minimal Configuration (no manual fields)
+## Étape 2 – Configuration minimale (pas de champs manuels)
 
-The existing Configuration block is extensive. Capgo auto-detects your project and Canaux, so the minimal Configuration is:
+Le bloc de configuration existant est étendu. Capgo détecte automatiquement votre projet et vos canaux, la configuration minimale est donc :
 
 ```ts title="capacitor.config.ts"
 import { CapacitorConfig } from '@capacitor/cli'
@@ -47,19 +54,19 @@ const config: CapacitorConfig = {
 export default config
 ```
 
-### Configuration quick Référence
+### Référence rapide de configuration
 
-| Ionic AppFlow setting | Capgo equivalent | Do you need to set it? |
+| Paramètre Ionic AppFlow | Capgo équivalent | Avez-vous besoin de le définir ? |
 | --- | --- | --- |
-| `appId` | Managed in the Capgo dashboard | Automatically supplied when you create the project |
-| `channel` / `defaultChannel` | Channel rules in the dashboard/API | Optional override; defaults come from the server |
-| `autoUpdateMethod` | `autoUpdate: true` | Enabled by default |
-| `maxVersions` | Retention policy | Configured centrally (1 month default, 24 months max) |
-| `enabled` | Not required | Capgo toggles availability per channel |
+| `appId` | Géré dans le tableau de bord Capgo | Fourni automatiquement lors de la création du projet |
+| `channel` / `defaultChannel` | Règles de chaîne dans le tableau de bord/API | Remplacement facultatif ; les valeurs par défaut proviennent du serveur. Voir [Ciblage de versions](/docs/live-updates/version-targeting) pour les stratégies multi-versions |
+| `autoUpdateMethod` | `autoUpdate: true` | Activé par défaut |
+| `maxVersions` | Politique de rétention | Configuré de manière centralisée (1 mois par défaut, 24 mois maximum) |
+| `enabled` | Non requis | Capgo bascule la disponibilité par canal |
 
-## Step 3 – Call `notifyAppReady()` (the only required hook)
+## Étape 3 – Appelez `notifyAppReady()` (le seul hook requis)
 
-In Ionic’s guide you wire `sync`, `download`, and `reload`, then hide the splash screen manually. Capgo performs those actions natively. You only need to confirm the app is ready:
+Dans le guide d'Ionic, vous câblez `sync`, `download` et `reload`, puis masquez l'écran de démarrage manuellement. Capgo effectue ces actions de manière native. Il vous suffit de confirmer que l'application est prête :
 
 ```ts
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -67,12 +74,12 @@ import { CapacitorUpdater } from '@capgo/capacitor-updater'
 CapacitorUpdater.notifyAppReady()
 ```
 
-If the confirmation never arrives, Capgo rolls the Bundle Retour automatically.
+Si la confirmation n'arrive jamais, Capgo annule automatiquement le bundle.
 
-**That's it—Capgo handles the background checks, splash visibility, and rollbacks for you.**
+**C'est tout : Capgo gère les vérifications d'antécédents, la visibilité des éclaboussures et les restaurations pour vous.**
 
 <details>
-<summary>Optional: run logic before the splash screen hides</summary>
+<summary>Facultatif : exécutez la logique avant que l'écran de démarrage ne se cache</summary>
 
 ```ts
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -88,20 +95,18 @@ CapacitorUpdater.notifyAppReady()
 
 </details>
 
-## Step 4 – Mise à jour strategies translated
+## Étape 4 – Mettre à jour les stratégies traduites
 
-AppFlow documents three strategies. Here is how they map to Capgo:
+AppFlow documente trois stratégies. Voici comment ils correspondent à Capgo :### Arrière-plan (par défaut)
+- **AppFlow** : configurez `autoUpdateMethod = background`, appelez `sync()` manuellement.
+- **Capgo** : activé par défaut. Aucun JavaScript requis.
 
-### Background (default)
-- **AppFlow**: configure `autoUpdateMethod = background`, call `sync()` manually.
-- **Capgo**: enabled by default. No JavaScript required.
-
-### Always latest
-- **AppFlow**: add an `App.addListener('resume')` handler that downloads and reloads.
-- **Capgo**: auto-Mise à jour runs on resume already. Ajouter the handler only if you want a custom timing window.
+### Toujours le plus récent
+- **AppFlow** : ajoutez un gestionnaire `App.addListener('resume')` qui télécharge et recharge.
+- **Capgo** : la mise à jour automatique s'exécute déjà à la reprise. Ajoutez le gestionnaire uniquement si vous souhaitez une fenêtre de synchronisation personnalisée.
 
 <details>
-<summary>Optional: manual resume check</summary>
+<summary>Facultatif : vérification manuelle de la reprise</summary>
 
 ```ts
 import { App } from '@capacitor/app'
@@ -117,22 +122,22 @@ App.addListener('resume', async () => {
 
 </details>
 
-### Force Mise à jour
-- **AppFlow**: prompt the user and call `reload()`.
-- **Capgo**: mark the bundle as “mandatory” in the dashboard, then listen for the `majorAvailable` event (emitted after `notifyAppReady()`) to prompt or force users inside your app.
+### Forcer la mise à jour
+- **AppFlow** : invitez l'utilisateur et appelez `reload()`.
+- **Capgo** : marquez le bundle comme « obligatoire » dans le tableau de bord, puis écoutez l'événement `majorAvailable` (émis après `notifyAppReady()`) pour inviter ou forcer les utilisateurs à entrer dans votre application.
 
-## Step 5 – Mapping API calls
+## Étape 5 – Mappage des appels API
 
-| AppFlow method | Capgo equivalent | Do you need it? |
+| Méthode AppFlow | Capgo équivalent | En avez-vous besoin ? |
 | --- | --- | --- |
-| `LiveUpdates.sync()` | Handled automatically | Capgo’s native auto-update runs without a manual sync call |
-| `LiveUpdates.download()` | `CapacitorUpdater.download()` | Optional for custom flows |
-| `LiveUpdates.reload()` | `CapacitorUpdater.set()` | Optional; dashboard toggles handle forced updates |
-| `LiveUpdates.getVersion()` | `CapacitorUpdater.current()` | Optional diagnostics |
+| `LiveUpdates.sync()` | Géré automatiquement | La mise à jour automatique native de Capgo s'exécute sans appel de synchronisation manuelle |
+| `LiveUpdates.download()` | `CapacitorUpdater.download()` | Facultatif pour les flux personnalisés |
+| `LiveUpdates.reload()` | `CapacitorUpdater.set()` | Facultatif; les bascules du tableau de bord gèrent les mises à jour forcées |
+| `LiveUpdates.getVersion()` | `CapacitorUpdater.current()` | Diagnostic en option |
 
-## Step 6 – Déployer using the Capgo CLI or API
+## Étape 6 – Déployer à l'aide de Capgo CLI ou API
 
-Finish the Migration by uploading Bundles with the Capgo CLI or API. The workflow mirrors what you may have scripted before, but now includes Natif safeguards:
+Terminez la migration en téléchargeant des bundles avec le Capgo CLI ou API. Le flux de travail reflète ce que vous avez peut-être écrit auparavant, mais inclut désormais des protections natives :
 
 ```bash
 capgo login                # authenticate once
@@ -141,30 +146,60 @@ capgo bundle upload \
   --channel production     # automatically tags platform/version
 ```
 
-Capgo automatically:
-- Keeps Appareil-level audit Journaux for every Installer.
-- Sends proactive emails when you approach plan limits.
-- Provides burst credits so you are never blocked mid-Libération.
-- Publishes latency metrics for 18 global regions at [status.capgo.Application/history](https://status.capgo.Application/history).
+### Déploiements spécifiques à la version (comme AppFlow)
+
+Si vous devez cibler des versions natives spécifiques (similaire au verrouillage de version native d'AppFlow) :
+
+```bash
+# Only deliver to devices on native version 2.0.0 or higher
+capgo bundle upload \
+  --path dist \
+  --channel production \
+  --native-version "2.0.0"
+
+# Use channels for different major versions
+capgo bundle upload --channel v2  # for app version 2.x
+capgo bundle upload --channel v3  # for app version 3.x
+```
+
+Consultez le [Guide de ciblage de versions](/docs/live-updates/version-targeting) pour connaître les stratégies complètes.
+
+Capgo automatiquement :
+- Conserve les journaux d'audit au niveau de l'appareil pour chaque installation.
+- Envoie des e-mails proactifs lorsque vous approchez des limites du plan.
+- Fournit des crédits en rafale afin que vous ne soyez jamais bloqué à mi-version.
+- Publie des mesures de latence pour 18 régions du monde sur [status.capgo.app/history](https://status.capgo.app/history).
+
+## Plugins d'entreprise Ionic
+
+Si votre pile Ionic utilise également des plugins d'entreprise, suivez les documents de migration ciblés ci-dessous. Chaque guide recommande le remplacement de Capgo et les étapes suivantes.
+
+- [Migrer depuis Ionic Secure Storage](/docs/upgrade/from-ionic-secure-storage)
+- [Migrer depuis Ionic Auth Connect](/docs/upgrade/from-ionic-auth-connect)
+- [Migrer depuis Ionic Identity Vault](/docs/upgrade/from-ionic-identity-vault)
 
 ## Questions fréquemment posées
 
-### Why is AppFlow shutting down Mises à jour en direct?
-Ionic is discontinuing commercial products, including AppFlow, to focus on their open-source framework. Existing customers can continue using Mises à jour en direct until **31 December 2027**, but no Nouveau Fonctionnalités or customers are accepted. Capgo fills that gap with a dedicated Natif OTA platform.
+### Pourquoi AppFlow arrête-t-il les mises à jour en direct ?
+Ionic abandonne les produits commerciaux, y compris AppFlow, pour se concentrer sur son framework open source. Les clients existants peuvent continuer à utiliser les mises à jour en direct jusqu'au **31 décembre 2027**, mais aucune nouvelle fonctionnalité ni aucun nouveau client ne sont acceptés. Capgo comble cette lacune avec une plateforme OTA native dédiée.
 
-### How long does Migration take?
-Most teams complete the move in under a day. Concepts such as channels, deployments, and release rules map directly, and our team provides documentation plus hands-on support. In many cases you simply install the plugin, call `notifyAppReady()`, and upload your first bundle.
+### Combien de temps dure la migration ?
+La plupart des équipes terminent le déménagement en moins d’une journée. Des concepts tels que les canaux, les déploiements et les règles de publication sont directement mappés, et notre équipe fournit une documentation ainsi qu'une assistance pratique. Dans de nombreux cas, il vous suffit d'installer le plugin, d'appeler `notifyAppReady()` et de télécharger votre premier bundle.### Allons-nous économiser de l'argent ?
+Oui. Les mises à jour en direct d'AppFlow commencent à **499 $/mois**. Capgo commence à **14 $/mois** avec une tarification basée sur l'utilisation qui tombe à environ **0,001 $ par MAU**. Vous bénéficiez également d’un cryptage, de restaurations automatiques et d’une surveillance mondiale de la latence.
 
-### Will we Enregistrer money?
-Yes. AppFlow Mises à jour en direct Démarrer at **$499/mo**. Capgo starts at **$14/mo** with Utilisation-based pricing that drops to roughly **$0.001 per MAU**. You also gain Chiffrement, automatic Restaurations, and worldwide latency monitoring.
+### Quand devons-nous migrer ?
+Étant donné qu'AppFlow est désormais en mode maintenance, une migration plus précoce vous donne accès à l'innovation Capgo en cours. Nous vous recommandons de changer lorsque cela correspond à votre calendrier de sortie. Notre équipe d'ingénierie vous aidera à planifier la transition afin que votre CI/CD et vos déploiements continuent de fonctionner.
 
-### When should we Migrer?
-Because AppFlow is now in maintenance mode, migrating sooner gives you access to ongoing Capgo innovation. We recommend switching when it fits your Libération schedule. Our engineering team will Aide you plan the changeover so your CI/CD and deployments keep running.
+## Ressources supplémentaires
 
-## Need Aide?
+- **[Guide de ciblage de versions](/docs/live-updates/version-targeting)** - Découvrez en profondeur les stratégies de correspondance de versions de style AppFlow
+- **[Modifications récentes](/docs/live-updates/breaking-changes)** - Gestion des mises à jour de versions majeures avec les chaînes
+- **[Gestion des canaux](/docs/live-updates/channels)** - Référence complète de configuration des canaux
 
-- Book a Migration session: [cal.com/team/capgo/demo](https://cal.com/team/capgo/demo)
-- Join the Communauté: [Capgo Discord](https://discord.gg/VCXxSVjefW)
-- Track issues / request Fonctionnalités: [github.com/Cap-go/capacitor-updater](https://github.com/Cap-go/capacitor-updater)
+## Besoin d'aide ?
 
-Capgo is engineered for enterprises that need Natif delta Mises à jour, Chiffré Bundles, and continuous innovation. Once you Migrer you can Supprimer the AppFlow glue code, rely on Natif automation, and keep shipping without interruption.
+- Réservez une session de migration : [cal.com/team/capgo/demo](https://cal.com/team/capgo/demo)
+- Rejoignez la communauté : [Capgo Discord](https://discord.gg/VCXxSVjefW)
+- Suivre les problèmes/demander des fonctionnalités : [github.com/Cap-go/capacitor-updater](https://github.com/Cap-go/capacitor-updater)
+
+Capgo est conçu pour les entreprises qui ont besoin de mises à jour delta natives, de packages chiffrés et d'une innovation continue. Une fois la migration effectuée, vous pouvez supprimer le code de colle AppFlow, vous appuyer sur l'automatisation native et continuer à expédier sans interruption.

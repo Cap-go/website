@@ -1,50 +1,51 @@
 ---
-locale: fr
-title: GitLab CI/CD Integration
-description: "Learn how to integrate Capgo Mises à jour en direct with GitLab CI/CD for automated Déploiement of your Application Mises à jour."
-sidebar: 
+title: GitLab Intégration CI/CD
+description: >-
+  Découvrez comment intégrer Capgo Live Updates avec GitLab CI/CD pour un
+  déploiement automatisé des mises à jour de vos applications.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Aside, Steps } from '@astrojs/starlight/components';
 
-Integrate Capgo Mises à jour en direct with GitLab CI/CD to automatically Déployer your Application Mises à jour whenever you Pousser code changes. This Guide covers setting up automated builds, Test, and Déploiement workflows.
+Intégrez Capgo Live Updates avec GitLab CI/CD pour déployer automatiquement les mises à jour de votre application chaque fois que vous apportez des modifications au code. Ce guide couvre la configuration des flux de travail automatisés de génération, de test et de déploiement.
 
-## Prerequisites
+## Prérequis
 
-Before setting up GitLab CI/CD integration, ensure you have:
+Avant de configurer l'intégration GitLab CI/CD, assurez-vous d'avoir :
 
-- A GitLab Compte with a project repository
-- A Capgo Compte with an Application configured
-- Node.js and npm/yarn configured in your project
+- Un compte GitLab avec un référentiel projet
+- Un compte Capgo avec une application configurée
+- Node.js et npm/fil configurés dans votre projet
 
-## Setting Up GitLab CI/CD
+## Configuration de GitLab CI/CD
 
-### Step 1: Configure Environment Variables
+### Étape 1 : Configurer les variables d'environnement
 
-First, set up the necessary variables in your GitLab project:
+Tout d’abord, configurez les variables nécessaires dans votre projet GitLab :
 
 <Steps>
 
-1. Navigate to your GitLab project
-2. Go to **Paramètres** → **CI/CD** → **Variables**
-3. Ajouter the following variables:
+1. Accédez à votre projet GitLab
+2. Accédez à **Paramètres** → **CI/CD** → **Variables**.
+3. Ajoutez les variables suivantes :
 
 </Steps>
 
-| Variable Name | Value | Protected | Masked |
-|---------------|-------|-----------|--------|
-| `CAPGO_TOKEN` | Your Capgo API token | ✅ Yes | ✅ Yes |
+| Nom de la variable | Valeur | Protégé | Masqué |
+|---------------|-------|---------------|--------|
+| `CAPGO_TOKEN` | Votre jeton Capgo API | ✅ Oui | ✅ Oui |
 
 <Aside type="tip">
 
-Get your Capgo API token from [console.capgo.app/apikeys](https://console.capgo.app/apikeys). Your app ID is already configured in your `capacitor.config.ts` file.
+Obtenez votre jeton Capgo API sur [console.capgo.app/apikeys](https://console.capgo.app/apikeys). Votre identifiant d'application est déjà configuré dans votre fichier `capacitor.config.ts`.
 
 </Aside>
 
 ## Simple
 
-Basic Configuration that deploys to Production on every Pousser to the main branch:
+Configuration de base qui se déploie en production à chaque poussée vers la branche principale :
 
 ```yaml
 # .gitlab-ci.yml - Simple Configuration
@@ -82,11 +83,11 @@ deploy_production:
     - main
 ```
 
-## Advanced
+## Avancé
 
-### Fonctionnalité Branch Deployments
+### Déploiements de branches de fonctionnalités
 
-Déployer Fonctionnalité branches to Test Canaux for review and Test:
+Déployez des branches de fonctionnalités pour tester les canaux à des fins d'examen et de test :
 
 ```yaml
 # Feature branch deployment
@@ -108,22 +109,22 @@ deploy_feature:
 
 <Aside type="tip">
 
-**Testing with Channels**: After deploying to a feature channel, you can test the update in your app by configuring it to use that specific channel. Learn more about [configuring channels in your app](/docs/live-updates/channels/#configuring-the-channel-in-your-app).
+**Test avec les canaux** : après le déploiement sur un canal de fonctionnalités, vous pouvez tester la mise à jour dans votre application en la configurant pour utiliser ce canal spécifique. En savoir plus sur la [configuration des canaux dans votre application](/docs/live-updates/channels/#configuring-the-channel-in-your-app).
 
 </Aside>
 
-### Using Chiffrement
+### Utilisation du cryptage
 
-If you're using [Capgo's Chiffrement Fonctionnalité](/docs/live-Mises à jour/Chiffrement/), you'll need to store your private key securely in your CI/CD environment.
+Si vous utilisez la [fonctionnalité de chiffrement de Capgo](/docs/live-updates/encryption/), vous devrez stocker votre clé privée en toute sécurité dans votre environnement CI/CD.
 
-After [setting up Chiffrement keys](/docs/live-Mises à jour/Chiffrement/#setting-up-Chiffrement) locally, Ajouter your private key to GitLab variables:
+Après avoir [configuré les clés de chiffrement](/docs/live-updates/encryption/#setting-up-encryption) localement, ajoutez votre clé privée aux variables GitLab :
 
 ```shell
 # Display your private key content (copy this output)
 cat .capgo_key_v2
 ```
 
-Add this content as `CAPGO_PRIVATE_KEY` in your GitLab project variables (mark as protected and masked), then use it in pipelines:
+Ajoutez ce contenu sous le nom `CAPGO_PRIVATE_KEY` dans les variables de votre projet GitLab (marquez comme protégé et masqué), puis utilisez-le dans les pipelines :
 
 ```yaml
 # Deploy with encryption
@@ -135,18 +136,18 @@ deploy_production:
 
 <Aside type="caution">
 
-**Security Best Practices:**
-- Never commit the `.capgo_key_v2` file to version control
-- Store the private key only in secure CI/CD secret management
-- Use different keys for different environments
+**Meilleures pratiques de sécurité :**
+- Ne validez jamais le fichier `.capgo_key_v2` dans le contrôle de version
+- Stockez la clé privée uniquement dans la gestion sécurisée des secrets CI/CD
+- Utilisez différentes clés pour différents environnements
 
 </Aside>
 
-### Multi-Canal Configuration
+### Configuration multicanal
 
-For comprehensive Information À propos setting up and managing multiple Déploiement Canaux, see the [Canaux Documentation](/docs/live-Mises à jour/Canaux/).
+Pour obtenir des informations complètes sur la configuration et la gestion de plusieurs canaux de déploiement, consultez la [Documentation des canaux](/docs/live-updates/channels/).
 
-Terminé Configuration with multiple environments and merge request deployments:
+Configuration complète avec plusieurs environnements et déploiements de demandes de fusion :
 
 ```yaml
 # .gitlab-ci.yml - Advanced Multi-Channel Configuration
@@ -241,9 +242,9 @@ deploy_production:
     name: production
 ```
 
-### Multi-Environment with Manual Approval
+### Multi-environnement avec approbation manuelle
 
-For Production deployments requiring manual approval:
+Pour les déploiements de production nécessitant une approbation manuelle :
 
 ```yaml
 deploy_production:
@@ -260,9 +261,9 @@ deploy_production:
     name: production
 ```
 
-### Branch-Based Déploiement Strategy
+### Stratégie de déploiement basée sur les succursales
 
-Déployer different branches to appropriate Canaux automatically:
+Déployez automatiquement différentes branches sur les canaux appropriés :
 
 ```yaml
 # Dynamic channel deployment based on branch
@@ -285,20 +286,18 @@ deploy:
     name: $CHANNEL
 ```
 
-## Sécurité Best Practices
+## Bonnes pratiques de sécurité
 
-### Protected Variables
+### Variables protégées
 
-<Steps>
-
-1. **Mark Sensitive Variables**: Always mark API tokens as protected and masked
-2. **Branch Protection**: Use protected variables for Production deployments
-3. **Access Control**: Limit variable access to maintainers only
-4. **Regular Rotation**: Rotate API tokens regularly
+<Steps>1. **Marquer les variables sensibles** : marquez toujours les jetons API comme protégés et masqués.
+2. **Protection des branches** : utilisez des variables protégées pour les déploiements de production
+3. **Contrôle d'accès** : limiter l'accès aux variables aux responsables uniquement
+4. **Rotation régulière** : faites pivoter régulièrement les jetons API
 
 </Steps>
 
-### Secure Pipeline Configuration
+### Configuration sécurisée du pipeline
 
 ```yaml
 # Use protected variables for production
@@ -314,11 +313,11 @@ deploy_production:
       - $CI_COMMIT_REF_PROTECTED == "true"
 ```
 
-## Monitoring and Notifications
+## Surveillance et notifications
 
-### Slack Integration
+### Intégration Slack
 
-Ajouter Slack notifications to your pipeline:
+Ajoutez des notifications Slack à votre pipeline :
 
 ```yaml
 notify_success:
@@ -346,9 +345,9 @@ notify_failure:
   when: on_failure
 ```
 
-### Email Notifications
+### Notifications par e-mail
 
-Configure email notifications in your GitLab project Paramètres or use the API:
+Configurez les notifications par e-mail dans les paramètres de votre projet GitLab ou utilisez le API :
 
 ```yaml
 notify_email:
@@ -368,7 +367,7 @@ notify_email:
 
 ### Problèmes courants
 
-**Pipeline fails with "Capgo CLI not found":**
+**Le pipeline échoue avec « Capgo CLI introuvable » :**
 ```yaml
 # Debug CLI installation
 debug_cli:
@@ -378,7 +377,7 @@ debug_cli:
     - npx @capgo/cli --version
 ```
 
-**Authentication errors:**
+**Erreurs d'authentification :**
 ```yaml
 # Verify token configuration
 debug_auth:
@@ -391,7 +390,7 @@ debug_auth:
       echo "Token length: ${#CAPGO_TOKEN}"
 ```
 
-**Build artifacts not found:**
+**Artéfacts de construction introuvables :**
 ```yaml
 # List build outputs
 debug_build:
@@ -400,9 +399,9 @@ debug_build:
     - find dist/ -type f -name "*.js" -o -name "*.html"
 ```
 
-### Débogage Pipeline
+### Pipeline de débogage
 
-Ajouter Débogage Information to troubleshoot issues:
+Ajoutez des informations de débogage pour résoudre les problèmes :
 
 ```yaml
 debug:
@@ -416,11 +415,11 @@ debug:
     - branches
 ```
 
-## Suivant Steps
+## Prochaines étapes
 
-- Learn À propos [Canaux](/docs/live-Mises à jour/Canaux/) to manage different Déploiement environments
-- Explore [Custom Storage](/docs/live-Mises à jour/custom-storage/) for advanced Déploiement scenarios
-- Set up [Chiffrement](/docs/live-Mises à jour/Chiffrement/) for secure deployments
-- Configure [Mise à jour Behavior](/docs/live-Mises à jour/Mise à jour-behavior/) to customize how Mises à jour are applied
+- Découvrez les [Canaux](/docs/live-updates/channels/) pour gérer différents environnements de déploiement
+- Explorez [Custom Storage](/docs/live-updates/custom-storage/) pour des scénarios de déploiement avancés
+- Configurer [Encryption](/docs/live-updates/encryption/) pour des déploiements sécurisés
+- Configurez [Comportement de mise à jour] (/docs/live-updates/update-behavior/) pour personnaliser la façon dont les mises à jour sont appliquées
 
-With GitLab CI/CD integration, you can automate your Capgo deployments and ensure consistent, reliable Mises à jour to your mobile Application Utilisateurs.
+Avec l'intégration CI/CD GitLab, vous pouvez automatiser vos déploiements Capgo et garantir des mises à jour cohérentes et fiables pour les utilisateurs de vos applications mobiles.

@@ -1,14 +1,16 @@
 ---
-locale: fr
 title: Commencer
-description: Learn how to Installer and configure the Autofill Enregistrer Password plugin for seamless password management in your Capacitor Application.
-sidebar: 
+description: >-
+  Découvrez comment installer et configurer le plugin Autofill Save Password
+  pour une gestion transparente des mots de passe dans votre application
+  Capacitor.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-## Installation
+##Installation
 
 <Tabs>
   <TabItem label="npm">
@@ -37,18 +39,18 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
   </TabItem>
 </Tabs>
 
-## Platform Support
+## Prise en charge de la plateforme
 
-- **iOS**: Full Support (iOS 18.3 and older versions)
-- **Android**: Work in progress
+- **iOS** : Prise en charge complète (iOS 18.3 et versions antérieures)
+- **Android** : Travaux en cours
 
-## Platform Configuration
+## Configuration de la plateforme
 
 ### iOS
 
-#### 1. Associated Domains Configuration
+#### 1. Configuration des domaines associés
 
-Configure associated domains in your Apple Developer account and add them to your `App.entitlements` file:
+Configurez les domaines associés dans votre compte développeur Apple et ajoutez-les à votre fichier `App.entitlements` :
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -64,9 +66,9 @@ Configure associated domains in your Apple Developer account and add them to you
 </plist>
 ```
 
-#### 2. Web Credential Configuration
+#### 2. Configuration des informations d'identification Web
 
-Add a `.well-known/apple-app-site-association` file to your website:
+Ajoutez un fichier `.well-known/apple-app-site-association` à votre site Web :
 
 ```json
 {
@@ -78,19 +80,19 @@ Add a `.well-known/apple-app-site-association` file to your website:
 }
 ```
 
-### Android (Future Support)
+### Android (Support futur)
 
-#### 1. Google Services Plugin
+#### 1. Plugin de services Google
 
-Add to `android/app/build.gradle`:
+Ajouter à `android/app/build.gradle` :
 
 ```kotlin
 apply plugin: 'com.google.gms.google-services'
 ```
 
-#### 2. Domain Configuration
+#### 2. Configuration du domaine
 
-Add to `android/app/src/main/res/values/strings.xml`:
+Ajouter à `android/app/src/main/res/values/strings.xml` :
 
 ```xml
 <resources>
@@ -106,7 +108,7 @@ Add to `android/app/src/main/res/values/strings.xml`:
 </resources>
 ```
 
-## Utilisation Exemple
+## Exemple d'utilisation
 
 ```typescript
 import { SavePassword } from '@capgo/capacitor-autofill-save-password';
@@ -155,15 +157,15 @@ async function loadSavedCredentials() {
 
 ## API Référence
 
-### promptDialog(Options)
+### promptDialog(options)
 
 ```typescript
 promptDialog(options: SavePasswordOptions) => Promise<void>
 ```
 
-Saves Utilisateur credentials to the system keychain.
+Enregistre les informations d'identification de l'utilisateur dans le trousseau du système.
 
-| Param         | Type                              |
+| Paramètres | Tapez |
 | ------------- | --------------------------------- |
 | **`options`** | `SavePasswordOptions` |
 
@@ -173,28 +175,28 @@ Saves Utilisateur credentials to the system keychain.
 readPassword() => Promise<SavedCredentials>
 ```
 
-Retrieves saved credentials from the system keychain.
+Récupère les informations d'identification enregistrées à partir du trousseau du système.
 
-**Returns:** `Promise<SavedCredentials>`
+**Retours :** `Promise<SavedCredentials>`
 
-## Interfaces
+##Interfaces
 
-### SavePasswordOptions
+### Enregistrer les options de mot de passe
 
-| Prop           | Type               | Description                                   |
-| -------------- | ------------------ | --------------------------------------------- |
-| **`username`** | `string` | The username to save                          |
-| **`password`** | `string` | The password to save                          |
-| **`url`**      | `string` | iOS only - associated domain URL (optional) |
+| Accessoire | Tapez | Descriptif |
+| ---------- | ------------------ | --------------------------------------------- |
+| **`username`** | `string` | Le nom d'utilisateur à enregistrer |
+| **`password`** | `string` | Le mot de passe à enregistrer |
+| **`url`** | `string` | iOS uniquement - URL du domaine associé (facultatif) |
 
-### SavedCredentials
+### Informations d'identification enregistrées
 
-| Prop           | Type              | Description                  |
-| -------------- | ----------------- | ---------------------------- |
-| **`username`** | `string` | The saved username           |
-| **`password`** | `string` | The saved password           |
+| Accessoire | Tapez | Descriptif |
+| ---------- | ----------------- | ---------------------------- |
+| **`username`** | `string` | Le nom d'utilisateur enregistré |
+| **`password`** | `string` | Le mot de passe enregistré |
 
-## Integration with Connexion Flow
+## Intégration avec le flux de connexion
 
 ```typescript
 import { SavePassword } from '@capgo/capacitor-autofill-save-password';
@@ -244,17 +246,17 @@ class AuthService {
 }
 ```
 
-## Best Practices
+## meilleures pratiques
 
-- Only prompt to Enregistrer passwords after successful authentication
-- Handle cases where Utilisateurs decline to Enregistrer passwords gracefully
-- Implement proper Erreur handling for keychain access failures
-- Use associated domains for seamless web-Application credential sharing
-- Test autofill functionality across different iOS versions
+- Invite uniquement à enregistrer les mots de passe après une authentification réussie
+- Gérer les cas où les utilisateurs refusent d'enregistrer correctement leurs mots de passe
+- Implémenter une gestion appropriée des erreurs pour les échecs d'accès au trousseau
+- Utilisez les domaines associés pour un partage transparent des informations d'identification des applications Web
+- Testez la fonctionnalité de remplissage automatique sur différentes versions de iOS
 
-## Sécurité Considerations
+## Considérations de sécurité
 
-- Credentials are stored in the system keychain with appropriate Sécurité flags
-- Associated domains ensure credentials are only accessible to authorized apps
-- Follow platform Sécurité guidelines for credential management
-- Consider implementing additional Sécurité measures for sensitive applications
+- Les informations d'identification sont stockées dans le trousseau du système avec les indicateurs de sécurité appropriés
+- Les domaines associés garantissent que les informations d'identification ne sont accessibles qu'aux applications autorisées
+- Suivez les directives de sécurité de la plateforme pour la gestion des informations d'identification
+- Envisager de mettre en œuvre des mesures de sécurité supplémentaires pour les applications sensibles

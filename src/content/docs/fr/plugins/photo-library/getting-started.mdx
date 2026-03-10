@@ -1,28 +1,29 @@
 ---
-locale: fr
 title: Commencer
-description: Integrate the Natif photo gallery with pagination and media picking.
-sidebar: 
+description: >-
+  Intégrez la galerie de photos native avec la pagination et la sélection des
+  médias.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Installer the plugin**
+1. **Installez le plugin**
    <PackageManagers pkg="@capgo/capacitor-photo-library" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser platforms**
+2. **Plateformes de synchronisation**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Platform permissions
+## Autorisations de la plateforme
 
-- **iOS**: Update `Info.plist` with `NSPhotoLibraryUsageDescription` (and `NSPhotoLibraryAddUsageDescription` if you plan to save media).
-- **Android**: For Android 13+, declare the photo/video permissions (`READ_MEDIA_IMAGES`, `READ_MEDIA_VIDEO`). Capacitor 5 handles this automatically, but double-check custom manifests.
+- **iOS** : mettez à jour `Info.plist` avec `NSPhotoLibraryUsageDescription` (et `NSPhotoLibraryAddUsageDescription` si vous envisagez de sauvegarder des médias).
+- **Android** : Pour Android 13+, déclarez les autorisations photo/vidéo (`READ_MEDIA_IMAGES`, `READ_MEDIA_VIDEO`). Capacitor 5 gère cela automatiquement, mais revérifiez les manifestes personnalisés.
 
-## Request access
+## Demander l'accès
 
 ```typescript
 import { PhotoLibrary } from '@capgo/capacitor-photo-library';
@@ -33,7 +34,7 @@ if (state !== 'authorized' && state !== 'limited') {
 }
 ```
 
-## Load the gallery
+## Charger la galerie
 
 ```typescript
 import { Capacitor } from '@capacitor/core';
@@ -58,9 +59,9 @@ const gallery = assets.map((asset) => ({
 }));
 ```
 
-To fetch additional pages, call `PhotoLibrary.getLibrary({ cursor: nextPage })`.
+Pour récupérer des pages supplémentaires, appelez `PhotoLibrary.getLibrary({ cursor: nextPage })`.
 
-## Let Utilisateurs pick media
+## Laisser les utilisateurs choisir un média
 
 ```typescript
 const selection = await PhotoLibrary.pickMedia({
@@ -71,6 +72,6 @@ const selection = await PhotoLibrary.pickMedia({
 console.log('User selected', selection.assets.length, 'items');
 ```
 
-## Clean up cached files
+## Nettoyer les fichiers en cache
 
-Generated thumbnails and exports are stored in the app cache directory under `photoLibrary`. Remove them with your preferred file API when you need to reclaim storage.
+Les miniatures et exportations générées sont stockées dans le répertoire de cache de l'application sous `photoLibrary`. Supprimez-les avec votre fichier préféré API lorsque vous devez récupérer de l'espace de stockage.

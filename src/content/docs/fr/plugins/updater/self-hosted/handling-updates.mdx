@@ -1,12 +1,14 @@
 ---
-locale: fr
-title: "Mise à jour API Endpoint"
-description: "How to Construction your Mise à jour server API endpoint to respond to Capgo plugin requests with proper Bundle Information and checksums"
-sidebar: 
+title: Mettre à jour le point de terminaison API
+description: >-
+  Comment créer le point de terminaison API de votre serveur de mise à jour pour
+  répondre aux requêtes du plug-in Capgo avec les informations de bundle et les
+  sommes de contrôle appropriées
+sidebar:
   order: 6
+locale: fr
 ---
-
-Here is an Exemple of code in JavaScript to send an Mise à jour to the plugin
+Voici un exemple de code dans JavaScript pour envoyer une mise à jour du plugin
 
 ```typescript
 interface AppInfos {
@@ -64,9 +66,9 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-## Response Format
+## Format de réponse
 
-For **non-Chiffré Bundles**, your endpoint should return:
+Pour les **bundles non chiffrés**, votre point de terminaison doit renvoyer :
 
 ```json
 {
@@ -76,7 +78,7 @@ For **non-Chiffré Bundles**, your endpoint should return:
 }
 ```
 
-For **Chiffré Bundles**, you also need to include the session key:
+Pour les **bundles chiffrés**, vous devez également inclure la clé de session :
 
 ```json
 {
@@ -87,7 +89,7 @@ For **Chiffré Bundles**, you also need to include the session key:
 }
 ```
 
-And if no update or error, add the `message` key and optionally an `error`:
+Et si pas de mise à jour ou d'erreur, ajoutez la clé `message` et éventuellement un `error` :
 
 ```json
 {
@@ -97,15 +99,15 @@ And if no update or error, add the `message` key and optionally an `error`:
 }
 ```
 
-## Field Descriptions
+## Description des champs
 
-- **`checksum`**: SHA256 hash of your bundle zip file for integrity verification
-- **`session_key`**: Required only for encrypted bundles - this is the `ivSessionKey` returned by the encrypt command
-- **`version`**: Version identifier in semver format
-- **`url`**: HTTPS URL where the bundle can be downloaded
+- **`checksum`** : hachage SHA256 du fichier zip de votre bundle pour la vérification de l'intégrité
+- **`session_key`** : requis uniquement pour les bundles chiffrés - il s'agit du `ivSessionKey` renvoyé par la commande encrypt
+- **`version`** : Identifiant de version au format semver
+- **`url`** : URL HTTPS où le bundle peut être téléchargé
 
-## Bundle Creation
+## Création de bundles
 
-To learn how to Créer compatible Bundles and generate checksums, see the [Auto Mise à jour Documentation](/docs/plugin/self-hosted/auto-Mise à jour/#generating-Bundle-checksum).
+Pour savoir comment créer des bundles compatibles et générer des sommes de contrôle, consultez la [documentation de mise à jour automatique](/docs/plugin/self-hosted/auto-update/#generating-bundle-checksum).
 
-For Chiffré Bundles, see the [Chiffré Bundles Documentation](/docs/plugin/self-hosted/Chiffré-Bundles/) which explains the Terminé Chiffrement workflow.
+Pour les bundles chiffrés, consultez la [documentation sur les bundles chiffrés](/docs/plugin/self-hosted/encrypted-bundles/) qui explique le flux de travail de chiffrement complet.

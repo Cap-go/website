@@ -1,11 +1,10 @@
 ---
-title: はじめに
-locale: ja
-description: Updaterプラグインを使用してCapacitorアプリにライブアップデートを統合するためのクイックスタートガイド。
+title: はじめる
+description: Updater プラグインを使用してライブ アップデートを Capacitor アプリに統合するためのクイック スタート ガイド。
 sidebar:
   order: 2
+locale: ja
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ## インストール
@@ -39,35 +38,35 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ## クイックスタート
 
-ほとんどのユーザーには、プラグインのインストールとCapgo cloudの統合の両方をカバーする[メインのクイックスタートガイド](/docs/getting-started/quickstart/)に従うことをお勧めします。
+ほとんどのユーザーには、プラグインのインストールと Capgo クラウド統合の両方をカバーする [メイン クイックスタート ガイド](/docs/getting-started/quickstart/) に従うことをお勧めします。
 
-このはじめにガイドは、基礎となるメカニズムを理解したい、またはセルフホスティングのアップデートを実装したい上級ユーザー向けの技術的なプラグインの詳細に焦点を当てています。
+この入門ガイドでは、基礎となるメカニズムを理解したい、またはセルフホスト型アップデートを実装したいと考えている上級ユーザー向けに、プラグインの技術的な詳細に焦点を当てています。
 
 ## 概要
 
-Capacitor Updaterプラグインは、Capacitorアプリケーションのover-the-air（OTA）アップデートを可能にします。これにより、アプリストアのレビューを経ることなくアプリにアップデートをプッシュできます。
+Capacitor アップデータ プラグインを使用すると、Capacitor アプリケーションの無線 (OTA) 更新が可能になります。これにより、アプリ ストアのレビューを通過せずにアプリにアップデートをプッシュできます。
 
 ## 仕組み
 
-1. **バンドルのダウンロード**: プラグインはアップデートバンドル（Webアセットを含むZIPファイル）をダウンロードします
-2. **展開**: バンドルはデバイスのストレージに展開されます
-3. **ホットリロード**: アプリは再起動を必要とせずに新しいバンドルに切り替わります
-4. **フォールバック**: アップデートが失敗した場合、アプリは以前の動作バージョンに戻ります
+1. **バンドル ダウンロード**: プラグインは更新バンドル (Web アセットを含む ZIP ファイル) をダウンロードします。
+2. **抽出**: バンドルはデバイスのストレージに抽出されます。
+3. **ホット リロード**: アプリは再起動を必要とせずに新しいバンドルに切り替わります。
+4. **フォールバック**: アップデートが失敗した場合、アプリは以前の動作バージョンに戻ります。
 
 ## 使用モード
 
-### 1. 自動アップデートモード（推奨）
+### 1. 自動更新モード (推奨)
 
-自動アップデート管理を使用するプラグインの最も簡単な方法:
+自動更新管理でプラグインを使用する最も簡単な方法:
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
 
-// プラグインはすべてを自動的に処理します
-// capacitor.config.tsで設定してください
+// Plugin handles everything automatically
+// Configure in capacitor.config.ts
 ```
 
-`capacitor.config.ts`に追加:
+`capacitor.config.ts` に次の内容を追加します。
 
 ```typescript
 {
@@ -80,41 +79,41 @@ import { CapacitorUpdater } from '@capgo/capacitor-updater';
 }
 ```
 
-### 2. 手動モード
+### 2. マニュアルモード
 
-アップデートプロセスの高度な制御用:
+更新プロセスを高度に制御するには:
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
 
-// アップデートをダウンロード
+// Download an update
 const bundle = await CapacitorUpdater.download({
   url: 'https://your-server.com/updates/v1.0.1.zip',
   version: '1.0.1'
 });
 
-// バンドルを設定（次回のアプリ起動時に使用されます）
+// Set the bundle (will be used on next app start)
 await CapacitorUpdater.set({
   id: bundle.id
 });
 
-// または即座にリロード
+// Or reload immediately
 await CapacitorUpdater.reload();
 ```
 
-## プラットフォーム設定
+## プラットフォーム構成
 
 ### iOS
 
-追加の設定は必要ありません。プラグインはそのまま動作します。
+追加の構成は必要ありません。プラグインはそのまま使用できます。
 
 ### Android
 
-追加の設定は必要ありません。プラグインはそのまま動作します。
+追加の構成は必要ありません。プラグインはそのまま使用できます。
 
-## 基本的なAPI使用法
+## 基本的な API の使用法
 
-### アップデートをダウンロード
+### アップデートをダウンロードする
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
@@ -127,10 +126,10 @@ const bundle = await CapacitorUpdater.download({
 console.log('Downloaded bundle:', bundle.id);
 ```
 
-### アクティブバンドルを設定
+### アクティブなバンドルを設定する
 
 ```typescript
-// 次回のアプリ起動時に使用されるバンドルを設定
+// Set bundle to be used on next app start
 await CapacitorUpdater.set({
   id: bundle.id
 });
@@ -139,18 +138,18 @@ await CapacitorUpdater.set({
 ### 新しいバンドルでリロード
 
 ```typescript
-// 新しいバンドルで即座にアプリをリロード
+// Reload app immediately with new bundle
 await CapacitorUpdater.reload();
 ```
 
-### バンドル一覧
+### バンドルのリスト
 
 ```typescript
 const { bundles } = await CapacitorUpdater.list();
 console.log('Available bundles:', bundles);
 ```
 
-### バンドルを削除
+### バンドルを削除する
 
 ```typescript
 await CapacitorUpdater.delete({
@@ -167,58 +166,58 @@ console.log('Current bundle:', bundle.version);
 
 ## イベントリスナー
 
-アップデートイベントをリッスン:
+更新イベントをリッスンします。
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
 
-// ダウンロード進捗をリッスン
+// Listen for download progress
 CapacitorUpdater.addListener('download', (info) => {
   console.log('Download progress:', info.percent);
 });
 
-// ダウンロード完了をリッスン
+// Listen for download completion
 CapacitorUpdater.addListener('downloadComplete', (bundle) => {
   console.log('Download complete:', bundle.version);
 });
 
-// アップデート失敗をリッスン
+// Listen for update failures
 CapacitorUpdater.addListener('updateFailed', (error) => {
   console.error('Update failed:', error);
 });
 
-// 成功したアップデートをリッスン
+// Listen for successful updates
 CapacitorUpdater.addListener('updateAvailable', (info) => {
   console.log('Update available:', info.version);
 });
 ```
 
-## 設定オプション
+## 構成オプション
 
-`capacitor.config.ts`でプラグインを設定:
+`capacitor.config.ts` でプラグインを設定します。
 
 ```typescript
 {
   plugins: {
     CapacitorUpdater: {
-      // 自動アップデート設定
+      // Auto-update settings
       autoUpdate: true,
       updateUrl: 'https://api.example.com/updates',
 
-      // アップデート動作
+      // Update behavior
       resetWhenUpdate: true,
       directUpdate: false,
 
-      // バージョン設定
+      // Version settings
       version: '1.0.0',
 
-      // セキュリティ
+      // Security
       allowModifyUrl: false,
 
-      // 統計収集
+      // Stats collection
       statsUrl: 'https://api.example.com/stats',
 
-      // チャンネル（Capgo cloud用）
+      // Channel (for Capgo cloud)
       defaultChannel: 'production'
     }
   }
@@ -227,31 +226,31 @@ CapacitorUpdater.addListener('updateAvailable', (info) => {
 
 ## 統合パターン
 
-### Capgo Cloudを使用
+### Capgo クラウドを使用
 
-最も簡単な始め方:
+始めるための最も簡単な方法:
 
 ```typescript
-// Capgo CLIをインストール
+// Install the Capgo CLI
 npm install -g @capgo/cli
 
-// Capgoにログイン
+// Login to Capgo
 npx @capgo/cli login
 
-// 最初のバンドルをアップロード
+// Upload your first bundle
 npx @capgo/cli bundle upload
 
-// プラグインはCapgo cloudから自動的にアップデートします
+// The plugin auto-updates from Capgo cloud
 ```
 
-詳細は[メインのクイックスタートガイド](/docs/getting-started/quickstart/)をご覧ください。
+詳細については、[メイン クイックスタート ガイド](/docs/getting-started/quickstart/) を参照してください。
 
-### セルフホスティングアップデート
+### 自己ホスト型アップデート
 
-独自のアップデートサーバーをホスト:
+独自の更新サーバーをホストします。
 
 ```typescript
-// アップデートエンドポイントを設定
+// Configure your update endpoint
 {
   plugins: {
     CapacitorUpdater: {
@@ -262,7 +261,7 @@ npx @capgo/cli bundle upload
 }
 ```
 
-サーバーは以下を返す必要があります:
+サーバーは以下を返すはずです:
 
 ```json
 {
@@ -271,57 +270,55 @@ npx @capgo/cli bundle upload
 }
 ```
 
-完全な詳細については[セルフホスティングモード](/docs/plugins/updater/self-hosted/getting-started/)をご覧ください。
+詳細については、[セルフホスト モード](/docs/plugins/updater/self-hosted/getting-started/) を参照してください。
 
-### 手動アップデートフロー
+### 手動更新フロー
 
-アップデートの完全な制御:
+アップデートを完全に制御:
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
 
 async function checkAndUpdate() {
-  // サーバーからアップデートを確認
+  // Check for updates from your server
   const response = await fetch('https://api.example.com/check-update');
   const { version, url } = await response.json();
 
-  // アップデートをダウンロード
+  // Download the update
   const bundle = await CapacitorUpdater.download({
     url,
     version
   });
 
-  // バンドルの準備が完了したことを通知
+  // Notify bundle is ready
   await CapacitorUpdater.notifyAppReady();
 
-  // 次のバージョンとして設定
+  // Set as next version
   await CapacitorUpdater.set({ id: bundle.id });
 
-  // 準備ができたらリロード
+  // Reload when ready
   await CapacitorUpdater.reload();
 }
 ```
 
 ## ベストプラクティス
 
-- アプリが正常にロードされたら常に`notifyAppReady()`を呼び出す
-- 本番環境にプッシュする前にアップデートを十分にテストする
+- アプリが正常に読み込まれたときは、常に `notifyAppReady()` を呼び出します
+- 実稼働環境に移行する前に、更新を徹底的にテストします
 - ネットワーク障害に対する適切なエラー処理を実装する
 - バージョン番号を一貫して使用する
-- より速いダウンロードのためにバンドルサイズを小さく保つ
-- アップデート成功率を監視する
+- ダウンロードを高速化するためにバンドルのサイズを小さく保ちます
+- アップデートの成功率を監視する
 
-## 次のステップ
-
-- [Plugin API Reference](/docs/plugins/updater/api/) - 完全なAPIドキュメント
-- [Plugin Settings](/docs/plugins/updater/settings/) - すべての設定オプション
-- [Events](/docs/plugins/updater/events/) - 利用可能なアップデートイベント
-- [Self-Hosted Mode](/docs/plugins/updater/self-hosted/getting-started/) - 独自のアップデートサーバーを運用
-- [Local Development](/docs/plugins/updater/local-dev/getting-started/) - アップデートをローカルでテスト
-- [Debugging](/docs/plugins/updater/debugging/) - トラブルシューティングガイド
+## 次のステップ- [プラグイン API リファレンス](/docs/plugins/updater/api/) - 完全な API ドキュメント
+- [プラグイン設定](/docs/plugins/updater/settings/) - すべての設定オプション
+- [イベント](/docs/plugins/updater/events/) - 利用可能なアップデートイベント
+- [セルフホストモード](/docs/plugins/updater/self-hosted/getting-started/) - 独自のアップデートサーバーを実行します
+- [ローカル開発](/docs/plugins/updater/local-dev/getting-started/) - アップデートをローカルでテストする
+- [デバッグ](/docs/plugins/updater/debugging/) - トラブルシューティング ガイド
 
 ## サポート
 
-- [Known Issues](/docs/plugins/updater/known-issues/) - 一般的な問題と解決策
-- [GitHub Discussions](https://github.com/Cap-go/capacitor-updater/discussions) - コミュニティサポート
+- [既知の問題](/docs/plugins/updater/known-issues/) - 一般的な問題と解決策
+- [GitHub ディスカッション](https://github.com/Cap-go/capacitor-updater/discussions) - コミュニティ サポート
 - [Discord](https://discord.gg/VnYRvBfgA6) - リアルタイムチャット

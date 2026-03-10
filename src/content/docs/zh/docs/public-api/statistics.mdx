@@ -1,33 +1,32 @@
 ---
-title: "统计"
-description: "统计 API 端点的详细指南,提供应用和组织的月活跃用户(MAU)、存储和带宽指标的见解"
+title: 统计
+description: 统计 API 端点的详细指南，提供有关应用程序和组织的每月活跃用户 (MAU)、存储和带宽指标的见解。
 sidebar:
   order: 5
 locale: zh
 ---
-
-统计端点提供有关应用和组织的详细分析。您可以跟踪不同时间段的月活跃用户(MAU)、存储使用情况和带宽消耗。这些数据对于监控应用增长、资源使用和规划容量至关重要。
+统计端点提供有关您的应用程序和组织的详细分析。您可以跟踪不同时间段的每月活跃用户 (MAU)、存储使用情况和带宽消耗。这些数据对于监控应用程序增长、资源使用情况和规划容量至关重要。
 
 ## 了解指标
 
-- **MAU(月活跃用户)**: 在过去 30 天内访问应用的唯一设备数量
-- **存储**: 存储的所有 bundle 和资源的总大小(以字节为单位)
-- **带宽**: bundle 下载的总数据传输量(以字节为单位)
+- **MAU（每月活跃用户）**：过去 30 天内访问您的应用的唯一设备数量
+- **存储**：存储的所有捆绑包和资源的总大小（以字节为单位）
+- **带宽**：捆绑包下载的总数据传输量（以字节为单位）
 
 ## 最佳实践
 
-1. **定期监控**: 定期检查统计信息以跟踪增长和使用模式
-2. **资源规划**: 使用存储和带宽指标进行容量规划
-3. **用户参与度**: 跟踪 MAU 以了解用户参与度趋势
-4. **成本管理**: 监控资源使用情况以优化成本
+1. **定期监控**：定期检查统计数据以跟踪增长和使用模式
+2. **资源规划**：使用存储和带宽指标进行容量规划
+3. **用户参与度**：跟踪 MAU 以了解用户参与度趋势
+4. **成本管理**：监控资源使用情况以优化成本
 
-## Endpoints
+## 端点
 
 ### GET /statistics/app/:app_id/
 
-Get statistics for a specific app. This endpoint is useful for monitoring individual app performance.
+获取特定应用程序的统计信息。此端点对于监控单个应用程序性能非常有用。
 
-#### Query Parameters
+#### 查询参数
 
 ```typescript
 interface StatsQuery {
@@ -36,14 +35,14 @@ interface StatsQuery {
 }
 ```
 
-#### Example Request
+#### 请求示例
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/statistics/app/com.demo.app/?from=2024-01-01&to=2024-02-01"
 ```
 
-#### Example Response
+#### 响应示例
 
 ```json
 [
@@ -62,11 +61,11 @@ curl -H "authorization: your-api-key" \
 ]
 ```
 
-### GET /statistics/org/:org_id/
+### 获取/statistics/org/:org_id/
 
-Get statistics for a specific organization. Useful for monitoring organization-level usage.
+获取特定组织的统计数据。对于监控组织级别的使用情况很有用。
 
-#### Query Parameters
+#### 查询参数
 
 ```typescript
 interface StatsQuery {
@@ -77,14 +76,14 @@ interface StatsQuery {
 }
 ```
 
-#### Example Request
+#### 请求示例
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/statistics/org/046a36ac-e03c-4590-9257-bd6c9dba9ee8/?from=2024-01-01&to=2024-02-01"
 ```
 
-#### Example Response
+#### 响应示例
 
 ```json
 [
@@ -103,11 +102,11 @@ curl -H "authorization: your-api-key" \
 ]
 ```
 
-### GET /statistics/user/
+### 获取/统计/用户/
 
-Get aggregated statistics across all organizations you have access to. Perfect for overall usage monitoring.
+获取您有权访问的所有组织的汇总统计数据。非常适合整体使用情况监控。
 
-#### Query Parameters
+#### 查询参数
 
 ```typescript
 interface StatsQuery {
@@ -116,14 +115,14 @@ interface StatsQuery {
 }
 ```
 
-#### Example Request
+#### 请求示例
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/statistics/user/?from=2024-01-01&to=2024-02-01"
 ```
 
-#### Example Response
+#### 响应示例
 
 ```json
 [
@@ -144,9 +143,9 @@ curl -H "authorization: your-api-key" \
 
 ### GET /statistics/app/:app_id/bundle_usage
 
-Get bundle usage statistics for a specific app, showing the distribution of versions among users over a specified period.
+获取特定应用程序的捆绑包使用情况统计信息，显示指定时间段内用户之间的捆绑包（版本）分布情况。
 
-#### Query Parameters
+#### 查询参数
 
 ```typescript
 interface BundleUsageQuery {
@@ -155,14 +154,14 @@ interface BundleUsageQuery {
 }
 ```
 
-#### Example Request
+#### 请求示例
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/statistics/app/com.demo.app/bundle_usage?from=2024-01-01&to=2024-02-01"
 ```
 
-#### Example Response
+#### 响应示例
 
 ```json
 {
@@ -180,9 +179,9 @@ curl -H "authorization: your-api-key" \
 }
 ```
 
-## Error Handling
+## 错误处理
 
-Common error scenarios and their responses:
+常见错误场景及其应对措施：
 
 ```json
 // Invalid body
@@ -216,18 +215,18 @@ Common error scenarios and their responses:
 }
 ```
 
-## Common Use Cases
+## 常见用例
 
-1. **Growth Tracking**: Monitor MAU growth over time
-2. **Resource Optimization**: Track storage and bandwidth usage to optimize costs
-3. **Capacity Planning**: Use trends to plan for future resource needs
-4. **Usage Reports**: Generate periodic usage reports for stakeholders
-5. **Version Distribution Analysis**: Understand how users are distributed across different app versions with bundle usage statistics
+1. **增长跟踪**：监控 MAU 随着时间的推移的增长
+2. **资源优化**：跟踪存储和带宽使用情况以优化成本
+3. **容量规划**：利用趋势来规划未来的资源需求
+4. **使用报告**：为利益相关者生成定期使用报告
+5. **捆绑包（版本）分布分析**：通过捆绑包使用统计信息了解用户如何分布在不同的应用程序捆绑包（版本）中
 
-## Tips for Analysis
+## 分析技巧
 
-1. **Compare Periods**: Look at month-over-month or year-over-year trends
-2. **Track Ratios**: Monitor bandwidth per user or storage per app
-3. **Set Alerts**: Create alerts for unusual spikes in usage
-4. **Regular Backups**: Export statistics regularly for historical analysis
-5. **Version Adoption**: Use bundle usage to track adoption rates of new versions
+1. **比较期间**：查看环比或同比趋势
+2. **跟踪比率**：监控每个用户的带宽或每个应用程序的存储
+3. **设置警报**：针对异常使用高峰创建警报
+4. **定期备份**：定期导出统计数据以进行历史分析
+5. **捆绑包（版本）采用**：使用捆绑包使用情况来跟踪新捆绑包（版本）的采用率

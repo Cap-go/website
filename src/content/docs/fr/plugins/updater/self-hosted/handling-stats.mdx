@@ -1,24 +1,26 @@
 ---
-locale: fr
-title: "Statistiques API"
-description: "How to use the Statistiques endpoint of Capgo with the auto-Mise à jour plugin in self-hosted mode, what they are used for and what to expect"
-sidebar: 
+title: Statistiques API
+description: >-
+  Comment utiliser le point de terminaison de statistiques de Capgo avec le
+  plugin de mise à jour automatique en mode auto-hébergé, à quoi ils servent et
+  à quoi s'attendre
+sidebar:
   order: 7
+locale: fr
 ---
-
 import { LinkCard, CardGrid, Aside } from '@astrojs/starlight/components';
 
 ## Statistiques API
 
-Starting from Version 1.3.0 the Mise à jour system is able to send stats!
+À partir de la version 1.3.0, le système de mise à jour est capable d'envoyer des statistiques !
 
-By default, all stats are sent to our server, to understand Utilisation and research. 
+Par défaut, toutes les statistiques sont envoyées à notre serveur, pour comprendre l'utilisation et la recherche. 
 
 <Aside>
-No private data is sent for stats, only random UUID, Version Mise à jour, Version Natif Application, platform, action, and Application ID.
+Aucune donnée privée n'est envoyée pour les statistiques, uniquement l'UUID aléatoire, la mise à jour de version, la version native de l'application, la plate-forme, l'action et l'ID de l'application.
 </Aside>
 
-If you want to send this data to your server instead, change the config below:
+Si vous souhaitez plutôt envoyer ces données à votre serveur, modifiez la configuration ci-dessous :
 
 ```tsx
 // capacitor.config.json
@@ -33,9 +35,9 @@ If you want to send this data to your server instead, change the config below:
 }
 ```
 
-## Data Structure
+## Structure des données
 
-What your server will receive is:
+Ce que votre serveur recevra est :
 
 ```tsx
 interface AppInfosStats {
@@ -43,7 +45,7 @@ interface AppInfosStats {
 	// Then it's the same info as update
 	"app_id": "**.***.**", // app identifier in the store
 	"device_id": "*******", // unique id per app install
-	"platform": "ios", // or android
+	"platform": "ios", // or android, or electron
 	"custom_id": "user_1", // represent your user
         "version_name": "1.2.3", // version of the web build
         "version_build": "1.2.0", // version of the native build
@@ -55,21 +57,21 @@ interface AppInfosStats {
 }
 ```
 
-You can also totally Désactiver it, with an empty string. Keep in mind, Statistiques are made private friendly and Aide me to understand how people use the plugin, to resolve issues and improve it.
+Vous pouvez également le désactiver totalement, avec une chaîne vide. Gardez à l’esprit que les statistiques sont confidentielles et m’aident à comprendre comment les gens utilisent le plugin, à résoudre les problèmes et à l’améliorer.
 
-## Comportement attendu en l'absence de mise à jour
+## Comportement attendu "pas de mise à jour"
 
-Quand votre endpoint de mise à jour n'a pas de nouvelle version, il doit répondre avec un payload d'erreur comme :
+Lorsque votre point de terminaison de mise à jour n'a **aucune nouvelle version**, il doit répondre avec une charge utile d'erreur telle que :
 
 ```json
 { "error": "no_new_version_available", "message": "No new version available" }
 ```
 
-Le code `error` doit être exactement `no_new_version_available`. Le `message` peut être n'importe quelle chaîne (uniquement pour logs/débogage). C’est le comportement attendu et il est quand même renvoyé avec HTTP `200`. Si votre endpoint renvoie plutôt un `200` sans `url`, le plugin le traitera comme un échec de téléchargement et enverra `download_fail`.
+Le code `error` doit être exactement `no_new_version_available`. Le `message` peut être n'importe quelle chaîne de votre choix (c'est uniquement pour la journalisation/le débogage). C'est le comportement attendu et il est toujours renvoyé avec HTTP `200`. Si votre point de terminaison de mise à jour renvoie à la place une réponse `200` sans `url`, le plugin le traitera comme un échec de téléchargement et enverra une statistique `download_fail`.
 
-## Implementation Exemple
+## Exemple d'implémentation
 
-Here is an Exemple of code in JavaScript to Enregistrer the stats of the plugin:
+Voici un exemple de code dans JavaScript pour sauvegarder les stats du plugin :
 
 ```typescript
 interface AppInfos {
@@ -130,6 +132,7 @@ interface AppInfos {
           'rateLimited' |
           'disableAutoUpdate' |
           'InvalidIp' |
+          'keyMismatch' |
           'blocked_by_server_url'
   version_build: string
   version_code: string
@@ -170,7 +173,7 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-This endpoint should return a JSON:
+Ce point de terminaison doit renvoyer un JSON :
 
 ```json
 { "status": "ok" }
@@ -178,12 +181,12 @@ This endpoint should return a JSON:
 
 ## Actions
 
-For detailed descriptions of all action codes and their meanings, please refer to the Débogage Documentation:
+Pour des descriptions détaillées de tous les codes d'action et de leur signification, veuillez vous référer à la documentation de débogage :
 
-* **Actions sent from the device**: See the [debugging documentation - Sent from the device](/docs/plugins/updater/debugging/#sent-from-the-device) section
-* **Actions sent from the backend**: See the [debugging documentation - Sent from the backend](/docs/plugins/updater/debugging/#sent-from-the-backend) section
+* **Actions envoyées depuis l'appareil** : voir la section [documentation de débogage - Envoyées depuis l'appareil](/docs/plugins/updater/debugging/#sent-from-the-device)
+* **Actions envoyées depuis le backend** : voir la section [documentation de débogage - Envoyées depuis le backend](/docs/plugins/updater/debugging/#sent-from-the-backend)
 
 <LinkCard
-	title="Handling Mises à jour"
+	title="Gestion des mises à jour"
 	href="/docs/plugin/self-hosted/handling-updates/"
 />

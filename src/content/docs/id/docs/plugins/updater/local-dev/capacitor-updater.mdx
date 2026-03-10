@@ -1,24 +1,23 @@
 ---
-title: Using the capacitor updater with self-hosted capgo
+title: Menggunakan pembaru kapasitor dengan capgo yang dihosting sendiri
 description: >-
-  How to use the capacitor updater with self-hosted Capgo, be fully autonomous
-  with your own instance of Capgo
+  Cara menggunakan pembaru kapasitor dengan Capgo yang dihosting sendiri,
+  sepenuhnya otonom dengan instance Capgo Anda sendiri
 sidebar:
   order: 4
 locale: id
 ---
+## Apa saja yang akan dibahas dalam tutorial ini?
 
-## What this tutorial will cover?
+Tutorial ini akan menunjukkan cara menggunakan kapasitor updater di lingkungan dev dengan capgo yang dihosting sendiri
 
-This tutorial will show how to use capacitor updater in a dev environment with self hosted capgo
+## Persyaratan
 
-## Requirements
+ 1. [Kloning capgo](https://github.com/Cap-go/capgo)
 
- 1. [Cloned capgo](https://github.com/Cap-go/capgo)
+## Memulai
 
-## Getting started
-
-To use the capacitor updater with self-hosted capgo edit the `capacitor.config.ts` from your app directory and set it like this:
+Untuk menggunakan pembaru kapasitor dengan capgo yang dihosting sendiri, edit `capacitor.config.ts` dari direktori aplikasi Anda dan atur seperti ini:
 
 ```ts
 const config: CapacitorConfig = {
@@ -36,15 +35,15 @@ const config: CapacitorConfig = {
 };
 ```
 
-This will enable you to use local capgo in development. However, by default, this is not enough.
+Ini akan memungkinkan Anda untuk menggunakan capgo lokal dalam pengembangan. Namun, secara default, ini tidak cukup.
 
-> By default both IOS and Android expect you to use HTTPS, you need to use a tool like Ngrock or localcan to proxy your API in https.
+> Secara default iOS, Android, dan Electron mengharapkan Anda menggunakan HTTPS, Anda perlu menggunakan alat seperti Ngrock atau localcan untuk mem-proxy API Anda di https.
 
-There is a way in Android to enable [plaintext communication](https://developer.android.com/topic/security/risks/cleartext).
-This can be achieved by modifying [AndroidManifest.xml](https://github.com/Cap-go/capacitor-updater/blob/main/android/src/main/AndroidManifest.xml) and adding `android:usesCleartextTraffic="true"` in the `application` tag
-A full example of this change can be seen [here](https://gist.github.com/WcaleNieWolny/061a015acdebe35eaf3afd7030797701)
+Ada cara di Android untuk mengaktifkan [komunikasi teks biasa](https://developer.android.com/topic/security/risks/cleartext).
+Hal ini dapat dicapai dengan memodifikasi [AndroidManifest.xml](https://github.com/Cap-go/capacitor-updater/blob/main/android/src/main/AndroidManifest.xml) dan menambahkan `android:usesCleartextTraffic="true"` di tag `application`
+Contoh lengkap perubahan ini dapat dilihat [di sini](https://gist.github.com/WcaleNieWolny/061a015acdebe35eaf3afd7030797701)
 
-There also could be a problem that prevents the android app from connecting. If you do not see any requests being send to edge functions run
+Mungkin juga ada masalah yang menghalangi koneksi aplikasi Android. Jika Anda tidak melihat permintaan apa pun yang dikirim ke fungsi edge dijalankan
 ```bash
 adb reverse tcp:54321 tcp:54321
 ```

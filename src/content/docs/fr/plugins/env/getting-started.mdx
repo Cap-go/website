@@ -1,25 +1,26 @@
 ---
-locale: fr
 title: Commencer
-description: Configure per-Construction environment values and fetch them at runtime with the Env plugin.
-sidebar: 
+description: >-
+  Configurez les valeurs d'environnement par build et récupérez-les au moment de
+  l'exécution avec le plugin Env.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Installer the package**
+1. **Installez le package**
    <PackageManagers pkg="@capgo/capacitor-env" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser Natif platforms**
+2. **Synchroniser les plateformes natives**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Declare Configuration values
+## Déclarer les valeurs de configuration
 
-Add keys to the Capacitor config so they are baked into your native builds. You can create multiple config variants (`capacitor.config.prod.ts`, `capacitor.config.dev.ts`, etc.) to swap values per environment.
+Ajoutez des clés à la configuration Capacitor afin qu'elles soient intégrées dans vos versions natives. Vous pouvez créer plusieurs variantes de configuration (`capacitor.config.prod.ts`, `capacitor.config.dev.ts`, etc.) pour échanger les valeurs par environnement.
 
 ```ts title="capacitor.config.ts"
 import { CapacitorConfig } from '@capacitor/cli';
@@ -39,9 +40,9 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-On native platforms the values are stored inside the generated configuration files (`ios/App/App/capacitor.config.json` and `android/app/src/main/assets/capacitor.config.json`). Update those files per flavor if you need tenant-specific values.
+Sur les plateformes natives, les valeurs sont stockées dans les fichiers de configuration générés (`ios/App/App/capacitor.config.json` et `android/app/src/main/assets/capacitor.config.json`). Mettez à jour ces fichiers par version si vous avez besoin de valeurs spécifiques au locataire.
 
-## Read values in code
+## Lire les valeurs dans le code
 
 ```typescript
 import { Env } from '@capgo/capacitor-env';
@@ -53,7 +54,7 @@ if (!apiUrl) {
 }
 ```
 
-## Provide fallbacks
+## Fournir des solutions de secours
 
 ```typescript
 const loadConfig = async () => {
@@ -62,8 +63,8 @@ const loadConfig = async () => {
 };
 ```
 
-## Tips
+## Conseils
 
-- Use different `capacitor.config` files per environment and point the CLI to the right one with `npx cap run ios --configuration=prod`.
-- Combine with Capgo updater Canaux to ship tenant-specific values without publishing Nouveau binaries.
-- Keep secrets out of source control by substituting them during your CI build before `npx cap sync`.
+- Utilisez différents fichiers `capacitor.config` par environnement et pointez le CLI vers celui de droite avec `npx cap run ios --configuration=prod`.
+- Combinez avec les canaux de mise à jour Capgo pour expédier des valeurs spécifiques au locataire sans publier de nouveaux binaires.
+- Gardez les secrets hors du contrôle de code source en les remplaçant lors de la construction de votre CI avant le `npx cap sync`.

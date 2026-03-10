@@ -1,33 +1,30 @@
 ---
-title: "快速入门"
-description: >-
-  Learn how to install and use the Crisp chat SDK plugin for in-app customer
-  support in your Capacitor app.
+title: 入门
+description: 了解如何在 Capacitor 应用中安装和使用 Crisp chat SDK 插件来提供应用内客户支持。
 sidebar:
   order: 2
 locale: zh
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **安装软件包**
    <PackageManagers pkg="@capgo/capacitor-crisp" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **与原生项目同步**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Get your Crisp Website ID**
-   - Sign up at [crisp.chat](https://crisp.chat)
-   - Create a website/project
-   - Find your Website ID in Settings > Setup Instructions
+3. **获取您的 Crisp 网站 ID**
+   - 在 [crisp.chat](https://crisp.chat) 注册
+   - 创建网站/项目
+   - 在“设置”>“设置说明”中查找您的网站 ID
 </Steps>
 
-## Basic Usage
+## 基本用法
 
-Import the plugin and configure it with your Website ID:
+导入插件并使用您的网站 ID 配置它：
 
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
@@ -60,11 +57,11 @@ const logout = async () => {
 };
 ```
 
-## API Reference
+## API 参考
 
-### configure(options)
+### 配置（选项）
 
-Configure Crisp with your website ID and optional settings.
+使用您的网站 ID 和可选设置配置 Crisp。
 
 ```typescript
 interface ConfigureOptions {
@@ -81,15 +78,15 @@ await CapacitorCrisp.configure({
 
 ### openMessenger()
 
-Opens the Crisp chat interface.
+打开 Crisp 聊天界面。
 
 ```typescript
 await CapacitorCrisp.openMessenger();
 ```
 
-### setUser(options)
+### 设置用户（选项）
 
-Sets user information for the chat session.
+设置聊天会话的用户信息。
 
 ```typescript
 interface UserOptions {
@@ -105,9 +102,9 @@ await CapacitorCrisp.setUser({
 });
 ```
 
-### setUserCompany(options)
+### setUserCompany(选项)
 
-Sets company information for business users.
+为企业用户设置公司信息。
 
 ```typescript
 interface CompanyOptions {
@@ -134,9 +131,9 @@ await CapacitorCrisp.setUserCompany({
 });
 ```
 
-### pushEvent(options)
+### 推送事件（选项）
 
-Send custom events to track user actions.
+发送自定义事件来跟踪用户操作。
 
 ```typescript
 interface EventOptions {
@@ -155,25 +152,25 @@ await CapacitorCrisp.pushEvent({
 });
 ```
 
-### setSessionSegment(segment)
+### setSessionSegment(段)
 
-Set a segment to categorize the chat session.
+设置分段以对聊天会话进行分类。
 
 ```typescript
 await CapacitorCrisp.setSessionSegment('premium_customer');
 ```
 
-### resetChatSession()
+### 重置ChatSession()
 
-Reset the current chat session (useful for logout).
+重置当前聊天会话（对于注销很有用）。
 
 ```typescript
 await CapacitorCrisp.resetChatSession();
 ```
 
-## Advanced Features
+## 高级功能
 
-### Custom User Data
+### 自定义用户数据
 
 ```typescript
 // Set multiple custom data fields
@@ -188,9 +185,9 @@ await CapacitorCrisp.setSessionData({
 });
 ```
 
-### Message Preset
+### 消息预设
 
-Set a pre-filled message in the chat input:
+在聊天输入中设置预填充消息：
 
 ```typescript
 await CapacitorCrisp.setMessageText(
@@ -198,16 +195,16 @@ await CapacitorCrisp.setMessageText(
 );
 ```
 
-### Chat Availability
+### 聊天可用性
 
-Control when the chat widget is available:
+控制聊天小部件何时可用：
 
 ```typescript
 // Hide chat temporarily
 await CapacitorCrisp.setTokenID('user_token_12345');
 ```
 
-## Complete Example
+## 完整示例
 
 ```typescript
 import { CapacitorCrisp } from '@capgo/capacitor-crisp';
@@ -272,18 +269,18 @@ export class ChatService {
 }
 ```
 
-## Styling and Customization
+## 样式和定制
 
-Crisp automatically adapts to your app's theme, but you can customize it further through the Crisp dashboard:
+Crisp 会自动适应您应用程序的主题，但您可以通过 Crisp 仪表板进一步自定义它：
 
-1. Go to your Crisp dashboard
-2. Navigate to Settings > Website Settings > Chatbox & Email Settings
-3. Customize colors, position, and behavior
+1. 转到您的 Crisp 仪表板
+2. 导航至设置 > 网站设置 > 聊天室和电子邮件设置
+3. 自定义颜色、位置和行为
 
-## Best Practices
+## 最佳实践
 
-1. **Initialize early**
-   Configure Crisp during app initialization for immediate availability:
+1. **尽早初始化**
+   在应用程序初始化期间配置 Crisp 以立即可用：
    ```typescript
    import { App } from '@capacitor/app';
    
@@ -296,8 +293,8 @@ Crisp automatically adapts to your app's theme, but you can customize it further
    });
    ```
 
-2. **Set user context**
-   Always provide user information when available for better support:
+2. **设置用户上下文**
+   始终在可用时提供用户信息以获得更好的支持：
    ```typescript
    if (user.isAuthenticated) {
      await CapacitorCrisp.setUser({
@@ -307,8 +304,8 @@ Crisp automatically adapts to your app's theme, but you can customize it further
    }
    ```
 
-3. **Track important events**
-   Use events to provide context to support agents:
+3. **追踪重要事件**
+   使用事件为支持代理提供上下文：
    ```typescript
    await CapacitorCrisp.pushEvent({
      name: 'error_occurred',
@@ -320,8 +317,8 @@ Crisp automatically adapts to your app's theme, but you can customize it further
    });
    ```
 
-4. **Handle logout properly**
-   Always reset the session when users log out:
+4. **正确处理注销**
+   当用户注销时始终重置会话：
    ```typescript
    async logout() {
      await CapacitorCrisp.resetChatSession();
@@ -329,18 +326,18 @@ Crisp automatically adapts to your app's theme, but you can customize it further
    }
    ```
 
-## Platform Notes
+## 平台说明
 
 ### iOS
-- Requires iOS 10.0+
-- Uses native Crisp iOS SDK
-- Supports push notifications (configure in Crisp dashboard)
+- 需要 iOS 10.0+
+- 使用原生 Crisp iOS SDK
+- 支持推送通知（在 Crisp 仪表板中配置）
 
 ### Android
-- Requires Android 5.0 (API 21)+
-- Uses native Crisp Android SDK
-- Material Design compliant
+- 需要 Android 5.0 (API 21)+
+- 使用原生 Crisp Android SDK
+- 符合材料设计标准
 
-### Web
-- Falls back to Crisp JavaScript SDK
-- Full feature parity with native platforms
+### 网络
+- 回落到脆 JavaScript SDK
+- 与本机平台的完整功能对等

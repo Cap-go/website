@@ -1,35 +1,36 @@
 ---
-locale: fr
-title: "Placing CapacitorUpdater.notifyAppReady() call correctly"
-description: How to properly place the CapacitorUpdater.notifyAppReady() call in your Application to ensure correct auto-Mise à jour flow.
+title: Placer correctement l'appel CapacitorUpdater.notifyAppReady()
+description: >-
+  Comment placer correctement l'appel CapacitorUpdater.notifyAppReady() dans
+  votre application pour garantir un flux de mise à jour automatique correct.
 tableOfContents: false
 next: false
 prev: false
-sidebar: 
+sidebar:
   order: 1
-  label: "Introduction"
+  label: Introduction
+locale: fr
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code } from '@astrojs/starlight/components';
 import { Aside } from '@astrojs/starlight/components';
 import ConditionalQuestionnaire from '@/components/ConditionalQuestionnaire.astro'
 
-The placement of the `CapacitorUpdater.notifyAppReady()` call is crucial for the correct auto-update flow.
+Le placement de l’appel `CapacitorUpdater.notifyAppReady()` est crucial pour le bon déroulement de la mise à jour automatique.
 
 
-If not done correctly, the app will not be able to update to the latest version. Each version that does not call `notifyAppReady()` within 10 seconds will be marked as invalid and will be replaced by the previous valid version or the default (built-in) version.
+Si ce n'est pas fait correctement, l'application ne pourra pas se mettre à jour vers la dernière version. Chaque version qui n'appelle pas `notifyAppReady()` dans les 10 secondes sera marquée comme invalide et sera remplacée par la version valide précédente ou la version par défaut (intégrée).
 
 
-In this guide we will show you how to properly place the `notifyAppReady()` call in your app to ensure correct auto-update flow.
+Dans ce guide, nous allons vous montrer comment placer correctement l'appel `notifyAppReady()` dans votre application pour garantir un flux de mise à jour automatique correct.
 
-### `notifyAppReady()` Call Placement questionnaire
+### `notifyAppReady()` Questionnaire de placement d'appel
 
 <ConditionalQuestionnaire />
 
 
 <div style="margin-top: 3rem;">
 <Aside type="note">
-If you cannot find your framework in the questionnaire, please don't hesitate to ask on our [Discord](https://discord.capgo.Application).
+Si vous ne trouvez pas votre framework dans le questionnaire, n'hésitez pas à le demander sur notre [Discord](https://discord.capgo.app).
 </Aside>
 </div>

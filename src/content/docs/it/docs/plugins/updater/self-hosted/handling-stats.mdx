@@ -1,26 +1,25 @@
 ---
-
-title: "Statistics API"
-description: "How to use the statistics endpoint of Capgo with the auto-update plugin in self-hosted mode, what they are used for and what to expect"
+title: Statistiche API
+description: >-
+  Come utilizzare l'endpoint statistico di Capgo con il plug-in di aggiornamento
+  automatico in modalità self-hosted, a cosa servono e cosa aspettarsi
 sidebar:
   order: 7
 locale: it
 ---
-
-
 import { LinkCard, CardGrid, Aside } from '@astrojs/starlight/components';
 
-## Statistics API
+## Statistiche API
 
-Starting from version 1.3.0 the update system is able to send stats!
+A partire dalla versione 1.3.0 il sistema di aggiornamento è in grado di inviare statistiche!
 
-By default, all stats are sent to our server, to understand usage and research. 
+Per impostazione predefinita, tutte le statistiche vengono inviate al nostro server, per comprendere l'utilizzo e la ricerca. 
 
 <Aside>
-No private data is sent for stats, only random UUID, version update, version native app, platform, action, and app ID.
+Nessun dato privato viene inviato per le statistiche, solo UUID casuale, aggiornamento della versione, versione dell'app nativa, piattaforma, azione e ID dell'app.
 </Aside>
 
-If you want to send this data to your server instead, change the config below:
+Se invece desideri inviare questi dati al tuo server, modifica la configurazione di seguito:
 
 ```tsx
 // capacitor.config.json
@@ -35,9 +34,9 @@ If you want to send this data to your server instead, change the config below:
 }
 ```
 
-## Data Structure
+## Struttura dei dati
 
-What your server will receive is:
+Ciò che riceverà il tuo server è:
 
 ```tsx
 interface AppInfosStats {
@@ -45,7 +44,7 @@ interface AppInfosStats {
 	// Then it's the same info as update
 	"app_id": "**.***.**", // app identifier in the store
 	"device_id": "*******", // unique id per app install
-	"platform": "ios", // or android
+	"platform": "ios", // or android, or electron
 	"custom_id": "user_1", // represent your user
         "version_name": "1.2.3", // version of the web build
         "version_build": "1.2.0", // version of the native build
@@ -57,21 +56,21 @@ interface AppInfosStats {
 }
 ```
 
-You can also totally disable it, with an empty string. Keep in mind, statistics are made private friendly and help me to understand how people use the plugin, to resolve issues and improve it.
+Puoi anche disabilitarlo totalmente, con una stringa vuota. Tieni presente che le statistiche sono rese private e mi aiutano a capire come le persone utilizzano il plug-in, a risolvere problemi e a migliorarlo.
 
-## Comportamento previsto quando non c'è aggiornamento
+## Comportamento previsto "nessun aggiornamento".
 
-Quando il tuo endpoint di aggiornamento non ha una nuova versione, deve rispondere con un payload di errore come:
+Quando l'endpoint di aggiornamento **non ha una nuova versione**, dovrebbe rispondere con un payload di errore come:
 
 ```json
 { "error": "no_new_version_available", "message": "No new version available" }
 ```
 
-Il codice `error` deve essere esattamente `no_new_version_available`. Il `message` può essere qualsiasi stringa (solo per log/debug). Questo è il comportamento previsto ed è comunque restituito con HTTP `200`. Se invece il tuo endpoint restituisce un `200` senza `url`, il plugin lo considererà un errore di download e invierà `download_fail`.
+Il codice `error` deve essere esattamente `no_new_version_available`. `message` può essere qualsiasi stringa tu voglia (è solo per la registrazione/debug). Questo è il comportamento previsto e viene comunque restituito con HTTP `200`. If your update endpoint instead returns a `200` response without a `url`, the plugin will treat it as a download failure and send a `download_fail` stat.
 
-## Implementation Example
+## Esempio di implementazione
 
-Here is an example of code in JavaScript to save the stats of the plugin:
+Ecco un esempio di codice in JavaScript per salvare le statistiche del plugin:
 
 ```typescript
 interface AppInfos {
@@ -132,6 +131,7 @@ interface AppInfos {
           'rateLimited' |
           'disableAutoUpdate' |
           'InvalidIp' |
+          'keyMismatch' |
           'blocked_by_server_url'
   version_build: string
   version_code: string
@@ -172,20 +172,20 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-This endpoint should return a JSON:
+Questo endpoint dovrebbe restituire un JSON:
 
 ```json
 { "status": "ok" }
 ```
 
-## Actions
+## Azioni
 
-For detailed descriptions of all action codes and their meanings, please refer to the debugging documentation:
+Per descrizioni dettagliate di tutti i codici di azione e i loro significati, fare riferimento alla documentazione di debug:
 
-* **Actions sent from the device**: See the [debugging documentation - Sent from the device](/docs/plugins/updater/debugging/#sent-from-the-device) section
-* **Actions sent from the backend**: See the [debugging documentation - Sent from the backend](/docs/plugins/updater/debugging/#sent-from-the-backend) section
+* **Azioni inviate dal dispositivo**: vedere la sezione [documentazione di debug - Inviata dal dispositivo](/docs/plugins/updater/debugging/#sent-from-the-device)
+* **Azioni inviate dal backend**: vedere la sezione [documentazione di debug - Inviata dal backend](/docs/plugins/updater/debugging/#sent-from-the-backend)
 
 <LinkCard
-	title="Handling Updates"
+	title="Gestione degli aggiornamenti"
 	href="/docs/plugin/self-hosted/handling-updates/"
 />

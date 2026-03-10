@@ -1,20 +1,19 @@
 ---
-title: Supabase Apple Login on Web
-description: Learn how to integrate Apple Sign-In with Supabase Authentication on Web.
-locale: zh
+title: Supabase Apple 网页登录
+description: 了解如何在 Web 上将 Apple 登录与 Supabase 身份验证集成。
 sidebar:
-    order: 4
+  order: 4
+locale: zh
 ---
+## 先决条件
 
-## 前置条件
+本指南将帮助您将 Apple 登录与 Supabase 网络身份验证集成。假设您已经完成：
+- [Apple 登录 Web 设置](/docs/plugins/social-login/apple/web/)
+- [Supabase Apple 登录 - 常规设置](./general/)。
 
-本指南将帮助您在 Web 上集成 Apple 登录与 Supabase 身份验证。假定您已完成以下步骤：
-- [Apple Login Web 设置](/docs/plugins/social-login/apple/web/)
-- [Supabase Apple Login - 通用设置](./general/)
+## 实施
 
-## 实现
-
-完整的实现可在 [example app 的 `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) 文件中找到。本指南解释了关键概念以及如何使用它。
+完整的实现可在 [示例应用程序的 `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) 文件中找到。本指南解释了关键概念及其使用方法。
 
 ### 使用身份验证助手
 
@@ -32,42 +31,42 @@ if (result.success) {
 }
 ```
 
-## 工作原理
+## 它是如何工作的
 
-在 Web 上，Apple 登录使用 OAuth 弹出窗口流程：
+在 Web 上，Apple 登录使用 OAuth 弹出流程：
 
-1. **初始化**: 使用您的服务 ID 和当前页面 URL 作为重定向 URL 初始化插件
-2. **OAuth 弹出窗口**: 使用 Apple 的 OAuth 页面打开弹出窗口
-3. **用户身份验证**: 用户在弹出窗口中通过 Apple 进行身份验证
-4. **身份令牌**: Apple 返回一个包含用户信息的身份令牌（JWT）
-5. **Supabase 身份验证**: 身份令牌使用 `signInWithIdToken()` 发送给 Supabase
+1. **初始化**：插件使用您的Service ID和当前页面URL作为重定向URL进行初始化
+2. **OAuth 弹出窗口**：打开一个弹出窗口，其中包含 Apple 的 OAuth 页面
+3. **用户身份验证**：用户在弹出窗口中使用 Apple 进行身份验证
+4. **身份令牌**：Apple 返回包含用户信息的身份令牌（JWT）
+5. **Supabase 身份验证**：使用 `signInWithIdToken()` 将身份令牌发送到 Supabase
 
-助手函数自动检测 web 平台并相应地配置所有内容。
+帮助程序功能会自动检测网络平台并适当配置所有内容。
 
-## 重要说明
+## 重要提示
 
-### 服务 ID 配置
+### 服务ID配置
 
 - Web 需要您的 Apple 服务 ID（与 Android 相同）
-- 服务 ID 必须在 Apple Developer Portal 中配置正确的返回 URL
-- 确保您的域已添加到 Apple Developer Portal 中的允许域
+- 必须在 Apple 开发者门户中使用正确的返回 URL 配置服务 ID
+- 确保您的域已添加到 Apple 开发者门户中允许的域中
 
-### 重定向 URL
+### 重定向网址
 
-- 在 web 上，重定向 URL 自动设置为 `window.location.href`（当前页面 URL）
-- 这必须与 Apple Developer Portal 中配置的返回 URL 之一匹配
-- 确保在 Apple Developer Portal 中配置了带尾部斜杠和不带尾部斜杠的 URL
+- 在网络上，重定向 URL 自动设置为 `window.location.href` （当前页面 URL）
+- 这必须与 Apple 开发者门户中配置的返回 URL 之一匹配
+- 确保在 Apple 开发者门户中配置带有和不带有尾部斜杠的 URL
 
 ### Supabase 客户端 ID
 
-在 Supabase 中，使用以下内容配置您的 Apple 提供商：
-- **Client ID**: 您的 Apple 服务 ID（例如，`com.example.app.service`）
+在 Supabase 中，配置您的 Apple 提供程序：
+- **客户端 ID**：您的 Apple 服务 ID（例如 `com.example.app.service`）
 
-如果您还使用 iOS，您需要在 Supabase 的客户端 ID 字段中同时提供应用 ID 和服务 ID（逗号分隔）。
+如果您还使用 iOS，则需要在 Supabase 的客户端 ID 字段中提供应用程序 ID 和服务 ID（以逗号分隔）。
 
-### 更新助手函数
+### 更新辅助函数
 
-使用 `authenticateWithAppleSupabase` 助手函数时，您**必须**更新 `clientId` 以匹配您的 Apple 服务 ID：
+使用 `authenticateWithAppleSupabase` 辅助函数时，您**必须**更新 `clientId` 以匹配您的 Apple 服务 ID：
 
 ```typescript
 await SocialLogin.initialize({
@@ -80,17 +79,15 @@ await SocialLogin.initialize({
 });
 ```
 
-:::caution[重要]
-将 `'your.service.id.here'` 替换为您的实际 Apple 服务 ID（与您在 Apple Developer Portal 中配置的值相同）。
+:::注意[重要的]
+将 `'your.service.id.here'` 替换为您的实际 Apple 服务 ID（与您在 Apple 开发者门户中配置的值相同）。
 :::
 
 ## 故障排除
 
-如果身份验证失败：
-
-- **服务 ID 不匹配**: 验证您的服务 ID 在 Apple Developer Portal 和您的代码中都匹配
-- **未配置返回 URL**: 确保您的当前页面 URL（带尾部斜杠和不带尾部斜杠）已在 Apple Developer Portal 中配置
-- **弹出窗口被阻止**: 检查浏览器设置 - 某些浏览器默认阻止弹出窗口
-- **不允许域**: 验证您的域已添加到 Apple Developer Portal 中的允许域
-- **Supabase 配置**: 验证您的服务 ID 是否在 Supabase Apple 提供商设置中正确配置
-- 参考 [example app 代码](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts)
+如果认证失败：- **服务 ID 不匹配**：验证您的服务 ID 在 Apple 开发者门户和您的代码中匹配
+- **未配置返回 URL**：确保在 Apple 开发者门户中配置当前页面 URL（带或不带尾部斜杠）
+- **弹出窗口被阻止**：检查浏览器设置 - 某些浏览器默认情况下会阻止弹出窗口
+- **不允许域**：验证您的域是否已添加到 Apple 开发者门户中允许的域中
+- **Supabase 配置**：验证您的服务 ID 是否在 Supabase Apple 提供商设置中正确配置
+- 查看[示例应用程序代码](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts)以供参考

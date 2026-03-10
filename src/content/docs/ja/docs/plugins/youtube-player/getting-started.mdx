@@ -1,23 +1,22 @@
 ---
-title: Getting Started
-description: Learn how to integrate YouTube video playback in your Capacitor app.
+title: はじめる
+description: YouTube ビデオの再生を Capacitor アプリに統合する方法を学びます。
 sidebar:
   order: 2
 locale: ja
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **パッケージをインストールします**
    <PackageManagers pkg="@capgo/capacitor-youtube-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **ネイティブ プロジェクトと同期**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Basic Usage
+## 基本的な使い方
 
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
@@ -46,11 +45,11 @@ YoutubePlayer.addEventListener(result.player, 'onStateChange', (event) => {
 });
 ```
 
-## API Reference
+## API リファレンス
 
-### initialize(options)
+### 初期化(オプション)
 
-Initialize a YouTube player instance.
+YouTube プレーヤーのインスタンスを初期化します。
 
 ```typescript
 const { player, playerReady } = await YoutubePlayer.initialize({
@@ -66,7 +65,7 @@ const { player, playerReady } = await YoutubePlayer.initialize({
 });
 ```
 
-### Video Control Methods
+### ビデオ制御方法
 
 ```typescript
 // Play
@@ -88,7 +87,7 @@ await YoutubePlayer.loadVideoById(playerId, { videoId: 'VIDEO_ID' });
 await YoutubePlayer.cueVideoById(playerId, { videoId: 'VIDEO_ID' });
 ```
 
-### Playlist Control
+### プレイリストコントロール
 
 ```typescript
 // Load playlist
@@ -109,7 +108,7 @@ await YoutubePlayer.previousVideo(playerId);
 await YoutubePlayer.playVideoAt(playerId, index);
 ```
 
-### Audio Control
+### オーディオコントロール
 
 ```typescript
 // Mute/Unmute
@@ -124,7 +123,7 @@ await YoutubePlayer.setVolume(playerId, 50);
 const { result } = await YoutubePlayer.getVolume(playerId);
 ```
 
-### Playback Control
+### 再生コントロール
 
 ```typescript
 // Playback rate
@@ -140,7 +139,7 @@ await YoutubePlayer.setLoop(playerId, true);
 await YoutubePlayer.setShuffle(playerId, true);
 ```
 
-### Quality Control
+### 品質管理
 
 ```typescript
 // Set quality
@@ -153,7 +152,7 @@ const { result } = await YoutubePlayer.getPlaybackQuality(playerId);
 const { result } = await YoutubePlayer.getAvailableQualityLevels(playerId);
 ```
 
-### Player Information
+### プレイヤー情報
 
 ```typescript
 // Duration
@@ -204,7 +203,7 @@ YoutubePlayer.addEventListener(playerId, 'onPlaybackRateChange', (event) => {
 YoutubePlayer.removeEventListener(playerId, 'onStateChange', callback);
 ```
 
-## Complete Example
+## 完全な例
 
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
@@ -321,18 +320,18 @@ export class YouTubeService {
 }
 ```
 
-## Player States
+## プレーヤーの状態
 
-| State | Value | Description |
-|-------|-------|-------------|
-| UNSTARTED | -1 | Video not started |
-| ENDED | 0 | Video has ended |
-| PLAYING | 1 | Video is playing |
-| PAUSED | 2 | Video is paused |
-| BUFFERING | 3 | Video is buffering |
-| CUED | 5 | Video is cued |
+|状態 |値 |説明 |
+|----------|----------|---------------|
+|未開始 | -1 |ビデオが開始されていません |
+|終了 | 0 |動画は終了しました |
+|遊ぶ | 1 |ビデオが再生中です |
+|一時停止 | 2 |ビデオが一時停止されています |
+|バッファリング | 3 |ビデオがバッファリング中です |
+|キュード | 5 |ビデオの頭出し |
 
-## Quality Levels
+## 品質レベル
 
 - `small`: 240p
 - `medium`: 360p
@@ -340,19 +339,19 @@ export class YouTubeService {
 - `hd720`: 720p
 - `hd1080`: 1080p
 - `highres`: >1080p
-- `default`: Auto quality
+- `default`: 自動品質
 
-## Best Practices
+## ベストプラクティス
 
-1. **Initialize once**
-   Create player instance once and reuse it:
+1. **一度初期化します**
+   プレーヤー インスタンスを一度作成して再利用します。
    ```typescript
    let player = await YoutubePlayer.initialize(options);
    // Reuse player for different videos
    await YoutubePlayer.loadVideoById(player, { videoId: 'NEW_ID' });
    ```
 
-2. **Handle errors gracefully**
+2. **エラーを適切に処理する**
    ```typescript
    YoutubePlayer.addEventListener(playerId, 'onError', (event) => {
      switch (event.data) {
@@ -370,8 +369,8 @@ export class YouTubeService {
    });
    ```
 
-3. **Clean up**
-   Destroy player when component unmounts:
+3. **掃除**
+   コンポーネントがアンマウントされたときにプレーヤーを破棄します。
    ```typescript
    useEffect(() => {
      return () => {
@@ -382,7 +381,7 @@ export class YouTubeService {
    }, []);
    ```
 
-4. **Respect user preferences**
+4. **ユーザーの好みを尊重する**
    ```typescript
    // Don't autoplay unless user initiated
    playerVars: {
@@ -390,7 +389,7 @@ export class YouTubeService {
    }
    ```
 
-5. **Monitor playback**
+5. **モニター再生**
    ```typescript
    setInterval(async () => {
      const time = await YoutubePlayer.getCurrentTime(playerId);
@@ -398,35 +397,35 @@ export class YouTubeService {
    }, 1000);
    ```
 
-## Platform Notes
+## プラットフォームに関する注意事項
 
 ### iOS
-- Works on iOS 9.0+
-- Uses WKWebView with YouTube iframe API
-- Fullscreen supported
+- iOS 9.0+ で動作します
+- YouTube iframe API で WKWebView を使用します
+- フルスクリーン対応
 
 ### Android
-- Works on Android 5.0 (API 21)+
-- Uses WebView with YouTube iframe API
+- Android 5.0 (API 21)+ で動作します
+- YouTube iframe API で WebView を使用します
 - Fullscreen supported
 
-### Web
-- Direct YouTube iframe integration
-- Full API support
-- Best performance
+### ウェブ
+- YouTube iframe の直接統合
+- API の完全なサポート
+- 最高のパフォーマンス
 
-## Troubleshooting
+## トラブルシューティング
 
-**Player not loading:**
-- Check video ID is valid
-- Verify internet connection
-- Ensure YouTube embedding is allowed for the video
+**プレーヤーがロードされていません:**
+- ビデオIDが有効であることを確認してください
+- インターネット接続を確認する
+- YouTube の埋め込みがビデオに許可されていることを確認してください
 
-**Events not firing:**
-- Make sure listeners are added after initialization
-- Check player is ready before adding listeners
+**イベントが起動しない:**
+- 初期化後にリスナーが追加されていることを確認してください
+- リスナーを追加する前にプレーヤーの準備ができているかどうかを確認してください
 
-**Quality issues:**
-- Check available quality levels first
-- Some videos don't support all qualities
-- Quality changes may not be immediate
+**品質の問題:**
+- 最初に利用可能な品質レベルを確認してください
+- 一部のビデオはすべての品質をサポートしていない
+- 品質の変化はすぐには起こらない可能性があります

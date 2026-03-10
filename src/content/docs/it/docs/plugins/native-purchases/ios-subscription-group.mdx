@@ -1,62 +1,61 @@
 ---
-
-title: Create iOS Subscription Group
-description: Learn how to create and configure subscription groups in App Store Connect for organizing your app's subscription offerings.
+title: Crea iOS Gruppo di iscrizione
+description: >-
+  Scopri come creare e configurare gruppi di abbonamento in App Store Connect
+  per organizzare le offerte di abbonamento della tua app.
 sidebar:
   order: 7
 locale: it
 ---
-
-
 import { Steps } from '@astrojs/starlight/components';
 
-Subscription groups are essential for organizing and managing multiple subscription levels in your iOS app. Understanding how they work is crucial for implementing upgrade, downgrade, and crossgrade functionality.
+I gruppi di abbonamento sono essenziali per organizzare e gestire più livelli di abbonamento nella tua app iOS. Comprendere come funzionano è fondamentale per implementare le funzionalità di aggiornamento, downgrade e crossgrade.
 
-## What is a Subscription Group?
+## Cos'è un gruppo di abbonamento?
 
-A subscription group is a collection of related subscriptions that users can choose between. Users can only subscribe to one subscription within a group at a time. When they switch subscriptions, Apple handles the transition automatically.
+Un gruppo di abbonamenti è una raccolta di abbonamenti correlati tra cui gli utenti possono scegliere. Gli utenti possono sottoscrivere un solo abbonamento alla volta all'interno di un gruppo. Quando cambiano abbonamento, Apple gestisce la transizione automaticamente.
 
-## Why Subscription Groups Matter
+## Perché i gruppi di abbonamento sono importanti
 
-Subscription groups enable:
-- **Tiered pricing**: Offer basic, premium, and ultimate plans
-- **Different durations**: Monthly, yearly, and lifetime options
-- **Upgrade/downgrade logic**: Automatic handling of subscription changes
-- **Simplified management**: Group related subscriptions together
+I gruppi di sottoscrizione consentono:
+- **Prezzi scaglionati**: offri piani base, premium e definitivi
+- **Durate diverse**: opzioni mensili, annuali e a vita
+- **Logica di upgrade/downgrade**: gestione automatica delle modifiche all'abbonamento
+- **Gestione semplificata**: raggruppa insieme gli abbonamenti correlati
 
-## Subscription Levels
+## Livelli di abbonamento
 
-Within a group, each subscription should be ranked from highest value (level 1) to lowest value. This ranking determines how subscription changes are classified:
+All'interno di un gruppo, ciascuna sottoscrizione deve essere classificata dal valore più alto (livello 1) al valore più basso. Questa classifica determina come vengono classificate le modifiche all'abbonamento:
 
-![Subscription group hierarchy](/native-purchases/ios/subscription-group/subscription-group-hierarchy.webp)
+![Gerarchia del gruppo di sottoscrizione](/native-purchases/ios/subscription-group/subscription-group-hierarchy.webp)
 
-### Level Examples
+### Esempi di livelli
 
-**Level 1** (Highest Value)
-- Premium Annual ($99.99/year)
-- Ultimate Monthly ($19.99/month)
+**Livello 1** (valore più alto)
+- Premium annuale ($99,99/anno)
+- Ultimate mensile ($ 19,99/mese)
 
-**Level 2** (Medium Value)
-- Standard Annual ($49.99/year)
-- Premium Monthly ($9.99/month)
+**Livello 2** (valore medio)
+- Annuale standard ($49,99/anno)
+- Premium mensile ($ 9,99/mese)
 
-**Level 3** (Lowest Value)
-- Basic Annual ($29.99/year)
-- Standard Monthly ($4.99/month)
+**Livello 3** (valore più basso)
+- Annuale di base ($ 29,99/anno)
+- Mensile standard ($ 4,99/mese)
 
-## Subscription Change Types
+## Tipi di modifica dell'abbonamento
 
-Apple automatically handles three types of subscription changes based on the level ranking:
+Apple gestisce automaticamente tre tipi di modifiche all'abbonamento in base alla classifica del livello:
 
-### 1. Upgrade
-Moving to a **higher-tier** subscription (e.g., level 2 → level 1).
+### 1. Aggiorna
+Passaggio a un abbonamento di **livello superiore** (ad esempio, livello 2 → livello 1).
 
-**Behavior:**
-- Takes effect **immediately**
-- User receives **prorated refund** for remaining time
-- New subscription starts right away
+**Comportamento:**
+- Ha effetto **immediatamente**
+- L'utente riceve un **rimborso proporzionale** per il tempo rimanente
+- Il nuovo abbonamento inizia subito
 
-**Example:**
+**Esempio:**
 ```typescript
 // User currently has: Standard Monthly (Level 2)
 // User upgrades to: Premium Annual (Level 1)
@@ -64,68 +63,66 @@ Moving to a **higher-tier** subscription (e.g., level 2 → level 1).
 ```
 
 ### 2. Downgrade
-Moving to a **lower-tier** subscription (e.g., level 1 → level 2).
+Passaggio a un abbonamento di **livello inferiore** (ad esempio, livello 1 → livello 2).
 
-**Behavior:**
-- Takes effect at **next renewal date**
-- User keeps current subscription until period ends
-- New subscription starts automatically after expiration
+**Comportamento:**
+- Entra in vigore alla **prossima data di rinnovo**
+- L'utente mantiene l'abbonamento corrente fino alla fine del periodo
+- Il nuovo abbonamento inizia automaticamente dopo la scadenza
 
-**Example:**
+**Esempio:**
 ```typescript
 // User currently has: Premium Annual (Level 1)
 // User downgrades to: Standard Monthly (Level 2)
 // Result: Premium access continues until annual renewal date, then switches
 ```
 
-### 3. Crossgrade
-Switching to another subscription **at the same tier level**.
+### 3. Valutazione incrociata
+Passaggio a un altro abbonamento **allo stesso livello**.
 
-**Behavior depends on duration:**
+**Il comportamento dipende dalla durata:**
 
-**Different Duration** → Behaves like **downgrade**
-- Takes effect at next renewal date
-- Example: Monthly Premium (Level 1) → Annual Premium (Level 1)
+**Durata diversa** → Si comporta come **downgrade**
+- Entra in vigore alla prossima data di rinnovo
+- Esempio: Premio mensile (Livello 1) → Premio annuale (Livello 1)
 
-**Same Duration** → Behaves like **upgrade**
-- Takes effect immediately
-- Example: Premium Monthly (Level 1) → Ultimate Monthly (Level 1)
+**Stessa durata** → Si comporta come **aggiornamento**
+- Ha effetto immediato
+- Esempio: Premium mensile (Livello 1) → Ultimate mensile (Livello 1)
 
-## Creating a Subscription Group
+## Creazione di un gruppo di abbonamento
 
 <Steps>
 
-1. **Navigate to Subscriptions**
+1. **Vai a Abbonamenti**
 
-   In App Store Connect, select your app and go to **Monetize > Subscriptions**.
+   In App Store Connect, seleziona la tua app e vai a **Monetizza > Abbonamenti**.
 
-2. **Create Group**
+2. **Crea gruppo**
 
-   Click **+** next to "Subscription Groups" to create a new group.
+   Fai clic su **++** accanto a "Gruppi di abbonamento" per creare un nuovo gruppo.
 
-3. **Name the Group**
+3. **Assegna un nome al gruppo**
 
-   Choose a descriptive name that reflects the subscriptions it contains:
-   - "Premium Access"
-   - "Cloud Storage Plans"
-   - "Pro Features"
+   Scegli un nome descrittivo che rifletta gli abbonamenti che contiene:
+   - "Accesso Premium"
+   - "Piani di archiviazione cloud"
+   - "Funzioni professionali"
 
-4. **Add Subscriptions**
+4. **Aggiungi abbonamenti**
 
-   After creating the group, add individual subscriptions to it. Each subscription will have a level ranking.
+   Dopo aver creato il gruppo, aggiungivi iscrizioni individuali. Ogni abbonamento avrà una classifica per livello.
 
-5. **Set Level Rankings**
-
-   Arrange subscriptions from highest value (1) to lowest value. Consider:
-   - Annual plans typically rank higher than monthly
-   - Higher-priced tiers rank above lower-priced ones
-   - Ultimate/premium tiers rank highest
+5. **Imposta classifiche di livello**Disporre gli abbonamenti dal valore più alto (1) al valore più basso. Considera:
+   - I piani annuali in genere hanno un posizionamento migliore rispetto a quelli mensili
+   - I livelli con il prezzo più alto si collocano sopra quelli con il prezzo più basso
+   - I livelli Ultimate/Premium sono i più alti
 
 </Steps>
 
-## Using in Your App
+## Utilizzo nella tua app
 
-The native-purchases plugin automatically handles subscription group logic:
+Il plugin per gli acquisti nativi gestisce automaticamente la logica del gruppo di abbonamento:
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -161,9 +158,9 @@ NativePurchases.addListener('transactionUpdated', (transaction) => {
 });
 ```
 
-## Handling Subscription Changes
+## Gestione delle modifiche all'abbonamento
 
-### Detecting Change Type
+### Rilevamento del tipo di modifica
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -201,71 +198,71 @@ NativePurchases.addListener('transactionUpdated', (transaction) => {
 });
 ```
 
-### User Communication
+### Comunicazione con l'utente
 
-Always communicate the change behavior clearly:
+Comunicare sempre chiaramente il comportamento del cambiamento:
 
-**For Upgrades:**
-> "You'll get immediate access to Premium features. We'll prorate your current subscription."
+**Per gli aggiornamenti:**
+> "Avrai accesso immediato alle funzionalità Premium. Ripartiremo proporzionalmente il tuo abbonamento attuale."
 
-**For Downgrades:**
-> "You'll keep Premium access until [renewal date], then switch to Standard."
+**Per i downgrade:**
+> "Manterrai l'accesso Premium fino al [data di rinnovo], poi passerai a Standard."
 
-**For Crossgrades:**
-> "Your plan will change to Annual billing at the next renewal on [date]."
+**Per i voti incrociati:**
+> "Il tuo piano passerà alla fatturazione annuale al prossimo rinnovo il [data]."
 
-## Server monitoring
+## Monitoraggio del server
 
-Use Apple's App Store Server Notifications v2 or your own receipt-validation backend to mirror StoreKit changes in your database. Pair server notifications with the `transactionUpdated` listener so both client and backend stay in sync.
+Utilizza App Store Server Notifications v2 di Apple o il tuo backend di convalida delle ricevute per rispecchiare le modifiche di StoreKit nel tuo database. Associa le notifiche del server al listener `transactionUpdated` in modo che sia il client che il backend rimangano sincronizzati.
 
-## Best Practices
+## Migliori pratiche
 
-### Group Organization
-- Keep related subscriptions in the same group
-- Don't mix unrelated features (e.g., storage and ad removal)
-- Create separate groups for different feature sets
+### Organizzazione del gruppo
+- Mantieni gli abbonamenti correlati nello stesso gruppo
+- Non combinare funzionalità non correlate (ad esempio archiviazione e rimozione degli annunci)
+- Crea gruppi separati per diversi set di funzionalità
 
-### Level Ranking Strategy
-- Annual plans → Higher level than monthly (for same tier)
-- Higher-priced tiers → Higher level
-- Consider value, not just price
+### Strategia di classificazione dei livelli
+- Piani annuali → Livello superiore al mensile (per lo stesso livello)
+- Livelli più costosi → Livello superiore
+- Considera il valore, non solo il prezzo
 
-### User Experience
-- Show current subscription clearly
-- Display all available options in the group
-- Indicate which changes are immediate vs. at renewal
-- Allow easy switching between plans
+### Esperienza utente
+- Mostra chiaramente l'abbonamento corrente
+- Visualizza tutte le opzioni disponibili nel gruppo
+- Indicare quali modifiche sono immediate rispetto al rinnovo
+- Consentire un facile passaggio da un piano all'altro
 
-### Testing
-- Test all upgrade scenarios
-- Test all downgrade scenarios
-- Verify crossgrade behavior
-- Check webhook firing
+### Test
+- Testare tutti gli scenari di aggiornamento
+- Testare tutti gli scenari di downgrade
+- Verificare il comportamento del crossgrade
+- Controllare l'attivazione del webhook
 
-## Common Scenarios
+## Scenari comuni
 
-### Scenario 1: Three-Tier Monthly Plans
+### Scenario 1: piani mensili a tre livelli
 ```
 Level 1: Ultimate Monthly ($19.99)
 Level 2: Premium Monthly ($9.99)
 Level 3: Basic Monthly ($4.99)
 ```
 
-- Basic → Premium: Upgrade (immediate)
-- Premium → Ultimate: Upgrade (immediate)
-- Ultimate → Premium: Downgrade (at renewal)
-- Basic → Ultimate: Upgrade (immediate)
+- Base → Premium: aggiornamento (immediato)
+- Premium → Ultimate: aggiornamento (immediato)
+- Ultimate → Premium: Downgrade (al rinnovo)
+- Base → Ultimate: aggiornamento (immediato)
 
-### Scenario 2: Mixed Duration Plans
+### Scenario 2: Piani di durata mista
 ```
 Level 1: Premium Annual ($99.99/year)
 Level 2: Premium Monthly ($9.99/month)
 ```
 
-- Monthly → Annual: Crossgrade (at renewal)
-- Annual → Monthly: Downgrade (at renewal)
+- Mensile → Annuale: Crossgrade (al rinnovo)
+- Annuale → Mensile: Downgrade (al rinnovo)
 
-### Scenario 3: Multi-Tier Multi-Duration
+### Scenario 3: multilivello e durata multipla
 ```
 Level 1: Ultimate Annual ($199/year)
 Level 2: Ultimate Monthly ($19.99/month)
@@ -275,29 +272,29 @@ Level 5: Basic Annual ($49/year)
 Level 6: Basic Monthly ($4.99/month)
 ```
 
-This setup provides maximum flexibility while maintaining clear upgrade/downgrade logic.
+Questa configurazione offre la massima flessibilità pur mantenendo una chiara logica di aggiornamento/downgrade.
 
-## Troubleshooting
+## Risoluzione dei problemi
 
-**Subscription not appearing in group:**
-- Verify it's assigned to the correct group
-- Check that it's in at least "Ready to Submit" status
-- Ensure product ID is correct
+**Abbonamento non visualizzato nel gruppo:**
+- Verificare che sia assegnato al gruppo corretto
+- Verifica che sia almeno nello stato "Pronto per l'invio".
+- Assicurarsi che l'ID prodotto sia corretto
 
-**Wrong upgrade/downgrade behavior:**
-- Review level rankings (1 = highest)
-- Verify subscription tiers make sense
-- Check that levels are set correctly
+**Comportamento errato di upgrade/downgrade:**
+- Classifiche a livello di revisione (1 = più alta)
+- Verificare che i livelli di abbonamento abbiano senso
+- Verificare che i livelli siano impostati correttamente
 
-**Products from different groups:**
-- Users can subscribe to multiple groups simultaneously
-- This is intentional - keep related products in same group
+**Prodotti di diversi gruppi:**
+- Gli utenti possono iscriversi a più gruppi contemporaneamente
+- Questo è intenzionale: mantieni i prodotti correlati nello stesso gruppo
 
-**getActiveProducts showing multiple subscriptions:**
-- Check if subscriptions are in different groups
-- Verify user isn't subscribed via Family Sharing
-- Review subscription status in App Store Connect
+**getActiveProducts che mostra più abbonamenti:**
+- Controlla se gli abbonamenti sono in gruppi diversi
+- Verifica che l'utente non sia iscritto tramite Condivisione famiglia
+- Controlla lo stato dell'abbonamento in App Store Connect
 
-## Additional Resources
+## Risorse aggiuntive
 
-For more details, refer to the [official Apple documentation on subscription groups](https://developer.apple.com/app-store/subscriptions/).
+Per ulteriori dettagli, fare riferimento alla [documentazione ufficiale Apple sui gruppi di abbonamento](https://developer.apple.com/app-store/subscriptions/).

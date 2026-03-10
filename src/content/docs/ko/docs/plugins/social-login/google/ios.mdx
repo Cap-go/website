@@ -1,88 +1,90 @@
 ---
-title: iOS에서 Google 로그인
-locale: ko
-description: 이 가이드는 iOS에서 Capacitor로 Google 로그인을 구성하는 포괄적인 안내를 제공하며, 원활한 통합 프로세스를 보장하기 위한 각 단계를 자세히 설명합니다.
+title: Google iOS에 로그인
+description: >-
+  이 가이드는 iOS에서 Capacitor을(를) 사용하여 Google 로그인을 구성하기 위한 포괄적인 연습을 제공하며 원활한 통합 프로세스를
+  보장하기 위한 각 단계를 자세히 설명합니다.
 sidebar:
-    order: 3
+  order: 3
+locale: ko
 ---
 import { Steps } from '@astrojs/starlight/components';
 
-## Introduction
+## 소개
 
-In this guide, you will learn how to setup Google Login with Capgo Social Login for iOS.
-I assume that you have already read the [general setup guide](/docs/plugins/social-login/google/general/).
+이 가이드에서는 iOS에 대한 Capgo 소셜 로그인을 사용하여 Google 로그인을 설정하는 방법을 알아봅니다.
+[일반 설정 가이드](/docs/plugins/social-login/google/general/)를 이미 읽으셨다고 가정합니다.
 
-## Using Google login on iOS
+## iOS에서 Google 로그인 사용
 
-In this part, you will learn how to setup Google login in iOS.
+이 부분에서는 iOS에서 Google 로그인을 설정하는 방법을 알아봅니다.
 
 <Steps>
-1. Create an iOS client ID in the Google console
+1. Google 콘솔에서 iOS 클라이언트 ID를 생성합니다.
    
-   1. Click on the search bar
-      <img src="/social-login-assets/google_cons_search.png" alt="Google Console search bar" />
+   1. 검색창을 클릭하세요
+      <img src="/social-login-assets/google_cons_search.png" alt="Google 콘솔 검색 창" />
    
-   2. Search for `credentials` and click on the `APIs and Services` one (number 2 on the screenshot)
-      <img src="/social-login-assets/google_cons_cred_search.png" alt="Search results showing credentials option with APIs and Services highlighted" />
+   2. `credentials`을 검색하고 'API 및 서비스' 항목(스크린샷의 2번)을 클릭합니다.
+      <img src="/social-login-assets/google_cons_cred_search.png" alt="API 및 서비스가 강조 표시된 자격 증명 옵션을 보여주는 검색 결과" />
    
-   3. Click on the `create credentials`
-      <img src="/social-login-assets/google_cons_create_cred.png" alt="Create credentials button in Google Console" />
+   3. '사용자 인증 정보 생성'을 클릭하세요.
+      <img src="/social-login-assets/google_cons_create_cred.png" alt="Google 콘솔에서 자격 증명 만들기 버튼" />
    
-   4. Select `OAuth client ID`
-      <img src="/social-login-assets/google_cons_cred_oauth.png" alt="OAuth client ID option in credentials creation menu" />
+   4. `OAuth client ID`을 선택하세요.
+      <img src="/social-login-assets/google_cons_cred_oauth.png" alt="자격 증명 생성 메뉴의 OAuth 클라이언트 ID 옵션" />
    
-   5. Select the `Application type` to `iOS`
-      <img src="/social-login-assets/goolge_cons_cred_type_app_tye.png" alt="Application type selection with iOS option highlighted" />
+   5. `iOS`에 '애플리케이션 유형'을 선택합니다.
+      <img src="/social-login-assets/goolge_cons_cred_type_app_tye.png" alt="iOS 옵션이 강조 표시된 애플리케이션 유형 선택" />
    
-   6. Find the bundle ID
+   6. 번들 ID 찾기
      
-      1. Open Xcode
+      1. Xcode을 엽니다.
      
-      2. Double click on `App`
-         <img src="/social-login-assets/xcode_app_click.png" alt="App target in Xcode project navigator" />
+      2. `App`을 두 번 클릭합니다.
+         <img src="/social-login-assets/xcode_app_click.png" alt="Xcode 프로젝트 탐색기의 앱 대상" />
      
-      3. Ensure that you are on `Targets -> App`
-         <img src="/social-login-assets/xcode_targets_app.png" alt="Targets section in Xcode with App selected" />
+      3. `Targets -> App`에 있는지 확인하세요.
+         <img src="/social-login-assets/xcode_targets_app.png" alt="앱이 선택된 Xcode의 타겟 섹션" />
      
-      4. Find your `Bundle Identifier` 
-         <img src="/social-login-assets/xcode_bundle_id.png" alt="Bundle Identifier field in Xcode project settings" />
+      4. '번들 식별자'를 찾으세요. 
+         <img src="/social-login-assets/xcode_bundle_id.png" alt="Xcode 프로젝트 설정의 번들 식별자 필드" />
      
-      5. Go back to the Google Console and paste your `Bundle Identifier` into `Bundle ID`
-         <img src="/social-login-assets/google_cons_ios_bd_id.png" alt="Bundle ID field in Google Console iOS client creation form" />
+      5. Google 콘솔로 돌아가서 `번들 식별자`를 `번들 ID`에 붙여넣습니다.
+         <img src="/social-login-assets/google_cons_ios_bd_id.png" alt="Google 콘솔 iOS 클라이언트 생성 양식의 번들 ID 필드" />
    
-   7. Optionally, add your `App Store ID` or `Team ID` into the client ID if you have published your app to App Store
+   7. 선택적으로 앱을 App Store에 게시한 경우 클라이언트 ID에 `App Store ID` 또는 '팀 ID'를 추가하세요.
    
-   8. After filling all the details, click `create`
-      <img src="/social-login-assets/google_cons_ios_cred_creat.png" alt="Create button at bottom of iOS client creation form" />
+   8. 모든 세부정보를 입력한 후 `create`을(를) 클릭하세요.
+      <img src="/social-login-assets/google_cons_ios_cred_creat.png" alt="iOS 클라이언트 생성 양식 하단에 있는 생성 버튼" />
    
-   9. Click `OK`
-      <img src="/social-login-assets/google_cons_ios_click_ok.png" alt="OK button on client ID created confirmation dialog" />
+   9. `OK`을 클릭하세요.
+      <img src="/social-login-assets/google_cons_ios_click_ok.png" alt="클라이언트 ID 생성 확인 대화 상자의 확인 버튼" />
    
-   10. Open the newly created iOS client
-       <img src="/social-login-assets/google_cons_open_new_ios.png" alt="Newly created iOS client in credentials list" />
+   10. 새로 생성된 iOS 클라이언트를 엽니다.
+       <img src="/social-login-assets/google_cons_open_new_ios.png" alt="자격 증명 목록에 새로 생성된 iOS 클라이언트" />
    
-   11. Copy the following data
-       <img src="/social-login-assets/google_cons_ios_what_to_copy.png" alt="Client ID details showing Client ID and reversed client ID to copy" />
+   11. 다음 데이터를 복사하세요
+       <img src="/social-login-assets/google_cons_ios_what_to_copy.png" alt="복사할 클라이언트 ID와 반전된 클라이언트 ID를 보여주는 클라이언트 ID 세부정보" />
      
-       :::note
-       The `nr. 1` in this image will later become the `iOSClientId` in the `initialize` call.
+       :::참고
+       이 이미지의 `nr. 1`은 나중에 `initialize` 호출에서 `iOSClientId`이 됩니다.
        
-       The `nr. 2` in this image will later become `YOUR_DOT_REVERSED_IOS_CLIENT_ID`
+       이 이미지의 `nr. 2`은 나중에 `YOUR_DOT_REVERSED_IOS_CLIENT_ID`이 됩니다.
        :::
 
-2. Modify your app's Info.plist
+2. 앱의 Info.plist 수정
    
-   1. Open Xcode and find the `Info.plist` file
-      <img src="/social-login-assets/xcode_info_file.png" alt="Info.plist file in Xcode project navigator" />
+   1. Xcode을 열고 `Info.plist` 파일을 찾습니다.
+      <img src="/social-login-assets/xcode_info_file.png" alt="Xcode 프로젝트 탐색기의 Info.plist 파일" />
    
-   2. Right click this file and open it as source code
-      <img src="/social-login-assets/xcode_open_as_src_code.png" alt="Right-click menu showing Open As Source Code option" />
+   2. 이 파일을 마우스 오른쪽 버튼으로 클릭하고 소스 코드로 엽니다.
+      <img src="/social-login-assets/xcode_open_as_src_code.png" alt="소스 코드로 열기 옵션을 표시하는 마우스 오른쪽 버튼 클릭 메뉴" />
    
-   3. At the bottom of your `Plist` file, you will see a `</dict>` tag
-      <img src="/social-login-assets/xcode_dict_tag.png" alt="Closing dict tag in Info.plist file" />
+   3. `Plist` 파일 하단에 `</dict>` 태그가 표시됩니다.
+      <img src="/social-login-assets/xcode_dict_tag.png" alt="Info.plist 파일에서 dict 태그 닫기" />
    
-   4. Insert the following fragment just before the closing `</dict>` tag
-      <img src="/social-login-assets/xcode_plist_inserted.png" alt="Info.plist with URL schemes code inserted before closing dict tag" />
+   4. 닫는 `</dict>` 태그 바로 앞에 다음 조각을 삽입합니다.
+      <img src="/social-login-assets/xcode_plist_inserted.png" alt="dict 태그를 닫기 전에 URL 구성표 코드가 삽입된 Info.plist" />
      
       ```xml
       <key>CFBundleURLTypes</key>
@@ -96,27 +98,27 @@ In this part, you will learn how to setup Google login in iOS.
       </array>
       ```
    
-   5. Change the `YOUR_DOT_REVERSED_IOS_CLIENT_ID` to the value copied in the previous step
-      <img src="/social-login-assets/xcode_plist_final.png" alt="Info.plist with actual reversed client ID inserted in URL schemes" />
+   5. `YOUR_DOT_REVERSED_IOS_CLIENT_ID`를 이전 단계에서 복사한 값으로 변경합니다.
+      <img src="/social-login-assets/xcode_plist_final.png" alt="URL 구성표에 삽입된 실제 역방향 클라이언트 ID가 포함된 Info.plist" />
      
-      :::caution
-      Ensure that this value **STARTS** with `com.googleusercontent.apps`
+      :::주의
+      이 값이 `com.googleusercontent.apps`으로 **STARTS**되는지 확인하세요.
       :::
    
-   6. Save the file with `Command + S`
+   6. `Command + S`로 파일을 저장하세요.
 
-3. Modify the `AppDelegate.swift`
+3. `AppDelegate.swift` 수정
    
-   1. Open the AppDelegate
-      <img src="/social-login-assets/xcode_app_deleg.png" alt="AppDelegate.swift file in Xcode project navigator" />
+   1. AppDelegate를 엽니다.
+      <img src="/social-login-assets/xcode_app_deleg.png" alt="Xcode 프로젝트 탐색기의 AppDelegate.swift 파일" />
    
-   2. Insert `import GoogleSignIn` at the top of the file
-      <img src="/social-login-assets/xcode_app_deleg_google_sign_in.png" alt="AppDelegate.swift with GoogleSignIn import added" />
+   2. 파일 상단에 `import GoogleSignIn`을 삽입하세요.
+      <img src="/social-login-assets/xcode_app_deleg_google_sign_in.png" alt="GoogleSignIn 가져오기가 추가된 AppDelegate.swift" />
    
-   3. Find the `func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:])` function
-      <img src="/social-login-assets/xcode_app_deleg_app_fn.png" alt="Original application openURL function in AppDelegate" />
+   3. `func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:])` 함수를 찾으세요
+      <img src="/social-login-assets/xcode_app_deleg_app_fn.png" alt="AppDelegate의 원래 애플리케이션 openURL 기능" />
    
-   4. Modify the function to look like this
+   4. 다음과 같이 함수를 수정합니다.
      
       ```swift
       func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
@@ -134,22 +136,20 @@ In this part, you will learn how to setup Google login in iOS.
       }
       ```
       
-      <img src="/social-login-assets/xcode_app_deleg_app_fn_mod.png" alt="Modified application openURL function with GoogleSignIn handling" />
+      <img src="/social-login-assets/xcode_app_deleg_app_fn_mod.png" alt="GoogleSignIn 처리로 애플리케이션 openURL 기능을 수정했습니다." />
    
-   5. Save the file with `Command + S`
+   5. `Command + S`로 파일을 저장하세요.
 
-4. Setup Google login in your JavaScript/TypeScript code
+4. JavaScript/TypeScript 코드에 Google 로그인을 설정하세요.
    
-   1. Import `SocialLogin` and `Capacitor`
+   1. `SocialLogin` 및 `Capacitor` 가져오기
      
       ```typescript
       import { SocialLogin } from '@capgo/capacitor-social-login';
       import { Capacitor } from '@capacitor/core';
       ```
    
-   2. Call the initialize method (this should be called only once)
-     
-      **Basic setup (online mode - recommended for most apps):**
+   2. 초기화 메소드를 호출합니다(한 번만 호출해야 함).**기본 설정(온라인 모드 - 대부분의 앱에 권장):**
       ```typescript
       // onMounted is Vue specific
       onMounted(() => {
@@ -162,7 +162,7 @@ In this part, you will learn how to setup Google login in iOS.
       })
       ```
 
-      **Advanced setup with additional client IDs:**
+      **추가 클라이언트 ID를 사용한 고급 설정:**
       ```typescript
       onMounted(() => {
         SocialLogin.initialize({
@@ -176,22 +176,22 @@ In this part, you will learn how to setup Google login in iOS.
       })
       ```
      
-      :::note
-      **Client ID Requirements:**
-      - `iOSClientId`: **Required** - Must end with `googleusercontent.com` (from step 1 above)
-      - `webClientId`: **Optional** - Only needed if you also support web platform or need advanced features
-      - `iOSServerClientId`: **Optional** - Should be the same value as `webClientId` when provided
+      :::참고
+      **클라이언트 ID 요구 사항:**
+      - `iOSClientId`: **필수** - `googleusercontent.com`로 끝나야 합니다(위 1단계).
+      - `webClientId`: **선택 사항** - 웹 플랫폼도 지원하거나 고급 기능이 필요한 경우에만 필요합니다.
+      - `iOSServerClientId`: **선택 사항** - 제공된 경우 `webClientId`과 동일한 값이어야 합니다.
       
-      For advanced setup with `webClientId` and `iOSServerClientId`, see the [web setup guide](/docs/plugins/social-login/google/web/) for creating these credentials.
+      `webClientId` 및 `iOSServerClientId`을 사용한 고급 설정의 경우 이러한 자격 증명 생성에 대한 [웹 설정 가이드](/docs/plugins/social-login/google/web/)를 참조하세요.
       :::
 
-      :::caution
-      **About offline mode:** When using `mode: 'offline'`, the login response will not contain user data directly. Instead, you'll receive a server auth code that must be exchanged for user information via your backend server. See the [general setup guide](/docs/plugins/social-login/google/general/#using-offline-access-with-your-own-backend) for implementation details.
+      :::주의
+      **오프라인 모드 정보:** `mode: 'offline'`를 사용할 때 로그인 응답에는 사용자 데이터가 직접 포함되지 않습니다. 대신 백엔드 서버를 통해 사용자 정보로 교환해야 하는 서버 인증 코드를 받게 됩니다. 구현 세부정보는 [일반 설정 가이드](/docs/plugins/social-login/google/general/#using-offline-access-with-your-own-backend)를 참조하세요.
       :::
    
-   3. Implement the login function. Create a button and run the following code on click
+   3. 로그인 기능을 구현합니다. 버튼을 만들고 클릭 시 다음 코드를 실행합니다.
      
-      **For online mode:**
+      **온라인 모드의 경우:**
       ```typescript
       const res = await SocialLogin.login({
         provider: 'google',
@@ -201,7 +201,7 @@ In this part, you will learn how to setup Google login in iOS.
       console.log(JSON.stringify(res))
       ```
 
-      **For offline mode:**
+      **오프라인 모드의 경우:**
       ```typescript
       const res = await SocialLogin.login({
         provider: 'google',
@@ -214,25 +214,25 @@ In this part, you will learn how to setup Google login in iOS.
       console.log('Server auth code:', res.result.serverAuthCode)
       ```
 
-5. Test your application
+5. 애플리케이션 테스트
    
-   1. Build your app and run `cap sync`
+   1. 앱을 빌드하고 'cap sync'를 실행하세요.
    
-   2. If you've done everything correctly, you should see the Google login flow working properly
-      <img src="/social-login-assets/google_final_ios_v2.gif" alt="Demo of Google login flow on iOS showing sign-in process and successful authentication" />
+   2. 모든 작업을 올바르게 수행했다면 Google 로그인 흐름이 제대로 작동하는 것을 볼 수 있습니다.
+      <img src="/social-login-assets/google_final_ios_v2.gif" alt="로그인 프로세스 및 성공적인 인증을 보여주는 iOS의 Google 로그인 흐름 데모" />
 </Steps>
 
 :::note
-The language in the Google prompt depends on your device's language settings.
+Google 프롬프트의 언어는 장치의 언어 설정에 따라 다릅니다.
 :::
 
-## Known Problems
+## 알려진 문제
 
-### Privacy Screen Plugin Incompatibility
+### 개인정보 보호 화면 플러그인 비호환성
 
-The Google Login plugin is incompatible with [@capacitor/privacy-screen](https://github.com/ionic-team/capacitor-privacy-screen). When using both plugins together, the Google login webview will be interrupted by the privacy screen.
+Google 로그인 플러그인은 [@capacitor/privacy-screen](https://github.com/ionic-team/capacitor-privacy-screen)과 호환되지 않습니다. 두 플러그인을 함께 사용하면 Google 로그인 웹뷰가 개인정보 보호 화면으로 인해 중단됩니다.
 
-**Workaround:** Call `await PrivacyScreen.disable();` before calling the login function:
+**해결 방법:** 로그인 기능을 호출하기 전에 `await PrivacyScreen.disable();`을 호출하세요.
 
 ```typescript
 import { PrivacyScreen } from '@capacitor/privacy-screen';

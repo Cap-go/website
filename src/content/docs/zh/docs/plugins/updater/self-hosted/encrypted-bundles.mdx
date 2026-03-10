@@ -1,6 +1,6 @@
 ---
-title: "加密 Bundle"
-description: "在自托管环境中使用手动更新插件的综合指南,详细说明管理加密 bundle 以进行安全高效更新所涉及的步骤和流程"
+title: 加密捆绑包
+description: 有关在自托管环境中使用手动更新插件的综合指南，详细介绍了管理加密包以实现安全高效更新所涉及的步骤和流程。
 sidebar:
   order: 5
 locale: zh
@@ -9,28 +9,28 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 ## 端到端加密
 
-从版本 4.15.0 开始,插件允许您发送加密更新。
+从版本 4.15.0 开始，该插件允许您发送加密更新。
 
-### 步骤 1: 创建私钥
-```bash title='创建私钥'
+### 第 1 步：创建私钥
+```bash title='Create a private key'
 npx @capgo/cli key create
 ```
 
-### 步骤 2: 创建并压缩您的 bundle
-```bash title="创建带有校验和的 bundle zip"
+### 步骤 2：创建并压缩你的包
+```bash title="Create bundle zip with checksum"
 npx @capgo/cli bundle zip [appId] --key-v2 --json
 ```
 
-`--key-v2` 标志使用具有更好校验和的新加密系统,`--json` 标志将输出 bundle 信息,包括加密所需的校验和。
+`--key-v2` 标志使用具有更好校验和的新加密系统，而 `--json` 标志将输出包信息，包括加密所需的校验和。
 
-### 步骤 3: 加密您的 bundle
-```bash title="使用校验和加密打包的 zip"
+### 第 3 步：加密您的包
+```bash title="Encrypt bundled zip with checksum"
 npx @capgo/cli encrypt [path/to/zip] [checksum]
 ```
 
-`checksum` 参数是步骤 2 中 zip 命令生成的 SHA256 校验和。encrypt 命令将返回 `ivSessionKey` 并生成加密的校验和。请记住在更新有效负载中将 `ivSessionKey` 键重命名为 `session_key`。
+`checksum` 参数是步骤 2 中 zip 命令生成的 SHA256 校验和。加密命令将返回 `ivSessionKey` 并生成加密的校验和。请记住在更新负载中将 `ivSessionKey` 密钥重命名为 `session_key`。
 
-### 步骤 4: 在您的更新有效负载中使用
+### 步骤 4：在更新负载中使用
 ```json
 {
 "version": "1.2.3",
@@ -40,9 +40,9 @@ npx @capgo/cli encrypt [path/to/zip] [checksum]
 }
 ```
 
-`session_key` 是 encrypt 命令返回的 `ivSessionKey`,`checksum` 是加密期间生成的加密校验和(不是 zip 命令的原始校验和)。
+`session_key` 是加密命令返回的 `ivSessionKey`，`checksum` 是加密期间生成的加密校验和（不是 zip 命令的原始校验和）。
 
-然后,您的应用将能够使用私钥解密 `session_key`,并使用解密的 `session_key` 解密更新。加密的校验和确保 bundle 完整性验证。
+然后，您的应用程序将能够使用私钥来解密 `session_key` 并使用解密后的 `session_key` 来解密更新。加密的校验和确保包完整性验证。
 
 ## 了解更多
 
@@ -50,11 +50,11 @@ npx @capgo/cli encrypt [path/to/zip] [checksum]
 <LinkCard
 	title="端到端加密指南"
 	href="https://capgo.app/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/"
-	description="深入了解 Capgo 的加密系统如何使用 RSA + AES 密码学"
+	description="Deep dive into how Capgo's encryption system works with RSA + AES cryptography"
 />
 <LinkCard
 	title="自托管实时更新"
 	href="https://capgo.app/blog/self-hosted-live-updates/"
-	description="设置自托管更新的完整工作流程"
+	description="Complete workflow for setting up self-hosted updates"
 />
 </CardGrid>

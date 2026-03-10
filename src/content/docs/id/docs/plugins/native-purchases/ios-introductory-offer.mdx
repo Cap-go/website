@@ -1,184 +1,182 @@
 ---
-title: Create iOS Subscription Introductory Offer
+title: Buat iOS Penawaran Perkenalan Berlangganan
 description: >-
-  Learn how to create introductory offers for auto-renewable subscriptions on
-  iOS to attract and convert new subscribers.
+  Pelajari cara membuat penawaran perkenalan untuk langganan yang dapat
+  diperpanjang secara otomatis di iOS untuk menarik dan mengonversi pelanggan
+  baru.
 sidebar:
   order: 9
 locale: id
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 
-Introductory offers allow you to provide eligible users with free trials or discounted introductory pricing to reduce barriers to entry and increase subscription conversions.
+Penawaran perkenalan memungkinkan Anda memberikan uji coba gratis atau harga perkenalan yang didiskon kepada pengguna yang memenuhi syarat untuk mengurangi hambatan masuk dan meningkatkan konversi langganan.
 
-## Overview
+## Ikhtisar
 
-Introductory offers are one of the most effective tools for growing your subscriber base. They allow users to:
-- Try your premium features risk-free
-- Experience value before committing
-- Start at a lower price point
-- Build confidence in your product
+Penawaran perkenalan adalah salah satu alat paling efektif untuk mengembangkan basis pelanggan Anda. Mereka memungkinkan pengguna untuk:
+- Coba fitur premium Anda tanpa risiko
+- Nilai pengalaman sebelum melakukan
+- Mulai dari titik harga yang lebih rendah
+- Bangun kepercayaan pada produk Anda
 
-## Offer Types
+## Jenis Penawaran
 
-iOS supports three types of introductory offers:
+iOS mendukung tiga jenis penawaran perkenalan:
 
-### 1. Free Trial
-Customers get complimentary access for a specified duration. After the trial, they're charged at standard rates if they don't cancel.
+### 1. Uji Coba Gratis
+Pelanggan mendapatkan akses gratis untuk jangka waktu tertentu. Setelah uji coba, mereka akan dikenakan tarif standar jika tidak membatalkan.
 
-**Examples:**
-- 7 days free
-- 14 days free
-- 1 month free
+**Contoh:**
+- 7 hari gratis
+- 14 hari gratis
+- 1 bulan gratis
 
-**Best for:**
-- High-value subscriptions
-- Feature-rich apps
-- Building user habit
+**Terbaik untuk:**
+- Langganan bernilai tinggi
+- Aplikasi kaya fitur
+- Membangun kebiasaan pengguna
 
-### 2. Pay Up Front
-Customers pay a single discounted price that covers the introductory period.
+### 2. Bayar di Muka
+Pelanggan membayar satu harga diskon yang mencakup periode perkenalan.
 
-**Examples:**
-- $1.99 for 2 months (then $9.99/month)
-- $9.99 for 3 months (then $19.99/month)
+**Contoh:**
+- $1,99 selama 2 bulan (kemudian $9,99/bulan)
+- $9,99 selama 3 bulan (kemudian $19,99/bulan)
 
-**Best for:**
-- Commitment signals
-- Cash flow needs
-- Testing price sensitivity
+**Terbaik untuk:**
+- Sinyal komitmen
+- Kebutuhan arus kas
+- Menguji sensitivitas harga
 
-### 3. Pay As You Go
-Customers pay a reduced price for multiple billing cycles.
+### 3. Bayar Sesuai Pemakaian
+Pelanggan membayar potongan harga untuk beberapa siklus penagihan.
 
-**Examples:**
-- $1.99/month for 3 months (then $9.99/month)
-- $4.99/month for 6 months (then $14.99/month)
+**Contoh:**
+- $1,99/bulan selama 3 bulan (kemudian $9,99/bulan)
+- $4,99/bulan selama 6 bulan (kemudian $14,99/bulan)
 
-**Best for:**
-- Gradual commitment
-- Long-term value demonstration
-- Reducing perceived risk
+**Terbaik untuk:**
+- Komitmen bertahap
+- Demonstrasi nilai jangka panjang
+- Mengurangi risiko yang dirasakan
 
-## Eligibility Requirements
+## Persyaratan Kelayakan
 
-Users can only receive introductory offers if they:
-- Haven't previously received an introductory offer for the product
-- Haven't received an introductory offer for any product in the same subscription group
-- Haven't had an active subscription to the product
+Pengguna hanya dapat menerima penawaran perkenalan jika mereka:
+- Sebelumnya belum pernah menerima tawaran perkenalan untuk produk tersebut
+- Belum menerima penawaran perkenalan untuk produk apa pun di grup langganan yang sama
+- Belum aktif berlangganan produk
 
 :::note
-Apple handles eligibility checking automatically. The native-purchases plugin provides methods to check eligibility before presenting offers.
+Apple menangani pemeriksaan kelayakan secara otomatis. Plugin pembelian asli menyediakan metode untuk memeriksa kelayakan sebelum menyajikan penawaran.
 :::
 
-## Prerequisites
+## Prasyarat
 
-You must first [create an auto-renewable subscription](/docs/plugins/native-purchases/ios-create-subscription/) before adding an introductory offer.
+Anda harus terlebih dahulu [membuat langganan yang dapat diperpanjang secara otomatis](/docs/plugins/native-purchases/ios-create-subscription/) sebelum menambahkan penawaran perkenalan.
 
-## Creating an Introductory Offer
+## Membuat Penawaran Perkenalan
 
 <Steps>
 
-1. **Navigate to Subscription**
+1. **Navigasi ke Berlangganan**
 
-   In App Store Connect, go to your app's **Monetize > Subscriptions** section and select the subscription you want to add an offer to.
+   Di App Store Connect, buka bagian **Monetisasi > Langganan** aplikasi Anda dan pilih langganan yang ingin Anda tambahi penawaran.
 
-2. **Add Subscription Price**
+2. **Tambahkan Harga Berlangganan**
 
-   Click the **+** icon next to "Subscription Prices" to open the pricing modal.
+   Klik ikon **** di samping "Harga Berlangganan" untuk membuka modal harga.
 
-3. **Create Introductory Offer**
+3. **Buat Penawaran Perkenalan**
 
-   Select **"Create introductory offer"** from the options.
+   Pilih **"Buat penawaran perkenalan"** dari opsi.
 
-   ![Create introductory offer](/native-purchases/ios/introductory-offer/create-introductory-offer.webp)
+   ![Buat penawaran perkenalan](/native-purchases/ios/introductory-offer/create-introductory-offer.webp)
 
-4. **Configure Countries and Start Date**
+4. **Konfigurasi Negara dan Tanggal Mulai**
 
-   **Countries and Regions**: Select where the offer will be available
-   - Choose all countries for maximum reach
-   - Or limit to specific markets for testing
+   **Negara dan Wilayah**: Pilih di mana penawaran akan tersedia
+   - Pilih semua negara untuk jangkauan maksimal
+   - Atau batasi pada pasar tertentu untuk pengujian
 
-   **Start Date**: When the offer becomes available
-   - Can be immediate or scheduled for the future
-   - Useful for coordinating with marketing campaigns
+   **Tanggal Mulai**: Saat penawaran tersedia
+   - Bisa segera atau dijadwalkan untuk masa depan
+   - Berguna untuk berkoordinasi dengan kampanye pemasaran
 
-   **End Date (Optional)**: When the offer expires
-   - Leave blank for ongoing availability
-   - Set a date for limited-time promotions
+   **Tanggal Berakhir (Opsional)**: Saat penawaran berakhir
+   - Biarkan kosong untuk ketersediaan berkelanjutan
+   - Tetapkan tanggal untuk promosi waktu terbatas
 
-5. **Select Offer Type**
+5. **Pilih Jenis Penawaran**
 
-   Choose one of the three offer types:
+   Pilih salah satu dari tiga jenis penawaran:
 
-   **Free** (Free Trial)
-   - Select duration (days, weeks, months)
-   - Examples: 7 days, 2 weeks, 1 month
+   **Gratis** (Uji Coba Gratis)
+   - Pilih durasi (hari, minggu, bulan)
+   - Contoh: 7 hari, 2 minggu, 1 bulan**Bayar di Muka**
+   - Tetapkan harga pembayaran tunggal
+   - Tetapkan durasi yang dicakup oleh pembayaran
+   - Contoh: $1,99 untuk 2 bulan
 
-   **Pay Up Front**
-   - Set single payment price
-   - Set duration covered by payment
-   - Example: $1.99 for 2 months
+   **Bayar Sesuai Pemakaian**
+   - Tetapkan harga diskon per periode
+   - Tetapkan jumlah periode
+   - Contoh: $2,99/bulan selama 3 bulan
 
-   **Pay As You Go**
-   - Set discounted price per period
-   - Set number of periods
-   - Example: $2.99/month for 3 months
+6. **Tinjau dan Konfirmasi**
 
-6. **Review and Confirm**
+   Tinjau ringkasan yang menunjukkan:
+   - Jenis dan durasi penawaran
+   - Detail harga
+   - Harga reguler setelah periode perkenalan
+   - Tanggal ketersediaan dan negara
 
-   Review the summary showing:
-   - Offer type and duration
-   - Pricing details
-   - Regular price after intro period
-   - Availability dates and countries
+7. **Simpan**
 
-7. **Save**
-
-   Click **Save** to create the introductory offer. It will be available for testing immediately in sandbox mode.
+   Klik **Simpan** untuk membuat penawaran perkenalan. Ini akan segera tersedia untuk pengujian dalam mode sandbox.
 
 </Steps>
 
-## Offer Configuration Examples
+## Contoh Konfigurasi Penawaran
 
-### Example 1: Standard Free Trial
+### Contoh 1: Uji Coba Gratis Standar
 ```
 Type: Free
 Duration: 7 days
 Then: $9.99/month
 ```
-**User Journey:**
-- Day 1-7: Free access
-- Day 8: First charge of $9.99
-- Monthly charges continue
+**Perjalanan Pengguna:**
+- Hari 1-7: Akses gratis
+- Hari 8: Tagihan pertama sebesar $9,99
+- Tagihan bulanan terus berlanjut
 
-### Example 2: Upfront Discounted Period
+### Contoh 2: Periode Diskon di Muka
 ```
 Type: Pay Up Front
 Price: $4.99
 Duration: 3 months
 Then: $9.99/month
 ```
-**User Journey:**
-- Day 1: Charged $4.99
-- 90 days access
-- Day 91: Charged $9.99/month
+**Perjalanan Pengguna:**
+- Hari 1: Dikenakan biaya $4,99
+- Akses 90 hari
+- Hari ke-91: Dikenakan biaya $9,99/bulan
 
-### Example 3: Gradual Introduction
+### Contoh 3: Pengenalan Bertahap
 ```
 Type: Pay As You Go
 Price: $2.99/month
 Periods: 6 months
 Then: $9.99/month
 ```
-**User Journey:**
-- Months 1-6: $2.99/month
-- Month 7+: $9.99/month
+**Perjalanan Pengguna:**
+- Bulan 1-6: $2,99/bulan
+- Bulan 7+: $9,99/bulan
 
-## Using in Your App
+## Menggunakan di Aplikasi Anda
 
-The native-purchases plugin automatically handles introductory offer presentation and eligibility:
+Plugin pembelian asli secara otomatis menangani presentasi dan kelayakan penawaran perkenalan:
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -215,24 +213,24 @@ try {
 }
 ```
 
-## Displaying Intro Offers to Users
+## Menampilkan Penawaran Intro kepada Pengguna
 
-### Best Practices for UI
+### Praktik Terbaik untuk UI
 
-**Clear Value Proposition:**
+**Proposisi Nilai yang Jelas:**
 ```
 Try Premium Free for 7 Days
 Then $9.99/month. Cancel anytime.
 ```
 
-**Emphasize Savings:**
+**Tekankan Penghematan:**
 ```
 Start at Just $1.99
 Get 3 months of Premium for only $1.99
 Then $9.99/month
 ```
 
-**Transparent Communication:**
+**Komunikasi Transparan:**
 ```
 Your Free Trial
 • Access all premium features
@@ -241,7 +239,7 @@ Your Free Trial
 • Cancel anytime, even during trial
 ```
 
-### Example Implementation
+### Contoh Implementasi
 
 ```typescript
 function formatIntroOffer(product: any): string {
@@ -265,27 +263,27 @@ function formatIntroOffer(product: any): string {
 }
 ```
 
-## Marketing Best Practices
+## Praktik Terbaik Pemasaran
 
-### Trial Length Strategy
-- **3-7 days**: Quick decision apps, games
-- **7-14 days**: Standard for most apps
-- **14-30 days**: Complex tools, professional apps
-- **30+ days**: High-value B2B or enterprise
+### Strategi Durasi Uji Coba
+- **3-7 hari**: Aplikasi pengambilan keputusan cepat, game
+- **7-14 hari**: Standar untuk sebagian besar aplikasi
+- **14-30 hari**: Alat kompleks, aplikasi profesional
+- **30+ hari**: B2B atau perusahaan bernilai tinggi
 
-### Pricing Psychology
-- **$0.99-$1.99**: Very low barrier, good for testing
-- **50% off**: Strong perceived value
-- **First month free**: Common, familiar pattern
+### Psikologi Penetapan Harga
+- **$0,99-$1,99**: Penghalang sangat rendah, bagus untuk pengujian
+- **Diskon 50%**: Nilai yang dirasakan kuat
+- **Gratis bulan pertama**: Pola yang umum dan familiar
 
-### Communication Timing
-- **Before trial ends**: Remind users of upcoming charge
-- **Highlight value**: Show usage stats, achievements
-- **Easy cancellation**: Build trust with transparent process
+### Waktu Komunikasi
+- **Sebelum uji coba berakhir**: Ingatkan pengguna tentang tagihan yang akan datang
+- **Nilai sorotan**: Tampilkan statistik penggunaan, pencapaian
+- **Pembatalan mudah**: Bangun kepercayaan dengan proses transparan
 
-## Testing Intro Offers
+## Menguji Penawaran Intro
 
-Use sandbox testing to verify behavior:
+Gunakan pengujian sandbox untuk memverifikasi perilaku:
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -318,68 +316,66 @@ setTimeout(async () => {
 }, 180000); // 3 minutes for weekly trial
 ```
 
-## Important Notes
+## Catatan Penting
 
-### Eligibility Rules
-- One intro offer per user per subscription group (lifetime)
-- Applies to new subscribers only
-- Cannot be used again after cancellation
-- Not available for subscription upgrades/crossgrades
+### Aturan Kelayakan
+- Satu penawaran perkenalan per pengguna per grup berlangganan (seumur hidup)
+- Hanya berlaku untuk pelanggan baru
+- Tidak dapat digunakan lagi setelah pembatalan
+- Tidak tersedia untuk upgrade langganan/crossgrade
 
 ### StoreKit API
-- `introductoryPrice` shows intro offer details
-- `eligibility` method checks if user qualifies
-- Automatically applied at purchase time
-- No special purchase method needed
+- `introductoryPrice` menampilkan detail penawaran perkenalan
+- Metode `eligibility` memeriksa apakah pengguna memenuhi syarat
+- Secara otomatis diterapkan pada waktu pembelian
+- Tidak diperlukan metode pembelian khusus
 
-### Limitations
-- Only one intro offer active per subscription at a time
-- Cannot combine with other discount types
-- Cannot change eligibility rules
-- Apple controls eligibility checking
+### Keterbatasan
+- Hanya satu penawaran perkenalan yang aktif per langganan dalam satu waktu
+- Tidak dapat digabungkan dengan jenis diskon lainnya
+- Tidak dapat mengubah aturan kelayakan
+- Apple mengontrol pemeriksaan kelayakan
 
-## Troubleshooting
+## Pemecahan masalah
 
-**Intro offer not showing:**
-- Check if offer is activated in App Store Connect
-- Verify user hasn't used an intro offer before
-- Ensure user hasn't subscribed to anything in the group
-- Test with new sandbox account
+**Penawaran perkenalan tidak ditampilkan:**
+- Periksa apakah penawaran diaktifkan di App Store Connect
+- Verifikasi pengguna belum pernah menggunakan tawaran perkenalan sebelumnya
+- Pastikan pengguna belum berlangganan apa pun di grup
+- Uji dengan akun sandbox baru
 
-**Eligibility check failing:**
-- Wait for App Store sync (can take 2-3 hours)
-- Verify product ID is correct
-- Check subscription group configuration
-- Test in sandbox with fresh test account
+**Pemeriksaan kelayakan gagal:**
+- Tunggu sinkronisasi App Store (dapat memakan waktu 2-3 jam)
+- Verifikasi ID produk sudah benar
+- Periksa konfigurasi grup berlangganan
+- Uji di kotak pasir dengan akun pengujian baru**Penampilan harga salah:**
+- Periksa pengaturan harga regional
+- Verifikasi konversi mata uang
+- Pastikan tanggal penawaran terkini
+- Segarkan informasi produk
 
-**Wrong price displaying:**
-- Check regional pricing settings
-- Verify currency conversion
-- Ensure offer dates are current
-- Refresh product information
+**Masalah pengujian kotak pasir:**
+- Gunakan durasi yang dipercepat (3 menit = 1 minggu)
+- Buat akun pengujian baru untuk setiap pengujian
+- Tunggu hingga uji coba selesai secara alami
+- Periksa jumlah perpanjangan (maks 6 di kotak pasir)
 
-**Sandbox testing issues:**
-- Use accelerated durations (3 min = 1 week)
-- Create new test accounts for each test
-- Wait for trial to complete naturally
-- Check renewal count (max 6 in sandbox)
+## Analisis dan Pengoptimalan
 
-## Analytics and Optimization
+### Lacak Metrik Ini
+- Tingkat penerimaan tawaran intro
+- Tingkat konversi uji coba ke berbayar
+- Pembatalan selama uji coba
+- Retensi setelah pengisian pertama
+- Dampak pendapatan
 
-### Track These Metrics
-- Intro offer acceptance rate
-- Trial-to-paid conversion rate
-- Cancellation during trial
-- Retention after first charge
-- Revenue impact
+### Ide Pengujian A/B
+- Uji coba gratis vs. intro berbayar
+- Variasi panjang percobaan
+- Persentase diskon
+- Pembayaran tunggal vs. diskon berulang
 
-### A/B Testing Ideas
-- Free trial vs. paid intro
-- Trial length variations
-- Discount percentage
-- Single payment vs. recurring discount
-
-### Optimization Strategy
+### Strategi Pengoptimalan
 ```typescript
 // Track offer performance
 analytics.track('intro_offer_displayed', {
@@ -403,13 +399,13 @@ NativePurchases.addListener('transactionUpdated', (transaction) => {
 });
 ```
 
-## Next Steps
+## Langkah Selanjutnya
 
-- [Configure sandbox testing](/docs/plugins/native-purchases/ios-sandbox-testing/) to test your intro offers
-- Set up promotional offers for win-back campaigns
-- Implement subscription analytics
-- Create targeted marketing campaigns
+- [Konfigurasi pengujian sandbox](/docs/plugins/native-purchases/ios-sandbox-testing/) untuk menguji penawaran perkenalan Anda
+- Siapkan penawaran promosi untuk kampanye win-back
+- Menerapkan analisis berlangganan
+- Buat kampanye pemasaran yang ditargetkan
 
-## Additional Resources
+## Sumber Daya Tambahan
 
-For more details, refer to the [official Apple documentation on introductory offers](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers/implementing_introductory_offers_in_your_app).
+Untuk detail selengkapnya, lihat [dokumentasi resmi Apple tentang penawaran perkenalan](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers/implementing_introductory_offers_in_your_app).

@@ -1,27 +1,28 @@
 ---
-title: "Getting started"
-description: "This tutorial will show how to start the Supabase from scratch as well as start edge functions, to run Capgo on your own"
+title: Empezando
+description: >-
+  Este tutorial mostrará cómo iniciar Supabase desde cero, así como iniciar
+  funciones perimetrales, para ejecutar Capgo por su cuenta.
 sidebar:
   order: 1
 locale: es
 ---
+## ¿Qué cubrirá este tutorial?
 
-## What this tutorial will cover?
+Este tutorial mostrará cómo iniciar la supabase desde cero, así como iniciar las funciones de borde. 
 
-This tutorial will show how to start the supabase from scratch as well as start edge functions 
-
-## Requirements
- 1. Cloned [capgo](https://github.com/Cap-go/capgo)
+## Requisitos
+ 1. Clonado [capgo](https://github.com/Cap-go/capgo)
  3. [supabase](https://supabase.com/)
 
-## Getting started
+## Empezando
 
-To get started run
+Para empezar a ejecutar
 ```bash
 supabase start
 ```
 
-Next should see something like this:
+A continuación debería ver algo como esto:
 ```js
 Started supabase local development setup.
 
@@ -35,7 +36,7 @@ Started supabase local development setup.
 service_role key: supa_key_admin
 ```
 
-Next open `configs.json` and set the following values:
+Luego abra `configs.json` y establezca los siguientes valores:
 ```json
 {
   "base_domain": {
@@ -56,23 +57,23 @@ Next open `configs.json` and set the following values:
 }
 ```
 
-where `supa_key_anon` is the value from the previous step.
+donde `supa_key_anon` es el valor del paso anterior.
 
 :::danger
-⚠️ Do not commit `configs.json` into the remote repo
+⚠️ No envíe `configs.json` al repositorio remoto
 :::
 
-Next, verify that you can go to [localhost:54323](http://localhost:54323/projects) and that the table `users` looks something like this
+A continuación, verifique que puede ir a [localhost:54323](http://localhost:54323/projects) y que la tabla `users` se parece a esta
 
-<figure><img src="/supabase.webp" alt="Supabase dashboard showing users table" /><figcaption></figcaption></figure>
+<figure><img src="/supabase.webp" alt="Panel Supabase que muestra la tabla de usuarios" /><figcaption></figcaption></figure>
 
-If it does start edge functions by running:
+Si inicia funciones perimetrales ejecutando:
 
 ```bash
 supabase functions serve
 ```
 
-and start frontend by running:
+e inicie la interfaz ejecutando:
 ```bash
 bun run serve
 ```

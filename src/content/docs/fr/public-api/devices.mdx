@@ -1,53 +1,55 @@
 ---
-locale: fr
-title: "Appareils"
-description: "Docs for managing Appareils via Capgo API, covering tracking, versioning, and Canal assignments for Application installations."
-sidebar: 
+title: Devices
+description: >-
+  Documents pour la gestion des appareils via Capgo API, couvrant le suivi,
+  l'attribution des bundles (versions) et la gestion des canaux pour les
+  installations d'applications.
+sidebar:
   order: 7
+locale: fr
 ---
+Les appareils représentent des installations individuelles de votre application gérées par Capgo. Les appareils API vous permettent de suivre et de gérer les appareils, y compris leurs offres groupées (versions), leurs canaux et leur état de mise à jour.
 
-Appareils represent individual installations of your Application that are managed by Capgo. The Appareils API allows you to track and manage Appareils, including their versions, Canaux, and Mise à jour status.
-
-:::Remarque[Data Retention]
-Appareil data is retained for **90 days** from the last Appareil activity. Appareils that haven't connected to Capgo within this period will be automatically removed from the system. Actif Appareils are continuously tracked as they Vérifier for Mises à jour.
+:::note[Conservation des données]
+Les données de l'appareil sont conservées pendant **90 jours** à compter de la dernière activité de l'appareil. Les appareils qui ne se sont pas connectés à Capgo pendant cette période seront automatiquement supprimés du système. Les appareils actifs sont suivis en permanence lorsqu'ils recherchent des mises à jour.
 :::
 
-## Understanding Appareils
+## Comprendre les appareils
 
-Each Appareil has unique characteristics and states:
-- **Platform**: iOS or Android
-- **Version**: Current Bundle Version and Natif Construction Version
-- **Environment**: Production or Développement, emulator or physical Appareil
-- **Canal**: Current Mise à jour Canal assignment
-- **Custom ID**: Optional identifier for your own tracking purposes
+Chaque appareil possède des caractéristiques et des états uniques :
+- **Plateforme** : iOS, Android ou Electron
+- **Bundle (version)** : bundle actuel (version) et version de build native
+- **Environnement** : Production ou développement, émulateur ou périphérique physique
+- **Channel**: Current update channel assignment
+- **ID personnalisé** : identifiant facultatif pour vos propres fins de suivi
 
-## Best Practices
+## meilleures pratiques
 
-1. **Version Tracking**: Monitor Appareil versions to ensure Mise à jour adoption
-2. **Canal Management**: Assign Appareils to appropriate Canaux based on Test needs
-3. **Environment Awareness**: Handle different environments (prod/dev/emulator) appropriately
-4. **Custom Identification**: Use custom IDs to integrate with your existing systems
+1. **Suivi des bundles (versions)** : surveillez l'adoption des bundles (versions) d'appareils pour garantir l'adoption des mises à jour
+2. **Gestion des canaux** : attribuez des appareils aux canaux appropriés en fonction des besoins de test
+3. **Conscience de l'environnement** : Gérer différents environnements (prod/dev/emulator) de manière appropriée
+4. **Identification personnalisée** : utilisez des identifiants personnalisés pour intégrer vos systèmes existants
 
-## Endpoints
+## Points de terminaison
 
-### POST
+### POSTER
 
 `https://api.capgo.app/device/`
 
-Link a Appareil to a specific Version or Canal.
+Associez un appareil à un ensemble (version) ou à un canal spécifique.
 
-#### Request Body
+#### Corps de la demande
 
 ```typescript
 interface DeviceLink {
   app_id: string
   device_id: string
-  version_id?: string // version name
+  version_id?: string // bundle (version) name
   channel?: string    // channel name
 }
 ```
 
-#### Exemple Request
+#### Exemple de demande
 
 ```bash
 curl -X POST \
@@ -61,7 +63,7 @@ curl -X POST \
   https://api.capgo.app/device/
 ```
 
-#### Succès Response
+#### Réponse réussie
 
 ```json
 {
@@ -69,19 +71,19 @@ curl -X POST \
 }
 ```
 
-### GET
+### OBTENIR
 
 `https://api.capgo.app/device/`
 
-Retrieve Appareil Information. Uses cursor-based pagination for efficient retrieval of large Appareil lists.
+Retrieve device information. Utilise la pagination basée sur le curseur pour une récupération efficace de grandes listes de périphériques.
 
-#### Query Paramètres
-- `app_id`: Required. The ID of your app
-- `device_id`: Optional. Specific device ID to retrieve a single device
+#### Paramètres de requête
+- `app_id`: Required. L'ID de votre application
+- `device_id` : Facultatif. Specific device ID to retrieve a single device
 - `cursor`: Optional. Cursor from previous response for pagination
-- `limit`: Optional. Number of devices per page (default: 50)
+- `limit`: Optional. Nombre d'appareils par page (par défaut : 50)
 
-#### Exemple Requests
+#### Exemples de requêtes
 
 ```bash
 # Get all devices (first page)
@@ -99,7 +101,7 @@ curl -H "authorization: your-api-key" \
 
 #### Response Type (List)
 
-When requesting multiple devices (no `device_id` parameter):
+Lors de la demande de plusieurs appareils (pas de paramètre `device_id`) :
 
 ```typescript
 interface DeviceListResponse {
@@ -112,42 +114,44 @@ interface Device {
   updated_at: string;
   device_id: string;
   custom_id: string;
-  version?: number;
-  version_name: string | null;
+  version?: number; // bundle (version) id
+  version_name: string | null; // bundle (version) name
   channel?: string;
   app_id: string;
-  platform: "ios" | "android";
+  platform: "ios" | "android" | "electron";
   plugin_version: string;
   os_version: string;
   version_build: string;
   is_prod: boolean;
   is_emulator: boolean;
+  key_id: string | null; // First 4 chars of encryption key (e.g., "MIIB")
 }
 ```
 
-#### Response Type (Single Appareil)
+#### Response Type (Single Device)
 
-When requesting a specific device with `device_id` parameter, returns the device object directly:
+Lors de la demande d'un appareil spécifique avec le paramètre `device_id`, renvoie directement l'objet appareil :
 
 ```typescript
 interface Device {
   updated_at: string;
   device_id: string;
   custom_id: string;
-  version?: number;
-  version_name: string | null;
+  version?: number; // bundle (version) id
+  version_name: string | null; // bundle (version) name
   channel?: string;
   app_id: string;
-  platform: "ios" | "android";
+  platform: "ios" | "android" | "electron";
   plugin_version: string;
   os_version: string;
   version_build: string;
   is_prod: boolean;
   is_emulator: boolean;
+  key_id: string | null; // First 4 chars of encryption key (e.g., "MIIB")
 }
 ```
 
-#### Exemple Response (List)
+#### Example Response (List)
 
 ```json
 {
@@ -172,7 +176,7 @@ interface Device {
 }
 ```
 
-#### Exemple Response (Single Appareil)
+#### Example Response (Single Device)
 
 ```json
 {
@@ -192,18 +196,18 @@ interface Device {
 }
 ```
 
-### Supprimer
+### SUPPRIMER
 
 `https://api.capgo.app/device/`
 
-Unlink a Appareil from its Canal override. This resets the Appareil to use its default Canal.
+Unlink a device from its channel override. Cela réinitialise l'appareil pour qu'il utilise son canal par défaut.
 
-:::Remarque[Supprimer Appareil]
-Appareil data is retained for **90 days** from the last Appareil activity. Appareils that haven't connected to Capgo within this period will be automatically removed from the system. Actif Appareils are continuously tracked as they Vérifier for Mises à jour.
-You can't Supprimer a Appareil with this endpoint, it only affect the Canal override.
+:::note[Supprimer l'appareil]
+Les données de l'appareil sont conservées pendant **90 jours** à compter de la dernière activité de l'appareil. Les appareils qui ne se sont pas connectés à Capgo pendant cette période seront automatiquement supprimés du système. Les appareils actifs sont suivis en permanence lorsqu'ils recherchent des mises à jour.
+Vous ne pouvez pas supprimer un appareil avec ce point de terminaison, cela affecte uniquement le remplacement du canal.
 :::
 
-#### Query Paramètres
+#### Paramètres de requête
 
 ```typescript
 interface Device {
@@ -212,7 +216,7 @@ interface Device {
 }
 ```
 
-#### Exemple Request
+#### Exemple de demande
 
 ```bash
 curl -X DELETE \
@@ -225,7 +229,7 @@ curl -X DELETE \
   https://api.capgo.app/device/
 ```
 
-#### Succès Response
+#### Réponse réussie
 
 ```json
 {
@@ -233,9 +237,9 @@ curl -X DELETE \
 }
 ```
 
-## Erreur Handling
+## Gestion des erreurs
 
-Common Erreur scenarios and their responses:
+Scénarios d'erreur courants et leurs réponses :
 
 ```json
 // Device not found
@@ -244,7 +248,7 @@ Common Erreur scenarios and their responses:
   "status": "KO"
 }
 
-// Invalid version
+// Invalid bundle (version)
 {
   "error": "Version not found",
   "status": "KO"
@@ -263,9 +267,9 @@ Common Erreur scenarios and their responses:
 }
 ```
 
-## Common Use Cases
+## Cas d'utilisation courants
 
-1. **Bêta Appareil Registration**
+1. **Beta Device Registration**
 ```typescript
 {
   "app_id": "app_123",
@@ -274,23 +278,21 @@ Common Erreur scenarios and their responses:
 }
 ```
 
-2. **Version Override**
+2. **Remplacement de version**
 ```typescript
 {
   "app_id": "app_123",
   "device_id": "device_456",
   "version_id": "1.1.0"
 }
-```
-
-3. **Réinitialiser to Default Canal**
+```3. **Réinitialiser la chaîne par défaut**
 ```typescript
 // Use DELETE endpoint to remove overrides
 ```
 
-## Tips for Appareil Management
+## Conseils pour la gestion des appareils
 
-1. **Monitoring**: Regularly Vérifier Appareil status and Version distribution
-2. **Test**: Use custom IDs to identify Test Appareils easily
-3. **Dépannage**: Track Appareil Mises à jour and Canal assignments
-4. **Version Control**: Monitor Natif Application versions to ensure compatibility 
+1. **Surveillance** : vérifiez régulièrement l'état de l'appareil et la distribution du bundle (version)
+2. **Tests** : utilisez des identifiants personnalisés pour identifier facilement les appareils de test
+3. **Dépannage** : suivez les mises à jour des appareils et les attributions de canaux
+4. **Contrôle de version natif** : surveillez les versions d'applications natives pour garantir la compatibilité

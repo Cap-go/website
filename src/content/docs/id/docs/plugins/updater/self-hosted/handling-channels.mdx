@@ -1,26 +1,25 @@
 ---
-title: Channel API Endpoint
+title: Saluran API Titik Akhir
 description: >-
-  How to build channel management endpoints for self-hosted Capgo to handle
-  device-channel assignments and channel queries
+  Cara membangun titik akhir pengelolaan saluran untuk Capgo yang dihosting
+  sendiri guna menangani penetapan saluran perangkat dan kueri saluran
 sidebar:
   order: 8
 locale: id
 ---
+Saluran adalah mekanisme inti untuk mengelola pembaruan aplikasi di Capgo. Dalam mode yang dihosting sendiri, Anda perlu menerapkan titik akhir saluran untuk menangani penetapan perangkat, kueri saluran, dan operasi pengelolaan saluran.
 
-Channels are a core mechanism for managing app updates in Capgo. In self-hosted mode, you need to implement channel endpoints to handle device assignments, channel queries, and channel management operations.
+## Memahami Saluran
 
-## Understanding Channels
+Saluran memungkinkan Anda untuk:
+- **Kontrol distribusi pembaruan**: Tetapkan versi aplikasi yang berbeda ke grup pengguna yang berbeda
+- **Pengujian A/B**: Menguji fitur baru dengan segmen pengguna tertentu  
+- **Peluncuran bertahap**: Terapkan pembaruan secara bertahap untuk meminimalkan risiko
+- **Pemisahan lingkungan**: Pisahkan pengembangan, staging, dan pembaruan produksi
 
-Channels allow you to:
-- **Control update distribution**: Assign different app versions to different user groups
-- **A/B testing**: Test new features with specific user segments
-- **Staged rollouts**: Gradually deploy updates to minimize risk
-- **Environment separation**: Separate development, staging, and production updates
+## Konfigurasi
 
-## Configuration
-
-Configure the channel endpoint URL in your `capacitor.config.json`:
+Konfigurasikan URL titik akhir saluran di `capacitor.config.json` Anda:
 
 ```json
 {
@@ -32,15 +31,15 @@ Configure the channel endpoint URL in your `capacitor.config.json`:
 }
 ```
 
-## Channel Operations
+## Operasi Saluran
 
-The plugin performs different channel operations that your endpoint needs to handle:
+Plugin ini melakukan operasi saluran berbeda yang perlu ditangani oleh titik akhir Anda:
 
-### 1. List Compatible Channels (GET Request)
+### 1. Daftar Saluran yang Kompatibel (GET Request)
 
-When the plugin calls `listChannels()`, it sends a GET request to retrieve all channels that are compatible with the device. This returns channels that match the device's environment (dev/prod, emulator/real device) and allow either public access or self-assignment.
+Saat plugin memanggil `listChannels()`, plugin mengirimkan permintaan GET untuk mengambil semua saluran yang kompatibel dengan perangkat. Ini mengembalikan saluran yang cocok dengan lingkungan perangkat (dev/prod, emulator/perangkat nyata) dan mengizinkan akses publik atau penetapan mandiri.
 
-#### Request Format
+#### Format Permintaan
 ```typescript
 // GET /api/channel_self
 // Headers:
@@ -51,14 +50,14 @@ When the plugin calls `listChannels()`, it sends a GET request to retrieve all c
 // Query parameters:
 interface ListChannelsRequest {
   app_id: string
-  platform: "ios" | "android"
+  platform: "ios" | "android" | "electron"
   is_emulator: boolean
   is_prod: boolean
   key_id?: string
 }
 ```
 
-#### Response Format
+#### Format Respons
 ```json
 [
   {
@@ -76,23 +75,23 @@ interface ListChannelsRequest {
 ]
 ```
 
-#### Understanding Channel Types
+#### Memahami Jenis Saluran
 
-The response includes two important flags for each channel:
+Responsnya mencakup dua tanda penting untuk setiap saluran:
 
-- **`public: true`**: This is a **default channel**. Devices cannot self-assign to it using `setChannel()`. Instead, if a device removes its channel assignment (using `unsetChannel()`), it will automatically receive updates from this public channel if it matches the device's conditions.
+- **`public: true`**: Ini adalah **saluran default**. Perangkat tidak dapat menetapkan sendiri ke perangkat tersebut menggunakan `setChannel()`. Sebaliknya, jika perangkat menghapus penetapan salurannya (menggunakan `unsetChannel()`), perangkat akan otomatis menerima pembaruan dari saluran publik ini jika cocok dengan kondisi perangkat.
 
-- **`allow_self_set: true`**: This is a **self-assignable channel**. Devices can explicitly assign themselves to this channel using `setChannel()`. This is useful for beta testing, A/B testing, or allowing users to opt-in to specific update tracks.
+- **`allow_self_set: true`**: Ini adalah **saluran yang dapat ditetapkan sendiri**. Perangkat dapat secara eksplisit menetapkan dirinya sendiri ke saluran ini menggunakan `setChannel()`. Ini berguna untuk pengujian beta, pengujian A/B, atau memungkinkan pengguna untuk ikut serta dalam jalur pembaruan tertentu.
 
 :::note
-A channel can be either `public` OR `allow_self_set`, but typically not both. Public channels serve as the default fallback, while self-assignable channels require explicit opt-in.
+Saluran dapat berupa `public` ATAU `allow_self_set`, namun biasanya tidak keduanya. Saluran publik berfungsi sebagai pengganti default, sedangkan saluran yang dapat ditetapkan sendiri memerlukan keikutsertaan yang jelas.
 :::
 
-### 2. Get Channel (PUT Request)
+### 2. Dapatkan Saluran (Permintaan PUT)
 
-When the plugin calls `getChannel()`, it sends a PUT request to retrieve the device's current channel assignment.
+Saat plugin memanggil `getChannel()`, plugin mengirimkan permintaan PUT untuk mengambil penetapan saluran perangkat saat ini.
 
-#### Request Format
+#### Format Permintaan
 ```typescript
 // PUT /api/channel_self
 // Headers:
@@ -104,7 +103,7 @@ When the plugin calls `getChannel()`, it sends a PUT request to retrieve the dev
 interface GetChannelRequest {
   device_id: string
   app_id: string
-  platform: "ios" | "android"
+  platform: "ios" | "android" | "electron"
   plugin_version: string
   version_build: string
   version_code: string
@@ -116,7 +115,7 @@ interface GetChannelRequest {
 }
 ```
 
-#### Response Format
+#### Format Respons
 ```json
 {
   "status": "ok",
@@ -127,18 +126,18 @@ interface GetChannelRequest {
 }
 ```
 
-### 3. Set Channel (POST Request)
+### 3. Atur Saluran (Permintaan POST)
 
-When the plugin calls `setChannel()`, it sends a POST request to assign the device to a specific channel.
+Saat plugin memanggil `setChannel()`, plugin mengirimkan permintaan POST untuk menetapkan perangkat ke saluran tertentu.
 
-#### Request Format
+#### Format Permintaan
 ```typescript
 // POST /api/channel_self
 interface SetChannelRequest {
   device_id: string
   app_id: string
   channel: string
-  platform: "ios" | "android"
+  platform: "ios" | "android" | "electron"
   plugin_version: string
   version_build: string
   version_code: string
@@ -148,7 +147,7 @@ interface SetChannelRequest {
 }
 ```
 
-#### Response Format
+#### Format Respons
 ```json
 {
   "status": "ok",
@@ -157,9 +156,9 @@ interface SetChannelRequest {
 }
 ```
 
-#### Error Cases
+#### Kasus Kesalahan
 
-When a device tries to assign itself to a **public channel** (one with `public: true`), your endpoint should return an error:
+Saat perangkat mencoba menetapkan dirinya ke **saluran publik** (saluran dengan `public: true`), titik akhir Anda akan menampilkan error:
 
 ```json
 {
@@ -169,7 +168,7 @@ When a device tries to assign itself to a **public channel** (one with `public: 
 }
 ```
 
-When a device tries to assign itself to a channel that doesn't allow self-assignment:
+Saat perangkat mencoba menetapkan dirinya sendiri ke saluran yang tidak mengizinkan penetapan mandiri:
 
 ```json
 {
@@ -179,17 +178,17 @@ When a device tries to assign itself to a channel that doesn't allow self-assign
 }
 ```
 
-### 4. Unset Channel (DELETE Request)
+### 4. Saluran Tidak Disetel (Permintaan HAPUS)
 
-When the plugin calls `unsetChannel()`, it sends a DELETE request to remove the device's channel assignment.
+Saat plugin memanggil `unsetChannel()`, plugin mengirimkan permintaan DELETE untuk menghapus penetapan saluran perangkat.
 
-#### Request Format
+#### Format Permintaan
 ```typescript
 // DELETE /api/channel_self
 interface UnsetChannelRequest {
   device_id: string
   app_id: string
-  platform: "ios" | "android"
+  platform: "ios" | "android" | "electron"
   plugin_version: string
   version_build: string
   version_code: string
@@ -197,16 +196,16 @@ interface UnsetChannelRequest {
 }
 ```
 
-## Implementation Example
+## Contoh Implementasi
 
-Here's a JavaScript example of how to implement the channel endpoint:
+Berikut adalah JavaScript contoh cara mengimplementasikan titik akhir saluran:
 
 ```typescript
 interface ChannelRequest {
   device_id: string
   app_id: string
   channel?: string
-  platform: "ios" | "android"
+  platform: "ios" | "android" | "electron"
   plugin_version: string
   version_build: string
   version_code: string
@@ -224,20 +223,20 @@ interface ChannelResponse {
 export const handler = async (event) => {
   const method = event.httpMethod || event.method
   const body = JSON.parse(event.body || '{}') as ChannelRequest
-
+  
   const { device_id, app_id, channel, platform } = body
 
   try {
     switch (method) {
       case 'GET':
         return await getDeviceChannel(device_id, app_id)
-
+        
       case 'POST':
         return await setDeviceChannel(device_id, app_id, channel!, platform)
-
+        
       case 'DELETE':
         return await unsetDeviceChannel(device_id, app_id)
-
+        
       default:
         return {
           status: "error",
@@ -255,7 +254,7 @@ export const handler = async (event) => {
 async function getDeviceChannel(deviceId: string, appId: string): Promise<ChannelResponse> {
   // Query your database for device channel assignment
   const assignment = await database.getDeviceChannel(deviceId, appId)
-
+  
   if (assignment) {
     return {
       status: "ok",
@@ -263,7 +262,7 @@ async function getDeviceChannel(deviceId: string, appId: string): Promise<Channe
       allowSet: assignment.allowSelfAssign
     }
   }
-
+  
   // Return default channel if no assignment found
   return {
     status: "ok",
@@ -273,46 +272,53 @@ async function getDeviceChannel(deviceId: string, appId: string): Promise<Channe
 }
 
 async function setDeviceChannel(
-  deviceId: string,
-  appId: string,
-  channel: string,
+  deviceId: string, 
+  appId: string, 
+  channel: string, 
   platform: string
 ): Promise<ChannelResponse> {
   // Validate channel exists and allows self-assignment
   const channelConfig = await database.getChannelConfig(channel, appId)
-
+  
   if (!channelConfig) {
     return {
       status: "error",
       error: "Channel not found"
     }
   }
-
+  
   if (!channelConfig.allowDeviceSelfSet) {
     return {
       status: "error",
       error: "Channel does not allow self-assignment"
     }
   }
-
+  
   // Check platform restrictions
   if (platform === "ios" && !channelConfig.ios) {
     return {
-      status: "error",
+      status: "error", 
       error: "Channel not available for iOS"
     }
   }
-
+  
   if (platform === "android" && !channelConfig.android) {
     return {
-      status: "error",
-      error: "Channel not available for Android"
+      status: "error", 
+      error: "Channel not available for Android" 
     }
   }
-
+  
+  if (platform === "electron" && !channelConfig.electron) {
+    return {
+      status: "error", 
+      error: "Channel not available for Electron" 
+    }
+  }
+  
   // Save the assignment
   await database.setDeviceChannel(deviceId, appId, channel)
-
+  
   return {
     status: "ok",
     message: "Device assigned to channel successfully"
@@ -322,7 +328,7 @@ async function setDeviceChannel(
 async function unsetDeviceChannel(deviceId: string, appId: string): Promise<ChannelResponse> {
   // Remove device channel assignment
   await database.removeDeviceChannel(deviceId, appId)
-
+  
   return {
     status: "ok",
     message: "Device channel assignment removed"
@@ -330,9 +336,9 @@ async function unsetDeviceChannel(deviceId: string, appId: string): Promise<Chan
 }
 ```
 
-## Channel Configuration
+## Konfigurasi Saluran
 
-Your channel system should support these configuration options:
+Sistem saluran Anda harus mendukung opsi konfigurasi berikut:
 
 ```typescript
 interface ChannelConfig {
@@ -342,6 +348,7 @@ interface ChannelConfig {
   // Platform targeting
   ios: boolean              // Allow updates to iOS devices
   android: boolean          // Allow updates to Android devices
+  electron: boolean         // Allow updates to Electron apps
 
   // Device type restrictions
   allow_emulator: boolean   // Allow updates on emulator/simulator devices
@@ -361,23 +368,21 @@ interface ChannelConfig {
 }
 ```
 
-### Device Filtering Logic
+### Logika Pemfilteran PerangkatSaat membuat daftar saluran yang kompatibel (permintaan GET), Anda harus memfilter saluran berdasarkan kondisi berikut:
 
-When listing compatible channels (GET request), you should filter channels based on these conditions:
-
-1. **Platform check**: Channel must allow the device's platform (`ios` or `android`)
-2. **Device type check**:
-   - If `is_emulator=true`: Channel must have `allow_emulator=true`
-   - If `is_emulator=false`: Channel must have `allow_device=true`
-3. **Build type check**:
-   - If `is_prod=true`: Channel must have `allow_prod=true`
-   - If `is_prod=false`: Channel must have `allow_dev=true`
-4. **Visibility check**: Channel must be either `public=true` OR `allow_device_self_set=true`
+1. **Pemeriksaan platform**: Saluran harus mengizinkan platform perangkat (`ios`, `android`, atau `electron`)
+2. **Pemeriksaan jenis perangkat**:
+   - Jika `is_emulator=true`: Saluran harus memiliki `allow_emulator=true`
+   - Jika `is_emulator=false`: Saluran harus memiliki `allow_device=true`
+3. **Pemeriksaan tipe build**:
+   - Jika `is_prod=true`: Saluran harus memiliki `allow_prod=true`
+   - Jika `is_prod=false`: Saluran harus memiliki `allow_dev=true`
+4. **Pemeriksaan visibilitas**: Saluran harus `public=true` ATAU `allow_device_self_set=true`
 
 ```typescript
 // Example filtering logic
 function getCompatibleChannels(
-  platform: 'ios' | 'android',
+  platform: 'ios' | 'android' | 'electron',
   isEmulator: boolean,
   isProd: boolean,
   channels: ChannelConfig[]
@@ -402,9 +407,9 @@ function getCompatibleChannels(
 }
 ```
 
-## Database Schema Example
+## Contoh Skema Basis Data
 
-You'll need to store channel configurations and device assignments:
+Anda harus menyimpan konfigurasi saluran dan penetapan perangkat:
 
 ```sql
 -- Channels table
@@ -416,6 +421,7 @@ CREATE TABLE channels (
   -- Platform targeting
   ios BOOLEAN DEFAULT true,
   android BOOLEAN DEFAULT true,
+  electron BOOLEAN DEFAULT true,
 
   -- Device type restrictions
   allow_emulator BOOLEAN DEFAULT true,   -- Allow emulator/simulator devices
@@ -448,9 +454,9 @@ CREATE TABLE device_channels (
 );
 ```
 
-## Error Handling
+## Penanganan Kesalahan
 
-Handle common error scenarios:
+Tangani skenario kesalahan umum:
 
 ```typescript
 // Channel not found
@@ -461,7 +467,7 @@ Handle common error scenarios:
 
 // Self-assignment not allowed
 {
-  "status": "error",
+  "status": "error", 
   "error": "Channel does not allow device self-assignment"
 }
 
@@ -478,27 +484,27 @@ Handle common error scenarios:
 }
 ```
 
-## Best Practices
+## Praktik Terbaik
 
-1. **Security**: Validate all channel assignments against your business rules
-2. **Logging**: Log all channel operations for auditing and debugging
-3. **Performance**: Cache channel configurations to reduce database queries
-4. **Validation**: Verify device_id and app_id authenticity
-5. **Rate Limiting**: Implement rate limiting to prevent abuse
+1. **Keamanan**: Validasi semua penetapan saluran terhadap aturan bisnis Anda
+2. **Logging**: Mencatat semua operasi saluran untuk audit dan debugging
+3. **Kinerja**: Konfigurasi saluran cache untuk mengurangi kueri database
+4. **Validasi**: Verifikasi keaslian device_id dan app_id
+5. **Pembatasan Tarif**: Menerapkan pembatasan tarif untuk mencegah penyalahgunaan
 
-## Integration with Updates
+## Integrasi dengan Pembaruan
 
-Channel assignments work together with your [Update API Endpoint](/docs/plugin/self-hosted/handling-updates/). When a device requests an update, check its channel assignment to determine which version to serve:
+Penetapan saluran berfungsi sama dengan [Titik Akhir API Pembaruan](/docs/plugin/self-hosted/handling-updates/) Anda. Saat perangkat meminta pembaruan, periksa penetapan salurannya untuk menentukan versi mana yang akan ditayangkan:
 
 ```typescript
 async function getUpdateForDevice(deviceId: string, appId: string) {
   // Get device's channel assignment
   const channelAssignment = await getDeviceChannel(deviceId, appId)
   const channel = channelAssignment.channel || 'production'
-
+  
   // Get the version assigned to this channel
   const channelVersion = await getChannelVersion(channel, appId)
-
+  
   return {
     version: channelVersion.version,
     url: channelVersion.url,
@@ -507,4 +513,4 @@ async function getUpdateForDevice(deviceId: string, appId: string) {
 }
 ```
 
-This creates a complete self-hosted channel management system that gives you full control over how updates are distributed to your users.
+Hal ini menciptakan sistem manajemen saluran lengkap yang dihosting sendiri yang memberi Anda kendali penuh atas bagaimana pembaruan didistribusikan kepada pengguna Anda.

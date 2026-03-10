@@ -1,164 +1,161 @@
 ---
-title: Create iOS Auto-Renewable Subscription
+title: Buat iOS Langganan yang Dapat Diperbarui Otomatis
 description: >-
-  Step-by-step guide to creating auto-renewable subscriptions in App Store
-  Connect for the native-purchases plugin.
+  Panduan langkah demi langkah untuk membuat langganan yang dapat diperpanjang
+  secara otomatis di App Store Connect untuk plugin pembelian asli.
 sidebar:
   order: 8
 locale: id
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 
-Auto-renewable subscriptions provide recurring access to content, services, or premium features in your iOS app. This guide walks you through creating subscriptions in App Store Connect.
+Langganan yang dapat diperpanjang secara otomatis memberikan akses berulang ke konten, layanan, atau fitur premium di aplikasi iOS Anda. Panduan ini memandu Anda membuat langganan di App Store Connect.
 
-## Overview
+## Ikhtisar
 
-Auto-renewable subscriptions automatically renew at the end of each billing period until users cancel. They're perfect for:
-- Premium content and features
-- Ad-free experiences
-- Cloud storage and sync
-- Streaming services
-- Professional tools and utilities
+Langganan yang dapat diperpanjang secara otomatis diperpanjang secara otomatis pada akhir setiap periode penagihan hingga pengguna membatalkannya. Mereka sempurna untuk:
+- Konten dan fitur premium
+- Pengalaman bebas iklan
+- Penyimpanan dan sinkronisasi cloud
+- Layanan streaming
+- Alat dan utilitas profesional
 
-## Prerequisites
+## Prasyarat
 
-Before creating subscriptions, you must:
-1. [Create a subscription group](/docs/plugins/native-purchases/ios-subscription-group/) to organize your subscriptions
-2. Have an active Apple Developer Program membership
-3. Complete banking and tax information in App Store Connect
+Sebelum membuat langganan, Anda harus:
+1. [Buat grup langganan](/docs/plugins/native-purchases/ios-subscription-group/) untuk mengatur langganan Anda
+2. Memiliki keanggotaan Program Pengembang Apple yang aktif
+3. Informasi perbankan dan perpajakan lengkap di App Store Connect
 
-## Creating a Subscription
+## Membuat Langganan
 
 <Steps>
 
-1. **Navigate to Subscriptions**
+1. **Navigasi ke Langganan**
 
-   In App Store Connect, select your app and go to **Monetize > Subscriptions**.
+   Di App Store Connect, pilih aplikasi Anda dan buka **Monetisasi > Langganan**.
 
-   Select your subscription group or create a new one if needed.
+   Pilih grup langganan Anda atau buat yang baru jika diperlukan.
 
-   ![Navigate to subscriptions](/native-purchases/ios/create-subscription/navigate-to-subscriptions.webp)
+   ![Navigasi ke langganan](/native-purchases/ios/create-subscription/navigate-to-subscriptions.webp)
 
-2. **Create New Subscription**
+2. **Buat Langganan Baru**
 
-   Click the **+** icon next to your subscription group to add a new subscription.
+   Klik ikon **** di samping grup langganan Anda untuk menambahkan langganan baru.
 
-3. **Enter Basic Information**
+3. **Masukkan Informasi Dasar**
 
-   **Reference Name**: Descriptive name for your internal use (not shown to customers)
-   - Examples: "Premium Monthly", "Ultimate Annual", "Basic Plan"
+   **Nama Referensi**: Nama deskriptif untuk penggunaan internal Anda (tidak ditampilkan kepada pelanggan)
+   - Contoh: "Premium Bulanan", "Ultimate Tahunan", "Paket Dasar"
 
-   **Product ID**: Unique identifier for this subscription (cannot be changed later)
+   **ID Produk**: Pengidentifikasi unik untuk langganan ini (tidak dapat diubah nanti)
    - Format: `com.yourcompany.yourapp.premium_monthly`
-   - Use descriptive, lowercase names with underscores
-   - Required for configuring the native-purchases plugin
+   - Gunakan nama deskriptif dengan huruf kecil dengan garis bawah
+   - Diperlukan untuk mengonfigurasi plugin pembelian asli
 
-   ![Enter subscription details](/native-purchases/ios/create-subscription/enter-subscription-info.webp)
+   ![Masukkan detail langganan](/native-purchases/ios/create-subscription/enter-subscription-info.webp)
 
-4. **Configure Duration**
+4. **Konfigurasi Durasi**
 
-   Select the subscription duration from available options:
-   - 1 week
-   - 1 month
-   - 2 months
-   - 3 months
-   - 6 months
-   - 1 year
+   Pilih durasi berlangganan dari opsi yang tersedia:
+   - 1 minggu
+   - 1 bulan
+   - 2 bulan
+   - 3 bulan
+   - 6 bulan
+   - 1 tahun
 
-   The duration determines how often users are billed.
+   Durasi menentukan seberapa sering pengguna ditagih.
 
-5. **Set Up Pricing**
+5. **Siapkan Harga**
 
-   Click **Add Subscription Price** to configure pricing:
+   Klik **Tambahkan Harga Berlangganan** untuk mengonfigurasi harga:
 
-   **Base Territory**: Select your primary market (usually your country)
+   **Wilayah Dasar**: Pilih pasar utama Anda (biasanya negara Anda)
 
-   **Price**: Set the subscription price
-   - Apple automatically converts to other currencies
-   - Choose from Apple's price tiers
-   - Consider perceived value and market rates
+   **Harga**: Tetapkan harga berlangganan
+   - Apple secara otomatis mengkonversi ke mata uang lain
+   - Pilih dari tingkatan harga Apple
+   - Pertimbangkan nilai yang dirasakan dan harga pasar
 
-   ![Configure pricing](/native-purchases/ios/create-subscription/configure-pricing.webp)
+   ![Konfigurasi harga](/native-purchases/ios/create-subscription/configure-pricing.webp)
 
-6. **Family Sharing (Optional)**
+6. **Keluarga Berbagi (Opsional)**
 
-   Decide whether to enable Family Sharing, which allows up to 6 family members to access the subscription.
+   Putuskan apakah akan mengaktifkan Keluarga Berbagi, yang memungkinkan hingga 6 anggota keluarga mengakses langganan.
 
-   :::caution
-   Once Family Sharing is enabled, it cannot be turned off for this product.
+   :::hati-hati
+   Setelah Keluarga Berbagi diaktifkan, fitur ini tidak dapat dinonaktifkan untuk produk ini.
    :::
 
-   **Enable if:**
-   - Content is appropriate for family use
-   - You want to increase value proposition
-   - Your business model supports it
+   **Aktifkan jika:**
+   - Konten sesuai untuk penggunaan keluarga
+   - Anda ingin meningkatkan proposisi nilai
+   - Model bisnis Anda mendukungnya
 
-   **Don't enable if:**
-   - Subscription is for individual use only
-   - Content is personalized to the user
-   - You want to maximize revenue per user
+   **Jangan aktifkan jika:**
+   - Berlangganan hanya untuk penggunaan individu
+   - Konten dipersonalisasi untuk pengguna
+   - Anda ingin memaksimalkan pendapatan per pengguna
 
-7. **Add Localizations**
+7. **Tambahkan Pelokalan**
 
-   Add subscription display information in all languages your app supports:
+   Tambahkan informasi tampilan langganan dalam semua bahasa yang didukung aplikasi Anda:
 
-   **Subscription Display Name**: Customer-facing name (e.g., "Premium Monthly")
+   **Nama Tampilan Langganan**: Nama yang ditujukan kepada pelanggan (misalnya, "Premium Bulanan")
 
-   **Description**: Brief description of what the subscription includes
-   - Keep it concise and benefit-focused
-   - Mention key features
-   - Highlight value proposition
+   **Deskripsi**: Deskripsi singkat tentang apa saja yang termasuk dalam langganan
+   - Jaga agar tetap ringkas dan fokus pada manfaat
+   - Sebutkan fitur-fitur utama
+   - Soroti proposisi nilai
 
-   ![Add localizations](/native-purchases/ios/create-subscription/add-localization.webp)
+   ![Tambahkan pelokalan](/native-purchases/ios/create-subscription/add-localization.webp)8. **App Store Gambar Promosi (Opsional)**
 
-8. **App Store Promotional Image (Optional)**
+   Unggah gambar promosi untuk langganan ini (312x390 piksel):
+   - Ditampilkan di halaman berlangganan App Store
+   - Harus sesuai dengan desain aplikasi Anda
+   - Sertakan nama langganan untuk kejelasan
 
-   Upload a promotional image for this subscription (312x390 pixels):
-   - Shows in the App Store subscription page
-   - Should match your app's design
-   - Include subscription name for clarity
-
-   :::note
-   While images are optional for initial submission, they're required for promotional display in the App Store. You can add them later.
+   :::catatan
+   Meskipun gambar bersifat opsional untuk pengiriman awal, gambar tersebut diperlukan untuk tampilan promosi di App Store. Anda dapat menambahkannya nanti.
    :::
 
-9. **Save and Submit**
+9. **Simpan dan Kirim**
 
-   Click **Save** to create the subscription.
+   Klik **Simpan** untuk membuat langganan.
 
-   **For First Subscription:**
-   - Must be submitted with a new app version
-   - Include in your next App Store submission
-   - Cannot submit independently
+   **Untuk Langganan Pertama:**
+   - Harus dikirimkan dengan versi aplikasi baru
+   - Sertakan dalam kiriman App Store Anda berikutnya
+   - Tidak dapat mengirimkan secara mandiri
 
-   **For Subsequent Subscriptions:**
-   - Can be submitted directly from the Subscriptions page
-   - Don't require a new app version
-   - Available after first subscription is approved
+   **Untuk Langganan Berikutnya:**
+   - Dapat dikirimkan langsung dari halaman Langganan
+   - Tidak memerlukan versi aplikasi baru
+   - Tersedia setelah langganan pertama disetujui
 
 </Steps>
 
-## Subscription Status
+## Status Berlangganan
 
-Your subscription will have one of these statuses:
+Langganan Anda akan memiliki salah satu status berikut:
 
-| Status | Description | Can Test? |
+| Status | Deskripsi | Bisakah Menguji? |
 |--------|-------------|-----------|
-| **Missing Metadata** | Incomplete setup | Yes (sandbox) |
-| **Ready to Submit** | Complete but not submitted | Yes (sandbox) |
-| **Waiting for Review** | Submitted to Apple | Yes (sandbox) |
-| **In Review** | Being reviewed by Apple | Yes (sandbox) |
-| **Approved** | Available for purchase | Yes |
-| **Rejected** | Needs changes | Yes (sandbox) |
+| **Metadata Tidak Ada** | Penyiapan tidak lengkap | Ya (kotak pasir) |
+| **Siap Kirim** | Lengkap tapi belum diserahkan | Ya (kotak pasir) |
+| **Menunggu Review** | Dikirim ke Apple | Ya (kotak pasir) |
+| **Sedang Ditinjau** | Sedang ditinjau oleh Apple | Ya (kotak pasir) |
+| **Disetujui** | Tersedia untuk dibeli | Ya |
+| **Ditolak** | Perlu perubahan | Ya (kotak pasir) |
 
 :::tip
-You can test subscriptions in sandbox mode even if they show "Missing Metadata" or "Ready to Submit"!
+Anda dapat menguji langganan dalam mode kotak pasir meskipun langganan tersebut menampilkan "Metadata Tidak Ada" atau "Siap Dikirim"!
 :::
 
-## Using in Your App
+## Menggunakan di Aplikasi Anda
 
-Once created, reference the subscription in your app using the product ID:
+Setelah dibuat, rujuk langganan di aplikasi Anda menggunakan ID produk:
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -212,41 +209,41 @@ if (premium?.isActive) {
 }
 ```
 
-## Best Practices
+## Praktik Terbaik
 
-### Pricing Strategy
-- **Monthly plans**: Lower barrier to entry, builds habit
-- **Annual plans**: Better value, higher LTV, lower churn
-- **Multiple tiers**: Basic, Premium, Ultimate for different user segments
-- **Competitive analysis**: Research similar apps' pricing
+### Strategi Penetapan Harga
+- **Paket bulanan**: Menurunkan hambatan masuk, membangun kebiasaan
+- **Paket tahunan**: Nilai lebih baik, LTV lebih tinggi, churn lebih rendah
+- **Beberapa tingkatan**: Basic, Premium, Ultimate untuk segmen pengguna yang berbeda
+- **Analisis kompetitif**: Teliti harga aplikasi serupa
 
-### Product IDs
-- Use consistent naming: `company.app.tier_duration`
-- Include tier and duration in ID: `premium_monthly`, `ultimate_annual`
-- Avoid changing product IDs (they're permanent)
-- Document all product IDs for your team
+### ID Produk
+- Gunakan penamaan yang konsisten: `company.app.tier_duration`
+- Sertakan tingkatan dan durasi dalam ID: `premium_monthly`, `ultimate_annual`
+- Hindari mengubah ID produk (bersifat permanen)
+- Dokumentasikan semua ID produk untuk tim Anda
 
-### Family Sharing
-- Enable for family-oriented apps (games, educational, entertainment)
-- Consider impact on revenue
-- Test sharing behavior thoroughly
-- Communicate sharing capability in marketing
+### Keluarga Berbagi
+- Aktifkan untuk aplikasi berorientasi keluarga (permainan, pendidikan, hiburan)
+- Pertimbangkan dampaknya terhadap pendapatan
+- Uji perilaku berbagi secara menyeluruh
+- Mengkomunikasikan kemampuan berbagi dalam pemasaran
 
-### Localization
-- Translate all subscription names and descriptions
-- Consider regional pricing differences
-- Test display in all supported languages
-- Use culturally appropriate marketing language
+### Lokalisasi
+- Terjemahkan semua nama dan deskripsi langganan
+- Pertimbangkan perbedaan harga regional
+- Uji tampilan dalam semua bahasa yang didukung
+- Gunakan bahasa pemasaran yang sesuai dengan budaya
 
-### Promotional Images
-- Maintain consistent visual style
-- Include subscription name and key benefit
-- Update for seasonal promotions
-- Match app's overall design language
+### Gambar Promosi
+- Pertahankan gaya visual yang konsisten
+- Sertakan nama langganan dan manfaat utama
+- Pembaruan untuk promosi musiman
+- Cocokkan bahasa desain aplikasi secara keseluruhan
 
-## Common Subscription Patterns
+## Pola Berlangganan Umum
 
-### Single Tier (Freemium)
+### Tingkat Tunggal (Gratis)
 ```
 Free App + Premium Subscription
 - Basic: Free (limited features)
@@ -254,7 +251,7 @@ Free App + Premium Subscription
 - Premium Annual: $39.99 (save 33%)
 ```
 
-### Multi-Tier (Good, Better, Best)
+### Multi-Tingkat (Baik, Lebih Baik, Terbaik)
 ```
 - Basic Monthly: $4.99
 - Premium Monthly: $9.99
@@ -265,50 +262,48 @@ Free App + Premium Subscription
 - Ultimate Annual: $199.99
 ```
 
-### Consumable + Subscription Hybrid
+### Konsumsi + Hibrid Berlangganan
 ```
 - Credit packs (consumable)
 - Monthly subscription (unlimited credits)
 - Annual subscription (unlimited + bonus features)
 ```
 
-## Troubleshooting
+## Pemecahan masalah
 
-**Subscription not loading in app:**
-- Verify product ID matches exactly (case-sensitive)
-- Check subscription is in subscription group
-- Ensure bundle identifier matches App Store Connect
-- Wait 2-3 hours after creating product
+**Langganan tidak dimuat di aplikasi:**
+- Verifikasi ID produk sama persis (peka huruf besar-kecil)
+- Periksa langganan ada di grup berlangganan
+- Pastikan pengidentifikasi bundel cocok dengan App Store Connect
+- Tunggu 2-3 jam setelah membuat produk**Tidak dapat mengirimkan langganan:**
+- Lengkapi semua bidang yang wajib diisi (nama, deskripsi, harga)
+- Tambahkan setidaknya satu lokalisasi
+- Verifikasi info perbankan/pajak disetujui
+- Periksa apakah langganan pertama (memerlukan versi aplikasi)
 
-**Cannot submit subscription:**
-- Complete all required fields (name, description, price)
-- Add at least one localization
-- Verify banking/tax info is approved
-- Check if first subscription (requires app version)
+**Tombol Berbagi Keluarga dinonaktifkan:**
+- Sudah diaktifkan (tidak dapat dinonaktifkan)
+- Periksa detail berlangganan
+- Hubungi Dukungan Apple jika macet
 
-**Family Sharing toggle disabled:**
-- Already enabled (cannot be disabled)
-- Check in subscription details
-- Contact Apple Support if stuck
+**Tingkat harga tidak tersedia:**
+- Mungkin dibatasi di beberapa wilayah
+- Pilih tingkat alternatif
+- Hubungi Apple untuk pertanyaan harga
 
-**Price tier not available:**
-- May be restricted in some territories
-- Choose alternative tier
-- Contact Apple for pricing questions
+**Kesalahan "ID Produk Tidak Valid":**
+- Harus dalam format domain terbalik
+- Tidak boleh mengandung spasi atau karakter khusus
+- Periksa kesalahan ketik
+- Verifikasi keunikan di semua produk
 
-**"Invalid Product ID" error:**
-- Must be reverse domain format
-- Cannot contain spaces or special characters
-- Check for typos
-- Verify uniqueness across all products
+## Langkah Selanjutnya
 
-## Next Steps
+- [Buat penawaran perkenalan](/docs/plugins/native-purchases/ios-introductory-offer/) untuk menarik pelanggan baru
+- [Konfigurasi pengujian sandbox](/docs/plugins/native-purchases/ios-sandbox-testing/) untuk menguji langganan Anda
+- Siapkan penawaran promosi untuk win-back dan retensi
+- Menerapkan pelacakan analitik berlangganan
 
-- [Create an introductory offer](/docs/plugins/native-purchases/ios-introductory-offer/) to attract new subscribers
-- [Configure sandbox testing](/docs/plugins/native-purchases/ios-sandbox-testing/) to test your subscriptions
-- Set up promotional offers for win-back and retention
-- Implement subscription analytics tracking
+## Sumber Daya Tambahan
 
-## Additional Resources
-
-For more details, refer to the [official Apple documentation on auto-renewable subscriptions](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers).
+Untuk detail selengkapnya, lihat [dokumentasi resmi Apple tentang langganan yang dapat diperpanjang secara otomatis](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers).

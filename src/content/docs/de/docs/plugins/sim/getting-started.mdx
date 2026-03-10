@@ -1,30 +1,29 @@
 ---
-title: Getting Started
+title: Erste Schritte
 description: >-
-  Retrieve SIM card details and handle runtime permissions with the Capgo SIM
-  plugin.
+  Rufen Sie SIM-Kartendetails ab und verwalten Sie Laufzeitberechtigungen mit
+  dem SIM-Plugin Capgo.
 sidebar:
   order: 2
 locale: de
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the plugin**
+1. **Installieren Sie das Plugin**
    <PackageManagers pkg="@capgo/capacitor-sim" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync platforms**
+2. **Plattformen synchronisieren**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Permissions
+## Berechtigungen
 
-- **Android**: Ensure `android.permission.READ_PHONE_STATE` (and on Android 13+, `READ_BASIC_PHONE_STATE`) is granted. Capacitor includes the manifest declarations, but you must request the permission before calling `getSimCards`.
-- **iOS**: Carrier information is available automatically; the platform does not prompt for additional permissions. Be mindful of the limited data returned on iOS 16.4+ due to OS restrictions.
+- **Android**: Stellen Sie sicher, dass `android.permission.READ_PHONE_STATE` (und bei Android 13+, `READ_BASIC_PHONE_STATE`) gewährt wird. Capacitor enthält die Manifest-Deklarationen, aber Sie müssen die Erlaubnis anfordern, bevor Sie `getSimCards` aufrufen.
+- **iOS**: Anbieterinformationen sind automatisch verfügbar; Die Plattform fordert nicht zur Eingabe zusätzlicher Berechtigungen auf. Beachten Sie die begrenzten Daten, die aufgrund von Betriebssystemeinschränkungen auf iOS 16.4+ zurückgegeben werden.
 
-## Request runtime access (Android)
+## Laufzeitzugriff anfordern (Android)
 
 ```typescript
 import { Sim } from '@capgo/capacitor-sim';
@@ -38,7 +37,7 @@ if (status.readSimCard !== 'granted') {
 }
 ```
 
-## Read SIM cards
+## SIM-Karten lesen
 
 ```typescript
 const { simCards } = await Sim.getSimCards();
@@ -54,8 +53,8 @@ simCards.forEach((card, index) => {
 });
 ```
 
-## Platform considerations
+## Überlegungen zur Plattform
 
-- **Dual SIM devices**: Iterate through the returned array; each entry corresponds to a slot. When present, `subscriptionId` helps you interact with Android's telephony APIs.
-- **iOS 16.4+**: Apple redacts several carrier attributes. Expect placeholder values (`--`, `65535`) and plan fallbacks in your UI.
-- **Web**: The plugin resolves with empty data because browsers cannot access SIM information.
+- **Dual-SIM-Geräte**: Durchlaufen Sie das zurückgegebene Array; Jeder Eintrag entspricht einem Slot. Wenn vorhanden, hilft Ihnen `subscriptionId` bei der Interaktion mit den Telefonie-APIs von Android.
+- **iOS 16.4+**: Apple schwärzt mehrere Trägerattribute. Erwarten Sie Platzhalterwerte (`--`, `65535`) und planen Sie Fallbacks in Ihrer Benutzeroberfläche.
+- **Web**: Das Plugin wird mit leeren Daten aufgelöst, da Browser nicht auf SIM-Informationen zugreifen können.

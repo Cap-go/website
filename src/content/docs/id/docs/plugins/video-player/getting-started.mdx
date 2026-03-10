@@ -1,23 +1,24 @@
 ---
-title: Getting Started
-description: Learn how to integrate native video playback in your Capacitor app.
+title: Memulai
+description: >-
+  Pelajari cara mengintegrasikan pemutaran video asli di aplikasi Capacitor
+  Anda.
 sidebar:
   order: 2
 locale: id
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Instal paket**
    <PackageManagers pkg="@capgo/capacitor-video-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Sinkronisasi dengan proyek asli**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Basic Usage
+## Penggunaan Dasar
 
 ```typescript
 import { CapacitorVideoPlayer } from '@capgo/capacitor-video-player';
@@ -57,11 +58,11 @@ await CapacitorVideoPlayer.setVolume({
 });
 ```
 
-## API Reference
+## API Referensi
 
-### initPlayer(options)
+### initPlayer (pilihan)
 
-Initialize a video player instance.
+Inisialisasi instance pemutar video.
 
 ```typescript
 await CapacitorVideoPlayer.initPlayer({
@@ -78,42 +79,42 @@ await CapacitorVideoPlayer.initPlayer({
 });
 ```
 
-### play(options)
+### bermain (pilihan)
 
-Play the video.
+Putar videonya.
 
 ```typescript
 await CapacitorVideoPlayer.play({ playerId: 'player1' });
 ```
 
-### pause(options)
+### jeda (pilihan)
 
-Pause the video.
+Jeda videonya.
 
 ```typescript
 await CapacitorVideoPlayer.pause({ playerId: 'player1' });
 ```
 
-### getDuration(options)
+### dapatkanDurasi(pilihan)
 
-Get video duration in seconds.
+Dapatkan durasi video dalam hitungan detik.
 
 ```typescript
 const { value } = await CapacitorVideoPlayer.getDuration({ playerId: 'player1' });
 console.log('Duration:', value, 'seconds');
 ```
 
-### getCurrentTime(options)
+### dapatkanWaktu Saat Ini(pilihan)
 
-Get current playback position in seconds.
+Dapatkan posisi pemutaran saat ini dalam hitungan detik.
 
 ```typescript
 const { value } = await CapacitorVideoPlayer.getCurrentTime({ playerId: 'player1' });
 ```
 
-### setCurrentTime(options)
+### setWaktu Saat Ini(pilihan)
 
-Seek to a specific time.
+Carilah waktu tertentu.
 
 ```typescript
 await CapacitorVideoPlayer.setCurrentTime({
@@ -122,9 +123,9 @@ await CapacitorVideoPlayer.setCurrentTime({
 });
 ```
 
-### setVolume(options)
+### setVolume(pilihan)
 
-Set volume (0.0 to 1.0).
+Atur volume (0,0 hingga 1,0).
 
 ```typescript
 await CapacitorVideoPlayer.setVolume({
@@ -133,17 +134,17 @@ await CapacitorVideoPlayer.setVolume({
 });
 ```
 
-### getVolume(options)
+### dapatkanVolume(pilihan)
 
-Get current volume.
+Dapatkan volume saat ini.
 
 ```typescript
 const { value } = await CapacitorVideoPlayer.getVolume({ playerId: 'player1' });
 ```
 
-### setMuted(options)
+### setMuted (pilihan)
 
-Mute or unmute the video.
+Bisukan atau suarakan video.
 
 ```typescript
 await CapacitorVideoPlayer.setMuted({
@@ -152,9 +153,9 @@ await CapacitorVideoPlayer.setMuted({
 });
 ```
 
-### setRate(options)
+### setRate(pilihan)
 
-Set playback speed.
+Atur kecepatan pemutaran.
 
 ```typescript
 await CapacitorVideoPlayer.setRate({
@@ -163,23 +164,23 @@ await CapacitorVideoPlayer.setRate({
 });
 ```
 
-### stopAllPlayers()
+### hentikanSemua Pemain()
 
-Stop all active players.
+Hentikan semua pemain aktif.
 
 ```typescript
 await CapacitorVideoPlayer.stopAllPlayers();
 ```
 
-### exitPlayer()
+### keluarPemain()
 
-Exit the video player.
+Keluar dari pemutar video.
 
 ```typescript
 await CapacitorVideoPlayer.exitPlayer();
 ```
 
-## Complete Example
+## Contoh Lengkap
 
 ```typescript
 import { CapacitorVideoPlayer } from '@capgo/capacitor-video-player';
@@ -274,29 +275,29 @@ export class VideoPlayerService {
 }
 ```
 
-## Platform Notes
+## Catatan Platform
 
 ### iOS
-- Requires iOS 10.0+
-- Uses native AVPlayer
-- Supports Picture-in-Picture
-- Background playback supported
+- Membutuhkan iOS 10.0+
+- Menggunakan AVPlayer asli
+- Mendukung Gambar-dalam-Gambar
+- Pemutaran latar belakang didukung
 
 ### Android
-- Requires Android 5.0 (API 21)+
-- Uses ExoPlayer
-- Supports Chromecast
-- Custom accent colors available
+- Membutuhkan Android 5.0 (API 21)+
+- Menggunakan ExoPlayer
+- Mendukung Chromecast
+- Warna aksen khusus tersedia
 
 ### Web
-- Uses HTML5 video player
-- Embedded mode only
-- Limited native features
+- Menggunakan pemutar video HTML5
+- Hanya mode tertanam
+- Fitur asli terbatas
 
-## Best Practices
+## Praktik Terbaik
 
-1. **Clean up players**: Always stop players when done
-2. **Handle errors**: Wrap player calls in try-catch
-3. **Unique player IDs**: Use unique IDs for multiple players
-4. **Check playback status**: Verify state before operations
-5. **Resource management**: Release players to free memory
+1. **Bersihkan pemain**: Selalu hentikan pemain setelah selesai
+2. **Menangani kesalahan**: Menggabungkan panggilan pemain dalam try-catch
+3. **ID pemain unik**: Gunakan ID unik untuk beberapa pemain
+4. **Periksa status pemutaran**: Verifikasi status sebelum pengoperasian
+5. **Manajemen sumber daya**: Lepaskan pemain untuk mengosongkan memori

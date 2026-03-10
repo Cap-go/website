@@ -1,25 +1,24 @@
 ---
-title: Getting Started with Share Target
-description: Learn how to make your app receive shared content from other apps
+title: Memulai dengan Target Berbagi
+description: Pelajari cara membuat aplikasi Anda menerima konten bersama dari aplikasi lain
 locale: id
 ---
+Panduan ini akan memandu Anda dalam mengintegrasikan plugin Capacitor Share Target untuk memungkinkan aplikasi Anda menerima konten bersama dari aplikasi lain.
 
-This guide will walk you through integrating the Capacitor Share Target plugin to enable your app to receive shared content from other applications.
+## Instalasi
 
-## Installation
-
-Install the plugin using npm:
+Instal plugin menggunakan npm:
 
 ```bash
 npm install @capgo/capacitor-share-target
 npx cap sync
 ```
 
-## Android Configuration
+## Android Konfigurasi
 
-Add intent filters to your `AndroidManifest.xml` inside the `<activity>` tag:
+Tambahkan filter maksud ke `AndroidManifest.xml` Anda di dalam tag `<activity>`:
 
-### Accept Text Content
+### Terima Konten Teks
 
 ```xml
 <intent-filter>
@@ -29,7 +28,7 @@ Add intent filters to your `AndroidManifest.xml` inside the `<activity>` tag:
 </intent-filter>
 ```
 
-### Accept Images
+### Terima Gambar
 
 ```xml
 <intent-filter>
@@ -45,7 +44,7 @@ Add intent filters to your `AndroidManifest.xml` inside the `<activity>` tag:
 </intent-filter>
 ```
 
-### Accept All Content Types
+### Terima Semua Jenis Konten
 
 ```xml
 <intent-filter>
@@ -61,40 +60,40 @@ Add intent filters to your `AndroidManifest.xml` inside the `<activity>` tag:
 </intent-filter>
 ```
 
-## iOS Configuration
+## iOS Konfigurasi
 
-For iOS, you need to create a Share Extension:
+Untuk iOS, Anda perlu membuat Ekstensi Berbagi:
 
-### 1. Create Share Extension in Xcode
+### 1. Buat Ekstensi Berbagi di Xcode
 
-1. Open your project in Xcode
-2. Go to **File > New > Target**
-3. Select **Share Extension** and click **Next**
-4. Name it (e.g., "ShareExtension") and click **Finish**
-5. If prompted, activate the scheme
+1. Buka proyek Anda di Xcode
+2. Buka **File > Baru > Target**
+3. Pilih **Bagikan Ekstensi** dan klik **Berikutnya**
+4. Beri nama (misalnya, "ShareExtension") dan klik **Selesai**
+5. Jika diminta, aktifkan skema tersebut
 
-### 2. Configure App Group
+### 2. Konfigurasikan Grup Aplikasi
 
-1. In your main app target, go to **Signing & Capabilities**
-2. Click **+ Capability** and add **App Groups**
-3. Create or select an app group (e.g., `group.com.yourcompany.yourapp`)
-4. Repeat for the Share Extension target
+1. Di target aplikasi utama Anda, buka **Penandatanganan & Kemampuan**
+2. Klik **+ Kapabilitas** dan tambahkan **Grup Aplikasi**
+3. Buat atau pilih grup aplikasi (mis., `group.com.yourcompany.yourapp`)
+4. Ulangi untuk target Share Extension
 
-### 3. Update Share Extension Code
+### 3. Perbarui Kode Ekstensi Berbagi
 
-The Share Extension needs to save shared data to the app group container so your main app can access it.
+Ekstensi Berbagi perlu menyimpan data bersama ke wadah grup aplikasi sehingga aplikasi utama Anda dapat mengaksesnya.
 
-For detailed iOS setup, see [Apple's Share Extension documentation](https://developer.apple.com/documentation/uikit/uiactivityviewcontroller).
+Untuk detail penyiapan iOS, lihat [dokumentasi Ekstensi Berbagi Apple](https://developer.apple.com/documentation/uikit/uiactivityviewcontroller).
 
-## Basic Usage
+## Penggunaan Dasar
 
-### Import the Plugin
+### Impor Plugin
 
 ```typescript
 import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
 ```
 
-### Listen for Shared Content
+### Dengarkan Konten yang Dibagikan
 
 ```typescript
 CapacitorShareTarget.addListener('shareReceived', (event) => {
@@ -113,9 +112,9 @@ CapacitorShareTarget.addListener('shareReceived', (event) => {
 });
 ```
 
-## Complete Example
+## Contoh Lengkap
 
-Here's a comprehensive example handling different types of shared content:
+Berikut adalah contoh komprehensif yang menangani berbagai jenis konten bersama:
 
 ```typescript
 import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
@@ -271,7 +270,7 @@ shareTarget.initialize();
 // shareTarget.cleanup();
 ```
 
-## React Integration
+## Integrasi Reaksi
 
 ```typescript
 import { useEffect } from 'react';
@@ -298,7 +297,7 @@ function App() {
 }
 ```
 
-## Vue Integration
+## Integrasi Vue
 
 ```typescript
 import { onMounted, onUnmounted } from 'vue';
@@ -324,9 +323,9 @@ export default {
 };
 ```
 
-## Handling Different Content Types
+## Menangani Berbagai Jenis Konten
 
-### URLs
+### URL
 
 ```typescript
 if (event.texts && event.texts.length > 0) {
@@ -339,7 +338,7 @@ if (event.texts && event.texts.length > 0) {
 }
 ```
 
-### Images
+### Gambar
 
 ```typescript
 if (event.files) {
@@ -357,7 +356,7 @@ if (event.files) {
 }
 ```
 
-### Multiple Files
+### Banyak File
 
 ```typescript
 if (event.files && event.files.length > 1) {
@@ -372,29 +371,29 @@ if (event.files && event.files.length > 1) {
 }
 ```
 
-## Best Practices
+## Praktik Terbaik
 
-1. **Handle Multiple Content Types**: Be prepared to receive text, URLs, and files
-2. **Validate Content**: Check MIME types before processing
-3. **Provide Feedback**: Show users what was received
-4. **Handle Errors**: File URIs might be invalid or inaccessible
-5. **Clean Up Listeners**: Remove listeners when not needed
-6. **Test Thoroughly**: Test with different apps and content types
-7. **Request Permissions**: Some file types may require additional permissions
+1. **Menangani Berbagai Jenis Konten**: Bersiaplah untuk menerima teks, URL, dan file
+2. **Validasi Konten**: Periksa jenis MIME sebelum diproses
+3. **Berikan Masukan**: Menampilkan kepada pengguna apa yang telah diterima
+4. **Menangani Kesalahan**: URI file mungkin tidak valid atau tidak dapat diakses
+5. **Bersihkan Pendengar**: Hapus pendengar bila tidak diperlukan
+6. **Uji Secara Menyeluruh**: Uji dengan berbagai aplikasi dan jenis konten
+7. **Permintaan Izin**: Beberapa jenis file mungkin memerlukan izin tambahan
 
-## Common Issues
+## Masalah Umum
 
-### Share Not Working on Android
+### Berbagi Tidak Berfungsi di Android
 
-Ensure intent filters are correctly configured in `AndroidManifest.xml` within the `<activity>` tag that has `android.intent.action.MAIN`.
+Pastikan filter maksud dikonfigurasi dengan benar di `AndroidManifest.xml` dalam tag `<activity>` yang memiliki `android.intent.action.MAIN`.
 
-### iOS Share Extension Not Appearing
+### iOS Ekstensi Berbagi Tidak Muncul
 
-1. Verify App Group is configured in both targets
-2. Ensure Share Extension is activated
-3. Check that Info.plist in Share Extension has correct configuration
+1. Verifikasi Grup Aplikasi dikonfigurasi di kedua target
+2. Pastikan Ekstensi Berbagi diaktifkan
+3. Periksa apakah Info.plist di Share Extension memiliki konfigurasi yang benar
 
-### File Access Errors
+### Kesalahan Akses File
 
 ```typescript
 try {
@@ -407,8 +406,8 @@ try {
 }
 ```
 
-## Next Steps
+## Langkah Selanjutnya
 
-- Explore the [API Reference](https://github.com/Cap-go/capacitor-share-target#api) for complete method documentation
-- Check out the [example app](https://github.com/Cap-go/capacitor-share-target/tree/main/example) for advanced usage
-- See the [tutorial](/plugins/capacitor-share-target) for complete implementation examples
+- Jelajahi [Referensi API](https://github.com/Cap-go/capacitor-share-target#api) untuk dokumentasi metode lengkap
+- Lihat [aplikasi contoh](https://github.com/Cap-go/capacitor-share-target/tree/main/example) untuk penggunaan lanjutan
+- Lihat [tutorial](/plugins/capacitor-share-target) untuk contoh implementasi selengkapnya

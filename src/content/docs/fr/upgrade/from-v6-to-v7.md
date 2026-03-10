@@ -1,16 +1,20 @@
 ---
-locale: fr
-title: "From V6 to V7"
-description: "A detailed Guide on transitioning from Version 6 to Version 7 of Capgo updater, outlining the necessary steps and considerations for a successful Mise à niveau process, ensuring compatibility with the latest Capacitor Fonctionnalités and improvements."
+title: Du V6 au V7
+description: >-
+  Un guide détaillé sur la transition de la version 6 à la version 7 du
+  programme de mise à jour Capgo, décrivant les étapes et considérations
+  nécessaires pour un processus de mise à niveau réussi, garantissant la
+  compatibilité avec les dernières fonctionnalités et améliorations de
+  Capacitor.
 sidebar:
   order: 2
+locale: fr
 ---
+## Pourquoi cette mise à jour
 
-## Why this Mise à niveau
+Cette version majeure est là pour suivre la version majeure de Capacitor
 
-This major Version is here to follow Capacitor major Version
-
-First follow the Migration Guide of Capacitor:
+Suivez d’abord le guide de migration de Capacitor :
 
 [https://capacitorjs.com/docs/updating/7-0](https://capacitorjs.com/docs/updating/7-0/)
 
@@ -22,22 +26,20 @@ First follow the Migration Guide of Capacitor:
 
 `npx cap sync`
 
-That it ! Pretty easy !
+C'est ça ! Assez facile !
 
-## Chiffrement Migration
+## Migration du chiffrement
 
-If you're using the `key-v1` encryption method, you'll need to migrate to the new encryption system as `key-v1` is no longer supported in V7. [[memory:96112]]
+Si vous utilisez la méthode de chiffrement `key-v1`, vous devrez migrer vers le nouveau système de chiffrement car `key-v1` n'est plus pris en charge dans la V7. [[mémoire :96112]]
 
-Follow the Chiffrement Migration Guide here: [Chiffrement Migration Guide](/docs/CLI/migrations/Chiffrement/)
+Suivez le guide de migration du chiffrement ici : [Guide de migration du chiffrement](/docs/cli/migrations/encryption/)
 
-## Configuration Changes
+## Modifications de configuration
 
-We recommend adding the following properties in your `capacitor.config` file:
+Nous vous recommandons d'ajouter les propriétés suivantes dans votre fichier `capacitor.config` :
 - `capacitorUpdater`
 - `appId`
 - `version`
 - `autoUpdate`
 
-These Paramètres should Aide managed better the plugin's and it's behaviors.
-
-
+Ces paramètres devraient aider à mieux gérer le plugin et ses comportements.

@@ -1,40 +1,39 @@
 ---
-title: "Getting Started with Accelerometer"
-description: "Learn how to integrate accelerometer sensing into your Capacitor app"
+title: Primeros pasos con el acelerómetro
+description: Aprenda cómo integrar la detección del acelerómetro en su aplicación Capacitor
 locale: es
 ---
+Esta guía lo guiará a través de la integración del complemento Acelerómetro Capacitor en su aplicación.
 
-This guide will walk you through integrating the Capacitor Accelerometer plugin into your application.
+## Instalación
 
-## Installation
-
-Install the plugin using npm:
+Instale el complemento usando npm:
 
 ```bash
 npm install @capgo/capacitor-accelerometer
 npx cap sync
 ```
 
-## Platform Configuration
+## Configuración de la plataforma
 
 ### iOS
-No additional configuration required. The accelerometer is always available.
+No se requiere configuración adicional. El acelerómetro siempre está disponible.
 
 ### Android
-No additional configuration required. The accelerometer is always available.
+No se requiere configuración adicional. El acelerómetro siempre está disponible.
 
 ### Web
-The plugin uses the DeviceMotion API. Requires HTTPS in production.
+El complemento utiliza DeviceMotion API. Requiere HTTPS en producción.
 
-## Basic Usage
+## Uso básico
 
-### Import the Plugin
+### Importar el complemento
 
 ```typescript
 import { Accelerometer } from '@capgo/capacitor-accelerometer';
 ```
 
-### Start Monitoring
+### Iniciar monitoreo
 
 ```typescript
 const startAccelerometer = async () => {
@@ -46,7 +45,7 @@ const startAccelerometer = async () => {
 };
 ```
 
-### Listen to Acceleration Events
+### Escuche los eventos de aceleración
 
 ```typescript
 Accelerometer.addListener('accelerationChange', (data) => {
@@ -57,7 +56,7 @@ Accelerometer.addListener('accelerationChange', (data) => {
 });
 ```
 
-### Get Current Reading
+### Obtener lectura actual
 
 ```typescript
 const getCurrentAcceleration = async () => {
@@ -66,7 +65,7 @@ const getCurrentAcceleration = async () => {
 };
 ```
 
-### Stop Monitoring
+### Dejar de monitorear
 
 ```typescript
 const stopAccelerometer = async () => {
@@ -75,9 +74,9 @@ const stopAccelerometer = async () => {
 };
 ```
 
-## Complete Example
+## Ejemplo completo
 
-Here's a complete example with shake detection:
+Aquí hay un ejemplo completo con detección de sacudidas:
 
 ```typescript
 import { Accelerometer } from '@capgo/capacitor-accelerometer';
@@ -154,24 +153,24 @@ accelService.initialize();
 // accelService.cleanup();
 ```
 
-## Understanding Readings
+## Comprender las lecturas
 
-### Acceleration Axes
-- **X-axis**: Left (-) to Right (+)
-- **Y-axis**: Bottom (-) to Top (+)
-- **Z-axis**: Back (-) to Front (+)
+### Ejes de aceleración
+- **Eje X**: de izquierda (-) a derecha (+)
+- **Eje Y**: de abajo (-) a arriba (+)
+- **Eje Z**: De atrás (-) a Frente (+)
 
-### Gravity
-- Device at rest shows ~9.8 m/s² on one axis (gravity)
-- Moving device shows acceleration in addition to gravity
+### Gravedad
+- El dispositivo en reposo muestra ~9,8 m/s² en un eje (gravedad)
+- El dispositivo en movimiento muestra aceleración además de gravedad.
 
-### Units
-- Measured in meters per second squared (m/s²)
-- Gravity = 9.8 m/s²
+### Unidades
+- Medido en metros por segundo al cuadrado (m/s²)
+- Gravedad = 9,8 m/s²
 
-## Common Use Cases
+## Casos de uso comunes
 
-### Shake Detection
+### Detección de sacudidas
 
 ```typescript
 class ShakeDetector {
@@ -201,7 +200,7 @@ class ShakeDetector {
 }
 ```
 
-### Tilt Detection
+### Detección de inclinación
 
 ```typescript
 class TiltDetector {
@@ -222,7 +221,7 @@ class TiltDetector {
 }
 ```
 
-### Step Counter
+### Contador de pasos
 
 ```typescript
 class StepCounter {
@@ -244,21 +243,21 @@ class StepCounter {
 }
 ```
 
-## Best Practices
+## Mejores prácticas
 
-1. **Choose Appropriate Intervals**: Balance responsiveness and battery life
-   - Gaming: 16-50ms
-   - Fitness: 100-200ms
-   - General: 200-500ms
+1. **Elija intervalos adecuados**: equilibre la capacidad de respuesta y la duración de la batería
+   - Juegos: 16-50 ms
+   - Condición física: 100-200 ms
+   - Generales: 200-500 ms
 
-2. **Remove Listeners**: Always clean up when done
-3. **Filter Noise**: Use moving averages for smoother data
-4. **Consider Battery**: High-frequency polling drains battery
-5. **Test on Real Devices**: Simulators don't provide accurate data
+2. **Eliminar oyentes**: limpie siempre cuando haya terminado
+3. **Filtrar ruido**: utilice promedios móviles para obtener datos más fluidos
+4. **Considere la batería**: el sondeo de alta frecuencia agota la batería
+5. **Prueba en dispositivos reales**: los simuladores no proporcionan datos precisos
 
-## Performance Tips
+## Consejos de rendimiento
 
-### Debouncing
+### Antirrebote
 
 ```typescript
 class AccelerometerDebouncer {
@@ -273,7 +272,7 @@ class AccelerometerDebouncer {
 }
 ```
 
-### Data Smoothing
+### Suavizado de datos
 
 ```typescript
 class AccelerometerFilter {
@@ -296,8 +295,8 @@ class AccelerometerFilter {
 }
 ```
 
-## Next Steps
+## Próximos pasos
 
-- Explore the [API Reference](https://github.com/Cap-go/capacitor-accelerometer#api) for complete method documentation
-- Check out the [example app](https://github.com/Cap-go/capacitor-accelerometer/tree/main/example) for advanced usage
-- See the [tutorial](/plugins/capacitor-accelerometer) for complete implementation examples
+- Explore la [Referencia API](https://github.com/Cap-go/capacitor-accelerometer#api) para obtener documentación completa del método
+- Consulte la [aplicación de ejemplo](https://github.com/Cap-go/capacitor-accelerometer/tree/main/example) para un uso avanzado
+- Consulte el [tutorial](/plugins/capacitor-accelerometer) para ver ejemplos completos de implementación.

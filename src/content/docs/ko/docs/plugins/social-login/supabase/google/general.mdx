@@ -1,76 +1,74 @@
 ---
-title: Supabase Google Login - General Setup
-description: >-
-  Learn how to set up Google Sign-In with Supabase Authentication using the
-  Capacitor Social Login plugin.
+title: Supabase Google 로그인 - 일반 설정
+description: Capacitor 소셜 로그인 플러그인을 사용하여 Supabase 인증으로 Google 로그인을 설정하는 방법을 알아보세요.
 sidebar:
   order: 1
 locale: ko
 ---
 import { Steps } from '@astrojs/starlight/components';
 
-## Introduction
+## 소개
 
-This guide will walk you through integrating Google Sign-In with Supabase Authentication using the Capacitor Social Login plugin. This setup allows you to use native Google Sign-In on mobile platforms while leveraging Supabase Auth for backend authentication.
+이 가이드는 Capacitor 소셜 로그인 플러그인을 사용하여 Google 로그인과 Supabase 인증을 통합하는 과정을 안내합니다. 이 설정을 사용하면 백엔드 인증을 위해 Supabase 인증을 활용하면서 모바일 플랫폼에서 기본 Google 로그인을 사용할 수 있습니다.
 
-## Prerequisites
+## 전제조건
 
-Before starting, ensure you have:
+시작하기 전에 다음 사항을 확인하세요.
 
-1. [Created a Supabase project](https://database.new/)
-2. Read the [Google Login General Setup](/docs/plugins/social-login/google/general/) guide to setup Google OAuth credentials
-3. Followed the respective platform-specific guides to setup Google OAuth credentials for your target platform:
-    - [Android Setup](/docs/plugins/social-login/google/android/)
-    - [iOS Setup](/docs/plugins/social-login/google/ios/)
-    - [Web Setup](/docs/plugins/social-login/google/web/)
+1. [Supabase 프로젝트 생성](https://database.new/)
+2. Google OAuth 자격 증명 설정에 대한 [Google 로그인 일반 설정](/docs/plugins/social-login/google/general/) 가이드를 읽어보세요.
+3. 해당 플랫폼별 가이드에 따라 대상 플랫폼에 대한 Google OAuth 자격 증명을 설정했습니다.
+    - [Android 설정](/docs/plugins/social-login/google/android/)
+    - [iOS 설정](/docs/plugins/social-login/google/ios/)
+    - [웹 설정](/docs/plugins/social-login/google/web/)
 
-    :::note
-        Before starting the Supabase tutorial, you need to generate the client IDs for the platforms you plan to use.
-        You will use them in step 7 of this guide.
+    :::참고
+        Supabase 튜토리얼을 시작하기 전에 사용하려는 플랫폼에 대한 클라이언트 ID를 생성해야 합니다.
+        이 가이드의 7단계에서 이를 사용하게 됩니다.
     :::
 
-## Enabling Google OAuth provider in Supabase
+## Supabase에서 Google OAuth 공급자 활성화
 
 <Steps>
-1. Go to your [Supabase Dashboard](https://app.supabase.com/)
-2. Click on your project
-    <img src="/social-login-assets/supabase_project_select.webp" alt="Supabase Project Selector" />
-3. Do go to the `Authentication` menu
-    <img src="/social-login-assets/supabase_authentication_menu.webp" alt="Supabase Authentication Menu" />
-4. Click on the `Providers` tab
-    <img src="/social-login-assets/supabase_providers_tab.webp" alt="Supabase Providers Tab" />
-5. Find the `Google` provider
-    <img src="/social-login-assets/supabase_google_provider.webp" alt="Supabase Google Provider" />
-6. Enable the provider
-    <img src="/social-login-assets/supabase_google_provider_enable.webp" alt="Supabase Google Provider Enable" />
-7. Add the client IDs for the platforms you plan to use
-    <img src="/social-login-assets/supabase_google_provider_add_client_ids.webp" alt="Supabase Google Provider Add Client IDs" />
+1. [Supabase 대시보드](https://app.supabase.com/)로 이동합니다.
+2. 프로젝트를 클릭하세요
+    <img src="/social-login-assets/supabase_project_select.webp" alt="Supabase 프로젝트 선택기" />
+3. `Authentication` 메뉴로 이동하세요.
+    <img src="/social-login-assets/supabase_authentication_menu.webp" alt="Supabase 인증 메뉴" />
+4. `Providers` 탭을 클릭하세요.
+    <img src="/social-login-assets/supabase_providers_tab.webp" alt="Supabase 공급자 탭" />
+5. `Google` 공급자 찾기
+    <img src="/social-login-assets/supabase_google_provider.webp" alt="Supabase Google 제공자" />
+6. 공급자 활성화
+    <img src="/social-login-assets/supabase_google_provider_enable.webp" alt="Supabase Google 공급자 활성화" />
+7. 사용하려는 플랫폼의 클라이언트 ID를 추가하세요.
+    <img src="/social-login-assets/supabase_google_provider_add_client_ids.webp" alt="Supabase Google 공급자 클라이언트 ID 추가" />
 
-    :::note
-        This included the web client ID, the iOS client ID and the Android client ID. You can skip providing some of them, depending on the platforms you plan to use.
+    :::참고
+        여기에는 웹 클라이언트 ID, iOS 클라이언트 ID 및 Android 클라이언트 ID가 포함됩니다. 사용하려는 플랫폼에 따라 일부 제공을 건너뛸 수 있습니다.
     :::
-8. Click on the `Save` button
-    <img src="/social-login-assets/supabase_google_provider_save.webp" alt="Supabase Google Provider Save" />
+8. `Save` 버튼을 클릭하세요.
+    <img src="/social-login-assets/supabase_google_provider_save.webp" alt="Supabase Google 공급자 저장" />
 
 </Steps>
 
 :::note
-You __**SHOULD NOT**__ setup `Client Secret (for OAuth)` or `Callback URL (for OAuth)`. Some sources might also suggest setting `Skip nonce checks` for Google on iOS, but with this guide this isn't needed.
+__**해서는 안 됩니다**__ `Client Secret (for OAuth)` 또는 `Callback URL (for OAuth)`을 설정하세요. 일부 소스에서는 iOS의 Google에 대해 `nonce 검사 건너뛰기` 설정을 제안할 수도 있지만 이 가이드에서는 이것이 필요하지 않습니다.
 :::
 
-Voilà, you have now enabled Google Sign-In with Supabase Authentication 🎉
+짜잔, 이제 Google Supabase 인증으로 로그인이 활성화되었습니다 🎉
 
-## How Google Sign-In with Supabase Authentication Helper Works
+## Google Supabase 인증 도우미를 사용한 로그인 작동 방식
 
-This section explains how the Google Sign-In integration with Supabase works under the hood. Understanding this flow will help you implement and troubleshoot the authentication process.
+이 섹션에서는 Google 로그인 통합이 Supabase과 어떻게 작동하는지 설명합니다. 이 흐름을 이해하면 인증 프로세스를 구현하고 문제를 해결하는 데 도움이 됩니다.
 
-:::tip[Complete Implementation]
-The complete implementation is available in the [example app's `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) file.
+:::tip[완전한 형태]
+전체 구현은 [예제 앱의 `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) 파일에서 확인할 수 있습니다.
 :::
 
-### 1. Nonce Generation
+### 1. 논스 생성
 
-The implementation generates a secure nonce pair following the [Supabase nonce requirements](https://react-native-google-signin.github.io/docs/security#usage-with-supabase):
+구현에서는 [Supabase nonce 요구 사항](https://react-native-google-signin.github.io/docs/security#usage-with-supabase)에 따라 보안 nonce 쌍을 생성합니다.
 
 ```typescript
 // Generate URL-safe random nonce
@@ -97,17 +95,15 @@ async function getNonce(): Promise<{ rawNonce: string; nonceDigest: string }> {
 }
 ```
 
-**Flow:**
-- `rawNonce`: URL-safe random string (64 hex characters)
-- `nonceDigest`: SHA-256 hash of `rawNonce` (hex-encoded)
-- `nonceDigest` is passed to Google Sign-In → Google includes the nonce digest in the ID token
-- `rawNonce` is passed to Supabase → Supabase hashes the raw nonce and compares with the token's nonce
+**흐름:**
+- `rawNonce`: URL 안전 임의 문자열(64자리 16진수)
+- `nonceDigest`: `rawNonce`의 SHA-256 해시(16진수 인코딩)
+- `nonceDigest`은 Google 로그인으로 전달됩니다. → Google은 ID 토큰에 nonce 다이제스트를 포함합니다.
+- `rawNonce`는 Supabase로 전달됩니다. → Supabase는 원시 nonce를 해시하고 토큰의 nonce와 비교합니다.
 
-### 2. Google Sign-In
+### 2. Google 로그인
 
-The function initializes the plugin and signs in with Google:
-
-```typescript
+이 함수는 플러그인을 초기화하고 Google을 사용하여 로그인합니다.```typescript
 await SocialLogin.initialize({
   google: {
     webClientId: 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
@@ -126,9 +122,9 @@ const response = await SocialLogin.login({
 });
 ```
 
-### 3. JWT Validation
+### 3. JWT 유효성 검사
 
-Before sending the token to Supabase, the implementation validates the JWT token:
+토큰을 Supabase로 보내기 전에 구현에서는 JWT 토큰의 유효성을 검사합니다.
 
 ```typescript
 function validateJWTToken(idToken: string, expectedNonceDigest: string): { valid: boolean; error?: string } {
@@ -150,26 +146,26 @@ function validateJWTToken(idToken: string, expectedNonceDigest: string): { valid
 }
 ```
 
-**Why validate before Supabase?**
+**Supabase 전에 검증해야 하는 이유는 무엇입니까?**
 
-Validating the JWT token before sending the token to Supabase serves several important purposes:
+Supabase에 토큰을 보내기 전에 JWT 토큰을 검증하는 것은 몇 가지 중요한 목적을 제공합니다.
 
-1. **Prevent Invalid Requests**: If the token has an incorrect audience or nonce mismatch, Supabase will reject the token anyway. Validating first avoids unnecessary API calls and provides clearer error messages.
+1. **잘못된 요청 방지**: 토큰에 잘못된 대상이 있거나 nonce 불일치가 있는 경우 Supabase은 어쨌든 토큰을 거부합니다. 먼저 검증하면 불필요한 API 호출을 방지하고 더 명확한 오류 메시지를 제공합니다.
 
-2. **Token Caching Issues**: On some platforms (especially iOS), Google Sign-In SDK can cache tokens for performance. When a cached token is returned, the cached token may have been generated with a different nonce (or no nonce at all), causing Supabase to reject the token with a "nonce mismatch" error. By validating before sending to Supabase, we can detect this issue early and automatically retry with a fresh token.
+2. **토큰 캐싱 문제**: 일부 플랫폼(특히 iOS)에서는 Google 로그인 SDK이 성능을 위해 토큰을 캐시할 수 있습니다. 캐시된 토큰이 반환되면 캐시된 토큰이 다른 nonce로 생성되었을 수 있습니다(또는 nonce가 전혀 없음). 이로 인해 Supabase에서 "nonce 불일치" 오류와 함께 토큰을 거부하게 됩니다. Supabase로 보내기 전에 확인함으로써 이 문제를 조기에 감지하고 새로운 토큰으로 자동으로 재시도할 수 있습니다.
 
-3. **Security** (iOS): On iOS, validation ensures the token was issued for your specific Google Client IDs, preventing potential security issues from using tokens intended for other applications.
+3. **보안**(iOS): iOS에서 유효성 검사를 통해 특정 Google 클라이언트 ID에 대해 토큰이 발급되었는지 확인하여 잠재적인 보안 문제가 다른 애플리케이션용 토큰을 사용하는 것을 방지합니다.
 
-4. **Better Error Handling**: Detecting issues before Supabase allows for automatic retry logic, which is essential for handling iOS caching issues transparently.
+4. **더 나은 오류 처리**: Supabase 이전에 문제를 감지하면 iOS 캐싱 문제를 투명하게 처리하는 데 필수적인 자동 재시도 논리가 허용됩니다.
 
-If validation fails, the function automatically:
-1. Logs out from Google (clears cached tokens - critical on iOS)
-2. Retries authentication once (forces fresh token generation with correct nonce)
-3. If retry also fails, returns an error
+유효성 검사에 실패하면 함수는 자동으로 다음을 수행합니다.
+1. Google에서 로그아웃합니다(캐시된 토큰 지우기 - iOS에서 중요).
+2. 인증을 한 번 재시도합니다(올바른 nonce로 새로운 토큰 생성을 강제합니다).
+3. 재시도도 실패하면 오류를 반환합니다.
 
-### 4. Supabase Sign-In
+### 4. Supabase 로그인
 
-Finally, the validated token is sent to Supabase:
+마지막으로 검증된 토큰이 Supabase로 전송됩니다.
 
 ```typescript
 const { data, error } = await supabase.auth.signInWithIdToken({
@@ -179,26 +175,26 @@ const { data, error } = await supabase.auth.signInWithIdToken({
 });
 ```
 
-## Complete Code Reference
+## 전체 코드 참조
 
-The complete implementation is available in the [example app's `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) file, which includes:
+전체 구현은 다음을 포함하는 [예제 앱의 `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) 파일에서 사용할 수 있습니다.
 
-- `getUrlSafeNonce()` - Generates URL-safe random nonce
-- `sha256Hash()` - Hashes string with SHA-256
-- `getNonce()` - Generates nonce pair
-- `decodeJWT()` - Decodes JWT token
-- `validateJWTToken()` - Validates JWT audience and nonce
-- `authenticateWithGoogleSupabase()` - Main authentication function with automatic retry
+- `getUrlSafeNonce()` - URL 안전 임의 논스를 생성합니다.
+- `sha256Hash()` - SHA-256을 사용하여 문자열을 해시합니다.
+- `getNonce()` - nonce 쌍을 생성합니다.
+- `decodeJWT()` - JWT 토큰을 디코딩합니다.
+- `validateJWTToken()` - JWT 대상 및 nonce를 검증합니다.
+- `authenticateWithGoogleSupabase()` - 자동 재시도를 통한 기본 인증 기능
 
-### Additional Example Files
+### 추가 예제 파일
 
-- [SupabasePage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabasePage.tsx) - Example component with redirect handling (Web)
-- [SupabaseCreateAccountPage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabaseCreateAccountPage.tsx) - Example create account page
+- [SupabasePage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabasePage.tsx) - 리디렉션 처리가 포함된 구성 요소 예(웹)
+- [SupabaseCreateAccountPage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabaseCreateAccountPage.tsx) - 계정 생성 페이지 예시
 
-## Next Steps
+## 다음 단계
 
-Please proceed to the platform-specific setup guide for your target platform:
+대상 플랫폼에 대한 플랫폼별 설정 가이드를 진행하세요.
 
-- [Android Setup](../android/)
-- [iOS Setup](../ios/)
-- [Web Setup](../web/)
+- [Android 설정](../android/)
+- [iOS 설정](../ios/)
+- [웹 설정](../web/)

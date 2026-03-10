@@ -1,33 +1,32 @@
 ---
-locale: fr
 title: Commencer
-description: Wire up the Natif Mux Player SDK inside your Capacitor Application.
-sidebar: 
+description: Connectez le Mux Player natif SDK dans votre application Capacitor.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Installer the plugin**
+1. **Installez le plugin**
    <PackageManagers pkg="@capgo/capacitor-mux-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser Natif projects**
+2. **Synchroniser les projets natifs**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## iOS preparation
+## iOS préparation
 
-1. Open the Xcode workspace under `ios/App/`.
-2. Add the Swift package `https://github.com/muxinc/mux-player-swift` to your app target so the `MuxPlayerSwift` module is available.
-3. Ensure the Déploiement target is **iOS 15+** and rebuild.
+1. Ouvrez l'espace de travail Xcode sous `ios/App/`.
+2. Ajoutez le package Swift `https://github.com/muxinc/mux-player-swift` à la cible de votre application afin que le module `MuxPlayerSwift` soit disponible.
+3. Assurez-vous que la cible de déploiement est **iOS 15+** et reconstruisez.
 
-## Android preparation
+## Android préparation
 
-The Gradle module ships with the correct repositories and dependencies. If you use a custom corporate proxy, allow requests to `https://muxinc.jfrog.io/artifactory/default-maven-release-local`.
+Le module Gradle est livré avec les référentiels et dépendances appropriés. Si vous utilisez un proxy d'entreprise personnalisé, autorisez les requêtes adressées à `https://muxinc.jfrog.io/artifactory/default-maven-release-local`.
 
-## Launch the player
+## Lancez le lecteur
 
 ```typescript
 import { MuxPlayer } from '@capgo/capacitor-mux-player';
@@ -41,7 +40,7 @@ await MuxPlayer.play({
 });
 ```
 
-## Listen to player events
+## Écoutez les événements des joueurs
 
 ```typescript
 const readyHandle = await MuxPlayer.addListener('ready', ({ playerName }) => {
@@ -60,7 +59,7 @@ const dismissPlayer = async () => {
 };
 ```
 
-## Token-based playback
+## Lecture basée sur des jetons
 
 ```typescript
 await MuxPlayer.play({
@@ -72,7 +71,7 @@ await MuxPlayer.play({
 });
 ```
 
-## React to player lifecycle
+## Réagissez au cycle de vie du joueur
 
 ```typescript
 const { active } = await MuxPlayer.isActive();
@@ -84,8 +83,8 @@ if (active) {
 await MuxPlayer.removeAllListeners();
 ```
 
-## Tips
+## Conseils
 
-- Generate signed playback and DRM tokens on your backend using the Mux signing keys.
-- Pass a `playerName` to separate analytics when running multiple players in your app.
-- Combine with `enableSmartCache` to improve offline resilience on supported platforms.
+- Générez des jetons de lecture et DRM signés sur votre backend à l'aide des clés de signature Mux.
+- Transmettez un `playerName` pour séparer les analyses lors de l'exécution de plusieurs lecteurs dans votre application.
+- Combinez avec `enableSmartCache` pour améliorer la résilience hors ligne sur les plateformes prises en charge.

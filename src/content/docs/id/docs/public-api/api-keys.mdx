@@ -1,70 +1,95 @@
 ---
-title: API Keys
+title: API Kunci
 description: >-
-  Comprehensive documentation for API Keys endpoint, detailing authentication,
-  permissions, and management within Capgo API
+  Dokumentasi komprehensif untuk API Titik akhir kunci, merinci autentikasi,
+  izin, dan pengelolaan dalam Capgo API
 sidebar:
   order: 9
 locale: id
 ---
+Kunci API digunakan untuk mengautentikasi permintaan ke Capgo API. Setiap kunci dapat memiliki izin (mode) berbeda untuk mengontrol tingkat akses. Kunci bersifat khusus untuk organisasi dan harus dikelola dengan hati-hati karena memberikan akses ke sumber daya Capgo Anda.
 
-API keys are used to authenticate requests to the Capgo API. Each key can have different permissions (modes) to control access levels. Keys are organization-specific and should be managed carefully as they grant access to your Capgo resources.
+## Mode Kunci
 
-## Key Modes
+- **baca**: Hanya dapat membaca data, tidak diperbolehkan adanya modifikasi
+- **unggah**: Dapat membaca, memodifikasi, dan mengunggah bundel baru
+- **tulis**: Dapat membaca, mengubah data, dan mengunggah bundel
+- **semua**: Akses penuh ke semua operasi
 
-- **read**: Can only read data, no modifications allowed
-- **upload**: Can read, modify, and upload new bundles
-- **write**: Can read, modify data, and upload bundles
-- **all**: Full access to all operations
+Mode utama mengikuti skema bertahap/bertahap. Jika Anda memiliki kunci unggah, lalu Anda membuat kunci tulis, kunci tulis tersebut akan mampu melakukan segala sesuatu yang dapat dilakukan oleh kunci unggah.
+Silakan lihat diagram berikut untuk lebih memahami cara kerja kunci API.
 
-Key modes follow a stepped/gradual schema. If you have an upload key, and then you create a write key, the write key will be able to do everything that the upload key could.
-Please take a look at the following diagram to better understand how API keys work.
+<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="Diagram yang menjelaskan cara kerja kunci API" /><figcaption></figcaption></figure>
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="A diagram explaining how API key work" /><figcaption></figcaption></figure>
+## Subkunci dengan Hak Terbatas
 
-## Subkeys with Limited Rights
+Anda dapat membuat subkunci dengan akses terbatas pada aplikasi atau organisasi tertentu. Hal ini berguna untuk membatasi akses ke sumber daya tertentu sambil tetap mengizinkan pengoperasian pada sumber daya lain. Gunakan parameter `limited_to_apps` dan `limited_to_orgs` saat membuat kunci untuk menentukan batasan ini.
 
-You can create subkeys with limited access to specific apps or organizations. This is useful for restricting access to certain resources while still allowing operations on others. Use the `limited_to_apps` and `limited_to_orgs` parameters when creating a key to define these restrictions.
+## Kunci Terenkripsi
 
-## Security Best Practices
+Anda dapat membuat **kunci API terenkripsi (hash)** untuk meningkatkan keamanan. Saat membuat kunci terenkripsi:
 
-1. **Principle of Least Privilege**: Always use the most restrictive mode that still allows your integration to function
-2. **Regular Rotation**: Rotate your API keys periodically
-3. **Secure Storage**: Store API keys securely and never commit them to version control
-4. **Monitoring**: Monitor API key usage and revoke any compromised keys immediately
-5. **Limited Subkeys**: Use subkeys with limited rights for specific integrations to minimize risk
+- Kuncinya di-hash menggunakan SHA-256 sebelum disimpan dalam database
+- **Kunci biasa dikembalikan hanya sekali** dalam respons pembuatan - segera simpan
+- Kunci tidak dapat diambil atau dilihat lagi setelah dibuat
+- Jika Anda kehilangan kunci terenkripsi, Anda harus membuat yang baru
 
-## Endpoints
+Gunakan parameter `hashed: true` saat membuat kunci untuk mengaktifkan enkripsi. Ini adalah pendekatan yang direkomendasikan untuk lingkungan produksi.
 
-### GET
+## Kedaluwarsa Kunci
+
+Kunci API dapat memiliki **tanggal kedaluwarsa** untuk membatasi jangka waktu paparan jika kunci disusupi. Kapan tanggal kedaluwarsa ditetapkan:
+
+- Kunci berhenti bekerja setelah tanggal dan waktu yang ditentukan
+- Permintaan menggunakan kunci kadaluwarsa akan ditolak karena kesalahan
+- Kunci yang kedaluwarsa secara otomatis dibersihkan setelah 30 hari
+
+Organisasi dapat menerapkan kebijakan kedaluwarsa:
+- **Memerlukan masa berlaku habis**: Semua kunci API harus memiliki tanggal masa berlaku
+- **Periode kedaluwarsa maksimum**: Membatasi seberapa jauh tanggal kedaluwarsa dapat ditetapkan di masa mendatang
+
+## Praktik Terbaik Keamanan
+
+1. **Prinsip Hak Istimewa Terkecil**: Selalu gunakan mode paling ketat yang masih memungkinkan integrasi Anda berfungsi
+2. **Gunakan Kunci Terenkripsi**: Buat kunci hash untuk produksi guna melindungi dari pelanggaran basis data
+3. **Tetapkan Tanggal Kedaluwarsa**: Gunakan tanggal kedaluwarsa untuk membatasi masa pakai kunci Anda
+4. **Rotasi Reguler**: Putar kunci API Anda secara berkala
+5. **Penyimpanan Aman**: Simpan kunci API dengan aman dan jangan pernah memasukkannya ke kontrol versi
+6. **Pemantauan**: Pantau penggunaan kunci API dan segera cabut kunci apa pun yang disusupi
+7. **Subkunci Terbatas**: Gunakan subkunci dengan hak terbatas untuk integrasi tertentu guna meminimalkan risiko
+
+## Titik akhir
+
+### DAPATKAN
 
 `https://api.capgo.app/apikey/`
 
-Retrieve all API keys associated with your account.
+Ambil semua kunci API yang terkait dengan akun Anda.
 
-#### Response Type
+#### Jenis Respons
 
 ```typescript
 interface ApiKey {
   created_at: string | null
   id: number
-  key: string
+  key: string | null  // null for encrypted keys
   mode: 'read' | 'write' | 'upload' | 'all'
   name: string
   updated_at: string | null
   user_id: string
   limited_to_apps?: string[]
   limited_to_orgs?: string[]
+  expires_at?: string | null  // ISO 8601 date, null means never expires
 }
-```
+```> **Catatan**: Untuk kunci terenkripsi, kolom `key` akan menjadi `null` dalam respons GET karena kunci biasa hanya ditampilkan satu kali selama pembuatan.
 
-#### Example Request
+#### Contoh Permintaan
 
 ```bash
 curl -H "authorization: your-api-key" https://api.capgo.app/apikey/
 ```
 
-#### Example Response
+#### Contoh Respon
 
 ```json
 {
@@ -92,13 +117,13 @@ curl -H "authorization: your-api-key" https://api.capgo.app/apikey/
 }
 ```
 
-### POST
+### POSTINGAN
 
 `https://api.capgo.app/apikey/`
 
-Create a new API key for a specific organization.
+Buat kunci API baru untuk organisasi tertentu.
 
-#### Query Parameters
+#### Isi Permintaan
 
 ```typescript
 interface ApiKeyCreate {
@@ -106,10 +131,12 @@ interface ApiKeyCreate {
   mode: 'read' | 'write' | 'upload' | 'all'
   limited_to_apps?: string[]
   limited_to_orgs?: string[]
+  hashed?: boolean       // Create an encrypted key (recommended for production)
+  expires_at?: string    // ISO 8601 date for key expiration
 }
 ```
 
-#### Example Request
+#### Contoh Permintaan (Kunci Standar)
 
 ```bash
 curl -X POST \
@@ -123,7 +150,22 @@ curl -X POST \
   https://api.capgo.app/apikey/
 ```
 
-#### Example Response
+#### Contoh Permintaan (Kunci Terenkripsi dengan Kedaluwarsa)
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Secure CI Key",
+    "mode": "upload",
+    "hashed": true,
+    "expires_at": "2025-06-01T00:00:00Z"
+  }' \
+  https://api.capgo.app/apikey/
+```
+
+#### Contoh Respon (Kunci Standar)
 
 ```json
 {
@@ -139,22 +181,40 @@ curl -X POST \
 }
 ```
 
-### DELETE
+#### Contoh Respons (Kunci Terenkripsi)
+
+```json
+{
+  "apikey": {
+    "id": 4,
+    "key": "ak_abc123...",
+    "mode": "upload",
+    "name": "Secure CI Key",
+    "created_at": "2024-02-12T00:00:00Z",
+    "user_id": "user_123",
+    "expires_at": "2025-06-01T00:00:00Z"
+  }
+}
+```
+
+> **Penting**: Untuk kunci terenkripsi, nilai `key` dalam respons ini adalah **satu-satunya** saat Anda akan melihat kunci biasa. Simpan segera di lokasi yang aman. Permintaan GET berikutnya akan mengembalikan `null` untuk bidang `key`.
+
+### HAPUS
 
 `https://api.capgo.app/apikey/:id/`
 
-Delete an existing API key. Use this to revoke access immediately.
+Hapus kunci API yang ada. Gunakan ini untuk segera mencabut akses.
 
-#### Parameters
-- `id`: The ID of the API key to delete (numeric identifier, not the key string itself)
+#### Parameter
+- `id`: ID kunci API yang akan dihapus (pengidentifikasi numerik, bukan string kunci itu sendiri)
 
-#### Example Request
+#### Contoh Permintaan
 
 ```bash
 curl -X DELETE -H "authorization: your-api-key" https://api.capgo.app/apikey/1/
 ```
 
-#### Success Response
+#### Respon Sukses
 
 ```json
 {
@@ -162,17 +222,17 @@ curl -X DELETE -H "authorization: your-api-key" https://api.capgo.app/apikey/1/
 }
 ```
 
-## Common Use Cases
+## Kasus Penggunaan Umum
 
-1. **CI/CD Integration**: Create read-only keys for CI pipelines to check deployment status
-2. **Deployment Automation**: Use upload mode keys for automated deployment scripts
-3. **Monitoring Tools**: Use read mode keys for external monitoring integrations
-4. **Admin Access**: Use all mode keys sparingly for administrative tools
-5. **Limited Access**: Create subkeys with limited rights to specific apps or organizations for third-party integrations
+1. **Integrasi CI/CD**: Membuat kunci hanya-baca untuk pipeline CI guna memeriksa status penerapan
+2. **Otomasi Penerapan**: Gunakan kunci mode unggah untuk skrip penerapan otomatis
+3. **Alat Pemantauan**: Gunakan tombol mode baca untuk integrasi pemantauan eksternal
+4. **Akses Admin**: Gunakan semua tombol mode secukupnya untuk alat administratif
+5. **Akses Terbatas**: Membuat subkunci dengan hak terbatas pada aplikasi atau organisasi tertentu untuk integrasi pihak ketiga
 
-## Error Handling
+## Penanganan Kesalahan
 
-Common error scenarios and their responses:
+Skenario kesalahan umum dan tanggapannya:
 
 ```json
 // Invalid mode
@@ -192,4 +252,28 @@ Common error scenarios and their responses:
   "error": "Insufficient permissions to manage API keys",
   "status": "KO"
 }
-``` 
+
+// Expired API key used for authentication
+{
+  "error": "API key has expired",
+  "status": "KO"
+}
+
+// Invalid expiration date (in the past)
+{
+  "error": "Expiration date must be in the future",
+  "status": "KO"
+}
+
+// Organization requires expiration
+{
+  "error": "Organization policy requires an expiration date for API keys",
+  "status": "KO"
+}
+
+// Expiration exceeds organization limit
+{
+  "error": "Expiration date exceeds organization maximum of 90 days",
+  "status": "KO"
+}
+```

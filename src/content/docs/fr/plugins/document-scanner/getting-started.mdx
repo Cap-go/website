@@ -1,23 +1,24 @@
 ---
-locale: fr
 title: Commencer
-description: Ajouter Natif-quality document scanning with edge detection and adjustable output formats.
-sidebar: 
+description: >-
+  Ajoutez une numérisation de documents de qualité native avec détection des
+  contours et formats de sortie réglables.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Installer the plugin**
+1. **Installez le plugin**
    <PackageManagers pkg="@capgo/capacitor-document-scanner" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser Natif platforms**
+2. **Synchroniser les plateformes natives**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Trigger a scan
+## Déclencher une analyse
 
 ```typescript
 import {
@@ -40,7 +41,7 @@ if (result.status === ScanDocumentResponseStatus.Success) {
 }
 ```
 
-## Return base64 data
+## Renvoie les données base64
 
 ```typescript
 const result = await DocumentScanner.scanDocument({
@@ -54,8 +55,8 @@ if (firstPage) {
 }
 ```
 
-## Platform requirements
+## Exigences de la plate-forme
 
-- **iOS**: Add `NSCameraUsageDescription` to `ios/App/App/Info.plist` explaining how you use the camera.
-- **Android**: Confirm that `CAMERA` permission is declared (Capacitor adds it automatically) and adjust `croppedImageQuality`, `letUserAdjustCrop`, and `maxNumDocuments` to match your UI.
-- **Storage**: When using `ResponseType.ImageFilePath`, move or copy the scanned files to your desired storage location before the app session ends.
+- **iOS** : ajoutez `NSCameraUsageDescription` à `ios/App/App/Info.plist` pour expliquer comment vous utilisez la caméra.
+- **Android** : confirmez que l'autorisation `CAMERA` est déclarée (Capacitor l'ajoute automatiquement) et ajustez `croppedImageQuality`, `letUserAdjustCrop` et `maxNumDocuments` pour correspondre à votre interface utilisateur.
+- **Stockage** : lorsque vous utilisez `ResponseType.ImageFilePath`, déplacez ou copiez les fichiers numérisés vers l'emplacement de stockage souhaité avant la fin de la session de l'application.

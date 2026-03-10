@@ -1,26 +1,27 @@
 ---
-locale: fr
 title: Commencer
-description: Learn how to Installer and use the Background Uploader plugin for reliable file uploads in your Capacitor Application.
-sidebar: 
+description: >-
+  Découvrez comment installer et utiliser le plug-in Background Uploader pour
+  des téléchargements de fichiers fiables dans votre application Capacitor.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Installer the package**
+1. **Installez le package**
    <PackageManagers pkg="@capgo/capacitor-uploader" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser with Natif projects**
+2. **Synchronisation avec les projets natifs**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure permissions**
+3. **Configurer les autorisations**
    
    ### iOS
-   Add background modes to your `Info.plist`:
+   Ajoutez des modes d'arrière-plan à votre `Info.plist` :
    ```xml
    <key>UIBackgroundModes</key>
    <array>
@@ -29,7 +30,7 @@ import { PackageManagers } from 'starlight-package-managers'
    ```
    
    ### Android
-   Add permissions to your `AndroidManifest.xml`:
+   Ajoutez des autorisations à votre `AndroidManifest.xml` :
    ```xml
    <uses-permission android:name="android.permission.INTERNET" />
    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -39,7 +40,7 @@ import { PackageManagers } from 'starlight-package-managers'
 
 ## Utilisation
 
-Importer the plugin and use its methods to Télécharger files:
+Importez le plugin et utilisez ses méthodes pour télécharger des fichiers :
 
 ```typescript
 import { Uploader } from '@capgo/capacitor-uploader';
@@ -97,9 +98,9 @@ const getActiveUploads = async () => {
 
 ## API Référence
 
-### startUpload(Options)
+### startUpload(options)
 
-Starts a Nouveau file Télécharger.
+Démarre un nouveau téléchargement de fichier.
 
 ```typescript
 interface UploadOptions {
@@ -115,9 +116,9 @@ interface UploadOptions {
 }
 ```
 
-### cancelUpload(Options)
+### annuler le téléchargement (options)
 
-Cancels an ongoing Télécharger.
+Annule un téléchargement en cours.
 
 ```typescript
 interface CancelOptions {
@@ -125,13 +126,13 @@ interface CancelOptions {
 }
 ```
 
-### getUploads()
+###getUploads()
 
-Retourne all Actif uploads.
+Renvoie tous les téléchargements actifs.
 
-### removeUpload(Options)
+### Supprimer le téléchargement (options)
 
-Removes an Télécharger from the queue.
+Supprime un téléchargement de la file d'attente.
 
 ```typescript
 interface RemoveOptions {
@@ -139,11 +140,11 @@ interface RemoveOptions {
 }
 ```
 
-## Events
+## Événements
 
-### events
+### événements
 
-All upload events are delivered through a single `events` listener. The event contains a `name` field to identify the type:
+Tous les événements de téléchargement sont diffusés via un seul écouteur `events`. L'événement contient un champ `name` pour identifier le type :
 
 ```typescript
 Uploader.addListener('events', (event: UploadEvent) => {
@@ -169,14 +170,14 @@ Uploader.addListener('events', (event: UploadEvent) => {
 });
 ```
 
-**Event Types:**
-- `uploading` - Progress update with `percent` and `id`
-- `completed` - Upload finished with `id` and `statusCode`
-- `failed` - Upload failed with `id` and `error` message
+**Types d'événements :**
+- `uploading` - Mise à jour des progrès avec `percent` et `id`
+- `completed` - Téléchargement terminé avec `id` et `statusCode`
+- `failed` - Échec du téléchargement avec les messages `id` et `error`
 
-## Advanced Fonctionnalités
+## Fonctionnalités avancées
 
-### Multipart Form Télécharger
+### Téléchargement de formulaire en plusieurs parties
 
 ```typescript
 const uploadWithFormData = async () => {
@@ -195,7 +196,7 @@ const uploadWithFormData = async () => {
 };
 ```
 
-### Binary Télécharger
+### Téléchargement binaire
 
 ```typescript
 const uploadBinary = async () => {
@@ -210,7 +211,7 @@ const uploadBinary = async () => {
 };
 ```
 
-### Network-Aware Uploading
+### Téléchargement compatible réseau
 
 ```typescript
 import { Network } from '@capacitor/network';
@@ -228,9 +229,9 @@ const smartUpload = async () => {
 };
 ```
 
-## Best Practices
+## meilleures pratiques
 
-1. **Handle all event types**
+1. **Gérer tous les types d'événements**
    ```typescript
    const setupUploadHandlers = () => {
      Uploader.addListener('events', (event) => {
@@ -249,7 +250,7 @@ const smartUpload = async () => {
    };
    ```
 
-2. **Clean up listeners**
+2. **Nettoyer les auditeurs**
    ```typescript
    // Add listener
    const listener = await Uploader.addListener('events', handleEvent);
@@ -258,7 +259,7 @@ const smartUpload = async () => {
    listener.remove();
    ```
 
-3. **Retry Échoué uploads**
+3. **Réessayez les téléchargements ayant échoué**
    ```typescript
    const retryUpload = async (filePath: string, serverUrl: string) => {
      try {
@@ -273,7 +274,7 @@ const smartUpload = async () => {
    };
    ```
 
-4. **Show Télécharger notifications**
+4. **Afficher les notifications de téléchargement**
    ```typescript
    await Uploader.startUpload({
      filePath: 'file:///path/to/file',
@@ -283,14 +284,14 @@ const smartUpload = async () => {
    });
    ```
 
-## Platform Notes
+## Remarques sur la plate-forme
 
 ### iOS
-- Uses `URLSession` for background uploads
-- Requires background processing capability
-- Uploads continue when Application is suspended
+- Utilise `URLSession` pour les téléchargements en arrière-plan
+- Nécessite une capacité de traitement en arrière-plan
+- Les téléchargements continuent lorsque l'application est suspendue
 
 ### Android
-- Uses `WorkManager` for reliable uploads
-- Shows foreground service notification during uploads
-- Respects battery optimization Paramètres
+- Utilise `WorkManager` pour des téléchargements fiables
+- Affiche la notification du service de premier plan lors des téléchargements
+- Respecte les paramètres d'optimisation de la batterie

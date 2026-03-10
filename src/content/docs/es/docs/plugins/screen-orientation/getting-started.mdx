@@ -1,31 +1,30 @@
 ---
-title: Getting Started
-description: Learn how to install and use the Screen Orientation plugin to control and detect device orientation in your Capacitor app.
+title: Empezando
+description: ''
 sidebar:
   order: 2
 locale: es
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps, Aside } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Instalar el paquete**
    <PackageManagers pkg="@capgo/capacitor-screen-orientation" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Sincronización con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **iOS Configuration (optional)**
-   To detect physical device orientation using motion sensors on iOS, add to your `Info.plist`:
+3. **iOS Configuración (opcional)**
+   Para detectar la orientación física del dispositivo usando sensores de movimiento en iOS, agregue a su `Info.plist`:
    ```xml
    <key>NSMotionUsageDescription</key>
    <string>This app uses motion sensors to detect device orientation.</string>
    ```
 </Steps>
 
-## Basic Usage
+## Uso básico
 
 ```typescript
 import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
@@ -49,12 +48,12 @@ const listener = await ScreenOrientation.addListener(
 );
 ```
 
-## Physical Orientation Detection
+## Detección de orientación física
 
-This plugin has a unique feature: it can detect the **true physical orientation** of the device using motion sensors, even when the user has enabled orientation lock on their device.
+Este complemento tiene una característica única: puede detectar la **verdadera orientación física** del dispositivo mediante sensores de movimiento, incluso cuando el usuario ha habilitado el bloqueo de orientación en su dispositivo.
 
 <Aside type="note">
-  The UI will still respect the user's orientation lock setting. Motion tracking allows you to know how the device is physically held, but the UI won't rotate if orientation lock is enabled.
+  La interfaz de usuario seguirá respetando la configuración de bloqueo de orientación del usuario. El seguimiento de movimiento le permite saber cómo se sostiene físicamente el dispositivo, pero la interfaz de usuario no girará si el bloqueo de orientación está habilitado.
 </Aside>
 
 ```typescript
@@ -85,26 +84,26 @@ if (lockStatus.locked) {
 await ScreenOrientation.stopOrientationTracking();
 ```
 
-## API Reference
+## API Referencia
 
-### orientation()
+### orientación()
 
-Get the current screen orientation.
+Obtenga la orientación actual de la pantalla.
 
 ```typescript
 const result = await ScreenOrientation.orientation();
 // Returns: { type: OrientationType }
 ```
 
-**OrientationType values:**
-- `'portrait-primary'` - Portrait, home button at bottom
-- `'portrait-secondary'` - Portrait, upside down
+**Valores de tipo de orientación:**
+- `'retrato-primario'` - Retrato, botón de inicio en la parte inferior
+- ``retrato-secundario'' - Retrato, al revés
 - `'landscape-primary'` - Landscape, home button on right
 - `'landscape-secondary'` - Landscape, home button on left
 
-### lock(options)
+### bloquear (opciones)
 
-Lock the screen to a specific orientation.
+Bloquea la pantalla con una orientación específica.
 
 ```typescript
 interface OrientationLockOptions {
@@ -115,23 +114,23 @@ interface OrientationLockOptions {
 await ScreenOrientation.lock({ orientation: 'landscape' });
 ```
 
-**OrientationLockType values:**
-- `'any'` - Any orientation
-- `'natural'` - Device's natural orientation
-- `'landscape'` - Any landscape mode
-- `'portrait'` - Any portrait mode
-- `'portrait-primary'` / `'portrait-secondary'`
+**Valores de OrientationLockType:**
+- `'cualquiera'` - Cualquier orientación
+- `'natural'` - Orientación natural del dispositivo
+- `'paisaje'` - Cualquier modo horizontal
+- ``retrato'' - Cualquier modo retrato
+- `'retrato-primario'` / `'retrato-secundario'`
 - `'landscape-primary'` / `'landscape-secondary'`
 
-### unlock()
+### desbloquear()
 
-Unlock the screen orientation.
+Desbloquea la orientación de la pantalla.
 
 ```typescript
 await ScreenOrientation.unlock();
 ```
 
-### startOrientationTracking(options?)
+### startOrientationTracking(¿opciones?)
 
 Start tracking physical device orientation using motion sensors.
 
@@ -141,17 +140,17 @@ await ScreenOrientation.startOrientationTracking({
 });
 ```
 
-### stopOrientationTracking()
+### detener el seguimiento de orientación()
 
-Stop motion-based orientation tracking.
+Detener el seguimiento de orientación basado en movimiento.
 
 ```typescript
 await ScreenOrientation.stopOrientationTracking();
 ```
 
-### isOrientationLocked()
+### estáOrientaciónBloqueada()
 
-Check if device orientation lock is enabled.
+Compruebe si el bloqueo de orientación del dispositivo está habilitado.
 
 ```typescript
 const result = await ScreenOrientation.isOrientationLocked();
@@ -166,9 +165,9 @@ const result = await ScreenOrientation.isOrientationLocked();
   This method requires motion tracking to be active to work properly.
 </Aside>
 
-### addListener(eventName, callback)
+### addListener(nombre del evento, devolución de llamada)
 
-Listen for orientation changes.
+Escuche los cambios de orientación.
 
 ```typescript
 const listener = await ScreenOrientation.addListener(
@@ -182,15 +181,15 @@ const listener = await ScreenOrientation.addListener(
 await listener.remove();
 ```
 
-### removeAllListeners()
+### eliminarTodos los oyentes()
 
-Remove all event listeners.
+Elimine todos los detectores de eventos.
 
 ```typescript
 await ScreenOrientation.removeAllListeners();
 ```
 
-## Complete Example
+## Ejemplo completo
 
 ```typescript
 import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
@@ -266,19 +265,19 @@ class OrientationManager {
 }
 ```
 
-## Platform Notes
+## Notas de plataforma
 
 ### iOS
 - Uses Core Motion framework for physical orientation detection
 - Requires `NSMotionUsageDescription` in Info.plist for motion sensors
-- Full support for all orientation types
+- Soporte completo para todos los tipos de orientación.
 
 ### Android
 - Uses accelerometer sensor for physical orientation detection
-- No additional permissions required
-- Full support for all orientation types
+- No se requieren permisos adicionales
+- Soporte completo para todos los tipos de orientación.
 
 ### Web
-- Uses Screen Orientation API
-- Motion sensor detection is limited
-- Some browsers may not support all lock types
+- Utiliza la orientación de la pantalla API
+- La detección del sensor de movimiento es limitada
+- Es posible que algunos navegadores no admitan todos los tipos de bloqueo

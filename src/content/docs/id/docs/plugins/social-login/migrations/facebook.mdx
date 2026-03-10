@@ -1,48 +1,46 @@
 ---
-title: >-
-  Migration Guide from @capacitor-community/facebook-login to
-  @capgo/capacitor-social-login
+title: Facebook Migrasi Masuk ke @capgo/social-login
 description: >-
-  This detailed guide provides step-by-step instructions for transitioning from
-  the @capacitor-community/facebook-login plugin to the
-  @capgo/capacitor-social-login plugin, ensuring a smooth migration process with
-  enhanced features.
+  Panduan terperinci ini memberikan petunjuk langkah demi langkah untuk
+  melakukan transisi dari plugin @capacitor-community/facebook-login ke plugin
+  @capgo/capacitor-social-login, memastikan proses migrasi lancar dengan fitur
+  yang disempurnakan.
 sidebar:
   order: 2
 locale: id
 ---
 import { Steps } from '@astrojs/starlight/components';
 
-## Overview
+## Ikhtisar
 
-This guide provides comprehensive instructions for migrating from `@capacitor-community/facebook-login` to `@capgo/capacitor-social-login`. The new plugin modernizes Facebook authentication with a unified API that supports multiple social providers, improved TypeScript support, and enhanced capabilities.
+Panduan ini memberikan petunjuk komprehensif untuk bermigrasi dari `@capacitor-community/facebook-login` ke `@capgo/capacitor-social-login`. Plugin baru ini memodernisasi autentikasi Facebook dengan API terpadu yang mendukung beberapa penyedia sosial, dukungan TypeScript yang lebih baik, dan kemampuan yang ditingkatkan.
 
-## Installation
+## Instalasi
 
 <Steps>
-1. Remove the old package:
+1. Hapus paket lama:
    ```bash
    npm uninstall @capacitor-community/facebook-login
    ```
 
-2. Install the new package:
+2. Instal paket baru:
    ```bash
    npm install @capgo/capacitor-social-login
    npx cap sync
    ```
 </Steps>
 
-## Code Changes
+## Perubahan Kode
 
-### Import Changes
+### Impor Perubahan
 ```diff
 - import { FacebookLogin } from '@capacitor-community/facebook-login';
 + import { SocialLogin } from '@capgo/capacitor-social-login';
 ```
 
-### Initialization
+### Inisialisasi
 
-**Key Change**: The new package requires explicit setup in your code:
+**Perubahan Kunci**: Paket baru memerlukan pengaturan eksplisit dalam kode Anda:
 
 ```diff
 - // Old package required no explicit initialization in code
@@ -57,9 +55,9 @@ This guide provides comprehensive instructions for migrating from `@capacitor-co
 + });
 ```
 
-### Login
+### Masuk
 
-The login method now accepts a provider parameter:
+Metode login sekarang menerima parameter penyedia:
 
 ```diff
 - const FACEBOOK_PERMISSIONS = ['email', 'public_profile'];
@@ -75,9 +73,9 @@ The login method now accepts a provider parameter:
 + });
 ```
 
-### Response Type Changes
+### Perubahan Jenis Respons
 
-The response structure has been modernized with a more comprehensive profile object:
+Struktur respons telah dimodernisasi dengan objek profil yang lebih komprehensif:
 
 ```typescript
 // Old response type
@@ -122,12 +120,12 @@ interface FacebookLoginResponse {
 }
 ```
 
-**Key Differences**:
-- Response now includes a `provider` field identifying the authentication provider
-- More detailed `profile` object with additional user information
-- Consistent structure across all social login providers
+**Perbedaan Utama**:
+- Respons sekarang mencakup kolom `provider` yang mengidentifikasi penyedia autentikasi
+- Objek `profile` lebih detail dengan informasi pengguna tambahan
+- Struktur yang konsisten di semua penyedia login sosial
 
-### Checking Login Status
+### Memeriksa Status Masuk
 ```diff
 - const result = await FacebookLogin.getCurrentAccessToken();
 - const isLoggedIn = result && result.accessToken;
@@ -138,7 +136,7 @@ interface FacebookLoginResponse {
 + const isLoggedIn = status.isLoggedIn;
 ```
 
-### Logout
+### Keluar
 ```diff
 - await FacebookLogin.logout();
 
@@ -147,11 +145,11 @@ interface FacebookLoginResponse {
 + });
 ```
 
-## Platform Specific Changes
+## Perubahan Khusus Platform
 
-### Android Setup
+### Android Penyiapan
 
-Configuration is now handled through the initialize method:
+Konfigurasi sekarang ditangani melalui metode inisialisasi:
 
 ```diff
 - // AndroidManifest.xml changes remain the same
@@ -165,11 +163,11 @@ Configuration is now handled through the initialize method:
 + });
 ```
 
-**Important**: Client token is now required for Android authentication.
+**Penting**: Token klien sekarang diperlukan untuk autentikasi Android.
 
-### iOS Setup
+### iOS Penyiapan
 
-1. The iOS setup in `AppDelegate.swift` remains the same:
+1. Pengaturan iOS di `AppDelegate.swift` tetap sama:
 
 ```swift
 import FBSDKCoreKit
@@ -189,7 +187,7 @@ ApplicationDelegate.shared.application(
 )
 ```
 
-2. The `Info.plist` configuration remains the same:
+2. Konfigurasi `Info.plist` tetap sama:
 ```xml
 <key>CFBundleURLTypes</key>
 <array>
@@ -216,25 +214,25 @@ ApplicationDelegate.shared.application(
 </array>
 ```
 
-## Breaking Changes
+## Perubahan yang Mengganggu
 
-Summary of breaking changes when migrating:
+Ringkasan perubahan yang dapat menyebabkan gangguan saat migrasi:
 
-1. **Explicit initialization is now required** - Must call `initialize()` before use
-2. **Response object structure has changed significantly** - New nested result format with enhanced profile data
-3. **Client token is now required for Android** - Additional configuration needed
-4. **Different method names and parameter structures** - Provider-based approach
-5. **Error handling and error types have changed** - More detailed error information
+1. **Inisialisasi eksplisit sekarang diperlukan** - Harus memanggil `initialize()` sebelum digunakan
+2. **Struktur objek respons telah berubah secara signifikan** - Format hasil bertingkat baru dengan data profil yang disempurnakan
+3. **Token klien sekarang diperlukan untuk Android** - Diperlukan konfigurasi tambahan
+4. **Nama metode dan struktur parameter yang berbeda** - Pendekatan berbasis penyedia
+5. **Penanganan kesalahan dan jenis kesalahan telah berubah** - Informasi kesalahan lebih detail
 
-## Key Advantages
+## Keuntungan Utama
 
-The new plugin provides:
+Plugin baru menyediakan:
 
-- **Unified API** across multiple social providers (Google, Apple, Facebook)
-- **Improved TypeScript support** with better type definitions
-- **Enhanced profile data** with more user information
-- **Active maintenance** and community support
-- **Consistent error handling** across all providers
-- **Better token management** with proper expiration handling
+- **Terpadu API** di beberapa penyedia sosial (Google, Apple, Facebook)
+- **Peningkatan dukungan TypeScript** dengan definisi tipe yang lebih baik
+- **Data profil yang ditingkatkan** dengan lebih banyak informasi pengguna
+- **Pemeliharaan aktif** dan dukungan komunitas
+- **Penanganan kesalahan yang konsisten** di semua penyedia
+- **Manajemen token yang lebih baik** dengan penanganan kedaluwarsa yang tepat
 
-For more detailed setup instructions, please refer to the [official documentation](/docs/plugins/social-login/facebook/). 
+Untuk petunjuk pengaturan lebih detail, lihat [dokumentasi resmi](/docs/plugins/social-login/facebook/).

@@ -1,54 +1,51 @@
 ---
-title: iOS App Store Review Guidelines for IAP
-description: >-
-  Complete guide to passing App Store review with in-app purchases and
-  subscriptions, including common rejection reasons and best practices.
+title: iOS App Store IAP 검토 지침
+description: 일반적인 거부 이유와 모범 사례를 포함하여 인앱 구매 및 구독에 대한 App Store 검토 통과에 대한 전체 가이드입니다.
 sidebar:
   order: 10
 locale: ko
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 
-Getting your app approved on the App Store requires careful attention to Apple's guidelines, especially when implementing in-app purchases and subscriptions. This guide covers everything you need to know to pass review on your first submission.
+App Store에서 앱을 승인받으려면 특히 인앱 구매 및 구독을 구현할 때 Apple의 가이드라인에 세심한 주의가 필요합니다. 이 가이드에서는 첫 번째 제출물에 대한 검토를 통과하기 위해 알아야 할 모든 내용을 다룹니다.
 
-![iOS App Store Review Process](/native-purchases/review-guides/ios-review-hero.webp)
+![iOS App Store 검토 프로세스](/native-purchases/review-guides/ios-review-hero.webp)
 
-## In-App Purchase Requirements
+## 인앱 구매 요구 사항
 
-### Pricing Transparency (Critical)
+### 가격 투명성(중요)
 
-Apple requires crystal-clear pricing disclosure before any purchase:
+Apple에서는 구매하기 전에 명확한 가격 공개가 필요합니다.
 
-**Must-Have Elements:**
-- Display exact price before purchase button
-- Show billing frequency (e.g., "$9.99/month")
-- Clearly state what users get for their money
-- Indicate when charges will occur
+**필수 요소:**
+- 구매 버튼 전 정확한 가격 표시
+- 청구 빈도 표시(예: "$9.99/월")
+- 사용자가 자신의 돈으로 무엇을 얻는지 명확하게 명시
+- 요금이 언제 발생하는지 표시
 
-**Common Rejection:**
-> "Subscription pricing must be clear and upfront."
+**일반적인 거부:**
+> "구독 가격은 명확하고 명확해야 합니다."
 
-:::caution Price Consistency
-All prices must match across:
-- App Store metadata listing
-- In-app purchase screens
-- Subscription management screens
+:::주의 가격 일관성
+모든 가격은 다음에 걸쳐 일치해야 합니다.
+- App Store 메타데이터 목록
+- 인앱 구매 화면
+- 구독 관리 화면
 
-Even a $1 discrepancy between store listing ($4.99) and app ($5.99) will trigger automatic rejection.
+스토어 등록정보($4.99)와 앱($5.99) 사이에 1달러의 차이가 있어도 자동 거부가 발생합니다.
 :::
 
-### Subscription Plan Presentation
+### 구독 계획 프레젠테이션
 
-**Required Disclosures:**
-- All available subscription tiers displayed together
-- Clear comparison of features per tier
-- No auto-defaulting to premium tiers through UI tricks
-- Easy-to-locate cancellation instructions
+**필수 공개:**
+- 사용 가능한 모든 구독 등급이 함께 표시됩니다.
+- 계층별 기능을 명확하게 비교
+- UI 트릭을 통해 프리미엄 계층으로 자동 기본값이 설정되지 않습니다.
+- 찾기 쉬운 취소 지침
 
-![UI Design Dos and Don'ts](/native-purchases/review-guides/ui-design-dos-donts.webp)
+![UI 디자인 해야 할 일과 하지 말아야 할 일](/native-purchases/review-guides/ui-design-dos-donts.webp)
 
-**Example of Compliant UI:**
+**호환 UI의 예:**
 ```typescript
 import { NativePurchases } from '@capgo/native-purchases';
 
@@ -80,11 +77,11 @@ function SubscriptionScreen() {
 }
 ```
 
-### Restore Purchases
+### 구매 복원
 
-**Required Implementation:**
+**필수 구현:**
 
-Every app with IAP must provide a way for users to restore previous purchases without contacting support.
+IAP가 포함된 모든 앱은 사용자가 지원팀에 문의하지 않고도 이전 구매를 복원할 수 있는 방법을 제공해야 합니다.
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -126,31 +123,31 @@ async function restorePurchases() {
 </Button>
 ```
 
-## Common Rejection Reasons
+## 일반적인 거부 사유
 
-### 1. App Crashes or Broken Functionality
+### 1. 앱 충돌 또는 기능 손상
 
-**Why It Fails:**
-- App crashes on launch
-- Purchase flow fails to complete
-- Features shown in screenshots don't work
+**실패하는 이유:**
+- 실행 시 앱이 충돌함
+- 구매 흐름이 완료되지 않습니다.
+- 스크린샷에 표시된 기능이 작동하지 않습니다.
 
-**Prevention:**
-- Test on real devices (not just simulators)
-- Test all subscription flows end-to-end
-- Verify receipt validation works
-- Check network error handling
+**예방:**
+- 실제 장치에서 테스트(시뮬레이터뿐만 아니라)
+- 모든 구독 흐름을 처음부터 끝까지 테스트하세요.
+- 영수증 유효성 검사가 작동하는지 확인
+- 네트워크 오류 처리 확인
 
-### 2. Metadata Mismatches
+### 2. 메타데이터 불일치
 
-**Why It Fails:**
-- Screenshots show features not in current build
-- Description mentions functionality that doesn't exist
-- Pricing in metadata differs from in-app pricing
+**실패하는 이유:**
+- 스크린샷은 현재 빌드에 없는 기능을 보여줍니다.
+- 설명에 존재하지 않는 기능이 언급되어 있습니다.
+- 메타데이터 가격이 인앱 가격과 다릅니다.
 
-![Metadata Checklist](/native-purchases/review-guides/metadata-checklist.webp)
+![메타데이터 체크리스트](/native-purchases/review-guides/metadata-checklist.webp)
 
-**Prevention:**
+**예방:**
 ```typescript
 // Document exactly what's in each tier
 const SUBSCRIPTION_FEATURES = {
@@ -161,16 +158,16 @@ const SUBSCRIPTION_FEATURES = {
 // Use these in both your app AND App Store description
 ```
 
-### 3. Missing Permission Explanations
+### 3. 권한 누락 설명
 
-**Why It Fails:**
-- Requesting camera/location/health without explanation
-- Permission requests buried multiple screens deep
-- Vague or generic permission descriptions
+**실패하는 이유:**
+- 설명 없이 카메라/위치/건강 요청
+- 여러 화면에 깊이 묻혀 있는 권한 요청
+- 모호하거나 일반적인 권한 설명
 
-**Prevention:**
+**예방:**
 
-Update your `Info.plist` with clear explanations:
+명확한 설명으로 `Info.plist`을 업데이트하세요.
 
 ```xml
 <key>NSCameraUsageDescription</key>
@@ -180,30 +177,30 @@ Update your `Info.plist` with clear explanations:
 <string>Location helps us show relevant local content in your Premium subscription.</string>
 ```
 
-### 4. Misleading Marketing
+### 4. 오해를 불러일으키는 마케팅
 
-**Why It Fails:**
-- Claims like "#1 app in world" without proof
-- "Unlimited" features that have hidden limits
-- Fake urgency tactics ("Only 2 spots left!")
+**실패하는 이유:**
+- 증거 없이 "세계 1위 앱"과 같은 주장
+- 숨겨진 한계가 있는 "무제한" 기능
+- 가짜 긴급 전술("2자리만 남았어요!")
 
-![Description Guidelines Examples](/native-purchases/review-guides/description-guidelines-1.webp)
+![설명 지침 예](/native-purchases/review-guides/description-guidelines-1.webp)
 
-![Additional Description Guidelines](/native-purchases/review-guides/description-guidelines-2.webp)
+![추가 설명 지침](/native-purchases/review-guides/description-guidelines-2.webp)
 
-**Prevention:**
-- Be specific and factual in descriptions
-- Avoid superlatives without evidence
-- Don't pressure users with fake scarcity
+**예방:**
+- 설명은 구체적이고 사실에 근거해야 합니다.
+- 증거가 없는 최상급 표현은 피하세요.
+- 가짜 희소성으로 사용자에게 압력을 가하지 마세요.
 
-### 5. Hidden Cancellation Process
+### 5. 숨겨진 취소 절차
 
-**Why It Fails:**
-- No mention of how to cancel
-- Cancellation button hidden or obscured
-- Multi-step cancellation process without Apple's native flow
+**실패하는 이유:**
+- 취소 방법에 대한 언급이 없습니다.
+- 취소버튼이 숨겨져 있거나 가려져 있음
+- Apple의 기본 흐름이 없는 다단계 취소 프로세스
 
-**Prevention:**
+**예방:**
 ```typescript
 // Always inform users about cancellation
 function SubscriptionInfo() {
@@ -230,21 +227,19 @@ async function openSubscriptionManagement() {
   // Direct link to iOS subscription management
   await NativePurchases.showManageSubscriptions();
 }
-```
+```## 개인정보 보호 및 데이터 사용(섹션 5.1.1)
 
-## Privacy & Data Usage (Section 5.1.1)
+Apple에서는 2025년에 개인 정보 보호 요구 사항을 대폭 강화했습니다.
 
-Apple has significantly tightened privacy requirements in 2025.
+### 필수 공개
 
-### Required Disclosures
+**모든 권한에 대해:**
+1. 필요한 이유(특정 사용 사례)
+2. 이용시기
+3. 데이터 저장/공유 방법
+4. 선택사항인지 필수사항인지
 
-**For Every Permission:**
-1. Why you need it (specific use case)
-2. When it will be used
-3. How data is stored/shared
-4. Whether it's optional or required
-
-### Example: Proper Permission Flow
+### 예: 적절한 권한 흐름
 
 ```typescript
 async function requestCameraPermission() {
@@ -261,65 +256,65 @@ async function requestCameraPermission() {
 }
 ```
 
-### Privacy Nutrition Labels
+### 개인 정보 보호 영양 라벨
 
-Ensure your App Store privacy labels accurately reflect:
-- Purchase history collection
-- Email addresses (for receipts)
-- Device IDs (for fraud prevention)
-- Usage data (for analytics)
+App Store 개인 정보 보호 라벨에 다음 사항이 정확하게 반영되어 있는지 확인하세요.
+- 구매내역 수집
+- 이메일 주소(영수증용)
+- 기기 ID(사기 방지용)
+- 사용량 데이터(분석용)
 
 :::warning
-Inaccurate privacy labels are a common rejection reason in 2025. Audit your data collection carefully.
+부정확한 개인 정보 보호 라벨은 2025년에 일반적인 거부 사유입니다. 데이터 수집을 주의 깊게 감사하세요.
 :::
 
-## Pre-Submission Checklist
+## 제출 전 체크리스트
 
-![Pre-Submission Checklist](/native-purchases/review-guides/pre-submission-checklist.webp)
+![제출 전 체크리스트](/native-purchases/review-guides/pre-submission-checklist.webp)
 
 <Steps>
 
-1. **Test All Purchase Flows**
-   - Buy each subscription tier
-   - Test free trials
-   - Verify introductory offers apply correctly
-   - Test restore purchases
-   - Verify Family Sharing (if enabled)
-   - Test on multiple devices
+1. **모든 구매 흐름 테스트**
+   - 각 구독 등급 구매
+   - 무료 평가판 테스트
+   - 신규 프로모션이 올바르게 적용되었는지 확인하세요.
+   - 테스트 복원 구매
+   - 가족 공유 확인(활성화된 경우)
+   - 여러 장치에서 테스트
 
-2. **Verify Pricing Consistency**
-   - Check App Store metadata matches in-app prices
-   - Verify all currencies are correct
-   - Confirm free trial durations match descriptions
-   - Check introductory offer terms are accurate
+2. **가격 일관성 확인**
+   - App Store 메타데이터가 인앱 가격과 일치하는지 확인하세요.
+   - 모든 통화가 올바른지 확인하세요.
+   - 무료 평가판 기간이 설명과 일치하는지 확인
+   - 신규 프로모션 약관이 정확한지 확인하세요.
 
-3. **Review All Copy**
-   - Remove placeholder text
-   - Verify claims are testable
-   - Check grammar and spelling
-   - Ensure descriptions match current build
-   - Remove competitor mentions
+3. **모든 사본 검토**
+   - 자리 표시자 텍스트 제거
+   - 주장이 테스트 가능한지 확인
+   - 문법과 철자를 확인하세요
+   - 설명이 현재 빌드와 일치하는지 확인하세요.
+   - 경쟁사 언급 제거
 
-4. **Test Permissions**
-   - Request only necessary permissions
-   - Show clear explanations before requesting
-   - Test "Deny" flows (app should still work)
-   - Verify Info.plist descriptions are clear
+4. **테스트 권한**
+   - 꼭 필요한 권한만 요청
+   - 요청하기 전에 명확한 설명을 보여주세요.
+   - "거부" 흐름 테스트(앱은 계속 작동해야 함)
+   - Info.plist 설명이 명확한지 확인하세요.
 
-5. **Prepare Test Account**
-   - Create sandbox test account
-   - Document login credentials in App Review Notes
-   - Verify test account has active subscription
-   - Test that reviewer can complete purchase flow
+5. **테스트 계정 준비**
+   - 샌드박스 테스트 계정 만들기
+   - 앱 리뷰 노트에 로그인 자격 증명을 기록하세요.
+   - 테스트 계정에 활성 구독이 있는지 확인하세요.
+   - 리뷰어가 구매 흐름을 완료할 수 있는지 테스트
 
-6. **Check Metadata**
-   - Screenshots match current UI
-   - App preview video (if any) shows current version
-   - Description accurately describes features
-   - Age rating matches content
-   - Privacy policy is accessible in-app
+6. **메타데이터 확인**
+   - 스크린샷은 현재 UI와 일치합니다.
+   - 앱 미리보기 비디오(있는 경우)에 현재 버전이 표시됩니다.
+   - 설명은 기능을 정확하게 설명합니다.
+   - 연령 등급이 콘텐츠와 일치함
+   - 개인정보 보호정책은 앱 내에서 확인할 수 있습니다.
 
-7. **Write Detailed Review Notes**
+7. **자세한 리뷰 노트 작성**
    ```
    Test Account:
    Email: reviewer@test.com
@@ -338,49 +333,47 @@ Inaccurate privacy labels are a common rejection reason in 2025. Audit your data
 
 </Steps>
 
-## Review Timeline
+## 타임라인 검토
 
-![App Store Review Timeline](/native-purchases/review-guides/review-timeline.webp)
+![App Store 검토 일정](/native-purchases/review-guides/review-timeline.webp)
 
-**Standard Review:** 24-48 hours
-**Peak Periods:** 3-5 days (App Store holiday releases)
-**Weekends:** No reviews processed
-**Expedited Review:** Available for critical bug fixes (request via App Store Connect)
+**표준 검토:** 24~48시간
+**피크 기간:** 3~5일(App Store 휴일 릴리스)
+**주말:** 처리된 리뷰가 없습니다.
+**신속 검토:** 중요한 버그 수정이 가능합니다(App Store Connect을 통해 요청).
 
 :::tip
-Submit early in the week to avoid weekend delays. Monday submissions typically get reviewed by Wednesday.
+주말 지연을 방지하려면 주중에 일찍 제출하세요. 월요일 제출물은 일반적으로 수요일까지 검토됩니다.
 :::
 
-## 2025 Guideline Updates
+## 2025 지침 업데이트
 
-### New Requirements
+### 새로운 요구사항
 
-**1. AI Functionality Disclosure**
-If your app uses AI for any features, you must:
-- Clearly label AI-generated content
-- Explain how AI is used
-- Document content safety measures
+**1. AI 기능 공개**
+앱이 모든 기능에 AI를 사용하는 경우 다음을 수행해야 합니다.
+- AI 생성 콘텐츠에 명확한 라벨을 지정하세요.
+- AI가 어떻게 활용되는지 설명해주세요.
+- 문서 내용 안전 대책
 
-**2. Enhanced Subscription Clarity**
-- Side-by-side plan comparisons required
-- No "dark patterns" that hide cheaper options
-- Clear downgrade/upgrade paths
+**2. 향상된 구독 명확성**
+- 병렬 계획 비교가 필요합니다.
+- 더 저렴한 옵션을 숨기는 "어두운 패턴"이 없습니다.
+- 명확한 다운그레이드/업그레이드 경로
 
-**3. Privacy Intensification**
-- Section 5.1.1 enforcement increased
-- More scrutiny on data collection justification
-- Stricter requirements for children's apps
+**3. 개인 정보 보호 강화**
+- 섹션 5.1.1 시행이 강화되었습니다.
+- 데이터 수집 정당성에 대한 추가 조사
+- 어린이용 앱에 대한 요구사항이 더욱 엄격해졌습니다.
 
-### What Changed from 2024
+### 2024년과 달라진 점- 이제 모듈식 제출이 허용됩니다(제품 페이지를 독립적으로 업데이트).
+- 인앱 이벤트를 별도로 제출할 수 있습니다.
+- 오해의 소지가 있는 구독 UI를 더욱 엄격하게 시행
+- 암호화폐/NFT 앱에 대한 새로운 지침
 
-- Modular submissions now allowed (update product pages independently)
-- In-app events can be submitted separately
-- Stricter enforcement of misleading subscription UIs
-- New guidance on cryptocurrency/NFT apps
+## 기본 구매 플러그인 모범 사례
 
-## Best Practices for Native Purchases Plugin
-
-### Implement Proper Error Handling
+### 적절한 오류 처리 구현
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -415,7 +408,7 @@ async function handlePurchase(productId: string) {
 }
 ```
 
-### Display Loading States
+### 로딩 상태 표시
 
 ```typescript
 function PurchaseButton({ productId }: { productId: string }) {
@@ -438,7 +431,7 @@ function PurchaseButton({ productId }: { productId: string }) {
 }
 ```
 
-### Show Terms Clearly
+### 용어를 명확하게 표시
 
 ```typescript
 function SubscriptionTerms() {
@@ -465,22 +458,22 @@ function SubscriptionTerms() {
 }
 ```
 
-## If Your App Gets Rejected
+## 앱이 거부되는 경우
 
-### Steps to Resolve
+### 해결 단계
 
 <Steps>
 
-1. **Read the rejection carefully**
-   - Note the specific guideline cited (e.g., 3.1.1, 5.1.1)
-   - Understand exactly what Apple flagged
+1. **거절 내용을 주의 깊게 읽어보세요**
+   - 인용된 특정 지침을 참고하세요(예: 3.1.1, 5.1.1).
+   - Apple이 무엇을 신고했는지 정확히 이해하세요.
 
-2. **Fix the issue thoroughly**
-   - Don't just patch - fix root cause
-   - Test the fix extensively
-   - Document what you changed
+2. **문제를 철저히 해결**
+   - 패치만 하지 말고 근본 원인을 해결하세요.
+   - 수정 사항을 광범위하게 테스트
+   - 변경한 내용을 문서로 기록하세요.
 
-3. **Respond in Resolution Center**
+3. **해결 센터에서 응답**
    ```
    Thank you for your feedback. I have addressed the issue:
 
@@ -494,50 +487,50 @@ function SubscriptionTerms() {
    provided test account.
    ```
 
-4. **Resubmit promptly**
-   - Resubmissions are typically reviewed faster
-   - Usually within 24 hours
+4. **즉시 다시 제출**
+   - 재제출은 일반적으로 더 빠르게 검토됩니다.
+   - 보통 24시간 이내
 
 </Steps>
 
-### Appeal Process
+### 항소 절차
 
-If you believe the rejection is incorrect:
+거부가 잘못되었다고 생각하는 경우:
 
-![App Store Clarification Process](/native-purchases/review-guides/clarification-process.webp)
+![App Store 설명 프로세스](/native-purchases/review-guides/clarification-process.webp)
 
-1. Click "Appeal" in App Store Connect
-2. Provide clear evidence:
-   - Screenshots showing compliance
-   - References to specific guidelines
-   - Explanation of how you meet requirements
-3. Be professional and factual
-4. Include test account if functionality is hard to find
+1. App Store Connect에서 '이의제기'를 클릭하세요.
+2. 명확한 증거를 제공하십시오:
+   - 규정 준수를 보여주는 스크린샷
+   - 특정 지침에 대한 참조
+   - 요구사항을 어떻게 충족하는지에 대한 설명
+3. 전문적이고 사실에 입각한 태도를 취하세요.
+4. 기능을 찾기 어려운 경우 테스트 계정을 포함하세요.
 
-![Request for Documents Example](/native-purchases/review-guides/request-documents.webp)
+![서류요청 예시](/native-purchases/review-guides/request-documents.webp)
 
-## Additional Resources
+## 추가 리소스
 
-- [Apple App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/)
-- [In-App Purchase Guidelines](https://developer.apple.com/app-store/review/guidelines/#in-app-purchase)
-- [Subscriptions Best Practices](https://developer.apple.com/app-store/subscriptions/)
-- [App Store Connect Help](https://developer.apple.com/help/app-store-connect/)
+- [Apple App Store 검토 지침](https://developer.apple.com/app-store/review/guidelines/)
+- [인앱 구매 지침](https://developer.apple.com/app-store/review/guidelines/#in-app-purchase)
+- [구독 모범 사례](https://developer.apple.com/app-store/subscriptions/)
+- [App Store Connect 도움말](https://developer.apple.com/help/app-store-connect/)
 
-## Support
+## 지원
 
-If you're still having issues:
-- Review the [Native Purchases documentation](/docs/plugins/native-purchases/getting-started/)
-- Check [common troubleshooting issues](/docs/plugins/native-purchases/getting-started/#troubleshooting)
-- Contact Apple Developer Support for guideline clarifications
+여전히 문제가 있는 경우:
+- [기본 구매 문서](/docs/plugins/native-purchases/getting-started/) 검토
+- [일반적인 문제 해결 문제](/docs/plugins/native-purchases/getting-started/#troubleshooting)를 확인하세요.
+- 지침에 대한 설명은 Apple 개발자 지원팀에 문의하세요.
 
-### Need Expert Help?
+### 전문가의 도움이 필요하신가요?
 
-Struggling with app review or need personalized assistance? **[Book a consultation call with our team](https://cal.com/team/capgo/capacitor-consulting-services)** for dedicated support with:
+앱 검토에 어려움을 겪고 있거나 맞춤 지원이 필요하십니까? **[저희 팀과 상담 전화 예약](https://cal.com/team/capgo/capacitor-consulting-services)** 다음과 같은 전담 지원을 받으세요.
 
-- IAP implementation review and optimization
-- App Store review preparation and strategy
-- Submission checklist review
-- Rejection resolution and appeals
-- Complete testing and validation
+- IAP 구현 검토 및 최적화
+- App Store 검토 준비 및 전략
+- 제출 체크리스트 검토
+- 거절결정 및 이의신청
+- 완벽한 테스트 및 검증
 
-Our experts have successfully helped hundreds of apps pass review!
+우리 전문가들은 수백 개의 앱이 심사를 통과하도록 성공적으로 도왔습니다!

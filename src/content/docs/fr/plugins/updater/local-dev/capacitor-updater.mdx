@@ -1,22 +1,25 @@
 ---
+title: >-
+  Utilisation du programme de mise à jour du condensateur avec capgo
+  auto-hébergé
+description: >-
+  Comment utiliser le programme de mise à jour de condensateur avec Capgo
+  auto-hébergé, être totalement autonome avec votre propre instance de Capgo
+sidebar:
+  order: 4
 locale: fr
-title: "Using the capacitor updater with self-hosted capgo"
-description: "How to use the capacitor updater with self-hosted Capgo, be fully autonomous with your own instance of Capgo"
-sidebar: 
-    order: 4
 ---
+## Que couvrira ce tutoriel ?
 
-## What this Tutoriel will cover?
+Ce tutoriel montrera comment utiliser le programme de mise à jour des condensateurs dans un environnement de développement avec capgo auto-hébergé.
 
-This Tutoriel will show how to use capacitor updater in a dev environment with self hosted capgo
+## Exigences
 
-## Requirements
-
- 1. [Cloned capgo](https://github.com/Cap-go/capgo)
+ 1. [Capgo cloné](https://github.com/Cap-go/capgo)
 
 ## Commencer
 
-To use the capacitor updater with self-hosted capgo edit the `capacitor.config.ts` from your app directory and set it like this:
+Pour utiliser le programme de mise à jour du condensateur avec capgo auto-hébergé, modifiez le `capacitor.config.ts` à partir du répertoire de votre application et définissez-le comme ceci :
 
 ```ts
 const config: CapacitorConfig = {
@@ -34,15 +37,15 @@ const config: CapacitorConfig = {
 };
 ```
 
-This will Activer you to use local capgo in Développement. However, by default, this is not enough.
+Cela vous permettra d'utiliser capgo local dans le développement. Cependant, par défaut, cela ne suffit pas.
 
-> By default both iOS and Android expect you to use HTTPS, you need to use a tool like Ngrock or localcan to proxy your API in https.
+> Par défaut iOS, Android et Electron s'attendent à ce que vous utilisiez HTTPS, vous devez utiliser un outil comme Ngrock ou localcan pour proxy votre API en https.
 
-There is a way in Android to Activer [plaintext communication](https://developer.Android.com/topic/Sécurité/risks/cleartext).
-This can be achieved by modifying [AndroidManifest.xml](https://github.com/Cap-go/capacitor-updater/blob/main/android/src/main/AndroidManifest.xml) and adding `android:usesCleartextTraffic="true"` in the `application` tag
-A full Exemple of this change can be seen [here](https://gist.github.com/WcaleNieWolny/061a015acdebe35eaf3afd7030797701)
+Il existe un moyen dans Android d'activer la [communication en texte brut](https://developer.android.com/topic/security/risks/cleartext).
+Ceci peut être réalisé en modifiant [AndroidManifest.xml](https://github.com/Cap-go/capacitor-updater/blob/main/android/src/main/AndroidManifest.xml) et en ajoutant `android:usesCleartextTraffic="true"` dans la balise `application`
+Un exemple complet de ce changement peut être vu [ici](https://gist.github.com/WcaleNieWolny/061a015acdebe35eaf3afd7030797701)
 
-There also could be a problem that prevents the Android Application from connecting. If you do not see any requests being send to edge functions run
+Il pourrait également y avoir un problème empêchant l’application Android de se connecter. Si vous ne voyez aucune requête envoyée aux fonctions Edge, exécutez
 ```bash
 adb reverse tcp:54321 tcp:54321
 ```

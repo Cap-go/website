@@ -1,16 +1,15 @@
 ---
-title: Getting Started
+title: はじめる
 description: >-
-  Learn how to install and use the Ricoh 360° Camera plugin to control Ricoh
-  Theta cameras in your Capacitor app.
+  Ricoh 360° Camera プラグインをインストールして使用し、Capacitor アプリで Ricoh Theta
+  カメラを制御する方法を学びます。
 sidebar:
   order: 2
 locale: ja
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-## Installation
+## インストール
 
 <Tabs>
   <TabItem label="npm">
@@ -39,11 +38,11 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
   </TabItem>
 </Tabs>
 
-## Platform Configuration
+## プラットフォーム構成
 
 ### iOS
 
-Add camera and photo library permissions to your `Info.plist`:
+カメラと写真ライブラリの権限を `Info.plist` に追加します。
 
 ```xml
 <key>NSCameraUsageDescription</key>
@@ -54,7 +53,7 @@ Add camera and photo library permissions to your `Info.plist`:
 
 ### Android
 
-Add required permissions to your `AndroidManifest.xml`:
+必要な権限を `AndroidManifest.xml` に追加します。
 
 ```xml
 <uses-permission android:name="android.permission.CAMERA" />
@@ -63,15 +62,15 @@ Add required permissions to your `AndroidManifest.xml`:
 <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 ```
 
-## サポートされるデバイス
+## サポートされているデバイス
 
-このプラグインはRicoh Thetaシリーズカメラをサポートしています:
-- Ricoh Theta V
-- Ricoh Theta Z1
-- Ricoh Theta SC2
-- Ricoh Theta X
+このプラグインは、Ricoh Theta シリーズのカメラをサポートします。
+- リコー Theta V
+- リコー シータ Z1
+- リコー シータ SC2
+- リコーシータX
 
-## Usage Example
+## 使用例
 
 ```typescript
 import { Ricoh360Camera } from '@capgo/capacitor-ricoh360-camera';
@@ -110,45 +109,45 @@ await Ricoh360Camera.stopPreview();
 await Ricoh360Camera.disconnect();
 ```
 
-## API Reference
+## API リファレンス
 
-### initialize()
+### 初期化()
 
 ```typescript
 initialize() => Promise<void>
 ```
 
-Initialize the camera plugin.
+カメラプラグインを初期化します。
 
-### connect(options)
+### 接続(オプション)
 
 ```typescript
 connect(options: ConnectOptions) => Promise<void>
 ```
 
-Connect to a Ricoh Theta camera via WiFi.
+WiFi 経由で Ricoh Theta カメラに接続します。
 
-| Param         | Type                      |
+|パラム |タイプ |
 | ------------- | ------------------------- |
 | **`options`** | `ConnectOptions` |
 
-### disconnect()
+### 切断()
 
 ```typescript
 disconnect() => Promise<void>
 ```
 
-Disconnect from the camera.
+カメラから切断します。
 
-### startPreview(options)
+### startPreview(オプション)
 
 ```typescript
 startPreview(options: PreviewOptions) => Promise<void>
 ```
 
-Start live 360° preview stream.
+ライブ 360° プレビュー ストリームを開始します。
 
-| Param         | Type                      |
+|パラム |タイプ |
 | ------------- | ------------------------- |
 | **`options`** | `PreviewOptions` |
 
@@ -158,33 +157,33 @@ Start live 360° preview stream.
 stopPreview() => Promise<void>
 ```
 
-Stop the live preview stream.
+ライブ プレビュー ストリームを停止します。
 
-### capturePhoto(options?)
+### キャプチャ写真(オプション?)
 
 ```typescript
 capturePhoto(options?: CaptureOptions) => Promise<CaptureResult>
 ```
 
-Capture a 360° photo.
+360° 写真を撮影します。
 
-| Param         | Type                        |
-| ------------- | --------------------------- |
-| **`options`** | `CaptureOptions` (optional) |
+|パラム |タイプ |
+| ------------- | ------------------------- |
+| **`options`** | `CaptureOptions` (オプション) |
 
-**Returns:** `Promise<CaptureResult>`
+**戻り値:** `Promise<CaptureResult>`
 
-### startRecording(options?)
+### startRecording(オプション?)
 
 ```typescript
 startRecording(options?: RecordingOptions) => Promise<void>
 ```
 
-Start recording 360° video.
+360°ビデオの録画を開始します。
 
-| Param         | Type                          |
+|パラム |タイプ |
 | ------------- | ----------------------------- |
-| **`options`** | `RecordingOptions` (optional) |
+| **`options`** | `RecordingOptions` (オプション) |
 
 ### stopRecording()
 
@@ -192,9 +191,9 @@ Start recording 360° video.
 stopRecording() => Promise<CaptureResult>
 ```
 
-Stop video recording.
+ビデオ録画を停止します。
 
-**Returns:** `Promise<CaptureResult>`
+**戻り値:** `Promise<CaptureResult>`
 
 ### getCameraInfo()
 
@@ -202,94 +201,92 @@ Stop video recording.
 getCameraInfo() => Promise<CameraInfo>
 ```
 
-Get camera information and capabilities.
+カメラの情報と機能を取得します。
 
-**Returns:** `Promise<CameraInfo>`
+**戻り値:** `Promise<CameraInfo>`
 
-### setExposure(options)
+### setExposure(オプション)
 
 ```typescript
 setExposure(options: ExposureOptions) => Promise<void>
 ```
 
-Set camera exposure settings.
+カメラの露出設定を設定します。
 
-| Param         | Type                       |
-| ------------- | -------------------------- |
+|パラム |タイプ |
+| ------------- | ------------------------ |
 | **`options`** | `ExposureOptions` |
 
-### setWhiteBalance(options)
+### setWhiteBalance(オプション)
 
 ```typescript
 setWhiteBalance(options: WhiteBalanceOptions) => Promise<void>
 ```
 
-Set white balance mode.
+ホワイトバランスモードを設定します。
 
-| Param         | Type                           |
+|パラム |タイプ |
 | ------------- | ------------------------------ |
 | **`options`** | `WhiteBalanceOptions` |
 
-## Interfaces
+## インターフェース
 
-### ConnectOptions
+### 接続オプション
 
-| Prop           | Type              | Description                    |
+|小道具 |タイプ |説明 |
 | -------------- | ----------------- | ------------------------------ |
-| **`ssid`**     | `string` | WiFi SSID of the Ricoh camera  |
-| **`password`** | `string` | WiFi password of the camera    |
+| **`ssid`** | `string` |リコーカメラのWiFi SSID |
+| **`password`** | `string` |カメラのWiFiパスワード |
 
-### PreviewOptions
+### プレビューオプション
 
-| Prop            | Type              | Description                           |
+|小道具 |タイプ |説明 |
 | --------------- | ----------------- | ------------------------------------- |
-| **`container`** | `string` | HTML element ID for preview container |
+| **`container`** | `string` | HTML プレビュー コンテナーの要素 ID |
 
-### CaptureOptions
-
-| Prop           | Type               | Description                           |
+### キャプチャオプション|小道具 |タイプ |説明 |
 | -------------- | ------------------ | ------------------------------------- |
-| **`quality`**  | `number` | Image quality (1-100) (optional)      |
-| **`saveToGallery`** | `boolean` | Save to device gallery (optional) |
+| **`quality`** | `number` |画質 (1-100) (オプション) |
+| **`saveToGallery`** | `boolean` |デバイス ギャラリーに保存 (オプション) |
 
-### RecordingOptions
+### 録音オプション
 
-| Prop              | Type               | Description                              |
-| ----------------- | ------------------ | ---------------------------------------- |
-| **`maxDuration`** | `number` | Maximum recording duration in seconds (optional) |
-| **`quality`**     | `string` | Video quality: 'high' \| 'medium' \| 'low' (optional) |
+|小道具 |タイプ |説明 |
+| ----------------- | ------------------ | -------------------------------------- |
+| **`maxDuration`** | `number` |最大録音時間 (秒単位) (オプション) |
+| **`quality`** | `string` |ビデオ品質: '高' \| '中' \| '低' (オプション) |
 
-### CaptureResult
+### キャプチャ結果
 
-| Prop           | Type              | Description                |
-| -------------- | ----------------- | -------------------------- |
-| **`filePath`** | `string` | Path to the captured file  |
-| **`fileUrl`**  | `string` | URL to access the file     |
+|小道具 |タイプ |説明 |
+| -------------- | ----------------- | ------------------------ |
+| **`filePath`** | `string` |キャプチャされたファイルへのパス |
+| **`fileUrl`** | `string` |ファイルにアクセスするための URL |
 
-### CameraInfo
+### カメラ情報
 
-| Prop              | Type              | Description                |
-| ----------------- | ----------------- | -------------------------- |
-| **`model`**       | `string` | Camera model name          |
-| **`serialNumber`** | `string` | Camera serial number      |
-| **`firmwareVersion`** | `string` | Firmware version         |
-| **`batteryLevel`** | `number` | Battery level (0-100)     |
+|小道具 |タイプ |説明 |
+| ----------------- | ----------------- | ------------------------ |
+| **`model`** | `string` |カメラのモデル名 |
+| **`serialNumber`** | `string` |カメラのシリアル番号 |
+| **`firmwareVersion`** | `string` |ファームウェアのバージョン |
+| **`batteryLevel`** | `number` |バッテリー残量 (0-100) |
 
-### ExposureOptions
+### 露出オプション
 
-| Prop         | Type               | Description                                    |
-| ------------ | ------------------ | ---------------------------------------------- |
-| **`mode`**   | `string` | Exposure mode: 'auto' \| 'manual' \| 'iso' |
-| **`iso`**    | `number` | ISO value (100, 200, 400, etc.) (optional)     |
-| **`shutter`** | `number` | Shutter speed (optional)                      |
+|小道具 |タイプ |説明 |
+| ------------ | ------------------ | ------------------------------------------------ |
+| **`mode`** | `string` |露出モード: '自動' \| 'マニュアル' \| 'イソ' |
+| **`iso`** | `number` | ISO 値 (100、200、400 など) (オプション) |
+| **`shutter`** | `number` |シャッタースピード (オプション) |
 
-### WhiteBalanceOptions
+### ホワイトバランスオプション
 
-| Prop       | Type              | Description                                            |
-| ---------- | ----------------- | ------------------------------------------------------ |
-| **`mode`** | `string` | White balance: 'auto' \| 'daylight' \| 'cloudy' \| 'tungsten' \| 'fluorescent' |
+|小道具 |タイプ |説明 |
+| ---------- | ----------------- | -------------------------------------------------------- |
+| **`mode`** | `string` |ホワイトバランス: '自動' \| '日光' \| 「曇り」 \| 'タングステン' \| '蛍光' |
 
-## Complete Example
+## 完全な例
 
 ```typescript
 import { Ricoh360Camera } from '@capgo/capacitor-ricoh360-camera';
@@ -386,31 +383,29 @@ await camera.cleanup();
 
 ## ベストプラクティス
 
-- プラグインを初期化してからカメラに接続してください
-- デバイスがカメラのWiFiネットワークに接続していることを確認してください
-- エラーを適切に処理してください。特に接続エラーについて
-- 完了したらプレビューを停止して切断し、バッテリーを節約してください
-- 長時間の録画セッション前にカメラのバッテリーレベルを確認してください
-- 実際のRicoh Thetaハードウェアでテストしてください
-- ストレージの制約に基づいて適切なビデオ品質を使用してください
+- カメラに接続する前に必ずプラグインを初期化してください
+- デバイスがカメラの WiFi ネットワークに接続されていることを確認します。
+- エラー、特に接続障害を適切に処理します
+- プレビューを停止し、完了したらバッテリーを節約するために接続を解除します
+- 長時間の録画セッションの前にカメラのバッテリー残量を確認してください
+- 実際のRicoh Thetaハードウェアでのテスト
+- ストレージの制約に基づいて適切なビデオ品質を使用する
 
 ## トラブルシューティング
 
 ### 接続の問題
 
-- カメラの電源が入っていることを確認してください
-- WiFi SSIDとパスワードが正しいことを確認してください
-- 他のアプリがカメラに接続していないことを確認してください
-- 接続に失敗した場合、カメラのWiFi設定をリセットしてください
+- カメラの電源が入っていることを確認します
+- WiFi SSID とパスワードが正しいことを確認してください
+- 他のアプリがカメラに接続されていないことを確認してください
+- 接続に失敗した場合はカメラの WiFi 設定をリセット
 
 ### プレビューが表示されない
 
-- HTMLコンテナ要素が存在することを確認してください
+- HTML コンテナ要素が存在することを確認します
 - カメラの権限が付与されていることを確認してください
-- 接続に成功した後、プレビューを開始していることを確認してください
+- 接続が成功した後にプレビューが開始されることを確認します
 
-### キャプチャの失敗
-
-- 利用可能なストレージスペースを確認してください
-- カメラのバッテリーレベルが十分なことを確認してください
-- カメラがスリープモードでないことを確認してください
+### キャプチャの失敗- 利用可能なストレージ容量を確認する
+- カメラのバッテリー残量が十分であることを確認します
+- カメラがスリープモードになっていないことを確認してください

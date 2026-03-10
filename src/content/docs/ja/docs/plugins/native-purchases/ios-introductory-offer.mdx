@@ -1,184 +1,179 @@
 ---
-title: Create iOS Subscription Introductory Offer
-description: >-
-  Learn how to create introductory offers for auto-renewable subscriptions on
-  iOS to attract and convert new subscribers.
+title: iOS サブスクリプションの紹介オファーを作成する
+description: iOS で自動更新可能なサブスクリプションの紹介オファーを作成し、新しいサブスクライバーを引き付けて変換する方法を学びます。
 sidebar:
   order: 9
 locale: ja
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 
-イントロダクトリーオファーにより、適格なユーザーに無料試用版または割引されたイントロダクトリー価格を提供して、参入障壁を低減し、サブスクリプションの転換を増やすことができます。
+お試しオファーを利用すると、対象となるユーザーに無料トライアルまたは割引されたお試し価格を提供して、参入障壁を軽減し、サブスクリプション コンバージョンを増やすことができます。
 
-## Overview
+## 概要
 
-Introductory offers are one of the most effective tools for growing your subscriber base. They allow users to:
-- Try your premium features risk-free
-- Experience value before committing
-- Start at a lower price point
-- Build confidence in your product
+紹介オファーは、加入者ベースを拡大するための最も効果的なツールの 1 つです。これらにより、ユーザーは次のことが可能になります。
+- プレミアム機能をリスクなしでお試しください
+- コミット前の経験値
+- 低価格帯から始める
+- 製品に対する信頼を築く
 
-## Offer Types
+## オファーの種類
 
-iOS supports three types of introductory offers:
+iOS は、次の 3 種類の紹介オファーをサポートしています。
 
-### 1. Free Trial
-Customers get complimentary access for a specified duration. After the trial, they're charged at standard rates if they don't cancel.
+### 1. 無料トライアル
+顧客は指定された期間中無料でアクセスできます。試用後、キャンセルしない場合は、通常の料金が請求されます。
 
-**Examples:**
-- 7 days free
-- 14 days free
-- 1 month free
+**例:**
+- 7日間無料
+- 14日間無料
+- 1ヶ月無料
 
-**Best for:**
-- High-value subscriptions
-- Feature-rich apps
-- Building user habit
+**こんな方に最適:**
+- 高価値のサブスクリプション
+- 機能豊富なアプリ
+- ユーザーの習慣を構築する
 
-### 2. Pay Up Front
-Customers pay a single discounted price that covers the introductory period.
+### 2. 前払い
+顧客は、導入期間をカバーする単一の割引価格を支払います。
 
-**Examples:**
-- $1.99 for 2 months (then $9.99/month)
-- $9.99 for 3 months (then $19.99/month)
+**例:**
+- 2 か月間 $1.99 (その後は月額 $9.99)
+- 3 か月間 $9.99 (その後は月額 $19.99)
 
-**Best for:**
-- Commitment signals
-- Cash flow needs
-- Testing price sensitivity
+**こんな方に最適:**
+- コミットメントシグナル
+- キャッシュフローのニーズ
+- 価格感応度のテスト
 
-### 3. Pay As You Go
-Customers pay a reduced price for multiple billing cycles.
+### 3. 従量課金制
+顧客は複数の請求サイクルに対して割引価格を支払います。
 
-**Examples:**
-- $1.99/month for 3 months (then $9.99/month)
-- $4.99/month for 6 months (then $14.99/month)
+**例:**
+- 3 か月間 $1.99/月 (その後は $9.99/月)
+- 6 か月間 $4.99/月 (その後は $14.99/月)
 
-**Best for:**
-- Gradual commitment
-- Long-term value demonstration
-- Reducing perceived risk
+**こんな方に最適:**
+- 段階的な取り組み
+- 長期的な価値の実証
+- 認識されているリスクの軽減
 
-## Eligibility Requirements
+## 資格要件
 
-Users can only receive introductory offers if they:
-- Haven't previously received an introductory offer for the product
-- Haven't received an introductory offer for any product in the same subscription group
-- Haven't had an active subscription to the product
+ユーザーは次の場合にのみ紹介オファーを受け取ることができます。
+- これまでに製品の紹介オファーを受け取ったことがない
+- 同じサブスクリプション グループ内のどの製品の紹介オファーも受け取っていない
+- 製品の有効なサブスクリプションを持っていない
 
 :::note
-Apple handles eligibility checking automatically. The native-purchases plugin provides methods to check eligibility before presenting offers.
+Apple は資格チェックを自動的に処理します。ネイティブ購入プラグインは、オファーを提示する前に資格を確認するメソッドを提供します。
 :::
 
-## Prerequisites
+## 前提条件
 
-You must first [create an auto-renewable subscription](/docs/plugins/native-purchases/ios-create-subscription/) before adding an introductory offer.
+紹介特典を追加する前に、まず [自動更新可能なサブスクリプションを作成](/docs/plugins/native-purchases/ios-create-subscription/) する必要があります。
 
-## Creating an Introductory Offer
+## 紹介オファーの作成
 
 <Steps>
 
-1. **Navigate to Subscription**
+1. **サブスクリプションに移動**
 
-   In App Store Connect, go to your app's **Monetize > Subscriptions** section and select the subscription you want to add an offer to.
+   App Store Connect で、アプリの **収益化 > サブスクリプション** セクションに移動し、オファーを追加するサブスクリプションを選択します。
 
-2. **Add Subscription Price**
+2. **サブスクリプション価格を追加**
 
-   Click the **+** icon next to "Subscription Prices" to open the pricing modal.
+   [サブスクリプション価格] の横にある **+** アイコンをクリックして、価格設定モーダルを開きます。
 
-3. **Create Introductory Offer**
+3. **紹介オファーを作成**
 
-   Select **"Create introductory offer"** from the options.
+   オプションから **「紹介オファーの作成」** を選択します。
 
-   ![Create introductory offer](/native-purchases/ios/introductory-offer/create-introductory-offer.webp)
+   ![紹介オファーを作成](/native-purchases/ios/introductory-offer/create-introductory-offer.webp)
 
-4. **Configure Countries and Start Date**
+4. **国と開始日の構成**
 
-   **Countries and Regions**: Select where the offer will be available
-   - Choose all countries for maximum reach
-   - Or limit to specific markets for testing
+   **国と地域**: オファーを利用できる国を選択してください
+   - リーチを最大化するにはすべての国を選択してください
+   - またはテストを特定の市場に限定する
 
-   **Start Date**: When the offer becomes available
-   - Can be immediate or scheduled for the future
-   - Useful for coordinating with marketing campaigns
+   **開始日**: オファーが利用可能になった日
+   - すぐに実行することも、将来的にスケジュールすることもできます
+   - マーケティング キャンペーンとの調整に役立ちます
 
-   **End Date (Optional)**: When the offer expires
-   - Leave blank for ongoing availability
-   - Set a date for limited-time promotions
+   **終了日 (オプション)**: オファーの有効期限が切れる日
+   - 継続的に利用できる場合は空白のままにします
+   - 期間限定プロモーションの日付を設定します
 
-5. **Select Offer Type**
+5. **オファーの種類を選択**
 
-   Choose one of the three offer types:
+   次の 3 つのオファー タイプから 1 つを選択します。
 
-   **Free** (Free Trial)
-   - Select duration (days, weeks, months)
-   - Examples: 7 days, 2 weeks, 1 month
+   **無料** (無料トライアル)
+   - 期間を選択します (日、週、月)
+   - 例: 7 日、2 週間、1 か月**前払い**
+   - 一括支払い価格の設定
+   - 支払いの対象となる期間を設定する
+   - 例: 2 か月で 1.99 ドル
 
-   **Pay Up Front**
-   - Set single payment price
-   - Set duration covered by payment
-   - Example: $1.99 for 2 months
+   **従量課金制**
+   - 期間ごとに割引価格を設定
+   - 期間の数を設定します
+   - 例: 3 か月間 $2.99/月
 
-   **Pay As You Go**
-   - Set discounted price per period
-   - Set number of periods
-   - Example: $2.99/month for 3 months
+6. **レビューと確認**
 
-6. **Review and Confirm**
+   以下を示す概要を確認してください。
+   - 特典の種類と期間
+   - 価格の詳細
+   - 導入期間後の通常価格
+   - 利用可能日と国
 
-   Review the summary showing:
-   - Offer type and duration
-   - Pricing details
-   - Regular price after intro period
-   - Availability dates and countries
+7. **保存**
 
-7. **Save**
-
-   Click **Save** to create the introductory offer. It will be available for testing immediately in sandbox mode.
+   [**保存**] をクリックして紹介オファーを作成します。サンドボックス モードですぐにテストできるようになります。
 
 </Steps>
 
-## Offer Configuration Examples
+## オファーの構成例
 
-### Example 1: Standard Free Trial
+### 例 1: 標準の無料トライアル
 ```
 Type: Free
 Duration: 7 days
 Then: $9.99/month
 ```
-**User Journey:**
-- Day 1-7: Free access
-- Day 8: First charge of $9.99
-- Monthly charges continue
+**ユーザージャーニー:**
+- 1日目～7日目：無料アクセス
+- 8日目: 初回料金9.99ドル
+- 月額料金は継続します
 
-### Example 2: Upfront Discounted Period
+### 例 2: 前払い割引期間
 ```
 Type: Pay Up Front
 Price: $4.99
 Duration: 3 months
 Then: $9.99/month
 ```
-**User Journey:**
-- Day 1: Charged $4.99
-- 90 days access
-- Day 91: Charged $9.99/month
+**ユーザージャーニー:**
+- 1日目: $4.99の請求
+- 90日間のアクセス
+- 91 日目: 月額 9.99 ドルが請求されます
 
-### Example 3: Gradual Introduction
+### 例 3: 段階的な導入
 ```
 Type: Pay As You Go
 Price: $2.99/month
 Periods: 6 months
 Then: $9.99/month
 ```
-**User Journey:**
-- Months 1-6: $2.99/month
-- Month 7+: $9.99/month
+**ユーザージャーニー:**
+- 1 ～ 6 か月目: 月額 2.99 ドル
+- 7 か月目以降: $9.99/月
 
-## Using in Your App
+## アプリでの使用
 
-The native-purchases plugin automatically handles introductory offer presentation and eligibility:
+ネイティブ購入プラグインは、紹介オファーの提示と資格を自動的に処理します。
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -215,24 +210,24 @@ try {
 }
 ```
 
-## Displaying Intro Offers to Users
+## ユーザーへの紹介オファーの表示
 
-### Best Practices for UI
+### UI のベスト プラクティス
 
-**Clear Value Proposition:**
+**明確な価値提案:**
 ```
 Try Premium Free for 7 Days
 Then $9.99/month. Cancel anytime.
 ```
 
-**Emphasize Savings:**
+**節約を重視:**
 ```
 Start at Just $1.99
 Get 3 months of Premium for only $1.99
 Then $9.99/month
 ```
 
-**Transparent Communication:**
+**透過的なコミュニケーション:**
 ```
 Your Free Trial
 • Access all premium features
@@ -241,7 +236,7 @@ Your Free Trial
 • Cancel anytime, even during trial
 ```
 
-### Example Implementation
+### 実装例
 
 ```typescript
 function formatIntroOffer(product: any): string {
@@ -265,27 +260,27 @@ function formatIntroOffer(product: any): string {
 }
 ```
 
-## Marketing Best Practices
+## マーケティングのベストプラクティス
 
-### Trial Length Strategy
-- **3-7 days**: Quick decision apps, games
-- **7-14 days**: Standard for most apps
-- **14-30 days**: Complex tools, professional apps
-- **30+ days**: High-value B2B or enterprise
+### トライアル期間戦略
+- **3～7日**: アプリ、ゲームをすぐに決定
+- **7 ～ 14 日**: ほとんどのアプリの標準
+- **14～30日**: 複雑なツール、プロフェッショナルなアプリ
+- **30 日以上**: 高価値の B2B またはエンタープライズ
 
-### Pricing Psychology
-- **$0.99-$1.99**: Very low barrier, good for testing
-- **50% off**: Strong perceived value
-- **First month free**: Common, familiar pattern
+### 価格設定の心理学
+- **$0.99-$1.99**: 障壁が非常に低く、テストに適しています
+- **50% オフ**: 知覚価値が高い
+- **初月無料**: よくあるおなじみのパターン
 
-### Communication Timing
-- **Before trial ends**: Remind users of upcoming charge
-- **Highlight value**: Show usage stats, achievements
-- **Easy cancellation**: Build trust with transparent process
+### 通信タイミング
+- **試用期間が終了する前に**: 今後の請求についてユーザーに通知します
+- **ハイライト値**: 使用状況の統計、実績を表示します。
+- **簡単なキャンセル**: 透明性のあるプロセスで信頼を構築
 
-## Testing Intro Offers
+## イントロオファーのテスト
 
-Use sandbox testing to verify behavior:
+サンドボックス テストを使用して動作を検証します。
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -318,68 +313,66 @@ setTimeout(async () => {
 }, 180000); // 3 minutes for weekly trial
 ```
 
-## Important Notes
+## 重要な注意事項
 
-### Eligibility Rules
-- One intro offer per user per subscription group (lifetime)
-- Applies to new subscribers only
-- Cannot be used again after cancellation
-- Not available for subscription upgrades/crossgrades
+### 資格規定
+- サブスクリプション グループごとにユーザーごとに 1 つのイントロ オファー (生涯)
+- 新規加入者のみに適用されます
+・キャンセル後は再利用不可
+- サブスクリプションのアップグレード/クロスグレードには利用できません
 
-### StoreKit API
-- `introductoryPrice` shows intro offer details
-- `eligibility` method checks if user qualifies
-- Automatically applied at purchase time
-- No special purchase method needed
+### ストアキット API
+- `introductoryPrice` には、イントロ オファーの詳細が表示されます
+- `eligibility` メソッドはユーザーが資格があるかどうかを確認します
+- 購入時に自動的に適用されます
+- 特別な購入方法は必要ありません
 
-### Limitations
-- Only one intro offer active per subscription at a time
-- Cannot combine with other discount types
-- Cannot change eligibility rules
-- Apple controls eligibility checking
+### 制限事項
+- サブスクリプションごとに一度に有効になるイントロ オファーは 1 つだけです
+- 他の割引タイプとの併用はできません
+- 資格ルールは変更できません
+- Apple は適格性チェックを制御します
 
-## Troubleshooting
+## トラブルシューティング
 
-**Intro offer not showing:**
-- Check if offer is activated in App Store Connect
-- Verify user hasn't used an intro offer before
-- Ensure user hasn't subscribed to anything in the group
-- Test with new sandbox account
+**紹介オファーが表示されない:**
+- App Store Connect でオファーがアクティブ化されているかどうかを確認します
+- ユーザーがこれまでに紹介オファーを使用したことがないことを確認する
+- ユーザーがグループ内の何もサブスクライブしていないことを確認してください
+- 新しいサンドボックス アカウントでテストする
 
-**Eligibility check failing:**
-- Wait for App Store sync (can take 2-3 hours)
-- Verify product ID is correct
-- Check subscription group configuration
-- Test in sandbox with fresh test account
+**資格チェックに失敗しました:**
+- App Store の同期を待ちます (2 ～ 3 時間かかる場合があります)
+- 製品IDが正しいことを確認してください
+- サブスクリプション グループの構成を確認する
+- 新しいテスト アカウントを使用してサンドボックスでテストする**間違った価格表示:**
+- 地域の価格設定を確認する
+- 通貨換算を確認する
+- オファーの日付が最新のものであることを確認してください
+- 製品情報を更新
 
-**Wrong price displaying:**
-- Check regional pricing settings
-- Verify currency conversion
-- Ensure offer dates are current
-- Refresh product information
+**サンドボックス テストの問題:**
+- 加速期間を使用します (3 分 = 1 週間)
+- テストごとに新しいテスト アカウントを作成する
+- トライアルが自然に完了するまで待ちます
+- 更新回数の確認（サンドボックスでは最大6回）
 
-**Sandbox testing issues:**
-- Use accelerated durations (3 min = 1 week)
-- Create new test accounts for each test
-- Wait for trial to complete naturally
-- Check renewal count (max 6 in sandbox)
+## 分析と最適化
 
-## Analytics and Optimization
+### これらの指標を追跡する
+- 紹介オファー承諾率
+- トライアルから有料への変換率
+- トライアル中のキャンセル
+- 最初の充電後の保持
+- 収益への影響
 
-### Track These Metrics
-- Intro offer acceptance rate
-- Trial-to-paid conversion rate
-- Cancellation during trial
-- Retention after first charge
-- Revenue impact
+### A/B テストのアイデア
+- 無料トライアルと有料イントロの比較
+- トライアルの長さのバリエーション
+- 割引率
+- 一括支払いと定期割引の比較
 
-### A/B Testing Ideas
-- Free trial vs. paid intro
-- Trial length variations
-- Discount percentage
-- Single payment vs. recurring discount
-
-### Optimization Strategy
+### 最適化戦略
 ```typescript
 // Track offer performance
 analytics.track('intro_offer_displayed', {
@@ -403,13 +396,13 @@ NativePurchases.addListener('transactionUpdated', (transaction) => {
 });
 ```
 
-## Next Steps
+## 次のステップ
 
-- [Configure sandbox testing](/docs/plugins/native-purchases/ios-sandbox-testing/) to test your intro offers
-- Set up promotional offers for win-back campaigns
-- Implement subscription analytics
-- Create targeted marketing campaigns
+- [サンドボックス テストを構成](/docs/plugins/native-purchases/ios-sandbox-testing/) してイントロ オファーをテストします
+- ウィンバック キャンペーンのプロモーション オファーを設定する
+- サブスクリプション分析の実装
+- ターゲットを絞ったマーケティング キャンペーンを作成する
 
-## Additional Resources
+## 追加のリソース
 
-For more details, refer to the [official Apple documentation on introductory offers](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers/implementing_introductory_offers_in_your_app).
+詳細については、[紹介オファーに関する公式 Apple ドキュメント](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers/implementing_introductory_offers_in_your_app) を参照してください。

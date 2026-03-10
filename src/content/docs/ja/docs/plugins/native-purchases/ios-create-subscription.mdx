@@ -1,164 +1,159 @@
 ---
-title: Create iOS Auto-Renewable Subscription
-description: >-
-  Step-by-step guide to creating auto-renewable subscriptions in App Store
-  Connect for the native-purchases plugin.
+title: iOS 自動更新可能なサブスクリプションを作成する
+description: App Store Connect でネイティブ購入プラグインの自動更新可能なサブスクリプションを作成するためのステップバイステップ ガイド。
 sidebar:
   order: 8
 locale: ja
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 
-自動更新サブスクリプションは、iOS アプリ内のコンテンツ、サービス、またはプレミアム機能への継続的なアクセスを提供します。このガイドでは、App Store Connect でサブスクリプションを作成する方法を説明します。
+自動更新可能なサブスクリプションにより、iOS アプリのコンテンツ、サービス、またはプレミアム機能に定期的にアクセスできます。このガイドでは、App Store Connect でサブスクリプションを作成する手順を説明します。
 
-## Overview
+## 概要
 
-Auto-renewable subscriptions automatically renew at the end of each billing period until users cancel. They're perfect for:
-- Premium content and features
-- Ad-free experiences
-- Cloud storage and sync
-- Streaming services
-- Professional tools and utilities
+自動更新可能なサブスクリプションは、ユーザーがキャンセルするまで、各請求期間の終了時に自動的に更新されます。以下のような用途に最適です。
+- プレミアムコンテンツと機能
+- 広告なしのエクスペリエンス
+- クラウドストレージと同期
+- ストリーミングサービス
+- プロフェッショナルなツールとユーティリティ
 
-## Prerequisites
+## 前提条件
 
-Before creating subscriptions, you must:
-1. [Create a subscription group](/docs/plugins/native-purchases/ios-subscription-group/) to organize your subscriptions
-2. Have an active Apple Developer Program membership
-3. Complete banking and tax information in App Store Connect
+サブスクリプションを作成する前に、次のことを行う必要があります。
+1. [サブスクリプション グループを作成](/docs/plugins/native-purchases/ios-subscription-group/) してサブスクリプションを整理します
+2. アクティブな Apple 開発者プログラム メンバーシップを持っている
+3. App Store Connect で銀行と税金の情報を入力します
 
-## Creating a Subscription
+## サブスクリプションの作成
 
 <Steps>
 
-1. **Navigate to Subscriptions**
+1. **サブスクリプションに移動**
 
-   In App Store Connect, select your app and go to **Monetize > Subscriptions**.
+   App Store Connect で、アプリを選択し、**[収益化] > [サブスクリプション]** に移動します。
 
-   Select your subscription group or create a new one if needed.
+   サブスクリプション グループを選択するか、必要に応じて新しいグループを作成します。
 
-   ![Navigate to subscriptions](/native-purchases/ios/create-subscription/navigate-to-subscriptions.webp)
+   ![サブスクリプションに移動](/native-purchases/ios/create-subscription/navigate-to-subscriptions.webp)
 
-2. **Create New Subscription**
+2. **新しいサブスクリプションを作成**
 
-   Click the **+** icon next to your subscription group to add a new subscription.
+   サブスクリプション グループの横にある **+** アイコンをクリックして、新しいサブスクリプションを追加します。
 
-3. **Enter Basic Information**
+3. **基本情報を入力**
 
-   **Reference Name**: Descriptive name for your internal use (not shown to customers)
-   - Examples: "Premium Monthly", "Ultimate Annual", "Basic Plan"
+   **参照名**: 内部使用のためのわかりやすい名前 (顧客には表示されません)
+   - 例：「プレミアムマンスリー」、「アルティメット年間」、「ベーシックプラン」
 
-   **Product ID**: Unique identifier for this subscription (cannot be changed later)
-   - Format: `com.yourcompany.yourapp.premium_monthly`
-   - Use descriptive, lowercase names with underscores
-   - Required for configuring the native-purchases plugin
+   **製品 ID**: このサブスクリプションの一意の識別子 (後で変更することはできません)
+   - 形式: `com.yourcompany.yourapp.premium_monthly`
+   - アンダースコアを含むわかりやすい小文字の名前を使用します
+   - ネイティブ購入プラグインの構成に必要です
 
-   ![Enter subscription details](/native-purchases/ios/create-subscription/enter-subscription-info.webp)
+   ![サブスクリプションの詳細を入力](/native-purchases/ios/create-subscription/enter-subscription-info.webp)
 
-4. **Configure Duration**
+4. **期間の構成**
 
-   Select the subscription duration from available options:
-   - 1 week
-   - 1 month
-   - 2 months
-   - 3 months
-   - 6 months
-   - 1 year
+   利用可能なオプションからサブスクリプション期間を選択します。
+   - 1週間
+   - 1ヶ月
+   - 2ヶ月
+   - 3ヶ月
+   - 6ヶ月
+   - 1年
 
-   The duration determines how often users are billed.
+   期間によって、ユーザーに請求される頻度が決まります。
 
-5. **Set Up Pricing**
+5. **価格設定**
 
-   Click **Add Subscription Price** to configure pricing:
+   [**サブスクリプション価格の追加**] をクリックして価格を設定します。
 
-   **Base Territory**: Select your primary market (usually your country)
+   **基本地域**: 主要市場 (通常はあなたの国) を選択してください
 
-   **Price**: Set the subscription price
-   - Apple automatically converts to other currencies
-   - Choose from Apple's price tiers
-   - Consider perceived value and market rates
+   **価格**: サブスクリプション価格を設定します
+   - Apple は自動的に他の通貨に変換されます
+   - Apple の価格帯から選択します
+   - 知覚価値と市場レートを考慮する
 
-   ![Configure pricing](/native-purchases/ios/create-subscription/configure-pricing.webp)
+   ![価格設定](/native-purchases/ios/create-subscription/configure-pricing.webp)
 
-6. **Family Sharing (Optional)**
+6. **ファミリー共有 (オプション)**
 
-   Decide whether to enable Family Sharing, which allows up to 6 family members to access the subscription.
+   最大 6 人の家族メンバーがサブスクリプションにアクセスできるようにするファミリー共有を有効にするかどうかを決定します。
 
-   :::caution
-   Once Family Sharing is enabled, it cannot be turned off for this product.
+   :::注意
+   ファミリー共有を一度有効にすると、この製品ではオフにすることはできません。
    :::
 
-   **Enable if:**
-   - Content is appropriate for family use
-   - You want to increase value proposition
-   - Your business model supports it
+   **次の場合に有効にします:**
+   - コンテンツは家族での使用に適しています
+   - 価値提案を高めたい
+   - あなたのビジネスモデルがそれをサポートしています
 
-   **Don't enable if:**
-   - Subscription is for individual use only
-   - Content is personalized to the user
-   - You want to maximize revenue per user
+   **次の場合は有効にしないでください**
+   - サブスクリプションは個人使用のみを目的としています
+   - コンテンツはユーザーに合わせてカスタマイズされます
+   - ユーザーあたりの収益を最大化したい
 
-7. **Add Localizations**
+7. **ローカリゼーションを追加**
 
-   Add subscription display information in all languages your app supports:
+   アプリがサポートするすべての言語でサブスクリプション表示情報を追加します。
 
-   **Subscription Display Name**: Customer-facing name (e.g., "Premium Monthly")
+   **サブスクリプション表示名**: 顧客向けの名前 (例: 「Premium Monthly」)
 
-   **Description**: Brief description of what the subscription includes
-   - Keep it concise and benefit-focused
-   - Mention key features
-   - Highlight value proposition
+   **説明**: サブスクリプションに含まれる内容の簡単な説明
+   - 簡潔かつ利益を重視した内容にします
+   - 主な機能について言及する
+   - 価値提案を強調する
 
-   ![Add localizations](/native-purchases/ios/create-subscription/add-localization.webp)
+   ![ローカリゼーションを追加](/native-purchases/ios/create-subscription/add-localization.webp)8. **App Store プロモーション画像 (オプション)**
 
-8. **App Store Promotional Image (Optional)**
+   このサブスクリプションのプロモーション画像をアップロードします (312x390 ピクセル):
+   - App Store サブスクリプション ページに表示されます
+   - アプリのデザインと一致する必要があります
+   - 明確にするためにサブスクリプション名を含めます
 
-   Upload a promotional image for this subscription (312x390 pixels):
-   - Shows in the App Store subscription page
-   - Should match your app's design
-   - Include subscription name for clarity
-
-   :::note
-   While images are optional for initial submission, they're required for promotional display in the App Store. You can add them later.
+   :::メモ
+   画像は最初の送信ではオプションですが、App Store でのプロモーション表示には必須です。後で追加することもできます。
    :::
 
-9. **Save and Submit**
+9. **保存して送信**
 
-   Click **Save** to create the subscription.
+   [**保存**] をクリックしてサブスクリプションを作成します。
 
-   **For First Subscription:**
-   - Must be submitted with a new app version
-   - Include in your next App Store submission
-   - Cannot submit independently
+   **初めてのサブスクリプションの場合:**
+   - 新しいアプリバージョンで提出する必要があります
+   - 次回の App Store の提出物に含めてください
+   - 単独で提出することはできません
 
-   **For Subsequent Subscriptions:**
-   - Can be submitted directly from the Subscriptions page
-   - Don't require a new app version
-   - Available after first subscription is approved
+   **次回以降のサブスクリプションの場合:**
+   - サブスクリプションページから直接送信できます
+   - 新しいアプリのバージョンは必要ありません
+   - 最初のサブスクリプションが承認された後に利用可能になります
 
 </Steps>
 
-## Subscription Status
+## サブスクリプションのステータス
 
-Your subscription will have one of these statuses:
+サブスクリプションは次のいずれかのステータスになります。
 
-| Status | Description | Can Test? |
-|--------|-------------|-----------|
-| **Missing Metadata** | Incomplete setup | Yes (sandbox) |
-| **Ready to Submit** | Complete but not submitted | Yes (sandbox) |
-| **Waiting for Review** | Submitted to Apple | Yes (sandbox) |
-| **In Review** | Being reviewed by Apple | Yes (sandbox) |
-| **Approved** | Available for purchase | Yes |
-| **Rejected** | Needs changes | Yes (sandbox) |
+|ステータス |説明 |テストできますか? |
+|----------|---------------|----------|
+| **メタデータがありません** |セットアップが不完全 |はい (サンドボックス) |
+| **送信準備完了** |完了したが送信されていない |はい (サンドボックス) |
+| **レビュー待ち** | Apple に送信されました |はい (サンドボックス) |
+| **レビュー中** | Apple によってレビュー中 |はい (サンドボックス) |
+| **承認済み** |購入可能 |はい |
+| **拒否されました** |変化が必要 |はい (サンドボックス) |
 
 :::tip
-You can test subscriptions in sandbox mode even if they show "Missing Metadata" or "Ready to Submit"!
+「メタデータがありません」または「送信準備完了」と表示されている場合でも、サンドボックス モードでサブスクリプションをテストできます。
 :::
 
-## Using in Your App
+## アプリでの使用
 
-Once created, reference the subscription in your app using the product ID:
+作成したら、製品 ID を使用してアプリ内でサブスクリプションを参照します。
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -212,41 +207,41 @@ if (premium?.isActive) {
 }
 ```
 
-## Best Practices
+## ベストプラクティス
 
-### Pricing Strategy
-- **Monthly plans**: Lower barrier to entry, builds habit
-- **Annual plans**: Better value, higher LTV, lower churn
-- **Multiple tiers**: Basic, Premium, Ultimate for different user segments
-- **Competitive analysis**: Research similar apps' pricing
+### 価格戦略
+- **月額プラン**: 参入障壁が低くなり、習慣が身に付きます
+- **年間計画**: より良い価値、より高い LTV、より低い解約率
+- **複数のレベル**: さまざまなユーザーセグメントに対応するベーシック、プレミアム、アルティメット
+- **競合分析**: 類似アプリの価格を調査します。
 
-### Product IDs
-- Use consistent naming: `company.app.tier_duration`
-- Include tier and duration in ID: `premium_monthly`, `ultimate_annual`
-- Avoid changing product IDs (they're permanent)
-- Document all product IDs for your team
+### 製品ID
+- 一貫した名前を使用します: `company.app.tier_duration`
+- ID に階層と期間を含めます: `premium_monthly`、`ultimate_annual`
+- 製品 ID は変更しないでください (永久的なものです)。
+- チームのすべての製品 ID を文書化します。
 
-### Family Sharing
-- Enable for family-oriented apps (games, educational, entertainment)
-- Consider impact on revenue
-- Test sharing behavior thoroughly
-- Communicate sharing capability in marketing
+### ファミリー共有
+- 家族向けアプリ (ゲーム、教育、エンターテイメント) を有効にします
+- 収益への影響を考慮する
+- 共有動作を徹底的にテストする
+- マーケティングにおける共有機能を伝える
 
-### Localization
-- Translate all subscription names and descriptions
-- Consider regional pricing differences
-- Test display in all supported languages
-- Use culturally appropriate marketing language
+### ローカリゼーション
+- すべてのサブスクリプション名と説明を翻訳します
+- 地域による価格の違いを考慮する
+- サポートされているすべての言語での表示をテストします
+- 文化的に適切なマーケティング言語を使用する
 
-### Promotional Images
-- Maintain consistent visual style
-- Include subscription name and key benefit
-- Update for seasonal promotions
-- Match app's overall design language
+### プロモーション画像
+- 一貫したビジュアルスタイルを維持する
+- サブスクリプション名と主な特典を含めます
+- 季節限定プロモーションの更新
+- マッチアプリ全体のデザイン言語
 
-## Common Subscription Patterns
+## 一般的なサブスクリプション パターン
 
-### Single Tier (Freemium)
+### シングルティア (フリーミアム)
 ```
 Free App + Premium Subscription
 - Basic: Free (limited features)
@@ -254,7 +249,7 @@ Free App + Premium Subscription
 - Premium Annual: $39.99 (save 33%)
 ```
 
-### Multi-Tier (Good, Better, Best)
+### 多層 (良い、より良い、最高)
 ```
 - Basic Monthly: $4.99
 - Premium Monthly: $9.99
@@ -265,50 +260,48 @@ Free App + Premium Subscription
 - Ultimate Annual: $199.99
 ```
 
-### Consumable + Subscription Hybrid
+### 消耗品 + サブスクリプションのハイブリッド
 ```
 - Credit packs (consumable)
 - Monthly subscription (unlimited credits)
 - Annual subscription (unlimited + bonus features)
 ```
 
-## Troubleshooting
+## トラブルシューティング
 
-**Subscription not loading in app:**
-- Verify product ID matches exactly (case-sensitive)
-- Check subscription is in subscription group
-- Ensure bundle identifier matches App Store Connect
-- Wait 2-3 hours after creating product
+**サブスクリプションがアプリに読み込まれていません:**
+- 製品 ID が正確に一致することを確認します (大文字と小文字が区別されます)。
+- サブスクリプションがサブスクリプション グループに含まれていることを確認します
+- バンドル識別子が App Store Connect と一致することを確認してください
+- 製品を作成してから 2 ～ 3 時間待ちます**サブスクリプションを送信できません:**
+- すべての必須フィールドに入力します (名前、説明、価格)
+- 少なくとも 1 つのローカリゼーションを追加します
+- 銀行/税金情報が承認されていることを確認します
+- 最初のサブスクリプションかどうかを確認します (アプリのバージョンが必要です)
 
-**Cannot submit subscription:**
-- Complete all required fields (name, description, price)
-- Add at least one localization
-- Verify banking/tax info is approved
-- Check if first subscription (requires app version)
+**ファミリー共有の切り替えが無効になっています:**
+- すでに有効になっています（無効にすることはできません）
+- サブスクリプションの詳細をチェックインする
+- 行き詰まった場合は、Apple サポートにお問い合わせください
 
-**Family Sharing toggle disabled:**
-- Already enabled (cannot be disabled)
-- Check in subscription details
-- Contact Apple Support if stuck
+**価格帯は利用できません:**
+- 一部の地域では制限される場合があります
+- 代替ティアを選択してください
+- 価格に関する質問については、Apple にお問い合わせください。
 
-**Price tier not available:**
-- May be restricted in some territories
-- Choose alternative tier
-- Contact Apple for pricing questions
+**「無効な製品 ID」エラー:**
+- リバースドメイン形式である必要があります
+- スペースや特殊文字を含めることはできません
+- タイプミスをチェックする
+- すべての製品の一意性を検証する
 
-**"Invalid Product ID" error:**
-- Must be reverse domain format
-- Cannot contain spaces or special characters
-- Check for typos
-- Verify uniqueness across all products
+## 次のステップ
 
-## Next Steps
+- [紹介オファーを作成](/docs/plugins/native-purchases/ios-introductory-offer/) して新規登録者を引きつけます
+- [サンドボックス テストを構成](/docs/plugins/native-purchases/ios-sandbox-testing/) してサブスクリプションをテストします
+- 獲得と維持のためのプロモーションオファーを設定する
+- サブスクリプション分析追跡を実装する
 
-- [Create an introductory offer](/docs/plugins/native-purchases/ios-introductory-offer/) to attract new subscribers
-- [Configure sandbox testing](/docs/plugins/native-purchases/ios-sandbox-testing/) to test your subscriptions
-- Set up promotional offers for win-back and retention
-- Implement subscription analytics tracking
+## 追加のリソース
 
-## Additional Resources
-
-For more details, refer to the [official Apple documentation on auto-renewable subscriptions](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers).
+詳細については、[自動更新可能なサブスクリプションに関する公式 Apple ドキュメント](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers) を参照してください。

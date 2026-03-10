@@ -1,37 +1,156 @@
 ---
 locale: fr
-title: Commencer
-description: Discover how to Installer and configure the Capacitor Social Connexion plugin to enhance your Application's authentication with seamless integration for Google, Apple, and Facebook logins.
-sidebar: 
+title: Premiers pas
+description: Découvrez comment installer et configurer le plugin Capacitor Social Login afin d'améliorer l'authentification de votre application grâce à une intégration transparente des connexions Google, Apple, Facebook et OAuth2 générique.
+sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps, Card, CardGrid } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { Code, Card, CardGrid } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 import MicroCard from '@/components/MicroCard.astro'
 
 <Steps>
-1. **Installer the package**
+1. **Installer le package**
    <PackageManagers pkg="@capgo/capacitor-social-login" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser with Natif projects**
+2. **Synchroniser avec les projets natifs**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure the plugin**
-   <div class="flex flex-nowrap gap-4 h-full">
-      <div style="display: flex; gap: 1rem; width: 100% !important; max-width: 100% !important;">
-         <MicroCard href="/docs/plugins/social-login/google/general/" title="Google" customIcon="/icons/google.svg">
-            Configure Google Sign-In for your Application
-         </MicroCard>
-         <MicroCard href="/docs/plugins/social-login/facebook/" title="Facebook" icon="facebook">
-            Set up Facebook Connexion integration
-         </MicroCard>
-         <MicroCard href="/docs/plugins/social-login/apple/general/" title="Apple" icon="apple">
-            Activer Sign in with Apple
-         </MicroCard>
-      </div>
-   </div>
+3. **Initialiser au démarrage de l'application**
+
+   ```typescript
+   import { SocialLogin } from '@capgo/capacitor-social-login';
+
+   await SocialLogin.initialize({
+     google: {
+       webClientId: 'your-google-web-client-id',
+       iOSServerClientId: 'your-google-server-client-id',
+       mode: 'online',
+     },
+     apple: {
+       clientId: 'your-apple-service-id',
+       useProperTokenExchange: true,
+       useBroadcastChannel: true,
+     },
+     facebook: {
+       appId: 'your-facebook-app-id',
+     },
+     twitter: {
+       clientId: 'your-twitter-client-id',
+       redirectUrl: 'myapp://oauth/twitter',
+     },
+     oauth2: {
+       github: {
+         appId: 'your-github-client-id',
+         authorizationBaseUrl: 'https://github.com/login/oauth/authorize',
+         accessTokenEndpoint: 'https://github.com/login/oauth/access_token',
+         redirectUrl: 'myapp://oauth/github',
+         scope: 'read:user user:email',
+         pkceEnabled: true,
+       },
+     },
+   });
+   ```
 </Steps>
 
+## Exemples de flux principaux
 
+### Connexion
+
+```typescript
+await SocialLogin.login({
+  provider: 'google',
+  options: { scopes: ['profile', 'email'] },
+});
+
+await SocialLogin.login({
+  provider: 'oauth2',
+  options: {
+    providerId: 'github',
+    scope: 'read:user user:email',
+  },
+});
+```
+
+### Vérifications de session
+
+```typescript
+const status = await SocialLogin.isLoggedIn({ provider: 'google' });
+await SocialLogin.logout({ provider: 'google' });
+```
+
+### Codes d'autorisation et rafraîchissement
+
+```typescript
+// For providers that support this mode
+const authCodeResult = await SocialLogin.getAuthorizationCode({ provider: 'google' });
+await SocialLogin.refresh({ provider: 'google', options: {} as never });
+```
+
+### Helpers avancés
+
+```typescript
+const jwt = await SocialLogin.decodeIdToken({
+  idToken: 'eyJhbGciOi...',
+});
+
+const { date } = await SocialLogin.getAccessTokenExpirationDate({
+  accessTokenExpirationDate: Date.now() + 3600 * 1000,
+});
+
+const expired = await SocialLogin.isAccessTokenExpired({
+  accessTokenExpirationDate: Date.now() + 1000,
+});
+
+const active = await SocialLogin.isRefreshTokenAvailable({ refreshToken: 'a-token' });
+```
+
+## Remarques spécifiques aux fournisseurs
+
+### Mode hors ligne de Google
+
+`google.mode: 'offline'` renvoie `serverAuthCode` lors de la connexion. Dans ce mode, `logout`, `isLoggedIn`, `getAuthorizationCode` et `refresh` ne sont pas disponibles.
+
+### Apple
+
+Définissez `useProperTokenExchange: true` pour une gestion stricte des jetons et `useBroadcastChannel: true` pour une configuration simplifiée sur Android.
+
+### Flux de redirection web OAuth2
+
+Utilisez `OAuth2LoginOptions.flow: 'redirect'` pour les flux web qui naviguent hors de la page.
+
+## Configuration des fournisseurs dans Capacitor
+
+Vous pouvez désactiver les fournisseurs inutilisés pour réduire la taille des binaires natifs :
+
+```typescript
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.example.app',
+  appName: 'My App',
+  webDir: 'dist',
+  plugins: {
+    SocialLogin: {
+      providers: {
+        google: true,
+        facebook: true,
+        apple: true,
+        twitter: false,
+      },
+    },
+  },
+};
+```
+
+## Documentation associée
+
+- [Aperçu des intégrations](/docs/plugins/social-login/integrations/)
+- [Intégration Better Auth](/docs/plugins/social-login/better-auth/)
+- [Fournisseurs OAuth2 et OIDC](/docs/plugins/social-login/oauth2/)
+- [Migrer depuis Ionic Auth Connect](/docs/upgrade/from-ionic-auth-connect/)
+- [Guide de migration Social Login Auth Connect](/docs/plugins/social-login/migrations/ionic-auth-connect/)
+- [Migrer les fournisseurs historiques](/docs/plugins/social-login/migrations/google/)
+- [Solution de migration des plugins Ionic Enterprise](/solutions/ionic-enterprise-plugins/)

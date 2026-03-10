@@ -1,87 +1,91 @@
 ---
+title: Facebook Configuration de la connexion
+description: >-
+  Ce guide fournit une procédure pas à pas complète sur la configuration de la
+  connexion Facebook à l'aide de Capacitor, garantissant une intégration
+  transparente et une authentification améliorée des utilisateurs pour votre
+  application.
+sidebar:
+  order: 1
 locale: fr
-title: Facebook Connexion Configuration
-description: This Guide provides a comprehensive walkthrough on setting up Facebook Connexion using Capacitor, ensuring seamless integration and enhanced Utilisateur authentication for your Application.
-sidebar: 
-    order: 1
 ---
 import { Steps } from '@astrojs/starlight/components';
 
 
-## Introduction
+##Présentation
 
-In this Guide, you will learn how to Configuration Facebook Connexion with Capgo Social Connexion. You will need the following:
+Dans ce guide, vous apprendrez comment configurer la connexion Facebook avec la connexion sociale Capgo. Vous aurez besoin des éléments suivants :
 
-- A Facebook Developer Compte
-- Your Application's package name/Bundle ID
-- Access to a Terminal for generating key hashes (Android)
+- Un compte développeur Facebook
+- Le nom/ID du package de votre application
+- Accès à un terminal de génération de hachages de clés (Android)
 
-## General Configuration
+## Configuration générale
 
-If you don't already have a Facebook Application created, follow these steps:
+Si vous n'avez pas encore créé d'application Facebook, procédez comme suit :
 
 <Steps>
-1. Créer a Facebook Application
+1. Créez une application Facebook
    
-   Follow the Tutoriel to [Créer an Application](https://developers.facebook.com/docs/Développement/Créer-an-Application/)
+   Suivez le didacticiel pour [Créer une application](https://developers.facebook.com/docs/development/create-an-app/)
 
-2. Ajouter Facebook Connexion to your Application
+2. Ajoutez la connexion Facebook à votre application
    
-   In your Facebook Developer Tableau de bord, Ajouter the Facebook Connexion product to your Application
+   Dans votre tableau de bord de développeur Facebook, ajoutez le produit de connexion Facebook à votre application.
 
-3. Before you can Libération your Application to the public, follow this [Tutoriel](https://developers.facebook.com/docs/Développement/Libération/) to publish it
+3. Avant de pouvoir rendre votre application publique, suivez ce [tutoriel](https://developers.facebook.com/docs/development/release/) pour la publier.
 </Steps>
 
-## Important Information
+## Informations importantes
 
-Here's where to find the key Information you'll need for integration:
+Voici où trouver les informations clés dont vous aurez besoin pour l’intégration :
 
-1. `CLIENT_TOKEN`:
-   <img src="/social-login-assets/fb_where_to_fiind_client_token.png" alt="Facebook developer dashboard showing where to find the client token" />
+1. `CLIENT_TOKEN` :
+   <img src="/social-login-assets/fb_where_to_fiind_client_token.png" alt="Tableau de bord du développeur Facebook indiquant où trouver le jeton client" />
   
-2. `APP_ID`:
-   <img src="/social-login-assets/fb_where_to_find_app_id.png" alt="Facebook developer dashboard showing where to find the app ID" />
+2. `APP_ID` :
+   <img src="/social-login-assets/fb_where_to_find_app_id.png" alt="" />
 
-3. `APP_NAME`:
-   <img src="/social-login-assets/fb_where_to_find_app_name.png" alt="Facebook developer dashboard showing where to find the app name" />
+3. `APP_NAME` :
+   <img src="/social-login-assets/fb_where_to_find_app_name.png" alt="Tableau de bord du développeur Facebook indiquant où trouver le nom de l'application" />
 
 ## Android Configuration
 
 <Steps>
-1. Add internet permission to your `AndroidManifest.xml`
+1. Ajoutez une autorisation Internet à votre `AndroidManifest.xml`
 
-   Ensure this line is present:
+   Assurez-vous que cette ligne est présente :
    ```xml
    <uses-permission android:name="android.permission.INTERNET"/>
    ```
 
-2. Generate your Android key hash
+2. Générez votre hachage de clé Android
    
-   This is a crucial Sécurité step required by Facebook. Open your Terminal and run:
+   Il s'agit d'une étape de sécurité cruciale requise par Facebook. Ouvrez votre terminal et exécutez :
 
    ```bash
    keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64 -A
    ```
 
-   When prompted for a password, use: `android`
+   Lorsque vous êtes invité à saisir un mot de passe, utilisez : `android`
 
-   :::Remarque
-   For Libération builds, you'll need to use your Libération keystore:
+   :::remarque
+   Pour les versions de version, vous devrez utiliser votre magasin de clés de version :
    ```bash
    keytool -exportcert -alias your-key-name -keystore your-keystore-path | openssl sha1 -binary | openssl base64 -A
    ```
    :::
 
-3. Ajouter the key hash to your Facebook Application
+3. Ajoutez le hachage de clé à votre application Facebook
    
-   1. Go to your Application's Tableau de bord on Facebook Developers
-   2. Navigate to Paramètres > Basic
-   3. Scroll down to "Android" section
-   4. Click "Ajouter Platform" if Android isn't added yet and fill in the details
-   5. Ajouter the key hash you generated
-   6. For Production, Ajouter both Débogage and Libération key hashes
+   1. Accédez au tableau de bord de votre application sur Facebook Developers
+   2. Accédez à Paramètres > De base
+   3. Faites défiler jusqu'à la section "Android".
+   4. Cliquez sur "Ajouter une plateforme" si Android n'est pas encore ajouté et remplissez les détails.
+   5. Ajoutez le hachage de clé que vous avez généré
+   6. Pour la production, ajoutez les hachages de clé de débogage et de publication
 
-4. Update your `AndroidManifest.xml` to include:
+4. Mettez à jour votre `AndroidManifest.xml` pour inclure :
 
    ```xml
    <application>
@@ -103,24 +107,24 @@ Here's where to find the key Information you'll need for integration:
    </application>
    ```
 
-   :::Attention
-   Make sure to replace `[APP_ID]` with your actual Facebook app ID in the `android:scheme` attribute
+   :::attention
+   Assurez-vous de remplacer `[APP_ID]` par votre ID d'application Facebook réel dans l'attribut `android:scheme`.
    :::
 </Steps>
 
 ## iOS Configuration
 
 <Steps>
-1. Ajouter the iOS platform in Facebook Developer Console
+1. Ajoutez la plateforme iOS dans la console développeur Facebook
    
-   1. Go to your Application's Tableau de bord on Facebook Developers
-   2. Navigate to Paramètres > Basic
-   3. Scroll down to very bottom of the page and click "Ajouter Platform"
-   4. Select iOS and fill in the required details
+   1. Accédez au tableau de bord de votre application sur Facebook Developers
+   2. Accédez à Paramètres > De base
+   3. Faites défiler vers le bas de la page et cliquez sur « Ajouter une plateforme »
+   4. Sélectionnez iOS et remplissez les détails requis
 
-2. Open your Xcode project and navigate to Info.plist
+2. Ouvrez votre projet Xcode et accédez à Info.plist
 
-3. Ajouter the following entries to your Info.plist:
+3. Ajoutez les entrées suivantes à votre Info.plist :
 
    ```xml
    <key>FacebookAppID</key>
@@ -145,14 +149,14 @@ Here's where to find the key Information you'll need for integration:
    </array>
    ```
 
-   :::Attention
-   Replace the following values:
-   - `[APP-ID]` with your Facebook app ID
-   - `[CLIENT-TOKEN]` with your client token
-   - `[APP-NAME]` with your app's name
+   :::attention
+   Remplacez les valeurs suivantes :
+   - `[APP-ID]` avec votre identifiant d'application Facebook
+   - `[CLIENT-TOKEN]` avec votre token client
+   - `[APP-NAME]` avec le nom de votre application
    :::
 
-4. Modify the `AppDelegate.swift`
+4. Modifiez le `AppDelegate.swift`
 
    ```swift
    import FBSDKCoreKit
@@ -189,14 +193,12 @@ Here's where to find the key Information you'll need for integration:
    ```
 </Steps>
 
-## Using Facebook Connexion in Your Application
-
-:::Attention
-**Before You Start**: Remember that with the new Facebook SDK, the token type you receive depends entirely on the user's App Tracking choice, not on your code configuration. Always implement both access token and JWT token handling in your backend to ensure authentication works for all users.
+## Utilisation de Facebook Connectez-vous à votre application:::caution
+**Avant de commencer** : n'oubliez pas qu'avec le nouveau Facebook SDK, le type de jeton que vous recevez dépend entièrement du choix de suivi des applications de l'utilisateur, et non de la configuration de votre code. Implémentez toujours la gestion du jeton d'accès et du jeton JWT dans votre backend pour garantir que l'authentification fonctionne pour tous les utilisateurs.
 :::
 
 <Steps>
-1. Initialiser the Facebook Connexion in your Application
+1. Initialisez la connexion Facebook dans votre application
 
    ```typescript
    import { SocialLogin } from '@capgo/capacitor-social-login';
@@ -210,7 +212,7 @@ Here's where to find the key Information you'll need for integration:
    })
    ```
 
-2. Implement the Connexion function
+2. Implémentez la fonction de connexion
 
    ```typescript
    async function loginWithFacebook() {
@@ -231,13 +233,13 @@ Here's where to find the key Information you'll need for integration:
    }
    ```
 
-   :::Remarque
-   **Limited Login (iOS Only)**: Set `limitedLogin` to true if you want to use Facebook's Limited Login feature. This is an iOS-only feature that provides enhanced privacy by restricting the data shared during login.
+   :::remarque
+   **Connexion limitée (iOS uniquement)** : définissez `limitedLogin` sur true si vous souhaitez utiliser la fonctionnalité de connexion limitée de Facebook. Il s'agit d'une fonctionnalité réservée à iOS qui offre une confidentialité améliorée en limitant les données partagées lors de la connexion.
 
-   **Important Limitations:**
-   - **iOS Only**: Limited Connexion only affects iOS Appareils and has no impact on Android
-   - **ATT Override**: Even if you set `limitedLogin: false`, Facebook will automatically force it to `true` if the user hasn't granted App Tracking Transparency (ATT) permission
-   - **Always Handle Both Cases**: Your Application should always be prepared to handle both limited and full Connexion scenarios
+   **Limites importantes :**
+   - **iOS uniquement** : la connexion limitée n'affecte que les appareils iOS et n'a aucun impact sur Android.
+   - **ATT Override** : même si vous définissez `limitedLogin: false`, Facebook le forcera automatiquement à `true` si l'utilisateur n'a pas accordé l'autorisation App Tracking Transparency (ATT)
+   - **Toujours gérer les deux cas** : votre application doit toujours être prête à gérer des scénarios de connexion limités et complets.
 
    **Checking ATT Status:**
    ```typescript
@@ -249,7 +251,7 @@ Here's where to find the key Information you'll need for integration:
    console.log('Tracking status:', trackingStatus.status); // 'authorized', 'denied', 'notDetermined', or 'restricted'
    ```
 
-   **Recommended Implementation if access_token is preferred:**
+   **Mise en œuvre recommandée si access_token est préféré :**
    ```typescript
    async function loginWithFacebook() {
      try {
@@ -278,17 +280,17 @@ Here's where to find the key Information you'll need for integration:
    }
    ```
 
-   **What Happens in Limited Login:**
-   - **Reduced Data Access**: Some Utilisateur data may not be Disponible
-   - **Different Token Types**: Access tokens may have different capabilities
-   - **Privacy Compliance**: Helps comply with iOS privacy requirements
+   **Que se passe-t-il en cas de connexion limitée :**
+   - **Accès réduit aux données** : certaines données utilisateur peuvent ne pas être disponibles
+   - **Différents types de jetons** : les jetons d'accès peuvent avoir différentes capacités
+   - **Conformité en matière de confidentialité** : permet de se conformer aux exigences de confidentialité de iOS
 
-   **Important**: Always test your app with both limited and full login scenarios to ensure your app works correctly in both cases. You can learn more about Limited Login [here](https://developers.facebook.com/docs/facebook-login/limited-login/).
+   **Important** : Testez toujours votre application avec des scénarios de connexion limitée et complète pour vous assurer que votre application fonctionne correctement dans les deux cas. Vous pouvez en savoir plus sur la connexion limitée [ici] (https://developers.facebook.com/docs/facebook-login/limited-login/).
    :::
 
-3. **Get Utilisateur Profil Data**
+3. **Obtenir les données du profil utilisateur**
 
-   After successful Connexion, you can retrieve additional Profil Information:
+   Après une connexion réussie, vous pouvez récupérer des informations de profil supplémentaires :
 
    ```typescript
    async function getFacebookProfile() {
@@ -323,230 +325,27 @@ Here's where to find the key Information you'll need for integration:
    }
    ```
 
-   :::Conseil
-   **Available Profile Fields**: You can request any fields available in Facebook's Graph API. Common fields include: `id`, `name`, `email`, `first_name`, `last_name`, `picture`, `birthday`, `gender`, `location`, `hometown`. Note that some fields may require additional permissions.
+   :::tip
+   **Champs de profil disponibles** : vous pouvez demander tous les champs disponibles dans le graphique API de Facebook. Les champs courants incluent : `id`, `name`, `email`, `first_name`, `last_name`, `picture`, `birthday`, `gender`, `location`, `hometown`. Notez que certains champs peuvent nécessiter des autorisations supplémentaires.
    :::
 
-   :::Avertissement
-   **Token Type Limitation**: The `getProfile` call only works when you have an **access token** (standard login with tracking allowed). If the user denied tracking or you're using limited login (JWT token only), this call will fail. In that case, use the profile data provided in the initial login response.
+   :::warning
+   **Limitation du type de jeton** : l'appel `getProfile` ne fonctionne que lorsque vous disposez d'un **jeton d'accès** (connexion standard avec suivi autorisé). Si l'utilisateur a refusé le suivi ou si vous utilisez une connexion limitée (jeton JWT uniquement), cet appel échouera. Dans ce cas, utilisez les données de profil fournies dans la réponse de connexion initiale.
    :::
 </Steps>
 
-## ⚠️ Critical: Backend Token Handling
+## ⚠️ Critique : gestion des jetons backend
 
 :::danger
-**CRITICAL iOS BEHAVIOR**: Limited Login and App Tracking Transparency (ATT) are **iOS-ONLY** features. On Android, you will always receive access tokens regardless of the `limitedLogin` setting.
-
-**iOS Token Behavior**: 
-- **`limitedLogin: true`** → Always JWT token (iOS only)
-- **`limitedLogin: false` + User ALLOWS tracking** → Access token  
-- **`limitedLogin: false` + User DENIES tracking** → JWT token (iOS automatically overrides your setting)
-
-**Android Token Behavior**: Always access token, `limitedLogin` setting is ignored.
+**COMPORTEMENT CRITIQUE iOS** : la connexion limitée et la transparence du suivi des applications (ATT) sont des fonctionnalités **iOS-ONLY**. Le Android, vous recevrez toujours des jetons d'accès quel que soit le paramètre `limitedLogin`.:::tip
+**Essentiel pour iOS** : Vous DEVEZ implémenter les deux méthodes de gestion des jetons. De nombreux développeurs iOS supposent qu'ils obtiendront toujours des jetons d'accès et que leurs applications seront interrompues lorsque les utilisateurs refuseront le suivi.
 :::
 
-Your backend must handle **two different token types** because iOS Utilisateurs can receive either access tokens or JWT tokens depending on their Application Tracking Transparency choice, while Android Utilisateurs always receive access tokens.
+## Exigences relatives au contexte sécurisé (Web/Capacitor)
 
-### Token Types by Platform
+### Crypto API Limites
 
-| Platform | limitedLogin Setting | Utilisateur ATT Choice | Result Token Type |
-|----------|---------------------|-----------------|-------------------|
-| **iOS** | `true` | Any | JWT Token |
-| **iOS** | `false` | Allows tracking | Access Token |
-| **iOS** | `false` | Denies tracking | JWT Token (auto-override) |
-| **Android** | Any | N/A | Access Token (always) |
-
-### Backend Implementation
-
-<Steps>
-1. **Detect Token Type and Handle Accordingly**
-
-   ```typescript
-   async function loginWithFacebook() {
-     try {
-       const loginResult = await SocialLogin.login({
-         provider: 'facebook',
-         options: {
-           permissions: ['email', 'public_profile'],
-           limitedLogin: false // iOS: depends on ATT, Android: ignored
-         }
-       });
-
-       if (loginResult.accessToken) {
-         // Access token (Android always, iOS when tracking allowed)
-         return handleAccessToken(loginResult.accessToken.token);
-       } else if (loginResult.idToken) {
-         // JWT token (iOS only when tracking denied or limitedLogin: true)
-         return handleJWTToken(loginResult.idToken);
-       }
-     } catch (error) {
-       console.error('Facebook login error:', error);
-     }
-   }
-   ```
-
-2. **Firebase Integration Exemple**
-
-   ```typescript
-   import { OAuthProvider, FacebookAuthProvider, signInWithCredential } from 'firebase/auth';
-
-   async function handleAccessToken(accessToken: string, nonce: string) {
-     // For access tokens, use OAuthProvider (new method)
-     const fbOAuth = new OAuthProvider("facebook.com");
-     const credential = fbOAuth.credential({
-       idToken: accessToken,
-       rawNonce: nonce
-     });
-
-     try {
-       const userResponse = await signInWithCredential(auth, credential);
-       return userResponse;
-     } catch (error) {
-       console.error('Firebase OAuth error:', error);
-       return false;
-     }
-   }
-
-   async function handleJWTToken(jwtToken: string) {
-     // For JWT tokens, send to your backend for validation
-     try {
-       const response = await fetch('/api/auth/facebook-jwt', {
-         method: 'POST',
-         headers: {
-           'Content-Type': 'application/json',
-         },
-         body: JSON.stringify({ jwtToken })
-       });
-
-       const result = await response.json();
-       return result;
-     } catch (error) {
-       console.error('JWT validation error:', error);
-       return false;
-     }
-   }
-   ```
-
-3. **Backend JWT Validation**
-
-   ```typescript
-   // Backend: Validate JWT token from Facebook
-   import jwt from 'jsonwebtoken';
-   import { Request, Response } from 'express';
-
-   app.post('/api/auth/facebook-jwt', async (req: Request, res: Response) => {
-     const { jwtToken } = req.body;
-
-     try {
-       // Verify JWT token with Facebook's public key
-       // See: https://developers.facebook.com/docs/facebook-login/limited-login/token/validating/#standard-claims
-       const decoded = jwt.verify(jwtToken, getFacebookPublicKey(), {
-         algorithms: ['RS256'],
-         audience: process.env.FACEBOOK_APP_ID,
-         issuer: 'https://www.facebook.com' // From: https://www.facebook.com/.well-known/openid-configuration/?_rdr
-       });
-
-       // Extract user info from JWT
-       const userInfo = {
-         id: decoded.sub,
-         email: decoded.email,
-         name: decoded.name,
-         isJWTAuth: true
-       };
-
-       // Create your app's session/token
-       const sessionToken = createUserSession(userInfo);
-
-       res.json({
-         success: true,
-         token: sessionToken,
-         user: userInfo
-       });
-     } catch (error) {
-       console.error('JWT validation failed:', error);
-       res.status(401).json({ success: false, error: 'Invalid token' });
-     }
-   });
-   ```
-
-4. **Generic Backend Token Handler**
-
-   ```typescript
-   // Handle both token types in your backend
-   async function authenticateFacebookUser(tokenData: any) {
-     if (tokenData.accessToken) {
-       // Handle access token - validate with Facebook Graph API
-       const response = await fetch(`https://graph.facebook.com/me?access_token=${tokenData.accessToken}&fields=id,name,email`);
-       const userInfo = await response.json();
-       
-       return {
-         user: userInfo,
-         tokenType: 'access_token',
-         expiresIn: tokenData.expiresIn || 3600
-       };
-     } else if (tokenData.jwtToken) {
-       // Handle JWT token - decode and validate
-       // See: https://developers.facebook.com/docs/facebook-login/limited-login/token/validating/#standard-claims
-       const decoded = jwt.verify(tokenData.jwtToken, getFacebookPublicKey());
-       
-       return {
-         user: {
-           id: decoded.sub,
-           name: decoded.name,
-           email: decoded.email
-         },
-         tokenType: 'jwt',
-         expiresIn: decoded.exp - Math.floor(Date.now() / 1000)
-       };
-     } else {
-       throw new Error('No valid token provided');
-     }
-   }
-   ```
-</Steps>
-
-### Key Considerations
-
-:::danger
-**Critical iOS-Only Understanding**: 
-- **iOS**: User's App Tracking choice determines token type, NOT your code settings (even when `limitedLogin: false`)
-- **Android**: Always receives access tokens, regardless of `limitedLogin` setting
-- **Limited Connexion is iOS-ONLY** - Android ignores this setting completely
-:::
-
-**Access Token (Standard Login)**:
-- ✅ **Android**: Always Disponible (iOS-only restrictions don't apply)
-- ✅ **iOS**: Only when Utilisateur explicitly allows Application tracking
-- ✅ Can be used to access Facebook Graph API
-- ✅ Longer expiration times
-- ✅ More Utilisateur data Disponible
-- ❌ **Becoming less common on iOS** as Utilisateurs increasingly deny tracking
-
-**JWT Token (iOS-Only Privacy Mode)**:
-- ❌ **Android**: Never occurs (not supported)
-- ✅ **iOS**: When tracking denied or `limitedLogin: true`
-- ✅ Respects iOS Utilisateur privacy preferences
-- ❌ Contains basic Utilisateur Info only
-- ❌ Shorter expiration times
-- ❌ No access to Facebook Graph API
-- ⚠️ **Now the most common scenario for iOS Utilisateurs**
-
-:::Avertissement
-**Platform-Specific Behavior**: 
-- **iOS apps**: Must handle both access tokens AND JWT tokens
-- **Android apps**: Only need to handle access tokens
-- **Cross-platform apps**: Must implement both token handling methods
-:::
-
-:::Conseil
-**Essential for iOS**: You MUST implement both token handling methods. Many iOS developers assume they'll always get access tokens and their apps break when users deny tracking.
-:::
-
-## Secure Context Requirements (Web/Capacitor)
-
-### Crypto API Limitations
-
-The updated Facebook Connexion flow requires the **Web Crypto API** for nonce generation, which is only Disponible in **secure contexts**:
+Le flux de connexion Facebook mis à jour nécessite le **Web Crypto API** pour la génération de noms occasionnels, qui n'est disponible que dans des **contextes sécurisés** :
 
 ```typescript
 // This requires secure context (HTTPS or localhost)
@@ -557,39 +356,39 @@ async function sha256(message: string) {
 }
 ```
 
-### Développement Environment Issues
+### Problèmes d'environnement de développement
 
-**Common Problem**: `ionic serve` with HTTP URLs breaks Facebook authentication
+**Problème courant** : `ionic serve` avec les URL HTTP interrompt l'authentification Facebook
 
-| Environment | Crypto API Disponible | Facebook Connexion Works |
-|-------------|---------------------|---------------------|
-| `http://localhost:3000` | ✅ Yes | ✅ Yes |
-| `http://127.0.0.1:3000` | ✅ Yes | ✅ Yes |
-| `http://192.168.1.100:3000` | ❌ No | ❌ No |
-| `https://any-domain.com` | ✅ Yes | ✅ Yes |
+| Environnement | Crypto API disponible | Facebook Connexion Fonctionne |
+|-------------|-----------|-------------------------|
+| `http://localhost:3000` | ✅ Oui | ✅ Oui |
+| `http://127.0.0.1:3000` | ✅ Oui | ✅ Oui |
+| `http://192.168.1.100:3000` | ❌ Non | ❌ Non |
+| `https://any-domain.com` | ✅ Oui | ✅ Oui |
 
-### Solutions for Capacitor Développement
+### Solutions pour le développement Capacitor
 
 <Steps>
-1. **Use localhost for web Test**
+1. **Utilisez localhost pour les tests Web**
    ```bash
    # Instead of ionic serve --host=0.0.0.0
    ionic serve --host=localhost
    ```
 
-2. **Activer HTTPS in Ionic**
+2. **Activez HTTPS dans Ionic**
    ```bash
    ionic serve --ssl
    ```
 
-3. **Test on actual Appareils**
+3. **Test sur des appareils réels**
    ```bash
    # Capacitor apps run in secure context on devices
    ionic cap run ios
    ionic cap run android
    ```
 
-4. **Alternative nonce generation for Développement**
+4. **Génération occasionnelle alternative pour le développement**
    ```typescript
    async function generateNonce() {
      if (typeof crypto !== 'undefined' && crypto.subtle) {
@@ -604,9 +403,9 @@ async function sha256(message: string) {
    ```
 </Steps>
 
-### Firebase Integration Remarque
+### Firebase Note d'intégration
 
-Recent Firebase documentation requires JWT tokens with nonces for Facebook authentication, regardless of login settings. This approach works with both `limitedLogin: true` and `limitedLogin: false`:
+La documentation récente Firebase nécessite des jetons JWT avec des noms occasionnels pour l'authentification Facebook, quels que soient les paramètres de connexion. Cette approche fonctionne à la fois avec `limitedLogin: true` et `limitedLogin: false` :
 
 ```typescript
    // Both modes can return JWT tokens depending on user choice
@@ -620,47 +419,45 @@ Recent Firebase documentation requires JWT tokens with nonces for Facebook authe
    });
 ```
 
-:::Avertissement
-**Development Limitation**: If you're using `ionic serve` on a network IP (not localhost), Facebook login will fail due to crypto API restrictions. Use localhost or HTTPS for web testing.
+:::warning
+**Limitation de développement** : si vous utilisez « ionic serve » sur une adresse IP réseau (et non sur un hôte local), la connexion Facebook échouera en raison des restrictions cryptographiques API. Utilisez localhost ou HTTPS pour les tests Web.
 :::
 
-:::Conseil
-**Production Safety**: Capacitor apps on iOS/Android always run in secure contexts, so this limitation only affects web development environments.
+:::tip
+**Sécurité de la production** : les applications Capacitor sur iOS/Android s'exécutent toujours dans des contextes sécurisés. Cette limitation n'affecte donc que les environnements de développement Web.
 :::
 
 ## Dépannage
 
-### Problèmes courants and Solutions
+### Problèmes courants et solutions
 
-1. **Key hash errors on Android**
-   - Double Vérifier that you've added the correct key hash to the Facebook Tableau de bord
-   - For Libération builds, make sure you've added both Débogage and Libération key hashes
-   - Verify you're using the correct keystore when generating the hash
+1. **Erreurs de hachage de clé sur Android**
+   - Vérifiez à nouveau que vous avez ajouté le hachage de clé correct au tableau de bord Facebook
+   - Pour les versions release, assurez-vous d'avoir ajouté les hachages de clé de débogage et de release
+   - Vérifiez que vous utilisez le bon magasin de clés lors de la génération du hachage
 
-2. **Facebook Connexion button doesn't appear**
-   - Verify all manifest entries are correct
-   - Vérifier that your Facebook Application ID and Client Token are correct
-   - Ensure you've properly initialized the SDK
+2. **Le bouton de connexion Facebook n'apparaît pas**
+   - Vérifiez que toutes les entrées du manifeste sont correctes
+   - Vérifiez que votre identifiant d'application Facebook et votre jeton client sont corrects.
+   - Assurez-vous d'avoir correctement initialisé le SDK
 
-3. **Common iOS issues**
-   - Make sure all Info.plist entries are correct
-   - Verify URL schemes are properly configured
-   - Vérifier that your Bundle ID matches what's registered in the Facebook Tableau de bord
+3. **Problèmes courants de iOS**
+   - Assurez-vous que toutes les entrées Info.plist sont correctes
+   - Vérifiez que les schémas d'URL sont correctement configurés
+   - Vérifiez que votre identifiant de forfait correspond à ce qui est enregistré dans le tableau de bord Facebook
 
-### Test
+### Tests
 
-1. **Before Test, Ajouter Test Utilisateurs in the Facebook Developer Console**
-   - Go to Roles > Test Utilisateurs
-   - Créer a Test Utilisateur
-   - Use these credentials for Test
+1. **Avant de tester, ajoutez des utilisateurs de test dans la console du développeur Facebook**
+   - Allez dans Rôles > Utilisateurs test
+   - Créer un utilisateur test
+   - Utilisez ces informations d'identification pour les tests
 
-2. **Test both Débogage and Libération builds**
-   - Débogage Construction with Débogage key hash
-   - Libération Construction with Libération key hash
-   - Test on both emulator and physical Appareils
-
-Remember to Test the full Connexion flow, including:
-- Successful Connexion
-- Connexion cancellation
-- Erreur handling
-- Déconnexion functionality
+2. **Testez les versions de débogage et de version**
+   - Construction de débogage avec hachage de clé de débogage
+   - Version de version avec hachage de clé de version
+   - Test sur émulateur et appareils physiquesN'oubliez pas de tester le flux de connexion complet, notamment :
+- Connexion réussie
+- Annulation de connexion
+- Gestion des erreurs
+- Fonctionnalité de déconnexion

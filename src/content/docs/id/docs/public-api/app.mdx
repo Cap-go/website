@@ -1,51 +1,52 @@
 ---
 title: Apps
 description: >-
-  Dokumentasi terperinci untuk endpoint Apps, memberikan wawasan komprehensif
-  tentang pengelolaan dan interaksi dengan aplikasi Capacitor melalui platform
-  Capgo.
+  Dokumentasi terperinci untuk titik akhir Aplikasi, memberikan wawasan
+  komprehensif tentang pengelolaan dan interaksi dengan aplikasi Capacitor
+  melalui platform Capgo.
 sidebar:
   order: 7
 locale: id
 ---
+Aplikasi adalah entitas dasar di Capgo. Setiap aplikasi mewakili aplikasi Capacitor unik yang dapat Anda kelola dan perbarui melalui platform. Aplikasi API memungkinkan Anda membuat, mengambil, memperbarui, dan menghapus konfigurasi aplikasi.
 
-Apps adalah entitas dasar di Capgo. Setiap app mewakili aplikasi Capacitor unik yang dapat Anda kelola dan perbarui melalui platform. API Apps memungkinkan Anda untuk membuat, mengambil, memperbarui, dan menghapus konfigurasi app.
+## Memahami Aplikasi
 
-## Memahami Apps
+Sebuah aplikasi di Capgo mewakili aplikasi Capacitor Anda dan mencakup:
+- **ID Aplikasi**: Pengidentifikasi unik untuk aplikasi Anda
+- **Nama**: Nama aplikasi Anda yang dapat dibaca manusia
+- **Ikon**: Pengidentifikasi visual untuk aplikasi Anda di dasbor
+- **Konfigurasi**: Pengaturan yang mengontrol cara pembaruan dikirimkan
+- **Kepemilikan**: Informasi akses organisasi dan pengguna
+- **Statistik Penggunaan**: Metrik tentang pemasangan dan pembaruan
 
-Sebuah app di Capgo mewakili aplikasi Capacitor Anda dan mencakup:
-- **App ID**: Pengidentifikasi unik untuk aplikasi Anda
-- **Name**: Nama yang dapat dibaca manusia dari aplikasi Anda
-- **Icons**: Pengidentifikasi visual untuk app Anda di dashboard
-- **Configuration**: Pengaturan yang mengontrol bagaimana pembaruan dikirimkan
-- **Ownership**: Informasi akses organisasi dan pengguna
-- **Usage Statistics**: Metrik tentang instalasi dan pembaruan
+## Praktik Terbaik
 
-## Best Practices
+1. **Konvensi Penamaan**: Gunakan nama yang jelas dan dapat diidentifikasi untuk aplikasi Anda
+2. **Keamanan**: Lindungi kunci API Anda dan kredensial akses
+3. **Organisasi**: Mengelompokkan aplikasi terkait dalam organisasi yang sama
+4. **Pemantauan**: Periksa statistik dan kinerja aplikasi secara rutin
+5. **Cadangan**: Menjaga cadangan konfigurasi untuk aplikasi penting
 
-1. **Naming Convention**: Gunakan nama yang jelas dan dapat diidentifikasi untuk app Anda
-2. **Security**: Lindungi kunci API dan kredensial akses Anda
-3. **Organization**: Kelompokkan app terkait di bawah organisasi yang sama
-4. **Monitoring**: Periksa statistik dan performa app secara teratur
-5. **Backup**: Pertahankan cadangan konfigurasi untuk app kritis
+## Titik akhir
 
-## Endpoints
-
-### GET
+### DAPATKAN
 
 `https://api.capgo.app/app/`
 
-Mengambil informasi tentang app Anda.
+Ambil informasi tentang aplikasi Anda.
 
-#### Query Parameters
-- `page`: Opsional. Nomor halaman untuk paginasi
+#### Parameter Kueri
+- `page`: Opsional. Nomor halaman untuk penomoran halaman
 - `limit`: Opsional. Jumlah hasil per halaman (default: 50)
-- `org_id`: Opsional. Filter app berdasarkan ID organisasi. Jika tidak disediakan, mengembalikan app dari semua organisasi yang dapat diakses pengguna
+- `org_id`: Opsional. Filter aplikasi berdasarkan ID organisasi. Jika tidak disediakan, akan menampilkan aplikasi dari semua organisasi yang aksesnya dimiliki pengguna
 
-Untuk mendapatkan app tertentu:
-- Gunakan app ID di path URL: `https://api.capgo.app/app/:app_id`
+Untuk mendapatkan aplikasi tertentu:
+- Gunakan ID aplikasi di jalur URL: `https://api.capgo.app/app/:app_id`
 
-#### Response Type
+#### Jenis Respons
+
+Catatan: `last_version` mengacu pada paket (versi) terakhir yang diunggah untuk aplikasi.
 
 ```typescript
 interface App {
@@ -54,7 +55,7 @@ interface App {
   default_upload_channel: string
   icon_url: string
   id: string | null
-  last_version: string | null
+  last_version: string | null // last bundle (version) name
   name: string | null
   owner_org: string
   retention: number
@@ -64,7 +65,7 @@ interface App {
 }
 ```
 
-#### Example Request
+#### Contoh Permintaan
 
 ```bash
 # Get all apps
@@ -80,7 +81,7 @@ curl -H "authorization: your-api-key" \
   "https://api.capgo.app/app/com.demo.app"
 ```
 
-#### Example Response
+#### Contoh Respon
 
 ```json
 {
@@ -103,13 +104,13 @@ curl -H "authorization: your-api-key" \
 }
 ```
 
-### POST
+### POSTINGAN
 
 `https://api.capgo.app/app/`
 
-Membuat app baru.
+Buat aplikasi baru.
 
-#### Request Body
+#### Isi Permintaan
 
 ```typescript
 interface CreateApp {
@@ -120,7 +121,7 @@ interface CreateApp {
 }
 ```
 
-#### Example Request
+#### Contoh Permintaan
 
 ```bash
 # Create new app
@@ -129,14 +130,14 @@ curl -X POST \
   -H "Content-Type: application/json" \
   -d '{
     "name": "My New App",
-    "app_id": "com.demo.myapp", // id ini unik di Capgo. Tidak dapat digunakan ulang oleh akun manapun.
+    "app_id": "com.demo.myapp", // this id is unique in Capgo This cannot be reused by any account.
     "icon": "https://example.com/icon.png",
     "owner_org": "046a36ac-e03c-4590-9257-bd6c9dba9ee8"
   }' \
   https://api.capgo.app/app/
 ```
 
-#### Success Response
+#### Respon Sukses
 
 ```json
 {
@@ -152,13 +153,13 @@ curl -X POST \
 }
 ```
 
-### PUT
+### MASUKKAN
 
 `https://api.capgo.app/app/:app_id`
 
-Memperbarui app yang ada. App ID ditentukan di path URL.
+Perbarui aplikasi yang ada. ID aplikasi ditentukan di jalur URL.
 
-#### Request Body
+#### Isi Permintaan
 
 ```typescript
 interface UpdateApp {
@@ -168,7 +169,7 @@ interface UpdateApp {
 }
 ```
 
-#### Example Request
+#### Contoh Permintaan
 
 ```bash
 curl -X PUT \
@@ -182,7 +183,7 @@ curl -X PUT \
   https://api.capgo.app/app/com.demo.app
 ```
 
-#### Success Response
+#### Respon Sukses
 
 ```json
 {
@@ -198,13 +199,13 @@ curl -X PUT \
 }
 ```
 
-### DELETE
+### HAPUS
 
 `https://api.capgo.app/app/:app_id`
 
-Menghapus app dan semua sumber daya terkait. App ID ditentukan di path URL. Gunakan dengan sangat hati-hati karena tindakan ini tidak dapat dibatalkan.
+Hapus aplikasi dan semua sumber daya terkait. ID aplikasi ditentukan di jalur URL. Gunakan dengan sangat hati-hati karena tindakan ini tidak dapat dibatalkan.
 
-#### Example Request
+#### Contoh Permintaan
 
 ```bash
 curl -X DELETE \
@@ -212,7 +213,7 @@ curl -X DELETE \
   https://api.capgo.app/app/com.demo.app
 ```
 
-#### Success Response
+#### Respon Sukses
 
 ```json
 {
@@ -220,9 +221,9 @@ curl -X DELETE \
 }
 ```
 
-## Error Handling
+## Penanganan Kesalahan
 
-Skenario error umum dan responnya:
+Skenario kesalahan umum dan tanggapannya:
 
 ```json
 // App not found
@@ -255,9 +256,9 @@ Skenario error umum dan responnya:
 }
 ```
 
-## Common Use Cases
+## Kasus Penggunaan Umum
 
-1. **Create New App**
+1. **Buat Aplikasi Baru**
 ```typescript
 // Set up a new app
 {
@@ -266,7 +267,7 @@ Skenario error umum dan responnya:
 }
 ```
 
-2. **Update App Configuration**
+2. **Perbarui Konfigurasi Aplikasi**
 ```typescript
 // Change app name and icon
 {
@@ -275,7 +276,7 @@ Skenario error umum dan responnya:
 }
 ```
 
-3. **Set Retention Policy**
+3. **Tetapkan Kebijakan Retensi**
 ```typescript
 // Configure automatic bundle cleanup
 {
@@ -283,16 +284,16 @@ Skenario error umum dan responnya:
 }
 ```
 
-4. **Get Apps by Organization**
+4. **Dapatkan Aplikasi berdasarkan Organisasi**
 ```bash
 # List all apps in a specific organization
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/app/?org_id=046a36ac-e03c-4590-9257-bd6c9dba9ee8"
 ```
 
-## Resource Management
+## Manajemen Sumber Daya
 
-1. **Storage Optimization**: Pantau penggunaan penyimpanan dan atur kebijakan retensi yang sesuai
-2. **Organization**: Kelompokkan app terkait di bawah satu organisasi
-3. **Access Control**: Kelola anggota tim mana yang dapat mengubah pengaturan app
-4. **Backup Strategy**: Cadangkan konfigurasi dan pengaturan app yang kritis
+1. **Pengoptimalan Penyimpanan**: Pantau penggunaan penyimpanan dan tetapkan kebijakan penyimpanan yang sesuai
+2. **Organisasi**: Mengelompokkan aplikasi terkait dalam satu organisasi
+3. **Kontrol Akses**: Kelola anggota tim mana yang dapat mengubah pengaturan aplikasi
+4. **Strategi Pencadangan**: Cadangkan konfigurasi dan pengaturan aplikasi penting

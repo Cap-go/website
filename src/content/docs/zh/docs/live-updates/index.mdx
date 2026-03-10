@@ -1,90 +1,95 @@
 ---
-title: "概述"
-description: "了解 Capgo 的实时更新如何实现无缝 JavaScript bundle 更新,使您无需应用商店延迟即可直接向用户推送更改"
+title: Overview
+description: 了解 Capgo 的实时更新如何实现无缝 JavaScript 捆绑包更新，使您可以将更改直接推送给用户，而不会延迟应用商店。
 sidebar:
   order: 1
 prev: false
 next: false
 locale: zh
 ---
-
 import { Steps, CardGrid, Card, Aside } from '@astrojs/starlight/components';
 
-Use Capgo's Live Updates feature to update the JavaScript bundles of your app remotely, in real-time. Push JS updates directly to your users without going through the app store review process to instantly fix bugs and ship new features.
+使用 Capgo 的实时更新功能来远程实时更新应用程序的 JavaScript 捆绑包。将 JS 更新直接推送给 iOS、Android 和 Electron 上的用户，无需经过商店级审核周期即可修复错误并更快地发布新功能。
 
 <Aside>
 
-Live Updates are limited to JavaScript bundle changes. If you need to update native code, such as adding or removing a plugin or changing native project configuration, you'll need to submit a new native binary build to the app stores.
+实时更新仅限于 JavaScript 捆绑包更改。如果您需要更新本机代码，例如添加或删除插件或更改本机项目配置，则需要通过通常的平台分发过程提交新的二进制版本。
 
 </Aside>
 
-## How Live Updates Work
+## 实时更新如何工作
 
-Capgo's Live Update system has two key components:
+Capgo 的实时更新系统有两个关键组件：
 
-1. The Capgo SDK, which you install in your app. The SDK checks for available updates and downloads them in the background.
+1. Capgo SDK，您在应用程序中安装。 SDK 检查可用更新并在后台下载它们。
 
-2. Channels, which let you target updates to specific groups of users. You can use channels to manage different release tracks, such as `Production`, `Staging`, and `Dev`.
+2. 渠道，让您可以针对特定用户组进行更新。您可以使用通道来管理不同的发布轨道，例如 `Production`、`Staging` 和 `Dev`。
 
-When you upload a new JS bundle to Capgo and assign it to a channel, the Capgo SDK in apps configured for that channel will detect the update and download it. The next time the app restarts, the new bundle will be loaded.
+当您将新的 JS 包上传到 Capgo 并将其分配给通道时，为该通道配置的应用程序中的 Capgo SDK 将检测更新并下载它。下次应用程序重新启动时，将加载新包。
 
-## Getting Started
+## 为什么 Capgo 日志很重要（营销视图）
 
-To start using Live Updates, follow these steps:
+- **每次部署的即时透视**：每台设备的时间线显示检查、下载、安装、策略阻止和回滚，因此您可以确切地知道发生了什么 - 无需猜测或“它适用于我的手机”争论。
+- **更快的事件响应**：类似警报的代码（例如，速率限制、校验和失败、notifyAppReady 未命中）在用户开始大量支持之前出现，让您在几分钟内发布修复或回滚。
+- **渠道政策证明**：日志验证护栏（区块专业、禁用模拟器/开发版本、平台限制）正在积极保护生产。
+- **收入和声誉保护**：查看更新何时在较差的网络上停滞或达到计划限制，以便您可以在转化、会话或评论下降之前进行干预。
+- **单一事实来源**：产品、QA 和支持共享相同的云日志流 — 无需通过 Xcode/Android Studio 或 DM’ing 工程师挖掘本机日志。
+
+## 开始使用
+
+要开始使用实时更新，请按照下列步骤操作：
 
 <Steps>
 
-1. Complete the [Capgo Quickstart](/docs/getting-started/quickstart) to set up your app in Capgo and install the Capgo SDK.
+1. 完成 [Capgo 快速入门](/docs/getting-started/quickstart)，在 Capgo 中设置您的应用程序并安装 Capgo SDK。
 
-2. In your app code, call `CapacitorUpdater.notifyAppReady()` after your app has finished initializing. This tells the Capgo SDK that your app is ready to receive updates.
+2. 在应用程序代码中，在应用程序完成初始化后调用 `CapacitorUpdater.notifyAppReady()`。这告诉 Capgo SDK 您的应用程序已准备好接收更新。
 
-3. Build your JS bundle and upload it to Capgo:
+3. 构建 JS 包并将其上传到 Capgo：
    ```shell
    npm run build
    npx @capgo/cli@latest bundle upload --channel=production 
    ```
 
-4. Open your app and wait for the update to download. You can check the status with:
+4. 打开您的应用程序并等待更新下载。您可以通过以下方式检查状态：
    ```shell
    npx @capgo/cli@latest app debug
    ```
 
-5. Once the update is downloaded, close and reopen your app to load the new bundle.
+5. 下载更新后，关闭并重新打开您的应用程序以加载新包。
 
 </Steps>
 
-See the [Deploying Live Updates](/docs/getting-started/deploy) guide for more details.
+有关更多详细信息，请参阅[部署实时更新](/docs/getting-started/deploy) 指南。
 
 
-## Next Steps
-
-<CardGrid stagger>
+## 后续步骤<CardGrid stagger>
   <a href="/docs/live-updates/update-types/">
     <Card title="更新类型" icon="open-book">
-      所有 OTA 更新类型的参考:应用时机、延迟条件、版本阻止和交付。
+      所有OTA更新类型的参考：应用时机、延迟条件、版本阻止和交付。
     </Card>
   </a>
 
   <a href="/docs/live-updates/channels/">
     <Card title="Channels" icon="bars">
-      Learn how to use channels to manage different release tracks and target updates to specific users.
+      了解如何使用渠道来管理不同的发布轨道并将更新定位到特定用户。
     </Card>
   </a>
 
   <a href="/docs/live-updates/rollbacks/">
     <Card title="Rollbacks" icon="left-arrow">
-      Discover how to roll back to a previous JS bundle version if an update causes issues.
+      了解如果更新导致问题如何回滚到以前的 JS 包版本。
     </Card>
   </a>
 
   <a href="/docs/live-updates/update-behavior/">
-    <Card title="Update Behavior" icon="setting">
-      Customize how and when updates are downloaded and applied in your app.  
+    <Card title="更新行为" icon="setting">
+      自定义在您的应用程序中下载和应用更新的方式和时间。  
     </Card>
   </a>
   <a href="/docs/live-updates/differentials/">
-    <Card title="Fast Updates" icon="starlight">
-      Learn how to use fast updates to speed up the update process.
+    <Card title="快速更新" icon="starlight">
+      了解如何使用快速更新来加快更新过程。
     </Card>
   </a>
 </CardGrid>

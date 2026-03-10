@@ -1,47 +1,47 @@
 ---
 title: 部署实时更新
-locale: zh
-description: "了解如何使用 Capgo 的实时更新功能向您的应用部署实时更新,实现实时 UI 和逻辑更新,无需应用商店重新提交。"
+description: 了解如何使用 Capgo 的实时更新功能将实时更新部署到您的应用程序，从而无需重新提交应用程序商店即可实现实时 UI 和逻辑更新。
 sidebar:
   order: 4
+locale: zh
 ---
 import { Steps, LinkCard, Tabs, TabItem } from '@astrojs/starlight/components';
 
-使用 Capgo 的实时更新功能远程、实时更新应用的 UI 和业务逻辑。直接向用户推送 JS bundle 更新,无需通过应用商店即可立即修复错误和发布新功能。
+使用 Capgo 的实时更新功能远程实时更新应用程序的 UI 和业务逻辑。将 JS 捆绑包更新直接推送给您的用户，无需通过应用商店即可立即修复错误并发布新功能。
 
-本指南假设您已完成 [Capgo 快速入门](/docs/getting-started/quickstart)并已经:
+本指南假设您已完成 [Capgo 快速入门](/docs/getting-started/quickstart) 并且已经：
 
 <Steps>
 
-1. 在 Capacitor 应用中安装了 `@capgo/capacitor-updater` SDK
+1. 在您的 Capacitor 应用程序中安装 `@capgo/capacitor-updater` SDK 
 
-2. 在 `capacitor.config.ts` 中配置了应用 ID 和更新渠道
+2. 在`capacitor.config.ts`中配置您的应用程序ID并更新频道
 
-3. 在代码中添加了 `CapacitorUpdater.notifyAppReady()` 方法
+3. 在代码中添加 `CapacitorUpdater.notifyAppReady()` 方法
 
 </Steps>
 
-如果您还没有完成这些步骤,请返回并首先完成快速入门。
+如果您尚未完成这些步骤，请先返回并完成快速入门。
 
-<LinkCard href="/docs/getting-started/add-an-app/" title="添加应用" description="将应用添加到您的 Capgo 账户,并在应用中安装插件" />
+<LinkCard href="/docs/getting-started/add-an-app/" title="添加应用程序" description="Add an app to your Capgo account, and install the plugin in your app" />
 
-## 上传 Bundle
+## 上传包
 
-安装并配置好 Capgo SDK 后,您就可以上传第一个实时更新 bundle 了:
+安装并配置 Capgo SDK 后，您就可以上传第一个实时更新包了：
 
-1. 构建您的 Web 资源:
+1. 构建您的网络资产：
    ```shell
    npm run build
    ```
 
-2. 将 bundle 上传到 Capgo:
+2. 将捆绑包上传到 Capgo：
     <Tabs>
-      <TabItem label="控制台">
+      <TabItem label="Console">
         ```shell
       npx @capgo/cli@latest bundle upload --channel=production
       ```
       </TabItem>
-      <TabItem label="Github Actions">
+      <TabItem label="Github 操作">
       ```yml
       // .github/workflows/build_and_deploy.yml
     name: Build source code and send to Capgo
@@ -102,50 +102,50 @@ import { Steps, LinkCard, Tabs, TabItem } from '@astrojs/starlight/components';
       ```
       </TabItem>
     </Tabs>
-   这将上传新的 bundle 版本到命令中指定的渠道。
+   这会将新的捆绑包版本上传到命令中指定的通道。
 
-### 上传故障排除
+### 上传疑难解答
 
-如果上传失败,请仔细检查:
+如果您的上传失败，请仔细检查：
 - `capacitor.config.ts` 中的应用 ID 与 Capgo 仪表板中的应用匹配
-- 您从 Capacitor 项目的根目录运行上传命令
-- 您的 Web 资源已构建且是最新的
+- 您正在从 Capacitor 项目的根目录运行上传命令
+- 您的网络资产已构建并且是最新的
 
-如果您仍然遇到问题,请转到[故障排除](/docs/getting-started/troubleshooting/)部分。
+如果您仍然遇到问题，请转到[疑难解答](/docs/getting-started/troubleshooting/) 部分。
 
 ## 在设备上接收更新
 
-上传 bundle 后,您可以在设备上测试实时更新:
+上传捆绑包后，您可以在设备上测试实时更新：
 
-1. 将应用同步到设备:
+1. 将您的应用程序同步到设备：
    ```shell
    npx cap sync ios
    ```
 
-2. 打开另一个终端并运行以下命令以检查更新状态:
+2. 打开另一个终端并运行以下命令检查更新状态：
    ```shell
    npx @capgo/cli@latest app debug
    ```
 
-3. 在本地运行您的应用:
+3. 在本地运行您的应用程序：
    ```shell
    npx cap run ios
-   ```
-   或在 Xcode/Android Studio 中打开 iOS/Android 项目并执行原生运行。
+   ``` 
+   或者在 Xcode/Android Studio 中打开 iOS/Android 项目并进行本机运行。
 
-4. 保持应用打开约 30 秒,以允许更新在后台下载。
+4. 保持应用程序打开约 30 秒，以便在后台下载更新。 
 
-5. 日志将需要几秒钟更新并显示更新状态。
+5. 日志将需要几秒钟的时间来更新并显示更新状态。
 
-6. 关闭并重新打开应用。您应该看到实时更新已应用!
+6. 关闭并重新打开应用程序。您应该会看到您的实时更新已应用！
 
-请参考 [Capgo 快速入门](/docs/getting-started/quickstart#receiving-a-live-update-on-a-device)以获取有关测试实时更新的更多详细信息。
+有关测试实时更新的更多详细信息，请参阅 [Capgo 快速入门](/docs/getting-started/quickstart#receiving-a-live-update-on-a-device)。
 
 ## 后续步骤
 
-恭喜您使用 Capgo 部署了第一个实时更新!
+恭喜您使用 Capgo 部署了第一个实时更新！ 🎉 
 
-要了解更多信息,请查看其余的 [Capgo 实时更新文档](/docs/live-updates)。一些需要查看的关键主题:
-- [使用渠道定位更新](/docs/live-updates/channels)
+要了解更多信息，请查看 [Capgo 实时更新文档](/docs/live-updates) 的其余部分。接下来要检查的一些关键主题：
+- [通过渠道进行定向更新](/docs/live-updates/channels)
 - [自定义更新行为](/docs/live-updates/update-behavior)
 - [实时更新回滚](/docs/live-updates/rollbacks)

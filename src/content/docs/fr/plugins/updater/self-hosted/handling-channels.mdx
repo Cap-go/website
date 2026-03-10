@@ -1,26 +1,26 @@
 ---
-title: Channel API Endpoint
+title: Canal API Point de terminaison
 description: >-
-  How to build channel management endpoints for self-hosted Capgo to handle
-  device-channel assignments and channel queries
+  Comment créer des points de terminaison de gestion de canaux pour Capgo
+  auto-hébergé afin de gérer les attributions de canaux de périphérique et les
+  requêtes de canal
 sidebar:
   order: 8
 locale: fr
 ---
+Les canaux constituent un mécanisme essentiel pour gérer les mises à jour des applications dans Capgo. En mode auto-hébergé, vous devez implémenter des points de terminaison de canal pour gérer les attributions de périphériques, les requêtes de canal et les opérations de gestion des canaux.
 
-Channels are a core mechanism for managing app updates in Capgo. In self-hosted mode, you need to implement channel endpoints to handle device assignments, channel queries, and channel management operations.
+## Comprendre les chaînes
 
-## Understanding Channels
+Les chaînes vous permettent de :
+- **Contrôler la distribution des mises à jour** : attribuez différentes versions d'application à différents groupes d'utilisateurs
+- **Tests A/B** : testez de nouvelles fonctionnalités avec des segments d'utilisateurs spécifiques  
+- **Déploiements par étapes** : déployez progressivement les mises à jour pour minimiser les risques
+- **Séparation de l'environnement** : mises à jour séparées pour le développement, la préparation et la production
 
-Channels allow you to:
-- **Control update distribution**: Assign different app versions to different user groups
-- **A/B testing**: Test new features with specific user segments
-- **Staged rollouts**: Gradually deploy updates to minimize risk
-- **Environment separation**: Separate development, staging, and production updates
+##Configuration
 
-## Configuration
-
-Configure the channel endpoint URL in your `capacitor.config.json`:
+Configurez l'URL du point de terminaison du canal dans votre `capacitor.config.json` :
 
 ```json
 {
@@ -32,15 +32,15 @@ Configure the channel endpoint URL in your `capacitor.config.json`:
 }
 ```
 
-## Channel Operations
+## Opérations de canal
 
-The plugin performs different channel operations that your endpoint needs to handle:
+Le plugin effectue différentes opérations de canal que votre point de terminaison doit gérer :
 
-### 1. List Compatible Channels (GET Request)
+### 1. Liste des chaînes compatibles (demande GET)
 
-When the plugin calls `listChannels()`, it sends a GET request to retrieve all channels that are compatible with the device. This returns channels that match the device's environment (dev/prod, emulator/real device) and allow either public access or self-assignment.
+Lorsque le plugin appelle `listChannels()`, il envoie une requête GET pour récupérer tous les canaux compatibles avec l'appareil. Cela renvoie des canaux qui correspondent à l'environnement de l'appareil (dev/prod, émulateur/appareil réel) et permettent soit un accès public, soit une auto-attribution.
 
-#### Request Format
+#### Format de la demande
 ```typescript
 // GET /api/channel_self
 // Headers:
@@ -51,14 +51,14 @@ When the plugin calls `listChannels()`, it sends a GET request to retrieve all c
 // Query parameters:
 interface ListChannelsRequest {
   app_id: string
-  platform: "ios" | "android"
+  platform: "ios" | "android" | "electron"
   is_emulator: boolean
   is_prod: boolean
   key_id?: string
 }
 ```
 
-#### Response Format
+#### Format de réponse
 ```json
 [
   {
@@ -76,23 +76,23 @@ interface ListChannelsRequest {
 ]
 ```
 
-#### Understanding Channel Types
+#### Comprendre les types de canaux
 
-The response includes two important flags for each channel:
+La réponse comprend deux indicateurs importants pour chaque canal :
 
-- **`public: true`**: This is a **default channel**. Devices cannot self-assign to it using `setChannel()`. Instead, if a device removes its channel assignment (using `unsetChannel()`), it will automatically receive updates from this public channel if it matches the device's conditions.
+- **`public: true`** : Il s'agit d'un **canal par défaut**. Les appareils ne peuvent pas s'y attribuer automatiquement à l'aide de `setChannel()`. Au lieu de cela, si un appareil supprime son attribution de canal (à l'aide de `unsetChannel()`), il recevra automatiquement les mises à jour de ce canal public si cela correspond aux conditions de l'appareil.
 
-- **`allow_self_set: true`**: This is a **self-assignable channel**. Devices can explicitly assign themselves to this channel using `setChannel()`. This is useful for beta testing, A/B testing, or allowing users to opt-in to specific update tracks.
+- **`allow_self_set: true`** : Il s'agit d'un **canal auto-attribuable**. Les appareils peuvent s'attribuer explicitement à ce canal à l'aide de `setChannel()`. Ceci est utile pour les tests bêta, les tests A/B ou pour permettre aux utilisateurs de s'inscrire à des pistes de mise à jour spécifiques.
 
 :::note
-A channel can be either `public` OR `allow_self_set`, but typically not both. Public channels serve as the default fallback, while self-assignable channels require explicit opt-in.
+Un canal peut être `public` OU `allow_self_set`, mais généralement pas les deux. Les chaînes publiques servent de solution de secours par défaut, tandis que les chaînes auto-attribuables nécessitent une inscription explicite.
 :::
 
-### 2. Get Channel (PUT Request)
+### 2. Obtenir le canal (demande PUT)
 
-When the plugin calls `getChannel()`, it sends a PUT request to retrieve the device's current channel assignment.
+Lorsque le plugin appelle `getChannel()`, il envoie une requête PUT pour récupérer l'attribution de canal actuelle de l'appareil.
 
-#### Request Format
+#### Format de la demande
 ```typescript
 // PUT /api/channel_self
 // Headers:
@@ -104,7 +104,7 @@ When the plugin calls `getChannel()`, it sends a PUT request to retrieve the dev
 interface GetChannelRequest {
   device_id: string
   app_id: string
-  platform: "ios" | "android"
+  platform: "ios" | "android" | "electron"
   plugin_version: string
   version_build: string
   version_code: string
@@ -116,7 +116,7 @@ interface GetChannelRequest {
 }
 ```
 
-#### Response Format
+#### Format de réponse
 ```json
 {
   "status": "ok",
@@ -127,18 +127,18 @@ interface GetChannelRequest {
 }
 ```
 
-### 3. Set Channel (POST Request)
+### 3. Définir le canal (requête POST)
 
-When the plugin calls `setChannel()`, it sends a POST request to assign the device to a specific channel.
+Lorsque le plugin appelle `setChannel()`, il envoie une requête POST pour attribuer l'appareil à un canal spécifique.
 
-#### Request Format
+#### Format de la demande
 ```typescript
 // POST /api/channel_self
 interface SetChannelRequest {
   device_id: string
   app_id: string
   channel: string
-  platform: "ios" | "android"
+  platform: "ios" | "android" | "electron"
   plugin_version: string
   version_build: string
   version_code: string
@@ -148,7 +148,7 @@ interface SetChannelRequest {
 }
 ```
 
-#### Response Format
+#### Format de réponse
 ```json
 {
   "status": "ok",
@@ -157,9 +157,9 @@ interface SetChannelRequest {
 }
 ```
 
-#### Error Cases
+#### Cas d'erreur
 
-When a device tries to assign itself to a **public channel** (one with `public: true`), your endpoint should return an error:
+Lorsqu'un appareil tente de s'attribuer un **canal public** (un avec `public: true`), votre point de terminaison doit renvoyer une erreur :
 
 ```json
 {
@@ -169,7 +169,7 @@ When a device tries to assign itself to a **public channel** (one with `public: 
 }
 ```
 
-When a device tries to assign itself to a channel that doesn't allow self-assignment:
+Lorsqu'un appareil tente de s'attribuer à un canal qui ne permet pas l'auto-affectation :
 
 ```json
 {
@@ -179,17 +179,17 @@ When a device tries to assign itself to a channel that doesn't allow self-assign
 }
 ```
 
-### 4. Unset Channel (DELETE Request)
+### 4. Désactiver le canal (demande DELETE)
 
-When the plugin calls `unsetChannel()`, it sends a DELETE request to remove the device's channel assignment.
+Lorsque le plugin appelle `unsetChannel()`, il envoie une requête DELETE pour supprimer l'attribution de canal de l'appareil.
 
-#### Request Format
+#### Format de la demande
 ```typescript
 // DELETE /api/channel_self
 interface UnsetChannelRequest {
   device_id: string
   app_id: string
-  platform: "ios" | "android"
+  platform: "ios" | "android" | "electron"
   plugin_version: string
   version_build: string
   version_code: string
@@ -197,16 +197,16 @@ interface UnsetChannelRequest {
 }
 ```
 
-## Implementation Example
+## Exemple d'implémentation
 
-Here's a JavaScript example of how to implement the channel endpoint:
+Voici un exemple JavaScript de la façon d'implémenter le point de terminaison du canal :
 
 ```typescript
 interface ChannelRequest {
   device_id: string
   app_id: string
   channel?: string
-  platform: "ios" | "android"
+  platform: "ios" | "android" | "electron"
   plugin_version: string
   version_build: string
   version_code: string
@@ -224,20 +224,20 @@ interface ChannelResponse {
 export const handler = async (event) => {
   const method = event.httpMethod || event.method
   const body = JSON.parse(event.body || '{}') as ChannelRequest
-
+  
   const { device_id, app_id, channel, platform } = body
 
   try {
     switch (method) {
       case 'GET':
         return await getDeviceChannel(device_id, app_id)
-
+        
       case 'POST':
         return await setDeviceChannel(device_id, app_id, channel!, platform)
-
+        
       case 'DELETE':
         return await unsetDeviceChannel(device_id, app_id)
-
+        
       default:
         return {
           status: "error",
@@ -255,7 +255,7 @@ export const handler = async (event) => {
 async function getDeviceChannel(deviceId: string, appId: string): Promise<ChannelResponse> {
   // Query your database for device channel assignment
   const assignment = await database.getDeviceChannel(deviceId, appId)
-
+  
   if (assignment) {
     return {
       status: "ok",
@@ -263,7 +263,7 @@ async function getDeviceChannel(deviceId: string, appId: string): Promise<Channe
       allowSet: assignment.allowSelfAssign
     }
   }
-
+  
   // Return default channel if no assignment found
   return {
     status: "ok",
@@ -273,46 +273,53 @@ async function getDeviceChannel(deviceId: string, appId: string): Promise<Channe
 }
 
 async function setDeviceChannel(
-  deviceId: string,
-  appId: string,
-  channel: string,
+  deviceId: string, 
+  appId: string, 
+  channel: string, 
   platform: string
 ): Promise<ChannelResponse> {
   // Validate channel exists and allows self-assignment
   const channelConfig = await database.getChannelConfig(channel, appId)
-
+  
   if (!channelConfig) {
     return {
       status: "error",
       error: "Channel not found"
     }
   }
-
+  
   if (!channelConfig.allowDeviceSelfSet) {
     return {
       status: "error",
       error: "Channel does not allow self-assignment"
     }
   }
-
+  
   // Check platform restrictions
   if (platform === "ios" && !channelConfig.ios) {
     return {
-      status: "error",
+      status: "error", 
       error: "Channel not available for iOS"
     }
   }
-
+  
   if (platform === "android" && !channelConfig.android) {
     return {
-      status: "error",
-      error: "Channel not available for Android"
+      status: "error", 
+      error: "Channel not available for Android" 
     }
   }
-
+  
+  if (platform === "electron" && !channelConfig.electron) {
+    return {
+      status: "error", 
+      error: "Channel not available for Electron" 
+    }
+  }
+  
   // Save the assignment
   await database.setDeviceChannel(deviceId, appId, channel)
-
+  
   return {
     status: "ok",
     message: "Device assigned to channel successfully"
@@ -322,7 +329,7 @@ async function setDeviceChannel(
 async function unsetDeviceChannel(deviceId: string, appId: string): Promise<ChannelResponse> {
   // Remove device channel assignment
   await database.removeDeviceChannel(deviceId, appId)
-
+  
   return {
     status: "ok",
     message: "Device channel assignment removed"
@@ -330,9 +337,9 @@ async function unsetDeviceChannel(deviceId: string, appId: string): Promise<Chan
 }
 ```
 
-## Channel Configuration
+## Configuration du canal
 
-Your channel system should support these configuration options:
+Votre système de canaux doit prendre en charge ces options de configuration :
 
 ```typescript
 interface ChannelConfig {
@@ -342,6 +349,7 @@ interface ChannelConfig {
   // Platform targeting
   ios: boolean              // Allow updates to iOS devices
   android: boolean          // Allow updates to Android devices
+  electron: boolean         // Allow updates to Electron apps
 
   // Device type restrictions
   allow_emulator: boolean   // Allow updates on emulator/simulator devices
@@ -361,23 +369,21 @@ interface ChannelConfig {
 }
 ```
 
-### Device Filtering Logic
+### Logique de filtrage des appareilsLorsque vous répertoriez les chaînes compatibles (requête GET), vous devez filtrer les chaînes en fonction de ces conditions :
 
-When listing compatible channels (GET request), you should filter channels based on these conditions:
-
-1. **Platform check**: Channel must allow the device's platform (`ios` or `android`)
-2. **Device type check**:
-   - If `is_emulator=true`: Channel must have `allow_emulator=true`
-   - If `is_emulator=false`: Channel must have `allow_device=true`
-3. **Build type check**:
-   - If `is_prod=true`: Channel must have `allow_prod=true`
-   - If `is_prod=false`: Channel must have `allow_dev=true`
-4. **Visibility check**: Channel must be either `public=true` OR `allow_device_self_set=true`
+1. **Vérification de la plate-forme** : le canal doit autoriser la plate-forme de l'appareil (`ios`, `android` ou `electron`)
+2. **Vérification du type d'appareil** :
+   - Si `is_emulator=true` : le canal doit avoir `allow_emulator=true`
+   - Si `is_emulator=false` : le canal doit avoir `allow_device=true`
+3. **Vérification du type de build** :
+   - Si `is_prod=true` : le canal doit avoir `allow_prod=true`
+   - Si `is_prod=false` : le canal doit avoir `allow_dev=true`
+4. **Contrôle de visibilité** : le canal doit être soit `public=true` OU `allow_device_self_set=true`.
 
 ```typescript
 // Example filtering logic
 function getCompatibleChannels(
-  platform: 'ios' | 'android',
+  platform: 'ios' | 'android' | 'electron',
   isEmulator: boolean,
   isProd: boolean,
   channels: ChannelConfig[]
@@ -402,9 +408,9 @@ function getCompatibleChannels(
 }
 ```
 
-## Database Schema Example
+## Exemple de schéma de base de données
 
-You'll need to store channel configurations and device assignments:
+Vous devrez stocker les configurations de canaux et les attributions de périphériques :
 
 ```sql
 -- Channels table
@@ -416,6 +422,7 @@ CREATE TABLE channels (
   -- Platform targeting
   ios BOOLEAN DEFAULT true,
   android BOOLEAN DEFAULT true,
+  electron BOOLEAN DEFAULT true,
 
   -- Device type restrictions
   allow_emulator BOOLEAN DEFAULT true,   -- Allow emulator/simulator devices
@@ -448,9 +455,9 @@ CREATE TABLE device_channels (
 );
 ```
 
-## Error Handling
+## Gestion des erreurs
 
-Handle common error scenarios:
+Gérez les scénarios d’erreur courants :
 
 ```typescript
 // Channel not found
@@ -461,7 +468,7 @@ Handle common error scenarios:
 
 // Self-assignment not allowed
 {
-  "status": "error",
+  "status": "error", 
   "error": "Channel does not allow device self-assignment"
 }
 
@@ -478,27 +485,27 @@ Handle common error scenarios:
 }
 ```
 
-## Best Practices
+## meilleures pratiques
 
-1. **Security**: Validate all channel assignments against your business rules
-2. **Logging**: Log all channel operations for auditing and debugging
-3. **Performance**: Cache channel configurations to reduce database queries
-4. **Validation**: Verify device_id and app_id authenticity
-5. **Rate Limiting**: Implement rate limiting to prevent abuse
+1. **Sécurité** : validez toutes les attributions de canaux par rapport à vos règles métier
+2. **Logging** : enregistrez toutes les opérations du canal pour l'audit et le débogage.
+3. **Performances** : configurations du canal de cache pour réduire les requêtes de base de données
+4. **Validation** : Vérifiez l'authenticité de device_id et app_id
+5. **Limitation du débit** : mettez en œuvre une limitation du débit pour éviter les abus
 
-## Integration with Updates
+## Intégration avec les mises à jour
 
-Channel assignments work together with your [Update API Endpoint](/docs/plugin/self-hosted/handling-updates/). When a device requests an update, check its channel assignment to determine which version to serve:
+Les attributions de canaux fonctionnent avec votre [Mettre à jour API Endpoint](/docs/plugin/self-hosted/handling-updates/). Lorsqu'un appareil demande une mise à jour, vérifiez son attribution de canal pour déterminer la version à diffuser :
 
 ```typescript
 async function getUpdateForDevice(deviceId: string, appId: string) {
   // Get device's channel assignment
   const channelAssignment = await getDeviceChannel(deviceId, appId)
   const channel = channelAssignment.channel || 'production'
-
+  
   // Get the version assigned to this channel
   const channelVersion = await getChannelVersion(channel, appId)
-
+  
   return {
     version: channelVersion.version,
     url: channelVersion.url,
@@ -507,4 +514,4 @@ async function getUpdateForDevice(deviceId: string, appId: string) {
 }
 ```
 
-This creates a complete self-hosted channel management system that gives you full control over how updates are distributed to your users.
+Cela crée un système complet de gestion de canaux auto-hébergé qui vous donne un contrôle total sur la manière dont les mises à jour sont distribuées à vos utilisateurs.

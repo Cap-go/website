@@ -1,8 +1,9 @@
 ---
 title: '@capgo/capacitor-screen-orientation'
 description: >-
-  Control and detect screen orientation with the unique ability to detect
-  physical device orientation using motion sensors.
+  Controlla e rileva l'orientamento dello schermo con la capacità unica di
+  rilevare l'orientamento del dispositivo fisico utilizzando i sensori di
+  movimento.
 tableOfContents: false
 next: false
 prev: false
@@ -11,12 +12,13 @@ sidebar:
   label: Introduction
 hero:
   tagline: >-
-    Screen orientation plugin with support for detecting true physical device
-    orientation - even when orientation lock is enabled.
+    Plugin per l'orientamento dello schermo con supporto per il rilevamento
+    dell'orientamento reale del dispositivo fisico, anche quando il blocco
+    dell'orientamento è abilitato.
   image:
     file: ~public/icons/plugins/screen-orientation.svg
   actions:
-    - text: Get started
+    - text: Inizia
       link: /docs/plugins/screen-orientation/getting-started/
       icon: right-arrow
       variant: primary
@@ -26,20 +28,19 @@ hero:
       variant: minimal
 locale: it
 ---
-
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid stagger>
-  <Card title="Physical Orientation Detection" icon="rocket">
-    Detect true physical device orientation using motion sensors, even when orientation lock is enabled
+  <Card title="Rilevamento dell'orientamento fisico" icon="rocket">
+    Rileva il vero orientamento fisico del dispositivo utilizzando i sensori di movimento, anche quando il blocco dell'orientamento è abilitato
   </Card>
-  <Card title="Orientation Lock Detection" icon="puzzle">
-    Determine if the user has enabled orientation lock by comparing physical vs UI orientation
+  <Card title="Rilevamento del blocco dell'orientamento" icon="puzzle">
+    Determina se l'utente ha abilitato il blocco dell'orientamento confrontando l'orientamento fisico con quello dell'interfaccia utente
   </Card>
   <Card title="Cross-platform" icon="laptop">
-    Works on iOS (Core Motion), Android (Accelerometer), and Web
+    Funziona su iOS (Core Motion), Android (Accelerometro) e Web
   </Card>
-  <Card title="Real-time Updates" icon="open-book">
-    Get instant notifications when device orientation changes with event listeners
+  <Card title="Aggiornamenti in tempo reale" icon="open-book">
+    Ricevi notifiche istantanee quando l'orientamento del dispositivo cambia con i listener di eventi
   </Card>
 </CardGrid>

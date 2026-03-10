@@ -1,53 +1,48 @@
 ---
-title: Functions and settings
-description: All available method and settings of the plugin
+title: 機能と設定
+description: プラグインの利用可能なすべてのメソッドと設定
 sidebar:
   order: 2
 locale: ja
 ---
+# アップデータープラグイン構成
 
-# Updater Plugin Config
-
-See the Github [Readme](https://github.com/Cap-go/capacitor-updater) for more information.
+詳細については、Github [Readme](https://github.com/Cap-go/capacitor-updater) を参照してください。
 
 <docgen-config>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
-CapacitorUpdater can be configured with these options:
+CapacitorUpdater は次のオプションで構成できます。|小道具 |タイプ |説明 |デフォルト |以来 |
+| ---------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- | ------- |
+| **`appReadyTimeout`** | <code>番号</code> |ネイティブ プラグインが更新が「失敗」したと判断するまでに待機するミリ秒数を構成します。 Android、iOS、および Electron で利用可能です。                                                                                                                                                                                                                                                                                                                                                                                                                                     | <code>10000 // (10 秒)</code> |         |
+| **`responseTimeout`** | <code>番号</code> | API タイムアウトを考慮する前にネイティブ プラグインが待機するミリ秒数を構成します。 Android、iOS、および Electron で利用可能です。                                                                                                                                                                                                                                                                                                                                                                                                                                            | <code>20000 // (20 秒)</code> |         |
+| **`autoDeleteFailed`** | <code>ブール値</code> |プラグインが失敗したバンドルの自動削除を使用するかどうかを構成します。 Android、iOS、および E で利用可能レクトロン。                                                                                                                                                                                                                                                                                                                                                                                                                                                              | <code>true</code> |         |
+| **`autoDeletePrevious`** | <code>ブール値</code> |プラグインが更新の成功後に以前のバンドルを自動的に削除するようにするかどうかを構成します。 Android、iOS、および Electron で利用可能です。                                                                                                                                                                                                                                                                                                                                                                                                                                      | <code>true</code> |         |
+| **`autoUpdate`** | <code>ブール値</code> |プラグインが更新サーバー経由の自動更新を使用するかどうかを構成します。 Android、iOS、および Electron で利用可能です。                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | <code>true</code> |         |
+| **`resetWhenUpdate`** | <code>ブール値</code> |新しいネイティブ アプリ バンドルがデバイスにインストールされると、以前にダウンロードしたバンドルが自動的に削除されます。 Android、iOS、および Electron で利用可能です。                                                                                                                                                                                                                                                                                                                                                                                                                                   | <code>true</code> |         |
+| **`updateUrl`** | <code>string</code> |更新チェックの送信先となる URL / エンドポイントを構成します。 Android、iOS、および Electron で利用可能です。| <code>https://plugin.capgo.app/updates</code> |         |
+| **`channelUrl`** | <code>文字列</code> |チャネル操作の URL / エンドポイントを構成します。 Android、iOS、および Electron で利用可能です。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | <code>https://plugin.capgo.app/channel_self</code> |         |
+| **`statsUrl`** | <code>string</code> |更新統計の送信先となる URL / エンドポイントを構成します。 Android、iOS、および Electron で利用可能です。統計レポートを無効にするには、「」に設定します。                                                                                                                                                                                                                                                                                                                                                                                                                                       | <code>https://plugin.capgo.app/stats</code> |         |
+| **`publicKey`** | <code>文字列</code> |エンドツーエンドのライブ アップデート暗号化バージョン 2 の公開キーを構成します。Android、iOS、および Electron で利用可能です。                                                                                                                                                                                                                                                                                                                                                                                                                                                             | <code>未定義</code> | 6.2.0 |
+| **`version`** | <code>文字列</code> |アプリの現在のバージョンを構成します。これは最初の更新リクエストに使用されます。設定されていない場合、プラグインはネイティブ コードからバージョンを取得します。 Android、iOS、および Electron で利用可能です。| <code>未定義</code> | 4.17.48 |
+| **`directUpdate`** | <code>ブール値 \| '常に' \| 'atInstall' \| '起動時'</code> |プラグインがアップデートをいつインストールするかを設定します。自動更新モードのみ。 10MB 未満のアプリや --delta フラグを使用してアップロードを行う場合にうまく機能します。 10MB を超える ZIP やアプリは、ユーザーの更新に比較的時間がかかります。 - false: 直接更新を行わない (デフォルトの動作を使用: 開始時にダウンロード、バックグラウンド時に設定) - atInstall: アプリがインストールされたときのみ直接更新、ストアから更新、それ以外の場合は directUpdate = false として動作 - onLaunch: アプリがインストールされた場合のみ直接更新、ストアから更新またはアプリの強制終了後に更新、それ以外の場合は directUpdate = false として動作 - always: 以前のすべてのケース (アプリのインストール、ストアからの更新、アプリの強制終了またはアプリの再開後) で直接更新し、directUpdate = false として動作しない - true: (非推奨) 同じ下位互換性のために「常に」 Android、iOS、および Electron で使用できます。 | <code>false</code> | 5.1.0 |
+| **`autoSplashscreen`** | <code>ブール値</code> | directUpdate の使用時にスプラッシュスクリーンの非表示を自動的に処理します。有効にすると、プラグインは更新が適用された後、または更新が必要ない場合に、スプラッシュスクリーンを自動的に非表示にします。これにより、手動で appReady イベントをリッスンして SplashScreen.hide() を呼び出す必要がなくなります。 directUpdate が「atInstall」、「always」、または true に設定されている場合にのみ機能します。 @capacitor/splash-screen プラグインをインストールし、launchAutoHide: false で構成する必要があります。 autoUpdate と directUpdate を有効にする必要があります。 Android および iOS で利用可能です。                      | <code>false</code> | 7.6.0 |
+| **`periodCheckDelay`** | <code>番号</code> |期間更新チェックの遅延期間を設定します。単位は秒です。 Android、iOS、および Electron で利用可能です。 600 秒 (10 分) 未満にすることはできません。                                                                                                                                                                                                                                                                                                                                                                                                                     | <code>600 // (10 分)</code> |         |
+| **`localS3`** | <code>ブール値</code> |テスト用のローカル サーバーまたは自己ホスト型更新サーバーを使用するように CLI を構成します。| <code>未定義</code> | 4.17.48 |
+| **`localHost`** | <code>文字列</code> |テスト用のローカル サーバーまたは自己ホスト型更新サーバーを使用するように CLI を構成します。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | <code>未定義</code> | 4.17.48 |
+| **`localWebHost`** | <code>string</code> |テスト用のローカル サーバーまたは自己ホスト型更新サーバーを使用するように CLI を構成します。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | <code>未定義</code> | 4.17.48 |
+| **`localSupa`** | <code>文字列</code> |テスト用のローカル サーバーまたは自己ホスト型更新サーバーを使用するように CLI を構成します。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | <code>未定義</code> | 4.17.48 |
+| **`localSupaAnon`** | <code>string</code> |テストにローカル サーバーを使用するように CLI を構成します。| <code>未定義</code> | 4.17.48 |
+| **`localApi`** | <code>文字列</code> |テストにローカル API を使用するように CLI を構成します。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | <code>未定義</code> | 6.3.3 |
+| **`localApiFiles`** | <code>string</code> |テストにローカル ファイル API を使用するように CLI を構成します。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | <code>未定義</code> | 6.3.3 |
+| **`allowModifyUrl`** | <code>ブール値</code> |プラグインが JavaScript 側から updateUrl、statsUrl、channelUrl を動的に変更できるようにします。                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | <code>false</code> | 5.4.0 |
+| **`defaultChannel`** | <code>string</code> |構成でアプリのデフォルトのチャネルを設定します。大文字と小文字を区別。この設定はクラウドに設定されているデフォルトのチャネルをオーバーライドしますが、クラウドで行われたオーバーライドは引き続き尊重されます。                                                                                                                                                                                                                                                                                                                                                                                      | <code>未定義</code> | 5.5.0 |
+| **`appId`** | <code>string</code> |構成でアプリのアプリ ID を構成します。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | <code>未定義</code> | 6.0.0 |
+| **`keepUrlPathAfterReload`** | <code>ブール値</code> |リロード後に URL パスを保持するようにプラグインを構成します。警告: リロードがトリガーされると、「window.history」はクリアされます。                                                                                                                                                                                                                                                                                                                                                                                                                                                  | <code>false</code> | 6.8.0 |
+| **`disableJSLogging`** | <code>ブール値</code> |プラグインの JavaScript ログを無効にします。 true の場合、プラグインは JavaScript コンソールにログを記録しません。ネイティブ ログのみが実行されます。 <code>false</code> | 7.3.0 |
+| **`shakeMenu`** | <code>ブール値</code> |デバッグ/テスト目的で更新メニューを表示するには、シェイク ジェスチャを有効にします。 <code>false</code> | 7.5.0 |## 例
 
-| Prop                         | Type                                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Default                                            | Since   |
-| ---------------------------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- | ------- |
-| **`appReadyTimeout`**        | <code>number</code>                             | Configure the number of milliseconds the native plugin should wait before considering an update 'failed'. Only available for Android and iOS.                                                                                                                                                                                                                                                                                                                                                                                                                                     | <code>10000 // (10 seconds)</code>                 |         |
-| **`responseTimeout`**        | <code>number</code>                             | Configure the number of milliseconds the native plugin should wait before considering API timeout. Only available for Android and iOS.                                                                                                                                                                                                                                                                                                                                                                                                                                            | <code>20 // (20 second)</code>                     |         |
-| **`autoDeleteFailed`**       | <code>boolean</code>                            | Configure whether the plugin should use automatically delete failed bundles. Only available for Android and iOS.                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | <code>true</code>                                  |         |
-| **`autoDeletePrevious`**     | <code>boolean</code>                            | Configure whether the plugin should use automatically delete previous bundles after a successful update. Only available for Android and iOS.                                                                                                                                                                                                                                                                                                                                                                                                                                      | <code>true</code>                                  |         |
-| **`autoUpdate`**             | <code>boolean</code>                            | Configure whether the plugin should use Auto Update via an update server. Only available for Android and iOS.                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | <code>true</code>                                  |         |
-| **`resetWhenUpdate`**        | <code>boolean</code>                            | Automatically delete previous downloaded bundles when a newer native app bundle is installed to the device. Only available for Android and iOS.                                                                                                                                                                                                                                                                                                                                                                                                                                   | <code>true</code>                                  |         |
-| **`updateUrl`**              | <code>string</code>                             | Configure the URL / endpoint to which update checks are sent. Only available for Android and iOS.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | <code>https://plugin.capgo.app/updates</code>      |         |
-| **`channelUrl`**             | <code>string</code>                             | Configure the URL / endpoint for channel operations. Only available for Android and iOS.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | <code>https://plugin.capgo.app/channel_self</code> |         |
-| **`statsUrl`**               | <code>string</code>                             | Configure the URL / endpoint to which update statistics are sent. Only available for Android and iOS. Set to "" to disable stats reporting.                                                                                                                                                                                                                                                                                                                                                                                                                                       | <code>https://plugin.capgo.app/stats</code>        |         |
-| **`publicKey`**              | <code>string</code>                             | Configure the public key for end to end live update encryption Version 2 Only available for Android and iOS.                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | <code>undefined</code>                             | 6.2.0   |
-| **`version`**                | <code>string</code>                             | Configure the current version of the app. This will be used for the first update request. If not set, the plugin will get the version from the native code. Only available for Android and iOS.                                                                                                                                                                                                                                                                                                                                                                                   | <code>undefined</code>                             | 4.17.48 |
-| **`directUpdate`**           | <code>boolean \| 'always' \| 'atInstall' \| 'onLaunch'</code> | Configure when the plugin should direct install updates. Only for autoUpdate mode. Works well for apps less than 10MB and with uploads done using --partial flag. Zip or apps more than 10MB will be relatively slow for users to update. - false: Never do direct updates (use default behavior: download at start, set when backgrounded) - atInstall: Direct update only when app is installed, updated from store, otherwise act as directUpdate = false - onLaunch: Direct update only on app installed, updated from store or after app kill, otherwise act as directUpdate = false - always: Direct update in all previous cases (app installed, updated from store, after app kill or app resume), never act as directUpdate = false - true: (deprecated) Same as "always" for backward compatibility Only available for Android and iOS. | <code>false</code>                                 | 5.1.0   |
-| **`autoSplashscreen`**       | <code>boolean</code>                            | Automatically handle splashscreen hiding when using directUpdate. When enabled, the plugin will automatically hide the splashscreen after updates are applied or when no update is needed. This removes the need to manually listen for appReady events and call SplashScreen.hide(). Only works when directUpdate is set to "atInstall", "always", or true. Requires the @capacitor/splash-screen plugin to be installed and configured with launchAutoHide: false. Requires autoUpdate and directUpdate to be enabled. Only available for Android and iOS.                      | <code>false</code>                                 | 7.6.0   |
-| **`periodCheckDelay`**       | <code>number</code>                             | Configure the delay period for period update check. the unit is in seconds. Only available for Android and iOS. Cannot be less than 600 seconds (10 minutes).                                                                                                                                                                                                                                                                                                                                                                                                                     | <code>600 // (10 minutes)</code>                   |         |
-| **`localS3`**                | <code>boolean</code>                            | Configure the CLI to use a local server for testing or self-hosted update server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | <code>undefined</code>                             | 4.17.48 |
-| **`localHost`**              | <code>string</code>                             | Configure the CLI to use a local server for testing or self-hosted update server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | <code>undefined</code>                             | 4.17.48 |
-| **`localWebHost`**           | <code>string</code>                             | Configure the CLI to use a local server for testing or self-hosted update server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | <code>undefined</code>                             | 4.17.48 |
-| **`localSupa`**              | <code>string</code>                             | Configure the CLI to use a local server for testing or self-hosted update server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | <code>undefined</code>                             | 4.17.48 |
-| **`localSupaAnon`**          | <code>string</code>                             | Configure the CLI to use a local server for testing.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | <code>undefined</code>                             | 4.17.48 |
-| **`localApi`**               | <code>string</code>                             | Configure the CLI to use a local api for testing.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | <code>undefined</code>                             | 6.3.3   |
-| **`localApiFiles`**          | <code>string</code>                             | Configure the CLI to use a local file api for testing.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | <code>undefined</code>                             | 6.3.3   |
-| **`allowModifyUrl`**         | <code>boolean</code>                            | Allow the plugin to modify the updateUrl, statsUrl and channelUrl dynamically from the JavaScript side.                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | <code>false</code>                                 | 5.4.0   |
-| **`defaultChannel`**         | <code>string</code>                             | Set the default channel for the app in the config. Case sensitive. This will setting will override the default channel set in the cloud, but will still respect overrides made in the cloud.                                                                                                                                                                                                                                                                                                                                                                                      | <code>undefined</code>                             | 5.5.0   |
-| **`appId`**                  | <code>string</code>                             | Configure the app id for the app in the config.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | <code>undefined</code>                             | 6.0.0   |
-| **`keepUrlPathAfterReload`** | <code>boolean</code>                            | Configure the plugin to keep the URL path after a reload. WARNING: When a reload is triggered, 'window.history' will be cleared.                                                                                                                                                                                                                                                                                                                                                                                                                                                  | <code>false</code>                                 | 6.8.0   |
-| **`disableJSLogging`**       | <code>boolean</code>                            | Disable the JavaScript logging of the plugin. if true, the plugin will not log to the JavaScript console. only the native log will be done                                                                                                                                                                                                                                                                                                                                                                                                                                        | <code>false</code>                                 | 7.3.0   |
-| **`shakeMenu`**              | <code>boolean</code>                            | Enable shake gesture to show update menu for debugging/testing purposes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | <code>false</code>                                 | 7.5.0   |
-
-## Examples
-
-In `capacitor.config.json`:
+`capacitor.config.json`:
 
 ```json
 {
@@ -85,7 +80,7 @@ In `capacitor.config.json`:
 }
 ```
 
-In `capacitor.config.ts`:
+`capacitor.config.ts` 内:
 
 ```ts
 import { CapacitorConfig } from '@capacitor/cli';
@@ -138,13 +133,13 @@ export default config;
 * [`download(...)`](#download)
 * [`next(...)`](#next)
 * [`set(...)`](#set)
-* [`delete(...)`](#delete)
-* [`list(...)`](#list)
-* [`reset(...)`](#reset)
-* [`current()`](#current)
+* [`delete(...)`](#削除)
+* [`list(...)`](#リスト)
+* [`reset(...)`](#リセット)
+* [`current()`](#現在)
 * [`reload()`](#reload)
-* [`setMultiDelay(...)`](#setmultidelay)
-* [`cancelDelay()`](#canceldelay)
+* [`setMultiDelay(...)`](#setmultilay)
+* [`cancelDelay()`](#キャンセル遅延)
 * [`getLatest(...)`](#getlatest)
 * [`setChannel(...)`](#setchannel)
 * [`unsetChannel(...)`](#unsetchannel)
@@ -169,27 +164,27 @@ export default config;
 * [`getNextBundle()`](#getnextbundle)
 * [`setShakeMenu(...)`](#setshakemenu)
 * [`isShakeMenuEnabled()`](#isshakemenuenabled)
-* [Interfaces](#interfaces)
-* [Type Aliases](#type-aliases)
+* [インターフェース](#interfaces)
+* [タイプエイリアス](#type-aliases)
 
 </docgen-index>
 
-# Methods
+# メソッド
 
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
-## notifyAppReady()
+## 通知AppReady()
 
 ```typescript
 notifyAppReady() => Promise<AppReadyResult>
 ```
 
-Notify Capacitor Updater that the current bundle is working (a rollback will occur if this method is not called on every app launch)
-By default this method should be called in the first 10 sec after app launch, otherwise a rollback will occur.
-Change this behaviour with {@link appReadyTimeout}
+現在のバンドルが機能していることを Capacitor Updater に通知します (アプリの起動ごとにこのメソッドが呼び出されないとロールバックが発生します)
+デフォルトでは、このメソッドはアプリ起動後の最初の 10 秒以内に呼び出される必要があります。そうしないとロールバックが発生します。
+この動作を {@link appReadyTimeout} で変更します
 
-**Returns:** <code>Promise&lt;<a href="#appreadyresult">AppReadyResult</a>&gt;</code>
+**戻り値:** <code>Promise<<a href="#appreadyresult">AppReadyResult</a>></code>
 
 --------------------
 
@@ -200,13 +195,13 @@ Change this behaviour with {@link appReadyTimeout}
 setUpdateUrl(options: UpdateUrl) => Promise<void>
 ```
 
-Set the updateUrl for the app, this will be used to check for updates.
+アプリの updateUrl を設定します。これは更新を確認するために使用されます。
 
-| Param         | Type                                            | Description                                       |
-| ------------- | ----------------------------------------------- | ------------------------------------------------- |
-| **`options`** | <code><a href="#updateurl">UpdateUrl</a></code> | contains the URL to use for checking for updates. |
+|パラム |タイプ |説明 |
+| ------------- | ----------------------------------------------- | -------------------------------------------------- |
+| **`options`** | <code><a href="#updateurl">UpdateUrl</a></code> |更新の確認に使用する URL が含まれています。 |
 
-**Since:** 5.4.0
+**以降:** 5.4.0
 
 --------------------
 
@@ -217,13 +212,11 @@ Set the updateUrl for the app, this will be used to check for updates.
 setStatsUrl(options: StatsUrl) => Promise<void>
 ```
 
-Set the statsUrl for the app, this will be used to send statistics. Passing an empty string will disable statistics gathering.
+アプリの statsUrl を設定します。これは統計の送信に使用されます。空の文字列を渡すと、統計の収集が無効になります。|パラム |タイプ | Description                                     |
+| ------------- | ----------------------------------------------- | ----------------------------------------------- |
+| **`options`** | <code><a href="#statsurl">StatsUrl</a></code> |統計の送信に使用する URL が含まれています。 |
 
-| Param         | Type                                          | Description                                     |
-| ------------- | --------------------------------------------- | ----------------------------------------------- |
-| **`options`** | <code><a href="#statsurl">StatsUrl</a></code> | contains the URL to use for sending statistics. |
-
-**Since:** 5.4.0
+**以降:** 5.4.0
 
 --------------------
 
@@ -236,16 +229,16 @@ setChannelUrl(options: ChannelUrl) => Promise<void>
 
 Set the channelUrl for the app, this will be used to set the channel.
 
-| Param         | Type                                              | Description                                      |
-| ------------- | ------------------------------------------------- | ------------------------------------------------ |
-| **`options`** | <code><a href="#channelurl">ChannelUrl</a></code> | contains the URL to use for setting the channel. |
+|パラム | Type                                              | Description                                      |
+| ------------- | -------------------------------------------------- | ------------------------------------------------ |
+| **`options`** | <code><a href="#channelurl">ChannelUrl</a></code> |チャネルの設定に使用する URL が含まれています。 |
 
-**Since:** 5.4.0
+**以降:** 5.4.0
 
 --------------------
 
 
-## download(...)
+## ダウンロード(...)
 
 ```typescript
 download(options: DownloadOptions) => Promise<BundleInfo>
@@ -253,114 +246,110 @@ download(options: DownloadOptions) => Promise<BundleInfo>
 
 Download a new bundle from the provided URL, it should be a zip file, with files inside or with a unique id inside with all your files
 
-| Param         | Type                                                        | Description                                                                                  |
+|パラム |タイプ | Description                                                                                  |
 | ------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#downloadoptions">DownloadOptions</a></code> | The {@link <a href="#downloadoptions">DownloadOptions</a>} for downloading a new bundle zip. |
+| **`options`** | <code><a href="#downloadoptions">ダウンロード オプション</a></code> |新しいバンドル zip をダウンロードするための {@link <a href="#downloadoptions">DownloadOptions</a>}。 |
 
-**Returns:** <code>Promise&lt;<a href="#bundleinfo">BundleInfo</a>&gt;</code>
+**Returns:** <code>Promise<<a href="#bundleinfo">BundleInfo</a>></code>
 
 --------------------
 
 
-## next(...)
+## 次(...)
 
 ```typescript
 next(options: BundleId) => Promise<BundleInfo>
 ```
 
-Set the next bundle to be used when the app is reloaded.
+アプリのリロード時に使用される次のバンドルを設定します。
 
-| Param         | Type                                          | Description                                                                                                   |
-| ------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#bundleid">BundleId</a></code> | Contains the ID of the next Bundle to set on next app launch. {@link <a href="#bundleinfo">BundleInfo.id</a>} |
+|パラム |タイプ | Description                                                                                                   |
+| ------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **`options`** | <code><a href="#bundleid">バンドルID</a></code> |次回のアプリ起動時に設定する次のバンドルの ID が含まれます。 {@link <a href="#bundleinfo">BundleInfo.id</a>} |
 
-**Returns:** <code>Promise&lt;<a href="#bundleinfo">BundleInfo</a>&gt;</code>
+**戻り値:** <code>約束<<a href="#bundleinfo">バンドル情報</a>></code>
 
 --------------------
 
 
-## set(...)
+## セット(...)
 
 ```typescript
 set(options: BundleId) => Promise<void>
 ```
 
-Set the current bundle and immediately reloads the app.
-
-| Param         | Type                                          | Description                                                                                       |
-| ------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#bundleid">BundleId</a></code> | A {@link <a href="#bundleid">BundleId</a>} object containing the new bundle id to set as current. |
+現在のバンドルを設定し、すぐにアプリをリロードします。|パラム |タイプ |説明 |
+| ------------- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| **`options`** | <code><a href="#bundleid">バンドルID</a></code> |現在として設定する新しいバンドル ID を含む {@link <a href="#bundleid">BundleId</a>} オブジェクト。 |
 
 --------------------
 
 
-## delete(...)
+## 削除(...)
 
 ```typescript
 delete(options: BundleId) => Promise<void>
 ```
 
-Deletes the specified bundle from the native app storage. Use with {@link list} to get the stored Bundle IDs.
+指定されたバンドルをネイティブ アプリ ストレージから削除します。 {@link list} とともに使用して、保存されているバンドル ID を取得します。
 
-| Param         | Type                                          | Description                                                                                                                                   |
-| ------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#bundleid">BundleId</a></code> | A {@link <a href="#bundleid">BundleId</a>} object containing the ID of a bundle to delete (note, this is the bundle id, NOT the version name) |
+|パラム |タイプ |説明 |
+| ------------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`options`** | <code><a href="#bundleid">バンドルID</a></code> |削除するバンドルの ID を含む {@link <a href="#bundleid">BundleId</a>} オブジェクト (これはバンドル ID であり、バージョン名ではないことに注意してください) |
 
 --------------------
 
 
-## list(...)
+## リスト(...)
 
 ```typescript
 list(options?: ListOptions | undefined) => Promise<BundleListResult>
 ```
 
-Get all locally downloaded bundles in your app
+ローカルにダウンロードされたすべてのバンドルをアプリで取得します
 
-| Param         | Type                                                | Description                                                            |
+|パラム |タイプ |説明 |
 | ------------- | --------------------------------------------------- | ---------------------------------------------------------------------- |
-| **`options`** | <code><a href="#listoptions">ListOptions</a></code> | The {@link <a href="#listoptions">ListOptions</a>} for listing bundles |
+| **`options`** | <code><a href="#listoptions">リストオプション</a></code> |バンドルをリストするための {@link <a href="#listoptions">ListOptions</a>} |
 
-**Returns:** <code>Promise&lt;<a href="#bundlelistresult">BundleListResult</a>&gt;</code>
+**戻り値:** <code>約束<<a href="#bundlelistresult">BundleListResult</a>></code>
 
 --------------------
 
 
-## reset(...)
+## リセット(...)
 
 ```typescript
 reset(options?: ResetOptions | undefined) => Promise<void>
 ```
 
-Reset the app to the `builtin` bundle (the one sent to Apple App Store / Google Play Store ) or the last successfully loaded bundle.
+アプリを `builtin` バンドル ( Apple App Store / Google Play ストア に送信されたもの) または最後に正常にロードされたバンドルにリセットします。
 
-| Param         | Type                                                  | Description                                                                                                                                                                      |
+|パラム |タイプ |説明 |
 | ------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#resetoptions">ResetOptions</a></code> | Containing {@link <a href="#resetoptions">ResetOptions.toLastSuccessful</a>}, `true` resets to the builtin bundle and `false` will reset to the last successfully loaded bundle. |
+| **`options`** | <code><a href="#resetoptions">リセットオプション</a></code> | {@link <a href="#resetoptions">ResetOptions.toLastSuccessful</a>} を含む、`true` は組み込みバンドルにリセットされ、`false` は最後に正常にロードされたバンドルにリセットされます。 |
 
 --------------------
 
 
-## current()
+## 現在()
 
 ```typescript
 current() => Promise<CurrentBundleResult>
-```
+```現在のバンドルを取得します。何も設定されていない場合は、`builtin` を返します。 currentNative はデバイスにインストールされている元のバンドルです
 
-Get the current bundle, if none are set it returns `builtin`. currentNative is the original bundle installed on the device
-
-**Returns:** <code>Promise&lt;<a href="#currentbundleresult">CurrentBundleResult</a>&gt;</code>
+**戻り値:** <code>約束<<a href="#currentbundleresult">CurrentBundleResult</a>></code>
 
 --------------------
 
 
-## reload()
+## リロード()
 
 ```typescript
 reload() => Promise<void>
 ```
 
-Reload the view
+ビューをリロードする
 
 --------------------
 
@@ -371,19 +360,19 @@ Reload the view
 setMultiDelay(options: MultiDelayConditions) => Promise<void>
 ```
 
-Sets a {@link <a href="#delaycondition">DelayCondition</a>} array containing conditions that the Plugin will use to delay the update.
-After all conditions are met, the update process will run start again as usual, so update will be installed after a backgrounding or killing the app.
-For the `date` kind, the value should be an iso8601 date string.
-For the `background` kind, the value should be a number in milliseconds.
-For the `nativeVersion` kind, the value should be the version number.
-For the `kill` kind, the value is not used.
-The function has inconsistent behavior the option kill do trigger the update after the first kill and not after the next background like other options. This will be fixed in a future major release.
+プラグインが更新を遅らせるために使用する条件を含む {@link <a href="#delaycondition">DelayCondition</a>} 配列を設定します。
+すべての条件が満たされると、更新プロセスが通常どおりに再び実行され、アプリのバックグラウンド化または終了後に更新がインストールされます。
+`date` 種類の場合、値は iso8601 日付文字列である必要があります。
+`background` 種類の場合、値はミリ秒単位の数値である必要があります。
+`nativeVersion` 種類の場合、値はバージョン番号である必要があります。
+`kill` 種類の場合、値は使用されません。
+この関数には一貫性のない動作があり、オプション kill では、他のオプションのように次のバックグラウンドの後ではなく、最初の kill 後に更新がトリガーされます。これは将来のメジャー リリースで修正される予定です。
 
-| Param         | Type                                                                  | Description                                                                                                |
-| ------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#multidelayconditions">MultiDelayConditions</a></code> | Containing the {@link <a href="#multidelayconditions">MultiDelayConditions</a>} array of conditions to set |
+|パラム |タイプ |説明 |
+| ------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| **`options`** | <code><a href="#multidelayconditions">MultiDelayConditions</a></code> |設定する条件の {@link <a href="#multidelayconditions">MultiDelayConditions</a>} 配列が含まれています |
 
-**Since:** 4.3.0
+**以降:** 4.3.0
 
 --------------------
 
@@ -394,28 +383,28 @@ The function has inconsistent behavior the option kill do trigger the update aft
 cancelDelay() => Promise<void>
 ```
 
-Cancels a {@link <a href="#delaycondition">DelayCondition</a>} to process an update immediately.
+{@link <a href="#delaycondition">DelayCondition</a>} をキャンセルして、更新をすぐに処理します。
 
-**Since:** 4.0.0
+**以降:** 4.0.0
 
 --------------------
 
 
-## getLatest(...)
+## getlatest(...)
 
 ```typescript
 getLatest(options?: GetLatestOptions | undefined) => Promise<LatestVersion>
 ```
 
-Get Latest bundle available from update Url
+アップデート URL から最新のバンドルを入手
 
-| Param         | Type                                                          |
-| ------------- | ------------------------------------------------------------- |
-| **`options`** | <code><a href="#getlatestoptions">GetLatestOptions</a></code> |
+|パラム |タイプ |
+| ------------- | -------------------------------------------------------------- |
+| **`options`** | <code><a href="#getlatestoptions">最新オプションの取得</a></code> |
 
-**Returns:** <code>Promise&lt;<a href="#latestversion">LatestVersion</a>&gt;</code>
+**戻り値:** <code>約束<<a href="#latestversion">最新バージョン</a>></code>
 
-**Since:** 4.0.0
+**以降:** 4.0.0
 
 --------------------
 
@@ -426,83 +415,13 @@ Get Latest bundle available from update Url
 setChannel(options: SetChannelOptions) => Promise<ChannelRes>
 ```
 
-Sets the channel for this device. The channel has to allow for self assignment for this to work.
-Do not use this method to set the channel at boot.
-This method is to set the channel after the app is ready, and user interacted.
-If you want to set the channel at boot, use the {@link PluginsConfig} to set the default channel.
-This methods send to Capgo backend a request to link the device ID to the channel. Capgo can accept or refuse depending of the setting of your channel.
+このデバイスのチャンネルを設定します。これが機能するには、チャネルで `allow_device_self_set` が有効になっている必要があります。このデバイスのカスタム ID を設定する
 
-| Param         | Type                                                            | Description                                                                      |
-| ------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#setchanneloptions">SetChannelOptions</a></code> | Is the {@link <a href="#setchanneloptions">SetChannelOptions</a>} channel to set |
+|パラム |タイプ |説明 |
+| ------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| **`options`** | <code><a href="#setcustomidoptions">SetCustomIdOptions</a></code> |は、設定する {@link <a href="#setcustomidoptions">SetCustomIdOptions</a>} カスタム ID です |
 
-**Returns:** <code>Promise&lt;<a href="#channelres">ChannelRes</a>&gt;</code>
-
-**Since:** 4.7.0
-
---------------------
-
-
-## unsetChannel(...)
-
-```typescript
-unsetChannel(options: UnsetChannelOptions) => Promise<void>
-```
-
-Unset the channel for this device. The device will then return to the default channel
-
-| Param         | Type                                                                |
-| ------------- | ------------------------------------------------------------------- |
-| **`options`** | <code><a href="#unsetchanneloptions">UnsetChannelOptions</a></code> |
-
-**Since:** 4.7.0
-
---------------------
-
-
-## getChannel()
-
-```typescript
-getChannel() => Promise<GetChannelRes>
-```
-
-Get the channel for this device
-
-**Returns:** <code>Promise&lt;<a href="#getchannelres">GetChannelRes</a>&gt;</code>
-
-**Since:** 4.8.0
-
---------------------
-
-
-## listChannels()
-
-```typescript
-listChannels() => Promise<ListChannelsResult>
-```
-
-List all channels available for this device that allow self-assignment
-
-**Returns:** <code>Promise&lt;<a href="#listchannelsresult">ListChannelsResult</a>&gt;</code>
-
-**Since:** 7.5.0
-
---------------------
-
-
-## setCustomId(...)
-
-```typescript
-setCustomId(options: SetCustomIdOptions) => Promise<void>
-```
-
-Set a custom ID for this device
-
-| Param         | Type                                                              | Description                                                                         |
-| ------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#setcustomidoptions">SetCustomIdOptions</a></code> | is the {@link <a href="#setcustomidoptions">SetCustomIdOptions</a>} customId to set |
-
-**Since:** 4.9.0
+**以降:** 4.9.0
 
 --------------------
 
@@ -513,11 +432,11 @@ Set a custom ID for this device
 getBuiltinVersion() => Promise<BuiltinVersion>
 ```
 
-Get the native app version or the builtin version if set in config
+ネイティブアプリのバージョン、または構成で設定されている場合は組み込みバージョンを取得します
 
-**Returns:** <code>Promise&lt;<a href="#builtinversion">BuiltinVersion</a>&gt;</code>
+**戻り値:** <code>約束<<a href="#builtinversion">BuiltinVersion</a>></code>
 
-**Since:** 5.2.0
+**以降:** 5.2.0
 
 --------------------
 
@@ -528,9 +447,9 @@ Get the native app version or the builtin version if set in config
 getDeviceId() => Promise<DeviceId>
 ```
 
-Get unique ID used to identify device (sent to auto update server)
+デバイスを識別するために使用される固有の ID を取得します (自動更新サーバーに送信されます)。
 
-**Returns:** <code>Promise&lt;<a href="#deviceid">DeviceId</a>&gt;</code>
+**戻り値:** <code>約束<<a href="#deviceid">DeviceId</a>></code>
 
 --------------------
 
@@ -541,9 +460,9 @@ Get unique ID used to identify device (sent to auto update server)
 getPluginVersion() => Promise<PluginVersion>
 ```
 
-Get the native Capacitor Updater plugin version (sent to auto update server)
+ネイティブ Capacitor アップデーター プラグインのバージョンを取得します (自動更新サーバーに送信されます)。
 
-**Returns:** <code>Promise&lt;<a href="#pluginversion">PluginVersion</a>&gt;</code>
+**戻り値:** <code>約束<<a href="#pluginversion">プラグインバージョン</a>></code>
 
 --------------------
 
@@ -554,43 +473,43 @@ Get the native Capacitor Updater plugin version (sent to auto update server)
 isAutoUpdateEnabled() => Promise<AutoUpdateEnabled>
 ```
 
-Get the state of auto update config.
+自動更新設定の状態を取得します。
 
-**Returns:** <code>Promise&lt;<a href="#autoupdateenabled">AutoUpdateEnabled</a>&gt;</code>
+**戻り値:** <code>約束<<a href="#autoupdateenabled">AutoUpdateEnabled</a>></code>
 
 --------------------
 
 
-## removeAllListeners()
+## 削除AllListeners()
 
 ```typescript
 removeAllListeners() => Promise<void>
 ```
 
-Remove all listeners for this plugin.
+このプラグインのすべてのリスナーを削除します。
 
-**Since:** 1.0.0
+**以降:** 1.0.0
 
 --------------------
 
 
-## addListener('download', ...)
+## addListener('ダウンロード', ...)
 
 ```typescript
 addListener(eventName: 'download', listenerFunc: (state: DownloadEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for bundle download event in the App. Fires once a download has started, during downloading and when finished.
-This will return you all download percent during the download
+アプリでバンドルのダウンロード イベントをリッスンします。ダウンロードの開始時、ダウンロード中、終了時に発生します。
+これにより、ダウンロード中にすべてのダウンロードパーセントが返されます
 
-| Param              | Type                                                                        |
+|パラム |タイプ |
 | ------------------ | --------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'download'</code>                                                     |
-| **`listenerFunc`** | <code>(state: <a href="#downloadevent">DownloadEvent</a>) =&gt; void</code> |
+| **`eventName`** | <code>「ダウンロード」</code> |
+| **`listenerFunc`** | <code>(状態: <a href="#downloadevent">DownloadEvent</a>) => void</code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+**戻り値:** <code>Promise<<a href="#pluginlistenerhandle">PluginListenerHandle</a>></code>
 
-**Since:** 2.0.11
+**以降:** 2.0.11
 
 --------------------
 
@@ -601,16 +520,14 @@ This will return you all download percent during the download
 addListener(eventName: 'noNeedUpdate', listenerFunc: (state: NoNeedEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for no need to update event, useful when you want force check every time the app is launched
+イベントを更新する必要がないためリッスンします。アプリが起動されるたびに強制的にチェックしたい場合に便利です
 
-| Param              | Type                                                                    |
+|パラム |タイプ |
 | ------------------ | ----------------------------------------------------------------------- |
-| **`eventName`**    | <code>'noNeedUpdate'</code>                                             |
-| **`listenerFunc`** | <code>(state: <a href="#noneedevent">NoNeedEvent</a>) =&gt; void</code> |
+| **`eventName`** | <code>'アップデートは必要ありません'</code> |
+| **`listenerFunc`** | <code>(状態: <a href="#noneedevent">NoNeedEvent</a>) => void</code> |**戻り値:** <code>Promise<<a href="#pluginlistenerhandle">PluginListenerHandle</a>></code>
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
-
-**Since:** 4.0.0
+**以降:** 4.0.0
 
 --------------------
 
@@ -621,16 +538,16 @@ Listen for no need to update event, useful when you want force check every time 
 addListener(eventName: 'updateAvailable', listenerFunc: (state: UpdateAvailableEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for available update event, useful when you want to force check every time the app is launched
+利用可能な更新イベントをリッスンします。アプリが起動されるたびに強制的にチェックしたい場合に便利です。
 
-| Param              | Type                                                                                      |
+|パラム |タイプ |
 | ------------------ | ----------------------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'updateAvailable'</code>                                                            |
-| **`listenerFunc`** | <code>(state: <a href="#updateavailableevent">UpdateAvailableEvent</a>) =&gt; void</code> |
+| **`eventName`** | <code>'アップデートあり'</code> |
+| **`listenerFunc`** | <code>(状態: <a href="#updateavailableevent">UpdateAvailableEvent</a>) => void</code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+**戻り値:** <code>Promise<<a href="#pluginlistenerhandle">PluginListenerHandle</a>></code>
 
-**Since:** 4.0.0
+**以降:** 4.0.0
 
 --------------------
 
@@ -641,16 +558,16 @@ Listen for available update event, useful when you want to force check every tim
 addListener(eventName: 'downloadComplete', listenerFunc: (state: DownloadCompleteEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for downloadComplete events.
+downloadComplete イベントをリッスンします。
 
-| Param              | Type                                                                                        |
+|パラム |タイプ |
 | ------------------ | ------------------------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'downloadComplete'</code>                                                             |
-| **`listenerFunc`** | <code>(state: <a href="#downloadcompleteevent">DownloadCompleteEvent</a>) =&gt; void</code> |
+| **`eventName`** | <code>'ダウンロード完了'</code> |
+| **`listenerFunc`** | <code>(状態: <a href="#downloadcompleteevent">DownloadCompleteEvent</a>) => void</code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+**戻り値:** <code>Promise<<a href="#pluginlistenerhandle">PluginListenerHandle</a>></code>
 
-**Since:** 4.0.0
+**以降:** 4.0.0
 
 --------------------
 
@@ -661,16 +578,16 @@ Listen for downloadComplete events.
 addListener(eventName: 'majorAvailable', listenerFunc: (state: MajorAvailableEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for Major update event in the App, let you know when major update is blocked by setting disableAutoUpdateBreaking
+アプリでメジャー アップデート イベントをリッスンし、disableAutoUpdateBreaking を設定することでメジャー アップデートがブロックされたときに通知します。
 
-| Param              | Type                                                                                    |
-| ------------------ | --------------------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'majorAvailable'</code>                                                           |
-| **`listenerFunc`** | <code>(state: <a href="#majoravailableevent">MajorAvailableEvent</a>) =&gt; void</code> |
+|パラム |タイプ |
+| ------------------ | ----------------------------------------------------------------------------------------- |
+| **`eventName`** | <code>'メジャー利用可能'</code> |
+| **`listenerFunc`** | <code>(状態: <a href="#majoravailableevent">MajorAvailableEvent</a>) => void</code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+**戻り値:** <code>Promise<<a href="#pluginlistenerhandle">PluginListenerHandle</a>></code>
 
-**Since:** 2.3.0
+**以降:** 2.3.0
 
 --------------------
 
@@ -681,36 +598,34 @@ Listen for Major update event in the App, let you know when major update is bloc
 addListener(eventName: 'updateFailed', listenerFunc: (state: UpdateFailedEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for update fail event in the App, let you know when update has fail to install at next app start
+アプリ内で更新失敗イベントをリッスンし、次回のアプリ起動時に更新のインストールに失敗したことを通知します
 
-| Param              | Type                                                                                |
+|パラム |タイプ |
 | ------------------ | ----------------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'updateFailed'</code>                                                         |
-| **`listenerFunc`** | <code>(state: <a href="#updatefailedevent">UpdateFailedEvent</a>) =&gt; void</code> |
+| **`eventName`** | <code>'更新失敗'</code> |
+| **`listenerFunc`** | <code>(状態: <a href="#updatefailedevent">UpdateFailedEvent</a>) => void</code> |**戻り値:** <code>Promise<<a href="#pluginlistenerhandle">PluginListenerHandle</a>></code>
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
-
-**Since:** 2.3.0
+**以降:** 2.3.0
 
 --------------------
 
 
-## addListener('downloadFailed', ...)
+## addListener('ダウンロード失敗', ...)
 
 ```typescript
 addListener(eventName: 'downloadFailed', listenerFunc: (state: DownloadFailedEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for download fail event in the App, let you know when a bundle download has failed
+アプリでダウンロード失敗イベントをリッスンし、バンドルのダウンロードが失敗したときに通知します
 
-| Param              | Type                                                                                    |
-| ------------------ | --------------------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'downloadFailed'</code>                                                           |
-| **`listenerFunc`** | <code>(state: <a href="#downloadfailedevent">DownloadFailedEvent</a>) =&gt; void</code> |
+|パラム |タイプ |
+| ------------------ | ----------------------------------------------------------------------------------------- |
+| **`eventName`** | <code>'ダウンロード失敗'</code> |
+| **`listenerFunc`** | <code>(状態: <a href="#downloadfailedevent">DownloadFailedEvent</a>) => void</code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+**戻り値:** <code>Promise<<a href="#pluginlistenerhandle">PluginListenerHandle</a>></code>
 
-**Since:** 4.0.0
+**以降:** 4.0.0
 
 --------------------
 
@@ -721,16 +636,16 @@ Listen for download fail event in the App, let you know when a bundle download h
 addListener(eventName: 'appReloaded', listenerFunc: () => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for reload event in the App, let you know when reload has happened
+アプリでリロード イベントをリッスンし、リロードが発生したときに通知します
 
-| Param              | Type                       |
-| ------------------ | -------------------------- |
-| **`eventName`**    | <code>'appReloaded'</code> |
-| **`listenerFunc`** | <code>() =&gt; void</code> |
+|パラム |タイプ |
+| ------------------ | ------------------------ |
+| **`eventName`** | <code>'アプリが再ロードされました'</code> |
+| **`listenerFunc`** | <code>() => void</code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+**戻り値:** <code>Promise<<a href="#pluginlistenerhandle">PluginListenerHandle</a>></code>
 
-**Since:** 4.3.0
+**以降:** 4.3.0
 
 --------------------
 
@@ -741,16 +656,16 @@ Listen for reload event in the App, let you know when reload has happened
 addListener(eventName: 'appReady', listenerFunc: (state: AppReadyEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for app ready event in the App, let you know when app is ready to use
+アプリ内でアプリ準備完了イベントをリッスンし、アプリが使用できるようになったときに通知します
 
-| Param              | Type                                                                        |
+|パラム |タイプ |
 | ------------------ | --------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'appReady'</code>                                                     |
-| **`listenerFunc`** | <code>(state: <a href="#appreadyevent">AppReadyEvent</a>) =&gt; void</code> |
+| **`eventName`** | <code>'アプリ準備完了'</code> |
+| **`listenerFunc`** | <code>(状態: <a href="#appreadyevent">AppReadyEvent</a>) => void</code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+**戻り値:** <code>Promise<<a href="#pluginlistenerhandle">PluginListenerHandle</a>></code>
 
-**Since:** 5.1.0
+**以降:** 5.1.0
 
 --------------------
 
@@ -761,9 +676,9 @@ Listen for app ready event in the App, let you know when app is ready to use
 isAutoUpdateAvailable() => Promise<AutoUpdateAvailable>
 ```
 
-Get if auto update is available (not disabled by serverUrl).
+自動更新が利用可能かどうかを取得します (serverUrl によって無効になっていない)。
 
-**Returns:** <code>Promise&lt;<a href="#autoupdateavailable">AutoUpdateAvailable</a>&gt;</code>
+**戻り値:** <code>約束<<a href="#autoupdateavailable">AutoUpdateAvailable</a>></code>
 
 --------------------
 
@@ -775,11 +690,11 @@ getNextBundle() => Promise<BundleInfo | null>
 ```
 
 Get the next bundle that will be used when the app reloads.
-Returns null if no next bundle is set.
+次のバンドルが設定されていない場合は null を返します。
 
-**Returns:** <code>Promise&lt;<a href="#bundleinfo">BundleInfo</a> | null&gt;</code>
+**戻り値:** <code>約束<<a href="#bundleinfo">バンドル情報</a> | null></code>
 
-**Since:** 6.8.0
+**以降:** 6.8.0
 
 --------------------
 
@@ -790,13 +705,11 @@ Returns null if no next bundle is set.
 setShakeMenu(options: SetShakeMenuOptions) => Promise<void>
 ```
 
-Enable or disable the shake menu for debugging/testing purposes
-
-| Param         | Type                                                                | Description                                              |
+デバッグ/テスト目的でシェイク メニューを有効または無効にします。|パラム |タイプ |説明 |
 | ------------- | ------------------------------------------------------------------- | -------------------------------------------------------- |
-| **`options`** | <code><a href="#setshakemenuoptions">SetShakeMenuOptions</a></code> | Contains enabled boolean to enable or disable shake menu |
+| **`options`** | <code><a href="#setshakemenuoptions">SetShakeMenuOptions</a></code> |シェイク メニューを有効または無効にするための有効なブール値が含まれます |
 
-**Since:** 7.5.0
+**以降:** 7.5.0
 
 --------------------
 
@@ -807,341 +720,329 @@ Enable or disable the shake menu for debugging/testing purposes
 isShakeMenuEnabled() => Promise<ShakeMenuEnabled>
 ```
 
-Get the current state of the shake menu
+シェイク メニューの現在の状態を取得する
 
-**Returns:** <code>Promise&lt;<a href="#shakemenuenabled">ShakeMenuEnabled</a>&gt;</code>
+**戻り値:** <code>約束<<a href="#shakemenuenabled">ShakeMenuEnabled</a>></code>
 
-**Since:** 7.5.0
+**以降:** 7.5.0
 
 --------------------
 
 
-## Interfaces
+## インターフェース
 
 
-### AppReadyResult
+### AppReady結果
 
-| Prop         | Type                                              |
-| ------------ | ------------------------------------------------- |
-| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> |
+|小道具 |タイプ |
+| ------------ | -------------------------------------------------- |
+| **`bundle`** | <code><a href="#bundleinfo">バンドル情報</a></code> |
 
 
-### BundleInfo
+### バンドル情報
 
-| Prop             | Type                                                  |
+|小道具 |タイプ |
 | ---------------- | ----------------------------------------------------- |
-| **`id`**         | <code>string</code>                                   |
-| **`version`**    | <code>string</code>                                   |
-| **`downloaded`** | <code>string</code>                                   |
-| **`checksum`**   | <code>string</code>                                   |
-| **`status`**     | <code><a href="#bundlestatus">BundleStatus</a></code> |
+| **`id`** | <code>string</code> |
+| **`version`** | <code>string</code> |
+| **`downloaded`** | <code>string</code> |
+| **`checksum`** | <code>string</code> |
+| **`status`** | <code><a href="#bundlestatus">バンドルステータス</a></code> |
 
 
-### UpdateUrl
+### 更新URL
 
-| Prop      | Type                |
+|小道具 |タイプ |
 | --------- | ------------------- |
 | **`url`** | <code>string</code> |
 
 
-### StatsUrl
+### 統計URL
 
-| Prop      | Type                |
+|小道具 |タイプ |
 | --------- | ------------------- |
 | **`url`** | <code>string</code> |
 
 
-### ChannelUrl
+### チャンネルURL
 
-| Prop      | Type                |
+|小道具 |タイプ |
 | --------- | ------------------- |
 | **`url`** | <code>string</code> |
 
 
-### DownloadOptions
+### ダウンロードオプション
 
-This URL and versions are used to download the bundle from the server, If you use backend all information will be given by the method getLatest.
-If you don't use backend, you need to provide the URL and version of the bundle. Checksum and sessionKey are required if you encrypted the bundle with the CLI command encrypt, you should receive them as result of the command.
-
-| Prop             | Type                         | Description                                                                                                                                                      | Default                | Since |
+この URL とバージョンは、サーバーからバンドルをダウンロードするために使用されます。バックエンドを使用する場合は、すべての情報が getlatest メソッドによって提供されます。
+バックエンドを使用しない場合は、バンドルの URL とバージョンを指定する必要があります。 CLI コマンド encrypt を使用してバンドルを暗号化した場合は、チェックサムとセッションキーが必要です。これらはコマンドの結果として受け取る必要があります。|小道具 |タイプ |説明 |デフォルト |以来 |
 | ---------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----- |
-| **`url`**        | <code>string</code>          | The URL of the bundle zip file (e.g: dist.zip) to be downloaded. (This can be any URL. E.g: Amazon S3, a GitHub tag, any other place you've hosted your bundle.) |                        |       |
-| **`version`**    | <code>string</code>          | The version code/name of this bundle/version                                                                                                                     |                        |       |
-| **`sessionKey`** | <code>string</code>          | The session key for the update, when the bundle is encrypted with a session key                                                                                  | <code>undefined</code> | 4.0.0 |
-| **`checksum`**   | <code>string</code>          | The checksum for the update, it should be in sha256 and encrypted with private key if the bundle is encrypted                                                    | <code>undefined</code> | 4.0.0 |
-| **`manifest`**   | <code>ManifestEntry[]</code> | The manifest for multi-file downloads                                                                                                                            | <code>undefined</code> | 6.1.0 |
+| **`url`** | <code>string</code> |ダウンロードするバンドル zip ファイル (例: dist.zip) の URL。 (これは任意の URL にすることができます。例: Amazon S3、GitHub タグ、バンドルをホストしているその他の場所。)                        |       |
+| **`version`** | <code>string</code> |このバンドル/バージョンのバージョン コード/名前 |                        |       |
+| **`sessionKey`** | <code>string</code> |バンドルがセッション キーで暗号化されている場合の更新用のセッション キー | <code>未定義</code> | 4.0.0 |
+| **`checksum`** | <code>string</code> |アップデートのチェックサム。バンドルが暗号化されている場合は、sha256 で秘密キーで暗号化されている必要があります。 <code>未定義</code> | 4.0.0 |
+| **`manifest`** | <code>ManifestEntry[]</code> |デルタ (マニフェスト) マルチファイル ダウンロードのマニフェスト | <code>未定義</code> | 6.1.0 |
 
 
-### ManifestEntry
+### マニフェストエントリ
 
-| Prop               | Type                        |
-| ------------------ | --------------------------- |
-| **`file_name`**    | <code>string \| null</code> |
-| **`file_hash`**    | <code>string \| null</code> |
-| **`download_url`** | <code>string \| null</code> |
+|小道具 |タイプ |
+| ------------------ | ------------------------- |
+| **`file_name`** | <code>文字列 \| null</code> |
+| **`file_hash`** | <code>文字列 \| null</code> |
+| **`download_url`** | <code>文字列 \| null</code> |
 
 
 ### BundleId
 
-| Prop     | Type                |
+|小道具 |タイプ |
 | -------- | ------------------- |
 | **`id`** | <code>string</code> |
 
 
-### BundleListResult
+### バンドルリスト結果
 
-| Prop          | Type                      |
+|小道具 |タイプ |
 | ------------- | ------------------------- |
-| **`bundles`** | <code>BundleInfo[]</code> |
+| **`bundles`** | <code>バンドル情報[]</code> |
 
 
-### ListOptions
-
-| Prop      | Type                 | Description                                                                                                                                   | Default            | Since  |
+### リストオプション|小道具 |タイプ |説明 |デフォルト |以来 |
 | --------- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | ------ |
-| **`raw`** | <code>boolean</code> | Whether to return the raw bundle list or the manifest. If true, the list will attempt to read the internal database instead of files on disk. | <code>false</code> | 6.14.0 |
+| **`raw`** | <code>ブール値</code> |生のバンドル リストを返すかマニフェストを返すか。 true の場合、リストはディスク上のファイルではなく内部データベースの読み取りを試みます。 | <code>false</code> | 6.14.0 |
 
 
-### ResetOptions
+### リセットオプション
 
-| Prop                   | Type                 |
+| Prop                   |タイプ |
 | ---------------------- | -------------------- |
-| **`toLastSuccessful`** | <code>boolean</code> |
+| **`toLastSuccessful`** | <code>ブール値</code> |
 
 
-### CurrentBundleResult
+### 現在のバンドル結果
 
-| Prop         | Type                                              |
-| ------------ | ------------------------------------------------- |
-| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> |
-| **`native`** | <code>string</code>                               |
+|小道具 |タイプ |
+| ------------ | -------------------------------------------------- |
+| **`bundle`** | <code><a href="#bundleinfo">バンドル情報</a></code> |
+| **`native`** | <code>string</code> |
 
 
-### MultiDelayConditions
+### マルチ遅延条件
 
-| Prop                  | Type                          |
+|小道具 |タイプ |
 | --------------------- | ----------------------------- |
-| **`delayConditions`** | <code>DelayCondition[]</code> |
+| **`delayConditions`** | <code>遅延条件[]</code> |
 
 
-### DelayCondition
+### 遅延条件
 
-| Prop        | Type                                                      | Description                              |
-| ----------- | --------------------------------------------------------- | ---------------------------------------- |
-| **`kind`**  | <code><a href="#delayuntilnext">DelayUntilNext</a></code> | Set up delay conditions in setMultiDelay |
-| **`value`** | <code>string</code>                                       |                                          |
-
-
-### LatestVersion
-
-| Prop             | Type                         | Description                | Since |
-| ---------------- | ---------------------------- | -------------------------- | ----- |
-| **`version`**    | <code>string</code>          | Result of getLatest method | 4.0.0 |
-| **`checksum`**   | <code>string</code>          |                            | 6     |
-| **`major`**      | <code>boolean</code>         |                            |       |
-| **`message`**    | <code>string</code>          |                            |       |
-| **`sessionKey`** | <code>string</code>          |                            |       |
-| **`error`**      | <code>string</code>          |                            |       |
-| **`old`**        | <code>string</code>          |                            |       |
-| **`url`**        | <code>string</code>          |                            |       |
-| **`manifest`**   | <code>ManifestEntry[]</code> |                            | 6.1   |
+|小道具 |タイプ |説明 |
+| ----------- | -------------------------------------------------------- | -------------------------------------- |
+| **`kind`** | <code><a href="#delayuntilnext">次まで遅延</a></code> | setMultiDelay | で遅延条件を設定します。
+| **`value`** | <code>string</code> |                                          |
 
 
-### GetLatestOptions
+### 最新バージョン|小道具 |タイプ |説明 |以来 |
+| ---------------- | ---------------------------- | ------------------------ | ----- |
+| **`version`** | <code>string</code> | getlatest メソッドの結果 | 4.0.0 |
+| **`checksum`** | <code>string</code> |                            | 6 |
+| **`major`** | <code>ブール値</code> |                            |       |
+| **`message`** | <code>string</code> |                            |       |
+| **`sessionKey`** | <code>string</code> |                            |       |
+| **`error`** | <code>string</code> |                            |       |
+| **`old`** | <code>string</code> |                            |       |
+| **`url`** | <code>string</code> |                            |       |
+| **`manifest`** | <code>ManifestEntry[]</code> |                            | 6.1 |
 
-| Prop          | Type                | Description                                                                                     | Default                | Since |
-| ------------- | ------------------- | ----------------------------------------------------------------------------------------------- | ---------------------- | ----- |
-| **`channel`** | <code>string</code> | The channel to get the latest version for The channel must allow 'self_assign' for this to work | <code>undefined</code> | 6.8.0 |
+
+### GetlatestOptions
+
+|小道具 |タイプ |説明 |デフォルト |以来 |
+| ------------- | ------------------- | ---------------------------------------------------------------------------------------------- | ---------------------- | ----- |
+| **`channel`** | <code>string</code> |最新バージョンを取得するチャネル このチャネルが機能するには、「self_assign」を許可する必要があります。 <code>未定義</code> | 6.8.0 |
 
 
-### ChannelRes
+### チャンネル解像度
 
-| Prop          | Type                | Description                   | Since |
+|小道具 |タイプ |説明 |以来 |
 | ------------- | ------------------- | ----------------------------- | ----- |
-| **`status`**  | <code>string</code> | Current status of set channel | 4.7.0 |
-| **`error`**   | <code>string</code> |                               |       |
+| **`status`** | <code>string</code> |設定チャンネルの現在の状態 | 4.7.0 |
+| **`error`** | <code>string</code> |                               |       |
 | **`message`** | <code>string</code> |                               |       |
 
 
 ### SetChannelOptions
 
-| Prop                    | Type                 |
+|小道具 |タイプ |
 | ----------------------- | -------------------- |
-| **`channel`**           | <code>string</code>  |
-| **`triggerAutoUpdate`** | <code>boolean</code> |
+| **`channel`** | <code>string</code> |
+| **`triggerAutoUpdate`** | <code>ブール値</code> |
 
 
 ### UnsetChannelOptions
 
-| Prop                    | Type                 |
+|小道具 |タイプ |
 | ----------------------- | -------------------- |
-| **`triggerAutoUpdate`** | <code>boolean</code> |
+| **`triggerAutoUpdate`** | <code>ブール値</code> |
 
 
-### GetChannelRes
-
-| Prop           | Type                 | Description                   | Since |
+### GetChannelRes|小道具 |タイプ |説明 |以来 |
 | -------------- | -------------------- | ----------------------------- | ----- |
-| **`channel`**  | <code>string</code>  | Current status of get channel | 4.8.0 |
-| **`error`**    | <code>string</code>  |                               |       |
-| **`message`**  | <code>string</code>  |                               |       |
-| **`status`**   | <code>string</code>  |                               |       |
-| **`allowSet`** | <code>boolean</code> |                               |       |
+| **`channel`** | <code>string</code> |チャンネル取得の現在のステータス | 4.8.0 |
+| **`error`** | <code>string</code> |                               |       |
+| **`message`** | <code>string</code> |                               |       |
+| **`status`** | <code>string</code> |                               |       |
+| **`allowSet`** | <code>ブール値</code> |                               |       |
 
 
 ### ListChannelsResult
 
-| Prop           | Type                       | Description                | Since |
-| -------------- | -------------------------- | -------------------------- | ----- |
-| **`channels`** | <code>ChannelInfo[]</code> | List of available channels | 7.5.0 |
+|小道具 |タイプ |説明 |以来 |
+| -------------- | ------------------------ | ------------------------ | ----- |
+| **`channels`** | <code>チャンネル情報[]</code> |利用可能なチャンネルのリスト | 7.5.0 |
 
 
-### ChannelInfo
+### チャンネル情報
 
-| Prop                 | Type                 | Description                                     | Since |
+|小道具 |タイプ |説明 |以来 |
 | -------------------- | -------------------- | ----------------------------------------------- | ----- |
-| **`id`**             | <code>string</code>  | The channel ID                                  | 7.5.0 |
-| **`name`**           | <code>string</code>  | The channel name                                | 7.5.0 |
-| **`public`**         | <code>boolean</code> | Whether this is a public channel                | 7.5.0 |
-| **`allow_self_set`** | <code>boolean</code> | Whether devices can self-assign to this channel | 7.5.0 |
+| **`id`** | <code>string</code> |チャンネル ID | 7.5.0 |
+| **`name`** | <code>string</code> |チャンネル名 | 7.5.0 |
+| **`public`** | <code>ブール値</code> | true の場合、これはデフォルト/フォールバック チャネルです。デバイスはパブリック チャネルに自己割り当てできません。代わりに、デバイスがチャネル オーバーライドを削除すると (`unsetChannel()` を使用)、一致するパブリック チャネルから更新を自動的に受信します。 | 7.5.0 |
+| **`allow_self_set`** | <code>ブール値</code> | true の場合、デバイスは `setChannel()` を使用してこのチャネルに明示的に自己割り当てできます。これは通常、ベータ テスト、A/B テスト、またはオプトイン更新トラックに使用されます。 | 7.5.0 |
 
 
 ### SetCustomIdOptions
 
-| Prop           | Type                |
+|小道具 |タイプ |
 | -------------- | ------------------- |
 | **`customId`** | <code>string</code> |
 
 
-### BuiltinVersion
+### 組み込みバージョン
 
-| Prop          | Type                |
+|小道具 |タイプ |
 | ------------- | ------------------- |
 | **`version`** | <code>string</code> |
 
 
-### DeviceId
+### デバイス ID
 
-| Prop           | Type                |
+|小道具 |タイプ |
 | -------------- | ------------------- |
 | **`deviceId`** | <code>string</code> |
 
 
-### PluginVersion
+### プラグインのバージョン
 
-| Prop          | Type                |
+|小道具 |タイプ |
 | ------------- | ------------------- |
 | **`version`** | <code>string</code> |
 
 
-### AutoUpdateEnabled
+### 自動更新が有効です
 
-| Prop          | Type                 |
+|小道具 |タイプ |
 | ------------- | -------------------- |
-| **`enabled`** | <code>boolean</code> |
+| **`enabled`** | <code>ブール値</code> |
 
 
-### PluginListenerHandle
+### プラグインリスナーハンドル
 
-| Prop         | Type                                      |
-| ------------ | ----------------------------------------- |
-| **`remove`** | <code>() =&gt; Promise&lt;void&gt;</code> |
-
-
-### DownloadEvent
-
-| Prop          | Type                                              | Description                                    | Since |
-| ------------- | ------------------------------------------------- | ---------------------------------------------- | ----- |
-| **`percent`** | <code>number</code>                               | Current status of download, between 0 and 100. | 4.0.0 |
-| **`bundle`**  | <code><a href="#bundleinfo">BundleInfo</a></code> |                                                |       |
+|小道具 |タイプ |
+| ------------ | -------------------------------------- |
+| **`remove`** | <code>() => 約束<void></code> |
 
 
-### NoNeedEvent
+### DownloadEvent|小道具 |タイプ |説明 |以来 |
+| ------------- | -------------------------------------------------- | ------------------------------------------------ | ----- |
+| **`percent`** | <code>番号</code> |ダウンロードの現在のステータス (0 ～ 100)。 4.0.0 |
+| **`bundle`** | <code><a href="#bundleinfo">バンドル情報</a></code> |                                                |       |
 
-| Prop         | Type                                              | Description                                    | Since |
-| ------------ | ------------------------------------------------- | ---------------------------------------------- | ----- |
-| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | Current status of download, between 0 and 100. | 4.0.0 |
+
+### 必要のないイベント
+
+|小道具 |タイプ |説明 |以来 |
+| ------------ | -------------------------------------------------- | ------------------------------------------------ | ----- |
+| **`bundle`** | <code><a href="#bundleinfo">バンドル情報</a></code> |ダウンロードの現在のステータス (0 ～ 100)。 4.0.0 |
 
 
 ### UpdateAvailableEvent
 
-| Prop         | Type                                              | Description                                    | Since |
-| ------------ | ------------------------------------------------- | ---------------------------------------------- | ----- |
-| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | Current status of download, between 0 and 100. | 4.0.0 |
+|小道具 |タイプ |説明 |以来 |
+| ------------ | -------------------------------------------------- | ------------------------------------------------ | ----- |
+| **`bundle`** | <code><a href="#bundleinfo">バンドル情報</a></code> |ダウンロードの現在のステータス (0 ～ 100)。 4.0.0 |
 
 
-### DownloadCompleteEvent
+### ダウンロード完了イベント
 
-| Prop         | Type                                              | Description                          | Since |
-| ------------ | ------------------------------------------------- | ------------------------------------ | ----- |
-| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | Emit when a new update is available. | 4.0.0 |
+|小道具 |タイプ |説明 |以来 |
+| ------------ | -------------------------------------------------- | ------------------------------------ | ----- |
+| **`bundle`** | <code><a href="#bundleinfo">バンドル情報</a></code> |新しいアップデートが利用可能になったときに発行されます。 | 4.0.0 |
 
 
 ### MajorAvailableEvent
 
-| Prop          | Type                | Description                                | Since |
+|小道具 |タイプ |説明 |以来 |
 | ------------- | ------------------- | ------------------------------------------ | ----- |
-| **`version`** | <code>string</code> | Emit when a new major bundle is available. | 4.0.0 |
+| **`version`** | <code>string</code> |新しいメジャー バンドルが利用可能になったときに発行されます。 | 4.0.0 |
 
 
-### UpdateFailedEvent
+### 更新失敗イベント
 
-| Prop         | Type                                              | Description                           | Since |
-| ------------ | ------------------------------------------------- | ------------------------------------- | ----- |
-| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | Emit when a update failed to install. | 4.0.0 |
+|小道具 |タイプ |説明 |以来 |
+| ------------ | -------------------------------------------------- | ------------------------------------- | ----- |
+| **`bundle`** | <code><a href="#bundleinfo">バンドル情報</a></code> |アップデートのインストールに失敗した場合に発行されます。 | 4.0.0 |
 
 
 ### DownloadFailedEvent
 
-| Prop          | Type                | Description                | Since |
-| ------------- | ------------------- | -------------------------- | ----- |
-| **`version`** | <code>string</code> | Emit when a download fail. | 4.0.0 |
+|小道具 |タイプ |説明 |以来 |
+| ------------- | ------------------- | ------------------------ | ----- |
+| **`version`** | <code>string</code> |ダウンロードが失敗したときに発行されます。 | 4.0.0 |
 
 
-### AppReadyEvent
-
-| Prop         | Type                                              | Description                           | Since |
-| ------------ | ------------------------------------------------- | ------------------------------------- | ----- |
-| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | Emitted when the app is ready to use. | 5.2.0 |
-| **`status`** | <code>string</code>                               |                                       |       |
+### AppReadyイベント|小道具 |タイプ |説明 |以来 |
+| ------------ | -------------------------------------------------- | ------------------------------------- | ----- |
+| **`bundle`** | <code><a href="#bundleinfo">バンドル情報</a></code> |アプリを使用する準備ができたときに発行されます。 | 5.2.0 |
+| **`status`** | <code>string</code> |                                       |       |
 
 
-### AutoUpdateAvailable
+### 自動更新が利用可能
 
-| Prop            | Type                 |
+|小道具 |タイプ |
 | --------------- | -------------------- |
-| **`available`** | <code>boolean</code> |
+| **`available`** | <code>ブール値</code> |
 
 
 ### SetShakeMenuOptions
 
-| Prop          | Type                 |
+|小道具 |タイプ |
 | ------------- | -------------------- |
-| **`enabled`** | <code>boolean</code> |
+| **`enabled`** | <code>ブール値</code> |
 
 
 ### ShakeMenuEnabled
 
-| Prop          | Type                 |
+|小道具 |タイプ |
 | ------------- | -------------------- |
-| **`enabled`** | <code>boolean</code> |
+| **`enabled`** | <code>ブール値</code> |
 
 
-## Type Aliases
+## タイプエイリアス
 
 
-### BundleStatus
+### バンドルのステータス
 
-pending: The bundle is pending to be **SET** as the next bundle.
-downloading: The bundle is being downloaded.
-success: The bundle has been downloaded and is ready to be **SET** as the next bundle.
-error: The bundle has failed to download.
+pending: バンドルは次のバンドルとして **SET** されるまで保留中です。
+ダウンロード中: バンドルをダウンロード中です。
+成功: バンドルはダウンロードされ、次のバンドルとして **SET** する準備ができています。
+エラー: バンドルのダウンロードに失敗しました。
 
-<code>'success' | 'error' | 'pending' | 'downloading'</code>
+<code>「成功」 | 'エラー' | '保留中' | 'ダウンロード中'</code>
 
 
-### DelayUntilNext
+### 次までの遅延
 
-<code>'background' | 'kill' | 'nativeVersion' | 'date'</code>
+<code>'背景' | '殺す' | 'ネイティブバージョン' | '日付'</code>
 
 </docgen-api>

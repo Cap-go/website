@@ -1,21 +1,19 @@
 ---
-title: Using the CLI with self-hosted capgo
+title: 자체 호스팅 capgo와 함께 CLI 사용
 description: >-
-  This guide explains how to use the CLI with a self-hosted Capgo instance,
-  enabling you to utilize Capgo tools on your own server instead of the cloud
-  service.
+  이 가이드에서는 자체 호스팅 Capgo 인스턴스와 함께 CLI을 사용하여 클라우드 서비스 대신 자체 서버에서 Capgo 도구를 활용할 수
+  있는 방법을 설명합니다.
 sidebar:
   order: 2
 locale: ko
 ---
+## 이 튜토리얼에서는 무엇을 다룰까요?
 
-## What this tutorial will cover?
+이 튜토리얼에서는 자체 호스팅 capgo가 있는 개발 환경에서 CLI을 사용하는 방법을 보여줍니다.
 
-This tutorial will show how to use CLI in a dev environment with self hosted capgo
+## 시작하기
 
-## Getting started
-
-To use the CLI with self-hosted capgo edit the `capacitor.config.ts` from your app directory and set it like this:
+자체 호스팅 capgo와 함께 CLI을 사용하려면 앱 디렉터리에서 `capacitor.config.ts`을 편집하고 다음과 같이 설정합니다.
 
 ```ts
 const config: CapacitorConfig = {
@@ -34,4 +32,4 @@ const config: CapacitorConfig = {
 };
 ```
 
-Note: To get `localSupaAnon` please follow [this tutorial](/docs/plugin/self-hosted/local-dev/getting-started/) and copy the `anon key` into `localSupaAnon`
+참고: `localSupaAnon`을(를) 얻으려면 [이 튜토리얼](/docs/plugin/self-hosted/local-dev/getting-started/)을 따르고 'anon key'를 `localSupaAnon`에 복사하세요.

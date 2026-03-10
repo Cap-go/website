@@ -1,184 +1,181 @@
 ---
-
-title: Create iOS Subscription Introductory Offer
-description: Learn how to create introductory offers for auto-renewable subscriptions on iOS to attract and convert new subscribers.
+title: Crea iOS Offerta introduttiva di abbonamento
+description: >-
+  Scopri come creare offerte di lancio per abbonamenti con rinnovo automatico su
+  iOS per attirare e convertire nuovi abbonati.
 sidebar:
   order: 9
 locale: it
 ---
-
-
 import { Steps } from '@astrojs/starlight/components';
 
-Introductory offers allow you to provide eligible users with free trials or discounted introductory pricing to reduce barriers to entry and increase subscription conversions.
+Le offerte di lancio ti consentono di offrire agli utenti idonei prove gratuite o prezzi di lancio scontati per ridurre le barriere all'ingresso e aumentare le conversioni degli abbonamenti.
 
-## Overview
+## Panoramica
 
-Introductory offers are one of the most effective tools for growing your subscriber base. They allow users to:
-- Try your premium features risk-free
-- Experience value before committing
-- Start at a lower price point
-- Build confidence in your product
+Le offerte di lancio sono uno degli strumenti più efficaci per far crescere la tua base di iscritti. Consentono agli utenti di:
+- Prova le tue funzionalità premium senza rischi
+- Sperimenta il valore prima di impegnarti
+- Inizia ad un prezzo più basso
+- Costruisci fiducia nel tuo prodotto
 
-## Offer Types
+## Tipi di offerte
 
-iOS supports three types of introductory offers:
+iOS supporta tre tipi di offerte di lancio:
 
-### 1. Free Trial
-Customers get complimentary access for a specified duration. After the trial, they're charged at standard rates if they don't cancel.
+### 1. Prova gratuita
+I clienti ottengono l'accesso gratuito per una durata specifica. Dopo il periodo di prova, se non annullano, vengono addebitate le tariffe standard.
 
-**Examples:**
-- 7 days free
-- 14 days free
-- 1 month free
+**Esempi:**
+- 7 giorni gratuiti
+- 14 giorni gratuiti
+- 1 mese gratis
 
-**Best for:**
-- High-value subscriptions
-- Feature-rich apps
-- Building user habit
+**Ideale per:**
+- Abbonamenti di alto valore
+- App ricche di funzionalità
+- Costruire l'abitudine dell'utente
 
-### 2. Pay Up Front
-Customers pay a single discounted price that covers the introductory period.
+### 2. Paga in anticipo
+I clienti pagano un unico prezzo scontato che copre il periodo introduttivo.
 
-**Examples:**
-- $1.99 for 2 months (then $9.99/month)
-- $9.99 for 3 months (then $19.99/month)
+**Esempi:**
+- $ 1,99 per 2 mesi (poi $ 9,99 al mese)
+- $ 9,99 per 3 mesi (poi $ 19,99 al mese)
 
-**Best for:**
-- Commitment signals
-- Cash flow needs
-- Testing price sensitivity
+**Ideale per:**
+- Segnali di impegno
+- Esigenze di flusso di cassa
+- Testare la sensibilità al prezzo
 
-### 3. Pay As You Go
-Customers pay a reduced price for multiple billing cycles.
+### 3. Paga in base al consumo
+I clienti pagano un prezzo ridotto per più cicli di fatturazione.
 
-**Examples:**
-- $1.99/month for 3 months (then $9.99/month)
-- $4.99/month for 6 months (then $14.99/month)
+**Esempi:**
+- $ 1,99/mese per 3 mesi (poi $ 9,99/mese)
+- $ 4,99/mese per 6 mesi (poi $ 14,99/mese)
 
-**Best for:**
-- Gradual commitment
-- Long-term value demonstration
-- Reducing perceived risk
+**Ideale per:**
+- Impegno graduale
+- Dimostrazione del valore a lungo termine
+- Ridurre il rischio percepito
 
-## Eligibility Requirements
+## Requisiti di idoneità
 
-Users can only receive introductory offers if they:
-- Haven't previously received an introductory offer for the product
-- Haven't received an introductory offer for any product in the same subscription group
-- Haven't had an active subscription to the product
+Gli utenti possono ricevere offerte di lancio solo se:
+- Non aver ricevuto in precedenza un'offerta di lancio per il prodotto
+- Non ho ricevuto un'offerta di lancio per nessun prodotto nello stesso gruppo di abbonamento
+- Non ho avuto un abbonamento attivo al prodotto
 
 :::note
-Apple handles eligibility checking automatically. The native-purchases plugin provides methods to check eligibility before presenting offers.
+Apple gestisce automaticamente il controllo dell'idoneità. Il plug-in per gli acquisti nativi fornisce metodi per verificare l'idoneità prima di presentare le offerte.
 :::
 
-## Prerequisites
+## Prerequisiti
 
-You must first [create an auto-renewable subscription](/docs/plugins/native-purchases/ios-create-subscription/) before adding an introductory offer.
+Devi prima [creare un abbonamento con rinnovo automatico](/docs/plugins/native-purchases/ios-create-subscription/) prima di aggiungere un'offerta di lancio.
 
-## Creating an Introductory Offer
+## Creazione di un'offerta di lancio
 
 <Steps>
 
-1. **Navigate to Subscription**
+1. **Vai all'abbonamento**
 
-   In App Store Connect, go to your app's **Monetize > Subscriptions** section and select the subscription you want to add an offer to.
+   In App Store Connect, vai alla sezione **Monetizza > Abbonamenti** della tua app e seleziona l'abbonamento a cui desideri aggiungere un'offerta.
 
-2. **Add Subscription Price**
+2. **Aggiungi prezzo di abbonamento**
 
-   Click the **+** icon next to "Subscription Prices" to open the pricing modal.
+   Fai clic sull'icona **++** accanto a "Prezzi di abbonamento" per aprire la modalità dei prezzi.
 
-3. **Create Introductory Offer**
+3. **Crea un'offerta di lancio**
 
-   Select **"Create introductory offer"** from the options.
+   Seleziona **"Crea offerta di lancio"** dalle opzioni.
 
-   ![Create introductory offer](/native-purchases/ios/introductory-offer/create-introductory-offer.webp)
+   ![Crea offerta di lancio](/native-purchases/ios/introductory-offer/create-introductory-offer.webp)
 
-4. **Configure Countries and Start Date**
+4. **Configura paesi e data di inizio**
 
-   **Countries and Regions**: Select where the offer will be available
-   - Choose all countries for maximum reach
-   - Or limit to specific markets for testing
+   **Paesi e regioni**: seleziona dove sarà disponibile l'offerta
+   - Scegli tutti i paesi per la massima copertura
+   - Oppure limitare i test a mercati specifici
 
-   **Start Date**: When the offer becomes available
-   - Can be immediate or scheduled for the future
-   - Useful for coordinating with marketing campaigns
+   **Data di inizio**: quando l'offerta diventa disponibile
+   - Può essere immediato o programmato per il futuro
+   - Utile per il coordinamento con le campagne di marketing
 
-   **End Date (Optional)**: When the offer expires
-   - Leave blank for ongoing availability
-   - Set a date for limited-time promotions
+   **Data di fine (facoltativa)**: quando scade l'offerta
+   - Lascia vuoto per la disponibilità continua
+   - Imposta una data per le promozioni a tempo limitato
 
-5. **Select Offer Type**
+5. **Seleziona il tipo di offerta**
 
-   Choose one of the three offer types:
+   Scegli una delle tre tipologie di offerta:
 
-   **Free** (Free Trial)
-   - Select duration (days, weeks, months)
-   - Examples: 7 days, 2 weeks, 1 month
+   **Gratuito** (prova gratuita)
+   - Seleziona la durata (giorni, settimane, mesi)
+   - Esempi: 7 giorni, 2 settimane, 1 mese**Paga in anticipo**
+   - Imposta il prezzo del pagamento unico
+   - Imposta la durata coperta dal pagamento
+   - Esempio: $ 1,99 per 2 mesi
 
-   **Pay Up Front**
-   - Set single payment price
-   - Set duration covered by payment
-   - Example: $1.99 for 2 months
+   **Paga in base al consumo**
+   - Imposta il prezzo scontato per periodo
+   - Impostare il numero di periodi
+   - Esempio: $ 2,99/mese per 3 mesi
 
-   **Pay As You Go**
-   - Set discounted price per period
-   - Set number of periods
-   - Example: $2.99/month for 3 months
+6. **Rivedi e conferma**
 
-6. **Review and Confirm**
+   Esamina il riepilogo che mostra:
+   - Tipologia e durata dell'offerta
+   - Dettagli sui prezzi
+   - Prezzo normale dopo il periodo di introduzione
+   - Date e paesi di disponibilità
 
-   Review the summary showing:
-   - Offer type and duration
-   - Pricing details
-   - Regular price after intro period
-   - Availability dates and countries
+7. **Salva**
 
-7. **Save**
-
-   Click **Save** to create the introductory offer. It will be available for testing immediately in sandbox mode.
+   Fai clic su **Salva** per creare l'offerta di lancio. Sarà disponibile per il test immediatamente in modalità sandbox.
 
 </Steps>
 
-## Offer Configuration Examples
+## Esempi di configurazione dell'offerta
 
-### Example 1: Standard Free Trial
+### Esempio 1: prova gratuita standard
 ```
 Type: Free
 Duration: 7 days
 Then: $9.99/month
 ```
-**User Journey:**
-- Day 1-7: Free access
-- Day 8: First charge of $9.99
-- Monthly charges continue
+**Percorso dell'utente:**
+- Giorni 1-7: Accesso gratuito
+- Giorno 8: primo addebito di $ 9,99
+- Continuano gli addebiti mensili
 
-### Example 2: Upfront Discounted Period
+### Esempio 2: periodo scontato anticipato
 ```
 Type: Pay Up Front
 Price: $4.99
 Duration: 3 months
 Then: $9.99/month
 ```
-**User Journey:**
-- Day 1: Charged $4.99
-- 90 days access
-- Day 91: Charged $9.99/month
+**Percorso dell'utente:**
+- Giorno 1: addebitato $ 4,99
+- Accesso per 90 giorni
+- Giorno 91: addebitato $ 9,99 al mese
 
-### Example 3: Gradual Introduction
+### Esempio 3: Introduzione graduale
 ```
 Type: Pay As You Go
 Price: $2.99/month
 Periods: 6 months
 Then: $9.99/month
 ```
-**User Journey:**
-- Months 1-6: $2.99/month
-- Month 7+: $9.99/month
+**Percorso dell'utente:**
+- Mesi 1-6: $ 2,99/mese
+- Mese 7+: $ 9,99/mese
 
-## Using in Your App
+## Utilizzo nella tua app
 
-The native-purchases plugin automatically handles introductory offer presentation and eligibility:
+Il plug-in per gli acquisti nativi gestisce automaticamente la presentazione e l'idoneità dell'offerta introduttiva:
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -215,24 +212,24 @@ try {
 }
 ```
 
-## Displaying Intro Offers to Users
+## Visualizzazione delle offerte introduttive agli utenti
 
-### Best Practices for UI
+### Best practice per l'interfaccia utente
 
-**Clear Value Proposition:**
+**Chiara proposta di valore:**
 ```
 Try Premium Free for 7 Days
 Then $9.99/month. Cancel anytime.
 ```
 
-**Emphasize Savings:**
+**Metti in risalto il risparmio:**
 ```
 Start at Just $1.99
 Get 3 months of Premium for only $1.99
 Then $9.99/month
 ```
 
-**Transparent Communication:**
+**Comunicazione trasparente:**
 ```
 Your Free Trial
 • Access all premium features
@@ -241,7 +238,7 @@ Your Free Trial
 • Cancel anytime, even during trial
 ```
 
-### Example Implementation
+### Esempio di implementazione
 
 ```typescript
 function formatIntroOffer(product: any): string {
@@ -265,27 +262,27 @@ function formatIntroOffer(product: any): string {
 }
 ```
 
-## Marketing Best Practices
+## Migliori pratiche di marketing
 
-### Trial Length Strategy
-- **3-7 days**: Quick decision apps, games
-- **7-14 days**: Standard for most apps
-- **14-30 days**: Complex tools, professional apps
-- **30+ days**: High-value B2B or enterprise
+### Strategia sulla durata della prova
+- **3-7 giorni**: app e giochi per decisioni rapide
+- **7-14 giorni**: standard per la maggior parte delle app
+- **14-30 giorni**: strumenti complessi, app professionali
+- **Più di 30 giorni**: B2B o azienda di alto valore
 
-### Pricing Psychology
-- **$0.99-$1.99**: Very low barrier, good for testing
-- **50% off**: Strong perceived value
-- **First month free**: Common, familiar pattern
+### Psicologia dei prezzi
+- **$0,99-$1,99**: barriera molto bassa, ottima per i test
+- **50% di sconto**: Forte valore percepito
+- **Primo mese gratuito**: modello comune e familiare
 
-### Communication Timing
-- **Before trial ends**: Remind users of upcoming charge
-- **Highlight value**: Show usage stats, achievements
-- **Easy cancellation**: Build trust with transparent process
+### Tempi di comunicazione
+- **Prima della fine del periodo di prova**: ricorda agli utenti l'imminente addebito
+- **Evidenzia valore**: mostra statistiche di utilizzo e risultati
+- **Cancellazione facile**: crea fiducia con un processo trasparente
 
-## Testing Intro Offers
+## Testare le offerte introduttive
 
-Use sandbox testing to verify behavior:
+Utilizza i test sandbox per verificare il comportamento:
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -318,68 +315,66 @@ setTimeout(async () => {
 }, 180000); // 3 minutes for weekly trial
 ```
 
-## Important Notes
+## Note importanti
 
-### Eligibility Rules
-- One intro offer per user per subscription group (lifetime)
-- Applies to new subscribers only
-- Cannot be used again after cancellation
-- Not available for subscription upgrades/crossgrades
+### Regole di ammissibilità
+- Un'offerta introduttiva per utente per gruppo di abbonamento (a vita)
+- Si applica solo ai nuovi abbonati
+- Non può essere riutilizzato dopo la cancellazione
+- Non disponibile per aggiornamenti/crossgrade dell'abbonamento
 
 ### StoreKit API
-- `introductoryPrice` shows intro offer details
-- `eligibility` method checks if user qualifies
-- Automatically applied at purchase time
-- No special purchase method needed
+- `introductoryPrice` mostra i dettagli dell'offerta introduttiva
+- Il metodo `eligibility` controlla se l'utente è idoneo
+- Applicato automaticamente al momento dell'acquisto
+- Non è necessario alcun metodo di acquisto speciale
 
-### Limitations
-- Only one intro offer active per subscription at a time
-- Cannot combine with other discount types
-- Cannot change eligibility rules
-- Apple controls eligibility checking
+### Limitazioni
+- È attiva una sola offerta di lancio alla volta per abbonamento
+- Non cumulabile con altri tipi di sconto
+- Non è possibile modificare le regole di ammissibilità
+- Apple controlla il controllo di idoneità
 
-## Troubleshooting
+## Risoluzione dei problemi
 
-**Intro offer not showing:**
-- Check if offer is activated in App Store Connect
-- Verify user hasn't used an intro offer before
-- Ensure user hasn't subscribed to anything in the group
-- Test with new sandbox account
+**Offerta introduttiva non visualizzata:**
+- Controlla se l'offerta è attivata in App Store Connect
+- Verificare che l'utente non abbia utilizzato prima un'offerta introduttiva
+- Assicurati che l'utente non sia iscritto a nulla nel gruppo
+- Prova con il nuovo account sandbox
 
-**Eligibility check failing:**
-- Wait for App Store sync (can take 2-3 hours)
-- Verify product ID is correct
-- Check subscription group configuration
-- Test in sandbox with fresh test account
+**Controllo di idoneità non superato:**
+- Attendi la sincronizzazione di App Store (può richiedere 2-3 ore)
+- Verificare che l'ID prodotto sia corretto
+- Controlla la configurazione del gruppo di abbonamento
+- Prova in sandbox con un nuovo account di prova**Visualizzazione prezzo errata:**
+- Controlla le impostazioni dei prezzi regionali
+- Verificare la conversione di valuta
+- Assicurarsi che le date dell'offerta siano attuali
+- Aggiorna le informazioni sul prodotto
 
-**Wrong price displaying:**
-- Check regional pricing settings
-- Verify currency conversion
-- Ensure offer dates are current
-- Refresh product information
+**Problemi di test sandbox:**
+- Utilizza durate accelerate (3 minuti = 1 settimana)
+- Crea nuovi account di prova per ogni test
+- Attendi il completamento della prova in modo naturale
+- Controlla il conteggio dei rinnovi (max 6 nella sandbox)
 
-**Sandbox testing issues:**
-- Use accelerated durations (3 min = 1 week)
-- Create new test accounts for each test
-- Wait for trial to complete naturally
-- Check renewal count (max 6 in sandbox)
+## Analisi e ottimizzazione
 
-## Analytics and Optimization
+### Tieni traccia di queste metriche
+- Tasso di accettazione dell'offerta introduttiva
+- Tasso di conversione dal periodo di prova al pagamento
+- Cancellazione durante il periodo di prova
+- Ritenzione dopo la prima carica
+- Impatto sulle entrate
 
-### Track These Metrics
-- Intro offer acceptance rate
-- Trial-to-paid conversion rate
-- Cancellation during trial
-- Retention after first charge
-- Revenue impact
+### Idee per test A/B
+- Prova gratuita rispetto a introduzione a pagamento
+- Variazioni della durata della prova
+- Percentuale di sconto
+- Pagamento unico vs sconto ricorrente
 
-### A/B Testing Ideas
-- Free trial vs. paid intro
-- Trial length variations
-- Discount percentage
-- Single payment vs. recurring discount
-
-### Optimization Strategy
+### Strategia di ottimizzazione
 ```typescript
 // Track offer performance
 analytics.track('intro_offer_displayed', {
@@ -403,13 +398,13 @@ NativePurchases.addListener('transactionUpdated', (transaction) => {
 });
 ```
 
-## Next Steps
+## Passaggi successivi
 
-- [Configure sandbox testing](/docs/plugins/native-purchases/ios-sandbox-testing/) to test your intro offers
-- Set up promotional offers for win-back campaigns
-- Implement subscription analytics
-- Create targeted marketing campaigns
+- [Configura test sandbox](/docs/plugins/native-purchases/ios-sandbox-testing/) per testare le tue offerte introduttive
+- Impostazione di offerte promozionali per campagne di recupero
+- Implementare l'analisi degli abbonamenti
+-Creare campagne di marketing mirate
 
-## Additional Resources
+## Risorse aggiuntive
 
-For more details, refer to the [official Apple documentation on introductory offers](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers/implementing_introductory_offers_in_your_app).
+Per ulteriori dettagli, fare riferimento alla [documentazione ufficiale Apple sulle offerte di lancio](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers/implementing_introductory_offers_in_your_app).

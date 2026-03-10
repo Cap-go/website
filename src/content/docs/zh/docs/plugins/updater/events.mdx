@@ -1,98 +1,97 @@
 ---
-title: "事件"
-description: "您可以在 Capacitor Updater 插件中监听的所有事件,用于监控更新状态和进度"
+title: Events
+description: 您可以在 Capacitor 更新程序插件中监听的所有事件，以监控更新状态和进度
 sidebar:
   order: 9
 locale: zh
 ---
-
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
-Capacitor Updater 插件提供了多个事件,您可以监听这些事件来监控更新过程并响应不同的状态。
+Capacitor 更新程序插件提供了多个您可以监听的事件，用于监视更新过程并响应不同的状态。
 
 ## 事件监听器设置
 
-要监听事件,请在 `CapacitorUpdater` 对象上使用 `addListener` 方法:
+要侦听事件，请在 `CapacitorUpdater` 对象上使用 `addListener` 方法：
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
 
-// 添加监听器
+// Add a listener
 const listener = await CapacitorUpdater.addListener('eventName', (event) => {
-  // 处理事件
+  // Handle the event
 });
 
-// 不再需要时移除监听器
+// Remove the listener when no longer needed
 listener.remove();
 
-// 移除所有监听器
+// Remove all listeners
 await CapacitorUpdater.removeAllListeners();
 ```
 
-## 可用事件
+## 可用活动
 
 ### `download`
 
-在 bundle 下载过程中触发。提供下载进度信息。
+在捆绑包下载过程中触发。提供下载进度信息。
 
 ```typescript
 CapacitorUpdater.addListener('download', (event) => {
-  console.log(`下载进度: ${event.percent}%`);
-  console.log('Bundle 信息:', event.bundle);
+  console.log(`Download progress: ${event.percent}%`);
+  console.log('Bundle info:', event.bundle);
 });
 ```
 
-**事件数据:**
-- `percent`: number - 下载进度百分比 (0-100)
-- `bundle`: BundleInfo - 正在下载的 bundle 信息
+**事件数据：**
+- `percent`：数字 - 下载进度百分比（0-100）
+- `bundle`：BundleInfo - 有关正在下载的捆绑包的信息
 
 <Aside>
-此事件在下载期间触发多次以报告进度。
+下载期间会多次触发此事件以报告进度。
 </Aside>
 
 ### `noNeedUpdate`
 
-当检查更新确定不需要更新时触发。
+当更新检查确定不需要更新时触发。
 
 ```typescript
 CapacitorUpdater.addListener('noNeedUpdate', (event) => {
-  console.log('应用是最新的');
-  console.log('当前 bundle:', event.bundle);
+  console.log('App is up to date');
+  console.log('Current bundle:', event.bundle);
 });
 ```
 
-**事件数据:**
-- `bundle`: BundleInfo - 当前 bundle 的信息
+**事件数据：**
+- `bundle`：BundleInfo - 有关当前捆绑包的信息
 
 ### `updateAvailable`
 
-当有新更新可供下载时触发。
+当有新的更新可供下载时触发。
 
 ```typescript
 CapacitorUpdater.addListener('updateAvailable', (event) => {
-  console.log('更新可用');
-  console.log('新 bundle:', event.bundle);
-  // 如果需要,您可以在这里触发下载
+  console.log('Update available');
+  console.log('New bundle:', event.bundle);
+  // You can trigger a download here if needed
 });
 ```
 
-**事件数据:**
-- `bundle`: BundleInfo - 可用更新 bundle 的信息
+**事件数据：**
+- `bundle`：BundleInfo - 有关可用更新包的信息
 
 ### `downloadComplete`
 
-当 bundle 下载成功完成时触发。
+当捆绑包下载成功完成时触发。
 
 ```typescript
 CapacitorUpdater.addListener('downloadComplete', (event) => {
-  console.log('下载完成');
-  console.log('已下载的 bundle:', event.bundle);
-  // 您可能希望将此 bundle 设置为下一个
+  console.log('Download completed');
+  console.log('Downloaded bundle:', event.bundle);
+  // You might want to set this bundle as next
 });
 ```
 
-**事件数据:**
-- `bundle`: BundleInfo - 已下载 bundle 的信息
+**事件数据：**
+- `bundle`：BundleInfo - 有关下载的捆绑包的信息
 
 ### `majorAvailable`
 
@@ -100,12 +99,12 @@ CapacitorUpdater.addListener('downloadComplete', (event) => {
 
 ```typescript
 CapacitorUpdater.addListener('majorAvailable', (event) => {
-  console.log('主要更新可用:', event.version);
-  // 通知用户有关主要更新
+  console.log('Major update available:', event.version);
+  // Notify user about major update
 });
 ```
 
-**事件数据:**
+**事件数据：**
 - `version`: string - 主要更新的版本号
 
 <Aside type="tip">
@@ -114,93 +113,93 @@ CapacitorUpdater.addListener('majorAvailable', (event) => {
 
 ### `updateFailed`
 
-当更新在下次应用启动时安装失败时触发。
+当下次应用程序启动时安装更新失败时触发。
 
 ```typescript
 CapacitorUpdater.addListener('updateFailed', (event) => {
-  console.error('更新安装失败');
-  console.log('失败的 bundle:', event.bundle);
-  // 处理回滚或重试逻辑
+  console.error('Update failed to install');
+  console.log('Failed bundle:', event.bundle);
+  // Handle rollback or retry logic
 });
 ```
 
-**事件数据:**
-- `bundle`: BundleInfo - 安装失败的 bundle 信息
+**事件数据：**
+- `bundle`：BundleInfo - 有关安装失败的捆绑包的信息
 
 ### `downloadFailed`
 
-当 bundle 下载失败时触发。
+当捆绑包下载失败时触发。
 
 ```typescript
 CapacitorUpdater.addListener('downloadFailed', (event) => {
-  console.error('版本下载失败:', event.version);
-  // 处理下载重试逻辑
+  console.error('Download failed for version:', event.version);
+  // Handle download retry logic
 });
 ```
 
-**事件数据:**
+**事件数据：**
 - `version`: string - 下载失败的版本
 
 ### `appReloaded`
 
-当应用已重新加载时触发。
+当应用程序重新加载时触发。
 
 ```typescript
 CapacitorUpdater.addListener('appReloaded', () => {
-  console.log('应用已重新加载');
-  // 执行任何必要的重新初始化
+  console.log('App has been reloaded');
+  // Perform any necessary reinitialization
 });
 ```
 
-**事件数据:** 无
+**事件数据：** 无
 
 ### `appReady`
 
-当应用在更新后准备就绪可以使用时触发。
+当应用程序更新后可供使用时触发。
 
 ```typescript
 CapacitorUpdater.addListener('appReady', (event) => {
-  console.log('应用已准备就绪');
-  console.log('当前 bundle:', event.bundle);
-  console.log('状态:', event.status);
+  console.log('App is ready');
+  console.log('Current bundle:', event.bundle);
+  console.log('Status:', event.status);
 });
 ```
 
-**事件数据:**
-- `bundle`: BundleInfo - 当前 bundle 的信息
+**事件数据：**
+- `bundle`：BundleInfo - 有关当前捆绑包的信息
 - `status`: string - 就绪状态
 
 <Aside type="caution">
-记得在配置的超时时间内(默认 10 秒)调用 `notifyAppReady()` 以防止自动回滚。
+请记住在配置的超时（默认 10 秒）内调用 `notifyAppReady()` 以防止自动回滚。
 </Aside>
 
 ## BundleInfo 对象
 
-许多事件包含一个具有以下属性的 `BundleInfo` 对象:
+许多事件都包含具有以下属性的 `BundleInfo` 对象：
 
 ```typescript
 interface BundleInfo {
-  id: string;           // 唯一 bundle 标识符
-  version: string;      // Bundle 版本
-  downloaded: string;   // 下载时间戳
-  checksum?: string;    // Bundle 校验和(如果可用)
-  status: BundleStatus; // Bundle 状态
+  id: string;           // Unique bundle identifier
+  version: string;      // Bundle version
+  downloaded: string;   // Download timestamp
+  checksum?: string;    // Bundle checksum (if available)
+  status: BundleStatus; // Bundle status
 }
 ```
 
-其中 `BundleStatus` 可以是:
-- `'success'` - Bundle 下载成功
-- `'error'` - Bundle 下载/安装失败
-- `'pending'` - Bundle 待设置为下一个
-- `'downloading'` - Bundle 当前正在下载
+其中 `BundleStatus` 可以是：
+- `'success'` - 捆绑包下载成功
+- `'错误'` - 捆绑包下载/安装失败
+- `'pending'` - 捆绑包正在等待设置为下一个
+- ``正在下载'` - 捆绑包当前正在下载
 
-## 示例: 完整的更新流程
+## 示例：完整更新流程
 
-以下是使用事件处理完整更新流程的示例:
+以下是使用事件处理完整更新流程的示例：
 
 <Aside type="caution">
 此 `UpdateManager` 类不包括自动更新流程所需的 `CapacitorUpdater.notifyAppReady()` 调用。
-有关更多信息,请参阅[正确放置 notifyAppReady 调用](/docs/plugins/updater/auto-update#placing-notifyappready-call-correctly)文档。
+请参阅[正确调用notifyAppReady](/docs/plugins/updater/auto-update#placing-notifyappready-call-correctly)文档以获取更多信息。
 </Aside>
 
 ```typescript
@@ -210,83 +209,81 @@ export class UpdateManager {
   private listeners: any[] = [];
 
   async setupListeners() {
-    // 监听可用更新
+    // Listen for available updates
     this.listeners.push(
       await CapacitorUpdater.addListener('updateAvailable', async (event) => {
-        console.log('更新可用:', event.bundle.version);
-        // 自动下载更新
-        await CapacitorUpdater.download({
+        console.log('Update available:', event.bundle.version);
+        // Auto-download the update
+        await CapacitorUpdater.download({ 
           url: event.bundle.url,
-          version: event.bundle.version
+          version: event.bundle.version 
         });
       })
     );
 
-    // 监控下载进度
+    // Monitor download progress
     this.listeners.push(
       await CapacitorUpdater.addListener('download', (event) => {
-        console.log(`正在下载: ${event.percent}%`);
-        // 更新 UI 进度条
+        console.log(`Downloading: ${event.percent}%`);
+        // Update UI progress bar
         this.updateProgressBar(event.percent);
       })
     );
 
-    // 处理下载完成
+    // Handle download completion
     this.listeners.push(
       await CapacitorUpdater.addListener('downloadComplete', async (event) => {
-        console.log('下载完成:', event.bundle.version);
-        // 设置为下一个 bundle
+        console.log('Download complete:', event.bundle.version);
+        // Set as next bundle
         await CapacitorUpdater.next({ id: event.bundle.id });
       })
     );
 
-    // 处理失败
+    // Handle failures
     this.listeners.push(
       await CapacitorUpdater.addListener('downloadFailed', (event) => {
-        console.error('下载失败:', event.version);
-        this.showError('更新下载失败。请稍后重试。');
+        console.error('Download failed:', event.version);
+        this.showError('Update download failed. Please try again later.');
       })
     );
 
     this.listeners.push(
       await CapacitorUpdater.addListener('updateFailed', (event) => {
-        console.error('更新安装失败:', event.bundle.version);
-        this.showError('更新安装失败。应用已回滚。');
+        console.error('Update installation failed:', event.bundle.version);
+        this.showError('Update installation failed. The app has been rolled back.');
       })
     );
 
-    // 处理应用就绪
+    // Handle app ready
     this.listeners.push(
       await CapacitorUpdater.addListener('appReady', async (event) => {
-        console.log('应用就绪,bundle:', event.bundle.version);
+        console.log('App ready with bundle:', event.bundle.version);
       })
     );
   }
 
   cleanup() {
-    // 不再需要时移除所有监听器
+    // Remove all listeners when no longer needed
     this.listeners.forEach(listener => listener.remove());
     this.listeners = [];
   }
 
   private updateProgressBar(percent: number) {
-    // 更新您的 UI 进度条
+    // Update your UI progress bar
   }
 
   private showError(message: string) {
-    // 向用户显示错误
+    // Show error to user
   }
 }
 ```
 
-## 最佳实践
+## 最佳实践1. **始终调用 `notifyAppReady()`**：使用自动更新时，请始终在应用初始化后调用此方法以防止回滚。
 
-1. **始终调用 `notifyAppReady()`**: 使用自动更新时,在应用初始化后始终调用此方法以防止回滚。
+2. **优雅地处理失败**：对下载和更新失败实施正确的错误处理。
 
-2. **优雅地处理失败**: 为下载和更新失败实现适当的错误处理。
+3. **提供用户反馈**：使用下载进度事件向用户展示更新进度。
 
-3. **提供用户反馈**: 使用下载进度事件向用户显示更新进度。
+4. **清理监听器**：当不再需要事件监听器时将其删除，以防止内存泄漏。
 
-4. **清理监听器**: 不再需要时移除事件监听器以防止内存泄漏。
-
-5. **测试更新场景**: 测试各种更新场景,包括失败、回滚和主要更新。
+5. **测试更新场景**：测试各种更新场景，包括失败、回滚和重大更新。

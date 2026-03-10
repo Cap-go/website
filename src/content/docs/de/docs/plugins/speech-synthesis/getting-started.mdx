@@ -1,28 +1,27 @@
 ---
-title: Getting Started
+title: Erste Schritte
 description: >-
-  Learn how to install and use the Speech Synthesis plugin to convert text to
-  speech in your Capacitor app.
+  Erfahren Sie, wie Sie das Sprachsynthese-Plugin installieren und verwenden, um
+  Text in Ihrer Capacitor-App in Sprache umzuwandeln.
 sidebar:
   order: 2
 locale: de
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Paket installieren**
    <PackageManagers pkg="@capgo/capacitor-speech-synthesis" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Mit nativen Projekten synchronisieren**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Usage
+## Nutzung
 
-Import the plugin and synthesize speech from text:
+Importieren Sie das Plugin und synthetisieren Sie Sprache aus Text:
 
 ```typescript
 import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
@@ -48,11 +47,11 @@ const speakWithVoice = async () => {
 };
 ```
 
-## API Reference
+## API Referenz
 
-### speak(options)
+### sprechen(Optionen)
 
-Speaks the given text using the specified voice settings.
+Spricht den angegebenen Text mit den angegebenen Spracheinstellungen.
 
 ```typescript
 interface SpeakOptions {
@@ -69,7 +68,7 @@ await SpeechSynthesis.speak(options);
 
 ### stop()
 
-Stops any ongoing speech synthesis.
+Stoppt jede laufende Sprachsynthese.
 
 ```typescript
 await SpeechSynthesis.stop();
@@ -77,7 +76,7 @@ await SpeechSynthesis.stop();
 
 ### getVoices()
 
-Gets the list of available voices for speech synthesis.
+Ruft die Liste der verfügbaren Stimmen für die Sprachsynthese ab.
 
 ```typescript
 interface Voice {
@@ -93,7 +92,7 @@ console.log('Available voices:', voices);
 
 ### getSupportedLanguages()
 
-Gets the list of supported language codes.
+Ruft die Liste der unterstützten Sprachcodes ab.
 
 ```typescript
 const { languages } = await SpeechSynthesis.getSupportedLanguages();
@@ -102,14 +101,14 @@ console.log('Supported languages:', languages);
 
 ### isSpeaking()
 
-Checks if speech synthesis is currently active.
+Überprüft, ob die Sprachsynthese derzeit aktiv ist.
 
 ```typescript
 const { speaking } = await SpeechSynthesis.isSpeaking();
 console.log('Currently speaking:', speaking);
 ```
 
-## Complete Example
+## Vollständiges Beispiel
 
 ```typescript
 import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
@@ -169,9 +168,9 @@ export class TextToSpeechService {
 }
 ```
 
-## Advanced Usage
+## Erweiterte Nutzung
 
-### Multi-language Support
+### Mehrsprachige Unterstützung
 
 ```typescript
 // Speak in different languages
@@ -193,7 +192,7 @@ const speakMultiLanguage = async () => {
 };
 ```
 
-### Voice Selection
+### Sprachauswahl
 
 ```typescript
 // Select a specific voice
@@ -216,7 +215,7 @@ const selectVoice = async (languageCode: string) => {
 };
 ```
 
-### Reading Long Text
+### Langtext lesen
 
 ```typescript
 // Split and speak long text in chunks
@@ -236,19 +235,19 @@ const speakLongText = async (longText: string) => {
 };
 ```
 
-## Best Practices
+## Bewährte Methoden
 
-1. **Voice Selection**: Always check available voices before using a specific voice ID
-2. **Language Codes**: Use standard language codes (e.g., 'en-US', 'es-ES', 'fr-FR')
-3. **Rate Control**: Keep rate between 0.5 and 2.0 for natural-sounding speech
-4. **Stop Before Speak**: Call stop() before starting new speech to avoid overlap
-5. **Error Handling**: Wrap all calls in try-catch blocks for robust error handling
+1. **Stimmenauswahl**: Überprüfen Sie immer die verfügbaren Stimmen, bevor Sie eine bestimmte Stimmen-ID verwenden
+2. **Sprachcodes**: Verwenden Sie Standard-Sprachcodes (z. B. „en-US“, „es-ES“, „fr-FR“).
+3. **Ratensteuerung**: Halten Sie die Rate zwischen 0,5 und 2,0 für eine natürlich klingende Sprache
+4. **Vor dem Sprechen stoppen**: Rufen Sie stop() auf, bevor Sie mit einer neuen Rede beginnen, um Überschneidungen zu vermeiden
+5. **Fehlerbehandlung**: Umfassen Sie alle Aufrufe in Try-Catch-Blöcken für eine robuste Fehlerbehandlung
 
-## Troubleshooting
+## Fehlerbehebung
 
-### Common Issues
+### Häufige Probleme
 
-**No speech output**: Check device volume and ensure text is not empty
-**Voice not found**: Use getVoices() to find available voices on the device
-**Speech interrupted**: Stop any ongoing speech before starting new synthesis
-**Language not supported**: Check getSupportedLanguages() for available languages
+**Keine Sprachausgabe**: Überprüfen Sie die Lautstärke des Geräts und stellen Sie sicher, dass der Text nicht leer ist
+**Stimme nicht gefunden**: Verwenden Sie getVoices(), um verfügbare Stimmen auf dem Gerät zu finden
+**Sprache unterbrochen**: Stoppen Sie jede laufende Sprache, bevor Sie mit der neuen Synthese beginnen
+**Sprache nicht unterstützt**: Überprüfen Sie getSupportedLanguages() auf verfügbare Sprachen

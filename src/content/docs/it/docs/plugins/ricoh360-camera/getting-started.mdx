@@ -1,16 +1,15 @@
 ---
-title: Getting Started
+title: Iniziare
 description: >-
-  Learn how to install and use the Ricoh 360° Camera plugin to control Ricoh
-  Theta cameras in your Capacitor app.
+  Scopri come installare e utilizzare il plug-in Ricoh 360° Camera per
+  controllare le fotocamere Ricoh Theta nella tua app Capacitor.
 sidebar:
   order: 2
 locale: it
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-## Installation
+## Installazione
 
 <Tabs>
   <TabItem label="npm">
@@ -39,11 +38,11 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
   </TabItem>
 </Tabs>
 
-## Platform Configuration
+## Configurazione della piattaforma
 
 ### iOS
 
-Add camera and photo library permissions to your `Info.plist`:
+Aggiungi le autorizzazioni per fotocamera e libreria di foto al tuo `Info.plist`:
 
 ```xml
 <key>NSCameraUsageDescription</key>
@@ -54,7 +53,7 @@ Add camera and photo library permissions to your `Info.plist`:
 
 ### Android
 
-Add required permissions to your `AndroidManifest.xml`:
+Aggiungi le autorizzazioni richieste al tuo `AndroidManifest.xml`:
 
 ```xml
 <uses-permission android:name="android.permission.CAMERA" />
@@ -63,15 +62,15 @@ Add required permissions to your `AndroidManifest.xml`:
 <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 ```
 
-## Supported Devices
+## Dispositivi supportati
 
-This plugin supports Ricoh Theta series cameras:
+Questo plugin supporta le fotocamere della serie Ricoh Theta:
 - Ricoh Theta V
 - Ricoh Theta Z1
 - Ricoh Theta SC2
 - Ricoh Theta X
 
-## Usage Example
+## Esempio di utilizzo
 
 ```typescript
 import { Ricoh360Camera } from '@capgo/capacitor-ricoh360-camera';
@@ -110,91 +109,91 @@ await Ricoh360Camera.stopPreview();
 await Ricoh360Camera.disconnect();
 ```
 
-## API Reference
+## API Riferimento
 
-### initialize()
+### inizializza()
 
 ```typescript
 initialize() => Promise<void>
 ```
 
-Initialize the camera plugin.
+Inizializza il plug-in della fotocamera.
 
-### connect(options)
+### connetti(opzioni)
 
 ```typescript
 connect(options: ConnectOptions) => Promise<void>
 ```
 
-Connect to a Ricoh Theta camera via WiFi.
+Connettiti a una fotocamera Ricoh Theta tramite WiFi.
 
-| Param         | Type                      |
-| ------------- | ------------------------- |
+| Parametro | Digitare |
+| ------------- | ------------------------ |
 | **`options`** | `ConnectOptions` |
 
-### disconnect()
+### disconnetti()
 
 ```typescript
 disconnect() => Promise<void>
 ```
 
-Disconnect from the camera.
+Disconnettersi dalla fotocamera.
 
-### startPreview(options)
+### startAnteprima(opzioni)
 
 ```typescript
 startPreview(options: PreviewOptions) => Promise<void>
 ```
 
-Start live 360° preview stream.
+Avvia lo streaming di anteprima dal vivo a 360°.
 
-| Param         | Type                      |
-| ------------- | ------------------------- |
+| Parametro | Digitare |
+| ------------- | ------------------------ |
 | **`options`** | `PreviewOptions` |
 
-### stopPreview()
+### fermaAnteprima()
 
 ```typescript
 stopPreview() => Promise<void>
 ```
 
-Stop the live preview stream.
+Interrompi lo streaming di anteprima dal vivo.
 
-### capturePhoto(options?)
+### cattura foto(opzioni?)
 
 ```typescript
 capturePhoto(options?: CaptureOptions) => Promise<CaptureResult>
 ```
 
-Capture a 360° photo.
+Scatta una foto a 360°.
 
-| Param         | Type                        |
-| ------------- | --------------------------- |
-| **`options`** | `CaptureOptions` (optional) |
+| Parametro | Digitare |
+| ------------- | --------------------- |
+| **`options`** | `CaptureOptions` (facoltativo) |
 
-**Returns:** `Promise<CaptureResult>`
+**Resi:** `Promise<CaptureResult>`
 
-### startRecording(options?)
+### avvia la registrazione (opzioni?)
 
 ```typescript
 startRecording(options?: RecordingOptions) => Promise<void>
 ```
 
-Start recording 360° video.
+Inizia a registrare video a 360°.
 
-| Param         | Type                          |
-| ------------- | ----------------------------- |
-| **`options`** | `RecordingOptions` (optional) |
+| Parametro | Digitare |
+| ------------- | ----------------------- |
+| **`options`** | `RecordingOptions` (facoltativo) |
 
-### stopRecording()
+### interrompi la registrazione()
 
 ```typescript
 stopRecording() => Promise<CaptureResult>
 ```
 
-Stop video recording.
+Interrompe la registrazione video.
 
-**Returns:** `Promise<CaptureResult>`
+**Resi:** `Promise<CaptureResult>`
 
 ### getCameraInfo()
 
@@ -202,94 +201,92 @@ Stop video recording.
 getCameraInfo() => Promise<CameraInfo>
 ```
 
-Get camera information and capabilities.
+Ottieni informazioni e funzionalità della fotocamera.
 
-**Returns:** `Promise<CameraInfo>`
+**Resi:** `Promise<CameraInfo>`
 
-### setExposure(options)
+### impostaEsposizione(opzioni)
 
 ```typescript
 setExposure(options: ExposureOptions) => Promise<void>
 ```
 
-Set camera exposure settings.
+Configura le impostazioni di esposizione della fotocamera.
 
-| Param         | Type                       |
+| Parametro | Digitare |
 | ------------- | -------------------------- |
 | **`options`** | `ExposureOptions` |
 
-### setWhiteBalance(options)
+### impostaBilanciaBianco(opzioni)
 
 ```typescript
 setWhiteBalance(options: WhiteBalanceOptions) => Promise<void>
 ```
 
-Set white balance mode.
+Imposta la modalità di bilanciamento del bianco.
 
-| Param         | Type                           |
-| ------------- | ------------------------------ |
+| Parametro | Digitare |
+| ------------- | ------------------------------- |
 | **`options`** | `WhiteBalanceOptions` |
 
-## Interfaces
+## Interfacce
 
-### ConnectOptions
+### Opzioni di connessione
 
-| Prop           | Type              | Description                    |
-| -------------- | ----------------- | ------------------------------ |
-| **`ssid`**     | `string` | WiFi SSID of the Ricoh camera  |
-| **`password`** | `string` | WiFi password of the camera    |
+| Prop | Digitare | Descrizione |
+| -------------- | ----------------- | ------------------------------- |
+| **`ssid`** | `string` | SSID WiFi della fotocamera Ricoh |
+| **`password`** | `string` | Password WiFi della fotocamera |
 
-### PreviewOptions
+### Opzioni di anteprima
 
-| Prop            | Type              | Description                           |
+| Prop | Digitare | Descrizione |
 | --------------- | ----------------- | ------------------------------------- |
-| **`container`** | `string` | HTML element ID for preview container |
+| **`container`** | `string` | ID elemento HTML per il contenitore di anteprima |
 
-### CaptureOptions
-
-| Prop           | Type               | Description                           |
+### Opzioni di cattura| Prop | Digitare | Descrizione |
 | -------------- | ------------------ | ------------------------------------- |
-| **`quality`**  | `number` | Image quality (1-100) (optional)      |
-| **`saveToGallery`** | `boolean` | Save to device gallery (optional) |
+| **`quality`** | `number` | Qualità immagine (1-100) (opzionale) |
+| **`saveToGallery`** | `boolean` | Salva nella galleria del dispositivo (facoltativo) |
 
-### RecordingOptions
+### Opzioni di registrazione
 
-| Prop              | Type               | Description                              |
-| ----------------- | ------------------ | ---------------------------------------- |
-| **`maxDuration`** | `number` | Maximum recording duration in seconds (optional) |
-| **`quality`**     | `string` | Video quality: 'high' \| 'medium' \| 'low' (optional) |
+| Prop | Digitare | Descrizione |
+| ----------------- | ------------------ | --------------------------------------- |
+| **`maxDuration`** | `number` | Durata massima della registrazione in secondi (opzionale) |
+| **`quality`** | `string` | Qualità video: 'alta' \| 'medio' \| 'basso' (facoltativo) |
 
-### CaptureResult
+### RisultatoCattura
 
-| Prop           | Type              | Description                |
+| Prop | Digitare | Descrizione |
 | -------------- | ----------------- | -------------------------- |
-| **`filePath`** | `string` | Path to the captured file  |
-| **`fileUrl`**  | `string` | URL to access the file     |
+| **`filePath`** | `string` | Percorso del file catturato |
+| **`fileUrl`** | `string` | URL per accedere al file |
 
-### CameraInfo
+### Informazioni sulla fotocamera
 
-| Prop              | Type              | Description                |
+| Prop | Digitare | Descrizione |
 | ----------------- | ----------------- | -------------------------- |
-| **`model`**       | `string` | Camera model name          |
-| **`serialNumber`** | `string` | Camera serial number      |
-| **`firmwareVersion`** | `string` | Firmware version         |
-| **`batteryLevel`** | `number` | Battery level (0-100)     |
+| **`model`** | `string` | Nome del modello della fotocamera |
+| **`serialNumber`** | `string` | Numero di serie della fotocamera |
+| **`firmwareVersion`** | `string` | Versione firmware |
+| **`batteryLevel`** | `number` | Livello della batteria (0-100) |
 
-### ExposureOptions
+### Opzioni di esposizione
 
-| Prop         | Type               | Description                                    |
-| ------------ | ------------------ | ---------------------------------------------- |
-| **`mode`**   | `string` | Exposure mode: 'auto' \| 'manual' \| 'iso' |
-| **`iso`**    | `number` | ISO value (100, 200, 400, etc.) (optional)     |
-| **`shutter`** | `number` | Shutter speed (optional)                      |
+| Prop | Digitare | Descrizione |
+| ------------ | ------------------ | ----------------------------------------------------- |
+| **`mode`** | `string` | Modalità di esposizione: 'auto' \| 'manuale' \| 'iso' |
+| **`iso`** | `number` | Valore ISO (100, 200, 400, ecc.) (opzionale) |
+| **`shutter`** | `number` | Velocità dell'otturatore (opzionale) |
 
-### WhiteBalanceOptions
+### Opzioni bilanciamento del bianco
 
-| Prop       | Type              | Description                                            |
+| Prop | Digitare | Descrizione |
 | ---------- | ----------------- | ------------------------------------------------------ |
-| **`mode`** | `string` | White balance: 'auto' \| 'daylight' \| 'cloudy' \| 'tungsten' \| 'fluorescent' |
+| **`mode`** | `string` | Bilanciamento del bianco: 'auto' \| 'luce del giorno' \| 'nuvoloso' \| 'tungsteno' \| 'fluorescente' |
 
-## Complete Example
+## Esempio completo
 
 ```typescript
 import { Ricoh360Camera } from '@capgo/capacitor-ricoh360-camera';
@@ -384,33 +381,31 @@ await camera.recordVideo(10); // 10 seconds
 await camera.cleanup();
 ```
 
-## Best Practices
+## Migliori pratiche
 
-- Always initialize the plugin before connecting to the camera
-- Ensure the device is connected to the camera's WiFi network
-- Handle errors gracefully, especially connection failures
-- Stop preview and disconnect when done to save battery
-- Check camera battery level before long recording sessions
-- Test on actual Ricoh Theta hardware
-- Use appropriate video quality based on storage constraints
+- Inizializzare sempre il plugin prima di collegarlo alla fotocamera
+- Assicurati che il dispositivo sia connesso alla rete WiFi della fotocamera
+- Gestire gli errori con garbo, in particolare gli errori di connessione
+- Interrompi l'anteprima e disconnettiti al termine per risparmiare batteria
+- Controllare il livello della batteria della fotocamera prima di lunghe sessioni di registrazione
+- Test su hardware Ricoh Theta reale
+- Utilizzare una qualità video appropriata in base ai vincoli di archiviazione
 
-## Troubleshooting
+## Risoluzione dei problemi
 
-### Connection Issues
+### Problemi di connessione
 
-- Verify the camera is powered on
-- Check WiFi SSID and password are correct
-- Ensure no other app is connected to the camera
-- Reset camera WiFi settings if connection fails
+- Verificare che la fotocamera sia accesa
+- Controlla che l'SSID WiFi e la password siano corretti
+- Assicurati che nessun'altra app sia collegata alla fotocamera
+- Ripristina le impostazioni WiFi della fotocamera se la connessione non riesce
 
-### Preview Not Showing
+### Anteprima non visualizzata
 
-- Verify the HTML container element exists
-- Check camera permissions are granted
-- Ensure preview is started after successful connection
+- Verifica che l'elemento contenitore HTML esista
+- Controlla che le autorizzazioni della fotocamera siano concesse
+- Assicurarsi che l'anteprima venga avviata dopo la connessione riuscita
 
-### Capture Failures
-
-- Check available storage space
-- Verify camera battery level is sufficient
-- Ensure camera is not in sleep mode
+### Acquisizione fallita- Controlla lo spazio di archiviazione disponibile
+- Verificare che il livello della batteria della fotocamera sia sufficiente
+- Assicurarsi che la fotocamera non sia in modalità di sospensione

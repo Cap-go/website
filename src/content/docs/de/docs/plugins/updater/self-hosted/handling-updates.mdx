@@ -1,14 +1,14 @@
 ---
-title: Update API Endpoint
+title: Aktualisieren Sie den Endpunkt API
 description: >-
-  How to build your update server API endpoint to respond to Capgo plugin
-  requests with proper bundle information and checksums
+  So erstellen Sie Ihren Update-Server-Endpunkt API, um auf
+  Capgo-Plugin-Anfragen mit den richtigen Bundle-Informationen und Prüfsummen zu
+  antworten
 sidebar:
   order: 6
 locale: de
 ---
-
-Here is an example of code in JavaScript to send an update to the plugin
+Hier ist ein Beispiel für Code in JavaScript zum Senden eines Updates an das Plugin
 
 ```typescript
 interface AppInfos {
@@ -66,9 +66,9 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-## Response Format
+## Antwortformat
 
-For **non-encrypted bundles**, your endpoint should return:
+Für **nicht verschlüsselte Bundles** sollte Ihr Endpunkt Folgendes zurückgeben:
 
 ```json
 {
@@ -78,7 +78,7 @@ For **non-encrypted bundles**, your endpoint should return:
 }
 ```
 
-For **encrypted bundles**, you also need to include the session key:
+Für **verschlüsselte Bundles** müssen Sie auch den Sitzungsschlüssel angeben:
 
 ```json
 {
@@ -89,7 +89,7 @@ For **encrypted bundles**, you also need to include the session key:
 }
 ```
 
-And if no update or error, add the `message` key and optionally an `error`:
+Und wenn kein Update oder Fehler vorliegt, fügen Sie den Schlüssel `message` und optional einen `error` hinzu:
 
 ```json
 {
@@ -99,15 +99,15 @@ And if no update or error, add the `message` key and optionally an `error`:
 }
 ```
 
-## Field Descriptions
+## Feldbeschreibungen
 
-- **`checksum`**: SHA256 hash of your bundle zip file for integrity verification
-- **`session_key`**: Required only for encrypted bundles - this is the `ivSessionKey` returned by the encrypt command
-- **`version`**: Version identifier in semver format
-- **`url`**: HTTPS URL where the bundle can be downloaded
+- **`checksum`**: SHA256-Hash Ihrer Bundle-Zip-Datei zur Integritätsüberprüfung
+- **`session_key`**: Nur für verschlüsselte Bundles erforderlich – dies ist der vom Verschlüsselungsbefehl zurückgegebene `ivSessionKey`
+- **`version`**: Versionskennung im Semver-Format
+- **`url`**: HTTPS-URL, unter der das Bundle heruntergeladen werden kann
 
-## Bundle Creation
+## Bundle-Erstellung
 
-To learn how to create compatible bundles and generate checksums, see the [Auto Update documentation](/docs/plugin/self-hosted/auto-update/#generating-bundle-checksum).
+Informationen zum Erstellen kompatibler Bundles und zum Generieren von Prüfsummen finden Sie in der [Dokumentation zum automatischen Update](/docs/plugin/self-hosted/auto-update/#generating-bundle-checksum).
 
-For encrypted bundles, see the [Encrypted Bundles documentation](/docs/plugin/self-hosted/encrypted-bundles/) which explains the complete encryption workflow.
+Informationen zu verschlüsselten Bundles finden Sie in der [Dokumentation zu verschlüsselten Bundles](/docs/plugin/self-hosted/encrypted-bundles/), in der der vollständige Verschlüsselungsworkflow erläutert wird.

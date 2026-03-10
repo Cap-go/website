@@ -1,24 +1,26 @@
 ---
+title: Troubleshooting
+description: >-
+  Résolvez les problèmes courants rencontrés lors de l'utilisation de Capgo
+  grâce à des étapes de dépannage détaillées et des options avancées de
+  téléchargement et de débogage.
+sidebar:
+  order: 6
+  next: false
+  prev: false
 locale: fr
-title: Dépannage
-description: "Resolve Problèmes courants encountered while using Capgo with detailed Dépannage steps and advanced Options for Télécharger and Débogage."
-sidebar: 
-  order: 5
-next: false
-prev: false
 ---
-
 import { Card } from '@astrojs/starlight/components';
 
-Here are some Problèmes courants you might encounter while using Capgo and how to resolve them.
+Voici quelques problèmes courants que vous pourriez rencontrer lors de l'utilisation de Capgo et comment les résoudre.
 
-<Card title="🚀 Need Expert Help?" icon="rocket">
+<Card title="🚀 Besoin de l'aide d'un expert ?" icon="rocket">
   <p>
-    Stuck with a complex Problème? Our expert team is here to Aide! Get personalized Support, code reviews, and custom Solutions tailored to your specific needs.
+    Vous êtes confronté à un problème complexe ? Notre équipe d’experts est là pour vous aider ! Bénéficiez d'une assistance personnalisée, de révisions de code et de solutions personnalisées adaptées à vos besoins spécifiques.
   </p>
   <div style="margin-top: 1rem;">
     <a href="/consulting/" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background-color: #2563eb; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600; transition: background-color 0.2s;">
-      Get Professional Support
+      Obtenez une assistance professionnelle
       <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="margin:0">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
       </svg>
@@ -26,132 +28,147 @@ Here are some Problèmes courants you might encounter while using Capgo and how 
   </div>
 </Card>
 
-### Télécharger failures
+### Échecs du téléchargement
 
-If your Bundle Télécharger fails, double Vérifier:
-- Your app ID in `capacitor.config.ts` matches your app in the Capgo dashboard
-- You're running the Télécharger Commande from the root of your Capacitor project 
-- Your web assets are built and up to date
+Si le téléchargement de votre bundle échoue, vérifiez :
+- Votre identifiant d'application dans `capacitor.config.ts` correspond à votre application dans le tableau de bord Capgo
+- Vous exécutez la commande upload depuis la racine de votre projet Capacitor 
+- Vos actifs Web sont construits et à jour
 
-#### Advanced Télécharger Options
+#### Options de téléchargement avancées
 
-The Capgo CLI provides some additional flags to Aide with common Télécharger issues:
+Le Capgo CLI fournit des indicateurs supplémentaires pour vous aider à résoudre les problèmes de téléchargement courants :
 
-- `--tus`: Uses the [tus resumable upload protocol](https://tus.io/) for more reliable uploads of large bundles or on poor network connections. If your bundle is over 10MB or you're on a spotty connection, consider using `--tus`:
+- `--tus` : utilise le [protocole de téléchargement avec reprise](https://tus.io/) pour des téléchargements plus fiables de lots volumineux ou sur des connexions réseau médiocres. Si votre forfait dépasse 10 Mo ou si votre connexion est inégale, pensez à utiliser `--tus` :
   ```shell
   npx @capgo/cli@latest bundle upload --tus
   ```
 
-- `--package-json` and `--node-modules`: Tells Capgo where to find your root `package.json` and `node_modules` if your app uses a non-standard structure like a monorepo or npm workspace. Pass the path to the root `package.json` and the `--node_modules` path:
+- `--package-json` et `--node-modules` : indique à Capgo où trouver votre racine `package.json` et `node_modules` si votre application utilise une structure non standard comme un monorepo ou un espace de travail npm. Transmettez le chemin à la racine `package.json` et le chemin `--node_modules` :
   ```shell
   npx @capgo/cli@latest bundle upload --package-json=path/to/package.json --node_modules=path/to/node_modules
   ```
-  Capgo needs this Information to correctly Bundle your Application's dependencies.
+  Capgo a besoin de ces informations pour regrouper correctement les dépendances de votre application.
 
-You can combine these flags with other options like `--channel` as needed. See the [Capgo CLI docs](/docs/cli/overview/) for full details on the available upload options.
+Vous pouvez combiner ces indicateurs avec d'autres options telles que `--channel` selon vos besoins. Consultez les [docs Capgo CLI](/docs/cli/overview/) pour plus de détails sur les options de téléchargement disponibles.
 
-If you're still having trouble with uploads, reach out to [Capgo Support](https://Support.capgo.Application) for further assistance.
+Si vous rencontrez toujours des problèmes avec les téléchargements, contactez l'[assistance Capgo](https://support.capgo.app) pour obtenir de l'aide.
 
-### Débogage Mises à jour
+### Mises à jour de débogage
 
-If you're encountering issues with Mises à jour en direct, the Capgo Débogage Commande is a helpful tool for Dépannage. To use it:
+Si vous rencontrez des problèmes avec les mises à jour en direct, la commande de débogage Capgo est un outil utile pour le dépannage. Pour l'utiliser :
 
-1. Run the following Commande in your project directory:
+1. Exécutez la commande suivante dans le répertoire de votre projet :
    ```shell
    npx @capgo/cli@latest app debug
    ```
 
-2. Launch your Application on a Appareil or emulator and perform the action that should trigger an Mise à jour (e.g. reopening the Application after uploading a Nouveau Bundle).
+2. Lancez votre application sur un appareil ou un émulateur et effectuez l'action qui doit déclencher une mise à jour (par exemple, rouvrir l'application après le téléchargement d'un nouveau bundle).
 
-3. Watch the output of the Débogage Commande. It will Journal Information À propos the Mise à jour process, including:
-   - When the Application checks for an Mise à jour
-   - If an Mise à jour is found and what Version it is
-   - Télécharger and Installation progress for the Mise à jour
-   - Any errors that occur during the Mise à jour process
+3. Regardez le résultat de la commande debug. Il enregistrera des informations sur le processus de mise à jour, notamment :
+   - Lorsque l'application recherche une mise à jour
+   - Si une mise à jour est trouvée et de quelle version il s'agit
+   - Progression du téléchargement et de l'installation de la mise à jour
+   - Toutes les erreurs survenues pendant le processus de mise à jour
 
-4. Use the Débogage Journaux to identify where the Problème is occurring. For Exemple:
-   - If no Mise à jour is found, double Vérifier that your Bundle was uploaded successfully and the Application is configured to use the correct Canal.
-   - If the update downloads but doesn't install, make sure you've called `CapacitorUpdater.notifyAppReady()` and that the app was fully closed and reopened.
-   - If you see an Erreur message, look up that specific Erreur in the Capgo docs or reach out to Support for Aide.
+4. Utilisez les journaux de débogage pour identifier où le problème se produit. Par exemple :
+   - Si aucune mise à jour n'est trouvée, vérifiez que votre bundle a été téléchargé avec succès et que l'application est configurée pour utiliser le bon canal.
+   - Si la mise à jour est téléchargée mais ne s'installe pas, assurez-vous d'avoir appelé `CapacitorUpdater.notifyAppReady()` et que l'application a été complètement fermée et rouverte.
+   - Si vous voyez un message d'erreur, recherchez cette erreur spécifique dans la documentation Capgo ou contactez l'assistance pour obtenir de l'aide.La commande debug est particulièrement utile pour identifier les problèmes liés au processus de téléchargement et d’installation des mises à jour. Si les journaux indiquent que la version de mise à jour attendue a été trouvée mais n'a finalement pas été appliquée, concentrez votre dépannage sur les étapes suivant le téléchargement.
 
-The Débogage Commande is especially useful for identifying issues with the Mise à jour Télécharger and Installation process. If the Journaux show the expected Mise à jour Version was found but not ultimately applied, focus your Dépannage on the steps after the Télécharger.
+### Débogage avec les journaux natifs
 
-### Débogage with Natif Journaux
-
-In addition to the Capgo Débogage Commande, the Natif Journaux on Android and iOS can provide valuable Dépannage Information, especially for issues on the Natif side of the Mise à jour process.
+En plus de la commande de débogage Capgo, les journaux natifs sur Android, iOS et Electron peuvent fournir des informations de dépannage précieuses, en particulier pour les problèmes du côté natif du processus de mise à jour.
 
 #### Android Journaux
 
-To access the Android Journaux:
+Pour accéder aux journaux Android :
 
-1. Connect your Appareil or Démarrer your emulator
-2. Open Android Studio and select "View > Tool Windows > Logcat" 
-3. In the Logcat window, filter the Journaux to just your Application's process by selecting it from the dropdown at the top
-4. Look for any lines that include `Capgo` to find the SDK logs
+1. Connectez votre appareil ou démarrez votre émulateur
+2. Ouvrez Android Studio et sélectionnez « Affichage > Fenêtres d'outils > Logcat ». 
+3. Dans la fenêtre Logcat, filtrez les journaux uniquement sur le processus de votre application en le sélectionnant dans la liste déroulante en haut.
+4. Recherchez toutes les lignes incluant `Capgo` pour trouver les journaux SDK.
 
-Alternatively, you can use the `adb logcat` command and grep for `Capgo` to filter the logs.
+Alternativement, vous pouvez utiliser la commande `adb logcat` et grep pour `Capgo` pour filtrer les journaux.
 
-The Capgo SDK will Journal key events during the Mise à jour process, such as:
-- When an Mise à jour Vérifier is initiated
-- If an Mise à jour is found and what Version it is
-- When the Mise à jour Télécharger starts and completes
-- When the Mise à jour Installation is triggered
-- Any errors that occur during the Natif Mise à jour steps
+Le Capgo SDK enregistrera les événements clés pendant le processus de mise à jour, tels que :
+- Lorsqu'une vérification de mise à jour est lancée
+- Si une mise à jour est trouvée et de quelle version il s'agit
+- Lorsque le téléchargement de la mise à jour démarre et se termine
+- Lorsque l'installation de la mise à jour est déclenchée
+- Toutes les erreurs survenues lors des étapes de mise à jour native
 
-Common Android-specific issues you might see in the Journaux include:
-- Network connectivity problems preventing the Mise à jour Télécharger
-- File permissions errors when saving or reading the Mise à jour Bundle
-- Out of storage space for the Mise à jour Bundle
-- Failure to Redémarrer the Application after the Mise à jour is installed
+Les problèmes courants spécifiques à Android que vous pourriez voir dans les journaux incluent :
+- Problèmes de connectivité réseau empêchant le téléchargement de la mise à jour
+- Erreurs d'autorisations de fichiers lors de l'enregistrement ou de la lecture du bundle de mise à jour
+- Manque d'espace de stockage pour le bundle de mise à jour
+- Impossible de redémarrer l'application après l'installation de la mise à jour
 
 #### iOS Journaux
 
-To access the iOS Journaux:
+Pour accéder aux journaux iOS :
 
-1. Connect your Appareil or Démarrer your simulator
-2. Open Xcode and go to "Window > Appareils and Simulators"
-3. Select your Appareil and click on "Open Console"
-4. In the console output, look for any lines that include `Capgo` to find the SDK logs
+1. Connectez votre appareil ou démarrez votre simulateur
+2. Ouvrez Xcode et allez dans « Fenêtre > Appareils et simulateurs »
+3. Sélectionnez votre appareil et cliquez sur "Ouvrir la console"
+4. Dans la sortie de la console, recherchez toutes les lignes incluant `Capgo` pour trouver les journaux SDK.
 
-You can also use the `log stream` command in the terminal and grep for `Capgo` to filter the logs.
+Vous pouvez également utiliser la commande `log stream` dans le terminal et grep pour `Capgo` pour filtrer les journaux.
 
-Similar to Android, the Capgo SDK will Journal key iOS-side events:
-- Mise à jour Vérifier initiation and result
-- Télécharger Démarrer, progress, and completion
-- Installation trigger and result
-- Any errors during the Natif Mise à jour process
+Semblable à Android, le Capgo SDK enregistrera les événements clés côté iOS :
+- Mise à jour du lancement et du résultat du contrôle
+- Début, progression et fin du téléchargement
+- Déclencheur et résultat de l'installation
+- Toute erreur lors du processus de mise à jour native
 
-iOS-specific issues you might identify in the Journaux include:
-- SSL certificate problems when downloading the Mise à jour
-- Application transport Sécurité blocking the Mise à jour Télécharger 
-- Insufficient storage space for the Mise à jour Bundle
-- Failure to properly extract or apply the Mise à jour Bundle
+Les problèmes spécifiques à iOS que vous pourriez identifier dans les journaux incluent :
+- Problèmes de certificat SSL lors du téléchargement de la mise à jour
+- Sécurité du transport de l'application bloquant le téléchargement de la mise à jour 
+- Espace de stockage insuffisant pour le bundle de mise à jour
+- Échec de l'extraction ou de l'application correcte du bundle de mise à jour
 
-On both platforms, the Natif Journaux provide a lower-level view into the Mise à jour process, with more details on the Natif implementation. They are especially useful for identifying issues that occur outside of the Capgo JavaScript layer.
+#### Journaux d'électrons
 
-When Dépannage a tricky live Mise à jour problem, it's a good idea to capture both the Capgo Débogage Journaux and the Natif Journaux for a comprehensive picture of what's happening. The two Journaux together will give you the best chance of identifying and resolving the Problème.
+Pour les applications Electron, vérifiez à la fois la sortie du processus principal et celle du processus de rendu :1. Exécutez l'application Electron depuis votre terminal à l'aide de votre commande de lancement normale (par exemple `bun run electron:dev` ou `bun run electron:serve`) et surveillez la sortie du terminal pour le démarrage, les vérifications de mise à jour et les erreurs réseau.
+2. Ouvrez DevTools dans la fenêtre du moteur de rendu (Affichage → Basculer les outils de développement) et inspectez les journaux de la console et les requêtes réseau ayant échoué tout en reproduisant le flux de mise à jour.
+3. Pour les applications packagées, vérifiez les outils de journalisation du système d'exploitation pour détecter les plantages ou les échecs de démarrage :
+   - **macOS** : ouvrez `Console.app` et filtrez sur le nom de votre application
+   - **Windows** : ouvrez **Observateur d'événements** → **Journaux Windows** → **Application**
+   - **Linux** : utilisez la visionneuse de journaux de votre bureau ou `journalctl` pour le processus de votre application
 
-### Mises à jour not applying
+Lors du débogage des mises à jour, comparez les messages des journaux du processus principal et du processus de rendu pour séparer les problèmes d'amorçage d'Electron des problèmes de cycle de vie de mise à jour Capgo.
 
-If you've uploaded a Bundle but aren't seeing the changes on your Appareil:
-- Make sure you've called `CapacitorUpdater.notifyAppReady()` in your app code as shown in the [quickstart](/docs/getting-started/quickstart)  
-- Vérifier that your Appareil is connected to the internet and the Capgo Débogage Journaux show the Mise à jour was downloaded
-- Try fully closing and reopening the Application, as Mises à jour are only applied on a fresh launch
-- Look for any errors in the Natif Journaux that might indicate a problem applying the Mise à jour
+Sur toutes les plateformes, les journaux natifs fournissent une vue de niveau inférieur sur le processus de mise à jour, avec plus de détails sur l'implémentation native. Ils sont particulièrement utiles pour identifier les problèmes qui se produisent en dehors de la couche Capgo JavaScript.
 
-Refer to the [deploying live updates](/docs/getting-started/deploy) guide for more details on the update process. If you're still stuck, use the `npx @capgo/cli@latest app debug` command and native logs to get more visibility into what's happening.
+Lors du dépannage d'un problème délicat de mise à jour en direct, c'est une bonne idée de capturer à la fois les journaux de débogage Capgo et les journaux natifs pour une image complète de ce qui se passe. Les deux journaux réunis vous donneront les meilleures chances d’identifier et de résoudre le problème.
+
+### Les mises à jour ne s'appliquent pas
+
+Si vous avez téléchargé un lot mais que vous ne voyez pas les modifications sur votre appareil :
+- Assurez-vous d'avoir appelé `CapacitorUpdater.notifyAppReady()` dans le code de votre application, comme indiqué dans le [démarrage rapide](/docs/getting-started/quickstart).  
+- Vérifiez que votre appareil est connecté à Internet et que les journaux de débogage Capgo indiquent que la mise à jour a été téléchargée.
+- Essayez de fermer et de rouvrir complètement l'application, car les mises à jour ne sont appliquées que lors d'un nouveau lancement.
+- Recherchez les erreurs dans les journaux natifs qui pourraient indiquer un problème lors de l'application de la mise à jour.
+
+Reportez-vous au guide [Déploiement des mises à jour en direct](/docs/getting-started/deploy) pour plus de détails sur le processus de mise à jour. Si vous êtes toujours bloqué, utilisez la commande `npx @capgo/cli@latest app debug` et les journaux natifs pour obtenir plus de visibilité sur ce qui se passe.
+
+### Codes d'échec de mise à jour courants
+
+Si vos journaux affichent des erreurs backend telles que `disable_auto_update_to_major`, `semver_error` ou `cannot_update_via_private_channel`, utilisez le guide dédié :
+
+- [Problèmes de mise à jour courants](/docs/plugins/updater/commonproblems/)
+
+Il explique la signification de chaque code commun, pourquoi il se produit et comment le corriger.
 
 ## SDK Installation
 
-If you're having trouble installing the Capgo SDK, make sure:
-- Your Application is using a supported Version of Capacitor (4.0 or newer)
-- You've followed the [Démarrage rapide](/docs/getting-started/Démarrage rapide) steps in order, including syncing your Application after installing the SDK
+Si vous rencontrez des difficultés pour installer Capgo SDK, assurez-vous :
+- Votre application utilise une version prise en charge de Capacitor (4.0 ou plus récente)
+- Vous avez suivi les étapes de [démarrage rapide](/docs/getting-started/quickstart) dans l'ordre, y compris la synchronisation de votre application après l'installation de SDK.
 
-## CI/CD Integration 
+## Intégration CI/CD 
 
-For issues with triggering Capgo uploads from your CI/CD pipeline:
-- Double Vérifier your Capgo authentication token is set up correctly 
-- Make sure you're running the Télécharger Commande after your web assets are built
-- Vérifier that the Télécharger Commande is using the correct Canal name for your target environment
-
-See the [CI/CD integration](/docs/getting-started/cicd-integration/) docs for more troubleshooting tips. You can also use the `npx @capgo/cli@latest app debug` command to confirm if your CI/CD-triggered updates are being received by the app.
+Pour les problèmes liés au déclenchement des importations Capgo à partir de votre pipeline CI/CD :
+- Vérifiez que votre jeton d'authentification Capgo est correctement configuré 
+- Assurez-vous d'exécuter la commande de téléchargement une fois vos ressources Web créées.
+- Vérifiez que la commande de téléchargement utilise le nom de canal correct pour votre environnement cibleConsultez la documentation [Intégration CI/CD](/docs/getting-started/cicd-integration/) pour plus de conseils de dépannage. Vous pouvez également utiliser la commande `npx @capgo/cli@latest app debug` pour confirmer si vos mises à jour déclenchées par CI/CD sont reçues par l'application.

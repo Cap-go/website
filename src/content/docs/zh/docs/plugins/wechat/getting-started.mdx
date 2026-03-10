@@ -1,34 +1,31 @@
 ---
-title: "快速入门"
-description: >-
-  Learn how to install and use the WeChat plugin to integrate WeChat
-  functionality in your Capacitor app.
+title: 入门
+description: 了解如何安装和使用微信插件将微信功能集成到您的 Capacitor 应用中。
 sidebar:
   order: 2
 locale: zh
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **安装软件包**
    <PackageManagers pkg="@capgo/capacitor-wechat" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **与原生项目同步**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Configuration
+## 配置
 
-### WeChat App Registration
+### 微信小程序注册
 
-Before using this plugin, you must register your app on the [WeChat Open Platform](https://open.weixin.qq.com/) to obtain an App ID.
+使用本插件前，您必须在【微信开放平台】(https://open.weixin.qq.com/)注册您的应用，获取App ID。
 
-### iOS Configuration
+### iOS 配置
 
-Add the following to your `Info.plist`:
+将以下内容添加到您的 `Info.plist` 中：
 
 ```xml
 <key>LSApplicationQueriesSchemes</key>
@@ -52,11 +49,11 @@ Add the following to your `Info.plist`:
 </array>
 ```
 
-You'll need to integrate the WeChat SDK into your iOS project. Add the WeChat SDK to your `Podfile` or download it from the [WeChat Open Platform](https://developers.weixin.qq.com/doc/oplatform/en/Mobile_App/Access_Guide/iOS.html).
+您需要将微信SDK集成到您的iOS项目中。将微信SDK添加到您的`Podfile`中或从【微信开放平台】(https://developers.weixin.qq.com/doc/oplatform/en/Mobile_App/Access_Guide/iOS.html)下载。
 
-### Android Configuration
+### Android 配置
 
-Add the following to your `AndroidManifest.xml`:
+将以下内容添加到您的 `AndroidManifest.xml` 中：
 
 ```xml
 <manifest>
@@ -77,11 +74,11 @@ Add the following to your `AndroidManifest.xml`:
 </manifest>
 ```
 
-You'll need to integrate the WeChat SDK into your Android project. Add the WeChat SDK dependency to your `build.gradle` or download it from the [WeChat Open Platform](https://developers.weixin.qq.com/doc/oplatform/en/Mobile_App/Access_Guide/Android.html).
+您需要将微信SDK集成到您的Android项目中。将微信SDK依赖添加到您的`build.gradle`中，或者从【微信开放平台】(https://developers.weixin.qq.com/doc/oplatform/en/Mobile_App/Access_Guide/Android.html)下载。
 
-## Usage
+## 用法
 
-### Check WeChat Installation
+### 检查微信安装情况
 
 ```typescript
 import { CapacitorWechat } from '@capgo/capacitor-wechat';
@@ -96,7 +93,7 @@ const checkWeChat = async () => {
 };
 ```
 
-### Authentication
+### 身份验证
 
 ```typescript
 const loginWithWeChat = async () => {
@@ -121,9 +118,9 @@ const loginWithWeChat = async () => {
 };
 ```
 
-### Share Content
+### 分享内容
 
-#### Share Text
+#### 分享文字
 
 ```typescript
 const shareText = async () => {
@@ -135,7 +132,7 @@ const shareText = async () => {
 };
 ```
 
-#### Share Link
+#### 分享链接
 
 ```typescript
 const shareLink = async () => {
@@ -150,7 +147,7 @@ const shareLink = async () => {
 };
 ```
 
-#### Share Image
+#### 分享图片
 
 ```typescript
 const shareImage = async () => {
@@ -163,7 +160,7 @@ const shareImage = async () => {
 };
 ```
 
-### WeChat Pay
+###微信支付
 
 ```typescript
 const payWithWeChat = async () => {
@@ -187,7 +184,7 @@ const payWithWeChat = async () => {
 };
 ```
 
-### Open Mini Program
+### 打开小程序
 
 ```typescript
 const openMiniProgram = async () => {
@@ -199,20 +196,20 @@ const openMiniProgram = async () => {
 };
 ```
 
-## API Reference
+## API 参考
 
 ### isInstalled()
 
-Check if WeChat app is installed on the device.
+检查设备上是否安装了微信应用。
 
 ```typescript
 const result = await CapacitorWechat.isInstalled();
 // Returns: { installed: boolean }
 ```
 
-### auth(options)
+### 身份验证（选项）
 
-Authenticate user with WeChat OAuth.
+使用微信OAuth验证用户身份。
 
 ```typescript
 interface WechatAuthOptions {
@@ -224,9 +221,9 @@ const result = await CapacitorWechat.auth(options);
 // Returns: { code: string, state?: string }
 ```
 
-### share(options)
+### 分享（选项）
 
-Share content to WeChat.
+分享内容到微信。
 
 ```typescript
 interface WechatShareOptions {
@@ -248,9 +245,9 @@ interface WechatShareOptions {
 await CapacitorWechat.share(options);
 ```
 
-### sendPaymentRequest(options)
+### 发送付款请求（选项）
 
-Send payment request to WeChat Pay.
+向微信支付发送支付请求。
 
 ```typescript
 interface WechatPaymentOptions {
@@ -265,9 +262,9 @@ interface WechatPaymentOptions {
 await CapacitorWechat.sendPaymentRequest(options);
 ```
 
-### openMiniProgram(options)
+### openMiniProgram(选项)
 
-Open WeChat mini-program.
+打开微信小程序。
 
 ```typescript
 interface WechatMiniProgramOptions {
@@ -279,9 +276,9 @@ interface WechatMiniProgramOptions {
 await CapacitorWechat.openMiniProgram(options);
 ```
 
-### chooseInvoice(options)
+### 选择发票（选项）
 
-Choose invoice from WeChat (for business apps).
+选择微信发票（适用于商业应用）。
 
 ```typescript
 interface WechatInvoiceOptions {
@@ -298,14 +295,14 @@ const result = await CapacitorWechat.chooseInvoice(options);
 
 ### getPluginVersion()
 
-Get the native plugin version.
+获取本机插件版本。
 
 ```typescript
 const result = await CapacitorWechat.getPluginVersion();
 // Returns: { version: string }
 ```
 
-## Complete Example
+## 完整示例
 
 ```typescript
 import { CapacitorWechat } from '@capgo/capacitor-wechat';
@@ -357,37 +354,35 @@ export class WeChatService {
 }
 ```
 
-## Important Notes
+## 重要提示
 
-1. **WeChat SDK Integration**: This plugin provides the Capacitor interface, but you need to integrate the official WeChat SDK into your native projects.
+1. **微信SDK集成**：该插件提供了Capacitor接口，但您需要将官方微信SDK集成到您的原生项目中。
 
-2. **App Registration**: You must register your app on the [WeChat Open Platform](https://open.weixin.qq.com/) to get an App ID.
+2. **应用注册**：您必须在【微信开放平台】(https://open.weixin.qq.com/)上注册您的应用才能获得应用ID。
 
-3. **Universal Links (iOS)**: For iOS 13+, you need to configure Universal Links for WeChat callbacks.
+3. **通用链接（iOS）**：对于iOS 13+，您需要配置微信回调通用链接。
 
-4. **Backend Integration**: Authentication and payment features require backend integration to exchange codes for tokens and prepare payment parameters.
+4. **后端集成**：身份验证和支付功能需要后端集成，以将代码交换为令牌并准备支付参数。
 
-5. **Testing**: WeChat features require testing on physical devices - they will not work in simulators.
+5. **测试**：微信功能需要在物理设备上进行测试 - 它们无法在模拟器中运行。
 
-## Best Practices
+## 最佳实践
 
-1. **Always check if WeChat is installed** before attempting to use features.
-2. **Handle errors gracefully** with try-catch blocks.
-3. **Use state parameter** in auth requests for CSRF protection.
-4. **Validate payment responses** on your backend before granting access.
-5. **Compress images** before sharing to reduce data usage.
+1. **在尝试使用功能之前，请务必检查是否安装了微信**。
+2. **使用 try-catch 块优雅地处理错误**。
+3. **在身份验证请求中使用状态参数**以实现 CSRF 保护。
+4. **在授予访问权限之前在后端验证付款响应**。
+5. **在共享之前压缩图像**以减少数据使用。
 
-## Platform Notes
+## 平台说明
 
 ### iOS
-- Requires iOS 10.0+
-- Uses official WeChat SDK for iOS
-- Requires Universal Links configuration for iOS 13+
+- 需要 iOS 10.0+
+- iOS使用官方微信SDK
+- 需要 iOS 13+ 的通用链接配置### Android
+- 需要 Android 5.0 (API 21)+
+- Android使用官方微信SDK
+- 需要WXEntryActivity配置
 
-### Android
-- Requires Android 5.0 (API 21)+
-- Uses official WeChat SDK for Android
-- Requires WXEntryActivity configuration
-
-### Web
-- Not supported on web platform
+### 网络
+- 不支持网络平台

@@ -1,97 +1,95 @@
 ---
+title: Supabase Introduction à l'intégration
+description: >-
+  Découvrez comment intégrer l'authentification Supabase au plugin Capacitor
+  Social Login pour une solution d'authentification complète.
+sidebar:
+  order: 1
 locale: fr
-title: Supabase Integration Introduction
-description: Learn how to integrate Supabase Authentication with the Capacitor Social Connexion plugin for a Terminé authentication Solution.
-sidebar: 
-    order: 1
 ---
-
 ## Aperçu
 
-This Tutoriel will Guide you through setting up Supabase Authentication with the Capacitor Social Connexion plugin. This integration allows you to use Natif social Connexion providers (Google, Apple, Facebook, Twitter) on mobile platforms while leveraging Supabase Auth for backend authentication and PostgreSQL for data storage.
+Ce didacticiel vous guidera dans la configuration de l'authentification Supabase avec le plugin de connexion sociale Capacitor. Cette intégration vous permet d'utiliser des fournisseurs de connexion sociale natifs (Google, Apple, Facebook, Twitter) sur les plateformes mobiles tout en tirant parti de Supabase Auth pour l'authentification backend et de PostgreSQL pour le stockage des données.
 
-## What You'll Learn
+## Ce que vous apprendrez
 
-- How to configure Supabase Authentication
-- How to integrate Capacitor Social Connexion plugin with Supabase Auth
-- Platform-specific Configuration for Android, iOS, and Web
-- How to handle nonces securely for Supabase
+- Comment configurer l'authentification Supabase
+- Comment intégrer le plugin Capacitor Social Login avec Supabase Auth
+- Configuration spécifique à la plate-forme pour Android, iOS et Web
+- Comment gérer les noms occasionnels en toute sécurité pour Supabase
 
-## What You'll Need
+## Ce dont vous aurez besoin
 
-Before you begin, make sure you have:
+Avant de commencer, assurez-vous d'avoir :
 
-1. **A Supabase Project**
-   - Créer a project at [Supabase Tableau de bord](https://Application.supabase.com/)
-   - Activer Google OAuth provider
-   - Get your Supabase project URL and anon key
+1. **Un projet Supabase**
+   - Créez un projet sur [Supabase Dashboard](https://app.supabase.com/)
+   - Activer le fournisseur Google OAuth
+   - Obtenez l'URL de votre projet Supabase et la clé anonyme
 
 2. **Supabase JS SDK**
-   - Installer Supabase in your project:
+   - Installez Supabase dans votre projet :
      ```bash
      npm install @supabase/supabase-js
      ```
 
-3. **A Capacitor Project**
-   - An existing Capacitor Application
-   - Capacitor Social Connexion plugin installed:
+3. **Un projet Capacitor**
+   - Une application Capacitor existante
+   - Capacitor Plugin de connexion sociale installé :
      ```bash
      npm install @capgo/capacitor-social-login
      npx cap sync
      ```
 
-4. **Platform-Specific Google Configuration**
-   - Terminé the Google Sign-In Configuration for your target platforms:
-     - [Google Connexion Android Configuration](/docs/plugins/social-Connexion/google/Android/)
-     - [Google Connexion iOS Configuration](/docs/plugins/social-Connexion/google/iOS/)
-     - [Google Connexion Web Configuration](/docs/plugins/social-Connexion/google/web/)
+4. **Configuration Google spécifique à la plate-forme**
+   - Terminez la configuration de connexion Google pour vos plates-formes cibles :
+     - [Google Connexion Android Configuration](/docs/plugins/social-login/google/android/)
+     - [Google Connexion iOS Configuration](/docs/plugins/social-login/google/ios/)
+     - [Google Configuration Web de connexion](/docs/plugins/social-login/google/web/)
 
-## Exemple Application
+## Exemple d'application
 
-A Terminé working Exemple is Disponible in the repository:
+Un exemple de travail complet est disponible dans le référentiel :
 
-**Code Repository**: [You can find the code repository here](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app)
+**Dépôt de code** : [Vous pouvez trouver le référentiel de code ici](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app)
 
-The Exemple Application demonstrates:
-- Email/password authentication with Supabase
-- Google Sign-In integration (Android, iOS, and Web)
-- A simple key-value store using Supabase PostgreSQL tables
-- Utilisateur-specific data storage with Row Level Sécurité (RLS)
+L'exemple d'application montre :
+- Authentification email/mot de passe avec Supabase
+- Intégration de connexion Google (Android, iOS et Web)
+- Un simple magasin clé-valeur utilisant les tables Supabase PostgreSQL
+- Stockage de données spécifique à l'utilisateur avec Row Level Security (RLS)
 
-## Key Implementation Details
+## Détails clés de la mise en œuvre
 
-### Nonce Handling
+### Gestion des cas occasionnels
 
-Supabase requires special nonce handling for Sécurité. The implementation follows the [React Natif Google Sign In Documentation](https://react-Natif-google-signin.github.io/docs/Sécurité#Utilisation-with-supabase):
+Supabase nécessite une gestion spéciale des cas occasionnels pour des raisons de sécurité. L'implémentation suit la [documentation de connexion React Native Google](https://react-native-google-signin.github.io/docs/security#usage-with-supabase) :
 
-- Generate a `rawNonce` (URL-safe random string)
-- Hash it with SHA-256 to get `nonceDigest`
-- Pass `nonceDigest` to Google Sign-In
-- Pass `rawNonce` to Supabase (Supabase hashes it internally for comparison)
+- Générer un `rawNonce` (chaîne aléatoire sécurisée pour les URL)
+- Hachez-le avec SHA-256 pour obtenir `nonceDigest`
+- Passez `nonceDigest` à Google Connexion
+- Passez `rawNonce` à Supabase (Supabase le hache en interne pour comparaison)
 
 ### JWT Validation
 
-The Exemple implementation includes JWT validation to ensure:
-- The token audience matches your configured Google Client IDs
-- The nonce matches the expected digest
-- Automatic retry on validation failure (especially Important for iOS)
+L'exemple d'implémentation inclut la validation JWT pour garantir :
+- L'audience du jeton correspond à vos ID client Google configurés
+- Le nonce correspond au résumé attendu
+- Nouvelle tentative automatique en cas d'échec de validation (particulièrement important pour iOS)
 
-### Platform-Specific Considerations
+### Considérations spécifiques à la plate-forme
 
-- **iOS**: Token caching can cause nonce issues - the implementation handles this automatically
-- **Web**: Must call `isLoggedIn()` on mount to handle OAuth redirects
-- **Android**: Standard implementation with SHA-1 fingerprint Configuration
+- **iOS** : la mise en cache des jetons peut provoquer des problèmes occasionnels - l'implémentation gère cela automatiquement
+- **Web** : doit appeler `isLoggedIn()` lors du montage pour gérer les redirections OAuth
+- **Android** : implémentation standard avec configuration d'empreintes digitales SHA-1
 
-## Suivant Steps
+## Prochaines étapesContinuez avec les guides de configuration :
+- [Supabase Google Connexion - Configuration générale](./google/general/) - Présentation et conditions préalables
+- [Configuration Android](./google/android/) - Configuration spécifique à Android
+- [Configuration iOS](./google/ios/) - Configuration spécifique à iOS
+- [Configuration Web](./google/web/) - Configuration spécifique au Web
 
-Continue with the Configuration guides:
-- [Supabase Google Connexion - General Configuration](./google/general/) - Aperçu and prerequisites
-- [Android Configuration](./google/Android/) - Android-specific Configuration
-- [iOS Configuration](./google/iOS/) - iOS-specific Configuration
-- [Web Configuration](./google/web/) - Web-specific Configuration
-
-### Apple Sign-In
-- [Supabase Apple Connexion - General Configuration](./Apple/general/) - Aperçu and prerequisites
-- [iOS Configuration](./Apple/iOS/) - iOS-specific Configuration
-- [Android Configuration](./Apple/Android/) - Android-specific Configuration
-
+### Apple Connexion
+- [Supabase Apple Connexion - Configuration générale](./Apple/general/) - Présentation et prérequis
+- [Configuration iOS](./Apple/ios/) - Configuration spécifique à iOS
+- [Configuration Android](./Apple/android/) - Configuration spécifique à Android

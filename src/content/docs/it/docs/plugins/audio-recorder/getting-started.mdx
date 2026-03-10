@@ -1,53 +1,50 @@
 ---
-
-title: "Getting Started with Audio Recorder"
-description: "Learn how to integrate audio recording into your Capacitor app"
+title: Iniziare con il registratore audio
+description: Scopri come integrare la registrazione audio nella tua app Capacitor
 locale: it
 ---
+Questa guida ti guiderà attraverso l'integrazione del plug-in Capacitor Audio Recorder nella tua applicazione.
 
+## Installazione
 
-This guide will walk you through integrating the Capacitor Audio Recorder plugin into your application.
-
-## Installation
-
-Install the plugin using npm:
+Installa il plug-in utilizzando npm:
 
 ```bash
 npm install @capgo/capacitor-audio-recorder
 npx cap sync
 ```
 
-## iOS Configuration
+## iOS Configurazione
 
-Add the following to your `Info.plist`:
+Aggiungi quanto segue al tuo `Info.plist`:
 
 ```xml
 <key>NSMicrophoneUsageDescription</key>
 <string>This app needs access to the microphone to record audio</string>
 ```
 
-## Android Configuration
+## Android Configurazione
 
-Add the following permissions to your `AndroidManifest.xml`:
+Aggiungi le seguenti autorizzazioni al tuo `AndroidManifest.xml`:
 
 ```xml
 <uses-permission android:name="android.permission.RECORD_AUDIO" />
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
 
-## Web Configuration
+## Configurazione Web
 
-The plugin uses the MediaRecorder API. Requires HTTPS in production.
+Il plugin utilizza MediaRecorder API. Richiede HTTPS in produzione.
 
-## Basic Usage
+## Utilizzo di base
 
-### Import the Plugin
+### Importa il plugin
 
 ```typescript
 import { AudioRecorder } from '@capgo/capacitor-audio-recorder';
 ```
 
-### Request Permissions
+### Richiedi autorizzazioni
 
 ```typescript
 const requestPermission = async () => {
@@ -56,7 +53,7 @@ const requestPermission = async () => {
 };
 ```
 
-### Start Recording
+### Avvia la registrazione
 
 ```typescript
 const startRecording = async () => {
@@ -65,7 +62,7 @@ const startRecording = async () => {
 };
 ```
 
-### Stop Recording
+### Interrompi la registrazione
 
 ```typescript
 const stopRecording = async () => {
@@ -75,7 +72,7 @@ const stopRecording = async () => {
 };
 ```
 
-### Pause/Resume Recording
+### Interrompe/riprende la registrazione
 
 ```typescript
 const pauseRecording = async () => {
@@ -89,7 +86,7 @@ const resumeRecording = async () => {
 };
 ```
 
-### Get Status
+### Ottieni lo stato
 
 ```typescript
 const getStatus = async () => {
@@ -99,9 +96,9 @@ const getStatus = async () => {
 };
 ```
 
-## Complete Example
+## Esempio completo
 
-Here's a complete voice recorder implementation:
+Ecco un'implementazione completa del registratore vocale:
 
 ```typescript
 import { AudioRecorder } from '@capgo/capacitor-audio-recorder';
@@ -227,9 +224,9 @@ const result = await recorder.stopRecording();
 console.log('Recording saved:', result?.filePath);
 ```
 
-## Advanced Configuration
+## Configurazione avanzata
 
-### Configure Audio Quality
+### Configura la qualità audio
 
 ```typescript
 const startHighQualityRecording = async () => {
@@ -242,7 +239,7 @@ const startHighQualityRecording = async () => {
 };
 ```
 
-### Configure for Voice
+### Configura per la voce
 
 ```typescript
 const startVoiceRecording = async () => {
@@ -255,7 +252,7 @@ const startVoiceRecording = async () => {
 };
 ```
 
-## UI Integration Example
+## Esempio di integrazione dell'interfaccia utente
 
 ```typescript
 class AudioRecorderUI {
@@ -345,17 +342,17 @@ const ui = new AudioRecorderUI();
 ui.init();
 ```
 
-## Best Practices
+## Migliori pratiche
 
-1. **Request Permissions Early**: Check permissions before showing recording UI
-2. **Handle Interruptions**: Phone calls, alarms can interrupt recording
-3. **Manage Storage**: Clean up old recordings to save space
-4. **Provide Feedback**: Show recording status, duration, and waveform
-5. **Test on Devices**: Simulators/emulators have limited audio support
+1. **Richiedi autorizzazioni in anticipo**: controlla le autorizzazioni prima di mostrare l'interfaccia utente di registrazione
+2. **Gestione delle interruzioni**: telefonate e allarmi possono interrompere la registrazione
+3. **Gestisci spazio di archiviazione**: ripulisci le vecchie registrazioni per risparmiare spazio
+4. **Fornisci feedback**: mostra lo stato della registrazione, la durata e la forma d'onda
+5. **Test sui dispositivi**: i simulatori/emulatori hanno un supporto audio limitato
 
-## Common Issues
+## Problemi comuni
 
-### Permission Denied
+### Autorizzazione negata
 
 ```typescript
 const handlePermissionDenied = async () => {
@@ -367,7 +364,7 @@ const handlePermissionDenied = async () => {
 };
 ```
 
-### Recording Interrupted
+### Registrazione interrotta
 
 ```typescript
 // Handle app going to background
@@ -380,7 +377,7 @@ document.addEventListener('pause', async () => {
 });
 ```
 
-### Storage Management
+### Gestione dell'archiviazione
 
 ```typescript
 const cleanupOldRecordings = async () => {
@@ -390,8 +387,8 @@ const cleanupOldRecordings = async () => {
 };
 ```
 
-## Next Steps
+## Passaggi successivi
 
-- Explore the [API Reference](https://github.com/Cap-go/capacitor-audio-recorder#api) for complete method documentation
-- Check out the [example app](https://github.com/Cap-go/capacitor-audio-recorder/tree/main/example) for advanced usage
-- See the [tutorial](/plugins/capacitor-audio-recorder) for complete implementation examples
+- Esplora il [API Riferimento](https://github.com/Cap-go/capacitor-audio-recorder#api) per la documentazione completa del metodo
+- Controlla l'[app di esempio](https://github.com/Cap-go/capacitor-audio-recorder/tree/main/example) per un utilizzo avanzato
+- Consulta il [tutorial](/plugins/capacitor-audio-recorder) per esempi di implementazione completi

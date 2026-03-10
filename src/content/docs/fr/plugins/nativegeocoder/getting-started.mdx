@@ -1,33 +1,34 @@
 ---
-locale: fr
 title: Commencer
-description: Learn how to Installer and use the Natif Geocoder plugin for address and coordinate conversion in your Capacitor Application.
-sidebar: 
+description: >-
+  Découvrez comment installer et utiliser le plugin Native Geocoder pour la
+  conversion d'adresses et de coordonnées dans votre application Capacitor.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Installer the package**
+1. **Installez le package**
    <PackageManagers pkg="@capgo/nativegeocoder" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser with Natif projects**
+2. **Synchronisation avec les projets natifs**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure permissions**
+3. **Configurer les autorisations**
    
    ### iOS
-   Add location usage description to your `Info.plist`:
+   Ajoutez une description d'utilisation de l'emplacement à votre `Info.plist` :
    ```xml
    <key>NSLocationWhenInUseUsageDescription</key>
    <string>To convert addresses to coordinates</string>
    ```
    
    ### Android
-   Add permissions to your `AndroidManifest.xml`:
+   Ajoutez des autorisations à votre `AndroidManifest.xml` :
    ```xml
    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -36,7 +37,7 @@ import { PackageManagers } from 'starlight-package-managers'
 
 ## Utilisation
 
-Importer the plugin and use its geocoding methods:
+Importez le plugin et utilisez ses méthodes de géocodage :
 
 ```typescript
 import { NativeGeocoder } from '@capgo/nativegeocoder';
@@ -72,9 +73,9 @@ const reverseGeocode = async () => {
 
 ## API Référence
 
-### forwardGeocode(Options)
+### forwardGeocode(options)
 
-Converts an address string to geographic coordinates.
+Convertit une chaîne d'adresse en coordonnées géographiques.
 
 ```typescript
 interface ForwardGeocodeOptions {
@@ -103,9 +104,9 @@ interface Address {
 }
 ```
 
-### reverseGeocode(Options)
+### Géocode inversé (options)
 
-Converts geographic coordinates to address Information.
+Convertit les coordonnées géographiques en informations d’adresse.
 
 ```typescript
 interface ReverseGeocodeOptions {
@@ -117,9 +118,9 @@ interface ReverseGeocodeOptions {
 }
 ```
 
-## Terminé Exemples
+## Exemples complets
 
-### Address Recherche with Erreur Handling
+### Recherche d'adresse avec gestion des erreurs
 
 ```typescript
 import { NativeGeocoder } from '@capgo/nativegeocoder';
@@ -184,7 +185,7 @@ export class GeocodingService {
 }
 ```
 
-### Location Picker Component
+### Composant de sélection d'emplacement
 
 ```typescript
 import { NativeGeocoder } from '@capgo/nativegeocoder';
@@ -261,9 +262,9 @@ export class LocationPicker {
 }
 ```
 
-## Best Practices
+## meilleures pratiques
 
-1. **Request permissions first**
+1. **Demandez d'abord les autorisations**
    ```typescript
    import { Geolocation } from '@capacitor/geolocation';
    
@@ -275,7 +276,7 @@ export class LocationPicker {
    };
    ```
 
-2. **Handle errors gracefully**
+2. **Gérer les erreurs avec élégance**
    ```typescript
    try {
      const results = await NativeGeocoder.forwardGeocode({
@@ -291,12 +292,12 @@ export class LocationPicker {
    }
    ```
 
-3. **Use maxResults wisely**
-   - For Utilisateur Recherche: Use 5-10 results
-   - For automatic conversion: Use 1 result
-   - More results = slower response
+3. **Utilisez judicieusement maxResults**
+   - Pour la recherche d'utilisateurs : utilisez 5 à 10 résultats
+   - Pour une conversion automatique : utilisez 1 résultat
+   - Plus de résultats = réponse plus lente
 
-4. **Cache results when possible**
+4. **Cache les résultats lorsque cela est possible**
    ```typescript
    const geocodeCache = new Map();
    
@@ -314,21 +315,21 @@ export class LocationPicker {
    }
    ```
 
-## Platform Differences
+## Différences de plateforme
 
 ### iOS
-- Uses `CLGeocoder` from CoreLocation
-- No Clé API required
-- Respects Utilisateur's locale automatically
+- Utilise `CLGeocoder` de CoreLocation
+- Aucune clé API requise
+- Respecte automatiquement les paramètres régionaux de l'utilisateur
 
 ### Android
-- Uses Android Geocoder API
-- Optional Google Clé API for better results
-- May fall Retour to Google's web service
+- Utilise Android Géocodeur API
+- Clé Google API en option pour de meilleurs résultats
+- Peut recourir au service Web de Google
 
-### Clé API Configuration (Android)
+### API Configuration des touches (Android)
 
-For better results on Android, you can provide a Google Clé API:
+Pour de meilleurs résultats sur Android, vous pouvez fournir une clé Google API :
 
 ```typescript
 await NativeGeocoder.forwardGeocode({
@@ -339,16 +340,16 @@ await NativeGeocoder.forwardGeocode({
 
 ## Problèmes courants
 
-1. **No results returned**
-   - Vérifier internet connection
-   - Verify address format
-   - Try with more general address
+1. **Aucun résultat renvoyé**
+   - Vérifier la connexion Internet
+   - Vérifier le format de l'adresse
+   - Essayez avec une adresse plus générale
 
-2. **Permission errors**
-   - Ensure location permissions are granted
-   - Vérifier Info.plist/AndroidManifest.xml
+2. **Erreurs d'autorisation**
+   - Assurez-vous que les autorisations de localisation sont accordées
+   - Vérifiez Info.plist/AndroidManifest.xml
 
-3. **Inaccurate results**
-   - Use more specific addresses
-   - Include postal codes when Disponible
-   - Consider using coordinates for precise locations
+3. **Résultats inexacts**
+   - Utiliser des adresses plus spécifiques
+   - Inclure les codes postaux lorsqu'ils sont disponibles
+   - Pensez à utiliser des coordonnées pour des emplacements précis

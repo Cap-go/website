@@ -1,26 +1,28 @@
 ---
-locale: fr
 title: Commencer
-description: Learn how to Installer and use the Camera Preview plugin to display real-time camera feed and capture photos/videos in your Capacitor Application.
-sidebar: 
+description: >-
+  Découvrez comment installer et utiliser le plugin Camera Preview pour afficher
+  le flux de la caméra en temps réel et capturer des photos/vidéos dans votre
+  application Capacitor.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Installer the package**
+1. **Installez le package**
    <PackageManagers pkg="@capgo/camera-preview" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser with Natif projects**
+2. **Synchronisation avec les projets natifs**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure permissions**
+3. **Configurer les autorisations**
    
    ### iOS
-   Add camera usage description to your `Info.plist`:
+   Ajoutez une description de l'utilisation de la caméra à votre `Info.plist` :
    ```xml
    <key>NSCameraUsageDescription</key>
    <string>To take photos and videos</string>
@@ -31,7 +33,7 @@ import { PackageManagers } from 'starlight-package-managers'
    ```
    
    ### Android
-   Add camera permissions to your `AndroidManifest.xml`:
+   Ajoutez des autorisations de caméra à votre `AndroidManifest.xml` :
    ```xml
    <uses-permission android:name="android.permission.CAMERA" />
    <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -41,7 +43,7 @@ import { PackageManagers } from 'starlight-package-managers'
 
 ## Utilisation
 
-Importer the plugin and use its methods to control the camera:
+Importez le plugin et utilisez ses méthodes pour contrôler la caméra :
 
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
@@ -111,9 +113,9 @@ const stopRecording = async () => {
 
 ## API Référence
 
-### Démarrer(Options)
+### début (options)
 
-Starts the camera preview.
+Démarre l'aperçu de la caméra.
 
 ```typescript
 interface CameraPreviewOptions {
@@ -135,13 +137,13 @@ interface CameraPreviewOptions {
 }
 ```
 
-### Arrêter()
+### arrête()
 
-Stops the camera preview.
+Arrête l'aperçu de la caméra.
 
-### capture(Options)
+### capture(options)
 
-Takes a picture and Retourne it as base64 encoded string.
+Prend une photo et la renvoie sous forme de chaîne codée en base64.
 
 ```typescript
 interface CameraPreviewPictureOptions {
@@ -151,13 +153,13 @@ interface CameraPreviewPictureOptions {
 }
 ```
 
-### flip()
+### retourner()
 
-Switches between front and rear camera.
+Bascule entre la caméra avant et la caméra arrière.
 
-### setFlashMode(Options)
+### setFlashMode(options)
 
-Sets the flash mode.
+Règle le mode flash.
 
 ```typescript
 interface CameraPreviewFlashMode {
@@ -165,9 +167,9 @@ interface CameraPreviewFlashMode {
 }
 ```
 
-### startRecordVideo(Options)
+### startRecordVideo(options)
 
-Starts video recording.
+Démarre l'enregistrement vidéo.
 
 ```typescript
 interface CameraPreviewVideoOptions {
@@ -182,11 +184,11 @@ interface CameraPreviewVideoOptions {
 
 ### stopRecordVideo()
 
-Stops video recording and Retourne the video file path.
+Arrête l'enregistrement vidéo et renvoie le chemin du fichier vidéo.
 
-## Advanced Fonctionnalités
+## Fonctionnalités avancées
 
-### Focus Control
+### Contrôle de la mise au point
 
 ```typescript
 // Set focus
@@ -204,7 +206,7 @@ await CameraPreview.setFocusMode({
 });
 ```
 
-### Zoom Control
+### Contrôle du zoom
 
 ```typescript
 // Get max zoom
@@ -219,7 +221,7 @@ await CameraPreview.setZoom({
 const currentZoom = await CameraPreview.getZoom();
 ```
 
-### Exposure Control
+### Contrôle de l'exposition
 
 ```typescript
 // Get exposure compensation range
@@ -231,9 +233,9 @@ await CameraPreview.setExposureCompensation({
 });
 ```
 
-## Best Practices
+## meilleures pratiques
 
-1. **Request permissions first**
+1. **Demandez d'abord les autorisations**
    ```typescript
    import { Camera } from '@capacitor/camera';
    
@@ -245,15 +247,15 @@ await CameraPreview.setExposureCompensation({
    };
    ```
 
-2. **Handle orientation changes**
-   Set `rotateWhenOrientationChanged: true` to automatically adjust the preview.
+2. **Gérer les changements d'orientation**
+   Définissez `rotateWhenOrientationChanged: true` pour ajuster automatiquement l'aperçu.
 
-3. **Optimize performance**
-   - Use appropriate resolution Paramètres
-   - Arrêter the preview when not in use
-   - Désactiver Fonctionnalités you don't need
+3. **Optimiser les performances**
+   - Utilisez les paramètres de résolution appropriés
+   - Arrêtez l'aperçu lorsqu'il n'est pas utilisé
+   - Désactivez les fonctionnalités dont vous n'avez pas besoin
 
-4. **Erreur handling**
+4. **Gestion des erreurs**
    ```typescript
    try {
      await CameraPreview.start(options);
@@ -262,14 +264,14 @@ await CameraPreview.setExposureCompensation({
    }
    ```
 
-## Platform Notes
+## Remarques sur la plate-forme
 
 ### iOS
-- Requires iOS 10.0+
-- Uses AVFoundation framework
-- Hardware acceleration supported
+- Nécessite iOS 10.0+
+- Utilise le framework AVFoundation
+- Accélération matérielle prise en charge
 
 ### Android
-- Requires Android 5.0 (API 21)+
-- Uses Camera2 API
-- Supports various camera Fonctionnalités based on Appareil capabilities
+- Nécessite Android 5.0 (API 21)+
+- Utilise Camera2 API
+- Prend en charge diverses fonctionnalités de l'appareil photo en fonction des capacités de l'appareil

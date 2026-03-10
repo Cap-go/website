@@ -1,8 +1,6 @@
 ---
 title: '@capgo/capacitor-sim'
-description: >-
-  Inspect SIM card information such as carrier, country code, and slot index
-  from Capacitor apps.
+description: 'Capacitor 앱에서 이동통신사, 국가 코드, 슬롯 색인과 같은 SIM 카드 정보를 검사하세요.'
 tableOfContents: false
 next: false
 prev: false
@@ -10,13 +8,11 @@ sidebar:
   order: 1
   label: Introduction
 hero:
-  tagline: >-
-    Retrieve SIM carrier metadata and handle permission flows with a lightweight
-    Capacitor bridge.
+  tagline: 경량 Capacitor 브리지를 사용하여 SIM 이동통신사 메타데이터를 검색하고 권한 흐름을 처리합니다.
   image:
     file: ~public/icons/plugins/sim.svg
   actions:
-    - text: Get started
+    - text: 시작하기
       link: /docs/plugins/sim/getting-started/
       icon: right-arrow
       variant: primary
@@ -26,24 +22,23 @@ hero:
       variant: minimal
 locale: ko
 ---
-
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-Use Capgo SIM to query carrier data, slot indexes, and permission states while remaining inside Capacitor.
+Capgo SIM을 사용하여 Capacitor 내부에 있는 동안 이동통신사 데이터, 슬롯 인덱스 및 권한 상태를 쿼리합니다.
 
 <CardGrid stagger>
-  <Card title="Multi-SIM support" icon="rocket">
-    Enumerate every installed SIM along with slot indices and subscription IDs.
+  <Card title="다중 SIM 지원" icon="rocket">
+    슬롯 색인 및 구독 ID와 함께 설치된 모든 SIM을 열거합니다.
   </Card>
-  <Card title="Permission helpers" icon="approve-check">
-    Check and request the telephony permission required on Android.
+  <Card title="권한 도우미" icon="approve-check">
+    Android에 필요한 전화 통신 권한을 확인하고 요청하세요.
   </Card>
-  <Card title="Consistent schema" icon="star">
-    Work with normalized carrier fields like MCC, MNC, ISO country, and phone numbers.
+  <Card title="일관된 스키마" icon="star">
+    MCC, MNC, ISO 국가 및 전화번호와 같은 정규화된 이동통신사 필드로 작업합니다.
   </Card>
   <Card title="iOS-aware" icon="pencil">
-    Handle platform nuances such as limited carrier data on iOS 16.4+.
+    iOS 16.4+에서 제한된 이동통신사 데이터와 같은 플랫폼 미묘한 차이를 처리합니다.
   </Card>
 </CardGrid>
 
-Grab the getting started guide to integrate permissions and consumption patterns.
+권한과 소비 패턴을 통합하려면 시작 가이드를 확인하세요.

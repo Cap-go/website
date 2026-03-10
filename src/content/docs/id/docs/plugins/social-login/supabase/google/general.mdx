@@ -1,76 +1,76 @@
 ---
-title: Supabase Google Login - General Setup
+title: Supabase Google Masuk - Pengaturan Umum
 description: >-
-  Learn how to set up Google Sign-In with Supabase Authentication using the
-  Capacitor Social Login plugin.
+  Pelajari cara menyiapkan Google Masuk dengan Supabase Autentikasi menggunakan
+  plugin Capacitor Login Sosial.
 sidebar:
   order: 1
 locale: id
 ---
 import { Steps } from '@astrojs/starlight/components';
 
-## Introduction
+## Pendahuluan
 
-This guide will walk you through integrating Google Sign-In with Supabase Authentication using the Capacitor Social Login plugin. This setup allows you to use native Google Sign-In on mobile platforms while leveraging Supabase Auth for backend authentication.
+Panduan ini akan memandu Anda dalam mengintegrasikan Google Masuk dengan Supabase Otentikasi menggunakan plugin Capacitor Login Sosial. Penyiapan ini memungkinkan Anda menggunakan Masuk Google asli pada platform seluler sambil memanfaatkan Supabase Auth untuk autentikasi backend.
 
-## Prerequisites
+## Prasyarat
 
-Before starting, ensure you have:
+Sebelum memulai, pastikan Anda memiliki:
 
-1. [Created a Supabase project](https://database.new/)
-2. Read the [Google Login General Setup](/docs/plugins/social-login/google/general/) guide to setup Google OAuth credentials
-3. Followed the respective platform-specific guides to setup Google OAuth credentials for your target platform:
+1. [Membuat proyek Supabase](https://database.new/)
+2. Baca panduan [Google Pengaturan Umum Login](/docs/plugins/social-login/google/general/) untuk menyiapkan kredensial Google OAuth
+3. Ikuti panduan khusus platform masing-masing untuk menyiapkan kredensial Google OAuth untuk platform target Anda:
     - [Android Setup](/docs/plugins/social-login/google/android/)
     - [iOS Setup](/docs/plugins/social-login/google/ios/)
-    - [Web Setup](/docs/plugins/social-login/google/web/)
+    - [Pengaturan Web](/docs/plugins/social-login/google/web/)
 
     :::note
-        Before starting the Supabase tutorial, you need to generate the client IDs for the platforms you plan to use.
+        Sebelum memulai tutorial Supabase, Anda perlu membuat ID klien untuk platform yang ingin Anda gunakan.
         You will use them in step 7 of this guide.
     :::
 
-## Enabling Google OAuth provider in Supabase
+## Mengaktifkan penyedia Google OAuth di Supabase
 
 <Steps>
-1. Go to your [Supabase Dashboard](https://app.supabase.com/)
-2. Click on your project
-    <img src="/social-login-assets/supabase_project_select.webp" alt="Supabase Project Selector" />
+1. Buka [Dasbor Supabase](https://app.supabase.com/) Anda
+2. Klik pada proyek Anda
+    <img src="/social-login-assets/supabase_project_select.webp" alt="Supabase Pemilih Proyek" />
 3. Do go to the `Authentication` menu
-    <img src="/social-login-assets/supabase_authentication_menu.webp" alt="Supabase Authentication Menu" />
+    <img src="/social-login-assets/supabase_authentication_menu.webp" alt="Supabase Menu Otentikasi" />
 4. Click on the `Providers` tab
-    <img src="/social-login-assets/supabase_providers_tab.webp" alt="Supabase Providers Tab" />
+    <img src="/social-login-assets/supabase_providers_tab.webp" alt="Supabase Tab Penyedia" />
 5. Find the `Google` provider
-    <img src="/social-login-assets/supabase_google_provider.webp" alt="Supabase Google Provider" />
-6. Enable the provider
-    <img src="/social-login-assets/supabase_google_provider_enable.webp" alt="Supabase Google Provider Enable" />
-7. Add the client IDs for the platforms you plan to use
-    <img src="/social-login-assets/supabase_google_provider_add_client_ids.webp" alt="Supabase Google Provider Add Client IDs" />
+    <img src="/social-login-assets/supabase_google_provider.webp" alt="Supabase Google Penyedia" />
+6. Aktifkan penyedia
+    <img src="/social-login-assets/supabase_google_provider_enable.webp" alt="Supabase Google Penyedia Aktif" />
+7. Tambahkan ID klien untuk platform yang ingin Anda gunakan
+    <img src="/social-login-assets/supabase_google_provider_add_client_ids.webp" alt="Supabase Google Penyedia Tambahkan ID Klien" />
 
     :::note
-        This included the web client ID, the iOS client ID and the Android client ID. You can skip providing some of them, depending on the platforms you plan to use.
+        Ini termasuk ID klien web, ID klien iOS, dan ID klien Android. Anda dapat melewatkan penyediaan beberapa di antaranya, bergantung pada platform yang ingin Anda gunakan.
     :::
 8. Click on the `Save` button
-    <img src="/social-login-assets/supabase_google_provider_save.webp" alt="Supabase Google Provider Save" />
+    <img src="/social-login-assets/supabase_google_provider_save.webp" alt="Supabase Google Penyedia Simpan" />
 
 </Steps>
 
 :::note
-You __**SHOULD NOT**__ setup `Client Secret (for OAuth)` or `Callback URL (for OAuth)`. Some sources might also suggest setting `Skip nonce checks` for Google on iOS, but with this guide this isn't needed.
+Anda __**TIDAK BOLEH**__ menyiapkan `Client Secret (for OAuth)` atau `Callback URL (for OAuth)`. Beberapa sumber mungkin juga menyarankan pengaturan `Lewati pemeriksaan nonce` untuk Google pada iOS, namun dengan panduan ini hal ini tidak diperlukan.
 :::
 
-Voilà, you have now enabled Google Sign-In with Supabase Authentication 🎉
+Voila, Anda sekarang telah mengaktifkan Google Masuk dengan Supabase Otentikasi 🎉
 
-## How Google Sign-In with Supabase Authentication Helper Works
+## Cara Kerja Google Masuk dengan Supabase Pembantu Otentikasi
 
-This section explains how the Google Sign-In integration with Supabase works under the hood. Understanding this flow will help you implement and troubleshoot the authentication process.
+Bagian ini menjelaskan cara kerja integrasi Masuk Google dengan Supabase. Memahami alur ini akan membantu Anda menerapkan dan memecahkan masalah proses autentikasi.
 
-:::tip[Complete Implementation]
-The complete implementation is available in the [example app's `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) file.
+:::tip[Implementasi Lengkap]
+Implementasi lengkapnya tersedia di file [aplikasi contoh `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts).
 :::
 
 ### 1. Nonce Generation
 
-The implementation generates a secure nonce pair following the [Supabase nonce requirements](https://react-native-google-signin.github.io/docs/security#usage-with-supabase):
+Implementasinya menghasilkan pasangan nonce aman yang mengikuti [Supabase persyaratan nonce](https://react-native-google-signin.github.io/docs/security#usage-with-supabase):
 
 ```typescript
 // Generate URL-safe random nonce
@@ -98,14 +98,12 @@ async function getNonce(): Promise<{ rawNonce: string; nonceDigest: string }> {
 ```
 
 **Flow:**
-- `rawNonce`: URL-safe random string (64 hex characters)
-- `nonceDigest`: SHA-256 hash of `rawNonce` (hex-encoded)
-- `nonceDigest` is passed to Google Sign-In → Google includes the nonce digest in the ID token
-- `rawNonce` is passed to Supabase → Supabase hashes the raw nonce and compares with the token's nonce
+- `rawNonce`: string acak aman-URL (64 karakter hex)
+- `nonceDigest`: hash SHA-256 dari `rawNonce` (dikodekan hex)
+- `nonceDigest` diteruskan ke Google Masuk → Google menyertakan intisari nonce dalam token ID
+- `rawNonce` diteruskan ke Supabase → Supabase melakukan hash pada nonce mentah dan membandingkannya dengan nonce token
 
-### 2. Google Sign-In
-
-The function initializes the plugin and signs in with Google:
+### 2. Google Sign-InFungsi ini menginisialisasi plugin dan masuk dengan Google:
 
 ```typescript
 await SocialLogin.initialize({
@@ -126,9 +124,9 @@ const response = await SocialLogin.login({
 });
 ```
 
-### 3. JWT Validation
+### 3. JWT Validasi
 
-Before sending the token to Supabase, the implementation validates the JWT token:
+Sebelum mengirim token ke Supabase, implementasi memvalidasi token JWT:
 
 ```typescript
 function validateJWTToken(idToken: string, expectedNonceDigest: string): { valid: boolean; error?: string } {
@@ -150,26 +148,26 @@ function validateJWTToken(idToken: string, expectedNonceDigest: string): { valid
 }
 ```
 
-**Why validate before Supabase?**
+**Mengapa memvalidasi sebelum Supabase?**
 
-Validating the JWT token before sending the token to Supabase serves several important purposes:
+Memvalidasi token JWT sebelum mengirim token ke Supabase memiliki beberapa tujuan penting:
 
-1. **Prevent Invalid Requests**: If the token has an incorrect audience or nonce mismatch, Supabase will reject the token anyway. Validating first avoids unnecessary API calls and provides clearer error messages.
+1. **Mencegah Permintaan Tidak Valid**: Jika token memiliki audiens yang salah atau ketidakcocokan, Supabase akan tetap menolak token tersebut. Memvalidasi terlebih dahulu menghindari panggilan API yang tidak perlu dan memberikan pesan kesalahan yang lebih jelas.
 
-2. **Token Caching Issues**: On some platforms (especially iOS), Google Sign-In SDK can cache tokens for performance. When a cached token is returned, the cached token may have been generated with a different nonce (or no nonce at all), causing Supabase to reject the token with a "nonce mismatch" error. By validating before sending to Supabase, we can detect this issue early and automatically retry with a fresh token.
+2. **Masalah Caching Token**: Pada beberapa platform (terutama iOS), Google Masuk SDK dapat menyimpan token untuk kinerja. Ketika token yang di-cache dikembalikan, token yang di-cache mungkin dibuat dengan nonce yang berbeda (atau tanpa nonce sama sekali), menyebabkan Supabase menolak token dengan kesalahan "nonce mismatch". Dengan memvalidasi sebelum mengirim ke Supabase, kami dapat mendeteksi masalah ini lebih awal dan secara otomatis mencoba lagi dengan token baru.
 
-3. **Security** (iOS): On iOS, validation ensures the token was issued for your specific Google Client IDs, preventing potential security issues from using tokens intended for other applications.
+3. **Keamanan** (iOS): Pada iOS, validasi memastikan token dikeluarkan untuk ID Klien Google spesifik Anda, sehingga mencegah potensi masalah keamanan dalam penggunaan token yang ditujukan untuk aplikasi lain.
 
-4. **Better Error Handling**: Detecting issues before Supabase allows for automatic retry logic, which is essential for handling iOS caching issues transparently.
+4. **Penanganan Kesalahan yang Lebih Baik**: Mendeteksi masalah sebelum Supabase memungkinkan logika percobaan ulang otomatis, yang penting untuk menangani masalah cache iOS secara transparan.
 
-If validation fails, the function automatically:
-1. Logs out from Google (clears cached tokens - critical on iOS)
-2. Retries authentication once (forces fresh token generation with correct nonce)
-3. If retry also fails, returns an error
+Jika validasi gagal, fungsinya secara otomatis:
+1. Keluar dari Google (menghapus token yang disimpan dalam cache - penting pada iOS)
+2. Mencoba kembali autentikasi satu kali (memaksa pembuatan token baru dengan nonce yang benar)
+3. Jika percobaan ulang juga gagal, akan muncul kesalahan
 
-### 4. Supabase Sign-In
+### 4. Supabase Masuk
 
-Finally, the validated token is sent to Supabase:
+Terakhir, token yang divalidasi dikirim ke Supabase:
 
 ```typescript
 const { data, error } = await supabase.auth.signInWithIdToken({
@@ -179,27 +177,26 @@ const { data, error } = await supabase.auth.signInWithIdToken({
 });
 ```
 
-## Complete Code Reference
+## Referensi Kode Lengkap
 
-The complete implementation is available in the [example app's `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) file, which includes:
+Implementasi lengkapnya tersedia di file [aplikasi contoh `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts), yang meliputi:
 
-- `getUrlSafeNonce()` - Generates URL-safe random nonce
-- `sha256Hash()` - Hashes string with SHA-256
-- `getNonce()` - Generates nonce pair
-- `decodeJWT()` - Decodes JWT token
-- `validateJWTToken()` - Validates JWT audience and nonce
-- `authenticateWithGoogleSupabase()` - Main authentication function with automatic retry
+- `getUrlSafeNonce()` - Menghasilkan nonce acak yang aman untuk URL
+- `sha256Hash()` - Hash string dengan SHA-256
+- `getNonce()` - Menghasilkan pasangan nonce
+- `decodeJWT()` - Mendekode token JWT
+- `validateJWTToken()` - Memvalidasi JWT audiens dan nonce
+- `authenticateWithGoogleSupabase()` - Fungsi otentikasi utama dengan coba lagi otomatis
 
-### Additional Example Files
+### File Contoh Tambahan
 
-- [SupabasePage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabasePage.tsx) - Example component with redirect handling (Web)
-- [SupabaseCreateAccountPage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabaseCreateAccountPage.tsx) - Example create account page
+- [SupabasePage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabasePage.tsx) - Contoh komponen dengan penanganan pengalihan (Web)
+- [SupabaseCreateAccountPage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabaseCreateAccountPage.tsx) - Contoh halaman pembuatan akun
 
-## Next Steps
+## Langkah Selanjutnya
 
-Please proceed to the platform-specific setup guide for your target platform:
+Silakan lanjutkan ke panduan pengaturan khusus platform untuk platform target Anda:
 
-- [Android Setup](../android/)
-- [iOS Setup](../ios/)
-- [Web Setup](../web/)
-
+- [Android Pengaturan](../android/)
+- [iOS Pengaturan](../ios/)
+- [Pengaturan Web](../web/)

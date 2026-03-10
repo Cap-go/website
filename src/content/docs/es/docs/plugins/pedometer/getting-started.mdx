@@ -1,42 +1,43 @@
 ---
-title: "Getting Started with Pedometer"
-description: "Learn how to integrate step counting and fitness tracking into your Capacitor app"
+title: Primeros pasos con el podómetro
+description: >-
+  Aprenda cómo integrar el conteo de pasos y el seguimiento del estado físico en
+  su aplicación Capacitor
 locale: es
 ---
+Esta guía lo guiará en la integración del complemento Capacitor Podómetro en su aplicación.
 
-This guide will walk you through integrating the Capacitor Pedometer plugin into your application.
+## Instalación
 
-## Installation
-
-Install the plugin using npm:
+Instale el complemento usando npm:
 
 ```bash
 npm install @capgo/capacitor-pedometer
 npx cap sync
 ```
 
-## iOS Configuration
+## iOS Configuración
 
-Add motion usage description to your `Info.plist`:
+Agregue una descripción de uso de movimiento a su `Info.plist`:
 
 ```xml
 <key>NSMotionUsageDescription</key>
 <string>We need access to your motion data to track steps and activity</string>
 ```
 
-## Android Configuration
+## Android Configuración
 
-The plugin automatically adds the `ACTIVITY_RECOGNITION` permission. For Android 10+ (API 29), you need to request this permission at runtime.
+El complemento agrega automáticamente el permiso `ACTIVITY_RECOGNITION`. Para Android 10+ (API 29), debe solicitar este permiso en tiempo de ejecución.
 
-## Basic Usage
+## Uso básico
 
-### Import the Plugin
+### Importar el complemento
 
 ```typescript
 import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
 ```
 
-### Check Availability
+### Consultar disponibilidad
 
 ```typescript
 const checkPedometer = async () => {
@@ -49,7 +50,7 @@ const checkPedometer = async () => {
 };
 ```
 
-### Request Permissions
+### Solicitar permisos
 
 ```typescript
 const requestPermission = async () => {
@@ -58,7 +59,7 @@ const requestPermission = async () => {
 };
 ```
 
-### Get Current Measurements
+### Obtener mediciones actuales
 
 ```typescript
 const getMeasurements = async () => {
@@ -74,7 +75,7 @@ const getMeasurements = async () => {
 };
 ```
 
-### Start Real-time Updates
+### Iniciar actualizaciones en tiempo real
 
 ```typescript
 // Add listener for real-time updates
@@ -89,14 +90,14 @@ CapacitorPedometer.addListener('measurement', (data) => {
 await CapacitorPedometer.startMeasurementUpdates();
 ```
 
-### Stop Updates
+### Detener actualizaciones
 
 ```typescript
 await CapacitorPedometer.stopMeasurementUpdates();
 CapacitorPedometer.removeAllListeners();
 ```
 
-## Complete Example
+## Ejemplo completo
 
 ```typescript
 import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
@@ -165,17 +166,17 @@ await pedometer.initialize();
 await pedometer.startTracking();
 ```
 
-## Best Practices
+## Mejores prácticas
 
-1. **Check Availability**: Always verify pedometer features before use
-2. **Request Permissions**: Handle permission requests gracefully
-3. **Battery Optimization**: Stop updates when not needed
-4. **Error Handling**: Wrap calls in try-catch blocks
-5. **Background Updates**: Configure background modes for continuous tracking
+1. **Verificar disponibilidad**: Verifique siempre las características del podómetro antes de usarlo
+2. **Solicitar permisos**: Maneje las solicitudes de permiso con elegancia
+3. **Optimización de la batería**: detenga las actualizaciones cuando no sean necesarias
+4. **Manejo de errores**: envuelve llamadas en bloques try-catch
+5. **Actualizaciones en segundo plano**: configure modos en segundo plano para un seguimiento continuo
 
-## Common Issues
+## Problemas comunes
 
-### Permission Denied
+### Permiso denegado
 
 ```typescript
 const handlePermissionDenied = async () => {
@@ -187,7 +188,7 @@ const handlePermissionDenied = async () => {
 };
 ```
 
-### Not Available on Device
+### No disponible en el dispositivo
 
 ```typescript
 const checkSupport = async () => {
@@ -202,8 +203,8 @@ const checkSupport = async () => {
 };
 ```
 
-## Next Steps
+## Próximos pasos
 
-- Explore the [API Reference](https://github.com/Cap-go/capacitor-pedometer#api) for complete documentation
-- Check out the [example app](https://github.com/Cap-go/capacitor-pedometer/tree/main/example)
-- See the [tutorial](/plugins/capacitor-pedometer) for advanced implementation
+- Explore la [API Referencia](https://github.com/Cap-go/capacitor-pedometer#api) para obtener documentación completa
+- Consulte la [aplicación de ejemplo](https://github.com/Cap-go/capacitor-pedometer/tree/main/example)
+- Consulte el [tutorial](/plugins/capacitor-pedometer) para una implementación avanzada.

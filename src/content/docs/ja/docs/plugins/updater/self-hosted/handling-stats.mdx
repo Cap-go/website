@@ -1,26 +1,23 @@
 ---
-title: Statistics API
-description: >-
-  How to use the statistics endpoint of Capgo with the auto-update plugin in
-  self-hosted mode, what they are used for and what to expect
+title: 統計 API
+description: セルフホスト モードの自動更新プラグインで Capgo の統計エンドポイントを使用する方法、その用途と期待するもの
 sidebar:
   order: 7
 locale: ja
 ---
-
 import { LinkCard, CardGrid, Aside } from '@astrojs/starlight/components';
 
-## Statistics API
+## 統計 API
 
-Starting from version 1.3.0 the update system is able to send stats!
+バージョン 1.3.0 から、更新システムは統計情報を送信できるようになりました。
 
-By default, all stats are sent to our server, to understand usage and research. 
+デフォルトでは、使用状況を把握し調査するために、すべての統計情報がサーバーに送信されます。 
 
 <Aside>
-No private data is sent for stats, only random UUID, version update, version native app, platform, action, and app ID.
+統計情報についてはプライベート データは送信されず、ランダムな UUID、バージョン更新、ネイティブ アプリのバージョン、プラットフォーム、アクション、アプリ ID のみが送信されます。
 </Aside>
 
-If you want to send this data to your server instead, change the config below:
+代わりにこのデータをサーバーに送信したい場合は、以下の構成を変更します。
 
 ```tsx
 // capacitor.config.json
@@ -35,9 +32,9 @@ If you want to send this data to your server instead, change the config below:
 }
 ```
 
-## Data Structure
+## データ構造
 
-What your server will receive is:
+サーバーが受け取るものは次のとおりです。
 
 ```tsx
 interface AppInfosStats {
@@ -45,7 +42,7 @@ interface AppInfosStats {
 	// Then it's the same info as update
 	"app_id": "**.***.**", // app identifier in the store
 	"device_id": "*******", // unique id per app install
-	"platform": "ios", // or android
+	"platform": "ios", // or android, or electron
 	"custom_id": "user_1", // represent your user
         "version_name": "1.2.3", // version of the web build
         "version_build": "1.2.0", // version of the native build
@@ -57,21 +54,21 @@ interface AppInfosStats {
 }
 ```
 
-You can also totally disable it, with an empty string. Keep in mind, statistics are made private friendly and help me to understand how people use the plugin, to resolve issues and improve it.
+空の文字列を使用して完全に無効にすることもできます。統計は非公開で作成されており、問題を解決して改善するために人々がプラグインをどのように使用しているかを理解するのに役立ちます。
 
-## 更新がない場合の期待される挙動
+## 予想される「更新なし」の動作
 
-更新エンドポイントに新しいバージョンがない場合は、次のようなエラーペイロードで応答する必要があります:
+更新エンドポイントに **新しいバージョンがない**場合、次のようなエラー ペイロードで応答する必要があります。
 
 ```json
 { "error": "no_new_version_available", "message": "No new version available" }
 ```
 
-`error` コードは必ず `no_new_version_available` にしてください。`message` は任意の文字列で構いません（ログ/デバッグ用）。これは期待される挙動で、HTTP `200` で返します。`url` なしの `200` を返すと、プラグインはダウンロード失敗として扱い `download_fail` を送信します。
+`error` コードは正確に `no_new_version_available` である必要があります。 `message` には任意の文字列を指定できます (ロギング/デバッグのみに使用されます)。これは予期された動作であり、引き続き HTTP `200` で返されます。更新エンドポイントが `url` なしで `200` 応答を返した場合、プラグインはそれをダウンロードの失敗として扱い、`download_fail` 統計を送信します。
 
-## Implementation Example
+## 実装例
 
-Here is an example of code in JavaScript to save the stats of the plugin:
+プラグインの統計を保存するための JavaScript のコードの例を次に示します。
 
 ```typescript
 interface AppInfos {
@@ -132,6 +129,7 @@ interface AppInfos {
           'rateLimited' |
           'disableAutoUpdate' |
           'InvalidIp' |
+          'keyMismatch' |
           'blocked_by_server_url'
   version_build: string
   version_code: string
@@ -172,20 +170,20 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-This endpoint should return a JSON:
+このエンドポイントは JSON を返す必要があります。
 
 ```json
 { "status": "ok" }
 ```
 
-## Actions
+## アクション
 
-For detailed descriptions of all action codes and their meanings, please refer to the debugging documentation:
+すべてのアクション コードとその意味の詳細な説明については、デバッグ ドキュメントを参照してください。
 
-* **Actions sent from the device**: See the [debugging documentation - Sent from the device](/docs/plugins/updater/debugging/#sent-from-the-device) section
-* **Actions sent from the backend**: See the [debugging documentation - Sent from the backend](/docs/plugins/updater/debugging/#sent-from-the-backend) section
+* **デバイスから送信されるアクション**: [デバッグ ドキュメント - デバイスから送信される](/docs/plugins/updater/debugging/#sent-from-the-device) セクションを参照してください。
+* **バックエンドから送信されるアクション**: [デバッグ ドキュメント - バックエンドから送信される](/docs/plugins/updater/debugging/#sent-from-the-backend) セクションを参照してください。
 
 <LinkCard
-	title="Handling Updates"
+	title="アップデートの処理"
 	href="/docs/plugin/self-hosted/handling-updates/"
 />

@@ -1,18 +1,20 @@
 ---
-title: "Organisationen"
-locale: de
-description: "Leitfaden zur Verwaltung von Organisationen in Capgo, einschließlich Erstellung, Einstellungen, Updates und Abruf von Organisationsdetails."
+title: Organizations
+description: >-
+  Leitfaden zur Verwaltung von Organisationen in Capgo, der die Erstellung,
+  Einstellungen, Aktualisierungen und den Abruf von Organisationsdetails
+  umfasst.
 sidebar:
   order: 2
+locale: de
 ---
-
-Organisationen sind die obersten Entitäten in Capgo. Sie ermöglichen es Ihnen, Apps, Teammitglieder und Ressourcen unter einem einzigen Dach zu gruppieren. Jede Organisation kann mehrere Mitglieder mit unterschiedlichen Rollen und Berechtigungen haben.
+Organisationen sind die Entitäten der obersten Ebene in Capgo. Sie ermöglichen Ihnen, Apps, Teammitglieder und Ressourcen unter einem einzigen Dach zu gruppieren. Jede Organisation kann mehrere Mitglieder mit unterschiedlichen Rollen und Berechtigungen haben.
 
 ## Häufige Anwendungsfälle
 
 - Erstellen einer neuen Organisation für Ihr Unternehmen
-- Verwalten von Organisationseinstellungen
-- Aktualisieren von Organisationsinformationen
+- Organisationseinstellungen verwalten
+- Aktualisierung der Organisationsinformationen
 - Abrufen von Organisationsdetails
 
 ## Endpunkte
@@ -21,13 +23,13 @@ Organisationen sind die obersten Entitäten in Capgo. Sie ermöglichen es Ihnen,
 
 `https://api.capgo.app/organization/`
 
-Ruft Organisationsinformationen ab. Wenn `orgId` in den Parametern angegeben wird, wird eine einzelne Organisation zurückgegeben. Andernfalls werden alle zugänglichen Organisationen zurückgegeben.
+Rufen Sie Organisationsinformationen ab. Wenn `orgId` in den Parametern angegeben ist, wird eine einzelne Organisation zurückgegeben. Andernfalls werden alle zugänglichen Organisationen zurückgegeben.
 
-#### Query-Parameter
+#### Abfrageparameter
 
-- `orgId` (optional): Die ID der spezifischen Organisation, die abgerufen werden soll
+- `orgId` (optional): Die ID der spezifischen abzurufenden Organisation
 
-#### Response-Typ
+#### Antworttyp
 
 ```typescript
 interface Organization {
@@ -42,17 +44,17 @@ interface Organization {
 }
 ```
 
-#### Beispiel-Anfrage
+#### Beispielanfrage
 
 ```bash
-# Alle Organisationen abrufen
+# Get all organizations
 curl -H "authorization: your-api-key" https://api.capgo.app/organization/
 
-# Spezifische Organisation abrufen
+# Get specific organization
 curl -H "authorization: your-api-key" https://api.capgo.app/organization/?orgId=org_123
 ```
 
-#### Beispiel-Antwort
+#### Beispielantwort
 
 ```json
 {
@@ -72,9 +74,9 @@ curl -H "authorization: your-api-key" https://api.capgo.app/organization/?orgId=
 
 `https://api.capgo.app/organization/`
 
-Erstellt eine neue Organisation.
+Erstellen Sie eine neue Organisation.
 
-#### Request-Body
+#### Anforderungstext
 
 ```typescript
 interface OrganizationCreate {
@@ -82,7 +84,7 @@ interface OrganizationCreate {
 }
 ```
 
-#### Beispiel-Anfrage
+#### Beispielanfrage
 
 ```bash
 curl -X POST \
@@ -94,7 +96,7 @@ curl -X POST \
   https://api.capgo.app/organization/
 ```
 
-#### Example Response
+#### Beispielantwort
 
 ```json
 {
@@ -107,9 +109,9 @@ curl -X POST \
 
 `https://api.capgo.app/organization/`
 
-Update an existing organization. Requires admin role.
+Aktualisieren Sie eine vorhandene Organisation. Erfordert die Rolle eines Administrators.
 
-#### Request Body
+#### Anforderungstext
 
 ```typescript
 interface OrganizationUpdate {
@@ -120,7 +122,7 @@ interface OrganizationUpdate {
 }
 ```
 
-#### Example Request
+#### Beispielanfrage
 
 ```bash
 curl -X PUT \
@@ -134,7 +136,7 @@ curl -X PUT \
   https://api.capgo.app/organization/
 ```
 
-#### Example Response
+#### Beispielantwort
 
 ```json
 {
@@ -147,17 +149,17 @@ curl -X PUT \
 }
 ```
 
-### DELETE
+### LÖSCHEN
 
 `https://api.capgo.app/organization/`
 
-Delete an existing organization. Requires admin role. This action is irreversible and will remove all associated apps, versions, and resources.
+Löschen Sie eine vorhandene Organisation. Erfordert die Rolle eines Administrators. Diese Aktion ist irreversibel und entfernt alle zugehörigen Apps, Bundles (Versionen) und Ressourcen.
 
-#### Query Parameters
+#### Abfrageparameter
 
-- `orgId`: The ID of the organization to delete
+- `orgId`: Die ID der zu löschenden Organisation
 
-#### Example Request
+#### Beispielanfrage
 
 ```bash
 curl -X DELETE \
@@ -165,7 +167,7 @@ curl -X DELETE \
   https://api.capgo.app/organization/?orgId=org_123
 ```
 
-#### Example Response
+#### Beispielantwort
 
 ```json
 {
@@ -174,9 +176,9 @@ curl -X DELETE \
 }
 ```
 
-## Error Handling
+## Fehlerbehandlung
 
-Common error scenarios and their responses:
+Häufige Fehlerszenarien und ihre Antworten:
 
 ```json
 // Invalid API key
@@ -198,9 +200,9 @@ Common error scenarios and their responses:
 }
 ```
 
-## Best Practices
+## Bewährte Methoden
 
-1. **Naming**: Use clear, descriptive names for organizations
-2. **Roles**: Assign appropriate roles to team members
-3. **Email**: Use a group email for management_email to avoid issues with personal email changes
-4. **Logo**: Host logos on a reliable CDN and use HTTPS URLs 
+1. **Benennung**: Verwenden Sie klare, aussagekräftige Namen für Organisationen
+2. **Rollen**: Weisen Sie den Teammitgliedern entsprechende Rollen zu
+3. **E-Mail**: Verwenden Sie eine Gruppen-E-Mail für „management_email“, um Probleme mit persönlichen E-Mail-Änderungen zu vermeiden
+4. **Logo**: Hosten Sie Logos auf einem zuverlässigen CDN und verwenden Sie HTTPS-URLs

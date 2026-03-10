@@ -1,45 +1,48 @@
 ---
-locale: fr
-title: "@capgo/capacitor-photo-library"
-description: Browse and select photos with efficient paging, thumbnails, and cached URLs.
+title: '@capgo/capacitor-photo-library'
+description: >-
+  Parcourez et sélectionnez des photos avec une pagination efficace, des
+  vignettes et des URL en cache.
 tableOfContents: false
 next: false
 prev: false
-sidebar: 
+sidebar:
   order: 1
-  label: "Introduction"
-hero: 
-  tagline: Construction custom galleries that tap into the Natif photo library with robust authorization flows.
-  image: 
+  label: Introduction
+hero:
+  tagline: >-
+    Créez des galeries personnalisées qui exploitent la photothèque native avec
+    des flux d'autorisation robustes.
+  image:
     file: ~public/icons/plugins/photo-library.svg
-  actions: 
-    - text: Get started
+  actions:
+    - text: Commencer
       link: /docs/plugins/photo-library/getting-started/
       icon: right-arrow
       variant: primary
     - text: Github
-      link: https://github.com/Cap-go/capacitor-photo-library/
+      link: 'https://github.com/Cap-go/capacitor-photo-library/'
       icon: external
       variant: minimal
+locale: fr
 ---
-
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-Capgo Photo Library helps you list albums, page through assets, and request thumbnails while keeping performance in Vérifier.
+La bibliothèque de photos Capgo vous aide à répertorier les albums, à parcourir les ressources et à demander des miniatures tout en contrôlant les performances.
 
 <CardGrid stagger>
-  <Card title="Authorization helpers" icon="approve-check">
-    Request permissions and handle limited access states gracefully.
+  <Card title="Aides à l'autorisation" icon="approve-check">
+    Demandez des autorisations et gérez les états d’accès limités avec élégance.
   </Card>
-  <Card title="Paged fetching" icon="rocket">
-    Paginate the gallery with cursor-based loading and customizable limits.
+  <Card title="Récupération paginée" icon="rocket">
+    Paginez la galerie avec un chargement basé sur le curseur et des limites personnalisables.
   </Card>
-  <Card title="Optimized thumbnails" icon="star">
-    Fetch thumbnail URLs at fixed dimensions for smooth scrolling lists.
+  <Card title="Miniatures optimisées" icon="star">
+    Récupérez les URL miniatures à dimensions fixes pour des listes à défilement fluide.
   </Card>
-  <Card title="Media picking" icon="download">
-    Let Utilisateurs select photos or videos with configurable selection limits.
+  <Card title="Sélection des médias" icon="download">
+    Permettez aux utilisateurs de sélectionner des photos ou des vidéos avec des limites de sélection configurables.
   </Card>
 </CardGrid>
 
-Vérifier the Commencer Guide for permission Configuration and gallery Exemples.
+Consultez le guide de démarrage pour connaître la configuration des autorisations et des exemples de galerie.

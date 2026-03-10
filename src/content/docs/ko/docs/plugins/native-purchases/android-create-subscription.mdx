@@ -1,111 +1,108 @@
 ---
-title: Create Android Auto-Renewable Subscription
-description: >-
-  Step-by-step guide to creating auto-renewable subscriptions in Google Play
-  Console for the native-purchases plugin.
+title: Android 자동 갱신 구독 생성
+description: 기본 구매 플러그인용 Google Play 콘솔에서 자동 갱신 구독을 생성하는 방법에 대한 단계별 가이드입니다.
 sidebar:
   order: 4
 locale: ko
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 
-Auto-renewable subscriptions provide access to content, services, or premium features in your app on an ongoing basis. This guide will help you create and configure subscriptions in Google Play Console.
+자동 갱신 구독을 통해 앱의 콘텐츠, 서비스 또는 프리미엄 기능에 지속적으로 액세스할 수 있습니다. 이 가이드는 Google Play 콘솔에서 구독을 생성하고 구성하는 데 도움이 됩니다.
 
-## Overview
+## 개요
 
-Subscriptions automatically renew at the end of each billing period until the user cancels. They're ideal for:
-- Premium content access
-- Ad-free experiences
-- Cloud storage
-- Ongoing services
+구독은 사용자가 취소할 때까지 각 결제 기간이 끝날 때 자동으로 갱신됩니다. 다음과 같은 경우에 이상적입니다.
+- 프리미엄 콘텐츠 이용
+- 광고 없는 경험
+- 클라우드 스토리지
+- 지속적인 서비스
 
-## Creating a Subscription
+## 구독 만들기
 
 <Steps>
 
-1. **Navigate to Subscriptions**
+1. **구독으로 이동**
 
-   In Google Play Console, select your app and choose **Monetize > Subscriptions** from the left menu.
+   Google Play 콘솔에서 앱을 선택하고 왼쪽 메뉴에서 **수익 창출 > 구독**을 선택합니다.
 
-   Click the **Create subscription** button to begin.
+   시작하려면 **구독 만들기** 버튼을 클릭하세요.
 
-   ![Navigate to subscriptions](/native-purchases/android/create-subscription/navigate-to-subscriptions.webp)
+   ![구독으로 이동](/native-purchases/android/create-subscription/navigate-to-subscriptions.webp)
 
-2. **Enter Basic Information**
+2. **기본정보 입력**
 
-   Provide a subscription name and product ID. The product ID is required for configuration in your app and cannot be changed later.
+   구독 이름과 제품 ID를 제공하세요. 제품 ID는 앱 구성에 필요하며 나중에 변경할 수 없습니다.
 
-   ![Enter subscription details](/native-purchases/android/create-subscription/enter-subscription-details.webp)
+   ![구독 세부정보 입력](/native-purchases/android/create-subscription/enter-subscription-details.webp)
 
-3. **Create Base Plan**
+3. **기본 계획 생성**
 
-   Google Play requires exactly one base plan per subscription. The native-purchases plugin supports only one base plan to maintain compatibility with iOS.
+   Google Play에는 구독당 정확히 하나의 기본 요금제가 필요합니다. 기본 구매 플러그인은 iOS과의 호환성을 유지하기 위해 하나의 기본 계획만 지원합니다.
 
-   Click **Add base plan** to continue.
+   계속하려면 **기본 요금제 추가**를 클릭하세요.
 
-   ![Create base plan](/native-purchases/android/create-subscription/create-base-plan.webp)
+   ![기본 계획 만들기](/native-purchases/android/create-subscription/create-base-plan.webp)
 
-4. **Configure Base Plan Details**
+4. **기본 요금제 세부정보 구성**
 
-   Enter:
-   - **Base plan ID**: Unique identifier for this plan
-   - **Billing period**: How often users are charged (weekly, monthly, yearly, etc.)
-   - **Grace period**: Time window during which Google maintains the subscription while retrying payment before cancellation
+   입력:
+   - **기본 요금제 ID**: 이 요금제의 고유 식별자
+   - **청구 기간**: 사용자에게 청구되는 빈도(주간, 월간, 연간 등)
+   - **유예 기간**: 취소 전 결제를 재시도하면서 Google이 구독을 유지하는 기간입니다.
 
-   ![Configure base plan](/native-purchases/android/create-subscription/configure-base-plan-details.webp)
+   ![기본 요금제 구성](/native-purchases/android/create-subscription/configure-base-plan-details.webp)
 
-5. **Set Up Pricing**
+5. **가격 설정**
 
-   Access the pricing section and select all countries/regions where you want to offer the subscription.
+   가격 섹션에 액세스하여 구독을 제공하려는 모든 국가/지역을 선택하세요.
 
-   ![Select regions](/native-purchases/android/create-subscription/select-pricing-regions.webp)
+   ![지역 선택](/native-purchases/android/create-subscription/select-pricing-regions.webp)
 
-6. **Configure Price**
+6. **가격 구성**
 
-   Set your base price in your primary currency. Google Play automatically converts this to local currencies.
+   기본 통화로 기본 가격을 설정하세요. Google Play은(는) 이를 현지 통화로 자동 변환합니다.
 
-   ![Set price](/native-purchases/android/create-subscription/set-base-price.webp)
+   ![가격 설정](/native-purchases/android/create-subscription/set-base-price.webp)
 
-7. **Review Regional Pricing**
+7. **지역별 가격 검토**
 
-   Review the automatically converted prices for each country. You can adjust individual prices if needed.
+   국가별로 자동 변환된 가격을 검토하세요. 필요한 경우 개별 가격을 조정할 수 있습니다.
 
-   ![Review pricing](/native-purchases/android/create-subscription/review-regional-pricing.webp)
+   ![가격 검토](/native-purchases/android/create-subscription/review-regional-pricing.webp)
 
-8. **Save Configuration**
+8. **구성 저장**
 
-   Save your pricing configuration.
+   가격 구성을 저장하세요.
 
-   ![Save pricing](/native-purchases/android/create-subscription/save-pricing-configuration.webp)
+   ![가격 저장](/native-purchases/android/create-subscription/save-pricing-configuration.webp)
 
-9. **Activate Subscription**
+9. **구독 활성화**
 
-   Click the **Activate** button to make your subscription product live and available for purchase.
+   구독 제품을 활성화하고 구매할 수 있게 하려면 **활성화** 버튼을 클릭하세요.
 
-   ![Activate subscription](/native-purchases/android/create-subscription/activate-subscription.webp)
+   ![구독 활성화](/native-purchases/android/create-subscription/activate-subscription.webp)
 
 </Steps>
 
-## Important Considerations
+## 중요 고려사항
 
-### Base Plan Limitation
+### 기본 요금제 제한
 
-The native-purchases plugin requires exactly one base plan per subscription to ensure consistency with iOS subscription handling. Multiple base plans are not supported.
+기본 구매 플러그인에는 iOS 구독 처리와의 일관성을 보장하기 위해 구독당 정확히 하나의 기본 계획이 필요합니다. 여러 기본 요금제는 지원되지 않습니다.
 
-### Grace Period
+### 유예 기간
 
-The grace period allows Google Play to retry failed payments while maintaining the user's subscription access. Common grace periods are:
-- 3 days for monthly subscriptions
-- 7 days for longer subscriptions
+유예 기간을 통해 Google Play은 사용자의 구독 액세스를 유지하면서 실패한 결제를 다시 시도할 수 있습니다. 일반 유예 기간은 다음과 같습니다.
+- 월간 구독의 경우 3일
+- 장기 구독의 경우 7일
 
-### Subscription Status
+### 구독 상태
 
-After creation, your subscription will be in "Draft" status until activated. You can test draft subscriptions in sandbox mode.
+생성 후 구독은 활성화될 때까지 "초안" 상태로 유지됩니다. 샌드박스 모드에서 초안 구독을 테스트할 수 있습니다.
 
-## Using in Your App
+## 앱에서 사용하기
 
-Once created, reference the subscription in your app using the product ID:
+구독이 생성되면 제품 ID를 사용하여 앱에서 구독을 참조하세요.
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -143,26 +140,24 @@ if (subscription && subscription.purchaseState === 'PURCHASED' && subscription.i
 }
 ```
 
-## Next Steps
+## 다음 단계- 신규 구독자를 유치하기 위한 [소개 제안 만들기](/docs/plugins/native-purchases/android-introductory-offer/)
+- 구독 테스트를 위한 [샌드박스 테스트 구성](/docs/plugins/native-purchases/android-sandbox-testing/)
+- 보안을 위해 백엔드 영수증 검증 설정
 
-- [Create an introductory offer](/docs/plugins/native-purchases/android-introductory-offer/) to attract new subscribers
-- [Configure sandbox testing](/docs/plugins/native-purchases/android-sandbox-testing/) to test your subscriptions
-- Set up backend receipt validation for security
+## 문제 해결
 
-## Troubleshooting
+**구독이 앱에 표시되지 않음:**
+- 상품ID가 정확히 일치하는지 확인하세요.
+- 구독이 활성화되었는지 확인하세요.
+- 앱의 패키지 이름이 올바른지 확인하세요.
+- 변경사항이 적용되려면 활성화 후 2~3시간 정도 기다립니다.
 
-**Subscription not appearing in app:**
-- Verify the product ID matches exactly
-- Ensure the subscription is activated
-- Check that your app has the correct package name
-- Wait 2-3 hours after activation for changes to propagate
+**기본 요금제 오류:**
+- 정확히 하나의 기본 계획이 있는지 확인하세요.
+- 모든 필수 필드가 채워졌는지 확인하세요.
+- 청구기간이 유효한지 확인하세요.
 
-**Base plan errors:**
-- Ensure you have exactly one base plan
-- Verify all required fields are filled
-- Check that billing period is valid
-
-**Pricing issues:**
-- Confirm at least one country is selected
-- Verify base price is greater than minimum allowed
-- Check currency conversion rates are acceptable
+**가격 문제:**
+- 국가가 하나 이상 선택되어 있는지 확인하세요.
+- 기본 가격이 허용되는 최소 가격보다 높은지 확인하세요.
+- 통화 환율이 허용되는지 확인하세요.

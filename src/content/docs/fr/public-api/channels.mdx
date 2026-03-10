@@ -1,67 +1,70 @@
 ---
-locale: fr
-title: "Canaux"
-description: "Guide to managing Application Mise à jour Canaux in Capgo, covering Version control, platform targeting, and Mise à jour policies."
-sidebar: 
+title: Channels
+description: >-
+  Guide de gestion des canaux de mise à jour des applications dans Capgo,
+  couvrant le contrôle des bundles (versions), le ciblage des plates-formes et
+  les politiques de mise à jour.
+sidebar:
   order: 6
+locale: fr
 ---
+Les canaux constituent le mécanisme principal de gestion des mises à jour des applications dans Capgo. Ils vous permettent de contrôler comment et quand vos utilisateurs reçoivent les mises à jour, en activant des fonctionnalités telles que les tests A/B, les déploiements par étapes et les mises à jour spécifiques à la plate-forme.
 
-Canaux are the core mechanism for managing Application Mises à jour in Capgo. They allow you to control how and when your Utilisateurs receive Mises à jour, enabling Fonctionnalités like A/B Test, staged rollouts, and platform-specific Mises à jour.
+## Comprendre les chaînes
 
-## Understanding Canaux
+Un canal représente une piste de distribution pour les mises à jour de votre application. Chaque canal peut être configuré avec des règles et contraintes spécifiques :
 
-A Canal represents a distribution track for your Application Mises à jour. Each Canal can be configured with specific rules and constraints:
+- **Contrôle du bundle (version)** : spécifiez quel bundle (version) les utilisateurs reçoivent
+- **Ciblage de plates-formes** : ciblez des plates-formes spécifiques (iOS/Android/Electron)
+- **Politiques de mise à jour** : contrôlez la manière dont les mises à jour sont fournies
+- **Restrictions relatives aux appareils** : gérez quels appareils peuvent accéder aux mises à jour
 
-- **Version Control**: Specify which Version Utilisateurs receive
-- **Platform Targeting**: Target specific platforms (iOS/Android)
-- **Mise à jour Policies**: Control how Mises à jour are delivered
-- **Appareil Restrictions**: Manage which Appareils can access Mises à jour
+## Options de configuration des canaux
 
-## Canal Configuration Options
+- **public** : définir comme canal par défaut pour les nouveaux appareils
+- **disableAutoUpdateUnderNative** : empêche les mises à jour lorsque la version de l'application native de l'appareil est plus récente que le bundle de mise à jour (version) disponible dans le canal (par exemple, l'appareil utilise la version 1.2.3 de l'application native, mais le canal possède un bundle (version) 1.2.2)
+- **disableAutoUpdate** : contrôle le comportement de la mise à jour ("majeur", "mineur", "numéro_version", "aucun")
+- **ios/android/electron** : activer/désactiver pour des plates-formes spécifiques
+- **allow_device_self_set** : laissez les appareils choisir leur canal
+- **allow_emulator** : Autoriser les mises à jour sur les appareils émulateurs
+- **allow_dev** : Autoriser les mises à jour sur les versions de développement
 
-- **public**: Set as default Canal for Nouveau Appareils
-- **disableAutoUpdateUnderNative**: Prevent Mises à jour when the Appareil's Natif Application Version is newer than the Mise à jour Version Disponible in the Canal (e.g., Appareil is on Version 1.2.3, but Canal has 1.2.2)
-- **disableAutoUpdate**: Control Mise à jour behavior ("major", "minor", "version_number", "none")
-- **iOS/Android**: Activer/Désactiver for specific platforms
-- **allow_device_self_set**: Let Appareils choose their Canal
-- **allow_emulator**: Allow Mises à jour on emulator Appareils
-- **allow_dev**: Allow Mises à jour on Développement builds
+## meilleures pratiques
 
-## Best Practices
+1. **Canal de test** : maintenez un canal de test pour la validation interne
+2. **Déploiement par étapes** : utilisez plusieurs canaux pour un déploiement progressif des mises à jour
+3. **Séparation de plate-forme** : créez des canaux séparés pour iOS, Android et Electron si nécessaire.
+4. **Bundle (version) Control** : utilisez le versioning sémantique pour des chemins de mise à jour clairs
 
-1. **Test Canal**: Maintain a Test Canal for internal validation
-2. **Staged Rollout**: Use multiple Canaux for gradual Mise à jour Déploiement
-3. **Platform Separation**: Créer separate Canaux for iOS and Android when needed
-4. **Version Control**: Use semantic versioning for clear Mise à jour paths
+## Points de terminaison
 
-## Endpoints
-
-### POST
+### POSTER
 
 `https://api.capgo.app/channel/`
 
-Créer or Mise à jour a Canal Configuration.
+Créez ou mettez à jour une configuration de canal.
 
-#### Request Body
+#### Corps de la demande
 
 ```typescript
 type disable_update = "major" | "minor" | "version_number" | "none"
 interface ChannelSet {
   app_id: string
   channel: string
-  version?: string
+  version?: string // bundle (version) name
   public?: boolean
   disableAutoUpdateUnderNative?: boolean
   disableAutoUpdate?: disable_update
   ios?: boolean
   android?: boolean
+  electron?: boolean
   allow_device_self_set?: boolean
   allow_emulator?: boolean
   allow_dev?: boolean
 }
 ```
 
-#### Exemple Request
+#### Exemple de demande
 
 ```bash
 curl -X POST \
@@ -75,12 +78,13 @@ curl -X POST \
     "disableAutoUpdate": "minor",
     "ios": true,
     "android": true,
+    "electron": true,
     "allow_emulator": true
   }' \
   https://api.capgo.app/channel/
 ```
 
-#### Succès Response
+#### Réponse réussie
 
 ```json
 {
@@ -88,18 +92,18 @@ curl -X POST \
 }
 ```
 
-### GET
+### OBTENIR
 
 `https://api.capgo.app/channel/`
 
-Retrieve Canal Information. Retourne 50 Canaux per page.
+Récupérer les informations sur la chaîne. Renvoie 50 chaînes par page.
 
-#### Query Paramètres
-- `app_id`: Required. The ID of your app
-- `page`: Optional. Page number for pagination
-- `channel`: Optional. Specific channel name to retrieve
+#### Paramètres de requête
+- `app_id` : obligatoire. L'ID de votre application
+- `page` : Facultatif. Numéro de page pour la pagination
+- `channel` : Facultatif. Nom de chaîne spécifique à récupérer
 
-#### Exemple Requests
+#### Exemples de requêtes
 
 ```bash
 # Get all channels
@@ -115,7 +119,7 @@ curl -H "authorization: your-api-key" \
   "https://api.capgo.app/channel/?app_id=app_123&page=1"
 ```
 
-#### Response Type
+#### Type de réponse
 
 ```typescript
 interface Channel {
@@ -123,7 +127,7 @@ interface Channel {
     created_at: string;
     name: string;
     app_id: string;
-    version: {
+    version: { // bundle (version) assigned to the channel
         id: number,
         name: string
     };
@@ -137,7 +141,9 @@ interface Channel {
 }
 ```
 
-#### Exemple Response
+Dans la réponse ci-dessous, `version` fait référence au bundle (version) attribué au canal.
+
+#### Exemple de réponse
 
 ```json
 {
@@ -163,13 +169,13 @@ interface Channel {
 }
 ```
 
-### Supprimer
+### SUPPRIMER
 
 `https://api.capgo.app/channel/`
 
-Supprimer a Canal. Remarque that this will affect all Appareils using this Canal.
+Supprimer une chaîne. Notez que cela affectera tous les appareils utilisant ce canal.
 
-#### Query Paramètres
+#### Paramètres de requête
 
 ```typescript
 interface Channel {
@@ -178,7 +184,7 @@ interface Channel {
 }
 ```
 
-#### Exemple Request
+#### Exemple de demande
 
 ```bash
 curl -X DELETE \
@@ -191,7 +197,7 @@ curl -X DELETE \
   https://api.capgo.app/channel/
 ```
 
-#### Succès Response
+#### Réponse réussie
 
 ```json
 {
@@ -199,9 +205,9 @@ curl -X DELETE \
 }
 ```
 
-## Erreur Handling
+## Gestion des erreurs
 
-Common Erreur scenarios and their responses:
+Scénarios d'erreur courants et leurs réponses :
 
 ```json
 // Channel not found
@@ -210,7 +216,7 @@ Common Erreur scenarios and their responses:
   "status": "KO"
 }
 
-// Invalid version format
+// Invalid bundle (version) format
 {
   "error": "Invalid version format. Use semantic versioning",
   "status": "KO"
@@ -229,9 +235,9 @@ Common Erreur scenarios and their responses:
 }
 ```
 
-## Common Use Cases
+## Cas d'utilisation courants
 
-1. **Bêta Test**
+1. **Test bêta**
 ```typescript
 {
   "app_id": "app_123",
@@ -243,7 +249,7 @@ Common Erreur scenarios and their responses:
 }
 ```
 
-2. **Production Rollout**
+2. **Déploiement de la production**
 ```typescript
 {
   "app_id": "app_123",
@@ -254,7 +260,7 @@ Common Erreur scenarios and their responses:
 }
 ```
 
-3. **Platform-Specific Mises à jour**
+3. **Mises à jour spécifiques à la plateforme**
 ```typescript
 {
   "app_id": "app_123",
@@ -263,4 +269,4 @@ Common Erreur scenarios and their responses:
   "ios": true,
   "android": false
 }
-``` 
+```

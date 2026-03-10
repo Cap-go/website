@@ -1,28 +1,27 @@
 ---
-title: Getting Started
+title: Memulai
 description: >-
-  Learn how to install and use the Screen Recorder plugin to capture screen
-  recordings in your Capacitor app.
+  Pelajari cara memasang dan menggunakan plugin Perekam Layar untuk merekam
+  rekaman layar di aplikasi Capacitor Anda.
 sidebar:
   order: 2
 locale: id
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Instal paket**
    <PackageManagers pkg="@capgo/capacitor-screen-recorder" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Sinkronisasi dengan proyek asli**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure permissions**
+3. **Konfigurasi izin**
    
    ### iOS
-   Add usage descriptions to your `Info.plist`:
+   Tambahkan deskripsi penggunaan ke `Info.plist` Anda:
    ```xml
    <key>NSMicrophoneUsageDescription</key>
    <string>To record audio with screen recording</string>
@@ -31,7 +30,7 @@ import { PackageManagers } from 'starlight-package-managers'
    ```
    
    ### Android
-   Add permissions to your `AndroidManifest.xml`:
+   Tambahkan izin ke `AndroidManifest.xml` Anda:
    ```xml
    <uses-permission android:name="android.permission.RECORD_AUDIO" />
    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -39,9 +38,9 @@ import { PackageManagers } from 'starlight-package-managers'
    ```
 </Steps>
 
-## Usage
+## Penggunaan
 
-Import the plugin and use its methods to record the screen:
+Impor plugin dan gunakan metodenya untuk merekam layar:
 
 ```typescript
 import { ScreenRecorder } from '@capgo/capacitor-screen-recorder';
@@ -82,19 +81,19 @@ const checkRecordingStatus = async () => {
 };
 ```
 
-## API Reference
+## API Referensi
 
-### start()
+### mulai()
 
-Starts screen recording.
+Memulai perekaman layar.
 
 ```typescript
 await ScreenRecorder.start();
 ```
 
-### stop()
+### berhenti()
 
-Stops recording and returns the video file path.
+Berhenti merekam dan mengembalikan jalur file video.
 
 ```typescript
 interface RecordingResult {
@@ -104,27 +103,27 @@ interface RecordingResult {
 const result = await ScreenRecorder.stop();
 ```
 
-### isSupported()
+### Didukung()
 
-Checks if screen recording is supported on the device.
+Memeriksa apakah perekaman layar didukung pada perangkat.
 
 ```typescript
 const { value } = await ScreenRecorder.isSupported();
 // Returns: { value: boolean }
 ```
 
-### isRecording()
+### sedangRekaman()
 
-Checks if screen recording is currently active.
+Memeriksa apakah perekaman layar sedang aktif.
 
 ```typescript
 const { value } = await ScreenRecorder.isRecording();
 // Returns: { value: boolean }
 ```
 
-## Advanced Usage
+## Penggunaan Lanjutan
 
-### Recording with Options
+### Merekam dengan Opsi
 
 ```typescript
 // iOS-specific options
@@ -139,7 +138,7 @@ const startWithOptions = async () => {
 };
 ```
 
-### Complete Recording Flow
+### Alur Perekaman Lengkap
 
 ```typescript
 import { ScreenRecorder } from '@capgo/capacitor-screen-recorder';
@@ -205,9 +204,9 @@ export class RecordingService {
 }
 ```
 
-## Best Practices
+## Praktik Terbaik
 
-1. **Check support before use**
+1. **Periksa dukungan sebelum digunakan**
    ```typescript
    const { value } = await ScreenRecorder.isSupported();
    if (!value) {
@@ -215,11 +214,11 @@ export class RecordingService {
    }
    ```
 
-2. **Handle permissions properly**
-   On iOS, the system will automatically prompt for permission. On Android, ensure you request necessary permissions.
+2. **Tangani izin dengan benar**
+   Pada iOS, sistem akan secara otomatis meminta izin. Di Android, pastikan Anda meminta izin yang diperlukan.
 
-3. **Provide user feedback**
-   Show clear indicators when recording is active:
+3. **Berikan masukan kepada pengguna**
+   Tampilkan indikator yang jelas saat perekaman aktif:
    ```typescript
    let recordingInterval: any;
    
@@ -238,7 +237,7 @@ export class RecordingService {
    };
    ```
 
-4. **Handle interruptions**
+4. **Menangani gangguan**
    ```typescript
    import { App } from '@capacitor/app';
    
@@ -253,37 +252,37 @@ export class RecordingService {
    });
    ```
 
-## Platform Notes
+## Catatan Platform
 
 ### iOS
-- Requires iOS 11.0+
-- Uses `ReplayKit` framework
-- System shows recording indicator in status bar
-- User must confirm recording start
+- Membutuhkan iOS 11.0+
+- Menggunakan kerangka `ReplayKit`
+- Sistem menunjukkan indikator perekaman di bilah status
+- Pengguna harus mengonfirmasi dimulainya perekaman
 
 ### Android
-- Requires Android 5.0 (API 21)+
-- Uses `MediaProjection` API
-- Shows notification during recording
-- Some devices may have manufacturer-specific limitations
+- Membutuhkan Android 5.0 (API 21)+
+- Menggunakan `MediaProjection` API
+- Menampilkan notifikasi selama perekaman
+- Beberapa perangkat mungkin memiliki batasan khusus pabrikan
 
 ### Web
-- Not supported on web platform
-- Will return `isSupported: false`
+- Tidak didukung pada platform web
+- Akan mengembalikan `isSupported: false`
 
-## Troubleshooting
+## Pemecahan masalah
 
-1. **Recording fails to start**
-   - Ensure all permissions are granted
-   - Check if another app is already recording
-   - Verify device supports screen recording
+1. **Perekaman gagal dimulai**
+   - Pastikan semua izin diberikan
+   - Periksa apakah aplikasi lain sudah merekam
+   - Pastikan perangkat mendukung perekaman layar
 
-2. **No audio in recording**
-   - Check microphone permissions
-   - Ensure `recordAudio` option is enabled
-   - Some devices may not support system audio recording
+2. **Tidak ada audio dalam rekaman**
+   - Periksa izin mikrofon
+   - Pastikan opsi `recordAudio` diaktifkan
+   - Beberapa perangkat mungkin tidak mendukung perekaman audio sistem
 
-3. **Video file not found**
-   - Check file permissions
-   - Ensure sufficient storage space
-   - Verify the returned video URL is valid
+3. **File video tidak ditemukan**
+   - Periksa izin file
+   - Pastikan ruang penyimpanan cukup
+   - Pastikan URL video yang dikembalikan valid

@@ -1,78 +1,75 @@
 ---
-title: Android Play Store Review Guidelines for IAP
-description: >-
-  Complete guide to passing Google Play review with in-app purchases and
-  subscriptions, including compliance requirements and best practices.
+title: Android Play Store IAP のガイドラインを確認する
+description: コンプライアンス要件とベスト プラクティスを含む、アプリ内購入とサブスクリプションで Google Play レビューに合格するための完全なガイド。
 sidebar:
   order: 11
 locale: ja
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 
-Android アプリを Google Play で承認されるには、Google のポリシーに準拠する必要があります。特にアプリ内購入とサブスクリプションがあるアプリの場合です。このガイドはレビューに合格するために必要なすべてをカバーしています。
+Android アプリを Google Play で承認するには、特にアプリ内購入とサブスクリプションのあるアプリの場合、Google のポリシーに準拠する必要があります。このガイドには、審査に合格するために必要なすべてが記載されています。
 
-## Google Play Billing の要件
+## Google Play 請求要件
 
-### 必須の課金システム
+### 必須の請求システム
 
-デジタル商品とサービスについては、**Google Play の課金システムを使用する必要があります**:
+デジタル商品やサービスの場合は、Google Play の課金システムを**使用する必要があります**。
 
-**デジタル商品 (Play Billing が必須):**
-- プレミアム機能へのサブスクリプション
+**デジタルグッズ (Play Billing を使用する必要があります):**
+- プレミアム機能のサブスクリプション
 - アプリ内通貨またはクレジット
-- デジタルコンテンツ (電子書籍、音楽、ビデオ)
+- デジタル コンテンツ (電子書籍、音楽、ビデオ)
 - ゲームのアップグレードとパワーアップ
-- アプリのロック解除とプレミアムティア
+- アプリのロック解除とプレミアム層
 
-**物理商品 (Play Billing は使用できません):**
+**物理的な商品 (Play Billing は使用できません):**
 - 物理的な商品
-- 実世界のサービス
-- 非営利団体への1回限りの寄付
+- 現実世界のサービス
+- 非営利団体への 1 回限りの寄付
 
-:::caution 2025 要件
-新しいアプリはサブスクリプションカタログを処理するために `monetization.subscriptions` API を使用する必要があります。レガシー課金 API は廃止されました。
+:::注意 2025 年の要件
+新しいアプリは、サブスクリプション カタログを処理するために `monetization.subscriptions` API を使用する必要があります。従来の課金 API は非推奨になりました。
 :::
 
-### Native Purchases を使用した実装
+### ネイティブ購入による実装
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
 
-// デバイスで課金が利用可能かどうかを確認します
+// Ensure billing is available on the device
 const { isBillingSupported } = await NativePurchases.isBillingSupported();
 if (!isBillingSupported) throw new Error('Google Play Billing not available');
 
-// サブスクリプション商品を取得します (ストアデータが必須—価格をハードコードしないでください)
+// Fetch subscription products (Store data is required—never hardcode pricing)
 const { products } = await NativePurchases.getProducts({
   productIdentifiers: ['premium_monthly', 'premium_yearly'],
   productType: PURCHASE_TYPE.SUBS,
 });
 
-// プラン識別子は Google Play Console で作成した Base Plan ID です
+// Plan identifiers are the Base Plan IDs you create in Google Play Console
 const transaction = await NativePurchases.purchaseProduct({
   productIdentifier: 'premium_monthly',
-  planIdentifier: 'monthly-plan', // Android では必須、iOS では無視されます
+  planIdentifier: 'monthly-plan', // REQUIRED on Android, ignored on iOS
   productType: PURCHASE_TYPE.SUBS,
 });
 
 console.log('Purchase token for server validation:', transaction.purchaseToken);
 ```
 
-## 透明性と開示要件
+## 透明性と開示の要件
 
-### 事前価格開示
+### 価格の事前開示
 
-Google Play は購入前にすべてのコストを明確に開示することを義務付けています:
+Google Play では、購入前にすべてのコストを明確に開示することが義務付けられています。
 
 **必須要素:**
-- ユーザーの地域通貨での正確な価格
-- 請求頻度 (月額、年額など)
+- ユーザーの現地通貨での正確な価格
+- 請求頻度 (毎月、毎年など)
 - サブスクリプションに含まれるもの
-- 紹介オファーの総コスト
-- 請求が発生するタイミング
+- 紹介オファーの合計費用
+- 料金が発生する場合
 
-![UI Design Best Practices](/native-purchases/review-guides/ui-design-dos-donts.webp)
+![UI デザインのベスト プラクティス](/native-purchases/review-guides/ui-design-dos-donts.webp)
 
 **準拠した UI の例:**
 ```typescript
@@ -81,75 +78,75 @@ function SubscriptionCard({ product }) {
     <div className="subscription-card">
       <h3>{product.title}</h3>
 
-      {/* 利用可能な場合は紹介オファーを表示します */}
+      {/* Show intro offer if available */}
       {product.introductoryPrice && (
         <div className="intro-offer">
           <p className="intro-price">{product.introductoryPriceString}</p>
           <p className="intro-period">
-            {product.introductoryPricePeriod} 間
+            for {product.introductoryPricePeriod}
           </p>
         </div>
       )}
 
-      {/* 通常価格 */}
+      {/* Regular price */}
       <div className="regular-price">
         <p className="price">{product.priceString}</p>
-        <p className="period">1 {product.subscriptionPeriod} あたり</p>
+        <p className="period">per {product.subscriptionPeriod}</p>
       </div>
 
-      {/* 明確な説明 */}
+      {/* Clear description */}
       <p>{product.description}</p>
 
-      {/* 更新条件 */}
+      {/* Renewal terms */}
       <p className="terms">
-        自動的に更新されます。Google Play でいつでもキャンセルできます。
+        Renews automatically. Cancel anytime in Google Play.
       </p>
 
       <button onClick={() => handlePurchase(product)}>
-        今すぐサブスクライブ
+        Subscribe Now
       </button>
     </div>
   );
 }
 ```
 
-### 自動更新開示
+### 自動更新の開示
 
-サブスクリプションが自動更新される前に、Google は以下を要求します:
-- 更新が発生することを明確に通知
-- 価格を思い出させる
+サブスクリプションが自動更新される前に、Google には以下が必要です。
+- 更新が行われることを明確に通知
+- 価格のリマインダー
 - キャンセルへの簡単なアクセス
 
 :::tip
-native-purchases プラグインは Google Play と連携して自動更新通知を自動的に処理します。サブスクリプション製品が Google Play Console で適切に設定されていることを確認してください。
+ネイティブ購入プラグインは Google Play と連携して自動更新通知を自動的に処理します。サブスクリプション製品が Google Play コンソールで適切に設定されていることを確認してください。
 :::
 
-### プラットフォーム全体での価格一貫性
+### プラットフォーム間の価格の一貫性
 
-**重要なルール:** アプリが利用可能なすべてのプラットフォーム全体で価格は一貫している必要があります。
+**重要なルール:** 価格は、アプリが利用可能なすべてのプラットフォームで一貫している必要があります。
 
-**違反例:**
-- iOS: $9.99/月
-- Android: $7.99/月
-- Web: $11.99/月
+**違反の例:**
+- iOS: 月額 9.99 ドル
+- Android: 月額 7.99 ドル
+- ウェブ: $11.99/月
 
-**重要な理由:** ユーザーは価格差をスクリーンショットして Google に報告でき、ポリシー違反をトリガーできます。
+**重要な理由:** ユーザーは価格差のスクリーンショットを撮って Google に報告し、ポリシー違反を引き起こす可能性があります。
 
-## プライバシーポリシー要件
+## プライバシー ポリシーの要件
 
-### 必須プライバシーポリシー
+### 必須のプライバシー ポリシー
 
-アプリにアプリ内購入が含まれている場合、以下を実行する必要があります:
+アプリにアプリ内購入が含まれている場合は、次のことを行う必要があります。
 
-1. **Play Store リストでのリンク**
-   - Play Console にプライバシーポリシー URL を追加
-   - 公開アクセス可能である必要があります
+1. **Play Store リスト内のリンク**
+   - Play Console にプライバシー ポリシーの URL を追加
+   - パブリックにアクセスできる必要があります
    - アプリと同じ言語である必要があります
 
-2. **アプリ内でのリンク**
-   - アプリ設定にプライバシーポリシーを表示
-   - ユーザーデータを収集する前に表示
-   - 簡単に見つけられるようにします
+2. **アプリ内リンク**
+   - アプリ設定でプライバシーポリシーを表示
+   - ユーザーデータを収集する前に表示する
+   - 簡単に見つけられるようにする
 
 **実装例:**
 ```typescript
@@ -164,99 +161,98 @@ function SettingsScreen() {
 
   return (
     <div>
-      <h2>設定</h2>
+      <h2>Settings</h2>
 
       <button onClick={openPrivacyPolicy}>
-        プライバシーポリシー
+        Privacy Policy
       </button>
 
       <button onClick={openTerms}>
-        利用規約
+        Terms of Service
       </button>
 
       <button onClick={() => NativePurchases.showManageSubscriptions()}>
-        サブスクリプションを管理
+        Manage Subscriptions
       </button>
     </div>
   );
 }
 ```
 
-### データ安全性セクション
+### データ セーフティ セクション
 
-Google Play はデータ安全性セクションで詳細な開示を要求します:
+Google Play では、データ セーフティ セクションで詳細な開示が必要です。
 
-**IAP アプリの場合、宣言してください:**
+**IAP アプリの場合、次のように宣言します:**
 - 購入履歴の収集
-- メールアドレス (領収書用)
-- デバイス ID (不正防止用)
-- 支払い情報の処理
-- 分析データ収集
+・メールアドレス（領収書用）
+- デバイスID（不正行為防止用）
+- 決済情報の取り扱い
+- 分析データの収集
 
 :::warning
-データ安全性セクションは法的拘束力があります。不正確な宣言はアプリの削除につながる可能性があります。
+データ セーフティ セクションには法的拘束力があります。不正確な宣言はアプリの削除につながる可能性があります。
 :::
 
-## 一般的な却下理由
+## 一般的な拒否理由
 
-### 1. 課金実装が欠落または不正確
+### 1. 請求の実装が欠落している、または正しくない**失敗する理由:**
+- Google Play デジタル グッズの課金を使用していない
+- 非推奨の課金 API の使用
+- サブスクリプション向けのカスタム支払いソリューションの実装
 
-**失敗する理由:**
-- デジタル商品に Google Play Billing を使用していない
-- 廃止された課金 API を使用している
-- サブスクリプションにカスタム支払いソリューションを実装している
-
-**防止:**
+**予防:**
 ```typescript
-// ✅ 正しい: native-purchases を使用 (Google Play Billing を使用)
+// ✅ Correct: Use native-purchases (uses Google Play Billing)
 await NativePurchases.purchaseProduct({
   productIdentifier: 'premium_monthly'
 });
 
-// ❌ 間違い: サブスクリプションにカスタム支払いプロセッサーを使用
+// ❌ Wrong: Custom payment processor for subscriptions
 // await CustomPayment.charge(user, 9.99);
 ```
 
 ### 2. 不明確な価格設定または隠れたコスト
 
 **失敗する理由:**
-- 購入をクリックした後にのみ表示される価格
-- 事前に開示されていない追加料金
+- 価格は購入をクリックした後にのみ表示されます
+- 追加料金は事前に開示されていません
 - 曖昧なサブスクリプション条件
 
-**防止:**
+**予防:**
 ```typescript
 function PurchaseScreen({ product }) {
   return (
     <div>
-      {/* すべてのコストを事前に表示します */}
-      <h2>プレミアムサブスクリプション</h2>
+      {/* Show ALL costs upfront */}
+      <h2>Premium Subscription</h2>
 
       <div className="pricing">
-        <p className="price">{product.priceString}/月</p>
-        <p className="taxes">場所に基づいて税金が適用される場合があります</p>
+        <p className="price">{product.priceString}/month</p>
+        <p className="taxes">Taxes may apply based on location</p>
       </div>
 
       <div className="features">
-        <h3>含まれるもの:</h3>
+        <h3>Includes:</h3>
         <ul>
-          <li>広告なしの体験</li>
-          <li>無制限のクラウドストレージ</li>
-          <li>優先サポート</li>
+          <li>Ad-free experience</li>
+          <li>Unlimited cloud storage</li>
+          <li>Priority support</li>
         </ul>
       </div>
 
       <div className="terms">
         <p>
-          サブスクリプションは自動的に更新されます。現在の期間終了の少なくとも 24 時間前にキャンセルされていない限り。
+          Subscription renews automatically unless cancelled at least
+          24 hours before the end of the current period.
         </p>
         <p>
-          Google Play サブスクリプションで管理またはキャンセルします。
+          Manage or cancel in Google Play Subscriptions.
         </p>
       </div>
 
       <button onClick={handlePurchase}>
-        サブスクリプションを開始
+        Start Subscription
       </button>
     </div>
   );
@@ -266,20 +262,20 @@ function PurchaseScreen({ product }) {
 ### 3. 欺瞞的なサブスクリプション パターン
 
 **失敗する理由:**
-- プレミアム オプションの事前選択
-- より安い代替案を非表示にする
-- キャンセルを困難にする
-- 偽りの緊迫性 ("残り 3 つのスポットだけです!")
+- プレミアムオプションの事前選択
+- より安価な代替品を隠す
+・キャンセルが難しくなる
+- 偽の緊急性 (「あと 3 枠しか残っていない!」)
 
-![Description Best Practices](/native-purchases/review-guides/description-guidelines-1.webp)
+![ベストプラクティスの説明](/native-purchases/review-guides/description-guidelines-1.webp)
 
-![Marketing Guidelines](/native-purchases/review-guides/description-guidelines-2.webp)
+![マーケティング ガイドライン](/native-purchases/review-guides/description-guidelines-2.webp)
 
-**防止:**
-- すべてのサブスクリプション層を均等に表示
-- キャンセルを明確でアクセス可能にする
-- カウントダウン タイマーや偽りの希少性を避ける
-- 高価なオプションを押し付けるダーク パターンを使用しない
+**予防:**
+- すべてのサブスクリプション層を均等に表示します
+- キャンセルを明確にし、アクセスしやすいものにする
+- カウントダウンタイマーや偽の希少性を避ける
+- 高価なオプションを押しつけるためにダークパターンを使用しないでください
 
 ### 4. 不完全なテスト
 
@@ -287,23 +283,23 @@ function PurchaseScreen({ product }) {
 - 購入時にアプリがクラッシュする
 - 製品が読み込まれない
 - 購入確認が表示されない
-- 購入後にプレミアム機能がロック解除されない
+- プレミアム機能は購入後にロック解除されません
 
-**防止:**
+**予防:**
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
 
-// 提出前の包括的なテスト
+// Comprehensive testing before submission
 async function testPurchaseFlow() {
   try {
-    // 1. 製品読み込みをテストする
+    // 1. Test product loading
     const { products } = await NativePurchases.getProducts({
       productIdentifiers: ['premium_monthly', 'premium_yearly'],
       productType: PURCHASE_TYPE.SUBS,
     });
     console.log('✓ Products loaded:', products.length);
 
-    // 2. 購入フローをテストする
+    // 2. Test purchase flow
     const transaction = await NativePurchases.purchaseProduct({
       productIdentifier: 'premium_monthly',
       planIdentifier: 'monthly-plan',
@@ -311,7 +307,7 @@ async function testPurchaseFlow() {
     });
     console.log('✓ Purchase completed', transaction.transactionId);
 
-    // 3. 権利を確認する
+    // 3. Verify entitlements
     const { purchases } = await NativePurchases.getPurchases({
       productType: PURCHASE_TYPE.SUBS,
     });
@@ -326,7 +322,7 @@ async function testPurchaseFlow() {
       console.log('✓ Premium features unlocked');
     }
 
-    // 4. 復元をテストする
+    // 4. Test restore
     await NativePurchases.restorePurchases();
     console.log('✓ Restore works');
 
@@ -339,45 +335,45 @@ async function testPurchaseFlow() {
 ### 5. プライバシーポリシー違反
 
 **失敗する理由:**
-- アプリにプライバシーポリシー リンクがない
-- プライバシーポリシーにアクセスできない
-- データ収集が開示されていない
-- データ安全性セクションが不正確
+- アプリ内にプライバシー ポリシーへのリンクがない
+- プライバシー ポリシーにアクセスできません
+- データ収集は非公開
+- データ セーフティ セクションが不正確
 
-**防止:**
-- プライバシーポリシーを Play Store リストに追加
+**予防:**
+- Play Store リストにプライバシー ポリシーを追加
 - アプリ設定にリンクを含める
-- データ安全性セクションを正確に入力
-- 新しいデータ収集を追加する場合はポリシーを更新
+- データ セーフティ セクションに正確に記入します
+- 新しいデータコレクションを追加するときにポリシーを更新します
 
-## 代替課金システム (2025 アップデート)
+## 代替請求システム (2025 年更新)
 
-### 地域の準拠
+### 地域のコンプライアンス
 
-Google は特定の地域で代替課金システムを許可するようになりました:
+Google では、特定の地域で代替の請求システムが許可されるようになりました。
 
 **対象地域:**
 - 欧州経済領域 (EEA)
 - 韓国
 - インド (近日公開予定)
 
-**代替課金を使用する場合の要件:**
-- Google Play Billing をオプションとして提供し続ける必要があります
-- ユーザーに選択について明確に伝える
-- 地域の規制に準拠
-- サービス手数料が適用されます (削減)
+**代替請求を使用する場合の要件:**
+- Google Play 請求をオプションとして提供する必要があります
+- 選択についてユーザーに明確に伝える
+- 現地の規制に準拠する
+- サービス料は引き続き適用されます（減額されます）
 
 :::note
-ほとんどの開発者にとって、Google Play Billing のみを使用し続ける方がシンプルです。native-purchases プラグインはこれを自動的に処理します。
+ほとんどの開発者にとって、Google Play 請求のみを使用する方が簡単です。ネイティブ購入プラグインはこれを自動的に処理します。
 :::
 
 ## サブスクリプション管理
 
-### 簡単キャンセル
+### 簡単なキャンセル
 
-ユーザーは以下を実行できる必要があります:
+ユーザーは次のことができる必要があります。
 - アクティブなサブスクリプションを簡単に表示
-- サポートに連絡せずにキャンセル
+- サポートに連絡せずにキャンセルする
 - キャンセルがいつ有効になるかを理解する
 
 **実装:**
@@ -387,10 +383,10 @@ import { NativePurchases } from '@capgo/native-purchases';
 function ManageSubscriptionButton() {
   const openManagement = async () => {
     try {
-      // Google Play サブスクリプション管理を開きます
+      // Opens Google Play subscription management
       await NativePurchases.showManageSubscriptions();
     } catch (error) {
-      // 直接 URL にフォールバック
+      // Fallback to direct URL
       const playStoreUrl = 'https://play.google.com/store/account/subscriptions';
       window.open(playStoreUrl, '_blank');
     }
@@ -398,7 +394,7 @@ function ManageSubscriptionButton() {
 
   return (
     <button onClick={openManagement}>
-      Google Play でサブスクリプションを管理
+      Manage Subscription in Google Play
     </button>
   );
 }
@@ -408,23 +404,23 @@ function ManageSubscriptionButton() {
 
 **必須開示:**
 - キャンセルはいつ有効になりますか?
-- ユーザーは期間終了まで引き続きアクセスできますか?
-- 一部払い戻しは利用できますか?
+- ユーザーは期間が終了するまでアクセスし続けますか?
+- 一部返金は可能ですか?
 
 ```typescript
 function CancellationInfo() {
   return (
     <div className="cancellation-info">
-      <h3>キャンセルポリシー</h3>
+      <h3>Cancellation Policy</h3>
       <ul>
-        <li>Google Play でいつでもキャンセルできます</li>
-        <li>請求期間の終了まで引き続きアクセスできます</li>
-        <li>一部期間の払い戻しはありません</li>
-        <li>アクセスを再取得するいつでも再度サブスクライブできます</li>
+        <li>Cancel anytime in Google Play</li>
+        <li>Access continues until end of billing period</li>
+        <li>No refunds for partial periods</li>
+        <li>Resubscribe anytime to regain access</li>
       </ul>
 
       <button onClick={() => NativePurchases.showManageSubscriptions()}>
-        Google Play で管理
+        Manage in Google Play
       </button>
     </div>
   );
@@ -433,76 +429,74 @@ function CancellationInfo() {
 
 ## 提出前チェックリスト
 
-![Pre-Submission Checklist](/native-purchases/review-guides/pre-submission-checklist.webp)
+![提出前チェックリスト](/native-purchases/review-guides/pre-submission-checklist.webp)
 
 <Steps>
 
-1. **課金実装を確認**
-   - Google Play Billing を使用 (native-purchases 経由)
-   - すべてのサブスクリプション製品が Play Console で作成
-   - 製品が有効化および公開されている
-   - すべてのターゲット国で価格設定されている
+1. **請求の実装を確認**
+   - Google Play 請求の使用 (ネイティブ購入経由)
+   - Play Console で作成されたすべての定期購入製品
+   - 製品がアクティベートされ公開される
+   - すべての対象国向けに設定された価格
 
-2. **購入フローをテスト**
-   - ライセンステストアカウントを作成
-   - 各サブスクリプションティアをテスト
-   - 製品が正しく読み込まれることを確認
-   - 購入完了をテスト
-   - プレミアム機能がロック解除されることを確認
-   - サブスクリプション復元をテスト
-   - 複数のデバイスでテスト
+2. **テスト購入フロー**
+   - ライセンステストアカウントの作成
+   - 各サブスクリプション層をテストする
+   - 製品が正しくロードされていることを確認します
+   - テスト購入の完了
+   - プレミアム機能のロックが解除されていることを確認します
+   - サブスクリプションの復元をテストする
+   - 複数のデバイスでテストする3. **すべてのコピーを確認**
+   - 購入前に価格が明確に表示される
+   - すべての料金は事前に開示されます
+   - サブスクリプション条件が明確です
+   - キャンセル手順の説明
+   - 誤解を招くような主張はしないでください
 
-3. **すべてのコピーをレビュー**
-   - 購入前に価格設定が明確に表示されている
-   - すべての料金が事前に開示されている
-   - サブスクリプション条件が明確である
-   - キャンセルプロセスが説明されている
-   - 誤解を招く主張がない
+4. **プライバシーの遵守**
+   - プライバシー ポリシーは Play Console にリンクされています
+   - アプリ内でプライバシーポリシーにアクセス可能
+   - データ セーフティ セクションを正確に完了しました
+   - 許可が正当化され文書化されている
 
-4. **プライバシーコンプライアンス**
-   - プライバシーポリシーが Play Console にリンクされている
-   - プライバシーポリシーはアプリ内でアクセス可能です
-   - データ安全性セクションが正確に完成した
-   - 権限が正当化および文書化されている
+5. **コンテンツの評価**
+   - コンテンツレーティングアンケートに記入してください
+   - 評価が実際のコンテンツと一致していることを確認する
+   - アンケートでアプリ内購入を宣言します
 
-5. **コンテンツレーティング**
-   - コンテンツレーティングアンケートを完成
-   - レーティングが実際のコンテンツと一致することを確認
-   - アンケートでアプリ内購入を宣言
-
-6. **ストアリストを準備**
-   - アプリの説明が正確です
-   - スクリーンショットは現在のバージョンを表示
+6. **ストア掲載情報の準備**
+   - アプリの説明が正確
+   - スクリーンショットには現在のバージョンが表示されます
    - フィーチャーグラフィックが要件を満たしている
-   - すべての必須アセットがアップロードされている
+   - 必要なすべてのアセットがアップロードされました
 
 </Steps>
 
-## レビュータイムライン
+## レビューのタイムライン
 
-**初期レビュー:** 平均 7 日 (より速い場合もあります)
-**アップデート:** 通常、初期提出より高速
-**ポリシー違反:** 即座に中断される可能性があります
-**異議申し立て:** レビューに 7-14 日
+**初回レビュー:** 平均 7 日 (もっと早くなる場合もあります)
+**更新:** 通常、最初の提出よりも早く更新されます
+**ポリシー違反:** 即時停止の可能性あり
+**異議申し立て:** 審査には 7 ～ 14 日かかります
 
 :::tip ローリングレビュー
-Apple と異なり、Google はアプリを継続的にレビューします。アプリはレビュー期間中いつでも公開される可能性があり、固定時間ではありません。
+Apple とは異なり、Google はアプリを継続的にレビューします。アプリは、決まった時間ではなく、レビュー期間中いつでも公開される可能性があります。
 :::
 
 ## 提出前のテスト
 
 ### ライセンステスト
 
-1. **テストアカウントを追加:**
-   - Play Console に移動
-   - セットアップ > ライセンステスト
-   - テスト用のGmailアカウントを追加
+1. **テストアカウントを追加します:**
+   - Play コンソールに移動します
+   - [セットアップ] > [ライセンス テスト]
+   - テスト用に Gmail アカウントを追加します
 
-2. **サンドボックスでテスト:**
+2. **サンドボックスでのテスト:**
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
 
-// ライセンステストアカウントでテスト購入を実行します
+// Test purchases with license test account
 async function testInSandbox() {
   const { isBillingSupported } = await NativePurchases.isBillingSupported();
   if (!isBillingSupported) {
@@ -510,7 +504,7 @@ async function testInSandbox() {
     return;
   }
 
-  // 製品を取得します (ライセンステスターを使用する場合、テスト価格を返す)
+  // Fetch products (returns test pricing when using a license tester)
   const { products } = await NativePurchases.getProducts({
     productIdentifiers: ['premium_monthly'],
     productType: PURCHASE_TYPE.SUBS,
@@ -518,7 +512,7 @@ async function testInSandbox() {
 
   console.log('Test products:', products);
 
-  // テスト購入を実行します (料金なし)
+  // Make test purchase (no charge)
   const transaction = await NativePurchases.purchaseProduct({
     productIdentifier: 'premium_monthly',
     planIdentifier: 'monthly-plan',
@@ -529,24 +523,24 @@ async function testInSandbox() {
 }
 ```
 
-3. **テストバナーを確認:**
+3. **テスト バナーを確認します:**
    - テストアカウントで購入する場合
-   - "テスト購入" 通知が表示されるはずです
-   - 実際の請求は発生しません
+   - 「テスト購入」通知が表示されるはずです
+   - 実際の料金は発生しません
 
 ### 内部テストトラック
 
-本番リリース前:
+製品版リリース前:
 
-1. Play Console で内部テストトラックを作成
-2. APK/AAB をアップロード
-3. テスターメールアドレスを追加
-4. テスターは Play Store (テストトラック) からダウンロード
-5. 購入フローがエンドツーエンドで機能することを確認
+1. Play Console で内部テスト トラックを作成する
+2.APK/AABをアップロードする
+3. テスターのメールアドレスを追加する
+4. テスターは Play Store (テスト トラック) からダウンロードします。
+5. 購入フローがエンドツーエンドで機能することを確認する
 
-## Native Purchases のベストプラクティス
+## ネイティブ購入のベスト プラクティス
 
-### すべての購入状態を処理
+### すべての購入状態を処理する
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -563,7 +557,7 @@ async function handlePurchase(productId: string, planIdentifier?: string) {
 
     console.log('Purchase token:', transaction.purchaseToken ?? transaction.receipt);
 
-    // 成功 - ストアから権利を確認します
+    // Success - check entitlements from the store
     const { purchases } = await NativePurchases.getPurchases({
       productType: planIdentifier ? PURCHASE_TYPE.SUBS : PURCHASE_TYPE.INAPP,
     });
@@ -577,33 +571,33 @@ async function handlePurchase(productId: string, planIdentifier?: string) {
 
     if (isOwned) {
       unlockPremiumFeatures();
-      showSuccess('プレミアムがアクティブ化されました!');
+      showSuccess('Premium activated!');
     }
 
   } catch (error: any) {
-    // 特定のエラーケースを処理します
+    // Handle specific error cases
     switch (error.code) {
       case 'USER_CANCELLED':
-        // ユーザーがバックアウト - エラーは不要
+        // User backed out - no error needed
         console.log('Purchase cancelled');
         break;
 
       case 'ITEM_ALREADY_OWNED':
-        // 既に所有している - 代わりに復元
-        showInfo('既にこれを所有しています! 復元中...');
+        // They already own it - restore instead
+        showInfo('You already own this! Restoring...');
         await NativePurchases.restorePurchases();
         break;
 
       case 'ITEM_UNAVAILABLE':
-        showError('このサブスクリプションは現在利用できません。後でもう一度お試しください。');
+        showError('This subscription is currently unavailable. Please try again later.');
         break;
 
       case 'NETWORK_ERROR':
-        showError('ネットワークエラー。接続を確認して、もう一度お試しください。');
+        showError('Network error. Please check your connection and try again.');
         break;
 
       default:
-        showError('購入に失敗しました。もう一度お試しください。');
+        showError('Purchase failed. Please try again.');
         console.error('Purchase error:', error);
     }
   } finally {
@@ -612,7 +606,7 @@ async function handlePurchase(productId: string, planIdentifier?: string) {
 }
 ```
 
-### 購入復元を実装
+### 購入の復元を実装する
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -636,11 +630,11 @@ function RestorePurchasesButton() {
 
       if (hasSubscription) {
         unlockPremiumFeatures();
-        showSuccess('サブスクリプションが復元されました!');
+        showSuccess('Subscriptions restored!');
         return;
       }
 
-      // 必要に応じて1回限りのロック解除を確認
+      // Check one-time unlocks if needed
       const { purchases: iaps } = await NativePurchases.getPurchases({
         productType: PURCHASE_TYPE.INAPP,
       });
@@ -648,13 +642,13 @@ function RestorePurchasesButton() {
 
       if (hasInApp) {
         unlockPremiumFeatures();
-        showSuccess('以前の購入が復元されました!');
+        showSuccess('Previous purchases restored!');
         return;
       }
 
-      showInfo('以前の購入は見つかりませんでした。');
+      showInfo('No previous purchases found.');
     } catch (error) {
-      showError('購入の復元に失敗しました。もう一度お試しください。');
+      showError('Failed to restore purchases. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -662,13 +656,13 @@ function RestorePurchasesButton() {
 
   return (
     <button onClick={handleRestore} disabled={loading}>
-      {loading ? '復元中...' : '購入を復元'}
+      {loading ? 'Restoring...' : 'Restore Purchases'}
     </button>
   );
 }
 ```
 
-### サブスクリプション状態を確認
+### サブスクリプションステータスを確認する
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -705,92 +699,90 @@ async function checkSubscriptionStatus() {
 }
 ```
 
-## アプリが却下された場合
+## アプリが拒否された場合
 
 ### 一般的なポリシー違反
 
 **支払いポリシー:**
-- Google Play Billing を使用していない
-- サブスクリプション条件が誤解を招く
-- コストが隠されている
+- Google Play 課金を使用していない
+- 誤解を招くサブスクリプション規約
+- 隠れたコスト
 
 **ユーザーデータポリシー:**
-- プライバシーポリシーがない
-- データ安全性宣言が不正確
-- 権限が過剰
+- プライバシーポリシーが欠落している
+- 不正確なデータ安全宣言
+- 過剰な権限
 
-### 解決ステップ
+### 解決手順
 
 <Steps>
 
-1. **違反通知をレビュー**
+1. **違反通知を確認します**
    - 引用された特定のポリシーを読む
-   - Google が何をフラグを立てたかを理解する
-   - 提供された例を確認
+   - Google がフラグを立てた内容を理解する
+   - 提供された例を確認してください
 
 2. **問題を修正**
-   - 根本原因に対処し、症状だけではない
-   - 修正後に徹底的にテスト
-   - 行われたすべての変更を文書化
+   - 症状だけでなく根本原因に対処する
+   - 修正後に徹底的にテストする
+   - 行われたすべての変更を文書化する
 
-3. **異議申し立てを提出 (該当する場合)**
+3. **異議申し立てを送信します (該当する場合)**
 
-   ![Clarification and Appeal Process](/native-purchases/review-guides/clarification-process.webp)
+   ![説明と異議申し立てのプロセス](/native-purchases/review-guides/clarification-process.webp)
 
    ```
-   件名: ポリシー違反異議申し立て - [アプリ名]
+   Subject: Policy Violation Appeal - [App Name]
 
-   親愛なる Google Play レビュー チーム,
+   Dear Google Play Review Team,
 
-   私のアプリが [ポリシー X.Y] に違反していることが通知されています。
-   コンプライアンスを確保するために次の変更を加えました:
+   I have received notification that my app violates [Policy X.Y].
+   I have made the following changes to comply:
 
-   1. [加えた特定の変更]
-   2. [加えた特定の変更]
-   3. [加えた特定の変更]
+   1. [Specific change made]
+   2. [Specific change made]
+   3. [Specific change made]
 
-   更新版 [バージョン番号] は、提起されたすべての懸念事項に対処しています。
+   The updated version [version number] addresses all concerns raised.
 
-   検証用のテストアカウント:
-   メール: test@example.com
-   パスワード: TestPass123
+   Test account for verification:
+   Email: test@example.com
+   Password: TestPass123
 
-   ご検討ありがとうございます。
+   Thank you for your consideration.
    ```
 
-   ![Request Documentation Example](/native-purchases/review-guides/request-documents.webp)
+   ![ドキュメントのリクエストの例](/native-purchases/review-guides/request-documents.webp)
 
-4. **再提出またはアップデート**
-   - 修正版をアップロード
-   - レビューの再提出
-   - Play Console でステータスを監視
+4. **再送信または更新**
+   - 修正版をアップロードする
+   - レビューのために再送信します
+   - Play Console でステータスを監視する
 
 </Steps>
 
-## 追加リソース
+## 追加のリソース
 
-- [Google Play デベロッパー ポリシー センター](https://play.google.com/about/developer-content-policy/)
-- [Google Play Billing ドキュメンテーション](https://developer.android.com/google/play/billing)
-- [サブスクリプション ベストプラクティス](https://developer.android.com/google/play/billing/subscriptions)
+- [Google Play 開発者ポリシー センター](https://play.google.com/about/developer-content-policy/)
+- [Google Play 請求ドキュメント](https://developer.android.com/google/play/billing)
+- [サブスクリプションのベスト プラクティス](https://developer.android.com/google/play/billing/subscriptions)
 - [Play Console ヘルプ](https://support.google.com/googleplay/android-developer/)
 
-## エキスパートの助けが必要ですか?
+## 専門家の助けが必要ですか?Play Store レビューのナビゲートは、特に 2025 年の新しいテスト要件では複雑になる可能性があります。個別のサポートが必要な場合:
 
-Play Store レビューのナビゲートは複雑である可能性があります。特に新しい 2025 テスト要件があります。パーソナライズされた支援が必要な場合:
+**[チームへの相談電話を予約](https://cal.com/team/capgo/capacitor-consulting-services)**:
+- Play Store レビューの準備を完了する
+- テストトラックのセットアップとテスターの募集
+- IAP実装レビュー
+- データの安全性とプライバシーのコンプライアンス
+- 拒否のトラブルシューティングと異議申し立て
+- アプリの提出プロセスを完了する
 
-**[チームとのコンサルテーション通話を予約](https://cal.com/team/capgo/capacitor-consulting-services)** 次のことをお手伝いします:
-- Play Store レビューの完全な準備
-- テストトラックのセットアップとテスター採用
-- IAP 実装レビュー
-- データ安全性とプライバシーのコンプライアンス
-- 却下トラブルシューティングと異議申し立て
-- 完全なアプリ提出プロセス
-
-当社の専門家は数百のアプリの成功した Play Store 提出をガイドしており、2025 年の要件をナビゲートするのに役立ちます。
+当社の専門家は、Play Store の提出を成功させるために何百ものアプリをガイドしており、2025 年の要件に対処するお手伝いをします。
 
 ## サポート
 
-実装でサポートが必要ですか?
-- [Native Purchases ドキュメンテーション](/docs/plugins/native-purchases/getting-started/) を確認してください
-- [Android サンドボックステスティング ガイド](/docs/plugins/native-purchases/android-sandbox-testing/) を確認してください
-- [Google Play デベロッパー サポート](https://support.google.com/googleplay/android-developer/) にアクセスしてください
+導入に関してサポートが必要ですか?
+- [ネイティブ購入ドキュメント]を確認してください(/docs/plugins/native-purchases/getting-started/)
+- [Android サンドボックス テスト ガイド](/docs/plugins/native-purchases/android-sandbox-testing/) を確認してください
+- [Google Play 開発者サポート](https://support.google.com/googleplay/android-developer/) にアクセスしてください。

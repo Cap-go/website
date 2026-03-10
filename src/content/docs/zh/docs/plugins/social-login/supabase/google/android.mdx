@@ -1,26 +1,23 @@
 ---
-title: "Supabase Google Login on Android"
-description: >-
-  Learn how to set up Google Sign-In with Supabase Authentication on Android
-  using the Capacitor Social Login plugin.
+title: Supabase Google 登录 Android
+description: 了解如何使用 Capacitor 社交登录插件在 Android 上通过 Supabase 身份验证设置 Google 登录。
 sidebar:
   order: 2
 locale: zh
 ---
+## 简介
 
-## Introduction
+本指南将帮助您将 Google 登录与 Android 上的 Supabase 身份验证集成。假设您已经完成：
+ - [Google 登录 Android 设置](/docs/plugins/social-login/google/android/)
+ - [Supabase Google 登录 - 常规设置](/docs/plugins/social-login/supabase/google/general/)。
 
-This guide will help you integrate Google Sign-In with Supabase Authentication on Android. It is assumed that you have already completed:
- -  the [Google Login Android setup](/docs/plugins/social-login/google/android/)
- -  the [Supabase Google Login - General Setup](/docs/plugins/social-login/supabase/google/general/).
+## 实施
 
-## Implementation
+完整的实现可在 [示例应用程序的 `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) 文件中找到。本指南解释了关键概念及其使用方法。
 
-The complete implementation is available in the [example app's `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) file. This guide explains the key concepts and how to use it.
+### 使用身份验证助手
 
-### Using the Authentication Helper
-
-The `authenticateWithGoogleSupabase` function handles the entire authentication flow:
+`authenticateWithGoogleSupabase` 函数处理整个身份验证流程：
 
 ```typescript
 import { authenticateWithGoogleSupabase } from './supabaseAuthUtils';
@@ -34,34 +31,34 @@ if (result.success) {
 }
 ```
 
-## How It Works
+## 它是如何工作的
 
-For a detailed explanation of how the authentication flow works, including nonce generation, JWT validation, and Supabase sign-in, see the [How It Works section in the General Setup guide](/docs/plugins/social-login/supabase/google/general/#how-it-works).
+有关身份验证流程工作原理（包括随机数生成、JWT 验证和 Supabase 登录）的详细说明，请参阅[常规设置指南中的工作原理部分](/docs/plugins/social-login/supabase/google/general/#how-it-works)。
 
-For the complete code reference, see the [Complete Code Reference section in the General Setup guide](/docs/plugins/social-login/supabase/google/general/#complete-code-reference).
+有关完整的代码参考，请参阅[常规设置指南中的完整代码参考部分](/docs/plugins/social-login/supabase/google/general/#complete-code-reference)。
 
-## Important Notes
+## 重要提示
 
-### Nonce Handling
+### 随机数处理
 
-The nonce implementation follows the pattern from the [React Native Google Sign In documentation](https://react-native-google-signin.github.io/docs/security#usage-with-supabase):
+nonce 实现遵循 [React Native Google 登录文档](https://react-native-google-signin.github.io/docs/security#usage-with-supabase) 中的模式：
 
-- `rawNonce` goes to Supabase's `signInWithIdToken()`
-- Supabase makes a hash of `rawNonce` and compares it with the `nonceDigest` which is included in the ID token from Google Sign-In
-- `nonceDigest` (SHA-256 hash, hex-encoded) goes to the `nonce` parameter in Google Sign-In APIs
+- `rawNonce` 转到 Supabase 的 `signInWithIdToken()`
+- Supabase 对 `rawNonce` 进行哈希处理，并将其与 `nonceDigest` 进行比较，该 `nonceDigest` 包含在 Google 登录的 ID 令牌中
+- `nonceDigest`（SHA-256 哈希，十六进制编码）转到 Google 登录 API 中的 `nonce` 参数
 
-### Automatic Retry
+### 自动重试
 
-The implementation includes automatic retry logic:
-- If JWT validation fails on first attempt, it logs out and retries once
-- This handles cases where cached tokens might have incorrect nonces
-- If the retry also fails, an error is returned
+该实现包括自动重试逻辑：
+- 如果 JWT 验证在第一次尝试时失败，则会注销并重试一次
+- 这可以处理缓存的令牌可能具有不正确的随机数的情况
+- 如果重试也失败，则返回错误
 
-## Troubleshooting
+## 故障排除
 
-If authentication fails:
+如果认证失败：
 
-- **Invalid audience**: Verify your Google Client IDs match in both Google Cloud Console and Supabase
-- **Nonce mismatch**: Check console logs - the function will automatically retry, but you can manually logout first if needed
-- **Token validation fails**: Ensure you're using `mode: 'online'` in the initialize call to get an idToken
-- Review the [example app code](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) for reference
+- **无效受众群体**：验证您的 Google 客户端 ID 在 Google Cloud Console 和 Supabase 中是否匹配
+- **Nonce 不匹配**：检查控制台日志 - 该功能会自动重试，但如果需要，您可以先手动注销
+- **令牌验证失败**：确保您在初始化调用中使用 `mode: 'online'` 来获取 idToken
+- 查看[示例应用程序代码](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts)以供参考

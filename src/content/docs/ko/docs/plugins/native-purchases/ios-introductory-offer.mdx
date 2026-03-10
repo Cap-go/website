@@ -1,184 +1,179 @@
 ---
-title: Create iOS Subscription Introductory Offer
-description: >-
-  Learn how to create introductory offers for auto-renewable subscriptions on
-  iOS to attract and convert new subscribers.
+title: iOS 구독 소개 제안 만들기
+description: iOS에서 자동 갱신 구독에 대한 소개 제안을 만들어 새로운 구독자를 유치하고 전환하는 방법을 알아보세요.
 sidebar:
   order: 9
 locale: ko
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 
-Introductory offers allow you to provide eligible users with free trials or discounted introductory pricing to reduce barriers to entry and increase subscription conversions.
+신규 프로모션을 사용하면 자격을 갖춘 사용자에게 무료 평가판 또는 할인된 신규 출시 가격을 제공하여 진입 장벽을 낮추고 구독 전환율을 높일 수 있습니다.
 
-## Overview
+## 개요
 
-Introductory offers are one of the most effective tools for growing your subscriber base. They allow users to:
-- Try your premium features risk-free
-- Experience value before committing
-- Start at a lower price point
-- Build confidence in your product
+입문 혜택은 구독자 기반을 확대하는 데 가장 효과적인 도구 중 하나입니다. 이를 통해 사용자는 다음을 수행할 수 있습니다.
+- 부담 없이 프리미엄 기능을 사용해 보세요
+- 헌신하기 전에 가치를 경험하십시오.
+- 저렴한 가격부터 시작하세요
+- 제품에 대한 신뢰를 쌓으세요.
 
-## Offer Types
+## 제안 유형
 
-iOS supports three types of introductory offers:
+iOS은 세 가지 유형의 소개 제안을 지원합니다.
 
-### 1. Free Trial
-Customers get complimentary access for a specified duration. After the trial, they're charged at standard rates if they don't cancel.
+### 1. 무료 평가판
+고객은 지정된 기간 동안 무료로 액세스할 수 있습니다. 평가판 사용 후 취소하지 않으면 표준 요금이 청구됩니다.
 
-**Examples:**
-- 7 days free
-- 14 days free
-- 1 month free
+**예:**
+- 7일 무료
+- 14일 무료
+- 1개월 무료
 
-**Best for:**
-- High-value subscriptions
-- Feature-rich apps
-- Building user habit
+**최적의 용도:**
+- 고가치 구독
+- 기능이 풍부한 앱
+- 사용자 습관 만들기
 
-### 2. Pay Up Front
-Customers pay a single discounted price that covers the introductory period.
+### 2. 선불 결제
+고객은 출시 기간 동안 단일 할인 가격을 지불합니다.
 
-**Examples:**
-- $1.99 for 2 months (then $9.99/month)
-- $9.99 for 3 months (then $19.99/month)
+**예:**
+- 2개월 동안 $1.99(이후 $9.99/월)
+- 3개월 동안 $9.99(이후 $19.99/월)
 
-**Best for:**
-- Commitment signals
-- Cash flow needs
-- Testing price sensitivity
+**최적의 용도:**
+- 약속 신호
+- 현금 흐름이 필요함
+- 가격 민감도 테스트
 
-### 3. Pay As You Go
-Customers pay a reduced price for multiple billing cycles.
+### 3. 종량제 결제
+고객은 여러 청구 주기에 대해 할인된 가격을 지불합니다.
 
-**Examples:**
-- $1.99/month for 3 months (then $9.99/month)
-- $4.99/month for 6 months (then $14.99/month)
+**예:**
+- 3개월간 월 $1.99 (이후 월 $9.99)
+- 6개월간 월 $4.99 (이후 월 $14.99)
 
-**Best for:**
-- Gradual commitment
-- Long-term value demonstration
-- Reducing perceived risk
+**최적의 용도:**
+- 점진적인 헌신
+- 장기적인 가치 입증
+- 인지된 위험 감소
 
-## Eligibility Requirements
+## 자격 요건
 
-Users can only receive introductory offers if they:
-- Haven't previously received an introductory offer for the product
-- Haven't received an introductory offer for any product in the same subscription group
-- Haven't had an active subscription to the product
+사용자는 다음과 같은 경우에만 소개 제안을 받을 수 있습니다.
+- 이전에 제품에 대한 소개 제안을 받은 적이 없습니다.
+- 동일한 구독 그룹에 속한 제품에 대한 소개 제안을 받지 못했습니다.
+- 해당 제품에 대한 활성 구독이 없습니다.
 
 :::note
-Apple handles eligibility checking automatically. The native-purchases plugin provides methods to check eligibility before presenting offers.
+Apple은 자격 확인을 자동으로 처리합니다. 기본 구매 플러그인은 제안을 제시하기 전에 자격을 확인하는 방법을 제공합니다.
 :::
 
-## Prerequisites
+## 전제조건
 
-You must first [create an auto-renewable subscription](/docs/plugins/native-purchases/ios-create-subscription/) before adding an introductory offer.
+신규 할인 혜택을 추가하기 전에 먼저 [자동 갱신 구독을 생성](/docs/plugins/native-purchases/ios-create-subscription/)해야 합니다.
 
-## Creating an Introductory Offer
+## 입문 제안 만들기
 
 <Steps>
 
-1. **Navigate to Subscription**
+1. **구독으로 이동**
 
-   In App Store Connect, go to your app's **Monetize > Subscriptions** section and select the subscription you want to add an offer to.
+   App Store Connect에서 앱의 **수익 창출 > 구독** 섹션으로 이동하여 혜택을 추가하려는 구독을 선택하세요.
 
-2. **Add Subscription Price**
+2. **구독 가격 추가**
 
-   Click the **+** icon next to "Subscription Prices" to open the pricing modal.
+   "구독 가격" 옆에 있는 **+** 아이콘을 클릭하여 가격 책정 모드를 엽니다.
 
-3. **Create Introductory Offer**
+3. **소개 제안 만들기**
 
-   Select **"Create introductory offer"** from the options.
+   옵션에서 **"소개 제안 만들기"**를 선택하세요.
 
-   ![Create introductory offer](/native-purchases/ios/introductory-offer/create-introductory-offer.webp)
+   ![소개 제안 만들기](/native-purchases/ios/introductory-offer/create-introductory-offer.webp)
 
-4. **Configure Countries and Start Date**
+4. **국가 및 시작일 구성**
 
-   **Countries and Regions**: Select where the offer will be available
-   - Choose all countries for maximum reach
-   - Or limit to specific markets for testing
+   **국가 및 지역**: 혜택을 이용할 수 있는 지역을 선택하세요.
+   - 도달 범위를 최대화하려면 모든 국가를 선택하세요.
+   - 또는 테스트를 위해 특정 시장으로 제한
 
-   **Start Date**: When the offer becomes available
-   - Can be immediate or scheduled for the future
-   - Useful for coordinating with marketing campaigns
+   **시작일**: 혜택이 제공되는 날짜
+   - 즉시 또는 미래에 예정될 수 있습니다.
+   - 마케팅 캠페인을 조율하는 데 유용합니다.
 
-   **End Date (Optional)**: When the offer expires
-   - Leave blank for ongoing availability
-   - Set a date for limited-time promotions
+   **종료일(선택사항)**: 혜택이 만료되는 시점
+   - 지속적인 가용성을 위해 비워두세요.
+   - 기간 한정 프로모션 날짜 설정
 
-5. **Select Offer Type**
+5. **혜택 유형 선택**
 
-   Choose one of the three offer types:
+   세 가지 제안 유형 중 하나를 선택하십시오.
 
-   **Free** (Free Trial)
-   - Select duration (days, weeks, months)
-   - Examples: 7 days, 2 weeks, 1 month
+   **무료**(무료 평가판)
+   - 기간 선택(일, 주, 월)
+   - 예: 7일, 2주, 1개월**선불**
+   - 단일 결제 가격 설정
+   - 결제 기간 설정
+   - 예: 2개월 동안 $1.99
 
-   **Pay Up Front**
-   - Set single payment price
-   - Set duration covered by payment
-   - Example: $1.99 for 2 months
+   **사용한 만큼 지불**
+   - 기간별 할인가격 설정
+   - 기간 설정
+   - 예: 3개월 동안 월 $2.99
 
-   **Pay As You Go**
-   - Set discounted price per period
-   - Set number of periods
-   - Example: $2.99/month for 3 months
+6. **검토 및 확인**
 
-6. **Review and Confirm**
+   다음 내용이 표시된 요약을 검토하세요.
+   - 혜택 유형 및 기간
+   - 가격 세부정보
+   - 신규 출시 이후 정상가
+   - 이용 가능 날짜 및 국가
 
-   Review the summary showing:
-   - Offer type and duration
-   - Pricing details
-   - Regular price after intro period
-   - Availability dates and countries
+7. **저장**
 
-7. **Save**
-
-   Click **Save** to create the introductory offer. It will be available for testing immediately in sandbox mode.
+   **저장**을 클릭하여 신규 프로모션을 생성하세요. 샌드박스 모드에서 즉시 테스트가 가능합니다.
 
 </Steps>
 
-## Offer Configuration Examples
+## 제안 구성 예
 
-### Example 1: Standard Free Trial
+### 예 1: 표준 무료 평가판
 ```
 Type: Free
 Duration: 7 days
 Then: $9.99/month
 ```
-**User Journey:**
-- Day 1-7: Free access
-- Day 8: First charge of $9.99
-- Monthly charges continue
+**사용자 여정:**
+- 1~7일차: 무료 이용
+- 8일차: $9.99의 첫 번째 청구
+- 월별 요금은 계속됩니다.
 
-### Example 2: Upfront Discounted Period
+### 예시 2: 선불 할인 기간
 ```
 Type: Pay Up Front
 Price: $4.99
 Duration: 3 months
 Then: $9.99/month
 ```
-**User Journey:**
-- Day 1: Charged $4.99
-- 90 days access
-- Day 91: Charged $9.99/month
+**사용자 여정:**
+- 1일차: $4.99 청구
+- 90일 이용 가능
+- 91일차: 월 $9.99 청구
 
-### Example 3: Gradual Introduction
+### 예시 3: 점진적 소개
 ```
 Type: Pay As You Go
 Price: $2.99/month
 Periods: 6 months
 Then: $9.99/month
 ```
-**User Journey:**
-- Months 1-6: $2.99/month
-- Month 7+: $9.99/month
+**사용자 여정:**
+- 1~6개월: $2.99/월
+- 7개월 이상: $9.99/월
 
-## Using in Your App
+## 앱에서 사용하기
 
-The native-purchases plugin automatically handles introductory offer presentation and eligibility:
+기본 구매 플러그인은 소개 제안 프레젠테이션 및 자격을 자동으로 처리합니다.
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -215,24 +210,24 @@ try {
 }
 ```
 
-## Displaying Intro Offers to Users
+## 사용자에게 소개 제안 표시
 
-### Best Practices for UI
+### UI 모범 사례
 
-**Clear Value Proposition:**
+**명확한 가치 제안:**
 ```
 Try Premium Free for 7 Days
 Then $9.99/month. Cancel anytime.
 ```
 
-**Emphasize Savings:**
+**절감 강조:**
 ```
 Start at Just $1.99
 Get 3 months of Premium for only $1.99
 Then $9.99/month
 ```
 
-**Transparent Communication:**
+**투명한 의사소통:**
 ```
 Your Free Trial
 • Access all premium features
@@ -241,7 +236,7 @@ Your Free Trial
 • Cancel anytime, even during trial
 ```
 
-### Example Implementation
+### 구현 예
 
 ```typescript
 function formatIntroOffer(product: any): string {
@@ -265,27 +260,27 @@ function formatIntroOffer(product: any): string {
 }
 ```
 
-## Marketing Best Practices
+## 마케팅 모범 사례
 
-### Trial Length Strategy
-- **3-7 days**: Quick decision apps, games
-- **7-14 days**: Standard for most apps
-- **14-30 days**: Complex tools, professional apps
-- **30+ days**: High-value B2B or enterprise
+### 시험 기간 전략
+- **3~7일**: 빠른 의사결정 앱, 게임
+- **7~14일**: 대부분의 앱에 표준
+- **14~30일**: 복잡한 도구, 전문 앱
+- **30일 이상**: 고부가가치 B2B 또는 기업
 
-### Pricing Psychology
-- **$0.99-$1.99**: Very low barrier, good for testing
-- **50% off**: Strong perceived value
-- **First month free**: Common, familiar pattern
+### 가격 심리학
+- **$0.99-$1.99**: 장벽이 매우 낮아 테스트하기에 좋습니다.
+- **50% 할인**: 인지도가 높은 가치
+- **첫 달 무료**: 일반적이고 친숙한 패턴
 
-### Communication Timing
-- **Before trial ends**: Remind users of upcoming charge
-- **Highlight value**: Show usage stats, achievements
-- **Easy cancellation**: Build trust with transparent process
+### 통신 타이밍
+- **평가판 종료 전**: 사용자에게 향후 청구에 대해 알립니다.
+- **하이라이트 값**: 사용 통계, 업적 표시
+- **손쉬운 취소**: 투명한 프로세스로 신뢰 구축
 
-## Testing Intro Offers
+## 소개 제안 테스트
 
-Use sandbox testing to verify behavior:
+샌드박스 테스트를 사용하여 동작을 확인합니다.
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -318,68 +313,66 @@ setTimeout(async () => {
 }, 180000); // 3 minutes for weekly trial
 ```
 
-## Important Notes
+## 중요 참고사항
 
-### Eligibility Rules
-- One intro offer per user per subscription group (lifetime)
-- Applies to new subscribers only
-- Cannot be used again after cancellation
-- Not available for subscription upgrades/crossgrades
+### 자격 규칙
+- 구독 그룹당 사용자당 하나의 소개 제안(평생)
+- 신규 가입자에게만 적용됩니다.
+- 취소 후 재이용 불가
+- 구독 업그레이드/크로스그레이드에는 사용할 수 없습니다.
 
 ### StoreKit API
-- `introductoryPrice` shows intro offer details
-- `eligibility` method checks if user qualifies
-- Automatically applied at purchase time
-- No special purchase method needed
+- `introductoryPrice`에는 소개 혜택 세부정보가 표시됩니다.
+- `eligibility` 메소드는 사용자가 자격이 있는지 확인합니다.
+- 구매시 자동 적용
+- 특별한 구매방법이 필요하지 않습니다.
 
-### Limitations
-- Only one intro offer active per subscription at a time
-- Cannot combine with other discount types
-- Cannot change eligibility rules
-- Apple controls eligibility checking
+### 제한사항
+- 구독당 한 번에 하나의 소개 혜택만 활성화됩니다.
+- 다른 할인 유형과 결합할 수 없습니다.
+- 자격규정은 변경할 수 없습니다.
+- Apple는 자격 확인을 제어합니다.
 
-## Troubleshooting
+## 문제 해결
 
-**Intro offer not showing:**
-- Check if offer is activated in App Store Connect
-- Verify user hasn't used an intro offer before
-- Ensure user hasn't subscribed to anything in the group
-- Test with new sandbox account
+**소개 혜택이 표시되지 않음:**
+- App Store Connect에서 혜택이 활성화되었는지 확인하세요.
+- 사용자가 이전에 소개 쿠폰을 사용한 적이 없는지 확인하세요.
+- 사용자가 그룹의 어떤 항목도 구독하지 않았는지 확인하세요.
+- 새로운 샌드박스 계정으로 테스트
 
-**Eligibility check failing:**
-- Wait for App Store sync (can take 2-3 hours)
-- Verify product ID is correct
-- Check subscription group configuration
-- Test in sandbox with fresh test account
+**자격 확인 실패:**
+- App Store 동기화를 기다립니다(2~3시간 정도 소요될 수 있음).
+- 제품 ID가 올바른지 확인하세요.
+- 구독 그룹 구성 확인
+- 새로운 테스트 계정으로 샌드박스에서 테스트**잘못된 가격 표시:**
+- 지역별 가격 설정 확인
+- 통화 변환 확인
+- 제안 날짜가 최신인지 확인하세요.
+- 상품정보 새로고침
 
-**Wrong price displaying:**
-- Check regional pricing settings
-- Verify currency conversion
-- Ensure offer dates are current
-- Refresh product information
+**샌드박스 테스트 문제:**
+- 가속 기간 사용(3분 = 1주)
+- 각 테스트마다 새 테스트 계정 만들기
+- 시도가 자연스럽게 완료될 때까지 기다립니다.
+- 갱신 횟수 확인(샌드박스 최대 6개)
 
-**Sandbox testing issues:**
-- Use accelerated durations (3 min = 1 week)
-- Create new test accounts for each test
-- Wait for trial to complete naturally
-- Check renewal count (max 6 in sandbox)
+## 분석 및 최적화
 
-## Analytics and Optimization
+### 측정항목 추적
+- 소개 제안 수락률
+- 체험판에서 유료판으로의 전환율
+- 체험 기간 중 취소
+- 최초 충전 후 보관
+- 수익에 미치는 영향
 
-### Track These Metrics
-- Intro offer acceptance rate
-- Trial-to-paid conversion rate
-- Cancellation during trial
-- Retention after first charge
-- Revenue impact
+### A/B 테스트 아이디어
+- 무료 평가판과 유료 소개 비교
+- 평가판 기간 변형
+- 할인율
+- 단일결제 vs. 반복할인
 
-### A/B Testing Ideas
-- Free trial vs. paid intro
-- Trial length variations
-- Discount percentage
-- Single payment vs. recurring discount
-
-### Optimization Strategy
+### 최적화 전략
 ```typescript
 // Track offer performance
 analytics.track('intro_offer_displayed', {
@@ -403,13 +396,13 @@ NativePurchases.addListener('transactionUpdated', (transaction) => {
 });
 ```
 
-## Next Steps
+## 다음 단계
 
-- [Configure sandbox testing](/docs/plugins/native-purchases/ios-sandbox-testing/) to test your intro offers
-- Set up promotional offers for win-back campaigns
-- Implement subscription analytics
-- Create targeted marketing campaigns
+- 소개 제안을 테스트하려면 [샌드박스 테스트 구성](/docs/plugins/native-purchases/ios-sandbox-testing/)
+- 윈백 캠페인을 위한 프로모션 제안 설정
+- 구독 분석 구현
+- 타겟 마케팅 캠페인 만들기
 
-## Additional Resources
+## 추가 리소스
 
-For more details, refer to the [official Apple documentation on introductory offers](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers/implementing_introductory_offers_in_your_app).
+자세한 내용은 [소개 제품에 대한 공식 Apple 문서](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers/implementing_introductory_offers_in_your_app)를 참조하세요.

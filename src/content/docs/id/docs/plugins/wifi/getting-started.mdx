@@ -1,27 +1,26 @@
 ---
-title: Getting Started
+title: Memulai
 description: >-
-  Learn how to install and use the WiFi plugin to manage network connectivity in
-  your Capacitor app.
+  Pelajari cara memasang dan menggunakan plugin WiFi untuk mengelola
+  konektivitas jaringan di aplikasi Capacitor Anda.
 sidebar:
   order: 2
 locale: id
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Instal paket**
    <PackageManagers pkg="@capgo/capacitor-wifi" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Sinkronisasi dengan proyek asli**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure permissions**
+3. **Konfigurasi izin**
 
-   **Android**: Add to `AndroidManifest.xml`:
+   **Android**: Tambahkan ke `AndroidManifest.xml`:
    ```xml
    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -29,16 +28,16 @@ import { PackageManagers } from 'starlight-package-managers'
    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
    ```
 
-   **iOS**: Add to `Info.plist`:
+   **iOS**: Tambahkan ke `Info.plist`:
    ```xml
    <key>NSLocationWhenInUseUsageDescription</key>
    <string>We need location access to scan WiFi networks</string>
    ```
 </Steps>
 
-## Usage
+## Penggunaan
 
-Import the plugin and manage WiFi connectivity:
+Impor plugin dan kelola konektivitas WiFi:
 
 ```typescript
 import { CapacitorWifi } from '@capgo/capacitor-wifi';
@@ -67,11 +66,11 @@ const connectToWifi = async () => {
 };
 ```
 
-## API Reference
+## API Referensi
 
-### getWifiInfo()
+### dapatkan InfoWi-Fi()
 
-Gets information about the currently connected WiFi network.
+Mendapatkan informasi tentang jaringan WiFi yang saat ini terhubung.
 
 ```typescript
 interface WifiInfo {
@@ -86,9 +85,9 @@ interface WifiInfo {
 const info = await CapacitorWifi.getWifiInfo();
 ```
 
-### scan()
+### pemindaian()
 
-Scans for available WiFi networks.
+Memindai jaringan WiFi yang tersedia.
 
 ```typescript
 interface WifiNetwork {
@@ -102,9 +101,9 @@ interface WifiNetwork {
 const { networks } = await CapacitorWifi.scan();
 ```
 
-### connect(options)
+### sambungkan (opsi)
 
-Connects to a WiFi network.
+Terhubung ke jaringan WiFi.
 
 ```typescript
 interface ConnectOptions {
@@ -119,33 +118,33 @@ await CapacitorWifi.connect({
 });
 ```
 
-### disconnect()
+### putuskan sambungan()
 
-Disconnects from the current WiFi network.
+Terputus dari jaringan WiFi saat ini.
 
 ```typescript
 await CapacitorWifi.disconnect();
 ```
 
-### getSSID()
+### dapatkanSSID()
 
-Gets the SSID of the currently connected network.
+Mendapatkan SSID dari jaringan yang saat ini terhubung.
 
 ```typescript
 const { ssid } = await CapacitorWifi.getSSID();
 console.log('Connected to:', ssid);
 ```
 
-### getIP()
+### dapatkan IP()
 
-Gets the current device IP address.
+Mendapatkan alamat IP perangkat saat ini.
 
 ```typescript
 const { ip } = await CapacitorWifi.getIP();
 console.log('IP Address:', ip);
 ```
 
-## Complete Example
+## Contoh Lengkap
 
 ```typescript
 import { CapacitorWifi } from '@capgo/capacitor-wifi';
@@ -259,9 +258,9 @@ export class WifiService {
 }
 ```
 
-## Advanced Usage
+## Penggunaan Lanjutan
 
-### Network Quality Assessment
+### Penilaian Kualitas Jaringan
 
 ```typescript
 const assessNetworkQuality = async () => {
@@ -281,7 +280,7 @@ const assessNetworkQuality = async () => {
 };
 ```
 
-### Auto-Connect to Preferred Networks
+### Sambung Otomatis ke Jaringan Pilihan
 
 ```typescript
 const autoConnect = async (preferredNetworks: Array<{ ssid: string, password: string }>) => {
@@ -308,7 +307,7 @@ const autoConnect = async (preferredNetworks: Array<{ ssid: string, password: st
 };
 ```
 
-### Network Change Detection
+### Deteksi Perubahan Jaringan
 
 ```typescript
 class NetworkMonitor {
@@ -343,31 +342,31 @@ class NetworkMonitor {
 }
 ```
 
-## Best Practices
+## Praktik Terbaik
 
-1. **Permissions**: Request location permissions before scanning networks
-2. **Error Handling**: Always wrap WiFi operations in try-catch blocks
-3. **User Feedback**: Show loading indicators during network operations
-4. **Security**: Never store WiFi passwords in plain text
-5. **Testing**: Test on real devices as WiFi APIs may not work in emulators
+1. **Izin**: Minta izin lokasi sebelum memindai jaringan
+2. **Penanganan Kesalahan**: Selalu gabungkan operasi WiFi dalam blok coba-tangkap
+3. **Umpan Balik Pengguna**: Menampilkan indikator pemuatan selama operasi jaringan
+4. **Keamanan**: Jangan pernah menyimpan kata sandi WiFi dalam teks biasa
+5. **Pengujian**: Uji pada perangkat nyata karena API WiFi mungkin tidak berfungsi di emulator
 
-## Platform Differences
+## Perbedaan Platform
 
 ### iOS
-- Requires location permissions to scan networks
-- Cannot programmatically connect to networks (will open Settings)
-- Limited access to network details
+- Membutuhkan izin lokasi untuk memindai jaringan
+- Tidak dapat terprogram terhubung ke jaringan (akan membuka Pengaturan)
+- Akses terbatas ke detail jaringan
 
 ### Android
-- Full programmatic WiFi control
-- Requires location permissions for network scanning
-- Can connect/disconnect programmatically
+- Kontrol WiFi terprogram penuh
+- Membutuhkan izin lokasi untuk pemindaian jaringan
+- Dapat menghubungkan/memutuskan sambungan secara terprogram
 
-## Troubleshooting
+## Pemecahan masalah
 
-### Common Issues
+### Masalah Umum
 
-**Scan returns empty**: Check location permissions are granted
-**Cannot connect to network**: Verify password is correct and network is in range
-**getWifiInfo fails**: Ensure device is connected to a WiFi network
-**Permission denied**: Add required permissions to platform configuration files
+**Pemindaian kembali kosong**: Periksa apakah izin lokasi diberikan
+**Tidak dapat terhubung ke jaringan**: Pastikan kata sandi benar dan jaringan berada dalam jangkauan
+**getWifiInfo gagal**: Pastikan perangkat terhubung ke jaringan WiFi
+**Izin ditolak**: Tambahkan izin yang diperlukan ke file konfigurasi platform

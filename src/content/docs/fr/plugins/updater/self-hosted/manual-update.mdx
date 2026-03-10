@@ -1,14 +1,17 @@
 ---
-locale: fr
-title: "Manual Mise à jour"
-description: "A detailed Guide on utilizing the manual Mise à jour plugin within a self-hosted environment, providing comprehensive instructions on Configuration and Utilisation to effectively manage Mises à jour without relying on automatic processes."
-sidebar: 
+title: Mise à jour manuelle
+description: >-
+  Un guide détaillé sur l'utilisation du plug-in de mise à jour manuelle dans un
+  environnement auto-hébergé, fournissant des instructions complètes sur la
+  configuration et l'utilisation pour gérer efficacement les mises à jour sans
+  recourir à des processus automatiques.
+sidebar:
   order: 3
+locale: fr
 ---
+##Configuration
 
-## Configuration
-
-Add this to your ``capacitor.config.json``, to disable auto-update.
+Ajoutez ceci à votre ``capacitor.config.json`` pour désactiver la mise à jour automatique.
 ```tsx
 // capacitor.config.json
 {
@@ -24,14 +27,14 @@ Add this to your ``capacitor.config.json``, to disable auto-update.
 
 ## Utilisation
 
-You can use this Exemple or re-Créer the logic in your Application.
+Vous pouvez utiliser cet exemple ou recréer la logique dans votre application.
 
-:::Attention
-We are forcing the Utilisateur to Mise à jour the Application with a static Version declared in the code. This is not recommended, you should use a dynamic Version from your server.
+:::caution
+Nous obligeons l'utilisateur à mettre à jour l'application avec une version statique déclarée dans le code. Ceci n'est pas recommandé, vous devez utiliser une version dynamique de votre serveur.
 :::
 
 :::danger
-We are not doing any Version checking, decryption or checksum validation in this Exemple. You should do that on your own.
+Nous n'effectuons aucune vérification de version, déchiffrement ou validation de somme de contrôle dans cet exemple. Vous devriez le faire vous-même.
 :::
 
 ```tsx
@@ -63,6 +66,6 @@ App.addListener('appStateChange', async(state) => {
 
 
 
-:::Remarque
-If this seems like a lot of work consider trying [Capgo trial](https://capgo.Application/register/). It will handle all of this for you.
+:::note
+Si cela vous semble demander beaucoup de travail, envisagez d'essayer [essai Capgo](https://capgo.app/register/). Il gérera tout cela pour vous.
 :::

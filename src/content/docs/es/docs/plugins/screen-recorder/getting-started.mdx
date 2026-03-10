@@ -1,26 +1,27 @@
 ---
-title: Getting Started
-description: Learn how to install and use the Screen Recorder plugin to capture screen recordings in your Capacitor app.
+title: Empezando
+description: >-
+  Aprenda a instalar y utilizar el complemento Screen Recorder para capturar
+  grabaciones de pantalla en su aplicación Capacitor.
 sidebar:
   order: 2
 locale: es
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Instalar el paquete**
    <PackageManagers pkg="@capgo/capacitor-screen-recorder" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Sincronización con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure permissions**
+3. **Configurar permisos**
    
    ### iOS
-   Add usage descriptions to your `Info.plist`:
+   Agregue descripciones de uso a su `Info.plist`:
    ```xml
    <key>NSMicrophoneUsageDescription</key>
    <string>To record audio with screen recording</string>
@@ -29,7 +30,7 @@ import { PackageManagers } from 'starlight-package-managers'
    ```
    
    ### Android
-   Add permissions to your `AndroidManifest.xml`:
+   Agregue permisos a su `AndroidManifest.xml`:
    ```xml
    <uses-permission android:name="android.permission.RECORD_AUDIO" />
    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -37,9 +38,9 @@ import { PackageManagers } from 'starlight-package-managers'
    ```
 </Steps>
 
-## Usage
+## Uso
 
-Import the plugin and use its methods to record the screen:
+Importe el complemento y use sus métodos para grabar la pantalla:
 
 ```typescript
 import { ScreenRecorder } from '@capgo/capacitor-screen-recorder';
@@ -80,19 +81,19 @@ const checkRecordingStatus = async () => {
 };
 ```
 
-## API Reference
+## API Referencia
 
-### start()
+### inicio()
 
-Starts screen recording.
+Inicia la grabación de pantalla.
 
 ```typescript
 await ScreenRecorder.start();
 ```
 
-### stop()
+### detener()
 
-Stops recording and returns the video file path.
+Detiene la grabación y devuelve la ruta del archivo de vídeo.
 
 ```typescript
 interface RecordingResult {
@@ -102,27 +103,27 @@ interface RecordingResult {
 const result = await ScreenRecorder.stop();
 ```
 
-### isSupported()
+### es compatible()
 
-Checks if screen recording is supported on the device.
+Comprueba si la grabación de pantalla es compatible con el dispositivo.
 
 ```typescript
 const { value } = await ScreenRecorder.isSupported();
 // Returns: { value: boolean }
 ```
 
-### isRecording()
+### está grabando()
 
-Checks if screen recording is currently active.
+Comprueba si la grabación de pantalla está actualmente activa.
 
 ```typescript
 const { value } = await ScreenRecorder.isRecording();
 // Returns: { value: boolean }
 ```
 
-## Advanced Usage
+## Uso avanzado
 
-### Recording with Options
+### Grabación con opciones
 
 ```typescript
 // iOS-specific options
@@ -137,7 +138,7 @@ const startWithOptions = async () => {
 };
 ```
 
-### Complete Recording Flow
+### Flujo de grabación completo
 
 ```typescript
 import { ScreenRecorder } from '@capgo/capacitor-screen-recorder';
@@ -203,9 +204,9 @@ export class RecordingService {
 }
 ```
 
-## Best Practices
+## Mejores prácticas
 
-1. **Check support before use**
+1. **Verifique el soporte antes de usar**
    ```typescript
    const { value } = await ScreenRecorder.isSupported();
    if (!value) {
@@ -213,11 +214,11 @@ export class RecordingService {
    }
    ```
 
-2. **Handle permissions properly**
-   On iOS, the system will automatically prompt for permission. On Android, ensure you request necessary permissions.
+2. **Manejar los permisos correctamente**
+   El iOS, el sistema solicitará permiso automáticamente. El Android, asegúrese de solicitar los permisos necesarios.
 
-3. **Provide user feedback**
-   Show clear indicators when recording is active:
+3. **Proporcionar comentarios de los usuarios**
+   Muestra indicadores claros cuando la grabación está activa:
    ```typescript
    let recordingInterval: any;
    
@@ -236,7 +237,7 @@ export class RecordingService {
    };
    ```
 
-4. **Handle interruptions**
+4. **Manejar las interrupciones**
    ```typescript
    import { App } from '@capacitor/app';
    
@@ -251,37 +252,37 @@ export class RecordingService {
    });
    ```
 
-## Platform Notes
+## Notas de plataforma
 
 ### iOS
-- Requires iOS 11.0+
-- Uses `ReplayKit` framework
-- System shows recording indicator in status bar
-- User must confirm recording start
+- Requiere iOS 11.0+
+- Utiliza el marco `ReplayKit`
+- El sistema muestra el indicador de grabación en la barra de estado
+- El usuario debe confirmar el inicio de la grabación.
 
 ### Android
-- Requires Android 5.0 (API 21)+
-- Uses `MediaProjection` API
-- Shows notification during recording
-- Some devices may have manufacturer-specific limitations
+- Requiere Android 5.0 (API 21)+
+- Utiliza `MediaProjection` API
+- Muestra notificación durante la grabación.
+- Algunos dispositivos pueden tener limitaciones específicas del fabricante.
 
 ### Web
-- Not supported on web platform
-- Will return `isSupported: false`
+- No compatible con la plataforma web
+- Devolverá `isSupported: false`
 
-## Troubleshooting
+## Solución de problemas
 
-1. **Recording fails to start**
-   - Ensure all permissions are granted
-   - Check if another app is already recording
-   - Verify device supports screen recording
+1. **La grabación no comienza**
+   - Asegúrese de que se concedan todos los permisos.
+   - Comprueba si otra aplicación ya está grabando
+   - Verificar que el dispositivo admita la grabación de pantalla
 
-2. **No audio in recording**
-   - Check microphone permissions
-   - Ensure `recordAudio` option is enabled
-   - Some devices may not support system audio recording
+2. **No hay audio en la grabación**
+   - Verificar los permisos del micrófono
+   - Asegúrese de que la opción `recordAudio` esté habilitada
+   - Es posible que algunos dispositivos no admitan la grabación de audio del sistema
 
-3. **Video file not found**
-   - Check file permissions
-   - Ensure sufficient storage space
-   - Verify the returned video URL is valid
+3. **Archivo de vídeo no encontrado**
+   - Verificar permisos de archivos
+   - Asegurar suficiente espacio de almacenamiento
+   - Verifique que la URL del video devuelto sea válida

@@ -1,35 +1,32 @@
 ---
-title: Statistics
-description: >-
-  Detailed guide to Statistics API endpoints, providing insights into Monthly
-  Active Users (MAU), storage, and bandwidth metrics for apps and organizations.
+title: 統計
+description: 統計 API エンドポイントの詳細なガイド。アプリと組織の月間アクティブ ユーザー (MAU)、ストレージ、帯域幅メトリクスに関する洞察を提供します。
 sidebar:
   order: 5
 locale: ja
 ---
+統計エンドポイントは、アプリと組織に関する詳細な分析を提供します。さまざまな期間にわたる月間アクティブ ユーザー (MAU)、ストレージ使用量、帯域幅消費量を追跡できます。このデータは、アプリの成長、リソースの使用状況、および容量の計画を監視するために不可欠です。
 
-統計エンドポイントは、アプリと組織に関する詳細な分析を提供します。異なる期間にわたって、月間アクティブユーザー (MAU)、ストレージ使用量、帯域幅消費を追跡できます。このデータは、アプリの成長、リソース使用、キャパシティプランニングを監視するために不可欠です。
+## メトリクスを理解する
 
-## Understanding the Metrics
+- **MAU (月間アクティブ ユーザー)**: 過去 30 日間にアプリにアクセスした一意のデバイスの数
+- **ストレージ**: 保存されているすべてのバンドルとリソースの合計サイズ (バイト単位)
+- **帯域幅**: バンドル ダウンロードの合計データ転送量 (バイト単位)
 
-- **MAU (Monthly Active Users)**: Number of unique devices that accessed your app in the last 30 days
-- **Storage**: Total size of all bundles and resources stored in bytes
-- **Bandwidth**: Total data transfer for bundle downloads in bytes
+## ベストプラクティス
 
-## Best Practices
+1. **定期的なモニタリング**: 統計を定期的にチェックして、増加と使用パターンを追跡します。
+2. **リソース プランニング**: 容量計画にストレージと帯域幅のメトリクスを使用する
+3. **ユーザー エンゲージメント**: MAU を追跡してユーザー エンゲージメントの傾向を理解する
+4. **コスト管理**: リソースの使用状況を監視してコストを最適化します。
 
-1. **Regular Monitoring**: Check statistics periodically to track growth and usage patterns
-2. **Resource Planning**: Use storage and bandwidth metrics for capacity planning
-3. **User Engagement**: Track MAU to understand user engagement trends
-4. **Cost Management**: Monitor resource usage to optimize costs
-
-## Endpoints
+## エンドポイント
 
 ### GET /statistics/app/:app_id/
 
-Get statistics for a specific app. This endpoint is useful for monitoring individual app performance.
+特定のアプリの統計を取得します。このエンドポイントは、個々のアプリのパフォーマンスを監視するのに役立ちます。
 
-#### Query Parameters
+#### クエリパラメータ
 
 ```typescript
 interface StatsQuery {
@@ -38,14 +35,14 @@ interface StatsQuery {
 }
 ```
 
-#### Example Request
+#### リクエストの例
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/statistics/app/com.demo.app/?from=2024-01-01&to=2024-02-01"
 ```
 
-#### Example Response
+#### 応答例
 
 ```json
 [
@@ -66,9 +63,9 @@ curl -H "authorization: your-api-key" \
 
 ### GET /statistics/org/:org_id/
 
-Get statistics for a specific organization. Useful for monitoring organization-level usage.
+特定の組織の統計を取得します。組織レベルの使用状況を監視するのに役立ちます。
 
-#### Query Parameters
+#### クエリパラメータ
 
 ```typescript
 interface StatsQuery {
@@ -79,14 +76,14 @@ interface StatsQuery {
 }
 ```
 
-#### Example Request
+#### リクエストの例
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/statistics/org/046a36ac-e03c-4590-9257-bd6c9dba9ee8/?from=2024-01-01&to=2024-02-01"
 ```
 
-#### Example Response
+#### 応答例
 
 ```json
 [
@@ -105,11 +102,11 @@ curl -H "authorization: your-api-key" \
 ]
 ```
 
-### GET /statistics/user/
+### GET /統計/ユーザー/
 
-Get aggregated statistics across all organizations you have access to. Perfect for overall usage monitoring.
+アクセスできるすべての組織の集計統計を取得します。全体的な使用状況の監視に最適です。
 
-#### Query Parameters
+#### クエリパラメータ
 
 ```typescript
 interface StatsQuery {
@@ -118,14 +115,14 @@ interface StatsQuery {
 }
 ```
 
-#### Example Request
+#### リクエストの例
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/statistics/user/?from=2024-01-01&to=2024-02-01"
 ```
 
-#### Example Response
+#### 応答例
 
 ```json
 [
@@ -146,9 +143,9 @@ curl -H "authorization: your-api-key" \
 
 ### GET /statistics/app/:app_id/bundle_usage
 
-Get bundle usage statistics for a specific app, showing the distribution of versions among users over a specified period.
+特定のアプリのバンドル使用統計を取得し、指定した期間におけるユーザー間のバンドル (バージョン) の分布を示します。
 
-#### Query Parameters
+#### クエリパラメータ
 
 ```typescript
 interface BundleUsageQuery {
@@ -157,14 +154,14 @@ interface BundleUsageQuery {
 }
 ```
 
-#### Example Request
+#### リクエストの例
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/statistics/app/com.demo.app/bundle_usage?from=2024-01-01&to=2024-02-01"
 ```
 
-#### Example Response
+#### 応答例
 
 ```json
 {
@@ -182,9 +179,9 @@ curl -H "authorization: your-api-key" \
 }
 ```
 
-## Error Handling
+## エラー処理
 
-Common error scenarios and their responses:
+一般的なエラーのシナリオとその対応:
 
 ```json
 // Invalid body
@@ -218,18 +215,18 @@ Common error scenarios and their responses:
 }
 ```
 
-## Common Use Cases
+## 一般的な使用例
 
-1. **Growth Tracking**: Monitor MAU growth over time
-2. **Resource Optimization**: Track storage and bandwidth usage to optimize costs
-3. **Capacity Planning**: Use trends to plan for future resource needs
-4. **Usage Reports**: Generate periodic usage reports for stakeholders
-5. **Version Distribution Analysis**: Understand how users are distributed across different app versions with bundle usage statistics
+1. **成長追跡**: MAU の成長を時間の経過とともに監視する
+2. **リソースの最適化**: ストレージと帯域幅の使用状況を追跡してコストを最適化します。
+3. **キャパシティ プランニング**: トレンドを使用して、将来のリソースのニーズを計画します。
+4. **使用状況レポート**: 関係者向けに定期的な使用状況レポートを作成します。
+5. **バンドル (バージョン) の分布分析**: バンドルの使用状況統計を使用して、ユーザーがさまざまなアプリ バンドル (バージョン) にどのように分布しているかを理解します。
 
-## Tips for Analysis
+## 分析のヒント
 
-1. **Compare Periods**: Look at month-over-month or year-over-year trends
-2. **Track Ratios**: Monitor bandwidth per user or storage per app
-3. **Set Alerts**: Create alerts for unusual spikes in usage
-4. **Regular Backups**: Export statistics regularly for historical analysis
-5. **Version Adoption**: Use bundle usage to track adoption rates of new versions
+1. **期間の比較**: 前月比または前年比の傾向を確認します。
+2. **追跡率**: ユーザーごとの帯域幅またはアプリごとのストレージを監視します
+3. **アラートの設定**: 使用量の異常な急増に対するアラートを作成します
+4. **定期的なバックアップ**: 履歴分析のために統計を定期的にエクスポートします。
+5. **バンドル (バージョン) の採用**: バンドルの使用状況を使用して、新しいバンドル (バージョン) の採用率を追跡します。

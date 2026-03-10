@@ -1,31 +1,30 @@
 ---
-title: "日志"
-description: "了解并使用 Capgo 的应用程序日志来诊断和跟踪设备更新的操作。"
+title: Logs
+description: 了解并利用 Capgo 的应用程序日志来诊断并跟踪设备更新的操作。
 sidebar:
   order: 8
 locale: zh
 ---
+## 了解应用程序日志
 
-## 理解应用程序日志
+日志页面提供应用程序更新事件和诊断信息的详细历史记录。这对于监控更新过程、解决问题以及了解您的设备如何与 Capgo 交互至关重要。您可以通过[单击您的应用](/docs/webapp/main-page)，然后[单击“日志”选项卡（以前在一些较旧的屏幕截图或文档中称为“更新”）](/docs/webapp/main-app-page) 来访问它。
 
-日志页面提供了应用程序更新事件和诊断信息的详细历史记录。这对于监控更新过程、解决问题以及了解设备如何与 Capgo 交互至关重要。您可以通过[点击您的应用](/docs/webapp/main-page)然后[点击"日志"标签（在一些较旧的屏幕截图或文档中以前称为"更新"）](/docs/webapp/main-app-page)来访问它。
+从那里您应该看到与此类似的页面，显示日志条目列表：
 
-从那里您应该看到类似这样的页面，显示日志条目列表：
-
-<figure><img style="margin-left: auto; margin-right: auto" src="/logs.webp" alt="显示主界面的日志页面概览" /><figcaption>日志页面概览</figcaption></figure>
+<figure><img style="margin-left: auto; margin-right: auto" src="/logs.webp" alt="显示主界面的日志页面概述" /><figcaption>日志页面概述</figcaption></figure>
 
 日志页面界面包括：
-1. **日志标签** - 访问日志视图的导航标签
-2. **重新加载按钮** - 用最新数据刷新日志列表
-3. **时间范围和操作过滤器** - 按日期范围和操作类型过滤日志（参见下面的部分）
+1. **日志选项卡** - 用于访问日志视图的导航选项卡
+2. **重新加载按钮** - 使用最新数据刷新日志列表
+3. **时间范围和操作过滤器** - 按日期范围和操作类型过滤日志（请参阅下面的部分）
 
 每行显示：
-- **时间戳**（UTC）
+- **时间戳** (UTC)
 - **设备 ID**
 - **操作代码**（发生了什么）
-- **版本名称**（bundle 或 `builtin`）
+- **版本名称**（捆绑包或 `builtin`）
 
-点击一行可跳转到设备详细页面查看完整历史记录。
+单击一行可跳转至设备详细信息页面以查看完整历史记录。
 
 ### 按日期范围过滤
 
@@ -38,156 +37,150 @@ locale: zh
 3. **结束时间** - 设置范围的自定义结束时间
 4. **日历** - 使用日历视图选择特定日期
 
-点击"选择"应用您选择的日期范围，或点击"取消"关闭选择器。
+单击“选择”以应用您选择的日期范围，或单击“取消”以关闭选择器。
 
 ### 按操作类型过滤
 
-操作下拉菜单允许您按特定事件类型过滤日志：
+通过“操作”下拉列表，您可以按特定事件类型过滤日志：
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/logs_filters.webp" alt="用于按事件类型过滤日志的操作过滤器下拉菜单" /><figcaption>操作过滤器</figcaption></figure>
+<figure><img style="margin-left: auto; margin-right: auto" src="/logs_filters.webp" alt="用于按事件类型过滤日志的操作过滤器下拉列表" /><figcaption>操作过滤器</figcaption></figure>
 
 可用的操作过滤器包括：
-- **设备心跳** - 设备的定期健康检查
-- **请求删除版本** - 当 bundle 版本被删除时
-- **重置为默认版本** - 当设备恢复到内置 bundle 时
-- **版本安装成功** - bundle 安装成功
-- **新版本已发送到设备** - 当 Capgo 向设备发送更新时
-- **版本安装失败** - 当 bundle 安装失败时
+- **设备心跳** - 设备定期运行状况检查
+- **请求删除版本** - 删除捆绑包版本时
+- **重置为默认版本** - 当设备恢复为内置捆绑包时
+- **版本安装成功** - 捆绑包安装成功
+- **新版本发送到设备** - 当 Capgo 向设备发送更新时
+- **版本安装失败** - 当捆绑包安装失败时
 
-使用顶部的搜索框快速查找特定的操作类型。您可以选择多个操作来显示与所选任何类型匹配的日志。
+使用顶部的搜索框快速查找特定操作类型。您可以选择多个操作来显示与任何选定类型匹配的日志。
 
-### 示例日志片段（虚假数据）
+### 示例日志片段（假数据）|时间 (UTC) |设备 ID |行动|版本 |它告诉你什么 |
+|------------|----------|--------|---------|--------------------|
+| 2025-01-14 10:00:01 | `A1B2C3` | `get` | 2.4.1 |设备询问 Capgo 是否有可用更新 |
+| 2025-01-14 10:00:03 | `A1B2C3` | `download_manifest_start` | 2.4.1 |清单获取已开始； SDK 即将下载文件 |
+| 2025-01-14 10:00:07 | `A1B2C3` | `download_40` | 2.4.1 |捆绑包下载已完成 40% |
+| 2025-01-14 10:00:12 | `A1B2C3` | `download_zip_complete` | 2.4.1 | Zip 下载完毕 |
+| 2025-01-14 10:00:13 | `A1B2C3` | `set` | 2.4.1 |捆绑包已安装并标记为下一步运行 |
+| 2025-01-14 10:05:00 | `B9C8D7` | `disableAutoUpdateToMajor` | 1.9.0 |渠道政策阻止了向 2.x 的跳跃 |
+| 2025-01-14 10:05:05 | `B9C8D7` | `rateLimited` |内置 |设备达到请求限制； SDK 退出直至重新启动 |
 
-| 时间 (UTC) | 设备 ID | 操作 | 版本 | 含义 |
-|------------|---------|------|------|------|
-| 2025-01-14 10:00:01 | `A1B2C3` | `get` | 2.4.1 | 设备向 Capgo 询问是否有可用更新 |
-| 2025-01-14 10:00:03 | `A1B2C3` | `download_manifest_start` | 2.4.1 | 清单下载已启动；SDK 即将下载文件 |
-| 2025-01-14 10:00:07 | `A1B2C3` | `download_40` | 2.4.1 | bundle 下载完成 40% |
-| 2025-01-14 10:00:12 | `A1B2C3` | `download_zip_complete` | 2.4.1 | zip 下载完成 |
-| 2025-01-14 10:00:13 | `A1B2C3` | `set` | 2.4.1 | bundle 已安装并标记为下次运行 |
-| 2025-01-14 10:05:00 | `B9C8D7` | `disableAutoUpdateToMajor` | 1.9.0 | 频道策略阻止了到 2.x 的跳跃 |
-| 2025-01-14 10:05:05 | `B9C8D7` | `rateLimited` | builtin | 设备达到请求限制；SDK 等待直到重启 |
+## 日志场景示例
 
-## 示例日志场景
+为了帮助您了解日志告诉您的内容，以下是显示真实设备更新过程的示例序列：
 
-为帮助您理解日志所传达的信息，以下是展示真实设备更新历程的示例序列：
-
-### 成功的更新流程
+### 成功更新流程
 
 这是日志中健康更新的样子：
 
-| 时间 | 设备 ID | 操作 | 版本 | 含义 |
-|------|---------|------|------|------|
-| 10:00:01 | `a1b2c3d4` | `get` | 1.2.0 | 设备检查更新并收到版本 1.2.0 信息 |
-| 10:00:02 | `a1b2c3d4` | `download_10` | 1.2.0 | 下载开始，完成 10% |
-| 10:00:03 | `a1b2c3d4` | `download_50` | 1.2.0 | 下载 50% |
-| 10:00:05 | `a1b2c3d4` | `download_complete` | 1.2.0 | 下载成功完成 |
-| 10:00:06 | `a1b2c3d4` | `set` | 1.2.0 | bundle 已安装并激活 |
+|时间 |设备 ID |行动|版本 |这意味着什么 |
+|------|---------|--------|---------|---------------|
+| 10:00:01 | `a1b2c3d4` | `get` | 1.2.0 |设备检查更新并收到版本 1.2.0 信息 |
+| 10:00:02 | 10:00:02 `a1b2c3d4` | `download_10` | 1.2.0 |下载已开始，完成 10% |
+| 10:00:03 | 10:00:03 `a1b2c3d4` | `download_50` | 1.2.0 |下载速度为 50% |
+| 10:00:05 | 10:00:05 `a1b2c3d4` | `download_complete` | 1.2.0 |下载成功 |
+| 10:00:06 | 10:00:06 `a1b2c3d4` | `set` | 1.2.0 |捆绑包已安装并激活 |
 
-### 设备已是最新
+### 设备已经是最新的
 
-当设备检查但已有最新版本时：
+当设备检查但已具有最新版本时：
 
-| 时间 | 设备 ID | 操作 | 版本 | 含义 |
-|------|---------|------|------|------|
-| 14:30:00 | `e5f6g7h8` | `noNew` | 1.2.0 | 设备已是最新版本，无需更新 |
+|时间 |设备 ID |行动|版本 |这意味着什么 |
+|------|---------|--------|---------|---------------|
+| 14:30:00 | 14:30:00 `e5f6g7h8` | `noNew` | 1.2.0 |设备已是最新版本，无需更新 |
 
-### 带回滚的失败更新
+### 回滚更新失败
 
 当更新失败并且设备回滚时：
 
-| 时间 | 设备 ID | 操作 | 版本 | 含义 |
-|------|---------|------|------|------|
-| 11:15:00 | `i9j0k1l2` | `get` | 1.3.0 | 设备收到更新信息 |
-| 11:15:02 | `i9j0k1l2` | `download_complete` | 1.3.0 | 下载完成 |
-| 11:15:03 | `i9j0k1l2` | `set` | 1.3.0 | bundle 已设置 |
-| 11:15:10 | `i9j0k1l2` | `update_fail` | 1.3.0 | 应用崩溃或未调用 `notifyAppReady()` - 触发回滚 |
-| 11:15:11 | `i9j0k1l2` | `reset` | builtin | 设备恢复到内置版本 |
+|时间 |设备 ID |行动|版本 |这意味着什么 |
+|------|---------|--------|---------|---------------|
+| 11:15:00 | 11:15:00 `i9j0k1l2` | `get` | 1.3.0 |设备收到更新信息 |
+| 11:15:02 | `i9j0k1l2` | `download_complete` | 1.3.0 |下载完成 |
+| 11:15:03 | 11:15:03 `i9j0k1l2` | `set` | 1.3.0 |捆绑包已设置 |
+| 11:15:10 | 11:15:10 `i9j0k1l2` | `update_fail` | 1.3.0 |应用程序崩溃或未调用 `notifyAppReady()` - 已触发回滚 |
+| 11:15:11 | `i9j0k1l2` | `reset` |内置 |设备恢复内置版本 |
 
-**需要的操作**：检查您的应用是否在成功初始化后调用 `notifyAppReady()`。详情参见[插件文档](/docs/plugin/api/#notifyappready)。
+**需要采取的行动**：检查您的应用程序在成功初始化后是否调用 `notifyAppReady()`。有关详细信息，请参阅[插件文档](/docs/plugin/api/#notifyappready)。
 
 ### 下载失败
 
-当网络问题阻止下载时：
+当网络问题阻止下载时：|时间 |设备 ID |行动|版本 |这意味着什么 |
+|------|---------|--------|---------|---------------|
+| 09:45:00 | 09:45:00 `m3n4o5p6` | `get` | 1.2.0 |设备收到更新信息 |
+| 09:45:01 | `m3n4o5p6` | `download_30` | 1.2.0 |下载已开始，但是... |
+| 09:45:15 | 09:45:15 `m3n4o5p6` | `download_fail` | 1.2.0 |下载失败（网络超时、连接丢失等） |
 
-| 时间 | 设备 ID | 操作 | 版本 | 含义 |
-|------|---------|------|------|------|
-| 09:45:00 | `m3n4o5p6` | `get` | 1.2.0 | 设备收到更新信息 |
-| 09:45:01 | `m3n4o5p6` | `download_30` | 1.2.0 | 下载开始但是... |
-| 09:45:15 | `m3n4o5p6` | `download_fail` | 1.2.0 | 下载失败（网络超时、连接丢失等） |
+**需要采取的行动**：设备将在下次应用程序启动时自动重试。除非这种情况经常发生，否则无需采取任何措施。
 
-**需要的操作**：设备将在下次应用启动时自动重试。除非频繁发生，否则无需操作。
+### 已达到计划限制
 
-### 达到计划限制
+当您的帐户达到其设备限制时：
 
-当您的账户达到设备限制时：
+|时间 |设备 ID |行动|版本 |这意味着什么 |
+|------|---------|--------|---------|---------------|
+| 16:00:00 | 16:00:00 `q7r8s9t0` | `needPlanUpgrade` | - |在您升级或计费周期重置之前，此设备不会收到更新 |
 
-| 时间 | 设备 ID | 操作 | 版本 | 含义 |
-|------|---------|------|------|------|
-| 16:00:00 | `q7r8s9t0` | `needPlanUpgrade` | - | 此设备在您升级或计费周期重置之前不会收到更新 |
+**需要采取行动**：[升级您的计划](/docs/webapp/settings/) 或等待下一个计费周期。
 
-**需要的操作**：[升级您的计划](/docs/webapp/settings/)或等待下一个计费周期。
-
-### 频道配置阻止更新
+### 通道配置阻止更新
 
 当频道设置阻止更新时：
 
-| 时间 | 设备 ID | 操作 | 版本 | 含义 |
-|------|---------|------|------|------|
-| 12:00:00 | `u1v2w3x4` | `disableAutoUpdateToMajor` | 2.0.0 | v1.x 上的设备无法自动更新到 v2.x（主版本跳跃被阻止） |
-| 12:05:00 | `y5z6a7b8` | `disableEmulator` | 1.2.0 | 检测到模拟器，频道阻止模拟器 |
-| 12:10:00 | `c9d0e1f2` | `disableDevBuild` | 1.2.0 | 检测到开发构建，频道阻止开发构建 |
+|时间 |设备 ID |行动|版本 |这意味着什么 |
+|------|---------|--------|---------|---------------|
+| 12:00:00 | 12:00:00 `u1v2w3x4` | `disableAutoUpdateToMajor` | 2.0.0 | v1.x 上的设备无法自动更新到 v2.x（主要版本跳转被阻止）|
+| 12:05:00 | 12:05:00 `y5z6a7b8` | `disableEmulator` | 1.2.0 |检测到模拟器，并且通道阻止模拟器 |
+| 12:10:00 | 12:10:00 `c9d0e1f2` | `disableDevBuild` | 1.2.0 |检测到开发版本，通道阻止开发版本 |
 
-**需要的操作**：这些是有意的保护。如果您想允许这些更新，请修改您的[频道设置](/docs/webapp/channels/)。
+**需要采取行动**：这些是有意的保护。如果您想允许这些更新，请修改您的[频道设置](/docs/webapp/channels/)。
 
 ## 日志代码（Capgo 后端枚举）
 
-这些代码来自仪表板 API 使用的 `stats_action` 枚举（`capgo/src/types/supabase.types.ts`）。如果您在 UI 中看到新代码，它是由 SDK 或后端发出的，并已针对此列表进行验证。
+这些代码来自仪表板 API (`capgo/src/types/supabase.types.ts`) 使用的 `stats_action` 枚举。如果您在 UI 中看到新代码，则它是由 SDK 或后端发出的，并根据此列表进行了验证。
 
-**正常路径和生命周期**
+**幸福之路和生命周期**
 
-| 代码 | 含义 |
-|------|------|
-| `get` | 设备向 Capgo 请求当前频道清单 |
-| `download_manifest_start`, `download_manifest_complete` | 清单下载开始/完成（用于增量或多文件 bundle） |
-| `download_zip_start`, `download_zip_complete` | zip 归档下载开始/完成 |
-| `download_10` … `download_90` | 下载进度里程碑 |
-| `download_complete` | 整个 bundle 已下载 |
-| `set` | bundle 已准备好下次启动 |
-| `reset` | 设备恢复到内置 bundle |
-| `delete` | bundle 从本地存储中删除 |
-| `uninstall` | 检测到应用卸载 |
-| `app_moved_to_foreground`, `app_moved_to_background` | SDK 记录的应用生命周期事件 |
-| `ping` | 设备的健康/心跳检查 |
-| `setChannel`, `getChannel` | 通过 SDK 调用覆盖或获取频道 |
+|代码 |意义|
+|---------|---------|
+| `get` |设备向 Capgo 询问当前通道清单 |
+| `download_manifest_start`、`download_manifest_complete` |清单下载开始/完成（对于增量或多文件包）|
+| `download_zip_start`、`download_zip_complete` | Zip 存档下载开始/完成 |
+| `download_10` … `download_90` |下载进度里程碑 |
+| `download_complete` |整个捆绑包已下载 |
+| `set` |捆绑包将于下次发布|
+| `reset` |设备恢复为内置捆绑包 |
+| `delete` |捆绑包已从本地存储中删除 |
+| `uninstall` |检测到应用程序卸载 |
+| `app_moved_to_foreground`、`app_moved_to_background` | SDK 记录的应用程序生命周期事件 |
+| `ping` |从设备进行健康/心跳检查 |
+| `setChannel`、`getChannel` |通过 SDK 调用覆盖或获取通道 |
 
-**配置或策略阻止**
-
-| 代码 | 为什么更新被阻止 |
-|------|-----------------|
-| `disableAutoUpdate`, `disableAutoUpdateToMajor`, `disableAutoUpdateToMinor`, `disableAutoUpdateToPatch`, `disableAutoUpdateMetadata`, `disableAutoUpdateUnderNative` | 频道策略禁止此 semver 跳跃 |
-| `disablePlatformIos`, `disablePlatformAndroid` | 平台在频道上被禁用 |
-| `disableDevBuild`, `disableEmulator` | 不允许开发构建或模拟器 |
-| `cannotUpdateViaPrivateChannel`, `NoChannelOrOverride`, `channelMisconfigured` | 频道选择或覆盖失败 |
-| `missingBundle`, `cannotGetBundle` | 清单引用了 Capgo 无法提供的 bundle |
-| `needPlanUpgrade` | 组织达到其计划/设备限制 |
-| `rateLimited` | 请求过多；SDK 限制直到重启 |
-| `blocked_by_server_url`, `backend_refusal`, `InvalidIp` | 服务器端规则阻止了请求 |
+**配置或策略块**|代码 |为什么更新被阻止 |
+|--------|----------------------------------------|
+| `disableAutoUpdate`、`disableAutoUpdateToMajor`、`disableAutoUpdateToMinor`、`disableAutoUpdateToPatch`、`disableAutoUpdateMetadata`、`disableAutoUpdateUnderNative` |渠道策略禁止这种 semver 跳跃 |
+| `disablePlatformIos`、`disablePlatformAndroid` |频道上的平台被禁用 |
+| `disableDevBuild`、`disableEmulator` |不允许开发版本或模拟器 |
+| `cannotUpdateViaPrivateChannel`、`NoChannelOrOverride`、`channelMisconfigured` |频道选择或覆盖失败 |
+| `missingBundle`、`cannotGetBundle` |清单引用了无法提供的捆绑包 Capgo |
+| `needPlanUpgrade` |组织达到其计划/设备限制 |
+| `rateLimited` |请求过多； SDK 节流直至重新启动 |
+| `blocked_by_server_url`、`backend_refusal`、`InvalidIp` |服务器端规则阻止了请求 |
 
 **下载/完整性/安装失败**
 
-| 代码 | 含义 |
-|------|------|
-| `download_fail` | bundle 下载失败（网络或响应错误） |
-| `download_manifest_file_fail`, `download_manifest_checksum_fail`, `download_manifest_brotli_fail` | 清单文件无法检索或验证 |
-| `checksum_fail`, `checksum_required` | 完整性检查失败或缺少校验和 |
-| `unzip_fail`, `directory_path_fail`, `canonical_path_fail`, `windows_path_fail` | 文件系统或解压验证失败 |
-| `decrypt_fail` | 解密失败（加密的 bundle） |
-| `update_fail` | bundle 已安装但应用从未调用 `notifyAppReady()`；触发回滚 |
-| `download_zip_*` 后没有 `set` | 下载完成但安装阶段从未完成 |
+|代码 |意义|
+|---------|---------|
+| `download_fail` |捆绑包下载失败（网络或响应错误）|
+| `download_manifest_file_fail`、`download_manifest_checksum_fail`、`download_manifest_brotli_fail` |无法检索或验证清单文件 |
+| `checksum_fail`、`checksum_required` |完整性检查失败或校验和丢失 |
+| `unzip_fail`、`directory_path_fail`、`canonical_path_fail`、`windows_path_fail` |文件系统或解压缩验证失败 |
+| `decrypt_fail` |解密失败（加密包）|
+| `update_fail` |捆绑包已安装，但应用程序从未调用 `notifyAppReady()`；回滚已触发|
+| `download_zip_*` 没有后续 `set` |下载已完成但安装阶段尚未完成 |
 
-➡️ 需要每个代码的更深入指导？参见**[完整日志代码参考和调试指南](/docs/plugins/updater/debugging/#understanding-cloud-logs)**。
+➡️ 需要更深入的每代码指导？请参阅**[完整日志代码参考和调试指南](/docs/plugins/updater/debugging/#understanding-cloud-logs)**。
 
 ## 获取有关日志的更多详细信息
 
-如果您点击特定的日志条目，它通常会将您带到[设备页面](/docs/webapp/devices/)。这允许您查看该特定设备的完整历史记录，这对于诊断特定于设备的问题或了解其更新历程非常有帮助。
+如果您单击特定日志条目，通常会将您带到[设备页面](/docs/webapp/devices/)。这使您可以查看该特定设备的完整历史记录，这对于诊断设备特定问题或了解其更新过程非常有帮助。

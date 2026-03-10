@@ -1,35 +1,35 @@
 ---
-title: Statistics
+title: Statistik
 description: >-
-  Detailed guide to Statistics API endpoints, providing insights into Monthly
-  Active Users (MAU), storage, and bandwidth metrics for apps and organizations.
+  Panduan terperinci untuk titik akhir Statistik API, memberikan wawasan tentang
+  Pengguna Aktif Bulanan (MAU), penyimpanan, dan metrik bandwidth untuk aplikasi
+  dan organisasi.
 sidebar:
   order: 5
 locale: id
 ---
+Titik akhir Statistik memberikan analisis mendetail tentang aplikasi dan organisasi Anda. Anda dapat melacak Pengguna Aktif Bulanan (MAU), penggunaan penyimpanan, dan konsumsi bandwidth dalam periode waktu yang berbeda. Data ini penting untuk memantau pertumbuhan aplikasi, penggunaan sumber daya, dan kapasitas perencanaan.
 
-The Statistics endpoints provide detailed analytics about your apps and organizations. You can track Monthly Active Users (MAU), storage usage, and bandwidth consumption across different time periods. This data is essential for monitoring app growth, resource usage, and planning capacity.
+## Memahami Metrik
 
-## Understanding the Metrics
+- **MAU (Pengguna Aktif Bulanan)**: Jumlah perangkat unik yang mengakses aplikasi Anda dalam 30 hari terakhir
+- **Penyimpanan**: Ukuran total semua paket dan sumber daya yang disimpan dalam byte
+- **Bandwidth**: Total transfer data untuk unduhan bundel dalam byte
 
-- **MAU (Monthly Active Users)**: Number of unique devices that accessed your app in the last 30 days
-- **Storage**: Total size of all bundles and resources stored in bytes
-- **Bandwidth**: Total data transfer for bundle downloads in bytes
+## Praktik Terbaik
 
-## Best Practices
+1. **Pemantauan Reguler**: Periksa statistik secara berkala untuk melacak pertumbuhan dan pola penggunaan
+2. **Perencanaan Sumber Daya**: Gunakan metrik penyimpanan dan bandwidth untuk perencanaan kapasitas
+3. **Keterlibatan Pengguna**: Lacak MAU untuk memahami tren keterlibatan pengguna
+4. **Manajemen Biaya**: Pantau penggunaan sumber daya untuk mengoptimalkan biaya
 
-1. **Regular Monitoring**: Check statistics periodically to track growth and usage patterns
-2. **Resource Planning**: Use storage and bandwidth metrics for capacity planning
-3. **User Engagement**: Track MAU to understand user engagement trends
-4. **Cost Management**: Monitor resource usage to optimize costs
+## Titik akhir
 
-## Endpoints
+### DAPATKAN /statistik/aplikasi/:app_id/
 
-### GET /statistics/app/:app_id/
+Dapatkan statistik untuk aplikasi tertentu. Titik akhir ini berguna untuk memantau kinerja aplikasi individual.
 
-Get statistics for a specific app. This endpoint is useful for monitoring individual app performance.
-
-#### Query Parameters
+#### Parameter Kueri
 
 ```typescript
 interface StatsQuery {
@@ -38,14 +38,14 @@ interface StatsQuery {
 }
 ```
 
-#### Example Request
+#### Contoh Permintaan
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/statistics/app/com.demo.app/?from=2024-01-01&to=2024-02-01"
 ```
 
-#### Example Response
+#### Contoh Respon
 
 ```json
 [
@@ -64,11 +64,11 @@ curl -H "authorization: your-api-key" \
 ]
 ```
 
-### GET /statistics/org/:org_id/
+### DAPATKAN /statistics/org/:org_id/
 
-Get statistics for a specific organization. Useful for monitoring organization-level usage.
+Dapatkan statistik untuk organisasi tertentu. Berguna untuk memantau penggunaan tingkat organisasi.
 
-#### Query Parameters
+#### Parameter Kueri
 
 ```typescript
 interface StatsQuery {
@@ -79,14 +79,14 @@ interface StatsQuery {
 }
 ```
 
-#### Example Request
+#### Contoh Permintaan
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/statistics/org/046a36ac-e03c-4590-9257-bd6c9dba9ee8/?from=2024-01-01&to=2024-02-01"
 ```
 
-#### Example Response
+#### Contoh Respon
 
 ```json
 [
@@ -105,11 +105,11 @@ curl -H "authorization: your-api-key" \
 ]
 ```
 
-### GET /statistics/user/
+### DAPATKAN /statistik/pengguna/
 
-Get aggregated statistics across all organizations you have access to. Perfect for overall usage monitoring.
+Dapatkan statistik gabungan di seluruh organisasi yang dapat Anda akses. Sempurna untuk pemantauan penggunaan secara keseluruhan.
 
-#### Query Parameters
+#### Parameter Kueri
 
 ```typescript
 interface StatsQuery {
@@ -118,14 +118,14 @@ interface StatsQuery {
 }
 ```
 
-#### Example Request
+#### Contoh Permintaan
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/statistics/user/?from=2024-01-01&to=2024-02-01"
 ```
 
-#### Example Response
+#### Contoh Respon
 
 ```json
 [
@@ -144,11 +144,11 @@ curl -H "authorization: your-api-key" \
 ]
 ```
 
-### GET /statistics/app/:app_id/bundle_usage
+### DAPATKAN /statistics/app/:app_id/bundle_usage
 
-Get bundle usage statistics for a specific app, showing the distribution of versions among users over a specified period.
+Dapatkan statistik penggunaan paket untuk aplikasi tertentu, yang menunjukkan distribusi paket (versi) di antara pengguna selama periode tertentu.
 
-#### Query Parameters
+#### Parameter Kueri
 
 ```typescript
 interface BundleUsageQuery {
@@ -157,14 +157,14 @@ interface BundleUsageQuery {
 }
 ```
 
-#### Example Request
+#### Contoh Permintaan
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/statistics/app/com.demo.app/bundle_usage?from=2024-01-01&to=2024-02-01"
 ```
 
-#### Example Response
+#### Contoh Respon
 
 ```json
 {
@@ -182,9 +182,9 @@ curl -H "authorization: your-api-key" \
 }
 ```
 
-## Error Handling
+## Penanganan Kesalahan
 
-Common error scenarios and their responses:
+Skenario kesalahan umum dan tanggapannya:
 
 ```json
 // Invalid body
@@ -218,18 +218,18 @@ Common error scenarios and their responses:
 }
 ```
 
-## Common Use Cases
+## Kasus Penggunaan Umum
 
-1. **Growth Tracking**: Monitor MAU growth over time
-2. **Resource Optimization**: Track storage and bandwidth usage to optimize costs
-3. **Capacity Planning**: Use trends to plan for future resource needs
-4. **Usage Reports**: Generate periodic usage reports for stakeholders
-5. **Version Distribution Analysis**: Understand how users are distributed across different app versions with bundle usage statistics
+1. **Pelacakan Pertumbuhan**: Pantau pertumbuhan MAU dari waktu ke waktu
+2. **Pengoptimalan Sumber Daya**: Melacak penyimpanan dan penggunaan bandwidth untuk mengoptimalkan biaya
+3. **Perencanaan Kapasitas**: Gunakan tren untuk merencanakan kebutuhan sumber daya di masa depan
+4. **Laporan Penggunaan**: Menghasilkan laporan penggunaan berkala untuk pemangku kepentingan
+5. **Analisis Distribusi Paket (versi)**: Memahami bagaimana pengguna didistribusikan ke berbagai paket aplikasi (versi) dengan statistik penggunaan paket
 
-## Tips for Analysis
+## Tip untuk Analisis
 
-1. **Compare Periods**: Look at month-over-month or year-over-year trends
-2. **Track Ratios**: Monitor bandwidth per user or storage per app
-3. **Set Alerts**: Create alerts for unusual spikes in usage
-4. **Regular Backups**: Export statistics regularly for historical analysis
-5. **Version Adoption**: Use bundle usage to track adoption rates of new versions
+1. **Bandingkan Periode**: Lihat tren dari bulan ke bulan atau tahun ke tahun
+2. **Rasio Lacak**: Memantau bandwidth per pengguna atau penyimpanan per aplikasi
+3. **Atur Peringatan**: Membuat peringatan untuk lonjakan penggunaan yang tidak biasa
+4. **Pencadangan Reguler**: Ekspor statistik secara berkala untuk analisis historis
+5. **Adopsi Paket (versi)**: Gunakan penggunaan paket untuk melacak tingkat adopsi paket (versi) baru

@@ -1,40 +1,37 @@
 ---
-title: "快速入门"
-description: >-
-  Learn how to install and use the NFC plugin to read and write NFC tags in your
-  Capacitor app.
+title: 入门
+description: 了解如何安装和使用 NFC 插件在 Capacitor 应用程序中读取和写入 NFC 标签。
 sidebar:
   order: 2
 locale: zh
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **安装软件包**
    <PackageManagers pkg="@capgo/capacitor-nfc" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **与原生项目同步**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Configuration
+## 配置
 
-### iOS Configuration
+### iOS 配置
 
-Add the NFC usage description to your `Info.plist`:
+将 NFC 使用说明添加到您的 `Info.plist` 中：
 
 ```xml
 <key>NFCReaderUsageDescription</key>
 <string>This app needs NFC access to read and write tags</string>
 ```
 
-Enable the Near Field Communication Tag Reading capability in your Xcode project.
+在 Xcode 项目中启用近场通信标签读取功能。
 
-### Android Configuration
+### Android 配置
 
-Add the NFC permission to your `AndroidManifest.xml`:
+将 NFC 权限添加到您的 `AndroidManifest.xml`：
 
 ```xml
 <manifest>
@@ -43,9 +40,9 @@ Add the NFC permission to your `AndroidManifest.xml`:
 </manifest>
 ```
 
-## Usage
+## 用法
 
-### Start Scanning for NFC Tags
+### 开始扫描 NFC 标签
 
 ```typescript
 import { CapacitorNfc } from '@capgo/capacitor-nfc';
@@ -62,7 +59,7 @@ const listener = await CapacitorNfc.addListener('nfcEvent', (event) => {
 });
 ```
 
-### Read NFC Tag
+### 读取 NFC 标签
 
 ```typescript
 await CapacitorNfc.addListener('nfcEvent', (event) => {
@@ -85,7 +82,7 @@ await CapacitorNfc.addListener('nfcEvent', (event) => {
 });
 ```
 
-### Write to NFC Tag
+### 写入 NFC 标签
 
 ```typescript
 // Prepare a text record
@@ -109,7 +106,7 @@ await CapacitorNfc.write({
 console.log('Tag written successfully');
 ```
 
-### Write URL to NFC Tag
+### 将 URL 写入 NFC 标签
 
 ```typescript
 const url = 'https://capgo.app';
@@ -128,28 +125,28 @@ await CapacitorNfc.write({
 });
 ```
 
-### Erase NFC Tag
+### 擦除 NFC 标签
 
 ```typescript
 await CapacitorNfc.erase();
 console.log('Tag erased');
 ```
 
-### Make Tag Read-Only
+### 将标签设置为只读
 
 ```typescript
 await CapacitorNfc.makeReadOnly();
 console.log('Tag is now read-only');
 ```
 
-### Stop Scanning
+### 停止扫描
 
 ```typescript
 await listener.remove();
 await CapacitorNfc.stopScanning();
 ```
 
-### Check NFC Status
+### 检查 NFC 状态
 
 ```typescript
 const { status } = await CapacitorNfc.getStatus();
@@ -162,7 +159,7 @@ if (status === 'NFC_DISABLED') {
 }
 ```
 
-### Android Beam (P2P Sharing)
+### Android 光束（P2P 共享）
 
 ```typescript
 // Share data via Android Beam
@@ -183,11 +180,11 @@ await CapacitorNfc.share(message);
 await CapacitorNfc.unshare();
 ```
 
-## API Reference
+## API 参考
 
-### startScanning(options?)
+### 开始扫描（选项？）
 
-Start listening for NFC tags.
+开始监听 NFC 标签。
 
 ```typescript
 interface StartScanningOptions {
@@ -199,17 +196,17 @@ interface StartScanningOptions {
 await CapacitorNfc.startScanning(options);
 ```
 
-### stopScanning()
+### 停止扫描()
 
-Stop the NFC scanning session.
+停止 NFC 扫描会话。
 
 ```typescript
 await CapacitorNfc.stopScanning();
 ```
 
-### write(options)
+### 写（选项）
 
-Write NDEF records to the last discovered tag.
+将 NDEF 记录写入最后发现的标签。
 
 ```typescript
 interface WriteTagOptions {
@@ -227,9 +224,9 @@ interface NdefRecord {
 await CapacitorNfc.write(options);
 ```
 
-### erase()
+### 擦除()
 
-Erase the last discovered tag.
+删除最后发现的标签。
 
 ```typescript
 await CapacitorNfc.erase();
@@ -237,50 +234,50 @@ await CapacitorNfc.erase();
 
 ### makeReadOnly()
 
-Make the last discovered tag read-only (permanent).
+将最后发现的标签设置为只读（永久）。
 
 ```typescript
 await CapacitorNfc.makeReadOnly();
 ```
 
-### share(options)
+### 分享（选项）
 
-Share NDEF message via Android Beam (Android only).
+通过 Android Beam 共享 NDEF 消息（仅限 Android）。
 
 ```typescript
 await CapacitorNfc.share({ records: [...] });
 ```
 
-### unshare()
+### 取消共享()
 
-Stop sharing (Android only).
+停止共享（仅限 Android）。
 
 ```typescript
 await CapacitorNfc.unshare();
 ```
 
-### getStatus()
+### 获取状态()
 
-Get current NFC adapter status.
+获取当前 NFC 适配器状态。
 
 ```typescript
 const { status } = await CapacitorNfc.getStatus();
 // Returns: 'NFC_OK' | 'NO_NFC' | 'NFC_DISABLED' | 'NDEF_PUSH_DISABLED'
 ```
 
-### showSettings()
+### 显示设置()
 
-Open system NFC settings.
+打开系统 NFC 设置。
 
 ```typescript
 await CapacitorNfc.showSettings();
 ```
 
-## Events
+## 活动
 
-### nfcEvent
+### nfc事件
 
-Fired when an NFC tag is discovered.
+发现 NFC 标签时触发。
 
 ```typescript
 interface NfcEvent {
@@ -301,7 +298,7 @@ interface NfcTag {
 
 ### nfcStateChange
 
-Fired when NFC adapter availability changes (Android only).
+当 NFC 适配器可用性发生变化时触发（仅限 Android）。
 
 ```typescript
 interface NfcStateChangeEvent {
@@ -310,7 +307,7 @@ interface NfcStateChangeEvent {
 }
 ```
 
-## Complete Example
+## 完整示例
 
 ```typescript
 import { CapacitorNfc } from '@capgo/capacitor-nfc';
@@ -401,58 +398,56 @@ export class NfcService {
 }
 ```
 
-## NDEF Record Types
+## NDEF 记录类型
 
-### TNF (Type Name Format)
+### TNF（类型名称格式）
 
-- `0x00`: Empty
-- `0x01`: Well-known (e.g., Text, URI)
-- `0x02`: MIME media type
-- `0x03`: Absolute URI
-- `0x04`: External type
-- `0x05`: Unknown
-- `0x06`: Unchanged
-- `0x07`: Reserved
+- `0x00`：空
+- `0x01`：众所周知（例如文本、URI）
+- `0x02`：MIME 媒体类型
+- `0x03`：绝对 URI
+- `0x04`：外部类型
+- `0x05`：未知
+- `0x06`：不变
+- `0x07`：保留
 
-### Common Record Types
+### 常见记录类型
 
-- **Text**: `type: [0x54]` ('T')
-- **URI**: `type: [0x55]` ('U')
-- **Smart Poster**: `type: [0x53, 0x70]` ('Sp')
+- **文本**：`type: [0x54]` ('T')
+- **URI**：`type: [0x55]`（'U'）
+- **智能海报**：`type: [0x53, 0x70]`（'Sp'）
 
-### URI Prefixes
+### URI 前缀
 
-- `0x00`: (no prefix)
-- `0x01`: `https://`
-- `0x02`: `https://`
-- `0x03`: `http://`
+- `0x00`：（无前缀）
+- `0x01`：`https://`
+- `0x02`：`https://`
+- `0x03`：`http://`
 - `0x04`: `https://www.`
 
-## Best Practices
+## 最佳实践
 
-1. **Check NFC Status**: Always verify NFC is available and enabled
-2. **Handle Permissions**: Request NFC permissions appropriately
-3. **Stop Scanning**: Always stop scanning when done to save battery
-4. **Error Handling**: Wrap NFC operations in try-catch blocks
-5. **Test on Devices**: NFC features don't work on simulators/emulators
+1. **检查 NFC 状态**：始终验证 NFC 是否可用并已启用
+2. **处理权限**：适当请求 NFC 权限
+3. **停止扫描**：完成后始终停止扫描以节省电池
+4. **错误处理**：将 NFC 操作包装在 try-catch 块中
+5. **在设备上测试**：NFC 功能在模拟器/仿真器上不起作用
 
-## Platform Notes
+## 平台说明
 
 ### iOS
-- Requires iOS 11.0+
-- Uses Core NFC framework
-- Supports background tag reading (iOS 13+)
-- Limited to reading NDEF-formatted tags
-- Cannot write tags in background
-- Requires NFCReaderUsageDescription in Info.plist
+- 需要 iOS 11.0+
+- 使用核心 NFC 框架
+- 支持后台标签读取（iOS 13+）
+- 仅限读取 NDEF 格式的标签
+- 无法在后台写入标签
+- 需要 Info.plist 中的 NFCReaderUsageDescription### Android
+- 需要 Android 4.4 (API 19)+
+- 使用 Android NFC API
+- 支持前台和后台标签读取
+- 可以写入标签
+- 在具有 NFC 的设备上支持 Android Beam (P2P)
+- 需要 AndroidManifest.xml 中的 NFC 权限
 
-### Android
-- Requires Android 4.4 (API 19)+
-- Uses Android NFC API
-- Supports both foreground and background tag reading
-- Can write to tags
-- Supports Android Beam (P2P) on devices with NFC
-- Requires NFC permission in AndroidManifest.xml
-
-### Web
-- Not supported on web platform
+### 网络
+- 不支持网络平台

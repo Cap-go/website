@@ -1,8 +1,6 @@
 ---
 title: '@capgo/capacitor-screen-orientation'
-description: >-
-  Control and detect screen orientation with the unique ability to detect
-  physical device orientation using motion sensors.
+description: 동작 센서를 사용하여 물리적 장치 방향을 감지하는 고유한 기능으로 화면 방향을 제어하고 감지합니다.
 tableOfContents: false
 next: false
 prev: false
@@ -10,13 +8,11 @@ sidebar:
   order: 1
   label: Introduction
 hero:
-  tagline: >-
-    Screen orientation plugin with support for detecting true physical device
-    orientation - even when orientation lock is enabled.
+  tagline: 실제 장치 방향 감지를 지원하는 화면 방향 플러그인 - 방향 잠금이 활성화된 경우에도 마찬가지입니다.
   image:
     file: ~public/icons/plugins/screen-orientation.svg
   actions:
-    - text: Get started
+    - text: 시작하기
       link: /docs/plugins/screen-orientation/getting-started/
       icon: right-arrow
       variant: primary
@@ -26,20 +22,19 @@ hero:
       variant: minimal
 locale: ko
 ---
-
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid stagger>
-  <Card title="Physical Orientation Detection" icon="rocket">
-    Detect true physical device orientation using motion sensors, even when orientation lock is enabled
+  <Card title="물리적 방향 감지" icon="rocket">
+    방향 잠금이 활성화된 경우에도 모션 센서를 사용하여 실제 장치 방향을 감지합니다.
   </Card>
-  <Card title="Orientation Lock Detection" icon="puzzle">
-    Determine if the user has enabled orientation lock by comparing physical vs UI orientation
+  <Card title="방향 잠금 감지" icon="puzzle">
+    물리적 방향과 UI 방향을 비교하여 사용자가 방향 잠금을 활성화했는지 확인합니다.
   </Card>
   <Card title="Cross-platform" icon="laptop">
-    Works on iOS (Core Motion), Android (Accelerometer), and Web
+    iOS(코어 모션), Android(가속도계) 및 웹에서 작동합니다.
   </Card>
-  <Card title="Real-time Updates" icon="open-book">
-    Get instant notifications when device orientation changes with event listeners
+  <Card title="실시간 업데이트" icon="open-book">
+    이벤트 리스너를 사용하여 기기 방향이 변경되면 즉시 알림 받기
   </Card>
 </CardGrid>

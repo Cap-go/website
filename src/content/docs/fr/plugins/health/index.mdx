@@ -1,45 +1,48 @@
 ---
-locale: fr
-title: "@capgo/capacitor-health"
-description: Connect to Apple HealthKit and Health Connect from Capacitor with a unified, typed API.
+title: '@capgo/capacitor-health'
+description: >-
+  Connectez-vous à Apple HealthKit et Health Connect à partir de Capacitor avec
+  un API unifié et saisi.
 tableOfContents: false
 next: false
 prev: false
-sidebar: 
+sidebar:
   order: 1
-  label: "Introduction"
-hero: 
-  tagline: Read and write fitness metrics across iOS and Android while keeping one consistent TypeScript contract.
-  image: 
+  label: Introduction
+hero:
+  tagline: >-
+    Lisez et rédigez des mesures de condition physique sur iOS et Android tout
+    en conservant un contrat TypeScript cohérent.
+  image:
     file: ~public/icons/plugins/health.svg
-  actions: 
-    - text: Get started
+  actions:
+    - text: Commencer
       link: /docs/plugins/health/getting-started/
       icon: right-arrow
       variant: primary
     - text: Github
-      link: https://github.com/Cap-go/capacitor-health/
+      link: 'https://github.com/Cap-go/capacitor-health/'
       icon: external
       variant: minimal
+locale: fr
 ---
-
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-The Capgo Health plugin unifies HealthKit and Health Connect access so you can track activity, biometric metrics, and body measurements with one Capacitor integration.
+Le plugin Capgo Health unifie l'accès HealthKit et Health Connect afin que vous puissiez suivre l'activité, les mesures biométriques et les mesures corporelles avec une seule intégration Capacitor.
 
 <CardGrid stagger>
-  <Card title="Cross-platform health data" icon="rocket">
-    Support Apple HealthKit and Android Health Connect out of the box.
+  <Card title="Données de santé multiplateformes" icon="rocket">
+    Prend en charge Apple HealthKit et Android Health Connect prêts à l'emploi.
   </Card>
-  <Card title="Granular permissions" icon="approve-check">
-    Request separate read/write scopes and react to authorization changes.
+  <Card title="Autorisations granulaires" icon="approve-check">
+    Demandez des étendues de lecture/écriture distinctes et réagissez aux modifications d’autorisation.
   </Card>
-  <Card title="Consistent units" icon="star">
-    Work with normalized data types like `steps`, `heartRate`, and `weight`.
+  <Card title="Unités cohérentes" icon="star">
+    Travaillez avec des types de données normalisés tels que `steps`, `heartRate` et `weight`.
   </Card>
-  <Card title="Real-time writes" icon="rocket">
-    Enregistrer samples Retour to the Utilisateur's health store when they Journal activity.
+  <Card title="Écritures en temps réel" icon="rocket">
+    Enregistrez les échantillons dans le magasin de santé de l'utilisateur lorsqu'il enregistre son activité.
   </Card>
 </CardGrid>
 
-Follow the Commencer Guide to Activer platform capabilities, gather consent, and Démarrer syncing metrics.
+Suivez le guide de démarrage pour activer les fonctionnalités de la plateforme, recueillir le consentement et commencer à synchroniser les métriques.

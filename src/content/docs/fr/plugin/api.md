@@ -1,57 +1,31 @@
 ---
-locale: fr
-title: "Functions and Paramètres"
-description: "All Disponible method and Paramètres of the plugin"
-sidebar: 
+title: Fonctions et paramètres
+description: Toutes les méthodes et paramètres disponibles du plugin
+sidebar:
   order: 2
+locale: fr
 ---
-
-# Updater Plugin Config
+# Configuration du plugin de mise à jour
 
 <docgen-config>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
-CapacitorUpdater can be configured with these Options:
-
-| Prop | Type | Description | Default | Since |
-| --- | --- | --- | --- | --- |
-| **`appReadyTimeout`** | `number` | Configure the number of milliseconds the native plugin should wait before considering an update 'failed'. Only available for Android and iOS. | `10000 // (10 seconds)` |  |
-| **`responseTimeout`** | `number` | Configure the number of seconds the native plugin should wait before considering API timeout. Only available for Android and iOS. | `20 // (20 second)` |  |
-| **`autoDeleteFailed`** | `boolean` | Configure whether the plugin should use automatically delete failed bundles. Only available for Android and iOS. | `true` |  |
-| **`autoDeletePrevious`** | `boolean` | Configure whether the plugin should use automatically delete previous bundles after a successful update. Only available for Android and iOS. | `true` |  |
-| **`autoUpdate`** | `boolean` | Configure whether the plugin should use Auto Update via an update server. Only available for Android and iOS. | `true` |  |
-| **`resetWhenUpdate`** | `boolean` | Automatically delete previous downloaded bundles when a newer native app bundle is installed to the device. Only available for Android and iOS. | `true` |  |
-| **`updateUrl`** | `string` | Configure the URL / endpoint to which update checks are sent. Only available for Android and iOS. | `https://plugin.capgo.app/updates` |  |
-| **`channelUrl`** | `string` | Configure the URL / endpoint for channel operations. Only available for Android and iOS. | `https://plugin.capgo.app/channel_self` |  |
-| **`statsUrl`** | `string` | Configure the URL / endpoint to which update statistics are sent. Only available for Android and iOS. Set to "" to disable stats reporting. | `https://plugin.capgo.app/stats` |  |
-| **`publicKey`** | `string` | Configure the public key for end to end live update encryption Version 2 Only available for Android and iOS. | `undefined` | 6.2.0 |
-| **`version`** | `string` | Configure the current version of the app. This will be used for the first update request. If not set, the plugin will get the version from the native code. Only available for Android and iOS. | `undefined` | 4.17.48 |
-| **`directUpdate`** | `boolean | 'always' | 'atInstall' | 'onLaunch'` | Configure when the plugin should direct install updates. Only for autoUpdate mode. Works well for apps less than 10MB and with uploads done using --partial flag. Zip or apps more than 10MB will be relatively slow for users to update. - false: Never do direct updates (use default behavior: download at start, set when backgrounded) - atInstall: Direct update only when app is installed, updated from store, otherwise act as directUpdate = false - onLaunch: Direct update only on app installed, updated from store or after app kill, otherwise act as directUpdate = false - always: Direct update in all previous cases (app installed, updated from store, after app kill or app resume), never act as directUpdate = false - true: (deprecated) Same as "always" for backward compatibility Only available for Android and iOS. | `false` | 5.1.0 |
-| **`autoSplashscreen`** | `boolean` | Automatically handle splashscreen hiding when using directUpdate. When enabled, the plugin will automatically hide the splashscreen after updates are applied or when no update is needed. This removes the need to manually listen for appReady events and call SplashScreen.hide(). Only works when directUpdate is set to "atInstall", "always", "onLaunch", or true. Requires the @capacitor/splash-screen plugin to be installed and configured with launchAutoHide: false. Requires autoUpdate and directUpdate to be enabled. Only available for Android and iOS. | `false` | 7.6.0 |
-| **`autoSplashscreenLoader`** | `boolean` | Display a native loading indicator on top of the splashscreen while automatic direct updates are running. Only takes effect when {@link autoSplashscreen} is enabled. Requires the @capacitor/splash-screen plugin to be installed and configured with launchAutoHide: false. Only available for Android and iOS. | `false` | 7.19.0 |
-| **`autoSplashscreenTimeout`** | `number` | Automatically hide the splashscreen after the specified number of milliseconds when using automatic direct updates. If the timeout elapses, the update continues to download in the background while the splashscreen is dismissed. Set to `0` (zero) to disable the timeout. When the timeout fires, the direct update flow is skipped and the downloaded bundle is installed on the next background/launch. Requires {@link autoSplashscreen} to be enabled. Only available for Android and iOS. | `10000 // (10 seconds)` | 7.19.0 |
-| **`periodCheckDelay`** | `number` | Configure the delay period for period update check. the unit is in seconds. Only available for Android and iOS. Cannot be less than 600 seconds (10 minutes). | `0 (disabled)` |  |
-| **`localS3`** | `boolean` | Configure the CLI to use a local server for testing or self-hosted update server. | `undefined` | 4.17.48 |
-| **`localHost`** | `string` | Configure the CLI to use a local server for testing or self-hosted update server. | `undefined` | 4.17.48 |
-| **`localWebHost`** | `string` | Configure the CLI to use a local server for testing or self-hosted update server. | `undefined` | 4.17.48 |
-| **`localSupa`** | `string` | Configure the CLI to use a local server for testing or self-hosted update server. | `undefined` | 4.17.48 |
-| **`localSupaAnon`** | `string` | Configure the CLI to use a local server for testing. | `undefined` | 4.17.48 |
-| **`localApi`** | `string` | Configure the CLI to use a local api for testing. | `undefined` | 6.3.3 |
-| **`localApiFiles`** | `string` | Configure the CLI to use a local file api for testing. | `undefined` | 6.3.3 |
-| **`allowModifyUrl`** | `boolean` | Allow the plugin to modify the updateUrl, statsUrl and channelUrl dynamically from the JavaScript side. | `false` | 5.4.0 |
-| **`allowModifyAppId`** | `boolean` | Allow the plugin to modify the appId dynamically from the JavaScript side. | `false` | 7.14.0 |
-| **`allowManualBundleError`** | `boolean` | Allow marking bundles as errored from JavaScript while using manual update flows. When enabled, {@link CapacitorUpdaterPlugin.setBundleError} can change a bundle status to `error`. | `false` | 7.20.0 |
-| **`persistCustomId`** | `boolean` | Persist the customId set through {@link CapacitorUpdaterPlugin.setCustomId} across app restarts. Only available for Android and iOS. | `false (will be true by default in a future major release v8.x.x)` | 7.17.3 |
-| **`persistModifyUrl`** | `boolean` | Persist the updateUrl, statsUrl and channelUrl set through {@link CapacitorUpdaterPlugin.setUpdateUrl}, {@link CapacitorUpdaterPlugin.setStatsUrl} and {@link CapacitorUpdaterPlugin.setChannelUrl} across app restarts. Only available for Android and iOS. | `false` | 7.20.0 |
-| **`allowSetDefaultChannel`** | `boolean` | Allow or disallow the {@link CapacitorUpdaterPlugin.setChannel} method to modify the defaultChannel. When set to `false`, calling `setChannel()` will return an error with code `disabled_by_config`. | `true` | 7.34.0 |
-| **`defaultChannel`** | `string` | Set the default channel for the app in the config. Case sensitive. This will setting will override the default channel set in the cloud, but will still respect overrides made in the cloud. This requires the channel to allow devices to self dissociate/associate in the channel settings. https://capgo.app/docs/public-api/channels/#channel-configuration-options | `undefined` | 5.5.0 |
-| **`appId`** | `string` | Configure the app id for the app in the config. | `undefined` | 6.0.0 |
-| **`keepUrlPathAfterReload`** | `boolean` | Configure the plugin to keep the URL path after a reload. WARNING: When a reload is triggered, 'window.history' will be cleared. | `false` | 6.8.0 |
-| **`disableJSLogging`** | `boolean` | Disable the JavaScript logging of the plugin. if true, the plugin will not log to the JavaScript console. only the native log will be done | `false` | 7.3.0 |
-| **`shakeMenu`** | `boolean` | Enable shake gesture to show update menu for debugging/testing purposes | `false` | 7.5.0 |
-
-
-</docgen-config>
+CapacitorUpdater peut être configuré avec ces options :Configurez le CLI pour utiliser un serveur local pour les tests. | `undefined` | 4.17.48 |
+| **`localApi`** | `string` | Configurez le CLI pour utiliser une API locale pour les tests. | `undefined` | 6.3.3 |
+| **`localApiFiles`** | `string` | Configurez le CLI pour utiliser une API de fichier local pour les tests. | `undefined` | 6.3.3 |
+| **`allowModifyUrl`** | `boolean` | Autorisez le plugin à modifier dynamiquement updateUrl, statsUrl et channelUrl du côté JavaScript. | `false` | 5.4.0 |
+| **`allowModifyAppId`** | `boolean` | Autorisez le plugin à modifier dynamiquement l'appId du côté JavaScript. | `false` | 7.14.0 |
+| **`allowManualBundleError`** | `boolean` | Autoriser le marquage des bundles comme erronés à partir de JavaScript lors de l'utilisation de flux de mise à jour manuelle. Lorsqu'il est activé, {@link CapacitorUpdaterPlugin.setBundleError} peut modifier l'état d'un bundle en `error`. | `false` | 7.20.0 |
+| **`persistCustomId`** | `boolean` | Conservez le customId défini via {@link CapacitorUpdaterPlugin.setCustomId} lors des redémarrages de l'application. Disponible uniquement pour Android et iOS. | `false (will be true by default in a future major release v8.x.x)` | 7.17.3 |
+| **`persistModifyUrl`** | `boolean` | Conservez les paramètres updateUrl, statsUrl et channelUrl définis via {@link CapacitorUpdaterPlugin.setUpdateUrl}, {@link CapacitorUpdaterPlugin.setStatsUrl} et {@link CapacitorUpdaterPlugin.setChannelUrl} lors des redémarrages de l'application. Disponible uniquement pour Android et iOS. | `false` | 7.20.0 |
+| **`allowSetDefaultChannel`** | `boolean` | Autorisez ou interdisez la méthode {@link CapacitorUpdaterPlugin.setChannel} pour modifier le defaultChannel. Lorsqu'il est défini sur `false`, l'appel de `setChannel()` renverra une erreur avec le code `disabled_by_config`. | `true` | 7.34.0 |
+| **`defaultChannel`** | `string` | Définissez le canal par défaut pour l'application dans la configuration. Sensible aux majuscules et minuscules. Ce paramètre remplacera le canal par défaut défini dans le cloud, mais respectera toujours les remplacements effectués dans le cloud. Cela nécessite que le canal permette aux appareils de se dissocier/s'associer automatiquement dans les paramètres du canal. https://capgo.app/docs/public-api/channels/#channel-configuration-options | `undefined` | 5.5.0 |
+| **`appId`** | `string` | Configurez l'ID de l'application pour l'application dans la configuration. | `undefined` | 6.0.0 |
+| **`keepUrlPathAfterReload`** | `boolean` | Configurez le plugin pour conserver le chemin de l'URL après un rechargement. AVERTISSEMENT : lorsqu'un rechargement est déclenché, 'window.history' sera effacé. | `false` | 6.8.0 |
+| **`disableJSLogging`** | `boolean` | Désactivez la journalisation JavaScript du plugin. si c'est vrai, le plugin ne se connectera pas à la console JavaScript. seul le log natif sera réalisé | `false` | 7.3.0 |
+| **`osLogging`** | `boolean` | Activez la journalisation au niveau du système d’exploitation. Lorsqu'ils sont activés, les journaux sont écrits dans le journal système qui peut être inspecté dans les versions de production. - **iOS** : utilise os_log au lieu de Swift.print, les journaux sont accessibles via Console.app ou Instruments - **Android** : journaux vers Logcat (android.util.Log) Lorsqu'elle est définie sur false, la journalisation du système est désactivée sur les deux plates-formes (seule la journalisation de la console JavaScript se produira si elle est activée). Tceci est utile pour déboguer les applications de production (App Store/TestFlight s'appuie sur iOS, ou les APK de production sur Android). | `true` | 8.42.0 |
+| **`shakeMenu`** | `boolean` | Activer le geste de secousse pour afficher le menu de mise à jour à des fins de débogage/test | `false` | 7.5.0 |
+| **`allowShakeChannelSelector`** | `boolean` | Activez le geste de secousse pour afficher un menu de sélection de canal permettant de basculer entre les canaux de mise à jour. Lorsqu'il est activé ET `shakeMenu` est vrai, le geste de secousse affiche un sélecteur de canal au lieu du menu de débogage par défaut (Go Home/Reload/Close). Après avoir sélectionné une chaîne, l'application vérifie automatiquement les mises à jour et les téléchargements si disponibles. Fonctionne uniquement si les canaux ont `allow_self_set` activé sur le backend. Disponible uniquement pour Android et iOS. | `false` | 8.43.0 |</docgen-config>
 
 ## API Référence
 
@@ -59,18 +33,18 @@ CapacitorUpdater can be configured with these Options:
 <!--Auto-generated, do not edit by hand-->
 
 - [`notifyAppReady`](#notifyappready)
-- [`setUpdateUrl`](#setupdateurl)
+- [`setUpdateUrl`](#setupdateur)
 - [`setStatsUrl`](#setstatsurl)
 - [`setChannelUrl`](#setchannelurl)
-- [`download`](#download)
-- [`next`](#next)
-- [`set`](#set)
+- [`download`](#téléchargement)
+- [`next`](#suivant)
+- [`set`](#ensemble)
 - [`delete`](#delete)
 - [`setBundleError`](#setbundleerror)
-- [`list`](#list)
-- [`reset`](#reset)
-- [`current`](#current)
-- [`reload`](#reload)
+- [`list`](#liste)
+- [`reset`](#réinitialisation)
+- [`current`](#actuel)
+- [`reload`](#rechargement)
 - [`setMultiDelay`](#setmultidelay)
 - [`cancelDelay`](#canceldelay)
 - [`getLatest`](#getlatest)
@@ -95,55 +69,61 @@ CapacitorUpdater can be configured with these Options:
 - [`addListener('appReloaded')`](#addlistenerappreloaded-)
 - [`addListener('appReady')`](#addlistenerappready-)
 - [`addListener('channelPrivate')`](#addlistenerchannelprivate-)
+- [`addListener('onFlexibleUpdateStateChange')`](#addlisteneronflexibleupdatestatechange-)
 - [`isAutoUpdateAvailable`](#isautoupdateavailable)
 - [`getNextBundle`](#getnextbundle)
 - [`getFailedUpdate`](#getfailedupdate)
 - [`setShakeMenu`](#setshakemenu)
 - [`isShakeMenuEnabled`](#isshakemenuenabled)
+- [`setShakeChannelSelector`](#setshakechannelselector)
+- [`isShakeChannelSelectorEnabled`](#isshakechannelselectorenabled)
 - [`getAppId`](#getappid)
 - [`setAppId`](#setappid)
+- [`getAppUpdateInfo`](#getappupdateinfo)
+- [`openAppStore`](#openappstore)
+- [`performImmediateUpdate`](#performimmediateupdate)
+- [`startFlexibleUpdate`](#startflexibleupdate)
+- [`completeFlexibleUpdate`](#completeflexibleupdate)
 
 </docgen-index>
 
 <docgen-api>
 <!--Auto-generated, do not edit by hand-->
 
-### notifyAppReady
+### notifierAppReady
 
 ```typescript
 notifyAppReady() => Promise<AppReadyResult>
 ```
 
-Notify the Natif layer that JavaScript initialized successfully.
+Informez la couche native que JavaScript s'est initialisé avec succès.
 
-**CRITICAL: You must call this method on every app launch to prevent automatic rollback.**
+**CRITIQUE : vous devez appeler cette méthode à chaque lancement d'application pour empêcher la restauration automatique.**
 
-This is a simple notification to confirm that your Bundle's JavaScript loaded and executed.
-The Natif web server successfully served the Bundle files and your JS runtime started.
-That's all it checks - nothing more complex.
+Il s'agit d'une simple notification pour confirmer que le JavaScript de votre bundle est chargé et exécuté.
+Le serveur Web natif a servi avec succès les fichiers du bundle et votre runtime JS a démarré.
+C'est tout ce qu'il vérifie – rien de plus complexe.
 
-**What triggers rollback:**
-- NOT calling this method within the timeout (default: 10 seconds)
-- Terminé JavaScript failure (Bundle won't load at all)
+**Qu'est-ce qui déclenche la restauration :**
+- NE PAS appeler cette méthode dans le délai d'attente (par défaut : 10 secondes)
+- Échec complet de JavaScript (le bundle ne se chargera pas du tout)
 
-**What does NOT trigger rollback:**
-- Runtime errors after Initialisation (API failures, crashes, etc.)
-- Network request failures
-- Application logic errors
+**Qu'est-ce qui ne déclenche PAS la restauration :**
+- Erreurs d'exécution après initialisation (échecs API, plantages, etc.)
+- Échecs des requêtes réseau
+- Erreurs de logique d'application
 
-**IMPORTANT: Call this BEFORE any network requests.**
-Don't wait for APIs, data loading, or async operations. Call it as soon as your
-JavaScript Bundle starts executing to confirm the Bundle itself is valid.
+**IMPORTANT : Appelez-le AVANT toute demande réseau.**
+N'attendez pas les API, le chargement de données ou les opérations asynchrones. Appelez-le dès que votre
+Le bundle JavaScript commence à s'exécuter pour confirmer que le bundle lui-même est valide.Bonnes pratiques :
+- Appelez immédiatement le point d'entrée de votre application (main.js, montage de composant d'application, etc.)
+- Ne le mettez pas après des appels réseau ou une initialisation lourde
+- Ne l'enveloppez pas dans try/catch avec des conditions
+- Ajustez {@link PluginsConfig.CapacitorUpdater.appReadyTimeout} si vous avez besoin de plus de temps
 
-Best practices:
-- Call immediately in your Application entry point (main.js, Application component mount, etc.)
-- Don't put it after network calls or heavy Initialisation
-- Don't wrap it in try/catch with conditions
-- Adjust {@link PluginsConfig.CapacitorUpdater.appReadyTimeout} if you need more time
+**Retours**
 
-**Returns**
-
-`Promise<AppReadyResult>` — Always resolves successfully with current bundle info. This method never fails.
+`Promise<AppReadyResult>` — Résout toujours avec succès les informations actuelles du bundle. Cette méthode n’échoue jamais.
 
 
 --------------------
@@ -155,27 +135,27 @@ Best practices:
 setUpdateUrl(options: UpdateUrl) => Promise<void>
 ```
 
-Set the Mise à jour URL for the Application dynamically at runtime.
+Définissez l'URL de mise à jour de l'application de manière dynamique au moment de l'exécution.
 
-This overrides the {@link PluginsConfig.CapacitorUpdater.updateUrl} config value.
-Requires {@link PluginsConfig.CapacitorUpdater.allowModifyUrl} to be set to `true`.
+Cela remplace la valeur de configuration {@link PluginsConfig.CapacitorUpdater.updateUrl}.
+Nécessite que {@link PluginsConfig.CapacitorUpdater.allowModifyUrl} soit défini sur `true`.
 
-Use {@link PluginsConfig.CapacitorUpdater.persistModifyUrl} to persist this value across app restarts.
-Otherwise, the URL will Réinitialiser to the config value on Suivant Application launch.
+Utilisez {@link PluginsConfig.CapacitorUpdater.persistModifyUrl} pour conserver cette valeur lors des redémarrages de l'application.
+Sinon, l'URL sera réinitialisée à la valeur de configuration au prochain lancement de l'application.
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `options` | `UpdateUrl` | Contains the URL to use for checking for updates. |
+| `options` | `UpdateUrl` | Contient l'URL à utiliser pour vérifier les mises à jour. |
 
-**Returns**
+**Retours**
 
-`Promise<void>` — Resolves when the URL is successfully updated.
+`Promise<void>` — Résout lorsque l'URL est mise à jour avec succès.
 
-**Since:** 5.4.0
+**Depuis :** 5.4.0
 
-**Throws:** {Error} If `allowModifyUrl` is false or if the operation fails.
+**Lance :** {Erreur} Si `allowModifyUrl` est faux ou si l'opération échoue.
 
 
 --------------------
@@ -187,27 +167,27 @@ Otherwise, the URL will Réinitialiser to the config value on Suivant Applicatio
 setStatsUrl(options: StatsUrl) => Promise<void>
 ```
 
-Set the Statistiques URL for the Application dynamically at runtime.
+Définissez l'URL des statistiques de l'application de manière dynamique au moment de l'exécution.
 
-This overrides the {@link PluginsConfig.CapacitorUpdater.statsUrl} config value.
-Requires {@link PluginsConfig.CapacitorUpdater.allowModifyUrl} to be set to `true`.
+Cela remplace la valeur de configuration {@link PluginsConfig.CapacitorUpdater.statsUrl}.
+Nécessite que {@link PluginsConfig.CapacitorUpdater.allowModifyUrl} soit défini sur `true`.
 
-Pass an empty string to Désactiver Statistiques gathering entirely.
-Use {@link PluginsConfig.CapacitorUpdater.persistModifyUrl} to persist this value across app restarts.
+Transmettez une chaîne vide pour désactiver complètement la collecte de statistiques.
+Utilisez {@link PluginsConfig.CapacitorUpdater.persistModifyUrl} pour conserver cette valeur lors des redémarrages de l'application.
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `options` | `StatsUrl` | Contains the URL to use for sending statistics, or an empty string to disable. |
+| `options` | `StatsUrl` | Contient l'URL à utiliser pour l'envoi des statistiques, ou une chaîne vide à désactiver. |
 
-**Returns**
+**Retours**
 
-`Promise<void>` — Resolves when the URL is successfully updated.
+`Promise<void>` — Résout lorsque l'URL est mise à jour avec succès.
 
-**Since:** 5.4.0
+**Depuis :** 5.4.0
 
-**Throws:** {Error} If `allowModifyUrl` is false or if the operation fails.
+**Lance :** {Erreur} Si `allowModifyUrl` est faux ou si l'opération échoue.
 
 
 --------------------
@@ -219,66 +199,64 @@ Use {@link PluginsConfig.CapacitorUpdater.persistModifyUrl} to persist this valu
 setChannelUrl(options: ChannelUrl) => Promise<void>
 ```
 
-Set the Canal URL for the Application dynamically at runtime.
+Définissez l'URL de la chaîne pour l'application de manière dynamique au moment de l'exécution.
 
-This overrides the {@link PluginsConfig.CapacitorUpdater.channelUrl} config value.
-Requires {@link PluginsConfig.CapacitorUpdater.allowModifyUrl} to be set to `true`.
+Cela remplace la valeur de configuration {@link PluginsConfig.CapacitorUpdater.channelUrl}.
+Nécessite que {@link PluginsConfig.CapacitorUpdater.allowModifyUrl} soit défini sur `true`.
 
-Use {@link PluginsConfig.CapacitorUpdater.persistModifyUrl} to persist this value across app restarts.
-Otherwise, the URL will Réinitialiser to the config value on Suivant Application launch.
+Utilisez {@link PluginsConfig.CapacitorUpdater.persistModifyUrl} pour conserver cette valeur lors des redémarrages de l'application.
+Sinon, l'URL sera réinitialisée à la valeur de configuration au prochain lancement de l'application.
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `options` | `ChannelUrl` | Contains the URL to use for channel operations. |
+| `options` | `ChannelUrl` | Contient l'URL à utiliser pour les opérations de canal. |
 
-**Returns**
+**Retours**
 
-`Promise<void>` — Resolves when the URL is successfully updated.
+`Promise<void>` — Résout lorsque l'URL est mise à jour avec succès.
 
-**Since:** 5.4.0
+**Depuis :** 5.4.0
 
-**Throws:** {Error} If `allowModifyUrl` is false or if the operation fails.
+**Lance :** {Erreur} Si `allowModifyUrl` est faux ou si l'opération échoue.
 
 
 --------------------
 
 
-### Télécharger
+### télécharger
 
 ```typescript
 download(options: DownloadOptions) => Promise<BundleInfo>
 ```
 
-Télécharger a Nouveau Bundle from the provided URL for later Installation.
+Téléchargez un nouveau bundle à partir de l'URL fournie pour une installation ultérieure.
 
-The downloaded Bundle is stored locally but not activated. To use it:
-- Call {@link next} to set it for installation on next app backgrounding/restart
-- Call {@link set} to activate it immediately (destroys current JavaScript context)
+Le bundle téléchargé est stocké localement mais n'est pas activé. Pour l'utiliser :
+- Appelez {@link next} pour le configurer pour l'installation lors du prochain arrière-plan/redémarrage de l'application.
+- Appelez {@link set} pour l'activer immédiatement (détruit le contexte JavaScript actuel)L'URL doit pointer vers un fichier zip contenant soit :
+- Vos fichiers d'application directement dans la racine du zip, ou
+- Un seul dossier contenant tous vos fichiers d'application
 
-The URL should point to a zip file containing either:
-- Your Application files directly in the zip root, or
-- A single folder containing all your Application files
+Le bundle doit inclure un fichier `index.html` au niveau racine.
 
-The bundle must include an `index.html` file at the root level.
+Pour les bundles chiffrés, fournissez les paramètres `sessionKey` et `checksum`.
+Pour les mises à jour delta multi-fichiers, fournissez le tableau `manifest`.
 
-For encrypted bundles, provide the `sessionKey` and `checksum` parameters.
-For multi-file partial updates, provide the `manifest` array.
+**Paramètres**
 
-**Parameters**
-
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `options` | `DownloadOptions` | The {@link DownloadOptions} for downloading a new bundle zip. |
+| `options` | `DownloadOptions` | Les {@link DownloadOptions} pour télécharger un nouveau package zip. |
 
-**Returns**
+**Retours**
 
-`Promise<BundleInfo>` — The {@link BundleInfo} for the downloaded bundle.
+`Promise<BundleInfo>` — Le {@link BundleInfo} du bundle téléchargé.
 
-**Throws:** {Error} If the download fails or the bundle is invalid.
+**Lance :** {Erreur} Si le téléchargement échoue ou si le bundle n'est pas valide.
 
-**Example**
+**Exemple**
 
 ```ts
 const bundle = await CapacitorUpdater.download({
@@ -293,110 +271,108 @@ await CapacitorUpdater.next({ id: bundle.id }); // Will activate on next backgro
 --------------------
 
 
-### Suivant
+### suivant
 
 ```typescript
 next(options: BundleId) => Promise<BundleInfo>
 ```
 
-Set the Suivant Bundle to be activated when the Application backgrounds or restarts.
+Définissez le paquet suivant à activer lorsque l'application s'arrête ou redémarre.
 
-This is the recommended way to apply Mises à jour as it doesn't interrupt the Utilisateur's current session.
-The Bundle will be activated when:
-- The Application is backgrounded (Utilisateur switches away), or
-- The Application is killed and relaunched, or
-- {@link reload} is called manually
+Il s'agit de la méthode recommandée pour appliquer les mises à jour, car elle n'interrompt pas la session en cours de l'utilisateur.
+Le forfait sera activé lorsque :
+- L'application est en arrière-plan (l'utilisateur s'éloigne), ou
+- L'application est supprimée et relancée, ou
+- {@link reload} est appelé manuellement
 
-Unlike {@link set}, this method does NOT destroy the current JavaScript context immediately.
-Your Application continues running normally until one of the above events occurs.
+Contrairement à {@link set}, cette méthode ne détruit PAS immédiatement le contexte JavaScript actuel.
+Votre application continue de fonctionner normalement jusqu'à ce que l'un des événements ci-dessus se produise.
 
-Use {@link setMultiDelay} to add additional conditions before the update is applied.
+Utilisez {@link setMultiDelay} pour ajouter des conditions supplémentaires avant que la mise à jour ne soit appliquée.
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `options` | `BundleId` | Contains the ID of the bundle to set as next. Use {@link BundleInfo.id} from a downloaded bundle. |
+| `options` | `BundleId` | Contient l’ID du bundle à définir comme suivant. Utilisez {@link BundleInfo.id} à partir d'un ensemble téléchargé. |
 
-**Returns**
+**Retours**
 
-`Promise<BundleInfo>` — The {@link BundleInfo} for the specified bundle.
+`Promise<BundleInfo>` — Le {@link BundleInfo} pour le bundle spécifié.
 
-**Throws:** {Error} When there is no index.html file inside the bundle folder or the bundle doesn't exist.
+**Lance :** {Erreur} Lorsqu'il n'y a pas de fichier index.html dans le dossier du bundle ou que le bundle n'existe pas.
 
 
 --------------------
 
 
-### set
+### défini
 
 ```typescript
 set(options: BundleId) => Promise<void>
 ```
 
-Set the current Bundle and immediately reloads the Application.
+Définissez le bundle actuel et rechargez immédiatement l'application.
 
-**IMPORTANT: This is a terminal operation that destroys the current JavaScript context.**
+**IMPORTANT : Il s'agit d'une opération de terminal qui détruit le contexte JavaScript actuel.**
 
-When you call this method:
-- The entire JavaScript context is immediately destroyed
-- The Application reloads from a different folder with different files
-- NO code after this call will execute
-- NO promises will resolve
-- NO callbacks will fire
-- Event listeners registered after this call are unreliable and may never fire
+Lorsque vous appelez cette méthode :
+- L'ensemble du contexte JavaScript est immédiatement détruit
+- L'application se recharge à partir d'un dossier différent avec des fichiers différents
+- AUCUN code après cet appel ne sera exécuté
+- AUCUNE promesse ne sera résolue
+- AUCUN rappel ne sera déclenché
+- Les écouteurs d'événements enregistrés après cet appel ne sont pas fiables et risquent de ne jamais se déclencher.
 
-The reload happens automatically - you don't need to do anything else.
-If you need to preserve state like the current URL path, use the {@link PluginsConfig.CapacitorUpdater.keepUrlPathAfterReload} config option.
-For other state preservation needs, Enregistrer your data before calling this method (e.g., to localStorage).
+Le rechargement s'effectue automatiquement - vous n'avez rien d'autre à faire.
+Si vous devez conserver l'état comme le chemin d'URL actuel, utilisez l'option de configuration {@link PluginsConfig.CapacitorUpdater.keepUrlPathAfterReload}.
+Pour d'autres besoins de préservation de l'état, enregistrez vos données avant d'appeler cette méthode (par exemple, à localStorage).
 
-**Do not** try to execute additional logic after calling `set()` - it won't work as expected.
+**N'essayez pas** d'exécuter une logique supplémentaire après avoir appelé `set()` - cela ne fonctionnera pas comme prévu.
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `options` | `BundleId` | A {@link BundleId} object containing the new bundle id to set as current. |
+| `options` | `BundleId` | Un objet {@link BundleId} contenant le nouvel identifiant de bundle à définir comme actuel. |
 
-**Returns**
+**Retours**
 
-`Promise<void>` — A promise that will never resolve because the JavaScript context is destroyed.
+`Promise<void>` — Une promesse qui ne sera jamais résolue car le contexte JavaScript est détruit.
 
-**Throws:** {Error} When there is no index.html file inside the bundle folder.
+**Lance :** {Erreur} Lorsqu'il n'y a pas de fichier index.html dans le dossier du bundle.
 
 
 --------------------
 
 
-### Supprimer
+### supprimer
 
 ```typescript
 delete(options: BundleId) => Promise<void>
-```
+```Supprimez un bundle du stockage local pour libérer de l'espace disque.
 
-Supprimer a Bundle from local storage to free up disk space.
+Vous ne pouvez pas supprimer :
+- Le forfait actuellement actif
+- Le bundle `builtin` (la version livrée avec votre application)
+- Le forfait défini comme `next` (appelez d'abord {@link next} avec un autre forfait)
 
-You cannot Supprimer:
-- The currently Actif Bundle
-- The `builtin` bundle (the version shipped with your app)
-- The bundle set as `next` (call {@link next} with a different bundle first)
+Utilisez {@link list} pour obtenir tous les identifiants de bundle disponibles.
 
-Use {@link list} to get all available bundle IDs.
+**Remarque :** L'ID du bundle n'est PAS le même que le nom de la version.
+Utilisez le champ `id` de {@link BundleInfo}, et non le champ `version`.
 
-**Note:** The bundle ID is NOT the same as the version name.
-Use the `id` field from {@link BundleInfo}, not the `version` field.
+**Paramètres**
 
-**Parameters**
-
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `options` | `BundleId` | A {@link BundleId} object containing the bundle ID to delete. |
+| `options` | `BundleId` | Un objet {@link BundleId} contenant l'ID du bundle à supprimer. |
 
-**Returns**
+**Retours**
 
-`Promise<void>` — Resolves when the bundle is successfully deleted.
+`Promise<void>` — Résout lorsque le bundle est supprimé avec succès.
 
-**Throws:** {Error} If the bundle is currently in use or doesn't exist.
+**Lance :** {Erreur} Si le bundle est actuellement utilisé ou n'existe pas.
 
 
 --------------------
@@ -408,165 +384,163 @@ Use the `id` field from {@link BundleInfo}, not the `version` field.
 setBundleError(options: BundleId) => Promise<BundleInfo>
 ```
 
-Manually mark a Bundle as Échoué/errored in manual Mise à jour mode.
+Marquez manuellement un bundle comme ayant échoué/erré en mode de mise à jour manuelle.
 
-This is useful when you detect that a Bundle has critical issues and want to prevent
-it from being used again. The bundle status will be changed to `error` and the plugin
-will avoid using this Bundle in the future.
+Ceci est utile lorsque vous détectez qu'un ensemble présente des problèmes critiques et que vous souhaitez éviter
+qu'il ne soit plus utilisé. Le statut du bundle sera changé en `error` et le plugin
+j'éviterai d'utiliser ce bundle à l'avenir.
 
-**Requirements:**
-- {@link PluginsConfig.CapacitorUpdater.allowManualBundleError} must be set to `true`
-- Only works in manual Mise à jour mode (when autoUpdate is disabled)
+**Exigences :**
+- {@link PluginsConfig.CapacitorUpdater.allowManualBundleError} doit être défini sur `true`
+- Fonctionne uniquement en mode de mise à jour manuelle (lorsque autoUpdate est désactivé)
 
-Common use case: After downloading and Test a Bundle, you discover it has critical
-bugs and want to mark it as Échoué so it won't be retried.
+Cas d'utilisation courant : après avoir téléchargé et testé un ensemble, vous découvrez qu'il présente des
+bogues et je veux le marquer comme ayant échoué afin qu'il ne soit pas réessayé.
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `options` | `BundleId` | A {@link BundleId} object containing the bundle ID to mark as errored. |
+| `options` | `BundleId` | Un objet {@link BundleId} contenant l'ID du bundle à marquer comme erroné. |
 
-**Returns**
+**Retours**
 
-`Promise<BundleInfo>` — The updated {@link BundleInfo} with status set to `error`.
+`Promise<BundleInfo>` — Le {@link BundleInfo} mis à jour avec le statut défini sur `error`.
 
-**Since:** 7.20.0
+**Depuis :** 7.20.0
 
-**Throws:** {Error} When the bundle does not exist or `allowManualBundleError` is false.
+**Lance :** {Erreur} Lorsque le bundle n'existe pas ou que `allowManualBundleError` est faux.
 
 
 --------------------
 
 
-### list
+### liste
 
 ```typescript
 list(options?: ListOptions | undefined) => Promise<BundleListResult>
 ```
 
-Get all locally downloaded Bundles stored in your Application.
+Obtenez tous les bundles téléchargés localement stockés dans votre application.
 
-This Retourne all Bundles that have been downloaded and are Disponible locally, including:
-- The currently Actif Bundle
-- The `builtin` bundle (shipped with your app)
-- Any downloaded Bundles waiting to be activated
-- Failed bundles (with `error` status)
+Cela renvoie tous les bundles qui ont été téléchargés et sont disponibles localement, notamment :
+- Le forfait actuellement actif
+- Le bundle `builtin` (livré avec votre application)
+- Tous les bundles téléchargés en attente d'activation
+- Bundles ayant échoué (avec le statut `error`)
 
-Use this to:
-- Vérifier Disponible disk space by counting Bundles
-- Delete old bundles with {@link delete}
-- Monitor Bundle Télécharger status
+Utilisez-le pour :
+- Vérifiez l'espace disque disponible en comptant les bundles
+- Supprimez les anciens bundles avec {@link delete}
+- Surveiller l'état de téléchargement du bundle
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `options` | `ListOptions | undefined` | The {@link ListOptions} for customizing the bundle list output. |
+| `options` | `OptionsListe | non défini` | Les {@link ListOptions} pour personnaliser la sortie de la liste de bundles. |
 
-**Returns**
+**Retours**
 
-`Promise<BundleListResult>` — A promise containing the array of {@link BundleInfo} objects.
+`Promise<BundleListResult>` — Une promesse contenant le tableau d'objets {@link BundleInfo}.
 
-**Throws:** {Error} If the operation fails.
+**Lance :** {Erreur} Si l'opération échoue.
 
 
 --------------------
 
 
-### Réinitialiser
+### réinitialiser
 
 ```typescript
 reset(options?: ResetOptions | undefined) => Promise<void>
 ```
 
-Réinitialiser the Application to a known good Bundle.
+Réinitialisez l’application sur un bon bundle connu.
 
-This method helps recover from problematic Mises à jour by reverting to either:
-- The `builtin` bundle (the original version shipped with your app to App Store/Play Store)
-- The last successfully loaded Bundle (most recent Bundle that worked correctly)
+Cette méthode permet de récupérer des mises à jour problématiques en revenant soit :
+- Le bundle `builtin` (la version originale livrée avec votre application à App Store/Play Store)
+- Le dernier bundle chargé avec succès (le bundle le plus récent qui a fonctionné correctement)**IMPORTANT : cela déclenche un rechargement immédiat de l'application, détruisant le contexte JavaScript actuel.**
+Voir {@link set} pour plus de détails sur les implications de cette opération.
 
-**IMPORTANT: This triggers an immediate app reload, destroying the current JavaScript context.**
-See {@link set} for details on the implications of this operation.
+Cas d'utilisation :
+- Récupération d'urgence lorsqu'une mise à jour provoque des problèmes critiques
+- Test de la fonctionnalité de restauration
+- Fournir aux utilisateurs une option « réinitialisation d'usine »
 
-Use cases:
-- Emergency recovery when an Mise à jour causes critical issues
-- Test Restauration functionality
-- Providing Utilisateurs a "Réinitialiser to factory" Option
+**Paramètres**
 
-**Parameters**
-
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `options` | `ResetOptions | undefined` |  |
+| `options` | `Réinitialiser les options | non défini` |  |
 
-**Returns**
+**Retours**
 
-`Promise<void>` — A promise that may never resolve because the app will be reloaded.
+`Promise<void>` — Une promesse qui pourrait ne jamais se résoudre car l'application sera rechargée.
 
-**Throws:** {Error} If the reset operation fails.
+**Lance :** {Erreur} Si l'opération de réinitialisation échoue.
 
 
 --------------------
 
 
-### current
+### actuel
 
 ```typescript
 current() => Promise<CurrentBundleResult>
 ```
 
-Get Information À propos the currently Actif Bundle.
+Obtenez des informations sur le bundle actuellement actif.
 
-Retourne:
-- `bundle`: The currently active bundle information
-- `native`: The version of the builtin bundle (the original app version from App/Play Store)
+Retours :
+- `bundle` : informations sur le bundle actuellement actif
+- `native` : La version du bundle intégré (la version originale de l'application depuis App/Play Store)
 
-If no updates have been applied, `bundle.id` will be `"builtin"`, indicating the app
-is running the original Version shipped with the Natif Application.
+Si aucune mise à jour n'a été appliquée, `bundle.id` sera « intégré », indiquant l'application
+exécute la version originale fournie avec l'application native.
 
-Use this to:
-- Display the current Version to Utilisateurs
-- Vérifier if an Mise à jour is currently Actif
-- Compare against Disponible Mises à jour
-- Journal the Actif Bundle for Débogage
+Utilisez-le pour :
+- Afficher la version actuelle aux utilisateurs
+- Vérifiez si une mise à jour est actuellement active
+- Comparez avec les mises à jour disponibles
+- Enregistrez le bundle actif pour le débogage
 
-**Returns**
+**Retours**
 
-`Promise<CurrentBundleResult>` — A promise with the current bundle and native version info.
+`Promise<CurrentBundleResult>` — Une promesse avec le bundle actuel et les informations sur la version native.
 
-**Throws:** {Error} If the operation fails.
+**Lance :** {Erreur} Si l'opération échoue.
 
 
 --------------------
 
 
-### reload
+### recharger
 
 ```typescript
 reload() => Promise<void>
 ```
 
-Manually reload the Application to apply a En attente Mise à jour.
+Rechargez manuellement l'application pour appliquer une mise à jour en attente.
 
-This triggers the same reload behavior that happens automatically when the Application backgrounds.
-If you've called {@link next} to queue an update, calling `reload()` will apply it immediately.
+Cela déclenche le même comportement de rechargement qui se produit automatiquement lorsque l'application est en arrière-plan.
+Si vous avez appelé {@link next} pour mettre une mise à jour en file d'attente, l'appel de `reload()` l'appliquera immédiatement.
 
-**IMPORTANT: This destroys the current JavaScript context immediately.**
-See {@link set} for details on the implications of this operation.
+**IMPORTANT : cela détruit immédiatement le contexte JavaScript actuel.**
+Voir {@link set} pour plus de détails sur les implications de cette opération.
 
-Common use cases:
-- Applying an Mise à jour immediately after Télécharger instead of waiting for backgrounding
-- Providing a "Redémarrer now" button to Utilisateurs after an Mise à jour is ready
-- Test Mise à jour flows during Développement
+Cas d'utilisation courants :
+- Application d'une mise à jour immédiatement après le téléchargement au lieu d'attendre l'arrière-plan
+- Fournir un bouton "Redémarrer maintenant" aux utilisateurs une fois qu'une mise à jour est prête
+- Test des flux de mise à jour pendant le développement
 
-If no update is pending (no call to {@link next}), this simply reloads the current bundle.
+Si aucune mise à jour n'est en attente (pas d'appel à {@link next}), cela recharge simplement le bundle actuel.
 
-**Returns**
+**Retours**
 
-`Promise<void>` — A promise that may never resolve because the app will be reloaded.
+`Promise<void>` — Une promesse qui pourrait ne jamais se résoudre car l'application sera rechargée.
 
-**Throws:** {Error} If the reload operation fails.
+**Lance :** {Erreur} Si l'opération de rechargement échoue.
 
 
 --------------------
@@ -578,38 +552,36 @@ If no update is pending (no call to {@link next}), this simply reloads the curre
 setMultiDelay(options: MultiDelayConditions) => Promise<void>
 ```
 
-Configure conditions that must be met before a En attente Mise à jour is applied.
+Configurez les conditions qui doivent être remplies avant qu'une mise à jour en attente soit appliquée.
 
-After calling {@link next} to queue an update, use this method to control when it gets applied.
-The Mise à jour will only be installed after ALL specified conditions are satisfied.
+Après avoir appelé {@link next} pour mettre une mise à jour en file d'attente, utilisez cette méthode pour contrôler le moment où elle est appliquée.
+La mise à jour ne sera installée qu'une fois que TOUTES les conditions spécifiées seront remplies.
 
-Disponible condition types:
-- `background`: Wait for the app to be backgrounded. Optionally specify duration in milliseconds.
-- `kill`: Wait for the app to be killed and relaunched (**Note:** Current behavior triggers update immediately on kill, not on next background. This will be fixed in v8.)
-- `date`: Wait until a specific date/time (ISO 8601 format)
-- `nativeVersion`: Wait until the native app is updated to a specific version
+Types de conditions disponibles :
+- `background` : Attendez que l'application soit mise en arrière-plan. Spécifiez éventuellement la durée en millisecondes.
+- `kill` : Attendez que l'application soit supprimée et relancée (**Remarque :** Le comportement actuel déclenche la mise à jour immédiatement lors de la mise à jour, pas lors de l'arrière-plan suivant. Cela sera corrigé dans la v8.)
+- `date` : Attendre une date/heure précise (format ISO 8601)
+- `nativeVersion` : Attendez que l'application native soit mise à jour vers une version spécifiqueFormats de valeur de condition :
+- `background` : Nombre en millisecondes (par exemple, « 300 000 » pour 5 minutes), ou omettre pour une utilisation immédiate.
+- `kill` : aucune valeur requise
+- `date` : chaîne de date ISO 8601 (par exemple, `"2025-12-31T23:59:59Z"`)
+- `nativeVersion` : chaîne de version (par exemple, `"2.0.0"`)
 
-Condition value formats:
-- `background`: Number in milliseconds (e.g., `"300000"` for 5 minutes), or omit for immediate
-- `kill`: No value needed
-- `date`: ISO 8601 date string (e.g., `"2025-12-31T23:59:59Z"`)
-- `nativeVersion`: Version string (e.g., `"2.0.0"`)
+**Paramètres**
 
-**Parameters**
-
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `options` | `MultiDelayConditions` | Contains the {@link MultiDelayConditions} array of conditions. |
+| `options` | `MultiDelayConditions` | Contient le tableau de conditions {@link MultiDelayConditions}. |
 
-**Returns**
+**Retours**
 
-`Promise<void>` — Resolves when the delay conditions are set.
+`Promise<void>` — Résout lorsque les conditions de délai sont définies.
 
-**Since:** 4.3.0
+**Depuis :** 4.3.0
 
-**Throws:** {Error} If the operation fails or conditions are invalid.
+**Lance :** {Erreur} Si l'opération échoue ou si les conditions ne sont pas valides.
 
-**Example**
+**Exemple**
 
 ```ts
 // Update after user kills app OR after 5 minutes in background
@@ -621,7 +593,7 @@ await CapacitorUpdater.setMultiDelay({
 });
 ```
 
-**Example**
+**Exemple**
 
 ```ts
 // Update after a specific date
@@ -630,7 +602,7 @@ await CapacitorUpdater.setMultiDelay({
 });
 ```
 
-**Example**
+**Exemple**
 
 ```ts
 // Default behavior: update on next background
@@ -643,65 +615,65 @@ await CapacitorUpdater.setMultiDelay({
 --------------------
 
 
-### cancelDelay
+### annulerDélai
 
 ```typescript
 cancelDelay() => Promise<void>
 ```
 
-Annuler all delay conditions and apply the En attente Mise à jour immediately.
+Annulez toutes les conditions de retard et appliquez immédiatement la mise à jour en attente.
 
-If you've set delay conditions with {@link setMultiDelay}, this method clears them
-and triggers the En attente Mise à jour to be applied on the Suivant Application background or Redémarrer.
+Si vous avez défini des conditions de délai avec {@link setMultiDelay}, cette méthode les efface
+et déclenche l'application de la mise à jour en attente au prochain arrière-plan ou au prochain redémarrage de l'application.
 
-This is useful when:
-- Utilisateur manually requests to Mise à jour now (e.g., clicks "Mise à jour now" button)
-- Your Application detects it's a good time to Mise à jour (e.g., Utilisateur finished critical task)
-- You want to override a time-based delay early
+Ceci est utile lorsque :
+- L'utilisateur demande manuellement la mise à jour maintenant (par exemple, clique sur le bouton "Mettre à jour maintenant")
+- Votre application détecte que c'est le bon moment pour effectuer la mise à jour (par exemple, l'utilisateur a terminé une tâche critique)
+- Vous souhaitez annuler un délai temporel plus tôt
 
-**Returns**
+**Retours**
 
-`Promise<void>` — Resolves when the delay conditions are cleared.
+`Promise<void>` — Résout lorsque les conditions de retard sont effacées.
 
-**Since:** 4.0.0
+**Depuis :** 4.0.0
 
-**Throws:** {Error} If the operation fails.
+**Lance :** {Erreur} Si l'opération échoue.
 
 
 --------------------
 
 
-### getLatest
+### obtenir le dernier
 
 ```typescript
 getLatest(options?: GetLatestOptions | undefined) => Promise<LatestVersion>
 ```
 
-Vérifier the Mise à jour server for the latest Disponible Bundle Version.
+Vérifiez le serveur de mise à jour pour connaître la dernière version du bundle disponible.
 
-This queries your configured Mise à jour URL (or Capgo backend) to see if a newer Bundle
-is Disponible for Télécharger. It does NOT Télécharger the Bundle automatically.
+Cela interroge votre URL de mise à jour configurée (ou votre backend Capgo) pour voir si un ensemble plus récent
+est disponible en téléchargement. Il ne télécharge PAS le bundle automatiquement.
 
-The response includes:
-- `version`: The latest available version identifier
-- `url`: Download URL for the bundle (if available)
-- `breaking`: Whether this update is marked as incompatible (requires native app update)
-- `message`: Optional message from the server
-- `manifest`: File list for partial updates (if using multi-file downloads)
+La réponse comprend :
+- `version` : Le dernier identifiant de version disponible
+- `url` : URL de téléchargement du bundle (si disponible)
+- `breaking` : indique si cette mise à jour est marquée comme incompatible (nécessite une mise à jour de l'application native)
+- `message` : Message optionnel du serveur
+- `manifest` : liste de fichiers pour les mises à jour delta (si vous utilisez des téléchargements multi-fichiers)
 
-After receiving the latest Version Info, you can:
-1. Compare it with your current Version
-2. Download it using {@link download}
-3. Apply it using {@link next} or {@link set}
+Après avoir reçu les dernières informations sur la version, vous pouvez :
+1. Comparez-le avec votre version actuelle
+2. Téléchargez-le en utilisant {@link download}
+3. Appliquez-le en utilisant {@link next} ou {@link set}
 
-**Important: Error handling for "no new version available"**
+**Important : Gestion des erreurs pour "aucune nouvelle version disponible"**
 
-When the Appareil's current Version matches the latest Version on the server (i.e., the Appareil is already
-up-to-date), the server returns a 200 response with `error: "no_new_version_available"` and
-`message: "No new version available"`. **This causes `getLatest()` to throw an error**, even though
-this is a normal, expected condition.
+Lorsque la version actuelle de l'appareil correspond à la dernière version sur le serveur (c'est-à-dire que l'appareil est déjà
+à jour), le serveur renvoie une réponse 200 avec `error: "no_new_version_available"` et
+`message: "No new version available"`. **Cela provoque une erreur de `getLatest()`**, même si
+il s'agit d'une condition normale et attendue.
 
-You should catch this specific Erreur to handle it gracefully:
+Vous devez détecter cette erreur spécifique pour la gérer correctement :
 
 ```typescript
 try {
@@ -718,23 +690,21 @@ try {
 }
 ```
 
-In this scenario, the server:
-- Journaux the request with a "No Nouveau Version Disponible" message
-- Sends a "noNew" stat action to track that the Appareil checked for Mises à jour but was already current (done on the backend)
+Dans ce scénario, le serveur :
+- Enregistre la demande avec un message "Aucune nouvelle version disponible"
+- Envoie une action statistique "noNew" pour vérifier que l'appareil a vérifié les mises à jour mais qu'il était déjà à jour (effectué sur le backend)
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `options` | `GetLatestOptions | undefined` | Optional {@link GetLatestOptions} to specify which channel to check. |
+| `options` | `Obtenir les dernières options | non défini` | {@link GetLatestOptions} facultatif pour spécifier le canal à vérifier. |
 
-**Returns**
+**Retours**
 
-`Promise<LatestVersion>` — Information about the latest available bundle version.
+`Promise<LatestVersion>` — Informations sur la dernière version du bundle disponible.
 
-**Since:** 4.0.0
-
-**Throws:** {Error} Always throws when no new version is available (`error: "no_new_version_available"`), or when the request fails.
+**Depuis :** 4.0.0**Lance :** {Erreur} Lance toujours lorsqu'aucune nouvelle version n'est disponible (`error: "no_new_version_available"`) ou lorsque la requête échoue.
 
 
 --------------------
@@ -746,29 +716,29 @@ In this scenario, the server:
 setChannel(options: SetChannelOptions) => Promise<ChannelRes>
 ```
 
-Assign this Appareil to a specific Mise à jour Canal at runtime.
+Attribuez cet appareil à un canal de mise à jour spécifique au moment de l'exécution.
 
-Canaux allow you to distribute different Bundle versions to different groups of Utilisateurs
-(e.g., "Production", "Bêta", "staging"). This method switches the Appareil to a Nouveau Canal.
+Les canaux vous permettent de distribuer différentes versions de bundle à différents groupes d'utilisateurs
+(par exemple, « production », « bêta », « mise en scène »). Cette méthode fait basculer l'appareil sur un nouveau canal.
 
-**Requirements:**
-- The target Canal must allow self-assignment (configured in your Capgo Tableau de bord or backend)
-- The backend may accept or reject the request based on Canal Paramètres
+**Exigences :**
+- Le canal cible doit permettre l'auto-attribution (configurée dans votre tableau de bord ou backend Capgo)
+- Le backend peut accepter ou rejeter la demande en fonction des paramètres du canal
 
-**When to use:**
-- After the Application is ready and the Utilisateur has interacted (e.g., opted into Bêta program)
-- To implement in-Application Canal switching (Bêta toggle, tester access, etc.)
-- For Utilisateur-driven Canal changes
+**Quand l'utiliser :**
+- Une fois que l'application est prête et que l'utilisateur a interagi (par exemple, en participant au programme bêta)
+- Pour implémenter le changement de canal dans l'application (bascule bêta, accès aux testeurs, etc.)
+- Pour les changements de canal pilotés par l'utilisateur
 
-**When NOT to use:**
-- At app boot/initialization - use {@link PluginsConfig.CapacitorUpdater.defaultChannel} config instead
-- Before Utilisateur interaction
+**Quand NE PAS utiliser :**
+- Au démarrage/initialisation de l'application - utilisez plutôt la configuration {@link PluginsConfig.CapacitorUpdater.defaultChannel}
+- Avant l'interaction de l'utilisateur
 
-**Important: Listen for the `channelPrivate` event**
+**Important : écoutez l'événement `channelPrivate`**
 
-When a Utilisateur attempts to set a Canal that doesn't allow Appareil self-assignment, the method will
-throw an error AND fire a {@link addListener}('channelPrivate') event. You should listen to this event
-to provide appropriate Retour to Utilisateurs:
+Lorsqu'un utilisateur tente de définir un canal qui ne permet pas l'auto-attribution des appareils, la méthode
+lancer une erreur ET déclencher un événement {@link addListener}('channelPrivate'). Vous devriez écouter cet événement
+pour fournir des commentaires appropriés aux utilisateurs :
 
 ```typescript
 CapacitorUpdater.addListener('channelPrivate', (data) => {
@@ -777,121 +747,119 @@ CapacitorUpdater.addListener('channelPrivate', (data) => {
 });
 ```
 
-This sends a request to the Capgo backend linking your Appareil ID to the specified Canal.
+Cela envoie une requête au backend Capgo reliant l'ID de votre appareil au canal spécifié.
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `options` | `SetChannelOptions` | The {@link SetChannelOptions} containing the channel name and optional auto-update trigger. |
+| `options` | `SetChannelOptions` | Le {@link SetChannelOptions} contenant le nom de la chaîne et le déclencheur de mise à jour automatique facultatif. |
 
-**Returns**
+**Retours**
 
-`Promise<ChannelRes>` — Channel operation result with status and optional error/message.
+`Promise<ChannelRes>` — Résultat de l'opération de canal avec état et erreur/message facultatif.
 
-**Since:** 4.7.0
+**Depuis :** 4.7.0
 
-**Throws:** {Error} If the channel doesn't exist or doesn't allow self-assignment.
+**Lance :** {Erreur} Si le canal n'existe pas ou ne permet pas l'auto-attribution.
 
 
 --------------------
 
 
-### unsetChannel
+### unsetChannel
 
 ```typescript
 unsetChannel(options: UnsetChannelOptions) => Promise<void>
 ```
 
-Retirer the Appareil's Canal assignment and return to the default Canal.
+Supprimez l'attribution de canal de l'appareil et revenez au canal par défaut.
 
-This unlinks the Appareil from any specifically assigned Canal, causing it to fall Retour to:
-- The {@link PluginsConfig.CapacitorUpdater.defaultChannel} if configured, or
-- Your backend's default Canal for this Application
+Cela dissocie l'appareil de tout canal spécifiquement attribué, le faisant revenir à :
+- Le {@link PluginsConfig.CapacitorUpdater.defaultChannel} s'il est configuré, ou
+- Le canal par défaut de votre backend pour cette application
 
-Use this when:
-- Utilisateurs opt out of Bêta/Test programs
-- You want to Réinitialiser a Appareil to standard Mise à jour distribution
-- Test Canal switching behavior
+Utilisez-le lorsque :
+- Les utilisateurs se désengagent des programmes bêta/test
+- Vous souhaitez réinitialiser un appareil à la distribution de mise à jour standard
+- Test du comportement de commutation de canal
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
 | `options` | `UnsetChannelOptions` |  |
 
-**Returns**
+**Retours**
 
-`Promise<void>` — Resolves when the channel is successfully unset.
+`Promise<void>` — Résout lorsque le canal est désarmé avec succès.
 
-**Since:** 4.7.0
+**Depuis :** 4.7.0
 
-**Throws:** {Error} If the operation fails.
+**Lance :** {Erreur} Si l'opération échoue.
 
 
 --------------------
 
 
-### getChannel
+### obtenirChannel
 
 ```typescript
 getChannel() => Promise<GetChannelRes>
 ```
 
-Get the current Canal assigned to this Appareil.
+Obtenez le canal actuel attribué à cet appareil.
 
-Retourne Information À propos:
-- `channel`: The currently assigned channel name (if any)
-- `allowSet`: Whether the channel allows self-assignment
-- `status`: Operation status
-- `error`/`message`: Additional information (if applicable)
+Renvoie des informations sur :
+- `channel` : le nom du canal actuellement attribué (le cas échéant)
+- `allowSet` : indique si le canal autorise l'auto-affectation
+- `status` : État de fonctionnement
+- `error`/`message` : Informations supplémentaires (le cas échéant)
 
-Use this to:
-- Display current Canal to Utilisateurs (e.g., "You're on the Bêta Canal")
-- Vérifier if a Appareil is on a specific Canal before showing Fonctionnalités
-- Verify channel assignment after calling {@link setChannel}
+Utilisez-le pour :
+- Afficher la chaîne actuelle aux utilisateurs (par exemple, "Vous êtes sur la chaîne bêta")
+- Vérifiez si un appareil est sur un canal spécifique avant d'afficher les fonctionnalités
+- Vérifiez l'attribution des canaux après avoir appelé {@link setChannel}
 
-**Returns**
+**Retours**`Promise<GetChannelRes>` — Les informations actuelles sur la chaîne.
 
-`Promise<GetChannelRes>` — The current channel information.
+**Depuis :** 4.8.0
 
-**Since:** 4.8.0
-
-**Throws:** {Error} If the operation fails.
+**Lance :** {Erreur} Si l'opération échoue.
 
 
 --------------------
 
 
-### listChannels
+### listeChaînes
 
 ```typescript
 listChannels() => Promise<ListChannelsResult>
 ```
 
-Get a list of all Canaux Disponible for this Appareil to self-assign to.
+Obtenez une liste de tous les canaux disponibles auxquels cet appareil peut s'auto-attribuer.
 
-Only returns channels where `allow_self_set` is `true`. These are channels that
-users can switch to using {@link setChannel} without backend administrator intervention.
+Renvoie uniquement les canaux où `allow_self_set` est `true`. Ce sont des chaînes qui
+les utilisateurs peuvent passer à l'utilisation de {@link setChannel} sans l'intervention de l'administrateur backend.
 
-Each Canal includes:
-- `id`: Unique channel identifier
-- `name`: Human-readable channel name
-- `public`: Whether the channel is publicly visible
-- `allow_self_set`: Always `true` in results (filtered to only self-assignable channels)
+Chaque chaîne comprend :
+- `id` : Identifiant unique du canal
+- `name` : nom de canal lisible par l'homme
+- `public` : indique si la chaîne est visible publiquement
+- `allow_self_set` : toujours `true` dans les résultats (filtré uniquement sur les canaux auto-attribuables)
 
-Use this to:
-- Construction a Canal selector UI for Utilisateurs (e.g., "Join Bêta" button)
-- Show Disponible Test/preview Canaux
-- Implement Canal discovery Fonctionnalités
+Utilisez-le pour :
+- Créez une interface utilisateur de sélection de chaîne pour les utilisateurs (par exemple, bouton "Rejoindre la bêta")
+- Afficher les canaux de test/aperçu disponibles
+- Implémenter des fonctionnalités de découverte de canaux
 
-**Returns**
+**Retours**
 
-`Promise<ListChannelsResult>` — List of channels the device can self-assign to.
+`Promise<ListChannelsResult>` — Liste des canaux auxquels l'appareil peut s'auto-attribuer.
 
-**Since:** 7.5.0
+**Depuis :** 7.5.0
 
-**Throws:** {Error} If the operation fails or the request to the backend fails.
+**Lance :** {Erreur} Si l'opération échoue ou si la requête adressée au backend échoue.
 
 
 --------------------
@@ -903,36 +871,36 @@ Use this to:
 setCustomId(options: SetCustomIdOptions) => Promise<void>
 ```
 
-Set a custom identifier for this Appareil.
+Définissez un identifiant personnalisé pour cet appareil.
 
-This allows you to identify Appareils by your own custom ID (Utilisateur ID, Compte ID, etc.)
-instead of or in addition to the Appareil's unique hardware ID. The custom ID is sent
-to your Mise à jour server and can be used for:
-- Targeting specific Utilisateurs for Mises à jour
-- Analyse and Utilisateur tracking
-- Débogage and Support (correlating Appareils with Utilisateurs)
-- A/B Test or Fonctionnalité flagging
+Cela vous permet d'identifier les appareils par votre propre identifiant personnalisé (ID utilisateur, ID de compte, etc.)
+à la place ou en plus de l'ID matériel unique de l'appareil. L'identifiant personnalisé est envoyé
+à votre serveur de mise à jour et peut être utilisé pour :
+- Cibler des utilisateurs spécifiques pour les mises à jour
+- Analyse et suivi des utilisateurs
+- Débogage et support (corrélation des appareils avec les utilisateurs)
+- Tests A/B ou signalement de fonctionnalités
 
-**Persistence:**
-- When {@link PluginsConfig.CapacitorUpdater.persistCustomId} is `true`, the ID persists across app restarts
-- When `false`, the ID is only kept for the current session
+**Persistance :**
+- Lorsque {@link PluginsConfig.CapacitorUpdater.persistCustomId} est `true`, l'ID persiste lors des redémarrages de l'application.
+- Lorsque `false`, l'identifiant n'est conservé que pour la session en cours
 
-**Clearing the custom ID:**
-- Pass an empty string `""` to remove any stored custom ID
+**Effacement de l'ID personnalisé :**
+- Passez une chaîne vide `""` pour supprimer tout identifiant personnalisé stocké
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `options` | `SetCustomIdOptions` | The {@link SetCustomIdOptions} containing the custom identifier string. |
+| `options` | `SetCustomIdOptions` | Le {@link SetCustomIdOptions} contenant la chaîne d'identifiant personnalisé. |
 
-**Returns**
+**Retours**
 
-`Promise<void>` — Resolves immediately (synchronous operation).
+`Promise<void>` — Résout immédiatement (fonctionnement synchrone).
 
-**Since:** 4.9.0
+**Depuis :** 4.9.0
 
-**Throws:** {Error} If the operation fails.
+**Lance :** {Erreur} Si l'opération échoue.
 
 
 --------------------
@@ -944,27 +912,27 @@ to your Mise à jour server and can be used for:
 getBuiltinVersion() => Promise<BuiltinVersion>
 ```
 
-Get the builtin Bundle Version (the original Version shipped with your Natif Application).
+Obtenez la version du bundle intégré (la version originale livrée avec votre application native).
 
-This Retourne the Version of the Bundle that was included when the Application was installed
-from the Application Store or Play Store. This is NOT the currently Actif Bundle Version -
-use {@link current} for that.
+Cela renvoie la version du bundle qui était incluse lors de l'installation de l'application.
+à partir du App Store ou du Play Store. Ce n'est PAS la version du bundle actuellement active -
+utilisez {@link current} pour cela.
 
-Retourne:
-- The {@link PluginsConfig.CapacitorUpdater.version} config value if set, or
-- The Natif Application Version from platform configs (package.json, Info.plist, Construction.gradle)
+Retours :
+- La valeur de configuration {@link PluginsConfig.CapacitorUpdater.version} si elle est définie, ou
+- La version native de l'application à partir des configurations de la plateforme (package.json, Info.plist, build.gradle)
 
-Use this to:
-- Display the "factory" Version to Utilisateurs
-- Compare against downloaded Bundle versions
-- Determine if any Mises à jour have been applied
-- Débogage Version mismatches
+Utilisez-le pour :
+- Afficher la version "usine" aux utilisateurs
+- Comparez avec les versions groupées téléchargées
+- Déterminer si des mises à jour ont été appliquées
+- Incohérences de version de débogage
 
-**Returns**
+**Retours**
 
-`Promise<BuiltinVersion>` — The builtin bundle version string.
+`Promise<BuiltinVersion>` — La chaîne de version du bundle intégré.
 
-**Since:** 5.2.0
+**Depuis :** 5.2.0
 
 
 --------------------
@@ -976,34 +944,32 @@ Use this to:
 getDeviceId() => Promise<DeviceId>
 ```
 
-Get the unique, privacy-friendly identifier for this Appareil.
+Obtenez l'identifiant unique et respectueux de la confidentialité de cet appareil.
 
-This ID is used to identify the Appareil when communicating with Mise à jour servers.
-It's automatically generated and stored securely by the plugin.
+Cet ID est utilisé pour identifier l'appareil lors de la communication avec les serveurs de mise à jour.
+Il est automatiquement généré et stocké en toute sécurité par le plugin.**Caractéristiques de confidentialité et de sécurité :**
+- Généré en tant qu'UUID (non basé sur des identifiants matériels)
+- Stocké en toute sécurité dans un stockage sécurisé spécifique à la plate-forme
+- Android : Android Keystore (persiste lors des réinstallations d'applications sur API 23+)
+- iOS : Porte-clés avec `kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly`
+- Non synchronisé avec le cloud (iOS)
+- Suit les meilleures pratiques de confidentialité Apple et Google
+- Les utilisateurs peuvent l'effacer via les paramètres système (Android) ou l'accès au trousseau (iOS)
 
-**Privacy & Security characteristics:**
-- Generated as a UUID (not based on hardware identifiers)
-- Stored securely in platform-specific secure storage
-- Android: Android Keystore (persists across Application reinstalls on API 23+)
-- iOS: Keychain with `kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly`
-- Not synced to cloud (iOS)
-- Follows Apple and Google privacy best practices
-- Utilisateurs can clear it via system Paramètres (Android) or keychain access (iOS)
+**Persistance :**
+L'ID de l'appareil persiste lors des réinstallations d'applications pour conserver une identité cohérente de l'appareil.
+pour le suivi et l’analyse des mises à jour.
 
-**Persistence:**
-The Appareil ID persists across Application reinstalls to maintain consistent Appareil identity
-for Mise à jour tracking and Analyse.
+Utilisez-le pour :
+- Débogage des problèmes de livraison des mises à jour (vérifiez quel ID le serveur voit)
+- Implémenter des fonctionnalités spécifiques à l'appareil
+- Corréler les journaux du serveur avec des appareils spécifiques
 
-Use this to:
-- Débogage Mise à jour delivery issues (Vérifier what ID the server sees)
-- Implement Appareil-specific Fonctionnalités
-- Correlate server Journaux with specific Appareils
+**Retours**
 
-**Returns**
+`Promise<DeviceId>` — La chaîne d'identifiant unique de l'appareil.
 
-`Promise<DeviceId>` — The unique device identifier string.
-
-**Throws:** {Error} If the operation fails.
+**Lance :** {Erreur} Si l'opération échoue.
 
 
 --------------------
@@ -1015,22 +981,22 @@ Use this to:
 getPluginVersion() => Promise<PluginVersion>
 ```
 
-Get the Version of the Capacitor Updater plugin installed in your Application.
+Obtenez la version du plugin Capacitor Updater installé dans votre application.
 
-This Retourne the Version of the Natif plugin code (Android/iOS), which is sent
-to the Mise à jour server with each request. This is NOT your Application Version or Bundle Version.
+Ceci renvoie la version du code natif du plugin (Android/iOS), qui est envoyé
+au serveur de mise à jour à chaque demande. Il ne s'agit PAS de la version de votre application ou de votre version groupée.
 
-Use this to:
-- Débogage plugin-specific issues (when reporting bugs)
-- Verify plugin Installation and Version
-- Vérifier compatibility with backend Fonctionnalités
-- Display in Débogage/À propos screens
+Utilisez-le pour :
+- Déboguer les problèmes spécifiques au plugin (lors du signalement de bugs)
+- Vérifier l'installation et la version du plugin
+- Vérifier la compatibilité avec les fonctionnalités backend
+- Affichage dans les écrans de débogage/à propos
 
-**Returns**
+**Retours**
 
-`Promise<PluginVersion>` — The Capacitor Updater plugin version string.
+`Promise<PluginVersion>` — La chaîne de version du plug-in Capacitor Updater.
 
-**Throws:** {Error} If the operation fails.
+**Lance :** {Erreur} Si l'opération échoue.
 
 
 --------------------
@@ -1042,38 +1008,38 @@ Use this to:
 isAutoUpdateEnabled() => Promise<AutoUpdateEnabled>
 ```
 
-Vérifier if automatic Mises à jour are currently enabled.
+Vérifiez si les mises à jour automatiques sont actuellement activées.
 
-Returns `true` if {@link PluginsConfig.CapacitorUpdater.autoUpdate} is enabled,
-meaning the plugin will automatically Vérifier for, Télécharger, and apply Mises à jour.
+Renvoie `true` si {@link PluginsConfig.CapacitorUpdater.autoUpdate} est activé,
+ce qui signifie que le plugin recherchera, téléchargera et appliquera automatiquement les mises à jour.
 
-Returns `false` if in manual mode, where you control the update flow using
-{@link getLatest}, {@link download}, {@link next}, and {@link set}.
+Renvoie `false` en mode manuel, où vous contrôlez le flux de mise à jour à l'aide
+{@link getLatest}, {@link download}, {@link next} et {@link set}.
 
-Use this to:
-- Determine which Mise à jour flow your Application is using
-- Show/hide manual Mise à jour UI based on mode
-- Débogage Mise à jour behavior
+Utilisez-le pour :
+- Déterminez le flux de mise à jour utilisé par votre application
+- Afficher/masquer l'interface utilisateur de mise à jour manuelle en fonction du mode
+- Comportement de mise à jour du débogage
 
-**Returns**
+**Retours**
 
-`Promise<AutoUpdateEnabled>` — `true` if auto-update is enabled, `false` if in manual mode.
+`Promise<AutoUpdateEnabled>` — `true` si la mise à jour automatique est activée, `false` si en mode manuel.
 
-**Throws:** {Error} If the operation fails.
+**Lance :** {Erreur} Si l'opération échoue.
 
 
 --------------------
 
 
-### removeAllListeners
+### supprimer tous les auditeurs
 
 ```typescript
 removeAllListeners() => Promise<void>
 ```
 
-Retirer all event listeners registered for this plugin.
+Supprimez tous les écouteurs d'événements enregistrés pour ce plugin.
 
-This unregisters all listeners added via {@link addListener} for all event types:
+Cela désenregistre tous les écouteurs ajoutés via {@link addListener} pour tous les types d'événements :
 - `download`
 - `noNeedUpdate`
 - `updateAvailable`
@@ -1084,40 +1050,38 @@ This unregisters all listeners added via {@link addListener} for all event types
 - `appReloaded`
 - `appReady`
 
-Use this during cleanup (e.g., when unmounting components or closing screens)
-to prevent memory leaks from lingering event listeners.
+Utilisez-le pendant le nettoyage (par exemple, lors du démontage de composants ou de la fermeture d'écrans)
+pour éviter les fuites de mémoire dues aux écouteurs d'événements persistants.
 
-**Returns**
+**Retours**
 
-`Promise<void>` — Resolves when all listeners are removed.
+`Promise<void>` — Résout lorsque tous les écouteurs sont supprimés.
 
-**Since:** 1.0.0
+**Depuis :** 1.0.0
 
 
 --------------------
 
 
-### addListener('Télécharger')
+### addListener('télécharger')
 
 ```typescript
 addListener(eventName: 'download', listenerFunc: (state: DownloadEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for Bundle Télécharger event in the Application. Fires once a Télécharger has started, during downloading and when finished.
-This will return you all Télécharger percent during the Télécharger
+Écoutez l'événement de téléchargement du bundle dans l'application. Se déclenche une fois qu'un téléchargement a commencé, pendant le téléchargement et une fois terminé.
+Cela vous renverra tous les pourcentages de téléchargement pendant le téléchargement
 
-**Parameters**
-
-| Name | Type | Description |
+**Paramètres**| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `eventName` | `'download'` |  |
+| `eventName` | ``télécharger'` |  |
 | `listenerFunc` | `(state: DownloadEvent) => void` |  |
 
-**Returns**
+**Retours**
 
 `Promise<PluginListenerHandle>`
 
-**Since:** 2.0.11
+**Depuis :** 2.0.11
 
 
 --------------------
@@ -1129,20 +1093,20 @@ This will return you all Télécharger percent during the Télécharger
 addListener(eventName: 'noNeedUpdate', listenerFunc: (state: NoNeedEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for no need to Mise à jour event, useful when you want force Vérifier every time the Application is launched
+Écoutez l'événement sans qu'il soit nécessaire de le mettre à jour, utile lorsque vous souhaitez forcer la vérification à chaque lancement de l'application
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `eventName` | `'noNeedUpdate'` |  |
+| `eventName` | ``pas de mise à jour nécessaire'` |  |
 | `listenerFunc` | `(state: NoNeedEvent) => void` |  |
 
-**Returns**
+**Retours**
 
 `Promise<PluginListenerHandle>`
 
-**Since:** 4.0.0
+**Depuis :** 4.0.0
 
 
 --------------------
@@ -1154,20 +1118,20 @@ Listen for no need to Mise à jour event, useful when you want force Vérifier e
 addListener(eventName: 'updateAvailable', listenerFunc: (state: UpdateAvailableEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for Disponible Mise à jour event, useful when you want to force Vérifier every time the Application is launched
+Écoutez l'événement de mise à jour disponible, utile lorsque vous souhaitez forcer la vérification à chaque lancement de l'application
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `eventName` | `'updateAvailable'` |  |
+| `eventName` | ``mise à jourDisponible'` |  |
 | `listenerFunc` | `(state: UpdateAvailableEvent) => void` |  |
 
-**Returns**
+**Retours**
 
 `Promise<PluginListenerHandle>`
 
-**Since:** 4.0.0
+**Depuis :** 4.0.0
 
 
 --------------------
@@ -1179,20 +1143,20 @@ Listen for Disponible Mise à jour event, useful when you want to force Vérifie
 addListener(eventName: 'downloadComplete', listenerFunc: (state: DownloadCompleteEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for downloadComplete events.
+Écoutez les événements downloadComplete.
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `eventName` | `'downloadComplete'` |  |
+| `eventName` | ``téléchargementComplet'` |  |
 | `listenerFunc` | `(state: DownloadCompleteEvent) => void` |  |
 
-**Returns**
+**Retours**
 
 `Promise<PluginListenerHandle>`
 
-**Since:** 4.0.0
+**Depuis :** 4.0.0
 
 
 --------------------
@@ -1204,21 +1168,21 @@ Listen for downloadComplete events.
 addListener(eventName: 'breakingAvailable', listenerFunc: (state: BreakingAvailableEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for breaking Mise à jour events when the backend flags an Mise à jour as incompatible with the current Application.
-Emits the same payload as the legacy `majorAvailable` listener.
+Écoutez les événements de mise à jour de rupture lorsque le backend signale une mise à jour comme incompatible avec l'application actuelle.
+Émet la même charge utile que l’ancien écouteur `majorAvailable`.
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `eventName` | `'breakingAvailable'` |  |
+| `eventName` | ``breakingDisponible'` |  |
 | `listenerFunc` | `(state: MajorAvailableEvent) => void` |  |
 
-**Returns**
+**Retours**
 
 `Promise<PluginListenerHandle>`
 
-**Since:** 7.22.0
+**Depuis :** 7.22.0
 
 
 --------------------
@@ -1230,20 +1194,20 @@ Emits the same payload as the legacy `majorAvailable` listener.
 addListener(eventName: 'majorAvailable', listenerFunc: (state: MajorAvailableEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for Major Mise à jour event in the Application, let you know when major Mise à jour is blocked by setting disableAutoUpdateBreaking
+Écoutez l'événement de mise à jour majeure dans l'application, informez-vous lorsque la mise à jour majeure est bloquée en définissant DisableAutoUpdateBreaking
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `eventName` | `'majorAvailable'` |  |
+| `eventName` | ``majeurDisponible'` |  |
 | `listenerFunc` | `(state: MajorAvailableEvent) => void` |  |
 
-**Returns**
+**Retours**
 
 `Promise<PluginListenerHandle>`
 
-**Since:** 2.3.0
+**Depuis :** 2.3.0
 
 
 --------------------
@@ -1255,20 +1219,20 @@ Listen for Major Mise à jour event in the Application, let you know when major 
 addListener(eventName: 'updateFailed', listenerFunc: (state: UpdateFailedEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for Mise à jour fail event in the Application, let you know when Mise à jour has fail to Installer at Suivant Application Démarrer
+Écoutez l'événement d'échec de la mise à jour dans l'application, vous informez lorsque la mise à jour n'a pas pu être installée au prochain démarrage de l'application.
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `eventName` | `'updateFailed'` |  |
+| `eventName` | ''updateFailed'` |  |
 | `listenerFunc` | `(state: UpdateFailedEvent) => void` |  |
 
-**Returns**
+**Retours**
 
 `Promise<PluginListenerHandle>`
 
-**Since:** 2.3.0
+**Depuis :** 2.3.0
 
 
 --------------------
@@ -1280,20 +1244,20 @@ Listen for Mise à jour fail event in the Application, let you know when Mise à
 addListener(eventName: 'downloadFailed', listenerFunc: (state: DownloadFailedEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for Télécharger fail event in the Application, let you know when a Bundle Télécharger has Échoué
+Écoutez l'événement d'échec de téléchargement dans l'application, vous informez lorsqu'un téléchargement de bundle a échoué
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `eventName` | `'downloadFailed'` |  |
+| `eventName` | ``Échec du téléchargement'` |  |
 | `listenerFunc` | `(state: DownloadFailedEvent) => void` |  |
 
-**Returns**
+**Retours**
 
 `Promise<PluginListenerHandle>`
 
-**Since:** 4.0.0
+**Depuis :** 4.0.0
 
 
 --------------------
@@ -1305,20 +1269,18 @@ Listen for Télécharger fail event in the Application, let you know when a Bund
 addListener(eventName: 'appReloaded', listenerFunc: () => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for reload event in the Application, let you know when reload has happened
+Écoutez l'événement de rechargement dans l'application, informez-vous quand le rechargement a eu lieu
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `eventName` | `'appReloaded'` |  |
+| `eventName` | ``appReloaded'` |  |
 | `listenerFunc` | `() => void` |  |
 
-**Returns**
+**Retours**`Promise<PluginListenerHandle>`
 
-`Promise<PluginListenerHandle>`
-
-**Since:** 4.3.0
+**Depuis :** 4.3.0
 
 
 --------------------
@@ -1330,20 +1292,20 @@ Listen for reload event in the Application, let you know when reload has happene
 addListener(eventName: 'appReady', listenerFunc: (state: AppReadyEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for Application ready event in the Application, let you know when Application is ready to use, this event is retain till consumed.
+Écoutez l'événement prêt pour l'application dans l'application, informez-vous lorsque l'application est prête à être utilisée, cet événement est conservé jusqu'à sa consommation.
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `eventName` | `'appReady'` |  |
+| `eventName` | ``appReady'` |  |
 | `listenerFunc` | `(state: AppReadyEvent) => void` |  |
 
-**Returns**
+**Retours**
 
 `Promise<PluginListenerHandle>`
 
-**Since:** 5.1.0
+**Depuis :** 5.1.0
 
 
 --------------------
@@ -1355,25 +1317,67 @@ Listen for Application ready event in the Application, let you know when Applica
 addListener(eventName: 'channelPrivate', listenerFunc: (state: ChannelPrivateEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for Canal private event, fired when attempting to set a Canal that doesn't allow Appareil self-assignment.
+Écoutez l'événement privé de canal, déclenché lors de la tentative de définition d'un canal qui n'autorise pas l'auto-attribution d'un appareil.
 
-This event is useful for:
-- Informing Utilisateurs they don't have permission to switch to a specific Canal
-- Implementing custom Erreur handling for Canal restrictions
-- Logging unauthorized Canal access attempts
+Cet événement est utile pour :
+- Informer les utilisateurs qu'ils ne sont pas autorisés à passer à un canal spécifique
+- Implémentation d'une gestion personnalisée des erreurs pour les restrictions de canal
+- Enregistrement des tentatives d'accès non autorisées aux chaînes
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
-| `eventName` | `'channelPrivate'` |  |
+| `eventName` | ``canalPrivé'` |  |
 | `listenerFunc` | `(state: ChannelPrivateEvent) => void` |  |
 
-**Returns**
+**Retours**
 
 `Promise<PluginListenerHandle>`
 
-**Since:** 7.34.0
+**Depuis :** 7.34.0
+
+
+--------------------
+
+
+### addListener('onFlexibleUpdateStateChange')
+
+```typescript
+addListener(eventName: 'onFlexibleUpdateStateChange', listenerFunc: (state: FlexibleUpdateState) => void) => Promise<PluginListenerHandle>
+```
+
+Écoutez les changements d’état de mise à jour flexibles sur Android.
+
+Cet événement se déclenche pendant le processus flexible de téléchargement de la mise à jour, fournissant :
+- Progression du téléchargement (octets téléchargés / nombre total d'octets)
+- Modifications de l'état de l'installation
+
+**Valeurs d'état d'installation :**
+- `UNKNOWN` (0) : Statut inconnu
+- `PENDING` (1) : Téléchargement en attente
+- `DOWNLOADING` (2) : Téléchargement en cours
+- `INSTALLING` (3) : Installation de la mise à jour
+- `INSTALLED` (4) : mise à jour installée (redémarrage de l'application nécessaire)
+- `FAILED` (5) : échec de la mise à jour
+- `CANCELED` (6) : La mise à jour a été annulée
+- `DOWNLOADED` (11) : Téléchargement terminé, prêt à installer
+
+Lorsque le statut est `DOWNLOADED`, vous devez inviter l'utilisateur et appeler
+{@link completeFlesibleUpdate} pour terminer l'installation.
+
+**Paramètres**
+
+| Nom | Tapez | Descriptif |
+| --- | --- | --- |
+| `eventName` | ``onFlexibleUpdateStateChange'` |  |
+| `listenerFunc` | `(state: FlexibleUpdateState) => void` |  |
+
+**Retours**
+
+`Promise<PluginListenerHandle>`
+
+**Depuis :** 8.0.0
 
 
 --------------------
@@ -1385,22 +1389,22 @@ This event is useful for:
 isAutoUpdateAvailable() => Promise<AutoUpdateAvailable>
 ```
 
-Vérifier if the auto-Mise à jour Fonctionnalité is Disponible (not disabled by custom server Configuration).
+Vérifiez si la fonctionnalité de mise à jour automatique est disponible (non désactivée par la configuration personnalisée du serveur).
 
-Returns `false` when a custom `updateUrl` is configured, as this typically indicates
-you're using a self-hosted Mise à jour server that may not Support all auto-Mise à jour Fonctionnalités.
+Renvoie `false` lorsqu'un `updateUrl` personnalisé est configuré, comme cela l'indique généralement
+vous utilisez un serveur de mise à jour auto-hébergé qui peut ne pas prendre en charge toutes les fonctionnalités de mise à jour automatique.
 
-Returns `true` when using the default Capgo backend or when the feature is available.
+Renvoie `true` lors de l'utilisation du backend Capgo par défaut ou lorsque la fonctionnalité est disponible.
 
-This is different from {@link isAutoUpdateEnabled}:
-- `isAutoUpdateEnabled()`: Checks if auto-update MODE is turned on/off
-- `isAutoUpdateAvailable()`: Checks if auto-update is SUPPORTED with your current configuration
+Ceci est différent de {@link isAutoUpdateEnabled} :
+- `isAutoUpdateEnabled()` : Vérifie si le MODE de mise à jour automatique est activé/désactivé
+- `isAutoUpdateAvailable()` : Vérifie si la mise à jour automatique est PRISE EN CHARGE avec votre configuration actuelle
 
-**Returns**
+**Retours**
 
-`Promise<AutoUpdateAvailable>` — `false` when custom updateUrl is set, `true` otherwise.
+`Promise<AutoUpdateAvailable>` — `false` lorsque la updateUrl personnalisée est définie, `true` sinon.
 
-**Throws:** {Error} If the operation fails.
+**Lance :** {Erreur} Si l'opération échoue.
 
 
 --------------------
@@ -1412,69 +1416,67 @@ This is different from {@link isAutoUpdateEnabled}:
 getNextBundle() => Promise<BundleInfo | null>
 ```
 
-Get Information À propos the Bundle queued to be activated on Suivant reload.
+Obtenez des informations sur le bundle en file d’attente pour être activé lors du prochain rechargement.
 
-Retourne:
-- {@link BundleInfo} object if a bundle has been queued via {@link next}
-- `null` if no update is pending
+Retours :
+- Objet {@link BundleInfo} si un bundle a été mis en file d'attente via {@link next}
+- `null` si aucune mise à jour n'est en attenteCeci est utile pour :
+- Vérifiez si une mise à jour est en attente d'être appliquée
+- Afficher le statut "Mise à jour en attente" aux utilisateurs
+- Afficher les informations de version de la mise à jour en file d'attente
+- Décidez si vous souhaitez afficher une invite "Redémarrer pour mettre à jour"
 
-This is useful to:
-- Vérifier if an Mise à jour is waiting to be applied
-- Display "Mise à jour En attente" status to Utilisateurs
-- Show Version Info of the queued Mise à jour
-- Decide whether to show a "Redémarrer to Mise à jour" prompt
+Le bundle en file d'attente sera activé lorsque :
+- L'application est en arrière-plan (comportement par défaut)
+- L'application est supprimée et redémarrée
+- {@link reload} est appelé manuellement
+- Les conditions de délai définies par {@link setMultiDelay} sont remplies
 
-The queued Bundle will be activated when:
-- The Application is backgrounded (default behavior)
-- The Application is killed and restarted
-- {@link reload} is called manually
-- Delay conditions set by {@link setMultiDelay} are met
+**Retours**
 
-**Returns**
+`Promise<BundleInfo | null>` — Les informations sur le bundle en attente, ou `null` si aucune n'est en file d'attente.
 
-`Promise<BundleInfo | null>` — The pending bundle info, or `null` if none is queued.
+**Depuis :** 6.8.0
 
-**Since:** 6.8.0
-
-**Throws:** {Error} If the operation fails.
+**Lance :** {Erreur} Si l'opération échoue.
 
 
 --------------------
 
 
-### getFailedUpdate
+###getFailedUpdate
 
 ```typescript
 getFailedUpdate() => Promise<UpdateFailedEvent | null>
 ```
 
-Retrieve Information À propos the most recent Bundle that Échoué to load.
+Récupérez des informations sur le bundle le plus récent dont le chargement a échoué.
 
-When a Bundle fails to load (e.g., JavaScript errors prevent Initialisation, missing files),
-the plugin automatically rolls Retour and stores Information À propos the failure. This method
-retrieves that failure Information.
+Lorsqu'un bundle ne parvient pas à se charger (par exemple, des erreurs JavaScript empêchent l'initialisation, des fichiers manquants),
+le plugin revient automatiquement en arrière et stocke les informations sur l'échec. Cette méthode
+récupère ces informations d’échec.
 
-**IMPORTANT: The stored value is cleared after being retrieved once.**
-Calling this method multiple times will only return the failure Info on the first call,
-then `null` on subsequent calls until another failure occurs.
+**IMPORTANT : La valeur stockée est effacée après avoir été récupérée une fois.**
+Appeler cette méthode plusieurs fois ne renverra les informations d'échec qu'au premier appel,
+puis `null` lors des appels suivants jusqu'à ce qu'un autre échec se produise.
 
-Retourne:
-- {@link UpdateFailedEvent} with bundle info if a failure was recorded
-- `null` if no failure has occurred or if it was already retrieved
+Retours :
+- {@link UpdateFailedEvent} avec informations sur le bundle si un échec a été enregistré
+- `null` si aucune panne n'est survenue ou si elle a déjà été récupérée
 
-Use this to:
-- Show Utilisateurs why an Mise à jour Échoué
-- Journal failure Information for Débogage
-- Implement custom Erreur handling/reporting
-- Display Restauration notifications
+Utilisez-le pour :
+- Montrer aux utilisateurs pourquoi une mise à jour a échoué
+- Consigner les informations d'échec pour le débogage
+- Implémenter une gestion/rapport d'erreurs personnalisée
+- Afficher les notifications de restauration
 
-**Returns**
+**Retours**
 
-`Promise<UpdateFailedEvent | null>` — The failed update info (cleared after first retrieval), or `null`.
+`Promise<UpdateFailedEvent | null>` — Les informations sur l'échec de la mise à jour (effacées après la première récupération) ou `null`.
 
-**Since:** 7.22.0
+**Depuis :** 7.22.0
 
-**Throws:** {Error} If the operation fails.
+**Lance :** {Erreur} Si l'opération échoue.
 
 
 --------------------
@@ -1486,37 +1488,37 @@ Use this to:
 setShakeMenu(options: SetShakeMenuOptions) => Promise<void>
 ```
 
-Activer or Désactiver the shake gesture menu for Débogage and Test.
+Activez ou désactivez le menu des gestes de secousse pour le débogage et les tests.
 
-When enabled, Utilisateurs can shake their Appareil to open a Débogage menu that shows:
-- Current Bundle Information
-- Disponible Bundles
-- Options to switch Bundles manually
-- Mise à jour status
+Lorsqu'il est activé, les utilisateurs peuvent secouer leur appareil pour ouvrir un menu de débogage qui affiche :
+- Informations sur le forfait actuel
+- Forfaits disponibles
+- Options pour changer de forfait manuellement
+- Statut de mise à jour
 
-This is useful during Développement and Test to:
-- Quickly Test different Bundle versions
-- Débogage Mise à jour flows
-- Switch between Production and Test Bundles
-- Verify Bundle installations
+Ceci est utile pendant le développement et les tests pour :
+- Testez rapidement différentes versions du bundle
+- Déboguer les flux de mise à jour
+- Basculer entre les bundles de production et de test
+- Vérifier les installations du bundle
 
-**Important:** Disable this in production builds or only enable for internal testers.
+**Important :** Désactivez cette option dans les versions de production ou activez-la uniquement pour les testeurs internes.
 
-Can also be configured via {@link PluginsConfig.CapacitorUpdater.shakeMenu}.
+Peut également être configuré via {@link PluginsConfig.CapacitorUpdater.shakeMenu}.
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
 | `options` | `SetShakeMenuOptions` |  |
 
-**Returns**
+**Retours**
 
-`Promise<void>` — Resolves when the setting is applied.
+`Promise<void>` — Résout lorsque le paramètre est appliqué.
 
-**Since:** 7.5.0
+**Depuis :** 7.5.0
 
-**Throws:** {Error} If the operation fails.
+**Lance :** {Erreur} Si l'opération échoue.
 
 
 --------------------
@@ -1528,23 +1530,79 @@ Can also be configured via {@link PluginsConfig.CapacitorUpdater.shakeMenu}.
 isShakeMenuEnabled() => Promise<ShakeMenuEnabled>
 ```
 
-Vérifier if the shake gesture Débogage menu is currently enabled.
+Vérifiez si le menu de débogage des gestes de secousse est actuellement activé.
 
-Retourne the current state of the shake menu Fonctionnalité that can be toggled via
-{@link setShakeMenu} or configured via {@link PluginsConfig.CapacitorUpdater.shakeMenu}.
+Renvoie l'état actuel de la fonctionnalité du menu Shake qui peut être basculée via
+{@link setShakeMenu} ou configuré via {@link PluginsConfig.CapacitorUpdater.shakeMenu}.
 
-Use this to:
-- Vérifier if Débogage Fonctionnalités are enabled
-- Show/hide Débogage Paramètres UI
-- Verify Configuration during Test
+Utilisez-le pour :
+- Vérifiez si les fonctionnalités de débogage sont activées
+- Afficher/masquer l'interface utilisateur des paramètres de débogage
+- Vérifier la configuration lors des tests
 
-**Returns**
+**Retours**
 
-`Promise<ShakeMenuEnabled>` — Object with `enabled: true` or `enabled: false`.
+`Promise<ShakeMenuEnabled>` — Objet avec `enabled: true` ou `enabled: false`.
 
-**Since:** 7.5.0
+**Depuis :** 7.5.0
 
-**Throws:** {Error} If the operation fails.
+**Lance :** {Erreur} Si l'opération échoue.
+
+
+--------------------
+
+
+### setShakeChannelSelector
+
+```typescript
+setShakeChannelSelector(options: SetShakeChannelSelectorOptions) => Promise<void>
+```Activez ou désactivez le sélecteur de canal de secousse au moment de l'exécution.
+
+Lorsqu'il est activé ET que shakeMenu est vrai, secouer l'appareil affiche une chaîne
+sélecteur au lieu du menu de débogage. Cela permet aux utilisateurs de basculer entre
+mettre à jour les chaînes en secouant leur appareil.
+
+Après avoir sélectionné une chaîne, l'application vérifie automatiquement les mises à jour
+et téléchargements si disponibles.
+
+Peut également être configuré via {@link PluginsConfig.CapacitorUpdater.allowShakeChannelSelector}.
+
+**Paramètres**
+
+| Nom | Tapez | Descriptif |
+| --- | --- | --- |
+| `options` | `SetShakeChannelSelectorOptions` |  |
+
+**Retours**
+
+`Promise<void>` — Résout lorsque le paramètre est appliqué.
+
+**Depuis :** 8.43.0
+
+**Lance :** {Erreur} Si l'opération échoue.
+
+
+--------------------
+
+
+### isShakeChannelSelectorEnabled
+
+```typescript
+isShakeChannelSelectorEnabled() => Promise<ShakeChannelSelectorEnabled>
+```
+
+Vérifiez si le sélecteur de canal de secousse est actuellement activé.
+
+Renvoie l'état actuel de la fonction de sélection de canal de secousse qui peut être basculée via
+{@link setShakeChannelSelector} ou configuré via {@link PluginsConfig.CapacitorUpdater.allowShakeChannelSelector}.
+
+**Retours**
+
+`Promise<ShakeChannelSelectorEnabled>` — Objet avec `enabled: true` ou `enabled: false`.
+
+**Depuis :** 8.43.0
+
+**Lance :** {Erreur} Si l'opération échoue.
 
 
 --------------------
@@ -1556,26 +1614,26 @@ Use this to:
 getAppId() => Promise<GetAppIdRes>
 ```
 
-Get the currently configured Application ID used for Mise à jour server communication.
+Obtenez l'ID d'application actuellement configuré utilisé pour la communication du serveur de mise à jour.
 
-Retourne the Application ID that identifies this Application to the Mise à jour server. This can be:
-- The value set via {@link setAppId}, or
-- The {@link PluginsConfig.CapacitorUpdater.appId} config value, or
-- The default Application identifier from your Natif Application Configuration
+Renvoie l'ID d'application qui identifie cette application au serveur de mise à jour. Cela peut être :
+- La valeur définie via {@link setAppId}, ou
+- La valeur de configuration {@link PluginsConfig.CapacitorUpdater.appId}, ou
+- L'identifiant d'application par défaut de la configuration de votre application native
 
-Use this to:
-- Verify which Application ID is being used for Mises à jour
-- Débogage Mise à jour delivery issues
-- Display Application Configuration in Débogage screens
-- Confirm App ID after calling {@link setAppId}
+Utilisez-le pour :
+- Vérifiez quel identifiant d'application est utilisé pour les mises à jour
+- Déboguer les problèmes de livraison des mises à jour
+- Afficher la configuration de l'application dans les écrans de débogage
+- Confirmez l'ID de l'application après avoir appelé {@link setAppId}
 
-**Returns**
+**Retours**
 
-`Promise<GetAppIdRes>` — Object containing the current `appId` string.
+`Promise<GetAppIdRes>` — Objet contenant la chaîne `appId` actuelle.
 
-**Since:** 7.14.0
+**Depuis :** 7.14.0
 
-**Throws:** {Error} If the operation fails.
+**Lance :** {Erreur} Si l'opération échoue.
 
 
 --------------------
@@ -1587,34 +1645,221 @@ Use this to:
 setAppId(options: SetAppIdOptions) => Promise<void>
 ```
 
-Dynamically change the Application ID used for Mise à jour server communication.
+Modifiez dynamiquement l'ID d'application utilisé pour la communication du serveur de mise à jour.
 
-This overrides the Application ID used to identify your Application to the Mise à jour server, allowing you
-to switch between different Application configurations at runtime (e.g., Production vs staging
-Application IDs, or multi-tenant configurations).
+Cela remplace l'ID d'application utilisé pour identifier votre application sur le serveur de mise à jour, vous permettant ainsi
+pour basculer entre différentes configurations d'application au moment de l'exécution (par exemple, production ou staging)
+ID d'application ou configurations multi-locataires).
 
-**Requirements:**
-- {@link PluginsConfig.CapacitorUpdater.allowModifyAppId} must be set to `true`
+**Exigences :**
+- {@link PluginsConfig.CapacitorUpdater.allowModifyAppId} doit être défini sur `true`
 
-**Important considerations:**
-- Changing the Application ID will affect which Mises à jour this Appareil receives
-- The Nouveau Application ID must exist on your Mise à jour server
-- This is primarily for advanced use cases (multi-tenancy, environment switching)
-- Most apps should use the config-based {@link PluginsConfig.CapacitorUpdater.appId} instead
+**Considérations importantes :**
+- La modification de l'ID de l'application affectera les mises à jour que cet appareil reçoit
+- Le nouvel App ID doit exister sur votre serveur de mise à jour
+- Ceci est principalement destiné aux cas d'utilisation avancés (multilocation, changement d'environnement)
+- La plupart des applications doivent plutôt utiliser {@link PluginsConfig.CapacitorUpdater.appId} basé sur la configuration.
 
-**Parameters**
+**Paramètres**
 
-| Name | Type | Description |
+| Nom | Tapez | Descriptif |
 | --- | --- | --- |
 | `options` | `SetAppIdOptions` |  |
 
-**Returns**
+**Retours**
 
-`Promise<void>` — Resolves when the App ID is successfully changed.
+`Promise<void>` — Résout lorsque l'ID de l'application est modifié avec succès.
 
-**Since:** 7.14.0
+**Depuis :** 7.14.0
 
-**Throws:** {Error} If `allowModifyAppId` is false or the operation fails.
+**Lance :** {Erreur} Si `allowModifyAppId` est faux ou si l'opération échoue.
+
+
+--------------------
+
+
+### getAppUpdateInfo
+
+```typescript
+getAppUpdateInfo(options?: GetAppUpdateInfoOptions | undefined) => Promise<AppUpdateInfo>
+```
+
+Obtenez des informations sur la disponibilité de l'application dans le App Store ou le Play Store.Cette méthode vérifie les magasins d'applications natifs pour voir si une version plus récente de l'application
+est disponible en téléchargement. Ceci est différent des mises à jour OTA de Capgo - ceci
+vérifie les mises à jour d'applications natives qui nécessitent de passer par les magasins d'applications.
+
+**Différences de plateforme :**
+- **Android** : utilise les mises à jour intégrées à l'application de Play Store API pour des informations de mise à jour précises
+- **iOS** : interroge la recherche App Store API (nécessite le code du pays pour des résultats précis)
+
+**Renvoie des informations sur :**
+- Version actuellement installée
+- Version disponible en magasin (le cas échéant)
+- Si une mise à jour est disponible
+- Priorité de mise à jour (Android uniquement)
+- Si les mises à jour immédiates/flexibles sont autorisées (Android uniquement)
+
+Utilisez-le pour :
+- Vérifiez si les utilisateurs doivent mettre à jour depuis l'App Store
+- Afficher les invites « Mise à jour disponible » pour les mises à jour natives
+- Implémenter le contrôle de version (nécessite une version native minimale)
+- Combinez avec les mises à jour Capgo OTA pour une stratégie de mise à jour complète
+
+**Paramètres**
+
+| Nom | Tapez | Descriptif |
+| --- | --- | --- |
+| `options` | `GetAppUpdateInfoOptions | non défini` | {@link GetAppUpdateInfoOptions} facultatif avec l'indicatif de pays pour iOS. |
+
+**Retours**
+
+`Promise<AppUpdateInfo>` — Informations sur les versions actuelles et disponibles de l'application.
+
+**Depuis :** 8.0.0
+
+**Lance :** {Erreur} Si l'opération échoue ou si les informations du magasin ne sont pas disponibles.
+
+
+--------------------
+
+
+### ouvrirAppStore
+
+```typescript
+openAppStore(options?: OpenAppStoreOptions | undefined) => Promise<void>
+```
+
+Ouvrez la page de l'application dans le App Store ou Play Store.
+
+Cela dirige l'utilisateur vers la fiche Play Store de votre application où il peut manuellement
+mettre à jour l'application. Utilisez-le comme solution de secours lorsque les mises à jour intégrées à l'application ne sont pas disponibles
+ou lorsque l'utilisateur doit mettre à jour le iOS.
+
+**Comportement de la plateforme :**
+- **Android** : Ouvre Play Store à la page de l'application
+- **iOS** : Ouvre App Store à la page de l'application
+
+**Options de personnalisation :**
+- `appId` : spécifiez un identifiant App Store personnalisé (iOS) - utile pour ouvrir la page d'une autre application
+- `packageName` : spécifiez un nom de package personnalisé (Android) - utile pour ouvrir la page d'une autre application
+
+**Paramètres**
+
+| Nom | Tapez | Descriptif |
+| --- | --- | --- |
+| `options` | `OuvrirOptionsAppStore | non défini` | {@link OpenAppStoreOptions} facultatif pour personnaliser la page de magasin de l'application à ouvrir. |
+
+**Retours**
+
+`Promise<void>` — Se résout lorsque le magasin est ouvert.
+
+**Depuis :** 8.0.0
+
+**Lance :** {Erreur} Si le magasin ne peut pas être ouvert.
+
+
+--------------------
+
+
+### performImmediateUpdate
+
+```typescript
+performImmediateUpdate() => Promise<AppUpdateResult>
+```
+
+Effectuez une mise à jour immédiate dans l'application sur Android.
+
+Cela déclenche le flux de mise à jour immédiat de Google Play, qui :
+1. Affiche une interface utilisateur de mise à jour en plein écran
+2. Télécharge et installe la mise à jour
+3. Redémarre automatiquement l'application
+
+L'utilisateur ne peut pas continuer à utiliser l'application tant que la mise à jour n'est pas terminée.
+C’est idéal pour les mises à jour critiques qui doivent être installées immédiatement.
+
+**Exigences :**
+- Android uniquement (génère une erreur sur iOS)
+- Une mise à jour doit être disponible (vérifiez d'abord auprès de {@link getAppUpdateInfo})
+- La mise à jour doit permettre les mises à jour immédiates (`immediateUpdateAllowed: true`)**Expérience utilisateur :**
+- Interface utilisateur de blocage en plein écran
+- Progression affichée lors du téléchargement
+- L'application redémarre automatiquement après l'installation
+
+**Retours**
+
+`Promise<AppUpdateResult>` — Résultat indiquant la réussite, l'annulation ou l'échec.
+
+**Depuis :** 8.0.0
+
+**Lance :** {Erreur} Si ce n'est pas le cas sur Android, aucune mise à jour n'est disponible ou les mises à jour immédiates ne sont pas autorisées.
+
+
+--------------------
+
+
+### startFlexibleUpdate
+
+```typescript
+startFlexibleUpdate() => Promise<AppUpdateResult>
+```
+
+Démarrez une mise à jour flexible dans l'application sur Android.
+
+Cela déclenche le flux de mise à jour flexible de Google Play, qui :
+1. Télécharge la mise à jour en arrière-plan
+2. Permet à l'utilisateur de continuer à utiliser l'application
+3. Avertit lorsque le téléchargement est terminé
+4. Nécessite d'appeler {@link completeFlexibleUpdate} pour l'installation
+
+Surveillez la progression du téléchargement à l’aide de l’écouteur `onFlexibleUpdateStateChange`.
+
+**Exigences :**
+- Android uniquement (génère une erreur sur iOS)
+- Une mise à jour doit être disponible (vérifiez d'abord auprès de {@link getAppUpdateInfo})
+- La mise à jour doit permettre des mises à jour flexibles (`flexibleUpdateAllowed: true`)
+
+**Flux typique :**
+1. Appelez `startFlexibleUpdate()` pour commencer le téléchargement
+2. Écoutez `onFlexibleUpdateStateChange` pour progresser
+3. Lorsque l'état est `DOWNLOADED`, invitez l'utilisateur à redémarrer
+4. Appelez `completeFlexibleUpdate()` pour installer et redémarrer
+
+**Retours**
+
+`Promise<AppUpdateResult>` — Résultat indiquant que la mise à jour a été démarrée, annulée ou a échoué.
+
+**Depuis :** 8.0.0
+
+**Lance :** {Erreur} Si ce n'est pas le cas sur Android, aucune mise à jour n'est disponible ou les mises à jour flexibles ne sont pas autorisées.
+
+
+--------------------
+
+
+### complèteFlexibleUpdate
+
+```typescript
+completeFlexibleUpdate() => Promise<void>
+```
+
+Effectuez une mise à jour flexible dans l'application sur Android.
+
+Après le téléchargement d'une mise à jour flexible (statut `DOWNLOADED` dans
+`onFlexibleUpdateStateChange`), appelez cette méthode pour installer la mise à jour
+et redémarrez l'application.
+
+**Important :** Cela redémarrera immédiatement l'application. Assurez-vous de :
+- Enregistrez toutes les données utilisateur avant d'appeler
+- Inviter l'utilisateur avant de redémarrer
+- Appelez uniquement lorsque l'état du téléchargement est `DOWNLOADED`
+
+**Retours**
+
+`Promise<void>` — Résout lorsque l'installation de la mise à jour commence (l'application redémarrera).
+
+**Depuis :** 8.0.0
+
+**Lance :** {Erreur} Si ce n'est pas sur Android ou si aucune mise à jour téléchargée n'est en attente.
 
 
 --------------------

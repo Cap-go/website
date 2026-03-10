@@ -1,14 +1,15 @@
 ---
-locale: fr
 title: Commencer
-description: Learn how to Installer and integrate Google Tag Manager into your Capacitor Application using the official SDK.
-sidebar: 
+description: >-
+  Découvrez comment installer et intégrer Google Tag Manager dans votre
+  application Capacitor à l'aide du SDK officiel.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-## Installation
+##Installation
 
 <Tabs>
   <TabItem label="npm">
@@ -37,21 +38,21 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
   </TabItem>
 </Tabs>
 
-## Platform Configuration
+## Configuration de la plateforme
 
 ### iOS
 
-1. Télécharger your GTM container Configuration file from Google Tag Manager console
-2. Ajouter the container JSON file to your iOS project in Xcode
-3. The file should be named something like `GTM-XXXXXX.json`
+1. Téléchargez le fichier de configuration de votre conteneur GTM depuis la console Google Tag Manager.
+2. Ajoutez le fichier conteneur JSON à votre projet iOS dans Xcode
+3. Le fichier doit être nommé quelque chose comme `GTM-XXXXXX.json`
 
 ### Android
 
-1. Télécharger your GTM container Configuration file from Google Tag Manager console
-2. Add the container JSON file to `android/app/src/main/assets/`
-3. The file should be named something like `GTM-XXXXXX.json`
+1. Téléchargez le fichier de configuration de votre conteneur GTM depuis la console Google Tag Manager.
+2. Ajoutez le fichier conteneur JSON à `android/app/src/main/assets/`
+3. Le fichier doit être nommé quelque chose comme `GTM-XXXXXX.json`
 
-## Utilisation Exemple
+## Exemple d'utilisation
 
 ```typescript
 import { CapacitorGTM } from '@capgo/capacitor-gtm';
@@ -103,68 +104,68 @@ console.log('Config value:', result.value);
 
 ## API Référence
 
-### init(Options)
+### initialisation(options)
 
 ```typescript
 init(options: { containerId: string }) => Promise<void>
 ```
 
-Initialiser Google Tag Manager with your container ID.
+Initialisez Google Tag Manager avec votre ID de conteneur.
 
-| Param         | Type                             |
+| Paramètres | Tapez |
 | ------------- | -------------------------------- |
 | **`options`** | `{ containerId: string }` |
 
-### pushEvent(Options)
+### pushEvent(options)
 
 ```typescript
 pushEvent(options: GTMEvent) => Promise<void>
 ```
 
-Pousser an event to the dataLayer with optional Paramètres.
+Envoyez un événement au dataLayer avec des paramètres facultatifs.
 
-| Param         | Type              |
+| Paramètres | Tapez |
 | ------------- | ----------------- |
 | **`options`** | `GTMEvent` |
 
-### setUserProperty(Options)
+### setUserProperty(options)
 
 ```typescript
 setUserProperty(options: { key: string; value: string }) => Promise<void>
 ```
 
-Set a Utilisateur property for segmentation and targeting.
+Définissez une propriété utilisateur pour la segmentation et le ciblage.
 
-| Param         | Type                                      |
+| Paramètres | Tapez |
 | ------------- | ----------------------------------------- |
 | **`options`** | `{ key: string; value: string }` |
 
-### getVariable(Options)
+### getVariable(options)
 
 ```typescript
 getVariable(options: { key: string }) => Promise<{ value: any }>
 ```
 
-Get a value from the GTM container Configuration.
+Obtenez une valeur de la configuration du conteneur GTM.
 
-| Param         | Type                     |
-| ------------- | ------------------------ |
+| Paramètres | Tapez |
+| ------------- | -------------------- |
 | **`options`** | `{ key: string }` |
 
-**Returns:** `Promise<{ value: any }>`
+**Retours :** `Promise<{ value: any }>`
 
-## Interfaces
+##Interfaces
 
-### GTMEvent
+### Événement GTME
 
-| Prop             | Type                                 | Description                        |
+| Accessoire | Tapez | Descriptif |
 | ---------------- | ------------------------------------ | ---------------------------------- |
-| **`event`**      | `string`                  | The event name                     |
-| **`parameters`** | `Record<string, any>` | Optional event parameters (optional) |
+| **`event`** | `string` | Le nom de l'événement |
+| **`parameters`** | `Record<string, any>` | Paramètres d'événement facultatifs (facultatif) |
 
-## Common Event Exemples
+## Exemples d'événements courants
 
-### Screen Views
+### Vues d'écran
 
 ```typescript
 await CapacitorGTM.pushEvent({
@@ -176,7 +177,7 @@ await CapacitorGTM.pushEvent({
 });
 ```
 
-### Utilisateur Actions
+### Actions de l'utilisateur
 
 ```typescript
 await CapacitorGTM.pushEvent({
@@ -188,7 +189,7 @@ await CapacitorGTM.pushEvent({
 });
 ```
 
-### E-commerce Events
+### Événements de commerce électronique
 
 ```typescript
 await CapacitorGTM.pushEvent({
@@ -214,29 +215,27 @@ await CapacitorGTM.pushEvent({
 });
 ```
 
-## Best Practices
+## meilleures pratiques
 
-- Initialiser GTM early in your Application lifecycle
-- Use consistent event naming conventions
-- Include relevant Paramètres with each event
-- Test your GTM Configuration in preview mode
-- Monitor data in Google Tag Manager console
-- Use Utilisateur properties for meaningful segmentation
+- Initialisez GTM au début du cycle de vie de votre application
+- Utiliser des conventions de dénomination d'événements cohérentes
+- Inclure les paramètres pertinents avec chaque événement
+- Testez votre configuration GTM en mode aperçu
+- Surveiller les données dans la console Google Tag Manager
+- Utilisez les propriétés utilisateur pour une segmentation significative
 
 ## Débogage
 
-Activer Débogage mode in Google Tag Manager console to Test your implementation:
+Activez le mode débogage dans la console Google Tag Manager pour tester votre implémentation :
 
-1. Open GTM console
-2. Go to Preview mode
-3. Connect to your Application using the container ID
-4. Verify events are being tracked correctly
+1. Ouvrez la console GTM
+2. Accédez au mode Aperçu
+3. Connectez-vous à votre application à l'aide de l'ID du conteneur
+4. Vérifiez que les événements sont correctement suivis
 
-## Use Cases
-
-- Track Utilisateur interactions and behavior
-- Monitor Application performance metrics
-- Collect e-commerce data
-- Manage third-party tags without code changes
-- Implement A/B Test and personalization
-- Integrate with Google Analyse and other services
+## Cas d'utilisation- Suivre les interactions et le comportement des utilisateurs
+- Surveiller les mesures de performances des applications
+- Collecter des données de commerce électronique
+- Gérer les balises tierces sans modification de code
+- Mettre en œuvre les tests A/B et la personnalisation
+- Intégration avec Google Analytics et d'autres services

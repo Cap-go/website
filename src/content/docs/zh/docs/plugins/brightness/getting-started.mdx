@@ -1,26 +1,25 @@
 ---
-title: 开始使用
-description: 了解如何安装并使用 Brightness 插件,在 Capacitor 应用中控制屏幕亮度。
+title: 入门
+description: 了解如何安装和使用亮度插件来控制 Capacitor 应用中的屏幕亮度。
 sidebar:
   order: 2
 locale: zh
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **安装包**
+1. **安装软件包**
    <PackageManagers pkg="@capgo/capacitor-brightness" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **同步原生项目**
+2. **与原生项目同步**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
 ## Android 配置
 
-要在 Android 上修改系统级亮度,请在 `AndroidManifest.xml` 中添加 WRITE_SETTINGS 权限:
+要修改 Android 上的系统范围亮度，请将 WRITE_SETTINGS 权限添加到 `AndroidManifest.xml`：
 
 ```xml
 <uses-permission android:name="android.permission.WRITE_SETTINGS" />
@@ -28,23 +27,23 @@ import { PackageManagers } from 'starlight-package-managers'
 
 ## 用法
 
-导入插件并使用其方法控制亮度:
+导入插件并使用其方法来控制亮度：
 
 ```typescript
 import { CapgoBrightness } from '@capgo/capacitor-brightness';
 
-// 获取当前亮度
+// Get current brightness
 const getBrightness = async () => {
   const { brightness } = await CapgoBrightness.getBrightness();
   console.log('Current brightness:', brightness);
 };
 
-// 设置亮度 (0 到 1)
+// Set brightness (0 to 1)
 const setBrightness = async (level: number) => {
   await CapgoBrightness.setBrightness({ brightness: level });
 };
 
-// 检查 API 是否可用
+// Check if API is available
 const checkAvailable = async () => {
   const { available } = await CapgoBrightness.isAvailable();
   console.log('Brightness API available:', available);
@@ -53,18 +52,18 @@ const checkAvailable = async () => {
 
 ## API 参考
 
-### getBrightness()
+### 获取亮度()
 
-获取设备主屏幕的当前亮度。
+获取设备主屏幕的当前亮度级别。
 
 ```typescript
 const { brightness } = await CapgoBrightness.getBrightness();
 // Returns: { brightness: number } (0 to 1)
 ```
 
-### setBrightness(options)
+### 设置亮度（选项）
 
-设置设备主屏幕亮度。
+设置设备主屏幕的亮度级别。
 
 ```typescript
 interface SetBrightnessOptions {
@@ -74,25 +73,25 @@ interface SetBrightnessOptions {
 await CapgoBrightness.setBrightness({ brightness: 0.75 });
 ```
 
-### getSystemBrightness() (仅 Android)
+### getSystemBrightness() （仅限 Android）
 
-获取系统级屏幕亮度。
+获取系统范围的屏幕亮度。
 
 ```typescript
 const { brightness } = await CapgoBrightness.getSystemBrightness();
 ```
 
-### setSystemBrightness(options) (仅 Android)
+### setSystemBrightness(options)（仅Android）
 
-设置系统级屏幕亮度。需要 WRITE_SETTINGS 权限。
+设置系统范围的屏幕亮度。需要 WRITE_SETTINGS 权限。
 
 ```typescript
 await CapgoBrightness.setSystemBrightness({ brightness: 0.5 });
 ```
 
-### getSystemBrightnessMode() (仅 Android)
+### getSystemBrightnessMode() （仅限 Android）
 
-获取当前系统亮度模式(自动或手动)。
+获取当前系统亮度模式（自动或手动）。
 
 ```typescript
 import { BrightnessMode } from '@capgo/capacitor-brightness';
@@ -103,31 +102,31 @@ if (mode === BrightnessMode.AUTOMATIC) {
 }
 ```
 
-### setSystemBrightnessMode(options) (仅 Android)
+### setSystemBrightnessMode(options)（仅限 Android）
 
 设置系统亮度模式。
 
 ```typescript
 import { BrightnessMode } from '@capgo/capacitor-brightness';
 
-// 启用自动亮度
+// Enable automatic brightness
 await CapgoBrightness.setSystemBrightnessMode({ mode: BrightnessMode.AUTOMATIC });
 
-// 启用手动亮度
+// Enable manual brightness
 await CapgoBrightness.setSystemBrightnessMode({ mode: BrightnessMode.MANUAL });
 ```
 
-### isUsingSystemBrightness() (仅 Android)
+### isUsingSystemBrightness() （仅限 Android）
 
-检查当前 Activity 是否使用系统级亮度。
+检查当前活动是否使用系统范围的亮度。
 
 ```typescript
 const { isUsing } = await CapgoBrightness.isUsingSystemBrightness();
 ```
 
-### restoreSystemBrightness() (仅 Android)
+### RestoreSystemBrightness()（仅限 Android）
 
-恢复为系统级亮度。
+重置亮度以使用系统范围的值。
 
 ```typescript
 await CapgoBrightness.restoreSystemBrightness();
@@ -135,13 +134,13 @@ await CapgoBrightness.restoreSystemBrightness();
 
 ### isAvailable()
 
-检查 Brightness API 是否可用。
+检查亮度 API 是否可用。
 
 ```typescript
 const { available } = await CapgoBrightness.isAvailable();
 ```
 
-### checkPermissions()
+### 检查权限()
 
 检查系统亮度访问权限。
 
@@ -150,9 +149,9 @@ const status = await CapgoBrightness.checkPermissions();
 // Returns: { brightness: 'granted' | 'denied' | 'prompt' | 'prompt-with-rationale' }
 ```
 
-### requestPermissions()
+### 请求权限()
 
-请求系统亮度权限。在 Android 上会打开系统设置。
+请求系统亮度权限。打开 Android 上的系统设置。
 
 ```typescript
 const status = await CapgoBrightness.requestPermissions();
@@ -172,7 +171,7 @@ export class BrightnessService {
       throw new Error('Brightness API not available');
     }
 
-    // 保存原始亮度
+    // Store original brightness
     const { brightness } = await CapgoBrightness.getBrightness();
     this.originalBrightness = brightness;
   }
@@ -193,7 +192,7 @@ export class BrightnessService {
     }
   }
 
-  // Android 专用:启用自动亮度
+  // Android-specific: Enable auto-brightness
   async enableAutoBrightness() {
     const status = await CapgoBrightness.checkPermissions();
     if (status.brightness !== 'granted') {
@@ -209,21 +208,21 @@ export class BrightnessService {
 
 ## 最佳实践
 
-1. **先检查可用性**
+1. **首先检查可用性**
    ```typescript
    const { available } = await CapgoBrightness.isAvailable();
    if (!available) {
-     // 显示回退 UI 或禁用亮度功能
+     // Show fallback UI or disable brightness features
    }
    ```
 
 2. **退出时恢复亮度**
-   当应用进入后台或该功能不再需要时,务必恢复原始亮度。
+   当您的应用程序进入后台或不再需要该功能时，请始终恢复原始亮度。
 
-3. **在 Android 上请求权限**
-   若需系统级亮度控制,在调用系统方法前请求 WRITE_SETTINGS 权限。
+3. **请求 Android** 的权限
+   对于系统范围的亮度控制，请在调用系统方法之前请求 WRITE_SETTINGS 权限。
 
-4. **优雅处理错误**
+4. **优雅地处理错误**
    ```typescript
    try {
      await CapgoBrightness.setBrightness({ brightness: 0.8 });
@@ -235,18 +234,18 @@ export class BrightnessService {
 ## 平台说明
 
 ### iOS
-- 亮度更改会持续到设备锁屏
-- 仅支持应用级亮度
+- 亮度变化持续到设备锁定为止
+- 仅支持应用程序特定的亮度
 - 使用 `UIScreen.main.brightness` API
 
 ### Android
-- 应用级亮度仅作用于当前 Activity
-- 系统级亮度需要 WRITE_SETTINGS 权限
+- 应用程序特定的亮度仅适用于当前活动
+- 系统范围的亮度需要 WRITE_SETTINGS 权限
 - 支持自动亮度模式切换
-- 应用亮度使用 WindowManager,系统亮度使用 Settings.System
+- 使用 WindowManager 来调节应用程序亮度，使用 Settings.System 来调节系统亮度
 
-### Web
-- 根据浏览器能力有限支持
+### 网络
+- 有限支持取决于浏览器功能
 - 某些浏览器可能需要用户交互
 
 ## 要求

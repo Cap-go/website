@@ -1,14 +1,15 @@
 ---
-locale: fr
 title: Commencer
-description: Learn how to Installer and integrate Twilio Voice for VoIP calling in your Capacitor Application.
-sidebar: 
+description: >-
+  Découvrez comment installer et intégrer Twilio Voice pour les appels VoIP dans
+  votre application Capacitor.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-## Installation
+##Installation
 
 <Tabs>
   <TabItem label="npm">
@@ -37,30 +38,30 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
   </TabItem>
 </Tabs>
 
-## Prerequisites
+## Prérequis
 
-You'll need a Twilio Compte and access tokens for authentication. Sign up at [Twilio](https://www.twilio.com/) if you don't have an Compte.
+Vous aurez besoin d'un compte Twilio et de jetons d'accès pour l'authentification. Inscrivez-vous sur [Twilio](https://www.twilio.com/) si vous n'avez pas de compte.
 
-## Platform Configuration
+## Configuration de la plateforme
 
 ### iOS
 
-Add required permissions to your `Info.plist`:
+Ajoutez les autorisations requises à votre `Info.plist` :
 
 ```xml
 <key>NSMicrophoneUsageDescription</key>
 <string>This app needs microphone access for voice calls</string>
 ```
 
-For incoming calls with PushKit:
+Pour les appels entrants avec PushKit :
 
-1. Activer Pousser Notifications in Xcode capabilities
-2. Ajouter VoIP background mode
-3. Configure VoIP certificate in Twilio console
+1. Activez les notifications push dans les fonctionnalités Xcode
+2. Ajouter le mode d'arrière-plan VoIP
+3. Configurez le certificat VoIP dans la console Twilio
 
 ### Android
 
-Add required permissions to your `AndroidManifest.xml`:
+Ajoutez les autorisations requises à votre `AndroidManifest.xml` :
 
 ```xml
 <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -70,12 +71,12 @@ Add required permissions to your `AndroidManifest.xml`:
 <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 ```
 
-Configure Firebase for Pousser notifications:
+Configurez Firebase pour les notifications push :
 
-1. Add `google-services.json` to your Android project
-2. Configure FCM in Twilio console
+1. Ajoutez `google-services.json` à votre projet Android
+2. Configurez FCM dans la console Twilio
 
-## Utilisation Exemple
+## Exemple d'utilisation
 
 ```typescript
 import { TwilioVoice } from '@capgo/capacitor-twilio-voice';
@@ -131,139 +132,137 @@ await TwilioVoice.logout();
 
 ## API Référence
 
-### Connexion(Options)
+### connexion(options)
 
 ```typescript
 login(options: { accessToken: string }) => Promise<void>
 ```
 
-Authenticate with Twilio using an access token.
+Authentifiez-vous auprès de Twilio à l'aide d'un jeton d'accès.
 
-| Param         | Type                              |
+| Paramètres | Tapez |
 | ------------- | --------------------------------- |
 | **`options`** | `{ accessToken: string }` |
 
-### Déconnexion()
+### déconnexion()
 
 ```typescript
 logout() => Promise<void>
 ```
 
-End Utilisateur session and clear call state.
+Session de l'utilisateur final et état d'appel clair.
 
-### isLoggedIn()
+### estLoggedIn()
 
 ```typescript
 isLoggedIn() => Promise<{ loggedIn: boolean }>
 ```
 
-Vérifier current authentication status.
+Vérifiez l'état d'authentification actuel.
 
-**Returns:** `Promise<{ loggedIn: boolean }>`
+**Retours :** `Promise<{ loggedIn: boolean }>`
 
-### makeCall(Options)
+### makeCall(options)
 
 ```typescript
 makeCall(options: { to: string; params?: Record<string, string> }) => Promise<{ callSid: string }>
 ```
 
-Initiate an outgoing call to a specified number.
+Lancez un appel sortant vers un numéro spécifié.
 
-| Param         | Type                                                    |
+| Paramètres | Tapez |
 | ------------- | ------------------------------------------------------- |
 | **`options`** | `{ to: string; params?: Record<string, string> }` |
 
-**Returns:** `Promise<{ callSid: string }>`
+**Retours :** `Promise<{ callSid: string }>`
 
-### acceptCall(Options)
+### accepter l'appel (options)
 
 ```typescript
 acceptCall(options: { callSid: string }) => Promise<void>
 ```
 
-Accept an incoming call.
+Acceptez un appel entrant.
 
-| Param         | Type                       |
+| Paramètres | Tapez |
 | ------------- | -------------------------- |
 | **`options`** | `{ callSid: string }` |
 
-### rejectCall(Options)
+### rejeter l'appel (options)
 
 ```typescript
 rejectCall(options: { callSid: string }) => Promise<void>
 ```
 
-Reject an incoming call.
+Rejeter un appel entrant.
 
-| Param         | Type                       |
+| Paramètres | Tapez |
 | ------------- | -------------------------- |
 | **`options`** | `{ callSid: string }` |
 
-### endCall(Options?)
+### fin d'appel (options ?)
 
 ```typescript
 endCall(options?: { callSid?: string }) => Promise<void>
 ```
 
-Terminate an Actif call.
+Terminez un appel actif.
 
-| Param         | Type                         |
+| Paramètres | Tapez |
 | ------------- | ---------------------------- |
-| **`options`** | `{ callSid?: string }` (optional) |
+| **`options`** | `{ callSid?: string }` (facultatif) |
 
-### muteCall(Options)
+### muteCall (options)
 
 ```typescript
 muteCall(options: { muted: boolean; callSid?: string }) => Promise<void>
 ```
 
-Mute or unmute call audio.
+Couper ou réactiver le son de l'appel.
 
-| Param         | Type                                            |
+| Paramètres | Tapez |
 | ------------- | ----------------------------------------------- |
 | **`options`** | `{ muted: boolean; callSid?: string }` |
 
-### setSpeaker(Options)
+### setSpeaker(options)
 
 ```typescript
 setSpeaker(options: { enabled: boolean }) => Promise<void>
 ```
 
-Toggle speaker output.
+Basculer la sortie du haut-parleur.
 
-| Param         | Type                          |
+| Paramètres | Tapez |
 | ------------- | ----------------------------- |
 | **`options`** | `{ enabled: boolean }` |
 
-### sendDigits(Options)
+### envoyer des chiffres (options)
 
 ```typescript
 sendDigits(options: { digits: string; callSid?: string }) => Promise<void>
 ```
 
-Send DTMF tones during a call.
+Envoyez des tonalités DTMF pendant un appel.
 
-| Param         | Type                                          |
+| Paramètres | Tapez |
 | ------------- | --------------------------------------------- |
 | **`options`** | `{ digits: string; callSid?: string }` |
 
-## Event Listeners
+## Écouteurs d'événements
 
-### Disponible Events
+### Événements disponibles- `registered` - Inscrit avec succès auprès de Twilio
+- `unregistered` - Non inscrit depuis Twilio
+- `registrationFailed` - L'enregistrement a échoué
+- `incomingCall` - Appel entrant reçu
+- `callConnected` - Appel connecté avec succès
+- `callDisconnected` - Appel déconnecté
+- `callRinging` - L'appel sortant sonne
+- `callReconnecting` - L'appel est reconnecté
+- `callReconnected` - Appel reconnecté après interruption
+- `qualityWarning` - Avertissement de qualité d'appel
+- `error` - Une erreur s'est produite
 
-- `registered` - Successfully registered with Twilio
-- `unregistered` - Unregistered from Twilio
-- `registrationFailed` - Registration failed
-- `incomingCall` - Incoming call received
-- `callConnected` - Call successfully connected
-- `callDisconnected` - Call disconnected
-- `callRinging` - Outgoing call is ringing
-- `callReconnecting` - Call is reconnecting
-- `callReconnected` - Call reconnected after interruption
-- `qualityWarning` - Call quality warning
-- `error` - An error occurred
-
-### Event Exemples
+### Exemples d'événements
 
 ```typescript
 // Handle incoming calls
@@ -311,7 +310,7 @@ const listener = await TwilioVoice.addListener('callConnected', (data) => {
 listener.remove();
 ```
 
-## Terminé Exemple
+## Exemple complet
 
 ```typescript
 import { TwilioVoice } from '@capgo/capacitor-twilio-voice';
@@ -479,53 +478,53 @@ await voiceService.endCall();
 await voiceService.logout();
 ```
 
-## Best Practices
+## meilleures pratiques
 
-- Fetch access tokens from your backend server, never embed them in the Application
-- Implement token Actualiser logic for long-running sessions
-- Handle network interruptions with reconnection logic
-- Provide visual Retour for call states
-- Test on actual Appareils with Pousser notifications
-- Implement proper Erreur handling
-- Clean up listeners when components unmount
-- Request microphone permissions before making calls
+- Récupérez les jetons d'accès depuis votre serveur backend, ne les intégrez jamais dans l'application
+- Implémenter une logique d'actualisation des jetons pour les sessions de longue durée
+- Gérer les interruptions du réseau avec une logique de reconnexion
+- Fournir un retour visuel pour les états d'appel
+- Test sur des appareils réels avec notifications push
+- Mettre en œuvre une gestion appropriée des erreurs
+- Nettoyer les écouteurs lors du démontage des composants
+- Demander les autorisations du microphone avant de passer des appels
 
-## Sécurité Considerations
+## Considérations de sécurité
 
-- Never store Twilio credentials in the Application
-- Generate access tokens on your backend
-- Implement token expiration and Actualiser
-- Use HTTPS for all token requests
-- Valider incoming calls server-side
+- Ne stockez jamais les informations d'identification Twilio dans l'application
+- Générez des jetons d'accès sur votre backend
+- Implémenter l'expiration et l'actualisation des jetons
+- Utilisez HTTPS pour toutes les demandes de jetons
+- Valider les appels entrants côté serveur
 
 ## Dépannage
 
-### Calls Not Connecting
+### Les appels ne se connectent pas
 
-- Verify access token is valid and not expired
-- Vérifier network connectivity
-- Ensure microphone permissions are granted
-- Verify Twilio Compte is properly configured
+- Vérifiez que le jeton d'accès est valide et n'a pas expiré
+- Vérifier la connectivité réseau
+- Assurez-vous que les autorisations du microphone sont accordées
+- Vérifiez que le compte Twilio est correctement configuré
 
-### Pousser Notifications Not Working
+### Les notifications push ne fonctionnent pas
 
-- Verify PushKit/FCM certificates are configured in Twilio
-- Vérifier Appareil is registered for Pousser notifications
-- Test with Production certificates
+- Vérifiez que les certificats PushKit/FCM sont configurés dans Twilio
+- Vérifiez que l'appareil est enregistré pour les notifications push
+- Test avec certificats de production
 
-### Audio Issues
+### Problèmes audio
 
-- Vérifier microphone permissions
-- Verify speaker/bluetooth Paramètres
-- Test audio routing on actual Appareils
+- Vérifiez les autorisations du microphone
+- Vérifier les paramètres du haut-parleur/Bluetooth
+- Tester le routage audio sur des appareils réels
 
-## Caller Name Display (CapacitorTwilioCallerName)
+## Affichage du nom de l'appelant (CapacitorTwilioCallerName)
 
-By default, incoming calls display the caller's phone number or client ID. You can customize this by passing a `CapacitorTwilioCallerName` parameter from your TwiML backend to display a friendly name instead.
+Par défaut, les appels entrants affichent le numéro de téléphone ou l'identifiant client de l'appelant. Vous pouvez personnaliser cela en passant un paramètre `CapacitorTwilioCallerName` depuis votre backend TwiML pour afficher un nom convivial à la place.
 
-### Backend Configuration
+### Configuration du backend
 
-When generating your TwiML response for the `<Client>` dial, add the `CapacitorTwilioCallerName` parameter:
+Lors de la génération de votre réponse TwiML pour le cadran `<Client>`, ajoutez le paramètre `CapacitorTwilioCallerName` :
 
 ```java
 // Java example
@@ -555,14 +554,14 @@ dial.client({
 }, identity);
 ```
 
-### How It Works
+### Comment ça marche
 
-1. When your backend receives an incoming call, it generates TwiML to route the call
-2. Include the `CapacitorTwilioCallerName` parameter with the caller's display name
-3. The plugin automatically extracts this Paramètre and uses it for:
-   - iOS CallKit incoming call screen
-   - Android incoming call notification
-   - The `from` field in `incomingCall` events
-   - The `pendingInvites` array in call status
+1. Lorsque votre backend reçoit un appel entrant, il génère TwiML pour acheminer l'appel
+2. Incluez le paramètre `CapacitorTwilioCallerName` avec le nom d'affichage de l'appelant
+3. Le plugin extrait automatiquement ce paramètre et l'utilise pour :
+   - iOS Écran d'appel entrant CallKit
+   - Android notification d'appel entrant
+   - Le champ `from` dans les événements `incomingCall`
+   - Le tableau `pendingInvites` en statut d'appel
 
-If `CapacitorTwilioCallerName` is not provided, the plugin falls back to the caller's phone number or client ID.
+Si `CapacitorTwilioCallerName` n'est pas fourni, le plugin revient au numéro de téléphone ou à l'ID client de l'appelant.

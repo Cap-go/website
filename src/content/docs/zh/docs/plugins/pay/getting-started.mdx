@@ -1,41 +1,38 @@
 ---
-title: "快速入门"
-description: >-
-  Configure Apple Pay and Google Pay for your Capacitor checkout with the Pay
-  plugin.
+title: 入门
+description: 使用 Pay 插件为您的 Capacitor 结帐配置 Apple Pay 和 Google Pay。
 sidebar:
   order: 2
 locale: zh
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the plugin**
+1. **安装插件**
    <PackageManagers pkg="@capgo/capacitor-pay" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync native projects**
+2. **同步原生项目**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Native prerequisites
+## 本机先决条件
 
-- **Apple Pay (iOS)**
-  1. Create an Apple Pay merchant ID in the Apple Developer portal.
-  2. Generate and upload the payment processing certificate required by your gateway.
-  3. Enable the **Apple Pay** capability in Xcode and make sure your provisioning profile includes it.
-  4. Update `Info.plist` with a usage description if your gateway requires network access to validate payments.
+- **Apple 付款 (iOS)**
+  1. 在 Apple 开发者门户中创建 Apple 支付商户 ID。
+  2. 生成并上传网关所需的支付处理证书。
+  3. 在 Xcode 中启用 **Apple Pay** 功能，并确保您的配置文件包含它。
+  4. 如果您的网关需要网络访问来验证付款，请使用使用说明更新 `Info.plist`。
 
-- **Google Pay (Android)**
-  1. Sign in to the [Google Pay Business Console](https://pay.google.com/business/console/).
-  2. Configure your payment gateway parameters or set up direct tokenization for testing.
-  3. If you plan to use production cards, switch `environment` to `PRODUCTION` and register test cards for QA.
-  4. Confirm that Google Play services are available on the device (required by Google Pay).
+- **Google 支付 (Android)**
+  1. 登录 [Google 支付业务控制台](https://pay.google.com/business/console/)。
+  2. 配置您的支付网关参数或设置直接标记化以进行测试。
+  3. 如果您计划使用生产卡，请将 `environment` 切换为 `PRODUCTION` 并注册用于 QA 的测试卡。
+  4. 确认设备上可以使用 Google Play 服务（Google Pay 需要）。
 
-Refer to the guides under `docs/` in the plugin repository for step-by-step screenshots.
+请参阅插件存储库中 `docs/` 下的指南以获取分步屏幕截图。
 
-## Check availability
+## 检查可用性
 
 ```typescript
 import { Pay } from '@capgo/capacitor-pay';
@@ -62,7 +59,7 @@ if (!availability.available) {
 }
 ```
 
-## Request payment (Apple Pay)
+## 请求付款（Apple 付款）
 
 ```typescript
 const appleResult = await Pay.requestPayment({
@@ -82,7 +79,7 @@ const appleResult = await Pay.requestPayment({
 const token = appleResult.apple?.paymentData;
 ```
 
-## Request payment (Google Pay)
+## 请求付款（Google 付款）
 
 ```typescript
 const googleResult = await Pay.requestPayment({
@@ -125,8 +122,8 @@ const googleResult = await Pay.requestPayment({
 const paymentData = googleResult.google?.paymentData;
 ```
 
-## Handling responses
+## 处理响应
 
-- Tokenize the returned payload with your payment processor and confirm the transaction server-side.
-- Surface a fallback path (card entry, invoice) if native pay is unavailable or the user cancels the sheet.
-- Cache the availability result so you do not display the buttons on unsupported devices.
+- 使用您的支付处理器对返回的有效负载进行标记，并在服务器端确认交易。
+- 如果本地支付不可用或用户取消表单，则显示后备路径（卡输入、发票）。
+- 缓存可用性结果，以便您不会在不受支持的设备上显示按钮。

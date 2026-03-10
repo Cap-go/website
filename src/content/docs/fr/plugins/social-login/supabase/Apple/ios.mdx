@@ -1,24 +1,25 @@
 ---
+title: Supabase Apple Connexion lors de la configuration de iOS
+description: >-
+  Découvrez comment intégrer la connexion Apple avec l'authentification Supabase
+  sur iOS.
+sidebar:
+  order: 2
 locale: fr
-title: Supabase Apple Connexion on iOS Configuration
-description: Learn how to integrate Apple Sign-In with Supabase Authentication on iOS.
-sidebar: 
-    order: 2
 ---
+## Prérequis
 
-## Prerequisites
+Ce guide vous aidera à intégrer la connexion Apple avec l'authentification Supabase sur iOS. On suppose que vous avez déjà complété :
+- la [configuration Apple connexion iOS](/docs/plugins/social-login/apple/ios/)
+- le [Supabase Apple Connexion - Configuration générale](./general/).
 
-This Guide will Aide you integrate Apple Sign-In with Supabase Authentication on iOS. It is assumed that you have already completed:
-- the [Apple Connexion iOS Configuration](/docs/plugins/social-Connexion/apple/iOS/)
-- the [Supabase Apple Connexion - General Configuration](./general/).
+## Implémentation
 
-## Implementation
+L’implémentation complète est disponible dans le fichier [`supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) de l’application exemple. Ce guide explique les concepts clés et comment l'utiliser.
 
-The complete implementation is available in the [example app's `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) file. This guide explains the key concepts and how to use it.
+### Utilisation de l'assistant d'authentification
 
-### Using the Authentication Helper
-
-The `authenticateWithAppleSupabase` function handles the entire authentication flow:
+La fonction `authenticateWithAppleSupabase` gère l'intégralité du flux d'authentification :
 
 ```typescript
 import { authenticateWithAppleSupabase } from './supabaseAuthUtils';
@@ -32,39 +33,38 @@ if (result.success) {
 }
 ```
 
-## How It Works
+## Comment ça marche
 
-On iOS, Apple Sign-In uses the Natif implementation:
+Le iOS, Apple Sign-In utilise l'implémentation native :
 
-1. **Initialization**: The plugin uses your app's bundle ID automatically (no `clientId` needed)
-2. **Natif Sign-In**: Uses Apple's Natif Sign in with Apple button and authentication flow
-3. **Identity Token**: Apple Retourne an identity token (JWT) containing Utilisateur Information
-4. **Supabase Authentication**: The identity token is sent to Supabase using `signInWithIdToken()`
+1. **Initialisation** : le plugin utilise automatiquement l'ID de bundle de votre application (aucun `clientId` nécessaire)
+2. **Connexion native** : utilise la connexion native de Apple avec le bouton Apple et le flux d'authentification
+3. **Jeton d'identité** : Apple renvoie un jeton d'identité (JWT) contenant les informations utilisateur
+4. **Supabase Authentification** : le jeton d'identité est envoyé à Supabase à l'aide de `signInWithIdToken()`
 
-The helper function automatically detects the iOS platform and configures everything appropriately.
+La fonction d'assistance détecte automatiquement la plate-forme iOS et configure tout de manière appropriée.
 
-## Important Notes
+## Remarques importantes
 
-### Bundle ID Configuration
+### Configuration de l'ID de lot
 
-- iOS uses your Application's Bundle ID automatically for Apple Sign-In
-- Make sure your Bundle ID matches what's configured in Apple Developer Portal
-- The Bundle ID should have "Sign in with Apple" capability enabled
+- iOS utilise automatiquement l'ID de bundle de votre application pour la connexion Apple
+- Assurez-vous que l'ID de votre bundle correspond à ce qui est configuré dans le portail des développeurs Apple.
+- L'ID du bundle doit avoir la fonctionnalité "Connectez-vous avec Apple" activée.
 
-### Supabase Client ID
+### Supabase ID client
 
-In Supabase, configure your Apple provider with:
-- **Client ID**: Your iOS App ID (bundle ID) - e.g., `app.capgo.plugin.SocialLogin`
+Dans Supabase, configurez votre fournisseur Apple avec :
+- **ID client** : votre identifiant d'application iOS (ID de bundle) - par exemple, `app.capgo.plugin.SocialLogin`
 
-If you're also using Android/Web, you'll need to provide both the Application ID and Service ID in Supabase's Client ID field (comma-separated).
+Si vous utilisez également Android/Web, vous devrez fournir à la fois l'ID d'application et l'ID de service dans le champ ID client de Supabase (séparés par des virgules).
 
 ## Dépannage
 
-If authentication fails:
+Si l'authentification échoue :
 
-- **Bundle ID mismatch**: Verify your Bundle ID matches in both Xcode and Apple Developer Portal
-- **Capability not enabled**: Ensure "Sign in with Apple" capability is enabled in Xcode
-- **Supabase Configuration**: Verify your Application ID is correctly configured in Supabase Apple provider Paramètres
-- **Token validation fails**: Vérifier that the identity token is being received from Apple
-- Review the [Exemple Application code](https://github.com/Cap-go/capacitor-social-Connexion/blob/main/Exemple-Application/src/supabaseAuthUtils.ts) for Référence
-
+- **Incompatibilité d'ID de bundle** : vérifiez que l'ID de votre bundle correspond à la fois dans le portail des développeurs Xcode et Apple.
+- **Fonctionnalité non activée** : assurez-vous que la fonctionnalité « Connexion avec Apple » est activée dans Xcode.
+- **Configuration Supabase** : vérifiez que votre ID d'application est correctement configuré dans les paramètres du fournisseur Supabase Apple
+- **La validation du jeton échoue** : vérifiez que le jeton d'identité est reçu de Apple
+- Consultez l'[exemple de code d'application](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) pour référence.

@@ -1,12 +1,9 @@
 ---
-title: >-
-  Migration Guide from @capacitor-community/facebook-login to
-  @capgo/capacitor-social-login
+title: Facebook @capgo/social-login へのログインの移行
 description: >-
-  This detailed guide provides step-by-step instructions for transitioning from
-  the @capacitor-community/facebook-login plugin to the
-  @capgo/capacitor-social-login plugin, ensuring a smooth migration process with
-  enhanced features.
+  この詳細なガイドでは、@capacitor-community/facebook-login プラグインから
+  @capgo/capacitor-social-login
+  プラグインに移行するための段階的な手順を説明し、強化された機能でスムーズな移行プロセスを保証します。
 sidebar:
   order: 2
 locale: ja
@@ -15,34 +12,34 @@ import { Steps } from '@astrojs/starlight/components';
 
 ## 概要
 
-このガイドは、`@capacitor-community/facebook-login` から `@capgo/capacitor-social-login` への移行に関する包括的な指示を提供します。新しいプラグインは、複数のソーシャル プロバイダーをサポートする統一された API、改善された TypeScript サポート、および拡張機能を備えた Facebook 認証を最新化します。
+このガイドでは、`@capacitor-community/facebook-login` から `@capgo/capacitor-social-login` に移行するための包括的な手順を説明します。新しいプラグインは、複数のソーシャル プロバイダー、改良された TypeScript サポート、強化された機能をサポートする統合された API で Facebook 認証を最新化します。
 
-## Installation
+## インストール
 
 <Steps>
-1. Remove the old package:
+1. 古いパッケージを削除します。
    ```bash
    npm uninstall @capacitor-community/facebook-login
    ```
 
-2. Install the new package:
+2. 新しいパッケージをインストールします。
    ```bash
    npm install @capgo/capacitor-social-login
    npx cap sync
    ```
 </Steps>
 
-## Code Changes
+## コードの変更
 
-### Import Changes
+### 変更のインポート
 ```diff
 - import { FacebookLogin } from '@capacitor-community/facebook-login';
 + import { SocialLogin } from '@capgo/capacitor-social-login';
 ```
 
-### Initialization
+### 初期化
 
-**Key Change**: The new package requires explicit setup in your code:
+**重要な変更**: 新しいパッケージでは、コード内で明示的にセットアップする必要があります。
 
 ```diff
 - // Old package required no explicit initialization in code
@@ -57,9 +54,9 @@ import { Steps } from '@astrojs/starlight/components';
 + });
 ```
 
-### Login
+### ログイン
 
-The login method now accepts a provider parameter:
+ログイン メソッドはプロバイダー パラメーターを受け入れるようになりました。
 
 ```diff
 - const FACEBOOK_PERMISSIONS = ['email', 'public_profile'];
@@ -75,9 +72,9 @@ The login method now accepts a provider parameter:
 + });
 ```
 
-### Response Type Changes
+### 応答タイプの変更
 
-The response structure has been modernized with a more comprehensive profile object:
+応答構造は、より包括的なプロファイル オブジェクトで最新化されました。
 
 ```typescript
 // Old response type
@@ -122,12 +119,12 @@ interface FacebookLoginResponse {
 }
 ```
 
-**Key Differences**:
-- Response now includes a `provider` field identifying the authentication provider
-- More detailed `profile` object with additional user information
-- Consistent structure across all social login providers
+**主な違い**:
+- 応答には、認証プロバイダーを識別する `provider` フィールドが含まれるようになりました。
+- 追加のユーザー情報を含む、より詳細な `profile` オブジェクト
+- すべてのソーシャル ログイン プロバイダーにわたる一貫した構造
 
-### Checking Login Status
+### ログインステータスの確認
 ```diff
 - const result = await FacebookLogin.getCurrentAccessToken();
 - const isLoggedIn = result && result.accessToken;
@@ -138,7 +135,7 @@ interface FacebookLoginResponse {
 + const isLoggedIn = status.isLoggedIn;
 ```
 
-### Logout
+### ログアウト
 ```diff
 - await FacebookLogin.logout();
 
@@ -147,11 +144,11 @@ interface FacebookLoginResponse {
 + });
 ```
 
-## Platform Specific Changes
+## プラットフォーム固有の変更
 
-### Android Setup
+### Android セットアップ
 
-Configuration is now handled through the initialize method:
+構成は、initialize メソッドを通じて処理されるようになりました。
 
 ```diff
 - // AndroidManifest.xml changes remain the same
@@ -165,11 +162,11 @@ Configuration is now handled through the initialize method:
 + });
 ```
 
-**Important**: Client token is now required for Android authentication.
+**重要**: Android 認証にはクライアント トークンが必要になりました。
 
-### iOS Setup
+### iOS セットアップ
 
-1. The iOS setup in `AppDelegate.swift` remains the same:
+1. `AppDelegate.swift` の iOS セットアップは変わりません。
 
 ```swift
 import FBSDKCoreKit
@@ -189,7 +186,7 @@ ApplicationDelegate.shared.application(
 )
 ```
 
-2. The `Info.plist` configuration remains the same:
+2. `Info.plist` 構成は変わりません。
 ```xml
 <key>CFBundleURLTypes</key>
 <array>
@@ -216,25 +213,25 @@ ApplicationDelegate.shared.application(
 </array>
 ```
 
-## Breaking Changes
+## 重大な変更
 
-Summary of breaking changes when migrating:
+移行時の重大な変更の概要:
 
-1. **Explicit initialization is now required** - Must call `initialize()` before use
-2. **Response object structure has changed significantly** - New nested result format with enhanced profile data
-3. **Client token is now required for Android** - Additional configuration needed
-4. **Different method names and parameter structures** - Provider-based approach
-5. **Error handling and error types have changed** - More detailed error information
+1. **明示的な初期化が必要になりました** - 使用前に `initialize()` を呼び出す必要があります
+2. **応答オブジェクトの構造が大幅に変更されました** - 強化されたプロファイル データを備えた新しいネストされた結果形式
+3. **Android__にはクライアント トークンが必要になりました** - 追加の構成が必要です
+4. **異なるメソッド名とパラメーター構造** - プロバイダーベースのアプローチ
+5. **エラー処理とエラーの種類が変更されました** - より詳細なエラー情報
 
-## Key Advantages
+## 主な利点
 
-The new plugin provides:
+新しいプラグインは以下を提供します。
 
-- **Unified API** across multiple social providers (Google, Apple, Facebook)
-- **Improved TypeScript support** with better type definitions
-- **Enhanced profile data** with more user information
-- **Active maintenance** and community support
-- **Consistent error handling** across all providers
-- **Better token management** with proper expiration handling
+- **複数のソーシャル プロバイダーにわたって API** を統合 (Google、Apple、Facebook)
+- **型定義が改善され、TypeScript サポートが改善されました**
+- **より多くのユーザー情報を含む強化されたプロフィール データ**
+- **アクティブなメンテナンス**とコミュニティ サポート
+- **すべてのプロバイダーにわたる一貫したエラー処理**
+- **適切な有効期限処理による優れたトークン管理**
 
-For more detailed setup instructions, please refer to the [official documentation](/docs/plugins/social-login/facebook/). 
+セットアップ手順の詳細については、[公式ドキュメント](/docs/plugins/social-login/facebook/) を参照してください。

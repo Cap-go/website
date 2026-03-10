@@ -1,59 +1,64 @@
 ---
-locale: fr
-title: "@capgo/capacitor-launch-navigator"
-description: Launch navigation apps plugin for Capacitor apps with Support for Google Maps, Apple Maps, Waze, and other navigation services.
+title: '@capgo/capacitor-launch-navigator'
+description: >-
+  Lancez le plug-in d'applications de navigation pour les applications Capacitor
+  avec prise en charge de Google Maps, Apple Maps, Waze et d'autres services de
+  navigation.
 tableOfContents: false
 next: false
 prev: false
-sidebar: 
+sidebar:
   order: 1
-  label: "Introduction"
-hero: 
-  tagline: Launch navigation apps with turn-by-turn directions, supporting multiple map providers and custom routing Options.
-  image: 
+  label: Introduction
+hero:
+  tagline: >-
+    Lancez des applications de navigation avec des instructions étape par étape,
+    prenant en charge plusieurs fournisseurs de cartes et des options
+    d'itinéraire personnalisées.
+  image:
     file: ~public/icons/plugins/launch-navigator.svg
-  actions: 
-    - text: Get started
+  actions:
+    - text: Commencer
       link: /docs/plugins/launch-navigator/getting-started/
       icon: right-arrow
       variant: primary
     - text: Github
-      link: https://github.com/Cap-go/capacitor-launch-navigator/
+      link: 'https://github.com/Cap-go/capacitor-launch-navigator/'
       icon: external
       variant: minimal
+locale: fr
 ---
-
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 ## Aperçu
 
-The Capacitor Launch Navigator plugin enables launching Natif navigation apps on iOS and Android Appareils with coordinate-based navigation. This plugin provides seamless integration with popular mapping applications and supports multiple transportation modes for comprehensive navigation Solutions.
+The Capacitor Launch Navigator plugin enables launching native navigation apps on iOS and Android devices with coordinate-based navigation. This plugin provides seamless integration with popular mapping applications and supports multiple transportation modes for comprehensive navigation solutions.
 
 <CardGrid stagger>
-  <Card title="Multi-app support" icon="rocket">
-    Google Maps, Apple Maps, Waze, Citymapper and more 🗺️
+  <Card title="Prise en charge de plusieurs applications" icon="rocket">
+    Google Cartes, Apple Cartes, Waze, Citymapper et plus 🗺️
   </Card>
-  <Card title="Transport modes" icon="magnifier">
-    Driving, walking, transit, and cycling directions 🧭
+  <Card title="Modes de transport" icon="magnifier">
+    Itinéraires en voiture, à pied, en transports en commun et à vélo 🧭
   </Card>
-  <Card title="App detection" icon="magnifier">
-    Vérifier availability and list installed navigation apps 🔍
+  <Card title="Détection d'applications" icon="magnifier">
+    Vérifiez la disponibilité et répertoriez les applications de navigation installées 🔍
   </Card>
   <Card title="Coordinate-based" icon="star">
-    Navigate using latitude/longitude coordinates 📍
+    Naviguez en utilisant les coordonnées latitude/longitude 📍
   </Card>
 </CardGrid>
 
-## Installation
+##Installation
 
 ```bash
 npm install @capgo/capacitor-launch-navigator
 npx cap sync
 ```
 
-## iOS Configuration
+## iOSConfiguration
 
-Add URL schemes to your `Info.plist` to detect installed navigation apps:
+Ajoutez des schémas d'URL à votre `Info.plist` pour détecter les applications de navigation installées :
 
 ```xml
 <key>LSApplicationQueriesSchemes</key>
@@ -65,15 +70,15 @@ Add URL schemes to your `Info.plist` to detect installed navigation apps:
 </array>
 ```
 
-## Core API Methods
+## Méthodes principales API
 
 ### Navigation
-- `navigate(options)` - Launch navigation to specified coordinates
-- `isAppAvailable(options)` - Check if a specific navigation app is installed
-- `getAvailableApps()` - List all available navigation apps on device
-- `getSupportedApps()` - Get all supported apps for current platform
+- `navigate(options)` - Lancer la navigation vers les coordonnées spécifiées
+- `isAppAvailable(options)` - Vérifiez si une application de navigation spécifique est installée
+- `getAvailableApps()` - Répertorie toutes les applications de navigation disponibles sur l'appareil
+- `getSupportedApps()` - Obtenez toutes les applications prises en charge pour la plate-forme actuelle
 
-## Utilisation Exemple
+## Exemple d'utilisation
 
 ```typescript
 import { LaunchNavigator, TransportMode } from '@capgo/capacitor-launch-navigator';
@@ -114,7 +119,7 @@ const supportedApps = await LaunchNavigator.getSupportedApps();
 console.log('Supported apps:', supportedApps);
 ```
 
-## Navigation Options
+## Options de navigation
 
 ```typescript
 interface NavigationOptions {
@@ -126,7 +131,7 @@ interface NavigationOptions {
 }
 ```
 
-## Transport Modes
+## Modes de transport
 
 ```typescript
 enum TransportMode {
@@ -137,32 +142,32 @@ enum TransportMode {
 }
 ```
 
-## Supported Navigation Apps
+## Applications de navigation prises en charge
 
 ### iOS
-- Apple Maps (built-in)
-- Google Maps
-- Waze
-- Citymapper
+- Apple Cartes (intégrées)
+- Google Cartes
+-Waze
+- Planificateur de ville
 - Transit
 - Moovit
-- Uber
-- Lyft
-- And many more...
+-Uber
+-Lyft
+- Et bien d'autres encore...
 
 ### Android
-- Google Maps (built-in)
-- Waze
-- Citymapper
-- HERE WeGo
-- Sygic
+- Google Cartes (intégrées)
+-Waze
+- Planificateur de ville
+- ICI WeGo
+-Sygic
 - MapQuest
 - Moovit
-- And many more...
+- Et bien d'autres encore...
 
-## Coordinate Requirements
+## Coordonner les exigences
 
-> ⚠️ **Important**: This plugin only accepts latitude/longitude coordinates for navigation. Use [@capgo/capacitor-nativegeocoder](https://github.com/Cap-go/capacitor-nativegeocoder) to convert addresses to coordinates.
+> ⚠️ **Important** : Ce plugin n'accepte que les coordonnées latitude/longitude pour la navigation. Utilisez [@capgo/capacitor-nativegeocoder](https://github.com/Cap-go/capacitor-nativegeocoder) pour convertir les adresses en coordonnées.
 
 ```typescript
 // Example with geocoding
@@ -183,7 +188,7 @@ if (geocodeResult.results.length > 0) {
 }
 ```
 
-## Application Detection and Selection
+## Détection et sélection d'applications
 
 ```typescript
 // Check multiple apps and use the first available
@@ -208,7 +213,7 @@ if (selectedApp) {
 }
 ```
 
-## Erreur Handling
+## Gestion des erreurs
 
 ```typescript
 try {
@@ -225,22 +230,22 @@ try {
 }
 ```
 
-## Use Cases
+## Cas d'utilisation
 
-- **Location-based services**: Navigate Utilisateurs to points of interest
-- **Delivery apps**: Guide drivers to delivery locations
-- **Event apps**: Direct attendees to venue locations
-- **Real estate apps**: Navigate to property locations
-- **Travel apps**: Guide tourists to attractions
+- **Services basés sur la localisation** : orientez les utilisateurs vers des points d'intérêt
+- **Applications de livraison** : guidez les chauffeurs vers les lieux de livraison
+- **Applications événementielles** : dirigez les participants vers les emplacements des lieux
+- **Applications immobilières** : accédez aux emplacements des propriétés
+- **Applications de voyage** : guidez les touristes vers les attractions
 
-## Best Practices
+## meilleures pratiques
 
-- Always Vérifier Application availability before attempting navigation
-- Provide fallback Options when preferred apps aren't Disponible
-- Use meaningful Application display names for Utilisateur selection
-- Handle errors gracefully with Utilisateur-friendly messages
-- Consider Utilisateur preferences for default navigation apps
+- Vérifiez toujours la disponibilité de l'application avant de tenter la navigation
+- Fournir des options de secours lorsque les applications préférées ne sont pas disponibles
+- Utilisez des noms d'affichage d'application significatifs pour la sélection de l'utilisateur
+- Gérez les erreurs avec élégance avec des messages conviviaux
+- Tenir compte des préférences de l'utilisateur pour les applications de navigation par défaut
 
-## Documentation
+##Documents
 
-Vérifier the [Terminé Documentation](/docs/plugins/launch-navigator/getting-started/) for detailed implementation guides and advanced navigation patterns.
+Consultez la [documentation complète](/docs/plugins/launch-navigator/getting-started/) pour obtenir des guides de mise en œuvre détaillés et des modèles de navigation avancés.

@@ -1,14 +1,15 @@
 ---
-title: Getting Started
-description: Learn how to install and use the Text Interaction plugin to control iOS text selection magnifier and loupe.
+title: Empezando
+description: >-
+  Aprenda a instalar y utilizar el complemento Text Interaction para controlar
+  la lupa y la lupa de selección de texto iOS.
 sidebar:
   order: 2
 locale: es
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-## Installation
+## Instalación
 
 <Tabs>
   <TabItem label="npm">
@@ -37,13 +38,13 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
   </TabItem>
 </Tabs>
 
-## Platform Support
+## Soporte de plataforma
 
-- **iOS**: iOS 15.0+ (requires UITextInteraction API)
-- **Android**: No-op (returns unsupported)
-- **Web**: No-op (returns unsupported)
+- **iOS**: iOS 15.0+ (requiere UITextInteraction API)
+- **Android**: No operativo (devoluciones no admitidas)
+- **Web**: No operativo (devoluciones no admitidas)
 
-## Usage Example
+## Ejemplo de uso
 
 ```typescript
 import { TextInteraction } from '@capgo/capacitor-textinteraction';
@@ -61,30 +62,30 @@ if (result.success) {
 await TextInteraction.setEnabled({ enabled: true });
 ```
 
-## API Reference
+## API Referencia
 
-### setEnabled(options)
+### setEnabled(opciones)
 
 ```typescript
 setEnabled(options: { enabled: boolean }) => Promise<{ success: boolean }>
 ```
 
-Enable or disable iOS text interaction (magnifier lens and selection handles).
+Habilite o deshabilite la interacción de texto iOS (lente de lupa y controladores de selección).
 
-| Param         | Type                          |
-| ------------- | ----------------------------- |
+| Parámetro | Tipo |
+| ------------- | ----------------------- |
 | **`options`** | `{ enabled: boolean }` |
 
-**Returns:** `Promise<{ success: boolean }>`
+**Devoluciones:** `Promise<{ success: boolean }>`
 
-- Returns `{ success: true }` if the operation was successful (iOS 15+)
-- Returns `{ success: false }` if not supported (Android, Web, or iOS < 15)
+- Devuelve `{ success: true }` si la operación fue exitosa (iOS 15+)
+- Devuelve `{ success: false }` si no es compatible (Android, Web o iOS < 15)
 
-## Practical Use Cases
+## Casos de uso prácticos
 
-### Kiosk Applications
+### Aplicaciones de quiosco
 
-Disable text interaction in kiosk mode to prevent users from accessing copy/paste menus:
+Deshabilite la interacción de texto en el modo quiosco para evitar que los usuarios accedan a los menús de copiar y pegar:
 
 ```typescript
 import { TextInteraction } from '@capgo/capacitor-textinteraction';
@@ -105,9 +106,9 @@ async function exitKioskMode() {
 }
 ```
 
-### Game Experiences
+### Experiencias de juego
 
-Remove magnifier lens during gameplay and restore it for text input:
+Retire la lente de aumento durante el juego y restáurela para ingresar texto:
 
 ```typescript
 import { TextInteraction } from '@capgo/capacitor-textinteraction';
@@ -136,9 +137,9 @@ class GameController {
 }
 ```
 
-### Interactive Installations
+### Instalaciones interactivas
 
-Control text interaction for digital signage and interactive displays:
+Controle la interacción de texto para señalización digital y pantallas interactivas:
 
 ```typescript
 import { TextInteraction } from '@capgo/capacitor-textinteraction';
@@ -164,9 +165,9 @@ async function enableUserInput() {
 }
 ```
 
-### Form Management
+### Gestión de formularios
 
-Toggle text interaction based on form state:
+Alternar interacción de texto según el estado del formulario:
 
 ```typescript
 import { TextInteraction } from '@capgo/capacitor-textinteraction';
@@ -198,9 +199,9 @@ class FormManager {
 }
 ```
 
-### Conditional Text Interaction
+### Interacción de texto condicional
 
-Platform-aware text interaction control:
+Control de interacción de texto compatible con la plataforma:
 
 ```typescript
 import { TextInteraction } from '@capgo/capacitor-textinteraction';
@@ -226,48 +227,46 @@ await toggleTextInteraction(false); // Disable
 await toggleTextInteraction(true);  // Enable
 ```
 
-## Best Practices
+## Mejores prácticas
 
 - **Always re-enable before text input**: Disable text interaction when needed, but always re-enable it before showing text input fields or keyboards
-- **Check for platform support**: Verify `result.success` to handle unsupported platforms gracefully
-- **iOS-specific feature**: This plugin is iOS-only; implement fallbacks for Android and Web
-- **User experience**: Consider UX implications of disabling text interaction
-- **State management**: Track enabled/disabled state to avoid redundant calls
+- **Compruebe la compatibilidad con la plataforma**: verifique que `result.success` maneje correctamente las plataformas no compatibles
+- **Característica específica de iOS**: este complemento es exclusivo de iOS; implementar alternativas para Android y Web
+- **Experiencia de usuario**: considere las implicaciones de UX al deshabilitar la interacción de texto
+- **Gestión de estado**: seguimiento del estado habilitado/deshabilitado para evitar llamadas redundantes
 
-## Important Reminders
+## Recordatorios importantes
 
 1. **Re-enable for text inputs**: Always call `setEnabled({ enabled: true })` before showing text input fields, otherwise users won't be able to properly select or edit text
 
-2. **Platform detection**: The plugin returns `{ success: false }` on Android, Web, and iOS versions below 15.0
+2. **Detección de plataforma**: el complemento devuelve `{ success: false }` en las versiones Android, web y iOS inferiores a 15.0.
 
 3. **No visual feedback**: Disabling text interaction removes the magnifier but doesn't provide visual feedback - implement your own UI indicators if needed
 
-4. **Safe defaults**: The text interaction system is enabled by default, matching iOS's standard behavior
+4. **Valores predeterminados seguros**: el sistema de interacción de texto está habilitado de forma predeterminada, coincidiendo con el comportamiento estándar de iOS
 
-## Limitations
+## Limitaciones
 
-- iOS 15.0+ only (requires UITextInteraction API)
-- No effect on Android or Web platforms
-- Cannot selectively disable only magnifier or only selection handles
-- No callback for when users attempt to use disabled features
+- iOS 15.0+ únicamente (requiere UITextInteraction API)
+- Sin efecto en Android o plataformas web
+- No se puede desactivar selectivamente sólo la lupa o sólo los controladores de selección.
+- No hay devolución de llamada cuando los usuarios intentan utilizar funciones deshabilitadas
 
-## Use Cases
-
-- **Kiosk applications**: Prevent copy/paste on controlled installations
-- **Game experiences**: Remove magnifier during gameplay
-- **Interactive displays**: Control text interaction on digital signage
+## Casos de uso- **Aplicaciones de quiosco**: evita copiar y pegar en instalaciones controladas
+- **Experiencias de juego**: elimina la lupa durante el juego
+- **Pantallas interactivas**: controla la interacción del texto en la señalización digital
 - **Custom text editors**: Build specialized text editing experiences
-- **Security**: Prevent text selection in sensitive areas
+- **Seguridad**: evita la selección de texto en áreas sensibles
 
-## Troubleshooting
+## Solución de problemas
 
-### Text Interaction Not Disabling
+### Interacción de texto no deshabilitada
 
-- Verify iOS version is 15.0 or higher
-- Check that `result.success` returns `true`
-- Ensure no other code is re-enabling text interaction
+- Verifique que la versión iOS sea 15.0 o superior
+- Verifique que `result.success` devuelva `true`
+- Asegúrese de que ningún otro código vuelva a habilitar la interacción de texto
 
-### Users Can't Edit Text
+### Los usuarios no pueden editar el texto
 
 - Make sure you called `setEnabled({ enabled: true })` before showing text inputs
 - Verify the enable call succeeded by checking `result.success`

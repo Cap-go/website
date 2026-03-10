@@ -1,51 +1,52 @@
 ---
-locale: fr
-title: GitHub Actions Integration
-description: "Learn how to integrate Capgo Mises à jour en direct with GitHub Actions for automated Déploiement of your Application Mises à jour."
-sidebar: 
+title: GitHub Intégration des actions
+description: >-
+  Découvrez comment intégrer Capgo Live Updates avec GitHub Actions pour un
+  déploiement automatisé des mises à jour de votre application.
+sidebar:
   order: 3
+locale: fr
 ---
-
 import { Aside, Steps } from '@astrojs/starlight/components';
 
-Integrate Capgo Mises à jour en direct with GitHub Actions to automatically Déployer your Application Mises à jour whenever you Pousser code changes. This Guide covers setting up automated builds, Test, and Déploiement workflows using GitHub's powerful CI/CD platform.
+Intégrez Capgo Live Updates avec GitHub Actions pour déployer automatiquement les mises à jour de votre application chaque fois que vous apportez des modifications au code. Ce guide couvre la configuration de workflows automatisés de génération, de test et de déploiement à l'aide de la puissante plateforme CI/CD de GitHub.
 
-## Prerequisites
+## Prérequis
 
-Before setting up GitHub Actions integration, ensure you have:
+Avant de configurer l'intégration des actions GitHub, assurez-vous d'avoir :
 
-- A GitHub repository with your Application's source code
-- A Capgo Compte with an Application configured
-- Node.js and npm/yarn configured in your project
-- GitHub Actions enabled for your repository
+- Un dépôt GitHub avec le code source de votre application
+- Un compte Capgo avec une application configurée
+- Node.js et npm/fil configurés dans votre projet
+- GitHub Actions activées pour votre référentiel
 
-## Setting Up GitHub Secrets
+## Configuration des secrets GitHub
 
-### Step 1: Configure Repository Secrets
+### Étape 1 : Configurer les secrets du référentiel
 
-Set up the necessary secrets in your GitHub repository:
+Configurez les secrets nécessaires dans votre référentiel GitHub :
 
 <Steps>
 
-1. Navigate to your GitHub repository
-2. Go to **Paramètres** → **Secrets and variables** → **Actions**
-3. Click **Nouveau repository secret** and Ajouter the following:
+1. Accédez à votre référentiel GitHub
+2. Accédez à **Paramètres** → **Secrets et variables** → **Actions**.
+3. Cliquez sur **Nouveau secret du référentiel** et ajoutez les éléments suivants :
 
 </Steps>
 
-| Secret Name | Value |
+| Nom secret | Valeur |
 |-------------|-------|
-| `CAPGO_TOKEN` | Your Capgo API token |
+| `CAPGO_TOKEN` | Votre jeton Capgo API |
 
 <Aside type="tip">
 
-Get your Capgo API token from [console.capgo.app/apikeys](https://console.capgo.app/apikeys). Your app ID is already configured in your `capacitor.config.ts` file.
+Obtenez votre jeton Capgo API sur [console.capgo.app/apikeys](https://console.capgo.app/apikeys). Votre identifiant d'application est déjà configuré dans votre fichier `capacitor.config.ts`.
 
 </Aside>
 
-## Simple Production Déploiement
+## Déploiement de production simple
 
-Démarrer with this basic Configuration that deploys to Production on every Pousser to the main branch:
+Commencez par cette configuration de base qui se déploie en production à chaque poussée vers la branche principale :
 
 ```yaml
 # Simple GitHub Actions Workflow for Capgo Live Updates
@@ -84,11 +85,11 @@ jobs:
            # For encrypted uploads, add: --key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"
 ```
 
-## Advanced Multi-Canal Configuration
+## Configuration multicanal avancée
 
-### Fonctionnalité Branch Deployments
+### Déploiements de branches de fonctionnalités
 
-Déployer Fonctionnalité branches to temporary Canaux for Test:
+Déployez des branches de fonctionnalités sur des canaux temporaires à des fins de test :
 
 ```yaml
 # Feature branch deployment
@@ -122,18 +123,18 @@ jobs:
                      npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel $CHANNEL_NAME
 ```
 
-### Using Chiffrement
+### Utilisation du cryptage
 
-If you're using [Capgo's Chiffrement Fonctionnalité](/docs/live-Mises à jour/Chiffrement/), you'll need to store your private key securely in your CI/CD environment.
+Si vous utilisez la [fonctionnalité de chiffrement de Capgo](/docs/live-updates/encryption/), vous devrez stocker votre clé privée en toute sécurité dans votre environnement CI/CD.
 
-After [setting up Chiffrement keys](/docs/live-Mises à jour/Chiffrement/#setting-up-Chiffrement) locally, Ajouter your private key to GitHub secrets:
+Après avoir [configuré les clés de chiffrement](/docs/live-updates/encryption/#setting-up-encryption) localement, ajoutez votre clé privée aux secrets GitHub :
 
 ```shell
 # Display your private key content (copy this output)
 cat .capgo_key_v2
 ```
 
-Add this content as `CAPGO_PRIVATE_KEY` in your GitHub repository secrets, then use it in workflows:
+Ajoutez ce contenu sous le nom `CAPGO_PRIVATE_KEY` dans les secrets de votre référentiel GitHub, puis utilisez-le dans les workflows :
 
 ```yaml
 # Deploy with encryption
@@ -145,18 +146,18 @@ Add this content as `CAPGO_PRIVATE_KEY` in your GitHub repository secrets, then 
 
 <Aside type="caution">
 
-**Security Best Practices:**
-- Never commit the `.capgo_key_v2` file to version control
-- Store the private key only in secure CI/CD secret management
-- Use different keys for different environments
+**Meilleures pratiques de sécurité :**
+- Ne validez jamais le fichier `.capgo_key_v2` dans le contrôle de version
+- Stockez la clé privée uniquement dans la gestion sécurisée des secrets CI/CD
+- Utilisez différentes clés pour différents environnements
 
 </Aside>
 
-### Multi-Canal Configuration
+### Configuration multicanal
 
-For comprehensive Information À propos setting up and managing multiple Déploiement Canaux, see the [Canaux Documentation](/docs/live-Mises à jour/Canaux/).
+Pour obtenir des informations complètes sur la configuration et la gestion de plusieurs canaux de déploiement, consultez la [Documentation des canaux](/docs/live-updates/channels/).
 
-Terminé workflow with Développement, Tirer requests, and Production deployments:
+Flux de travail complet avec développement, demandes d'extraction et déploiements de production :
 
 ```yaml
 # Complete multi-environment workflow
@@ -261,13 +262,13 @@ jobs:
 
 <Aside type="tip">
 
-**Testing with Channels**: After deploying to a PR or development channel, you can test the update in your app by configuring it to use that specific channel. Learn more about [configuring channels in your app](/docs/live-updates/channels/#configuring-the-channel-in-your-app).
+**Test avec les canaux** : après le déploiement sur un canal de relations publiques ou de développement, vous pouvez tester la mise à jour dans votre application en la configurant pour utiliser ce canal spécifique. En savoir plus sur la [configuration des canaux dans votre application](/docs/live-updates/channels/#configuring-the-channel-in-your-app).
 
 </Aside>
 
-### Cleanup Fonctionnalité Canaux
+### Canaux de fonctionnalités de nettoyage
 
-Automatically clean up Fonctionnalité Canaux when branches are deleted:
+Nettoyer automatiquement les canaux de fonctionnalités lorsque les branches sont supprimées :
 
 ```yaml
 name: Cleanup Feature Channels
@@ -291,26 +292,24 @@ jobs:
           npx @capgo/cli channel delete $CHANNEL_NAME --apikey ${{ secrets.CAPGO_TOKEN }} || true
 ```
 
-## Sécurité and Best Practices
+## Sécurité et bonnes pratiques
 
-### Environment Protection Rules
+### Règles de protection de l'environnement
 
-Set up environment protection rules in GitHub:
+Configurez les règles de protection de l'environnement dans GitHub :
 
-<Steps>
-
-1. Go to **Paramètres** → **Environments** in your repository
-2. Create environments: `development`, `staging`, `production`
-3. For Production environment, Ajouter:
-   - **Required reviewers**: Ajouter team Membres who must approve deployments
-   - **Wait timer**: Ajouter a delay before Déploiement (optional)
-   - **Deployment branches**: Restrict to `main` branch only
+<Steps>1. Accédez à **Paramètres** → **Environnements** dans votre référentiel
+2. Créez des environnements : `development`, `staging`, `production`
+3. Pour l'environnement de production, ajoutez :
+   - **Réviseurs requis** : ajoutez des membres de l'équipe qui doivent approuver les déploiements
+   - **Minuterie d'attente** : Ajouter un délai avant le déploiement (facultatif)
+   - **Branches de déploiement** : restreindre à la branche `main` uniquement
 
 </Steps>
 
-### Secure Secrets Management
+### Gestion des secrets sécurisés
 
-Use environment-specific secrets:
+Utilisez des secrets spécifiques à l'environnement :
 
 ```yaml
 # Use different secrets per environment
@@ -325,11 +324,11 @@ deploy-production:
           --channel production
 ```
 
-## Monitoring and Notifications
+## Surveillance et notifications
 
-### Slack Integration
+### Intégration Slack
 
-Ajouter Slack notifications to your workflow:
+Ajoutez des notifications Slack à votre flux de travail :
 
 ```yaml
 name: Deploy with Notifications
@@ -361,9 +360,9 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 ```
 
-### Discord Integration
+### Intégration Discorde
 
-Send notifications to Discord:
+Envoyer des notifications à Discord :
 
 ```yaml
 - name: Discord notification
@@ -379,9 +378,9 @@ Send notifications to Discord:
     DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
 ```
 
-### Email Notifications
+### Notifications par e-mail
 
-Configure email notifications:
+Configurez les notifications par e-mail :
 
 ```yaml
 - name: Send email notification
@@ -404,9 +403,9 @@ Configure email notifications:
 
 ## Dépannage
 
-### Débogage Workflow
+### Flux de travail de débogage
 
-Ajouter Débogage steps to troubleshoot issues:
+Ajoutez des étapes de débogage pour résoudre les problèmes :
 
 ```yaml
 - name: Debug environment
@@ -424,9 +423,9 @@ Ajouter Débogage steps to troubleshoot issues:
     npx @capgo/cli app debug --apikey ${{ secrets.CAPGO_TOKEN }} --app ${{ secrets.CAPGO_APP_ID }}
 ```
 
-### Problèmes courants and Solutions
+### Problèmes courants et solutions
 
-**Workflow fails with "CAPGO_TOKEN not found":**
+**Le workflow échoue avec « CAPGO_TOKEN introuvable » :**
 
 ```yaml
 - name: Verify secrets
@@ -440,7 +439,7 @@ Ajouter Débogage steps to troubleshoot issues:
     CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
 ```
 
-**Build artifacts not found:**
+**Artéfacts de construction introuvables :**
 
 ```yaml
 - name: Debug artifacts
@@ -450,7 +449,7 @@ Ajouter Débogage steps to troubleshoot issues:
     find . -name "*.js" -o -name "*.html" | head -10
 ```
 
-**Network connectivity issues:**
+**Problèmes de connectivité réseau :**
 
 ```yaml
 - name: Test connectivity
@@ -459,9 +458,9 @@ Ajouter Débogage steps to troubleshoot issues:
     curl -I https://api.capgo.io/health || echo "Health check failed"
 ```
 
-## Reusable Workflows
+## Flux de travail réutilisables
 
-Créer reusable workflows for consistency across projects:
+Créez des flux de travail réutilisables pour assurer la cohérence entre les projets :
 
 ```yaml
 # .github/workflows/reusable-capgo-deploy.yml
@@ -509,7 +508,7 @@ jobs:
             --channel ${{ inputs.channel }}
 ```
 
-Use the reusable workflow:
+Utilisez le workflow réutilisable :
 
 ```yaml
 # .github/workflows/deploy.yml
@@ -541,11 +540,11 @@ jobs:
       CAPGO_APP_ID: ${{ secrets.CAPGO_APP_ID }}
 ```
 
-## Suivant Steps
+## Prochaines étapes
 
-- Learn À propos [Canaux](/docs/live-Mises à jour/Canaux/) to manage different Déploiement environments
-- Explore [Custom Storage](/docs/live-Mises à jour/custom-storage/) for advanced Déploiement scenarios
-- Set up [Chiffrement](/docs/live-Mises à jour/Chiffrement/) for secure deployments
-- Configure [Mise à jour Behavior](/docs/live-Mises à jour/Mise à jour-behavior/) to customize how Mises à jour are applied
+- Découvrez les [Canaux](/docs/live-updates/channels/) pour gérer différents environnements de déploiement
+- Explorez [Custom Storage](/docs/live-updates/custom-storage/) pour des scénarios de déploiement avancés
+- Configurer [Encryption](/docs/live-updates/encryption/) pour des déploiements sécurisés
+- Configurez [Comportement de mise à jour] (/docs/live-updates/update-behavior/) pour personnaliser la façon dont les mises à jour sont appliquées
 
-With GitHub Actions integration, you can leverage GitHub's powerful CI/CD platform to Créer sophisticated Déploiement workflows with built-in Sécurité, monitoring, and collaboration Fonctionnalités for your Capgo Mises à jour en direct.
+Avec l'intégration de GitHub Actions, vous pouvez tirer parti de la puissante plateforme CI/CD de GitHub pour créer des workflows de déploiement sophistiqués avec des fonctionnalités intégrées de sécurité, de surveillance et de collaboration pour vos mises à jour en direct Capgo.

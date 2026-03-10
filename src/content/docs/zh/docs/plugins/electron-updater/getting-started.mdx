@@ -1,36 +1,35 @@
 ---
-title: "Electron Updater 入门"
-description: 为您的 Electron 应用添加 Capgo 实时更新的完整配置指南。
+title: Electron 更新器入门
+description: 将 Capgo 实时更新添加到 Electron 应用程序的完整设置指南。
 sidebar:
   order: 1
 locale: zh
 ---
-
 import { Steps, Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
 
-本指南将引导您在 Electron 应用中设置 `@capgo/electron-updater`,以启用 JavaScript/HTML/CSS 的实时更新。
+本指南将引导您在 Electron 应用程序中设置 `@capgo/electron-updater` 以启用实时 JavaScript/HTML/CSS 更新。
 
 <Aside type="tip">
-  已在 Capacitor 中使用 Capgo? Electron Updater 使用相同的 Capgo Cloud 后端,因此您可以在同一控制台中同时管理移动端与桌面端应用。
+  已将 Capgo 与 Capacitor 一起使用？ Electron Updater 使用相同的 Capgo 云后端，因此您可以从同一仪表板管理移动和桌面应用程序。
 </Aside>
 
-## 前置条件
+## 先决条件
 
 - Electron 20.0.0 或更高版本
-- Node.js 18 或更高版本
-- Capgo 账号(在 [capgo.app](https://capgo.app) 注册)
+- Node.js 18 或更高
+- Capgo 帐户（在 [capgo.app](https://capgo.app) 上注册）
 
 ## 安装
 
 <Steps>
 
-1. 安装包:
+1.安装包：
 
    ```bash
    npm install @capgo/electron-updater
    ```
 
-2. 在 Capgo 控制台获取 App ID。如果尚未创建应用,请运行:
+2. 从 Capgo 仪表板获取您的应用程序 ID。如果您尚未创建应用程序，请运行：
 
    ```bash
    npx @capgo/cli@latest init
@@ -40,9 +39,9 @@ import { Steps, Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components
 
 ## 设置
 
-Electron Updater 需要在三处配置:主进程、预加载脚本、渲染进程。
+Electron Updater 需要在三个地方进行设置：主进程、预加载脚本和渲染器进程。
 
-### 主进程
+### 主要流程
 
 ```typescript
 // main.ts
@@ -54,9 +53,9 @@ import {
   setupEventForwarding,
 } from '@capgo/electron-updater';
 
-// 使用您的 Capgo App ID 创建 updater 实例
+// Create updater instance with your Capgo App ID
 const updater = new ElectronUpdater({
-  appId: 'YOUR_CAPGO_APP_ID', // 例如 'com.example.myapp'
+  appId: 'YOUR_CAPGO_APP_ID', // e.g., 'com.example.myapp'
   autoUpdate: true,
 });
 
@@ -70,15 +69,15 @@ app.whenReady().then(async () => {
     },
   });
 
-  // 使用窗口与内置路径初始化 updater
+  // Initialize updater with window and builtin path
   const builtinPath = path.join(__dirname, 'www/index.html');
   await updater.initialize(mainWindow, builtinPath);
 
-  // 设置主进程与渲染进程之间的 IPC 通信
+  // Setup IPC communication between main and renderer
   setupIPCHandlers(updater);
   setupEventForwarding(updater, mainWindow);
 
-  // 加载当前 bundle(内置或下载的更新)
+  // Load the current bundle (either builtin or downloaded update)
   await mainWindow.loadFile(updater.getCurrentBundlePath());
 });
 
@@ -95,41 +94,41 @@ app.on('window-all-closed', () => {
 // preload.ts
 import { exposeUpdaterAPI } from '@capgo/electron-updater/preload';
 
-// 将 updater API 暴露给渲染进程
+// Expose the updater API to the renderer process
 exposeUpdaterAPI();
 ```
 
-### 渲染进程
+### 渲染器进程
 
 ```typescript
-// renderer.ts (或应用入口文件)
+// renderer.ts (or in your app's entry point)
 import { requireUpdater } from '@capgo/electron-updater/renderer';
 
 const updater = requireUpdater();
 
-// 关键:每次应用启动时都要调用!
-// 该调用确认 bundle 成功加载并防止回滚
+// CRITICAL: Call this on every app launch!
+// This confirms the bundle loaded successfully and prevents rollback
 await updater.notifyAppReady();
 
 console.log('App ready, current bundle:', await updater.current());
 ```
 
 <Aside type="caution">
-  您**必须**在应用启动后 10 秒内调用 `notifyAppReady()`(可通过 `appReadyTimeout` 配置)。若未调用,updater 会认为更新失败并回滚到上一版本。
+  您**必须**在应用程序启动后 10 秒内调用 `notifyAppReady()`（可通过 `appReadyTimeout` 配置）。如果未调用，更新程序将假定更新失败并回滚到以前的版本。
 </Aside>
 
 ## 检查更新
 
-当 `autoUpdate: true` 时,updater 会自动检查更新。您也可以手动触发:
+使用 `autoUpdate: true`，更新程序会自动检查更新。您还可以触发手动检查：
 
 ```typescript
-// 手动检查更新
+// Check for updates manually
 const latest = await updater.getLatest();
 
 if (latest.url && !latest.error) {
   console.log('Update available:', latest.version);
 
-  // 下载更新
+  // Download the update
   const bundle = await updater.download({
     url: latest.url,
     version: latest.version,
@@ -138,70 +137,70 @@ if (latest.url && !latest.error) {
 
   console.log('Downloaded bundle:', bundle.id);
 
-  // 选项 1: 下次重启生效
+  // Option 1: Queue for next restart
   await updater.next({ id: bundle.id });
 
-  // 选项 2: 立即应用并重载
+  // Option 2: Apply immediately and reload
   // await updater.set({ id: bundle.id });
 }
 ```
 
 ## 监听事件
 
-通过事件跟踪更新进度与状态:
+通过事件跟踪更新进度和状态：
 
 ```typescript
-// 下载进度
+// Download progress
 updater.addListener('download', (event) => {
   console.log(`Download progress: ${event.percent}%`);
 });
 
-// 有可用更新
+// Update available
 updater.addListener('updateAvailable', (event) => {
   console.log('New version available:', event.bundle.version);
 });
 
-// 下载完成
+// Download completed
 updater.addListener('downloadComplete', (event) => {
   console.log('Download finished:', event.bundle.id);
 });
 
-// 更新失败
+// Update failed
 updater.addListener('updateFailed', (event) => {
   console.error('Update failed:', event.bundle.version);
 });
 ```
 
-## 发布更新
+## 部署更新
 
-使用 Capgo CLI 上传更新:
+使用 Capgo CLI 上传更新：
 
 ```bash
-# 构建应用
+# Build your app
 npm run build
 
-# 上传到 Capgo
+# Upload to Capgo
 npx @capgo/cli@latest bundle upload --channel=production
 ```
 
-您的 Electron 应用将在下次检查时自动检测并下载新 bundle。
+您的 Electron 应用程序将在下次检查时自动检测并下载新包。
 
 ## 调试菜单
 
-在开发期间启用调试菜单:
+在开发过程中启用调试菜单：
 
 ```typescript
 const updater = new ElectronUpdater({
   appId: 'YOUR_CAPGO_APP_ID',
-  debugMenu: true, // 启用调试菜单
+  debugMenu: true, // Enable debug menu
 });
 ```
 
-按 `Ctrl+Shift+D`(或 Mac 上 `Cmd+Shift+D`) 打开调试菜单,可:
-- 查看当前 bundle 信息
-- 在可用 bundle 之间切换
+按“Ctrl+Shift+D”（或 Mac 上的“Cmd+Shift+D”）打开调试菜单，然后：
+- 查看当前捆绑包信息
+- 在可用捆绑包之间切换
 - 重置为内置版本
-- 查看设备与渠道信息
+- 查看设备和频道信息
 
 ## 配置选项
 
@@ -236,8 +235,8 @@ const updater = new ElectronUpdater({
 });
 ```
 
-## 下一步
+## 后续步骤
 
-- [API 参考](/docs/plugins/electron-updater/api/) - 查看所有可用方法
-- [渠道](/docs/live-updates/channels/) - 了解发布渠道
-- [回滚](/docs/live-updates/rollbacks/) - 理解回滚保护
+- [API 参考](/docs/plugins/electron-updater/api/) - 探索所有可用的方法
+- [渠道](/docs/live-updates/channels/) - 了解部署渠道
+- [回滚](/docs/live-updates/rollbacks/) - 了解回滚保护

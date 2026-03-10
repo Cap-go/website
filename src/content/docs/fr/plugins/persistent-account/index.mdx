@@ -1,70 +1,72 @@
 ---
-locale: fr
-title: "@capgo/capacitor-persistent-Compte"
-description: Persistent Compte management plugin for Capacitor apps with secure storage, session handling, and Utilisateur data persistence.
+title: '@capgo/capacitor-persistent-account'
+description: ''
 tableOfContents: false
 next: false
 prev: false
-sidebar: 
+sidebar:
   order: 1
-  label: "Introduction"
-hero: 
-  tagline: Manage Utilisateur accounts with persistent storage, secure session handling, and seamless authentication across Application sessions.
-  image: 
+  label: Introduction
+hero:
+  tagline: >-
+    Gérez les comptes d'utilisateurs avec un stockage persistant, une gestion
+    sécurisée des sessions et une authentification transparente entre les
+    sessions d'application.
+  image:
     file: ~public/icons/plugins/persistent-account.svg
-  actions: 
-    - text: Get started
+  actions:
+    - text: Commencer
       link: /docs/plugins/persistent-account/getting-started/
       icon: right-arrow
       variant: primary
     - text: Github
-      link: https://github.com/Cap-go/capacitor-persistent-account/
+      link: 'https://github.com/Cap-go/capacitor-persistent-account/'
       icon: external
       variant: minimal
+locale: fr
 ---
-
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 ## Aperçu
 
-The Capacitor Persistent Compte plugin enables secure storage and persistence of Utilisateur Compte data between Application installations. This plugin ensures that Utilisateur Compte Information remains Disponible even after Application reinstalls, providing seamless Utilisateur experience and Compte continuity.
+Le plugin Capacitor Persistent Account permet le stockage sécurisé et la persistance des données de compte utilisateur entre les installations d'applications. Ce plugin garantit que les informations du compte utilisateur restent disponibles même après la réinstallation de l'application, offrant ainsi une expérience utilisateur transparente et une continuité de compte.
 
 <CardGrid stagger>
-  <Card title="Cross-install persistence" icon="rocket">
-    Data survives Application uninstall/reinstall cycles 💾
+  <Card title="Persistance entre installations" icon="rocket">
+    Les données survivent aux cycles de désinstallation/réinstallation des applications 💾
   </Card>
-  <Card title="Secure storage" icon="setting">
-    Secure Compte data storage with system integration 🔐
+  <Card title="Stockage sécurisé" icon="setting">
+    Stockage sécurisé des données de compte avec intégration du système 🔐
   </Card>
   <Card title="Simple API" icon="puzzle">
-    Clean read/write interface for Compte management 📊
+    Interface de lecture/écriture propre pour la gestion des comptes 📊
   </Card>
   <Card title="Cross-platform" icon="laptop">
-    Natif iOS and Android implementation 📱
+    Implémentation native de iOS et Android 📱
   </Card>
 </CardGrid>
 
-## Installation
+##Installation
 
 ```bash
 npm install @capgo/capacitor-persistent-account
 npx cap sync
 ```
 
-## Core API Methods
+## Méthodes principales API
 
-### Data Management
-- `saveAccount(options: { data: unknown })` - Securely save account data to persistent storage
-- `readAccount()` - Retrieve stored account data, returns `Promise<{ data: unknown | null }>`
+### Gestion des données
+- `saveAccount(options: { data: unknown })` - Enregistrez en toute sécurité les données du compte sur un stockage persistant
+- `readAccount()` - Récupère les données de compte stockées, renvoie `Promise<{ data: unknown | null }>`
 
-## Key Fonctionnalités
+## Principales fonctionnalités
 
-- **Cross-Installation persistence**: Compte data survives Application uninstall and reinstall
-- **Secure storage**: Uses platform-specific secure storage mechanisms
-- **Type flexibility**: Store any serializable Compte data structure
-- **Cross-platform Support**: Natif implementation for both iOS and Android
+- **Persistance entre installations** : les données du compte survivent à la désinstallation et à la réinstallation de l'application
+- **Stockage sécurisé** : utilise des mécanismes de stockage sécurisé spécifiques à la plate-forme
+- **Flexibilité de type** : stockez toute structure de données de compte sérialisable
+- **Prise en charge multiplateforme** : implémentation native pour iOS et Android
 
-## Utilisation Exemple
+## Exemple d'utilisation
 
 ```typescript
 import { PersistentAccount } from '@capgo/capacitor-persistent-account';
@@ -103,30 +105,30 @@ if (result.data) {
 }
 ```
 
-## Use Cases
+## Cas d'utilisation
 
-- **Utilisateur onboarding**: Preserve Utilisateur progress through Application reinstalls
-- **Compte recovery**: Restore Utilisateur sessions after Application Mises à jour
-- **Preferences storage**: Maintain Utilisateur Paramètres and configurations
-- **Offline-first apps**: Store essential Utilisateur data locally
+- **Intégration des utilisateurs** : préservez la progression des utilisateurs grâce aux réinstallations d'applications
+- **Récupération de compte** : restaurez les sessions utilisateur après les mises à jour de l'application
+- **Stockage des préférences** : conserver les paramètres et configurations utilisateur
+- **Applications hors ligne** : stockez les données utilisateur essentielles localement
 
-## Platform Implementation
+## Implémentation de la plateforme
 
 ### iOS
-- Utilizes iOS Keychain Services for secure, persistent storage
-- Data survives Application deletion and Appareil restores
+- Utilise les services de trousseau iOS pour un stockage sécurisé et persistant
+- Les données survivent à la suppression de l'application et aux restaurations de l'appareil
 
 ### Android
-- Uses Android Compte Manager or shared preferences with backup
-- Maintains data across Application reinstalls and Appareil migrations
+- Utilise le gestionnaire de compte Android ou les préférences partagées avec sauvegarde
+- Conserve les données lors des réinstallations d'applications et des migrations d'appareils
 
-## Sécurité Considerations
+## Considérations de sécurité
 
-- Compte data is stored using platform-specific secure storage
-- Consider data Chiffrement for sensitive Information
-- Implement proper data validation when reading stored accounts
-- Follow platform guidelines for Utilisateur data handling
+- Les données du compte sont stockées à l'aide d'un stockage sécurisé spécifique à la plateforme
+- Envisagez le cryptage des données pour les informations sensibles
+- Mettre en œuvre une validation appropriée des données lors de la lecture des comptes stockés
+- Suivre les directives de la plateforme pour le traitement des données utilisateur
 
-## Documentation
+##Documents
 
-Vérifier the [Terminé Documentation](/docs/plugins/persistent-Compte/getting-started/) for detailed implementation guides and best practices.
+Consultez la [documentation complète](/docs/plugins/persistent-account/getting-started/) pour obtenir des guides de mise en œuvre détaillés et les meilleures pratiques.

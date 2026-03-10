@@ -1,26 +1,27 @@
 ---
-locale: fr
 title: Commencer
-description: Learn how to Installer and use the Zip plugin to compress and extract files in your Capacitor Application.
-sidebar: 
+description: >-
+  Découvrez comment installer et utiliser le plugin Zip pour compresser et
+  extraire des fichiers dans votre application Capacitor.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Installer the package**
+1. **Installez le package**
    <PackageManagers pkg="@capgo/capacitor-zip" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser with Natif projects**
+2. **Synchronisation avec les projets natifs**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
 ## Utilisation
 
-Importer the plugin and zip or unzip files:
+Importez le plugin et zippez ou décompressez les fichiers :
 
 ```typescript
 import { CapacitorZip } from '@capgo/capacitor-zip';
@@ -46,9 +47,9 @@ const unzipArchive = async () => {
 
 ## API Référence
 
-### zip(Options)
+### zip(options)
 
-Creates a ZIP archive from a source folder.
+Crée une archive ZIP à partir d'un dossier source.
 
 ```typescript
 interface ZipOptions {
@@ -62,9 +63,9 @@ await CapacitorZip.zip({
 });
 ```
 
-### unzip(Options)
+### décompresser (options)
 
-Extracts files from a ZIP archive.
+Extrait les fichiers d'une archive ZIP.
 
 ```typescript
 interface UnzipOptions {
@@ -78,7 +79,7 @@ await CapacitorZip.unzip({
 });
 ```
 
-## Terminé Exemple
+## Exemple complet
 
 ```typescript
 import { CapacitorZip } from '@capgo/capacitor-zip';
@@ -205,9 +206,9 @@ export class ZipService {
 }
 ```
 
-## Advanced Utilisation
+## Utilisation avancée
 
-### Creating Archives with Progress Tracking
+### Création d'archives avec suivi des progrès
 
 ```typescript
 const zipWithProgress = async (source: string, destination: string) => {
@@ -223,7 +224,7 @@ const zipWithProgress = async (source: string, destination: string) => {
 };
 ```
 
-### Batch Archive Operations
+### Opérations d'archivage par lots
 
 ```typescript
 const batchZip = async (folders: string[]) => {
@@ -248,7 +249,7 @@ const batchZip = async (folders: string[]) => {
 };
 ```
 
-### Secure Archive Creation
+### Création d'archives sécurisées
 
 ```typescript
 const createSecureBackup = async (dataPath: string) => {
@@ -266,7 +267,7 @@ const createSecureBackup = async (dataPath: string) => {
 };
 ```
 
-### Archive Validation
+### Validation des archives
 
 ```typescript
 const validateArchive = async (zipPath: string): Promise<boolean> => {
@@ -294,19 +295,19 @@ const validateArchive = async (zipPath: string): Promise<boolean> => {
 };
 ```
 
-## Best Practices
+## meilleures pratiques
 
-1. **Path Validation**: Always Valider source and destination paths before operations
-2. **Erreur Handling**: Wrap all zip/unzip operations in try-catch blocks
-3. **Cleanup**: Retirer temporary files and folders after operations
-4. **Large Files**: Be cautious with large archives on mobile Appareils
-5. **Permissions**: Ensure your Application has necessary file system permissions
+1. **Validation du chemin** : validez toujours les chemins source et de destination avant les opérations
+2. **Gestion des erreurs** : Encapsulez toutes les opérations de zip/décompression dans des blocs try-catch
+3. **Nettoyage** : supprimez les fichiers et dossiers temporaires après les opérations
+4. **Fichiers volumineux** : soyez prudent avec les archives volumineuses sur les appareils mobiles
+5. **Autorisations** : assurez-vous que votre application dispose des autorisations nécessaires sur le système de fichiers.
 
 ## Dépannage
 
 ### Problèmes courants
 
-**Zip operation fails**: Ensure source path exists and is accessible
-**Unzip fails**: Check that ZIP file is valid and destination path is writable
-**Out of storage**: Monitor available disk space before operations
-**Permission denied**: Verify file system permissions in your app configuration
+**L'opération Zip échoue** : assurez-vous que le chemin source existe et qu'il est accessible
+**Échec de la décompression** : vérifiez que le fichier ZIP est valide et que le chemin de destination est accessible en écriture
+**Stockage épuisé** : surveillez l'espace disque disponible avant les opérations
+**Autorisation refusée** : vérifiez les autorisations du système de fichiers dans la configuration de votre application

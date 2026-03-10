@@ -1,49 +1,46 @@
 ---
-
-title: "Getting Started with Contacts"
-description: "Learn how to integrate contact management into your Capacitor app"
+title: Iniziare con i contatti
+description: Scopri come integrare la gestione dei contatti nella tua app Capacitor
 locale: it
 ---
+Questa guida ti guiderà attraverso l'integrazione del plug-in Capacitor Contatti nella tua applicazione.
 
+## Installazione
 
-This guide will walk you through integrating the Capacitor Contacts plugin into your application.
-
-## Installation
-
-Install the plugin using npm:
+Installa il plug-in utilizzando npm:
 
 ```bash
 npm install @capgo/capacitor-contacts
 npx cap sync
 ```
 
-## iOS Configuration
+## iOS Configurazione
 
-Add the following to your `Info.plist`:
+Aggiungi quanto segue al tuo `Info.plist`:
 
 ```xml
 <key>NSContactsUsageDescription</key>
 <string>This app needs access to contacts to let you select recipients</string>
 ```
 
-## Android Configuration
+## Android Configurazione
 
-Add the following permissions to your `AndroidManifest.xml`:
+Aggiungi le seguenti autorizzazioni al tuo `AndroidManifest.xml`:
 
 ```xml
 <uses-permission android:name="android.permission.READ_CONTACTS" />
 <uses-permission android:name="android.permission.WRITE_CONTACTS" />
 ```
 
-## Basic Usage
+## Utilizzo di base
 
-### Import the Plugin
+### Importa il plugin
 
 ```typescript
 import { Contacts } from '@capgo/capacitor-contacts';
 ```
 
-### Request Permissions
+### Richiedi autorizzazioni
 
 ```typescript
 const requestPermissions = async () => {
@@ -52,7 +49,7 @@ const requestPermissions = async () => {
 };
 ```
 
-### Get All Contacts
+### Ottieni tutti i contatti
 
 ```typescript
 const getAllContacts = async () => {
@@ -69,7 +66,7 @@ const getAllContacts = async () => {
 };
 ```
 
-### Search Contacts
+### Cerca contatti
 
 ```typescript
 const searchContacts = async (query: string) => {
@@ -86,7 +83,7 @@ const searchContacts = async (query: string) => {
 };
 ```
 
-### Create Contact
+### Crea contatto
 
 ```typescript
 const createContact = async () => {
@@ -110,7 +107,7 @@ const createContact = async () => {
 };
 ```
 
-### Update Contact
+### Aggiorna contatto
 
 ```typescript
 const updateContact = async (contactId: string) => {
@@ -127,7 +124,7 @@ const updateContact = async (contactId: string) => {
 };
 ```
 
-### Delete Contact
+### Elimina contatto
 
 ```typescript
 const deleteContact = async (contactId: string) => {
@@ -136,9 +133,9 @@ const deleteContact = async (contactId: string) => {
 };
 ```
 
-## Complete Example
+## Esempio completo
 
-Here's a complete example with a contact service:
+Ecco un esempio completo con un servizio di contatto:
 
 ```typescript
 import { Contacts } from '@capgo/capacitor-contacts';
@@ -296,9 +293,9 @@ await contactsService.updateContact(newContactId, {
 });
 ```
 
-## Understanding Projection
+## Comprendere la proiezione
 
-The `projection` parameter controls which fields to fetch:
+Il parametro `projection` controlla quali campi recuperare:
 
 ```typescript
 const result = await Contacts.getContacts({
@@ -316,11 +313,11 @@ const result = await Contacts.getContacts({
 });
 ```
 
-**Tip**: Only request fields you need to improve performance.
+**Suggerimento**: richiedi solo i campi necessari per migliorare le prestazioni.
 
-## Contact Picker UI
+## Interfaccia utente del selettore di contatti
 
-Many apps prefer using the native contact picker:
+Molte app preferiscono utilizzare il selettore di contatti nativo:
 
 ```typescript
 const pickContact = async () => {
@@ -343,18 +340,18 @@ const pickContact = async () => {
 };
 ```
 
-## Best Practices
+## Migliori pratiche
 
-1. **Request Minimal Permissions**: Only request contacts permission when needed
-2. **Use Projection**: Only fetch fields you actually use
-3. **Handle Denials**: Provide fallback when permissions denied
-4. **Cache Wisely**: Contacts can change, don't cache too long
-5. **Respect Privacy**: Be transparent about contact usage
-6. **Async Operations**: All contact operations are async
+1. **Richiedi autorizzazioni minime**: richiedi l'autorizzazione ai contatti solo quando necessario
+2. **Utilizza proiezione**: recupera solo i campi effettivamente utilizzati
+3. **Gestisci rifiuti**: fornisce fallback quando le autorizzazioni vengono negate
+4. **Memorizza nella cache con saggezza**: i contatti possono cambiare, non memorizzare nella cache troppo a lungo
+5. **Rispetta la privacy**: sii trasparente sull'utilizzo dei contatti
+6. **Operazioni asincrone**: tutte le operazioni sui contatti sono asincrone
 
-## Common Issues
+## Problemi comuni
 
-### Permission Denied
+### Autorizzazione negata
 
 ```typescript
 const handlePermissionDenied = async () => {
@@ -370,7 +367,7 @@ const handlePermissionDenied = async () => {
 };
 ```
 
-### Large Contact Lists
+### Elenchi di contatti di grandi dimensioni
 
 ```typescript
 const loadContactsInBatches = async () => {
@@ -389,8 +386,8 @@ const loadContactsInBatches = async () => {
 };
 ```
 
-## Next Steps
+## Passaggi successivi
 
-- Explore the [API Reference](https://github.com/Cap-go/capacitor-contacts#api) for complete method documentation
-- Check out the [example app](https://github.com/Cap-go/capacitor-contacts/tree/main/example) for advanced usage
-- See the [tutorial](/plugins/capacitor-contacts) for complete implementation examples
+- Esplora il [API Riferimento](https://github.com/Cap-go/capacitor-contacts#api) per la documentazione completa del metodo
+- Controlla l'[app di esempio](https://github.com/Cap-go/capacitor-contacts/tree/main/example) per un utilizzo avanzato
+- Consulta il [tutorial](/plugins/capacitor-contacts) per esempi di implementazione completi

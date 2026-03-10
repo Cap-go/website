@@ -1,76 +1,74 @@
 ---
-title: "Supabase Google Login - General Setup"
-description: >-
-  Learn how to set up Google Sign-In with Supabase Authentication using the
-  Capacitor Social Login plugin.
+title: Supabase Google 登录 - 常规设置
+description: 了解如何使用 Capacitor 社交登录插件设置 Google 通过 Supabase 身份验证登录。
 sidebar:
   order: 1
 locale: zh
 ---
 import { Steps } from '@astrojs/starlight/components';
 
-## Introduction
+## 简介
 
-This guide will walk you through integrating Google Sign-In with Supabase Authentication using the Capacitor Social Login plugin. This setup allows you to use native Google Sign-In on mobile platforms while leveraging Supabase Auth for backend authentication.
+本指南将引导您使用 Capacitor 社交登录插件将 Google 登录与 Supabase 身份验证集成。此设置允许您在移动平台上使用本机 Google 登录，同时利用 Supabase Auth 进行后端身份验证。
 
-## Prerequisites
+## 先决条件
 
-Before starting, ensure you have:
+开始之前，请确保您拥有：
 
-1. [Created a Supabase project](https://database.new/)
-2. Read the [Google Login General Setup](/docs/plugins/social-login/google/general/) guide to setup Google OAuth credentials
-3. Followed the respective platform-specific guides to setup Google OAuth credentials for your target platform:
-    - [Android Setup](/docs/plugins/social-login/google/android/)
-    - [iOS Setup](/docs/plugins/social-login/google/ios/)
-    - [Web Setup](/docs/plugins/social-login/google/web/)
+1. [创建Supabase项目](https://database.new/)
+2. 阅读 [Google 登录常规设置](/docs/plugins/social-login/google/general/) 指南以设置 Google OAuth 凭据
+3. 按照相应平台特定的指南为您的目标平台设置 Google OAuth 凭据：
+    - [Android 设置](/docs/plugins/social-login/google/android/)
+    - [iOS 设置](/docs/plugins/social-login/google/ios/)
+    - [网页设置](/docs/plugins/social-login/google/web/)
 
-    :::note
-        Before starting the Supabase tutorial, you need to generate the client IDs for the platforms you plan to use.
-        You will use them in step 7 of this guide.
+    :::注意
+        在开始 Supabase 教程之前，您需要为您计划使用的平台生成客户端 ID。
+        您将在本指南的第 7 步中使用它们。
     :::
 
-## Enabling Google OAuth provider in Supabase
+## 在 Supabase 中启用 Google OAuth 提供程序
 
 <Steps>
-1. Go to your [Supabase Dashboard](https://app.supabase.com/)
-2. Click on your project
-    <img src="/social-login-assets/supabase_project_select.webp" alt="Supabase Project Selector" />
-3. Do go to the `Authentication` menu
-    <img src="/social-login-assets/supabase_authentication_menu.webp" alt="Supabase Authentication Menu" />
-4. Click on the `Providers` tab
-    <img src="/social-login-assets/supabase_providers_tab.webp" alt="Supabase Providers Tab" />
-5. Find the `Google` provider
-    <img src="/social-login-assets/supabase_google_provider.webp" alt="Supabase Google Provider" />
-6. Enable the provider
-    <img src="/social-login-assets/supabase_google_provider_enable.webp" alt="Supabase Google Provider Enable" />
-7. Add the client IDs for the platforms you plan to use
-    <img src="/social-login-assets/supabase_google_provider_add_client_ids.webp" alt="Supabase Google Provider Add Client IDs" />
+1. 转到您的 [Supabase 仪表板](https://app.supabase.com/)
+2. 单击您的项目
+    <img src="/social-login-assets/supabase_project_select.webp" alt="Supabase 项目选择器" />
+3. 请转到 `Authentication` 菜单
+    <img src="/social-login-assets/supabase_authentication_menu.webp" alt="Supabase 身份验证菜单" />
+4. 单击 `Providers` 选项卡
+    <img src="/social-login-assets/supabase_providers_tab.webp" alt="Supabase 提供商选项卡" />
+5. 找到 `Google` 提供商
+    <img src="/social-login-assets/supabase_google_provider.webp" alt="Supabase Google 提供商" />
+6. 启用提供程序
+    <img src="/social-login-assets/supabase_google_provider_enable.webp" alt="Supabase Google 提供商启用" />
+7. 添加您计划使用的平台的客户端 ID
+    <img src="/social-login-assets/supabase_google_provider_add_client_ids.webp" alt="Supabase Google 提供商添加客户端 ID" />
 
-    :::note
-        This included the web client ID, the iOS client ID and the Android client ID. You can skip providing some of them, depending on the platforms you plan to use.
+    :::注意
+        这包括 Web 客户端 ID、iOS 客户端 ID 和 Android 客户端 ID。您可以跳过提供其中一些，具体取决于您计划使用的平台。
     :::
-8. Click on the `Save` button
-    <img src="/social-login-assets/supabase_google_provider_save.webp" alt="Supabase Google Provider Save" />
+8. 单击 `Save` 按钮
+    <img src="/social-login-assets/supabase_google_provider_save.webp" alt="Supabase Google 提供商保存" />
 
 </Steps>
 
 :::note
-You __**SHOULD NOT**__ setup `Client Secret (for OAuth)` or `Callback URL (for OAuth)`. Some sources might also suggest setting `Skip nonce checks` for Google on iOS, but with this guide this isn't needed.
+您_**不应该**__ 设置 `Client Secret (for OAuth)` 或 `Callback URL (for OAuth)`。一些消息来源可能还建议在 iOS 上为 Google 设置“跳过随机数检查”，但在本指南中不需要这样做。
 :::
 
-Voilà, you have now enabled Google Sign-In with Supabase Authentication 🎉
+瞧，您现在已启用 Google 使用 Supabase 身份验证登录 🎉
 
-## How Google Sign-In with Supabase Authentication Helper Works
+## Google 使用 Supabase 身份验证助手登录的工作原理
 
-This section explains how the Google Sign-In integration with Supabase works under the hood. Understanding this flow will help you implement and troubleshoot the authentication process.
+本节介绍 Google 登录与 Supabase 的集成如何在后台工作。了解此流程将帮助您实施身份验证过程并排除故障。
 
-:::tip[Complete Implementation]
-The complete implementation is available in the [example app's `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) file.
+:::提示[完整实施]
+完整的实现可在 [示例应用程序的 `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) 文件中找到。
 :::
 
-### 1. Nonce Generation
+### 1.随机数生成
 
-The implementation generates a secure nonce pair following the [Supabase nonce requirements](https://react-native-google-signin.github.io/docs/security#usage-with-supabase):
+该实现生成符合 [Supabase 随机数要求](https://react-native-google-signin.github.io/docs/security#usage-with-supabase) 的安全随机数对：
 
 ```typescript
 // Generate URL-safe random nonce
@@ -97,17 +95,15 @@ async function getNonce(): Promise<{ rawNonce: string; nonceDigest: string }> {
 }
 ```
 
-**Flow:**
-- `rawNonce`: URL-safe random string (64 hex characters)
-- `nonceDigest`: SHA-256 hash of `rawNonce` (hex-encoded)
-- `nonceDigest` is passed to Google Sign-In → Google includes the nonce digest in the ID token
-- `rawNonce` is passed to Supabase → Supabase hashes the raw nonce and compares with the token's nonce
+**流量：**
+- `rawNonce`：URL 安全随机字符串（64 个十六进制字符）
+- `nonceDigest`：`rawNonce` 的 SHA-256 哈希值（十六进制编码）
+- `nonceDigest` 传递到 Google 登录 → Google 在 ID 令牌中包含随机数摘要
+- `rawNonce` 传递给 Supabase → Supabase 哈希原始随机数并与令牌的随机数进行比较
 
-### 2. Google Sign-In
+### 2. Google 登录
 
-The function initializes the plugin and signs in with Google:
-
-```typescript
+该函数初始化插件并使用 Google 登录：```typescript
 await SocialLogin.initialize({
   google: {
     webClientId: 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
@@ -126,9 +122,9 @@ const response = await SocialLogin.login({
 });
 ```
 
-### 3. JWT Validation
+### 3. JWT 验证
 
-Before sending the token to Supabase, the implementation validates the JWT token:
+在将令牌发送到 Supabase 之前，实现会验证 JWT 令牌：
 
 ```typescript
 function validateJWTToken(idToken: string, expectedNonceDigest: string): { valid: boolean; error?: string } {
@@ -150,26 +146,26 @@ function validateJWTToken(idToken: string, expectedNonceDigest: string): { valid
 }
 ```
 
-**Why validate before Supabase?**
+**为什么要在 Supabase 之前验证？**
 
-Validating the JWT token before sending the token to Supabase serves several important purposes:
+在将令牌发送到 Supabase 之前验证 JWT 令牌有几个重要目的：
 
-1. **Prevent Invalid Requests**: If the token has an incorrect audience or nonce mismatch, Supabase will reject the token anyway. Validating first avoids unnecessary API calls and provides clearer error messages.
+1. **防止无效请求**：如果令牌的受众不正确或随机数不匹配，Supabase 无论如何都会拒绝令牌。首先验证可以避免不必要的 API 调用并提供更清晰的错误消息。
 
-2. **Token Caching Issues**: On some platforms (especially iOS), Google Sign-In SDK can cache tokens for performance. When a cached token is returned, the cached token may have been generated with a different nonce (or no nonce at all), causing Supabase to reject the token with a "nonce mismatch" error. By validating before sending to Supabase, we can detect this issue early and automatically retry with a fresh token.
+2. **令牌缓存问题**：在某些平台（尤其是 iOS）上，Google 登录 SDK 可以缓存令牌以提高性能。返回缓存令牌时，缓存令牌可能是使用不同的随机数（或根本没有随机数）生成的，导致 Supabase 拒绝该令牌并出现“随机数不匹配”错误。通过在发送到 Supabase 之前进行验证，我们可以及早检测到此问题并使用新令牌自动重试。
 
-3. **Security** (iOS): On iOS, validation ensures the token was issued for your specific Google Client IDs, preventing potential security issues from using tokens intended for other applications.
+3. **安全性** (iOS)：在 iOS 上，验证可确保为您的特定 Google 客户端 ID 颁发令牌，从而防止因使用用于其他应用程序的令牌而出现潜在的安全问题。
 
-4. **Better Error Handling**: Detecting issues before Supabase allows for automatic retry logic, which is essential for handling iOS caching issues transparently.
+4. **更好的错误处理**：在 Supabase 之前检测问题允许自动重试逻辑，这对于透明地处理 iOS 缓存问题至关重要。
 
-If validation fails, the function automatically:
-1. Logs out from Google (clears cached tokens - critical on iOS)
-2. Retries authentication once (forces fresh token generation with correct nonce)
-3. If retry also fails, returns an error
+如果验证失败，该函数会自动：
+1. 从 Google 注销（清除缓存的令牌 - 对 iOS 至关重要）
+2. 重试身份验证一次（强制使用正确的随机数生成新的令牌）
+3.如果重试也失败，则返回错误
 
-### 4. Supabase Sign-In
+### 4. Supabase 登录
 
-Finally, the validated token is sent to Supabase:
+最后，验证后的令牌被发送到 Supabase：
 
 ```typescript
 const { data, error } = await supabase.auth.signInWithIdToken({
@@ -179,27 +175,26 @@ const { data, error } = await supabase.auth.signInWithIdToken({
 });
 ```
 
-## Complete Code Reference
+## 完整代码参考
 
-The complete implementation is available in the [example app's `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) file, which includes:
+完整的实现可在 [示例应用程序的 `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) 文件中找到，其中包括：
 
-- `getUrlSafeNonce()` - Generates URL-safe random nonce
-- `sha256Hash()` - Hashes string with SHA-256
-- `getNonce()` - Generates nonce pair
-- `decodeJWT()` - Decodes JWT token
-- `validateJWTToken()` - Validates JWT audience and nonce
-- `authenticateWithGoogleSupabase()` - Main authentication function with automatic retry
+- `getUrlSafeNonce()` - 生成 URL 安全随机数
+- `sha256Hash()` - 使用 SHA-256 哈希字符串
+- `getNonce()` - 生成随机数对
+- `decodeJWT()` - 解码 JWT 令牌
+- `validateJWTToken()` - 验证 JWT 受众和随机数
+- `authenticateWithGoogleSupabase()` - 带自动重试的主要身份验证功能
 
-### Additional Example Files
+### 其他示例文件
 
-- [SupabasePage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabasePage.tsx) - Example component with redirect handling (Web)
-- [SupabaseCreateAccountPage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabaseCreateAccountPage.tsx) - Example create account page
+- [SupabasePage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabasePage.tsx) - 具有重定向处理功能的示例组件 (Web)
+- [SupabaseCreateAccountPage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabaseCreateAccountPage.tsx) - 创建帐户页面示例
 
-## Next Steps
+## 后续步骤
 
-Please proceed to the platform-specific setup guide for your target platform:
+请继续阅读您的目标平台的特定于平台的设置指南：
 
-- [Android Setup](../android/)
-- [iOS Setup](../ios/)
-- [Web Setup](../web/)
-
+- [Android 设置](../android/)
+- [iOS 设置](../ios/)
+- [网页设置](../web/)

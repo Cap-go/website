@@ -1,61 +1,90 @@
 ---
-title: "Bundles"
-locale: zh
-description: "了解如何在 Capgo 中管理 bundle，什么是 bundle 以及如何管理它，您可以对它们执行多种操作，它们是 Capgo 中最重要的部分"
+title: Bundles
+description: 了解如何在 Capgo 中管理捆绑包。捆绑包是应用程序代码和资产的特定版本。了解如何查看、链接到频道、下载和删除捆绑包。
 sidebar:
   order: 7
+locale: zh
 ---
+## 显示所有捆绑包
 
-## 显示所有 bundle
+在 Capgo 中，捆绑包代表应用程序代码和资产的特定版本，可以分发到设备。首先，让我们看一下捆绑页面。您可以通过[单击您的应用程序](/docs/webapp/main-page)，然后[单击捆绑包选项卡](/docs/webapp/main-app-page) 来访问它。
 
-在 Capgo 中，bundle 代表应用程序代码和资源的特定版本，准备分发到设备。首先，让我们看看 bundle 页面。您可以通过[点击您的应用](/docs/webapp/main-page)，然后[点击 bundle 标签](/docs/webapp/main-app-page)来访问它。
+<figure><img style="margin-left: auto; margin-right: auto" src="/bundles.webp" alt="捆绑清单" /><figcaption></figcaption></figure>
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/bundles.webp" alt="bundle list" /><figcaption></figcaption></figure>
+捆绑包列表显示：
+- **名称**：捆绑版本号
+- **创建于**：上传捆绑包时
+- **频道**：捆绑包当前链接到哪个频道（如果有）
+- **大小**：捆绑文件大小
+- **操作**：快速操作，包括链接到频道（齿轮图标）和删除（垃圾桶图标）
 
-## 删除 bundle
+您可以使用 **重新加载** 按钮刷新列表，**+ 添加** 上传新捆绑包，并使用 **过滤器** 缩小显示的捆绑包范围。搜索框允许您按名称查找捆绑包。
 
-有两种方式可以删除 bundle：
+## 删除一个包
 
- - 正常删除
- - 不安全删除
+有两种方法可以删除捆绑包：
 
-不安全删除 bundle 的方式于 2024 年 8 月 12 日添加到 Capgo 中。
+ - 通常情况下
+ - 不安全
 
-这两种方式的区别在于删除后能否重用版本号。
+删除捆绑包的不安全方式已于 2024 年 8 月 12 日添加到 Capgo 中。
 
-例如，如果您以正常方式删除版本 `1.0.0`，然后尝试上传 `1.0.0` 版本，将会失败。
-如果您通过不安全删除方式删除此版本，您将能够上传 `1.0.0` 版本。
+两种方式的区别在于删除后能否重新使用版本号。
+
+例如，如果您以正常方式删除版本 `1.0.0`，然后尝试上传 `1.0.0` 版本，则会失败。
+如果您通过不安全删除删除此版本，您将能够上传 `1.0.0` 版本。
 
 :::danger
-不安全删除版本并重新上传是非常危险的。
-它可能会在插件中导致各种错误和不可预测的行为。
-绝不应该用于已在公开频道中使用的 bundle。
-正是因为这个原因，不安全删除版本需要 "super_admin" 权限
+不安全地删除版本并重新上传是非常危险的。
+它可能会导致插件中出现各种错误和不可预测的行为。
+It should NEVER be used for bundles that have been used in a public channel.
+正是这个原因，不安全地删除版本需要“super_admin”权限
 :::
 
-## 管理特定 bundle
+## 管理特定包
 
-看到所有 bundle 列表后，点击您想要管理的 bundle。之后您应该会看到类似这样的内容：
+看到所有捆绑包的列表后，单击您要管理的捆绑包。执行此操作后，您应该会看到如下内容：
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/bundle-info.webp" alt="bundle info" /><figcaption></figcaption></figure>
+<figure><img style="margin-left: auto; margin-right: auto" src="/bundle-info.webp" alt="捆绑信息" /><figcaption></figcaption></figure>
 
-让我们逐一了解此页面上的所有元素。
+捆绑包详细信息页面包含三个选项卡：
 
----
+1. **信息**：显示所有包元数据和属性
+2. **依赖项**：列出此捆绑包中包含的依赖项
+3. **历史**：显示此捆绑包的更改历史记录
 
-首先，您可以看到一个 `Channel`（频道）。这让您知道此 bundle 是为哪个频道准备的。您可以通过点击它来更改频道。
-点击后，您应该会看到类似这样的内容：
+### 捆绑信息
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/bundle-change.webp" alt="bundle change" /><figcaption></figcaption></figure>
+信息选项卡显示以下详细信息：
 
-**将 bundle 设置到频道：** 将此 bundle 指定为所选频道的活动版本。订阅该频道的设备将接收此 bundle。
-**打开频道：** 导航到当前与此 bundle 关联的频道的专用页面，您可以在那里管理特定于频道的设置。
-**从频道取消链接 bundle：** 删除此 bundle 与其当前频道之间的关联。这意味着该频道上的设备将不再接收此特定 bundle（除非重新链接或为该频道设置其他 bundle）。
+- **捆绑包编号**：版本标识符（例如 12.87.1）
+- **ID**：此捆绑包的唯一内部标识符
+- **创建于**：首次上传捆绑包时
+- **更新于**：上次修改捆绑包时
+- **校验和**：捆绑包的完整性哈希（点击复制）
+- **频道**：此捆绑包链接到的频道（单击以打开频道或更改它）
+- **加密**：捆绑包是否加密
+- **CLI 版本**：用于上传此捆绑包的 Capgo CLI 的版本
+- **Zip应用程序包**：压缩包大小（点击下载）
+- **清单**：清单文件大小
+- **状态**：捆绑包是活动还是非活动（单击垃圾桶图标进行删除）
 
-:::warning
-`从频道取消链接 bundle` 操作仅影响与当前为此 bundle 显示的频道的关联（例如，屏幕截图中的 "dev"）。如果此 bundle 在其他频道上也处于活动状态，那些链接将保持不变。您需要分别管理从其他频道的取消链接，例如，通过导航到相应频道的配置页面。
-:::
+### 将捆绑包链接到频道
 
-### 下载 bundle
+单击频道行旁边或操作列中的齿轮图标以打开频道链接模式：<figure><img style="margin-left: auto; margin-right: auto" src="/bundle-change.webp" alt="捆绑改变" /><figcaption></figcaption></figure>
 
-要下载 bundle，请点击信息标签页中的 **Zip app bundle** 大小值。将出现确认对话框，确认后 bundle 将直接下载到您的设备。
+该模式提供：
+1. **搜索频道**：按名称过滤可用频道
+2. **当前捆绑包**：显示正在链接的捆绑包版本
+3. **可用频道**：所有频道及其详细信息的列表（ID、可见性、平台、创建日期）。标记为“当前”的频道表示该捆绑包已链接到的位置。公共频道显示链接图标。
+4. **将捆绑包设置为频道**：确认选择并将该捆绑包分配给所选频道
+
+**将捆绑包设置为通道：** 将此捆绑包分配为所选通道的活动版本。订阅该频道的设备将收到该捆绑包。
+
+要打开频道的专用页面，请单击频道行中的频道名称链接。
+
+要取消捆绑包与频道的链接，请导航至频道的配置页面。
+
+### 下载捆绑包
+
+要下载捆绑包，请单击“信息”选项卡中的 **Zip 应用程序捆绑包** 大小值。将出现一个确认对话框，确认后，捆绑包将直接下载到您的设备。

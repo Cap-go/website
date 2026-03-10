@@ -1,26 +1,25 @@
 ---
-
-title: Getting Started
-description: Learn how to install and configure the Capacitor Shake plugin to detect shake gestures and create interactive experiences in your app.
+title: Iniziare
+description: >-
+  Scopri come installare e configurare il plug-in Capacitor Shake per rilevare i
+  gesti di scuotimento e creare esperienze interattive nella tua app.
 sidebar:
   order: 2
 locale: it
 ---
-
-
 import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Installa il pacchetto**
    <PackageManagers pkg="@capgo/capacitor-shake" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Sincronizzazione con progetti nativi**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure the plugin**
+3. **Configura il plugin**
 
-   **Basic Usage Example:**
+   **Esempio di utilizzo di base:**
    ```typescript
    import { Shake } from '@capgo/capacitor-shake';
 
@@ -34,7 +33,7 @@ import { PackageManagers } from 'starlight-package-managers'
    });
    ```
 
-   **Sensitivity Configuration:**
+   **Configurazione sensibilità:**
    ```typescript
    // Configure shake sensitivity
    await Shake.start({
@@ -44,14 +43,14 @@ import { PackageManagers } from 'starlight-package-managers'
 
    <Tabs>
      <TabItem label="iOS">
-       No additional setup required for iOS.
+       Non è richiesta alcuna configurazione aggiuntiva per iOS.
      </TabItem>
      <TabItem label="Android">
-       No additional setup required for Android.
+       Non è richiesta alcuna configurazione aggiuntiva per Android.
      </TabItem>
    </Tabs>
 
-4. **Stop listening for shakes**
+4. **Smetti di ascoltare i frullati**
    ```typescript
    // Stop shake detection when not needed
    await Shake.stop();
@@ -63,7 +62,7 @@ import { PackageManagers } from 'starlight-package-managers'
    handle.remove();
    ```
 
-5. **Example implementation**
+5. **Esempio di implementazione**
    ```typescript
    import { Shake } from '@capgo/capacitor-shake';
    import { App } from '@capacitor/app';
@@ -106,26 +105,26 @@ import { PackageManagers } from 'starlight-package-managers'
    ```
 </Steps>
 
-## API Reference
+## API Riferimento
 
-### Methods
+### Metodi
 
 #### `start(options?: ShakeOptions)`
-Start listening for shake gestures.
+Inizia ad ascoltare i gesti di scuotimento.
 
-**Parameters:**
-- `options` (optional): Configuration object
-  - `threshold`: number - Sensitivity threshold (default: 3.5)
+**Parametri:**
+- `options` (opzionale): oggetto di configurazione
+  - `threshold`: numero - Soglia di sensibilità (impostazione predefinita: 3,5)
 
 #### `stop()`
-Stop listening for shake gestures.
+Smetti di ascoltare i gesti di agitazione.
 
 #### `addListener('shake', callback: () => void)`
-Add a listener for shake events.
+Aggiungi un ascoltatore per gli eventi shake.
 
-**Returns:** Promise with a handle to remove the listener
+**Restituisce:** Promessa con un handle per rimuovere l'ascoltatore
 
-### Interfaces
+### Interfacce
 
 ```typescript
 interface ShakeOptions {
@@ -133,32 +132,32 @@ interface ShakeOptions {
 }
 ```
 
-## Platform Notes
+## Note sulla piattaforma
 
 ### iOS
-- Uses the device's accelerometer to detect shake gestures
-- Works in both foreground and background (if app has background permissions)
+- Utilizza l'accelerometro del dispositivo per rilevare i movimenti di vibrazione
+- Funziona sia in primo piano che in background (se l'app dispone delle autorizzazioni in background)
 
 ### Android
-- Uses the SensorManager to detect shake events
-- Requires no special permissions
-- Works when app is in foreground
+- Utilizza SensorManager per rilevare eventi di scuotimento
+- Non richiede autorizzazioni speciali
+- Funziona quando l'app è in primo piano
 
-## Common Use Cases
+## Casi d'uso comuni
 
-1. **Debug Menu**: Show developer options when device is shaken
-2. **Feedback**: Trigger feedback form or bug report
-3. **Refresh**: Refresh app data or clear cache
-4. **Games**: Use shake as a game control mechanism
-5. **Undo**: Implement shake-to-undo functionality
+1. **Menu Debug**: mostra le opzioni sviluppatore quando il dispositivo viene scosso
+2. **Feedback**: attiva il modulo di feedback o la segnalazione di bug
+3. **Aggiorna**: aggiorna i dati dell'app o svuota la cache
+4. **Giochi**: utilizza lo scuotimento come meccanismo di controllo del gioco
+5. **Annulla**: implementa la funzionalità agita per annullare
 
-## Troubleshooting
+## Risoluzione dei problemi
 
-**Shake not detected:**
-- Ensure the plugin is started with `Shake.start()`
-- Try adjusting the threshold value (lower = more sensitive)
-- Check that listeners are properly registered
+**Scuotimento non rilevato:**
+- Assicurati che il plugin sia avviato con `Shake.start()`
+- Prova a regolare il valore di soglia (più basso = più sensibile)
+- Verificare che gli ascoltatori siano registrati correttamente
 
-**Too sensitive/not sensitive enough:**
-- Adjust the `threshold` parameter in `start()` options
-- Values typically range from 2.0 (very sensitive) to 5.0 (less sensitive)
+**Troppo sensibile/non abbastanza sensibile:**
+- Modifica il parametro `threshold` nelle opzioni `start()`
+- I valori variano tipicamente da 2,0 (molto sensibile) a 5,0 (meno sensibile)

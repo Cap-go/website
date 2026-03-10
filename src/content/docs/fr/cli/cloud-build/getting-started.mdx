@@ -1,32 +1,39 @@
 ---
-locale: fr
 title: Commencer
-description: Créer your first Natif Construction with Capgo Cloud Construction
-sidebar: 
+description: Créez votre première build native avec Capgo Cloud Build
+sidebar:
   order: 1
+locale: fr
 ---
+import { Steps, Card, CardGrid, Aside } from '@astrojs/starlight/components';
+import MermaidGraph from '@/components/MermaidGraph.astro';
 
-import { Steps, Card, CardGrid } from '@astrojs/starlight/components';
+export const buildProcessFlowGraph = `flowchart LR
+    A[Votre machine] -->|1. Projet Zip| B[Température locale]
+    B -->|2. Télécharger| C[Capgo Nuage]
+    C -->|3. Construire| D[Construire le serveur]
+    D -->|4. Flux de journaux| Un
+    D -->|5. Nettoyage| E[Suppression automatique]`;
 
-Commencer avec Capgo Cloud Construction and Créer your first iOS or Android Natif Construction in minutes.
+Commencez avec Capgo Cloud Build et créez votre première build native iOS ou Android en quelques minutes.
 
-## What You'll Need
+## Ce dont vous aurez besoin
 
-Before you begin, ensure you have:
+Avant de commencer, assurez-vous d'avoir :
 
-- A Capacitor Application that builds successfully locally
-- Node.js 20 or higher installed
-- A Capgo Compte with an Actif subscription
-- Your app already registered in Capgo (run `npx @capgo/cli@latest app add` if not)
-- **Construction credentials configured** (certificates, keystores) - see below
+- Une application Capacitor qui se construit avec succès localement
+- Node.js 20 ou supérieur installé
+- Un compte Capgo avec un abonnement actif
+- Votre application est déjà enregistrée dans Capgo (exécutez `npx @capgo/cli@latest app add` sinon)
+- **Certains d'identification de build configurés** (certificats, magasins de clés) - voir ci-dessous
 
-## Before Your First Construction
+## Avant votre première construction
 
 <CardGrid>
-  <Card title="⚠️ Setup Credentials First" icon="warning">
-    **Required before building:** You must configure your build credentials (certificates for iOS, keystores for Android).
+  <Card title="⚠️ Configurez d'abord les informations d'identification" icon="warning">
+    **Obligatoire avant la construction :** Vous devez configurer vos informations d'identification de construction (certificats pour iOS, magasins de clés pour Android).
 
-    [Configuration Credentials →](/docs/CLI/cloud-Construction/credentials/)
+    [Configurer les informations d'identification →](/docs/cli/cloud-build/credentials/)
   </Card>
 </CardGrid>
 
@@ -34,11 +41,11 @@ Before you begin, ensure you have:
 
 <Steps>
 
-1. **Configuration Construction Credentials**
+1. **Configurer les informations d'identification de build**
 
-   Before you can Construction, you need to Enregistrer your credentials locally:
+   Avant de pouvoir créer, vous devez enregistrer vos informations d'identification localement :
 
-   **For iOS:**
+   **Pour iOS :**
    ```bash
    npx @capgo/cli build credentials save \
      --platform ios \
@@ -51,7 +58,7 @@ Before you begin, ensure you have:
      --apple-team-id "team-id"
    ```
 
-   **For Android:**
+   **Pour Android :**
    ```bash
    npx @capgo/cli build credentials save \
      --platform android \
@@ -61,11 +68,11 @@ Before you begin, ensure you have:
      --keystore-store-password "store-pass"
    ```
 
-   See the [full credentials Guide](/docs/CLI/cloud-Construction/credentials/) for details.
+   Consultez le [guide complet des informations d'identification](/docs/cli/cloud-build/credentials/) pour plus de détails.
 
-2. **Verify Local Construction**
+2. **Vérifier la version locale**
 
-   First, ensure your Application builds locally without errors:
+   Tout d’abord, assurez-vous que votre application est construite localement sans erreurs :
 
    ```bash
    # Build your web assets
@@ -79,22 +86,22 @@ Before you begin, ensure you have:
    npx cap open android # For Android
    ```
 
-3. **Authenticate with Capgo**
+3. **Authentifiez-vous auprès de Capgo**
 
-   Set your Capgo Clé API (if not already configured):
+   Définissez votre clé Capgo API (si elle n'est pas déjà configurée) :
 
    ```bash
    npx @capgo/cli@latest login
    ```
 
-   Or set the environment variable:
+   Ou définissez la variable d'environnement :
    ```bash
    export CAPGO_TOKEN=your_api_key_here
    ```
 
-4. **Run Your First Construction**
+4. **Exécutez votre première build**
 
-   Démarrer with an Android Débogage Construction (fastest to Test):
+   Commencez par une version de débogage Android (la plus rapide à tester) :
 
    ```bash
    npx @capgo/cli@latest build com.example.app \
@@ -102,7 +109,7 @@ Before you begin, ensure you have:
      --build-mode debug
    ```
 
-   You'll see real-time Journaux as your Construction progresses:
+   Vous verrez des journaux en temps réel au fur et à mesure de la progression de votre build :
    ```
    ✔ Creating build job...
    ✔ Uploading project (15.2 MB)...
@@ -115,38 +122,31 @@ Before you begin, ensure you have:
    ✔ Build succeeded in 3m 42s
    ```
 
-5. **Vérifier Construction Status**
+5. **Vérifier l'état de la construction**
 
-   The CLI will automatically poll and display the Construction status. Once Terminé, you'll see:
+   Le CLI interrogera et affichera automatiquement l'état de la construction. Une fois terminé, vous verrez :
 
-   - Construction time
-   - Succès/failure status
-   - Application submitted to Application Store/Play Store (if credentials configured)
+   - Temps de construction
+   - Statut de réussite/échec
+   - Application soumise à App Store/Play Store (si les informations d'identification sont configurées)
 
 </Steps>
 
-## Understanding the Construction Process
+## Comprendre le processus de construction
 
-When you run the Construction Commande, here's what happens:
+Lorsque vous exécutez la commande build, voici ce qui se passe :
 
-```mermaid
-graph LR
-    A[Your Machine] -->|1. Zip Project| B[Local Temp]
-    B -->|2. Upload| C[Capgo Cloud]
-    C -->|3. Build| D[Build Server]
-    D -->|4. Logs Stream| A
-    D -->|5. Cleanup| E[Auto Delete]
-```
+<MermaidGraph graph={buildProcessFlowGraph} ariaLabel="Capgo Cloud Build process flow diagram" />
 
-1. **Local Preparation** - Your project is zipped (excluding `node_modules` and dotfiles)
-2. **Télécharger** - The zip is uploaded to secure cloud storage (Cloudflare R2)
-3. **Construction Execution** - Your Application builds on dedicated infrastructure
-4. **Journal Streaming** - Real-time Journaux stream to your Terminal via Server-Sent Events
-5. **Automatic Cleanup** - Construction artifacts are deleted (Android: instant, iOS: 24 hours)
+1. **Préparation locale** - Votre projet est compressé (hors `node_modules` et dotfiles)
+2. **Télécharger** - Le zip est téléchargé sur un stockage cloud sécurisé (Cloudflare R2)
+3. **Build Execution** – Votre application s'appuie sur une infrastructure dédiée
+4. **Log Streaming** - Les journaux en temps réel sont diffusés sur votre terminal via les événements envoyés par le serveur.
+5. **Nettoyage automatique** - Les artefacts de build sont supprimés (Android : instantané, iOS : 24 heures)
 
-## Your First Production Construction
+## Votre première version de production
 
-Once you've verified the process works, Créer a Production Construction:
+Une fois que vous avez vérifié que le processus fonctionne, créez une version de production :
 
 ### Android
 
@@ -156,7 +156,7 @@ npx @capgo/cli@latest build com.example.app \
   --build-mode release
 ```
 
-You'll need to configure signing credentials first. See [Android Construction Configuration](/docs/CLI/cloud-Construction/Android/).
+Vous devrez d'abord configurer les informations de signature. Voir [Android Configuration de construction](/docs/cli/cloud-build/android/).
 
 ### iOS
 
@@ -166,37 +166,66 @@ npx @capgo/cli@latest build com.example.app \
   --build-mode release
 ```
 
-iOS builds require signing certificates and provisioning profiles. See [iOS Construction Configuration](/docs/CLI/cloud-Construction/iOS/).
+Les builds iOS nécessitent la signature de certificats et de profils de provisionnement. Voir [iOS Configuration de construction](/docs/cli/cloud-build/ios/).
 
-## What Gets Built
+## Ce qui est construitCapgo Build télécharge uniquement le **minimum de fichiers requis** pour compiler votre application native. Votre code source complet ne quitte jamais votre machine.
 
-**Important:** Capgo Cloud Build only builds the **native parts** of your app (iOS and Android native code).
+### Ce qui est téléchargé
 
-You are responsible for:
-- Building your web assets (`npm run build`)
-- Running `npx cap sync` before the build
-- Ensuring all dependencies are in `package.json`
+| Inclus | Descriptif |
+|--------------|-------------|
+| `ios/` ou `android/` | Le dossier de plateforme natif que vous créez |
+| `package.json`, `package-lock.json` | Manifeste de dépendance |
+| `capacitor.config.*` | Configuration Capacitor |
+| `resources/` | Icônes d'applications, écrans de démarrage |
+| Code du plugin natif | Seul le sous-dossier `ios/` ou `android/` de chaque plugin Capacitor |
 
-We handle:
-- Natif iOS compilation (Xcode, Fastlane)
-- Natif Android compilation (Gradle)
-- Code signing
-- Application Store submission (if configured)
+### Ce qui n'est PAS téléchargé
 
-## Construction Time & Costs
+| Exclus | Pourquoi |
+|----------|-----|
+| `node_modules/` (la plupart) | Seul le code natif du plugin est inclus, pas les dépendances JS |
+| `src/` | Votre code source Web reste local |
+| `dist/`, `www/`, `build/` (niveau racine) | Déjà synchronisé dans le dossier natif via `cap sync` |
+| `.git/` | Historique du contrôle de version |
+| `.gradle/`, `.idea/`, `.swiftpm/` | Construire des caches et des paramètres IDE |
+| `.env`, secrets | Jamais téléchargé |
 
-Construction time is measured from Démarrer to completion:
+<Aside>
+Vos ressources Web créées (JS, CSS, HTML) **sont** téléchargées - mais dans le cadre du dossier natif. Lorsque vous exécutez `npx cap sync`, votre build Web est copié dans `ios/App/App/public/` ou `android/app/src/main/assets/public/`. C'est pourquoi il est nécessaire d'exécuter « cap sync » avant la construction.
+</Aside>
 
-- **Android**: Typically 3-5 minutes (1× billing multiplier)
-- **iOS**: Typically 5-10 minutes (2× billing multiplier due to Mac hardware costs)
+### Vos responsabilités
 
-You only pay for actual Construction time used. No hidden fees.
+Avant d'exécuter `npx @capgo/cli build` :
 
-## Common Use Cases
+1. **Créez vos ressources Web** - Exécutez `npm run build` (ou la commande build de votre framework)
+2. **Synchroniser avec le natif** – Exécutez `npx cap sync` pour copier les ressources Web dans le projet natif
+3. **Dépendances de validation** - Assurez-vous que tous les plugins natifs sont dans `package.json`
 
-### CI/CD Integration
+### Quelles sont les poignées de construction de Capgo
 
-Ajouter to your GitHub Actions workflow:
+- Compilation native iOS (Xcode, Fastlane)
+- Compilation native Android (Gradle)
+- Signature de code avec vos informations d'identification
+- Soumission de l'App Store (si configuré)
+
+<div style="border-top: 1px solid var(--sl-color-gray-5); margin: 2rem 0;"></div>
+
+## Temps et coûts de construction
+
+Le temps de construction est mesuré du début à la fin :
+
+- **Android** : généralement 3 à 5 minutes (1 × multiplicateur de facturation)
+- **iOS** : généralement 5 à 10 minutes (multiplicateur de facturation 2 × en raison des coûts matériels Mac)
+
+Vous ne payez que pour le temps de construction réellement utilisé. Pas de frais cachés.
+
+## Cas d'utilisation courants
+
+### Intégration CI/CD
+
+Ajoutez à votre workflow d'actions GitHub :
 
 ```yaml
 - name: Build native app
@@ -210,9 +239,9 @@ Ajouter to your GitHub Actions workflow:
       --build-mode release
 ```
 
-### Local Développement
+### Développement Local
 
-Test builds locally before committing:
+Testez les builds localement avant de les valider :
 
 ```bash
 # Quick debug build for testing
@@ -222,27 +251,35 @@ npx @capgo/cli@latest build com.example.app \
   --build-mode debug
 ```
 
-### Multi-Platform Builds
+### Constructions multiplateformes
 
-Construction for both platforms simultaneously:
+Créez pour les deux plates-formes en exécutant deux commandes :
 
 ```bash
+# iOS build
 npx @capgo/cli@latest build com.example.app \
-  --platform both \
+  --platform ios \
+  --build-mode release
+
+# Android build
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
   --build-mode release
 ```
 
-## Suivant Steps
+Dans CI/CD, vous pouvez les exécuter dans des tâches parallèles pour des builds plus rapides.
 
-Now that you've created your first Construction:
+## Prochaines étapes
 
-- [Configure iOS builds](/docs/CLI/cloud-Construction/iOS/) - Set up certificates and profiles
-- [Configure Android builds](/docs/CLI/cloud-Construction/Android/) - Set up keystores and Play Store
-- [Dépannage](/docs/CLI/cloud-Construction/Dépannage/) - Problèmes courants and Solutions
-- [CLI Référence](/docs/CLI/Référence/Construction/) - Terminé Commande Documentation
+Maintenant que vous avez créé votre premier build :
 
-## Need Aide?
+- [Configurer les builds iOS](/docs/cli/cloud-build/ios/) - Configurer les certificats et les profils
+- [Configurer les builds Android](/docs/cli/cloud-build/android/) - Configurer les magasins de clés et Play Store
+- [Dépannage](/docs/cli/cloud-build/troubleshooting/) - Problèmes courants et solutions
+- [CLI Référence](/docs/cli/reference/build/) - Documentation complète des commandes
 
-- Vérifier the [Dépannage Guide](/docs/CLI/cloud-Construction/Dépannage/)
-- Join our [Discord Communauté](https://discord.com/invite/VnYRvBfgA6)
-- Email Support at Support@capgo.Application
+## Besoin d'aide ?
+
+- Consultez le [guide de dépannage](/docs/cli/cloud-build/troubleshooting/)
+- Rejoignez notre [communauté Discord](https://discord.com/invite/VnYRvBfgA6)
+- Assistance par e-mail à support@capgo.app

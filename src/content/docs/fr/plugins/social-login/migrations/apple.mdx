@@ -1,34 +1,38 @@
 ---
+title: Apple Migration de connexion vers @capgo/social-login
+description: >-
+  Ce guide complet fournit des instructions détaillées pour la transition du
+  plugin @capacitor-community/apple-sign-in au plugin
+  @capgo/capacitor-social-login, garantissant un processus de migration fluide
+  et des fonctionnalités améliorées.
+sidebar:
+  order: 1
 locale: fr
-title: Migration Guide from @capacitor-Communauté/apple-sign-in to @capgo/capacitor-social-Connexion
-description: This comprehensive Guide provides detailed instructions for transitioning from the @capacitor-Communauté/apple-sign-in plugin to the @capgo/capacitor-social-Connexion plugin, ensuring a smooth Migration process and improved capabilities.
-sidebar: 
-    order: 1
 ---
 import { Steps } from '@astrojs/starlight/components';
 
 ## Aperçu
 
-This guide outlines the transition from the legacy `@capacitor-community/apple-sign-in` plugin to the modern `@capgo/capacitor-social-login` package. The new plugin provides a unified interface for multiple social authentication providers with improved TypeScript support and active maintenance.
+Ce guide décrit la transition de l'ancien plugin `@capacitor-community/apple-sign-in` au package moderne `@capgo/capacitor-social-login`. Le nouveau plugin fournit une interface unifiée pour plusieurs fournisseurs d'authentification sociale avec une prise en charge améliorée de TypeScript et une maintenance active.
 
-## Installation
+##Installation
 
 <Steps>
-1. Retirer the old package:
+1. Supprimez l'ancien package :
    ```bash
    npm uninstall @capacitor-community/apple-sign-in
    ```
 
-2. Installer the Nouveau package:
+2. Installez le nouveau package :
    ```bash
    npm install @capgo/capacitor-social-login
    npx cap sync
    ```
 </Steps>
 
-## Code Changes
+## Modifications du code
 
-### Importer Changes
+### Importer les modifications
 ```diff
 - import { SignInWithApple } from '@capacitor-community/apple-sign-in';
 + import { SocialLogin } from '@capgo/capacitor-social-login';
@@ -36,7 +40,7 @@ This guide outlines the transition from the legacy `@capacitor-community/apple-s
 
 ### Initialisation
 
-**Key Change**: The new plugin requires an initialization step that wasn't needed before.
+**Changement de clé** : le nouveau plugin nécessite une étape d'initialisation qui n'était pas nécessaire auparavant.
 
 ```diff
 - // No initialization needed in old package
@@ -54,11 +58,11 @@ This guide outlines the transition from the legacy `@capacitor-community/apple-s
 + });
 ```
 
-**Important Note**: For iOS, you provide basic configuration, while Android requires additional details including a Service ID and backend callback URL for web-based OAuth authentication.
+**Remarque importante** : Pour iOS, vous fournissez une configuration de base, tandis que Android nécessite des détails supplémentaires, notamment un ID de service et une URL de rappel back-end pour l'authentification OAuth basée sur le Web.
 
-### Sign In
+### Se connecter
 
-The Connexion process simplifies from multiple Paramètres to a cleaner API:
+Le processus de connexion passe de plusieurs paramètres à un API plus propre :
 
 ```diff
 - const result = await SignInWithApple.authorize({
@@ -79,11 +83,11 @@ The Connexion process simplifies from multiple Paramètres to a cleaner API:
 + });
 ```
 
-The new plugin uses `login()` with `provider: 'apple'` and optional scopes rather than passing individual configuration values like `clientId` and `redirectURI`.
+Le nouveau plugin utilise `login()` avec `provider: 'apple'` et des étendues facultatives plutôt que de transmettre des valeurs de configuration individuelles telles que `clientId` et `redirectURI`.
 
-### Response Type Changes
+### Modifications du type de réponse
 
-Results now include an `accessToken` object with expiration details and a structured `profile` section, replacing the flatter response format of the original package:
+Les résultats incluent désormais un objet `accessToken` avec des détails d'expiration et une section `profile` structurée, remplaçant le format de réponse plus plat du package d'origine :
 
 ```typescript
 // Old response type
@@ -118,9 +122,9 @@ interface SocialLoginResponse {
 }
 ```
 
-### Nouveau Capabilities
+### Nouvelles fonctionnalités
 
-The updated plugin introduces functionality that wasn't Disponible in the predecessor:
+Le plugin mis à jour introduit des fonctionnalités qui n'étaient pas disponibles dans le prédécesseur :
 
 **Checking Login Status**
 ```diff
@@ -130,7 +134,7 @@ The updated plugin introduces functionality that wasn't Disponible in the predec
 + });
 ```
 
-**Logout Functionality**
+**Fonctionnalité de déconnexion**
 ```diff
 - // Not available in old package
 + await SocialLogin.logout({
@@ -138,49 +142,47 @@ The updated plugin introduces functionality that wasn't Disponible in the predec
 + });
 ```
 
-These methods provide `isLoggedIn()` to verify authentication status and `logout()` functionality.
+Ces méthodes fournissent `isLoggedIn()` pour vérifier l'état d'authentification et la fonctionnalité `logout()`.
 
-## Platform Specific Changes
+## Modifications spécifiques à la plateforme
 
-### iOS Configuration
+### iOS Setup
 
-**iOS** maintains familiar setup procedures through Xcode capabilities:
+**iOS** maintient les procédures de configuration familières grâce aux fonctionnalités Xcode :
 
-1. The iOS Configuration remains largely the same. You still need to:
-   - Activer "Sign In with Apple" capability in Xcode
-   - Configure your Application in the Apple Developer Portal
-   - No additional code changes required for iOS
+1. La configuration iOS reste en grande partie la même. Vous devez encore :
+   - Activer la fonctionnalité "Connexion avec Apple" dans Xcode
+   - Configurez votre application dans le portail des développeurs Apple
+   - Aucune modification de code supplémentaire requise pour iOS
 
 ### Android Configuration
 
-**Android** now receives native support via web-based OAuth authentication:
+**Android** bénéficie désormais d'une prise en charge native via l'authentification Web OAuth :
 
-The Nouveau plugin provides Android Support out of the box, but requires additional Configuration:
+Le nouveau plugin fournit une prise en charge Android prête à l'emploi, mais nécessite une configuration supplémentaire :
 
-1. Créer a Services ID in the Apple Developer Portal
+1. Créez un ID de services dans le portail de développeur Apple
 2. Configure a web authentication endpoint
-3. Set up your Android Application to handle the OAuth flow
-4. Backend service Configuration is required
+3. Configurez votre application Android pour gérer le flux OAuth
+4. Backend service configuration is required
 
-For detailed Android Configuration instructions, please refer to the [Android Configuration Guide](/docs/plugins/social-Connexion/apple/Android/).
+Pour des instructions de configuration détaillées de Android, veuillez vous référer au [Android Guide de configuration](/docs/plugins/social-login/apple/android/).
 
-## Key Advantages
+## Avantages clés
 
-The modernized package provides:
+Le package modernisé fournit :
 
-1. **Unified APIs** across multiple social providers (Google, Facebook, Apple)
-2. **Improved TypeScript typing** with better type definitions
-3. **Actif Communauté maintenance** compared to the Obsolète Version
-4. **Built-in Android Support** through web-based authentication
-5. **Persistent Connexion state management**
-6. **Better Erreur handling** with consistent Erreur types
+1. **API unifiées** sur plusieurs fournisseurs sociaux (Google, Facebook, Apple)
+2. **Typage TypeScript amélioré** avec de meilleures définitions de type
+3. **Maintenance communautaire active** par rapport à la version obsolète
+4. **Prise en charge intégrée de Android** via l'authentification basée sur le Web
+5. **Persistent login state management**
+6. **Meilleure gestion des erreurs** avec des types d'erreurs cohérents
 
-## Breaking Changes
+## Modifications radicales1. **Une initialisation explicite est désormais requise** - aucune configuration par défaut
+2. **La structure de l'objet de réponse a changé** - format de résultat imbriqué
+3. **La mise en œuvre de Android nécessite un service backend** pour OAuth
+4. **La gestion de l'actualisation des jetons est différente** - gestion améliorée des jetons
+5. **La gestion des erreurs et les types d'erreurs ont changé** - erreurs plus détaillées
 
-1. **Explicit Initialisation is now required** - no default Configuration
-2. **Response object structure has changed** - nested result format
-3. **Android implementation requires a backend service** for OAuth
-4. **Token Actualiser handling is different** - improved token management
-5. **Erreur handling and Erreur types have changed** - more detailed errors
-
-For more detailed Configuration instructions, please refer to the [official Documentation](/docs/plugins/social-Connexion/apple/general/). 
+Pour des instructions de configuration plus détaillées, veuillez vous référer à la [documentation officielle](/docs/plugins/social-login/apple/general/).

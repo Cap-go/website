@@ -1,51 +1,49 @@
 ---
-title: Firebase Google Login - General Setup
-description: >-
-  Learn how to set up Google Sign-In with Firebase Authentication using the
-  Capacitor Social Login plugin.
+title: Firebase Google 로그인 - 일반 설정
+description: Capacitor 소셜 로그인 플러그인을 사용하여 Firebase 인증으로 Google 로그인을 설정하는 방법을 알아보세요.
 sidebar:
   order: 1
 locale: ko
 ---
 import { Steps } from '@astrojs/starlight/components';
 
-## Introduction
+## 소개
 
-This guide will walk you through integrating Google Sign-In with Firebase Authentication using the Capacitor Social Login plugin. This setup allows you to use native Google Sign-In on mobile platforms while leveraging Firebase Auth for backend authentication.
+이 가이드는 Capacitor 소셜 로그인 플러그인을 사용하여 Google 로그인과 Firebase 인증을 통합하는 과정을 안내합니다. 이 설정을 사용하면 백엔드 인증을 위해 Firebase 인증을 활용하면서 모바일 플랫폼에서 기본 Google 로그인을 사용할 수 있습니다.
 
-## Setup Steps
+## 설정 단계
 
 <Steps>
-1. Please go to [console.cloud.google.com](https://console.cloud.google.com/)
-2. Select the project you want to use
-    <img src="/social-login-assets/firebase_project_select.webp" alt="Firebase Project Selector" />
-3. Go to the `Authentication` menu
-    1. Click on `build`
-    2. Click on `Authentication`
-    <img src="/social-login-assets/firebase_select_authentication.webp" alt="Firebase Authentication Menu" />
-4. Click on the `Get started` button
-    <img src="/social-login-assets/firebase_auth_start.webp" alt="Firebase Get Started Button" />
-5. Select EITHER `Email/Password` AND `Google` OR `Google` ONLY
-    :::note
-    I will select `Email/Password` AND `Google`, as I want to use both, but you could select only `Google`. This is something you can change later.
+1. [console.cloud.google.com](https://console.cloud.google.com/)으로 이동하세요.
+2. 사용하고 싶은 프로젝트를 선택하세요
+    <img src="/social-login-assets/firebase_project_select.webp" alt="Firebase 프로젝트 선택기" />
+3. `Authentication` 메뉴로 이동
+    1. `build`을 클릭하세요.
+    2. `Authentication`을 클릭하세요.
+    <img src="/social-login-assets/firebase_select_authentication.webp" alt="Firebase 인증 메뉴" />
+4. '시작하기' 버튼을 클릭하세요.
+    <img src="/social-login-assets/firebase_auth_start.webp" alt="Firebase 시작하기 버튼" />
+5. `Email/Password` 및 `Google` 또는 `Google`만 선택하세요.
+    :::참고
+    둘 다 사용하고 싶기 때문에 `Email/Password` 및 `Google`을 선택하겠습니다. 하지만 `Google`만 선택할 수 있습니다. 이는 나중에 변경할 수 있는 사항입니다.
     :::
-    <img src="/social-login-assets/firebase_google_email_auth.webp" alt="Firebase Select Email/Password and Google Button" />
-    <img src="/social-login-assets/firebase_auth_enable_email.webp" alt="Firebase enable email authentication" />
-    <img src="/social-login-assets/firebase_auth_enable_email_save.webp" alt="Firebase save enable google authentication" />
-    <img src="/social-login-assets/firebase_auth_add_provider_after_email.webp" alt="Firebase enable add provider button" />
-    <img src="/social-login-assets/firebase_auth_add_google_provider_after_email.webp" alt="Firebase add Google provider after having added email provider" />
-6. Enable the `Google` provider
-    <img src="/social-login-assets/firebase_auth_add_google_provider_enable.webp" alt="Firebase enable google authentication" />
-7. Add the support email
-    <img src="/social-login-assets/firebase_auth_add_support_email_google_auth.webp" alt="Firebase add support email" />
-    <img src="/social-login-assets/firebase_auth_add_support_email_google_auth_2.webp" alt="Firebase add support email part 2" />
-8. Change the `Public-facing name for project`.
-    :::note
-    This will be displayed to the users, so I recommend changing it to something more descriptive.
+    <img src="/social-login-assets/firebase_google_email_auth.webp" alt="Firebase 이메일/비밀번호를 선택하고 Google 버튼을 선택하세요." />
+    <img src="/social-login-assets/firebase_auth_enable_email.webp" alt="Firebase 이메일 인증 활성화" />
+    <img src="/social-login-assets/firebase_auth_enable_email_save.webp" alt="Firebase 저장, Google 인증 활성화" />
+    <img src="/social-login-assets/firebase_auth_add_provider_after_email.webp" alt="Firebase 공급자 추가 버튼 활성화" />
+    <img src="/social-login-assets/firebase_auth_add_google_provider_after_email.webp" alt="Firebase 이메일 공급자를 추가한 후 Google 공급자를 추가하세요." />
+6. `Google` 공급자를 활성화합니다.
+    <img src="/social-login-assets/firebase_auth_add_google_provider_enable.webp" alt="Firebase Google 인증 활성화" />
+7. 지원 이메일 추가
+    <img src="/social-login-assets/firebase_auth_add_support_email_google_auth.webp" alt="Firebase 지원 이메일 추가" />
+    <img src="/social-login-assets/firebase_auth_add_support_email_google_auth_2.webp" alt="Firebase 지원 이메일 파트 2 추가" />
+8. '프로젝트 공개 이름'을 변경합니다.
+    :::참고
+    이는 사용자에게 표시되므로 좀 더 설명적인 것으로 변경하는 것이 좋습니다.
     :::
-    <img src="/social-login-assets/firebase_auth_change_public_facing_name.webp" alt="Firebase change public facing name" />
-9. Click on the `Save` button
-    <img src="/social-login-assets/firebase_auth_save_google_auth.webp" alt="Firebase save public facing name" />
+    <img src="/social-login-assets/firebase_auth_change_public_facing_name.webp" alt="Firebase 공개 이름 변경" />
+9. `Save` 버튼을 클릭하세요.
+    <img src="/social-login-assets/firebase_auth_save_google_auth.webp" alt="Firebase 공개 이름 저장" />
 </Steps>
 
-Voilà, you have now enabled Google Sign-In with Firebase Authentication 🎉
+짜잔, 이제 Google Firebase 인증으로 로그인이 활성화되었습니다 🎉

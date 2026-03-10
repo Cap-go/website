@@ -1,8 +1,8 @@
 ---
 title: '@capgo/capacitor-fast-sql'
 description: >-
-  High-performance native SQLite with custom HTTP protocol for efficient sync
-  operations and IndexedDB replacement.
+  SQLite nativo ad alte prestazioni con protocollo HTTP personalizzato per
+  operazioni di sincronizzazione efficienti e sostituzione di IndexedDB.
 tableOfContents: false
 next: false
 prev: false
@@ -11,12 +11,13 @@ sidebar:
   label: Introduction
 hero:
   tagline: >-
-    Ultra-fast native SQLite with custom protocol for sync systems and large
-    datasets, delivering up to 25x faster performance.
+    SQLite nativo ultraveloce con protocollo personalizzato per sistemi di
+    sincronizzazione e set di dati di grandi dimensioni, che offre prestazioni
+    fino a 25 volte più veloci.
   image:
     file: ~public/icons/plugins/fast-sql.svg
   actions:
-    - text: Get started
+    - text: Inizia
       link: /docs/plugins/fast-sql/getting-started/
       icon: right-arrow
       variant: primary
@@ -26,29 +27,25 @@ hero:
       variant: minimal
 locale: it
 ---
-
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid stagger>
-  <Card title="Custom HTTP Protocol" icon="rocket">
-    Bypasses Capacitor's bridge for up to 25x faster performance ⚡
+  <Card title="Protocollo HTTP personalizzato" icon="rocket">
+    Ignora il bridge di Capacitor per carichi di lavoro batch e di grandi risultati più rapidi.
   </Card>
-  <Card title="Full SQLite Support" icon="list-format">
-    Complete SQL support with transactions and batch operations 📊
+  <Card title="Supporto alle transazioni" icon="list-format">
+    Supporta `transaction()`, inizio/commit/rollback esplicito e livelli di isolamento.
   </Card>
-  <Card title="Sync-Friendly" icon="random">
-    Designed for local sync systems like CRDTs and operational transforms 🔄
+  <Card title="Supporto batch + BLOB" icon="random">
+    Esegui più istruzioni in una richiesta e archivia dati binari.
   </Card>
-  <Card title="Cross-Platform" icon="laptop">
-    iOS, Android, and Web using sql.js + IndexedDB 🌐
+  <Card title="Comodità del valore-chiave" icon="document">
+    Utilizza `KeyValueStore` per una semplice persistenza chiave/valore mobile-first.
   </Card>
-  <Card title="Transaction Support" icon="approve-check-circle">
-    ACID transactions with configurable isolation levels 🔒
+  <Card title="Gestione della connessione" icon="setting">
+    Tieni traccia dei database aperti, disconnettiti esplicitamente o chiudi tutto in un'unica chiamata.
   </Card>
-  <Card title="Binary Data" icon="document">
-    Native support for Uint8Array/BLOB storage 📁
-  </Card>
-  <Card title="Getting Started" icon="open-book">
-    Check the [Getting Started Guide](/docs/plugins/fast-sql/getting-started/) to install and configure the plugin.
+  <Card title="Iniziare" icon="open-book">
+    Controlla la guida introduttiva per installare e configurare il plugin.
   </Card>
 </CardGrid>

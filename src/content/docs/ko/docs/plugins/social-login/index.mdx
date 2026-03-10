@@ -1,15 +1,18 @@
 ---
-title: "@capgo/capacitor-social-login"
-locale: ko
-description: Google, Apple 및 Facebook을 사용한 원활한 소셜 인증을 위한 Capacitor 플러그인으로 사용자 로그인 보안 및 경험을 향상시킵니다.
+title: '@capgo/capacitor-social-login'
+description: >-
+  Google, Apple, Facebook, Twitter 및 일반 OAuth2 공급자와의 원활한 소셜 인증을 위한 Capacitor
+  플러그인으로 사용자 로그인 보안 및 경험을 향상시킵니다.
 tableOfContents: false
 next: false
 prev: false
 sidebar:
   order: 1
-  label: "소개"
+  label: Introduction
 hero:
-  tagline: Google, Apple 및 Facebook을 사용한 소셜 인증을 위한 Capacitor 플러그인으로 사용자 로그인을 원활하고 안전하게 만듭니다.
+  tagline: >-
+    Google, Apple, Facebook, Twitter 및 모든 OAuth2 공급자를 통한 소셜 인증을 위한 Capacitor
+    플러그인으로 사용자 로그인을 원활하고 안전하게 만듭니다.
   image:
     file: ~public/icons/plugins/social-login.svg
   actions:
@@ -18,30 +21,62 @@ hero:
       icon: right-arrow
       variant: primary
     - text: Github
-      link: https://github.com/Cap-go/capacitor-social-login/
+      link: 'https://github.com/Cap-go/capacitor-social-login/'
       icon: external
       variant: minimal
+locale: ko
 ---
 import { Card, CardGrid } from '@astrojs/starlight/components';
 import { YouTube } from 'astro-embed';
 
-## Video Walkthrough
+## 비디오 둘러보기
 
-Watch a quick demo of the plugin setup and login flow in action.
+플러그인 설정 및 로그인 흐름에 대한 간단한 데모를 시청하세요.
 
-<YouTube id="iTINYxvSJrE" title="Capgo Social Login plugin overview" />
+<YouTube id="iTINYxvSJrE" title="Capgo 소셜 로그인 플러그인 개요" />
 
 <CardGrid stagger>
-  <Card title="Google login" icon="rocket">
-    Provides a frictionless login experience for your users 🚀
+  <Card title="여러 제공업체" icon="rocket">
+    Google, Apple, Facebook, Twitter/X 및 일반 OAuth2용 API 1개.
   </Card>
-  <Card title="Facebook login" icon="pencil">
-    Makes Facebook login a breeze 💨
+  <Card title="OIDC / OAuth2" icon="external">
+    OIDC 검색 및 공급자 별칭을 갖춘 다중 공급자 OAuth2.
   </Card>
-  <Card title="Apple login" icon="setting">
-    Apple login can be challenging to implement, but we make it easy 😊
+  <Card title="인증 도우미" icon="setting">
+    새로 고침, 만료 확인, JWT 디코딩 및 리디렉션 처리를 위한 토큰 도우미입니다.
   </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/social-login/getting-started/) to master the plugin in just a few minutes.
+  <Card title="공급자별 동작" icon="pencil">
+    Google 오프라인 모드, Apple 적절한 토큰 교환 및 Facebook 비즈니스 흐름을 지원합니다.
   </Card>
+  <Card title="공급자 번들링" icon="seti:folder">
+    바이너리 크기를 줄이려면 `capacitor.config`에서 활성화된 공급자를 구성하세요.
+  </Card>
+  <Card title="마이그레이션 가이드" icon="open-book">
+    Ionic Auth Connect 및 레거시 공급자 마이그레이션에 대한 업그레이드 문서를 참조하세요.
+  </Card>
+</CardGrid>
+
+## 제공업체 가이드
+
+<CardGrid>
+  <a href="/docs/plugins/social-login/oauth2/">
+    <Card title="OAuth2 및 OIDC 제공업체" icon="external">
+      GitHub, Azure AD, Auth0, Okta, Keycloak 및 사용자 지정 공급자에 대한 설정 가이드입니다.
+    </Card>
+  </a>
+  <a href="/docs/plugins/social-login/migrations/ionic-auth-connect/">
+    <Card title="Auth Connect 마이그레이션" icon="open-book">
+      Auth0, Azure, Cognito, Okta 및 OneLogin과 같은 친숙한 공급자 이름을 유지하세요.
+    </Card>
+  </a>
+</CardGrid>
+
+## 통합
+
+<CardGrid>
+  <a href="/docs/plugins/social-login/integrations/">
+    <Card title="통합 가이드" icon="setting">
+      Better Auth, Firebase 및 Supabase 통합 진입점이 한 곳에 있습니다.
+    </Card>
+  </a>
 </CardGrid>

@@ -1,44 +1,41 @@
 ---
-title: "快速入门"
-description: >-
-  Learn how to install and use the Native Geocoder plugin for address and
-  coordinate conversion in your Capacitor app.
+title: 入门
+description: 了解如何在 Capacitor 应用程序中安装和使用 Native Geocoder 插件进行地址和坐标转换。
 sidebar:
   order: 2
 locale: zh
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **安装软件包**
    <PackageManagers pkg="@capgo/nativegeocoder" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **与原生项目同步**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure permissions**
+3. **配置权限**
    
    ### iOS
-   Add location usage description to your `Info.plist`:
+   将位置使用说明添加到您的 `Info.plist` 中：
    ```xml
    <key>NSLocationWhenInUseUsageDescription</key>
    <string>To convert addresses to coordinates</string>
    ```
    
    ### Android
-   Add permissions to your `AndroidManifest.xml`:
+   向您的 `AndroidManifest.xml` 添加权限：
    ```xml
    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
    ```
 </Steps>
 
-## Usage
+## 用法
 
-Import the plugin and use its geocoding methods:
+导入插件并使用其地理编码方法：
 
 ```typescript
 import { NativeGeocoder } from '@capgo/nativegeocoder';
@@ -72,11 +69,11 @@ const reverseGeocode = async () => {
 };
 ```
 
-## API Reference
+## API 参考
 
-### forwardGeocode(options)
+### 转发地理编码（选项）
 
-Converts an address string to geographic coordinates.
+将地址字符串转换为地理坐标。
 
 ```typescript
 interface ForwardGeocodeOptions {
@@ -105,9 +102,9 @@ interface Address {
 }
 ```
 
-### reverseGeocode(options)
+### 反向地理编码（选项）
 
-Converts geographic coordinates to address information.
+将地理坐标转换为地址信息。
 
 ```typescript
 interface ReverseGeocodeOptions {
@@ -119,9 +116,9 @@ interface ReverseGeocodeOptions {
 }
 ```
 
-## Complete Examples
+## 完整示例
 
-### Address Search with Error Handling
+### 带错误处理的地址搜索
 
 ```typescript
 import { NativeGeocoder } from '@capgo/nativegeocoder';
@@ -186,7 +183,7 @@ export class GeocodingService {
 }
 ```
 
-### Location Picker Component
+### 位置选择器组件
 
 ```typescript
 import { NativeGeocoder } from '@capgo/nativegeocoder';
@@ -263,9 +260,9 @@ export class LocationPicker {
 }
 ```
 
-## Best Practices
+## 最佳实践
 
-1. **Request permissions first**
+1. **先请求权限**
    ```typescript
    import { Geolocation } from '@capacitor/geolocation';
    
@@ -277,7 +274,7 @@ export class LocationPicker {
    };
    ```
 
-2. **Handle errors gracefully**
+2. **优雅地处理错误**
    ```typescript
    try {
      const results = await NativeGeocoder.forwardGeocode({
@@ -293,12 +290,12 @@ export class LocationPicker {
    }
    ```
 
-3. **Use maxResults wisely**
-   - For user search: Use 5-10 results
-   - For automatic conversion: Use 1 result
-   - More results = slower response
+3. **明智地使用 maxResults**
+   - 对于用户搜索：使用 5-10 个结果
+   - 对于自动转换：使用 1 个结果
+   - 结果越多 = 响应速度越慢
 
-4. **Cache results when possible**
+4. **尽可能缓存结果**
    ```typescript
    const geocodeCache = new Map();
    
@@ -316,21 +313,21 @@ export class LocationPicker {
    }
    ```
 
-## Platform Differences
+## 平台差异
 
 ### iOS
-- Uses `CLGeocoder` from CoreLocation
-- No API key required
-- Respects user's locale automatically
+- 使用 CoreLocation 中的 `CLGeocoder`
+- 无需 API 密钥
+- 自动尊重用户的区域设置
 
 ### Android
-- Uses Android Geocoder API
-- Optional Google API key for better results
-- May fall back to Google's web service
+- 使用 Android 地理编码器 API
+- 可选 Google API 键以获得更好的结果
+- 可能会退回到 Google 的网络服务
 
-### API Key Configuration (Android)
+### API 按键配置 (Android)
 
-For better results on Android, you can provide a Google API key:
+为了在 Android 上获得更好的结果，您可以提供 Google API 密钥：
 
 ```typescript
 await NativeGeocoder.forwardGeocode({
@@ -339,18 +336,18 @@ await NativeGeocoder.forwardGeocode({
 });
 ```
 
-## Common Issues
+## 常见问题
 
-1. **No results returned**
-   - Check internet connection
-   - Verify address format
-   - Try with more general address
+1. **没有返回结果**
+   - 检查互联网连接
+   - 验证地址格式
+   - 尝试使用更通用的地址
 
-2. **Permission errors**
-   - Ensure location permissions are granted
-   - Check Info.plist/AndroidManifest.xml
+2. **权限错误**
+   - 确保授予位置权限
+   - 检查 Info.plist/AndroidManifest.xml
 
-3. **Inaccurate results**
-   - Use more specific addresses
-   - Include postal codes when available
-   - Consider using coordinates for precise locations
+3. **结果不准确**
+   - 使用更具体的地址
+   - 包括可用的邮政编码
+   - 考虑使用坐标来精确定位

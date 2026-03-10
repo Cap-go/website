@@ -1,33 +1,30 @@
 ---
-title: Getting Started
-description: >-
-  Learn how to install and use the Screen Orientation plugin to control and
-  detect device orientation in your Capacitor app.
+title: はじめる
+description: 画面の向きプラグインをインストールして使用し、Capacitor アプリでデバイスの向きを制御および検出する方法を学びます。
 sidebar:
   order: 2
 locale: ja
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps, Aside } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **パッケージをインストールします**
    <PackageManagers pkg="@capgo/capacitor-screen-orientation" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **ネイティブ プロジェクトと同期**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **iOS Configuration (optional)**
-   To detect physical device orientation using motion sensors on iOS, add to your `Info.plist`:
+3. **iOS 構成 (オプション)**
+   iOS のモーション センサーを使用して物理デバイスの向きを検出するには、`Info.plist` に以下を追加します。
    ```xml
    <key>NSMotionUsageDescription</key>
    <string>This app uses motion sensors to detect device orientation.</string>
    ```
 </Steps>
 
-## Basic Usage
+## 基本的な使い方
 
 ```typescript
 import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
@@ -51,12 +48,12 @@ const listener = await ScreenOrientation.addListener(
 );
 ```
 
-## 物理的な向き検出
+## 物理的な向きの検出
 
-このプラグインには独自の機能があります。ユーザーが向きロックを有効にしている場合でも、モーションセンサーを使用してデバイスの**真の物理的な向き**を検出できます。
+このプラグインには独自の機能があります。ユーザーがデバイスで方向のロックを有効にしている場合でも、モーション センサーを使用してデバイスの**実際の物理的な方向**を検出できます。
 
 <Aside type="note">
-  UIはユーザーの向きロック設定を尊重します。モーショントラッキングでは、デバイスがどのように物理的に保持されているかを知ることができますが、向きロックが有効な場合、UIは回転しません。
+  UI はユーザーの方向ロック設定を引き続き尊重します。モーション トラッキングを使用すると、デバイスが物理的にどのように保持されているかを知ることができますが、方向のロックが有効になっている場合、UI は回転しません。
 </Aside>
 
 ```typescript
@@ -87,26 +84,26 @@ if (lockStatus.locked) {
 await ScreenOrientation.stopOrientationTracking();
 ```
 
-## API Reference
+## API リファレンス
 
-### orientation()
+### 向き()
 
-Get the current screen orientation.
+現在の画面の向きを取得します。
 
 ```typescript
 const result = await ScreenOrientation.orientation();
 // Returns: { type: OrientationType }
 ```
 
-**OrientationType values:**
-- `'portrait-primary'` - Portrait, home button at bottom
-- `'portrait-secondary'` - Portrait, upside down
-- `'landscape-primary'` - Landscape, home button on right
-- `'landscape-secondary'` - Landscape, home button on left
+**OrientationType 値:**
+- `'portrait-primary'` - 縦向き、下部にホームボタン
+- `'portrait-Secondary'` - 縦向き、上下逆さま
+- `'landscape-primary'` - 横向き、右側のホームボタン
+- `'landscape-Secondary'` - 横向き、左側のホームボタン
 
-### lock(options)
+### ロック(オプション)
 
-Lock the screen to a specific orientation.
+画面を特定の向きにロックします。
 
 ```typescript
 interface OrientationLockOptions {
@@ -117,25 +114,25 @@ interface OrientationLockOptions {
 await ScreenOrientation.lock({ orientation: 'landscape' });
 ```
 
-**OrientationLockType values:**
-- `'any'` - Any orientation
-- `'natural'` - Device's natural orientation
-- `'landscape'` - Any landscape mode
-- `'portrait'` - Any portrait mode
-- `'portrait-primary'` / `'portrait-secondary'`
-- `'landscape-primary'` / `'landscape-secondary'`
+**OrientationLockType 値:**
+- `'any'` - 任意の方向
+- `'natural'` - デバイスの自然な向き
+- `'landscape'` - 任意の風景モード
+- `'portrait'` - 任意のポートレート モード
+- `'ポートレート-プライマリ'` / `'ポートレート-セカンダリ'`
+- `'ランドスケープ-プライマリ'` / 'ランドスケープ-セカンダリ'`
 
-### unlock()
+### ロック解除()
 
-Unlock the screen orientation.
+画面の向きのロックを解除します。
 
 ```typescript
 await ScreenOrientation.unlock();
 ```
 
-### startOrientationTracking(options?)
+### startOrientationTracking(オプション?)
 
-Start tracking physical device orientation using motion sensors.
+モーション センサーを使用して物理デバイスの向きの追跡を開始します。
 
 ```typescript
 await ScreenOrientation.startOrientationTracking({
@@ -145,7 +142,7 @@ await ScreenOrientation.startOrientationTracking({
 
 ### stopOrientationTracking()
 
-Stop motion-based orientation tracking.
+モーションベースの方向追跡を停止します。
 
 ```typescript
 await ScreenOrientation.stopOrientationTracking();
@@ -153,7 +150,7 @@ await ScreenOrientation.stopOrientationTracking();
 
 ### isOrientationLocked()
 
-Check if device orientation lock is enabled.
+デバイスの向きのロックが有効になっているかどうかを確認します。
 
 ```typescript
 const result = await ScreenOrientation.isOrientationLocked();
@@ -165,12 +162,12 @@ const result = await ScreenOrientation.isOrientationLocked();
 ```
 
 <Aside type="tip">
-  This method requires motion tracking to be active to work properly.
+  この方法が正しく動作するには、モーション トラッキングがアクティブになっている必要があります。
 </Aside>
 
-### addListener(eventName, callback)
+### addListener(イベント名, コールバック)
 
-Listen for orientation changes.
+方向の変化を聞きます。
 
 ```typescript
 const listener = await ScreenOrientation.addListener(
@@ -184,15 +181,15 @@ const listener = await ScreenOrientation.addListener(
 await listener.remove();
 ```
 
-### removeAllListeners()
+###removeAllListeners()
 
-Remove all event listeners.
+すべてのイベント リスナーを削除します。
 
 ```typescript
 await ScreenOrientation.removeAllListeners();
 ```
 
-## Complete Example
+## 完全な例
 
 ```typescript
 import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
@@ -268,19 +265,19 @@ class OrientationManager {
 }
 ```
 
-## Platform Notes
+## プラットフォームに関する注意事項
 
 ### iOS
-- Uses Core Motion framework for physical orientation detection
-- Requires `NSMotionUsageDescription` in Info.plist for motion sensors
-- Full support for all orientation types
+- 物理的な向きの検出に Core Motion フレームワークを使用
+- モーション センサーには Info.plist に `NSMotionUsageDescription` が必要です
+- すべての向きのタイプを完全にサポート
 
 ### Android
-- Uses accelerometer sensor for physical orientation detection
-- No additional permissions required
-- Full support for all orientation types
+- 物理的な向きの検出に加速度センサーを使用
+- 追加の権限は必要ありません
+- すべての向きのタイプを完全にサポート
 
-### Web
-- Uses Screen Orientation API
-- Motion sensor detection is limited
-- Some browsers may not support all lock types
+### ウェブ
+- 画面の向き API を使用します
+- モーションセンサーの検出は制限されています
+- 一部のブラウザはすべてのロック タイプをサポートしていない場合があります

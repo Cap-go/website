@@ -1,53 +1,54 @@
 ---
 title: Devices
-description: アプリのインストールの追跡、バージョン管理、チャネル割り当てをカバーする、Capgo API 経由でデバイスを管理するためのドキュメント。
+description: >-
+  Capgo API を介してデバイスを管理するためのドキュメント。アプリのインストールの追跡、バンドル (バージョン)
+  の割り当て、チャネル管理について説明します。
 sidebar:
   order: 7
 locale: ja
 ---
+デバイスは、Capgo によって管理されるアプリの個々のインストールを表します。デバイス API を使用すると、デバイスのバンドル (バージョン)、チャネル、更新ステータスなどを追跡および管理できます。
 
-Devicesは、Capgoによって管理されるアプリの個別のインストールを表します。Devices APIを使用すると、バージョン、チャネル、更新ステータスを含むデバイスを追跡および管理できます。
-
-:::note[データ保持]
-デバイスデータは、最後のデバイスアクティビティから**90日間**保持されます。この期間内にCapgoに接続していないデバイスは、システムから自動的に削除されます。アクティブなデバイスは、更新をチェックする際に継続的に追跡されます。
+:::note[データの保持]
+デバイス データは、最後のデバイス アクティビティから **90 日間**保持されます。この期間内に Capgo に接続しなかったデバイスはシステムから自動的に削除されます。アクティブなデバイスは、アップデートをチェックする際に継続的に追跡されます。
 :::
 
-## Devicesを理解する
+## デバイスについて
 
-各デバイスには固有の特性と状態があります：
-- **Platform**: iOSまたはAndroid
-- **Version**: 現在のバンドルバージョンとネイティブビルドバージョン
-- **Environment**: 本番環境または開発環境、エミュレーターまたは物理デバイス
-- **Channel**: 現在の更新チャネル割り当て
-- **Custom ID**: 独自の追跡目的のためのオプションの識別子
+各デバイスには固有の特性と状態があります。
+- **プラットフォーム**: iOS、Android、または Electron
+- **バンドル (バージョン)**: 現在のバンドル (バージョン) とネイティブ ビルド バージョン
+- **環境**: 本番環境または開発環境、エミュレータまたは物理デバイス
+- **チャンネル**: 現在の更新チャンネルの割り当て
+- **カスタム ID**: 独自の追跡目的のためのオプションの識別子
 
 ## ベストプラクティス
 
-1. **バージョン追跡**: デバイスのバージョンを監視して、更新の採用を確保します
-2. **チャネル管理**: テストのニーズに基づいて、適切なチャネルにデバイスを割り当てます
-3. **環境の認識**: 異なる環境（本番/開発/エミュレーター）を適切に処理します
-4. **カスタム識別**: カスタムIDを使用して、既存のシステムと統合します
+1. **バンドル (バージョン) 追跡**: デバイス バンドル (バージョン) の導入を監視して、更新プログラムの取り込みを確認します。
+2. **チャネル管理**: テストのニーズに基づいてデバイスを適切なチャネルに割り当てます。
+3. **環境認識**: さまざまな環境 (本番/開発/エミュレータ) を適切に処理します。
+4. **カスタム ID**: カスタム ID を使用して既存のシステムと統合します
 
-## Endpoints
+## エンドポイント
 
-### POST
+### 投稿
 
 `https://api.capgo.app/device/`
 
-デバイスを特定のバージョンまたはチャネルにリンクします。
+デバイスを特定のバンドル (バージョン) またはチャネルにリンクします。
 
-#### Request Body
+#### リクエスト本文
 
 ```typescript
 interface DeviceLink {
   app_id: string
   device_id: string
-  version_id?: string // version name
+  version_id?: string // bundle (version) name
   channel?: string    // channel name
 }
 ```
 
-#### リクエスト例
+#### リクエストの例
 
 ```bash
 curl -X POST \
@@ -61,7 +62,7 @@ curl -X POST \
   https://api.capgo.app/device/
 ```
 
-#### 成功レスポンス
+#### 成功の応答
 
 ```json
 {
@@ -69,19 +70,19 @@ curl -X POST \
 }
 ```
 
-### GET
+### 入手
 
 `https://api.capgo.app/device/`
 
-デバイス情報を取得します。大規模なデバイスリストの効率的な取得のために、カーソルベースのページネーションを使用します。
+デバイス情報を取得します。カーソルベースのページネーションを使用して、大規模なデバイスリストを効率的に取得します。
 
 #### クエリパラメータ
 - `app_id`: 必須。アプリのID
-- `device_id`: オプション。単一のデバイスを取得するための特定のデバイスID
-- `cursor`: オプション。ページネーション用の前のレスポンスからのカーソル
-- `limit`: オプション。ページごとのデバイス数（デフォルト：50）
+- `device_id`: オプション。単一のデバイスを取得するための特定のデバイス ID
+- `cursor`: オプション。ページネーションのための前の応答のカーソル
+- `limit`: オプション。ページごとのデバイス数 (デフォルト: 50)
 
-#### リクエスト例s
+#### リクエストの例
 
 ```bash
 # Get all devices (first page)
@@ -97,57 +98,59 @@ curl -H "authorization: your-api-key" \
   "https://api.capgo.app/device/?app_id=app_123&cursor=2024-01-01T00:00:00Z|device_456"
 ```
 
-#### レスポンスタイプ（リスト）
+#### 応答タイプ (リスト)
 
-複数のデバイスを要求する場合（`device_id`パラメータなし）：
+複数のデバイスをリクエストする場合 (`device_id` パラメーターなし):
 
 ```typescript
 interface DeviceListResponse {
   data: Device[];
-  nextCursor?: string;  // 次のページを取得するために、これを'cursor'パラメータとして渡します
-  hasMore: boolean;     // より多くのページが利用可能な場合はtrue
+  nextCursor?: string;  // Pass this as 'cursor' param to get next page
+  hasMore: boolean;     // true if more pages available
 }
 
 interface Device {
   updated_at: string;
   device_id: string;
   custom_id: string;
-  version?: number;
-  version_name: string | null;
+  version?: number; // bundle (version) id
+  version_name: string | null; // bundle (version) name
   channel?: string;
   app_id: string;
-  platform: "ios" | "android";
+  platform: "ios" | "android" | "electron";
   plugin_version: string;
   os_version: string;
   version_build: string;
   is_prod: boolean;
   is_emulator: boolean;
+  key_id: string | null; // First 4 chars of encryption key (e.g., "MIIB")
 }
 ```
 
-#### レスポンスタイプ（単一デバイス）
+#### 応答タイプ (単一デバイス)
 
-`device_id`パラメータを使用して特定のデバイスを要求すると、デバイスオブジェクトを直接返します：
+`device_id` パラメーターを使用して特定のデバイスをリクエストすると、デバイス オブジェクトが直接返されます。
 
 ```typescript
 interface Device {
   updated_at: string;
   device_id: string;
   custom_id: string;
-  version?: number;
-  version_name: string | null;
+  version?: number; // bundle (version) id
+  version_name: string | null; // bundle (version) name
   channel?: string;
   app_id: string;
-  platform: "ios" | "android";
+  platform: "ios" | "android" | "electron";
   plugin_version: string;
   os_version: string;
   version_build: string;
   is_prod: boolean;
   is_emulator: boolean;
+  key_id: string | null; // First 4 chars of encryption key (e.g., "MIIB")
 }
 ```
 
-#### レスポンス例（リスト）
+#### 応答例 (リスト)
 
 ```json
 {
@@ -172,7 +175,7 @@ interface Device {
 }
 ```
 
-#### レスポンス例（単一デバイス）
+#### 応答例 (単一デバイス)
 
 ```json
 {
@@ -192,18 +195,18 @@ interface Device {
 }
 ```
 
-### DELETE
+### 削除
 
 `https://api.capgo.app/device/`
 
-デバイスをチャネルオーバーライドからリンク解除します。これにより、デバイスがデフォルトチャネルを使用するようにリセットされます。
+チャネルオーバーライドからデバイスのリンクを解除します。これにより、デバイスがデフォルトのチャネルを使用するようにリセットされます。
 
-:::note[デバイスを削除]
-デバイスデータは、最後のデバイスアクティビティから**90日間**保持されます。この期間内にCapgoに接続していないデバイスは、システムから自動的に削除されます。アクティブなデバイスは、更新をチェックする際に継続的に追跡されます。
-このエンドポイントではデバイスを削除できません。チャネルオーバーライドにのみ影響します。
+:::note[デバイスの削除]
+デバイス データは、最後のデバイス アクティビティから **90 日間**保持されます。この期間内に Capgo に接続しなかったデバイスはシステムから自動的に削除されます。アクティブなデバイスは、アップデートをチェックする際に継続的に追跡されます。
+このエンドポイントではデバイスを削除できません。影響を受けるのはチャネルのオーバーライドのみです。
 :::
 
-#### Query Parameters
+#### クエリパラメータ
 
 ```typescript
 interface Device {
@@ -212,7 +215,7 @@ interface Device {
 }
 ```
 
-#### リクエスト例
+#### リクエストの例
 
 ```bash
 curl -X DELETE \
@@ -225,7 +228,7 @@ curl -X DELETE \
   https://api.capgo.app/device/
 ```
 
-#### 成功レスポンス
+#### 成功の応答
 
 ```json
 {
@@ -235,7 +238,7 @@ curl -X DELETE \
 
 ## エラー処理
 
-一般的なエラーシナリオとそのレスポンス：
+一般的なエラーのシナリオとその対応:
 
 ```json
 // Device not found
@@ -244,7 +247,7 @@ curl -X DELETE \
   "status": "KO"
 }
 
-// Invalid version
+// Invalid bundle (version)
 {
   "error": "Version not found",
   "status": "KO"
@@ -265,7 +268,7 @@ curl -X DELETE \
 
 ## 一般的な使用例
 
-1. **Beta Device Registration**
+1. **ベータ版デバイスの登録**
 ```typescript
 {
   "app_id": "app_123",
@@ -274,7 +277,7 @@ curl -X DELETE \
 }
 ```
 
-2. **Version Override**
+2. **バージョンの上書き**
 ```typescript
 {
   "app_id": "app_123",
@@ -283,14 +286,12 @@ curl -X DELETE \
 }
 ```
 
-3. **Reset to Default Channel**
+3. **デフォルトのチャンネルにリセット**
 ```typescript
 // Use DELETE endpoint to remove overrides
-```
+```## デバイス管理のヒント
 
-## デバイス管理のヒント
-
-1. **監視**: デバイスのステータスとバージョンの分布を定期的に確認します
-2. **テスト**: カスタムIDを使用して、テストデバイスを簡単に識別します
-3. **トラブルシューティング**: デバイスの更新とチャネル割り当てを追跡します
-4. **バージョン管理**: 互換性を確保するために、ネイティブアプリのバージョンを監視します 
+1. **監視**: デバイスのステータスとバンドル (バージョン) の配布を定期的に確認します。
+2. **テスト**: カスタム ID を使用してテスト デバイスを簡単に識別します
+3. **トラブルシューティング**: デバイスの更新とチャネル割り当てを追跡する
+4. **ネイティブ バージョン管理**: ネイティブ アプリのバージョンを監視して互換性を確保します

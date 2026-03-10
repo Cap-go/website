@@ -1,153 +1,150 @@
 ---
+title: Firebase Google Connectez-vous sur Android
+description: >-
+  Découvrez comment configurer la connexion Google avec l'authentification
+  Firebase sur Android à l'aide du plug-in de connexion sociale Capacitor.
+sidebar:
+  order: 2
 locale: fr
-title: Firebase Google Connexion on Android
-description: Learn how to set up Google Sign-In with Firebase Authentication on Android using the Capacitor Social Connexion plugin.
-sidebar: 
-    order: 2
 ---
 import { Steps } from '@astrojs/starlight/components';
 
-## Introduction
+##Présentation
 
-This Guide will Aide you integrate Google Sign-In with Firebase Authentication on Android. I assume you have already completed the [general Firebase Google Configuration](./general/) 
+Ce guide vous aidera à intégrer la connexion Google avec l'authentification Firebase sur Android. Je suppose que vous avez déjà terminé la [configuration générale Firebase Google](./general/) 
 
-:::Remarque
-I will assume that you have not yet created your Android Application in the Firebase Console. If you have, your steps will be slightly different.
+:::note
+Je suppose que vous n'avez pas encore créé votre application Android dans la console Firebase. Si c’est le cas, vos étapes seront légèrement différentes.
 :::
 
-## Configuration Steps
+## Étapes de configuration
 
 <Steps>
-1. Go to your project Aperçu over at [console.cloud.google.com](https://console.cloud.google.com/)
-    <img src="/social-login-assets/firebase_project_overview.webp" alt="Firebase Project Overview" />
+1. Accédez à la présentation de votre projet sur [console.cloud.google.com](https://console.cloud.google.com/)
+    <img src="/social-login-assets/firebase_project_overview.webp" alt="Firebase Aperçu du projet" />
 
-2. Click on the `Add app` button
-    <img src="/social-login-assets/firebase_project_add_app.webp" alt="Firebase Add App Button" />
+2. Cliquez sur le bouton « Ajouter une application »
+    <img src="/social-login-assets/firebase_project_add_app.webp" alt="Firebase Ajouter un bouton d'application" />
 
-    :::Remarque
-    It is possible that you will have to look here for this button. This applies only if you have already created a different Application in the Firebase Console.
+    :::remarque
+    Il est possible que vous deviez chercher ce bouton ici. Cela s'applique uniquement si vous avez déjà créé une autre application dans la console Firebase.
     :::
 
-    <img src="/social-login-assets/firebase_project_add_app_2.webp" alt="Firebase Add App Button" />
+    <img src="/social-login-assets/firebase_project_add_app_2.webp" alt="Firebase Ajouter un bouton d'application" />
 
-3. Select `Android`
-    <img src="/social-login-assets/firebase_project_add_app_android.webp" alt="Firebase Add App Android Button" />
+3. Sélectionnez `Android`
+    <img src="/social-login-assets/firebase_project_add_app_android.webp" alt="Firebase Ajouter une application Android Bouton" />
 
-4. Fill the first part of the form
-   1. Fill the `Android package name`
-      1. Open Android Studio at your app using `npx cap open android`
-      2. At the very bottom of the navigator, find the `Gradle Scripts`
-         <img src="/social-login-assets/studio_gradle_scripts.png" alt="Gradle Scripts section in Android Studio project navigator" />
-      3. Find `build.gradle` for the module `app`
-         <img src="/social-login-assets/studio_build_gradle.png" alt="build.gradle (Module: app) file in Gradle Scripts section" />
-      4. Copy the `android.defaultConfig.applicationId`. This will be your `package name` in the Firebase console
-         <img src="/social-login-assets/studio_build_gradle_app_id.png" alt="Build.gradle file showing applicationId configuration" />
-      :::Remarque
-      The ID shown here will differ from the one I will use for the rest of the guide. I will use `app.capgo.plugin.SocialLogin` for the rest of the guide.
+4. Remplissez la première partie du formulaire
+   1. Remplissez le `Android package name`
+      1. Ouvrez Android Studio sur votre application en utilisant `npx cap open android`
+      2. Tout en bas du navigateur, recherchez les « Gradle Scripts »
+         <img src="/social-login-assets/studio_gradle_scripts.png" alt="Section Gradle Scripts dans le navigateur de projet Android Studio" />
+      3. Recherchez `build.gradle` pour le module `app`
+         <img src="/social-login-assets/studio_build_gradle.png" alt="Fichier build.gradle (Module : app) dans la section Gradle Scripts" />
+      4. Copiez le `android.defaultConfig.applicationId`. Ce sera votre « nom de package » dans la console Firebase
+         <img src="/social-login-assets/studio_build_gradle_app_id.png" alt="Fichier Build.gradle montrant la configuration de l'ID d'application" />
+      :::remarque
+      L'identifiant affiché ici sera différent de celui que j'utiliserai pour le reste du guide. J'utiliserai `app.capgo.plugin.SocialLogin` pour le reste du guide.
       :::
-      5. Paste it in the Firebase console
-          <img src="/social-login-assets/firebase_project_add_app_android_package_name.webp" alt="Firebase Add App Android Package Name Field" />
-    2. Click on the `Register app` button
-        <img src="/social-login-assets/firebase_project_add_app_android_register.webp" alt="Firebase Add App Android Register Button" />
-5. Skip the `Download and then add config file` step
-    <img src="/social-login-assets/firebase_project_add_app_android_skip_download.webp" alt="Firebase Add App Android Skip 'Download and then add config file'" />
-6. Skip the `Add firebase SDK` step
-   <img src="/social-login-assets/firebase_project_add_app_android_skip_download_firebase_sdk.webp" alt="Firebase Add App Android Skip 'Add firebase SDK'" />
-7. Click on the `Continue to console` button
-   <img src="/social-login-assets/firebase_project_add_app_android_continue_to_console.webp" alt="Firebase Add App Android Continue to Console Button" />
-8. If you do not get automatically authenticated, go to `settings` -> `general` -> `your apps` -> find your android app and click on it
-   <img src="/social-login-assets/firebase_project_add_app_android_settings_general_your_apps.webp" alt="Firebase Add App Android Settings General Your Apps Button" />
-9. Get your SHA1 fingerprint
+      5. Collez-le dans la console Firebase
+          <img src="/social-login-assets/firebase_project_add_app_android_package_name.webp" alt="Firebase Ajouter une application Android Champ de nom du package" />
+    2. Cliquez sur le bouton « Enregistrer l'application »
+        <img src="/social-login-assets/firebase_project_add_app_android_register.webp" alt="Firebase Ajouter une application Android Bouton d'enregistrement" />
+5. Ignorez l'étape « Télécharger puis ajouter le fichier de configuration »
+    <img src="/social-login-assets/firebase_project_add_app_android_skip_download.webp" alt="Firebase Ajouter une application Android Ignorer « Télécharger puis ajouter le fichier de configuration »" />
+6. Ignorez l'étape `Add firebase SDK`
+   <img src="/social-login-assets/firebase_project_add_app_android_skip_download_firebase_sdk.webp" alt="Firebase Ajouter une application Android Ignorer « Ajouter Firebase SDK »" />
+7. Cliquez sur le bouton « Continuer vers la console »
+   <img src="/social-login-assets/firebase_project_add_app_android_continue_to_console.webp" alt="Firebase Ajouter une application Android Bouton Continuer vers la console" />
+8. Si vous n'êtes pas automatiquement authentifié, accédez à `settings` -> `general` -> `vos applications` -> recherchez votre application Android et cliquez dessus.
+   <img src="/social-login-assets/firebase_project_add_app_android_settings_general_your_apps.webp" alt="Firebase Ajouter une application Android Paramètres Général Bouton Vos applications" />
+9. Obtenez votre empreinte digitale SHA1
    
-   Follow steps 10-11 from the [Google Connexion Android Configuration Guide](/docs/plugins/social-Connexion/google/Android/#using-google-Connexion-on-Android):
+   Suivez les étapes 10 à 11 du [Google Login Android guide de configuration](/docs/plugins/social-login/google/android/#using-google-login-on-android) :
    
-   1. Now, open the terminal. Make sure that you are in the `android` folder of your app and run `./gradlew signInReport`
-      <img src="/social-login-assets/term_sign_report.png" alt="Terminal showing gradlew signInReport command" />
+   1. Maintenant, ouvrez le terminal. Assurez-vous que vous êtes dans le dossier `android` de votre application et exécutez `./gradlew signInReport`
+      <img src="/social-login-assets/term_sign_report.png" alt="Terminal affichant la commande Gradlew SignInReport" />
    
-   2. Scroll to the top of this command. You should see the following. Copy the `SHA1`.
-      <img src="/social-login-assets/term_sign_report_res.png" alt="Terminal output showing SHA1 certificate fingerprint" />
+   2. Faites défiler vers le haut de cette commande. Vous devriez voir ce qui suit. Copiez le `SHA1`.
+      <img src="/social-login-assets/term_sign_report_res.png" alt="Sortie du terminal affichant l'empreinte digitale du certificat SHA1" />
 
-   :::Remarque
-   I will use a slightly different SHA1 for the rest of the Guide, because I have changed computes since writing the original Google Connexion Android Configuration Guide.
+   :::remarque
+   J'utiliserai un SHA1 légèrement différent pour le reste du guide, car j'ai modifié les calculs depuis la rédaction du guide de configuration Android de connexion original Google.
    :::
 
-   :::Attention
-   The SHA1 is very Important to get right. If you mess up, the authentication will fail in strange ways.
-   Please __**[READ THE GOOGLE Connexion Android Configuration Guide](/docs/plugins/social-Connexion/google/Android/#using-google-Connexion-on-Android)**__ to get it right.
+   :::attention
+   Le SHA1 est très important pour réussir. Si vous vous trompez, l'authentification échouera de manière étrange.
+   Veuillez __**[LIRE LE GUIDE DE CONFIGURATION ANDROID DE CONNEXION GOOGLE](/docs/plugins/social-login/google/android/#using-google-login-on-android)**__ pour bien faire les choses.
    :::
    
-10. Ajouter the SHA1 to the Firebase project
-      1. Click on the `Add fingerprint` button
-         <img src="/social-login-assets/firebase_project_add_app_android_add_fingerprint.webp" alt="Firebase Add App Android Add Fingerprint Button" />
-      2. Paste the SHA1 you copied in the Précédent step
-         <img src="/social-login-assets/firebase_project_add_app_android_add_fingerprint_sha1.webp" alt="Firebase Add App Android Add Fingerprint SHA1 Field" />
-      3. Click on the `Save` button
-         <img src="/social-login-assets/firebase_project_add_app_android_add_fingerprint_add.webp" alt="Firebase Add App Android Add Fingerprint Save Button" />
-
-11. Get your web client ID
-      1. Go to `Build` -> `Authentication`
-         <img src="/social-login-assets/firebase_select_authentication.webp" alt="Firebase Authentication Menu" />
-      2. Click on the `Sign-in method` button
-         <img src="/social-login-assets/firebase_select_authentication_sign_in_method.webp" alt="Firebase Authentication Sign-in Method Button" />
-      3. Click on the `Google` provider
-         <img src="/social-login-assets/firebase_select_authentication_sign_in_method_google.webp" alt="Firebase Authentication Sign-in Method Google Provider" />
-      4. Click on the `Web SDK configuration` button
-         <img src="/social-login-assets/firebase_select_authentication_sign_in_method_web_sdk_configuration.webp" alt="Firebase Authentication Sign-in Method Web SDK Configuration Button" />
-      5. Copy the `Web client ID`. This will be your `webClientId` in the `initialize` method of the plugin.
-        <img src="/social-login-assets/firebase_select_authentication_sign_in_method_web_sdk_configuration_web_client_id.webp" alt="Firebase Authentication Sign-in Method Web SDK Configuration Web Client ID" />
-12. Use the web client ID in JS.
-      :::Remarque
-      I recommend using the `authenticateWithGoogle` helper function available in the [authUtils.ts](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/authUtils.ts) file of the example app.
+10. Ajoutez le SHA1 au projet Firebase
+      1. Cliquez sur le bouton « Ajouter une empreinte digitale »
+         <img src="/social-login-assets/firebase_project_add_app_android_add_fingerprint.webp" alt="Firebase Ajouter une application Android Ajouter un bouton d'empreinte digitale" />
+      2. Collez le SHA1 que vous avez copié à l'étape précédente
+         <img src="/social-login-assets/firebase_project_add_app_android_add_fingerprint_sha1.webp" alt="Firebase Ajouter une application Android Ajouter un champ SHA1 d'empreinte digitale" />
+      3. Cliquez sur le bouton `Save`
+         <img src="/social-login-assets/firebase_project_add_app_android_add_fingerprint_add.webp" alt="Firebase Ajouter une application Android Ajouter un bouton d'enregistrement d'empreintes digitales" />11. Obtenez votre identifiant client Web
+      1. Accédez à `Build` -> `Authentication`
+         <img src="/social-login-assets/firebase_select_authentication.webp" alt="Firebase Menu d'authentification" />
+      2. Cliquez sur le bouton « Méthode de connexion »
+         <img src="/social-login-assets/firebase_select_authentication_sign_in_method.webp" alt="Firebase Bouton de méthode de connexion d'authentification" />
+      3. Cliquez sur le fournisseur `Google`
+         <img src="/social-login-assets/firebase_select_authentication_sign_in_method_google.webp" alt="Firebase Méthode de connexion par authentification Google Fournisseur" />
+      4. Cliquez sur le bouton `Web SDK configuration`
+         <img src="/social-login-assets/firebase_select_authentication_sign_in_method_web_sdk_configuration.webp" alt="Firebase Méthode de connexion par authentification Web SDK Bouton de configuration" />
+      5. Copiez l'« ID client Web ». Ce sera votre `webClientId` dans la méthode `initialize` du plugin.
+        <img src="/social-login-assets/firebase_select_authentication_sign_in_method_web_sdk_configuration_web_client_id.webp" alt="Firebase Méthode de connexion par authentification Web SDK Configuration ID client Web" />
+12. Utilisez l'ID du client Web dans JS.
+      :::remarque
+      Je recommande d'utiliser la fonction d'assistance `authenticateWithGoogle` disponible dans le fichier [authUtils.ts](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/authUtils.ts) de l'exemple d'application.
       :::
 </Steps>
 
-At this point, you are **__TECHNICALLY__** ready to use Google Sign-In with Firebase Authentication on Android. However, I would recommend double-checking the Configuration in the Google Cloud console as explained in the Suivant step.
+À ce stade, vous êtes **__TECHNIQUEMENT__** prêt à utiliser Google Connectez-vous avec Firebase Authentification sur Android. Cependant, je recommanderais de revérifier la configuration dans la console Cloud Google, comme expliqué à l'étape suivante.
 
-## Double-Vérifier the Configuration in Google Cloud console
+## Vérifiez à nouveau la configuration dans Google Cloud Console
 
-In order to make sure that the Configuration is correct, you should double-Vérifier the Configuration in the Google Cloud console.
+Afin de vous assurer que la configuration est correcte, vous devez revérifier la configuration dans la console Cloud Google.
 <Steps>
-   1. Go to [console.cloud.google.com](https://console.cloud.google.com/)
-   2. Find your project
-      1. Click on the project selector
-         <img src="/social-login-assets/firebase_double_check_gc_project_select.webp" alt="Google Cloud Console Project Selector" />
-      2. Search up your project by the exact name of your Firebase project and click on it. In my case, it is `sociallogin-tutorial-app`.
-         <img src="/social-login-assets/firebase_gc_project_select_project.webp" alt="Firebase Project Selector Project" />
-   3. Open the search bar and open `credentials`
-      1. Open the Recherche bar
-         <img src="/social-login-assets/firebase_double_check_gc_search_bar.webp" alt="Google Cloud Console Search Bar" />
-      2. Search for `credentials` and click on the `APIs and Services` one (number 2 on the screenshot)
-         <img src="/social-login-assets/firebase_gc_credentials_search.webp" alt="Google Cloud Console Credentials Search" />
-   4. Verify that you see both the Android and Web client IDs in the list.
-      <img src="/social-login-assets/firebase_gc_credentials_list.webp" alt="Google Cloud Console Credentials List" />
+   1. Accédez à [console.cloud.google.com](https://console.cloud.google.com/)
+   2. Trouvez votre projet
+      1. Cliquez sur le sélecteur de projet
+         <img src="/social-login-assets/firebase_double_check_gc_project_select.webp" alt="Google Sélecteur de projets Cloud Console" />
+      2. Recherchez votre projet par le nom exact de votre projet Firebase et cliquez dessus. Dans mon cas, il s'agit de `sociallogin-tutorial-app`.
+         <img src="/social-login-assets/firebase_gc_project_select_project.webp" alt="Firebase Sélecteur de projet Projet" />
+   3. Ouvrez la barre de recherche et ouvrez `credentials`
+      1. Ouvrez la barre de recherche
+         <img src="/social-login-assets/firebase_double_check_gc_search_bar.webp" alt="Google Barre de recherche Cloud Console" />
+      2. Recherchez `credentials` et cliquez sur celui « API et services » (numéro 2 sur la capture d'écran)
+         <img src="/social-login-assets/firebase_gc_credentials_search.webp" alt="Google Recherche d'identifiants Cloud Console" />
+   4. Vérifiez que vous voyez à la fois les ID Android et client Web dans la liste.
+      <img src="/social-login-assets/firebase_gc_credentials_list.webp" alt="Google Liste des informations d'identification de Cloud Console" />
 
-      :::Attention
-      If you do not see both the Android and Web client IDs in the list, you have made a mistake in the Configuration. Please go Retour and Vérifier your steps.
+      :::attention
+      Si vous ne voyez pas les identifiants Android et client Web dans la liste, vous avez commis une erreur lors de la configuration. Veuillez revenir en arrière et vérifier vos étapes.
 
-      It is also possible, and it has happened to me, that you already have added the Android SHA1 hash with the same Application ID in a different project. This will result in Firbase being unable to Créer an Android client ID. In this case, you will need to Retirer the SHA1 from the other project as well as on Firebase (using the Firebase console to Retirer the Android Application) and recreate it on Firbase
+      Il est également possible, et cela m'est arrivé, que vous ayez déjà ajouté le hachage Android SHA1 avec le même ID d'application dans un projet différent. Cela empêchera Firbase de créer un ID client Android. Dans ce cas, vous devrez supprimer le SHA1 de l'autre projet ainsi que sur Firebase (en utilisant la console Firebase pour supprimer l'application android) et le recréer sur Firbase
       :::
-   5. Verify that the Android client ID is correctly configured in the Firebase console.
-      1. Click on the `Android` app
-         <img src="/social-login-assets/firebase_gc_android_app_select.webp" alt="Google Cloud Console Android App Select" />
-      2. Confirm that the SHA1 hash is correctly configured and that it matches the one you copied in the Précédent steps.
-         <img src="/social-login-assets/firebase_gc_android_app_sha1_configured.webp" alt="Google Cloud Console Android App SHA1 Configured" />
-   6. Verify that the Web client ID is correctly configured in the Firebase console.
-      1. Click on the `Web` app
-         <img src="/social-login-assets/firebase_gc_web_app_select.webp" alt="Google Cloud Console Web App Select" />
-      2. Confirm that the client ID matches the one you copied in the Précédent steps.
-         <img src="/social-login-assets/firebase_gc_web_app_client_id_configured.webp" alt="Google Cloud Console Web App Client ID Configured" />
-      :::Remarque
-      Please ignore the rest of the Paramètres of the web client. We will discuss this on the [web Configuration Guide](/docs/plugins/social-Connexion/firebase/google/web/).
-</Steps>
-
-Voila! You are now ready to use Google Sign-In with Firebase Authentication on Android.
+   5. Vérifiez que l'ID client Android est correctement configuré dans la console Firebase.
+      1. Cliquez sur l'application `Android`
+         <img src="/social-login-assets/firebase_gc_android_app_select.webp" alt="Google Cloud Console Android Sélection d'application" />
+      2. Confirmez que le hachage SHA1 est correctement configuré et qu'il correspond à celui que vous avez copié lors des étapes précédentes.
+         <img src="/social-login-assets/firebase_gc_android_app_sha1_configured.webp" alt="Google Cloud Console Android Application SHA1 configurée" />
+   6. Vérifiez que l'ID client Web est correctement configuré dans la console Firebase.
+      1. Cliquez sur l'application `Web`
+         <img src="/social-login-assets/firebase_gc_web_app_select.webp" alt="Google Sélection de l'application Web Cloud Console" />
+      2. Confirmez que l'ID client correspond à celui que vous avez copié lors des étapes précédentes.
+         <img src="/social-login-assets/firebase_gc_web_app_client_id_configured.webp" alt="" />
+      :::remarque
+      Veuillez ignorer le reste des paramètres du client Web. Nous en discuterons dans le [guide de configuration Web](/docs/plugins/social-login/firebase/google/web/).
+</Steps>Voilà ! Vous êtes maintenant prêt à utiliser la connexion Google avec l'authentification Firebase sur Android.
 
 ## Dépannage
 
-If authentication hangs or fails:
+Si l'authentification se bloque ou échoue :
 
-- Verify the `idToken` audience matches your Firebase web client ID
-- Vérifier that Google Sign-In is enabled in Firebase Console
-- Ensure the SHA-1 fingerprint is correctly configured
-- Review the [Exemple Application code](https://github.com/Cap-go/capacitor-social-Connexion/tree/main/Exemple-Application/src/authUtils.ts) for Référence
-
+- Vérifiez que l'audience `idToken` correspond à votre identifiant de client Web Firebase.
+- Vérifiez que la connexion Google est activée dans la console Firebase.
+- Assurez-vous que l'empreinte digitale SHA-1 est correctement configurée
+- Consultez l'[exemple de code d'application](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app/src/authUtils.ts) pour référence.

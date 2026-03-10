@@ -1,23 +1,24 @@
 ---
-title: Getting Started
-description: Learn how to integrate YouTube video playback in your Capacitor app.
+title: Memulai
+description: >-
+  Pelajari cara mengintegrasikan pemutaran video YouTube di aplikasi Capacitor
+  Anda.
 sidebar:
   order: 2
 locale: id
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Instal paket**
    <PackageManagers pkg="@capgo/capacitor-youtube-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Sinkronisasi dengan proyek asli**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Basic Usage
+## Penggunaan Dasar
 
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
@@ -46,11 +47,11 @@ YoutubePlayer.addEventListener(result.player, 'onStateChange', (event) => {
 });
 ```
 
-## API Reference
+## API Referensi
 
-### initialize(options)
+### inisialisasi (pilihan)
 
-Initialize a YouTube player instance.
+Inisialisasi instance pemutar YouTube.
 
 ```typescript
 const { player, playerReady } = await YoutubePlayer.initialize({
@@ -66,7 +67,7 @@ const { player, playerReady } = await YoutubePlayer.initialize({
 });
 ```
 
-### Video Control Methods
+### Metode Kontrol Video
 
 ```typescript
 // Play
@@ -88,7 +89,7 @@ await YoutubePlayer.loadVideoById(playerId, { videoId: 'VIDEO_ID' });
 await YoutubePlayer.cueVideoById(playerId, { videoId: 'VIDEO_ID' });
 ```
 
-### Playlist Control
+### Kontrol Daftar Putar
 
 ```typescript
 // Load playlist
@@ -109,7 +110,7 @@ await YoutubePlayer.previousVideo(playerId);
 await YoutubePlayer.playVideoAt(playerId, index);
 ```
 
-### Audio Control
+### Kontrol Audio
 
 ```typescript
 // Mute/Unmute
@@ -124,7 +125,7 @@ await YoutubePlayer.setVolume(playerId, 50);
 const { result } = await YoutubePlayer.getVolume(playerId);
 ```
 
-### Playback Control
+### Kontrol Pemutaran
 
 ```typescript
 // Playback rate
@@ -140,7 +141,7 @@ await YoutubePlayer.setLoop(playerId, true);
 await YoutubePlayer.setShuffle(playerId, true);
 ```
 
-### Quality Control
+### Kontrol Kualitas
 
 ```typescript
 // Set quality
@@ -153,7 +154,7 @@ const { result } = await YoutubePlayer.getPlaybackQuality(playerId);
 const { result } = await YoutubePlayer.getAvailableQualityLevels(playerId);
 ```
 
-### Player Information
+### Informasi Pemain
 
 ```typescript
 // Duration
@@ -172,7 +173,7 @@ const { result } = await YoutubePlayer.getPlayerState(playerId);
 const { result } = await YoutubePlayer.getVideoUrl(playerId);
 ```
 
-### Event Listeners
+### Pendengar Acara
 
 ```typescript
 // State change
@@ -204,7 +205,7 @@ YoutubePlayer.addEventListener(playerId, 'onPlaybackRateChange', (event) => {
 YoutubePlayer.removeEventListener(playerId, 'onStateChange', callback);
 ```
 
-## Complete Example
+## Contoh Lengkap
 
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
@@ -321,18 +322,18 @@ export class YouTubeService {
 }
 ```
 
-## Player States
+## Status Pemain
 
-| State | Value | Description |
+| Negara | Nilai | Deskripsi |
 |-------|-------|-------------|
-| UNSTARTED | -1 | Video not started |
-| ENDED | 0 | Video has ended |
-| PLAYING | 1 | Video is playing |
-| PAUSED | 2 | Video is paused |
-| BUFFERING | 3 | Video is buffering |
-| CUED | 5 | Video is cued |
+| BELUM DIMULAI | -1 | Video tidak dimulai |
+| BERAKHIR | 0 | Video telah berakhir |
+| BERMAIN | 1 | Video sedang diputar |
+| DIJEDA | 2 | Video dijeda |
+| PENYANGGAAN | 3 | Video sedang buffering |
+| Isyarat | 5 | Video diberi isyarat |
 
-## Quality Levels
+## Tingkat Kualitas
 
 - `small`: 240p
 - `medium`: 360p
@@ -340,19 +341,19 @@ export class YouTubeService {
 - `hd720`: 720p
 - `hd1080`: 1080p
 - `highres`: >1080p
-- `default`: Auto quality
+- `default`: Kualitas otomatis
 
-## Best Practices
+## Praktik Terbaik
 
-1. **Initialize once**
-   Create player instance once and reuse it:
+1. **Inisialisasi sekali**
+   Buat instance pemain satu kali dan gunakan kembali:
    ```typescript
    let player = await YoutubePlayer.initialize(options);
    // Reuse player for different videos
    await YoutubePlayer.loadVideoById(player, { videoId: 'NEW_ID' });
    ```
 
-2. **Handle errors gracefully**
+2. **Tangani kesalahan dengan baik**
    ```typescript
    YoutubePlayer.addEventListener(playerId, 'onError', (event) => {
      switch (event.data) {
@@ -370,8 +371,8 @@ export class YouTubeService {
    });
    ```
 
-3. **Clean up**
-   Destroy player when component unmounts:
+3. **Bersihkan**
+   Hancurkan pemain saat komponen dilepas:
    ```typescript
    useEffect(() => {
      return () => {
@@ -382,7 +383,7 @@ export class YouTubeService {
    }, []);
    ```
 
-4. **Respect user preferences**
+4. **Hargai preferensi pengguna**
    ```typescript
    // Don't autoplay unless user initiated
    playerVars: {
@@ -390,7 +391,7 @@ export class YouTubeService {
    }
    ```
 
-5. **Monitor playback**
+5. **Pantau pemutaran**
    ```typescript
    setInterval(async () => {
      const time = await YoutubePlayer.getCurrentTime(playerId);
@@ -398,35 +399,35 @@ export class YouTubeService {
    }, 1000);
    ```
 
-## Platform Notes
+## Catatan Platform
 
 ### iOS
-- Works on iOS 9.0+
-- Uses WKWebView with YouTube iframe API
-- Fullscreen supported
+- Bekerja pada iOS 9.0+
+- Menggunakan WKWebView dengan iframe YouTube API
+- Layar penuh didukung
 
 ### Android
-- Works on Android 5.0 (API 21)+
-- Uses WebView with YouTube iframe API
-- Fullscreen supported
+- Bekerja pada Android 5.0 (API 21)+
+- Menggunakan WebView dengan iframe YouTube API
+- Layar penuh didukung
 
 ### Web
-- Direct YouTube iframe integration
-- Full API support
-- Best performance
+- Integrasi iframe YouTube langsung
+- Dukungan penuh API
+- Performa terbaik
 
-## Troubleshooting
+## Pemecahan masalah
 
-**Player not loading:**
-- Check video ID is valid
-- Verify internet connection
-- Ensure YouTube embedding is allowed for the video
+**Pemain tidak memuat:**
+- Periksa ID video valid
+- Verifikasi koneksi internet
+- Pastikan penyematan YouTube diizinkan untuk video tersebut
 
-**Events not firing:**
-- Make sure listeners are added after initialization
-- Check player is ready before adding listeners
+**Acara tidak diaktifkan:**
+- Pastikan pendengar ditambahkan setelah inisialisasi
+- Periksa apakah pemutar sudah siap sebelum menambahkan pendengar
 
-**Quality issues:**
-- Check available quality levels first
-- Some videos don't support all qualities
-- Quality changes may not be immediate
+**Masalah kualitas:**
+- Periksa tingkat kualitas yang tersedia terlebih dahulu
+- Beberapa video tidak mendukung semua kualitas
+- Perubahan kualitas mungkin tidak terjadi secara instan

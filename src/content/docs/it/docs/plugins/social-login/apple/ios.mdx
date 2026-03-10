@@ -1,41 +1,42 @@
 ---
-
-title: Apple login on IOS
-description: This comprehensive guide will walk you through the process of setting up Apple Login using Capacitor on iOS devices, ensuring a seamless integration by covering all necessary steps and configurations.
+title: Apple accedi su IOS
+description: >-
+  Questa guida completa ti guiderà attraverso il processo di configurazione
+  dell'accesso a Apple utilizzando Capacitor sui dispositivi iOS, garantendo
+  un'integrazione perfetta coprendo tutti i passaggi e le configurazioni
+  necessarie.
 sidebar:
-    order: 2
+  order: 2
 locale: it
 ---
-
-
 import { Steps } from '@astrojs/starlight/components';
 
-Let's break down what you are going to need in order to setup Apple login on IOS.
+Analizziamo ciò di cui avrai bisogno per configurare l'accesso Apple su IOS.
 
 <Steps>
-1. Configure the capabilities of your app.
+1. Configura le funzionalità della tua app.
 
-    In order to do this, please open Xcode, click on `App`
+    Per fare ciò, apri Xcode, fai clic su `App`
     ![App XCode](/social-login-assets/app-xcode.png)
 
-2. Make sure that you select the right target.
+2. Assicurati di selezionare il target giusto.
 
-    ![XCode App Target](/social-login-assets/xcode-app-target.png)
+    ![Destinazione app XCode](/social-login-assets/xcode-app-target.png)
 
-3. Please make sure that you add the `Sign in with Apple` capability.
+3. Assicurati di aggiungere la funzionalità `Sign in with Apple`.
 
-    ![App XCode Add Capability](/social-login-assets/app-xcode-add-cap.png)
+    ![Funzionalità di aggiunta App XCode](/social-login-assets/app-xcode-add-cap.png)
 
-    ![App XCode Add Capability](/social-login-assets/sign-with-apple-cap.png)
+    ![Funzionalità di aggiunta App XCode](/social-login-assets/sign-with-apple-cap.png)
 
-    :::caution
-    If you don't see the `Sign in with Apple` capability, configure the [Account & Organizational Data Sharing](https://developer.apple.com/account/resources/services/cwa/configure/)
+    :::attenzione
+    Se non vedi la funzionalità `Sign in with Apple`, configura [Condivisione dati account e organizzazione](https://developer.apple.com/account/resources/services/cwa/configure/)
     :::
 
-4. Initialize the Apple Login in your app.
+4. Inizializza l'accesso Apple nella tua app.
 
-    :::note
-    I am using Vue as my framework, the exact implementation will vary depending on the framework of your choice
+    :::nota
+    Sto utilizzando Vue come framework, l'implementazione esatta varierà a seconda del framework scelto
     :::
 
     ```ts
@@ -47,9 +48,9 @@ Let's break down what you are going to need in order to setup Apple login on IOS
     });
     ```
 
-5. Create a button that will begin the login process.
+5. Crea un pulsante che avvierà il processo di accesso.
 
-    Said button should call the following function:
+    Detto pulsante dovrebbe richiamare la seguente funzione:
 
     ```ts
     async function loginApple() {
@@ -59,11 +60,11 @@ Let's break down what you are going to need in order to setup Apple login on IOS
     })
     ```
 
-6. Run your app on a **<u>PHYSICAL</u>** device and test it. 
+6. Esegui la tua app su un dispositivo **<u>PHYSICAL</u>** e testala. 
 
-    If you followed the steps closely you will see the following screen after clicking your button.
+    Se hai seguito attentamente i passaggi, dopo aver fatto clic sul pulsante vedrai la seguente schermata.
 
-    ![Apple Sign In prompt on iOS device](/social-login-assets/apple-sign-in-ios-final.png)
+    ![Apple Richiesta di accesso sul dispositivo iOS](/social-login-assets/apple-sign-in-ios-final.png)
 </Steps>
 
-That's it! You are all set.
+Questo è tutto! È tutto pronto.

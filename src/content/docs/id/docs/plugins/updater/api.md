@@ -1,53 +1,48 @@
 ---
-title: "Fungsi dan Pengaturan"
-locale: id
-description: "Semua metode dan pengaturan yang tersedia dari plugin"
+title: Fungsi dan pengaturan
+description: Semua metode dan pengaturan plugin yang tersedia
 sidebar:
   order: 2
+locale: id
 ---
+# Konfigurasi Plugin Pembaru
 
-# Konfigurasi Plugin Updater
-
-Lihat [Readme](https://github.com/Cap-go/capacitor-updater) Github untuk informasi lebih lanjut.
+Lihat Github [Readme](https://github.com/Cap-go/capacitor-updater) untuk informasi lebih lanjut.
 
 <docgen-config>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
-CapacitorUpdater can be configured with these options:
+CapacitorUpdater dapat dikonfigurasi dengan opsi berikut:| Prop | Ketik | Deskripsi | Bawaan | Sejak |
+| ---------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------- | ------- |
+| **`appReadyTimeout`** | <code>nomor</code> | Konfigurasikan jumlah milidetik yang harus ditunggu oleh plugin asli sebelum mempertimbangkan pembaruan 'gagal'. Tersedia di Android, iOS, dan Elektron.                                                                                                                                                                                                                                                                                                                                                                                                                                     | <code>10000 // (10 detik)</code> |         |
+| **`responseTimeout`** | <code>nomor</code> | Konfigurasikan jumlah milidetik yang harus ditunggu oleh plugin asli sebelum mempertimbangkan batas waktu API. Tersedia di Android, iOS, dan Elektron.                                                                                                                                                                                                                                                                                                                                                                                                                                            | <code>20000 // (20 detik)</code> |         |
+| **`autoDeleteFailed`** | <code>boolean</code> | Konfigurasikan apakah plugin harus menggunakan penghapusan bundel yang gagal secara otomatis. Tersedia di Android, iOS, dan Eelektron.                                                                                                                                                                                                                                                                                                                                                                                                                                                              | <code>benar</code> |         |
+| **`autoDeletePrevious`** | <code>boolean</code> | Konfigurasikan apakah plugin harus menggunakan penghapusan otomatis bundel sebelumnya setelah pembaruan berhasil. Tersedia di Android, iOS, dan Elektron.                                                                                                                                                                                                                                                                                                                                                                                                                                      | <code>benar</code> |         |
+| **`autoUpdate`** | <code>boolean</code> | Konfigurasikan apakah plugin harus menggunakan Pembaruan Otomatis melalui server pembaruan. Tersedia di Android, iOS, dan Elektron.                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | <code>benar</code> |         |
+| **`resetWhenUpdate`** | <code>boolean</code> | Hapus paket yang diunduh sebelumnya secara otomatis saat paket aplikasi asli yang lebih baru diinstal ke perangkat. Tersedia di Android, iOS, dan Elektron.                                                                                                                                                                                                                                                                                                                                                                                                                                   | <code>benar</code> |         |
+| **`updateUrl`** | <code>string</code> | Konfigurasikan URL/titik akhir yang menjadi tujuan pengiriman pemeriksaan pembaruan. Tersedia di Android, iOS, dan Elektron.| <code>https://plugin.capgo.app/updates</code> |         |
+| **`channelUrl`** | <code>string</code> | Konfigurasikan URL/titik akhir untuk operasi saluran. Tersedia di Android, iOS, dan Elektron.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | <code>https://plugin.capgo.app/channel_self</code> |         |
+| **`statsUrl`** | <code>string</code> | Konfigurasikan URL/titik akhir yang menjadi tujuan pengiriman statistik pembaruan. Tersedia di Android, iOS, dan Elektron. Setel ke "" untuk menonaktifkan pelaporan statistik.                                                                                                                                                                                                                                                                                                                                                                                                                                       | <code>https://plugin.capgo.app/stats</code> |         |
+| **`publicKey`** | <code>string</code> | Konfigurasikan kunci publik untuk enkripsi pembaruan langsung ujung ke ujung Versi 2. Tersedia di Android, iOS, dan Electron.                                                                                                                                                                                                                                                                                                                                                                                                                                                             | <code>tidak terdefinisi</code> | 6.2.0 |
+| **`version`** | <code>string</code> | Konfigurasikan versi aplikasi saat ini. Ini akan digunakan untuk permintaan pembaruan pertama. Jika tidak disetel, plugin akan mendapatkan versi dari kode asli. Tersedia di Android, iOS, dan Elektron.| <code>tidak terdefinisi</code> | 4.17.48 |
+| **`directUpdate`** | <code>boolean \| 'selalu' \| 'di Instal' \| 'saat Peluncuran'</code> | Konfigurasikan kapan plugin harus mengarahkan pembaruan instalasi. Hanya untuk mode pembaruan otomatis. Berfungsi dengan baik untuk aplikasi kurang dari 10MB dan dengan unggahan dilakukan menggunakan tanda --delta. Zip atau aplikasi yang lebih besar dari 10 MB akan relatif lambat bagi pengguna untuk memperbaruinya. - false: Jangan pernah melakukan pembaruan langsung (gunakan perilaku default: unduh di awal, atur saat di latar belakang) - atInstall: Pembaruan langsung hanya ketika aplikasi diinstal, diperbarui dari toko, jika tidak bertindak sebagai directUpdate = false - onLaunch: Pembaruan langsung hanya pada aplikasi yang diinstal, diperbarui dari toko atau setelah aplikasi dimatikan, jika tidak bertindak sebagai directUpdate = false - selalu: Pembaruan langsung dalam semua kasus sebelumnya (aplikasi diinstal, diperbarui dari toko, setelah aplikasi dimatikan atau aplikasi dilanjutkan), tidak pernah bertindak sebagai directUpdate = false - true: (tidak digunakan lagi) Sama seperti "selalu" untuk kompatibilitas mundur Tersedia di Android, iOS, dan Electron. | <code>false</code> | 5.1.0 |
+| **`autoSplashscreen`** | <code>boolean</code> | Secara otomatis menangani penyembunyian splashscreen saat menggunakan directUpdate. Saat diaktifkan, plugin akan secara otomatis menyembunyikan splashscreen setelah pembaruan diterapkan atau ketika tidak diperlukan pembaruan. Hal ini menghilangkan kebutuhan untuk mendengarkan peristiwa appReady secara manual dan memanggil SplashScreen.hide(). Hanya berfungsi jika directUpdate disetel ke "atInstall", "always", atau true. Memerlukan plugin @capacitor/splash-screen untuk diinstal dan dikonfigurasi dengan launchAutoHide: false. Memerlukan autoUpdate dan directUpdate untuk diaktifkan. Tersedia di Android dan iOS.                      | <code>false</code> | 7.6.0 |
+| **`periodCheckDelay`** | <code>nomor</code> | Konfigurasikan periode penundaan untuk pemeriksaan pembaruan periode. unitnya dalam hitungan detik. Tersedia di Android, iOS, dan Elektron. Tidak boleh kurang dari 600 detik (10 menit).                                                                                                                                                                                                                                                                                                                                                                                                                     | <code>600 // (10 menit)</code> |         |
+| **`localS3`** | <code>boolean</code> | Konfigurasikan CLI untuk menggunakan server lokal untuk pengujian atau server pembaruan yang dihosting sendiri.| <code>tidak terdefinisi</code> | 4.17.48 |
+| **`localHost`** | <code>string</code> | Konfigurasikan CLI untuk menggunakan server lokal untuk pengujian atau server pembaruan yang dihosting sendiri.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | <code>tidak terdefinisi</code> | 4.17.48 |
+| **`localWebHost`** | <code>string</code> | Konfigurasikan CLI untuk menggunakan server lokal untuk pengujian atau server pembaruan yang dihosting sendiri.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | <code>tidak terdefinisi</code> | 4.17.48 |
+| **`localSupa`** | <code>string</code> | Konfigurasikan CLI untuk menggunakan server lokal untuk pengujian atau server pembaruan yang dihosting sendiri.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | <code>tidak terdefinisi</code> | 4.17.48 |
+| **`localSupaAnon`** | <code>string</code> | Konfigurasikan CLI untuk menggunakan server lokal untuk pengujian.| <code>tidak terdefinisi</code> | 4.17.48 |
+| **`localApi`** | <code>string</code> | Konfigurasikan CLI untuk menggunakan api lokal untuk pengujian.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | <code>tidak terdefinisi</code> | 6.3.3 |
+| **`localApiFiles`** | <code>string</code> | Konfigurasikan CLI untuk menggunakan api file lokal untuk pengujian.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | <code>tidak terdefinisi</code> | 6.3.3 |
+| **`allowModifyUrl`** | <code>boolean</code> | Izinkan plugin untuk mengubah updateUrl, statsUrl, dan channelUrl secara dinamis dari sisi JavaScript.                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | <code>false</code> | 5.4.0 |
+| **`defaultChannel`** | <code>string</code> | Tetapkan saluran default untuk aplikasi di konfigurasi. Peka huruf besar-kecil. Pengaturan ini akan mengesampingkan saluran default yang diatur di cloud, namun tetap menghormati penggantian yang dilakukan di cloud.                                                                                                                                                                                                                                                                                                                                                                                      | <code>tidak terdefinisi</code> | 5.5.0 |
+| **`appId`** | <code>string</code> | Konfigurasikan id aplikasi untuk aplikasi di konfigurasi.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | <code>tidak terdefinisi</code> | 6.0.0 |
+| **`keepUrlPathAfterReload`** | <code>boolean</code> | Konfigurasikan plugin untuk mempertahankan jalur URL setelah memuat ulang. PERINGATAN: Saat memuat ulang dipicu, 'window.history' akan dihapus.                                                                                                                                                                                                                                                                                                                                                                                                                                                  | <code>false</code> | 6.8.0 |
+| **`disableJSLogging`** | <code>boolean</code> | Nonaktifkan pencatatan JavaScript pada plugin. jika benar, plugin tidak akan masuk ke konsol JavaScript. hanya log asli yang akan dilakukan | <code>false</code> | 7.3.0 |
+| **`shakeMenu`** | <code>boolean</code> | Aktifkan gerakan goyang untuk menampilkan menu pembaruan untuk tujuan debugging/pengujian | <code>false</code> | 7.5.0 |## Contoh
 
-| Prop                         | Type                                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Default                                            | Since   |
-| ---------------------------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- | ------- |
-| **`appReadyTimeout`**        | <code>number</code>                             | Configure the number of milliseconds the native plugin should wait before considering an update 'failed'. Only available for Android and iOS.                                                                                                                                                                                                                                                                                                                                                                                                                                     | <code>10000 // (10 seconds)</code>                 |         |
-| **`responseTimeout`**        | <code>number</code>                             | Configure the number of milliseconds the native plugin should wait before considering API timeout. Only available for Android and iOS.                                                                                                                                                                                                                                                                                                                                                                                                                                            | <code>20 // (20 second)</code>                     |         |
-| **`autoDeleteFailed`**       | <code>boolean</code>                            | Configure whether the plugin should use automatically delete failed bundles. Only available for Android and iOS.                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | <code>true</code>                                  |         |
-| **`autoDeletePrevious`**     | <code>boolean</code>                            | Configure whether the plugin should use automatically delete previous bundles after a successful update. Only available for Android and iOS.                                                                                                                                                                                                                                                                                                                                                                                                                                      | <code>true</code>                                  |         |
-| **`autoUpdate`**             | <code>boolean</code>                            | Configure whether the plugin should use Auto Update via an update server. Only available for Android and iOS.                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | <code>true</code>                                  |         |
-| **`resetWhenUpdate`**        | <code>boolean</code>                            | Automatically delete previous downloaded bundles when a newer native app bundle is installed to the device. Only available for Android and iOS.                                                                                                                                                                                                                                                                                                                                                                                                                                   | <code>true</code>                                  |         |
-| **`updateUrl`**              | <code>string</code>                             | Configure the URL / endpoint to which update checks are sent. Only available for Android and iOS.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | <code>https://plugin.capgo.app/updates</code>      |         |
-| **`channelUrl`**             | <code>string</code>                             | Configure the URL / endpoint for channel operations. Only available for Android and iOS.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | <code>https://plugin.capgo.app/channel_self</code> |         |
-| **`statsUrl`**               | <code>string</code>                             | Configure the URL / endpoint to which update statistics are sent. Only available for Android and iOS. Set to "" to disable stats reporting.                                                                                                                                                                                                                                                                                                                                                                                                                                       | <code>https://plugin.capgo.app/stats</code>        |         |
-| **`publicKey`**              | <code>string</code>                             | Configure the public key for end to end live update encryption Version 2 Only available for Android and iOS.                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | <code>undefined</code>                             | 6.2.0   |
-| **`version`**                | <code>string</code>                             | Configure the current version of the app. This will be used for the first update request. If not set, the plugin will get the version from the native code. Only available for Android and iOS.                                                                                                                                                                                                                                                                                                                                                                                   | <code>undefined</code>                             | 4.17.48 |
-| **`directUpdate`**           | <code>boolean \| 'always' \| 'atInstall' \| 'onLaunch'</code> | Configure when the plugin should direct install updates. Only for autoUpdate mode. Works well for apps less than 10MB and with uploads done using --partial flag. Zip or apps more than 10MB will be relatively slow for users to update. - false: Never do direct updates (use default behavior: download at start, set when backgrounded) - atInstall: Direct update only when app is installed, updated from store, otherwise act as directUpdate = false - onLaunch: Direct update only on app installed, updated from store or after app kill, otherwise act as directUpdate = false - always: Direct update in all previous cases (app installed, updated from store, after app kill or app resume), never act as directUpdate = false - true: (deprecated) Same as "always" for backward compatibility Only available for Android and iOS. | <code>false</code>                                 | 5.1.0   |
-| **`autoSplashscreen`**       | <code>boolean</code>                            | Automatically handle splashscreen hiding when using directUpdate. When enabled, the plugin will automatically hide the splashscreen after updates are applied or when no update is needed. This removes the need to manually listen for appReady events and call SplashScreen.hide(). Only works when directUpdate is set to "atInstall", "always", or true. Requires the @capacitor/splash-screen plugin to be installed and configured with launchAutoHide: false. Requires autoUpdate and directUpdate to be enabled. Only available for Android and iOS.                      | <code>false</code>                                 | 7.6.0   |
-| **`periodCheckDelay`**       | <code>number</code>                             | Configure the delay period for period update check. the unit is in seconds. Only available for Android and iOS. Cannot be less than 600 seconds (10 minutes).                                                                                                                                                                                                                                                                                                                                                                                                                     | <code>600 // (10 minutes)</code>                   |         |
-| **`localS3`**                | <code>boolean</code>                            | Configure the CLI to use a local server for testing or self-hosted update server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | <code>undefined</code>                             | 4.17.48 |
-| **`localHost`**              | <code>string</code>                             | Configure the CLI to use a local server for testing or self-hosted update server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | <code>undefined</code>                             | 4.17.48 |
-| **`localWebHost`**           | <code>string</code>                             | Configure the CLI to use a local server for testing or self-hosted update server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | <code>undefined</code>                             | 4.17.48 |
-| **`localSupa`**              | <code>string</code>                             | Configure the CLI to use a local server for testing or self-hosted update server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | <code>undefined</code>                             | 4.17.48 |
-| **`localSupaAnon`**          | <code>string</code>                             | Configure the CLI to use a local server for testing.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | <code>undefined</code>                             | 4.17.48 |
-| **`localApi`**               | <code>string</code>                             | Configure the CLI to use a local api for testing.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | <code>undefined</code>                             | 6.3.3   |
-| **`localApiFiles`**          | <code>string</code>                             | Configure the CLI to use a local file api for testing.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | <code>undefined</code>                             | 6.3.3   |
-| **`allowModifyUrl`**         | <code>boolean</code>                            | Allow the plugin to modify the updateUrl, statsUrl and channelUrl dynamically from the JavaScript side.                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | <code>false</code>                                 | 5.4.0   |
-| **`defaultChannel`**         | <code>string</code>                             | Set the default channel for the app in the config. Case sensitive. This will setting will override the default channel set in the cloud, but will still respect overrides made in the cloud.                                                                                                                                                                                                                                                                                                                                                                                      | <code>undefined</code>                             | 5.5.0   |
-| **`appId`**                  | <code>string</code>                             | Configure the app id for the app in the config.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | <code>undefined</code>                             | 6.0.0   |
-| **`keepUrlPathAfterReload`** | <code>boolean</code>                            | Configure the plugin to keep the URL path after a reload. WARNING: When a reload is triggered, 'window.history' will be cleared.                                                                                                                                                                                                                                                                                                                                                                                                                                                  | <code>false</code>                                 | 6.8.0   |
-| **`disableJSLogging`**       | <code>boolean</code>                            | Disable the JavaScript logging of the plugin. if true, the plugin will not log to the JavaScript console. only the native log will be done                                                                                                                                                                                                                                                                                                                                                                                                                                        | <code>false</code>                                 | 7.3.0   |
-| **`shakeMenu`**              | <code>boolean</code>                            | Enable shake gesture to show update menu for debugging/testing purposes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | <code>false</code>                                 | 7.5.0   |
-
-## Examples
-
-In `capacitor.config.json`:
+Dalam `capacitor.config.json`:
 
 ```json
 {
@@ -85,7 +80,7 @@ In `capacitor.config.json`:
 }
 ```
 
-In `capacitor.config.ts`:
+Dalam `capacitor.config.ts`:
 
 ```ts
 import { CapacitorConfig } from '@capacitor/cli';
@@ -131,31 +126,31 @@ export default config;
 
 <docgen-index>
 
-* [`notifyAppReady()`](#notifyappready)
+* [`notifyAppReady()`](#notifyapready)
 * [`setUpdateUrl(...)`](#setupdateurl)
 * [`setStatsUrl(...)`](#setstatsurl)
 * [`setChannelUrl(...)`](#setchannelurl)
-* [`download(...)`](#download)
-* [`next(...)`](#next)
+* [`download(...)`](#unduh)
+* [`next(...)`](#berikutnya)
 * [`set(...)`](#set)
-* [`delete(...)`](#delete)
-* [`list(...)`](#list)
-* [`reset(...)`](#reset)
-* [`current()`](#current)
-* [`reload()`](#reload)
+* [`delete(...)`](#hapus)
+* [`list(...)`](#daftar)
+* [`reset(...)`](#setel ulang)
+* [`current()`](#saat ini)
+* [`reload()`](#muat ulang)
 * [`setMultiDelay(...)`](#setmultidelay)
-* [`cancelDelay()`](#canceldelay)
-* [`getLatest(...)`](#getlatest)
-* [`setChannel(...)`](#setchannel)
-* [`unsetChannel(...)`](#unsetchannel)
+* [`cancelDelay()`](#batalkan penundaan)
+* [`getLatest(...)`](#dapatkanterbaru)
+* [`setChannel(...)`](#setsaluran)
+* [`unsetChannel(...)`](#saluran tidak disetel)
 * [`getChannel()`](#getchannel)
-* [`listChannels()`](#listchannels)
+* [`listChannels()`](#daftarsaluran)
 * [`setCustomId(...)`](#setcustomid)
 * [`getBuiltinVersion()`](#getbuiltinversion)
 * [`getDeviceId()`](#getdeviceid)
 * [`getPluginVersion()`](#getpluginversion)
 * [`isAutoUpdateEnabled()`](#isautoupdateenabled)
-* [`removeAllListeners()`](#removealllisteners)
+* [`removeAllListeners()`](#hapus semua pendengar)
 * [`addListener('download', ...)`](#addlistenerdownload-)
 * [`addListener('noNeedUpdate', ...)`](#addlistenernoneedupdate-)
 * [`addListener('updateAvailable', ...)`](#addlistenerupdateavailable-)
@@ -166,30 +161,30 @@ export default config;
 * [`addListener('appReloaded', ...)`](#addlistenerappreloaded-)
 * [`addListener('appReady', ...)`](#addlistenerappready-)
 * [`isAutoUpdateAvailable()`](#isautoupdateavailable)
-* [`getNextBundle()`](#getnextbundle)
+* [`getNextBundle()`](#dapatkanbundel berikutnya)
 * [`setShakeMenu(...)`](#setshakemenu)
 * [`isShakeMenuEnabled()`](#isshakemenuenabled)
-* [Interfaces](#interfaces)
-* [Type Aliases](#type-aliases)
+* [Antarmuka](#antarmuka)
+* [Ketik Alias](#tipe-alias)
 
 </docgen-index>
 
-# Methods
+# Metode
 
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
-## notifyAppReady()
+## beri tahuAppReady()
 
 ```typescript
 notifyAppReady() => Promise<AppReadyResult>
 ```
 
-Notify Capacitor Updater that the current bundle is working (a rollback will occur if this method is not called on every app launch)
-By default this method should be called in the first 10 sec after app launch, otherwise a rollback will occur.
-Change this behaviour with {@link appReadyTimeout}
+Beri tahu Capacitor Pembaru bahwa paket saat ini berfungsi (pengembalian akan terjadi jika metode ini tidak dipanggil pada setiap peluncuran aplikasi)
+Secara default, metode ini harus dipanggil dalam 10 detik pertama setelah peluncuran aplikasi, jika tidak, rollback akan terjadi.
+Ubah perilaku ini dengan {@link appReadyTimeout}
 
-**Returns:** <code>Promise&lt;<a href="#appreadyresult">AppReadyResult</a>&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#appreadyresult">AppReadyResult</a>></code>
 
 --------------------
 
@@ -200,13 +195,13 @@ Change this behaviour with {@link appReadyTimeout}
 setUpdateUrl(options: UpdateUrl) => Promise<void>
 ```
 
-Set the updateUrl for the app, this will be used to check for updates.
+Atur updateUrl untuk aplikasi, ini akan digunakan untuk memeriksa pembaruan.
 
-| Param         | Type                                            | Description                                       |
-| ------------- | ----------------------------------------------- | ------------------------------------------------- |
-| **`options`** | <code><a href="#updateurl">UpdateUrl</a></code> | contains the URL to use for checking for updates. |
+| Param | Ketik | Deskripsi |
+| ------------- | ----------------------------------------------- | ---------------------------------- |
+| **`options`** | <code><a href="#updateurl">PerbaruiUrl</a></code> | berisi URL yang digunakan untuk memeriksa pembaruan. |
 
-**Since:** 5.4.0
+**Sejak:** 5.4.0
 
 --------------------
 
@@ -217,13 +212,11 @@ Set the updateUrl for the app, this will be used to check for updates.
 setStatsUrl(options: StatsUrl) => Promise<void>
 ```
 
-Set the statsUrl for the app, this will be used to send statistics. Passing an empty string will disable statistics gathering.
-
-| Param         | Type                                          | Description                                     |
+Atur statsUrl untuk aplikasi, ini akan digunakan untuk mengirim statistik. Melewati string kosong akan menonaktifkan pengumpulan statistik.| Param | Ketik | Deskripsi |
 | ------------- | --------------------------------------------- | ----------------------------------------------- |
-| **`options`** | <code><a href="#statsurl">StatsUrl</a></code> | contains the URL to use for sending statistics. |
+| **`options`** | <code><a href="#statsurl">StatsUrl</a></code> | berisi URL yang digunakan untuk mengirim statistik. |
 
-**Since:** 5.4.0
+**Sejak:** 5.4.0
 
 --------------------
 
@@ -234,133 +227,129 @@ Set the statsUrl for the app, this will be used to send statistics. Passing an e
 setChannelUrl(options: ChannelUrl) => Promise<void>
 ```
 
-Set the channelUrl for the app, this will be used to set the channel.
+Atur channelUrl untuk aplikasi, ini akan digunakan untuk mengatur saluran.
 
-| Param         | Type                                              | Description                                      |
-| ------------- | ------------------------------------------------- | ------------------------------------------------ |
-| **`options`** | <code><a href="#channelurl">ChannelUrl</a></code> | contains the URL to use for setting the channel. |
+| Param | Ketik | Deskripsi |
+| ------------- | ---------------------------------- | ------------------------------------------------ |
+| **`options`** | <code><a href="#channelurl">SaluranUrl</a></code> | berisi URL yang akan digunakan untuk menyetel saluran. |
 
-**Since:** 5.4.0
+**Sejak:** 5.4.0
 
 --------------------
 
 
-## download(...)
+## unduh(...)
 
 ```typescript
 download(options: DownloadOptions) => Promise<BundleInfo>
 ```
 
-Download a new bundle from the provided URL, it should be a zip file, with files inside or with a unique id inside with all your files
+Unduh bundel baru dari URL yang disediakan, itu harus berupa file zip, dengan file di dalamnya atau dengan id unik di dalamnya dengan semua file Anda
 
-| Param         | Type                                                        | Description                                                                                  |
-| ------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#downloadoptions">DownloadOptions</a></code> | The {@link <a href="#downloadoptions">DownloadOptions</a>} for downloading a new bundle zip. |
+| Param | Ketik | Deskripsi |
+| ------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| **`options`** | <code><a href="#downloadoptions">UnduhOpsi</a></code> | {@link <a href="#downloadoptions">DownloadOptions</a>} untuk mendownload zip paket baru. |
 
-**Returns:** <code>Promise&lt;<a href="#bundleinfo">BundleInfo</a>&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#bundleinfo">BundleInfo</a>></code>
 
 --------------------
 
 
-## next(...)
+## selanjutnya(...)
 
 ```typescript
 next(options: BundleId) => Promise<BundleInfo>
 ```
 
-Set the next bundle to be used when the app is reloaded.
+Atur paket berikutnya untuk digunakan saat aplikasi dimuat ulang.
 
-| Param         | Type                                          | Description                                                                                                   |
-| ------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#bundleid">BundleId</a></code> | Contains the ID of the next Bundle to set on next app launch. {@link <a href="#bundleinfo">BundleInfo.id</a>} |
+| Param | Ketik | Deskripsi |
+| ------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| **`options`** | <code><a href="#bundleid">BundleId</a></code> | Berisi ID Bundel berikutnya yang akan ditetapkan pada peluncuran aplikasi berikutnya. {@link <a href="#bundleinfo">BundleInfo.id</a>} |
 
-**Returns:** <code>Promise&lt;<a href="#bundleinfo">BundleInfo</a>&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#bundleinfo">BundleInfo</a>></code>
 
 --------------------
 
 
-## set(...)
+## mengatur(...)
 
 ```typescript
 set(options: BundleId) => Promise<void>
 ```
 
-Set the current bundle and immediately reloads the app.
-
-| Param         | Type                                          | Description                                                                                       |
-| ------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#bundleid">BundleId</a></code> | A {@link <a href="#bundleid">BundleId</a>} object containing the new bundle id to set as current. |
+Atur paket saat ini dan segera muat ulang aplikasi.| Param | Ketik | Deskripsi |
+| ------------- | --------------------------------------------- | ---------------------------------------------------------------------------------- |
+| **`options`** | <code><a href="#bundleid">BundleId</a></code> | Objek {@link <a href="#bundleid">BundleId</a>} yang berisi id paket baru untuk ditetapkan sebagai yang terbaru. |
 
 --------------------
 
 
-## delete(...)
+## hapus(...)
 
 ```typescript
 delete(options: BundleId) => Promise<void>
 ```
 
-Deletes the specified bundle from the native app storage. Use with {@link list} to get the stored Bundle IDs.
+Menghapus paket tertentu dari penyimpanan aplikasi asli. Gunakan dengan {@link list} untuk mendapatkan ID Paket yang disimpan.
 
-| Param         | Type                                          | Description                                                                                                                                   |
-| ------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#bundleid">BundleId</a></code> | A {@link <a href="#bundleid">BundleId</a>} object containing the ID of a bundle to delete (note, this is the bundle id, NOT the version name) |
+| Param | Ketik | Deskripsi |
+| ------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| **`options`** | <code><a href="#bundleid">BundleId</a></code> | Objek {@link <a href="#bundleid">BundleId</a>} berisi ID paket yang akan dihapus (perhatikan, ini adalah id paket, BUKAN nama versi) |
 
 --------------------
 
 
-## list(...)
+## daftar(...)
 
 ```typescript
 list(options?: ListOptions | undefined) => Promise<BundleListResult>
 ```
 
-Get all locally downloaded bundles in your app
+Dapatkan semua bundel yang diunduh secara lokal di aplikasi Anda
 
-| Param         | Type                                                | Description                                                            |
+| Param | Ketik | Deskripsi |
 | ------------- | --------------------------------------------------- | ---------------------------------------------------------------------- |
-| **`options`** | <code><a href="#listoptions">ListOptions</a></code> | The {@link <a href="#listoptions">ListOptions</a>} for listing bundles |
+| **`options`** | <code><a href="#listoptions">Opsi Daftar</a></code> | {@link <a href="#listoptions">ListOptions</a>} untuk mencantumkan paket |
 
-**Returns:** <code>Promise&lt;<a href="#bundlelistresult">BundleListResult</a>&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#bundlelistresult">BundleListResult</a>></code>
 
 --------------------
 
 
-## reset(...)
+## setel ulang(...)
 
 ```typescript
 reset(options?: ResetOptions | undefined) => Promise<void>
 ```
 
-Reset the app to the `builtin` bundle (the one sent to Apple App Store / Google Play Store ) or the last successfully loaded bundle.
+Setel ulang aplikasi ke paket `builtin` (yang dikirim ke Apple App Store / Google Play Store ) atau paket terakhir yang berhasil dimuat.
 
-| Param         | Type                                                  | Description                                                                                                                                                                      |
-| ------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#resetoptions">ResetOptions</a></code> | Containing {@link <a href="#resetoptions">ResetOptions.toLastSuccessful</a>}, `true` resets to the builtin bundle and `false` will reset to the last successfully loaded bundle. |
+| Param | Ketik | Deskripsi |
+| ------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`options`** | <code><a href="#resetoptions">ResetOptions</a></code> | Berisi {@link <a href="#resetoptions">ResetOptions.toLastSuccessful</a>}, `true` disetel ulang ke paket bawaan dan `false` akan disetel ulang ke paket terakhir yang berhasil dimuat. |
 
 --------------------
 
 
-## current()
+## saat ini()
 
 ```typescript
 current() => Promise<CurrentBundleResult>
-```
+```Dapatkan bundel saat ini, jika tidak ada yang disetel, ia akan mengembalikan `builtin`. currentNative adalah bundel asli yang diinstal pada perangkat
 
-Get the current bundle, if none are set it returns `builtin`. currentNative is the original bundle installed on the device
-
-**Returns:** <code>Promise&lt;<a href="#currentbundleresult">CurrentBundleResult</a>&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#currentbundleresult">CurrentBundleResult</a>></code>
 
 --------------------
 
 
-## reload()
+## muat ulang()
 
 ```typescript
 reload() => Promise<void>
 ```
 
-Reload the view
+Muat ulang tampilan
 
 --------------------
 
@@ -371,121 +360,129 @@ Reload the view
 setMultiDelay(options: MultiDelayConditions) => Promise<void>
 ```
 
-Sets a {@link <a href="#delaycondition">DelayCondition</a>} array containing conditions that the Plugin will use to delay the update.
-After all conditions are met, the update process will run start again as usual, so update will be installed after a backgrounding or killing the app.
-For the `date` kind, the value should be an iso8601 date string.
-For the `background` kind, the value should be a number in milliseconds.
-For the `nativeVersion` kind, the value should be the version number.
-For the `kill` kind, the value is not used.
-The function has inconsistent behavior the option kill do trigger the update after the first kill and not after the next background like other options. This will be fixed in a future major release.
+Menyetel array {@link <a href="#delaycondition">DelayCondition</a>} yang berisi ketentuan yang akan digunakan Plugin untuk menunda pembaruan.
+Setelah semua kondisi terpenuhi, proses update akan berjalan kembali seperti biasa, sehingga update akan diinstal setelah aplikasi di-background atau dimatikan.
+Untuk jenis `date`, nilainya harus berupa string tanggal iso8601.
+Untuk jenis `background`, nilainya harus berupa angka dalam milidetik.
+Untuk jenis `nativeVersion`, nilainya harus berupa nomor versi.
+Untuk jenis `kill`, nilainya tidak digunakan.
+Fungsi ini memiliki perilaku yang tidak konsisten, opsi kill memicu pembaruan setelah kill pertama dan bukan setelah latar belakang berikutnya seperti opsi lainnya. Ini akan diperbaiki dalam rilis besar mendatang.
 
-| Param         | Type                                                                  | Description                                                                                                |
-| ------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#multidelayconditions">MultiDelayConditions</a></code> | Containing the {@link <a href="#multidelayconditions">MultiDelayConditions</a>} array of conditions to set |
+| Param | Ketik | Deskripsi |
+| ------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| **`options`** | <code><a href="#multidelayconditions">Kondisi MultiDelay</a></code> | Berisi rangkaian kondisi {@link <a href="#multidelayconditions">MultiDelayConditions</a>} yang akan disetel |
 
-**Since:** 4.3.0
+**Sejak:** 4.3.0
 
 --------------------
 
 
-## cancelDelay()
+## batalkan Penundaan()
 
 ```typescript
 cancelDelay() => Promise<void>
 ```
 
-Cancels a {@link <a href="#delaycondition">DelayCondition</a>} to process an update immediately.
+Membatalkan {@link <a href="#delaycondition">DelayCondition</a>} untuk segera memproses pembaruan.
 
-**Since:** 4.0.0
+**Sejak:** 4.0.0
 
 --------------------
 
 
-## getLatest(...)
+## dapatkanTerbaru(...)
 
 ```typescript
 getLatest(options?: GetLatestOptions | undefined) => Promise<LatestVersion>
 ```
 
-Get Latest bundle available from update Url
+Dapatkan bundel terbaru yang tersedia dari URL pembaruan
 
-| Param         | Type                                                          |
-| ------------- | ------------------------------------------------------------- |
-| **`options`** | <code><a href="#getlatestoptions">GetLatestOptions</a></code> |
+| Param | Ketik |
+| ------------- | ---------------------------------------------- |
+| **`options`** | <code><a href="#getlatestoptions">DapatkanOpsi Terbaru</a></code> |
 
-**Returns:** <code>Promise&lt;<a href="#latestversion">LatestVersion</a>&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#latestversion">Versi Terbaru</a>></code>
 
-**Since:** 4.0.0
+**Sejak:** 4.0.0
 
 --------------------
 
 
-## setChannel(...)
+## setSaluran(...)
 
 ```typescript
 setChannel(options: SetChannelOptions) => Promise<ChannelRes>
 ```
 
-Sets the channel for this device. The channel has to allow for self assignment for this to work.
-Do not use this method to set the channel at boot.
-This method is to set the channel after the app is ready, and user interacted.
-If you want to set the channel at boot, use the {@link PluginsConfig} to set the default channel.
-This methods send to Capgo backend a request to link the device ID to the channel. Capgo can accept or refuse depending of the setting of your channel.
+Menyetel saluran untuk perangkat ini. Saluran harus mengaktifkan `allow_device_self_set` agar dapat berfungsi.**Catatan penting:**
+- Jangan gunakan metode ini untuk mengatur saluran saat boot. Gunakan `defaultChannel` di konfigurasi Capacitor Anda.
+- Metode ini dimaksudkan untuk digunakan setelah aplikasi siap dan pengguna berinteraksi (misalnya, ikut serta dalam program beta).
+- **Saluran publik tidak dapat ditetapkan sendiri.** Jika saluran ditandai sebagai `public`, memanggil `setChannel()` akan menghasilkan kesalahan. Untuk menggunakan saluran publik, hubungi `unsetChannel()` - perangkat akan otomatis kembali ke saluran publik yang cocok.
+- Gunakan `listChannels()` untuk mengetahui saluran mana yang tersedia dan apakah saluran tersebut mengizinkan penetapan mandiri.
 
-| Param         | Type                                                            | Description                                                                      |
-| ------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#setchanneloptions">SetChannelOptions</a></code> | Is the {@link <a href="#setchanneloptions">SetChannelOptions</a>} channel to set |
+| Param | Ketik | Deskripsi |
+| ------------- | ------------------------------------------------ | -------------------------------------------------------------------------------- |
+| **`options`** | <code><a href="#setchanneloptions">Set ChannelOptions</a></code> | Apakah saluran {@link <a href="#setchanneloptions">SetChannelOptions</a>} disetel |
 
-**Returns:** <code>Promise&lt;<a href="#channelres">ChannelRes</a>&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#channelres">ChannelRes</a>></code>
 
-**Since:** 4.7.0
+**Sejak:** 4.7.0
 
 --------------------
 
 
-## unsetChannel(...)
+## tidak disetelSaluran(...)
 
 ```typescript
 unsetChannel(options: UnsetChannelOptions) => Promise<void>
 ```
 
-Unset the channel for this device. The device will then return to the default channel
+Batalkan setelan penggantian saluran untuk perangkat ini. Setelah memanggil metode ini, perangkat akan otomatis menerima pembaruan dari **saluran publik** yang sesuai dengan kondisinya (platform, jenis perangkat, jenis build).
 
-| Param         | Type                                                                |
+Ini berguna ketika:
+- Anda ingin memindahkan perangkat kembali ke jalur pembaruan default
+- Anda ingin menggunakan saluran publik (karena saluran publik tidak dapat ditetapkan sendiri melalui `setChannel()`)
+
+| Param | Ketik |
 | ------------- | ------------------------------------------------------------------- |
-| **`options`** | <code><a href="#unsetchanneloptions">UnsetChannelOptions</a></code> |
+| **`options`** | <code><a href="#unsetchanneloptions">Batalkan Opsi Saluran</a></code> |
 
-**Since:** 4.7.0
+**Sejak:** 4.7.0
 
 --------------------
 
 
-## getChannel()
+## dapatkanSaluran()
 
 ```typescript
 getChannel() => Promise<GetChannelRes>
 ```
 
-Get the channel for this device
+Dapatkan saluran untuk perangkat ini
 
-**Returns:** <code>Promise&lt;<a href="#getchannelres">GetChannelRes</a>&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#getchannelres">GetChannelRes</a>></code>
 
-**Since:** 4.8.0
+**Sejak:** 4.8.0
 
 --------------------
 
 
-## listChannels()
+## daftarSaluran()
 
 ```typescript
 listChannels() => Promise<ListChannelsResult>
 ```
 
-List all channels available for this device that allow self-assignment
+Daftar semua saluran yang tersedia untuk perangkat ini. Mengembalikan saluran yang kompatibel dengan lingkungan perangkat saat ini (platform, emulator/perangkat nyata, build dev/prod) dan bersifat publik atau mengizinkan penetapan mandiri.
 
-**Returns:** <code>Promise&lt;<a href="#listchannelsresult">ListChannelsResult</a>&gt;</code>
+Setiap saluran dalam hasilnya meliputi:
+- `public`: Jika `true`, ini adalah **saluran default**. Anda tidak dapat menetapkannya sendiri menggunakan `setChannel()`. Sebaliknya, jika Anda menghapus penetapan saluran menggunakan `unsetChannel()`, perangkat akan otomatis menerima pembaruan dari saluran publik ini.
+- `allow_self_set`: Jika `true`, ini adalah **saluran yang dapat ditetapkan sendiri**. Anda dapat secara eksplisit menetapkan perangkat ke saluran ini menggunakan `setChannel()`.
 
-**Since:** 7.5.0
+**Pengembalian:** <code>Janji<<a href="#listchannelsresult">ListChannelsResult</a>></code>
+
+**Sejak:** 7.5.0
 
 --------------------
 
@@ -494,15 +491,13 @@ List all channels available for this device that allow self-assignment
 
 ```typescript
 setCustomId(options: SetCustomIdOptions) => Promise<void>
-```
+```Tetapkan ID khusus untuk perangkat ini
 
-Set a custom ID for this device
+| Param | Ketik | Deskripsi |
+| ------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **`options`** | <code><a href="#setcustomidoptions">SetCustomIdOptions</a></code> | apakah {@link <a href="#setcustomidoptions">SetCustomIdOptions</a>} customId akan disetel |
 
-| Param         | Type                                                              | Description                                                                         |
-| ------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| **`options`** | <code><a href="#setcustomidoptions">SetCustomIdOptions</a></code> | is the {@link <a href="#setcustomidoptions">SetCustomIdOptions</a>} customId to set |
-
-**Since:** 4.9.0
+**Sejak:** 4.9.0
 
 --------------------
 
@@ -513,37 +508,37 @@ Set a custom ID for this device
 getBuiltinVersion() => Promise<BuiltinVersion>
 ```
 
-Get the native app version or the builtin version if set in config
+Dapatkan versi aplikasi asli atau versi bawaan jika disetel di konfigurasi
 
-**Returns:** <code>Promise&lt;<a href="#builtinversion">BuiltinVersion</a>&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#builtinversion">BuiltinVersion</a>></code>
 
-**Since:** 5.2.0
+**Sejak:** 5.2.0
 
 --------------------
 
 
-## getDeviceId()
+## dapatkanIdPerangkat()
 
 ```typescript
 getDeviceId() => Promise<DeviceId>
 ```
 
-Get unique ID used to identify device (sent to auto update server)
+Dapatkan ID unik yang digunakan untuk mengidentifikasi perangkat (dikirim ke server pembaruan otomatis)
 
-**Returns:** <code>Promise&lt;<a href="#deviceid">DeviceId</a>&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#deviceid">DeviceId</a>></code>
 
 --------------------
 
 
-## getPluginVersion()
+## dapatkanVersi Plugin()
 
 ```typescript
 getPluginVersion() => Promise<PluginVersion>
 ```
 
-Get the native Capacitor Updater plugin version (sent to auto update server)
+Dapatkan versi plugin Updater Capacitor asli (dikirim ke server pembaruan otomatis)
 
-**Returns:** <code>Promise&lt;<a href="#pluginversion">PluginVersion</a>&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#pluginversion">Versi Plugin</a>></code>
 
 --------------------
 
@@ -554,203 +549,199 @@ Get the native Capacitor Updater plugin version (sent to auto update server)
 isAutoUpdateEnabled() => Promise<AutoUpdateEnabled>
 ```
 
-Get the state of auto update config.
+Dapatkan status konfigurasi pembaruan otomatis.
 
-**Returns:** <code>Promise&lt;<a href="#autoupdateenabled">AutoUpdateEnabled</a>&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#autoupdateenabled">AutoUpdateEnabled</a>></code>
 
 --------------------
 
 
-## removeAllListeners()
+## hapusSemua Pendengar()
 
 ```typescript
 removeAllListeners() => Promise<void>
 ```
 
-Remove all listeners for this plugin.
+Hapus semua pendengar untuk plugin ini.
 
-**Since:** 1.0.0
+**Sejak:** 1.0.0
 
 --------------------
 
 
-## addListener('download', ...)
+## addListener('unduh', ...)
 
 ```typescript
 addListener(eventName: 'download', listenerFunc: (state: DownloadEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for bundle download event in the App. Fires once a download has started, during downloading and when finished.
-This will return you all download percent during the download
+Dengarkan acara pengunduhan bundel di Aplikasi. Diaktifkan setelah pengunduhan dimulai, selama pengunduhan, dan setelah selesai.
+Ini akan mengembalikan Anda semua persentase unduhan selama pengunduhan
 
-| Param              | Type                                                                        |
-| ------------------ | --------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'download'</code>                                                     |
-| **`listenerFunc`** | <code>(state: <a href="#downloadevent">DownloadEvent</a>) =&gt; void</code> |
+| Param | Ketik |
+| ---- | ------------------------------------------------------------- |
+| **`eventName`** | <code>'unduh'</code> |
+| **`listenerFunc`** | <code>(negara bagian: <a href="#downloadevent">DownloadEvent</a>) => void</code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#pluginlistenerhandle">PluginListenerHandle</a>></code>
 
-**Since:** 2.0.11
+**Sejak:** 2.0.11
 
 --------------------
 
 
-## addListener('noNeedUpdate', ...)
+## addListener('tidak Perlu Pembaruan', ...)
 
 ```typescript
 addListener(eventName: 'noNeedUpdate', listenerFunc: (state: NoNeedEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for no need to update event, useful when you want force check every time the app is launched
+Dengarkan tanpa perlu memperbarui acara, berguna saat Anda ingin memeriksa paksa setiap kali aplikasi diluncurkan
 
-| Param              | Type                                                                    |
-| ------------------ | ----------------------------------------------------------------------- |
-| **`eventName`**    | <code>'noNeedUpdate'</code>                                             |
-| **`listenerFunc`** | <code>(state: <a href="#noneedevent">NoNeedEvent</a>) =&gt; void</code> |
+| Param | Ketik |
+| ---- | ----------------------------------------------------------------------- |
+| **`eventName`** | <code>'tidak Perlu Pembaruan'</code> |
+| **`listenerFunc`** | <code>(negara bagian: <a href="#noneedevent">NoNeedEvent</a>) => void</code> |**Pengembalian:** <code>Janji<<a href="#pluginlistenerhandle">PluginListenerHandle</a>></code>
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
-
-**Since:** 4.0.0
+**Sejak:** 4.0.0
 
 --------------------
 
 
-## addListener('updateAvailable', ...)
+## addListener('updateTersedia', ...)
 
 ```typescript
 addListener(eventName: 'updateAvailable', listenerFunc: (state: UpdateAvailableEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for available update event, useful when you want to force check every time the app is launched
+Dengarkan acara pembaruan yang tersedia, berguna ketika Anda ingin memaksa pemeriksaan setiap kali aplikasi diluncurkan
 
-| Param              | Type                                                                                      |
-| ------------------ | ----------------------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'updateAvailable'</code>                                                            |
-| **`listenerFunc`** | <code>(state: <a href="#updateavailableevent">UpdateAvailableEvent</a>) =&gt; void</code> |
+| Param | Ketik |
+| ---- | ------------------------------------------------------------------------------------------ |
+| **`eventName`** | <code>'pembaruanTersedia'</code> |
+| **`listenerFunc`** | <code>(negara bagian: <a href="#updateavailableevent">UpdateAvailableEvent</a>) => void</code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#pluginlistenerhandle">PluginListenerHandle</a>></code>
 
-**Since:** 4.0.0
+**Sejak:** 4.0.0
 
 --------------------
 
 
-## addListener('downloadComplete', ...)
+## addListener('unduhSelesai', ...)
 
 ```typescript
 addListener(eventName: 'downloadComplete', listenerFunc: (state: DownloadCompleteEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for downloadComplete events.
+Dengarkan untuk mengunduh acara Lengkap.
 
-| Param              | Type                                                                                        |
-| ------------------ | ------------------------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'downloadComplete'</code>                                                             |
-| **`listenerFunc`** | <code>(state: <a href="#downloadcompleteevent">DownloadCompleteEvent</a>) =&gt; void</code> |
+| Param | Ketik |
+| ---- | ------------------------------------------------------------------------------------------- |
+| **`eventName`** | <code>'unduhSelesai'</code> |
+| **`listenerFunc`** | <code>(negara bagian: <a href="#downloadcompleteevent">DownloadCompleteEvent</a>) => void</code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#pluginlistenerhandle">PluginListenerHandle</a>></code>
 
-**Since:** 4.0.0
+**Sejak:** 4.0.0
 
 --------------------
 
 
-## addListener('majorAvailable', ...)
+## addListener('MajorAvailable', ...)
 
 ```typescript
 addListener(eventName: 'majorAvailable', listenerFunc: (state: MajorAvailableEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for Major update event in the App, let you know when major update is blocked by setting disableAutoUpdateBreaking
+Dengarkan acara pembaruan besar di Aplikasi, beri tahu Anda ketika pembaruan besar diblokir dengan mengatur nonaktifkanAutoUpdateBreaking
 
-| Param              | Type                                                                                    |
-| ------------------ | --------------------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'majorAvailable'</code>                                                           |
-| **`listenerFunc`** | <code>(state: <a href="#majoravailableevent">MajorAvailableEvent</a>) =&gt; void</code> |
+| Param | Ketik |
+| ---- | ---------------------------------------------------------------------------------------- |
+| **`eventName`** | <code>'majorAvailable'</code> |
+| **`listenerFunc`** | <code>(negara bagian: <a href="#majoravailableevent">MajorAvailableEvent</a>) => void</code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#pluginlistenerhandle">PluginListenerHandle</a>></code>
 
-**Since:** 2.3.0
+**Sejak:** 2.3.0
 
 --------------------
 
 
-## addListener('updateFailed', ...)
+## addListener('updateGagal', ...)
 
 ```typescript
 addListener(eventName: 'updateFailed', listenerFunc: (state: UpdateFailedEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for update fail event in the App, let you know when update has fail to install at next app start
+Dengarkan peristiwa kegagalan pembaruan di Aplikasi, beri tahu Anda ketika pembaruan gagal dipasang pada permulaan aplikasi berikutnya
 
-| Param              | Type                                                                                |
-| ------------------ | ----------------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'updateFailed'</code>                                                         |
-| **`listenerFunc`** | <code>(state: <a href="#updatefailedevent">UpdateFailedEvent</a>) =&gt; void</code> |
+| Param | Ketik |
+| ---- | ----------------------------------------------------------------------------------- |
+| **`eventName`** | <code>'pembaruanGagal'</code> |
+| **`listenerFunc`** | <code>(negara bagian: <a href="#updatefailedevent">UpdateFailedEvent</a>) => void</code> |**Pengembalian:** <code>Janji<<a href="#pluginlistenerhandle">PluginListenerHandle</a>></code>
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
-
-**Since:** 2.3.0
+**Sejak:** 2.3.0
 
 --------------------
 
 
-## addListener('downloadFailed', ...)
+## addListener('unduhGagal', ...)
 
 ```typescript
 addListener(eventName: 'downloadFailed', listenerFunc: (state: DownloadFailedEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for download fail event in the App, let you know when a bundle download has failed
+Dengarkan peristiwa kegagalan pengunduhan di Aplikasi, beri tahu Anda ketika pengunduhan bundel gagal
 
-| Param              | Type                                                                                    |
-| ------------------ | --------------------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'downloadFailed'</code>                                                           |
-| **`listenerFunc`** | <code>(state: <a href="#downloadfailedevent">DownloadFailedEvent</a>) =&gt; void</code> |
+| Param | Ketik |
+| ---- | ---------------------------------------------------------------------------------------- |
+| **`eventName`** | <code>'unduhGagal'</code> |
+| **`listenerFunc`** | <code>(negara bagian: <a href="#downloadfailedevent">DownloadFailedEvent</a>) => void</code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#pluginlistenerhandle">PluginListenerHandle</a>></code>
 
-**Since:** 4.0.0
+**Sejak:** 4.0.0
 
 --------------------
 
 
-## addListener('appReloaded', ...)
+## addListener('aplikasiDimuat Ulang', ...)
 
 ```typescript
 addListener(eventName: 'appReloaded', listenerFunc: () => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for reload event in the App, let you know when reload has happened
+Dengarkan acara muat ulang di Aplikasi, beri tahu Anda saat memuat ulang telah terjadi
 
-| Param              | Type                       |
-| ------------------ | -------------------------- |
-| **`eventName`**    | <code>'appReloaded'</code> |
-| **`listenerFunc`** | <code>() =&gt; void</code> |
+| Param | Ketik |
+| ---- | -------------------------- |
+| **`eventName`** | <code>'aplikasi Dimuat Ulang'</code> |
+| **`listenerFunc`** | <code>() => batal</code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#pluginlistenerhandle">PluginListenerHandle</a>></code>
 
-**Since:** 4.3.0
+**Sejak:** 4.3.0
 
 --------------------
 
 
-## addListener('appReady', ...)
+## addListener('aplikasiSiap', ...)
 
 ```typescript
 addListener(eventName: 'appReady', listenerFunc: (state: AppReadyEvent) => void) => Promise<PluginListenerHandle>
 ```
 
-Listen for app ready event in the App, let you know when app is ready to use
+Dengarkan acara aplikasi siap di Aplikasi, beri tahu Anda saat aplikasi siap digunakan
 
-| Param              | Type                                                                        |
-| ------------------ | --------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'appReady'</code>                                                     |
-| **`listenerFunc`** | <code>(state: <a href="#appreadyevent">AppReadyEvent</a>) =&gt; void</code> |
+| Param | Ketik |
+| ---- | ------------------------------------------------------------- |
+| **`eventName`** | <code>'aplikasiSiap'</code> |
+| **`listenerFunc`** | <code>(negara bagian: <a href="#appreadyevent">AppReadyEvent</a>) => void</code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#pluginlistenerhandle">PluginListenerHandle</a>></code>
 
-**Since:** 5.1.0
+**Sejak:** 5.1.0
 
 --------------------
 
@@ -761,25 +752,25 @@ Listen for app ready event in the App, let you know when app is ready to use
 isAutoUpdateAvailable() => Promise<AutoUpdateAvailable>
 ```
 
-Get if auto update is available (not disabled by serverUrl).
+Dapatkan jika pembaruan otomatis tersedia (tidak dinonaktifkan oleh serverUrl).
 
-**Returns:** <code>Promise&lt;<a href="#autoupdateavailable">AutoUpdateAvailable</a>&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#autoupdateavailable">Pembaruan OtomatisTersedia</a>></code>
 
 --------------------
 
 
-## getNextBundle()
+## dapatkanBundleBerikutnya()
 
 ```typescript
 getNextBundle() => Promise<BundleInfo | null>
 ```
 
-Get the next bundle that will be used when the app reloads.
-Returns null if no next bundle is set.
+Dapatkan bundel berikutnya yang akan digunakan saat aplikasi dimuat ulang.
+Mengembalikan null jika tidak ada bundel berikutnya yang disetel.
 
-**Returns:** <code>Promise&lt;<a href="#bundleinfo">BundleInfo</a> | null&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#bundleinfo">BundleInfo</a> | batal></code>
 
-**Since:** 6.8.0
+**Sejak:** 6.8.0
 
 --------------------
 
@@ -790,13 +781,11 @@ Returns null if no next bundle is set.
 setShakeMenu(options: SetShakeMenuOptions) => Promise<void>
 ```
 
-Enable or disable the shake menu for debugging/testing purposes
-
-| Param         | Type                                                                | Description                                              |
+Mengaktifkan atau menonaktifkan menu goyang untuk tujuan debugging/pengujian| Param | Ketik | Deskripsi |
 | ------------- | ------------------------------------------------------------------- | -------------------------------------------------------- |
-| **`options`** | <code><a href="#setshakemenuoptions">SetShakeMenuOptions</a></code> | Contains enabled boolean to enable or disable shake menu |
+| **`options`** | <code><a href="#setshakemenuoptions">SetShakeMenuOptions</a></code> | Berisi boolean yang diaktifkan untuk mengaktifkan atau menonaktifkan menu goyang |
 
-**Since:** 7.5.0
+**Sejak:** 7.5.0
 
 --------------------
 
@@ -807,341 +796,281 @@ Enable or disable the shake menu for debugging/testing purposes
 isShakeMenuEnabled() => Promise<ShakeMenuEnabled>
 ```
 
-Get the current state of the shake menu
+Dapatkan status menu goyang saat ini
 
-**Returns:** <code>Promise&lt;<a href="#shakemenuenabled">ShakeMenuEnabled</a>&gt;</code>
+**Pengembalian:** <code>Janji<<a href="#shakemenuenabled">ShakeMenuEnabled</a>></code>
 
-**Since:** 7.5.0
+**Sejak:** 7.5.0
 
 --------------------
 
 
-## Interfaces
+## Antarmuka
 
 
-### AppReadyResult
+### Hasil AppReady
 
-| Prop         | Type                                              |
-| ------------ | ------------------------------------------------- |
-| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> |
-
-
-### BundleInfo
-
-| Prop             | Type                                                  |
-| ---------------- | ----------------------------------------------------- |
-| **`id`**         | <code>string</code>                                   |
-| **`version`**    | <code>string</code>                                   |
-| **`downloaded`** | <code>string</code>                                   |
-| **`checksum`**   | <code>string</code>                                   |
-| **`status`**     | <code><a href="#bundlestatus">BundleStatus</a></code> |
+| Prop | Ketik |
+| ------------ | ---------------------------------- |
+| **`bundle`** | <code><a href="#bundleinfo">Info Paket</a></code> |
 
 
-### UpdateUrl
+### Info Paket
 
-| Prop      | Type                |
+| Prop | Ketik |
+| ---------------- | -------------------------------------- |
+| **`id`** | <code>string</code> |
+| **`version`** | <code>string</code> |
+| **`downloaded`** | <code>string</code> |
+| **`checksum`** | <code>string</code> |
+| **`status`** | <code><a href="#bundlestatus">Status Paket</a></code> |
+
+
+### PerbaruiUrl
+
+| Prop | Ketik |
 | --------- | ------------------- |
 | **`url`** | <code>string</code> |
 
 
-### StatsUrl
+### StatistikUrl
 
-| Prop      | Type                |
+| Prop | Ketik |
 | --------- | ------------------- |
 | **`url`** | <code>string</code> |
 
 
-### ChannelUrl
+### SaluranUrl
 
-| Prop      | Type                |
+| Prop | Ketik |
 | --------- | ------------------- |
 | **`url`** | <code>string</code> |
 
 
-### DownloadOptions
+### Opsi Unduhan
 
-This URL and versions are used to download the bundle from the server, If you use backend all information will be given by the method getLatest.
-If you don't use backend, you need to provide the URL and version of the bundle. Checksum and sessionKey are required if you encrypted the bundle with the CLI command encrypt, you should receive them as result of the command.
-
-| Prop             | Type                         | Description                                                                                                                                                      | Default                | Since |
+URL dan versi ini digunakan untuk mengunduh bundel dari server, Jika Anda menggunakan backend semua informasi akan diberikan melalui metode getLatest.
+Jika Anda tidak menggunakan backend, Anda perlu memberikan URL dan versi paket. Checksum dan sessionKey diperlukan jika Anda mengenkripsi bundel dengan perintah CLI mengenkripsi, Anda akan menerimanya sebagai hasil dari perintah tersebut.| Prop | Ketik | Deskripsi | Bawaan | Sejak |
 | ---------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----- |
-| **`url`**        | <code>string</code>          | The URL of the bundle zip file (e.g: dist.zip) to be downloaded. (This can be any URL. E.g: Amazon S3, a GitHub tag, any other place you've hosted your bundle.) |                        |       |
-| **`version`**    | <code>string</code>          | The version code/name of this bundle/version                                                                                                                     |                        |       |
-| **`sessionKey`** | <code>string</code>          | The session key for the update, when the bundle is encrypted with a session key                                                                                  | <code>undefined</code> | 4.0.0 |
-| **`checksum`**   | <code>string</code>          | The checksum for the update, it should be in sha256 and encrypted with private key if the bundle is encrypted                                                    | <code>undefined</code> | 4.0.0 |
-| **`manifest`**   | <code>ManifestEntry[]</code> | The manifest for multi-file downloads                                                                                                                            | <code>undefined</code> | 6.1.0 |
+| **`url`** | <code>string</code> | URL file zip bundel (misalnya: dist.zip) yang akan diunduh. (Ini bisa berupa URL apa pun. Misalnya: Amazon S3, tag GitHub, tempat lain tempat Anda menghosting paket Anda.) |                        |       |
+| **`version`** | <code>string</code> | Kode versi/nama bundel/versi ini |                        |       |
+| **`sessionKey`** | <code>string</code> | Kunci sesi untuk pembaruan, ketika bundel dienkripsi dengan kunci sesi | <code>tidak terdefinisi</code> | 4.0.0 |
+| **`checksum`** | <code>string</code> | Checksum untuk pembaruan, harus dalam sha256 dan dienkripsi dengan kunci pribadi jika bundel dienkripsi | <code>tidak terdefinisi</code> | 4.0.0 |
+| **`manifest`** | <code>ManifestEntry[]</code> | Manifes untuk unduhan multi-file Delta (manifest) | <code>tidak terdefinisi</code> | 6.1.0 |
 
 
-### ManifestEntry
+### Entri Manifes
 
-| Prop               | Type                        |
-| ------------------ | --------------------------- |
-| **`file_name`**    | <code>string \| null</code> |
-| **`file_hash`**    | <code>string \| null</code> |
+| Prop | Ketik |
+| ---- | --------------------------- |
+| **`file_name`** | <code>string \| null</code> |
+| **`file_hash`** | <code>string \| null</code> |
 | **`download_url`** | <code>string \| null</code> |
 
 
-### BundleId
+### BundelId
 
-| Prop     | Type                |
+| Prop | Ketik |
 | -------- | ------------------- |
 | **`id`** | <code>string</code> |
 
 
-### BundleListResult
+### Hasil Daftar Bundel
 
-| Prop          | Type                      |
+| Prop | Ketik |
 | ------------- | ------------------------- |
-| **`bundles`** | <code>BundleInfo[]</code> |
+| **`bundles`** | <code>Info Paket[]</code> |
 
 
-### ListOptions
-
-| Prop      | Type                 | Description                                                                                                                                   | Default            | Since  |
-| --------- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | ------ |
-| **`raw`** | <code>boolean</code> | Whether to return the raw bundle list or the manifest. If true, the list will attempt to read the internal database instead of files on disk. | <code>false</code> | 6.14.0 |
+### Opsi Daftar| Prop | Ketik | Deskripsi | Bawaan | Sejak |
+| --------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ---- | ------ |
+| **`raw`** | <code>boolean</code> | Apakah akan mengembalikan daftar paket mentah atau manifes. Jika benar, daftar tersebut akan mencoba membaca database internal, bukan file di disk. | <code>false</code> | 6.14.0 |
 
 
-### ResetOptions
+### Opsi Reset
 
-| Prop                   | Type                 |
+| Prop | Ketik |
 | ---------------------- | -------------------- |
 | **`toLastSuccessful`** | <code>boolean</code> |
 
 
-### CurrentBundleResult
+### Hasil Bundel Saat Ini
 
-| Prop         | Type                                              |
-| ------------ | ------------------------------------------------- |
-| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> |
-| **`native`** | <code>string</code>                               |
+| Prop | Ketik |
+| ------------ | ---------------------------------- |
+| **`bundle`** | <code><a href="#bundleinfo">Info Paket</a></code> |
+| **`native`** | <code>string</code> |
 
 
-### MultiDelayConditions
+### Kondisi MultiDelay
 
-| Prop                  | Type                          |
+| Prop | Ketik |
 | --------------------- | ----------------------------- |
-| **`delayConditions`** | <code>DelayCondition[]</code> |
+| **`delayConditions`** | <code>Kondisi Penundaan[]</code> |
 
 
-### DelayCondition
+### Kondisi Penundaan
 
-| Prop        | Type                                                      | Description                              |
+| Prop | Ketik | Deskripsi |
 | ----------- | --------------------------------------------------------- | ---------------------------------------- |
-| **`kind`**  | <code><a href="#delayuntilnext">DelayUntilNext</a></code> | Set up delay conditions in setMultiDelay |
-| **`value`** | <code>string</code>                                       |                                          |
+| **`kind`** | <code><a href="#delayuntilnext">Tunda Hingga Berikutnya</a></code> | Atur kondisi penundaan di setMultiDelay |
+| **`value`** | <code>string</code> |                                          |
 
 
-### LatestVersion
-
-| Prop             | Type                         | Description                | Since |
+### Versi Terbaru| Prop | Ketik | Deskripsi | Sejak |
 | ---------------- | ---------------------------- | -------------------------- | ----- |
-| **`version`**    | <code>string</code>          | Result of getLatest method | 4.0.0 |
-| **`checksum`**   | <code>string</code>          |                            | 6     |
-| **`major`**      | <code>boolean</code>         |                            |       |
-| **`message`**    | <code>string</code>          |                            |       |
-| **`sessionKey`** | <code>string</code>          |                            |       |
-| **`error`**      | <code>string</code>          |                            |       |
-| **`old`**        | <code>string</code>          |                            |       |
-| **`url`**        | <code>string</code>          |                            |       |
-| **`manifest`**   | <code>ManifestEntry[]</code> |                            | 6.1   |
+| **`version`** | <code>string</code> | Hasil dari metode getLatest | 4.0.0 |
+| **`checksum`** | <code>string</code> |                            | 6 |
+| **`major`** | <code>boolean</code> |                            |       |
+| **`message`** | <code>string</code> |                            |       |
+| **`sessionKey`** | <code>string</code> |                            |       |
+| **`error`** | <code>string</code> |                            |       |
+| **`old`** | <code>string</code> |                            |       |
+| **`url`** | <code>string</code> |                            |       |
+| **`manifest`** | <code>ManifestEntri[]</code> |                            | 6.1 |
 
 
-### GetLatestOptions
+### Dapatkan Opsi Terbaru
 
-| Prop          | Type                | Description                                                                                     | Default                | Since |
-| ------------- | ------------------- | ----------------------------------------------------------------------------------------------- | ---------------------- | ----- |
-| **`channel`** | <code>string</code> | The channel to get the latest version for The channel must allow 'self_assign' for this to work | <code>undefined</code> | 6.8.0 |
+| Prop | Ketik | Deskripsi | Bawaan | Sejak |
+| ------------- | ------------------- | --------------------------------------------------------------------------------- | ---------------------- | ----- |
+| **`channel`** | <code>string</code> | Saluran untuk mendapatkan versi terbaru Saluran harus mengizinkan 'self_assign' agar ini berfungsi | <code>tidak terdefinisi</code> | 6.8.0 |
 
 
-### ChannelRes
+### Res Saluran
 
-| Prop          | Type                | Description                   | Since |
+| Prop | Ketik | Deskripsi | Sejak |
 | ------------- | ------------------- | ----------------------------- | ----- |
-| **`status`**  | <code>string</code> | Current status of set channel | 4.7.0 |
-| **`error`**   | <code>string</code> |                               |       |
+| **`status`** | <code>string</code> | Status saluran yang disetel saat ini | 4.7.0 |
+| **`error`** | <code>string</code> |                               |       |
 | **`message`** | <code>string</code> |                               |       |
 
 
-### SetChannelOptions
+### Setel Opsi Saluran
 
-| Prop                    | Type                 |
+| Prop | Ketik |
 | ----------------------- | -------------------- |
-| **`channel`**           | <code>string</code>  |
+| **`channel`** | <code>string</code> |
 | **`triggerAutoUpdate`** | <code>boolean</code> |
 
 
-### UnsetChannelOptions
+### Batalkan Penyetelan Opsi Saluran
 
-| Prop                    | Type                 |
+| Prop | Ketik |
 | ----------------------- | -------------------- |
 | **`triggerAutoUpdate`** | <code>boolean</code> |
 
 
-### GetChannelRes
-
-| Prop           | Type                 | Description                   | Since |
+### Dapatkan ChannelRes| Prop | Ketik | Deskripsi | Sejak |
 | -------------- | -------------------- | ----------------------------- | ----- |
-| **`channel`**  | <code>string</code>  | Current status of get channel | 4.8.0 |
-| **`error`**    | <code>string</code>  |                               |       |
-| **`message`**  | <code>string</code>  |                               |       |
-| **`status`**   | <code>string</code>  |                               |       |
+| **`channel`** | <code>string</code> | Status saluran dapatkan saat ini | 4.8.0 |
+| **`error`** | <code>string</code> |                               |       |
+| **`message`** | <code>string</code> |                               |       |
+| **`status`** | <code>string</code> |                               |       |
 | **`allowSet`** | <code>boolean</code> |                               |       |
 
 
-### ListChannelsResult
+### DaftarSaluranHasil
 
-| Prop           | Type                       | Description                | Since |
+| Prop | Ketik | Deskripsi | Sejak |
 | -------------- | -------------------------- | -------------------------- | ----- |
-| **`channels`** | <code>ChannelInfo[]</code> | List of available channels | 7.5.0 |
+| **`channels`** | <code>Info Saluran[]</code> | Daftar saluran yang tersedia | 7.5.0 |
 
 
-### ChannelInfo
+### Info Saluran
 
-| Prop                 | Type                 | Description                                     | Since |
+| Prop | Ketik | Deskripsi | Sejak |
 | -------------------- | -------------------- | ----------------------------------------------- | ----- |
-| **`id`**             | <code>string</code>  | The channel ID                                  | 7.5.0 |
-| **`name`**           | <code>string</code>  | The channel name                                | 7.5.0 |
-| **`public`**         | <code>boolean</code> | Whether this is a public channel                | 7.5.0 |
-| **`allow_self_set`** | <code>boolean</code> | Whether devices can self-assign to this channel | 7.5.0 |
+| **`id`** | <code>string</code> | ID saluran | 7.5.0 |
+| **`name`** | <code>string</code> | Nama saluran | 7.5.0 |
+| **`public`** | <code>boolean</code> | Jika benar, ini adalah saluran default/fallback. Perangkat tidak dapat menetapkan sendiri ke saluran publik. Sebaliknya, ketika perangkat menghapus penggantian salurannya (menggunakan `unsetChannel()`), perangkat akan secara otomatis menerima pembaruan dari saluran publik yang cocok. | 7.5.0 |
+| **`allow_self_set`** | <code>boolean</code> | Jika benar, perangkat dapat secara eksplisit menetapkan sendiri saluran ini menggunakan `setChannel()`. Ini biasanya digunakan untuk pengujian beta, pengujian A/B, atau jalur pembaruan keikutsertaan. | 7.5.0 |
 
 
-### SetCustomIdOptions
+### SetelOpsiIdKustom
 
-| Prop           | Type                |
+| Prop | Ketik |
 | -------------- | ------------------- |
 | **`customId`** | <code>string</code> |
 
 
-### BuiltinVersion
+### Versi Bawaan
 
-| Prop          | Type                |
+| Prop | Ketik |
 | ------------- | ------------------- |
 | **`version`** | <code>string</code> |
 
 
-### DeviceId
+### ID Perangkat
 
-| Prop           | Type                |
+| Prop | Ketik |
 | -------------- | ------------------- |
 | **`deviceId`** | <code>string</code> |
 
 
-### PluginVersion
+### Versi Plugin
 
-| Prop          | Type                |
+| Prop | Ketik |
 | ------------- | ------------------- |
 | **`version`** | <code>string</code> |
 
 
-### AutoUpdateEnabled
+### Pembaruan Otomatis Diaktifkan
 
-| Prop          | Type                 |
+| Prop | Ketik |
 | ------------- | -------------------- |
 | **`enabled`** | <code>boolean</code> |
 
 
 ### PluginListenerHandle
 
-| Prop         | Type                                      |
+| Prop | Ketik |
 | ------------ | ----------------------------------------- |
-| **`remove`** | <code>() =&gt; Promise&lt;void&gt;</code> |
+| **`remove`** | <code>() => Janji<void></code> |
 
 
-### DownloadEvent
-
-| Prop          | Type                                              | Description                                    | Since |
-| ------------- | ------------------------------------------------- | ---------------------------------------------- | ----- |
-| **`percent`** | <code>number</code>                               | Current status of download, between 0 and 100. | 4.0.0 |
-| **`bundle`**  | <code><a href="#bundleinfo">BundleInfo</a></code> |                                                |       |
+### Unduh Acara| Prop | Ketik | Deskripsi | Sejak |
+| ------------ | ---------------------------------- | ------------------------------------- | ----- |
+| **`bundle`** | <code><a href="#bundleinfo">Info Paket</a></code> | Dipancarkan saat aplikasi siap digunakan. | 5.2.0 |
+| **`status`** | <code>string</code> |                                       |       |
 
 
-### NoNeedEvent
+### Pembaruan Otomatis Tersedia
 
-| Prop         | Type                                              | Description                                    | Since |
-| ------------ | ------------------------------------------------- | ---------------------------------------------- | ----- |
-| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | Current status of download, between 0 and 100. | 4.0.0 |
-
-
-### UpdateAvailableEvent
-
-| Prop         | Type                                              | Description                                    | Since |
-| ------------ | ------------------------------------------------- | ---------------------------------------------- | ----- |
-| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | Current status of download, between 0 and 100. | 4.0.0 |
-
-
-### DownloadCompleteEvent
-
-| Prop         | Type                                              | Description                          | Since |
-| ------------ | ------------------------------------------------- | ------------------------------------ | ----- |
-| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | Emit when a new update is available. | 4.0.0 |
-
-
-### MajorAvailableEvent
-
-| Prop          | Type                | Description                                | Since |
-| ------------- | ------------------- | ------------------------------------------ | ----- |
-| **`version`** | <code>string</code> | Emit when a new major bundle is available. | 4.0.0 |
-
-
-### UpdateFailedEvent
-
-| Prop         | Type                                              | Description                           | Since |
-| ------------ | ------------------------------------------------- | ------------------------------------- | ----- |
-| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | Emit when a update failed to install. | 4.0.0 |
-
-
-### DownloadFailedEvent
-
-| Prop          | Type                | Description                | Since |
-| ------------- | ------------------- | -------------------------- | ----- |
-| **`version`** | <code>string</code> | Emit when a download fail. | 4.0.0 |
-
-
-### AppReadyEvent
-
-| Prop         | Type                                              | Description                           | Since |
-| ------------ | ------------------------------------------------- | ------------------------------------- | ----- |
-| **`bundle`** | <code><a href="#bundleinfo">BundleInfo</a></code> | Emitted when the app is ready to use. | 5.2.0 |
-| **`status`** | <code>string</code>                               |                                       |       |
-
-
-### AutoUpdateAvailable
-
-| Prop            | Type                 |
+| Prop | Ketik |
 | --------------- | -------------------- |
 | **`available`** | <code>boolean</code> |
 
 
-### SetShakeMenuOptions
+### SetelShakeMenuOptions
 
-| Prop          | Type                 |
+| Prop | Ketik |
 | ------------- | -------------------- |
 | **`enabled`** | <code>boolean</code> |
 
 
-### ShakeMenuEnabled
+### ShakeMenu Diaktifkan
 
-| Prop          | Type                 |
+| Prop | Ketik |
 | ------------- | -------------------- |
 | **`enabled`** | <code>boolean</code> |
 
 
-## Type Aliases
+## Ketik Alias
 
 
-### BundleStatus
+### Status Paket
 
-pending: The bundle is pending to be **SET** as the next bundle.
-downloading: The bundle is being downloaded.
-success: The bundle has been downloaded and is ready to be **SET** as the next bundle.
-error: The bundle has failed to download.
+tertunda: Paket tertunda untuk dijadikan **SET** sebagai paket berikutnya.
+mengunduh: Bundel sedang diunduh.
+sukses: Bundel telah diunduh dan siap **SET** sebagai bundel berikutnya.
+kesalahan: Bundel gagal diunduh.
 
-<code>'success' | 'error' | 'pending' | 'downloading'</code>
+<code>'sukses' | 'kesalahan' | 'menunggu keputusan' | 'mengunduh'</code>
 
 
-### DelayUntilNext
+### Tunda Hingga Berikutnya
 
-<code>'background' | 'kill' | 'nativeVersion' | 'date'</code>
+<code>'latar belakang' | 'membunuh' | 'Versi asli' | 'tanggal'</code>
 
 </docgen-api>

@@ -1,8 +1,6 @@
 ---
 title: '@capgo/capacitor-twilio-voice'
-description: >-
-  Twilio Voice API integration plugin for Capacitor apps with VoIP calling, call
-  management, and audio handling.
+description: 'Twilio 음성 API VoIP 통화, 통화 관리 및 오디오 처리 기능을 갖춘 Capacitor 앱용 통합 플러그인입니다.'
 tableOfContents: false
 next: false
 prev: false
@@ -10,13 +8,11 @@ sidebar:
   order: 1
   label: Introduction
 hero:
-  tagline: >-
-    Integrate Twilio Voice API for high-quality VoIP calling with call
-    management, audio controls, and real-time communication.
+  tagline: '통화 관리, 오디오 제어 및 실시간 통신 기능을 갖춘 고품질 VoIP 통화를 위해 Twilio 음성 API을 통합합니다.'
   image:
     file: ~public/icons/plugins/twilio-voice.svg
   actions:
-    - text: Get started
+    - text: 시작하기
       link: /docs/plugins/twilio-voice/getting-started/
       icon: right-arrow
       variant: primary
@@ -26,71 +22,70 @@ hero:
       variant: minimal
 locale: ko
 ---
-
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Overview
+## 개요
 
-The Capacitor Twilio Voice plugin enables high-quality VoIP calling functionality in iOS and Android applications using Twilio's Voice API. This plugin provides comprehensive call management, authentication, and audio controls for creating professional calling experiences.
+Capacitor Twilio 음성 플러그인은 Twilio의 음성 API을 사용하여 iOS 및 Android 애플리케이션에서 고품질 VoIP 통화 기능을 활성화합니다. 이 플러그인은 전문적인 통화 경험을 만들기 위한 포괄적인 통화 관리, 인증 및 오디오 제어 기능을 제공합니다.
 
 <CardGrid stagger>
-  <Card title="VoIP calling" icon="rocket">
-    High-quality voice calls over internet using Twilio Voice API 📞
+  <Card title="VoIP 통화" icon="rocket">
+    Twilio 음성 API을 사용하여 인터넷을 통한 고품질 음성 통화 📞
   </Card>
-  <Card title="Call management" icon="setting">
-    Make, accept, reject, and end calls with full lifecycle control 🎛️
+  <Card title="통화 관리" icon="setting">
+    전체 수명 주기 제어를 통해 전화 걸기, 수락, 거부 및 종료 🎛️
   </Card>
-  <Card title="Audio controls" icon="comment">
-    Mute, speaker toggle, and audio routing options 🎤
+  <Card title="오디오 컨트롤" icon="comment">
+    음소거, 스피커 전환 및 오디오 라우팅 옵션 🎤
   </Card>
-  <Card title="Platform support" icon="approve-check">
-    Native iOS and Android implementation with push notifications 📱
+  <Card title="플랫폼 지원" icon="approve-check">
+    푸시 알림을 사용한 기본 iOS 및 Android 구현 📱
   </Card>
 </CardGrid>
 
-## Installation
+## 설치
 
 ```bash
 npm install @capgo/capacitor-twilio-voice
 npx cap sync
 ```
 
-## Core API Methods
+## 핵심 API 메서드
 
-### Authentication
-- `login(options: { accessToken: string })` - Authenticate with Twilio using access token
-- `logout()` - End user session and clear call state
-- `isLoggedIn()` - Check current authentication status
+### 인증
+- `login(options: { accessToken: string })` - 액세스 토큰을 사용하여 Twilio로 인증합니다.
+- `logout()` - 사용자 세션 종료 및 통화 상태 지우기
+- `isLoggedIn()` - 현재 인증 상태 확인
 
-### Call Management
-- `makeCall(options: { to: string })` - Initiate outgoing call to specified number
-- `acceptCall(options: { callSid: string })` - Accept incoming call
-- `rejectCall(options: { callSid: string })` - Reject incoming call
-- `endCall(options?: { callSid?: string })` - Terminate active call
-- `muteCall(options: { muted: boolean, callSid?: string })` - Mute/unmute call audio
-- `setSpeaker(options: { enabled: boolean })` - Toggle speaker output
+### 통화 관리
+- `makeCall(options: { to: string })` - 지정된 번호로 발신 통화 시작
+- `acceptCall(options: { callSid: string })` - 수신 전화 수락
+- `rejectCall(options: { callSid: string })` - 수신 전화 거부
+- `endCall(options?: { callSid?: string })` - 활성 통화 종료
+- `muteCall(options: { muted: boolean, callSid?: string })` - 통화 오디오 음소거/음소거 해제
+- `setSpeaker(options: { enabled: boolean })` - 스피커 출력 전환
 
-## Event Listeners
+## 이벤트 리스너
 
-The plugin provides comprehensive event handling for:
-- Registration events for connection status
-- Call state changes (connected, disconnected, ringing)
-- Quality warnings and connection issues
-- Incoming call notifications
+플러그인은 다음에 대한 포괄적인 이벤트 처리를 제공합니다.
+- 연결 상태 등록 이벤트
+- 통화 상태 변경(연결됨, 연결 끊김, 벨 울림)
+- 품질 경고 및 연결 문제
+- 수신 전화 알림
 
-## Platform Configuration
+## 플랫폼 구성
 
-### iOS Setup
-- Requires PushKit integration for incoming calls
-- Certificate configuration for production use
-- Microphone permissions in Info.plist
+### iOS 설정
+- 수신 전화에 대해 PushKit 통합이 필요합니다.
+- 프로덕션용 인증서 구성
+- Info.plist의 마이크 권한
 
-### Android Setup
-- Firebase setup for push notifications
-- Microphone permissions in AndroidManifest.xml
-- Background service configuration
+### Android 설정
+- 푸시 알림을 위한 Firebase 설정
+- AndroidManifest.xml의 마이크 권한
+- 백그라운드 서비스 구성
 
-## Quick Start Example
+## 빠른 시작 예
 
 ```typescript
 import { TwilioVoice } from '@capgo/capacitor-twilio-voice';
@@ -107,6 +102,6 @@ TwilioVoice.addListener('callConnected', (data) => {
 });
 ```
 
-## Documentation
+## 문서
 
-Check the [complete documentation](/docs/plugins/twilio-voice/getting-started/) for detailed setup instructions, advanced configuration, and integration examples.
+자세한 설정 지침, 고급 구성 및 통합 예시는 [전체 문서](/docs/plugins/twilio-voice/getting-started/)를 확인하세요.

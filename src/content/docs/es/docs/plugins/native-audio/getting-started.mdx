@@ -1,31 +1,32 @@
 ---
-title: Getting Started
-description: Learn how to install and use the Native Audio plugin for high-performance audio playback in your Capacitor app.
+title: Empezando
+description: >-
+  Aprenda a instalar y utilizar el complemento Native Audio para la reproducción
+  de audio de alto rendimiento en su aplicación Capacitor.
 sidebar:
   order: 2
 locale: es
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Instalar el paquete**
    <PackageManagers pkg="@capgo/native-audio" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Sincronización con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Add audio files**
-   Place your audio files in the appropriate platform folders:
+3. **Agregar archivos de audio**
+   Coloque sus archivos de audio en las carpetas de la plataforma apropiadas:
    - **iOS**: `ios/App/App/sounds/`
    - **Android**: `android/app/src/main/res/raw/`
 </Steps>
 
-## Usage
+## Uso
 
-Import the plugin and preload audio files before playing:
+Importe el complemento y precargue los archivos de audio antes de reproducirlos:
 
 ```typescript
 import { NativeAudio } from '@capgo/native-audio';
@@ -91,11 +92,11 @@ const cleanup = async () => {
 };
 ```
 
-## API Reference
+## API Referencia
 
-### preload(options)
+### precarga (opciones)
 
-Preloads an audio file for simple playback (best for short sounds).
+Precarga un archivo de audio para una reproducción sencilla (mejor para sonidos cortos).
 
 ```typescript
 interface PreloadOptions {
@@ -113,9 +114,9 @@ await NativeAudio.preload({
 });
 ```
 
-### preloadComplex(options)
+### precargaComplejo(opciones)
 
-Preloads audio with advanced options (best for music/background audio).
+Precarga audio con opciones avanzadas (mejor para música/audio de fondo).
 
 ```typescript
 interface PreloadComplexOptions {
@@ -137,9 +138,9 @@ await NativeAudio.preloadComplex({
 });
 ```
 
-### play(options)
+### jugar(opciones)
 
-Plays a preloaded audio file.
+Reproduce un archivo de audio precargado.
 
 ```typescript
 interface PlayOptions {
@@ -153,9 +154,9 @@ await NativeAudio.play({
 });
 ```
 
-### loop(options)
+### bucle (opciones)
 
-Loops a preloaded audio file continuously.
+Realiza un bucle continuo de un archivo de audio precargado.
 
 ```typescript
 await NativeAudio.loop({
@@ -163,9 +164,9 @@ await NativeAudio.loop({
 });
 ```
 
-### stop(options)
+### detener(opciones)
 
-Stops playing an audio file.
+Deja de reproducir un archivo de audio.
 
 ```typescript
 await NativeAudio.stop({
@@ -173,9 +174,9 @@ await NativeAudio.stop({
 });
 ```
 
-### pause(options)
+### pausa (opciones)
 
-Pauses audio playback.
+Pausa la reproducción de audio.
 
 ```typescript
 await NativeAudio.pause({
@@ -183,9 +184,9 @@ await NativeAudio.pause({
 });
 ```
 
-### resume(options)
+### currículum (opciones)
 
-Resumes paused audio.
+Reanuda el audio en pausa.
 
 ```typescript
 await NativeAudio.resume({
@@ -193,9 +194,9 @@ await NativeAudio.resume({
 });
 ```
 
-### setVolume(options)
+### establecerVolumen(opciones)
 
-Sets the volume for an audio asset.
+Establece el volumen de un recurso de audio.
 
 ```typescript
 interface SetVolumeOptions {
@@ -209,9 +210,9 @@ await NativeAudio.setVolume({
 });
 ```
 
-### getDuration(options)
+### obtenerDuración(opciones)
 
-Gets the duration of an audio file in seconds.
+Obtiene la duración de un archivo de audio en segundos.
 
 ```typescript
 const { duration } = await NativeAudio.getDuration({
@@ -220,9 +221,9 @@ const { duration } = await NativeAudio.getDuration({
 console.log(`Duration: ${duration} seconds`);
 ```
 
-### getCurrentTime(options)
+### getCurrentTime(opciones)
 
-Gets the current playback time in seconds.
+Obtiene el tiempo de reproducción actual en segundos.
 
 ```typescript
 const { currentTime } = await NativeAudio.getCurrentTime({
@@ -231,9 +232,9 @@ const { currentTime } = await NativeAudio.getCurrentTime({
 console.log(`Current time: ${currentTime} seconds`);
 ```
 
-### isPlaying(options)
+### está reproduciendo (opciones)
 
-Checks if audio is currently playing.
+Comprueba si el audio se está reproduciendo actualmente.
 
 ```typescript
 const { isPlaying } = await NativeAudio.isPlaying({
@@ -242,9 +243,9 @@ const { isPlaying } = await NativeAudio.isPlaying({
 console.log(`Is playing: ${isPlaying}`);
 ```
 
-### unload(options)
+### descargar (opciones)
 
-Unloads an audio file from memory.
+Descarga un archivo de audio de la memoria.
 
 ```typescript
 await NativeAudio.unload({
@@ -252,9 +253,9 @@ await NativeAudio.unload({
 });
 ```
 
-## Advanced Usage
+## Uso avanzado
 
-### Sound Manager Class
+### Clase de administrador de sonido
 
 ```typescript
 import { NativeAudio } from '@capgo/native-audio';
@@ -354,7 +355,7 @@ export class SoundManager {
 }
 ```
 
-### Loading from URLs
+### Cargando desde URL
 
 ```typescript
 // Load audio from URL
@@ -366,7 +367,7 @@ await NativeAudio.preloadComplex({
 });
 ```
 
-### Fade In/Out Effects
+### Efectos de aparición y desaparición gradual
 
 ```typescript
 const fadeIn = async (assetId: string, duration: number) => {
@@ -401,9 +402,9 @@ const fadeOut = async (assetId: string, duration: number) => {
 };
 ```
 
-## Best Practices
+## Mejores prácticas
 
-1. **Preload during app initialization**
+1. **Precarga durante la inicialización de la aplicación**
    ```typescript
    import { App } from '@capacitor/app';
    
@@ -414,7 +415,7 @@ const fadeOut = async (assetId: string, duration: number) => {
    });
    ```
 
-2. **Handle errors gracefully**
+2. **Maneja los errores con elegancia**
    ```typescript
    try {
      await NativeAudio.play({ assetId: 'sound' });
@@ -423,7 +424,7 @@ const fadeOut = async (assetId: string, duration: number) => {
    }
    ```
 
-3. **Unload unused audio**
+3. **Descargar audio no utilizado**
    ```typescript
    // Unload sounds when leaving a screen
    ionViewWillLeave() {
@@ -431,48 +432,48 @@ const fadeOut = async (assetId: string, duration: number) => {
    }
    ```
 
-4. **Use appropriate preload methods**
-   - `preload()` for short sound effects (< 5 seconds)
-   - `preloadComplex()` for music and longer audio
+4. **Utilice métodos de precarga adecuados**
+   - `preload()` para efectos de sonido cortos (< 5 segundos)
+   - `preloadComplex()` para música y audio más largo
 
-## Platform Notes
+## Notas de plataforma
 
 ### iOS
-- Supports AAC, MP3, WAV, and other Core Audio formats
-- Uses AVAudioPlayer for complex audio
-- Uses System Sound Services for simple audio
-- Supports background audio with proper configuration
+- Admite AAC, MP3, WAV y otros formatos Core Audio
+- Utiliza AVAudioPlayer para audio complejo
+- Utiliza System Sound Services para audio simple
+- Admite audio de fondo con la configuración adecuada
 
 ### Android
-- Supports MP3, OGG, WAV formats
-- Uses SoundPool for simple audio
-- Uses MediaPlayer for complex audio
-- May require WAKE_LOCK permission for background playback
+- Soporta formatos MP3, OGG, WAV
+- Utiliza SoundPool para audio simple
+- Utiliza MediaPlayer para audio complejo
+- Puede requerir permiso WAKE_LOCK para reproducción en segundo plano
 
-### File Placement
+### Colocación de archivos
 
 #### iOS
-Place files in `ios/App/App/sounds/` or create a folder reference in Xcode.
+Coloque archivos en `ios/App/App/sounds/` o cree una referencia de carpeta en Xcode.
 
 #### Android
-Place files in `android/app/src/main/res/raw/`. 
-Note: File names must be lowercase with no special characters.
+Coloque archivos en `android/app/src/main/res/raw/`. 
+Nota: Los nombres de los archivos deben estar en minúsculas y sin caracteres especiales.
 
-## Common Issues
+## Problemas comunes
 
-1. **Audio not playing**
-   - Ensure files are in correct directories
-   - Check file format compatibility
-   - Verify assetId matches exactly
+1. **El audio no se reproduce**
+   - Asegúrese de que los archivos estén en los directorios correctos.
+   - Verificar la compatibilidad del formato de archivo
+   - Verificar que el identificador de activo coincida exactamente
 
-2. **Delay in playback**
-   - Use `preload()` for sound effects
-   - Preload before you need to play
+2. **Retraso en la reproducción**
+   - Utilice `preload()` para efectos de sonido
+   - Precarga antes de que necesites jugar
 
-3. **Memory issues**
-   - Unload audio files when not needed
-   - Don't preload too many large files
+3. **Problemas de memoria**
+   - Descargar archivos de audio cuando no sea necesario
+   - No precargues demasiados archivos grandes
 
-4. **Background playback**
-   - Configure background audio capability on iOS
-   - Handle audio focus on Android
+4. **Reproducción en segundo plano**
+   - Configurar la capacidad de audio de fondo en iOS
+   - Manejar el enfoque de audio en Android

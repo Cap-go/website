@@ -1,47 +1,51 @@
 ---
+title: Déployer une mise à jour en direct
+description: >-
+  Découvrez comment déployer une mise à jour en direct sur votre application à
+  l'aide de la fonctionnalité Live Updates de Capgo, permettant des mises à jour
+  de l'interface utilisateur et de la logique en temps réel sans nouvelle
+  soumission à l'App Store.
+sidebar:
+  order: 4
 locale: fr
-title: Déployer a Live Mise à jour
-description: "Learn how to Déployer a live Mise à jour to your Application using Capgo's Mises à jour en direct Fonctionnalité, enabling real-time UI and logic Mises à jour without Application Store resubmission."
-sidebar: 
-  order: 3
 ---
 import { Steps, LinkCard, Tabs, TabItem } from '@astrojs/starlight/components';
 
-Use Capgo's Mises à jour en direct Fonctionnalité to Mise à jour the UI and business logic of your Application remotely, in real-time. Pousser JS Bundle Mises à jour directly to your Utilisateurs without going through the Application Store to instantly fix bugs and ship Nouveau Fonctionnalités.
+Utilisez la fonctionnalité Live Updates de Capgo pour mettre à jour l'interface utilisateur et la logique métier de votre application à distance, en temps réel. Envoyez les mises à jour du bundle JS directement à vos utilisateurs sans passer par l'App Store pour corriger instantanément les bugs et proposer de nouvelles fonctionnalités.
 
-This Guide assumes you've completed the [Capgo Démarrage rapide](/docs/getting-started/Démarrage rapide) and have already:
+Ce guide suppose que vous avez terminé le [Capgo Quickstart](/docs/getting-started/quickstart) et que vous avez déjà :
 
 <Steps>
 
-1. Installed the `@capgo/capacitor-updater` SDK in your Capacitor app 
+1. Installé le `@capgo/capacitor-updater` SDK dans votre application Capacitor 
 
-2. Configured your app ID and update channel in `capacitor.config.ts`
+2. Configurez votre identifiant d'application et votre canal de mise à jour dans `capacitor.config.ts`
 
-3. Added in your code the `CapacitorUpdater.notifyAppReady()` method
+3. Ajout dans votre code de la méthode `CapacitorUpdater.notifyAppReady()`
 
 </Steps>
 
-If you haven't done those steps yet, please go Retour and Terminé the Démarrage rapide first.
+Si vous n'avez pas encore effectué ces étapes, veuillez d'abord revenir en arrière et terminer le démarrage rapide.
 
-<LinkCard href="/docs/getting-started/add-an-app/" title="Add an app" description="Add an app to your Capgo account, and install the plugin in your app" />
+<LinkCard href="/docs/getting-started/add-an-app/" title="Ajouter une application" description="Add an app to your Capgo account, and install the plugin in your app" />
 
-## Uploading a Bundle
+## Téléchargement d'un lot
 
-With the Capgo SDK installed and configured, you're ready to Télécharger your first live Mise à jour Bundle:
+Une fois Capgo SDK installé et configuré, vous êtes prêt à télécharger votre premier bundle de mise à jour en direct :
 
-1. Construction your web assets:
+1. Créez vos ressources Web :
    ```shell
    npm run build
    ```
 
-2. Télécharger the Bundle to Capgo:
+2. Téléchargez le bundle sur Capgo :
     <Tabs>
       <TabItem label="Console">
         ```shell
       npx @capgo/cli@latest bundle upload --channel=production
       ```
       </TabItem>
-      <TabItem label="Github Actions">
+      <TabItem label="Actions GitHub">
       ```yml
       // .github/workflows/build_and_deploy.yml
     name: Build source code and send to Capgo
@@ -102,50 +106,50 @@ With the Capgo SDK installed and configured, you're ready to Télécharger your 
       ```
       </TabItem>
     </Tabs>
-   This will Télécharger a Nouveau Bundle Version to the Canal specified in the Commande.
+   Cela téléchargera une nouvelle version du bundle sur le canal spécifié dans la commande.
 
-### Dépannage Uploads
+### Dépannage des téléchargements
 
-If your Télécharger fails, double Vérifier:
-- Your app ID in `capacitor.config.ts` matches your app in the Capgo dashboard
-- You're running the Télécharger Commande from the root of your Capacitor project
-- Your web assets are built and up to date
+Si votre téléchargement échoue, vérifiez :
+- Votre identifiant d'application dans `capacitor.config.ts` correspond à votre application dans le tableau de bord Capgo
+- Vous exécutez la commande upload depuis la racine de votre projet Capacitor
+- Vos actifs Web sont construits et à jour
 
-If you're still having trouble, go to the [Dépannage](/docs/getting-started/Dépannage/) section.
+Si vous rencontrez toujours des problèmes, accédez à la section [Dépannage](/docs/getting-started/troubleshooting/).
 
-## Receiving an Mise à jour on a Appareil
+## Recevoir une mise à jour sur un appareil
 
-Once your Bundle is uploaded, you can Test the live Mise à jour on a Appareil:
+Une fois votre bundle téléchargé, vous pouvez tester la mise à jour en direct sur un appareil :
 
-1. Synchroniser your Application to the Appareil:
+1. Synchronisez votre application avec l'appareil :
    ```shell
    npx cap sync ios
    ```
 
-2. Open another Terminal and run the following Commande to Vérifier the Mise à jour status:
+2. Ouvrez un autre terminal et exécutez la commande suivante pour vérifier l'état de la mise à jour :
    ```shell
    npx @capgo/cli@latest app debug
    ```
 
-3. Run your Application locally:
+3. Exécutez votre application localement :
    ```shell
    npx cap run ios
    ``` 
-   Or open the iOS/Android project in Xcode/Android Studio and do a Natif run.
+   Ou ouvrez le projet iOS/Android dans Xcode/Android Studio et effectuez une exécution native.
 
-4. Keep the Application open for À propos 30 seconds to allow the Mise à jour to Télécharger in the background. 
+4. Gardez l'application ouverte pendant environ 30 secondes pour permettre le téléchargement de la mise à jour en arrière-plan. 
 
-5. The Journaux will take a few seconds to Mise à jour and show the Mise à jour status.
+5. Les journaux prendront quelques secondes pour se mettre à jour et afficher l'état de la mise à jour.
 
-6. Close and reopen the Application. You should see your live Mise à jour applied!
+6. Fermez et rouvrez l'application. Vous devriez voir votre mise à jour en direct appliquée !
 
-Refer Retour to the [Capgo Démarrage rapide](/docs/getting-started/Démarrage rapide#receiving-a-live-Mise à jour-on-a-Appareil) for more details on Test Mises à jour en direct.
+Reportez-vous au [Capgo Quickstart](/docs/getting-started/quickstart#receiving-a-live-update-on-a-device) pour plus de détails sur le test des mises à jour en direct.
 
-## Suivant Steps
+## Prochaines étapes
 
-Congrats on deploying your first live Mise à jour with Capgo! 🎉 
+Félicitations pour le déploiement de votre première mise à jour en direct avec Capgo ! 🎉 
 
-To learn more, review the rest of the [Capgo Mises à jour en direct Documentation](/docs/live-Mises à jour). Some key topics to Vérifier out Suivant:
-- [Targeting Mises à jour with Canaux](/docs/live-Mises à jour/Canaux)
-- [Customizing Mise à jour Behavior](/docs/live-Mises à jour/Mise à jour-behavior)
-- [Live Mise à jour Restaurations](/docs/live-Mises à jour/Restaurations)
+Pour en savoir plus, consultez le reste de la [documentation Capgo Live Updates](/docs/live-updates). Quelques sujets clés à découvrir ensuite :
+- [Ciblage des mises à jour avec des chaînes](/docs/live-updates/channels)
+- [Personnalisation du comportement de mise à jour](/docs/live-updates/update-behavior)
+- [Annulations de mise à jour en direct](/docs/live-updates/rollbacks)

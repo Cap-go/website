@@ -1,25 +1,26 @@
 ---
-locale: fr
 title: Commencer
-description: Learn how to Installer and configure the Capacitor Navigation Bar plugin to customize the Android navigation bar color and style.
-sidebar: 
+description: >-
+  Découvrez comment installer et configurer le plugin Capacitor Navigation Bar
+  pour personnaliser la couleur et le style de la barre de navigation Android.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Installer the package**
+1. **Installez le package**
    <PackageManagers pkg="@capgo/capacitor-navigation-bar" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser with Natif projects**
+2. **Synchronisation avec les projets natifs**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure the plugin**
+3. **Configurez le plugin**
 
-   **Set Navigation Bar Color:**
+   **Définir la couleur de la barre de navigation :**
    ```typescript
    import { NavigationBar } from '@capgo/capacitor-navigation-bar';
 
@@ -30,7 +31,7 @@ import { PackageManagers } from 'starlight-package-managers'
    });
    ```
 
-   **Dynamic Theme Support:**
+   **Prise en charge des thèmes dynamiques :**
    ```typescript
    // Set color based on theme
    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -43,18 +44,18 @@ import { PackageManagers } from 'starlight-package-managers'
 
    <Tabs>
      <TabItem label="Android">
-       **Minimum Requirements:**
-       - Android 5.0 (API level 21) or higher
-       - The plugin only works on Android Appareils
+       **Exigences minimales :**
+       - Android 5.0 (API niveau 21) ou supérieur
+       - Le plugin ne fonctionne que sur les appareils Android
        
-       No additional Configuration required in AndroidManifest.xml.
+       Aucune configuration supplémentaire requise dans AndroidManifest.xml.
      </TabItem>
      <TabItem label="iOS">
-       This plugin is Android-only. iOS does not have a customizable navigation bar.
+       Ce plugin est uniquement Android. iOS n'a pas de barre de navigation personnalisable.
      </TabItem>
    </Tabs>
 
-4. **Advanced Utilisation**
+4. **Utilisation avancée**
    ```typescript
    import { NavigationBar } from '@capgo/capacitor-navigation-bar';
 
@@ -92,7 +93,7 @@ import { PackageManagers } from 'starlight-package-managers'
    }
    ```
 
-5. **Integration with Application lifecycle**
+5. **Intégration avec le cycle de vie des applications**
    ```typescript
    import { App } from '@capacitor/app';
    import { NavigationBar } from '@capgo/capacitor-navigation-bar';
@@ -121,24 +122,24 @@ import { PackageManagers } from 'starlight-package-managers'
 
 ## API Référence
 
-### Methods
+### Méthodes
 
 #### `setColor(options: ColorOptions)`
-Set the navigation bar color and button style.
+Définissez la couleur de la barre de navigation et le style des boutons.
 
-**Parameters:**
-- `options`: Configuration object
-  - `color`: string - Hex color code (e.g., '#FF0000')
-  - `darkButtons`: boolean - Use dark buttons (true) or light buttons (false)
+**Paramètres :**
+- `options` : Objet de configuration
+  - `color` : chaîne - Code couleur hexadécimal (par exemple, '#FF0000')
+  - `darkButtons` : booléen - Utiliser des boutons sombres (vrai) ou des boutons clairs (faux)
 
-**Returns:** `Promise<void>`
+**Retours :** `Promise<void>`
 
 #### `getColor()`
-Get the current navigation bar color.
+Obtenez la couleur actuelle de la barre de navigation.
 
-**Returns:** `Promise<{ color: string }>`
+**Retours :** `Promise<{ color: string }>`
 
-### Interfaces
+###Interfaces
 
 ```typescript
 interface ColorOptions {
@@ -151,50 +152,50 @@ interface ColorResult {
 }
 ```
 
-## Platform Notes
+## Remarques sur la plate-forme
 
 ### Android
-- Requires Android 5.0 (API level 21) or higher
-- Color changes are immediate
-- Transparent colors are supported (use Alpha Canal)
-- The navigation bar might not be visible on Appareils with gesture navigation
+- Nécessite Android 5.0 (API niveau 21) ou supérieur
+- Les changements de couleur sont immédiats
+- Les couleurs transparentes sont prises en charge (utilisez le canal alpha)
+- La barre de navigation peut ne pas être visible sur les appareils dotés de navigation gestuelle
 
 ### iOS
-- This plugin has no effect on iOS Appareils
-- iOS does not provide APIs to customize the system navigation
+- Ce plugin n'a aucun effet sur les appareils iOS
+- iOS ne fournit pas d'API pour personnaliser la navigation du système
 
-## Common Use Cases
+## Cas d'utilisation courants
 
-1. **Brand Consistency**: Match navigation bar with your Application's primary color
-2. **Theme Support**: Adapt to light/dark themes dynamically
-3. **Immersive Experiences**: Use transparent navigation for full-screen content
-4. **Status Indication**: Change color to indicate Application states (recording, errors, etc.)
+1. **Cohérence de la marque** : faites correspondre la barre de navigation avec la couleur principale de votre application
+2. **Prise en charge des thèmes** : Adaptez-vous dynamiquement aux thèmes clairs/sombres
+3. **Expériences immersives** : utilisez une navigation transparente pour le contenu en plein écran
+4. **Indication d'état** : changez la couleur pour indiquer les états de l'application (enregistrement, erreurs, etc.)
 
-## Best Practices
+## meilleures pratiques
 
-1. **Color Contrast**: Ensure sufficient contrast between navigation bar and buttons
+1. **Contraste des couleurs** : assurez un contraste suffisant entre la barre de navigation et les boutons
    ```typescript
    // Good contrast examples
    setColor({ color: '#FFFFFF', darkButtons: true });  // White bar, dark buttons
    setColor({ color: '#000000', darkButtons: false }); // Black bar, light buttons
    ```
 
-2. **Theme Consistency**: Mise à jour navigation bar when theme changes
-3. **Accessibility**: Consider Utilisateurs with visual impairments when choosing colors
-4. **Performance**: Avoid frequent color changes that might distract Utilisateurs
+2. **Cohérence du thème** : mettre à jour la barre de navigation lorsque le thème change
+3. **Accessibilité** : Tenez compte des utilisateurs malvoyants lors du choix des couleurs
+4. **Performance** : évitez les changements de couleur fréquents qui pourraient distraire les utilisateurs
 
 ## Dépannage
 
-**Navigation bar not changing:**
-- Verify the Appareil is running Android 5.0+
-- Vérifier if the Appareil has gesture navigation enabled
-- Ensure color format is valid hex (e.g., '#FF0000')
+**La barre de navigation ne change pas :**
+- Vérifiez que l'appareil exécute Android 5.0+
+- Vérifiez si la navigation gestuelle est activée sur l'appareil
+- Assurez-vous que le format de couleur est un hexadécimal valide (par exemple, « #FF0000 »)
 
-**Buttons not visible:**
-- Check the `darkButtons` parameter matches your background color
-- Light backgrounds need `darkButtons: true`
-- Dark backgrounds need `darkButtons: false`
+**Boutons non visibles :**
+- Vérifiez que le paramètre `darkButtons` correspond à votre couleur de fond
+- Les arrière-plans clairs nécessitent `darkButtons: true`
+- Les arrière-plans sombres nécessitent `darkButtons: false`
 
-**Color appears different:**
-- Some Android versions may modify the color slightly
-- Use fully opaque colors for best results
+**La couleur semble différente :**
+- Certaines versions Android peuvent modifier légèrement la couleur
+- Utilisez des couleurs entièrement opaques pour de meilleurs résultats

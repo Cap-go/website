@@ -1,70 +1,93 @@
 ---
-title: API Keys
-description: >-
-  Comprehensive documentation for API Keys endpoint, detailing authentication,
-  permissions, and management within Capgo API
+title: API キー
+description: API Keys エンドポイントに関する包括的なドキュメント。Capgo API 内の認証、権限、管理について詳しく説明します。
 sidebar:
   order: 9
 locale: ja
 ---
+API キーは、Capgo API へのリクエストを認証するために使用されます。各キーには、アクセス レベルを制御するための異なる権限 (モード) を設定できます。キーは組織固有であり、Capgo リソースへのアクセスを許可するため、慎重に管理する必要があります。
 
-API キーは、Capgo API へのリクエストを認証するために使用されます。各キーは、アクセス レベルを制御するために異なる権限 (モード) を持つことができます。キーは組織固有であり、Capgo リソースへのアクセスを許可するため、注意深く管理する必要があります。
+## キーモード
 
-## Key Modes
+- **読み取り**: データの読み取りのみが可能で、変更は許可されません
+- **アップロード**: 新しいバンドルの読み取り、変更、アップロードが可能
+- **書き込み**: データの読み取り、変更、バンドルのアップロードが可能
+- **all**: すべての操作へのフルアクセス
 
-- **read**: Can only read data, no modifications allowed
-- **upload**: Can read, modify, and upload new bundles
-- **write**: Can read, modify data, and upload bundles
-- **all**: Full access to all operations
+キー モードは、段階的/段階的なスキーマに従います。アップロード キーを持っていて、書き込みキーを作成すると、書き込みキーはアップロード キーで実行できるすべてのことを実行できるようになります。
+API キーがどのように機能するかをよりよく理解するには、次の図をご覧ください。
 
-Key modes follow a stepped/gradual schema. If you have an upload key, and then you create a write key, the write key will be able to do everything that the upload key could.
-Please take a look at the following diagram to better understand how API keys work.
+<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="API キーの仕組みを説明する図" /><figcaption></figcaption></figure>
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="A diagram explaining how API key work" /><figcaption></figcaption></figure>
+## 権限が制限されたサブキー
 
-## Subkeys with Limited Rights
+特定のアプリまたは組織へのアクセスが制限されたサブキーを作成できます。これは、特定のリソースへのアクセスを制限しながら、他のリソースに対する操作を許可する場合に便利です。これらの制限を定義するには、キーを作成するときに `limited_to_apps` および `limited_to_orgs` パラメーターを使用します。
 
-You can create subkeys with limited access to specific apps or organizations. This is useful for restricting access to certain resources while still allowing operations on others. Use the `limited_to_apps` and `limited_to_orgs` parameters when creating a key to define these restrictions.
+## 暗号化されたキー
 
-## Security Best Practices
+セキュリティを強化するために、**暗号化された (ハッシュ化された) API キー**を作成できます。暗号化キーを作成する場合:
 
-1. **Principle of Least Privilege**: Always use the most restrictive mode that still allows your integration to function
-2. **Regular Rotation**: Rotate your API keys periodically
-3. **Secure Storage**: Store API keys securely and never commit them to version control
-4. **Monitoring**: Monitor API key usage and revoke any compromised keys immediately
-5. **Limited Subkeys**: Use subkeys with limited rights for specific integrations to minimize risk
+- キーはデータベースに保存される前に SHA-256 を使用してハッシュされます。
+- **プレーンキーは作成応答で 1 回だけ返されます** - すぐに保存します
+- 作成後にキーを再度取得したり表示したりすることはできません
+- 暗号化されたキーを紛失した場合は、新しいキーを作成する必要があります
 
-## Endpoints
+暗号化を有効にするキーを作成する場合は、`hashed: true` パラメーターを使用します。これは実稼働環境に推奨されるアプローチです。
 
-### GET
+## キーの有効期限
+
+API キーには **有効期限** を設定して、キーが侵害された場合の危険範囲を制限できます。有効期限が設定されている場合:
+
+- 指定した日時を過ぎるとキーが機能しなくなります
+- 期限切れのキーを使用したリクエストはエラーで拒否されます。
+- 期限切れのキーは 30 日後に自動的にクリーンアップされます
+
+組織は有効期限ポリシーを適用できます。
+- **有効期限が必要**: すべての API キーには有効期限が必要です
+- **最大有効期限**: 有効期限を設定できる将来の期間を制限します。
+
+## セキュリティのベストプラクティス
+
+1. **最小特権の原則**: 統合が機能できる最も制限的なモードを常に使用します。
+2. **暗号化キーを使用**: 運用環境用にハッシュされたキーを作成し、データベース侵害から保護します
+3. **有効期限の設定**: 有効期限を使用してキーの有効期間を制限します。
+4. **定期的なローテーション**: API キーを定期的にローテーションします。
+5. **安全なストレージ**: API キーを安全に保存し、バージョン管理にコミットしないでください。
+6. **監視**: API キーの使用状況を監視し、漏洩したキーを直ちに取り消します。
+7. **制限されたサブキー**: リスクを最小限に抑えるために、特定の統合に対して制限された権限を持つサブキーを使用します。
+
+## エンドポイント
+
+### 入手
 
 `https://api.capgo.app/apikey/`
 
-Retrieve all API keys associated with your account.
+アカウントに関連付けられているすべての API キーを取得します。
 
-#### Response Type
+#### 応答タイプ
 
 ```typescript
 interface ApiKey {
   created_at: string | null
   id: number
-  key: string
+  key: string | null  // null for encrypted keys
   mode: 'read' | 'write' | 'upload' | 'all'
   name: string
   updated_at: string | null
   user_id: string
   limited_to_apps?: string[]
   limited_to_orgs?: string[]
+  expires_at?: string | null  // ISO 8601 date, null means never expires
 }
-```
+```> **注意**: 暗号化キーの場合、プレーンキーは作成中に 1 回しか表示されないため、GET 応答の `key` フィールドは `null` になります。
 
-#### Example Request
+#### リクエストの例
 
 ```bash
 curl -H "authorization: your-api-key" https://api.capgo.app/apikey/
 ```
 
-#### Example Response
+#### 応答例
 
 ```json
 {
@@ -92,13 +115,13 @@ curl -H "authorization: your-api-key" https://api.capgo.app/apikey/
 }
 ```
 
-### POST
+### 投稿
 
 `https://api.capgo.app/apikey/`
 
-Create a new API key for a specific organization.
+特定の組織に新しい API キーを作成します。
 
-#### Query Parameters
+#### リクエスト本文
 
 ```typescript
 interface ApiKeyCreate {
@@ -106,10 +129,12 @@ interface ApiKeyCreate {
   mode: 'read' | 'write' | 'upload' | 'all'
   limited_to_apps?: string[]
   limited_to_orgs?: string[]
+  hashed?: boolean       // Create an encrypted key (recommended for production)
+  expires_at?: string    // ISO 8601 date for key expiration
 }
 ```
 
-#### Example Request
+#### リクエストの例 (標準キー)
 
 ```bash
 curl -X POST \
@@ -123,7 +148,22 @@ curl -X POST \
   https://api.capgo.app/apikey/
 ```
 
-#### Example Response
+#### リクエストの例 (有効期限のある暗号化キー)
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Secure CI Key",
+    "mode": "upload",
+    "hashed": true,
+    "expires_at": "2025-06-01T00:00:00Z"
+  }' \
+  https://api.capgo.app/apikey/
+```
+
+#### 応答例 (標準キー)
 
 ```json
 {
@@ -139,22 +179,40 @@ curl -X POST \
 }
 ```
 
-### DELETE
+#### 応答例 (暗号化キー)
+
+```json
+{
+  "apikey": {
+    "id": 4,
+    "key": "ak_abc123...",
+    "mode": "upload",
+    "name": "Secure CI Key",
+    "created_at": "2024-02-12T00:00:00Z",
+    "user_id": "user_123",
+    "expires_at": "2025-06-01T00:00:00Z"
+  }
+}
+```
+
+> **重要**: 暗号化キーの場合、この応答の `key` 値は、プレーンキーが表示される**唯一の**です。すぐに安全な場所に保存してください。後続の GET リクエストは、`key` フィールドに対して `null` を返します。
+
+### 削除
 
 `https://api.capgo.app/apikey/:id/`
 
-Delete an existing API key. Use this to revoke access immediately.
+既存の API キーを削除します。これを使用して、アクセスをすぐに取り消します。
 
-#### Parameters
-- `id`: The ID of the API key to delete (numeric identifier, not the key string itself)
+#### パラメータ
+- `id`: 削除する API キーの ID (キー文字列自体ではなく数値識別子)
 
-#### Example Request
+#### リクエストの例
 
 ```bash
 curl -X DELETE -H "authorization: your-api-key" https://api.capgo.app/apikey/1/
 ```
 
-#### Success Response
+#### 成功の応答
 
 ```json
 {
@@ -162,17 +220,17 @@ curl -X DELETE -H "authorization: your-api-key" https://api.capgo.app/apikey/1/
 }
 ```
 
-## Common Use Cases
+## 一般的な使用例
 
-1. **CI/CD Integration**: Create read-only keys for CI pipelines to check deployment status
-2. **Deployment Automation**: Use upload mode keys for automated deployment scripts
-3. **Monitoring Tools**: Use read mode keys for external monitoring integrations
-4. **Admin Access**: Use all mode keys sparingly for administrative tools
-5. **Limited Access**: Create subkeys with limited rights to specific apps or organizations for third-party integrations
+1. **CI/CD 統合**: CI パイプラインの読み取り専用キーを作成して、展開ステータスを確認します
+2. **展開の自動化**: 自動展開スクリプトにアップロード モード キーを使用します。
+3. **監視ツール**: 外部監視統合に読み取りモード キーを使用します。
+4. **管理者アクセス**: 管理ツールにはすべてのモード キーを慎重に使用してください
+5. **制限付きアクセス**: サードパーティ統合用に、特定のアプリまたは組織に対する制限された権限を持つサブキーを作成します
 
-## Error Handling
+## エラー処理
 
-Common error scenarios and their responses:
+一般的なエラーのシナリオとその対応:
 
 ```json
 // Invalid mode
@@ -192,4 +250,28 @@ Common error scenarios and their responses:
   "error": "Insufficient permissions to manage API keys",
   "status": "KO"
 }
-``` 
+
+// Expired API key used for authentication
+{
+  "error": "API key has expired",
+  "status": "KO"
+}
+
+// Invalid expiration date (in the past)
+{
+  "error": "Expiration date must be in the future",
+  "status": "KO"
+}
+
+// Organization requires expiration
+{
+  "error": "Organization policy requires an expiration date for API keys",
+  "status": "KO"
+}
+
+// Expiration exceeds organization limit
+{
+  "error": "Expiration date exceeds organization maximum of 90 days",
+  "status": "KO"
+}
+```

@@ -1,68 +1,93 @@
 ---
-title: "API 密钥"
-description: "API 密钥端点的全面文档,详细说明 Capgo API 中的身份验证、权限和管理"
+title: API 键
+description: API 密钥端点的综合文档，详细介绍了 Capgo API 中的身份验证、权限和管理
 sidebar:
   order: 9
 locale: zh
 ---
+API 密钥用于验证对 Capgo API 的请求。每个密钥可以有不同的权限（模式）来控制访问级别。密钥是特定于组织的，应谨慎管理，因为它们授予对 Capgo 资源的访问权限。
 
-API 密钥用于验证对 Capgo API 的请求。每个密钥可以具有不同的权限(模式)以控制访问级别。密钥是特定于组织的,应谨慎管理,因为它们授予对您的 Capgo 资源的访问权限。
+## 关键模式
 
-## 密钥模式
+- **读取**：只能读取数据，不允许修改
+- **上传**：可以读取、修改和上传新包
+- **写入**：可以读取、修改数据和上传包
+- **全部**：对所有操作的完全访问权限
 
-- **read**: 只能读取数据,不允许修改
-- **upload**: 可以读取、修改和上传新 bundle
-- **write**: 可以读取、修改数据和上传 bundle
-- **all**: 对所有操作的完全访问权限
+关键模式遵循逐步/渐进的模式。如果您有上传密钥，然后创建写入密钥，则写入密钥将能够执行上传密钥可以执行的所有操作。
+请查看下图以更好地了解 API 键的工作原理。
 
-密钥模式遵循阶梯式/渐进式架构。如果您有上传密钥,然后创建写入密钥,写入密钥将能够执行上传密钥可以执行的所有操作。
-请查看以下图表以更好地了解 API 密钥的工作原理。
+<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="解释 API 键如何工作的图表" /><figcaption></figcaption></figure>
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="解释 API 密钥工作原理的图表" /><figcaption></figcaption></figure>
+## 具有有限权限的子项
 
-## 具有受限权限的子密钥
+您可以创建对特定应用程序或组织具有有限访问权限的子项。这对于限制对某些资源的访问同时仍然允许对其他资源进行操作非常有用。创建密钥时使用 `limited_to_apps` 和 `limited_to_orgs` 参数来定义这些限制。
 
-您可以创建对特定应用或组织具有受限访问权限的子密钥。这对于限制对某些资源的访问同时仍允许对其他资源进行操作很有用。创建密钥时使用 `limited_to_apps` 和 `limited_to_orgs` 参数来定义这些限制。
+## 加密密钥
+
+您可以创建**加密（散列）API 密钥**以增强安全性。创建加密密钥时：
+
+- 密钥在存储到数据库之前使用 SHA-256 进行哈希处理
+- **明文密钥在创建响应中仅返回一次** - 立即保存
+- 密钥创建后无法再次检索或查看
+- 如果您丢失了加密密钥，则必须创建一个新密钥
+
+创建密钥以启用加密时，请使用 `hashed: true` 参数。这是生产环境的推荐方法。
+
+## 密钥过期
+
+API 密钥可以有一个**到期日期**，以限制密钥被泄露时的暴露时间。当设置了到期日期时：
+
+- 钥匙在指定的日期和时间后停止工作
+- 使用过期密钥的请求将被拒绝并出现错误
+- 过期密钥将在 30 天后自动清除
+
+组织可以强制执行过期策略：
+- **需要过期**：所有 API 密钥必须有过期日期
+- **最大到期期限**：限制可以设置的到期日期
 
 ## 安全最佳实践
 
-1. **最小权限原则**: 始终使用仍允许集成运行的最严格模式
-2. **定期轮换**: 定期轮换您的 API 密钥
-3. **安全存储**: 安全存储 API 密钥,切勿将它们提交到版本控制
-4. **监控**: 监控 API 密钥使用情况并立即撤销任何受损的密钥
-5. **受限子密钥**: 对特定集成使用具有受限权限的子密钥以最小化风险
+1. **最小权限原则**：始终使用仍允许您的集成正常运行的最严格的模式
+2. **使用加密密钥**：为生产创建散列密钥以防止数据库泄露
+3. **设置到期日期**：使用到期日期来限制密钥的生命周期
+4. **定期轮换**：定期轮换您的 API 钥匙
+5. **安全存储**：安全存储 API 密钥，切勿将其提交给版本控制
+6. **监控**：监控 API 密钥使用情况并立即撤销任何受损密钥
+7. **有限子密钥**：使用具有有限权限的子密钥进行特定集成，以最大程度地降低风险
 
-## Endpoints
+## 端点
 
-### GET
+### 获取
 
 `https://api.capgo.app/apikey/`
 
-Retrieve all API keys associated with your account.
+检索与您的帐户关联的所有 API 密钥。
 
-#### Response Type
+#### 响应类型
 
 ```typescript
 interface ApiKey {
   created_at: string | null
   id: number
-  key: string
+  key: string | null  // null for encrypted keys
   mode: 'read' | 'write' | 'upload' | 'all'
   name: string
   updated_at: string | null
   user_id: string
   limited_to_apps?: string[]
   limited_to_orgs?: string[]
+  expires_at?: string | null  // ISO 8601 date, null means never expires
 }
-```
+```> **注意**：对于加密密钥，GET 响应中的 `key` 字段将为 `null`，因为纯密钥在创建过程中仅显示一次。
 
-#### Example Request
+#### 请求示例
 
 ```bash
 curl -H "authorization: your-api-key" https://api.capgo.app/apikey/
 ```
 
-#### Example Response
+#### 响应示例
 
 ```json
 {
@@ -90,13 +115,13 @@ curl -H "authorization: your-api-key" https://api.capgo.app/apikey/
 }
 ```
 
-### POST
+### 发布
 
 `https://api.capgo.app/apikey/`
 
-Create a new API key for a specific organization.
+为特定组织创建新的 API 密钥。
 
-#### Query Parameters
+#### 请求正文
 
 ```typescript
 interface ApiKeyCreate {
@@ -104,10 +129,12 @@ interface ApiKeyCreate {
   mode: 'read' | 'write' | 'upload' | 'all'
   limited_to_apps?: string[]
   limited_to_orgs?: string[]
+  hashed?: boolean       // Create an encrypted key (recommended for production)
+  expires_at?: string    // ISO 8601 date for key expiration
 }
 ```
 
-#### Example Request
+#### 请求示例（标准密钥）
 
 ```bash
 curl -X POST \
@@ -121,7 +148,22 @@ curl -X POST \
   https://api.capgo.app/apikey/
 ```
 
-#### Example Response
+#### 请求示例（带有效期的加密密钥）
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Secure CI Key",
+    "mode": "upload",
+    "hashed": true,
+    "expires_at": "2025-06-01T00:00:00Z"
+  }' \
+  https://api.capgo.app/apikey/
+```
+
+#### 响应示例（标准密钥）
 
 ```json
 {
@@ -137,22 +179,40 @@ curl -X POST \
 }
 ```
 
-### DELETE
+#### 响应示例（加密密钥）
+
+```json
+{
+  "apikey": {
+    "id": 4,
+    "key": "ak_abc123...",
+    "mode": "upload",
+    "name": "Secure CI Key",
+    "created_at": "2024-02-12T00:00:00Z",
+    "user_id": "user_123",
+    "expires_at": "2025-06-01T00:00:00Z"
+  }
+}
+```
+
+> **重要**：对于加密密钥，此响应中的 `key` 值是您**唯一一次**看到明文密钥。立即将其保存在安全的位置。后续 GET 请求将为 `key` 字段返回 `null`。
+
+### 删除
 
 `https://api.capgo.app/apikey/:id/`
 
-Delete an existing API key. Use this to revoke access immediately.
+删除现有的 API 密钥。使用它可以立即撤销访问权限。
 
-#### Parameters
-- `id`: The ID of the API key to delete (numeric identifier, not the key string itself)
+#### 参数
+- `id`：要删除的 API 密钥的 ID（数字标识符，而不是密钥字符串本身）
 
-#### Example Request
+#### 请求示例
 
 ```bash
 curl -X DELETE -H "authorization: your-api-key" https://api.capgo.app/apikey/1/
 ```
 
-#### Success Response
+#### 成功响应
 
 ```json
 {
@@ -160,17 +220,17 @@ curl -X DELETE -H "authorization: your-api-key" https://api.capgo.app/apikey/1/
 }
 ```
 
-## Common Use Cases
+## 常见用例
 
-1. **CI/CD Integration**: Create read-only keys for CI pipelines to check deployment status
-2. **Deployment Automation**: Use upload mode keys for automated deployment scripts
-3. **Monitoring Tools**: Use read mode keys for external monitoring integrations
-4. **Admin Access**: Use all mode keys sparingly for administrative tools
-5. **Limited Access**: Create subkeys with limited rights to specific apps or organizations for third-party integrations
+1. **CI/CD集成**：为CI管道创建只读密钥以检查部署状态
+2. **部署自动化**：使用上传模式密钥进行自动化部署脚本
+3. **监控工具**：使用读取模式键进行外部监控集成
+4. **管理员访问**：谨慎使用所有模式键作为管理工具
+5. **有限访问**：创建对特定应用程序或组织具有有限权限的子项以进行第三方集成
 
-## Error Handling
+## 错误处理
 
-Common error scenarios and their responses:
+常见错误场景及其应对措施：
 
 ```json
 // Invalid mode
@@ -190,4 +250,28 @@ Common error scenarios and their responses:
   "error": "Insufficient permissions to manage API keys",
   "status": "KO"
 }
-``` 
+
+// Expired API key used for authentication
+{
+  "error": "API key has expired",
+  "status": "KO"
+}
+
+// Invalid expiration date (in the past)
+{
+  "error": "Expiration date must be in the future",
+  "status": "KO"
+}
+
+// Organization requires expiration
+{
+  "error": "Organization policy requires an expiration date for API keys",
+  "status": "KO"
+}
+
+// Expiration exceeds organization limit
+{
+  "error": "Expiration date exceeds organization maximum of 90 days",
+  "status": "KO"
+}
+```

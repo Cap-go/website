@@ -1,79 +1,81 @@
 ---
-title: Supabase Apple Login - General Setup
-description: Learn how to integrate Apple Sign-In with Supabase Authentication using the Capacitor Social Login plugin.
-locale: zh
+title: Supabase Apple 登录 - 常规设置
+description: 了解如何使用 Capacitor 社交登录插件将 Apple 登录与 Supabase 身份验证集成。
 sidebar:
-    order: 1
+  order: 1
+locale: zh
 ---
 import { Steps } from '@astrojs/starlight/components';
 
 ## 概述
 
-本指南将帮助您集成 Apple 登录与 Supabase 身份验证。Apple 登录提供了一种安全、注重隐私的身份验证方法，可在 iOS、Android 和 Web 平台上使用。
+本指南将帮助您将 Apple 登录与 Supabase 身份验证集成。 Apple 登录提供了一种安全、注重隐私的身份验证方法，适用于 iOS、Android 和 Web 平台。
 
-## 前置条件
+## 先决条件
 
 开始之前，请确保您拥有：
 
-1. [创建一个 Supabase 项目](https://database.new/)
-2. 阅读 [Apple Login 通用设置](/docs/plugins/social-login/apple/general/) 指南以设置 Apple OAuth 凭证
-3. 遵循相应的特定于平台的指南为您的目标平台设置 Apple OAuth 凭证：
+1. [创建Supabase项目](https://database.new/)
+2. 阅读 [Apple 登录常规设置](/docs/plugins/social-login/apple/general/) 指南以设置 Apple OAuth 凭据
+3. 按照相应平台特定的指南为您的目标平台设置 Apple OAuth 凭据：
     - [Android 设置](/docs/plugins/social-login/apple/android/)
     - [iOS 设置](/docs/plugins/social-login/apple/ios/)
-    - [Web 设置](/docs/plugins/social-login/apple/web/)
+    - [网页设置](/docs/plugins/social-login/apple/web/)
 
-    :::note
-        在开始 Supabase 教程之前，您需要为计划使用的平台生成客户端 ID。
+    :::注意
+        在开始 Supabase 教程之前，您需要为您计划使用的平台生成客户端 ID。
+
 
         对于 iOS，客户端 ID 与您的应用 ID 相同。
         对于 Android 和 Web，客户端 ID 与您的服务 ID 相同。
-        您将在本指南的步骤 7 中使用它们。
+        您将在本指南的第 7 步中使用它们。
     :::
 
-## 在 Supabase 中启用 Apple OAuth 提供商
+## 在 Supabase 中启用 Apple OAuth 提供程序
 
 <Steps>
-1. 转到您的 [Supabase Dashboard](https://app.supabase.com/)
-2. 点击您的项目
-    <img src="/social-login-assets/supabase_project_select.webp" alt="Supabase Project Selector" />
-3. 转到 `Authentication` 菜单
-    <img src="/social-login-assets/supabase_authentication_menu.webp" alt="Supabase Authentication Menu" />
-4. 点击 `Providers` 选项卡
-    <img src="/social-login-assets/supabase_providers_tab.webp" alt="Supabase Providers Tab" />
+1. 转到您的 [Supabase 仪表板](https://app.supabase.com/)
+2. 单击您的项目
+    <img src="/social-login-assets/supabase_project_select.webp" alt="Supabase 项目选择器" />
+3. 请转到 `Authentication` 菜单
+    <img src="/social-login-assets/supabase_authentication_menu.webp" alt="Supabase 身份验证菜单" />
+4. 单击 `Providers` 选项卡
+    <img src="/social-login-assets/supabase_providers_tab.webp" alt="Supabase 提供商选项卡" />
 5. 查找 `Apple` 提供商
-    <img src="/social-login-assets/supabase_apple_provider.webp" alt="Supabase Apple Provider" />
-6. 启用 `Apple` 提供商
-    <img src="/social-login-assets/supabase_apple_provider_enable.webp" alt="Supabase Apple Provider Enable" />
-7. 填充客户端 ID 配置：
+    <img src="/social-login-assets/supabase_apple_provider.webp" alt="Supabase Apple 提供商" />
+6. 启用 `Apple` 提供程序
+    <img src="/social-login-assets/supabase_apple_provider_enable.webp" alt="Supabase Apple 提供商启用" />
+7.填写客户端ID配置：
 
-    :::note
-      如果您使用 Apple 登录进行 iOS，客户端 ID 与您的应用 ID 相同。
-      如果您使用 Apple 登录进行 Android 或 Web，客户端 ID 与您的服务 ID 相同。
-      如果您同时使用两者，您需要同时提供应用 ID 和服务 ID。
+    :::注意
+      如果您使用 Apple 登录 iOS，则客户端 ID 与您的应用 ID 相同。
+      如果您使用 Apple 登录 Android 或 Web，则客户端 ID 与您的服务 ID 相同。
+      如果您同时使用两者，则需要同时提供应用程序 ID 和服务 ID。
     :::
 
-    <img src="/social-login-assets/supabase_apple_provider_client_id.webp" alt="Supabase Apple Provider Client ID" />
-8. 点击 `Save` 按钮
-    <img src="/social-login-assets/supabase_apple_provider_save.webp" alt="Supabase Apple Provider Save" />
+    <img src="/social-login-assets/supabase_apple_provider_client_id.webp" alt="Supabase Apple 提供商客户端 ID" />
+8. 单击 `Save` 按钮
+    <img src="/social-login-assets/supabase_apple_provider_save.webp" alt="Supabase Apple 提供商保存" />
 
-    :::note
-      您**不必**设置 `Secret key (for OAuth)`。我们将进行自定义后端实现来处理 Apple 登录。
+
+    :::注意
+      您_**不必**_设置`Secret key (for OAuth)`。我们将执行自定义后端实现来处理 Apple 登录。
     :::
 </Steps>
 
-好的，您现在已启用 Supabase 身份验证的 Apple 登录 🎉
+瞧，您现在已启用 Apple 使用 Supabase 身份验证登录 🎉
 
 ## 使用身份验证助手
 
-完整的实现包括一个 `authenticateWithAppleSupabase()` 助手函数，该函数处理整个 Apple 登录流程与 Supabase。此函数：
+完整的实现包括一个辅助函数 `authenticateWithAppleSupabase()`，它使用 Supabase 处理整个 Apple 登录流程。这个功能：
 
 - 使用特定于平台的配置初始化 Apple 登录
-- 处理身份验证流程（iOS 上为原生，Android/Web 上为 OAuth 重定向）
-- 从 Apple 提取身份令牌
-- 使用身份令牌登录到 Supabase
+- 处理身份验证流程（在 iOS 上原生，在 Android/Web 上重定向 OAuth）
+- 从 Apple 中提取身份令牌
+- 使用身份令牌登录 Supabase
 
-:::tip[完整实现]
-完整实现可在 [example app 的 `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) 文件中找到。
+:::提示[完整实施]
+完整的实现可在 [示例应用程序的 `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) 文件中找到。
 :::
 
 ### 基本用法
@@ -90,12 +92,10 @@ if (result.success) {
 }
 ```
 
-### 工作原理
+### 它是如何运作的
 
-助手函数自动处理特定于平台的差异：
+辅助函数自动处理特定于平台的差异：- **iOS**：使用本机 Apple 登录（无需重定向 URL，自动使用捆绑包 ID）
+- **Android**：使用 OAuth 重定向流与后端边缘功能（需要服务 ID）
+- **Web**：使用 OAuth 弹出流程（需要服务 ID 和当前页面 URL 作为重定向）
 
-- **iOS**: 使用原生 Apple 登录（不需要重定向 URL，自动使用包 ID）
-- **Android**: 使用带有后端 edge function 的 OAuth 重定向流程（需要服务 ID）
-- **Web**: 使用 OAuth 弹出窗口流程（需要服务 ID 和当前页面 URL 作为重定向）
-
-该函数返回来自 Apple 的身份令牌，然后将其用于使用 `supabase.auth.signInWithIdToken()` 通过 Supabase 进行身份验证。
+该函数从 Apple 返回一个身份令牌，然后使用 `supabase.auth.signInWithIdToken()` 向 Supabase 进行身份验证。

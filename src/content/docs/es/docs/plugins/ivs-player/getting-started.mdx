@@ -1,25 +1,26 @@
 ---
-title: Getting Started
-description: Learn how to install and configure the Capacitor IVS Player plugin to integrate Amazon IVS low-latency streaming in your app.
+title: Empezando
+description: >-
+  Aprenda a instalar y configurar el complemento Capacitor IVS Player para
+  integrar la transmisión de baja latencia de Amazon IVS en su aplicación.
 sidebar:
   order: 2
 locale: es
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Instalar el paquete**
    <PackageManagers pkg="@capgo/ivs-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Sincronización con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure the plugin**
+3. **Configurar el complemento**
 
-   **Basic Player Setup:**
+   **Configuración básica del reproductor:**
    ```typescript
    import { IvsPlayer } from '@capgo/ivs-player';
 
@@ -33,7 +34,7 @@ import { PackageManagers } from 'starlight-package-managers'
    await IvsPlayer.play({ playerId });
    ```
 
-   **Player Controls:**
+   **Controles del jugador:**
    ```typescript
    // Pause playback
    await IvsPlayer.pause({ playerId });
@@ -53,7 +54,7 @@ import { PackageManagers } from 'starlight-package-managers'
 
    <Tabs>
      <TabItem label="iOS">
-       Add to your `Info.plist`:
+       Agregue a su `Info.plist`:
        ```xml
        <key>NSAppTransportSecurity</key>
        <dict>
@@ -63,14 +64,14 @@ import { PackageManagers } from 'starlight-package-managers'
        ```
      </TabItem>
      <TabItem label="Android">
-       Add to your `AndroidManifest.xml`:
+       Agregue a su `AndroidManifest.xml`:
        ```xml
        <uses-permission android:name="android.permission.INTERNET" />
        ```
      </TabItem>
    </Tabs>
 
-4. **Event handling**
+4. **Manejo de eventos**
    ```typescript
    import { IvsPlayer } from '@capgo/ivs-player';
 
@@ -98,7 +99,7 @@ import { PackageManagers } from 'starlight-package-managers'
    });
    ```
 
-5. **Advanced usage**
+5. **Uso avanzado**
    ```typescript
    import { IvsPlayer } from '@capgo/ivs-player';
 
@@ -187,52 +188,52 @@ import { PackageManagers } from 'starlight-package-managers'
    ```
 </Steps>
 
-## API Reference
+## API Referencia
 
-### Methods
+### Métodos
 
 #### `create(options: CreateOptions)`
-Create a new IVS player instance.
+Cree una nueva instancia de reproductor IVS.
 
-**Parameters:**
-- `options`: Player configuration
-  - `url`: string - IVS playback URL
-  - `autoplay`: boolean - Auto-start playback
-  - `muted`: boolean - Start muted
-  - `controls`: boolean - Show native controls
+**Parámetros:**
+- `options`: Configuración del reproductor
+  - `url`: cadena - URL de reproducción de IVS
+  - `autoplay`: booleano - Iniciar reproducción automáticamente
+  - `muted`: booleano - Inicio silenciado
+  - `controls`: booleano - Mostrar controles nativos
 
-**Returns:** `Promise<{ playerId: string }>`
+**Devoluciones:** `Promise<{ playerId: string }>`
 
 #### `play(options: PlayerOptions)`
-Start playback.
+Inicie la reproducción.
 
 #### `pause(options: PlayerOptions)`
-Pause playback.
+Pausar la reproducción.
 
 #### `stop(options: PlayerOptions)`
-Stop playback and reset position.
+Detenga la reproducción y restablezca la posición.
 
 #### `seekTo(options: SeekOptions)`
-Seek to a specific position.
+Buscar un puesto específico.
 
 #### `setVolume(options: VolumeOptions)`
-Set player volume (0.0 to 1.0).
+Establece el volumen del reproductor (0,0 a 1,0).
 
 #### `setQuality(options: QualityOptions)`
-Set playback quality.
+Establece la calidad de reproducción.
 
 #### `destroy(options: PlayerOptions)`
-Destroy the player instance.
+Destruye la instancia del jugador.
 
-### Events
+### Eventos
 
-- `onState`: Player state changes
-- `onError`: Playback errors
-- `onDuration`: Video duration available
-- `onProgress`: Playback progress updates
-- `onQuality`: Quality changes
-- `onMetadata`: Timed metadata events
-- `onBuffer`: Buffer status updates
+- `onState`: Cambios de estado del jugador
+- `onError`: Errores de reproducción
+- `onDuration`: Duración del vídeo disponible
+- `onProgress`: actualizaciones del progreso de la reproducción
+- `onQuality`: Cambios de calidad
+- `onMetadata`: Eventos de metadatos cronometrados
+- `onBuffer`: Actualizaciones de estado del búfer
 
 ### Interfaces
 
@@ -261,29 +262,29 @@ interface QualityOptions extends PlayerOptions {
 }
 ```
 
-## Platform Notes
+## Notas de plataforma
 
 ### iOS
-- Requires iOS 12.0 or later
-- Uses native AVPlayer with IVS extensions
-- Supports Picture-in-Picture on iPads
+- Requiere iOS 12.0 o posterior
+- Utiliza AVPlayer nativo con extensiones IVS
+- Admite imagen en imagen en iPads
 
 ### Android
-- Requires Android 5.0 (API level 21) or later
-- Uses Amazon IVS Player SDK
-- Hardware acceleration recommended
+- Requiere Android 5.0 (API nivel 21) o posterior
+- Utiliza el reproductor Amazon IVS SDK
+- Se recomienda aceleración de hardware
 
-## Common Use Cases
+## Casos de uso comunes
 
-1. **Live Streaming**: Real-time events, sports, gaming
-2. **Interactive Streaming**: Viewer polls, Q&A sessions
-3. **E-commerce**: Live shopping with product highlights
-4. **Education**: Live classes with timed content
-5. **Entertainment**: Concerts, shows with audience interaction
+1. **Transmisión en vivo**: eventos, deportes y juegos en tiempo real
+2. **Transmisión interactiva**: encuestas de espectadores, sesiones de preguntas y respuestas
+3. **Comercio electrónico**: compras en vivo con productos destacados
+4. **Educación**: Clases en vivo con contenido cronometrado
+5. **Entretenimiento**: Conciertos, espectáculos con interacción del público.
 
-## Best Practices
+## Mejores prácticas
 
-1. **Network Handling**: Monitor connection quality
+1. **Manejo de red**: monitorear la calidad de la conexión
    ```typescript
    IvsPlayer.addListener('onError', (event) => {
      if (event.error.includes('network')) {
@@ -293,21 +294,21 @@ interface QualityOptions extends PlayerOptions {
    });
    ```
 
-2. **Resource Management**: Always destroy players when done
-3. **Autoplay Policies**: Start muted for reliable autoplay
-4. **Quality Selection**: Let IVS handle automatic quality switching
+2. **Gestión de recursos**: Destruye siempre a los jugadores cuando hayas terminado
+3. **Políticas de reproducción automática**: inicio silenciado para una reproducción automática confiable
+4. **Selección de calidad**: deje que IVS se encargue del cambio automático de calidad
 
-## Troubleshooting
+## Solución de problemas
 
-**Stream not playing:**
-- Verify the IVS playback URL is valid
-- Check network permissions
-- Ensure the stream is live
+**La transmisión no se reproduce:**
+- Verifique que la URL de reproducción de IVS sea válida
+- Verificar permisos de red
+- Asegúrate de que la transmisión esté en vivo.
 
-**High latency:**
-- IVS is optimized for low latency, check your encoder settings
-- Verify you're using the IVS-specific playback URL
+**Alta latencia:**
+- IVS está optimizado para baja latencia, verifique la configuración de su codificador
+- Verifica que estás usando la URL de reproducción específica de IVS
 
-**Quality issues:**
-- Allow automatic quality switching
-- Check network bandwidth requirements
+**Problemas de calidad:**
+- Permitir el cambio automático de calidad.
+- Verifique los requisitos de ancho de banda de la red

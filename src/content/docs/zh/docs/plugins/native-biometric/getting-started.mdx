@@ -1,125 +1,139 @@
 ---
-title: "快速入门"
-description: >-
-  Learn how to install and use the Native Biometric plugin for secure biometric
-  authentication in your Capacitor app.
+title: 入门
+description: 了解如何在 Capacitor 应用程序中安装和使用本机生物识别插件进行安全生物识别身份验证。
 sidebar:
   order: 2
 locale: zh
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **安装软件包**
    <PackageManagers pkg="@capgo/capacitor-native-biometric" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **与原生项目同步**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure permissions**
+3. **配置权限**
    
    ### iOS
-   Add Face ID usage description to your `Info.plist`:
+   将 Face ID 使用说明添加到您的 `Info.plist` 中：
    ```xml
    <key>NSFaceIDUsageDescription</key>
-   <string>For secure authentication</string>
+   <string>Authenticate securely to access your account</string>
    ```
    
    ### Android
-   Add biometric permission to your `AndroidManifest.xml`:
+   将生物识别权限添加到您的 `AndroidManifest.xml`：
    ```xml
    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
    ```
+
+4. **在提示之前检查可用性**
+   在显示身份验证 UI 之前，请务必检查完整的可用性详细信息。
 </Steps>
 
-## Usage
+## 用法
 
-Import the plugin and use its methods for biometric authentication:
+导入插件并使用其方法进行生物识别身份验证：
 
 ```typescript
-import { NativeBiometric } from '@capgo/capacitor-native-biometric';
+import {
+  NativeBiometric,
+  BiometryType,
+  AuthenticationStrength,
+  AccessControl,
+} from '@capgo/capacitor-native-biometric';
 
-// Check if biometric authentication is available
 const checkBiometric = async () => {
-  const result = await NativeBiometric.isAvailable();
-  
-  if (result.isAvailable) {
-    console.log(`Biometric type: ${result.biometryType}`);
-  }
+  const result = await NativeBiometric.isAvailable({ useFallback: true });
+  console.log('Biometric available:', result.isAvailable);
+  console.log('Strength:', result.authenticationStrength); // STRONG | WEAK | NONE
+  console.log('Primary type:', result.biometryType);
+  console.log('Device is secure:', result.deviceIsSecure);
+  console.log('Strong biometry:', result.strongBiometryIsAvailable);
 };
 
-// Perform biometric verification
 const verify = async () => {
-  const verified = await NativeBiometric.verifyIdentity({
-    reason: "For secure access to your account",
-    title: "Authentication",
-    subtitle: "Verify your identity",
-    description: "Place your finger on the sensor"
-  })
-    .then(() => true)
-    .catch(() => false);
-  
-  if (verified) {
-    console.log("Authentication successful");
-  }
+  await NativeBiometric.verifyIdentity({
+    reason: 'Open secure section',
+    title: 'Biometric Login',
+    subtitle: 'Unlock with face, fingerprint, or credentials',
+    description: 'Authenticate to continue',
+    negativeButtonText: 'Cancel',
+    maxAttempts: 5,
+    allowedBiometryTypes: [BiometryType.FINGERPRINT, BiometryType.FACE_ID],
+  });
 };
 
-// Store credentials securely
 const saveCredentials = async () => {
   await NativeBiometric.setCredentials({
-    username: "user@example.com",
-    password: "securepassword",
-    server: "https://api.example.com"
+    username: 'user@example.com',
+    password: 'securepassword',
+    server: 'https://api.example.com',
+    accessControl: AccessControl.BIOMETRY_ANY,
   });
 };
 
-// Retrieve stored credentials
 const getCredentials = async () => {
-  const credentials = await NativeBiometric.getCredentials({
-    server: "https://api.example.com"
+  const credentials = await NativeBiometric.getSecureCredentials({
+    server: 'https://api.example.com',
+    reason: 'Sign in again',
+    title: 'Confirm identity',
   });
-  
   console.log(credentials.username);
-  console.log(credentials.password);
 };
 
-// Delete stored credentials
-const deleteCredentials = async () => {
-  await NativeBiometric.deleteCredentials({
-    server: "https://api.example.com"
+const alreadySaved = async () => {
+  const { isSaved } = await NativeBiometric.isCredentialsSaved({
+    server: 'https://api.example.com',
   });
+  console.log('Credentials saved:', isSaved);
+};
+
+const cleanup = async () => {
+  await NativeBiometric.deleteCredentials({
+    server: 'https://api.example.com',
+  });
+};
+
+const watchChanges = async () => {
+  const handle = await NativeBiometric.addListener('biometryChange', (result) => {
+    console.log('Biometry availability changed:', result.isAvailable);
+    console.log('Type:', result.biometryType);
+  });
+
+  // Remove when no longer needed
+  // await handle.remove();
 };
 ```
 
-## API Reference
+## API 参考
 
-### isAvailable()
+### 可用（选项）
 
-Checks if biometric authentication is available on the device.
+检查设备上是否可以使用生物识别身份验证。
 
 ```typescript
-interface AvailableResult {
-  isAvailable: boolean;
-  biometryType?: BiometryType;
-  errorCode?: number;
+interface IsAvailableOptions {
+  useFallback: boolean;
 }
 
-enum BiometryType {
-  NONE = 0,
-  TOUCH_ID = 1,
-  FACE_ID = 2,
-  FINGERPRINT = 3,
-  FACE_AUTHENTICATION = 4,
-  IRIS_AUTHENTICATION = 5
+interface AvailableResult {
+  isAvailable: boolean;
+  authenticationStrength: AuthenticationStrength; // STRONG | WEAK | NONE
+  biometryType: BiometryType;
+  deviceIsSecure: boolean;
+  strongBiometryIsAvailable: boolean;
+  errorCode?: number;
 }
 ```
 
-### verifyIdentity(options)
+### 验证身份（选项）
 
-Performs biometric authentication.
+提示进行生物识别身份验证。
 
 ```typescript
 interface BiometricOptions {
@@ -127,37 +141,59 @@ interface BiometricOptions {
   title?: string;
   subtitle?: string;
   description?: string;
-  fallbackTitle?: string;
+  negativeButtonText?: string;
   useFallback?: boolean;
-  maxAttempts?: number;
+  fallbackTitle?: string;
+  maxAttempts?: number; // Android only
+  allowedBiometryTypes?: BiometryType[];
 }
 ```
 
-### setCredentials(options)
+### setCredentials（选项）
 
-Stores credentials securely with biometric protection.
+存储凭据。使用 `accessControl` 在支持的平台上强制执行仅生物识别检索。
 
 ```typescript
-interface Credentials {
+interface SetCredentialOptions {
   username: string;
   password: string;
   server: string;
+  accessControl?: AccessControl;
 }
 ```
 
-### getCredentials(options)
+### getSecureCredentials（选项）
 
-Retrieves stored credentials after biometric authentication.
+仅当受保护条目的身份验证成功时才获取存储的凭据。
 
 ```typescript
-interface GetCredentialOptions {
+interface GetSecureCredentialsOptions {
   server: string;
+  reason?: string;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  negativeButtonText?: string;
 }
 ```
 
-### deleteCredentials(options)
+### isCredentialsSaved（选项）
 
-Deletes stored credentials.
+检查服务器条目的凭据是否存在。
+
+```typescript
+interface IsCredentialsSavedOptions {
+  server: string;
+}
+
+interface IsCredentialsSavedResult {
+  isSaved: boolean;
+}
+```
+
+### 删除凭证（选项）
+
+删除服务器条目存储的凭据。
 
 ```typescript
 interface DeleteCredentialOptions {
@@ -165,42 +201,35 @@ interface DeleteCredentialOptions {
 }
 ```
 
-## Best Practices
+### addListener('biometryChange', ...)
 
-1. **Always check availability first**
-   ```typescript
-   const result = await NativeBiometric.isAvailable();
-   if (!result.isAvailable) {
-     // Fall back to password authentication
-   }
-   ```
+监听生物识别变化并安全地恢复流程。
 
-2. **Provide clear reasons**
-   Always explain why you need biometric authentication to build user trust.
+```typescript
+const handle = await NativeBiometric.addListener('biometryChange', (result) => {
+  // result: AvailableResult
+});
+```
 
-3. **Handle errors gracefully**
-   ```typescript
-   try {
-     await NativeBiometric.verifyIdentity({
-       reason: "Access your secure data"
-     });
-   } catch (error) {
-     // Handle cancellation or failure
-     console.log("Authentication failed or cancelled");
-   }
-   ```
-
-4. **Use appropriate fallbacks**
-   Enable passcode fallback for devices where biometrics may fail.
-
-## Platform Differences
+## 平台差异
 
 ### iOS
-- Supports Touch ID and Face ID
-- Requires `NSFaceIDUsageDescription` for Face ID
-- Fallback to device passcode available
+- 支持面容 ID 和触摸 ID
+- `useFallback` 遵循配置的密码回退行为
 
 ### Android
-- Supports fingerprint, face, and iris recognition
-- Requires `USE_BIOMETRIC` permission
-- Biometric Prompt API for Android 9+
+- 支持指纹、面部、虹膜和 PIN/图案/密码流
+- Android 约束适用于后备 UI 和生物识别类型限制
+
+## 最佳实践
+
+1. **始终首先检查可用性**
+2. **使用完整结果数据**来选择安全路线
+3. **对于敏感数据首选安全凭证模式**
+4. **优雅地处理取消和错误**
+5. **当不再需要监听器时**删除它们
+
+## 相关文档
+
+- [从 Ionic Identity Vault 迁移](/docs/upgrade/from-ionic-identity-vault/)
+- [Ionic 企业插件迁移解决方案](/solutions/ionic-enterprise-plugins/)

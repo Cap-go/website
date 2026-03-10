@@ -1,34 +1,38 @@
 ---
+title: Facebook Migration de connexion vers @capgo/social-login
+description: >-
+  Ce guide détaillé fournit des instructions étape par étape pour la transition
+  du plugin @capacitor-community/facebook-login au plugin
+  @capgo/capacitor-social-login, garantissant un processus de migration fluide
+  avec des fonctionnalités améliorées.
+sidebar:
+  order: 2
 locale: fr
-title: Migration Guide from @capacitor-Communauté/facebook-Connexion to @capgo/capacitor-social-Connexion
-description: This detailed Guide provides step-by-step instructions for transitioning from the @capacitor-Communauté/facebook-Connexion plugin to the @capgo/capacitor-social-Connexion plugin, ensuring a smooth Migration process with enhanced Fonctionnalités.
-sidebar: 
-    order: 2
 ---
 import { Steps } from '@astrojs/starlight/components';
 
 ## Aperçu
 
-This guide provides comprehensive instructions for migrating from `@capacitor-community/facebook-login` to `@capgo/capacitor-social-login`. The new plugin modernizes Facebook authentication with a unified API that supports multiple social providers, improved TypeScript support, and enhanced capabilities.
+Ce guide fournit des instructions complètes pour la migration de `@capacitor-community/facebook-login` vers `@capgo/capacitor-social-login`. Le nouveau plugin modernise l'authentification Facebook avec un API unifié qui prend en charge plusieurs fournisseurs sociaux, une prise en charge améliorée de TypeScript et des fonctionnalités améliorées.
 
-## Installation
+##Installation
 
 <Steps>
-1. Retirer the old package:
+1. Supprimez l'ancien package :
    ```bash
    npm uninstall @capacitor-community/facebook-login
    ```
 
-2. Installer the Nouveau package:
+2. Installez le nouveau package :
    ```bash
    npm install @capgo/capacitor-social-login
    npx cap sync
    ```
 </Steps>
 
-## Code Changes
+## Modifications du code
 
-### Importer Changes
+### Importer les modifications
 ```diff
 - import { FacebookLogin } from '@capacitor-community/facebook-login';
 + import { SocialLogin } from '@capgo/capacitor-social-login';
@@ -36,7 +40,7 @@ This guide provides comprehensive instructions for migrating from `@capacitor-co
 
 ### Initialisation
 
-**Key Change**: The new package requires explicit setup in your code:
+**Changement de clé** : le nouveau package nécessite une configuration explicite dans votre code :
 
 ```diff
 - // Old package required no explicit initialization in code
@@ -53,7 +57,7 @@ This guide provides comprehensive instructions for migrating from `@capacitor-co
 
 ### Connexion
 
-The Connexion method now accepts a provider Paramètre:
+La méthode de connexion accepte désormais un paramètre de fournisseur :
 
 ```diff
 - const FACEBOOK_PERMISSIONS = ['email', 'public_profile'];
@@ -69,9 +73,9 @@ The Connexion method now accepts a provider Paramètre:
 + });
 ```
 
-### Response Type Changes
+### Modifications du type de réponse
 
-The response structure has been modernized with a more comprehensive Profil object:
+La structure de réponse a été modernisée avec un objet profil plus complet :
 
 ```typescript
 // Old response type
@@ -116,12 +120,12 @@ interface FacebookLoginResponse {
 }
 ```
 
-**Key Differences**:
-- Response now includes a `provider` field identifying the authentication provider
-- More detailed `profile` object with additional user information
-- Consistent structure across all social Connexion providers
+**Différences clés** :
+- La réponse inclut désormais un champ `provider` identifiant le fournisseur d'authentification
+- Objet `profile` plus détaillé avec des informations utilisateur supplémentaires
+- Structure cohérente parmi tous les fournisseurs de connexion sociale
 
-### Checking Connexion Status
+### Vérification de l'état de connexion
 ```diff
 - const result = await FacebookLogin.getCurrentAccessToken();
 - const isLoggedIn = result && result.accessToken;
@@ -141,11 +145,11 @@ interface FacebookLoginResponse {
 + });
 ```
 
-## Platform Specific Changes
+## Modifications spécifiques à la plateforme
 
 ### Android Configuration
 
-Configuration is now handled through the Initialiser method:
+La configuration est désormais gérée via la méthode initialize :
 
 ```diff
 - // AndroidManifest.xml changes remain the same
@@ -159,11 +163,11 @@ Configuration is now handled through the Initialiser method:
 + });
 ```
 
-**Important**: Client token is now required for Android authentication.
+**Important** : le jeton client est désormais requis pour l'authentification Android.
 
 ### iOS Configuration
 
-1. The iOS setup in `AppDelegate.swift` remains the same:
+1. La configuration iOS dans `AppDelegate.swift` reste la même :
 
 ```swift
 import FBSDKCoreKit
@@ -183,7 +187,7 @@ ApplicationDelegate.shared.application(
 )
 ```
 
-2. The `Info.plist` configuration remains the same:
+2. La configuration `Info.plist` reste la même :
 ```xml
 <key>CFBundleURLTypes</key>
 <array>
@@ -210,25 +214,25 @@ ApplicationDelegate.shared.application(
 </array>
 ```
 
-## Breaking Changes
+## Modifications radicales
 
-Summary of breaking changes when migrating:
+Résumé des modifications majeures lors de la migration :
 
-1. **Explicit initialization is now required** - Must call `initialize()` before use
-2. **Response object structure has changed significantly** - Nouveau nested result format with enhanced Profil data
-3. **Client token is now required for Android** - Additional Configuration needed
-4. **Different method names and Paramètre structures** - Provider-based approach
-5. **Erreur handling and Erreur types have changed** - More detailed Erreur Information
+1. **Une initialisation explicite est désormais requise** - Vous devez appeler `initialize()` avant utilisation
+2. **La structure de l'objet de réponse a considérablement changé** - Nouveau format de résultat imbriqué avec des données de profil améliorées
+3. **Le jeton client est désormais requis pour Android** - Configuration supplémentaire requise
+4. **Différents noms de méthodes et structures de paramètres** - Approche basée sur le fournisseur
+5. **La gestion des erreurs et les types d'erreurs ont changé** - Informations plus détaillées sur les erreurs
 
-## Key Advantages
+## Avantages clés
 
-The Nouveau plugin provides:
+Le nouveau plugin fournit :
 
-- **Unified API** across multiple social providers (Google, Apple, Facebook)
-- **Improved TypeScript Support** with better type definitions
-- **Enhanced Profil data** with more Utilisateur Information
-- **Actif maintenance** and Communauté Support
-- **Consistent Erreur handling** across all providers
-- **Better token management** with proper expiration handling
+- ** API** unifié entre plusieurs prestataires sociaux (Google, Apple, Facebook)
+- **Prise en charge améliorée de TypeScript** avec de meilleures définitions de types
+- **Données de profil améliorées** avec plus d'informations sur l'utilisateur
+- **Maintenance active** et support communautaire
+- **Gestion cohérente des erreurs** chez tous les fournisseurs
+- **Meilleure gestion des jetons** avec une gestion appropriée de l'expiration
 
-For more detailed Configuration instructions, please refer to the [official Documentation](/docs/plugins/social-Connexion/facebook/). 
+Pour des instructions de configuration plus détaillées, veuillez vous référer à la [documentation officielle](/docs/plugins/social-login/facebook/).

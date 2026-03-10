@@ -1,111 +1,110 @@
 ---
-title: Create Android Auto-Renewable Subscription
+title: Buat Android Langganan yang Dapat Diperbarui Otomatis
 description: >-
-  Step-by-step guide to creating auto-renewable subscriptions in Google Play
-  Console for the native-purchases plugin.
+  Panduan langkah demi langkah untuk membuat langganan yang dapat diperpanjang
+  secara otomatis di Konsol Google Play untuk plugin pembelian asli.
 sidebar:
   order: 4
 locale: id
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 
-Auto-renewable subscriptions provide access to content, services, or premium features in your app on an ongoing basis. This guide will help you create and configure subscriptions in Google Play Console.
+Langganan yang dapat diperpanjang secara otomatis memberikan akses ke konten, layanan, atau fitur premium di aplikasi Anda secara berkelanjutan. Panduan ini akan membantu Anda membuat dan mengonfigurasi langganan di Konsol Google Play.
 
-## Overview
+## Ikhtisar
 
-Subscriptions automatically renew at the end of each billing period until the user cancels. They're ideal for:
-- Premium content access
-- Ad-free experiences
-- Cloud storage
-- Ongoing services
+Langganan diperpanjang secara otomatis pada akhir setiap periode penagihan hingga pengguna membatalkan. Mereka ideal untuk:
+- Akses konten premium
+- Pengalaman bebas iklan
+- Penyimpanan awan
+- Layanan yang sedang berlangsung
 
-## Creating a Subscription
+## Membuat Langganan
 
 <Steps>
 
-1. **Navigate to Subscriptions**
+1. **Navigasi ke Langganan**
 
-   In Google Play Console, select your app and choose **Monetize > Subscriptions** from the left menu.
+   Di Konsol Google Play, pilih aplikasi Anda dan pilih **Monetisasi > Langganan** dari menu sebelah kiri.
 
-   Click the **Create subscription** button to begin.
+   Klik tombol **Buat langganan** untuk memulai.
 
-   ![Navigate to subscriptions](/native-purchases/android/create-subscription/navigate-to-subscriptions.webp)
+   ![Buka langganan](/native-purchases/android/create-subscription/navigate-to-subscriptions.webp)
 
-2. **Enter Basic Information**
+2. **Masukkan Informasi Dasar**
 
-   Provide a subscription name and product ID. The product ID is required for configuration in your app and cannot be changed later.
+   Berikan nama langganan dan ID produk. ID produk diperlukan untuk konfigurasi di aplikasi Anda dan tidak dapat diubah nanti.
 
-   ![Enter subscription details](/native-purchases/android/create-subscription/enter-subscription-details.webp)
+   ![Masukkan detail langganan](/native-purchases/android/create-subscription/enter-subscription-details.webp)
 
-3. **Create Base Plan**
+3. **Buat Rencana Dasar**
 
-   Google Play requires exactly one base plan per subscription. The native-purchases plugin supports only one base plan to maintain compatibility with iOS.
+   Google Play memerlukan tepat satu paket dasar per langganan. Plugin pembelian asli hanya mendukung satu paket dasar untuk menjaga kompatibilitas dengan iOS.
 
-   Click **Add base plan** to continue.
+   Klik **Tambahkan paket dasar** untuk melanjutkan.
 
-   ![Create base plan](/native-purchases/android/create-subscription/create-base-plan.webp)
+   ![Buat paket dasar](/native-purchases/android/create-subscription/create-base-plan.webp)
 
-4. **Configure Base Plan Details**
+4. **Konfigurasi Detail Paket Dasar**
 
-   Enter:
-   - **Base plan ID**: Unique identifier for this plan
-   - **Billing period**: How often users are charged (weekly, monthly, yearly, etc.)
-   - **Grace period**: Time window during which Google maintains the subscription while retrying payment before cancellation
+   Masukkan:
+   - **ID paket dasar**: Pengidentifikasi unik untuk paket ini
+   - **Periode penagihan**: Seberapa sering pengguna ditagih (mingguan, bulanan, tahunan, dll.)
+   - **Masa tenggang**: Jangka waktu selama Google mempertahankan langganan sambil mencoba kembali pembayaran sebelum pembatalan
 
-   ![Configure base plan](/native-purchases/android/create-subscription/configure-base-plan-details.webp)
+   ![Konfigurasi paket dasar](/native-purchases/android/create-subscription/configure-base-plan-details.webp)
 
-5. **Set Up Pricing**
+5. **Siapkan Harga**
 
-   Access the pricing section and select all countries/regions where you want to offer the subscription.
+   Akses bagian harga dan pilih semua negara/wilayah tempat Anda ingin menawarkan langganan.
 
-   ![Select regions](/native-purchases/android/create-subscription/select-pricing-regions.webp)
+   ![Pilih wilayah](/native-purchases/android/create-subscription/select-pricing-regions.webp)
 
-6. **Configure Price**
+6. **Konfigurasi Harga**
 
-   Set your base price in your primary currency. Google Play automatically converts this to local currencies.
+   Tetapkan harga dasar dalam mata uang utama Anda. Google Play secara otomatis mengonversikannya ke mata uang lokal.
 
-   ![Set price](/native-purchases/android/create-subscription/set-base-price.webp)
+   ![Tetapkan harga](/native-purchases/android/create-subscription/set-base-price.webp)
 
-7. **Review Regional Pricing**
+7. **Tinjau Harga Regional**
 
-   Review the automatically converted prices for each country. You can adjust individual prices if needed.
+   Tinjau harga yang dikonversi secara otomatis untuk setiap negara. Anda dapat menyesuaikan harga individual jika diperlukan.
 
-   ![Review pricing](/native-purchases/android/create-subscription/review-regional-pricing.webp)
+   ![Ulasan harga](/native-purchases/android/create-subscription/review-regional-pricing.webp)
 
-8. **Save Configuration**
+8. **Simpan Konfigurasi**
 
-   Save your pricing configuration.
+   Simpan konfigurasi harga Anda.
 
-   ![Save pricing](/native-purchases/android/create-subscription/save-pricing-configuration.webp)
+   ![Hemat harga](/native-purchases/android/create-subscription/save-pricing-configuration.webp)
 
-9. **Activate Subscription**
+9. **Aktifkan Berlangganan**
 
-   Click the **Activate** button to make your subscription product live and available for purchase.
+   Klik tombol **Aktifkan** untuk menjadikan produk langganan Anda aktif dan tersedia untuk dibeli.
 
-   ![Activate subscription](/native-purchases/android/create-subscription/activate-subscription.webp)
+   ![Aktifkan langganan](/native-purchases/android/create-subscription/activate-subscription.webp)
 
 </Steps>
 
-## Important Considerations
+## Pertimbangan Penting
 
-### Base Plan Limitation
+### Batasan Paket Dasar
 
-The native-purchases plugin requires exactly one base plan per subscription to ensure consistency with iOS subscription handling. Multiple base plans are not supported.
+Plugin pembelian asli memerlukan satu paket dasar per langganan untuk memastikan konsistensi dengan penanganan langganan iOS. Beberapa paket dasar tidak didukung.
 
-### Grace Period
+### Masa Tenggang
 
-The grace period allows Google Play to retry failed payments while maintaining the user's subscription access. Common grace periods are:
-- 3 days for monthly subscriptions
-- 7 days for longer subscriptions
+Masa tenggang memungkinkan Google Play mencoba kembali pembayaran yang gagal sambil mempertahankan akses berlangganan pengguna. Masa tenggang yang umum adalah:
+- 3 hari untuk langganan bulanan
+- 7 hari untuk langganan lebih lama
 
-### Subscription Status
+### Status Berlangganan
 
-After creation, your subscription will be in "Draft" status until activated. You can test draft subscriptions in sandbox mode.
+Setelah dibuat, langganan Anda akan berstatus "Draf" hingga diaktifkan. Anda dapat menguji draf langganan dalam mode sandbox.
 
-## Using in Your App
+## Menggunakan di Aplikasi Anda
 
-Once created, reference the subscription in your app using the product ID:
+Setelah dibuat, rujuk langganan di aplikasi Anda menggunakan ID produk:
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -143,26 +142,24 @@ if (subscription && subscription.purchaseState === 'PURCHASED' && subscription.i
 }
 ```
 
-## Next Steps
+## Langkah Selanjutnya- [Buat penawaran perkenalan](/docs/plugins/native-purchases/android-introductory-offer/) untuk menarik pelanggan baru
+- [Konfigurasi pengujian sandbox](/docs/plugins/native-purchases/android-sandbox-testing/) untuk menguji langganan Anda
+- Siapkan validasi tanda terima backend untuk keamanan
 
-- [Create an introductory offer](/docs/plugins/native-purchases/android-introductory-offer/) to attract new subscribers
-- [Configure sandbox testing](/docs/plugins/native-purchases/android-sandbox-testing/) to test your subscriptions
-- Set up backend receipt validation for security
+## Pemecahan masalah
 
-## Troubleshooting
+**Langganan tidak muncul di aplikasi:**
+- Verifikasi ID produk sama persis
+- Pastikan langganan diaktifkan
+- Periksa apakah aplikasi Anda memiliki nama paket yang benar
+- Tunggu 2-3 jam setelah aktivasi agar perubahan diterapkan
 
-**Subscription not appearing in app:**
-- Verify the product ID matches exactly
-- Ensure the subscription is activated
-- Check that your app has the correct package name
-- Wait 2-3 hours after activation for changes to propagate
+**Kesalahan paket dasar:**
+- Pastikan Anda memiliki satu paket dasar
+- Pastikan semua kolom wajib diisi
+- Periksa apakah periode penagihan valid
 
-**Base plan errors:**
-- Ensure you have exactly one base plan
-- Verify all required fields are filled
-- Check that billing period is valid
-
-**Pricing issues:**
-- Confirm at least one country is selected
-- Verify base price is greater than minimum allowed
-- Check currency conversion rates are acceptable
+**Masalah harga:**
+- Konfirmasikan setidaknya satu negara dipilih
+- Pastikan harga dasar lebih besar dari harga minimum yang diizinkan
+- Periksa nilai konversi mata uang yang dapat diterima

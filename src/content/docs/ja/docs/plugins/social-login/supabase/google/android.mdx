@@ -1,26 +1,25 @@
 ---
-title: Supabase Google Login on Android
+title: Supabase Google Android にログイン
 description: >-
-  Learn how to set up Google Sign-In with Supabase Authentication on Android
-  using the Capacitor Social Login plugin.
+  Capacitor ソーシャル ログイン プラグインを使用して、Android で Supabase 認証による Google
+  サインインを設定する方法を学びます。
 sidebar:
   order: 2
 locale: ja
 ---
-
 ## はじめに
 
-このガイドは、Android で Supabase 認証との Google サインインを統合するのに役立ちます。すでに以下を完了していることを前提としています:
- -  [Google Login Android セットアップ](/docs/plugins/social-login/google/android/)
- -  [Supabase Google ログイン - 一般セットアップ](/docs/plugins/social-login/supabase/google/general/)。
+このガイドは、Android で Google サインインと Supabase 認証を統合するのに役立ちます。以下をすでに完了していることを前提としています。
+ - [Google ログイン Android セットアップ](/docs/plugins/social-login/google/android/)
+ - [Supabase Google ログイン - 一般セットアップ](/docs/plugins/social-login/supabase/google/general/)。
 
-## Implementation
+## 実装
 
-The complete implementation is available in the [example app's `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) file. This guide explains the key concepts and how to use it.
+完全な実装は、[サンプル アプリの `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) ファイルで入手できます。このガイドでは、主要な概念とその使用方法について説明します。
 
-### Using the Authentication Helper
+### 認証ヘルパーの使用
 
-The `authenticateWithGoogleSupabase` function handles the entire authentication flow:
+`authenticateWithGoogleSupabase` 関数は、認証フロー全体を処理します。
 
 ```typescript
 import { authenticateWithGoogleSupabase } from './supabaseAuthUtils';
@@ -34,34 +33,34 @@ if (result.success) {
 }
 ```
 
-## How It Works
+## 仕組み
 
-For a detailed explanation of how the authentication flow works, including nonce generation, JWT validation, and Supabase sign-in, see the [How It Works section in the General Setup guide](/docs/plugins/social-login/supabase/google/general/#how-it-works).
+nonce 生成、JWT 検証、Supabase サインインなど、認証フローの仕組みの詳細については、[一般セットアップ ガイドの仕組みセクション](/docs/plugins/social-login/supabase/google/general/#how-it-works) を参照してください。
 
-For the complete code reference, see the [Complete Code Reference section in the General Setup guide](/docs/plugins/social-login/supabase/google/general/#complete-code-reference).
+完全なコード リファレンスについては、[一般セットアップ ガイドの完全なコード リファレンス セクション](/docs/plugins/social-login/supabase/google/general/#complete-code-reference) を参照してください。
 
-## Important Notes
+## 重要な注意事項
 
-### Nonce Handling
+### ノンス処理
 
-The nonce implementation follows the pattern from the [React Native Google Sign In documentation](https://react-native-google-signin.github.io/docs/security#usage-with-supabase):
+nonce の実装は、[React Native Google サインイン ドキュメント](https://react-native-google-signin.github.io/docs/security#usage-with-supabase) のパターンに従います。
 
-- `rawNonce` goes to Supabase's `signInWithIdToken()`
-- Supabase makes a hash of `rawNonce` and compares it with the `nonceDigest` which is included in the ID token from Google Sign-In
-- `nonceDigest` (SHA-256 hash, hex-encoded) goes to the `nonce` parameter in Google Sign-In APIs
+- `rawNonce` は Supabase の `signInWithIdToken()` に移動します
+- Supabase は `rawNonce` のハッシュを作成し、Google サインインからの ID トークンに含まれる `nonceDigest` と比較します。
+- `nonceDigest` (SHA-256 ハッシュ、16 進エンコード) は、Google サインイン API の `nonce` パラメーターに送られます。
 
-### Automatic Retry
+### 自動再試行
 
-The implementation includes automatic retry logic:
-- If JWT validation fails on first attempt, it logs out and retries once
-- This handles cases where cached tokens might have incorrect nonces
-- If the retry also fails, an error is returned
+実装には自動再試行ロジックが含まれています。
+- JWT 検証が最初の試行で失敗した場合、ログアウトして 1 回再試行します
+- これは、キャッシュされたトークンに不正な nonce が含まれる可能性がある場合に対処します。
+- リトライも失敗した場合はエラーが返されます。
 
-## Troubleshooting
+## トラブルシューティング
 
-If authentication fails:
+認証が失敗した場合:
 
-- **Invalid audience**: Verify your Google Client IDs match in both Google Cloud Console and Supabase
-- **Nonce mismatch**: Check console logs - the function will automatically retry, but you can manually logout first if needed
-- **Token validation fails**: Ensure you're using `mode: 'online'` in the initialize call to get an idToken
-- Review the [example app code](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) for reference
+- **無効な対象者**: Google クライアント ID が Google Cloud Console と Supabase の両方で一致していることを確認してください。
+- **ノンスが一致しません**: コンソール ログを確認してください - 関数は自動的に再試行されますが、必要に応じて最初に手動でログアウトできます。
+- **トークンの検証が失敗します**: idToken を取得するための初期化呼び出しで `mode: 'online'` を使用していることを確認してください。
+- 参考として [サンプル アプリ コード](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) を確認してください。

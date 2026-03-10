@@ -1,45 +1,49 @@
 ---
-title: "Bundles"
-description: "Detailed guide for managing Capgo Bundles, covering listing, deleting, versioning, and storage optimization for app update packages."
+title: Bundles
+description: >-
+  Guía detallada para administrar paquetes Capgo, que cubre la lista,
+  eliminación, administración de paquetes (versión) y optimización del
+  almacenamiento para paquetes de actualización de aplicaciones.
 sidebar:
   order: 8
 locale: es
 ---
+Los paquetes son los paquetes de actualización principales en Capgo. Cada paquete contiene los recursos web (HTML, CSS, JS) que conforman el contenido de su aplicación. Los Paquetes API le permiten administrar estos paquetes de actualización, incluso enumerarlos y eliminarlos.
 
-Bundles are the core update packages in Capgo. Each bundle contains the web assets (HTML, CSS, JS) that make up your app's content. The Bundles API allows you to manage these update packages, including listing and deleting them.
+## Comprender los paquetes
 
-## Understanding Bundles
+Un paquete representa un paquete (versión) específico del contenido web de su aplicación e incluye:
+- **Paquete (versión)**: número de versión semántica del paquete
+- **Suma de comprobación**: hash único para verificar la integridad del paquete
+- **Información de almacenamiento**: detalles sobre dónde y cómo se almacena el paquete
+- **Requisitos nativos**: requisitos mínimos de versión nativa de la aplicación
+- **Metadatos**: hora de creación, propiedad y otra información de seguimiento
 
-A bundle represents a specific version of your app's web content and includes:
-- **Version**: Semantic version number of the bundle
-- **Checksum**: Unique hash to verify bundle integrity
-- **Storage Info**: Details about where and how the bundle is stored
-- **Native Requirements**: Minimum native app version requirements
-- **Metadata**: Creation time, ownership, and other tracking information
+## Creación manual de paquetes (sin CLI)
 
-## Manual Bundle Creation (Without CLI)
+A continuación se explica cómo crear y cargar paquetes manualmente sin utilizar Capgo CLI:
 
-Here's how to create and upload bundles manually without using the Capgo CLI:
+### Paso 1: crea tu aplicación
 
-### Step 1: Build Your App
-
-First, build your app's web assets:
+Primero, cree los recursos web de su aplicación:
 
 ```bash
 npm run build
 ```
 
-### Step 2: Create Bundle Zip Using Same Packages as Capgo CLI
+### Paso 2: Crear paquete zip usando los mismos paquetes que Capgo CLI
 
-**Important**: Use the exact same JavaScript packages that Capgo CLI uses internally to ensure compatibility.
+**Importante**: Utilice exactamente los mismos paquetes JavaScript que Capgo CLI utiliza internamente para garantizar la compatibilidad.
 
-#### Install Required Packages
+#### Instalar los paquetes necesarios
 
 ```bash
 npm install adm-zip @tomasklaen/checksum
 ```
 
-#### Create Zip Bundle with JavaScript (Same as Capgo CLI)
+#### Crear paquete Zip con JavaScript (igual que Capgo CLI)
+
+Nota: En los ejemplos siguientes, `version` se refiere al nombre del paquete (versión) utilizado por API.
 
 ```javascript
 const fs = require('node:fs');
@@ -119,7 +123,7 @@ async function main() {
 main();
 ```
 
-### Step 3: Calculate SHA256 Checksum Using Same Package as CLI
+### Paso 3: Calcule la suma de comprobación SHA256 utilizando el mismo paquete que CLI
 
 ```javascript
 const fs = require('node:fs');
@@ -141,9 +145,9 @@ async function main() {
 main();
 ```
 
-### Step 4: Upload Bundle to Your Storage
+### Paso 4: Cargue el paquete en su almacenamiento
 
-Upload your zip file to any web-accessible storage:
+Cargue su archivo zip en cualquier almacenamiento accesible desde la web:
 
 ```bash
 # Example: Upload to your server via scp
@@ -158,22 +162,22 @@ curl -X POST https://your-storage-api.com/upload \
   -F "file=@my-app-1.2.3.zip"
 ```
 
-**Important**: Your bundle must be **publicly accessible** via HTTPS URL (no authentication required). Capgo's servers need to download the bundle from this URL.
+**Importante**: Su paquete debe ser **accesible públicamente** a través de una URL HTTPS (no se requiere autenticación). Los servidores de Capgo deben descargar el paquete desde esta URL.
 
-Examples of valid public URLs:
+Ejemplos de URL públicas válidas:
 - `https://your-storage.com/bundles/my-app-1.2.3.zip`
 - `https://github.com/username/repo/releases/download/v1.2.3/bundle.zip`
 - `https://cdn.jsdelivr.net/gh/username/repo@v1.2.3/dist.zip`
 
-### Step 5: Register Bundle with Capgo API
+### Paso 5: Registre el paquete con Capgo API
 
-Register the external bundle with Capgo using direct API calls:
+Registre el paquete externo con Capgo mediante llamadas directas API:
 
 ```javascript
 async function registerWithCapgo(appId, version, bundleUrl, checksum, apiKey) {
   const fetch = require('node-fetch');
   
-  // Create bundle version
+  // Create bundle (version)
   const response = await fetch('https://api.capgo.app/bundle/', {
     method: 'POST',
     headers: {
@@ -199,24 +203,24 @@ async function registerWithCapgo(appId, version, bundleUrl, checksum, apiKey) {
 }
 ```
 
-#### API Parameters
+#### API Parámetros
 
-| Parameter | Description | Required |
+| Parámetro | Descripción | Requerido |
 |-----------|-------------|----------|
-| `app_id` | Your app identifier | Yes |
-| `version` | Semantic version (e.g., "1.2.3") | Yes |
-| `external_url` | **Publicly accessible** HTTPS URL where bundle can be downloaded (no auth required) | Yes |
-| `checksum` | SHA256 checksum of the zip file | Yes |
+| `app_id` | Su identificador de aplicación | Sí |
+| `version` | Paquete (versión) versión semántica (por ejemplo, "1.2.3") | Sí |
+| `external_url` | **Accesible públicamente** URL HTTPS donde se puede descargar el paquete (no se requiere autenticación) | Sí |
+| `checksum` | Suma de comprobación SHA256 del archivo zip | Sí |
 
-## Bundle Structure Requirements
+## Requisitos de estructura del paquete
 
-Your bundle zip must follow these requirements:
+El paquete zip debe seguir estos requisitos:
 
-1. **Root Index File**: Must have `index.html` at the root level
-2. **Capacitor Integration**: Must call `notifyAppReady()` in your app code
-3. **Asset Paths**: Use relative paths for all assets
+1. **Archivo de índice raíz**: debe tener `index.html` en el nivel raíz
+2. **Capacitor Integración**: debe llamar a `notifyAppReady()` en el código de su aplicación
+3. **Rutas de activos**: use rutas relativas para todos los activos
 
-### Valid Bundle Structure
+### Estructura de paquete válida
 
 ```
 bundle.zip
@@ -227,9 +231,9 @@ bundle.zip
 └── images/
 ```
 
-## Complete Manual Workflow Example
+## Ejemplo completo de flujo de trabajo manual
 
-Simple Node.js script to zip, checksum, and upload to Capgo:
+Script Node.js simple para comprimir, realizar suma de verificación y cargar en Capgo:
 
 ```javascript
 const fs = require('node:fs');
@@ -282,17 +286,17 @@ async function deployToCapgo() {
 deployToCapgo().catch(console.error);
 ```
 
-Install dependencies:
+Instalar dependencias:
 
 ```bash
 npm install adm-zip @tomasklaen/checksum node-fetch
 ```
 
-## Checksum Verification
+## Verificación de suma de verificación
 
-### JavaScript Checksum Calculation (Same as Capgo CLI)
+### JavaScript Cálculo de suma de comprobación (igual que Capgo CLI)
 
-Use the exact same package and method that Capgo CLI uses internally:
+Utilice exactamente el mismo paquete y método que Capgo CLI utiliza internamente:
 
 ```javascript
 const fs = require('node:fs');
@@ -325,34 +329,32 @@ async function main() {
 }
 
 main();
-```
+```### Importancia de la suma de comprobación
 
-### Checksum Importance
+- **Integridad del paquete**: garantiza que el paquete no se haya dañado durante la transferencia
+- **API Verificación**: Capgo verifica las sumas de verificación antes de aceptar paquetes
+- **Verificación del complemento**: el complemento móvil verifica las sumas de verificación antes de aplicar las actualizaciones
 
-- **Bundle Integrity**: Ensures the bundle hasn't been corrupted during transfer
-- **API Verification**: Capgo verifies checksums before accepting bundles
-- **Plugin Verification**: The mobile plugin verifies checksums before applying updates
+## Mejores prácticas
 
-## Best Practices
+1. **Gestión de paquetes (versión)**: utilice el control de versiones semántico de forma coherente
+2. **Optimización de almacenamiento**: elimine periódicamente los paquetes no utilizados
+3. **Compatibilidad del paquete (versión)**: establezca los requisitos mínimos de versión nativa adecuados
+4. **Estrategia de copia de seguridad**: mantener copias de seguridad de paquetes (versiones) críticos
 
-1. **Version Management**: Use semantic versioning consistently
-2. **Storage Optimization**: Remove unused bundles periodically
-3. **Version Compatibility**: Set appropriate minimum native version requirements
-4. **Backup Strategy**: Maintain backups of critical bundle versions
+## Puntos finales
 
-## Endpoints
-
-### GET
+### OBTENER
 
 `https://api.capgo.app/bundle/`
 
-Retrieve bundle information. Returns 50 bundles per page.
+Recuperar información del paquete. Devuelve 50 paquetes por página.
 
-#### Query Parameters
-- `app_id`: Required. The ID of your app
-- `page`: Optional. Page number for pagination
+#### Parámetros de consulta
+- `app_id`: Requerido. El ID de tu aplicación
+- `page`: Opcional. Número de página para paginación
 
-#### Response Type
+#### Tipo de respuesta
 
 ```typescript
 interface Bundle {
@@ -375,7 +377,7 @@ interface Bundle {
 }
 ```
 
-#### Example Request
+#### Solicitud de ejemplo
 
 ```bash
 # Get all bundles
@@ -387,7 +389,7 @@ curl -H "authorization: your-api-key" \
   "https://api.capgo.app/bundle/?app_id=app_123&page=1"
 ```
 
-#### Example Response
+#### Ejemplo de respuesta
 
 ```json
 {
@@ -409,15 +411,15 @@ curl -H "authorization: your-api-key" \
 }
 ```
 
-### DELETE
+### BORRAR
 
 `https://api.capgo.app/bundle/`
 
-Delete one or all bundles for an app. Use with caution as this action cannot be undone.
+Elimine uno o todos los paquetes de una aplicación. Úselo con precaución ya que esta acción no se puede deshacer.
 
-#### Query Parameters
+#### Parámetros de consulta
 
-For deleting a specific bundle:
+Para eliminar un paquete específico:
 ```typescript
 interface BundleDelete {
   app_id: string
@@ -425,14 +427,14 @@ interface BundleDelete {
 }
 ```
 
-For deleting all bundles:
+Para eliminar todos los paquetes:
 ```typescript
 interface BundleDeleteAll {
   app_id: string
 }
 ```
 
-#### Example Requests
+#### Solicitudes de ejemplo
 
 ```bash
 # Delete specific bundle
@@ -455,7 +457,7 @@ curl -X DELETE \
   https://api.capgo.app/bundle/
 ```
 
-#### Success Response
+#### Respuesta exitosa
 
 ```json
 {
@@ -463,13 +465,13 @@ curl -X DELETE \
 }
 ```
 
-### POST
+### PUBLICAR
 
 `https://api.capgo.app/bundle/`
 
-Create a new bundle with external URL.
+Cree un nuevo paquete con URL externa.
 
-#### Request Body
+#### Cuerpo de solicitud
 
 ```typescript
 interface CreateBundleBody {
@@ -480,7 +482,7 @@ interface CreateBundleBody {
 }
 ```
 
-#### Example Request
+#### Solicitud de ejemplo
 
 ```bash
 curl -X POST \
@@ -495,7 +497,7 @@ curl -X POST \
   https://api.capgo.app/bundle/
 ```
 
-#### Success Response
+#### Respuesta exitosa
 
 ```json
 {
@@ -503,24 +505,24 @@ curl -X POST \
 }
 ```
 
-### POST (Metadata)
+### PUBLICACIÓN (Metadatos)
 
 `https://api.capgo.app/bundle/metadata`
 
-Update bundle metadata such as link and comment information.
+Actualice los metadatos del paquete, como la información de enlaces y comentarios.
 
-#### Request Body
+#### Cuerpo de solicitud
 
 ```typescript
 interface UpdateMetadataBody {
   app_id: string
-  version_id: number
+  version_id: number // bundle (version) id
   link?: string
   comment?: string
 }
 ```
 
-#### Example Request
+#### Solicitud de ejemplo
 
 ```bash
 curl -X POST \
@@ -535,7 +537,7 @@ curl -X POST \
   https://api.capgo.app/bundle/metadata
 ```
 
-#### Success Response
+#### Respuesta exitosa
 
 ```json
 {
@@ -543,23 +545,23 @@ curl -X POST \
 }
 ```
 
-### PUT
+### PONER
 
 `https://api.capgo.app/bundle/`
 
-Set a bundle to a specific channel. This links a bundle version to a channel for distribution.
+Establece un paquete para un canal específico. Esto vincula un paquete (versión) a un canal de distribución.
 
-#### Request Body
+#### Cuerpo de solicitud
 
 ```typescript
 interface SetChannelBody {
   app_id: string
-  version_id: number
+  version_id: number // bundle (version) id
   channel_id: number
 }
 ```
 
-#### Example Request
+#### Solicitud de ejemplo
 
 ```bash
 curl -X PUT \
@@ -573,7 +575,7 @@ curl -X PUT \
   https://api.capgo.app/bundle/
 ```
 
-#### Success Response
+#### Respuesta exitosa
 
 ```json
 {
@@ -582,9 +584,9 @@ curl -X PUT \
 }
 ```
 
-## Error Handling
+## Manejo de errores
 
-Common error scenarios and their responses:
+Escenarios de error comunes y sus respuestas:
 
 ```json
 // Bundle not found
@@ -593,7 +595,7 @@ Common error scenarios and their responses:
   "status": "KO"
 }
 
-// Invalid version format
+// Invalid bundle (version) format
 {
   "error": "Invalid version format",
   "status": "KO"
@@ -612,18 +614,18 @@ Common error scenarios and their responses:
 }
 ```
 
-## Common Use Cases
+## Casos de uso comunes
 
-1. **Cleanup Old Versions**
+1. **Limpiar paquetes antiguos (versiones)**
 ```typescript
-// Delete outdated beta versions
+// Delete outdated beta bundles (versions)
 {
   "app_id": "app_123",
   "version": "1.0.0-beta.1"
 }
 ```
 
-2. **App Reset**
+2. **Restablecimiento de aplicación**
 ```typescript
 // Remove all bundles to start fresh
 {
@@ -631,9 +633,9 @@ Common error scenarios and their responses:
 }
 ```
 
-## Storage Considerations
+## Consideraciones de almacenamiento
 
-1. **Retention Policy**: Define how long to keep old bundles
-2. **Size Management**: Monitor bundle sizes and storage usage
-3. **Backup Strategy**: Consider backing up critical versions
-4. **Cost Optimization**: Remove unnecessary bundles to optimize storage costs
+1. **Política de retención**: defina cuánto tiempo conservar los paquetes antiguos
+2. **Administración de tamaños**: supervise los tamaños de los paquetes y el uso de almacenamiento
+3. **Estrategia de copia de seguridad**: considere realizar una copia de seguridad de paquetes (versiones) críticos
+4. **Optimización de costos**: elimine paquetes innecesarios para optimizar los costos de almacenamiento

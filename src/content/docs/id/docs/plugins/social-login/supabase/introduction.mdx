@@ -1,94 +1,95 @@
 ---
-title: Supabase Integration Introduction
+title: Supabase Pengenalan Integrasi
 description: >-
-  Learn how to integrate Supabase Authentication with the Capacitor Social Login
-  plugin for a complete authentication solution.
+  Pelajari cara mengintegrasikan Supabase Autentikasi dengan plugin Capacitor
+  Social Login untuk solusi autentikasi yang lengkap.
 sidebar:
   order: 1
 locale: id
 ---
+## Ikhtisar
 
-## Overview
+Tutorial ini akan memandu Anda dalam menyiapkan Supabase Otentikasi dengan plugin Capacitor Login Sosial. Integrasi ini memungkinkan Anda menggunakan penyedia login sosial asli (Google, Apple, Facebook, Twitter) pada platform seluler sambil memanfaatkan Supabase Auth untuk autentikasi backend dan PostgreSQL untuk penyimpanan data.
 
-This tutorial will guide you through setting up Supabase Authentication with the Capacitor Social Login plugin. This integration allows you to use native social login providers (Google, Apple, Facebook, Twitter) on mobile platforms while leveraging Supabase Auth for backend authentication and PostgreSQL for data storage.
+## Apa yang Akan Anda Pelajari
 
-## What You'll Learn
+- Cara mengkonfigurasi Otentikasi Supabase
+- Cara mengintegrasikan plugin Login Sosial Capacitor dengan Supabase Auth
+- Penyiapan khusus platform untuk Android, iOS, dan Web
+- Cara menangani nonce dengan aman untuk Supabase
 
-- How to configure Supabase Authentication
-- How to integrate Capacitor Social Login plugin with Supabase Auth
-- Platform-specific setup for Android, iOS, and Web
-- How to handle nonces securely for Supabase
+## Apa yang Anda Butuhkan
 
-## What You'll Need
+Sebelum memulai, pastikan Anda memiliki:
 
-Before you begin, make sure you have:
+1. **Proyek Supabase**
+   - Buat proyek di [Dasbor Supabase](https://app.supabase.com/)
+   - Aktifkan penyedia Google OAuth
+   - Dapatkan URL proyek Supabase Anda dan kunci segera
 
-1. **A Supabase Project**
-   - Create a project at [Supabase Dashboard](https://app.supabase.com/)
-   - Enable Google OAuth provider
-   - Get your Supabase project URL and anon key
-
-2. **Supabase JS SDK**
-   - Install Supabase in your project:
+2.**Supabase JS SDK**
+   - Instal Supabase di proyek Anda:
      ```bash
      npm install @supabase/supabase-js
      ```
 
-3. **A Capacitor Project**
-   - An existing Capacitor application
-   - Capacitor Social Login plugin installed:
+3. **Proyek Capacitor**
+   - Aplikasi Capacitor yang sudah ada
+   - Capacitor Plugin Login Sosial terpasang:
      ```bash
      npm install @capgo/capacitor-social-login
      npx cap sync
      ```
 
-4. **Platform-Specific Google Setup**
-   - Complete the Google Sign-In setup for your target platforms:
-     - [Google Login Android Setup](/docs/plugins/social-login/google/android/)
-     - [Google Login iOS Setup](/docs/plugins/social-login/google/ios/)
-     - [Google Login Web Setup](/docs/plugins/social-login/google/web/)
+4. **Penyiapan Google Khusus Platform**
+   - Selesaikan penyiapan Google Masuk untuk platform target Anda:
+     - [Google Masuk Android Pengaturan](/docs/plugins/social-login/google/android/)
+     - [Google Masuk iOS Pengaturan](/docs/plugins/social-login/google/ios/)
+     - [Google Pengaturan Web Masuk](/docs/plugins/social-login/google/web/)
 
-## Example Application
+## Contoh Aplikasi
 
-A complete working example is available in the repository:
+Contoh kerja lengkap tersedia di repositori:
 
-**Code Repository**: [You can find the code repository here](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app)
+**Repositori Kode**: [Anda dapat menemukan repositori kode di sini](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app)
 
-The example app demonstrates:
-- Email/password authentication with Supabase
-- Google Sign-In integration (Android, iOS, and Web)
-- A simple key-value store using Supabase PostgreSQL tables
-- User-specific data storage with Row Level Security (RLS)
+Contoh aplikasi menunjukkan:
+- Otentikasi email/kata sandi dengan Supabase
+- Google Integrasi masuk (Android, iOS, dan Web)
+- Penyimpanan nilai kunci sederhana menggunakan tabel Supabase PostgreSQL
+- Penyimpanan data khusus pengguna dengan Keamanan Tingkat Baris (RLS)
 
-## Key Implementation Details
+## Detail Implementasi Utama
 
-### Nonce Handling
+### Penanganan Nonce
 
-Supabase requires special nonce handling for security. The implementation follows the [React Native Google Sign In documentation](https://react-native-google-signin.github.io/docs/security#usage-with-supabase):
+Supabase memerlukan penanganan nonce khusus untuk keamanan. Implementasinya mengikuti [dokumentasi Masuk React Native Google](https://react-native-google-signin.github.io/docs/security#usage-with-supabase):
 
-- Generate a `rawNonce` (URL-safe random string)
-- Hash it with SHA-256 to get `nonceDigest`
-- Pass `nonceDigest` to Google Sign-In
-- Pass `rawNonce` to Supabase (Supabase hashes it internally for comparison)
+- Hasilkan `rawNonce` (string acak aman URL)
+- Hash dengan SHA-256 untuk mendapatkan `nonceDigest`
+- Lewati `nonceDigest` ke Google Masuk
+- Teruskan `rawNonce` ke Supabase (Supabase melakukan hash secara internal untuk perbandingan)
 
-### JWT Validation
+### JWT Validasi
 
-The example implementation includes JWT validation to ensure:
-- The token audience matches your configured Google Client IDs
-- The nonce matches the expected digest
-- Automatic retry on validation failure (especially important for iOS)
+Contoh implementasi mencakup validasi JWT untuk memastikan:
+- Audiens token cocok dengan ID Klien Google Anda yang dikonfigurasi
+- Nonce cocok dengan intisari yang diharapkan
+- Coba ulang otomatis jika validasi gagal (terutama penting untuk iOS)
 
-### Platform-Specific Considerations
+### Pertimbangan Khusus Platform
 
-- **iOS**: Token caching can cause nonce issues - the implementation handles this automatically
-- **Web**: Must call `isLoggedIn()` on mount to handle OAuth redirects
-- **Android**: Standard implementation with SHA-1 fingerprint configuration
+- **iOS**: Penyimpanan token dapat menyebabkan masalah nonce - penerapannya menangani hal ini secara otomatis
+- **Web**: Harus memanggil `isLoggedIn()` saat dipasang untuk menangani pengalihan OAuth
+- **Android**: Implementasi standar dengan konfigurasi sidik jari SHA-1
 
-## Next Steps
+## Langkah SelanjutnyaLanjutkan dengan panduan pengaturan:
+- [Supabase Google Login - Pengaturan Umum](./google/general/) - Ikhtisar dan prasyarat
+- [Android Penyiapan](./google/android/) - Android konfigurasi khusus
+- [iOS Penyiapan](./google/ios/) - iOS konfigurasi khusus
+- [Penyiapan Web](./google/web/) - Konfigurasi khusus web
 
-Continue with the setup guides:
-- [Supabase Google Login - General Setup](./google/general/) - Overview and prerequisites
-- [Android Setup](./google/android/) - Android-specific configuration
-- [iOS Setup](./google/ios/) - iOS-specific configuration
-- [Web Setup](./google/web/) - Web-specific configuration
-
+### Apple Masuk
+- [Supabase Apple Login - Pengaturan Umum](./Apple/general/) - Ikhtisar dan prasyarat
+- [iOS Setup](./Apple/ios/) - iOS konfigurasi khusus
+- [Android Setup](./Apple/android/) - Android konfigurasi khusus

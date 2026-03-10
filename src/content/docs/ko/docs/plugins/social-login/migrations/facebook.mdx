@@ -1,42 +1,45 @@
 ---
-title: "@capacitor-community/facebook-login에서 @capgo/capacitor-social-login으로 마이그레이션 가이드"
-locale: ko
-description: "이 상세한 가이드는 @capacitor-community/facebook-login 플러그인에서 @capgo/capacitor-social-login 플러그인으로 전환하는 단계별 지침을 제공하여 향상된 기능으로 원활한 마이그레이션 프로세스를 보장합니다."
+title: Facebook @capgo/social-login으로 로그인 마이그레이션
+description: >-
+  이 세부 가이드는 @capacitor-community/facebook-login 플러그인에서
+  @capgo/capacitor-social-login 플러그인으로 전환하기 위한 단계별 지침을 제공하여 향상된 기능으로 원활한 마이그레이션
+  프로세스를 보장합니다.
 sidebar:
-    order: 2
+  order: 2
+locale: ko
 ---
 import { Steps } from '@astrojs/starlight/components';
 
-## Overview
+## 개요
 
-This guide provides comprehensive instructions for migrating from `@capacitor-community/facebook-login` to `@capgo/capacitor-social-login`. The new plugin modernizes Facebook authentication with a unified API that supports multiple social providers, improved TypeScript support, and enhanced capabilities.
+이 가이드는 `@capacitor-community/facebook-login`에서 `@capgo/capacitor-social-login`로 마이그레이션하기 위한 포괄적인 지침을 제공합니다. 새로운 플러그인은 여러 소셜 공급자, 향상된 TypeScript 지원 및 향상된 기능을 지원하는 통합 API을 통해 Facebook 인증을 현대화합니다.
 
-## Installation
+## 설치
 
 <Steps>
-1. Remove the old package:
+1. 기존 패키지를 제거합니다.
    ```bash
    npm uninstall @capacitor-community/facebook-login
    ```
 
-2. Install the new package:
+2. 새 패키지를 설치합니다.
    ```bash
    npm install @capgo/capacitor-social-login
    npx cap sync
    ```
 </Steps>
 
-## Code Changes
+## 코드 변경
 
-### Import Changes
+### 변경사항 가져오기
 ```diff
 - import { FacebookLogin } from '@capacitor-community/facebook-login';
 + import { SocialLogin } from '@capgo/capacitor-social-login';
 ```
 
-### Initialization
+### 초기화
 
-**Key Change**: The new package requires explicit setup in your code:
+**주요 변경 사항**: 새 패키지를 사용하려면 코드에 명시적인 설정이 필요합니다.
 
 ```diff
 - // Old package required no explicit initialization in code
@@ -51,9 +54,9 @@ This guide provides comprehensive instructions for migrating from `@capacitor-co
 + });
 ```
 
-### Login
+### 로그인
 
-The login method now accepts a provider parameter:
+이제 로그인 메소드는 공급자 매개변수를 허용합니다:
 
 ```diff
 - const FACEBOOK_PERMISSIONS = ['email', 'public_profile'];
@@ -69,9 +72,9 @@ The login method now accepts a provider parameter:
 + });
 ```
 
-### Response Type Changes
+### 응답 유형 변경
 
-The response structure has been modernized with a more comprehensive profile object:
+응답 구조는 보다 포괄적인 프로필 객체로 현대화되었습니다.
 
 ```typescript
 // Old response type
@@ -116,12 +119,12 @@ interface FacebookLoginResponse {
 }
 ```
 
-**Key Differences**:
-- Response now includes a `provider` field identifying the authentication provider
-- More detailed `profile` object with additional user information
-- Consistent structure across all social login providers
+**주요 차이점**:
+- 이제 응답에는 인증 공급자를 식별하는 `provider` 필드가 포함됩니다.
+- 추가 사용자 정보가 포함된 더 자세한 `profile` 개체
+- 모든 소셜 로그인 공급자의 일관된 구조
 
-### Checking Login Status
+### 로그인 상태 확인하기
 ```diff
 - const result = await FacebookLogin.getCurrentAccessToken();
 - const isLoggedIn = result && result.accessToken;
@@ -132,7 +135,7 @@ interface FacebookLoginResponse {
 + const isLoggedIn = status.isLoggedIn;
 ```
 
-### Logout
+### 로그아웃
 ```diff
 - await FacebookLogin.logout();
 
@@ -141,11 +144,11 @@ interface FacebookLoginResponse {
 + });
 ```
 
-## Platform Specific Changes
+## 플랫폼별 변경 사항
 
-### Android Setup
+### Android 설정
 
-Configuration is now handled through the initialize method:
+이제 초기화 메소드를 통해 구성이 처리됩니다.
 
 ```diff
 - // AndroidManifest.xml changes remain the same
@@ -159,11 +162,11 @@ Configuration is now handled through the initialize method:
 + });
 ```
 
-**Important**: Client token is now required for Android authentication.
+**중요**: 이제 Android 인증에는 클라이언트 토큰이 필요합니다.
 
-### iOS Setup
+### iOS 설정
 
-1. The iOS setup in `AppDelegate.swift` remains the same:
+1. `AppDelegate.swift`의 iOS 설정은 동일하게 유지됩니다.
 
 ```swift
 import FBSDKCoreKit
@@ -183,7 +186,7 @@ ApplicationDelegate.shared.application(
 )
 ```
 
-2. The `Info.plist` configuration remains the same:
+2. `Info.plist` 구성은 동일하게 유지됩니다.
 ```xml
 <key>CFBundleURLTypes</key>
 <array>
@@ -210,25 +213,25 @@ ApplicationDelegate.shared.application(
 </array>
 ```
 
-## Breaking Changes
+## 주요 변경 사항
 
-Summary of breaking changes when migrating:
+마이그레이션 시 주요 변경 사항 요약:
 
-1. **Explicit initialization is now required** - Must call `initialize()` before use
-2. **Response object structure has changed significantly** - New nested result format with enhanced profile data
-3. **Client token is now required for Android** - Additional configuration needed
-4. **Different method names and parameter structures** - Provider-based approach
-5. **Error handling and error types have changed** - More detailed error information
+1. **이제 명시적 초기화가 필요합니다** - 사용하기 전에 `initialize()`을 호출해야 합니다.
+2. **응답 객체 구조가 크게 변경되었습니다** - 향상된 프로필 데이터를 갖춘 새로운 중첩 결과 형식
+3. **이제 Android에 클라이언트 토큰이 필요합니다** - 추가 구성이 필요합니다.
+4. **다른 메소드 이름 및 매개변수 구조** - 제공자 기반 접근 방식
+5. **오류 처리 및 오류 유형이 변경되었습니다** - 자세한 오류 정보
 
-## Key Advantages
+## 주요 장점
 
-The new plugin provides:
+새로운 플러그인은 다음을 제공합니다:
 
-- **Unified API** across multiple social providers (Google, Apple, Facebook)
-- **Improved TypeScript support** with better type definitions
-- **Enhanced profile data** with more user information
-- **Active maintenance** and community support
-- **Consistent error handling** across all providers
-- **Better token management** with proper expiration handling
+- **여러 소셜 제공자(Google, Apple, Facebook)에 걸쳐 통합된 API**
+- 더 나은 유형 정의로 **향상된 TypeScript 지원**
+- 더 많은 사용자 정보로 **향상된 프로필 데이터**
+- **적극적인 유지 관리** 및 커뮤니티 지원
+- 모든 공급자에 걸쳐 **일관적인 오류 처리**
+- 적절한 만료 처리를 통한 **더 나은 토큰 관리**
 
-For more detailed setup instructions, please refer to the [official documentation](/docs/plugins/social-login/facebook/).
+자세한 설정 방법은 [공식 문서](/docs/plugins/social-login/facebook/)를 참고하세요.

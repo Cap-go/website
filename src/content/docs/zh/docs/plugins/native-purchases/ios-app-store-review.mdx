@@ -1,14 +1,13 @@
 ---
 title: iOS App Store IAP 审核指南
-locale: zh
-description: 通过应用内购买和订阅通过 App Store 审核的完整指南，包括常见拒绝原因和最佳实践。
+description: 通过应用内购买和订阅的 App Store 审核的完整指南，包括常见的拒绝原因和最佳实践。
 sidebar:
   order: 10
+locale: zh
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 
-让您的应用在 App Store 上获得批准需要仔细关注 Apple 的指南，特别是在实现应用内购买和订阅时。本指南涵盖了您在首次提交时通过审核所需了解的一切。
+要让您的应用程序在 App Store 上获得批准，需要仔细注意 Apple 的指南，尤其是在实施应用内购买和订阅时。本指南涵盖了您首次提交时通过审核所需了解的所有信息。
 
 ![iOS App Store 审核流程](/native-purchases/review-guides/ios-review-hero.webp)
 
@@ -16,32 +15,32 @@ import { Steps } from '@astrojs/starlight/components';
 
 ### 定价透明度（关键）
 
-Apple 要求在任何购买前清楚披露定价：
+Apple 要求在购买前提供清晰明了的定价信息：
 
-**必需元素：**
-- 在购买按钮前显示确切价格
-- 显示计费频率（例如，"$9.99/月"）
-- 清楚说明用户花钱得到什么
-- 指示何时收费
+**必备元素：**
+- 购买按钮前显示确切价格
+- 显示计费频率（例如“9.99 美元/月”）
+- 清楚地说明用户花钱得到了什么
+- 指明何时收费
 
 **常见拒绝：**
-> "订阅定价必须清楚且预先说明。"
+> “订阅定价必须明确且预先。”
 
-:::caution 价格一致性
-所有价格必须在以下位置匹配：
+:::注意价格一致性
+所有价格必须匹配：
 - App Store 元数据列表
 - 应用内购买屏幕
 - 订阅管理屏幕
 
-即使商店列表（$4.99）和应用（$5.99）之间有 $1 的差异也会触发自动拒绝。
+即使商品详情 (4.99 美元) 和应用程序 (5.99 美元) 之间存在 1 美元的差异，也会触发自动拒绝。
 :::
 
-### 订阅方案展示
+### 订阅计划介绍
 
-**必需披露：**
-- 所有可用订阅层级一起显示
-- 每个层级功能的清楚比较
-- 不通过 UI 技巧自动默认到高级层级
+**所需披露：**
+- 所有可用的订阅级别一起显示
+- 每层功能的清晰比较
+- 不会通过 UI 技巧自动默认为高级级别
 - 易于找到的取消说明
 
 ![UI 设计注意事项](/native-purchases/review-guides/ui-design-dos-donts.webp)
@@ -53,25 +52,25 @@ import { NativePurchases } from '@capgo/native-purchases';
 function SubscriptionScreen() {
   return (
     <div>
-      <h2>选择您的方案</h2>
+      <h2>Choose Your Plan</h2>
 
-      {/* 平等显示所有层级 */}
+      {/* Show all tiers equally */}
       <PlanCard
         title="Basic"
-        price="$4.99/月"
-        features={['功能 A', '功能 B']}
+        price="$4.99/month"
+        features={['Feature A', 'Feature B']}
       />
       <PlanCard
         title="Premium"
-        price="$9.99/月"
-        features={['所有基础功能', '功能 C', '功能 D']}
-        highlighted={false} // 不要强制高级
+        price="$9.99/month"
+        features={['All Basic', 'Feature C', 'Feature D']}
+        highlighted={false} // Don't force premium
       />
 
-      {/* 清楚的取消信息 */}
+      {/* Clear cancellation info */}
       <Text>
-        随时在设置 > 订阅中取消。
-        部分期间不退款。
+        Cancel anytime in Settings > Subscriptions.
+        No refunds for partial periods.
       </Text>
     </div>
   );
@@ -80,9 +79,9 @@ function SubscriptionScreen() {
 
 ### 恢复购买
 
-**必需实现：**
+**所需实施：**
 
-每个具有 IAP 的应用都必须提供一种方式让用户恢复之前的购买，而无需联系支持。
+每个具有 IAP 的应用程序都必须为用户提供一种无需联系支持人员即可恢复之前购买的方法。
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -101,7 +100,7 @@ async function restorePurchases() {
 
     if (activeSub) {
       unlockPremiumFeatures();
-      showMessage('购买已成功恢复！');
+      showMessage('Purchases restored successfully!');
       return;
     }
 
@@ -111,149 +110,147 @@ async function restorePurchases() {
     const hasIap = iaps.some((purchase) => purchase.productIdentifier === 'premium_unlock');
 
     showMessage(
-      hasIap ? '高级购买已恢复！' : '未找到之前的购买。',
+      hasIap ? 'Premium purchase restored!' : 'No previous purchases found.',
     );
   } catch (error) {
-    showError('恢复购买失败。请重试。');
+    showError('Failed to restore purchases. Please try again.');
   }
 }
 
-// 添加可见的"恢复购买"按钮
+// Add a visible "Restore Purchases" button
 <Button onClick={restorePurchases}>
-  恢复购买
+  Restore Purchases
 </Button>
 ```
 
 ## 常见拒绝原因
 
-### 1. 应用崩溃或功能损坏
+### 1. 应用程序崩溃或功能损坏
 
-**失败原因：**
-- 应用启动时崩溃
+**为什么失败：**
+- 应用程序在启动时崩溃
 - 购买流程无法完成
-- 截图中显示的功能无法工作
+- 屏幕截图中显示的功能不起作用
 
 **预防：**
-- 在真实设备上测试（不仅仅是模拟器）
+- 在真实设备上进行测试（不仅仅是模拟器）
 - 端到端测试所有订阅流程
-- 验证收据验证工作
+- 验证收据验证是否有效
 - 检查网络错误处理
 
-### 2. 元数据不匹配
+### 2.元数据不匹配
 
-**失败原因：**
-- 截图显示当前构建中没有的功能
-- 描述提到不存在的功能
+**为什么失败：**
+- 屏幕截图显示当前版本中没有的功能
+- 描述提到了不存在的功能
 - 元数据中的定价与应用内定价不同
 
-![元数据检查清单](/native-purchases/review-guides/metadata-checklist.webp)
+![元数据清单](/native-purchases/review-guides/metadata-checklist.webp)
 
 **预防：**
 ```typescript
-// 准确记录每个层级中的内容
+// Document exactly what's in each tier
 const SUBSCRIPTION_FEATURES = {
-  basic: ['无广告', '云同步', '基础主题'],
-  premium: ['无广告', '云同步', '所有主题', '优先支持']
+  basic: ['Ad-free', 'Cloud sync', 'Basic themes'],
+  premium: ['Ad-free', 'Cloud sync', 'All themes', 'Priority support']
 };
 
-// 在应用和 App Store 描述中使用这些
+// Use these in both your app AND App Store description
 ```
 
-### 3. 缺少权限说明
+### 3.缺少权限说明
 
-**失败原因：**
-- 请求相机/位置/健康而没有说明
-- 权限请求埋在多个屏幕深处
-- 模糊或通用的权限描述
+**为什么失败：**
+- 请求相机/位置/健康状况，无需解释
+- 权限请求深埋多个屏幕
+- 模糊或笼统的权限描述
 
 **预防：**
 
-使用清楚的说明更新您的 `Info.plist`：
+使用清晰的解释更新您的 `Info.plist`：
 
 ```xml
 <key>NSCameraUsageDescription</key>
-<string>需要访问相机以扫描产品条形码进行快速订阅升级。</string>
+<string>Camera access is needed to scan product barcodes for quick subscription upgrades.</string>
 
 <key>NSLocationWhenInUseUsageDescription</key>
-<string>位置帮助我们在您的高级订阅中显示相关的本地内容。</string>
+<string>Location helps us show relevant local content in your Premium subscription.</string>
 ```
 
 ### 4. 误导性营销
 
-**失败原因：**
-- 没有证据的声称，如"世界第一应用"
-- 具有隐藏限制的"无限制"功能
-- 虚假紧迫性策略（"仅剩 2 个名额！"）
+**为什么失败：**
+- 诸如“世界排名第一的应用程序”之类的说法没有证据
+- 具有隐藏限制的“无限”功能
+- 虚假的紧急策略（“仅剩 2 个名额！”）
 
 ![描述指南示例](/native-purchases/review-guides/description-guidelines-1.webp)
 
 ![附加描述指南](/native-purchases/review-guides/description-guidelines-2.webp)
 
 **预防：**
-- 在描述中具体且实事求是
-- 避免没有证据的夸张
-- 不要用虚假稀缺性对用户施压
+- 描述具体且真实
+- 避免在没有证据的情况下使用最高级的说法
+- 不要用虚假的稀缺来给用户施加压力
 
-### 5. 隐藏的取消流程
+### 5.隐藏取消流程
 
-**失败原因：**
+**为什么失败：**
 - 没有提及如何取消
-- 取消按钮隐藏或模糊
-- 没有 Apple 原生流程的多步取消流程
+- 取消按钮被隐藏或遮挡
+- 多步骤取消流程，无需 Apple 的本机流程
 
 **预防：**
 ```typescript
-// 始终告知用户取消方式
+// Always inform users about cancellation
 function SubscriptionInfo() {
   return (
     <div>
-      <h3>如何取消</h3>
+      <h3>How to Cancel</h3>
       <ol>
-        <li>打开 iPhone 设置</li>
-        <li>点击顶部的您的姓名</li>
-        <li>点击订阅</li>
-        <li>选择此应用并点击取消</li>
+        <li>Open iPhone Settings</li>
+        <li>Tap your name at the top</li>
+        <li>Tap Subscriptions</li>
+        <li>Select this app and tap Cancel</li>
       </ol>
 
-      <p>或直接在 App Store 应用中管理。</p>
+      <p>Or manage directly in the App Store app.</p>
 
       <Button onClick={openSubscriptionManagement}>
-        在设置中管理订阅
+        Manage Subscription in Settings
       </Button>
     </div>
   );
 }
 
 async function openSubscriptionManagement() {
-  // 直接链接到 iOS 订阅管理
+  // Direct link to iOS subscription management
   await NativePurchases.showManageSubscriptions();
 }
-```
+```## 隐私和数据使用（第 5.1.1 节）
 
-## 隐私和数据使用（第 5.1.1 节）
+Apple 在 2025 年显着收紧了隐私要求。
 
-Apple 在 2025 年显著收紧了隐私要求。
-
-### 必需披露
+### 所需披露
 
 **对于每个权限：**
 1. 为什么需要它（具体用例）
 2. 何时使用
 3. 数据如何存储/共享
-4. 是可选还是必需
+4. 是可选的还是必需的
 
 ### 示例：正确的权限流程
 
 ```typescript
 async function requestCameraPermission() {
-  // 在请求前显示说明
+  // Show explanation BEFORE requesting
   await showDialog({
-    title: '相机访问',
-    message: '我们需要相机访问权限让您扫描条形码进行快速产品查找。您的照片永远不会上传或存储。',
-    buttons: ['暂不', '允许']
+    title: 'Camera Access',
+    message: 'We need camera access to let you scan barcodes for quick product lookup. Your photos are never uploaded or stored.',
+    buttons: ['Not Now', 'Allow']
   });
 
-  // 然后请求权限
+  // Then request permission
   const result = await Camera.requestPermissions();
   return result.camera === 'granted';
 }
@@ -262,76 +259,76 @@ async function requestCameraPermission() {
 ### 隐私营养标签
 
 确保您的 App Store 隐私标签准确反映：
-- 购买历史收集
+- 购买历史记录收集
 - 电子邮件地址（用于收据）
-- 设备 ID（用于防欺诈）
+- 设备 ID（用于防止欺诈）
 - 使用数据（用于分析）
 
 :::warning
-不准确的隐私标签是 2025 年常见的拒绝原因。仔细审核您的数据收集。
+不准确的隐私标签是 2025 年常见的拒绝原因。请仔细审核您的数据收集。
 :::
 
-## 提交前检查清单
+## 预提交清单
 
-![提交前检查清单](/native-purchases/review-guides/pre-submission-checklist.webp)
+![预提交清单](/native-purchases/review-guides/pre-submission-checklist.webp)
 
 <Steps>
 
 1. **测试所有购买流程**
-   - 购买每个订阅层级
+   - 购买每个订阅级别
    - 测试免费试用
-   - 验证引导性优惠正确应用
+   - 验证介绍性优惠是否正确适用
    - 测试恢复购买
    - 验证家庭共享（如果启用）
-   - 在多个设备上测试
+   - 在多个设备上进行测试
 
 2. **验证定价一致性**
-   - 检查 App Store 元数据与应用内价格匹配
-   - 验证所有货币正确
-   - 确认免费试用时长与描述匹配
-   - 检查引导性优惠条款准确
+   - 检查 App Store 元数据是否与应用内价格匹配
+   - 验证所有货币是否正确
+   - 确认免费试用期限与描述相符
+   - 检查介绍性优惠条款是否准确
 
-3. **审核所有文案**
+3. **查看所有副本**
    - 删除占位符文本
-   - 验证声称可测试
+   - 验证声明是可测试的
    - 检查语法和拼写
-   - 确保描述与当前构建匹配
-   - 删除竞争对手提及
+   - 确保描述与当前版本匹配
+   - 删除提及竞争对手的内容
 
 4. **测试权限**
    - 仅请求必要的权限
-   - 在请求前显示清楚的说明
-   - 测试"拒绝"流程（应用应仍然工作）
-   - 验证 Info.plist 描述清楚
+   - 在提出请求之前提供清晰的解释
+   - 测试“拒绝”流（应用程序应该仍然可以工作）
+   - 验证Info.plist描述是否清晰
 
 5. **准备测试账户**
-   - 创建沙盒测试账户
-   - 在应用审核备注中记录登录凭据
-   - 验证测试账户有活跃订阅
-   - 测试审核员可以完成购买流程
+   - 创建沙箱测试帐户
+   - 在应用程序审查注释中记录登录凭据
+   - 验证测试帐户是否有有效订阅
+   - 测试评论者可以完成购买流程
 
 6. **检查元数据**
-   - 截图与当前 UI 匹配
-   - 应用预览视频（如果有）显示当前版本
-   - 描述准确描述功能
+   - 屏幕截图与当前用户界面匹配
+   - 应用程序预览视频（如果有）显示当前版本
+   - 描述准确地描述了功能
    - 年龄分级与内容匹配
-   - 隐私政策在应用内可访问
+   - 隐私政策可在应用程序内访问
 
-7. **编写详细的审核备注**
+7. **写详细的评论笔记**
    ```
-   测试账户：
-   电子邮件：reviewer@test.com
-   密码：TestPass123!
+   Test Account:
+   Email: reviewer@test.com
+   Password: TestPass123!
 
-   测试说明：
-   1. 使用上述测试账户登录
-   2. 点击"升级到高级"按钮
-   3. 选择"月度高级"订阅
-   4. 完成购买（沙盒中不收费）
-   5. 验证高级功能解锁
+   Testing Instructions:
+   1. Log in with test account above
+   2. Tap "Upgrade to Premium" button
+   3. Select "Monthly Premium" subscription
+   4. Complete purchase (no charge in sandbox)
+   5. Verify premium features unlock
 
-   注意：订阅定价在购买前清楚显示。
-   取消说明在设置 > 账户中。
+   Note: Subscription pricing is clearly shown before purchase.
+   Cancellation instructions are in Settings > Account.
    ```
 
 </Steps>
@@ -340,45 +337,43 @@ async function requestCameraPermission() {
 
 ![App Store 审核时间表](/native-purchases/review-guides/review-timeline.webp)
 
-**标准审核：**24-48 小时
-**高峰期：**3-5 天（App Store 假日发布）
-**周末：**不处理审核
-**加急审核：**可用于关键错误修复（通过 App Store Connect 请求）
+**标准审核：** 24-48 小时
+**高峰期：** 3-5 天（App Store 假期发布）
+**周末：** 未处理任何评论
+**加急审核：** 可修复关键错误（通过 App Store Connect 请求）
 
 :::tip
-在一周的早些时候提交以避免周末延迟。周一提交通常在周三前审核。
+本周早些时候提交，以避免周末延误。周一提交的内容通常会在周三得到审核。
 :::
 
-## 2025 指南更新
+## 2025 年指南更新
 
 ### 新要求
 
-**1. AI 功能披露**
-如果您的应用对任何功能使用 AI，您必须：
-- 清楚标记 AI 生成的内容
-- 解释如何使用 AI
-- 记录内容安全措施
+**1.人工智能功能披露**
+如果您的应用程序使用人工智能来实现任何功能，您必须：
+- 清晰地标记人工智能生成的内容
+- 解释如何使用人工智能
+- 文档内容安全措施
 
-**2. 增强的订阅清晰度**
-- 需要并排方案比较
-- 没有隐藏更便宜选项的"暗模式"
-- 清楚的降级/升级路径
+**2.增强订阅清晰度**
+- 需要并排计划比较
+- 没有隐藏更便宜选择的“深色图案”
+- 清晰的降级/升级路径
 
-**3. 隐私加强**
-- 第 5.1.1 节执行加强
-- 对数据收集理由的更多审查
-- 对儿童应用的更严格要求
+**3.隐私强化**
+- 加强第 5.1.1 条的执行力度
+- 对数据收集理由进行更多审查
+- 对儿童应用程序的更严格要求
 
-### 2024 年以来的变化
-
-- 现在允许模块化提交（独立更新产品页面）
+### 2024 年以来发生了什么变化- 现在允许模块化提交（独立更新产品页面）
 - 应用内事件可以单独提交
-- 对误导性订阅 UI 的更严格执行
-- 关于加密货币/NFT 应用的新指南
+- 更严格地执行误导性订阅用户界面
+- 关于加密货币/NFT 应用程序的新指南
 
-## Native Purchases 插件的最佳实践
+## 原生购买插件的最佳实践
 
-### 实现正确的错误处理
+### 实施正确的错误处理
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -390,23 +385,23 @@ async function handlePurchase(productId: string) {
       productType: PURCHASE_TYPE.SUBS,
     });
 
-    // 成功
+    // Success
     await validateReceiptOnServer(transaction.receipt);
-    showSuccess('订阅已激活！');
+    showSuccess('Subscription activated!');
     unlockFeatures();
 
   } catch (error: any) {
-    // 处理特定错误情况
+    // Handle specific error cases
     if (error.code === 'USER_CANCELLED') {
-      // 用户取消 - 不显示错误
+      // User cancelled - don't show error
       console.log('Purchase cancelled by user');
     } else if (error.code === 'PAYMENT_PENDING') {
       showInfo('Payment is pending. Please check back later.');
     } else if (error.code === 'PRODUCT_ALREADY_PURCHASED') {
-      // 改为恢复
+      // Restore instead
       await NativePurchases.restorePurchases();
     } else {
-      // 显示用户友好的错误
+      // Show user-friendly error
       showError('Unable to complete purchase. Please try again.');
     }
   }
@@ -430,85 +425,89 @@ function PurchaseButton({ productId }: { productId: string }) {
 
   return (
     <button onClick={handlePurchase} disabled={loading}>
-      {loading ? '处理中...' : '立即订阅'}
+      {loading ? 'Processing...' : 'Subscribe Now'}
     </button>
   );
 }
 ```
 
-### 清楚显示条款
+### 清楚地显示条款
 
 ```typescript
 function SubscriptionTerms() {
   return (
     <div className="terms">
       <p>
-        订阅自动续订，除非在当前期间结束前至少 24 小时取消。
+        Subscription automatically renews unless cancelled at least 24 hours
+        before the end of the current period.
       </p>
       <p>
-        您的账户将在当前期间结束前 24 小时内收取续订费用。
+        Your account will be charged for renewal within 24 hours prior to
+        the end of the current period.
       </p>
       <p>
-        订阅可由用户管理，购买后可在账户设置中关闭自动续订。
+        Subscriptions may be managed by the user and auto-renewal may be
+        turned off in Account Settings after purchase.
       </p>
       <p>
-        <a href="/terms">服务条款</a> |
-        <a href="/privacy">隐私政策</a>
+        <a href="/terms">Terms of Service</a> |
+        <a href="/privacy">Privacy Policy</a>
       </p>
     </div>
   );
 }
 ```
 
-## 如果您的应用被拒绝
+## 如果您的应用程序被拒绝
 
 ### 解决步骤
 
 <Steps>
 
-1. **仔细阅读拒绝**
-   - 注意引用的特定指南（例如，3.1.1、5.1.1）
-   - 准确了解 Apple 标记的内容
+1. **仔细阅读拒绝信息**
+   - 注意引用的具体指南（例如，3.1.1、5.1.1）
+   - 准确理解 Apple 标记的内容
 
-2. **彻底修复问题**
-   - 不要只是修补 - 修复根本原因
+2. **彻底解决问题**
+   - 不要只是打补丁 - 修复根本原因
    - 广泛测试修复
-   - 记录您的更改
+   - 记录您所做的更改
 
 3. **在解决中心回复**
    ```
-   感谢您的反馈。我已解决问题：
+   Thank you for your feedback. I have addressed the issue:
 
-   问题：订阅定价不够清楚预先说明
+   Issue: Subscription pricing not clear upfront
 
-   修复：在订阅选择屏幕上添加了显式定价显示，
-   在购买按钮前显示"$9.99/月"。还在同一屏幕上
-   添加了取消说明。
+   Fix: Added explicit pricing display on subscription selection
+   screen showing "$9.99/month" before purchase button. Also added
+   cancellation instructions on the same screen.
 
-   更改在此提交中，可以使用提供的测试账户进行测试。
+   The changes are in this submission and can be tested using the
+   provided test account.
    ```
 
 4. **及时重新提交**
-   - 重新提交通常审核更快
+   - 重新提交的审核速度通常会更快
    - 通常在 24 小时内
 
 </Steps>
 
-### 申诉流程
+### 上诉流程
 
 如果您认为拒绝不正确：
 
-![App Store 澄清流程](/native-purchases/review-guides/clarification-process.webp)
+![App Store 澄清过程](/native-purchases/review-guides/clarification-process.webp)
 
-1. 在 App Store Connect 中点击"申诉"
-2. 提供清楚的证据：
-   - 显示合规的截图
-   - 引用特定指南
-   - 解释您如何满足要求
-3. 保持专业和实事求是
-4. 如果功能难以找到，包括测试账户
+1. 点击App Store Connect中的“申诉”
+2、提供明确证据：
+   - 显示合规性的屏幕截图
+   - 参考具体指南
+   - 说明您如何满足要求
+3. 专业、真实
+4. 如果功能很难找到，请包括测试帐户
 
-![请求文档示例](/native-purchases/review-guides/request-documents.webp)
+![索取文件示例](/native-purchases/review-guides/request-documents.webp)
 
 ## 其他资源
 
@@ -519,19 +518,19 @@ function SubscriptionTerms() {
 
 ## 支持
 
-如果您仍然有问题：
-- 查看 [Native Purchases 文档](/docs/plugins/native-purchases/getting-started/)
+如果您仍然遇到问题：
+- 查看[本地购买文档](/docs/plugins/native-purchases/getting-started/)
 - 检查[常见故障排除问题](/docs/plugins/native-purchases/getting-started/#troubleshooting)
-- 联系 Apple Developer Support 获取指南澄清
+- 联系 Apple 开发者支持以获取指南说明
 
-### 需要专家帮助？
+### 需要专家帮助吗？
 
-在应用审核方面遇到困难或需要个性化帮助？**[预约与我们团队的咨询电话](https://cal.com/team/capgo/capacitor-consulting-services)**，获取以下专门支持：
+在应用程序审核方面遇到困难或需要个性化帮助？ **[与我们的团队预约咨询电话](https://cal.com/team/capgo/capacitor-consulting-services)** 以获得专门支持：
 
-- IAP 实现审核和优化
-- App Store 审核准备和策略
-- 提交检查清单审核
-- 拒绝解决和申诉
-- 完整测试和验证
+- IAP实施审查和优化
+- App Store 审查准备和策略
+- 提交清单审核
+- 拒绝决议和上诉
+- 完整的测试和验证
 
-我们的专家已成功帮助数百个应用通过审核！
+我们的专家已成功帮助数百个应用程序通过审核！

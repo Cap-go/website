@@ -1,62 +1,63 @@
 ---
+title: Firebase Introduction à l'intégration
+description: >-
+  Découvrez comment intégrer l'authentification Firebase au plugin Capacitor
+  Social Login pour une solution d'authentification complète.
+sidebar:
+  order: 1
 locale: fr
-title: Firebase Integration Introduction
-description: Learn how to integrate Firebase Authentication with the Capacitor Social Connexion plugin for a Terminé authentication Solution.
-sidebar: 
-    order: 1
 ---
-
 ## Aperçu
 
-This Tutoriel will Guide you through setting up Firebase Authentication with the Capacitor Social Connexion plugin. This integration allows you to use Natif social Connexion providers (Google, Apple, Facebook, Twitter) on mobile platforms while leveraging Firebase Auth for backend authentication and Firestore for data storage.
+Ce didacticiel vous guidera dans la configuration de l'authentification Firebase avec le plugin de connexion sociale Capacitor. Cette intégration vous permet d'utiliser des fournisseurs de connexion sociale natifs (Google, Apple, Facebook, Twitter) sur les plateformes mobiles tout en tirant parti de Firebase Auth pour l'authentification backend et de Firestore pour le stockage des données.
 
-## What You'll Learn
+## Ce que vous apprendrez
 
-- How to configure Firebase Authentication
-- How to integrate Capacitor Social Connexion plugin with Firebase Auth
-- Platform-specific Configuration for Android, iOS, and Web
+- Comment configurer l'authentification Firebase
+- Comment intégrer le plugin Capacitor Social Login avec Firebase Auth
+- Configuration spécifique à la plate-forme pour Android, iOS et Web
 
-## What You'll Need
+## Ce dont vous aurez besoin
 
-Before you begin, make sure you have:
+Avant de commencer, assurez-vous d'avoir :
 
-1. **A Firebase Project**
-   - Créer a project at [Firebase Console](https://console.firebase.google.com/)
-   - Activer Authentication (Email/Password and Google Sign-In)
-   - Get your Firebase Configuration credentials
+1. **Un projet Firebase**
+   - Créez un projet sur [Firebase Console](https://console.firebase.google.com/)
+   - Activer l'authentification (e-mail/mot de passe et connexion Google)
+   - Obtenez vos informations de configuration Firebase
 
 2. **Firebase JS SDK**
-   - Installer Firebase in your project:
+   - Installez Firebase dans votre projet :
      ```bash
      npm install firebase
      ```
 
-3. **A Capacitor Project**
-   - An existing Capacitor Application
-   - Capacitor Social Connexion plugin installed:
+3. **Un projet Capacitor**
+   - Une application Capacitor existante
+   - Capacitor Plugin de connexion sociale installé :
      ```bash
      npm install @capgo/capacitor-social-login
      npx cap sync
      ```
 
-## Exemple Application
+## Exemple d'application
 
-A Terminé working Exemple is Disponible in the repository:
+Un exemple de travail complet est disponible dans le référentiel :
 
-**Code Repository**: [You can find the code repository here](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app)
+**Dépôt de code** : [Vous pouvez trouver le référentiel de code ici](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app)
 
-The Exemple Application demonstrates:
-- Email/password authentication with Firebase
-- Google Sign-In integration (Android, iOS, and Web)
-- A simple key-value store using Firebase Firestore collections
-- Utilisateur-specific data storage in Firestore subcollections
+L'exemple d'application montre :
+- Authentification email/mot de passe avec Firebase
+- Intégration de connexion Google (Android, iOS et Web)
+- Un simple magasin clé-valeur utilisant les collections Firebase Firestore
+- Stockage de données spécifiques à l'utilisateur dans les sous-collections Firestore
 
 
-## A word À propos using the Firebase SDK on Capacitor
+## Un mot sur l'utilisation du Firebase SDK sur Capacitor
 
-When using the Firebase JS SDK on Capacitor, you need to be aware that when using the authentication methods, you need to Initialiser the Firebase Auth instance a bit differently.
+Lorsque vous utilisez le Firebase JS SDK sur Capacitor, vous devez être conscient que lorsque vous utilisez les méthodes d'authentification, vous devez initialiser l'instance d'authentification Firebase un peu différemment.
 
-On the web platform, you would use the `getAuth` function to get the Firebase Auth instance.
+Sur la plateforme Web, vous utiliserez la fonction `getAuth` pour obtenir l'instance d'authentification Firebase.
 
 ```typescript
 import { initializeApp } from 'firebase/app';
@@ -66,8 +67,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 ```
 
-Unfortunately, on Capacitor, this does not work and causes Firebase auth to hang. As stated in [this blog post](https://harryherskowitz.com/2021/08/23/firebase-capacitor.html), you need to use the `initializeAuth` function to initialize the Firebase Auth instance.
-This looks like this:
+Malheureusement, sur Capacitor, cela ne fonctionne pas et provoque le blocage de l'authentification Firebase. Comme indiqué dans [ce billet de blog](https://harryherskowitz.com/2021/08/23/firebase-capacitor.html), vous devez utiliser la fonction `initializeAuth` pour initialiser l'instance d'authentification Firebase.
+Cela ressemble à ceci :
 
 ```typescript
 import { initializeApp } from 'firebase/app';
@@ -89,11 +90,10 @@ function whichAuth() {
 
 export const auth = whichAuth();
 ```
-## Suivant Steps
+## Prochaines étapes
 
-Continue with the Configuration guides:
-- [Firebase Configuration](./google/general/) - Configure Firebase project
-- [Android Configuration](./google/Android/) - Android-specific Configuration
-- [iOS Configuration](./google/iOS/) - iOS-specific Configuration
-- [Web Configuration](./google/web/) - Web-specific Configuration
-
+Continuez avec les guides de configuration :
+- [Configuration Firebase](./google/general/) - Configurer le projet Firebase
+- [Configuration Android](./google/android/) - Configuration spécifique à Android
+- [Configuration iOS](./google/ios/) - Configuration spécifique à iOS
+- [Configuration Web](./google/web/) - Configuration spécifique au Web

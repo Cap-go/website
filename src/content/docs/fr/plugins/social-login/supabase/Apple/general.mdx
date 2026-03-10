@@ -1,84 +1,86 @@
 ---
+title: Supabase Apple Connexion - Configuration générale
+description: >-
+  Découvrez comment intégrer la connexion Apple avec l'authentification Supabase
+  à l'aide du plug-in de connexion sociale Capacitor.
+sidebar:
+  order: 1
 locale: fr
-title: Supabase Apple Connexion - General Configuration
-description: Learn how to integrate Apple Sign-In with Supabase Authentication using the Capacitor Social Connexion plugin.
-sidebar: 
-    order: 1
 ---
 import { Steps } from '@astrojs/starlight/components';
 
 ## Aperçu
 
-This Guide will Aide you integrate Apple Sign-In with Supabase Authentication. Apple Sign-In provides a secure, privacy-focused authentication method that works across iOS, Android, and Web platforms.
+Ce guide vous aidera à intégrer la connexion Apple avec l'authentification Supabase. Apple Sign-In fournit une méthode d'authentification sécurisée et axée sur la confidentialité qui fonctionne sur iOS, Android et les plateformes Web.
 
-## Prerequisites
+## Prérequis
 
-Before starting, ensure you have:
+Avant de commencer, assurez-vous d'avoir :
 
-1. [Created a Supabase project](https://database.Nouveau/)
-2. Read the [Apple Connexion General Configuration](/docs/plugins/social-Connexion/apple/general/) Guide to Configuration Apple OAuth credentials
-3. Followed the respective platform-specific guides to Configuration Apple OAuth credentials for your target platform:
-    - [Android Configuration](/docs/plugins/social-Connexion/apple/Android/)
-    - [iOS Configuration](/docs/plugins/social-Connexion/apple/iOS/)
-    - [Web Configuration](/docs/plugins/social-Connexion/apple/web/)
+1. [Créé un projet Supabase](https://database.new/)
+2. Lisez le guide [Apple Configuration générale de la connexion](/docs/plugins/social-login/apple/general/) pour configurer les informations d'identification Apple OAuth.
+3. Suivez les guides spécifiques à la plate-forme respective pour configurer les informations d'identification Apple OAuth pour votre plate-forme cible :
+    - [Configuration Android](/docs/plugins/social-login/apple/android/)
+    - [Configuration iOS](/docs/plugins/social-login/apple/ios/)
+    - [Configuration Web](/docs/plugins/social-login/apple/web/)
 
-    :::Remarque
-        Before starting the Supabase Tutoriel, you need to generate the client IDs for the platforms you plan to use.
+    :::remarque
+        Avant de démarrer le didacticiel Supabase, vous devez générer les ID client pour les plates-formes que vous prévoyez d'utiliser.
 
 
-        For iOS, the client ID is the same as your Application ID.
-        For Android and Web, the client ID is the same as your service ID.
-        You will use them in step 7 of this Guide.
+        Pour iOS, l'ID client est le même que l'ID de votre application.
+        Pour Android et Web, l'ID client est le même que votre ID de service.
+        Vous les utiliserez à l’étape 7 de ce guide.
     :::
 
-## Enabling Apple OAuth provider in Supabase
+## Activation du fournisseur Apple OAuth dans Supabase
 
 <Steps>
-1. Go to your [Supabase Tableau de bord](https://Application.supabase.com/)
-2. Click on your project
-    <img src="/social-login-assets/supabase_project_select.webp" alt="Supabase Project Selector" />
-3. Do go to the `Authentication` menu
-    <img src="/social-login-assets/supabase_authentication_menu.webp" alt="Supabase Authentication Menu" />
-4. Click on the `Providers` tab
-    <img src="/social-login-assets/supabase_providers_tab.webp" alt="Supabase Providers Tab" />
-5. Find the `Apple` provider
-    <img src="/social-login-assets/supabase_apple_provider.webp" alt="Supabase Apple Provider" />
-6. Enable the `Apple` provider
-    <img src="/social-login-assets/supabase_apple_provider_enable.webp" alt="Supabase Apple Provider Enable" />
-7. Fill in the client ID Configuration:
+1. Accédez à votre [Supabase tableau de bord](https://app.supabase.com/)
+2. Cliquez sur votre projet
+    <img src="/social-login-assets/supabase_project_select.webp" alt="Supabase Sélecteur de projet" />
+3. Allez dans le menu `Authentication`
+    <img src="/social-login-assets/supabase_authentication_menu.webp" alt="Supabase Menu d'authentification" />
+4. Cliquez sur l'onglet `Providers`
+    <img src="/social-login-assets/supabase_providers_tab.webp" alt="Supabase Onglet Fournisseurs" />
+5. Recherchez le fournisseur `Apple`
+    <img src="/social-login-assets/supabase_apple_provider.webp" alt="Supabase Apple Fournisseur" />
+6. Activez le fournisseur `Apple`
+    <img src="/social-login-assets/supabase_apple_provider_enable.webp" alt="Supabase Apple Activation du fournisseur" />
+7. Remplissez la configuration de l'ID client :
 
-    :::Remarque
-      If you are using Apple Connexion for iOS, the client ID is the same as your Application ID.
-      If you are using Apple Connexion for Android or Web, the client ID is the same as your service ID.
-      If you are using both, you need to provide both the Application ID and the service ID.
+    :::remarque
+      Si vous utilisez la connexion Apple pour iOS, l'ID client est le même que l'ID de votre application.
+      Si vous utilisez la connexion Apple pour Android ou Web, l'ID client est le même que votre ID de service.
+      Si vous utilisez les deux, vous devez fournir à la fois l’ID de l’application et l’ID du service.
     :::
 
-    <img src="/social-login-assets/supabase_apple_provider_client_id.webp" alt="Supabase Apple Provider Client ID" />
-8. Click on the `Save` button
-    <img src="/social-login-assets/supabase_apple_provider_save.webp" alt="Supabase Apple Provider Save" />
+    <img src="/social-login-assets/supabase_apple_provider_client_id.webp" alt="Supabase Apple ID client du fournisseur" />
+8. Cliquez sur le bouton `Save`
+    <img src="/social-login-assets/supabase_apple_provider_save.webp" alt="Supabase Apple Enregistrer le fournisseur" />
 
 
-    :::Remarque
-      You __**DO NOT HAVE TO**__ setup `Secret key (for OAuth)`. We will do a custom backend implementation to handle the Apple login.
+    :::remarque
+      Vous __**N'AVEZ PAS À**__ configurer `Secret key (for OAuth)`. Nous effectuerons une implémentation backend personnalisée pour gérer la connexion Apple.
     :::
 </Steps>
 
-Voilà, you have now enabled Apple Sign-In with Supabase Authentication 🎉
+Voilà, vous avez maintenant activé la connexion Apple avec l'authentification Supabase 🎉
 
-## Using the Authentication Helper
+## Utilisation de l'assistant d'authentification
 
-The complete implementation includes a helper function `authenticateWithAppleSupabase()` that handles the entire Apple Sign-In flow with Supabase. This function:
+L'implémentation complète comprend une fonction d'assistance `authenticateWithAppleSupabase()` qui gère l'intégralité du flux de connexion Apple avec Supabase. Cette fonction :
 
-- Initializes Apple Sign-In with platform-specific Configuration
-- Handles the authentication flow (Natif on iOS, OAuth redirect on Android/Web)
-- Extracts the identity token from Apple
-- Signs in to Supabase with the identity token
+- Initialise la connexion Apple avec une configuration spécifique à la plate-forme
+- Gère le flux d'authentification (natif sur iOS, redirection OAuth sur Android/Web)
+- Extrait le jeton d'identité de Apple
+- Se connecte à Supabase avec le jeton d'identité
 
-:::Conseil[Terminé Implementation]
-The complete implementation is available in the [example app's `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) file.
+:::tip[Mise en œuvre complète]
+L’implémentation complète est disponible dans le fichier [`supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) de l’application exemple.
 :::
 
-### Basic Utilisation
+### Utilisation de base
 
 ```typescript
 import { authenticateWithAppleSupabase } from './supabaseAuthUtils';
@@ -92,12 +94,10 @@ if (result.success) {
 }
 ```
 
-### How It Works
+### Comment ça marche
 
-The helper function automatically handles platform-specific differences:
+La fonction d'assistance gère automatiquement les différences spécifiques à la plate-forme :- **iOS** : utilise la connexion native Apple (aucune URL de redirection n'est nécessaire, utilise automatiquement l'ID du bundle)
+- **Android** : utilise le flux de redirection OAuth avec la fonction backend edge (nécessite l'ID de service)
+- **Web** : utilise le flux contextuel OAuth (nécessite l'ID de service et l'URL de la page actuelle comme redirection)
 
-- **iOS**: Uses Natif Apple Sign-In (no redirect URL needed, uses Bundle ID automatically)
-- **Android**: Uses OAuth redirect flow with backend edge function (requires Service ID)
-- **Web**: Uses OAuth popup flow (requires Service ID and current page URL as redirect)
-
-The function returns an identity token from Apple, which is then used to authenticate with Supabase using `supabase.auth.signInWithIdToken()`.
+La fonction renvoie un jeton d'identité de Apple, qui est ensuite utilisé pour s'authentifier auprès de Supabase à l'aide de `supabase.auth.signInWithIdToken()`.

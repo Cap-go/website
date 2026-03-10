@@ -1,12 +1,8 @@
 ---
-title: >-
-  Migration Guide from @capacitor-community/apple-sign-in to
-  @capgo/capacitor-social-login
+title: Apple @capgo/social-login へのサインインの移行
 description: >-
-  This comprehensive guide provides detailed instructions for transitioning from
-  the @capacitor-community/apple-sign-in plugin to the
-  @capgo/capacitor-social-login plugin, ensuring a smooth migration process and
-  improved capabilities.
+  この包括的なガイドでは、@capacitor-community/apple-sign-in プラグインから
+  @capgo/capacitor-social-login プラグインに移行するための詳細な手順を提供し、スムーズな移行プロセスと機能の向上を保証します。
 sidebar:
   order: 1
 locale: ja
@@ -15,34 +11,34 @@ import { Steps } from '@astrojs/starlight/components';
 
 ## 概要
 
-このガイドは、レガシー `@capacitor-community/apple-sign-in` プラグインから最新の `@capgo/capacitor-social-login` パッケージへの移行を説明しています。新しいプラグインは、複数のソーシャル認証プロバイダー向けの統一されたインターフェースを提供し、TypeScript サポートの改善とアクティブなメンテナンスが特徴です。
+このガイドでは、従来の `@capacitor-community/apple-sign-in` プラグインから最新の `@capgo/capacitor-social-login` パッケージへの移行について概要を説明します。新しいプラグインは、改善された TypeScript サポートとアクティブなメンテナンスを備えた複数のソーシャル認証プロバイダーに統合インターフェイスを提供します。
 
-## Installation
+## インストール
 
 <Steps>
-1. Remove the old package:
+1. 古いパッケージを削除します。
    ```bash
    npm uninstall @capacitor-community/apple-sign-in
    ```
 
-2. Install the new package:
+2. 新しいパッケージをインストールします。
    ```bash
    npm install @capgo/capacitor-social-login
    npx cap sync
    ```
 </Steps>
 
-## Code Changes
+## コードの変更
 
-### Import Changes
+### 変更のインポート
 ```diff
 - import { SignInWithApple } from '@capacitor-community/apple-sign-in';
 + import { SocialLogin } from '@capgo/capacitor-social-login';
 ```
 
-### Initialization
+### 初期化
 
-**Key Change**: The new plugin requires an initialization step that wasn't needed before.
+**キーの変更**: 新しいプラグインには、以前は必要なかった初期化手順が必要です。
 
 ```diff
 - // No initialization needed in old package
@@ -60,11 +56,11 @@ import { Steps } from '@astrojs/starlight/components';
 + });
 ```
 
-**Important Note**: For iOS, you provide basic configuration, while Android requires additional details including a Service ID and backend callback URL for web-based OAuth authentication.
+**重要な注意事項**: iOS の場合は基本構成を指定しますが、Android では Web ベースの OAuth 認証用のサービス ID やバックエンド コールバック URL などの追加の詳細が必要です。
 
-### Sign In
+### サインイン
 
-The login process simplifies from multiple parameters to a cleaner API:
+ログイン プロセスは、複数のパラメーターからよりクリーンな API に簡素化されます。
 
 ```diff
 - const result = await SignInWithApple.authorize({
@@ -85,11 +81,11 @@ The login process simplifies from multiple parameters to a cleaner API:
 + });
 ```
 
-The new plugin uses `login()` with `provider: 'apple'` and optional scopes rather than passing individual configuration values like `clientId` and `redirectURI`.
+新しいプラグインは、`clientId` や `redirectURI` などの個別の設定値を渡すのではなく、`login()` と `provider: 'apple'` およびオプションのスコープを使用します。
 
-### Response Type Changes
+### 応答タイプの変更
 
-Results now include an `accessToken` object with expiration details and a structured `profile` section, replacing the flatter response format of the original package:
+結果には、有効期限の詳細を含む `accessToken` オブジェクトと構造化された `profile` セクションが含まれるようになり、元のパッケージのよりフラットな応答形式が置き換えられました。
 
 ```typescript
 // Old response type
@@ -124,11 +120,11 @@ interface SocialLoginResponse {
 }
 ```
 
-### New Capabilities
+### 新しい機能
 
-The updated plugin introduces functionality that wasn't available in the predecessor:
+更新されたプラグインには、以前のプラグインでは利用できなかった機能が導入されています。
 
-**Checking Login Status**
+**ログインステータスの確認**
 ```diff
 - // Not available in old package
 + const status = await SocialLogin.isLoggedIn({
@@ -136,7 +132,7 @@ The updated plugin introduces functionality that wasn't available in the predece
 + });
 ```
 
-**Logout Functionality**
+**ログアウト機能**
 ```diff
 - // Not available in old package
 + await SocialLogin.logout({
@@ -144,49 +140,47 @@ The updated plugin introduces functionality that wasn't available in the predece
 + });
 ```
 
-These methods provide `isLoggedIn()` to verify authentication status and `logout()` functionality.
+これらのメソッドは、認証ステータスと `logout()` 機能を検証するための `isLoggedIn()` を提供します。
 
-## Platform Specific Changes
+## プラットフォーム固有の変更
 
-### iOS Setup
+### iOS セットアップ
 
-**iOS** maintains familiar setup procedures through Xcode capabilities:
+**iOS** は、Xcode 機能を通じて使い慣れたセットアップ手順を維持します。
 
-1. The iOS setup remains largely the same. You still need to:
-   - Enable "Sign In with Apple" capability in Xcode
-   - Configure your app in the Apple Developer Portal
-   - No additional code changes required for iOS
+1. iOS セットアップはほぼ同じままです。さらに次のことを行う必要があります。
+   - Xcode で「Apple でサインイン」機能を有効にする
+   - Apple 開発者ポータルでアプリを構成します
+   - iOS には追加のコード変更は必要ありません
 
-### Android Setup
+### Android セットアップ
 
-**Android** now receives native support via web-based OAuth authentication:
+**Android** は、Web ベースの OAuth 認証経由でネイティブ サポートを受けるようになりました。
 
-The new plugin provides Android support out of the box, but requires additional setup:
+新しいプラグインは、すぐに使える Android サポートを提供しますが、追加のセットアップが必要です。
 
-1. Create a Services ID in the Apple Developer Portal
-2. Configure a web authentication endpoint
-3. Set up your Android app to handle the OAuth flow
-4. Backend service configuration is required
+1. Apple 開発者ポータルでサービス ID を作成します。
+2. Web 認証エンドポイントを構成する
+3. OAuth フローを処理するように Android アプリを設定します
+4. バックエンドサービスの構成が必要です
 
-For detailed Android setup instructions, please refer to the [Android Setup Guide](/docs/plugins/social-login/apple/android/).
+Android セットアップ手順の詳細については、[Android セットアップ ガイド](/docs/plugins/social-login/apple/android/) を参照してください。
 
-## Key Advantages
+## 主な利点
 
-The modernized package provides:
+最新化されたパッケージは以下を提供します。
 
-1. **Unified APIs** across multiple social providers (Google, Facebook, Apple)
-2. **Improved TypeScript typing** with better type definitions
-3. **Active community maintenance** compared to the deprecated version
-4. **Built-in Android support** through web-based authentication
-5. **Persistent login state management**
-6. **Better error handling** with consistent error types
+1. 複数のソーシャル プロバイダーにわたる **統合 API** (Google、Facebook、Apple)
+2. **型定義が改善され、TypeScript タイピングが改善されました**
+3. 非推奨バージョンと比較した **アクティブなコミュニティ メンテナンス**
+4. Web ベースの認証による **組み込みの Android サポート**
+5. **永続的なログイン状態の管理**
+6. 一貫したエラータイプによる **より優れたエラー処理**
 
-## Breaking Changes
+## 重大な変更1. **明示的な初期化が必要になりました** - デフォルト構成はありません
+2. **応答オブジェクトの構造が変更されました** - ネストされた結果の形式
+3. **Android の実装には、OAuth のバックエンド サービスが必要です**
+4. **トークンのリフレッシュ処理が異なります** - トークン管理の改善
+5. **エラー処理とエラーの種類が変更されました** - より詳細なエラー
 
-1. **Explicit initialization is now required** - no default configuration
-2. **Response object structure has changed** - nested result format
-3. **Android implementation requires a backend service** for OAuth
-4. **Token refresh handling is different** - improved token management
-5. **Error handling and error types have changed** - more detailed errors
-
-For more detailed setup instructions, please refer to the [official documentation](/docs/plugins/social-login/apple/general/). 
+For more detailed setup instructions, please refer to the [official documentation](/docs/plugins/social-login/apple/general/).

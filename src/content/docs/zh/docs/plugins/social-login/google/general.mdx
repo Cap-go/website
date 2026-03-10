@@ -1,238 +1,231 @@
 ---
-title: "Google 登录设置"
-description: >-
-  This guide provides a comprehensive overview on setting up Google Login using
-  Capacitor, detailing each step to ensure a seamless integration process and
-  addressing potential challenges you may encounter.
+title: Google 登录设置
+description: 本指南全面概述了如何使用 Capacitor 设置 Google 登录，详细介绍了每个步骤，以确保无缝集成过程并解决您可能遇到的潜在挑战。
 sidebar:
   order: 1
 locale: zh
 ---
 import { Steps } from '@astrojs/starlight/components';
 
-## Introduction
+## 简介
 
-In this guide, you will learn how to setup Google Login with Capgo Social Login. You will need the following in order to setup Google Login:
+在本指南中，您将了解如何使用 Capgo 社交登录设置 Google 登录。您需要以下信息才能设置 Google 登录：
 
-- A Google account
+- Google 帐户
 
-## General setup
+## 一般设置
 
 :::note
-This step is required regardless of which the platform you decide to use. 
+无论您决定使用哪个平台，都需要执行此步骤。 
 :::
 
-In this part, you will setup the login screen displayed by Google.
+在此部分中，您将设置 Google 显示的登录屏幕。
 
 <Steps>
-    1. Please go to [console.cloud.google.com](https://console.cloud.google.com/)
-    2. Click on the project selector
-        <img src="/social-login-assets/google_cons_project_selector.png" alt="Google Console Project Selector" />
-    3. If you don't have a project already, please **create a new project**.
-        1. Click on `New project`
-            <img src="/social-login-assets/google_cons_new_project_btn.png" alt="New Project button in Google Console" />
-        2. Name your project and click `Create`
-            <img src="/social-login-assets/google_cons_name_projec.png" alt="Project naming screen showing name field and Create button" />
-        3. Ensure that you are on the right project
-            <img src="/social-login-assets/google_cons_right_proj.png" alt="Project name showing in the selector indicating correct project selection" />
-    4. Start to configure the  `OAuth consent screen`
-        1. Click on the search bar
-            <img src="/social-login-assets/google_cons_search.png" alt="Google Console search bar" />
-        2. Search for `OAuth consent screen` and click on it
-            <img src="/social-login-assets/google_cons_search_2.png" alt="Search results showing OAuth consent screen option" />
-        3. Configure the consent screen
-            :::note
-            I will assume that you are developing an app open to the public, so I will use the  `external`  user type. Please select the user type that suits you the best AND click `create`
+    1. 请访问 [console.cloud.google.com](https://console.cloud.google.com/)
+    2. 单击项目选择器
+        <img src="/social-login-assets/google_cons_project_selector.png" alt="Google 控制台项目选择器" />
+    3. 如果您还没有项目，请**创建一个新项目**。
+        1.点击“新建项目”
+            <img src="/social-login-assets/google_cons_new_project_btn.png" alt="Google 控制台中的“新建项目”按钮" />
+        2. 为您的项目命名并单击 `Create`
+            <img src="/social-login-assets/google_cons_name_projec.png" alt="显示名称字段和创建按钮的项目命名屏幕" />
+        3. 确保您从事正确的项目
+            <img src="/social-login-assets/google_cons_right_proj.png" alt="选择器中显示的项目名称表明项目选择正确" />
+    4.开始配置`OAuth consent screen`
+        1. 点击搜索栏
+            <img src="/social-login-assets/google_cons_search.png" alt="Google 控制台搜索栏" />
+        2. 搜索`OAuth consent screen`并点击它
+            <img src="/social-login-assets/google_cons_search_2.png" alt="搜索结果显示 OAuth 同意屏幕选项" />
+        3. 配置同意屏幕
+            :::注意
+            我假设您正在开发一个向公众开放的应用程序，因此我将使用 `external` 用户类型。请选择最适合您的用户类型并点击 `create`
             :::
 
-            Click on `create`
-            <img src="/social-login-assets/google_cons_oauth_const_scr.png" alt="OAuth consent screen user type selection with External and Internal options" />
-    5. Fill the information about your app
-            1. Let's start with the `App Information`
-                <img src="/social-login-assets/google_cons_app_inf.png" alt="App Information section showing App name and User support email fields" />
+            点击 `create`
+            <img src="/social-login-assets/google_cons_oauth_const_scr.png" alt="OAuth 同意屏幕用户类型选择，具有外部和内部选项" />
+    5.填写您的应用程序的信息
+            1. 让我们从“应用程序信息”开始
+                <img src="/social-login-assets/google_cons_app_inf.png" alt="应用程序信息部分显示应用程序名称和用户支持电子邮件字段" />
                 
-                    - Please type in your `App Name`
-                        :::caution
-                        **THIS WILL BE DISPLAYED TO THE USERS**
+                    - 请输入您的“应用程序名称”
+                        :::注意
+                        **这将显示给用户**
                         :::
-                    - Enter the `user support email`
-                        :::note
-                        You can learn more about the support email [here](https://support.google.com/cloud/answer/10311615#user-support-email&zippy=%2Cuser-support-email/)
+                    - 输入“用户支持电子邮件”
+                        :::注意
+                        您可以在[此处]了解有关支持电子邮件的更多信息(https://support.google.com/cloud/answer/10311615#user-support-email&zippy=%2Cuser-support-email/)
                         :::
-                2. You **CAN** add the app logo.
-                    <img src="/social-login-assets/google_cons_app_logo.png" alt="App logo upload section in OAuth consent screen" />
-                    :::note
-                    This is not obligatory and I will skip this step
+                2. 您**可以**添加应用程序徽标。
+                    <img src="/social-login-assets/google_cons_app_logo.png" alt="OAuth 同意屏幕中的应用徽标上传部分" />
+                    :::注意
+                    这不是强制性的，我将跳过这一步
                     :::
-                3. You **SHOULD** configure the `App domain`
-                    <img src="/social-login-assets/google_cons_app_doma.png" alt="App domain configuration section with authorized domains field" />
-                    :::note
-                    I will not do that because this is just a simple demonstration that will **NOT** get published, but I strongly recommend filling this section.
+                3.您**应该**配置“应用程序域”
+                    <img src="/social-login-assets/google_cons_app_doma.png" alt="具有授权域字段的应用程序域配置部分" />
+                    :::注意
+                    我不会这样做，因为这只是一个简单的演示，不会被发布，但我强烈建议填写此部分。
                     :::
                     
-                4. You **HAVE TO** provide the developer's email
-                    <img src="/social-login-assets/google_cons_dev_cont_inf.png" alt="Developer contact information section with email field" />     
-                5. Click on `save and continue`
-                        <img src="/social-login-assets/google_cons_cons_sav_cont.png" alt="Save and Continue button at bottom of form" />
-    6. Configure the scopes
-        1. Click on `add or remove scopes` 
-            <img src="/social-login-assets/google_cons_add_rm_sco.png" alt="Add or remove scopes button in scopes configuration screen" />
+                4. 您**必须**提供开发者的电子邮件
+                    <img src="/social-login-assets/google_cons_dev_cont_inf.png" alt="带有电子邮件字段的开发者联系信息部分" />     
+                5. 单击“保存并继续”
+                        <img src="/social-login-assets/google_cons_cons_sav_cont.png" alt="表单底部的“保存并继续”按钮" />
+    6. 配置范围
+        1. 单击“添加或删除范围” 
+            <img src="/social-login-assets/google_cons_add_rm_sco.png" alt="在范围配置屏幕中添加或删除范围按钮" />
         
-        2. Select the following scopes and click `update`
-            <img src="/social-login-assets/google_cons_update_scope.png" alt="Scope selection dialog with email and profile scopes selected" />
-        
-        3. Click `save and continue`
-            <img src="/social-login-assets/google_cons_scope_save.png" alt="Save and Continue button in scopes screen" />
-    7. Add a test user
-        1. Click on `add users`
-            <img src="/social-login-assets/google_cons_add_test_usr.png" alt="Add users button in test users section" />
-        2. Enter your Google email, click enter, and click `add`
-            <img src="/social-login-assets/google_cons_add_test_usr_2.png" alt="Email input field and Add button for test users" />
-        3. Click `save and continue`
-            <img src="/social-login-assets/google_cons_test_usr_save.png" alt="Save and Continue button in test users screen" />
-    8. Click `back to dashboard`
-        <img src="/social-login-assets/google_cons_back_to_dahs.png" alt="Back to dashboard button at bottom of completion page" />
-    9. Submit your app for verification
-        :::note
-            I strongly recommend submitting you app for verification. This is outside the scope of this tutorial. You can learn more [here](https://support.google.com/cloud/answer/13463073/). This isn't required for local testing, but is required for production.
+        2. 选择以下范围并单击 `update`
+            <img src="/social-login-assets/google_cons_update_scope.png" alt="范围选择对话框，其中选择了电子邮件和个人资料范围" />3.点击“保存并继续”
+            <img src="/social-login-assets/google_cons_scope_save.png" alt="示波器屏幕中的“保存并继续”按钮" />
+    7.添加测试用户
+        1.点击“添加用户”
+            <img src="/social-login-assets/google_cons_add_test_usr.png" alt="测试用户部分中的添加用户按钮" />
+        2. 输入您的 Google 电子邮件，单击“输入”，然后单击 `add`
+            <img src="/social-login-assets/google_cons_add_test_usr_2.png" alt="测试用户的电子邮件输入字段和添加按钮" />
+        3.点击“保存并继续”
+            <img src="/social-login-assets/google_cons_test_usr_save.png" alt="测试用户屏幕中的“保存并继续”按钮" />
+    8. 单击“返回仪表板”
+        <img src="/social-login-assets/google_cons_back_to_dahs.png" alt="返回完成页面底部的仪表板按钮" />
+    9. 提交您的应用程序以供验证
+        :::注意
+            我强烈建议您提交应用程序进行验证。这超出了本教程的范围。您可以[此处](https://support.google.com/cloud/answer/13463073/)了解更多信息。这对于本地测试不是必需的，但对于生产是必需的。
         :::
 </Steps>
 
 
-## Differences between online access and offline access
+## 在线访问和离线访问的区别
 
-There are multiple ways to use Google Login with Capacitor. Here is a table that summarizes the differences between the two:
+使用 Google 有多种方式使用 Capacitor 登录。下表总结了两者之间的差异：
 
-|                         | Online access | Offline access |
-|:-----------------------:|:-------------:|:--------------:|
-| Requires a backend      | ❌             | ✅              |
-| Long-lived access token | ❌             | ✅              |
-| Easy setup              | ✅             | ❌              |
+|                         |在线访问|离线访问 |
+|:------------------------:|:-------------:|:----------------:|
+|需要后端 | ❌ | ✅ |
+|长期访问令牌 | ❌ | ✅ |
+|轻松设置 | ✅ | ❌ |
 
 :::note
-**Offline mode** means that your backend can access Google's APIs even when the user is not actively using your app (i.e., when the user is "offline" from your app's perspective). Long-lived access tokens enable this functionality by allowing the backend to call Google APIs on behalf of the user at any time.
+**离线模式**意味着即使用户没有主动使用您的应用程序（即，当用户从您的应用程序的角度来看“离线”时），您的后端也可以访问 Google 的 API。长期访问令牌通过允许后端随时代表用户调用 Google API 来启用此功能。
 :::
 
 :::caution
-**Offline mode REQUIRES a backend server.** When using offline mode, the frontend receives minimal information (primarily just a server auth code). Without a backend to exchange this code for tokens and user information, offline mode provides no useful data to your frontend application.
+**离线模式需要后端服务器。**使用离线模式时，前端接收最少的信息（主要只是服务器身份验证代码）。如果没有后端将此代码交换为令牌和用户信息，离线模式不会为您的前端应用程序提供有用的数据。
 :::
 
-If you still do not know which one you should choose, please consider the following scenarios:
+如果您仍然不知道应该选择哪一个，请考虑以下场景：
 
-1. You want the user to login, immediately after you are going to issue him a custom JWT. Your app will NOT call Google APIs
+1. 您希望用户在您要向他颁发自定义 JWT 后立即登录。您的应用不会调用 Google API
    
-   In this case, choose online access.
+   在这种情况下，请选择在线访问。
 
-2. Your app will call some Google APIs from the client, but never from the backend
+2.您的应用将从客户端调用一些 Google API，但绝不会从后端调用
    
-   In this case, choose online access
+   在这种情况下，选择在线访问
 
-3. Your app will call some google APIs from the backend, but only when the user is actively using the app
+3.您的应用程序将从后端调用一些google API，但仅当用户主动使用该应用程序时
    
-   In this case, choose online access
+   在这种情况下，选择在线访问
 
-4. Your app will periodically check the user's calendar, even when he is not actively using the app
+4.您的应用程序将定期检查用户的日历，即使他没有积极使用该应用程序
    
-   In this case, choose offline access
+   在这种情况下，选择离线访问
 
-## An example backend for online access
+## 在线访问后端示例
 
-In this part of the tutorial, I will show how to validate the user on your backend. 
+在本教程的这一部分中，我将展示如何在后端验证用户。 
 
-This example will be very simple and it will be based on the following technologies:
+这个例子非常简单，它将基于以下技术：
 
-- [Typescript](https://www.typescriptlang.org/)
+- [打字稿](https://www.typescriptlang.org/)
 
-- [Hono](https://hono.dev/)
+- [霍诺](https://hono.dev/)
 
-- [Javascript's fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch)
+- [Javascript 的获取 API](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch)
 
-You can find the code for this example [here](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/141c01d93a85240e31a0d488a89df13c842708b1/index.ts#L135-L153)
+您可以在[此处](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/141c01d93a85240e31a0d488a89df13c842708b1/index.ts#L135-L153)找到此示例的代码
 
-As you can see:
+正如你所看到的：
 
-<img src="/social-login-assets/vscode_auth_google.png" alt="VS Code showing Google authentication code that verifies tokens" />
+<img src="/social-login-assets/vscode_auth_google.png" alt="VS Code 显示用于验证令牌的 Google 身份验证代码" />这个想法相当简单。您向 `https://www.googleapis.com/oauth2/v3/tokeninfo` 发送一个简单的 `GET` 请求，该请求会返回您令牌是否有效，如果有效，则会向您提供用户的电子邮件。它还为您提供了有关用户令牌的一些其他信息
+<img src="/social-login-assets/google_auth_playground_token_info.png" alt="Google OAuth Playground 显示带有用户详细信息的令牌信息响应" />
 
-The idea is rather simple. You send a simple `GET` request to `https://www.googleapis.com/oauth2/v3/tokeninfo` and this returns you whether the token is valid or not and if it it is, it gives you the email of the user. It also gives you some other info about the user token
-<img src="/social-login-assets/google_auth_playground_token_info.png" alt="Google OAuth Playground showing token information response with user details" />
+从那里，您可以向用户发出您自己的 JWT 或发出某种会话 cookie。对于最终的身份验证实施来说，可能性是无限的。
 
-From there, you could issue the user with your own JWT or issue some sort of session cookie. The possibilities are endless, for the final auth implementation.
+如果您确实想致电 Google API 的，我强烈建议您查看 [Google 的 OAuth 2.0 Playground](https://developers.google.com/oauthplayground)。从那里您可以轻松查看可以调用哪些 API。
 
-If you do want to call Google API's, I would strongly recommend looking at [Google's OAuth 2.0 Playground](https://developers.google.com/oauthplayground). From there you can easily see what APIs you can call.
+## 通过您自己的后端使用离线访问
 
-## Using offline access with your own backend
+为了使用在线访问，您将需要以下内容：
 
-In order to use online access you will need the following:
+- HTTP 服务器
 
-- An HTTP server
+在此示例中，我将使用以下技术在我的应用程序中提供离线访问：
 
-In this example, I will be using the following technologies to provide the offline access in my app:
+- [霍诺](https://hono.dev/)
 
-- [Hono](https://hono.dev/)
+- [Hono Zod 验证器](https://hono.dev/docs/guides/validation#with-zod)
 
-- [Hono Zod validator](https://hono.dev/docs/guides/validation#with-zod)
+- [佐德](https://zod.dev/)
 
-- [Zod](https://zod.dev/)
+- [荣誉JWT](https://hono.dev/docs/helpers/jwt#jwt-authentication-helper)
 
-- [Hono JWT](https://hono.dev/docs/helpers/jwt#jwt-authentication-helper)
+- [LowDb](https://www.npmjs.com/package/lowdb)（一个简单的数据库）
 
-- [LowDb](https://www.npmjs.com/package/lowdb) (a simple database)
+此示例的代码可以在[此处](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/aac7a8c909f650a8c2cd7f88c97f5f3c594ce9ba/index.ts#L139-L287)找到
 
-The code for this example can be found [here](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/aac7a8c909f650a8c2cd7f88c97f5f3c594ce9ba/index.ts#L139-L287)
+至于客户端代码，它看起来像这样：
 
-As for the client code, it looks like this:
-
-```typescript
+``打字稿
 import { Capacitor } from '@capacitor/core';
 import { GoogleLoginOfflineResponse, SocialLogin } from '@capgo/capacitor-social-login';
 import { usePopoutStore } from '@/popoutStore'; // <-- specific to my app
 
-const baseURL = "[redacted]";
+const baseURL = "[已编辑]";
 
-async function fullLogin() {
-  await SocialLogin.initialize({
-    google: {
-      webClientId: '[redacted]',  
-      iOSClientId: '[redacted]',
-      iOSServerClientId: 'The same value as webClientId',
-      mode: 'offline' // <-- important
+异步函数 fullLogin() {
+  等待 SocialLogin.initialize({
+    谷歌：{
+      webClientId: '[已编辑]',  
+      iOSClientId: '[已编辑]',
+      iOSServerClientId: '与 webClientId 相同的值',
+      mode: 'offline' // <-- 重要
     } 
   })
-  const response = await SocialLogin.login({
-    provider: 'google',
-    options: {
-      forceRefreshToken: true // <-- important
+  const 响应 = 等待 SocialLogin.login({
+    提供商：“谷歌”，
+    选项：{
+      forceRefreshToken: true // <-- 重要
     }
   })
 
   if (response.provider === 'google') {
-    const result = response.result as GoogleLoginOfflineResponse
-    const res = await fetch(`${baseURL}/auth/google_offline`, {
-      headers: {
-        "Content-Type": "application/json"
+    const 结果 = response.result 作为 GoogleLoginOfflineResponse
+    const res = 等待获取(`${baseURL}/auth/google_offline`, {
+      标题：{
+        “内容类型”：“应用程序/json”
       },
-      body: JSON.stringify({
-        serverAuthCode: result.serverAuthCode,
-        platform: Capacitor.getPlatform()
+      正文： JSON.stringify({
+        serverAuthCode: 结果.serverAuthCode,
+        平台：Capacitor.getPlatform()
       }),
-      method: "POST"
+      方法：“发布”
     })
 
     if (res.status !== 200) {
-      popoutStore.popout("Full google login failed", "check console");
-      return
+      popoutStore.popout("完整谷歌登录失败", "检查控制台");
+      返回
     }
 
-    const { jwt } = await res.json();
-    const userinfo = await fetch(`${baseURL}/auth/get_google_user`, {
-      headers: {
-        Authorization: `Bearer ${jwt}`
+    const { jwt } = 等待 res.json();
+    const userinfo = 等待获取(`${baseURL}/auth/get_google_user`, {
+      标题：{
+        授权：`Bearer ${jwt}`
       }
     })
-    if (userinfo.status !== 200) {
-      popoutStore.popout("Full google (userinfo) login failed", "check console");
-      return
+    if (用户信息.status !== 200) {
+      popoutStore.popout("完整谷歌(用户信息)登录失败", "检查控制台");
+      返回
     }
-    popoutStore.popout("userinfo res", await userinfo.text());
+    popoutStore.popout("userinfo res", wait userinfo.text());
   }
 }

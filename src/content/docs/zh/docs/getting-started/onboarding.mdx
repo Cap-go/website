@@ -1,86 +1,83 @@
 ---
-title: CLI Onboarding Guide
-description: >-
-  Complete step-by-step guide to onboard your app with Capgo using the
-  interactive CLI
+title: CLI 入职指南
+description: 使用交互式 CLI 通过 Capgo 加载您的应用程序的完整分步指南
 sidebar:
   order: 2
 next: true
 prev: true
 locale: zh
 ---
-
 import { Aside, Card, CardGrid } from '@astrojs/starlight/components';
 
-## Quick Overview
+## 快速概述
 
-The Capgo CLI provides an interactive onboarding that sets up live updates for your Capacitor app. You'll:
+Capgo CLI 提供交互式入门，为您的 Capacitor 应用程序设置实时更新。你会：
 
-1. ✅ Register your app in Capgo
-2. 🔌 Install and configure the updater plugin
-3. 🚀 Deploy your first live update
-4. 📱 Test the update on your device
+1. ✅ 在 Capgo 中注册您的应用程序
+2. 🔌安装并配置更新插件
+3. 🚀 部署您的第一个实时更新
+4. 📱 在您的设备上测试更新
 
-**Estimated time:** 10-20 minutes (varies based on your internet speed and build time)
+**预计时间：** 10-20 分钟（根据您的互联网速度和构建时间而有所不同）
 
 <Aside type="tip">
-The onboarding is fully resumable - exit anytime and continue later from where you left off.
+入职培训是完全可恢复的 - 随时退出并稍后从上次中断的地方继续。
 </Aside>
 
-## Starting the Onboarding
+## 开始入职
 
-Run the onboarding command with your API key:
+使用 API 密钥运行入门命令：
 
 ```bash
 npx @capgo/cli@latest init [APIKEY]
 ```
 
-You'll see the welcome message:
+您将看到欢迎消息：
 
 ```
 Capgo onboarding 🛫
 ```
 
-## What Happens During Onboarding
+## 入职期间会发生什么
 
-The CLI will guide you through 13 interactive steps:
+CLI 将引导您完成 13 个互动步骤：
 
-**Setup Phase (Steps 1-6):**
-- Check your development environment (Xcode/Android Studio)
-- Add your app to Capgo and create a production channel
-- Install the `@capgo/capacitor-updater` plugin
-- Inject the required code into your app
-- Optionally enable end-to-end encryption
-- Choose a platform for testing (iOS or Android)
+**设置阶段（步骤 1-6）：**
+- 检查您的开发环境（Xcode/Android Studio）
+- 将您的应用添加到 Capgo 并创建生产频道
+- 安装`@capgo/capacitor-updater`插件
+- 将所需的代码注入您的应用程序
+- 可选择启用端到端加密
+- 选择测试平台（iOS 或 Android）
 
-**Testing Phase (Steps 7-12):**
-- Build your app and run it on a device/simulator
-- Make a visible code change (automatic or manual)
-- Upload the updated bundle to Capgo
-- See the live update appear on your device in real-time
+**测试阶段（步骤 7-12）：**
+- 构建您的应用程序并在设备/模拟器上运行它
+- 进行可见的代码更改（自动或手动）
+- 将更新后的捆绑包上传到 Capgo
+- 实时查看您设备上显示的实时更新
 
-**Completion (Step 13):**
-- Your app is ready for live updates! 🎉
+**完成（步骤 13）：**
+- 您的应用程序已准备好进行实时更新！ 🎉
 
-## The 13-Step Onboarding Process
+## 13 步入职流程
 
-### Step 1: Check Prerequisites
+### 第 1 步：检查先决条件
 
-The CLI checks your development environment to ensure you have the necessary tools installed.
+CLI 检查您的开发环境以确保您安装了必要的工具。
 
-**What's checked:**
-- **Xcode** (macOS only) - for iOS development
-- **Android SDK** - for Android development
+**检查内容：**
+- **Xcode**（仅限 macOS）- 用于 iOS 开发
+- **Android SDK** - 用于 Android 开发
 
-**Possible outcomes:**
+**可能的结果：**
 
-✅ **Both environments found:**
+✅ **发现两种环境：**
 ```
 ✅ Xcode detected - iOS development ready
 ✅ Android SDK detected - Android development ready
 ```
 
-⚠️ **No environment found:**
+⚠️ **未找到环境：**
 ```
 ⚠️ Xcode not found
 ⚠️ Android SDK not found
@@ -91,15 +88,15 @@ The CLI checks your development environment to ensure you have the necessary too
    • For Android: Android Studio - https://developer.android.com/studio
 ```
 
-**Questions you may be asked:**
+**您可能会被问到的问题：**
 
 <Aside type="caution">
-If no development environment is detected, you'll be asked if you want to continue. It's recommended to install at least one platform before proceeding.
+如果未检测到开发环境，系统会询问您是否要继续。建议在继续之前至少安装一个平台。
 </Aside>
 
-### Step 2: Add Your App
+### 第 2 步：添加您的应用程序
 
-The CLI will log you into Capgo and add your app to your account.
+CLI 将使您登录到 Capgo 并将您的应用程序添加到您的帐户。
 
 ```
 (spinner) Running: npm @capgo/cli@latest login ***
@@ -108,9 +105,9 @@ Login Done ✅
 ❓ Add {appId} in Capgo?
 ```
 
-**If your app ID is already taken:**
+**如果您的应用 ID 已被占用：**
 
-The CLI will suggest alternatives:
+CLI 将建议替代方案：
 ```
 ❌ App ID "com.example.app" is already taken
 💡 Here are some suggestions:
@@ -122,108 +119,106 @@ The CLI will suggest alternatives:
 ❓ What would you like to do?
 ```
 
-You can choose a suggestion or enter a custom app ID.
+您可以选择建议或输入自定义应用程序 ID。
 
 <Aside type="note">
-App IDs must follow reverse domain notation (e.g., `com.example.myapp`)
+应用 ID 必须遵循反向域表示法（例如 `com.example.myapp`）
 </Aside>
 
-### Step 3: Create Production Channel
+### 第 3 步：创建生产频道
 
-Channels allow you to manage different update streams for your app.
+频道允许您管理应用程序的不同更新流。
 
 ```
 ❓ Create default channel production for {appId} in Capgo?
 ```
 
 <Aside type="tip">
-**Don't worry!** This is just for local testing during onboarding. Creating a "production" channel doesn't mean your updates will go live to customers immediately. You have full control over when updates are deployed. Select **Yes** unless you have specific channel requirements.
+**别担心！** 这仅适用于入职期间的本地测试。创建“生产”渠道并不意味着您的更新将立即向客户发布。您可以完全控制何时部署更新。除非您有特定的渠道要求，否则请选择**是**。
 </Aside>
 
-**If you select Yes:**
+**如果您选择是：**
 ```
 (spinner) Running: npm @capgo/cli@latest channel add production {appId} --default
 Channel add Done ✅  (or "Channel already added ✅")
 ```
 
-A production channel will be created and set as default. This is the recommended option for most users.
+将创建一个生产频道并将其设置为默认频道。这是大多数用户推荐的选项。
 
-**If you select No:**
+**如果您选择否：**
 ```
 If you change your mind, run it for yourself with: "npm @capgo/cli@latest channel add production {appId} --default"
-```
+```您稍后需要手动创建和配置通道。或者，您可以：
+- 在 `capacitor.config.ts` 文件中设置频道
+- 使用JavaScript `setChannel()`方法动态设置通道
+- 稍后从 Capgo Web 控制台配置通道
 
-You'll need to create and configure channels manually later. Alternatively, you can:
-- Set the channel in your `capacitor.config.ts` file
-- Use the JavaScript `setChannel()` method to dynamically set the channel
-- Configure channels later from the Capgo web console
+### 步骤 4：安装更新插件
 
-### Step 4: Install Updater Plugin
-
-The CLI will install the `@capgo/capacitor-updater` plugin compatible with your Capacitor version.
+CLI 将安装与您的 Capacitor 版本兼容的 `@capgo/capacitor-updater` 插件。
 
 ```
 ❓ Automatic Install "@capgo/capacitor-updater" dependency in {appId}?
 ```
 
-**Version compatibility:**
+**版本兼容性：**
 
-- **Capacitor 5**: Installs `@capgo/capacitor-updater` v5
-- **Capacitor 6**: Installs `@capgo/capacitor-updater` v6
-- **Capacitor 7**: Installs `@capgo/capacitor-updater` v7
-- **Capacitor 8+**: Installs latest version
+- **Capacitor 5**：安装 `@capgo/capacitor-updater` v5
+- **Capacitor 6**：安装 `@capgo/capacitor-updater` v6
+- **Capacitor 7**：安装 `@capgo/capacitor-updater` v7
+- **Capacitor 8+**：安装最新版本
 
 <Aside type="caution">
-Capgo only supports Capacitor v5 and above. If you're using an older version, you'll need to upgrade first.
+Capgo 仅支持 Capacitor v5 及以上版本。如果您使用的是旧版本，则需要先升级。
 </Aside>
 
-**Instant updates option:**
+**即时更新选项：**
 
-After installation, you'll be asked:
+安装后，系统会询问您：
 ```
 ❓ Do you want to set instant updates in {appId}?
    Read more: https://capgo.app/docs/live-updates/update-behavior/#applying-updates-immediately
 ```
 
 <Aside type="tip">
-**What are instant updates?** With instant updates enabled, your app applies updates immediately when backgrounded and reopened. This works seamlessly because Capgo can distribute updates worldwide in under 300ms. Without it (standard mode), updates download in the background and apply on the next app restart. Instant updates are great for faster iteration during development and critical bug fixes in production.
+**什么是即时更新？** 启用即时更新后，您的应用程序在后台运行并重新打开时会立即应用更新。这可以无缝工作，因为 Capgo 可以在 300 毫秒内在全球范围内分发更新。如果没有它（标准模式），更新将在后台下载并在下次应用程序重新启动时应用。即时更新对于开发过程中的更快迭代和生产中的关键错误修复非常有用。
 </Aside>
 
-**If you select Yes:**
-- Updates will be configured to apply immediately when the app is backgrounded and reopened
-- `directUpdate: 'always'` and `autoSplashscreen: true` will be added to your config
-- Your `capacitor.config.ts` will be updated automatically
-- **Delta updates** will be automatically enabled - this sends only the files that changed between updates instead of the full bundle, making updates much faster
+**如果您选择是：**
+- 更新将配置为在应用程序后台运行并重新打开时立即应用
+- `directUpdate: 'always'` 和 `autoSplashscreen: true` 将添加到您的配置中
+- 您的 `capacitor.config.ts` 将自动更新
+- **增量更新**将自动启用 - 这仅发送更新之间更改的文件而不是完整的捆绑包，从而使更新速度更快
 
-**If you select No:**
-- Updates will use standard behavior (download in background, apply on next restart)
-- You can always enable instant updates later by modifying your `capacitor.config.ts`
+**如果您选择否：**
+- 更新将使用标准行为（在后台下载，在下次重新启动时应用）
+- 您以后随时可以通过修改 `capacitor.config.ts` 来启用即时更新
 
-### Step 5: Add Integration Code
+### 步骤 5：添加集成代码
 
-The CLI will automatically inject the required code into your main application file.
+CLI 会自动将所需的代码注入到您的主应用程序文件中。
 
 ```
 ❓ Automatic Add "CapacitorUpdater.notifyAppReady()" code and import in {appId}?
 ```
 
-**What gets added:**
+**添加了什么：**
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
 CapacitorUpdater.notifyAppReady()
 ```
 
-**Project type detection:**
+**项目类型检测：**
 
-- **Nuxt.js**: Creates `plugins/capacitorUpdater.client.ts`
-- **Other frameworks**: Adds to your main entry file
+- **Nuxt.js**：创建 `plugins/capacitorUpdater.client.ts`
+- **其他框架**：添加到您的主条目文件中
 
 <Aside type="tip">
-**If auto-injection fails**, you can add the code manually to your main application file:
+**如果自动注入失败**，您可以手动将代码添加到主应用程序文件中：
 
-**For Nuxt.js:**
-Create `plugins/capacitorUpdater.client.ts`:
+**对于 Nuxt.js：**
+创建`plugins/capacitorUpdater.client.ts`：
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
@@ -232,20 +227,20 @@ export default defineNuxtPlugin(() => {
 })
 ```
 
-**For other frameworks:**
-Add to your main entry file (e.g., `main.ts`, `index.js`, `App.tsx`):
+**对于其他框架：**
+添加到您的主条目文件（例如，`main.ts`、`index.js`、`App.tsx`）：
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
 CapacitorUpdater.notifyAppReady()
 ```
 
-Place this code after your imports and before your app initialization. For more details, see the [Add an App guide](/docs/getting-started/add-an-app/).
+将此代码放在导入之后和应用程序初始化之前。有关更多详细信息，请参阅[添加应用程序指南](/docs/getting-started/add-an-app/)。
 </Aside>
 
-### Step 6: Setup Encryption (Optional)
+### 步骤 6：设置加密（可选）
 
-End-to-end encryption adds an extra security layer for your updates.
+端到端加密为您的更新添加了额外的安全层。
 
 ```
 🔐 End-to-end encryption
@@ -256,16 +251,16 @@ End-to-end encryption adds an extra security layer for your updates.
 ```
 
 <Aside type="note">
-Encryption is only available for Capacitor v6 and above.
+加密仅适用于 Capacitor v6 及更高版本。
 </Aside>
 
-If you enable encryption, the CLI will:
-1. Generate encryption keys
-2. Offer to sync your Capacitor configuration
+如果启用加密，CLI 将：
+1. 生成加密密钥
+2. 主动同步您的 Capacitor 配置
 
-### Step 7: Select Platform
+### 第 7 步：选择平台
 
-Choose which platform to test with during onboarding.
+选择在入职期间要测试的平台。
 
 ```
 📱 Platform selection for onboarding
@@ -275,38 +270,36 @@ Choose which platform to test with during onboarding.
    Options:
    - iOS
    - Android
-```
-
-<Aside type="tip">
-This only affects the onboarding process. Your final app will support all platforms.
+```<Aside type="tip">
+这只会影响入职流程。您的最终应用程序将支持所有平台。
 </Aside>
 
-### Step 8: Build Your Project
+### 第 8 步：构建您的项目
 
-The CLI will build your app and sync it with Capacitor.
+CLI 将构建您的应用程序并将其与 Capacitor 同步。
 
 ```
 ❓ Automatic build {appId} with "npm run build"?
 ```
 
-**What happens:**
-1. Detects your project type
-2. Runs your build script
-3. Executes `npx cap sync {platform}`
+**发生了什么：**
+1. 检测您的项目类型
+2. 运行构建脚本
+3. 执行`npx cap sync {platform}`
 
-**If build script is missing:**
+**如果缺少构建脚本：**
 
-You'll be asked if you want to skip the build or add a build script to your `package.json`.
+系统会询问您是否要跳过构建或将构建脚本添加到 `package.json`。
 
-### Step 9: Run on Device
+### 步骤 9：在设备上运行
 
-Test the initial version of your app on a device or simulator.
+在设备或模拟器上测试应用程序的初始版本。
 
 ```
 ❓ Run {appId} on {PLATFORM} device now to test the initial version?
 ```
 
-If you select **Yes**:
+如果您选择**是**：
 ```
 (spinner) Running: npx cap run {platform}
 (device picker appears)
@@ -315,9 +308,9 @@ App started ✅
 🔄 This is your baseline version - we'll create an update next
 ```
 
-### Step 10: Make a Test Change
+### 第 10 步：进行测试更改
 
-Now it's time to test Capgo's update system by making a visible change.
+现在是时候通过进行可见的更改来测试 Capgo 的更新系统了。
 
 ```
 🎯 Now let's test Capgo by making a visible change and deploying an update!
@@ -328,13 +321,13 @@ Now it's time to test Capgo's update system by making a visible change.
    - Manual: I'll make changes myself
 ```
 
-**Auto mode:**
-The CLI will automatically modify your files to add a visible test banner or change.
+**自动模式：**
+CLI 将自动修改您的文件以添加可见的测试横幅或更改。
 
-**Manual mode:**
-You make your own changes (e.g., change text, colors, or add elements).
+**手动模式：**
+您可以自行更改（例如，更改文本、颜色或添加元素）。
 
-**Version handling:**
+**版本处理：**
 ```
 ❓ How do you want to handle the version for this update?
    Options:
@@ -342,33 +335,33 @@ You make your own changes (e.g., change text, colors, or add elements).
    - Manual: I'll provide the version number
 ```
 
-**Build with changes:**
+**进行更改构建：**
 ```
 ❓ Build {appId} with changes before uploading?
 ```
 
 <Aside type="tip">
-If you need to build manually in another terminal, select "No" and build yourself, then continue.
+如果您需要在另一个终端中手动构建，请选择“否”并自行构建，然后继续。
 </Aside>
 
-### Step 11: Upload Bundle
+### 第 11 步：上传包
 
-Upload your updated app bundle to Capgo.
+将更新后的应用程序包上传到 Capgo。
 
 ```
 ❓ Upload the updated {appId} bundle (v{version}) to Capgo?
 ```
 
-The CLI runs:
+CLI 运行：
 ```bash
 npx @capgo/cli@latest bundle upload
 ```
 
 <Aside type="tip">
-**Delta updates with Direct Update:** If you enabled instant updates (Direct Update) in Step 4, the CLI will automatically ask if you want to enable delta updates. Delta updates send only the files that changed between versions instead of the entire bundle. Since usually only a few files change between updates, this makes downloads much faster. Select **Yes** for the best experience with instant updates.
+**使用直接更新进行增量更新：** 如果您在步骤 4 中启用了即时更新（直接更新），CLI 将自动询问您是否要启用增量更新。增量更新仅发送版本之间发生更改的文件，而不是整个捆绑包。由于更新之间通常只有少数文件发生变化，这使得下载速度更快。选择**是**以获得即时更新的最佳体验。
 </Aside>
 
-**Delta updates prompt (if Direct Update is enabled):**
+**Delta 更新提示（如果启用了直接更新）：**
 ```
 💡 Direct Update (instant updates) is enabled in your config
    Delta updates send only changed files instead of the full bundle
@@ -377,31 +370,31 @@ npx @capgo/cli@latest bundle upload
 ```
 
 <Aside type="caution">
-For monorepos, you may need to provide additional paths to your `package.json` and `node_modules`.
+对于 monorepos，您可能需要提供指向 `package.json` 和 `node_modules` 的其他路径。
 </Aside>
 
-**Success:**
+**成功：**
 ```
 ✅ Update v{version} uploaded successfully!
 🎉 Your updated bundle is now available on Capgo
 ```
 
-### Step 12: Test Update on Device
+### 步骤 12：在设备上测试更新
 
-Time to see the update in action!
+是时候看看更新的实际效果了！
 
 ```
 🧪 Time to test the Capgo update system!
 📱 Go to your device where the app is running
 ```
 
-**For instant updates:**
+**即时更新：**
 ```
 🔄 IMPORTANT: Background your app (swipe up/press home button) and then reopen it
 ⏱️  The update should be downloaded and applied automatically
 ```
 
-**For standard updates:**
+**对于标准更新：**
 ```
 📱 With standard updates, you will need to:
    1. Background the app (swipe up/press home button) to start download
@@ -409,90 +402,88 @@ Time to see the update in action!
    3. Background and foreground again to see the update
 ```
 
-**Monitor logs:**
+**监控日志：**
 ```
 ❓ Monitor Capgo logs to verify the update worked?
 ```
 
-If you select **Yes**, you'll see live logs from your device showing the update process.
+如果您选择**是**，您将看到设备上显示更新过程的实时日志。
 
-### Step 13: Completion
+### 第 13 步：完成
 
 ```
 Welcome onboard ✈️!
 ```
 
-Congratulations! You've successfully set up Capgo live updates for your app.
+恭喜！您已成功为您的应用设置 Capgo 实时更新。
 
-## What You've Accomplished
+## 你已经取得了什么成就
 
-After completing the onboarding, you have:
+完成入职后，您将拥有：
 
 <CardGrid>
-  <Card title="✅ App Registered" icon="rocket">
-    Your app is registered in Capgo with a production channel
+  <Card title="✅ 应用程序已注册" icon="rocket">
+    您的应用已通过生产渠道在 Capgo 中注册
   </Card>
-  <Card title="✅ Plugin Installed" icon="puzzle">
-    The Capacitor Updater plugin is installed and configured
+  <Card title="✅ 已安装插件" icon="puzzle">
+    Capacitor 更新程序插件已安装并配置
   </Card>
-  <Card title="✅ Code Integrated" icon="seti:config">
-    Integration code is added to your app
+  <Card title="✅ 代码集成" icon="seti:config">
+    集成代码已添加到您的应用程序中
   </Card>
-  <Card title="✅ Update Tested" icon="approve-check">
-    You've successfully deployed and received a live update
+  <Card title="✅ 更新已测试" icon="approve-check">
+    您已成功部署并收到实时更新
   </Card>
 </CardGrid>
 
-## Daily Workflow
+## 日常工作流程
 
-For subsequent updates, use:
+对于后续更新，请使用：
 
 ```bash
 npm run build
 npx @capgo/cli@latest bundle upload --channel=production
 ```
 
-For more deployment options, see [Deploy a Live Update](/docs/getting-started/deploy/).
+有关更多部署选项，请参阅[部署实时更新](/docs/getting-started/deploy/)。
 
-## Resuming Onboarding
+## 恢复入职
 
-If you exit the onboarding process, you can resume anytime:
+如果您退出入职流程，您可以随时恢复：
 
 ```bash
 npx @capgo/cli@latest init [APIKEY]
-```
-
-You'll see:
+```你会看到：
 ```
 You have already got to the step {stepNumber}/13 in the previous session
 ❓ Would you like to continue from where you left off?
 ```
 
 <Aside type="tip">
-Progress is saved locally, so you can safely exit and resume the onboarding process.
+进度保存在本地，因此您可以安全退出并恢复入门过程。
 </Aside>
 
-## Troubleshooting
+## 故障排除
 
-### No Development Environment
+### 无开发环境
 
-**Problem:** Neither Xcode nor Android SDK is detected.
+**问题：** 未检测到 Xcode 和 Android SDK。
 
-**Solution:**
-- **For iOS**: Install [Xcode](https://developer.apple.com/xcode/) (macOS only)
-- **For Android**: Install [Android Studio](https://developer.android.com/studio)
+**解决方案：**
+- **对于 iOS**：安装 [Xcode](https://developer.apple.com/xcode/)（仅限 macOS）
+- **对于 Android**：安装 [Android Studio](https://developer.android.com/studio)
 
-### App ID Already Taken
+### 应用程序 ID 已被占用
 
-**Problem:** Your app ID is already registered.
+**问题：** 您的应用程序 ID 已注册。
 
-**Solution:** Choose one of the suggested alternatives or enter a custom app ID in reverse domain notation.
+**解决方案：** 选择建议的替代方案之一，或以反向域表示法输入自定义应用程序 ID。
 
-### Build Script Missing
+### 缺少构建脚本
 
-**Problem:** No build script found in `package.json`.
+**问题：** 在 `package.json` 中找不到构建脚本。
 
-**Solution:** Add a build script to your `package.json`:
+**解决方案：** 将构建脚本添加到您的 `package.json` 中：
 ```json
 {
   "scripts": {
@@ -501,56 +492,56 @@ Progress is saved locally, so you can safely exit and resume the onboarding proc
 }
 ```
 
-### Auto-Injection Failed
+### 自动注入失败
 
-**Problem:** CLI cannot automatically inject the integration code.
+**问题：** CLI 无法自动注入集成代码。
 
-**Solution:** Add the code manually to your main file:
+**解决方案：** 将代码手动添加到您的主文件中：
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
 CapacitorUpdater.notifyAppReady()
 ```
 
-### Capacitor Version Too Old
+### Capacitor 版本太旧
 
-**Problem:** Your Capacitor version is below v5.
+**问题：** 您的 Capacitor 版本低于 v5。
 
-**Solution:** Upgrade Capacitor to v5 or higher:
-- [Upgrading to Capacitor 5](https://capacitorjs.com/docs/updating/5-0)
-- [Upgrading to Capacitor 6](https://capacitorjs.com/docs/updating/6-0)
-- [Upgrading to Capacitor 7](https://capacitorjs.com/docs/updating/7-0)
+**解决方案：** 将 Capacitor 升级到 v5 或更高版本：
+- [升级到Capacitor 5](https://capacitorjs.com/docs/updating/5-0)
+- [升级至 Capacitor 6](https://capacitorjs.com/docs/updating/6-0)
+- [升级至 Capacitor 7](https://capacitorjs.com/docs/updating/7-0)
 
-## Next Steps
+## 后续步骤
 
-Now that you've completed onboarding, explore these topics:
+现在您已完成入职培训，请探索以下主题：
 
 <CardGrid>
-  <a href="/docs/getting-started/deploy/"><Card title="Deploy Updates" icon="rocket">
-    Learn how to deploy updates from the Capgo dashboard
+  <a href="/docs/getting-started/deploy/"><Card title="部署更新" icon="rocket">
+    了解如何从 Capgo 仪表板部署更新
   </Card></a>
   <a href="/docs/live-updates/update-types/"><Card title="更新类型" icon="open-book">
-    所有 OTA 更新类型的参考：应用时机、延迟条件、版本阻止和交付
+    所有OTA更新类型参考：应用时机、延迟条件、版本阻止和交付
   </Card></a>
-  <a href="/docs/getting-started/cicd-integration/"><Card title="CI/CD Integration" icon="setting">
-    Automate your update deployments with CI/CD
+  <a href="/docs/getting-started/cicd-integration/"><Card title="持续集成/持续交付集成" icon="setting">
+    使用 CI/CD 自动执行更新部署
   </Card></a>
   <a href="/docs/live-updates/channels/"><Card title="Channels" icon="list-format">
-    Manage multiple update streams with channels
+    使用通道管理多个更新流
   </Card></a>
   <a href="/docs/live-updates/encryption/"><Card title="Encryption" icon="approve-check-circle">
-    Secure your updates with end-to-end encryption
+    通过端到端加密保护您的更新
   </Card></a>
-  <a href="/docs/live-updates/update-behavior/"><Card title="Update Behavior" icon="setting">
-    Customize when and how updates are applied (direct, delta, etc.)
+  <a href="/docs/live-updates/update-behavior/"><Card title="更新行为" icon="setting">
+    自定义应用更新的时间和方式（直接、增量等）
   </Card></a>
 </CardGrid>
 
-## Getting Help
+## 获取帮助
 
-If you encounter issues during onboarding:
+如果您在入职过程中遇到问题：
 
-- Check the [Troubleshooting Guide](/docs/getting-started/troubleshooting/)
-- Join the [Discord Community](https://discord.capgo.app)
-- Review the [FAQ](/docs/faq/)
-- Contact [Support](/docs/getting-help/)
+- 查看[故障排除指南](/docs/getting-started/troubleshooting/)
+- 加入 [Discord 社区](https://discord.capgo.app)
+- 查看[常见问题解答](/docs/faq/)
+- 联系[支持](/docs/getting-help/)

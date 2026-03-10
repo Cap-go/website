@@ -1,45 +1,49 @@
 ---
-locale: fr
-title: "@capgo/capacitor-media-session"
-description: Control lock-screen, notification and headset media controls directly from Capacitor.
+title: '@capgo/capacitor-media-session'
+description: >-
+  Contrôlez les commandes multimédia de l'écran de verrouillage, des
+  notifications et du casque directement depuis Capacitor.
 tableOfContents: false
 next: false
 prev: false
-sidebar: 
+sidebar:
   order: 1
-  label: "Introduction"
-hero: 
-  tagline: Publish track metadata, react to play/pause events, and Synchroniser playback state with Natif media controls.
-  image: 
+  label: Introduction
+hero:
+  tagline: >-
+    Publiez les métadonnées des pistes, réagissez aux événements de
+    lecture/pause et synchronisez l'état de lecture avec les commandes
+    multimédias natives.
+  image:
     file: ~public/icons/plugins/media-session.svg
-  actions: 
-    - text: Get started
+  actions:
+    - text: Commencer
       link: /docs/plugins/media-session/getting-started/
       icon: right-arrow
       variant: primary
     - text: Github
-      link: https://github.com/Cap-go/capacitor-media-session/
+      link: 'https://github.com/Cap-go/capacitor-media-session/'
       icon: external
       variant: minimal
+locale: fr
 ---
-
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-The Media Session plugin bridges Capacitor with the Media Session API so your audio and video players feel Natif everywhere.
+Le plugin Media Session relie Capacitor à Media Session API afin que vos lecteurs audio et vidéo se sentent natifs partout.
 
 <CardGrid stagger>
-  <Card title="Rich metadata" icon="star">
-    Provide album art, artist, and title for lock-screen and notification controls.
+  <Card title="Des métadonnées riches" icon="star">
+    Fournissez la pochette de l'album, l'artiste et le titre pour les commandes de verrouillage de l'écran et de notification.
   </Card>
-  <Card title="Playback state sync" icon="rocket">
-    Keep play / pause buttons and progress indicators aligned with your player.
+  <Card title="Synchronisation de l'état de lecture" icon="rocket">
+    Gardez les boutons lecture/pause et les indicateurs de progression alignés avec votre lecteur.
   </Card>
-  <Card title="Action callbacks" icon="pencil">
-    Handle headset buttons and OS media actions from your Capacitor code.
+  <Card title="Rappels d'actions" icon="pencil">
+    Gérez les boutons du casque et les actions multimédias du système d'exploitation à partir de votre code Capacitor.
   </Card>
-  <Card title="Position reporting" icon="download">
-    Pousser duration, position, and rate so scrubbing works fluidly.
+  <Card title="Rapport de position" icon="download">
+    Appuyez sur la durée, la position et le débit pour que le gommage fonctionne de manière fluide.
   </Card>
 </CardGrid>
 
-Jump to the Commencer Guide to wire metadata Mises à jour into your player lifecycle.
+Accédez au guide de démarrage pour intégrer les mises à jour des métadonnées dans le cycle de vie de votre lecteur.

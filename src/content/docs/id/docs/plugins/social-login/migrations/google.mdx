@@ -1,57 +1,55 @@
 ---
-title: >-
-  Migration Guide from @codetrix-studio/capacitor-google-auth to
-  @capgo/capacitor-social-login
+title: Google Migrasi Otentikasi ke @capgo/social-login
 description: >-
-  This guide outlines transitioning from the older Google Auth plugin to the
-  newer Capgo social login package, which unifies multiple social authentication
-  providers.
+  Panduan ini menguraikan transisi dari plugin Google Auth lama ke paket login
+  sosial Capgo yang lebih baru, yang menyatukan beberapa penyedia autentikasi
+  sosial.
 sidebar:
   order: 3
 locale: id
 ---
 import { Steps } from '@astrojs/starlight/components';
 
-## Overview
+## Ikhtisar
 
-This guide provides comprehensive steps for migrating from `@codetrix-studio/capacitor-google-auth` to `@capgo/capacitor-social-login`, ensuring a smooth transition and improved authentication experience. The new plugin unifies multiple social authentication providers under a single, consistent API.
+Panduan ini memberikan langkah-langkah komprehensif untuk bermigrasi dari `@codetrix-studio/capacitor-google-auth` ke `@capgo/capacitor-social-login`, memastikan transisi yang lancar dan pengalaman autentikasi yang lebih baik. Plugin baru ini menyatukan beberapa penyedia autentikasi sosial dalam satu API yang konsisten.
 
-## Installation
+## Instalasi
 
 <Steps>
-1. Remove the old package:
+1. Hapus paket lama:
    ```bash
    npm uninstall @codetrix-studio/capacitor-google-auth
    ```
 
-2. Install the new package:
+2. Instal paket baru:
    ```bash
    npm install @capgo/capacitor-social-login
    npx cap sync
    ```
 </Steps>
 
-## Important Changes in Google Auth Setup
+## Perubahan Penting pada Google Pengaturan Otentikasi
 
-### Web Client ID Requirement
-**Critical Change**: The updated plugin requires using a Web Client ID across all platforms.
+### Persyaratan ID Klien Web
+**Perubahan Penting**: Plugin yang diperbarui memerlukan penggunaan ID Klien Web di semua platform.
 
-You'll need to:
-1. Create a Web Client ID in Google Cloud Console if you don't have one ([How to get the credentials](/docs/plugins/social-login/google/general/))
-2. Use this Web Client ID in the `webClientId` field for all platforms
-3. For Android, you still need to create an Android Client ID with your SHA1, but this is only for verification purposes - the token won't be used ([Android setup guide](/docs/plugins/social-login/google/android/))
+Anda harus:
+1. Buat ID Klien Web di Google Cloud Console jika Anda belum memilikinya ([Cara mendapatkan kredensial](/docs/plugins/social-login/google/general/))
+2. Gunakan ID Klien Web ini di kolom `webClientId` untuk semua platform
+3. Untuk Android, Anda masih perlu membuat ID Klien Android dengan SHA1 Anda, namun ini hanya untuk keperluan verifikasi - token tidak akan digunakan ([Android panduan penyiapan](/docs/plugins/social-login/google/android/))
 
-## Code Changes
+## Perubahan Kode
 
-### Import Changes
+### Impor Perubahan
 ```diff
 - import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 + import { SocialLogin } from '@capgo/capacitor-social-login';
 ```
 
-### Initialization
+### Inisialisasi
 
-The setup transforms from a simple `GoogleAuth.initialize()` call to a more structured `SocialLogin.initialize()` with nested Google configuration:
+Penyiapannya berubah dari panggilan `GoogleAuth.initialize()` sederhana menjadi `SocialLogin.initialize()` yang lebih terstruktur dengan konfigurasi Google bertumpuk:
 
 ```diff
 - GoogleAuth.initialize({
@@ -69,9 +67,9 @@ The setup transforms from a simple `GoogleAuth.initialize()` call to a more stru
 + });
 ```
 
-### Sign In
+### Masuk
 
-The login method changes from `GoogleAuth.signIn()` to `SocialLogin.login()` with explicit provider specification:
+Metode login berubah dari `GoogleAuth.signIn()` menjadi `SocialLogin.login()` dengan spesifikasi penyedia eksplisit:
 
 ```diff
 - const user = await GoogleAuth.signIn();
@@ -84,11 +82,11 @@ The login method changes from `GoogleAuth.signIn()` to `SocialLogin.login()` wit
 + });
 ```
 
-## Platform Specific Changes
+## Perubahan Khusus Platform
 
 ### Android
 
-1. Update your `MainActivity.java` ([Full Android setup guide](/docs/plugins/social-login/google/android/)):
+1. Perbarui `MainActivity.java` Anda ([Panduan penyiapan Android lengkap](/docs/plugins/social-login/google/android/)):
 ```diff
 + import ee.forgr.capacitor.social.login.GoogleProvider;
 + import ee.forgr.capacitor.social.login.SocialLoginPlugin;
@@ -126,9 +124,9 @@ The login method changes from `GoogleAuth.signIn()` to `SocialLogin.login()` wit
 
 ### iOS
 
-1. No major changes needed in AppDelegate.swift ([iOS setup guide](/docs/plugins/social-login/google/ios/))
+1. Tidak diperlukan perubahan besar di AppDelegate.swift ([iOS panduan penyiapan](/docs/plugins/social-login/google/ios/))
 
-2. Update your configuration in `capacitor.config.json`, we don't use it in the new plugin:
+2. Perbarui konfigurasi Anda di `capacitor.config.json`, kami tidak menggunakannya di plugin baru:
 ```diff
 {
   "plugins": {
@@ -142,15 +140,15 @@ The login method changes from `GoogleAuth.signIn()` to `SocialLogin.login()` wit
 
 ### Web
 
-1. Remove the Google Sign-In meta tags from your `index.html` if you were using them:
+1. Hapus tag meta Masuk Google dari `index.html` jika Anda menggunakannya:
 ```diff
 - <meta name="google-signin-client_id" content="{your client id here}" />
 - <meta name="google-signin-scope" content="profile email" />
 ```
 
-## Response Type Changes
+## Perubahan Jenis Respons
 
-The authentication response now provides a structured object containing provider information, access tokens, ID tokens, and user profile data:
+Respons autentikasi kini menyediakan objek terstruktur yang berisi informasi penyedia, token akses, token ID, dan data profil pengguna:
 
 ```typescript
 interface GoogleLoginResponse {
@@ -174,22 +172,22 @@ interface GoogleLoginResponse {
 }
 ```
 
-The response structure includes:
-- **provider**: Identifies the authentication provider (`'google'`)
-- **result.accessToken**: Access token details with expiration
-- **result.idToken**: ID token for authentication
-- **result.profile**: User profile information including email, name, and image URL
+Struktur responsnya meliputi:
+- **penyedia**: Mengidentifikasi penyedia autentikasi (`'google'`)
+- **result.accessToken**: Mengakses detail token dengan masa berlaku
+- **result.idToken**: Token ID untuk autentikasi
+- **result.profile**: Informasi profil pengguna termasuk email, nama, dan URL gambar
 
-## Additional Capabilities
+## Kemampuan Tambahan
 
-The new package supports multiple social authentication providers beyond Google:
-- [Apple Sign-In](/docs/plugins/social-login/apple/general/)
-- [Facebook Login](/docs/plugins/social-login/facebook/)
+Paket baru ini mendukung beberapa penyedia autentikasi sosial selain Google:
+- [Apple Masuk](/docs/plugins/social-login/apple/general/)
+- [Facebook Masuk](/docs/plugins/social-login/facebook/)
 
-This unified approach provides:
-- Consistent API across all providers
-- Improved TypeScript support
-- Better error handling
-- Active maintenance and community support
+Pendekatan terpadu ini menyediakan:
+- API yang konsisten di semua penyedia
+- Peningkatan dukungan TypeScript
+- Penanganan kesalahan yang lebih baik
+- Pemeliharaan aktif dan dukungan komunitas
 
-Check the [main documentation](/docs/plugins/social-login/google/general/) for detailed setup instructions for these additional providers. 
+Periksa [dokumentasi utama](/docs/plugins/social-login/google/general/) untuk mengetahui petunjuk penyiapan mendetail untuk penyedia tambahan ini.

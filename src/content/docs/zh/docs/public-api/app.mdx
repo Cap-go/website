@@ -1,34 +1,33 @@
 ---
 title: Apps
-description: Apps端点的详细文档，提供通过Capgo平台管理和与Capacitor应用程序交互的全面见解。
+description: 应用程序端点的详细文档，提供有关通过 Capgo 平台管理 Capacitor 应用程序并与之交互的全面见解。
 sidebar:
   order: 7
 locale: zh
 ---
+应用程序是 Capgo 中的基础实体。每个应用程序代表一个独特的 Capacitor 应用程序，您可以通过平台管理和更新该应用程序。应用程序 API 允许您创建、检索、更新和删除应用程序配置。
 
-Apps是Capgo中的基础实体。每个应用程序代表一个独特的Capacitor应用程序，您可以通过平台进行管理和更新。Apps API允许您创建、检索、更新和删除应用程序配置。
+## 了解应用程序
 
-## 理解Apps
-
-Capgo中的应用程序代表您的Capacitor应用程序，包括：
-- **App ID**：应用程序的唯一标识符
-- **Name**：应用程序的可读名称
-- **Icons**：仪表板中应用程序的视觉标识符
-- **Configuration**：控制更新交付方式的设置
-- **Ownership**：组织和用户访问信息
-- **Usage Statistics**：关于安装和更新的指标
+Capgo 中的应用代表您的 Capacitor 应用程序，包括：
+- **应用程序 ID**：您的应用程序的唯一标识符
+- **名称**：应用程序的人类可读名称
+- **图标**：仪表板中应用程序的视觉标识符
+- **配置**：控制更新交付方式的设置
+- **所有权**：组织和用户访问信息
+- **使用统计**：有关安装和更新的指标
 
 ## 最佳实践
 
 1. **命名约定**：为您的应用程序使用清晰、可识别的名称
-2. **安全性**：保护您的API密钥和访问凭据
+2. **安全**：保护您的 API 密钥和访问凭据
 3. **组织**：将相关应用程序分组到同一组织下
 4. **监控**：定期检查应用程序统计信息和性能
 5. **备份**：维护关键应用程序的配置备份
 
 ## 端点
 
-### GET
+### 获取
 
 `https://api.capgo.app/app/`
 
@@ -36,13 +35,15 @@ Capgo中的应用程序代表您的Capacitor应用程序，包括：
 
 #### 查询参数
 - `page`：可选。分页的页码
-- `limit`：可选。每页结果数（默认值：50）
-- `org_id`：可选。按组织ID筛选应用程序。如果未提供，则返回用户有权访问的所有组织的应用程序
+- `limit`：可选。每页结果数（默认：50）
+- `org_id`：可选。按组织 ID 过滤应用程序。如果未提供，则返回用户有权访问的所有组织的应用程序
 
-获取特定应用程序：
-- 在URL路径中使用应用程序ID：`https://api.capgo.app/app/:app_id`
+要获取特定应用程序：
+- 在 URL 路径中使用应用程序 ID：`https://api.capgo.app/app/:app_id`
 
-#### Response Type
+#### 响应类型
+
+注意：`last_version` 指的是为应用程序上传的最后一个捆绑包（版本）。
 
 ```typescript
 interface App {
@@ -51,7 +52,7 @@ interface App {
   default_upload_channel: string
   icon_url: string
   id: string | null
-  last_version: string | null
+  last_version: string | null // last bundle (version) name
   name: string | null
   owner_org: string
   retention: number
@@ -61,7 +62,7 @@ interface App {
 }
 ```
 
-#### Example Request
+#### 请求示例
 
 ```bash
 # Get all apps
@@ -77,7 +78,7 @@ curl -H "authorization: your-api-key" \
   "https://api.capgo.app/app/com.demo.app"
 ```
 
-#### Example Response
+#### 响应示例
 
 ```json
 {
@@ -100,13 +101,13 @@ curl -H "authorization: your-api-key" \
 }
 ```
 
-### POST
+### 发布
 
 `https://api.capgo.app/app/`
 
-创建新应用程序。
+创建一个新应用程序。
 
-#### Request Body
+#### 请求正文
 
 ```typescript
 interface CreateApp {
@@ -117,7 +118,7 @@ interface CreateApp {
 }
 ```
 
-#### Example Request
+#### 请求示例
 
 ```bash
 # Create new app
@@ -133,7 +134,7 @@ curl -X POST \
   https://api.capgo.app/app/
 ```
 
-#### Success Response
+#### 成功响应
 
 ```json
 {
@@ -149,13 +150,13 @@ curl -X POST \
 }
 ```
 
-### PUT
+### 放置
 
 `https://api.capgo.app/app/:app_id`
 
-更新现有应用程序。应用程序ID在URL路径中指定。
+更新现有应用程序。应用程序 ID 在 URL 路径中指定。
 
-#### Request Body
+#### 请求正文
 
 ```typescript
 interface UpdateApp {
@@ -165,7 +166,7 @@ interface UpdateApp {
 }
 ```
 
-#### Example Request
+#### 请求示例
 
 ```bash
 curl -X PUT \
@@ -179,7 +180,7 @@ curl -X PUT \
   https://api.capgo.app/app/com.demo.app
 ```
 
-#### Success Response
+#### 成功响应
 
 ```json
 {
@@ -195,13 +196,13 @@ curl -X PUT \
 }
 ```
 
-### DELETE
+### 删除
 
 `https://api.capgo.app/app/:app_id`
 
-删除应用程序及所有相关资源。应用程序ID在URL路径中指定。请极其谨慎使用，因为此操作无法撤消。
+删除应用程序和所有关联的资源。应用程序 ID 在 URL 路径中指定。请务必谨慎使用，因为此操作无法撤消。
 
-#### Example Request
+#### 请求示例
 
 ```bash
 curl -X DELETE \
@@ -209,7 +210,7 @@ curl -X DELETE \
   https://api.capgo.app/app/com.demo.app
 ```
 
-#### Success Response
+#### 成功响应
 
 ```json
 {
@@ -219,7 +220,7 @@ curl -X DELETE \
 
 ## 错误处理
 
-常见错误场景及其响应：
+常见错误场景及其应对措施：
 
 ```json
 // App not found
@@ -254,7 +255,7 @@ curl -X DELETE \
 
 ## 常见用例
 
-1. **Create New App**
+1. **创建新应用程序**
 ```typescript
 // Set up a new app
 {
@@ -263,7 +264,7 @@ curl -X DELETE \
 }
 ```
 
-2. **Update App Configuration**
+2. **更新应用程序配置**
 ```typescript
 // Change app name and icon
 {
@@ -272,7 +273,7 @@ curl -X DELETE \
 }
 ```
 
-3. **Set Retention Policy**
+3. **设置保留策略**
 ```typescript
 // Configure automatic bundle cleanup
 {
@@ -280,7 +281,7 @@ curl -X DELETE \
 }
 ```
 
-4. **Get Apps by Organization**
+4. **按组织获取应用程序**
 ```bash
 # List all apps in a specific organization
 curl -H "authorization: your-api-key" \

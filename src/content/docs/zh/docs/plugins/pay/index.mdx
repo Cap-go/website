@@ -1,8 +1,6 @@
 ---
 title: '@capgo/capacitor-pay'
-description: >-
-  Present Apple Pay and Google Pay sheets from Capacitor with a unified
-  workflow.
+description: 使用统一的工作流程呈现来自 Capacitor 的 Apple 工资和 Google 工资表。
 tableOfContents: false
 next: false
 prev: false
@@ -10,13 +8,11 @@ sidebar:
   order: 1
   label: Introduction
 hero:
-  tagline: >-
-    Offer native Apple Pay and Google Pay checkouts with a single TypeScript API
-    that adapts per platform.
+  tagline: 通过适应每个平台的单个 TypeScript API 提供原生 Apple Pay 和 Google Pay 结账。
   image:
     file: ~public/icons/plugins/pay.svg
   actions:
-    - text: Get started
+    - text: 开始使用
       link: /docs/plugins/pay/getting-started/
       icon: right-arrow
       variant: primary
@@ -26,24 +22,23 @@ hero:
       variant: minimal
 locale: zh
 ---
-
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-Capgo Pay bridges the latest Apple Pay and Google Pay SDKs so you can deliver one seamless checkout experience across devices.
+Capgo Pay 连接了最新的 Apple Pay 和 Google Pay SDKs，因此您可以跨设备提供一种无缝结账体验。
 
 <CardGrid stagger>
-  <Card title="Unified API" icon="pencil">
-    Call `isPayAvailable` and `requestPayment` once and let the plugin handle each platform.
+  <Card title="统一API" icon="pencil">
+    调用 `isPayAvailable` 和 `requestPayment` 一次，让插件处理每个平台。
   </Card>
-  <Card title="Rapid setup" icon="rocket">
-    Ship fully native payment sheets without manually wiring platform-specific code.
+  <Card title="快速设置" icon="rocket">
+    发送完全原生的支付表，无需手动连接特定于平台的代码。
   </Card>
-  <Card title="Tokenized payments" icon="approve-check">
-    Receive payment tokens ready for your gateway or PSP integrations.
+  <Card title="代币化支付" icon="approve-check">
+    接收准备用于网关或 PSP 集成的支付令牌。
   </Card>
-  <Card title="Customizable flows" icon="star">
-    Configure line items, contact fields, and billing requirements to fit your checkout.
+  <Card title="可定制的流程" icon="star">
+    配置行项目、联系人字段和计费要求以适合您的结帐。
   </Card>
 </CardGrid>
 
-Dive into the getting started guide for setup checklists and sample payloads for each platform.
+深入了解每个平台的设置清单和示例有效负载的入门指南。

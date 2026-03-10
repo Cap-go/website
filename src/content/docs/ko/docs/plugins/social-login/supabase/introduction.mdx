@@ -1,97 +1,93 @@
 ---
-title: Supabase Integration Introduction
-description: >-
-  Learn how to integrate Supabase Authentication with the Capacitor Social Login
-  plugin for a complete authentication solution.
+title: Supabase 통합 소개
+description: 완전한 인증 솔루션을 위해 Supabase 인증을 Capacitor 소셜 로그인 플러그인과 통합하는 방법을 알아보세요.
 sidebar:
   order: 1
 locale: ko
 ---
-## Overview
+## 개요
 
-This tutorial will guide you through setting up Supabase Authentication with the Capacitor Social Login plugin. This integration allows you to use native social login providers (Google, Apple, Facebook, Twitter) on mobile platforms while leveraging Supabase Auth for backend authentication and PostgreSQL for data storage.
+이 튜토리얼은 Capacitor 소셜 로그인 플러그인을 사용하여 Supabase 인증을 설정하는 과정을 안내합니다. 이 통합을 통해 모바일 플랫폼에서 기본 소셜 로그인 공급자(Google, Apple, Facebook, Twitter)를 사용하는 동시에 백엔드 인증을 위해 Supabase 인증을, 데이터 저장을 위해 PostgreSQL을 활용할 수 있습니다.
 
-## What You'll Learn
+## 무엇을 배울 것인가
 
-- How to configure Supabase Authentication
-- How to integrate Capacitor Social Login plugin with Supabase Auth
-- Platform-specific setup for Android, iOS, and Web
-- How to handle nonces securely for Supabase
+- Supabase 인증 구성 방법
+- Capacitor 소셜 로그인 플러그인을 Supabase 인증과 통합하는 방법
+- Android, iOS 및 웹에 대한 플랫폼별 설정
+- Supabase에 대한 nonce를 안전하게 처리하는 방법
 
-## What You'll Need
+## 필요한 것
 
-Before you begin, make sure you have:
+시작하기 전에 다음 사항을 확인하세요.
 
-1. **A Supabase Project**
-   - Create a project at [Supabase Dashboard](https://app.supabase.com/)
-   - Enable Google OAuth provider
-   - Get your Supabase project URL and anon key
+1. **Supabase 프로젝트**
+   - [Supabase 대시보드](https://app.supabase.com/)에서 프로젝트를 생성하세요.
+   - Google OAuth 공급자 활성화
+   - Supabase 프로젝트 URL 및 익명 키를 가져옵니다.
 
 2. **Supabase JS SDK**
-   - Install Supabase in your project:
+   - 프로젝트에 Supabase을 설치합니다.
      ```bash
      npm install @supabase/supabase-js
      ```
 
-3. **A Capacitor Project**
-   - An existing Capacitor application
-   - Capacitor Social Login plugin installed:
+3. **Capacitor 프로젝트**
+   - 기존 Capacitor 애플리케이션
+   - Capacitor 소셜 로그인 플러그인 설치:
      ```bash
      npm install @capgo/capacitor-social-login
      npx cap sync
      ```
 
-4. **Platform-Specific Google Setup**
-   - Complete the Google Sign-In setup for your target platforms:
-     - [Google Login Android Setup](/docs/plugins/social-login/google/android/)
-     - [Google Login iOS Setup](/docs/plugins/social-login/google/ios/)
-     - [Google Login Web Setup](/docs/plugins/social-login/google/web/)
+4. **플랫폼별 Google 설정**
+   - 대상 플랫폼에 대한 Google 로그인 설정을 완료하세요.
+     - [Google 로그인 Android 설정](/docs/plugins/social-login/google/android/)
+     - [Google 로그인 iOS 설정](/docs/plugins/social-login/google/ios/)
+     - [Google 로그인 웹 설정](/docs/plugins/social-login/google/web/)
 
-## Example Application
+## 예제 애플리케이션
 
-A complete working example is available in the repository:
+전체 작업 예제는 저장소에서 사용할 수 있습니다.
 
-**Code Repository**: [You can find the code repository here](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app)
+**코드 저장소**: [여기에서 코드 저장소를 찾을 수 있습니다](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app)
 
-The example app demonstrates:
-- Email/password authentication with Supabase
-- Google Sign-In integration (Android, iOS, and Web)
-- A simple key-value store using Supabase PostgreSQL tables
-- User-specific data storage with Row Level Security (RLS)
+예제 앱은 다음을 보여줍니다.
+- Supabase을 사용한 이메일/비밀번호 인증
+- Google 로그인 통합(Android, iOS 및 웹)
+- Supabase PostgreSQL 테이블을 사용하는 간단한 키-값 저장소
+- 행 수준 보안(RLS)을 갖춘 사용자별 데이터 저장
 
-## Key Implementation Details
+## 주요 구현 세부정보
 
-### Nonce Handling
+### Nonce 처리
 
-Supabase requires special nonce handling for security. The implementation follows the [React Native Google Sign In documentation](https://react-native-google-signin.github.io/docs/security#usage-with-supabase):
+Supabase에는 보안을 위해 특별한 nonce 처리가 필요합니다. 구현은 [React Native Google 로그인 문서](https://react-native-google-signin.github.io/docs/security#usage-with-supabase)를 따릅니다.
 
-- Generate a `rawNonce` (URL-safe random string)
-- Hash it with SHA-256 to get `nonceDigest`
-- Pass `nonceDigest` to Google Sign-In
-- Pass `rawNonce` to Supabase (Supabase hashes it internally for comparison)
+- `rawNonce`(URL 안전 임의 문자열) 생성
+- SHA-256으로 해시하여 `nonceDigest`을 얻습니다.
+- `nonceDigest`을(를) Google에 전달합니다.
+- `rawNonce`을 Supabase에 전달합니다(Supabase은 비교를 위해 내부적으로 해시합니다).
 
-### JWT Validation
+### JWT 유효성 검사
 
-The example implementation includes JWT validation to ensure:
-- The token audience matches your configured Google Client IDs
-- The nonce matches the expected digest
-- Automatic retry on validation failure (especially important for iOS)
+예제 구현에는 다음을 보장하기 위한 JWT 유효성 검사가 포함됩니다.
+- 토큰 대상은 구성된 Google 클라이언트 ID와 일치합니다.
+- nonce가 예상 다이제스트와 일치합니다.
+- 검증 실패 시 자동 재시도(iOS에 특히 중요)
 
-### Platform-Specific Considerations
+### 플랫폼별 고려 사항
 
-- **iOS**: Token caching can cause nonce issues - the implementation handles this automatically
-- **Web**: Must call `isLoggedIn()` on mount to handle OAuth redirects
-- **Android**: Standard implementation with SHA-1 fingerprint configuration
+- **iOS**: 토큰 캐싱으로 인해 nonce 문제가 발생할 수 있습니다. 구현 시 이를 자동으로 처리합니다.
+- **웹**: OAuth 리디렉션을 처리하려면 마운트 시 `isLoggedIn()`을 호출해야 합니다.
+- **Android**: SHA-1 지문 구성을 사용한 표준 구현
 
-## Next Steps
+## 다음 단계설정 가이드를 계속 진행하세요.
+- [Supabase Google 로그인 - 일반 설정](./google/general/) - 개요 및 전제조건
+- [Android 설정](./google/android/) - Android 관련 구성
+- [iOS 설정](./google/ios/) - iOS 관련 구성
+- [웹 설정](./google/web/) - 웹별 구성
 
-Continue with the setup guides:
-- [Supabase Google Login - General Setup](./google/general/) - Overview and prerequisites
-- [Android Setup](./google/android/) - Android-specific configuration
-- [iOS Setup](./google/ios/) - iOS-specific configuration
-- [Web Setup](./google/web/) - Web-specific configuration
-
-### Apple Sign-In
-- [Supabase Apple Login - General Setup](./Apple/general/) - Overview and prerequisites
-- [iOS Setup](./Apple/ios/) - iOS-specific configuration
-- [Android Setup](./Apple/android/) - Android-specific configuration
+### Apple 로그인
+- [Supabase Apple 로그인 - 일반 설정](./Apple/general/) - 개요 및 전제 조건
+- [iOS 설정](./Apple/ios/) - iOS 관련 구성
+- [Android 설정](./Apple/android/) - Android 관련 구성

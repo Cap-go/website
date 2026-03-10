@@ -1,26 +1,27 @@
 ---
-locale: fr
 title: Commencer
-description: Learn how to Installer and use the Flash plugin to control your Appareil's flashlight in your Capacitor Application.
-sidebar: 
+description: >-
+  Découvrez comment installer et utiliser le plugin Flash pour contrôler la
+  lampe de poche de votre appareil dans votre application Capacitor.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Installer the package**
+1. **Installez le package**
    <PackageManagers pkg="@capgo/capacitor-flash" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser with Natif projects**
+2. **Synchronisation avec les projets natifs**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
 ## Utilisation
 
-Importer the plugin and use its methods to control the flashlight:
+Importez le plugin et utilisez ses méthodes pour contrôler la lampe de poche :
 
 ```typescript
 import { CapacitorFlash } from '@capgo/capacitor-flash';
@@ -55,18 +56,18 @@ const toggle = async () => {
 
 ## API Référence
 
-### isAvailable()
+### estDisponible()
 
-Checks if flashlight is Disponible on the Appareil.
+Vérifie si la lampe de poche est disponible sur l'appareil.
 
 ```typescript
 const result = await CapacitorFlash.isAvailable();
 // Returns: { value: boolean }
 ```
 
-### switchOn(Options?)
+### allumer (options ?)
 
-Turns the flashlight on.
+Allume la lampe de poche.
 
 ```typescript
 interface SwitchOnOptions {
@@ -78,30 +79,30 @@ await CapacitorFlash.switchOn({ intensity: 0.5 });
 
 ### switchOff()
 
-Turns the flashlight off.
+Éteint la lampe de poche.
 
 ```typescript
 await CapacitorFlash.switchOff();
 ```
 
-### isSwitchedOn()
+### estSwitchedOn()
 
-Checks if the flashlight is currently on.
+Vérifie si la lampe de poche est actuellement allumée.
 
 ```typescript
 const result = await CapacitorFlash.isSwitchedOn();
 // Returns: { value: boolean }
 ```
 
-### toggle()
+### bascule()
 
-Toggles the flashlight on/off.
+Active/désactive la lampe de poche.
 
 ```typescript
 await CapacitorFlash.toggle();
 ```
 
-## Terminé Exemple
+## Exemple complet
 
 ```typescript
 import { CapacitorFlash } from '@capgo/capacitor-flash';
@@ -150,10 +151,10 @@ export class FlashlightService {
 }
 ```
 
-## Best Practices
+## meilleures pratiques
 
-1. **Vérifier availability first**
-   Always verify flashlight availability before using it:
+1. **Vérifiez d'abord la disponibilité**
+   Vérifiez toujours la disponibilité de la lampe de poche avant de l'utiliser :
    ```typescript
    const { value } = await CapacitorFlash.isAvailable();
    if (!value) {
@@ -161,7 +162,7 @@ export class FlashlightService {
    }
    ```
 
-2. **Handle errors gracefully**
+2. **Gérer les erreurs avec élégance**
    ```typescript
    try {
      await CapacitorFlash.switchOn();
@@ -170,28 +171,28 @@ export class FlashlightService {
    }
    ```
 
-3. **Turn off when not needed**
-   Always turn off the flashlight when your Application goes to background or when the Fonctionnalité is no longer needed to Enregistrer battery.
+3. **Éteignez lorsque vous n'en avez pas besoin**
+   Éteignez toujours la lampe de poche lorsque votre application passe en arrière-plan ou lorsque la fonctionnalité n'est plus nécessaire pour économiser la batterie.
 
-4. **Avoid rapid toggling**
-   Implement debouncing to prevent rapid on/off switching which could damage the LED or drain battery.
+4. **Évitez les basculements rapides**
+   Mettez en œuvre une fonction anti-rebond pour éviter une commutation marche/arrêt rapide qui pourrait endommager la LED ou vider la batterie.
 
-## Platform Notes
+## Remarques sur la plate-forme
 
 ### iOS
-- Requires iOS 10.0+
-- Uses `AVCaptureDevice` torch mode
-- Supports intensity control (0.0 to 1.0)
+- Nécessite iOS 10.0+
+- Utilise le mode torche `AVCaptureDevice`
+- Prend en charge le contrôle de l'intensité (0,0 à 1,0)
 
 ### Android
-- Requires Android 6.0 (API 23)+
-- Uses Camera2 API
-- Intensity control not supported (uses default brightness)
+- Nécessite Android 6.0 (API 23)+
+- Utilise Camera2 API
+- Contrôle de l'intensité non pris en charge (utilise la luminosité par défaut)
 
-### Web
-- Supported on browsers with MediaDevices API and torch capability
-- Uses the camera stream to access the Appareil's flashlight
-- Requires Utilisateur permission to access the camera
-- Works best on mobile browsers (Chrome on Android)
-- Desktop browsers typically return `isAvailable: false` (no torch hardware)
-- Intensity control not supported on web
+###Web
+- Pris en charge sur les navigateurs avec MediaDevices API et capacité de torche
+- Utilise le flux de la caméra pour accéder à la lampe de poche de l'appareil
+- Nécessite l'autorisation de l'utilisateur pour accéder à la caméra
+- Fonctionne mieux sur les navigateurs mobiles (Chrome sur Android)
+- Les navigateurs de bureau renvoient généralement `isAvailable: false` (pas de matériel de torche)
+- Contrôle d'intensité non pris en charge sur le Web

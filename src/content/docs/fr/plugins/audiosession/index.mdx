@@ -1,45 +1,48 @@
 ---
-locale: fr
-title: "@capgo/capacitor-plugin-audiosession"
-description: Observe and control the iOS audio session from Capacitor apps to handle route changes and interruptions.
+title: '@capgo/capacitor-plugin-audiosession'
+description: >-
+  Observez et contrôlez la session audio iOS à partir des applications Capacitor
+  pour gérer les changements d'itinéraire et les interruptions.
 tableOfContents: false
 next: false
 prev: false
-sidebar: 
+sidebar:
   order: 1
-  label: "Introduction"
-hero: 
-  tagline: Listen for audio route changes, react to interruptions, and reroute playback to the speaker without leaving Capacitor.
-  image: 
+  label: Introduction
+hero:
+  tagline: >-
+    Écoutez les changements de route audio, réagissez aux interruptions et
+    redirigez la lecture vers le haut-parleur sans quitter Capacitor.
+  image:
     file: ~public/icons/plugins/audiosession.svg
-  actions: 
-    - text: Get started
+  actions:
+    - text: Commencer
       link: /docs/plugins/audiosession/getting-started/
       icon: right-arrow
       variant: primary
     - text: Github
-      link: https://github.com/Cap-go/capacitor-audiosession/
+      link: 'https://github.com/Cap-go/capacitor-audiosession/'
       icon: external
       variant: minimal
+locale: fr
 ---
-
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-Capgo's AudioSession plugin gives you fine-grained control over the iOS AVAudioSession layer so you can gracefully handle headphones, Bluetooth Appareils, and unexpected interruptions.
+Le plugin AudioSession de Capgo vous offre un contrôle précis sur la couche iOS AVAudioSession afin que vous puissiez gérer avec élégance les écouteurs, les appareils Bluetooth et les interruptions inattendues.
 
 <CardGrid stagger>
-  <Card title="Route awareness" icon="rocket">
-    Detect when Utilisateurs plug or unplug headsets, AirPods, Bluetooth speakers, and more.
+  <Card title="Connaissance des itinéraires" icon="rocket">
+    Détectez lorsque les utilisateurs branchent ou débranchent des casques, des AirPod, des haut-parleurs Bluetooth, etc.
   </Card>
-  <Card title="Speaker override" icon="setting">
-    Force playback through the built-in speaker when you need hands-free audio.
+  <Card title="Remplacement du haut-parleur" icon="setting">
+    Forcez la lecture via le haut-parleur intégré lorsque vous avez besoin d'un son mains libres.
   </Card>
-  <Card title="Interruption handling" icon="moon">
-    React to interruption events such as phone calls or Siri to pause and resume audio safely.
+  <Card title="Gestion des interruptions" icon="moon">
+    Réagissez aux événements d'interruption tels que les appels téléphoniques ou Siri pour mettre en pause et reprendre l'audio en toute sécurité.
   </Card>
-  <Card title="Type safety" icon="pencil">
-    Strong TypeScript definitions make it easy to Construction resilient audio experiences.
+  <Card title="Type de sécurité" icon="pencil">
+    Des définitions TypeScript fortes facilitent la création d'expériences audio résilientes.
   </Card>
 </CardGrid>
 
-This plugin targets iOS where AVAudioSession control is required. On other platforms the calls resolve without effect, letting you keep one shared code path.
+Ce plugin cible iOS où le contrôle AVAudioSession est requis. Sur d'autres plates-formes, les appels sont résolus sans effet, vous permettant de conserver un chemin de code partagé.

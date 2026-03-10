@@ -1,32 +1,33 @@
 ---
-locale: fr
 title: Commencer
-description: Learn how to Installer and use the WeChat plugin to integrate WeChat functionality in your Capacitor Application.
-sidebar: 
+description: >-
+  Découvrez comment installer et utiliser le plugin WeChat pour intégrer la
+  fonctionnalité WeChat dans votre application Capacitor.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Installer the package**
+1. **Installez le package**
    <PackageManagers pkg="@capgo/capacitor-wechat" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser with Natif projects**
+2. **Synchronisation avec les projets natifs**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Configuration
+##Configuration
 
-### WeChat Application Registration
+### Inscription de l'application WeChat
 
-Before using this plugin, you must register your Application on the [WeChat Open Platform](https://open.weixin.qq.com/) to obtain an Application ID.
+Avant d'utiliser ce plugin, vous devez enregistrer votre application sur la [WeChat Open Platform](https://open.weixin.qq.com/) pour obtenir un identifiant d'application.
 
-### iOS Configuration
+### iOSConfiguration
 
-Add the following to your `Info.plist`:
+Ajoutez ce qui suit à votre `Info.plist` :
 
 ```xml
 <key>LSApplicationQueriesSchemes</key>
@@ -50,11 +51,11 @@ Add the following to your `Info.plist`:
 </array>
 ```
 
-You'll need to integrate the WeChat SDK into your iOS project. Add the WeChat SDK to your `Podfile` or download it from the [WeChat Open Platform](https://developers.weixin.qq.com/doc/oplatform/en/Mobile_App/Access_Guide/iOS.html).
+Vous devrez intégrer le WeChat SDK dans votre projet iOS. Ajoutez le WeChat SDK à votre `Podfile` ou téléchargez-le depuis la [WeChat Open Platform](https://developers.weixin.qq.com/doc/oplatform/en/Mobile_App/Access_Guide/iOS.html).
 
 ### Android Configuration
 
-Add the following to your `AndroidManifest.xml`:
+Ajoutez ce qui suit à votre `AndroidManifest.xml` :
 
 ```xml
 <manifest>
@@ -75,11 +76,11 @@ Add the following to your `AndroidManifest.xml`:
 </manifest>
 ```
 
-You'll need to integrate the WeChat SDK into your Android project. Add the WeChat SDK dependency to your `build.gradle` or download it from the [WeChat Open Platform](https://developers.weixin.qq.com/doc/oplatform/en/Mobile_App/Access_Guide/Android.html).
+Vous devrez intégrer le WeChat SDK dans votre projet Android. Ajoutez la dépendance WeChat SDK à votre `build.gradle` ou téléchargez-la depuis la [WeChat Open Platform](https://developers.weixin.qq.com/doc/oplatform/en/Mobile_App/Access_Guide/Android.html).
 
 ## Utilisation
 
-### Vérifier WeChat Installation
+### Vérifiez l'installation de WeChat
 
 ```typescript
 import { CapacitorWechat } from '@capgo/capacitor-wechat';
@@ -94,7 +95,7 @@ const checkWeChat = async () => {
 };
 ```
 
-### Authentication
+### Authentification
 
 ```typescript
 const loginWithWeChat = async () => {
@@ -119,9 +120,9 @@ const loginWithWeChat = async () => {
 };
 ```
 
-### Share Content
+### Partager du contenu
 
-#### Share Text
+#### Partager le texte
 
 ```typescript
 const shareText = async () => {
@@ -133,7 +134,7 @@ const shareText = async () => {
 };
 ```
 
-#### Share Link
+#### Partager le lien
 
 ```typescript
 const shareLink = async () => {
@@ -148,7 +149,7 @@ const shareLink = async () => {
 };
 ```
 
-#### Share Image
+#### Partager l'image
 
 ```typescript
 const shareImage = async () => {
@@ -161,7 +162,7 @@ const shareImage = async () => {
 };
 ```
 
-### WeChat Pay
+### Paiement WeChat
 
 ```typescript
 const payWithWeChat = async () => {
@@ -185,7 +186,7 @@ const payWithWeChat = async () => {
 };
 ```
 
-### Open Mini Program
+### Ouvrir un mini-programme
 
 ```typescript
 const openMiniProgram = async () => {
@@ -199,18 +200,18 @@ const openMiniProgram = async () => {
 
 ## API Référence
 
-### isInstalled()
+### estInstallé()
 
-Vérifier if WeChat Application is installed on the Appareil.
+Vérifiez si l'application WeChat est installée sur l'appareil.
 
 ```typescript
 const result = await CapacitorWechat.isInstalled();
 // Returns: { installed: boolean }
 ```
 
-### auth(Options)
+### authentification (options)
 
-Authenticate Utilisateur with WeChat OAuth.
+Authentifiez l'utilisateur avec WeChat OAuth.
 
 ```typescript
 interface WechatAuthOptions {
@@ -222,9 +223,9 @@ const result = await CapacitorWechat.auth(options);
 // Returns: { code: string, state?: string }
 ```
 
-### share(Options)
+### partage(options)
 
-Share content to WeChat.
+Partagez du contenu sur WeChat.
 
 ```typescript
 interface WechatShareOptions {
@@ -246,9 +247,9 @@ interface WechatShareOptions {
 await CapacitorWechat.share(options);
 ```
 
-### sendPaymentRequest(Options)
+### sendPaymentRequest(options)
 
-Send payment request to WeChat Pay.
+Envoyez la demande de paiement à WeChat Pay.
 
 ```typescript
 interface WechatPaymentOptions {
@@ -263,9 +264,9 @@ interface WechatPaymentOptions {
 await CapacitorWechat.sendPaymentRequest(options);
 ```
 
-### openMiniProgram(Options)
+### openMiniProgram(options)
 
-Open WeChat mini-program.
+Ouvrez le mini-programme WeChat.
 
 ```typescript
 interface WechatMiniProgramOptions {
@@ -277,9 +278,9 @@ interface WechatMiniProgramOptions {
 await CapacitorWechat.openMiniProgram(options);
 ```
 
-### chooseInvoice(Options)
+### choisirFacture(options)
 
-Choose invoice from WeChat (for business apps).
+Choisissez la facture de WeChat (pour les applications professionnelles).
 
 ```typescript
 interface WechatInvoiceOptions {
@@ -294,16 +295,16 @@ const result = await CapacitorWechat.chooseInvoice(options);
 // Returns: { cards: string[] }
 ```
 
-### getPluginVersion()
+###getPluginVersion()
 
-Get the Natif plugin Version.
+Obtenez la version native du plugin.
 
 ```typescript
 const result = await CapacitorWechat.getPluginVersion();
 // Returns: { version: string }
 ```
 
-## Terminé Exemple
+## Exemple complet
 
 ```typescript
 import { CapacitorWechat } from '@capgo/capacitor-wechat';
@@ -355,37 +356,35 @@ export class WeChatService {
 }
 ```
 
-## Important Notes
+## Remarques importantes
 
-1. **WeChat SDK Integration**: This plugin provides the Capacitor interface, but you need to integrate the official WeChat SDK into your Natif projects.
+1. **Intégration WeChat SDK** : ce plugin fournit l'interface Capacitor, mais vous devez intégrer le WeChat officiel SDK dans vos projets natifs.
 
-2. **Application Registration**: You must register your Application on the [WeChat Open Platform](https://open.weixin.qq.com/) to get an Application ID.
+2. **Inscription de l'application** : vous devez enregistrer votre application sur la [Plateforme ouverte WeChat](https://open.weixin.qq.com/) pour obtenir un identifiant d'application.
 
-3. **Universal Links (iOS)**: For iOS 13+, you need to configure Universal Links for WeChat callbacks.
+3. **Liens universels (iOS)** : Pour iOS 13+, vous devez configurer les liens universels pour les rappels WeChat.
 
-4. **Backend Integration**: Authentication and payment Fonctionnalités require backend integration to exchange codes for tokens and prepare payment Paramètres.
+4. **Intégration backend** : les fonctionnalités d'authentification et de paiement nécessitent une intégration backend pour échanger des codes contre des jetons et préparer les paramètres de paiement.
 
-5. **Test**: WeChat Fonctionnalités require Test on physical Appareils - they will not work in simulators.
+5. **Test** : les fonctionnalités de WeChat nécessitent des tests sur des appareils physiques – elles ne fonctionneront pas dans des simulateurs.
 
-## Best Practices
+## meilleures pratiques
 
-1. **Always Vérifier if WeChat is installed** before attempting to use Fonctionnalités.
-2. **Handle errors gracefully** with try-catch blocks.
-3. **Use state Paramètre** in auth requests for CSRF protection.
-4. **Valider payment responses** on your backend before granting access.
-5. **Compress images** before sharing to reduce data Utilisation.
+1. **Vérifiez toujours si WeChat est installé** avant d'essayer d'utiliser les fonctionnalités.
+2. **Gérez les erreurs avec élégance** avec les blocs try-catch.
+3. **Utilisez le paramètre d'état** dans les demandes d'authentification pour la protection CSRF.
+4. **Validez les réponses de paiement** sur votre backend avant d'accorder l'accès.
+5. **Compressez les images** avant de les partager pour réduire la consommation de données.
 
-## Platform Notes
+## Remarques sur la plate-forme
 
 ### iOS
-- Requires iOS 10.0+
-- Uses official WeChat SDK for iOS
-- Requires Universal Links Configuration for iOS 13+
+- Nécessite iOS 10.0+
+- Utilise WeChat officiel SDK pour iOS
+- Nécessite une configuration Universal Links pour iOS 13+### Android
+- Nécessite Android 5.0 (API 21)+
+- Utilise WeChat officiel SDK pour Android
+- Nécessite la configuration de WXEntryActivity
 
-### Android
-- Requires Android 5.0 (API 21)+
-- Uses official WeChat SDK for Android
-- Requires WXEntryActivity Configuration
-
-### Web
-- Not supported on web platform
+###Web
+- Non pris en charge sur la plateforme Web

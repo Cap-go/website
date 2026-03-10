@@ -1,14 +1,11 @@
 ---
-title: Update API Endpoint
-description: >-
-  How to build your update server API endpoint to respond to Capgo plugin
-  requests with proper bundle information and checksums
+title: API エンドポイントを更新する
+description: 適切なバンドル情報とチェックサムを使用して Capgo プラグイン リクエストに応答する更新サーバー API エンドポイントを構築する方法
 sidebar:
   order: 6
 locale: ja
 ---
-
-Here is an example of code in JavaScript to send an update to the plugin
+以下は、プラグインに更新を送信する JavaScript のコードの例です。
 
 ```typescript
 interface AppInfos {
@@ -66,9 +63,9 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-## Response Format
+## 応答フォーマット
 
-For **non-encrypted bundles**, your endpoint should return:
+**非暗号化バンドル**の場合、エンドポイントは次を返す必要があります:
 
 ```json
 {
@@ -78,7 +75,7 @@ For **non-encrypted bundles**, your endpoint should return:
 }
 ```
 
-For **encrypted bundles**, you also need to include the session key:
+**暗号化されたバンドル**の場合は、セッション キーも含める必要があります。
 
 ```json
 {
@@ -89,7 +86,7 @@ For **encrypted bundles**, you also need to include the session key:
 }
 ```
 
-And if no update or error, add the `message` key and optionally an `error`:
+更新またはエラーがない場合は、`message` キーを追加し、オプションで `error` を追加します。
 
 ```json
 {
@@ -99,15 +96,15 @@ And if no update or error, add the `message` key and optionally an `error`:
 }
 ```
 
-## Field Descriptions
+## フィールドの説明
 
-- **`checksum`**: SHA256 hash of your bundle zip file for integrity verification
-- **`session_key`**: Required only for encrypted bundles - this is the `ivSessionKey` returned by the encrypt command
-- **`version`**: Version identifier in semver format
-- **`url`**: HTTPS URL where the bundle can be downloaded
+- **`checksum`**: 整合性検証用のバンドル zip ファイルの SHA256 ハッシュ
+- **`session_key`**: 暗号化されたバンドルの場合にのみ必要です。これは、暗号化コマンドによって返される `ivSessionKey` です。
+- **`version`**: semver 形式のバージョン識別子
+- **`url`**: バンドルをダウンロードできる HTTPS URL
 
-## Bundle Creation
+## バンドルの作成
 
-To learn how to create compatible bundles and generate checksums, see the [Auto Update documentation](/docs/plugin/self-hosted/auto-update/#generating-bundle-checksum).
+互換性のあるバンドルを作成し、チェックサムを生成する方法については、[自動更新ドキュメント](/docs/plugin/self-hosted/auto-update/#generating-bundle-checksum) を参照してください。
 
-For encrypted bundles, see the [Encrypted Bundles documentation](/docs/plugin/self-hosted/encrypted-bundles/) which explains the complete encryption workflow.
+暗号化されたバンドルについては、完全な暗号化ワークフローを説明する [暗号化されたバンドルのドキュメント](/docs/plugin/self-hosted/encrypted-bundles/) を参照してください。

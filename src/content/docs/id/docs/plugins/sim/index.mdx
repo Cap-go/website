@@ -1,8 +1,8 @@
 ---
 title: '@capgo/capacitor-sim'
 description: >-
-  Inspect SIM card information such as carrier, country code, and slot index
-  from Capacitor apps.
+  Periksa informasi kartu SIM seperti operator, kode negara, dan indeks slot
+  dari aplikasi Capacitor.
 tableOfContents: false
 next: false
 prev: false
@@ -11,12 +11,12 @@ sidebar:
   label: Introduction
 hero:
   tagline: >-
-    Retrieve SIM carrier metadata and handle permission flows with a lightweight
-    Capacitor bridge.
+    Ambil metadata operator SIM dan tangani alur izin dengan jembatan Capacitor
+    yang ringan.
   image:
     file: ~public/icons/plugins/sim.svg
   actions:
-    - text: Get started
+    - text: Mulailah
       link: /docs/plugins/sim/getting-started/
       icon: right-arrow
       variant: primary
@@ -26,24 +26,23 @@ hero:
       variant: minimal
 locale: id
 ---
-
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-Use Capgo SIM to query carrier data, slot indexes, and permission states while remaining inside Capacitor.
+Gunakan SIM Capgo untuk menanyakan data operator, indeks slot, dan status izin sambil tetap berada di dalam Capacitor.
 
 <CardGrid stagger>
-  <Card title="Multi-SIM support" icon="rocket">
-    Enumerate every installed SIM along with slot indices and subscription IDs.
+  <Card title="Dukungan multi-SIM" icon="rocket">
+    Hitung setiap SIM yang terpasang beserta indeks slot dan ID langganan.
   </Card>
-  <Card title="Permission helpers" icon="approve-check">
-    Check and request the telephony permission required on Android.
+  <Card title="Pembantu izin" icon="approve-check">
+    Periksa dan minta izin telepon yang diperlukan di Android.
   </Card>
-  <Card title="Consistent schema" icon="star">
-    Work with normalized carrier fields like MCC, MNC, ISO country, and phone numbers.
+  <Card title="Skema yang konsisten" icon="star">
+    Bekerja dengan bidang operator yang dinormalisasi seperti MCC, MNC, negara ISO, dan nomor telepon.
   </Card>
   <Card title="iOS-aware" icon="pencil">
-    Handle platform nuances such as limited carrier data on iOS 16.4+.
+    Tangani nuansa platform seperti data operator yang terbatas di iOS 16.4+.
   </Card>
 </CardGrid>
 
-Grab the getting started guide to integrate permissions and consumption patterns.
+Dapatkan panduan memulai untuk mengintegrasikan izin dan pola konsumsi.

@@ -1,17 +1,14 @@
 ---
-title: Manual Update
+title: 手動アップデート
 description: >-
-  A detailed guide on utilizing the manual update plugin within a self-hosted
-  environment, providing comprehensive instructions on configuration and usage
-  to effectively manage updates without relying on automatic processes.
+  セルフホスト環境内で手動更新プラグインを利用するための詳細なガイド。自動プロセスに依存せずに更新を効果的に管理するための構成と使用法に関する包括的な手順を提供します。
 sidebar:
   order: 3
 locale: ja
 ---
+## 構成
 
-## Configuration
-
-Add this to your ``capacitor.config.json``, to disable auto-update.
+これを ``capacitor.config.json`` に追加して、自動更新を無効にします。
 ```tsx
 // capacitor.config.json
 {
@@ -25,16 +22,16 @@ Add this to your ``capacitor.config.json``, to disable auto-update.
 }
 ```
 
-## Usage
+## 使用法
 
-You can use this example or re-create the logic in your app.
+この例を使用することも、アプリ内でロジックを再作成することもできます。
 
 :::caution
-We are forcing the user to update the app with a static version declared in the code. This is not recommended, you should use a dynamic version from your server.
+コード内で宣言された静的バージョンでアプリを更新することをユーザーに強制しています。これはお勧めできません。サーバーの動的バージョンを使用する必要があります。
 :::
 
 :::danger
-We are not doing any version checking, decryption or checksum validation in this example. You should do that on your own.
+この例では、バージョン チェック、復号化、チェックサム検証は行っていません。それは自分で行うべきです。
 :::
 
 ```tsx
@@ -67,5 +64,5 @@ App.addListener('appStateChange', async(state) => {
 
 
 :::note
-If this seems like a lot of work consider trying [Capgo trial](https://capgo.app/register/). It will handle all of this for you.
+これが大変な作業だと思われる場合は、[Capgo トライアル版](https://capgo.app/register/) を試してみることを検討してください。これらすべてを自動的に処理します。
 :::

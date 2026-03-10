@@ -1,25 +1,23 @@
 ---
-title: Supabase Google Login on Web
-description: >-
-  Learn how to set up Google Sign-In with Supabase Authentication on Web using
-  the Capacitor Social Login plugin.
+title: Supabase Google 웹에서 로그인
+description: Capacitor 소셜 로그인 플러그인을 사용하여 웹에서 Supabase 인증으로 Google 로그인을 설정하는 방법을 알아보세요.
 sidebar:
   order: 4
 locale: ko
 ---
-## Introduction
+## 소개
 
-This guide will help you integrate Google Sign-In with Supabase Authentication on Web. It is assumed that you have already completed:
- -  the [Google Login Web setup](/docs/plugins/social-login/google/web/)
- -  the [Supabase Google Login - General Setup](/docs/plugins/social-login/supabase/google/general/).
+이 가이드는 웹에서 Supabase 인증과 Google 로그인을 통합하는 데 도움이 됩니다. 이미 다음 작업을 완료했다고 가정합니다.
+ - [Google 로그인 웹 설정](/docs/plugins/social-login/google/web/)
+ - [Supabase Google 로그인 - 일반 설정](/docs/plugins/social-login/supabase/google/general/).
 
-## Implementation
+## 구현
 
-The complete implementation is available in the [example app's `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) file. This guide explains the key concepts and how to use it.
+전체 구현은 [예제 앱의 `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) 파일에서 확인할 수 있습니다. 이 가이드에서는 주요 개념과 사용 방법을 설명합니다.
 
-### Using the Authentication Helper
+### 인증 도우미 사용
 
-The `authenticateWithGoogleSupabase` function handles the entire authentication flow:
+`authenticateWithGoogleSupabase` 함수는 전체 인증 흐름을 처리합니다.
 
 ```typescript
 import { authenticateWithGoogleSupabase } from './supabaseAuthUtils';
@@ -33,17 +31,17 @@ if (result.success) {
 }
 ```
 
-## Critical: Redirect Handling
+## 중요: 리디렉션 처리
 
-:::warning[Critical: Redirect Handling]
-When using Google login on web, you **MUST** call any function from the plugin when the redirect happens to initialize the plugin so it can handle the redirect and close the popup window. You can call either `isLoggedIn()` OR `initialize()` - both will trigger the redirect handling.
+:::경고[중요: 처리]
+웹에서 Google 로그인을 사용할 때 리디렉션이 발생하면 플러그인에서 모든 함수를 호출하여 리디렉션을 처리하고 팝업 창을 닫을 수 있도록 플러그인을 초기화해야 합니다. `isLoggedIn()` 또는 `initialize()`을 호출할 수 있습니다. 둘 다 리디렉션 처리를 트리거합니다.
 
-This is essential for the OAuth popup flow to work correctly.
+이는 OAuth 팝업 흐름이 올바르게 작동하는 데 필수적입니다.
 :::
 
-### Implementation Example
+### 구현 예
 
-Add this to your component that handles Google Sign-In:
+Google 로그인을 처리하는 구성 요소에 다음을 추가하세요.
 
 ```typescript
 import { useEffect } from 'react';
@@ -71,48 +69,46 @@ function SupabasePage() {
 }
 ```
 
-See the [SupabasePage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabasePage.tsx) for a complete example.
+전체 예는 [SupabasePage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabasePage.tsx)를 참조하세요.
 
-## How It Works
+## 작동 방식
 
-For a detailed explanation of how the authentication flow works, including nonce generation, JWT validation, and Supabase sign-in, see the [How It Works section in the General Setup guide](/docs/plugins/social-login/supabase/google/general/#how-it-works).
+Nonce 생성, JWT 유효성 검사, Supabase 로그인을 포함하여 인증 흐름이 작동하는 방식에 대한 자세한 설명은 [일반 설정 가이드의 작동 방식 섹션](/docs/plugins/social-login/supabase/google/general/#how-it-works)을 참조하세요.
 
-For the complete code reference, see the [Complete Code Reference section in the General Setup guide](/docs/plugins/social-login/supabase/google/general/#complete-code-reference).
+전체 코드 참조는 [일반 설정 가이드의 전체 코드 참조 섹션](/docs/plugins/social-login/supabase/google/general/#complete-code-reference)을 참조하세요.
 
-Also see:
-- [SupabasePage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabasePage.tsx) - Example component with redirect handling
-- [SupabaseCreateAccountPage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabaseCreateAccountPage.tsx) - Example create account page
+다음도 참조하세요.
+- [SupabasePage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabasePage.tsx) - 리디렉션 처리가 포함된 예제 구성 요소
+- [SupabaseCreateAccountPage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabaseCreateAccountPage.tsx) - 계정 생성 페이지 예시
 
-## Important Notes
+## 중요 참고사항
 
-### Redirect Handling
+### 리디렉션 처리
 
-When using Google login on web, you **MUST** call any function from the plugin when the redirect happens to initialize the plugin so it can handle the redirect and close the popup window. You can call either `isLoggedIn()` OR `initialize()` - both will trigger the redirect handling.
+웹에서 Google 로그인을 사용할 때 리디렉션이 발생하면 플러그인에서 모든 함수를 호출하여 리디렉션을 처리하고 팝업 창을 닫을 수 있도록 플러그인을 초기화해야 합니다. `isLoggedIn()` 또는 `initialize()`을 호출할 수 있습니다. 둘 다 리디렉션 처리를 트리거합니다.
 
-This is essential for the OAuth popup flow to work correctly. Without this, the popup window won't close after authentication.
+이는 OAuth 팝업 흐름이 올바르게 작동하는 데 필수적입니다. 이것이 없으면 인증 후 팝업창이 닫히지 않습니다.
 
-### Nonce Handling
+### Nonce 처리
 
-The nonce implementation follows the pattern from the [React Native Google Sign In documentation](https://react-native-google-signin.github.io/docs/security#usage-with-supabase):
+nonce 구현은 [React Native Google 로그인 문서](https://react-native-google-signin.github.io/docs/security#usage-with-supabase)의 패턴을 따릅니다.
 
-- `rawNonce` goes to Supabase's `signInWithIdToken()`
-- Supabase makes a hash of `rawNonce` and compares it with the `nonceDigest` which is included in the ID token from Google Sign-In
-- `nonceDigest` (SHA-256 hash, hex-encoded) goes to the `nonce` parameter in Google Sign-In APIs
+- `rawNonce`은(는) Supabase의 `signInWithIdToken()`(으)로 이동합니다.
+- Supabase는 `rawNonce`의 해시를 만들고 이를 Google의 ID 토큰에 포함된 `nonceDigest`과 비교합니다.
+- `nonceDigest`(SHA-256 해시, 16진수 인코딩)은 Google 로그인 API의 `nonce` 매개변수로 이동합니다.
 
-### Automatic Retry
+### 자동 재시도
 
-The implementation includes automatic retry logic:
-- If JWT validation fails on first attempt, it logs out and retries once
-- This handles cases where cached tokens might have incorrect nonces
-- If the retry also fails, an error is returned
+구현에는 자동 재시도 논리가 포함됩니다.
+- JWT 첫 번째 시도에서 유효성 검사에 실패하면 로그아웃하고 한 번 재시도합니다.
+- 캐시된 토큰에 잘못된 nonce가 있을 수 있는 경우를 처리합니다.
+- 재시도에도 실패하면 오류가 반환됩니다.
 
-## Troubleshooting
+## 문제 해결
 
-If authentication fails:
-
-- **Redirect not working**: Ensure you're calling `isLoggedIn()` on component mount (see example above)
-- **Invalid audience**: Verify your Google Client IDs match in both Google Cloud Console and Supabase
-- **Authorized redirect URLs**: Check that authorized redirect URLs are configured in both Google Cloud Console and Supabase
-- **Nonce mismatch**: Check console logs - the function will automatically retry, but you can manually logout first if needed
-- **Token validation fails**: Ensure you're using `mode: 'online'` in the initialize call to get an idToken
-- Review the [example app code](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) for reference
+인증이 실패하는 경우:- **리디렉션이 작동하지 않음**: 구성 요소 마운트 시 `isLoggedIn()`을 호출하고 있는지 확인하세요(위 예 참조).
+- **잘못된 대상**: Google 클라이언트 ID가 Google Cloud Console과 Supabase 모두에서 일치하는지 확인하세요.
+- **승인된 리디렉션 URL**: 승인된 리디렉션 URL이 Google Cloud Console과 Supabase 모두에 구성되어 있는지 확인하세요.
+- **Nonce 불일치**: 콘솔 로그를 확인하세요. 기능이 자동으로 재시도되지만 필요한 경우 먼저 수동으로 로그아웃할 수 있습니다.
+- **토큰 유효성 검사 실패**: idToken을 가져오기 위한 초기화 호출에서 `mode: 'online'`을 사용하고 있는지 확인하세요.
+- 참고용으로 [예제 앱 코드](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts)를 검토하세요.

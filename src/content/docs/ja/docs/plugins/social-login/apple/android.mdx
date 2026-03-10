@@ -1,9 +1,8 @@
 ---
-title: Apple login on Android
+title: Apple Android にログイン
 description: >-
-  This guide provides a comprehensive walkthrough on setting up Apple Login
-  using Capacitor for iOS devices, detailing each step to ensure a smooth
-  integration process.
+  このガイドでは、iOS デバイスの Capacitor を使用した Apple
+  ログインのセットアップに関する包括的なチュートリアルを提供し、スムーズな統合プロセスを確保するための各手順を詳しく説明します。
 sidebar:
   order: 3
 locale: ja
@@ -12,166 +11,164 @@ import MermaidGraph from '@/components/MermaidGraph.astro';
 import { Steps } from '@astrojs/starlight/components';
 
 export const appleLoginFlowGraph = `flowchart TD
-    A("await SocialLogin.login()") -->|Handled in the plugin|B(Generate the login URL)
-    B --> |Pass the link| C(Open the Chrome browser)
-    C --> D(Wait for the user to login)
-    D --> |Apple redirects to your backend|E(Handle the data returned from Apple)
-    E --> F(Redirect back to the app)
-    F --> G(Return to JS)`;
+    A("await SocialLogin.login()") -->|プラグインで処理|B(ログイン URL を生成)
+    B --> |リンクを渡します| C(Chromeブラウザを開く)
+    C --> D(ユーザーがログインするまで待ちます)
+    D --> |Apple はバックエンドにリダイレクトします|E(Apple から返されたデータを処理します)
+    E --> F(アプリにリダイレクト)
+    F --> G(JS に戻る)`;
 
-AndroidでのAppleログインはハッキー的です。AppleはAndroidで「Sign in with Apple」の公式サポートがないため、ソリューションはやや不格好です。
+Apple Android でのログインはハッキングされています。 Apple は、Android 上の `Sign in with Apple` を正式にサポートしていないため、解決策は少しハック的です。
 
-Android は現在、Chrome タブを使用して OAuth2 Web サイトを表示しています。このアプローチには以下の課題があります:
+Android は現在、クロム タブを使用して OAuth2 Web サイトを表示しています。このアプローチには次のような課題があります。
 
-- 難しい構成
-- バックエンドが必要
+- 構成が難しい
+- バックエンドが必要です
 
-## Understanding the flow on android.
+## Android での流れを理解する。
 
-Let me use a diagram to explain the flow on android:
+Android での流れを図を使って説明します。
 
 <MermaidGraph graph={appleLoginFlowGraph} ariaLabel="Apple Login flow diagram on Android" fullWidth={false} />
 
-Now that you are aware of the challlanges and the flow, let's begin the configuration.
+課題とフローを理解したので、構成を開始しましょう。
 
-## Creating the service ID
+## サービスIDの作成
 
 <Steps>
-1. Login into the [Apple Developer Portal](https://developer.apple.com). 
+1. [Apple 開発者ポータル](https://developer.apple.com) にログインします。 
 
-2. Click on `Identifiers`.
+2. [`Identifiers`] をクリックします。
 
-    <img src="/social-login-assets/apple_dev_portal_iden.png" alt="Apple Developer Portal Identifiers section" />
+    <img src="/social-login-assets/apple_dev_portal_iden.png" alt="Apple 開発者ポータル識別子セクション" />
     
-    You should see a screen that looks like this:
+    次のような画面が表示されるはずです。
 
-    <img src="/social-login-assets/apple_dev_portal_iden_2.png" alt="Apple Developer Portal Identifiers screen" />
+    <img src="/social-login-assets/apple_dev_portal_iden_2.png" alt="Apple 開発者ポータル識別子画面" />
 
-    1. Ensure that this field says <code>App IDs</code>
-    2. Make sure that you can find your App ID.
-        :::note
-        If you don't have configured Apple Login for IOS, you will have to create one. For me, I already have one created. The app ID I will use is `me.wcaleniewolny.test.ionic.vue`. If you don't have one, please create one using the [create app step](#creating-the-app).
+    1. このフィールドに <code>App IDs</code> と表示されていることを確認します。
+    2. アプリ ID が見つかることを確認します。
+        :::メモ
+        IOS 用の Apple ログインを設定していない場合は、作成する必要があります。私の場合は、すでに作成済みです。使用するアプリ ID は `me.wcaleniewolny.test.ionic.vue` です。お持ちでない場合は、[アプリの作成ステップ](#creating-the-app) を使用して作成してください。
         :::
-3. Make sure that the `Sign in with Apple` capability is enabled for your app
-    1. Click on your app
-        <img src="/social-login-assets/apple_dev_click_on_app.png" alt="Selecting your app from the list" />
-    2. Ensure that the `Sign in with Apple` capability is enabled
-        <img src="/social-login-assets/apple_dev_sign_in_with_apple_enabled.png" alt="Sign in with Apple capability enabled checkbox" />
-    3. If it isn't enabled, enable it.
-4. Go back to all `All Identifiers` 
-    <img src="/social-login-assets/apple_dev_go_back_iden.png" alt="All Identifiers navigation button" />
-5. Click on `App Ids` and go to `Services IDs`
-   <img src="/social-login-assets/apple_dev_go_to_services_id.png" alt="Navigation to Services IDs section" />
-6. Creare a new identifier
-    1. Click on the plus button
-        <img src="/social-login-assets/apple_dev_iden_add.png" alt="Add new service ID button" />
+3. `Sign in with Apple` 機能がアプリで有効になっていることを確認します
+    1. アプリをクリックします
+        <img src="/social-login-assets/apple_dev_click_on_app.png" alt="リストからアプリを選択する" />
+    2. `Sign in with Apple` 機能が有効になっていることを確認します
+        <img src="/social-login-assets/apple_dev_sign_in_with_apple_enabled.png" alt="Apple 機能を有効にしてサインインするチェックボックス" />
+    3. 有効になっていない場合は、有効にします。
+4. すべての「すべての識別子」に戻ります。 
+    <img src="/social-login-assets/apple_dev_go_back_iden.png" alt="すべての識別子のナビゲーション ボタン" />
+5. 「アプリ ID」をクリックし、「サービス ID」に移動します。
+   <img src="/social-login-assets/apple_dev_go_to_services_id.png" alt="「サービス ID」セクションへのナビゲーション" />
+6. 新しい識別子の作成
+    1. プラスボタンをクリックします
+        <img src="/social-login-assets/apple_dev_iden_add.png" alt="新しいサービスIDの追加ボタン" />
     
-    2. Select `Servcice IDs` and click `Continue`
-        <img src="/social-login-assets/apple_dev_service_and_cont.png" alt="Selecting Service IDs option" />
+    2. 「サービス ID」を選択し、`Continue` をクリックします。
+        <img src="/social-login-assets/apple_dev_service_and_cont.png" alt="サービス ID オプションの選択" />
     
-    3. Enter a description and a identifiers and click `Continuie`.
+    3. 説明と識別子を入力し、`Continuie` をクリックします。
 
-        <img src="/social-login-assets/apple_dev_reg_service_2.png" alt="Entering service ID details" />
+        <img src="/social-login-assets/apple_dev_reg_service_2.png" alt="サービスIDの詳細を入力する" />
 
-        :::note
-        This `identifiers` will become the `clientId` that you will pass in the `initialize` function AND `ANDROID_SERVICE_ID` for the backend. 
+        :::メモ
+        この `identifiers` は、バックエンドの `initialize` 関数と `ANDROID_SERVICE_ID` に渡す `clientId` になります。 
         
-        **Please save it!!!**
+        **保存してください!!!**
         :::
 
-        :::note
-        Service ID doesn't have to match the App ID, but I recommend setting the service ID to `YOUR_APP_ID.service` . As a reminder, I am using `me.wcaleniewolny.test.ionic.vue` for my app ID but I am using `ee.forgr.io.ionic.service2` as the service ID.
+        :::メモ
+        サービス ID はアプリ ID と一致する必要はありませんが、サービス ID を `YOUR_APP_ID.service` に設定することをお勧めします。念のため、アプリ ID として `me.wcaleniewolny.test.ionic.vue` を使用していますが、サービス ID として `ee.forgr.io.ionic.service2` を使用しています。
         :::
-    4. Please verify the details and click `Register`
-        <img src="/social-login-assets/apple_dev_service_ref_fin.png" alt="Confirming service ID registration" />
+    4. 詳細を確認し、`Register` をクリックしてください。
+        <img src="/social-login-assets/apple_dev_service_ref_fin.png" alt="サービスIDの登録確認" />
     
-    5. Click on the the newly created service
-        <img src="/social-login-assets/apple_dev_open_serv.png" alt="Selecting newly created service ID" />
+    5. 新しく作成したサービスをクリックします。
+        <img src="/social-login-assets/apple_dev_open_serv.png" alt="新しく作成したサービスIDを選択する" />
     
-    6. Enable the `Sign in with Apple` option
-        <img src="/social-login-assets/apple_dev_serv_enable_sign_with_apple.png" alt="Enabling Sign in with Apple for service ID" />
+    6. `Sign in with Apple` オプションを有効にします。
+        <img src="/social-login-assets/apple_dev_serv_enable_sign_with_apple.png" alt="サービス ID に対して Apple を使用したサインインを有効にする" />
     
-    7. Configure the `Sign In with Apple`
-        <img src="/social-login-assets/apple_dev_conf_serv_sign_with_apple.png" alt="Configure button for Sign in with Apple" />
+    7. `Sign In with Apple` を構成する
+        <img src="/social-login-assets/apple_dev_conf_serv_sign_with_apple.png" alt="Apple でサインインするためのボタンを設定する" />
     
-    8. Ensure that the `Primary App ID` is set to the App ID configured in the previous step
-        <img src="/social-login-assets/apple_dev_service_prim_id.png" alt="Setting Primary App ID dropdown" />
+    8. 「プライマリ アプリ ID」が前の手順で構成したアプリ ID に設定されていることを確認します。
+        <img src="/social-login-assets/apple_dev_service_prim_id.png" alt="プライマリアプリIDの設定ドロップダウン" />
     
-    9. Add the domain that you are going to host you backend on.
-    
-        <img src="/social-login-assets/apple_dev_serv_create_next.png" alt="Setting domain and return URL fields" />
+    9. バックエンドをホストするドメインを追加します。<img src="/social-login-assets/apple_dev_serv_create_next.png" alt="ドメインと戻り URL フィールドの設定" />
 
-        :::note
-        This backend **has** to be running on HTTPS. As for the `Return URLs`, you might want to come back to this after reading the next section of this tutorial and after configuring the backend. For the purposes of this tutorial, I will use `https://xyz.wcaleniewolny.me/login/callback` for the return URL and `xyz.wcaleniewolny.me` the domain. Press next.
+        :::メモ
+        このバックエンドは HTTPS で実行する必要があります**。 「戻り URL」については、このチュートリアルの次のセクションを読み、バックエンドを構成した後に戻ってくるとよいでしょう。このチュートリアルでは、戻り URL として `https://xyz.wcaleniewolny.me/login/callback` を使用し、ドメインとして `xyz.wcaleniewolny.me` を使用します。次へを押してください。
         :::
 
-    10. Confirm the data and click `Done`
-        <img src="/social-login-assets/apple_dev_serv_conf_done.png" alt="Confirming domain and return URL configuration" />
+    10. データを確認し、`Done` をクリックします。
+        <img src="/social-login-assets/apple_dev_serv_conf_done.png" alt="ドメインと戻り先 URL の設定の確認" />
 
-    11. Click on `Continue`
-        <img src="/social-login-assets/apple_dev_cont_serv_creat.png" alt="Continue button for service configuration" />
+    11.「`Continue`」をクリックします。
+        <img src="/social-login-assets/apple_dev_cont_serv_creat.png" alt="サービス構成の「続行」ボタン" />
 
-    12. Click on `Save`
-        <img src="/social-login-assets/apple_dev_cont_serv_creat_save.png" alt="Save button for service configuration" />
+    12.「`Save`」をクリックします。
+        <img src="/social-login-assets/apple_dev_cont_serv_creat_save.png" alt="サービス構成の「保存」ボタン" />
 </Steps>
 
-## Creating the key
+## キーの作成
 
 <Steps>
-1. Go back to all `All Identifiers` 
-    <img src="/social-login-assets/apple_dev_go_back_iden.png" alt="All Identifiers navigation button" />
-2. Click on `Keys`
-    <img src="/social-login-assets/apple_dev_key_selc.png" alt="Keys section in Apple Developer Portal" />
-3. Click on the plus icon
-    <img src="/social-login-assets/apple_dev_key_plus.png" alt="Add new key button" />
-4. Name your key
-    <img src="/social-login-assets/apple_key_name.png" alt="Entering key name field" />
-    :::note
-    This name isn't important, you can put anything.
+1. すべての「すべての識別子」に戻ります。 
+    <img src="/social-login-assets/apple_dev_go_back_iden.png" alt="すべての識別子のナビゲーション ボタン" />
+2. [`Keys`] をクリックします。
+    <img src="/social-login-assets/apple_dev_key_selc.png" alt="Apple 開発者ポータルのキー セクション" />
+3. プラスアイコンをクリックします
+    <img src="/social-login-assets/apple_dev_key_plus.png" alt="新しいキーを追加ボタン" />
+4. キーに名前を付けます
+    <img src="/social-login-assets/apple_key_name.png" alt="キー名の入力フィールド" />
+    :::メモ
+    この名前は重要ではありません。何でも入力できます。
     :::
-5. Select `Sign in with Apple` and click `Configure`
-    <img src="/social-login-assets/apple_dev_key_sing_apple_conf.png" alt="Enabling and configuring Sign in with Apple for the key" />
-6. Select the primary App ID, and press `Save`
-    <img src="/social-login-assets/apple_dev_key_prim_app_id.png" alt="Selecting primary App ID for the key" />
+5. `Sign in with Apple` を選択し、`Configure` をクリックします
+    <img src="/social-login-assets/apple_dev_key_sing_apple_conf.png" alt="キーの Apple を使用したサインインの有効化と構成" />
+6. プライマリ アプリ ID を選択し、`Save` を押します。
+    <img src="/social-login-assets/apple_dev_key_prim_app_id.png" alt="キーのプライマリ アプリ ID の選択" />
 
-    :::note
-    This must be the same App ID as the ID in the previous steps.
+    :::メモ
+    これは、前の手順の ID と同じアプリ ID である必要があります。
     :::
-7. Click on `Continue`
-    <img src="/social-login-assets/apple_dev_key_const.png" alt="Continue button for key configuration" />
-8. Click on `Register`
-    <img src="/social-login-assets/apple_dev_key_reg.png" alt="Register button for key creation" />
-9. Copy the key ID and download the key.
-    <img src="/social-login-assets/apple_dev_key_downl.png" alt="Key ID and download button screen" />
+7. [`Continue`] をクリックします。
+    <img src="/social-login-assets/apple_dev_key_const.png" alt="キー設定の続行ボタン" />
+8. [`Register`] をクリックします。
+    <img src="/social-login-assets/apple_dev_key_reg.png" alt="キー作成用の登録ボタン" />
+9. キー ID をコピーし、キーをダウンロードします。
+    <img src="/social-login-assets/apple_dev_key_downl.png" alt="キーIDとダウンロードボタン画面" />
 
-    :::caution
-        **IMPORTANT:** Save this ID, in the backend it will be called `KEY_ID`. Download the key. Make sure to never share this key.
+    :::注意
+        **重要:** この ID を保存します。バックエンドでは `KEY_ID` という名前になります。キーをダウンロードします。このキーは決して共有しないでください。
     :::
-10. Find the downloaded key and save it in the backend folder.
-    <img src="/social-login-assets/apple_dev_downloaded_key.png" alt="Downloaded key file" />
+10. ダウンロードしたキーを見つけて、バックエンド フォルダーに保存します。
+    <img src="/social-login-assets/apple_dev_downloaded_key.png" alt="ダウンロードしたキーファイル" />
 </Steps>
 
-## Getting the Team ID
+## チーム ID の取得
 
-In order to use `Login with Apple` on Android, you need to get the `Team ID`. It will be used in the backend.
+Android で `Login with Apple` を使用するには、「チーム ID」を取得する必要があります。バックエンドで使用されます。
 
 <Steps>
-   1. Go to [this website](https://developer.apple.com/account/) and scroll down
+   1. [この Web サイト](https://developer.apple.com/account/) にアクセスし、下にスクロールします
    
-   2. Find the `Team ID`
-      <img src="/social-login-assets/apple_dev_team_id.png" alt="Team ID location in developer account" />
+   2.「チーム ID」を見つけます。
+      <img src="/social-login-assets/apple_dev_team_id.png" alt="開発者アカウント内のチーム ID の場所" />
 </Steps>
 
-## Configuring the app redirect
+## アプリのリダイレクトの構成
 
-As you saw in the diagram, the backend performs a step called `Redirect back to the app`. This requires manual changes to your app.
+図で見たように、バックエンドは「アプリにリダイレクトする」というステップを実行します。これには、アプリを手動で変更する必要があります。
 
 <Steps>
-    1. Modify the `AndroidManifest.xml`
-        1. Open the file, I will use `AndroidStudio`
-            <img src="/social-login-assets/studio_android_manifest_file.png" alt="AndroidManifest.xml file in Android Studio" />
-        2. Find the `MainActivity` and add the following Intent filter
-            <img src="/social-login-assets/studio_manifest_code_to_add.png" alt="Intent filter code to add in MainActivity" />
+    1. `AndroidManifest.xml` を変更します
+        1. ファイルを開きます。`AndroidStudio` を使用します。
+            <img src="/social-login-assets/studio_android_manifest_file.png" alt="Android Studio の AndroidManifest.xml ファイル" />
+        2. `MainActivity` を見つけて、次のインテント フィルターを追加します
+            <img src="/social-login-assets/studio_manifest_code_to_add.png" alt="MainActivity に追加するインテント フィルター コード" />
 
             ```xml
             <intent-filter>
@@ -181,12 +178,12 @@ As you saw in the diagram, the backend performs a step called `Redirect back to 
                 <data android:scheme="capgo-demo-app" android:host="path" />
             </intent-filter>
             ```
-    2. Modify the `MainActivity`
-        1. Please open the `MainActivity`
-            <img src="/social-login-assets/studio_main_activ_file.png" alt="MainActivity.java file in Android Studio" />
+    2. `MainActivity` を変更します
+        1. `MainActivity` を開いてください。
+            <img src="/social-login-assets/studio_main_activ_file.png" alt="Android Studio の MainActivity.java ファイル" />
 
-        2. Add the following code:
-            <img src="/social-login-assets/studio_main_actv_new_code.png" alt="Code to add to MainActivity for handling deep links" />
+        2. 次のコードを追加します。
+            <img src="/social-login-assets/studio_main_actv_new_code.png" alt="ディープリンクを処理するために MainActivity に追加するコード" />
 
             ```java
             @Override
@@ -212,34 +209,32 @@ As you saw in the diagram, the backend performs a step called `Redirect back to 
             }
             ```
 
-            :::caution
-            This example assumes that you don't have any deep links configured. If you do, please adjust the code
+            :::注意
+            この例では、ディープリンクが設定されていないことを前提としています。その場合はコードを調整してください
             :::
 </Steps>
 
 :::note
-You have just added a new deep link into your app. The deep link will look something like this: `capgo-demo-app://path`. You can change the `android:scheme` and the `android:host` to modify how this deep link looks.
-**Important:** In the backend configuration, this deep link will become `BASE_REDIRECT_URL`
+新しいディープリンクをアプリに追加しました。ディープリンクは、`capgo-demo-app://path` のようになります。 `android:scheme` と `android:host` を変更して、このディープ リンクの外観を変更できます。
+**重要:** バックエンド構成では、このディープリンクは `BASE_REDIRECT_URL` になります。
 :::
 
 
-## Backend configuration
+## バックエンド構成
 
-A backend is required for Android, but configuring a backend will also impact IOS. An example backend is provided [here](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/main/index.ts)
-
-This example provides the following:
-- A simple JSON database
-- A way to request the JWT from Apple's servers
-- A simple JWT verification
+Android にはバックエンドが必要ですが、バックエンドの構成は IOS にも影響します。バックエンドの例は [ここ] (https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/main/index.ts) で提供されています。この例では次のことが提供されます。
+- シンプルな JSON データベース
+- Apple のサーバーから JWT をリクエストする方法
+- 簡単な JWT 検証
 
 :::note
-I use `PM2` in order to host this example. An example `ecosystem.config.js` can be found [here](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/main/ecosystem.config.js.example)
+この例をホストするには `PM2` を使用します。 `ecosystem.config.js` の例は [ここ] (https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/main/ecosystem.config.js.example) にあります。
 :::
 
-Given everything that I said in this tutorial, here is how the `env` section would look:
+このチュートリアルで述べたことをすべて考慮すると、`env` セクションは次のようになります。
 
-- `ANDROID_SERVICE_ID` = Service ID
-- `IOS_SERVICE_ID` = App ID
+- `ANDROID_SERVICE_ID` = サービス ID
+- `IOS_SERVICE_ID` = アプリID
 
 ```js
 env: {
@@ -254,9 +249,9 @@ env: {
 }
 ```
 
-#### Using the plugin
+#### プラグインの使用
 
-The usage of the `login` function doesn't change, it's the same as IOS. Please take a look at that section for more info. **HOWEVER**, the `initialize` method changes a bit.
+`login` 関数の使用法は変更されず、IOS と同じです。詳細については、そのセクションをご覧ください。 **ただし**、`initialize` メソッドは少し変更されています。
 
 ```typescript
 await SocialLogin.initialize({
@@ -268,36 +263,36 @@ await SocialLogin.initialize({
 ```
 
 :::danger
-    Note, that adding `redirectUrl` **WILL** affect IOS !!!!!
+    `redirectUrl` **** を追加すると IOS に影響することに注意してください。
 :::
 
 
-## Creating the app
+## アプリの作成
 
 :::note
-If you already have an App ID, you can skip this step.
-Don't follow this step if you have configured Apple Login for IOS.
+すでにアプリ ID を持っている場合は、この手順をスキップできます。
+IOS 用に Apple ログインを設定している場合は、この手順を実行しないでください。
 :::
 
 <Steps>
-   1. If you don't already have an App ID, click on the plus button
-        <img src="/social-login-assets/apple_dev_iden_plus.png" alt="Add new identifier plus button" />
+   1. アプリ ID をまだ持っていない場合は、プラス ボタンをクリックします。
+        <img src="/social-login-assets/apple_dev_iden_plus.png" alt="新しい識別子のプラスボタンを追加" />
    
-   2. Select `App IDs` and click continue 
-        <img src="/social-login-assets/apple_dev_new_app_id.png" alt="Selecting App IDs type" />
+   2. 「App ID」を選択し、「続行」をクリックします。 
+        <img src="/social-login-assets/apple_dev_new_app_id.png" alt="アプリ ID タイプの選択" />
    
-   3. Click on type `App` and click `Continue` 
-        <img src="/social-login-assets/apple_dev_new_app_type.png" alt="Selecting App type" />
+   3. 「`App`」と入力し、「`Continue`」をクリックします。 
+        <img src="/social-login-assets/apple_dev_new_app_type.png" alt="アプリの種類の選択" />
    
-   4. Enter the description and the app ID 
-        <img src="/social-login-assets/apple_dev_new_app_desc_id.png" alt="Entering app description and bundle ID" />
+   4. 説明とアプリ ID を入力します 
+        <img src="/social-login-assets/apple_dev_new_app_desc_id.png" alt="アプリの説明とバンドル ID の入力" />
    
-   5. Enable `Sign with Apple` capability 
-        <img src="/social-login-assets/apple_dev_enable_sign_with_apple.png" alt="Enabling Sign in with Apple capability" />
+   5. `Sign with Apple` 機能を有効にする 
+        <img src="/social-login-assets/apple_dev_enable_sign_with_apple.png" alt="Apple 機能を使用したサインインの有効化" />
    
-   6. Click `Continue` 
-        <img src="/social-login-assets/apple_dev_register_continue.png" alt="Continue button for app registration" />
+   6. [`Continue`] をクリックします。 
+        <img src="/social-login-assets/apple_dev_register_continue.png" alt="アプリ登録の続行ボタン" />
    
-   7. Confirm the details and click `Register` 
-        <img src="/social-login-assets/apple_dev_confirm_register.png" alt="Confirming app registration details" />
+   7. 詳細を確認し、`Register` をクリックします。 
+        <img src="/social-login-assets/apple_dev_confirm_register.png" alt="アプリの登録内容を確認する" />
 </Steps>

@@ -1,26 +1,27 @@
 ---
-title: Getting Started
-description: Learn how to install and use the Zip plugin to compress and extract files in your Capacitor app.
+title: Empezando
+description: >-
+  Aprenda a instalar y utilizar el complemento Zip para comprimir y extraer
+  archivos en su aplicación Capacitor.
 sidebar:
   order: 2
 locale: es
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Instalar el paquete**
    <PackageManagers pkg="@capgo/capacitor-zip" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Sincronización con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Usage
+## Uso
 
-Import the plugin and zip or unzip files:
+Importe el complemento y comprima o descomprima los archivos:
 
 ```typescript
 import { CapacitorZip } from '@capgo/capacitor-zip';
@@ -44,11 +45,11 @@ const unzipArchive = async () => {
 };
 ```
 
-## API Reference
+## API Referencia
 
-### zip(options)
+### zip(opciones)
 
-Creates a ZIP archive from a source folder.
+Crea un archivo ZIP a partir de una carpeta de origen.
 
 ```typescript
 interface ZipOptions {
@@ -62,9 +63,9 @@ await CapacitorZip.zip({
 });
 ```
 
-### unzip(options)
+### descomprimir (opciones)
 
-Extracts files from a ZIP archive.
+Extrae archivos de un archivo ZIP.
 
 ```typescript
 interface UnzipOptions {
@@ -78,7 +79,7 @@ await CapacitorZip.unzip({
 });
 ```
 
-## Complete Example
+## Ejemplo completo
 
 ```typescript
 import { CapacitorZip } from '@capgo/capacitor-zip';
@@ -205,9 +206,9 @@ export class ZipService {
 }
 ```
 
-## Advanced Usage
+## Uso avanzado
 
-### Creating Archives with Progress Tracking
+### Creación de archivos con seguimiento del progreso
 
 ```typescript
 const zipWithProgress = async (source: string, destination: string) => {
@@ -223,7 +224,7 @@ const zipWithProgress = async (source: string, destination: string) => {
 };
 ```
 
-### Batch Archive Operations
+### Operaciones de archivo por lotes
 
 ```typescript
 const batchZip = async (folders: string[]) => {
@@ -248,7 +249,7 @@ const batchZip = async (folders: string[]) => {
 };
 ```
 
-### Secure Archive Creation
+### Creación segura de archivos
 
 ```typescript
 const createSecureBackup = async (dataPath: string) => {
@@ -266,7 +267,7 @@ const createSecureBackup = async (dataPath: string) => {
 };
 ```
 
-### Archive Validation
+### Validación de archivo
 
 ```typescript
 const validateArchive = async (zipPath: string): Promise<boolean> => {
@@ -294,19 +295,19 @@ const validateArchive = async (zipPath: string): Promise<boolean> => {
 };
 ```
 
-## Best Practices
+## Mejores prácticas
 
-1. **Path Validation**: Always validate source and destination paths before operations
-2. **Error Handling**: Wrap all zip/unzip operations in try-catch blocks
-3. **Cleanup**: Remove temporary files and folders after operations
-4. **Large Files**: Be cautious with large archives on mobile devices
-5. **Permissions**: Ensure your app has necessary file system permissions
+1. **Validación de ruta**: valide siempre las rutas de origen y destino antes de las operaciones.
+2. **Manejo de errores**: empaquete todas las operaciones de comprimir/descomprimir en bloques try-catch
+3. **Limpieza**: elimina archivos y carpetas temporales después de las operaciones
+4. **Archivos grandes**: tenga cuidado con los archivos grandes en dispositivos móviles
+5. **Permisos**: asegúrese de que su aplicación tenga los permisos necesarios del sistema de archivos
 
-## Troubleshooting
+## Solución de problemas
 
-### Common Issues
+### Problemas comunes
 
-**Zip operation fails**: Ensure source path exists and is accessible
-**Unzip fails**: Check that ZIP file is valid and destination path is writable
-**Out of storage**: Monitor available disk space before operations
-**Permission denied**: Verify file system permissions in your app configuration
+**La operación zip falla**: asegúrese de que la ruta de origen exista y sea accesible
+**Error al descomprimir**: compruebe que el archivo ZIP sea válido y que se pueda escribir en la ruta de destino
+**Sin almacenamiento**: supervise el espacio disponible en disco antes de las operaciones
+**Permiso denegado**: verifique los permisos del sistema de archivos en la configuración de su aplicación

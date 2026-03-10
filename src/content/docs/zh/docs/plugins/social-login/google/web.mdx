@@ -1,92 +1,90 @@
 ---
-title: "Web 上的 Google 登录"
+title: Google 网页登录
 description: >-
-  This guide provides a comprehensive walkthrough for setting up Google Login on
-  web applications using Capacitor and the @capgo/capacitor-social-login plugin,
-  ensuring a seamless integration process by covering all necessary steps and
-  configurations.
+  本指南提供了使用 Capacitor 和 @capgo/capacitor-social-login 插件在 Web 应用程序上设置 Google
+  登录的全面演练，通过涵盖所有必要的步骤和配置来确保无缝集成过程。
 sidebar:
   order: 4
 locale: zh
 ---
 import { Steps } from '@astrojs/starlight/components';
 
-## Introduction
+## 简介
 
-In this guide, you will learn how to setup Google Login with Capgo Social Login for web applications.
-I assume that you have already read the [general setup guide](/docs/plugins/social-login/google/general/).
+在本指南中，您将了解如何为 Web 应用程序设置 Google 使用 Capgo 社交登录登录。
+我假设您已经阅读了[一般设置指南](/docs/plugins/social-login/google/general/)。
 
-## Using Google login on the web
+## 使用 Google 在网络上登录
 
-Using the google login on the web is rather simple.
-In order to use it, you have to do the following:
+在网络上使用谷歌登录相当简单。
+为了使用它，您必须执行以下操作：
 
 <Steps>
-1. Create a web client in the Google Console
+1. 在 Google 控制台中创建 Web 客户端
    
-   :::note
-   If you have already configured Google Login for Android, you can skip this step as you've already created a web client. You can proceed directly to step 2.
+   :::注意
+   如果您已经为 Android 配置了 Google 登录，则可以跳过此步骤，因为您已经创建了 Web 客户端。您可以直接进行步骤 2。
    :::
    
-   1. Click on the search bar
-      <img src="/social-login-assets/google_cons_search.png" alt="Google Console search bar" />
+   1. 点击搜索栏
+      <img src="/social-login-assets/google_cons_search.png" alt="Google 控制台搜索栏" />
    
-   2. Search for `credentials` and click on the `APIs and Services` option (number 2 on the screenshot)
-      <img src="/social-login-assets/google_cons_cred_search.png" alt="Search results showing credentials option with APIs and Services highlighted" />
+   2. 搜索 `credentials` 并单击“API 和服务”选项（屏幕截图中的数字 2）
+      <img src="/social-login-assets/google_cons_cred_search.png" alt="搜索结果显示凭据选项，并突出显示 API 和服务" />
    
-   3. Click on the `create credentials`
-      <img src="/social-login-assets/google_cons_create_cred.png" alt="Create credentials button in Google Console" />
+   3. 单击“创建凭据”
+      <img src="/social-login-assets/google_cons_create_cred.png" alt="在 Google 控制台中创建凭据按钮" />
    
-   4. Select `OAuth client ID`
-      <img src="/social-login-assets/google_cons_cred_oauth.png" alt="OAuth client ID option in credentials creation menu" />
+   4. 选择`OAuth client ID`
+      <img src="/social-login-assets/google_cons_cred_oauth.png" alt="凭证创建菜单中的 OAuth 客户端 ID 选项" />
    
-   5. Select the `Application type` as `Web application`
-      <img src="/social-login-assets/google_cons_app_type_web.png" alt="Application type selection with Web option highlighted" />
+   5. 选择“应用程序类型”为“Web 应用程序”
+      <img src="/social-login-assets/google_cons_app_type_web.png" alt="应用程序类型选择，突出显示 Web 选项" />
    
-   6. Name your client and click `Create`
-      <img src="/social-login-assets/google_cons_web_app_create.png" alt="Web client creation form with name field highlighted" />
+   6. 为您的客户命名并点击 `Create`
+      <img src="/social-login-assets/google_cons_web_app_create.png" alt="突出显示名称字段的 Web 客户端创建表单" />
    
-   7. Copy the client ID, you'll use this as the `webClientId` in your application
-      <img src="/social-login-assets/google_cons_copy_web_client_id.png" alt="Client ID details showing Web client ID to copy" />
+   7. 复制客户端 ID，您将在应用程序中使用它作为 `webClientId`
+      <img src="/social-login-assets/google_cons_copy_web_client_id.png" alt="显示要复制的 Web 客户端 ID 的客户端 ID 详细信息" />
 
-2. Configure the web client in the Google Console
+2. 在 Google 控制台中配置 Web 客户端
 
-   1. Please open the [credentials page](https://console.cloud.google.com/apis/credentials) and click on your web client
-      <img src="/social-login-assets/google_cons_open_web_client_id.png" alt="Credentials list showing web client to click" />
+   1. 请打开[凭据页面](https://console.cloud.google.com/apis/credentials) 并单击您的网络客户端
+      <img src="/social-login-assets/google_cons_open_web_client_id.png" alt="显示要单击的 Web 客户端的凭据列表" />
 
-   2. Now, please add the `Authorized JavaScript origins`. This should include all the addresses that you might use for your app. In might case, I will **ONLY** use localhost, but since I use a custom port I have to add both `http://localhost` and `http://localhost:5173`
+   2. 现在，请添加 `Authorized JavaScript origins`。这应该包括您的应用程序可能使用的所有地址。在可能的情况下，我将 **仅** 使用 localhost，但由于我使用自定义端口，我必须添加 `http://localhost` 和 `http://localhost:5173`
     
-      1. Please click on `add URI`
-         <img src="/social-login-assets/google_cons_authorized_js_add_btn.png" alt="Authorized JavaScript origins section with ADD URI button" />
+      1. 请点击“添加URI”
+         <img src="/social-login-assets/google_cons_authorized_js_add_btn.png" alt="带有 ADD URI 按钮的授权 JavaScript 起源部分" />
     
-      2. Please type your URL
-         <img src="/social-login-assets/google_cons_authorized_js_typed_url.png" alt="ADD URI dialog with localhost URL entered" />
+      2. 请输入您的网址
+         <img src="/social-login-assets/google_cons_authorized_js_typed_url.png" alt="输入 localhost URL 的“添加 URI”对话框" />
     
-      3. Please repeat until you added all the URLs
+      3. 请重复，直到添加所有 URL
     
-      4. When you finish, your screen should look something like this
-         <img src="/social-login-assets/google_cons_authorized_js_final.png" alt="Authorized JavaScript origins with multiple localhost URLs added" />
+      4. 完成后，您的屏幕应如下所示
+         <img src="/social-login-assets/google_cons_authorized_js_final.png" alt="添加了多个本地主机 URL 的授权 JavaScript 来源" />
 
-   3. Now, please add some `Authorized redirect URIs`. This will depend on what page do you depend to use the CapacitorSocialLogin plugin on. In my case, I am going to be using it on `http://localhost:5173/auth` 
+   3. 现在，请添加一些“授权重定向 URI”。这将取决于您依赖哪个页面来使用 CapacitorSocialLogin 插件。就我而言，我将在 `http://localhost:5173/auth` 上使用它 
     
-      1. Please click on `ADD URI`
-         <img src="/social-login-assets/google_cons_web_add_redirect_url_1.png" alt="Authorized redirect URIs section with ADD URI button" />
+      1. 请点击“添加 URI”
+         <img src="/social-login-assets/google_cons_web_add_redirect_url_1.png" alt="带有“添加 URI”按钮的授权重定向 URI 部分" />
     
-      2. Enter your URL and click `ADD URL` again
-         <img src="/social-login-assets/google_cons_web_add_redirect_url_2.png" alt="ADD URI dialog with redirect URL entered" />
+      2. 输入您的 URL，然后再次单击“添加 URL”
+         <img src="/social-login-assets/google_cons_web_add_redirect_url_2.png" alt="输入重定向 URL 的“添加 URI”对话框" />
 
-   4. Click `save`
-      <img src="/social-login-assets/google_cons_web_app_save.png" alt="Save button at bottom of web client configuration" />
+   4. 单击`save`
+      <img src="/social-login-assets/google_cons_web_app_save.png" alt="Web 客户端配置底部的“保存”按钮" />
 
-3. Now, you should be ready to call `login` from JavaScript like so:
+3. 现在，您应该准备好从 JavaScript 调用 `login`，如下所示：
 
-   1. First, import `SocialLogin`
+   1.首先导入`SocialLogin`
   
       ```typescript
       import { SocialLogin } from '@capgo/capacitor-social-login';
       ```
 
-   2. Then, call initialize. This should be called ONLY once.
+   2. 然后，调用初始化。这应该只被调用一次。
   
       ```typescript
       // onMounted is Vue specific
@@ -100,8 +98,8 @@ In order to use it, you have to do the following:
       })
       ```
 
-   :::note[Web Redirect Handling]
-   When using Google login on web, you **MUST** call any function from the plugin when the redirect happens to initialize the plugin so it can handle the redirect and close the popup window. You can call either `isLoggedIn()` OR `initialize()` - both will trigger the redirect handling:
+   :::注意[Web 重定向处理]
+   在网络上使用 Google 登录时，您**必须**在重定向发生时调用插件中的任何函数来初始化插件，以便它可以处理重定向并关闭弹出窗口。您可以调用 `isLoggedIn()` 或 `initialize()` - 两者都会触发重定向处理：
 
    ```typescript
    // Option 1: Call isLoggedIn when the redirect page loads
@@ -120,7 +118,7 @@ In order to use it, you have to do the following:
    ```
    :::
 
-   3. Create a login button that calls `SocialLogin.login` when clicked
+   3. 创建一个登录按钮，单击时调用 `SocialLogin.login`
   
       ```typescript
       const res = await SocialLogin.login({
@@ -131,4 +129,3 @@ In order to use it, you have to do the following:
       console.log(JSON.stringify(res));
       ```
 </Steps>
-

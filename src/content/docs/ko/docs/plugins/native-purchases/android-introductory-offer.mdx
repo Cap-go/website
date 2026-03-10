@@ -1,121 +1,116 @@
 ---
-title: Create Android Subscription Introductory Offer
-description: >-
-  Learn how to create introductory offers for auto-renewable subscriptions on
-  Android to attract new subscribers.
+title: Android 구독 소개 제안 만들기
+description: 새로운 구독자를 유치하기 위해 Android에서 자동 갱신 구독에 대한 소개 제안을 만드는 방법을 알아보세요.
 sidebar:
   order: 5
 locale: ko
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 
-Introductory offers allow you to provide eligible users with either a free trial or a discounted introductory price. After the introductory period concludes, subscriptions automatically renew at standard pricing unless cancelled.
+신규 할인 혜택을 사용하면 자격을 갖춘 사용자에게 무료 평가판 또는 할인된 신규 출시 가격을 제공할 수 있습니다. 신규 출시 기간이 끝난 후 취소하지 않는 한 구독은 표준 가격으로 자동 갱신됩니다.
 
-## Overview
+## 개요
 
-Introductory offers are a powerful tool to:
-- Reduce barriers to entry for new subscribers
-- Increase conversion rates
-- Allow users to try your premium features risk-free
-- Build long-term subscriber relationships
+입문 혜택은 다음을 수행하는 강력한 도구입니다.
+- 신규 가입자의 진입 장벽을 낮춥니다.
+- 전환율 증가
+- 사용자가 위험 부담 없이 프리미엄 기능을 사용해 볼 수 있도록 허용
+- 장기적인 구독자 관계 구축
 
-## Eligibility
+## 자격
 
-Users can receive an introductory offer if they haven't previously purchased or received an introductory offer for the subscription. Google Play handles eligibility automatically.
+사용자가 이전에 구독에 대한 신규 할인 혜택을 구매하거나 받은 적이 없는 경우 신규 할인 혜택을 받을 수 있습니다. Google Play은 자격을 자동으로 처리합니다.
 
-## Prerequisites
+## 전제조건
 
-You must first [create an auto-renewable subscription](/docs/plugins/native-purchases/android-create-subscription/) before adding an introductory offer.
+신규 할인 혜택을 추가하기 전에 먼저 [자동 갱신 구독을 생성](/docs/plugins/native-purchases/android-create-subscription/)해야 합니다.
 
-## Creating an Introductory Offer
+## 입문 제안 만들기
 
 <Steps>
 
-1. **Access Offer Configuration**
+1. **액세스 제안 구성**
 
-   Navigate to your subscription in Google Play Console and select the **Add offer** button.
+   Google Play 콘솔에서 구독으로 이동하여 **혜택 추가** 버튼을 선택하세요.
 
-   ![Add offer button](/native-purchases/android/introductory-offer/add-offer-button.webp)
+   ![쿠폰 추가 버튼](/native-purchases/android/introductory-offer/add-offer-button.webp)
 
-2. **Select Base Plan**
+2. **기본 요금제 선택**
 
-   A modal will appear requiring you to choose your base plan. Typically, you'll only have one base plan. Click **Add offer** to continue.
+   기본 요금제를 선택하라는 모달이 표시됩니다. 일반적으로 기본 계획은 하나만 있습니다. 계속하려면 **쿠폰 추가**를 클릭하세요.
 
-   ![Select base plan](/native-purchases/android/introductory-offer/select-base-plan.webp)
+   ![기본 요금제 선택](/native-purchases/android/introductory-offer/select-base-plan.webp)
 
-3. **Configure Offer Details**
+3. **혜택 세부정보 구성**
 
-   Enter the following information:
+   다음 정보를 입력하세요.
 
-   **Offer ID**: A unique identifier for this offer
+   **제안 ID**: 이 제안에 대한 고유 식별자입니다.
 
-   **Eligibility**: Choose who can receive this offer
-   - **New customers**: Only users who have never subscribed
-   - **Existing customers**: Users who previously subscribed
-   - **Developer determined**: Custom eligibility logic (not supported by native-purchases)
+   **자격**: 이 혜택을 받을 수 있는 사람을 선택하세요.
+   - **신규고객** : 한번도 구독한 적이 없는 사용자만
+   - **기존 고객**: 이전에 구독한 사용자
+   - **개발자 결정**: 맞춤 자격 로직(기본 구매에서는 지원되지 않음)
 
-   :::caution
-   The native-purchases plugin does not support the "Developer determined" eligibility option. Use "New customers" or "Existing customers" instead.
+   :::주의
+   기본 구매 플러그인은 "개발자가 결정한" 자격 옵션을 지원하지 않습니다. 대신 '신규 고객' 또는 '기존 고객'을 사용하세요.
    :::
 
-   ![Configure offer](/native-purchases/android/introductory-offer/configure-offer-details.webp)
+   ![쿠폰 구성](/native-purchases/android/introductory-offer/configure-offer-details.webp)
 
-4. **Add Phases**
+4. **단계 추가**
 
-   Click **Add phase** at the bottom of the page to define your offer structure.
+   제안 구조를 정의하려면 페이지 하단의 **단계 추가**를 클릭하세요.
 
-   You can add up to two phases, allowing combinations like:
-   - Free trial only
-   - Discounted price only
-   - Free trial followed by discounted recurring payment
+   최대 2개의 단계를 추가하여 다음과 같은 조합을 허용할 수 있습니다.
+   - 무료 평가판만 제공
+   - 가격만 할인됨
+   - 무료 체험 후 할인된 반복 결제가 가능합니다.
 
-5. **Select Phase Type**
+5. **단계 유형 선택**
 
-   Choose from three phase types:
+   세 가지 위상 유형 중에서 선택하십시오.
 
-   **Free Trial**
-   - Complimentary access for a set duration
-   - Example: 7 days free, then $9.99/month
+   **무료 평가판**
+   - 정해진 기간 동안 무료 이용
+   - 예: 7일 무료 후 $9.99/월
 
-   **Single Payment**
-   - One-time discounted price for a specific period
-   - Example: $1.99 for 2 months, then $9.99/month
+   **단일 결제**
+   - 특정 기간 동안 일회성 할인 가격
+   - 예: 2개월 동안 $1.99, 이후 월 $9.99
 
-   **Discounted Recurring Payment**
-   - Reduced per-billing-cycle rate for multiple cycles
-   - Example: $4.99/month for 3 months, then $9.99/month
+   **할인된 반복 결제**
+   - 여러 주기에 대한 청구 주기당 요금 감소
+   - 예: 3개월 동안 월 $4.99, 이후 월 $9.99
 
-6. **Configure Phase Duration**
+6. **단계 기간 구성**
 
-   Set how long the introductory phase lasts:
-   - Days, weeks, or months
-   - Number of billing cycles
+   도입 단계의 지속 시간을 설정합니다.
+   - 일, 주 또는 월
+   - 청구 주기 수
 
-7. **Finalize and Activate**
+7. **완료 및 활성화**
 
-   Click **Apply**, then **Save** to activate the offer. The **Activate** button will become available once saved.
+   **적용**을 클릭한 다음 **저장**을 클릭하여 혜택을 활성화하세요. 저장되면 **활성화** 버튼을 사용할 수 있습니다.
 
 </Steps>
 
-## Offer Phase Examples
+## 제안 단계 예시
 
-### Example 1: Simple Free Trial
-- Phase 1: 7 days free
-- Then: $9.99/month standard pricing
+### 예시 1: 간단한 무료 평가판
+- 1단계: 7일 무료
+- 이후: $9.99/월 표준 가격
 
-### Example 2: Discounted Introduction
-- Phase 1: $1.99 for the first month
-- Then: $9.99/month standard pricing
+### 예시 2: 소개 할인
+- 1단계: 첫 달 $1.99
+- 이후: $9.99/월 표준 가격### 예 3: 연장된 평가판 + 할인
+- 1단계: 14일 무료
+- 2단계: 2개월 동안 월 $4.99
+- 이후: $9.99/월 표준 가격
 
-### Example 3: Extended Trial + Discount
-- Phase 1: 14 days free
-- Phase 2: $4.99/month for 2 months
-- Then: $9.99/month standard pricing
+## 앱에서 사용하기
 
-## Using in Your App
-
-The native-purchases plugin automatically handles introductory offer eligibility and presentation:
+기본 구매 플러그인은 소개 제안 자격 및 프리젠테이션을 자동으로 처리합니다.
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -148,52 +143,52 @@ const transaction = await NativePurchases.purchaseProduct({
 console.log('Introductory purchase transaction', transaction.transactionId);
 ```
 
-## Best Practices
+## 모범 사례
 
-### Offer Duration
-- **Free trials**: 3-14 days is optimal for most apps
-- **Discounted periods**: 1-3 months works well for building habit
-- **Price discount**: 50-70% off regular price drives conversions
+### 혜택 기간
+- **무료 평가판**: 대부분의 앱에서는 3~14일이 최적입니다.
+- **할인된 기간**: 습관을 기르는 데는 1~3개월이 적합합니다.
+- **가격 할인**: 정가를 50~70% 할인하면 전환율이 높아집니다.
 
-### Marketing
-- Clearly display the intro offer and regular price
-- Show what happens after the intro period
-- Make cancellation easy and transparent
-- Remind users before the intro period ends
+### 마케팅
+- 신규 할인 혜택과 정상 가격을 명확하게 표시하세요.
+- 인트로 기간 이후에 무슨 일이 일어나는지 보여주세요.
+- 취소를 쉽고 투명하게 만듭니다.
+- 소개 기간이 끝나기 전에 사용자에게 알림
 
-### A/B Testing
-Test different offer structures:
-- Free trial length
-- Discount percentage
-- Discount duration
-- Single phase vs. multi-phase
+### A/B 테스트
+다양한 제안 구조를 테스트하세요.
+- 무료 평가판 기간
+- 할인율
+- 할인 기간
+- 단상 vs. 다상
 
-## Important Notes
+## 중요 참고사항
 
-- Only one introductory offer can be active per subscription at a time
-- Users can only claim an intro offer once per subscription
-- Intro offers don't apply to subscription upgrades/downgrades
-- Changes to intro offers don't affect existing subscribers
+- 구독당 한 번에 하나의 신규 프로모션만 활성화할 수 있습니다.
+- 사용자는 구독당 한 번만 신규 할인 혜택을 요청할 수 있습니다.
+- 구독 업그레이드/다운그레이드에는 신규 할인 혜택이 적용되지 않습니다.
+- 소개 혜택 변경사항은 기존 구독자에게 영향을 주지 않습니다.
 
-## Troubleshooting
+## 문제 해결
 
-**Intro offer not showing:**
-- Verify the offer is activated in Play Console
-- Check user eligibility (may have used offer before)
-- Ensure app is using latest product information
+**소개 혜택이 표시되지 않음:**
+- Play Console에서 혜택이 활성화되었는지 확인하세요.
+- 사용자 자격 확인(이전에 제안을 사용한 적이 있을 수 있음)
+- 앱이 최신 제품 정보를 사용하고 있는지 확인하세요.
 
-**Wrong users receiving offer:**
-- Review eligibility settings (new vs. existing customers)
-- Check if user previously subscribed on different device
-- Verify Play Store account history
+**잘못된 사용자가 혜택을 받음:**
+- 자격 설정 검토(신규 고객 및 기존 고객)
+- 사용자가 이전에 다른 기기에서 구독했는지 확인
+- Play Store 계정 내역 확인
 
-**Offer not applying at purchase:**
-- Confirm product ID matches exactly
-- Check that offer is still active and not expired
-- Verify date range settings for the offer
+**구매 시 혜택이 적용되지 않음:**
+- 상품ID가 정확히 일치하는지 확인
+- 제안이 아직 활성화되어 있고 만료되지 않았는지 확인하세요.
+- 제안의 기간 설정을 확인하세요.
 
-## Next Steps
+## 다음 단계
 
-- [Configure sandbox testing](/docs/plugins/native-purchases/android-sandbox-testing/) to test your offers
-- Monitor conversion rates in Play Console analytics
-- Consider creating multiple subscription tiers with different offers
+- 제안을 테스트하려면 [샌드박스 테스트 구성](/docs/plugins/native-purchases/android-sandbox-testing/)
+- Play Console 분석에서 전환율 모니터링
+- 다양한 제안으로 여러 구독 등급을 만드는 것을 고려해보세요.

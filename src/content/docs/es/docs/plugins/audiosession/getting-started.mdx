@@ -1,25 +1,26 @@
 ---
-title: Getting Started
-description: Configure the AudioSession plugin to react to iOS audio route changes and interruptions.
+title: Empezando
+description: >-
+  Configure el complemento AudioSession para reaccionar a iOS cambios e
+  interrupciones en la ruta de audio.
 sidebar:
   order: 2
 locale: es
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
-> ℹ️ **Platform support:** The audio session API is available on iOS. Calls on Android and the web resolve without effect so you can keep shared logic.
+> ℹ️ **Soporte de plataforma:** La sesión de audio API está disponible en iOS. Calls on Android and the web resolve without effect so you can keep shared logic.
 
 <Steps>
-1. **Install the package**
+1. **Instalar el paquete**
    <PackageManagers pkg="@capgo/capacitor-plugin-audiosession" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync iOS platform**
+2. **Sincronizar plataforma iOS**
    <PackageManagers type="exec" pkg="cap" args="sync ios" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Inspect available outputs
+## Inspeccionar las salidas disponibles
 
 ```typescript
 import { AudioSession, AudioSessionPorts } from '@capgo/capacitor-plugin-audiosession';
@@ -31,7 +32,7 @@ if (outputs.includes(AudioSessionPorts.BLUETOOTH_A2DP)) {
 }
 ```
 
-## Override to speaker mode
+## Anular al modo de altavoz
 
 ```typescript
 import { AudioSession, OutputOverrideType } from '@capgo/capacitor-plugin-audiosession';
@@ -42,7 +43,7 @@ await AudioSession.overrideOutput(OutputOverrideType.speaker);
 await AudioSession.overrideOutput(OutputOverrideType.default);
 ```
 
-## Listen for route and interruption events
+## Escuche eventos de ruta e interrupción
 
 ```typescript
 import { AudioSession, RouteChangeReasons, InterruptionTypes } from '@capgo/capacitor-plugin-audiosession';
@@ -66,7 +67,7 @@ await routeListener.remove();
 await interruptionListener.remove();
 ```
 
-## Entitlements
+## Derechos
 
-- **iOS**: Add any required background audio modes (e.g. `audio`, `voice`) inside `ios/App/App/Info.plist` if your app plays audio in the background.
-- **Other platforms**: No additional setup is necessary; methods will resolve with empty results.
+- **iOS**: agregue los modos de audio de fondo necesarios (por ejemplo, `audio`, `voice`) dentro de `ios/App/App/Info.plist` si su aplicación reproduce audio en segundo plano.
+- **Other platforms**: No additional setup is necessary; Los métodos se resolverán con resultados vacíos.

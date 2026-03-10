@@ -1,30 +1,29 @@
 ---
-title: Getting Started
+title: Erste Schritte
 description: >-
-  Learn how to install and use the iBeacon plugin to detect and monitor
-  Bluetooth beacons in your Capacitor app.
+  Erfahren Sie, wie Sie das iBeacon-Plugin installieren und verwenden, um
+  Bluetooth-Beacons in Ihrer Capacitor-App zu erkennen und zu überwachen.
 sidebar:
   order: 2
 locale: de
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Paket installieren**
    <PackageManagers pkg="@capgo/capacitor-ibeacon" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Mit nativen Projekten synchronisieren**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Configuration
+## Konfiguration
 
-### iOS Configuration
+### iOS Konfiguration
 
-Add the following to your `Info.plist`:
+Fügen Sie Folgendes zu Ihrem `Info.plist` hinzu:
 
 ```xml
 <key>NSLocationWhenInUseUsageDescription</key>
@@ -42,9 +41,9 @@ Add the following to your `Info.plist`:
 </array>
 ```
 
-### Android Configuration
+### Android Konfiguration
 
-Add the following to your `AndroidManifest.xml`:
+Fügen Sie Folgendes zu Ihrem `AndroidManifest.xml` hinzu:
 
 ```xml
 <manifest>
@@ -56,9 +55,9 @@ Add the following to your `AndroidManifest.xml`:
 </manifest>
 ```
 
-**Important**: For Android, you need to integrate the [AltBeacon](https://altbeacon.github.io/android-beacon-library/) library into your project for beacon detection to work.
+**Wichtig**: Für Android müssen Sie die Bibliothek [AltBeacon](https://altbeacon.github.io/android-beacon-library/) in Ihr Projekt integrieren, damit die Beacon-Erkennung funktioniert.
 
-Add to your app's `build.gradle`:
+Fügen Sie `build.gradle` Ihrer App hinzu:
 
 ```kotlin
 dependencies {
@@ -66,9 +65,9 @@ dependencies {
 }
 ```
 
-## Usage
+## Nutzung
 
-### Basic Setup
+### Grundeinrichtung
 
 ```typescript
 import { CapacitorIbeacon } from '@capgo/capacitor-ibeacon';
@@ -82,7 +81,7 @@ const beaconRegion = {
 };
 ```
 
-### Request Permissions
+### Berechtigungen anfordern
 
 ```typescript
 // Request "When In Use" permission
@@ -105,7 +104,7 @@ const checkPermission = async () => {
 };
 ```
 
-### Check Device Capabilities
+### Überprüfen Sie die Gerätefunktionen
 
 ```typescript
 // Check if Bluetooth is enabled
@@ -123,9 +122,9 @@ const checkRanging = async () => {
 };
 ```
 
-### Monitor Beacon Regions
+### Beacon-Regionen überwachen
 
-Monitoring detects when you enter or exit a beacon region. This works in the background.
+Die Überwachung erkennt, wenn Sie eine Beacon-Region betreten oder verlassen. Dies funktioniert im Hintergrund.
 
 ```typescript
 // Start monitoring
@@ -148,9 +147,9 @@ const stopMonitoring = async () => {
 };
 ```
 
-### Range Beacons
+### Reichweitenbaken
 
-Ranging provides continuous updates about nearby beacons and their distances. This requires the app to be in the foreground.
+Ranging bietet kontinuierliche Updates zu nahegelegenen Beacons und deren Entfernungen. Dazu muss die App im Vordergrund sein.
 
 ```typescript
 // Start ranging
@@ -171,7 +170,7 @@ const stopRanging = async () => {
 };
 ```
 
-### Listen to Events
+### Ereignisse anhören
 
 ```typescript
 import { PluginListenerHandle } from '@capacitor/core';
@@ -227,9 +226,9 @@ const cleanup = () => {
 };
 ```
 
-### Advertise as iBeacon (iOS only)
+### Als iBeacon bewerben (nur iOS)
 
-Turn your device into an iBeacon transmitter.
+Verwandeln Sie Ihr Gerät in einen iBeacon-Sender.
 
 ```typescript
 // Start advertising
@@ -250,7 +249,7 @@ const stopAdvertising = async () => {
 };
 ```
 
-## Complete Example
+## Vollständiges Beispiel
 
 ```typescript
 import { CapacitorIbeacon } from '@capgo/capacitor-ibeacon';
@@ -361,11 +360,11 @@ export class BeaconService {
 }
 ```
 
-## API Reference
+## API Referenz
 
-### startMonitoringForRegion(options)
+### startMonitoringForRegion(Optionen)
 
-Start monitoring for a beacon region. Triggers events when entering/exiting.
+Beginnen Sie mit der Überwachung einer Beacon-Region. Löst Ereignisse beim Betreten/Verlassen aus.
 
 ```typescript
 interface BeaconRegion {
@@ -379,33 +378,33 @@ interface BeaconRegion {
 await CapacitorIbeacon.startMonitoringForRegion(options);
 ```
 
-### stopMonitoringForRegion(options)
+### stopMonitoringForRegion(Optionen)
 
-Stop monitoring for a beacon region.
+Beenden Sie die Überwachung einer Beacon-Region.
 
 ```typescript
 await CapacitorIbeacon.stopMonitoringForRegion(options);
 ```
 
-### startRangingBeaconsInRegion(options)
+### startRangingBeaconsInRegion(Optionen)
 
-Start ranging beacons in a region for continuous distance updates.
+Starten Sie Messbaken in einer Region, um kontinuierliche Entfernungsaktualisierungen zu erhalten.
 
 ```typescript
 await CapacitorIbeacon.startRangingBeaconsInRegion(options);
 ```
 
-### stopRangingBeaconsInRegion(options)
+### stopRangingBeaconsInRegion(Optionen)
 
-Stop ranging beacons in a region.
+Stoppen Sie Entfernungsbaken in einer Region.
 
 ```typescript
 await CapacitorIbeacon.stopRangingBeaconsInRegion(options);
 ```
 
-### startAdvertising(options)
+### startAdvertising(Optionen)
 
-Start advertising the device as an iBeacon (iOS only).
+Beginnen Sie mit der Werbung für das Gerät als iBeacon (nur iOS).
 
 ```typescript
 interface BeaconAdvertisingOptions {
@@ -421,7 +420,7 @@ await CapacitorIbeacon.startAdvertising(options);
 
 ### stopAdvertising()
 
-Stop advertising the device as an iBeacon.
+Hören Sie auf, das Gerät als iBeacon zu bewerben.
 
 ```typescript
 await CapacitorIbeacon.stopAdvertising();
@@ -429,7 +428,7 @@ await CapacitorIbeacon.stopAdvertising();
 
 ### requestWhenInUseAuthorization()
 
-Request "When In Use" location authorization.
+Fordern Sie die Standortautorisierung „Bei Verwendung“ an.
 
 ```typescript
 const result = await CapacitorIbeacon.requestWhenInUseAuthorization();
@@ -438,7 +437,7 @@ const result = await CapacitorIbeacon.requestWhenInUseAuthorization();
 
 ### requestAlwaysAuthorization()
 
-Request "Always" location authorization (required for background monitoring).
+Fordern Sie die Standortberechtigung „Immer“ an (erforderlich für die Hintergrundüberwachung).
 
 ```typescript
 const result = await CapacitorIbeacon.requestAlwaysAuthorization();
@@ -447,7 +446,7 @@ const result = await CapacitorIbeacon.requestAlwaysAuthorization();
 
 ### getAuthorizationStatus()
 
-Get current location authorization status.
+Erhalten Sie den aktuellen Status der Standortautorisierung.
 
 ```typescript
 const result = await CapacitorIbeacon.getAuthorizationStatus();
@@ -456,7 +455,7 @@ const result = await CapacitorIbeacon.getAuthorizationStatus();
 
 ### isBluetoothEnabled()
 
-Check if Bluetooth is enabled.
+Überprüfen Sie, ob Bluetooth aktiviert ist.
 
 ```typescript
 const result = await CapacitorIbeacon.isBluetoothEnabled();
@@ -465,26 +464,26 @@ const result = await CapacitorIbeacon.isBluetoothEnabled();
 
 ### isRangingAvailable()
 
-Check if ranging is available on the device.
+Überprüfen Sie, ob die Bereichswahl auf dem Gerät verfügbar ist.
 
 ```typescript
 const result = await CapacitorIbeacon.isRangingAvailable();
 // Returns: { available: boolean }
 ```
 
-### enableARMAFilter(options)
+### enableARMAFilter(Optionen)
 
-Enable ARMA filtering for distance calculations (Android only).
+Aktivieren Sie die ARMA-Filterung für Entfernungsberechnungen (nur Android).
 
 ```typescript
 await CapacitorIbeacon.enableARMAFilter({ enabled: true });
 ```
 
-## Events
+## Ereignisse
 
 ### didRangeBeacons
 
-Fired when beacons are detected during ranging.
+Wird ausgelöst, wenn während der Entfernungsmessung Beacons erkannt werden.
 
 ```typescript
 interface RangingEvent {
@@ -504,7 +503,7 @@ interface Beacon {
 
 ### didEnterRegion
 
-Fired when entering a monitored beacon region.
+Wird beim Betreten einer überwachten Beacon-Region ausgelöst.
 
 ```typescript
 interface RegionEvent {
@@ -514,7 +513,7 @@ interface RegionEvent {
 
 ### didExitRegion
 
-Fired when exiting a monitored beacon region.
+Wird beim Verlassen einer überwachten Beacon-Region ausgelöst.
 
 ```typescript
 interface RegionEvent {
@@ -524,7 +523,7 @@ interface RegionEvent {
 
 ### didDetermineStateForRegion
 
-Fired when region state is determined.
+Wird ausgelöst, wenn der Regionsstatus ermittelt wird.
 
 ```typescript
 interface StateEvent {
@@ -533,21 +532,19 @@ interface StateEvent {
 }
 ```
 
-## Proximity Values
+## Näherungswerte
 
-- **immediate**: Very close (< 0.5 meters)
+- **sofort**: Sehr nah (< 0.5 meters)
 - **near**: Relatively close (0.5 - 3 meters)
-- **far**: Further away (> 3 meters)
-- **unknown**: Distance cannot be determined
+- **far**: Further away (> 3 Meter)
+- **unbekannt**: Entfernung kann nicht bestimmt werden
 
-## Best Practices
+## Bewährte Methoden
 
-1. **Request appropriate permissions**
-   - Use "When In Use" for foreground features
-   - Request "Always" only if you need background monitoring
-   - Explain clearly why you need location access
-
-2. **Handle Bluetooth state**
+1. **Entsprechende Berechtigungen anfordern**
+   - Verwenden Sie „Bei Verwendung“ für Vordergrundfunktionen
+   - Fordern Sie „Immer“ nur an, wenn Sie eine Hintergrundüberwachung benötigen
+   - Erklären Sie deutlich, warum Sie einen Standortzugriff benötigen2. **Bluetooth-Status verwalten**
    ```typescript
    const { enabled } = await CapacitorIbeacon.isBluetoothEnabled();
    if (!enabled) {
@@ -555,12 +552,12 @@ interface StateEvent {
    }
    ```
 
-3. **Battery optimization**
-   - Use monitoring instead of ranging when possible (more battery-efficient)
-   - Stop ranging when not actively needed
-   - Consider using larger major/minor ranges to reduce processing
+3. **Batterieoptimierung**
+   - Verwenden Sie nach Möglichkeit eine Überwachung anstelle einer Entfernungsmessung (batterieeffizienter).
+   - Stoppen Sie die Bereichswahl, wenn sie nicht aktiv benötigt wird
+   - Erwägen Sie die Verwendung größerer Haupt-/Nebenbereiche, um die Verarbeitung zu reduzieren
 
-4. **Error handling**
+4. **Fehlerbehandlung**
    ```typescript
    try {
      await CapacitorIbeacon.startMonitoringForRegion(region);
@@ -569,54 +566,54 @@ interface StateEvent {
    }
    ```
 
-5. **Clean up listeners**
-   Always remove event listeners when component unmounts to prevent memory leaks.
+5. **Räumen Sie die Zuhörer auf**
+   Entfernen Sie immer Ereignis-Listener, wenn die Bereitstellung einer Komponente aufgehoben wird, um Speicherlecks zu verhindern.
 
-## Platform Notes
+## Plattformhinweise
 
 ### iOS
-- Requires iOS 10.0+
-- Uses native CoreLocation framework
-- Supports background monitoring with "Always" permission
-- Can advertise as iBeacon using CoreBluetooth
-- Ranging requires app to be in foreground
+- Erfordert iOS 10.0+
+- Verwendet das native CoreLocation-Framework
+- Unterstützt Hintergrundüberwachung mit der Berechtigung „Immer“.
+- Kann mit CoreBluetooth als iBeacon werben
+- Für die Entfernungsmessung muss sich die App im Vordergrund befinden
 
 ### Android
-- Requires Android 6.0 (API 23)+
-- Uses AltBeacon library
-- Requires location permissions even though beacons use Bluetooth
-- Background monitoring requires ACCESS_BACKGROUND_LOCATION (Android 10+)
-- Cannot advertise as iBeacon (hardware limitation on most devices)
+- Erfordert Android 6.0 (API 23)+
+- Verwendet die AltBeacon-Bibliothek
+- Erfordert Standortberechtigungen, obwohl Beacons Bluetooth verwenden
+– Hintergrundüberwachung erfordert ACCESS_BACKGROUND_LOCATION (Android 10+)
+- Kann nicht als iBeacon werben (Hardwareeinschränkung auf den meisten Geräten)
 
 ### Web
-- Not supported on web platform
+– Wird auf der Webplattform nicht unterstützt
 
-## Common Use Cases
+## Häufige Anwendungsfälle
 
-1. **Proximity Marketing**: Trigger notifications or content when users approach your store
-2. **Indoor Navigation**: Guide users through buildings using beacon waypoints
-3. **Attendance Tracking**: Automatically check-in when users enter a location
-4. **Asset Tracking**: Monitor equipment or inventory movement
-5. **Museum Tours**: Provide contextual information as visitors approach exhibits
-6. **Smart Home**: Trigger automations based on room presence
+1. **Proximity-Marketing**: Lösen Sie Benachrichtigungen oder Inhalte aus, wenn sich Benutzer Ihrem Geschäft nähern
+2. **Indoor-Navigation**: Führen Sie Benutzer mithilfe von Beacon-Wegpunkten durch Gebäude
+3. **Anwesenheitsverfolgung**: Automatisches Einchecken, wenn Benutzer einen Standort betreten
+4. **Asset Tracking**: Überwachen Sie Geräte- oder Bestandsbewegungen
+5. **Museumsführungen**: Stellen Sie kontextbezogene Informationen bereit, wenn Besucher sich den Ausstellungen nähern
+6. **Smart Home**: Automatisierungen basierend auf der Raumpräsenz auslösen
 
-## Troubleshooting
+## Fehlerbehebung
 
-### Beacons not detected
-- Ensure Bluetooth is enabled
-- Verify location permissions are granted
-- Check beacon UUID matches exactly (case-sensitive)
-- Confirm beacon is powered and transmitting
-- Try without major/minor filters first
+### Beacons nicht erkannt
+- Stellen Sie sicher, dass Bluetooth aktiviert ist
+- Überprüfen Sie, ob Standortberechtigungen erteilt wurden
+- Überprüfen Sie, ob die Beacon-UUID genau übereinstimmt (Groß- und Kleinschreibung beachten).
+- Bestätigen Sie, dass die Bake mit Strom versorgt wird und sendet
+- Versuchen Sie es zunächst ohne Haupt-/Nebenfilter
 
-### Background monitoring not working
-- Ensure "Always" location permission is granted
-- Add `location` to UIBackgroundModes (iOS)
-- Request ACCESS_BACKGROUND_LOCATION (Android 10+)
-- Note: iOS may delay background callbacks to save battery
+### Hintergrundüberwachung funktioniert nicht
+- Stellen Sie sicher, dass die Standortberechtigung „Immer“ erteilt ist
+– `location` zu UIBackgroundModes hinzufügen (iOS)
+- ACCESS_BACKGROUND_LOCATION anfordern (Android 10+)
+- Hinweis: iOS kann Hintergrundrückrufe verzögern, um Batterie zu sparen
 
-### Distance measurements inaccurate
-- Beacon RSSI varies with environment (walls, interference)
-- Use multiple beacons for triangulation
-- Calibrate measuredPower at 1 meter from beacon
-- Enable ARMA filtering on Android for smoother values
+### Entfernungsmessungen ungenau
+- Beacon RSSI variiert je nach Umgebung (Wände, Störungen)
+- Verwenden Sie mehrere Beacons zur Triangulation
+- Kalibrieren Sie die gemessene Leistung 1 Meter von der Bake entfernt
+– Aktivieren Sie die ARMA-Filterung auf Android für glattere Werte

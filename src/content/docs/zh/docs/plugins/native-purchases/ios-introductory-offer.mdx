@@ -1,184 +1,179 @@
 ---
-title: "创建 iOS 订阅介绍优惠"
-description: >-
-  Learn how to create introductory offers for auto-renewable subscriptions on
-  iOS to attract and convert new subscribers.
+title: 创建 iOS 订阅介绍优惠
+description: 了解如何在 iOS 上为自动续订订阅创建介绍性优惠，以吸引和转化新订阅者。
 sidebar:
   order: 9
 locale: zh
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 
-Introductory offers allow you to provide eligible users with free trials or discounted introductory pricing to reduce barriers to entry and increase subscription conversions.
+通过介绍性优惠，您可以为符合条件的用户提供免费试用或折扣介绍性定价，以减少进入壁垒并提高订阅转化率。
 
-## Overview
+## 概述
 
-Introductory offers are one of the most effective tools for growing your subscriber base. They allow users to:
-- Try your premium features risk-free
-- Experience value before committing
-- Start at a lower price point
-- Build confidence in your product
+介绍性优惠是扩大用户群的最有效工具之一。它们允许用户：
+- 无风险地尝试您的高级功能
+- 承诺前体验价值
+- 从较低的价格开始
+- 建立对您产品的信心
 
-## Offer Types
+## 优惠类型
 
-iOS supports three types of introductory offers:
+iOS 支持三种类型的介绍性优惠：
 
-### 1. Free Trial
-Customers get complimentary access for a specified duration. After the trial, they're charged at standard rates if they don't cancel.
+### 1.免费试用
+客户可以在指定时间内免费访问。试用后，如果他们不取消，将按标准费率收费。
 
-**Examples:**
-- 7 days free
-- 14 days free
-- 1 month free
+**示例：**
+- 7天免费
+- 14 天免费
+- 1 个月免费
 
-**Best for:**
-- High-value subscriptions
-- Feature-rich apps
-- Building user habit
+**最适合：**
+- 高价值订阅
+- 功能丰富的应用程序
+- 培养用户习惯
 
-### 2. Pay Up Front
-Customers pay a single discounted price that covers the introductory period.
+### 2. 预先付款
+客户在介绍期内支付单一折扣价。
 
-**Examples:**
-- $1.99 for 2 months (then $9.99/month)
-- $9.99 for 3 months (then $19.99/month)
+**示例：**
+- 2 个月 1.99 美元（然后每月 9.99 美元）
+- 3 个月 9.99 美元（然后每月 19.99 美元）
 
-**Best for:**
-- Commitment signals
-- Cash flow needs
-- Testing price sensitivity
+**最适合：**
+- 承诺信号
+- 现金流需求
+- 测试价格敏感性
 
-### 3. Pay As You Go
-Customers pay a reduced price for multiple billing cycles.
+### 3. 即用即付
+客户可以为多个计费周期支付折扣价。
 
-**Examples:**
-- $1.99/month for 3 months (then $9.99/month)
-- $4.99/month for 6 months (then $14.99/month)
+**示例：**
+- 3 个月每月 1.99 美元（之后每月 9.99 美元）
+- 6 个月每月 4.99 美元（之后每月 14.99 美元）
 
-**Best for:**
-- Gradual commitment
-- Long-term value demonstration
-- Reducing perceived risk
+**最适合：**
+- 逐步承诺
+- 长期价值展示
+- 降低感知风险
 
-## Eligibility Requirements
+## 资格要求
 
-Users can only receive introductory offers if they:
-- Haven't previously received an introductory offer for the product
-- Haven't received an introductory offer for any product in the same subscription group
-- Haven't had an active subscription to the product
+用户只有在以下情况下才能收到介绍性优惠：
+- 之前没有收到过该产品的介绍性报价
+- 尚未收到同一订阅组中任何产品的介绍性优惠
+- 尚未有效订阅该产品
 
 :::note
-Apple handles eligibility checking automatically. The native-purchases plugin provides methods to check eligibility before presenting offers.
+Apple 自动处理资格检查。本机购买插件提供了在提供优惠之前检查资格的方法。
 :::
 
-## Prerequisites
+## 先决条件
 
-You must first [create an auto-renewable subscription](/docs/plugins/native-purchases/ios-create-subscription/) before adding an introductory offer.
+在添加介绍性优惠之前，您必须首先[创建自动续订订阅](/docs/plugins/native-purchases/ios-create-subscription/)。
 
-## Creating an Introductory Offer
+## 创建介绍性优惠
 
 <Steps>
 
-1. **Navigate to Subscription**
+1. **导航至订阅**
 
-   In App Store Connect, go to your app's **Monetize > Subscriptions** section and select the subscription you want to add an offer to.
+   在 App Store Connect 中，转到应用的 **获利 > 订阅** 部分，然后选择要添加优惠的订阅。
 
-2. **Add Subscription Price**
+2. **添加订阅价格**
 
-   Click the **+** icon next to "Subscription Prices" to open the pricing modal.
+   单击“订阅价格”旁边的 **+** 图标以打开定价模式。
 
-3. **Create Introductory Offer**
+3. **创建介绍性优惠**
 
-   Select **"Create introductory offer"** from the options.
+   从选项中选择**“创建介绍性优惠”**。
 
-   ![Create introductory offer](/native-purchases/ios/introductory-offer/create-introductory-offer.webp)
+   ![创建介绍性优惠](/native-purchases/ios/introductory-offer/create-introductory-offer.webp)
 
-4. **Configure Countries and Start Date**
+4. **配置国家和开始日期**
 
-   **Countries and Regions**: Select where the offer will be available
-   - Choose all countries for maximum reach
-   - Or limit to specific markets for testing
+   **国家和地区**：选择提供优惠的地区
+   - 选择所有国家以获得最大覆盖范围
+   - 或限制在特定市场进行测试
 
-   **Start Date**: When the offer becomes available
-   - Can be immediate or scheduled for the future
-   - Useful for coordinating with marketing campaigns
+   **开始日期**：当优惠可用时
+   - 可以立即执行或安排在未来执行
+   - 有助于协调营销活动
 
-   **End Date (Optional)**: When the offer expires
-   - Leave blank for ongoing availability
-   - Set a date for limited-time promotions
+   **结束日期（可选）**：优惠到期时
+   - 留空以保证持续可用
+   - 设定限时促销的日期
 
-5. **Select Offer Type**
+5. **选择优惠类型**
 
-   Choose one of the three offer types:
+   选择三种优惠类型之一：
 
-   **Free** (Free Trial)
-   - Select duration (days, weeks, months)
-   - Examples: 7 days, 2 weeks, 1 month
+   **免费**（免费试用）
+   - 选择持续时间（天、周、月）
+   - 示例：7 天、2 周、1 个月**预先付款**
+   - 设置单次付款价格
+   - 设置付款期限
+   - 示例：2 个月 1.99 美元
 
-   **Pay Up Front**
-   - Set single payment price
-   - Set duration covered by payment
-   - Example: $1.99 for 2 months
+   **现收现付**
+   - 设置每个时段的折扣价格
+   - 设置周期数
+   - 示例：3 个月每月 2.99 美元
 
-   **Pay As You Go**
-   - Set discounted price per period
-   - Set number of periods
-   - Example: $2.99/month for 3 months
+6. **审查并确认**
 
-6. **Review and Confirm**
+   查看摘要显示：
+   - 优惠类型和持续时间
+   - 定价详情
+   - 介绍期后的正常价格
+   - 可用日期和国家
 
-   Review the summary showing:
-   - Offer type and duration
-   - Pricing details
-   - Regular price after intro period
-   - Availability dates and countries
+7. **保存**
 
-7. **Save**
-
-   Click **Save** to create the introductory offer. It will be available for testing immediately in sandbox mode.
+   单击“**保存**”以创建介绍性优惠。它将立即可以在沙盒模式下进行测试。
 
 </Steps>
 
-## Offer Configuration Examples
+## 报价配置示例
 
-### Example 1: Standard Free Trial
+### 示例 1：标准免费试用
 ```
 Type: Free
 Duration: 7 days
 Then: $9.99/month
 ```
-**User Journey:**
-- Day 1-7: Free access
-- Day 8: First charge of $9.99
-- Monthly charges continue
+**用户旅程：**
+- 第 1-7 天：免费参观
+- 第 8 天：首次收费 9.99 美元
+- 继续按月收费
 
-### Example 2: Upfront Discounted Period
+### 示例 2：预付折扣期
 ```
 Type: Pay Up Front
 Price: $4.99
 Duration: 3 months
 Then: $9.99/month
 ```
-**User Journey:**
-- Day 1: Charged $4.99
-- 90 days access
-- Day 91: Charged $9.99/month
+**用户旅程：**
+- 第 1 天：收费 4.99 美元
+- 90 天访问权限
+- 第 91 天：收费 9.99 美元/月
 
-### Example 3: Gradual Introduction
+### 示例 3：逐步介绍
 ```
 Type: Pay As You Go
 Price: $2.99/month
 Periods: 6 months
 Then: $9.99/month
 ```
-**User Journey:**
-- Months 1-6: $2.99/month
-- Month 7+: $9.99/month
+**用户旅程：**
+- 第 1-6 个月：2.99 美元/月
+- 第 7 个月以上：9.99 美元/月
 
-## Using in Your App
+## 在您的应用程序中使用
 
-The native-purchases plugin automatically handles introductory offer presentation and eligibility:
+本机购买插件自动处理介绍性优惠的呈现和资格：
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -215,24 +210,24 @@ try {
 }
 ```
 
-## Displaying Intro Offers to Users
+## 向用户显示介绍优惠
 
-### Best Practices for UI
+### UI 最佳实践
 
-**Clear Value Proposition:**
+**明确的价值主张：**
 ```
 Try Premium Free for 7 Days
 Then $9.99/month. Cancel anytime.
 ```
 
-**Emphasize Savings:**
+**强调节省：**
 ```
 Start at Just $1.99
 Get 3 months of Premium for only $1.99
 Then $9.99/month
 ```
 
-**Transparent Communication:**
+**透明的沟通：**
 ```
 Your Free Trial
 • Access all premium features
@@ -241,7 +236,7 @@ Your Free Trial
 • Cancel anytime, even during trial
 ```
 
-### Example Implementation
+### 示例实现
 
 ```typescript
 function formatIntroOffer(product: any): string {
@@ -265,27 +260,27 @@ function formatIntroOffer(product: any): string {
 }
 ```
 
-## Marketing Best Practices
+## 营销最佳实践
 
-### Trial Length Strategy
-- **3-7 days**: Quick decision apps, games
-- **7-14 days**: Standard for most apps
-- **14-30 days**: Complex tools, professional apps
-- **30+ days**: High-value B2B or enterprise
+### 试用长度策略
+- **3-7 天**：快速决策应用程序、游戏
+- **7-14 天**：大多数应用程序的标准
+- **14-30 天**：复杂的工具，专业的应用程序
+- **30+ 天**：高价值 B2B 或企业
 
-### Pricing Psychology
-- **$0.99-$1.99**: Very low barrier, good for testing
-- **50% off**: Strong perceived value
-- **First month free**: Common, familiar pattern
+### 定价心理学
+- **$0.99-$1.99**：门槛非常低，适合测试
+- **50% 折扣**：强烈的感知价值
+- **第一个月免费**：常见、熟悉的模式
 
-### Communication Timing
-- **Before trial ends**: Remind users of upcoming charge
-- **Highlight value**: Show usage stats, achievements
-- **Easy cancellation**: Build trust with transparent process
+### 通讯时机
+- **试用结束前**：提醒用户即将收费
+- **突出显示价值**：显示使用统计数据、成就
+- **轻松取消**：通过透明流程建立信任
 
-## Testing Intro Offers
+## 测试介绍优惠
 
-Use sandbox testing to verify behavior:
+使用沙箱测试来验证行为：
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -318,68 +313,66 @@ setTimeout(async () => {
 }, 180000); // 3 minutes for weekly trial
 ```
 
-## Important Notes
+## 重要提示
 
-### Eligibility Rules
-- One intro offer per user per subscription group (lifetime)
-- Applies to new subscribers only
-- Cannot be used again after cancellation
-- Not available for subscription upgrades/crossgrades
+### 资格规则
+- 每个订阅组的每个用户可获得一份介绍优惠（终身）
+- 仅适用于新订阅者
+- 取消后不可再次使用
+- 不适用于订阅升级/交叉升级
 
 ### StoreKit API
-- `introductoryPrice` shows intro offer details
-- `eligibility` method checks if user qualifies
-- Automatically applied at purchase time
-- No special purchase method needed
+- `introductoryPrice` 显示介绍性优惠详细信息
+- `eligibility` 方法检查用户是否合格
+- 购买时自动应用
+- 无需特殊购买方式
 
-### Limitations
-- Only one intro offer active per subscription at a time
-- Cannot combine with other discount types
-- Cannot change eligibility rules
-- Apple controls eligibility checking
+### 限制
+- 每个订阅一次只能有一个有效的介绍优惠
+- 不能与其他折扣类型结合使用
+- 无法更改资格规则
+- Apple 控制资格检查
 
-## Troubleshooting
+## 故障排除
 
-**Intro offer not showing:**
-- Check if offer is activated in App Store Connect
-- Verify user hasn't used an intro offer before
-- Ensure user hasn't subscribed to anything in the group
-- Test with new sandbox account
+**介绍优惠未显示：**
+- 检查优惠是否已在 App Store Connect 中激活
+- 验证用户之前没有使用过介绍优惠
+- 确保用户没有订阅群组中的任何内容
+- 使用新的沙箱帐户进行测试
 
-**Eligibility check failing:**
-- Wait for App Store sync (can take 2-3 hours)
-- Verify product ID is correct
-- Check subscription group configuration
-- Test in sandbox with fresh test account
+**资格检查失败：**
+- 等待 App Store 同步（可能需要 2-3 小时）
+- 验证产品ID是否正确
+- 检查订阅组配置
+- 使用新的测试帐户在沙箱中进行测试**价格显示错误：**
+- 检查区域定价设置
+- 验证货币换算
+- 确保报价日期是最新的
+- 刷新产品信息
 
-**Wrong price displaying:**
-- Check regional pricing settings
-- Verify currency conversion
-- Ensure offer dates are current
-- Refresh product information
+**沙盒测试问题：**
+- 使用加速持续时间（3 分钟 = 1 周）
+- 为每个测试创建新的测试帐户
+- 等待试用自然完成
+- 检查续订计数（沙盒中最多 6 个）
 
-**Sandbox testing issues:**
-- Use accelerated durations (3 min = 1 week)
-- Create new test accounts for each test
-- Wait for trial to complete naturally
-- Check renewal count (max 6 in sandbox)
+## 分析和优化
 
-## Analytics and Optimization
+### 跟踪这些指标
+- 介绍报价接受率
+- 试用到付费的转化率
+- 试用期间取消
+- 首次充电后保留
+- 收入影响
 
-### Track These Metrics
-- Intro offer acceptance rate
-- Trial-to-paid conversion rate
-- Cancellation during trial
-- Retention after first charge
-- Revenue impact
+### A/B 测试想法
+- 免费试用与付费介绍
+- 试验长度变化
+- 折扣百分比
+- 一次性付款与定期折扣
 
-### A/B Testing Ideas
-- Free trial vs. paid intro
-- Trial length variations
-- Discount percentage
-- Single payment vs. recurring discount
-
-### Optimization Strategy
+### 优化策略
 ```typescript
 // Track offer performance
 analytics.track('intro_offer_displayed', {
@@ -403,13 +396,13 @@ NativePurchases.addListener('transactionUpdated', (transaction) => {
 });
 ```
 
-## Next Steps
+## 后续步骤
 
-- [Configure sandbox testing](/docs/plugins/native-purchases/ios-sandbox-testing/) to test your intro offers
-- Set up promotional offers for win-back campaigns
-- Implement subscription analytics
-- Create targeted marketing campaigns
+- [配置沙盒测试](/docs/plugins/native-purchases/ios-sandbox-testing/) 测试您的介绍优惠
+- 为赢回活动设置促销优惠
+- 实施订阅分析
+- 创建有针对性的营销活动
 
-## Additional Resources
+## 其他资源
 
-For more details, refer to the [official Apple documentation on introductory offers](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers/implementing_introductory_offers_in_your_app).
+有关更多详细信息，请参阅[有关介绍性优惠的官方 Apple 文档](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers/implementing_introductory_offers_in_your_app)。

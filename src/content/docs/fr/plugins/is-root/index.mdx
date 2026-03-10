@@ -1,85 +1,86 @@
 ---
-locale: fr
-title: "@capgo/capacitor-is-root"
-description: Root and jailbreak detection plugin for Capacitor apps with comprehensive Sécurité checks and Appareil integrity validation.
+title: '@capgo/capacitor-is-root'
+description: ''
 tableOfContents: false
 next: false
 prev: false
-sidebar: 
+sidebar:
   order: 1
-  label: "Introduction"
-hero: 
-  tagline: Detect rooted Android Appareils and jailbroken iOS Appareils to enhance Application Sécurité and protect sensitive data.
-  image: 
+  label: Introduction
+hero:
+  tagline: >-
+    Détectez les appareils Android rootés et les appareils iOS jailbreakés pour
+    améliorer la sécurité des applications et protéger les données sensibles.
+  image:
     file: ~public/icons/plugins/is-root.svg
-  actions: 
-    - text: Get started
+  actions:
+    - text: Commencer
       link: /docs/plugins/is-root/getting-started/
       icon: right-arrow
       variant: primary
     - text: Github
-      link: https://github.com/Cap-go/capacitor-is-root/
+      link: 'https://github.com/Cap-go/capacitor-is-root/'
       icon: external
       variant: minimal
+locale: fr
 ---
-
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 ## Aperçu
 
-The Capacitor Is Root plugin provides comprehensive root and jailbreak detection for Android Appareils and emulator detection. This plugin helps enhance Application Sécurité by identifying compromised Appareils and emulated environments that may pose Sécurité risks.
+Le plugin Capacitor Is Root fournit une détection complète de root et de jailbreak pour les appareils Android et une détection d'émulateur. Ce plugin contribue à améliorer la sécurité des applications en identifiant les appareils compromis et les environnements émulés qui peuvent présenter des risques de sécurité.
 
 <CardGrid stagger>
-  <Card title="Root detection" icon="rocket">
-    Advanced Android root detection with multiple methods 🔒
+  <Card title="Détection de racine" icon="rocket">
+    Détection avancée de racine Android avec plusieurs méthodes 🔒
   </Card>
-  <Card title="Emulator detection" icon="approve-check">
-    Identify emulated environments and Test frameworks 🛡️
+  <Card title="Détection d'émulateur" icon="approve-check">
+    Identifiez les environnements émulés et les frameworks de test 🛡️
   </Card>
-  <Card title="Security validation" icon="approve-check">
-    Multiple detection techniques for enhanced accuracy ✅
+  <Card title="Validation de sécurité" icon="approve-check">
+    Plusieurs techniques de détection pour une précision accrue ✅
   </Card>
-  <Card title="Android focused" icon="laptop">
-    Specialized detection for Android Sécurité assessment 🤖
+  <Card title="Android concentré" icon="laptop">
+    Détection spécialisée pour l'évaluation de sécurité Android 🤖
   </Card>
 </CardGrid>
 
-## Installation
+##Installation
 
 ```bash
 npm install @capgo/capacitor-is-root
 npx cap sync
 ```
 
-## Core API Methods
+## Méthodes principales API
 
-### Root Detection
-- `isRooted()` - Performs comprehensive root detection using default methods
-- `isRootedWithBusyBox()` - Extended detection including BusyBox checks
-- `detectRootManagementApps()` - Identifies installed root management applications
-- `checkForSuBinary()` - Checks for `su` binary presence in system paths
+### Détection de racine
+- `isRooted()` - Effectue une détection complète des racines à l'aide des méthodes par défaut
+- `isRootedWithBusyBox()` - Détection étendue incluant les contrôles BusyBox
+- `detectRootManagementApps()` - Identifie les applications de gestion racine installées
+- `checkForSuBinary()` - Vérifie la présence binaire `su` dans les chemins système
 
-### Emulator Detection
-- `isRunningOnEmulator()` - Detects common Android emulator fingerprints
+### Détection de l'émulateur
+- `isRunningOnEmulator()` - Détecte les empreintes digitales courantes de l'émulateur Android
 
-## Detection Techniques
+## Techniques de détection
 
-The plugin employs multiple detection methods:
+Le plugin utilise plusieurs méthodes de détection :
 
-### Root Detection
-- Checks for root management applications (SuperSU, Magisk, etc.)
-- Scans for suspicious system properties
-- Identifies Test Construction tags and Débogage flags
-- Validates dangerous binary locations
-- Examines system path permissions
+### Détection de racine
+- Vérifie les applications de gestion racine (SuperSU, Magisk, etc.)
+- Analyse les propriétés système suspectes
+- Identifie les balises de build de test et les indicateurs de débogage
+- Valide les emplacements binaires dangereux
+- Examine les autorisations de chemin du système
 
-### Emulator Detection
-- Hardware fingerprint analysis
-- Construction property inspection
-- Emulator-specific characteristics
-- Virtual environment indicators
+### Détection de l'émulateur
+- Analyse des empreintes matérielles
+- Inspection de la propriété du bâtiment
+- Caractéristiques spécifiques à l'émulateur
+- Indicateurs d'environnement virtuel
 
-## Utilisation Exemple
+## Exemple d'utilisation
 
 ```typescript
 import { IsRoot } from '@capgo/capacitor-is-root';
@@ -110,13 +111,13 @@ if (rootAppsResult.hasRootApps) {
 }
 ```
 
-## Sécurité Considerations
+## Considérations de sécurité
 
-- Use multiple detection methods for higher accuracy
-- Implement graceful degradation for detected environments
-- Consider Utilisateur privacy when implementing Sécurité measures
-- Regular Mises à jour recommended as detection methods evolve
+- Utilisez plusieurs méthodes de détection pour une plus grande précision
+- Implémenter une dégradation gracieuse pour les environnements détectés
+- Tenir compte de la confidentialité des utilisateurs lors de la mise en œuvre de mesures de sécurité
+- Mises à jour régulières recommandées à mesure que les méthodes de détection évoluent
 
-## Documentation
+##Documents
 
-Vérifier the [Terminé Documentation](/docs/plugins/is-root/getting-started/) for detailed implementation guides and advanced Sécurité patterns.
+Consultez la [documentation complète](/docs/plugins/is-root/getting-started/) pour obtenir des guides de mise en œuvre détaillés et des modèles de sécurité avancés.

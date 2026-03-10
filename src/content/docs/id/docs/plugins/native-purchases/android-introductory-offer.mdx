@@ -1,121 +1,118 @@
 ---
-title: Create Android Subscription Introductory Offer
+title: Buat Android Penawaran Perkenalan Berlangganan
 description: >-
-  Learn how to create introductory offers for auto-renewable subscriptions on
-  Android to attract new subscribers.
+  Pelajari cara membuat penawaran perkenalan untuk langganan yang dapat
+  diperpanjang secara otomatis di Android untuk menarik pelanggan baru.
 sidebar:
   order: 5
 locale: id
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 
-Introductory offers allow you to provide eligible users with either a free trial or a discounted introductory price. After the introductory period concludes, subscriptions automatically renew at standard pricing unless cancelled.
+Penawaran perkenalan memungkinkan Anda memberikan uji coba gratis atau harga perkenalan yang didiskon kepada pengguna yang memenuhi syarat. Setelah periode perkenalan berakhir, langganan diperpanjang secara otomatis dengan harga standar kecuali dibatalkan.
 
-## Overview
+## Ikhtisar
 
-Introductory offers are a powerful tool to:
-- Reduce barriers to entry for new subscribers
-- Increase conversion rates
-- Allow users to try your premium features risk-free
-- Build long-term subscriber relationships
+Penawaran perkenalan adalah alat yang ampuh untuk:
+- Mengurangi hambatan masuk bagi pelanggan baru
+- Meningkatkan tingkat konversi
+- Izinkan pengguna mencoba fitur premium Anda tanpa risiko
+- Membangun hubungan pelanggan jangka panjang
 
-## Eligibility
+## Kelayakan
 
-Users can receive an introductory offer if they haven't previously purchased or received an introductory offer for the subscription. Google Play handles eligibility automatically.
+Pengguna dapat menerima penawaran perkenalan jika mereka belum pernah membeli atau menerima penawaran perkenalan untuk berlangganan. Google Play menangani kelayakan secara otomatis.
 
-## Prerequisites
+## Prasyarat
 
-You must first [create an auto-renewable subscription](/docs/plugins/native-purchases/android-create-subscription/) before adding an introductory offer.
+Anda harus terlebih dahulu [membuat langganan yang dapat diperpanjang secara otomatis](/docs/plugins/native-purchases/android-create-subscription/) sebelum menambahkan penawaran perkenalan.
 
-## Creating an Introductory Offer
+## Membuat Penawaran Perkenalan
 
 <Steps>
 
-1. **Access Offer Configuration**
+1. **Konfigurasi Penawaran Akses**
 
-   Navigate to your subscription in Google Play Console and select the **Add offer** button.
+   Navigasikan ke langganan Anda di Konsol Google Play dan pilih tombol **Tambahkan penawaran**.
 
-   ![Add offer button](/native-purchases/android/introductory-offer/add-offer-button.webp)
+   ![Tombol Tambahkan penawaran](/native-purchases/android/introductory-offer/add-offer-button.webp)
 
-2. **Select Base Plan**
+2. **Pilih Paket Dasar**
 
-   A modal will appear requiring you to choose your base plan. Typically, you'll only have one base plan. Click **Add offer** to continue.
+   Sebuah modal akan muncul yang mengharuskan Anda memilih paket dasar Anda. Biasanya, Anda hanya memiliki satu paket dasar. Klik **Tambahkan penawaran** untuk melanjutkan.
 
-   ![Select base plan](/native-purchases/android/introductory-offer/select-base-plan.webp)
+   ![Pilih paket dasar](/native-purchases/android/introductory-offer/select-base-plan.webp)
 
-3. **Configure Offer Details**
+3. **Konfigurasi Detail Penawaran**
 
-   Enter the following information:
+   Masukkan informasi berikut:
 
-   **Offer ID**: A unique identifier for this offer
+   **ID Penawaran**: Pengidentifikasi unik untuk penawaran ini
 
-   **Eligibility**: Choose who can receive this offer
-   - **New customers**: Only users who have never subscribed
-   - **Existing customers**: Users who previously subscribed
-   - **Developer determined**: Custom eligibility logic (not supported by native-purchases)
+   **Kelayakan**: Pilih siapa yang dapat menerima penawaran ini
+   - **Pelanggan baru**: Hanya pengguna yang belum pernah berlangganan
+   - **Pelanggan lama**: Pengguna yang sebelumnya berlangganan
+   - **Ditentukan pengembang**: Logika kelayakan khusus (tidak didukung oleh pembelian asli)
 
-   :::caution
-   The native-purchases plugin does not support the "Developer determined" eligibility option. Use "New customers" or "Existing customers" instead.
+   :::hati-hati
+   Plugin pembelian asli tidak mendukung opsi kelayakan "Ditentukan pengembang". Gunakan "Pelanggan baru" atau "Pelanggan lama" sebagai gantinya.
    :::
 
-   ![Configure offer](/native-purchases/android/introductory-offer/configure-offer-details.webp)
+   ![Konfigurasi penawaran](/native-purchases/android/introductory-offer/configure-offer-details.webp)
 
-4. **Add Phases**
+4. **Tambahkan Fase**
 
-   Click **Add phase** at the bottom of the page to define your offer structure.
+   Klik **Tambahkan fase** di bagian bawah halaman untuk menentukan struktur penawaran Anda.
 
-   You can add up to two phases, allowing combinations like:
-   - Free trial only
-   - Discounted price only
-   - Free trial followed by discounted recurring payment
+   Anda dapat menambahkan hingga dua fase, memungkinkan kombinasi seperti:
+   - Uji coba gratis saja
+   - Harga diskon saja
+   - Uji coba gratis diikuti dengan diskon pembayaran berulang
 
-5. **Select Phase Type**
+5. **Pilih Tipe Fase**
 
-   Choose from three phase types:
+   Pilih dari tiga jenis fase:
 
-   **Free Trial**
-   - Complimentary access for a set duration
-   - Example: 7 days free, then $9.99/month
+   **Uji Coba Gratis**
+   - Akses gratis untuk durasi tertentu
+   - Contoh: Gratis 7 hari, lalu $9,99/bulan
 
-   **Single Payment**
-   - One-time discounted price for a specific period
-   - Example: $1.99 for 2 months, then $9.99/month
+   **Pembayaran Tunggal**
+   - Harga diskon satu kali untuk periode tertentu
+   - Contoh: $1,99 untuk 2 bulan, lalu $9,99/bulan
 
-   **Discounted Recurring Payment**
-   - Reduced per-billing-cycle rate for multiple cycles
-   - Example: $4.99/month for 3 months, then $9.99/month
+   **Pembayaran Berulang dengan Diskon**
+   - Pengurangan tarif per siklus penagihan untuk beberapa siklus
+   - Contoh: $4,99/bulan selama 3 bulan, lalu $9,99/bulan
 
-6. **Configure Phase Duration**
+6. **Konfigurasi Durasi Fase**
 
-   Set how long the introductory phase lasts:
-   - Days, weeks, or months
-   - Number of billing cycles
+   Tetapkan berapa lama fase perkenalan berlangsung:
+   - Hari, minggu, atau bulan
+   - Jumlah siklus penagihan
 
-7. **Finalize and Activate**
+7. **Selesaikan dan Aktifkan**
 
-   Click **Apply**, then **Save** to activate the offer. The **Activate** button will become available once saved.
+   Klik **Terapkan**, lalu **Simpan** untuk mengaktifkan penawaran. Tombol **Aktifkan** akan tersedia setelah disimpan.
 
 </Steps>
 
-## Offer Phase Examples
+## Contoh Fase Penawaran
 
-### Example 1: Simple Free Trial
-- Phase 1: 7 days free
-- Then: $9.99/month standard pricing
+### Contoh 1: Uji Coba Gratis Sederhana
+- Fase 1: 7 hari gratis
+- Lalu: harga standar $9,99/bulan
 
-### Example 2: Discounted Introduction
-- Phase 1: $1.99 for the first month
-- Then: $9.99/month standard pricing
+### Contoh 2: Perkenalan dengan Diskon
+- Fase 1: $1,99 untuk bulan pertama
+- Lalu: harga standar $9,99/bulan### Contoh 3: Perpanjangan Uji Coba + Diskon
+- Fase 1: 14 hari gratis
+- Tahap 2: $4,99/bulan selama 2 bulan
+- Lalu: harga standar $9,99/bulan
 
-### Example 3: Extended Trial + Discount
-- Phase 1: 14 days free
-- Phase 2: $4.99/month for 2 months
-- Then: $9.99/month standard pricing
+## Menggunakan di Aplikasi Anda
 
-## Using in Your App
-
-The native-purchases plugin automatically handles introductory offer eligibility and presentation:
+Plugin pembelian asli secara otomatis menangani kelayakan dan presentasi penawaran perkenalan:
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -148,52 +145,52 @@ const transaction = await NativePurchases.purchaseProduct({
 console.log('Introductory purchase transaction', transaction.transactionId);
 ```
 
-## Best Practices
+## Praktik Terbaik
 
-### Offer Duration
-- **Free trials**: 3-14 days is optimal for most apps
-- **Discounted periods**: 1-3 months works well for building habit
-- **Price discount**: 50-70% off regular price drives conversions
+### Durasi Penawaran
+- **Uji coba gratis**: 3-14 hari adalah waktu optimal untuk sebagian besar aplikasi
+- **Periode diskon**: 1-3 bulan merupakan waktu yang baik untuk membangun kebiasaan
+- **Diskon harga**: Diskon 50-70% dari harga reguler mendorong konversi
 
-### Marketing
-- Clearly display the intro offer and regular price
-- Show what happens after the intro period
-- Make cancellation easy and transparent
-- Remind users before the intro period ends
+### Pemasaran
+- Tampilkan dengan jelas penawaran perkenalan dan harga reguler
+- Tunjukkan apa yang terjadi setelah periode intro
+- Jadikan pembatalan mudah dan transparan
+- Ingatkan pengguna sebelum periode intro berakhir
 
-### A/B Testing
-Test different offer structures:
-- Free trial length
-- Discount percentage
-- Discount duration
-- Single phase vs. multi-phase
+### Pengujian A/B
+Uji struktur penawaran yang berbeda:
+- Durasi uji coba gratis
+- Persentase diskon
+- Durasi diskon
+- Fase tunggal vs. multifase
 
-## Important Notes
+## Catatan Penting
 
-- Only one introductory offer can be active per subscription at a time
-- Users can only claim an intro offer once per subscription
-- Intro offers don't apply to subscription upgrades/downgrades
-- Changes to intro offers don't affect existing subscribers
+- Hanya satu penawaran perkenalan yang dapat aktif per langganan dalam satu waktu
+- Pengguna hanya dapat mengklaim penawaran perkenalan satu kali per langganan
+- Penawaran perkenalan tidak berlaku untuk peningkatan/penurunan versi langganan
+- Perubahan pada penawaran perkenalan tidak memengaruhi pelanggan yang sudah ada
 
-## Troubleshooting
+## Pemecahan masalah
 
-**Intro offer not showing:**
-- Verify the offer is activated in Play Console
-- Check user eligibility (may have used offer before)
-- Ensure app is using latest product information
+**Penawaran perkenalan tidak ditampilkan:**
+- Pastikan penawaran diaktifkan di Konsol Play
+- Periksa kelayakan pengguna (mungkin pernah menggunakan penawaran sebelumnya)
+- Pastikan aplikasi menggunakan informasi produk terbaru
 
-**Wrong users receiving offer:**
-- Review eligibility settings (new vs. existing customers)
-- Check if user previously subscribed on different device
-- Verify Play Store account history
+**Pengguna yang salah menerima tawaran:**
+- Tinjau pengaturan kelayakan (pelanggan baru vs. pelanggan lama)
+- Periksa apakah pengguna sebelumnya berlangganan pada perangkat yang berbeda
+- Verifikasi riwayat akun Play Store
 
-**Offer not applying at purchase:**
-- Confirm product ID matches exactly
-- Check that offer is still active and not expired
-- Verify date range settings for the offer
+**Penawaran tidak berlaku saat pembelian:**
+- Konfirmasikan ID produk sama persis
+- Periksa apakah penawaran masih aktif dan belum kedaluwarsa
+- Verifikasi pengaturan rentang tanggal untuk penawaran tersebut
 
-## Next Steps
+## Langkah Selanjutnya
 
-- [Configure sandbox testing](/docs/plugins/native-purchases/android-sandbox-testing/) to test your offers
-- Monitor conversion rates in Play Console analytics
-- Consider creating multiple subscription tiers with different offers
+- [Konfigurasi pengujian sandbox](/docs/plugins/native-purchases/android-sandbox-testing/) untuk menguji penawaran Anda
+- Pantau tingkat konversi di analisis Konsol Play
+- Pertimbangkan untuk membuat beberapa tingkatan langganan dengan penawaran berbeda

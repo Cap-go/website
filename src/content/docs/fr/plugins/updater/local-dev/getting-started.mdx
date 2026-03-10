@@ -1,27 +1,28 @@
 ---
+title: Commencer
+description: >-
+  Ce didacticiel montrera comment démarrer Supabase à partir de zéro ainsi que
+  démarrer les fonctions Edge, pour exécuter Capgo par vous-même.
+sidebar:
+  order: 1
 locale: fr
-title: "Commencer"
-description: "This Tutoriel will show how to Démarrer the Supabase from scratch as well as Démarrer edge functions, to run Capgo on your own"
-sidebar: 
-    order: 1
 ---
+## Que couvrira ce tutoriel ?
 
-## What this Tutoriel will cover?
+Ce tutoriel montrera comment démarrer la supabase à partir de zéro ainsi que démarrer les fonctions Edge. 
 
-This Tutoriel will show how to Démarrer the supabase from scratch as well as Démarrer edge functions 
-
-## Requirements
- 1. Cloned [capgo](https://github.com/Cap-go/capgo)
- 3. [supabase](https://supabase.com/)
+## Exigences
+ 1. Cloné [capgo](https://github.com/Cap-go/capgo)
+ 3. [supase](https://supabase.com/)
 
 ## Commencer
 
-To get started run
+Pour commencer, courez
 ```bash
 supabase start
 ```
 
-Suivant should see something like this:
+Ensuite, vous devriez voir quelque chose comme ceci :
 ```js
 Started supabase local development setup.
 
@@ -35,7 +36,7 @@ Started supabase local development setup.
 service_role key: supa_key_admin
 ```
 
-Next open `configs.json` and set the following values:
+Ensuite, ouvrez `configs.json` et définissez les valeurs suivantes :
 ```json
 {
   "base_domain": {
@@ -56,23 +57,23 @@ Next open `configs.json` and set the following values:
 }
 ```
 
-where `supa_key_anon` is the value from the previous step.
+où `supa_key_anon` est la valeur de l'étape précédente.
 
 :::danger
-⚠️ Do not commit `configs.json` into the remote repo
+⚠️ Ne validez pas `configs.json` dans le dépôt distant
 :::
 
-Next, verify that you can go to [localhost:54323](http://localhost:54323/projects) and that the table `users` looks something like this
+Ensuite, vérifiez que vous pouvez accéder à [localhost:54323](http://localhost:54323/projects) et que la table `users` ressemble à ceci
 
-<figure><img src="/supabase.webp" alt="Supabase dashboard showing users table" /><figcaption></figcaption></figure>
+<figure><img src="/supabase.webp" alt="Tableau de bord Supabase affichant le tableau des utilisateurs" /><figcaption></figcaption></figure>
 
-If it does Démarrer edge functions by running:
+S'il démarre les fonctions Edge en exécutant :
 
 ```bash
 supabase functions serve
 ```
 
-and Démarrer frontend by running:
+et démarrez le frontend en exécutant :
 ```bash
 bun run serve
 ```

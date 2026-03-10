@@ -1,23 +1,22 @@
 ---
-title: "快速入门"
-description: Learn how to detect volume button presses in your Capacitor app.
+title: 入门
+description: 了解如何在 Capacitor 应用中检测音量按钮按下情况。
 sidebar:
   order: 2
 locale: zh
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **安装软件包**
    <PackageManagers pkg="@capgo/capacitor-volume-buttons" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **与原生项目同步**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Usage
+## 用法
 
 ```typescript
 import { VolumeButtons } from '@capgo/capacitor-volume-buttons';
@@ -39,11 +38,11 @@ VolumeButtons.addListener('volumeButtonPressed', (event) => {
 await VolumeButtons.removeAllListeners();
 ```
 
-## API Reference
+## API 参考
 
-### addListener('volumeButtonPressed', callback)
+### addListener('volumeButtonPressed', 回调)
 
-Listen for volume button press events.
+监听音量按钮按下事件。
 
 ```typescript
 const handle = VolumeButtons.addListener('volumeButtonPressed', (event) => {
@@ -54,12 +53,12 @@ const handle = VolumeButtons.addListener('volumeButtonPressed', (event) => {
 await handle.remove();
 ```
 
-**Event Data:**
-- `direction`: `'up' | 'down'` - Direction of the button press
+**事件数据：**
+- `direction`: `'向上' | 'down'` - 按下按钮的方向
 
-### removeAllListeners()
+### 删除所有监听器()
 
-Remove all registered listeners.
+删除所有已注册的侦听器。
 
 ```typescript
 await VolumeButtons.removeAllListeners();
@@ -67,14 +66,14 @@ await VolumeButtons.removeAllListeners();
 
 ### getPluginVersion()
 
-Get the plugin version.
+获取插件版本。
 
 ```typescript
 const { version } = await VolumeButtons.getPluginVersion();
 console.log('Plugin version:', version);
 ```
 
-## Complete Example
+## 完整示例
 
 ```typescript
 import { VolumeButtons } from '@capgo/capacitor-volume-buttons';
@@ -124,11 +123,11 @@ export class VolumeButtonController {
 }
 ```
 
-## Use Cases
+## 用例
 
-### Photo/Video Capture
+### 照片/视频捕捉
 
-Use volume buttons as camera shutter triggers:
+使用音量按钮作为相机快门触发器：
 
 ```typescript
 VolumeButtons.addListener('volumeButtonPressed', async (event) => {
@@ -137,9 +136,9 @@ VolumeButtons.addListener('volumeButtonPressed', async (event) => {
 });
 ```
 
-### Page Navigation
+### 页面导航
 
-Navigate through content with volume buttons:
+使用音量按钮浏览内容：
 
 ```typescript
 let currentPage = 0;
@@ -155,9 +154,9 @@ VolumeButtons.addListener('volumeButtonPressed', (event) => {
 });
 ```
 
-### Media Control
+### 媒体控制
 
-Control media playback:
+控制媒体播放：
 
 ```typescript
 VolumeButtons.addListener('volumeButtonPressed', (event) => {
@@ -169,9 +168,9 @@ VolumeButtons.addListener('volumeButtonPressed', (event) => {
 });
 ```
 
-### Game Controls
+### 游戏控制
 
-Use volume buttons for game actions:
+使用音量按钮进行游戏操作：
 
 ```typescript
 VolumeButtons.addListener('volumeButtonPressed', (event) => {
@@ -183,10 +182,10 @@ VolumeButtons.addListener('volumeButtonPressed', (event) => {
 });
 ```
 
-## Best Practices
+## 最佳实践
 
-1. **Clean up listeners**
-   Always remove listeners when your component unmounts:
+1. **清理监听器**
+   当组件卸载时，始终删除侦听器：
    ```typescript
    useEffect(() => {
      const listener = VolumeButtons.addListener('volumeButtonPressed', handler);
@@ -197,8 +196,8 @@ VolumeButtons.addListener('volumeButtonPressed', (event) => {
    }, []);
    ```
 
-2. **Provide visual feedback**
-   Show users that volume buttons are being used for custom controls:
+2. **提供视觉反馈**
+   向用户显示音量按钮用于自定义控件：
    ```typescript
    VolumeButtons.addListener('volumeButtonPressed', (event) => {
      showNotification(`Volume ${event.direction} pressed`);
@@ -206,11 +205,11 @@ VolumeButtons.addListener('volumeButtonPressed', (event) => {
    });
    ```
 
-3. **Consider accessibility**
-   Remember that some users rely on volume buttons for actual volume control. Provide alternative controls.
+3. **考虑可访问性**
+   请记住，某些用户依赖音量按钮进行实际音量控制。提供替代控制。
 
-4. **Debounce rapid presses**
-   Prevent accidental double-presses:
+4. **快速按下去抖动**
+   防止意外双击：
    ```typescript
    let lastPress = 0;
    const DEBOUNCE_MS = 300;
@@ -225,41 +224,41 @@ VolumeButtons.addListener('volumeButtonPressed', (event) => {
    });
    ```
 
-5. **Document the behavior**
-   Make it clear to users that volume buttons have custom functionality:
+5. **记录行为**
+   向用户明确音量按钮具有自定义功能：
    ```typescript
    function showVolumeButtonHelp() {
      alert('Use Volume Up/Down buttons to navigate pages');
    }
    ```
 
-## Platform Notes
+## 平台说明
 
 ### iOS
-- Works on iOS 10.0+
-- Volume buttons detected reliably
-- System volume UI may still appear briefly
+- 适用于 iOS 10.0+
+- 可靠地检测到音量按钮
+- 系统音量 UI 可能仍会短暂出现
 
 ### Android
-- Works on Android 5.0 (API 21)+
-- Requires app to be in foreground
-- Some devices may have slight delay
+- 适用于 Android 5.0 (API 21)+
+- 要求应用程序位于前台
+- 某些设备可能会有轻微延迟
 
-### Web
-- Not supported on web platform
-- Listeners will not fire
+### 网络
+- 不支持网络平台
+- 听众不会开火
 
-## Troubleshooting
+## 故障排除
 
-**Events not firing:**
-- Ensure app has focus
-- Check that listeners are properly registered
-- Verify plugin is installed and synced
+**事件未触发：**
+- 确保应用程序具有焦点
+- 检查监听器是否正确注册
+- 验证插件是否已安装并同步
 
-**System volume changes interfere:**
-- This is expected behavior - the plugin detects presses but doesn't prevent system volume changes
-- Consider UX that works alongside volume changes
+**系统音量变化干扰：**
+- 这是预期的行为 - 插件检测按下但不会阻止系统音量变化
+- 考虑与音量变化一起工作的用户体验
 
-**Multiple events firing:**
-- Implement debouncing to handle rapid presses
-- Check for duplicate listener registration
+**多个事件触发：**
+- 实施去抖处理快速按压
+- 检查重复的监听器注册

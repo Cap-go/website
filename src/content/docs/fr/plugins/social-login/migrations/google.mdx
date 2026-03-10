@@ -1,44 +1,47 @@
 ---
+title: Google Migration d'authentification vers @capgo/social-login
+description: >-
+  Ce guide décrit la transition de l'ancien plugin d'authentification Google au
+  nouveau package de connexion sociale Capgo, qui unifie plusieurs fournisseurs
+  d'authentification sociale.
+sidebar:
+  order: 3
 locale: fr
-title: Migration Guide from @codetrix-studio/capacitor-google-auth to @capgo/capacitor-social-Connexion
-description: This Guide outlines transitioning from the older Google Auth plugin to the newer Capgo social Connexion package, which unifies multiple social authentication providers.
-sidebar: 
-    order: 3
 ---
 import { Steps } from '@astrojs/starlight/components';
 
 ## Aperçu
 
-This guide provides comprehensive steps for migrating from `@codetrix-studio/capacitor-google-auth` to `@capgo/capacitor-social-login`, ensuring a smooth transition and improved authentication experience. The new plugin unifies multiple social authentication providers under a single, consistent API.
+Ce guide fournit des étapes complètes pour migrer de `@codetrix-studio/capacitor-google-auth` vers `@capgo/capacitor-social-login`, garantissant une transition en douceur et une expérience d'authentification améliorée. Le nouveau plugin unifie plusieurs fournisseurs d'authentification sociale sous un API unique et cohérent.
 
-## Installation
+##Installation
 
 <Steps>
-1. Retirer the old package:
+1. Supprimez l'ancien package :
    ```bash
    npm uninstall @codetrix-studio/capacitor-google-auth
    ```
 
-2. Installer the Nouveau package:
+2. Installez le nouveau package :
    ```bash
    npm install @capgo/capacitor-social-login
    npx cap sync
    ```
 </Steps>
 
-## Important Changes in Google Auth Configuration
+## Modifications importantes dans la configuration de l'authentification Google
 
-### Web Client ID Requirement
-**Critical Change**: The updated plugin requires using a Web Client ID across all platforms.
+### Exigence d'ID de client Web
+**Changement critique** : Le plugin mis à jour nécessite l'utilisation d'un ID client Web sur toutes les plates-formes.
 
-You'll need to:
-1. Créer a Web Client ID in Google Cloud Console if you don't have one ([How to get the credentials](/docs/plugins/social-Connexion/google/general/))
-2. Use this Web Client ID in the `webClientId` field for all platforms
-3. For Android, you still need to Créer an Android Client ID with your SHA1, but this is only for verification purposes - the token won't be used ([Android Configuration Guide](/docs/plugins/social-Connexion/google/Android/))
+Vous devrez :
+1. Créez un ID client Web dans Google Cloud Console si vous n'en avez pas ([Comment obtenir les informations d'identification](/docs/plugins/social-login/google/general/))
+2. Utilisez cet ID client Web dans le champ `webClientId` pour toutes les plateformes
+3. Pour Android, vous devez toujours créer un identifiant client Android avec votre SHA1, mais ceci est uniquement à des fins de vérification - le jeton ne sera pas utilisé ([Android guide de configuration](/docs/plugins/social-login/google/android/))
 
-## Code Changes
+## Modifications du code
 
-### Importer Changes
+### Importer les modifications
 ```diff
 - import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 + import { SocialLogin } from '@capgo/capacitor-social-login';
@@ -46,7 +49,7 @@ You'll need to:
 
 ### Initialisation
 
-The setup transforms from a simple `GoogleAuth.initialize()` call to a more structured `SocialLogin.initialize()` with nested Google configuration:
+La configuration passe d'un simple appel `GoogleAuth.initialize()` à un `SocialLogin.initialize()` plus structuré avec une configuration Google imbriquée :
 
 ```diff
 - GoogleAuth.initialize({
@@ -64,9 +67,9 @@ The setup transforms from a simple `GoogleAuth.initialize()` call to a more stru
 + });
 ```
 
-### Sign In
+### Se connecter
 
-The login method changes from `GoogleAuth.signIn()` to `SocialLogin.login()` with explicit provider specification:
+La méthode de connexion passe de `GoogleAuth.signIn()` à `SocialLogin.login()` avec une spécification explicite du fournisseur :
 
 ```diff
 - const user = await GoogleAuth.signIn();
@@ -79,11 +82,11 @@ The login method changes from `GoogleAuth.signIn()` to `SocialLogin.login()` wit
 + });
 ```
 
-## Platform Specific Changes
+## Modifications spécifiques à la plateforme
 
 ### Android
 
-1. Update your `MainActivity.java` ([Full Android setup guide](/docs/plugins/social-login/google/android/)):
+1. Mettez à jour votre `MainActivity.java` ([Guide de configuration complet de Android](/docs/plugins/social-login/google/android/)) :
 ```diff
 + import ee.forgr.capacitor.social.login.GoogleProvider;
 + import ee.forgr.capacitor.social.login.SocialLoginPlugin;
@@ -121,9 +124,9 @@ The login method changes from `GoogleAuth.signIn()` to `SocialLogin.login()` wit
 
 ### iOS
 
-1. No major changes needed in AppDelegate.swift ([iOS Configuration Guide](/docs/plugins/social-Connexion/google/iOS/))
+1. Aucune modification majeure n'est nécessaire dans AppDelegate.swift ([iOS guide de configuration](/docs/plugins/social-login/google/ios/))
 
-2. Update your configuration in `capacitor.config.json`, we don't use it in the new plugin:
+2. Mettez à jour votre configuration dans `capacitor.config.json`, nous ne l'utilisons pas dans le nouveau plugin :
 ```diff
 {
   "plugins": {
@@ -135,17 +138,17 @@ The login method changes from `GoogleAuth.signIn()` to `SocialLogin.login()` wit
 }
 ```
 
-### Web
+###Web
 
-1. Remove the Google Sign-In meta tags from your `index.html` if you were using them:
+1. Supprimez les balises méta de connexion Google de votre `index.html` si vous les utilisiez :
 ```diff
 - <meta name="google-signin-client_id" content="{your client id here}" />
 - <meta name="google-signin-scope" content="profile email" />
 ```
 
-## Response Type Changes
+## Modifications du type de réponse
 
-The authentication response now provides a structured object containing provider Information, access tokens, ID tokens, and Utilisateur Profil data:
+La réponse d'authentification fournit désormais un objet structuré contenant des informations sur le fournisseur, des jetons d'accès, des jetons d'identification et des données de profil utilisateur :
 
 ```typescript
 interface GoogleLoginResponse {
@@ -169,22 +172,22 @@ interface GoogleLoginResponse {
 }
 ```
 
-The response structure includes:
-- **provider**: Identifies the authentication provider (`'google'`)
-- **result.accessToken**: Access token details with expiration
-- **result.idToken**: ID token for authentication
-- **result.Profil**: Utilisateur Profil Information including email, name, and image URL
+La structure de réponse comprend :
+- **provider** : Identifie le fournisseur d'authentification ("google")
+- **result.accessToken** : accédez aux détails du jeton avec expiration
+- **result.idToken** : jeton d'identification pour l'authentification
+- **result.profile** : informations sur le profil de l'utilisateur, notamment son adresse e-mail, son nom et l'URL de l'image.
 
-## Additional Capabilities
+## Capacités supplémentaires
 
-The Nouveau package supports multiple social authentication providers beyond Google:
-- [Apple Sign-In](/docs/plugins/social-Connexion/apple/general/)
-- [Facebook Connexion](/docs/plugins/social-Connexion/facebook/)
+Le nouveau package prend en charge plusieurs fournisseurs d'authentification sociale au-delà de Google :
+- [Apple Connexion](/docs/plugins/social-login/apple/general/)
+- [Facebook Connexion](/docs/plugins/social-login/facebook/)
 
-This unified approach provides:
-- Consistent API across all providers
-- Improved TypeScript Support
-- Better Erreur handling
-- Actif maintenance and Communauté Support
+Cette approche unifiée fournit :
+- API cohérent chez tous les fournisseurs
+- Prise en charge améliorée de TypeScript
+- Meilleure gestion des erreurs
+- Maintenance active et support communautaire
 
-Vérifier the [main Documentation](/docs/plugins/social-Connexion/google/general/) for detailed Configuration instructions for these additional providers. 
+Consultez la [documentation principale](/docs/plugins/social-login/google/general/) pour obtenir des instructions de configuration détaillées pour ces fournisseurs supplémentaires.

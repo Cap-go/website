@@ -1,70 +1,93 @@
 ---
-title: API Keys
-description: >-
-  Comprehensive documentation for API Keys endpoint, detailing authentication,
-  permissions, and management within Capgo API
+title: API 키
+description: 'API 키 엔드포인트에 대한 포괄적인 문서로, Capgo API 내의 인증, 권한 및 관리를 자세히 설명합니다.'
 sidebar:
   order: 9
 locale: ko
 ---
+API 키는 Capgo API에 대한 요청을 인증하는 데 사용됩니다. 각 키에는 액세스 수준을 제어하기 위한 다양한 권한(모드)이 있을 수 있습니다. 키는 조직별로 다르며 Capgo 리소스에 대한 액세스 권한을 부여하므로 신중하게 관리해야 합니다.
 
-API keys are used to authenticate requests to the Capgo API. Each key can have different permissions (modes) to control access levels. Keys are organization-specific and should be managed carefully as they grant access to your Capgo resources.
+## 주요 모드
 
-## Key Modes
+- **읽기**: 데이터를 읽을 수만 있고 수정은 허용되지 않습니다.
+- **업로드**: 새 번들을 읽고 수정하고 업로드할 수 있습니다.
+- **쓰기**: 데이터 읽기, 수정 및 번들 업로드가 가능합니다.
+- **모두**: 모든 작업에 대한 전체 액세스 권한입니다.
 
-- **read**: Can only read data, no modifications allowed
-- **upload**: Can read, modify, and upload new bundles
-- **write**: Can read, modify data, and upload bundles
-- **all**: Full access to all operations
+키 모드는 단계별/점진적 스키마를 따릅니다. 업로드 키가 있고 쓰기 키를 생성하면 쓰기 키는 업로드 키가 할 수 있는 모든 작업을 수행할 수 있습니다.
+API 키 작동 방식을 더 잘 이해하려면 다음 다이어그램을 살펴보십시오.
 
-Key modes follow a stepped/gradual schema. If you have an upload key, and then you create a write key, the write key will be able to do everything that the upload key could.
-Please take a look at the following diagram to better understand how API keys work.
+<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="API 키 작동 방식을 설명하는 다이어그램" /><figcaption></figcaption></figure>
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="A diagram explaining how API key work" /><figcaption></figcaption></figure>
+## 권한이 제한된 하위 키
 
-## Subkeys with Limited Rights
+특정 앱이나 조직에 대한 액세스가 제한된 하위 키를 생성할 수 있습니다. 이는 특정 리소스에 대한 액세스를 제한하는 동시에 다른 리소스에 대한 작업은 허용하는 데 유용합니다. 이러한 제한 사항을 정의하려면 키를 생성할 때 `limited_to_apps` 및 `limited_to_orgs` 매개 변수를 사용하세요.
 
-You can create subkeys with limited access to specific apps or organizations. This is useful for restricting access to certain resources while still allowing operations on others. Use the `limited_to_apps` and `limited_to_orgs` parameters when creating a key to define these restrictions.
+## 암호화된 키
 
-## Security Best Practices
+보안 강화를 위해 **암호화된(해시된) API 키**를 생성할 수 있습니다. 암호화된 키를 생성하는 경우:
 
-1. **Principle of Least Privilege**: Always use the most restrictive mode that still allows your integration to function
-2. **Regular Rotation**: Rotate your API keys periodically
-3. **Secure Storage**: Store API keys securely and never commit them to version control
-4. **Monitoring**: Monitor API key usage and revoke any compromised keys immediately
-5. **Limited Subkeys**: Use subkeys with limited rights for specific integrations to minimize risk
+- 키는 데이터베이스에 저장되기 전에 SHA-256을 사용하여 해시됩니다.
+- **일반 키는 생성 응답에서 한 번만 반환됩니다** - 즉시 저장합니다.
+- 생성 후에는 키를 검색하거나 다시 볼 수 없습니다.
+- 암호화된 키를 분실한 경우 새 키를 만들어야 합니다.
 
-## Endpoints
+암호화를 활성화하려면 키를 생성할 때 `hashed: true` 매개변수를 사용하세요. 이는 프로덕션 환경에 권장되는 접근 방식입니다.
 
-### GET
+## 키 만료
+
+API 키에는 **만료 날짜**가 있어 키가 손상된 경우 노출 기간을 제한할 수 있습니다. 만료 날짜가 설정된 경우:
+
+- 지정된 날짜와 시간이 지나면 열쇠가 작동하지 않습니다.
+- 만료된 키를 사용한 요청은 오류와 함께 거부됩니다.
+- 만료된 키는 30일 후에 자동으로 정리됩니다.
+
+조직은 만료 정책을 시행할 수 있습니다.
+- **만료 필요**: 모든 API 키에는 만료 날짜가 있어야 합니다.
+- **최대 만료 기간**: 만료 날짜를 설정할 수 있는 기간을 제한합니다.
+
+## 보안 모범 사례
+
+1. **최소 권한의 원칙**: 항상 통합이 작동하도록 허용하는 가장 제한적인 모드를 사용하십시오.
+2. **암호화된 키 사용**: 데이터베이스 침해로부터 보호하기 위해 프로덕션용 해시 키를 생성합니다.
+3. **만료 날짜 설정**: 만료 날짜를 사용하여 키의 수명을 제한하세요.
+4. **정기 순환**: API 키를 주기적으로 순환합니다.
+5. **보안 저장소**: API 키를 안전하게 저장하고 버전 관리에 커밋하지 마세요.
+6. **모니터링**: API 키 사용을 모니터링하고 손상된 키를 즉시 취소합니다.
+7. **제한된 하위 키**: 특정 통합에 대해 제한된 권한이 있는 하위 키를 사용하여 위험을 최소화합니다.
+
+## 엔드포인트
+
+### 받기
 
 `https://api.capgo.app/apikey/`
 
-Retrieve all API keys associated with your account.
+귀하의 계정과 연결된 모든 API 키를 검색하세요.
 
-#### Response Type
+#### 응답 유형
 
 ```typescript
 interface ApiKey {
   created_at: string | null
   id: number
-  key: string
+  key: string | null  // null for encrypted keys
   mode: 'read' | 'write' | 'upload' | 'all'
   name: string
   updated_at: string | null
   user_id: string
   limited_to_apps?: string[]
   limited_to_orgs?: string[]
+  expires_at?: string | null  // ISO 8601 date, null means never expires
 }
-```
+```> **참고**: 암호화된 키의 경우 일반 키는 생성 중에 한 번만 표시되므로 GET 응답에서 `key` 필드는 `null`입니다.
 
-#### Example Request
+#### 요청 예시
 
 ```bash
 curl -H "authorization: your-api-key" https://api.capgo.app/apikey/
 ```
 
-#### Example Response
+#### 응답 예시
 
 ```json
 {
@@ -92,13 +115,13 @@ curl -H "authorization: your-api-key" https://api.capgo.app/apikey/
 }
 ```
 
-### POST
+### 포스트
 
 `https://api.capgo.app/apikey/`
 
-Create a new API key for a specific organization.
+특정 조직에 대한 새 API 키를 만듭니다.
 
-#### Query Parameters
+#### 요청 본문
 
 ```typescript
 interface ApiKeyCreate {
@@ -106,10 +129,12 @@ interface ApiKeyCreate {
   mode: 'read' | 'write' | 'upload' | 'all'
   limited_to_apps?: string[]
   limited_to_orgs?: string[]
+  hashed?: boolean       // Create an encrypted key (recommended for production)
+  expires_at?: string    // ISO 8601 date for key expiration
 }
 ```
 
-#### Example Request
+#### 요청 예시(표준 키)
 
 ```bash
 curl -X POST \
@@ -123,7 +148,22 @@ curl -X POST \
   https://api.capgo.app/apikey/
 ```
 
-#### Example Response
+#### 요청 예시(만료된 암호화 키)
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Secure CI Key",
+    "mode": "upload",
+    "hashed": true,
+    "expires_at": "2025-06-01T00:00:00Z"
+  }' \
+  https://api.capgo.app/apikey/
+```
+
+#### 응답 예(표준 키)
 
 ```json
 {
@@ -139,22 +179,40 @@ curl -X POST \
 }
 ```
 
-### DELETE
+#### 응답 예시(암호화된 키)
+
+```json
+{
+  "apikey": {
+    "id": 4,
+    "key": "ak_abc123...",
+    "mode": "upload",
+    "name": "Secure CI Key",
+    "created_at": "2024-02-12T00:00:00Z",
+    "user_id": "user_123",
+    "expires_at": "2025-06-01T00:00:00Z"
+  }
+}
+```
+
+> **중요**: 암호화된 키의 경우 이 응답의 `key` 값은 일반 키를 볼 수 있는 **유일한 시간**입니다. 즉시 안전한 장소에 저장하세요. 후속 GET 요청은 `key` 필드에 대해 `null`을 반환합니다.
+
+### 삭제
 
 `https://api.capgo.app/apikey/:id/`
 
-Delete an existing API key. Use this to revoke access immediately.
+기존 API 키를 삭제합니다. 즉시 액세스 권한을 취소하려면 이 옵션을 사용하세요.
 
-#### Parameters
-- `id`: The ID of the API key to delete (numeric identifier, not the key string itself)
+#### 매개변수
+- `id`: 삭제할 API 키의 ID(키 문자열 자체가 아닌 숫자 식별자)
 
-#### Example Request
+#### 요청 예시
 
 ```bash
 curl -X DELETE -H "authorization: your-api-key" https://api.capgo.app/apikey/1/
 ```
 
-#### Success Response
+#### 성공 응답
 
 ```json
 {
@@ -162,17 +220,17 @@ curl -X DELETE -H "authorization: your-api-key" https://api.capgo.app/apikey/1/
 }
 ```
 
-## Common Use Cases
+## 일반적인 사용 사례
 
-1. **CI/CD Integration**: Create read-only keys for CI pipelines to check deployment status
-2. **Deployment Automation**: Use upload mode keys for automated deployment scripts
-3. **Monitoring Tools**: Use read mode keys for external monitoring integrations
-4. **Admin Access**: Use all mode keys sparingly for administrative tools
-5. **Limited Access**: Create subkeys with limited rights to specific apps or organizations for third-party integrations
+1. **CI/CD 통합**: CI 파이프라인에 대한 읽기 전용 키를 생성하여 배포 상태 확인
+2. **배포 자동화**: 자동화된 배포 스크립트에 업로드 모드 키를 사용합니다.
+3. **모니터링 도구**: 외부 모니터링 통합을 위해 읽기 모드 키를 사용합니다.
+4. **관리자 액세스**: 관리 도구에 대해 모든 모드 키를 드물게 사용합니다.
+5. **제한된 액세스**: 타사 통합을 위해 특정 앱이나 조직에 대한 제한된 권한을 가진 하위 키를 만듭니다.
 
-## Error Handling
+## 오류 처리
 
-Common error scenarios and their responses:
+일반적인 오류 시나리오 및 대응:
 
 ```json
 // Invalid mode
@@ -192,4 +250,28 @@ Common error scenarios and their responses:
   "error": "Insufficient permissions to manage API keys",
   "status": "KO"
 }
-``` 
+
+// Expired API key used for authentication
+{
+  "error": "API key has expired",
+  "status": "KO"
+}
+
+// Invalid expiration date (in the past)
+{
+  "error": "Expiration date must be in the future",
+  "status": "KO"
+}
+
+// Organization requires expiration
+{
+  "error": "Organization policy requires an expiration date for API keys",
+  "status": "KO"
+}
+
+// Expiration exceeds organization limit
+{
+  "error": "Expiration date exceeds organization maximum of 90 days",
+  "status": "KO"
+}
+```

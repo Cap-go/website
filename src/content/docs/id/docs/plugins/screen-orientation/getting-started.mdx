@@ -1,33 +1,32 @@
 ---
-title: Getting Started
+title: Memulai
 description: >-
-  Learn how to install and use the Screen Orientation plugin to control and
-  detect device orientation in your Capacitor app.
+  Pelajari cara memasang dan menggunakan plugin Orientasi Layar untuk mengontrol
+  dan mendeteksi orientasi perangkat di aplikasi Capacitor Anda.
 sidebar:
   order: 2
 locale: id
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps, Aside } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Instal paket**
    <PackageManagers pkg="@capgo/capacitor-screen-orientation" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Sinkronisasi dengan proyek asli**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **iOS Configuration (optional)**
-   To detect physical device orientation using motion sensors on iOS, add to your `Info.plist`:
+3. **iOS Konfigurasi (opsional)**
+   Untuk mendeteksi orientasi perangkat fisik menggunakan sensor gerak di iOS, tambahkan ke `Info.plist` Anda:
    ```xml
    <key>NSMotionUsageDescription</key>
    <string>This app uses motion sensors to detect device orientation.</string>
    ```
 </Steps>
 
-## Basic Usage
+## Penggunaan Dasar
 
 ```typescript
 import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
@@ -51,12 +50,12 @@ const listener = await ScreenOrientation.addListener(
 );
 ```
 
-## Physical Orientation Detection
+## Deteksi Orientasi Fisik
 
-This plugin has a unique feature: it can detect the **true physical orientation** of the device using motion sensors, even when the user has enabled orientation lock on their device.
+Plugin ini memiliki fitur unik: plugin ini dapat mendeteksi **orientasi fisik sebenarnya** perangkat menggunakan sensor gerak, bahkan ketika pengguna telah mengaktifkan kunci orientasi pada perangkatnya.
 
 <Aside type="note">
-  The UI will still respect the user's orientation lock setting. Motion tracking allows you to know how the device is physically held, but the UI won't rotate if orientation lock is enabled.
+  UI akan tetap mengikuti pengaturan kunci orientasi pengguna. Pelacakan gerakan memungkinkan Anda mengetahui cara perangkat dipegang secara fisik, namun UI tidak akan berputar jika kunci orientasi diaktifkan.
 </Aside>
 
 ```typescript
@@ -87,26 +86,26 @@ if (lockStatus.locked) {
 await ScreenOrientation.stopOrientationTracking();
 ```
 
-## API Reference
+## API Referensi
 
-### orientation()
+### orientasi()
 
-Get the current screen orientation.
+Dapatkan orientasi layar saat ini.
 
 ```typescript
 const result = await ScreenOrientation.orientation();
 // Returns: { type: OrientationType }
 ```
 
-**OrientationType values:**
-- `'portrait-primary'` - Portrait, home button at bottom
-- `'portrait-secondary'` - Portrait, upside down
-- `'landscape-primary'` - Landscape, home button on right
-- `'landscape-secondary'` - Landscape, home button on left
+**Nilai Tipe Orientasi:**
+- `'potret-utama'` - Potret, tombol beranda di bagian bawah
+- `'potret-sekunder'` - Potret, terbalik
+- `'landscape-primary'` - Landscape, tombol beranda di sebelah kanan
+- `'lanskap-sekunder'` - Lanskap, tombol beranda di sebelah kiri
 
-### lock(options)
+### kunci (opsi)
 
-Lock the screen to a specific orientation.
+Kunci layar ke orientasi tertentu.
 
 ```typescript
 interface OrientationLockOptions {
@@ -117,25 +116,25 @@ interface OrientationLockOptions {
 await ScreenOrientation.lock({ orientation: 'landscape' });
 ```
 
-**OrientationLockType values:**
-- `'any'` - Any orientation
-- `'natural'` - Device's natural orientation
-- `'landscape'` - Any landscape mode
-- `'portrait'` - Any portrait mode
-- `'portrait-primary'` / `'portrait-secondary'`
-- `'landscape-primary'` / `'landscape-secondary'`
+**Nilai OrientationLockType:**
+- `'apa saja'` - Orientasi apa pun
+- `'alami'` - Orientasi alami perangkat
+- `'lanskap'` - Mode lanskap apa pun
+- `'potret'` - Mode potret apa pun
+- `'potret-primer'` / `'potret-sekunder'`
+- `'lanskap-primer'` / `'lanskap-sekunder'`
 
-### unlock()
+### buka kunci()
 
-Unlock the screen orientation.
+Buka kunci orientasi layar.
 
 ```typescript
 await ScreenOrientation.unlock();
 ```
 
-### startOrientationTracking(options?)
+### startOrientationTracking(pilihan?)
 
-Start tracking physical device orientation using motion sensors.
+Mulai lacak orientasi perangkat fisik menggunakan sensor gerak.
 
 ```typescript
 await ScreenOrientation.startOrientationTracking({
@@ -143,9 +142,9 @@ await ScreenOrientation.startOrientationTracking({
 });
 ```
 
-### stopOrientationTracking()
+### hentikanPelacakanOrientasi()
 
-Stop motion-based orientation tracking.
+Hentikan pelacakan orientasi berbasis gerakan.
 
 ```typescript
 await ScreenOrientation.stopOrientationTracking();
@@ -153,7 +152,7 @@ await ScreenOrientation.stopOrientationTracking();
 
 ### isOrientationLocked()
 
-Check if device orientation lock is enabled.
+Periksa apakah kunci orientasi perangkat diaktifkan.
 
 ```typescript
 const result = await ScreenOrientation.isOrientationLocked();
@@ -165,12 +164,12 @@ const result = await ScreenOrientation.isOrientationLocked();
 ```
 
 <Aside type="tip">
-  This method requires motion tracking to be active to work properly.
+  Metode ini memerlukan pelacakan gerak yang aktif agar dapat berfungsi dengan baik.
 </Aside>
 
-### addListener(eventName, callback)
+### addListener(nama kejadian, panggilan balik)
 
-Listen for orientation changes.
+Dengarkan perubahan orientasi.
 
 ```typescript
 const listener = await ScreenOrientation.addListener(
@@ -184,15 +183,15 @@ const listener = await ScreenOrientation.addListener(
 await listener.remove();
 ```
 
-### removeAllListeners()
+### hapusSemua Pendengar()
 
-Remove all event listeners.
+Hapus semua pendengar acara.
 
 ```typescript
 await ScreenOrientation.removeAllListeners();
 ```
 
-## Complete Example
+## Contoh Lengkap
 
 ```typescript
 import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
@@ -268,19 +267,19 @@ class OrientationManager {
 }
 ```
 
-## Platform Notes
+## Catatan Platform
 
 ### iOS
-- Uses Core Motion framework for physical orientation detection
-- Requires `NSMotionUsageDescription` in Info.plist for motion sensors
-- Full support for all orientation types
+- Menggunakan kerangka Core Motion untuk deteksi orientasi fisik
+- Membutuhkan `NSMotionUsageDescription` di Info.plist untuk sensor gerak
+- Dukungan penuh untuk semua jenis orientasi
 
 ### Android
-- Uses accelerometer sensor for physical orientation detection
-- No additional permissions required
-- Full support for all orientation types
+- Menggunakan sensor accelerometer untuk deteksi orientasi fisik
+- Tidak diperlukan izin tambahan
+- Dukungan penuh untuk semua jenis orientasi
 
 ### Web
-- Uses Screen Orientation API
-- Motion sensor detection is limited
-- Some browsers may not support all lock types
+- Menggunakan Orientasi Layar API
+- Deteksi sensor gerak terbatas
+- Beberapa browser mungkin tidak mendukung semua jenis kunci

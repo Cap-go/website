@@ -1,31 +1,33 @@
 ---
-locale: fr
-title: "Chiffrement"
-description: "How to encrypt your data with Chiffrement v2, secure your Application and ensure only you can Mise à jour your Utilisateurs with your Mises à jour"
-sidebar: 
+title: Encryption
+description: >-
+  Comment chiffrer vos données avec le chiffrement v2, sécuriser votre
+  application et vous assurer que vous seul pouvez mettre à jour vos
+  utilisateurs avec vos mises à jour
+sidebar:
   order: 5
+locale: fr
 ---
+Cette documentation explique comment migrer vers le système de chiffrement v2. Apprenez-en davantage sur le système de chiffrement v2 dans le [article de blog](/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing).
 
-This Documentation explains how to Migrer to the Chiffrement v2 system. Learn more À propos the Chiffrement v2 system in the [blog post](/blog/introducing-end-to-end-Sécurité-to-capacitor-updater-with-code-signing).
-
-## 1. Créer Key Pair
+## 1. Créer une paire de clés
 
 ```bash
 npx @capgo/cli key create
 ```
 
-:::Avertissement
-Store the private key securely. Never commit it to source control or share it with untrusted parties.
+:::warning
+Stockez la clé privée en toute sécurité. Ne le confiez jamais au contrôle de source et ne le partagez jamais avec des parties non fiables.
 :::
 
-This Commande:
-- Creates a Nouveau key pair in your Application
-- Removes the old key from your Capacitor config
-- Keeps old key files for backward compatibility
+Cette commande :
+- Crée une nouvelle paire de clés dans votre application
+- Supprime l'ancienne clé de votre configuration Capacitor
+- Conserve les anciens fichiers clés pour une compatibilité ascendante
 
-## 2. Mise à jour Capacitor Config
+## 2. Mettre à jour la configuration Capacitor
 
-When prompted "Do you want to setup encryption with the new channel in order to support old apps and facilitate the migration?", select yes. This adds a new `defaultChannel` option to your Capacitor config.
+Lorsque vous êtes invité à « Voulez-vous configurer le cryptage avec le nouveau canal afin de prendre en charge les anciennes applications et faciliter la migration ? », sélectionnez oui. Cela ajoute une nouvelle option `defaultChannel` à votre configuration Capacitor.
 
 ```ts
 // capacitor.config.ts
@@ -45,43 +47,43 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-## 3. Télécharger Bundle to Nouveau Canal
+## 3. Télécharger le bundle sur une nouvelle chaîne
 
 ```bash
 npx @capgo/cli bundle upload --channel encryption_v2
 ```
 
-## 4. Activer Self-Assignment
+## 4. Activer l'auto-affectation
 
-:::Attention
-Required for the `defaultChannel` option to work
+:::caution
+Requis pour que l'option `defaultChannel` fonctionne
 :::
 
 ```bash
 npx @capgo/cli channel set encryption_v2 --self-assign
 ```
 
-## 5. Télécharger to Old Canal
+## 5. Télécharger sur l'ancienne chaîne
 
 ```bash
 npx @capgo/cli bundle upload --channel production
 ```
 
-:::Conseil
-Capacitor config is never uploaded to Capgo
+:::tip
+La configuration Capacitor n'est jamais téléchargée sur Capgo
 :::
 
-## 6. Cleanup (After 3-4 Months)
+## 6. Nettoyage (après 3-4 mois)
 
-Once all Utilisateurs have updated their apps:
+Une fois que tous les utilisateurs ont mis à jour leurs applications :
 
-1. Remove `defaultChannel` from your Capacitor config
-2. Supprimer the old Canal:
+1. Supprimez `defaultChannel` de votre configuration Capacitor
+2. Supprimez l'ancienne chaîne :
 
 ```bash
 npx @capgo/cli channel delete encryption_v2
 ```
 
-:::Remarque
-Apps using `encryption_v2` as default will switch to `production` channel after deletion
+:::note
+Les applications utilisant `encryption_v2` par défaut passeront au canal `production` après la suppression.
 :::

@@ -1,18 +1,17 @@
 ---
-title: "Events"
-locale: ja
-description: "Capacitor Updaterプラグインで更新のステータスと進行状況を監視するためにリッスンできるすべてのイベント"
+title: Events
+description: 更新のステータスと進行状況を監視するための Capacitor Updater プラグインでリッスンできるすべてのイベント
 sidebar:
   order: 9
+locale: ja
 ---
-
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
-Capacitor Updaterプラグインは、更新プロセスを監視し、さまざまな状態に応答するためにリッスンできるいくつかのイベントを提供します。
+Capacitor Updater プラグインは、更新プロセスを監視し、さまざまな状態に応答するためにリッスンできるいくつかのイベントを提供します。
 
 ## イベントリスナーのセットアップ
 
-イベントをリッスンするには、`CapacitorUpdater`オブジェクトの`addListener`メソッドを使用します：
+イベントをリッスンするには、`CapacitorUpdater` オブジェクトの `addListener` メソッドを使用します。
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
@@ -33,7 +32,7 @@ await CapacitorUpdater.removeAllListeners();
 
 ### `download`
 
-バンドルのダウンロードプロセス中に発火します。ダウンロードの進行状況情報を提供します。
+バンドルのダウンロード プロセス中に発生します。ダウンロードの進行状況に関する情報を提供します。
 
 ```typescript
 CapacitorUpdater.addListener('download', (event) => {
@@ -43,16 +42,16 @@ CapacitorUpdater.addListener('download', (event) => {
 ```
 
 **イベントデータ:**
-- `percent`: number - ダウンロードの進行状況（パーセンテージ、0-100）
+- `percent`: 数値 - ダウンロードの進行状況のパーセンテージ (0 ～ 100)
 - `bundle`: BundleInfo - ダウンロード中のバンドルに関する情報
 
 <Aside>
-このイベントは、ダウンロード中に進行状況を報告するために複数回発火します。
+このイベントは、ダウンロード中に複数回発生して、進行状況を報告します。
 </Aside>
 
 ### `noNeedUpdate`
 
-更新の確認により、更新が不要であると判断されたときに発火します。
+更新のチェックで更新が必要ないと判断された場合に発生します。
 
 ```typescript
 CapacitorUpdater.addListener('noNeedUpdate', (event) => {
@@ -66,7 +65,7 @@ CapacitorUpdater.addListener('noNeedUpdate', (event) => {
 
 ### `updateAvailable`
 
-ダウンロード可能な新しい更新が利用可能なときに発火します。
+新しいアップデートがダウンロード可能になったときに発生します。
 
 ```typescript
 CapacitorUpdater.addListener('updateAvailable', (event) => {
@@ -77,11 +76,11 @@ CapacitorUpdater.addListener('updateAvailable', (event) => {
 ```
 
 **イベントデータ:**
-- `bundle`: BundleInfo - 利用可能な更新バンドルに関する情報
+- `bundle`: BundleInfo - 利用可能なアップデート バンドルに関する情報
 
 ### `downloadComplete`
 
-バンドルのダウンロードが正常に完了したときに発火します。
+バンドルのダウンロードが正常に完了すると発生します。
 
 ```typescript
 CapacitorUpdater.addListener('downloadComplete', (event) => {
@@ -96,7 +95,7 @@ CapacitorUpdater.addListener('downloadComplete', (event) => {
 
 ### `majorAvailable`
 
-メジャーアップデートが利用可能だが、自動更新設定によってブロックされているときに発火します。
+メジャー アップデートが利用可能であるが、自動アップデート設定によってブロックされている場合に発生します。
 
 ```typescript
 CapacitorUpdater.addListener('majorAvailable', (event) => {
@@ -106,15 +105,15 @@ CapacitorUpdater.addListener('majorAvailable', (event) => {
 ```
 
 **イベントデータ:**
-- `version`: string - メジャーアップデートのバージョン番号
+- `version`: string - メジャー アップデートのバージョン番号
 
 <Aside type="tip">
-メジャーアップデートは通常、ユーザーの確認またはアプリストアの更新が必要です。このイベントを使用して、ユーザーに適切に通知してください。
+メジャーアップデートでは通常、ユーザーの確認またはアプリストアのアップデートが必要です。このイベントを使用して、ユーザーに適切に通知します。
 </Aside>
 
 ### `updateFailed`
 
-次回のアプリ起動時に更新のインストールが失敗したときに発火します。
+次回のアプリ起動時にアップデートのインストールに失敗した場合に発生します。
 
 ```typescript
 CapacitorUpdater.addListener('updateFailed', (event) => {
@@ -129,7 +128,7 @@ CapacitorUpdater.addListener('updateFailed', (event) => {
 
 ### `downloadFailed`
 
-バンドルのダウンロードが失敗したときに発火します。
+バンドルのダウンロードが失敗したときに発生します。
 
 ```typescript
 CapacitorUpdater.addListener('downloadFailed', (event) => {
@@ -143,7 +142,7 @@ CapacitorUpdater.addListener('downloadFailed', (event) => {
 
 ### `appReloaded`
 
-アプリがリロードされたときに発火します。
+アプリがリロードされたときに発生します。
 
 ```typescript
 CapacitorUpdater.addListener('appReloaded', () => {
@@ -156,7 +155,7 @@ CapacitorUpdater.addListener('appReloaded', () => {
 
 ### `appReady`
 
-更新後にアプリが使用可能になったときに発火します。
+更新後にアプリを使用できる状態になったときに発生します。
 
 ```typescript
 CapacitorUpdater.addListener('appReady', (event) => {
@@ -168,15 +167,15 @@ CapacitorUpdater.addListener('appReady', (event) => {
 
 **イベントデータ:**
 - `bundle`: BundleInfo - 現在のバンドルに関する情報
-- `status`: string - 準備完了ステータス
+- `status`: 文字列 - 準備完了ステータス
 
 <Aside type="caution">
-自動ロールバックを防ぐために、設定されたタイムアウト（デフォルト10秒）内に`notifyAppReady()`を呼び出すことを忘れないでください。
+自動ロールバックを防ぐために、構成されたタイムアウト (デフォルトは 10 秒) 内に `notifyAppReady()` を必ず呼び出してください。
 </Aside>
 
-## BundleInfoオブジェクト
+## BundleInfo オブジェクト
 
-多くのイベントには、次のプロパティを持つ`BundleInfo`オブジェクトが含まれています：
+多くのイベントには、次のプロパティを持つ `BundleInfo` オブジェクトが含まれています。
 
 ```typescript
 interface BundleInfo {
@@ -188,19 +187,19 @@ interface BundleInfo {
 }
 ```
 
-Where `BundleStatus` can be:
-- `'success'` - Bundle downloaded successfully
-- `'error'` - Bundle download/installation failed
-- `'pending'` - Bundle is pending to be set as next
-- `'downloading'` - Bundle is currently downloading
+`BundleStatus` は次のとおりです。
+- `'success'` - バンドルは正常にダウンロードされました
+- `'error'` - バンドルのダウンロード/インストールが失敗しました
+- `'pending'` - バンドルは次のバンドルとして設定されるまで保留中です
+- `'downloading'` - バンドルは現在ダウンロード中です
 
-## 例：完全な更新フロー
+## 例: 完全な更新フロー
 
-イベントを使用して完全な更新フローを処理する例を以下に示します：
+イベントを使用して完全な更新フローを処理する例を次に示します。
 
 <Aside type="caution">
-この`UpdateManager`クラスには、自動更新フローに必要な`CapacitorUpdater.notifyAppReady()`呼び出しが含まれていません。
-詳細については、[notifyAppReady呼び出しを正しく配置する](/docs/plugins/updater/auto-update#placing-notifyappready-call-correctly)ドキュメントを参照してください。
+この `UpdateManager` クラスには、自動更新フローに必要な `CapacitorUpdater.notifyAppReady()` 呼び出しが含まれていません。
+詳細については、[notifyAppReady 呼び出しを正しく行う](/docs/plugins/updater/auto-update#placing-notifyappready-call-correctly) のドキュメントを参照してください。
 </Aside>
 
 ```typescript
@@ -279,14 +278,12 @@ export class UpdateManager {
 }
 ```
 
-## ベストプラクティス
+## ベストプラクティス1. **常に `notifyAppReady()`** を呼び出します。自動更新を使用する場合は、ロールバックを防ぐために、アプリの初期化後に必ずこのメソッドを呼び出します。
 
-1. **常に`notifyAppReady()`を呼び出す**: 自動更新を使用する場合、ロールバックを防ぐために、アプリの初期化後に常にこのメソッドを呼び出してください。
+2. **失敗を適切に処理します**: ダウンロードおよび更新の失敗に対する適切なエラー処理を実装します。
 
-2. **失敗を適切に処理する**: ダウンロードおよび更新の失敗に対する適切なエラー処理を実装してください。
+3. **ユーザー フィードバックの提供**: ダウンロード進行状況イベントを使用して、更新の進行状況をユーザーに表示します。
 
-3. **ユーザーフィードバックを提供する**: ダウンロード進行状況イベントを使用して、ユーザーに更新の進行状況を表示してください。
+4. **リスナーのクリーンアップ**: メモリ リークを防ぐために、不要になったイベント リスナーを削除します。
 
-4. **リスナーをクリーンアップする**: メモリリークを防ぐために、不要になったイベントリスナーを削除してください。
-
-5. **更新シナリオをテストする**: 失敗、ロールバック、メジャーアップデートを含むさまざまな更新シナリオをテストしてください。
+5. **更新シナリオのテスト**: 失敗、ロールバック、メジャー アップデートなどのさまざまな更新シナリオをテストします。

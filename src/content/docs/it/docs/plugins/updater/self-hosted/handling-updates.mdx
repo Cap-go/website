@@ -1,14 +1,11 @@
 ---
-
-title: "Update API Endpoint"
-description: "How to build your update server API endpoint to respond to Capgo plugin requests with proper bundle information and checksums"
+title: Aggiorna API endpoint
+description: ''
 sidebar:
   order: 6
 locale: it
 ---
-
-
-Here is an example of code in JavaScript to send an update to the plugin
+Ecco un esempio di codice in JavaScript per inviare un aggiornamento al plugin
 
 ```typescript
 interface AppInfos {
@@ -66,9 +63,9 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-## Response Format
+## Formato della risposta
 
-For **non-encrypted bundles**, your endpoint should return:
+Per i **pacchetti non crittografati**, l'endpoint dovrebbe restituire:
 
 ```json
 {
@@ -78,7 +75,7 @@ For **non-encrypted bundles**, your endpoint should return:
 }
 ```
 
-For **encrypted bundles**, you also need to include the session key:
+Per i **pacchetti crittografati**, devi includere anche la chiave di sessione:
 
 ```json
 {
@@ -89,7 +86,7 @@ For **encrypted bundles**, you also need to include the session key:
 }
 ```
 
-And if no update or error, add the `message` key and optionally an `error`:
+E se non ci sono aggiornamenti o errori, aggiungi la chiave `message` e facoltativamente un `error`:
 
 ```json
 {
@@ -99,15 +96,15 @@ And if no update or error, add the `message` key and optionally an `error`:
 }
 ```
 
-## Field Descriptions
+## Descrizioni dei campi
 
-- **`checksum`**: SHA256 hash of your bundle zip file for integrity verification
-- **`session_key`**: Required only for encrypted bundles - this is the `ivSessionKey` returned by the encrypt command
-- **`version`**: Version identifier in semver format
-- **`url`**: HTTPS URL where the bundle can be downloaded
+- **`checksum`**: hash SHA256 del file zip del pacchetto per la verifica dell'integrità
+- **`session_key`**: richiesto solo per i bundle crittografati: questo è il `ivSessionKey` restituito dal comando encrypt
+- **`version`**: identificatore di versione in formato semver
+- **`url`**: URL HTTPS dove è possibile scaricare il pacchetto
 
-## Bundle Creation
+## Creazione di pacchetti
 
-To learn how to create compatible bundles and generate checksums, see the [Auto Update documentation](/docs/plugin/self-hosted/auto-update/#generating-bundle-checksum).
+Per informazioni su come creare pacchetti compatibili e generare checksum, consultare la [documentazione sull'aggiornamento automatico](/docs/plugin/self-hosted/auto-update/#generating-bundle-checksum).
 
-For encrypted bundles, see the [Encrypted Bundles documentation](/docs/plugin/self-hosted/encrypted-bundles/) which explains the complete encryption workflow.
+Per i pacchetti crittografati, consulta la [documentazione sui pacchetti crittografati](/docs/plugin/self-hosted/encrypted-bundles/) che spiega il flusso di lavoro di crittografia completo.

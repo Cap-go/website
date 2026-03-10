@@ -1,26 +1,25 @@
 ---
-locale: fr
 title: Commencer
-description: Activer HealthKit and Health Connect access with the Capgo Health plugin.
-sidebar: 
+description: Activez l'accès à HealthKit et Health Connect avec le plugin Capgo Health.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Installer the plugin**
+1. **Installez le plugin**
    <PackageManagers pkg="@capgo/capacitor-health" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser Natif projects**
+2. **Synchroniser les projets natifs**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## iOS Configuration
+## iOSconfiguration
 
-- Open `ios/App/App.xcworkspace` in Xcode and enable the **HealthKit** capability.
-- Provide usage descriptions in `Info.plist`:
+- Ouvrez `ios/App/App.xcworkspace` dans Xcode et activez la fonctionnalité **HealthKit**.
+- Fournissez des descriptions d'utilisation dans `Info.plist` :
 
 ```xml
 <key>NSHealthShareUsageDescription</key>
@@ -29,15 +28,15 @@ import { PackageManagers } from 'starlight-package-managers'
 <string>This app writes health data that you explicitly record.</string>
 ```
 
-## Android Configuration
+## Androidconfiguration
 
-Health data is powered by [Health Connect](https://developer.Android.com/health-and-fitness/guides/health-connect). Make sure:
+Les données de santé sont alimentées par [Health Connect](https://developer.android.com/health-and-fitness/guides/health-connect). Assurez-vous :
 
-- `minSdkVersion` is **26 or higher** (Capacitor 5 already satisfies this).
-- Utilisateurs have Health Connect installed (Android 14+ Bundles it; earlier versions require a Play Store Télécharger).
-- You Guide Utilisateurs through the runtime permission UI when prompting for access.
+- `minSdkVersion` est **26 ou plus** (Capacitor 5 satisfait déjà à cela).
+- Les utilisateurs ont installé Health Connect (Android 14+ le regroupe ; les versions antérieures nécessitent un téléchargement Play Store).
+- Vous guidez les utilisateurs à travers l'interface utilisateur des autorisations d'exécution lorsque vous leur demandez l'accès.
 
-## Vérifier availability and request access
+## Vérifier la disponibilité et demander l'accès
 
 ```typescript
 import { Health } from '@capgo/capacitor-health';
@@ -54,7 +53,7 @@ await Health.requestAuthorization({
 });
 ```
 
-## Read samples
+## Lire des exemples
 
 ```typescript
 const { samples } = await Health.readSamples({
@@ -69,7 +68,7 @@ samples.forEach((sample) => {
 });
 ```
 
-## Write samples
+## Écrire des échantillons
 
 ```typescript
 await Health.saveSample({
@@ -79,8 +78,8 @@ await Health.saveSample({
 });
 ```
 
-## Authorization management
+## Gestion des autorisations
 
-- Use `checkAuthorization()` to verify current read/write scopes and adjust your UI.
-- Handle denials gracefully by explaining why the data enhances the experience and offering a retry.
-- Always respect the Utilisateur's privacy and only request the minimum scopes your Fonctionnalité requires.
+- Utilisez `checkAuthorization()` pour vérifier les étendues de lecture/écriture actuelles et ajuster votre interface utilisateur.
+- Gérez les refus avec élégance en expliquant pourquoi les données améliorent l'expérience et en proposant une nouvelle tentative.
+- Respectez toujours la vie privée de l'utilisateur et ne demandez que les étendues minimales requises par votre fonctionnalité.

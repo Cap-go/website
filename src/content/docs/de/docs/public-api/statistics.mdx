@@ -1,35 +1,35 @@
 ---
 title: Statistiken
 description: >-
-  Detaillierter Leitfaden zu Statistik-API-Endpoints, der Einblicke in monatlich
-  aktive Benutzer (MAU), Speicher und Bandbreitemetriken für Apps und Organisationen bietet.
+  Ausführlicher Leitfaden zur Statistik von API-Endpunkten, der Einblicke in
+  monatliche aktive Benutzer (MAU), Speicher und Bandbreitenmetriken für Apps
+  und Organisationen bietet.
 sidebar:
   order: 5
 locale: de
 ---
+Die Statistiken-Endpunkte bieten detaillierte Analysen zu Ihren Apps und Organisationen. Sie können monatlich aktive Benutzer (MAU), Speichernutzung und Bandbreitenverbrauch über verschiedene Zeiträume hinweg verfolgen. Diese Daten sind für die Überwachung des App-Wachstums, der Ressourcennutzung und der Planungskapazität unerlässlich.
 
-Die Statistik-Endpoints bieten detaillierte Analysen über Ihre Apps und Organisationen. Sie können monatlich aktive Benutzer (MAU), Speichernutzung und Bandbreitenverbrauch über verschiedene Zeiträume verfolgen. Diese Daten sind wichtig zum Überwachen des App-Wachstums, der Ressourcennutzung und der Kapazitätsplanung.
+## Die Metriken verstehen
 
-## Metriken verstehen
+- **MAU (monatlich aktive Benutzer)**: Anzahl der eindeutigen Geräte, die in den letzten 30 Tagen auf Ihre App zugegriffen haben
+- **Speicher**: Gesamtgröße aller gespeicherten Bundles und Ressourcen in Bytes
+- **Bandbreite**: Gesamtdatenübertragung für Bundle-Downloads in Bytes
 
-- **MAU (Monatlich aktive Benutzer)**: Anzahl der eindeutigen Geräte, die Ihre App in den letzten 30 Tagen verwendet haben
-- **Speicher**: Gesamtgröße aller in Bytes gespeicherten Bundles und Ressourcen
-- **Bandbreite**: Gesamte Datenübertragung für Bundle-Downloads in Bytes
+## Bewährte Methoden
 
-## Best Practices
+1. **Regelmäßige Überwachung**: Überprüfen Sie die Statistiken regelmäßig, um Wachstum und Nutzungsmuster zu verfolgen
+2. **Ressourcenplanung**: Verwenden Sie Speicher- und Bandbreitenmetriken für die Kapazitätsplanung
+3. **Benutzerengagement**: Verfolgen Sie MAU, um Trends beim Benutzerengagement zu verstehen
+4. **Kostenmanagement**: Überwachen Sie die Ressourcennutzung, um die Kosten zu optimieren
 
-1. **Regelmäßige Überwachung**: Überprüfen Sie regelmäßig Statistiken, um Wachstum und Nutzungsmuster zu verfolgen
-2. **Ressourcenplanung**: Verwenden Sie Speicher- und Bandbreitemetriken für die Kapazitätsplanung
-3. **Benutzerengagement**: Verfolgen Sie MAU, um Benutzerengagement-Trends zu verstehen
-4. **Kostenmanagement**: Überwachen Sie die Ressourcennutzung, um Kosten zu optimieren
-
-## Endpoints
+## Endpunkte
 
 ### GET /statistics/app/:app_id/
 
-Rufen Sie Statistiken für eine bestimmte App ab. Dieser Endpoint ist nützlich zum Überwachen der Leistung einzelner Apps.
+Rufen Sie Statistiken für eine bestimmte App ab. Dieser Endpunkt ist nützlich für die Überwachung der Leistung einzelner Apps.
 
-#### Query Parameters
+#### Abfrageparameter
 
 ```typescript
 interface StatsQuery {
@@ -38,14 +38,14 @@ interface StatsQuery {
 }
 ```
 
-#### Example Request
+#### Beispielanfrage
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/statistics/app/com.demo.app/?from=2024-01-01&to=2024-02-01"
 ```
 
-#### Example Response
+#### Beispielantwort
 
 ```json
 [
@@ -66,9 +66,9 @@ curl -H "authorization: your-api-key" \
 
 ### GET /statistics/org/:org_id/
 
-Get statistics for a specific organization. Useful for monitoring organization-level usage.
+Rufen Sie Statistiken für eine bestimmte Organisation ab. Nützlich für die Überwachung der Nutzung auf Organisationsebene.
 
-#### Query Parameters
+#### Abfrageparameter
 
 ```typescript
 interface StatsQuery {
@@ -79,14 +79,14 @@ interface StatsQuery {
 }
 ```
 
-#### Example Request
+#### Beispielanfrage
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/statistics/org/046a36ac-e03c-4590-9257-bd6c9dba9ee8/?from=2024-01-01&to=2024-02-01"
 ```
 
-#### Example Response
+#### Beispielantwort
 
 ```json
 [
@@ -107,9 +107,9 @@ curl -H "authorization: your-api-key" \
 
 ### GET /statistics/user/
 
-Get aggregated statistics across all organizations you have access to. Perfect for overall usage monitoring.
+Erhalten Sie aggregierte Statistiken für alle Organisationen, auf die Sie Zugriff haben. Perfekt für die allgemeine Nutzungsüberwachung.
 
-#### Query Parameters
+#### Abfrageparameter
 
 ```typescript
 interface StatsQuery {
@@ -118,14 +118,14 @@ interface StatsQuery {
 }
 ```
 
-#### Example Request
+#### Beispielanfrage
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/statistics/user/?from=2024-01-01&to=2024-02-01"
 ```
 
-#### Example Response
+#### Beispielantwort
 
 ```json
 [
@@ -146,9 +146,9 @@ curl -H "authorization: your-api-key" \
 
 ### GET /statistics/app/:app_id/bundle_usage
 
-Get bundle usage statistics for a specific app, showing the distribution of versions among users over a specified period.
+Erhalten Sie Bundle-Nutzungsstatistiken für eine bestimmte App, die die Verteilung von Bundles (Versionen) unter Benutzern über einen bestimmten Zeitraum anzeigen.
 
-#### Query Parameters
+#### Abfrageparameter
 
 ```typescript
 interface BundleUsageQuery {
@@ -157,14 +157,14 @@ interface BundleUsageQuery {
 }
 ```
 
-#### Example Request
+#### Beispielanfrage
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/statistics/app/com.demo.app/bundle_usage?from=2024-01-01&to=2024-02-01"
 ```
 
-#### Example Response
+#### Beispielantwort
 
 ```json
 {
@@ -182,9 +182,9 @@ curl -H "authorization: your-api-key" \
 }
 ```
 
-## Error Handling
+## Fehlerbehandlung
 
-Common error scenarios and their responses:
+Häufige Fehlerszenarien und ihre Antworten:
 
 ```json
 // Invalid body
@@ -218,18 +218,18 @@ Common error scenarios and their responses:
 }
 ```
 
-## Common Use Cases
+## Häufige Anwendungsfälle
 
-1. **Growth Tracking**: Monitor MAU growth over time
-2. **Resource Optimization**: Track storage and bandwidth usage to optimize costs
-3. **Capacity Planning**: Use trends to plan for future resource needs
-4. **Usage Reports**: Generate periodic usage reports for stakeholders
-5. **Version Distribution Analysis**: Understand how users are distributed across different app versions with bundle usage statistics
+1. **Wachstumsverfolgung**: Überwachen Sie das MAU-Wachstum im Laufe der Zeit
+2. **Ressourcenoptimierung**: Verfolgen Sie die Speicher- und Bandbreitennutzung, um die Kosten zu optimieren
+3. **Kapazitätsplanung**: Nutzen Sie Trends, um den zukünftigen Ressourcenbedarf zu planen
+4. **Nutzungsberichte**: Erstellen Sie regelmäßige Nutzungsberichte für Stakeholder
+5. **Bundle (version) Distribution Analysis**: Understand how users are distributed across different app bundles (versions) with bundle usage statistics
 
-## Tips for Analysis
+## Tipps zur Analyse
 
-1. **Compare Periods**: Look at month-over-month or year-over-year trends
-2. **Track Ratios**: Monitor bandwidth per user or storage per app
-3. **Set Alerts**: Create alerts for unusual spikes in usage
-4. **Regular Backups**: Export statistics regularly for historical analysis
-5. **Version Adoption**: Use bundle usage to track adoption rates of new versions
+1. **Zeiträume vergleichen**: Sehen Sie sich die Trends im Monats- oder Jahresvergleich an
+2. **Track-Verhältnisse**: Überwachen Sie die Bandbreite pro Benutzer oder Speicher pro App
+3. **Benachrichtigungen festlegen**: Erstellen Sie Benachrichtigungen für ungewöhnliche Nutzungsspitzen
+4. **Regelmäßige Backups**: Exportieren Sie regelmäßig Statistiken zur historischen Analyse
+5. **Bundle-(Versions-)Annahme**: Verwenden Sie die Bundle-Nutzung, um die Akzeptanzraten neuer Bundles (Versionen) zu verfolgen.

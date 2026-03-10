@@ -1,28 +1,25 @@
 ---
-title: "快速入门"
-description: >-
-  Learn how to install and use the Screen Recorder plugin to capture screen
-  recordings in your Capacitor app.
+title: 入门
+description: 了解如何安装和使用屏幕录像机插件在 Capacitor 应用程序中捕获屏幕录像。
 sidebar:
   order: 2
 locale: zh
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **安装软件包**
    <PackageManagers pkg="@capgo/capacitor-screen-recorder" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **与原生项目同步**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure permissions**
+3. **配置权限**
    
    ### iOS
-   Add usage descriptions to your `Info.plist`:
+   将使用说明添加到您的 `Info.plist` 中：
    ```xml
    <key>NSMicrophoneUsageDescription</key>
    <string>To record audio with screen recording</string>
@@ -31,7 +28,7 @@ import { PackageManagers } from 'starlight-package-managers'
    ```
    
    ### Android
-   Add permissions to your `AndroidManifest.xml`:
+   向您的 `AndroidManifest.xml` 添加权限：
    ```xml
    <uses-permission android:name="android.permission.RECORD_AUDIO" />
    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -39,9 +36,9 @@ import { PackageManagers } from 'starlight-package-managers'
    ```
 </Steps>
 
-## Usage
+## 用法
 
-Import the plugin and use its methods to record the screen:
+导入插件并使用其方法来录制屏幕：
 
 ```typescript
 import { ScreenRecorder } from '@capgo/capacitor-screen-recorder';
@@ -82,19 +79,19 @@ const checkRecordingStatus = async () => {
 };
 ```
 
-## API Reference
+## API 参考
 
-### start()
+### 开始()
 
-Starts screen recording.
+开始屏幕录制。
 
 ```typescript
 await ScreenRecorder.start();
 ```
 
-### stop()
+### 停止（）
 
-Stops recording and returns the video file path.
+停止录制并返回视频文件路径。
 
 ```typescript
 interface RecordingResult {
@@ -106,7 +103,7 @@ const result = await ScreenRecorder.stop();
 
 ### isSupported()
 
-Checks if screen recording is supported on the device.
+检查设备是否支持屏幕录制。
 
 ```typescript
 const { value } = await ScreenRecorder.isSupported();
@@ -115,16 +112,16 @@ const { value } = await ScreenRecorder.isSupported();
 
 ### isRecording()
 
-Checks if screen recording is currently active.
+检查屏幕录制当前是否处于活动状态。
 
 ```typescript
 const { value } = await ScreenRecorder.isRecording();
 // Returns: { value: boolean }
 ```
 
-## Advanced Usage
+## 高级用法
 
-### Recording with Options
+### 使用选项进行录制
 
 ```typescript
 // iOS-specific options
@@ -139,7 +136,7 @@ const startWithOptions = async () => {
 };
 ```
 
-### Complete Recording Flow
+### 完整的录音流程
 
 ```typescript
 import { ScreenRecorder } from '@capgo/capacitor-screen-recorder';
@@ -205,9 +202,9 @@ export class RecordingService {
 }
 ```
 
-## Best Practices
+## 最佳实践
 
-1. **Check support before use**
+1. **使用前检查支持**
    ```typescript
    const { value } = await ScreenRecorder.isSupported();
    if (!value) {
@@ -215,11 +212,11 @@ export class RecordingService {
    }
    ```
 
-2. **Handle permissions properly**
-   On iOS, the system will automatically prompt for permission. On Android, ensure you request necessary permissions.
+2. **正确处理权限**
+   在iOS上，系统会自动提示权限。在 Android 上，确保您请求必要的权限。
 
-3. **Provide user feedback**
-   Show clear indicators when recording is active:
+3. **提供用户反馈**
+   录音处于活动状态时显示清晰的指示符：
    ```typescript
    let recordingInterval: any;
    
@@ -238,7 +235,7 @@ export class RecordingService {
    };
    ```
 
-4. **Handle interruptions**
+4. **处理中断**
    ```typescript
    import { App } from '@capacitor/app';
    
@@ -253,37 +250,37 @@ export class RecordingService {
    });
    ```
 
-## Platform Notes
+## 平台说明
 
 ### iOS
-- Requires iOS 11.0+
-- Uses `ReplayKit` framework
-- System shows recording indicator in status bar
-- User must confirm recording start
+- 需要 iOS 11.0+
+- 使用`ReplayKit`框架
+- 系统在状态栏中显示录音指示器
+- 用户必须确认录音开始
 
 ### Android
-- Requires Android 5.0 (API 21)+
-- Uses `MediaProjection` API
-- Shows notification during recording
-- Some devices may have manufacturer-specific limitations
+- 需要 Android 5.0 (API 21)+
+- 使用 `MediaProjection` API
+- 录制期间显示通知
+- 某些设备可能具有制造商特定的限制
 
-### Web
-- Not supported on web platform
-- Will return `isSupported: false`
+### 网络
+- 不支持网络平台
+- 将返回 `isSupported: false`
 
-## Troubleshooting
+## 故障排除
 
-1. **Recording fails to start**
-   - Ensure all permissions are granted
-   - Check if another app is already recording
-   - Verify device supports screen recording
+1. **录音无法开始**
+   - 确保授予所有权限
+   - 检查另一个应用程序是否已经在录制
+   - 验证设备支持屏幕录制
 
-2. **No audio in recording**
-   - Check microphone permissions
-   - Ensure `recordAudio` option is enabled
-   - Some devices may not support system audio recording
+2. **录音中没有声音**
+   - 检查麦克风权限
+   - 确保启用 `recordAudio` 选项
+   - 部分设备可能不支持系统录音
 
-3. **Video file not found**
-   - Check file permissions
-   - Ensure sufficient storage space
-   - Verify the returned video URL is valid
+3. **找不到视频文件**
+   - 检查文件权限
+   - 确保足够的存储空间
+   - 验证返回的视频URL是否有效

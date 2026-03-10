@@ -1,52 +1,53 @@
 ---
-locale: fr
-title: Azure DevOps Integration
-description: "Learn how to integrate Capgo Mises à jour en direct with Azure DevOps Pipelines for automated Déploiement of your Application Mises à jour."
-sidebar: 
+title: Azure DevOps Intégration
+description: >-
+  Découvrez comment intégrer Capgo Live Updates avec Azure DevOps Pipelines pour
+  un déploiement automatisé des mises à jour de votre application.
+sidebar:
   order: 1
+locale: fr
 ---
-
 import { Aside, Steps } from '@astrojs/starlight/components';
 
-Integrate Capgo Mises à jour en direct with Azure DevOps Pipelines to automatically Déployer your Application Mises à jour whenever you Pousser code changes. This Guide covers setting up automated builds, Test, and Déploiement workflows.
+Intégrez Capgo Live Updates avec Azure DevOps Pipelines pour déployer automatiquement les mises à jour de votre application chaque fois que vous apportez des modifications au code. Ce guide couvre la configuration des flux de travail automatisés de génération, de test et de déploiement.
 
-## Prerequisites
+## Prérequis
 
-Before setting up Azure DevOps integration, ensure you have:
+Avant de configurer l'intégration Azure DevOps, assurez-vous d'avoir :
 
-- An Azure DevOps Organisation and project
-- A Capgo Compte with an Application configured
-- Your Application's source code in an Azure Repos Git repository
-- Node.js and npm/yarn configured in your project
+- Une organisation et un projet Azure DevOps
+- Un compte Capgo avec une application configurée
+- Le code source de votre application dans un référentiel Azure Repos Git
+- Node.js et npm/fil configurés dans votre projet
 
-## Setting Up Azure DevOps Pipeline
+## Configuration du pipeline Azure DevOps
 
-### Step 1: Créer Pipeline Variables
+### Étape 1 : Créer des variables de pipeline
 
-First, set up the necessary variables in your Azure DevOps project:
+Tout d’abord, configurez les variables nécessaires dans votre projet Azure DevOps :
 
 <Steps>
 
-1. Navigate to your Azure DevOps project
-2. Go to **Pipelines** → **Library** → **Variable groups**
-3. Create a new variable group named `Capgo-Variables`
-4. Ajouter the following variables:
+1. Accédez à votre projet Azure DevOps
+2. Accédez à **Pipelines** → **Bibliothèque** → **Groupes de variables**.
+3. Créez un nouveau groupe de variables nommé `Capgo-Variables`
+4. Ajoutez les variables suivantes :
 
 </Steps>
 
-| Variable Name | Value | Secure |
-|---------------|-------|---------|
-| `CAPGO_TOKEN` | Your Capgo API token | ✅ Yes |
+| Nom de la variable | Valeur | Sécurisé |
+|---------------|-------|--------------|
+| `CAPGO_TOKEN` | Votre jeton Capgo API | ✅ Oui |
 
 <Aside type="tip">
 
-Get your Capgo API token from [console.capgo.app/apikeys](https://console.capgo.app/apikeys). Your app ID is already configured in your `capacitor.config.ts` file.
+Obtenez votre jeton Capgo API sur [console.capgo.app/apikeys](https://console.capgo.app/apikeys). Votre identifiant d'application est déjà configuré dans votre fichier `capacitor.config.ts`.
 
 </Aside>
 
 ## Simple
 
-Basic Configuration that deploys to Production on every Pousser to the main branch:
+Configuration de base qui se déploie en production à chaque poussée vers la branche principale :
 
 ```yaml
 # Simple Azure DevOps Pipeline for Capgo Live Updates
@@ -82,11 +83,11 @@ jobs:
         displayName: 'Deploy to Capgo'
 ```
 
-## Advanced
+## Avancé
 
-### Fonctionnalité Branch Deployments
+### Déploiements de branches de fonctionnalités
 
-Déployer Fonctionnalité branches to Test Canaux for review and Test:
+Déployez des branches de fonctionnalités pour tester les canaux à des fins d'examen et de test :
 
 ```yaml
 # Feature branch deployment
@@ -127,22 +128,22 @@ jobs:
 
 <Aside type="tip">
 
-**Testing with Channels**: After deploying to a feature channel, you can test the update in your app by configuring it to use that specific channel. Learn more about [configuring channels in your app](/docs/live-updates/channels/#configuring-the-channel-in-your-app).
+**Test avec les canaux** : après le déploiement sur un canal de fonctionnalités, vous pouvez tester la mise à jour dans votre application en la configurant pour utiliser ce canal spécifique. En savoir plus sur la [configuration des canaux dans votre application](/docs/live-updates/channels/#configuring-the-channel-in-your-app).
 
 </Aside>
 
-### Using Chiffrement
+### Utilisation du cryptage
 
-If you're using [Capgo's Chiffrement Fonctionnalité](/docs/live-Mises à jour/Chiffrement/), you'll need to store your private key securely in your CI/CD environment.
+Si vous utilisez la [fonctionnalité de chiffrement de Capgo](/docs/live-updates/encryption/), vous devrez stocker votre clé privée en toute sécurité dans votre environnement CI/CD.
 
-After [setting up Chiffrement keys](/docs/live-Mises à jour/Chiffrement/#setting-up-Chiffrement) locally, Ajouter your private key to Azure DevOps variables:
+Après avoir [configuré les clés de chiffrement](/docs/live-updates/encryption/#setting-up-encryption) localement, ajoutez votre clé privée aux variables Azure DevOps :
 
 ```shell
 # Display your private key content (copy this output)
 cat .capgo_key_v2
 ```
 
-Add this content as `CAPGO_PRIVATE_KEY` in your Azure DevOps variable group (mark as secret), then use it in pipelines:
+Ajoutez ce contenu sous le nom `CAPGO_PRIVATE_KEY` dans votre groupe de variables Azure DevOps (marquez comme secret), puis utilisez-le dans les pipelines :
 
 ```yaml
 # Deploy with encryption
@@ -154,18 +155,18 @@ Add this content as `CAPGO_PRIVATE_KEY` in your Azure DevOps variable group (mar
 
 <Aside type="caution">
 
-**Security Best Practices:**
-- Never commit the `.capgo_key_v2` file to version control
-- Store the private key only in secure CI/CD secret management
-- Use different keys for different environments
+**Meilleures pratiques de sécurité :**
+- Ne validez jamais le fichier `.capgo_key_v2` dans le contrôle de version
+- Stockez la clé privée uniquement dans la gestion sécurisée des secrets CI/CD
+- Utilisez différentes clés pour différents environnements
 
 </Aside>
 
-### Multi-Canal Configuration
+### Configuration multicanal
 
-For comprehensive Information À propos setting up and managing multiple Déploiement Canaux, see the [Canaux Documentation](/docs/live-Mises à jour/Canaux/).
+Pour obtenir des informations complètes sur la configuration et la gestion de plusieurs canaux de déploiement, consultez la [Documentation des canaux](/docs/live-updates/channels/).
 
-Terminé Configuration with multiple environments and Tirer request deployments:
+Configuration complète avec plusieurs environnements et déploiements de pull request :
 
 ```yaml
 # Advanced Azure DevOps Pipeline with Multiple Channels
@@ -284,9 +285,9 @@ stages:
                   displayName: 'Deploy to Production'
 ```
 
-### Multi-Environment Déploiement
+### Déploiement multi-environnements
 
-For complex scenarios with multiple environments:
+Pour les scénarios complexes avec plusieurs environnements :
 
 ```yaml
 # Extended pipeline with multiple environments
@@ -367,9 +368,9 @@ stages:
                     channel: 'production'
 ```
 
-### Déploiement Template (Déployer-steps.yml)
+### Modèle de déploiement (deploy-steps.yml)
 
-Create a reusable template file `deploy-steps.yml`:
+Créez un fichier modèle réutilisable `deploy-steps.yml` :
 
 ```yaml
 # deploy-steps.yml
@@ -401,9 +402,9 @@ steps:
     displayName: 'Upload to Capgo (${{ parameters.channel }})'
 ```
 
-### Branch-Based Déploiement Strategy
+### Stratégie de déploiement basée sur les succursales
 
-Configure different Déploiement strategies based on Git branches:
+Configurez différentes stratégies de déploiement basées sur les branches Git :
 
 ```yaml
 trigger:
@@ -464,24 +465,22 @@ stages:
                     channel: '$(targetChannel)'
 ```
 
-## Sécurité Best Practices
+## Bonnes pratiques de sécurité
 
-### Secure Variable Management
+### Gestion sécurisée des variables
 
-<Steps>
-
-1. **Use Variable Groups**: Store sensitive data in Azure DevOps variable groups
-2. **Mark as Secret**: Always mark API tokens and keys as secret variables
-3. **Scope Access**: Limit variable group access to specific pipelines and Utilisateurs
-4. **Rotate Keys**: Regularly rotate your Capgo API tokens
+<Steps>1. **Utiliser des groupes de variables** : stockez les données sensibles dans des groupes de variables Azure DevOps
+2. **Marquer comme secret** : marquez toujours les jetons et les clés API comme variables secrètes.
+3. **Scope Access** : limiter l'accès aux groupes de variables à des pipelines et des utilisateurs spécifiques
+4. **Rotation des clés** : faites régulièrement pivoter vos jetons Capgo API
 
 </Steps>
 
-## Monitoring and Notifications
+## Surveillance et notifications
 
-### Teams Integration
+### Intégration des équipes
 
-Ajouter Microsoft Teams notifications to your pipeline:
+Ajoutez des notifications Microsoft Teams à votre pipeline :
 
 ```yaml
 - task: ms-teams-deploy-card@1.4.1
@@ -503,9 +502,9 @@ Ajouter Microsoft Teams notifications to your pipeline:
     themeColor: 'FF0000'
 ```
 
-### Email Notifications
+### Notifications par e-mail
 
-Configure email notifications for Déploiement status:
+Configurez les notifications par e-mail pour l'état du déploiement :
 
 ```yaml
 - task: EmailReport@1
@@ -526,7 +525,7 @@ Configure email notifications for Déploiement status:
 
 ### Problèmes courants
 
-**Pipeline fails with "Capgo CLI not found":**
+**Le pipeline échoue avec « Capgo CLI introuvable » :**
 ```yaml
 # Ensure global installation
 - script: |
@@ -535,7 +534,7 @@ Configure email notifications for Déploiement status:
   displayName: 'Install and verify Capgo CLI'
 ```
 
-**Authentication errors:**
+**Erreurs d'authentification :**
 ```yaml
 # Verify token is correctly set
 - script: |
@@ -549,7 +548,7 @@ Configure email notifications for Déploiement status:
     CAPGO_TOKEN: $(CAPGO_TOKEN)
 ```
 
-**Build artifacts not found:**
+**Artéfacts de construction introuvables :**
 ```yaml
 # List available artifacts for debugging
 - script: |
@@ -558,9 +557,9 @@ Configure email notifications for Déploiement status:
   displayName: 'Debug artifacts'
 ```
 
-### Débogage Pipeline
+### Pipeline de débogage
 
-Ajouter Débogage steps to troubleshoot issues:
+Ajoutez des étapes de débogage pour résoudre les problèmes :
 
 ```yaml
 - script: |
@@ -574,11 +573,11 @@ Ajouter Débogage steps to troubleshoot issues:
   displayName: 'Debug Capgo App Status'
 ```
 
-## Suivant Steps
+## Prochaines étapes
 
-- Learn À propos [Canaux](/docs/live-Mises à jour/Canaux/) to manage different Déploiement environments
-- Explore [Custom Storage](/docs/live-Mises à jour/custom-storage/) for advanced Déploiement scenarios
-- Set up [Chiffrement](/docs/live-Mises à jour/Chiffrement/) for secure deployments
-- Configure [Mise à jour Behavior](/docs/live-Mises à jour/Mise à jour-behavior/) to customize how Mises à jour are applied
+- Découvrez les [Canaux](/docs/live-updates/channels/) pour gérer différents environnements de déploiement
+- Explorez [Custom Storage](/docs/live-updates/custom-storage/) pour des scénarios de déploiement avancés
+- Configurer le [Chiffrement](/docs/live-updates/encryption/) pour des déploiements sécurisés
+- Configurez [Comportement de mise à jour] (/docs/live-updates/update-behavior/) pour personnaliser la façon dont les mises à jour sont appliquées
 
-With Azure DevOps integration, you can automate your Capgo deployments and ensure consistent, reliable Mises à jour to your mobile Application Utilisateurs.
+Avec l'intégration Azure DevOps, vous pouvez automatiser vos déploiements Capgo et garantir des mises à jour cohérentes et fiables pour les utilisateurs de vos applications mobiles.

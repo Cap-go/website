@@ -1,23 +1,24 @@
 ---
-locale: fr
 title: Commencer
-description: Render HTML and remote pages into PDFs with the Capgo PDF Generator plugin.
-sidebar: 
+description: >-
+  Convertissez HTML et les pages distantes en PDF avec le plugin Capgo PDF
+  Generator.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Installer the plugin**
+1. **Installez le plugin**
    <PackageManagers pkg="@capgo/capacitor-pdf-generator" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser platforms**
+2. **Plateformes de synchronisation**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Generate from HTML
+## Générer à partir de HTML
 
 ```typescript
 import { PdfGenerator } from '@capgo/capacitor-pdf-generator';
@@ -47,7 +48,7 @@ if (pdf.type === 'base64') {
 }
 ```
 
-## Capture a remote URL
+## Capturer une URL distante
 
 ```typescript
 await PdfGenerator.fromURL({
@@ -59,9 +60,9 @@ await PdfGenerator.fromURL({
 });
 ```
 
-## Tips
+## Conseils
 
-- Include inline CSS in your HTML string or provide a `baseUrl` so relative assets resolve correctly.
-- When returning base64 data on mobile, move it to the filesystem (e.g., Capacitor Filesystem) before sharing.
-- landscape orientation is ideal for wide tables, while portrait fits most documents.
-- Consider using scoped CSS fonts (e.g., system fonts) for consistent rendering across platforms.
+- Incluez du CSS en ligne dans votre chaîne HTML ou fournissez un `baseUrl` pour que les actifs relatifs soient résolus correctement.
+- Lorsque vous renvoyez des données base64 sur mobile, déplacez-les vers le système de fichiers (par exemple, Capacitor Filesystem) avant de les partager.
+- l'orientation paysage est idéale pour les tableaux larges, tandis que l'orientation portrait s'adapte à la plupart des documents.
+- Envisagez d'utiliser des polices CSS étendues (par exemple, des polices système) pour un rendu cohérent sur toutes les plateformes.

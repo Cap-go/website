@@ -1,52 +1,54 @@
 ---
+title: Guide de migration vers la version 7
+description: >-
+  Guide de migration des versions antérieures vers la V7 de
+  @capgo/capacitor-social-login
+sidebar:
+  order: 4
 locale: fr
-title: V7 Migration Guide
-description: Guide for migrating from earlier versions to V7 of @capgo/capacitor-social-Connexion
-sidebar: 
-    order: 4
 ---
 import { Steps } from '@astrojs/starlight/components';
 
-## Introduction
+##Présentation
 
-:::Attention
-This guide is for the `V1`/`V7` version of the plugin for people who were still using this plugin with the `0.x.x` version.
+:::caution
+Ce guide concerne la version `V1`/`V7` du plugin pour les personnes qui utilisaient encore ce plugin avec la version `0.x.x`.
 :::
 
-This Guide will cover the following:
+Ce guide couvrira les éléments suivants :
 
-- Migrating to the V1 version from the `main` version
-- Migrating to the V1 version from the `development` version
+- Migration vers la version V1 à partir de la version `main`
+- Migration vers la version V1 à partir de la version `development`
 
-## Important changes in V1
+## Changements importants dans la V1
 
-V1 is just a port of the development version into main. It does, however, include a lot of important changes that are not available in the `main` V0 version. Those changes include:
+La V1 n'est qu'un portage de la version de développement vers main. Il inclut cependant de nombreux changements importants qui ne sont pas disponibles dans la version `main` V0. Ces changements incluent :
 
-- Access scopes for Google Connexion
-- Offline mode for Google Connexion
-- Unification of the different implementations
-  - Extensive Test was conducted to ensure that all implementations of the Google Provider behave in the same way between platforms
+- Accédez aux étendues pour la connexion Google
+- Mode hors ligne pour la connexion Google
+- Unification des différentes implémentations
+  - Des tests approfondis ont été effectués pour garantir que toutes les implémentations du fournisseur Google se comportent de la même manière entre les plates-formes.
 
-## Migration from the V0 main Version
+## Migration depuis la version principale V0
 
-- Changes in the `MainActivity.java` for Android
-  - Please follow the [Google Setup Guide](/docs/plugins/social-login/google/android/). Specifically, please search for `MainActivity.java`
+- Modifications dans le `MainActivity.java` pour Android
+  - Veuillez suivre le [Google Guide de configuration](/docs/plugins/social-login/google/android/). Plus précisément, veuillez rechercher `MainActivity.java`
 
-- Please Ajouter redirect urls in the Google Console. Without adding redirect urls, Google Connexion will not work.
-  - Again, please follow the [Google Setup Guide](/docs/plugins/social-login/google/android/). Specifically, please search for `Authorized redirect URIs`
+- Veuillez ajouter des URL de redirection dans la console Google. Sans ajouter d'URL de redirection, la connexion Google ne fonctionnera pas.
+  - Encore une fois, veuillez suivre le [Google Guide de configuration](/docs/plugins/social-login/google/android/). Plus précisément, veuillez rechercher « URI de redirection autorisés »
 
-- Please ensure that you are not using `grantOfflineAccess` in the config. This feature is not supported in V1.
+- Veuillez vous assurer que vous n'utilisez pas `grantOfflineAccess` dans la configuration. Cette fonctionnalité n'est pas prise en charge dans la V1.
 
-- Please ensure that authentication works on all the platforms.
+- Veuillez vous assurer que l'authentification fonctionne sur toutes les plateformes.
 
-## Migration from the V0 Développement Version
+## Migration depuis la version de développement V0
 
-- Changes in the `MainActivity.java` for Android
-  - Please follow the [Google Setup Guide](/docs/plugins/social-login/google/android/). Specifically, please search for `MainActivity.java`. In V1, you **HAVE TO** implement `ModifiedMainActivityForSocialLoginPlugin` in your main activity. This change is crucial for the plugin to work
+- Modifications dans le `MainActivity.java` pour Android
+  - Veuillez suivre le [Google Guide de configuration](/docs/plugins/social-login/google/android/). Plus précisément, veuillez rechercher `MainActivity.java`. Dans la V1, vous **DEVEZ** implémenter `ModifiedMainActivityForSocialLoginPlugin` dans votre activité principale. Ce changement est crucial pour que le plugin fonctionne
 
-- Please Ajouter redirect urls in the Google Console. Without adding redirect urls, Google Connexion will not work.
-  - Again, please follow the [Google Setup Guide](/docs/plugins/social-login/google/android/). Specifically, please search for `Authorized redirect URIs`
+- Veuillez ajouter des URL de redirection dans la console Google. Sans ajouter d'URL de redirection, la connexion Google ne fonctionnera pas.
+  - Encore une fois, veuillez suivre le [Google Guide de configuration](/docs/plugins/social-login/google/android/). Plus précisément, veuillez rechercher « URI de redirection autorisés »
 
-- Please ensure that types and variable names are correct. Please know that types and variables might not match between Développement and V1.
+- Veuillez vous assurer que les types et les noms de variables sont corrects. Sachez que les types et les variables peuvent ne pas correspondre entre le développement et la V1.
 
-- Please ensure that authentication works on all the platforms.
+- Veuillez vous assurer que l'authentification fonctionne sur toutes les plateformes.

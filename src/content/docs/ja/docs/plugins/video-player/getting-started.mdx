@@ -1,23 +1,22 @@
 ---
-title: Getting Started
-description: Learn how to integrate native video playback in your Capacitor app.
+title: はじめる
+description: Capacitor アプリにネイティブ ビデオ再生を統合する方法を学びます。
 sidebar:
   order: 2
 locale: ja
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **パッケージをインストールします**
    <PackageManagers pkg="@capgo/capacitor-video-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **ネイティブ プロジェクトと同期**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Basic Usage
+## 基本的な使い方
 
 ```typescript
 import { CapacitorVideoPlayer } from '@capgo/capacitor-video-player';
@@ -57,11 +56,11 @@ await CapacitorVideoPlayer.setVolume({
 });
 ```
 
-## API Reference
+## API リファレンス
 
-### initPlayer(options)
+### initPlayer(オプション)
 
-Initialize a video player instance.
+ビデオプレーヤーのインスタンスを初期化します。
 
 ```typescript
 await CapacitorVideoPlayer.initPlayer({
@@ -78,42 +77,42 @@ await CapacitorVideoPlayer.initPlayer({
 });
 ```
 
-### play(options)
+### プレイ(オプション)
 
-Play the video.
+ビデオを再生します。
 
 ```typescript
 await CapacitorVideoPlayer.play({ playerId: 'player1' });
 ```
 
-### pause(options)
+### 一時停止(オプション)
 
-Pause the video.
+ビデオを一時停止します。
 
 ```typescript
 await CapacitorVideoPlayer.pause({ playerId: 'player1' });
 ```
 
-### getDuration(options)
+### getDuration(オプション)
 
-Get video duration in seconds.
+動画の長さを秒単位で取得します。
 
 ```typescript
 const { value } = await CapacitorVideoPlayer.getDuration({ playerId: 'player1' });
 console.log('Duration:', value, 'seconds');
 ```
 
-### getCurrentTime(options)
+### getCurrentTime(オプション)
 
-Get current playback position in seconds.
+現在の再生位置を秒単位で取得します。
 
 ```typescript
 const { value } = await CapacitorVideoPlayer.getCurrentTime({ playerId: 'player1' });
 ```
 
-### setCurrentTime(options)
+### setCurrentTime(オプション)
 
-Seek to a specific time.
+特定の時刻までシークします。
 
 ```typescript
 await CapacitorVideoPlayer.setCurrentTime({
@@ -122,9 +121,9 @@ await CapacitorVideoPlayer.setCurrentTime({
 });
 ```
 
-### setVolume(options)
+### setVolume(オプション)
 
-Set volume (0.0 to 1.0).
+音量を設定します (0.0 ～ 1.0)。
 
 ```typescript
 await CapacitorVideoPlayer.setVolume({
@@ -133,17 +132,17 @@ await CapacitorVideoPlayer.setVolume({
 });
 ```
 
-### getVolume(options)
+### getVolume(オプション)
 
-Get current volume.
+現在の音量を取得します。
 
 ```typescript
 const { value } = await CapacitorVideoPlayer.getVolume({ playerId: 'player1' });
 ```
 
-### setMuted(options)
+### setMuted(オプション)
 
-Mute or unmute the video.
+ビデオをミュートまたはミュート解除します。
 
 ```typescript
 await CapacitorVideoPlayer.setMuted({
@@ -152,9 +151,9 @@ await CapacitorVideoPlayer.setMuted({
 });
 ```
 
-### setRate(options)
+### setRate(オプション)
 
-Set playback speed.
+再生速度を設定します。
 
 ```typescript
 await CapacitorVideoPlayer.setRate({
@@ -165,7 +164,7 @@ await CapacitorVideoPlayer.setRate({
 
 ### stopAllPlayers()
 
-Stop all active players.
+すべてのアクティブなプレイヤーを停止します。
 
 ```typescript
 await CapacitorVideoPlayer.stopAllPlayers();
@@ -173,13 +172,13 @@ await CapacitorVideoPlayer.stopAllPlayers();
 
 ### exitPlayer()
 
-Exit the video player.
+ビデオプレーヤーを終了します。
 
 ```typescript
 await CapacitorVideoPlayer.exitPlayer();
 ```
 
-## Complete Example
+## 完全な例
 
 ```typescript
 import { CapacitorVideoPlayer } from '@capgo/capacitor-video-player';
@@ -274,29 +273,29 @@ export class VideoPlayerService {
 }
 ```
 
-## Platform Notes
+## プラットフォームに関する注意事項
 
 ### iOS
-- Requires iOS 10.0+
-- Uses native AVPlayer
-- Supports Picture-in-Picture
-- Background playback supported
+- iOS 10.0+が必要です
+- ネイティブ AVPlayer を使用
+- ピクチャインピクチャをサポート
+- バックグラウンド再生をサポート
 
 ### Android
-- Requires Android 5.0 (API 21)+
-- Uses ExoPlayer
-- Supports Chromecast
-- Custom accent colors available
+- Android 5.0 (API 21)+ が必要です
+- ExoPlayerを使用します
+- Chromecastをサポート
+- カスタムアクセントカラーが利用可能
 
-### Web
-- Uses HTML5 video player
-- Embedded mode only
-- Limited native features
+### ウェブ
+- HTML5ビデオプレーヤーを使用します
+- 埋め込みモードのみ
+- ネイティブ機能が制限されている
 
 ## ベストプラクティス
 
-1. **プレイヤーをクリーンアップ**: 完了したら常にプレイヤーを停止してください
-2. **エラーを処理**: プレイヤー呼び出しをtry-catchでラップしてください
-3. **一意のプレイヤーID**: 複数のプレイヤーに対して一意のIDを使用してください
-4. **再生ステータスを確認**: 操作前にステータスを確認してください
-5. **リソース管理**: メモリを解放するためにプレイヤーをリリースしてください
+1. **プレイヤーをクリーンアップ**: 完了したら必ずプレイヤーを停止します
+2. **エラーの処理**: プレイヤーの呼び出しを try-catch でラップする
+3. **一意のプレーヤー ID**: 複数のプレーヤーに一意の ID を使用します
+4. **再生ステータスの確認**: 操作前に状態を確認します。
+5. **リソース管理**: プレーヤーを解放してメモリを解放します

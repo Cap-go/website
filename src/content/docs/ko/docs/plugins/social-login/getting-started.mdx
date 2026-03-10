@@ -1,34 +1,157 @@
 ---
 title: 시작하기
-locale: ko
-description: Capacitor Social Login 플러그인을 설치하고 구성하여 Google, Apple 및 Facebook 로그인과 원활하게 통합하여 앱의 인증을 향상시키는 방법을 알아보세요.
+description: >-
+  Google, Apple, Facebook 및 일반 OAuth2 로그인에 대한 원활한 통합을 통해 앱 인증을 강화하기 위해 Capacitor
+  소셜 로그인 플러그인을 설치하고 구성하는 방법을 알아보세요.
 sidebar:
   order: 2
+locale: ko
 ---
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps, Card, CardGrid } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { Code, Card, CardGrid } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 import MicroCard from '@/components/MicroCard.astro'
 
 <Steps>
-1. **Install the package**
+1. **패키지 설치**
    <PackageManagers pkg="@capgo/capacitor-social-login" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **네이티브 프로젝트와 동기화**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure the plugin**
-   <div class="flex flex-nowrap gap-4 h-full">
-      <div style="display: flex; gap: 1rem; width: 100% !important; max-width: 100% !important;">
-         <MicroCard href="/docs/plugins/social-login/google/general/" title="Google" customIcon="/icons/google.svg">
-            Configure Google Sign-In for your app
-         </MicroCard>
-         <MicroCard href="/docs/plugins/social-login/facebook/" title="Facebook" icon="facebook">
-            Set up Facebook Login integration
-         </MicroCard>
-         <MicroCard href="/docs/plugins/social-login/apple/general/" title="Apple" icon="apple">
-            Enable Sign in with Apple
-         </MicroCard>
-      </div>
-   </div>
+3. **앱 시작 시 초기화**
+
+   ```typescript
+   import { SocialLogin } from '@capgo/capacitor-social-login';
+
+   await SocialLogin.initialize({
+     google: {
+       webClientId: 'your-google-web-client-id',
+       iOSServerClientId: 'your-google-server-client-id',
+       mode: 'online',
+     },
+     apple: {
+       clientId: 'your-apple-service-id',
+       useProperTokenExchange: true,
+       useBroadcastChannel: true,
+     },
+     facebook: {
+       appId: 'your-facebook-app-id',
+     },
+     twitter: {
+       clientId: 'your-twitter-client-id',
+       redirectUrl: 'myapp://oauth/twitter',
+     },
+     oauth2: {
+       github: {
+         appId: 'your-github-client-id',
+         authorizationBaseUrl: 'https://github.com/login/oauth/authorize',
+         accessTokenEndpoint: 'https://github.com/login/oauth/access_token',
+         redirectUrl: 'myapp://oauth/github',
+         scope: 'read:user user:email',
+         pkceEnabled: true,
+       },
+     },
+   });
+   ```
 </Steps>
+
+## 핵심 흐름 예시
+
+### 로그인
+
+```typescript
+await SocialLogin.login({
+  provider: 'google',
+  options: { scopes: ['profile', 'email'] },
+});
+
+await SocialLogin.login({
+  provider: 'oauth2',
+  options: {
+    providerId: 'github',
+    scope: 'read:user user:email',
+  },
+});
+```
+
+### 세션 확인
+
+```typescript
+const status = await SocialLogin.isLoggedIn({ provider: 'google' });
+await SocialLogin.logout({ provider: 'google' });
+```
+
+### 인증 코드 및 새로고침
+
+```typescript
+// For providers that support this mode
+const authCodeResult = await SocialLogin.getAuthorizationCode({ provider: 'google' });
+await SocialLogin.refresh({ provider: 'google', options: {} as never });
+```
+
+### 고급 도우미
+
+```typescript
+const jwt = await SocialLogin.decodeIdToken({
+  idToken: 'eyJhbGciOi...',
+});
+
+const { date } = await SocialLogin.getAccessTokenExpirationDate({
+  accessTokenExpirationDate: Date.now() + 3600 * 1000,
+});
+
+const expired = await SocialLogin.isAccessTokenExpired({
+  accessTokenExpirationDate: Date.now() + 1000,
+});
+
+const active = await SocialLogin.isRefreshTokenAvailable({ refreshToken: 'a-token' });
+```
+
+## 제공업체별 참고 사항
+
+### Google 오프라인 모드
+
+`google.mode: 'offline'`는 로그인에서 `serverAuthCode`을 반환합니다. 이 모드 로그아웃에서는 isLoggedIn, getAuthorizationCode 및 새로 고침을 사용할 수 없습니다.
+
+### Apple
+
+엄격한 토큰 처리를 위해서는 `useProperTokenExchange: true`을 설정하고 Android 단순화된 설정을 위해서는 `useBroadcastChannel: true`를 설정하세요.
+
+### OAuth2 웹 리디렉션 흐름
+
+페이지에서 벗어나 탐색하는 웹 흐름에는 `OAuth2LoginOptions.flow: 'redirect'`을 사용하세요.
+
+## Capacitor의 공급자 구성
+
+사용하지 않는 공급자를 비활성화하여 기본 바이너리를 줄일 수 있습니다.
+
+```typescript
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.example.app',
+  appName: 'My App',
+  webDir: 'dist',
+  plugins: {
+    SocialLogin: {
+      providers: {
+        google: true,
+        facebook: true,
+        apple: true,
+        twitter: false,
+      },
+    },
+  },
+};
+```
+
+## 관련 문서
+
+- [통합 개요](/docs/plugins/social-login/integrations/)
+- [Better Auth 통합](/docs/plugins/social-login/better-auth/)
+- [OAuth2 및 OIDC 제공업체](/docs/plugins/social-login/oauth2/)
+- [Ionic Auth Connect에서 마이그레이션](/docs/upgrade/from-ionic-auth-connect/)
+- [소셜 로그인 Auth Connect 이전 안내](/docs/plugins/social-login/migrations/ionic-auth-connect/)
+- [기존 공급자 마이그레이션](/docs/plugins/social-login/migrations/google/)
+- [Ionic 엔터프라이즈 플러그인 마이그레이션 솔루션](/solutions/ionic-enterprise-plugins/)

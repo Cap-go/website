@@ -1,29 +1,26 @@
 ---
-title: "从 Capawesome Cloud 迁移到 Capgo"
-description: >-
-  Step-by-step guide to move from Capawesome Cloud to Capgo while gaining native
-  OTA safety, device-level observability, and full automation.
+title: 从 Capawesome Cloud 迁移到 Capgo
+description: 从 Capawesome Cloud 迁移到 Capgo 同时获得本机 OTA 安全性、设备级可观察性和完全自动化的分步指南。
 sidebar:
   order: 8
 locale: zh
 ---
+> ⚡️ Capgo 自动化通道、捆绑清理、回滚、分析和 CLI 本地上传。使用本指南执行迁移所需的最少步骤，并可选择重新创建您仍然需要的任何自定义行为。
 
-> ⚡️ Capgo automates channels, bundle cleanup, rollbacks, analytics, and CLI uploads natively. Use this guide to perform the minimal steps required to migrate and optionally recreate any custom behaviour you still need.
+## 概述
 
-## Overview
+1. 收集您现有的 Capawesome Cloud 配置（应用程序 ID、通道、签名密钥、CLI 令牌），以便您稍后可以存档或审核。
+2.安装Capgo插件，删除Capawesome SDK，并调用`CapacitorUpdater.notifyAppReady()`。
+3. 如果您现在依赖这些流程，请配置可选行为（手动下载、固定捆绑包、重新加载）。
 
-1. Gather your existing Capawesome Cloud configuration (App ID, channels, signing keys, CLI tokens) so you can archive or audit it later.
-2. Install the Capgo plugin, remove the Capawesome SDK, and call `CapacitorUpdater.notifyAppReady()`.
-3. Configure optional behaviour (manual downloads, pinning bundles, reloads) if you rely on those flows today.
+使用Capgo，您只需安装我们的插件并调用`CapacitorUpdater.notifyAppReady()`。其他所有内容（通道、捆绑清理、回滚、分析和 CLI 自动化）均在本机处理。以下部分直接介绍每个任务。
 
-With Capgo you only need to install our plugin and call `CapacitorUpdater.notifyAppReady()`. Everything else—channels, bundle cleanup, rollbacks, analytics, and CLI automation—is handled natively. The sections below walk through each task directly.
+## 开始之前
 
-## Before you start
+- 确保您的项目已使用 Capacitor 5 或更高版本。
+- 如果您计划从 CI/CD 推送捆绑包，请安装 Capgo CLI (`npm install -g @capgo/cli`)。
 
-- Make sure your project is already using Capacitor 5 or later.
-- Install the Capgo CLI (`npm install -g @capgo/cli`) if you plan to push bundles from CI/CD.
-
-## Step 1 – Install Capgo and remove the Capawesome SDK
+## 步骤 1 – 安装 Capgo 并删除 Capawesome SDK
 
 ```bash
 npm uninstall @capawesome/capacitor-live-update
@@ -31,11 +28,11 @@ npm install @capgo/capacitor-updater
 npx cap sync
 ```
 
-That is the only mandatory swap. Capgo’s native code ships with the plugin; no extra JavaScript helpers are required.
+这是唯一的强制交换。 Capgo 的本机代码随插件一起提供；不需要额外的 JavaScript 助手。
 
-## Step 2 – Minimal configuration
+## 步骤 2 – 最低配置
 
-The previous setup required mapping dozens of options in `capacitor.config`. Capgo recognises your project automatically, so the minimal configuration looks like this:
+之前的设置需要映射 `capacitor.config` 中的数十个选项。 Capgo 自动识别您的项目，因此最小配置如下所示：
 
 ```ts title="capacitor.config.ts"
 import { CapacitorConfig } from '@capacitor/cli'
@@ -53,21 +50,21 @@ const config: CapacitorConfig = {
 export default config
 ```
 
-Everything Capawesome lists as manual flags (`defaultChannel`, `autoDeleteBundles`, retention policies, etc.) is managed through the Capgo dashboard or API. You only need to override these keys if you want behaviour that differs from Capgo’s defaults.
+Capawesome 列为手动标记的所有内容（`defaultChannel`、`autoDeleteBundles`、保留策略等）均通过 Capgo 仪表板或 API 进行管理。仅当您想要与 Capgo 的默认值不同的行为时，才需要覆盖这些键。
 
-### Configuration quick reference
+### 配置快速参考
 
-| Capawesome option | Capgo equivalent | Do you need to set it? |
-| --- | --- | --- |
-| `appId` | Taken from the Capgo dashboard once you create a project | Only if you use multiple projects in one binary |
-| `defaultChannel` | Channel rules managed in the dashboard/API | Optional; most teams set this server-side |
-| `autoDeleteBundles` | `autoDeletePrevious: true` (default) | Already enabled |
-| `publicKey` | Managed in Capgo console | Only if you rotate keys manually |
-| `maxVersions` / retention | Bundle retention policy | Configured centrally in Capgo (1 month default, 24 months max) |
+|很棒的选择| Capgo 等效 |需要设置吗？ |
+| ---| ---| ---|
+| `appId` |创建项目后取自 Capgo 仪表板 |仅当您在一个二进制文件中使用多个项目时 |
+| `defaultChannel` |在仪表板/API 中管理的频道规则 |选修的;大多数团队将此设置在服务器端 |
+| `autoDeleteBundles` | `autoDeletePrevious: true`（默认）|已经启用 |
+| `publicKey` |在 Capgo 控制台中管理 |仅当您手动轮换密钥时 |
+| `maxVersions` / 保留 |捆绑保留政策 |在 Capgo 中集中配置（默认 1 个月，最长 24 个月）|
 
-## Step 3 – Call `notifyAppReady()` (the only required hook)
+## 步骤 3 – 调用 `notifyAppReady()` （唯一需要的钩子）
 
-The old workflow introduced custom listeners (`checkForUpdates()`, `retryDownload()`, hiding the splash screen, etc.). Capgo performs those steps natively. The only API you must call is:
+旧的工作流程引入了自定义侦听器（`checkForUpdates()`、`retryDownload()`、隐藏启动屏幕等）。 Capgo 本机执行这些步骤。您必须调用的唯一 API 是：
 
 ```ts
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -75,12 +72,12 @@ import { CapacitorUpdater } from '@capgo/capacitor-updater'
 CapacitorUpdater.notifyAppReady()
 ```
 
-This confirms the app booted successfully. If the confirmation never arrives, Capgo automatically rolls back the bundle—no extra JavaScript needed.
+这确认应用程序已成功启动。如果确认从未到达，Capgo 会自动回滚捆绑包，无需额外的 JavaScript。
 
-**That's it—Capgo handles background checks, splash visibility, and rollbacks natively.**
+**就是这样 - Capgo 本地处理背景检查、启动可见性和回滚。**
 
 <details>
-<summary>Optional: run custom logic before the splash screen hides</summary>
+<summary>可选：在闪屏隐藏之前运行自定义逻辑</summary>
 
 ```ts
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -94,25 +91,23 @@ CapacitorUpdater.addListener('appReady', () => {
 CapacitorUpdater.notifyAppReady()
 ```
 
-</details>
+</details>## 步骤 4 – 映射 API 调用（大部分是可选的）
 
-## Step 4 – Map API calls (mostly optional)
+在 Capgo 中，您通常让自动更新程序运行；如果您想要完全控制，手动 API 仍然可用。
 
-In Capgo you normally let the auto-updater run; manual APIs remain available if you want full control.
+|很棒的云 | Capgo 等效 |你需要吗？ |
+| ---| ---| ---|
+| `LiveUpdate.fetchLatestBundle()` | `CapacitorUpdater.getLatest()` |仅当实施您自己的下载工作流程时 |
+| `LiveUpdate.downloadBundle()` | `CapacitorUpdater.download()` |可选：本机自动更新已下载 |
+| `LiveUpdate.setNextBundle()` | `CapacitorUpdater.next()` |可选：仪表板引脚自动捆绑 |
+| `LiveUpdate.reload()` | `CapacitorUpdater.reload()` |选修的; Capgo 在 `notifyAppReady()` 之后强制执行强制捆绑 |
+| `LiveUpdate.getCurrentBundle()` | `CapacitorUpdater.current()` |可选诊断 |
 
-| Capawesome Cloud | Capgo equivalent | Do you need it? |
-| --- | --- | --- |
-| `LiveUpdate.fetchLatestBundle()` | `CapacitorUpdater.getLatest()` | Only when implementing your own download workflow |
-| `LiveUpdate.downloadBundle()` | `CapacitorUpdater.download()` | Optional: native auto-update already downloads |
-| `LiveUpdate.setNextBundle()` | `CapacitorUpdater.next()` | Optional: dashboard pins bundles automatically |
-| `LiveUpdate.reload()` | `CapacitorUpdater.reload()` | Optional; Capgo enforces mandatory bundles after `notifyAppReady()` |
-| `LiveUpdate.getCurrentBundle()` | `CapacitorUpdater.current()` | Optional diagnostics |
+如果您坚持使用本机自动更新行为，则可以完全删除 Capawesome JavaScript。
 
-If you stick with the native auto-update behaviour you can delete the Capawesome JavaScript entirely.
+### 手动控制示例
 
-### Manual control examples
-
-**Download the latest bundle**
+**下载最新的捆绑包**
 
 ```ts title="Capgo"
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -144,7 +139,7 @@ const downloadUpdate = async () => {
 }
 ```
 
-**Set the next bundle**
+**设置下一个捆绑包**
 
 ```ts title="Capgo"
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -162,7 +157,7 @@ const setNextBundle = async () => {
 }
 ```
 
-**Apply the downloaded bundle immediately**
+**立即应用下载的捆绑包**
 
 ```ts title="Capgo"
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -180,20 +175,20 @@ const applyUpdate = async () => {
 }
 ```
 
-## Step 5 – Update strategies: how Capgo handles them
+## 步骤 5 – 更新策略：Capgo 如何处理它们
 
-Capawesome documents three strategies. Here’s how they translate:
+Capawesome 记录了三种策略。他们的翻译是这样的：
 
-### Background updates
-- **Previous workflow**: configure in code and schedule downloads manually.
-- **Capgo**: enabled by default (`autoUpdate: true`). No additional code required.
+### 后台更新
+- **以前的工作流程**：在代码中配置并手动安排下载。
+- **Capgo**：默认启用 (`autoUpdate: true`)。不需要额外的代码。
 
-### Always latest
-- **Previous workflow**: add an `App.resume` listener, call `download`, then `set`.
-- **Capgo**: background auto-update already performs the check after resume. You only need the manual listener if you want a custom interval.
+### 始终最新
+- **之前的工作流程**：添加 `App.resume` 侦听器，调用 `download`，然后调用 `set`。
+- **Capgo**：后台自动更新已在恢复后执行检查。如果您想要自定义间隔，则仅需要手动侦听器。
 
 <details>
-<summary>Optional: manual resume check</summary>
+<summary>可选：手动恢复检查</summary>
 
 ```ts
 import { App } from '@capacitor/app'
@@ -215,13 +210,13 @@ App.addListener('resume', async () => {
 
 </details>
 
-### Force update
-- **Previous workflow**: wire prompt logic and enforce reload.
-- **Capgo**: mark the bundle as “mandatory” in the dashboard, then listen for the `majorAvailable` event (emitted after `notifyAppReady()`) to require users to upgrade inside your app.
+### 强制更新
+- **以前的工作流程**：连接提示逻辑并强制重新加载。
+- **Capgo**：在仪表板中将捆绑包标记为“强制”，然后侦听 `majorAvailable` 事件（在 `notifyAppReady()` 之后发出）以要求用户在您的应用内升级。
 
-## Step 6 – Deploying bundles
+## 步骤 6 – 部署捆绑包
 
-If you previously relied on `capawesome live-update deploy`, Capgo offers a similar CLI workflow, and you can also automate deployments entirely via API.
+如果您以前依赖“强大的实时更新部署”，Capgo 提供类似的 CLI 工作流程，并且您还可以通过 API 完全自动化部署。
 
 ```bash
 # Authenticate once (stores a token in your CI environment)
@@ -231,25 +226,23 @@ capgo login
 capgo bundle upload --path dist --channel production
 ```
 
-Because Capgo tracks bundle health automatically, you also get:
+由于 Capgo 自动跟踪包运行状况，您还可以获得：
 
-- Device-level audit logs for every install.
-- Automatic retention (one month by default) with configurable limits up to 24 months.
-- Real-time latency metrics at [status.capgo.app/history](https://status.capgo.app/history).
+- 每次安装的设备级审核日志。
+- 自动保留（默认为一个月），可配置的限制最长可达 24 个月。
+- [status.capgo.app/history](https://status.capgo.app/history) 中的实时延迟指标。
 
-## Migration timeline
+## 迁移时间表
 
-- **Inventory & install**: 10 minutes (`npm install`, remove old plugin).
-- **Config & readiness**: 5 minutes (`notifyAppReady`).
-- **Sanity checks**: 15 minutes (optional manual tests or listeners).
-- **First deployment**: 10 minutes with Capgo CLI or CI integration.
+- **清点和安装**：10 分钟（`npm install`，删除旧插件）。
+- **配置和准备**：5 分钟 (`notifyAppReady`)。
+- **健全性检查**：15 分钟（可选的手动测试或侦听器）。
+- **首次部署**：使用 Capgo CLI 或 CI 集成需要 10 分钟。
 
-In practice teams finish in under an hour. If you provide Capawesome project details we can even import channels and device lists for you.
+在练习中，团队在一小时内完成。如果您提供 Capawesome 项目详细信息，我们甚至可以为您导入频道和设备列表。
 
-## Capgo support
+## Capgo 支持- **迁移礼宾**：在 [cal.com/team/capgo/demo](https://cal.com/team/capgo/demo) 预订课程。
+- **社区**：加入 [Capgo Discord](https://discord.gg/VCXxSVjefW)。
+- **问题跟踪器**：[github.com/Cap-go/capacitor-updater/issues](https://github.com/Cap-go/capacitor-updater/issues)。
 
-- **Migration concierge**: book a session at [cal.com/team/capgo/demo](https://cal.com/team/capgo/demo).
-- **Community**: join the [Capgo Discord](https://discord.gg/VCXxSVjefW).
-- **Issue tracker**: [github.com/Cap-go/capacitor-updater/issues](https://github.com/Cap-go/capacitor-updater/issues).
-
-Capgo is built for long-term reliability: native delta updates, encrypted bundles, automatic rollbacks, and analytics that do not require custom JavaScript. Once you migrate you can delete the maintenance-heavy glue and let the platform run updates automatically.
+Capgo 专为长期可靠性而构建：本机增量更新、加密捆绑包、自动回滚和不需要自定义 JavaScript 的分析。迁移后，您可以删除需要大量维护的粘合剂，并让平台自动运行更新。

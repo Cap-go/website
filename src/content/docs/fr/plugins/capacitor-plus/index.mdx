@@ -1,62 +1,65 @@
 ---
-locale: fr
-title: "Capacitor+"
-description: An automated, always-synced fork of Capacitor with merged Communauté PRs and rapid releases.
+title: Capacitor+
+description: >-
+  Un fork automatisé et toujours synchronisé de Capacitor avec des PR
+  communautaires fusionnés et des versions rapides.
 tableOfContents: false
 next: false
 prev: false
-sidebar: 
+sidebar:
   order: 1
-  label: "Introduction"
-hero: 
-  tagline: Capacitor+ is an automated fork of Capacitor that merges Communauté PRs faster, with Sécurité-reviewed releases.
-  image: 
+  label: Introduction
+hero:
+  tagline: >-
+    Capacitor+ est un fork automatisé de Capacitor qui fusionne plus rapidement
+    les PR de la communauté, avec des versions vérifiées par la sécurité.
+  image:
     file: ~public/icons/plugins/capacitor-plus.svg
-  actions: 
-    - text: Get started
+  actions:
+    - text: Commencer
       link: /docs/plugins/capacitor-plus/getting-started/
       icon: right-arrow
       variant: primary
     - text: Github
-      link: https://github.com/Cap-go/capacitor-plus/
+      link: 'https://github.com/Cap-go/capacitor-plus/'
       icon: external
       variant: minimal
+locale: fr
 ---
-
 import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
 
 <Aside type="tip">
-  **Why Capacitor+?** Great PRs sit unmerged in the official Capacitor repository for months. Capacitor+ actively merges these community contributions so you don't have to wait.
+  **Pourquoi Capacitor+ ?** Les excellents PR ne sont pas fusionnés dans le référentiel officiel Capacitor pendant des mois. Capacitor+ fusionne activement ces contributions de la communauté afin que vous n'ayez pas à attendre.
 </Aside>
 
 <CardGrid stagger>
-  <Card title="Community PRs Merged Faster" icon="rocket">
-    Bug fixes and Fonctionnalités stuck in upstream? We merge them so you can benefit immediately.
+  <Card title="Les PR communautaires fusionnent plus rapidement" icon="rocket">
+    Corrections de bugs et fonctionnalités bloquées en amont ? Nous les fusionnons pour que vous puissiez en bénéficier immédiatement.
   </Card>
-  <Card title="Auto-Synced Daily" icon="seti:clock">
-    Every change from official Capacitor is automatically pulled, tested, and verified.
+  <Card title="Synchronisé automatiquement quotidiennement" icon="seti:clock">
+    Chaque modification par rapport au Capacitor officiel est automatiquement extraite, testée et vérifiée.
   </Card>
-  <Card title="Security Reviewed" icon="approve-check">
-    Every Libération is analyzed by AI for Sécurité vulnerabilities, breaking changes, and stability risks.
+  <Card title="Sécurité révisée" icon="approve-check">
+    Chaque version est analysée par l'IA pour détecter les vulnérabilités de sécurité, les modifications majeures et les risques de stabilité.
   </Card>
-  <Card title="Drop-in Replacement" icon="puzzle">
-    Same API as official Capacitor - just change the package scope and you're done.
+  <Card title="Remplacement instantané" icon="puzzle">
+    Même API que le Capacitor officiel - changez simplement la portée du package et vous avez terminé.
   </Card>
 </CardGrid>
 
-## Philosophy
+## Philosophie
 
-The Ionic team maintains Capacitor with their own priorities and Libération schedule. Communauté contributions can wait months or even years to be merged. Capacitor+ takes a different approach:
+L'équipe Ionic maintient Capacitor avec ses propres priorités et calendrier de sortie. Les contributions communautaires peuvent attendre des mois, voire des années, pour être fusionnées. Capacitor+ adopte une approche différente :
 
-1. **Merge PRs from Forks** - Valuable PRs stuck in the upstream queue are actively merged
-2. **Continuous Synchroniser** - Every upstream change is automatically pulled and tested
-3. **Rapid Releases** - Changes are published to npm as soon as they pass CI
-4. **Communauté-First** - Your contributions matter and get prioritized
-5. **Transparency** - All automation is open source and visible
+1. **Fusionner les PR de Forks** - Les PR précieux bloqués dans la file d'attente en amont sont activement fusionnés
+2. **Synchronisation continue** - Chaque modification en amont est automatiquement extraite et testée
+3. **Publications rapides** - Les modifications sont publiées sur npm dès qu'elles passent CI
+4. **La communauté d'abord** - Vos contributions comptent et sont prioritaires
+5. **Transparence** – Toute l'automatisation est open source et visible
 
-## Packages
+## Forfaits
 
-| Package | npm |
+| Forfait | npm |
 |---------|-----|
 | `@capacitor-plus/core` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/core)](https://www.npmjs.com/package/@capacitor-plus/core) |
 | `@capacitor-plus/cli` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/cli)](https://www.npmjs.com/package/@capacitor-plus/cli) |

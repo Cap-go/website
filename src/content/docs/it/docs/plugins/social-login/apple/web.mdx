@@ -1,71 +1,67 @@
 ---
-
-title: Apple login for web browsers
-description: This guide provides a detailed walkthrough on setting up Apple Login using Capacitor for web applications, utilizing the @capgo/capacitor-social-login plugin to ensure a seamless integration process.
+title: Apple accesso per browser web
+description: >-
+  Questa guida fornisce una procedura dettagliata sulla configurazione
+  dell'accesso Apple utilizzando Capacitor per le applicazioni Web, utilizzando
+  il plug-in @capgo/capacitor-social-login per garantire un processo di
+  integrazione senza interruzioni.
 sidebar:
-    order: 4
+  order: 4
 locale: it
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 
 
-Configuring the web login is not trivial. It's more difficult than setting up `Sign in with Apple` on iOS but more difficult than setting up `Sign in with Apple` on Android.
+La configurazione dell'accesso web non è banale. È più difficile che impostare `Sign in with Apple` su iOS ma più difficile che impostare `Sign in with Apple` su Android.
 
-## Generating the service
+## Generazione del servizio
 
 :::note
-This step is redundant if you have already configured `Sign in with Apple` on Android.
+Questo passaggio è ridondante se hai già configurato `Sign in with Apple` su Android.
 :::
 
-Please follow the guide [here](/docs/plugins/social-login/apple/android/#creating-the-service-id/) to generate the service.
+Segui la guida [qui](/docs/plugins/social-login/apple/android/#creating-the-service-id/) per generare il servizio.
 
-## Configuring the `Return URLs`
+## Configurazione degli "URL di restituzione".
 
 <Steps>
 
-1. **Go to your Service ID configuration**
+1. **Vai alla configurazione dell'ID servizio**
    
-   In the [Apple Developer Portal](https://developer.apple.com), navigate to `Identifiers` > `Services IDs` and click on your service ID.
+   Nel [Apple Portale per sviluppatori](https://developer.apple.com), vai a `Identifiers` > "ID servizi" e fai clic sul tuo ID servizio.
 
-2. **Configure Sign in with Apple**
+2. **Configura l'accesso con Apple**
    
-   Click on `Configure` next to `Sign in with Apple`.
+   Fai clic su `Configure` accanto a `Sign in with Apple`.
 
    ![apple_dev_configure_login](/social-login-assets/apple_dev_configure_login.webp)
 
-3. **Add the Return URLs**
+3. **Aggiungi gli URL di ritorno**
 
-   Click on the `+` button to add a new return URL.
+   Fare clic sul pulsante "+" per aggiungere un nuovo URL di ritorno.
 
    ![apple_dev_return_url_plus](/social-login-assets/apple_dev_return_url_plus.webp)
 
-4. **Add the Return URLs**
+4. **Aggiungi gli URL di ritorno**
 
-   Add your domain for your web application in `Domains and Subdomains`.
-   :::caution
-   You **CANNOT** add `localhost` or `127.0.0.1` as a domain here.
+   Aggiungi il tuo dominio per la tua applicazione web in "Domini e sottodomini".
+   :::attenzione
+   **NON PUOI** aggiungere `localhost` o `127.0.0.1` come dominio qui.
    :::
 
-   Then, add your domain with the `https://` prefix and the path from which you will call Apple Login.
-   For example, if your domain is `https://my-app.com` and you will call Apple Login from `/login`, you should add `https://my-app.com/login` as the return URL.
+   Successivamente, aggiungi il tuo dominio con il prefisso `https://` e il percorso da cui chiamerai Apple Login.
+   Ad esempio, se il tuo dominio è `https://my-app.com` e chiamerai Apple Accedi da `/login`, dovresti aggiungere `https://my-app.com/login` come URL di ritorno.
 
-   :::caution
-   You **MUST** add both the domain with a trailing slash and without a trailing slash.
+   :::attenzione
+   **DEVI** aggiungere sia il dominio con una barra finale che quello senza barra finale.
    :::
 
    ![apple_dev_return_url_add](/social-login-assets/apple_dev_return_url_add.webp)
 
-5. **Save the changes**
+5. **Salva le modifiche**
 
-   1. Click on the `Next` button to save the changes.
-   2. Click on the `Save` button to save the changes.
+   1. Fare clic sul pulsante `Next` per salvare le modifiche.
+   2. Fare clic sul pulsante `Save` per salvare le modifiche.
 
-6. You should be ready to test the login for JavaScript. Please note that you cannot test from localhost.
+6. Dovresti essere pronto per testare l'accesso per JavaScript. Tieni presente che non puoi eseguire il test da localhost.
 </Steps>
-
-
-
-
-
-

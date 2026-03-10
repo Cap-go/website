@@ -1,25 +1,24 @@
 ---
-title: Getting Started with Share Target
-description: Learn how to make your app receive shared content from other apps
+title: 共有ターゲットの使用を開始する
+description: アプリが他のアプリから共有コンテンツを受信できるようにする方法を学びます
 locale: ja
 ---
+このガイドでは、Capacitor Share Target プラグインを統合して、アプリが他のアプリケーションから共有コンテンツを受信できるようにする手順を説明します。
 
-このガイドでは、Capacitor Share Targetプラグインを統合して、アプリが他のアプリケーションから共有されたコンテンツを受信できるようにする方法を説明します。
+## インストール
 
-## Installation
-
-Install the plugin using npm:
+npm を使用してプラグインをインストールします。
 
 ```bash
 npm install @capgo/capacitor-share-target
 npx cap sync
 ```
 
-## Android Configuration
+## Android 構成
 
-Add intent filters to your `AndroidManifest.xml` inside the `<activity>` tag:
+`<activity>` タグ内の `AndroidManifest.xml` にインテント フィルターを追加します。
 
-### Accept Text Content
+### テキストコンテンツを受け入れる
 
 ```xml
 <intent-filter>
@@ -29,7 +28,7 @@ Add intent filters to your `AndroidManifest.xml` inside the `<activity>` tag:
 </intent-filter>
 ```
 
-### Accept Images
+### 画像を受け入れる
 
 ```xml
 <intent-filter>
@@ -45,7 +44,7 @@ Add intent filters to your `AndroidManifest.xml` inside the `<activity>` tag:
 </intent-filter>
 ```
 
-### Accept All Content Types
+### すべてのコンテンツ タイプを受け入れる
 
 ```xml
 <intent-filter>
@@ -61,40 +60,40 @@ Add intent filters to your `AndroidManifest.xml` inside the `<activity>` tag:
 </intent-filter>
 ```
 
-## iOS Configuration
+## iOS 構成
 
-For iOS, you need to create a Share Extension:
+iOS の場合、共有拡張機能を作成する必要があります。
 
-### 1. Create Share Extension in Xcode
+### 1. Xcode で共有拡張機能を作成します
 
-1. Open your project in Xcode
-2. Go to **File > New > Target**
-3. Select **Share Extension** and click **Next**
-4. Name it (e.g., "ShareExtension") and click **Finish**
-5. If prompted, activate the scheme
+1. Xcode でプロジェクトを開きます
+2. **[ファイル] > [新規] > [ターゲット]** に移動します。
+3. [**拡張機能の共有**] を選択し、[**次へ**] をクリックします。
+4. 名前を付けて (例: 「ShareExtension」)、**完了** をクリックします。
+5. プロンプトが表示されたら、スキームをアクティブ化します
 
-### 2. Configure App Group
+### 2. アプリグループの構成
 
-1. In your main app target, go to **Signing & Capabilities**
-2. Click **+ Capability** and add **App Groups**
-3. Create or select an app group (e.g., `group.com.yourcompany.yourapp`)
-4. Repeat for the Share Extension target
+1. メインのアプリターゲットで、**署名と機能**に移動します。
+2. [**+ 機能**] をクリックし、**アプリ グループ** を追加します。
+3. アプリ グループを作成または選択します (例: `group.com.yourcompany.yourapp`)
+4. 共有拡張ターゲットに対して繰り返します。
 
-### 3. Update Share Extension Code
+### 3. 共有拡張コードの更新
 
-The Share Extension needs to save shared data to the app group container so your main app can access it.
+共有拡張機能は、メイン アプリがアクセスできるように、共有データをアプリ グループ コンテナーに保存する必要があります。
 
-For detailed iOS setup, see [Apple's Share Extension documentation](https://developer.apple.com/documentation/uikit/uiactivityviewcontroller).
+iOS セットアップの詳細については、[Apple の共有拡張機能のドキュメント](https://developer.apple.com/documentation/uikit/uiactivityviewcontroller) を参照してください。
 
-## Basic Usage
+## 基本的な使い方
 
-### Import the Plugin
+### プラグインをインポートする
 
 ```typescript
 import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
 ```
 
-### Listen for Shared Content
+### 共有コンテンツを聞く
 
 ```typescript
 CapacitorShareTarget.addListener('shareReceived', (event) => {
@@ -113,9 +112,9 @@ CapacitorShareTarget.addListener('shareReceived', (event) => {
 });
 ```
 
-## Complete Example
+## 完全な例
 
-Here's a comprehensive example handling different types of shared content:
+以下は、さまざまな種類の共有コンテンツを処理する包括的な例です。
 
 ```typescript
 import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
@@ -271,7 +270,7 @@ shareTarget.initialize();
 // shareTarget.cleanup();
 ```
 
-## React Integration
+## React の統合
 
 ```typescript
 import { useEffect } from 'react';
@@ -298,7 +297,7 @@ function App() {
 }
 ```
 
-## Vue Integration
+## Vue の統合
 
 ```typescript
 import { onMounted, onUnmounted } from 'vue';
@@ -324,9 +323,9 @@ export default {
 };
 ```
 
-## Handling Different Content Types
+## さまざまなコンテンツタイプの処理
 
-### URLs
+### URL
 
 ```typescript
 if (event.texts && event.texts.length > 0) {
@@ -339,7 +338,7 @@ if (event.texts && event.texts.length > 0) {
 }
 ```
 
-### Images
+### 画像
 
 ```typescript
 if (event.files) {
@@ -357,7 +356,7 @@ if (event.files) {
 }
 ```
 
-### Multiple Files
+### 複数のファイル
 
 ```typescript
 if (event.files && event.files.length > 1) {
@@ -372,29 +371,29 @@ if (event.files && event.files.length > 1) {
 }
 ```
 
-## Best Practices
+## ベストプラクティス
 
-1. **Handle Multiple Content Types**: Be prepared to receive text, URLs, and files
-2. **Validate Content**: Check MIME types before processing
-3. **Provide Feedback**: Show users what was received
-4. **Handle Errors**: File URIs might be invalid or inaccessible
-5. **Clean Up Listeners**: Remove listeners when not needed
-6. **Test Thoroughly**: Test with different apps and content types
-7. **Request Permissions**: Some file types may require additional permissions
+1. **複数のコンテンツ タイプの処理**: テキスト、URL、およびファイルを受信できるように準備します。
+2. **コンテンツの検証**: 処理する前に MIME タイプを確認します。
+3. **フィードバックの提供**: 受け取った内容をユーザーに表示します
+4. **処理エラー**: ファイル URI が無効であるかアクセスできない可能性があります
+5. **リスナーのクリーンアップ**: 不要な場合はリスナーを削除します
+6. **徹底的にテストします**: さまざまなアプリやコンテンツ タイプでテストします
+7. **アクセス許可のリクエスト**: 一部のファイルの種類では追加のアクセス許可が必要な場合があります
 
-## Common Issues
+## よくある問題
 
-### Share Not Working on Android
+### Android で共有が機能しない
 
-Ensure intent filters are correctly configured in `AndroidManifest.xml` within the `<activity>` tag that has `android.intent.action.MAIN`.
+`android.intent.action.MAIN` を持つ `<activity>` タグ内の `AndroidManifest.xml` でインテント フィルターが正しく設定されていることを確認します。
 
-### iOS Share Extension Not Appearing
+### iOS 共有拡張機能が表示されません
 
-1. Verify App Group is configured in both targets
-2. Ensure Share Extension is activated
-3. Check that Info.plist in Share Extension has correct configuration
+1. 両方のターゲットでアプリ グループが構成されていることを確認します
+2. 共有拡張機能が有効になっていることを確認します
+3. 共有拡張機能の Info.plist が正しい構成になっていることを確認します
 
-### File Access Errors
+### ファイルアクセスエラー
 
 ```typescript
 try {
@@ -407,8 +406,8 @@ try {
 }
 ```
 
-## Next Steps
+## 次のステップ
 
-- Explore the [API Reference](https://github.com/Cap-go/capacitor-share-target#api) for complete method documentation
-- Check out the [example app](https://github.com/Cap-go/capacitor-share-target/tree/main/example) for advanced usage
-- See the [tutorial](/plugins/capacitor-share-target) for complete implementation examples
+- 完全なメソッドのドキュメントについては、[API リファレンス](https://github.com/Cap-go/capacitor-share-target#api) を参照してください。
+- 高度な使用法については、[サンプルアプリ](https://github.com/Cap-go/capacitor-share-target/tree/main/example) をご覧ください。
+- 完全な実装例については、[チュートリアル](/plugins/capacitor-share-target) を参照してください。

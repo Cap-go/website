@@ -1,14 +1,16 @@
 ---
-locale: fr
-title: "From V2 to V3"
-description: "A comprehensive Guide on transitioning from Version 2 to Version 3 of Capgo updater, detailing the necessary steps and considerations for a successful Mise à niveau process"
-sidebar: 
+title: De la V2 à la V3
+description: >-
+  Un guide complet sur la transition de la version 2 à la version 3 du programme
+  de mise à jour Capgo, détaillant les étapes et considérations nécessaires pour
+  un processus de mise à niveau réussi.
+sidebar:
   order: 4
+locale: fr
 ---
+Cette documentation expliquera comment mettre à niveau vers la version 3 de la mise à jour automatique.
 
-This Documentation will explain how to Mise à niveau to the Version 3 of auto-Mise à jour.
-
-## First Migrer to the last tooling:
+## Commencez par migrer vers le dernier outillage :
 
 ```bash
 npm remove -g capgo
@@ -19,7 +21,7 @@ npm i @capgo/capacitor-updater@3
 npx cap sync
 ```
 
-## Retirer all your Précédent config:
+## Supprimez toutes vos configurations précédentes :
 
 ```json
 {
@@ -30,7 +32,7 @@ npx cap sync
 }
 ```
 
-to only let this:
+pour laisser seulement ceci:
 
 ```json
 {
@@ -40,22 +42,22 @@ to only let this:
 }
 ```
 
-> ⚠️ If you were using your server, with `autoUpdateURL`, I will upgrade this guide soon for you. Meanwhile, take a look at the new upload option `external` which allows you to send only the link of your zip, not the code in Capgo cloud. This has been made for companies with strict privacy policies. In external mode, the code will never land on Capgo server, we just store the URL and send it to the device, which will directly download it. In the standard way, the code is zipped and stored in our server, but we will never open it or use it either.
+> ⚠️ Si vous utilisiez votre serveur, avec `autoUpdateURL`, je mettrai bientôt à jour ce guide pour vous. En attendant, jetez un œil à la nouvelle option de téléchargement `external` qui vous permet d'envoyer uniquement le lien de votre zip, pas le code dans le cloud Capgo. Ceci a été conçu pour les entreprises ayant des politiques de confidentialité strictes. En mode externe, le code n'atteindra jamais sur le serveur Capgo, nous stockons simplement l'URL et l'envoyons à l'appareil, qui le téléchargera directement. De manière standard, le code est compressé et stocké sur notre serveur, mais nous ne l'ouvrirons ni ne l'utiliserons jamais non plus.
 
-## What change
+## Quel changement
 
-All configurations become server-side for auto-Mise à jour, to give you more control on how you send an Mise à jour to Utilisateurs.
+Toutes les configurations deviennent côté serveur pour la mise à jour automatique, afin de vous donner plus de contrôle sur la manière dont vous envoyez une mise à jour aux utilisateurs.
 
-That allows us to revert, even Déployer just to one Utilisateur with Canaux! These Paramètres are added Retour to the web interface:
+Cela nous permet de revenir, voire de déployer, sur un seul utilisateur avec des canaux ! Ces paramètres sont réajoutés à l'interface Web :
 
-* disable revert under native
-* disable update above major
+* désactiver le retour sous natif
+* désactiver la mise à jour ci-dessus majeure
 
-> ⚠️ They will become true by default for all Canaux
+> ⚠️ Ils deviendront vrais par défaut pour toutes les chaînes
 
-This will also Retirer the need to Mise à jour often the plugin, most Mises à jour will be done server side, and you will get it without any change in your side.
+Cela supprimera également le besoin de mettre à jour souvent le plugin, la plupart des mises à jour seront effectuées côté serveur et vous l'obtiendrez sans aucun changement de votre côté.
 
-> ⚠️ Réinitialiser when an Mise à jour becomes the default, so if you prefer not to Retirer all Télécharger versions when updating from the store, do this:
+> ⚠️ Réinitialiser lorsqu'une mise à jour devient la mise à jour par défaut, donc si vous préférez ne pas supprimer toutes les versions téléchargées lors de la mise à jour depuis le store, procédez comme suit :
 
 ```json
 {
@@ -66,40 +68,40 @@ This will also Retirer the need to Mise à jour often the plugin, most Mises à 
 }
 ```
 
-## Mise à jour your code
+## Mettez à jour votre code
 
-Lastly, Mise à jour all your imports in JS from:
+Enfin, mettez à jour toutes vos importations dans JS depuis :
 
 ```
 import { CapacitorUpdater } from 'capacitor-updater'
 ```
 
-to
+à
 
 ```
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 ```
 
-Then build your code again `npm run build` and copy assets once more `npx cap copy`.
+Ensuite, reconstruisez votre code `npm run build` et copiez à nouveau les actifs `npx cap copy`.
 
-You should be able now to Test the last auto-Mise à jour system
+Vous devriez pouvoir maintenant tester le dernier système de mise à jour automatique
 
-Send your Version with:
+Envoyez votre version avec :
 
 ```
 npx @capgo/cli@latest bundle upload
 ```
 
-instead of
+au lieu de
 
 ```
 npx capgo upload
 ```
 
-## Future evolution
+## Evolution future
 
-For now only the first public Canal is in use, in the future, public will change for multi public Canaux, if more than one is set.
+Pour l'instant, seule la première chaîne publique est utilisée. À l'avenir, la chaîne publique changera pour plusieurs chaînes publiques, si plusieurs chaînes sont définies.
 
-## Common problems:
+## Problèmes courants :
 
-* Build problem after upgrade: if you have already opened the source code of the plugin in Android studio or Xcode, sometimes the sync doesn't remove them, that the cause of the issue. Open the native IDE and remove `capacitor-updater` by hands and do `npx cap sync` this should solve.
+* Problème de build après la mise à niveau : si vous avez déjà ouvert le code source du plugin dans le studio Android ou Xcode, parfois la synchronisation ne les supprime pas, c'est la cause du problème. Ouvrez l'IDE natif et supprimez `capacitor-updater` à la main et faites `npx cap sync` cela devrait résoudre.

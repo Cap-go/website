@@ -1,11 +1,10 @@
 ---
 title: 시작하기
-locale: ko
-description: Capacitor 앱에 음성 전사를 추가하기 위해 음성 인식 플러그인을 설치하고 사용하는 방법을 알아보세요
+description: 음성 인식 플러그인을 설치하고 사용하여 Capacitor 앱에 음성 전사를 추가하는 방법을 알아보세요.
 sidebar:
   order: 2
+locale: ko
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
@@ -16,14 +15,14 @@ import { PackageManagers } from 'starlight-package-managers'
 2. **네이티브 프로젝트와 동기화**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **플랫폼 권한 구성** (아래 참조)
+3. **플랫폼 권한 구성**(아래 참조)
 </Steps>
 
 ## 플랫폼 구성
 
 ### iOS
 
-앱의 `Info.plist` 파일에 다음 키를 추가하세요:
+앱의 `Info.plist` 파일에 다음 키를 추가하세요.
 
 ```xml
 <key>NSSpeechRecognitionUsageDescription</key>
@@ -34,13 +33,13 @@ import { PackageManagers } from 'starlight-package-managers'
 
 ### Android
 
-플러그인이 자동으로 필요한 `RECORD_AUDIO` 권한을 `AndroidManifest.xml`에 추가합니다. 추가 구성이 필요하지 않습니다.
+플러그인은 필수 `RECORD_AUDIO` 권한을 `AndroidManifest.xml`에 자동으로 추가합니다. 추가 구성이 필요하지 않습니다.
 
 ## 기본 사용법
 
-### 사용 가능 여부 확인
+### 가용성 확인
 
-음성 인식을 사용하기 전에 장치에서 사용 가능한지 확인하세요:
+음성 인식을 사용하기 전에 기기에서 음성 인식을 사용할 수 있는지 확인하세요.
 
 ```typescript
 import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
@@ -57,7 +56,7 @@ const checkAvailability = async () => {
 
 ### 권한 요청
 
-인식을 시작하기 전에 필요한 권한을 요청하세요:
+인식을 시작하기 전에 필요한 권한을 요청하십시오:
 
 ```typescript
 const requestPermissions = async () => {
@@ -75,7 +74,7 @@ const requestPermissions = async () => {
 
 ### 인식 시작
 
-선택적 구성과 함께 음성 듣기를 시작하세요:
+선택적 구성으로 음성 듣기를 시작하세요.
 
 ```typescript
 // Basic usage
@@ -99,7 +98,7 @@ await SpeechRecognition.start({
 
 ### 결과 듣기
 
-인식이 활성화되어 있는 동안 부분 결과를 구독하세요:
+인식이 활성화된 동안 부분 결과를 구독합니다.
 
 ```typescript
 const partialListener = await SpeechRecognition.addListener(
@@ -116,15 +115,15 @@ await partialListener.remove();
 
 ### 인식 중지
 
-듣기를 중지하고 리소스를 정리하세요:
+듣기를 중지하고 리소스를 정리하십시오.
 
 ```typescript
 await SpeechRecognition.stop();
 ```
 
-## 완전한 예제
+## 완전한 예
 
-플러그인 사용 방법을 보여주는 완전한 예제입니다:
+다음은 플러그인 사용 방법을 보여주는 전체 예입니다.
 
 ```typescript
 import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
@@ -223,18 +222,18 @@ export class VoiceRecognitionService {
 
 ## API 참조
 
-### available()
+### 사용 가능()
 
-현재 장치에서 네이티브 음성 인식 서비스를 사용할 수 있는지 확인합니다.
+현재 기기에서 네이티브 음성인식 서비스를 사용할 수 있는지 확인합니다.
 
 ```typescript
 const result = await SpeechRecognition.available();
 // Returns: { available: boolean }
 ```
 
-### start(options?)
+### 시작(옵션?)
 
-오디오 캡처 및 음성 전사를 시작합니다.
+오디오 캡처 및 음성 기록을 시작합니다.
 
 ```typescript
 interface SpeechRecognitionStartOptions {
@@ -251,9 +250,9 @@ const result = await SpeechRecognition.start(options);
 // Returns: { matches?: string[] }
 ```
 
-### stop()
+### 중지()
 
-듣기를 중지하고 네이티브 리소스를 해제합니다.
+듣기를 중지하고 기본 리소스를 분해합니다.
 
 ```typescript
 await SpeechRecognition.stop();
@@ -261,9 +260,9 @@ await SpeechRecognition.stop();
 
 ### getSupportedLanguages()
 
-Gets the locales supported by the underlying recognizer.
+기본 인식기가 지원하는 로캘을 가져옵니다.
 
-**Note**: Android 13+ devices no longer expose this list; in that case `languages` will be empty.
+**참고**: Android 13개 이상의 장치는 더 이상 이 목록을 노출하지 않습니다. 이 경우 `languages`은 비어 있게 됩니다.
 
 ```typescript
 const result = await SpeechRecognition.getSupportedLanguages();
@@ -272,7 +271,7 @@ const result = await SpeechRecognition.getSupportedLanguages();
 
 ### isListening()
 
-Returns whether the plugin is actively listening for speech.
+플러그인이 음성을 적극적으로 듣고 있는지 여부를 반환합니다.
 
 ```typescript
 const result = await SpeechRecognition.isListening();
@@ -281,27 +280,27 @@ const result = await SpeechRecognition.isListening();
 
 ### checkPermissions()
 
-Gets the current permission state.
+현재 권한 상태를 가져옵니다.
 
 ```typescript
 const result = await SpeechRecognition.checkPermissions();
 // Returns: { speechRecognition: 'prompt' | 'prompt-with-rationale' | 'granted' | 'denied' }
 ```
 
-### requestPermissions()
+### 요청권한()
 
-Requests the microphone + speech recognition permissions.
+마이크+음성인식 권한을 요청합니다.
 
 ```typescript
 const result = await SpeechRecognition.requestPermissions();
 // Returns: { speechRecognition: 'prompt' | 'prompt-with-rationale' | 'granted' | 'denied' }
 ```
 
-## Event Listeners
+## 이벤트 리스너
 
-### partialResults
+### 부분 결과
 
-Listen for partial transcription updates while `partialResults` is enabled.
+`partialResults`이 활성화된 동안 부분 기록 업데이트를 수신합니다.
 
 ```typescript
 const listener = await SpeechRecognition.addListener(
@@ -312,9 +311,9 @@ const listener = await SpeechRecognition.addListener(
 );
 ```
 
-### segmentResults (Android only)
+### 세그먼트 결과(Android 전용)
 
-Listen for segmented recognition results.
+분할된 인식 결과를 들어보세요.
 
 ```typescript
 const listener = await SpeechRecognition.addListener(
@@ -325,9 +324,9 @@ const listener = await SpeechRecognition.addListener(
 );
 ```
 
-### endOfSegmentedSession (Android only)
+### endOfSegmentedSession(Android 전용)
 
-Listen for segmented session completion events.
+분할된 세션 완료 이벤트를 수신합니다.
 
 ```typescript
 const listener = await SpeechRecognition.addListener(
@@ -338,9 +337,9 @@ const listener = await SpeechRecognition.addListener(
 );
 ```
 
-### listeningState
+### 청취 상태
 
-Listen for changes to the native listening state.
+기본 청취 상태에 대한 변경 사항을 수신합니다.
 
 ```typescript
 const listener = await SpeechRecognition.addListener(
@@ -351,17 +350,17 @@ const listener = await SpeechRecognition.addListener(
 );
 ```
 
-### removeAllListeners()
+### 제거AllListeners()
 
-Removes all registered listeners.
+등록된 모든 리스너를 제거합니다.
 
 ```typescript
 await SpeechRecognition.removeAllListeners();
 ```
 
-## Best Practices
+## 모범 사례
 
-1. **Always check availability and permissions**
+1. **항상 가용성과 권한을 확인하세요**
    ```typescript
    const { available } = await SpeechRecognition.available();
    if (!available) return;
@@ -370,15 +369,15 @@ await SpeechRecognition.removeAllListeners();
    if (speechRecognition !== 'granted') return;
    ```
 
-2. **Clean up listeners**
-   Always remove listeners when they're no longer needed to prevent memory leaks:
+2. **청취자 정리**
+   메모리 누수를 방지하려면 더 이상 필요하지 않은 리스너를 항상 제거하세요.
    ```typescript
    await listener.remove();
    // or
    await SpeechRecognition.removeAllListeners();
    ```
 
-3. **Handle errors gracefully**
+3. **오류를 적절하게 처리**
    ```typescript
    try {
      await SpeechRecognition.start({ language: 'en-US' });
@@ -388,38 +387,36 @@ await SpeechRecognition.removeAllListeners();
    }
    ```
 
-4. **Provide visual feedback**
-   Use the `listeningState` event to show users when the app is actively listening.
+4. **시각적 피드백 제공**
+   `listeningState` 이벤트를 사용하여 앱이 적극적으로 듣고 있을 때 사용자에게 표시합니다.
 
-5. **Test with different accents and languages**
-   Speech recognition accuracy varies by language and accent. Test thoroughly with your target audience.
+5. **다양한 억양과 언어로 테스트**
+   음성 인식 정확도는 언어와 억양에 따라 다릅니다. 타겟 고객을 대상으로 철저하게 테스트하세요.
 
-## Platform Notes
-
-### iOS
-- Requires iOS 10.0+
-- Uses native `SFSpeechRecognizer`
-- Supports punctuation on iOS 16+
-- Requires both microphone and speech recognition permissions
-- Recognition may fail if device language doesn't match requested language
+## 플랫폼 노트### iOS
+- iOS 10.0+ 필요
+- 네이티브 `SFSpeechRecognizer` 사용
+- iOS 16+에서 구두점을 지원합니다.
+- 마이크 및 음성 인식 권한이 모두 필요합니다.
+- 기기 언어가 요청한 언어와 일치하지 않을 경우 인식이 실패할 수 있습니다.
 
 ### Android
-- Requires Android 6.0 (API 23)+
-- Uses `SpeechRecognizer` API
-- Supports segmented sessions with configurable silence detection
-- Android 13+ doesn't expose list of supported languages
-- Some devices may show system recognition UI
+- Android 6.0(API 23) 필요+
+- `SpeechRecognizer` API 사용
+- 구성 가능한 무음 감지로 분할된 세션 지원
+- Android 13+는 지원되는 언어 목록을 공개하지 않습니다.
+- 일부 장치에서는 시스템 인식 UI가 표시될 수 있습니다.
 
-### Web
-- Limited support via Web Speech API
-- Not all browsers support speech recognition
-- Requires HTTPS connection
-- May have different behavior across browsers
+### 웹
+- 웹 스피치를 통한 제한적 지원 API
+- 모든 브라우저가 음성 인식을 지원하는 것은 아닙니다.
+- HTTPS 연결이 필요합니다
+- 브라우저마다 동작이 다를 수 있습니다.
 
-## Troubleshooting
+## 문제 해결
 
-### Permission Denied
-If permissions are denied, guide users to app settings:
+### 권한이 거부되었습니다
+권한이 거부된 경우 사용자에게 앱 설정을 안내하세요.
 ```typescript
 const { speechRecognition } = await SpeechRecognition.checkPermissions();
 if (speechRecognition === 'denied') {
@@ -427,19 +424,19 @@ if (speechRecognition === 'denied') {
 }
 ```
 
-### No Results Returned
-- Check microphone is working
-- Ensure quiet environment
-- Verify language code matches device capabilities
-- Check network connection (some platforms require it)
+### 결과가 반환되지 않았습니다.
+- 마이크가 작동하는지 확인하세요
+- 조용한 환경을 보장합니다.
+- 언어 코드가 장치 기능과 일치하는지 확인
+- 네트워크 연결을 확인하세요(일부 플랫폼에서는 필요함)
 
-### Recognition Stops Unexpectedly
-- Use `isListening()` to check state
-- Listen to `listeningState` events
-- Implement auto-restart logic if needed
+### 인식이 예기치 않게 중지됩니다.
+- `isListening()`을 사용하여 상태를 확인하세요.
+- `listeningState` 이벤트 듣기
+- 필요한 경우 자동 재시작 로직을 구현합니다.
 
-## Next Steps
+## 다음 단계
 
-- [View API reference on GitHub](https://github.com/Cap-go/capacitor-speech-recognition#api)
-- [Report issues](https://github.com/Cap-go/capacitor-speech-recognition/issues)
-- [Explore example app](https://github.com/Cap-go/capacitor-speech-recognition/tree/main/example)
+- [GitHub의 API 참조 보기](https://github.com/Cap-go/capacitor-speech-recognition#api)
+- [문제 신고](https://github.com/Cap-go/capacitor-speech-recognition/issues)
+- [예제 앱 살펴보기](https://github.com/Cap-go/capacitor-speech-recognition/tree/main/example)

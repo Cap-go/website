@@ -1,8 +1,8 @@
 ---
 title: '@capgo/capacitor-compass'
 description: >-
-  Read device compass heading in degrees with continuous updates and permission
-  handling.
+  Leggi la direzione della bussola del dispositivo in gradi con aggiornamenti
+  continui e gestione delle autorizzazioni.
 tableOfContents: false
 next: false
 prev: false
@@ -11,12 +11,12 @@ sidebar:
   label: Introduction
 hero:
   tagline: >-
-    Access device compass sensor for heading data with real-time updates on iOS
-    and Android.
+    Accedi al sensore della bussola del dispositivo per i dati di rotta con
+    aggiornamenti in tempo reale su iOS e Android.
   image:
     file: ~public/icons/plugins/compass.svg
   actions:
-    - text: Get started
+    - text: Inizia
       link: /docs/plugins/compass/getting-started/
       icon: right-arrow
       variant: primary
@@ -26,20 +26,19 @@ hero:
       variant: minimal
 locale: it
 ---
-
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid stagger>
-  <Card title="Real-time Heading" icon="rocket">
-    Get continuous compass heading updates in degrees (0-360)
+  <Card title="Direzione in tempo reale" icon="rocket">
+    Ricevi aggiornamenti continui sulla direzione della bussola in gradi (0-360)
   </Card>
   <Card title="Cross-platform" icon="puzzle">
-    Works on both iOS and Android devices with native sensor access
+    Funziona su dispositivi iOS e Android con accesso nativo al sensore
   </Card>
-  <Card title="Permission Handling" icon="seti:lock">
-    Built-in permission management for location services (iOS)
+  <Card title="Gestione dei permessi" icon="seti:lock">
+    Gestione delle autorizzazioni integrata per i servizi di localizzazione (iOS)
   </Card>
   <Card title="Event-driven" icon="star">
-    Subscribe to heading changes with efficient event listeners
+    Iscriviti ai cambiamenti di intestazione con ascoltatori di eventi efficienti
   </Card>
 </CardGrid>

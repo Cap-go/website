@@ -1,25 +1,22 @@
 ---
-
-title: Getting Started
-description: Learn how to integrate native video playback in your Capacitor app.
+title: Iniziare
+description: Scopri come integrare la riproduzione video nativa nella tua app Capacitor.
 sidebar:
   order: 2
 locale: it
 ---
-
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Installa il pacchetto**
    <PackageManagers pkg="@capgo/capacitor-video-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Sincronizzazione con progetti nativi**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Basic Usage
+## Utilizzo di base
 
 ```typescript
 import { CapacitorVideoPlayer } from '@capgo/capacitor-video-player';
@@ -59,11 +56,11 @@ await CapacitorVideoPlayer.setVolume({
 });
 ```
 
-## API Reference
+## API Riferimento
 
-### initPlayer(options)
+### initPlayer(opzioni)
 
-Initialize a video player instance.
+Inizializza un'istanza del lettore video.
 
 ```typescript
 await CapacitorVideoPlayer.initPlayer({
@@ -80,42 +77,42 @@ await CapacitorVideoPlayer.initPlayer({
 });
 ```
 
-### play(options)
+### gioca(opzioni)
 
-Play the video.
+Riproduci il video.
 
 ```typescript
 await CapacitorVideoPlayer.play({ playerId: 'player1' });
 ```
 
-### pause(options)
+### pausa(opzioni)
 
-Pause the video.
+Metti in pausa il video.
 
 ```typescript
 await CapacitorVideoPlayer.pause({ playerId: 'player1' });
 ```
 
-### getDuration(options)
+### getDuration(opzioni)
 
-Get video duration in seconds.
+Ottieni la durata del video in secondi.
 
 ```typescript
 const { value } = await CapacitorVideoPlayer.getDuration({ playerId: 'player1' });
 console.log('Duration:', value, 'seconds');
 ```
 
-### getCurrentTime(options)
+### getCurrentTime(opzioni)
 
-Get current playback position in seconds.
+Ottieni la posizione di riproduzione corrente in pochi secondi.
 
 ```typescript
 const { value } = await CapacitorVideoPlayer.getCurrentTime({ playerId: 'player1' });
 ```
 
-### setCurrentTime(options)
+### setCurrentTime(opzioni)
 
-Seek to a specific time.
+Cerca un momento specifico.
 
 ```typescript
 await CapacitorVideoPlayer.setCurrentTime({
@@ -124,9 +121,9 @@ await CapacitorVideoPlayer.setCurrentTime({
 });
 ```
 
-### setVolume(options)
+### impostaVolume(opzioni)
 
-Set volume (0.0 to 1.0).
+Imposta il volume (da 0,0 a 1,0).
 
 ```typescript
 await CapacitorVideoPlayer.setVolume({
@@ -135,17 +132,17 @@ await CapacitorVideoPlayer.setVolume({
 });
 ```
 
-### getVolume(options)
+### getVolume(opzioni)
 
-Get current volume.
+Ottieni il volume corrente.
 
 ```typescript
 const { value } = await CapacitorVideoPlayer.getVolume({ playerId: 'player1' });
 ```
 
-### setMuted(options)
+### setMuted(opzioni)
 
-Mute or unmute the video.
+Disattiva o attiva l'audio del video.
 
 ```typescript
 await CapacitorVideoPlayer.setMuted({
@@ -154,9 +151,9 @@ await CapacitorVideoPlayer.setMuted({
 });
 ```
 
-### setRate(options)
+### setRate(opzioni)
 
-Set playback speed.
+Imposta la velocità di riproduzione.
 
 ```typescript
 await CapacitorVideoPlayer.setRate({
@@ -167,21 +164,21 @@ await CapacitorVideoPlayer.setRate({
 
 ### stopAllPlayers()
 
-Stop all active players.
+Ferma tutti i giocatori attivi.
 
 ```typescript
 await CapacitorVideoPlayer.stopAllPlayers();
 ```
 
-### exitPlayer()
+### esciGiocatore()
 
-Exit the video player.
+Esci dal lettore video.
 
 ```typescript
 await CapacitorVideoPlayer.exitPlayer();
 ```
 
-## Complete Example
+## Esempio completo
 
 ```typescript
 import { CapacitorVideoPlayer } from '@capgo/capacitor-video-player';
@@ -276,29 +273,29 @@ export class VideoPlayerService {
 }
 ```
 
-## Platform Notes
+## Note sulla piattaforma
 
 ### iOS
-- Requires iOS 10.0+
-- Uses native AVPlayer
-- Supports Picture-in-Picture
-- Background playback supported
+- Richiede iOS 10.0+
+- Utilizza AVPlayer nativo
+- Supporta l'immagine nell'immagine
+- Supporta la riproduzione in background
 
 ### Android
-- Requires Android 5.0 (API 21)+
-- Uses ExoPlayer
-- Supports Chromecast
-- Custom accent colors available
+- Richiede Android 5.0 (API 21)+
+- Utilizza ExoPlayer
+- Supporta Chromecast
+- Colori accentati personalizzati disponibili
 
-### Web
-- Uses HTML5 video player
-- Embedded mode only
-- Limited native features
+### Rete
+- Utilizza il lettore video HTML5
+- Solo modalità incorporata
+- Funzionalità native limitate
 
-## Best Practices
+## Migliori pratiche
 
-1. **Clean up players**: Always stop players when done
-2. **Handle errors**: Wrap player calls in try-catch
-3. **Unique player IDs**: Use unique IDs for multiple players
-4. **Check playback status**: Verify state before operations
-5. **Resource management**: Release players to free memory
+1. **Pulizia dei giocatori**: ferma sempre i giocatori quando hai finito
+2. **Gestione degli errori**: racchiude le chiamate del giocatore in try-catch
+3. **ID giocatore univoci**: utilizza ID univoci per più giocatori
+4. **Controlla lo stato della riproduzione**: verifica lo stato prima delle operazioni
+5. **Gestione delle risorse**: rilascia i giocatori per liberare memoria

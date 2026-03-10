@@ -1,23 +1,24 @@
 ---
-title: Getting Started
-description: Learn how to integrate YouTube video playback in your Capacitor app.
+title: Iniziare
+description: >-
+  Scopri come integrare la riproduzione di video di YouTube nella tua app
+  Capacitor.
 sidebar:
   order: 2
 locale: it
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Installa il pacchetto**
    <PackageManagers pkg="@capgo/capacitor-youtube-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Sincronizzazione con progetti nativi**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Basic Usage
+## Utilizzo di base
 
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
@@ -46,11 +47,11 @@ YoutubePlayer.addEventListener(result.player, 'onStateChange', (event) => {
 });
 ```
 
-## API Reference
+## API Riferimento
 
-### initialize(options)
+### inizializza(opzioni)
 
-Initialize a YouTube player instance.
+Inizializza un'istanza del player YouTube.
 
 ```typescript
 const { player, playerReady } = await YoutubePlayer.initialize({
@@ -66,7 +67,7 @@ const { player, playerReady } = await YoutubePlayer.initialize({
 });
 ```
 
-### Video Control Methods
+### Metodi di controllo video
 
 ```typescript
 // Play
@@ -88,7 +89,7 @@ await YoutubePlayer.loadVideoById(playerId, { videoId: 'VIDEO_ID' });
 await YoutubePlayer.cueVideoById(playerId, { videoId: 'VIDEO_ID' });
 ```
 
-### Playlist Control
+### Controllo della playlist
 
 ```typescript
 // Load playlist
@@ -109,7 +110,7 @@ await YoutubePlayer.previousVideo(playerId);
 await YoutubePlayer.playVideoAt(playerId, index);
 ```
 
-### Audio Control
+### Controllo dell'audio
 
 ```typescript
 // Mute/Unmute
@@ -124,7 +125,7 @@ await YoutubePlayer.setVolume(playerId, 50);
 const { result } = await YoutubePlayer.getVolume(playerId);
 ```
 
-### Playback Control
+### Controllo della riproduzione
 
 ```typescript
 // Playback rate
@@ -140,7 +141,7 @@ await YoutubePlayer.setLoop(playerId, true);
 await YoutubePlayer.setShuffle(playerId, true);
 ```
 
-### Quality Control
+### Controllo qualità
 
 ```typescript
 // Set quality
@@ -153,7 +154,7 @@ const { result } = await YoutubePlayer.getPlaybackQuality(playerId);
 const { result } = await YoutubePlayer.getAvailableQualityLevels(playerId);
 ```
 
-### Player Information
+### Informazioni sul giocatore
 
 ```typescript
 // Duration
@@ -172,7 +173,7 @@ const { result } = await YoutubePlayer.getPlayerState(playerId);
 const { result } = await YoutubePlayer.getVideoUrl(playerId);
 ```
 
-### Event Listeners
+### Ascoltatori di eventi
 
 ```typescript
 // State change
@@ -204,7 +205,7 @@ YoutubePlayer.addEventListener(playerId, 'onPlaybackRateChange', (event) => {
 YoutubePlayer.removeEventListener(playerId, 'onStateChange', callback);
 ```
 
-## Complete Example
+## Esempio completo
 
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
@@ -321,18 +322,18 @@ export class YouTubeService {
 }
 ```
 
-## Player States
+## Stati del giocatore
 
-| State | Value | Description |
-|-------|-------|-------------|
-| UNSTARTED | -1 | Video not started |
-| ENDED | 0 | Video has ended |
-| PLAYING | 1 | Video is playing |
-| PAUSED | 2 | Video is paused |
-| BUFFERING | 3 | Video is buffering |
-| CUED | 5 | Video is cued |
+| Stato | Valore | Descrizione |
+|-------|-------|-----|
+| NON INIZIATO | -1 | Video non avviato |
+| FINITO | 0| Il video è terminato |
+| GIOCANDO | 1| Il video è in riproduzione |
+| IN PAUSA | 2| Il video è in pausa |
+| BUFFER | 3| Il video è in buffering |
+| CUED | 5| Il video è suggerito |
 
-## Quality Levels
+## Livelli di qualità
 
 - `small`: 240p
 - `medium`: 360p
@@ -340,19 +341,19 @@ export class YouTubeService {
 - `hd720`: 720p
 - `hd1080`: 1080p
 - `highres`: >1080p
-- `default`: Auto quality
+- `default`: qualità automatica
 
-## Best Practices
+## Migliori pratiche
 
-1. **Initialize once**
-   Create player instance once and reuse it:
+1. **Inizializza una volta**
+   Crea l'istanza del lettore una volta e riutilizzala:
    ```typescript
    let player = await YoutubePlayer.initialize(options);
    // Reuse player for different videos
    await YoutubePlayer.loadVideoById(player, { videoId: 'NEW_ID' });
    ```
 
-2. **Handle errors gracefully**
+2. **Gestire gli errori con garbo**
    ```typescript
    YoutubePlayer.addEventListener(playerId, 'onError', (event) => {
      switch (event.data) {
@@ -370,8 +371,8 @@ export class YouTubeService {
    });
    ```
 
-3. **Clean up**
-   Destroy player when component unmounts:
+3. **Pulisci**
+   Distruggi il giocatore quando il componente viene smontato:
    ```typescript
    useEffect(() => {
      return () => {
@@ -382,7 +383,7 @@ export class YouTubeService {
    }, []);
    ```
 
-4. **Respect user preferences**
+4. **Rispetta le preferenze dell'utente**
    ```typescript
    // Don't autoplay unless user initiated
    playerVars: {
@@ -390,7 +391,7 @@ export class YouTubeService {
    }
    ```
 
-5. **Monitor playback**
+5. **Monitora la riproduzione**
    ```typescript
    setInterval(async () => {
      const time = await YoutubePlayer.getCurrentTime(playerId);
@@ -398,35 +399,35 @@ export class YouTubeService {
    }, 1000);
    ```
 
-## Platform Notes
+## Note sulla piattaforma
 
 ### iOS
-- Works on iOS 9.0+
-- Uses WKWebView with YouTube iframe API
-- Fullscreen supported
+- Funziona su iOS 9.0+
+- Utilizza WKWebView con iframe YouTube API
+- Supporta lo schermo intero
 
 ### Android
-- Works on Android 5.0 (API 21)+
-- Uses WebView with YouTube iframe API
-- Fullscreen supported
+- Funziona su Android 5.0 (API 21)+
+- Utilizza WebView con iframe YouTube API
+- Supporta lo schermo intero
 
-### Web
-- Direct YouTube iframe integration
-- Full API support
-- Best performance
+### Rete
+- Integrazione iframe diretta di YouTube
+- Supporto completo per API
+- Migliori prestazioni
 
-## Troubleshooting
+## Risoluzione dei problemi
 
-**Player not loading:**
-- Check video ID is valid
-- Verify internet connection
-- Ensure YouTube embedding is allowed for the video
+**Il giocatore non si carica:**
+- Verifica che l'ID video sia valido
+- Verificare la connessione Internet
+- Assicurati che l'incorporamento su YouTube sia consentito per il video
 
-**Events not firing:**
-- Make sure listeners are added after initialization
-- Check player is ready before adding listeners
+**Eventi non attivati:**
+- Assicurati che gli ascoltatori vengano aggiunti dopo l'inizializzazione
+- Controlla che il player sia pronto prima di aggiungere ascoltatori
 
-**Quality issues:**
-- Check available quality levels first
-- Some videos don't support all qualities
-- Quality changes may not be immediate
+**Problemi di qualità:**
+- Controlla prima i livelli di qualità disponibili
+- Alcuni video non supportano tutte le qualità
+- I cambiamenti di qualità potrebbero non essere immediati

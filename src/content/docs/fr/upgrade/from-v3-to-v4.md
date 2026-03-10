@@ -1,42 +1,43 @@
 ---
-locale: fr
-title: "From V3 to V4"
-description: "How to Mise à niveau from V3 to V4 of  Capgo updater, understand what are the breaking changes and how to handle them"
-sidebar: 
+title: De la V3 à la V4
+description: >-
+  Comment passer de la V3 à la V4 du programme de mise à jour Capgo, comprendre
+  quelles sont les modifications majeures et comment les gérer
+sidebar:
   order: 3
+locale: fr
 ---
+## Pourquoi cette mise à jour
 
-## Why this Mise à niveau
+Après de nombreuses discussions dans la communauté Discord avec vous. J'ai découvert que le mode manuel était très trop manuel et dangereux à utiliser, par exemple, le retour automatique n'était pas possible, donc si vous échouez à la mise à jour manuelle, l'utilisateur doit supprimer l'application et la réinstaller, ce qui est terrible UX.
 
-After many talk in the discord Communauté with you. I discovered the manual mode was very too manual and not safe to use, for Exemple, auto-revert was not possible, so if you Échoué Mise à jour in manual the Utilisateur have to Retirer the Application and Installer Retour, what is terrible UX.
-
-Meanwhile, I took this as an opportunity to give more freedom to you, and Retirer all bad code I made.
+En attendant, j'en ai profité pour vous donner plus de liberté et supprimer tous les mauvais codes que j'ai créés.
 
 ## Installer
 
 `npm i @capgo/capacitor-updater@4`
 
-## Auto-Mise à jour cloud
+## Cloud de mise à jour automatique
 
-If you use the basic Exemple in your Application, you are safe to Migrer to the Nouveau Version, enjoy!
+Si vous utilisez l'exemple de base dans votre application, vous pouvez migrer en toute sécurité vers la nouvelle version, profitez-en !
 
-## Auto-Mise à jour self-hosted
+## Mise à jour automatique auto-hébergée
 
-For you, still simple, the changes are:
+Pour vous, toujours simple, les changements sont :
 
-* The name of the setting from `autoUpdateUrl` in `updateUrl`
-* The Endpoint method changed from `GET` to POST
+* Le nom du paramètre de `autoUpdateUrl` dans `updateUrl`
+* La méthode Endpoint est passée de `GET` à POST
 
-## Manual Utilisateurs
+## Utilisateurs manuels
 
-For you, this is the most significant change, but for the best! You get tons of improvements, Read carefully.
+Pour vous, c’est le changement le plus important, mais pour le meilleur ! Vous obtenez des tonnes d’améliorations, lisez attentivement.
 
-## Changes
+## Modifications
 
-* `autoUpdateUrl` becomes `updateUrl` since this setting can be used in manual mode now too
-* Delete of `cancelDelay` and `delayUpdate` in favor of `setDelay`
-* No more `versionName` in set
-* Change `version` key, who was returned in most function to object `BundleInfo`
+* `autoUpdateUrl` devient `updateUrl` puisque ce paramètre peut désormais également être utilisé en mode manuel
+* Suppression de `cancelDelay` et `delayUpdate` au profit de `setDelay`
+* Plus de `versionName` dans l'ensemble
+* Changez la clé `version`, qui a été renvoyée dans la plupart des fonctions, en objet `BundleInfo`
 
 ```typescript
 interface BundleInfo {
@@ -47,26 +48,26 @@ interface BundleInfo {
 }
 ```
 
-* Renamed of misleading names now (even to explain cannot be clear, but at usage is easy to understand the new one):
-  * what was called a `version` is now referring to a `bundle`
-  * `id` refer to the old `version` who was a random string of 10 char, this `id` is the only trustable and unique way to access to your bundles, example `7Dfcd2RedN`.
-  * `version` refer now to the `versionName` you choose for a bundle, example `1.0.0`
-* `updateUrl` move from `get` to `post`, since custom headers were a problem for some of you and post is more logical, all previous headers go to the body and prefix `cap_` disappear.
-* `versionName` method is deleted, in favor of `getId`
-* list returns now a list of `BundleInfo`
-* Rename `getId` in `getDeviceId`
-* `autoUpdate` becomes true by default, if you use Manual mode, set it to false.
+* Renommé de noms trompeurs maintenant (même l'explication ne peut pas être claire, mais à l'usage il est facile de comprendre le nouveau) :
+  * ce qui s'appelait un `version` fait désormais référence à un `bundle`
+  * `id` fait référence à l'ancien `version` qui était une chaîne aléatoire de 10 caractères, ce `id` est le seul moyen fiable et unique d'accéder à vos bundles, exemple `7Dfcd2RedN`.
+  * `version` référez-vous maintenant au `versionName` que vous choisissez pour un bundle, exemple `1.0.0`
+* `updateUrl` passe de `get` à `post`, puisque les en-têtes personnalisés étaient un problème pour certains d'entre vous et que la publication est plus logique, tous les en-têtes précédents vont dans le corps et le préfixe `cap_` disparaît.
+* La méthode `versionName` est supprimée, au profit de `getId`
+* list renvoie maintenant une liste de `BundleInfo`
+* Renommez `getId` en `getDeviceId`
+* `autoUpdate` devient vrai par défaut, si vous utilisez le mode Manuel, définissez-le sur faux.
 
-## News
+## Actualités
 
-* Method `getLatest`, this method allows you to get from your server set with `updateUrl` the last version available.
-* Method `setDelay` who take `{`kind`:` "background" | "kill" | "nativeVersion" | "date", value? : string`}` as argument to set delay to different modes.
-* Method `next`, to set the version in next backgrounding, in opposite to `set` who do it instantly.
-* Method `isAutoUpdateEnabled`, to let you know if you are in auto-update context
-* Event `downloadComplete` when download reach 100%
-* Added mandatory field `version` in download method
-* `notifyAppReady` become mandatory in manual mode too, if not call after 10 sec the app reverts to past version.
+* Méthode `getLatest`, cette méthode vous permet d'obtenir depuis votre serveur paramétré avec `updateUrl` la dernière version disponible.
+* Méthode `setDelay` qui prend `{`kind`:` "fond" | "tuer" | "Version native" | "date", valeur ? : string`}` comme argument pour définir le délai sur différents modes.
+* Méthode `next`, pour mettre la version en backgrounding suivant, contrairement à `set` qui le fait instantanément.
+* Méthode `isAutoUpdateEnabled`, pour vous indiquer si vous êtes dans un contexte de mise à jour automatique
+* Événement `downloadComplete` lorsque le téléchargement atteint 100 %
+* Ajout du champ obligatoire `version` dans la méthode de téléchargement
+* `notifyAppReady` devient également obligatoire en mode manuel, si vous n'appelez pas après 10 secondes, l'application revient à la version précédente.
 
-## Contributors
+## Contributeurs
 
-[@lincolnthree](https://github.com/lincolnthree/) Thank you so much for starting this work, it was impossible to make this Mise à jour work without you.
+[@lincolntrois](https://github.com/lincolnthree/) Merci beaucoup d'avoir commencé ce travail, il était impossible de faire fonctionner cette mise à jour sans vous.

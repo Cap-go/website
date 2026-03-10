@@ -1,40 +1,37 @@
 ---
-title: Android Play Store Review Guidelines for IAP
-description: >-
-  Complete guide to passing Google Play review with in-app purchases and
-  subscriptions, including compliance requirements and best practices.
+title: Android Play Store IAP 검토 지침
+description: 규정 준수 요구 사항 및 모범 사례를 포함하여 인앱 구매 및 구독에 대한 Google Play 검토 통과에 대한 전체 가이드입니다.
 sidebar:
   order: 11
 locale: ko
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 
-Getting your Android app approved on Google Play requires compliance with Google's policies, especially for apps with in-app purchases and subscriptions. This guide covers everything you need to pass review successfully.
+Android 앱을 Google Play에서 승인받으려면 Google의 정책을 준수해야 하며, 특히 인앱 구매 및 구독이 포함된 앱의 경우 더욱 그렇습니다. 이 가이드에서는 검토를 성공적으로 통과하는 데 필요한 모든 내용을 다룹니다.
 
-## Google Play Billing Requirements
+## Google Play 결제 요구사항
 
-### Mandatory Billing System
+### 필수 결제 시스템
 
-For digital goods and services, you **must** use Google Play's billing system:
+디지털 상품 및 서비스의 경우 **반드시** Google Play의 결제 시스템을 사용해야 합니다.
 
-**Digital Goods (Must Use Play Billing):**
-- Subscriptions to premium features
-- In-app currency or credits
-- Digital content (ebooks, music, videos)
-- Game upgrades and power-ups
-- App unlocks and premium tiers
+**디지털 상품(Play 결제를 사용해야 함):**
+- 프리미엄 기능 구독
+- 인앱 통화 또는 크레딧
+- 디지털 콘텐츠(전자책, 음악, 비디오)
+- 게임 업그레이드 및 파워업
+- 앱 잠금 해제 및 프리미엄 등급
 
-**Physical Goods (Cannot Use Play Billing):**
-- Physical merchandise
-- Real-world services
-- One-time donations to nonprofits
+**실제 상품(Play 결제 사용 불가):**
+- 실제 상품
+- 실제 서비스
+- 비영리 단체에 대한 일회성 기부
 
-:::caution 2025 Requirement
-New apps must use the `monetization.subscriptions` APIs for handling subscription catalogs. Legacy billing APIs are deprecated.
+:::주의 2025 요구 사항
+새로운 앱은 구독 카탈로그를 처리하기 위해 `monetization.subscriptions` API를 사용해야 합니다. 기존 결제 API는 더 이상 사용되지 않습니다.
 :::
 
-### Implementation with Native Purchases
+### 기본 구매를 통한 구현
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -59,22 +56,22 @@ const transaction = await NativePurchases.purchaseProduct({
 console.log('Purchase token for server validation:', transaction.purchaseToken);
 ```
 
-## Transparency and Disclosure Requirements
+## 투명성 및 공개 요구 사항
 
-### Upfront Pricing Disclosure
+### 선불 가격 공개
 
-Google Play mandates clear disclosure of all costs before purchase:
+Google Play에서는 구매 전 모든 비용을 명확하게 공개하도록 요구합니다.
 
-**Required Elements:**
-- Exact price in user's local currency
-- Billing frequency (monthly, yearly, etc.)
-- What's included in the subscription
-- Total cost for introductory offers
-- When charges will occur
+**필수 요소:**
+- 사용자의 현지 통화로 표시된 정확한 가격
+- 청구 빈도(월별, 연간 등)
+- 구독에 포함되는 내용
+- 입문 제안에 대한 총 비용
+- 요금이 발생하는 경우
 
-![UI Design Best Practices](/native-purchases/review-guides/ui-design-dos-donts.webp)
+![UI 디자인 모범 사례](/native-purchases/review-guides/ui-design-dos-donts.webp)
 
-**Example of Compliant UI:**
+**호환 UI의 예:**
 ```typescript
 function SubscriptionCard({ product }) {
   return (
@@ -113,45 +110,45 @@ function SubscriptionCard({ product }) {
 }
 ```
 
-### Auto-Renewal Disclosure
+### 자동 갱신 공개
 
-Before a subscription auto-renews, Google requires:
-- Clear notification that renewal will occur
-- Reminder of the price
-- Easy access to cancellation
+구독이 자동 갱신되기 전에 Google에는 다음이 필요합니다.
+- 갱신이 발생한다는 명확한 알림
+- 가격 알림
+- 취소에 대한 쉬운 접근
 
 :::tip
-The native-purchases plugin works with Google Play to handle auto-renewal notifications automatically. Ensure your subscription products are properly configured in Google Play Console.
+기본 구매 플러그인은 Google Play과 함께 작동하여 자동 갱신 알림을 자동으로 처리합니다. Google Play 콘솔에서 구독 제품이 올바르게 구성되었는지 확인하세요.
 :::
 
-### Price Consistency Across Platforms
+### 플랫폼 간 가격 일관성
 
-**Critical Rule:** Prices must be consistent across all platforms where your app is available.
+**중요 규칙:** 가격은 앱을 사용할 수 있는 모든 플랫폼에서 일관되어야 합니다.
 
-**Example Violation:**
-- iOS: $9.99/month
-- Android: $7.99/month
-- Web: $11.99/month
+**위반 예:**
+- iOS: $9.99/월
+- Android: $7.99/월
+- 웹: $11.99/월
 
-**Why It Matters:** Users can screenshot price differences and report to Google, triggering policy violations.
+**중요한 이유:** 사용자는 가격 차이를 캡쳐하여 Google에 신고하여 정책 위반을 유발할 수 있습니다.
 
-## Privacy Policy Requirements
+## 개인정보 보호정책 요구사항
 
-### Mandatory Privacy Policy
+### 필수 개인정보 보호정책
 
-If your app includes in-app purchases, you must:
+앱에 인앱 구매가 포함되어 있는 경우 다음을 수행해야 합니다.
 
-1. **Link in Play Store Listing**
-   - Add privacy policy URL in Play Console
-   - Must be publicly accessible
-   - Must be in the same language as your app
+1. **Play Store 목록의 링크**
+   - Play Console에 개인정보처리방침 URL 추가
+   - 공개적으로 접근 가능해야 함
+   - 앱과 동일한 언어로 작성되어야 합니다.
 
-2. **Link Within App**
-   - Display privacy policy in app settings
-   - Show before collecting any user data
-   - Make easily discoverable
+2. **앱 내 링크**
+   - 앱 설정에 개인정보 보호정책 표시
+   - 사용자 데이터를 수집하기 전에 표시
+   - 쉽게 검색 가능하게 만들기
 
-**Example Implementation:**
+**구현 예:**
 ```typescript
 function SettingsScreen() {
   const openPrivacyPolicy = () => {
@@ -182,31 +179,29 @@ function SettingsScreen() {
 }
 ```
 
-### Data Safety Section
+### 데이터 안전 섹션
 
-Google Play requires detailed disclosure in the Data Safety section:
+Google Play에서는 데이터 안전 섹션에 자세한 공개가 필요합니다.
 
-**For IAP Apps, Declare:**
-- Purchase history collection
-- Email addresses (for receipts)
-- Device IDs (for fraud prevention)
-- Payment information handling
-- Analytics data collection
+**IAP 앱의 경우 다음을 선언하세요.**
+- 구매내역 수집
+- 이메일 주소(영수증용)
+- 기기 ID(사기 방지용)
+- 결제정보 처리
+- 분석 데이터 수집
 
 :::warning
-The Data Safety section is legally binding. Inaccurate declarations can result in app removal.
+데이터 안전 섹션은 법적 구속력을 갖습니다. 부정확한 선언으로 인해 앱이 제거될 수 있습니다.
 :::
 
-## Common Rejection Reasons
+## 일반적인 거부 사유
 
-### 1. Missing or Incorrect Billing Implementation
+### 1. 누락되거나 잘못된 결제 구현**실패하는 이유:**
+- 디지털 상품에 대한 Google Play 청구를 사용하지 않음
+- 더 이상 사용되지 않는 결제 API 사용
+- 구독을 위한 맞춤형 결제 솔루션 구현
 
-**Why It Fails:**
-- Not using Google Play Billing for digital goods
-- Using deprecated billing APIs
-- Implementing custom payment solutions for subscriptions
-
-**Prevention:**
+**예방:**
 ```typescript
 // ✅ Correct: Use native-purchases (uses Google Play Billing)
 await NativePurchases.purchaseProduct({
@@ -217,14 +212,14 @@ await NativePurchases.purchaseProduct({
 // await CustomPayment.charge(user, 9.99);
 ```
 
-### 2. Unclear Pricing or Hidden Costs
+### 2. 불분명한 가격 또는 숨겨진 비용
 
-**Why It Fails:**
-- Price only shown after clicking purchase
-- Additional fees not disclosed upfront
-- Vague subscription terms
+**실패하는 이유:**
+- 구매를 클릭한 후에만 가격이 표시됩니다.
+- 추가 비용은 사전에 공개되지 않습니다.
+- 모호한 구독 조건
 
-**Prevention:**
+**예방:**
 ```typescript
 function PurchaseScreen({ product }) {
   return (
@@ -264,33 +259,33 @@ function PurchaseScreen({ product }) {
 }
 ```
 
-### 3. Deceptive Subscription Patterns
+### 3. 사기성 구독 패턴
 
-**Why It Fails:**
-- Pre-selecting premium options
-- Hiding cheaper alternatives
-- Making cancellation difficult
-- Fake urgency ("Only 3 spots left!")
+**실패하는 이유:**
+- 프리미엄 옵션 사전 선택
+- 더 저렴한 대안 숨기기
+- 취소를 어렵게 만드는 경우
+- 거짓 긴급성("3자리만 남았어요!")
 
-![Description Best Practices](/native-purchases/review-guides/description-guidelines-1.webp)
+![설명 모범 사례](/native-purchases/review-guides/description-guidelines-1.webp)
 
-![Marketing Guidelines](/native-purchases/review-guides/description-guidelines-2.webp)
+![마케팅 가이드라인](/native-purchases/review-guides/description-guidelines-2.webp)
 
-**Prevention:**
-- Display all subscription tiers equally
-- Make cancellation clear and accessible
-- Avoid countdown timers or fake scarcity
-- Don't use dark patterns to push expensive options
+**예방:**
+- 모든 구독 등급을 동일하게 표시
+- 취소를 명확하고 접근 가능하게 만듭니다.
+- 카운트다운 타이머나 가짜 희소성을 피하세요.
+- 값비싼 옵션을 강요하기 위해 어두운 패턴을 사용하지 마세요.
 
-### 4. Incomplete Testing
+### 4. 불완전한 테스트
 
-**Why It Fails:**
-- App crashes when purchasing
-- Products don't load
-- Purchase confirmation doesn't show
-- Premium features don't unlock after purchase
+**실패하는 이유:**
+- 구매 시 앱이 다운됩니다.
+- 제품이 로드되지 않습니다.
+- 구매 확인이 표시되지 않습니다.
+- 구매 후 프리미엄 기능이 잠금 해제되지 않습니다.
 
-**Prevention:**
+**예방:**
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
 
@@ -337,51 +332,51 @@ async function testPurchaseFlow() {
 }
 ```
 
-### 5. Privacy Policy Violations
+### 5. 개인정보 보호정책 위반
 
-**Why It Fails:**
-- No privacy policy link in app
-- Privacy policy not accessible
-- Data collection not disclosed
-- Data Safety section inaccurate
+**실패하는 이유:**
+- 앱에 개인정보 보호정책 링크가 없습니다.
+- 개인정보취급방침에 액세스할 수 없습니다.
+- 수집된 데이터는 공개되지 않습니다.
+- 데이터 안전 섹션이 부정확함
 
-**Prevention:**
-- Add privacy policy to Play Store listing
-- Include link in app settings
-- Accurately fill out Data Safety section
-- Update policy when adding new data collection
+**예방:**
+- Play Store 목록에 개인정보 보호정책 추가
+- 앱 설정에 링크 포함
+- 데이터 안전 섹션을 정확하게 작성하세요.
+- 새로운 데이터 수집 추가 시 정책 업데이트
 
-## Alternative Billing Systems (2025 Update)
+## 개발자 제공 결제 시스템(2025 업데이트)
 
-### Regional Compliance
+### 지역 규정 준수
 
-Google now allows alternative billing systems in certain regions:
+Google은 이제 특정 지역에서 대체 결제 시스템을 허용합니다.
 
-**Eligible Regions:**
-- European Economic Area (EEA)
-- South Korea
-- India (coming soon)
+**적격 지역:**
+- 유럽경제지역(EEA)
+- 한국
+- 인도(곧 제공 예정)
 
-**Requirements if Using Alternative Billing:**
-- Must still offer Google Play Billing as option
-- Clear communication to users about choice
-- Comply with local regulations
-- Service fee still applies (reduced)
+**대체 결제 사용 시 요구 사항:**
+- Google Play 청구를 옵션으로 제공해야 합니다.
+- 선택에 관해 사용자에게 명확한 의사소통
+- 현지 규정을 준수합니다.
+- 서비스 수수료는 그대로 적용됩니다(감소).
 
 :::note
-For most developers, sticking with Google Play Billing only is simpler. The native-purchases plugin handles this automatically.
+대부분의 개발자에게는 Google Play 청구만 사용하는 것이 더 간단합니다. 기본 구매 플러그인은 이를 자동으로 처리합니다.
 :::
 
-## Subscription Management
+## 구독 관리
 
-### Easy Cancellation
+### 간편 취소
 
-Users must be able to:
-- View active subscriptions easily
-- Cancel without contacting support
-- Understand when cancellation takes effect
+사용자는 다음을 수행할 수 있어야 합니다.
+- 활성 구독을 쉽게 봅니다.
+- 지원팀에 문의하지 않고 취소
+- 취소가 적용되는 시기 이해
 
-**Implementation:**
+**구현:**
 ```typescript
 import { NativePurchases } from '@capgo/native-purchases';
 
@@ -405,12 +400,12 @@ function ManageSubscriptionButton() {
 }
 ```
 
-### Cancellation Grace Period
+### 취소 유예 기간
 
-**Required Disclosure:**
-- When does cancellation take effect?
-- Do users keep access until period ends?
-- Are partial refunds available?
+**필수 공개:**
+- 취소는 언제부터 적용되나요?
+- 사용자는 기간이 종료될 때까지 계속 액세스할 수 있나요?
+- 부분 환불이 가능한가요?
 
 ```typescript
 function CancellationInfo() {
@@ -432,74 +427,72 @@ function CancellationInfo() {
 }
 ```
 
-## Pre-Submission Checklist
+## 제출 전 체크리스트
 
-![Pre-Submission Checklist](/native-purchases/review-guides/pre-submission-checklist.webp)
+![제출 전 체크리스트](/native-purchases/review-guides/pre-submission-checklist.webp)
 
 <Steps>
 
-1. **Verify Billing Implementation**
-   - Using Google Play Billing (via native-purchases)
-   - All subscription products created in Play Console
-   - Products are activated and published
-   - Pricing set for all target countries
+1. **결제 구현 확인**
+   - Google Play 청구 사용(기본 구매를 통해)
+   - Play Console에서 생성된 모든 구독 제품
+   - 제품이 활성화되고 게시됩니다.
+   - 모든 대상 국가에 대해 가격 설정
 
-2. **Test Purchase Flows**
-   - Create license test account
-   - Test each subscription tier
-   - Verify products load correctly
-   - Test purchase completion
-   - Verify premium features unlock
-   - Test subscription restoration
-   - Test on multiple devices
+2. **구매 흐름 테스트**
+   - 라이센스 테스트 계정 생성
+   - 각 구독 등급을 테스트하세요.
+   - 제품이 올바르게 로드되었는지 확인
+   - 테스트 구매 완료
+   - 프리미엄 기능 잠금 해제 확인
+   - 테스트 구독 복원
+   - 여러 장치에서 테스트3. **모든 사본 검토**
+   - 구매하기 전에 가격이 명확하게 표시됩니다.
+   - 모든 수수료는 사전에 공개됩니다.
+   - 구독 조건이 명확합니다.
+   - 취소 절차 설명
+   - 오해의 소지가 있는 주장은 하지 않습니다.
 
-3. **Review All Copy**
-   - Pricing displayed clearly before purchase
-   - All fees disclosed upfront
-   - Subscription terms are clear
-   - Cancellation process explained
-   - No misleading claims
+4. **개인정보 보호 규정 준수**
+   - Play Console에 연결된 개인정보취급방침
+   - 앱에서 액세스할 수 있는 개인정보 보호정책
+   - 데이터 안전 섹션을 정확하게 작성함
+   - 정당화되고 문서화된 권한
 
-4. **Privacy Compliance**
-   - Privacy policy linked in Play Console
-   - Privacy policy accessible in app
-   - Data Safety section completed accurately
-   - Permissions justified and documented
+5. **콘텐츠 등급**
+   - 콘텐츠 등급 설문지 작성
+   - 등급이 실제 콘텐츠와 일치하는지 확인하세요.
+   - 설문지에 인앱 구매를 선언하세요.
 
-5. **Content Rating**
-   - Complete content rating questionnaire
-   - Ensure rating matches actual content
-   - Declare in-app purchases in questionnaire
-
-6. **Prepare Store Listing**
-   - App description accurate
-   - Screenshots show current version
-   - Feature graphic meets requirements
-   - All required assets uploaded
+6. **스토어 등록정보 준비**
+   - 정확한 앱 설명
+   - 스크린샷은 현재 버전을 보여줍니다.
+   - 기능 그래픽이 요구 사항을 충족합니다.
+   - 모든 필수 자산이 업로드되었습니다.
 
 </Steps>
 
-## Review Timeline
+## 타임라인 검토
 
-**Initial Review:** 7 days on average (can be faster)
-**Updates:** Typically faster than initial submission
-**Policy Violations:** Immediate suspension possible
-**Appeals:** 7-14 days for review
+**최초 검토:** 평균 7일(더 빠를 수 있음)
+**업데이트:** 일반적으로 초기 제출보다 빠릅니다.
+**정책 위반:** 즉시 정지 가능
+**이의신청:** 검토에 7~14일 소요
 
-:::tip Rolling Reviews
-Unlike Apple, Google reviews apps continuously. Your app may go live at any time during the review period, not at a fixed time.
+:::tip 롤링 리뷰
+Apple과 달리 Google는 지속적으로 앱을 검토합니다. 정해진 시간이 아닌 검토 기간 중 언제든지 앱이 게시될 수 있습니다.
 :::
 
-## Testing Before Submission
+## 제출 전 테스트
 
-### License Testing
+### 라이센스 테스트
 
-1. **Add Test Account:**
-   - Go to Play Console
-   - Setup > License Testing
-   - Add Gmail account for testing
+1. **테스트 계정 추가:**
+   - Play Console로 이동
+   - 설정 > 라이선스 테스트
+   - 테스트용 Gmail 계정 추가
 
-2. **Test in Sandbox:**
+2. **샌드박스에서 테스트:**
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
 
@@ -530,24 +523,24 @@ async function testInSandbox() {
 }
 ```
 
-3. **Verify Test Banner:**
-   - When purchasing with test account
-   - Should see "Test purchase" notification
-   - No real charges occur
+3. **테스트 배너 확인:**
+   - 테스트 계정으로 구매 시
+   - "테스트 구매" 알림이 표시되어야 합니다.
+   - 실제 요금이 발생하지 않습니다.
 
-### Internal Testing Track
+### 내부 테스트 트랙
 
-Before production release:
+프로덕션 릴리스 전:
 
-1. Create Internal Testing track in Play Console
-2. Upload APK/AAB
-3. Add tester email addresses
-4. Testers download from Play Store (testing track)
-5. Verify purchase flows work end-to-end
+1. Play Console에서 내부 테스트 트랙 만들기
+2. APK/AAB 업로드
+3. 테스터 이메일 주소 추가
+4. Play Store(테스트 트랙)에서 테스터 다운로드
+5. 구매 흐름이 처음부터 끝까지 작동하는지 확인하세요.
 
-## Best Practices for Native Purchases
+## 기본 구매 모범 사례
 
-### Handle All Purchase States
+### 모든 구매 상태 처리
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -613,7 +606,7 @@ async function handlePurchase(productId: string, planIdentifier?: string) {
 }
 ```
 
-### Implement Restore Purchases
+### 복원 구매 구현
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -669,7 +662,7 @@ function RestorePurchasesButton() {
 }
 ```
 
-### Check Subscription Status
+### 구독 상태 확인
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -706,37 +699,37 @@ async function checkSubscriptionStatus() {
 }
 ```
 
-## If Your App Gets Rejected
+## 앱이 거부되는 경우
 
-### Common Policy Violations
+### 일반적인 정책 위반
 
-**Payments Policy:**
-- Not using Google Play Billing
-- Misleading subscription terms
-- Hidden costs
+**결제 정책:**
+- Google Play 결제를 사용하지 않음
+- 오해의 소지가 있는 구독 약관
+- 숨겨진 비용
 
-**User Data Policy:**
-- Missing privacy policy
-- Inaccurate Data Safety declarations
-- Excessive permissions
+**사용자 데이터 정책:**
+- 개인정보취급방침 누락
+- 부정확한 데이터 안전 선언
+- 과도한 권한
 
-### Resolution Steps
+### 해결 단계
 
 <Steps>
 
-1. **Review the Violation Notice**
-   - Read the specific policy cited
-   - Understand what Google flagged
-   - Check examples they provided
+1. **위반 통지 검토**
+   - 인용된 특정 정책을 읽어 보십시오.
+   - Google에 플래그가 지정된 내용을 이해합니다.
+   - 제공한 예시를 확인하세요.
 
-2. **Fix the Issue**
-   - Address root cause, not just symptoms
-   - Test thoroughly after fix
-   - Document all changes made
+2. **문제 해결**
+   - 단순히 증상이 아닌 근본 원인을 해결합니다.
+   - 수정 후 철저한 테스트
+   - 모든 변경 사항을 문서화하세요.
 
-3. **Submit Appeal (if applicable)**
+3. **이의신청 제출(해당하는 경우)**
 
-   ![Clarification and Appeal Process](/native-purchases/review-guides/clarification-process.webp)
+   ![해명 및 항소 절차](/native-purchases/review-guides/clarification-process.webp)
 
    ```
    Subject: Policy Violation Appeal - [App Name]
@@ -759,39 +752,37 @@ async function checkSubscriptionStatus() {
    Thank you for your consideration.
    ```
 
-   ![Request Documentation Example](/native-purchases/review-guides/request-documents.webp)
+   ![문서 요청 예시](/native-purchases/review-guides/request-documents.webp)
 
-4. **Resubmit or Update**
-   - Upload fixed version
-   - Resubmit for review
-   - Monitor status in Play Console
+4. **다시 제출 또는 업데이트**
+   - 수정된 버전 업로드
+   - 검토를 위해 다시 제출
+   - Play Console에서 상태 모니터링
 
 </Steps>
 
-## Additional Resources
+## 추가 리소스
 
-- [Google Play Developer Policy Center](https://play.google.com/about/developer-content-policy/)
-- [Google Play Billing Documentation](https://developer.android.com/google/play/billing)
-- [Subscriptions Best Practices](https://developer.android.com/google/play/billing/subscriptions)
-- [Play Console Help](https://support.google.com/googleplay/android-developer/)
+- [Google Play 개발자 정책 센터](https://play.google.com/about/developer-content-policy/)
+- [Google Play 결제 문서](https://developer.android.com/google/play/billing)
+- [구독 모범 사례](https://developer.android.com/google/play/billing/subscriptions)
+- [Play Console 도움말](https://support.google.com/googleplay/android-developer/)
 
-## Need Expert Help?
+## 전문가의 도움이 필요하신가요?Play Store 검토 탐색은 특히 새로운 2025 테스트 요구 사항의 경우 복잡할 수 있습니다. 맞춤형 지원이 필요한 경우:
 
-Navigating Play Store review can be complex, especially with the new 2025 testing requirements. If you need personalized assistance:
+**[저희 팀과 상담 전화 예약](https://cal.com/team/capgo/capacitor-consulting-services)** 다음과 같은 도움이 필요합니다.
+- Play Store 검토 준비 완료
+- 테스트 트랙 설정 및 테스터 모집
+- IAP 구현 검토
+- 데이터 안전 및 개인정보 보호 규정 준수
+- 거부 문제 해결 및 이의 제기
+- 앱 제출 프로세스 완료
 
-**[Book a consultation call with our team](https://cal.com/team/capgo/capacitor-consulting-services)** for help with:
-- Complete Play Store review preparation
-- Testing track setup and tester recruitment
-- IAP implementation review
-- Data Safety and privacy compliance
-- Rejection troubleshooting and appeals
-- Complete app submission process
+우리 전문가들은 성공적인 Play Store 제출을 통해 수백 개의 앱을 안내했으며 2025년 요구 사항을 탐색하는 데 도움을 줄 수 있습니다.
 
-Our experts have guided hundreds of apps through successful Play Store submissions and can help you navigate the 2025 requirements.
+## 지원
 
-## Support
-
-Need help with implementation?
-- Review the [Native Purchases documentation](/docs/plugins/native-purchases/getting-started/)
-- Check [Android sandbox testing guide](/docs/plugins/native-purchases/android-sandbox-testing/)
-- Visit [Google Play Developer Support](https://support.google.com/googleplay/android-developer/)
+구현에 도움이 필요하십니까?
+- [기본 구매 문서](/docs/plugins/native-purchases/getting-started/) 검토
+- [Android 샌드박스 테스트 가이드](/docs/plugins/native-purchases/android-sandbox-testing/) 확인
+- [Google Play 개발자 지원](https://support.google.com/googleplay/android-developer/)을 방문하세요.

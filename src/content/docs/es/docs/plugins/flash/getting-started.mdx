@@ -1,26 +1,27 @@
 ---
-title: Getting Started
-description: Learn how to install and use the Flash plugin to control your device's flashlight in your Capacitor app.
+title: Empezando
+description: >-
+  Aprenda cómo instalar y usar el complemento Flash para controlar la linterna
+  de su dispositivo en su aplicación Capacitor.
 sidebar:
   order: 2
 locale: es
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Instalar el paquete**
    <PackageManagers pkg="@capgo/capacitor-flash" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Sincronización con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Usage
+## Uso
 
-Import the plugin and use its methods to control the flashlight:
+Importe el complemento y use sus métodos para controlar la linterna:
 
 ```typescript
 import { CapacitorFlash } from '@capgo/capacitor-flash';
@@ -53,20 +54,20 @@ const toggle = async () => {
 };
 ```
 
-## API Reference
+## API Referencia
 
-### isAvailable()
+### está disponible()
 
-Checks if flashlight is available on the device.
+Comprueba si la linterna está disponible en el dispositivo.
 
 ```typescript
 const result = await CapacitorFlash.isAvailable();
 // Returns: { value: boolean }
 ```
 
-### switchOn(options?)
+### encender (¿opciones?)
 
-Turns the flashlight on.
+Enciende la linterna.
 
 ```typescript
 interface SwitchOnOptions {
@@ -76,32 +77,32 @@ interface SwitchOnOptions {
 await CapacitorFlash.switchOn({ intensity: 0.5 });
 ```
 
-### switchOff()
+### apagar()
 
-Turns the flashlight off.
+Apaga la linterna.
 
 ```typescript
 await CapacitorFlash.switchOff();
 ```
 
-### isSwitchedOn()
+### está encendido()
 
-Checks if the flashlight is currently on.
+Comprueba si la linterna está encendida actualmente.
 
 ```typescript
 const result = await CapacitorFlash.isSwitchedOn();
 // Returns: { value: boolean }
 ```
 
-### toggle()
+### alternar()
 
-Toggles the flashlight on/off.
+Activa y desactiva la linterna.
 
 ```typescript
 await CapacitorFlash.toggle();
 ```
 
-## Complete Example
+## Ejemplo completo
 
 ```typescript
 import { CapacitorFlash } from '@capgo/capacitor-flash';
@@ -150,10 +151,10 @@ export class FlashlightService {
 }
 ```
 
-## Best Practices
+## Mejores prácticas
 
-1. **Check availability first**
-   Always verify flashlight availability before using it:
+1. **Consulta primero la disponibilidad**
+   Siempre verifique la disponibilidad de la linterna antes de usarla:
    ```typescript
    const { value } = await CapacitorFlash.isAvailable();
    if (!value) {
@@ -161,7 +162,7 @@ export class FlashlightService {
    }
    ```
 
-2. **Handle errors gracefully**
+2. **Maneja los errores con elegancia**
    ```typescript
    try {
      await CapacitorFlash.switchOn();
@@ -170,28 +171,28 @@ export class FlashlightService {
    }
    ```
 
-3. **Turn off when not needed**
-   Always turn off the flashlight when your app goes to background or when the feature is no longer needed to save battery.
+3. **Apagar cuando no sea necesario**
+   Apague siempre la linterna cuando su aplicación pase a segundo plano o cuando la función ya no sea necesaria para ahorrar batería.
 
-4. **Avoid rapid toggling**
-   Implement debouncing to prevent rapid on/off switching which could damage the LED or drain battery.
+4. **Evita el cambio rápido**
+   Implemente la función antirrebote para evitar un encendido/apagado rápido que podría dañar el LED o agotar la batería.
 
-## Platform Notes
+## Notas de plataforma
 
 ### iOS
-- Requires iOS 10.0+
-- Uses `AVCaptureDevice` torch mode
-- Supports intensity control (0.0 to 1.0)
+- Requiere iOS 10.0+
+- Utiliza el modo antorcha `AVCaptureDevice`
+- Admite control de intensidad (0,0 a 1,0)
 
 ### Android
-- Requires Android 6.0 (API 23)+
-- Uses Camera2 API
-- Intensity control not supported (uses default brightness)
+- Requiere Android 6.0 (API 23)+
+- Utiliza Cámara2 API
+- No se admite el control de intensidad (utiliza el brillo predeterminado)
 
 ### Web
-- Supported on browsers with MediaDevices API and torch capability
-- Uses the camera stream to access the device's flashlight
-- Requires user permission to access the camera
-- Works best on mobile browsers (Chrome on Android)
-- Desktop browsers typically return `isAvailable: false` (no torch hardware)
-- Intensity control not supported on web
+- Compatible con navegadores con MediaDevices API y capacidad de antorcha
+- Utiliza la transmisión de la cámara para acceder a la linterna del dispositivo
+- Requiere permiso del usuario para acceder a la cámara
+- Funciona mejor en navegadores móviles (Chrome en Android)
+- Los navegadores de escritorio normalmente devuelven `isAvailable: false` (sin hardware de antorcha)
+- El control de intensidad no es compatible con la web.

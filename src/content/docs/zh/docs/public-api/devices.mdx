@@ -1,48 +1,47 @@
 ---
 title: Devices
-description: 通过 Capgo API 管理设备的文档，涵盖应用安装的跟踪、版本管理和渠道分配。
+description: 通过 Capgo API 管理设备的文档，涵盖应用安装的跟踪、捆绑（版本）分配和渠道管理。
 sidebar:
   order: 7
 locale: zh
 ---
+设备代表由 Capgo 管理的应用程序的各个安装。设备 API 允许您跟踪和管理设备，包括其捆绑包（版本）、通道和更新状态。
 
-Devices 代表由 Capgo 管理的应用程序的各个安装。Devices API 允许您跟踪和管理设备，包括其版本、渠道和更新状态。
-
-:::note[数据保留]
-设备数据从最后一次设备活动起保留 **90 天**。在此期间内未连接到 Capgo 的设备将自动从系统中删除。活跃设备在检查更新时会被持续跟踪。
+:::注意[数据保留]
+设备数据自上次设备活动起保留 **90 天**。在此期间未连接到 Capgo 的设备将自动从系统中删除。活动设备在检查更新时会被持续跟踪。
 :::
 
-## 了解 Devices
+## 了解设备
 
-每个设备都有独特的特征和状态：
-- **Platform**：iOS 或 Android
-- **Version**：当前 bundle 版本和原生构建版本
-- **Environment**：生产或开发环境、模拟器或物理设备
-- **Channel**：当前更新渠道分配
-- **Custom ID**：用于您自己跟踪目的的可选标识符
+每个设备都有独特的特性和状态：
+- **平台**：iOS、Android 或 Electron
+- **捆绑包（版本）**：当前捆绑包（版本）和本机构建版本
+- **环境**：生产或开发、模拟器或物理设备
+- **频道**：当前更新频道分配
+- **自定义 ID**：用于您自己的跟踪目的的可选标识符
 
 ## 最佳实践
 
-1. **版本跟踪**：监控设备版本以确保更新采用
-2. **渠道管理**：根据测试需求将设备分配到适当的渠道
-3. **环境意识**：适当处理不同环境（生产/开发/模拟器）
-4. **自定义识别**：使用自定义 ID 与现有系统集成
+1. **捆绑包（版本）跟踪**：监控设备捆绑包（版本）的采用情况以确保更新的采用
+2. **通道管理**：根据测试需求将设备分配到合适的通道
+3. **环境意识**：适当处理不同的环境（prod/dev/emulator）
+4. **自定义标识**：使用自定义 ID 与您现有的系统集成
 
-## Endpoints
+## 端点
 
-### POST
+### 发布
 
 `https://api.capgo.app/device/`
 
-将设备链接到特定版本或渠道。
+将设备链接到特定捆绑包（版本）或通道。
 
-#### Request Body
+#### 请求正文
 
 ```typescript
 interface DeviceLink {
   app_id: string
   device_id: string
-  version_id?: string // version name
+  version_id?: string // bundle (version) name
   channel?: string    // channel name
 }
 ```
@@ -69,19 +68,19 @@ curl -X POST \
 }
 ```
 
-### GET
+### 获取
 
 `https://api.capgo.app/device/`
 
-检索设备信息。使用基于游标的分页来高效检索大型设备列表。
+检索设备信息。使用基于光标的分页来高效检索大型设备列表。
 
 #### 查询参数
-- `app_id`：必需。您的应用程序 ID
+- `app_id`：必需。您的应用程序的 ID
 - `device_id`：可选。用于检索单个设备的特定设备 ID
-- `cursor`：可选。来自上一个响应的游标，用于分页
-- `limit`：可选。每页设备数（默认值：50）
+- `cursor`：可选。来自先前分页响应的光标
+- `limit`：可选。每页设备数量（默认：50）
 
-#### 请求示例s
+#### 请求示例
 
 ```bash
 # Get all devices (first page)
@@ -104,46 +103,48 @@ curl -H "authorization: your-api-key" \
 ```typescript
 interface DeviceListResponse {
   data: Device[];
-  nextCursor?: string;  // 将此作为 'cursor' 参数传递以获取下一页
-  hasMore: boolean;     // 如果有更多页面可用则为 true
+  nextCursor?: string;  // Pass this as 'cursor' param to get next page
+  hasMore: boolean;     // true if more pages available
 }
 
 interface Device {
   updated_at: string;
   device_id: string;
   custom_id: string;
-  version?: number;
-  version_name: string | null;
+  version?: number; // bundle (version) id
+  version_name: string | null; // bundle (version) name
   channel?: string;
   app_id: string;
-  platform: "ios" | "android";
+  platform: "ios" | "android" | "electron";
   plugin_version: string;
   os_version: string;
   version_build: string;
   is_prod: boolean;
   is_emulator: boolean;
+  key_id: string | null; // First 4 chars of encryption key (e.g., "MIIB")
 }
 ```
 
 #### 响应类型（单个设备）
 
-使用 `device_id` 参数请求特定设备时，直接返回设备对象：
+当使用 `device_id` 参数请求特定设备时，直接返回设备对象：
 
 ```typescript
 interface Device {
   updated_at: string;
   device_id: string;
   custom_id: string;
-  version?: number;
-  version_name: string | null;
+  version?: number; // bundle (version) id
+  version_name: string | null; // bundle (version) name
   channel?: string;
   app_id: string;
-  platform: "ios" | "android";
+  platform: "ios" | "android" | "electron";
   plugin_version: string;
   os_version: string;
   version_build: string;
   is_prod: boolean;
   is_emulator: boolean;
+  key_id: string | null; // First 4 chars of encryption key (e.g., "MIIB")
 }
 ```
 
@@ -192,18 +193,18 @@ interface Device {
 }
 ```
 
-### DELETE
+### 删除
 
 `https://api.capgo.app/device/`
 
-从其渠道覆盖中取消链接设备。这会将设备重置为使用其默认渠道。
+取消设备与其通道覆盖的链接。这会将设备重置为使用其默认通道。
 
 :::note[删除设备]
-设备数据从最后一次设备活动起保留 **90 天**。在此期间内未连接到 Capgo 的设备将自动从系统中删除。活跃设备在检查更新时会被持续跟踪。
-您无法使用此端点删除设备，它仅影响渠道覆盖。
+设备数据自上次设备活动起保留 **90 天**。在此期间未连接到 Capgo 的设备将自动从系统中删除。活动设备在检查更新时会被持续跟踪。
+您无法删除具有此端点的设备，它只会影响通道覆盖。
 :::
 
-#### Query Parameters
+#### 查询参数
 
 ```typescript
 interface Device {
@@ -235,7 +236,7 @@ curl -X DELETE \
 
 ## 错误处理
 
-常见错误场景及其响应：
+常见错误场景及其应对措施：
 
 ```json
 // Device not found
@@ -244,7 +245,7 @@ curl -X DELETE \
   "status": "KO"
 }
 
-// Invalid version
+// Invalid bundle (version)
 {
   "error": "Version not found",
   "status": "KO"
@@ -265,7 +266,7 @@ curl -X DELETE \
 
 ## 常见用例
 
-1. **Beta Device Registration**
+1. **测试版设备注册**
 ```typescript
 {
   "app_id": "app_123",
@@ -274,7 +275,7 @@ curl -X DELETE \
 }
 ```
 
-2. **Version Override**
+2. **版本覆盖**
 ```typescript
 {
   "app_id": "app_123",
@@ -283,14 +284,12 @@ curl -X DELETE \
 }
 ```
 
-3. **Reset to Default Channel**
+3. **重置为默认频道**
 ```typescript
 // Use DELETE endpoint to remove overrides
-```
+```## 设备管理技巧
 
-## 设备管理提示
-
-1. **监控**：定期检查设备状态和版本分布
-2. **测试**：使用自定义 ID 轻松识别测试设备
-3. **故障排除**：跟踪设备更新和渠道分配
-4. **版本控制**：监控原生应用版本以确保兼容性 
+1. **监控**：定期检查设备状态和bundle（版本）分布
+2. **测试**：使用自定义ID轻松识别测试设备
+3. **故障排除**：跟踪设备更新和通道分配
+4. **本机版本控制**：监控本机应用程序版本以确保兼容性

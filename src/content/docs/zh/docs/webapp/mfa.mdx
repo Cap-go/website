@@ -1,99 +1,96 @@
 ---
-title: "双因素认证"
-description: "管理双因素认证以更好地保护您的 Capgo 帐户。本文档将帮助您使帐户尽可能安全,并防止不良行为者向您的用户发送不需要的 bundle"
+title: 双因素身份验证
+description: 管理双因素身份验证以更好地保护您的 capgo 帐户。本文档将帮助您使您的帐户尽可能安全，并防止不良行为者向您的用户发送不需要的捆绑包
 sidebar:
   order: 9
 locale: zh
 ---
+## 什么是 2FA？
 
-## 什么是 2FA?
-
-2FA 是一种安全措施,旨在防止不良行为者接管您的 Capgo 帐户。\
-它通过要求额外的代码来实现。此代码存储在您的手机或硬件 2FA 密钥上。它每 30 秒更改一次,使其无法猜测
+2FA 是一种安全措施，旨在防止不良行为者接管您的 capgo 帐户。\
+它通过需要额外的代码来实现它。该代码存储在您的手机或硬件 2FA 密钥上。每30秒变化一次，让人无法猜测
 
 ## 本指南的要求
- - Android 或 iOS 手机
+ - Android 或 IOS 手机
  - 互联网连接
 
-## 本指南将涵盖什么?
+## 本指南将涵盖哪些内容？
 
-本指南将展示如何使用 `Google Authenticator` 设置 2FA。存在其他应用程序来实现类似目的,但是我无法在本指南中涵盖 2FA 的整个主题。
+本指南将展示如何使用 `Google Authenticator` 设置 2FA。其他应用程序的存在也具有类似的目的，但我无法在本指南中涵盖 2FA 的整个主题。
 
-## 如何设置 2FA?
+## 如何设置 2FA？
 
-首先下载 `Google Authenticator` 应用。如果您使用 Android,可以从 [Play 商店](https://play.google.com/store/apps/details/?id=com.google.android.apps.authenticator2)下载。在 iOS 上,您可以从 [App Store](https://apps.apple.com/us/app/google-authenticator/id388497605/)下载
+首先下载`Google Authenticator`应用程序。如果您使用的是 Android，则可以从 [play 商店](https://play.google.com/store/apps/details/?id=com.google.android.apps.authenticator2) 下载它。在 IOS 上，您可以从 [App store](https://apps.apple.com/us/app/google-authenticator/id388497605/) 下载它
 
-其次,请转到 [Capgo 的帐户设置](https://console.capgo.app/dashboard/settings/account/)。在那里您应该看到一个绿色按钮,看起来像这样
+其次，请进入[capgo的账户设置](https://console.capgo.app/dashboard/settings/account/)。在那里你应该看到一个绿色按钮，看起来像这样
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/button-mfa.webp" alt="Button MFA" /><figcaption></figcaption></figure>
+<figure><img style="margin-left: auto; margin-right: auto" src="/button-mfa.webp" alt="按钮MFA" /><figcaption></figcaption></figure>
 
-Click it, and once you do, a QR code should appear
+单击它，一旦单击，就会出现一个二维码
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/enable-mfa.webp" alt="Enable MFA" /><figcaption></figcaption></figure>
-
-:::danger
-⚠️ Important Note: \
-Never share this QR code with anyone, or you could get logged out of your account
-:::
-
-Next, please open the `Google Authenticator` on your phone. Once you do, follow these steps:
-
-Click the plus button
-
-<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-auth-plus.webp" alt="MFA auth plus" /><figcaption></figcaption></figure>
-
-After that, please click the camera button
-
-<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-scan-qr.webp" alt="MFA scan QR" /><figcaption></figcaption></figure>
-
-That will open the camera preview. Please scan the QR code shown on your PC. After you do that, you should see something like this:
-
-<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-final-code.webp" alt="MFA final code" /><figcaption></figcaption></figure>
-
-Then please go back to the PC and click the verify button
-
-<figure><img style="margin-left: auto; margin-right: auto" src="/enable-mfa-verify.webp" alt="Verify MFA" /><figcaption></figcaption></figure>
-
-This will open a window to type our 2FA code. In my case, this code is `095101` but it will be different for you.\
-After you type this code, please click on the `verify` button
-
-<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-verify-final-code.webp" alt="MFA verify code final" /><figcaption></figcaption></figure>
-
-If you entered the correct code and pressed `verify` you should see a pop-up like this
-
-<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-enabled.webp" alt="MFA enabled" /><figcaption></figcaption></figure>
-
-Congrats!\
-You enabled 2FA authentication 🎉
-
-## How to login using 2FA
-
-Next time you login to your account, you will see a window like this
-<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-required.webp" alt="MFA required" /><figcaption></figcaption></figure>
-
-Please open the authenticator and copy your auth code
-
-<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-login.webp" alt="MFA login" /><figcaption></figcaption></figure>
+<figure><img style="margin-left: auto; margin-right: auto" src="/enable-mfa.webp" alt="启用 MFA" /><figcaption></figcaption></figure>
 
 :::danger
-⚠️ Important Note: \
-Press `verify` before the code refresh, otherwise the code will change, and the old one will no longer be valid
+⚠️重要提示：\
+切勿与任何人分享此二维码，否则您可能会被注销帐户
 :::
 
-Then input the code, into the login form and pres the `verify`
+接下来，请打开手机上的`Google Authenticator`。完成后，请按照下列步骤操作：
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-final-login-verify.webp" alt="MFA login" /><figcaption></figcaption></figure>
+单击加号按钮
 
-If you entered the correct code you should see the capgo dashboard
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-auth-plus.webp" alt="MFA 授权加" /><figcaption></figcaption></figure>
 
-## How to disable 2FA
+之后，请单击相机按钮
 
-To disable 2FA please go to the [capgo's account settings](https://console.capgo.app/dashboard/settings/account/). There you should see a red button that should look like this:
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-scan-qr.webp" alt="MFA扫描二维码" /><figcaption></figcaption></figure>
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-disable-button.webp" alt="MFA disable button" /><figcaption></figcaption></figure>
+这将打开相机预览。请扫描电脑上显示的二维码。执行此操作后，您应该会看到如下内容：
 
-Click it, and and you should see a screen like this
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-final-code.webp" alt="MFA最终代码" /><figcaption></figcaption></figure>
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-disable-2.webp" alt="MFA disabled" /><figcaption></figcaption></figure>
+然后请返回PC并点击验证按钮
 
-Just press the `disable` button, and that's it.
+<figure><img style="margin-left: auto; margin-right: auto" src="/enable-mfa-verify.webp" alt="验证 MFA" /><figcaption></figcaption></figure>
+
+这将打开一个窗口来输入我们的 2FA 代码。就我而言，此代码是 `095101` 但对您来说会有所不同。\
+输入此代码后，请单击 `verify` 按钮
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-verify-final-code.webp" alt="MFA验证码最终" /><figcaption></figcaption></figure>
+
+如果您输入了正确的代码并按下 `verify` 您应该会看到如下所示的弹出窗口
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-enabled.webp" alt="启用 MFA" /><figcaption></figcaption></figure>
+
+恭喜！\
+您启用了 2FA 身份验证 🎉
+
+## 如何使用 2FA 登录
+
+下次您登录您的帐户时，您将看到这样的窗口
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-required.webp" alt="需要艺术硕士学位" /><figcaption></figcaption></figure>
+
+请打开验证器并复制您的授权码
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-login.webp" alt="多重身份验证登录" /><figcaption></figcaption></figure>
+
+:::danger
+⚠️重要提示：\
+刷新代码前按`verify`，否则代码会改变，旧的不再有效
+:::
+
+然后在登录表单中输入代码并按 `verify`
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-final-login-verify.webp" alt="多重身份验证登录" /><figcaption></figcaption></figure>
+
+如果您输入了正确的代码，您应该会看到 capgo 仪表板
+
+## 如何禁用 2FA要禁用 2FA，请转至 [capgo 的帐户设置](https://console.capgo.app/dashboard/settings/account/)。在那里您应该看到一个红色按钮，如下所示：
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-disable-button.webp" alt="MFA 禁用按钮" /><figcaption></figcaption></figure>
+
+单击它，您应该看到这样的屏幕
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/mfa-disable-2.webp" alt="MFA 已禁用" /><figcaption></figcaption></figure>
+
+只需按下 `disable` 按钮即可。

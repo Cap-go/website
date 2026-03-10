@@ -1,23 +1,24 @@
 ---
-title: Getting Started
-description: Learn how to detect volume button presses in your Capacitor app.
+title: Empezando
+description: >-
+  Aprenda a detectar pulsaciones de botones de volumen en su aplicación
+  Capacitor.
 sidebar:
   order: 2
 locale: es
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Instalar el paquete**
    <PackageManagers pkg="@capgo/capacitor-volume-buttons" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Sincronización con proyectos nativos**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Usage
+## Uso
 
 ```typescript
 import { VolumeButtons } from '@capgo/capacitor-volume-buttons';
@@ -39,11 +40,11 @@ VolumeButtons.addListener('volumeButtonPressed', (event) => {
 await VolumeButtons.removeAllListeners();
 ```
 
-## API Reference
+## API Referencia
 
-### addListener('volumeButtonPressed', callback)
+### addListener('volumeButtonPressed', devolución de llamada)
 
-Listen for volume button press events.
+Escuche los eventos de pulsación del botón de volumen.
 
 ```typescript
 const handle = VolumeButtons.addListener('volumeButtonPressed', (event) => {
@@ -54,27 +55,27 @@ const handle = VolumeButtons.addListener('volumeButtonPressed', (event) => {
 await handle.remove();
 ```
 
-**Event Data:**
-- `direction`: `'up' | 'down'` - Direction of the button press
+**Datos del evento:**
+- `direction`: `'arriba' | 'abajo'` - Dirección de pulsación del botón
 
-### removeAllListeners()
+### eliminarTodos los oyentes()
 
-Remove all registered listeners.
+Elimine a todos los oyentes registrados.
 
 ```typescript
 await VolumeButtons.removeAllListeners();
 ```
 
-### getPluginVersion()
+### obtenerPluginVersion()
 
-Get the plugin version.
+Obtenga la versión del complemento.
 
 ```typescript
 const { version } = await VolumeButtons.getPluginVersion();
 console.log('Plugin version:', version);
 ```
 
-## Complete Example
+## Ejemplo completo
 
 ```typescript
 import { VolumeButtons } from '@capgo/capacitor-volume-buttons';
@@ -124,11 +125,11 @@ export class VolumeButtonController {
 }
 ```
 
-## Use Cases
+## Casos de uso
 
-### Photo/Video Capture
+### Captura de foto/vídeo
 
-Use volume buttons as camera shutter triggers:
+Utilice los botones de volumen como disparadores del obturador de la cámara:
 
 ```typescript
 VolumeButtons.addListener('volumeButtonPressed', async (event) => {
@@ -137,9 +138,9 @@ VolumeButtons.addListener('volumeButtonPressed', async (event) => {
 });
 ```
 
-### Page Navigation
+### Navegación de página
 
-Navigate through content with volume buttons:
+Navega por el contenido con los botones de volumen:
 
 ```typescript
 let currentPage = 0;
@@ -155,9 +156,9 @@ VolumeButtons.addListener('volumeButtonPressed', (event) => {
 });
 ```
 
-### Media Control
+### Control de medios
 
-Control media playback:
+Controlar la reproducción multimedia:
 
 ```typescript
 VolumeButtons.addListener('volumeButtonPressed', (event) => {
@@ -169,9 +170,9 @@ VolumeButtons.addListener('volumeButtonPressed', (event) => {
 });
 ```
 
-### Game Controls
+### Controles del juego
 
-Use volume buttons for game actions:
+Utilice botones de volumen para acciones del juego:
 
 ```typescript
 VolumeButtons.addListener('volumeButtonPressed', (event) => {
@@ -183,10 +184,10 @@ VolumeButtons.addListener('volumeButtonPressed', (event) => {
 });
 ```
 
-## Best Practices
+## Mejores prácticas
 
-1. **Clean up listeners**
-   Always remove listeners when your component unmounts:
+1. **Limpiar a los oyentes**
+   Elimine siempre los oyentes cuando su componente se desmonte:
    ```typescript
    useEffect(() => {
      const listener = VolumeButtons.addListener('volumeButtonPressed', handler);
@@ -197,8 +198,8 @@ VolumeButtons.addListener('volumeButtonPressed', (event) => {
    }, []);
    ```
 
-2. **Provide visual feedback**
-   Show users that volume buttons are being used for custom controls:
+2. **Proporcione comentarios visuales**
+   Muestre a los usuarios que los botones de volumen se utilizan para controles personalizados:
    ```typescript
    VolumeButtons.addListener('volumeButtonPressed', (event) => {
      showNotification(`Volume ${event.direction} pressed`);
@@ -206,11 +207,11 @@ VolumeButtons.addListener('volumeButtonPressed', (event) => {
    });
    ```
 
-3. **Consider accessibility**
-   Remember that some users rely on volume buttons for actual volume control. Provide alternative controls.
+3. **Considere la accesibilidad**
+   Recuerde que algunos usuarios confían en los botones de volumen para controlar el volumen real. Proporcionar controles alternativos.
 
-4. **Debounce rapid presses**
-   Prevent accidental double-presses:
+4. **Presiones rápidas antirrebote**
+   Evite pulsaciones dobles accidentales:
    ```typescript
    let lastPress = 0;
    const DEBOUNCE_MS = 300;
@@ -225,41 +226,41 @@ VolumeButtons.addListener('volumeButtonPressed', (event) => {
    });
    ```
 
-5. **Document the behavior**
-   Make it clear to users that volume buttons have custom functionality:
+5. **Documente el comportamiento**
+   Deje claro a los usuarios que los botones de volumen tienen una funcionalidad personalizada:
    ```typescript
    function showVolumeButtonHelp() {
      alert('Use Volume Up/Down buttons to navigate pages');
    }
    ```
 
-## Platform Notes
+## Notas de plataforma
 
 ### iOS
-- Works on iOS 10.0+
-- Volume buttons detected reliably
-- System volume UI may still appear briefly
+- Funciona en iOS 10.0+
+- Botones de volumen detectados de forma fiable
+- Es posible que la interfaz de usuario del volumen del sistema aún aparezca brevemente
 
 ### Android
-- Works on Android 5.0 (API 21)+
-- Requires app to be in foreground
-- Some devices may have slight delay
+- Funciona en Android 5.0 (API 21)+
+- Requiere que la aplicación esté en primer plano
+- Algunos dispositivos pueden tener un ligero retraso
 
 ### Web
-- Not supported on web platform
-- Listeners will not fire
+- No compatible con la plataforma web
+- Los oyentes no dispararán.
 
-## Troubleshooting
+## Solución de problemas
 
-**Events not firing:**
-- Ensure app has focus
-- Check that listeners are properly registered
-- Verify plugin is installed and synced
+**Eventos que no se activan:**
+- Asegúrese de que la aplicación tenga el foco
+- Comprobar que los oyentes estén correctamente registrados.
+- Verificar que el complemento esté instalado y sincronizado
 
-**System volume changes interfere:**
-- This is expected behavior - the plugin detects presses but doesn't prevent system volume changes
-- Consider UX that works alongside volume changes
+**Los cambios de volumen del sistema interfieren:**
+- Este es el comportamiento esperado: el complemento detecta pulsaciones pero no evita los cambios de volumen del sistema.
+- Considere una UX que funcione junto con los cambios de volumen
 
-**Multiple events firing:**
-- Implement debouncing to handle rapid presses
-- Check for duplicate listener registration
+**Activación de múltiples eventos:**
+- Implementar antirrebote para manejar prensas rápidas.
+- Verifique si hay registros de oyentes duplicados

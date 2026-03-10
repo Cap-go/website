@@ -1,14 +1,15 @@
 ---
+title: Premiers pas avec le baromètre
+description: >-
+  Découvrez comment intégrer la détection de pression barométrique dans votre
+  application Capacitor
 locale: fr
-title: "Commencer with Barometer"
-description: "Learn how to integrate barometric pressure sensing into your Capacitor Application"
 ---
+Ce guide vous guidera dans l'intégration du plugin Capacitor Barometer dans votre application.
 
-This Guide will walk you through integrating the Capacitor Barometer plugin into your Application.
+##Installation
 
-## Installation
-
-Installer the plugin using npm:
+Installez le plugin en utilisant npm :
 
 ```bash
 npm install @capgo/capacitor-barometer
@@ -17,26 +18,26 @@ npx cap sync
 
 ## iOS Configuration
 
-Add the following to your `Info.plist`:
+Ajoutez ce qui suit à votre `Info.plist` :
 
 ```xml
 <key>NSMotionUsageDescription</key>
 <string>This app uses the barometer to measure atmospheric pressure</string>
 ```
 
-## Android Configuration
+## AndroidConfiguration
 
-No additional Configuration required. The plugin automatically requests necessary permissions.
+Aucune configuration supplémentaire requise. Le plugin demande automatiquement les autorisations nécessaires.
 
-## Basic Utilisation
+## Utilisation de base
 
-### Importer the Plugin
+### Importer le plugin
 
 ```typescript
 import { Barometer } from '@capgo/capacitor-barometer';
 ```
 
-### Vérifier Sensor Availability
+### Vérifier la disponibilité du capteur
 
 ```typescript
 const checkBarometer = async () => {
@@ -45,7 +46,7 @@ const checkBarometer = async () => {
 };
 ```
 
-### Démarrer Monitoring Pressure
+### Commencer à surveiller la pression
 
 ```typescript
 const startMonitoring = async () => {
@@ -57,7 +58,7 @@ const startMonitoring = async () => {
 };
 ```
 
-### Listen to Pressure Events
+### Écoutez les événements de pression
 
 ```typescript
 Barometer.addListener('pressureChange', (data) => {
@@ -67,7 +68,7 @@ Barometer.addListener('pressureChange', (data) => {
 });
 ```
 
-### Get Current Reading
+### Obtenir la lecture actuelle
 
 ```typescript
 const getCurrentPressure = async () => {
@@ -77,7 +78,7 @@ const getCurrentPressure = async () => {
 };
 ```
 
-### Arrêter Monitoring
+### Arrêter la surveillance
 
 ```typescript
 const stopMonitoring = async () => {
@@ -86,9 +87,9 @@ const stopMonitoring = async () => {
 };
 ```
 
-## Terminé Exemple
+## Exemple complet
 
-Here's a Terminé Exemple showing barometer integration:
+Voici un exemple complet montrant l'intégration d'un baromètre :
 
 ```typescript
 import { Barometer } from '@capgo/capacitor-barometer';
@@ -151,31 +152,31 @@ barometerService.initialize();
 // barometerService.cleanup();
 ```
 
-## Understanding Readings
+## Comprendre les lectures
 
-### Atmospheric Pressure
-- Measured in hectopascals (hPa) or millibars (mb)
-- Standard sea-level pressure: 1013.25 hPa
-- Higher altitude = lower pressure
-- Weather systems affect pressure readings
+### Pression atmosphérique
+- Mesuré en hectopascals (hPa) ou millibars (mb)
+- Pression standard au niveau de la mer : 1013,25 hPa
+- Altitude plus élevée = pression plus basse
+- Les systèmes météorologiques affectent les lectures de pression
 
-### Relative Altitude
-- Calculated from pressure changes
-- Relative to starting Référence point
-- Accuracy: ±10-30 meters
-- Works best for short-term tracking
+### Altitude relative
+- Calculé à partir des changements de pression
+- Par rapport au point de référence de départ
+- Précision : ±10-30 mètres
+- Fonctionne mieux pour le suivi à court terme
 
-## Best Practices
+## meilleures pratiques
 
-1. **Vérifier Availability**: Always verify sensor availability before use
-2. **Reasonable Intervals**: Don't poll too frequently (1000ms is good)
-3. **Retirer Listeners**: Clean up listeners when not needed
-4. **Calibration**: Use known altitude for accurate readings
-5. **Battery Impact**: Monitor battery Utilisation with continuous sensing
+1. **Vérifier la disponibilité** : vérifiez toujours la disponibilité du capteur avant utilisation
+2. **Intervalles raisonnables** : n'interrogez pas trop fréquemment (1 000 ms, c'est bien)
+3. **Supprimer les auditeurs** : nettoyez les auditeurs lorsqu'ils ne sont pas nécessaires
+4. **Calibrage** : utilisez l'altitude connue pour des lectures précises
+5. **Impact de la batterie** : surveillez l'utilisation de la batterie avec une détection continue
 
 ## Problèmes courants
 
-### Sensor Not Disponible
+### Capteur non disponible
 ```typescript
 try {
   const { available } = await Barometer.isAvailable();
@@ -188,7 +189,7 @@ try {
 }
 ```
 
-### Noisy Data
+### Données bruyantes
 ```typescript
 class PressureFilter {
   private readings: number[] = [];
@@ -207,8 +208,8 @@ class PressureFilter {
 }
 ```
 
-## Suivant Steps
+## Prochaines étapes
 
-- Explore the [API Référence](https://github.com/Cap-go/capacitor-barometer#api) for Terminé method Documentation
-- Vérifier out the [Exemple Application](https://github.com/Cap-go/capacitor-barometer/tree/main/Exemple) for advanced Utilisation
-- See the [Tutoriel](/plugins/capacitor-barometer) for Terminé implementation Exemples
+- Explorez la [Référence API](https://github.com/Cap-go/capacitor-barometer#api) pour une documentation complète de la méthode
+- Consultez l'[exemple d'application](https://github.com/Cap-go/capacitor-barometer/tree/main/example) pour une utilisation avancée.
+- Voir le [tutoriel](/plugins/capacitor-barometer) pour des exemples complets d'implémentation

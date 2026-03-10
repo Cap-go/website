@@ -1,16 +1,17 @@
 ---
-locale: fr
 title: Commencer
-description: Learn how to Installer and use the Background Geolocation plugin to track Appareil location in the background.
-sidebar: 
+description: >-
+  Découvrez comment installer et utiliser le plugin Background Geolocation pour
+  suivre l'emplacement de l'appareil en arrière-plan.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-## Installation
+##Installation
 
-This plugin supports Capacitor v7:
+Ce plugin prend en charge Capacitor v7 :
 
 | Capacitor  | Plugin |
 |------------|--------|
@@ -43,11 +44,11 @@ This plugin supports Capacitor v7:
   </TabItem>
 </Tabs>
 
-## Platform Configuration
+## Platform Setup
 
 ### iOS
 
-Add the following keys to `Info.plist.`:
+Ajoutez les clés suivantes à `Info.plist.` :
 
 ```xml
 <dict>
@@ -66,13 +67,13 @@ Add the following keys to `Info.plist.`:
 
 ### Android
 
-Set the the `android.useLegacyBridge` option to `true` in your Capacitor configuration. This prevents location updates halting after 5 minutes in the background. See https://capacitorjs.com/docs/config and https://github.com/capacitor-community/background-geolocation/issues/89.
+Définissez l'option `android.useLegacyBridge` sur `true` dans votre configuration Capacitor. Cela empêche les mises à jour de localisation de s'arrêter après 5 minutes en arrière-plan. See https://capacitorjs.com/docs/config and https://github.com/capacitor-community/background-geolocation/issues/89.
 
-On Android 13+, the app needs the `POST_NOTIFICATIONS` runtime permission to show the persistent notification informing the user that their location is being used in the background. This runtime permission is requested after the location permission is granted.
+Sur Android 13+, l'application a besoin de l'autorisation d'exécution `POST_NOTIFICATIONS` pour afficher la notification persistante informant l'utilisateur que sa position est utilisée en arrière-plan. Cette autorisation d'exécution est demandée une fois l'autorisation de localisation accordée.
 
-If your Application forwards location Mises à jour to a server in real time, be aware that after 5 minutes in the background Android will throttle HTTP requests initiated from the WebView. The Solution is to use a Natif HTTP plugin such as [CapacitorHttp](https://capacitorjs.com/docs/apis/http). See https://github.com/capacitor-Communauté/background-geolocation/issues/14.
+Si votre application transfère les mises à jour de localisation à un serveur en temps réel, sachez qu'après 5 minutes en arrière-plan, Android limitera les requêtes HTTP lancées à partir de WebView. La solution consiste à utiliser un plugin HTTP natif tel que [CapacitorHttp](https://capacitorjs.com/docs/apis/http). See https://github.com/capacitor-community/background-geolocation/issues/14.
 
-Configuration specific to Android can be made in `strings.xml`:
+Une configuration spécifique à Android peut être effectuée dans `strings.xml` :
 ```xml
 <resources>
     <!--
@@ -179,28 +180,28 @@ function guessLocation(callback, timeout) {
 
 ## API
 
-### Démarrer(...)
+### début(...)
 
 ```typescript
 start(options: StartOptions, callback: (position?: Location | undefined, error?: CallbackError | undefined) => void) => Promise<void>
 ```
 
-To Démarrer listening for changes in the Appareil's location, call this method.
-A Promise is returned to indicate that it finished the call. The callback will be called every time a Nouveau location
-is Disponible, or if there was an Erreur when calling this method. Don't rely on promise rejection for this.
+Pour commencer à écouter les changements dans l'emplacement de l'appareil, appelez cette méthode.
+Une promesse est renvoyée pour indiquer que l'appel est terminé. Le rappel sera appelé à chaque fois qu'un nouvel emplacement
+est disponible, ou s'il y a eu une erreur lors de l'appel de cette méthode. Ne comptez pas sur le rejet d'une promesse pour cela.
 
-| Param          | Type                                                                                                                      | Description                                                                       |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| **`options`**  | `StartOptions`                                                                     | The configuration options                                                         |
-| **`callback`** | `(position?: Location, error?: CallbackError) => void` | The callback function invoked when a new location is available or an error occurs |
+| Param          | Tapez | Descriptif |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| **`options`** | `StartOptions` | Les options de configuration |
+| **`callback`** | `(position?: Location, error?: CallbackError) => void` | La fonction de rappel invoquée lorsqu'un nouvel emplacement est disponible ou qu'une erreur se produit |
 
-### Arrêter()
+### arrête()
 
 ```typescript
 stop() => Promise<void>
 ```
 
-Stops location Mises à jour.
+Arrête les mises à jour de localisation.
 
 ### openSettings()
 
@@ -208,8 +209,8 @@ Stops location Mises à jour.
 openSettings() => Promise<void>
 ```
 
-Opens the Appareil's location Paramètres page.
-Useful for directing Utilisateurs to Activer location services or adjust permissions.
+Opens the device's location settings page.
+Utile pour demander aux utilisateurs d'activer les services de localisation ou d'ajuster les autorisations.
 
 ### setPlannedRoute(...)
 
@@ -217,57 +218,49 @@ Useful for directing Utilisateurs to Activer location services or adjust permiss
 setPlannedRoute(options: SetPlannedRouteOptions) => Promise<void>
 ```
 
-Plays a sound file when the Utilisateur deviates from the planned route.
-This should be used to play a sound (in the background too, only for Natif).
-
-| Param         | Type                                                                      | Description                                              |
+Lit un fichier sonore lorsque l'utilisateur s'écarte de l'itinéraire prévu.
+Cela doit être utilisé pour jouer un son (en arrière-plan également, uniquement pour les natifs).| Paramètres | Tapez | Descriptif |
 | ------------- | ------------------------------------------------------------------------- | -------------------------------------------------------- |
-| **`options`** | `SetPlannedRouteOptions` | The options for setting the planned route and sound file |
+| **`options`** | `SetPlannedRouteOptions` | Les options de paramétrage de l'itinéraire prévu et du fichier son |
 
-## Interfaces
+##Interfaces
 
-### StartOptions
+### Options de démarrage
 
-The Options for configuring for location Mises à jour.
+Les options de configuration des mises à jour de localisation.| Accessoire | Tapez | Descriptif | Par défaut |
+| -------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| **`backgroundMessage`** | `string` | Si l'option "backgroundMessage" est définie, le plugin fournira des mises à jour de localisation, que l'application soit en arrière-plan ou au premier plan. Si elle n'est pas définie, les mises à jour de localisation ne sont garanties qu'au premier plan. Cela est vrai sur les deux plateformes. Le Android, une notification doit être affichée pour continuer à recevoir des mises à jour de localisation en arrière-plan. Cette option spécifie le texte de cette notification. |                                    |
+| **`backgroundTitle`** | `string` | Le titre de la notification mentionnée ci-dessus.                                                                                                                                                                                                                                                                                                                                                                       | `"Utiliser votre position"` |
+| **`requestPermissions`** | `boolean` | Indique si les autorisations doivent être demandées automatiquement à l'utilisateur, si elles ne sont pas déjà accordées.                                                                                                                                                                                                                                                                                                                | `true` |
+| **`stale`** | `boolean` | Si « vrai », des emplacements obsolètes peuvent être fournis pendant que l'appareil obtient une position GPS. Vous êtes responsable de la vérification de la propriété « time ». Si « faux », les emplacements sont garantis être à jour.                                                                                                                                                                                                                         | `false` |
+| **`distanceFilter`** | `number` | Distance en mètres que l'appareil doit parcourir avant qu'une nouvelle mise à jour de localisation ne soit déclenchée. Ceci est utilisé pour filtrer les petits mouvements et réduire le nombre de mises à jour.| `0` |### Localisation
 
-| Prop                     | Type                 | Description                                                                                                                                                                                                                                                                                                                                                                                                          | Default                            |
-| ------------------------ | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
-| **`backgroundMessage`**  | `string`  | If the "backgroundMessage" option is defined, the plugin will provide location updates whether the app is in the background or the foreground. If it is not defined, location updates are only guaranteed in the foreground. This is true on both platforms. On Android, a notification must be shown to continue receiving location updates in the background. This option specifies the text of that notification. |                                    |
-| **`backgroundTitle`**    | `string`  | The title of the notification mentioned above.                                                                                                                                                                                                                                                                                                                                                                       | `"Using your location"` |
-| **`requestPermissions`** | `boolean` | Whether permissions should be requested from the user automatically, if they are not already granted.                                                                                                                                                                                                                                                                                                                | `true`                  |
-| **`stale`**              | `boolean` | If "true", stale locations may be delivered while the device obtains a GPS fix. You are responsible for checking the "time" property. If "false", locations are guaranteed to be up to date.                                                                                                                                                                                                                         | `false`                 |
-| **`distanceFilter`**     | `number`  | The distance in meters that the device must move before a new location update is triggered. This is used to filter out small movements and reduce the number of updates.                                                                                                                                                                                                                                             | `0`                     |
+Représente un emplacement géographique avec divers attributs.
+Contient toutes les propriétés de localisation standard renvoyées par les fournisseurs GPS/réseau.
 
-### Location
+| Accessoire | Tapez | Descriptif |
+| ---------------------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **`latitude`** | `number` | Latitude en degrés. Plage : -90,0 à +90,0 |
+| **`longitude`** | `number` | Longitude en degrés. Plage : -180,0 à +180,0 |
+| **`accuracy`** | `number` | Rayon d'incertitude horizontale en mètres, avec un niveau de confiance de 68 %. Des valeurs inférieures indiquent une localisation plus précise.                         |
+| **`altitude`** | `number \| null` | Mètres au-dessus du niveau de la mer (ou nul si non disponible).                                                                                     |
+| **`altitudeAccuracy`** | `number \| null` | Incertitude verticale en mètres, avec un niveau de confiance de 68 % (ou nul si non disponible).                                                        |
+| **`simulated`** | `boolean` | `true` si l'emplacement a été simulé par un logiciel plutôt que par GPS. Utile pour détecter des emplacements fictifs en cours de développement ou de test.      |
+| **`bearing`** | `number \| null` | Écart par rapport au nord vrai en degrés (ou nul si non disponible). Plage : 0,0 à 360,0 |
+| **`speed`** | `number \| null` | Vitesse en mètres par seconde (ou nulle si non disponible).                                                                                 |
+| **`time`** | `number \| null` | Heure à laquelle l'emplacement a été produit, en millisecondes depuis l'époque Unix. Utilisez ceci pour vérifier si un emplacement est obsolète lorsque vous utilisez stale: true. |
 
-Represents a geographical location with various attributes.
-Contains all the standard location properties returned by GPS/network providers.
+### Erreur de rappel
 
-| Prop                   | Type                        | Description                                                                                                                            |
-| ---------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| **`latitude`**         | `number`         | Latitude in degrees. Range: -90.0 to +90.0                                                                                             |
-| **`longitude`**        | `number`         | Longitude in degrees. Range: -180.0 to +180.0                                                                                          |
-| **`accuracy`**         | `number`         | Radius of horizontal uncertainty in metres, with 68% confidence. Lower values indicate more accurate location.                         |
-| **`altitude`**         | `number \| null` | Metres above sea level (or null if not available).                                                                                     |
-| **`altitudeAccuracy`** | `number \| null` | Vertical uncertainty in metres, with 68% confidence (or null if not available).                                                        |
-| **`simulated`**        | `boolean`        | `true` if the location was simulated by software, rather than GPS. Useful for detecting mock locations in development or testing.      |
-| **`bearing`**          | `number \| null` | Deviation from true north in degrees (or null if not available). Range: 0.0 to 360.0                                                   |
-| **`speed`**            | `number \| null` | Speed in metres per second (or null if not available).                                                                                 |
-| **`time`**             | `number \| null` | Time the location was produced, in milliseconds since the unix epoch. Use this to check if a location is stale when using stale: true. |
+Objet d'erreur qui peut être transmis au rappel de début d'emplacement.
+Étend l'erreur standard avec des codes d'erreur facultatifs.
 
-### CallbackError
-
-Erreur object that may be passed to the location Démarrer callback.
-Extends the standard Erreur with optional Erreur codes.
-
-| Prop       | Type                | Description                                           |
+| Accessoire | Tapez | Descriptif |
 | ---------- | ------------------- | ----------------------------------------------------- |
-| **`code`** | `string` | Optional error code for more specific error handling. |
+| **`code`** | `string` | Code d'erreur facultatif pour une gestion des erreurs plus spécifique. |
 
-### SetPlannedRouteOptions
-
-| Prop            | Type                            | Description                                                                                                                                                                                                                                        | Default         |
+### Définir les options d'itinéraire planifié| Accessoire | Tapez | Descriptif | Par défaut |
 | --------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| **`soundFile`** | `string`             | The name of the sound file to play. Must be a valid sound relative path in the app's public folder to work for both web and native platforms. There's no need to include the public folder in the path.                                            |                 |
-| **`route`**     | `[number, number][]` | The planned route as an array of longitude and latitude pairs. Each pair represents a point on the route. This is used to define a route that the user can follow. The route is used to play a sound when the user deviates from it.               |                 |
-| **`distance`**  | `number`             | The distance in meters that the user must deviate from the planned route to trigger the sound. This is used to determine how far off the route the user can be before the sound is played. If not specified, a default value of 50 meters is used. | `50` |
+| **`soundFile`** | `string` | Le nom du fichier son à lire. Il doit s'agir d'un chemin relatif sonore valide dans le dossier public de l'application pour fonctionner à la fois sur les plates-formes Web et natives. Il n'est pas nécessaire d'inclure le dossier public dans le chemin.                                            |                 |
+| **`route`** | `[number, number][]` | L'itinéraire planifié sous la forme d'un tableau de paires de longitude et de latitude. Chaque paire représente un point sur l'itinéraire. Ceci est utilisé pour définir un itinéraire que l'utilisateur peut suivre. L'itinéraire est utilisé pour émettre un son lorsque l'utilisateur s'en écarte.               |                 |
+| **`distance`** | `number` | La distance en mètres que l'utilisateur doit s'écarter de l'itinéraire prévu pour déclencher le son. Ceci est utilisé pour déterminer à quelle distance de l'itinéraire l'utilisateur peut se trouver avant que le son ne soit joué. Si elle n’est pas spécifiée, une valeur par défaut de 50 mètres est utilisée. | `50` |

@@ -1,7 +1,7 @@
 ---
 title: '@capgo/capacitor-nfc'
 description: >-
-  Native NFC tag discovery, reading and writing for Capacitor apps on iOS and
+  Penemuan tag NFC asli, membaca dan menulis untuk aplikasi Capacitor di iOS dan
   Android.
 tableOfContents: false
 next: false
@@ -11,12 +11,12 @@ sidebar:
   label: Introduction
 hero:
   tagline: >-
-    Read and write NFC tags with native support for iOS and Android, enabling
-    contactless interactions and smart tag experiences.
+    Membaca dan menulis tag NFC dengan dukungan asli untuk iOS dan Android,
+    memungkinkan interaksi nirsentuh dan pengalaman tag cerdas.
   image:
     file: ~public/icons/plugins/nfc.svg
   actions:
-    - text: Get started
+    - text: Mulailah
       link: /docs/plugins/nfc/getting-started/
       icon: right-arrow
       variant: primary
@@ -26,26 +26,25 @@ hero:
       variant: minimal
 locale: id
 ---
-
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid stagger>
-  <Card title="Tag Discovery" icon="star">
-    Detect NFC tags automatically when they come near the device 📡
+  <Card title="Penemuan Tag" icon="star">
+    Deteksi tag NFC secara otomatis saat berada di dekat perangkat 📡
   </Card>
-  <Card title="Read NDEF Records" icon="open-book">
-    Read structured data from NFC tags including text, URLs, and custom payloads 📖
+  <Card title="Baca Catatan NDEF" icon="open-book">
+    Baca data terstruktur dari tag NFC termasuk teks, URL, dan muatan khusus 📖
   </Card>
-  <Card title="Write to Tags" icon="pencil">
-    Write NDEF messages to compatible NFC tags 📝
+  <Card title="Menulis ke Tag" icon="pencil">
+    Tulis pesan NDEF ke tag NFC yang kompatibel 📝
   </Card>
-  <Card title="Tag Formatting" icon="setting">
-    Format NDEF-formattable tags for writing data 🔧
+  <Card title="Pemformatan Tag" icon="setting">
+    Format tag yang dapat diformat NDEF untuk menulis data 🔧
   </Card>
   <Card title="Peer-to-Peer" icon="rocket">
-    Share data between devices using Android Beam (Android only) 📲
+    Bagikan data antar perangkat menggunakan Android Beam (khusus Android) 📲
   </Card>
   <Card title="Cross-platform" icon="puzzle">
-    Works on both iOS and Android with consistent API 📱
+    Berfungsi pada iOS dan Android dengan API yang konsisten 📱
   </Card>
 </CardGrid>

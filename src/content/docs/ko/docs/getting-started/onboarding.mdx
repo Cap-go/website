@@ -1,86 +1,83 @@
 ---
-title: CLI Onboarding Guide
-description: >-
-  Complete step-by-step guide to onboard your app with Capgo using the
-  interactive CLI
+title: CLI 온보딩 가이드
+description: 대화형 CLI을 사용하여 Capgo에 앱을 온보딩하기 위한 완전한 단계별 가이드
 sidebar:
   order: 2
 next: true
 prev: true
 locale: ko
 ---
-
 import { Aside, Card, CardGrid } from '@astrojs/starlight/components';
 
-## Quick Overview
+## 빠른 개요
 
-The Capgo CLI provides an interactive onboarding that sets up live updates for your Capacitor app. You'll:
+Capgo CLI은 Capacitor 앱에 대한 실시간 업데이트를 설정하는 대화형 온보딩을 제공합니다. 당신은:
 
-1. ✅ Register your app in Capgo
-2. 🔌 Install and configure the updater plugin
-3. 🚀 Deploy your first live update
-4. 📱 Test the update on your device
+1. ✅ Capgo에 앱을 등록하세요.
+2. 🔌 업데이터 플러그인 설치 및 구성
+3. 🚀 첫 번째 라이브 업데이트 배포
+4. 📱 기기에서 업데이트를 테스트하세요.
 
-**Estimated time:** 10-20 minutes (varies based on your internet speed and build time)
+**예상 시간:** 10~20분(인터넷 속도 및 구축 시간에 따라 다름)
 
 <Aside type="tip">
-The onboarding is fully resumable - exit anytime and continue later from where you left off.
+온보딩은 완전히 재개 가능합니다. 언제든지 종료하고 나중에 중단한 부분부터 계속하세요.
 </Aside>
 
-## Starting the Onboarding
+## 온보딩 시작하기
 
-Run the onboarding command with your API key:
+API 키를 사용하여 온보딩 명령을 실행합니다.
 
 ```bash
 npx @capgo/cli@latest init [APIKEY]
 ```
 
-You'll see the welcome message:
+환영 메시지가 표시됩니다.
 
 ```
 Capgo onboarding 🛫
 ```
 
-## What Happens During Onboarding
+## 온보딩 중에 일어나는 일
 
-The CLI will guide you through 13 interactive steps:
+CLI은 13가지 대화형 단계를 안내합니다.
 
-**Setup Phase (Steps 1-6):**
-- Check your development environment (Xcode/Android Studio)
-- Add your app to Capgo and create a production channel
-- Install the `@capgo/capacitor-updater` plugin
-- Inject the required code into your app
-- Optionally enable end-to-end encryption
-- Choose a platform for testing (iOS or Android)
+**설정 단계(1~6단계):**
+- 개발 환경을 확인하세요. (Xcode/Android Studio)
+- Capgo에 앱을 추가하고 제작 채널을 만드세요.
+- `@capgo/capacitor-updater` 플러그인 설치
+- 앱에 필요한 코드를 삽입합니다.
+- 선택적으로 종단 간 암호화를 활성화합니다.
+- 테스트할 플랫폼 선택(iOS 또는 Android)
 
-**Testing Phase (Steps 7-12):**
-- Build your app and run it on a device/simulator
-- Make a visible code change (automatic or manual)
-- Upload the updated bundle to Capgo
-- See the live update appear on your device in real-time
+**테스트 단계(7~12단계):**
+- 앱을 빌드하고 기기/시뮬레이터에서 실행
+- 눈에 보이는 코드 변경(자동 또는 수동)
+- 업데이트된 번들을 Capgo에 업로드하세요.
+- 실시간 업데이트가 기기에 실시간으로 표시되는 것을 확인하세요.
 
-**Completion (Step 13):**
-- Your app is ready for live updates! 🎉
+**완료(13단계):**
+- 앱이 실시간 업데이트될 준비가 되었습니다! 🎉
 
-## The 13-Step Onboarding Process
+## 13단계 온보딩 프로세스
 
-### Step 1: Check Prerequisites
+### 1단계: 전제조건 확인
 
-The CLI checks your development environment to ensure you have the necessary tools installed.
+CLI은 개발 환경을 확인하여 필요한 도구가 설치되어 있는지 확인합니다.
 
-**What's checked:**
-- **Xcode** (macOS only) - for iOS development
-- **Android SDK** - for Android development
+**확인한 내용:**
+- **Xcode** (macOS 전용) - iOS 개발용
+- **Android SDK** - Android 개발용
 
-**Possible outcomes:**
+**가능한 결과:**
 
-✅ **Both environments found:**
+✅ **두 환경 모두 발견됨:**
 ```
 ✅ Xcode detected - iOS development ready
 ✅ Android SDK detected - Android development ready
 ```
 
-⚠️ **No environment found:**
+⚠️ **환경을 찾을 수 없습니다:**
 ```
 ⚠️ Xcode not found
 ⚠️ Android SDK not found
@@ -91,15 +88,15 @@ The CLI checks your development environment to ensure you have the necessary too
    • For Android: Android Studio - https://developer.android.com/studio
 ```
 
-**Questions you may be asked:**
+**질문받을 수 있는 질문:**
 
 <Aside type="caution">
-If no development environment is detected, you'll be asked if you want to continue. It's recommended to install at least one platform before proceeding.
+개발 환경이 감지되지 않으면 계속할 것인지 묻는 메시지가 표시됩니다. 계속하기 전에 하나 이상의 플랫폼을 설치하는 것이 좋습니다.
 </Aside>
 
-### Step 2: Add Your App
+### 2단계: 앱 추가
 
-The CLI will log you into Capgo and add your app to your account.
+CLI는 귀하를 Capgo에 로그인하고 귀하의 계정에 앱을 추가합니다.
 
 ```
 (spinner) Running: npm @capgo/cli@latest login ***
@@ -108,9 +105,9 @@ Login Done ✅
 ❓ Add {appId} in Capgo?
 ```
 
-**If your app ID is already taken:**
+**앱 ID가 이미 사용된 경우:**
 
-The CLI will suggest alternatives:
+CLI은 대안을 제안합니다.
 ```
 ❌ App ID "com.example.app" is already taken
 💡 Here are some suggestions:
@@ -122,108 +119,106 @@ The CLI will suggest alternatives:
 ❓ What would you like to do?
 ```
 
-You can choose a suggestion or enter a custom app ID.
+제안을 선택하거나 맞춤 앱 ID를 입력할 수 있습니다.
 
 <Aside type="note">
-App IDs must follow reverse domain notation (e.g., `com.example.myapp`)
+앱 ID는 역도메인 표기법(예: `com.example.myapp`)을 따라야 합니다.
 </Aside>
 
-### Step 3: Create Production Channel
+### 3단계: 제작 채널 생성
 
-Channels allow you to manage different update streams for your app.
+채널을 사용하면 앱의 다양한 업데이트 스트림을 관리할 수 있습니다.
 
 ```
 ❓ Create default channel production for {appId} in Capgo?
 ```
 
 <Aside type="tip">
-**Don't worry!** This is just for local testing during onboarding. Creating a "production" channel doesn't mean your updates will go live to customers immediately. You have full control over when updates are deployed. Select **Yes** unless you have specific channel requirements.
+**걱정하지 마세요!** 이는 온보딩 중 로컬 테스트를 위한 것입니다. "프로덕션" 채널을 만든다고 해서 업데이트가 고객에게 즉시 제공된다는 의미는 아닙니다. 업데이트 배포 시기를 완전히 제어할 수 있습니다. 특정 채널 요구사항이 없으면 **예**를 선택하세요.
 </Aside>
 
-**If you select Yes:**
+**예를 선택한 경우:**
 ```
 (spinner) Running: npm @capgo/cli@latest channel add production {appId} --default
 Channel add Done ✅  (or "Channel already added ✅")
 ```
 
-A production channel will be created and set as default. This is the recommended option for most users.
+프로덕션 채널이 생성되고 기본값으로 설정됩니다. 이는 대부분의 사용자에게 권장되는 옵션입니다.
 
-**If you select No:**
+**아니요를 선택하는 경우:**
 ```
 If you change your mind, run it for yourself with: "npm @capgo/cli@latest channel add production {appId} --default"
-```
-
-You'll need to create and configure channels manually later. Alternatively, you can:
-- Set the channel in your `capacitor.config.ts` file
-- Use the JavaScript `setChannel()` method to dynamically set the channel
+```나중에 채널을 수동으로 만들고 구성해야 합니다. 또는 다음을 수행할 수 있습니다.
+- `capacitor.config.ts` 파일에 채널을 설정하세요.
+- JavaScript `setChannel()` 메서드를 사용하여 채널을 동적으로 설정합니다.
 - Configure channels later from the Capgo web console
 
-### Step 4: Install Updater Plugin
+### 4단계: 업데이터 플러그인 설치
 
-The CLI will install the `@capgo/capacitor-updater` plugin compatible with your Capacitor version.
+CLI은 Capacitor 버전과 호환되는 `@capgo/capacitor-updater` 플러그인을 설치합니다.
 
 ```
 ❓ Automatic Install "@capgo/capacitor-updater" dependency in {appId}?
 ```
 
-**Version compatibility:**
+**버전 호환성:**
 
-- **Capacitor 5**: Installs `@capgo/capacitor-updater` v5
-- **Capacitor 6**: Installs `@capgo/capacitor-updater` v6
-- **Capacitor 7**: Installs `@capgo/capacitor-updater` v7
-- **Capacitor 8+**: Installs latest version
+- **Capacitor 5**: `@capgo/capacitor-updater` v5를 설치합니다.
+- **Capacitor 6**: `@capgo/capacitor-updater` v6을 설치합니다.
+- **Capacitor 7**: `@capgo/capacitor-updater` v7을 설치합니다.
+- **Capacitor 8+**: 최신 버전 설치
 
 <Aside type="caution">
-Capgo only supports Capacitor v5 and above. If you're using an older version, you'll need to upgrade first.
+Capgo은 Capacitor v5 이상만 지원합니다. 이전 버전을 사용하는 경우 먼저 업그레이드해야 합니다.
 </Aside>
 
-**Instant updates option:**
+**즉시 업데이트 옵션:**
 
-After installation, you'll be asked:
+설치 후 다음과 같은 질문이 표시됩니다.
 ```
 ❓ Do you want to set instant updates in {appId}?
    Read more: https://capgo.app/docs/live-updates/update-behavior/#applying-updates-immediately
 ```
 
 <Aside type="tip">
-**What are instant updates?** With instant updates enabled, your app applies updates immediately when backgrounded and reopened. This works seamlessly because Capgo can distribute updates worldwide in under 300ms. Without it (standard mode), updates download in the background and apply on the next app restart. Instant updates are great for faster iteration during development and critical bug fixes in production.
+**즉시 업데이트란 무엇입니까?** 즉시 업데이트를 활성화하면 앱이 백그라운드에서 다시 열릴 때 즉시 업데이트를 적용합니다. Capgo는 300ms 이내에 전세계에 업데이트를 배포할 수 있기 때문에 원활하게 작동합니다. 이 기능이 없으면(표준 모드) 업데이트가 백그라운드에서 다운로드되고 다음에 앱을 다시 시작할 때 적용됩니다. 즉각적인 업데이트는 개발 중 더 빠른 반복과 프로덕션의 중요한 버그 수정에 적합합니다.
 </Aside>
 
-**If you select Yes:**
-- Updates will be configured to apply immediately when the app is backgrounded and reopened
-- `directUpdate: 'always'` and `autoSplashscreen: true` will be added to your config
-- Your `capacitor.config.ts` will be updated automatically
-- **Delta updates** will be automatically enabled - this sends only the files that changed between updates instead of the full bundle, making updates much faster
+**예를 선택한 경우:**
+- 앱이 백그라운드에서 다시 열리면 즉시 업데이트가 적용되도록 구성됩니다.
+- `directUpdate: 'always'` 및 `autoSplashscreen: true`이 구성에 추가됩니다.
+- `capacitor.config.ts`이 자동으로 업데이트됩니다.
+- **델타 업데이트**가 자동으로 활성화됩니다. 이는 전체 번들 대신 업데이트 간에 변경된 파일만 전송하므로 업데이트 속도가 훨씬 빨라집니다.
 
-**If you select No:**
-- Updates will use standard behavior (download in background, apply on next restart)
-- You can always enable instant updates later by modifying your `capacitor.config.ts`
+**아니요를 선택하는 경우:**
+- 업데이트는 표준 동작을 사용합니다(백그라운드에서 다운로드, 다음에 다시 시작할 때 적용).
+- `capacitor.config.ts`을 수정하여 나중에 언제든지 즉시 업데이트를 활성화할 수 있습니다.
 
-### Step 5: Add Integration Code
+### 5단계: 통합 코드 추가
 
-The CLI will automatically inject the required code into your main application file.
+CLI는 필수 코드를 기본 애플리케이션 파일에 자동으로 삽입합니다.
 
 ```
 ❓ Automatic Add "CapacitorUpdater.notifyAppReady()" code and import in {appId}?
 ```
 
-**What gets added:**
+**추가되는 내용:**
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
 CapacitorUpdater.notifyAppReady()
 ```
 
-**Project type detection:**
+**프로젝트 유형 감지:**
 
-- **Nuxt.js**: Creates `plugins/capacitorUpdater.client.ts`
+- **Nuxt.js**: `plugins/capacitorUpdater.client.ts` 생성
 - **Other frameworks**: Adds to your main entry file
 
 <Aside type="tip">
-**If auto-injection fails**, you can add the code manually to your main application file:
+**자동 삽입에 실패하는 경우** 기본 애플리케이션 파일에 코드를 수동으로 추가할 수 있습니다.
 
-**For Nuxt.js:**
-Create `plugins/capacitorUpdater.client.ts`:
+**Nuxt.js의 경우:**
+`plugins/capacitorUpdater.client.ts` 생성:
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
@@ -232,20 +227,20 @@ export default defineNuxtPlugin(() => {
 })
 ```
 
-**For other frameworks:**
-Add to your main entry file (e.g., `main.ts`, `index.js`, `App.tsx`):
+**다른 프레임워크의 경우:**
+기본 항목 파일(예: `main.ts`, `index.js`, `App.tsx`)에 추가합니다.
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
 CapacitorUpdater.notifyAppReady()
 ```
 
-Place this code after your imports and before your app initialization. For more details, see the [Add an App guide](/docs/getting-started/add-an-app/).
+가져온 후와 앱 초기화 전에 이 코드를 배치하세요. 자세한 내용은 [앱 추가 가이드](/docs/getting-started/add-an-app/)를 참조하세요.
 </Aside>
 
-### Step 6: Setup Encryption (Optional)
+### 6단계: 암호화 설정(선택 사항)
 
-End-to-end encryption adds an extra security layer for your updates.
+엔드투엔드 암호화는 업데이트를 위한 추가 보안 계층을 추가합니다.
 
 ```
 🔐 End-to-end encryption
@@ -256,16 +251,16 @@ End-to-end encryption adds an extra security layer for your updates.
 ```
 
 <Aside type="note">
-Encryption is only available for Capacitor v6 and above.
+암호화는 Capacitor v6 이상에서만 사용할 수 있습니다.
 </Aside>
 
-If you enable encryption, the CLI will:
-1. Generate encryption keys
-2. Offer to sync your Capacitor configuration
+암호화를 활성화하면 CLI은 다음을 수행합니다.
+1. 암호화 키 생성
+2. Capacitor 구성 동기화 제안
 
-### Step 7: Select Platform
+### 7단계: 플랫폼 선택
 
-Choose which platform to test with during onboarding.
+온보딩 중에 테스트할 플랫폼을 선택하세요.
 
 ```
 📱 Platform selection for onboarding
@@ -275,38 +270,36 @@ Choose which platform to test with during onboarding.
    Options:
    - iOS
    - Android
-```
-
-<Aside type="tip">
-This only affects the onboarding process. Your final app will support all platforms.
+```<Aside type="tip">
+이는 온보딩 프로세스에만 영향을 미칩니다. 최종 앱은 모든 플랫폼을 지원합니다.
 </Aside>
 
-### Step 8: Build Your Project
+### 8단계: 프로젝트 구축
 
-The CLI will build your app and sync it with Capacitor.
+CLI는 앱을 빌드하고 Capacitor과 동기화합니다.
 
 ```
 ❓ Automatic build {appId} with "npm run build"?
 ```
 
-**What happens:**
-1. Detects your project type
-2. Runs your build script
-3. Executes `npx cap sync {platform}`
+**발생하는 상황:**
+1. 프로젝트 유형 감지
+2. 빌드 스크립트를 실행합니다.
+3. `npx cap sync {platform}`을 실행합니다.
 
-**If build script is missing:**
+**빌드 스크립트가 누락된 경우:**
 
-You'll be asked if you want to skip the build or add a build script to your `package.json`.
+빌드를 건너뛸지 아니면 `package.json`에 빌드 스크립트를 추가할지 묻는 메시지가 표시됩니다.
 
-### Step 9: Run on Device
+### 9단계: 기기에서 실행
 
-Test the initial version of your app on a device or simulator.
+기기나 시뮬레이터에서 앱의 초기 버전을 테스트하세요.
 
 ```
 ❓ Run {appId} on {PLATFORM} device now to test the initial version?
 ```
 
-If you select **Yes**:
+**예**를 선택하는 경우:
 ```
 (spinner) Running: npx cap run {platform}
 (device picker appears)
@@ -317,7 +310,7 @@ App started ✅
 
 ### Step 10: Make a Test Change
 
-Now it's time to test Capgo's update system by making a visible change.
+이제 눈에 띄는 변경을 적용하여 Capgo의 업데이트 시스템을 테스트할 차례입니다.
 
 ```
 🎯 Now let's test Capgo by making a visible change and deploying an update!
@@ -328,13 +321,13 @@ Now it's time to test Capgo's update system by making a visible change.
    - Manual: I'll make changes myself
 ```
 
-**Auto mode:**
-The CLI will automatically modify your files to add a visible test banner or change.
+**자동 모드:**
+CLI은 눈에 보이는 테스트 배너를 추가하거나 변경하기 위해 파일을 자동으로 수정합니다.
 
-**Manual mode:**
-You make your own changes (e.g., change text, colors, or add elements).
+**수동 모드:**
+원하는 대로 변경할 수 있습니다(예: 텍스트, 색상 변경, 요소 추가).
 
-**Version handling:**
+**버전 처리:**
 ```
 ❓ How do you want to handle the version for this update?
    Options:
@@ -342,18 +335,18 @@ You make your own changes (e.g., change text, colors, or add elements).
    - Manual: I'll provide the version number
 ```
 
-**Build with changes:**
+**변경 사항을 적용하여 빌드:**
 ```
 ❓ Build {appId} with changes before uploading?
 ```
 
 <Aside type="tip">
-If you need to build manually in another terminal, select "No" and build yourself, then continue.
+다른 터미널에서 수동으로 빌드해야 하는 경우 "아니요"를 선택하고 직접 빌드한 다음 계속하세요.
 </Aside>
 
-### Step 11: Upload Bundle
+### 11단계: 번들 업로드
 
-Upload your updated app bundle to Capgo.
+업데이트된 App Bundle을 Capgo에 업로드하세요.
 
 ```
 ❓ Upload the updated {appId} bundle (v{version}) to Capgo?
@@ -365,10 +358,10 @@ npx @capgo/cli@latest bundle upload
 ```
 
 <Aside type="tip">
-**Delta updates with Direct Update:** If you enabled instant updates (Direct Update) in Step 4, the CLI will automatically ask if you want to enable delta updates. Delta updates send only the files that changed between versions instead of the entire bundle. Since usually only a few files change between updates, this makes downloads much faster. Select **Yes** for the best experience with instant updates.
+**직접 업데이트를 통한 델타 업데이트:** 4단계에서 즉시 업데이트(직접 업데이트)를 활성화한 경우 CLI는 델타 업데이트를 활성화할지 자동으로 묻습니다. 델타 업데이트는 전체 번들 대신 버전 간에 변경된 파일만 보냅니다. 일반적으로 업데이트 간에는 몇 개의 파일만 변경되므로 다운로드 속도가 훨씬 빨라집니다. 즉각적인 업데이트를 통해 최상의 경험을 얻으려면 **예**를 선택하세요.
 </Aside>
 
-**Delta updates prompt (if Direct Update is enabled):**
+**델타 업데이트 프롬프트(직접 업데이트가 활성화된 경우):**
 ```
 💡 Direct Update (instant updates) is enabled in your config
    Delta updates send only changed files instead of the full bundle
@@ -377,31 +370,31 @@ npx @capgo/cli@latest bundle upload
 ```
 
 <Aside type="caution">
-For monorepos, you may need to provide additional paths to your `package.json` and `node_modules`.
+단일 저장소의 경우 `package.json` 및 `node_modules`에 대한 추가 경로를 제공해야 할 수도 있습니다.
 </Aside>
 
-**Success:**
+**성공:**
 ```
 ✅ Update v{version} uploaded successfully!
 🎉 Your updated bundle is now available on Capgo
 ```
 
-### Step 12: Test Update on Device
+### 12단계: 기기에서 업데이트 테스트
 
-Time to see the update in action!
+업데이트가 실제로 작동하는 모습을 볼 시간입니다!
 
 ```
 🧪 Time to test the Capgo update system!
 📱 Go to your device where the app is running
 ```
 
-**For instant updates:**
+**즉시 업데이트를 원하시면:**
 ```
 🔄 IMPORTANT: Background your app (swipe up/press home button) and then reopen it
 ⏱️  The update should be downloaded and applied automatically
 ```
 
-**For standard updates:**
+**표준 업데이트의 경우:**
 ```
 📱 With standard updates, you will need to:
    1. Background the app (swipe up/press home button) to start download
@@ -409,90 +402,88 @@ Time to see the update in action!
    3. Background and foreground again to see the update
 ```
 
-**Monitor logs:**
+**모니터 로그:**
 ```
 ❓ Monitor Capgo logs to verify the update worked?
 ```
 
-If you select **Yes**, you'll see live logs from your device showing the update process.
+**예**를 선택하면 업데이트 프로세스를 보여주는 장치의 실시간 로그가 표시됩니다.
 
-### Step 13: Completion
+### 13단계: 완료
 
 ```
 Welcome onboard ✈️!
 ```
 
-Congratulations! You've successfully set up Capgo live updates for your app.
+축하합니다! 앱에 대한 Capgo 실시간 업데이트를 성공적으로 설정했습니다.
 
-## What You've Accomplished
+## 당신이 성취한 것
 
-After completing the onboarding, you have:
+온보딩을 완료한 후 다음을 수행할 수 있습니다.
 
 <CardGrid>
-  <Card title="✅ App Registered" icon="rocket">
-    Your app is registered in Capgo with a production channel
+  <Card title="✅ 앱 등록됨" icon="rocket">
+    귀하의 앱은 프로덕션 채널을 통해 Capgo에 등록되어 있습니다.
   </Card>
-  <Card title="✅ Plugin Installed" icon="puzzle">
-    The Capacitor Updater plugin is installed and configured
+  <Card title="✅ 플러그인 설치됨" icon="puzzle">
+    Capacitor 업데이트 프로그램 플러그인이 설치 및 구성되었습니다.
   </Card>
-  <Card title="✅ Code Integrated" icon="seti:config">
-    Integration code is added to your app
+  <Card title="✅ 코드 통합" icon="seti:config">
+    통합 코드가 앱에 추가되었습니다.
   </Card>
-  <Card title="✅ Update Tested" icon="approve-check">
-    You've successfully deployed and received a live update
+  <Card title="✅ 업데이트 테스트됨" icon="approve-check">
+    성공적으로 배포하고 실시간 업데이트를 받았습니다.
   </Card>
 </CardGrid>
 
-## Daily Workflow
+## 일일 작업 흐름
 
-For subsequent updates, use:
+후속 업데이트의 경우 다음을 사용하십시오.
 
 ```bash
 npm run build
 npx @capgo/cli@latest bundle upload --channel=production
 ```
 
-For more deployment options, see [Deploy a Live Update](/docs/getting-started/deploy/).
+자세한 배포 옵션은 [라이브 업데이트 배포](/docs/getting-started/deploy/)를 참조하세요.
 
-## Resuming Onboarding
+## 온보딩 재개
 
-If you exit the onboarding process, you can resume anytime:
+온보딩 프로세스를 종료하면 언제든지 재개할 수 있습니다.
 
 ```bash
 npx @capgo/cli@latest init [APIKEY]
-```
-
-You'll see:
+```다음을 볼 수 있습니다:
 ```
 You have already got to the step {stepNumber}/13 in the previous session
 ❓ Would you like to continue from where you left off?
 ```
 
 <Aside type="tip">
-Progress is saved locally, so you can safely exit and resume the onboarding process.
+진행 상황은 로컬에 저장되므로 온보딩 프로세스를 안전하게 종료하고 다시 시작할 수 있습니다.
 </Aside>
 
-## Troubleshooting
+## 문제 해결
 
-### No Development Environment
+### 개발 환경 없음
 
-**Problem:** Neither Xcode nor Android SDK is detected.
+**문제:** Xcode 및 Android SDK가 모두 감지되지 않습니다.
 
-**Solution:**
-- **For iOS**: Install [Xcode](https://developer.apple.com/xcode/) (macOS only)
-- **For Android**: Install [Android Studio](https://developer.android.com/studio)
+**해결책:**
+- **iOS**의 경우: [Xcode](https://developer.apple.com/xcode/) 설치(macOS에만 해당)
+- **Android**의 경우: [Android Studio](https://developer.android.com/studio)를 설치합니다.
 
-### App ID Already Taken
+### 앱 ID가 이미 사용되었습니다.
 
-**Problem:** Your app ID is already registered.
+**문제:** 앱 ID가 이미 등록되어 있습니다.
 
-**Solution:** Choose one of the suggested alternatives or enter a custom app ID in reverse domain notation.
+**해결책:** 제안된 대안 중 하나를 선택하거나 역도메인 표기법으로 맞춤 앱 ID를 입력하세요.
 
-### Build Script Missing
+### 빌드 스크립트 누락
 
-**Problem:** No build script found in `package.json`.
+**문제:** `package.json`에 빌드 스크립트가 없습니다.
 
-**Solution:** Add a build script to your `package.json`:
+**해결책:** `package.json`에 빌드 스크립트를 추가하세요.
 ```json
 {
   "scripts": {
@@ -501,56 +492,56 @@ Progress is saved locally, so you can safely exit and resume the onboarding proc
 }
 ```
 
-### Auto-Injection Failed
+### 자동 삽입 실패
 
-**Problem:** CLI cannot automatically inject the integration code.
+**문제:** CLI는 통합 코드를 자동으로 삽입할 수 없습니다.
 
-**Solution:** Add the code manually to your main file:
+**해결책:** 기본 파일에 코드를 수동으로 추가하세요.
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
 CapacitorUpdater.notifyAppReady()
 ```
 
-### Capacitor Version Too Old
+### Capacitor 버전이 너무 오래됨
 
-**Problem:** Your Capacitor version is below v5.
+**문제:** Capacitor 버전이 v5보다 낮습니다.
 
-**Solution:** Upgrade Capacitor to v5 or higher:
-- [Upgrading to Capacitor 5](https://capacitorjs.com/docs/updating/5-0)
-- [Upgrading to Capacitor 6](https://capacitorjs.com/docs/updating/6-0)
-- [Upgrading to Capacitor 7](https://capacitorjs.com/docs/updating/7-0)
+**해결책:** Capacitor을 v5 이상으로 업그레이드하세요.
+- [Capacitor 5로 업그레이드 중](https://capacitorjs.com/docs/updating/5-0)
+- [Capacitor 6으로 업그레이드 중](https://capacitorjs.com/docs/updating/6-0)
+- [Capacitor 7로 업그레이드 중](https://capacitorjs.com/docs/updating/7-0)
 
-## Next Steps
+## 다음 단계
 
-Now that you've completed onboarding, explore these topics:
+이제 온보딩을 완료했으므로 다음 주제를 살펴보세요.
 
 <CardGrid>
-  <a href="/docs/getting-started/deploy/"><Card title="Deploy Updates" icon="rocket">
-    Learn how to deploy updates from the Capgo dashboard
+  <a href="/docs/getting-started/deploy/"><Card title="업데이트 배포" icon="rocket">
+    Capgo 대시보드에서 업데이트를 배포하는 방법을 알아보세요.
   </Card></a>
   <a href="/docs/live-updates/update-types/"><Card title="업데이트 유형" icon="open-book">
-    모든 OTA 업데이트 유형 참조: 적용 시점, 지연 조건, 버전 차단 및 전달
+    모든 OTA 업데이트 유형 참조: 적용 시기, 지연 조건, 버전 차단, 전달
   </Card></a>
-  <a href="/docs/getting-started/cicd-integration/"><Card title="CI/CD Integration" icon="setting">
-    Automate your update deployments with CI/CD
+  <a href="/docs/getting-started/cicd-integration/"><Card title="CI/CD 통합" icon="setting">
+    CI/CD를 사용하여 업데이트 배포 자동화
   </Card></a>
   <a href="/docs/live-updates/channels/"><Card title="Channels" icon="list-format">
-    Manage multiple update streams with channels
+    채널을 통해 여러 업데이트 스트림 관리
   </Card></a>
   <a href="/docs/live-updates/encryption/"><Card title="Encryption" icon="approve-check-circle">
-    Secure your updates with end-to-end encryption
+    엔드투엔드 암호화로 업데이트를 보호하세요
   </Card></a>
-  <a href="/docs/live-updates/update-behavior/"><Card title="Update Behavior" icon="setting">
-    Customize when and how updates are applied (direct, delta, etc.)
+  <a href="/docs/live-updates/update-behavior/"><Card title="업데이트 동작" icon="setting">
+    업데이트 적용 시기 및 방법 사용자 정의(직접, 델타 등)
   </Card></a>
 </CardGrid>
 
-## Getting Help
+## 도움 받기
 
-If you encounter issues during onboarding:
+온보딩 중에 문제가 발생하는 경우:
 
-- Check the [Troubleshooting Guide](/docs/getting-started/troubleshooting/)
-- Join the [Discord Community](https://discord.capgo.app)
-- Review the [FAQ](/docs/faq/)
-- Contact [Support](/docs/getting-help/)
+- [문제 해결 가이드](/docs/getting-started/troubleshooting/)를 확인하세요.
+- [Discord 커뮤니티](https://discord.capgo.app)에 가입하세요
+- [FAQ](/docs/faq/)를 검토하세요.
+- [지원팀](/docs/getting-help/)에 문의하세요.

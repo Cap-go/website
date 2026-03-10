@@ -1,45 +1,46 @@
 ---
 title: Bundles
-description: 管理 Capgo Bundles 的详细指南，涵盖应用更新包的列表显示、删除、版本管理和存储优化。
+description: 管理 Capgo 捆绑包的详细指南，包括列出、删除、捆绑包（版本）管理以及应用程序更新包的存储优化。
 sidebar:
   order: 8
 locale: zh
 ---
+捆绑包是 Capgo 中的核心更新包。每个捆绑包都包含构成应用程序内容的 Web 资源（HTML、CSS、JS）。捆绑包 API 允许您管理这些更新包，包括列出和删除它们。
 
-Bundles 是 Capgo 的核心更新包。每个 bundle 包含构成应用内容的 web 资源（HTML、CSS、JS）。Bundles API 允许您管理这些更新包，包括列表显示和删除。
+## 了解捆绑包
 
-## 了解 Bundles
+捆绑包代表应用程序 Web 内容的特定捆绑包（版本），包括：
+- **捆绑包（版本）**：捆绑包的语义版本号
+- **校验和**：用于验证包完整性的唯一哈希值
+- **存储信息**：有关捆绑包存储位置和方式的详细信息
+- **本机要求**：最低本机应用程序版本要求
+- **元数据**：创建时间、所有权和其他跟踪信息
 
-bundle 代表应用 web 内容的特定版本，包括：
-- **Version**：bundle 的语义版本号
-- **Checksum**：用于验证 bundle 完整性的唯一哈希
-- **Storage Info**：有关 bundle 存储位置和方式的详细信息
-- **Native Requirements**：原生应用的最低版本要求
-- **Metadata**：创建时间、所有权和其他跟踪信息
+## 手动创建捆绑包（不带 CLI）
 
-## 手动 Bundle 创建（无需 CLI）
+下面介绍了如何在不使用 Capgo CLI 的情况下手动创建和上传捆绑包：
 
-如何在不使用 Capgo CLI 的情况下手动创建和上传 bundle：
+### 第 1 步：构建您的应用程序
 
-### 步骤 1：构建应用
-
-首先，构建应用的 web 资源：
+首先，构建应用程序的网络资产：
 
 ```bash
 npm run build
 ```
 
-### 步骤 2：使用与 Capgo CLI 相同的包创建 Bundle Zip
+### 步骤 2：使用与 Capgo CLI 相同的包创建捆绑包 Zip
 
-**重要**：使用与 Capgo CLI 内部使用完全相同的 JavaScript 包以确保兼容性。
+**重要**：使用 Capgo CLI 内部使用的完全相同的 JavaScript 包来确保兼容性。
 
-#### 安装所需的包
+#### 安装所需的软件包
 
 ```bash
 npm install adm-zip @tomasklaen/checksum
 ```
 
-#### 使用 JavaScript 创建 Zip Bundle（与 Capgo CLI 相同）
+#### 使用 JavaScript 创建 Zip 包（与 Capgo CLI 相同）
+
+注意：在下面的示例中，`version` 指的是 API 使用的包（版本）名称。
 
 ```javascript
 const fs = require('node:fs');
@@ -141,9 +142,9 @@ async function main() {
 main();
 ```
 
-### 步骤 4：将 Bundle 上传到存储
+### 步骤 4：将捆绑包上传到您的存储
 
-Upload your zip file to any web-accessible storage:
+将您的 zip 文件上传到任何可通过网络访问的存储：
 
 ```bash
 # Example: Upload to your server via scp
@@ -158,22 +159,22 @@ curl -X POST https://your-storage-api.com/upload \
   -F "file=@my-app-1.2.3.zip"
 ```
 
-**Important**: Your bundle must be **publicly accessible** via HTTPS URL (no authentication required). Capgo's servers need to download the bundle from this URL.
+**重要**：您的捆绑包必须可通过 HTTPS URL **公开访问**（无需身份验证）。 Capgo 的服务器需要从此 URL 下载捆绑包。
 
-Examples of valid public URLs:
+有效公共 URL 的示例：
 - `https://your-storage.com/bundles/my-app-1.2.3.zip`
 - `https://github.com/username/repo/releases/download/v1.2.3/bundle.zip`
 - `https://cdn.jsdelivr.net/gh/username/repo@v1.2.3/dist.zip`
 
-### 步骤 5：向 Capgo API 注册 Bundle
+### 步骤 5：使用 Capgo API 注册捆绑包
 
-Register the external bundle with Capgo using direct API calls:
+使用直接 API 调用向 Capgo 注册外部包：
 
 ```javascript
 async function registerWithCapgo(appId, version, bundleUrl, checksum, apiKey) {
   const fetch = require('node-fetch');
   
-  // Create bundle version
+  // Create bundle (version)
   const response = await fetch('https://api.capgo.app/bundle/', {
     method: 'POST',
     headers: {
@@ -201,22 +202,22 @@ async function registerWithCapgo(appId, version, bundleUrl, checksum, apiKey) {
 
 #### API 参数
 
-| Parameter | Description | Required |
-|-----------|-------------|----------|
-| `app_id` | Your app identifier | Yes |
-| `version` | Semantic version (e.g., "1.2.3") | Yes |
-| `external_url` | **Publicly accessible** HTTPS URL where bundle can be downloaded (no auth required) | Yes |
-| `checksum` | SHA256 checksum of the zip file | Yes |
+|参数|描述 |必填 |
+|------------|-------------|----------|
+| `app_id` |您的应用程序标识符 |是的 |
+| `version` |捆绑包（版本）语义版本（例如“1.2.3”）|是的 |
+| `external_url` | **可公开访问** 可下载捆绑包的 HTTPS URL（无需身份验证）|是的 |
+| `checksum` | zip 文件的 SHA256 校验和 |是的 |
 
-## Bundle 结构要求
+## 捆绑包结构要求
 
-Your bundle zip must follow these requirements:
+您的捆绑包 zip 必须遵循以下要求：
 
-1. **Root Index File**: Must have `index.html` at the root level
-2. **Capacitor Integration**: Must call `notifyAppReady()` in your app code
-3. **Asset Paths**: Use relative paths for all assets
+1. **根索引文件**：根级别必须有 `index.html`
+2. **Capacitor 集成**：必须在您的应用代码中调用 `notifyAppReady()`
+3. **资产路径**：对所有资产使用相对路径
 
-### 有效的 Bundle 结构
+### 有效的包结构
 
 ```
 bundle.zip
@@ -229,7 +230,7 @@ bundle.zip
 
 ## 完整的手动工作流程示例
 
-Simple Node.js script to zip, checksum, and upload to Capgo:
+用于压缩、校验和上传到 Capgo 的简单 Node.js 脚本：
 
 ```javascript
 const fs = require('node:fs');
@@ -282,7 +283,7 @@ async function deployToCapgo() {
 deployToCapgo().catch(console.error);
 ```
 
-Install dependencies:
+安装依赖项：
 
 ```bash
 npm install adm-zip @tomasklaen/checksum node-fetch
@@ -292,7 +293,7 @@ npm install adm-zip @tomasklaen/checksum node-fetch
 
 ### JavaScript 校验和计算（与 Capgo CLI 相同）
 
-Use the exact same package and method that Capgo CLI uses internally:
+使用与 Capgo CLI 内部使用完全相同的包和方法：
 
 ```javascript
 const fs = require('node:fs');
@@ -325,32 +326,30 @@ async function main() {
 }
 
 main();
-```
+```### 校验和重要性
 
-### 校验和的重要性
+- **捆绑包完整性**：确保捆绑包在传输过程中没有损坏
+- **API 验证**：Capgo 在接受捆绑包之前验证校验和
+- **插件验证**：移动插件在应用更新之前验证校验和
 
-- **Bundle Integrity**: Ensures the bundle hasn't been corrupted during transfer
-- **API Verification**: Capgo verifies checksums before accepting bundles
-- **Plugin Verification**: The mobile plugin verifies checksums before applying updates
+## 最佳实践
 
-## Best Practices
+1. **捆绑包（版本）管理**：一致地使用语义版本控制
+2. **存储优化**：定期删除未使用的捆绑包
+3. **捆绑包（版本）兼容性**：设置适当的最低本机版本要求
+4. **备份策略**：维护关键捆绑包（版本）的备份
 
-1. **Version Management**: Use semantic versioning consistently
-2. **Storage Optimization**: Remove unused bundles periodically
-3. **Version Compatibility**: Set appropriate minimum native version requirements
-4. **Backup Strategy**: Maintain backups of critical bundle versions
+## 端点
 
-## Endpoints
-
-### GET
+### 获取
 
 `https://api.capgo.app/bundle/`
 
-Retrieve bundle information. Returns 50 bundles per page.
+检索捆绑包信息。每页返回 50 个捆绑包。
 
 #### 查询参数
-- `app_id`: Required. The ID of your app
-- `page`: Optional. Page number for pagination
+- `app_id`：必需。您的应用程序的 ID
+- `page`：可选。分页的页码
 
 #### 响应类型
 
@@ -409,15 +408,15 @@ curl -H "authorization: your-api-key" \
 }
 ```
 
-### DELETE
+### 删除
 
 `https://api.capgo.app/bundle/`
 
-Delete one or all bundles for an app. Use with caution as this action cannot be undone.
+删除应用程序的一个或所有捆绑包。请谨慎使用，因为此操作无法撤消。
 
 #### 查询参数
 
-For deleting a specific bundle:
+要删除特定包：
 ```typescript
 interface BundleDelete {
   app_id: string
@@ -425,14 +424,14 @@ interface BundleDelete {
 }
 ```
 
-For deleting all bundles:
+删除所有包：
 ```typescript
 interface BundleDeleteAll {
   app_id: string
 }
 ```
 
-#### 请求示例s
+#### 请求示例
 
 ```bash
 # Delete specific bundle
@@ -463,13 +462,13 @@ curl -X DELETE \
 }
 ```
 
-### POST
+### 发布
 
 `https://api.capgo.app/bundle/`
 
-Create a new bundle with external URL.
+使用外部 URL 创建一个新包。
 
-#### Request Body
+#### 请求正文
 
 ```typescript
 interface CreateBundleBody {
@@ -503,18 +502,18 @@ curl -X POST \
 }
 ```
 
-### POST (Metadata)
+### POST（元数据）
 
 `https://api.capgo.app/bundle/metadata`
 
-Update bundle metadata such as link and comment information.
+更新捆绑元数据，例如链接和评论信息。
 
-#### Request Body
+#### 请求正文
 
 ```typescript
 interface UpdateMetadataBody {
   app_id: string
-  version_id: number
+  version_id: number // bundle (version) id
   link?: string
   comment?: string
 }
@@ -543,18 +542,18 @@ curl -X POST \
 }
 ```
 
-### PUT
+### 放置
 
 `https://api.capgo.app/bundle/`
 
-Set a bundle to a specific channel. This links a bundle version to a channel for distribution.
+将捆绑包设置到特定频道。这会将捆绑包（版本）链接到分发渠道。
 
-#### Request Body
+#### 请求正文
 
 ```typescript
 interface SetChannelBody {
   app_id: string
-  version_id: number
+  version_id: number // bundle (version) id
   channel_id: number
 }
 ```
@@ -584,7 +583,7 @@ curl -X PUT \
 
 ## 错误处理
 
-Common error scenarios and their responses:
+常见错误场景及其应对措施：
 
 ```json
 // Bundle not found
@@ -593,7 +592,7 @@ Common error scenarios and their responses:
   "status": "KO"
 }
 
-// Invalid version format
+// Invalid bundle (version) format
 {
   "error": "Invalid version format",
   "status": "KO"
@@ -614,16 +613,16 @@ Common error scenarios and their responses:
 
 ## 常见用例
 
-1. **Cleanup Old Versions**
+1. **清理旧包（版本）**
 ```typescript
-// Delete outdated beta versions
+// Delete outdated beta bundles (versions)
 {
   "app_id": "app_123",
   "version": "1.0.0-beta.1"
 }
 ```
 
-2. **App Reset**
+2. **应用程序重置**
 ```typescript
 // Remove all bundles to start fresh
 {
@@ -631,9 +630,9 @@ Common error scenarios and their responses:
 }
 ```
 
-## 存储考虑因素
+## 存储注意事项
 
-1. **Retention Policy**: Define how long to keep old bundles
-2. **Size Management**: Monitor bundle sizes and storage usage
-3. **Backup Strategy**: Consider backing up critical versions
-4. **Cost Optimization**: Remove unnecessary bundles to optimize storage costs 
+1. **保留策略**：定义保留旧捆绑包的时间
+2. **大小管理**：监控捆绑包大小和存储使用情况
+3. **备份策略**：考虑备份关键捆绑包（版本）
+4. **成本优化**：删除不必要的捆绑以优化存储成本

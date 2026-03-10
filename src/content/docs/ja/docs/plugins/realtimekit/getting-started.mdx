@@ -1,32 +1,29 @@
 ---
-title: Getting Started with RealtimeKit
-description: >-
-  Learn how to integrate Cloudflare Calls video conferencing into your Capacitor
-  app
+title: RealtimeKit の使用を開始する
+description: Cloudflare Calls ビデオ会議を Capacitor アプリに統合する方法を学びます
 locale: ja
 ---
+このガイドでは、Capacitor RealtimeKit プラグインを統合して、Cloudflare Calls を利用したビデオ会議をアプリケーションに追加する手順を説明します。
 
-このガイドでは、Cloudflare Callsを活用したビデオ会議を追加するために、Capacitor RealtimeKitプラグインを統合する方法を説明します。
+## インストール
 
-## Installation
-
-Install the plugin using npm:
+npm を使用してプラグインをインストールします。
 
 ```bash
 npm install @capgo/capacitor-realtimekit
 npx cap sync
 ```
 
-## Dependencies
+## 依存関係
 
-This plugin uses the Cloudflare RealtimeKit SDK:
+このプラグインは Cloudflare RealtimeKit SDK を使用します。
 
-- **iOS**: RealtimeKitCoreiOS (automatically installed via Swift Package Manager)
-- **Android**: `com.cloudflare.realtimekit:ui-android` version `0.2.2`
+- **iOS**: RealtimeKitCoreiOS (Swift Package Manager 経由で自動的にインストールされます)
+- **Android**: `com.cloudflare.realtimekit:ui-android` バージョン `0.2.2`
 
-### Customizing Android RealtimeKit Version
+### Android RealtimeKit バージョンのカスタマイズ
 
-In your app's `build.gradle`:
+アプリの `build.gradle` 内:
 
 ```kotlin
 buildscript {
@@ -36,9 +33,9 @@ buildscript {
 }
 ```
 
-## iOS Configuration
+## iOS 構成
 
-Add the following to your app's `Info.plist`:
+アプリの `Info.plist` に以下を追加します。
 
 ```xml
 <key>NSCameraUsageDescription</key>
@@ -62,9 +59,9 @@ Add the following to your app's `Info.plist`:
 </array>
 ```
 
-## Android Configuration
+## Android 構成
 
-Add the following permissions to your `AndroidManifest.xml`:
+次の権限を `AndroidManifest.xml` に追加します。
 
 ```xml
 <uses-permission android:name="android.permission.CAMERA" />
@@ -76,15 +73,15 @@ Add the following permissions to your `AndroidManifest.xml`:
 <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
 ```
 
-## Basic Usage
+## 基本的な使い方
 
-### Import the Plugin
+### プラグインをインポートする
 
 ```typescript
 import { CapacitorRealtimekit } from '@capgo/capacitor-realtimekit';
 ```
 
-### Initialize the Plugin
+### プラグインを初期化する
 
 ```typescript
 async function initializeRealtimeKit() {
@@ -97,7 +94,7 @@ async function initializeRealtimeKit() {
 }
 ```
 
-### Start a Meeting
+### 会議を開始する
 
 ```typescript
 async function startMeeting(meetingUrl: string) {
@@ -112,9 +109,9 @@ async function startMeeting(meetingUrl: string) {
 }
 ```
 
-## Complete Example
+## 完全な例
 
-Here's a comprehensive video conferencing service:
+総合的なビデオ会議サービスは次のとおりです。
 
 ```typescript
 import { CapacitorRealtimekit } from '@capgo/capacitor-realtimekit';
@@ -214,24 +211,24 @@ await videoService.joinMeeting(
 );
 ```
 
-## Cloudflare Calls Setup
+## Cloudflare 通話のセットアップ
 
-To use this plugin, you need to set up Cloudflare Calls:
+このプラグインを使用するには、Cloudflare Calls を設定する必要があります。
 
-### 1. Create Cloudflare Account
+### 1. Cloudflareアカウントを作成する
 
-Sign up at [Cloudflare](https://dash.cloudflare.com/sign-up) if you don't have an account.
+アカウントをお持ちでない場合は、[Cloudflare](https://dash.cloudflare.com/sign-up) にサインアップしてください。
 
-### 2. Enable Calls API
+### 2. 通話を有効にする API
 
-1. Navigate to your Cloudflare dashboard
-2. Go to **Calls** section
-3. Enable the Calls API
-4. Get your API credentials
+1. Cloudflareダッシュボードに移動します
+2. **通話**セクションに移動します
+3. 呼び出し API を有効にする
+4. API 資格情報を取得します
 
-### 3. Create Meeting URLs
+### 3. ミーティング URL を作成する
 
-You need a backend service to create meeting URLs. Example using Cloudflare Workers:
+会議 URL を作成するにはバックエンド サービスが必要です。 Cloudflare ワーカーを使用した例:
 
 ```typescript
 // Cloudflare Worker example
@@ -260,9 +257,9 @@ function generateMeetingId(): string {
 }
 ```
 
-## Advanced Usage
+## 高度な使用法
 
-### Meeting with Custom Configuration
+### カスタム構成でのミーティング
 
 ```typescript
 class MeetingManager {
@@ -308,7 +305,7 @@ class MeetingManager {
 }
 ```
 
-### Handling Permissions
+### 権限の処理
 
 ```typescript
 import { Capacitor } from '@capacitor/core';
@@ -342,7 +339,7 @@ if (hasPermissions) {
 }
 ```
 
-## React Integration
+## React の統合
 
 ```typescript
 import { useEffect, useState } from 'react';
@@ -382,7 +379,7 @@ function VideoCallComponent() {
 }
 ```
 
-## Vue Integration
+## Vue の統合
 
 ```typescript
 import { ref, onMounted } from 'vue';
@@ -420,17 +417,17 @@ export default {
 
 ## ベストプラクティス
 
-1. **早期に初期化**: アプリの起動時にRealtimeKitを初期化します
-2. **エラー処理**: 常にtry-catchブロックで呼び出しをラップします
-3. **権限をリクエスト**: 開始前にカメラ/マイク権限を確認します
-4. **ネットワークをテスト**: 参加前にインターネット接続を確認します
-5. **バックグラウンドオーディオ**: iOSのバックグラウンドモードを設定します
-6. **ユーザー体験**: 初期化中に読み込み状態を表示します
-7. **URLをクリーンにする**: 使用前にミーティングURLを検証します
+1. **早期初期化**: アプリの起動時に RealtimeKit を初期化します。
+2. **エラーの処理**: 呼び出しは常に try-catch ブロックでラップする
+3. **権限のリクエスト**: 開始する前にカメラ/マイクの権限を確認してください
+4. **テストネットワーク**: 参加する前にインターネット接続を確認してください
+5. **バックグラウンド オーディオ**: iOS のバックグラウンド モードを構成します。
+6. **ユーザー エクスペリエンス**: 初期化中に読み込み状態を表示する
+7. **クリーンな URL**: 使用前に会議 URL を検証する
 
-## 一般的な問題
+## よくある問題
 
-### ミーティングが開始しない
+### 会議が開始されません
 
 ```typescript
 async function troubleshootMeeting(meetingUrl: string) {
@@ -453,13 +450,13 @@ async function troubleshootMeeting(meetingUrl: string) {
 }
 ```
 
-### Permission Denied
+### 権限が拒否されました
 
-On iOS, ensure Info.plist has all required usage descriptions. On Android, verify AndroidManifest.xml permissions are present.
+iOS では、Info.plist に必要な使用法の説明がすべて含まれていることを確認します。 Android で、AndroidManifest.xml 権限が存在することを確認します。
 
-### Audio Issues on iOS
+### iOS の音声の問題
 
-Ensure background audio mode is configured in Info.plist:
+Info.plist でバックグラウンド オーディオ モードが設定されていることを確認します。
 
 ```xml
 <key>UIBackgroundModes</key>
@@ -469,9 +466,9 @@ Ensure background audio mode is configured in Info.plist:
 </array>
 ```
 
-## Next Steps
+## 次のステップ
 
-- Explore the [API Reference](https://github.com/Cap-go/capacitor-realtimekit#api) for complete method documentation
-- Read [Cloudflare Calls Documentation](https://developers.cloudflare.com/calls/)
-- Check out the [example app](https://github.com/Cap-go/capacitor-realtimekit/tree/main/example)
-- See the [tutorial](/plugins/capacitor-realtimekit) for complete implementation
+- 完全なメソッドのドキュメントについては、[API リファレンス](https://github.com/Cap-go/capacitor-realtimekit#api) を参照してください。
+- [Cloudflare コールのドキュメント] を読む(https://developers.cloudflare.com/calls/)
+- [サンプルアプリ]をチェックしてください(https://github.com/Cap-go/capacitor-realtimekit/tree/main/example)
+- 完全な実装については、[チュートリアル](/plugins/capacitor-realtimekit) を参照してください。

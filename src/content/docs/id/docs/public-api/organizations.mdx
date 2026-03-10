@@ -1,35 +1,34 @@
 ---
 title: Organizations
 description: >-
-  Guide to managing organizations in Capgo, covering creation, settings,
-  updates, and retrieval of organization details.
+  Panduan untuk mengelola organisasi di Capgo, yang mencakup pembuatan,
+  pengaturan, pembaruan, dan pengambilan detail organisasi.
 sidebar:
   order: 2
 locale: id
 ---
+Organisasi adalah entitas tingkat teratas di Capgo. Mereka memungkinkan Anda mengelompokkan aplikasi, anggota tim, dan sumber daya di bawah satu payung. Setiap organisasi dapat memiliki banyak anggota dengan peran dan izin berbeda.
 
-Organizations are the top-level entities in Capgo. They allow you to group apps, team members, and resources under a single umbrella. Each organization can have multiple members with different roles and permissions.
+## Kasus Penggunaan Umum
 
-## Common Use Cases
+- Membuat organisasi baru untuk perusahaan Anda
+- Mengelola pengaturan organisasi
+- Memperbarui informasi organisasi
+- Mengambil detail organisasi
 
-- Creating a new organization for your company
-- Managing organization settings
-- Updating organization information
-- Retrieving organization details
+## Titik akhir
 
-## Endpoints
-
-### GET
+### DAPATKAN
 
 `https://api.capgo.app/organization/`
 
-Retrieve organization information. If `orgId` is provided in the parameters, returns a single organization. Otherwise, returns all accessible organizations.
+Ambil informasi organisasi. Jika `orgId` disediakan dalam parameter, mengembalikan satu organisasi. Jika tidak, kembalikan semua organisasi yang dapat diakses.
 
-#### Query Parameters
+#### Parameter Kueri
 
-- `orgId` (optional): The ID of the specific organization to retrieve
+- `orgId` (opsional): ID organisasi tertentu yang akan diambil
 
-#### Response Type
+#### Jenis Respons
 
 ```typescript
 interface Organization {
@@ -44,7 +43,7 @@ interface Organization {
 }
 ```
 
-#### Example Request
+#### Contoh Permintaan
 
 ```bash
 # Get all organizations
@@ -54,7 +53,7 @@ curl -H "authorization: your-api-key" https://api.capgo.app/organization/
 curl -H "authorization: your-api-key" https://api.capgo.app/organization/?orgId=org_123
 ```
 
-#### Example Response
+#### Contoh Respon
 
 ```json
 {
@@ -70,13 +69,13 @@ curl -H "authorization: your-api-key" https://api.capgo.app/organization/?orgId=
 }
 ```
 
-### POST
+### POSTINGAN
 
 `https://api.capgo.app/organization/`
 
-Create a new organization.
+Buat organisasi baru.
 
-#### Request Body
+#### Isi Permintaan
 
 ```typescript
 interface OrganizationCreate {
@@ -84,7 +83,7 @@ interface OrganizationCreate {
 }
 ```
 
-#### Example Request
+#### Contoh Permintaan
 
 ```bash
 curl -X POST \
@@ -96,7 +95,7 @@ curl -X POST \
   https://api.capgo.app/organization/
 ```
 
-#### Example Response
+#### Contoh Respon
 
 ```json
 {
@@ -105,13 +104,13 @@ curl -X POST \
 }
 ```
 
-### PUT
+### MASUKKAN
 
 `https://api.capgo.app/organization/`
 
-Update an existing organization. Requires admin role.
+Perbarui organisasi yang ada. Membutuhkan peran admin.
 
-#### Request Body
+#### Isi Permintaan
 
 ```typescript
 interface OrganizationUpdate {
@@ -122,7 +121,7 @@ interface OrganizationUpdate {
 }
 ```
 
-#### Example Request
+#### Contoh Permintaan
 
 ```bash
 curl -X PUT \
@@ -136,7 +135,7 @@ curl -X PUT \
   https://api.capgo.app/organization/
 ```
 
-#### Example Response
+#### Contoh Respon
 
 ```json
 {
@@ -149,17 +148,17 @@ curl -X PUT \
 }
 ```
 
-### DELETE
+### HAPUS
 
 `https://api.capgo.app/organization/`
 
-Delete an existing organization. Requires admin role. This action is irreversible and will remove all associated apps, versions, and resources.
+Hapus organisasi yang ada. Membutuhkan peran admin. Tindakan ini tidak dapat diubah dan akan menghapus semua aplikasi, paket (versi), dan sumber daya terkait.
 
-#### Query Parameters
+#### Parameter Kueri
 
-- `orgId`: The ID of the organization to delete
+- `orgId`: ID organisasi yang akan dihapus
 
-#### Example Request
+#### Contoh Permintaan
 
 ```bash
 curl -X DELETE \
@@ -167,7 +166,7 @@ curl -X DELETE \
   https://api.capgo.app/organization/?orgId=org_123
 ```
 
-#### Example Response
+#### Contoh Respon
 
 ```json
 {
@@ -176,9 +175,9 @@ curl -X DELETE \
 }
 ```
 
-## Error Handling
+## Penanganan Kesalahan
 
-Common error scenarios and their responses:
+Skenario kesalahan umum dan tanggapannya:
 
 ```json
 // Invalid API key
@@ -200,9 +199,9 @@ Common error scenarios and their responses:
 }
 ```
 
-## Best Practices
+## Praktik Terbaik
 
-1. **Naming**: Use clear, descriptive names for organizations
-2. **Roles**: Assign appropriate roles to team members
-3. **Email**: Use a group email for management_email to avoid issues with personal email changes
-4. **Logo**: Host logos on a reliable CDN and use HTTPS URLs 
+1. **Penamaan**: Gunakan nama organisasi yang jelas dan deskriptif
+2. **Peran**: Tetapkan peran yang sesuai kepada anggota tim
+3. **Email**: Gunakan email grup untuk email_manajemen untuk menghindari masalah dengan perubahan email pribadi
+4. **Logo**: Menghosting logo di CDN yang andal dan menggunakan URL HTTPS

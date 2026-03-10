@@ -1,164 +1,161 @@
 ---
-
-title: Create iOS Auto-Renewable Subscription
-description: Step-by-step guide to creating auto-renewable subscriptions in App Store Connect for the native-purchases plugin.
+title: Crea un abbonamento iOS rinnovabile automaticamente
+description: >-
+  Guida passo passo alla creazione di abbonamenti con rinnovo automatico in App
+  Store Connect per il plug-in per acquisti nativi.
 sidebar:
   order: 8
 locale: it
 ---
-
-
 import { Steps } from '@astrojs/starlight/components';
 
-Auto-renewable subscriptions provide recurring access to content, services, or premium features in your iOS app. This guide walks you through creating subscriptions in App Store Connect.
+Gli abbonamenti con rinnovo automatico forniscono accesso ricorrente a contenuti, servizi o funzionalità premium nella tua app iOS. Questa guida ti guida attraverso la creazione di abbonamenti in App Store Connect.
 
-## Overview
+## Panoramica
 
-Auto-renewable subscriptions automatically renew at the end of each billing period until users cancel. They're perfect for:
-- Premium content and features
-- Ad-free experiences
-- Cloud storage and sync
-- Streaming services
-- Professional tools and utilities
+Gli abbonamenti con rinnovo automatico si rinnovano automaticamente alla fine di ogni periodo di fatturazione fino all'annullamento da parte degli utenti. Sono perfetti per:
+- Contenuti e funzionalità premium
+- Esperienze senza pubblicità
+- Archiviazione e sincronizzazione nel cloud
+- Servizi di streaming
+- Strumenti e utilità professionali
 
-## Prerequisites
+## Prerequisiti
 
-Before creating subscriptions, you must:
-1. [Create a subscription group](/docs/plugins/native-purchases/ios-subscription-group/) to organize your subscriptions
-2. Have an active Apple Developer Program membership
-3. Complete banking and tax information in App Store Connect
+Prima di creare abbonamenti è necessario:
+1. [Crea un gruppo di iscrizione](/docs/plugins/native-purchases/ios-subscription-group/) per organizzare le tue iscrizioni
+2. Avere un'iscrizione attiva al programma per sviluppatori Apple
+3. Completa i dati bancari e fiscali in App Store Connect
 
 ## Creating a Subscription
 
 <Steps>
 
-1. **Navigate to Subscriptions**
+1. **Vai a Abbonamenti**
 
-   In App Store Connect, select your app and go to **Monetize > Subscriptions**.
+   In App Store Connect, seleziona la tua app e vai a **Monetizza > Abbonamenti**.
 
-   Select your subscription group or create a new one if needed.
+   Seleziona il tuo gruppo di abbonamento o creane uno nuovo se necessario.
 
-   ![Navigate to subscriptions](/native-purchases/ios/create-subscription/navigate-to-subscriptions.webp)
+   ![Vai agli abbonamenti](/native-purchases/ios/create-subscription/navigate-to-subscriptions.webp)
 
-2. **Create New Subscription**
+2. **Crea un nuovo abbonamento**
 
-   Click the **+** icon next to your subscription group to add a new subscription.
+   Fai clic sull'icona **++** accanto al tuo gruppo di abbonamento per aggiungere un nuovo abbonamento.
 
-3. **Enter Basic Information**
+3. **Inserisci le informazioni di base**
 
-   **Reference Name**: Descriptive name for your internal use (not shown to customers)
-   - Examples: "Premium Monthly", "Ultimate Annual", "Basic Plan"
+   **Nome di riferimento**: nome descrittivo per uso interno (non mostrato ai clienti)
+   - Esempi: "Premium mensile", "Ultimate annuale", "Piano base"
 
-   **Product ID**: Unique identifier for this subscription (cannot be changed later)
-   - Format: `com.yourcompany.yourapp.premium_monthly`
-   - Use descriptive, lowercase names with underscores
-   - Required for configuring the native-purchases plugin
+   **ID prodotto**: identificatore univoco per questo abbonamento (non può essere modificato in seguito)
+   - Formato: `com.yourcompany.yourapp.premium_monthly`
+   - Utilizzare nomi descrittivi in minuscolo con trattini bassi
+   - Necessario per configurare il plugin per gli acquisti nativi
 
-   ![Enter subscription details](/native-purchases/ios/create-subscription/enter-subscription-info.webp)
+   ![Inserisci i dettagli dell'abbonamento](/native-purchases/ios/create-subscription/enter-subscription-info.webp)
 
-4. **Configure Duration**
+4. **Configura durata**
 
-   Select the subscription duration from available options:
-   - 1 week
-   - 1 month
-   - 2 months
-   - 3 months
-   - 6 months
-   - 1 year
+   Seleziona la durata dell'abbonamento dalle opzioni disponibili:
+   - 1 settimana
+   - 1 mese
+   - 2 mesi
+   - 3 mesi
+   - 6 mesi
+   - 1 anno
 
-   The duration determines how often users are billed.
+   La durata determina la frequenza con cui viene fatturata agli utenti.
 
-5. **Set Up Pricing**
+5. **Impostazione dei prezzi**
 
-   Click **Add Subscription Price** to configure pricing:
+   Fai clic su **Aggiungi prezzo di abbonamento** per configurare i prezzi:
 
-   **Base Territory**: Select your primary market (usually your country)
+   **Territorio di base**: seleziona il tuo mercato principale (solitamente il tuo Paese)
 
-   **Price**: Set the subscription price
-   - Apple automatically converts to other currencies
-   - Choose from Apple's price tiers
-   - Consider perceived value and market rates
+   **Prezzo**: imposta il prezzo dell'abbonamento
+   - Apple si converte automaticamente in altre valute
+   - Scegli tra le fasce di prezzo di Apple
+   - Considerare il valore percepito e i tassi di mercato
 
-   ![Configure pricing](/native-purchases/ios/create-subscription/configure-pricing.webp)
+   ![Configura prezzi](/native-purchases/ios/create-subscription/configure-pricing.webp)
 
-6. **Family Sharing (Optional)**
+6. **Condivisione con la famiglia (facoltativo)**
 
-   Decide whether to enable Family Sharing, which allows up to 6 family members to access the subscription.
+   Decidi se abilitare la condivisione in famiglia, che consente a un massimo di 6 membri della famiglia di accedere all'abbonamento.
 
-   :::caution
-   Once Family Sharing is enabled, it cannot be turned off for this product.
+   :::attenzione
+   Una volta abilitata la Condivisione famiglia, non è possibile disattivarla per questo prodotto.
    :::
 
-   **Enable if:**
-   - Content is appropriate for family use
-   - You want to increase value proposition
-   - Your business model supports it
+   **Abilita se:**
+   - Il contenuto è appropriato per l'uso familiare
+   - Vuoi aumentare la proposta di valore
+   - Il tuo modello di business lo supporta
 
-   **Don't enable if:**
-   - Subscription is for individual use only
-   - Content is personalized to the user
-   - You want to maximize revenue per user
+   **Non abilitare se:**
+   - L'abbonamento è solo per uso individuale
+   - Il contenuto è personalizzato per l'utente
+   - Desideri massimizzare le entrate per utente
 
-7. **Add Localizations**
+7. **Aggiungi localizzazioni**
 
-   Add subscription display information in all languages your app supports:
+   Aggiungi informazioni di visualizzazione dell'abbonamento in tutte le lingue supportate dalla tua app:
 
-   **Subscription Display Name**: Customer-facing name (e.g., "Premium Monthly")
+   **Nome visualizzato dell'abbonamento**: nome rivolto al cliente (ad es. "Premium mensile")
 
-   **Description**: Brief description of what the subscription includes
-   - Keep it concise and benefit-focused
-   - Mention key features
+   **Descrizione**: Breve descrizione di cosa comprende l'abbonamento
+   - Mantenerlo conciso e incentrato sui benefici
+   - Menzionare le caratteristiche principali
    - Highlight value proposition
 
-   ![Add localizations](/native-purchases/ios/create-subscription/add-localization.webp)
+   ![Aggiungi localizzazioni](/native-purchases/ios/create-subscription/add-localization.webp)8. **App Store Immagine promozionale (facoltativo)**
 
-8. **App Store Promotional Image (Optional)**
+   Carica un'immagine promozionale per questo abbonamento (312x390 pixel):
+   - Mostra nella pagina di abbonamento App Store
+   - Dovrebbe corrispondere al design della tua app
+   - Includi il nome dell'abbonamento per chiarezza
 
-   Upload a promotional image for this subscription (312x390 pixels):
-   - Shows in the App Store subscription page
-   - Should match your app's design
-   - Include subscription name for clarity
-
-   :::note
-   While images are optional for initial submission, they're required for promotional display in the App Store. You can add them later.
+   :::nota
+   Sebbene le immagini siano facoltative per l'invio iniziale, sono obbligatorie per la visualizzazione promozionale in App Store. Puoi aggiungerli in seguito.
    :::
 
-9. **Save and Submit**
+9. **Salva e invia**
 
-   Click **Save** to create the subscription.
+   Fai clic su **Salva** per creare l'abbonamento.
 
-   **For First Subscription:**
-   - Must be submitted with a new app version
-   - Include in your next App Store submission
-   - Cannot submit independently
+   **Per il primo abbonamento:**
+   - Deve essere inviato con una nuova versione dell'app
+   - Includilo nel tuo prossimo invio App Store
+   - Non è possibile inviare in modo indipendente
 
-   **For Subsequent Subscriptions:**
-   - Can be submitted directly from the Subscriptions page
-   - Don't require a new app version
-   - Available after first subscription is approved
+   **Per abbonamenti successivi:**
+   - Può essere inviato direttamente dalla pagina Iscrizioni
+   - Non è necessaria una nuova versione dell'app
+   - Disponibile dopo l'approvazione del primo abbonamento
 
 </Steps>
 
-## Subscription Status
+## Stato dell'abbonamento
 
-Your subscription will have one of these statuses:
+Il tuo abbonamento avrà uno di questi stati:
 
-| Status | Description | Can Test? |
+| Stato | Descrizione | Può testare? |
 |--------|-------------|-----------|
-| **Missing Metadata** | Incomplete setup | Yes (sandbox) |
-| **Ready to Submit** | Complete but not submitted | Yes (sandbox) |
-| **Waiting for Review** | Submitted to Apple | Yes (sandbox) |
-| **In Review** | Being reviewed by Apple | Yes (sandbox) |
-| **Approved** | Available for purchase | Yes |
-| **Rejected** | Needs changes | Yes (sandbox) |
+| **Metadati mancanti** | Configurazione incompleta | Sì (sandbox) |
+| **Pronto per l'invio** | Completo ma non inviato | Sì (sandbox) |
+| **In attesa di revisione** | Inviato a Apple | Sì (sandbox) |
+| **In revisione** | In fase di revisione da parte di Apple | Sì (sandbox) |
+| **Approvato** | Disponibile per l'acquisto | Sì |
+| **Rifiutato** | Ha bisogno di cambiamenti | Sì (sandbox) |
 
 :::tip
-You can test subscriptions in sandbox mode even if they show "Missing Metadata" or "Ready to Submit"!
+Puoi testare gli abbonamenti in modalità sandbox anche se mostrano "Metadati mancanti" o "Pronti per l'invio"!
 :::
 
-## Using in Your App
+## Utilizzo nella tua app
 
-Once created, reference the subscription in your app using the product ID:
+Una volta creato, fai riferimento all'abbonamento nella tua app utilizzando l'ID prodotto:
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -212,41 +209,41 @@ if (premium?.isActive) {
 }
 ```
 
-## Best Practices
+## Migliori pratiche
 
-### Pricing Strategy
-- **Monthly plans**: Lower barrier to entry, builds habit
-- **Annual plans**: Better value, higher LTV, lower churn
-- **Multiple tiers**: Basic, Premium, Ultimate for different user segments
-- **Competitive analysis**: Research similar apps' pricing
+### Strategia dei prezzi
+- **Piani mensili**: abbassa la barriera all'ingresso, crea abitudini
+- **Piani annuali**: miglior valore, LTV più elevato, abbandono inferiore
+- **Livelli multipli**: Basic, Premium, Ultimate per diversi segmenti di utenti
+- **Analisi della concorrenza**: ricerca i prezzi di app simili
 
-### Product IDs
-- Use consistent naming: `company.app.tier_duration`
-- Include tier and duration in ID: `premium_monthly`, `ultimate_annual`
-- Avoid changing product IDs (they're permanent)
-- Document all product IDs for your team
+### ID prodotto
+- Utilizza nomi coerenti: `company.app.tier_duration`
+- Includi livello e durata nell'ID: `premium_monthly`, `ultimate_annual`
+- Evita di modificare gli ID prodotto (sono permanenti)
+- Documenta tutti gli ID prodotto per il tuo team
 
-### Family Sharing
-- Enable for family-oriented apps (games, educational, entertainment)
-- Consider impact on revenue
-- Test sharing behavior thoroughly
-- Communicate sharing capability in marketing
+### Condivisione in famiglia
+- Abilitazione per app orientate alla famiglia (giochi, istruzione, intrattenimento)
+- Considerare l'impatto sulle entrate
+- Testare accuratamente il comportamento di condivisione
+- Comunicare la capacità di condivisione nel marketing
 
-### Localization
-- Translate all subscription names and descriptions
-- Consider regional pricing differences
-- Test display in all supported languages
-- Use culturally appropriate marketing language
+### Localizzazione
+- Traduci tutti i nomi e le descrizioni degli abbonamenti
+- Considerare le differenze di prezzo regionali
+- Prova la visualizzazione in tutte le lingue supportate
+- Utilizzare un linguaggio di marketing culturalmente appropriato
 
-### Promotional Images
-- Maintain consistent visual style
-- Include subscription name and key benefit
-- Update for seasonal promotions
-- Match app's overall design language
+### Immagini promozionali
+- Mantenere uno stile visivo coerente
+- Includere il nome dell'abbonamento e il vantaggio principale
+- Aggiornamento per le promozioni stagionali
+- Abbina il linguaggio di progettazione generale dell'app
 
-## Common Subscription Patterns
+## Modelli di abbonamento comuni
 
-### Single Tier (Freemium)
+### Livello singolo (Freemium)
 ```
 Free App + Premium Subscription
 - Basic: Free (limited features)
@@ -254,7 +251,7 @@ Free App + Premium Subscription
 - Premium Annual: $39.99 (save 33%)
 ```
 
-### Multi-Tier (Good, Better, Best)
+### Multilivello (Buono, Migliore, Migliore)
 ```
 - Basic Monthly: $4.99
 - Premium Monthly: $9.99
@@ -265,50 +262,48 @@ Free App + Premium Subscription
 - Ultimate Annual: $199.99
 ```
 
-### Consumable + Subscription Hybrid
+### Consumabili + Abbonamento ibrido
 ```
 - Credit packs (consumable)
 - Monthly subscription (unlimited credits)
 - Annual subscription (unlimited + bonus features)
 ```
 
-## Troubleshooting
+## Risoluzione dei problemi
 
-**Subscription not loading in app:**
-- Verify product ID matches exactly (case-sensitive)
-- Check subscription is in subscription group
-- Ensure bundle identifier matches App Store Connect
-- Wait 2-3 hours after creating product
+**Abbonamento non caricato nell'app:**
+- Verifica che l'ID prodotto corrisponda esattamente (con distinzione tra maiuscole e minuscole)
+- Controlla che l'abbonamento sia nel gruppo di abbonamento
+- Assicurati che l'identificatore del pacchetto corrisponda a App Store Connect
+- Attendere 2-3 ore dopo aver creato il prodotto**Impossibile inviare l'iscrizione:**
+- Compila tutti i campi obbligatori (nome, descrizione, prezzo)
+- Aggiungi almeno una localizzazione
+- Verificare che le informazioni bancarie/fiscali siano approvate
+- Controlla se è il primo abbonamento (richiede la versione dell'app)
 
-**Cannot submit subscription:**
-- Complete all required fields (name, description, price)
-- Add at least one localization
-- Verify banking/tax info is approved
-- Check if first subscription (requires app version)
+**Attiva/disattiva Condivisione famiglia disabilitata:**
+- Già abilitato (non può essere disabilitato)
+- Controlla i dettagli dell'abbonamento
+- Contatta l'assistenza Apple se bloccato
 
-**Family Sharing toggle disabled:**
-- Already enabled (cannot be disabled)
-- Check in subscription details
-- Contact Apple Support if stuck
+**Fascia di prezzo non disponibile:**
+- Potrebbe essere limitato in alcuni territori
+- Scegli il livello alternativo
+- Contatta Apple per domande sui prezzi
 
-**Price tier not available:**
-- May be restricted in some territories
-- Choose alternative tier
-- Contact Apple for pricing questions
+**Errore "ID prodotto non valido":**
+- Deve essere in formato dominio inverso
+- Non può contenere spazi o caratteri speciali
+- Controlla eventuali errori di battitura
+- Verificare l'unicità di tutti i prodotti
 
-**"Invalid Product ID" error:**
-- Must be reverse domain format
-- Cannot contain spaces or special characters
-- Check for typos
-- Verify uniqueness across all products
+## Passaggi successivi
 
-## Next Steps
+- [Crea un'offerta di lancio](/docs/plugins/native-purchases/ios-introductory-offer/) per attirare nuovi abbonati
+- [Configura test sandbox](/docs/plugins/native-purchases/ios-sandbox-testing/) per testare i tuoi abbonamenti
+- Impostare offerte promozionali per il recupero e la fidelizzazione
+- Implementare il monitoraggio dell'analisi degli abbonamenti
 
-- [Create an introductory offer](/docs/plugins/native-purchases/ios-introductory-offer/) to attract new subscribers
-- [Configure sandbox testing](/docs/plugins/native-purchases/ios-sandbox-testing/) to test your subscriptions
-- Set up promotional offers for win-back and retention
-- Implement subscription analytics tracking
+## Risorse aggiuntive
 
-## Additional Resources
-
-For more details, refer to the [official Apple documentation on auto-renewable subscriptions](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers).
+Per maggiori dettagli, fai riferimento alla [documentazione ufficiale Apple sugli abbonamenti con rinnovo automatico](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers).

@@ -1,131 +1,126 @@
 ---
-title: Create iOS Subscription Group
-description: >-
-  Learn how to create and configure subscription groups in App Store Connect for
-  organizing your app's subscription offerings.
+title: iOS 구독 그룹 만들기
+description: 앱의 구독 서비스를 구성하기 위해 App Store Connect에서 구독 그룹을 만들고 구성하는 방법을 알아보세요.
 sidebar:
   order: 7
 locale: ko
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 
-Subscription groups are essential for organizing and managing multiple subscription levels in your iOS app. Understanding how they work is crucial for implementing upgrade, downgrade, and crossgrade functionality.
+구독 그룹은 iOS 앱에서 여러 구독 수준을 구성하고 관리하는 데 필수적입니다. 업그레이드, 다운그레이드 및 크로스그레이드 기능을 구현하려면 작동 방식을 이해하는 것이 중요합니다.
 
-## What is a Subscription Group?
+## 구독 그룹이란 무엇입니까?
 
-A subscription group is a collection of related subscriptions that users can choose between. Users can only subscribe to one subscription within a group at a time. When they switch subscriptions, Apple handles the transition automatically.
+구독 그룹은 사용자가 선택할 수 있는 관련 구독의 모음입니다. 사용자는 그룹 내에서 한 번에 하나의 구독만 구독할 수 있습니다. 구독을 전환하면 Apple이 전환을 자동으로 처리합니다.
 
-## Why Subscription Groups Matter
+## 구독 그룹이 중요한 이유
 
-Subscription groups enable:
-- **Tiered pricing**: Offer basic, premium, and ultimate plans
-- **Different durations**: Monthly, yearly, and lifetime options
-- **Upgrade/downgrade logic**: Automatic handling of subscription changes
-- **Simplified management**: Group related subscriptions together
+구독 그룹을 사용하면 다음이 가능합니다.
+- **계층별 가격**: 기본, 프리미엄, 최종 요금제 제공
+- **다양한 기간**: 월별, 연간 및 평생 옵션
+- **업그레이드/다운그레이드 로직**: 구독 변경 자동 처리
+- **간소화된 관리**: 관련 구독을 그룹화합니다.
 
-## Subscription Levels
+## 구독 수준
 
-Within a group, each subscription should be ranked from highest value (level 1) to lowest value. This ranking determines how subscription changes are classified:
+그룹 내에서 각 구독은 가장 높은 값(수준 1)에서 가장 낮은 값까지 순위가 지정되어야 합니다. 이 순위에 따라 구독 변경 사항이 분류되는 방식이 결정됩니다.
 
-![Subscription group hierarchy](/native-purchases/ios/subscription-group/subscription-group-hierarchy.webp)
+![구독 그룹 계층 구조](/native-purchases/ios/subscription-group/subscription-group-hierarchy.webp)
 
-### Level Examples
+### 레벨 예시
 
-**Level 1** (Highest Value)
-- Premium Annual ($99.99/year)
-- Ultimate Monthly ($19.99/month)
+**수준 1**(가장 높은 값)
+- 연간 프리미엄 ($99.99/년)
+- Ultimate Monthly ($19.99/월)
 
-**Level 2** (Medium Value)
-- Standard Annual ($49.99/year)
-- Premium Monthly ($9.99/month)
+**레벨 2**(중간 값)
+- 표준 연간 ($49.99/년)
+- 월간 프리미엄 ($9.99/월)
 
-**Level 3** (Lowest Value)
-- Basic Annual ($29.99/year)
-- Standard Monthly ($4.99/month)
+**레벨 3**(가장 낮은 값)
+- 기본 연간 ($29.99/년)
+- 표준 월간 ($4.99/월)
 
-## Subscription Change Types
+## 구독 변경 유형
 
-Apple automatically handles three types of subscription changes based on the level ranking:
+Apple는 레벨 순위에 따라 세 가지 유형의 구독 변경을 자동으로 처리합니다.
 
-### 1. Upgrade
-Moving to a **higher-tier** subscription (e.g., level 2 → level 1).
+### 1. 업그레이드
+**상위 등급** 구독으로 이동합니다(예: 레벨 2 → 레벨 1).
 
-**Behavior:**
-- Takes effect **immediately**
-- User receives **prorated refund** for remaining time
-- New subscription starts right away
+**행동:**
+- **즉시** 적용됩니다.
+- 사용자는 남은 시간에 대해 **일할 계산된 환불**을 받습니다.
+- 신규 구독이 바로 시작됩니다.
 
-**Example:**
+**예:**
 ```typescript
 // User currently has: Standard Monthly (Level 2)
 // User upgrades to: Premium Annual (Level 1)
 // Result: Immediate access to Premium, refund for unused Standard time
 ```
 
-### 2. Downgrade
-Moving to a **lower-tier** subscription (e.g., level 1 → level 2).
+### 2. 다운그레이드
+**낮은 등급** 구독으로 이동합니다(예: 레벨 1 → 레벨 2).
 
-**Behavior:**
-- Takes effect at **next renewal date**
-- User keeps current subscription until period ends
-- New subscription starts automatically after expiration
+**행동:**
+- **다음 갱신일**부터 적용됩니다.
+- 사용자는 기간이 종료될 때까지 현재 구독을 유지합니다.
+- 만료 후 새 구독이 자동으로 시작됩니다.
 
-**Example:**
+**예:**
 ```typescript
 // User currently has: Premium Annual (Level 1)
 // User downgrades to: Standard Monthly (Level 2)
 // Result: Premium access continues until annual renewal date, then switches
 ```
 
-### 3. Crossgrade
-Switching to another subscription **at the same tier level**.
+### 3. 크로스그레이드
+**동일한 등급 수준**의 다른 구독으로 전환합니다.
 
-**Behavior depends on duration:**
+**동작은 기간에 따라 다릅니다.**
 
-**Different Duration** → Behaves like **downgrade**
-- Takes effect at next renewal date
-- Example: Monthly Premium (Level 1) → Annual Premium (Level 1)
+**다른 기간** → **다운그레이드**처럼 작동
+- 다음 갱신일부터 적용됩니다.
+- 예: 월 보험료(1단계) → 연간 보험료(1단계)
 
-**Same Duration** → Behaves like **upgrade**
-- Takes effect immediately
-- Example: Premium Monthly (Level 1) → Ultimate Monthly (Level 1)
+**동일한 기간** → **업그레이드**처럼 작동
+- 즉시 적용됩니다.
+- 예: Premium Monthly(레벨 1) → Ultimate Monthly(레벨 1)
 
-## Creating a Subscription Group
+## 구독 그룹 만들기
 
 <Steps>
 
-1. **Navigate to Subscriptions**
+1. **구독으로 이동**
 
-   In App Store Connect, select your app and go to **Monetize > Subscriptions**.
+   App Store Connect에서 앱을 선택하고 **수익 창출 > 구독**으로 이동합니다.
 
-2. **Create Group**
+2. **그룹 생성**
 
-   Click **+** next to "Subscription Groups" to create a new group.
+   새 그룹을 만들려면 "구독 그룹" 옆에 있는 **+**를 클릭하세요.
 
-3. **Name the Group**
+3. **그룹 이름 지정**
 
-   Choose a descriptive name that reflects the subscriptions it contains:
-   - "Premium Access"
-   - "Cloud Storage Plans"
-   - "Pro Features"
+   포함된 구독을 반영하는 설명이 포함된 이름을 선택하세요.
+   - "프리미엄 액세스"
+   - "클라우드 스토리지 계획"
+   - "프로 기능"
 
-4. **Add Subscriptions**
+4. **구독 추가**
 
-   After creating the group, add individual subscriptions to it. Each subscription will have a level ranking.
+   그룹을 생성한 후 그룹에 개별 구독을 추가합니다. 각 구독에는 레벨 순위가 있습니다.
 
-5. **Set Level Rankings**
-
-   Arrange subscriptions from highest value (1) to lowest value. Consider:
-   - Annual plans typically rank higher than monthly
-   - Higher-priced tiers rank above lower-priced ones
-   - Ultimate/premium tiers rank highest
+5. **레벨 순위 설정**가장 높은 값(1)부터 가장 낮은 값까지 구독을 정렬합니다. 고려 사항:
+   - 연간 요금제는 일반적으로 월별 요금제보다 순위가 높습니다.
+   - 고가 등급이 저가 등급보다 순위가 높습니다.
+   - 얼티밋/프리미엄 등급이 가장 높습니다.
 
 </Steps>
 
-## Using in Your App
+## 앱에서 사용하기
 
-The native-purchases plugin automatically handles subscription group logic:
+기본 구매 플러그인은 구독 그룹 논리를 자동으로 처리합니다.
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -161,9 +156,9 @@ NativePurchases.addListener('transactionUpdated', (transaction) => {
 });
 ```
 
-## Handling Subscription Changes
+## 구독 변경 처리
 
-### Detecting Change Type
+### 변경 유형 감지 중
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
@@ -201,71 +196,71 @@ NativePurchases.addListener('transactionUpdated', (transaction) => {
 });
 ```
 
-### User Communication
+### 사용자 커뮤니케이션
 
-Always communicate the change behavior clearly:
+항상 변경 동작을 명확하게 전달하세요.
 
-**For Upgrades:**
-> "You'll get immediate access to Premium features. We'll prorate your current subscription."
+**업그레이드의 경우:**
+> "프리미엄 기능에 즉시 액세스할 수 있습니다. 현재 구독 금액을 일할 계산해 드립니다."
 
-**For Downgrades:**
-> "You'll keep Premium access until [renewal date], then switch to Standard."
+**다운그레이드의 경우:**
+> "[갱신 날짜]까지 프리미엄 액세스를 유지한 후 스탠다드로 전환하세요."
 
-**For Crossgrades:**
-> "Your plan will change to Annual billing at the next renewal on [date]."
+**크로스그레이드의 경우:**
+> "귀하의 요금제는 [날짜]에 다음 갱신 시 연간 청구로 변경됩니다."
 
-## Server monitoring
+## 서버 모니터링
 
-Use Apple's App Store Server Notifications v2 or your own receipt-validation backend to mirror StoreKit changes in your database. Pair server notifications with the `transactionUpdated` listener so both client and backend stay in sync.
+Apple의 App Store 서버 알림 v2 또는 자체 영수증 확인 백엔드를 사용하여 데이터베이스의 StoreKit 변경 사항을 미러링하세요. 클라이언트와 백엔드가 모두 동기화 상태를 유지할 수 있도록 서버 알림을 `transactionUpdated` 리스너와 페어링하세요.
 
-## Best Practices
+## 모범 사례
 
-### Group Organization
-- Keep related subscriptions in the same group
-- Don't mix unrelated features (e.g., storage and ad removal)
-- Create separate groups for different feature sets
+### 그룹 구성
+- 관련 구독을 동일한 그룹에 유지
+- 관련 없는 기능(예: 저장 및 광고 제거)을 혼합하지 마십시오.
+- 다양한 기능 세트에 대해 별도의 그룹 생성
 
-### Level Ranking Strategy
-- Annual plans → Higher level than monthly (for same tier)
-- Higher-priced tiers → Higher level
-- Consider value, not just price
+### 레벨랭킹 전략
+- 연간 요금제 → 월간 요금제 상위(동일 요금제)
+- 고가 등급 → 상위 등급
+- 가격만이 아닌 가치를 고려하라
 
-### User Experience
-- Show current subscription clearly
-- Display all available options in the group
-- Indicate which changes are immediate vs. at renewal
-- Allow easy switching between plans
+### 사용자 경험
+- 현재 구독을 명확하게 표시
+- 그룹에서 사용 가능한 모든 옵션을 표시합니다.
+- 어떤 변경 사항이 즉시 적용되는지 아니면 갱신 시 적용되는지 표시
+- 요금제 간 쉽게 전환 가능
 
-### Testing
-- Test all upgrade scenarios
-- Test all downgrade scenarios
-- Verify crossgrade behavior
-- Check webhook firing
+### 테스트
+- 모든 업그레이드 시나리오 테스트
+- 모든 다운그레이드 시나리오 테스트
+- 크로스그레이드 동작 확인
+- 웹훅 실행 확인
 
-## Common Scenarios
+## 일반적인 시나리오
 
-### Scenario 1: Three-Tier Monthly Plans
+### 시나리오 1: 3단계 월간 요금제
 ```
 Level 1: Ultimate Monthly ($19.99)
 Level 2: Premium Monthly ($9.99)
 Level 3: Basic Monthly ($4.99)
 ```
 
-- Basic → Premium: Upgrade (immediate)
-- Premium → Ultimate: Upgrade (immediate)
-- Ultimate → Premium: Downgrade (at renewal)
-- Basic → Ultimate: Upgrade (immediate)
+- 기본 → 프리미엄 : 업그레이드(즉시)
+- 프리미엄 → 얼티밋: 업그레이드(즉시)
+- 얼티밋 → 프리미엄 : 다운그레이드 (갱신시)
+- 기본 → 궁극기 : 업그레이드(즉시)
 
-### Scenario 2: Mixed Duration Plans
+### 시나리오 2: 혼합 기간 계획
 ```
 Level 1: Premium Annual ($99.99/year)
 Level 2: Premium Monthly ($9.99/month)
 ```
 
-- Monthly → Annual: Crossgrade (at renewal)
-- Annual → Monthly: Downgrade (at renewal)
+- 월간 → 연간 : 크로스그레이드 (갱신시)
+- 연간 → 월간 : 다운그레이드 (갱신시)
 
-### Scenario 3: Multi-Tier Multi-Duration
+### 시나리오 3: 다중 계층 다중 기간
 ```
 Level 1: Ultimate Annual ($199/year)
 Level 2: Ultimate Monthly ($19.99/month)
@@ -275,29 +270,29 @@ Level 5: Basic Annual ($49/year)
 Level 6: Basic Monthly ($4.99/month)
 ```
 
-This setup provides maximum flexibility while maintaining clear upgrade/downgrade logic.
+이 설정은 명확한 업그레이드/다운그레이드 논리를 유지하면서 최대의 유연성을 제공합니다.
 
-## Troubleshooting
+## 문제 해결
 
-**Subscription not appearing in group:**
-- Verify it's assigned to the correct group
-- Check that it's in at least "Ready to Submit" status
-- Ensure product ID is correct
+**그룹에 구독이 표시되지 않음:**
+- 올바른 그룹에 할당되었는지 확인하세요.
+- 최소한 '제출 준비' 상태인지 확인하세요.
+- 제품 ID가 올바른지 확인하세요.
 
-**Wrong upgrade/downgrade behavior:**
-- Review level rankings (1 = highest)
-- Verify subscription tiers make sense
-- Check that levels are set correctly
+**잘못된 업그레이드/다운그레이드 동작:**
+- 리뷰 수준 순위(1 = 최고)
+- 구독 등급이 적합한지 확인하세요.
+- 레벨이 올바르게 설정되었는지 확인하세요.
 
-**Products from different groups:**
-- Users can subscribe to multiple groups simultaneously
-- This is intentional - keep related products in same group
+**다른 그룹의 제품:**
+- 사용자는 동시에 여러 그룹에 가입할 수 있습니다.
+- 이는 의도적인 것입니다. 관련 제품을 동일한 그룹에 유지하세요.
 
-**getActiveProducts showing multiple subscriptions:**
-- Check if subscriptions are in different groups
-- Verify user isn't subscribed via Family Sharing
-- Review subscription status in App Store Connect
+**여러 구독을 표시하는 getActiveProducts:**
+- 구독이 다른 그룹에 있는지 확인
+- 사용자가 가족 공유를 통해 구독하고 있지 않은지 확인
+- App Store Connect에서 구독 상태를 검토하세요.
 
-## Additional Resources
+## 추가 리소스
 
-For more details, refer to the [official Apple documentation on subscription groups](https://developer.apple.com/app-store/subscriptions/).
+자세한 내용은 [구독 그룹에 대한 공식 Apple 문서](https://developer.apple.com/app-store/subscriptions/)를 참조하세요.

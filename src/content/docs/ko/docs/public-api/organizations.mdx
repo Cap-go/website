@@ -1,35 +1,32 @@
 ---
 title: Organizations
-description: >-
-  Guide to managing organizations in Capgo, covering creation, settings,
-  updates, and retrieval of organization details.
+description: 'Capgo의 조직 관리에 대한 가이드로, 조직 세부정보 생성, 설정, 업데이트 및 검색을 다룹니다.'
 sidebar:
   order: 2
 locale: ko
 ---
+조직은 Capgo의 최상위 엔터티입니다. 이를 통해 앱, 팀 구성원, 리소스를 하나의 그룹으로 그룹화할 수 있습니다. 각 조직에는 서로 다른 역할과 권한을 가진 여러 구성원이 있을 수 있습니다.
 
-Organizations are the top-level entities in Capgo. They allow you to group apps, team members, and resources under a single umbrella. Each organization can have multiple members with different roles and permissions.
+## 일반적인 사용 사례
 
-## Common Use Cases
+- 회사를 위한 새로운 조직 만들기
+- 조직 설정 관리
+- 조직 정보 업데이트
+- 조직 세부 정보 검색
 
-- Creating a new organization for your company
-- Managing organization settings
-- Updating organization information
-- Retrieving organization details
+## 엔드포인트
 
-## Endpoints
-
-### GET
+### 받기
 
 `https://api.capgo.app/organization/`
 
-Retrieve organization information. If `orgId` is provided in the parameters, returns a single organization. Otherwise, returns all accessible organizations.
+조직 정보를 검색합니다. 매개변수에 `orgId`이 제공되면 단일 조직을 반환합니다. 그렇지 않으면 액세스 가능한 모든 조직을 반환합니다.
 
-#### Query Parameters
+#### 쿼리 매개변수
 
-- `orgId` (optional): The ID of the specific organization to retrieve
+- `orgId` (선택) : 검색하려는 특정 기관의 ID
 
-#### Response Type
+#### 응답 유형
 
 ```typescript
 interface Organization {
@@ -44,7 +41,7 @@ interface Organization {
 }
 ```
 
-#### Example Request
+#### 요청 예시
 
 ```bash
 # Get all organizations
@@ -54,7 +51,7 @@ curl -H "authorization: your-api-key" https://api.capgo.app/organization/
 curl -H "authorization: your-api-key" https://api.capgo.app/organization/?orgId=org_123
 ```
 
-#### Example Response
+#### 응답 예시
 
 ```json
 {
@@ -70,13 +67,13 @@ curl -H "authorization: your-api-key" https://api.capgo.app/organization/?orgId=
 }
 ```
 
-### POST
+### 포스트
 
 `https://api.capgo.app/organization/`
 
-Create a new organization.
+새 조직을 만듭니다.
 
-#### Request Body
+#### 요청 본문
 
 ```typescript
 interface OrganizationCreate {
@@ -84,7 +81,7 @@ interface OrganizationCreate {
 }
 ```
 
-#### Example Request
+#### 요청 예시
 
 ```bash
 curl -X POST \
@@ -96,7 +93,7 @@ curl -X POST \
   https://api.capgo.app/organization/
 ```
 
-#### Example Response
+#### 응답 예시
 
 ```json
 {
@@ -105,13 +102,13 @@ curl -X POST \
 }
 ```
 
-### PUT
+### 넣어
 
 `https://api.capgo.app/organization/`
 
-Update an existing organization. Requires admin role.
+기존 조직을 업데이트합니다. 관리자 역할이 필요합니다.
 
-#### Request Body
+#### 요청 본문
 
 ```typescript
 interface OrganizationUpdate {
@@ -122,7 +119,7 @@ interface OrganizationUpdate {
 }
 ```
 
-#### Example Request
+#### 요청 예시
 
 ```bash
 curl -X PUT \
@@ -136,7 +133,7 @@ curl -X PUT \
   https://api.capgo.app/organization/
 ```
 
-#### Example Response
+#### 응답 예시
 
 ```json
 {
@@ -149,17 +146,17 @@ curl -X PUT \
 }
 ```
 
-### DELETE
+### 삭제
 
 `https://api.capgo.app/organization/`
 
-Delete an existing organization. Requires admin role. This action is irreversible and will remove all associated apps, versions, and resources.
+기존 조직을 삭제합니다. 관리자 역할이 필요합니다. 이 작업은 되돌릴 수 없으며 관련 앱, 번들(버전) 및 리소스가 모두 제거됩니다.
 
-#### Query Parameters
+#### 쿼리 매개변수
 
-- `orgId`: The ID of the organization to delete
+- `orgId` : 삭제할 기관의 ID
 
-#### Example Request
+#### 요청 예시
 
 ```bash
 curl -X DELETE \
@@ -167,7 +164,7 @@ curl -X DELETE \
   https://api.capgo.app/organization/?orgId=org_123
 ```
 
-#### Example Response
+#### 응답 예시
 
 ```json
 {
@@ -176,9 +173,9 @@ curl -X DELETE \
 }
 ```
 
-## Error Handling
+## 오류 처리
 
-Common error scenarios and their responses:
+일반적인 오류 시나리오 및 대응:
 
 ```json
 // Invalid API key
@@ -200,9 +197,9 @@ Common error scenarios and their responses:
 }
 ```
 
-## Best Practices
+## 모범 사례
 
-1. **Naming**: Use clear, descriptive names for organizations
-2. **Roles**: Assign appropriate roles to team members
-3. **Email**: Use a group email for management_email to avoid issues with personal email changes
-4. **Logo**: Host logos on a reliable CDN and use HTTPS URLs 
+1. **이름 지정**: 조직에 대해 명확하고 설명이 포함된 이름을 사용하세요.
+2. **역할**: 팀 구성원에게 적절한 역할을 할당합니다.
+3. **이메일**: 개인 이메일 변경 시 문제를 방지하려면 관리 이메일에 그룹 이메일을 사용하세요.
+4. **로고**: 신뢰할 수 있는 CDN에 로고를 호스팅하고 HTTPS URL을 사용합니다.

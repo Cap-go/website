@@ -1,30 +1,31 @@
 ---
+title: Premiers pas avec RealtimeKit
+description: >-
+  Découvrez comment intégrer la visioconférence Cloudflare Calls dans votre
+  application Capacitor
 locale: fr
-title: "Commencer with RealtimeKit"
-description: "Learn how to integrate Cloudflare Calls video conferencing into your Capacitor Application"
 ---
+Ce guide vous guidera dans l'intégration du plugin Capacitor RealtimeKit pour ajouter la visioconférence optimisée par Cloudflare Calls à votre application.
 
-This Guide will walk you through integrating the Capacitor RealtimeKit plugin to Ajouter video conferencing powered by Cloudflare Calls to your Application.
+##Installation
 
-## Installation
-
-Installer the plugin using npm:
+Installez le plugin en utilisant npm :
 
 ```bash
 npm install @capgo/capacitor-realtimekit
 npx cap sync
 ```
 
-## Dependencies
+## Dépendances
 
-This plugin uses the Cloudflare RealtimeKit SDK:
+Ce plugin utilise le Cloudflare RealtimeKit SDK :
 
-- **iOS**: RealtimeKitCoreiOS (automatically installed via Swift Package Manager)
-- **Android**: `com.cloudflare.realtimekit:ui-android` version `0.2.2`
+- **iOS** : RealtimeKitCoreiOS (installé automatiquement via Swift Package Manager)
+- **Android** : `com.cloudflare.realtimekit:ui-android` version `0.2.2`
 
-### Customizing Android RealtimeKit Version
+### Personnalisation de la version Android RealtimeKit
 
-In your app's `build.gradle`:
+Dans le `build.gradle` de votre application :
 
 ```kotlin
 buildscript {
@@ -34,9 +35,9 @@ buildscript {
 }
 ```
 
-## iOS Configuration
+## iOSConfiguration
 
-Add the following to your app's `Info.plist`:
+Ajoutez les éléments suivants au `Info.plist` de votre application :
 
 ```xml
 <key>NSCameraUsageDescription</key>
@@ -60,9 +61,9 @@ Add the following to your app's `Info.plist`:
 </array>
 ```
 
-## Android Configuration
+## AndroidConfiguration
 
-Add the following permissions to your `AndroidManifest.xml`:
+Ajoutez les autorisations suivantes à votre `AndroidManifest.xml` :
 
 ```xml
 <uses-permission android:name="android.permission.CAMERA" />
@@ -74,15 +75,15 @@ Add the following permissions to your `AndroidManifest.xml`:
 <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
 ```
 
-## Basic Utilisation
+## Utilisation de base
 
-### Importer the Plugin
+### Importer le plugin
 
 ```typescript
 import { CapacitorRealtimekit } from '@capgo/capacitor-realtimekit';
 ```
 
-### Initialiser the Plugin
+### Initialiser le plugin
 
 ```typescript
 async function initializeRealtimeKit() {
@@ -95,7 +96,7 @@ async function initializeRealtimeKit() {
 }
 ```
 
-### Démarrer a Meeting
+### Démarrer une réunion
 
 ```typescript
 async function startMeeting(meetingUrl: string) {
@@ -110,9 +111,9 @@ async function startMeeting(meetingUrl: string) {
 }
 ```
 
-## Terminé Exemple
+## Exemple complet
 
-Here's a comprehensive video conferencing service:
+Voici un service complet de visioconférence :
 
 ```typescript
 import { CapacitorRealtimekit } from '@capgo/capacitor-realtimekit';
@@ -212,24 +213,24 @@ await videoService.joinMeeting(
 );
 ```
 
-## Cloudflare Calls Configuration
+## Configuration des appels Cloudflare
 
-To use this plugin, you need to set up Cloudflare Calls:
+Pour utiliser ce plugin, vous devez configurer Cloudflare Calls :
 
-### 1. Créer Cloudflare Compte
+### 1. Créer un compte Cloudflare
 
-Sign up at [Cloudflare](https://dash.cloudflare.com/sign-up) if you don't have an Compte.
+Inscrivez-vous sur [Cloudflare](https://dash.cloudflare.com/sign-up) si vous n'avez pas de compte.
 
-### 2. Activer Calls API
+### 2. Activer les appels API
 
-1. Navigate to your Cloudflare Tableau de bord
-2. Go to **Calls** section
-3. Activer the Calls API
-4. Get your API credentials
+1. Accédez à votre tableau de bord Cloudflare
+2. Accédez à la section **Appels**
+3. Activez les appels API
+4. Obtenez vos identifiants API
 
-### 3. Créer Meeting URLs
+### 3. Créer des URL de réunion
 
-You need a backend service to Créer meeting URLs. Exemple using Cloudflare Workers:
+Vous avez besoin d'un service backend pour créer des URL de réunion. Exemple utilisant Cloudflare Workers :
 
 ```typescript
 // Cloudflare Worker example
@@ -258,9 +259,9 @@ function generateMeetingId(): string {
 }
 ```
 
-## Advanced Utilisation
+## Utilisation avancée
 
-### Meeting with Custom Configuration
+### Réunion avec configuration personnalisée
 
 ```typescript
 class MeetingManager {
@@ -306,7 +307,7 @@ class MeetingManager {
 }
 ```
 
-### Handling Permissions
+### Gestion des autorisations
 
 ```typescript
 import { Capacitor } from '@capacitor/core';
@@ -340,7 +341,7 @@ if (hasPermissions) {
 }
 ```
 
-## React Integration
+## Intégration de React
 
 ```typescript
 import { useEffect, useState } from 'react';
@@ -380,7 +381,7 @@ function VideoCallComponent() {
 }
 ```
 
-## Vue Integration
+## Intégration Vue
 
 ```typescript
 import { ref, onMounted } from 'vue';
@@ -416,19 +417,19 @@ export default {
 };
 ```
 
-## Best Practices
+## meilleures pratiques
 
-1. **Initialiser Early**: Initialiser RealtimeKit when your Application starts
-2. **Handle Errors**: Always wrap calls in try-catch blocks
-3. **Request Permissions**: Ensure camera/microphone permissions before starting
-4. **Test Network**: Vérifier internet connectivity before joining
-5. **Background Audio**: Configure background modes for iOS
-6. **Utilisateur Experience**: Show loading states during Initialisation
-7. **Clean URLs**: Valider meeting URLs before use
+1. **Initialiser tôt** : initialisez RealtimeKit au démarrage de votre application
+2. **Gérer les erreurs** : enveloppez toujours les appels dans des blocs try-catch
+3. **Demander des autorisations** : assurez-vous des autorisations de la caméra/du microphone avant de commencer
+4. **Test du réseau** : vérifiez la connectivité Internet avant de rejoindre
+5. **Audio de fond** : configurez les modes d'arrière-plan pour iOS
+6. **Expérience utilisateur** : afficher les états de chargement lors de l'initialisation
+7. **Nettoyer les URL** : validez les URL des réunions avant utilisation
 
 ## Problèmes courants
 
-### Meeting Not Starting
+### La réunion ne démarre pas
 
 ```typescript
 async function troubleshootMeeting(meetingUrl: string) {
@@ -451,13 +452,13 @@ async function troubleshootMeeting(meetingUrl: string) {
 }
 ```
 
-### Permission Denied
+### Autorisation refusée
 
-On iOS, ensure Info.plist has all required Utilisation descriptions. On Android, verify AndroidManifest.xml permissions are present.
+Le iOS, assurez-vous qu'Info.plist dispose de toutes les descriptions d'utilisation requises. Sur Android, vérifiez que les autorisations AndroidManifest.xml sont présentes.
 
-### Audio Issues on iOS
+### Problèmes audio sur iOS
 
-Ensure background audio mode is configured in Info.plist:
+Assurez-vous que le mode audio d'arrière-plan est configuré dans Info.plist :
 
 ```xml
 <key>UIBackgroundModes</key>
@@ -467,9 +468,9 @@ Ensure background audio mode is configured in Info.plist:
 </array>
 ```
 
-## Suivant Steps
+## Prochaines étapes
 
-- Explore the [API Référence](https://github.com/Cap-go/capacitor-realtimekit#api) for Terminé method Documentation
-- Read [Cloudflare Calls Documentation](https://developers.cloudflare.com/calls/)
-- Vérifier out the [Exemple Application](https://github.com/Cap-go/capacitor-realtimekit/tree/main/Exemple)
-- See the [Tutoriel](/plugins/capacitor-realtimekit) for Terminé implementation
+- Explorez la [API Reference](https://github.com/Cap-go/capacitor-realtimekit#api) pour une documentation complète de la méthode
+- Lire la [Documentation des appels Cloudflare](https://developers.cloudflare.com/calls/)
+- Consultez l'[exemple d'application](https://github.com/Cap-go/capacitor-realtimekit/tree/main/example)
+- Voir le [tutoriel](/plugins/capacitor-realtimekit) pour une mise en œuvre complète

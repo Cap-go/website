@@ -1,26 +1,27 @@
 ---
-locale: fr
 title: Commencer
-description: Learn how to Installer and use the Printer plugin to print content from your Capacitor Application.
-sidebar: 
+description: >-
+  Découvrez comment installer et utiliser le plugin Printer pour imprimer le
+  contenu de votre application Capacitor.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Installer the package**
+1. **Installez le package**
    <PackageManagers pkg="@capgo/capacitor-printer" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser with Natif projects**
+2. **Synchronisation avec les projets natifs**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
 ## Utilisation
 
-Importer the plugin and print various types of content:
+Importez le plugin et imprimez différents types de contenu :
 
 ```typescript
 import { Printer } from '@capgo/capacitor-printer';
@@ -52,9 +53,9 @@ const printImage = async () => {
 
 ## API Référence
 
-### print(Options)
+### imprimer(options)
 
-Opens the Natif print dialog with the specified content.
+Ouvre la boîte de dialogue d'impression native avec le contenu spécifié.
 
 ```typescript
 interface PrintOptions {
@@ -69,14 +70,14 @@ await Printer.print(options);
 
 ### canPrint()
 
-Checks if printing is Disponible on the Appareil.
+Vérifie si l'impression est disponible sur le périphérique.
 
 ```typescript
 const { value } = await Printer.canPrint();
 console.log('Printing available:', value);
 ```
 
-## Terminé Exemple
+## Exemple complet
 
 ```typescript
 import { Printer } from '@capgo/capacitor-printer';
@@ -133,13 +134,13 @@ export class PrintService {
           ${receiptData.items.map((item: any) => `
             <div class="item">
               <span>${item.name}</span>
-              <span>$${item.price.toFixed(2)}</span>
+              <span>${item.price.toFixed(2)}</span>
             </div>
           `).join('')}
           <div class="total">
             <div class="item">
               <span>Total:</span>
-              <span>$${receiptData.total.toFixed(2)}</span>
+              <span>${receiptData.total.toFixed(2)}</span>
             </div>
           </div>
         </body>
@@ -174,9 +175,9 @@ export class PrintService {
 }
 ```
 
-## Advanced Utilisation
+## Utilisation avancée
 
-### Printing with Custom Styling
+### Impression avec un style personnalisé
 
 ```typescript
 const printStyledDocument = async () => {
@@ -220,7 +221,7 @@ const printStyledDocument = async () => {
 };
 ```
 
-### Printing Tables
+### Impression de tableaux
 
 ```typescript
 const printTable = async (data: any[]) => {
@@ -276,7 +277,7 @@ const printTable = async (data: any[]) => {
 };
 ```
 
-### Printing Images
+### Impression d'images
 
 ```typescript
 const printImageWithDetails = async (imagePath: string, title: string) => {
@@ -304,19 +305,19 @@ const printImageWithDetails = async (imagePath: string, title: string) => {
 };
 ```
 
-## Best Practices
+## meilleures pratiques
 
-1. **Vérifier Availability**: Always Vérifier if printing is Disponible before attempting to print
-2. **Valid Content**: Ensure HTML is well-formed and file paths are valid
-3. **Job Names**: Use descriptive names for print jobs to Aide Utilisateurs identify them
-4. **Styling**: Use inline CSS or embedded styles for consistent print output
-5. **Erreur Handling**: Wrap print calls in try-catch blocks for Utilisateur Retour
+1. **Vérifier la disponibilité** : Vérifiez toujours si l'impression est disponible avant d'essayer d'imprimer.
+2. **Contenu valide** : assurez-vous que HTML est bien formé et que les chemins de fichiers sont valides
+3. **Noms des travaux** : utilisez des noms descriptifs pour les travaux d'impression afin d'aider les utilisateurs à les identifier
+4. **Style** : utilisez du CSS en ligne ou des styles intégrés pour une sortie d'impression cohérente
+5. **Gestion des erreurs** : enveloppez les appels d'impression dans des blocs try-catch pour les commentaires des utilisateurs
 
 ## Dépannage
 
 ### Problèmes courants
 
-**Print dialog not appearing**: Check that printing is available with canPrint()
-**Content not printing**: Verify that HTML is valid and file paths are correct
-**Images not showing**: Ensure image paths are absolute and files are accessible
-**Styling issues**: Use @page CSS rules and test print output
+**La boîte de dialogue Imprimer n'apparaît pas** : Vérifiez que l'impression est disponible avec canPrint()
+**Contenu non imprimé** : vérifiez que HTML est valide et que les chemins d'accès aux fichiers sont corrects.
+**Les images ne s'affichent pas** : assurez-vous que les chemins d'accès aux images sont absolus et que les fichiers sont accessibles
+**Problèmes de style** : utilisez les règles CSS @page et testez la sortie d'impression

@@ -1,27 +1,28 @@
 ---
-locale: fr
 title: Commencer
-description: Learn how to set up live reload for faster Développement with your Capacitor Application.
-sidebar: 
+description: >-
+  Découvrez comment configurer le rechargement en direct pour un développement
+  plus rapide avec votre application Capacitor.
+sidebar:
   order: 2
+locale: fr
 ---
-
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Installer the package**
+1. **Installez le package**
    <PackageManagers pkg="@capgo/capacitor-live-reload" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser with Natif projects**
+2. **Synchronisation avec les projets natifs**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
 ## Configuration
 
-Configure your Vite dev server to work with live reload. You need to:
-1. Désactiver the built-in HMR client
-2. Forward reload events over a dedicated WebSocket endpoint
+Configurez votre serveur de développement Vite pour qu'il fonctionne avec le rechargement en direct. Vous devez :
+1. Désactivez le client HMR intégré
+2. Transférer les événements de rechargement sur un point de terminaison WebSocket dédié
 
 ## Utilisation
 
@@ -58,9 +59,9 @@ LiveReload.addListener('statusChange', (status) => {
 
 ## API Référence
 
-### configureServer(Options)
+### configurer le serveur (options)
 
-Store remote dev server Paramètres for subsequent connections.
+Stockez les paramètres du serveur de développement distant pour les connexions ultérieures.
 
 ```typescript
 const status = await LiveReload.configureServer({
@@ -74,29 +75,29 @@ const status = await LiveReload.configureServer({
 });
 ```
 
-**Parameters:**
-- `url` (string): Base URL for the dev server (e.g., `http://dev.local:5173`)
-- `websocketPath` (string, optional): WebSocket path override (default: `/ws`)
-- `headers` (Record\<string, string\>, optional): Extra headers for WebSocket connection
-- `autoReconnect` (boolean, optional): Auto-reconnect on disconnect (default: `true`)
-- `reconnectInterval` (number, optional): Delay between reconnect attempts in ms (default: `2000`)
+**Paramètres :**
+- `url` (string) : URL de base du serveur de développement (par exemple, `http://dev.local:5173`)
+- `websocketPath` (chaîne, facultatif) : remplacement du chemin WebSocket (par défaut : `/ws`)
+- `headers` (Record\<string, string\>, facultatif) : en-têtes supplémentaires pour la connexion WebSocket
+- `autoReconnect` (booléen, facultatif) : Reconnexion automatique en cas de déconnexion (par défaut : `true`)
+- `reconnectInterval` (numéro, facultatif) : délai entre les tentatives de reconnexion en ms (par défaut : `2000`)
 
-**Returns:** `LiveReloadStatus` with connection info
+**Renvoie :** `LiveReloadStatus` avec informations de connexion
 
-### connect()
+### connecter()
 
-Establish a WebSocket connection if one is not already Actif.
+Établissez une connexion WebSocket si elle n’est pas déjà active.
 
 ```typescript
 const status = await LiveReload.connect();
 console.log('Connected:', status.connected);
 ```
 
-**Returns:** Current connection status
+**Renvoie :** État actuel de la connexion
 
-### disconnect()
+### déconnexion()
 
-Close the current WebSocket connection and Désactiver auto reconnect.
+Fermez la connexion WebSocket actuelle et désactivez la reconnexion automatique.
 
 ```typescript
 await LiveReload.disconnect();
@@ -104,7 +105,7 @@ await LiveReload.disconnect();
 
 ### getStatus()
 
-Get the current connection status.
+Obtenez l'état actuel de la connexion.
 
 ```typescript
 const status = await LiveReload.getStatus();
@@ -112,17 +113,17 @@ console.log('Connected:', status.connected);
 console.log('URL:', status.url);
 ```
 
-### reload()
+### recharger()
 
-Manually trigger a full reload of the Capacitor WebView.
+Déclenchez manuellement un rechargement complet de Capacitor WebView.
 
 ```typescript
 await LiveReload.reload();
 ```
 
-### reloadFile(Options)
+### reloadFichier (options)
 
-Reload a single file/module (falls Retour to full reload if not supported).
+Rechargez un seul fichier/module (revient au rechargement complet s'il n'est pas pris en charge).
 
 ```typescript
 await LiveReload.reloadFile({
@@ -131,9 +132,9 @@ await LiveReload.reloadFile({
 });
 ```
 
-### addListener('reloadEvent', callback)
+### addListener('reloadEvent', rappel)
 
-Listen to incoming reload events from the server.
+Écoutez les événements de rechargement entrants du serveur.
 
 ```typescript
 const handle = await LiveReload.addListener('reloadEvent', (event) => {
@@ -154,9 +155,9 @@ const handle = await LiveReload.addListener('reloadEvent', (event) => {
 await handle.remove();
 ```
 
-### addListener('statusChange', callback)
+### addListener('statusChange', rappel)
 
-Listen to socket status changes.
+Écoutez les changements d’état des sockets.
 
 ```typescript
 await LiveReload.addListener('statusChange', (status) => {
@@ -164,15 +165,15 @@ await LiveReload.addListener('statusChange', (status) => {
 });
 ```
 
-### removeAllListeners()
+### supprimerAllListeners()
 
-Retirer all registered listeners.
+Supprimez tous les auditeurs enregistrés.
 
 ```typescript
 await LiveReload.removeAllListeners();
 ```
 
-## Terminé Exemple
+## Exemple complet
 
 ```typescript
 import { LiveReload } from '@capgo/capacitor-live-reload';
@@ -255,9 +256,9 @@ export class DevServer {
 }
 ```
 
-## Vite Configuration Exemple
+## Exemple de configuration Vite
 
-Configure your Vite server to work with the live reload plugin:
+Configurez votre serveur Vite pour qu'il fonctionne avec le plugin live reload :
 
 ```typescript
 // vite.config.ts
@@ -275,9 +276,9 @@ export default defineConfig({
 });
 ```
 
-## Best Practices
+## meilleures pratiques
 
-1. **Only use in Développement**
+1. **Utiliser uniquement en développement**
    ```typescript
    if (import.meta.env.DEV) {
      await LiveReload.configureServer({
@@ -288,13 +289,13 @@ export default defineConfig({
    }
    ```
 
-2. **Use your local IP for mobile Test**
+2. **Utilisez votre adresse IP locale pour les tests mobiles**
    ```typescript
    const devServerUrl = process.env.VITE_DEV_SERVER_URL || 'http://192.168.1.100:5173';
    await LiveReload.configureServer({ url: devServerUrl });
    ```
 
-3. **Handle connection errors gracefully**
+3. **Gérez les erreurs de connexion avec élégance**
    ```typescript
    try {
      await LiveReload.connect();
@@ -303,14 +304,14 @@ export default defineConfig({
    }
    ```
 
-4. **Clean up on Application exit**
+4. **Nettoyer à la sortie de l'application**
    ```typescript
    window.addEventListener('beforeunload', async () => {
      await LiveReload.disconnect();
    });
    ```
 
-5. **Show connection status in UI**
+5. **Afficher l'état de la connexion dans l'interface utilisateur**
    ```typescript
    LiveReload.addListener('statusChange', (status) => {
      // Show indicator in dev builds
@@ -318,38 +319,38 @@ export default defineConfig({
    });
    ```
 
-## Platform Notes
+## Remarques sur la plate-forme
 
 ### iOS
-- Works with iOS 11.0+
-- Ensure dev server is accessible from your Appareil's network
-- May need to configure firewall to allow connections
+- Fonctionne avec iOS 11.0+
+- Assurez-vous que le serveur de développement est accessible depuis le réseau de votre appareil
+- Il faudra peut-être configurer un pare-feu pour autoriser les connexions
 
 ### Android
-- Works with Android 5.0 (API 21)+
-- Use `adb reverse` for localhost connections:
+- Fonctionne avec Android 5.0 (API 21)+
+- Utilisez `adb reverse` pour les connexions localhost :
   ```bash
   adb reverse tcp:5173 tcp:5173
   ```
 
-### Web
-- Full Support for web platform
-- Direct WebSocket connection to Vite dev server
+###Web
+- Prise en charge complète de la plateforme Web
+- Connexion WebSocket directe au serveur de développement Vite
 
 ## Dépannage
 
-**Connection fails:**
-- Verify dev server is running
-- Vérifier that Appareil and computer are on same network
-- Ensure firewall allows connections on the port
-- Use IP address instead of localhost for mobile Appareils
+**La connexion échoue :**
+- Vérifiez que le serveur de développement est en cours d'exécution
+- Vérifiez que l'appareil et l'ordinateur sont sur le même réseau
+- Assurez-vous que le pare-feu autorise les connexions sur le port
+- Utilisez l'adresse IP au lieu de localhost pour les appareils mobiles
 
-**Slow reload:**
-- Vérifier network speed
-- Reduce reconnect interval
-- Optimize Vite Construction Configuration
+**Rechargement lent :**
+- Vérifier la vitesse du réseau
+- Réduire l'intervalle de reconnexion
+- Optimiser la configuration de la build Vite
 
-**WebSocket errors:**
-- Verify websocketPath matches Vite config
-- Vérifier for port conflicts
-- Ensure headers are correct if using authentication
+**Erreurs WebSocket :**
+- Vérifiez que websocketPath correspond à la configuration de Vite
+- Vérifier les conflits de ports
+- Assurez-vous que les en-têtes sont corrects si vous utilisez l'authentification

@@ -20,8 +20,6 @@ published: true
 locale: fr
 next_blog: how-to-release-major-version-in-capgo
 ---
-Here's the French translation:
-
 Capgo utilise 2 variables principales pour gérer les versions dans votre application Capacitor :
   - Version native
   - Versions JavaScript

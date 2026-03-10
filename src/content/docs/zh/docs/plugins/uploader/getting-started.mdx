@@ -1,28 +1,25 @@
 ---
-title: "快速入门"
-description: >-
-  Learn how to install and use the Background Uploader plugin for reliable file
-  uploads in your Capacitor app.
+title: 入门
+description: 了解如何安装和使用后台上传器插件，以便在 Capacitor 应用程序中实现可靠的文件上传。
 sidebar:
   order: 2
 locale: zh
 ---
-
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **安装软件包**
    <PackageManagers pkg="@capgo/capacitor-uploader" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **与原生项目同步**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure permissions**
+3. **配置权限**
    
    ### iOS
-   Add background modes to your `Info.plist`:
+   将背景模式添加到您的 `Info.plist` 中：
    ```xml
    <key>UIBackgroundModes</key>
    <array>
@@ -31,7 +28,7 @@ import { PackageManagers } from 'starlight-package-managers'
    ```
    
    ### Android
-   Add permissions to your `AndroidManifest.xml`:
+   向您的 `AndroidManifest.xml` 添加权限：
    ```xml
    <uses-permission android:name="android.permission.INTERNET" />
    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -39,9 +36,9 @@ import { PackageManagers } from 'starlight-package-managers'
    ```
 </Steps>
 
-## Usage
+## 用法
 
-Import the plugin and use its methods to upload files:
+导入插件并使用其方法上传文件：
 
 ```typescript
 import { Uploader } from '@capgo/capacitor-uploader';
@@ -97,11 +94,11 @@ const getActiveUploads = async () => {
 };
 ```
 
-## API Reference
+## API 参考
 
-### startUpload(options)
+### 开始上传（选项）
 
-Starts a new file upload.
+开始新文件上传。
 
 ```typescript
 interface UploadOptions {
@@ -117,9 +114,9 @@ interface UploadOptions {
 }
 ```
 
-### cancelUpload(options)
+### 取消上传（选项）
 
-Cancels an ongoing upload.
+取消正在进行的上传。
 
 ```typescript
 interface CancelOptions {
@@ -127,13 +124,13 @@ interface CancelOptions {
 }
 ```
 
-### getUploads()
+### 获取上传()
 
-Returns all active uploads.
+返回所有活动上传。
 
-### removeUpload(options)
+### 删除上传（选项）
 
-Removes an upload from the queue.
+从队列中删除上传。
 
 ```typescript
 interface RemoveOptions {
@@ -141,11 +138,11 @@ interface RemoveOptions {
 }
 ```
 
-## Events
+## 活动
 
-### events
+### 活动
 
-All upload events are delivered through a single `events` listener. The event contains a `name` field to identify the type:
+所有上传事件均通过单个 `events` 侦听器传递。该事件包含一个 `name` 字段来标识类型：
 
 ```typescript
 Uploader.addListener('events', (event: UploadEvent) => {
@@ -171,14 +168,14 @@ Uploader.addListener('events', (event: UploadEvent) => {
 });
 ```
 
-**Event Types:**
-- `uploading` - Progress update with `percent` and `id`
-- `completed` - Upload finished with `id` and `statusCode`
-- `failed` - Upload failed with `id` and `error` message
+**事件类型：**
+- `uploading` - `percent` 和 `id` 的进度更新
+- `completed` - 使用 `id` 和 `statusCode` 完成上传
+- `failed` - 上传失败，并显示 `id` 和 `error` 消息
 
-## Advanced Features
+## 高级功能
 
-### Multipart Form Upload
+### 多部分表单上传
 
 ```typescript
 const uploadWithFormData = async () => {
@@ -197,7 +194,7 @@ const uploadWithFormData = async () => {
 };
 ```
 
-### Binary Upload
+### 二进制上传
 
 ```typescript
 const uploadBinary = async () => {
@@ -212,7 +209,7 @@ const uploadBinary = async () => {
 };
 ```
 
-### Network-Aware Uploading
+### 网络感知上传
 
 ```typescript
 import { Network } from '@capacitor/network';
@@ -230,9 +227,9 @@ const smartUpload = async () => {
 };
 ```
 
-## Best Practices
+## 最佳实践
 
-1. **Handle all event types**
+1. **处理所有事件类型**
    ```typescript
    const setupUploadHandlers = () => {
      Uploader.addListener('events', (event) => {
@@ -251,7 +248,7 @@ const smartUpload = async () => {
    };
    ```
 
-2. **Clean up listeners**
+2. **清理监听器**
    ```typescript
    // Add listener
    const listener = await Uploader.addListener('events', handleEvent);
@@ -260,7 +257,7 @@ const smartUpload = async () => {
    listener.remove();
    ```
 
-3. **Retry failed uploads**
+3. **重试失败的上传**
    ```typescript
    const retryUpload = async (filePath: string, serverUrl: string) => {
      try {
@@ -275,7 +272,7 @@ const smartUpload = async () => {
    };
    ```
 
-4. **Show upload notifications**
+4. **显示上传通知**
    ```typescript
    await Uploader.startUpload({
      filePath: 'file:///path/to/file',
@@ -285,14 +282,14 @@ const smartUpload = async () => {
    });
    ```
 
-## Platform Notes
+## 平台说明
 
 ### iOS
-- Uses `URLSession` for background uploads
-- Requires background processing capability
-- Uploads continue when app is suspended
+- 使用 `URLSession` 进行后台上传
+- 需要后台处理能力
+- 应用程序暂停时继续上传
 
 ### Android
-- Uses `WorkManager` for reliable uploads
-- Shows foreground service notification during uploads
-- Respects battery optimization settings
+- 使用 `WorkManager` 进行可靠的上传
+- 上传期间显示前台服务通知
+- 尊重电池优化设置

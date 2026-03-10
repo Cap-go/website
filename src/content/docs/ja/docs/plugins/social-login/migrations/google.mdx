@@ -1,11 +1,8 @@
 ---
-title: >-
-  Migration Guide from @codetrix-studio/capacitor-google-auth to
-  @capgo/capacitor-social-login
+title: ''
 description: >-
-  This guide outlines transitioning from the older Google Auth plugin to the
-  newer Capgo social login package, which unifies multiple social authentication
-  providers.
+  このガイドでは、古い Google Auth プラグインから、複数のソーシャル認証プロバイダーを統合する新しい Capgo ソーシャル ログイン
+  パッケージへの移行について概要を説明します。
 sidebar:
   order: 3
 locale: ja
@@ -14,44 +11,44 @@ import { Steps } from '@astrojs/starlight/components';
 
 ## 概要
 
-このガイドは、`@codetrix-studio/capacitor-google-auth` から `@capgo/capacitor-social-login` への移行に関する包括的な手順を提供し、スムーズな移行と改善された認証エクスペリエンスを確保します。新しいプラグインは、複数のソーシャル認証プロバイダーを単一の一貫した API の下に統合します。
+このガイドでは、`@codetrix-studio/capacitor-google-auth` から `@capgo/capacitor-social-login` に移行するための包括的な手順を説明し、スムーズな移行と改善された認証エクスペリエンスを保証します。新しいプラグインは、複数のソーシャル認証プロバイダーを単一の一貫した API の下に統合します。
 
-## Installation
+## インストール
 
 <Steps>
-1. Remove the old package:
+1. 古いパッケージを削除します。
    ```bash
    npm uninstall @codetrix-studio/capacitor-google-auth
    ```
 
-2. Install the new package:
+2. 新しいパッケージをインストールします。
    ```bash
    npm install @capgo/capacitor-social-login
    npx cap sync
    ```
 </Steps>
 
-## Important Changes in Google Auth Setup
+## Google 認証設定の重要な変更点
 
-### Web Client ID Requirement
-**Critical Change**: The updated plugin requires using a Web Client ID across all platforms.
+### Web クライアント ID の要件
+**重要な変更**: 更新されたプラグインでは、すべてのプラットフォームで Web クライアント ID を使用する必要があります。
 
-You'll need to:
-1. Create a Web Client ID in Google Cloud Console if you don't have one ([How to get the credentials](/docs/plugins/social-login/google/general/))
-2. Use this Web Client ID in the `webClientId` field for all platforms
-3. For Android, you still need to create an Android Client ID with your SHA1, but this is only for verification purposes - the token won't be used ([Android setup guide](/docs/plugins/social-login/google/android/))
+次のことを行う必要があります。
+1. Web クライアント ID がない場合は、Google Cloud Console で Web クライアント ID を作成します ([認証情報の取得方法](/docs/plugins/social-login/google/general/))
+2. すべてのプラットフォームの `webClientId` フィールドでこの Web クライアント ID を使用します
+3. Android の場合、SHA1 を使用して Android クライアント ID を作成する必要がありますが、これは検証目的のみであり、トークンは使用されません ([Android セットアップ ガイド](/docs/plugins/social-login/google/android/))
 
-## Code Changes
+## コードの変更
 
-### Import Changes
+### 変更のインポート
 ```diff
 - import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 + import { SocialLogin } from '@capgo/capacitor-social-login';
 ```
 
-### Initialization
+### 初期化
 
-The setup transforms from a simple `GoogleAuth.initialize()` call to a more structured `SocialLogin.initialize()` with nested Google configuration:
+セットアップは、単純な `GoogleAuth.initialize()` 呼び出しから、ネストされた Google 構成を備えたより構造化された `SocialLogin.initialize()` に変換されます。
 
 ```diff
 - GoogleAuth.initialize({
@@ -69,9 +66,9 @@ The setup transforms from a simple `GoogleAuth.initialize()` call to a more stru
 + });
 ```
 
-### Sign In
+### サインイン
 
-The login method changes from `GoogleAuth.signIn()` to `SocialLogin.login()` with explicit provider specification:
+明示的なプロバイダ指定により、ログイン方法が `GoogleAuth.signIn()` から `SocialLogin.login()` に変更されます。
 
 ```diff
 - const user = await GoogleAuth.signIn();
@@ -84,11 +81,11 @@ The login method changes from `GoogleAuth.signIn()` to `SocialLogin.login()` wit
 + });
 ```
 
-## Platform Specific Changes
+## プラットフォーム固有の変更
 
 ### Android
 
-1. Update your `MainActivity.java` ([Full Android setup guide](/docs/plugins/social-login/google/android/)):
+1. `MainActivity.java` ([完全な Android セットアップ ガイド](/docs/plugins/social-login/google/android/)) を更新します。
 ```diff
 + import ee.forgr.capacitor.social.login.GoogleProvider;
 + import ee.forgr.capacitor.social.login.SocialLoginPlugin;
@@ -126,9 +123,9 @@ The login method changes from `GoogleAuth.signIn()` to `SocialLogin.login()` wit
 
 ### iOS
 
-1. No major changes needed in AppDelegate.swift ([iOS setup guide](/docs/plugins/social-login/google/ios/))
+1. AppDelegate.swift に大きな変更は必要ありません ([iOS セットアップ ガイド](/docs/plugins/social-login/google/ios/))
 
-2. Update your configuration in `capacitor.config.json`, we don't use it in the new plugin:
+2. `capacitor.config.json` で設定を更新します。新しいプラグインではそれを使用しません。
 ```diff
 {
   "plugins": {
@@ -140,17 +137,17 @@ The login method changes from `GoogleAuth.signIn()` to `SocialLogin.login()` wit
 }
 ```
 
-### Web
+### ウェブ
 
-1. Remove the Google Sign-In meta tags from your `index.html` if you were using them:
+1. Google サインイン メタ タグを使用している場合は、`index.html` からこれらを削除します。
 ```diff
 - <meta name="google-signin-client_id" content="{your client id here}" />
 - <meta name="google-signin-scope" content="profile email" />
 ```
 
-## Response Type Changes
+## 応答タイプの変更
 
-The authentication response now provides a structured object containing provider information, access tokens, ID tokens, and user profile data:
+認証応答は、プロバイダー情報、アクセス トークン、ID トークン、ユーザー プロファイル データを含む構造化オブジェクトを提供するようになりました。
 
 ```typescript
 interface GoogleLoginResponse {
@@ -174,22 +171,22 @@ interface GoogleLoginResponse {
 }
 ```
 
-The response structure includes:
-- **provider**: Identifies the authentication provider (`'google'`)
-- **result.accessToken**: Access token details with expiration
-- **result.idToken**: ID token for authentication
-- **result.profile**: User profile information including email, name, and image URL
+応答構造には次のものが含まれます。
+- **プロバイダー**: 認証プロバイダー (`'google'`) を識別します。
+- **result.accessToken**: 有効期限のあるアクセス トークンの詳細
+- **result.idToken**: 認証用のIDトークン
+- **result.profile**: 電子メール、名前、画像 URL などのユーザー プロフィール情報
 
-## Additional Capabilities
+## 追加機能
 
-The new package supports multiple social authentication providers beyond Google:
-- [Apple Sign-In](/docs/plugins/social-login/apple/general/)
-- [Facebook Login](/docs/plugins/social-login/facebook/)
+新しいパッケージは、Google を超える複数のソーシャル認証プロバイダーをサポートします。
+- [Apple サインイン](/docs/plugins/social-login/apple/general/)
+- [Facebook ログイン](/docs/plugins/social-login/facebook/)
 
-This unified approach provides:
-- Consistent API across all providers
-- Improved TypeScript support
-- Better error handling
-- Active maintenance and community support
+この統一されたアプローチにより、以下が提供されます。
+- すべてのプロバイダーにわたって一貫した API
+- TypeScript サポートの改善
+- エラー処理の改善
+- 積極的なメンテナンスとコミュニティサポート
 
-Check the [main documentation](/docs/plugins/social-login/google/general/) for detailed setup instructions for these additional providers. 
+これらの追加プロバイダーの詳細なセットアップ手順については、[メイン ドキュメント](/docs/plugins/social-login/google/general/) を確認してください。

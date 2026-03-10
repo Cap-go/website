@@ -1,47 +1,46 @@
 ---
-title: "联系人快速入门"
-description: Learn how to integrate contact management into your Capacitor app
+title: 开始使用联系人
+description: 了解如何将联系人管理集成到您的 Capacitor 应用程序中
 locale: zh
 ---
+本指南将引导您将 Capacitor 联系人插件集成到您的应用程序中。
 
-This guide will walk you through integrating the Capacitor Contacts plugin into your application.
+## 安装
 
-## Installation
-
-Install the plugin using npm:
+使用 npm 安装插件：
 
 ```bash
 npm install @capgo/capacitor-contacts
 npx cap sync
 ```
 
-## iOS Configuration
+## iOS 配置
 
-Add the following to your `Info.plist`:
+将以下内容添加到您的 `Info.plist` 中：
 
 ```xml
 <key>NSContactsUsageDescription</key>
 <string>This app needs access to contacts to let you select recipients</string>
 ```
 
-## Android Configuration
+## Android 配置
 
-Add the following permissions to your `AndroidManifest.xml`:
+将以下权限添加到您的 `AndroidManifest.xml`：
 
 ```xml
 <uses-permission android:name="android.permission.READ_CONTACTS" />
 <uses-permission android:name="android.permission.WRITE_CONTACTS" />
 ```
 
-## Basic Usage
+## 基本用法
 
-### Import the Plugin
+### 导入插件
 
 ```typescript
 import { Contacts } from '@capgo/capacitor-contacts';
 ```
 
-### Request Permissions
+### 请求权限
 
 ```typescript
 const requestPermissions = async () => {
@@ -50,7 +49,7 @@ const requestPermissions = async () => {
 };
 ```
 
-### Get All Contacts
+### 获取所有联系人
 
 ```typescript
 const getAllContacts = async () => {
@@ -67,7 +66,7 @@ const getAllContacts = async () => {
 };
 ```
 
-### Search Contacts
+### 搜索联系人
 
 ```typescript
 const searchContacts = async (query: string) => {
@@ -84,7 +83,7 @@ const searchContacts = async (query: string) => {
 };
 ```
 
-### Create Contact
+### 创建联系人
 
 ```typescript
 const createContact = async () => {
@@ -108,7 +107,7 @@ const createContact = async () => {
 };
 ```
 
-### Update Contact
+### 更新联系方式
 
 ```typescript
 const updateContact = async (contactId: string) => {
@@ -125,7 +124,7 @@ const updateContact = async (contactId: string) => {
 };
 ```
 
-### Delete Contact
+### 删除联系人
 
 ```typescript
 const deleteContact = async (contactId: string) => {
@@ -134,9 +133,9 @@ const deleteContact = async (contactId: string) => {
 };
 ```
 
-## Complete Example
+## 完整示例
 
-Here's a complete example with a contact service:
+以下是联系服务的完整示例：
 
 ```typescript
 import { Contacts } from '@capgo/capacitor-contacts';
@@ -294,9 +293,9 @@ await contactsService.updateContact(newContactId, {
 });
 ```
 
-## Understanding Projection
+## 理解投影
 
-The `projection` parameter controls which fields to fetch:
+`projection` 参数控制要获取的字段：
 
 ```typescript
 const result = await Contacts.getContacts({
@@ -314,11 +313,11 @@ const result = await Contacts.getContacts({
 });
 ```
 
-**Tip**: Only request fields you need to improve performance.
+**提示**：仅请求提高性能所需的字段。
 
-## Contact Picker UI
+## 联系选择器 UI
 
-Many apps prefer using the native contact picker:
+许多应用程序更喜欢使用本机联系人选择器：
 
 ```typescript
 const pickContact = async () => {
@@ -341,18 +340,18 @@ const pickContact = async () => {
 };
 ```
 
-## Best Practices
+## 最佳实践
 
-1. **Request Minimal Permissions**: Only request contacts permission when needed
-2. **Use Projection**: Only fetch fields you actually use
-3. **Handle Denials**: Provide fallback when permissions denied
-4. **Cache Wisely**: Contacts can change, don't cache too long
-5. **Respect Privacy**: Be transparent about contact usage
-6. **Async Operations**: All contact operations are async
+1. **请求最小权限**：仅在需要时请求联系人权限
+2. **使用投影**：只获取你实际使用的字段
+3. **处理拒绝**：当权限被拒绝时提供后备
+4. **明智地缓存**：联系人可能会更改，不要缓存太久
+5. **尊重隐私**：联系人使用情况保持透明
+6. **异步操作**：所有联系操作都是异步的
 
-## Common Issues
+## 常见问题
 
-### Permission Denied
+### 权限被拒绝
 
 ```typescript
 const handlePermissionDenied = async () => {
@@ -368,7 +367,7 @@ const handlePermissionDenied = async () => {
 };
 ```
 
-### Large Contact Lists
+### 大型联系人列表
 
 ```typescript
 const loadContactsInBatches = async () => {
@@ -387,8 +386,8 @@ const loadContactsInBatches = async () => {
 };
 ```
 
-## Next Steps
+## 后续步骤
 
-- Explore the [API Reference](https://github.com/Cap-go/capacitor-contacts#api) for complete method documentation
-- Check out the [example app](https://github.com/Cap-go/capacitor-contacts/tree/main/example) for advanced usage
-- See the [tutorial](/plugins/capacitor-contacts) for complete implementation examples
+- 探索 [API 参考](https://github.com/Cap-go/capacitor-contacts#api) 以获取完整的方法文档
+- 查看[示例应用程序](https://github.com/Cap-go/capacitor-contacts/tree/main/example) 以了解高级用法
+- 请参阅[教程](/plugins/capacitor-contacts)以获取完整的实施示例

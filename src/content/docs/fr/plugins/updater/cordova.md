@@ -1,26 +1,26 @@
 ---
-locale: fr
-title: "Cordova"
-description: "Exploring the potential availability of the capacitor-updater plugin for Cordova and the challenges involved in its Développement."
-sidebar: 
+title: Cordova
+description: >-
+  Explorer la disponibilité potentielle du plugin de mise à jour de condensateur
+  pour Cordova et les défis impliqués dans son développement.
+sidebar:
   order: 8
+locale: fr
 ---
+Vous vous demandez si ce plugin sera un jour disponible pour Cordova.
 
-You've been wondering if this plugin will ever be Disponible for Cordova.
+Nous avons lancé un référentiel R\&D pour cela, mais cela représente une quantité de travail énorme.
 
-We have started a R\&D repository for that, but it's a huge amount of work.
+## Problèmes
 
-## Problems
+Nous savons que nous pouvons le faire mais pour cela, nous devons lire tout le code de la base de code Cordova comme nous l'avons fait pour Capacitor, pour comprendre comment le faire fonctionner avec les fonctionnalités ap Capgo.
 
-We know we can do it but for that, we have to read all the code of Cordova codebase as we did for Capacitor, to understand how to make it work with ap Capgo Fonctionnalités.
+La version Android est plus facile à réaliser puisque les deux utilisent Java, mais iOS nécessite une réécriture complète car Swift n'est toujours pas bien pris en charge dans Cordova.
 
-The Android Version is easier to do since both use Java, but iOS needs a full rewrite because Swift is still not well-supported in Cordova
+##Solution
 
-## Solution
+En attendant, voici ce que vous pouvez faire :
 
-In the mean time heres what you can do:
-
-* [Support us](https://github.com/sponsors/cap-go) on GitHub and we can prioritize that. 
-This will need at least 1 month of work.
-* Hire us as a [Consultant](https://capgo.app/consulting/), we are used to help big companies migrate to Capacitor, it usually takes a month, and the [benefit](https://ionic.io/resources/articles/capacitor-vs-cordova-modern-hybrid-app-development) is huge for your team
-
+* [Soutenez-nous](https://github.com/sponsors/cap-go) le GitHub et nous pouvons donner la priorité à cela. 
+Cela nécessitera au moins 1 mois de travail.
+* Embauchez-nous en tant que [Consultant](https://capgo.app/consulting/), nous avons l'habitude d'aider les grandes entreprises à migrer vers Capacitor, cela prend généralement un mois, et le [bénéfice](https://ionic.io/resources/articles/capacitor-vs-cordova-modern-hybrid-app-development) est énorme pour votre équipe
