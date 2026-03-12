@@ -2,8 +2,14 @@ import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders'
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema'
 import { docSearchI18nSchema } from '@astrojs/starlight-docsearch/schema'
 import { glob } from 'astro/loaders'
-import { defineCollection, z } from 'astro:content'
-import type { Locales } from './services/locale'
+import { defineCollection } from 'astro:content'
+import { z } from 'astro/zod'
+import { locales, type Locales } from './services/locale'
+
+const localeSchema = z.custom<Locales>(
+  (value) => typeof value === 'string' && locales.includes(value as Locales),
+  'Invalid locale',
+)
 
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.md', base: 'src/content/blog', generateId: ({ entry }) => entry }),
@@ -29,7 +35,7 @@ const blog = defineCollection({
       return tmp
     }),
     published: z.boolean().optional(),
-    locale: z.string() as z.ZodType<Locales>,
+    locale: localeSchema,
     next_blog: z.string().optional().nullable(),
   }),
 })
@@ -38,7 +44,7 @@ const plugin = defineCollection({
   loader: glob({ pattern: '**/*.md', base: 'src/content/plugins-tutorials' }),
   schema: z.object({
     published: z.boolean().optional(),
-    locale: z.string().optional() as z.ZodType<Locales>,
+    locale: localeSchema.optional(),
   }),
 })
 

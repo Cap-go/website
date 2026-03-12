@@ -2,8 +2,7 @@
 import type { StarlightRouteData } from '@astrojs/starlight/route-data'
 import * as m from '@/paraglide/messages'
 
-const { entry, editUrl } = Astro.locals.starlightRoute as StarlightRouteData
-const pageSlug = entry?.slug || ''
+const { editUrl, id: pageSlug } = Astro.locals.starlightRoute as StarlightRouteData
 
 const translations = {
   copyPage: m.copy_page({}, { locale: Astro.locals.locale }),

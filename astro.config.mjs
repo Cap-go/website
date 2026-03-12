@@ -8,6 +8,7 @@ import { defineConfig } from 'astro/config'
 import { glob } from 'glob'
 import { readFileSync, statSync } from 'node:fs'
 import os from 'node:os'
+import { fileURLToPath } from 'node:url'
 import starlightImageZoom from 'starlight-image-zoom'
 import starlightLlmsTxt from 'starlight-llms-txt'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
@@ -16,6 +17,7 @@ import { defaultLocale, localeNames, locales } from './src/services/locale'
 
 // Get CPU count for optimal parallelization
 const CPU_COUNT = os.cpus().length
+const SRC_DIR = `${fileURLToPath(new URL('./src/', import.meta.url)).replace(/\\/g, '/').replace(/\/$/, '')}/`
 
 // Build a map of page paths to their lastmod dates for sitemap
 function getPageLastModDates() {
@@ -71,29 +73,6 @@ export default defineConfig({
     // Inline small stylesheets for performance
     inlineStylesheets: 'auto',
   },
-  vite: {
-    build: {
-      // Target modern JS to reduce transpilation overhead
-      target: 'es2022',
-      // Increase chunk size warning limit
-      chunkSizeWarningLimit: 1000,
-      // Use esbuild for fastest minification (or disable for even faster builds)
-      minify: 'esbuild',
-      // Reduce chunk fragmentation overhead
-      rollupOptions: {
-        output: {
-          manualChunks: undefined,
-        },
-        // Maximize parallel file operations
-        maxParallelFileOps: CPU_COUNT * 3,
-      },
-    },
-    // Optimize dependency pre-bundling
-    optimizeDeps: {
-      // Force include heavy deps to pre-bundle them once
-      include: ['mermaid'],
-    },
-  },
   redirects: {
     '/docs/getting-started/': {
       status: 301,
@@ -118,7 +97,7 @@ export default defineConfig({
     //     return r
     //   }, {})
     routing: {
-      redirectToDefaultLocale: true,
+      redirectToDefaultLocale: false,
     },
   },
   integrations: [
@@ -1537,6 +1516,31 @@ export default defineConfig({
     host: '0.0.0.0',
   },
   vite: {
+    build: {
+      // Target modern JS to reduce transpilation overhead
+      target: 'es2022',
+      // Increase chunk size warning limit
+      chunkSizeWarningLimit: 1000,
+      // Use esbuild for fastest minification (or disable for even faster builds)
+      minify: 'esbuild',
+      // Reduce chunk fragmentation overhead
+      rollupOptions: {
+        output: {
+          manualChunks: undefined,
+        },
+        // Maximize parallel file operations
+        maxParallelFileOps: CPU_COUNT * 3,
+      },
+    },
+    // Keep Astro's generated `/src/...` virtual imports resolvable during the build.
+    resolve: {
+      alias: [{ find: /^\/src\//, replacement: SRC_DIR }],
+    },
+    // Optimize dependency pre-bundling
+    optimizeDeps: {
+      // Force include heavy deps to pre-bundle them once
+      include: ['mermaid'],
+    },
     plugins: [
       tailwindcss(),
       paraglideVitePlugin({

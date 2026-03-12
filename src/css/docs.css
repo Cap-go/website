@@ -52,10 +52,6 @@ body,
   --font-size-tiny: 0.4rem;
 
   /* Custom Breakpoints */
-  --breakpoint-vtab: (min-height: 361px);
-  --breakpoint-vix: (min-height: 812px);
-  --breakpoint-vip10: (min-height: 1024px);
-  --breakpoint-vip12: (min-height: 1112px);
   --breakpoint-tab: 361px;
   --breakpoint-iv: 402px;
   --breakpoint-ise: 667px;
