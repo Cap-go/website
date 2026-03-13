@@ -12,6 +12,7 @@ permissions:
 
 env:
   CLICOLOR: 1
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
 jobs:
   typos:
