@@ -265,10 +265,10 @@ const content = { title, description }
   <span class="text-cyan-400">security:</span>
     <span class="text-purple-400">runs-on:</span> ubuntu-latest
     <span class="text-purple-400">steps:</span>
-      - <span class="text-purple-400">uses:</span> actions/checkout@v4
+      - <span class="text-purple-400">uses:</span> actions/checkout@v6
 
       - <span class="text-purple-400">name:</span> Setup Bun
-        <span class="text-purple-400">uses:</span> oven-sh/setup-bun@v1
+        <span class="text-purple-400">uses:</span> oven-sh/setup-bun@v2
 
       - <span class="text-purple-400">name:</span> Run Security Scan
         <span class="text-purple-400">run:</span> bunx @capgo/capgo-sec scan --ci</code></pre>
