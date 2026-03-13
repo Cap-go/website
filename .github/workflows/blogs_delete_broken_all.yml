@@ -3,6 +3,9 @@ name: Delete Broken Blog Posts
 on:
   workflow_dispatch:
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
 jobs:
   delete-all-broken-blogs:
     runs-on: ubuntu-latest

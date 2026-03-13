@@ -3,6 +3,9 @@ name: Fix locales of all blogs
 on:
   workflow_dispatch:
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
 jobs:
   fix-locales-of-all-blogs:
     runs-on: ubuntu-latest
