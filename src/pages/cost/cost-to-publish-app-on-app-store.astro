@@ -178,7 +178,7 @@ const resources = [
     <div class="absolute inset-0 -z-10">
       <div class="absolute -top-40 right-0 w-[520px] h-[520px] rounded-full bg-blue-500/20 blur-[140px] animate-float"></div>
       <div class="absolute top-20 -left-32 w-[420px] h-[420px] rounded-full bg-emerald-500/15 blur-[140px] animate-float-slow"></div>
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(148,163,184,0.18),_transparent_55%)]"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(148,163,184,0.18),transparent_55%)]"></div>
     </div>
 
     <section class="relative px-4 pt-16 pb-20 mx-auto max-w-6xl sm:px-6 lg:px-8">
@@ -294,7 +294,7 @@ const resources = [
     </div>
   </section>
 
-  <section class="py-16 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950">
+  <section class="py-16 bg-linear-to-b from-slate-900 via-slate-950 to-slate-950">
     <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
       <div class="flex flex-col gap-4 mb-10 sm:flex-row sm:items-end sm:justify-between">
         <div>
@@ -306,7 +306,7 @@ const resources = [
       <div class="grid gap-6 lg:grid-cols-2">
         {comparisonCards.map((card) => (
           <div class="relative overflow-hidden border border-white/10 rounded-3xl bg-slate-900/60">
-            <div class={`absolute inset-0 bg-gradient-to-br ${card.accent}`} aria-hidden="true"></div>
+            <div class={`absolute inset-0 bg-linear-to-br ${card.accent}`} aria-hidden="true"></div>
             <div class="relative p-6">
               <div class="flex items-center justify-between">
                 <div>
@@ -422,7 +422,7 @@ const resources = [
     </div>
   </section>
 
-  <section class="py-16 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+  <section class="py-16 bg-linear-to-b from-slate-950 via-slate-900 to-slate-950">
     <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
       <div class="flex flex-col gap-4 mb-10 sm:flex-row sm:items-end sm:justify-between">
         <div>
@@ -479,7 +479,7 @@ const resources = [
 
   <section class="py-16 bg-slate-950">
     <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
-      <div class="p-8 border border-white/10 rounded-3xl bg-gradient-to-br from-blue-500/10 via-slate-900/80 to-slate-900">
+      <div class="p-8 border border-white/10 rounded-3xl bg-linear-to-br from-blue-500/10 via-slate-900/80 to-slate-900">
         <div class="grid gap-8 lg:grid-cols-[1fr_0.9fr]">
           <div>
             <p class="text-xs font-medium tracking-[0.2em] text-blue-200 uppercase">After launch</p>

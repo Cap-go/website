@@ -304,7 +304,7 @@ Create `app/pages/index.vue`:
 ```vue
 <template>
   <main
-    class="min-h-screen bg-gradient-to-b from-green-500 to-green-700 flex flex-col items-center justify-center p-6 text-white"
+    class="min-h-screen bg-linear-to-b from-green-500 to-green-700 flex flex-col items-center justify-center p-6 text-white"
   >
     <h1 class="text-4xl font-bold mb-4">My Mobile App</h1>
     <p class="text-xl mb-8 text-center opacity-90">
