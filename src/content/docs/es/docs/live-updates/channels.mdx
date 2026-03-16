@@ -10,6 +10,10 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 Un canal de Actualización en Vivo apunta a una compilación específica del Paquete JS de tu aplicación que se compartirá con cualquier dispositivo configurado para escuchar ese canal para actualizaciones. Cuando [instalas el SDK de Actualizaciones en Vivo de Capgo](/docs/getting-started/quickstart/) en tu aplicación, cualquier binario nativo configurado para ese canal verificará las actualizaciones disponibles cada vez que se inicie la aplicación. Puedes cambiar la compilación a la que apunta un canal en cualquier momento y también puedes revertir a compilaciones anteriores si es necesario.
 
+<Aside type="caution" title="Los canales no proporcionan confidencialidad">
+Los canales controlan la elegibilidad de actualización, no el secreto del bundle. Aunque un canal sea privado o tenga desactivada la autoasignación, cualquier bundle sin cifrar subido a Capgo debe seguir tratándose como un activo público entregado a los clientes. El cifrado protege la ruta de entrega y la autenticidad de las actualizaciones, pero los bundles distribuidos todavía pueden ser objeto de ingeniería inversa desde la app distribuida con suficiente esfuerzo porque la clave pública forma parte del cliente. Consulta [el cifrado de Live Updates](/docs/live-updates/encryption/) para más detalles.
+</Aside>
+
 ## Cómo un dispositivo elige un canal (precedencia)
 
 Cuando un dispositivo verifica una actualización, Capgo decide qué canal usar en este orden estricto (prioridad más alta primero):

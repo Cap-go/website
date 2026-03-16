@@ -56,6 +56,10 @@ Over-the-Air (OTA)アップデート機能は、HTML、CSS、JavaScriptファイ
 Capacitorプラグインの更新などネイティブコードを変更する場合は、アプリストアに再提出して承認を得る必要があります。
 </Aside>
 
+<Aside type="caution" title="バンドルの機密性">
+Capgoの暗号化を有効にしない限り、Capgoにアップロードしたすべてのバンドルは公開Webアセットとして扱ってください。プライベートチャンネルはどのデバイスがアップデートを受け取れるかを制御しますが、アップロードされたバンドルを機密にはしません。暗号化は配信経路を保護し、第三者が有効な暗号化アップデートを生成することを防ぎますが、公開鍵がバイナリに含まれて配布されるため、配信済みのWebアセットは十分な労力をかければアプリからリバースエンジニアリングできます。[Live Updatesの暗号化](/docs/live-updates/encryption/)を参照してください。
+</Aside>
+
 ## Discordコミュニティに参加する
 
 [Capacitor-updater Discordサーバーに参加しましょう！](https://discordcom/invite/VnYRvBfgA6)

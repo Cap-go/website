@@ -14,7 +14,15 @@ Capgo fornisce una solida crittografia end-to-end per i bundle della tua app, ga
 
 Il sistema di crittografia di Capgo utilizza metodi crittografici standard del settore per proteggere i tuoi bundle dall'accesso non autorizzato. Quando la crittografia è abilitata, i tuoi bundle vengono crittografati prima di lasciare il tuo ambiente di sviluppo e rimangono crittografati fino a quando non vengono decrittografati dalla tua app sul dispositivo dell'utente.
 
-**Vera crittografia end-to-end**: A differenza di altre piattaforme di aggiornamento OTA che si limitano a firmare gli aggiornamenti (lasciando il codice leggibile pubblicamente), Capgo fornisce vera crittografia end-to-end. Questo significa che solo i tuoi utenti possono decrittografare i tuoi aggiornamenti - nessun altro, incluso Capgo stesso. Il contenuto del tuo bundle rimane completamente privato e illeggibile durante l'intero processo di distribuzione.
+**Cosa protegge davvero la crittografia**: A differenza dei sistemi OTA che si limitano a firmare gli aggiornamenti, Capgo crittografa il bundle caricato prima dell'archiviazione e della distribuzione. Questo protegge il contenuto del bundle da accessi casuali durante transito e archiviazione e garantisce che solo chi possiede la tua chiave privata possa produrre un aggiornamento crittografato valido. **Non** rende impossibile fare reverse engineering delle risorse web distribuite: la chiave pubblica che il client usa per decrittografare gli aggiornamenti è distribuita dentro l'app, quindi un attaccante determinato può comunque estrarla e ispezionare il contenuto del bundle con sufficiente impegno.
+
+<Aside type="note" title="Quando hai bisogno della crittografia">
+Se carichi un bundle senza crittografia, trattalo come una risorsa pubblica. I canali privati limitano quali dispositivi ricevono un aggiornamento, ma non rendono riservato il bundle caricato. La crittografia è utile quando desideri una protezione migliore durante archiviazione e transito e quando vuoi che solo i titolari della chiave privata possano pubblicare aggiornamenti crittografati validi. Non garantisce che JavaScript, HTML o CSS distribuiti non possano mai essere ispezionati.
+</Aside>
+
+<Aside type="caution" title="Modello di minaccia">
+La crittografia di Capgo protegge dalla divulgazione del bundle da parte di Capgo, provider di storage, CDN o chiunque veda solo l'artefatto crittografato di distribuzione. Impedisce inoltre a terzi di generare aggiornamenti crittografati validi senza la tua chiave privata. Poiché la chiave pubblica è incorporata nell'app distribuita per permettere al client di decrittografare gli aggiornamenti, qualcuno che possiede il binario della tua app e ha sufficiente motivazione può comunque recuperare il materiale di chiave necessario per ispezionare il bundle.
+</Aside>
 
 <Aside type="tip">
 
@@ -65,15 +73,15 @@ RSA non può crittografare grandi quantità di dati in modo efficiente, quindi A
 
 | Caratteristica | Capgo | Altre piattaforme OTA |
 |---------|-------|-------------------|
-| **Contenuto del bundle** | Completamente crittografato (illeggibile) | Leggibile pubblicamente |
+| **Contenuto del bundle** | Crittografato in archiviazione e transito; ancora ispezionabile da un reverse engineer determinato con il binario dell'app | Leggibile pubblicamente |
 | **Metodo di sicurezza** | Vera crittografia end-to-end | Solo firma del codice |
-| **Livello di privacy** | Zero-knowledge (nemmeno Capgo può leggere il tuo codice) | La piattaforma può accedere al tuo codice |
+| **Livello di privacy** | Forte protezione in distribuzione e archiviazione; non anti-reverse-engineering | La piattaforma può accedere al tuo codice |
 | **Protezione** | Contenuto + integrità + autenticità | Solo integrità + autenticità |
 
 **Perché è importante:**
 - **La firma del codice** verifica solo che gli aggiornamenti non siano stati manomessi e provengano dalla fonte corretta
-- **La crittografia end-to-end** garantisce che il contenuto effettivo del tuo codice rimanga privato e illeggibile durante la trasmissione e l'archiviazione
-- Con la vera crittografia end-to-end di Capgo, solo i tuoi utenti possono decrittografare gli aggiornamenti - nessun altro, incluso Capgo stesso
+- **La crittografia di Capgo** protegge il bundle mentre viene archiviato e distribuito e rende molto più difficile falsificare aggiornamenti crittografati perché un attaccante avrebbe bisogno della tua chiave privata
+- **Il reverse engineering resta possibile** dopo la distribuzione dell'app, perché il client contiene la chiave pubblica necessaria per decrittografare e caricare l'aggiornamento
 
 ## Metodi di crittografia
 

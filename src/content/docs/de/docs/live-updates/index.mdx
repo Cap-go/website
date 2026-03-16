@@ -17,6 +17,10 @@ Live Updates sind auf JavaScript-Bundle-Änderungen beschränkt. Wenn Sie native
 
 </Aside>
 
+<Aside type="caution" title="Modell öffentlicher Assets">
+Unverschlüsselte Bundles, die zu Capgo hochgeladen werden, sollten als öffentliche Auslieferungsartefakte behandelt werden. Kanäle bestimmen, welchen Geräten ein Update angeboten wird, aber die Privatsphäre eines Kanals macht das zugrunde liegende Bundle nicht vertraulich. Verschlüsselung bietet Schutz in Speicher und Übertragung und verhindert, dass Dritte gültige verschlüsselte Updates erzeugen, macht ausgelieferte Web-Assets aber nicht unmöglich zu untersuchen, weil die App den öffentlichen Schlüssel zur Entschlüsselung enthält. Siehe [Ende-zu-Ende-Verschlüsselung](/docs/live-updates/encryption/) für das genaue Bedrohungsmodell.
+</Aside>
+
 ## Wie Live Updates funktionieren
 
 Das Live Update-System von Capgo hat zwei Schlüsselkomponenten:

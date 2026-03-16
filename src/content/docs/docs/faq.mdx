@@ -36,7 +36,7 @@ See [Teams](https://capgo.app/pricing/) for more information.
 No. Capgo servers never see your source code. When you run `npx @capgo/cli@latest bundle upload`, Capgo stores a zip file of the minified/compiled code - the same code that a browser would receive, not your source code. 
 
 For additional security, you have two options:
-- **End-to-End Encryption**: Encrypt your bundle before uploading, making it impossible for Capgo to read or modify the contents
+- **End-to-End Encryption**: Encrypt your bundle before uploading to protect it in storage and transit and to prevent third parties from generating valid encrypted updates without your private key. This does not make shipped web assets impossible to reverse engineer because the public key is present in the distributed app.
 - **External URL Upload**: Store the bundle on your own server and only provide Capgo with the download link with the option `--external <url>`
 
 See also our privacy policy: [https://capgo.app/privacy](https://capgo.app/privacy/)
