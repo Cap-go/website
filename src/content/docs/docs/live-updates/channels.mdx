@@ -9,6 +9,10 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 A Live Update channel points to a specific JS bundle build of your app that will be shared with any devices configured to listen to that channel for updates. When you [install the Capgo Live Updates SDK](/docs/getting-started/quickstart/) in your app, any native binary configured to that channel will check for available updates whenever the app is launched. You can change the build a channel points to at any time and can also roll back to previous builds if needed.
 
+<Aside type="caution" title="Channels Do Not Provide Confidentiality">
+Channels control update eligibility, not bundle secrecy. Even if a channel is private or self-assignment is disabled, any unencrypted bundle uploaded to Capgo should still be treated as a public asset delivered to clients. Encryption protects the delivery path and authenticity of updates, but shipped bundles can still be reverse engineered from the distributed app with enough effort because the public key is part of the client. See [Live Update encryption](/docs/live-updates/encryption/) for details.
+</Aside>
+
 ## How a device picks a channel (precedence)
 
 When a device checks for an update, Capgo decides which channel to use in this strict order (highest priority first):
