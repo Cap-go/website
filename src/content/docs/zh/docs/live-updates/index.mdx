@@ -17,6 +17,10 @@ import { Steps, CardGrid, Card, Aside } from '@astrojs/starlight/components';
 
 </Aside>
 
+<Aside type="caution" title="公开资产模型">
+上传到 Capgo 的未加密 bundle 应被视为公开的交付工件。渠道决定哪些设备会被提供更新，但渠道的私有性不会让底层 bundle 变成机密。加密会在存储和传输阶段增加保护，并阻止第三方生成有效的加密更新，但它并不会让已交付的 Web 资产变得无法检查，因为应用本身包含了解密所需的公钥。请参阅 [端到端加密](/docs/live-updates/encryption/) 了解准确的威胁模型。
+</Aside>
+
 ## 实时更新如何工作
 
 Capgo 的实时更新系统有两个关键组件：

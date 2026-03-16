@@ -10,6 +10,10 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 实时更新渠道指向您的应用的特定 JS bundle 构建,该构建将与配置为监听该渠道更新的任何设备共享。当您在应用中[安装 Capgo 实时更新 SDK](/docs/getting-started/quickstart/)时,配置为该渠道的任何原生二进制文件都将在应用启动时检查可用更新。您可以随时更改渠道指向的构建,如果需要,还可以回滚到以前的构建。
 
+<Aside type="caution" title="渠道不提供机密性">
+渠道控制的是更新资格，而不是 bundle 的保密性。即使某个渠道是私有的，或者禁用了自分配，上传到 Capgo 的任何未加密 bundle 仍然应被视为交付给客户端的公开资产。加密会保护交付路径和更新真实性，但由于公钥是客户端的一部分，已交付的 bundle 仍可能在付出足够努力后从已发布应用中被逆向分析。详情请参阅 [Live Updates 加密](/docs/live-updates/encryption/)。
+</Aside>
+
 ## 设备如何选择渠道(优先级)
 
 当设备检查更新时,Capgo 按以下严格顺序决定使用哪个渠道(优先级从高到低):

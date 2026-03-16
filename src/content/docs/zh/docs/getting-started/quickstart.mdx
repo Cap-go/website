@@ -58,6 +58,10 @@ import { Card, CardGrid, Steps, LinkCard, Aside } from '@astrojs/starlight/compo
 如果您对原生代码进行任何更改,例如更新 Capacitor 插件,则必须重新提交应用到应用商店以获得批准。
 </Aside>
 
+<Aside type="caution" title="Bundle 机密性">
+除非您启用了 Capgo 加密，否则应将上传到 Capgo 的每个 bundle 视为公开的 Web 资产。私有渠道只控制哪些设备有资格接收更新，并不会让已上传的 bundle 变成机密内容。加密可以保护交付链路并阻止第三方生成有效的加密更新，但由于公钥会随二进制一起分发，已交付的 Web 资产仍然可能在付出足够努力后从应用中被逆向分析。请参阅 [Live Updates 加密](/docs/live-updates/encryption/)。
+</Aside>
+
 ## 加入 Discord 社区
 
 [加入 Capgo Discord 服务器!](https://discord.capgo.app)

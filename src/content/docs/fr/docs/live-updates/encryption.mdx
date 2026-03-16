@@ -12,13 +12,17 @@ Capgo propose un chiffrement de bout en bout pour vos bundles OTA. Vos assets et
 
 ## Aperçu
 
-Le système utilise des primitives cryptographiques standard pour garantir :
+Le système utilise des primitives cryptographiques standard pour protéger le bundle pendant le stockage et la distribution, garantir l'intégrité des fichiers et garantir l'authenticité des mises à jour.
 
-- la confidentialité du contenu
-- l'intégrité des fichiers
-- l'authenticité des mises à jour
+**Ce que le chiffrement protège réellement :** contrairement à une simple signature de bundle, Capgo chiffre le bundle envoyé avant le stockage et la distribution. Cela protège le contenu contre un accès opportuniste pendant le transit ou dans le stockage et garantit que seule une personne disposant de votre clé privée peut produire une mise à jour chiffrée valide. Cela ne rend **pas** les assets web distribués impossibles à analyser par rétro-ingénierie : la clé publique utilisée par le client pour déchiffrer les mises à jour est embarquée dans l'application, donc un attaquant motivé peut encore l'extraire et inspecter le contenu du bundle.
 
-**Différence clé :** contrairement à une simple signature de bundle, le contenu lui-même est chiffré. Même Capgo ne peut pas lire votre code en clair.
+<Aside type="note" title="Quand utiliser le chiffrement">
+Si vous envoyez un bundle sans chiffrement, traitez-le comme un asset public. Les canaux privés limitent quels appareils reçoivent une mise à jour, mais ils ne rendent pas le bundle envoyé confidentiel. Le chiffrement est utile pour mieux protéger le stockage et le transit et pour faire en sorte que seuls les détenteurs de la clé privée puissent publier des mises à jour chiffrées valides. Il ne garantit pas qu'un JavaScript, HTML ou CSS distribué ne pourra jamais être inspecté.
+</Aside>
+
+<Aside type="caution" title="Modèle de menace">
+Le chiffrement Capgo protège contre la divulgation du bundle par Capgo, un fournisseur de stockage, un CDN ou toute personne qui ne voit que l'artefact chiffré. Il empêche également des tiers de générer des mises à jour chiffrées valides sans votre clé privée. Comme la clé publique est embarquée dans l'application distribuée pour permettre au client de déchiffrer les mises à jour, une personne disposant de votre binaire et d'assez de motivation peut malgré tout récupérer le matériau nécessaire pour inspecter le bundle.
+</Aside>
 
 <Aside type="tip">
 Le chiffrement est particulièrement utile pour les applications sensibles (finance, santé, B2B, logique métier propriétaire).
@@ -60,9 +64,9 @@ AES chiffre les gros volumes efficacement; RSA protège la clé AES et les donn�
 
 | Fonctionnalité | Capgo | Plateformes OTA classiques |
 |---|---|---|
-| Contenu bundle | Chiffré de bout en bout | Souvent lisible en clair |
-| Garantie | Confidentialité + intégrité + authenticité | Intégrité + authenticité |
-| Confidentialité code | Élevée | Limitée |
+| Contenu bundle | Chiffré en stockage et en transit, mais encore inspectable par rétro-ingénierie avec le binaire | Souvent lisible en clair |
+| Garantie | Contenu + intégrité + authenticité | Intégrité + authenticité |
+| Confidentialité code | Protection forte en distribution et stockage, pas anti-rétro-ingénierie | Limitée |
 
 ## Versions de chiffrement
 

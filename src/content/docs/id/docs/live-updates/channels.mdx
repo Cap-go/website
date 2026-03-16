@@ -10,6 +10,10 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 Channel Live Update mengarah ke build bundle JS tertentu dari aplikasi Anda yang akan dibagikan dengan perangkat yang dikonfigurasi untuk mendengarkan channel tersebut untuk pembaruan. Ketika Anda [menginstal Capgo Live Updates SDK](/docs/getting-started/quickstart/) di aplikasi Anda, setiap binary native yang dikonfigurasi ke channel tersebut akan memeriksa pembaruan yang tersedia setiap kali aplikasi diluncurkan. Anda dapat mengubah build yang ditunjuk channel kapan saja dan juga dapat kembali ke build sebelumnya jika diperlukan.
 
+<Aside type="caution" title="Channel tidak memberikan kerahasiaan">
+Channel mengontrol kelayakan pembaruan, bukan kerahasiaan bundle. Bahkan jika sebuah channel bersifat privat atau self-assignment dinonaktifkan, bundle tanpa enkripsi yang diunggah ke Capgo tetap harus diperlakukan sebagai aset publik yang dikirim ke klien. Enkripsi melindungi jalur distribusi dan keaslian pembaruan, tetapi bundle yang dikirim masih dapat direkayasa balik dari aplikasi terdistribusi dengan usaha yang cukup karena kunci publik merupakan bagian dari klien. Lihat [enkripsi Live Updates](/docs/live-updates/encryption/) untuk detailnya.
+</Aside>
+
 ## Bagaimana Perangkat Memilih Channel (Prioritas)
 
 Ketika perangkat memeriksa pembaruan, Capgo memutuskan channel mana yang akan digunakan dalam urutan ketat ini (prioritas tertinggi lebih dulu):

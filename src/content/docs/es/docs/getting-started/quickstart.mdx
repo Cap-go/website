@@ -58,6 +58,10 @@ La función de actualización Over-the-Air (OTA) solo es aplicable para modifica
 Si realizas cambios en el código nativo, como actualizaciones de Plugins de Capacitor, es obligatorio volver a enviar la aplicación a la tienda de aplicaciones para su aprobación.
 </Aside>
 
+<Aside type="caution" title="Confidencialidad del Bundle">
+Trata cada bundle subido a Capgo como un activo web público a menos que actives el cifrado de Capgo. Los canales privados controlan qué dispositivos pueden recibir una actualización, pero no hacen confidencial el bundle subido. El cifrado protege la ruta de entrega y evita que terceros generen actualizaciones cifradas válidas, pero los activos web distribuidos todavía pueden ser objeto de ingeniería inversa desde la app con suficiente esfuerzo porque la clave pública se distribuye en el binario. Consulta [el cifrado de Live Updates](/docs/live-updates/encryption/).
+</Aside>
+
 ## Únete a la Comunidad de Discord
 
 [¡Únete al Servidor de Discord de Capgo!](https://discord.capgo.app)
