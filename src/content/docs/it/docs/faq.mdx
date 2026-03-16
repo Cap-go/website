@@ -34,7 +34,7 @@ Vedi [Teams](https://capgo.app/pricing/) per maggiori informazioni.
 
 ### Capgo memorizza il mio codice sorgente?
 
-No. I server Capgo non vedono mai il tuo codice sorgente. Quando esegui `npx @capgo/cli app update`, il tool `npx @capgo/cli` carica solo lo stesso codice compilato che invii agli app store. Se desideri ulteriore sicurezza, puoi utilizzare la crittografia End to End per crittografare il tuo bundle prima di caricarlo sui server Capgo.
+No. I server Capgo non vedono mai il tuo codice sorgente. Quando esegui `npx @capgo/cli app update`, il tool `npx @capgo/cli` carica solo lo stesso codice compilato che invii agli app store. Se desideri ulteriore sicurezza, puoi utilizzare la crittografia End to End per crittografare il tuo bundle prima di caricarlo sui server Capgo. Questo protegge il bundle durante archiviazione e transito e impedisce a terzi di generare aggiornamenti crittografati validi senza la tua chiave privata, ma non rende impossibile fare reverse engineering delle risorse web distribuite perché la chiave pubblica è presente nell'app distribuita.
 
 Vedi anche la nostra privacy policy: [https://capgo.app/privacy](https://capgo.app/privacy/)
 

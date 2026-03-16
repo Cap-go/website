@@ -58,6 +58,10 @@ Die Over-the-Air (OTA) Update-Funktion gilt nur für Änderungen an HTML-, CSS- 
 Wenn Sie Änderungen am nativen Code vornehmen, wie z.B. Updates von Capacitor-Plugins, müssen Sie die Anwendung erneut zur Genehmigung im App Store einreichen.
 </Aside>
 
+<Aside type="caution" title="Vertraulichkeit von Bundles">
+Behandeln Sie jedes zu Capgo hochgeladene Bundle als öffentliches Web-Asset, sofern Sie die Capgo-Verschlüsselung nicht aktivieren. Private Kanäle steuern, welche Geräte ein Update erhalten dürfen, machen das hochgeladene Bundle aber nicht vertraulich. Die Verschlüsselung schützt den Auslieferungsweg und verhindert, dass Dritte gültige verschlüsselte Updates erzeugen, aber ausgelieferte Web-Assets können mit genügend Aufwand weiterhin aus der App rückentwickelt werden, weil der öffentliche Schlüssel im Binärpaket verteilt wird. Siehe [Live-Update-Verschlüsselung](/docs/live-updates/encryption/).
+</Aside>
+
 ## Discord Community beitreten
 
 [Treten Sie dem Capgo Discord Server bei!](https://discord.capgo.app)

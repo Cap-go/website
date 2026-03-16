@@ -6,6 +6,9 @@ on:
     # Run every first day at 00:00 AM every month.
     - cron: '0 0 * * *'
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
 jobs:
   markdown-link-check:
     runs-on: ubuntu-latest

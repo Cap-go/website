@@ -14,7 +14,15 @@ Capgo bietet robuste Ende-zu-Ende-Verschlüsselung für Ihre App-Bundles und ste
 
 Das Verschlüsselungssystem von Capgo verwendet branchenübliche kryptografische Methoden, um Ihre Bundles vor unbefugtem Zugriff zu schützen. Wenn die Verschlüsselung aktiviert ist, werden Ihre Bundles verschlüsselt, bevor sie Ihre Entwicklungsumgebung verlassen, und bleiben verschlüsselt, bis sie von Ihrer App auf dem Gerät des Benutzers entschlüsselt werden.
 
-**Echte Ende-zu-Ende-Verschlüsselung**: Im Gegensatz zu anderen OTA-Update-Plattformen, die nur Updates signieren (wobei der Code öffentlich lesbar bleibt), bietet Capgo echte Ende-zu-Ende-Verschlüsselung. Das bedeutet, dass nur Ihre Benutzer Ihre Updates entschlüsseln können - niemand sonst, einschließlich Capgo selbst. Ihr Bundle-Inhalt bleibt während des gesamten Bereitstellungsprozesses vollständig privat und unlesbar.
+**Was die Verschlüsselung tatsächlich schützt**: Im Gegensatz zu OTA-Systemen, die Updates nur signieren, verschlüsselt Capgo das hochgeladene Bundle vor Speicherung und Auslieferung. Das schützt den Bundle-Inhalt vor beiläufigem Zugriff in Speicher und Übertragung und stellt sicher, dass nur jemand mit Ihrem privaten Schlüssel ein gültiges verschlüsseltes Update erzeugen kann. Sie macht ausgelieferte Web-Assets **nicht** unmöglich rückzuentwickeln: Der öffentliche Schlüssel, den der Client zum Entschlüsseln von Updates verwendet, ist in der App enthalten, sodass ein entschlossener Angreifer ihn mit genügend Aufwand extrahieren und den Bundle-Inhalt untersuchen kann.
+
+<Aside type="note" title="Wann Sie Verschlüsselung benötigen">
+Wenn Sie ein Bundle ohne Verschlüsselung hochladen, behandeln Sie es als öffentliches Asset. Private Kanäle begrenzen, welche Geräte ein Update erhalten, machen das hochgeladene Bundle aber nicht vertraulich. Verschlüsselung ist nützlich, wenn Sie besseren Schutz in Speicher und Übertragung möchten und wenn nur Inhaber des privaten Schlüssels gültige verschlüsselte Updates veröffentlichen können sollen. Sie garantiert nicht, dass ausgeliefertes JavaScript, HTML oder CSS niemals untersucht werden kann.
+</Aside>
+
+<Aside type="caution" title="Bedrohungsmodell">
+Die Capgo-Verschlüsselung schützt vor einer Offenlegung des Bundles durch Capgo, Speicheranbieter, CDNs oder Personen, die nur das verschlüsselte Auslieferungsartefakt sehen. Sie verhindert außerdem, dass Dritte ohne Ihren privaten Schlüssel gültige verschlüsselte Updates erzeugen. Weil der öffentliche Schlüssel in die verteilte App eingebettet ist, damit der Client Updates entschlüsseln kann, kann jemand mit Ihrer App-Binary und genug Motivation trotzdem das für die Analyse des Bundles nötige Schlüsselmaterial wiedergewinnen.
+</Aside>
 
 <Aside type="tip">
 
@@ -65,15 +73,15 @@ RSA kann große Datenmengen nicht effizient verschlüsseln, daher wird AES für 
 
 | Merkmal | Capgo | Andere OTA-Plattformen |
 |---------|-------|-------------------|
-| **Bundle-Inhalt** | Vollständig verschlüsselt (unlesbar) | Öffentlich lesbar |
+| **Bundle-Inhalt** | In Speicher und Übertragung verschlüsselt; mit der App-Binary für entschlossene Reverse Engineers weiterhin untersuchbar | Öffentlich lesbar |
 | **Sicherheitsmethode** | Echte Ende-zu-Ende-Verschlüsselung | Nur Code-Signierung |
-| **Datenschutzniveau** | Zero-Knowledge (selbst Capgo kann Ihren Code nicht lesen) | Plattform kann auf Ihren Code zugreifen |
+| **Datenschutzniveau** | Starker Schutz bei Auslieferung und Speicherung; kein Schutz vor Reverse Engineering | Plattform kann auf Ihren Code zugreifen |
 | **Schutz** | Inhalt + Integrität + Authentizität | Nur Integrität + Authentizität |
 
 **Warum das wichtig ist:**
 - **Code-Signierung** überprüft nur, dass Updates nicht manipuliert wurden und aus der richtigen Quelle stammen
-- **Ende-zu-Ende-Verschlüsselung** stellt sicher, dass Ihr tatsächlicher Code-Inhalt während der Übertragung und Speicherung privat und unlesbar bleibt
-- Mit Capgos echter Ende-zu-Ende-Verschlüsselung können nur Ihre Benutzer Updates entschlüsseln - niemand sonst, einschließlich Capgo selbst
+- **Capgo-Verschlüsselung** schützt das Bundle während Speicherung und Auslieferung und erschwert gefälschte verschlüsselte Updates erheblich, weil ein Angreifer dafür Ihren privaten Schlüssel bräuchte
+- **Reverse Engineering bleibt möglich**, nachdem die App ausgeliefert wurde, weil der Client den öffentlichen Schlüssel enthält, der zum Entschlüsseln und Laden des Updates benötigt wird
 
 ## Verschlüsselungsmethoden
 

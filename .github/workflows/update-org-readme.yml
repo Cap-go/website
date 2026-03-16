@@ -11,6 +11,9 @@ on:
       - 'src/data/npm-downloads.json'
       - 'scripts/generate-plugins-readme.ts'
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
 jobs:
   update-readme:
     runs-on: ubuntu-latest

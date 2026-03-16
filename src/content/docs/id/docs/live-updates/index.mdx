@@ -17,6 +17,10 @@ Live Updates terbatas pada perubahan bundel JavaScript. Jika Anda perlu memperba
 
 </Aside>
 
+<Aside type="caution" title="Model Aset Publik">
+Bundle tanpa enkripsi yang diunggah ke Capgo harus diperlakukan sebagai artefak distribusi publik. Channel menentukan perangkat mana yang ditawari pembaruan, tetapi privasi channel tidak membuat bundle dasarnya menjadi rahasia. Enkripsi menambah perlindungan saat penyimpanan dan transit serta mencegah pihak ketiga menghasilkan pembaruan terenkripsi yang valid, tetapi tidak membuat aset web yang dikirim mustahil untuk diperiksa karena aplikasi berisi kunci publik yang dibutuhkan untuk mendekripsinya. Lihat [enkripsi end-to-end](/docs/live-updates/encryption/) untuk model ancaman yang tepat.
+</Aside>
+
 ## Cara Kerja Live Updates
 
 Sistem Live Update Capgo memiliki dua komponen utama:

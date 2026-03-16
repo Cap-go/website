@@ -34,7 +34,7 @@ Lihat [Teams](https://capgo.app/pricing/) untuk informasi lebih lanjut.
 
 ### Apakah Capgo menyimpan kode sumber saya?[](https://capgo.app/docs/faq/#does-capgo-store-my-source-code "Direct link to Does Capgo store my source code?")
 
-Tidak. Server Capgo tidak pernah melihat kode sumber Anda. Ketika Anda menjalankan `npx @capgo/cli app update`, alat `npx @capgo/cli` hanya mengunggah kode yang sama yang dikompilasi yang Anda kirim ke app store. Jika Anda menginginkan keamanan tambahan, Anda dapat menggunakan enkripsi End to End untuk mengenkripsi bundle Anda sebelum mengunggahnya ke server Capgo.
+Tidak. Server Capgo tidak pernah melihat kode sumber Anda. Ketika Anda menjalankan `npx @capgo/cli app update`, alat `npx @capgo/cli` hanya mengunggah kode yang sama yang dikompilasi yang Anda kirim ke app store. Jika Anda menginginkan keamanan tambahan, Anda dapat menggunakan enkripsi End to End untuk mengenkripsi bundle Anda sebelum mengunggahnya ke server Capgo. Ini melindungi bundle saat penyimpanan dan transit serta mencegah pihak ketiga menghasilkan pembaruan terenkripsi yang valid tanpa kunci privat Anda, tetapi tidak membuat aset web yang dikirim mustahil untuk direkayasa balik karena kunci publik ada di aplikasi yang didistribusikan.
 
 Lihat juga kebijakan privasi kami: [https://capgo.app/privacy](https://capgo.app/privacy/)
 
