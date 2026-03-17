@@ -6,6 +6,7 @@ on:
 jobs:
   translate-all-blogs:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v6
       - uses: oven-sh/setup-bun@v2
@@ -39,4 +40,3 @@ jobs:
         with:
           branch: ${{ github.ref }} 
           github_token: ${{ secrets.GITHUB_TOKEN }}
-
