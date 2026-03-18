@@ -323,7 +323,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-blue-500 to-blue-700 flex flex-col items-center justify-center p-6 text-white">
+    <main className="min-h-screen bg-linear-to-b from-blue-500 to-blue-700 flex flex-col items-center justify-center p-6 text-white">
       <h1 className="text-4xl font-bold mb-4">My Mobile App</h1>
       <p className="text-xl mb-8 text-center opacity-90">
         Built with Next.js 15 + Capacitor 8

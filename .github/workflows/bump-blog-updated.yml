@@ -11,6 +11,7 @@ env:
 jobs:
   bump-blog-updated:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     # Skip if the commit message contains our auto-bump signature
     if: "!contains(github.event.head_commit.message, 'chore: auto-bump updated_at dates')"
     steps:

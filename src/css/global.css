@@ -19,6 +19,11 @@ body,
 }
 
 @theme {
+  /* Typography tokens used by font-pj/font-prompt/font-inter utilities */
+  --font-pj: 'AirbnbCerealBold', 'AirbnbCerealMedium', ui-sans-serif, system-ui, sans-serif;
+  --font-prompt: 'AirbnbCerealBold', 'AirbnbCerealMedium', ui-sans-serif, system-ui, sans-serif;
+  --font-inter: 'AirbnbCerealMedium', ui-sans-serif, system-ui, sans-serif;
+
   /* Gray colors */
   --color-gray-50: oklch(0.984 0.003 247.858);
   --color-gray-100: oklch(0.968 0.007 247.896);
