@@ -1,11 +1,137 @@
 ---
+import ArchiveBoxArrowDown from 'astro-heroicons/mini/ArchiveBoxArrowDown.astro'
+import ArchiveBox from 'astro-heroicons/mini/ArchiveBox.astro'
+import ArrowPath from 'astro-heroicons/mini/ArrowPath.astro'
+import ArrowsPointingOut from 'astro-heroicons/mini/ArrowsPointingOut.astro'
+import ArrowUpOnSquare from 'astro-heroicons/mini/ArrowUpOnSquare.astro'
+import ArrowsRightLeft from 'astro-heroicons/mini/ArrowsRightLeft.astro'
+import Bars3 from 'astro-heroicons/mini/Bars3.astro'
+import Bell from 'astro-heroicons/mini/Bell.astro'
+import Bolt from 'astro-heroicons/mini/Bolt.astro'
+import Camera from 'astro-heroicons/mini/Camera.astro'
+import ChartBar from 'astro-heroicons/mini/ChartBar.astro'
+import ChatBubbleLeft from 'astro-heroicons/mini/ChatBubbleLeft.astro'
+import ChatBubbleOvalLeft from 'astro-heroicons/mini/ChatBubbleOvalLeft.astro'
+import CircleStack from 'astro-heroicons/mini/CircleStack.astro'
+import CloudArrowDown from 'astro-heroicons/mini/CloudArrowDown.astro'
+import Cloud from 'astro-heroicons/mini/Cloud.astro'
+import Clock from 'astro-heroicons/mini/Clock.astro'
+import Cog from 'astro-heroicons/mini/Cog.astro'
+import CommandLine from 'astro-heroicons/mini/CommandLine.astro'
+import CpuChip from 'astro-heroicons/mini/CpuChip.astro'
+import CreditCard from 'astro-heroicons/mini/CreditCard.astro'
+import CurrencyDollar from 'astro-heroicons/mini/CurrencyDollar.astro'
+import DevicePhoneMobile from 'astro-heroicons/mini/DevicePhoneMobile.astro'
+import Document from 'astro-heroicons/mini/Document.astro'
+import DocumentText from 'astro-heroicons/mini/DocumentText.astro'
+import ExclamationTriangle from 'astro-heroicons/mini/ExclamationTriangle.astro'
+import Eye from 'astro-heroicons/mini/Eye.astro'
+import EyeSlash from 'astro-heroicons/mini/EyeSlash.astro'
+import Film from 'astro-heroicons/mini/Film.astro'
+import FingerPrint from 'astro-heroicons/mini/FingerPrint.astro'
+import Fire from 'astro-heroicons/mini/Fire.astro'
+import FolderOpen from 'astro-heroicons/mini/FolderOpen.astro'
+import Folder from 'astro-heroicons/mini/Folder.astro'
+import GlobeAlt from 'astro-heroicons/mini/GlobeAlt.astro'
+import Heart from 'astro-heroicons/mini/Heart.astro'
+import Home from 'astro-heroicons/mini/Home.astro'
+import LockClosed from 'astro-heroicons/mini/LockClosed.astro'
+import MapPin from 'astro-heroicons/mini/MapPin.astro'
+import Map from 'astro-heroicons/mini/Map.astro'
+import Megaphone from 'astro-heroicons/mini/Megaphone.astro'
+import Microphone from 'astro-heroicons/mini/Microphone.astro'
+import Phone from 'astro-heroicons/mini/Phone.astro'
+import Photo from 'astro-heroicons/mini/Photo.astro'
+import PlayCircle from 'astro-heroicons/mini/PlayCircle.astro'
+import Printer from 'astro-heroicons/mini/Printer.astro'
+import Radio from 'astro-heroicons/mini/Radio.astro'
+import RocketLaunch from 'astro-heroicons/mini/RocketLaunch.astro'
+import Share from 'astro-heroicons/mini/Share.astro'
+import ShieldCheck from 'astro-heroicons/mini/ShieldCheck.astro'
+import ShieldExclamation from 'astro-heroicons/mini/ShieldExclamation.astro'
+import Signal from 'astro-heroicons/mini/Signal.astro'
+import SpeakerWave from 'astro-heroicons/mini/SpeakerWave.astro'
+import SpeakerXMark from 'astro-heroicons/mini/SpeakerXMark.astro'
+import Star from 'astro-heroicons/mini/Star.astro'
+import Sun from 'astro-heroicons/mini/Sun.astro'
+import Tag from 'astro-heroicons/mini/Tag.astro'
+import UserCircle from 'astro-heroicons/mini/UserCircle.astro'
+import UserGroup from 'astro-heroicons/mini/UserGroup.astro'
+import VideoCamera from 'astro-heroicons/mini/VideoCamera.astro'
+import Wifi from 'astro-heroicons/mini/Wifi.astro'
+
 interface Props {
-  icon: any;
-  name: string;
-  className?: string;
+  icon: string
+  name: string
+  className?: string
 }
 
-const { icon: Icon, name, className = "" } = Astro.props;
+const { icon, name, className = '' } = Astro.props
+
+const icons = {
+  ArchiveBoxArrowDown,
+  ArchiveBox,
+  ArrowPath,
+  ArrowsPointingOut,
+  ArrowUpOnSquare,
+  ArrowsRightLeft,
+  Bars3,
+  Bell,
+  Bolt,
+  Camera,
+  ChartBar,
+  ChatBubbleLeft,
+  ChatBubbleOvalLeft,
+  CircleStack,
+  CloudArrowDown,
+  Cloud,
+  Clock,
+  Cog,
+  CommandLine,
+  CpuChip,
+  CreditCard,
+  CurrencyDollar,
+  DevicePhoneMobile,
+  Document,
+  DocumentText,
+  ExclamationTriangle,
+  Eye,
+  EyeSlash,
+  Film,
+  FingerPrint,
+  Fire,
+  FolderOpen,
+  Folder,
+  GlobeAlt,
+  Heart,
+  Home,
+  LockClosed,
+  MapPin,
+  Map,
+  Megaphone,
+  Microphone,
+  Phone,
+  Photo,
+  PlayCircle,
+  Printer,
+  Radio,
+  RocketLaunch,
+  Share,
+  ShieldCheck,
+  ShieldExclamation,
+  Signal,
+  SpeakerWave,
+  SpeakerXMark,
+  Star,
+  Sun,
+  Tag,
+  UserCircle,
+  UserGroup,
+  VideoCamera,
+  Wifi,
+} as const
+
+const Icon = icons[icon as keyof typeof icons] ?? Tag
 ---
 
 <div

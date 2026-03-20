@@ -1,3 +1,4 @@
+import cloudflare from '@astrojs/cloudflare'
 import sitemap from '@astrojs/sitemap'
 import starlight from '@astrojs/starlight'
 import starlightDocSearch from '@astrojs/starlight-docsearch'
@@ -15,8 +16,10 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 import config from './configs.json'
 import { defaultLocale, localeNames, locales } from './src/services/locale'
 
-// Get CPU count for optimal parallelization
-const CPU_COUNT = os.cpus().length
+// Prefer the scheduler-aware CPU count and keep a clear override for CI/local tuning.
+const AVAILABLE_PARALLELISM = typeof os.availableParallelism === 'function' ? os.availableParallelism() : os.cpus().length
+const BUILD_CONCURRENCY = Number.parseInt(process.env.BUILD_CONCURRENCY ?? '', 10)
+const CPU_COUNT = Number.isFinite(BUILD_CONCURRENCY) && BUILD_CONCURRENCY > 0 ? BUILD_CONCURRENCY : AVAILABLE_PARALLELISM
 const SRC_DIR = `${fileURLToPath(new URL('./src/', import.meta.url)).replace(/\\/g, '/').replace(/\/$/, '')}/`
 
 // Build a map of page paths to their lastmod dates for sitemap
@@ -63,14 +66,14 @@ const docsExpludes = locales.map((locale) => `${locale}/**`)
 export default defineConfig({
   trailingSlash: 'always',
   site: `https://${config.base_domain.prod}`,
-  output: 'static',
+  output: 'server',
+  adapter: cloudflare(),
   build: {
-    // Optimal concurrency based on benchmarks: CPU_COUNT is usually best
-    // Too high causes memory contention, too low underutilizes cores
+    // Use all available build workers by default; override with BUILD_CONCURRENCY when needed.
     concurrency: CPU_COUNT,
     // Skip HTML compression - let CDN handle it for faster builds
     compressHTML: false,
-    // Inline small stylesheets for performance
+    // Keep Astro's default stylesheet optimization behavior.
     inlineStylesheets: 'auto',
   },
   redirects: {
@@ -1519,10 +1522,13 @@ export default defineConfig({
     build: {
       // Target modern JS to reduce transpilation overhead
       target: 'es2022',
+      // Skip gzip/brotli size reporting during local builds.
+      reportCompressedSize: false,
       // Increase chunk size warning limit
       chunkSizeWarningLimit: 1000,
-      // Use esbuild for fastest minification (or disable for even faster builds)
+      // Keep both JS and CSS on esbuild for the fastest production minification path.
       minify: 'esbuild',
+      cssMinify: 'esbuild',
       // Reduce chunk fragmentation overhead
       rollupOptions: {
         output: {

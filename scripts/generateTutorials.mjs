@@ -9,7 +9,7 @@ import { PromptTemplate } from 'langchain/prompts'
 import { FaissStore } from 'langchain/vectorstores/faiss'
 import { appendFileSync, existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { z } from 'zod'
+import { z } from 'zod/v4'
 import { actions } from './action.mjs'
 
 async function loadVectorStore() {

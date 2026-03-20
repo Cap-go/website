@@ -2,16 +2,16 @@
   "type": "module",
   "name": "capgo-website",
   "scripts": {
-    "astro": "astro",
-    "dev": "export NODE_OPTIONS='--max-old-space-size=8192'; bun run fix_code_languages_all && astro dev",
-    "start": "astro dev",
+    "astro": "bunx --bun astro",
+    "dev": "bun run fix_code_languages_all && bunx --bun astro dev",
+    "start": "bunx --bun astro dev",
     "clean:build-cache": "rm -rf dist .astro/content-modules.mjs .astro/content-assets.mjs",
     "repair_sitemap": "bun run scripts/repair_sitemap.tsx",
     "fetch:stars": "bun run scripts/fetch-github-stars.ts",
     "fetch:downloads": "bun run scripts/fetch-npm-downloads.ts",
-    "just:build": "bun run clean:build-cache && export NODE_OPTIONS='--max-old-space-size=8192' UV_THREADPOOL_SIZE=16; astro build",
+    "just:build": "bun run clean:build-cache && UV_THREADPOOL_SIZE=16 bunx --bun astro build",
     "generate:plugins-readme": "bun run scripts/generate-plugins-readme.ts",
-    "build": "bun run clean:build-cache && export NODE_OPTIONS='--max-old-space-size=8192' UV_THREADPOOL_SIZE=16; astro build",
+    "build": "bun run clean:build-cache && UV_THREADPOOL_SIZE=16 bunx --bun astro build",
     "build:prepare": "bun run fetch:stars && bun run fetch:downloads && bun run generate:plugins-readme && bun run fix_code_languages_all",
     "build:after": "bun run repair_sitemap && bun run seo:check",
     "seo:check": "seo-checker --output github",
@@ -19,7 +19,7 @@
     "seo:check:report": "seo-checker --report seo-report.txt",
     "seo:check:local": "seo-checker",
     "seo:generate-config": "seo-checker --generate-config",
-    "preview": "wrangler dev",
+    "preview": "bunx --bun astro preview",
     "types": "bunx supabase gen types typescript --project-id=xvwzpoazmxkqosrdewyv > src/services/supabase.types.ts",
     "fmt": "prettier --write '**/*' --ignore-unknown",
     "blogs:translate_all": "bun run scripts/blogs/translate_all.tsx",
@@ -33,6 +33,9 @@
     "plugins:translate_all": "bun run scripts/generate_plugin_translations.tsx",
     "setup:new:locale": "bun run scripts/setup_new_locale.tsx",
     "clean:unused": "bun run scripts/clean_not_used.tsx"
+  },
+  "overrides": {
+    "vite": "8.0.0"
   },
   "dependencies": {
     "@astrojs/cloudflare": "13.1.1",
@@ -63,6 +66,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.7",
+    "@astrojs/compiler-rs": "^0.1.4",
     "@capgo/seo-checker": "^0.0.13",
     "@dotenvx/dotenvx": "^1.54.1",
     "@iconify-json/carbon": "^1.2.19",
@@ -93,7 +97,7 @@
     "seobot": "^1.4.0",
     "typescript": "^5.9.3",
     "vite-plugin-static-copy": "^3.2.0",
-    "wrangler": "^4.72.0",
-    "zod": "^3.25.76"
+    "wrangler": "^4.73.0",
+    "zod": "^4"
   }
 }

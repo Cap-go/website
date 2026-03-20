@@ -2,13 +2,12 @@ import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders'
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema'
 import { docSearchI18nSchema } from '@astrojs/starlight-docsearch/schema'
 import { glob } from 'astro/loaders'
-import { defineCollection } from 'astro:content'
-import { z } from 'astro/zod'
+import { defineCollection, z } from 'astro:content'
 import { locales, type Locales } from './services/locale'
 
 const localeSchema = z.custom<Locales>(
   (value) => typeof value === 'string' && locales.includes(value as Locales),
-  'Invalid locale',
+  { message: 'Invalid locale' },
 )
 
 const blog = defineCollection({
