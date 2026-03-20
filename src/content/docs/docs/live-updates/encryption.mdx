@@ -13,7 +13,15 @@ Capgo provides robust end-to-end encryption for your app bundles, ensuring that 
 
 Capgo's encryption system uses industry-standard cryptographic methods to protect your bundles from unauthorized access. When encryption is enabled, your bundles are encrypted before leaving your development environment and remain encrypted until they're decrypted by your app on the user's device.
 
-**True End-to-End Encryption**: Unlike other OTA update platforms that only sign updates (leaving the code publicly readable), Capgo provides true end-to-end encryption. This means only your users can decrypt your updates - no one else, including Capgo itself. Your bundle content remains completely private and unreadable throughout the entire delivery process.
+**What Encryption Actually Protects**: Unlike OTA systems that only sign updates, Capgo encrypts the uploaded bundle before storage and delivery. This protects the bundle contents from casual access in storage or transit and ensures only someone with your private key can produce a valid encrypted update. It does **not** make shipped web assets impossible to reverse engineer: the public key used by the client to decrypt updates is distributed in the app, so a determined attacker can still extract it and inspect bundle contents with enough effort.
+
+<Aside type="note" title="When You Need Encryption">
+If you upload a bundle without encryption, treat it as a public asset. Private channels limit which devices receive an update, but they do not make the uploaded bundle confidential. Encryption is useful when you want better protection in storage and transit and when you want only holders of the private key to be able to publish valid encrypted updates. It does not guarantee that shipped JavaScript, HTML, or CSS can never be inspected.
+</Aside>
+
+<Aside type="caution" title="Threat Model">
+Capgo encryption protects against bundle disclosure by Capgo, storage providers, CDNs, or anyone who only sees the encrypted delivery artifact. It also prevents third parties from generating valid encrypted updates without your private key. Because the public key is embedded in the distributed app so the client can decrypt updates, someone who has your app binary and enough motivation can still recover the key material needed to inspect the bundle.
+</Aside>
 
 <Aside type="tip">
 
@@ -64,15 +72,15 @@ RSA cannot encrypt large amounts of data efficiently, so AES is used for the act
 
 | Feature | Capgo | Other OTA Platforms |
 |---------|-------|-------------------|
-| **Bundle Content** | Fully encrypted (unreadable) | Publicly readable |
+| **Bundle Content** | Encrypted in storage/transit; still inspectable by a determined reverse engineer with the app binary | Publicly readable |
 | **Security Method** | True end-to-end encryption | Code signing only |
-| **Privacy Level** | Zero-knowledge (even Capgo can't read your code) | Platform can access your code |
+| **Privacy Level** | Strong delivery/storage protection; not anti-reverse-engineering | Platform can access your code |
 | **Protection** | Content + integrity + authenticity | Integrity + authenticity only |
 
 **Why This Matters:**
 - **Code signing** only verifies that updates haven't been tampered with and come from the right source
-- **End-to-end encryption** ensures that your actual code content remains private and unreadable during transmission and storage
-- With Capgo's true end-to-end encryption, only your users can decrypt updates - no one else, including Capgo itself
+- **Capgo encryption** protects the bundle while it is stored and delivered and makes forged encrypted updates much harder because the attacker would need your private key
+- **Reverse engineering is still possible** after the app ships, because the client contains the public key needed to decrypt and load the update
 
 ## Encryption Methods
 

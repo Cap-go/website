@@ -37,7 +37,7 @@ sidebar:
 不会。Capgo 服务器永远不会看到您的源代码。当您运行 `npx @capgo/cli@latest bundle upload` 时，Capgo 存储的是压缩/编译代码的 zip 文件 - 浏览器会接收的相同代码，而不是您的源代码。
 
 为了增强安全性，您有两个选项：
-- **端到端加密**：在上传之前加密您的 bundle，使 Capgo 无法读取或修改内容
+- **端到端加密**：在上传前对 bundle 进行加密，以在存储和传输阶段保护它，并阻止第三方在没有您私钥的情况下生成有效的加密更新。这并不会让已分发的 Web 资产完全无法被逆向分析，因为公钥存在于已分发的应用中。
 - **外部 URL 上传**：将 bundle 存储在您自己的服务器上，仅向 Capgo 提供下载链接，使用选项 `--external <url>`
 
 另请参阅我们的隐私政策：[https://capgo.app/privacy](https://capgo.app/privacy/)

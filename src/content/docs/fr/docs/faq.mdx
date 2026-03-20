@@ -39,7 +39,7 @@ Voir [Équipes](https://capgo.app/pricing/) pour plus d'informations.
 Non. Les serveurs Capgo ne voient jamais votre code source. Lorsque vous exécutez `npx @capgo/cli@latest bundle upload`, Capgo stocke un fichier zip du code minifié/compilé - le même code qu'un navigateur recevrait, pas votre code source. 
 
 Pour plus de sécurité, vous avez deux options :
-- **Chiffrement de bout en bout** : chiffrez votre bundle avant de le télécharger, ce qui empêche Capgo de lire ou de modifier le contenu.
+- **Chiffrement de bout en bout** : chiffrez votre bundle avant l'envoi pour le protéger pendant le stockage et le transit et pour empêcher des tiers de générer des mises à jour chiffrées valides sans votre clé privée. Cela ne rend pas les assets web distribués impossibles à rétroconcevoir, car la clé publique est présente dans l'application distribuée.
 - **Téléchargement d'URL externe** : stockez le bundle sur votre propre serveur et fournissez uniquement à Capgo le lien de téléchargement avec l'option `--external <url>`
 
 Voir également notre politique de confidentialité : [https://capgo.app/privacy](https://capgo.app/privacy/)

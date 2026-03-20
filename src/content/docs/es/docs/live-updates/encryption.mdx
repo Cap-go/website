@@ -14,7 +14,15 @@ Capgo proporciona un cifrado de extremo a extremo robusto para sus paquetes de a
 
 El sistema de cifrado de Capgo utiliza métodos criptográficos estándar de la industria para proteger sus paquetes del acceso no autorizado. Cuando el cifrado está habilitado, sus paquetes se cifran antes de salir de su entorno de desarrollo y permanecen cifrados hasta que son descifrados por su aplicación en el dispositivo del usuario.
 
-**Cifrado Verdadero de Extremo a Extremo**: A diferencia de otras plataformas de actualización OTA que solo firman actualizaciones (dejando el código públicamente legible), Capgo proporciona cifrado verdadero de extremo a extremo. Esto significa que solo sus usuarios pueden descifrar sus actualizaciones - nadie más, incluido Capgo mismo. El contenido de su paquete permanece completamente privado e ilegible durante todo el proceso de entrega.
+**Lo que el cifrado realmente protege**: A diferencia de los sistemas OTA que solo firman las actualizaciones, Capgo cifra el bundle cargado antes del almacenamiento y la entrega. Esto protege el contenido del bundle frente a accesos casuales en almacenamiento y tránsito y garantiza que solo alguien con su clave privada pueda producir una actualización cifrada válida. **No** hace imposible realizar ingeniería inversa sobre los activos web distribuidos: la clave pública que el cliente usa para descifrar las actualizaciones se distribuye dentro de la app, por lo que un atacante decidido aún puede extraerla e inspeccionar el contenido del bundle con suficiente esfuerzo.
+
+<Aside type="note" title="Cuándo necesita cifrado">
+Si sube un bundle sin cifrado, trátelo como un activo público. Los canales privados limitan qué dispositivos reciben una actualización, pero no hacen confidencial el bundle cargado. El cifrado es útil cuando desea una mejor protección en almacenamiento y tránsito y cuando quiere que solo quienes poseen la clave privada puedan publicar actualizaciones cifradas válidas. No garantiza que el JavaScript, HTML o CSS distribuido nunca pueda ser inspeccionado.
+</Aside>
+
+<Aside type="caution" title="Modelo de amenazas">
+El cifrado de Capgo protege contra la exposición del bundle por parte de Capgo, proveedores de almacenamiento, CDN o cualquier persona que solo vea el artefacto cifrado de entrega. También evita que terceros generen actualizaciones cifradas válidas sin su clave privada. Como la clave pública está integrada en la app distribuida para que el cliente pueda descifrar las actualizaciones, alguien que tenga el binario de su app y suficiente motivación todavía puede recuperar el material de clave necesario para inspeccionar el bundle.
+</Aside>
 
 <Aside type="tip">
 
@@ -65,15 +73,15 @@ RSA no puede cifrar grandes cantidades de datos eficientemente, por lo que AES s
 
 | Característica | Capgo | Otras Plataformas OTA |
 |---------|-------|-------------------|
-| **Contenido del Paquete** | Completamente cifrado (ilegible) | Públicamente legible |
+| **Contenido del Paquete** | Cifrado en almacenamiento y tránsito; aún puede ser inspeccionado por un atacante decidido con el binario de la app | Públicamente legible |
 | **Método de Seguridad** | Cifrado verdadero de extremo a extremo | Solo firma de código |
-| **Nivel de Privacidad** | Conocimiento cero (incluso Capgo no puede leer su código) | La plataforma puede acceder a su código |
+| **Nivel de Privacidad** | Protección fuerte en entrega y almacenamiento; no evita la ingeniería inversa | La plataforma puede acceder a su código |
 | **Protección** | Contenido + integridad + autenticidad | Solo integridad + autenticidad |
 
 **Por Qué Esto Importa:**
 - **La firma de código** solo verifica que las actualizaciones no han sido manipuladas y provienen de la fuente correcta
-- **El cifrado de extremo a extremo** asegura que el contenido real de su código permanezca privado e ilegible durante la transmisión y almacenamiento
-- Con el cifrado verdadero de extremo a extremo de Capgo, solo sus usuarios pueden descifrar actualizaciones - nadie más, incluido Capgo mismo
+- **El cifrado de Capgo** protege el bundle mientras se almacena y se entrega, y dificulta mucho la falsificación de actualizaciones cifradas porque un atacante necesitaría su clave privada
+- **La ingeniería inversa sigue siendo posible** después de distribuir la app, porque el cliente contiene la clave pública necesaria para descifrar y cargar la actualización
 
 ## Métodos de Cifrado
 

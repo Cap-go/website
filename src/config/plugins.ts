@@ -413,6 +413,14 @@ export const actions = [
     icon: 'CreditCard',
   },
   {
+    name: '@capgo/capacitor-privacy-screen',
+    author: 'github.com/Cap-go',
+    description: 'Protect app content in Android screenshots and obscure the iOS app switcher snapshot',
+    href: 'https://github.com/Cap-go/capacitor-privacy-screen/',
+    title: 'Privacy Screen',
+    icon: EyeSlashIcon,
+  },
+  {
     name: '@capgo/capacitor-pdf-generator',
     author: 'github.com/Cap-go',
     description: 'Create PDF documents from HTML templates for invoices, reports, and receipts',

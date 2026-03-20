@@ -13,6 +13,10 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 Un canal Live Update pointe vers une version de bundle JS spécifique de votre application qui sera partagée avec tous les appareils configurés pour écouter ce canal pour les mises à jour. Lorsque vous [installez les Capgo Live Updates SDK](/docs/getting-started/quickstart/) dans votre application, tout binaire natif configuré sur ce canal recherchera les mises à jour disponibles à chaque lancement de l'application. Vous pouvez modifier la version vers laquelle pointe un canal à tout moment et pouvez également revenir aux versions précédentes si nécessaire.
 
+<Aside type="caution" title="Les canaux n'apportent pas de confidentialité">
+Les canaux contrôlent l'éligibilité à la mise à jour, pas le secret du bundle. Même si un canal est privé ou que l'auto-affectation est désactivée, tout bundle non chiffré envoyé à Capgo doit toujours être considéré comme un asset public livré aux clients. Le chiffrement protège la distribution et l'authenticité des mises à jour, mais les bundles distribués restent analysables par rétro-ingénierie depuis l'application avec suffisamment d'effort, car la clé publique fait partie du client. Voir [le chiffrement des Live Updates](/docs/live-updates/encryption/) pour le détail.
+</Aside>
+
 ## Comment un appareil sélectionne une chaîne (priorité)
 
 Lorsqu'un appareil recherche une mise à jour, Capgo décide quel canal utiliser dans cet ordre strict (la priorité la plus élevée en premier) :

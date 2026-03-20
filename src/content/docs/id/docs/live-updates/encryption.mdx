@@ -14,7 +14,15 @@ Capgo menyediakan enkripsi end-to-end yang kuat untuk bundle aplikasi Anda, mema
 
 Sistem enkripsi Capgo menggunakan metode kriptografi standar industri untuk melindungi bundle Anda dari akses yang tidak sah. Ketika enkripsi diaktifkan, bundle Anda dienkripsi sebelum meninggalkan lingkungan pengembangan Anda dan tetap terenkripsi sampai didekripsi oleh aplikasi Anda di perangkat pengguna.
 
-**Enkripsi End-to-End Sejati**: Tidak seperti platform pembaruan OTA lain yang hanya menandatangani pembaruan (membiarkan kode dapat dibaca publik), Capgo menyediakan enkripsi end-to-end sejati. Ini berarti hanya pengguna Anda yang dapat mendekripsi pembaruan Anda - tidak ada orang lain, termasuk Capgo sendiri. Konten bundle Anda tetap sepenuhnya pribadi dan tidak dapat dibaca selama seluruh proses pengiriman.
+**Apa yang sebenarnya dilindungi enkripsi**: Berbeda dengan sistem OTA yang hanya menandatangani pembaruan, Capgo mengenkripsi bundle yang diunggah sebelum penyimpanan dan distribusi. Ini melindungi konten bundle dari akses kasual saat transit atau penyimpanan dan memastikan bahwa hanya seseorang yang memiliki kunci privat Anda yang dapat menghasilkan pembaruan terenkripsi yang valid. Ini **tidak** membuat aset web yang telah dikirim mustahil untuk direkayasa balik: kunci publik yang digunakan klien untuk mendekripsi pembaruan didistribusikan di dalam aplikasi, sehingga penyerang yang benar-benar berniat masih dapat mengekstraknya dan memeriksa isi bundle dengan usaha yang cukup.
+
+<Aside type="note" title="Kapan Anda membutuhkan enkripsi">
+Jika Anda mengunggah bundle tanpa enkripsi, perlakukan bundle tersebut sebagai aset publik. Channel privat membatasi perangkat mana yang menerima pembaruan, tetapi tidak membuat bundle yang diunggah menjadi rahasia. Enkripsi berguna ketika Anda ingin perlindungan yang lebih baik saat penyimpanan dan transit dan ketika Anda ingin hanya pemegang kunci privat yang dapat menerbitkan pembaruan terenkripsi yang valid. Enkripsi tidak menjamin bahwa JavaScript, HTML, atau CSS yang sudah dikirim tidak akan pernah bisa diperiksa.
+</Aside>
+
+<Aside type="caution" title="Model ancaman">
+Enkripsi Capgo melindungi dari pengungkapan bundle oleh Capgo, penyedia penyimpanan, CDN, atau siapa pun yang hanya melihat artefak distribusi terenkripsi. Enkripsi juga mencegah pihak ketiga menghasilkan pembaruan terenkripsi yang valid tanpa kunci privat Anda. Karena kunci publik disematkan ke aplikasi yang didistribusikan agar klien dapat mendekripsi pembaruan, seseorang yang memiliki binary aplikasi Anda dan motivasi yang cukup tetap dapat memulihkan materi kunci yang diperlukan untuk memeriksa bundle.
+</Aside>
 
 <Aside type="tip">
 
@@ -65,15 +73,15 @@ RSA tidak dapat mengenkripsi data dalam jumlah besar secara efisien, jadi AES di
 
 | Fitur | Capgo | Platform OTA Lain |
 |---------|-------|-------------------|
-| **Konten Bundle** | Sepenuhnya terenkripsi (tidak dapat dibaca) | Dapat dibaca publik |
+| **Konten Bundle** | Terenkripsi saat penyimpanan dan transit; tetap bisa diperiksa oleh pelaku reverse engineering yang gigih dengan binary aplikasi | Dapat dibaca publik |
 | **Metode Keamanan** | Enkripsi end-to-end sejati | Hanya penandatanganan kode |
-| **Tingkat Privasi** | Zero-knowledge (bahkan Capgo tidak dapat membaca kode Anda) | Platform dapat mengakses kode Anda |
+| **Tingkat Privasi** | Perlindungan kuat saat distribusi dan penyimpanan; bukan anti-reverse-engineering | Platform dapat mengakses kode Anda |
 | **Perlindungan** | Konten + integritas + keaslian | Hanya integritas + keaslian |
 
 **Mengapa Ini Penting:**
 - **Penandatanganan kode** hanya memverifikasi bahwa pembaruan belum diubah dan berasal dari sumber yang benar
-- **Enkripsi end-to-end** memastikan bahwa konten kode aktual Anda tetap pribadi dan tidak dapat dibaca selama transmisi dan penyimpanan
-- Dengan enkripsi end-to-end sejati Capgo, hanya pengguna Anda yang dapat mendekripsi pembaruan - tidak ada orang lain, termasuk Capgo sendiri
+- **Enkripsi Capgo** melindungi bundle saat disimpan dan dikirimkan serta membuat pemalsuan pembaruan terenkripsi menjadi jauh lebih sulit karena penyerang akan membutuhkan kunci privat Anda
+- **Reverse engineering tetap mungkin dilakukan** setelah aplikasi didistribusikan, karena klien berisi kunci publik yang diperlukan untuk mendekripsi dan memuat pembaruan
 
 ## Metode Enkripsi
 

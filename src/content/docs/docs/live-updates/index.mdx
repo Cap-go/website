@@ -17,6 +17,10 @@ Live Updates are limited to JavaScript bundle changes. If you need to update nat
 
 </Aside>
 
+<Aside type="caution" title="Public Asset Model">
+Unencrypted bundles uploaded to Capgo should be treated as public delivery assets. Channels determine which devices are offered an update, but channel privacy does not make the underlying bundle confidential. Encryption adds protection in storage and transit and stops third parties from producing valid encrypted updates, but it does not make shipped web assets impossible to inspect because the app contains the public key needed for decryption. See [end-to-end encryption](/docs/live-updates/encryption/) for the exact threat model.
+</Aside>
+
 ## How Live Updates Work
 
 Capgo's Live Update system has two key components:

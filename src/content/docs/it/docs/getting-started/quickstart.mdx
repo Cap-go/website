@@ -56,6 +56,10 @@ La funzionalità di aggiornamento Over-the-Air (OTA) è applicabile solo per mod
 Se apporti modifiche al codice nativo, come aggiornamenti ai plugin Capacitor, è obbligatorio inviare nuovamente l'applicazione all'app store per l'approvazione
 </Aside>
 
+<Aside type="caution" title="Riservatezza dei Bundle">
+Tratta ogni bundle caricato su Capgo come una risorsa web pubblica a meno che tu non abiliti la crittografia di Capgo. I canali privati controllano quali dispositivi possono ricevere un aggiornamento, ma non rendono riservato il bundle caricato. La crittografia protegge il percorso di distribuzione e impedisce a terzi di produrre aggiornamenti crittografati validi, ma le risorse web distribuite possono comunque essere sottoposte a reverse engineering dall'app con sufficiente impegno perché la chiave pubblica viene distribuita nel binario. Vedi [la crittografia dei Live Update](/docs/live-updates/encryption/).
+</Aside>
+
 ## Unisciti alla Community Discord
 
 [Unisciti al Server Discord di Capacitor-updater!](https://discordcom/invite/VnYRvBfgA6)

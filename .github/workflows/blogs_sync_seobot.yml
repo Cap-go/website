@@ -5,6 +5,9 @@ on:
   schedule:
     - cron: '0 0 * * *'
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
 jobs:
   sync-blogs-from-seobot:
     runs-on: ubuntu-latest

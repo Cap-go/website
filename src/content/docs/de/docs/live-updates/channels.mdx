@@ -10,6 +10,10 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 Ein Live Update-Kanal verweist auf einen bestimmten JS-Bundle-Build Ihrer App, der mit allen Geräten geteilt wird, die für Updates auf diesen Kanal eingestellt sind. Wenn Sie das [Capgo Live Updates SDK](/docs/getting-started/quickstart/) in Ihrer App installieren, prüft jede native Binary, die für diesen Kanal konfiguriert ist, beim App-Start auf verfügbare Updates. Sie können den Build, auf den ein Kanal verweist, jederzeit ändern und bei Bedarf auch auf vorherige Builds zurücksetzen.
 
+<Aside type="caution" title="Kanäle bieten keine Vertraulichkeit">
+Kanäle steuern die Update-Berechtigung, nicht die Geheimhaltung des Bundles. Selbst wenn ein Kanal privat ist oder Self-Assignment deaktiviert wurde, sollte jedes unverschlüsselte zu Capgo hochgeladene Bundle weiterhin als öffentliches an Clients ausgeliefertes Asset behandelt werden. Die Verschlüsselung schützt den Auslieferungsweg und die Authentizität von Updates, aber ausgelieferte Bundles können mit genügend Aufwand weiterhin aus der verteilten App rückentwickelt werden, weil der öffentliche Schlüssel Teil des Clients ist. Siehe [Live-Update-Verschlüsselung](/docs/live-updates/encryption/) für Details.
+</Aside>
+
 ## Wie ein Gerät einen Kanal auswählt (Priorität)
 
 Wenn ein Gerät nach einem Update sucht, entscheidet Capgo in dieser strikten Reihenfolge, welcher Kanal verwendet wird (höchste Priorität zuerst):

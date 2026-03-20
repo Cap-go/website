@@ -462,6 +462,11 @@ export default defineConfig({
               paths: ['docs/plugins/pay/**'],
             },
             {
+              label: 'Plugin Privacy Screen',
+              description: 'privacy screen plugin for hiding app content in system previews and screenshots',
+              paths: ['docs/plugins/privacy-screen/**'],
+            },
+            {
               label: 'Plugin PDF Generator',
               description: 'PDF generation plugin',
               paths: ['docs/plugins/pdf-generator/**'],
@@ -1209,6 +1214,16 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/pay/' },
                 { label: 'Getting started', link: '/docs/plugins/pay/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Privacy Screen',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/privacy-screen/' },
+                { label: 'Getting started', link: '/docs/plugins/privacy-screen/getting-started' },
+                { label: 'iOS behavior', link: '/docs/plugins/privacy-screen/ios' },
+                { label: 'Android behavior', link: '/docs/plugins/privacy-screen/android' },
               ],
               collapsed: true,
             },
