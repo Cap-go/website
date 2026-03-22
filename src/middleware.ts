@@ -1,21 +1,11 @@
 import { defineMiddleware } from 'astro:middleware'
 import { useRuntimeConfig } from './config/app'
-import { paraglideMiddleware } from './paraglide/server.js'
+import { getTranslations } from './services/translations'
 import { defaultLocale, type Locales } from './services/locale'
 
 export const onRequest = defineMiddleware((context, next) => {
-  // When Astro pre-renders during `astro build`, there is no real request.
-  // Skip the Paraglide middleware so we don't touch unavailable request headers.
-  // Use context.isPrerendered which is the reliable way to detect prerendering
-  if (context.isPrerendered) {
-    context.locals.locale = (context.currentLocale || defaultLocale) as Locales
-    context.locals.runtimeConfig = useRuntimeConfig()
-    return next()
-  }
-
-  return paraglideMiddleware(context.request, async () => {
-    context.locals.locale = (context.currentLocale || defaultLocale) as Locales
-    context.locals.runtimeConfig = useRuntimeConfig()
-    return await next()
-  })
+  context.locals.locale = (context.currentLocale || defaultLocale) as Locales
+  context.locals.runtimeConfig = useRuntimeConfig()
+  context.locals.translations = getTranslations(context.locals.locale)
+  return next()
 })

@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import * as m from '@/paraglide/messages'
+import * as m from '@/services/messages'
 import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.consulting({}, { locale: Astro.locals.locale })].join(' | ')

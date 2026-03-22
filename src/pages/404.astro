@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import * as m from '@/paraglide/messages'
+import * as m from '@/services/messages'
 
 const homeUrl = new URL(getRelativeLocaleUrl(Astro.locals.locale, '/'), Astro.url.origin).toString()
 ---

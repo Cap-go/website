@@ -3,24 +3,20 @@ import { baseDomain, structuredData } from '@/config/app'
 import { appName } from '@/constants'
 import { AstroFont } from 'astro-font'
 import { join } from 'node:path'
-import * as m from '@/paraglide/messages'
+import * as m from '@/services/messages'
 import { generateAlternateVersions } from '@/lib/alternateVersions'
 
 const rawLocale = (Astro.locals.locale || 'en').toString().toLowerCase()
-// Paraglide message functions use a narrower locale union than the app router.
-// Cast once here to avoid repeating casts and keep runtime behavior unchanged.
-const messageLocale = Astro.locals.locale as any
-
 
 const {
   ldJSON = structuredData,
-  title = m.website_title({}, { locale: messageLocale }),
-  description = m.website_description({}, { locale: messageLocale }),
+  title = m.website_title({}, { locale: Astro.locals.locale }),
+  description = m.website_description({}, { locale: Astro.locals.locale }),
   url = Astro.url,
   image = `${Astro.locals.runtimeConfig?.public?.baseUrl || Astro.url.origin}/capgo_social.png`,
   canonical = Astro.url,
   author = `Martin DONADIEU`,
-  keywords = m.website_keywords({}, { locale: messageLocale }),
+  keywords = m.website_keywords({}, { locale: Astro.locals.locale }),
   audio = null,
   alternateVersions = generateAlternateVersions(Astro),
   // Article-specific props for blog posts

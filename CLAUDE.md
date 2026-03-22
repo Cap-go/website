@@ -83,7 +83,7 @@ When creating or modifying pages, always consider SEO:
 - Pages: `src/pages/`
 - Components: `src/components/`
 - Layouts: `src/layouts/`
-- Translations: `src/paraglide/messages.ts`
+- Translations: `src/services/messages.ts` and `messages/*.json`
 - SEO helpers: `src/lib/ldJson.ts`
 - Styles: Tailwind CSS
 

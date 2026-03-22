@@ -6,7 +6,7 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
 import Plans from '@/components/pricing/Plans.astro'
 import { createLdJsonGraph, createProductLdJson, createFAQPageLdJson } from '@/lib/ldJson'
 import type { Database } from '@/services/supabase.types'
-import * as m from '@/paraglide/messages'
+import * as m from '@/services/messages'
 import Enterprise from '@/components/enterprise.astro'
 
 const locale = Astro.locals.locale

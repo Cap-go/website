@@ -5,6 +5,6 @@ declare namespace App {
   interface Locals {
     locale: import('./services/locale').Locales
     runtimeConfig: import('./config/app').RuntimeConfig
-    translations: typeof import('./services/translations').default
+    translations: import('./services/translations').TranslationCatalog
   }
 }

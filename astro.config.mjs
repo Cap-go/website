@@ -2,7 +2,6 @@ import cloudflare from '@astrojs/cloudflare'
 import sitemap from '@astrojs/sitemap'
 import starlight from '@astrojs/starlight'
 import starlightDocSearch from '@astrojs/starlight-docsearch'
-import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import tailwindcss from '@tailwindcss/vite'
 import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
 import { defineConfig } from 'astro/config'
@@ -132,7 +131,7 @@ export default defineConfig({
     starlight({
       title: 'Capgo',
       pagefind: false,
-      prerender: true,
+      prerender: false,
       plugins: [
         starlightDocSearch({
           appId: 'R0TIQUJRSN',
@@ -1564,11 +1563,6 @@ export default defineConfig({
     },
     plugins: [
       tailwindcss(),
-      paraglideVitePlugin({
-        outdir: './src/paraglide',
-        project: './project.inlang',
-        disableAsyncLocalStorage: true,
-      }),
       viteStaticCopy({
         targets: [
           {

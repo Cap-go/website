@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import * as m from '@/paraglide/messages'
+import * as m from '@/services/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.Capacitor_Sanbox_App({}, { locale: Astro.locals.locale })].join(' | ')

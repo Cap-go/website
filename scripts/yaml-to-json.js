@@ -12,7 +12,6 @@ const yamlData = load(yamlContent, {
 })
 if (!yamlData) throw new Error('YAML data is empty')
 const newJsonData = {
-  $schema: 'https://inlang.com/schema/inlang-message-format',
   ...Object.entries(yamlData).reduce(
     (acc, [key, value]) => ({
       ...acc,

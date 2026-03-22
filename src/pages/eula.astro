@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import * as m from '@/paraglide/messages'
+import * as m from '@/services/messages'
 import { defaultLocale } from '@/services/locale'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.eula({}, { locale: Astro.locals.locale })].join(' | ')

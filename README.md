@@ -62,7 +62,7 @@ Key folders and files in this repo:
 │   ├── css/
 │   ├── config/
 │   └── content.config.ts      # Content collections config
-├── messages/                  # Paraglide UI strings
+├── messages/                  # UI strings by locale
 └── package.json
 ```
 
