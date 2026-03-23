@@ -1,7 +1,6 @@
 {
-  "i18n-ally.keystyle": "nested",
-  "i18n-ally.localesPaths": "messages",
-  "i18n-ally.sortKeys": true,
+  "i18n-ally-next.keystyle": "nested",
+  "i18n-ally-next.sortKeys": true,
   "search.exclude": {
     "dist": true,
     // "public": true,
@@ -28,5 +27,11 @@
     // "src/content/docs/ja": true,
     // "src/content/docs/ko": true
   },
-  "claudeCodeChat.permissions.yoloMode": true
+  "claudeCodeChat.permissions.yoloMode": true,
+  "i18n-ally-next.localesPaths": [
+    "messages",
+    "project.inlang/messages",
+    "src/content/i18n",
+    "src/paraglide/messages"
+  ]
 }
