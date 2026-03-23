@@ -35,7 +35,7 @@
     "clean:unused": "bun run scripts/clean_not_used.tsx"
   },
   "overrides": {
-    "vite": "8.0.0"
+    "vite": "8.0.1"
   },
   "dependencies": {
     "@astrojs/cloudflare": "13.1.1",
