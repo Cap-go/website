@@ -38,7 +38,7 @@
     "vite": "8.0.0"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "13.1.1",
+    "@astrojs/cloudflare": "13.1.3",
     "@astrojs/sitemap": "3.7.1",
     "@astrojs/starlight": "0.38.1",
     "@astrojs/starlight-docsearch": "0.7.0",
@@ -47,7 +47,7 @@
     "@supabase/supabase-js": "^2.99.1",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.1",
-    "astro": "6.0.4",
+    "astro": "6.0.8",
     "astro-embed": "^0.12.0",
     "astro-heroicons": "^2.1.5-1",
     "astro-i18n-aut": "^0.7.3",
@@ -65,7 +65,7 @@
     "toastify-js": "^1.12.0"
   },
   "devDependencies": {
-    "@astrojs/check": "0.9.7",
+    "@astrojs/check": "0.9.8",
     "@astrojs/compiler-rs": "^0.1.4",
     "@capgo/seo-checker": "^0.0.13",
     "@dotenvx/dotenvx": "^1.54.1",
