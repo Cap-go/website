@@ -653,6 +653,14 @@ export const actions = [
     icon: 'ArchiveBox',
   },
   {
+    name: '@capgo/capacitor-zebra-datawedge',
+    author: 'github.com/Cap-go',
+    description: 'Manage Zebra DataWedge profiles, notifications, queries, and scan triggers on Zebra Android devices',
+    href: 'https://github.com/Cap-go/capacitor-zebra-datawedge/',
+    title: 'Zebra DataWedge',
+    icon: 'QrCode',
+  },
+  {
     name: '@capgo/capacitor-wifi',
     author: 'github.com/Cap-go',
     description: 'Manage WiFi connectivity for your Capacitor app',

@@ -1,0 +1,51 @@
+---
+title: "@capgo/capacitor-zebra-datawedge"
+description: Manage Zebra DataWedge profiles, notifications, queries, and soft scans from Capacitor.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Ship Zebra barcode scanning workflows in Capacitor without wrapping DataWedge intents yourself.
+  image:
+    file: ~public/icons/plugins/zebra-datawedge.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/zebra-datawedge/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-zebra-datawedge/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+`@capgo/capacitor-zebra-datawedge` is an Android-first Capacitor wrapper around Zebra DataWedge.
+
+It covers the same core areas exposed by the Ionic enterprise Zebra Scanner plugin:
+
+- `ZebraConfiguration` for profile creation and updates
+- `ZebraNotification` for scanner and profile status events
+- `ZebraQuery` for profiles, scanners, and version metadata
+- `ZebraRuntime` for scanner control and soft-triggered scans
+
+<CardGrid stagger>
+  <Card title="Profile management">
+    Create, clone, rename, restore, and update DataWedge profiles directly from JavaScript.
+  </Card>
+  <Card title="Scanner notifications">
+    Subscribe to scanner state and profile switch notifications without manually parsing broadcast bundles.
+  </Card>
+  <Card title="Soft scan triggers">
+    Trigger barcode and RFID scans, then wait for the next intent result through the same Capacitor API.
+  </Card>
+  <Card title="Android device focus">
+    Built for Zebra Android hardware where DataWedge is available. iOS and web expose API parity only.
+  </Card>
+</CardGrid>
+
+Start with the getting started guide, then review the Android notes before wiring production scan flows.
