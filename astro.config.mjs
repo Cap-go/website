@@ -484,6 +484,11 @@ export default defineConfig({
               paths: ['docs/plugins/persona/**'],
             },
             {
+              label: 'Plugin Intune',
+              description: 'Microsoft Intune MAM and MSAL plugin',
+              paths: ['docs/plugins/intune/**'],
+            },
+            {
               label: 'Plugin Persistent Account',
               description: 'persistent account storage plugin',
               paths: ['docs/plugins/persistent-account/**'],
@@ -1260,6 +1265,16 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/persona/' },
                 { label: 'Getting started', link: '/docs/plugins/persona/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Intune',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/intune/' },
+                { label: 'Getting started', link: '/docs/plugins/intune/getting-started' },
+                { label: 'iOS', link: '/docs/plugins/intune/ios' },
+                { label: 'Android', link: '/docs/plugins/intune/android' },
               ],
               collapsed: true,
             },
