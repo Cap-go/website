@@ -209,6 +209,11 @@ export default defineConfig({
               paths: ['docs/plugins/appinsights/**'],
             },
             {
+              label: 'Plugin AppsFlyer',
+              description: 'AppsFlyer mobile attribution, analytics, and deep linking plugin',
+              paths: ['docs/plugins/appsflyer/**'],
+            },
+            {
               label: 'Plugin App Attest',
               description: 'cross-platform app attestation plugin using Apple App Attest and Google Play Integrity Standard',
               paths: ['docs/plugins/app-attest/**'],
@@ -858,6 +863,14 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/appinsights/' },
                 { label: 'Getting started', link: '/docs/plugins/appinsights/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'AppsFlyer',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/appsflyer/' },
+                { label: 'Getting started', link: '/docs/plugins/appsflyer/getting-started' },
               ],
               collapsed: true,
             },

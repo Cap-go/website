@@ -1,0 +1,134 @@
+---
+title: Getting Started
+description: Learn how to install and initialize @capgo/capacitor-appsflyer in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-appsflyer" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Collect your AppsFlyer credentials**
+   You need your AppsFlyer `devKey` and, on iOS, your App Store numeric `appID`.
+</Steps>
+
+## Initialize the SDK
+
+Call `initSDK()` as early as possible during app startup:
+
+```ts
+import { AppsFlyer, AFConstants } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.addListener(AFConstants.CONVERSION_CALLBACK, (event) => {
+  console.log('AppsFlyer conversion event', event);
+});
+
+await AppsFlyer.addListener(AFConstants.UDL_CALLBACK, (event) => {
+  console.log('AppsFlyer deep link event', event);
+});
+
+await AppsFlyer.initSDK({
+  devKey: 'YOUR_DEV_KEY',
+  appID: '1234567890',
+  isDebug: true,
+  waitForATTUserAuthorization: 10,
+  registerConversionListener: true,
+  registerOnDeepLink: true,
+});
+```
+
+Use `manualStart: true` if you want to separate initialization from startup:
+
+```ts
+await AppsFlyer.initSDK({
+  devKey: 'YOUR_DEV_KEY',
+  appID: '1234567890',
+  manualStart: true,
+  registerConversionListener: true,
+  registerOnDeepLink: true,
+});
+
+await AppsFlyer.startSDK();
+```
+
+## Log events
+
+Track in-app events from JavaScript with the same SDK instance:
+
+```ts
+await AppsFlyer.logEvent({
+  eventName: 'af_purchase',
+  eventValue: {
+    af_revenue: 19.99,
+    af_currency: 'USD',
+    af_content_id: 'plan_pro_monthly',
+  },
+});
+```
+
+## Platform notes
+
+### iOS
+
+- `appID` is required and must be your Apple App Store numeric app identifier.
+- If you rely on IDFA or want AppsFlyer to wait for App Tracking Transparency, add `NSUserTrackingUsageDescription` to `Info.plist`.
+- `waitForATTUserAuthorization` is the number of seconds AppsFlyer should wait before continuing startup.
+- `disableSKAdNetwork()` is iOS-only.
+
+Example `Info.plist` key:
+
+```xml
+<key>NSUserTrackingUsageDescription</key>
+<string>This identifier is used to measure campaign attribution and improve acquisition analytics.</string>
+```
+
+### Android
+
+- The plugin wraps the native AppsFlyer Android SDK directly, so no extra bridge code is required.
+- Use `disableAppSetId()` only on Android.
+- If you already handle push notifications in another plugin, you can forward the payload to AppsFlyer with `sendPushNotificationData()`.
+
+## Deep links and conversion callbacks
+
+AppsFlyer events are delivered through Capacitor listeners:
+
+- `AFConstants.CONVERSION_CALLBACK`: Install attribution and conversion data callbacks.
+- `AFConstants.OAOA_CALLBACK`: App open attribution callbacks.
+- `AFConstants.UDL_CALLBACK`: Unified deep linking callbacks.
+
+Example:
+
+```ts
+await AppsFlyer.addListener(AFConstants.OAOA_CALLBACK, (event) => {
+  console.log('App open attribution', event);
+});
+```
+
+## Useful APIs
+
+```ts
+const { uid } = await AppsFlyer.getAppsFlyerUID();
+await AppsFlyer.setCustomerUserId({ cuid: 'user_123' });
+await AppsFlyer.setAdditionalData({ additionalData: { plan: 'pro' } });
+await AppsFlyer.setConsentDataV2({
+  isUserSubjectToGDPR: true,
+  hasConsentForDataUsage: true,
+  hasConsentForAdsPersonalization: true,
+});
+```
+
+## Best practices
+
+1. Initialize AppsFlyer during the earliest stable startup phase of your app.
+2. Register listeners before calling `initSDK()` so you do not miss conversion or deep-link events.
+3. Keep AppsFlyer keys in your runtime configuration, not hardcoded across the app.
+4. Gate ATT prompts and advertising-related collection behind your privacy flow when required.
+
+For the full native API surface, advanced purchase validation, invite links, and partner data features, see the [plugin repository](https://github.com/Cap-go/capacitor-appsflyer/).
