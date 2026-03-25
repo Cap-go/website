@@ -1,4 +1,3 @@
-/.well-known/* /deepLink/:splat 200
 /docs/plugin/auto-update /docs/plugin/cloud-mode/getting-started 200
 /docs/self-hosted/auto-update /docs/plugin/self-hosted/getting-started 200
 /docs/v3/plugin-api /docs/upgrade/api-v3/ 200
@@ -12,10 +11,8 @@
 /llms-full.txt/ /llms-full.txt 301
 /llm.txt/ /llms.txt 301
 /docs/plugin/cloud-mode/getting-started/ /docs/getting-started/quickstart 301
-/en/* /:splat 301
 /login/ /register/ 301
 /robots.txt/ /robots.txt 301
-/docs/plugin/* /docs/plugins/updater/:splat 301
 /docs/plugins/updater/self-hosted/contributing.mdx /docs/plugins/updater/local-dev/contributing.mdx 301
 /blog/building-a-native-mobile-app-with-nuxt-3-and-capacitor/ /blog/building-a-native-mobile-app-with-nuxt-and-capacitor/ 301
 /docs/plugin/cloud-mode/auto-update/ /docs/getting-started/add-an-app/ 301
@@ -35,3 +32,6 @@
 /ja/blog/capgo-vs-capawesome-comparing-ota-update-plugins/ /ja/capwesome/ 301
 /ko/blog/alternative-to-capawesome/ /ko/capwesome/ 301
 /ko/blog/capgo-vs-capawesome-comparing-ota-update-plugins/ /ko/capwesome/ 301
+/.well-known/* /deepLink/:splat 200
+/en/* /:splat 301
+/docs/plugin/* /docs/plugins/updater/:splat 301

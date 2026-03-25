@@ -49,7 +49,7 @@ jobs:
         uses: actions/cache@v5
         with:
           path: ~/.bun/install/cache
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
           restore-keys: |
             ${{ runner.os }}-bun-
 
@@ -61,12 +61,12 @@ jobs:
             .astro
             node_modules/.astro
             node_modules/.cache
-          key: ${{ runner.os }}-astro-${{ hashFiles('**/bun.lockb') }}-${{ hashFiles('src/**', 'public/**', 'astro.config.mjs') }}
+          key: ${{ runner.os }}-astro-${{ hashFiles('**/bun.lock') }}-${{ hashFiles('src/**', 'public/**', 'astro.config.mjs') }}
           restore-keys: |
-            ${{ runner.os }}-astro-${{ hashFiles('**/bun.lockb') }}-
+            ${{ runner.os }}-astro-${{ hashFiles('**/bun.lock') }}-
             ${{ runner.os }}-astro-
 
-      # - run: bun install
+      # - run: bun install --frozen-lockfile
       - run: bunx astro check
       - run: bun run build:prepare
       - run: bun run build

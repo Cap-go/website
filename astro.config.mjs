@@ -132,7 +132,7 @@ export default defineConfig({
     starlight({
       title: 'Capgo',
       pagefind: false,
-      prerender: true,
+      prerender: false,
       plugins: [
         starlightDocSearch({
           appId: 'R0TIQUJRSN',
