@@ -541,6 +541,14 @@ export const actions = [
     icon: 'UserCircle',
   },
   {
+    name: '@capgo/capacitor-intune',
+    author: 'github.com/Cap-go',
+    description: 'Microsoft Intune MAM, app protection policy, app config, and MSAL authentication for Capacitor',
+    href: 'https://github.com/Cap-go/capacitor-intune/',
+    title: 'Intune',
+    icon: 'ShieldCheck',
+  },
+  {
     name: '@capgo/capacitor-android-age-signals',
     author: 'github.com/Cap-go',
     description: 'Google Play Age Signals API wrapper - detect supervised accounts and verified users',
