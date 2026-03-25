@@ -1,0 +1,97 @@
+---
+title: Android Setup
+description: Configure Microsoft Intune MAM and MSAL on Android for @capgo/capacitor-intune.
+sidebar:
+  order: 4
+---
+
+## 1. Add the Intune Gradle plugin
+
+In your app project's top-level `android/build.gradle`, add the Intune Gradle plugin JAR to the `buildscript` classpath. The plugin package includes:
+
+- `android/ms-intune-app-sdk-android/GradlePlugin/com.microsoft.intune.mam.build.jar`
+
+Also include the Duo Maven feed that Ionic documents for current Intune Android SDK releases:
+
+```gradle
+maven {
+  url 'https://pkgs.dev.azure.com/MicrosoftDeviceSDK/DuoSDK-Public/_packaging/Duo-SDK-Feed/maven/v1'
+  name 'Duo-SDK-Feed'
+}
+```
+
+## 2. Update the app module
+
+In `android/app/build.gradle`:
+
+```gradle
+apply plugin: 'com.microsoft.intune.mam'
+```
+
+And keep resource optimization disabled:
+
+```properties
+android.enableResourceOptimizations=false
+```
+
+## 3. Provide `auth_config.json`
+
+Create `android/app/src/main/res/raw/auth_config.json`:
+
+```json
+{
+  "client_id": "YOUR_CLIENT_ID",
+  "authorization_user_agent": "BROWSER",
+  "redirect_uri": "msauth://YOUR_PACKAGE/YOUR_SIGNATURE_HASH",
+  "broker_redirect_uri_registered": true,
+  "account_mode": "MULTIPLE",
+  "authorities": [
+    {
+      "type": "AAD",
+      "audience": {
+        "type": "AzureADMyOrg"
+      }
+    }
+  ]
+}
+```
+
+The plugin expects that file at runtime for both MSAL and the Intune auth callback.
+
+## 4. Configure the `<application>` tag
+
+If your app does not already define a custom `Application`, set:
+
+```xml
+<application
+  android:name="app.capgo.intune.IntuneApplication"
+  android:enableOnBackInvokedCallback="false">
+```
+
+If you already have a custom `Application`, extend `MAMApplication` and register `IntuneMamServiceAuthenticationCallback` in `onMAMCreate()`.
+
+## 5. Add broker auth queries and redirect handling
+
+Add the package visibility queries Ionic documents for:
+
+- `com.azure.authenticator`
+- `com.microsoft.windowsintune.companyportal`
+- browser detection intents
+
+Also add `BrowserTabActivity` with your `msauth://` redirect URI host/path so MSAL can complete the sign-in round trip.
+
+## 6. Use the plugin
+
+Once the app-level native setup is complete, the Capacitor API is the same as on iOS:
+
+```ts
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+const auth = await IntuneMAM.acquireToken({
+  scopes: ['https://graph.microsoft.com/.default'],
+});
+
+await IntuneMAM.registerAndEnrollAccount({
+  accountId: auth.accountId,
+});
+```

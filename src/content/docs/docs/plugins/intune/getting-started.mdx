@@ -1,0 +1,116 @@
+---
+title: Getting Started
+description: Install and use Microsoft Intune MAM, policy, app config, and MSAL support in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-intune" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Complete native Intune setup**
+   Follow the dedicated [iOS setup](/docs/plugins/intune/ios/) and [Android setup](/docs/plugins/intune/android/) pages. Intune still requires host-app native configuration for brokered auth, redirect URIs, manifests, entitlements, and MSAL config.
+</Steps>
+
+## Requirements
+
+- Capacitor 8+
+- Android with Intune Android SDK `12.0.3`
+- iOS with Intune iOS SDK `21.5.1`
+- iOS deployment target `17.0+`
+
+Ionic's Intune docs currently call out a January 19, 2026 cutoff for apps built with Xcode 26, requiring Intune iOS SDK `21.1.0+`. This plugin already uses `21.5.1`.
+
+## Basic Usage
+
+```ts
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+await IntuneMAM.addListener('appConfigChange', (result) => {
+  console.log('App config changed', result.accountId);
+});
+
+await IntuneMAM.addListener('policyChange', (result) => {
+  console.log('Policy changed', result.accountId);
+});
+
+const auth = await IntuneMAM.acquireToken({
+  scopes: ['https://graph.microsoft.com/.default'],
+  loginHint: 'alex@example.com',
+});
+
+await IntuneMAM.registerAndEnrollAccount({
+  accountId: auth.accountId,
+});
+
+const appConfig = await IntuneMAM.appConfig({
+  accountId: auth.accountId,
+});
+
+const policy = await IntuneMAM.getPolicy({
+  accountId: auth.accountId,
+});
+
+console.log({ auth, appConfig, policy });
+```
+
+## Common Flows
+
+### Interactive sign-in and enrollment
+
+```ts
+const auth = await IntuneMAM.acquireToken({
+  scopes: ['https://graph.microsoft.com/.default'],
+});
+
+await IntuneMAM.registerAndEnrollAccount({
+  accountId: auth.accountId,
+});
+```
+
+### Silent token refresh
+
+```ts
+const token = await IntuneMAM.acquireTokenSilent({
+  accountId: 'AAD_OBJECT_ID',
+  scopes: ['https://graph.microsoft.com/.default'],
+  forceRefresh: true,
+});
+```
+
+### Read the currently enrolled account
+
+```ts
+const user = await IntuneMAM.enrolledAccount();
+```
+
+### Sign out or selectively wipe
+
+```ts
+await IntuneMAM.logoutOfAccount({ accountId: 'AAD_OBJECT_ID' });
+await IntuneMAM.deRegisterAndUnenrollAccount({ accountId: 'AAD_OBJECT_ID' });
+```
+
+## API Summary
+
+- `acquireToken(options)`: Start Microsoft sign-in and return token plus account metadata.
+- `acquireTokenSilent(options)`: Read a cached token for an existing account.
+- `registerAndEnrollAccount(options)`: Register the MSAL account with Intune and trigger enrollment.
+- `loginAndEnrollAccount()`: Let Intune drive the login and enrollment flow.
+- `appConfig(user)`: Read Intune app configuration values for the account.
+- `getPolicy(user)`: Read the current Intune app protection policy for the account.
+- `groupName(user)`: Read the common `GroupName` config helper value when present.
+- `sdkVersion()`: Inspect bundled Intune and MSAL versions.
+
+## Platform Notes
+
+- Web is not supported.
+- iOS and Android both require native project configuration beyond `cap sync`.
+- Your Azure registration, Intune policy assignment, redirect URIs, and entitlements remain app-specific.

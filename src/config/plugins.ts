@@ -101,6 +101,14 @@ export const actions = [
     icon: 'ChatBubbleLeft',
   },
   {
+    name: '@capgo/capacitor-appsflyer',
+    author: 'github.com/Cap-go',
+    description: 'Add AppsFlyer attribution, analytics, deferred deep links, and OneLink support to your Capacitor app',
+    href: 'https://github.com/Cap-go/capacitor-appsflyer/',
+    title: 'AppsFlyer',
+    icon: 'ChartBar',
+  },
+  {
     name: '@capgo/nativegeocoder',
     author: 'github.com/Cap-go',
     description: 'Convert addresses to coordinates and coordinates to addresses using native geocoding',
@@ -541,6 +549,14 @@ export const actions = [
     icon: 'UserCircle',
   },
   {
+    name: '@capgo/capacitor-intune',
+    author: 'github.com/Cap-go',
+    description: 'Microsoft Intune MAM, app protection policy, app config, and MSAL authentication for Capacitor',
+    href: 'https://github.com/Cap-go/capacitor-intune/',
+    title: 'Intune',
+    icon: 'ShieldCheck',
+  },
+  {
     name: '@capgo/capacitor-android-age-signals',
     author: 'github.com/Cap-go',
     description: 'Google Play Age Signals API wrapper - detect supervised accounts and verified users',
@@ -629,6 +645,14 @@ export const actions = [
     icon: 'SpeakerWave',
   },
   {
+    name: '@capgo/capacitor-ssl-pinning',
+    author: 'github.com/Cap-go',
+    description: 'Pin HTTPS connections to bundled certificates for CapacitorHttp on iOS and Android',
+    href: 'https://github.com/Cap-go/capacitor-ssl-pinning/',
+    title: 'SSL Pinning',
+    icon: 'ShieldCheck',
+  },
+  {
     name: '@capgo/capacitor-printer',
     author: 'github.com/Cap-go',
     description: 'Capacitor plugin for printing documents, HTML, PDFs, images and web views',
@@ -643,6 +667,14 @@ export const actions = [
     href: 'https://github.com/Cap-go/capacitor-zip/',
     title: 'Zip',
     icon: 'ArchiveBox',
+  },
+  {
+    name: '@capgo/capacitor-zebra-datawedge',
+    author: 'github.com/Cap-go',
+    description: 'Manage Zebra DataWedge profiles, notifications, queries, and scan triggers on Zebra Android devices',
+    href: 'https://github.com/Cap-go/capacitor-zebra-datawedge/',
+    title: 'Zebra DataWedge',
+    icon: 'QrCode',
   },
   {
     name: '@capgo/capacitor-wifi',
@@ -671,8 +703,7 @@ export const actions = [
   {
     name: '@capgo/capacitor-webview-version-checker',
     author: 'github.com/Cap-go',
-    description:
-      'Capacitor plugin for checking Android WebView version freshness and guiding users to native update flows',
+    description: 'Capacitor plugin for checking Android WebView version freshness and guiding users to native update flows',
     href: 'https://github.com/Cap-go/capacitor-webview-version-checker/',
     title: 'WebView Version Checker',
     icon: 'ShieldExclamation',

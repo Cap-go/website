@@ -1,0 +1,150 @@
+---
+title: Getting Started
+description: Learn how to configure SSL pinning for CapacitorHttp requests with bundled certificates.
+sidebar:
+  order: 2
+---
+
+import { PackageManagers } from 'starlight-package-managers'
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-ssl-pinning" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Enable Capacitor HTTP and declare your certificates**
+   Add `CapacitorHttp.enabled` and `plugins.SSLPinning.certs` in `capacitor.config.*`.
+</Steps>
+
+## Requirements
+
+This plugin enforces pinning for native `CapacitorHttp` requests.
+
+- `plugins.CapacitorHttp.enabled` must be `true`
+- `plugins.SSLPinning.certs` must contain at least one bundled certificate file
+- Requests must use `https://`
+- Certificate paths are relative to your app root
+
+## Capacitor configuration
+
+Declare the certificates you want to trust and optionally list domains that should bypass pinning:
+
+```ts
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorHttp: {
+      enabled: true,
+    },
+    SSLPinning: {
+      certs: [
+        'sslCerts/production/primary.cer',
+        'sslCerts/production/backup.cer',
+      ],
+      excludedDomains: [
+        'https://analytics.google.com',
+      ],
+    },
+  },
+};
+
+export default config;
+```
+
+## Certificate placement
+
+Store your certificate files inside the app project, for example:
+
+```text
+your-app/
+  capacitor.config.ts
+  sslCerts/
+    production/
+      primary.cer
+      backup.cer
+```
+
+During `bunx cap sync`, the plugin copies the configured certificate files into `webDir/certs` so they are available to both native runtimes from the bundled app assets.
+
+## Usage
+
+Use `CapacitorHttp` for the requests that must be pinned:
+
+```ts
+import { CapacitorHttp } from '@capacitor/core';
+
+const response = await CapacitorHttp.get({
+  url: 'https://api.example.com/health',
+});
+
+console.log(response.status, response.data);
+```
+
+If the server certificate chain does not match one of the configured pinned certificates, the native request fails.
+
+## Excluding specific domains
+
+`excludedDomains` is useful for endpoints you do not control directly, such as analytics, crash reporting, or third-party SDK backends.
+
+- Matching is done by origin.
+- If you include a path, the match becomes an origin-plus-path-prefix check.
+
+Example:
+
+```ts
+plugins: {
+  SSLPinning: {
+    certs: ['sslCerts/production/primary.cer'],
+    excludedDomains: [
+      'https://analytics.google.com',
+      'https://api.example.com/public/',
+    ],
+  },
+}
+```
+
+## Inspect the active configuration
+
+The plugin also exposes lightweight inspection helpers:
+
+```ts
+import { SSLPinning } from '@capgo/capacitor-ssl-pinning';
+
+const config = await SSLPinning.getConfiguration();
+const version = await SSLPinning.getPluginVersion();
+
+console.log(config.configured, config.certs, config.excludedDomains);
+console.log(version.version);
+```
+
+## Best practices
+
+- Pin certificates only for services you operate or fully control.
+- Keep at least one backup certificate configured for rotation windows.
+- Test certificate rotation in staging before shipping to production.
+- Use `CapacitorHttp` consistently for requests that must be pinned.
+- Keep `excludedDomains` short and explicit.
+
+## Platform notes
+
+- Android injects a pinned `SSLSocketFactory` into Capacitor HTTP requests unless the URL matches an excluded domain.
+- iOS replaces the default Capacitor HTTP handler with a pinned `URLSession` delegate and also handles WebView authentication challenges through the Capacitor hook.
+- Web only exposes configuration inspection helpers. Native SSL pinning is not enforced in the browser.
+
+## Troubleshooting
+
+### Requests are not pinned
+
+Check these first:
+
+- `CapacitorHttp.enabled` is set to `true`
+- You are using `CapacitorHttp`, not `fetch`
+- At least one certificate path exists and is copied during `bunx cap sync`
+
+### Requests fail after certificate rotation
+
+Bundle both the active and next certificate during the rotation window, then remove the old one after the backend rollout is complete.

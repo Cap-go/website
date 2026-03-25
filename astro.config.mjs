@@ -20,7 +20,9 @@ import { defaultLocale, localeNames, locales } from './src/services/locale'
 const AVAILABLE_PARALLELISM = typeof os.availableParallelism === 'function' ? os.availableParallelism() : os.cpus().length
 const BUILD_CONCURRENCY = Number.parseInt(process.env.BUILD_CONCURRENCY ?? '', 10)
 const CPU_COUNT = Number.isFinite(BUILD_CONCURRENCY) && BUILD_CONCURRENCY > 0 ? BUILD_CONCURRENCY : AVAILABLE_PARALLELISM
-const SRC_DIR = `${fileURLToPath(new URL('./src/', import.meta.url)).replace(/\\/g, '/').replace(/\/$/, '')}/`
+const SRC_DIR = `${fileURLToPath(new URL('./src/', import.meta.url))
+  .replace(/\\/g, '/')
+  .replace(/\/$/, '')}/`
 
 // Build a map of page paths to their lastmod dates for sitemap
 function getPageLastModDates() {
@@ -205,6 +207,11 @@ export default defineConfig({
               label: 'Plugin AppInsights',
               description: 'Microsoft Application Insights analytics plugin',
               paths: ['docs/plugins/appinsights/**'],
+            },
+            {
+              label: 'Plugin AppsFlyer',
+              description: 'AppsFlyer mobile attribution, analytics, and deep linking plugin',
+              paths: ['docs/plugins/appsflyer/**'],
             },
             {
               label: 'Plugin App Attest',
@@ -482,6 +489,11 @@ export default defineConfig({
               paths: ['docs/plugins/persona/**'],
             },
             {
+              label: 'Plugin Intune',
+              description: 'Microsoft Intune MAM and MSAL plugin',
+              paths: ['docs/plugins/intune/**'],
+            },
+            {
               label: 'Plugin Persistent Account',
               description: 'persistent account storage plugin',
               paths: ['docs/plugins/persistent-account/**'],
@@ -547,6 +559,11 @@ export default defineConfig({
               paths: ['docs/plugins/speech-synthesis/**'],
             },
             {
+              label: 'Plugin SSL Pinning',
+              description: 'certificate pinning plugin for CapacitorHttp requests',
+              paths: ['docs/plugins/ssl-pinning/**'],
+            },
+            {
               label: 'Plugin StreamCall',
               description: 'Stream video calling plugin',
               paths: ['docs/plugins/streamcall/**'],
@@ -605,6 +622,11 @@ export default defineConfig({
               label: 'Plugin WiFi',
               description: 'WiFi network information plugin',
               paths: ['docs/plugins/wifi/**'],
+            },
+            {
+              label: 'Plugin Zebra DataWedge',
+              description: 'Zebra DataWedge plugin for barcode profiles, notifications, and scan intents',
+              paths: ['docs/plugins/zebra-datawedge/**'],
             },
             {
               label: 'Plugin YouTube Player',
@@ -841,6 +863,14 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/appinsights/' },
                 { label: 'Getting started', link: '/docs/plugins/appinsights/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'AppsFlyer',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/appsflyer/' },
+                { label: 'Getting started', link: '/docs/plugins/appsflyer/getting-started' },
               ],
               collapsed: true,
             },
@@ -1252,6 +1282,16 @@ export default defineConfig({
               collapsed: true,
             },
             {
+              label: 'Intune',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/intune/' },
+                { label: 'Getting started', link: '/docs/plugins/intune/getting-started' },
+                { label: 'iOS', link: '/docs/plugins/intune/ios' },
+                { label: 'Android', link: '/docs/plugins/intune/android' },
+              ],
+              collapsed: true,
+            },
+            {
               label: 'Persistent Account',
               items: [
                 { label: 'Overview', link: '/docs/plugins/persistent-account/' },
@@ -1344,6 +1384,14 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/speech-synthesis/' },
                 { label: 'Getting started', link: '/docs/plugins/speech-synthesis/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'SSL Pinning',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/ssl-pinning/' },
+                { label: 'Getting started', link: '/docs/plugins/ssl-pinning/getting-started' },
               ],
               collapsed: true,
             },
@@ -1486,6 +1534,15 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/zip/' },
                 { label: 'Getting started', link: '/docs/plugins/zip/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Zebra DataWedge',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/zebra-datawedge/' },
+                { label: 'Getting started', link: '/docs/plugins/zebra-datawedge/getting-started' },
+                { label: 'Android behavior', link: '/docs/plugins/zebra-datawedge/android' },
               ],
               collapsed: true,
             },
