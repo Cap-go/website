@@ -1,0 +1,46 @@
+---
+title: "@capgo/capacitor-ssl-pinning"
+description: Pin HTTPS connections to bundled certificates for CapacitorHttp on iOS and Android.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Protect CapacitorHttp requests with native certificate pinning on iOS and Android.
+  image:
+    file: ~public/icons/plugins/ssl-pinning.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/ssl-pinning/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-ssl-pinning/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="CapacitorHttp integration" icon="rocket">
+    Native pinning is applied automatically to `CapacitorHttp` requests once `CapacitorHttp.enabled` and `SSLPinning.certs` are configured.
+  </Card>
+  <Card title="Bundled certificate workflow" icon="document">
+    Declare certificate files in `capacitor.config.*` and the plugin copies them into `webDir/certs` during `bunx cap sync`.
+  </Card>
+  <Card title="Selective bypass rules" icon="setting">
+    Use `excludedDomains` for hosts like analytics or third-party SDK endpoints that should not be pinned.
+  </Card>
+  <Card title="Cross-platform native enforcement" icon="approve-check">
+    Android uses a pinned `SSLSocketFactory`, while iOS installs a pinned `URLSession` delegate for Capacitor networking.
+  </Card>
+  <Card title="Inspection helpers" icon="puzzle">
+    Verify what native configuration is active with `getConfiguration()` and `getPluginVersion()`.
+  </Card>
+  <Card title="Comprehensive setup guide" icon="open-book">
+    Start with the [Getting Started guide](/docs/plugins/ssl-pinning/getting-started/) to configure certificates and ship safely.
+  </Card>
+</CardGrid>

@@ -629,6 +629,14 @@ export const actions = [
     icon: 'SpeakerWave',
   },
   {
+    name: '@capgo/capacitor-ssl-pinning',
+    author: 'github.com/Cap-go',
+    description: 'Pin HTTPS connections to bundled certificates for CapacitorHttp on iOS and Android',
+    href: 'https://github.com/Cap-go/capacitor-ssl-pinning/',
+    title: 'SSL Pinning',
+    icon: 'ShieldCheck',
+  },
+  {
     name: '@capgo/capacitor-printer',
     author: 'github.com/Cap-go',
     description: 'Capacitor plugin for printing documents, HTML, PDFs, images and web views',
@@ -671,8 +679,7 @@ export const actions = [
   {
     name: '@capgo/capacitor-webview-version-checker',
     author: 'github.com/Cap-go',
-    description:
-      'Capacitor plugin for checking Android WebView version freshness and guiding users to native update flows',
+    description: 'Capacitor plugin for checking Android WebView version freshness and guiding users to native update flows',
     href: 'https://github.com/Cap-go/capacitor-webview-version-checker/',
     title: 'WebView Version Checker',
     icon: 'ShieldExclamation',

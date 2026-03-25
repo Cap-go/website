@@ -20,7 +20,9 @@ import { defaultLocale, localeNames, locales } from './src/services/locale'
 const AVAILABLE_PARALLELISM = typeof os.availableParallelism === 'function' ? os.availableParallelism() : os.cpus().length
 const BUILD_CONCURRENCY = Number.parseInt(process.env.BUILD_CONCURRENCY ?? '', 10)
 const CPU_COUNT = Number.isFinite(BUILD_CONCURRENCY) && BUILD_CONCURRENCY > 0 ? BUILD_CONCURRENCY : AVAILABLE_PARALLELISM
-const SRC_DIR = `${fileURLToPath(new URL('./src/', import.meta.url)).replace(/\\/g, '/').replace(/\/$/, '')}/`
+const SRC_DIR = `${fileURLToPath(new URL('./src/', import.meta.url))
+  .replace(/\\/g, '/')
+  .replace(/\/$/, '')}/`
 
 // Build a map of page paths to their lastmod dates for sitemap
 function getPageLastModDates() {
@@ -545,6 +547,11 @@ export default defineConfig({
               label: 'Plugin Speech Synthesis',
               description: 'text-to-speech synthesis plugin',
               paths: ['docs/plugins/speech-synthesis/**'],
+            },
+            {
+              label: 'Plugin SSL Pinning',
+              description: 'certificate pinning plugin for CapacitorHttp requests',
+              paths: ['docs/plugins/ssl-pinning/**'],
             },
             {
               label: 'Plugin StreamCall',
@@ -1344,6 +1351,14 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/speech-synthesis/' },
                 { label: 'Getting started', link: '/docs/plugins/speech-synthesis/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'SSL Pinning',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/ssl-pinning/' },
+                { label: 'Getting started', link: '/docs/plugins/ssl-pinning/getting-started' },
               ],
               collapsed: true,
             },
