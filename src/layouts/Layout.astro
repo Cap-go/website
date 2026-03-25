@@ -3,7 +3,7 @@ import Footer from '../components/Footer.astro'
 import Header from '../components/Header.astro'
 import SEO from '../components/SEO.astro'
 import PostHog from '../components/posthog.astro'
-import globalStylesHref from '../css/global.css?url'
+import '../css/global.css'
 
 const content = Astro.props.content ?? {}
 
@@ -13,7 +13,6 @@ const isLocalhost = Astro.url.origin.includes('localhost:')
 <!doctype html>
 <html lang={Astro.locals.locale.toLowerCase()}>
   <head>
-    <link rel="stylesheet" href={globalStylesHref} />
     <SEO {...content} />
     <PostHog />
   </head>
