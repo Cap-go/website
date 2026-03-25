@@ -1,0 +1,75 @@
+---
+title: Getting Started
+description: Install and use Contentsquare in a Capacitor 8 app with consent, screenview, transaction, and dynamic variable tracking.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers';
+
+<Steps>
+1. **Install the plugin**
+   <PackageManagers pkg="@capgo/capacitor-contentsquare" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Handle user consent**
+   Contentsquare users are opted out by default. Call `optIn()` only after your consent flow allows tracking.
+
+4. **Track at least one screen**
+   Contentsquare discards sessions without a screenview, so send a screen name as soon as a meaningful screen is visible.
+</Steps>
+
+## Basic usage
+
+```ts
+import { ContentsquarePlugin, CurrencyCode } from '@capgo/capacitor-contentsquare';
+
+await ContentsquarePlugin.optIn();
+
+await ContentsquarePlugin.sendScreenName('Home');
+
+await ContentsquarePlugin.sendTransaction({
+  transactionValue: 29.99,
+  transactionCurrency: CurrencyCode.EUR,
+  transactionId: 'order-123',
+});
+
+await ContentsquarePlugin.sendDynamicVar({
+  dynVarKey: 'store',
+  dynVarValue: 'rome',
+});
+```
+
+## Screenview recommendations
+
+- Send a screenview whenever a new screen becomes visible.
+- Send a fresh screenview when a modal closes and the user returns to the underlying screen.
+- Re-send key contextual dynamic variables when the app returns to foreground.
+
+## Session replay helpers
+
+```ts
+await ContentsquarePlugin.excludeURLForReplay('/checkout/');
+
+await ContentsquarePlugin.setCapturedElementsSelector('[data-cs-capture]');
+
+await ContentsquarePlugin.setPIISelectors({
+  PIISelectors: ['input[type="email"]', '.credit-card'],
+  Attributes: [
+    { selector: 'input[name="email"]', attrName: 'value' },
+  ],
+});
+```
+
+## Platform setup
+
+- For iOS in-app features, complete the extra deeplink wiring in the [iOS setup](/docs/plugins/contentsquare/ios/) page.
+- Android requires no extra manifest wiring for the plugin itself; see [Android notes](/docs/plugins/contentsquare/android/) for logging and validation tips.
+
+## Notes
+
+- This plugin is a Capacitor 8 community port of the official Contentsquare Capacitor package.
+- The JavaScript API matches the current Contentsquare Capacitor docs, while the packaging and native build setup target Capacitor 8.

@@ -285,6 +285,14 @@ export const actions = [
     icon: 'ChartBar',
   },
   {
+    name: '@capgo/capacitor-contentsquare',
+    author: 'github.com/Cap-go',
+    description: 'Track mobile consent, screenviews, transactions, dynamic variables, and session replay with Contentsquare',
+    href: 'https://github.com/Cap-go/capacitor-contentsquare/',
+    title: 'Contentsquare',
+    icon: 'ChartBar',
+  },
+  {
     name: '@capgo/capacitor-app-attest',
     author: 'github.com/Cap-go',
     description: 'Capacitor plugin for cross-platform device attestation using Apple App Attest and Google Play Integrity Standard',

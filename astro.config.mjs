@@ -209,6 +209,11 @@ export default defineConfig({
               paths: ['docs/plugins/appinsights/**'],
             },
             {
+              label: 'Plugin Contentsquare',
+              description: 'Contentsquare mobile analytics and session replay plugin',
+              paths: ['docs/plugins/contentsquare/**'],
+            },
+            {
               label: 'Plugin AppsFlyer',
               description: 'AppsFlyer mobile attribution, analytics, and deep linking plugin',
               paths: ['docs/plugins/appsflyer/**'],
@@ -863,6 +868,16 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/appinsights/' },
                 { label: 'Getting started', link: '/docs/plugins/appinsights/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Contentsquare',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/contentsquare/' },
+                { label: 'Getting started', link: '/docs/plugins/contentsquare/getting-started' },
+                { label: 'iOS setup', link: '/docs/plugins/contentsquare/ios' },
+                { label: 'Android notes', link: '/docs/plugins/contentsquare/android' },
               ],
               collapsed: true,
             },

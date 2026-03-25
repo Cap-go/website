@@ -1,0 +1,46 @@
+---
+title: "@capgo/capacitor-contentsquare"
+description: Contentsquare analytics and session replay integration for Capacitor 8 apps.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Add Contentsquare consent handling, screen tracking, transactions, dynamic variables, and session replay hooks to your Capacitor app.
+  image:
+    file: ~public/icons/plugins/contentsquare.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/contentsquare/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-contentsquare/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Consent APIs" icon="shield-check">
+    Control Contentsquare collection explicitly with opt-in and opt-out flows.
+  </Card>
+  <Card title="Screen Analytics" icon="chart-bar">
+    Send screenviews, transactions, and dynamic variables with the same API shape as the official plugin.
+  </Card>
+  <Card title="Session Replay Hooks" icon="eye">
+    Configure replay masking, captured selectors, and URL exclusions from JavaScript.
+  </Card>
+  <Card title="Capacitor 8 Ready" icon="bolt">
+    Uses Capgo's Capacitor 8 template, Swift Package Manager, CocoaPods, and Java 21 Android builds.
+  </Card>
+  <Card title="Native SDKs" icon="boxes">
+    Ships with Contentsquare iOS SDK 4.45.4 and Android SDK 4.43.3.
+  </Card>
+  <Card title="Setup Guide" icon="open-book">
+    Start with the [Getting Started guide](/docs/plugins/contentsquare/getting-started/) and complete the iOS deeplink setup if you need in-app features.
+  </Card>
+</CardGrid>

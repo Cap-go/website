@@ -1,0 +1,41 @@
+---
+title: Android Notes
+description: Android-specific validation and behavior notes for the Contentsquare Capacitor 8 plugin.
+sidebar:
+  order: 4
+---
+
+Android does not require extra host-app setup for the plugin itself. Once installed and synced, the plugin registers the main Capacitor `WebView`, injects the Contentsquare event bridge, and exposes the documented JavaScript APIs.
+
+## What the plugin does on Android
+
+- Registers the Capacitor `WebView` with the native Contentsquare SDK.
+- Exposes `optIn`, `optOut`, `sendScreenName`, `sendTransaction`, and dynamic variable APIs.
+- Injects replay-related commands such as URL exclusion, PII masking, and captured element selectors.
+
+## Validation tips
+
+### Check native logs
+
+Filter Android Studio `Logcat` with:
+
+```text
+CSLIB
+```
+
+You should see the native Contentsquare SDK startup message and the WebView bridge registration during app launch.
+
+### Track a first session
+
+```ts
+await ContentsquarePlugin.optIn();
+await ContentsquarePlugin.sendScreenName('Home');
+```
+
+Without at least one screenview, the session is not kept by Contentsquare.
+
+## Dynamic variable constraints
+
+- Keys are limited by Contentsquare to 512 characters.
+- Values must be either a string or a non-negative integer.
+- If you want a value on every session, send it again when the app returns to foreground.
