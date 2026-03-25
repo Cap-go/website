@@ -101,6 +101,14 @@ export const actions = [
     icon: 'ChatBubbleLeft',
   },
   {
+    name: '@capgo/capacitor-appsflyer',
+    author: 'github.com/Cap-go',
+    description: 'Add AppsFlyer attribution, analytics, deferred deep links, and OneLink support to your Capacitor app',
+    href: 'https://github.com/Cap-go/capacitor-appsflyer/',
+    title: 'AppsFlyer',
+    icon: 'ChartBar',
+  },
+  {
     name: '@capgo/nativegeocoder',
     author: 'github.com/Cap-go',
     description: 'Convert addresses to coordinates and coordinates to addresses using native geocoding',
