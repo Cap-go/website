@@ -614,6 +614,11 @@ export default defineConfig({
               paths: ['docs/plugins/wifi/**'],
             },
             {
+              label: 'Plugin Zebra DataWedge',
+              description: 'Zebra DataWedge plugin for barcode profiles, notifications, and scan intents',
+              paths: ['docs/plugins/zebra-datawedge/**'],
+            },
+            {
               label: 'Plugin YouTube Player',
               description: 'YouTube video player plugin',
               paths: ['docs/plugins/youtube-player/**'],
@@ -1501,6 +1506,15 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/zip/' },
                 { label: 'Getting started', link: '/docs/plugins/zip/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Zebra DataWedge',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/zebra-datawedge/' },
+                { label: 'Getting started', link: '/docs/plugins/zebra-datawedge/getting-started' },
+                { label: 'Android behavior', link: '/docs/plugins/zebra-datawedge/android' },
               ],
               collapsed: true,
             },

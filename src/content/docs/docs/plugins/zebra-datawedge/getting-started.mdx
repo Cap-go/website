@@ -1,0 +1,91 @@
+---
+title: Getting Started
+description: Install and configure the Zebra DataWedge Capacitor plugin for Zebra Android devices.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the plugin**
+   <PackageManagers pkg="@capgo/capacitor-zebra-datawedge" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync native platforms**
+   <PackageManagers type="exec" pkg="cap" args="sync android" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configure DataWedge on the device**
+   - Create or pick a Zebra DataWedge profile associated with your app package.
+   - Enable `Intent Output`.
+   - Set `Intent delivery` to `Broadcast Intent`.
+   - Choose an action such as `app.capgo.zebra.SCAN`.
+
+4. **Review Android behavior**
+   - Read the [Android notes](/docs/plugins/zebra-datawedge/android/) before enabling soft triggers in production.
+</Steps>
+
+## Basic setup
+
+```typescript
+import {
+  DataWedgeConfigMode,
+  DataWedgePlugin,
+  ZebraConfiguration,
+  ZebraDataWedge,
+  ZebraRuntime,
+} from '@capgo/capacitor-zebra-datawedge';
+
+const intentAction = 'app.capgo.zebra.SCAN';
+
+await ZebraConfiguration.setConfig({
+  profileName: 'CapgoZebraProfile',
+  profileEnabled: true,
+  configMode: DataWedgeConfigMode.CREATE_IF_NOT_EXIST,
+  appList: [
+    {
+      packageName: 'com.example.app',
+      activityList: ['*'],
+    },
+  ],
+  pluginConfigs: [
+    {
+      pluginName: DataWedgePlugin.BARCODE,
+      resetConfig: true,
+      paramList: {
+        scanner_selection: 'auto',
+        scanner_input_enabled: 'true',
+      },
+    },
+    {
+      pluginName: DataWedgePlugin.INTENT,
+      resetConfig: true,
+      paramList: {
+        intent_output_enabled: 'true',
+        intent_action: intentAction,
+        intent_delivery: 2,
+      },
+    },
+  ],
+});
+
+await ZebraDataWedge.addListener('scan', (result) => {
+  console.log('Scanned', result.data, result.labelType);
+});
+
+const result = await ZebraRuntime.softScanTrigger(intentAction);
+console.log(result.data);
+```
+
+## Main runtime groups
+
+- `ZebraConfiguration` manages profiles and disabled-app settings.
+- `ZebraNotification` registers for DataWedge notification broadcasts such as scanner status and profile switches.
+- `ZebraQuery` reads active profiles, associated apps, scanner status, scanner lists, and version info.
+- `ZebraRuntime` enables or disables DataWedge, switches scanners, and triggers scans.
+
+## Platform scope
+
+- Android: fully supported on Zebra devices with DataWedge installed.
+- iOS: not available because DataWedge is Zebra Android specific.
+- Web: not available beyond API shape parity.
