@@ -13,7 +13,7 @@ In your app project's top-level `android/build.gradle`, add the Intune Gradle pl
 
 Also include the Duo Maven feed that Ionic documents for current Intune Android SDK releases:
 
-```gradle
+```kotlin
 maven {
   url 'https://pkgs.dev.azure.com/MicrosoftDeviceSDK/DuoSDK-Public/_packaging/Duo-SDK-Feed/maven/v1'
   name 'Duo-SDK-Feed'
@@ -24,7 +24,7 @@ maven {
 
 In `android/app/build.gradle`:
 
-```gradle
+```kotlin
 apply plugin: 'com.microsoft.intune.mam'
 ```
 
