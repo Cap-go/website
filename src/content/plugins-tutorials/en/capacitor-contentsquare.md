@@ -4,116 +4,52 @@ locale: en
 
 # Complete Tutorial: Using @capgo/capacitor-contentsquare in Capacitor 8 Apps
 
-`@capgo/capacitor-contentsquare` brings the Contentsquare mobile SDK to Capacitor 8 projects with a packaging layer that fits modern Capgo plugins. It lets you manage consent, send screenviews, track transactions, attach dynamic variables, and configure session replay masking from a single JavaScript API.
+`@capgo/capacitor-contentsquare` wires the Contentsquare mobile SDK into Capacitor 8 projects with a Capgo-friendly plugin surface. This tutorial focuses on the integration decisions you typically need to make (consent boundaries, naming strategy, event timing, and ownership), while the step-by-step API snippets live in the plugin docs.
 
-## Why use Contentsquare in a Capacitor app?
+## Start with the plugin docs
 
-Contentsquare helps product and growth teams understand how users actually move through the app:
+- Getting started: [Contentsquare Getting Started](/docs/plugins/contentsquare/getting-started/)
+- iOS setup notes: [Contentsquare iOS Setup](/docs/plugins/contentsquare/ios/)
+- Android notes: [Contentsquare Android Notes](/docs/plugins/contentsquare/android/)
 
-- Track screen-level behavior across onboarding, discovery, and checkout funnels.
-- Associate revenue events with sessions using transaction tracking.
-- Segment sessions using dynamic variables such as store, country, experiment bucket, or subscription tier.
-- Configure replay masking and capture rules without rewriting native code.
+If you only need installation and the basic API examples, those pages are the canonical reference.
 
-## Install the plugin
-
-Install the package in your Capacitor app, then sync native projects:
+## Install and sync (Bun)
 
 ```bash
 bun add @capgo/capacitor-contentsquare
 bunx cap sync
 ```
 
-## Handle consent correctly
+## Decide what owns consent
 
-Contentsquare users are opted out by default. After your consent UI grants analytics permission, start collection explicitly:
+Treat consent as a product feature, not an analytics toggle. The simplest rule is:
 
-```ts
-import { ContentsquarePlugin } from '@capgo/capacitor-contentsquare';
+- The consent UI (or your privacy layer) is the only code allowed to call `optIn()` or `optOut()`.
+- Everyone else can only call tracking methods when the privacy layer says tracking is allowed.
 
-await ContentsquarePlugin.optIn();
-```
+This keeps you from accidentally emitting events before consent is granted.
 
-If a user revokes consent later:
+## Choose a screen naming strategy
 
-```ts
-await ContentsquarePlugin.optOut();
-```
+For clean analysis, define names as stable templates (not user-specific content). A practical approach:
 
-## Send your first screenview
+- Build a centralized set of constants: `Screen.Home`, `Screen.ProductDetail`, `Screen.Checkout`.
+- Keep names consistent across iOS and Android route stacks.
+- Reuse names when only parameters change (for example, item ID).
 
-At least one screenview is required for a session to be useful in Contentsquare:
+## Track transactions where the truth happens
 
-```ts
-await ContentsquarePlugin.sendScreenName('Home');
-```
-
-Use stable screen template names rather than highly specific content labels. For example, prefer `Product Detail` over a full product title.
-
-## Track purchases
-
-Send the transaction once when the purchase is actually confirmed:
-
-```ts
-import { ContentsquarePlugin, CurrencyCode } from '@capgo/capacitor-contentsquare';
-
-await ContentsquarePlugin.sendTransaction({
-  transactionValue: 49.9,
-  transactionCurrency: CurrencyCode.EUR,
-  transactionId: 'order-4901',
-});
-```
-
-## Add dynamic variables
-
-Dynamic variables are useful for segmentation:
-
-```ts
-await ContentsquarePlugin.sendDynamicVar({
-  dynVarKey: 'ab_variant',
-  dynVarValue: 'checkout_redesign_b',
-});
-
-await ContentsquarePlugin.sendDynamicVar({
-  dynVarKey: 'loyalty_level',
-  dynVarValue: 3,
-});
-```
-
-## Configure replay masking
-
-Use replay helper APIs when screens contain sensitive content:
-
-```ts
-await ContentsquarePlugin.excludeURLForReplay('/payment/');
-
-await ContentsquarePlugin.setCapturedElementsSelector('[data-cs-capture]');
-
-await ContentsquarePlugin.setPIISelectors({
-  PIISelectors: ['.email', '.credit-card'],
-  Attributes: [
-    { selector: 'input[name="email"]', attrName: 'value' },
-    { selector: 'input[name="card"]', attrName: ['value', 'placeholder'] },
-  ],
-});
-```
-
-## iOS in-app features setup
-
-On iOS, the host app must still expose the URL scheme expected by Contentsquare and forward deeplinks to `Contentsquare.handle(url:)`. Without that step, core tracking still works, but in-app tooling and some debugging features are incomplete.
+Only emit purchase tracking once the app has a confirmed result (for example, a server receipt or a finalized payment state). Avoid firing on UI intent (button press) unless you explicitly label it as an attempt.
 
 ## Recommended app structure
 
-A simple way to integrate the plugin is to centralize it in an analytics service:
+A low-friction way to integrate is to centralize it behind an analytics service and keep the plugin API out of UI components:
 
 ```ts
 import { ContentsquarePlugin, CurrencyCode } from '@capgo/capacitor-contentsquare';
 
 export class CsAnalyticsService {
-  async grantConsent() {
-    await ContentsquarePlugin.optIn();
-  }
-
   async trackScreen(name: string) {
     await ContentsquarePlugin.sendScreenName(name);
   }
@@ -126,15 +62,25 @@ export class CsAnalyticsService {
     });
   }
 
-  async setStore(store: string) {
+  async setContext(key: string, value: string | number) {
     await ContentsquarePlugin.sendDynamicVar({
-      dynVarKey: 'store',
-      dynVarValue: store,
+      dynVarKey: key,
+      dynVarValue: value,
     });
   }
 }
 ```
 
+## Replay privacy checklist
+
+Before enabling replay in production:
+
+- Decide what should never be captured (inputs, payment fields, identity screens).
+- Add capture selectors intentionally (favor explicit allow-listing).
+- Keep the selector list owned by the same team that owns privacy compliance.
+
+For the specific helper methods, use the examples in the plugin docs.
+
 ## Final notes
 
-This plugin is a Capgo-maintained Capacitor 8 port of the current Contentsquare Capacitor API surface. For the latest product-level guidance around naming strategy, replay, privacy, and mobile debugging, pair this plugin with the official Contentsquare documentation and your own consent policy.
+This plugin is a Capgo-maintained Capacitor 8 port of the current Contentsquare Capacitor API surface. Pair it with your existing consent policy and the official Contentsquare documentation for product-level guidance around replay, privacy, and debugging.
