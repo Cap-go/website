@@ -349,6 +349,14 @@ export const actions = [
     icon: 'ChartBar',
   },
   {
+    name: '@capgo/capacitor-rudderstack',
+    author: 'github.com/Cap-go',
+    description: 'RudderStack analytics, identity resolution, screen tracking, and delivery controls for Capacitor',
+    href: 'https://github.com/Cap-go/capacitor-rudderstack/',
+    title: 'RudderStack',
+    icon: 'ChartBar',
+  },
+  {
     name: '@capgo/capacitor-health',
     author: 'github.com/Cap-go',
     description: 'Access health and fitness data from native health platforms',

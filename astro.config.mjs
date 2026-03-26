@@ -334,6 +334,11 @@ export default defineConfig({
               paths: ['docs/plugins/gtm/**'],
             },
             {
+              label: 'Plugin RudderStack',
+              description: 'RudderStack analytics and identity tracking plugin',
+              paths: ['docs/plugins/rudderstack/**'],
+            },
+            {
               label: 'Plugin Health',
               description: 'health data access plugin for HealthKit and Google Fit',
               paths: ['docs/plugins/health/**'],
@@ -1041,6 +1046,14 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/gtm/' },
                 { label: 'Getting started', link: '/docs/plugins/gtm/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'RudderStack',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/rudderstack/' },
+                { label: 'Getting started', link: '/docs/plugins/rudderstack/getting-started' },
               ],
               collapsed: true,
             },
