@@ -4,7 +4,7 @@ locale: en
 
 # Using @capgo/capacitor-rudderstack
 
-The `@capgo/capacitor-rudderstack` package brings RudderStack analytics, identity management, screen tracking, and delivery controls to Capacitor apps with native iOS and Android SDK support. It preserves the familiar Rudder Cordova call shape, which makes migration easier when you are moving an existing hybrid app to Capacitor.
+The `@capgo/capacitor-rudderstack` package brings RudderStack analytics, identity management, screen tracking, and delivery controls to Capacitor apps with native iOS and Android SDK support. Its main value is preserving the familiar Rudder Cordova call shape while moving the implementation to a Capacitor-native bridge.
 
 ## Installation
 
@@ -15,58 +15,63 @@ bun add @capgo/capacitor-rudderstack
 bunx cap sync
 ```
 
-## Initialize the SDK
+## Migration checklist
 
-Initialize RudderStack during app startup with your write key and data plane URL:
+When moving from `rudder-sdk-cordova`, keep the migration simple:
+
+1. Replace the Cordova import with `RudderStack` from `@capgo/capacitor-rudderstack`.
+2. Initialize once during app startup with your `writeKey` and `dataPlaneUrl`.
+3. Keep your existing `identify`, `group`, `track`, `screen`, and `alias` call order where possible.
+4. Wire consent and sign-out flows to `optOut()` and `reset()`.
+5. Use `flush()` for critical transitions when you want events delivered faster before backgrounding.
+
+## Example application flow
+
+The following pattern works well for most apps:
 
 ```ts
 import { RudderStack } from '@capgo/capacitor-rudderstack';
 
-await RudderStack.initialize('YOUR_WRITE_KEY', {
+const rudderConfig = {
+  writeKey: 'YOUR_WRITE_KEY',
   dataPlaneUrl: 'https://your-dataplane.rudderstack.com',
+};
+
+await RudderStack.initialize(rudderConfig.writeKey, {
+  dataPlaneUrl: rudderConfig.dataPlaneUrl,
   trackLifecycleEvents: true,
-  logLevel: RudderStack.LogLevel.INFO,
 });
-```
 
-## Identify and track
-
-After authentication, attach identity traits and start sending events:
-
-```ts
 await RudderStack.identify('user_123', {
-  email: 'user@example.com',
   plan: 'pro',
+  source: 'mobile-app',
 });
 
-await RudderStack.track('Checkout Started', {
-  cartValue: 49,
-  currency: 'EUR',
-});
-
-await RudderStack.screen('Checkout', {
-  step: 'payment',
+await RudderStack.track('Subscription Viewed', {
+  placement: 'paywall',
+  experiment: 'spring-pricing',
 });
 ```
 
-## Control delivery and consent
+Keep destination routing or external IDs on the individual calls that need them instead of trying to centralize every integration rule at initialization time.
 
-The plugin also exposes helper APIs for device and privacy state:
+## Platform behavior
 
-```ts
-await RudderStack.putDeviceToken('PUSH_TOKEN');
-await RudderStack.putAdvertisingId('ADVERTISING_ID');
-await RudderStack.flush();
-await RudderStack.optOut(false);
-```
+### Native apps
 
-Call `reset()` when a user signs out to clear the current Rudder identity.
+- The plugin packages native RudderStack SDK support for both iOS and Android.
+- Common config values such as `trackLifecycleEvents`, `recordScreenViews`, `flushQueueSize`, and `logLevel` are set from JavaScript.
 
-## Important notes
+### Web builds
 
-- The web implementation is a compatibility shim and does not send live RudderStack events.
-- `config.factories` from the Cordova plugin is not implemented in this first Capacitor release.
-- Per-call options support `externalIds` and `integrations` for destination-specific routing.
+- The web target is a compatibility shim for development.
+- It preserves the API shape but does not send live analytics events.
 
-For the full API surface and setup details, see the plugin repository:
-[github.com/Cap-go/capacitor-rudderstack](https://github.com/Cap-go/capacitor-rudderstack)
+### Current limitation
+
+- `config.factories` from the Cordova plugin is intentionally ignored in this first Capacitor release.
+
+## Next steps
+
+- Read the full [Getting started guide](https://capgo.app/docs/plugins/rudderstack/getting-started/).
+- Browse the plugin source and native packaging details on [github.com/Cap-go/capacitor-rudderstack](https://github.com/Cap-go/capacitor-rudderstack).
