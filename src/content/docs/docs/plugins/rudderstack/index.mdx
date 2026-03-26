@@ -1,0 +1,46 @@
+---
+title: "@capgo/capacitor-rudderstack"
+description: Add RudderStack analytics, identity, screen tracking, and event delivery controls to your Capacitor app with native iOS and Android SDK support.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Use a Cordova-compatible RudderStack API in Capacitor for initialize, identify, group, track, screen, alias, and delivery control flows.
+  image:
+    file: ~public/icons/plugins/rudderstack.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/rudderstack/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-rudderstack/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Cordova Migration" icon="rocket">
+    Keep the familiar Rudder Cordova calling style while moving the implementation to a Capacitor-native bridge.
+  </Card>
+  <Card title="Native SDKs" icon="star">
+    Uses the RudderStack Android and iOS SDKs directly, packaged for Capacitor 8 on both platforms.
+  </Card>
+  <Card title="Identity APIs" icon="shield-check">
+    Send `identify`, `group`, and `alias` calls with traits, external IDs, and destination integration flags.
+  </Card>
+  <Card title="Event Tracking" icon="document">
+    Track events and screen views from JavaScript with the same SDK instance used by the native bridge.
+  </Card>
+  <Card title="Delivery Controls" icon="setting">
+    Flush queued events, opt users out, forward push tokens, and set advertising or anonymous identifiers when needed.
+  </Card>
+  <Card title="Documentation" icon="open-book">
+    Follow the [Getting started guide](/docs/plugins/rudderstack/getting-started/) for installation, initialization, and common tracking patterns.
+  </Card>
+</CardGrid>
