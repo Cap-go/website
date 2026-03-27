@@ -1,28 +1,24 @@
 ---
 title: Getting Started
-description: Install and use Contentsquare in a Capacitor 8 app with consent, screenview, transaction, and dynamic variable tracking.
+description: Install and use Contentsquare in a Capacitor 8 app with consent gating, screenviews, transactions, and dynamic variables.
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers';
+## Install (Bun)
 
-<Steps>
-1. **Install the plugin**
-   <PackageManagers pkg="@capgo/capacitor-contentsquare" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+```bash
+bun add @capgo/capacitor-contentsquare
+bunx cap sync
+```
 
-2. **Sync native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+## Gate tracking on consent
 
-3. **Handle user consent**
-   Contentsquare users are opted out by default. Call `optIn()` only after your consent flow allows tracking.
+Users are opted out by default. Only call `optIn()` after your consent flow allows tracking, and keep `optOut()` in the same privacy layer so UI components do not accidentally emit events.
 
-4. **Track at least one screen**
-   Contentsquare discards sessions without a screenview, so send a screen name as soon as a meaningful screen is visible.
-</Steps>
+## Send a first screenview
 
-## Basic usage
+Contentsquare discards sessions that have no screenview. Send a screen name as soon as a meaningful screen is visible (for example after your first route transition settles).
 
 ```ts
 import { ContentsquarePlugin, CurrencyCode } from '@capgo/capacitor-contentsquare';
@@ -31,6 +27,7 @@ await ContentsquarePlugin.optIn();
 
 await ContentsquarePlugin.sendScreenName('Home');
 
+// Track a purchase only once the app has a confirmed outcome (receipt / server confirmation).
 await ContentsquarePlugin.sendTransaction({
   transactionValue: 29.99,
   transactionCurrency: CurrencyCode.EUR,
@@ -43,13 +40,13 @@ await ContentsquarePlugin.sendDynamicVar({
 });
 ```
 
-## Screenview recommendations
+## Screen naming tips
 
-- Send a screenview whenever a new screen becomes visible.
-- Send a fresh screenview when a modal closes and the user returns to the underlying screen.
-- Re-send key contextual dynamic variables when the app returns to foreground.
+- Use stable names (avoid user-specific strings).
+- Keep the same naming conventions across iOS and Android navigation stacks.
+- When reopening the app, resend key context (screen name and relevant dynamic vars).
 
-## Session replay helpers
+## Session replay helpers (optional)
 
 ```ts
 await ContentsquarePlugin.excludeURLForReplay('/checkout/');
