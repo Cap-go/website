@@ -1,31 +1,6 @@
-<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="128" height="128" rx="32" fill="url(#bg)" />
-  <circle cx="42" cy="42" r="12" fill="#FFF7ED" />
-  <circle cx="86" cy="34" r="10" fill="#FFF7ED" fill-opacity="0.92" />
-  <circle cx="78" cy="84" r="14" fill="#FFF7ED" />
-  <path
-    d="M42 42C52 42 57 42 63 39C69 36 72 31 86 34"
-    stroke="#FFF7ED"
-    stroke-width="8"
-    stroke-linecap="round"
-  />
-  <path
-    d="M42 42C54 46 62 54 69 64C72 68 74 74 78 84"
-    stroke="#FFF7ED"
-    stroke-width="8"
-    stroke-linecap="round"
-  />
-  <path
-    d="M34 92C44 80 56 74 78 72"
-    stroke="#FED7AA"
-    stroke-width="10"
-    stroke-linecap="round"
-    opacity="0.9"
-  />
-  <defs>
-    <linearGradient id="bg" x1="18" y1="14" x2="110" y2="116" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#EA580C" />
-      <stop offset="1" stop-color="#B91C1C" />
-    </linearGradient>
-  </defs>
+<svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="56" height="56" rx="12" fill="#119eff" />
+  <g transform="translate(12, 12) scale(1.6)">
+    <path fill="white" d="M15.5 2A1.5 1.5 0 0 0 14 3.5v13a1.5 1.5 0 0 0 1.5 1.5h1a1.5 1.5 0 0 0 1.5-1.5v-13A1.5 1.5 0 0 0 16.5 2h-1ZM9.5 6A1.5 1.5 0 0 0 8 7.5v9A1.5 1.5 0 0 0 9.5 18h1a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 10.5 6h-1ZM3.5 10A1.5 1.5 0 0 0 2 11.5v5A1.5 1.5 0 0 0 3.5 18h1A1.5 1.5 0 0 0 6 16.5v-5A1.5 1.5 0 0 0 4.5 10h-1Z"/>
+  </g>
 </svg>
