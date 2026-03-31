@@ -33,7 +33,7 @@
       },
       "devDependencies": {
         "@astrojs/check": "0.9.7",
-        "@astrojs/compiler-rs": "^0.1.4",
+        "@astrojs/compiler-rs": "^0.1.6",
         "@capgo/seo-checker": "^0.0.13",
         "@dotenvx/dotenvx": "^1.54.1",
         "@iconify-json/carbon": "^1.2.19",
