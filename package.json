@@ -2,16 +2,16 @@
   "type": "module",
   "name": "capgo-website",
   "scripts": {
-    "astro": "bunx --bun astro",
-    "dev": "bun run fix_code_languages_all && bunx --bun astro dev",
-    "start": "bunx --bun astro dev",
+    "astro": "astro",
+    "dev": "bun run fix_code_languages_all && astro dev",
+    "start": "astro dev",
     "clean:build-cache": "rm -rf dist .astro/content-modules.mjs .astro/content-assets.mjs",
     "repair_sitemap": "bun run scripts/repair_sitemap.tsx",
     "fetch:stars": "bun run scripts/fetch-github-stars.ts",
     "fetch:downloads": "bun run scripts/fetch-npm-downloads.ts",
-    "just:build": "bun run clean:build-cache && UV_THREADPOOL_SIZE=16 bunx --bun astro build",
+    "just:build": "bun run clean:build-cache && UV_THREADPOOL_SIZE=16 astro build",
     "generate:plugins-readme": "bun run scripts/generate-plugins-readme.ts",
-    "build": "bun run clean:build-cache && UV_THREADPOOL_SIZE=16 bunx --bun astro build",
+    "build": "bun run clean:build-cache && UV_THREADPOOL_SIZE=16 astro build",
     "build:prepare": "bun run fetch:stars && bun run fetch:downloads && bun run generate:plugins-readme && bun run fix_code_languages_all",
     "build:after": "bun run repair_sitemap && bun run seo:check",
     "seo:check": "seo-checker --output github",
@@ -19,7 +19,7 @@
     "seo:check:report": "seo-checker --report seo-report.txt",
     "seo:check:local": "seo-checker",
     "seo:generate-config": "seo-checker --generate-config",
-    "preview": "bunx --bun astro preview",
+    "preview": "astro preview",
     "types": "bunx supabase gen types typescript --project-id=xvwzpoazmxkqosrdewyv > src/services/supabase.types.ts",
     "fmt": "prettier --write '**/*' --ignore-unknown",
     "blogs:translate_all": "bun run scripts/blogs/translate_all.tsx",
@@ -34,9 +34,6 @@
     "setup:new:locale": "bun run scripts/setup_new_locale.tsx",
     "clean:unused": "bun run scripts/clean_not_used.tsx"
   },
-  "overrides": {
-    "vite": "8.0.0"
-  },
   "dependencies": {
     "@astrojs/cloudflare": "13.1.1",
     "@astrojs/sitemap": "3.7.1",
@@ -47,7 +44,7 @@
     "@supabase/supabase-js": "^2.99.1",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.1",
-    "astro": "6.0.4",
+    "astro": "https://pkg.pr.new/astro@15819",
     "astro-embed": "^0.12.0",
     "astro-heroicons": "^2.1.5-1",
     "astro-i18n-aut": "^0.7.3",
@@ -97,7 +94,7 @@
     "seobot": "^1.4.0",
     "typescript": "^5.9.3",
     "vite-plugin-static-copy": "^3.2.0",
-    "wrangler": "^4.73.0",
+    "wrangler": "^4.79.0",
     "zod": "^4"
   }
 }
