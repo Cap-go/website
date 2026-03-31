@@ -434,7 +434,7 @@ export const actions = [
     description: 'Protect app content in Android screenshots and obscure the iOS app switcher snapshot',
     href: 'https://github.com/Cap-go/capacitor-privacy-screen/',
     title: 'Privacy Screen',
-    icon: EyeSlashIcon,
+    icon: 'EyeSlash',
   },
   {
     name: '@capgo/capacitor-pdf-generator',
