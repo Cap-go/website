@@ -364,6 +364,11 @@ export default defineConfig({
               paths: ['docs/plugins/in-app-review/**'],
             },
             {
+              label: 'Plugin Incoming Call Kit',
+              description: 'native incoming call UI plugin with iOS CallKit and Android full-screen notifications',
+              paths: ['docs/plugins/incoming-call-kit/**'],
+            },
+            {
               label: 'Plugin Intent Launcher',
               description: 'Android intent launcher plugin',
               paths: ['docs/plugins/intent-launcher/**'],
@@ -1086,6 +1091,16 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/inappbrowser/' },
                 { label: 'Getting started', link: '/docs/plugins/inappbrowser/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Incoming Call Kit',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/incoming-call-kit/' },
+                { label: 'Getting started', link: '/docs/plugins/incoming-call-kit/getting-started' },
+                { label: 'iOS', link: '/docs/plugins/incoming-call-kit/ios' },
+                { label: 'Android', link: '/docs/plugins/incoming-call-kit/android' },
               ],
               collapsed: true,
             },

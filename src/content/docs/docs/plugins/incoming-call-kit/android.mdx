@@ -1,0 +1,75 @@
+---
+title: Android
+description: Configure notifications, full-screen intents, and Android-specific incoming call behavior.
+sidebar:
+  order: 4
+---
+
+## How Android behavior works
+
+On Android, the plugin posts a high-priority incoming-call notification and can raise a full-screen activity when the platform and user settings allow it.
+
+The plugin manifest already includes:
+
+```xml
+<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+<uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+```
+
+After installation, `bunx cap sync` is enough to merge that configuration into your host app.
+
+## Runtime permissions
+
+Call these methods during onboarding or before you rely on incoming-call presentation:
+
+```ts
+import { IncomingCallKit } from '@capgo/capacitor-incoming-call-kit';
+
+await IncomingCallKit.requestPermissions();
+await IncomingCallKit.requestFullScreenIntentPermission();
+```
+
+- `requestPermissions()` requests notification permission on Android 13 and later.
+- `requestFullScreenIntentPermission()` opens the Android 14 and later settings page for full-screen intents when needed.
+
+## Basic example
+
+```ts
+await IncomingCallKit.showIncomingCall({
+  callId: 'call-42',
+  callerName: 'Ada Lovelace',
+  appName: 'Capgo Phone',
+  timeoutMs: 45_000,
+  android: {
+    channelId: 'calls',
+    channelName: 'Incoming Calls',
+    showFullScreen: true,
+    isHighPriority: true,
+    accentColor: '#0F766E',
+  },
+});
+```
+
+## Android-specific options
+
+- `channelId`: identifier for the notification channel.
+- `channelName`: user-visible channel name.
+- `showFullScreen`: request the full-screen activity.
+- `isHighPriority`: keep the notification disruptive enough for ringing flows.
+- `accentColor`: tint compatible notification surfaces.
+- `ringtoneUri`: point at a custom Android ringtone resource or URI.
+
+## Behavior notes
+
+- Full-screen presentation is best-effort. If the device or user settings block it, Android still shows the incoming-call notification.
+- Timeout handling is also best-effort. The plugin tracks `timeoutMs` and emits `callTimedOut`, but your backend should still reconcile missed calls on its side.
+- Accept, decline, and end actions are emitted back through Capacitor listeners so your app can join or clean up the real call session.
+
+## Recommended production model
+
+Use Android push or your calling SDK for transport, then let this plugin handle the last mile of native ringing UI. Keep these responsibilities outside the plugin:
+
+- FCM registration and token management
+- Media session lifecycle
+- Backend call state
+- Retry and missed-call business logic

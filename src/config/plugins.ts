@@ -485,6 +485,14 @@ export const actions = [
     icon: 'DocumentText',
   },
   {
+    name: '@capgo/capacitor-incoming-call-kit',
+    author: 'github.com/Cap-go',
+    description: 'Present native incoming call UI with iOS CallKit and Android full-screen notifications',
+    href: 'https://github.com/Cap-go/capacitor-incoming-call-kit/',
+    title: 'Incoming Call Kit',
+    icon: 'Phone',
+  },
+  {
     name: '@capgo/capacitor-twilio-voice',
     author: 'github.com/Cap-go',
     description: 'Make and receive VoIP calls with Twilio Voice for in-app calling functionality',
