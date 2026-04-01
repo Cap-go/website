@@ -1,24 +1,13 @@
 ---
 import * as m from '@/paraglide/messages'
-import { locales } from '@/services/locale'
 import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getAlternateLocaleEntries, getLocaleEntry } from '@/services/landingLocale'
 
 const year = new Date().getFullYear()
-
-// Map locale codes to flag emojis
-const localeFlags: Record<string, string> = {
-  de: '🇩🇪',
-  en: '🇺🇸',
-  es: '🇪🇸',
-  fr: '🇫🇷',
-  id: '🇮🇩',
-  it: '🇮🇹',
-  ja: '🇯🇵',
-  ko: '🇰🇷',
-  zh: '🇨🇳',
-}
-
-const currentFlag = localeFlags[Astro.locals.locale] || '🇺🇸'
+const displayLocale = Astro.locals.displayLocale || Astro.locals.locale || 'en'
+const currentLocaleEntry = getLocaleEntry(displayLocale)
+const localeOptions = getAlternateLocaleEntries(Astro.locals.requestedPathname || Astro.url.pathname)
+const currentFlag = currentLocaleEntry.flag
 
 interface NavigationItem {
   name: string | (() => string)
@@ -316,24 +305,29 @@ const navigation: Record<string, NavigationItem[]> = {
       <!-- Language & Copyright -->
       <div class="flex w-full flex-col items-center justify-between gap-6 md:w-auto md:flex-row md:justify-end">
         <!-- Language Selector -->
-        <div class="relative">
+        <div class="relative" translate="no" data-no-translate>
           <button type="button" id="language-dropdown-button" class="flex items-center text-sm text-zinc-400 hover:text-white focus:outline-none">
             <span class="mr-2">{currentFlag}</span>
-            {Astro.locals.locale.toUpperCase()}
+            <span lang={currentLocaleEntry.code}>{currentLocaleEntry.nativeName}</span>
             <span class="ml-1">▼</span>
           </button>
           <div
             id="language-dropdown"
-            class="ring-opacity-5 absolute bottom-full left-0 z-50 mb-2 hidden w-32 rounded-md bg-[#1c1c1f] shadow-lg ring-1 ring-black focus:outline-none"
+            class="ring-opacity-5 absolute bottom-full left-0 z-50 mb-2 hidden w-56 rounded-md bg-[#1c1c1f] shadow-lg ring-1 ring-black focus:outline-none"
           >
             <div class="py-1">
               {
-                locales.map((item) => (
+                localeOptions.map((item) => (
                   <a
-                    href={getRelativeLocaleUrl(item.toLowerCase(), Astro.url.pathname.replace(`/${Astro.locals.locale}/`, '/'))}
-                    class="block px-4 py-2 text-sm text-zinc-400 hover:bg-zinc-800 hover:text-white"
+                    href={item.path}
+                    lang={item.code}
+                    class:list={[
+                      'block px-4 py-2 text-sm hover:bg-zinc-800 hover:text-white',
+                      item.code === displayLocale ? 'bg-zinc-800 text-white' : 'text-zinc-400',
+                    ]}
                   >
-                    {item.toUpperCase()}
+                    <span class="mr-2">{item.flag}</span>
+                    {item.nativeName}
                   </a>
                 ))
               }

@@ -7,13 +7,14 @@ import tailwindcss from '@tailwindcss/vite'
 import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
 import { defineConfig } from 'astro/config'
 import { glob } from 'glob'
-import { readFileSync, statSync } from 'node:fs'
+import { mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
 import os from 'node:os'
 import { fileURLToPath } from 'node:url'
 import starlightImageZoom from 'starlight-image-zoom'
 import starlightLlmsTxt from 'starlight-llms-txt'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import config from './configs.json'
+import { getAlternateLocaleEntries, normalizePathname, splitLocaleFromPathname } from './src/services/landingLocale'
 import { defaultLocale, localeNames, locales } from './src/services/locale'
 
 // Prefer the scheduler-aware CPU count and keep a clear override for CI/local tuning.
@@ -23,6 +24,7 @@ const CPU_COUNT = Number.isFinite(BUILD_CONCURRENCY) && BUILD_CONCURRENCY > 0 ? 
 const SRC_DIR = `${fileURLToPath(new URL('./src/', import.meta.url))
   .replace(/\\/g, '/')
   .replace(/\/$/, '')}/`
+const GENERATED_PAGE_VERSIONS_FILE = `${SRC_DIR}/generated/pageVersions.ts`
 
 // Build a map of page paths to their lastmod dates for sitemap
 function getPageLastModDates() {
@@ -62,8 +64,30 @@ function getPageLastModDates() {
 }
 
 const pageLastModDates = getPageLastModDates()
+writeGeneratedPageVersionModule(pageLastModDates)
 
 const docsExpludes = locales.map((locale) => `${locale}/**`)
+
+function writeGeneratedPageVersionModule(lastModMap) {
+  mkdirSync(`${SRC_DIR}/generated`, { recursive: true })
+
+  const entries = [...lastModMap.entries()]
+    .sort(([leftPath], [rightPath]) => leftPath.localeCompare(rightPath))
+    .map(([path, lastMod]) => `  ${JSON.stringify(path)}: ${JSON.stringify(lastMod.toISOString())},`)
+    .join('\n')
+
+  writeFileSync(
+    GENERATED_PAGE_VERSIONS_FILE,
+    [
+      `export const siteBuildVersion = ${JSON.stringify(new Date().toISOString())}`,
+      '',
+      'export const pageVersionMap = {',
+      entries,
+      '} as const',
+      '',
+    ].join('\n'),
+  )
+}
 
 export default defineConfig({
   trailingSlash: 'always',
@@ -123,11 +147,16 @@ export default defineConfig({
       lastmod: new Date(),
       serialize(item) {
         // Check if this URL matches a page with a known lastmod date
-        const urlPath = new URL(item.url).pathname
-        const lastmod = pageLastModDates.get(urlPath)
+        const urlPath = normalizePathname(new URL(item.url).pathname)
+        const { pathname: basePath } = splitLocaleFromPathname(urlPath)
+        const lastmod = pageLastModDates.get(basePath) ?? pageLastModDates.get(urlPath)
         if (lastmod) {
           item.lastmod = lastmod.toISOString()
         }
+        item.links = getAlternateLocaleEntries(urlPath).map((locale) => ({
+          lang: locale.hreflang,
+          url: new URL(locale.path, `https://${config.base_domain.prod}`).toString(),
+        }))
         return item
       },
     }),
