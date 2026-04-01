@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import * as m from '@/paraglide/messages'
+import m from '@/services/messages'
 import { createWebPageLdJson, createLdJsonGraph } from '@/lib/ldJson'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.bug_bounty_program({}, { locale: Astro.locals.locale })].join(' | ')

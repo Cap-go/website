@@ -2,7 +2,7 @@
 import { numberWithSpaces } from '@/services/misc'
 import type { Database } from '@/services/supabase.types'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import * as m from '@/paraglide/messages'
+import m from '@/services/messages'
 
 interface Props {
   pricing: Database['public']['Tables']['plans']['Row'][]

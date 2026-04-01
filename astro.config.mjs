@@ -2,9 +2,7 @@ import cloudflare from '@astrojs/cloudflare'
 import sitemap from '@astrojs/sitemap'
 import starlight from '@astrojs/starlight'
 import starlightDocSearch from '@astrojs/starlight-docsearch'
-import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import tailwindcss from '@tailwindcss/vite'
-import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
 import icon from 'astro-icon'
 import { defineConfig } from 'astro/config'
 import { glob } from 'glob'
@@ -155,18 +153,11 @@ export default defineConfig({
         heroicons: pluginIcons,
       },
     }),
-    i18n({
-      locales: localeNames,
-      defaultLocale,
-      redirectDefaultLocale: true,
-      exclude: ['pages/**/*.json.ts'],
-    }),
     sitemap({
       i18n: {
         defaultLocale,
         locales: localeNames,
       },
-      filter: filterSitemapByDefaultLocale({ defaultLocale }),
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
@@ -1688,11 +1679,6 @@ export default defineConfig({
     },
     plugins: [
       tailwindcss(),
-      paraglideVitePlugin({
-        outdir: './src/paraglide',
-        project: './project.inlang',
-        disableAsyncLocalStorage: true,
-      }),
       viteStaticCopy({
         targets: [
           {

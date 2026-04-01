@@ -1,7 +1,9 @@
 ---
 // @ts-nocheck
-import { locales } from '@/services/locale'
-import * as m from '@/paraglide/messages'
+import m from '@/services/messages'
+import { landingLocales } from '@/services/landingLocale'
+
+const localeCodes = landingLocales.map((locale) => locale.code)
 ---
 
 <div class="flex relative flex-row items-center">
@@ -21,24 +23,33 @@ import * as m from '@/paraglide/messages'
     style="top: 100%; right: 0;"
   >
     {
-      locales.map((j) => (
+      landingLocales.map((locale) => (
         <a
-          id={`language_${j}`}
+          id={`language_${locale.code}`}
           class="block py-2 px-4 text-sm text-gray-700 cursor-pointer dark:text-gray-200 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-gray-100"
           role="menuitem"
           tabindex="-1"
         >
-          {j.toUpperCase()}
+          {locale.nativeName}
         </a>
       ))
     }
   </div>
 </div>
 
-<script is:inline define:vars={{ locales, currentLocale: Astro.locals.locale }}>
+<script is:inline define:vars={{ localeCodes }}>
   const languageMenu = document.getElementById('language-menu')
   const button = document.getElementById('language-menu-button')
   if (languageMenu && button) {
+    const stripLocalePrefix = (pathname) => {
+      const segments = pathname.split('/').filter(Boolean)
+      if (segments.length > 0 && localeCodes.includes(segments[0])) {
+        const remainder = segments.slice(1).join('/')
+        return remainder ? `/${remainder}/`.replace(/\/{2,}/g, '/') : '/'
+      }
+      return pathname.endsWith('/') ? pathname : `${pathname}/`
+    }
+
     const adjustMenuPosition = () => {
       if (languageMenu.classList.contains('hidden')) return
       const rect = button.getBoundingClientRect()
@@ -58,13 +69,13 @@ import * as m from '@/paraglide/messages'
       languageMenu.classList.toggle('hidden')
       if (willShow) adjustMenuPosition()
     }
-    locales.forEach((j) => {
+    localeCodes.forEach((j) => {
       const item = document.getElementById(`language_${j}`)
       if (!item) return
       item.addEventListener('click', () => {
-        const tmp = new URL(window.location.href).pathname.replace(`/${currentLocale}/`, '/')
+        const tmp = stripLocalePrefix(new URL(window.location.href).pathname)
         if (j === 'en') window.location.href = tmp
-        else window.location.href = `/${j}${tmp}`
+        else window.location.href = `/${j}${tmp === '/' ? '/' : tmp}`
       })
     })
   }

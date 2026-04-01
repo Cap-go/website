@@ -4,8 +4,6 @@ import { env } from 'cloudflare:workers'
 import { useRuntimeConfig } from './config/app'
 import { siteBuildVersion, pageVersionMap } from './generated/pageVersions'
 import { translateLandingHtml } from './lib/landingTranslation'
-// @ts-expect-error Paraglide generates this module outside the checked source tree.
-import { paraglideMiddleware } from './paraglide/server.js'
 import { defaultLocale, type Locales } from './services/locale'
 import { isDynamicLandingPath, normalizePathname, parseRequestedLandingLocale } from './services/landingLocale'
 
@@ -17,11 +15,10 @@ export const onRequest = defineMiddleware((context, next) => {
   context.locals.runtimeConfig = runtimeConfig
 
   // When Astro pre-renders during `astro build`, there is no real request.
-  // Skip the Paraglide middleware so we don't touch unavailable request headers.
-  // Use context.isPrerendered which is the reliable way to detect prerendering
+  // Use context.isPrerendered which is the reliable way to detect prerendering.
   if (context.isPrerendered) {
-    context.locals.locale = (context.currentLocale || defaultLocale) as Locales
-    context.locals.displayLocale = context.currentLocale || defaultLocale
+    context.locals.locale = defaultLocale as Locales
+    context.locals.displayLocale = defaultLocale
     context.locals.requestedLocale = context.locals.displayLocale
     return next()
   }
@@ -51,14 +48,11 @@ export const onRequest = defineMiddleware((context, next) => {
     }
   }
 
-  return paraglideMiddleware(context.request, async () => {
-    const activeLocale = (context.currentLocale || defaultLocale) as Locales
-    context.locals.locale = activeLocale
-    context.locals.displayLocale = activeLocale
-    context.locals.requestedLocale = activeLocale
-    context.locals.isDynamicLandingRequest = false
-    return await next()
-  })
+  context.locals.locale = defaultLocale as Locales
+  context.locals.displayLocale = defaultLocale
+  context.locals.requestedLocale = defaultLocale
+  context.locals.isDynamicLandingRequest = false
+  return next()
 })
 
 async function handleDynamicLandingRequest(
@@ -82,73 +76,77 @@ async function handleDynamicLandingRequest(
     })
   }
 
-  return paraglideMiddleware(sourceRequest, async () => {
-    context.locals.locale = defaultLocale as Locales
-    context.locals.displayLocale = requestedLocale
-    context.locals.requestedLocale = requestedLocale
-    context.locals.requestedPathname = normalizePathname(requestUrl.pathname)
-    context.locals.requestedUrl = requestUrl.toString()
-    context.locals.isDynamicLandingRequest = true
+  context.locals.locale = defaultLocale as Locales
+  context.locals.displayLocale = requestedLocale
+  context.locals.requestedLocale = requestedLocale
+  context.locals.requestedPathname = normalizePathname(requestUrl.pathname)
+  context.locals.requestedUrl = requestUrl.toString()
+  context.locals.isDynamicLandingRequest = true
 
-    const sourceResponse = await next(sourceRequest)
-    if (context.request.method === 'HEAD' || !isHtmlResponse(sourceResponse)) {
-      return withTranslationHeaders(sourceResponse, {
-        cacheState: 'skip',
-        locale: requestedLocale,
-        pageVersion,
-      })
-    }
+  const sourceResponse = await next(sourceRequest)
+  if (context.request.method === 'HEAD' || !isHtmlResponse(sourceResponse)) {
+    return withTranslationHeaders(sourceResponse, {
+      cacheState: 'skip',
+      locale: requestedLocale,
+      pageVersion,
+    })
+  }
 
-    const ai = (env as { AI?: { run: (model: string, inputs: Record<string, unknown>) => Promise<unknown> } }).AI
-    if (!ai) {
-      return withTranslationHeaders(sourceResponse, {
-        cacheState: 'disabled',
-        locale: requestedLocale,
-        pageVersion,
-      })
-    }
+  const ai = (env as { AI?: { run: (model: string, inputs: Record<string, unknown>) => Promise<unknown> } }).AI
+  if (!ai) {
+    return withTranslationHeaders(sourceResponse, {
+      cacheState: 'disabled',
+      locale: requestedLocale,
+      pageVersion,
+    })
+  }
 
-    try {
-      const sourceHtml = await sourceResponse.clone().text()
-      const translatedHtml = await translateLandingHtml({
-        ai,
-        html: sourceHtml,
-        locale: requestedLocale,
-        siteOrigin: requestUrl.origin,
-      })
+  try {
+    const sourceHtml = await sourceResponse.clone().text()
+    const translatedHtml = await translateLandingHtml({
+      ai,
+      html: sourceHtml,
+      locale: requestedLocale,
+      siteOrigin: requestUrl.origin,
+    })
+    const shouldEdgeCache = sourceResponse.ok
 
-      const responseHeaders = new Headers(sourceResponse.headers)
+    const responseHeaders = new Headers(sourceResponse.headers)
+    responseHeaders.set('Content-Language', requestedLocale)
+    responseHeaders.set('X-Capgo-Build-Version', siteBuildVersion)
+    responseHeaders.set('X-Capgo-Page-Version', pageVersion)
+    responseHeaders.set(TRANSLATION_CACHE_HEADER, shouldEdgeCache ? 'miss' : 'skip')
+
+    if (shouldEdgeCache) {
       responseHeaders.set('Cache-Control', 'public, max-age=0, s-maxage=31536000, stale-while-revalidate=86400')
-      responseHeaders.set('Content-Language', requestedLocale)
       responseHeaders.set('ETag', `W/"${siteBuildVersion}:${pageVersion}:${requestedLocale}"`)
-      responseHeaders.set('X-Capgo-Build-Version', siteBuildVersion)
-      responseHeaders.set('X-Capgo-Page-Version', pageVersion)
-      responseHeaders.set(TRANSLATION_CACHE_HEADER, 'miss')
+    }
 
-      const translatedResponse = new Response(translatedHtml, {
-        headers: responseHeaders,
-        status: sourceResponse.status,
-        statusText: sourceResponse.statusText,
-      })
+    const translatedResponse = new Response(translatedHtml, {
+      headers: responseHeaders,
+      status: sourceResponse.status,
+      statusText: sourceResponse.statusText,
+    })
 
-      const cfContext = (context.locals as App.Locals & {
-        cfContext: {
-          waitUntil: (promise: Promise<unknown>) => void
-        }
-      }).cfContext
+    const cfContext = (context.locals as App.Locals & {
+      cfContext: {
+        waitUntil: (promise: Promise<unknown>) => void
+      }
+    }).cfContext
 
+    if (shouldEdgeCache) {
       cfContext.waitUntil(cache.put(cacheKey, translatedResponse.clone()))
-      return translatedResponse
     }
-    catch (error) {
-      console.error('Dynamic landing translation failed.', error)
-      return withTranslationHeaders(sourceResponse, {
-        cacheState: 'error',
-        locale: requestedLocale,
-        pageVersion,
-      })
-    }
-  })
+    return translatedResponse
+  }
+  catch (error) {
+    console.error('Dynamic landing translation failed.', error)
+    return withTranslationHeaders(sourceResponse, {
+      cacheState: 'error',
+      locale: requestedLocale,
+      pageVersion,
+    })
+  }
 }
 
 function createSourceRequest(request: Request, sourcePathname: string): Request {

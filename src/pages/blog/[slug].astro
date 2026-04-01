@@ -4,7 +4,7 @@ import GetStarted from '@/components/GetStarted.astro'
 import { formatTime } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
 import { createNewsArticleLdJson } from '@/lib/ldJson'
-import * as m from '@/paraglide/messages'
+import m from '@/services/messages'
 import type { GetStaticPaths } from 'astro'
 import type { CollectionEntry } from 'astro:content'
 import { getCollection, render } from 'astro:content'
@@ -60,19 +60,6 @@ if (!entry) {
 }
 
 const related = allPublishedEntries.filter((j) => j.data.slug !== Astro.params.slug && j.data.locale === Astro.locals.locale).slice(0, 3)
-const seenLocales = new Set()
-const alternateVersions = entries
-  .filter(({ data }) => {
-    if (seenLocales.has(data.locale)) return false
-    seenLocales.add(data.locale)
-    return true
-  })
-  .map(({ data }) => ({
-    slug: data.slug,
-    locale: data.locale,
-    url:
-      data.locale === 'en' ? `${Astro.locals.runtimeConfig.public.baseUrl}/blog/${data.slug}/` : `${Astro.locals.runtimeConfig.public.baseUrl}/${data.locale}/blog/${data.slug}/`,
-  }))
 
 const { Content, headings } = await render(entry)
 
@@ -86,7 +73,6 @@ const content: {
   author?: string
   ldJSON?: Object
   keywords?: string[]
-  alternateVersions?: any[]
   ogType?: string
   articlePublishedTime?: string
   articleModifiedTime?: string
@@ -102,8 +88,6 @@ if (entry.data.head_image) {
 }
 if (entry.data.author) content['author'] = entry.data.author || 'Capgo'
 if (entry.data.keywords) content['keywords'] = entry.data.keywords.split(',') || []
-if (alternateVersions.length > 0) content['alternateVersions'] = alternateVersions
-
 // Add article-specific OG tags for better social sharing
 content['ogType'] = 'article'
 content['articlePublishedTime'] = new Date(datePublished).toISOString()

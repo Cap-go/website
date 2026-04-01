@@ -3,13 +3,13 @@ import { baseDomain, structuredData } from '@/config/app'
 import { appName } from '@/constants'
 import { AstroFont } from 'astro-font'
 import { join } from 'node:path'
-import * as m from '@/paraglide/messages'
+import m from '@/services/messages'
 import { generateAlternateVersions } from '@/lib/alternateVersions'
 import { getOgLocale } from '@/services/landingLocale'
 
 const requestUrl = Astro.locals.requestedUrl ? new URL(Astro.locals.requestedUrl) : Astro.url
 const rawLocale = (Astro.locals.displayLocale || Astro.locals.locale || 'en').toString().toLowerCase()
-// Paraglide message functions use a narrower locale union than the app router.
+// The English copy shim does not need the requested display locale for lookups.
 // Cast once here to avoid repeating casts and keep runtime behavior unchanged.
 const messageLocale = Astro.locals.locale as any
 

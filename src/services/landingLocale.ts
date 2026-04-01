@@ -54,8 +54,6 @@ const staticLocaleEntries = locales
   .filter((locale): locale is LandingLocaleDefinition => Boolean(locale))
 
 const DYNAMIC_LANDING_EXACT_EXCLUDES = new Set<string>([
-  '/docs/',
-  '/blog/',
   '/robots.txt',
   '/favicon.ico',
   '/favicon.svg',
@@ -66,7 +64,7 @@ const DYNAMIC_LANDING_EXACT_EXCLUDES = new Set<string>([
   '/sponsors.json',
 ])
 
-const DYNAMIC_LANDING_PREFIX_EXCLUDES = ['/docs/', '/blog/', '/_astro/', '/.well-known/']
+const DYNAMIC_LANDING_PREFIX_EXCLUDES = ['/_astro/', '/.well-known/']
 
 export function isLandingLocale(locale: string | undefined): locale is LandingLocaleCode {
   if (!locale) {

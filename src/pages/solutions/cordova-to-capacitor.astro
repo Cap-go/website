@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import * as m from '@/paraglide/messages'
+import m from '@/services/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import HandoffIllustration from '@/components/solutions/HandoffIllustration.astro'
 import BugFixIllustration from '@/components/solutions/BugFixIllustration.astro'
@@ -342,9 +342,9 @@ const content = { title, description, ldJSON }
                 const day = idx + 1
                 const titleKey = `solutions_cordova_to_capacitor_day${day}_title` as const
                 const descKey = `solutions_cordova_to_capacitor_day${day}_desc` as const
-                // @ts-expect-error paraglide keys are generated, but TS can't infer from the string
+                // @ts-expect-error Message keys are resolved dynamically from the copy shim.
                 const dayTitle = m[titleKey]({}, { locale })
-                // @ts-expect-error paraglide keys are generated, but TS can't infer from the string
+                // @ts-expect-error Message keys are resolved dynamically from the copy shim.
                 const dayDesc = m[descKey]({}, { locale })
                 return (
                   <li class="rounded-2xl border border-gray-700 bg-gray-900 p-6">
@@ -475,9 +475,9 @@ const content = { title, description, ldJSON }
               const n = idx + 1
               const qKey = `solutions_cordova_to_capacitor_faq${n}_q` as const
               const aKey = `solutions_cordova_to_capacitor_faq${n}_a` as const
-              // @ts-expect-error paraglide keys are generated, but TS can't infer from the string
+              // @ts-expect-error Message keys are resolved dynamically from the copy shim.
               const q = m[qKey]({}, { locale })
-              // @ts-expect-error paraglide keys are generated, but TS can't infer from the string
+              // @ts-expect-error Message keys are resolved dynamically from the copy shim.
               const a = m[aKey]({}, { locale })
               return (
                 <details class="group rounded-2xl border border-gray-700 bg-gray-800 p-6">

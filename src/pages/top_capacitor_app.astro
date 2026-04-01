@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import { renameCat, shortNumber } from '@/services/misc'
-import * as m from '@/paraglide/messages'
+import m from '@/services/messages'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.top_capacitor_apps({}, { locale: Astro.locals.locale })].join(' | ')
 const description = m.top_100_app_using_capacitor_on_android_play_store({}, { locale: Astro.locals.locale })

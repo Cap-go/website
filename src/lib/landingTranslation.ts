@@ -254,17 +254,41 @@ function localizeInternalUrl(value: string, locale: string, siteOrigin: string):
 }
 
 async function translateSegments(ai: AiBinding, locale: string, values: string[]): Promise<string[]> {
-  const maskedEntries = values.map((value, index) => createMaskedValue(value, index))
+  const maskedEntries = values.map((value, index) => ({
+    ...createMaskedValue(value, index),
+    translationId: '',
+  }))
   const translatedValues = new Array<string>(maskedEntries.length)
-  const chunks = chunkMaskedValues(maskedEntries)
+  const uniqueValues = new Map<string, string>()
+  const uniqueEntries: Array<{ id: string; maskedValue: string }> = []
+
+  maskedEntries.forEach((entry) => {
+    const existingId = uniqueValues.get(entry.maskedValue)
+    if (existingId) {
+      entry.translationId = existingId
+      return
+    }
+
+    const translationId = `t${uniqueEntries.length}`
+    uniqueValues.set(entry.maskedValue, translationId)
+    uniqueEntries.push({ id: translationId, maskedValue: entry.maskedValue })
+    entry.translationId = translationId
+  })
+
+  const translatedById = new Map<string, string>()
+  const chunks = chunkMaskedValues(uniqueEntries)
 
   for (const chunk of chunks) {
-    const translatedChunk = await translateChunk(ai, locale, chunk.map((entry) => entry.maskedValue))
+    const translatedChunk = await translateChunk(ai, locale, chunk)
 
-    chunk.forEach((entry, index) => {
-      translatedValues[entry.index] = entry.restore(translatedChunk[index] ?? entry.maskedValue)
+    chunk.forEach((entry) => {
+      translatedById.set(entry.id, translatedChunk[entry.id] ?? entry.maskedValue)
     })
   }
+
+  maskedEntries.forEach((entry) => {
+    translatedValues[entry.index] = entry.restore(translatedById.get(entry.translationId) ?? entry.maskedValue)
+  })
 
   return translatedValues
 }
@@ -291,14 +315,14 @@ function createMaskedValue(value: string, index = 0) {
 }
 
 function chunkMaskedValues(
-  maskedValues: Array<ReturnType<typeof createMaskedValue>>,
-): Array<Array<ReturnType<typeof createMaskedValue>>> {
-  const chunks: Array<Array<ReturnType<typeof createMaskedValue>>> = []
-  let currentChunk: Array<ReturnType<typeof createMaskedValue>> = []
+  maskedValues: Array<{ id: string; maskedValue: string }>,
+): Array<Array<{ id: string; maskedValue: string }>> {
+  const chunks: Array<Array<{ id: string; maskedValue: string }>> = []
+  let currentChunk: Array<{ id: string; maskedValue: string }> = []
   let currentLength = 0
 
   maskedValues.forEach((entry) => {
-    const nextLength = currentLength + entry.maskedValue.length
+    const nextLength = currentLength + entry.id.length + entry.maskedValue.length
 
     if (currentChunk.length >= 24 || nextLength > 5000) {
       chunks.push(currentChunk)
@@ -317,18 +341,28 @@ function chunkMaskedValues(
   return chunks
 }
 
-async function translateChunk(ai: AiBinding, locale: string, values: string[]): Promise<string[]> {
+async function translateChunk(
+  ai: AiBinding,
+  locale: string,
+  values: Array<{ id: string; maskedValue: string }>,
+): Promise<Record<string, string>> {
+  const translationProperties = Object.fromEntries(
+    values.map(({ id }) => [
+      id,
+      {
+        type: 'string',
+      },
+    ]),
+  )
   const schema = {
     type: 'object',
     additionalProperties: false,
     properties: {
       translations: {
-        type: 'array',
-        items: {
-          type: 'string',
-        },
-        minItems: values.length,
-        maxItems: values.length,
+        type: 'object',
+        additionalProperties: false,
+        properties: translationProperties,
+        required: values.map(({ id }) => id),
       },
     },
     required: ['translations'],
@@ -340,13 +374,13 @@ async function translateChunk(ai: AiBinding, locale: string, values: string[]): 
       {
         role: 'system',
         content:
-          'Translate English website copy into the requested target language. Return JSON only. Keep placeholders such as __CAPGO_KEEP_0__ exactly unchanged. Preserve punctuation, markdown, and brand names.',
+          'Translate isolated English website copy into the requested target language. Return JSON only. Each key is an opaque ID. Translate only the value for each key. Keep placeholders such as __CAPGO_KEEP_0__ exactly unchanged. Preserve punctuation, HTML fragments, markdown, and brand names.',
       },
       {
         role: 'user',
         content: JSON.stringify({
           targetLocale: locale,
-          items: values,
+          items: Object.fromEntries(values.map(({ id, maskedValue }) => [id, maskedValue])),
         }),
       },
     ],
@@ -359,20 +393,23 @@ async function translateChunk(ai: AiBinding, locale: string, values: string[]): 
     },
   })
 
-  const parsed = extractTranslations(response)
-  if (!parsed || parsed.length !== values.length) {
+  const parsed = extractTranslations(response, values.map(({ id }) => id))
+  if (!parsed) {
     throw new Error(`Workers AI returned an invalid translation payload for locale "${locale}".`)
   }
 
   return parsed
 }
 
-function extractTranslations(response: unknown): string[] | null {
-  if (Array.isArray((response as { translations?: unknown[] })?.translations)) {
-    return (response as { translations: string[] }).translations
+function extractTranslations(response: unknown, ids: string[]): Record<string, string> | null {
+  const directTranslations = normalizeTranslationMap((response as { translations?: unknown })?.translations, ids)
+  if (directTranslations) {
+    return directTranslations
   }
-  if (Array.isArray((response as { result?: { translations?: unknown[] } })?.result?.translations)) {
-    return (response as { result: { translations: string[] } }).result.translations
+
+  const nestedTranslations = normalizeTranslationMap((response as { result?: { translations?: unknown } })?.result?.translations, ids)
+  if (nestedTranslations) {
+    return nestedTranslations
   }
 
   const candidates = [
@@ -388,15 +425,29 @@ function extractTranslations(response: unknown): string[] | null {
     }
 
     const parsedCandidate = parseJsonCandidate(candidate)
-    if (Array.isArray(parsedCandidate?.translations)) {
-      return parsedCandidate.translations
+    const parsedTranslations = normalizeTranslationMap(parsedCandidate?.translations, ids)
+    if (parsedTranslations) {
+      return parsedTranslations
     }
   }
 
   return null
 }
 
-function parseJsonCandidate(candidate: string): { translations?: string[] } | null {
+function normalizeTranslationMap(candidate: unknown, ids: string[]): Record<string, string> | null {
+  if (!candidate || typeof candidate !== 'object' || Array.isArray(candidate)) {
+    return null
+  }
+
+  const normalized = candidate as Record<string, unknown>
+  if (!ids.every((id) => typeof normalized[id] === 'string')) {
+    return null
+  }
+
+  return Object.fromEntries(ids.map((id) => [id, normalized[id] as string]))
+}
+
+function parseJsonCandidate(candidate: string): { translations?: Record<string, string> } | null {
   const sanitizedCandidate = candidate
     .replace(/^```json\s*/iu, '')
     .replace(/^```\s*/iu, '')
