@@ -288,7 +288,7 @@ const benefits = [
 
 <script>
   import type { DownloadableFile } from '@/scripts/tool-client'
-  import { downloadFile, escapeHtml, postJson } from '@/scripts/tool-client'
+  import { downloadFile, postJson } from '@/scripts/tool-client'
 
   interface IosCertificateResponse {
     summary: {
@@ -307,6 +307,55 @@ const benefits = [
   const downloads = document.getElementById('ios-certificate-downloads') as HTMLDivElement | null
 
   let generatedFiles: DownloadableFile[] = []
+
+  const createSummaryItem = (label: string, value: string) => {
+    const wrapper = document.createElement('div')
+    const term = document.createElement('dt')
+    const detail = document.createElement('dd')
+
+    term.className = 'text-xs uppercase tracking-[0.25em] text-cyan-300'
+    term.textContent = label
+
+    detail.className = 'mt-2 text-sm leading-7 text-white'
+    detail.textContent = value
+
+    wrapper.append(term, detail)
+    return wrapper
+  }
+
+  const renderSummary = (response: IosCertificateResponse) => {
+    const list = document.createElement('dl')
+    list.className = 'grid gap-4 sm:grid-cols-3'
+    list.append(
+      createSummaryItem('Subject', response.summary.subject),
+      createSummaryItem('Key type', response.summary.keyType),
+      createSummaryItem('Hash', response.summary.hashAlgorithm),
+    )
+    summary?.replaceChildren(list)
+  }
+
+  const renderDownloads = (files: DownloadableFile[]) => {
+    const buttons = files.map((file, index) => {
+      const button = document.createElement('button')
+      const name = document.createElement('span')
+      const hint = document.createElement('span')
+
+      button.type = 'button'
+      button.dataset.fileIndex = String(index)
+      button.className = 'rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-left transition hover:border-cyan-300/50 hover:bg-white/8'
+
+      name.className = 'block text-sm font-semibold text-white'
+      name.textContent = file.fileName
+
+      hint.className = 'mt-2 block text-xs uppercase tracking-[0.2em] text-cyan-300'
+      hint.textContent = 'Download file'
+
+      button.append(name, hint)
+      return button
+    })
+
+    downloads?.replaceChildren(...buttons)
+  }
 
   downloads?.addEventListener('click', (event) => {
     const target = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-file-index]')
@@ -335,37 +384,8 @@ const benefits = [
       const response = await postJson<IosCertificateResponse>('/api/tools/ios-certificate-generator', payload)
 
       generatedFiles = response.files
-      summary.innerHTML = `
-        <dl class="grid gap-4 sm:grid-cols-3">
-          <div>
-            <dt class="text-xs uppercase tracking-[0.25em] text-cyan-300">Subject</dt>
-            <dd class="mt-2 text-sm leading-7 text-white">${escapeHtml(response.summary.subject)}</dd>
-          </div>
-          <div>
-            <dt class="text-xs uppercase tracking-[0.25em] text-cyan-300">Key type</dt>
-            <dd class="mt-2 text-sm leading-7 text-white">${escapeHtml(response.summary.keyType)}</dd>
-          </div>
-          <div>
-            <dt class="text-xs uppercase tracking-[0.25em] text-cyan-300">Hash</dt>
-            <dd class="mt-2 text-sm leading-7 text-white">${escapeHtml(response.summary.hashAlgorithm)}</dd>
-          </div>
-        </dl>
-      `
-
-      downloads.innerHTML = response.files
-        .map(
-          (file, index) => `
-            <button
-              type="button"
-              data-file-index="${index}"
-              class="rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-left transition hover:border-cyan-300/50 hover:bg-white/8"
-            >
-              <span class="block text-sm font-semibold text-white">${escapeHtml(file.fileName)}</span>
-              <span class="mt-2 block text-xs uppercase tracking-[0.2em] text-cyan-300">Download file</span>
-            </button>
-          `,
-        )
-        .join('')
+      renderSummary(response)
+      renderDownloads(response.files)
 
       emptyState.classList.add('hidden')
       result.classList.remove('hidden')

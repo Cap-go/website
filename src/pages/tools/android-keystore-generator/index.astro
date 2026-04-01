@@ -321,7 +321,7 @@ const content = {
 
 <script>
   import type { DownloadableFile } from '@/scripts/tool-client'
-  import { downloadFile, escapeHtml, postJson } from '@/scripts/tool-client'
+  import { downloadFile, postJson } from '@/scripts/tool-client'
 
   interface AndroidKeystoreResponse {
     summary: {
@@ -342,6 +342,65 @@ const content = {
   const downloads = document.getElementById('android-keystore-downloads') as HTMLDivElement | null
 
   let generatedFiles: DownloadableFile[] = []
+
+  const createSummaryItem = (label: string, value: string, className = '') => {
+    const wrapper = document.createElement('div')
+    const term = document.createElement('dt')
+    const detail = document.createElement('dd')
+
+    wrapper.className = className
+    term.className = 'text-xs uppercase tracking-[0.25em] text-emerald-300'
+    term.textContent = label
+
+    detail.className = 'mt-2 text-sm leading-7 text-white'
+    detail.textContent = value
+
+    wrapper.append(term, detail)
+    return wrapper
+  }
+
+  const renderSummary = (response: AndroidKeystoreResponse) => {
+    const list = document.createElement('dl')
+    list.className = 'grid gap-4 sm:grid-cols-2'
+
+    const sha1 = createSummaryItem('SHA-1', response.summary.fingerprintSha1)
+    const sha256 = createSummaryItem('SHA-256', response.summary.fingerprintSha256)
+    sha1.lastElementChild?.classList.add('break-all')
+    sha256.lastElementChild?.classList.add('break-all')
+
+    list.append(
+      createSummaryItem('Subject', response.summary.subject, 'sm:col-span-2'),
+      createSummaryItem('Alias', response.summary.alias),
+      createSummaryItem('Validity', `${response.summary.validityYears} years`),
+      sha1,
+      sha256,
+    )
+
+    summary?.replaceChildren(list)
+  }
+
+  const renderDownloads = (files: DownloadableFile[]) => {
+    const buttons = files.map((file, index) => {
+      const button = document.createElement('button')
+      const name = document.createElement('span')
+      const hint = document.createElement('span')
+
+      button.type = 'button'
+      button.dataset.fileIndex = String(index)
+      button.className = 'rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-left transition hover:border-emerald-300/50 hover:bg-white/8'
+
+      name.className = 'block text-sm font-semibold text-white'
+      name.textContent = file.fileName
+
+      hint.className = 'mt-2 block text-xs uppercase tracking-[0.2em] text-emerald-300'
+      hint.textContent = 'Download file'
+
+      button.append(name, hint)
+      return button
+    })
+
+    downloads?.replaceChildren(...buttons)
+  }
 
   downloads?.addEventListener('click', (event) => {
     const target = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-file-index]')
@@ -370,45 +429,8 @@ const content = {
       const response = await postJson<AndroidKeystoreResponse>('/api/tools/android-keystore-generator', payload)
 
       generatedFiles = response.files
-      summary.innerHTML = `
-        <dl class="grid gap-4 sm:grid-cols-2">
-          <div class="sm:col-span-2">
-            <dt class="text-xs uppercase tracking-[0.25em] text-emerald-300">Subject</dt>
-            <dd class="mt-2 text-sm leading-7 text-white">${escapeHtml(response.summary.subject)}</dd>
-          </div>
-          <div>
-            <dt class="text-xs uppercase tracking-[0.25em] text-emerald-300">Alias</dt>
-            <dd class="mt-2 text-sm leading-7 text-white">${escapeHtml(response.summary.alias)}</dd>
-          </div>
-          <div>
-            <dt class="text-xs uppercase tracking-[0.25em] text-emerald-300">Validity</dt>
-            <dd class="mt-2 text-sm leading-7 text-white">${escapeHtml(String(response.summary.validityYears))} years</dd>
-          </div>
-          <div>
-            <dt class="text-xs uppercase tracking-[0.25em] text-emerald-300">SHA-1</dt>
-            <dd class="mt-2 break-all text-sm leading-7 text-white">${escapeHtml(response.summary.fingerprintSha1)}</dd>
-          </div>
-          <div>
-            <dt class="text-xs uppercase tracking-[0.25em] text-emerald-300">SHA-256</dt>
-            <dd class="mt-2 break-all text-sm leading-7 text-white">${escapeHtml(response.summary.fingerprintSha256)}</dd>
-          </div>
-        </dl>
-      `
-
-      downloads.innerHTML = response.files
-        .map(
-          (file, index) => `
-            <button
-              type="button"
-              data-file-index="${index}"
-              class="rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-left transition hover:border-emerald-300/50 hover:bg-white/8"
-            >
-              <span class="block text-sm font-semibold text-white">${escapeHtml(file.fileName)}</span>
-              <span class="mt-2 block text-xs uppercase tracking-[0.2em] text-emerald-300">Download file</span>
-            </button>
-          `,
-        )
-        .join('')
+      renderSummary(response)
+      renderDownloads(response.files)
 
       emptyState.classList.add('hidden')
       result.classList.remove('hidden')
