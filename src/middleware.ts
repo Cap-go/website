@@ -205,6 +205,8 @@ function localizeResponseLocation(response: Response, locale: string, siteOrigin
 
 function createCacheKey(requestUrl: URL, pageVersion: string): Request {
   const cacheUrl = new URL(requestUrl.toString())
+  cacheUrl.search = ''
+  cacheUrl.hash = ''
   cacheUrl.searchParams.set('__capgo_build', siteBuildVersion)
   cacheUrl.searchParams.set('__capgo_page', pageVersion)
   return new Request(cacheUrl.toString(), {

@@ -152,6 +152,9 @@ export function getLocalizedPathname(pathname: string, locale: string): string {
   const normalized = normalizePathname(strippedPath)
 
   if (!isDynamicLandingPath(normalized)) {
+    if (looksLikeFilePath(normalized)) {
+      return normalized
+    }
     if (locale !== defaultLocale && isStaticLocale(locale)) {
       return normalizePathname(`/${locale}${normalized}`)
     }
