@@ -48,7 +48,10 @@ const titleString = typeof title === 'string' && title.trim().length > 0 ? title
 const descriptionString =
   typeof description === 'string' && description.trim().length > 0 ? description : m.website_description({}, { locale: messageLocale })
 
-const requestedUrlString = requestUrl.toString()
+const canonicalRequestUrl = new URL(requestUrl.toString())
+canonicalRequestUrl.search = ''
+canonicalRequestUrl.hash = ''
+const requestedUrlString = canonicalRequestUrl.toString()
 const urlString = Astro.locals.isDynamicLandingRequest ? requestedUrlString : (toStringUrl(url) || requestedUrlString)
 const canonicalString = Astro.locals.isDynamicLandingRequest ? requestedUrlString : (toStringUrl(canonical) || urlString)
 

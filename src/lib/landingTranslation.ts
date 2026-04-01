@@ -7,6 +7,7 @@ const SKIP_TAGS = new Set(['CODE', 'NOSCRIPT', 'PRE', 'SCRIPT', 'STYLE', 'SVG', 
 const TRANSLATABLE_ATTRIBUTES = ['aria-label', 'alt', 'placeholder', 'title'] as const
 const TRANSLATABLE_META_NAMES = new Set(['description', 'keywords', 'twitter:description', 'twitter:title'])
 const TRANSLATABLE_META_PROPERTIES = new Set(['og:description', 'og:title', 'twitter:description', 'twitter:title'])
+const JSON_LD_URL_KEYS = new Set(['@id', 'contentUrl', 'embedUrl', 'image', 'item', 'logo', 'mainEntityOfPage', 'sameAs', 'url'])
 const PROTECTED_PATTERNS = [
   /https?:\/\/[^\s"'<>]+/giu,
   /\b(?:App Store|Cloudflare|CLI|Capacitor|Capgo|Electron|GDPR|GitHub|Google Play|OTA|SDK|SOC 1|SOC 2|Supabase|Workers AI|iOS|Android|API)\b/gu,
@@ -168,6 +169,10 @@ function rewriteInternalLinks(document: Document, locale: string, siteOrigin: st
   const anchors = Array.from(document.querySelectorAll('a[href]'))
 
   for (const anchor of anchors) {
+    if (anchor.closest('[translate="no"], [data-no-translate]')) {
+      continue
+    }
+
     const href = anchor.getAttribute('href')
     if (!href) {
       continue
@@ -200,13 +205,16 @@ function rewriteStructuredDataUrls(document: Document, locale: string, siteOrigi
   }
 }
 
-function rewriteJsonLdValue(value: unknown, locale: string, siteOrigin: string): unknown {
+function rewriteJsonLdValue(value: unknown, locale: string, siteOrigin: string, parentKey?: string): unknown {
   if (typeof value === 'string') {
+    if (!parentKey || !JSON_LD_URL_KEYS.has(parentKey)) {
+      return value
+    }
     return localizeInternalUrl(value, locale, siteOrigin) ?? value
   }
 
   if (Array.isArray(value)) {
-    return value.map((item) => rewriteJsonLdValue(item, locale, siteOrigin))
+    return value.map((item) => rewriteJsonLdValue(item, locale, siteOrigin, parentKey))
   }
 
   if (value && typeof value === 'object') {
@@ -217,7 +225,7 @@ function rewriteJsonLdValue(value: unknown, locale: string, siteOrigin: string):
         clonedValue[key] = locale
         continue
       }
-      clonedValue[key] = rewriteJsonLdValue(nestedValue, locale, siteOrigin)
+      clonedValue[key] = rewriteJsonLdValue(nestedValue, locale, siteOrigin, key)
     }
 
     return clonedValue
@@ -322,9 +330,13 @@ function chunkMaskedValues(
   let currentLength = 0
 
   maskedValues.forEach((entry) => {
+    if (entry.maskedValue.length > 5000) {
+      throw new Error('Translation segment exceeds the maximum chunk size.')
+    }
+
     const nextLength = currentLength + entry.id.length + entry.maskedValue.length
 
-    if (currentChunk.length >= 24 || nextLength > 5000) {
+    if (currentChunk.length >= 24 || (currentChunk.length > 0 && nextLength > 5000)) {
       chunks.push(currentChunk)
       currentChunk = []
       currentLength = 0

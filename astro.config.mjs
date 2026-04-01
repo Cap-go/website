@@ -23,7 +23,7 @@ const CPU_COUNT = Number.isFinite(BUILD_CONCURRENCY) && BUILD_CONCURRENCY > 0 ? 
 const SRC_DIR = `${fileURLToPath(new URL('./src/', import.meta.url))
   .replace(/\\/g, '/')
   .replace(/\/$/, '')}/`
-const GENERATED_PAGE_VERSIONS_FILE = `${SRC_DIR}/generated/pageVersions.ts`
+const GENERATED_PAGE_VERSIONS_FILE = `${SRC_DIR}generated/pageVersions.ts`
 const PUBLIC_DIR = fileURLToPath(new URL('./public/', import.meta.url)).replace(/\\/g, '/').replace(/\/$/, '')
 
 // Build a map of page paths to their lastmod dates for sitemap

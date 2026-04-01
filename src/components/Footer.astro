@@ -306,7 +306,13 @@ const navigation: Record<string, NavigationItem[]> = {
       <div class="flex w-full flex-col items-center justify-between gap-6 md:w-auto md:flex-row md:justify-end">
         <!-- Language Selector -->
         <div class="relative" translate="no" data-no-translate>
-          <button type="button" id="language-dropdown-button" class="flex items-center text-sm text-zinc-400 hover:text-white focus:outline-none">
+          <button
+            type="button"
+            id="language-dropdown-button"
+            aria-controls="language-dropdown"
+            aria-expanded="false"
+            class="flex items-center text-sm text-zinc-400 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
+          >
             <span class="mr-2">{currentFlag}</span>
             <span lang={currentLocaleEntry.code}>{currentLocaleEntry.nativeName}</span>
             <span class="ml-1">▼</span>
@@ -350,12 +356,14 @@ const navigation: Record<string, NavigationItem[]> = {
 
   if (button && dropdown) {
     button.addEventListener('click', () => {
-      dropdown.classList.toggle('hidden')
+      const isOpen = !dropdown.classList.toggle('hidden')
+      button.setAttribute('aria-expanded', String(isOpen))
     })
 
     document.addEventListener('click', (event) => {
       if (!button?.contains(event.target as Node) && !dropdown?.contains(event.target as Node)) {
         dropdown?.classList.add('hidden')
+        button.setAttribute('aria-expanded', 'false')
       }
     })
   }
