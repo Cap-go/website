@@ -25,7 +25,7 @@ const catalogs: Record<string, MessageCatalog> = {
   zh: chineseMessages as MessageCatalog,
 }
 
-const placeholderPattern = /\{([A-Za-z0-9_]+)\}/g
+const placeholderPattern = /\{(\w+)\}/g
 const missingMessageWarnings = new Set<string>()
 
 function formatPlaceholderValue(key: string, value: unknown): string {
@@ -46,7 +46,7 @@ function formatPlaceholderValue(key: string, value: unknown): string {
 }
 
 function formatMessage(template: string, params: MessageParams = {}): string {
-  return template.replace(placeholderPattern, (_, key: string) => {
+  return template.replaceAll(placeholderPattern, (_, key: string) => {
     const value = params[key]
     return formatPlaceholderValue(key, value)
   })

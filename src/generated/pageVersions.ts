@@ -1,4 +1,4 @@
-export const siteBuildVersion = "2026-04-01T22:34:25.719Z"
+export const siteBuildVersion = "2026-04-01T22:42:40.730Z"
 
 export const pageVersionMap = {
   "/": "2026-04-01T21:30:46.403Z",

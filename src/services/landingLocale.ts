@@ -95,12 +95,14 @@ export function looksLikeFilePath(pathname: string): boolean {
   return /\.[a-z0-9]{1,8}$/i.test(pathname)
 }
 
-export function normalizePathname(pathname: string): string {
-  let normalized = pathname || '/'
+export function normalizePathname(pathname = '/'): string {
+  let normalized = pathname
   if (!normalized.startsWith('/')) {
     normalized = `/${normalized}`
   }
-  normalized = normalized.replace(/\/{2,}/g, '/')
+  while (normalized.includes('//')) {
+    normalized = normalized.replaceAll('//', '/')
+  }
   if (normalized !== '/' && !normalized.endsWith('/') && !looksLikeFilePath(normalized)) {
     normalized = `${normalized}/`
   }

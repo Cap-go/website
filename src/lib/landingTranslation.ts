@@ -111,7 +111,7 @@ function shouldSkipElement(element: Element): boolean {
   return (
     SKIP_TAGS.has(element.tagName) ||
     element.getAttribute('translate') === 'no' ||
-    element.hasAttribute('data-no-translate')
+    element.dataset.noTranslate !== undefined
   )
 }
 
@@ -153,9 +153,13 @@ function prepareTextSegment(value: string): { leading: string; core: string; tra
     return null
   }
 
-  const leading = value.match(/^\s*/u)?.[0] ?? ''
-  const trailing = value.match(/\s*$/u)?.[0] ?? ''
-  const core = value.trim()
+  const trimmedStart = value.trimStart()
+  const trimmedValue = trimmedStart.trimEnd()
+  const leadingLength = value.length - trimmedStart.length
+  const trailingLength = trimmedStart.length - trimmedValue.length
+  const leading = value.slice(0, leadingLength)
+  const trailing = trailingLength > 0 ? trimmedStart.slice(trimmedValue.length) : ''
+  const core = trimmedValue
 
   return {
     leading,
@@ -547,11 +551,18 @@ function normalizeTranslationMap(candidate: unknown, ids: string[]): Record<stri
 }
 
 function parseJsonCandidate(candidate: string): { translations?: Record<string, string> } | null {
-  const sanitizedCandidate = candidate
-    .replace(/^```json\s*/iu, '')
-    .replace(/^```\s*/iu, '')
-    .replace(/\s*```$/u, '')
-    .trim()
+  let sanitizedCandidate = candidate.trim()
+
+  if (sanitizedCandidate.startsWith('```json')) {
+    sanitizedCandidate = sanitizedCandidate.slice('```json'.length).trimStart()
+  }
+  else if (sanitizedCandidate.startsWith('```')) {
+    sanitizedCandidate = sanitizedCandidate.slice(3).trimStart()
+  }
+
+  if (sanitizedCandidate.endsWith('```')) {
+    sanitizedCandidate = sanitizedCandidate.slice(0, -3).trimEnd()
+  }
 
   try {
     return JSON.parse(sanitizedCandidate)
