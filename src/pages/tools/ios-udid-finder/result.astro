@@ -1,0 +1,105 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { decodePayload } from '@/lib/tools/udid'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const payload = decodePayload(Astro.url.searchParams.get('payload'))
+
+const title = payload?.udid ? 'iOS UDID Finder Result | Device Identifier Received' : 'iOS UDID Finder Result'
+const description = payload?.udid
+  ? 'Your device response has been received. Review the UDID, model, serial number, and other identifiers below.'
+  : 'No device response payload was found.'
+
+const content = {
+  title,
+  description,
+  robots: 'noindex, nofollow',
+}
+
+const rows = payload
+  ? [
+      ['UDID', payload.udid],
+      ['Device name', payload.deviceName],
+      ['Product', payload.product],
+      ['iOS version', payload.version],
+      ['Serial number', payload.serial],
+      ['IMEI', payload.imei],
+      ['MEID', payload.meid],
+    ].filter((row) => row[1])
+  : []
+---
+
+<Layout content={content}>
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
+        <p class="text-sm font-semibold tracking-[0.25em] text-fuchsia-300 uppercase">Device response</p>
+        <h1 class="mt-3 text-4xl font-bold text-white">iOS UDID Finder result</h1>
+
+        {
+          payload?.udid ? (
+            <>
+              <p class="mt-4 text-sm leading-7 text-slate-300">
+                The backend received the device payload successfully. Copy the values you need for Apple Developer or your tester registry below.
+              </p>
+              <div class="mt-8 space-y-4">
+                {rows.map(([label, value], index) => (
+                  <div class="rounded-2xl border border-white/10 bg-slate-950/70 p-5">
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <div>
+                        <p class="text-xs tracking-[0.25em] text-fuchsia-300 uppercase">{label}</p>
+                        <p class="mt-2 font-mono text-sm break-all text-white">{value}</p>
+                      </div>
+                      <button
+                        type="button"
+                        class="inline-flex items-center justify-center rounded-2xl border border-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:border-fuchsia-300/60 hover:bg-white/5"
+                        data-copy-value={value}
+                      >
+                        Copy
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <div class="mt-8 rounded-2xl border border-amber-400/20 bg-amber-400/10 p-6 text-sm leading-7 text-amber-100">
+              No payload was found in the URL. Open this page through the profile-service redirect after installing the UDID profile on the device.
+            </div>
+          )
+        }
+
+        <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'tools/ios-udid-finder')}
+            class="inline-flex items-center justify-center rounded-2xl bg-fuchsia-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-fuchsia-300"
+          >
+            Back to the UDID finder
+          </a>
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/cloud-build/ios')}
+            class="inline-flex items-center justify-center rounded-2xl border border-white/15 px-6 py-3 text-sm font-semibold text-white transition hover:border-fuchsia-300/60 hover:bg-white/5"
+          >
+            Continue to iOS signing docs
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-value]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const value = button.dataset.copyValue
+      if (!value) return
+
+      await navigator.clipboard.writeText(value)
+      const original = button.textContent || 'Copy'
+      button.textContent = 'Copied'
+      window.setTimeout(() => {
+        button.textContent = original
+      }, 1600)
+    })
+  })
+</script>

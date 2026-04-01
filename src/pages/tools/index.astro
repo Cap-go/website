@@ -1,0 +1,160 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import ToolCatalog from '@/components/tools/ToolCatalog.astro'
+import { createItemListLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+import { toolCatalog } from '@/lib/tools/catalog'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const title = 'Free Mobile App Signing Tools | iOS CSR, UDID, and Android Keystore'
+const description =
+  'Generate an iOS certificate signing request, find an iPhone UDID, and create an Android signing keystore from one place. Built for mobile release and CI workflows.'
+
+const webPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: Astro.url.href,
+})
+
+const itemList = createItemListLdJson(Astro.locals.runtimeConfig.public, {
+  url: Astro.url.href,
+  name: 'Capgo mobile signing tools',
+  description,
+  items: toolCatalog.map((tool) => ({
+    name: tool.name,
+    url: new URL(`/${tool.href}/`, Astro.locals.runtimeConfig.public.baseUrl).toString(),
+    description: tool.summary,
+  })),
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, webPage, {
+  includeOrganization: true,
+  includeBreadcrumbs: true,
+  breadcrumbs: [
+    { name: 'Home', url: Astro.locals.runtimeConfig.public.baseUrl },
+    { name: 'Tools', url: Astro.url.href },
+  ],
+  additionalEntities: [itemList],
+})
+
+const content = {
+  title,
+  description,
+  keywords: 'ios certificate generator, ios csr generator, android keystore generator, ios udid finder, mobile signing tools, apple developer csr, play store keystore',
+  ldJSON,
+}
+
+const pillars = [
+  {
+    title: 'Real outputs',
+    description: 'The tools generate downloadable signing files and device data instead of stopping at a demo interface.',
+  },
+  {
+    title: 'Release-focused',
+    description: 'Each flow is written for app signing, ad-hoc testing, CI handoff, and cloud build pipelines.',
+  },
+  {
+    title: 'Search intent coverage',
+    description: 'The pages answer setup questions, troubleshooting questions, and operational questions around mobile signing.',
+  },
+]
+---
+
+<Layout content={content}>
+  <section class="relative overflow-hidden border-b border-white/10 bg-linear-to-b from-slate-950 via-slate-900 to-slate-950 py-16 sm:py-20">
+    <div class="pointer-events-none absolute inset-0">
+      <div class="absolute top-10 -left-16 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl"></div>
+      <div class="absolute top-0 right-0 h-80 w-80 rounded-full bg-blue-500/10 blur-3xl"></div>
+    </div>
+
+    <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl">
+        <p class="text-sm font-semibold tracking-[0.3em] text-cyan-300 uppercase">Mobile signing toolkit</p>
+        <h1 class="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">Free tools for iOS signing requests, iPhone UDID capture, and Android release keystores</h1>
+        <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
+          These tools are designed for teams shipping Capacitor, Ionic, React Native, Flutter, and native mobile apps. Generate the files you need, validate device data quickly,
+          and keep your release process moving without bouncing between desktop utilities.
+        </p>
+
+        <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'tools/ios-certificate-generator')}
+            class="inline-flex items-center justify-center rounded-2xl bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+          >
+            Open iOS certificate generator
+          </a>
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'native-build')}
+            class="inline-flex items-center justify-center rounded-2xl border border-white/15 px-6 py-3 text-sm font-semibold text-white transition hover:border-cyan-300/60 hover:bg-white/5"
+          >
+            See the native build workflow
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ToolCatalog
+    title="Choose the tool that matches your release bottleneck"
+    intro="Each page includes the utility, setup guidance, FAQ markup, and internal links to the broader signing and build docs."
+  />
+
+  <section class="border-y border-white/10 bg-slate-950 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-6 lg:grid-cols-3">
+        {
+          pillars.map((pillar) => (
+            <article class="rounded-3xl border border-white/10 bg-white/5 p-6">
+              <h2 class="text-2xl font-bold text-white">{pillar.title}</h2>
+              <p class="mt-4 text-sm leading-7 text-slate-300">{pillar.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1.4fr_1fr] lg:px-8">
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
+        <p class="text-sm font-semibold tracking-[0.25em] text-cyan-300 uppercase">Release operations</p>
+        <h2 class="mt-3 text-3xl font-bold text-white">Why these pages exist</h2>
+        <div class="mt-6 space-y-5 text-sm leading-7 text-slate-300">
+          <p>
+            Mobile teams still lose time on the same tasks every week: generating a fresh CSR for Apple Developer, collecting a tester UDID from a physical iPhone, or creating a
+            keystore that matches the Play signing pipeline. Search results often send people into outdated CLI examples or forum threads with half the steps missing.
+          </p>
+          <p>
+            These pages are meant to be operational. The interface produces the output immediately, while the surrounding content answers the follow-up questions that usually
+            appear right after generation: where the file goes next, which values must be stored securely, and how the asset fits into CI or cloud build systems.
+          </p>
+          <p>
+            If you are running a cross-platform release process, pair these tools with the Capgo native build docs and keep the generated signing assets in a secure secret manager
+            instead of committing them to Git.
+          </p>
+        </div>
+      </div>
+
+      <aside class="rounded-3xl border border-cyan-400/20 bg-cyan-400/5 p-8">
+        <p class="text-sm font-semibold tracking-[0.25em] text-cyan-300 uppercase">Next steps</p>
+        <h2 class="mt-3 text-2xl font-bold text-white">Related docs</h2>
+        <ul class="mt-6 space-y-4 text-sm leading-7 text-slate-300">
+          <li>
+            <a class="text-cyan-200 underline decoration-cyan-300/40 underline-offset-4" href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/cloud-build/ios')}>
+              Configure iOS certificates and provisioning profiles
+            </a>
+          </li>
+          <li>
+            <a class="text-cyan-200 underline decoration-cyan-300/40 underline-offset-4" href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/cloud-build/troubleshooting')}>
+              Troubleshoot keystore, alias, and signing failures
+            </a>
+          </li>
+          <li>
+            <a class="text-cyan-200 underline decoration-cyan-300/40 underline-offset-4" href={getRelativeLocaleUrl(Astro.locals.locale, 'native-build')}>
+              Connect the generated assets to a cloud build workflow
+            </a>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+</Layout>

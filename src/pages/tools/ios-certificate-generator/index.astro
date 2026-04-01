@@ -1,0 +1,382 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import ToolCatalog from '@/components/tools/ToolCatalog.astro'
+import ToolFaq from '@/components/tools/ToolFaq.astro'
+import { createFAQPageLdJson, createLdJsonGraph, createSoftwareApplicationLdJson, createWebPageLdJson } from '@/lib/ldJson'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const title = 'iOS Certificate Generator | Free Apple CSR and Private Key'
+const description = 'Generate an iOS certificate signing request and private key in seconds. Use the CSR for Apple Developer certificates, manual signing, or CI build pipelines.'
+
+const faqItems = [
+  {
+    question: 'What does this iOS certificate generator create?',
+    answer:
+      'It creates a certificate signing request in CSR format and the matching private key in PEM format. Upload the CSR to Apple Developer, keep the private key secure, and export the issued certificate as a .p12 when you need it for CI or cloud builds.',
+  },
+  {
+    question: 'Is the private key stored on the server?',
+    answer:
+      'No. The request is processed only long enough to generate the files and return them in the response. The tool does not persist the private key or write it to a database.',
+  },
+  {
+    question: 'Can I use the generated CSR for App Store, ad-hoc, or enterprise signing?',
+    answer:
+      'Yes. The CSR is the starting point for any Apple certificate that requires a signing request. The certificate type is chosen later inside Apple Developer when you issue the certificate.',
+  },
+  {
+    question: 'What should I do after Apple issues the certificate?',
+    answer:
+      'Download the certificate from Apple, import it into Keychain Access together with the private key, and export the combined identity as a .p12 if your CI or build platform needs a portable signing asset.',
+  },
+]
+
+const softwareApplication = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.public, {
+  name: 'Capgo iOS Certificate Generator',
+  description,
+  url: Astro.url.href,
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'Web',
+  offers: {
+    price: '0',
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+  },
+})
+
+const faqLdJson = createFAQPageLdJson(Astro.locals.runtimeConfig.public, {
+  url: Astro.url.href,
+  questions: faqItems,
+})
+
+const webPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: Astro.url.href,
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, softwareApplication, {
+  includeOrganization: true,
+  includeBreadcrumbs: true,
+  breadcrumbs: [
+    { name: 'Home', url: Astro.locals.runtimeConfig.public.baseUrl },
+    { name: 'Tools', url: new URL('/tools/', Astro.locals.runtimeConfig.public.baseUrl).toString() },
+    { name: 'iOS Certificate Generator', url: Astro.url.href },
+  ],
+  additionalEntities: [faqLdJson, webPage],
+})
+
+const content = {
+  title,
+  description,
+  keywords: 'ios certificate generator, apple csr generator, ios csr generator, apple developer certificate request, ios signing request, apple private key generator',
+  ldJSON,
+}
+
+const benefits = [
+  'Generate a fresh Apple-ready CSR without opening Keychain Access or the macOS certificate assistant.',
+  'Keep manual signing, CI secrets setup, and cloud build onboarding on the same page.',
+  'Use the resulting private key later when you export a distribution identity as a .p12 file.',
+]
+---
+
+<Layout content={content}>
+  <section class="relative overflow-hidden border-b border-white/10 bg-linear-to-b from-slate-950 via-slate-900 to-slate-950 py-16 sm:py-20">
+    <div class="pointer-events-none absolute inset-0">
+      <div class="absolute top-10 left-0 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl"></div>
+      <div class="absolute top-0 right-0 h-80 w-80 rounded-full bg-blue-500/10 blur-3xl"></div>
+    </div>
+
+    <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+        <div>
+          <p class="text-sm font-semibold tracking-[0.3em] text-cyan-300 uppercase">Apple signing</p>
+          <h1 class="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">Generate an iOS certificate signing request and private key</h1>
+          <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
+            Create a clean CSR for Apple Developer and download the matching private key immediately. This is the fastest starting point for App Store, ad-hoc, or internal iOS
+            signing workflows.
+          </p>
+
+          <ul class="mt-8 space-y-3 text-sm leading-7 text-slate-200">
+            {
+              benefits.map((benefit) => (
+                <li class="flex gap-3">
+                  <span class="mt-2 h-2 w-2 rounded-full bg-cyan-300" />
+                  <span>{benefit}</span>
+                </li>
+              ))
+            }
+          </ul>
+
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+            <a
+              href="#generator"
+              class="inline-flex items-center justify-center rounded-2xl bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+            >
+              Generate CSR now
+            </a>
+            <a
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/cloud-build/ios')}
+              class="inline-flex items-center justify-center rounded-2xl border border-white/15 px-6 py-3 text-sm font-semibold text-white transition hover:border-cyan-300/60 hover:bg-white/5"
+            >
+              Read the iOS signing guide
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
+          <p class="text-sm font-semibold tracking-[0.25em] text-cyan-300 uppercase">Workflow</p>
+          <ol class="mt-6 space-y-5 text-sm leading-7 text-slate-300">
+            <li><strong class="text-white">1.</strong> Enter the certificate subject details you want attached to the signing request.</li>
+            <li><strong class="text-white">2.</strong> Download the CSR and matching private key.</li>
+            <li><strong class="text-white">3.</strong> Upload the CSR in Apple Developer when creating your certificate.</li>
+            <li><strong class="text-white">4.</strong> Pair the issued certificate with the private key and export a portable .p12 when your build pipeline needs it.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="generator" class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
+          <p class="text-sm font-semibold tracking-[0.25em] text-cyan-300 uppercase">Input</p>
+          <h2 class="mt-3 text-3xl font-bold text-white">CSR subject details</h2>
+          <p class="mt-4 text-sm leading-7 text-slate-300">Use the same person or organization identity you want represented in the Apple certificate request.</p>
+
+          <form id="ios-certificate-form" class="mt-8 space-y-5">
+            <div>
+              <label class="mb-2 block text-sm font-medium text-slate-200" for="ios-common-name">Full name</label>
+              <input
+                id="ios-common-name"
+                name="commonName"
+                required
+                class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-cyan-300/60"
+                placeholder="Jane Doe"
+              />
+            </div>
+
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="ios-email">Email</label>
+                <input
+                  id="ios-email"
+                  name="emailAddress"
+                  type="email"
+                  required
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-cyan-300/60"
+                  placeholder="jane@company.com"
+                />
+              </div>
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="ios-country">Country code</label>
+                <input
+                  id="ios-country"
+                  name="countryName"
+                  required
+                  maxlength="2"
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white uppercase transition outline-none focus:border-cyan-300/60"
+                  placeholder="US"
+                />
+              </div>
+            </div>
+
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="ios-organization">Organization</label>
+                <input
+                  id="ios-organization"
+                  name="organization"
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-cyan-300/60"
+                  placeholder="Acme Mobile"
+                />
+              </div>
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="ios-organizational-unit">Organizational unit</label>
+                <input
+                  id="ios-organizational-unit"
+                  name="organizationalUnit"
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-cyan-300/60"
+                  placeholder="Release Engineering"
+                />
+              </div>
+            </div>
+
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="ios-city">City</label>
+                <input
+                  id="ios-city"
+                  name="localityName"
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-cyan-300/60"
+                  placeholder="Paris"
+                />
+              </div>
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="ios-state">State or province</label>
+                <input
+                  id="ios-state"
+                  name="stateOrProvinceName"
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-cyan-300/60"
+                  placeholder="Ile-de-France"
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="inline-flex w-full items-center justify-center rounded-2xl bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+            >
+              Generate CSR and private key
+            </button>
+          </form>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-slate-950/80 p-8">
+          <p class="text-sm font-semibold tracking-[0.25em] text-cyan-300 uppercase">Output</p>
+          <h2 class="mt-3 text-3xl font-bold text-white">Your generated signing request</h2>
+          <p class="mt-4 text-sm leading-7 text-slate-300">Nothing is shown until the CSR is generated. Once ready, download both files and store the private key securely.</p>
+
+          <div id="ios-certificate-error" class="mt-6 hidden rounded-2xl border border-rose-400/30 bg-rose-400/10 px-4 py-3 text-sm text-rose-200"></div>
+          <div id="ios-certificate-empty" class="mt-8 rounded-3xl border border-dashed border-white/10 px-6 py-12 text-center text-sm text-slate-400">
+            Generate a certificate request to see the subject summary and download buttons here.
+          </div>
+
+          <div id="ios-certificate-result" class="mt-8 hidden">
+            <div id="ios-certificate-summary" class="rounded-3xl border border-white/10 bg-white/5 p-6"></div>
+            <div id="ios-certificate-downloads" class="mt-6 grid gap-4 sm:grid-cols-2"></div>
+            <div class="mt-6 rounded-3xl border border-cyan-400/20 bg-cyan-400/5 p-6 text-sm leading-7 text-slate-300">
+              Upload the CSR to Apple Developer, keep the private key outside Git, and export the issued certificate as a password-protected <code class="text-cyan-200">.p12</code>
+              when your CI or build service asks for it.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-white/10 bg-slate-950 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-6 md:grid-cols-3">
+        <article class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <h2 class="text-2xl font-bold text-white">When you need a fresh CSR</h2>
+          <p class="mt-4 text-sm leading-7 text-slate-300">
+            Use this before creating a new Apple Distribution certificate, rotating signing material, or onboarding a new app to an automated build system.
+          </p>
+        </article>
+        <article class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <h2 class="text-2xl font-bold text-white">What to store securely</h2>
+          <p class="mt-4 text-sm leading-7 text-slate-300">
+            The private key is the sensitive asset. Put it in your company vault, password manager, or build secrets store and never commit it to the repository.
+          </p>
+        </article>
+        <article class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <h2 class="text-2xl font-bold text-white">What comes next</h2>
+          <p class="mt-4 text-sm leading-7 text-slate-300">
+            After Apple issues the certificate, pair it with the private key and export a <code class="text-cyan-200">.p12</code> to connect local signing, CI jobs, or cloud builds.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <ToolFaq items={faqItems} intro="These are the questions that usually come immediately after a team generates a CSR for an iOS release pipeline." />
+
+  <ToolCatalog current="ios-certificate-generator" />
+</Layout>
+
+<script>
+  import type { DownloadableFile } from '@/scripts/tool-client'
+  import { downloadFile, escapeHtml, postJson } from '@/scripts/tool-client'
+
+  interface IosCertificateResponse {
+    summary: {
+      subject: string
+      keyType: string
+      hashAlgorithm: string
+    }
+    files: DownloadableFile[]
+  }
+
+  const form = document.getElementById('ios-certificate-form') as HTMLFormElement | null
+  const errorBox = document.getElementById('ios-certificate-error') as HTMLDivElement | null
+  const emptyState = document.getElementById('ios-certificate-empty') as HTMLDivElement | null
+  const result = document.getElementById('ios-certificate-result') as HTMLDivElement | null
+  const summary = document.getElementById('ios-certificate-summary') as HTMLDivElement | null
+  const downloads = document.getElementById('ios-certificate-downloads') as HTMLDivElement | null
+
+  let generatedFiles: DownloadableFile[] = []
+
+  downloads?.addEventListener('click', (event) => {
+    const target = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-file-index]')
+    if (!target) return
+    const file = generatedFiles[Number.parseInt(target.dataset.fileIndex || '-1', 10)]
+    if (file) downloadFile(file)
+  })
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault()
+
+    if (!form || !errorBox || !emptyState || !result || !summary || !downloads) return
+
+    const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement | null
+    const originalLabel = submitButton?.textContent || ''
+    if (submitButton) {
+      submitButton.disabled = true
+      submitButton.textContent = 'Generating...'
+    }
+
+    errorBox.classList.add('hidden')
+
+    try {
+      const formData = new FormData(form)
+      const payload = Object.fromEntries(formData.entries())
+      const response = await postJson<IosCertificateResponse>('/api/tools/ios-certificate-generator', payload)
+
+      generatedFiles = response.files
+      summary.innerHTML = `
+        <dl class="grid gap-4 sm:grid-cols-3">
+          <div>
+            <dt class="text-xs uppercase tracking-[0.25em] text-cyan-300">Subject</dt>
+            <dd class="mt-2 text-sm leading-7 text-white">${escapeHtml(response.summary.subject)}</dd>
+          </div>
+          <div>
+            <dt class="text-xs uppercase tracking-[0.25em] text-cyan-300">Key type</dt>
+            <dd class="mt-2 text-sm leading-7 text-white">${escapeHtml(response.summary.keyType)}</dd>
+          </div>
+          <div>
+            <dt class="text-xs uppercase tracking-[0.25em] text-cyan-300">Hash</dt>
+            <dd class="mt-2 text-sm leading-7 text-white">${escapeHtml(response.summary.hashAlgorithm)}</dd>
+          </div>
+        </dl>
+      `
+
+      downloads.innerHTML = response.files
+        .map(
+          (file, index) => `
+            <button
+              type="button"
+              data-file-index="${index}"
+              class="rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-left transition hover:border-cyan-300/50 hover:bg-white/8"
+            >
+              <span class="block text-sm font-semibold text-white">${escapeHtml(file.fileName)}</span>
+              <span class="mt-2 block text-xs uppercase tracking-[0.2em] text-cyan-300">Download file</span>
+            </button>
+          `,
+        )
+        .join('')
+
+      emptyState.classList.add('hidden')
+      result.classList.remove('hidden')
+    } catch (error) {
+      errorBox.textContent = error instanceof Error ? error.message : 'The CSR generation failed.'
+      errorBox.classList.remove('hidden')
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false
+        submitButton.textContent = originalLabel
+      }
+    }
+  })
+</script>

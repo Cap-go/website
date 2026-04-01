@@ -1,0 +1,180 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import ToolCatalog from '@/components/tools/ToolCatalog.astro'
+import ToolFaq from '@/components/tools/ToolFaq.astro'
+import { createFAQPageLdJson, createLdJsonGraph, createSoftwareApplicationLdJson, createWebPageLdJson } from '@/lib/ldJson'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const title = 'iOS UDID Finder | Get an iPhone or iPad UDID Without a Mac'
+const description = 'Find an iPhone or iPad UDID directly on the device. Download a lightweight profile, install it in Settings, and view the UDID, model, serial, and iOS version.'
+
+const certificateLink = (import.meta.env.PUBLIC_IOS_UDID_CERTIFICATE_LINK || '').trim()
+
+const faqItems = [
+  {
+    question: 'What is a UDID?',
+    answer:
+      'A UDID is the unique device identifier used for ad-hoc iOS testing and device registration. Teams usually need it when they want to add a tester device to Apple Developer before distributing a build outside the App Store.',
+  },
+  {
+    question: 'Do I need a Mac or Xcode to get the UDID?',
+    answer:
+      'No. This tool works on the iPhone or iPad itself. The device installs a lightweight profile and posts the requested identifiers back to the server so the result page can show them.',
+  },
+  {
+    question: 'What data is displayed after installation?',
+    answer: 'The result page shows the UDID plus the device name, hardware product identifier, iOS version, serial number, IMEI, and MEID when iOS provides them.',
+  },
+  {
+    question: 'Is the profile signed?',
+    answer:
+      'The page supports signed mobileconfig delivery when the signing certificate and private key are configured on the server. If those values are not configured, the profile is still generated and delivered without a signing envelope.',
+  },
+]
+
+const softwareApplication = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.public, {
+  name: 'Capgo iOS UDID Finder',
+  description,
+  url: Astro.url.href,
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'iOS',
+  offers: {
+    price: '0',
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+  },
+})
+
+const faqLdJson = createFAQPageLdJson(Astro.locals.runtimeConfig.public, {
+  url: Astro.url.href,
+  questions: faqItems,
+})
+
+const webPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: Astro.url.href,
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, softwareApplication, {
+  includeOrganization: true,
+  includeBreadcrumbs: true,
+  breadcrumbs: [
+    { name: 'Home', url: Astro.locals.runtimeConfig.public.baseUrl },
+    { name: 'Tools', url: new URL('/tools/', Astro.locals.runtimeConfig.public.baseUrl).toString() },
+    { name: 'iOS UDID Finder', url: Astro.url.href },
+  ],
+  additionalEntities: [faqLdJson, webPage],
+})
+
+const content = {
+  title,
+  description,
+  keywords: 'ios udid finder, get iphone udid, ipad udid finder, find udid without mac, ios profile service, ad hoc testing udid',
+  ldJSON,
+}
+
+const steps = [
+  'Open this page on the physical iPhone or iPad you want to register.',
+  'Download the configuration profile and, if your setup requires it, install the supporting certificate first.',
+  'Go to Settings, tap “Profile Downloaded”, and confirm the installation.',
+  'The device sends its identifiers to the backend and redirects you to the results page automatically.',
+]
+---
+
+<Layout content={content}>
+  <section class="relative overflow-hidden border-b border-white/10 bg-linear-to-b from-slate-950 via-slate-900 to-slate-950 py-16 sm:py-20">
+    <div class="pointer-events-none absolute inset-0">
+      <div class="absolute top-10 left-0 h-72 w-72 rounded-full bg-fuchsia-500/10 blur-3xl"></div>
+      <div class="absolute top-0 right-0 h-80 w-80 rounded-full bg-cyan-500/10 blur-3xl"></div>
+    </div>
+
+    <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+        <div>
+          <p class="text-sm font-semibold tracking-[0.3em] text-fuchsia-300 uppercase">Tester onboarding</p>
+          <h1 class="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">Find an iPhone or iPad UDID without plugging into a Mac</h1>
+          <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
+            This page uses the standard iOS profile-service flow to request the device identifier and send it to the backend. Once installed, the result page shows the UDID and the
+            surrounding device metadata needed for ad-hoc registration.
+          </p>
+
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+            <a
+              href="/api/tools/ios-udid-finder/profile"
+              class="inline-flex items-center justify-center rounded-2xl bg-fuchsia-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-fuchsia-300"
+            >
+              Download UDID profile
+            </a>
+            {
+              certificateLink ? (
+                <a
+                  href={certificateLink}
+                  class="inline-flex items-center justify-center rounded-2xl border border-white/15 px-6 py-3 text-sm font-semibold text-white transition hover:border-fuchsia-300/60 hover:bg-white/5"
+                >
+                  Download trust certificate
+                </a>
+              ) : (
+                <a
+                  href={getRelativeLocaleUrl(Astro.locals.locale, 'native-build')}
+                  class="inline-flex items-center justify-center rounded-2xl border border-white/15 px-6 py-3 text-sm font-semibold text-white transition hover:border-fuchsia-300/60 hover:bg-white/5"
+                >
+                  See the iOS signing workflow
+                </a>
+              )
+            }
+          </div>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
+          <p class="text-sm font-semibold tracking-[0.25em] text-fuchsia-300 uppercase">How it works</p>
+          <ol class="mt-6 space-y-5 text-sm leading-7 text-slate-300">
+            {
+              steps.map((step, index) => (
+                <li>
+                  <strong class="text-white">{index + 1}.</strong> {step}
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[1fr_0.95fr] lg:px-8">
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
+        <p class="text-sm font-semibold tracking-[0.25em] text-fuchsia-300 uppercase">Install notes</p>
+        <h2 class="mt-3 text-3xl font-bold text-white">Use the profile on the device that needs to be registered</h2>
+        <div class="mt-6 space-y-5 text-sm leading-7 text-slate-300">
+          <p>
+            Open the profile from Safari on the physical iPhone or iPad. iOS will download the configuration profile and expose it in Settings so the user can review and install
+            it. After approval, the device posts the requested attributes to the callback endpoint and the browser is redirected to the results page.
+          </p>
+          <p>
+            This is the quickest path for collecting tester identifiers during ad-hoc or beta distribution setup because it avoids Finder, Apple Configurator, and Xcode on a
+            separate machine.
+          </p>
+          <p>
+            If your device flow depends on an additional trust certificate, publish the certificate at a public HTTPS URL and surface it on this page. A setup runbook for that
+            lives in the repository documentation.
+          </p>
+        </div>
+      </div>
+
+      <aside class="rounded-3xl border border-fuchsia-400/20 bg-fuchsia-400/5 p-8">
+        <p class="text-sm font-semibold tracking-[0.25em] text-fuchsia-300 uppercase">Good to know</p>
+        <ul class="mt-6 space-y-4 text-sm leading-7 text-slate-300">
+          <li>The callback endpoint receives the raw device response and extracts the plist payload on the server.</li>
+          <li>The result page is generated from the backend response so the tester can copy the UDID immediately.</li>
+          <li>When signing credentials are configured, the download endpoint returns a signed mobileconfig envelope.</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <ToolFaq items={faqItems} intro="These are the questions teams usually ask before they send a UDID collection link to testers, QA, or customer devices." />
+
+  <ToolCatalog current="ios-udid-finder" />
+</Layout>
