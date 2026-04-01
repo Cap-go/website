@@ -2,8 +2,10 @@
 // @ts-nocheck
 import m from '@/services/messages'
 import { landingLocales } from '@/services/landingLocale'
+import { locales } from '@/services/locale'
 
-const localeCodes = landingLocales.map((locale) => locale.code)
+const availableLocales = landingLocales.filter((locale) => locales.includes(locale.code as (typeof locales)[number]))
+const localeCodes = availableLocales.map((locale) => locale.code)
 ---
 
 <div class="flex relative flex-row items-center">
@@ -23,7 +25,7 @@ const localeCodes = landingLocales.map((locale) => locale.code)
     style="top: 100%; right: 0;"
   >
     {
-      landingLocales.map((locale) => (
+      availableLocales.map((locale) => (
         <a
           id={`language_${locale.code}`}
           class="block py-2 px-4 text-sm text-gray-700 cursor-pointer dark:text-gray-200 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-gray-100"

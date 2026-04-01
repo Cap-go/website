@@ -64,7 +64,7 @@ const DYNAMIC_LANDING_EXACT_EXCLUDES = new Set<string>([
   '/sponsors.json',
 ])
 
-const DYNAMIC_LANDING_PREFIX_EXCLUDES = ['/_astro/', '/.well-known/']
+const DYNAMIC_LANDING_PREFIX_EXCLUDES = ['/_astro/', '/.well-known/', '/blog/', '/docs/', '/plugins/']
 
 export function isLandingLocale(locale: string | undefined): locale is LandingLocaleCode {
   if (!locale) {

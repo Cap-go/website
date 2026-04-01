@@ -5,7 +5,7 @@ import { useRuntimeConfig } from './config/app'
 import { siteBuildVersion, pageVersionMap } from './generated/pageVersions'
 import { translateLandingHtml } from './lib/landingTranslation'
 import { defaultLocale, type Locales } from './services/locale'
-import { isDynamicLandingPath, normalizePathname, parseRequestedLandingLocale } from './services/landingLocale'
+import { isDynamicLandingPath, isStaticLocale, normalizePathname, parseRequestedLandingLocale, splitLocaleFromPathname } from './services/landingLocale'
 
 const SOURCE_REQUEST_HEADER = 'x-capgo-translation-source'
 const TRANSLATION_CACHE_HEADER = 'x-capgo-translation-cache'
@@ -24,15 +24,18 @@ export const onRequest = defineMiddleware((context, next) => {
   }
 
   const requestUrl = new URL(context.request.url)
+  const requestedRoute = splitLocaleFromPathname(requestUrl.pathname)
   const requestedLandingLocale = parseRequestedLandingLocale(requestUrl.pathname)
-  const requestedPathname = normalizePathname(requestUrl.pathname)
+  const requestedPathname = requestedRoute.pathname
 
   context.locals.requestedPathname = requestedPathname
   context.locals.requestedUrl = requestUrl.toString()
 
   if (context.request.headers.get(SOURCE_REQUEST_HEADER) === '1') {
     context.locals.locale = defaultLocale as Locales
-    context.locals.displayLocale = context.locals.requestedLocale || defaultLocale
+    context.locals.displayLocale = defaultLocale
+    context.locals.requestedLocale = defaultLocale
+    context.locals.isDynamicLandingRequest = false
     return next()
   }
 
@@ -48,9 +51,10 @@ export const onRequest = defineMiddleware((context, next) => {
     }
   }
 
-  context.locals.locale = defaultLocale as Locales
-  context.locals.displayLocale = defaultLocale
-  context.locals.requestedLocale = defaultLocale
+  const routeLocale = isStaticLocale(requestedRoute.locale) ? requestedRoute.locale : defaultLocale
+  context.locals.locale = routeLocale as Locales
+  context.locals.displayLocale = routeLocale
+  context.locals.requestedLocale = routeLocale
   context.locals.isDynamicLandingRequest = false
   return next()
 })
@@ -62,6 +66,8 @@ async function handleDynamicLandingRequest(
   requestedLocale: string,
   sourcePathname: string,
 ): Promise<Response> {
+  const sourceRenderUrl = new URL(requestUrl.toString())
+  sourceRenderUrl.pathname = sourcePathname
   const sourceRequest = createSourceRequest(context.request, sourcePathname)
   const pageVersion = resolvePageVersion(sourcePathname)
   const cacheKey = createCacheKey(requestUrl, pageVersion)
@@ -77,17 +83,17 @@ async function handleDynamicLandingRequest(
   }
 
   context.locals.locale = defaultLocale as Locales
-  context.locals.displayLocale = requestedLocale
+  context.locals.displayLocale = defaultLocale
   context.locals.requestedLocale = requestedLocale
-  context.locals.requestedPathname = normalizePathname(requestUrl.pathname)
-  context.locals.requestedUrl = requestUrl.toString()
-  context.locals.isDynamicLandingRequest = true
+  context.locals.requestedPathname = normalizePathname(sourcePathname)
+  context.locals.requestedUrl = sourceRenderUrl.toString()
+  context.locals.isDynamicLandingRequest = false
 
   const sourceResponse = await next(sourceRequest)
   if (context.request.method === 'HEAD' || !isHtmlResponse(sourceResponse)) {
     return withTranslationHeaders(sourceResponse, {
       cacheState: 'skip',
-      locale: requestedLocale,
+      locale: defaultLocale,
       pageVersion,
     })
   }
@@ -96,7 +102,7 @@ async function handleDynamicLandingRequest(
   if (!ai) {
     return withTranslationHeaders(sourceResponse, {
       cacheState: 'disabled',
-      locale: requestedLocale,
+      locale: defaultLocale,
       pageVersion,
     })
   }
@@ -143,7 +149,7 @@ async function handleDynamicLandingRequest(
     console.error('Dynamic landing translation failed.', error)
     return withTranslationHeaders(sourceResponse, {
       cacheState: 'error',
-      locale: requestedLocale,
+      locale: defaultLocale,
       pageVersion,
     })
   }

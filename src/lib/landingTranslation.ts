@@ -1,6 +1,6 @@
 import { parseHTML } from 'linkedom'
 import { defaultLocale } from '@/services/locale'
-import { getLocalizedPathname, isRtlLocale } from '@/services/landingLocale'
+import { getLocaleEntry, getLocalizedPathname, isRtlLocale } from '@/services/landingLocale'
 
 const AI_MODEL = '@cf/zai-org/glm-4.7-flash'
 const SKIP_TAGS = new Set(['CODE', 'NOSCRIPT', 'PRE', 'SCRIPT', 'STYLE', 'SVG', 'TEXTAREA'])
@@ -45,8 +45,10 @@ export async function translateLandingHtml({
     root.setAttribute('dir', isRtlLocale(locale) ? 'rtl' : 'ltr')
   }
 
+  rewriteSeoUrls(document, locale, siteOrigin)
   rewriteInternalLinks(document, locale, siteOrigin)
   rewriteStructuredDataUrls(document, locale, siteOrigin)
+  rewriteLanguageSelector(document, locale)
 
   const segments = collectTranslatableSegments(document)
   if (segments.length === 0) {
@@ -183,6 +185,62 @@ function rewriteInternalLinks(document: Document, locale: string, siteOrigin: st
       anchor.setAttribute('href', localizedHref)
     }
   }
+}
+
+function rewriteSeoUrls(document: Document, locale: string, siteOrigin: string): void {
+  const urlTargets: Array<{ selector: string; attribute: 'content' | 'href' }> = [
+    { selector: 'link[rel="canonical"][href]', attribute: 'href' },
+    { selector: 'meta[property="og:url"][content]', attribute: 'content' },
+    { selector: 'meta[name="twitter:url"][content]', attribute: 'content' },
+    { selector: 'meta[property="twitter:url"][content]', attribute: 'content' },
+  ]
+
+  urlTargets.forEach(({ selector, attribute }) => {
+    const elements = Array.from(document.querySelectorAll(selector))
+    elements.forEach((element) => {
+      const currentValue = element.getAttribute(attribute)
+      if (!currentValue) {
+        return
+      }
+
+      const localizedValue = localizeInternalUrl(currentValue, locale, siteOrigin)
+      if (localizedValue && localizedValue !== currentValue) {
+        element.setAttribute(attribute, localizedValue)
+      }
+    })
+  })
+
+  const ogLocale = document.querySelector('meta[property="og:locale"]')
+  if (ogLocale) {
+    ogLocale.setAttribute('content', getLocaleEntry(locale).ogLocale)
+  }
+}
+
+function rewriteLanguageSelector(document: Document, locale: string): void {
+  const localeEntry = getLocaleEntry(locale)
+  const localeButton = document.getElementById('language-dropdown-button')
+
+  if (localeButton) {
+    const buttonSpans = localeButton.querySelectorAll('span')
+    const flagLabel = buttonSpans[0]
+    const nativeNameLabel = buttonSpans[1]
+
+    if (flagLabel) {
+      flagLabel.textContent = localeEntry.flag
+    }
+    if (nativeNameLabel) {
+      nativeNameLabel.textContent = localeEntry.nativeName
+      nativeNameLabel.setAttribute('lang', localeEntry.code)
+    }
+  }
+
+  const localeLinks = Array.from(document.querySelectorAll('#language-dropdown a[lang]'))
+  localeLinks.forEach((localeLink) => {
+    const isActiveLocale = localeLink.getAttribute('lang') === locale
+    localeLink.classList.toggle('bg-zinc-800', isActiveLocale)
+    localeLink.classList.toggle('text-white', isActiveLocale)
+    localeLink.classList.toggle('text-zinc-400', !isActiveLocale)
+  })
 }
 
 function rewriteStructuredDataUrls(document: Document, locale: string, siteOrigin: string): void {

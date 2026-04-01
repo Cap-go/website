@@ -79,7 +79,7 @@ const pluginIcons = [
 ].sort()
 
 function writeGeneratedPageVersionModule(lastModMap) {
-  mkdirSync(`${SRC_DIR}/generated`, { recursive: true })
+  mkdirSync(`${SRC_DIR}generated`, { recursive: true })
 
   const entries = [...lastModMap.entries()]
     .sort(([leftPath], [rightPath]) => leftPath.localeCompare(rightPath))
