@@ -2,6 +2,8 @@ import { encodePayload, extractPlistXml, parseUdidDevicePayload } from '@/lib/to
 import { webJson, webRedirect } from '@/services/responses'
 import type { APIRoute } from 'astro'
 
+const UDID_RESULT_COOKIE = 'ios_udid_payload'
+const UDID_RESULT_PATH = '/tools/ios-udid-finder/result/'
 const headers = {
   'Cache-Control': 'no-store',
 }
@@ -20,6 +22,10 @@ export const POST: APIRoute = async ({ request }) => {
 
   const payload = parseUdidDevicePayload(plistXml)
   const encoded = encodePayload(payload)
+  const secure = new URL(request.url).protocol === 'https:'
 
-  return webRedirect(`/tools/ios-udid-finder/result/?payload=${encodeURIComponent(encoded)}`, 302, headers)
+  return webRedirect(UDID_RESULT_PATH, 302, {
+    ...headers,
+    'Set-Cookie': `${UDID_RESULT_COOKIE}=${encoded}; Max-Age=300; Path=${UDID_RESULT_PATH}; HttpOnly; SameSite=Lax${secure ? '; Secure' : ''}`,
+  })
 }

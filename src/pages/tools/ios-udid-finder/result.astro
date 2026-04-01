@@ -3,7 +3,14 @@ import Layout from '@/layouts/Layout.astro'
 import { decodePayload } from '@/lib/tools/udid'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
-const payload = decodePayload(Astro.url.searchParams.get('payload'))
+const UDID_RESULT_COOKIE = 'ios_udid_payload'
+const UDID_RESULT_PATH = '/tools/ios-udid-finder/result/'
+const cookieValue = Astro.cookies.get(UDID_RESULT_COOKIE)?.value ?? null
+const payload = decodePayload(cookieValue)
+
+if (cookieValue) {
+  Astro.cookies.delete(UDID_RESULT_COOKIE, { path: UDID_RESULT_PATH })
+}
 
 const title = payload?.udid ? 'iOS UDID Finder Result | Device Identifier Received' : 'iOS UDID Finder Result'
 const description = payload?.udid
@@ -64,7 +71,7 @@ const rows = payload
             </>
           ) : (
             <div class="mt-8 rounded-2xl border border-amber-400/20 bg-amber-400/10 p-6 text-sm leading-7 text-amber-100">
-              No payload was found in the URL. Open this page through the profile-service redirect after installing the UDID profile on the device.
+              No device response was available for this session. Open this page through the profile-service redirect after installing the UDID profile on the device.
             </div>
           )
         }
