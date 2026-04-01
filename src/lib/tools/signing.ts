@@ -80,7 +80,17 @@ function validateCountry(value: string): string {
 
 function validateEmail(value: string): string {
   const normalized = requireField(cleanField(value), 'Email')
-  const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized)
+  const atIndex = normalized.indexOf('@')
+  const domain = atIndex > -1 ? normalized.slice(atIndex + 1) : ''
+  const domainLabels = domain.split('.')
+  const valid =
+    !normalized.includes(' ') &&
+    atIndex > 0 &&
+    atIndex === normalized.lastIndexOf('@') &&
+    atIndex < normalized.length - 1 &&
+    domainLabels.length >= 2 &&
+    domainLabels.every(Boolean)
+
   if (!valid) {
     throw new Error('Email must be a valid email address.')
   }
