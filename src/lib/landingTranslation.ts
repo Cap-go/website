@@ -418,59 +418,86 @@ async function translateChunk(
   locale: string,
   values: Array<{ id: string; maskedValue: string }>,
 ): Promise<Record<string, string>> {
-  const translationProperties = Object.fromEntries(
-    values.map(({ id }) => [
-      id,
-      {
-        type: 'string',
-      },
-    ]),
-  )
+  const ids = values.map(({ id }) => id)
+  const items = Object.fromEntries(values.map(({ id, maskedValue }) => [id, maskedValue]))
   const schema = {
     type: 'object',
-    additionalProperties: false,
     properties: {
       translations: {
         type: 'object',
-        additionalProperties: false,
-        properties: translationProperties,
-        required: values.map(({ id }) => id),
+        additionalProperties: {
+          type: 'string',
+        },
       },
     },
     required: ['translations'],
   }
-
-  const response = await ai.run(AI_MODEL, {
-    temperature: 0.2,
-    messages: [
-      {
-        role: 'system',
-        content:
-          'Translate isolated English website copy into the requested target language. Return JSON only. Each key is an opaque ID. Translate only the value for each key. Keep placeholders such as __CAPGO_KEEP_0__ exactly unchanged. Preserve punctuation, HTML fragments, markdown, and brand names.',
-      },
-      {
-        role: 'user',
-        content: JSON.stringify({
-          targetLocale: locale,
-          items: Object.fromEntries(values.map(({ id, maskedValue }) => [id, maskedValue])),
-        }),
-      },
-    ],
-    response_format: {
-      type: 'json_schema',
-      json_schema: {
-        name: 'landing_translation_batch',
-        schema,
-      },
+  const messages = [
+    {
+      role: 'system',
+      content:
+        'Translate isolated English website copy into the requested target language. Return compact JSON only in the shape {"translations":{"id":"translated text"}}. Each key is an opaque ID. Translate only the value for each key. Keep placeholders such as __CAPGO_KEEP_0__ exactly unchanged. Preserve punctuation, HTML fragments, markdown, and brand names.',
     },
+    {
+      role: 'user',
+      content: JSON.stringify({
+        targetLocale: locale,
+        items,
+      }),
+    },
+  ]
+
+  const parseResponse = (response: unknown) => extractTranslations(response, ids)
+
+  try {
+    const structuredResponse = await ai.run(AI_MODEL, {
+      temperature: 0.2,
+      messages,
+      response_format: {
+        type: 'json_schema',
+        json_schema: {
+          name: 'landing_translation_batch',
+          schema,
+        },
+      },
+    })
+    const structuredTranslations = parseResponse(structuredResponse)
+    if (structuredTranslations) {
+      return structuredTranslations
+    }
+  }
+  catch (error) {
+    if (!shouldRetryWithoutSchema(error)) {
+      throw error
+    }
+  }
+
+  const fallbackResponse = await ai.run(AI_MODEL, {
+    temperature: 0.2,
+    messages,
   })
 
-  const parsed = extractTranslations(response, values.map(({ id }) => id))
+  const parsed = parseResponse(fallbackResponse)
   if (!parsed) {
     throw new Error(`Workers AI returned an invalid translation payload for locale "${locale}".`)
   }
 
   return parsed
+}
+
+function shouldRetryWithoutSchema(error: unknown): boolean {
+  if (!(error instanceof Error)) {
+    return true
+  }
+
+  const message = error.message.toLowerCase()
+  return (
+    message.includes("json mode couldn't be met") ||
+    message.includes('json mode') ||
+    message.includes('json schema') ||
+    message.includes('response format') ||
+    message.includes('schema validation')
+  )
 }
 
 function extractTranslations(response: unknown, ids: string[]): Record<string, string> | null {

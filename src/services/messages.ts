@@ -28,10 +28,27 @@ const catalogs: Record<string, MessageCatalog> = {
 const placeholderPattern = /\{([A-Za-z0-9_]+)\}/g
 const missingMessageWarnings = new Set<string>()
 
+function formatPlaceholderValue(key: string, value: unknown): string {
+  if (value === undefined || value === null) {
+    return `{${key}}`
+  }
+
+  if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'bigint') {
+    return String(value)
+  }
+
+  try {
+    return JSON.stringify(value)
+  }
+  catch {
+    return '[unserializable]'
+  }
+}
+
 function formatMessage(template: string, params: MessageParams = {}): string {
   return template.replace(placeholderPattern, (_, key: string) => {
     const value = params[key]
-    return value === undefined || value === null ? `{${key}}` : String(value)
+    return formatPlaceholderValue(key, value)
   })
 }
 

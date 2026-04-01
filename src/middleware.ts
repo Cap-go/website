@@ -52,7 +52,7 @@ export const onRequest = defineMiddleware((context, next) => {
   }
 
   const routeLocale = isStaticLocale(requestedRoute.locale) ? requestedRoute.locale : defaultLocale
-  context.locals.locale = routeLocale as Locales
+  context.locals.locale = routeLocale
   context.locals.displayLocale = routeLocale
   context.locals.requestedLocale = routeLocale
   context.locals.isDynamicLandingRequest = false
