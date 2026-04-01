@@ -26,11 +26,13 @@ export async function translateLandingHtml({
   ai,
   html,
   locale,
+  pageUrl,
   siteOrigin,
 }: {
   ai: AiBinding
   html: string
   locale: string
+  pageUrl: string
   siteOrigin: string
 }): Promise<string> {
   if (locale === defaultLocale) {
@@ -45,9 +47,9 @@ export async function translateLandingHtml({
     root.setAttribute('dir', isRtlLocale(locale) ? 'rtl' : 'ltr')
   }
 
-  rewriteSeoUrls(document, locale, siteOrigin)
-  rewriteInternalLinks(document, locale, siteOrigin)
-  rewriteStructuredDataUrls(document, locale, siteOrigin)
+  rewriteSeoUrls(document, locale, pageUrl, siteOrigin)
+  rewriteInternalLinks(document, locale, pageUrl, siteOrigin)
+  rewriteStructuredDataUrls(document, locale, pageUrl, siteOrigin)
   rewriteLanguageSelector(document, locale)
 
   const segments = collectTranslatableSegments(document)
@@ -167,7 +169,7 @@ function shouldTranslateValue(value: string): boolean {
   return Boolean(trimmed) && /\p{L}/u.test(trimmed)
 }
 
-function rewriteInternalLinks(document: Document, locale: string, siteOrigin: string): void {
+function rewriteInternalLinks(document: Document, locale: string, pageUrl: string, siteOrigin: string): void {
   const anchors = Array.from(document.querySelectorAll('a[href]'))
 
   for (const anchor of anchors) {
@@ -180,14 +182,14 @@ function rewriteInternalLinks(document: Document, locale: string, siteOrigin: st
       continue
     }
 
-    const localizedHref = localizeInternalUrl(href, locale, siteOrigin)
+    const localizedHref = localizeInternalUrl(href, locale, pageUrl, siteOrigin)
     if (localizedHref && localizedHref !== href) {
       anchor.setAttribute('href', localizedHref)
     }
   }
 }
 
-function rewriteSeoUrls(document: Document, locale: string, siteOrigin: string): void {
+function rewriteSeoUrls(document: Document, locale: string, pageUrl: string, siteOrigin: string): void {
   const urlTargets: Array<{ selector: string; attribute: 'content' | 'href' }> = [
     { selector: 'link[rel="canonical"][href]', attribute: 'href' },
     { selector: 'meta[property="og:url"][content]', attribute: 'content' },
@@ -203,7 +205,7 @@ function rewriteSeoUrls(document: Document, locale: string, siteOrigin: string):
         return
       }
 
-      const localizedValue = localizeInternalUrl(currentValue, locale, siteOrigin)
+      const localizedValue = localizeInternalUrl(currentValue, locale, pageUrl, siteOrigin)
       if (localizedValue && localizedValue !== currentValue) {
         element.setAttribute(attribute, localizedValue)
       }
@@ -243,7 +245,7 @@ function rewriteLanguageSelector(document: Document, locale: string): void {
   })
 }
 
-function rewriteStructuredDataUrls(document: Document, locale: string, siteOrigin: string): void {
+function rewriteStructuredDataUrls(document: Document, locale: string, pageUrl: string, siteOrigin: string): void {
   const scripts = Array.from(document.querySelectorAll('script[type="application/ld+json"]'))
 
   for (const script of scripts) {
@@ -254,7 +256,7 @@ function rewriteStructuredDataUrls(document: Document, locale: string, siteOrigi
 
     try {
       const parsed = JSON.parse(content)
-      const rewritten = rewriteJsonLdValue(parsed, locale, siteOrigin)
+      const rewritten = rewriteJsonLdValue(parsed, locale, pageUrl, siteOrigin)
       script.textContent = JSON.stringify(rewritten)
     }
     catch {
@@ -263,16 +265,16 @@ function rewriteStructuredDataUrls(document: Document, locale: string, siteOrigi
   }
 }
 
-function rewriteJsonLdValue(value: unknown, locale: string, siteOrigin: string, parentKey?: string): unknown {
+function rewriteJsonLdValue(value: unknown, locale: string, pageUrl: string, siteOrigin: string, parentKey?: string): unknown {
   if (typeof value === 'string') {
     if (!parentKey || !JSON_LD_URL_KEYS.has(parentKey)) {
       return value
     }
-    return localizeInternalUrl(value, locale, siteOrigin) ?? value
+    return localizeInternalUrl(value, locale, pageUrl, siteOrigin) ?? value
   }
 
   if (Array.isArray(value)) {
-    return value.map((item) => rewriteJsonLdValue(item, locale, siteOrigin, parentKey))
+    return value.map((item) => rewriteJsonLdValue(item, locale, pageUrl, siteOrigin, parentKey))
   }
 
   if (value && typeof value === 'object') {
@@ -283,7 +285,7 @@ function rewriteJsonLdValue(value: unknown, locale: string, siteOrigin: string, 
         clonedValue[key] = locale
         continue
       }
-      clonedValue[key] = rewriteJsonLdValue(nestedValue, locale, siteOrigin, key)
+      clonedValue[key] = rewriteJsonLdValue(nestedValue, locale, pageUrl, siteOrigin, key)
     }
 
     return clonedValue
@@ -292,14 +294,14 @@ function rewriteJsonLdValue(value: unknown, locale: string, siteOrigin: string, 
   return value
 }
 
-function localizeInternalUrl(value: string, locale: string, siteOrigin: string): string | null {
+function localizeInternalUrl(value: string, locale: string, pageUrl: string, siteOrigin: string): string | null {
   if (!value || value.startsWith('#') || /^[a-z]+:/iu.test(value) && !/^https?:/iu.test(value)) {
     return null
   }
 
   let url: URL
   try {
-    url = new URL(value, siteOrigin)
+    url = new URL(value, pageUrl)
   }
   catch {
     return null

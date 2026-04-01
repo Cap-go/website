@@ -1,6 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import m from '@/services/messages'
+import { defaultLocale } from '@/services/locale'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.aup({}, { locale: Astro.locals.locale })].join(' | ')
 const description = m.read_our_aup({}, { locale: Astro.locals.locale })
@@ -10,6 +11,14 @@ const content = { title, description }
 
 <Layout content={content}>
   <div class="py-8 m-auto prose-sm prose prose-invert">
+    {
+      (Astro.locals.requestedLocale || Astro.locals.locale) !== defaultLocale && (
+        <span class="text-xs">
+          Note: This is an automatically translated page from its English source. Only the English version should be used for legal actions. Please refer to the English source for
+          legal matters.
+        </span>
+      )
+    }
     <h1>{m.aup({}, { locale: Astro.locals.locale })}</h1>
     <p><em>{m.last_update({}, { locale: Astro.locals.locale })}: 07/09/2024</em></p>
     <p>

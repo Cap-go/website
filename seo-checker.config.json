@@ -1,5 +1,5 @@
 {
-  "distPath": "./dist",
+  "distPath": "./dist/client",
   "baseUrl": "https://capgo.app",
   "languages": [
     "en",
@@ -7,16 +7,10 @@
     "de",
     "es",
     "it",
-    "pt",
     "ja",
     "ko",
     "zh",
-    "ru",
-    "nl",
-    "pl",
-    "uk",
-    "id",
-    "ar"
+    "id"
   ],
   "defaultLanguage": "en",
   "rules": {

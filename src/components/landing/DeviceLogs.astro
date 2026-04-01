@@ -1,5 +1,6 @@
 ---
 import m from '@/services/messages'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const locale = Astro.locals.locale
 ---
@@ -36,10 +37,10 @@ const locale = Astro.locals.locale
           </li>
         </ul>
         <div class="flex flex-wrap gap-3 mt-8">
-          <a href="/register" class="px-5 py-3 text-sm font-semibold text-white transition bg-blue-600 rounded-lg shadow-lg shadow-blue-600/30 hover:bg-blue-700">
+          <a href={getRelativeLocaleUrl(locale, 'register')} class="px-5 py-3 text-sm font-semibold text-white transition bg-blue-600 rounded-lg shadow-lg shadow-blue-600/30 hover:bg-blue-700">
             {m.live_update_logs_cta_primary({}, { locale })}
           </a>
-          <a href="/live-update" class="px-5 py-3 text-sm font-semibold text-blue-100 transition border rounded-lg border-white/10 hover:border-blue-400/60">
+          <a href={getRelativeLocaleUrl(locale, 'live-update')} class="px-5 py-3 text-sm font-semibold text-blue-100 transition border rounded-lg border-white/10 hover:border-blue-400/60">
             {m.live_update_logs_cta_secondary({}, { locale })}
           </a>
         </div>

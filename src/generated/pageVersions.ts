@@ -1,4 +1,4 @@
-export const siteBuildVersion = "2026-04-01T21:58:19.173Z"
+export const siteBuildVersion = "2026-04-01T22:09:16.013Z"
 
 export const pageVersionMap = {
   "/": "2026-04-01T21:30:46.403Z",
@@ -6,7 +6,7 @@ export const pageVersionMap = {
   "/about/": "2026-04-01T21:30:46.336Z",
   "/alternatives/": "2026-04-01T21:30:46.605Z",
   "/app_mobile/": "2026-04-01T21:30:46.307Z",
-  "/aup/": "2026-04-01T21:30:46.026Z",
+  "/aup/": "2026-04-01T22:06:49.261Z",
   "/blog/": "2026-04-01T20:24:27.962Z",
   "/blog/[slug]/": "2026-04-01T21:30:46.526Z",
   "/blog/2-way-communication-in-capacitor-apps": "2025-04-26T01:12:41.179Z",
@@ -588,7 +588,7 @@ export const pageVersionMap = {
   "/consulting/": "2026-04-01T21:30:46.299Z",
   "/contributing/": "2026-04-01T21:30:46.584Z",
   "/cost/cost-to-publish-app-on-app-store/": "2026-04-01T20:24:27.965Z",
-  "/disclaimer/": "2026-04-01T21:30:46.557Z",
+  "/disclaimer/": "2026-04-01T22:06:49.265Z",
   "/dp/": "2026-04-01T21:30:46.427Z",
   "/dpa/": "2026-04-01T21:30:46.396Z",
   "/enterprise/": "2026-04-01T21:30:46.539Z",
@@ -614,7 +614,7 @@ export const pageVersionMap = {
   "/solutions/agencies/": "2026-04-01T21:30:46.676Z",
   "/solutions/beta-testing/": "2026-04-01T21:30:46.545Z",
   "/solutions/cordova-to-capacitor-ai/": "2026-04-01T21:30:46.710Z",
-  "/solutions/cordova-to-capacitor/": "2026-04-01T21:31:10.012Z",
+  "/solutions/cordova-to-capacitor/": "2026-04-01T22:07:14.534Z",
   "/solutions/direct-updates/": "2026-04-01T21:30:46.576Z",
   "/solutions/ecommerce/": "2026-04-01T21:30:46.703Z",
   "/solutions/fintech/": "2026-04-01T21:30:46.730Z",
@@ -638,6 +638,6 @@ export const pageVersionMap = {
   "/top_kotlin_app/": "2026-04-01T21:30:45.878Z",
   "/top_native_script_app/": "2026-04-01T21:30:45.891Z",
   "/top_react_native_app/": "2026-04-01T21:30:46.291Z",
-  "/tos/": "2026-04-01T21:30:46.381Z",
+  "/tos/": "2026-04-01T22:06:49.264Z",
   "/trust/": "2026-04-01T21:30:46.227Z",
 } as const

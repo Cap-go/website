@@ -5,7 +5,7 @@ import { useRuntimeConfig } from './config/app'
 import { siteBuildVersion, pageVersionMap } from './generated/pageVersions'
 import { translateLandingHtml } from './lib/landingTranslation'
 import { defaultLocale, type Locales } from './services/locale'
-import { isDynamicLandingPath, isStaticLocale, normalizePathname, parseRequestedLandingLocale, splitLocaleFromPathname } from './services/landingLocale'
+import { getLocalizedPathname, isDynamicLandingPath, isStaticLocale, normalizePathname, parseRequestedLandingLocale, splitLocaleFromPathname } from './services/landingLocale'
 
 const SOURCE_REQUEST_HEADER = 'x-capgo-translation-source'
 const TRANSLATION_CACHE_HEADER = 'x-capgo-translation-cache'
@@ -91,7 +91,7 @@ async function handleDynamicLandingRequest(
 
   const sourceResponse = await next(sourceRequest)
   if (context.request.method === 'HEAD' || !isHtmlResponse(sourceResponse)) {
-    return withTranslationHeaders(sourceResponse, {
+    return withTranslationHeaders(localizeResponseLocation(sourceResponse, requestedLocale, requestUrl.origin), {
       cacheState: 'skip',
       locale: defaultLocale,
       pageVersion,
@@ -113,6 +113,7 @@ async function handleDynamicLandingRequest(
       ai,
       html: sourceHtml,
       locale: requestedLocale,
+      pageUrl: sourceRenderUrl.toString(),
       siteOrigin: requestUrl.origin,
     })
     const shouldEdgeCache = sourceResponse.ok
@@ -166,6 +167,39 @@ function createSourceRequest(request: Request, sourcePathname: string): Request 
     headers,
     method: request.method,
     redirect: request.redirect,
+  })
+}
+
+function localizeResponseLocation(response: Response, locale: string, siteOrigin: string): Response {
+  const location = response.headers.get('Location')
+  if (!location) {
+    return response
+  }
+
+  let resolvedLocation: URL
+  try {
+    resolvedLocation = new URL(location, siteOrigin)
+  }
+  catch {
+    return response
+  }
+
+  if (resolvedLocation.origin !== siteOrigin) {
+    return response
+  }
+
+  const localizedPath = getLocalizedPathname(resolvedLocation.pathname, locale)
+  const localizedLocation = /^https?:/iu.test(location)
+    ? `${resolvedLocation.origin}${localizedPath}${resolvedLocation.search}${resolvedLocation.hash}`
+    : `${localizedPath}${resolvedLocation.search}${resolvedLocation.hash}`
+
+  const headers = new Headers(response.headers)
+  headers.set('Location', localizedLocation)
+
+  return new Response(response.body, {
+    headers,
+    status: response.status,
+    statusText: response.statusText,
   })
 }
 

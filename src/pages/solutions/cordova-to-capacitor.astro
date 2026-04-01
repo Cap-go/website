@@ -27,6 +27,76 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
 })
 
 const content = { title, description, ldJSON }
+
+const migrationPlanMessages = [
+  {
+    title: m.solutions_cordova_to_capacitor_day1_title,
+    description: m.solutions_cordova_to_capacitor_day1_desc,
+  },
+  {
+    title: m.solutions_cordova_to_capacitor_day2_title,
+    description: m.solutions_cordova_to_capacitor_day2_desc,
+  },
+  {
+    title: m.solutions_cordova_to_capacitor_day3_title,
+    description: m.solutions_cordova_to_capacitor_day3_desc,
+  },
+  {
+    title: m.solutions_cordova_to_capacitor_day4_title,
+    description: m.solutions_cordova_to_capacitor_day4_desc,
+  },
+  {
+    title: m.solutions_cordova_to_capacitor_day5_title,
+    description: m.solutions_cordova_to_capacitor_day5_desc,
+  },
+  {
+    title: m.solutions_cordova_to_capacitor_day6_title,
+    description: m.solutions_cordova_to_capacitor_day6_desc,
+  },
+  {
+    title: m.solutions_cordova_to_capacitor_day7_title,
+    description: m.solutions_cordova_to_capacitor_day7_desc,
+  },
+  {
+    title: m.solutions_cordova_to_capacitor_day8_title,
+    description: m.solutions_cordova_to_capacitor_day8_desc,
+  },
+  {
+    title: m.solutions_cordova_to_capacitor_day9_title,
+    description: m.solutions_cordova_to_capacitor_day9_desc,
+  },
+  {
+    title: m.solutions_cordova_to_capacitor_day10_title,
+    description: m.solutions_cordova_to_capacitor_day10_desc,
+  },
+] as const
+
+const faqMessages = [
+  {
+    question: m.solutions_cordova_to_capacitor_faq1_q,
+    answer: m.solutions_cordova_to_capacitor_faq1_a,
+  },
+  {
+    question: m.solutions_cordova_to_capacitor_faq2_q,
+    answer: m.solutions_cordova_to_capacitor_faq2_a,
+  },
+  {
+    question: m.solutions_cordova_to_capacitor_faq3_q,
+    answer: m.solutions_cordova_to_capacitor_faq3_a,
+  },
+  {
+    question: m.solutions_cordova_to_capacitor_faq4_q,
+    answer: m.solutions_cordova_to_capacitor_faq4_a,
+  },
+  {
+    question: m.solutions_cordova_to_capacitor_faq5_q,
+    answer: m.solutions_cordova_to_capacitor_faq5_a,
+  },
+  {
+    question: m.solutions_cordova_to_capacitor_faq6_q,
+    answer: m.solutions_cordova_to_capacitor_faq6_a,
+  },
+] as const
 ---
 
 <Layout content={content}>
@@ -338,14 +408,10 @@ const content = { title, description, ldJSON }
         <div class="mx-auto max-w-4xl">
           <ol class="space-y-4">
             {
-              Array.from({ length: 10 }).map((_, idx) => {
+              migrationPlanMessages.map((dayEntry, idx) => {
                 const day = idx + 1
-                const titleKey = `solutions_cordova_to_capacitor_day${day}_title` as const
-                const descKey = `solutions_cordova_to_capacitor_day${day}_desc` as const
-                // @ts-expect-error Message keys are resolved dynamically from the copy shim.
-                const dayTitle = m[titleKey]({}, { locale })
-                // @ts-expect-error Message keys are resolved dynamically from the copy shim.
-                const dayDesc = m[descKey]({}, { locale })
+                const dayTitle = dayEntry.title({}, { locale })
+                const dayDesc = dayEntry.description({}, { locale })
                 return (
                   <li class="rounded-2xl border border-gray-700 bg-gray-900 p-6">
                     <div class="flex items-start gap-4">
@@ -471,14 +537,9 @@ const content = { title, description, ldJSON }
 
         <div class="mx-auto max-w-4xl space-y-4">
           {
-            Array.from({ length: 6 }).map((_, idx) => {
-              const n = idx + 1
-              const qKey = `solutions_cordova_to_capacitor_faq${n}_q` as const
-              const aKey = `solutions_cordova_to_capacitor_faq${n}_a` as const
-              // @ts-expect-error Message keys are resolved dynamically from the copy shim.
-              const q = m[qKey]({}, { locale })
-              // @ts-expect-error Message keys are resolved dynamically from the copy shim.
-              const a = m[aKey]({}, { locale })
+            faqMessages.map((faqEntry) => {
+              const q = faqEntry.question({}, { locale })
+              const a = faqEntry.answer({}, { locale })
               return (
                 <details class="group rounded-2xl border border-gray-700 bg-gray-800 p-6">
                   <summary class="flex cursor-pointer list-none items-center justify-between gap-4">

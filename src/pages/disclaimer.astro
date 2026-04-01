@@ -15,7 +15,7 @@ const content = { title, description }
 <Layout content={content}>
   <div class="py-8 m-auto prose-sm prose prose-invert">
     {
-      Astro.locals.locale !== defaultLocale && (
+      (Astro.locals.requestedLocale || Astro.locals.locale) !== defaultLocale && (
         <span class="text-xs">
           Note: This is an automatically translated page from its English source. Only the English version should be used for legal actions. Please refer to the English source for
           legal matters.

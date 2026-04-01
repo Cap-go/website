@@ -44,6 +44,19 @@ const toStringUrl = (value: unknown): string | null => {
   return null
 }
 
+const cleanUrlString = (value: string | null): string | null => {
+  if (!value) return null
+  try {
+    const parsedUrl = new URL(value, requestUrl.origin)
+    parsedUrl.search = ''
+    parsedUrl.hash = ''
+    return parsedUrl.toString()
+  }
+  catch {
+    return value
+  }
+}
+
 const titleString = typeof title === 'string' && title.trim().length > 0 ? title : m.website_title({}, { locale: messageLocale })
 const descriptionString =
   typeof description === 'string' && description.trim().length > 0 ? description : m.website_description({}, { locale: messageLocale })
@@ -52,8 +65,8 @@ const canonicalRequestUrl = new URL(requestUrl.toString())
 canonicalRequestUrl.search = ''
 canonicalRequestUrl.hash = ''
 const requestedUrlString = canonicalRequestUrl.toString()
-const urlString = Astro.locals.isDynamicLandingRequest ? requestedUrlString : (toStringUrl(url) || requestedUrlString)
-const canonicalString = Astro.locals.isDynamicLandingRequest ? requestedUrlString : (toStringUrl(canonical) || urlString)
+const urlString = cleanUrlString(toStringUrl(url)) || requestedUrlString
+const canonicalString = cleanUrlString(toStringUrl(canonical)) || urlString
 
 const baseUrl = Astro.locals.runtimeConfig?.public?.baseUrl || Astro.url.origin
 const rawImage = typeof image === 'string' ? image : toStringUrl(image)
