@@ -1,4 +1,4 @@
-export const siteBuildVersion = "2026-04-01T20:54:43.949Z"
+export const siteBuildVersion = "2026-04-01T21:10:54.677Z"
 
 export const pageVersionMap = {
   "/": "2026-04-01T20:24:27.968Z",
@@ -599,7 +599,7 @@ export const pageVersionMap = {
   "/ionic-enterprise-plugins/": "2026-04-01T20:24:27.970Z",
   "/live-update/": "2026-04-01T20:24:27.970Z",
   "/native-build/": "2026-04-01T20:24:27.970Z",
-  "/plugins/": "2026-04-01T20:24:27.970Z",
+  "/plugins/": "2026-04-01T21:04:54.120Z",
   "/plugins/[slug]/": "2026-04-01T20:24:27.971Z",
   "/premium-support/": "2026-04-01T20:24:27.971Z",
   "/pricing/": "2026-04-01T20:24:27.972Z",

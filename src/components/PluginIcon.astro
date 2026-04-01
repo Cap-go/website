@@ -1,18 +1,24 @@
 ---
+import { Icon } from 'astro-icon/components'
+
 interface Props {
-  icon: any;
-  name: string;
-  className?: string;
+  icon: string
+  name: string
+  className?: string
 }
 
-const { icon: Icon, name, className = "" } = Astro.props;
+const { icon, name, className = '' } = Astro.props
+
+const toHeroiconName = (value: string) =>
+  `heroicons:${value
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1-$2')
+    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+    .replace(/([a-zA-Z])([0-9])/g, '$1-$2')
+    .replace(/([0-9])([a-zA-Z])/g, '$1-$2')
+    .toLowerCase()}-solid`
 ---
 
-<div
-  role="img"
-  aria-label={`${name} plugin icon`}
-  class={`relative flex h-14 w-14 items-center justify-center rounded-xl bg-azure-500 shadow-lg ${className}`}
->
-  <div class="absolute inset-0 bg-white rounded-xl opacity-20" aria-hidden="true"></div>
-  <Icon class="relative w-8 h-8 text-white drop-shadow-md" aria-hidden="true" />
+<div role="img" aria-label={`${name} plugin icon`} class={`relative flex h-14 w-14 items-center justify-center rounded-xl bg-azure-500 shadow-lg ${className}`}>
+  <div class="absolute inset-0 rounded-xl bg-white opacity-20" aria-hidden="true"></div>
+  <Icon name={toHeroiconName(icon)} class="relative h-8 w-8 text-white drop-shadow-md" aria-hidden="true" />
 </div>

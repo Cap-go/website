@@ -5,6 +5,7 @@ import starlightDocSearch from '@astrojs/starlight-docsearch'
 import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import tailwindcss from '@tailwindcss/vite'
 import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
+import icon from 'astro-icon'
 import { defineConfig } from 'astro/config'
 import { glob } from 'glob'
 import { mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
@@ -25,6 +26,7 @@ const SRC_DIR = `${fileURLToPath(new URL('./src/', import.meta.url))
   .replace(/\\/g, '/')
   .replace(/\/$/, '')}/`
 const GENERATED_PAGE_VERSIONS_FILE = `${SRC_DIR}/generated/pageVersions.ts`
+const PUBLIC_DIR = fileURLToPath(new URL('./public/', import.meta.url)).replace(/\\/g, '/').replace(/\/$/, '')
 
 // Build a map of page paths to their lastmod dates for sitemap
 function getPageLastModDates() {
@@ -67,6 +69,16 @@ const pageLastModDates = getPageLastModDates()
 writeGeneratedPageVersionModule(pageLastModDates)
 
 const docsExpludes = locales.map((locale) => `${locale}/**`)
+const toHeroiconName = (value) =>
+  `${value
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1-$2')
+    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+    .replace(/([a-zA-Z])([0-9])/g, '$1-$2')
+    .replace(/([0-9])([a-zA-Z])/g, '$1-$2')
+    .toLowerCase()}-solid`
+const pluginIcons = [
+  ...new Set(['arrow-up-right-solid', ...[...readFileSync('src/config/plugins.ts', 'utf8').matchAll(/icon:\s*'([^']+)'/g)].map(([, iconName]) => toHeroiconName(iconName))]),
+].sort()
 
 function writeGeneratedPageVersionModule(lastModMap) {
   mkdirSync(`${SRC_DIR}/generated`, { recursive: true })
@@ -94,6 +106,14 @@ export default defineConfig({
   site: `https://${config.base_domain.prod}`,
   output: 'server',
   adapter: cloudflare(),
+  vite: {
+    resolve: {
+      alias: {
+        '@': SRC_DIR.slice(0, -1),
+        '~public': PUBLIC_DIR,
+      },
+    },
+  },
   build: {
     // Use all available build workers by default; override with BUILD_CONCURRENCY when needed.
     concurrency: CPU_COUNT,
@@ -130,6 +150,11 @@ export default defineConfig({
     },
   },
   integrations: [
+    icon({
+      include: {
+        heroicons: pluginIcons,
+      },
+    }),
     i18n({
       locales: localeNames,
       defaultLocale,
