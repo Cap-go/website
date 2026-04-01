@@ -1,18 +1,35 @@
 ---
 // @ts-nocheck
+import { getRelativeLocaleUrl } from 'astro:i18n'
 import m from '@/services/messages'
 import { landingLocales } from '@/services/landingLocale'
 import { locales } from '@/services/locale'
 
 const availableLocales = landingLocales.filter((locale) => locales.includes(locale.code as (typeof locales)[number]))
 const localeCodes = availableLocales.map((locale) => locale.code)
+const stripLocalePrefix = (pathname) => {
+  const segments = pathname.split('/').filter(Boolean)
+  if (segments.length > 0 && localeCodes.includes(segments[0])) {
+    const remainder = segments.slice(1).join('/')
+    return remainder ? `/${remainder}/`.replace(/\/{2,}/g, '/') : '/'
+  }
+  return pathname.endsWith('/') ? pathname : `${pathname}/`
+}
+const currentPathname = stripLocalePrefix(Astro.url.pathname)
+const localeLinks = availableLocales.map((locale) => ({
+  ...locale,
+  href: getRelativeLocaleUrl(locale.code, currentPathname),
+}))
 ---
 
 <div class="flex relative flex-row items-center">
   <button
     id="language-menu-button"
     type="button"
-    class="inline-flex flex-row justify-center items-center py-1 px-4 w-full text-sm font-medium text-gray-700 bg-white rounded-md border border-gray-300 shadow-sm dark:text-gray-200 dark:bg-gray-800 dark:border-gray-600 hover:bg-gray-50 focus:outline-none dark:hover:bg-gray-700"
+    aria-controls="language-menu"
+    aria-expanded="false"
+    aria-haspopup="menu"
+    class="inline-flex flex-row justify-center items-center py-1 px-4 w-full text-sm font-medium text-gray-700 bg-white rounded-md border border-gray-300 shadow-sm dark:text-gray-200 dark:bg-gray-800 dark:border-gray-600 hover:bg-gray-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 dark:hover:bg-gray-700"
   >
     {m.language_label({}, { locale: Astro.locals.locale })}
     <svg class="ml-2 -mr-1 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -22,15 +39,17 @@ const localeCodes = availableLocales.map((locale) => locale.code)
   <div
     id="language-menu"
     class="hidden absolute z-50 w-56 bg-white rounded-md border border-gray-400 shadow-lg origin-top-right dark:bg-gray-800 dark:border-gray-700"
+    role="menu"
     style="top: 100%; right: 0;"
   >
     {
-      availableLocales.map((locale) => (
+      localeLinks.map((locale) => (
         <a
           id={`language_${locale.code}`}
+          href={locale.href}
           class="block py-2 px-4 text-sm text-gray-700 cursor-pointer dark:text-gray-200 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-gray-100"
           role="menuitem"
-          tabindex="-1"
+          aria-current={locale.code === Astro.locals.locale ? 'true' : undefined}
         >
           {locale.nativeName}
         </a>
@@ -39,18 +58,12 @@ const localeCodes = availableLocales.map((locale) => locale.code)
   </div>
 </div>
 
-<script is:inline define:vars={{ localeCodes }}>
-  const languageMenu = document.getElementById('language-menu')
+<script is:inline>
   const button = document.getElementById('language-menu-button')
+  const languageMenu = document.getElementById('language-menu')
   if (languageMenu && button) {
-    const stripLocalePrefix = (pathname) => {
-      const segments = pathname.split('/').filter(Boolean)
-      if (segments.length > 0 && localeCodes.includes(segments[0])) {
-        const remainder = segments.slice(1).join('/')
-        return remainder ? `/${remainder}/`.replace(/\/{2,}/g, '/') : '/'
-      }
-      return pathname.endsWith('/') ? pathname : `${pathname}/`
-    }
+    const firstMenuItem = () => languageMenu.querySelector('a[href]')
+    const setExpanded = (expanded) => button.setAttribute('aria-expanded', expanded ? 'true' : 'false')
 
     const adjustMenuPosition = () => {
       if (languageMenu.classList.contains('hidden')) return
@@ -65,20 +78,51 @@ const localeCodes = availableLocales.map((locale) => locale.code)
         languageMenu.style.bottom = 'auto'
       }
     }
-    // window.addEventListener('resize', adjustMenuPosition)
-    button.onclick = () => {
-      const willShow = languageMenu.classList.contains('hidden')
-      languageMenu.classList.toggle('hidden')
-      if (willShow) adjustMenuPosition()
+
+    const closeMenu = () => {
+      languageMenu.classList.add('hidden')
+      setExpanded(false)
     }
-    localeCodes.forEach((j) => {
-      const item = document.getElementById(`language_${j}`)
-      if (!item) return
-      item.addEventListener('click', () => {
-        const tmp = stripLocalePrefix(new URL(window.location.href).pathname)
-        if (j === 'en') window.location.href = tmp
-        else window.location.href = `/${j}${tmp === '/' ? '/' : tmp}`
-      })
+
+    const openMenu = () => {
+      languageMenu.classList.remove('hidden')
+      setExpanded(true)
+      adjustMenuPosition()
+    }
+
+    button.addEventListener('click', () => {
+      if (languageMenu.classList.contains('hidden')) {
+        openMenu()
+        firstMenuItem()?.focus()
+        return
+      }
+      closeMenu()
+    })
+
+    button.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowDown' || event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault()
+        if (languageMenu.classList.contains('hidden')) {
+          openMenu()
+        }
+        firstMenuItem()?.focus()
+      }
+      if (event.key === 'Escape') {
+        closeMenu()
+      }
+    })
+
+    languageMenu.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeMenu()
+        button.focus()
+      }
+    })
+
+    document.addEventListener('click', (event) => {
+      if (!languageMenu.contains(event.target) && !button.contains(event.target)) {
+        closeMenu()
+      }
     })
   }
 </script>
