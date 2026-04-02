@@ -6,7 +6,7 @@ import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import tailwindcss from '@tailwindcss/vite'
 import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
 import icon from 'astro-icon'
-import { defineConfig } from 'astro/config'
+import { defineConfig, sessionDrivers } from 'astro/config'
 import { glob } from 'glob'
 import { readFileSync, statSync } from 'node:fs'
 import os from 'node:os'
@@ -82,6 +82,9 @@ export default defineConfig({
   site: `https://${config.base_domain.prod}`,
   output: 'server',
   adapter: cloudflare(),
+  session: {
+    driver: sessionDrivers.null(),
+  },
   vite: {
     resolve: {
       alias: {
