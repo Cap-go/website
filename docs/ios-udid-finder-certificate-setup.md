@@ -65,7 +65,7 @@ Keep the PEM values on the server only. Do not expose them in public client code
 4. Download the profile from `/api/tools/ios-udid-finder/profile`.
 5. Confirm the response header is:
    - `Content-Type: application/x-apple-aspen-config`
-6. Install the profile on a real iPhone or iPad.
+6. Install the profile on a real iPhone or iPad. The device must be able to reach the host serving `/api/tools/ios-udid-finder/profile` and the optional `PUBLIC_IOS_UDID_CERTIFICATE_LINK`, so use a LAN-accessible hostname or IP address, or a tunnel such as ngrok or localhost.run, when testing from a local machine.
 7. Confirm the device lands on `/tools/ios-udid-finder/result/` with the UDID and device details rendered.
 
 ## Notes

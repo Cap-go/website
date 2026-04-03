@@ -8,6 +8,8 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
 const title = 'Free Mobile App Signing Tools | iOS CSR, UDID, and Android Keystore'
 const description =
   'Generate an iOS certificate signing request, find an iPhone UDID, and create an Android signing keystore from one place. Built for mobile release and CI workflows.'
+const locale = Astro.locals.locale
+const toAbsoluteLocaleUrl = (path: string) => new URL(getRelativeLocaleUrl(locale, path), Astro.url.origin).toString()
 
 const webPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
@@ -21,7 +23,7 @@ const itemList = createItemListLdJson(Astro.locals.runtimeConfig.public, {
   description,
   items: toolCatalog.map((tool) => ({
     name: tool.name,
-    url: new URL(`/${tool.href}/`, Astro.locals.runtimeConfig.public.baseUrl).toString(),
+    url: toAbsoluteLocaleUrl(tool.href),
     description: tool.summary,
   })),
 })
@@ -30,7 +32,7 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, webPage, {
   includeOrganization: true,
   includeBreadcrumbs: true,
   breadcrumbs: [
-    { name: 'Home', url: Astro.locals.runtimeConfig.public.baseUrl },
+    { name: 'Home', url: toAbsoluteLocaleUrl('') },
     { name: 'Tools', url: Astro.url.href },
   ],
   additionalEntities: [itemList],

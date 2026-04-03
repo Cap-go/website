@@ -65,7 +65,7 @@ const navigation: Record<string, NavigationItem[]> = {
       href: getRelativeLocaleUrl(Astro.locals.locale, 'semver_tester'),
     },
     {
-      name: 'Free Mobile Tools',
+      name: m.free_mobile_tools({}, { locale: Astro.locals.locale }),
       href: getRelativeLocaleUrl(Astro.locals.locale, 'tools'),
     },
     {

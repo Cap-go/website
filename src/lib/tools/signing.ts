@@ -56,6 +56,13 @@ const MAX_FIELD_LENGTH = 120
 const MAX_PASSWORD_LENGTH = 128
 const KEY_SIZE = 2048
 
+export class ToolInputError extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = 'ToolInputError'
+  }
+}
+
 function cleanField(value: unknown, maxLength = MAX_FIELD_LENGTH): string {
   return String(value ?? '')
     .trim()
@@ -65,7 +72,7 @@ function cleanField(value: unknown, maxLength = MAX_FIELD_LENGTH): string {
 
 function requireField(value: string, label: string): string {
   if (!value) {
-    throw new Error(`${label} is required.`)
+    throw new ToolInputError(`${label} is required.`)
   }
   return value
 }
@@ -73,7 +80,7 @@ function requireField(value: string, label: string): string {
 function validateCountry(value: string): string {
   const normalized = requireField(cleanField(value, 2), 'Country code').toUpperCase()
   if (!/^[A-Z]{2}$/.test(normalized)) {
-    throw new Error('Country code must use the ISO 3166-1 alpha-2 format, for example US or FR.')
+    throw new ToolInputError('Country code must use the ISO 3166-1 alpha-2 format, for example US or FR.')
   }
   return normalized
 }
@@ -92,7 +99,7 @@ function validateEmail(value: string): string {
     domainLabels.every(Boolean)
 
   if (!valid) {
-    throw new Error('Email must be a valid email address.')
+    throw new ToolInputError('Email must be a valid email address.')
   }
   return normalized
 }
@@ -100,7 +107,7 @@ function validateEmail(value: string): string {
 function validateAlias(value: string): string {
   const normalized = requireField(cleanField(value, 80), 'Alias')
   if (!/^[A-Za-z0-9._-]+$/.test(normalized)) {
-    throw new Error('Alias can only contain letters, numbers, dots, underscores, and hyphens.')
+    throw new ToolInputError('Alias can only contain letters, numbers, dots, underscores, and hyphens.')
   }
   return normalized
 }
@@ -108,15 +115,23 @@ function validateAlias(value: string): string {
 function validatePassword(value: string): string {
   const normalized = requireField(String(value ?? '').slice(0, MAX_PASSWORD_LENGTH), 'Password')
   if (normalized.length < 8) {
-    throw new Error('Password must be at least 8 characters long.')
+    throw new ToolInputError('Password must be at least 8 characters long.')
   }
   return normalized
 }
 
 function validateValidityYears(value: unknown): number {
-  const parsed = Number.parseInt(String(value ?? '10'), 10)
+  let parsed = 10
+
+  if (typeof value === 'number') {
+    parsed = Math.floor(value)
+  } else if (typeof value === 'string') {
+    const trimmed = value.trim()
+    parsed = trimmed ? Number.parseInt(trimmed, 10) : 10
+  }
+
   if (!Number.isFinite(parsed) || parsed < 1 || parsed > 35) {
-    throw new Error('Validity must be between 1 and 35 years.')
+    throw new ToolInputError('Validity must be between 1 and 35 years.')
   }
   return parsed
 }
@@ -257,7 +272,7 @@ export async function createAndroidKeystoreBundle(input: AndroidKeystoreInput): 
   certificate.sign(keyPair.privateKey, forge.md.sha256.create())
 
   const pkcs12 = forge.pkcs12.toPkcs12Asn1(keyPair.privateKey, certificate, input.password, {
-    algorithm: '3des',
+    algorithm: 'aes256',
     friendlyName: input.alias,
     generateLocalKeyId: true,
   })

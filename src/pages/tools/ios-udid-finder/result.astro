@@ -1,12 +1,18 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
 import { decodePayload } from '@/lib/tools/udid'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const UDID_RESULT_COOKIE = 'ios_udid_payload'
 const UDID_RESULT_PATH = '/tools/ios-udid-finder/result/'
+const locale = Astro.locals.locale
+const toAbsoluteLocaleUrl = (path: string) => new URL(getRelativeLocaleUrl(locale, path), Astro.url.origin).toString()
 const cookieValue = Astro.cookies.get(UDID_RESULT_COOKIE)?.value ?? null
 const payload = decodePayload(cookieValue)
+
+Astro.response.headers.set('Cache-Control', 'no-store, max-age=0, must-revalidate')
+Astro.response.headers.set('Pragma', 'no-cache')
 
 if (cookieValue) {
   Astro.cookies.delete(UDID_RESULT_COOKIE, { path: UDID_RESULT_PATH })
@@ -16,11 +22,28 @@ const title = payload?.udid ? 'iOS UDID Finder Result | Device Identifier Receiv
 const description = payload?.udid
   ? 'Your device response has been received. Review the UDID, model, serial number, and other identifiers below.'
   : 'No device response payload was found.'
+const webPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: Astro.url.href,
+})
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, webPage, {
+  includeOrganization: true,
+  includeBreadcrumbs: true,
+  breadcrumbs: [
+    { name: 'Home', url: toAbsoluteLocaleUrl('') },
+    { name: 'Tools', url: toAbsoluteLocaleUrl('tools') },
+    { name: 'iOS UDID Finder', url: toAbsoluteLocaleUrl('tools/ios-udid-finder') },
+    { name: 'Result', url: Astro.url.href },
+  ],
+})
 
 const content = {
   title,
   description,
+  keywords: 'ios udid result, iphone udid response, ipad device identifier result, ios profile service result, tester device registration',
   robots: 'noindex, nofollow',
+  ldJSON,
 }
 
 const rows = payload
@@ -42,6 +65,7 @@ const rows = payload
       <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
         <p class="text-sm font-semibold tracking-[0.25em] text-fuchsia-300 uppercase">Device response</p>
         <h1 class="mt-3 text-4xl font-bold text-white">iOS UDID Finder result</h1>
+        <p id="copy-status" class="sr-only" aria-live="polite"></p>
 
         {
           payload?.udid ? (
@@ -96,16 +120,52 @@ const rows = payload
 </Layout>
 
 <script>
+  const statusRegion = document.querySelector<HTMLElement>('#copy-status')
+
+  function announceCopyStatus(message: string): void {
+    if (statusRegion) {
+      statusRegion.textContent = message
+    }
+  }
+
+  async function copyText(value: string): Promise<void> {
+    try {
+      await navigator.clipboard.writeText(value)
+    } catch {
+      const helper = document.createElement('textarea')
+      helper.value = value
+      helper.setAttribute('readonly', 'true')
+      helper.style.position = 'absolute'
+      helper.style.opacity = '0'
+      document.body.append(helper)
+      helper.select()
+      const copied = document.execCommand('copy')
+      helper.remove()
+      if (!copied) {
+        throw new Error('Copy failed')
+      }
+    }
+  }
+
   document.querySelectorAll<HTMLButtonElement>('[data-copy-value]').forEach((button) => {
     button.addEventListener('click', async () => {
       const value = button.dataset.copyValue
       if (!value) return
 
-      await navigator.clipboard.writeText(value)
       const original = button.textContent || 'Copy'
-      button.textContent = 'Copied'
+
+      try {
+        await copyText(value)
+        button.textContent = 'Copied'
+        announceCopyStatus('Value copied to clipboard.')
+      } catch {
+        button.textContent = 'Copy failed'
+        announceCopyStatus('Copy to clipboard failed.')
+      }
+
       window.setTimeout(() => {
         button.textContent = original
+        announceCopyStatus('')
       }, 1600)
     })
   })

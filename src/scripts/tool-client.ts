@@ -24,8 +24,10 @@ export function downloadFile(file: DownloadableFile): void {
   const link = document.createElement('a')
   link.href = url
   link.download = file.fileName
+  document.body.append(link)
   link.click()
-  URL.revokeObjectURL(url)
+  link.remove()
+  window.setTimeout(() => URL.revokeObjectURL(url), 0)
 }
 
 export async function postJson<TResponse>(url: string, body: Record<string, unknown>): Promise<TResponse> {
@@ -42,6 +44,10 @@ export async function postJson<TResponse>(url: string, body: Record<string, unkn
   if (!response.ok) {
     const message = payload && typeof payload.error === 'string' ? payload.error : 'The request failed. Please review your values and try again.'
     throw new Error(message)
+  }
+
+  if (payload === null) {
+    throw new Error('The server returned an empty or invalid JSON response.')
   }
 
   return payload as TResponse

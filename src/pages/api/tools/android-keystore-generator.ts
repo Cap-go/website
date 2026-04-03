@@ -1,4 +1,4 @@
-import { createAndroidKeystoreBundle, normalizeAndroidKeystoreInput } from '@/lib/tools/signing'
+import { createAndroidKeystoreBundle, normalizeAndroidKeystoreInput, ToolInputError } from '@/lib/tools/signing'
 import { webJson } from '@/services/responses'
 import type { APIRoute } from 'astro'
 
@@ -14,8 +14,13 @@ export const POST: APIRoute = async ({ request }) => {
 
     return webJson(bundle, 200, headers)
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unable to generate the Android keystore.'
-    return webJson({ error: message }, 400, headers)
+    if (error instanceof SyntaxError || error instanceof ToolInputError) {
+      const message = error instanceof Error ? error.message : 'Unable to validate the Android keystore request.'
+      return webJson({ error: message }, 400, headers)
+    }
+
+    console.error('Unexpected Android keystore generation failure', error)
+    return webJson({ error: 'Internal server error generating the Android keystore.' }, 500, headers)
   }
 }
 

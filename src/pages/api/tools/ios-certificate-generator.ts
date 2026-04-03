@@ -1,4 +1,4 @@
-import { createIosCertificateBundle, normalizeIosCertificateInput } from '@/lib/tools/signing'
+import { createIosCertificateBundle, normalizeIosCertificateInput, ToolInputError } from '@/lib/tools/signing'
 import { webJson } from '@/services/responses'
 import type { APIRoute } from 'astro'
 
@@ -14,8 +14,13 @@ export const POST: APIRoute = async ({ request }) => {
 
     return webJson(bundle, 200, headers)
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unable to generate the iOS signing request.'
-    return webJson({ error: message }, 400, headers)
+    if (error instanceof SyntaxError || error instanceof ToolInputError) {
+      const message = error instanceof Error ? error.message : 'Unable to validate the iOS certificate request.'
+      return webJson({ error: message }, 400, headers)
+    }
+
+    console.error('Unexpected iOS certificate generation failure', error)
+    return webJson({ error: 'Internal server error generating the iOS certificate request.' }, 500, headers)
   }
 }
 

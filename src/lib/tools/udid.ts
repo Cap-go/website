@@ -85,41 +85,45 @@ export async function signMobileconfig(profileXml: string): Promise<Buffer | nul
     return null
   }
 
-  const forge = await getForge()
-  const signingCertificate = forge.pki.certificateFromPem(certificatePem)
-  const privateKey = forge.pki.privateKeyFromPem(privateKeyPem)
-  const signedData = forge.pkcs7.createSignedData()
-  signedData.content = forge.util.createBuffer(profileXml, 'utf8')
-  signedData.addCertificate(signingCertificate)
+  try {
+    const forge = await getForge()
+    const signingCertificate = forge.pki.certificateFromPem(certificatePem)
+    const privateKey = forge.pki.privateKeyFromPem(privateKeyPem)
+    const signedData = forge.pkcs7.createSignedData()
+    signedData.content = forge.util.createBuffer(profileXml, 'utf8')
+    signedData.addCertificate(signingCertificate)
 
-  if (chainPem) {
-    const matches = chainPem.match(/-----BEGIN CERTIFICATE-----[\s\S]+?-----END CERTIFICATE-----/g) || []
-    for (const certificate of matches) {
-      signedData.addCertificate(forge.pki.certificateFromPem(certificate))
+    if (chainPem) {
+      const matches = chainPem.match(/-----BEGIN CERTIFICATE-----[\s\S]+?-----END CERTIFICATE-----/g) || []
+      for (const certificate of matches) {
+        signedData.addCertificate(forge.pki.certificateFromPem(certificate))
+      }
     }
+
+    signedData.addSigner({
+      key: privateKey,
+      certificate: signingCertificate,
+      digestAlgorithm: forge.pki.oids.sha256,
+      authenticatedAttributes: [
+        {
+          type: forge.pki.oids.contentType,
+          value: forge.pki.oids.data,
+        },
+        {
+          type: forge.pki.oids.messageDigest,
+        },
+        {
+          type: forge.pki.oids.signingTime,
+          value: new Date(),
+        },
+      ],
+    })
+
+    signedData.sign({ detached: false })
+    return Buffer.from(forge.asn1.toDer(signedData.toAsn1()).getBytes(), 'binary')
+  } catch {
+    return null
   }
-
-  signedData.addSigner({
-    key: privateKey,
-    certificate: signingCertificate,
-    digestAlgorithm: forge.pki.oids.sha256,
-    authenticatedAttributes: [
-      {
-        type: forge.pki.oids.contentType,
-        value: forge.pki.oids.data,
-      },
-      {
-        type: forge.pki.oids.messageDigest,
-      },
-      {
-        type: forge.pki.oids.signingTime,
-        value: new Date(),
-      },
-    ],
-  })
-
-  signedData.sign({ detached: false })
-  return Buffer.from(forge.asn1.toDer(signedData.toAsn1()).getBytes(), 'binary')
 }
 
 export function extractPlistXml(rawBody: string): string | null {
