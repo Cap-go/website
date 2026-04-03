@@ -1,0 +1,88 @@
+---
+title: Getting Started
+description: Install and wire the incoming call kit plugin for native call presentation in Capacitor.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the plugin**
+   <PackageManagers pkg="@capgo/capacitor-incoming-call-kit" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync native platforms**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Decide what triggers the ring UI**
+   - Use your existing push, SIP, or backend event flow.
+   - Call `showIncomingCall()` only when your app has enough information to render the incoming call.
+</Steps>
+
+## Permissions
+
+```typescript
+import { IncomingCallKit } from '@capgo/capacitor-incoming-call-kit';
+
+await IncomingCallKit.requestPermissions();
+await IncomingCallKit.requestFullScreenIntentPermission();
+```
+
+- Android 13+ may require notification permission.
+- Android 14+ may require full-screen intent approval.
+- iOS CallKit does not show a runtime permission prompt for the call sheet itself.
+
+## Show an incoming call
+
+```typescript
+import { IncomingCallKit } from '@capgo/capacitor-incoming-call-kit';
+
+await IncomingCallKit.addListener('callAccepted', async ({ call }) => {
+  console.log('Accepted', call.callId, call.extra);
+  // Start your real voice or video session here.
+});
+
+await IncomingCallKit.addListener('callDeclined', ({ call }) => {
+  console.log('Declined', call.callId);
+});
+
+await IncomingCallKit.showIncomingCall({
+  callId: 'call-42',
+  callerName: 'Ada Lovelace',
+  handle: '+39 555 010 020',
+  appName: 'Capgo Phone',
+  hasVideo: true,
+  timeoutMs: 45_000,
+  extra: {
+    roomId: 'room-42',
+    callerUserId: 'user_ada',
+  },
+  android: {
+    channelId: 'calls',
+    channelName: 'Incoming Calls',
+    showFullScreen: true,
+  },
+  ios: {
+    handleType: 'phoneNumber',
+  },
+});
+```
+
+## End or inspect calls
+
+```typescript
+const active = await IncomingCallKit.getActiveCalls();
+console.log(active.calls);
+
+await IncomingCallKit.endCall({
+  callId: 'call-42',
+  reason: 'joined-session',
+});
+```
+
+## Architecture notes
+
+- Keep FCM, APNs, PushKit, SIP, Twilio, Stream, or Daily integration outside this plugin.
+- Use the plugin only for the native incoming-call presentation layer.
+- Start media and networking after the user accepts the call.

@@ -1,8 +1,12 @@
 ---
+import fs from 'node:fs'
+import path from 'node:path'
 import { actions } from '@/config/plugins'
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
 import { getSlug, getPluginsWithStars, getTotalStars, getTotalDownloads } from '@/services/github'
+import { defaultLocale } from '@/services/locale'
+import { resolvePluginDocsSlug } from '@/services/pluginDocs'
 import PluginIcon from '@/components/PluginIcon.astro'
 import { Icon as AstroIcon } from 'astro-icon/components'
 import { getCollection } from 'astro:content'
@@ -39,25 +43,46 @@ const title = makeSeoTitle(m.plugins({}, { locale }), description)
 
 const content = { title, description }
 
-const slugsSet = new Set()
+const tutorialSlugs = new Set<string>()
 await getCollection('plugin', ({ data, filePath }) => {
   if (data.published !== false && filePath) {
-    slugsSet.add(getSlug(filePath).replace('.md', ''))
+    tutorialSlugs.add(getSlug(filePath).replace('.md', ''))
   }
 })
+
+const readDocsDirectory = (dir: string) => {
+  if (!fs.existsSync(dir)) return []
+  return fs
+    .readdirSync(dir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+}
+
+const defaultDocsDirectory = path.join(process.cwd(), 'src', 'content', 'docs', 'docs', 'plugins')
+const localizedDocsDirectory = locale === defaultLocale ? defaultDocsDirectory : path.join(process.cwd(), 'src', 'content', 'docs', locale, 'docs', 'plugins')
+const defaultDocsSlugs = new Set(readDocsDirectory(defaultDocsDirectory))
+const localizedDocsSlugs = locale === defaultLocale ? defaultDocsSlugs : new Set(readDocsDirectory(localizedDocsDirectory))
+const docsSlugs = new Set([...defaultDocsSlugs, ...localizedDocsSlugs])
 
 const pluginsWithStars = getPluginsWithStars(actions)
 const totalStars = getTotalStars()
 const totalDownloads = getTotalDownloads()
 
 // Parse descriptions for all plugins
-const slugs = [...slugsSet] as string[]
 const plugins = await Promise.all(
-  pluginsWithStars.map(async (item) => ({
-    ...item,
-    description: await marked.parse(item.description),
-    hasTutorial: slugs.includes(getSlug(item.href).replace('.md', '')),
-  })),
+  pluginsWithStars.map(async (item) => {
+    const tutorialSlug = getSlug(item.href).replace('.md', '')
+    const docsSlug = resolvePluginDocsSlug(item, docsSlugs)
+    const hasTutorial = tutorialSlugs.has(tutorialSlug)
+    const docsLocale = docsSlug && localizedDocsSlugs.has(docsSlug) ? locale : defaultLocale
+
+    return {
+      ...item,
+      description: await marked.parse(item.description),
+      docsHref: hasTutorial ? getRelativeLocaleUrl(locale, `plugins/${tutorialSlug}`) : docsSlug ? getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`) : item.href,
+      hasSiteDocs: hasTutorial || Boolean(docsSlug),
+    }
+  }),
 )
 
 // Helper function to format counts
@@ -193,9 +218,9 @@ const formatCount = (count: number): string => {
                     </div>
                   </div>
                   <div class="flex gap-2">
-                    {item.hasTutorial ? (
+                    {item.hasSiteDocs ? (
                       <a
-                        href={getRelativeLocaleUrl(Astro.locals.locale, `plugins/${getSlug(item.href)}`)}
+                        href={item.docsHref}
                         class="inline-flex flex-1 items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700"
                       >
                         Documentation

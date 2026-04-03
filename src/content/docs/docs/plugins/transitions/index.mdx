@@ -1,0 +1,40 @@
+---
+title: "@capgo/transitions"
+description: Framework-agnostic page transitions for Capacitor apps with iOS-style navigation and platform-aware animations.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Add native-feeling page transitions to Capacitor apps without adopting a full design system.
+  actions:
+    - text: Get started
+      link: /docs/plugins/transitions/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-transitions/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+`@capgo/transitions` provides route transitions only. It does not force Ionic styles or framework-specific layout choices.
+
+<CardGrid stagger>
+  <Card title="Framework agnostic">
+    Use the same package with vanilla web components or framework bindings for React, Vue, Angular, Svelte, and Solid.
+  </Card>
+  <Card title="Native-feeling motion">
+    Get iOS and Android style transitions with Web Animations API and progressive View Transitions support.
+  </Card>
+  <Card title="Router primitives">
+    Coordinate transitions across headers, content, and footers with `cap-router-outlet` and `cap-page`.
+  </Card>
+  <Card title="No design lock-in">
+    Bring your own styles and navigation structure. The library focuses on transition behavior, not UI chrome.
+  </Card>
+</CardGrid>

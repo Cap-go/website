@@ -597,6 +597,14 @@ export const actions = [
     icon: 'UserGroup',
   },
   {
+    name: '@capgo/capacitor-contentsquare',
+    author: 'github.com/Cap-go',
+    description: 'Contentsquare analytics, screen tracking, transaction events, and session replay controls for Capacitor 8 apps',
+    href: 'https://github.com/Cap-go/capacitor-contentsquare/',
+    title: 'Contentsquare',
+    icon: 'ChartBar',
+  },
+  {
     name: '@capgo/capacitor-audio-recorder',
     author: 'github.com/Cap-go',
     description: 'Record audio on iOS, Android, and Web with simple controls and formats',
@@ -653,12 +661,28 @@ export const actions = [
     icon: 'SpeakerWave',
   },
   {
+    name: '@capgo/capacitor-supabase',
+    author: 'github.com/Cap-go',
+    description: 'Native Supabase authentication, JWT session access, and basic database operations for Capacitor apps',
+    href: 'https://github.com/Cap-go/capacitor-supabase/',
+    title: 'Supabase',
+    icon: 'CircleStack',
+  },
+  {
     name: '@capgo/capacitor-ssl-pinning',
     author: 'github.com/Cap-go',
     description: 'Pin HTTPS connections to bundled certificates for CapacitorHttp on iOS and Android',
     href: 'https://github.com/Cap-go/capacitor-ssl-pinning/',
     title: 'SSL Pinning',
     icon: 'ShieldCheck',
+  },
+  {
+    name: '@capgo/transitions',
+    author: 'github.com/Cap-go',
+    description: 'Framework-agnostic page transitions for Capacitor apps with iOS-style navigation and platform-aware animations',
+    href: 'https://github.com/Cap-go/capacitor-transitions/',
+    title: 'Transitions',
+    icon: 'ArrowsRightLeft',
   },
   {
     name: '@capgo/capacitor-printer',
@@ -875,6 +899,14 @@ export const actions = [
     href: 'https://github.com/Cap-go/capacitor-in-app-review/',
     title: 'In App Review',
     icon: 'Star',
+  },
+  {
+    name: '@capgo/capacitor-incoming-call-kit',
+    author: 'github.com/Cap-go',
+    description: 'Native incoming call UI for Android full-screen notifications and iOS CallKit with typed call lifecycle events',
+    href: 'https://github.com/Cap-go/capacitor-incoming-call-kit/',
+    title: 'Incoming Call Kit',
+    icon: 'Phone',
   },
   {
     name: '@capgo/capacitor-file-picker',

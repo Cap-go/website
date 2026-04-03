@@ -24,7 +24,9 @@ const CPU_COUNT = Number.isFinite(BUILD_CONCURRENCY) && BUILD_CONCURRENCY > 0 ? 
 const SRC_DIR = `${fileURLToPath(new URL('./src/', import.meta.url))
   .replace(/\\/g, '/')
   .replace(/\/$/, '')}/`
-const PUBLIC_DIR = fileURLToPath(new URL('./public/', import.meta.url)).replace(/\\/g, '/').replace(/\/$/, '')
+const PUBLIC_DIR = fileURLToPath(new URL('./public/', import.meta.url))
+  .replace(/\\/g, '/')
+  .replace(/\/$/, '')
 
 // Build a map of page paths to their lastmod dates for sitemap
 function getPageLastModDates() {
@@ -302,6 +304,11 @@ export default defineConfig({
               paths: ['docs/plugins/contacts/**'],
             },
             {
+              label: 'Plugin Contentsquare',
+              description: 'Contentsquare mobile analytics and session replay plugin',
+              paths: ['docs/plugins/contentsquare/**'],
+            },
+            {
               label: 'Plugin Crisp',
               description: 'Crisp chat integration plugin',
               paths: ['docs/plugins/crisp/**'],
@@ -390,6 +397,11 @@ export default defineConfig({
               label: 'Plugin In App Review',
               description: 'in-app review prompt plugin for app store ratings',
               paths: ['docs/plugins/in-app-review/**'],
+            },
+            {
+              label: 'Plugin Incoming Call Kit',
+              description: 'native incoming call UI plugin with Android notifications and iOS CallKit',
+              paths: ['docs/plugins/incoming-call-kit/**'],
             },
             {
               label: 'Plugin Intent Launcher',
@@ -592,6 +604,11 @@ export default defineConfig({
               paths: ['docs/plugins/speech-synthesis/**'],
             },
             {
+              label: 'Plugin Supabase',
+              description: 'native Supabase authentication and JWT access plugin',
+              paths: ['docs/plugins/supabase/**'],
+            },
+            {
               label: 'Plugin SSL Pinning',
               description: 'certificate pinning plugin for CapacitorHttp requests',
               paths: ['docs/plugins/ssl-pinning/**'],
@@ -605,6 +622,11 @@ export default defineConfig({
               label: 'Plugin Text Interaction',
               description: 'text selection and interaction plugin',
               paths: ['docs/plugins/textinteraction/**'],
+            },
+            {
+              label: 'Plugin Transitions',
+              description: 'framework-agnostic page transition plugin for Capacitor apps',
+              paths: ['docs/plugins/transitions/**'],
             },
             {
               label: 'Plugin Twilio Voice',
@@ -990,6 +1012,14 @@ export default defineConfig({
               collapsed: true,
             },
             {
+              label: 'Contentsquare',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/contentsquare/' },
+                { label: 'Getting started', link: '/docs/plugins/contentsquare/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
               label: 'Crisp',
               items: [
                 { label: 'Overview', link: '/docs/plugins/crisp/' },
@@ -1114,6 +1144,14 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/inappbrowser/' },
                 { label: 'Getting started', link: '/docs/plugins/inappbrowser/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Incoming Call Kit',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/incoming-call-kit/' },
+                { label: 'Getting started', link: '/docs/plugins/incoming-call-kit/getting-started' },
               ],
               collapsed: true,
             },
@@ -1429,6 +1467,14 @@ export default defineConfig({
               collapsed: true,
             },
             {
+              label: 'Supabase',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/supabase/' },
+                { label: 'Getting started', link: '/docs/plugins/supabase/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
               label: 'SSL Pinning',
               items: [
                 { label: 'Overview', link: '/docs/plugins/ssl-pinning/' },
@@ -1501,6 +1547,14 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/textinteraction/' },
                 { label: 'Getting started', link: '/docs/plugins/textinteraction/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Transitions',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/transitions/' },
+                { label: 'Getting started', link: '/docs/plugins/transitions/getting-started' },
               ],
               collapsed: true,
             },

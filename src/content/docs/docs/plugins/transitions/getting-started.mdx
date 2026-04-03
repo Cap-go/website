@@ -1,0 +1,95 @@
+---
+title: Getting Started
+description: Install and initialize the transitions package in a Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/transitions" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Import the runtime once at app startup**
+   - Import `@capgo/transitions`.
+   - Call `initTransitions({ platform: 'auto' })` from the binding that matches your stack.
+
+3. **Wrap your routed pages**
+   - Put your pages inside `cap-router-outlet`.
+   - Use `cap-page`, `cap-header`, `cap-content`, and `cap-footer` for coordinated transitions.
+</Steps>
+
+## Vanilla setup
+
+```html
+<cap-router-outlet platform="auto">
+  <cap-page>
+    <cap-header slot="header">
+      <h1>My Page</h1>
+    </cap-header>
+    <cap-content slot="content">
+      <p>Page content here</p>
+    </cap-content>
+    <cap-footer slot="footer">
+      <nav>Tab bar</nav>
+    </cap-footer>
+  </cap-page>
+</cap-router-outlet>
+```
+
+```typescript
+import '@capgo/transitions';
+
+const outlet = document.querySelector('cap-router-outlet');
+outlet?.push(newPageElement);
+```
+
+## React setup
+
+```tsx
+import { useEffect, useRef } from 'react';
+import { initTransitions, setDirection, setupPage, setupRouterOutlet } from '@capgo/transitions/react';
+import '@capgo/transitions';
+
+initTransitions({ platform: 'auto' });
+
+function HomePage() {
+  const pageRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!pageRef.current) return;
+    return setupPage(pageRef.current, {
+      onDidEnter: () => console.log('entered'),
+    });
+  }, []);
+
+  return (
+    <cap-page ref={pageRef}>
+      <cap-header slot="header">
+        <h1>Home</h1>
+      </cap-header>
+      <cap-content slot="content">
+        <button
+          onClick={() => {
+            setDirection('forward');
+            // Call your router navigate here.
+          }}
+        >
+          Go to Details
+        </button>
+      </cap-content>
+    </cap-page>
+  );
+}
+```
+
+## Core primitives
+
+- `initTransitions()` bootstraps the transition controller.
+- `setDirection()` defines the next navigation direction.
+- `setupRouterOutlet()` attaches lifecycle behavior to the outlet.
+- `setupPage()` registers enter and leave hooks for a page element.
+
+Use the binding that matches your framework and keep your existing router. The package does not require a native sync step because it runs in the web layer of your Capacitor app.

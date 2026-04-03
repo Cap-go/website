@@ -1,0 +1,66 @@
+---
+title: Getting Started
+description: Install and configure the Contentsquare Capacitor plugin for analytics and session replay.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the plugin**
+   <PackageManagers pkg="@capgo/capacitor-contentsquare" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync native platforms**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Review the upstream product configuration**
+   - Follow the official [Contentsquare Capacitor guide](https://docs.contentsquare.com/en/capacitor/) for project keys, replay settings, and dashboard setup.
+</Steps>
+
+## iOS setup
+
+To enable Contentsquare in-app features on iOS, add the `cs-$(PRODUCT_BUNDLE_IDENTIFIER)` URL scheme to your app and forward incoming URLs with `Contentsquare.handle(url: url)` from your `AppDelegate`, `SceneDelegate`, or SwiftUI `onOpenURL`.
+
+## Basic usage
+
+```typescript
+import { ContentsquarePlugin, CurrencyCode } from '@capgo/capacitor-contentsquare';
+
+await ContentsquarePlugin.optIn();
+
+await ContentsquarePlugin.sendScreenName('Home');
+
+await ContentsquarePlugin.sendTransaction({
+  transactionValue: 10,
+  transactionCurrency: CurrencyCode.EUR,
+  transactionId: 'order-42',
+});
+
+await ContentsquarePlugin.sendDynamicVar({
+  dynVarKey: 'store',
+  dynVarValue: 'rome',
+});
+```
+
+## Replay privacy controls
+
+Use the built-in masking helpers to keep sensitive content out of Session Replay:
+
+```typescript
+await ContentsquarePlugin.excludeURLForReplay('/checkout/');
+
+await ContentsquarePlugin.setPIISelectors({
+  PIISelectors: ['.credit-card', '.email-address'],
+  Attributes: [{ selector: '[data-secret]', attrName: ['value', 'placeholder'] }],
+});
+```
+
+## Available API groups
+
+- Consent control with `optIn()` and `optOut()`.
+- Screen, transaction, and dynamic variable tracking.
+- Session Replay filtering with URL and selector masking.
+
+For the full API surface and platform-specific behavior, keep the official Contentsquare docs open alongside this guide.

@@ -1,0 +1,50 @@
+---
+import fs from 'node:fs'
+import path from 'node:path'
+import { CardGrid, LinkCard } from '@astrojs/starlight/components'
+import { actions } from '@/config/plugins'
+import { defaultLocale } from '@/services/locale'
+import { resolvePluginDocsSlug } from '@/services/pluginDocs'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const locale = Astro.locals.locale ?? defaultLocale
+
+const readDocsDirectory = (dir: string) => {
+  if (!fs.existsSync(dir)) return []
+  return fs
+    .readdirSync(dir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+}
+
+const defaultDocsDirectory = path.join(process.cwd(), 'src', 'content', 'docs', 'docs', 'plugins')
+const localizedDocsDirectory = locale === defaultLocale ? defaultDocsDirectory : path.join(process.cwd(), 'src', 'content', 'docs', locale, 'docs', 'plugins')
+const defaultDocsSlugs = new Set(readDocsDirectory(defaultDocsDirectory))
+const localizedDocsSlugs = locale === defaultLocale ? defaultDocsSlugs : new Set(readDocsDirectory(localizedDocsDirectory))
+const docsSlugs = new Set([...defaultDocsSlugs, ...localizedDocsSlugs])
+const seenDocsSlugs = new Set<string>()
+
+const plugins = actions
+  .map((plugin) => {
+    const docsSlug = resolvePluginDocsSlug(plugin, docsSlugs)
+    if (!docsSlug || seenDocsSlugs.has(docsSlug)) return null
+
+    seenDocsSlugs.add(docsSlug)
+
+    const docsLocale = localizedDocsSlugs.has(docsSlug) ? locale : defaultLocale
+
+    return {
+      description: plugin.description,
+      href: getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`),
+      title: plugin.title,
+    }
+  })
+  .filter((plugin): plugin is NonNullable<typeof plugin> => Boolean(plugin))
+  .sort((left, right) => left.title.localeCompare(right.title))
+---
+
+<p>{plugins.length} documented plugins currently resolve from the live Capgo plugin registry.</p>
+
+<CardGrid>
+  {plugins.map((plugin) => <LinkCard title={plugin.title} description={plugin.description} href={plugin.href} />)}
+</CardGrid>
