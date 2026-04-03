@@ -15,15 +15,22 @@ interface HandleToolPostOptions<TInput, TResponse> {
 
 export async function handleToolPost<TInput, TResponse>(request: Request, options: HandleToolPostOptions<TInput, TResponse>): Promise<Response> {
   try {
-    const body = (await request.json()) as Record<string, unknown>
-    const input = options.normalize(body)
+    const body = await request.json()
+    if (!body || typeof body !== 'object' || Array.isArray(body)) {
+      return webJson({ error: options.fallbackValidationMessage }, 400, toolResponseHeaders)
+    }
+
+    const input = options.normalize(body as Record<string, unknown>)
     const payload = await options.create(input)
 
     return webJson(payload, 200, toolResponseHeaders)
   } catch (error) {
-    if (error instanceof SyntaxError || error instanceof ToolInputError) {
-      const message = error instanceof Error ? error.message : options.fallbackValidationMessage
-      return webJson({ error: message }, 400, toolResponseHeaders)
+    if (error instanceof SyntaxError) {
+      return webJson({ error: options.fallbackValidationMessage }, 400, toolResponseHeaders)
+    }
+
+    if (error instanceof ToolInputError) {
+      return webJson({ error: error.message }, 400, toolResponseHeaders)
     }
 
     console.error(options.logLabel, error)
