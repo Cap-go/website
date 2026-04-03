@@ -19,6 +19,46 @@ export interface Plugin extends Action {
   locale?: string
 }
 
+const createCapgoPlugin = (name: string, title: string, description: string, href: string, icon: string): Action => ({
+  name,
+  title,
+  description,
+  href,
+  icon,
+  author: 'github.com/Cap-go',
+})
+
+const additionalCapgoPlugins = [
+  createCapgoPlugin(
+    '@capgo/capacitor-contentsquare',
+    'Contentsquare',
+    'Contentsquare analytics, screen tracking, transaction events, and session replay controls for Capacitor 8 apps',
+    'https://github.com/Cap-go/capacitor-contentsquare/',
+    'ChartBar',
+  ),
+  createCapgoPlugin(
+    '@capgo/capacitor-supabase',
+    'Supabase',
+    'Native Supabase authentication, JWT session access, and basic database operations for Capacitor apps',
+    'https://github.com/Cap-go/capacitor-supabase/',
+    'CircleStack',
+  ),
+  createCapgoPlugin(
+    '@capgo/transitions',
+    'Transitions',
+    'Framework-agnostic page transitions for Capacitor apps with iOS-style navigation and platform-aware animations',
+    'https://github.com/Cap-go/capacitor-transitions/',
+    'ArrowsRightLeft',
+  ),
+  createCapgoPlugin(
+    '@capgo/capacitor-incoming-call-kit',
+    'Incoming Call Kit',
+    'Native incoming call UI for Android full-screen notifications and iOS CallKit with typed call lifecycle events',
+    'https://github.com/Cap-go/capacitor-incoming-call-kit/',
+    'Phone',
+  ),
+]
+
 export const actions = [
   {
     name: '@capgo/native-market',
@@ -597,14 +637,6 @@ export const actions = [
     icon: 'UserGroup',
   },
   {
-    name: '@capgo/capacitor-contentsquare',
-    author: 'github.com/Cap-go',
-    description: 'Contentsquare analytics, screen tracking, transaction events, and session replay controls for Capacitor 8 apps',
-    href: 'https://github.com/Cap-go/capacitor-contentsquare/',
-    title: 'Contentsquare',
-    icon: 'ChartBar',
-  },
-  {
     name: '@capgo/capacitor-audio-recorder',
     author: 'github.com/Cap-go',
     description: 'Record audio on iOS, Android, and Web with simple controls and formats',
@@ -661,28 +693,12 @@ export const actions = [
     icon: 'SpeakerWave',
   },
   {
-    name: '@capgo/capacitor-supabase',
-    author: 'github.com/Cap-go',
-    description: 'Native Supabase authentication, JWT session access, and basic database operations for Capacitor apps',
-    href: 'https://github.com/Cap-go/capacitor-supabase/',
-    title: 'Supabase',
-    icon: 'CircleStack',
-  },
-  {
     name: '@capgo/capacitor-ssl-pinning',
     author: 'github.com/Cap-go',
     description: 'Pin HTTPS connections to bundled certificates for CapacitorHttp on iOS and Android',
     href: 'https://github.com/Cap-go/capacitor-ssl-pinning/',
     title: 'SSL Pinning',
     icon: 'ShieldCheck',
-  },
-  {
-    name: '@capgo/transitions',
-    author: 'github.com/Cap-go',
-    description: 'Framework-agnostic page transitions for Capacitor apps with iOS-style navigation and platform-aware animations',
-    href: 'https://github.com/Cap-go/capacitor-transitions/',
-    title: 'Transitions',
-    icon: 'ArrowsRightLeft',
   },
   {
     name: '@capgo/capacitor-printer',
@@ -900,14 +916,7 @@ export const actions = [
     title: 'In App Review',
     icon: 'Star',
   },
-  {
-    name: '@capgo/capacitor-incoming-call-kit',
-    author: 'github.com/Cap-go',
-    description: 'Native incoming call UI for Android full-screen notifications and iOS CallKit with typed call lifecycle events',
-    href: 'https://github.com/Cap-go/capacitor-incoming-call-kit/',
-    title: 'Incoming Call Kit',
-    icon: 'Phone',
-  },
+  ...additionalCapgoPlugins,
   {
     name: '@capgo/capacitor-file-picker',
     author: 'github.com/Cap-go',

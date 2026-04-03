@@ -91,6 +91,14 @@ const createPluginSidebarItem = (label, slug) => ({
   ],
   collapsed: true,
 })
+const additionalPluginDocs = [
+  ['Contentsquare', 'Contentsquare mobile analytics and session replay plugin', 'contentsquare'],
+  ['Incoming Call Kit', 'native incoming call UI plugin with Android notifications and iOS CallKit', 'incoming-call-kit'],
+  ['Supabase', 'native Supabase authentication and JWT access plugin', 'supabase'],
+  ['Transitions', 'framework-agnostic page transition plugin for Capacitor apps', 'transitions'],
+]
+const additionalPluginDocSets = additionalPluginDocs.map(([label, description, slug]) => createPluginDocSet(label, description, slug))
+const additionalPluginSidebarItems = additionalPluginDocs.map(([label, , slug]) => createPluginSidebarItem(label, slug))
 
 export default defineConfig({
   trailingSlash: 'always',
@@ -316,7 +324,6 @@ export default defineConfig({
               description: 'contacts access plugin for reading device contacts',
               paths: ['docs/plugins/contacts/**'],
             },
-            createPluginDocSet('Contentsquare', 'Contentsquare mobile analytics and session replay plugin', 'contentsquare'),
             {
               label: 'Plugin Crisp',
               description: 'Crisp chat integration plugin',
@@ -407,7 +414,6 @@ export default defineConfig({
               description: 'in-app review prompt plugin for app store ratings',
               paths: ['docs/plugins/in-app-review/**'],
             },
-            createPluginDocSet('Incoming Call Kit', 'native incoming call UI plugin with Android notifications and iOS CallKit', 'incoming-call-kit'),
             {
               label: 'Plugin Intent Launcher',
               description: 'Android intent launcher plugin',
@@ -608,7 +614,6 @@ export default defineConfig({
               description: 'text-to-speech synthesis plugin',
               paths: ['docs/plugins/speech-synthesis/**'],
             },
-            createPluginDocSet('Supabase', 'native Supabase authentication and JWT access plugin', 'supabase'),
             {
               label: 'Plugin SSL Pinning',
               description: 'certificate pinning plugin for CapacitorHttp requests',
@@ -624,7 +629,6 @@ export default defineConfig({
               description: 'text selection and interaction plugin',
               paths: ['docs/plugins/textinteraction/**'],
             },
-            createPluginDocSet('Transitions', 'framework-agnostic page transition plugin for Capacitor apps', 'transitions'),
             {
               label: 'Plugin Twilio Voice',
               description: 'Twilio voice calling plugin',
@@ -690,6 +694,7 @@ export default defineConfig({
               description: 'file compression and extraction plugin',
               paths: ['docs/plugins/zip/**'],
             },
+            ...additionalPluginDocSets,
             // Firebase plugins
             {
               label: 'Plugin Firebase Analytics',
@@ -1008,7 +1013,6 @@ export default defineConfig({
               ],
               collapsed: true,
             },
-            createPluginSidebarItem('Contentsquare', 'contentsquare'),
             {
               label: 'Crisp',
               items: [
@@ -1137,7 +1141,6 @@ export default defineConfig({
               ],
               collapsed: true,
             },
-            createPluginSidebarItem('Incoming Call Kit', 'incoming-call-kit'),
             {
               label: 'Intercom',
               items: [
@@ -1449,7 +1452,6 @@ export default defineConfig({
               ],
               collapsed: true,
             },
-            createPluginSidebarItem('Supabase', 'supabase'),
             {
               label: 'SSL Pinning',
               items: [
@@ -1526,7 +1528,6 @@ export default defineConfig({
               ],
               collapsed: true,
             },
-            createPluginSidebarItem('Transitions', 'transitions'),
             {
               label: 'Twilio Voice',
               items: [
@@ -1610,6 +1611,7 @@ export default defineConfig({
               ],
               collapsed: true,
             },
+            ...additionalPluginSidebarItems,
             {
               label: '👋 Get a custom plugin',
               link: '/consulting/',
