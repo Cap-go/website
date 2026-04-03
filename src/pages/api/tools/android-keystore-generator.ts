@@ -1,29 +1,18 @@
-import { createAndroidKeystoreBundle, normalizeAndroidKeystoreInput, ToolInputError } from '@/lib/tools/signing'
+import { handleToolPost, toolResponseHeaders } from '@/lib/tools/api'
+import { createAndroidKeystoreBundle, normalizeAndroidKeystoreInput } from '@/lib/tools/signing'
 import { webJson } from '@/services/responses'
 import type { APIRoute } from 'astro'
 
-const headers = {
-  'Cache-Control': 'no-store',
-}
-
 export const POST: APIRoute = async ({ request }) => {
-  try {
-    const body = await request.json()
-    const input = normalizeAndroidKeystoreInput(body)
-    const bundle = await createAndroidKeystoreBundle(input)
-
-    return webJson(bundle, 200, headers)
-  } catch (error) {
-    if (error instanceof SyntaxError || error instanceof ToolInputError) {
-      const message = error instanceof Error ? error.message : 'Unable to validate the Android keystore request.'
-      return webJson({ error: message }, 400, headers)
-    }
-
-    console.error('Unexpected Android keystore generation failure', error)
-    return webJson({ error: 'Internal server error generating the Android keystore.' }, 500, headers)
-  }
+  return await handleToolPost(request, {
+    normalize: normalizeAndroidKeystoreInput,
+    create: createAndroidKeystoreBundle,
+    fallbackValidationMessage: 'Unable to validate the Android keystore request.',
+    internalErrorMessage: 'Internal server error generating the Android keystore.',
+    logLabel: 'Unexpected Android keystore generation failure',
+  })
 }
 
 export const ALL: APIRoute = async () => {
-  return webJson({ error: 'Method not allowed.' }, 405, headers)
+  return webJson({ error: 'Method not allowed.' }, 405, toolResponseHeaders)
 }
