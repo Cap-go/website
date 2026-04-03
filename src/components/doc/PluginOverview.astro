@@ -11,11 +11,14 @@ interface Props {
   summary: string
 }
 
-const { cards, summary } = Astro.props
+const { cards, summary } = Astro.props as Props
 ---
 
-<p>{summary}</p>
+<section aria-live="polite" aria-labelledby="plugin-overview-heading">
+  <h2 id="plugin-overview-heading" class="sr-only">Plugin overview</h2>
+  <p>{summary}</p>
 
-<CardGrid stagger>
-  {cards.map((card) => <Card title={card.title}>{card.body}</Card>)}
-</CardGrid>
+  <CardGrid stagger>
+    {cards.map((card) => <Card title={card.title}>{card.body}</Card>)}
+  </CardGrid>
+</section>

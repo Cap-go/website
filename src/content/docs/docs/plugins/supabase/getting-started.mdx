@@ -36,7 +36,7 @@ const { session, user } = await CapacitorSupabase.signInWithPassword({
 });
 
 console.log('User', user?.id);
-console.log('JWT', session?.accessToken);
+console.log('JWT available', Boolean(session?.accessToken));
 ```
 
 ## Listen for auth changes
@@ -44,7 +44,7 @@ console.log('JWT', session?.accessToken);
 ```typescript
 const listener = await CapacitorSupabase.addListener('authStateChange', ({ event, session }) => {
   console.log('Auth event', event);
-  console.log('Current JWT', session?.accessToken);
+  console.log('Current JWT available', Boolean(session?.accessToken));
 });
 
 // Remove it when the page is done.

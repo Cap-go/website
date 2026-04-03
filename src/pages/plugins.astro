@@ -1,12 +1,11 @@
 ---
-import fs from 'node:fs'
-import path from 'node:path'
 import { actions } from '@/config/plugins'
 import Layout from '@/layouts/Layout.astro'
+import { createItemListLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import * as m from '@/paraglide/messages'
 import { getSlug, getPluginsWithStars, getTotalStars, getTotalDownloads } from '@/services/github'
 import { defaultLocale } from '@/services/locale'
-import { resolvePluginDocsSlug } from '@/services/pluginDocs'
+import { getPluginDocsSlugs, resolvePluginDocsSlug } from '@/services/pluginDocs'
 import PluginIcon from '@/components/PluginIcon.astro'
 import { Icon as AstroIcon } from 'astro-icon/components'
 import { getCollection } from 'astro:content'
@@ -41,8 +40,6 @@ const makeSeoTitle = (primary: string, descriptionText: string) => {
 
 const title = makeSeoTitle(m.plugins({}, { locale }), description)
 
-const content = { title, description }
-
 const tutorialSlugs = new Set<string>()
 await getCollection('plugin', ({ data, filePath }) => {
   if (data.published !== false && filePath) {
@@ -50,19 +47,7 @@ await getCollection('plugin', ({ data, filePath }) => {
   }
 })
 
-const readDocsDirectory = (dir: string) => {
-  if (!fs.existsSync(dir)) return []
-  return fs
-    .readdirSync(dir, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
-}
-
-const defaultDocsDirectory = path.join(process.cwd(), 'src', 'content', 'docs', 'docs', 'plugins')
-const localizedDocsDirectory = locale === defaultLocale ? defaultDocsDirectory : path.join(process.cwd(), 'src', 'content', 'docs', locale, 'docs', 'plugins')
-const defaultDocsSlugs = new Set(readDocsDirectory(defaultDocsDirectory))
-const localizedDocsSlugs = locale === defaultLocale ? defaultDocsSlugs : new Set(readDocsDirectory(localizedDocsDirectory))
-const docsSlugs = new Set([...defaultDocsSlugs, ...localizedDocsSlugs])
+const { localizedDocsSlugs, docsSlugs } = await getPluginDocsSlugs(locale)
 
 const pluginsWithStars = getPluginsWithStars(actions)
 const totalStars = getTotalStars()
@@ -94,6 +79,32 @@ const formatCount = (count: number): string => {
     return `${(count / 1000).toFixed(1)}k`
   }
   return count.toString()
+}
+
+const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
+const pluginsUrl = new URL(getRelativeLocaleUrl(locale, '/plugins/'), baseUrl).toString()
+const ldJSON = createLdJsonGraph(
+  Astro.locals.runtimeConfig.public,
+  createItemListLdJson(Astro.locals.runtimeConfig.public, {
+    url: pluginsUrl,
+    name: title,
+    description,
+    items: plugins.map((plugin) => ({
+      name: plugin.title,
+      url: new URL(plugin.docsHref, baseUrl).toString(),
+      description: plugin.description.replace(/<[^>]+>/g, '').trim(),
+    })),
+  }),
+  {
+    includeOrganization: true,
+  },
+)
+
+const content = {
+  title,
+  description,
+  keywords: 'capacitor plugins, mobile plugins, ionic plugins, native plugins, app plugins',
+  ldJSON,
 }
 ---
 

@@ -1,41 +1,39 @@
 ---
-import fs from 'node:fs'
-import path from 'node:path'
 import { CardGrid, LinkCard } from '@astrojs/starlight/components'
 import { actions } from '@/config/plugins'
 import { defaultLocale } from '@/services/locale'
-import { resolvePluginDocsSlug } from '@/services/pluginDocs'
+import { getPluginDocsSlugs, resolvePluginDocsSlug } from '@/services/pluginDocs'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const locale = Astro.locals.locale ?? defaultLocale
-
-const readDocsDirectory = (dir: string) => {
-  if (!fs.existsSync(dir)) return []
-  return fs
-    .readdirSync(dir, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
-}
-
-const defaultDocsDirectory = path.join(process.cwd(), 'src', 'content', 'docs', 'docs', 'plugins')
-const localizedDocsDirectory = locale === defaultLocale ? defaultDocsDirectory : path.join(process.cwd(), 'src', 'content', 'docs', locale, 'docs', 'plugins')
-const defaultDocsSlugs = new Set(readDocsDirectory(defaultDocsDirectory))
-const localizedDocsSlugs = locale === defaultLocale ? defaultDocsSlugs : new Set(readDocsDirectory(localizedDocsDirectory))
-const docsSlugs = new Set([...defaultDocsSlugs, ...localizedDocsSlugs])
-const seenDocsSlugs = new Set<string>()
+const { localizedDocsSlugs, docsSlugs } = await getPluginDocsSlugs(locale)
+const seenPluginLinks = new Set<string>()
 
 const plugins = actions
   .map((plugin) => {
     const docsSlug = resolvePluginDocsSlug(plugin, docsSlugs)
-    if (!docsSlug || seenDocsSlugs.has(docsSlug)) return null
+    if (docsSlug) {
+      const docsKey = `docs:${docsSlug}`
+      if (seenPluginLinks.has(docsKey)) return null
 
-    seenDocsSlugs.add(docsSlug)
+      seenPluginLinks.add(docsKey)
 
-    const docsLocale = localizedDocsSlugs.has(docsSlug) ? locale : defaultLocale
+      const docsLocale = localizedDocsSlugs.has(docsSlug) ? locale : defaultLocale
+
+      return {
+        description: plugin.description,
+        href: getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`),
+        title: plugin.title,
+      }
+    }
+
+    const fallbackKey = `repo:${plugin.href}`
+    if (seenPluginLinks.has(fallbackKey)) return null
+    seenPluginLinks.add(fallbackKey)
 
     return {
-      description: plugin.description,
-      href: getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`),
+      description: `${plugin.description} Opens the plugin repository until a dedicated docs page is available.`,
+      href: plugin.href,
       title: plugin.title,
     }
   })
@@ -43,7 +41,7 @@ const plugins = actions
   .sort((left, right) => left.title.localeCompare(right.title))
 ---
 
-<p>{plugins.length} documented plugins currently resolve from the live Capgo plugin registry.</p>
+<p>{plugins.length} plugins currently resolve from the live Capgo registry. Dedicated docs open when available, and repository links remain visible for the rest.</p>
 
 <CardGrid>
   {plugins.map((plugin) => <LinkCard title={plugin.title} description={plugin.description} href={plugin.href} />)}
