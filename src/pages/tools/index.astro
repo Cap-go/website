@@ -80,13 +80,13 @@ const pillars = [
         <div class="mt-8 flex flex-col gap-4 sm:flex-row">
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'tools/ios-certificate-generator')}
-            class="inline-flex items-center justify-center rounded-2xl bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+            class="inline-flex items-center justify-center rounded-2xl bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300 focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-none"
           >
             Open iOS certificate generator
           </a>
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'native-build')}
-            class="inline-flex items-center justify-center rounded-2xl border border-white/15 px-6 py-3 text-sm font-semibold text-white transition hover:border-cyan-300/60 hover:bg-white/5"
+            class="inline-flex items-center justify-center rounded-2xl border border-white/15 px-6 py-3 text-sm font-semibold text-white transition hover:border-cyan-300/60 hover:bg-white/5 focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-none"
           >
             See the native build workflow
           </a>
@@ -141,17 +141,26 @@ const pillars = [
         <h2 class="mt-3 text-2xl font-bold text-white">Related docs</h2>
         <ul class="mt-6 space-y-4 text-sm leading-7 text-slate-300">
           <li>
-            <a class="text-cyan-200 underline decoration-cyan-300/40 underline-offset-4" href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/cloud-build/ios')}>
+            <a
+              class="text-cyan-200 underline decoration-cyan-300/40 underline-offset-4 focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-none"
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/cloud-build/ios')}
+            >
               Configure iOS certificates and provisioning profiles
             </a>
           </li>
           <li>
-            <a class="text-cyan-200 underline decoration-cyan-300/40 underline-offset-4" href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/cloud-build/troubleshooting')}>
+            <a
+              class="text-cyan-200 underline decoration-cyan-300/40 underline-offset-4 focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-none"
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/cloud-build/troubleshooting')}
+            >
               Troubleshoot keystore, alias, and signing failures
             </a>
           </li>
           <li>
-            <a class="text-cyan-200 underline decoration-cyan-300/40 underline-offset-4" href={getRelativeLocaleUrl(Astro.locals.locale, 'native-build')}>
+            <a
+              class="text-cyan-200 underline decoration-cyan-300/40 underline-offset-4 focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-none"
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'native-build')}
+            >
               Connect the generated assets to a cloud build workflow
             </a>
           </li>
