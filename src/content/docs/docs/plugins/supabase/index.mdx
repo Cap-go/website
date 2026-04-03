@@ -20,21 +20,26 @@ hero:
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import PluginOverview from '@/components/doc/PluginOverview.astro';
 
-`@capgo/capacitor-supabase` focuses on the parts where native Supabase SDKs give you real value: secure auth flows, session persistence, token refresh, and direct JWT access.
-
-<CardGrid stagger>
-  <Card title="Native auth">
-    Handle email and password, OAuth, OTP, magic links, and session refresh with native SDK behavior.
-  </Card>
-  <Card title="JWT access">
-    Read the access token from native auth, then pass it to `@supabase/supabase-js` for the rest of your app.
-  </Card>
-  <Card title="Auth listeners">
-    Subscribe to native auth state changes and react to `SIGNED_IN`, `SIGNED_OUT`, or `TOKEN_REFRESHED`.
-  </Card>
-  <Card title="Basic CRUD">
-    Run simple native select, insert, update, and delete operations when you want them close to the auth layer.
-  </Card>
-</CardGrid>
+<PluginOverview
+  summary="Capgo's Supabase plugin focuses on the parts where native SDKs give you real value: secure auth flows, session persistence, token refresh, and direct JWT access."
+  cards={[
+    {
+      title: 'Native auth',
+      body: 'Handle email and password, OAuth, OTP, magic links, and session refresh with native SDK behavior.',
+    },
+    {
+      title: 'JWT access',
+      body: 'Read the access token from native auth, then pass it to supabase-js for the rest of your app.',
+    },
+    {
+      title: 'Auth listeners',
+      body: 'Subscribe to native auth state changes and react to SIGNED_IN, SIGNED_OUT, or TOKEN_REFRESHED.',
+    },
+    {
+      title: 'Basic CRUD',
+      body: 'Run simple native select, insert, update, and delete operations when you want them close to the auth layer.',
+    },
+  ]}
+/>

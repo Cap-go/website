@@ -5,20 +5,17 @@ sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+import PluginSetupSteps from '@/components/doc/PluginSetupSteps.astro';
 
-<Steps>
-1. **Install the plugin**
-   <PackageManagers pkg="@capgo/capacitor-incoming-call-kit" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-2. **Sync native platforms**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-3. **Decide what triggers the ring UI**
-   - Use your existing push, SIP, or backend event flow.
-   - Call `showIncomingCall()` only when your app has enough information to render the incoming call.
-</Steps>
+<PluginSetupSteps
+  pkg="@capgo/capacitor-incoming-call-kit"
+  stepTitle="Decide what triggers the ring UI"
+>
+  <ul>
+    <li>Use your existing push, SIP, or backend event flow.</li>
+    <li>Call <code>showIncomingCall()</code> only when your app has enough information to render the incoming call.</li>
+  </ul>
+</PluginSetupSteps>
 
 ## Permissions
 

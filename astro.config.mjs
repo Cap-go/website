@@ -22,10 +22,10 @@ const AVAILABLE_PARALLELISM = typeof os.availableParallelism === 'function' ? os
 const BUILD_CONCURRENCY = Number.parseInt(process.env.BUILD_CONCURRENCY ?? '', 10)
 const CPU_COUNT = Number.isFinite(BUILD_CONCURRENCY) && BUILD_CONCURRENCY > 0 ? BUILD_CONCURRENCY : AVAILABLE_PARALLELISM
 const SRC_DIR = `${fileURLToPath(new URL('./src/', import.meta.url))
-  .replace(/\\/g, '/')
+  .replaceAll('\\', '/')
   .replace(/\/$/, '')}/`
 const PUBLIC_DIR = fileURLToPath(new URL('./public/', import.meta.url))
-  .replace(/\\/g, '/')
+  .replaceAll('\\', '/')
   .replace(/\/$/, '')
 
 // Build a map of page paths to their lastmod dates for sitemap
@@ -78,6 +78,19 @@ const toHeroiconName = (value) =>
 const pluginIcons = [
   ...new Set(['arrow-up-right-solid', ...[...readFileSync('src/config/plugins.ts', 'utf8').matchAll(/icon:\s*'([^']+)'/g)].map(([, iconName]) => toHeroiconName(iconName))]),
 ].sort()
+const createPluginDocSet = (label, description, slug) => ({
+  label: `Plugin ${label}`,
+  description,
+  paths: [`docs/plugins/${slug}/**`],
+})
+const createPluginSidebarItem = (label, slug) => ({
+  label,
+  items: [
+    { label: 'Overview', link: `/docs/plugins/${slug}/` },
+    { label: 'Getting started', link: `/docs/plugins/${slug}/getting-started` },
+  ],
+  collapsed: true,
+})
 
 export default defineConfig({
   trailingSlash: 'always',
@@ -303,11 +316,7 @@ export default defineConfig({
               description: 'contacts access plugin for reading device contacts',
               paths: ['docs/plugins/contacts/**'],
             },
-            {
-              label: 'Plugin Contentsquare',
-              description: 'Contentsquare mobile analytics and session replay plugin',
-              paths: ['docs/plugins/contentsquare/**'],
-            },
+            createPluginDocSet('Contentsquare', 'Contentsquare mobile analytics and session replay plugin', 'contentsquare'),
             {
               label: 'Plugin Crisp',
               description: 'Crisp chat integration plugin',
@@ -398,11 +407,7 @@ export default defineConfig({
               description: 'in-app review prompt plugin for app store ratings',
               paths: ['docs/plugins/in-app-review/**'],
             },
-            {
-              label: 'Plugin Incoming Call Kit',
-              description: 'native incoming call UI plugin with Android notifications and iOS CallKit',
-              paths: ['docs/plugins/incoming-call-kit/**'],
-            },
+            createPluginDocSet('Incoming Call Kit', 'native incoming call UI plugin with Android notifications and iOS CallKit', 'incoming-call-kit'),
             {
               label: 'Plugin Intent Launcher',
               description: 'Android intent launcher plugin',
@@ -603,11 +608,7 @@ export default defineConfig({
               description: 'text-to-speech synthesis plugin',
               paths: ['docs/plugins/speech-synthesis/**'],
             },
-            {
-              label: 'Plugin Supabase',
-              description: 'native Supabase authentication and JWT access plugin',
-              paths: ['docs/plugins/supabase/**'],
-            },
+            createPluginDocSet('Supabase', 'native Supabase authentication and JWT access plugin', 'supabase'),
             {
               label: 'Plugin SSL Pinning',
               description: 'certificate pinning plugin for CapacitorHttp requests',
@@ -623,11 +624,7 @@ export default defineConfig({
               description: 'text selection and interaction plugin',
               paths: ['docs/plugins/textinteraction/**'],
             },
-            {
-              label: 'Plugin Transitions',
-              description: 'framework-agnostic page transition plugin for Capacitor apps',
-              paths: ['docs/plugins/transitions/**'],
-            },
+            createPluginDocSet('Transitions', 'framework-agnostic page transition plugin for Capacitor apps', 'transitions'),
             {
               label: 'Plugin Twilio Voice',
               description: 'Twilio voice calling plugin',
@@ -1011,14 +1008,7 @@ export default defineConfig({
               ],
               collapsed: true,
             },
-            {
-              label: 'Contentsquare',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/contentsquare/' },
-                { label: 'Getting started', link: '/docs/plugins/contentsquare/getting-started' },
-              ],
-              collapsed: true,
-            },
+            createPluginSidebarItem('Contentsquare', 'contentsquare'),
             {
               label: 'Crisp',
               items: [
@@ -1147,14 +1137,7 @@ export default defineConfig({
               ],
               collapsed: true,
             },
-            {
-              label: 'Incoming Call Kit',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/incoming-call-kit/' },
-                { label: 'Getting started', link: '/docs/plugins/incoming-call-kit/getting-started' },
-              ],
-              collapsed: true,
-            },
+            createPluginSidebarItem('Incoming Call Kit', 'incoming-call-kit'),
             {
               label: 'Intercom',
               items: [
@@ -1466,14 +1449,7 @@ export default defineConfig({
               ],
               collapsed: true,
             },
-            {
-              label: 'Supabase',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/supabase/' },
-                { label: 'Getting started', link: '/docs/plugins/supabase/getting-started' },
-              ],
-              collapsed: true,
-            },
+            createPluginSidebarItem('Supabase', 'supabase'),
             {
               label: 'SSL Pinning',
               items: [
@@ -1550,14 +1526,7 @@ export default defineConfig({
               ],
               collapsed: true,
             },
-            {
-              label: 'Transitions',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/transitions/' },
-                { label: 'Getting started', link: '/docs/plugins/transitions/getting-started' },
-              ],
-              collapsed: true,
-            },
+            createPluginSidebarItem('Transitions', 'transitions'),
             {
               label: 'Twilio Voice',
               items: [

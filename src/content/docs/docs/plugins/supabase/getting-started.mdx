@@ -5,19 +5,16 @@ sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+import PluginSetupSteps from '@/components/doc/PluginSetupSteps.astro';
 
-<Steps>
-1. **Install the plugin**
-   <PackageManagers pkg="@capgo/capacitor-supabase" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-2. **Sync native platforms**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-3. **Confirm Android minimum SDK**
-   - Set `minSdkVersion = 26` in `android/variables.gradle`.
-</Steps>
+<PluginSetupSteps
+  pkg="@capgo/capacitor-supabase"
+  stepTitle="Confirm Android minimum SDK"
+>
+  <ul>
+    <li>Set <code>minSdkVersion = 26</code> in <code>android/variables.gradle</code>.</li>
+  </ul>
+</PluginSetupSteps>
 
 ## Initialize the client
 

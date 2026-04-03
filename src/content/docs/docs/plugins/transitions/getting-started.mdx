@@ -5,21 +5,19 @@ sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+import PluginSetupSteps from '@/components/doc/PluginSetupSteps.astro';
 
-<Steps>
-1. **Install the package**
-   <PackageManagers pkg="@capgo/transitions" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-2. **Import the runtime once at app startup**
-   - Import `@capgo/transitions`.
-   - Call `initTransitions({ platform: 'auto' })` from the binding that matches your stack.
-
-3. **Wrap your routed pages**
-   - Put your pages inside `cap-router-outlet`.
-   - Use `cap-page`, `cap-header`, `cap-content`, and `cap-footer` for coordinated transitions.
-</Steps>
+<PluginSetupSteps
+  pkg="@capgo/transitions"
+  installLabel="package"
+  stepTitle="Wrap your routed pages"
+>
+  <ul>
+    <li>Import <code>@capgo/transitions</code> and call <code>initTransitions()</code> from the binding that matches your stack.</li>
+    <li>Put your pages inside <code>cap-router-outlet</code>.</li>
+    <li>Use <code>cap-page</code>, <code>cap-header</code>, <code>cap-content</code>, and <code>cap-footer</code> for coordinated transitions.</li>
+  </ul>
+</PluginSetupSteps>
 
 ## Vanilla setup
 

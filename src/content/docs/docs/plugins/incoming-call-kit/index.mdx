@@ -20,21 +20,26 @@ hero:
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import PluginOverview from '@/components/doc/PluginOverview.astro';
 
-`@capgo/capacitor-incoming-call-kit` is the native ringing layer for apps that already have push delivery and voice or video sessions handled elsewhere.
-
-<CardGrid stagger>
-  <Card title="Native call surfaces">
-    Show Android incoming call notifications with optional full-screen UI and iOS CallKit sheets from JavaScript.
-  </Card>
-  <Card title="Typed lifecycle events">
-    Listen for `callAccepted`, `callDeclined`, `callEnded`, and `callTimedOut` with your original metadata attached.
-  </Card>
-  <Card title="Push provider agnostic">
-    Bring your own FCM, PushKit, SIP, or backend trigger and call the plugin when you are ready to ring.
-  </Card>
-  <Card title="Clear platform boundaries">
-    The plugin handles presentation only. Your app still owns the real audio or video session.
-  </Card>
-</CardGrid>
+<PluginOverview
+  summary="Capgo's incoming call kit plugin is the native ringing layer for apps that already have push delivery and voice or video sessions handled elsewhere."
+  cards={[
+    {
+      title: 'Native call surfaces',
+      body: 'Show Android incoming call notifications with optional full-screen UI and iOS CallKit sheets from JavaScript.',
+    },
+    {
+      title: 'Typed lifecycle events',
+      body: 'Listen for callAccepted, callDeclined, callEnded, and callTimedOut with your original metadata attached.',
+    },
+    {
+      title: 'Push provider agnostic',
+      body: 'Bring your own FCM, PushKit, SIP, or backend trigger and call the plugin when you are ready to ring.',
+    },
+    {
+      title: 'Clear platform boundaries',
+      body: 'The plugin handles presentation only. Your app still owns the real audio or video session.',
+    },
+  ]}
+/>

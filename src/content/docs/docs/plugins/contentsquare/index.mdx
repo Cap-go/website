@@ -20,21 +20,26 @@ hero:
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import PluginOverview from '@/components/doc/PluginOverview.astro';
 
-`@capgo/capacitor-contentsquare` keeps the documented Contentsquare Capacitor API while updating the plugin for Capacitor 8, Swift Package Manager, and the Capgo plugin template.
-
-<CardGrid stagger>
-  <Card title="Official API shape">
-    Keep the same `optIn`, `sendScreenName`, transaction, and replay masking calls documented by Contentsquare.
-  </Card>
-  <Card title="Capacitor 8 ready">
-    Use a package that matches modern Capacitor projects without maintaining your own fork.
-  </Card>
-  <Card title="Replay controls">
-    Apply URL exclusions and selector-based masking for Session Replay from JavaScript.
-  </Card>
-  <Card title="Upstream docs">
-    Product-specific setup details still live in the official [Contentsquare Capacitor documentation](https://docs.contentsquare.com/en/capacitor/).
-  </Card>
-</CardGrid>
+<PluginOverview
+  summary="Capgo's Contentsquare package keeps the documented API shape while updating the plugin for Capacitor 8, Swift Package Manager, and the Capgo plugin template."
+  cards={[
+    {
+      title: 'Official API shape',
+      body: 'Keep the same optIn, sendScreenName, transaction, and replay masking calls documented by Contentsquare.',
+    },
+    {
+      title: 'Capacitor 8 ready',
+      body: 'Use a package that matches modern Capacitor projects without maintaining your own fork.',
+    },
+    {
+      title: 'Replay controls',
+      body: 'Apply URL exclusions and selector-based masking for Session Replay from JavaScript.',
+    },
+    {
+      title: 'Upstream docs',
+      body: 'Product-specific setup details still live in the official Contentsquare Capacitor documentation.',
+    },
+  ]}
+/>

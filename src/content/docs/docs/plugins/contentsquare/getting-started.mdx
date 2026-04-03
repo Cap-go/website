@@ -5,19 +5,18 @@ sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+import PluginSetupSteps from '@/components/doc/PluginSetupSteps.astro';
 
-<Steps>
-1. **Install the plugin**
-   <PackageManagers pkg="@capgo/capacitor-contentsquare" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-2. **Sync native platforms**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-3. **Review the upstream product configuration**
-   - Follow the official [Contentsquare Capacitor guide](https://docs.contentsquare.com/en/capacitor/) for project keys, replay settings, and dashboard setup.
-</Steps>
+<PluginSetupSteps
+  pkg="@capgo/capacitor-contentsquare"
+  stepTitle="Review the upstream product configuration"
+>
+  <ul>
+    <li>
+      Follow the official <a href="https://docs.contentsquare.com/en/capacitor/">Contentsquare Capacitor guide</a> for project keys, replay settings, and dashboard setup.
+    </li>
+  </ul>
+</PluginSetupSteps>
 
 ## iOS setup
 
