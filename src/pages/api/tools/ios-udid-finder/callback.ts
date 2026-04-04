@@ -10,6 +10,10 @@ const headers = {
   'Cache-Control': 'no-store',
 }
 
+function hasMatchingChallenge(expectedChallenge: string, cookieChallenge: string | null, payloadChallenge: string | undefined): boolean {
+  return Boolean(expectedChallenge) && Boolean(cookieChallenge) && Boolean(payloadChallenge) && expectedChallenge === cookieChallenge && payloadChallenge === expectedChallenge
+}
+
 export const GET: APIRoute = async () => {
   return new Response(null, {
     status: 302,
@@ -33,7 +37,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
   const expectedChallenge = requestUrl.searchParams.get('challenge') ?? ''
   const cookieChallenge = cookies.get(UDID_CHALLENGE_COOKIE)?.value ?? null
 
-  if (!expectedChallenge || !payload.challenge || payload.challenge !== expectedChallenge || (cookieChallenge !== null && payload.challenge !== cookieChallenge)) {
+  if (!hasMatchingChallenge(expectedChallenge, cookieChallenge, payload.challenge)) {
     return webJson({ error: 'The device response challenge did not match the active UDID session.' }, 400, headers)
   }
 
