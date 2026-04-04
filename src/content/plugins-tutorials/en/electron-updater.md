@@ -93,5 +93,5 @@ bunx @capgo/cli@latest bundle upload --channel=production
 ## Practical advice
 
 - Always call `notifyAppReady()` early in the renderer so rollback protection works as intended.
-- Keep the builtin path stable and let the updater decide whether to load the shipped bundle or a downloaded one.
+- Keep the built-in path stable and let the updater decide whether to load the shipped bundle or a downloaded one.
 - Reuse the same Capgo channel and rollout model you already use on mobile when your Electron app shares a backend release pipeline.
