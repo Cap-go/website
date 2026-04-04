@@ -364,23 +364,13 @@ When updating an existing plugin:
 6. **Revise best practices** based on new features
 7. **Keep tutorial current** with latest API
 
-## Multi-language Support
+## Language Support
 
-The website supports multiple languages. After creating English documentation:
+The website currently ships English content only. Keep plugin tutorials in:
 
-1. Run the translation script:
-   ```bash
-   bun run plugins:translate_all
-   ```
+- `/src/content/plugins-tutorials/en/`
 
-2. Review generated translations in:
-   - `/src/content/plugins-tutorials/de/` (German)
-   - `/src/content/plugins-tutorials/es/` (Spanish)
-   - `/src/content/plugins-tutorials/fr/` (French)
-   - `/src/content/plugins-tutorials/it/` (Italian)
-   - `/src/content/plugins-tutorials/ja/` (Japanese)
-   - `/src/content/plugins-tutorials/ko/` (Korean)
-   - `/src/content/plugins-tutorials/id/` (Indonesian)
+The i18n setup remains in place, but non-English website content is intentionally not published.
 
 ## Testing Your Changes
 
@@ -388,7 +378,7 @@ After adding or updating plugin documentation:
 
 1. **Build the site locally**:
    ```bash
-   npm run build
+   bun run build
    ```
 
 2. **Check for errors**:

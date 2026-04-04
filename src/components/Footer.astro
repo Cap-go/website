@@ -4,6 +4,7 @@ import { locales } from '@/services/locale'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const year = new Date().getFullYear()
+const showLanguageSelector = locales.length > 1
 
 // Map locale codes to flag emojis
 const localeFlags: Record<string, string> = {
@@ -315,31 +316,32 @@ const navigation: Record<string, NavigationItem[]> = {
 
       <!-- Language & Copyright -->
       <div class="flex w-full flex-col items-center justify-between gap-6 md:w-auto md:flex-row md:justify-end">
-        <!-- Language Selector -->
-        <div class="relative">
-          <button type="button" id="language-dropdown-button" class="flex items-center text-sm text-zinc-400 hover:text-white focus:outline-none">
-            <span class="mr-2">{currentFlag}</span>
-            {Astro.locals.locale.toUpperCase()}
-            <span class="ml-1">▼</span>
-          </button>
-          <div
-            id="language-dropdown"
-            class="ring-opacity-5 absolute bottom-full left-0 z-50 mb-2 hidden w-32 rounded-md bg-[#1c1c1f] shadow-lg ring-1 ring-black focus:outline-none"
-          >
-            <div class="py-1">
-              {
-                locales.map((item) => (
-                  <a
-                    href={getRelativeLocaleUrl(item.toLowerCase(), Astro.url.pathname.replace(`/${Astro.locals.locale}/`, '/'))}
-                    class="block px-4 py-2 text-sm text-zinc-400 hover:bg-zinc-800 hover:text-white"
-                  >
-                    {item.toUpperCase()}
-                  </a>
-                ))
-              }
+        {
+          showLanguageSelector && (
+            <div class="relative">
+              <button type="button" id="language-dropdown-button" class="flex items-center text-sm text-zinc-400 hover:text-white focus:outline-none">
+                <span class="mr-2">{currentFlag}</span>
+                {Astro.locals.locale.toUpperCase()}
+                <span class="ml-1">▼</span>
+              </button>
+              <div
+                id="language-dropdown"
+                class="ring-opacity-5 absolute bottom-full left-0 z-50 mb-2 hidden w-32 rounded-md bg-[#1c1c1f] shadow-lg ring-1 ring-black focus:outline-none"
+              >
+                <div class="py-1">
+                  {locales.map((item) => (
+                    <a
+                      href={getRelativeLocaleUrl(item.toLowerCase(), Astro.url.pathname.replace(`/${Astro.locals.locale}/`, '/'))}
+                      class="block px-4 py-2 text-sm text-zinc-400 hover:bg-zinc-800 hover:text-white"
+                    >
+                      {item.toUpperCase()}
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          )
+        }
 
         <p class="text-xs tracking-wider text-zinc-500 uppercase">
           &copy; {year}
@@ -350,7 +352,9 @@ const navigation: Record<string, NavigationItem[]> = {
   </div>
 </footer>
 
-<script>
+<script is:inline define:vars={{ showLanguageSelector }}>
+  if (!showLanguageSelector) return
+
   const button = document.getElementById('language-dropdown-button')
   const dropdown = document.getElementById('language-dropdown')
 
@@ -360,7 +364,7 @@ const navigation: Record<string, NavigationItem[]> = {
     })
 
     document.addEventListener('click', (event) => {
-      if (!button?.contains(event.target as Node) && !dropdown?.contains(event.target as Node)) {
+      if (event.target instanceof Node && !button?.contains(event.target) && !dropdown?.contains(event.target)) {
         dropdown?.classList.add('hidden')
       }
     })

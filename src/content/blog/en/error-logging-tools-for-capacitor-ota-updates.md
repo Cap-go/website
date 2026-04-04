@@ -45,7 +45,7 @@ Each tool offers unique benefits depending on your team's needs, budget, and exp
 
 ## Error Logging Tools Review
 
-Explore top error logging tools for [Capacitor OTA updates](https://capgo.app/ja/), focusing on their features and how they work.
+Explore top error logging tools for [Capacitor OTA updates](https://capgo.app/), focusing on their features and how they work.
 
 ### Sentry: Features and Setup
 

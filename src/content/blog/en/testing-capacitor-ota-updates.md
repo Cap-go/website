@@ -154,7 +154,7 @@ Capgo's channel system also simplifies managing versions, ensuring updates are d
 
 ### Capgo Features
 
-Capgo provides specialized tools for testing [Capacitor OTA updates](https://capgo.app/ja/), ensuring secure delivery with **end-to-end encryption** and offering **real-time analytics** to monitor update performance. These tools allow developers to deploy updates accurately while maintaining strong security measures.
+Capgo provides specialized tools for testing [Capacitor OTA updates](https://capgo.app/), ensuring secure delivery with **end-to-end encryption** and offering **real-time analytics** to monitor update performance. These tools allow developers to deploy updates accurately while maintaining strong security measures.
 
 | Feature | Description |
 | --- | --- |

@@ -67,7 +67,7 @@ Modern OTA systems provide a way to push critical updates quickly without breaki
 
 ![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19.jpg?auto=compress)
 
-[Capacitor OTA updates](https://capgo.app/ja/) make app deployment faster and more efficient, allowing developers to push changes without waiting for app store approvals.
+[Capacitor OTA updates](https://capgo.app/) make app deployment faster and more efficient, allowing developers to push changes without waiting for app store approvals.
 
 ### How OTA Updates Work
 

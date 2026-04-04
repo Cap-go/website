@@ -42,7 +42,7 @@ With platforms like Capgo offering fast updates (95% user adoption in 24 hours) 
 
 ## npm Scripts Setup for OTA Updates
 
-Here's how to configure npm scripts to manage [Capacitor OTA updates](https://capgo.app/ja/) effectively. This involves installing necessary packages, setting up configurations, and creating deployment scripts.
+Here's how to configure npm scripts to manage [Capacitor OTA updates](https://capgo.app/) effectively. This involves installing necessary packages, setting up configurations, and creating deployment scripts.
 
 ### Installing Required Packages
 

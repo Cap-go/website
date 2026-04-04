@@ -47,7 +47,7 @@ For fast, secure, and reliable OTA updates, **Capgo** stands out, especially wit
 
 ## 1\. AWS for OTA Updates
 
-AWS is a reliable option for hosting [Capacitor OTA updates](https://capgo.app/ja/), though it requires more setup compared to platforms designed specifically for this purpose. Let’s break down AWS’s main features for delivering OTA updates.
+AWS is a reliable option for hosting [Capacitor OTA updates](https://capgo.app/), though it requires more setup compared to platforms designed specifically for this purpose. Let’s break down AWS’s main features for delivering OTA updates.
 
 ### Storage and Content Delivery
 

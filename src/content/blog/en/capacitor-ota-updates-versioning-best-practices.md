@@ -33,7 +33,7 @@ Here’s what you’ll learn in this guide:
 
 **Quick Tip:** Start with version **0.1.0**, increment MINOR for new features, and PATCH for bug fixes. Always validate builds and configurations before release.
 
-Ready to streamline your [Capacitor OTA updates](https://capgo.app/ja/)? Let’s dive in.
+Ready to streamline your [Capacitor OTA updates](https://capgo.app/)? Let’s dive in.
 
 ## Semantic Versioning
 

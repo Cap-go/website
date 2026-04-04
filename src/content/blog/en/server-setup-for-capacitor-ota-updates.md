@@ -60,7 +60,7 @@ next_blog: ''
 
 ## Server Requirements
 
-[Capacitor OTA updates](https://capgo.app/) rely on specific hardware and software to ensure secure and efficient delivery. Below are the key requirements for setting up a [production-ready OTA update server](https://capgo.app/it/docs/plugin/self-hosted/getting-started/).
+[Capacitor OTA updates](https://capgo.app/) rely on specific hardware and software to ensure secure and efficient delivery. Below are the key requirements for setting up a [production-ready OTA update server](https://capgo.app/docs/plugins/updater/self-hosted/getting-started/).
 
 ### System Specifications
 

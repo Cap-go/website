@@ -36,7 +36,7 @@ Choose based on your app's needs: **Capgo** for security and automation, or **In
 
 ### Platform Requirements
 
-[Capacitor OTA updates](https://capgo.app/ja/) need proper native integration to work smoothly. For iOS, this means strict code signing and update validation. On Android, managing version codes and ensuring compatibility is crucial to avoid update issues.
+[Capacitor OTA updates](https://capgo.app/) need proper native integration to work smoothly. For iOS, this means strict code signing and update validation. On Android, managing version codes and ensuring compatibility is crucial to avoid update issues.
 
 Key platform checks include:
 

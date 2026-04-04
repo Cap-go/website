@@ -25,7 +25,7 @@ next_blog: ''
 
 ### Quick Comparison:
 
-| Aspect | Traditional Updates | [Capacitor OTA Updates](https://capgo.app/ja/) |
+| Aspect | Traditional Updates | [Capacitor OTA Updates](https://capgo.app/) |
 | --- | --- | --- |
 | **Deployment Speed** | 24–72 hours | 5–10 minutes |
 | **User Adoption** | Manual download | Automatic |

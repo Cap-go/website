@@ -38,7 +38,7 @@ This section covers the key tools and steps required to set up your environment.
 
 ### Required Software
 
-To test [Capacitor OTA updates](https://capgo.app/ja/), you'll need the following tools:
+To test [Capacitor OTA updates](https://capgo.app/), you'll need the following tools:
 
 | Software | Purpose | Version Requirements |
 | --- | --- | --- |

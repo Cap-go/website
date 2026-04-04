@@ -207,7 +207,7 @@ Supporting older versions is just as important as rolling out new ones. Here’s
 
 ## Fix Version Targeting Issues
 
-Version targeting in [Capacitor OTA updates](https://capgo.app/ja/) can sometimes create challenges that disrupt functionality. Below are steps to help identify and address these problems effectively.
+Version targeting in [Capacitor OTA updates](https://capgo.app/) can sometimes create challenges that disrupt functionality. Below are steps to help identify and address these problems effectively.
 
 ### Known Issues
 

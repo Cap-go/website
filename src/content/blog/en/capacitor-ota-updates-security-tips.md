@@ -154,7 +154,7 @@ Building on secure deployment and testing, strong OTA management tools are cruci
 
 ![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f1d348ebbb9dc80644cb8d/241c8f19433e01f315154c8988becf9c.jpg)
 
-Capgo provides advanced security for [Capacitor OTA updates](https://capgo.app/ja/) with **end-to-end encryption**, ensuring that only authorized users can decrypt the updates.
+Capgo provides advanced security for [Capacitor OTA updates](https://capgo.app/) with **end-to-end encryption**, ensuring that only authorized users can decrypt the updates.
 
 Here’s a breakdown of its key features:
 

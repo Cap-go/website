@@ -18,7 +18,7 @@ next_blog: ''
 
 **Want faster [app updates](https://capgo.app/plugins/capacitor-updater/) without app store delays?** [Capacitor](https://capacitorjs.com/) OTA updates let you deliver changes instantly, while traditional testing ensures thorough pre-release quality. Here's a quick comparison:
 
--   **[Capacitor OTA Updates](https://capgo.app/ja/)**: Push updates directly to users without app store approval. Ideal for quick fixes and feature rollouts.
+-   **[Capacitor OTA Updates](https://capgo.app/)**: Push updates directly to users without app store approval. Ideal for quick fixes and feature rollouts.
 -   **Traditional Testing**: Follows structured phases like unit, integration, and system testing before release. Ensures reliability but takes longer.
 
 **Quick Comparison:**
