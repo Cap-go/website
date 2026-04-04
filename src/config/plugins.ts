@@ -57,6 +57,34 @@ const additionalCapgoPlugins = [
     'https://github.com/Cap-go/capacitor-incoming-call-kit/',
     'Phone',
   ),
+  createCapgoPlugin(
+    '@capgo/electron-updater',
+    'Electron Updater',
+    'OTA live updates for Electron apps with the same API surface as capacitor-updater',
+    'https://github.com/Cap-go/electron-updater/',
+    'ComputerDesktop',
+  ),
+  createCapgoPlugin(
+    '@capgo/capacitor-live-activities',
+    'Live Activities',
+    'Manage iOS Live Activities and Dynamic Island layouts from Capacitor with JSON-driven templates',
+    'https://github.com/Cap-go/capacitor-live-activities/',
+    'RectangleGroup',
+  ),
+  createCapgoPlugin(
+    '@capgo/capacitor-twilio-video',
+    'Twilio Video',
+    'Join Twilio Video rooms from Capacitor with native audio, camera, and room lifecycle events',
+    'https://github.com/Cap-go/capacitor-twilio-video/',
+    'VideoCamera',
+  ),
+  createCapgoPlugin(
+    '@capgo/capacitor-widget-kit',
+    'Widget Kit',
+    'Build iOS widgets and Live Activities from Capacitor with SVG templates, timers, and action hotspots',
+    'https://github.com/Cap-go/capacitor-widget-kit/',
+    'Squares2X2',
+  ),
 ]
 
 export const actions = [

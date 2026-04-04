@@ -93,9 +93,13 @@ const createPluginSidebarItem = (label, slug) => ({
 })
 const additionalPluginDocs = [
   ['Contentsquare', 'Contentsquare mobile analytics and session replay plugin', 'contentsquare'],
+  ['Electron Updater', 'live update plugin for Electron apps with Capgo-compatible APIs', 'electron-updater'],
   ['Incoming Call Kit', 'native incoming call UI plugin with Android notifications and iOS CallKit', 'incoming-call-kit'],
+  ['Live Activities', 'iOS Live Activities and Dynamic Island plugin with JSON layouts', 'live-activities'],
   ['Supabase', 'native Supabase authentication and JWT access plugin', 'supabase'],
   ['Transitions', 'framework-agnostic page transition plugin for Capacitor apps', 'transitions'],
+  ['Twilio Video', 'native Twilio Video room plugin for Capacitor', 'twilio-video'],
+  ['Widget Kit', 'iOS WidgetKit and Live Activities plugin with SVG templates', 'widget-kit'],
 ]
 const additionalPluginDocSets = additionalPluginDocs.map(([label, description, slug]) => createPluginDocSet(label, description, slug))
 const additionalPluginSidebarItems = additionalPluginDocs.map(([label, , slug]) => createPluginSidebarItem(label, slug))

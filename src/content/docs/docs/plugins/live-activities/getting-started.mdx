@@ -1,0 +1,116 @@
+---
+title: Getting Started
+description: Install and configure Capgo Live Activities in a Capacitor app.
+sidebar:
+  order: 2
+---
+
+import PluginSetupSteps from '@/components/doc/PluginSetupSteps.astro';
+
+<PluginSetupSteps
+  pkg="@capgo/capacitor-live-activities"
+  stepTitle="Create the Live Activity widget target"
+>
+  <ul>
+    <li>Create a Widget Extension target in Xcode and name it <code>LiveActivities</code>.</li>
+    <li>Add the same App Group to the main app target and the widget extension target.</li>
+  </ul>
+</PluginSetupSteps>
+
+## Platform requirements
+
+- iOS 16.1 or later is required.
+- Live Activities are not available on Android or web, so use `areActivitiesSupported()` before showing related UI.
+
+## Enable Live Activities
+
+Add the following key to your app `Info.plist`:
+
+```xml
+<key>NSSupportsLiveActivities</key>
+<true/>
+```
+
+Add an App Group for the app and widget targets. A common pattern is:
+
+```xml
+group.YOUR_BUNDLE_ID.liveactivities
+```
+
+## Check support
+
+```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
+
+const { supported, reason } = await CapgoLiveActivities.areActivitiesSupported();
+
+if (!supported) {
+  console.warn('Live Activities unavailable:', reason);
+}
+```
+
+## Start an activity
+
+```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
+
+const { activityId } = await CapgoLiveActivities.startActivity({
+  layout: {
+    type: 'container',
+    direction: 'vertical',
+    spacing: 8,
+    children: [
+      { type: 'text', content: 'Order #{{orderNumber}}', fontSize: 16, fontWeight: 'bold' },
+      { type: 'text', content: '{{status}}', fontSize: 14, color: '#666666' },
+      { type: 'progress', value: 'progress', tint: '#34C759' },
+    ],
+  },
+  dynamicIslandLayout: {
+    expanded: {
+      center: { type: 'text', content: '{{status}}' },
+      trailing: { type: 'text', content: '{{eta}}' },
+    },
+    compactLeading: { type: 'text', content: 'ETA' },
+    compactTrailing: { type: 'text', content: '{{eta}}' },
+    minimal: { type: 'text', content: '{{eta}}' },
+  },
+  behavior: {
+    widgetUrl: 'myapp://orders/12345',
+  },
+  data: {
+    orderNumber: '12345',
+    status: 'On the way',
+    eta: '10 min',
+    progress: 0.6,
+  },
+});
+```
+
+## Update and end the activity
+
+```typescript
+await CapgoLiveActivities.updateActivity({
+  activityId,
+  data: {
+    status: 'Arriving soon',
+    eta: '2 min',
+    progress: 0.9,
+  },
+});
+
+await CapgoLiveActivities.endActivity({
+  activityId,
+  data: {
+    status: 'Delivered',
+    progress: 1,
+  },
+  dismissalPolicy: 'after',
+  dismissAfter: Date.now() + 60 * 60 * 1000,
+});
+```
+
+## Recommended setup
+
+- Keep the widget extension focused on rendering and let the Capacitor app own activity creation and updates.
+- Use App Groups for any shared images or data the widget needs to display.
+- Model your JSON layout from the real-time state you already have in the app so updates stay simple and deterministic.
