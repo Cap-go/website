@@ -40,13 +40,20 @@ const makeSeoTitle = (primary: string, descriptionText: string) => {
 
 const title = makeSeoTitle(m.plugins({}, { locale }), description)
 
-const tutorialSlugs = new Set<string>()
+const tutorialSlugsByLocale = new Map<string, Set<string>>()
 await getCollection('plugin', ({ data, filePath }) => {
   if (data.published !== false && filePath) {
-    tutorialSlugs.add(getSlug(filePath).replace('.md', ''))
+    const tutorialLocale = data.locale || defaultLocale
+    const tutorialSlug = getSlug(filePath).replace('.md', '')
+    const localeTutorialSlugs = tutorialSlugsByLocale.get(tutorialLocale) ?? new Set<string>()
+
+    localeTutorialSlugs.add(tutorialSlug)
+    tutorialSlugsByLocale.set(tutorialLocale, localeTutorialSlugs)
   }
 })
 
+const defaultTutorialSlugs = tutorialSlugsByLocale.get(defaultLocale) ?? new Set<string>()
+const localizedTutorialSlugs = locale === defaultLocale ? defaultTutorialSlugs : (tutorialSlugsByLocale.get(locale) ?? new Set<string>())
 const { localizedDocsSlugs, docsSlugs } = await getPluginDocsSlugs(locale)
 
 const pluginsWithStars = getPluginsWithStars(actions)
@@ -58,13 +65,18 @@ const plugins = await Promise.all(
   pluginsWithStars.map(async (item) => {
     const tutorialSlug = getSlug(item.href).replace('.md', '')
     const docsSlug = resolvePluginDocsSlug(item, docsSlugs)
-    const hasTutorial = tutorialSlugs.has(tutorialSlug)
+    const tutorialLocale = localizedTutorialSlugs.has(tutorialSlug) ? locale : defaultTutorialSlugs.has(tutorialSlug) ? defaultLocale : undefined
+    const hasTutorial = Boolean(tutorialLocale)
     const docsLocale = docsSlug && localizedDocsSlugs.has(docsSlug) ? locale : defaultLocale
 
     return {
       ...item,
       description: await marked.parse(item.description),
-      docsHref: hasTutorial ? getRelativeLocaleUrl(locale, `plugins/${tutorialSlug}`) : docsSlug ? getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`) : item.href,
+      docsHref: hasTutorial
+        ? getRelativeLocaleUrl(tutorialLocale, `plugins/${tutorialSlug}`)
+        : docsSlug
+          ? getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`)
+          : item.href,
       hasSiteDocs: hasTutorial || Boolean(docsSlug),
     }
   }),
