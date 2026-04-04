@@ -5,33 +5,18 @@ import { formatTime } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
 import { createNewsArticleLdJson } from '@/lib/ldJson'
 import * as m from '@/paraglide/messages'
-import type { GetStaticPaths } from 'astro'
 import type { CollectionEntry } from 'astro:content'
 import { getCollection, render } from 'astro:content'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import striptags from 'striptags'
 import { slug as slugify } from 'github-slugger'
 
-export const getStaticPaths: GetStaticPaths = async ({}) => {
-  const blogs = await getCollection('blog')
-  const allPublishedEntries: CollectionEntry<'blog'>[] = []
-  const blogPosts: { [k: string]: CollectionEntry<'blog'>[] } = {}
-  blogs.forEach((j) => {
-    if (j.data.published !== false) {
-      allPublishedEntries.push(j)
-      if (!blogPosts[j.data.slug]) blogPosts[j.data.slug] = []
-      blogPosts[j.data.slug].push(j)
-    }
-  })
-  return Object.entries(blogPosts).map(([slug, posts]) => ({
-    params: { slug },
-    props: { entries: posts, allPublishedEntries },
-  }))
-}
+export const prerender = false
 
 if (!Astro.params.slug) return new Response(`Astro.params.slug is invalid for: ${Astro.url.pathname}`, { status: 404 })
 
-const { entries, allPublishedEntries } = Astro.props as { entries: CollectionEntry<'blog'>[]; allPublishedEntries: CollectionEntry<'blog'>[] }
+const allPublishedEntries = await getCollection('blog', ({ data }) => data.published !== false)
+const entries = allPublishedEntries.filter((entry) => entry.data.slug === Astro.params.slug)
 
 const entry = entries.find((j) => j.data.locale === Astro.locals.locale)
 

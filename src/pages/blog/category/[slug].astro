@@ -1,25 +1,16 @@
 ---
 import BlogListing from '@/components/BlogListing.astro'
-import type { GetStaticPaths } from 'astro'
-import type { CollectionEntry } from 'astro:content'
 import { getCollection } from 'astro:content'
 import { slug as slugify } from 'github-slugger'
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const publishedPosts = await getCollection('blog', ({ data }) => data.published !== false)
-  const tags: { [k: string]: CollectionEntry<'blog'>[] } = {}
-  publishedPosts.forEach((article) =>
-    article.data.tag.split(',').forEach((props) => {
-      if (!tags[props]) tags[props] = []
-      tags[props].push(article)
-    }),
-  )
-  return Object.entries(tags).map(([slug, posts]) => ({ params: { slug: slugify(slug) }, props: { posts } }))
-}
+export const prerender = false
 
-const allPosts = Astro.props.posts as CollectionEntry<'blog'>[]
-// Filter posts by current locale
-const localePosts = allPosts.filter((post) => post.data.locale === Astro.locals.locale)
+if (!Astro.params.slug) return new Response(`Astro.params.slug is invalid for: ${Astro.url.pathname}`, { status: 404 })
+
+const allPosts = await getCollection('blog', ({ data }) => data.published !== false && data.locale === Astro.locals.locale)
+const localePosts = allPosts.filter((post) => post.data.tag.split(',').some((tag) => slugify(tag.trim()) === Astro.params.slug))
+
+if (localePosts.length === 0) return new Response(`No blog category found for: ${Astro.url.pathname}`, { status: 404 })
 ---
 
 <BlogListing allPosts={localePosts} />

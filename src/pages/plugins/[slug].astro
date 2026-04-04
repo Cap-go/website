@@ -6,38 +6,26 @@ import { createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import * as m from '@/paraglide/messages'
 import { getSlug } from '@/services/github'
 import { defaultLocale } from '@/services/locale'
-import type { GetStaticPaths } from 'astro'
 import type { CollectionEntry } from 'astro:content'
 import { getCollection } from 'astro:content'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { marked } from 'marked'
 import PluginIcon from '@/components/PluginIcon.astro'
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const pluginPosts: { [k: string]: CollectionEntry<'plugin'>[] } = {}
-  await getCollection('plugin', (item) => {
-    const { data, filePath } = item
-    if (data.published !== false && filePath) {
-      const pluginSlug = getSlug(filePath).replace('.md', '')
-      if (!pluginPosts[pluginSlug]) pluginPosts[pluginSlug] = []
-      pluginPosts[pluginSlug].push(item)
-    }
-  })
-  return Object.entries(pluginPosts).map(([slug, posts]) => {
-    return {
-      params: { slug },
-      props: { posts },
-    }
-  })
-}
+export const prerender = false
 
 // Get the plugin from the actions set
 const plugin = actions.find((item) => getSlug(item.href) === Astro.params.slug) as Plugin
 
 if (!plugin || !plugin.title) return new Response(`plugin is not found for: ${Astro.url.pathname}`, { status: 404 })
 
+const posts = await getCollection(
+  'plugin',
+  ({ data, filePath }) => data.published !== false && Boolean(filePath) && getSlug(filePath!).replace('.md', '') === Astro.params.slug,
+)
+
 let tutorialPlugin = ''
-const thisTut = (Astro.props.posts as CollectionEntry<'plugin'>[]).find((i) => (i.data.locale || defaultLocale) === Astro.locals.locale)
+const thisTut = posts.find((i) => (i.data.locale || defaultLocale) === Astro.locals.locale)
 if (thisTut?.body) tutorialPlugin = thisTut.body
 
 if (tutorialPlugin.length > 0) {
