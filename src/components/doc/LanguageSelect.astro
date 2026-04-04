@@ -12,7 +12,9 @@ const showLanguageSelector = locales.length > 1
       <button
         id="language-menu-button"
         type="button"
-        class="inline-flex w-full flex-row items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-1 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+        aria-expanded="false"
+        aria-controls="language-menu"
+        class="inline-flex w-full flex-row items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-1 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
       >
         {m.language_label({}, { locale: Astro.locals.locale })}
         <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -25,14 +27,15 @@ const showLanguageSelector = locales.length > 1
         style="top: 100%; right: 0;"
       >
         {locales.map((j) => (
-          <a
+          <button
             id={`language_${j}`}
-            class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-100"
+            type="button"
+            class="block w-full cursor-pointer px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus-visible:bg-gray-100 focus-visible:text-gray-900 focus-visible:outline-none dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-100 dark:focus-visible:bg-gray-700 dark:focus-visible:text-gray-100"
             role="menuitem"
-            tabindex="-1"
+            aria-current={Astro.locals.locale === j ? 'true' : undefined}
           >
             {j.toUpperCase()}
-          </a>
+          </button>
         ))}
       </div>
     </div>
@@ -40,38 +43,39 @@ const showLanguageSelector = locales.length > 1
 }
 
 <script is:inline define:vars={{ locales, currentLocale: Astro.locals.locale, showLanguageSelector }}>
-  if (!showLanguageSelector) return
-
-  const languageMenu = document.getElementById('language-menu')
-  const button = document.getElementById('language-menu-button')
-  if (languageMenu && button) {
-    const adjustMenuPosition = () => {
-      if (languageMenu.classList.contains('hidden')) return
-      const rect = button.getBoundingClientRect()
-      const viewportHeight = window.innerHeight
-      const menuHeight = languageMenu.offsetHeight
-      if (rect.bottom + menuHeight > viewportHeight) {
-        languageMenu.style.top = 'auto'
-        languageMenu.style.bottom = '100%'
-      } else {
-        languageMenu.style.top = '100%'
-        languageMenu.style.bottom = 'auto'
+  if (showLanguageSelector) {
+    const languageMenu = document.getElementById('language-menu')
+    const button = document.getElementById('language-menu-button')
+    if (languageMenu && button) {
+      const adjustMenuPosition = () => {
+        if (languageMenu.classList.contains('hidden')) return
+        const rect = button.getBoundingClientRect()
+        const viewportHeight = window.innerHeight
+        const menuHeight = languageMenu.offsetHeight
+        if (rect.bottom + menuHeight > viewportHeight) {
+          languageMenu.style.top = 'auto'
+          languageMenu.style.bottom = '100%'
+        } else {
+          languageMenu.style.top = '100%'
+          languageMenu.style.bottom = 'auto'
+        }
       }
-    }
-    // window.addEventListener('resize', adjustMenuPosition)
-    button.onclick = () => {
-      const willShow = languageMenu.classList.contains('hidden')
-      languageMenu.classList.toggle('hidden')
-      if (willShow) adjustMenuPosition()
-    }
-    locales.forEach((j) => {
-      const item = document.getElementById(`language_${j}`)
-      if (!item) return
-      item.addEventListener('click', () => {
-        const tmp = new URL(window.location.href).pathname.replace(`/${currentLocale}/`, '/')
-        if (j === 'en') window.location.href = tmp
-        else window.location.href = `/${j}${tmp}`
+      // window.addEventListener('resize', adjustMenuPosition)
+      button.onclick = () => {
+        const willShow = languageMenu.classList.contains('hidden')
+        languageMenu.classList.toggle('hidden')
+        button.setAttribute('aria-expanded', String(willShow))
+        if (willShow) adjustMenuPosition()
+      }
+      locales.forEach((j) => {
+        const item = document.getElementById(`language_${j}`)
+        if (!item) return
+        item.addEventListener('click', () => {
+          const tmp = new URL(window.location.href).pathname.replace(`/${currentLocale}/`, '/')
+          if (j === 'en') window.location.href = tmp
+          else window.location.href = `/${j}${tmp}`
+        })
       })
-    })
+    }
   }
 </script>

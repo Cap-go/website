@@ -319,7 +319,13 @@ const navigation: Record<string, NavigationItem[]> = {
         {
           showLanguageSelector && (
             <div class="relative">
-              <button type="button" id="language-dropdown-button" class="flex items-center text-sm text-zinc-400 hover:text-white focus:outline-none">
+              <button
+                type="button"
+                id="language-dropdown-button"
+                aria-expanded="false"
+                aria-controls="language-dropdown"
+                class="flex items-center text-sm text-zinc-400 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
+              >
                 <span class="mr-2">{currentFlag}</span>
                 {Astro.locals.locale.toUpperCase()}
                 <span class="ml-1">▼</span>
@@ -353,20 +359,23 @@ const navigation: Record<string, NavigationItem[]> = {
 </footer>
 
 <script is:inline define:vars={{ showLanguageSelector }}>
-  if (!showLanguageSelector) return
+  if (showLanguageSelector) {
+    const button = document.getElementById('language-dropdown-button')
+    const dropdown = document.getElementById('language-dropdown')
 
-  const button = document.getElementById('language-dropdown-button')
-  const dropdown = document.getElementById('language-dropdown')
+    if (button && dropdown) {
+      button.addEventListener('click', () => {
+        const nextExpanded = button.getAttribute('aria-expanded') !== 'true'
+        button.setAttribute('aria-expanded', String(nextExpanded))
+        dropdown.classList.toggle('hidden')
+      })
 
-  if (button && dropdown) {
-    button.addEventListener('click', () => {
-      dropdown.classList.toggle('hidden')
-    })
-
-    document.addEventListener('click', (event) => {
-      if (event.target instanceof Node && !button?.contains(event.target) && !dropdown?.contains(event.target)) {
-        dropdown?.classList.add('hidden')
-      }
-    })
+      document.addEventListener('click', (event) => {
+        if (event.target instanceof Node && !button.contains(event.target) && !dropdown.contains(event.target)) {
+          dropdown.classList.add('hidden')
+          button.setAttribute('aria-expanded', 'false')
+        }
+      })
+    }
   }
 </script>
