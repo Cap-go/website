@@ -75,9 +75,12 @@ const toHeroiconName = (value) =>
     .replace(/([a-zA-Z])([0-9])/g, '$1-$2')
     .replace(/([0-9])([a-zA-Z])/g, '$1-$2')
     .toLowerCase()}-solid`
-const pluginIcons = [
-  ...new Set(['arrow-up-right-solid', ...[...readFileSync('src/config/plugins.ts', 'utf8').matchAll(/icon:\s*'([^']+)'/g)].map(([, iconName]) => toHeroiconName(iconName))]),
-].sort()
+const pluginConfigSource = readFileSync('src/config/plugins.ts', 'utf8')
+const literalPluginIcons = [...pluginConfigSource.matchAll(/icon:\s*'([^']+)'/g)].map(([, iconName]) => toHeroiconName(iconName))
+const factoryPluginIcons = [...pluginConfigSource.matchAll(/createCapgoPlugin\(\s*'[^']*'\s*,\s*'[^']*'\s*,\s*'[^']*'\s*,\s*'[^']*'\s*,\s*'([^']+)'\s*\)/gs)].map(([, iconName]) =>
+  toHeroiconName(iconName),
+)
+const pluginIcons = [...new Set(['arrow-up-right-solid', ...literalPluginIcons, ...factoryPluginIcons])].sort()
 const createPluginDocSet = (label, description, slug) => ({
   label: `Plugin ${label}`,
   description,
