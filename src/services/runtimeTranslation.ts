@@ -245,17 +245,37 @@ function collectSegments($: CheerioAPI): SegmentRef[] {
       const core = raw.trim()
       if (!core) return
 
-      const leadingWhitespace = raw.match(/^\s*/)?.[0] || ''
-      const trailingWhitespace = raw.match(/\s*$/)?.[0] || ''
+      const leadingWhitespaceLength = countLeadingWhitespace(raw)
+      const trailingWhitespaceStart = findTrailingWhitespaceStart(raw)
       segments.push({
         apply: (translation) => {
-          node.data = `${leadingWhitespace}${translation}${trailingWhitespace}`
+          node.data = `${raw.slice(0, leadingWhitespaceLength)}${translation}${raw.slice(trailingWhitespaceStart)}`
         },
         text: core,
       })
     })
 
   return segments
+}
+
+function countLeadingWhitespace(value: string): number {
+  let index = 0
+  while (index < value.length && isWhitespaceCharacter(value[index])) {
+    index += 1
+  }
+  return index
+}
+
+function findTrailingWhitespaceStart(value: string): number {
+  let index = value.length
+  while (index > 0 && isWhitespaceCharacter(value[index - 1])) {
+    index -= 1
+  }
+  return index
+}
+
+function isWhitespaceCharacter(value: string | undefined): boolean {
+  return value === ' ' || value === '\n' || value === '\r' || value === '\t' || value === '\f' || value === '\v'
 }
 
 function isTranslatableTextNode(node: AnyNode): node is AnyNode & { data: string } {
