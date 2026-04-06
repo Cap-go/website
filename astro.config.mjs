@@ -138,7 +138,7 @@ export default defineConfig({
       locales: localeNames,
       defaultLocale,
       redirectDefaultLocale: true,
-      exclude: ['pages/**/*.json.ts'],
+      exclude: ['pages/**/*.json.ts', 'pages/api/**/*.ts'],
     }),
     sitemap({
       i18n: {
