@@ -1,25 +1,14 @@
 ---
 import * as m from '@/paraglide/messages'
-import { locales } from '@/services/locale'
 import { getRelativeLocaleUrl } from 'astro:i18n'
+import { prefixRuntimeLocale, runtimeLocaleFlags, runtimeTranslationLocales } from '@/services/runtimeTranslation'
 
 const year = new Date().getFullYear()
-const showLanguageSelector = locales.length > 1
-
-// Map locale codes to flag emojis
-const localeFlags: Record<string, string> = {
-  de: '🇩🇪',
-  en: '🇺🇸',
-  es: '🇪🇸',
-  fr: '🇫🇷',
-  id: '🇮🇩',
-  it: '🇮🇹',
-  ja: '🇯🇵',
-  ko: '🇰🇷',
-  zh: '🇨🇳',
-}
-
-const currentFlag = localeFlags[Astro.locals.locale] || '🇺🇸'
+const translationState = Astro.locals.translation
+const currentPageLocale = translationState?.requestedLocale || Astro.locals.locale
+const currentFlag = runtimeLocaleFlags[currentPageLocale] || runtimeLocaleFlags.en
+const selectorPath = translationState?.sourcePath || Astro.url.pathname
+const showLanguageSelector = Boolean(translationState?.showSelector)
 
 interface NavigationItem {
   name: string | (() => string)
@@ -327,7 +316,7 @@ const navigation: Record<string, NavigationItem[]> = {
                 class="flex items-center text-sm text-zinc-400 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
               >
                 <span class="mr-2">{currentFlag}</span>
-                {Astro.locals.locale.toUpperCase()}
+                {currentPageLocale.toUpperCase()}
                 <span class="ml-1">▼</span>
               </button>
               <div
@@ -335,10 +324,11 @@ const navigation: Record<string, NavigationItem[]> = {
                 class="ring-opacity-5 absolute bottom-full left-0 z-50 mb-2 hidden w-32 rounded-md bg-[#1c1c1f] shadow-lg ring-1 ring-black focus:outline-none"
               >
                 <div class="py-1">
-                  {locales.map((item) => (
+                  {runtimeTranslationLocales.map((item) => (
                     <a
-                      href={getRelativeLocaleUrl(item.toLowerCase(), Astro.url.pathname.replace(`/${Astro.locals.locale}/`, '/'))}
+                      href={prefixRuntimeLocale(selectorPath, item)}
                       class="block px-4 py-2 text-sm text-zinc-400 hover:bg-zinc-800 hover:text-white"
+                      aria-current={currentPageLocale === item ? 'true' : undefined}
                     >
                       {item.toUpperCase()}
                     </a>

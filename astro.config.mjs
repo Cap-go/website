@@ -24,7 +24,9 @@ const CPU_COUNT = Number.isFinite(BUILD_CONCURRENCY) && BUILD_CONCURRENCY > 0 ? 
 const SRC_DIR = `${fileURLToPath(new URL('./src/', import.meta.url))
   .replace(/\\/g, '/')
   .replace(/\/$/, '')}/`
-const PUBLIC_DIR = fileURLToPath(new URL('./public/', import.meta.url)).replace(/\\/g, '/').replace(/\/$/, '')
+const PUBLIC_DIR = fileURLToPath(new URL('./public/', import.meta.url))
+  .replace(/\\/g, '/')
+  .replace(/\/$/, '')
 
 // Build a map of page paths to their lastmod dates for sitemap
 function getPageLastModDates() {
@@ -81,7 +83,9 @@ export default defineConfig({
   trailingSlash: 'always',
   site: `https://${config.base_domain.prod}`,
   output: 'server',
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    remoteBindings: false,
+  }),
   session: {
     driver: sessionDrivers.null(),
   },
