@@ -1,7 +1,7 @@
 import { appDescription } from '@/constants/index'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import dayjs from 'dayjs'
-import keys from '../../configs.json'
+import keys from '../../../../configs.json'
 
 function getRightKey(branch: string, keyname: 'base_domain'): string {
   if (branch === 'development') return keys[keyname].development

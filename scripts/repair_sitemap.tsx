@@ -1,5 +1,5 @@
 import { XMLParser } from 'fast-xml-parser'
-import { existsSync, readFileSync, writeFileSync } from 'node:fs'
+import { copyFileSync, existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { SitemapStream, streamToPromise } from 'sitemap'
 
@@ -10,14 +10,22 @@ interface SitemapUrl {
   priority?: number
 }
 
-const sitemapPath = join('dist', 'sitemap-0.xml')
+const HOSTNAME = 'https://capgo.app'
+const WEB_DIST = join('apps', 'web', 'dist', 'client')
+const DOCS_DIST = join('apps', 'docs', 'dist', 'client')
 
-if (existsSync(sitemapPath)) {
-  const xmlData = readFileSync(sitemapPath, 'utf-8')
-  const jsonObj = new XMLParser().parse(xmlData)
-  const urls: SitemapUrl[] = jsonObj.urlset.url
-  const smStream = new SitemapStream({ hostname: 'https://capgo.app' })
-  urls.forEach((item: SitemapUrl) => {
+const parser = new XMLParser()
+
+async function normalizeSitemap(inputPath: string, outputPath = inputPath): Promise<boolean> {
+  if (!existsSync(inputPath)) return false
+
+  const xmlData = readFileSync(inputPath, 'utf-8')
+  const jsonObj = parser.parse(xmlData)
+  const rawUrls = jsonObj?.urlset?.url
+  const urls: SitemapUrl[] = Array.isArray(rawUrls) ? rawUrls : rawUrls ? [rawUrls] : []
+  const smStream = new SitemapStream({ hostname: HOSTNAME })
+
+  urls.forEach((item) => {
     smStream.write({
       url: item.loc,
       lastmod: item.lastmod,
@@ -25,7 +33,38 @@ if (existsSync(sitemapPath)) {
       priority: item.priority,
     })
   })
+
   smStream.end()
   const sitemap = await streamToPromise(smStream)
-  writeFileSync(sitemapPath, sitemap.toString(), 'utf-8')
+  writeFileSync(outputPath, sitemap.toString(), 'utf-8')
+  return true
+}
+
+const sitemapEntries: string[] = []
+
+if (await normalizeSitemap(join(WEB_DIST, 'sitemap-0.xml'))) {
+  sitemapEntries.push(`${HOSTNAME}/sitemap-0.xml`)
+}
+
+if (await normalizeSitemap(join(DOCS_DIST, 'sitemap-0.xml'), join(WEB_DIST, 'docs-sitemap-0.xml'))) {
+  sitemapEntries.push(`${HOSTNAME}/docs-sitemap-0.xml`)
+}
+
+for (const docsArtifact of ['llms.txt', 'llms-full.txt']) {
+  const sourcePath = join(DOCS_DIST, docsArtifact)
+  if (existsSync(sourcePath)) {
+    copyFileSync(sourcePath, join(WEB_DIST, docsArtifact))
+  }
+}
+
+if (sitemapEntries.length > 0) {
+  const sitemapIndex = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ...sitemapEntries.map((loc) => `  <sitemap><loc>${loc}</loc></sitemap>`),
+    '</sitemapindex>',
+    '',
+  ].join('\n')
+
+  writeFileSync(join(WEB_DIST, 'sitemap-index.xml'), sitemapIndex, 'utf-8')
 }

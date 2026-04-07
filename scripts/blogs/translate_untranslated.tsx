@@ -3,11 +3,11 @@ import matter from 'gray-matter'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { readdir } from 'node:fs/promises'
 import { join } from 'node:path'
-import { defaultLocale, locales } from '../../src/services/locale'
+import { defaultLocale, locales } from '../../apps/web/src/services/locale'
 import { commonReplacements } from '../commonReplacements'
 import { translateText } from '../translate'
 
-const contentDirectory = join(process.cwd(), 'src', 'content')
+const contentDirectory = join(process.cwd(), 'apps', 'web', 'src', 'content')
 const blogDirectory = join(contentDirectory, 'blog')
 const defaultBlogDirectory = join(blogDirectory, defaultLocale)
 const localeArgIndex = process.argv.findIndex((arg) => arg.startsWith('--locale='))
@@ -43,10 +43,10 @@ const mapUntranslatedBlogToLocales = async (): Promise<{ [file: string]: string[
 
 const processFile = async (file: string, lang: string): Promise<void> => {
   try {
-    const sourceFilePath = join(process.cwd(), 'src', 'content', 'blog', 'en', file)
-    const destinationDir = join(process.cwd(), 'src', 'content', 'blog', lang)
+    const sourceFilePath = join(process.cwd(), 'apps', 'web', 'src', 'content', 'blog', 'en', file)
+    const destinationDir = join(process.cwd(), 'apps', 'web', 'src', 'content', 'blog', lang)
     if (!existsSync(destinationDir)) mkdirSync(destinationDir, { recursive: true })
-    const destinationPath = join(process.cwd(), 'src', 'content', 'blog', lang, file)
+    const destinationPath = join(process.cwd(), 'apps', 'web', 'src', 'content', 'blog', lang, file)
     const content = readFileSync(sourceFilePath, 'utf8')
     const { data: frontmatter, content: extractedContent } = matter(content)
     const newFrontmatter: Record<string, any> = { ...frontmatter, locale: lang }

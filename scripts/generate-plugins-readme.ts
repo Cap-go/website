@@ -6,11 +6,11 @@
  * Run with: bun run scripts/generate-plugins-readme.ts
  */
 
-import { actions } from '../src/config/plugins'
+import { actions } from '../apps/web/src/config/plugins'
 
 // Load the data files
-const starsPath = new URL('../src/data/github-stars.json', import.meta.url).pathname
-const downloadsPath = new URL('../src/data/npm-downloads.json', import.meta.url).pathname
+const starsPath = new URL('../apps/web/src/data/github-stars.json', import.meta.url).pathname
+const downloadsPath = new URL('../apps/web/src/data/npm-downloads.json', import.meta.url).pathname
 
 const githubStars: Record<string, number> = await Bun.file(starsPath).json()
 const npmDownloads: Record<string, number> = await Bun.file(downloadsPath).json()
@@ -233,7 +233,7 @@ All plugins are released under the Mozilla Public License Version 2.0 unless men
 `
 
 // Write to public directory so it can be served
-const outputPath = new URL('../public/plugins-readme.md', import.meta.url).pathname
+const outputPath = new URL('../apps/web/public/plugins-readme.md', import.meta.url).pathname
 await Bun.write(outputPath, markdown)
 
 console.log(`Generated plugins README with ${sortedPlugins.length} plugins`)

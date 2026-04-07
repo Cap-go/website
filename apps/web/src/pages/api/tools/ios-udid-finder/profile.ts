@@ -20,8 +20,9 @@ export const GET: APIRoute = async ({ request }) => {
 
   const signedProfile = await signMobileconfig(profile)
   const secure = baseUrl.protocol === 'https:'
+  const body = signedProfile ? new Uint8Array(signedProfile) : profile
 
-  return new Response(signedProfile ?? profile, {
+  return new Response(body, {
     status: 200,
     headers: {
       'Cache-Control': 'no-store',

@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto'
 
 let forgePromise: Promise<any> | undefined
+type ForgeKeyPair = { privateKey: any; publicKey: any }
 
 async function getForge(): Promise<any> {
   forgePromise ||= import('node-forge').then((module) => module.default ?? module)
@@ -175,10 +176,10 @@ function formatSubject(identity: SigningIdentityInput): string {
     .join(', ')
 }
 
-async function generateKeyPair() {
+async function generateKeyPair(): Promise<ForgeKeyPair> {
   const forge = await getForge()
-  return await new Promise((resolve, reject) => {
-    forge.pki.rsa.generateKeyPair({ bits: KEY_SIZE }, (error, keyPair) => {
+  return await new Promise<ForgeKeyPair>((resolve, reject) => {
+    forge.pki.rsa.generateKeyPair({ bits: KEY_SIZE }, (error: Error | null, keyPair: ForgeKeyPair | undefined) => {
       if (error || !keyPair) {
         reject(error || new Error('Failed to generate the RSA key pair.'))
         return
@@ -211,7 +212,7 @@ export function normalizeIosCertificateInput(input: Partial<IosCertificateReques
 export function normalizeAndroidKeystoreInput(input: Partial<AndroidKeystoreInput>): AndroidKeystoreInput {
   return {
     ...normalizeIdentity(input),
-    alias: validateAlias(input.alias),
+    alias: validateAlias(input.alias ?? ''),
     password: validatePassword(String(input.password ?? '')),
     validityYears: validateValidityYears(input.validityYears),
   }

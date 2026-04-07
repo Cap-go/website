@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url'
 import starlightImageZoom from 'starlight-image-zoom'
 import starlightLlmsTxt from 'starlight-llms-txt'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
-import config from './configs.json'
+import config from '../../configs.json'
 import { defaultLocale, localeNames, locales } from './src/services/locale'
 
 // Prefer the scheduler-aware CPU count and keep a clear override for CI/local tuning.
@@ -25,6 +25,7 @@ const SRC_DIR = `${fileURLToPath(new URL('./src/', import.meta.url))
   .replace(/\\/g, '/')
   .replace(/\/$/, '')}/`
 const PUBLIC_DIR = fileURLToPath(new URL('./public/', import.meta.url)).replace(/\\/g, '/').replace(/\/$/, '')
+const WEB_PLUGIN_CONFIG = fileURLToPath(new URL('../web/src/config/plugins.ts', import.meta.url))
 
 // Build a map of page paths to their lastmod dates for sitemap
 function getPageLastModDates() {
@@ -74,7 +75,7 @@ const toHeroiconName = (value) =>
     .replace(/([0-9])([a-zA-Z])/g, '$1-$2')
     .toLowerCase()}-solid`
 const pluginIcons = [
-  ...new Set(['arrow-up-right-solid', ...[...readFileSync('src/config/plugins.ts', 'utf8').matchAll(/icon:\s*'([^']+)'/g)].map(([, iconName]) => toHeroiconName(iconName))]),
+  ...new Set(['arrow-up-right-solid', ...[...readFileSync(WEB_PLUGIN_CONFIG, 'utf8').matchAll(/icon:\s*'([^']+)'/g)].map(([, iconName]) => toHeroiconName(iconName))]),
 ].sort()
 
 export default defineConfig({
@@ -96,6 +97,7 @@ export default defineConfig({
   build: {
     // Use all available build workers by default; override with BUILD_CONCURRENCY when needed.
     concurrency: CPU_COUNT,
+    assets: '_docs',
     // Skip HTML compression - let CDN handle it for faster builds
     compressHTML: false,
     // Keep Astro's default stylesheet optimization behavior.
@@ -1623,12 +1625,12 @@ export default defineConfig({
   ],
   server: {
     port: 3000,
-    open: true,
+    open: false,
     host: '0.0.0.0',
   },
   preview: {
     port: 3000,
-    open: true,
+    open: false,
     host: '0.0.0.0',
   },
   vite: {
@@ -1653,7 +1655,11 @@ export default defineConfig({
     },
     // Keep Astro's generated `/src/...` virtual imports resolvable during the build.
     resolve: {
-      alias: [{ find: /^\/src\//, replacement: SRC_DIR }],
+      alias: [
+        { find: '@', replacement: SRC_DIR.slice(0, -1) },
+        { find: '~public', replacement: PUBLIC_DIR },
+        { find: /^\/src\//, replacement: SRC_DIR },
+      ],
     },
     // Optimize dependency pre-bundling
     optimizeDeps: {
@@ -1664,7 +1670,7 @@ export default defineConfig({
       tailwindcss(),
       paraglideVitePlugin({
         outdir: './src/paraglide',
-        project: './project.inlang',
+        project: '../../project.inlang',
         disableAsyncLocalStorage: true,
       }),
       viteStaticCopy({

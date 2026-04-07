@@ -20,6 +20,7 @@
         "astro-icon": "1.1.5",
         "github-slugger": "^2.0.0",
         "glob": "^13.0.6",
+        "marked": "^16.4.1",
         "mermaid": "^11.13.0",
         "node-forge": "^1.4.0",
         "openai": "^6.27.0",
@@ -71,6 +72,12 @@
         "wrangler": "4.73.0",
         "zod": "^4",
       },
+    },
+    "apps/docs": {
+      "name": "@capgo/docs",
+    },
+    "apps/web": {
+      "name": "@capgo/web",
     },
   },
   "packages": {
@@ -212,7 +219,11 @@
 
     "@braintree/sanitize-url": ["@braintree/sanitize-url@7.1.2", "", {}, "sha512-jigsZK+sMF/cuiB7sERuo9V7N9jx+dhmHHnQyDSVdpZwVutaBu7WvNYqMDLSgFgfB30n452TP3vjDAvFC973mA=="],
 
+    "@capgo/docs": ["@capgo/docs@workspace:apps/docs"],
+
     "@capgo/seo-checker": ["@capgo/seo-checker@0.0.13", "", { "dependencies": { "ajv": "^8.17.1", "cheerio": "^1.0.0", "schema-org-json-schemas": "^2.1.4" }, "bin": { "seo-checker": "dist/cli.js" } }, "sha512-A5Een5f10LwSYOdf8ivRe9z7rtH1HlFIMUYX4YyYeaMY46aYe5Qu5RiA9leJMYHOg1cNvUDGZ/7P8TuHGyQSiA=="],
+
+    "@capgo/web": ["@capgo/web@workspace:apps/web"],
 
     "@capsizecss/unpack": ["@capsizecss/unpack@4.0.0", "", { "dependencies": { "fontkitten": "^1.0.0" } }, "sha512-VERIM64vtTP1C4mxQ5thVT9fK0apjPFobqybMtA1UdUujWka24ERHbRHFGmpbbhp73MhV+KSsHQH9C6uOTdEQA=="],
 

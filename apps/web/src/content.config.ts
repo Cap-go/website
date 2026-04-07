@@ -1,6 +1,3 @@
-import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders'
-import { docsSchema, i18nSchema } from '@astrojs/starlight/schema'
-import { docSearchI18nSchema } from '@astrojs/starlight-docsearch/schema'
 import { glob } from 'astro/loaders'
 import { defineCollection, z } from 'astro:content'
 import { locales, type Locales } from './services/locale'
@@ -24,15 +21,13 @@ const blog = defineCollection({
     head_image: z.string().optional(),
     head_image_alt: z.string().optional(),
     keywords: z.string().optional(),
-    tag: z.string().transform((j) => {
-      let tmp = ''
-      const splitTags = j.trim().split(',')
-      splitTags.forEach((p, index) => {
-        tmp += p.trim()
-        if (index < splitTags.length - 1) tmp += ','
-      })
-      return tmp
-    }),
+    tag: z.string().transform((value) =>
+      value
+        .trim()
+        .split(',')
+        .map((item) => item.trim())
+        .join(','),
+    ),
     published: z.boolean().optional(),
     locale: localeSchema,
     next_blog: z.string().optional().nullable(),
@@ -50,9 +45,4 @@ const plugin = defineCollection({
 export const collections = {
   blog,
   plugin,
-  docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
-  i18n: defineCollection({
-    loader: i18nLoader(),
-    schema: i18nSchema({ extend: docSearchI18nSchema() }),
-  }),
 }

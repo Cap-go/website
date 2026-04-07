@@ -5,7 +5,7 @@
  * Run with: bun run scripts/fetch-github-stars.ts
  */
 
-import { actions } from '../src/config/plugins'
+import { actions } from '../apps/web/src/config/plugins'
 
 const GITHUB_TOKEN = process.env.PERSONAL_ACCESS_TOKEN
 
@@ -86,7 +86,7 @@ async function main() {
   }
 
   // Write to JSON file
-  const outputPath = new URL('../src/data/github-stars.json', import.meta.url).pathname
+  const outputPath = new URL('../apps/web/src/data/github-stars.json', import.meta.url).pathname
   await Bun.write(outputPath, JSON.stringify(stars, null, 2))
 
   console.log(`\nSaved ${Object.keys(stars).length} star counts to ${outputPath}`)
