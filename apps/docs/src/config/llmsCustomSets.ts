@@ -109,7 +109,12 @@ Plugin Firebase Performance|Firebase Performance Monitoring plugin|docs/plugins/
 Plugin Firebase Remote Config|Firebase Remote Config plugin|docs/plugins/firebase-remote-config/**
 Plugin Firebase Storage|Firebase Cloud Storage plugin|docs/plugins/firebase-storage/**`.trim().split('\n')
 
-export const docsLlmsCustomSets = llmsCustomSetRows.map((row) => {
-  const [label, description, ...paths] = row.split('|')
+export const docsLlmsCustomSets = llmsCustomSetRows.map((row, index) => {
+  const [label, description, ...paths] = row.split('|').map((part) => part.trim())
+
+  if (!label || !description || paths.length === 0 || paths.some((path) => !path)) {
+    throw new Error(`Invalid llms custom set row at line ${index + 1}: "${row}"`)
+  }
+
   return { label, description, paths }
 })
