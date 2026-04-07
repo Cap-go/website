@@ -5,65 +5,16 @@ import tailwindcss from '@tailwindcss/vite'
 import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
 import icon from 'astro-icon'
 import { defineConfig, sessionDrivers } from 'astro/config'
-import { glob } from 'glob'
-import { readFileSync, statSync } from 'node:fs'
-import os from 'node:os'
 import { fileURLToPath } from 'node:url'
 import config from '../../configs.json'
+import { buildPluginIcons, getBuildConcurrency, getPageLastModDates, normalizeDirectoryPath } from '../shared/astro-utils.mjs'
 import { defaultLocale, localeNames, locales } from './src/services/locale'
 
-const AVAILABLE_PARALLELISM = typeof os.availableParallelism === 'function' ? os.availableParallelism() : os.cpus().length
-const BUILD_CONCURRENCY = Number.parseInt(process.env.BUILD_CONCURRENCY ?? '', 10)
-const CPU_COUNT = Number.isFinite(BUILD_CONCURRENCY) && BUILD_CONCURRENCY > 0 ? BUILD_CONCURRENCY : AVAILABLE_PARALLELISM
-const SRC_DIR = `${fileURLToPath(new URL('./src/', import.meta.url))
-  .replace(/\\/g, '/')
-  .replace(/\/$/, '')}/`
-const PUBLIC_DIR = fileURLToPath(new URL('./public/', import.meta.url)).replace(/\\/g, '/').replace(/\/$/, '')
-
-function getPageLastModDates() {
-  const lastModMap = new Map()
-
-  const blogFiles = glob.sync('src/content/blog/**/*.md')
-  for (const file of blogFiles) {
-    const content = readFileSync(file, 'utf-8')
-    const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/)
-    if (!frontmatterMatch) continue
-
-    const frontmatter = frontmatterMatch[1]
-    const updatedAtMatch = frontmatter.match(/updated_at:\s*(.+)/)
-    const slugMatch = frontmatter.match(/slug:\s*(.+)/)
-    if (!updatedAtMatch || !slugMatch) continue
-
-    const slug = slugMatch[1].trim()
-    const updatedAt = updatedAtMatch[1].trim()
-    lastModMap.set(`/blog/${slug}`, new Date(updatedAt))
-    lastModMap.set(`/blog/${slug}/`, new Date(updatedAt))
-  }
-
-  const pageFiles = glob.sync('src/pages/**/*.astro')
-  for (const file of pageFiles) {
-    const stat = statSync(file)
-    let urlPath = file.replace('src/pages', '').replace('/index.astro', '/').replace('.astro', '/')
-    if (!urlPath.endsWith('/')) urlPath += '/'
-    if (!lastModMap.has(urlPath)) {
-      lastModMap.set(urlPath, stat.mtime)
-    }
-  }
-
-  return lastModMap
-}
-
+const CPU_COUNT = getBuildConcurrency()
+const SRC_DIR = `${normalizeDirectoryPath(fileURLToPath(new URL('./src/', import.meta.url)))}/`
+const PUBLIC_DIR = normalizeDirectoryPath(fileURLToPath(new URL('./public/', import.meta.url)))
 const pageLastModDates = getPageLastModDates()
-const toHeroiconName = (value) =>
-  `${value
-    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1-$2')
-    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
-    .replace(/([a-zA-Z])([0-9])/g, '$1-$2')
-    .replace(/([0-9])([a-zA-Z])/g, '$1-$2')
-    .toLowerCase()}-solid`
-const pluginIcons = [
-  ...new Set(['arrow-up-right-solid', ...[...readFileSync('src/config/plugins.ts', 'utf8').matchAll(/icon:\s*'([^']+)'/g)].map(([, iconName]) => toHeroiconName(iconName))]),
-].sort((left, right) => left.localeCompare(right))
+const pluginIcons = buildPluginIcons('src/config/plugins.ts')
 
 export default defineConfig({
   trailingSlash: 'always',

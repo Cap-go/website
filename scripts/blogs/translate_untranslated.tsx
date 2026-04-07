@@ -2,14 +2,12 @@ import { execSync } from 'child_process'
 import matter from 'gray-matter'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { readdir } from 'node:fs/promises'
-import { join } from 'node:path'
 import { defaultLocale, locales } from '../../apps/web/src/services/locale'
+import { getBlogTranslationPaths, webBlogDirectory } from './shared'
 import { commonReplacements } from '../commonReplacements'
 import { translateText } from '../translate'
 
-const contentDirectory = join(process.cwd(), 'apps', 'web', 'src', 'content')
-const blogDirectory = join(contentDirectory, 'blog')
-const defaultBlogDirectory = join(blogDirectory, defaultLocale)
+const defaultBlogDirectory = `${webBlogDirectory}/${defaultLocale}`
 const localeArgIndex = process.argv.findIndex((arg) => arg.startsWith('--locale='))
 const keepPushingArgIndex = process.argv.findIndex((arg) => arg === '--keep-pushing')
 const languages = localeArgIndex !== -1 ? [process.argv[localeArgIndex].split('=')[1]] : locales.filter((lang) => lang !== defaultLocale)
@@ -17,8 +15,7 @@ const languages = localeArgIndex !== -1 ? [process.argv[localeArgIndex].split('=
 const getUntranslatedLocales = async (file: string): Promise<string[]> => {
   const untranslatedLocales: string[] = []
   for (const lang of languages) {
-    const langBlogDirectory = join(blogDirectory, lang)
-    const destinationPath = join(langBlogDirectory, file)
+    const { destinationPath } = getBlogTranslationPaths(file, lang)
     if (!existsSync(destinationPath)) untranslatedLocales.push(lang)
   }
   return untranslatedLocales
@@ -43,10 +40,8 @@ const mapUntranslatedBlogToLocales = async (): Promise<{ [file: string]: string[
 
 const processFile = async (file: string, lang: string): Promise<void> => {
   try {
-    const sourceFilePath = join(process.cwd(), 'apps', 'web', 'src', 'content', 'blog', 'en', file)
-    const destinationDir = join(process.cwd(), 'apps', 'web', 'src', 'content', 'blog', lang)
+    const { sourceFilePath, destinationDir, destinationPath } = getBlogTranslationPaths(file, lang)
     if (!existsSync(destinationDir)) mkdirSync(destinationDir, { recursive: true })
-    const destinationPath = join(process.cwd(), 'apps', 'web', 'src', 'content', 'blog', lang, file)
     const content = readFileSync(sourceFilePath, 'utf8')
     const { data: frontmatter, content: extractedContent } = matter(content)
     const newFrontmatter: Record<string, any> = { ...frontmatter, locale: lang }

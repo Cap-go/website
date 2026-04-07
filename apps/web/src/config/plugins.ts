@@ -19,796 +19,121 @@ export interface Plugin extends Action {
   locale?: string
 }
 
-export const actions = [
-  {
-    name: '@capgo/native-market',
-    author: 'github.com/Cap-go',
-    description: 'Deep link users directly to your app page on Google Play Store or Apple App Store',
-    href: 'https://github.com/Cap-go/capacitor-native-market/',
-    title: 'Native Market',
-  },
-  {
-    name: '@capgo/capacitor-native-biometric',
-    author: 'github.com/Cap-go',
-    description: 'Secure authentication using Face ID, Touch ID, and Android biometric APIs',
-    href: 'https://github.com/Cap-go/capacitor-native-biometric/',
-    title: 'Native Biometric',
-  },
-  {
-    name: '@capgo/camera-preview',
-    author: 'github.com/Cap-go',
-    description: 'Display live camera feed as overlay with customizable controls and capture capabilities',
-    href: 'https://github.com/Cap-go/capacitor-camera-preview/',
-    title: 'Camera Preview',
-  },
-  {
-    name: '@capgo/capacitor-updater',
-    author: 'github.com/Cap-go',
-    description: 'Deploy live updates instantly to your users without app store review delays',
-    href: 'https://github.com/Cap-go/capacitor-updater/',
-    title: 'Updater',
-  },
-  {
-    name: '@capgo/capacitor-uploader',
-    author: 'github.com/Cap-go',
-    description: 'Upload large files reliably in background with progress tracking and retry support',
-    href: 'https://github.com/Cap-go/capacitor-uploader/',
-    title: 'Uploader',
-  },
-  {
-    name: '@revenuecat/purchases-capacitor',
-    author: 'github.com/Cap-go',
-    description: 'Implement in-app subscriptions and purchases with RevenueCat SDK for cross-platform monetization',
-    href: 'https://github.com/RevenueCat/purchases-capacitor/',
-    title: 'Purchases',
-  },
-  {
-    name: '@capgo/capacitor-flash',
-    author: 'github.com/Cap-go',
-    description: 'Control device flashlight and torch with simple on/off toggle functionality',
-    href: 'https://github.com/Cap-go/capacitor-flash/',
-    title: 'Flash',
-  },
-  {
-    name: '@capgo/capacitor-screen-recorder',
-    author: 'github.com/Cap-go',
-    description: 'Capture screen recordings with audio for tutorials, demos, and bug reports',
-    href: 'https://github.com/Cap-go/capacitor-screen-recorder/',
-    title: 'Screen Recorder',
-  },
-  {
-    name: '@capgo/capacitor-crisp',
-    author: 'github.com/Cap-go',
-    description: 'Integrate Crisp live chat and customer support directly into your mobile app',
-    href: 'https://github.com/Cap-go/capacitor-crisp/',
-    title: 'Crisp',
-  },
-  {
-    name: '@capgo/capacitor-intercom',
-    author: 'github.com/Cap-go',
-    description: 'Integrate Intercom live chat, help center, and support workflows in your Capacitor app',
-    href: 'https://github.com/Cap-go/capacitor-intercom/',
-    title: 'Intercom',
-  },
-  {
-    name: '@capgo/capacitor-appsflyer',
-    author: 'github.com/Cap-go',
-    description: 'Add AppsFlyer attribution, analytics, deferred deep links, and OneLink support to your Capacitor app',
-    href: 'https://github.com/Cap-go/capacitor-appsflyer/',
-    title: 'AppsFlyer',
-  },
-  {
-    name: '@capgo/nativegeocoder',
-    author: 'github.com/Cap-go',
-    description: 'Convert addresses to coordinates and coordinates to addresses using native geocoding',
-    href: 'https://github.com/Cap-go/capacitor-nativegeocoder/',
-    title: 'Native Geocoder',
-  },
-  {
-    name: '@capgo/inappbrowser',
-    author: 'github.com/Cap-go',
-    description: 'Open web pages in a customizable in-app browser without leaving your application',
-    href: 'https://github.com/Cap-go/capacitor-inappbrowser/',
-    title: 'In App Browser',
-  },
-  {
-    name: '@capgo/capacitor-mqtt',
-    author: 'github.com/Cap-go',
-    description: 'MQTT support for real-time messaging across iOS, Android, and Web.',
-    href: 'https://github.com/Cap-go/capacitor-mqtt/',
-    title: 'MQTT',
-  },
-  {
-    name: '@capgo/capacitor-mute',
-    author: 'github.com/Cap-go',
-    description: 'Detect device mute switch state for iOS devices to handle audio playback appropriately',
-    href: 'https://github.com/Cap-go/capacitor-mute/',
-    title: 'Mute',
-  },
-  {
-    name: '@capgo/native-audio',
-    author: 'github.com/Cap-go',
-    description: 'Play short audio files with low latency using native audio engine for games and apps',
-    href: 'https://github.com/Cap-go/capacitor-native-audio/',
-    title: 'Native Audio',
-  },
-  {
-    name: '@capgo/capacitor-shake',
-    author: 'github.com/Cap-go',
-    description: 'Detect shake gestures on device for triggering actions like undo or feedback',
-    href: 'https://github.com/Cap-go/capacitor-shake/',
-    title: 'Shake',
-  },
-  {
-    name: '@capgo/capacitor-navigation-bar',
-    author: 'github.com/Cap-go',
-    description: 'Customize Android navigation bar color and visibility for immersive UI experiences',
-    href: 'https://github.com/Cap-go/capacitor-navigation-bar/',
-    title: 'Navigation Bar',
-  },
-  {
-    name: '@capgo/ivs-player',
-    author: 'github.com/Cap-go',
-    description: 'Stream ultra-low latency live video using Amazon Interactive Video Service (IVS)',
-    href: 'https://github.com/Cap-go/capacitor-ivs-player/',
-    title: 'IVS Player',
-  },
-  {
-    name: '@capgo/home-indicator',
-    author: 'github.com/Cap-go',
-    description: 'Hide or show iOS home indicator for fullscreen and immersive app experiences',
-    href: 'https://github.com/Cap-go/capacitor-home-indicator/',
-    title: 'Indicator',
-  },
-  {
-    name: '@capgo/native-purchases',
-    author: 'github.com/Cap-go',
-    description: 'Implement native in-app purchases and subscriptions for iOS and Android with simple API',
-    href: 'https://github.com/Cap-go/capacitor-native-purchases/',
-    title: 'Native Purchases',
-  },
-  {
-    name: '@capgo/capacitor-data-storage-sqlite',
-    author: 'github.com/Cap-go',
-    description: 'Store data locally using SQLite database with simple key-value API and encryption support',
-    href: 'https://github.com/Cap-go/capacitor-data-storage-sqlite/',
-    title: 'Data Storage',
-  },
-  {
-    name: '@capgo/capacitor-android-usagestatsmanager',
-    author: 'github.com/Cap-go',
-    description: 'Access Android usage statistics to track app usage time and screen time analytics',
-    href: 'https://github.com/Cap-go/capacitor-android-usagestatsmanager/',
-    title: 'Usage Stats Manager',
-  },
-  {
-    name: '@capgo/capacitor-streamcall',
-    author: 'github.com/Cap-go',
-    description: 'Integrate video calling and live streaming with Stream SDK for real-time communication',
-    href: 'https://github.com/Cap-go/capacitor-streamcall/',
-    title: 'Streamcall',
-  },
-  {
-    name: '@capgo/capacitor-autofill-save-password',
-    author: 'github.com/Cap-go',
-    description: 'Prompt users to save passwords to device autofill for seamless login experience',
-    href: 'https://github.com/Cap-go/capacitor-autofill-save-password/',
-    title: 'Autofill Save Password',
-  },
-  {
-    name: '@capgo/capacitor-social-login',
-    author: 'github.com/Cap-go',
-    description: 'Authenticate users with Google, Facebook, and Apple Sign-In for easy social login',
-    href: 'https://github.com/Cap-go/capacitor-social-login/',
-    title: 'Social Login',
-  },
-  {
-    name: '@capgo/capacitor-jw-player',
-    author: 'github.com/Cap-go',
-    description: 'Embed JW Player for professional video streaming with ads and analytics support',
-    href: 'https://github.com/Cap-go/capacitor-jw-player/',
-    title: 'JW Player',
-  },
-  {
-    name: '@capgo/capacitor-ricoh360-camera-plugin',
-    author: 'github.com/Cap-go',
-    description: 'Control Ricoh Theta 360-degree cameras for immersive panoramic photography',
-    href: 'https://github.com/Cap-go/capacitor-ricoh360-camera-plugin/',
-    title: 'Ricoh360 Camera',
-  },
-  {
-    name: '@capgo/capacitor-admob',
-    author: 'github.com/Cap-go',
-    description: 'Monetize your app with Google AdMob banner, interstitial, and rewarded ads',
-    href: 'https://github.com/Cap-go/capacitor-admob/',
-    title: 'AdMob',
-  },
-  {
-    name: '@capgo/capacitor-alarm',
-    author: 'github.com/Cap-go',
-    description: 'Schedule native alarms and notifications even when app is closed',
-    href: 'https://github.com/Cap-go/capacitor-alarm/',
-    title: 'Alarm',
-  },
-  {
-    name: '@capgo/capacitor-android-inline-install',
-    author: 'github.com/Cap-go',
-    description: 'Install app updates directly within the app without leaving to Play Store',
-    href: 'https://github.com/Cap-go/capacitor-android-inline-install/',
-    title: 'Android Inline Install',
-  },
-  {
-    name: '@capgo/capacitor-android-kiosk',
-    author: 'github.com/Cap-go',
-    description: 'Lock Android devices into kiosk mode with launcher functionality and hardware key control',
-    href: 'https://github.com/Cap-go/capacitor-android-kiosk/',
-    title: 'Android Kiosk',
-  },
-  {
-    name: '@capgo/capacitor-appinsights',
-    author: 'github.com/Cap-go',
-    description: 'Track app usage, performance metrics, and user behavior with Apptopia AppInsights',
-    href: 'https://github.com/Cap-go/capacitor-appinsights/',
-    title: 'AppInsights',
-  },
-  {
-    name: '@capgo/capacitor-app-attest',
-    author: 'github.com/Cap-go',
-    description: 'Capacitor plugin for cross-platform device attestation using Apple App Attest and Google Play Integrity Standard',
-    href: 'https://github.com/Cap-go/capacitor-app-attest/',
-    title: 'App Attest',
-  },
-  {
-    name: '@capgo/capacitor-audiosession',
-    author: 'github.com/Cap-go',
-    description: 'Configure iOS audio session for background playback, mixing, and routing control',
-    href: 'https://github.com/Cap-go/capacitor-audiosession/',
-    title: 'Audio Session',
-  },
-  {
-    name: '@capgo/capacitor-background-geolocation',
-    author: 'github.com/Cap-go',
-    description: 'Track device location continuously in background with battery-efficient geofencing',
-    href: 'https://github.com/Cap-go/capacitor-background-geolocation/',
-    title: 'Background Geolocation',
-  },
-  {
-    name: '@capgo/capacitor-document-scanner',
-    author: 'github.com/Cap-go',
-    description: 'Scan documents with auto edge detection, perspective correction, and PDF export',
-    href: 'https://github.com/Cap-go/capacitor-document-scanner/',
-    title: 'Document Scanner',
-  },
-  {
-    name: '@capgo/capacitor-downloader',
-    author: 'github.com/Cap-go',
-    description: 'Download large files in background with progress tracking and pause/resume support',
-    href: 'https://github.com/Cap-go/capacitor-downloader/',
-    title: 'Downloader',
-  },
-  {
-    name: '@capgo/capacitor-env',
-    author: 'github.com/Cap-go',
-    description: 'Securely manage environment variables and configuration across different build environments',
-    href: 'https://github.com/Cap-go/capacitor-env/',
-    title: 'Env',
-  },
-  {
-    name: '@capgo/capacitor-ffmpeg',
-    author: 'github.com/Cap-go',
-    description: 'Video encoding and processing powered by FFmpeg for compression and conversion',
-    href: 'https://github.com/Cap-go/capacitor-ffmpeg/',
-    title: 'FFmpeg',
-  },
-  {
-    name: '@capgo/capacitor-gtm',
-    author: 'github.com/Cap-go',
-    description: 'Google Tag Manager integration for analytics and tracking',
-    href: 'https://github.com/Cap-go/capacitor-gtm/',
-    title: 'GTM',
-  },
-  {
-    name: '@capgo/capacitor-rudderstack',
-    author: 'github.com/Cap-go',
-    description: 'RudderStack analytics, identity resolution, screen tracking, and delivery controls for Capacitor',
-    href: 'https://github.com/Cap-go/capacitor-rudderstack/',
-    title: 'RudderStack',
-  },
-  {
-    name: '@capgo/capacitor-health',
-    author: 'github.com/Cap-go',
-    description: 'Access health and fitness data from native health platforms',
-    href: 'https://github.com/Cap-go/capacitor-health/',
-    title: 'Health',
-  },
-  {
-    name: '@capgo/capacitor-is-root',
-    author: 'github.com/Cap-go',
-    description: 'Detect rooted Android or jailbroken iOS devices to enhance app security',
-    href: 'https://github.com/Cap-go/capacitor-is-root/',
-    title: 'Is Root',
-  },
-  {
-    name: '@capgo/capacitor-app-tracking-transparency',
-    author: 'github.com/Cap-go',
-    description: 'Request and check iOS App Tracking Transparency permission for IDFA access',
-    href: 'https://github.com/Cap-go/capacitor-app-tracking-transparency/',
-    title: 'App Tracking Transparency',
-  },
-  {
-    name: '@capgo/capacitor-launch-navigator',
-    author: 'github.com/Cap-go',
-    description: 'Open navigation apps like Google Maps or Apple Maps with directions to destinations',
-    href: 'https://github.com/Cap-go/capacitor-launch-navigator/',
-    title: 'Launch Navigator',
-  },
-  {
-    name: '@capgo/capacitor-live-reload',
-    author: 'github.com/Cap-go',
-    description: 'Connect to your dev server for instant hot reloading during development',
-    href: 'https://github.com/Cap-go/capacitor-live-reload/',
-    title: 'Live Reload',
-  },
-  {
-    name: '@capgo/capacitor-llm',
-    author: 'github.com/Cap-go',
-    description: 'Run Large Language Models locally on-device with Apple Intelligence and MLX support',
-    href: 'https://github.com/Cap-go/capacitor-llm/',
-    title: 'LLM',
-  },
-  {
-    name: '@capgo/capacitor-media-session',
-    author: 'github.com/Cap-go',
-    description: 'Control media playback from lock screen and notification center',
-    href: 'https://github.com/Cap-go/capacitor-media-session/',
-    title: 'Media Session',
-  },
-  {
-    name: '@capgo/capacitor-mux-player',
-    author: 'github.com/Cap-go',
-    description: 'Stream adaptive bitrate video with Mux player for optimized playback quality',
-    href: 'https://github.com/Cap-go/capacitor-mux-player/',
-    title: 'Mux Player',
-  },
-  {
-    name: '@capgo/capacitor-pay',
-    author: 'github.com/Cap-go',
-    description: 'Accept payments with Apple Pay and Google Pay for seamless checkout experience',
-    href: 'https://github.com/Cap-go/capacitor-pay/',
-    title: 'Pay',
-  },
-  {
-    name: '@capgo/capacitor-privacy-screen',
-    author: 'github.com/Cap-go',
-    description: 'Protect app content in Android screenshots and obscure the iOS app switcher snapshot',
-    href: 'https://github.com/Cap-go/capacitor-privacy-screen/',
-    title: 'Privacy Screen',
-  },
-  {
-    name: '@capgo/capacitor-pdf-generator',
-    author: 'github.com/Cap-go',
-    description: 'Create PDF documents from HTML templates for invoices, reports, and receipts',
-    href: 'https://github.com/Cap-go/capacitor-pdf-generator/',
-    title: 'PDF Generator',
-  },
-  {
-    name: '@capgo/capacitor-persistent-account',
-    author: 'github.com/Cap-go',
-    description: 'Preserve user authentication and account data across app reinstalls and updates',
-    href: 'https://github.com/Cap-go/capacitor-persistent-account/',
-    title: 'Persistent Account',
-  },
-  {
-    name: '@capgo/capacitor-photo-library',
-    author: 'github.com/Cap-go',
-    description: 'Browse, save, and manage photos and videos in device photo library with permissions',
-    href: 'https://github.com/Cap-go/capacitor-photo-library/',
-    title: 'Photo Library',
-  },
-  {
-    name: '@capgo/capacitor-sim',
-    author: 'github.com/Cap-go',
-    description: 'Retrieve SIM card information including carrier name, country code, and phone number',
-    href: 'https://github.com/Cap-go/capacitor-sim/',
-    title: 'SIM',
-  },
-  {
-    name: '@capgo/capacitor-speech-recognition',
-    author: 'github.com/Cap-go',
-    description: 'Natural, low-latency speech recognition with streaming partial results and cross-platform parity',
-    href: 'https://github.com/Cap-go/capacitor-speech-recognition/',
-    title: 'Speech Recognition',
-  },
-  {
-    name: '@capgo/capacitor-textinteraction',
-    author: 'github.com/Cap-go',
-    description: 'Enable advanced text selection, copy-paste, and interaction features in web views',
-    href: 'https://github.com/Cap-go/capacitor-textinteraction/',
-    title: 'Text Interaction',
-  },
-  {
-    name: '@capgo/capacitor-twilio-voice',
-    author: 'github.com/Cap-go',
-    description: 'Make and receive VoIP calls with Twilio Voice for in-app calling functionality',
-    href: 'https://github.com/Cap-go/capacitor-twilio-voice/',
-    title: 'Twilio Voice',
-  },
-  {
-    name: '@capgo/capacitor-video-player',
-    author: 'github.com/Cap-go',
-    description: 'Native video playback with subtitles, fullscreen, and comprehensive controls',
-    href: 'https://github.com/Cap-go/capacitor-video-player/',
-    title: 'Video Player',
-  },
-  {
-    name: '@capgo/capacitor-volume-buttons',
-    author: 'github.com/Cap-go',
-    description: 'Capture hardware volume button presses for custom app controls and shortcuts',
-    href: 'https://github.com/Cap-go/capacitor-volume-buttons/',
-    title: 'Volume Buttons',
-  },
-  {
-    name: '@capgo/capacitor-youtube-player',
-    author: 'github.com/Cap-go',
-    description: 'Embed YouTube videos with full player API control and event handling',
-    href: 'https://github.com/Cap-go/capacitor-youtube-player/',
-    title: 'YouTube Player',
-  },
-  {
-    name: '@capgo/capacitor-wechat',
-    author: 'github.com/Cap-go',
-    description: 'WeChat SDK for Capacitor - enables authentication, sharing, payments, and mini-programs',
-    href: 'https://github.com/Cap-go/capacitor-wechat/',
-    title: 'WeChat',
-  },
-  {
-    name: '@capgo/capacitor-ibeacon',
-    author: 'github.com/Cap-go',
-    description: 'iBeacon plugin for Capacitor - proximity detection and beacon region monitoring',
-    href: 'https://github.com/Cap-go/capacitor-ibeacon/',
-    title: 'iBeacon',
-  },
-  {
-    name: '@capgo/capacitor-nfc',
-    author: 'github.com/Cap-go',
-    description: 'Native NFC tag discovery, reading and writing for Capacitor apps on iOS and Android',
-    href: 'https://github.com/Cap-go/capacitor-nfc/',
-    title: 'NFC',
-  },
-  {
-    name: '@capgo/capacitor-age-range',
-    author: 'github.com/Cap-go',
-    description: 'Cross-platform age range detection using Google Play Age Signals (Android) and Apple DeclaredAgeRange (iOS)',
-    href: 'https://github.com/Cap-go/capacitor-age-range/',
-    title: 'Age Range',
-  },
-  {
-    name: '@capgo/capacitor-persona',
-    author: 'github.com/Cap-go',
-    description: 'Launch Persona identity verification inquiries with native iOS and Android SDKs',
-    href: 'https://github.com/Cap-go/capacitor-persona/',
-    title: 'Persona',
-  },
-  {
-    name: '@capgo/capacitor-intune',
-    author: 'github.com/Cap-go',
-    description: 'Microsoft Intune MAM, app protection policy, app config, and MSAL authentication for Capacitor',
-    href: 'https://github.com/Cap-go/capacitor-intune/',
-    title: 'Intune',
-  },
-  {
-    name: '@capgo/capacitor-android-age-signals',
-    author: 'github.com/Cap-go',
-    description: 'Google Play Age Signals API wrapper - detect supervised accounts and verified users',
-    href: 'https://github.com/Cap-go/capacitor-android-age-signals/',
-    title: 'Age Signals',
-  },
-  {
-    name: '@capgo/capacitor-barometer',
-    author: 'github.com/Cap-go',
-    description: 'Access device barometer for atmospheric pressure and altitude readings',
-    href: 'https://github.com/Cap-go/capacitor-barometer/',
-    title: 'Barometer',
-  },
-  {
-    name: '@capgo/capacitor-accelerometer',
-    author: 'github.com/Cap-go',
-    description: 'Read device accelerometer for motion detection and orientation tracking',
-    href: 'https://github.com/Cap-go/capacitor-accelerometer/',
-    title: 'Accelerometer',
-  },
-  {
-    name: '@capgo/capacitor-contacts',
-    author: 'github.com/Cap-go',
-    description: 'Access and manage device contacts with read and write capabilities',
-    href: 'https://github.com/Cap-go/capacitor-contacts/',
-    title: 'Contacts',
-  },
-  {
-    name: '@capgo/capacitor-audio-recorder',
-    author: 'github.com/Cap-go',
-    description: 'Record audio on iOS, Android, and Web with simple controls and formats',
-    href: 'https://github.com/Cap-go/capacitor-audio-recorder/',
-    title: 'Audio Recorder',
-  },
-  {
-    name: '@capgo/capacitor-share-target',
-    author: 'github.com/Cap-go',
-    description: 'Receive shared content from other apps - text, images, and files',
-    href: 'https://github.com/Cap-go/capacitor-share-target/',
-    title: 'Share Target',
-  },
-  {
-    name: '@capgo/capacitor-realtimekit',
-    author: 'github.com/Cap-go',
-    description: 'Cloudflare Calls integration with built-in UI for video meetings and real-time communication',
-    href: 'https://github.com/Cap-go/capacitor-realtimekit/',
-    title: 'RealtimeKit',
-  },
-  {
-    name: '@capgo/capacitor-pedometer',
-    author: 'github.com/Cap-go',
-    description: 'Track steps, distance, pace, cadence, and floors with device pedometer sensors',
-    href: 'https://github.com/Cap-go/capacitor-pedometer/',
-    title: 'Pedometer',
-  },
-  {
-    name: '@capgo/capacitor-fast-sql',
-    author: 'github.com/Cap-go',
-    description: 'High-performance native SQLite with custom protocol for efficient sync operations and IndexedDB replacement',
-    href: 'https://github.com/Cap-go/capacitor-fast-sql/',
-    title: 'Fast SQL',
-  },
-  {
-    name: '@capgo/capacitor-file-compressor',
-    author: 'github.com/Cap-go',
-    description: 'Capacitor plugin for efficient image compression supporting PNG, JPEG, and WebP formats across iOS, Android, and Web platforms',
-    href: 'https://github.com/Cap-go/capacitor-file-compressor/',
-    title: 'File Compressor',
-  },
-  {
-    name: '@capgo/capacitor-speech-synthesis',
-    author: 'github.com/Cap-go',
-    description: 'Synthesize speech from text with full control over language, voice, pitch, rate, and volume.',
-    href: 'https://github.com/Cap-go/capacitor-speech-synthesis/',
-    title: 'Speech Synthesis',
-  },
-  {
-    name: '@capgo/capacitor-ssl-pinning',
-    author: 'github.com/Cap-go',
-    description: 'Pin HTTPS connections to bundled certificates for CapacitorHttp on iOS and Android',
-    href: 'https://github.com/Cap-go/capacitor-ssl-pinning/',
-    title: 'SSL Pinning',
-  },
-  {
-    name: '@capgo/capacitor-printer',
-    author: 'github.com/Cap-go',
-    description: 'Capacitor plugin for printing documents, HTML, PDFs, images and web views',
-    href: 'https://github.com/Cap-go/capacitor-printer/',
-    title: 'Printer',
-  },
-  {
-    name: '@capgo/capacitor-zip',
-    author: 'github.com/Cap-go',
-    description: 'A free Capacitor plugin for zipping and unzipping files on iOS, Android, and Web.',
-    href: 'https://github.com/Cap-go/capacitor-zip/',
-    title: 'Zip',
-  },
-  {
-    name: '@capgo/capacitor-zebra-datawedge',
-    author: 'github.com/Cap-go',
-    description: 'Manage Zebra DataWedge profiles, notifications, queries, and scan triggers on Zebra Android devices',
-    href: 'https://github.com/Cap-go/capacitor-zebra-datawedge/',
-    title: 'Zebra DataWedge',
-  },
-  {
-    name: '@capgo/capacitor-wifi',
-    author: 'github.com/Cap-go',
-    description: 'Manage WiFi connectivity for your Capacitor app',
-    href: 'https://github.com/Cap-go/capacitor-wifi/',
-    title: 'WiFi',
-  },
-  {
-    name: '@capgo/capacitor-screen-orientation',
-    author: 'github.com/Cap-go',
-    description: 'Screen orientation plugin with support for bypassing orientation lock',
-    href: 'https://github.com/Cap-go/capacitor-screen-orientation/',
-    title: 'Screen Orientation',
-  },
-  {
-    name: '@capgo/capacitor-webview-guardian',
-    author: 'github.com/Cap-go',
-    description: 'Detect when the WebView was killed in the background and relaunch it on foreground',
-    href: 'https://github.com/Cap-go/capacitor-webview-guardian/',
-    title: 'WebView Guardian',
-  },
-  {
-    name: '@capgo/capacitor-webview-version-checker',
-    author: 'github.com/Cap-go',
-    description: 'Capacitor plugin for checking Android WebView version freshness and guiding users to native update flows',
-    href: 'https://github.com/Cap-go/capacitor-webview-version-checker/',
-    title: 'WebView Version Checker',
-  },
-  {
-    name: '@capgo/capacitor-firebase-analytics',
-    author: 'github.com/Cap-go',
-    description: 'Capacitor plugin for Firebase Analytics',
-    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/analytics',
-    title: 'Firebase Analytics',
-  },
-  {
-    name: '@capgo/capacitor-firebase-app',
-    author: 'github.com/Cap-go',
-    description: 'Capacitor plugin for Firebase App',
-    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/app',
-    title: 'Firebase App',
-  },
-  {
-    name: '@capgo/capacitor-firebase-app-check',
-    author: 'github.com/Cap-go',
-    description: 'Capacitor plugin for Firebase App Check',
-    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/app-check',
-    title: 'Firebase App Check',
-  },
-  {
-    name: '@capgo/capacitor-firebase-authentication',
-    author: 'github.com/Cap-go',
-    description: 'Capacitor plugin for Firebase Authentication',
-    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/authentication',
-    title: 'Firebase Authentication',
-  },
-  {
-    name: '@capgo/capacitor-firebase-crashlytics',
-    author: 'github.com/Cap-go',
-    description: 'Capacitor plugin for Firebase Crashlytics',
-    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/crashlytics',
-    title: 'Firebase Crashlytics',
-  },
-  {
-    name: '@capgo/capacitor-firebase-firestore',
-    author: 'github.com/Cap-go',
-    description: 'Capacitor plugin for Firebase Cloud Firestore',
-    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/firestore',
-    title: 'Firebase Firestore',
-  },
-  {
-    name: '@capgo/capacitor-firebase-functions',
-    author: 'github.com/Cap-go',
-    description: 'Capacitor plugin for Firebase Cloud Functions',
-    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/functions',
-    title: 'Firebase Functions',
-  },
-  {
-    name: '@capgo/capacitor-firebase-messaging',
-    author: 'github.com/Cap-go',
-    description: 'Capacitor plugin for Firebase Cloud Messaging (FCM)',
-    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/messaging',
-    title: 'Firebase Messaging',
-  },
-  {
-    name: '@capgo/capacitor-firebase-performance',
-    author: 'github.com/Cap-go',
-    description: 'Capacitor plugin for Firebase Performance Monitoring',
-    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/performance',
-    title: 'Firebase Performance',
-  },
-  {
-    name: '@capgo/capacitor-firebase-remote-config',
-    author: 'github.com/Cap-go',
-    description: 'Capacitor plugin for Firebase Remote Config',
-    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/remote-config',
-    title: 'Firebase Remote Config',
-  },
-  {
-    name: '@capgo/capacitor-firebase-storage',
-    author: 'github.com/Cap-go',
-    description: 'Capacitor plugin for Firebase Cloud Storage',
-    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/storage',
-    title: 'Firebase Storage',
-  },
-  {
-    name: '@capacitor-plus/core',
-    author: 'github.com/Cap-go',
-    description: 'Capacitor+ is an automated, always-synced fork of Capacitor with merged community PRs and rapid releases',
-    href: 'https://github.com/Cap-go/capacitor-plus/',
-    title: 'Capacitor+ Core',
-  },
-  {
-    name: '@capacitor-plus/cli',
-    author: 'github.com/Cap-go',
-    description: 'Capacitor+ CLI - Same as official CLI but with community improvements merged faster',
-    href: 'https://github.com/Cap-go/capacitor-plus/',
-    title: 'Capacitor+ CLI',
-  },
-  {
-    name: '@capacitor-plus/android',
-    author: 'github.com/Cap-go',
-    description: 'Capacitor+ Android runtime - Drop-in replacement with merged community fixes',
-    href: 'https://github.com/Cap-go/capacitor-plus/',
-    title: 'Capacitor+ Android',
-  },
-  {
-    name: '@capacitor-plus/ios',
-    author: 'github.com/Cap-go',
-    description: 'Capacitor+ iOS runtime - Drop-in replacement with merged community fixes',
-    href: 'https://github.com/Cap-go/capacitor-plus/',
-    title: 'Capacitor+ iOS',
-  },
-  {
-    name: '@capgo/capacitor-compass',
-    author: 'github.com/Cap-go',
-    description: 'Read device compass heading in degrees with continuous updates and permission handling',
-    href: 'https://github.com/Cap-go/capacitor-compass/',
-    title: 'Compass',
-  },
-  {
-    name: '@capgo/capacitor-file',
-    author: 'github.com/Cap-go',
-    description: 'Full-featured file system plugin for reading, writing, and managing files and directories',
-    href: 'https://github.com/Cap-go/capacitor-file/',
-    title: 'File',
-  },
-  {
-    name: '@capgo/capacitor-bluetooth-low-energy',
-    author: 'github.com/Cap-go',
-    description: 'Full-featured BLE plugin for scanning, connecting, reading, writing, and receiving notifications from Bluetooth devices',
-    href: 'https://github.com/Cap-go/capacitor-bluetooth-low-energy/',
-    title: 'Bluetooth Low Energy',
-  },
-  {
-    name: '@capgo/capacitor-keep-awake',
-    author: 'github.com/Cap-go',
-    description: 'Prevent device screen from dimming or sleeping for video players, navigation, and presentations',
-    href: 'https://github.com/Cap-go/capacitor-keep-awake/',
-    title: 'Keep Awake',
-  },
-  {
-    name: '@capgo/capacitor-in-app-review',
-    author: 'github.com/Cap-go',
-    description: 'Prompt users to submit app store ratings and reviews without leaving your app using native iOS and Android APIs',
-    href: 'https://github.com/Cap-go/capacitor-in-app-review/',
-    title: 'In App Review',
-  },
-  {
-    name: '@capgo/capacitor-file-picker',
-    author: 'github.com/Cap-go',
-    description: 'Pick files, images, videos, and directories with full native support for iOS and Android including HEIC conversion',
-    href: 'https://github.com/Cap-go/capacitor-file-picker/',
-    title: 'File Picker',
-  },
-  {
-    name: '@capgo/capacitor-watch',
-    author: 'github.com/Cap-go',
-    description: 'Apple Watch communication with bidirectional messaging between iPhone and watchOS apps',
-    href: 'https://github.com/Cap-go/capacitor-watch/',
-    title: 'Watch',
-  },
-  {
-    name: '@capgo/capacitor-brightness',
-    author: 'github.com/Cap-go',
-    description: 'Control device screen brightness programmatically with support for app-specific and system-wide control',
-    href: 'https://github.com/Cap-go/capacitor-brightness/',
-    title: 'Brightness',
-  },
-  {
-    name: '@capgo/capacitor-light-sensor',
-    author: 'github.com/Cap-go',
-    description: 'Access the ambient light sensor to measure illuminance levels in lux with real-time updates',
-    href: 'https://github.com/Cap-go/capacitor-light-sensor/',
-    title: 'Light Sensor',
-  },
-  {
-    name: '@capgo/capacitor-video-thumbnails',
-    author: 'github.com/Cap-go',
-    description: 'Generate thumbnail images from local and remote video files at specific timestamps',
-    href: 'https://github.com/Cap-go/capacitor-video-thumbnails/',
-    title: 'Video Thumbnails',
-  },
-  {
-    name: '@capgo/capacitor-intent-launcher',
-    author: 'github.com/Cap-go',
-    description: 'Launch Android intents, open system settings, and interact with other apps using the Intent system',
-    href: 'https://github.com/Cap-go/capacitor-intent-launcher/',
-    title: 'Intent Launcher',
-  },
-]
+const actionDefinitionRows = String.raw`@capgo/native-market|github.com/Cap-go|Deep link users directly to your app page on Google Play Store or Apple App Store|https://github.com/Cap-go/capacitor-native-market/|Native Market
+@capgo/capacitor-native-biometric|github.com/Cap-go|Secure authentication using Face ID, Touch ID, and Android biometric APIs|https://github.com/Cap-go/capacitor-native-biometric/|Native Biometric
+@capgo/camera-preview|github.com/Cap-go|Display live camera feed as overlay with customizable controls and capture capabilities|https://github.com/Cap-go/capacitor-camera-preview/|Camera Preview
+@capgo/capacitor-updater|github.com/Cap-go|Deploy live updates instantly to your users without app store review delays|https://github.com/Cap-go/capacitor-updater/|Updater
+@capgo/capacitor-uploader|github.com/Cap-go|Upload large files reliably in background with progress tracking and retry support|https://github.com/Cap-go/capacitor-uploader/|Uploader
+@revenuecat/purchases-capacitor|github.com/Cap-go|Implement in-app subscriptions and purchases with RevenueCat SDK for cross-platform monetization|https://github.com/RevenueCat/purchases-capacitor/|Purchases
+@capgo/capacitor-flash|github.com/Cap-go|Control device flashlight and torch with simple on/off toggle functionality|https://github.com/Cap-go/capacitor-flash/|Flash
+@capgo/capacitor-screen-recorder|github.com/Cap-go|Capture screen recordings with audio for tutorials, demos, and bug reports|https://github.com/Cap-go/capacitor-screen-recorder/|Screen Recorder
+@capgo/capacitor-crisp|github.com/Cap-go|Integrate Crisp live chat and customer support directly into your mobile app|https://github.com/Cap-go/capacitor-crisp/|Crisp
+@capgo/capacitor-intercom|github.com/Cap-go|Integrate Intercom live chat, help center, and support workflows in your Capacitor app|https://github.com/Cap-go/capacitor-intercom/|Intercom
+@capgo/capacitor-appsflyer|github.com/Cap-go|Add AppsFlyer attribution, analytics, deferred deep links, and OneLink support to your Capacitor app|https://github.com/Cap-go/capacitor-appsflyer/|AppsFlyer
+@capgo/nativegeocoder|github.com/Cap-go|Convert addresses to coordinates and coordinates to addresses using native geocoding|https://github.com/Cap-go/capacitor-nativegeocoder/|Native Geocoder
+@capgo/inappbrowser|github.com/Cap-go|Open web pages in a customizable in-app browser without leaving your application|https://github.com/Cap-go/capacitor-inappbrowser/|In App Browser
+@capgo/capacitor-mqtt|github.com/Cap-go|MQTT support for real-time messaging across iOS, Android, and Web.|https://github.com/Cap-go/capacitor-mqtt/|MQTT
+@capgo/capacitor-mute|github.com/Cap-go|Detect device mute switch state for iOS devices to handle audio playback appropriately|https://github.com/Cap-go/capacitor-mute/|Mute
+@capgo/native-audio|github.com/Cap-go|Play short audio files with low latency using native audio engine for games and apps|https://github.com/Cap-go/capacitor-native-audio/|Native Audio
+@capgo/capacitor-shake|github.com/Cap-go|Detect shake gestures on device for triggering actions like undo or feedback|https://github.com/Cap-go/capacitor-shake/|Shake
+@capgo/capacitor-navigation-bar|github.com/Cap-go|Customize Android navigation bar color and visibility for immersive UI experiences|https://github.com/Cap-go/capacitor-navigation-bar/|Navigation Bar
+@capgo/ivs-player|github.com/Cap-go|Stream ultra-low latency live video using Amazon Interactive Video Service (IVS)|https://github.com/Cap-go/capacitor-ivs-player/|IVS Player
+@capgo/home-indicator|github.com/Cap-go|Hide or show iOS home indicator for fullscreen and immersive app experiences|https://github.com/Cap-go/capacitor-home-indicator/|Indicator
+@capgo/native-purchases|github.com/Cap-go|Implement native in-app purchases and subscriptions for iOS and Android with simple API|https://github.com/Cap-go/capacitor-native-purchases/|Native Purchases
+@capgo/capacitor-data-storage-sqlite|github.com/Cap-go|Store data locally using SQLite database with simple key-value API and encryption support|https://github.com/Cap-go/capacitor-data-storage-sqlite/|Data Storage
+@capgo/capacitor-android-usagestatsmanager|github.com/Cap-go|Access Android usage statistics to track app usage time and screen time analytics|https://github.com/Cap-go/capacitor-android-usagestatsmanager/|Usage Stats Manager
+@capgo/capacitor-streamcall|github.com/Cap-go|Integrate video calling and live streaming with Stream SDK for real-time communication|https://github.com/Cap-go/capacitor-streamcall/|Streamcall
+@capgo/capacitor-autofill-save-password|github.com/Cap-go|Prompt users to save passwords to device autofill for seamless login experience|https://github.com/Cap-go/capacitor-autofill-save-password/|Autofill Save Password
+@capgo/capacitor-social-login|github.com/Cap-go|Authenticate users with Google, Facebook, and Apple Sign-In for easy social login|https://github.com/Cap-go/capacitor-social-login/|Social Login
+@capgo/capacitor-jw-player|github.com/Cap-go|Embed JW Player for professional video streaming with ads and analytics support|https://github.com/Cap-go/capacitor-jw-player/|JW Player
+@capgo/capacitor-ricoh360-camera-plugin|github.com/Cap-go|Control Ricoh Theta 360-degree cameras for immersive panoramic photography|https://github.com/Cap-go/capacitor-ricoh360-camera-plugin/|Ricoh360 Camera
+@capgo/capacitor-admob|github.com/Cap-go|Monetize your app with Google AdMob banner, interstitial, and rewarded ads|https://github.com/Cap-go/capacitor-admob/|AdMob
+@capgo/capacitor-alarm|github.com/Cap-go|Schedule native alarms and notifications even when app is closed|https://github.com/Cap-go/capacitor-alarm/|Alarm
+@capgo/capacitor-android-inline-install|github.com/Cap-go|Install app updates directly within the app without leaving to Play Store|https://github.com/Cap-go/capacitor-android-inline-install/|Android Inline Install
+@capgo/capacitor-android-kiosk|github.com/Cap-go|Lock Android devices into kiosk mode with launcher functionality and hardware key control|https://github.com/Cap-go/capacitor-android-kiosk/|Android Kiosk
+@capgo/capacitor-appinsights|github.com/Cap-go|Track app usage, performance metrics, and user behavior with Apptopia AppInsights|https://github.com/Cap-go/capacitor-appinsights/|AppInsights
+@capgo/capacitor-app-attest|github.com/Cap-go|Capacitor plugin for cross-platform device attestation using Apple App Attest and Google Play Integrity Standard|https://github.com/Cap-go/capacitor-app-attest/|App Attest
+@capgo/capacitor-audiosession|github.com/Cap-go|Configure iOS audio session for background playback, mixing, and routing control|https://github.com/Cap-go/capacitor-audiosession/|Audio Session
+@capgo/capacitor-background-geolocation|github.com/Cap-go|Track device location continuously in background with battery-efficient geofencing|https://github.com/Cap-go/capacitor-background-geolocation/|Background Geolocation
+@capgo/capacitor-document-scanner|github.com/Cap-go|Scan documents with auto edge detection, perspective correction, and PDF export|https://github.com/Cap-go/capacitor-document-scanner/|Document Scanner
+@capgo/capacitor-downloader|github.com/Cap-go|Download large files in background with progress tracking and pause/resume support|https://github.com/Cap-go/capacitor-downloader/|Downloader
+@capgo/capacitor-env|github.com/Cap-go|Securely manage environment variables and configuration across different build environments|https://github.com/Cap-go/capacitor-env/|Env
+@capgo/capacitor-ffmpeg|github.com/Cap-go|Video encoding and processing powered by FFmpeg for compression and conversion|https://github.com/Cap-go/capacitor-ffmpeg/|FFmpeg
+@capgo/capacitor-gtm|github.com/Cap-go|Google Tag Manager integration for analytics and tracking|https://github.com/Cap-go/capacitor-gtm/|GTM
+@capgo/capacitor-rudderstack|github.com/Cap-go|RudderStack analytics, identity resolution, screen tracking, and delivery controls for Capacitor|https://github.com/Cap-go/capacitor-rudderstack/|RudderStack
+@capgo/capacitor-health|github.com/Cap-go|Access health and fitness data from native health platforms|https://github.com/Cap-go/capacitor-health/|Health
+@capgo/capacitor-is-root|github.com/Cap-go|Detect rooted Android or jailbroken iOS devices to enhance app security|https://github.com/Cap-go/capacitor-is-root/|Is Root
+@capgo/capacitor-app-tracking-transparency|github.com/Cap-go|Request and check iOS App Tracking Transparency permission for IDFA access|https://github.com/Cap-go/capacitor-app-tracking-transparency/|App Tracking Transparency
+@capgo/capacitor-launch-navigator|github.com/Cap-go|Open navigation apps like Google Maps or Apple Maps with directions to destinations|https://github.com/Cap-go/capacitor-launch-navigator/|Launch Navigator
+@capgo/capacitor-live-reload|github.com/Cap-go|Connect to your dev server for instant hot reloading during development|https://github.com/Cap-go/capacitor-live-reload/|Live Reload
+@capgo/capacitor-llm|github.com/Cap-go|Run Large Language Models locally on-device with Apple Intelligence and MLX support|https://github.com/Cap-go/capacitor-llm/|LLM
+@capgo/capacitor-media-session|github.com/Cap-go|Control media playback from lock screen and notification center|https://github.com/Cap-go/capacitor-media-session/|Media Session
+@capgo/capacitor-mux-player|github.com/Cap-go|Stream adaptive bitrate video with Mux player for optimized playback quality|https://github.com/Cap-go/capacitor-mux-player/|Mux Player
+@capgo/capacitor-pay|github.com/Cap-go|Accept payments with Apple Pay and Google Pay for seamless checkout experience|https://github.com/Cap-go/capacitor-pay/|Pay
+@capgo/capacitor-privacy-screen|github.com/Cap-go|Protect app content in Android screenshots and obscure the iOS app switcher snapshot|https://github.com/Cap-go/capacitor-privacy-screen/|Privacy Screen
+@capgo/capacitor-pdf-generator|github.com/Cap-go|Create PDF documents from HTML templates for invoices, reports, and receipts|https://github.com/Cap-go/capacitor-pdf-generator/|PDF Generator
+@capgo/capacitor-persistent-account|github.com/Cap-go|Preserve user authentication and account data across app reinstalls and updates|https://github.com/Cap-go/capacitor-persistent-account/|Persistent Account
+@capgo/capacitor-photo-library|github.com/Cap-go|Browse, save, and manage photos and videos in device photo library with permissions|https://github.com/Cap-go/capacitor-photo-library/|Photo Library
+@capgo/capacitor-sim|github.com/Cap-go|Retrieve SIM card information including carrier name, country code, and phone number|https://github.com/Cap-go/capacitor-sim/|SIM
+@capgo/capacitor-speech-recognition|github.com/Cap-go|Natural, low-latency speech recognition with streaming partial results and cross-platform parity|https://github.com/Cap-go/capacitor-speech-recognition/|Speech Recognition
+@capgo/capacitor-textinteraction|github.com/Cap-go|Enable advanced text selection, copy-paste, and interaction features in web views|https://github.com/Cap-go/capacitor-textinteraction/|Text Interaction
+@capgo/capacitor-twilio-voice|github.com/Cap-go|Make and receive VoIP calls with Twilio Voice for in-app calling functionality|https://github.com/Cap-go/capacitor-twilio-voice/|Twilio Voice
+@capgo/capacitor-video-player|github.com/Cap-go|Native video playback with subtitles, fullscreen, and comprehensive controls|https://github.com/Cap-go/capacitor-video-player/|Video Player
+@capgo/capacitor-volume-buttons|github.com/Cap-go|Capture hardware volume button presses for custom app controls and shortcuts|https://github.com/Cap-go/capacitor-volume-buttons/|Volume Buttons
+@capgo/capacitor-youtube-player|github.com/Cap-go|Embed YouTube videos with full player API control and event handling|https://github.com/Cap-go/capacitor-youtube-player/|YouTube Player
+@capgo/capacitor-wechat|github.com/Cap-go|WeChat SDK for Capacitor - enables authentication, sharing, payments, and mini-programs|https://github.com/Cap-go/capacitor-wechat/|WeChat
+@capgo/capacitor-ibeacon|github.com/Cap-go|iBeacon plugin for Capacitor - proximity detection and beacon region monitoring|https://github.com/Cap-go/capacitor-ibeacon/|iBeacon
+@capgo/capacitor-nfc|github.com/Cap-go|Native NFC tag discovery, reading and writing for Capacitor apps on iOS and Android|https://github.com/Cap-go/capacitor-nfc/|NFC
+@capgo/capacitor-age-range|github.com/Cap-go|Cross-platform age range detection using Google Play Age Signals (Android) and Apple DeclaredAgeRange (iOS)|https://github.com/Cap-go/capacitor-age-range/|Age Range
+@capgo/capacitor-persona|github.com/Cap-go|Launch Persona identity verification inquiries with native iOS and Android SDKs|https://github.com/Cap-go/capacitor-persona/|Persona
+@capgo/capacitor-intune|github.com/Cap-go|Microsoft Intune MAM, app protection policy, app config, and MSAL authentication for Capacitor|https://github.com/Cap-go/capacitor-intune/|Intune
+@capgo/capacitor-android-age-signals|github.com/Cap-go|Google Play Age Signals API wrapper - detect supervised accounts and verified users|https://github.com/Cap-go/capacitor-android-age-signals/|Age Signals
+@capgo/capacitor-barometer|github.com/Cap-go|Access device barometer for atmospheric pressure and altitude readings|https://github.com/Cap-go/capacitor-barometer/|Barometer
+@capgo/capacitor-accelerometer|github.com/Cap-go|Read device accelerometer for motion detection and orientation tracking|https://github.com/Cap-go/capacitor-accelerometer/|Accelerometer
+@capgo/capacitor-contacts|github.com/Cap-go|Access and manage device contacts with read and write capabilities|https://github.com/Cap-go/capacitor-contacts/|Contacts
+@capgo/capacitor-audio-recorder|github.com/Cap-go|Record audio on iOS, Android, and Web with simple controls and formats|https://github.com/Cap-go/capacitor-audio-recorder/|Audio Recorder
+@capgo/capacitor-share-target|github.com/Cap-go|Receive shared content from other apps - text, images, and files|https://github.com/Cap-go/capacitor-share-target/|Share Target
+@capgo/capacitor-realtimekit|github.com/Cap-go|Cloudflare Calls integration with built-in UI for video meetings and real-time communication|https://github.com/Cap-go/capacitor-realtimekit/|RealtimeKit
+@capgo/capacitor-pedometer|github.com/Cap-go|Track steps, distance, pace, cadence, and floors with device pedometer sensors|https://github.com/Cap-go/capacitor-pedometer/|Pedometer
+@capgo/capacitor-fast-sql|github.com/Cap-go|High-performance native SQLite with custom protocol for efficient sync operations and IndexedDB replacement|https://github.com/Cap-go/capacitor-fast-sql/|Fast SQL
+@capgo/capacitor-file-compressor|github.com/Cap-go|Capacitor plugin for efficient image compression supporting PNG, JPEG, and WebP formats across iOS, Android, and Web platforms|https://github.com/Cap-go/capacitor-file-compressor/|File Compressor
+@capgo/capacitor-speech-synthesis|github.com/Cap-go|Synthesize speech from text with full control over language, voice, pitch, rate, and volume.|https://github.com/Cap-go/capacitor-speech-synthesis/|Speech Synthesis
+@capgo/capacitor-ssl-pinning|github.com/Cap-go|Pin HTTPS connections to bundled certificates for CapacitorHttp on iOS and Android|https://github.com/Cap-go/capacitor-ssl-pinning/|SSL Pinning
+@capgo/capacitor-printer|github.com/Cap-go|Capacitor plugin for printing documents, HTML, PDFs, images and web views|https://github.com/Cap-go/capacitor-printer/|Printer
+@capgo/capacitor-zip|github.com/Cap-go|A free Capacitor plugin for zipping and unzipping files on iOS, Android, and Web.|https://github.com/Cap-go/capacitor-zip/|Zip
+@capgo/capacitor-zebra-datawedge|github.com/Cap-go|Manage Zebra DataWedge profiles, notifications, queries, and scan triggers on Zebra Android devices|https://github.com/Cap-go/capacitor-zebra-datawedge/|Zebra DataWedge
+@capgo/capacitor-wifi|github.com/Cap-go|Manage WiFi connectivity for your Capacitor app|https://github.com/Cap-go/capacitor-wifi/|WiFi
+@capgo/capacitor-screen-orientation|github.com/Cap-go|Screen orientation plugin with support for bypassing orientation lock|https://github.com/Cap-go/capacitor-screen-orientation/|Screen Orientation
+@capgo/capacitor-webview-guardian|github.com/Cap-go|Detect when the WebView was killed in the background and relaunch it on foreground|https://github.com/Cap-go/capacitor-webview-guardian/|WebView Guardian
+@capgo/capacitor-webview-version-checker|github.com/Cap-go|Capacitor plugin for checking Android WebView version freshness and guiding users to native update flows|https://github.com/Cap-go/capacitor-webview-version-checker/|WebView Version Checker
+@capgo/capacitor-firebase-analytics|github.com/Cap-go|Capacitor plugin for Firebase Analytics|https://github.com/Cap-go/capacitor-firebase/tree/main/packages/analytics|Firebase Analytics
+@capgo/capacitor-firebase-app|github.com/Cap-go|Capacitor plugin for Firebase App|https://github.com/Cap-go/capacitor-firebase/tree/main/packages/app|Firebase App
+@capgo/capacitor-firebase-app-check|github.com/Cap-go|Capacitor plugin for Firebase App Check|https://github.com/Cap-go/capacitor-firebase/tree/main/packages/app-check|Firebase App Check
+@capgo/capacitor-firebase-authentication|github.com/Cap-go|Capacitor plugin for Firebase Authentication|https://github.com/Cap-go/capacitor-firebase/tree/main/packages/authentication|Firebase Authentication
+@capgo/capacitor-firebase-crashlytics|github.com/Cap-go|Capacitor plugin for Firebase Crashlytics|https://github.com/Cap-go/capacitor-firebase/tree/main/packages/crashlytics|Firebase Crashlytics
+@capgo/capacitor-firebase-firestore|github.com/Cap-go|Capacitor plugin for Firebase Cloud Firestore|https://github.com/Cap-go/capacitor-firebase/tree/main/packages/firestore|Firebase Firestore
+@capgo/capacitor-firebase-functions|github.com/Cap-go|Capacitor plugin for Firebase Cloud Functions|https://github.com/Cap-go/capacitor-firebase/tree/main/packages/functions|Firebase Functions
+@capgo/capacitor-firebase-messaging|github.com/Cap-go|Capacitor plugin for Firebase Cloud Messaging (FCM)|https://github.com/Cap-go/capacitor-firebase/tree/main/packages/messaging|Firebase Messaging
+@capgo/capacitor-firebase-performance|github.com/Cap-go|Capacitor plugin for Firebase Performance Monitoring|https://github.com/Cap-go/capacitor-firebase/tree/main/packages/performance|Firebase Performance
+@capgo/capacitor-firebase-remote-config|github.com/Cap-go|Capacitor plugin for Firebase Remote Config|https://github.com/Cap-go/capacitor-firebase/tree/main/packages/remote-config|Firebase Remote Config
+@capgo/capacitor-firebase-storage|github.com/Cap-go|Capacitor plugin for Firebase Cloud Storage|https://github.com/Cap-go/capacitor-firebase/tree/main/packages/storage|Firebase Storage
+@capacitor-plus/core|github.com/Cap-go|Capacitor+ is an automated, always-synced fork of Capacitor with merged community PRs and rapid releases|https://github.com/Cap-go/capacitor-plus/|Capacitor+ Core
+@capacitor-plus/cli|github.com/Cap-go|Capacitor+ CLI - Same as official CLI but with community improvements merged faster|https://github.com/Cap-go/capacitor-plus/|Capacitor+ CLI
+@capacitor-plus/android|github.com/Cap-go|Capacitor+ Android runtime - Drop-in replacement with merged community fixes|https://github.com/Cap-go/capacitor-plus/|Capacitor+ Android
+@capacitor-plus/ios|github.com/Cap-go|Capacitor+ iOS runtime - Drop-in replacement with merged community fixes|https://github.com/Cap-go/capacitor-plus/|Capacitor+ iOS
+@capgo/capacitor-compass|github.com/Cap-go|Read device compass heading in degrees with continuous updates and permission handling|https://github.com/Cap-go/capacitor-compass/|Compass
+@capgo/capacitor-file|github.com/Cap-go|Full-featured file system plugin for reading, writing, and managing files and directories|https://github.com/Cap-go/capacitor-file/|File
+@capgo/capacitor-bluetooth-low-energy|github.com/Cap-go|Full-featured BLE plugin for scanning, connecting, reading, writing, and receiving notifications from Bluetooth devices|https://github.com/Cap-go/capacitor-bluetooth-low-energy/|Bluetooth Low Energy
+@capgo/capacitor-keep-awake|github.com/Cap-go|Prevent device screen from dimming or sleeping for video players, navigation, and presentations|https://github.com/Cap-go/capacitor-keep-awake/|Keep Awake
+@capgo/capacitor-in-app-review|github.com/Cap-go|Prompt users to submit app store ratings and reviews without leaving your app using native iOS and Android APIs|https://github.com/Cap-go/capacitor-in-app-review/|In App Review
+@capgo/capacitor-file-picker|github.com/Cap-go|Pick files, images, videos, and directories with full native support for iOS and Android including HEIC conversion|https://github.com/Cap-go/capacitor-file-picker/|File Picker
+@capgo/capacitor-watch|github.com/Cap-go|Apple Watch communication with bidirectional messaging between iPhone and watchOS apps|https://github.com/Cap-go/capacitor-watch/|Watch
+@capgo/capacitor-brightness|github.com/Cap-go|Control device screen brightness programmatically with support for app-specific and system-wide control|https://github.com/Cap-go/capacitor-brightness/|Brightness
+@capgo/capacitor-light-sensor|github.com/Cap-go|Access the ambient light sensor to measure illuminance levels in lux with real-time updates|https://github.com/Cap-go/capacitor-light-sensor/|Light Sensor
+@capgo/capacitor-video-thumbnails|github.com/Cap-go|Generate thumbnail images from local and remote video files at specific timestamps|https://github.com/Cap-go/capacitor-video-thumbnails/|Video Thumbnails
+@capgo/capacitor-intent-launcher|github.com/Cap-go|Launch Android intents, open system settings, and interact with other apps using the Intent system|https://github.com/Cap-go/capacitor-intent-launcher/|Intent Launcher`.trim().split('\n')
+
+export const actions: Action[] = actionDefinitionRows.map((row) => {
+  const [name, author, description, href, title] = row.split('|')
+  return { name, author, description, href, title }
+})
