@@ -76,7 +76,7 @@ const toHeroiconName = (value) =>
     .toLowerCase()}-solid`
 const pluginIcons = [
   ...new Set(['arrow-up-right-solid', ...[...readFileSync(WEB_PLUGIN_CONFIG, 'utf8').matchAll(/icon:\s*'([^']+)'/g)].map(([, iconName]) => toHeroiconName(iconName))]),
-].sort()
+].sort((left, right) => left.localeCompare(right))
 
 export default defineConfig({
   trailingSlash: 'always',
