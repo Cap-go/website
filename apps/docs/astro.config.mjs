@@ -1,17 +1,12 @@
-import cloudflare from '@astrojs/cloudflare'
-import sitemap from '@astrojs/sitemap'
 import starlight from '@astrojs/starlight'
 import starlightDocSearch from '@astrojs/starlight-docsearch'
-import { paraglideVitePlugin } from '@inlang/paraglide-js'
-import tailwindcss from '@tailwindcss/vite'
-import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
-import icon from 'astro-icon'
-import { defineConfig, sessionDrivers } from 'astro/config'
+import { defineConfig } from 'astro/config'
 import { fileURLToPath } from 'node:url'
 import starlightImageZoom from 'starlight-image-zoom'
 import starlightLlmsTxt from 'starlight-llms-txt'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import config from '../../configs.json'
+import { buildSharedAstroBaseConfig, buildSharedIntegrations, buildSharedViteConfig } from '../shared/astro-config.mjs'
 import { buildPluginIcons, getBuildConcurrency, getPageLastModDates, normalizeDirectoryPath } from '../shared/astro-utils.mjs'
 import { docsLlmsCustomSets } from './src/config/llmsCustomSets'
 import { defaultLocale, localeNames, locales } from './src/services/locale'
@@ -26,22 +21,15 @@ const docsExpludes = locales.map((locale) => `${locale}/**`)
 const pluginIcons = buildPluginIcons(WEB_PLUGIN_CONFIG)
 
 export default defineConfig({
-  trailingSlash: 'always',
-  site: `https://${config.base_domain.prod}`,
-  output: 'server',
-  adapter: cloudflare(),
-  session: {
-    driver: sessionDrivers.null(),
-  },
-  build: {
-    // Use all available build workers by default; override with BUILD_CONCURRENCY when needed.
-    concurrency: CPU_COUNT,
-    assets: '_docs',
-    // Skip HTML compression - let CDN handle it for faster builds
-    compressHTML: false,
-    // Keep Astro's default stylesheet optimization behavior.
-    inlineStylesheets: 'auto',
-  },
+  ...buildSharedAstroBaseConfig({
+    siteDomain: config.base_domain.prod,
+    locales,
+    defaultLocale,
+    cpuCount: CPU_COUNT,
+    build: {
+      assets: '_docs',
+    },
+  }),
   redirects: {
     '/docs/getting-started/': {
       status: 301,
@@ -56,49 +44,12 @@ export default defineConfig({
       destination: '/docs/plugins/updater/commonproblems/',
     },
   },
-  i18n: {
-    locales,
-    defaultLocale,
-    // fallback: locales
-    //   .filter((i) => i !== defaultLocale)
-    //   .reduce((r, h) => {
-    //     r[h] = defaultLocale
-    //     return r
-    //   }, {})
-    routing: {
-      redirectToDefaultLocale: false,
-    },
-  },
   integrations: [
-    icon({
-      include: {
-        heroicons: pluginIcons,
-      },
-    }),
-    i18n({
-      locales: localeNames,
+    ...buildSharedIntegrations({
+      pluginIcons,
       defaultLocale,
-      redirectDefaultLocale: true,
-      exclude: ['pages/**/*.json.ts', 'pages/api/**/*.ts'],
-    }),
-    sitemap({
-      i18n: {
-        defaultLocale,
-        locales: localeNames,
-      },
-      filter: filterSitemapByDefaultLocale({ defaultLocale }),
-      changefreq: 'weekly',
-      priority: 0.7,
-      lastmod: new Date(),
-      serialize(item) {
-        // Check if this URL matches a page with a known lastmod date
-        const urlPath = new URL(item.url).pathname
-        const lastmod = pageLastModDates.get(urlPath)
-        if (lastmod) {
-          item.lastmod = lastmod.toISOString()
-        }
-        return item
-      },
+      localeNames,
+      pageLastModDates,
     }),
     starlight({
       title: 'Capgo',
@@ -1009,56 +960,12 @@ export default defineConfig({
       ],
     }),
   ],
-  server: {
-    port: 3000,
-    open: false,
-    host: '0.0.0.0',
-  },
-  preview: {
-    port: 3000,
-    open: false,
-    host: '0.0.0.0',
-  },
-  vite: {
-    build: {
-      // Target modern JS to reduce transpilation overhead
-      target: 'es2022',
-      // Skip gzip/brotli size reporting during local builds.
-      reportCompressedSize: false,
-      // Increase chunk size warning limit
-      chunkSizeWarningLimit: 1000,
-      // Keep both JS and CSS on esbuild for the fastest production minification path.
-      minify: 'esbuild',
-      cssMinify: 'esbuild',
-      // Reduce chunk fragmentation overhead
-      rollupOptions: {
-        output: {
-          manualChunks: undefined,
-        },
-        // Maximize parallel file operations
-        maxParallelFileOps: CPU_COUNT * 3,
-      },
-    },
-    // Keep Astro's generated `/src/...` virtual imports resolvable during the build.
-    resolve: {
-      alias: [
-        { find: '@', replacement: SRC_DIR.slice(0, -1) },
-        { find: '~public', replacement: PUBLIC_DIR },
-        { find: /^\/src\//, replacement: SRC_DIR },
-      ],
-    },
-    // Optimize dependency pre-bundling
-    optimizeDeps: {
-      // Force include heavy deps to pre-bundle them once
-      include: ['mermaid'],
-    },
-    plugins: [
-      tailwindcss(),
-      paraglideVitePlugin({
-        outdir: './src/paraglide',
-        project: '../../project.inlang',
-        disableAsyncLocalStorage: true,
-      }),
+  vite: buildSharedViteConfig({
+    srcDir: SRC_DIR,
+    publicDir: PUBLIC_DIR,
+    cpuCount: CPU_COUNT,
+    optimizeDepsInclude: ['mermaid'],
+    extraPlugins: [
       viteStaticCopy({
         targets: [
           {
@@ -1076,9 +983,9 @@ export default defineConfig({
 
               // Handle index files
               if (fileName === 'index') {
-                if (segments.length === 1) {
-                  return 'index.md'
-                }
+              if (segments.length === 1) {
+                return 'index.md'
+              }
                 // Remove 'index' from the end and use parent folder name
                 segments.pop()
                 return `${segments.join('/')}.md`
@@ -1091,5 +998,5 @@ export default defineConfig({
         ],
       }),
     ],
-  },
+  }),
 })

@@ -52,8 +52,15 @@ export function toHeroiconName(value) {
 }
 
 export function buildPluginIcons(configPath) {
-  const iconNames = [...readFileSync(configPath, 'utf8').matchAll(/icon:\s*'([^']+)'/g)].map(([, iconName]) => toHeroiconName(iconName))
-  return [...new Set(['arrow-up-right-solid', ...iconNames])].sort((left, right) => left.localeCompare(right))
+  try {
+    const iconNames = [...readFileSync(configPath, 'utf8').matchAll(/icon:\s*'([^']+)'/g)].map(([, iconName]) => toHeroiconName(iconName))
+    return [...new Set(['arrow-up-right-solid', ...iconNames])].sort((left, right) => left.localeCompare(right))
+  } catch (error) {
+    throw new Error(
+      `Failed to read plugin config at ${configPath}. This build depends on apps/web/src/config/plugins.ts being present.`,
+      { cause: error },
+    )
+  }
 }
 
 export function getPageLastModDates() {
