@@ -11,6 +11,13 @@ on:
       - main
     paths:
       - 'apps/web/**'
+      - 'apps/shared/**'
+      - 'messages/**'
+      - 'project.inlang/**'
+      - 'scripts/**'
+      - 'configs.json'
+      - 'package.json'
+      - 'bun.lock'
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'

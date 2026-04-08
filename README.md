@@ -70,10 +70,10 @@ Deployments are handled with [`wrangler deploy`](https://developers.cloudflare.c
 
 Production deploys are split into two GitHub workflows:
 
-- `Deploy Docs` runs on pushes to `main` that touch `apps/docs/**`
-- `Deploy Web` runs on pushes to `main` that touch `apps/web/**`
+- `Deploy Docs` runs on pushes to `main` that touch `apps/docs/**` or docs build inputs shared with the workspace
+- `Deploy Web` runs on pushes to `main` that touch `apps/web/**` or web build inputs shared with the workspace
 
-If a push changes both app folders, both workflows are queued, but the shared concurrency group keeps production deploys serialized so they never run at the same time.
+Shared workspace changes can queue both workflows, but the shared concurrency group keeps production deploys serialized so they never run at the same time.
 
 ## Project structure
 
