@@ -2,10 +2,10 @@ import fg from 'fast-glob'
 import matter from 'gray-matter'
 import { readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { locales } from '../../src/services/locale'
+import { locales } from '../../apps/web/src/services/locale'
 import { commonReplacements } from '../commonReplacements'
 
-const contentDirectory = path.join(process.cwd(), 'src', 'content')
+const contentDirectory = path.join(process.cwd(), 'apps', 'web', 'src', 'content')
 
 const patterns = locales.map((locale) => `**/${locale}/**/*.{md,mdx}`)
 const files = await fg(patterns, {

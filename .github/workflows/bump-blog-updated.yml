@@ -25,7 +25,7 @@ jobs:
         id: changed-files
         run: |
           # Get files changed in the last commit
-          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep '^src/content/blog/.*\.md$' || echo "")
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep '^apps/web/src/content/blog/.*\.md$' || echo "")
           echo "Changed blog files: $CHANGED_FILES"
           
           if [ -n "$CHANGED_FILES" ]; then
@@ -65,7 +65,7 @@ jobs:
           
           # Check if there are any changes to commit
           if [ -n "$(git status --porcelain)" ]; then
-            git add src/content/blog/
+            git add apps/web/src/content/blog/
             git commit -m "chore: auto-bump updated_at dates for modified blog posts"
             git push
           else

@@ -1,0 +1,14 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "allowJs": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "~public/*": ["./public/*"]
+    },
+    "types": ["bun-types"]
+  },
+  "exclude": ["scripts/**/*", "dist/**/*", ".astro/**/*"]
+}

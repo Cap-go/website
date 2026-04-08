@@ -2,7 +2,7 @@ import fg from 'fast-glob'
 import matter from 'gray-matter'
 import { readFileSync, unlinkSync } from 'node:fs'
 
-const blogFiles = fg.sync(['src/content/blog/**/*.md*'], { dot: true, absolute: true })
+const blogFiles = fg.sync(['apps/web/src/content/blog/**/*.md*'], { dot: true, absolute: true })
 let changedCount = 0
 for (const filePath of blogFiles) {
   const content = readFileSync(filePath, 'utf8')

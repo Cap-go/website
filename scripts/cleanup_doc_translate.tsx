@@ -2,9 +2,9 @@ import fg from 'fast-glob'
 import { createSpinner } from 'nanospinner'
 import { existsSync, rmSync, statSync, unlinkSync } from 'node:fs'
 import { dirname, join } from 'node:path'
-import { defaultLocale, locales } from '../src/services/locale'
+import { defaultLocale, locales } from '../apps/web/src/services/locale'
 
-const contentDirectory = join(process.cwd(), 'src', 'content')
+const contentDirectory = join(process.cwd(), 'apps', 'docs', 'src', 'content')
 const blogDirectory = join(contentDirectory, 'docs')
 const languages = locales.filter((lang) => lang !== defaultLocale)
 const defaultBlogDirectory = join(blogDirectory, 'docs')

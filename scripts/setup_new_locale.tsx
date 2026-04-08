@@ -2,7 +2,7 @@ import { execSync } from 'child_process'
 import fg from 'fast-glob'
 import fs from 'node:fs'
 import path from 'node:path'
-import { locales } from '../src/services/locale'
+import { locales } from '../apps/web/src/services/locale'
 
 const newLocale = 'fr'
 
@@ -24,14 +24,14 @@ const copyDirectory = (source: string, destination: string) => {
   })
 }
 
-console.log(`Copying src/pages to src/pages/${newLocale}...`)
-copyDirectory(path.join(process.cwd(), 'src', 'pages'), path.join(process.cwd(), 'src', 'pages', newLocale))
+console.log(`Copying apps/web/src/pages to apps/web/src/pages/${newLocale}...`)
+copyDirectory(path.join(process.cwd(), 'apps', 'web', 'src', 'pages'), path.join(process.cwd(), 'apps', 'web', 'src', 'pages', newLocale))
 console.log(`Done.\n`)
-console.log(`Copying src/content/blog to src/content/${newLocale}/blog...`)
-copyDirectory(path.join(process.cwd(), 'src', 'content', 'blog'), path.join(process.cwd(), 'src', 'content', newLocale, 'blog'))
+console.log(`Copying apps/web/src/content/blog to apps/web/src/content/${newLocale}/blog...`)
+copyDirectory(path.join(process.cwd(), 'apps', 'web', 'src', 'content', 'blog'), path.join(process.cwd(), 'apps', 'web', 'src', 'content', newLocale, 'blog'))
 console.log(`Done.\n`)
 
 console.log('Generating blog translations...')
-execSync(`npm run generate:blog:translations -- --locale=${newLocale}`, { stdio: 'inherit' })
+execSync(`bun run blogs:translate_all -- --locale=${newLocale}`, { stdio: 'inherit' })
 console.log('Generating plugin translations...')
-execSync(`npm run generate:plugin:translations -- --locale=${newLocale}`, { stdio: 'inherit' })
+execSync(`bun run plugins:translate_all -- --locale=${newLocale}`, { stdio: 'inherit' })
