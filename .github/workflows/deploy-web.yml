@@ -66,10 +66,9 @@ jobs:
         with:
           path: |
             apps/web/.astro
-            apps/docs/.astro
             node_modules/.astro
             node_modules/.cache
-          key: ${{ runner.os }}-astro-web-${{ hashFiles('**/bun.lock') }}-${{ hashFiles('apps/web/**', 'apps/docs/**', 'messages/**', 'project.inlang/**', 'scripts/**', 'configs.json') }}
+          key: ${{ runner.os }}-astro-web-${{ hashFiles('**/bun.lock') }}-${{ hashFiles('apps/web/**', 'apps/shared/**', 'messages/**', 'project.inlang/**', 'scripts/**', 'configs.json') }}
           restore-keys: |
             ${{ runner.os }}-astro-web-${{ hashFiles('**/bun.lock') }}-
             ${{ runner.os }}-astro-web-
@@ -77,8 +76,8 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: cd apps/web && bun run check
       - run: bun run build:prepare
-      # build:after merges docs sitemap and llms artifacts into the web worker bundle.
-      - run: bun run build
+      - run: bun run clean:build-cache
+      - run: bun run build:web
         env:
           PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
