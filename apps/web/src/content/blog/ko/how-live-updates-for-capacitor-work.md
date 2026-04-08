@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-18T06:14:25.862Z
-updated_at: 2025-03-18T15:14:16.781Z
+updated_at: 2026-04-08T14:34:13.000Z
 head_image: /capgo_banner.webp
 head_image_alt: 라이브 업데이트 아키텍처
 keywords: >-

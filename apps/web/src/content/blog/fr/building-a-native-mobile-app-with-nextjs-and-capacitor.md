@@ -12,7 +12,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-02-21T00:00:00.000Z
-updated_at: 2025-05-12T00:00:00.000Z
+updated_at: 2026-04-08T14:34:13.000Z
 head_image: /next_capgo.webp
 head_image_alt: Illustration de Next.js 15 et Capacitor
 keywords: >-

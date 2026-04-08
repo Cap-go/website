@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-05-01T00:00:00.000Z
-updated_at: 2026-01-01T17:38:39.000Z
+updated_at: 2026-04-08T14:34:13.000Z
 head_image: /stripe_apple.webp
 head_image_alt: Stripe payment implementation in Capacitor apps
 keywords: capacitor, stripe, payment links, app store guidelines, iOS, digital goods, in-app purchases, external payments

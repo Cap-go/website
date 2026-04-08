@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-05T00:00:00.000Z
-updated_at: 2023-06-05T00:00:00.000Z
+updated_at: 2026-04-08T14:34:13.000Z
 head_image: /native_app_look.webp
 head_image_alt: 네이티브 앱 모양 일러스트레이션
 keywords: 'tailwind css, css, mobile design, mobile app development'

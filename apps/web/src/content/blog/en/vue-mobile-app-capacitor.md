@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-08T00:00:00.000Z
-updated_at: 2023-06-29T00:00:00.000Z
+updated_at: 2026-04-08T14:34:13.000Z
 head_image: /vue_capacitor.webp
 head_image_alt: Vue and Capacitor illustration
 keywords: Vue, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates

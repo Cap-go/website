@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-06-02T00:00:00.000Z
-updated_at: 2024-06-14T00:00:00.000Z
+updated_at: 2026-04-08T14:34:13.000Z
 head_image: /what-is-cordova-phone-gap.webp
 head_image_alt: 하이브리드와 네이티브 앱의 차이점을 설명하는 다이어그램.
 keywords: >-

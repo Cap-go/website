@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-11T00:00:00.000Z
-updated_at: 2023-06-11T00:00:00.000Z
+updated_at: 2026-04-08T14:34:13.000Z
 head_image: /react_native_vs_react_capacitor.webp
 head_image_alt: React NativeとCapacitorの比較イラスト
 keywords: >-

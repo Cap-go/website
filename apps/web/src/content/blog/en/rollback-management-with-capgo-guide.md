@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-26T13:02:38.165Z
-updated_at: 2025-05-26T13:27:57.206Z
+updated_at: 2026-04-08T14:34:13.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68341bdfd3b966198181c1ad-1748266077206.jpg
 head_image_alt: Mobile Development
 keywords: rollback management, app updates, automated rollbacks, error recovery, mobile app stability

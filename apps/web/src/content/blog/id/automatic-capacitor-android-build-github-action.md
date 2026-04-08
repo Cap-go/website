@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-10-27T00:00:00.000Z
-updated_at: 2025-12-31T01:19:38.000Z
+updated_at: 2026-04-08T14:34:13.000Z
 head_image: /fastlane_android.webp
 head_image_alt: Ilustrasi GitHub Actions Fastlane Google Play
 keywords: >-
