@@ -1,0 +1,79 @@
+name: Deploy Web
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/web/**'
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
+jobs:
+  typos:
+    name: Check for Typos
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+      - name: Check for Typos
+        uses: crate-ci/typos@v1.44.0
+
+  build:
+    runs-on: ubuntu-latest
+    needs: typos
+    timeout-minutes: 30
+    env:
+      NODE_OPTIONS: '--max-old-space-size=16384'
+      UV_THREADPOOL_SIZE: '32'
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Cache bun modules
+        uses: actions/cache@v5
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+
+      - name: Cache Astro build
+        uses: actions/cache@v5
+        with:
+          path: |
+            apps/web/.astro
+            apps/docs/.astro
+            node_modules/.astro
+            node_modules/.cache
+          key: ${{ runner.os }}-astro-web-${{ hashFiles('**/bun.lock') }}-${{ hashFiles('apps/web/**', 'apps/docs/**', 'messages/**', 'project.inlang/**', 'scripts/**', 'configs.json') }}
+          restore-keys: |
+            ${{ runner.os }}-astro-web-${{ hashFiles('**/bun.lock') }}-
+            ${{ runner.os }}-astro-web-
+
+      - run: bun install --frozen-lockfile
+      - run: bun run check
+      - run: bun run build:prepare
+      - run: bun run build
+        env:
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
+          ORAMA_CLOUD_ENDPOINT: ${{ secrets.ORAMA_CLOUD_ENDPOINT }}
+          CLOUDFLARE_TURNSTILE_SITE_KEY: ${{ secrets.CLOUDFLARE_TURNSTILE_SITE_KEY }}
+      - run: bun run build:after
+      - run: bun run deploy:web
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

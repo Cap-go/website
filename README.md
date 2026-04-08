@@ -68,13 +68,12 @@ Deployments are handled with [`wrangler deploy`](https://developers.cloudflare.c
 - `bun run deploy:docs` deploys the documentation worker
 - `bun run deploy` is intentionally disabled so docs and web cannot be published together
 
-The `main` deploy workflow only publishes one worker per push:
+Production deploys are split into two GitHub workflows:
 
-- docs-only changes publish the docs worker
-- web-only changes publish the web worker
-- mixed docs/web changes, or shared changes that affect both apps, must be split before merge and are rejected by the deploy workflow
+- `Deploy Docs` runs on pushes to `main` that touch `apps/docs/**`
+- `Deploy Web` runs on pushes to `main` that touch `apps/web/**`
 
-Manual deployments also require choosing a single worker target, and production deploys are serialized so docs and web are never published at the same time.
+If a push changes both app folders, both workflows are queued, but the shared concurrency group keeps production deploys serialized so they never run at the same time.
 
 ## Project structure
 
