@@ -37,11 +37,7 @@ async function translateFrontmatter(frontmatter: Record<string, any>, locale: st
   await Promise.all(
     frontmatterFieldsToTranslate.map(async (field) => {
       if (translatedFrontmatter[field]) {
-        translatedFrontmatter[field] = await translateOrThrow(
-          translatedFrontmatter[field],
-          locale,
-          `Empty translation for ${field}`,
-        )
+        translatedFrontmatter[field] = await translateOrThrow(translatedFrontmatter[field], locale, `Empty translation for ${field}`)
       }
     }),
   )
@@ -63,10 +59,47 @@ function replaceMatchesWithTokens(content: string, regex: RegExp, tokenPrefix: s
 }
 
 function restoreProtectedContent(content: string, replacements: Array<[string, string]>): string {
-  return replacements.reduce(
-    (restoredContent, [token, value]) => restoredContent.replaceAll(token, value),
-    content,
-  )
+  return replacements.reduce((restoredContent, [token, value]) => restoredContent.replaceAll(token, value), content)
+}
+
+function replaceHtmlTagsWithTokens(content: string) {
+  const replacements: Array<[string, string]> = []
+  let protectedContent = ''
+  let currentIndex = 0
+
+  while (currentIndex < content.length) {
+    const openingIndex = content.indexOf('<', currentIndex)
+    if (openingIndex === -1) {
+      protectedContent += content.slice(currentIndex)
+      break
+    }
+
+    protectedContent += content.slice(currentIndex, openingIndex)
+
+    const closingIndex = content.indexOf('>', openingIndex + 1)
+    if (closingIndex === -1) {
+      protectedContent += content.slice(openingIndex)
+      break
+    }
+
+    const candidate = content.slice(openingIndex, closingIndex + 1)
+    const tagBody = candidate.slice(1, -1).trim()
+    const firstCharacter = tagBody[0]
+    const looksLikeHtmlTag = !!tagBody && (firstCharacter === '!' || firstCharacter === '?' || firstCharacter === '/' || /[A-Za-z]/.test(firstCharacter))
+
+    if (!looksLikeHtmlTag) {
+      protectedContent += '<'
+      currentIndex = openingIndex + 1
+      continue
+    }
+
+    const token = `[[HTML_TAG_${replacements.length}]]`
+    replacements.push([token, candidate])
+    protectedContent += token
+    currentIndex = closingIndex + 1
+  }
+
+  return { content: protectedContent, replacements }
 }
 
 async function translateContentParagraphs(content: string, locale: string): Promise<string> {
@@ -89,13 +122,10 @@ async function translateContentParagraphs(content: string, locale: string): Prom
 }
 
 async function translateMarkdownContent(content: string, locale: string): Promise<string> {
-  const htmlTags = replaceMatchesWithTokens(content, /<[^>]+>/g, 'HTML_TAG')
+  const htmlTags = replaceHtmlTagsWithTokens(content)
   const codeBlocks = replaceMatchesWithTokens(htmlTags.content, /```[\s\S]*?(?:```|$)/g, 'CODE_BLOCK')
   const translatedContent = await translateContentParagraphs(codeBlocks.content, locale)
-  return restoreProtectedContent(
-    restoreProtectedContent(translatedContent, codeBlocks.replacements),
-    htmlTags.replacements,
-  )
+  return restoreProtectedContent(restoreProtectedContent(translatedContent, codeBlocks.replacements), htmlTags.replacements)
 }
 
 export async function translateBlogFile(file: string, locale: string): Promise<void> {
