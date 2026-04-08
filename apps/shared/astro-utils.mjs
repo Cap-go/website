@@ -7,6 +7,7 @@ export function getBuildConcurrency() {
   const configuredConcurrency = Number.parseInt(process.env.BUILD_CONCURRENCY ?? '', 10)
   return Number.isFinite(configuredConcurrency) && configuredConcurrency > 0 ? configuredConcurrency : availableParallelism
 }
+// test deploy
 
 export function normalizeDirectoryPath(path) {
   const normalized = path.replaceAll('\\', '/')
