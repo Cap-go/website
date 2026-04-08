@@ -4,6 +4,7 @@ Console Tutorial|step-by-step tutorial to get started with Capgo Console and liv
 Public API|full reference documentation for public API|docs/public-api/**
 Plugin Accelerometer|accelerometer sensor plugin for detecting device motion and orientation|docs/plugins/accelerometer/**
 Plugin AdMob|Google AdMob plugin for mobile advertising integration|docs/plugins/admob/**
+Plugin Age Range|cross-platform age range detection plugin|docs/plugins/age-range/**
 Plugin Age Signals|Android age signals plugin for age verification|docs/plugins/age-signals/**
 Plugin Alarm|alarm and notification scheduling plugin|docs/plugins/alarm/**
 Plugin Android Inline Install|Android inline app installation plugin|docs/plugins/android-inline-install/**
@@ -12,6 +13,7 @@ Plugin Android Kiosk|Android kiosk mode plugin for locked-down device experience
 Plugin AppInsights|Microsoft Application Insights analytics plugin|docs/plugins/appinsights/**
 Plugin AppsFlyer|AppsFlyer mobile attribution, analytics, and deep linking plugin|docs/plugins/appsflyer/**
 Plugin App Attest|cross-platform app attestation plugin using Apple App Attest and Google Play Integrity Standard|docs/plugins/app-attest/**
+Plugin App Tracking Transparency|iOS app tracking transparency permission plugin|docs/plugins/app-tracking-transparency/**
 Plugin Audio Recorder|audio recording plugin for capturing microphone input|docs/plugins/audio-recorder/**
 Plugin Audio Session|iOS audio session configuration plugin|docs/plugins/audiosession/**
 Plugin Autofill Save Password|autofill and password save plugin for credential management|docs/plugins/autofill-save-password/**
@@ -49,6 +51,7 @@ Plugin JW Player|JW Player video integration plugin|docs/plugins/jw-player/**
 Plugin Keep Awake|screen wake lock plugin to prevent sleep|docs/plugins/keep-awake/**
 Plugin Launch Navigator|native maps navigation plugin|docs/plugins/launch-navigator/**
 Plugin Light Sensor|ambient light sensor plugin|docs/plugins/light-sensor/**
+Plugin Live Activities|iOS Live Activities and Dynamic Island plugin|docs/plugins/live-activities/**
 Plugin Live Reload|development live reload plugin|docs/plugins/live-reload/**
 Plugin LLM|on-device large language model plugin|docs/plugins/llm/**
 Plugin Media Session|media session and playback controls plugin|docs/plugins/media-session/**
@@ -84,6 +87,7 @@ Plugin Speech Synthesis|text-to-speech synthesis plugin|docs/plugins/speech-synt
 Plugin SSL Pinning|certificate pinning plugin for CapacitorHttp requests|docs/plugins/ssl-pinning/**
 Plugin StreamCall|Stream video calling plugin|docs/plugins/streamcall/**
 Plugin Text Interaction|text selection and interaction plugin|docs/plugins/textinteraction/**
+Plugin Twilio Video|Twilio Video room integration plugin|docs/plugins/twilio-video/**
 Plugin Twilio Voice|Twilio voice calling plugin|docs/plugins/twilio-voice/**
 Plugin Uploader|file upload plugin with background support|docs/plugins/uploader/**
 Plugin Video Player|native video player plugin|docs/plugins/video-player/**
@@ -94,6 +98,7 @@ Plugin WeChat|WeChat integration plugin|docs/plugins/wechat/**
 Plugin Webview Guardian|webview security and protection plugin|docs/plugins/webview-guardian/**
 Plugin Webview Version Checker|Android WebView version validation plugin|docs/plugins/webview-version-checker/**
 Plugin WiFi|WiFi network information plugin|docs/plugins/wifi/**
+Plugin Widget Kit|WidgetKit and Live Activities template plugin|docs/plugins/widget-kit/**
 Plugin Zebra DataWedge|Zebra DataWedge plugin for barcode profiles, notifications, and scan intents|docs/plugins/zebra-datawedge/**
 Plugin YouTube Player|YouTube video player plugin|docs/plugins/youtube-player/**
 Plugin Zip|file compression and extraction plugin|docs/plugins/zip/**
@@ -107,7 +112,9 @@ Plugin Firebase Functions|Firebase Cloud Functions plugin|docs/plugins/firebase-
 Plugin Firebase Messaging|Firebase Cloud Messaging push notifications plugin|docs/plugins/firebase-messaging/**
 Plugin Firebase Performance|Firebase Performance Monitoring plugin|docs/plugins/firebase-performance/**
 Plugin Firebase Remote Config|Firebase Remote Config plugin|docs/plugins/firebase-remote-config/**
-Plugin Firebase Storage|Firebase Cloud Storage plugin|docs/plugins/firebase-storage/**`.trim().split('\n')
+Plugin Firebase Storage|Firebase Cloud Storage plugin|docs/plugins/firebase-storage/**`
+  .trim()
+  .split('\n')
 
 export const docsLlmsCustomSets = llmsCustomSetRows.map((row, index) => {
   const [label, description, ...paths] = row.split('|').map((part) => part.trim())

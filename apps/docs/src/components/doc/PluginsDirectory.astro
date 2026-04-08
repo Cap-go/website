@@ -1,0 +1,48 @@
+---
+import { CardGrid, LinkCard } from '@astrojs/starlight/components'
+import { actions } from '@/config/plugins'
+import { defaultLocale } from '@/services/locale'
+import { getPluginDocsSlugs, resolvePluginDocsSlug } from '@/services/pluginDocs'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const locale = Astro.locals.locale ?? defaultLocale
+const { localizedDocsSlugs, docsSlugs } = await getPluginDocsSlugs(locale)
+const seenPluginLinks = new Set<string>()
+
+const plugins = actions
+  .map((plugin) => {
+    const docsSlug = resolvePluginDocsSlug(plugin, docsSlugs)
+    if (docsSlug) {
+      const docsKey = `docs:${docsSlug}`
+      if (seenPluginLinks.has(docsKey)) return null
+
+      seenPluginLinks.add(docsKey)
+
+      const docsLocale = localizedDocsSlugs.has(docsSlug) ? locale : defaultLocale
+
+      return {
+        description: plugin.description,
+        href: getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`),
+        title: plugin.title,
+      }
+    }
+
+    const fallbackKey = `repo:${plugin.href}`
+    if (seenPluginLinks.has(fallbackKey)) return null
+    seenPluginLinks.add(fallbackKey)
+
+    return {
+      description: `${plugin.description} Opens the plugin repository until a dedicated docs page is available.`,
+      href: plugin.href,
+      title: plugin.title,
+    }
+  })
+  .filter((plugin): plugin is NonNullable<typeof plugin> => Boolean(plugin))
+  .sort((left, right) => left.title.localeCompare(right.title))
+---
+
+<p>{plugins.length} plugins currently resolve from the live Capgo registry. Dedicated docs open when available, and repository links remain visible for the rest.</p>
+
+<CardGrid>
+  {plugins.map((plugin) => <LinkCard title={plugin.title} description={plugin.description} href={plugin.href} />)}
+</CardGrid>

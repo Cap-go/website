@@ -19,10 +19,12 @@ export interface Plugin extends Action {
   locale?: string
 }
 
-const actionDefinitionRows = String.raw`@capgo/native-market|github.com/Cap-go|Deep link users directly to your app page on Google Play Store or Apple App Store|https://github.com/Cap-go/capacitor-native-market/|Native Market
+const actionDefinitionRows =
+  String.raw`@capgo/native-market|github.com/Cap-go|Deep link users directly to your app page on Google Play Store or Apple App Store|https://github.com/Cap-go/capacitor-native-market/|Native Market
 @capgo/capacitor-native-biometric|github.com/Cap-go|Secure authentication using Face ID, Touch ID, and Android biometric APIs|https://github.com/Cap-go/capacitor-native-biometric/|Native Biometric
 @capgo/camera-preview|github.com/Cap-go|Display live camera feed as overlay with customizable controls and capture capabilities|https://github.com/Cap-go/capacitor-camera-preview/|Camera Preview
 @capgo/capacitor-updater|github.com/Cap-go|Deploy live updates instantly to your users without app store review delays|https://github.com/Cap-go/capacitor-updater/|Updater
+@capgo/electron-updater|github.com/Cap-go|OTA live updates for Electron apps with the same API surface as capacitor-updater|https://github.com/Cap-go/electron-updater/|Electron Updater
 @capgo/capacitor-uploader|github.com/Cap-go|Upload large files reliably in background with progress tracking and retry support|https://github.com/Cap-go/capacitor-uploader/|Uploader
 @revenuecat/purchases-capacitor|github.com/Cap-go|Implement in-app subscriptions and purchases with RevenueCat SDK for cross-platform monetization|https://github.com/RevenueCat/purchases-capacitor/|Purchases
 @capgo/capacitor-flash|github.com/Cap-go|Control device flashlight and torch with simple on/off toggle functionality|https://github.com/Cap-go/capacitor-flash/|Flash
@@ -65,6 +67,7 @@ const actionDefinitionRows = String.raw`@capgo/native-market|github.com/Cap-go|D
 @capgo/capacitor-is-root|github.com/Cap-go|Detect rooted Android or jailbroken iOS devices to enhance app security|https://github.com/Cap-go/capacitor-is-root/|Is Root
 @capgo/capacitor-app-tracking-transparency|github.com/Cap-go|Request and check iOS App Tracking Transparency permission for IDFA access|https://github.com/Cap-go/capacitor-app-tracking-transparency/|App Tracking Transparency
 @capgo/capacitor-launch-navigator|github.com/Cap-go|Open navigation apps like Google Maps or Apple Maps with directions to destinations|https://github.com/Cap-go/capacitor-launch-navigator/|Launch Navigator
+@capgo/capacitor-live-activities|github.com/Cap-go|Manage iOS Live Activities and Dynamic Island layouts from Capacitor with JSON-driven templates|https://github.com/Cap-go/capacitor-live-activities/|Live Activities
 @capgo/capacitor-live-reload|github.com/Cap-go|Connect to your dev server for instant hot reloading during development|https://github.com/Cap-go/capacitor-live-reload/|Live Reload
 @capgo/capacitor-llm|github.com/Cap-go|Run Large Language Models locally on-device with Apple Intelligence and MLX support|https://github.com/Cap-go/capacitor-llm/|LLM
 @capgo/capacitor-media-session|github.com/Cap-go|Control media playback from lock screen and notification center|https://github.com/Cap-go/capacitor-media-session/|Media Session
@@ -77,6 +80,7 @@ const actionDefinitionRows = String.raw`@capgo/native-market|github.com/Cap-go|D
 @capgo/capacitor-sim|github.com/Cap-go|Retrieve SIM card information including carrier name, country code, and phone number|https://github.com/Cap-go/capacitor-sim/|SIM
 @capgo/capacitor-speech-recognition|github.com/Cap-go|Natural, low-latency speech recognition with streaming partial results and cross-platform parity|https://github.com/Cap-go/capacitor-speech-recognition/|Speech Recognition
 @capgo/capacitor-textinteraction|github.com/Cap-go|Enable advanced text selection, copy-paste, and interaction features in web views|https://github.com/Cap-go/capacitor-textinteraction/|Text Interaction
+@capgo/capacitor-twilio-video|github.com/Cap-go|Join Twilio Video rooms from Capacitor with native audio, camera, and room lifecycle events|https://github.com/Cap-go/capacitor-twilio-video/|Twilio Video
 @capgo/capacitor-twilio-voice|github.com/Cap-go|Make and receive VoIP calls with Twilio Voice for in-app calling functionality|https://github.com/Cap-go/capacitor-twilio-voice/|Twilio Voice
 @capgo/capacitor-video-player|github.com/Cap-go|Native video playback with subtitles, fullscreen, and comprehensive controls|https://github.com/Cap-go/capacitor-video-player/|Video Player
 @capgo/capacitor-volume-buttons|github.com/Cap-go|Capture hardware volume button presses for custom app controls and shortcuts|https://github.com/Cap-go/capacitor-volume-buttons/|Volume Buttons
@@ -128,10 +132,13 @@ const actionDefinitionRows = String.raw`@capgo/native-market|github.com/Cap-go|D
 @capgo/capacitor-in-app-review|github.com/Cap-go|Prompt users to submit app store ratings and reviews without leaving your app using native iOS and Android APIs|https://github.com/Cap-go/capacitor-in-app-review/|In App Review
 @capgo/capacitor-file-picker|github.com/Cap-go|Pick files, images, videos, and directories with full native support for iOS and Android including HEIC conversion|https://github.com/Cap-go/capacitor-file-picker/|File Picker
 @capgo/capacitor-watch|github.com/Cap-go|Apple Watch communication with bidirectional messaging between iPhone and watchOS apps|https://github.com/Cap-go/capacitor-watch/|Watch
+@capgo/capacitor-widget-kit|github.com/Cap-go|Build iOS widgets and Live Activities from Capacitor with SVG templates, timers, and action hotspots|https://github.com/Cap-go/capacitor-widget-kit/|Widget Kit
 @capgo/capacitor-brightness|github.com/Cap-go|Control device screen brightness programmatically with support for app-specific and system-wide control|https://github.com/Cap-go/capacitor-brightness/|Brightness
 @capgo/capacitor-light-sensor|github.com/Cap-go|Access the ambient light sensor to measure illuminance levels in lux with real-time updates|https://github.com/Cap-go/capacitor-light-sensor/|Light Sensor
 @capgo/capacitor-video-thumbnails|github.com/Cap-go|Generate thumbnail images from local and remote video files at specific timestamps|https://github.com/Cap-go/capacitor-video-thumbnails/|Video Thumbnails
-@capgo/capacitor-intent-launcher|github.com/Cap-go|Launch Android intents, open system settings, and interact with other apps using the Intent system|https://github.com/Cap-go/capacitor-intent-launcher/|Intent Launcher`.trim().split('\n')
+@capgo/capacitor-intent-launcher|github.com/Cap-go|Launch Android intents, open system settings, and interact with other apps using the Intent system|https://github.com/Cap-go/capacitor-intent-launcher/|Intent Launcher`
+    .trim()
+    .split('\n')
 
 export const actions: Action[] = actionDefinitionRows.map((row) => {
   const [name, author, description, href, title] = row.split('|')

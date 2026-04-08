@@ -1,0 +1,125 @@
+---
+title: Getting Started
+description: Install and configure the Widget Kit plugin for Capacitor.
+sidebar:
+  order: 2
+---
+
+import PluginSetupSteps from '@/components/doc/PluginSetupSteps.astro';
+
+<PluginSetupSteps
+  pkg="@capgo/capacitor-widget-kit"
+  stepTitle="Create and configure the widget extension"
+>
+  <ul>
+    <li>Add the same App Group to the main app target and the widget extension target.</li>
+    <li>Set <code>CapgoWidgetKitAppGroup</code> in both <code>Info.plist</code> files to that shared App Group identifier.</li>
+  </ul>
+</PluginSetupSteps>
+
+## Platform requirements
+
+- iOS 17 or later is recommended for the interactive completion button flow.
+- Add `NSSupportsLiveActivities` to the app `Info.plist`.
+- WidgetKit support is iOS-only. The web implementation is only for development previews.
+
+Example App Group configuration:
+
+```xml
+<key>CapgoWidgetKitAppGroup</key>
+<string>group.com.example.app.widgetkit</string>
+```
+
+## Register the widget bundle
+
+Inside the widget extension, import the plugin package and expose your bundle:
+
+```swift
+import ActivityKit
+import SwiftUI
+import WidgetKit
+import CapgoWidgetKitPlugin
+
+@main
+struct ExampleWidgetBundle: WidgetBundle {
+    var body: some Widget {
+        if #available(iOS 16.2, *) {
+            ExampleTemplateLiveActivityWidget()
+        }
+    }
+}
+```
+
+## Start a template activity
+
+```typescript
+import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
+
+const { supported, reason } = await CapgoWidgetKit.areActivitiesSupported();
+
+if (!supported) {
+  console.warn(reason);
+}
+
+const { activity } = await CapgoWidgetKit.startTemplateActivity({
+  activityId: 'session-1',
+  openUrl: 'widgetkitdemo://session/session-1',
+  state: {
+    title: 'Chest Day',
+    count: 0,
+    restDurationMs: 90000,
+  },
+  definition: {
+    id: 'generic-session-card',
+    timers: [
+      {
+        id: 'rest',
+        durationPath: 'state.restDurationMs',
+      },
+    ],
+    actions: [
+      {
+        id: 'complete-set',
+        eventName: 'workout.set.completed',
+        patches: [{ op: 'increment', path: 'count', amount: 1 }],
+      },
+    ],
+    layouts: {
+      lockScreen: {
+        width: 100,
+        height: 40,
+        svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 40">
+  <rect x="0" y="0" width="100" height="40" rx="6" fill="#05070b" />
+  <text x="6" y="10" fill="#ffffff">{{state.title}}</text>
+  <text x="6" y="30" fill="#00d69c">{{timers.rest.remainingText}}</text>
+</svg>`,
+      },
+    },
+  },
+});
+
+console.log(activity.activityId);
+```
+
+## Perform an action and read events
+
+```typescript
+await CapgoWidgetKit.performTemplateAction({
+  activityId: activity.activityId,
+  actionId: 'complete-set',
+  sourceId: 'app-complete-set-button',
+});
+
+const pendingEvents = await CapgoWidgetKit.listTemplateEvents({
+  activityId: activity.activityId,
+  unacknowledgedOnly: true,
+});
+
+console.log(pendingEvents.events);
+```
+
+## Recommended usage
+
+- Treat the shipped workout flow as an example, not the core abstraction.
+- Keep the widget extension responsible for rendering and let the Capacitor app own activity state and event processing.
+- Model actions declaratively so app-side buttons and widget hotspots can reuse the same behavior.

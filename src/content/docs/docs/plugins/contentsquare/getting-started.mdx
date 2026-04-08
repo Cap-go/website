@@ -1,0 +1,65 @@
+---
+title: Getting Started
+description: Install and configure the Contentsquare Capacitor plugin for analytics and session replay.
+sidebar:
+  order: 2
+---
+
+import PluginSetupSteps from '@/components/doc/PluginSetupSteps.astro';
+
+<PluginSetupSteps
+  pkg="@capgo/capacitor-contentsquare"
+  stepTitle="Review the upstream product configuration"
+>
+  <ul>
+    <li>
+      Follow the official <a href="https://docs.contentsquare.com/en/capacitor/">Contentsquare Capacitor guide</a> for project keys, replay settings, and dashboard setup.
+    </li>
+  </ul>
+</PluginSetupSteps>
+
+## iOS setup
+
+To enable Contentsquare in-app features on iOS, add the `cs-$(PRODUCT_BUNDLE_IDENTIFIER)` URL scheme to your app and forward incoming URLs with `Contentsquare.handle(url: url)` from your `AppDelegate`, `SceneDelegate`, or SwiftUI `onOpenURL`.
+
+## Basic usage
+
+```typescript
+import { ContentsquarePlugin, CurrencyCode } from '@capgo/capacitor-contentsquare';
+
+await ContentsquarePlugin.optIn();
+
+await ContentsquarePlugin.sendScreenName('Home');
+
+await ContentsquarePlugin.sendTransaction({
+  transactionValue: 10,
+  transactionCurrency: CurrencyCode.EUR,
+  transactionId: 'order-42',
+});
+
+await ContentsquarePlugin.sendDynamicVar({
+  dynVarKey: 'store',
+  dynVarValue: 'rome',
+});
+```
+
+## Replay privacy controls
+
+Use the built-in masking helpers to keep sensitive content out of Session Replay:
+
+```typescript
+await ContentsquarePlugin.excludeURLForReplay('/checkout/');
+
+await ContentsquarePlugin.setPIISelectors({
+  PIISelectors: ['.credit-card', '.email-address'],
+  Attributes: [{ selector: '[data-secret]', attrName: ['value', 'placeholder'] }],
+});
+```
+
+## Available API groups
+
+- Consent control with `optIn()` and `optOut()`.
+- Screen, transaction, and dynamic variable tracking.
+- Session Replay filtering with URL and selector masking.
+
+For the full API surface and platform-specific behavior, keep the official Contentsquare docs open alongside this guide.

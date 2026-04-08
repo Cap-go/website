@@ -1,0 +1,33 @@
+---
+import { PackageManagers } from 'starlight-package-managers'
+
+interface Props {
+  installLabel?: string
+  pkg: string
+  stepTitle: string
+}
+
+const { installLabel = 'plugin', pkg, stepTitle } = Astro.props as Props
+const pkgManagers: Array<'npm' | 'pnpm' | 'yarn' | 'bun'> = ['npm', 'pnpm', 'yarn', 'bun']
+---
+
+<ol class="sl-steps" aria-live="polite" aria-atomic="true">
+  <li>
+    <p>
+      <strong>Install the {installLabel}</strong>
+    </p>
+    <PackageManagers pkg={pkg} pkgManagers={pkgManagers} />
+  </li>
+  <li>
+    <p>
+      <strong>Sync native platforms</strong>
+    </p>
+    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={pkgManagers} />
+  </li>
+  <li>
+    <p>
+      <strong>{stepTitle}</strong>
+    </p>
+    <slot />
+  </li>
+</ol>

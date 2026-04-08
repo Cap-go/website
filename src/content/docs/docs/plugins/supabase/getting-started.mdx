@@ -1,0 +1,92 @@
+---
+title: Getting Started
+description: Install and initialize the native Supabase Capacitor plugin.
+sidebar:
+  order: 2
+---
+
+import PluginSetupSteps from '@/components/doc/PluginSetupSteps.astro';
+
+<PluginSetupSteps
+  pkg="@capgo/capacitor-supabase"
+  stepTitle="Confirm Android minimum SDK"
+>
+  <ul>
+    <li>Set <code>minSdkVersion = 26</code> in <code>android/variables.gradle</code>.</li>
+  </ul>
+</PluginSetupSteps>
+
+## Initialize the client
+
+```typescript
+import { CapacitorSupabase } from '@capgo/capacitor-supabase';
+
+await CapacitorSupabase.initialize({
+  supabaseUrl: 'https://your-project.supabase.co',
+  supabaseKey: 'your-anon-key',
+});
+```
+
+## Sign in and access the JWT
+
+```typescript
+const { session, user } = await CapacitorSupabase.signInWithPassword({
+  email: 'user@example.com',
+  password: 'password123',
+});
+
+console.log('User', user?.id);
+console.log('JWT available', Boolean(session?.accessToken));
+```
+
+## Listen for auth changes
+
+```typescript
+const listener = await CapacitorSupabase.addListener('authStateChange', ({ event, session }) => {
+  console.log('Auth event', event);
+  console.log('Current JWT available', Boolean(session?.accessToken));
+});
+
+// Remove it when the page is done.
+await listener.remove();
+```
+
+## Pair native auth with `@supabase/supabase-js`
+
+```typescript
+import { createClient } from '@supabase/supabase-js';
+
+const { session } = await CapacitorSupabase.getSession();
+
+const supabase = createClient('https://your-project.supabase.co', 'your-anon-key', {
+  global: {
+    headers: {
+      Authorization: `Bearer ${session?.accessToken}`,
+    },
+  },
+});
+
+const { data } = await supabase.from('table').select('*');
+console.log(data);
+```
+
+## Native database helpers
+
+```typescript
+const { data, error } = await CapacitorSupabase.select({
+  table: 'users',
+  columns: 'id, name, email',
+  filter: { active: true },
+  limit: 10,
+  orderBy: 'created_at',
+  ascending: false,
+});
+
+console.log(data, error);
+```
+
+## Recommended usage
+
+- Use this plugin for authentication and session management.
+- Keep Realtime, Storage, Edge Functions, and advanced querying in `@supabase/supabase-js`.
+- Pass the native JWT into the JavaScript client whenever you need the rest of the Supabase surface area.

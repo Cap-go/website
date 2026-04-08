@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-contentsquare"
+description: Capacitor 8 wrapper for the official Contentsquare mobile analytics SDKs.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Use the official Contentsquare API shape from Capacitor 8 apps with Capgo's updated packaging.
+  actions:
+    - text: Get started
+      link: /docs/plugins/contentsquare/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-contentsquare/
+      icon: external
+      variant: minimal
+---
+
+import PluginOverview from '@/components/doc/PluginOverview.astro';
+
+<PluginOverview
+  summary="Capgo's Contentsquare package keeps the documented API shape while updating the plugin for Capacitor 8, Swift Package Manager, and the Capgo plugin template."
+  cards={[
+    {
+      title: 'Official API shape',
+      body: 'Keep the same optIn, sendScreenName, transaction, and replay masking calls documented by Contentsquare.',
+    },
+    {
+      title: 'Capacitor 8 ready',
+      body: 'Use a package that matches modern Capacitor projects without maintaining your own fork.',
+    },
+    {
+      title: 'Replay controls',
+      body: 'Apply URL exclusions and selector-based masking for Session Replay from JavaScript.',
+    },
+    {
+      title: 'Upstream docs',
+      body: 'Product-specific setup details still live in the official Contentsquare Capacitor documentation.',
+    },
+  ]}
+/>

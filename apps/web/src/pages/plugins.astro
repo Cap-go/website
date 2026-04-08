@@ -1,15 +1,18 @@
 ---
 import { actions } from '@/config/plugins'
 import Layout from '@/layouts/Layout.astro'
+import { createItemListLdJson, createLdJsonGraph } from '@/lib/ldJson'
 import * as m from '@/paraglide/messages'
 import { getSlug, getPluginsWithStars, getTotalStars, getTotalDownloads } from '@/services/github'
+import { defaultLocale } from '@/services/locale'
+import { getPluginDocsSlugs, resolvePluginDocsSlug } from '@/services/pluginDocs'
 import PluginIcon from '@/components/PluginIcon.astro'
 import { Icon as AstroIcon } from 'astro-icon/components'
 import { getCollection } from 'astro:content'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { marked } from 'marked'
 
-const locale = Astro.locals.locale
+const locale = Astro.locals.locale ?? defaultLocale
 const brand = Astro.locals.runtimeConfig.public.brand
 const description = m.plugins_description({}, { locale })
 
@@ -37,27 +40,43 @@ const makeSeoTitle = (primary: string, descriptionText: string) => {
 
 const title = makeSeoTitle(m.plugins({}, { locale }), description)
 
-const content = { title, description }
-
-const slugsSet = new Set()
+const tutorialSlugsByLocale = new Map<string, Set<string>>()
 await getCollection('plugin', ({ data, filePath }) => {
   if (data.published !== false && filePath) {
-    slugsSet.add(getSlug(filePath).replace('.md', ''))
+    const tutorialLocale = data.locale || defaultLocale
+    const tutorialSlug = getSlug(filePath).replace('.md', '')
+    const localeTutorialSlugs = tutorialSlugsByLocale.get(tutorialLocale) ?? new Set<string>()
+
+    localeTutorialSlugs.add(tutorialSlug)
+    tutorialSlugsByLocale.set(tutorialLocale, localeTutorialSlugs)
   }
 })
+
+const defaultTutorialSlugs = tutorialSlugsByLocale.get(defaultLocale) ?? new Set<string>()
+const localizedTutorialSlugs = locale === defaultLocale ? defaultTutorialSlugs : (tutorialSlugsByLocale.get(locale) ?? new Set<string>())
+const { localizedDocsSlugs, docsSlugs } = await getPluginDocsSlugs(locale)
 
 const pluginsWithStars = getPluginsWithStars(actions)
 const totalStars = getTotalStars()
 const totalDownloads = getTotalDownloads()
 
 // Parse descriptions for all plugins
-const slugs = [...slugsSet] as string[]
 const plugins = await Promise.all(
-  pluginsWithStars.map(async (item) => ({
-    ...item,
-    description: await marked.parse(item.description),
-    hasTutorial: slugs.includes(getSlug(item.href).replace('.md', '')),
-  })),
+  pluginsWithStars.map(async (item) => {
+    const tutorialSlug = getSlug(item.href).replace('.md', '')
+    const docsSlug = resolvePluginDocsSlug(item, docsSlugs)
+    const tutorialLocale = localizedTutorialSlugs.has(tutorialSlug) ? locale : defaultTutorialSlugs.has(tutorialSlug) ? defaultLocale : undefined
+    const hasTutorial = Boolean(tutorialLocale)
+    const tutorialHref = tutorialLocale ? getRelativeLocaleUrl(tutorialLocale, `plugins/${tutorialSlug}`) : undefined
+    const docsLocale = docsSlug && localizedDocsSlugs.has(docsSlug) ? locale : defaultLocale
+
+    return {
+      ...item,
+      description: await marked.parse(item.description),
+      docsHref: tutorialHref ?? (docsSlug ? getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`) : item.href),
+      hasSiteDocs: hasTutorial || Boolean(docsSlug),
+    }
+  }),
 )
 
 // Helper function to format counts
@@ -69,6 +88,32 @@ const formatCount = (count: number): string => {
     return `${(count / 1000).toFixed(1)}k`
   }
   return count.toString()
+}
+
+const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
+const pluginsUrl = new URL(getRelativeLocaleUrl(locale, '/plugins/'), baseUrl).toString()
+const ldJSON = createLdJsonGraph(
+  Astro.locals.runtimeConfig.public,
+  createItemListLdJson(Astro.locals.runtimeConfig.public, {
+    url: pluginsUrl,
+    name: title,
+    description,
+    items: plugins.map((plugin) => ({
+      name: plugin.title,
+      url: new URL(plugin.docsHref, baseUrl).toString(),
+      description: plugin.description.replace(/<[^>]+>/g, '').trim(),
+    })),
+  }),
+  {
+    includeOrganization: true,
+  },
+)
+
+const content = {
+  title,
+  description,
+  keywords: 'capacitor plugins, mobile plugins, ionic plugins, native plugins, app plugins',
+  ldJSON,
 }
 ---
 
@@ -193,9 +238,9 @@ const formatCount = (count: number): string => {
                     </div>
                   </div>
                   <div class="flex gap-2">
-                    {item.hasTutorial ? (
+                    {item.hasSiteDocs ? (
                       <a
-                        href={getRelativeLocaleUrl(Astro.locals.locale, `plugins/${getSlug(item.href)}`)}
+                        href={item.docsHref}
                         class="inline-flex flex-1 items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700"
                       >
                         Documentation
