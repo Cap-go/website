@@ -2,7 +2,7 @@ import fg from 'fast-glob'
 import { promises as fs } from 'node:fs'
 import { commonReplacements } from './commonReplacements'
 
-const files = await fg(['src/content/**/*.md*'], { absolute: true, onlyFiles: true })
+const files = await fg(['apps/web/src/content/**/*.md*', 'apps/docs/src/content/**/*.md*'], { absolute: true, onlyFiles: true })
 let changedCount = 0
 for (const filePath of files) {
   let content = await fs.readFile(filePath, 'utf8')

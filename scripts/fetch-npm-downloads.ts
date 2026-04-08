@@ -6,7 +6,7 @@
  * Run with: bun run scripts/fetch-npm-downloads.ts
  */
 
-import { actions } from '../src/config/plugins'
+import { actions } from '../apps/web/src/config/plugins'
 
 const MAX_RUNTIME_MS = 5 * 60 * 1000 // 5 minutes
 let startTime: number
@@ -80,7 +80,7 @@ async function main() {
 
   console.log(`Found ${packageNames.length} unique npm packages`)
 
-  const outputPath = new URL('../src/data/npm-downloads.json', import.meta.url).pathname
+  const outputPath = new URL('../apps/web/src/data/npm-downloads.json', import.meta.url).pathname
 
   // Fetch packages with concurrency limit to avoid rate limiting
   const concurrency = 10

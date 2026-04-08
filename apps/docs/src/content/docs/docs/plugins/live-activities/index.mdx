@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-live-activities"
+description: Manage iOS Live Activities and Dynamic Island experiences from Capacitor with JSON-based layouts.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Ship lock-screen and Dynamic Island experiences for delivery, timers, scores, and other real-time flows without building the layout in Swift.
+  actions:
+    - text: Get started
+      link: /docs/plugins/live-activities/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-live-activities/
+      icon: external
+      variant: minimal
+---
+
+import PluginOverview from '@/components/doc/PluginOverview.astro';
+
+<PluginOverview
+  summary="Capgo Live Activities exposes ActivityKit to Capacitor with a JSON-driven layout system, real-time state updates, and graceful fallbacks when the device does not support Live Activities."
+  cards={[
+    {
+      title: 'JSON layouts',
+      body: 'Define lock-screen and Dynamic Island content from JavaScript instead of writing bespoke Swift layout code for each activity.',
+    },
+    {
+      title: 'Dynamic Island support',
+      body: 'Configure expanded, compact, and minimal surfaces for supported iPhone models from the same activity definition.',
+    },
+    {
+      title: 'Real-time updates',
+      body: 'Start, update, and end Live Activities as your delivery, timer, ride, or score data changes.',
+    },
+    {
+      title: 'Shared assets',
+      body: 'Persist images and state through App Groups so the widget extension can render current activity content.',
+    },
+  ]}
+/>

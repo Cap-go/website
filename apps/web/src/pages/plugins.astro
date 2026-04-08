@@ -1,0 +1,493 @@
+---
+import { actions } from '@/config/plugins'
+import Layout from '@/layouts/Layout.astro'
+import { createItemListLdJson, createLdJsonGraph } from '@/lib/ldJson'
+import * as m from '@/paraglide/messages'
+import { getSlug, getPluginsWithStars, getTotalStars, getTotalDownloads } from '@/services/github'
+import { defaultLocale } from '@/services/locale'
+import { getPluginDocsSlugs, resolvePluginDocsSlug } from '@/services/pluginDocs'
+import PluginIcon from '@/components/PluginIcon.astro'
+import { Icon as AstroIcon } from 'astro-icon/components'
+import { getCollection } from 'astro:content'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import { marked } from 'marked'
+
+const locale = Astro.locals.locale ?? defaultLocale
+const brand = Astro.locals.runtimeConfig.public.brand
+const description = m.plugins_description({}, { locale })
+
+const makeSeoTitle = (primary: string, descriptionText: string) => {
+  const normalizedPrimary = primary.replace(/\s+/g, ' ').trim()
+  const normalizedDescription = descriptionText
+    .replace(/\s+/g, ' ')
+    .trim()
+    .replace(/[.!?]\s*$/, '')
+  const base = `${brand} | ${normalizedPrimary}`
+
+  if (base.length >= 50 && base.length <= 60) return base
+  if (base.length > 60) return base.slice(0, 60).trimEnd()
+
+  const separator = ' — '
+  const available = 60 - base.length - separator.length
+  if (available <= 0) return base
+
+  const snippetRaw = normalizedDescription.slice(0, available)
+  const lastSpace = snippetRaw.lastIndexOf(' ')
+  const snippet = (lastSpace > available * 0.6 ? snippetRaw.slice(0, lastSpace) : snippetRaw).trim().replace(/[,:;\-–—]\s*$/, '')
+
+  return snippet ? `${base}${separator}${snippet}` : base
+}
+
+const title = makeSeoTitle(m.plugins({}, { locale }), description)
+
+const tutorialSlugsByLocale = new Map<string, Set<string>>()
+await getCollection('plugin', ({ data, filePath }) => {
+  if (data.published !== false && filePath) {
+    const tutorialLocale = data.locale || defaultLocale
+    const tutorialSlug = getSlug(filePath).replace('.md', '')
+    const localeTutorialSlugs = tutorialSlugsByLocale.get(tutorialLocale) ?? new Set<string>()
+
+    localeTutorialSlugs.add(tutorialSlug)
+    tutorialSlugsByLocale.set(tutorialLocale, localeTutorialSlugs)
+  }
+})
+
+const defaultTutorialSlugs = tutorialSlugsByLocale.get(defaultLocale) ?? new Set<string>()
+const localizedTutorialSlugs = locale === defaultLocale ? defaultTutorialSlugs : (tutorialSlugsByLocale.get(locale) ?? new Set<string>())
+const { localizedDocsSlugs, docsSlugs } = await getPluginDocsSlugs(locale)
+
+const pluginsWithStars = getPluginsWithStars(actions)
+const totalStars = getTotalStars()
+const totalDownloads = getTotalDownloads()
+
+// Parse descriptions for all plugins
+const plugins = await Promise.all(
+  pluginsWithStars.map(async (item) => {
+    const tutorialSlug = getSlug(item.href).replace('.md', '')
+    const docsSlug = resolvePluginDocsSlug(item, docsSlugs)
+    const tutorialLocale = localizedTutorialSlugs.has(tutorialSlug) ? locale : defaultTutorialSlugs.has(tutorialSlug) ? defaultLocale : undefined
+    const hasTutorial = Boolean(tutorialLocale)
+    const tutorialHref = tutorialLocale ? getRelativeLocaleUrl(tutorialLocale, `plugins/${tutorialSlug}`) : undefined
+    const docsLocale = docsSlug && localizedDocsSlugs.has(docsSlug) ? locale : defaultLocale
+
+    return {
+      ...item,
+      description: await marked.parse(item.description),
+      docsHref: tutorialHref ?? (docsSlug ? getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`) : item.href),
+      hasSiteDocs: hasTutorial || Boolean(docsSlug),
+    }
+  }),
+)
+
+// Helper function to format counts
+const formatCount = (count: number): string => {
+  if (count >= 1000000) {
+    return `${(count / 1000000).toFixed(1)}M`
+  }
+  if (count >= 1000) {
+    return `${(count / 1000).toFixed(1)}k`
+  }
+  return count.toString()
+}
+
+const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
+const pluginsUrl = new URL(getRelativeLocaleUrl(locale, '/plugins/'), baseUrl).toString()
+const ldJSON = createLdJsonGraph(
+  Astro.locals.runtimeConfig.public,
+  createItemListLdJson(Astro.locals.runtimeConfig.public, {
+    url: pluginsUrl,
+    name: title,
+    description,
+    items: plugins.map((plugin) => ({
+      name: plugin.title,
+      url: new URL(plugin.docsHref, baseUrl).toString(),
+      description: plugin.description.replace(/<[^>]+>/g, '').trim(),
+    })),
+  }),
+  {
+    includeOrganization: true,
+  },
+)
+
+const content = {
+  title,
+  description,
+  keywords: 'capacitor plugins, mobile plugins, ionic plugins, native plugins, app plugins',
+  ldJSON,
+}
+---
+
+<Layout content={content}>
+  <div class="relative min-h-screen">
+    <!-- Plugins Directory -->
+    <section class="px-6 py-12 lg:px-8 lg:py-16">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-12">
+          <div class="mb-6 inline-flex items-center rounded-full border border-gray-600/40 bg-gray-800/40 px-4 py-2 text-sm font-medium text-gray-200">
+            <span class="mr-2 h-2 w-2 animate-pulse rounded-full bg-blue-400"></span>
+            {plugins.length}+ {m.plugins({}, { locale: Astro.locals.locale })}
+          </div>
+
+          <h1 class="text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+            {m.plugins({}, { locale: Astro.locals.locale })} Directory
+          </h1>
+          <p class="mt-4 max-w-2xl text-gray-300">Technical list of published plugins with direct links, npm download data, and GitHub stars.</p>
+        </div>
+        <div class="mb-8 grid grid-cols-1 gap-6 text-sm text-gray-300 md:grid-cols-3">
+          <div class="flex items-center justify-between rounded-xl border border-gray-700 bg-gray-900/40 px-4 py-3">
+            <span class="text-gray-400">Total plugins</span>
+            <span class="font-semibold text-white">{plugins.length}+</span>
+          </div>
+          <div class="flex items-center justify-between rounded-xl border border-gray-700 bg-gray-900/40 px-4 py-3">
+            <span class="text-gray-400">npm weekly</span>
+            <span class="font-semibold text-white">{formatCount(totalDownloads)}</span>
+          </div>
+          <div class="flex items-center justify-between rounded-xl border border-gray-700 bg-gray-900/40 px-4 py-3">
+            <span class="text-gray-400">GitHub stars</span>
+            <span class="font-semibold text-white">{formatCount(totalStars)}+</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Plugins Grid -->
+    <section id="plugins" class="py-20">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mb-16 text-center">
+          <h2 class="mb-6 text-4xl font-bold text-white">{m.browse_plugin_library({}, { locale: Astro.locals.locale })}</h2>
+          <p class="mx-auto max-w-2xl text-xl text-gray-300">
+            {m.discover_ready_plugins({}, { locale: Astro.locals.locale })}
+          </p>
+        </div>
+
+        <!-- Search and Sort Controls -->
+        <div class="mx-auto mb-8 flex max-w-3xl flex-col items-center justify-center gap-4 sm:flex-row">
+          <div class="relative w-full flex-1">
+            <input
+              type="text"
+              id="plugin-search"
+              aria-label="Search plugins by name or description"
+              placeholder="Search plugins by name or description..."
+              class="w-full rounded-xl border border-gray-700 bg-white/5 px-6 py-4 text-white placeholder-gray-400 backdrop-blur-sm transition-all duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
+            />
+            <svg
+              aria-hidden="true"
+              class="pointer-events-none absolute top-1/2 right-4 h-5 w-5 -translate-y-1/2 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <div class="relative w-full sm:w-auto">
+            <select
+              id="plugin-sort"
+              aria-label="Sort plugins by"
+              class="w-full cursor-pointer appearance-none rounded-xl border border-gray-700 bg-white/5 px-6 py-4 pr-10 text-white backdrop-blur-sm transition-all duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none sm:w-48"
+            >
+              <option value="downloads">Downloads</option>
+              <option value="stars">GitHub Stars</option>
+              <option value="alphabetical">Alphabetical</option>
+            </select>
+            <svg
+              aria-hidden="true"
+              class="pointer-events-none absolute top-1/2 right-4 h-5 w-5 -translate-y-1/2 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </div>
+        </div>
+        <div id="search-results-count" aria-live="polite" aria-atomic="true" class="mb-4 text-center text-sm text-gray-400"></div>
+
+        <div id="plugins-grid" class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {
+            plugins.map((item) => (
+              <div
+                class="plugin-card group relative rounded-2xl border border-gray-700 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-gray-500/50 hover:bg-white/10"
+                data-title={item.title.toLowerCase()}
+                data-description={item.description.toLowerCase()}
+                data-author={item.author.toLowerCase()}
+                data-downloads={item.npmDownloads ?? 0}
+                data-stars={item.githubStars ?? 0}
+              >
+                <div class="relative">
+                  {item.icon && <PluginIcon icon={item.icon} name={item.title} className="mb-4 transition-transform duration-300 group-hover:scale-110" />}
+                  <h3 class="mb-3 text-xl font-bold text-white transition-colors duration-300 group-hover:text-gray-200">{item.title}</h3>
+                  <div class="mb-4 line-clamp-3 leading-relaxed text-gray-300" set:html={item.description} />
+                  <div class="mb-4 flex items-center justify-between">
+                    <span class="text-sm text-gray-500">by {item.author}</span>
+                    <div class="flex gap-3">
+                      {item.npmDownloads !== undefined && (
+                        <span class="inline-flex items-center text-sm text-gray-200">
+                          <svg class="mr-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                          </svg>
+                          {formatCount(item.npmDownloads)}/w
+                        </span>
+                      )}
+                      <span class="inline-flex items-center text-sm text-gray-200">
+                        <svg class="mr-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        {formatCount(item.githubStars ?? 0)}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    {item.hasSiteDocs ? (
+                      <a
+                        href={item.docsHref}
+                        class="inline-flex flex-1 items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700"
+                      >
+                        Documentation
+                      </a>
+                    ) : (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex flex-1 items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700"
+                      >
+                        Docs
+                        <AstroIcon name="heroicons:arrow-up-right-solid" class="ml-1 h-4 w-4 text-white" aria-hidden="true" />
+                      </a>
+                    )}
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center justify-center rounded-lg border border-gray-600 bg-gray-800 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-gray-700"
+                    >
+                      GitHub
+                      <AstroIcon name="heroicons:arrow-up-right-solid" class="ml-1 h-4 w-4 text-white" aria-hidden="true" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="relative px-6 pt-24 pb-16 lg:px-8">
+      <div class="mx-auto max-w-7xl text-center">
+        <div class="mb-8 inline-flex items-center rounded-full border border-gray-600/40 bg-gray-800/40 px-4 py-2 text-sm font-medium text-gray-200">
+          <span class="mr-2 h-2 w-2 animate-pulse rounded-full bg-blue-400"></span>
+          {plugins.length}+ {m.plugins({}, { locale: Astro.locals.locale })} available
+        </div>
+
+        <h1 class="pb-6 text-5xl font-bold text-white md:text-7xl">
+          {m.supercharge_your_app({}, { locale: Astro.locals.locale })}
+        </h1>
+
+        <p class="mx-auto mb-12 max-w-3xl text-xl leading-relaxed text-gray-300 md:text-2xl">
+          {m.powerful_app_plugins_description({}, { locale: Astro.locals.locale })}
+        </p>
+
+        <div class="mb-16 flex flex-col justify-center gap-4 sm:flex-row">
+          <a
+            href="#plugins"
+            class="inline-flex items-center rounded-xl bg-blue-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-200 hover:bg-blue-500 hover:shadow-blue-900/40"
+          >
+            {m.browse_plugin_library({}, { locale: Astro.locals.locale })}
+            <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+          </a>
+          <a
+            href="https://github.com/Cap-go"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center rounded-xl border-2 border-gray-600 px-8 py-4 text-lg font-semibold text-white transition-all duration-200 hover:bg-white hover:text-gray-900"
+          >
+            <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+              ></path>
+            </svg>
+            GitHub
+            <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </svg>
+          </a>
+          <a
+            href="#custom-development"
+            class="inline-flex items-center rounded-xl border-2 border-blue-300 px-8 py-4 text-lg font-semibold text-blue-200 transition-all duration-200 hover:bg-blue-50 hover:text-blue-900"
+          >
+            {m.need_something_custom({}, { locale: Astro.locals.locale })}
+            <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Stats -->
+    <section class="border-y border-gray-800 py-16">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="grid grid-cols-2 gap-8 text-center md:grid-cols-4">
+          <div>
+            <div class="mb-2 text-3xl font-bold text-gray-200 md:text-4xl">{plugins.length}+</div>
+            <div class="text-gray-400">{m.ready_to_use_plugins({}, { locale: Astro.locals.locale })}</div>
+          </div>
+          <div>
+            <div class="mb-2 text-3xl font-bold text-emerald-400 md:text-4xl">{formatCount(totalDownloads)}</div>
+            <div class="text-gray-400">{m.downloads({}, { locale: Astro.locals.locale })}/week</div>
+          </div>
+          <div>
+            <div class="mb-2 text-3xl font-bold text-gray-200 md:text-4xl">{formatCount(totalStars)}+</div>
+            <div class="text-gray-400">GitHub Stars</div>
+          </div>
+          <div>
+            <div class="mb-2 text-3xl font-bold text-gray-200 md:text-4xl">24/7</div>
+            <div class="text-gray-400">{m.community_support({}, { locale: Astro.locals.locale })}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="px-6 py-12 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <!-- More Options Section -->
+        <div class="mx-auto mt-16 grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2">
+          <!-- GitHub Link -->
+          <div class="rounded-2xl border border-gray-700 bg-white/5 p-8 text-center backdrop-blur-sm">
+            <svg class="mx-auto mb-4 h-12 w-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+              ></path>
+            </svg>
+            <h3 class="mb-2 text-2xl font-bold text-white">Looking for more plugins?</h3>
+            <p class="mb-6 text-gray-300">Explore our GitHub organization for more open-source Capacitor plugins.</p>
+            <a
+              href="https://github.com/Cap-go"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center rounded-xl border border-gray-600 bg-gray-800 px-6 py-3 font-semibold text-white transition-all duration-200 hover:bg-gray-700"
+            >
+              <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                ></path>
+              </svg>
+              Browse Cap-go GitHub
+              <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Custom Plugin Development -->
+          <div class="rounded-2xl border border-gray-700 bg-white/5 p-8 text-center backdrop-blur-sm">
+            <svg class="mx-auto mb-4 h-12 w-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+              ></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            <h3 class="mb-2 text-2xl font-bold text-white">Need a custom plugin?</h3>
+            <p class="mb-6 text-gray-300">Our expert team can build the perfect plugin for your specific needs.</p>
+            <a
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'consulting')}
+              class="inline-flex items-center rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-blue-500/25"
+            >
+              Get Custom Plugin Built
+              <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('plugin-search') as HTMLInputElement
+      const sortSelect = document.getElementById('plugin-sort') as HTMLSelectElement
+      const pluginsGrid = document.getElementById('plugins-grid') as HTMLElement
+      const pluginCards = document.querySelectorAll('.plugin-card') as NodeListOf<HTMLElement>
+      const resultsCount = document.getElementById('search-results-count')
+      const totalPlugins = pluginCards.length
+
+      function updateResultsCount(visibleCount: number) {
+        if (resultsCount) {
+          if (searchInput.value.trim() === '') {
+            resultsCount.textContent = ''
+          } else {
+            resultsCount.textContent = `Showing ${visibleCount} of ${totalPlugins} plugins`
+          }
+        }
+      }
+
+      function filterPlugins() {
+        const searchTerm = searchInput.value.toLowerCase().trim()
+        let visibleCount = 0
+
+        pluginCards.forEach((card) => {
+          const title = card.getAttribute('data-title') || ''
+          const description = card.getAttribute('data-description') || ''
+          const author = card.getAttribute('data-author') || ''
+
+          const matches = title.includes(searchTerm) || description.includes(searchTerm) || author.includes(searchTerm)
+
+          if (matches) {
+            card.style.display = ''
+            visibleCount++
+          } else {
+            card.style.display = 'none'
+          }
+        })
+
+        updateResultsCount(visibleCount)
+      }
+
+      function sortPlugins(sortBy: string) {
+        const cardsArray = Array.from(pluginCards)
+
+        cardsArray.sort((a, b) => {
+          if (sortBy === 'downloads') {
+            const aDownloads = parseInt(a.getAttribute('data-downloads') || '0', 10)
+            const bDownloads = parseInt(b.getAttribute('data-downloads') || '0', 10)
+            return bDownloads - aDownloads
+          } else if (sortBy === 'stars') {
+            const aStars = parseInt(a.getAttribute('data-stars') || '0', 10)
+            const bStars = parseInt(b.getAttribute('data-stars') || '0', 10)
+            return bStars - aStars
+          } else {
+            const aTitle = a.getAttribute('data-title') || ''
+            const bTitle = b.getAttribute('data-title') || ''
+            return aTitle.localeCompare(bTitle)
+          }
+        })
+
+        // Re-append cards in sorted order
+        cardsArray.forEach((card) => {
+          pluginsGrid.appendChild(card)
+        })
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('input', filterPlugins)
+        updateResultsCount(totalPlugins)
+      }
+
+      if (sortSelect) {
+        sortSelect.addEventListener('change', () => {
+          sortPlugins(sortSelect.value)
+        })
+        // Initial sort by downloads
+        sortPlugins('downloads')
+      }
+    })
+  </script>
+</Layout>

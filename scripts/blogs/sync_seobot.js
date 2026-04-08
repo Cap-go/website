@@ -3,7 +3,7 @@ import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { BlogClient } from 'seobot'
 
-const BLOG_DIR = 'src/content/blog/en/'
+const BLOG_DIR = 'apps/web/src/content/blog/en/'
 const PAGE_SIZE = 10
 
 const iframe = `<iframe src="$1" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>`

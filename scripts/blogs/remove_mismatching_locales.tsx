@@ -33,8 +33,8 @@ async function callAnthropic(body: Record<string, any>): Promise<string> {
 }
 
 async function main() {
-  const files = await fg(['src/content/blog/**/*.md'], {
-    ignore: ['src/content/blog/en/**'],
+  const files = await fg(['apps/web/src/content/blog/**/*.md'], {
+    ignore: ['apps/web/src/content/blog/en/**'],
     absolute: true,
     dot: true,
   })

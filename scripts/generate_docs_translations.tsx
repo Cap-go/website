@@ -3,11 +3,11 @@ import matter from 'gray-matter'
 import { createSpinner } from 'nanospinner'
 import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { defaultLocale, locales } from '../src/services/locale'
+import { defaultLocale, locales } from '../apps/web/src/services/locale'
 import { commonReplacements } from './commonReplacements'
 import { translateText } from './translate'
 
-const contentDirectory = join(process.cwd(), 'src', 'content')
+const contentDirectory = join(process.cwd(), 'apps', 'docs', 'src', 'content')
 const blogDirectory = join(contentDirectory, 'docs')
 const localeArgIndex = process.argv.findIndex((arg) => arg.startsWith('--locale='))
 const languages = localeArgIndex !== -1 ? [process.argv[localeArgIndex].split('=')[1]] : locales.filter((lang) => lang !== defaultLocale)

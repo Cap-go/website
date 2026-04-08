@@ -3,7 +3,7 @@
 # Script to find and create missing translated pages compared to English
 # This script copies English files to language folders where they don't exist
 
-DOCS_BASE="/Users/martindonadieu/Projects/capgo_all/website/src/content/docs"
+DOCS_BASE="${PWD}/apps/docs/src/content/docs"
 EN_DOCS="$DOCS_BASE/docs"
 
 # Language folders to check (excluding 'docs' which is English)

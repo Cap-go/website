@@ -1,4 +1,4 @@
-import { localeNames } from '@/services/locale'
+import { localeNames } from '../apps/web/src/services/locale'
 import '@dotenvx/dotenvx/config'
 
 export const ANTHROPIC_MODEL = 'claude-3-5-haiku-20241022'

@@ -6,9 +6,9 @@ on:
     branches:
       - main
     paths:
-      - 'src/config/plugins.ts'
-      - 'src/data/github-stars.json'
-      - 'src/data/npm-downloads.json'
+      - 'apps/web/src/config/plugins.ts'
+      - 'apps/web/src/data/github-stars.json'
+      - 'apps/web/src/data/npm-downloads.json'
       - 'scripts/generate-plugins-readme.ts'
 
 env:
@@ -41,7 +41,7 @@ jobs:
       - name: Push to Cap-go/.github
         run: |
           git clone https://x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/Cap-go/.github.git target-repo
-          cp public/plugins-readme.md target-repo/profile/README.md
+          cp apps/web/public/plugins-readme.md target-repo/profile/README.md
           cd target-repo
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

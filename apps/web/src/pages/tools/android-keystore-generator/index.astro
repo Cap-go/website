@@ -1,0 +1,447 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import ToolCatalog from '@/components/tools/ToolCatalog.astro'
+import ToolFaq from '@/components/tools/ToolFaq.astro'
+import { createFAQPageLdJson, createLdJsonGraph, createSoftwareApplicationLdJson, createWebPageLdJson } from '@/lib/ldJson'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const title = 'Android Keystore Generator | Free PKCS#12 Signing Keystore'
+const description = 'Generate an Android signing keystore in PKCS#12 format, choose the alias, and download the certificate summary for Play Store or CI release workflows.'
+
+const faqItems = [
+  {
+    question: 'What file format does this Android keystore generator produce?',
+    answer:
+      'It produces a PKCS#12 keystore with a single signing identity plus a PEM certificate export. Modern Android tooling accepts PKCS#12, and if you need a classic JKS container later you can convert it with keytool.',
+  },
+  {
+    question: 'Should the store password and key password be different?',
+    answer: 'This generator uses one password for the PKCS#12 container. In Gradle or CI you can reuse the same value for both the store password and the key password.',
+  },
+  {
+    question: 'Can I use this keystore for Google Play releases?',
+    answer:
+      'Yes. It is suitable for release signing, internal testing, and direct distribution. If your app is already enrolled in Play App Signing, keep the original upload key stored securely because Google expects continuity across future releases.',
+  },
+  {
+    question: 'What metadata should I save with the keystore?',
+    answer:
+      'Store the keystore file, alias, password, SHA-1 fingerprint, and SHA-256 fingerprint together in your secure team documentation so future releases are not blocked by missing signing details.',
+  },
+]
+
+const softwareApplication = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.public, {
+  name: 'Capgo Android Keystore Generator',
+  description,
+  url: Astro.url.href,
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'Web',
+  offers: {
+    price: '0',
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+  },
+})
+
+const faqLdJson = createFAQPageLdJson(Astro.locals.runtimeConfig.public, {
+  url: Astro.url.href,
+  questions: faqItems,
+})
+
+const webPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
+  name: title,
+  description,
+  url: Astro.url.href,
+})
+
+const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, softwareApplication, {
+  includeOrganization: true,
+  includeBreadcrumbs: true,
+  breadcrumbs: [
+    { name: 'Home', url: Astro.locals.runtimeConfig.public.baseUrl },
+    { name: 'Tools', url: new URL('/tools/', Astro.locals.runtimeConfig.public.baseUrl).toString() },
+    { name: 'Android Keystore Generator', url: Astro.url.href },
+  ],
+  additionalEntities: [faqLdJson, webPage],
+})
+
+const content = {
+  title,
+  description,
+  keywords: 'android keystore generator, release keystore generator, play store keystore, pkcs12 keystore, android signing key, generate android upload key',
+  ldJSON,
+}
+---
+
+<Layout content={content}>
+  <section class="relative overflow-hidden border-b border-white/10 bg-linear-to-b from-slate-950 via-slate-900 to-slate-950 py-16 sm:py-20">
+    <div class="pointer-events-none absolute inset-0">
+      <div class="absolute top-16 left-0 h-72 w-72 rounded-full bg-emerald-500/10 blur-3xl"></div>
+      <div class="absolute top-0 right-0 h-80 w-80 rounded-full bg-cyan-500/10 blur-3xl"></div>
+    </div>
+
+    <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+        <div>
+          <p class="text-sm font-semibold tracking-[0.3em] text-emerald-300 uppercase">Android signing</p>
+          <h1 class="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">Generate an Android signing keystore and fingerprint summary</h1>
+          <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
+            Create a PKCS#12 signing keystore for release builds, save the alias and fingerprints, and hand the output directly to Gradle, CI, or a cloud build provider.
+          </p>
+
+          <div class="mt-8 grid gap-4 sm:grid-cols-3">
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-4">
+              <p class="text-xs tracking-[0.25em] text-emerald-300 uppercase">Container</p>
+              <p class="mt-2 text-sm font-semibold text-white">PKCS#12</p>
+            </div>
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-4">
+              <p class="text-xs tracking-[0.25em] text-emerald-300 uppercase">Identity</p>
+              <p class="mt-2 text-sm font-semibold text-white">Single release alias</p>
+            </div>
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-4">
+              <p class="text-xs tracking-[0.25em] text-emerald-300 uppercase">Fingerprints</p>
+              <p class="mt-2 text-sm font-semibold text-white">SHA-1 and SHA-256</p>
+            </div>
+          </div>
+
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+            <a
+              href="#generator"
+              class="inline-flex items-center justify-center rounded-2xl bg-emerald-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-300"
+            >
+              Generate keystore now
+            </a>
+            <a
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/cloud-build/troubleshooting')}
+              class="inline-flex items-center justify-center rounded-2xl border border-white/15 px-6 py-3 text-sm font-semibold text-white transition hover:border-emerald-300/60 hover:bg-white/5"
+            >
+              Review signing troubleshooting
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
+          <p class="text-sm font-semibold tracking-[0.25em] text-emerald-300 uppercase">Release checklist</p>
+          <ol class="mt-6 space-y-5 text-sm leading-7 text-slate-300">
+            <li><strong class="text-white">1.</strong> Choose the alias and password that will stay with this app over time.</li>
+            <li><strong class="text-white">2.</strong> Download the keystore and save the metadata in your secret manager.</li>
+            <li><strong class="text-white">3.</strong> Configure the same alias and password in Gradle or your CI environment.</li>
+            <li><strong class="text-white">4.</strong> Keep the upload key stable so future Play releases do not break.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="generator" class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
+          <p class="text-sm font-semibold tracking-[0.25em] text-emerald-300 uppercase">Input</p>
+          <h2 class="mt-3 text-3xl font-bold text-white">Keystore details</h2>
+          <p class="mt-4 text-sm leading-7 text-slate-300">Fill in the subject information that should be embedded in the signing certificate and pick a stable alias.</p>
+
+          <form id="android-keystore-form" class="mt-8 space-y-5">
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="android-common-name">Full name</label>
+                <input
+                  id="android-common-name"
+                  name="commonName"
+                  required
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-emerald-300/60"
+                  placeholder="Jane Doe"
+                />
+              </div>
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="android-email">Email</label>
+                <input
+                  id="android-email"
+                  name="emailAddress"
+                  type="email"
+                  required
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-emerald-300/60"
+                  placeholder="jane@company.com"
+                />
+              </div>
+            </div>
+
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="android-organization">Organization</label>
+                <input
+                  id="android-organization"
+                  name="organization"
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-emerald-300/60"
+                  placeholder="Acme Mobile"
+                />
+              </div>
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="android-organizational-unit">Organizational unit</label>
+                <input
+                  id="android-organizational-unit"
+                  name="organizationalUnit"
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-emerald-300/60"
+                  placeholder="Android Team"
+                />
+              </div>
+            </div>
+
+            <div class="grid gap-5 sm:grid-cols-3">
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="android-city">City</label>
+                <input
+                  id="android-city"
+                  name="localityName"
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-emerald-300/60"
+                  placeholder="Berlin"
+                />
+              </div>
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="android-state">State or province</label>
+                <input
+                  id="android-state"
+                  name="stateOrProvinceName"
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-emerald-300/60"
+                  placeholder="Berlin"
+                />
+              </div>
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="android-country">Country code</label>
+                <input
+                  id="android-country"
+                  name="countryName"
+                  required
+                  maxlength="2"
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white uppercase transition outline-none focus:border-emerald-300/60"
+                  placeholder="DE"
+                />
+              </div>
+            </div>
+
+            <div class="grid gap-5 sm:grid-cols-3">
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="android-alias">Alias</label>
+                <input
+                  id="android-alias"
+                  name="alias"
+                  required
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-emerald-300/60"
+                  placeholder="release"
+                />
+              </div>
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="android-validity">Validity in years</label>
+                <input
+                  id="android-validity"
+                  name="validityYears"
+                  type="number"
+                  min="1"
+                  max="35"
+                  value="25"
+                  required
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-emerald-300/60"
+                />
+              </div>
+              <div>
+                <label class="mb-2 block text-sm font-medium text-slate-200" for="android-password">Keystore password</label>
+                <input
+                  id="android-password"
+                  name="password"
+                  type="password"
+                  required
+                  class="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white transition outline-none focus:border-emerald-300/60"
+                  placeholder="At least 8 characters"
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="inline-flex w-full items-center justify-center rounded-2xl bg-emerald-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-300"
+            >
+              Generate keystore
+            </button>
+          </form>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-slate-950/80 p-8">
+          <p class="text-sm font-semibold tracking-[0.25em] text-emerald-300 uppercase">Output</p>
+          <h2 class="mt-3 text-3xl font-bold text-white">Generated Android signing bundle</h2>
+          <p class="mt-4 text-sm leading-7 text-slate-300">
+            After generation you will get a downloadable keystore plus the certificate export and fingerprints needed for store setup or OAuth integrations.
+          </p>
+
+          <div id="android-keystore-error" class="mt-6 hidden rounded-2xl border border-rose-400/30 bg-rose-400/10 px-4 py-3 text-sm text-rose-200"></div>
+          <div id="android-keystore-empty" class="mt-8 rounded-3xl border border-dashed border-white/10 px-6 py-12 text-center text-sm text-slate-400">
+            Generate the signing bundle to display the alias, fingerprints, and file downloads here.
+          </div>
+
+          <div id="android-keystore-result" class="mt-8 hidden">
+            <div id="android-keystore-summary" class="rounded-3xl border border-white/10 bg-white/5 p-6"></div>
+            <div id="android-keystore-downloads" class="mt-6 grid gap-4 sm:grid-cols-2"></div>
+            <div class="mt-6 rounded-3xl border border-emerald-400/20 bg-emerald-400/5 p-6 text-sm leading-7 text-slate-300">
+              Save the keystore file, alias, and password together. If your Gradle configuration asks for a separate key password, reuse the same password value you entered here.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-white/10 bg-slate-950 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-6 md:grid-cols-3">
+        <article class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <h2 class="text-2xl font-bold text-white">Play upload key setup</h2>
+          <p class="mt-4 text-sm leading-7 text-slate-300">
+            Use the generated keystore as your upload key for new apps or for internal testing pipelines that still sign artifacts before store submission.
+          </p>
+        </article>
+        <article class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <h2 class="text-2xl font-bold text-white">Fingerprint reuse</h2>
+          <p class="mt-4 text-sm leading-7 text-slate-300">
+            The SHA-1 and SHA-256 values are useful for APIs that require signing identity registration, including Google services and enterprise integrations.
+          </p>
+        </article>
+        <article class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <h2 class="text-2xl font-bold text-white">Recoverability</h2>
+          <p class="mt-4 text-sm leading-7 text-slate-300">
+            Store the generated bundle in a team-managed vault. Android signing outages usually happen because the alias or keystore password disappears after the first release.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <ToolFaq items={faqItems} intro="Use this section to validate the container format, password handling, and release assumptions before you wire the keystore into a build job." />
+
+  <ToolCatalog current="android-keystore-generator" />
+</Layout>
+
+<script>
+  import type { DownloadableFile } from '@/scripts/tool-client'
+  import { downloadFile, postJson } from '@/scripts/tool-client'
+
+  interface AndroidKeystoreResponse {
+    summary: {
+      subject: string
+      alias: string
+      validityYears: number
+      fingerprintSha1: string
+      fingerprintSha256: string
+    }
+    files: DownloadableFile[]
+  }
+
+  const form = document.getElementById('android-keystore-form') as HTMLFormElement | null
+  const errorBox = document.getElementById('android-keystore-error') as HTMLDivElement | null
+  const emptyState = document.getElementById('android-keystore-empty') as HTMLDivElement | null
+  const result = document.getElementById('android-keystore-result') as HTMLDivElement | null
+  const summary = document.getElementById('android-keystore-summary') as HTMLDivElement | null
+  const downloads = document.getElementById('android-keystore-downloads') as HTMLDivElement | null
+
+  let generatedFiles: DownloadableFile[] = []
+
+  const createSummaryItem = (label: string, value: string, className = '') => {
+    const wrapper = document.createElement('div')
+    const term = document.createElement('dt')
+    const detail = document.createElement('dd')
+
+    wrapper.className = className
+    term.className = 'text-xs uppercase tracking-[0.25em] text-emerald-300'
+    term.textContent = label
+
+    detail.className = 'mt-2 text-sm leading-7 text-white'
+    detail.textContent = value
+
+    wrapper.append(term, detail)
+    return wrapper
+  }
+
+  const renderSummary = (response: AndroidKeystoreResponse) => {
+    const list = document.createElement('dl')
+    list.className = 'grid gap-4 sm:grid-cols-2'
+
+    const sha1 = createSummaryItem('SHA-1', response.summary.fingerprintSha1)
+    const sha256 = createSummaryItem('SHA-256', response.summary.fingerprintSha256)
+    sha1.lastElementChild?.classList.add('break-all')
+    sha256.lastElementChild?.classList.add('break-all')
+
+    list.append(
+      createSummaryItem('Subject', response.summary.subject, 'sm:col-span-2'),
+      createSummaryItem('Alias', response.summary.alias),
+      createSummaryItem('Validity', `${response.summary.validityYears} years`),
+      sha1,
+      sha256,
+    )
+
+    summary?.replaceChildren(list)
+  }
+
+  const renderDownloads = (files: DownloadableFile[]) => {
+    const buttons = files.map((file, index) => {
+      const button = document.createElement('button')
+      const name = document.createElement('span')
+      const hint = document.createElement('span')
+
+      button.type = 'button'
+      button.dataset.fileIndex = String(index)
+      button.className = 'rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-left transition hover:border-emerald-300/50 hover:bg-white/8'
+
+      name.className = 'block text-sm font-semibold text-white'
+      name.textContent = file.fileName
+
+      hint.className = 'mt-2 block text-xs uppercase tracking-[0.2em] text-emerald-300'
+      hint.textContent = 'Download file'
+
+      button.append(name, hint)
+      return button
+    })
+
+    downloads?.replaceChildren(...buttons)
+  }
+
+  downloads?.addEventListener('click', (event) => {
+    const target = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-file-index]')
+    if (!target) return
+    const file = generatedFiles[Number.parseInt(target.dataset.fileIndex || '-1', 10)]
+    if (file) downloadFile(file)
+  })
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault()
+
+    if (!form || !errorBox || !emptyState || !result || !summary || !downloads) return
+
+    const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement | null
+    const originalLabel = submitButton?.textContent || ''
+    if (submitButton) {
+      submitButton.disabled = true
+      submitButton.textContent = 'Generating...'
+    }
+
+    errorBox.classList.add('hidden')
+
+    try {
+      const formData = new FormData(form)
+      const payload = Object.fromEntries(formData.entries())
+      const response = await postJson<AndroidKeystoreResponse>('/api/tools/android-keystore-generator', payload)
+
+      generatedFiles = response.files
+      renderSummary(response)
+      renderDownloads(response.files)
+
+      emptyState.classList.add('hidden')
+      result.classList.remove('hidden')
+    } catch (error) {
+      errorBox.textContent = error instanceof Error ? error.message : 'The keystore generation failed.'
+      errorBox.classList.remove('hidden')
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false
+        submitButton.textContent = originalLabel
+      }
+    }
+  })
+</script>

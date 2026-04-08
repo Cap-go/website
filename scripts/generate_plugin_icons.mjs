@@ -4,7 +4,7 @@ import path from 'path'
 
 const require = createRequire(import.meta.url)
 const heroicons = require('@iconify-json/heroicons/icons.json')
-const pluginsFile = fs.readFileSync('src/config/plugins.ts', 'utf8')
+const pluginsFile = fs.readFileSync('apps/web/src/config/plugins.ts', 'utf8')
 const preservedIcons = new Set(['zebra-datawedge'])
 
 // 1. Parse actions
@@ -65,7 +65,7 @@ const toHeroiconName = (value) =>
     .toLowerCase()}-solid`
 
 // 3. Generate SVGs
-const outputDir = 'public/icons/plugins'
+const outputDir = 'apps/web/public/icons/plugins'
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true })
 }
