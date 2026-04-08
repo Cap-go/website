@@ -66,7 +66,15 @@ Deployments are handled with [`wrangler deploy`](https://developers.cloudflare.c
 
 - `bun run deploy:web` deploys the main website worker
 - `bun run deploy:docs` deploys the documentation worker
-- `bun run deploy` deploys both workers
+- `bun run deploy` is intentionally disabled so docs and web cannot be published together
+
+The `main` deploy workflow only publishes one worker per push:
+
+- docs-only changes publish the docs worker
+- web-only changes publish the web worker
+- mixed docs/web changes, or shared changes that affect both apps, must be split before merge and are rejected by the deploy workflow
+
+Manual deployments also require choosing a single worker target, and production deploys are serialized so docs and web are never published at the same time.
 
 ## Project structure
 
@@ -122,6 +130,7 @@ All commands are run from the repo root:
 | `bun run preview:docs` | Preview the docs locally |
 | `bun run deploy:web` | Deploy the website worker |
 | `bun run deploy:docs` | Deploy the docs worker |
+| `bun run deploy` | Fails intentionally to prevent deploying both workers together |
 | `bun run astro -- --help` | Get help using the Astro CLI |
 
 ## Automatic i18n

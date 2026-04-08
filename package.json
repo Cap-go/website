@@ -31,7 +31,7 @@
     "preview:docs": "cd apps/docs && bun run preview",
     "deploy:web": "cd apps/web && bun run deploy",
     "deploy:docs": "cd apps/docs && bun run deploy",
-    "deploy": "bun run deploy:docs && bun run deploy:web",
+    "deploy": "echo 'Refusing to deploy docs and web together. Use bun run deploy:docs or bun run deploy:web.' && exit 1",
     "types": "bunx supabase gen types typescript --project-id=xvwzpoazmxkqosrdewyv > apps/web/src/services/supabase.types.ts",
     "fmt": "prettier --write '**/*' --ignore-unknown",
     "blogs:translate_all": "bun run scripts/blogs/translate_all.tsx",
