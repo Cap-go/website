@@ -24,7 +24,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v6
       - name: Check for Typos
-        uses: crate-ci/typos@v1.44.0
+        # v1.44.0
+        uses: crate-ci/typos@631208b7aac2daa8b707f55e7331f9112b0e062d
 
   build:
     runs-on: ubuntu-latest
@@ -38,7 +39,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - uses: oven-sh/setup-bun@v2
+      # v2
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
         with:
           bun-version: latest
 
