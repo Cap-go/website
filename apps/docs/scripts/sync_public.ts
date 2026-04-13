@@ -13,8 +13,6 @@ const referencePatterns = [
   /~public\/([^'"`\s)]+)/g,
   /(?:src|href)=["']\/([^"'?#]+)["']/g,
   /url\(["']?\/([^)"'?#]+)["']?\)/g,
-  /!\[[^\]]*]\(\/([^\s)"'#?]+)/g,
-  /\[[^\]]*]\(\/([^\s)"'#?]+)/g,
   /["'`]\/([^"'`?#]+)["'`]/g,
 ]
 
@@ -61,12 +59,36 @@ function addReferencedAssets(content: string, pattern: RegExp, referencedAssets:
   }
 }
 
+function addMarkdownReferencedAssets(content: string, referencedAssets: Set<string>) {
+  let searchIndex = 0
+
+  while (searchIndex < content.length) {
+    const referenceIndex = content.indexOf('](/', searchIndex)
+    if (referenceIndex === -1) return
+
+    const pathStart = referenceIndex + 3
+    let pathEnd = pathStart
+    while (pathEnd < content.length) {
+      const char = content[pathEnd]
+      if (char === ')' || char === '"' || char === '\'' || char === '#' || char === '?' || /\s/.test(char)) break
+      pathEnd += 1
+    }
+
+    const assetPath = resolveReferencedAsset(content.slice(pathStart, pathEnd))
+    if (assetPath) referencedAssets.add(assetPath)
+
+    searchIndex = pathEnd > pathStart ? pathEnd : pathStart
+  }
+}
+
 function collectReferencedAssets(scanPath: string, referencedAssets: Set<string>) {
   const content = readFileSync(scanPath, 'utf8')
 
   for (const pattern of referencePatterns) {
     addReferencedAssets(content, pattern, referencedAssets)
   }
+
+  addMarkdownReferencedAssets(content, referencedAssets)
 }
 
 if (!existsSync(sourcePublicDir)) {
