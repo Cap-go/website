@@ -77,7 +77,7 @@ for (const scanTarget of scanTargets) {
 
 let copiedBytes = 0
 
-for (const assetPath of [...referencedAssets].sort()) {
+for (const assetPath of [...referencedAssets].sort((left, right) => left.localeCompare(right))) {
   const sourcePath = resolve(sourcePublicDir, assetPath)
   const outputPath = resolve(targetPublicDir, assetPath)
   mkdirSync(dirname(outputPath), { recursive: true })
