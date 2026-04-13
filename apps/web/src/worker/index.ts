@@ -305,52 +305,64 @@ function methodNotAllowed(): Response {
   return webJson({ error: 'Method not allowed.' }, 405)
 }
 
+type RouteDefinition = {
+  methods: readonly string[],
+  handle: (request: Request, env: Env) => Promise<Response>,
+}
+
+const routeDefinitions: Record<string, RouteDefinition> = {
+  '/sponsors.json': {
+    methods: ['GET'],
+    handle: async (_request, env) => await handleSponsors(env),
+  },
+  '/status.json': {
+    methods: ['GET'],
+    handle: async () => await handleStatus(),
+  },
+  '/api/tools/android-keystore-generator': {
+    methods: ['POST'],
+    handle: async (request) => await handleSigningRequest(
+      request,
+      normalizeAndroidKeystoreInput,
+      createAndroidKeystoreBundle,
+      'Unable to validate the Android keystore request.',
+      'Internal server error generating the Android keystore.',
+      'Unexpected Android keystore generation failure',
+    ),
+  },
+  '/api/tools/ios-certificate-generator': {
+    methods: ['POST'],
+    handle: async (request) => await handleSigningRequest(
+      request,
+      normalizeIosCertificateInput,
+      createIosCertificateBundle,
+      'Unable to validate the iOS certificate request.',
+      'Internal server error generating the iOS certificate request.',
+      'Unexpected iOS certificate generation failure',
+    ),
+  },
+  '/api/tools/ios-udid-finder/profile': {
+    methods: ['GET'],
+    handle: async (request, env) => await handleUdidProfile(request, env),
+  },
+  '/api/tools/ios-udid-finder/callback': {
+    methods: ['GET', 'POST'],
+    handle: async (request) => await handleUdidCallback(request),
+  },
+}
+
+async function handleRouteRequest(request: Request, env: Env, pathname: string): Promise<Response | null> {
+  const route = routeDefinitions[pathname]
+  if (!route) return null
+  if (!route.methods.includes(request.method)) return methodNotAllowed()
+  return await route.handle(request, env)
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
-    const url = new URL(request.url)
-
-    if (request.method === 'GET' && url.pathname === '/sponsors.json') {
-      return await handleSponsors(env)
-    }
-
-    if (request.method === 'GET' && url.pathname === '/status.json') {
-      return await handleStatus()
-    }
-
-    if (url.pathname === '/api/tools/android-keystore-generator') {
-      if (request.method !== 'POST') return methodNotAllowed()
-      return await handleSigningRequest(
-        request,
-        normalizeAndroidKeystoreInput,
-        createAndroidKeystoreBundle,
-        'Unable to validate the Android keystore request.',
-        'Internal server error generating the Android keystore.',
-        'Unexpected Android keystore generation failure',
-      )
-    }
-
-    if (url.pathname === '/api/tools/ios-certificate-generator') {
-      if (request.method !== 'POST') return methodNotAllowed()
-      return await handleSigningRequest(
-        request,
-        normalizeIosCertificateInput,
-        createIosCertificateBundle,
-        'Unable to validate the iOS certificate request.',
-        'Internal server error generating the iOS certificate request.',
-        'Unexpected iOS certificate generation failure',
-      )
-    }
-
-    if (url.pathname === '/api/tools/ios-udid-finder/profile') {
-      if (request.method !== 'GET') return methodNotAllowed()
-      return await handleUdidProfile(request, env)
-    }
-
-    if (url.pathname === '/api/tools/ios-udid-finder/callback') {
-      if (request.method !== 'GET' && request.method !== 'POST') return methodNotAllowed()
-      return await handleUdidCallback(request)
-    }
-
+    const pathname = new URL(request.url).pathname
+    const routeResponse = await handleRouteRequest(request, env, pathname)
+    if (routeResponse) return routeResponse
     return await env.ASSETS.fetch(request)
   },
 }

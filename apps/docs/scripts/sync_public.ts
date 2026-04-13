@@ -13,8 +13,8 @@ const referencePatterns = [
   /~public\/([^'"`\s)]+)/g,
   /(?:src|href)=["']\/([^"'?#]+)["']/g,
   /url\(["']?\/([^)"'?#]+)["']?\)/g,
-  /!\[[^\]]*]\(\/([^\s)"'#?]+)(?:[?#][^)\s]*)?(?:\s+(?:"[^"]*"|'[^']*'))?\)/g,
-  /\[[^\]]*]\(\/([^\s)"'#?]+)(?:[?#][^)\s]*)?(?:\s+(?:"[^"]*"|'[^']*'))?\)/g,
+  /!\[[^\]]*]\(\/([^\s)"'#?]+)/g,
+  /\[[^\]]*]\(\/([^\s)"'#?]+)/g,
   /["'`]\/([^"'`?#]+)["'`]/g,
 ]
 
@@ -29,7 +29,9 @@ function walkFiles(rootDir: string): string[] {
   const discovered: string[] = []
 
   while (stack.length > 0) {
-    const currentDir = stack.pop()!
+    const currentDir = stack.pop()
+    if (!currentDir) continue
+
     for (const entry of readdirSync(currentDir, { withFileTypes: true })) {
       const entryPath = join(currentDir, entry.name)
       if (entry.isDirectory()) stack.push(entryPath)
@@ -40,24 +42,30 @@ function walkFiles(rootDir: string): string[] {
   return discovered
 }
 
+function resolveReferencedAsset(rawPath: string | undefined): string | null {
+  const normalizedPath = rawPath?.trim().replace(/^\/+/, '')
+  if (!normalizedPath || normalizedPath.endsWith('/')) return null
+
+  const sourcePath = resolve(sourcePublicDir, normalizedPath)
+  if (!isWithinRoot(sourcePublicDir, sourcePath)) return null
+  if (!existsSync(sourcePath)) return null
+  if (!statSync(sourcePath).isFile()) return null
+
+  return normalizedPath
+}
+
+function addReferencedAssets(content: string, pattern: RegExp, referencedAssets: Set<string>) {
+  for (const match of content.matchAll(pattern)) {
+    const assetPath = resolveReferencedAsset(match[1])
+    if (assetPath) referencedAssets.add(assetPath)
+  }
+}
+
 function collectReferencedAssets(scanPath: string, referencedAssets: Set<string>) {
   const content = readFileSync(scanPath, 'utf8')
 
   for (const pattern of referencePatterns) {
-    for (const match of content.matchAll(pattern)) {
-      const rawPath = match[1]?.trim()
-      if (!rawPath) continue
-
-      const normalizedPath = rawPath.replace(/^\/+/, '')
-      if (!normalizedPath || normalizedPath.endsWith('/')) continue
-
-      const sourcePath = resolve(sourcePublicDir, normalizedPath)
-      if (!isWithinRoot(sourcePublicDir, sourcePath)) continue
-      if (!existsSync(sourcePath)) continue
-      if (!statSync(sourcePath).isFile()) continue
-
-      referencedAssets.add(normalizedPath)
-    }
+    addReferencedAssets(content, pattern, referencedAssets)
   }
 }
 
