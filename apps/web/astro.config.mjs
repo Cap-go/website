@@ -10,13 +10,29 @@ const SRC_DIR = `${normalizeDirectoryPath(fileURLToPath(new URL('./src/', import
 const PUBLIC_DIR = normalizeDirectoryPath(fileURLToPath(new URL('./public/', import.meta.url)))
 const pageLastModDates = getPageLastModDates()
 const pluginIcons = buildPluginIcons('src/config/plugins.ts')
+const SITE_DOMAIN = process.env.BRANCH === 'development' ? config.base_domain.development : config.base_domain.prod
+const I18N_MIDDLEWARE_SHIM = fileURLToPath(new URL('./src/lib/astro-i18n-aut-middleware.ts', import.meta.url))
+const viteConfig = buildSharedViteConfig({
+  srcDir: SRC_DIR,
+  publicDir: PUBLIC_DIR,
+  cpuCount: CPU_COUNT,
+  ssrNoExternal: ['astro-i18n-aut', 'astro-i18n-aut/middleware'],
+})
+
+viteConfig.resolve.alias.push({
+  find: 'astro-i18n-aut/middleware',
+  replacement: I18N_MIDDLEWARE_SHIM,
+})
 
 export default defineConfig({
   ...buildSharedAstroBaseConfig({
-    siteDomain: config.base_domain.prod,
+    siteDomain: SITE_DOMAIN,
     locales,
     defaultLocale,
     cpuCount: CPU_COUNT,
+    build: {
+      output: 'static',
+    },
   }),
   integrations: buildSharedIntegrations({
     pluginIcons,
@@ -24,9 +40,5 @@ export default defineConfig({
     localeNames,
     pageLastModDates,
   }),
-  vite: buildSharedViteConfig({
-    srcDir: SRC_DIR,
-    publicDir: PUBLIC_DIR,
-    cpuCount: CPU_COUNT,
-  }),
+  vite: viteConfig,
 })

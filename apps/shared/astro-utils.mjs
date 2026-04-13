@@ -54,7 +54,12 @@ export function toHeroiconName(value) {
 
 export function buildPluginIcons(configPath) {
   try {
-    const iconNames = [...readFileSync(configPath, 'utf8').matchAll(/icon:\s*'([^']+)'/g)].map(([, iconName]) => toHeroiconName(iconName))
+    const configSource = readFileSync(configPath, 'utf8')
+    const iconMatches = [
+      ...configSource.matchAll(/icon:\s*'([^']+)'/g),
+      ...configSource.matchAll(/'[^']+':\s*'([^']+)'/g),
+    ]
+    const iconNames = iconMatches.map(([, iconName]) => toHeroiconName(iconName))
     return [...new Set(['arrow-up-right-solid', ...iconNames])].sort((left, right) => left.localeCompare(right))
   } catch (error) {
     throw new Error(

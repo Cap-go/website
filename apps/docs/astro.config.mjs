@@ -16,10 +16,11 @@ const WEB_PLUGIN_CONFIG = fileURLToPath(new URL('../web/src/config/plugins.ts', 
 
 const pageLastModDates = getPageLastModDates()
 const pluginIcons = buildPluginIcons(WEB_PLUGIN_CONFIG)
+const SITE_DOMAIN = process.env.BRANCH === 'development' ? config.base_domain.development : config.base_domain.prod
 
 export default defineConfig({
   ...buildSharedAstroBaseConfig({
-    siteDomain: config.base_domain.prod,
+    siteDomain: SITE_DOMAIN,
     locales,
     defaultLocale,
     cpuCount: CPU_COUNT,

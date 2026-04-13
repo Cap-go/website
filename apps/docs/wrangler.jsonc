@@ -17,16 +17,22 @@
     { "pattern": "capgo.app/ja/docs*", "zone_name": "capgo.app" },
     { "pattern": "capgo.app/ko/docs*", "zone_name": "capgo.app" },
     { "pattern": "capgo.app/zh/docs*", "zone_name": "capgo.app" },
-    { "pattern": "capgo.app/_docs*", "zone_name": "capgo.app" },
-    { "pattern": "development.capgo.app/docs*", "zone_name": "capgo.app" },
-    { "pattern": "development.capgo.app/de/docs*", "zone_name": "capgo.app" },
-    { "pattern": "development.capgo.app/es/docs*", "zone_name": "capgo.app" },
-    { "pattern": "development.capgo.app/fr/docs*", "zone_name": "capgo.app" },
-    { "pattern": "development.capgo.app/id/docs*", "zone_name": "capgo.app" },
-    { "pattern": "development.capgo.app/it/docs*", "zone_name": "capgo.app" },
-    { "pattern": "development.capgo.app/ja/docs*", "zone_name": "capgo.app" },
-    { "pattern": "development.capgo.app/ko/docs*", "zone_name": "capgo.app" },
-    { "pattern": "development.capgo.app/zh/docs*", "zone_name": "capgo.app" },
-    { "pattern": "development.capgo.app/_docs*", "zone_name": "capgo.app" }
-  ]
+    { "pattern": "capgo.app/_docs*", "zone_name": "capgo.app" }
+  ],
+  "env": {
+    "development": {
+      "routes": [
+        { "pattern": "development.capgo.app/docs*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/de/docs*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/es/docs*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/fr/docs*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/id/docs*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/it/docs*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/ja/docs*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/ko/docs*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/zh/docs*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/_docs*", "zone_name": "capgo.app" }
+      ]
+    }
+  }
 }

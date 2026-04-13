@@ -1,62 +1,12 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
-import { decodePayload } from '@/lib/tools/udid'
-import { getRelativeLocaleUrl } from 'astro:i18n'
-
-const UDID_RESULT_COOKIE = 'ios_udid_payload'
-const UDID_RESULT_PATH = '/tools/ios-udid-finder/result/'
-const locale = Astro.locals.locale
-const toAbsoluteLocaleUrl = (path: string) => new URL(getRelativeLocaleUrl(locale, path), Astro.url.origin).toString()
-const cookieValue = Astro.cookies.get(UDID_RESULT_COOKIE)?.value ?? null
-const payload = decodePayload(cookieValue)
-
-Astro.response.headers.set('Cache-Control', 'no-store, max-age=0, must-revalidate')
-Astro.response.headers.set('Pragma', 'no-cache')
-
-if (cookieValue) {
-  Astro.cookies.delete(UDID_RESULT_COOKIE, { path: UDID_RESULT_PATH })
-}
-
-const title = payload?.udid ? 'iOS UDID Finder Result | Device Identifier Received' : 'iOS UDID Finder Result'
-const description = payload?.udid
-  ? 'Your device response has been received. Review the UDID, model, serial number, and other identifiers below.'
-  : 'No device response payload was found.'
-const webPage = createWebPageLdJson(Astro.locals.runtimeConfig.public, {
-  name: title,
-  description,
-  url: Astro.url.href,
-})
-const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, webPage, {
-  includeOrganization: true,
-  includeBreadcrumbs: true,
-  breadcrumbs: [
-    { name: 'Home', url: toAbsoluteLocaleUrl('') },
-    { name: 'Tools', url: toAbsoluteLocaleUrl('tools') },
-    { name: 'iOS UDID Finder', url: toAbsoluteLocaleUrl('tools/ios-udid-finder') },
-    { name: 'Result', url: Astro.url.href },
-  ],
-})
-
 const content = {
-  title,
-  description,
+  title: 'iOS UDID Finder Result',
+  description: 'Review the UDID, model, serial number, and other identifiers captured from the device profile response.',
   keywords: 'ios udid result, iphone udid response, ipad device identifier result, ios profile service result, tester device registration',
   robots: 'noindex, nofollow',
-  ldJSON,
+  ldJSON: undefined,
 }
-
-const rows = payload
-  ? [
-      ['UDID', payload.udid],
-      ['Device name', payload.deviceName],
-      ['Product', payload.product],
-      ['iOS version', payload.version],
-      ['Serial number', payload.serial],
-      ['IMEI', payload.imei],
-      ['MEID', payload.meid],
-    ].filter((row) => row[1])
-  : []
 ---
 
 <Layout content={content}>
@@ -66,49 +16,23 @@ const rows = payload
         <p class="text-sm font-semibold tracking-[0.25em] text-fuchsia-300 uppercase">Device response</p>
         <h1 class="mt-3 text-4xl font-bold text-white">iOS UDID Finder result</h1>
         <p id="copy-status" class="sr-only" aria-live="polite"></p>
-
-        {
-          payload?.udid ? (
-            <>
-              <p class="mt-4 text-sm leading-7 text-slate-300">
-                The backend received the device payload successfully. Copy the values you need for Apple Developer or your tester registry below.
-              </p>
-              <div class="mt-8 space-y-4">
-                {rows.map(([label, value], index) => (
-                  <div class="rounded-2xl border border-white/10 bg-slate-950/70 p-5">
-                    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                      <div>
-                        <p class="text-xs tracking-[0.25em] text-fuchsia-300 uppercase">{label}</p>
-                        <p class="mt-2 font-mono text-sm break-all text-white">{value}</p>
-                      </div>
-                      <button
-                        type="button"
-                        class="inline-flex items-center justify-center rounded-2xl border border-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:border-fuchsia-300/60 hover:bg-white/5"
-                        data-copy-value={value}
-                      >
-                        Copy
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </>
-          ) : (
-            <div class="mt-8 rounded-2xl border border-amber-400/20 bg-amber-400/10 p-6 text-sm leading-7 text-amber-100">
-              No device response was available for this session. Open this page through the profile-service redirect after installing the UDID profile on the device.
-            </div>
-          )
-        }
+        <p id="result-description" class="mt-4 text-sm leading-7 text-slate-300">
+          Waiting for a device response. If you just installed the profile, this page will populate automatically after the redirect completes.
+        </p>
+        <div id="result-rows" class="mt-8 space-y-4"></div>
+        <div id="result-empty" class="mt-8 rounded-2xl border border-amber-400/20 bg-amber-400/10 p-6 text-sm leading-7 text-amber-100">
+          No device response was available for this session. Open this page through the profile-service redirect after installing the UDID profile on the device.
+        </div>
 
         <div class="mt-8 flex flex-col gap-4 sm:flex-row">
           <a
-            href={getRelativeLocaleUrl(Astro.locals.locale, 'tools/ios-udid-finder')}
+            href="/tools/ios-udid-finder/"
             class="inline-flex items-center justify-center rounded-2xl bg-fuchsia-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-fuchsia-300"
           >
             Back to the UDID finder
           </a>
           <a
-            href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/cloud-build/ios')}
+            href="/docs/cli/cloud-build/ios/"
             class="inline-flex items-center justify-center rounded-2xl border border-white/15 px-6 py-3 text-sm font-semibold text-white transition hover:border-fuchsia-300/60 hover:bg-white/5"
           >
             Continue to iOS signing docs
@@ -120,12 +44,108 @@ const rows = payload
 </Layout>
 
 <script>
+  const UDID_RESULT_COOKIE = 'ios_udid_payload'
+  const UDID_RESULT_PATH = '/tools/ios-udid-finder/result/'
+  const fields = [
+    ['UDID', 'udid'],
+    ['Device name', 'deviceName'],
+    ['Product', 'product'],
+    ['iOS version', 'version'],
+    ['Serial number', 'serial'],
+    ['IMEI', 'imei'],
+    ['MEID', 'meid'],
+  ]
+
   const statusRegion = document.querySelector<HTMLElement>('#copy-status')
+  const description = document.querySelector<HTMLElement>('#result-description')
+  const rowsRoot = document.querySelector<HTMLElement>('#result-rows')
+  const emptyState = document.querySelector<HTMLElement>('#result-empty')
 
   function announceCopyStatus(message: string): void {
     if (statusRegion) {
       statusRegion.textContent = message
     }
+  }
+
+  function readCookie(name: string): string | null {
+    const prefix = `${name}=`
+    return (
+      document.cookie
+        .split(';')
+        .map((chunk) => chunk.trim())
+        .find((chunk) => chunk.startsWith(prefix))
+        ?.slice(prefix.length) ?? null
+    )
+  }
+
+  function clearResultCookie(): void {
+    const secure = window.location.protocol === 'https:' ? '; Secure' : ''
+    document.cookie = `${UDID_RESULT_COOKIE}=; Max-Age=0; Path=${UDID_RESULT_PATH}; SameSite=Lax${secure}`
+  }
+
+  function decodePayload(value: string | null): Record<string, string> | null {
+    if (!value) return null
+
+    try {
+      const normalized = value.replace(/-/g, '+').replace(/_/g, '/')
+      const padding = normalized.length % 4 === 0 ? '' : '='.repeat(4 - (normalized.length % 4))
+      const decoded = window.atob(normalized + padding)
+      return JSON.parse(decoded) as Record<string, string>
+    } catch {
+      return null
+    }
+  }
+
+  function buildRow(label: string, value: string): HTMLDivElement {
+    const card = document.createElement('div')
+    card.className = 'rounded-2xl border border-white/10 bg-slate-950/70 p-5'
+
+    const wrapper = document.createElement('div')
+    wrapper.className = 'flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'
+
+    const text = document.createElement('div')
+    const labelElement = document.createElement('p')
+    labelElement.className = 'text-xs tracking-[0.25em] text-fuchsia-300 uppercase'
+    labelElement.textContent = label
+
+    const valueElement = document.createElement('p')
+    valueElement.className = 'mt-2 font-mono text-sm break-all text-white'
+    valueElement.textContent = value
+
+    const button = document.createElement('button')
+    button.type = 'button'
+    button.className = 'inline-flex items-center justify-center rounded-2xl border border-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:border-fuchsia-300/60 hover:bg-white/5'
+    button.dataset.copyValue = value
+    button.textContent = 'Copy'
+
+    text.append(labelElement, valueElement)
+    wrapper.append(text, button)
+    card.append(wrapper)
+
+    return card
+  }
+
+  function renderPayload(payload: Record<string, string> | null): void {
+    if (!rowsRoot || !emptyState || !description) return
+
+    rowsRoot.replaceChildren()
+
+    const rows = fields
+      .map(([label, key]) => [label, payload?.[key] ?? ''] as const)
+      .filter(([, value]) => Boolean(value))
+
+    if (payload?.udid && rows.length > 0) {
+      document.title = 'iOS UDID Finder Result | Device Identifier Received'
+      description.textContent = 'The backend received the device payload successfully. Copy the values you need for Apple Developer or your tester registry below.'
+      emptyState.classList.add('hidden')
+      rows.forEach(([label, value]) => rowsRoot.append(buildRow(label, value)))
+      bindCopyButtons()
+      return
+    }
+
+    document.title = 'iOS UDID Finder Result'
+    description.textContent = 'Waiting for a device response. If you just installed the profile, this page will populate automatically after the redirect completes.'
+    emptyState.classList.remove('hidden')
   }
 
   async function copyText(value: string): Promise<void> {
@@ -147,26 +167,36 @@ const rows = payload
     }
   }
 
-  document.querySelectorAll<HTMLButtonElement>('[data-copy-value]').forEach((button) => {
-    button.addEventListener('click', async () => {
-      const value = button.dataset.copyValue
-      if (!value) return
+  function bindCopyButtons(): void {
+    document.querySelectorAll<HTMLButtonElement>('[data-copy-value]').forEach((button) => {
+      button.addEventListener(
+        'click',
+        async () => {
+          const value = button.dataset.copyValue
+          if (!value) return
 
-      const original = button.textContent || 'Copy'
+          const original = button.textContent || 'Copy'
 
-      try {
-        await copyText(value)
-        button.textContent = 'Copied'
-        announceCopyStatus('Value copied to clipboard.')
-      } catch {
-        button.textContent = 'Copy failed'
-        announceCopyStatus('Copy to clipboard failed.')
-      }
+          try {
+            await copyText(value)
+            button.textContent = 'Copied'
+            announceCopyStatus('Value copied to clipboard.')
+          } catch {
+            button.textContent = 'Copy failed'
+            announceCopyStatus('Copy to clipboard failed.')
+          }
 
-      window.setTimeout(() => {
-        button.textContent = original
-        announceCopyStatus('')
-      }, 1600)
+          window.setTimeout(() => {
+            button.textContent = original
+            announceCopyStatus('')
+          }, 1600)
+        },
+        { once: true },
+      )
     })
-  })
+  }
+
+  const payload = decodePayload(readCookie(UDID_RESULT_COOKIE))
+  clearResultCookie()
+  renderPayload(payload)
 </script>

@@ -21,7 +21,6 @@ function getUrl(branch = ''): string {
 
 function getApiUrl(branch = ''): string {
   if (branch === 'local') return `http://api.${getRightKey(branch, 'base_domain')}`
-  else if (branch === 'development') return `https://api.${getRightKey(branch, 'base_domain')}`
   return `https://api.${getRightKey('prod', 'base_domain')}`
 }
 

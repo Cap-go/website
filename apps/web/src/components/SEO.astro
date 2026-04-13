@@ -1,8 +1,6 @@
 ---
 import { baseDomain, structuredData } from '@/config/app'
 import { appName } from '@/constants'
-import { AstroFont } from 'astro-font'
-import { join } from 'node:path'
 import * as m from '@/paraglide/messages'
 import { generateAlternateVersions } from '@/lib/alternateVersions'
 
@@ -85,58 +83,7 @@ const descSize = 170
 if (displayDescription.length > descSize) displayDescription = `${displayDescription.substring(0, descSize - 3)}...`
 
 const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
-
-const makeFontPath = (name: string) => join(process.cwd(), 'public', 'fonts', name)
-
 ---
-
-<AstroFont
-  config={[
-    {
-      preload: false,
-      display: 'swap',
-      fallback: 'serif',
-      selector: '.font-light',
-      name: 'AirbnbCerealLight',
-      src: [
-        {
-          style: 'light',
-          weight: '300',
-          path: makeFontPath('AirbnbCerealLight.woff'),
-        },
-      ],
-    },
-    {
-      preload: false,
-      display: 'swap',
-      fallback: 'serif',
-      selector: '.font-medium',
-      name: 'AirbnbCerealMedium',
-      src: [
-        {
-          style: 'medium',
-          weight: '500',
-          path: makeFontPath('AirbnbCerealMedium.woff'),
-        },
-      ],
-    },
-    {
-      preload: true,
-      display: 'swap',
-      fallback: 'serif',
-      selector: '.font-bold',
-      name: 'AirbnbCerealBold',
-      src: [
-        {
-          style: 'bold',
-          weight: '800',
-          path: makeFontPath('AirbnbCerealBold.woff'),
-        },
-      ],
-    },
-  ]}
-/>
-
 <!-- Sitemap -->
 <link rel="sitemap" href="/sitemap-index.xml" />
 
