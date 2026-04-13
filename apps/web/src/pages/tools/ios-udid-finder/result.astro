@@ -1,5 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
 const content = {
   title: 'iOS UDID Finder Result',
   description: 'Review the UDID, model, serial number, and other identifiers captured from the device profile response.',
@@ -7,9 +9,12 @@ const content = {
   robots: 'noindex, nofollow',
   ldJSON: undefined,
 }
+
+const toolHref = getRelativeLocaleUrl(Astro.locals.locale, 'tools/ios-udid-finder')
+const signingDocsHref = getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/cloud-build/ios')
 ---
 
-<Layout content={content}>
+<Layout content={content} disableThirdPartyScripts>
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
@@ -26,13 +31,13 @@ const content = {
 
         <div class="mt-8 flex flex-col gap-4 sm:flex-row">
           <a
-            href="/tools/ios-udid-finder/"
+            href={toolHref}
             class="inline-flex items-center justify-center rounded-2xl bg-fuchsia-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-fuchsia-300"
           >
             Back to the UDID finder
           </a>
           <a
-            href="/docs/cli/cloud-build/ios/"
+            href={signingDocsHref}
             class="inline-flex items-center justify-center rounded-2xl border border-white/15 px-6 py-3 text-sm font-semibold text-white transition hover:border-fuchsia-300/60 hover:bg-white/5"
           >
             Continue to iOS signing docs
@@ -44,8 +49,7 @@ const content = {
 </Layout>
 
 <script>
-  const UDID_RESULT_COOKIE = 'ios_udid_payload'
-  const UDID_RESULT_PATH = '/tools/ios-udid-finder/result/'
+  const UDID_RESULT_ENDPOINT = '/api/tools/ios-udid-finder/result'
   const fields = [
     ['UDID', 'udid'],
     ['Device name', 'deviceName'],
@@ -64,37 +68,6 @@ const content = {
   function announceCopyStatus(message: string): void {
     if (statusRegion) {
       statusRegion.textContent = message
-    }
-  }
-
-  function readCookie(name: string): string | null {
-    const prefix = `${name}=`
-    return (
-      document.cookie
-        .split(';')
-        .map((chunk) => chunk.trim())
-        .find((chunk) => chunk.startsWith(prefix))
-        ?.slice(prefix.length) ?? null
-    )
-  }
-
-  function clearResultCookie(): void {
-    const secure = window.location.protocol === 'https:' ? '; Secure' : ''
-    document.cookie = `${UDID_RESULT_COOKIE}=; Max-Age=0; Path=${UDID_RESULT_PATH}; SameSite=Lax${secure}`
-  }
-
-  function decodePayload(value: string | null): Record<string, string> | null {
-    if (!value) return null
-
-    try {
-      const normalized = value.replace(/-/g, '+').replace(/_/g, '/')
-      const padding = normalized.length % 4 === 0 ? '' : '='.repeat(4 - (normalized.length % 4))
-      const decoded = window.atob(normalized + padding)
-      const bytes = Uint8Array.from(decoded, (char) => char.charCodeAt(0))
-      const json = new TextDecoder().decode(bytes)
-      return JSON.parse(json) as Record<string, string>
-    } catch {
-      return null
     }
   }
 
@@ -150,6 +123,24 @@ const content = {
     emptyState.classList.remove('hidden')
   }
 
+  async function loadPayload(): Promise<Record<string, string> | null> {
+    try {
+      const response = await fetch(UDID_RESULT_ENDPOINT, {
+        credentials: 'same-origin',
+        headers: {
+          Accept: 'application/json',
+        },
+      })
+      if (!response.ok) return null
+      const data = await response.json()
+      if (!data || typeof data !== 'object' || !('payload' in data)) return null
+      const payload = data.payload
+      return payload && typeof payload === 'object' ? payload as Record<string, string> : null
+    } catch {
+      return null
+    }
+  }
+
   async function copyText(value: string): Promise<void> {
     try {
       await navigator.clipboard.writeText(value)
@@ -197,7 +188,7 @@ const content = {
     })
   }
 
-  const payload = decodePayload(readCookie(UDID_RESULT_COOKIE))
-  clearResultCookie()
-  renderPayload(payload)
+  void loadPayload().then((payload) => {
+    renderPayload(payload)
+  })
 </script>

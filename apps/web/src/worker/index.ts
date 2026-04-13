@@ -7,11 +7,13 @@ import {
 } from '../lib/tools/signing'
 import {
   createUdidMobileconfig,
+  decodePayload,
   encodePayload,
   extractPlistXml,
   parseUdidDevicePayload,
   signMobileconfig,
 } from '../lib/tools/udid'
+import { defaultLocale, locales } from '../services/locale'
 
 interface Env {
   ASSETS: {
@@ -35,6 +37,7 @@ const NO_STORE_HEADERS = {
 const UDID_RESULT_COOKIE = 'ios_udid_payload'
 const UDID_CHALLENGE_COOKIE = 'ios_udid_challenge'
 const UDID_RESULT_PATH = '/tools/ios-udid-finder/result/'
+const UDID_RESULT_API_PATH = '/api/tools/ios-udid-finder/result'
 const UDID_CALLBACK_PATH = '/api/tools/ios-udid-finder/callback'
 
 function webJson(body: unknown, status = 200, headers: HeadersInit = {}): Response {
@@ -82,6 +85,16 @@ function appendCookie(headers: Headers, name: string, value: string, path: strin
 
 function hasMatchingChallenge(expectedChallenge: string, cookieChallenge: string | null, payloadChallenge: string | undefined): boolean {
   return Boolean(expectedChallenge) && Boolean(cookieChallenge) && Boolean(payloadChallenge) && expectedChallenge === cookieChallenge && payloadChallenge === expectedChallenge
+}
+
+function normalizeLocale(locale: string | null): string | null {
+  if (!locale) return null
+  const normalized = locale.trim().toLowerCase()
+  return locales.includes(normalized as (typeof locales)[number]) ? normalized : null
+}
+
+function getUdidResultPath(locale: string | null): string {
+  return locale && locale !== defaultLocale ? `/${locale}${UDID_RESULT_PATH}` : UDID_RESULT_PATH
 }
 
 async function parseJsonBody(request: Request): Promise<Record<string, unknown>> {
@@ -247,8 +260,12 @@ async function handleStatus(): Promise<Response> {
 async function handleUdidProfile(request: Request, env: Env): Promise<Response> {
   const baseUrl = new URL(request.url)
   const challenge = crypto.randomUUID()
+  const locale = normalizeLocale(baseUrl.searchParams.get('locale'))
   const callbackUrl = new URL(UDID_CALLBACK_PATH, baseUrl)
   callbackUrl.searchParams.set('challenge', challenge)
+  if (locale) {
+    callbackUrl.searchParams.set('locale', locale)
+  }
 
   const profile = createUdidMobileconfig({
     callbackUrl: callbackUrl.toString(),
@@ -279,8 +296,11 @@ async function handleUdidProfile(request: Request, env: Env): Promise<Response> 
 }
 
 async function handleUdidCallback(request: Request): Promise<Response> {
+  const requestUrl = new URL(request.url)
+  const locale = normalizeLocale(requestUrl.searchParams.get('locale'))
+
   if (request.method === 'GET') {
-    return redirect('/tools/ios-udid-finder/')
+    return redirect(locale && locale !== defaultLocale ? `/${locale}/tools/ios-udid-finder/` : '/tools/ios-udid-finder/')
   }
 
   const rawBody = await request.text()
@@ -290,7 +310,6 @@ async function handleUdidCallback(request: Request): Promise<Response> {
   }
 
   const payload = parseUdidDevicePayload(plistXml)
-  const requestUrl = new URL(request.url)
   const expectedChallenge = requestUrl.searchParams.get('challenge') ?? ''
   const cookieChallenge = getCookie(request, UDID_CHALLENGE_COOKIE)
 
@@ -301,15 +320,22 @@ async function handleUdidCallback(request: Request): Promise<Response> {
   const secure = requestUrl.protocol === 'https:'
   const headers = new Headers({
     ...NO_STORE_HEADERS,
-    Location: UDID_RESULT_PATH,
+    Location: getUdidResultPath(locale),
   })
-  appendCookie(headers, UDID_RESULT_COOKIE, encodePayload(payload), UDID_RESULT_PATH, 300, secure, false)
+  appendCookie(headers, UDID_RESULT_COOKIE, encodePayload(payload), UDID_RESULT_API_PATH, 300, secure, true)
   appendCookie(headers, UDID_CHALLENGE_COOKIE, '', UDID_CALLBACK_PATH, 0, secure, true)
 
   return new Response(null, {
     status: 302,
     headers,
   })
+}
+
+async function handleUdidResult(request: Request): Promise<Response> {
+  const secure = new URL(request.url).protocol === 'https:'
+  const headers = new Headers(NO_STORE_HEADERS)
+  appendCookie(headers, UDID_RESULT_COOKIE, '', UDID_RESULT_API_PATH, 0, secure, true)
+  return webJson({ payload: decodePayload(getCookie(request, UDID_RESULT_COOKIE)) }, 200, headers)
 }
 
 function methodNotAllowed(): Response {
@@ -359,6 +385,10 @@ const routeDefinitions: Record<string, RouteDefinition> = {
   '/api/tools/ios-udid-finder/callback': {
     methods: ['GET', 'POST'],
     handle: async (request) => await handleUdidCallback(request),
+  },
+  '/api/tools/ios-udid-finder/result': {
+    methods: ['GET'],
+    handle: async (request) => await handleUdidResult(request),
   },
 }
 
