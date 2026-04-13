@@ -187,6 +187,13 @@ async function handleSponsors(env: Env): Promise<Response> {
       },
       body: JSON.stringify({ query }),
     })
+
+    if (!response.ok) {
+      const body = await response.text()
+      console.error('GitHub API error:', response.status, response.statusText, body)
+      return webJson([], 500)
+    }
+
     const data = await response.json()
     if (data.errors) {
       console.error('GraphQL Errors:', data.errors)
@@ -225,6 +232,10 @@ async function handleSponsors(env: Env): Promise<Response> {
 async function handleStatus(): Promise<Response> {
   try {
     const response = await fetch('https://status.capgo.app/status.json')
+    if (!response.ok) {
+      console.error('Status API error:', response.status, response.statusText)
+      return webJson({ indicator: 'unknown', uptime: 'N/A' }, 500)
+    }
     const data = await response.json()
     return webJson(data)
   } catch (error) {

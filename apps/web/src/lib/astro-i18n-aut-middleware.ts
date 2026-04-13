@@ -9,7 +9,7 @@ export const onRequest = defineMiddleware((context, next) => {
   const pathname = stripHtmlSuffix(url.pathname)
 
   if (pathname === `/${DEFAULT_LOCALE}` || pathname === `/${DEFAULT_LOCALE}/`) {
-    return context.redirect('/', 308)
+    return context.redirect(`/${url.search}`, 308)
   }
 
   if (pathname.startsWith(`/${DEFAULT_LOCALE}/`)) {

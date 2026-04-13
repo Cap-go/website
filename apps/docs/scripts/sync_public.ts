@@ -47,7 +47,8 @@ function resolveReferencedAsset(rawPath: string | undefined): string | null {
   const sourcePath = resolve(sourcePublicDir, normalizedPath)
   if (!isWithinRoot(sourcePublicDir, sourcePath)) return null
   if (!existsSync(sourcePath)) return null
-  if (!statSync(sourcePath).isFile()) return null
+  const sourceMetadata = lstatSync(sourcePath)
+  if (sourceMetadata.isSymbolicLink() || !sourceMetadata.isFile()) return null
 
   return normalizedPath
 }
@@ -120,11 +121,14 @@ let copiedBytes = 0
 for (const assetPath of [...referencedAssets].sort((left, right) => left.localeCompare(right))) {
   const sourcePath = resolve(sourcePublicDir, assetPath)
   if (!isWithinRoot(sourcePublicDir, sourcePath)) continue
+  if (!existsSync(sourcePath)) continue
+  const sourceMetadata = lstatSync(sourcePath)
+  if (sourceMetadata.isSymbolicLink() || !sourceMetadata.isFile()) continue
   const outputPath = resolve(targetPublicDir, assetPath)
   if (!isWithinRoot(targetPublicDir, outputPath)) continue
   mkdirSync(dirname(outputPath), { recursive: true })
   copyFileSync(sourcePath, outputPath)
-  copiedBytes += statSync(sourcePath).size
+  copiedBytes += sourceMetadata.size
 }
 
 const copiedMegabytes = (copiedBytes / 1024 / 1024).toFixed(2)

@@ -2,7 +2,7 @@
 @plugin '@tailwindcss/typography';
 
 @font-face {
-  font-family: 'AirbnbCerealLight';
+  font-family: AirbnbCerealLight;
   src: url('/fonts/AirbnbCerealLight.woff') format('woff');
   font-weight: 300;
   font-style: normal;
@@ -10,7 +10,7 @@
 }
 
 @font-face {
-  font-family: 'AirbnbCerealMedium';
+  font-family: AirbnbCerealMedium;
   src: url('/fonts/AirbnbCerealMedium.woff') format('woff');
   font-weight: 500;
   font-style: normal;
@@ -18,23 +18,11 @@
 }
 
 @font-face {
-  font-family: 'AirbnbCerealBold';
+  font-family: AirbnbCerealBold;
   src: url('/fonts/AirbnbCerealBold.woff') format('woff');
   font-weight: 800;
   font-style: normal;
   font-display: swap;
-}
-
-.font-light {
-  font-family: 'AirbnbCerealLight', ui-sans-serif, system-ui, sans-serif;
-}
-
-.font-medium {
-  font-family: 'AirbnbCerealMedium', ui-sans-serif, system-ui, sans-serif;
-}
-
-.font-bold {
-  font-family: 'AirbnbCerealBold', 'AirbnbCerealMedium', ui-sans-serif, system-ui, sans-serif;
 }
 
 html,
@@ -56,9 +44,9 @@ body,
 
 @theme {
   /* Typography tokens used by font-pj/font-prompt/font-inter utilities */
-  --font-pj: 'AirbnbCerealBold', 'AirbnbCerealMedium', ui-sans-serif, system-ui, sans-serif;
-  --font-prompt: 'AirbnbCerealBold', 'AirbnbCerealMedium', ui-sans-serif, system-ui, sans-serif;
-  --font-inter: 'AirbnbCerealMedium', ui-sans-serif, system-ui, sans-serif;
+  --font-pj: AirbnbCerealBold, AirbnbCerealMedium, ui-sans-serif, system-ui, sans-serif;
+  --font-prompt: AirbnbCerealBold, AirbnbCerealMedium, ui-sans-serif, system-ui, sans-serif;
+  --font-inter: AirbnbCerealMedium, ui-sans-serif, system-ui, sans-serif;
 
   /* Gray colors */
   --color-gray-50: oklch(0.984 0.003 247.858);

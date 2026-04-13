@@ -90,7 +90,9 @@ const content = {
       const normalized = value.replace(/-/g, '+').replace(/_/g, '/')
       const padding = normalized.length % 4 === 0 ? '' : '='.repeat(4 - (normalized.length % 4))
       const decoded = window.atob(normalized + padding)
-      return JSON.parse(decoded) as Record<string, string>
+      const bytes = Uint8Array.from(decoded, (char) => char.charCodeAt(0))
+      const json = new TextDecoder().decode(bytes)
+      return JSON.parse(json) as Record<string, string>
     } catch {
       return null
     }
@@ -191,7 +193,6 @@ const content = {
             announceCopyStatus('')
           }, 1600)
         },
-        { once: true },
       )
     })
   }
