@@ -11,6 +11,10 @@
     {
       "pattern": "capgo.app",
       "custom_domain": true
+    },
+    {
+      "pattern": "development.capgo.app",
+      "custom_domain": true
     }
   ]
 }
