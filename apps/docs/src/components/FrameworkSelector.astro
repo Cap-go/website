@@ -1,6 +1,7 @@
 ---
 // FrameworkSelector.astro - Framework selection buttons for conditional steps
 import * as m from '@/paraglide/messages'
+import { resolveMessageLocale } from '@/services/message-locale'
 
 interface FrameworkOption {
   id: string
@@ -18,15 +19,17 @@ const frameworks: FrameworkOption[] = [
   { id: 'qwik', nameKey: 'framework_qwik', icon: '/icons/qwik.svg' },
 ]
 
+const messageLocale = resolveMessageLocale(Astro.locals.starlightRoute.locale, Astro.currentLocale)
+
 const getFrameworkName = (key: string) => {
   const translations: Record<string, string> = {
-    framework_js_dom: m.framework_js_dom({}, { locale: Astro.locals.locale }),
-    framework_ts_dom: m.framework_ts_dom({}, { locale: Astro.locals.locale }),
-    framework_react: m.framework_react({}, { locale: Astro.locals.locale }),
-    framework_angular: m.framework_angular({}, { locale: Astro.locals.locale }),
-    framework_vue: m.framework_vue({}, { locale: Astro.locals.locale }),
-    framework_svelte: m.framework_svelte({}, { locale: Astro.locals.locale }),
-    framework_qwik: m.framework_qwik({}, { locale: Astro.locals.locale }),
+    framework_js_dom: m.framework_js_dom({}, { locale: messageLocale }),
+    framework_ts_dom: m.framework_ts_dom({}, { locale: messageLocale }),
+    framework_react: m.framework_react({}, { locale: messageLocale }),
+    framework_angular: m.framework_angular({}, { locale: messageLocale }),
+    framework_vue: m.framework_vue({}, { locale: messageLocale }),
+    framework_svelte: m.framework_svelte({}, { locale: messageLocale }),
+    framework_qwik: m.framework_qwik({}, { locale: messageLocale }),
   }
   return translations[key] || key
 }

@@ -1,6 +1,8 @@
 ---
 import type { StarlightRouteData } from '@astrojs/starlight/route-data'
 import * as m from '@/paraglide/messages'
+import { useRuntimeConfig } from '@/config/runtime'
+import { resolveMessageLocale } from '@/services/message-locale'
 
 const { head, entry } = Astro.locals.starlightRoute as StarlightRouteData
 
@@ -16,10 +18,10 @@ if (xDefault && !head.find(({ tag: Tag, attrs }) => Tag === 'link' && attrs?.rel
   })
 }
 
-const messageLocale = Astro.locals.locale as any
+const messageLocale = resolveMessageLocale(Astro.locals.starlightRoute.locale, Astro.currentLocale)
 const defaultDescription = m.website_description({}, { locale: messageLocale })
 
-const brand = Astro.locals.runtimeConfig?.public?.brand || 'Capgo'
+const brand = useRuntimeConfig().public.brand || 'Capgo'
 const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 const normalizeWhitespace = (value: string) => value.replace(/\s+/g, ' ').trim()
 

@@ -22,14 +22,11 @@ function withSitemapLastMod(item, pageLastModDates) {
 }
 
 export function buildSharedAstroBaseConfig({ siteDomain, locales, defaultLocale, cpuCount, build = {} }) {
-  return {
+  const { output = 'server', ...buildOptions } = build
+  const baseConfig = {
     trailingSlash: 'always',
     site: `https://${siteDomain}`,
-    output: 'server',
-    adapter: cloudflare(),
-    session: {
-      driver: sessionDrivers.null(),
-    },
+    output,
     i18n: {
       locales,
       defaultLocale,
@@ -41,11 +38,20 @@ export function buildSharedAstroBaseConfig({ siteDomain, locales, defaultLocale,
       concurrency: cpuCount,
       compressHTML: false,
       inlineStylesheets: 'auto',
-      ...build,
+      ...buildOptions,
     },
     server: { ...sharedServerOptions },
     preview: { ...sharedServerOptions },
   }
+
+  if (output === 'server') {
+    baseConfig.adapter = cloudflare()
+    baseConfig.session = {
+      driver: sessionDrivers.null(),
+    }
+  }
+
+  return baseConfig
 }
 
 export function buildSharedIntegrations({ pluginIcons, defaultLocale, localeNames, pageLastModDates }) {
@@ -77,7 +83,7 @@ export function buildSharedIntegrations({ pluginIcons, defaultLocale, localeName
   ]
 }
 
-export function buildSharedViteConfig({ srcDir, publicDir, cpuCount, optimizeDepsInclude = [], extraPlugins = [] }) {
+export function buildSharedViteConfig({ srcDir, publicDir, cpuCount, optimizeDepsInclude = [], extraPlugins = [], ssrNoExternal }) {
   const viteConfig = {
     resolve: {
       alias: [
@@ -108,6 +114,12 @@ export function buildSharedViteConfig({ srcDir, publicDir, cpuCount, optimizeDep
       }),
       ...extraPlugins,
     ],
+  }
+
+  if (ssrNoExternal) {
+    viteConfig.ssr = {
+      noExternal: ssrNoExternal,
+    }
   }
 
   if (optimizeDepsInclude.length > 0) {
