@@ -70,7 +70,7 @@ jobs:
             apps/docs/.astro
             node_modules/.astro
             node_modules/.cache
-          key: ${{ runner.os }}-astro-docs-${{ hashFiles('**/bun.lock') }}-${{ hashFiles('apps/docs/**', 'apps/web/public/**', 'apps/web/src/config/plugins.ts', 'messages/**', 'project.inlang/**', 'scripts/**', 'configs.json') }}
+          key: ${{ runner.os }}-astro-docs-${{ hashFiles('**/bun.lock') }}-${{ hashFiles('apps/docs/**', 'apps/shared/**', 'apps/web/public/**', 'apps/web/src/config/plugins.ts', 'messages/**', 'project.inlang/**', 'scripts/**', 'configs.json') }}
           restore-keys: |
             ${{ runner.os }}-astro-docs-${{ hashFiles('**/bun.lock') }}-
             ${{ runner.os }}-astro-docs-

@@ -1,5 +1,5 @@
 import { copyFileSync, existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs'
-import { dirname, join, relative, resolve } from 'node:path'
+import { dirname, isAbsolute, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const docsDir = resolve(dirname(fileURLToPath(import.meta.url)), '..')
@@ -13,10 +13,16 @@ const referencePatterns = [
   /~public\/([^'"`\s)]+)/g,
   /(?:src|href)=["']\/([^"'?#]+)["']/g,
   /url\(["']?\/([^)"'?#]+)["']?\)/g,
-  /!\[[^\]]*]\(\/([^)"'#?]+)(?:[?#][^)]*)?\)/g,
-  /\[[^\]]*]\(\/([^)"'#?]+)(?:[?#][^)]*)?\)/g,
+  /!\[[^\]]*]\(\/([^\s)"'#?]+)(?:[?#][^)\s]*)?(?:\s+(?:"[^"]*"|'[^']*'))?\)/g,
+  /\[[^\]]*]\(\/([^\s)"'#?]+)(?:[?#][^)\s]*)?(?:\s+(?:"[^"]*"|'[^']*'))?\)/g,
   /["'`]\/([^"'`?#]+)["'`]/g,
 ]
+
+function isWithinRoot(root: string, candidate: string): boolean {
+  const candidatePath = resolve(candidate)
+  const relativePath = relative(root, candidatePath)
+  return relativePath === '' || (!relativePath.startsWith('..') && !isAbsolute(relativePath))
+}
 
 function walkFiles(rootDir: string): string[] {
   const stack = [rootDir]
@@ -46,12 +52,21 @@ function collectReferencedAssets(scanPath: string, referencedAssets: Set<string>
       if (!normalizedPath || normalizedPath.endsWith('/')) continue
 
       const sourcePath = resolve(sourcePublicDir, normalizedPath)
+      if (!isWithinRoot(sourcePublicDir, sourcePath)) continue
       if (!existsSync(sourcePath)) continue
       if (!statSync(sourcePath).isFile()) continue
 
       referencedAssets.add(normalizedPath)
     }
   }
+}
+
+if (!existsSync(sourcePublicDir)) {
+  throw new Error(`Docs asset sync expects ${sourcePublicDir} to exist.`)
+}
+
+if (lstatSync(sourcePublicDir).isSymbolicLink()) {
+  throw new Error(`Expected ${sourcePublicDir} to be a real directory, not a symlink.`)
 }
 
 rmSync(targetPublicDir, { recursive: true, force: true })
@@ -61,14 +76,6 @@ for (const [relativePath, content] of trackedFiles) {
   const outputPath = join(targetPublicDir, relativePath)
   mkdirSync(dirname(outputPath), { recursive: true })
   writeFileSync(outputPath, content, 'utf8')
-}
-
-if (!existsSync(sourcePublicDir)) {
-  throw new Error(`Docs asset sync expects ${sourcePublicDir} to exist.`)
-}
-
-if (existsSync(sourcePublicDir) && lstatSync(sourcePublicDir).isSymbolicLink()) {
-  throw new Error(`Expected ${sourcePublicDir} to be a real directory, not a symlink.`)
 }
 
 const referencedAssets = new Set<string>()
@@ -82,7 +89,9 @@ let copiedBytes = 0
 
 for (const assetPath of [...referencedAssets].sort((left, right) => left.localeCompare(right))) {
   const sourcePath = resolve(sourcePublicDir, assetPath)
+  if (!isWithinRoot(sourcePublicDir, sourcePath)) continue
   const outputPath = resolve(targetPublicDir, assetPath)
+  if (!isWithinRoot(targetPublicDir, outputPath)) continue
   mkdirSync(dirname(outputPath), { recursive: true })
   copyFileSync(sourcePath, outputPath)
   copiedBytes += statSync(sourcePath).size

@@ -126,6 +126,8 @@ const translations = {
       </svg>
     </button>
   </div>
+
+  <span class="copy-page-feedback sr-only" aria-live="polite" aria-atomic="true"></span>
 </div>
 
 <script is:inline define:vars={{ translations, editUrl: editUrl?.toString() ?? '' }}>
@@ -167,6 +169,8 @@ const translations = {
 
       const title = btn.querySelector('.menu-item-title')
       const originalText = title?.textContent
+      const container = btn.closest('.copy-page-container')
+      const feedback = container?.querySelector('.copy-page-feedback')
 
       try {
         // Disable button during operation
@@ -228,16 +232,20 @@ const translations = {
         // Show success feedback
         if (title) {
           title.textContent = translations.copied
+          if (feedback) feedback.textContent = translations.copied
           setTimeout(() => {
             title.textContent = originalText || translations.copyPage
+            if (feedback) feedback.textContent = ''
           }, 2000)
         }
       } catch (error) {
         console.error('Failed to copy:', error)
         if (title) {
           title.textContent = translations.failedToCopy
+          if (feedback) feedback.textContent = translations.failedToCopy
           setTimeout(() => {
             title.textContent = originalText || translations.copyPage
+            if (feedback) feedback.textContent = ''
           }, 2000)
         }
       } finally {
