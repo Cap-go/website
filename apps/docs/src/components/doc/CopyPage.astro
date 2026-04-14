@@ -157,6 +157,8 @@ const translations = {
 
   // Copy page as markdown
   document.querySelectorAll('.copy-markdown').forEach((btn) => {
+    let resetTimer
+
     btn.addEventListener('click', async (e) => {
       e.preventDefault()
       e.stopPropagation()
@@ -179,7 +181,11 @@ const translations = {
       }
 
       function resetFeedback() {
-        window.setTimeout(() => {
+        if (resetTimer) {
+          window.clearTimeout(resetTimer)
+        }
+
+        resetTimer = window.setTimeout(() => {
           if (title) {
             title.textContent = originalText || translations.copyPage
           }
