@@ -1,0 +1,68 @@
+---
+title: "@capgo/capacitor-incoming-call-kit"
+description: Native incoming call presentation for Capacitor with iOS CallKit and Android full-screen notifications.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Present native incoming-call UI in Capacitor with iOS CallKit and Android full-screen notifications while keeping your push and media stack under your control.
+  image:
+    file: ~public/icons/plugins/incoming-call-kit.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/incoming-call-kit/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-incoming-call-kit/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Overview
+
+`@capgo/capacitor-incoming-call-kit` gives your Capacitor app the native ringing surface for incoming calls without forcing a specific VoIP vendor, push transport, or backend architecture.
+
+Use it when you already have your own signaling flow, SIP stack, Twilio integration, Stream integration, FCM delivery, or PushKit delivery and want the platform-native incoming-call experience layered onto that flow.
+
+<CardGrid stagger>
+  <Card title="CallKit on iOS" icon="approve-check">
+    Report incoming calls to CallKit and react to accepted, declined, ended, and timed-out events.
+  </Card>
+  <Card title="Full-screen Android UI" icon="rocket">
+    Show a high-priority notification and raise a full-screen activity when Android allows it.
+  </Card>
+  <Card title="Buffered listener events" icon="star">
+    User actions are retained until the Capacitor bridge consumes them, which helps when JavaScript starts late.
+  </Card>
+  <Card title="Transport agnostic" icon="setting">
+    Bring your own FCM, APNs, PushKit, SIP, or backend event flow. The plugin focuses on presentation, not transport.
+  </Card>
+  <Card title="Typed cross-platform API" icon="comment">
+    Use one small API to show calls, end calls, inspect active calls, and listen for state changes.
+  </Card>
+  <Card title="Platform guides" icon="open-book">
+    Start with the [Getting started guide](/docs/plugins/incoming-call-kit/getting-started/), then read the [iOS guide](/docs/plugins/incoming-call-kit/ios/) and [Android guide](/docs/plugins/incoming-call-kit/android/).
+  </Card>
+</CardGrid>
+
+## What the plugin handles
+
+- Native incoming-call presentation
+- Active call tracking
+- Accept, decline, end, and timeout events
+- Android notification and full-screen intent wiring
+- iOS CallKit reporting
+
+## What the plugin does not handle
+
+- FCM, APNs, or PushKit registration
+- Starting or managing the real audio or video session
+- Vendor-specific call logic from Twilio, Stream, Daily, Agora, SIP, or WebRTC SDKs
+
+If you need a complete communications stack, use this plugin as the native incoming-call surface and keep transport plus media sessions in your existing backend or SDK.

@@ -1,0 +1,69 @@
+---
+title: iOS
+description: Configure CallKit behavior and understand production limits on iOS.
+sidebar:
+  order: 3
+---
+
+## How iOS behavior works
+
+On iOS, the plugin reports the incoming call to CallKit. That gives you the system incoming-call sheet and standardized call actions without building your own native incoming-call UI.
+
+`requestPermissions()` resolves immediately on iOS because CallKit itself does not require a runtime permission dialog.
+
+## Basic example
+
+```ts
+import { IncomingCallKit } from '@capgo/capacitor-incoming-call-kit';
+
+await IncomingCallKit.showIncomingCall({
+  callId: 'call-42',
+  callerName: 'Ada Lovelace',
+  handle: '+1 555 010 020',
+  ios: {
+    handleType: 'phoneNumber',
+    supportsHolding: true,
+    supportsDTMF: false,
+  },
+});
+```
+
+## Handle types
+
+Use `ios.handleType` to control how CallKit formats the handle:
+
+- `generic` for app-specific identifiers
+- `phoneNumber` for real phone numbers
+- `emailAddress` for email-based identities
+
+## Background incoming calls
+
+This plugin does not register PushKit or APNs for you.
+
+For true background or terminated-state ringing on iOS, your host app still needs the native Apple push setup that matches your transport strategy:
+
+1. Enable Push Notifications when your transport uses Apple push delivery.
+2. Enable the Voice over IP background mode when your app uses a VoIP push flow.
+3. Deliver the incoming-call event to your app and invoke this plugin as soon as the Capacitor bridge is available.
+
+If your ring event exists only in JavaScript, you will get the best experience while the app is already running in the foreground.
+
+## Microphone and camera permissions
+
+CallKit does not replace your media SDK. If the real call session uses microphone or camera access, those usage descriptions still belong in your app:
+
+```xml
+<key>NSMicrophoneUsageDescription</key>
+<string>This app uses the microphone for calls.</string>
+<key>NSCameraUsageDescription</key>
+<string>This app uses the camera for video calls.</string>
+```
+
+Add only the keys your real calling flow needs.
+
+## Keep these responsibilities in your app layer
+
+- PushKit and APNs registration
+- Authentication and token refresh
+- Joining the real room or VoIP session after `callAccepted`
+- Ending or reconciling remote call state when the plugin emits `callDeclined`, `callEnded`, or `callTimedOut`

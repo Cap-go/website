@@ -43,6 +43,7 @@ Plugin Home Indicator|iOS home indicator visibility control plugin|docs/plugins/
 Plugin iBeacon|iBeacon proximity detection plugin|docs/plugins/ibeacon/**
 Plugin InAppBrowser|in-app browser plugin for opening web content|docs/plugins/inappbrowser/**
 Plugin In App Review|in-app review prompt plugin for app store ratings|docs/plugins/in-app-review/**
+Plugin Incoming Call Kit|native incoming call presentation with iOS CallKit and Android full-screen notifications|docs/plugins/incoming-call-kit/**
 Plugin Intent Launcher|Android intent launcher plugin|docs/plugins/intent-launcher/**
 Plugin Intercom|Intercom customer messaging and support plugin for native in-app chat|docs/plugins/intercom/**
 Plugin Is Root|root/jailbreak detection plugin|docs/plugins/is-root/**
