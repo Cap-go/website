@@ -1,23 +1,25 @@
 ---
 import type { StarlightRouteData } from '@astrojs/starlight/route-data'
 import * as m from '@/paraglide/messages'
+import { resolveMessageLocale } from '@/services/message-locale'
 
 const { editUrl, id: pageSlug } = Astro.locals.starlightRoute as StarlightRouteData
+const messageLocale = resolveMessageLocale(Astro.locals.starlightRoute.locale, Astro.currentLocale)
 
 const translations = {
-  copyPage: m.copy_page({}, { locale: Astro.locals.locale }),
-  copyPageOptions: m.copy_page_options({}, { locale: Astro.locals.locale }),
-  copyPageAsMarkdown: m.copy_page_as_markdown({}, { locale: Astro.locals.locale }),
-  viewAsMarkdown: m.view_as_markdown({}, { locale: Astro.locals.locale }),
-  viewPageAsPlainText: m.view_page_as_plain_text({}, { locale: Astro.locals.locale }),
-  viewRawOnGithub: m.view_raw_on_github({}, { locale: Astro.locals.locale }),
-  openRawOnGithub: m.open_raw_on_github({}, { locale: Astro.locals.locale }),
-  openInChatgpt: m.open_in_chatgpt({}, { locale: Astro.locals.locale }),
-  openInClaude: m.open_in_claude({}, { locale: Astro.locals.locale }),
-  openInPerplexity: m.open_in_perplexity({}, { locale: Astro.locals.locale }),
-  askQuestionsAboutPage: m.ask_questions_about_page({}, { locale: Astro.locals.locale }),
-  copied: m.copied({}, { locale: Astro.locals.locale }),
-  failedToCopy: m.failed_to_copy({}, { locale: Astro.locals.locale }),
+  copyPage: m.copy_page({}, { locale: messageLocale }),
+  copyPageOptions: m.copy_page_options({}, { locale: messageLocale }),
+  copyPageAsMarkdown: m.copy_page_as_markdown({}, { locale: messageLocale }),
+  viewAsMarkdown: m.view_as_markdown({}, { locale: messageLocale }),
+  viewPageAsPlainText: m.view_page_as_plain_text({}, { locale: messageLocale }),
+  viewRawOnGithub: m.view_raw_on_github({}, { locale: messageLocale }),
+  openRawOnGithub: m.open_raw_on_github({}, { locale: messageLocale }),
+  openInChatgpt: m.open_in_chatgpt({}, { locale: messageLocale }),
+  openInClaude: m.open_in_claude({}, { locale: messageLocale }),
+  openInPerplexity: m.open_in_perplexity({}, { locale: messageLocale }),
+  askQuestionsAboutPage: m.ask_questions_about_page({}, { locale: messageLocale }),
+  copied: m.copied({}, { locale: messageLocale }),
+  failedToCopy: m.failed_to_copy({}, { locale: messageLocale }),
 }
 ---
 
@@ -124,6 +126,8 @@ const translations = {
       </svg>
     </button>
   </div>
+
+  <span class="copy-page-feedback sr-only" aria-live="polite" aria-atomic="true"></span>
 </div>
 
 <script is:inline define:vars={{ translations, editUrl: editUrl?.toString() ?? '' }}>
@@ -165,6 +169,8 @@ const translations = {
 
       const title = btn.querySelector('.menu-item-title')
       const originalText = title?.textContent
+      const container = btn.closest('.copy-page-container')
+      const feedback = container?.querySelector('.copy-page-feedback')
 
       try {
         // Disable button during operation
@@ -226,16 +232,20 @@ const translations = {
         // Show success feedback
         if (title) {
           title.textContent = translations.copied
+          if (feedback) feedback.textContent = translations.copied
           setTimeout(() => {
             title.textContent = originalText || translations.copyPage
+            if (feedback) feedback.textContent = ''
           }, 2000)
         }
       } catch (error) {
         console.error('Failed to copy:', error)
         if (title) {
           title.textContent = translations.failedToCopy
+          if (feedback) feedback.textContent = translations.failedToCopy
           setTimeout(() => {
             title.textContent = originalText || translations.copyPage
+            if (feedback) feedback.textContent = ''
           }, 2000)
         }
       } finally {

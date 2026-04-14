@@ -11,10 +11,17 @@ interface SitemapUrl {
 }
 
 const HOSTNAME = 'https://capgo.app'
-const WEB_DIST = join('apps', 'web', 'dist', 'client')
-const DOCS_DIST = join('apps', 'docs', 'dist', 'client')
 
 const parser = new XMLParser()
+
+function resolveDistDir(appName: 'web' | 'docs'): string {
+  const distRoot = join('apps', appName, 'dist')
+  const clientDist = join(distRoot, 'client')
+  return existsSync(clientDist) ? clientDist : distRoot
+}
+
+const WEB_DIST = resolveDistDir('web')
+const DOCS_DIST = resolveDistDir('docs')
 
 async function normalizeSitemap(inputPath: string, outputPath = inputPath): Promise<boolean> {
   if (!existsSync(inputPath)) return false

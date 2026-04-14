@@ -24,6 +24,12 @@ export interface UdidDevicePayload {
   challenge: string
 }
 
+export interface UdidSigningCredentials {
+  certificatePem?: string
+  privateKeyPem?: string
+  chainPem?: string
+}
+
 function escapeXml(value: string): string {
   return value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&apos;')
 }
@@ -76,10 +82,10 @@ export function createUdidMobileconfig(options: UdidProfileOptions): string {
 </plist>`
 }
 
-export async function signMobileconfig(profileXml: string): Promise<Buffer | null> {
-  const certificatePem = normalizePem(import.meta.env.IOS_UDID_PROFILE_SIGNING_CERT_PEM)
-  const privateKeyPem = normalizePem(import.meta.env.IOS_UDID_PROFILE_SIGNING_KEY_PEM)
-  const chainPem = normalizePem(import.meta.env.IOS_UDID_PROFILE_SIGNING_CHAIN_PEM)
+export async function signMobileconfig(profileXml: string, credentials?: UdidSigningCredentials): Promise<Buffer | null> {
+  const certificatePem = normalizePem(credentials?.certificatePem ?? import.meta.env.IOS_UDID_PROFILE_SIGNING_CERT_PEM)
+  const privateKeyPem = normalizePem(credentials?.privateKeyPem ?? import.meta.env.IOS_UDID_PROFILE_SIGNING_KEY_PEM)
+  const chainPem = normalizePem(credentials?.chainPem ?? import.meta.env.IOS_UDID_PROFILE_SIGNING_CHAIN_PEM)
 
   if (!certificatePem || !privateKeyPem) {
     return null

@@ -2,16 +2,38 @@
   "name": "@capgo/docs",
   "private": true,
   "type": "module",
+  "dependencies": {
+    "@astrojs/cloudflare": "13.1.7",
+    "@astrojs/sitemap": "3.7.2",
+    "@astrojs/starlight": "0.38.2",
+    "@astrojs/starlight-docsearch": "0.7.0",
+    "@inlang/paraglide-js": "2.13.2",
+    "@tailwindcss/vite": "^4.2.1",
+    "astro": "6.1.3",
+    "astro-i18n-aut": "^0.7.3",
+    "astro-icon": "1.1.5",
+    "sharp": "^0.34.5",
+    "starlight-package-managers": "^0.11.1",
+    "tailwindcss": "^4.2.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.8",
+    "@types/node": "^25.5.0",
+    "vite-plugin-static-copy": "^4.0.0",
+    "wrangler": "4.73.0",
+    "zod": "^4"
+  },
   "scripts": {
+    "sync:public": "bun run ./scripts/sync_public.ts",
     "paraglide:compile": "bunx paraglide-js compile --project ../../project.inlang --outdir ./src/paraglide --emit-ts-declarations --silent",
     "astro": "astro",
-    "dev": "bun run paraglide:compile && astro dev",
-    "start": "bun run paraglide:compile && astro dev",
-    "clean:build-cache": "rm -rf dist .astro/content-modules.mjs .astro/content-assets.mjs",
-    "build": "bun run paraglide:compile && bun run clean:build-cache && NODE_OPTIONS=${NODE_OPTIONS:---max-old-space-size=16384} BUILD_CONCURRENCY=${BUILD_CONCURRENCY:-1} UV_THREADPOOL_SIZE=${UV_THREADPOOL_SIZE:-16} astro build",
-    "check": "bun run paraglide:compile && astro check",
+    "dev": "bun run sync:public && bun run paraglide:compile && astro dev",
+    "start": "bun run sync:public && bun run paraglide:compile && astro dev",
+    "clean:build-cache": "rm -rf dist .astro/content-modules.mjs .astro/content-assets.mjs .wrangler/deploy",
+    "build": "bun run sync:public && bun run paraglide:compile && bun run clean:build-cache && NODE_OPTIONS=${NODE_OPTIONS:---max-old-space-size=16384} BUILD_CONCURRENCY=${BUILD_CONCURRENCY:-1} UV_THREADPOOL_SIZE=${UV_THREADPOOL_SIZE:-16} astro build",
+    "check": "bun run sync:public && bun run paraglide:compile && astro check",
     "preview": "astro preview",
-    "preview:worker": "wrangler dev",
-    "deploy": "wrangler deploy"
+    "preview:worker": "rm -rf .wrangler/deploy && wrangler dev",
+    "deploy": "rm -rf .wrangler/deploy && wrangler deploy"
   }
 }

@@ -2,13 +2,10 @@ import starlight from '@astrojs/starlight'
 import starlightDocSearch from '@astrojs/starlight-docsearch'
 import { defineConfig } from 'astro/config'
 import { fileURLToPath } from 'node:url'
-import starlightImageZoom from 'starlight-image-zoom'
-import starlightLlmsTxt from 'starlight-llms-txt'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import config from '../../configs.json'
 import { buildSharedAstroBaseConfig, buildSharedIntegrations, buildSharedViteConfig } from '../shared/astro-config.mjs'
 import { buildPluginIcons, getBuildConcurrency, getPageLastModDates, normalizeDirectoryPath } from '../shared/astro-utils.mjs'
-import { docsLlmsCustomSets } from './src/config/llmsCustomSets'
 import { docsSidebar } from './src/config/sidebar.mjs'
 import { defaultLocale, localeNames, locales } from './src/services/locale'
 
@@ -18,16 +15,17 @@ const PUBLIC_DIR = normalizeDirectoryPath(fileURLToPath(new URL('./public/', imp
 const WEB_PLUGIN_CONFIG = fileURLToPath(new URL('../web/src/config/plugins.ts', import.meta.url))
 
 const pageLastModDates = getPageLastModDates()
-const docsExpludes = locales.map((locale) => `${locale}/**`)
 const pluginIcons = buildPluginIcons(WEB_PLUGIN_CONFIG)
+const SITE_DOMAIN = process.env.BRANCH === 'development' ? config.base_domain.development : config.base_domain.prod
 
 export default defineConfig({
   ...buildSharedAstroBaseConfig({
-    siteDomain: config.base_domain.prod,
+    siteDomain: SITE_DOMAIN,
     locales,
     defaultLocale,
     cpuCount: CPU_COUNT,
     build: {
+      output: 'static',
       assets: '_docs',
     },
   }),
@@ -55,19 +53,12 @@ export default defineConfig({
     starlight({
       title: 'Capgo',
       pagefind: false,
-      prerender: false,
+      prerender: true,
       plugins: [
         starlightDocSearch({
           appId: 'R0TIQUJRSN',
           apiKey: '039b8d50eaa068b9ff8726d912c6f388',
           indexName: 'capgo',
-        }),
-        starlightImageZoom({ showCaptions: false }),
-        starlightLlmsTxt({
-          projectName: 'capgo',
-          description: 'Capgo is set of tools for Capacitorjs apps, plugins live app updates with cloud hosting, more than 90 plugins for any problems.',
-          exclude: docsExpludes,
-          customSets: docsLlmsCustomSets,
         }),
       ],
       disable404Route: true,
@@ -97,6 +88,7 @@ export default defineConfig({
     publicDir: PUBLIC_DIR,
     cpuCount: CPU_COUNT,
     optimizeDepsInclude: ['mermaid'],
+    ssrNoExternal: true,
     extraPlugins: [
       viteStaticCopy({
         targets: [

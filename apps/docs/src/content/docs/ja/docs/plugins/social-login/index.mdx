@@ -24,13 +24,13 @@ locale: ja
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
-import { YouTube } from 'astro-embed';
+import YouTubeEmbed from '@/components/YouTubeEmbed.astro';
 
 ## ビデオウォークスルー
 
 プラグインのセットアップとログインフローの動作を簡単にデモでご覧いただけます。
 
-<YouTube id="iTINYxvSJrE" title="Capgo Social Login plugin overview" />
+<YouTubeEmbed id="iTINYxvSJrE" title="Capgo Social Login plugin overview" />
 
 <CardGrid stagger>
   <Card title="Googleログイン" icon="rocket">

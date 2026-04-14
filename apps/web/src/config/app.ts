@@ -19,9 +19,15 @@ function getUrl(branch = ''): string {
   return `https://${getRightKey('prod', 'base_domain')}`
 }
 
+function getApiUrlOverride(): string {
+  return (import.meta.env.PUBLIC_BASE_API_URL || '').trim().replace(/\/$/, '')
+}
+
 function getApiUrl(branch = ''): string {
+  const apiUrlOverride = getApiUrlOverride()
+  if (apiUrlOverride) return apiUrlOverride
   if (branch === 'local') return `http://api.${getRightKey(branch, 'base_domain')}`
-  else if (branch === 'development') return `https://api.${getRightKey(branch, 'base_domain')}`
+  else if (branch === 'development') return `https://api.${getRightKey('prod', 'base_domain')}`
   return `https://api.${getRightKey('prod', 'base_domain')}`
 }
 
