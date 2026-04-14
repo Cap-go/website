@@ -1,11 +1,9 @@
 import { glob } from 'astro/loaders'
-import { defineCollection, z } from 'astro:content'
+import { z } from 'astro/zod'
+import { defineCollection } from 'astro:content'
 import { locales, type Locales } from './services/locale'
 
-const localeSchema = z.custom<Locales>(
-  (value) => typeof value === 'string' && locales.includes(value as Locales),
-  { message: 'Invalid locale' },
-)
+const localeSchema = z.custom<Locales>((value) => typeof value === 'string' && locales.includes(value as Locales), { message: 'Invalid locale' })
 
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.md', base: 'src/content/blog', generateId: ({ entry }) => entry }),

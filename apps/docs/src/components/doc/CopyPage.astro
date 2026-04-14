@@ -205,29 +205,12 @@ const translations = {
           throw new Error('Failed to fetch markdown from any source')
         }
 
-        // Copy to clipboard using the most reliable method
-        try {
-          await navigator.clipboard.writeText(content)
-          console.log('Copied to clipboard successfully')
-        } catch (clipboardError) {
-          console.error('Clipboard API failed, trying fallback:', clipboardError)
-
-          // Fallback method using textarea
-          const textarea = document.createElement('textarea')
-          textarea.value = content
-          textarea.style.position = 'fixed'
-          textarea.style.opacity = '0'
-          document.body.appendChild(textarea)
-          textarea.focus()
-          textarea.select()
-          // @ts-expect-error execCommand is deprecated but used as fallback for older browsers
-          const success = document.execCommand('copy')
-          document.body.removeChild(textarea)
-
-          if (!success) {
-            throw new Error('Fallback copy method also failed')
-          }
+        if (!navigator.clipboard?.writeText) {
+          throw new Error('Clipboard API unavailable')
         }
+
+        await navigator.clipboard.writeText(content)
+        console.log('Copied to clipboard successfully')
 
         // Show success feedback
         if (title) {
