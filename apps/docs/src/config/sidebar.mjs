@@ -70,6 +70,7 @@ const pluginEntries = [
   ['Camera Preview', 'camera-preview'],
   ['Capacitor+', 'capacitor-plus'],
   ['Compass', 'compass'],
+  ['Contentsquare', 'contentsquare', [linkItem('iOS setup', '/docs/plugins/contentsquare/ios'), linkItem('Android setup', '/docs/plugins/contentsquare/android')]],
   ['Contacts', 'contacts'],
   ['Crisp', 'crisp'],
   ['Data Storage SQLite', 'data-storage-sqlite'],
