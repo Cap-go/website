@@ -112,16 +112,16 @@ Behind all these features, plugins, and certifications are real people. In Augus
 
 Jordan, Michael, and Martin (our CEO) spent a week working together, exploring the island, and building the relationships that make everything else possible. Some moments from that week:
 
-![The team at a beautiful viewpoint - Jordan, Michael, and Martin exploring Madeira on day one](/jordan_michael_martin_nice_view.jpeg)
+![The team at a beautiful viewpoint - Jordan, Michael, and Martin exploring Madeira on day one](/jordan_michael_martin_nice_view.webp)
 *Day one of the Madeira experience - Jordan (left), Michael (middle), and Martin (right, CEO) exploring the island's breathtaking views*
 
-![Working from paradise - the team on Calheta beach](/working_on_calheta.jpeg)
+![Working from paradise - the team on Calheta beach](/working_on_calheta.webp)
 *When your office is a sunny beach in Calheta - Jordan (left), Michael (middle), and Martin (right, CEO) getting work done in paradise*
 
-![Team adventure at Praia do Seixal waterfall](/jordan_michael_martin_madeira_waterfall.jpeg)
+![Team adventure at Praia do Seixal waterfall](/jordan_michael_martin_madeira_waterfall.webp)
 *Taking a break at the beautiful Praia do Seixal waterfall - Jordan (left), Michael (middle), and Martin (right, CEO)*
 
-![Michael and Martin at Câmara De Lobos viewpoint](/michael_martin_sun_madeira.jpeg)
+![Michael and Martin at Câmara De Lobos viewpoint](/michael_martin_sun_madeira.webp)
 *Michael (left) and Martin (right, CEO) taking in the views at Câmara De Lobos*
 
 And because no team trip is complete without karaoke in a Tesla:
