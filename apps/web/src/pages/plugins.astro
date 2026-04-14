@@ -59,6 +59,12 @@ const { localizedDocsSlugs, docsSlugs } = await getPluginDocsSlugs(locale)
 const pluginsWithStars = getPluginsWithStars(actions)
 const totalStars = getTotalStars()
 const totalDownloads = getTotalDownloads()
+const sortOptions = [
+  { value: 'downloads', label: 'Downloads', description: 'Most weekly npm usage' },
+  { value: 'stars', label: 'GitHub Stars', description: 'Most community interest' },
+  { value: 'alphabetical', label: 'Alphabetical', description: 'A to Z by plugin name' },
+] as const
+const defaultSortOption = sortOptions[0]
 
 // Parse descriptions for all plugins
 const plugins = await Promise.all(
@@ -128,7 +134,7 @@ const content = {
             {plugins.length}+ {m.plugins({}, { locale: Astro.locals.locale })}
           </div>
 
-          <h1 class="text-3xl font-bold text-white font-pj sm:text-4xl md:text-5xl">
+          <h1 class="font-pj text-3xl font-bold text-white sm:text-4xl md:text-5xl">
             {m.plugins({}, { locale: Astro.locals.locale })} Directory
           </h1>
           <p class="mt-4 max-w-2xl text-gray-300">Technical list of published plugins with direct links, npm download data, and GitHub stars.</p>
@@ -154,7 +160,7 @@ const content = {
     <section id="plugins" class="py-20">
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mb-16 text-center">
-          <h2 class="mb-6 text-4xl font-bold text-white font-pj">{m.browse_plugin_library({}, { locale: Astro.locals.locale })}</h2>
+          <h2 class="font-pj mb-6 text-4xl font-bold text-white">{m.browse_plugin_library({}, { locale: Astro.locals.locale })}</h2>
           <p class="mx-auto max-w-2xl text-xl text-gray-300">
             {m.discover_ready_plugins({}, { locale: Astro.locals.locale })}
           </p>
@@ -180,25 +186,72 @@ const content = {
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
           </div>
-          <div class="relative w-full sm:w-auto">
-            <select
-              id="plugin-sort"
+          <div id="plugin-sort-dropdown" class="relative w-full sm:w-auto">
+            <button
+              type="button"
+              id="plugin-sort-button"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="plugin-sort-menu"
               aria-label="Sort plugins by"
-              class="w-full cursor-pointer appearance-none rounded-xl border border-gray-700 bg-white/5 px-6 py-4 pr-10 text-white backdrop-blur-sm transition-all duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none sm:w-48"
+              data-sort-value={defaultSortOption.value}
+              class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-blue-400/30 bg-linear-to-b from-[#111827] to-[#0f172a] px-5 py-4 text-left shadow-[0_18px_40px_rgba(15,23,42,0.35)] transition-all duration-200 hover:border-blue-300/50 hover:shadow-[0_20px_50px_rgba(37,99,235,0.18)] focus-visible:border-blue-300 focus-visible:ring-2 focus-visible:ring-blue-400/30 focus-visible:outline-none sm:w-72"
             >
-              <option value="downloads">Downloads</option>
-              <option value="stars">GitHub Stars</option>
-              <option value="alphabetical">Alphabetical</option>
-            </select>
-            <svg
+              <span class="min-w-0">
+                <span class="block text-[11px] font-semibold tracking-[0.28em] text-blue-200/70 uppercase">Sort plugins</span>
+                <span id="plugin-sort-current-label" class="mt-1 block truncate text-base font-semibold text-white sm:text-lg">
+                  {defaultSortOption.label}
+                </span>
+              </span>
+              <span
+                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-colors duration-200 group-hover:border-blue-300/30 group-hover:text-white"
+              >
+                <svg id="plugin-sort-chevron" aria-hidden="true" class="h-5 w-5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </span>
+            </button>
+            <div
+              id="plugin-sort-menu"
               aria-hidden="true"
-              class="pointer-events-none absolute top-1/2 right-4 h-5 w-5 -translate-y-1/2 text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+              class="pointer-events-none invisible absolute inset-x-0 top-[calc(100%+0.75rem)] z-40 translate-y-2 rounded-2xl border border-blue-400/20 bg-slate-950/95 p-2 opacity-0 shadow-[0_28px_80px_rgba(2,6,23,0.75)] ring-1 ring-white/10 backdrop-blur-xl transition-all duration-200 sm:left-auto sm:min-w-80"
             >
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
+              <div class="px-3 pt-2 pb-1 text-[11px] font-semibold tracking-[0.28em] text-slate-500 uppercase">Choose an order</div>
+              <div class="mt-1 space-y-1">
+                {
+                  sortOptions.map((option) => (
+                    <button
+                      type="button"
+                      class:list={[
+                        'flex w-full items-center justify-between rounded-xl border px-4 py-3 text-left transition-all duration-200 focus-visible:ring-2 focus-visible:ring-blue-400/30 focus-visible:outline-none',
+                        option.value === defaultSortOption.value
+                          ? 'border-blue-400/40 bg-blue-500/15 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]'
+                          : 'border-transparent text-slate-200 hover:border-white/10 hover:bg-white/5 hover:text-white',
+                      ]}
+                      data-sort-option
+                      data-sort-value={option.value}
+                      data-sort-label={option.label}
+                      aria-pressed={option.value === defaultSortOption.value ? 'true' : 'false'}
+                    >
+                      <span class="min-w-0">
+                        <span class="block text-sm font-semibold">{option.label}</span>
+                        <span class="mt-1 block text-xs text-slate-400">{option.description}</span>
+                      </span>
+                      <svg
+                        aria-hidden="true"
+                        class:list={['h-5 w-5 shrink-0 text-blue-300', option.value === defaultSortOption.value ? 'opacity-100' : 'opacity-0']}
+                        data-sort-check
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </button>
+                  ))
+                }
+              </div>
+            </div>
           </div>
         </div>
         <div id="search-results-count" aria-live="polite" aria-atomic="true" class="mb-4 text-center text-sm text-gray-400"></div>
@@ -216,7 +269,7 @@ const content = {
               >
                 <div class="relative">
                   {item.icon && <PluginIcon icon={item.icon} name={item.title} className="mb-4 transition-transform duration-300 group-hover:scale-110" />}
-                  <h3 class="mb-3 text-xl font-bold text-white font-pj transition-colors duration-300 group-hover:text-gray-200">{item.title}</h3>
+                  <h3 class="font-pj mb-3 text-xl font-bold text-white transition-colors duration-300 group-hover:text-gray-200">{item.title}</h3>
                   <div class="mb-4 line-clamp-3 leading-relaxed text-gray-300" set:html={item.description} />
                   <div class="mb-4 flex items-center justify-between">
                     <span class="text-sm text-gray-500">by {item.author}</span>
@@ -282,7 +335,7 @@ const content = {
           {plugins.length}+ {m.plugins({}, { locale: Astro.locals.locale })} available
         </div>
 
-        <h1 class="pb-6 text-5xl font-bold text-white font-pj md:text-7xl">
+        <h1 class="font-pj pb-6 text-5xl font-bold text-white md:text-7xl">
           {m.supercharge_your_app({}, { locale: Astro.locals.locale })}
         </h1>
 
@@ -363,7 +416,7 @@ const content = {
                 d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
               ></path>
             </svg>
-            <h3 class="mb-2 text-2xl font-bold text-white font-pj">Looking for more plugins?</h3>
+            <h3 class="font-pj mb-2 text-2xl font-bold text-white">Looking for more plugins?</h3>
             <p class="mb-6 text-gray-300">Explore our GitHub organization for more open-source Capacitor plugins.</p>
             <a
               href="https://github.com/Cap-go"
@@ -394,7 +447,7 @@ const content = {
               ></path>
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
             </svg>
-            <h3 class="mb-2 text-2xl font-bold text-white font-pj">Need a custom plugin?</h3>
+            <h3 class="font-pj mb-2 text-2xl font-bold text-white">Need a custom plugin?</h3>
             <p class="mb-6 text-gray-300">Our expert team can build the perfect plugin for your specific needs.</p>
             <a
               href={getRelativeLocaleUrl(Astro.locals.locale, 'consulting')}
@@ -413,11 +466,67 @@ const content = {
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const searchInput = document.getElementById('plugin-search') as HTMLInputElement
-      const sortSelect = document.getElementById('plugin-sort') as HTMLSelectElement
+      const sortDropdown = document.getElementById('plugin-sort-dropdown') as HTMLDivElement | null
+      const sortButton = document.getElementById('plugin-sort-button') as HTMLButtonElement | null
+      const sortButtonLabel = document.getElementById('plugin-sort-current-label') as HTMLSpanElement | null
+      const sortMenu = document.getElementById('plugin-sort-menu') as HTMLDivElement | null
+      const sortChevron = document.getElementById('plugin-sort-chevron') as SVGElement | null
+      const sortOptionButtons = Array.from(document.querySelectorAll('[data-sort-option]')) as HTMLButtonElement[]
       const pluginsGrid = document.getElementById('plugins-grid') as HTMLElement
       const pluginCards = document.querySelectorAll('.plugin-card') as NodeListOf<HTMLElement>
       const resultsCount = document.getElementById('search-results-count')
       const totalPlugins = pluginCards.length
+      let currentSort = sortButton?.dataset.sortValue || 'downloads'
+
+      const activeSortClasses = ['border-blue-400/40', 'bg-blue-500/15', 'text-white', 'shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]']
+      const inactiveSortClasses = ['border-transparent', 'text-slate-200']
+
+      function isSortMenuOpen() {
+        return sortButton?.getAttribute('aria-expanded') === 'true'
+      }
+
+      function setSortMenuState(isOpen: boolean) {
+        if (!sortButton || !sortMenu) return
+
+        sortButton.setAttribute('aria-expanded', String(isOpen))
+        sortMenu.setAttribute('aria-hidden', String(!isOpen))
+        sortMenu.classList.toggle('pointer-events-none', !isOpen)
+        sortMenu.classList.toggle('invisible', !isOpen)
+        sortMenu.classList.toggle('opacity-0', !isOpen)
+        sortMenu.classList.toggle('translate-y-2', !isOpen)
+        sortMenu.classList.toggle('opacity-100', isOpen)
+        sortMenu.classList.toggle('translate-y-0', isOpen)
+        sortChevron?.classList.toggle('rotate-180', isOpen)
+      }
+
+      function syncSortSelection(sortBy: string) {
+        currentSort = sortBy
+
+        sortOptionButtons.forEach((button) => {
+          const isActive = button.dataset.sortValue === sortBy
+          button.setAttribute('aria-pressed', String(isActive))
+          activeSortClasses.forEach((className) => button.classList.toggle(className, isActive))
+          inactiveSortClasses.forEach((className) => button.classList.toggle(className, !isActive))
+
+          const checkIcon = button.querySelector('[data-sort-check]')
+          checkIcon?.classList.toggle('opacity-100', isActive)
+          checkIcon?.classList.toggle('opacity-0', !isActive)
+        })
+
+        const activeButton = sortOptionButtons.find((button) => button.dataset.sortValue === sortBy)
+
+        if (sortButton) {
+          sortButton.dataset.sortValue = sortBy
+        }
+        if (sortButtonLabel && activeButton?.dataset.sortLabel) {
+          sortButtonLabel.textContent = activeButton.dataset.sortLabel
+        }
+      }
+
+      function focusSortOption(index: number) {
+        const option = index >= 0 ? sortOptionButtons[index] : undefined
+        option?.focus()
+      }
 
       function updateResultsCount(visibleCount: number) {
         if (resultsCount) {
@@ -481,13 +590,75 @@ const content = {
         updateResultsCount(totalPlugins)
       }
 
-      if (sortSelect) {
-        sortSelect.addEventListener('change', () => {
-          sortPlugins(sortSelect.value)
+      if (sortButton && sortMenu && sortDropdown && sortOptionButtons.length > 0) {
+        sortButton.addEventListener('click', () => {
+          const nextOpenState = !isSortMenuOpen()
+          setSortMenuState(nextOpenState)
+
+          if (nextOpenState) {
+            const activeIndex = sortOptionButtons.findIndex((button) => button.dataset.sortValue === currentSort)
+            focusSortOption(activeIndex >= 0 ? activeIndex : 0)
+          }
         })
-        // Initial sort by downloads
-        sortPlugins('downloads')
+
+        sortButton.addEventListener('keydown', (event) => {
+          if (event.key === 'ArrowDown' || event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault()
+            setSortMenuState(true)
+
+            const activeIndex = sortOptionButtons.findIndex((button) => button.dataset.sortValue === currentSort)
+            focusSortOption(activeIndex >= 0 ? activeIndex : 0)
+          }
+        })
+
+        sortMenu.addEventListener('keydown', (event) => {
+          const focusedIndex = sortOptionButtons.findIndex((button) => button === document.activeElement)
+
+          if (event.key === 'Escape') {
+            event.preventDefault()
+            setSortMenuState(false)
+            sortButton.focus()
+          }
+
+          if (event.key === 'ArrowDown') {
+            event.preventDefault()
+            focusSortOption((focusedIndex + 1 + sortOptionButtons.length) % sortOptionButtons.length)
+          }
+
+          if (event.key === 'ArrowUp') {
+            event.preventDefault()
+            focusSortOption((focusedIndex - 1 + sortOptionButtons.length) % sortOptionButtons.length)
+          }
+        })
+
+        sortOptionButtons.forEach((button) => {
+          button.addEventListener('click', () => {
+            const nextSort = button.dataset.sortValue || 'downloads'
+
+            syncSortSelection(nextSort)
+            sortPlugins(nextSort)
+            setSortMenuState(false)
+            sortButton.focus()
+          })
+        })
+
+        document.addEventListener('click', (event) => {
+          if (!sortDropdown.contains(event.target as Node)) {
+            setSortMenuState(false)
+          }
+        })
+
+        sortDropdown.addEventListener('focusout', () => {
+          window.setTimeout(() => {
+            if (!sortDropdown.contains(document.activeElement)) {
+              setSortMenuState(false)
+            }
+          }, 0)
+        })
       }
+
+      syncSortSelection(currentSort)
+      sortPlugins(currentSort)
     })
   </script>
 </Layout>
