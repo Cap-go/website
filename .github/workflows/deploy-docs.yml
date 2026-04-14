@@ -16,7 +16,6 @@ on:
       - 'apps/web/src/config/plugins.ts'
       - 'messages/**'
       - 'project.inlang/**'
-      - 'scripts/**'
       - 'configs.json'
       - 'package.json'
       - 'bun.lock'
@@ -70,14 +69,13 @@ jobs:
             apps/docs/.astro
             node_modules/.astro
             node_modules/.cache
-          key: ${{ runner.os }}-astro-docs-${{ hashFiles('**/bun.lock') }}-${{ hashFiles('apps/docs/**', 'apps/shared/**', 'apps/web/public/**', 'apps/web/src/config/plugins.ts', 'messages/**', 'project.inlang/**', 'scripts/**', 'configs.json') }}
+          key: ${{ runner.os }}-astro-docs-${{ hashFiles('**/bun.lock') }}-${{ hashFiles('apps/docs/**', 'apps/shared/**', 'apps/web/public/**', 'apps/web/src/config/plugins.ts', 'messages/**', 'project.inlang/**', 'configs.json') }}
           restore-keys: |
             ${{ runner.os }}-astro-docs-${{ hashFiles('**/bun.lock') }}-
             ${{ runner.os }}-astro-docs-
 
       - run: bun install --frozen-lockfile
       - run: cd apps/docs && bun run check
-      - run: bun run build:prepare
       - run: bun run build:docs
         env:
           PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
