@@ -24,6 +24,7 @@ Plugin Brightness|screen brightness control plugin|docs/plugins/brightness/**
 Plugin Camera Preview|camera preview plugin for live camera feed|docs/plugins/camera-preview/**
 Plugin Capacitor+|Capacitor+ enhanced runtime plugin|docs/plugins/capacitor-plus/**
 Plugin Compass|digital compass plugin for device orientation|docs/plugins/compass/**
+Plugin Contentsquare|Contentsquare analytics, consent gating, and session replay integration plugin|docs/plugins/contentsquare/**
 Plugin Contacts|contacts access plugin for reading device contacts|docs/plugins/contacts/**
 Plugin Crisp|Crisp chat integration plugin|docs/plugins/crisp/**
 Plugin Data Storage SQLite|SQLite data storage plugin for local database|docs/plugins/data-storage-sqlite/**

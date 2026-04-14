@@ -11,6 +11,7 @@
   "@capgo/capacitor-crisp": 11813,
   "@capgo/capacitor-intercom": 701,
   "@capgo/capacitor-appsflyer": 506,
+  "@capgo/capacitor-contentsquare": 168,
   "@capgo/nativegeocoder": 21666,
   "@capgo/inappbrowser": 344742,
   "@capgo/capacitor-mqtt": 400,
