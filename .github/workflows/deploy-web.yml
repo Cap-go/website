@@ -75,7 +75,7 @@ jobs:
 
       - run: bun install --frozen-lockfile
       - run: cd apps/web && bun run check
-      - run: bun run build:prepare
+      - run: bun run build:prepare:web
       - run: bun run clean:build-cache
       - run: bun run build:web
         env:
