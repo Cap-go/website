@@ -33,7 +33,7 @@ If you use those together, you get smaller payloads, faster installs, and much l
 
 ## Lean matters even when MAU stays the same
 
-One useful Capgo-specific detail: Capgo MAU is effectively a monthly active device that contacted the update service in the last 30 days.
+One useful Capgo-specific detail: Capgo MAU is effectively the number of monthly active devices that contacted the update service in the last 30 days.
 
 So slimming a bundle is not mainly a trick to reduce MAU counting. It matters because it improves the parts users and teams actually feel:
 
