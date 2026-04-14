@@ -45,6 +45,11 @@ for (const pluginDir of mirroredPluginDirs) {
     continue
   }
 
+  if (!hasCanonicalDir && !hasMirroredDir) {
+    mismatches.push(`${pluginDir}: tracked plugin directory is missing from both docs trees`)
+    continue
+  }
+
   const canonicalFiles = listFiles(canonicalDir)
   const mirrorFiles = listFiles(mirrorDir)
   const mirroredRelativeFiles = new Set(mirrorFiles.map((mirrorFile) => relative(mirrorDir, mirrorFile)))
