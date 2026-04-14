@@ -23,6 +23,10 @@ bunx @tailwindcss/upgrade --force
 
 - Use that command to fix deprecated class syntax across the repo instead of doing large manual replacements.
 
+## Social Meta Images
+
+- Do not switch Open Graph or Twitter/X social meta images to `webp`; use `png` or `jpg`/`jpeg` for those assets and tags.
+
 ## Adding A Plugin To The Website
 
 - Add the plugin registry entry in `apps/web/src/config/plugins.ts` inside `actionDefinitionRows` with the package name, title, short description, and GitHub URL.

@@ -96,7 +96,7 @@ export function createNewsArticleLdJson(
     url: options.url,
     headline: options.title,
     description: options.description,
-    image: options.image || [`${config.baseUrl}/capgo_social.webp`],
+    image: options.image || [`${config.baseUrl}/capgo_social.png`],
     datePublished: options.datePublished,
     dateModified: options.dateModified,
     inLanguage: options.locale || 'en',
@@ -146,7 +146,7 @@ export function createSoftwareApplicationLdJson(
     name: options.name,
     description: options.description,
     url: options.url,
-    image: options.image || `${config.baseUrl}/capgo_social.webp`,
+    image: options.image || `${config.baseUrl}/capgo_social.png`,
     applicationCategory: options.applicationCategory,
   }
 
@@ -202,7 +202,7 @@ export function createProductLdJson(
     name: options.name,
     description: options.description,
     url: options.url,
-    image: options.image || `${config.baseUrl}/capgo_social.webp`,
+    image: options.image || `${config.baseUrl}/capgo_social.png`,
     brand: {
       '@type': 'Brand',
       name: options.brand || 'Capgo',

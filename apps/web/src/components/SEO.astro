@@ -15,7 +15,7 @@ const {
   title = m.website_title({}, { locale: messageLocale }),
   description = m.website_description({}, { locale: messageLocale }),
   url = Astro.url,
-  image = `${Astro.locals.runtimeConfig?.public?.baseUrl || Astro.url.origin}/capgo_social.webp`,
+  image = `${Astro.locals.runtimeConfig?.public?.baseUrl || Astro.url.origin}/capgo_social.png`,
   canonical = Astro.url,
   author = `Martin DONADIEU`,
   keywords = m.website_keywords({}, { locale: messageLocale }),
@@ -62,7 +62,7 @@ const canonicalString = toStringUrl(canonical) || urlString
 
 const baseUrl = Astro.locals.runtimeConfig?.public?.baseUrl || Astro.url.origin
 const rawImage = typeof image === 'string' ? image : toStringUrl(image)
-const imageUrl = rawImage ? new URL(rawImage, baseUrl).toString() : new URL('/capgo_social.webp', baseUrl).toString()
+const imageUrl = rawImage ? new URL(rawImage, baseUrl).toString() : new URL('/capgo_social.png', baseUrl).toString()
 
 const getImageMimeType = (img: string): string | null => {
   const withoutQuery = img.split('?')[0].toLowerCase()
