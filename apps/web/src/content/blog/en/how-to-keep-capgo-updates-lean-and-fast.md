@@ -67,6 +67,8 @@ If you want CI to stay strict, use `--delta-only` so nobody accidentally falls b
 bunx @capgo/cli@latest bundle upload --channel production --delta-only
 ```
 
+Only use `--delta-only` when your production fleet supports Delta updates. On mixed plugin versions, older devices that do not support manifest-based delta delivery will not be able to download that update.
+
 This matters even more if you use `directUpdate`, because the time between "update found" and "app reloaded" becomes visible to the user.
 
 ## 2. Treat assets like assets, not JavaScript baggage
