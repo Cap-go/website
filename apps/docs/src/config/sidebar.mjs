@@ -90,6 +90,7 @@ const pluginEntries = [
   ['iBeacon', 'ibeacon'],
   ['In App Review', 'in-app-review'],
   ['InAppBrowser', 'inappbrowser'],
+  ['Incoming Call Kit', 'incoming-call-kit', [linkItem('iOS', '/docs/plugins/incoming-call-kit/ios'), linkItem('Android', '/docs/plugins/incoming-call-kit/android')]],
   ['Intent Launcher', 'intent-launcher'],
   ['Intercom', 'intercom'],
   ['Is Root', 'is-root'],
