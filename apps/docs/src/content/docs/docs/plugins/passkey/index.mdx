@@ -1,0 +1,38 @@
+---
+title: "@capgo/capacitor-passkey"
+description: Passkeys for Capacitor with a browser-style WebAuthn shim, minimal JavaScript changes, and native setup generated during sync.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Keep your browser-style WebAuthn code in a Capacitor app while the plugin handles native passkey calls and native host patching.
+  actions:
+    - text: Get started
+      link: /docs/plugins/passkey/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-passkey/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Browser-style API" icon="rocket">
+    Keep `navigator.credentials.create()` and `navigator.credentials.get()` in your app instead of rewriting your passkey flow around a custom API.
+  </Card>
+  <Card title="Minimal app changes" icon="pencil">
+    Add plugin config once, import `@capgo/capacitor-passkey/auto`, and keep the rest of your WebAuthn code close to the browser implementation.
+  </Card>
+  <Card title="Build-time native wiring" icon="setting">
+    The plugin patches the generated iOS and Android host projects during sync so you do not need to keep hand-editing those files.
+  </Card>
+  <Card title="Platform notes included" icon="open-book">
+    Follow the [Getting Started](/docs/plugins/passkey/getting-started/), [iOS setup](/docs/plugins/passkey/ios/), [Android setup](/docs/plugins/passkey/android/), and [backend notes](/docs/plugins/passkey/backend/).
+  </Card>
+</CardGrid>
