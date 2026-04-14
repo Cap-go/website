@@ -11,7 +11,7 @@ await navigator.credentials.create({ publicKey: registrationOptions });
 await navigator.credentials.get({ publicKey: requestOptions });
 ```
 
-On native builds, the plugin installs a shim for `navigator.credentials.create()` and `navigator.credentials.get()`, forwards the request to iOS and Android passkey APIs, and returns browser-like credential objects back to your app.
+On native builds, the plugin installs a shim for `navigator.credentials.create()` and `navigator.credentials.get()`, forwards the request to iOS and Android passkey APIs, and returns browser-like credential objects to your app.
 
 ## Install the plugin
 
