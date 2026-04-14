@@ -14,8 +14,9 @@ const description = m.solutions_cordova_to_capacitor_ai_description({}, { locale
 const pagePath = getRelativeLocaleUrl(locale, 'solutions/cordova-to-capacitor-ai')
 const pageUrl = `${baseUrl}${pagePath}`
 const homeUrl = `${baseUrl}${getRelativeLocaleUrl(locale, '/')}`
-const shellBlockClasses = 'overflow-x-auto rounded-lg bg-gray-900 p-4 text-sm'
-const promptBlockClasses = 'overflow-x-auto rounded-lg bg-gray-900 p-4 text-sm'
+const baseBlockClasses = 'overflow-x-auto rounded-lg bg-gray-900 p-4 text-sm'
+const shellBlockClasses = baseBlockClasses
+const promptBlockClasses = baseBlockClasses
 const promptBlockStyle = 'white-space: pre-wrap; overflow-wrap: anywhere;'
 
 const dateModified = '2026-02-08T00:00:00.000Z'
