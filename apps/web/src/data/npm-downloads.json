@@ -52,6 +52,7 @@
   "@capgo/capacitor-media-session": 10546,
   "@capgo/capacitor-mux-player": 1041,
   "@capgo/capacitor-pay": 7144,
+  "@capgo/capacitor-passkey": 40,
   "@capgo/capacitor-privacy-screen": 85,
   "@capgo/capacitor-pdf-generator": 4011,
   "@capgo/capacitor-persistent-account": 13383,
