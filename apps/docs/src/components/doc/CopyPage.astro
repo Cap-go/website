@@ -127,7 +127,7 @@ const translations = {
     </button>
   </div>
 
-  <span class="copy-page-feedback sr-only" aria-live="polite" aria-atomic="true"></span>
+  <span class="copy-page-feedback sr-only" role="status" aria-live="polite" aria-atomic="true"></span>
 </div>
 
 <script is:inline define:vars={{ translations, editUrl: editUrl?.toString() ?? '' }}>
@@ -172,6 +172,40 @@ const translations = {
       const container = btn.closest('.copy-page-container')
       const feedback = container?.querySelector('.copy-page-feedback')
 
+      function updateFeedback(message) {
+        if (feedback instanceof HTMLElement) {
+          feedback.textContent = message
+        }
+      }
+
+      function resetFeedback() {
+        window.setTimeout(() => {
+          if (title) {
+            title.textContent = originalText || translations.copyPage
+          }
+          updateFeedback('')
+        }, 2000)
+      }
+
+      function fallbackCopy(value) {
+        const textarea = document.createElement('textarea')
+        textarea.value = value
+        textarea.style.position = 'fixed'
+        textarea.style.opacity = '0'
+        document.body.appendChild(textarea)
+        textarea.focus()
+        textarea.select()
+
+        const legacyCopy = Reflect.get(document, 'execCommand')
+        const copied = typeof legacyCopy === 'function' ? legacyCopy.call(document, 'copy') : false
+
+        document.body.removeChild(textarea)
+
+        if (!copied) {
+          throw new Error('Fallback copy method also failed')
+        }
+      }
+
       try {
         // Disable button during operation
         btn.disabled = true
@@ -206,31 +240,30 @@ const translations = {
         }
 
         if (!navigator.clipboard?.writeText) {
-          throw new Error('Clipboard API unavailable')
+          fallbackCopy(content)
+        } else {
+          try {
+            await navigator.clipboard.writeText(content)
+          } catch (clipboardError) {
+            console.error('Clipboard API failed, trying fallback:', clipboardError)
+            fallbackCopy(content)
+          }
         }
-
-        await navigator.clipboard.writeText(content)
         console.log('Copied to clipboard successfully')
 
         // Show success feedback
+        updateFeedback(translations.copied)
         if (title) {
           title.textContent = translations.copied
-          if (feedback) feedback.textContent = translations.copied
-          setTimeout(() => {
-            title.textContent = originalText || translations.copyPage
-            if (feedback) feedback.textContent = ''
-          }, 2000)
         }
+        resetFeedback()
       } catch (error) {
         console.error('Failed to copy:', error)
+        updateFeedback(translations.failedToCopy)
         if (title) {
           title.textContent = translations.failedToCopy
-          if (feedback) feedback.textContent = translations.failedToCopy
-          setTimeout(() => {
-            title.textContent = originalText || translations.copyPage
-            if (feedback) feedback.textContent = ''
-          }, 2000)
         }
+        resetFeedback()
       } finally {
         btn.disabled = false
       }
