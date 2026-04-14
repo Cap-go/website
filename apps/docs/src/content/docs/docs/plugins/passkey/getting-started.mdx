@@ -1,0 +1,96 @@
+---
+title: Getting Started
+description: Install @capgo/capacitor-passkey, configure the plugin once, and keep your browser-style WebAuthn code in a Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Steps, Card, CardGrid } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-passkey" pkgManagers={['bun']} />
+
+2. **Sync native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['bun']} />
+
+3. **Add the plugin config**
+
+   ```ts
+   import type { CapacitorConfig } from '@capacitor/cli';
+
+   const config: CapacitorConfig = {
+     appId: 'app.capgo.passkey.example',
+     appName: 'My App',
+     webDir: 'dist',
+     plugins: {
+       CapacitorPasskey: {
+         origin: 'https://signin.example.com',
+         autoShim: true,
+         domains: ['signin.example.com'],
+       },
+     },
+   };
+
+   export default config;
+   ```
+
+4. **Import the shim once**
+
+   ```ts
+   import '@capgo/capacitor-passkey/auto';
+   ```
+
+5. **Keep your normal WebAuthn flow**
+
+   ```ts
+   const registration = await navigator.credentials.create({
+     publicKey: registrationOptions,
+   });
+
+   const authentication = await navigator.credentials.get({
+     publicKey: requestOptions,
+   });
+   ```
+</Steps>
+
+## What the plugin config does
+
+The config is read from `plugins.CapacitorPasskey` in `capacitor.config.*`.
+
+- `origin`: primary HTTPS relying-party origin used by the shim and direct API
+- `domains`: extra relying-party hostnames to patch into native config during sync
+- `autoShim`: defaults to `true` when you use `@capgo/capacitor-passkey/auto`
+
+## What sync patches for you
+
+When you run `bunx cap sync`, the plugin updates the generated native host project:
+
+- iOS: associated domains entitlements and Xcode entitlements wiring when needed
+- Android: `asset_statements` metadata and the generated resource used by the manifest
+
+The hook does not publish your website trust files for you. You still need to host:
+
+- `https://your-domain/.well-known/apple-app-site-association`
+- `https://your-domain/.well-known/assetlinks.json`
+
+## Platform guides
+
+<CardGrid>
+  <a href="/docs/plugins/passkey/ios/">
+    <Card title="iOS setup" icon="open-book">
+      Associated Domains and `apple-app-site-association`.
+    </Card>
+  </a>
+  <a href="/docs/plugins/passkey/android/">
+    <Card title="Android setup" icon="open-book">
+      Digital Asset Links and `assetlinks.json`.
+    </Card>
+  </a>
+  <a href="/docs/plugins/passkey/backend/">
+    <Card title="Backend notes" icon="open-book">
+      Origin validation and Android caveats.
+    </Card>
+  </a>
+</CardGrid>

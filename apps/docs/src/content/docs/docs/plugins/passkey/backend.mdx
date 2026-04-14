@@ -1,0 +1,57 @@
+---
+title: Backend Notes
+description: Understand the backend contract for @capgo/capacitor-passkey, including WebAuthn challenge handling and Android origin validation.
+sidebar:
+  order: 5
+---
+
+Your backend still owns the normal WebAuthn ceremony:
+
+- generate registration and authentication challenges
+- verify attestation and assertion responses
+- enforce relying-party ID and challenge validation
+- store credentials and counters the same way you would for a browser flow
+
+## What stays the same
+
+The plugin is designed to preserve the front-end shape of your existing WebAuthn code.
+
+- On the web, it forwards to the real browser WebAuthn API.
+- On native Capacitor, it returns browser-like credential objects backed by native passkey APIs.
+- Your backend can keep the same challenge and verification pipeline.
+
+## What changes on Android
+
+Android native passkeys are not identical to a browser trust model.
+
+- Digital Asset Links let Android share the same relying party and credential ecosystem as your website.
+- The literal `clientDataJSON.origin` value can still differ from the website origin.
+- If your server rejects anything except `https://your-domain`, Android native assertions can fail even when the passkey is otherwise valid.
+
+## Recommended backend rule
+
+Allow the expected browser origin and the expected Android app origin for the same relying party when you support native Android passkeys.
+
+That gives you:
+
+- browser support for the website
+- native passkey support in the Capacitor app
+- one passkey ecosystem for the same relying-party domain
+
+## If you need direct JSON-safe calls
+
+If your backend already returns `PublicKeyCredentialCreationOptionsJSON` and `PublicKeyCredentialRequestOptionsJSON`, you can also use the direct plugin API instead of the browser-style shim:
+
+```ts
+import { CapacitorPasskey } from '@capgo/capacitor-passkey';
+
+const registration = await CapacitorPasskey.createCredential({
+  origin: 'https://signin.example.com',
+  publicKey: registrationOptionsFromBackend,
+});
+
+const authentication = await CapacitorPasskey.getCredential({
+  origin: 'https://signin.example.com',
+  publicKey: requestOptionsFromBackend,
+});
+```

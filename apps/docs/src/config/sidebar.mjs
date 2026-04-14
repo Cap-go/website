@@ -133,6 +133,11 @@ const pluginEntries = [
   ['Navigation Bar', 'navigation-bar'],
   ['NFC', 'nfc'],
   ['Pay', 'pay'],
+  [
+    'Passkey',
+    'passkey',
+    [linkItem('iOS setup', '/docs/plugins/passkey/ios'), linkItem('Android setup', '/docs/plugins/passkey/android'), linkItem('Backend notes', '/docs/plugins/passkey/backend')],
+  ],
   ['Privacy Screen', 'privacy-screen', [linkItem('iOS behavior', '/docs/plugins/privacy-screen/ios'), linkItem('Android behavior', '/docs/plugins/privacy-screen/android')]],
   ['PDF Generator', 'pdf-generator'],
   ['Pedometer', 'pedometer'],
