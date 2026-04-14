@@ -142,9 +142,7 @@ const signingDocsHref = getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/clou
   }
 
   async function copyText(value: string): Promise<void> {
-    try {
-      await navigator.clipboard.writeText(value)
-    } catch {
+    const fallbackCopy = (): void => {
       const helper = document.createElement('textarea')
       helper.value = value
       helper.setAttribute('readonly', 'true')
@@ -152,11 +150,25 @@ const signingDocsHref = getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/clou
       helper.style.opacity = '0'
       document.body.append(helper)
       helper.select()
-      const copied = document.execCommand('copy')
+
+      const legacyCopy = Reflect.get(document, 'execCommand')
+      const copied = typeof legacyCopy === 'function' ? legacyCopy.call(document, 'copy') : false
+
       helper.remove()
       if (!copied) {
         throw new Error('Copy failed')
       }
+    }
+
+    if (!navigator.clipboard?.writeText) {
+      fallbackCopy()
+      return
+    }
+
+    try {
+      await navigator.clipboard.writeText(value)
+    } catch {
+      fallbackCopy()
     }
   }
 
