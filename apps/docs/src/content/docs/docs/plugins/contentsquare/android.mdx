@@ -28,6 +28,8 @@ You should see the native Contentsquare SDK startup message and the WebView brid
 ### Track a first session
 
 ```typescript
+import { ContentsquarePlugin } from '@capgo/capacitor-contentsquare';
+
 await ContentsquarePlugin.optIn();
 await ContentsquarePlugin.sendScreenName('Home');
 ```
