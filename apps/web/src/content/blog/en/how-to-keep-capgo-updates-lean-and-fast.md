@@ -155,7 +155,7 @@ import { CapacitorUpdater } from '@capgo/capacitor-updater'
 CapacitorUpdater.notifyAppReady()
 ```
 
-If your app does not report ready within 10 seconds, Capgo can mark that bundle invalid and restore the previous good version. That rollback behavior is exactly what you want in production, but it also means you should keep startup clean:
+If your app does not report ready within the default 10-second `notifyAppReady()` window, or within whatever `appReadyTimeout` you set in your Capacitor config, Capgo can mark that bundle invalid and restore the previous good version. That rollback behavior is what you want in production, but it also means you should keep startup clean:
 
 - Call `notifyAppReady()` in the right place
 - Avoid slow boot-time work in the critical path
