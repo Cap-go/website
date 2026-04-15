@@ -141,6 +141,7 @@ const pluginEntries = [
     [linkItem('iOS setup', '/docs/plugins/passkey/ios'), linkItem('Android setup', '/docs/plugins/passkey/android'), linkItem('Backend notes', '/docs/plugins/passkey/backend')],
   ],
   ['Privacy Screen', 'privacy-screen', [linkItem('iOS behavior', '/docs/plugins/privacy-screen/ios'), linkItem('Android behavior', '/docs/plugins/privacy-screen/android')]],
+  ['Proximity', 'proximity'],
   ['PDF Generator', 'pdf-generator'],
   ['Pedometer', 'pedometer'],
   ['Persona', 'persona'],
