@@ -9,12 +9,12 @@ export interface IntegrationEntry {
 
 export const integrations: IntegrationEntry[] = [
   {
-    name: 'ViaSocket',
+    name: 'viaSocket',
     href: 'https://viasocket.com/integrations/capgo',
     logo: '/logo_viaSocket.svg',
     target: '_blank',
     rel: 'noopener noreferrer',
-    description: 'Real-time socket integration for Capgo workflows.',
+    description: 'Enable event-based automation for Capgo workflows using viaSocket, with instant triggers and smooth data flow.',
   },
   {
     name: 'Codemagic',
