@@ -76,6 +76,7 @@ const actionDefinitionRows =
 @capgo/capacitor-mux-player|github.com/Cap-go|Stream adaptive bitrate video with Mux player for optimized playback quality|https://github.com/Cap-go/capacitor-mux-player/|Mux Player
 @capgo/capacitor-pay|github.com/Cap-go|Accept payments with Apple Pay and Google Pay for seamless checkout experience|https://github.com/Cap-go/capacitor-pay/|Pay
 @capgo/capacitor-privacy-screen|github.com/Cap-go|Protect app content in Android screenshots and obscure the iOS app switcher snapshot|https://github.com/Cap-go/capacitor-privacy-screen/|Privacy Screen
+@capgo/capacitor-proximity|github.com/Cap-go|Enable native proximity monitoring so your app can react when the device is near a face, hand, or surface|https://github.com/Cap-go/capacitor-proximity/|Proximity
 @capgo/capacitor-pdf-generator|github.com/Cap-go|Create PDF documents from HTML templates for invoices, reports, and receipts|https://github.com/Cap-go/capacitor-pdf-generator/|PDF Generator
 @capgo/capacitor-persistent-account|github.com/Cap-go|Preserve user authentication and account data across app reinstalls and updates|https://github.com/Cap-go/capacitor-persistent-account/|Persistent Account
 @capgo/capacitor-photo-library|github.com/Cap-go|Browse, save, and manage photos and videos in device photo library with permissions|https://github.com/Cap-go/capacitor-photo-library/|Photo Library
@@ -231,6 +232,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-speech-synthesis': 'SpeakerWave',
   '@capgo/capacitor-ssl-pinning': 'ShieldCheck',
   '@capgo/capacitor-printer': 'Printer',
+  '@capgo/capacitor-proximity': 'Signal',
   '@capgo/capacitor-zip': 'ArchiveBox',
   '@capgo/capacitor-zebra-datawedge': 'QrCode',
   '@capgo/capacitor-wifi': 'Wifi',

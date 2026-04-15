@@ -1,0 +1,192 @@
+---
+title: Getting Started
+description: Learn how to install and use the Proximity plugin to enable near-sensor behavior in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+1. **Install the package**
+   ```bash
+   bun add @capgo/capacitor-proximity
+   ```
+
+2. **Sync with native projects**
+   ```bash
+   bunx cap sync
+   ```
+</Steps>
+
+## Platform Behavior
+
+### iOS
+
+Works out of the box. The plugin enables and disables `UIDevice.isProximityMonitoringEnabled`, so iOS manages the exact screen-off behavior.
+
+### Android
+
+Works out of the box. The plugin listens to `Sensor.TYPE_PROXIMITY` and dims the current app window while the sensor is covered. No runtime permissions are required.
+
+### Web
+
+The plugin is not available on the web. `getStatus()` reports `available: false` and `platform: 'web'`.
+
+## Basic Usage
+
+Import the plugin, check whether the sensor is available, and enable it only for the flow that needs it:
+
+```typescript
+import { CapacitorProximity } from '@capgo/capacitor-proximity';
+
+const runProximityFlow = async () => {
+  const status = await CapacitorProximity.getStatus();
+
+  if (!status.available) {
+    console.warn('Proximity sensor not available on this device');
+    return;
+  }
+
+  await CapacitorProximity.enable();
+
+  try {
+    console.log('Proximity monitoring active');
+    // Run your near-ear, privacy, or face-down flow here.
+  } finally {
+    await CapacitorProximity.disable();
+  }
+};
+```
+
+## API Reference
+
+### enable()
+
+Enable proximity monitoring.
+
+```typescript
+await CapacitorProximity.enable();
+```
+
+- iOS: enables `UIDevice.isProximityMonitoringEnabled`
+- Android: starts monitoring `TYPE_PROXIMITY` and dims the current app window while the sensor is covered
+
+### disable()
+
+Disable proximity monitoring and restore normal behavior.
+
+```typescript
+await CapacitorProximity.disable();
+```
+
+### getStatus()
+
+Check whether the device supports proximity and whether monitoring is currently enabled.
+
+```typescript
+const status = await CapacitorProximity.getStatus();
+
+console.log(status.available);
+console.log(status.enabled);
+console.log(status.platform);
+```
+
+```typescript
+interface ProximityStatusResult {
+  available: boolean;
+  enabled: boolean;
+  platform: 'ios' | 'android' | 'web';
+}
+```
+
+### getPluginVersion()
+
+Read the native plugin version string.
+
+```typescript
+const { version } = await CapacitorProximity.getPluginVersion();
+console.log(version);
+```
+
+## Complete Example
+
+```typescript
+import { App } from '@capacitor/app';
+import { CapacitorProximity } from '@capgo/capacitor-proximity';
+
+export class ProximitySession {
+  private active = false;
+
+  async init() {
+    const status = await CapacitorProximity.getStatus();
+    if (!status.available) {
+      throw new Error('Proximity sensor not available on this device');
+    }
+
+    App.addListener('appStateChange', async ({ isActive }) => {
+      if (!this.active) {
+        return;
+      }
+
+      if (!isActive) {
+        await CapacitorProximity.disable();
+        return;
+      }
+
+      await CapacitorProximity.enable();
+    });
+  }
+
+  async start() {
+    if (this.active) {
+      return;
+    }
+
+    await CapacitorProximity.enable();
+    this.active = true;
+  }
+
+  async stop() {
+    if (!this.active) {
+      return;
+    }
+
+    await CapacitorProximity.disable();
+    this.active = false;
+  }
+
+  async debugVersion() {
+    const { version } = await CapacitorProximity.getPluginVersion();
+    console.log('Capacitor Proximity version:', version);
+  }
+}
+```
+
+## Best Practices
+
+1. **Check availability first**
+   ```typescript
+   const status = await CapacitorProximity.getStatus();
+   if (!status.available) {
+     return;
+   }
+   ```
+
+2. **Enable only when needed**
+   Keep proximity monitoring limited to the exact user flow that needs it, then call `disable()` immediately afterward.
+
+3. **Test on real devices**
+   Simulators and most desktop browsers do not expose a working proximity sensor.
+
+4. **Always clean up**
+   ```typescript
+   await CapacitorProximity.disable();
+   ```
+
+## Common Use Cases
+
+- Near-ear experiences for voice or call-style interactions
+- Privacy screens that should dim when a hand covers the sensor
+- Face-down or pocket-aware app behavior
+- Debugging native plugin installation with `getPluginVersion()`

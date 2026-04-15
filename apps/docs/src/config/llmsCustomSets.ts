@@ -70,6 +70,7 @@ Plugin NFC|NFC reading and writing plugin|docs/plugins/nfc/**
 Plugin Pay|Apple Pay and Google Pay integration plugin|docs/plugins/pay/**
 Plugin Passkey|browser-style WebAuthn passkey plugin with native shims and generated platform configuration|docs/plugins/passkey/**
 Plugin Privacy Screen|privacy screen plugin for hiding app content in system previews and screenshots|docs/plugins/privacy-screen/**
+Plugin Proximity|native proximity sensor plugin for face, hand, and surface detection|docs/plugins/proximity/**
 Plugin PDF Generator|PDF generation plugin|docs/plugins/pdf-generator/**
 Plugin Pedometer|step counting pedometer plugin|docs/plugins/pedometer/**
 Plugin Persona|Persona identity verification inquiry plugin|docs/plugins/persona/**
