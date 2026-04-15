@@ -8,6 +8,7 @@ export interface Props {
     step_max: number
     price_per_unit: number
     type: string
+    unit_factor: number
   }[]
 }
 
@@ -30,24 +31,36 @@ Object.keys(creditsByType).forEach((type) => {
   creditsByType[type].sort((a, b) => a.step_min - b.step_min)
 })
 
+const typeOrder = ['mau', 'bandwidth', 'storage', 'build_time']
+const sortedCreditTypes = Object.entries(creditsByType).sort(([typeA], [typeB]) => {
+  const orderA = typeOrder.indexOf(typeA)
+  const orderB = typeOrder.indexOf(typeB)
+
+  if (orderA === -1 && orderB === -1) return typeA.localeCompare(typeB)
+  if (orderA === -1) return 1
+  if (orderB === -1) return -1
+  return orderA - orderB
+})
+
 // Format large numbers
-function formatNumber(num: number, type?: string): string {
-  // Convert bytes to GiB for bandwidth and storage
+function formatNumber(num: number, type?: string, unitFactor = 1): string {
+  const normalizedValue = num / unitFactor
+
+  // Convert GiB values to TB when large enough
   if (type === 'bandwidth' || type === 'storage') {
-    const gb = num / (1024 * 1024 * 1024) // Convert bytes to GiB
-    if (gb >= 1000) {
-      return `${(gb / 1000).toFixed(0)} TB`
+    if (normalizedValue >= 1000) {
+      return `${(normalizedValue / 1000).toFixed(0)} TB`
     }
-    return `${gb.toFixed(0)} GiB`
+    return `${normalizedValue.toFixed(0)} GiB`
   }
 
-  if (num >= 1000000) {
-    return `${(num / 1000000).toFixed(0)}M`
+  if (normalizedValue >= 1000000) {
+    return `${(normalizedValue / 1000000).toFixed(0)}M`
   }
-  if (num >= 1000) {
-    return `${(num / 1000).toFixed(0)}k`
+  if (normalizedValue >= 1000) {
+    return `${(normalizedValue / 1000).toFixed(0)}k`
   }
-  return num.toString()
+  return normalizedValue.toString()
 }
 
 // Get type label
@@ -59,6 +72,8 @@ function getTypeLabel(type: string): string {
       return m.bandwidth_gb({}, { locale: Astro.locals.locale })
     case 'storage':
       return m.storage_gb({}, { locale: Astro.locals.locale })
+    case 'build_time':
+      return m.build_minutes({}, { locale: Astro.locals.locale })
     default:
       return type
   }
@@ -73,6 +88,8 @@ function getUnitLabel(type: string): string {
       return m.per_gb({}, { locale: Astro.locals.locale })
     case 'storage':
       return m.per_gb({}, { locale: Astro.locals.locale })
+    case 'build_time':
+      return `/ ${m.build_minutes({}, { locale: Astro.locals.locale })}`
     default:
       return m.per_unit({}, { locale: Astro.locals.locale })
   }
@@ -84,21 +101,21 @@ function formatPrice(price: number): string {
 }
 ---
 
-<section id="credit-pricing" class="py-12 px-0 mx-auto max-w-7xl sm:px-6 lg:px-8">
-  <div class="p-6 bg-white rounded-3xl shadow-xl sm:p-8 lg:p-12">
+<section id="credit-pricing" class="mx-auto max-w-7xl px-0 py-12 sm:px-6 lg:px-8">
+  <div class="rounded-3xl bg-white p-6 shadow-xl sm:p-8 lg:p-12">
     <div class="mb-6 text-center sm:mb-8">
-      <h2 class="inline-flex flex-col gap-2 items-center text-2xl font-bold text-gray-900 sm:flex-row sm:gap-3 sm:text-3xl">
+      <h2 class="inline-flex flex-col items-center gap-2 text-2xl font-bold text-gray-900 sm:flex-row sm:gap-3 sm:text-3xl">
         {m.credit_pricing({}, { locale: Astro.locals.locale })}
       </h2>
     </div>
 
-    <div class="grid gap-6 sm:gap-8 md:grid-cols-3">
+    <div class="grid gap-6 sm:gap-8 md:grid-cols-2 xl:grid-cols-4">
       {
-        Object.entries(creditsByType).map(([type, typeCredits]) => (
-          <div class="p-4 rounded-2xl border border-gray-200 sm:p-6">
-            <h3 class="flex items-center mb-4 text-lg font-semibold text-gray-900 sm:text-xl">
+        sortedCreditTypes.map(([type, typeCredits]) => (
+          <div class="rounded-2xl border border-gray-200 p-4 sm:p-6">
+            <h3 class="mb-4 flex items-center text-lg font-semibold text-gray-900 sm:text-xl">
               {type === 'mau' && (
-                <svg class="mr-2 w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="mr-2 h-5 w-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -108,12 +125,12 @@ function formatPrice(price: number): string {
                 </svg>
               )}
               {type === 'bandwidth' && (
-                <svg class="mr-2 w-4 h-4 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                <svg class="mr-2 h-4 w-4 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
                 </svg>
               )}
               {type === 'storage' && (
-                <svg class="mr-2 w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="mr-2 h-5 w-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -122,18 +139,24 @@ function formatPrice(price: number): string {
                   />
                 </svg>
               )}
+              {type === 'build_time' && (
+                <svg class="mr-2 h-5 w-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22a10 10 0 100-20 10 10 0 000 20z" />
+                </svg>
+              )}
               {getTypeLabel(type)}
             </h3>
 
             <div class="space-y-3">
               {typeCredits.map((credit, index) => (
-                <div class="flex flex-col pb-3 space-y-1 border-b border-gray-100 sm:flex-row sm:justify-between sm:items-center sm:space-y-0 last:border-0">
+                <div class="flex flex-col space-y-1 border-b border-gray-100 pb-3 last:border-0 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
                   <div class="text-xs text-gray-600 sm:text-sm">
                     {index === 0
-                      ? `${m.first({}, { locale: Astro.locals.locale })} ${formatNumber(credit.step_max, type)}`
+                      ? `${m.first({}, { locale: Astro.locals.locale })} ${formatNumber(credit.step_max, type, credit.unit_factor)}`
                       : index === typeCredits.length - 1
-                        ? `${m.over({}, { locale: Astro.locals.locale })} ${formatNumber(credit.step_min, type)}`
-                        : `${m.next({}, { locale: Astro.locals.locale })} ${formatNumber(credit.step_max - credit.step_min, type)}`}
+                        ? `${m.over({}, { locale: Astro.locals.locale })} ${formatNumber(credit.step_min, type, credit.unit_factor)}`
+                        : `${m.next({}, { locale: Astro.locals.locale })} ${formatNumber(credit.step_max - credit.step_min, type, credit.unit_factor)}`}
                   </div>
                   <div class="text-xs font-medium text-gray-900 sm:text-sm">
                     ${formatPrice(credit.price_per_unit)} {getUnitLabel(type)}
