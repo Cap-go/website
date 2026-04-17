@@ -113,6 +113,10 @@ There are multiple ways to use Google Login with Capacitor. Here is a table that
 **Offline mode REQUIRES a backend server.** When using offline mode, the frontend receives minimal information (primarily just a server auth code). Without a backend to exchange this code for tokens and user information, offline mode provides no useful data to your frontend application.
 :::
 
+:::caution
+`SocialLogin.refresh({ provider: 'google' })` does **not** work with `google.mode: 'offline'`. In offline mode the plugin only gives you `serverAuthCode`, and your backend must exchange that code for access and refresh tokens, then refresh those tokens on the backend.
+:::
+
 If you still do not know which one you should choose, please consider the following scenarios:
 
 1. You want the user to login, immediately after you are going to issue him a custom JWT. Your app will NOT call Google APIs
@@ -233,3 +237,5 @@ async function fullLogin() {
   }
 }
 ```
+
+Notice what is missing here: there is no `SocialLogin.refresh()` call in the app. That is intentional. In Google offline mode, refresh happens after your backend exchanges `serverAuthCode` and stores the refresh token securely.
