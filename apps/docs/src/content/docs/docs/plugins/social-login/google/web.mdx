@@ -115,6 +115,10 @@ In order to use it, you have to do the following:
    ```
    :::
 
+   :::caution
+   On Web, `SocialLogin.refresh({ provider: 'google' })` is not implemented, even when using `google.mode: 'online'`. If you need a fresh Google token on Web, call `SocialLogin.login({ provider: 'google', ... })` again.
+   :::
+
    3. Create a login button that calls `SocialLogin.login` when clicked
   
       ```typescript
@@ -126,4 +130,3 @@ In order to use it, you have to do the following:
       console.log(JSON.stringify(res));
       ```
 </Steps>
-
