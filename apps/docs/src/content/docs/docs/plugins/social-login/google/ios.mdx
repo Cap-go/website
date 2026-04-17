@@ -185,7 +185,7 @@ In this part, you will learn how to setup Google login in iOS.
       :::
 
       :::caution
-      **About offline mode:** When using `mode: 'offline'`, the login response will not contain user data directly. Instead, you'll receive a server auth code that must be exchanged for user information via your backend server. See the [general setup guide](/docs/plugins/social-login/google/general/#using-offline-access-with-your-own-backend) for implementation details.
+      **About offline mode:** When using `mode: 'offline'`, the login response will not contain user data directly. Instead, you'll receive a server auth code that must be exchanged for user information via your backend server. `SocialLogin.refresh({ provider: 'google' })` is not available in this mode; refresh must happen on your backend after exchanging `serverAuthCode`. See the [general setup guide](/docs/plugins/social-login/google/general/#using-offline-access-with-your-own-backend) for implementation details.
       :::
    
    3. Implement the login function. Create a button and run the following code on click
@@ -210,6 +210,7 @@ In this part, you will learn how to setup Google login in iOS.
       })
       // res contains serverAuthCode, not user data
       // Send serverAuthCode to your backend to get user information
+      // Do not call SocialLogin.refresh() in offline mode
       console.log('Server auth code:', res.result.serverAuthCode)
       ```
 
@@ -243,7 +244,6 @@ await SocialLogin.login({
   options: {}
 });
 ```
-
 
 
 

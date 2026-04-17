@@ -169,6 +169,10 @@ You may create multiple Android client IDs. This is required if you have multipl
       console.log(JSON.stringify(res))
       ```
 
+      :::caution
+      If you initialize Google with `mode: 'offline'`, `SocialLogin.login()` returns `serverAuthCode` for your backend exchange flow. Do not call `SocialLogin.refresh({ provider: 'google' })` in the app in that mode. Exchange `serverAuthCode` on your backend, store the Google refresh token there, and refresh on the backend.
+      :::
+
 5. Configure the emulator for testing
    
    1. Go into `Device manager` and click the plus button

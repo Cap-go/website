@@ -112,6 +112,8 @@ const active = await SocialLogin.isRefreshTokenAvailable({ refreshToken: 'a-toke
 
 `google.mode: 'offline'` returns `serverAuthCode` from login. In this mode logout, isLoggedIn, getAuthorizationCode, and refresh are not available.
 
+Use `serverAuthCode` only as input to your backend token exchange. If you need to call `SocialLogin.refresh()` in the app, use `google.mode: 'online'` instead.
+
 ### Apple
 
 Set `useProperTokenExchange: true` for strict token handling and `useBroadcastChannel: true` for Android simplified setup.
