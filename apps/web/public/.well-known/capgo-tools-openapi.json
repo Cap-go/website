@@ -196,32 +196,50 @@
         ]
       },
       "AndroidKeystoreRequest": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/SigningIdentityInput"
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "commonName": {
+            "type": "string",
+            "description": "Full name used in the signing subject."
           },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "alias": {
-                "type": "string",
-                "pattern": "^[A-Za-z0-9._-]+$"
-              },
-              "password": {
-                "type": "string",
-                "minLength": 8
-              },
-              "validityYears": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 35,
-                "default": 10
-              }
-            },
-            "required": ["alias", "password"]
+          "emailAddress": {
+            "type": "string",
+            "format": "email"
+          },
+          "organization": {
+            "type": "string"
+          },
+          "organizationalUnit": {
+            "type": "string"
+          },
+          "localityName": {
+            "type": "string"
+          },
+          "stateOrProvinceName": {
+            "type": "string"
+          },
+          "countryName": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$",
+            "description": "ISO 3166-1 alpha-2 country code."
+          },
+          "alias": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9._-]+$"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 8
+          },
+          "validityYears": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 35,
+            "default": 10
           }
-        ]
+        },
+        "required": ["commonName", "emailAddress", "countryName", "alias", "password"]
       },
       "BaseToolFile": {
         "type": "object",

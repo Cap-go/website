@@ -40,14 +40,20 @@ async function main() {
     return
   }
 
-  for (const skill of registry.skills) {
+  for (const [index, skill] of registry.skills.entries()) {
+    if (!skill || typeof skill !== 'object' || typeof skill.url !== 'string' || typeof skill.digest !== 'string') {
+      console.error(`Invalid agent skill entry at index ${index}: expected object with string "url" and "digest".`)
+      process.exitCode = 1
+      continue
+    }
+
     const skillPath = normalizeSkillPath(skill.url)
     const skillContent = await readFile(skillPath, 'utf8')
     const actualDigest = computeDigest(skillContent)
 
     if (skill.digest !== actualDigest) {
       mismatches.push({
-        name: skill.name,
+        name: typeof skill.name === 'string' && skill.name ? skill.name : `skill[${index}]`,
         expected: skill.digest,
         actual: actualDigest,
       })
