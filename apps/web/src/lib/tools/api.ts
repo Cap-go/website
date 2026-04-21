@@ -154,7 +154,6 @@ function createRateLimiter({
     }
 
     existing.lastAccess = now
-
     if (existing.count >= limit) {
       const retryAfter = Math.max(1, Math.ceil((existing.resetAt - now) / 1000))
       return webJson({ error: errorMessage }, 429, {
@@ -330,19 +329,28 @@ function withRequestGuard(guard: RequestGuard, handle: RouteHandler): RouteHandl
 
 const iosCertificateRateLimiter = createRateLimiter({
   limit: HEAVY_TOOL_RATE_LIMIT,
+<<<<<<< HEAD
   maxEntries: HEAVY_TOOL_RATE_LIMIT_MAX_ENTRIES,
+=======
+>>>>>>> 907158237 (harden tool discovery endpoints)
   windowMs: HEAVY_TOOL_RATE_LIMIT_WINDOW_MS,
 })
 
 const androidKeystoreRateLimiter = createRateLimiter({
   limit: HEAVY_TOOL_RATE_LIMIT,
+<<<<<<< HEAD
   maxEntries: HEAVY_TOOL_RATE_LIMIT_MAX_ENTRIES,
+=======
+>>>>>>> 907158237 (harden tool discovery endpoints)
   windowMs: HEAVY_TOOL_RATE_LIMIT_WINDOW_MS,
 })
 
 const iosUdidProfileRateLimiter = createRateLimiter({
   limit: HEAVY_TOOL_RATE_LIMIT,
+<<<<<<< HEAD
   maxEntries: HEAVY_TOOL_RATE_LIMIT_MAX_ENTRIES,
+=======
+>>>>>>> 907158237 (harden tool discovery endpoints)
   windowMs: HEAVY_TOOL_RATE_LIMIT_WINDOW_MS,
 })
 
