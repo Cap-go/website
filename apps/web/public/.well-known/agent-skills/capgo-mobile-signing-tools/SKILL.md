@@ -16,6 +16,8 @@ Use this skill when a developer needs release-signing artifacts quickly from the
 
 ## API endpoints
 
+Base URL: `https://capgo.app`
+
 - `POST /api/tools/ios-certificate-generator`
 - `POST /api/tools/android-keystore-generator`
 - `GET /api/tools/ios-udid-finder/profile`

@@ -21,6 +21,6 @@
     "required": true,
     "schemes": ["bearer"]
   },
-  "instructions": "Start the local server with `bunx @capgo/cli@latest mcp` after authenticating with a Capgo API key. Use the MCP client configuration that matches your agent runtime.",
+  "instructions": "Start the local server with `bunx @capgo/cli@7.93.1 mcp` after authenticating with a Capgo API key. Use the MCP client configuration that matches your agent runtime.",
   "tools": ["dynamic"]
 }

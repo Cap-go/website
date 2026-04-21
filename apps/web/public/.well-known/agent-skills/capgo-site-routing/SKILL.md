@@ -19,7 +19,7 @@ Use this skill when a user lands on Capgo and needs the shortest path to the rig
 
 ## Routing hints
 
-- Send teams comparing plans, credits, or enterprise limits to pricing.
-- Send CI, certificates, and mobile release questions to native build or signing tools.
-- Send integration and automation work to the public API docs or the CLI MCP skill.
-- Send AI agent workflow questions to the Capgo skills page and the CLI MCP skill.
+- Route teams comparing plans, credits, or enterprise limits to pricing.
+- Direct CI, certificates, and mobile release questions to native build or signing tools.
+- Refer integration and automation work to the public API docs or the CLI MCP skill.
+- Forward AI agent workflow questions to the Capgo skills page and the CLI MCP skill.

@@ -10,7 +10,7 @@ Use this skill when an agent needs direct Capgo operations instead of only readi
 ## Start the server
 
 ```bash
-bunx @capgo/cli@latest mcp
+bunx @capgo/cli@7.93.1 mcp
 ```
 
 ## Authentication
@@ -18,7 +18,7 @@ bunx @capgo/cli@latest mcp
 Authenticate with a Capgo API key before starting the server or configure the key in the MCP client runtime.
 
 ```bash
-bunx @capgo/cli@latest login
+bunx @capgo/cli@7.93.1 login
 ```
 
 API keys are available from:

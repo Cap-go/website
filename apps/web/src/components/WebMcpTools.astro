@@ -40,54 +40,55 @@ const tools = [
     path: getRelativeLocaleUrl(locale, 'skills'),
   },
 ]
+
+const script = `;(() => {
+  if (typeof navigator === 'undefined') return
+
+  const modelContext = navigator.modelContext
+  if (!modelContext || typeof modelContext.registerTool !== 'function') return
+
+  const tools = ${JSON.stringify(tools)}
+  const controller = new AbortController()
+
+  const registerNavigationTool = (tool) => {
+    modelContext.registerTool(
+      {
+        name: tool.name,
+        title: tool.title,
+        description: tool.description,
+        inputSchema: {
+          type: 'object',
+          additionalProperties: false,
+        },
+        execute: async () => {
+          const url = new URL(tool.path, window.location.origin).toString()
+          window.location.assign(url)
+          return {
+            status: 'navigating',
+            url,
+          }
+        },
+      },
+      { signal: controller.signal },
+    )
+  }
+
+  for (const tool of tools) {
+    try {
+      registerNavigationTool(tool)
+    } catch (error) {
+      console.debug('Capgo WebMCP registration skipped', tool.name, error)
+    }
+  }
+
+  window.addEventListener(
+    'pagehide',
+    () => {
+      controller.abort()
+    },
+    { once: true },
+  )
+})()`
 ---
 
-<script is:inline define:vars={{ tools }}>
-  ;(() => {
-    if (typeof navigator === 'undefined') return
-
-    const modelContext = navigator.modelContext
-    if (!modelContext || typeof modelContext.registerTool !== 'function') return
-
-    const controller = new AbortController()
-
-    const registerNavigationTool = (tool) => {
-      modelContext.registerTool(
-        {
-          name: tool.name,
-          title: tool.title,
-          description: tool.description,
-          inputSchema: {
-            type: 'object',
-            additionalProperties: false,
-          },
-          execute: async () => {
-            const url = new URL(tool.path, window.location.origin).toString()
-            window.location.assign(url)
-            return {
-              status: 'navigating',
-              url,
-            }
-          },
-        },
-        { signal: controller.signal },
-      )
-    }
-
-    for (const tool of tools) {
-      try {
-        registerNavigationTool(tool)
-      } catch (error) {
-        console.debug('Capgo WebMCP registration skipped', tool.name, error)
-      }
-    }
-
-    window.addEventListener(
-      'pagehide',
-      () => {
-        controller.abort()
-      },
-      { once: true },
-    )
-  })()
-</script>
+<script is:inline set:html={script} />

@@ -13,21 +13,21 @@
       "type": "skill-md",
       "description": "Use Capgo's browser-based signing tools to generate iOS CSRs, create Android keystores, and capture iPhone or iPad UDIDs.",
       "url": "/.well-known/agent-skills/capgo-mobile-signing-tools/SKILL.md",
-      "digest": "sha256:7b00ed87ef3feea2bf2af33e7c4b31e603b631de788772b2a42f031a36554a8a"
+      "digest": "sha256:468de87ad549972ee8801b7a1289dce660a8995f73408afd9647082c70f44080"
     },
     {
       "name": "capgo-cli-mcp",
       "type": "skill-md",
       "description": "Run the local Capgo CLI MCP server with bunx so agents can manage live updates, channels, bundles, stats, apps, and native builds.",
       "url": "/.well-known/agent-skills/capgo-cli-mcp/SKILL.md",
-      "digest": "sha256:6a77f5d7e1b68ca54549623c1c6022cd0ed378ddde3f64b4d90b858237bfd071"
+      "digest": "sha256:e1c0aaa429f632690f6d8485b77a827518014a1b4b589c307b16695c78508756"
     },
     {
       "name": "capgo-site-routing",
       "type": "skill-md",
       "description": "Route developers to the right Capgo landing pages for pricing, native builds, signing tools, API docs, AI skills, and enterprise workflows.",
       "url": "/.well-known/agent-skills/capgo-site-routing/SKILL.md",
-      "digest": "sha256:0ee21c44f0f4e51fab18e68a75df591278beecced781b5fcf96b9557763a1cc4"
+      "digest": "sha256:4ee6bbca584fe7e15c96a003ef2181bbd660a5c1e47f3c5e810cfc9cee14771e"
     }
   ]
 }

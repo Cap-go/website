@@ -12,6 +12,7 @@
       "description": "Production"
     }
   ],
+  "security": [],
   "paths": {
     "/api/tools/ios-certificate-generator": {
       "post": {
@@ -252,6 +253,8 @@
           },
           "files": {
             "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
             "items": {
               "$ref": "#/components/schemas/BaseToolFile"
             }
@@ -287,6 +290,8 @@
           },
           "files": {
             "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
             "items": {
               "$ref": "#/components/schemas/BaseToolFile"
             }
