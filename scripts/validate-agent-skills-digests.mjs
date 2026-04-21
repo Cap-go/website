@@ -5,7 +5,7 @@ import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 
 const repoRoot = path.dirname(fileURLToPath(new URL('../package.json', import.meta.url)))
-const skillsDir = path.join(repoRoot, 'apps', 'web', 'public', '.well-known', 'agent-skills')
+const skillsDir = path.resolve(repoRoot, 'apps', 'web', 'public', '.well-known', 'agent-skills')
 const indexPath = path.join(skillsDir, 'index.json')
 
 function normalizeSkillPath(url) {
@@ -13,11 +13,20 @@ function normalizeSkillPath(url) {
     throw new Error(`Unsupported agent skill URL: ${url}`)
   }
 
-  return path.join(repoRoot, 'apps', 'web', 'public', url.slice(1))
+  const relativePath = url.slice('/.well-known/agent-skills/'.length)
+  const resolvedPath = path.resolve(skillsDir, relativePath)
+  const normalizedRelativePath = path.relative(skillsDir, resolvedPath)
+
+  if (normalizedRelativePath.startsWith('..') || path.isAbsolute(normalizedRelativePath)) {
+    throw new Error(`Unsupported agent skill URL: ${url}`)
+  }
+
+  return resolvedPath
 }
 
 function computeDigest(content) {
-  return `sha256:${createHash('sha256').update(content).digest('hex')}`
+  const normalizedContent = content.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n')
+  return `sha256:${createHash('sha256').update(normalizedContent, 'utf8').digest('hex')}`
 }
 
 async function main() {
@@ -27,7 +36,7 @@ async function main() {
 
   for (const skill of registry.skills ?? []) {
     const skillPath = normalizeSkillPath(skill.url)
-    const skillContent = await readFile(skillPath)
+    const skillContent = await readFile(skillPath, 'utf8')
     const actualDigest = computeDigest(skillContent)
 
     if (skill.digest !== actualDigest) {

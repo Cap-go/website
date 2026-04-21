@@ -42,6 +42,9 @@
           "400": {
             "$ref": "#/components/responses/ValidationError"
           },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
           "405": {
             "$ref": "#/components/responses/MethodNotAllowed"
           },
@@ -79,6 +82,9 @@
           "400": {
             "$ref": "#/components/responses/ValidationError"
           },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
           "405": {
             "$ref": "#/components/responses/MethodNotAllowed"
           },
@@ -113,6 +119,12 @@
                 }
               }
             }
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
           },
           "405": {
             "$ref": "#/components/responses/MethodNotAllowed"
@@ -371,6 +383,25 @@
       },
       "MethodNotAllowed": {
         "description": "The endpoint does not allow the requested HTTP method.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ApiError"
+            }
+          }
+        }
+      },
+      "RateLimited": {
+        "description": "Too many requests were received from this client. Retry after the indicated cooldown window.",
+        "headers": {
+          "Retry-After": {
+            "description": "Seconds to wait before retrying the request.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
         "content": {
           "application/json": {
             "schema": {
