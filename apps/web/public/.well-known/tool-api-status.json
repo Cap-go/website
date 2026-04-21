@@ -1,0 +1,11 @@
+{
+  "status": "pass",
+  "serviceId": "capgo-tools-api",
+  "version": "1.0.0",
+  "description": "Health document for Capgo's public website tools API.",
+  "links": {
+    "self": "https://capgo.app/.well-known/tool-api-status.json",
+    "openapi": "https://capgo.app/.well-known/capgo-tools-openapi.json",
+    "docs": "https://capgo.app/tools/"
+  }
+}

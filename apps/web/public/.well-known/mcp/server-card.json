@@ -1,0 +1,26 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/mcp-server-card/v1.json",
+  "version": "1.0",
+  "protocolVersion": "2025-06-18",
+  "serverInfo": {
+    "name": "capgo-cli-mcp",
+    "title": "Capgo CLI MCP Server",
+    "version": "7.93.1"
+  },
+  "description": "Local stdio MCP server bundled with @capgo/cli for managing Capgo apps, bundles, channels, statistics, organizations, and native builds.",
+  "documentationUrl": "https://github.com/Cap-go/CLI#readme",
+  "transport": {
+    "type": "stdio"
+  },
+  "capabilities": {
+    "tools": {
+      "listChanged": true
+    }
+  },
+  "authentication": {
+    "required": true,
+    "schemes": ["bearer"]
+  },
+  "instructions": "Start the local server with `bunx @capgo/cli@latest mcp` after authenticating with a Capgo API key. Use the MCP client configuration that matches your agent runtime.",
+  "tools": ["dynamic"]
+}

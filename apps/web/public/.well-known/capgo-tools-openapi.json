@@ -1,0 +1,389 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Capgo Website Tools API",
+    "summary": "Public browser-facing utility endpoints for Capgo mobile signing workflows.",
+    "description": "These endpoints power the Capgo website tools for generating iOS certificate requests, creating Android signing keystores, and retrieving iOS UDID capture results.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://capgo.app",
+      "description": "Production"
+    }
+  ],
+  "paths": {
+    "/api/tools/ios-certificate-generator": {
+      "post": {
+        "operationId": "createIosCertificateRequest",
+        "summary": "Generate an iOS certificate signing request and private key bundle.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IosCertificateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "CSR bundle generated successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IosCertificateBundle"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/api/tools/android-keystore-generator": {
+      "post": {
+        "operationId": "createAndroidKeystore",
+        "summary": "Generate a PKCS#12 Android signing keystore and certificate summary.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AndroidKeystoreRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Keystore bundle generated successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AndroidKeystoreBundle"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/api/tools/ios-udid-finder/profile": {
+      "get": {
+        "operationId": "downloadIosUdidProfile",
+        "summary": "Return a configuration profile that triggers iOS UDID collection.",
+        "parameters": [
+          {
+            "name": "locale",
+            "in": "query",
+            "description": "Optional locale code used when redirecting back to the localized result page.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Unsigned or signed mobile configuration profile.",
+            "content": {
+              "application/x-apple-aspen-config": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          }
+        }
+      }
+    },
+    "/api/tools/ios-udid-finder/result": {
+      "get": {
+        "operationId": "getIosUdidResult",
+        "summary": "Read the latest captured iOS device payload from the current browser session.",
+        "responses": {
+          "200": {
+            "description": "Current UDID capture state.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UdidResult"
+                }
+              }
+            }
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SigningIdentityInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "commonName": {
+            "type": "string",
+            "description": "Full name used in the signing subject."
+          },
+          "emailAddress": {
+            "type": "string",
+            "format": "email"
+          },
+          "organization": {
+            "type": "string"
+          },
+          "organizationalUnit": {
+            "type": "string"
+          },
+          "localityName": {
+            "type": "string"
+          },
+          "stateOrProvinceName": {
+            "type": "string"
+          },
+          "countryName": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$",
+            "description": "ISO 3166-1 alpha-2 country code."
+          }
+        },
+        "required": ["commonName", "emailAddress", "countryName"]
+      },
+      "IosCertificateRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SigningIdentityInput"
+          }
+        ]
+      },
+      "AndroidKeystoreRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SigningIdentityInput"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "alias": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9._-]+$"
+              },
+              "password": {
+                "type": "string",
+                "minLength": 8
+              },
+              "validityYears": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 35,
+                "default": 10
+              }
+            },
+            "required": ["alias", "password"]
+          }
+        ]
+      },
+      "BaseToolFile": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "fileName": {
+            "type": "string"
+          },
+          "mimeType": {
+            "type": "string"
+          },
+          "encoding": {
+            "type": "string",
+            "enum": ["text", "base64"]
+          },
+          "content": {
+            "type": "string"
+          }
+        },
+        "required": ["fileName", "mimeType", "encoding", "content"]
+      },
+      "IosCertificateBundle": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "summary": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "subject": {
+                "type": "string"
+              },
+              "keyType": {
+                "type": "string"
+              },
+              "hashAlgorithm": {
+                "type": "string"
+              }
+            },
+            "required": ["subject", "keyType", "hashAlgorithm"]
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BaseToolFile"
+            }
+          }
+        },
+        "required": ["summary", "files"]
+      },
+      "AndroidKeystoreBundle": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "summary": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "subject": {
+                "type": "string"
+              },
+              "alias": {
+                "type": "string"
+              },
+              "validityYears": {
+                "type": "integer"
+              },
+              "fingerprintSha1": {
+                "type": "string"
+              },
+              "fingerprintSha256": {
+                "type": "string"
+              }
+            },
+            "required": ["subject", "alias", "validityYears", "fingerprintSha1", "fingerprintSha256"]
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BaseToolFile"
+            }
+          }
+        },
+        "required": ["summary", "files"]
+      },
+      "UdidDevicePayload": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "udid": {
+            "type": "string"
+          },
+          "deviceName": {
+            "type": "string"
+          },
+          "product": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "serial": {
+            "type": "string"
+          },
+          "imei": {
+            "type": "string"
+          },
+          "meid": {
+            "type": "string"
+          },
+          "challenge": {
+            "type": "string"
+          }
+        },
+        "required": ["udid", "deviceName", "product", "version", "serial", "imei", "meid", "challenge"]
+      },
+      "UdidResult": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "payload": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/UdidDevicePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": ["payload"]
+      },
+      "ApiError": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        },
+        "required": ["error"]
+      }
+    },
+    "responses": {
+      "ValidationError": {
+        "description": "The request body was missing required fields or contained invalid values.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ApiError"
+            }
+          }
+        }
+      },
+      "MethodNotAllowed": {
+        "description": "The endpoint does not allow the requested HTTP method.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ApiError"
+            }
+          }
+        }
+      },
+      "InternalError": {
+        "description": "An internal error occurred while generating the requested artifact.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ApiError"
+            }
+          }
+        }
+      }
+    }
+  }
+}
