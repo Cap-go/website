@@ -34,7 +34,13 @@ async function main() {
   const registry = JSON.parse(indexContent)
   const mismatches = []
 
-  for (const skill of registry.skills ?? []) {
+  if (!registry || typeof registry !== 'object' || !Array.isArray(registry.skills)) {
+    console.error('Invalid agent skills registry: "skills" must be an array.')
+    process.exitCode = 1
+    return
+  }
+
+  for (const skill of registry.skills) {
     const skillPath = normalizeSkillPath(skill.url)
     const skillContent = await readFile(skillPath, 'utf8')
     const actualDigest = computeDigest(skillContent)

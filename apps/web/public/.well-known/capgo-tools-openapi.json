@@ -340,7 +340,7 @@
             "type": "string"
           }
         },
-        "required": ["udid", "deviceName", "product", "version", "serial", "imei", "meid", "challenge"]
+        "required": ["udid", "deviceName", "product", "version", "serial", "challenge"]
       },
       "UdidResult": {
         "type": "object",

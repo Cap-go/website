@@ -24,17 +24,20 @@ const UDID_RESULT_API_PATH = '/api/tools/ios-udid-finder/result'
 const UDID_CALLBACK_PATH = '/api/tools/ios-udid-finder/callback'
 const HEAVY_TOOL_RATE_LIMIT = 10
 const HEAVY_TOOL_RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000
+const HEAVY_TOOL_RATE_LIMIT_MAX_ENTRIES = 2048
 
 type RequestGuard = (request: Request) => Response | null
 
 type RateLimiterOptions = {
   limit: number
   windowMs: number
+  maxEntries?: number
   errorMessage?: string
 }
 
 type RateLimitEntry = {
   count: number
+  lastAccess: number
   resetAt: number
 }
 
@@ -102,7 +105,28 @@ function pruneExpiredRateLimitEntries(entries: Map<string, RateLimitEntry>, now:
   }
 }
 
-function createRateLimiter({ limit, windowMs, errorMessage = 'Too many requests. Please wait a few minutes and try again.' }: RateLimiterOptions): RequestGuard {
+function evictLeastRecentlyUsedEntry(entries: Map<string, RateLimitEntry>): void {
+  let oldestKey: string | null = null
+  let oldestAccess = Number.POSITIVE_INFINITY
+
+  for (const [key, entry] of entries) {
+    if (entry.lastAccess < oldestAccess) {
+      oldestKey = key
+      oldestAccess = entry.lastAccess
+    }
+  }
+
+  if (oldestKey) {
+    entries.delete(oldestKey)
+  }
+}
+
+function createRateLimiter({
+  limit,
+  windowMs,
+  maxEntries = HEAVY_TOOL_RATE_LIMIT_MAX_ENTRIES,
+  errorMessage = 'Too many requests. Please wait a few minutes and try again.',
+}: RateLimiterOptions): RequestGuard {
   const entries = new Map<string, RateLimitEntry>()
   let nextPruneAt = 0
 
@@ -117,12 +141,19 @@ function createRateLimiter({ limit, windowMs, errorMessage = 'Too many requests.
     const existing = entries.get(clientId)
 
     if (!existing || existing.resetAt <= now) {
+      if (!existing && entries.size >= maxEntries) {
+        evictLeastRecentlyUsedEntry(entries)
+      }
+
       entries.set(clientId, {
         count: 1,
+        lastAccess: now,
         resetAt: now + windowMs,
       })
       return null
     }
+
+    existing.lastAccess = now
 
     if (existing.count >= limit) {
       const retryAfter = Math.max(1, Math.ceil((existing.resetAt - now) / 1000))
@@ -299,16 +330,19 @@ function withRequestGuard(guard: RequestGuard, handle: RouteHandler): RouteHandl
 
 const iosCertificateRateLimiter = createRateLimiter({
   limit: HEAVY_TOOL_RATE_LIMIT,
+  maxEntries: HEAVY_TOOL_RATE_LIMIT_MAX_ENTRIES,
   windowMs: HEAVY_TOOL_RATE_LIMIT_WINDOW_MS,
 })
 
 const androidKeystoreRateLimiter = createRateLimiter({
   limit: HEAVY_TOOL_RATE_LIMIT,
+  maxEntries: HEAVY_TOOL_RATE_LIMIT_MAX_ENTRIES,
   windowMs: HEAVY_TOOL_RATE_LIMIT_WINDOW_MS,
 })
 
 const iosUdidProfileRateLimiter = createRateLimiter({
   limit: HEAVY_TOOL_RATE_LIMIT,
+  maxEntries: HEAVY_TOOL_RATE_LIMIT_MAX_ENTRIES,
   windowMs: HEAVY_TOOL_RATE_LIMIT_WINDOW_MS,
 })
 
