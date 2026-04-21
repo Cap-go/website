@@ -330,27 +330,39 @@ function withRequestGuard(guard: RequestGuard, handle: RouteHandler): RouteHandl
 const iosCertificateRateLimiter = createRateLimiter({
   limit: HEAVY_TOOL_RATE_LIMIT,
 <<<<<<< HEAD
+<<<<<<< HEAD
   maxEntries: HEAVY_TOOL_RATE_LIMIT_MAX_ENTRIES,
 =======
 >>>>>>> 907158237 (harden tool discovery endpoints)
+=======
+  maxEntries: HEAVY_TOOL_RATE_LIMIT_MAX_ENTRIES,
+>>>>>>> 99ddb21a5 (fix PR review follow-ups)
   windowMs: HEAVY_TOOL_RATE_LIMIT_WINDOW_MS,
 })
 
 const androidKeystoreRateLimiter = createRateLimiter({
   limit: HEAVY_TOOL_RATE_LIMIT,
 <<<<<<< HEAD
+<<<<<<< HEAD
   maxEntries: HEAVY_TOOL_RATE_LIMIT_MAX_ENTRIES,
 =======
 >>>>>>> 907158237 (harden tool discovery endpoints)
+=======
+  maxEntries: HEAVY_TOOL_RATE_LIMIT_MAX_ENTRIES,
+>>>>>>> 99ddb21a5 (fix PR review follow-ups)
   windowMs: HEAVY_TOOL_RATE_LIMIT_WINDOW_MS,
 })
 
 const iosUdidProfileRateLimiter = createRateLimiter({
   limit: HEAVY_TOOL_RATE_LIMIT,
 <<<<<<< HEAD
+<<<<<<< HEAD
   maxEntries: HEAVY_TOOL_RATE_LIMIT_MAX_ENTRIES,
 =======
 >>>>>>> 907158237 (harden tool discovery endpoints)
+=======
+  maxEntries: HEAVY_TOOL_RATE_LIMIT_MAX_ENTRIES,
+>>>>>>> 99ddb21a5 (fix PR review follow-ups)
   windowMs: HEAVY_TOOL_RATE_LIMIT_WINDOW_MS,
 })
 

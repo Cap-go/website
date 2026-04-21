@@ -40,6 +40,7 @@ async function main() {
     return
   }
 
+<<<<<<< HEAD
   for (const [index, skill] of registry.skills.entries()) {
     if (!skill || typeof skill !== 'object' || typeof skill.url !== 'string' || typeof skill.digest !== 'string') {
       console.error(`Invalid agent skill entry at index ${index}: expected object with string "url" and "digest".`)
