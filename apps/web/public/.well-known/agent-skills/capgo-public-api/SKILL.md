@@ -11,11 +11,13 @@ Use this skill when the task requires programmatic work with Capgo Cloud instead
 
 - Product site: https://capgo.app
 - API docs: https://capgo.app/docs/public-api/
+- Agent-ready OpenAPI: https://capgo.app/.well-known/capgo-public-api-openapi.json
 - API base: https://api.capgo.app
+- Status page: https://status.capgo.app/
 
 ## Authentication
 
-Send a Capgo API key in the `authorization` header.
+Send a raw Capgo API key in the `authorization` header. Do not prepend `Bearer` unless the published API docs change.
 
 ```bash
 curl -H "authorization: $CAPGO_API_KEY" https://api.capgo.app/organization/
@@ -27,17 +29,19 @@ Create or rotate API keys in the dashboard:
 
 ## Main resource groups
 
-- `/organization/` and `/organization/members/`
-- `/app/`
-- `/apikey/`
-- `/channel/`
-- `/bundle/`
-- `/device/`
-- `/statistics/...`
+- `/organization/` for organization CRUD and `/organization/members/` for member access control
+- `/app/` and `/app/:app_id` for app listing, creation, updates, and deletion
+- `/apikey/` and `/apikey/:id/` for API key lifecycle management
+- `/channel/` for channel rollout configuration
+- `/bundle/` and `/bundle/metadata` for live-update bundle registration and metadata
+- `/device/` for device overrides and device inventory
+- `/statistics/...` for app, organization, user, and bundle-usage analytics
 
 ## Working rules
 
-- Prefer the published docs for request and response details before guessing fields.
+- Prefer the published docs and OpenAPI document for request and response details before guessing fields.
 - Use least-privilege API keys (`read`, `upload`, `write`, `all`).
-- Handle `429` responses with retry backoff.
+- Handle `401`, `403`, and `429` responses explicitly, with retry backoff for `429`.
+- Standard accounts are limited to 100 requests per minute; enterprise accounts are limited to 1000 requests per minute.
 - Expect JSON success payloads with `data` or `status`, and JSON failures with `error`.
+- Capgo's public API currently uses API-key authentication, not OAuth/OIDC discovery metadata.
