@@ -48,7 +48,7 @@ const actionDefinitionRows =
 @capgo/capacitor-streamcall|github.com/Cap-go|Integrate video calling and live streaming with Stream SDK for real-time communication|https://github.com/Cap-go/capacitor-streamcall/|Streamcall
 @capgo/capacitor-autofill-save-password|github.com/Cap-go|Prompt users to save passwords to device autofill for seamless login experience|https://github.com/Cap-go/capacitor-autofill-save-password/|Autofill Save Password
 @capgo/capacitor-social-login|github.com/Cap-go|Authenticate users with Google, Facebook, and Apple Sign-In for easy social login|https://github.com/Cap-go/capacitor-social-login/|Social Login
-@capgo/capacitor-passkey|github.com/Cap-go|Use browser-style WebAuthn passkeys in Capacitor with a native shim and generated platform configuration|https://github.com/Cap-go/capacitor-passkey/|Passkey
+@capgo/capacitor-passkey|github.com/Cap-go|Keep browser-style WebAuthn code in Capacitor while native passkey calls and host patching are handled for you|https://github.com/Cap-go/capacitor-passkey/|Passkey
 @capgo/capacitor-jw-player|github.com/Cap-go|Embed JW Player for professional video streaming with ads and analytics support|https://github.com/Cap-go/capacitor-jw-player/|JW Player
 @capgo/capacitor-ricoh360-camera-plugin|github.com/Cap-go|Control Ricoh Theta 360-degree cameras for immersive panoramic photography|https://github.com/Cap-go/capacitor-ricoh360-camera-plugin/|Ricoh360 Camera
 @capgo/capacitor-admob|github.com/Cap-go|Monetize your app with Google AdMob banner, interstitial, and rewarded ads|https://github.com/Cap-go/capacitor-admob/|AdMob
