@@ -27,7 +27,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
     Keep `navigator.credentials.create()` and `navigator.credentials.get()` in your app instead of rewriting your passkey flow around a custom API.
   </Card>
   <Card title="Minimal app changes" icon="pencil">
-    Add plugin config once, import `@capgo/capacitor-passkey/auto`, and keep the rest of your WebAuthn code close to the browser implementation.
+    Add plugin config once, call `CapacitorPasskey.autoShimWebAuthn()` during bootstrap, and keep the rest of your WebAuthn code close to the browser implementation.
   </Card>
   <Card title="Build-time native wiring" icon="setting">
     The plugin patches the generated iOS and Android host projects during sync so you do not need to keep hand-editing those files.

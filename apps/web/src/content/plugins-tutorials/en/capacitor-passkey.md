@@ -53,7 +53,7 @@ The config is read from `plugins.CapacitorPasskey` in `capacitor.config.*`.
 
 - `origin`: primary HTTPS relying-party origin used by the shim and direct API
 - `domains`: extra relying-party hostnames to patch into native config during sync
-- `autoShim`: defaults to `true` when you use `@capgo/capacitor-passkey/auto`
+- `autoShim`: defaults to `true` and controls the native `cap sync` auto-configuration hook
 
 Run sync again after changing the config:
 
@@ -61,12 +61,14 @@ Run sync again after changing the config:
 bunx cap sync
 ```
 
-## Import the shim once
+## Install the shim during bootstrap
 
-Import the auto entrypoint in your app bootstrap:
+Import the plugin from the standard package entrypoint, then install the shim during app bootstrap:
 
 ```ts
-import '@capgo/capacitor-passkey/auto';
+import { CapacitorPasskey } from '@capgo/capacitor-passkey';
+
+await CapacitorPasskey.autoShimWebAuthn();
 ```
 
 After that, your existing browser-style passkey code can stay the same.

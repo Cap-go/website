@@ -36,10 +36,12 @@ import { PackageManagers } from 'starlight-package-managers'
    export default config;
    ```
 
-4. **Import the shim once**
+4. **Install the shim during bootstrap**
 
    ```ts
-   import '@capgo/capacitor-passkey/auto';
+   import { CapacitorPasskey } from '@capgo/capacitor-passkey';
+
+   await CapacitorPasskey.autoShimWebAuthn();
    ```
 
 5. **Keep your normal WebAuthn flow**
@@ -61,7 +63,7 @@ The config is read from `plugins.CapacitorPasskey` in `capacitor.config.*`.
 
 - `origin`: primary HTTPS relying-party origin used by the shim and direct API
 - `domains`: extra relying-party hostnames to patch into native config during sync
-- `autoShim`: defaults to `true` when you use `@capgo/capacitor-passkey/auto`
+- `autoShim`: defaults to `true` and controls the native `cap sync` auto-configuration hook
 
 ## What sync patches for you
 
