@@ -1,123 +1,212 @@
 ---
 title: Getting Started
-description: Install and configure the Capgo AdMob plugin to serve ads inside your Capacitor application.
+description: "Install @capgo/capacitor-admob and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the plugin**
-   <PackageManagers pkg="@capgo/capacitor-admob" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+```bash
+bun add @capgo/capacitor-admob
+bunx cap sync
+```
 
-2. **Sync native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
-
-## Initialize the SDK
+## Import
 
 ```typescript
-import { AdMob, MaxAdContentRating } from '@capgo/capacitor-admob';
-import { Capacitor } from '@capacitor/core';
-
-// Start the Mobile Ads SDK once in your application bootstrap
-await AdMob.start();
-
-// Optional: configure global request settings
-await AdMob.configure({
-  appMuted: false,
-  appVolume: 1,
-});
-
-// iOS: request tracking authorization
-const platform = Capacitor.getPlatform();
-if (platform === 'ios') {
-  await AdMob.requestTrackingAuthorization();
-}
-
-await AdMob.configRequest({
-  maxAdContentRating: MaxAdContentRating.T,
-  tagForChildDirectedTreatment: false,
-  tagForUnderAgeOfConsent: false,
-});
+import { AdMob } from '@capgo/capacitor-admob';
 ```
 
-## Android configuration
+## API Overview
 
-> android/app/src/main/AndroidManifest.xml
+### `start`
 
-```xml
-<application>
-	...
-	<meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-000000000000000~0000000000"/>
-</application>
-```
-
-## iOS configuration
-
-> ios/App/App/Info.plist
-
-```xml
-<dict>
-	...
-	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-000000000000000~0000000000</string>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>Your data will be used to deliver personalized ads and help us keep YourAppName free to play.</string>
-</dict>
-```
-
-## Show a banner ad
-
-```typescript
-import { BannerAd } from '@capgo/capacitor-admob';
-
-const banner = new BannerAd({
-  adUnitId: 'ca-app-pub-xxxxxxxxxxxxxxxx/banner',
-  position: 'bottom',
-});
-
-await banner.show();
-```
-
-## Interstitial or rewarded ads
-
-```typescript
-import { InterstitialAd, RewardedAd } from '@capgo/capacitor-admob';
-
-const interstitial = new InterstitialAd({
-  adUnitId: 'ca-app-pub-xxxxxxxxxxxxxxxx/interstitial',
-});
-await interstitial.load();
-await interstitial.show();
-
-const rewarded = new RewardedAd({
-  adUnitId: 'ca-app-pub-xxxxxxxxxxxxxxxx/rewarded',
-});
-await rewarded.load();
-await rewarded.show();
-```
-
-## Listen for ad events
+Initialize and start the AdMob SDK.
 
 ```typescript
 import { AdMob } from '@capgo/capacitor-admob';
 
-const handle = await AdMob.addListener('adImpression', (event) => {
-  console.log('Ad impression', event);
-});
-
-// Later when cleaning up
-await handle.remove();
+await AdMob.start();
 ```
 
-## Platform notes
+### `configure`
 
-- **iOS**: Add your AdMob app ID to `Info.plist` under the `GADApplicationIdentifier` key and include any SKAdNetwork IDs you rely on.
-- **Android**: Declare your AdMob app ID in `AndroidManifest.xml` by adding `com.google.android.gms.ads.APPLICATION_ID` inside the `<application>` tag.
-- **Consent & Privacy**: Use `requestTrackingAuthorization()` on iOS 14+ and `configRequest()` child-directed flags to stay compliant with regional privacy rules.
-- **iOS**: On `npx cap sync` got this error `The 'Pods-App' target has transitive dependencies that include statically linked binaries: (Google-Mobile-Ads-SDK and GoogleUserMessagingPlatform)` solved by editing `ios/App/Podfile` on line 4 adding `use_frameworks! :linkage => :static`
+Configure AdMob settings.
+
+```typescript
+import { AdMob } from '@capgo/capacitor-admob';
+
+await AdMob.configure({
+  appMuted: false,
+  appVolume: 0.5
+});
+```
+
+### `configRequest`
+
+Configure ad request settings.
+
+```typescript
+import { AdMob } from '@capgo/capacitor-admob';
+
+await AdMob.configRequest({
+  maxAdContentRating: MaxAdContentRating.PG,
+  tagForChildDirectedTreatment: true,
+  testDeviceIds: ['test-device-id']
+});
+```
+
+### `adCreate`
+
+Create a new ad instance.
+
+```typescript
+import { AdMob } from '@capgo/capacitor-admob';
+
+await AdMob.adCreate({
+  adUnitId: 'ca-app-pub-3940256099942544/1033173712'
+});
+```
+
+### `adIsLoaded`
+
+Check if an ad is loaded and ready to be shown.
+
+```typescript
+import { AdMob } from '@capgo/capacitor-admob';
+
+const isLoaded = await AdMob.adIsLoaded({ id: 1 });
+if (isLoaded) {
+  await AdMob.adShow({ id: 1 });
+}
+```
+
+### `adLoad`
+
+Load an ad.
+
+```typescript
+import { AdMob } from '@capgo/capacitor-admob';
+
+await AdMob.adLoad({ id: 1 });
+```
+
+### `adShow`
+
+Show a loaded ad.
+
+```typescript
+import { AdMob } from '@capgo/capacitor-admob';
+
+await AdMob.adShow({ id: 1 });
+```
+
+### `adHide`
+
+Hide a currently displayed ad.
+
+```typescript
+import { AdMob } from '@capgo/capacitor-admob';
+
+await AdMob.adHide({ id: 1 });
+```
+
+### `trackingAuthorizationStatus`
+
+Get the current tracking authorization status (iOS only).
+
+```typescript
+import { AdMob } from '@capgo/capacitor-admob';
+
+const { status } = await AdMob.trackingAuthorizationStatus();
+if (status === TrackingAuthorizationStatus.notDetermined) {
+  await AdMob.requestTrackingAuthorization();
+}
+```
+
+### `requestTrackingAuthorization`
+
+Request tracking authorization from the user (iOS only).
+
+```typescript
+import { AdMob } from '@capgo/capacitor-admob';
+
+const { status } = await AdMob.requestTrackingAuthorization();
+console.log('User tracking status:', status);
+```
+
+## Type Reference
+
+### `AdMobConfig`
+Configuration options for AdMob.
+```typescript
+export type AdMobConfig = {
+  /** Whether the app should be muted */
+  appMuted?: boolean;
+  /** The app volume (0.0 to 1.0) */
+  appVolume?: number;
+};
+```
+
+### `RequestConfig`
+Configuration for ad requests.
+```typescript
+export type RequestConfig = {
+  /** Maximum ad content rating */
+  maxAdContentRating?: MaxAdContentRating;
+  /** Whether to use the same app key */
+  sameAppKey?: boolean;
+  /** Tag for child-directed treatment (true, false, or null for unspecified) */
+  tagForChildDirectedTreatment?: boolean | null;
+  /** Tag for under age of consent (true, false, or null for unspecified) */
+  tagForUnderAgeOfConsent?: boolean | null;
+  /** Array of test device IDs */
+  testDeviceIds?: string[];
+};
+```
+
+### `MobileAdOptions`
+Base options for mobile ads.
+```typescript
+export type MobileAdOptions = {
+  /** The ad unit ID from AdMob */
+  adUnitId: string;
+};
+```
+
+### `TrackingAuthorizationStatus`
+Tracking authorization status for iOS App Tracking Transparency.
+```typescript
+export enum TrackingAuthorizationStatus {
+  /** User has not yet received an authorization request */
+  notDetermined = 0,
+  /** User restricted, device is unable to provide authorization */
+  restricted = 1,
+  /** User denied authorization */
+  denied = 2,
+  /** User authorized access */
+  authorized = 3,
+}
+```
+
+### `MaxAdContentRating`
+Maximum ad content rating enum used to restrict ads based on content rating.
+```typescript
+export enum MaxAdContentRating {
+  /** General Audiences */
+  G = 'G',
+  /** Mature Audiences */
+  MA = 'MA',
+  /** Parental Guidance */
+  PG = 'PG',
+  /** Teen */
+  T = 'T',
+  /** Unspecified rating */
+  UNSPECIFIED = '',
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-speech-recognition"
-description: Natural, low-latency speech recognition for Capacitor apps with parity across iOS and Android platforms.
+description: "Capacitor plugin for comprehensive on-device speech recognition with live partial results."
 tableOfContents: false
 next: false
 prev: false
@@ -8,42 +8,53 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Comprehensive on-device speech recognition with real-time transcription, streaming partial results, and cross-platform parity.
-  image:
-    file: ~public/icons/plugins/speech-recognition.svg
+  tagline: "Capacitor plugin for comprehensive on-device speech recognition with live partial results."
   actions:
     - text: Get started
       link: /docs/plugins/speech-recognition/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-speech-recognition/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Real-time Transcription" icon="rocket">
-    Get instant partial results as users speak 🎤
-  </Card>
-  <Card title="Cross-Platform Parity" icon="star">
-    Consistent API and behavior across iOS and Android 📱
-  </Card>
-  <Card title="Segmented Sessions" icon="list-format">
-    Split recognition into segments based on silence 🔇
-  </Card>
-  <Card title="Punctuation Support" icon="pencil">
-    Automatic punctuation on iOS 16+ 📝
-  </Card>
-  <Card title="Permission Helpers" icon="approve-check-circle">
-    Built-in permission request and status checking 🔒
-  </Card>
-  <Card title="Language Support" icon="translate">
-    Access to device's supported recognition languages 🌍
-  </Card>
-  <Card title="Getting Started" icon="open-book">
-    Check the [Getting Started Guide](/docs/plugins/speech-recognition/getting-started/) to install and configure the plugin.
-  </Card>
-</CardGrid>
+Capacitor plugin for comprehensive on-device speech recognition with live partial results.
+
+## Core Capabilities
+
+- `available` - Checks whether the native speech recognition service is usable on the current device.
+- `isOnDeviceRecognitionAvailable` - Checks whether the platform's newer on-device recognition path is available for the selected locale.
+- `start` - Begins capturing audio and transcribing speech.
+- `stop` - Stops listening and tears down native resources.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `available` | Checks whether the native speech recognition service is usable on the current device. |
+| `isOnDeviceRecognitionAvailable` | Checks whether the platform's newer on-device recognition path is available for the selected locale. |
+| `start` | Begins capturing audio and transcribing speech. |
+| `stop` | Stops listening and tears down native resources. |
+| `forceStop` | Force stops the current session. |
+| `getLastPartialResult` | Gets the last cached partial transcription result. |
+| `setPTTState` | Updates the current push-to-talk button state. |
+| `getSupportedLanguages` | Gets the locales supported by the underlying recognizer. |
+| `isListening` | Returns whether the plugin is actively listening for speech. |
+| `checkPermissions` | Gets the current permission state. |
+| `requestPermissions` | Requests the microphone + speech recognition permissions. |
+| `getPluginVersion` | Returns the native plugin version bundled with this package. |
+| `addListener` | Listen for segmented session completion events (Android only). |
+| `addListener` | Listen for segmented recognition results (Android only). |
+| `addListener` | Listen for partial transcription updates emitted while `partialResults` is enabled. |
+| `addListener` | Listen for changes to the native listening state. |
+| `addListener` | Listen for recognition errors. |
+| `addListener` | Listen for the recognizer becoming ready for another session. |
+| `removeAllListeners` | Removes every registered listener. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-speech-recognition](https://github.com/Cap-go/capacitor-speech-recognition/).

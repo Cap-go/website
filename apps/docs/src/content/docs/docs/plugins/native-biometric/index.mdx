@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-native-biometric"
-description: Capacitor plugin for native biometric authentication using fingerprint, Face ID, and other biometric sensors.
+description: "This plugin gives access to the native biometric apis for android and iOS."
 tableOfContents: false
 next: false
 prev: false
@@ -8,39 +8,43 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Access native biometric authentication APIs for Android and iOS, providing secure and convenient user authentication.
-  image:
-    file: ~public/icons/plugins/native-biometric.svg
+  tagline: "This plugin gives access to the native biometric apis for android and iOS."
   actions:
     - text: Get started
       link: /docs/plugins/native-biometric/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-native-biometric/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Comprehensive methods" icon="open-book">
-    Supports verification, secure credential storage, secure retrieval, and biometry-change events.
-  </Card>
-  <Card title="Stronger availability signals" icon="approve-check">
-    Reads `isAvailable`, `authenticationStrength`, and secure lock-state details for robust decision-making.
-  </Card>
-  <Card title="Credential access controls" icon="seti:lock">
-    Stores credentials with optional Keychain/Keystore access policies using `AccessControl`.
-  </Card>
-  <Card title="Prompt control" icon="setting">
-    Configure reason, titles, allowed biometry types, retry count, and platform-specific fallback behavior.
-  </Card>
-  <Card title="Event-driven updates" icon="seti:clock">
-    Listen to `biometryChange` and adapt login flows when biometrics change while app is in background.
-  </Card>
-  <Card title="Cross-platform docs" icon="setting">
-    See the full guide for setup and API usage in the getting-started page.
-  </Card>
-</CardGrid>
+This plugin gives access to the native biometric apis for android and iOS.
+
+## Core Capabilities
+
+- `isAvailable` - Checks if biometric authentication hardware is available.
+- `verifyIdentity` - Prompts the user to authenticate with biometrics.
+- `getCredentials` - Gets the stored credentials for a given server.
+- `setCredentials` - Stores the given credentials for a given server.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `isAvailable` | Checks if biometric authentication hardware is available. |
+| `addListener` | Adds a listener that is called when the app resumes from background. This is useful to detect if biometry availability has changed while the app was in the background (e.g., user enrolled/unenrolled biometrics). |
+| `verifyIdentity` | Prompts the user to authenticate with biometrics. |
+| `getCredentials` | Gets the stored credentials for a given server. |
+| `setCredentials` | Stores the given credentials for a given server. |
+| `deleteCredentials` | Deletes the stored credentials for a given server. |
+| `getSecureCredentials` | Gets the stored credentials for a given server, requiring biometric authentication. Credentials must have been stored with accessControl set to BIOMETRY_CURRENT_SET or BIOMETRY_ANY. |
+| `isCredentialsSaved` | Checks if credentials are already saved for a given server. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-native-biometric](https://github.com/Cap-go/capacitor-native-biometric/).

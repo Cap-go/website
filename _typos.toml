@@ -82,6 +82,7 @@ Damon = "Damon"
 ASO = "ASO"  # App Store Optimization
 ITMS = "ITMS"  # iTunes Music Store
 Hashi = "Hashi"  # HashiCorp (brand name)
+formatable = "formatable"  # NFC event literal from upstream API
 
 # Translation keys/identifiers - these should remain as-is
 udid = "udid"  # iOS device UDID (technical term)

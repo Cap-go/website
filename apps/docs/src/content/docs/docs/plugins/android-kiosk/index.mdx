@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-android-kiosk"
-description: Android Kiosk Mode plugin for Capacitor - Lock device into kiosk mode with launcher functionality
+description: "Android Kiosk Mode plugin for Capacitor - Lock device into kiosk mode with launcher functionality."
 tableOfContents: false
 next: false
 prev: false
@@ -8,43 +8,41 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Lock your Android device into kiosk mode with full control over hardware buttons and launcher functionality for your Capacitor apps.
-  image:
-    file: ~public/icons/plugins/android-kiosk.svg
+  tagline: "Capacitor Android Kiosk Plugin for controlling kiosk mode and launcher functionality. This plugin is Android-only. For iOS kiosk mode, use the device's Guided Access feature."
   actions:
     - text: Get started
       link: /docs/plugins/android-kiosk/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-android-kiosk/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Kiosk Mode" icon="rocket">
-    Hide system UI and enter immersive fullscreen mode
-  </Card>
-  <Card title="Launcher Integration" icon="setting">
-    Set your app as the device launcher/home app
-  </Card>
-  <Card title="Hardware Key Control" icon="warning">
-    Block or allow specific hardware buttons (back, home, recent, volume, power)
-  </Card>
-  <Card title="Status Detection" icon="approve-check">
-    Check if kiosk mode is active or if app is set as launcher
-  </Card>
-  <Card title="Android 6.0+" icon="star">
-    Supports Android API 23 through Android 15 (API 35)
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/android-kiosk/getting-started/) to integrate kiosk mode in minutes.
-  </Card>
-</CardGrid>
+Capacitor Android Kiosk Plugin for controlling kiosk mode and launcher functionality. This plugin is Android-only. For iOS kiosk mode, use the device's Guided Access feature.
 
-## Platform Support
+## Core Capabilities
 
-This plugin is **Android-only**. For iOS kiosk mode functionality, please use the device's built-in [Guided Access](https://support.apple.com/en-us/HT202612) feature.
+- `isInKioskMode` - Checks if the app is currently running in kiosk mode.
+- `isSetAsLauncher` - Checks if the app is set as the device launcher (home app).
+- `enterKioskMode` - Enters kiosk mode, hiding system UI and blocking hardware buttons. Also starts a foreground keep-alive service so the app is less likely to be killed by the system. The app must be set as the device launcher for this to work effectively.
+- `exitKioskMode` - Exits kiosk mode, restoring normal system UI and hardware button functionality. Also stops the foreground keep-alive service started in enterKioskMode().
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `isInKioskMode` | Checks if the app is currently running in kiosk mode. |
+| `isSetAsLauncher` | Checks if the app is set as the device launcher (home app). |
+| `enterKioskMode` | Enters kiosk mode, hiding system UI and blocking hardware buttons. Also starts a foreground keep-alive service so the app is less likely to be killed by the system. The app must be set as the device launcher for this to work effectively. |
+| `exitKioskMode` | Exits kiosk mode, restoring normal system UI and hardware button functionality. Also stops the foreground keep-alive service started in enterKioskMode(). |
+| `setAsLauncher` | Opens the device's home screen settings to allow user to set this app as the launcher. This is required for full kiosk mode functionality. |
+| `setAllowedKeys` | Sets which hardware keys are allowed to function in kiosk mode. By default, all hardware keys are blocked in kiosk mode. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-android-kiosk](https://github.com/Cap-go/capacitor-android-kiosk/).

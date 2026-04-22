@@ -1,55 +1,56 @@
 ---
 locale: en
 ---
-# Using @capgo/capacitor-privacy-screen Package
+# Using @capgo/capacitor-privacy-screen
 
-The `@capgo/capacitor-privacy-screen` package protects sensitive app content in Capacitor applications.
+Capacitor API for protecting app content from the app switcher preview.
 
-It gives you one JavaScript API to:
-
-- block Android screenshots, recordings, and recent-app previews
-- obscure the iOS app switcher snapshot
-- temporarily disable and restore protection around specific flows
-
-## Installation
+## Install
 
 ```bash
 bun add @capgo/capacitor-privacy-screen
 bunx cap sync
 ```
 
-## Basic usage
+## What This Plugin Exposes
 
-```ts
+- `enable` - Enables the privacy screen.
+- `disable` - Disables the privacy screen.
+- `isEnabled` - Returns the current enabled state.
+
+## Example Usage
+
+### `enable`
+
+Enables the privacy screen.
+
+```typescript
 import { PrivacyScreen } from '@capgo/capacitor-privacy-screen';
-
-await PrivacyScreen.disable();
-
-// Run a flow where screenshots or previews are acceptable.
 
 await PrivacyScreen.enable();
 ```
 
-The plugin starts enabled automatically on native platforms, so many apps do not need to call `enable()` on launch.
+### `disable`
 
-## Platform behavior
+Disables the privacy screen.
 
-### iOS
+```typescript
+import { PrivacyScreen } from '@capgo/capacitor-privacy-screen';
 
-- Protects the app switcher preview with a temporary overlay
-- Requires no extra setup after install
-- Does not block active user screenshots because iOS does not expose an equivalent secure-window API
+await PrivacyScreen.disable();
+```
 
-### Android
+### `isEnabled`
 
-- Uses `FLAG_SECURE`
-- Blocks screenshots and recent-app previews
-- Requires no extra setup after install
+Returns the current enabled state.
 
-## Recommended next step
+```typescript
+import { PrivacyScreen } from '@capgo/capacitor-privacy-screen';
 
-Use the full plugin docs for setup notes and platform-specific behavior:
+await PrivacyScreen.isEnabled();
+```
 
-- `/docs/plugins/privacy-screen/`
-- `/docs/plugins/privacy-screen/ios/`
-- `/docs/plugins/privacy-screen/android/`
+## Full Reference
+
+- GitHub: https://github.com/Cap-go/capacitor-privacy-screen/
+- Docs: /docs/plugins/privacy-screen/

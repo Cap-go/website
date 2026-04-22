@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-light-sensor"
-description: Access the device's ambient light sensor to measure illuminance levels in your Capacitor app.
+description: "Capacitor plugin for accessing the device light sensor (Android only)."
 tableOfContents: false
 next: false
 prev: false
@@ -8,36 +8,42 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Read ambient light levels in lux from the device's light sensor with real-time updates and configurable sampling rates. Requires Capacitor 8+.
-  image:
-    file: ~public/icons/plugins/light-sensor.svg
+  tagline: "Capacitor plugin for accessing the device's ambient light sensor."
   actions:
     - text: Get started
       link: /docs/plugins/light-sensor/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-light-sensor/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Real-time Updates" icon="rocket">
-    Receive continuous light sensor readings with configurable update intervals
-  </Card>
-  <Card title="Event-driven API" icon="puzzle">
-    Subscribe to light changes with easy-to-use event listeners
-  </Card>
-  <Card title="Configurable Sampling" icon="setting">
-    Adjust update frequency from 200ms to custom intervals
-  </Card>
-  <Card title="Battery Efficient" icon="sun">
-    Start and stop sensor on demand to conserve battery
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/light-sensor/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+Capacitor plugin for accessing the device's ambient light sensor.
+
+## Core Capabilities
+
+- `isAvailable` - Check if the light sensor is available on the current device. You should always check sensor availability before attempting to use it.
+- `start` - Start listening to light sensor updates. This will begin sensor measurements at the specified interval. Use `addListener` to receive the sensor data.
+- `stop` - Stop listening to light sensor updates. This will stop the sensor and conserve battery.
+- `checkPermissions` - Check the current permission status for high sampling rate sensors. On Android 12+, the HIGH_SAMPLING_RATE_SENSORS permission is required for sensor update intervals below 200ms.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `isAvailable` | Check if the light sensor is available on the current device. You should always check sensor availability before attempting to use it. |
+| `start` | Start listening to light sensor updates. This will begin sensor measurements at the specified interval. Use `addListener` to receive the sensor data. |
+| `stop` | Stop listening to light sensor updates. This will stop the sensor and conserve battery. |
+| `addListener` | Add a listener for light sensor change events. The listener will be called whenever new sensor data is available. |
+| `removeAllListeners` | Remove all listeners for light sensor events. |
+| `checkPermissions` | Check the current permission status for high sampling rate sensors. On Android 12+, the HIGH_SAMPLING_RATE_SENSORS permission is required for sensor update intervals below 200ms. |
+| `requestPermissions` | Request permission for high sampling rate sensors. On Android 12+, this requests the HIGH_SAMPLING_RATE_SENSORS permission. |
+| `getPluginVersion` | Get the current version of the plugin. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-light-sensor](https://github.com/Cap-go/capacitor-light-sensor/).

@@ -1,336 +1,225 @@
 ---
 title: Getting Started
-description: Learn how to install and use the Launch Navigator plugin to integrate with native navigation apps on iOS and Android.
+description: "Install @capgo/capacitor-launch-navigator and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+## Install
 
-## Installation
-
-<Tabs>
-  <TabItem label="npm">
-    ```bash
-    npm install @capgo/capacitor-launch-navigator
-    npx cap sync
-    ```
-  </TabItem>
-  <TabItem label="yarn">
-    ```bash
-    yarn add @capgo/capacitor-launch-navigator
-    npx cap sync
-    ```
-  </TabItem>
-  <TabItem label="pnpm">
-    ```bash
-    pnpm add @capgo/capacitor-launch-navigator
-    npx cap sync
-    ```
-  </TabItem>
-  <TabItem label="bun">
-    ```bash
-    bun add @capgo/capacitor-launch-navigator
-    npx cap sync
-    ```
-  </TabItem>
-</Tabs>
-
-## Platform Configuration
-
-### iOS
-
-Add URL schemes to your `Info.plist` to detect installed navigation apps:
-
-```xml
-<key>LSApplicationQueriesSchemes</key>
-<array>
-    <string>googlemaps</string>
-    <string>waze</string>
-    <string>citymapper</string>
-    <string>transit</string>
-    <string>moovit</string>
-    <string>uber</string>
-    <string>lyft</string>
-</array>
+```bash
+bun add @capgo/capacitor-launch-navigator
+bunx cap sync
 ```
 
-### Android
-
-No additional configuration required. The plugin will detect installed navigation apps automatically.
-
-## Usage Example
+## Import
 
 ```typescript
-import { LaunchNavigator, TransportMode } from '@capgo/capacitor-launch-navigator';
-
-// Basic navigation to coordinates
-await LaunchNavigator.navigate({
-  destination: [37.7749, -122.4194], // San Francisco coordinates
-});
-
-// Advanced navigation with options
-await LaunchNavigator.navigate({
-  destination: [37.7749, -122.4194],
-  options: {
-    start: [37.7849, -122.4094], // Optional starting point
-    transportMode: TransportMode.DRIVING,
-    app: 'google_maps', // Preferred navigation app
-    appDisplayName: 'Google Maps'
-  }
-});
-
-// Check if specific app is available
-const result = await LaunchNavigator.isAppAvailable({
-  app: 'google_maps'
-});
-
-if (result.available) {
-  console.log('Google Maps is installed');
-} else {
-  console.log('Google Maps is not available');
-}
-
-// Get all available navigation apps
-const availableApps = await LaunchNavigator.getAvailableApps();
-console.log('Available navigation apps:', availableApps);
-
-// Get all supported apps for platform
-const supportedApps = await LaunchNavigator.getSupportedApps();
-console.log('Supported apps:', supportedApps);
+import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
 ```
 
-## API Reference
+## API Overview
 
-### navigate(options)
+### `navigate`
 
-```typescript
-navigate(options: NavigateOptions) => Promise<void>
-```
-
-Launch navigation to specified coordinates.
-
-| Param         | Type                      |
-| ------------- | ------------------------- |
-| **`options`** | `NavigateOptions` |
-
-### isAppAvailable(options)
+Navigate to a location using latitude and longitude
 
 ```typescript
-isAppAvailable(options: { app: string }) => Promise<{ available: boolean }>
-```
-
-Check if a specific navigation app is installed.
-
-| Param         | Type                      |
-| ------------- | ------------------------- |
-| **`options`** | `{ app: string }` |
-
-**Returns:** `Promise<{ available: boolean }>`
-
-### getAvailableApps()
-
-```typescript
-getAvailableApps() => Promise<{ apps: string[] }>
-```
-
-Get list of all available navigation apps on the device.
-
-**Returns:** `Promise<{ apps: string[] }>`
-
-### getSupportedApps()
-
-```typescript
-getSupportedApps() => Promise<{ apps: string[] }>
-```
-
-Get list of all supported apps for the current platform.
-
-**Returns:** `Promise<{ apps: string[] }>`
-
-## Interfaces
-
-### NavigateOptions
-
-| Prop              | Type                          | Description                     |
-| ----------------- | ----------------------------- | ------------------------------- |
-| **`destination`** | `[number, number]` | Destination coordinates [lat, lng] |
-| **`options`**     | `NavigationOptions` | Additional navigation options (optional) |
-
-### NavigationOptions
-
-| Prop                 | Type                  | Description                           |
-| -------------------- | --------------------- | ------------------------------------- |
-| **`start`**          | `[number, number]` | Starting coordinates [lat, lng] (optional) |
-| **`transportMode`**  | `TransportMode` | Transportation method (optional)       |
-| **`app`**            | `string` | Preferred navigation app (optional)    |
-| **`appDisplayName`** | `string` | Display name for app (optional)        |
-
-### TransportMode
-
-```typescript
-enum TransportMode {
-  DRIVING = 'driving',
-  WALKING = 'walking',
-  TRANSIT = 'transit',
-  CYCLING = 'cycling'
-}
-```
-
-## Coordinate Requirement
-
-> **Important**: This plugin only accepts latitude/longitude coordinates for navigation. Use [@capgo/capacitor-nativegeocoder](https://github.com/Cap-go/capacitor-nativegeocoder) to convert addresses to coordinates.
-
-```typescript
-import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
 import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
 
-// Convert address to coordinates
-const geocodeResult = await NativeGeocoder.forwardGeocode({
-  address: '1600 Amphitheatre Parkway, Mountain View, CA'
-});
+await LaunchNavigator.navigate({} as {
+    /**
+     * Destination coordinates [latitude, longitude]
+     */
+    destination: [number, number];
 
-if (geocodeResult.results.length > 0) {
-  const coords = geocodeResult.results[0];
-
-  // Launch navigation with geocoded coordinates
-  await LaunchNavigator.navigate({
-    destination: [coords.latitude, coords.longitude]
+    /**
+     * Optional navigation options
+     */
+    options?: NavigateOptions;
   });
-}
 ```
 
-## Supported Navigation Apps
+### `isAppAvailable`
 
-### iOS
-- Apple Maps (built-in)
-- Google Maps
-- Waze
-- Citymapper
-- Transit
-- Moovit
-- Uber
-- Lyft
-- And many more...
-
-### Android
-- Google Maps (built-in)
-- Waze
-- Citymapper
-- HERE WeGo
-- Sygic
-- MapQuest
-- Moovit
-- And many more...
-
-## Advanced Examples
-
-### Check Multiple Apps and Use First Available
+Check if a specific navigation app is available
 
 ```typescript
-const appsToCheck = ['google_maps', 'waze', 'apple_maps'];
-let selectedApp = null;
+import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
 
-for (const app of appsToCheck) {
-  const result = await LaunchNavigator.isAppAvailable({ app });
-  if (result.available) {
-    selectedApp = app;
-    break;
-  }
-}
-
-if (selectedApp) {
-  await LaunchNavigator.navigate({
-    destination: [37.7749, -122.4194],
-    options: { app: selectedApp }
+await LaunchNavigator.isAppAvailable({} as {
+    /**
+     * App identifier to check
+     */
+    app: IOSNavigationApp | AndroidNavigationApp | string;
   });
-} else {
-  console.log('No supported navigation apps found');
+```
+
+### `getAvailableApps`
+
+Get list of available navigation apps on the device
+
+```typescript
+import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
+
+await LaunchNavigator.getAvailableApps();
+```
+
+### `getSupportedApps`
+
+Get list of supported apps for the current platform
+
+```typescript
+import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
+
+await LaunchNavigator.getSupportedApps();
+```
+
+### `getDefaultApp`
+
+Get the name of the default app for navigation
+
+```typescript
+import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
+
+await LaunchNavigator.getDefaultApp();
+```
+
+## Type Reference
+
+### `NavigateOptions`
+Options for navigation.
+```typescript
+export interface NavigateOptions {
+  /**
+   * Starting location coordinates [latitude, longitude]
+   */
+  start?: [number, number];
+
+  /**
+   * Starting location name
+   */
+  startName?: string;
+
+  /**
+   * Destination name (will be ignored since we only support coordinates)
+   */
+  destinationName?: string;
+
+  /**
+   * Transport mode
+   */
+  transportMode?: TransportMode;
+
+  /**
+   * Specific app to launch (if not specified, will use default or prompt)
+   */
+  app?: IOSNavigationApp | AndroidNavigationApp | string;
+
+  /**
+   * Launch mode
+   */
+  launchMode?: LaunchMode;
+
+  /**
+   * Additional parameters specific to certain apps
+   */
+  extras?: Record<string, any>;
+
+  /**
+   * Enable debug logging
+   */
+  enableDebug?: boolean;
 }
 ```
 
-### User Selection of Navigation App
-
+### `IOSNavigationApp`
+Available navigation apps for iOS.
 ```typescript
-// Get available apps
-const { apps } = await LaunchNavigator.getAvailableApps();
-
-if (apps.length === 0) {
-  alert('No navigation apps available');
-  return;
-}
-
-// Show app selection to user (pseudo-code)
-const selectedApp = await showAppSelectionDialog(apps);
-
-// Navigate with selected app
-await LaunchNavigator.navigate({
-  destination: [37.7749, -122.4194],
-  options: { app: selectedApp }
-});
-```
-
-### Navigation with Different Transport Modes
-
-```typescript
-// Driving directions
-await LaunchNavigator.navigate({
-  destination: [37.7749, -122.4194],
-  options: {
-    transportMode: TransportMode.DRIVING
-  }
-});
-
-// Walking directions
-await LaunchNavigator.navigate({
-  destination: [37.7749, -122.4194],
-  options: {
-    transportMode: TransportMode.WALKING
-  }
-});
-
-// Public transit directions
-await LaunchNavigator.navigate({
-  destination: [37.7749, -122.4194],
-  options: {
-    transportMode: TransportMode.TRANSIT
-  }
-});
-```
-
-## Best Practices
-
-- Always check app availability before attempting navigation
-- Provide fallback options when preferred apps aren't available
-- Use meaningful app display names for user selection
-- Handle errors gracefully with user-friendly messages
-- Consider user preferences for default navigation apps
-- Test on both iOS and Android devices
-- Implement proper error handling for invalid coordinates
-
-## Error Handling
-
-```typescript
-try {
-  await LaunchNavigator.navigate({
-    destination: [37.7749, -122.4194],
-    options: {
-      app: 'google_maps',
-      transportMode: TransportMode.DRIVING
-    }
-  });
-} catch (error) {
-  console.error('Navigation failed:', error);
-  // Handle error - app not available, invalid coordinates, etc.
-  alert('Unable to launch navigation. Please check your coordinates and try again.');
+export enum IOSNavigationApp {
+  APPLE_MAPS = 'apple_maps',
+  GOOGLE_MAPS = 'google_maps',
+  WAZE = 'waze',
+  CITYMAPPER = 'citymapper',
+  GARMIN_NAVIGON = 'garmin_navigon',
+  TRANSIT_APP = 'transit_app',
+  YANDEX_NAVIGATOR = 'yandex',
+  UBER = 'uber',
+  TOMTOM = 'tomtom',
+  SYGIC = 'sygic',
+  HERE_MAPS = 'here',
+  MOOVIT = 'moovit',
+  LYFT = 'lyft',
+  MAPS_ME = 'mapsme',
+  CABIFY = 'cabify',
+  BAIDU = 'baidu',
+  GAODE = 'gaode',
+  TAXI_99 = '99taxi',
 }
 ```
 
-## Use Cases
+### `AndroidNavigationApp`
+Available navigation apps for Android.
+```typescript
+export enum AndroidNavigationApp {
+  GOOGLE_MAPS = 'google_maps',
+  WAZE = 'waze',
+  CITYMAPPER = 'citymapper',
+  UBER = 'uber',
+  YANDEX = 'yandex',
+  SYGIC = 'sygic',
+  HERE_MAPS = 'here',
+  MOOVIT = 'moovit',
+  LYFT = 'lyft',
+  MAPS_ME = 'mapsme',
+  CABIFY = 'cabify',
+  BAIDU = 'baidu',
+  GAODE = 'gaode',
+}
+```
 
-- **Location-based services**: Navigate users to points of interest
-- **Delivery apps**: Guide drivers to delivery locations
-- **Event apps**: Direct attendees to venue locations
-- **Real estate apps**: Navigate to property locations
-- **Travel apps**: Guide tourists to attractions
-- **Service apps**: Direct field workers to job sites
+### `AvailableApp`
+Result of checking app availability.
+```typescript
+export interface AvailableApp {
+  /**
+   * App identifier
+   */
+  app: string;
+
+  /**
+   * Display name of the app
+   */
+  name: string;
+
+  /**
+   * Whether the app is available on the device
+   */
+  available: boolean;
+}
+```
+
+### `TransportMode`
+Transport modes.
+```typescript
+export enum TransportMode {
+  DRIVING = 'driving',
+  WALKING = 'walking',
+  BICYCLING = 'bicycling',
+  TRANSIT = 'transit',
+}
+```
+
+### `LaunchMode`
+Launch modes.
+```typescript
+export enum LaunchMode {
+  MAPS = 'maps',
+  TURN_BY_TURN = 'turn_by_turn',
+  GEO = 'geo',
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

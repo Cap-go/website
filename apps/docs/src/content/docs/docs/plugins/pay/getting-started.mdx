@@ -1,129 +1,231 @@
 ---
 title: Getting Started
-description: Configure Apple Pay and Google Pay for your Capacitor checkout with the Pay plugin.
+description: "Install @capgo/capacitor-pay and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the plugin**
-   <PackageManagers pkg="@capgo/capacitor-pay" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+```bash
+bun add @capgo/capacitor-pay
+bunx cap sync
+```
 
-2. **Sync native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+## Import
 
-## Native prerequisites
+```typescript
+import { Pay } from '@capgo/capacitor-pay';
+```
 
-- **Apple Pay (iOS)**
-  1. Create an Apple Pay merchant ID in the Apple Developer portal.
-  2. Generate and upload the payment processing certificate required by your gateway.
-  3. Enable the **Apple Pay** capability in Xcode and make sure your provisioning profile includes it.
-  4. Update `Info.plist` with a usage description if your gateway requires network access to validate payments.
+## API Overview
 
-- **Google Pay (Android)**
-  1. Sign in to the [Google Pay Business Console](https://pay.google.com/business/console/).
-  2. Configure your payment gateway parameters or set up direct tokenization for testing.
-  3. If you plan to use production cards, switch `environment` to `PRODUCTION` and register test cards for QA.
-  4. Confirm that Google Play services are available on the device (required by Google Pay).
+### `isPayAvailable`
 
-Refer to the guides under `docs/` in the plugin repository for step-by-step screenshots.
-
-## Check availability
+Checks whether native pay is available on the current platform.
+On iOS this evaluates Apple Pay, on Android it evaluates Google Pay.
 
 ```typescript
 import { Pay } from '@capgo/capacitor-pay';
 
-const availability = await Pay.isPayAvailable({
-  apple: { supportedNetworks: ['visa', 'masterCard', 'amex'] },
-  google: {
-    isReadyToPayRequest: {
-      allowedPaymentMethods: [
-        {
-          type: 'CARD',
-          parameters: {
-            allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
-            allowedCardNetworks: ['VISA', 'MASTERCARD'],
-          },
-        },
-      ],
-    },
-  },
-});
+await Pay.isPayAvailable();
+```
 
-if (!availability.available) {
-  console.warn('Native pay unavailable:', availability);
+### `requestPayment`
+
+Presents the native pay sheet for the current platform.
+Provide the Apple Pay configuration on iOS and the Google Pay configuration on Android.
+
+This promise is the completion path on both platforms.
+
+```typescript
+import { Pay } from '@capgo/capacitor-pay';
+
+await Pay.requestPayment({} as PayPaymentOptions);
+```
+
+## Type Reference
+
+### `PayAvailabilityOptions`
+```typescript
+export interface PayAvailabilityOptions {
+  apple?: ApplePayAvailabilityOptions;
+  google?: GooglePayAvailabilityOptions;
 }
 ```
 
-## Request payment (Apple Pay)
-
+### `PayAvailabilityResult`
 ```typescript
-const appleResult = await Pay.requestPayment({
-  apple: {
-    merchantIdentifier: 'merchant.com.example.app',
-    countryCode: 'US',
-    currencyCode: 'USD',
-    supportedNetworks: ['visa', 'masterCard'],
-    paymentSummaryItems: [
-      { label: 'Starter Plan', amount: '9.99' },
-      { label: 'Capgo Store', amount: '9.99' },
-    ],
-    requiredShippingContactFields: ['name', 'emailAddress'],
-  },
-});
-
-const token = appleResult.apple?.paymentData;
+export interface PayAvailabilityResult {
+  available: boolean;
+  platform: PayPlatform;
+  apple?: ApplePayAvailabilityResult;
+  google?: GooglePayAvailabilityResult;
+}
 ```
 
-## Request payment (Google Pay)
-
+### `PayPaymentOptions`
 ```typescript
-const googleResult = await Pay.requestPayment({
-  google: {
-    environment: 'test',
-    paymentDataRequest: {
-      apiVersion: 2,
-      apiVersionMinor: 0,
-      allowedPaymentMethods: [
-        {
-          type: 'CARD',
-          parameters: {
-            allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
-            allowedCardNetworks: ['VISA', 'MASTERCARD'],
-            billingAddressRequired: true,
-            billingAddressParameters: { format: 'FULL' },
-          },
-          tokenizationSpecification: {
-            type: 'PAYMENT_GATEWAY',
-            parameters: {
-              gateway: 'example',
-              gatewayMerchantId: 'exampleMerchantId',
-            },
-          },
-        },
-      ],
-      merchantInfo: {
-        merchantName: 'Capgo Store',
-      },
-      transactionInfo: {
-        totalPriceStatus: 'FINAL',
-        totalPrice: '9.99',
-        currencyCode: 'USD',
-        countryCode: 'US',
-      },
-    },
-  },
-});
-
-const paymentData = googleResult.google?.paymentData;
+export interface PayPaymentOptions {
+  apple?: ApplePayPaymentOptions;
+  google?: GooglePayPaymentOptions;
+}
 ```
 
-## Handling responses
+### `PayPaymentResult`
+```typescript
+export type PayPaymentResult = ApplePayRequestPaymentResult | GooglePayRequestPaymentResult;
+```
 
-- Tokenize the returned payload with your payment processor and confirm the transaction server-side.
-- Surface a fallback path (card entry, invoice) if native pay is unavailable or the user cancels the sheet.
-- Cache the availability result so you do not display the buttons on unsupported devices.
+### `ApplePayAvailabilityOptions`
+```typescript
+export interface ApplePayAvailabilityOptions {
+  /**
+   * Optional list of payment networks you intend to use.
+   * Passing networks determines the return value of `canMakePaymentsUsingNetworks`.
+   */
+  supportedNetworks?: ApplePayNetwork[];
+}
+```
+
+### `GooglePayAvailabilityOptions`
+```typescript
+export interface GooglePayAvailabilityOptions {
+  /**
+   * Environment used to construct the Google Payments client. Defaults to `'test'`.
+   */
+  environment?: GooglePayEnvironment;
+  /**
+   * Raw `IsReadyToPayRequest` JSON as defined by the Google Pay API.
+   * Supply the card networks and auth methods you intend to support at runtime.
+   *
+   * @see https://developers.google.com/pay/api/android/reference/request-objects#IsReadyToPayRequest
+   */
+  isReadyToPayRequest?: GooglePayIsReadyToPayRequest;
+}
+```
+
+### `PayPlatform`
+```typescript
+export type PayPlatform = 'ios' | 'android' | 'web';
+```
+
+### `ApplePayAvailabilityResult`
+```typescript
+export interface ApplePayAvailabilityResult {
+  /**
+   * Indicates whether the device can make Apple Pay payments in general.
+   */
+  canMakePayments: boolean;
+  /**
+   * Indicates whether the device can make Apple Pay payments with the supplied networks.
+   */
+  canMakePaymentsUsingNetworks: boolean;
+}
+```
+
+### `GooglePayAvailabilityResult`
+```typescript
+export interface GooglePayAvailabilityResult {
+  /**
+   * Whether the user is able to provide payment information through the Google Pay payment sheet.
+   */
+  isReady: boolean;
+  /**
+   * The current user's ability to pay with one or more of the payment methods specified in `IsReadyToPayRequest.allowedPaymentMethods`.
+   *
+   * This property only exists if `IsReadyToPayRequest.existingPaymentMethodRequired` was set to `true`. The property value will always be `true` if the request is configured for a test environment.
+   */
+  paymentMethodPresent: boolean | undefined;
+}
+```
+
+### `ApplePayPaymentOptions`
+```typescript
+export interface ApplePayPaymentOptions {
+  /**
+   * Merchant identifier created in the Apple Developer portal.
+   */
+  merchantIdentifier: string;
+  /**
+   * Two-letter ISO 3166 country code.
+   */
+  countryCode: string;
+  /**
+   * Three-letter ISO 4217 currency code.
+   */
+  currencyCode: string;
+  /**
+   * Payment summary items displayed in the Apple Pay sheet.
+   */
+  paymentSummaryItems: ApplePaySummaryItem[];
+  /**
+   * Card networks to support.
+   */
+  supportedNetworks: ApplePayNetwork[];
+  /**
+   * Merchant payment capabilities. Defaults to ['3DS'] when omitted.
+   */
+  merchantCapabilities?: ApplePayMerchantCapability[];
+  /**
+   * Contact fields that must be supplied for shipping.
+   */
+  requiredShippingContactFields?: ApplePayContactField[];
+  /**
+   * Contact fields that must be supplied for billing.
+   */
+  requiredBillingContactFields?: ApplePayContactField[];
+  /**
+   * Controls the shipping flow presented to the user.
+   */
+  shippingType?: ApplePayShippingType;
+  /**
+   * Optional ISO 3166 country codes where the merchant is supported.
+   */
+  supportedCountries?: string[];
+  /**
+   * Optional opaque application data passed back in the payment token.
+   */
+  applicationData?: string;
+
+  /**
+   * Recurring payment configuration (iOS 16+).
+   */
+  recurringPaymentRequest?: ApplePayRecurringPaymentRequest;
+}
+```
+
+### `GooglePayPaymentOptions`
+```typescript
+export interface GooglePayPaymentOptions {
+  /**
+   * Environment used to construct the Google Payments client. Defaults to `'test'`.
+   */
+  environment?: GooglePayEnvironment;
+  /**
+   * Raw `PaymentDataRequest` JSON as defined by the Google Pay API.
+   * Provide transaction details, merchant info, and tokenization parameters.
+   *
+   * @see https://developers.google.com/pay/api/android/reference/request-objects#PaymentDataRequest
+   */
+  paymentDataRequest: GooglePayPaymentDataRequest;
+}
+```
+
+### `ApplePayRequestPaymentResult`
+```typescript
+export interface ApplePayRequestPaymentResult {
+  /**
+   * Platform that resolved the payment request.
+   */
+  platform: 'ios';
+  /**
+   * Apple Pay payment payload.
+   */
+  apple: ApplePayPaymentResult;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

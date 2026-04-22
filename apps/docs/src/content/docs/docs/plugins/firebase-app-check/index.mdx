@@ -1,0 +1,46 @@
+---
+title: "@capgo/capacitor-firebase-app-check"
+description: "Capacitor plugin for Firebase App Check."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Capacitor plugin for Firebase App Check."
+  actions:
+    - text: Get started
+      link: /docs/plugins/firebase-app-check/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-firebase/tree/main/packages/app-check
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+Capacitor plugin for Firebase App Check.
+
+## Core Capabilities
+
+- `getToken` - Get the current App Check token.
+- `initialize` - Activate App Check for the given app. Can be called only once per app.
+- `setTokenAutoRefreshEnabled` - Set whether the App Check token should be refreshed automatically or not.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `getToken` | Get the current App Check token. |
+| `initialize` | Activate App Check for the given app. Can be called only once per app. |
+| `setTokenAutoRefreshEnabled` | Set whether the App Check token should be refreshed automatically or not. |
+| `addListener` | Called when the App Check token changed. |
+| `removeAllListeners` | Remove all listeners for this plugin. |
+| `getPluginVersion` | Get the version of this plugin. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-firebase](https://github.com/Cap-go/capacitor-firebase/).

@@ -1,87 +1,76 @@
 ---
 locale: en
 ---
-
-# Complete Tutorial: Using @capgo/capacitor-gtm for iOS and Android Mobile Apps
-
-The `@capgo/capacitor-gtm` package provides native gtm functionality for your Capacitor mobile applications on iOS and Android. This comprehensive tutorial will guide you through integrating gtm features into your iOS and Android mobile apps built with Capacitor or Cordova, enabling cross-platform mobile app development with native capabilities.
-
-## What is Capacitor?
-
-Capacitor is Ionic's modern native runtime that enables developers to build native iOS apps, Android apps, and Progressive Web Apps from a single codebase. Unlike older Cordova-based mobile development, Capacitor provides direct access to native iOS and Android APIs, making it the ideal choice for building production-ready mobile applications. This Capacitor plugin brings gtm capabilities to both iOS and Android mobile platforms.
-
-## Why Use gtm in Your Capacitor Mobile App?
-
-The @capgo/capacitor-gtm plugin enables your iOS and Android mobile applications to leverage native gtm functionality without writing platform-specific code. This Capacitor plugin provides a unified JavaScript API that works seamlessly on both iOS and Android mobile devices, making it perfect for cross-platform mobile app development.
-
-Benefits for iOS and Android mobile applications:
-- Native gtm performance on iOS and Android devices
-- Unified API for both iOS and Android mobile platforms
-- No need for separate native iOS or Android code
-- Works with Capacitor and Cordova mobile frameworks
-- Full TypeScript support for mobile app development
-- Seamless integration with existing Capacitor mobile apps
-
----
-locale: en
----
 # Using @capgo/capacitor-gtm
 
-The `@capgo/capacitor-gtm` package provides native functionality for your Capacitor app. Here is a tutorial on how to use this package.
+The main interface for the Google Tag Manager plugin.
 
-## Installation
-
-To install the package, run the following command:
+## Install
 
 ```bash
-npm install @capgo/capacitor-gtm
-npx cap sync
+bun add @capgo/capacitor-gtm
+bunx cap sync
 ```
 
-## Usage
+## What This Plugin Exposes
 
-### Basic Example
+- `initialize` - Initializes Google Tag Manager with the specified container ID.
+- `push` - Pushes an event to the Google Tag Manager dataLayer.
+- `setUserProperty` - Sets a user property in the Google Tag Manager dataLayer.
+- `getValue` - Gets a value from the Google Tag Manager dataLayer. Searches through the dataLayer for the most recent value of the specified key.
+
+## Example Usage
+
+### `initialize`
+
+Initializes Google Tag Manager with the specified container ID.
 
 ```typescript
-import { capacitorgtm } from '@capgo/capacitor-gtm';
+import { GoogleTagManager } from '@capgo/capacitor-gtm';
 
-// Use the plugin methods here
+await GoogleTagManager.initialize({} as { containerId: string; timeout?: number });
 ```
 
-For detailed API documentation, please visit the [GitHub repository](https://github.com/Cap-go/capacitor-gtm).
+### `push`
 
-That's it! You have successfully integrated @capgo/capacitor-gtm into your Capacitor app.
+Pushes an event to the Google Tag Manager dataLayer.
 
-## Platform-Specific Notes for iOS and Android
+```typescript
+import { GoogleTagManager } from '@capgo/capacitor-gtm';
 
-### iOS Mobile Platform
+await GoogleTagManager.push({
+  event: 'purchase',
+  parameters: {
+    value: 99.99,
+    currency: 'USD'
+  }
+});
+```
 
-- Compatible with iOS 10.0+ mobile devices (iPhone and iPad)
-- Uses native iOS APIs for gtm functionality
-- Optimized performance on iOS mobile platform
-- Full support for latest iOS versions
+### `setUserProperty`
 
-### Android Mobile Platform
+Sets a user property in the Google Tag Manager dataLayer.
 
-- Compatible with Android 5.0 (API 21)+ mobile devices
-- Uses native Android APIs for gtm functionality
-- Works across all Android device manufacturers
-- Optimized for Android mobile platform
+```typescript
+import { GoogleTagManager } from '@capgo/capacitor-gtm';
 
-## Capacitor vs Cordova for Mobile Development
+await GoogleTagManager.setUserProperty({
+  key: 'user_type',
+  value: 'premium'
+});
+```
 
-While this gtm plugin works with both Capacitor and Cordova mobile frameworks, Capacitor offers significant advantages for iOS and Android mobile app development:
+### `getValue`
 
-- **Modern Architecture**: Better performance on iOS and Android mobile platforms
-- **Direct Native Access**: Easier integration with iOS and Android native APIs
-- **Improved Tooling**: Superior development experience for mobile apps
-- **Active Development**: Regular updates for iOS and Android compatibility
-- **Better Documentation**: Comprehensive guides for mobile app development
+Gets a value from the Google Tag Manager dataLayer. Searches through the dataLayer for the most recent value of the specified key.
 
-## Conclusion
+```typescript
+import { GoogleTagManager } from '@capgo/capacitor-gtm';
 
-You have successfully integrated @capgo/capacitor-gtm into your Capacitor mobile application for iOS and Android. This plugin provides native gtm capabilities for both iOS and Android mobile platforms, enabling professional mobile app development with a unified codebase.
+await GoogleTagManager.getValue({} as { key: string });
+```
 
-For detailed API documentation and advanced gtm features for mobile app development, visit the [GitHub repository](https://github.com/Cap-go/capacitor-gtm).
+## Full Reference
 
-Whether you're building native iOS apps, Android mobile applications, or cross-platform Capacitor mobile apps, this gtm plugin provides the native capabilities you need for professional mobile app development on iOS and Android platforms.
+- GitHub: https://github.com/Cap-go/capacitor-gtm/
+- Docs: /docs/plugins/gtm/

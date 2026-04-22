@@ -73,6 +73,16 @@ await CapacitorPasskey.autoShimWebAuthn();
 
 After that, your existing browser-style passkey code can stay the same.
 
+If you need to force the shim or override the configured origin at runtime, call:
+
+```ts
+import { CapacitorPasskey } from '@capgo/capacitor-passkey';
+
+CapacitorPasskey.shimWebAuthn({
+  origin: 'https://signin.example.com',
+});
+```
+
 ## Keep your normal WebAuthn flow
 
 ```ts
@@ -101,6 +111,16 @@ The plugin reduces app-side work, but passkeys still depend on the website trust
 
 The plugin can patch the generated native projects during sync, but it cannot create or host those website trust files for you.
 
+## Other public methods
+
+The public plugin API also exposes the direct helpers defined in `src/definitions.ts`:
+
+- `await CapacitorPasskey.getConfiguration()` returns the resolved `origin`, `domains`, `autoShim`, and current `platform`.
+- `await CapacitorPasskey.createCredential(...)` registers a passkey from a JSON-safe WebAuthn payload.
+- `await CapacitorPasskey.getCredential(...)` authenticates with an existing passkey from a JSON-safe WebAuthn payload.
+- `await CapacitorPasskey.isSupported()` reports whether the current runtime supports passkeys.
+- `await CapacitorPasskey.getPluginVersion()` returns the current native implementation version marker.
+
 ## Platform guides
 
 - [Getting started](/docs/plugins/passkey/getting-started/)
@@ -115,3 +135,8 @@ On iOS 17.4 and newer, the plugin uses the browser-style client-data API so the 
 ## Important Android caveat
 
 Android Credential Manager can share the same relying party and passkeys as your website when Digital Asset Links are configured, but the native assertion origin is not identical to a browser origin. If your backend strictly validates `clientDataJSON.origin`, make sure it accepts the Android app origin alongside your website origin.
+
+## Full Reference
+
+- GitHub: https://github.com/Cap-go/capacitor-passkey/
+- Docs: /docs/plugins/passkey/

@@ -1,165 +1,229 @@
 ---
 title: Getting Started
-description: Learn how to install and use the File Compressor plugin to compress images in your Capacitor app.
+description: "Install @capgo/capacitor-file-compressor and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-file-compressor" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+```bash
+bun add @capgo/capacitor-file-compressor
+bunx cap sync
+```
 
-2. **Sync with native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
-
-## Platform Support
-
-| Platform | Supported Formats | Notes |
-|----------|-------------------|-------|
-| iOS | JPEG | Only JPEG compression supported |
-| Android | JPEG, WebP | Both formats fully supported |
-| Web | JPEG, WebP | Canvas API-based compression |
-
-Note: EXIF metadata is removed during compression on all platforms.
-
-## Usage
-
-Import the plugin and compress images:
+## Import
 
 ```typescript
 import { FileCompressor } from '@capgo/capacitor-file-compressor';
-
-// Compress an image
-const compressImage = async () => {
-  const result = await FileCompressor.compressImage({
-    source: 'file:///path/to/image.jpg',
-    quality: 0.8,
-    width: 1920,
-    height: 1080
-  });
-
-  console.log('Compressed image path:', result.path);
-  console.log('Original size:', result.originalSize);
-  console.log('Compressed size:', result.size);
-};
 ```
 
-## API Reference
+## API Overview
 
-### compressImage(options)
+### `compressImage`
 
 Compresses an image file with specified dimensions and quality settings.
 
-```typescript
-interface CompressImageOptions {
-  source: string;           // Path to the image file
-  quality?: number;         // 0.0 to 1.0 (default: 0.8)
-  width?: number;           // Target width in pixels
-  height?: number;          // Target height in pixels
-  format?: 'jpeg' | '.webp'; // Output format
-}
-
-interface CompressImageResult {
-  path: string;             // Path to compressed image
-  size: number;             // Compressed file size in bytes
-  originalSize: number;     // Original file size in bytes
-}
-
-const result = await FileCompressor.compressImage(options);
-```
+This method compresses images to reduce file size while maintaining acceptable quality.
+It supports resizing and format conversion (JPEG/WebP depending on platform).
 
 **Important Notes:**
 - EXIF metadata is removed during compression on all platforms
 - Aspect ratio is automatically maintained if only one dimension is provided
 - Compressed files are saved to temporary directories on native platforms
 
-### getPluginVersion()
-
-Get the native plugin version.
-
-```typescript
-const { version } = await FileCompressor.getPluginVersion();
-console.log('Plugin version:', version);
-```
-
-## Complete Example
-
 ```typescript
 import { FileCompressor } from '@capgo/capacitor-file-compressor';
-import { Camera } from '@capacitor/camera';
 
-export class ImageCompressionService {
-  async captureAndCompress() {
-    try {
-      // Take a photo
-      const photo = await Camera.getPhoto({
-        quality: 100,
-        allowEditing: false,
-        resultType: 'uri'
-      });
+// Web - Compress from file input
+const fileInput = document.getElementById('file') as HTMLInputElement;
+const file = fileInput.files[0];
+const result = await FileCompressor.compressImage({
+  blob: file,
+  quality: 0.8,
+  width: 1200,
+  mimeType: 'image/jpeg'
+});
+const url = URL.createObjectURL(result.blob);
+```
 
-      if (!photo.path) {
-        throw new Error('No image path');
-      }
+## Type Reference
 
-      // Compress the photo
-      const compressed = await FileCompressor.compressImage({
-        source: photo.path,
-        quality: 0.7,
-        width: 1920,
-        height: 1080,
-        format: 'jpeg'
-      });
+### `CompressImageOptions`
+Options for compressing an image.
+```typescript
+export interface CompressImageOptions {
+  /**
+   * The file path of the image to compress.
+   *
+   * **Platform:** Android, iOS only (not supported on Web)
+   *
+   * Accepts various path formats:
+   * - iOS: `file://` URLs or absolute paths
+   * - Android: `content://` URIs, `file://` URLs, or absolute paths
+   *
+   * @since 7.0.0
+   * @example "file:///var/mobile/Containers/Data/Application/image.jpg" // iOS
+   * @example "content://com.android.providers.downloads.documents/document/msf%3A1000000485" // Android
+   * @example "/storage/emulated/0/Download/photo.png" // Android absolute path
+   */
+  path?: string;
 
-      console.log(`Compression ratio: ${
-        ((1 - compressed.size / compressed.originalSize) * 100).toFixed(1)
-      }%`);
+  /**
+   * The file blob of the image to compress.
+   *
+   * **Platform:** Web only (not supported on iOS/Android)
+   *
+   * Use this when compressing images from file inputs, fetch responses,
+   * or any other Blob source in web applications.
+   *
+   * @since 7.0.0
+   * @example
+   * ```typescript
+   * // From file input
+   * const fileInput = document.getElementById('file') as HTMLInputElement;
+   * const blob = fileInput.files[0];
+   * ```
+   * @example
+   * ```typescript
+   * // From fetch
+   * const response = await fetch('https://example.com/image.jpg');
+   * const blob = await response.blob();
+   * ```
+   */
+  blob?: Blob;
 
-      return compressed.path;
-    } catch (error) {
-      console.error('Compression failed:', error);
-      throw error;
-    }
-  }
+  /**
+   * The quality of the compressed image.
+   *
+   * **Range:** 0.0 to 1.0
+   * - `0.0` = Maximum compression (lowest quality, smallest file)
+   * - `1.0` = Minimum compression (highest quality, largest file)
+   * - `0.6` = Default balanced compression
+   *
+   * **Platform:** All platforms
+   *
+   * Higher quality values result in larger files but better visual quality.
+   * The actual compression ratio depends on the image content and format.
+   *
+   * @since 7.0.0
+   * @default 0.6
+   * @example 0.8 // High quality
+   * @example 0.5 // Medium quality, smaller file
+   * @example 0.3 // Low quality, very small file
+   */
+  quality?: number;
 
-  async batchCompress(imagePaths: string[]) {
-    const results = [];
+  /**
+   * The width of the compressed image in pixels.
+   *
+   * **Platform:** All platforms
+   *
+   * If only width is specified, height is calculated automatically
+   * to maintain the original aspect ratio.
+   *
+   * If both width and height are specified, the image is resized
+   * to exact dimensions (may distort if ratio differs).
+   *
+   * @since 7.0.0
+   * @example 1920 // Full HD width
+   * @example 1200 // Common web image width
+   * @example 800  // Mobile-optimized width
+   */
+  width?: number;
 
-    for (const path of imagePaths) {
-      try {
-        const result = await FileCompressor.compressImage({
-          source: path,
-          quality: 0.8,
-          width: 1280
-        });
-        results.push(result);
-      } catch (error) {
-        console.error(`Failed to compress ${path}:`, error);
-      }
-    }
+  /**
+   * The height of the compressed image in pixels.
+   *
+   * **Platform:** All platforms
+   *
+   * If only height is specified, width is calculated automatically
+   * to maintain the original aspect ratio.
+   *
+   * If both width and height are specified, the image is resized
+   * to exact dimensions (may distort if ratio differs).
+   *
+   * @since 7.0.0
+   * @example 1080 // Full HD height
+   * @example 800  // Common web image height
+   * @example 600  // Mobile-optimized height
+   */
+  height?: number;
 
-    return results;
-  }
+  /**
+   * The MIME type of the compressed output image.
+   *
+   * **Platform Support:**
+   * - **iOS:** `image/jpeg` only
+   * - **Android:** `image/jpeg`, `image/webp`
+   * - **Web:** `image/jpeg`, `image/webp`
+   *
+   * **Format Characteristics:**
+   * - **JPEG:** Universal support, good for photos, no transparency
+   * - **WebP:** Better compression, supports transparency, not on iOS
+   *
+   * @since 7.0.0
+   * @default "image/jpeg"
+   * @example "image/jpeg" // JPEG format (all platforms)
+   * @example "image/webp" // WebP format (Android/Web only)
+   */
+  mimeType?: string;
 }
 ```
 
-## Best Practices
+### `CompressImageResult`
+The result of compressing an image.
+```typescript
+export interface CompressImageResult {
+  /**
+   * The file path of the compressed image.
+   *
+   * **Platform:** Android, iOS only (undefined on Web)
+   *
+   * Points to a temporary file containing the compressed image.
+   * On iOS, typically in `NSTemporaryDirectory()`.
+   * On Android, typically in app cache directory.
+   *
+   * **Important:** These files may be cleaned up by the OS.
+   * Copy to permanent storage if needed for long-term use.
+   *
+   * @since 7.0.0
+   * @example "/var/mobile/Containers/Data/tmp/compressed_abc123.jpg" // iOS
+   * @example "/data/user/0/com.app/cache/compressed_xyz789.jpg" // Android
+   */
+  path?: string;
 
-1. **Quality Settings**: Start with 0.8 quality for a good balance between file size and image quality
-2. **Resize Dimensions**: Only specify dimensions when needed - aspect ratio is preserved automatically
-3. **Format Selection**: Use JPEG for photos and WebP for better compression (Android/Web only)
-4. **Error Handling**: Always wrap compression calls in try-catch blocks
-5. **Cleanup**: Remember to clean up temporary files after use
+  /**
+   * The blob of the compressed image.
+   *
+   * **Platform:** Web only (undefined on iOS/Android)
+   *
+   * A Blob object containing the compressed image data.
+   * Can be used to:
+   * - Create object URLs for preview: `URL.createObjectURL(blob)`
+   * - Upload to server via FormData
+   * - Save to IndexedDB or other storage
+   * - Convert to base64 with FileReader
+   *
+   * @since 7.0.0
+   * @example
+   * ```typescript
+   * // Create preview URL
+   * const url = URL.createObjectURL(result.blob);
+   * imageElement.src = url;
+   * ```
+   * @example
+   * ```typescript
+   * // Upload to server
+   * const formData = new FormData();
+   * formData.append('image', result.blob, 'compressed.jpg');
+   * await fetch('/upload', { method: 'POST', body: formData });
+   * ```
+   */
+  blob?: Blob;
+}
+```
 
-## Troubleshooting
+## Source Of Truth
 
-### Common Issues
-
-**Image not compressing**: Ensure the source path is valid and accessible
-**Out of memory**: Reduce target dimensions or compress images one at a time
-**Format not supported**: Check platform support table above
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

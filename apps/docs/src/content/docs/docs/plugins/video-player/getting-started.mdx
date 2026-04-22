@@ -1,301 +1,482 @@
 ---
 title: Getting Started
-description: Learn how to integrate native video playback in your Capacitor app.
+description: "Install @capgo/capacitor-video-player and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-video-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-2. **Sync with native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
-
-## Basic Usage
-
-```typescript
-import { CapacitorVideoPlayer } from '@capgo/capacitor-video-player';
-
-// Initialize a video player
-const playVideo = async () => {
-  const result = await CapacitorVideoPlayer.initPlayer({
-    mode: 'fullscreen',
-    url: 'https://example.com/video.mp4',
-    playerId: 'myPlayer',
-    componentTag: 'div'
-  });
-
-  console.log('Player initialized:', result);
-};
-
-// Play the video
-await CapacitorVideoPlayer.play({ playerId: 'myPlayer' });
-
-// Pause the video
-await CapacitorVideoPlayer.pause({ playerId: 'myPlayer' });
-
-// Get current time
-const { value } = await CapacitorVideoPlayer.getCurrentTime({ playerId: 'myPlayer' });
-console.log('Current time:', value);
-
-// Seek to position
-await CapacitorVideoPlayer.setCurrentTime({
-  playerId: 'myPlayer',
-  seektime: 30 // seconds
-});
-
-// Set volume (0-1)
-await CapacitorVideoPlayer.setVolume({
-  playerId: 'myPlayer',
-  volume: 0.5
-});
+```bash
+bun add @capgo/capacitor-video-player
+bunx cap sync
 ```
 
-## API Reference
-
-### initPlayer(options)
-
-Initialize a video player instance.
+## Import
 
 ```typescript
-await CapacitorVideoPlayer.initPlayer({
-  mode: 'fullscreen', // or 'embedded'
-  url: 'https://example.com/video.mp4',
-  playerId: 'player1',
-  subtitle: 'https://example.com/subtitles.vtt',
-  language: 'en',
-  rate: 1.0,
-  exitOnEnd: true,
-  loopOnEnd: false,
-  pipEnabled: true,
-  showControls: true
-});
+import { VideoPlayer } from '@capgo/capacitor-video-player';
 ```
 
-### play(options)
+## API Overview
 
-Play the video.
+### `initPlayer`
+
+Initialize a video player
 
 ```typescript
-await CapacitorVideoPlayer.play({ playerId: 'player1' });
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+await VideoPlayer.initPlayer({} as capVideoPlayerOptions);
 ```
 
-### pause(options)
+### `isPlaying`
 
-Pause the video.
+Return if a given playerId is playing
 
 ```typescript
-await CapacitorVideoPlayer.pause({ playerId: 'player1' });
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+await VideoPlayer.isPlaying({} as capVideoPlayerIdOptions);
 ```
 
-### getDuration(options)
+### `play`
 
-Get video duration in seconds.
+Play the current video from a given playerId
 
 ```typescript
-const { value } = await CapacitorVideoPlayer.getDuration({ playerId: 'player1' });
-console.log('Duration:', value, 'seconds');
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+await VideoPlayer.play({} as capVideoPlayerIdOptions);
 ```
 
-### getCurrentTime(options)
+### `pause`
 
-Get current playback position in seconds.
+Pause the current video from a given playerId
 
 ```typescript
-const { value } = await CapacitorVideoPlayer.getCurrentTime({ playerId: 'player1' });
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+await VideoPlayer.pause({} as capVideoPlayerIdOptions);
 ```
 
-### setCurrentTime(options)
+### `getDuration`
 
-Seek to a specific time.
+Get the duration of the current video from a given playerId
 
 ```typescript
-await CapacitorVideoPlayer.setCurrentTime({
-  playerId: 'player1',
-  seektime: 60 // seconds
-});
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+await VideoPlayer.getDuration({} as capVideoPlayerIdOptions);
 ```
 
-### setVolume(options)
+### `getCurrentTime`
 
-Set volume (0.0 to 1.0).
+Get the current time of the current video from a given playerId
 
 ```typescript
-await CapacitorVideoPlayer.setVolume({
-  playerId: 'player1',
-  volume: 0.8
-});
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+await VideoPlayer.getCurrentTime({} as capVideoPlayerIdOptions);
 ```
 
-### getVolume(options)
+### `setCurrentTime`
 
-Get current volume.
+Set the current time to seek the current video to from a given playerId
 
 ```typescript
-const { value } = await CapacitorVideoPlayer.getVolume({ playerId: 'player1' });
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+await VideoPlayer.setCurrentTime({} as capVideoTimeOptions);
 ```
 
-### setMuted(options)
+### `getVolume`
 
-Mute or unmute the video.
+Get the volume of the current video from a given playerId
 
 ```typescript
-await CapacitorVideoPlayer.setMuted({
-  playerId: 'player1',
-  muted: true
-});
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+await VideoPlayer.getVolume({} as capVideoPlayerIdOptions);
 ```
 
-### setRate(options)
+### `setVolume`
 
-Set playback speed.
+Set the volume of the current video to from a given playerId
 
 ```typescript
-await CapacitorVideoPlayer.setRate({
-  playerId: 'player1',
-  rate: 1.5 // 1.5x speed
-});
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+await VideoPlayer.setVolume({} as capVideoVolumeOptions);
 ```
 
-### stopAllPlayers()
+### `getMuted`
 
-Stop all active players.
+Get the muted of the current video from a given playerId
 
 ```typescript
-await CapacitorVideoPlayer.stopAllPlayers();
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+await VideoPlayer.getMuted({} as capVideoPlayerIdOptions);
 ```
 
-### exitPlayer()
+### `setMuted`
 
-Exit the video player.
+Set the muted of the current video to from a given playerId
 
 ```typescript
-await CapacitorVideoPlayer.exitPlayer();
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+await VideoPlayer.setMuted({} as capVideoMutedOptions);
 ```
 
-## Complete Example
+### `setRate`
+
+Set the rate of the current video from a given playerId
 
 ```typescript
-import { CapacitorVideoPlayer } from '@capgo/capacitor-video-player';
+import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-export class VideoPlayerService {
-  private playerId = 'mainPlayer';
+await VideoPlayer.setRate({} as capVideoRateOptions);
+```
 
-  async initializePlayer(videoUrl: string, subtitleUrl?: string) {
-    try {
-      const result = await CapacitorVideoPlayer.initPlayer({
-        mode: 'fullscreen',
-        url: videoUrl,
-        playerId: this.playerId,
-        subtitle: subtitleUrl,
-        language: 'en',
-        rate: 1.0,
-        exitOnEnd: true,
-        loopOnEnd: false,
-        pipEnabled: true,
-        bkmodeEnabled: true,
-        showControls: true,
-        displayMode: 'all'
-      });
+### `getRate`
 
-      console.log('Player initialized:', result);
-      return result;
-    } catch (error) {
-      console.error('Failed to initialize player:', error);
-      throw error;
-    }
-  }
+Get the rate of the current video from a given playerId
 
-  async togglePlayPause() {
-    const { value: isPlaying } = await CapacitorVideoPlayer.isPlaying({
-      playerId: this.playerId
-    });
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-    if (isPlaying) {
-      await CapacitorVideoPlayer.pause({ playerId: this.playerId });
-    } else {
-      await CapacitorVideoPlayer.play({ playerId: this.playerId });
-    }
-  }
+await VideoPlayer.getRate({} as capVideoPlayerIdOptions);
+```
 
-  async seekForward(seconds: number = 10) {
-    const { value: currentTime } = await CapacitorVideoPlayer.getCurrentTime({
-      playerId: this.playerId
-    });
+### `stopAllPlayers`
 
-    await CapacitorVideoPlayer.setCurrentTime({
-      playerId: this.playerId,
-      seektime: currentTime + seconds
-    });
-  }
+Stop all players playing
 
-  async seekBackward(seconds: number = 10) {
-    const { value: currentTime } = await CapacitorVideoPlayer.getCurrentTime({
-      playerId: this.playerId
-    });
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-    await CapacitorVideoPlayer.setCurrentTime({
-      playerId: this.playerId,
-      seektime: Math.max(0, currentTime - seconds)
-    });
-  }
+await VideoPlayer.stopAllPlayers();
+```
 
-  async setPlaybackSpeed(speed: number) {
-    await CapacitorVideoPlayer.setRate({
-      playerId: this.playerId,
-      rate: speed
-    });
-  }
+### `showController`
 
-  async getProgress() {
-    const { value: currentTime } = await CapacitorVideoPlayer.getCurrentTime({
-      playerId: this.playerId
-    });
-    const { value: duration } = await CapacitorVideoPlayer.getDuration({
-      playerId: this.playerId
-    });
+Show controller
 
-    return {
-      currentTime,
-      duration,
-      percentage: (currentTime / duration) * 100
-    };
-  }
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
 
-  async cleanup() {
-    await CapacitorVideoPlayer.stopAllPlayers();
-  }
+await VideoPlayer.showController();
+```
+
+### `isControllerIsFullyVisible`
+
+isControllerIsFullyVisible
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+await VideoPlayer.isControllerIsFullyVisible();
+```
+
+### `exitPlayer`
+
+Exit player
+
+```typescript
+import { VideoPlayer } from '@capgo/capacitor-video-player';
+
+await VideoPlayer.exitPlayer();
+```
+
+## Type Reference
+
+### `capVideoPlayerOptions`
+```typescript
+export interface capVideoPlayerOptions {
+  /**
+   * Player mode
+   *  - "fullscreen"
+   *  - "embedded" (Web only)
+   */
+  mode?: string;
+  /**
+   * The url of the video to play
+   */
+  url?: string;
+  /**
+   * The url of subtitle associated with the video
+   */
+  subtitle?: string;
+  /**
+   * The language of subtitle
+   * see https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers
+   */
+  language?: string;
+  /**
+   * SubTitle Options
+   */
+  subtitleOptions?: SubTitleOptions;
+  /**
+   * Id of DIV Element parent of the player
+   */
+  playerId?: string;
+  /**
+   * Initial playing rate
+   */
+  rate?: number;
+  /**
+   * Exit on VideoEnd (iOS, Android)
+   * default: true
+   */
+  exitOnEnd?: boolean;
+  /**
+   * Loop on VideoEnd when exitOnEnd false (iOS, Android)
+   * default: false
+   */
+  loopOnEnd?: boolean;
+  /**
+   * Picture in Picture Enable (iOS, Android)
+   * default: true
+   */
+  pipEnabled?: boolean;
+  /**
+   * Background Mode Enable (iOS, Android)
+   * default: true
+   */
+  bkmodeEnabled?: boolean;
+  /**
+   * Show Controls Enable (iOS, Android)
+   * default: true
+   */
+  showControls?: boolean;
+  /**
+   * Display Mode ["all", "portrait", "landscape"] (iOS, Android)
+   * default: "all"
+   */
+  displayMode?: string;
+  /**
+   * Component Tag or DOM Element Tag (React app)
+   */
+  componentTag?: string;
+  /**
+   * Player Width (mode "embedded" only)
+   */
+  width?: number;
+  /**
+   * Player height (mode "embedded" only)
+   */
+  height?: number;
+  /**
+   * Headers for the request (iOS, Android)
+   * by Manuel García Marín (https://github.com/PhantomPainX)
+   */
+  headers?: {
+    [key: string]: string;
+  };
+  /**
+   * Title shown in the player (Android)
+   * by Manuel García Marín (https://github.com/PhantomPainX)
+   */
+  title?: string;
+  /**
+   * Subtitle shown below the title in the player (Android)
+   * by Manuel García Marín (https://github.com/PhantomPainX)
+   */
+  smallTitle?: string;
+  /**
+   * ExoPlayer Progress Bar and Spinner color (Android)
+   * by Manuel García Marín (https://github.com/PhantomPainX)
+   * Must be a valid hex color code
+   * default: #FFFFFF
+   */
+  accentColor?: string;
+  /**
+   * Chromecast enable/disable (Android)
+   * by Manuel García Marín (https://github.com/PhantomPainX)
+   * default: true
+   */
+  chromecast?: boolean;
+  /**
+   * Artwork url to be shown in Chromecast player
+   * by Manuel García Marín (https://github.com/PhantomPainX)
+   * default: ""
+   */
+  artwork?: string;
+  /**
+   * DRM configuration for protected content (iOS: FairPlay, Android: Widevine)
+   */
+  drm?: DrmOptions;
 }
 ```
 
-## Platform Notes
+### `capVideoPlayerResult`
+```typescript
+export interface capVideoPlayerResult {
+  /**
+   * result set to true when successful else false
+   */
+  result?: boolean;
+  /**
+   * method name
+   */
+  method?: string;
+  /**
+   * value returned
+   */
+  value?: any;
+  /**
+   * message string
+   */
+  message?: string;
+}
+```
 
-### iOS
-- Requires iOS 10.0+
-- Uses native AVPlayer
-- Supports Picture-in-Picture
-- Background playback supported
+### `capVideoPlayerIdOptions`
+```typescript
+export interface capVideoPlayerIdOptions {
+  /**
+   * Id of DIV Element parent of the player
+   */
+  playerId?: string;
+}
+```
 
-### Android
-- Requires Android 5.0 (API 21)+
-- Uses ExoPlayer
-- Supports Chromecast
-- Custom accent colors available
+### `capVideoTimeOptions`
+```typescript
+export interface capVideoTimeOptions {
+  /**
+   * Id of DIV Element parent of the player
+   */
+  playerId?: string;
+  /**
+   * Video time value you want to seek to
+   */
+  seektime?: number;
+}
+```
 
-### Web
-- Uses HTML5 video player
-- Embedded mode only
-- Limited native features
+### `capVideoVolumeOptions`
+```typescript
+export interface capVideoVolumeOptions {
+  /**
+   * Id of DIV Element parent of the player
+   */
+  playerId?: string;
+  /**
+   * Volume value between [0 - 1]
+   */
+  volume?: number;
+}
+```
 
-## Best Practices
+### `capVideoMutedOptions`
+```typescript
+export interface capVideoMutedOptions {
+  /**
+   * Id of DIV Element parent of the player
+   */
+  playerId?: string;
+  /**
+   * Muted value true or false
+   */
+  muted?: boolean;
+}
+```
 
-1. **Clean up players**: Always stop players when done
-2. **Handle errors**: Wrap player calls in try-catch
-3. **Unique player IDs**: Use unique IDs for multiple players
-4. **Check playback status**: Verify state before operations
-5. **Resource management**: Release players to free memory
+### `capVideoRateOptions`
+```typescript
+export interface capVideoRateOptions {
+  /**
+   * Id of DIV Element parent of the player
+   */
+  playerId?: string;
+  /**
+   * Rate value
+   */
+  rate?: number;
+}
+```
+
+### `SubTitleOptions`
+```typescript
+export interface SubTitleOptions {
+  /**
+   * Foreground Color in RGBA (default rgba(255,255,255,1)
+   */
+  foregroundColor?: string;
+  /**
+   * Background Color in RGBA (default rgba(0,0,0,1)
+   */
+  backgroundColor?: string;
+  /**
+   * Font Size in pixels (default 16)
+   */
+  fontSize?: number;
+
+  /**
+   * Get the native Capacitor plugin version
+   *
+   * @returns {Promise<{ id: string }>} an Promise with version for this device
+   * @throws An error if the something went wrong
+   */
+  getPluginVersion(): Promise<{ version: string }>;
+}
+```
+
+### `DrmOptions`
+```typescript
+export interface DrmOptions {
+  /**
+   * FairPlay DRM configuration (iOS)
+   */
+  fairplay?: FairPlayDrmOptions;
+  /**
+   * PlayReady DRM configuration
+   */
+  playready?: PlayreadyDrmOptions;
+  /**
+   * Widevine DRM configuration (Android)
+   */
+  widevine?: WidevineDrmOptions;
+}
+```
+
+### `FairPlayDrmOptions`
+```typescript
+export interface FairPlayDrmOptions {
+  /**
+   * The URL to fetch the FairPlay certificate
+   */
+  certificateUrl?: string;
+  /**
+   * The URL to send the SPC and receive the CKC license (FairPlay license server URL)
+   */
+  contentKeySpcUrl?: string;
+}
+```
+
+### `PlayreadyDrmOptions`
+```typescript
+export interface PlayreadyDrmOptions {
+  /**
+   * The URL to fetch the PlayReady license
+   */
+  certificateUrl?: string;
+}
+```
+
+### `WidevineDrmOptions`
+```typescript
+export interface WidevineDrmOptions {
+  /**
+   * The URL to fetch the Widevine license
+   */
+  certificateUrl?: string;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

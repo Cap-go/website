@@ -1,95 +1,62 @@
 ---
 locale: en
 ---
-# Using @capgo/capacitor-app-tracking-transparency Package
+# Using @capgo/capacitor-app-tracking-transparency
 
-The `@capgo/capacitor-app-tracking-transparency` package allows you to request and check iOS App Tracking Transparency (ATT) permission in your Capacitor app. This is required for apps that access the device's advertising identifier (IDFA) on iOS 14+.
+Capacitor App Tracking Transparency Plugin.
 
-## Installation
-
-To install the package, run the following command in your project's root directory:
+## Install
 
 ```bash
-npm install @capgo/capacitor-app-tracking-transparency
-npx cap sync
+bun add @capgo/capacitor-app-tracking-transparency
+bunx cap sync
 ```
 
-## iOS Setup
+## What This Plugin Exposes
 
-Add the `NSUserTrackingUsageDescription` key to your app's `Info.plist` file:
+- `getStatus` - Gets the current tracking authorization status without prompting the user.
+- `requestPermission` - Requests user authorization to access app-related data for tracking. Displays the native iOS tracking permission dialog.
 
-```xml
-<key>NSUserTrackingUsageDescription</key>
-<string>This identifier will be used to deliver personalized ads to you.</string>
-```
+## Example Usage
 
-This message will be shown to users when requesting tracking permission. Customize it to explain why your app needs tracking authorization.
-
-## Android & Web
-
-App Tracking Transparency is an iOS-only framework. On Android and Web, this plugin returns `authorized` status automatically, allowing transparent cross-platform usage without conditional code.
-
-## API
-
-The `@capgo/capacitor-app-tracking-transparency` package provides the following API methods:
-
-### getStatus()
+### `getStatus`
 
 Gets the current tracking authorization status without prompting the user.
 
-```javascript
+```typescript
 import { AppTrackingTransparency } from '@capgo/capacitor-app-tracking-transparency';
 
-async function checkTrackingStatus() {
-  const { status } = await AppTrackingTransparency.getStatus();
-  console.log('Tracking status:', status);
-  // Possible values: 'authorized', 'denied', 'notDetermined', 'restricted'
+const { status } = await AppTrackingTransparency.getStatus();
+if (status === 'authorized') {
+  console.log('Tracking is authorized');
 }
 ```
 
-### requestPermission()
+### `requestPermission`
 
-Requests user authorization to access app-related data for tracking. Shows the native iOS permission dialog.
+Requests user authorization to access app-related data for tracking. Displays the native iOS tracking permission dialog.
 
-```javascript
+```typescript
 import { AppTrackingTransparency } from '@capgo/capacitor-app-tracking-transparency';
 
-async function requestTrackingPermission() {
-  const { status } = await AppTrackingTransparency.requestPermission();
-  if (status === 'authorized') {
+const { status } = await AppTrackingTransparency.requestPermission();
+switch (status) {
+  case 'authorized':
     console.log('User authorized tracking');
-    // Initialize your tracking/analytics SDKs
-  } else {
-    console.log('User denied tracking:', status);
-    // Use non-personalized alternatives
-  }
+    break;
+  case 'denied':
+    console.log('User denied tracking');
+    break;
+  case 'restricted':
+    console.log('Tracking is restricted');
+    break;
+  case 'notDetermined':
+    console.log('Status not determined');
+    break;
 }
 ```
 
-> **Note:** The permission dialog is only shown once per app install. Subsequent calls return the stored status.
+## Full Reference
 
-## Complete Example
-
-```javascript
-import { AppTrackingTransparency } from '@capgo/capacitor-app-tracking-transparency';
-
-async function handleTracking() {
-  const { status } = await AppTrackingTransparency.getStatus();
-
-  if (status === 'notDetermined') {
-    const result = await AppTrackingTransparency.requestPermission();
-    if (result.status === 'authorized') {
-      initializeTracking();
-    }
-  } else if (status === 'authorized') {
-    initializeTracking();
-  }
-}
-
-function initializeTracking() {
-  // Initialize your ad SDKs, analytics, etc.
-  console.log('Tracking initialized');
-}
-```
-
-That's it! You have successfully learned how to use the `@capgo/capacitor-app-tracking-transparency` package to handle App Tracking Transparency in your Capacitor app.
+- GitHub: https://github.com/Cap-go/capacitor-app-tracking-transparency/
+- Docs: /docs/plugins/app-tracking-transparency/

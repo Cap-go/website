@@ -10,10 +10,10 @@ import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
 1. **Install the plugin**
-   <PackageManagers pkg="@capgo/capacitor-zebra-datawedge" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@capgo/capacitor-zebra-datawedge" pkgManagers={['bun']} />
 
 2. **Sync native platforms**
-   <PackageManagers type="exec" pkg="cap" args="sync android" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers type="exec" pkg="cap" args="sync android" pkgManagers={['bun']} />
 
 3. **Configure DataWedge on the device**
    - Create or pick a Zebra DataWedge profile associated with your app package.

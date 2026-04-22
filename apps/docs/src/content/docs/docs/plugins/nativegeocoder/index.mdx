@@ -1,6 +1,6 @@
 ---
 title: "@capgo/nativegeocoder"
-description: Native forward and reverse geocoding plugin for converting addresses to coordinates and vice versa.
+description: "Capacitor plugin for native forward and reverse geocoding."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,35 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Convert between addresses and geographic coordinates using native platform geocoding APIs for accurate location data.
-  image:
-    file: ~public/icons/plugins/nativegeocoder.svg
+  tagline: "Capacitor plugin for native forward and reverse geocoding."
   actions:
     - text: Get started
       link: /docs/plugins/nativegeocoder/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-nativegeocoder/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Forward geocoding" icon="rocket">
-    Convert addresses to geographic coordinates 📍
-  </Card>
-  <Card title="Reverse geocoding" icon="document">
-    Convert coordinates to human-readable addresses 🏠
-  </Card>
-  <Card title="Native accuracy" icon="star">
-    Uses platform-native geocoding for best results 🎯
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/nativegeocoder/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+Capacitor plugin for native forward and reverse geocoding.
+
+## Core Capabilities
+
+- `reverseGeocode` - Convert latitude and longitude to an address.
+- `forwardGeocode` - Convert an address to latitude and longitude.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `reverseGeocode` | Convert latitude and longitude to an address. |
+| `forwardGeocode` | Convert an address to latitude and longitude. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-nativegeocoder](https://github.com/Cap-go/capacitor-nativegeocoder/).

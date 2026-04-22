@@ -3,37 +3,81 @@ locale: en
 ---
 # Using @capgo/capacitor-mqtt
 
-`@capgo/capacitor-mqtt` enables MQTT messaging in Capacitor apps.
+Capacitor plugin for MQTT connectivity on Android and iOS.
 
 ## Install
 
 ```bash
-npm install @capgo/capacitor-mqtt
-npx cap sync
+bun add @capgo/capacitor-mqtt
+bunx cap sync
 ```
 
-## Connect and subscribe
+## What This Plugin Exposes
+
+- `connect`
+- `disconnect`
+- `subscribe`
+- `publish`
+
+## Example Usage
+
+### `connect`
+
+See the upstream definitions for the current contract.
 
 ```typescript
-import { CapacitorMqtt } from '@capgo/capacitor-mqtt';
+import { MqttBridge } from '@capgo/capacitor-mqtt';
 
-await CapacitorMqtt.connect({
-  brokerUrl: 'wss://broker.hivemq.com:8884/mqtt',
-  clientId: 'my-device-id',
-});
-
-await CapacitorMqtt.subscribe({
-  topic: 'myapp/events',
-  qos: 1,
-});
+await MqttBridge.connect({} as {
+    serverURI: string;
+    port: number;
+    clientId: string;
+    username: string;
+    password: string;
+    setCleanSession: boolean;
+    connectionTimeout: number;
+    keepAliveInterval: number;
+    setAutomaticReconnect: boolean;
+    setLastWill?: {
+      willTopic: string;
+      willPayload: string;
+      willQoS: number;
+      setRetained: boolean;
+    };
+  });
 ```
 
-## Publish
+### `disconnect`
+
+See the upstream definitions for the current contract.
 
 ```typescript
-await CapacitorMqtt.publish({
-  topic: 'myapp/commands',
-  message: JSON.stringify({ reboot: true }),
-  qos: 1,
-});
+import { MqttBridge } from '@capgo/capacitor-mqtt';
+
+await MqttBridge.disconnect();
 ```
+
+### `subscribe`
+
+See the upstream definitions for the current contract.
+
+```typescript
+import { MqttBridge } from '@capgo/capacitor-mqtt';
+
+await MqttBridge.subscribe({} as { topic: string; qos: number });
+```
+
+### `publish`
+
+See the upstream definitions for the current contract.
+
+```typescript
+import { MqttBridge } from '@capgo/capacitor-mqtt';
+
+await MqttBridge.publish({} as { topic: string; payload: string; qos: number; retained: boolean });
+```
+
+## Full Reference
+
+- GitHub: https://github.com/Cap-go/capacitor-mqtt/
+- Docs: /docs/plugins/mqtt/

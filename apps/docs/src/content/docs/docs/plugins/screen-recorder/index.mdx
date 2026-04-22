@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-screen-recorder"
-description: Record your device's screen with audio support for creating tutorials, demos, and app previews.
+description: "Record device's screen."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,35 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Record your device's screen with this powerful Capacitor plugin, perfect for creating tutorials, demos, and capturing app interactions.
-  image:
-    file: ~public/icons/plugins/screen-recorder.svg
+  tagline: "Capacitor Screen Recorder Plugin for recording the device screen. Allows you to capture video recordings of the screen with optional audio."
   actions:
     - text: Get started
       link: /docs/plugins/screen-recorder/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
-      link: https://github.com/riderx/capacitor-screen-recorder/
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-screen-recorder/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="High quality recording" icon="rocket">
-    Record screen in high quality with customizable settings 🎥
-  </Card>
-  <Card title="Audio support" icon="star">
-    Record with microphone audio and system sounds 🎤
-  </Card>
-  <Card title="Easy integration" icon="setting">
-    Simple API with start/stop recording methods 😊
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/screen-recorder/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+Capacitor Screen Recorder Plugin for recording the device screen. Allows you to capture video recordings of the screen with optional audio.
+
+## Core Capabilities
+
+- `start` - Start recording the device screen.
+- `stop` - Stop the current screen recording.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `start` | Start recording the device screen. |
+| `stop` | Stop the current screen recording. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-screen-recorder](https://github.com/Cap-go/capacitor-screen-recorder/).

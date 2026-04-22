@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-textinteraction"
-description: Enable or disable the iOS text interaction loupe for precise control over WebView behaviour.
+description: "Toggle text interaction in Capacitor based iOS apps."
 tableOfContents: false
 next: false
 prev: false
@@ -8,37 +8,33 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Remove the iOS magnifier lens in kiosk or game experiences, then restore it before text entry.
-  image:
-    file: ~public/icons/plugins/textinteraction.svg
+  tagline: "Toggle text interaction in Capacitor based iOS apps."
   actions:
     - text: Get started
       link: /docs/plugins/textinteraction/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-textinteraction/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-Control Apple's text interaction system to tailor UX on kiosk displays, games, and interactive installations.
+Toggle text interaction in Capacitor based iOS apps.
 
-<CardGrid stagger>
-  <Card title="iOS specific" icon="rocket">
-    Toggle the magnifier lens and selection handles introduced in iOS 15.
-  </Card>
-  <Card title="Simple API" icon="pencil">
-    Call a single method to enable or disable text interaction state.
-  </Card>
-  <Card title="Safe defaults" icon="approve-check">
-    Receives a boolean result so you can detect unsupported versions.
-  </Card>
-  <Card title="Kiosk friendly" icon="star">
-    Prevent long-press copy/paste on controlled installations or signage.
-  </Card>
-</CardGrid>
+## Core Capabilities
 
-Use the getting started guide for a minimal integration pattern and reminders to re-enable interaction before showing text inputs.
+- `toggle` - Toggle text interaction (selection) on the Capacitor WebView.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `toggle` | Toggle text interaction (selection) on the Capacitor WebView. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-textinteraction](https://github.com/Cap-go/capacitor-textinteraction/).

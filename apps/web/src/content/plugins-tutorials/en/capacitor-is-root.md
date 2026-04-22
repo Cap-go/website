@@ -1,87 +1,72 @@
 ---
 locale: en
 ---
-
-# Complete Tutorial: Using @capgo/capacitor-is-root for iOS and Android Mobile Apps
-
-The `@capgo/capacitor-is-root` package provides native is root functionality for your Capacitor mobile applications on iOS and Android. This comprehensive tutorial will guide you through integrating is root features into your iOS and Android mobile apps built with Capacitor or Cordova, enabling cross-platform mobile app development with native capabilities.
-
-## What is Capacitor?
-
-Capacitor is Ionic's modern native runtime that enables developers to build native iOS apps, Android apps, and Progressive Web Apps from a single codebase. Unlike older Cordova-based mobile development, Capacitor provides direct access to native iOS and Android APIs, making it the ideal choice for building production-ready mobile applications. This Capacitor plugin brings is root capabilities to both iOS and Android mobile platforms.
-
-## Why Use is root in Your Capacitor Mobile App?
-
-The @capgo/capacitor-is-root plugin enables your iOS and Android mobile applications to leverage native is root functionality without writing platform-specific code. This Capacitor plugin provides a unified JavaScript API that works seamlessly on both iOS and Android mobile devices, making it perfect for cross-platform mobile app development.
-
-Benefits for iOS and Android mobile applications:
-- Native is root performance on iOS and Android devices
-- Unified API for both iOS and Android mobile platforms
-- No need for separate native iOS or Android code
-- Works with Capacitor and Cordova mobile frameworks
-- Full TypeScript support for mobile app development
-- Seamless integration with existing Capacitor mobile apps
-
----
-locale: en
----
 # Using @capgo/capacitor-is-root
 
-The `@capgo/capacitor-is-root` package provides native functionality for your Capacitor app. Here is a tutorial on how to use this package.
+Capacitor Is Root Plugin for detecting rooted (Android) or jailbroken (iOS) devices.
 
-## Installation
-
-To install the package, run the following command:
+## Install
 
 ```bash
-npm install @capgo/capacitor-is-root
-npx cap sync
+bun add @capgo/capacitor-is-root
+bunx cap sync
 ```
 
-## Usage
+## What This Plugin Exposes
 
-### Basic Example
+- `isRooted` - Performs the default root/jailbreak detection checks.
+- `isRootedWithBusyBox` - Extends the default detection with BusyBox specific checks (Android only).
+- `detectRootManagementApps` - Detects if known root management applications are present (Android only).
+- `detectPotentiallyDangerousApps` - Detects potentially dangerous applications commonly found on rooted devices (Android only).
+
+## Example Usage
+
+### `isRooted`
+
+Performs the default root/jailbreak detection checks.
 
 ```typescript
-import { capacitorisroot } from '@capgo/capacitor-is-root';
+import { IsRoot } from '@capgo/capacitor-is-root';
 
-// Use the plugin methods here
+const { result } = await IsRoot.isRooted();
+if (result) {
+  console.log('Device is rooted/jailbroken');
+} else {
+  console.log('Device is not rooted/jailbroken');
+}
 ```
 
-For detailed API documentation, please visit the [GitHub repository](https://github.com/Cap-go/capacitor-is-root).
+### `isRootedWithBusyBox`
 
-That's it! You have successfully integrated @capgo/capacitor-is-root into your Capacitor app.
+Extends the default detection with BusyBox specific checks (Android only).
 
-## Platform-Specific Notes for iOS and Android
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
 
-### iOS Mobile Platform
+await IsRoot.isRootedWithBusyBox();
+```
 
-- Compatible with iOS 10.0+ mobile devices (iPhone and iPad)
-- Uses native iOS APIs for is root functionality
-- Optimized performance on iOS mobile platform
-- Full support for latest iOS versions
+### `detectRootManagementApps`
 
-### Android Mobile Platform
+Detects if known root management applications are present (Android only).
 
-- Compatible with Android 5.0 (API 21)+ mobile devices
-- Uses native Android APIs for is root functionality
-- Works across all Android device manufacturers
-- Optimized for Android mobile platform
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
 
-## Capacitor vs Cordova for Mobile Development
+await IsRoot.detectRootManagementApps();
+```
 
-While this is root plugin works with both Capacitor and Cordova mobile frameworks, Capacitor offers significant advantages for iOS and Android mobile app development:
+### `detectPotentiallyDangerousApps`
 
-- **Modern Architecture**: Better performance on iOS and Android mobile platforms
-- **Direct Native Access**: Easier integration with iOS and Android native APIs
-- **Improved Tooling**: Superior development experience for mobile apps
-- **Active Development**: Regular updates for iOS and Android compatibility
-- **Better Documentation**: Comprehensive guides for mobile app development
+Detects potentially dangerous applications commonly found on rooted devices (Android only).
 
-## Conclusion
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
 
-You have successfully integrated @capgo/capacitor-is-root into your Capacitor mobile application for iOS and Android. This plugin provides native is root capabilities for both iOS and Android mobile platforms, enabling professional mobile app development with a unified codebase.
+await IsRoot.detectPotentiallyDangerousApps();
+```
 
-For detailed API documentation and advanced is root features for mobile app development, visit the [GitHub repository](https://github.com/Cap-go/capacitor-is-root).
+## Full Reference
 
-Whether you're building native iOS apps, Android mobile applications, or cross-platform Capacitor mobile apps, this is root plugin provides the native capabilities you need for professional mobile app development on iOS and Android platforms.
+- GitHub: https://github.com/Cap-go/capacitor-is-root/
+- Docs: /docs/plugins/is-root/

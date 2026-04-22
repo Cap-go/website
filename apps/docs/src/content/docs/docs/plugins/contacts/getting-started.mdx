@@ -1,393 +1,393 @@
 ---
-title: "Getting Started with Contacts"
-description: "Learn how to integrate contact management into your Capacitor app"
+title: Getting Started
+description: "Install @capgo/capacitor-contacts and start using its current Capacitor API."
+sidebar:
+  order: 2
 ---
 
-This guide will walk you through integrating the Capacitor Contacts plugin into your application.
-
-## Installation
-
-Install the plugin using npm:
+## Install
 
 ```bash
-npm install @capgo/capacitor-contacts
-npx cap sync
+bun add @capgo/capacitor-contacts
+bunx cap sync
 ```
 
-## iOS Configuration
-
-Add the following to your `Info.plist`:
-
-```xml
-<key>NSContactsUsageDescription</key>
-<string>This app needs access to contacts to let you select recipients</string>
-```
-
-## Android Configuration
-
-Add the following permissions to your `AndroidManifest.xml`:
-
-```xml
-<uses-permission android:name="android.permission.READ_CONTACTS" />
-<uses-permission android:name="android.permission.WRITE_CONTACTS" />
-```
-
-## Basic Usage
-
-### Import the Plugin
+## Import
 
 ```typescript
-import { Contacts } from '@capgo/capacitor-contacts';
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
 ```
 
-### Request Permissions
+## API Overview
+
+### `countContacts`
+
+Count the total number of contacts on the device.
 
 ```typescript
-const requestPermissions = async () => {
-  const permission = await Contacts.requestPermissions();
-  console.log('Permission status:', permission.contacts);
-};
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
+
+await CapacitorContacts.countContacts();
 ```
 
-### Get All Contacts
+### `createContact`
+
+Create a new contact programmatically.
 
 ```typescript
-const getAllContacts = async () => {
-  const result = await Contacts.getContacts({
-    projection: {
-      name: true,
-      phones: true,
-      emails: true,
-      image: true
-    }
-  });
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-  console.log('Contacts:', result.contacts);
-};
+await CapacitorContacts.createContact({} as CreateContactOptions);
 ```
 
-### Search Contacts
+### `createGroup`
+
+Create a new contact group.
 
 ```typescript
-const searchContacts = async (query: string) => {
-  const result = await Contacts.getContacts({
-    projection: {
-      name: true,
-      phones: true,
-      emails: true
-    },
-    query: query
-  });
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-  console.log('Search results:', result.contacts);
-};
+await CapacitorContacts.createGroup({} as CreateGroupOptions);
 ```
 
-### Create Contact
+### `deleteContactById`
+
+Delete a contact by ID.
 
 ```typescript
-const createContact = async () => {
-  const newContact = {
-    name: {
-      given: 'John',
-      family: 'Doe'
-    },
-    phones: [{
-      type: 'mobile',
-      number: '+1234567890'
-    }],
-    emails: [{
-      type: 'work',
-      address: 'john.doe@example.com'
-    }]
-  };
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-  const result = await Contacts.createContact(newContact);
-  console.log('Contact created:', result);
-};
+await CapacitorContacts.deleteContactById({} as DeleteContactByIdOptions);
 ```
 
-### Update Contact
+### `deleteGroupById`
+
+Delete a group by ID.
 
 ```typescript
-const updateContact = async (contactId: string) => {
-  const updates = {
-    contactId: contactId,
-    name: {
-      given: 'Jane',
-      family: 'Doe'
-    }
-  };
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-  await Contacts.updateContact(updates);
-  console.log('Contact updated');
-};
+await CapacitorContacts.deleteGroupById({} as DeleteGroupByIdOptions);
 ```
 
-### Delete Contact
+### `displayContactById`
+
+Display a contact using the native contact viewer.
 
 ```typescript
-const deleteContact = async (contactId: string) => {
-  await Contacts.deleteContact({ contactId });
-  console.log('Contact deleted');
-};
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
+
+await CapacitorContacts.displayContactById({} as DisplayContactByIdOptions);
 ```
 
-## Complete Example
+### `displayCreateContact`
 
-Here's a complete example with a contact service:
+Display the native create contact UI.
 
 ```typescript
-import { Contacts } from '@capgo/capacitor-contacts';
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
 
-interface Contact {
-  contactId: string;
-  name: {
-    display?: string;
-    given?: string;
-    family?: string;
-  };
-  phones?: Array<{ type: string; number: string }>;
-  emails?: Array<{ type: string; address: string }>;
-  image?: { base64String: string };
+await CapacitorContacts.displayCreateContact();
+```
+
+### `displayUpdateContactById`
+
+Display the native update contact UI for a specific contact.
+
+```typescript
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
+
+await CapacitorContacts.displayUpdateContactById({} as DisplayUpdateContactByIdOptions);
+```
+
+### `getAccounts`
+
+Get all accounts available on the device.
+
+```typescript
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
+
+await CapacitorContacts.getAccounts();
+```
+
+### `getContactById`
+
+Get a specific contact by ID.
+
+```typescript
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
+
+await CapacitorContacts.getContactById({} as GetContactByIdOptions);
+```
+
+### `getContacts`
+
+Get all contacts from the device.
+
+```typescript
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
+
+await CapacitorContacts.getContacts();
+```
+
+### `getGroupById`
+
+Get a specific group by ID.
+
+```typescript
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
+
+await CapacitorContacts.getGroupById({} as GetGroupByIdOptions);
+```
+
+### `getGroups`
+
+Get all contact groups.
+
+```typescript
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
+
+await CapacitorContacts.getGroups();
+```
+
+### `isAvailable`
+
+Check if contacts are available on the device.
+
+```typescript
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
+
+await CapacitorContacts.isAvailable();
+```
+
+### `isSupported`
+
+Check if the plugin is supported on the current platform.
+
+```typescript
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
+
+await CapacitorContacts.isSupported();
+```
+
+### `openSettings`
+
+Open the device's contacts settings.
+
+```typescript
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
+
+await CapacitorContacts.openSettings();
+```
+
+### `pickContact`
+
+Pick a single contact using the native contact picker.
+
+```typescript
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
+
+await CapacitorContacts.pickContact();
+```
+
+### `pickContacts`
+
+Pick one or more contacts using the native contact picker.
+
+```typescript
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
+
+await CapacitorContacts.pickContacts();
+```
+
+### `updateContactById`
+
+Update an existing contact by ID.
+
+```typescript
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
+
+await CapacitorContacts.updateContactById({} as UpdateContactByIdOptions);
+```
+
+### `checkPermissions`
+
+Check the current permission status for contacts.
+
+```typescript
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
+
+await CapacitorContacts.checkPermissions();
+```
+
+### `requestPermissions`
+
+Request permissions to access contacts.
+
+```typescript
+import { CapacitorContacts } from '@capgo/capacitor-contacts';
+
+await CapacitorContacts.requestPermissions();
+```
+
+## Type Reference
+
+### `CountContactsResult`
+Result from counting contacts.
+```typescript
+export interface CountContactsResult {
+  /**
+   * Total number of contacts.
+   *
+   * @since 1.0.0
+   */
+  count: number;
 }
+```
 
-class ContactsService {
-  async checkPermissions(): Promise<boolean> {
-    const permission = await Contacts.checkPermissions();
-
-    if (permission.contacts === 'granted') {
-      return true;
-    }
-
-    const requested = await Contacts.requestPermissions();
-    return requested.contacts === 'granted';
-  }
-
-  async getAllContacts(): Promise<Contact[]> {
-    const hasPermission = await this.checkPermissions();
-    if (!hasPermission) {
-      throw new Error('Contacts permission denied');
-    }
-
-    const result = await Contacts.getContacts({
-      projection: {
-        name: true,
-        phones: true,
-        emails: true,
-        image: true
-      }
-    });
-
-    return result.contacts;
-  }
-
-  async searchContacts(query: string): Promise<Contact[]> {
-    if (!query || query.length < 2) {
-      return [];
-    }
-
-    const result = await Contacts.getContacts({
-      projection: {
-        name: true,
-        phones: true,
-        emails: true
-      },
-      query: query
-    });
-
-    return result.contacts;
-  }
-
-  async getContactById(contactId: string): Promise<Contact | null> {
-    const result = await Contacts.getContacts({
-      projection: {
-        name: true,
-        phones: true,
-        emails: true,
-        image: true,
-        organization: true,
-        birthday: true,
-        note: true,
-        urls: true,
-        postalAddresses: true
-      },
-      contactId: contactId
-    });
-
-    return result.contacts.length > 0 ? result.contacts[0] : null;
-  }
-
-  async createContact(contact: Partial<Contact>): Promise<string> {
-    const hasPermission = await this.checkPermissions();
-    if (!hasPermission) {
-      throw new Error('Contacts permission denied');
-    }
-
-    const result = await Contacts.createContact(contact);
-    return result.contactId;
-  }
-
-  async updateContact(contactId: string, updates: Partial<Contact>): Promise<void> {
-    await Contacts.updateContact({
-      contactId,
-      ...updates
-    });
-  }
-
-  async deleteContact(contactId: string): Promise<void> {
-    await Contacts.deleteContact({ contactId });
-  }
-
-  formatPhoneNumber(phone: string): string {
-    // Remove non-numeric characters
-    const cleaned = phone.replace(/\D/g, '');
-
-    // Format as (XXX) XXX-XXXX
-    if (cleaned.length === 10) {
-      return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
-    }
-
-    return phone;
-  }
-
-  getContactInitials(contact: Contact): string {
-    const given = contact.name?.given || '';
-    const family = contact.name?.family || '';
-
-    if (given && family) {
-      return `${given[0]}${family[0]}`.toUpperCase();
-    }
-
-    const display = contact.name?.display || '';
-    const parts = display.split(' ');
-
-    if (parts.length >= 2) {
-      return `${parts[0][0]}${parts[1][0]}`.toUpperCase();
-    }
-
-    return display.slice(0, 2).toUpperCase();
-  }
+### `CreateContactOptions`
+Options for creating a contact.
+```typescript
+export interface CreateContactOptions {
+  /**
+   * Contact information to create. The 'id' field will be generated automatically.
+   *
+   * @since 1.0.0
+   */
+  contact: Omit<Contact, 'id'>;
 }
-
-// Usage
-const contactsService = new ContactsService();
-
-// Get all contacts
-const contacts = await contactsService.getAllContacts();
-console.log('Contacts:', contacts);
-
-// Search contacts
-const results = await contactsService.searchContacts('john');
-console.log('Search results:', results);
-
-// Create contact
-const newContactId = await contactsService.createContact({
-  name: { given: 'Jane', family: 'Smith' },
-  phones: [{ type: 'mobile', number: '+1234567890' }]
-});
-
-// Update contact
-await contactsService.updateContact(newContactId, {
-  emails: [{ type: 'work', address: 'jane@example.com' }]
-});
 ```
 
-## Understanding Projection
-
-The `projection` parameter controls which fields to fetch:
-
+### `CreateContactResult`
+Result from creating a contact.
 ```typescript
-const result = await Contacts.getContacts({
-  projection: {
-    name: true,           // Contact name
-    phones: true,         // Phone numbers
-    emails: true,         // Email addresses
-    image: true,          // Contact photo
-    organization: true,   // Company/organization
-    birthday: true,       // Birth date
-    note: true,          // Notes
-    urls: true,          // Websites
-    postalAddresses: true // Physical addresses
-  }
-});
+export interface CreateContactResult {
+  /**
+   * The ID of the newly created contact.
+   *
+   * @since 1.0.0
+   */
+  id: string;
+}
 ```
 
-**Tip**: Only request fields you need to improve performance.
-
-## Contact Picker UI
-
-Many apps prefer using the native contact picker:
-
+### `CreateGroupOptions`
+Options for creating a group.
 ```typescript
-const pickContact = async () => {
-  try {
-    const result = await Contacts.pickContact({
-      projection: {
-        name: true,
-        phones: true,
-        emails: true
-      }
-    });
-
-    if (result.contacts.length > 0) {
-      const contact = result.contacts[0];
-      console.log('Selected contact:', contact);
-    }
-  } catch (error) {
-    console.error('Contact picker cancelled or failed:', error);
-  }
-};
+export interface CreateGroupOptions {
+  /**
+   * Group information to create. The 'id' field will be generated automatically.
+   *
+   * @since 1.0.0
+   */
+  group: Omit<Group, 'id'>;
+}
 ```
 
-## Best Practices
-
-1. **Request Minimal Permissions**: Only request contacts permission when needed
-2. **Use Projection**: Only fetch fields you actually use
-3. **Handle Denials**: Provide fallback when permissions denied
-4. **Cache Wisely**: Contacts can change, don't cache too long
-5. **Respect Privacy**: Be transparent about contact usage
-6. **Async Operations**: All contact operations are async
-
-## Common Issues
-
-### Permission Denied
-
+### `CreateGroupResult`
+Result from creating a group.
 ```typescript
-const handlePermissionDenied = async () => {
-  const permission = await Contacts.checkPermissions();
-
-  if (permission.contacts === 'denied') {
-    // Show dialog explaining why permission is needed
-    showPermissionDialog();
-    // Direct user to settings
-    // On iOS: Settings > [App] > Contacts
-    // On Android: Settings > Apps > [App] > Permissions
-  }
-};
+export interface CreateGroupResult {
+  /**
+   * The ID of the newly created group.
+   *
+   * @since 1.0.0
+   */
+  id: string;
+}
 ```
 
-### Large Contact Lists
-
+### `DeleteContactByIdOptions`
+Options for deleting a contact by ID.
 ```typescript
-const loadContactsInBatches = async () => {
-  // Get count first (lightweight)
-  const projection = { name: true }; // Minimal projection
-
-  // Implement pagination if needed
-  const allContacts = await Contacts.getContacts({ projection });
-
-  // Process in chunks
-  const chunkSize = 100;
-  for (let i = 0; i < allContacts.contacts.length; i += chunkSize) {
-    const chunk = allContacts.contacts.slice(i, i + chunkSize);
-    await processContactChunk(chunk);
-  }
-};
+export interface DeleteContactByIdOptions {
+  /**
+   * The ID of the contact to delete.
+   *
+   * @since 1.0.0
+   */
+  id: string;
+}
 ```
 
-## Next Steps
+### `DeleteGroupByIdOptions`
+Options for deleting a group by ID.
+```typescript
+export interface DeleteGroupByIdOptions {
+  /**
+   * The ID of the group to delete.
+   *
+   * @since 1.0.0
+   */
+  id: string;
+}
+```
 
-- Explore the [API Reference](https://github.com/Cap-go/capacitor-contacts#api) for complete method documentation
-- Check out the [example app](https://github.com/Cap-go/capacitor-contacts/tree/main/example) for advanced usage
-- See the [tutorial](/plugins/capacitor-contacts) for complete implementation examples
+### `DisplayContactByIdOptions`
+Options for displaying a contact by ID.
+```typescript
+export interface DisplayContactByIdOptions {
+  /**
+   * The ID of the contact to display.
+   *
+   * @since 1.0.0
+   */
+  id: string;
+}
+```
+
+### `DisplayCreateContactOptions`
+Options for displaying the native create contact UI.
+```typescript
+export interface DisplayCreateContactOptions {
+  /**
+   * Optional pre-filled contact information for the create UI.
+   *
+   * @since 1.0.0
+   */
+  contact?: Omit<Contact, 'id'>;
+}
+```
+
+### `DisplayCreateContactResult`
+Result from displaying the native create contact UI.
+```typescript
+export interface DisplayCreateContactResult {
+  /**
+   * The ID of the created contact, if one was created. Undefined if the user cancelled.
+   *
+   * @since 1.0.0
+   */
+  id?: string;
+}
+```
+
+### `DisplayUpdateContactByIdOptions`
+Options for displaying the native update contact UI.
+```typescript
+export interface DisplayUpdateContactByIdOptions {
+  /**
+   * The ID of the contact to update.
+   *
+   * @since 1.0.0
+   */
+  id: string;
+}
+```
+
+### `GetAccountsResult`
+Result from getting accounts.
+```typescript
+export interface GetAccountsResult {
+  /**
+   * List of accounts available on the device.
+   *
+   * @since 1.0.0
+   */
+  accounts: Account[];
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

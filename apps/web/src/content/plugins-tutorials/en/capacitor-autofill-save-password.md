@@ -1,87 +1,48 @@
 ---
 locale: en
 ---
-
-# Complete Tutorial: Using @capgo/capacitor-autofill-save-password for iOS and Android Mobile Apps
-
-The `@capgo/capacitor-autofill-save-password` package provides native autofill save password functionality for your Capacitor mobile applications on iOS and Android. This comprehensive tutorial will guide you through integrating autofill save password features into your iOS and Android mobile apps built with Capacitor or Cordova, enabling cross-platform mobile app development with native capabilities.
-
-## What is Capacitor?
-
-Capacitor is Ionic's modern native runtime that enables developers to build native iOS apps, Android apps, and Progressive Web Apps from a single codebase. Unlike older Cordova-based mobile development, Capacitor provides direct access to native iOS and Android APIs, making it the ideal choice for building production-ready mobile applications. This Capacitor plugin brings autofill save password capabilities to both iOS and Android mobile platforms.
-
-## Why Use autofill save password in Your Capacitor Mobile App?
-
-The @capgo/capacitor-autofill-save-password plugin enables your iOS and Android mobile applications to leverage native autofill save password functionality without writing platform-specific code. This Capacitor plugin provides a unified JavaScript API that works seamlessly on both iOS and Android mobile devices, making it perfect for cross-platform mobile app development.
-
-Benefits for iOS and Android mobile applications:
-- Native autofill save password performance on iOS and Android devices
-- Unified API for both iOS and Android mobile platforms
-- No need for separate native iOS or Android code
-- Works with Capacitor and Cordova mobile frameworks
-- Full TypeScript support for mobile app development
-- Seamless integration with existing Capacitor mobile apps
-
----
-locale: en
----
 # Using @capgo/capacitor-autofill-save-password
 
-The `@capgo/capacitor-autofill-save-password` package provides native functionality for your Capacitor app. Here is a tutorial on how to use this package.
+Prompt to display dialog for saving password to keychain from webview app.
 
-## Installation
-
-To install the package, run the following command:
+## Install
 
 ```bash
-npm install @capgo/capacitor-autofill-save-password
-npx cap sync
+bun add @capgo/capacitor-autofill-save-password
+bunx cap sync
 ```
 
-## Usage
+## What This Plugin Exposes
 
-### Basic Example
+- `promptDialog` - Save a password to the keychain.
+- `readPassword` - Read a password from the keychain. Requires the developer to setup associated domain for the app for iOS.
+
+## Example Usage
+
+### `promptDialog`
+
+Save a password to the keychain.
 
 ```typescript
-import { capacitorautofillsavepassword } from '@capgo/capacitor-autofill-save-password';
+import { SavePassword } from '@capgo/capacitor-autofill-save-password';
 
-// Use the plugin methods here
+await SavePassword.promptDialog({
+  username: 'your-username',
+  password: 'your-password'
+});
 ```
 
-For detailed API documentation, please visit the [GitHub repository](https://github.com/Cap-go/capacitor-autofill-save-password).
+### `readPassword`
 
-That's it! You have successfully integrated @capgo/capacitor-autofill-save-password into your Capacitor app.
+Read a password from the keychain. Requires the developer to setup associated domain for the app for iOS.
 
-## Platform-Specific Notes for iOS and Android
+```typescript
+import { SavePassword } from '@capgo/capacitor-autofill-save-password';
 
-### iOS Mobile Platform
+await SavePassword.readPassword();
+```
 
-- Compatible with iOS 10.0+ mobile devices (iPhone and iPad)
-- Uses native iOS APIs for autofill save password functionality
-- Optimized performance on iOS mobile platform
-- Full support for latest iOS versions
+## Full Reference
 
-### Android Mobile Platform
-
-- Compatible with Android 5.0 (API 21)+ mobile devices
-- Uses native Android APIs for autofill save password functionality
-- Works across all Android device manufacturers
-- Optimized for Android mobile platform
-
-## Capacitor vs Cordova for Mobile Development
-
-While this autofill save password plugin works with both Capacitor and Cordova mobile frameworks, Capacitor offers significant advantages for iOS and Android mobile app development:
-
-- **Modern Architecture**: Better performance on iOS and Android mobile platforms
-- **Direct Native Access**: Easier integration with iOS and Android native APIs
-- **Improved Tooling**: Superior development experience for mobile apps
-- **Active Development**: Regular updates for iOS and Android compatibility
-- **Better Documentation**: Comprehensive guides for mobile app development
-
-## Conclusion
-
-You have successfully integrated @capgo/capacitor-autofill-save-password into your Capacitor mobile application for iOS and Android. This plugin provides native autofill save password capabilities for both iOS and Android mobile platforms, enabling professional mobile app development with a unified codebase.
-
-For detailed API documentation and advanced autofill save password features for mobile app development, visit the [GitHub repository](https://github.com/Cap-go/capacitor-autofill-save-password).
-
-Whether you're building native iOS apps, Android mobile applications, or cross-platform Capacitor mobile apps, this autofill save password plugin provides the native capabilities you need for professional mobile app development on iOS and Android platforms.
+- GitHub: https://github.com/Cap-go/capacitor-autofill-save-password/
+- Docs: /docs/plugins/autofill-save-password/

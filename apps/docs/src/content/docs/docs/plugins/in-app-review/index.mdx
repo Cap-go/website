@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-in-app-review"
-description: Prompt users to submit app store ratings and reviews without leaving your app.
+description: "Prompt users to submit app store ratings and reviews without leaving your app."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,33 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Request native app store reviews on iOS and Android without redirecting users away from your app.
-  image:
-    file: ~public/icons/plugins/in-app-review.svg
+  tagline: "Capacitor In-App Review Plugin interface for prompting users to submit app store ratings and reviews without leaving the app."
   actions:
     - text: Get started
       link: /docs/plugins/in-app-review/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-in-app-review/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Native Experience" icon="rocket">
-    Uses iOS SKStoreReviewController and Android Play In-App Review API for authentic native review dialogs
-  </Card>
-  <Card title="No Redirects" icon="puzzle">
-    Users stay in your app while leaving reviews - no App Store or Play Store redirects
-  </Card>
-  <Card title="Platform Compliant" icon="approve-check">
-    Automatically follows Apple and Google guidelines for review prompts
-  </Card>
-  <Card title="Simple API" icon="open-book">
-    Just one method call to request a review - check the [Documentation](/docs/plugins/in-app-review/getting-started/) to get started.
-  </Card>
-</CardGrid>
+Capacitor In-App Review Plugin interface for prompting users to submit app store ratings and reviews without leaving the app.
+
+## Core Capabilities
+
+- `requestReview` - Request an in-app review from the user.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `requestReview` | Request an in-app review from the user. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-in-app-review](https://github.com/Cap-go/capacitor-in-app-review/).

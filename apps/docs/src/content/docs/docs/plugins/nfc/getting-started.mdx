@@ -1,455 +1,278 @@
 ---
 title: Getting Started
-description: Learn how to install and use the NFC plugin to read and write NFC tags in your Capacitor app.
+description: "Install @capgo/capacitor-nfc and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-nfc" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-2. **Sync with native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
-
-## Configuration
-
-### iOS Configuration
-
-Add the NFC usage description to your `Info.plist`:
-
-```xml
-<key>NFCReaderUsageDescription</key>
-<string>This app needs NFC access to read and write tags</string>
+```bash
+bun add @capgo/capacitor-nfc
+bunx cap sync
 ```
 
-Enable the Near Field Communication Tag Reading capability in your Xcode project.
+## Import
 
-### Android Configuration
-
-Add the NFC permission to your `AndroidManifest.xml`:
-
-```xml
-<manifest>
-  <uses-permission android:name="android.permission.NFC" />
-  <uses-feature android:name="android.hardware.nfc" android:required="false" />
-</manifest>
+```typescript
+import { CapacitorNfc } from '@capgo/capacitor-nfc';
 ```
 
-## Usage
+## API Overview
 
-### Start Scanning for NFC Tags
+### `startScanning`
+
+Starts listening for NFC tags.
 
 ```typescript
 import { CapacitorNfc } from '@capgo/capacitor-nfc';
 
-await CapacitorNfc.startScanning({
-  invalidateAfterFirstRead: false, // Keep session open (iOS)
-  alertMessage: 'Hold a tag near the top of your device.',
-});
-
-const listener = await CapacitorNfc.addListener('nfcEvent', (event) => {
-  console.log('Tag detected:', event.type);
-  console.log('Tag ID:', event.tag?.id);
-  console.log('NDEF message:', event.tag?.ndefMessage);
-});
+await CapacitorNfc.startScanning();
 ```
 
-### Read NFC Tag
+### `stopScanning`
+
+Stops the ongoing NFC scanning session.
 
 ```typescript
-await CapacitorNfc.addListener('nfcEvent', (event) => {
-  if (event.tag?.ndefMessage) {
-    event.tag.ndefMessage.forEach(record => {
-      console.log('TNF:', record.tnf);
-      console.log('Type:', record.type);
-      console.log('Payload:', record.payload);
+import { CapacitorNfc } from '@capgo/capacitor-nfc';
 
-      // Decode text record
-      if (record.tnf === 1 && record.type[0] === 0x54) { // Text record
-        const langLen = record.payload[0] & 0x3f;
-        const text = new TextDecoder().decode(
-          new Uint8Array(record.payload.slice(langLen + 1))
-        );
-        console.log('Text:', text);
-      }
-    });
-  }
-});
-```
-
-### Write to NFC Tag
-
-```typescript
-// Prepare a text record
-const encoder = new TextEncoder();
-const langBytes = Array.from(encoder.encode('en'));
-const textBytes = Array.from(encoder.encode('Hello NFC'));
-const payload = [langBytes.length & 0x3f, ...langBytes, ...textBytes];
-
-await CapacitorNfc.write({
-  allowFormat: true,
-  records: [
-    {
-      tnf: 0x01, // TNF Well-known
-      type: [0x54], // 'T' for Text
-      id: [],
-      payload,
-    },
-  ],
-});
-
-console.log('Tag written successfully');
-```
-
-### Write URL to NFC Tag
-
-```typescript
-const url = 'https://capgo.app';
-const urlBytes = Array.from(new TextEncoder().encode(url));
-
-await CapacitorNfc.write({
-  allowFormat: true,
-  records: [
-    {
-      tnf: 0x01, // TNF Well-known
-      type: [0x55], // 'U' for URI
-      id: [],
-      payload: [0x01, ...urlBytes], // 0x01 = https://
-    },
-  ],
-});
-```
-
-### Erase NFC Tag
-
-```typescript
-await CapacitorNfc.erase();
-console.log('Tag erased');
-```
-
-### Make Tag Read-Only
-
-```typescript
-await CapacitorNfc.makeReadOnly();
-console.log('Tag is now read-only');
-```
-
-### Stop Scanning
-
-```typescript
-await listener.remove();
 await CapacitorNfc.stopScanning();
 ```
 
-### Check NFC Status
+### `write`
+
+Writes the provided NDEF records to the last discovered tag.
 
 ```typescript
-const { status } = await CapacitorNfc.getStatus();
-console.log('NFC status:', status);
-// Possible values: 'NFC_OK', 'NO_NFC', 'NFC_DISABLED', 'NDEF_PUSH_DISABLED'
+import { CapacitorNfc } from '@capgo/capacitor-nfc';
 
-if (status === 'NFC_DISABLED') {
-  // Open system settings
-  await CapacitorNfc.showSettings();
-}
+await CapacitorNfc.write({} as WriteTagOptions);
 ```
 
-### Android Beam (P2P Sharing)
+### `erase`
+
+Attempts to erase the last discovered tag by writing an empty NDEF message.
 
 ```typescript
-// Share data via Android Beam
-const message = {
-  records: [
-    {
-      tnf: 0x01,
-      type: [0x54], // Text
-      id: [],
-      payload: [/* text record payload */],
-    },
-  ],
-};
+import { CapacitorNfc } from '@capgo/capacitor-nfc';
 
-await CapacitorNfc.share(message);
-
-// Later, stop sharing
-await CapacitorNfc.unshare();
-```
-
-## API Reference
-
-### startScanning(options?)
-
-Start listening for NFC tags.
-
-```typescript
-interface StartScanningOptions {
-  invalidateAfterFirstRead?: boolean; // iOS only, defaults to true
-  alertMessage?: string; // iOS only
-  androidReaderModeFlags?: number; // Android only
-}
-
-await CapacitorNfc.startScanning(options);
-```
-
-### stopScanning()
-
-Stop the NFC scanning session.
-
-```typescript
-await CapacitorNfc.stopScanning();
-```
-
-### write(options)
-
-Write NDEF records to the last discovered tag.
-
-```typescript
-interface WriteTagOptions {
-  records: NdefRecord[];
-  allowFormat?: boolean; // Defaults to true
-}
-
-interface NdefRecord {
-  tnf: number; // Type Name Format
-  type: number[]; // Record type
-  id: number[]; // Record ID
-  payload: number[]; // Record payload
-}
-
-await CapacitorNfc.write(options);
-```
-
-### erase()
-
-Erase the last discovered tag.
-
-```typescript
 await CapacitorNfc.erase();
 ```
 
-### makeReadOnly()
+### `makeReadOnly`
 
-Make the last discovered tag read-only (permanent).
+Attempts to make the last discovered tag read-only.
 
 ```typescript
+import { CapacitorNfc } from '@capgo/capacitor-nfc';
+
 await CapacitorNfc.makeReadOnly();
 ```
 
-### share(options)
+### `share`
 
-Share NDEF message via Android Beam (Android only).
+Shares an NDEF message with another device via peer-to-peer (Android only).
 
 ```typescript
-await CapacitorNfc.share({ records: [...] });
+import { CapacitorNfc } from '@capgo/capacitor-nfc';
+
+await CapacitorNfc.share({} as ShareTagOptions);
 ```
 
-### unshare()
+### `unshare`
 
-Stop sharing (Android only).
+Stops sharing previously provided NDEF message (Android only).
 
 ```typescript
+import { CapacitorNfc } from '@capgo/capacitor-nfc';
+
 await CapacitorNfc.unshare();
 ```
 
-### getStatus()
+### `getStatus`
 
-Get current NFC adapter status.
+Returns the current NFC adapter status.
 
 ```typescript
-const { status } = await CapacitorNfc.getStatus();
-// Returns: 'NFC_OK' | 'NO_NFC' | 'NFC_DISABLED' | 'NDEF_PUSH_DISABLED'
+import { CapacitorNfc } from '@capgo/capacitor-nfc';
+
+await CapacitorNfc.getStatus();
 ```
 
-### showSettings()
+### `showSettings`
 
-Open system NFC settings.
+Opens the system settings page where the user can enable NFC.
 
 ```typescript
+import { CapacitorNfc } from '@capgo/capacitor-nfc';
+
 await CapacitorNfc.showSettings();
 ```
 
-## Events
+### `isSupported`
 
-### nfcEvent
+Checks whether the device has NFC hardware support.
 
-Fired when an NFC tag is discovered.
+Returns `true` if NFC hardware is present on the device, regardless of
+whether NFC is currently enabled or disabled. Returns `false` if the
+device does not have NFC hardware.
+
+Use this method to determine if NFC features should be shown in your
+app's UI. To check if NFC is currently enabled, use `getStatus()`.
 
 ```typescript
-interface NfcEvent {
-  type: 'tag' | 'ndef' | 'ndef-mime' | 'ndef-formattable';
-  tag?: NfcTag;
-}
+import { CapacitorNfc } from '@capgo/capacitor-nfc';
 
-interface NfcTag {
-  id: number[];
-  techTypes: string[];
-  type: string | null;
-  maxSize: number | null;
-  isWritable: boolean | null;
-  canMakeReadOnly: boolean | null;
-  ndefMessage: NdefRecord[] | null;
+await CapacitorNfc.isSupported();
+```
+
+## Type Reference
+
+### `StartScanningOptions`
+Options controlling the behaviour of .
+```typescript
+export interface StartScanningOptions {
+  /**
+   * iOS-only: closes the NFC session automatically after the first successful tag read.
+   * Defaults to `true`.
+   */
+  invalidateAfterFirstRead?: boolean;
+  /**
+   * iOS-only: custom message displayed in the NFC system sheet while scanning.
+   */
+  alertMessage?: string;
+  /**
+   * iOS-only: session type to use for NFC scanning.
+   * - `'ndef'`: Uses NFCNDEFReaderSession (default). Only detects NDEF-formatted tags.
+   * - `'tag'`: Uses NFCTagReaderSession. Detects both NDEF and non-NDEF tags (e.g., raw MIFARE tags).
+   *            Allows reading UID from unformatted tags.
+   *            **Requires** the `Near Field Communication Tag Reader Session Formats` entitlement
+   *            in your app with the `TAG` format included. Without it the session will fail to
+   *            start and the promise will reject with a `NO_NFC` error code.
+   * Defaults to `'ndef'` for backward compatibility.
+   */
+  iosSessionType?: 'ndef' | 'tag';
+  /**
+   * Android-only: raw flags passed to `NfcAdapter.enableReaderMode`.
+   * Defaults to enabling all tag types with skipping NDEF checks.
+   */
+  androidReaderModeFlags?: number;
 }
 ```
 
-### nfcStateChange
-
-Fired when NFC adapter availability changes (Android only).
-
+### `WriteTagOptions`
+Options used when writing an NDEF message on the current tag.
 ```typescript
-interface NfcStateChangeEvent {
+export interface WriteTagOptions {
+  /**
+   * Array of records that compose the NDEF message to be written.
+   */
+  records: NdefRecord[];
+  /**
+   * When `true`, the plugin attempts to format NDEF-formattable tags before writing.
+   * Defaults to `true`.
+   */
+  allowFormat?: boolean;
+}
+```
+
+### `ShareTagOptions`
+Options used when sharing an NDEF message with another device using Android Beam / P2P mode.
+```typescript
+export interface ShareTagOptions {
+  records: NdefRecord[];
+}
+```
+
+### `NfcStatus`
+Possible NFC adapter states returned by .
+```typescript
+export type NfcStatus = 'NFC_OK' | 'NO_NFC' | 'NFC_DISABLED' | 'NDEF_PUSH_DISABLED';
+```
+
+### `NfcEvent`
+Generic NFC discovery event dispatched by the plugin.
+```typescript
+export interface NfcEvent {
+  type: NfcEventType;
+  tag: NfcTag;
+}
+```
+
+### `NfcStateChangeEvent`
+Event emitted whenever the NFC adapter availability changes.
+```typescript
+export interface NfcStateChangeEvent {
   status: NfcStatus;
   enabled: boolean;
 }
 ```
 
-## Complete Example
-
+### `NdefRecord`
+JSON structure representing a single NDEF record.
 ```typescript
-import { CapacitorNfc } from '@capgo/capacitor-nfc';
-
-export class NfcService {
-  private listener: any;
-
-  async startReading() {
-    // Check NFC status
-    const { status } = await CapacitorNfc.getStatus();
-
-    if (status === 'NO_NFC') {
-      throw new Error('NFC not available on this device');
-    }
-
-    if (status === 'NFC_DISABLED') {
-      await CapacitorNfc.showSettings();
-      return;
-    }
-
-    // Start scanning
-    await CapacitorNfc.startScanning({
-      invalidateAfterFirstRead: false,
-      alertMessage: 'Ready to scan NFC tags',
-    });
-
-    // Listen for tags
-    this.listener = await CapacitorNfc.addListener('nfcEvent', (event) => {
-      this.handleNfcEvent(event);
-    });
-  }
-
-  private handleNfcEvent(event: any) {
-    console.log('NFC Event:', event.type);
-
-    if (event.tag?.ndefMessage) {
-      event.tag.ndefMessage.forEach(record => {
-        this.processRecord(record);
-      });
-    }
-  }
-
-  private processRecord(record: any) {
-    // Process text records
-    if (record.tnf === 1 && record.type[0] === 0x54) {
-      const langLen = record.payload[0] & 0x3f;
-      const text = new TextDecoder().decode(
-        new Uint8Array(record.payload.slice(langLen + 1))
-      );
-      console.log('Text:', text);
-    }
-
-    // Process URI records
-    if (record.tnf === 1 && record.type[0] === 0x55) {
-      const uriCode = record.payload[0];
-      const uri = new TextDecoder().decode(
-        new Uint8Array(record.payload.slice(1))
-      );
-      console.log('URI:', uri);
-    }
-  }
-
-  async writeText(text: string) {
-    const encoder = new TextEncoder();
-    const langBytes = Array.from(encoder.encode('en'));
-    const textBytes = Array.from(encoder.encode(text));
-    const payload = [langBytes.length & 0x3f, ...langBytes, ...textBytes];
-
-    await CapacitorNfc.write({
-      allowFormat: true,
-      records: [
-        {
-          tnf: 0x01,
-          type: [0x54],
-          id: [],
-          payload,
-        },
-      ],
-    });
-  }
-
-  async stopReading() {
-    if (this.listener) {
-      await this.listener.remove();
-    }
-    await CapacitorNfc.stopScanning();
-  }
+export interface NdefRecord {
+  /**
+   * Type Name Format identifier.
+   */
+  tnf: number;
+  /**
+   * Type field expressed as an array of byte values.
+   */
+  type: number[];
+  /**
+   * Record identifier expressed as an array of byte values.
+   */
+  id: number[];
+  /**
+   * Raw payload expressed as an array of byte values.
+   */
+  payload: number[];
 }
 ```
 
-## NDEF Record Types
+### `NfcEventType`
+Event type describing the kind of NFC discovery that happened.
+```typescript
+export type NfcEventType = 'tag' | 'ndef' | 'ndef-mime' | 'ndef-formatable';
+```
 
-### TNF (Type Name Format)
+### `NfcTag`
+Representation of the full tag information returned by the native layers.
+```typescript
+export interface NfcTag {
+  /**
+   * Raw identifier bytes for the tag.
+   */
+  id?: number[];
+  /**
+   * List of Android tech strings (e.g. `android.nfc.tech.Ndef`).
+   */
+  techTypes?: string[];
+  /**
+   * Human readable tag type when available (e.g. `NFC Forum Type 2`, `MIFARE Ultralight`).
+   */
+  type?: string | null;
+  /**
+   * Maximum writable size in bytes for tags that expose NDEF information.
+   */
+  maxSize?: number | null;
+  /**
+   * Indicates whether the tag can be written to.
+   */
+  isWritable?: boolean | null;
+  /**
+   * Indicates whether the tag can be permanently locked.
+   */
+  canMakeReadOnly?: boolean | null;
+  /**
+   * Array of NDEF records discovered on the tag.
+   */
+  ndefMessage?: NdefRecord[] | null;
+}
+```
 
-- `0x00`: Empty
-- `0x01`: Well-known (e.g., Text, URI)
-- `0x02`: MIME media type
-- `0x03`: Absolute URI
-- `0x04`: External type
-- `0x05`: Unknown
-- `0x06`: Unchanged
-- `0x07`: Reserved
+## Source Of Truth
 
-### Common Record Types
-
-- **Text**: `type: [0x54]` ('T')
-- **URI**: `type: [0x55]` ('U')
-- **Smart Poster**: `type: [0x53, 0x70]` ('Sp')
-
-### URI Prefixes
-
-- `0x00`: (no prefix)
-- `0x01`: `https://`
-- `0x02`: `https://`
-- `0x03`: `http://`
-- `0x04`: `https://www.`
-
-## Best Practices
-
-1. **Check NFC Status**: Always verify NFC is available and enabled
-2. **Handle Permissions**: Request NFC permissions appropriately
-3. **Stop Scanning**: Always stop scanning when done to save battery
-4. **Error Handling**: Wrap NFC operations in try-catch blocks
-5. **Test on Devices**: NFC features don't work on simulators/emulators
-
-## Platform Notes
-
-### iOS
-- Requires iOS 11.0+
-- Uses Core NFC framework
-- Supports background tag reading (iOS 13+)
-- Limited to reading NDEF-formatted tags
-- Cannot write tags in background
-- Requires NFCReaderUsageDescription in Info.plist
-
-### Android
-- Requires Android 4.4 (API 19)+
-- Uses Android NFC API
-- Supports both foreground and background tag reading
-- Can write to tags
-- Supports Android Beam (P2P) on devices with NFC
-- Requires NFC permission in AndroidManifest.xml
-
-### Web
-- Not supported on web platform
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

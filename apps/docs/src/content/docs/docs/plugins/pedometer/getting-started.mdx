@@ -1,208 +1,266 @@
 ---
-title: "Getting Started with Pedometer"
-description: "Learn how to integrate step counting and fitness tracking into your Capacitor app"
+title: Getting Started
+description: "Install @capgo/capacitor-pedometer and start using its current Capacitor API."
+sidebar:
+  order: 2
 ---
 
-This guide will walk you through integrating the Capacitor Pedometer plugin into your application.
-
-## Installation
-
-Install the plugin using npm:
+## Install
 
 ```bash
-npm install @capgo/capacitor-pedometer
-npx cap sync
+bun add @capgo/capacitor-pedometer
+bunx cap sync
 ```
 
-## iOS Configuration
-
-Add motion usage description to your `Info.plist`:
-
-```xml
-<key>NSMotionUsageDescription</key>
-<string>We need access to your motion data to track steps and activity</string>
-```
-
-## Android Configuration
-
-The plugin automatically adds the `ACTIVITY_RECOGNITION` permission. For Android 10+ (API 29), you need to request this permission at runtime.
-
-## Basic Usage
-
-### Import the Plugin
+## Import
 
 ```typescript
 import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
 ```
 
-### Check Availability
+## API Overview
+
+### `getMeasurement`
+
+Get pedometer measurements for a specified time range.
 
 ```typescript
-const checkPedometer = async () => {
-  const result = await CapacitorPedometer.isAvailable();
-  console.log('Step counting available:', result.stepCounting);
-  console.log('Distance available:', result.distance);
-  console.log('Floor counting available:', result.floorCounting);
-  console.log('Pace available:', result.pace);
-  console.log('Cadence available:', result.cadence);
-};
+import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
+
+await CapacitorPedometer.getMeasurement();
 ```
 
-### Request Permissions
+### `isAvailable`
+
+Check which pedometer features are available on this device.
 
 ```typescript
-const requestPermission = async () => {
-  const permission = await CapacitorPedometer.requestPermissions();
-  console.log('Permission status:', permission.activityRecognition);
-};
+import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
+
+await CapacitorPedometer.isAvailable();
 ```
 
-### Get Current Measurements
+### `startMeasurementUpdates`
+
+Start receiving real-time pedometer measurement updates.
+
+On **Android** and **iOS**, the `measurement` event is only fired after calling `startMeasurementUpdates()`.
 
 ```typescript
-const getMeasurements = async () => {
-  const measurements = await CapacitorPedometer.getMeasurement({
-    startDate: new Date(Date.now() - 24 * 60 * 60 * 1000), // 24 hours ago
-    endDate: new Date()
-  });
+import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
 
-  console.log('Steps:', measurements.numberOfSteps);
-  console.log('Distance:', measurements.distance, 'meters');
-  console.log('Floors ascended:', measurements.floorsAscended);
-  console.log('Floors descended:', measurements.floorsDescended);
-};
-```
-
-### Start Real-time Updates
-
-```typescript
-// Add listener for real-time updates
-CapacitorPedometer.addListener('measurement', (data) => {
-  console.log('Steps:', data.numberOfSteps);
-  console.log('Distance:', data.distance);
-  console.log('Pace:', data.currentPace);
-  console.log('Cadence:', data.currentCadence);
-});
-
-// Start receiving updates
 await CapacitorPedometer.startMeasurementUpdates();
 ```
 
-### Stop Updates
+### `stopMeasurementUpdates`
 
-```typescript
-await CapacitorPedometer.stopMeasurementUpdates();
-CapacitorPedometer.removeAllListeners();
-```
-
-## Complete Example
+Stop receiving real-time pedometer measurement updates.
 
 ```typescript
 import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
 
-class PedometerService {
-  private listener: any;
+await CapacitorPedometer.stopMeasurementUpdates();
+```
 
-  async initialize() {
-    // Check availability
-    const available = await CapacitorPedometer.isAvailable();
-    if (!available.stepCounting) {
-      console.error('Step counting not available');
-      return false;
-    }
+### `checkPermissions`
 
-    // Request permissions
-    const permission = await CapacitorPedometer.requestPermissions();
-    if (permission.activityRecognition !== 'granted') {
-      console.error('Permission denied');
-      return false;
-    }
+Check permission to access pedometer data.
 
-    return true;
-  }
+On **Android**, this checks the `ACTIVITY_RECOGNITION` permission.
+On **iOS**, this checks the motion usage permission.
 
-  async startTracking() {
-    // Add listener
-    this.listener = CapacitorPedometer.addListener('measurement', (data) => {
-      this.onMeasurement(data);
-    });
+```typescript
+import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
 
-    // Start updates
-    await CapacitorPedometer.startMeasurementUpdates();
-    console.log('Pedometer tracking started');
-  }
+await CapacitorPedometer.checkPermissions();
+```
 
-  async stopTracking() {
-    await CapacitorPedometer.stopMeasurementUpdates();
-    if (this.listener) {
-      this.listener.remove();
-    }
-    console.log('Pedometer tracking stopped');
-  }
+### `requestPermissions`
 
-  onMeasurement(data: any) {
-    console.log('Steps today:', data.numberOfSteps);
-    console.log('Distance:', (data.distance / 1000).toFixed(2), 'km');
-  }
+Request permission to access pedometer data.
 
-  async getTodaySteps() {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+On **Android**, this requests the `ACTIVITY_RECOGNITION` permission.
+On **iOS**, this requests motion usage permission.
 
-    const measurements = await CapacitorPedometer.getMeasurement({
-      startDate: today,
-      endDate: new Date()
-    });
+```typescript
+import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
 
-    return measurements.numberOfSteps;
-  }
+await CapacitorPedometer.requestPermissions();
+```
+
+## Type Reference
+
+### `GetMeasurementOptions`
+```typescript
+export interface GetMeasurementOptions {
+  /**
+   * The start time for the measurement query (milliseconds since epoch).
+   *
+   * Required on **iOS**.
+   *
+   * @since 0.0.1
+   */
+  start?: number;
+
+  /**
+   * The end time for the measurement query (milliseconds since epoch).
+   *
+   * Required on **iOS**.
+   *
+   * @since 0.0.1
+   */
+  end?: number;
 }
-
-// Usage
-const pedometer = new PedometerService();
-await pedometer.initialize();
-await pedometer.startTracking();
 ```
 
-## Best Practices
-
-1. **Check Availability**: Always verify pedometer features before use
-2. **Request Permissions**: Handle permission requests gracefully
-3. **Battery Optimization**: Stop updates when not needed
-4. **Error Handling**: Wrap calls in try-catch blocks
-5. **Background Updates**: Configure background modes for continuous tracking
-
-## Common Issues
-
-### Permission Denied
-
+### `Measurement`
 ```typescript
-const handlePermissionDenied = async () => {
-  const permission = await CapacitorPedometer.checkPermissions();
+export interface Measurement {
+  /**
+   * The number of steps taken by the user.
+   *
+   * @since 0.0.1
+   */
+  numberOfSteps?: number;
 
-  if (permission.activityRecognition === 'denied') {
-    alert('Motion tracking permission is required. Please enable it in Settings.');
-  }
-};
+  /**
+   * The estimated distance (in meters) traveled by the user.
+   *
+   * Only available on **iOS**.
+   *
+   * @since 0.0.1
+   */
+  distance?: number;
+
+  /**
+   * The approximate number of floors ascended.
+   *
+   * Only available on **iOS**.
+   *
+   * @since 0.0.1
+   */
+  floorsAscended?: number;
+
+  /**
+   * The approximate number of floors descended.
+   *
+   * Only available on **iOS**.
+   *
+   * @since 0.0.1
+   */
+  floorsDescended?: number;
+
+  /**
+   * The current pace (in seconds per meter).
+   *
+   * Only available on **iOS**.
+   *
+   * @since 0.0.1
+   */
+  currentPace?: number;
+
+  /**
+   * The current cadence (steps per second).
+   *
+   * Only available on **iOS**.
+   *
+   * @since 0.0.1
+   */
+  currentCadence?: number;
+
+  /**
+   * The average active pace (in seconds per meter).
+   *
+   * Only available on **iOS**.
+   *
+   * @since 0.0.1
+   */
+  averageActivePace?: number;
+
+  /**
+   * The start time of this measurement (milliseconds since epoch).
+   *
+   * @since 0.0.1
+   */
+  startDate?: number;
+
+  /**
+   * The end time of this measurement (milliseconds since epoch).
+   *
+   * @since 0.0.1
+   */
+  endDate?: number;
+}
 ```
 
-### Not Available on Device
-
+### `IsAvailableResult`
 ```typescript
-const checkSupport = async () => {
-  const available = await CapacitorPedometer.isAvailable();
+export interface IsAvailableResult {
+  /**
+   * Whether step counting is available.
+   *
+   * @since 0.0.1
+   */
+  stepCounting: boolean;
 
-  if (!available.stepCounting) {
-    alert('Step counting is not available on this device');
-    return false;
-  }
+  /**
+   * Whether distance measurement is available.
+   *
+   * Only `true` on **iOS** devices that support distance tracking.
+   *
+   * @since 0.0.1
+   */
+  distance: boolean;
 
-  return true;
-};
+  /**
+   * Whether pace measurement is available.
+   *
+   * Only `true` on **iOS** devices that support pace tracking.
+   *
+   * @since 0.0.1
+   */
+  pace: boolean;
+
+  /**
+   * Whether cadence measurement is available.
+   *
+   * Only `true` on **iOS** devices that support cadence tracking.
+   *
+   * @since 0.0.1
+   */
+  cadence: boolean;
+
+  /**
+   * Whether floor counting is available.
+   *
+   * Only `true` on **iOS** devices that support floor tracking.
+   *
+   * @since 0.0.1
+   */
+  floorCounting: boolean;
+}
 ```
 
-## Next Steps
+### `PermissionStatus`
+```typescript
+export interface PermissionStatus {
+  /**
+   * Permission state for activity recognition.
+   *
+   * On **Android**, this is the `ACTIVITY_RECOGNITION` permission.
+   * On **iOS**, this is the motion usage permission.
+   *
+   * @since 0.0.1
+   */
+  activityRecognition: 'prompt' | 'prompt-with-rationale' | 'granted' | 'denied';
+}
+```
 
-- Explore the [API Reference](https://github.com/Cap-go/capacitor-pedometer#api) for complete documentation
-- Check out the [example app](https://github.com/Cap-go/capacitor-pedometer/tree/main/example)
-- See the [tutorial](/plugins/capacitor-pedometer) for advanced implementation
+### `MeasurementEvent`
+```typescript
+export type MeasurementEvent = Measurement;
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

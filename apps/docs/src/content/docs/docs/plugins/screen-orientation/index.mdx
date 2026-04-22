@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-screen-orientation"
-description: Control and detect screen orientation with the unique ability to detect physical device orientation using motion sensors.
+description: "Screen orientation plugin with support for bypassing orientation lock."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,43 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Screen orientation plugin with support for detecting true physical device orientation - even when orientation lock is enabled.
-  image:
-    file: ~public/icons/plugins/screen-orientation.svg
+  tagline: "Capacitor Screen Orientation Plugin interface."
   actions:
     - text: Get started
       link: /docs/plugins/screen-orientation/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-screen-orientation/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Physical Orientation Detection" icon="rocket">
-    Detect true physical device orientation using motion sensors, even when orientation lock is enabled
-  </Card>
-  <Card title="Orientation Lock Detection" icon="puzzle">
-    Determine if the user has enabled orientation lock by comparing physical vs UI orientation
-  </Card>
-  <Card title="Cross-platform" icon="laptop">
-    Works on iOS (Core Motion), Android (Accelerometer), and Web
-  </Card>
-  <Card title="Real-time Updates" icon="open-book">
-    Get instant notifications when device orientation changes with event listeners
-  </Card>
-</CardGrid>
+Capacitor Screen Orientation Plugin interface.
+
+## Core Capabilities
+
+- `orientation` - Get the current screen orientation.
+- `lock` - Lock the screen orientation to a specific type.
+- `unlock` - Unlock the screen orientation.
+- `startOrientationTracking` - Start tracking device orientation using motion sensors.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `orientation` | Get the current screen orientation. |
+| `lock` | Lock the screen orientation to a specific type. |
+| `unlock` | Unlock the screen orientation. |
+| `startOrientationTracking` | Start tracking device orientation using motion sensors. |
+| `stopOrientationTracking` | Stop tracking device orientation using motion sensors. |
+| `isOrientationLocked` | Check if device orientation lock is currently enabled. |
+| `addListener` | Listen for screen orientation changes. |
+| `removeAllListeners` | Remove all listeners for this plugin. |
+| `getPluginVersion` | Get the native plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-screen-orientation](https://github.com/Cap-go/capacitor-screen-orientation/).

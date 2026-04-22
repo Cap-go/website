@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-video-player"
-description: Native video playback for Capacitor apps with full control and customization.
+description: "Capacitor plugin to play video in native player."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,51 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Powerful native video player with support for fullscreen, embedded modes, subtitles, and comprehensive playback controls.
-  image:
-    file: ~public/icons/plugins/video-player.svg
+  tagline: "Capacitor plugin to play video in native player."
   actions:
     - text: Get started
       link: /docs/plugins/video-player/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-video-player/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Multiple Modes" icon="laptop">
-    Fullscreen and embedded playback modes
-  </Card>
-  <Card title="Subtitle Support" icon="document">
-    Display subtitles in multiple languages
-  </Card>
-  <Card title="Full Control" icon="setting">
-    Play, pause, seek, volume, and playback rate control
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/video-player/getting-started/) to integrate video playback.
-  </Card>
-</CardGrid>
+Capacitor plugin to play video in native player.
+
+## Core Capabilities
+
+- `initPlayer` - Initialize a video player.
+- `isPlaying` - Return if a given playerId is playing.
+- `play` - Play the current video from a given playerId.
+- `pause` - Pause the current video from a given playerId.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `initPlayer` | Initialize a video player. |
+| `isPlaying` | Return if a given playerId is playing. |
+| `play` | Play the current video from a given playerId. |
+| `pause` | Pause the current video from a given playerId. |
+| `getDuration` | Get the duration of the current video from a given playerId. |
+| `getCurrentTime` | Get the current time of the current video from a given playerId. |
+| `setCurrentTime` | Set the current time to seek the current video to from a given playerId. |
+| `getVolume` | Get the volume of the current video from a given playerId. |
+| `setVolume` | Set the volume of the current video to from a given playerId. |
+| `getMuted` | Get the muted of the current video from a given playerId. |
+| `setMuted` | Set the muted of the current video to from a given playerId. |
+| `setRate` | Set the rate of the current video from a given playerId. |
+| `getRate` | Get the rate of the current video from a given playerId. |
+| `stopAllPlayers` | Stop all players playing. |
+| `showController` | Show controller. |
+| `isControllerIsFullyVisible` | isControllerIsFullyVisible. |
+| `exitPlayer` | Exit player. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-video-player](https://github.com/Cap-go/capacitor-video-player/).

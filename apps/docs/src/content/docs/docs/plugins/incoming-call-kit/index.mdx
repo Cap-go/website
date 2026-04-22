@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-incoming-call-kit"
-description: Native incoming call presentation for Capacitor with iOS CallKit and Android full-screen notifications.
+description: "Capacitor plugin for native incoming call UI with Android full-screen notifications and iOS CallKit."
 tableOfContents: false
 next: false
 prev: false
@@ -8,9 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Present native incoming-call UI in Capacitor with iOS CallKit and Android full-screen notifications while keeping your push and media stack under your control.
-  image:
-    file: ~public/icons/plugins/incoming-call-kit.svg
+  tagline: "Capacitor API for presenting a native incoming-call surface."
   actions:
     - text: Get started
       link: /docs/plugins/incoming-call-kit/getting-started/
@@ -22,47 +20,36 @@ hero:
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
-
 ## Overview
 
-`@capgo/capacitor-incoming-call-kit` gives your Capacitor app the native ringing surface for incoming calls without forcing a specific VoIP vendor, push transport, or backend architecture.
+Capacitor API for presenting a native incoming-call surface.
 
-Use it when you already have your own signaling flow, SIP stack, Twilio integration, Stream integration, FCM delivery, or PushKit delivery and want the platform-native incoming-call experience layered onto that flow.
+## Core Capabilities
 
-<CardGrid stagger>
-  <Card title="CallKit on iOS" icon="approve-check">
-    Report incoming calls to CallKit and react to accepted, declined, ended, and timed-out events.
-  </Card>
-  <Card title="Full-screen Android UI" icon="rocket">
-    Show a high-priority notification and raise a full-screen activity when Android allows it.
-  </Card>
-  <Card title="Buffered listener events" icon="star">
-    User actions are retained until the Capacitor bridge consumes them, which helps when JavaScript starts late.
-  </Card>
-  <Card title="Transport agnostic" icon="setting">
-    Bring your own FCM, APNs, PushKit, SIP, or backend event flow. The plugin focuses on presentation, not transport.
-  </Card>
-  <Card title="Typed cross-platform API" icon="comment">
-    Use one small API to show calls, end calls, inspect active calls, and listen for state changes.
-  </Card>
-  <Card title="Platform guides" icon="open-book">
-    Start with the [Getting started guide](/docs/plugins/incoming-call-kit/getting-started/), then read the [iOS guide](/docs/plugins/incoming-call-kit/ios/) and [Android guide](/docs/plugins/incoming-call-kit/android/).
-  </Card>
-</CardGrid>
+- `showIncomingCall` - Displays the native incoming call UI.
+- `endCall` - Ends a specific tracked call.
+- `endAllCalls` - Ends every tracked call.
+- `getActiveCalls` - Returns the currently tracked calls.
 
-## What the plugin handles
+## Public API
 
-- Native incoming-call presentation
-- Active call tracking
-- Accept, decline, end, and timeout events
-- Android notification and full-screen intent wiring
-- iOS CallKit reporting
+| Method | Description |
+| --- | --- |
+| `showIncomingCall` | Displays the native incoming call UI. |
+| `endCall` | Ends a specific tracked call. |
+| `endAllCalls` | Ends every tracked call. |
+| `getActiveCalls` | Returns the currently tracked calls. |
+| `checkPermissions` | Returns the current permission state for notifications and full-screen intents. |
+| `requestPermissions` | Requests the notification permission when the platform supports it. |
+| `requestFullScreenIntentPermission` | Opens the Android 14+ full-screen intent settings page when available. |
+| `getPluginVersion` | Returns the native implementation version marker. |
+| `addListener` | Fired after the call has been handed to the native platform UI. |
+| `addListener` | Fired when the user accepts the call from native UI. |
+| `addListener` | Fired when the user declines the call from native UI. |
+| `addListener` | Fired when a call ends through the API or a platform action. |
+| `addListener` | Fired when an unanswered call reaches its configured timeout. |
+| `removeAllListeners` | Removes every native listener registered by the plugin. |
 
-## What the plugin does not handle
+## Source Of Truth
 
-- FCM, APNs, or PushKit registration
-- Starting or managing the real audio or video session
-- Vendor-specific call logic from Twilio, Stream, Daily, Agora, SIP, or WebRTC SDKs
-
-If you need a complete communications stack, use this plugin as the native incoming-call surface and keep transport plus media sessions in your existing backend or SDK.
+This reference is synced from `src/definitions.ts` in [capacitor-incoming-call-kit](https://github.com/Cap-go/capacitor-incoming-call-kit/).

@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-ffmpeg"
-description: Video encoding and processing powered by FFmpeg for Capacitor apps.
+description: "Exposes the FFmpeg API to Capacitor."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,40 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Re-encode videos with custom resolution and bitrate using the powerful FFmpeg library in your Capacitor apps.
-  image:
-    file: ~public/icons/plugins/ffmpeg.svg
+  tagline: "Exposes the FFmpeg API to Capacitor."
   actions:
     - text: Get started
       link: /docs/plugins/ffmpeg/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-ffmpeg/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Video Re-encoding" icon="rocket">
-    Convert and compress videos with FFmpeg
-  </Card>
-  <Card title="Custom Resolution" icon="setting">
-    Resize videos to any width and height
-  </Card>
-  <Card title="Bitrate Control" icon="star">
-    Control video quality and file size
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/ffmpeg/getting-started/) to start processing videos.
-  </Card>
-</CardGrid>
+Exposes the FFmpeg API to Capacitor.
+
+## Core Capabilities
+
+- `getCapabilities` - Return the machine-readable capability matrix for the current platform.
+- `reencodeVideo` - Queue a video re-encode job.
+- `convertImage` - Convert a still image into another format.
+- `convertAudio` - Convert audio into another container or codec.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `getCapabilities` | Return the machine-readable capability matrix for the current platform. |
+| `reencodeVideo` | Queue a video re-encode job. |
+| `convertImage` | Convert a still image into another format. |
+| `convertAudio` | Convert audio into another container or codec. |
+| `addListener` | Listen for media job progress. |
+| `getPluginVersion` | Get the plugin package version reported by the current platform implementation. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-ffmpeg](https://github.com/Cap-go/capacitor-ffmpeg/).

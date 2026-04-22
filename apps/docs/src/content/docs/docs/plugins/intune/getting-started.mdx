@@ -10,10 +10,10 @@ import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
 1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-intune" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@capgo/capacitor-intune" pkgManagers={['bun']} />
 
 2. **Sync native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['bun']} />
 
 3. **Complete native Intune setup**
    Follow the dedicated [iOS setup](/docs/plugins/intune/ios/) and [Android setup](/docs/plugins/intune/android/) pages. Intune still requires host-app native configuration for brokered auth, redirect URIs, manifests, entitlements, and MSAL config.

@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-share-target"
-description: Receive shared content from other apps in your Capacitor application for text, images, videos, and files.
+description: "Receive shared content from other apps."
 tableOfContents: false
 next: false
 prev: false
@@ -8,39 +8,36 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Enable your app to receive text, images, and files shared from other apps with cross-platform support.
-  image:
-    file: ~public/icons/plugins/share-target.svg
+  tagline: "Capacitor Share Target Plugin interface."
   actions:
     - text: Get started
       link: /docs/plugins/share-target/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-share-target/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Universal Sharing" icon="rocket">
-    Receive content shared from any app 🔗
-  </Card>
-  <Card title="Multiple Content Types" icon="document">
-    Handle text, images, videos, and files 📁
-  </Card>
-  <Card title="Cross-Platform" icon="laptop">
-    iOS and Android support with native integration 📱
-  </Card>
-  <Card title="Event-Based" icon="download">
-    Listen for share events in real-time 📡
-  </Card>
-  <Card title="Flexible Configuration" icon="setting">
-    Customize accepted MIME types 🎛️
-  </Card>
-  <Card title="Getting Started" icon="open-book">
-    Check the [Getting Started Guide](/docs/plugins/share-target/getting-started/) to install and configure the plugin.
-  </Card>
-</CardGrid>
+Capacitor Share Target Plugin interface.
+
+## Core Capabilities
+
+- `addListener` - Listen for shareReceived event.
+- `removeAllListeners` - Remove all listeners for this plugin.
+- `getPluginVersion` - Get the native Capacitor plugin version.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `addListener` | Listen for shareReceived event. |
+| `removeAllListeners` | Remove all listeners for this plugin. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-share-target](https://github.com/Cap-go/capacitor-share-target/).

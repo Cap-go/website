@@ -1,87 +1,92 @@
 ---
 locale: en
 ---
-
-# Complete Tutorial: Using @capgo/capacitor-twilio-voice for iOS and Android Mobile Apps
-
-The `@capgo/capacitor-twilio-voice` package provides native twilio voice functionality for your Capacitor mobile applications on iOS and Android. This comprehensive tutorial will guide you through integrating twilio voice features into your iOS and Android mobile apps built with Capacitor or Cordova, enabling cross-platform mobile app development with native capabilities.
-
-## What is Capacitor?
-
-Capacitor is Ionic's modern native runtime that enables developers to build native iOS apps, Android apps, and Progressive Web Apps from a single codebase. Unlike older Cordova-based mobile development, Capacitor provides direct access to native iOS and Android APIs, making it the ideal choice for building production-ready mobile applications. This Capacitor plugin brings twilio voice capabilities to both iOS and Android mobile platforms.
-
-## Why Use twilio voice in Your Capacitor Mobile App?
-
-The @capgo/capacitor-twilio-voice plugin enables your iOS and Android mobile applications to leverage native twilio voice functionality without writing platform-specific code. This Capacitor plugin provides a unified JavaScript API that works seamlessly on both iOS and Android mobile devices, making it perfect for cross-platform mobile app development.
-
-Benefits for iOS and Android mobile applications:
-- Native twilio voice performance on iOS and Android devices
-- Unified API for both iOS and Android mobile platforms
-- No need for separate native iOS or Android code
-- Works with Capacitor and Cordova mobile frameworks
-- Full TypeScript support for mobile app development
-- Seamless integration with existing Capacitor mobile apps
-
----
-locale: en
----
 # Using @capgo/capacitor-twilio-voice
 
-The `@capgo/capacitor-twilio-voice` package provides native functionality for your Capacitor app. Here is a tutorial on how to use this package.
+Integrates the Twilio Voice SDK into Capacitor.
 
-## Installation
-
-To install the package, run the following command:
+## Install
 
 ```bash
-npm install @capgo/capacitor-twilio-voice
-npx cap sync
+bun add @capgo/capacitor-twilio-voice
+bunx cap sync
 ```
 
-## Usage
+## What This Plugin Exposes
 
-### Basic Example
+- `login` - Authenticate the user with Twilio Voice using an access token.
+- `logout` - Log out the current user and unregister from Twilio Voice.
+- `isLoggedIn` - Check if the user is currently logged in and has a valid access token.
+- `makeCall` - Initiate an outgoing call to a phone number or client.
+
+## Example Usage
+
+### `login`
+
+Authenticate the user with Twilio Voice using an access token.
 
 ```typescript
-import { capacitortwiliovoice } from '@capgo/capacitor-twilio-voice';
+import { CapacitorTwilioVoice } from '@capgo/capacitor-twilio-voice';
 
-// Use the plugin methods here
+const result = await CapacitorTwilioVoice.login({
+  accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+});
+console.log('Login successful:', result.success);
 ```
 
-For detailed API documentation, please visit the [GitHub repository](https://github.com/Cap-go/capacitor-twilio-voice).
+### `logout`
 
-That's it! You have successfully integrated @capgo/capacitor-twilio-voice into your Capacitor app.
+Log out the current user and unregister from Twilio Voice.
 
-## Platform-Specific Notes for iOS and Android
+```typescript
+import { CapacitorTwilioVoice } from '@capgo/capacitor-twilio-voice';
 
-### iOS Mobile Platform
+const result = await CapacitorTwilioVoice.logout();
+console.log('Logout successful:', result.success);
+```
 
-- Compatible with iOS 10.0+ mobile devices (iPhone and iPad)
-- Uses native iOS APIs for twilio voice functionality
-- Optimized performance on iOS mobile platform
-- Full support for latest iOS versions
+### `isLoggedIn`
 
-### Android Mobile Platform
+Check if the user is currently logged in and has a valid access token.
 
-- Compatible with Android 5.0 (API 21)+ mobile devices
-- Uses native Android APIs for twilio voice functionality
-- Works across all Android device manufacturers
-- Optimized for Android mobile platform
+```typescript
+import { CapacitorTwilioVoice } from '@capgo/capacitor-twilio-voice';
 
-## Capacitor vs Cordova for Mobile Development
+const status = await CapacitorTwilioVoice.isLoggedIn();
+if (status.isLoggedIn && status.hasValidToken) {
+  console.log('User identity:', status.identity);
+} else {
+  // Re-authenticate the user
+}
+```
 
-While this twilio voice plugin works with both Capacitor and Cordova mobile frameworks, Capacitor offers significant advantages for iOS and Android mobile app development:
+### `makeCall`
 
-- **Modern Architecture**: Better performance on iOS and Android mobile platforms
-- **Direct Native Access**: Easier integration with iOS and Android native APIs
-- **Improved Tooling**: Superior development experience for mobile apps
-- **Active Development**: Regular updates for iOS and Android compatibility
-- **Better Documentation**: Comprehensive guides for mobile app development
+Initiate an outgoing call to a phone number or client.
 
-## Conclusion
+```typescript
+import { CapacitorTwilioVoice } from '@capgo/capacitor-twilio-voice';
 
-You have successfully integrated @capgo/capacitor-twilio-voice into your Capacitor mobile application for iOS and Android. This plugin provides native twilio voice capabilities for both iOS and Android mobile platforms, enabling professional mobile app development with a unified codebase.
+// Call a phone number
+const result = await CapacitorTwilioVoice.makeCall({
+  to: '+1234567890'
+});
+console.log('Call SID:', result.callSid);
 
-For detailed API documentation and advanced twilio voice features for mobile app development, visit the [GitHub repository](https://github.com/Cap-go/capacitor-twilio-voice).
+// Call another Twilio client with a readable name for CallKit Recents
+await CapacitorTwilioVoice.makeCall({
+  to: 'client:alice',
+  displayName: 'Alice Smith'
+});
 
-Whether you're building native iOS apps, Android mobile applications, or cross-platform Capacitor mobile apps, this twilio voice plugin provides the native capabilities you need for professional mobile app development on iOS and Android platforms.
+// Call a PSTN number using a specific caller ID
+await CapacitorTwilioVoice.makeCall({
+  to: '+1234567890',
+  callerId: '+10987654321'
+});
+```
+
+## Full Reference
+
+- GitHub: https://github.com/Cap-go/capacitor-twilio-voice/
+- Docs: /docs/plugins/twilio-voice/

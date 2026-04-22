@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-navigation-bar"
-description: Capacitor plugin to customize the Android navigation bar color, providing seamless integration with your app's design.
+description: "Capacitor plugin Set navigation bar color for android lollipop and higher."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,35 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Set custom colors for the Android navigation bar to match your app's theme and create a cohesive visual experience.
-  image:
-    file: ~public/icons/plugins/navigation-bar.svg
+  tagline: "Capacitor Navigation Bar Plugin for customizing the Android navigation bar."
   actions:
     - text: Get started
       link: /docs/plugins/navigation-bar/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-navigation-bar/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Android customization" icon="rocket">
-    Full control over Android navigation bar appearance 🎨
-  </Card>
-  <Card title="Dynamic theming" icon="setting">
-    Change colors dynamically to match your app's theme 🌈
-  </Card>
-  <Card title="Light/Dark support" icon="moon">
-    Support for light and dark navigation bar styles 🌓
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/navigation-bar/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+Capacitor Navigation Bar Plugin for customizing the Android navigation bar.
+
+## Core Capabilities
+
+- `setNavigationBarColor` - Set the navigation bar color and button theme.
+- `getNavigationBarColor` - Get the current navigation bar color and button theme.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `setNavigationBarColor` | Set the navigation bar color and button theme. |
+| `getNavigationBarColor` | Get the current navigation bar color and button theme. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-navigation-bar](https://github.com/Cap-go/capacitor-navigation-bar/).

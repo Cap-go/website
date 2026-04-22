@@ -1,0 +1,306 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-firebase-messaging and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+```bash
+bun add @capgo/capacitor-firebase-messaging
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
+```
+
+## API Overview
+
+### `checkPermissions`
+
+Check permission to receive push notifications.
+
+On **Android**, this method only needs to be called on Android 13+.
+
+```typescript
+import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
+
+await FirebaseMessaging.checkPermissions();
+```
+
+### `requestPermissions`
+
+Request permission to receive push notifications.
+
+On **Android**, this method only needs to be called on Android 13+.
+
+```typescript
+import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
+
+await FirebaseMessaging.requestPermissions();
+```
+
+### `isSupported`
+
+Checks if all required APIs exist.
+
+Always returns `true` on Android and iOS.
+
+```typescript
+import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
+
+await FirebaseMessaging.isSupported();
+```
+
+### `getToken`
+
+Register the app to receive push notifications.
+Returns a FCM token that can be used to send push messages to that Messaging instance.
+
+This method also re-enables FCM auto-init.
+
+```typescript
+import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
+
+await FirebaseMessaging.getToken();
+```
+
+### `deleteToken`
+
+Delete the FCM token and unregister the app to stop receiving push notifications.
+Can be called, for example, when a user signs out.
+
+```typescript
+import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
+
+await FirebaseMessaging.deleteToken();
+```
+
+### `getDeliveredNotifications`
+
+Get a list of notifications that are visible on the notifications screen.
+
+Note: This will return all delivered notifications, including local notifications, and not just FCM notifications.
+
+On Android, the data field of the FCM notification will NOT be included.
+
+```typescript
+import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
+
+await FirebaseMessaging.getDeliveredNotifications();
+```
+
+### `removeDeliveredNotifications`
+
+Remove specific notifications from the notifications screen.
+
+```typescript
+import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
+
+await FirebaseMessaging.removeDeliveredNotifications({} as RemoveDeliveredNotificationsOptions);
+```
+
+### `removeAllDeliveredNotifications`
+
+Remove all notifications from the notifications screen.
+
+Note: This will remove all delivered notifications, including local notifications, and not just FCM notifications.
+
+```typescript
+import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
+
+await FirebaseMessaging.removeAllDeliveredNotifications();
+```
+
+### `subscribeToTopic`
+
+Subscribes to topic in the background.
+
+Only available for Android and iOS.
+
+```typescript
+import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
+
+await FirebaseMessaging.subscribeToTopic({} as SubscribeToTopicOptions);
+```
+
+### `unsubscribeFromTopic`
+
+Unsubscribes from topic in the background.
+
+Only available for Android and iOS.
+
+```typescript
+import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
+
+await FirebaseMessaging.unsubscribeFromTopic({} as UnsubscribeFromTopicOptions);
+```
+
+### `createChannel`
+
+Create a notification channel.
+
+Only available for Android (SDK 26+).
+
+```typescript
+import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
+
+await FirebaseMessaging.createChannel({} as CreateChannelOptions);
+```
+
+### `deleteChannel`
+
+Delete a notification channel.
+
+Only available for Android (SDK 26+).
+
+```typescript
+import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
+
+await FirebaseMessaging.deleteChannel({} as DeleteChannelOptions);
+```
+
+### `listChannels`
+
+List the available notification channels.
+
+Only available for Android (SDK 26+).
+
+```typescript
+import { FirebaseMessaging } from '@capgo/capacitor-firebase-messaging';
+
+await FirebaseMessaging.listChannels();
+```
+
+## Type Reference
+
+### `PermissionStatus`
+```typescript
+export interface PermissionStatus {
+  /**
+   * @since 0.2.2
+   */
+  receive: PermissionState;
+}
+```
+
+### `IsSupportedResult`
+```typescript
+export interface IsSupportedResult {
+  /**
+   * @since 0.3.1
+   */
+  isSupported: boolean;
+}
+```
+
+### `GetTokenOptions`
+```typescript
+export interface GetTokenOptions {
+  /**
+   * Your VAPID public key, which is required to retrieve the current registration token on the web.
+   *
+   * Only available for Web.
+   */
+  vapidKey?: string;
+  /**
+   * The service worker registration for receiving push messaging.
+   * If the registration is not provided explicitly, you need to have a `firebase-messaging-sw.js` at your root location.
+   *
+   * Only available for Web.
+   */
+  serviceWorkerRegistration?: ServiceWorkerRegistration;
+}
+```
+
+### `GetTokenResult`
+```typescript
+export interface GetTokenResult {
+  /**
+   * @since 0.2.2
+   */
+  token: string;
+}
+```
+
+### `GetDeliveredNotificationsResult`
+```typescript
+export interface GetDeliveredNotificationsResult {
+  /**
+   * @since 0.2.2
+   */
+  notifications: Notification[];
+}
+```
+
+### `RemoveDeliveredNotificationsOptions`
+```typescript
+export interface RemoveDeliveredNotificationsOptions {
+  /**
+   * @since 0.4.0
+   */
+  notifications: Notification[];
+}
+```
+
+### `SubscribeToTopicOptions`
+```typescript
+export interface SubscribeToTopicOptions {
+  /**
+   * The name of the topic to subscribe.
+   *
+   * @since 0.2.2
+   */
+  topic: string;
+}
+```
+
+### `UnsubscribeFromTopicOptions`
+```typescript
+export interface UnsubscribeFromTopicOptions {
+  /**
+   * The name of the topic to unsubscribe from.
+   *
+   * @since 0.2.2
+   */
+  topic: string;
+}
+```
+
+### `CreateChannelOptions`
+```typescript
+export type CreateChannelOptions = Channel;
+```
+
+### `DeleteChannelOptions`
+```typescript
+export interface DeleteChannelOptions {
+  /**
+   * The channel identifier.
+   *
+   * @since 1.4.0
+   */
+  id: string;
+}
+```
+
+### `ListChannelsResult`
+```typescript
+export interface ListChannelsResult {
+  channels: Channel[];
+}
+```
+
+### `TokenReceivedListener`
+Callback to receive the token received event.
+```typescript
+export type TokenReceivedListener = (event: TokenReceivedEvent) => void;
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

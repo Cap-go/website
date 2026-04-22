@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-privacy-screen"
-description: Protect sensitive app content from Android screenshots and iOS app switcher previews.
+description: "Protect app content in Android screenshots and obscure the iOS app switcher snapshot."
 tableOfContents: false
 next: false
 prev: false
@@ -8,37 +8,37 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Ship native privacy protection for sensitive flows without custom platform code.
-  image:
-    file: ~public/icons/plugins/privacy-screen.svg
+  tagline: "Capacitor API for protecting app content from the app switcher preview."
   actions:
     - text: Get started
       link: /docs/plugins/privacy-screen/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-privacy-screen/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-Protect account balances, private messages, onboarding flows, and other sensitive screens from system previews.
+Capacitor API for protecting app content from the app switcher preview.
 
-<CardGrid stagger>
-  <Card title="Android screenshot blocking" icon="close">
-    Uses `FLAG_SECURE` to hide your app from screenshots, recordings, and the recent apps preview.
-  </Card>
-  <Card title="iOS app switcher protection" icon="warning">
-    Adds a native overlay before your app backgrounds so the app switcher snapshot stays obscured.
-  </Card>
-  <Card title="Simple runtime control" icon="bolt">
-    Call `enable()`, `disable()`, and `isEnabled()` from JavaScript when you need to relax or restore protection.
-  </Card>
-  <Card title="Secure by default" icon="shield-check">
-    Protection is enabled automatically when the native plugin loads, so most apps work without startup code.
-  </Card>
-</CardGrid>
+## Core Capabilities
 
-Follow the getting started guide first, then review the platform pages for iOS and Android behavior details.
+- `enable` - Enables the privacy screen.
+- `disable` - Disables the privacy screen.
+- `isEnabled` - Returns the current enabled state.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `enable` | Enables the privacy screen. |
+| `disable` | Disables the privacy screen. |
+| `isEnabled` | Returns the current enabled state. |
+| `getPluginVersion` | Returns the native implementation version marker. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-privacy-screen](https://github.com/Cap-go/capacitor-privacy-screen/).

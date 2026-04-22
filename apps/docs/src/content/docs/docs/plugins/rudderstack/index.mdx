@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-rudderstack"
-description: Add RudderStack analytics, identity, screen tracking, and event delivery controls to your Capacitor app with native iOS and Android SDK support.
+description: "Capacitor plugin for RudderStack analytics, identity, and event tracking."
 tableOfContents: false
 next: false
 prev: false
@@ -8,9 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Use a Cordova-compatible RudderStack API in Capacitor to initialize, identify, group, track, screen, alias, and manage delivery control flows.
-  image:
-    file: ~public/icons/plugins/rudderstack.svg
+  tagline: "Capacitor API that mirrors the public surface of `rudder-sdk-cordova`."
   actions:
     - text: Get started
       link: /docs/plugins/rudderstack/getting-started/
@@ -22,25 +20,37 @@ hero:
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Cordova Migration" icon="rocket">
-    Keep the familiar Rudder Cordova calling style while moving the implementation to a Capacitor-native bridge.
-  </Card>
-  <Card title="Native SDKs" icon="star">
-    Uses the RudderStack Android and iOS SDKs directly, packaged for Capacitor 8 on both platforms.
-  </Card>
-  <Card title="Identity APIs" icon="shield-check">
-    Send `identify`, `group`, and `alias` calls with traits, external IDs, and destination integration flags.
-  </Card>
-  <Card title="Event Tracking" icon="document">
-    Track events and screen views from JavaScript with the same SDK instance used by the native bridge.
-  </Card>
-  <Card title="Delivery Controls" icon="setting">
-    Flush queued events, opt users out, forward push tokens, and set advertising or anonymous identifiers when needed.
-  </Card>
-  <Card title="Documentation" icon="open-book">
-    Follow the [Getting started guide](/docs/plugins/rudderstack/getting-started/) for installation, initialization, and common tracking patterns.
-  </Card>
-</CardGrid>
+Capacitor API that mirrors the public surface of `rudder-sdk-cordova`.
+
+## Core Capabilities
+
+- `initialize` - Initializes the RudderStack client.
+- `identify` - Sends an identify call for the provided user id.
+- `group` - Sends a group call for the provided group id.
+- `track` - Sends a track call for the provided event name.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `initialize` | Initializes the RudderStack client. |
+| `identify` | Sends an identify call for the provided user id. |
+| `group` | Sends a group call for the provided group id. |
+| `track` | Sends a track call for the provided event name. |
+| `screen` | Sends a screen call for the provided screen name. |
+| `alias` | Aliases the current user to a new identifier. |
+| `reset` | Resets the current RudderStack identity state. |
+| `flush` | Flushes queued events immediately. |
+| `putDeviceToken` | Sets the push token that RudderStack forwards to supported destinations. |
+| `setAdvertisingId` | See the source definitions for current behavior. |
+| `putAdvertisingId` | Sets a custom advertising id value. |
+| `setAnonymousId` | See the source definitions for current behavior. |
+| `putAnonymousId` | Sets a custom anonymous id value. |
+| `optOut` | Toggles RudderStack tracking opt-out. |
+| `getPluginVersion` | Returns the plugin version marker from the native implementation. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-rudderstack](https://github.com/Cap-go/capacitor-rudderstack/).

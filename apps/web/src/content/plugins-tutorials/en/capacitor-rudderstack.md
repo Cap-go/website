@@ -1,77 +1,67 @@
 ---
 locale: en
 ---
-
 # Using @capgo/capacitor-rudderstack
 
-The `@capgo/capacitor-rudderstack` package brings RudderStack analytics, identity management, screen tracking, and delivery controls to Capacitor apps with native iOS and Android SDK support. Its main value is preserving the familiar Rudder Cordova call shape while moving the implementation to a Capacitor-native bridge.
+Capacitor API that mirrors the public surface of `rudder-sdk-cordova`.
 
-## Installation
-
-Install the plugin and sync native projects:
+## Install
 
 ```bash
 bun add @capgo/capacitor-rudderstack
 bunx cap sync
 ```
 
-## Migration checklist
+## What This Plugin Exposes
 
-When moving from `rudder-sdk-cordova`, keep the migration simple:
+- `initialize` - Initializes the RudderStack client.
+- `identify` - Sends an identify call for the provided user id.
+- `group` - Sends a group call for the provided group id.
+- `track` - Sends a track call for the provided event name.
 
-1. Replace the Cordova import with `RudderStack` from `@capgo/capacitor-rudderstack`.
-2. Initialize once during app startup with your `writeKey` and `dataPlaneUrl`.
-3. Keep your existing `identify`, `group`, `track`, `screen`, and `alias` call order where possible.
-4. Wire consent and sign-out flows to `optOut()` and `reset()`.
-5. Use `flush()` for critical transitions when you want events delivered faster before backgrounding.
+## Example Usage
 
-## Example application flow
+### `initialize`
 
-The following pattern works well for most apps:
+Initializes the RudderStack client.
 
-```ts
-import { RudderStack } from '@capgo/capacitor-rudderstack';
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-const rudderConfig = {
-  writeKey: 'YOUR_WRITE_KEY',
-  dataPlaneUrl: 'https://your-dataplane.rudderstack.com',
-};
-
-await RudderStack.initialize(rudderConfig.writeKey, {
-  dataPlaneUrl: rudderConfig.dataPlaneUrl,
-  trackLifecycleEvents: true,
-});
-
-await RudderStack.identify('user_123', {
-  plan: 'pro',
-  source: 'mobile-app',
-});
-
-await RudderStack.track('Subscription Viewed', {
-  placement: 'paywall',
-  experiment: 'spring-pricing',
-});
+await nativePlugin.initialize('value');
 ```
 
-Keep destination routing or external IDs on the individual calls that need them instead of trying to centralize every integration rule at initialization time.
+### `identify`
 
-## Platform behavior
+Sends an identify call for the provided user id.
 
-### Native apps
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-- The plugin packages native RudderStack SDK support for both iOS and Android.
-- Common config values such as `trackLifecycleEvents`, `recordScreenViews`, `flushQueueSize`, and `logLevel` are set from JavaScript.
+await nativePlugin.identify('value');
+```
 
-### Web builds
+### `group`
 
-- The web target is a compatibility shim for development.
-- It preserves the API shape but does not send live analytics events.
+Sends a group call for the provided group id.
 
-### Current limitation
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-- `config.factories` from the Cordova plugin is intentionally ignored in this first Capacitor release.
+await nativePlugin.group('value');
+```
 
-## Next steps
+### `track`
 
-- Read the full [Getting started guide](https://capgo.app/docs/plugins/rudderstack/getting-started/).
-- Browse the plugin source and native packaging details on [github.com/Cap-go/capacitor-rudderstack](https://github.com/Cap-go/capacitor-rudderstack).
+Sends a track call for the provided event name.
+
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
+
+await nativePlugin.track('value');
+```
+
+## Full Reference
+
+- GitHub: https://github.com/Cap-go/capacitor-rudderstack/
+- Docs: /docs/plugins/rudderstack/

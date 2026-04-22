@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-media-session"
-description: Control lock-screen, notification and headset media controls directly from Capacitor.
+description: "Capacitor plugin to expose media session controls of the device."
 tableOfContents: false
 next: false
 prev: false
@@ -8,37 +8,39 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Publish track metadata, react to play/pause events, and sync playback state with native media controls.
-  image:
-    file: ~public/icons/plugins/media-session.svg
+  tagline: "Capacitor plugin to expose media session controls of the device."
   actions:
     - text: Get started
       link: /docs/plugins/media-session/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-media-session/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-The Media Session plugin bridges Capacitor with the Media Session API so your audio and video players feel native everywhere.
+Capacitor plugin to expose media session controls of the device.
 
-<CardGrid stagger>
-  <Card title="Rich metadata" icon="star">
-    Provide album art, artist, and title for lock-screen and notification controls.
-  </Card>
-  <Card title="Playback state sync" icon="rocket">
-    Keep play / pause buttons and progress indicators aligned with your player.
-  </Card>
-  <Card title="Action callbacks" icon="pencil">
-    Handle headset buttons and OS media actions from your Capacitor code.
-  </Card>
-  <Card title="Position reporting" icon="download">
-    Push duration, position, and rate so scrubbing works fluidly.
-  </Card>
-</CardGrid>
+## Core Capabilities
 
-Jump to the getting started guide to wire metadata updates into your player lifecycle.
+- `setMetadata` - Sets metadata of the currently playing media.
+- `setPlaybackState` - Updates the playback state of the media session.
+- `setActionHandler` - Registers a handler for a media session action.
+- `setPositionState` - Updates position state for the active media session.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `setMetadata` | Sets metadata of the currently playing media. |
+| `setPlaybackState` | Updates the playback state of the media session. |
+| `setActionHandler` | Registers a handler for a media session action. |
+| `setPositionState` | Updates position state for the active media session. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-media-session](https://github.com/Cap-go/capacitor-media-session/).

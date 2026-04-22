@@ -1,84 +1,67 @@
 ---
 locale: en
 ---
-
 # Using @capgo/capacitor-twilio-video
 
-`@capgo/capacitor-twilio-video` connects a Capacitor app to Twilio Video rooms through the native mobile SDKs. The plugin is headless, so you keep your own call UI while delegating room connection, participant lifecycle events, and media state to Twilio.
+Capacitor API for joining Twilio Video rooms with a native in-app call surface.
 
-## Installation
+## Install
 
 ```bash
 bun add @capgo/capacitor-twilio-video
 bunx cap sync
 ```
 
-## Prepare your backend
+## What This Plugin Exposes
 
-This plugin expects a Twilio access token. Generate that token server-side and return it to the app when a user is ready to join a room.
+- `login` - Store and validate a Twilio Video access token minted by your backend.
+- `logout` - Clear the cached access token and leave the active room.
+- `isLoggedIn` - Check whether a valid Twilio token is currently cached on the device.
+- `joinRoom` - Join a Twilio room and present the plugin's native in-app call overlay.
 
-## Request permissions
+## Example Usage
 
-```typescript
-import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
+### `login`
 
-await CapacitorTwilioVideo.requestMicrophonePermission();
-await CapacitorTwilioVideo.requestCameraPermission();
-```
-
-On iOS, add `NSCameraUsageDescription` and `NSMicrophoneUsageDescription` to `Info.plist`.
-
-## Authenticate and join a room
+Store and validate a Twilio Video access token minted by your backend.
 
 ```typescript
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
-await CapacitorTwilioVideo.login({
-  accessToken: 'TWILIO_ACCESS_TOKEN',
-});
-
-await CapacitorTwilioVideo.joinRoom({
-  roomName: 'support-room',
-  enableAudio: true,
-  enableVideo: true,
-});
+await CapacitorTwilioVideo.login({} as { accessToken: string });
 ```
 
-## Listen for room events
+### `logout`
+
+Clear the cached access token and leave the active room.
 
 ```typescript
-await CapacitorTwilioVideo.addListener('roomConnected', ({ roomName, participantCount }) => {
-  console.log('Connected', roomName, participantCount);
-});
+import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
-await CapacitorTwilioVideo.addListener('participantConnected', (event) => {
-  console.log('Participant joined', event);
-});
-
-await CapacitorTwilioVideo.addListener('roomDisconnected', (event) => {
-  console.log('Disconnected', event);
-});
-```
-
-## Control local media
-
-```typescript
-await CapacitorTwilioVideo.setMicrophoneEnabled({ enabled: false });
-await CapacitorTwilioVideo.setCameraEnabled({ enabled: true });
-
-const status = await CapacitorTwilioVideo.getCallStatus();
-console.log(status.callState, status.participantCount);
-```
-
-## Leave the room
-
-```typescript
-await CapacitorTwilioVideo.leaveRoom();
 await CapacitorTwilioVideo.logout();
 ```
 
-## Practical advice
+### `isLoggedIn`
 
-- Keep token creation and room authorization on your backend.
-- Render your participant tiles and call controls in your app layer instead of relying on an embedded vendor UI.
-- Treat plugin events as the source of truth for connection state and participant changes.
+Check whether a valid Twilio token is currently cached on the device.
+
+```typescript
+import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
+
+await CapacitorTwilioVideo.isLoggedIn();
+```
+
+### `joinRoom`
+
+Join a Twilio room and present the plugin's native in-app call overlay.
+
+```typescript
+import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
+
+await CapacitorTwilioVideo.joinRoom({} as { roomName: string; enableAudio?: boolean; enableVideo?: boolean });
+```
+
+## Full Reference
+
+- GitHub: https://github.com/Cap-go/capacitor-twilio-video/
+- Docs: /docs/plugins/twilio-video/

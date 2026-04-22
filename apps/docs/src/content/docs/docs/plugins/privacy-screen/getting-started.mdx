@@ -10,10 +10,10 @@ import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
 1. **Install the plugin**
-   <PackageManagers pkg="@capgo/capacitor-privacy-screen" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@capgo/capacitor-privacy-screen" pkgManagers={['bun']} />
 
 2. **Sync native platforms**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['bun']} />
 
 3. **Review platform behavior**
    - Read the [iOS notes](/docs/plugins/privacy-screen/ios/) for app switcher behavior.

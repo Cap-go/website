@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-android-usagestatsmanager"
-description: Android usage statistics plugin for Capacitor apps with app usage tracking, screen time monitoring, and usage analytics.
+description: "Exposes the Android's UsageStatsManager SDK to Capacitor."
 tableOfContents: false
 next: false
 prev: false
@@ -8,138 +8,39 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Access Android usage statistics to monitor app usage, screen time, and user behavior analytics with system-level data.
-  image:
-    file: ~public/icons/plugins/android-usagestatsmanager.svg
+  tagline: "Capacitor plugin for accessing Android UsageStatsManager API."
   actions:
     - text: Get started
       link: /docs/plugins/android-usagestatsmanager/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-android-usagestatsmanager/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
-
 ## Overview
 
-The Capacitor Android Usage Stats Manager plugin exposes Android's UsageStatsManager SDK to Capacitor applications, enabling access to detailed app usage statistics and device usage data. This plugin allows developers to track app usage patterns, screen time, and user behavior analytics on Android devices.
+Capacitor plugin for accessing Android UsageStatsManager API.
 
-<CardGrid stagger>
-  <Card title="Usage statistics" icon="rocket">
-    Access Android UsageStatsManager SDK data 📱
-  </Card>
-  <Card title="App monitoring" icon="moon">
-    Track individual app usage time and frequency 🕐
-  </Card>
-  <Card title="Permission management" icon="approve-check">
-    Handle usage stats permissions seamlessly 🛡️
-  </Card>
-  <Card title="Package information" icon="puzzle">
-    Query installed package details and metadata 📦
-  </Card>
-</CardGrid>
+## Core Capabilities
 
-## Installation
+- `queryAndAggregateUsageStats` - Queries and aggregates usage stats for the given time range.
+- `isUsageStatsPermissionGranted` - Checks if the usage stats permission is granted.
+- `openUsageStatsSettings` - Open the usage stats settings screen. This will open the usage stats settings screen, which allows the user to grant the usage stats permission. This will always open the settings screen, even if the permission is already granted.
+- `queryAllPackages` - Queries all installed packages on the device. Requires the QUERY_ALL_PACKAGES permission.
 
-```bash
-npm install @capgo/capacitor-android-usagestatsmanager
-npx cap sync
-```
+## Public API
 
-## Required Permissions
+| Method | Description |
+| --- | --- |
+| `queryAndAggregateUsageStats` | Queries and aggregates usage stats for the given time range. |
+| `isUsageStatsPermissionGranted` | Checks if the usage stats permission is granted. |
+| `openUsageStatsSettings` | Open the usage stats settings screen. This will open the usage stats settings screen, which allows the user to grant the usage stats permission. This will always open the settings screen, even if the permission is already granted. |
+| `queryAllPackages` | Queries all installed packages on the device. Requires the QUERY_ALL_PACKAGES permission. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
 
-Add these permissions to your `android/app/src/main/AndroidManifest.xml`:
+## Source Of Truth
 
-```xml
-<uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
-<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
-```
-
-## Core API Methods
-
-### Usage Statistics
-- `queryAndAggregateUsageStats(options)` - Retrieve detailed usage statistics for installed apps
-- `isUsageStatsPermissionGranted()` - Check if usage stats permission is granted
-- `openUsageStatsSettings()` - Open system settings for usage stats permission
-
-### Package Information
-- `queryAllPackages()` - Get information about all installed packages
-
-## Usage Example
-
-```typescript
-import { AndroidUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
-
-// Check if permission is granted
-const permissionResult = await AndroidUsageStatsManager.isUsageStatsPermissionGranted();
-if (!permissionResult.granted) {
-  // Open settings to grant permission
-  await AndroidUsageStatsManager.openUsageStatsSettings();
-  return;
-}
-
-// Query usage statistics
-const statsOptions = {
-  intervalType: 0, // INTERVAL_DAILY
-  startTime: Date.now() - (7 * 24 * 60 * 60 * 1000), // 7 days ago
-  endTime: Date.now()
-};
-
-const usageStats = await AndroidUsageStatsManager.queryAndAggregateUsageStats(statsOptions);
-console.log('Usage statistics:', usageStats);
-
-// Get all installed packages
-const packages = await AndroidUsageStatsManager.queryAllPackages();
-console.log('Installed packages:', packages);
-```
-
-## Permission Handling
-
-The plugin requires special permissions that cannot be granted through normal runtime permission requests:
-
-1. **PACKAGE_USAGE_STATS**: Allows access to usage statistics
-2. **QUERY_ALL_PACKAGES**: Required for package information (Android 11+)
-
-Users must manually grant these permissions through system settings. Use `openUsageStatsSettings()` to direct users to the appropriate settings page.
-
-## Data Types
-
-### Usage Statistics
-- App usage time and frequency
-- First and last time used
-- Total time in foreground
-- Launch count
-
-### Package Information
-- Package name and version
-- Installation time
-- App labels and icons
-- System vs user apps
-
-## Use Cases
-
-- **Digital wellbeing apps**: Monitor screen time and app usage
-- **Parental controls**: Track children's device usage
-- **Productivity apps**: Analyze work patterns and focus time
-- **Analytics**: Understand user behavior and app engagement
-
-## Android Compatibility
-
-- **Minimum Android version**: API level 21 (Android 5.0)
-- **Advanced features**: API level 29+ (Android 10+) for enhanced statistics
-- **Package queries**: API level 30+ (Android 11+) requires QUERY_ALL_PACKAGES
-
-## Security Considerations
-
-- Usage stats permission is sensitive and requires user consent
-- Consider user privacy when collecting usage data
-- Implement proper data handling and storage practices
-- Follow Google Play policies for usage data collection
-
-## Documentation
-
-Check the [complete documentation](/docs/plugins/android-usagestatsmanager/getting-started/) for detailed implementation guides and advanced usage patterns.
+This reference is synced from `src/definitions.ts` in [capacitor-android-usagestatsmanager](https://github.com/Cap-go/capacitor-android-usagestatsmanager/).

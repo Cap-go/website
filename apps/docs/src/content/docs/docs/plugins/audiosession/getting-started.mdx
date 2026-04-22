@@ -1,71 +1,117 @@
 ---
 title: Getting Started
-description: Configure the AudioSession plugin to react to iOS audio route changes and interruptions.
+description: "Install @capgo/capacitor-audio-session and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-> ℹ️ **Platform support:** The audio session API is available on iOS. Calls on Android and the web resolve without effect so you can keep shared logic.
+```bash
+bun add @capgo/capacitor-audio-session
+bunx cap sync
+```
 
-<Steps>
-1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-plugin-audiosession" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-2. **Sync iOS platform**
-   <PackageManagers type="exec" pkg="cap" args="sync ios" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
-
-## Inspect available outputs
+## Import
 
 ```typescript
-import { AudioSession, AudioSessionPorts } from '@capgo/capacitor-plugin-audiosession';
+import { AudioSession } from '@capgo/capacitor-audio-session';
+```
 
-const outputs = await AudioSession.currentOutputs();
+## API Overview
 
-if (outputs.includes(AudioSessionPorts.BLUETOOTH_A2DP)) {
-  console.log('Bluetooth speaker connected');
+### `currentOutputs`
+
+Get the current active audio output routes.
+
+On web and non-iOS platforms, this resolves to an empty array.
+
+```typescript
+import { AudioSession } from '@capgo/capacitor-audio-session';
+
+await AudioSession.currentOutputs();
+```
+
+### `overrideOutput`
+
+Override the current audio output route.
+
+Use `speaker` to force playback through the built-in speaker, or
+`default` to restore the system-selected route.
+
+```typescript
+import { AudioSession } from '@capgo/capacitor-audio-session';
+
+await AudioSession.overrideOutput({} as OutputOverrideType);
+```
+
+## Type Reference
+
+### `AudioSessionPorts`
+Available audio output routes on iOS.
+```typescript
+export enum AudioSessionPorts {
+  AIR_PLAY = 'airplay',
+  BLUETOOTH_LE = 'bluetooth-le',
+  BLUETOOTH_HFP = 'bluetooth-hfp',
+  BLUETOOTH_A2DP = 'bluetooth-a2dp',
+  BUILT_IN_SPEAKER = 'builtin-speaker',
+  BUILT_IN_RECEIVER = 'builtin-receiver',
+  HDMI = 'hdmi',
+  HEADPHONES = 'headphones',
+  LINE_OUT = 'line-out',
 }
 ```
 
-## Override to speaker mode
-
+### `OutputOverrideType`
+Output override type. - `default`: Use the system-selected route. - `speaker`: Force playback through the built-in speaker.
 ```typescript
-import { AudioSession, OutputOverrideType } from '@capgo/capacitor-plugin-audiosession';
-
-await AudioSession.overrideOutput(OutputOverrideType.speaker);
-
-// Restore system routing when you are done
-await AudioSession.overrideOutput(OutputOverrideType.default);
+export type OutputOverrideType = 'default' | 'speaker';
 ```
 
-## Listen for route and interruption events
-
+### `OverrideResult`
+Result of an output override request.
 ```typescript
-import { AudioSession, RouteChangeReasons, InterruptionTypes } from '@capgo/capacitor-plugin-audiosession';
-
-const routeListener = await AudioSession.addListener('routeChanged', (reason) => {
-  if (reason === RouteChangeReasons.NEW_DEVICE_AVAILABLE) {
-    console.log('User connected a new audio route');
-  }
-});
-
-const interruptionListener = await AudioSession.addListener('interruption', (type) => {
-  if (type === InterruptionTypes.BEGAN) {
-    // Pause playback while we are interrupted
-  } else {
-    // Resume playback
-  }
-});
-
-// Later during cleanup
-await routeListener.remove();
-await interruptionListener.remove();
+export type OverrideResult = {
+  success: boolean;
+  message: string;
+};
 ```
 
-## Entitlements
+### `RouteChangeListener`
+Listener called when the audio route changes.
+```typescript
+export type RouteChangeListener = (reason: RouteChangeReasons) => void;
+```
 
-- **iOS**: Add any required background audio modes (e.g. `audio`, `voice`) inside `ios/App/App/Info.plist` if your app plays audio in the background.
-- **Other platforms**: No additional setup is necessary; methods will resolve with empty results.
+### `InterruptionListener`
+Listener called when the audio session is interrupted or ends.
+```typescript
+export type InterruptionListener = (type: InterruptionTypes) => void;
+```
+
+### `RouteChangeReasons`
+```typescript
+export enum RouteChangeReasons {
+  NEW_DEVICE_AVAILABLE = 'new-device-available',
+  OLD_DEVICE_UNAVAILABLE = 'old-device-unavailable',
+  CATEGORY_CHANGE = 'category-change',
+  OVERRIDE = 'override',
+  WAKE_FROM_SLEEP = 'wake-from-sleep',
+  NO_SUITABLE_ROUTE_FOR_CATEGORY = 'no-suitable-route-for-category',
+  ROUTE_CONFIGURATION_CHANGE = 'route-config-change',
+  UNKNOWN = 'unknown',
+}
+```
+
+### `InterruptionTypes`
+```typescript
+export enum InterruptionTypes {
+  BEGAN = 'began',
+  ENDED = 'ended',
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

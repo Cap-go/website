@@ -36,3 +36,11 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
     Follow the [Getting Started](/docs/plugins/passkey/getting-started/), [iOS setup](/docs/plugins/passkey/ios/), [Android setup](/docs/plugins/passkey/android/), and [backend notes](/docs/plugins/passkey/backend/).
   </Card>
 </CardGrid>
+
+## Core API
+
+- `shimWebAuthn(options?)` installs the browser-style shim immediately, with an optional HTTPS origin override.
+- `getConfiguration()` reads the resolved runtime config from `plugins.CapacitorPasskey`.
+- `autoShimWebAuthn(options?)` reads that config and installs the shim in one step during app bootstrap.
+- `createCredential(options)` and `getCredential(options)` call the native passkey APIs directly with JSON-safe WebAuthn payloads.
+- `isSupported()` reports runtime availability and `getPluginVersion()` returns the native implementation version marker.

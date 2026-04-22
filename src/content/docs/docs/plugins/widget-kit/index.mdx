@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-widget-kit"
-description: Generic WidgetKit and Live Activities bridge for Capacitor with SVG templates, timers, and action hotspots.
+description: "Capacitor plugin for generic iOS WidgetKit and Live Activities using SVG templates, declarative actions, and shared App Group persistence."
 tableOfContents: false
 next: false
 prev: false
@@ -8,38 +8,44 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Build interactive iOS widgets and Live Activities from Capacitor with shared App Group storage and declarative SVG templates.
+  tagline: "Capacitor bridge for an iOS-first WidgetKit / Live Activities plugin."
   actions:
     - text: Get started
       link: /docs/plugins/widget-kit/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-widget-kit/
       icon: external
       variant: minimal
 ---
 
-import PluginOverview from '@/components/doc/PluginOverview.astro';
+## Overview
 
-<PluginOverview
-  summary="Capgo Widget Kit gives Capacitor apps a generic bridge for WidgetKit and ActivityKit. Store raw SVG templates, bind app state into widget surfaces, attach actions to hotspots, and read back the event log from your app."
-  cards={[
-    {
-      title: 'SVG template bridge',
-      body: 'Define lock-screen and widget layouts as SVG templates with placeholder bindings for state, timers, metadata, and actions.',
-    },
-    {
-      title: 'Interactive actions',
-      body: 'Attach declarative actions to hotspots or buttons and process the resulting event log later inside the app.',
-    },
-    {
-      title: 'Timer bindings',
-      body: 'Expose countdown and timer state to the template scope without manually synchronizing every display field.',
-    },
-    {
-      title: 'Shared App Group storage',
-      body: 'Let the widget extension load resolved layouts from shared storage without knowing the internal persistence format.',
-    },
-  ]}
-/>
+Capacitor bridge for an iOS-first WidgetKit / Live Activities plugin.
+
+## Core Capabilities
+
+- `areActivitiesSupported` - Check whether the native template activity bridge can run on the current device.
+- `startTemplateActivity` - Persist a generic SVG template activity and start the matching native Live Activity bridge.
+- `updateTemplateActivity` - Replace part or all of the stored activity definition/state.
+- `endTemplateActivity` - End a running activity while optionally persisting one last state snapshot.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `areActivitiesSupported` | Check whether the native template activity bridge can run on the current device. |
+| `startTemplateActivity` | Persist a generic SVG template activity and start the matching native Live Activity bridge. |
+| `updateTemplateActivity` | Replace part or all of the stored activity definition/state. |
+| `endTemplateActivity` | End a running activity while optionally persisting one last state snapshot. |
+| `performTemplateAction` | Execute one declarative action and record the resulting event. |
+| `getTemplateActivity` | Read one activity back from the shared store. |
+| `listTemplateActivities` | List every activity currently known by the plugin. |
+| `listTemplateEvents` | List stored action events so the app can react to widget interactions later. |
+| `acknowledgeTemplateEvents` | Mark previously processed events as acknowledged. |
+| `getPluginVersion` | Return the platform implementation version marker. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-widget-kit](https://github.com/Cap-go/capacitor-widget-kit/).

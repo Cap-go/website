@@ -1,399 +1,386 @@
 ---
 title: Getting Started
-description: Learn how to install and configure the Capacitor Data Storage SQLite plugin for fast key-value storage with optional encryption.
+description: "Install @capgo/capacitor-data-storage-sqlite and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-data-storage-sqlite" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+```bash
+bun add @capgo/capacitor-data-storage-sqlite
+bunx cap sync
+```
 
-2. **Sync with native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-3. **Configure the plugin**
-
-   **Basic Storage Example:**
-   ```typescript
-   import { CapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
-
-   // Open a storage database
-   await CapacitorDataStorageSqlite.openStore({
-     database: 'myapp_storage'
-   });
-
-   // Store data
-   await CapacitorDataStorageSqlite.set({
-     key: 'user_preferences',
-     value: JSON.stringify({ theme: 'dark' })
-   });
-   ```
-
-   **Encrypted Storage Example:**
-   ```typescript
-   // Open encrypted storage
-   await CapacitorDataStorageSqlite.openStore({
-     database: 'secure_storage',
-     encrypted: true,
-     mode: 'encryption'
-   });
-
-   // Store sensitive data
-   await CapacitorDataStorageSqlite.set({
-     key: 'api_token',
-     value: 'secret_token_value'
-   });
-   ```
-
-   <Tabs>
-     <TabItem label="iOS">
-       No additional setup required for iOS.
-     </TabItem>
-     <TabItem label="Android">
-       No additional setup required for Android.
-     </TabItem>
-   </Tabs>
-
-4. **Basic operations**
-   ```typescript
-   import { CapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
-
-   // Set a value
-   await CapacitorDataStorageSqlite.set({
-     key: 'username',
-     value: 'john_doe'
-   });
-
-   // Get a value
-   const { value } = await CapacitorDataStorageSqlite.get({
-     key: 'username'
-   });
-   console.log('Username:', value); // "john_doe"
-
-   // Remove a value
-   await CapacitorDataStorageSqlite.remove({
-     key: 'username'
-   });
-
-   // Clear all data
-   await CapacitorDataStorageSqlite.clear();
-
-   // Check if key exists
-   const { result } = await CapacitorDataStorageSqlite.iskey({
-     key: 'username'
-   });
-   console.log('Key exists:', result); // true or false
-
-   // Get all keys
-   const { keys } = await CapacitorDataStorageSqlite.keys();
-   console.log('All keys:', keys);
-
-   // Get all values
-   const { values } = await CapacitorDataStorageSqlite.values();
-   console.log('All values:', values);
-   ```
-
-5. **Advanced usage**
-   ```typescript
-   import { CapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
-
-   export class StorageService {
-     private dbName = 'app_storage';
-     private isEncrypted = false;
-
-     async initialize(encrypted = false) {
-       this.isEncrypted = encrypted;
-       
-       // Open storage with options
-       await CapacitorDataStorageSqlite.openStore({
-         database: this.dbName,
-         encrypted: encrypted,
-         mode: encrypted ? 'encryption' : 'no-encryption',
-         version: 1
-       });
-     }
-
-     // Generic storage methods
-     async setObject<T>(key: string, data: T): Promise<void> {
-       const value = JSON.stringify(data);
-       await CapacitorDataStorageSqlite.set({ key, value });
-     }
-
-     async getObject<T>(key: string): Promise<T | null> {
-       try {
-         const { value } = await CapacitorDataStorageSqlite.get({ key });
-         return value ? JSON.parse(value) : null;
-       } catch (error) {
-         console.error('Error getting object:', error);
-         return null;
-       }
-     }
-
-     // Batch operations
-     async setMultiple(items: Record<string, any>): Promise<void> {
-       for (const [key, value] of Object.entries(items)) {
-         await CapacitorDataStorageSqlite.set({
-           key,
-           value: typeof value === 'string' ? value : JSON.stringify(value)
-         });
-       }
-     }
-
-     async getMultiple(keys: string[]): Promise<Record<string, any>> {
-       const results: Record<string, any> = {};
-       
-       for (const key of keys) {
-         try {
-           const { value } = await CapacitorDataStorageSqlite.get({ key });
-           results[key] = value;
-         } catch (error) {
-           results[key] = null;
-         }
-       }
-       
-       return results;
-     }
-
-     // Table management
-     async getTables(): Promise<string[]> {
-       const { tables } = await CapacitorDataStorageSqlite.tables();
-       return tables;
-     }
-
-     async deleteTable(table: string): Promise<void> {
-       await CapacitorDataStorageSqlite.deleteTable({ table });
-     }
-
-     // Import/Export functionality
-     async exportToJson(): Promise<any[]> {
-       const { keys } = await CapacitorDataStorageSqlite.keys();
-       const { values } = await CapacitorDataStorageSqlite.values();
-       
-       return keys.map((key, index) => ({
-         key,
-         value: values[index]
-       }));
-     }
-
-     async importFromJson(data: Array<{ key: string; value: string }>): Promise<void> {
-       // Clear existing data
-       await CapacitorDataStorageSqlite.clear();
-       
-       // Import new data
-       for (const item of data) {
-         await CapacitorDataStorageSqlite.set({
-           key: item.key,
-           value: item.value
-         });
-       }
-     }
-
-     // Filtering and searching
-     async keysStartingWith(prefix: string): Promise<string[]> {
-       const { keys } = await CapacitorDataStorageSqlite.keys();
-       return keys.filter(key => key.startsWith(prefix));
-     }
-
-     async filterByPrefix(prefix: string): Promise<Array<{ key: string; value: string }>> {
-       const { keys } = await CapacitorDataStorageSqlite.keys();
-       const { values } = await CapacitorDataStorageSqlite.values();
-       
-       const filtered: Array<{ key: string; value: string }> = [];
-       
-       keys.forEach((key, index) => {
-         if (key.startsWith(prefix)) {
-           filtered.push({ key, value: values[index] });
-         }
-       });
-       
-       return filtered;
-     }
-
-     // Close database when done
-     async close(): Promise<void> {
-       await CapacitorDataStorageSqlite.closeStore({
-         database: this.dbName
-       });
-     }
-   }
-
-   // Usage example
-   const storage = new StorageService();
-   await storage.initialize(true); // Use encryption
-
-   // Store user data
-   await storage.setObject('user_profile', {
-     id: 123,
-     name: 'John Doe',
-     email: 'john@example.com'
-   });
-
-   // Retrieve user data
-   const profile = await storage.getObject<any>('user_profile');
-   console.log('User profile:', profile);
-   ```
-</Steps>
-
-## API Reference
-
-### Methods
-
-#### `openStore(options: OpenStoreOptions)`
-Open a storage database.
-
-**Parameters:**
-- `options.database`: string - Database name
-- `options.encrypted`: boolean - Enable encryption
-- `options.mode`: string - 'encryption' or 'no-encryption'
-- `options.version`: number - Database version
-
-#### `closeStore(options: CloseStoreOptions)`
-Close the storage database.
-
-#### `set(options: SetOptions)`
-Store a key-value pair.
-
-**Parameters:**
-- `options.key`: string - Storage key
-- `options.value`: string - Value to store
-
-#### `get(options: GetOptions)`
-Retrieve a value by key.
-
-**Returns:** `Promise<{ value: string }>`
-
-#### `remove(options: RemoveOptions)`
-Remove a key-value pair.
-
-#### `clear()`
-Clear all data from storage.
-
-#### `iskey(options: IskeyOptions)`
-Check if a key exists.
-
-**Returns:** `Promise<{ result: boolean }>`
-
-#### `keys()`
-Get all storage keys.
-
-**Returns:** `Promise<{ keys: string[] }>`
-
-#### `values()`
-Get all storage values.
-
-**Returns:** `Promise<{ values: string[] }>`
-
-#### `tables()`
-Get all table names.
-
-**Returns:** `Promise<{ tables: string[] }>`
-
-#### `deleteTable(options: DeleteTableOptions)`
-Delete a specific table.
-
-### Interfaces
+## Import
 
 ```typescript
-interface OpenStoreOptions {
-  database: string;
-  encrypted?: boolean;
-  mode?: string;
-  version?: number;
-}
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+```
 
-interface SetOptions {
-  key: string;
-  value: string;
-}
+## API Overview
 
-interface GetOptions {
-  key: string;
-}
+### `openStore`
 
-interface RemoveOptions {
-  key: string;
+Open a store
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.openStore({} as capOpenStorageOptions);
+```
+
+### `closeStore`
+
+Close the Store
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.closeStore({} as capStorageOptions);
+```
+
+### `isStoreOpen`
+
+Check if the Store is opened
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.isStoreOpen({} as capStorageOptions);
+```
+
+### `isStoreExists`
+
+Check if the Store exists
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.isStoreExists({} as capStorageOptions);
+```
+
+### `deleteStore`
+
+Delete a store
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.deleteStore({} as capOpenStorageOptions);
+```
+
+### `setTable`
+
+Set or Add a table to an existing store
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.setTable({} as capTableStorageOptions);
+```
+
+### `set`
+
+Store a data with given key and value
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.set({} as capDataStorageOptions);
+```
+
+### `get`
+
+Retrieve a data value for a given data key
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.get({} as capDataStorageOptions);
+```
+
+### `remove`
+
+Remove a data with given key
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.remove({} as capDataStorageOptions);
+```
+
+### `clear`
+
+Clear the Data Store (delete all keys)
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.clear();
+```
+
+### `iskey`
+
+Check if a data key exists
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.iskey({} as capDataStorageOptions);
+```
+
+### `keys`
+
+Get the data key list
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.keys();
+```
+
+### `values`
+
+Get the data value list
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.values();
+```
+
+### `filtervalues`
+
+Get the data value list for filter keys
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.filtervalues({} as capFilterStorageOptions);
+```
+
+### `keysvalues`
+
+Get the data key/value pair list
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.keysvalues();
+```
+
+### `isTable`
+
+Check if a table exists
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.isTable({} as capTableStorageOptions);
+```
+
+### `tables`
+
+Get the table list for the current store
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.tables();
+```
+
+### `deleteTable`
+
+Delete a table
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.deleteTable({} as capTableStorageOptions);
+```
+
+### `importFromJson`
+
+Import a database From a JSON
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.importFromJson({} as capStoreImportOptions);
+```
+
+### `isJsonValid`
+
+Check the validity of a JSON Object
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.isJsonValid({} as capStoreImportOptions);
+```
+
+### `exportToJson`
+
+Export the given database to a JSON Object
+
+```typescript
+import { CapgoCapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+await CapgoCapacitorDataStorageSqlite.exportToJson();
+```
+
+## Type Reference
+
+### `capOpenStorageOptions`
+```typescript
+export interface capOpenStorageOptions {
+  /**
+   * The storage database name
+   */
+  database?: string; // default:
+  //  ios, android: storageSQLite
+  //  web : storageIDB
+  /**
+   * The storage table name
+   */
+  table?: string; // default:
+  //  ios, android: storage_table
+  //  web: storage_store
+  /**
+   * Set to true for database encryption
+   */
+  encrypted?: boolean; // only for ios and android
+  /***
+   * Set the mode for database encryption
+   * ["encryption", "secret","newsecret"]
+   */
+  mode?: string; // only for ios and android
 }
 ```
 
-## Platform Notes
+### `capStorageOptions`
+```typescript
+export interface capStorageOptions {
+  /**
+   * The storage name
+   */
+  database: string;
+}
+```
 
-### iOS
-- Uses SQLite3 with optional SQLCipher for encryption
-- Data persists across app updates
-- Supports iOS 11.0+
+### `capDataStorageResult`
+```typescript
+export interface capDataStorageResult {
+  /**
+   * result set to true when successful else false
+   */
+  result?: boolean;
+  /**
+   * a returned message
+   */
+  message?: string;
+}
+```
 
-### Android
-- Uses SQLite with optional SQLCipher
-- Data persists across app updates
-- Supports Android 5.0 (API 21)+
+### `capTableStorageOptions`
+```typescript
+export interface capTableStorageOptions {
+  /**
+   * The storage table name
+   */
+  table: string;
+}
+```
 
-## Common Use Cases
+### `capDataStorageOptions`
+```typescript
+export interface capDataStorageOptions {
+  /**
+   * The data name
+   */
+  key: string;
+  /**
+   * The data value when required
+   */
+  value?: string;
+}
+```
 
-1. **User Preferences**: Store app settings and preferences
-2. **Cache Management**: Cache API responses and data
-3. **Offline Storage**: Store data for offline access
-4. **Session Management**: Manage user sessions securely
-5. **Token Storage**: Securely store authentication tokens
+### `capValueResult`
+```typescript
+export interface capValueResult {
+  /**
+   * the data value for a given data key
+   */
+  value: string;
+}
+```
 
-## Best Practices
+### `capKeysResult`
+```typescript
+export interface capKeysResult {
+  /**
+   * the data key list as an Array
+   */
+  keys: string[];
+}
+```
 
-1. **Use Encryption for Sensitive Data**
-   ```typescript
-   // For sensitive data like tokens
-   await openStore({
-     database: 'secure_db',
-     encrypted: true,
-     mode: 'encryption'
-   });
-   ```
+### `capValuesResult`
+```typescript
+export interface capValuesResult {
+  /**
+   * the data values list as an Array
+   */
+  values: string[];
+}
+```
 
-2. **Organize Keys with Prefixes**
-   ```typescript
-   // Use prefixes for organization
-   await set({ key: 'user:123:profile', value: userData });
-   await set({ key: 'cache:api:users', value: apiData });
-   ```
+### `capFilterStorageOptions`
+```typescript
+export interface capFilterStorageOptions {
+  /**
+   * The filter data for filtering keys
+   *
+   * ['%filter', 'filter', 'filter%'] for
+   * [starts with filter, contains filter, ends with filter]
+   */
+  filter: string;
+}
+```
 
-3. **Handle Large Data Carefully**
-   ```typescript
-   // For large objects, consider compression
-   const compressed = compress(largeData);
-   await set({ key: 'large_data', value: compressed });
-   ```
+### `capKeysValuesResult`
+```typescript
+export interface capKeysValuesResult {
+  /**
+   * the data keys/values list as an Array of {key:string,value:string}
+   */
+  keysvalues: any[];
+}
+```
 
-4. **Regular Cleanup**
-   ```typescript
-   // Remove expired cache entries
-   const keys = await keys();
-   for (const key of keys.keys) {
-     if (key.startsWith('cache:') && isExpired(key)) {
-       await remove({ key });
-     }
-   }
-   ```
+### `capTablesResult`
+```typescript
+export interface capTablesResult {
+  /**
+   * the tables list as an Array
+   */
+  tables: string[];
+}
+```
 
-## Troubleshooting
+### `capStoreImportOptions`
+```typescript
+export interface capStoreImportOptions {
+  /**
+   * Set the JSON object to import
+   *
+   */
+  jsonstring?: string;
+}
+```
 
-**Database not opening:**
-- Check database name is valid (alphanumeric, underscores)
-- Ensure no special characters in database name
-- Verify encryption mode matches existing database
+## Source Of Truth
 
-**Data not persisting:**
-- Ensure `openStore` is called before operations
-- Check for any errors in console
-- Verify key names are strings
-
-**Performance issues:**
-- Avoid storing very large values
-- Use batch operations when possible
-- Consider using multiple databases for different data types
-
-## Related Documentation
-
-- [Migrate from Ionic Secure Storage](/docs/upgrade/from-ionic-secure-storage/)
-- [Ionic enterprise plugins migration solution](/solutions/ionic-enterprise-plugins/)
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

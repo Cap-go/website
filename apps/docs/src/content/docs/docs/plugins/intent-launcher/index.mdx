@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-intent-launcher"
-description: Launch Android intents and open system settings from your Capacitor app.
+description: "Capacitor plugin to launch Android intents and open system settings screens on Android and iOS."
 tableOfContents: false
 next: false
 prev: false
@@ -8,36 +8,39 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Start Android activities, open system settings, and interact with other apps using the Android Intent system. Requires Capacitor 8+.
-  image:
-    file: ~public/icons/plugins/intent-launcher.svg
+  tagline: "Capacitor Intent Launcher Plugin for launching Android intents and opening system settings on both Android and iOS."
   actions:
     - text: Get started
       link: /docs/plugins/intent-launcher/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-intent-launcher/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="System Settings" icon="setting">
-    Open any Android system settings screen directly from your app
-  </Card>
-  <Card title="Launch Apps" icon="external">
-    Open other installed applications by package name
-  </Card>
-  <Card title="Intent Actions" icon="rocket">
-    Execute over 65+ predefined Android intent actions
-  </Card>
-  <Card title="App Icons" icon="puzzle">
-    Retrieve application icons as base64 images
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/intent-launcher/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+Capacitor Intent Launcher Plugin for launching Android intents and opening system settings on both Android and iOS.
+
+## Core Capabilities
+
+- `startActivityAsync` - Starts an Android activity for the given action.
+- `openIOSSettings` - Opens iOS settings screen.
+- `openApplication` - Opens an application by its package name.
+- `getApplicationIconAsync` - Gets the application icon as a base64-encoded PNG string.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `startActivityAsync` | Starts an Android activity for the given action. |
+| `openIOSSettings` | Opens iOS settings screen. |
+| `openApplication` | Opens an application by its package name. |
+| `getApplicationIconAsync` | Gets the application icon as a base64-encoded PNG string. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-intent-launcher](https://github.com/Cap-go/capacitor-intent-launcher/).

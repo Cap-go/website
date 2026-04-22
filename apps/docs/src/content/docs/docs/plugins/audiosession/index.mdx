@@ -1,6 +1,6 @@
 ---
-title: "@capgo/capacitor-plugin-audiosession"
-description: Observe and control the iOS audio session from Capacitor apps to handle route changes and interruptions.
+title: "@capgo/capacitor-audio-session"
+description: "This capacitor plugin allows iOS applications to get notified audio about interrupts & route changes (for example when a headset is connected), and also query and override the audio device in use."
 tableOfContents: false
 next: false
 prev: false
@@ -8,37 +8,37 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Listen for audio route changes, react to interruptions, and reroute playback to the speaker without leaving Capacitor.
-  image:
-    file: ~public/icons/plugins/audiosession.svg
+  tagline: "iOS-only plugin to query and control the audio session output and listen to route changes and interruptions."
   actions:
     - text: Get started
       link: /docs/plugins/audiosession/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-audiosession/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-Capgo's AudioSession plugin gives you fine-grained control over the iOS AVAudioSession layer so you can gracefully handle headphones, Bluetooth devices, and unexpected interruptions.
+iOS-only plugin to query and control the audio session output and listen to route changes and interruptions.
 
-<CardGrid stagger>
-  <Card title="Route awareness" icon="rocket">
-    Detect when users plug or unplug headsets, AirPods, Bluetooth speakers, and more.
-  </Card>
-  <Card title="Speaker override" icon="setting">
-    Force playback through the built-in speaker when you need hands-free audio.
-  </Card>
-  <Card title="Interruption handling" icon="moon">
-    React to interruption events such as phone calls or Siri to pause and resume audio safely.
-  </Card>
-  <Card title="Type safety" icon="pencil">
-    Strong TypeScript definitions make it easy to build resilient audio experiences.
-  </Card>
-</CardGrid>
+## Core Capabilities
 
-This plugin targets iOS where AVAudioSession control is required. On other platforms the calls resolve without effect, letting you keep one shared code path.
+- `currentOutputs` - Get the current active audio output routes.
+- `overrideOutput` - Override the current audio output route.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `currentOutputs` | Get the current active audio output routes. |
+| `overrideOutput` | Override the current audio output route. |
+| `addListener` | Listen for audio route changes (e.g. headset connected/disconnected). |
+| `addListener` | Listen for audio session interruptions (e.g. incoming call) and their end. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-audiosession](https://github.com/Cap-go/capacitor-audiosession/).

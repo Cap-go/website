@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-file-picker"
-description: Pick files, images, videos, and directories with full native support for iOS and Android.
+description: "File picker Capacitor plugin - Pick files, images, videos, and directories."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,46 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: A comprehensive file picker plugin with native support for picking files, images, videos, and directories on iOS and Android.
-  image:
-    file: ~public/icons/plugins/file-picker.svg
+  tagline: "Capacitor File Picker Plugin interface for selecting files, images, videos, and directories."
   actions:
     - text: Get started
       link: /docs/plugins/file-picker/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-file-picker/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Multi-File Support" icon="puzzle">
-    Pick files, images, videos, or directories with a single API
-  </Card>
-  <Card title="Rich Metadata" icon="information">
-    Get file size, dimensions, duration, and more for all picked files
-  </Card>
-  <Card title="HEIC Conversion" icon="rocket">
-    Convert HEIC images to JPEG on iOS for better compatibility
-  </Card>
-  <Card title="Cross-Platform" icon="laptop">
-    Works on iOS, Android, and Web with platform-specific optimizations
-  </Card>
-</CardGrid>
+Capacitor File Picker Plugin interface for selecting files, images, videos, and directories.
+
+## Core Capabilities
+
+- `pickFiles` - Pick one or more files from the device.
+- `pickImages` - Pick one or more images from the gallery. Android/iOS only.
+- `pickVideos` - Pick one or more videos from the gallery. Android/iOS only.
+- `pickMedia` - Pick one or more images or videos from the gallery. Android/iOS only.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `pickFiles` | Pick one or more files from the device. |
+| `pickImages` | Pick one or more images from the gallery. Android/iOS only. |
+| `pickVideos` | Pick one or more videos from the gallery. Android/iOS only. |
+| `pickMedia` | Pick one or more images or videos from the gallery. Android/iOS only. |
+| `pickDirectory` | Pick a directory from the device. Android/iOS only. |
+| `convertHeicToJpeg` | Convert a HEIC image to JPEG format. iOS only. |
+| `copyFile` | Copy a file to a new location. |
+| `checkPermissions` | Check permissions for reading files. Android only. |
+| `requestPermissions` | Request permissions for reading files. Android only. |
+| `addListener` | Add a listener for the picker dismissed event. iOS only. |
+| `removeAllListeners` | Remove all listeners for this plugin. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-file-picker](https://github.com/Cap-go/capacitor-file-picker/).
