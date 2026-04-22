@@ -12,10 +12,10 @@ import MicroCard from '@/components/MicroCard.astro'
 
 <Steps>
 1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-social-login" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@capgo/capacitor-social-login" pkgManagers={['bun']} />
 
 2. **Sync with native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['bun']} />
 
 3. **Initialize in app startup**
 

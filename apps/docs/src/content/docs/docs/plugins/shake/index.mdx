@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-shake"
-description: Capacitor plugin to detect shake gestures on your device, enabling interactive shake-based features in your app.
+description: "Detect shake gesture in device."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,34 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Detect shake gestures in your app to trigger actions, show debug menus, or create interactive experiences.
-  image:
-    file: ~public/icons/plugins/shake.svg
+  tagline: "Capacitor Shake Plugin interface for detecting shake gestures on mobile devices. This plugin allows you to listen for shake events and get plugin version information."
   actions:
     - text: Get started
       link: /docs/plugins/shake/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-shake/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Simple gesture detection" icon="rocket">
-    Easily detect when users shake their device 📱
-  </Card>
-  <Card title="Customizable sensitivity" icon="setting">
-    Adjust shake detection sensitivity to your needs ⚡
-  </Card>
-  <Card title="Cross-platform" icon="laptop">
-    Works seamlessly on iOS and Android devices 🌍
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/shake/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+Capacitor Shake Plugin interface for detecting shake gestures on mobile devices. This plugin allows you to listen for shake events and get plugin version information.
+
+## Core Capabilities
+
+- `addListener` - Listen for shake event on the device.
+- `getPluginVersion` - Get the native Capacitor plugin version.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `addListener` | Listen for shake event on the device. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-shake](https://github.com/Cap-go/capacitor-shake/).

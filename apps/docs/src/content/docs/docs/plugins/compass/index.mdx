@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-compass"
-description: Read device compass heading in degrees with continuous updates and permission handling.
+description: "Native compass heading plugin for Capacitor."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,46 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Access device compass sensor for heading data with real-time updates on iOS and Android.
-  image:
-    file: ~public/icons/plugins/compass.svg
+  tagline: "Capacitor Compass Plugin interface for reading device compass heading."
   actions:
     - text: Get started
       link: /docs/plugins/compass/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-compass/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Real-time Heading" icon="rocket">
-    Get continuous compass heading updates in degrees (0-360)
-  </Card>
-  <Card title="Cross-platform" icon="puzzle">
-    Works on both iOS and Android devices with native sensor access
-  </Card>
-  <Card title="Permission Handling" icon="seti:lock">
-    Built-in permission management for location services (iOS)
-  </Card>
-  <Card title="Event-driven" icon="star">
-    Subscribe to heading changes with efficient event listeners
-  </Card>
-</CardGrid>
+Capacitor Compass Plugin interface for reading device compass heading.
+
+## Core Capabilities
+
+- `getCurrentHeading` - Get the current compass heading in degrees. On iOS, the heading is updated in the background, and the latest value is returned. On Android, the heading is calculated when the method is called using accelerometer and magnetometer sensors. Not implemented on Web.
+- `startListening` - Start listening for compass heading changes via events. This starts the compass sensors and emits 'headingChange' events.
+- `stopListening` - Stop listening for compass heading changes. This stops the compass sensors and stops emitting events.
+- `checkPermissions` - Check the current permission status for accessing compass data. On iOS, this checks location permission status. On Android, this always returns 'granted' as no permissions are required.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `getCurrentHeading` | Get the current compass heading in degrees. On iOS, the heading is updated in the background, and the latest value is returned. On Android, the heading is calculated when the method is called using accelerometer and magnetometer sensors. Not implemented on Web. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+| `startListening` | Start listening for compass heading changes via events. This starts the compass sensors and emits 'headingChange' events. |
+| `stopListening` | Stop listening for compass heading changes. This stops the compass sensors and stops emitting events. |
+| `addListener` | Add a listener for compass heading change events. |
+| `addListener` | Add a listener for compass accuracy change events. Only supported on Android. On iOS and Web, this will never emit events. |
+| `removeAllListeners` | Remove all listeners for this plugin. |
+| `checkPermissions` | Check the current permission status for accessing compass data. On iOS, this checks location permission status. On Android, this always returns 'granted' as no permissions are required. |
+| `requestPermissions` | Request permission to access compass data. On iOS, this requests location permission (required for heading data). On Android, this resolves immediately as no permissions are required. |
+| `watchAccuracy` | Start monitoring compass accuracy. On Android, this monitors the magnetometer accuracy and emits accuracyChange events. Developers can listen to these events and implement their own UI for calibration prompts. On iOS and Web, this method does nothing as compass accuracy monitoring is not available. |
+| `unwatchAccuracy` | Stop monitoring compass accuracy. This stops the accuracy monitoring. |
+| `getAccuracy` | Get the current compass accuracy level. On Android, returns the current magnetometer sensor accuracy. On iOS and Web, always returns CompassAccuracy.UNKNOWN as accuracy monitoring is not available. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-compass](https://github.com/Cap-go/capacitor-compass/).

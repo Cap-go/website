@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-ibeacon"
-description: iBeacon plugin for Capacitor - proximity detection and beacon region monitoring for location-based features.
+description: "iBeacon plugin for Capacitor - proximity detection and beacon region monitoring."
 tableOfContents: false
 next: false
 prev: false
@@ -8,39 +8,55 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Detect and monitor Bluetooth beacons for proximity-based features, indoor navigation, and location-aware experiences.
-  image:
-    file: ~public/icons/plugins/ibeacon.svg
+  tagline: "Capacitor iBeacon Plugin - Proximity detection and beacon region monitoring."
   actions:
     - text: Get started
       link: /docs/plugins/ibeacon/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-ibeacon/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Beacon Monitoring" icon="star">
-    Monitor beacon regions and get notified when entering or exiting 🎯
-  </Card>
-  <Card title="Beacon Ranging" icon="rocket">
-    Detect nearby beacons and measure their distance in real-time 📡
-  </Card>
-  <Card title="Background Detection" icon="setting">
-    Monitor beacons even when app is in background 🔔
-  </Card>
-  <Card title="Beacon Advertising" icon="puzzle">
-    Turn your device into an iBeacon transmitter (iOS only) 📱
-  </Card>
-  <Card title="Cross-platform" icon="puzzle">
-    Works on both iOS and Android with native beacon libraries 📱
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/ibeacon/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+Capacitor iBeacon Plugin - Proximity detection and beacon region monitoring.
+
+## Core Capabilities
+
+- `startMonitoringForRegion` - Start monitoring for a beacon region. Triggers events when entering/exiting the region.
+- `stopMonitoringForRegion` - Stop monitoring for a beacon region.
+- `startRangingBeaconsInRegion` - Start ranging beacons in a region. Provides continuous distance updates.
+- `stopRangingBeaconsInRegion` - Stop ranging beacons in a region.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `startMonitoringForRegion` | Start monitoring for a beacon region. Triggers events when entering/exiting the region. |
+| `stopMonitoringForRegion` | Stop monitoring for a beacon region. |
+| `startRangingBeaconsInRegion` | Start ranging beacons in a region. Provides continuous distance updates. |
+| `stopRangingBeaconsInRegion` | Stop ranging beacons in a region. |
+| `startAdvertising` | Start advertising the device as an iBeacon (iOS only). |
+| `stopAdvertising` | Stop advertising the device as an iBeacon (iOS only). |
+| `requestWhenInUseAuthorization` | Request "When In Use" location authorization (required for ranging/monitoring). |
+| `requestAlwaysAuthorization` | Request "Always" location authorization (required for background monitoring). |
+| `getAuthorizationStatus` | Get current location authorization status. |
+| `isBluetoothEnabled` | Check if Bluetooth is enabled on the device. |
+| `isRangingAvailable` | Check if ranging is available on the device. |
+| `enableARMAFilter` | Enable ARMA filtering for distance calculations (Android only). |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+| `enableBackgroundMode` | Enable or disable background beacon scanning mode (Android only). This enables a foreground service for reliable background beacon detection. Must be called after requesting "Always" location authorization. |
+| `setBackgroundScanPeriod` | Configure background scan periods (Android only). Controls how often and how long the device scans for beacons when in background. |
+| `addListener` | Listen for beacon ranging events. |
+| `addListener` | Listen for region enter events. |
+| `addListener` | Listen for region exit events. |
+| `addListener` | Listen for region state determination events. |
+| `addListener` | Listen for monitoring failure events. |
+| `removeAllListeners` | Remove all listeners for this plugin. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-ibeacon](https://github.com/Cap-go/capacitor-ibeacon/).

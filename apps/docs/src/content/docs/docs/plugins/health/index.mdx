@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-health"
-description: Connect to Apple HealthKit and Health Connect from Capacitor with a unified, typed API.
+description: "Capacitor plugin to interact with data from Apple HealthKit and Health Connect."
 tableOfContents: false
 next: false
 prev: false
@@ -8,37 +8,44 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Read and write fitness metrics across iOS and Android while keeping one consistent TypeScript contract.
-  image:
-    file: ~public/icons/plugins/health.svg
+  tagline: "Capacitor plugin to interact with data from Apple HealthKit and Health Connect."
   actions:
     - text: Get started
       link: /docs/plugins/health/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-health/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-The Capgo Health plugin unifies HealthKit and Health Connect access so you can track activity, biometric metrics, and body measurements with one Capacitor integration.
+Capacitor plugin to interact with data from Apple HealthKit and Health Connect.
 
-<CardGrid stagger>
-  <Card title="Cross-platform health data" icon="rocket">
-    Support Apple HealthKit and Android Health Connect out of the box.
-  </Card>
-  <Card title="Granular permissions" icon="approve-check">
-    Request separate read/write scopes and react to authorization changes.
-  </Card>
-  <Card title="Consistent units" icon="star">
-    Work with normalized data types like `steps`, `heartRate`, and `weight`.
-  </Card>
-  <Card title="Real-time writes" icon="rocket">
-    Save samples back to the user's health store when they log activity.
-  </Card>
-</CardGrid>
+## Core Capabilities
 
-Follow the getting started guide to enable platform capabilities, gather consent, and start syncing metrics.
+- `isAvailable` - Returns whether the current platform supports the native health SDK.
+- `requestAuthorization` - Requests read/write access to the provided data types.
+- `checkAuthorization` - Checks authorization status for the provided data types without prompting the user.
+- `readSamples` - Reads samples for the given data type within the specified time frame.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `isAvailable` | Returns whether the current platform supports the native health SDK. |
+| `requestAuthorization` | Requests read/write access to the provided data types. |
+| `checkAuthorization` | Checks authorization status for the provided data types without prompting the user. |
+| `readSamples` | Reads samples for the given data type within the specified time frame. |
+| `saveSample` | Writes a single sample to the native health store. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+| `openHealthConnectSettings` | Opens the Health Connect settings screen (Android only). On iOS, this method does nothing. |
+| `showPrivacyPolicy` | Shows the app's privacy policy for Health Connect (Android only). On iOS, this method does nothing. |
+| `queryWorkouts` | Queries workout sessions from the native health store. Supported on iOS (HealthKit) and Android (Health Connect). |
+| `queryAggregated` | Queries aggregated health data from the native health store. Aggregates data into time buckets (hour, day, week, month) with operations like sum, average, min, or max. This is more efficient than fetching individual samples for large date ranges. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-health](https://github.com/Cap-go/capacitor-health/).

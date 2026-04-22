@@ -10,10 +10,10 @@ import { Steps } from '@astrojs/starlight/components';
 
 <Steps>
 1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-app-attest" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@capgo/capacitor-app-attest" pkgManagers={['bun']} />
 
 2. **Sync native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['bun']} />
 
 3. **Configure platform requirements**
    - Complete [iOS setup](/docs/plugins/app-attest/ios/) for App Attest capability and backend verification flow.

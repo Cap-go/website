@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-gtm"
-description: Integrate Google Tag Manager into your Capacitor applications with official SDK support for iOS and Android.
+description: "Google Tag manager plugin for Capacitor."
 tableOfContents: false
 next: false
 prev: false
@@ -8,39 +8,40 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Integrate Google Tag Manager into your mobile applications with the official SDK for comprehensive analytics tracking.
-  image:
-    file: ~public/icons/plugins/gtm.svg
+  tagline: "The main interface for the Google Tag Manager plugin."
   actions:
     - text: Get started
       link: /docs/plugins/gtm/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-gtm/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Official SDK" icon="star">
-    Uses official Google Tag Manager SDK for iOS and Android 🏆
-  </Card>
-  <Card title="Event Tracking" icon="rocket">
-    Push events to dataLayer with custom parameters 📊
-  </Card>
-  <Card title="User Properties" icon="setting">
-    Set and manage user properties for segmentation 👤
-  </Card>
-  <Card title="Container Management" icon="document">
-    Initialize and manage GTM containers with ease 📦
-  </Card>
-  <Card title="DataLayer Access" icon="magnifier">
-    Get values from container configuration 🔍
-  </Card>
-  <Card title="Getting Started" icon="open-book">
-    Check the [Getting Started Guide](/docs/plugins/gtm/getting-started/) to install and configure the plugin.
-  </Card>
-</CardGrid>
+The main interface for the Google Tag Manager plugin.
+
+## Core Capabilities
+
+- `initialize` - Initializes Google Tag Manager with the specified container ID.
+- `push` - Pushes an event to the Google Tag Manager dataLayer.
+- `setUserProperty` - Sets a user property in the Google Tag Manager dataLayer.
+- `getValue` - Gets a value from the Google Tag Manager dataLayer. Searches through the dataLayer for the most recent value of the specified key.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `initialize` | Initializes Google Tag Manager with the specified container ID. |
+| `push` | Pushes an event to the Google Tag Manager dataLayer. |
+| `setUserProperty` | Sets a user property in the Google Tag Manager dataLayer. |
+| `getValue` | Gets a value from the Google Tag Manager dataLayer. Searches through the dataLayer for the most recent value of the specified key. |
+| `reset` | Resets the Google Tag Manager instance and clears all data. This will remove all data from the dataLayer and require re-initialization. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-gtm](https://github.com/Cap-go/capacitor-gtm/).

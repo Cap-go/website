@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-intercom"
-description: Add Intercom messaging, help center, and customer support features to your Capacitor app with native iOS and Android SDK integration.
+description: "Intercom Capacitor plugin."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,61 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Integrate Intercom in your Capacitor app for in-app messaging, support experiences, and customer engagement.
-  image:
-    file: ~public/icons/plugins/intercom.svg
+  tagline: "Intercom Capacitor plugin."
   actions:
     - text: Get started
       link: /docs/plugins/intercom/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-intercom/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Native Messaging" icon="comment">
-    Bring in-app Intercom chats, help center access, and support workflows to your app.
-  </Card>
-  <Card title="Cross-Platform" icon="external">
-    Full native implementation on iOS and Android for production-grade customer support.
-  </Card>
-  <Card title="Feature Rich" icon="star">
-    Support for messenger, help center, carousels, articles, surveys, and unread badge tracking.
-  </Card>
-  <Card title="Documentation" icon="open-book">
-    See the [Getting started guide](/docs/plugins/intercom/getting-started/) for setup and API examples.
-  </Card>
-</CardGrid>
+Intercom Capacitor plugin.
+
+## Core Capabilities
+
+- `loadWithKeys` - Initialize Intercom with API keys at runtime. Use this if you prefer not to configure keys in capacitor.config.
+- `registerIdentifiedUser` - Register a known user with Intercom. At least one of userId or email must be provided.
+- `registerUnidentifiedUser` - Register an anonymous user with Intercom.
+- `updateUser` - Update user attributes in Intercom.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `loadWithKeys` | Initialize Intercom with API keys at runtime. Use this if you prefer not to configure keys in capacitor.config. |
+| `registerIdentifiedUser` | Register a known user with Intercom. At least one of userId or email must be provided. |
+| `registerUnidentifiedUser` | Register an anonymous user with Intercom. |
+| `updateUser` | Update user attributes in Intercom. |
+| `logout` | Log the user out of Intercom. |
+| `logEvent` | Log a custom event in Intercom. |
+| `displayMessenger` | Open the Intercom messenger. |
+| `displayMessageComposer` | Open the message composer with a pre-filled message. |
+| `displayHelpCenter` | Open the Intercom help center. |
+| `hideMessenger` | Hide the Intercom messenger. |
+| `displayLauncher` | Show the Intercom launcher button. |
+| `hideLauncher` | Hide the Intercom launcher button. |
+| `displayInAppMessages` | Enable in-app messages from Intercom. |
+| `hideInAppMessages` | Disable in-app messages from Intercom. |
+| `displayCarousel` | Display a specific Intercom carousel. |
+| `displayArticle` | Display a specific Intercom article. |
+| `displaySurvey` | Display a specific Intercom survey. |
+| `setUserHash` | Set the HMAC for identity verification. |
+| `setUserJwt` | Set JWT for secure messenger authentication. |
+| `setBottomPadding` | Set the bottom padding for the Intercom messenger UI. |
+| `sendPushTokenToIntercom` | Send a push notification token to Intercom. |
+| `receivePush` | Handle a received Intercom push notification. |
+| `getUnreadConversationCount` | Get the number of unread conversations for the current user. |
+| `addListener` | Listen for when the Intercom window is shown. |
+| `addListener` | Listen for when the Intercom window is hidden. |
+| `addListener` | Listen for changes in the unread conversation count. |
+| `removeAllListeners` | Remove all event listeners. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-intercom](https://github.com/Cap-go/capacitor-intercom/).

@@ -1,85 +1,317 @@
 ---
 title: Getting Started
-description: Enable HealthKit and Health Connect access with the Capgo Health plugin.
+description: "Install @capgo/capacitor-health and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the plugin**
-   <PackageManagers pkg="@capgo/capacitor-health" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-2. **Sync native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
-
-## iOS configuration
-
-- Open `ios/App/App.xcworkspace` in Xcode and enable the **HealthKit** capability.
-- Provide usage descriptions in `Info.plist`:
-
-```xml
-<key>NSHealthShareUsageDescription</key>
-<string>This app reads your health metrics to personalize your experience.</string>
-<key>NSHealthUpdateUsageDescription</key>
-<string>This app writes health data that you explicitly record.</string>
+```bash
+bun add @capgo/capacitor-health
+bunx cap sync
 ```
 
-## Android configuration
+## Import
 
-Health data is powered by [Health Connect](https://developer.android.com/health-and-fitness/guides/health-connect). Make sure:
+```typescript
+import { Health } from '@capgo/capacitor-health';
+```
 
-- `minSdkVersion` is **26 or higher** (Capacitor 5 already satisfies this).
-- Users have Health Connect installed (Android 14+ bundles it; earlier versions require a Play Store download).
-- You guide users through the runtime permission UI when prompting for access.
+## API Overview
 
-## Check availability and request access
+### `isAvailable`
+
+Returns whether the current platform supports the native health SDK.
 
 ```typescript
 import { Health } from '@capgo/capacitor-health';
 
-const { available, reason } = await Health.isAvailable();
-if (!available) {
-  console.warn('Health APIs unavailable:', reason);
-  return;
+await Health.isAvailable();
+```
+
+### `requestAuthorization`
+
+Requests read/write access to the provided data types.
+
+```typescript
+import { Health } from '@capgo/capacitor-health';
+
+await Health.requestAuthorization({} as AuthorizationOptions);
+```
+
+### `checkAuthorization`
+
+Checks authorization status for the provided data types without prompting the user.
+
+```typescript
+import { Health } from '@capgo/capacitor-health';
+
+await Health.checkAuthorization({} as AuthorizationOptions);
+```
+
+### `readSamples`
+
+Reads samples for the given data type within the specified time frame.
+
+```typescript
+import { Health } from '@capgo/capacitor-health';
+
+await Health.readSamples({} as QueryOptions);
+```
+
+### `saveSample`
+
+Writes a single sample to the native health store.
+
+```typescript
+import { Health } from '@capgo/capacitor-health';
+
+await Health.saveSample({} as WriteSampleOptions);
+```
+
+### `openHealthConnectSettings`
+
+Opens the Health Connect settings screen (Android only).
+On iOS, this method does nothing.
+
+Use this to direct users to manage their Health Connect permissions
+or to install Health Connect if not available.
+
+```typescript
+import { Health } from '@capgo/capacitor-health';
+
+await Health.openHealthConnectSettings();
+```
+
+### `showPrivacyPolicy`
+
+Shows the app's privacy policy for Health Connect (Android only).
+On iOS, this method does nothing.
+
+This displays the same privacy policy screen that Health Connect shows
+when the user taps "Privacy policy" in the permissions dialog.
+
+The privacy policy URL can be configured by adding a string resource
+named "health_connect_privacy_policy_url" in your app's strings.xml,
+or by placing an HTML file at www/privacypolicy.html in your assets.
+
+```typescript
+import { Health } from '@capgo/capacitor-health';
+
+await Health.showPrivacyPolicy();
+```
+
+### `queryWorkouts`
+
+Queries workout sessions from the native health store.
+Supported on iOS (HealthKit) and Android (Health Connect).
+
+```typescript
+import { Health } from '@capgo/capacitor-health';
+
+await Health.queryWorkouts({} as QueryWorkoutsOptions);
+```
+
+### `queryAggregated`
+
+Queries aggregated health data from the native health store.
+Aggregates data into time buckets (hour, day, week, month) with operations like sum, average, min, or max.
+This is more efficient than fetching individual samples for large date ranges.
+
+Supported on iOS (HealthKit) and Android (Health Connect).
+
+```typescript
+import { Health } from '@capgo/capacitor-health';
+
+await Health.queryAggregated({} as QueryAggregatedOptions);
+```
+
+## Type Reference
+
+### `AvailabilityResult`
+```typescript
+export interface AvailabilityResult {
+  available: boolean;
+  /** Platform specific details (for debugging/diagnostics). */
+  platform?: 'ios' | 'android' | 'web';
+  reason?: string;
 }
-
-await Health.requestAuthorization({
-  read: ['steps', 'heartRate', 'weight'],
-  write: ['weight'],
-});
 ```
 
-## Read samples
-
+### `AuthorizationOptions`
 ```typescript
-const { samples } = await Health.readSamples({
-  dataType: 'steps',
-  startDate: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-  endDate: new Date().toISOString(),
-  limit: 200,
-});
-
-samples.forEach((sample) => {
-  console.log(sample.value, sample.startDate, sample.endDate);
-});
+export interface AuthorizationOptions {
+  /** Data types that should be readable after authorization. */
+  read?: HealthDataType[];
+  /** Data types that should be writable after authorization. */
+  write?: HealthDataType[];
+}
 ```
 
-## Write samples
-
+### `AuthorizationStatus`
 ```typescript
-await Health.saveSample({
-  dataType: 'weight',
-  value: 74.6,
-  startDate: new Date().toISOString(),
-});
+export interface AuthorizationStatus {
+  readAuthorized: HealthDataType[];
+  readDenied: HealthDataType[];
+  writeAuthorized: HealthDataType[];
+  writeDenied: HealthDataType[];
+}
 ```
 
-## Authorization management
+### `QueryOptions`
+```typescript
+export interface QueryOptions {
+  /** The type of data to retrieve from the health store. */
+  dataType: HealthDataType;
+  /** Inclusive ISO 8601 start date (defaults to now - 1 day). */
+  startDate?: string;
+  /** Exclusive ISO 8601 end date (defaults to now). */
+  endDate?: string;
+  /** Maximum number of samples to return (defaults to 100). */
+  limit?: number;
+  /** Return results sorted ascending by start date (defaults to false). */
+  ascending?: boolean;
+}
+```
 
-- Use `checkAuthorization()` to verify current read/write scopes and adjust your UI.
-- Handle denials gracefully by explaining why the data enhances the experience and offering a retry.
-- Always respect the user's privacy and only request the minimum scopes your feature requires.
+### `ReadSamplesResult`
+```typescript
+export interface ReadSamplesResult {
+  samples: HealthSample[];
+}
+```
+
+### `WriteSampleOptions`
+```typescript
+export interface WriteSampleOptions {
+  dataType: HealthDataType;
+  value: number;
+  /**
+   * Optional unit override. If omitted, the default unit for the data type is used
+   * (count for `steps`, meter for `distance`, kilocalorie for `calories`, bpm for `heartRate`, kilogram for `weight`).
+   */
+  unit?: HealthUnit;
+  /** ISO 8601 start date for the sample. Defaults to now. */
+  startDate?: string;
+  /** ISO 8601 end date for the sample. Defaults to startDate. */
+  endDate?: string;
+  /** Metadata key-value pairs forwarded to the native APIs where supported. */
+  metadata?: Record<string, string>;
+  /** For blood pressure data, the systolic value in mmHg. Required when dataType is 'bloodPressure'. */
+  systolic?: number;
+  /** For blood pressure data, the diastolic value in mmHg. Required when dataType is 'bloodPressure'. */
+  diastolic?: number;
+}
+```
+
+### `QueryWorkoutsOptions`
+```typescript
+export interface QueryWorkoutsOptions {
+  /** Optional workout type filter. If omitted, all workout types are returned. */
+  workoutType?: WorkoutType;
+  /** Inclusive ISO 8601 start date (defaults to now - 1 day). */
+  startDate?: string;
+  /** Exclusive ISO 8601 end date (defaults to now). */
+  endDate?: string;
+  /** Maximum number of workouts to return (defaults to 100). */
+  limit?: number;
+  /** Return results sorted ascending by start date (defaults to false). */
+  ascending?: boolean;
+  /**
+   * Anchor for pagination. Use the anchor returned from a previous query to continue from that point.
+   * On iOS, this is the ISO 8601 cursor returned by the previous query. On Android, this uses
+   * Health Connect's pageToken.
+   * Omit this parameter to start from the beginning.
+   */
+  anchor?: string;
+}
+```
+
+### `QueryWorkoutsResult`
+```typescript
+export interface QueryWorkoutsResult {
+  workouts: Workout[];
+  /**
+   * Anchor for the next page of results. Pass this value as the anchor parameter in the next query
+   * to continue pagination. If undefined or null, there are no more results.
+   */
+  anchor?: string;
+}
+```
+
+### `QueryAggregatedOptions`
+```typescript
+export interface QueryAggregatedOptions {
+  /** The type of data to aggregate from the health store. */
+  dataType: HealthDataType;
+  /** Inclusive ISO 8601 start date (defaults to now - 1 day). */
+  startDate?: string;
+  /** Exclusive ISO 8601 end date (defaults to now). */
+  endDate?: string;
+  /** Time bucket for aggregation (defaults to 'day'). */
+  bucket?: BucketType;
+  /** Aggregation operation to perform (defaults to 'sum'). */
+  aggregation?: AggregationType;
+}
+```
+
+### `QueryAggregatedResult`
+```typescript
+export interface QueryAggregatedResult {
+  samples: AggregatedSample[];
+}
+```
+
+### `HealthDataType`
+```typescript
+export type HealthDataType =
+  | 'steps'
+  | 'distance'
+  | 'calories'
+  | 'heartRate'
+  | 'weight'
+  | 'sleep'
+  | 'respiratoryRate'
+  | 'oxygenSaturation'
+  | 'restingHeartRate'
+  | 'heartRateVariability'
+  | 'bloodPressure'
+  | 'bloodGlucose'
+  | 'bodyTemperature'
+  | 'height'
+  | 'flightsClimbed'
+  | 'exerciseTime'
+  | 'distanceCycling'
+  | 'bodyFat'
+  | 'basalBodyTemperature'
+  | 'basalCalories'
+  | 'totalCalories'
+  | 'mindfulness'
+  | 'workouts';
+```
+
+### `HealthSample`
+```typescript
+export interface HealthSample {
+  dataType: HealthDataType;
+  value: number;
+  unit: HealthUnit;
+  startDate: string;
+  endDate: string;
+  sourceName?: string;
+  sourceId?: string;
+  /** Platform-specific unique identifier (HealthKit UUID on iOS, Health Connect metadata ID on Android). */
+  platformId?: string;
+  /** For sleep data, indicates the sleep state (e.g., 'asleep', 'awake', 'rem', 'deep', 'light'). */
+  sleepState?: SleepState;
+  /** For blood pressure data, the systolic value in mmHg. */
+  systolic?: number;
+  /** For blood pressure data, the diastolic value in mmHg. */
+  diastolic?: number;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

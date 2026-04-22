@@ -1,259 +1,83 @@
 ---
 title: Getting Started
-description: Learn how to install and configure the Autofill Save Password plugin for seamless password management in your Capacitor app.
+description: "Install @capgo/capacitor-autofill-save-password and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+## Install
 
-## Installation
-
-<Tabs>
-  <TabItem label="npm">
-    ```bash
-    npm install @capgo/capacitor-autofill-save-password
-    npx cap sync
-    ```
-  </TabItem>
-  <TabItem label="yarn">
-    ```bash
-    yarn add @capgo/capacitor-autofill-save-password
-    npx cap sync
-    ```
-  </TabItem>
-  <TabItem label="pnpm">
-    ```bash
-    pnpm add @capgo/capacitor-autofill-save-password
-    npx cap sync
-    ```
-  </TabItem>
-  <TabItem label="bun">
-    ```bash
-    bun add @capgo/capacitor-autofill-save-password
-    npx cap sync
-    ```
-  </TabItem>
-</Tabs>
-
-## Platform Support
-
-- **iOS**: Full support (iOS 18.3 and older versions)
-- **Android**: Work in progress
-
-## Platform Configuration
-
-### iOS
-
-#### 1. Associated Domains Setup
-
-Configure associated domains in your Apple Developer account and add them to your `App.entitlements` file:
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>com.apple.developer.associated-domains</key>
-    <array>
-        <string>webcredentials:yourdomain.com</string>
-        <string>webcredentials:www.yourdomain.com</string>
-    </array>
-</dict>
-</plist>
+```bash
+bun add @capgo/capacitor-autofill-save-password
+bunx cap sync
 ```
 
-#### 2. Web Credential Configuration
+## Import
 
-Add a `.well-known/apple-app-site-association` file to your website:
-
-```json
-{
-  "webcredentials": {
-    "apps": [
-      "TEAMID.com.yourcompany.yourapp"
-    ]
-  }
-}
+```typescript
+import { SavePassword } from '@capgo/capacitor-autofill-save-password';
 ```
 
-### Android (Future Support)
+## API Overview
 
-#### 1. Google Services Plugin
+### `promptDialog`
 
-Add to `android/app/build.gradle`:
-
-```kotlin
-apply plugin: 'com.google.gms.google-services'
-```
-
-#### 2. Domain Configuration
-
-Add to `android/app/src/main/res/values/strings.xml`:
-
-```xml
-<resources>
-    <string name="asset_statements">
-        [{
-            "relation": ["delegate_permission/common.handle_all_urls"],
-            "target": {
-                "namespace": "web",
-                "site": "https://yourdomain.com"
-            }
-        }]
-    </string>
-</resources>
-```
-
-## Usage Example
+Save a password to the keychain.
 
 ```typescript
 import { SavePassword } from '@capgo/capacitor-autofill-save-password';
 
-// Save password after successful login
-async function login(username: string, password: string) {
-  try {
-    // Perform your login logic here
-    const loginSuccess = await performLogin(username, password);
-
-    if (loginSuccess) {
-      // Prompt user to save password
-      await SavePassword.promptDialog({
-        username: username,
-        password: password,
-        url: 'https://yourdomain.com' // iOS only
-      });
-
-      console.log('Password saved successfully');
-    }
-  } catch (error) {
-    console.error('Failed to save password:', error);
-  }
-}
-
-// Read saved password for autofill
-async function loadSavedCredentials() {
-  try {
-    const credentials = await SavePassword.readPassword();
-
-    if (credentials.username && credentials.password) {
-      console.log('Found saved credentials');
-      // Pre-fill login form
-      return {
-        username: credentials.username,
-        password: credentials.password
-      };
-    }
-  } catch (error) {
-    console.error('Failed to read saved password:', error);
-  }
-
-  return null;
-}
+await SavePassword.promptDialog({
+  username: 'your-username',
+  password: 'your-password'
+});
 ```
 
-## API Reference
+### `readPassword`
 
-### promptDialog(options)
-
-```typescript
-promptDialog(options: SavePasswordOptions) => Promise<void>
-```
-
-Saves user credentials to the system keychain.
-
-| Param         | Type                              |
-| ------------- | --------------------------------- |
-| **`options`** | `SavePasswordOptions` |
-
-### readPassword()
-
-```typescript
-readPassword() => Promise<SavedCredentials>
-```
-
-Retrieves saved credentials from the system keychain.
-
-**Returns:** `Promise<SavedCredentials>`
-
-## Interfaces
-
-### SavePasswordOptions
-
-| Prop           | Type               | Description                                   |
-| -------------- | ------------------ | --------------------------------------------- |
-| **`username`** | `string` | The username to save                          |
-| **`password`** | `string` | The password to save                          |
-| **`url`**      | `string` | iOS only - associated domain URL (optional) |
-
-### SavedCredentials
-
-| Prop           | Type              | Description                  |
-| -------------- | ----------------- | ---------------------------- |
-| **`username`** | `string` | The saved username           |
-| **`password`** | `string` | The saved password           |
-
-## Integration with Login Flow
+Read a password from the keychain. Requires the developer to setup associated domain for the app for iOS.
 
 ```typescript
 import { SavePassword } from '@capgo/capacitor-autofill-save-password';
 
-class AuthService {
-  async login(username: string, password: string) {
-    try {
-      // Authenticate with your backend
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-      });
+await SavePassword.readPassword();
+```
 
-      if (response.ok) {
-        // Offer to save credentials
-        await this.offerToSavePassword(username, password);
-        return true;
-      }
-    } catch (error) {
-      console.error('Login failed:', error);
-    }
-    return false;
-  }
+## Type Reference
 
-  private async offerToSavePassword(username: string, password: string) {
-    try {
-      await SavePassword.promptDialog({
-        username,
-        password,
-        url: 'https://yourdomain.com'
-      });
-    } catch (error) {
-      // User declined to save or error occurred
-      console.log('Password not saved:', error);
-    }
-  }
-
-  async loadSavedCredentials() {
-    try {
-      return await SavePassword.readPassword();
-    } catch (error) {
-      console.log('No saved credentials found');
-      return null;
-    }
-  }
+### `Options`
+```typescript
+export interface Options {
+  /**
+   * The username to save.
+   */
+  username: string;
+  /**
+   * The password to save.
+   */
+  password: string;
+  /**
+   * The url to save the password for. (For example: "console.capgo.app")
+   * iOS only.
+   */
+  url?: string;
 }
 ```
 
-## Best Practices
+### `ReadPasswordResult`
+```typescript
+export interface ReadPasswordResult {
+  /**
+   * The username of the password.
+   */
+  username: string;
+  /**
+   * The password of the password.
+   */
+  password: string;
+}
+```
 
-- Only prompt to save passwords after successful authentication
-- Handle cases where users decline to save passwords gracefully
-- Implement proper error handling for keychain access failures
-- Use associated domains for seamless web-app credential sharing
-- Test autofill functionality across different iOS versions
+## Source Of Truth
 
-## Security Considerations
-
-- Credentials are stored in the system keychain with appropriate security flags
-- Associated domains ensure credentials are only accessible to authorized apps
-- Follow platform security guidelines for credential management
-- Consider implementing additional security measures for sensitive applications
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

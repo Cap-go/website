@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-file"
-description: Full-featured file system plugin for reading, writing, and managing files and directories.
+description: "Capacitor plugin for file system operations, compatible with Cordova File plugin API."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,62 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Complete file system operations with read, write, copy, move, and directory management for iOS and Android.
-  image:
-    file: ~public/icons/plugins/file.svg
+  tagline: "Capacitor File Plugin Implements file system operations similar to the Cordova File plugin."
   actions:
     - text: Get started
       link: /docs/plugins/file/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-file/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Complete File Operations" icon="rocket">
-    Read, write, append, copy, move, and delete files with ease
-  </Card>
-  <Card title="Directory Management" icon="seti:folder">
-    Create, list, and remove directories with recursive support
-  </Card>
-  <Card title="Multiple Encodings" icon="document">
-    Support for UTF-8, ASCII, UTF-16, and binary (base64) data
-  </Card>
-  <Card title="Cross-platform" icon="puzzle">
-    Works on iOS and Android with consistent API across platforms
-  </Card>
-</CardGrid>
+Capacitor File Plugin Implements file system operations similar to the Cordova File plugin.
+
+## Core Capabilities
+
+- `requestFileSystem` - Request a file system.
+- `resolveLocalFileSystemURL` - Resolve a file URL to an entry.
+- `getFile` - Get a file entry.
+- `getDirectory` - Get a directory entry.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `requestFileSystem` | Request a file system. |
+| `resolveLocalFileSystemURL` | Resolve a file URL to an entry. |
+| `getFile` | Get a file entry. |
+| `getDirectory` | Get a directory entry. |
+| `readFile` | Read a file as text or base64. |
+| `readAsDataURL` | Read a file as a data URL (base64 with MIME type prefix). |
+| `writeFile` | Write data to a file. |
+| `appendFile` | Append data to a file. |
+| `deleteFile` | Delete a file. |
+| `mkdir` | Create a directory. |
+| `rmdir` | Delete a directory. |
+| `readdir` | Read directory contents. |
+| `stat` | Get metadata about a file or directory. |
+| `getMetadata` | Get metadata about a file or directory. Alias for stat(). |
+| `rename` | Rename or move a file or directory. |
+| `move` | Move a file or directory. Alias for rename(). |
+| `copy` | Copy a file or directory. |
+| `exists` | Check if a file or directory exists. |
+| `getUri` | Get the URI for a file. |
+| `truncate` | Truncate a file to a specified size. |
+| `getDirectories` | Get all known file system directories. |
+| `getFreeDiskSpace` | Get the free disk space in bytes. |
+| `addListener` | Listen for read progress events. |
+| `addListener` | Listen for write progress events. |
+| `removeAllListeners` | Remove all event listeners. |
+| `getPluginVersion` | Get the plugin version. |
+| `checkPermissions` | Check the current permission status for file operations. On Android, this checks for external storage permissions. On iOS and web, this always returns 'granted' as no special permissions are needed. |
+| `requestPermissions` | Request permissions for file operations. On Android, this requests external storage permissions needed for accessing files outside the app's private directories. On iOS and web, this always returns 'granted' as no special permissions are needed. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-file](https://github.com/Cap-go/capacitor-file/).

@@ -1,87 +1,67 @@
 ---
 locale: en
 ---
+# Using @capgo/ricoh360
 
-# Complete Tutorial: Using @capgo/capacitor-ricoh360-camera-plugin for iOS and Android Mobile Apps
+Provides an SDK for the Ricoh360 cameras for Capacitor.
 
-The `@capgo/capacitor-ricoh360-camera-plugin` package provides native ricoh360 camera plugin functionality for your Capacitor mobile applications on iOS and Android. This comprehensive tutorial will guide you through integrating ricoh360 camera plugin features into your iOS and Android mobile apps built with Capacitor or Cordova, enabling cross-platform mobile app development with native capabilities.
-
-## What is Capacitor?
-
-Capacitor is Ionic's modern native runtime that enables developers to build native iOS apps, Android apps, and Progressive Web Apps from a single codebase. Unlike older Cordova-based mobile development, Capacitor provides direct access to native iOS and Android APIs, making it the ideal choice for building production-ready mobile applications. This Capacitor plugin brings ricoh360 camera plugin capabilities to both iOS and Android mobile platforms.
-
-## Why Use ricoh360 camera plugin in Your Capacitor Mobile App?
-
-The @capgo/capacitor-ricoh360-camera-plugin plugin enables your iOS and Android mobile applications to leverage native ricoh360 camera plugin functionality without writing platform-specific code. This Capacitor plugin provides a unified JavaScript API that works seamlessly on both iOS and Android mobile devices, making it perfect for cross-platform mobile app development.
-
-Benefits for iOS and Android mobile applications:
-- Native ricoh360 camera plugin performance on iOS and Android devices
-- Unified API for both iOS and Android mobile platforms
-- No need for separate native iOS or Android code
-- Works with Capacitor and Cordova mobile frameworks
-- Full TypeScript support for mobile app development
-- Seamless integration with existing Capacitor mobile apps
-
----
-locale: en
----
-# Using @capgo/capacitor-ricoh360-camera-plugin
-
-The `@capgo/capacitor-ricoh360-camera-plugin` package provides native functionality for your Capacitor app. Here is a tutorial on how to use this package.
-
-## Installation
-
-To install the package, run the following command:
+## Install
 
 ```bash
-npm install @capgo/capacitor-ricoh360-camera-plugin
-npx cap sync
+bun add @capgo/ricoh360
+bunx cap sync
 ```
 
-## Usage
+## What This Plugin Exposes
 
-### Basic Example
+- `initialize` - Initializes the SDK with camera URL.
+- `getCameraAsset` - Retrieves a camera asset from a URL and returns it as base64.
+- `listFiles` - Lists files stored on the camera.
+- `capturePicture` - Captures a picture.
+
+## Example Usage
+
+### `initialize`
+
+Initializes the SDK with camera URL.
 
 ```typescript
-import { capacitorricoh360cameraplugin } from '@capgo/capacitor-ricoh360-camera-plugin';
+import { Ricoh360Camera } from '@capgo/ricoh360';
 
-// Use the plugin methods here
+await Ricoh360Camera.initialize({} as InitializeOptions);
 ```
 
-For detailed API documentation, please visit the [GitHub repository](https://github.com/Cap-go/capacitor-ricoh360-camera-plugin).
+### `getCameraAsset`
 
-That's it! You have successfully integrated @capgo/capacitor-ricoh360-camera-plugin into your Capacitor app.
+Retrieves a camera asset from a URL and returns it as base64.
 
-## Platform-Specific Notes for iOS and Android
+```typescript
+import { Ricoh360Camera } from '@capgo/ricoh360';
 
-### iOS Mobile Platform
+await Ricoh360Camera.getCameraAsset({} as GetCameraAssetOptions);
+```
 
-- Compatible with iOS 10.0+ mobile devices (iPhone and iPad)
-- Uses native iOS APIs for ricoh360 camera plugin functionality
-- Optimized performance on iOS mobile platform
-- Full support for latest iOS versions
+### `listFiles`
 
-### Android Mobile Platform
+Lists files stored on the camera.
 
-- Compatible with Android 5.0 (API 21)+ mobile devices
-- Uses native Android APIs for ricoh360 camera plugin functionality
-- Works across all Android device manufacturers
-- Optimized for Android mobile platform
+```typescript
+import { Ricoh360Camera } from '@capgo/ricoh360';
 
-## Capacitor vs Cordova for Mobile Development
+await Ricoh360Camera.listFiles();
+```
 
-While this ricoh360 camera plugin plugin works with both Capacitor and Cordova mobile frameworks, Capacitor offers significant advantages for iOS and Android mobile app development:
+### `capturePicture`
 
-- **Modern Architecture**: Better performance on iOS and Android mobile platforms
-- **Direct Native Access**: Easier integration with iOS and Android native APIs
-- **Improved Tooling**: Superior development experience for mobile apps
-- **Active Development**: Regular updates for iOS and Android compatibility
-- **Better Documentation**: Comprehensive guides for mobile app development
+Captures a picture.
 
-## Conclusion
+```typescript
+import { Ricoh360Camera } from '@capgo/ricoh360';
 
-You have successfully integrated @capgo/capacitor-ricoh360-camera-plugin into your Capacitor mobile application for iOS and Android. This plugin provides native ricoh360 camera plugin capabilities for both iOS and Android mobile platforms, enabling professional mobile app development with a unified codebase.
+await Ricoh360Camera.capturePicture();
+```
 
-For detailed API documentation and advanced ricoh360 camera plugin features for mobile app development, visit the [GitHub repository](https://github.com/Cap-go/capacitor-ricoh360-camera-plugin).
+## Full Reference
 
-Whether you're building native iOS apps, Android mobile applications, or cross-platform Capacitor mobile apps, this ricoh360 camera plugin plugin provides the native capabilities you need for professional mobile app development on iOS and Android platforms.
+- GitHub: https://github.com/Cap-go/capacitor-ricoh360-camera-plugin/
+- Docs: /docs/plugins/ricoh360-camera/

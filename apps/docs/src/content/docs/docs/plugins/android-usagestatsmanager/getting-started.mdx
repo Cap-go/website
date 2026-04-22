@@ -1,172 +1,180 @@
 ---
 title: Getting Started
-description: Learn how to install and use the Android Usage Stats Manager plugin to access app usage statistics and device usage data.
+description: "Install @capgo/capacitor-android-usagestatsmanager and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+## Install
 
-## Installation
-
-<Tabs>
-  <TabItem label="npm">
-    ```bash
-    npm install @capgo/capacitor-android-usagestatsmanager
-    npx cap sync
-    ```
-  </TabItem>
-  <TabItem label="yarn">
-    ```bash
-    yarn add @capgo/capacitor-android-usagestatsmanager
-    npx cap sync
-    ```
-  </TabItem>
-  <TabItem label="pnpm">
-    ```bash
-    pnpm add @capgo/capacitor-android-usagestatsmanager
-    npx cap sync
-    ```
-  </TabItem>
-  <TabItem label="bun">
-    ```bash
-    bun add @capgo/capacitor-android-usagestatsmanager
-    npx cap sync
-    ```
-  </TabItem>
-</Tabs>
-
-## Platform Configuration
-
-### Android
-
-Add the required permissions to your `android/app/src/main/AndroidManifest.xml`:
-
-```xml
-<uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
-<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+```bash
+bun add @capgo/capacitor-android-usagestatsmanager
+bunx cap sync
 ```
 
-## Usage Example
+## Import
 
 ```typescript
-import { AndroidUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+```
 
-// Check if permission is granted
-const permissionResult = await AndroidUsageStatsManager.isUsageStatsPermissionGranted();
-if (!permissionResult.granted) {
-  // Open settings to grant permission
-  await AndroidUsageStatsManager.openUsageStatsSettings();
-  return;
+## API Overview
+
+### `queryAndAggregateUsageStats`
+
+Queries and aggregates usage stats for the given time range.
+
+```typescript
+import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000;
+const now = Date.now();
+const stats = await UsageStatsManager.queryAndAggregateUsageStats({
+  beginTime: oneDayAgo,
+  endTime: now
+});
+
+for (const [packageName, usageData] of Object.entries(stats)) {
+  console.log(`${packageName}: ${usageData.totalTimeInForeground}ms`);
 }
-
-// Query usage statistics for the last 7 days
-const statsOptions = {
-  intervalType: 0, // INTERVAL_DAILY
-  startTime: Date.now() - (7 * 24 * 60 * 60 * 1000), // 7 days ago
-  endTime: Date.now()
-};
-
-const usageStats = await AndroidUsageStatsManager.queryAndAggregateUsageStats(statsOptions);
-console.log('Usage statistics:', usageStats);
-
-// Get all installed packages
-const packages = await AndroidUsageStatsManager.queryAllPackages();
-console.log('Installed packages:', packages);
 ```
 
-## API Reference
+### `isUsageStatsPermissionGranted`
 
-### isUsageStatsPermissionGranted()
+Checks if the usage stats permission is granted.
 
 ```typescript
-isUsageStatsPermissionGranted() => Promise<{ granted: boolean }>
+import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+const { granted } = await UsageStatsManager.isUsageStatsPermissionGranted();
+if (!granted) {
+  await UsageStatsManager.openUsageStatsSettings();
+}
 ```
 
-Check if the PACKAGE_USAGE_STATS permission is granted.
+### `openUsageStatsSettings`
 
-**Returns:** `Promise<{ granted: boolean }>`
-
-### openUsageStatsSettings()
+Open the usage stats settings screen.
+This will open the usage stats settings screen, which allows the user to grant the usage stats permission.
+This will always open the settings screen, even if the permission is already granted.
 
 ```typescript
-openUsageStatsSettings() => Promise<void>
+import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+await UsageStatsManager.openUsageStatsSettings();
 ```
 
-Open the system settings page for granting usage stats permission.
+### `queryAllPackages`
 
-### queryAndAggregateUsageStats(options)
+Queries all installed packages on the device.
+Requires the QUERY_ALL_PACKAGES permission.
 
 ```typescript
-queryAndAggregateUsageStats(options: UsageStatsOptions) => Promise<UsageStatsResult>
+import { CapacitorUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+const { packages } = await UsageStatsManager.queryAllPackages();
+packages.forEach(pkg => {
+  console.log(`${pkg.appName} (${pkg.packageName}): v${pkg.versionName}`);
+});
 ```
 
-Query detailed usage statistics for installed apps.
+## Type Reference
 
-| Param         | Type                           |
-| ------------- | ------------------------------ |
-| **`options`** | `UsageStatsOptions` |
-
-**Returns:** `Promise<UsageStatsResult>`
-
-### queryAllPackages()
-
+### `UsageStatsOptions`
+Options for querying usage statistics.
 ```typescript
-queryAllPackages() => Promise<PackagesResult>
+export interface UsageStatsOptions {
+  /**
+   * The inclusive beginning of the range of stats to include in the results.
+   * Defined in terms of "Unix time"
+   */
+  beginTime: number;
+
+  /**
+   * The exclusive end of the range of stats to include in the results.
+   * Defined in terms of "Unix time"
+   */
+  endTime: number;
+}
 ```
 
-Get information about all installed packages on the device.
+### `UsageStats`
+Usage statistics for an Android app.
+```typescript
+export interface UsageStats {
+  /**
+   * The first timestamp of the usage stats.
+   */
+  firstTimeStamp: number;
+  /**
+   * The last timestamp of the usage stats.
+   */
+  lastTimeStamp: number;
+  /**
+   * Only available on Android Q (API level 29) and above.
+   * Will be undefined on lower Android versions.
+   */
+  lastTimeForegroundServiceUsed?: number;
+  /**
+   * The last time the app was used.
+   */
+  lastTimeUsed: number;
+  /**
+   * Only available on Android Q (API level 29) and above.
+   * Will be undefined on lower Android versions.
+   */
+  lastTimeVisible?: number;
+  /**
+   * The name of the package.
+   */
+  packageName: string;
+  /**
+   * Only available on Android Q (API level 29) and above.
+   * Will be undefined on lower Android versions.
+   */
+  totalForegroundServiceUsed?: number;
+  /**
+   * The total time the app was in the foreground.
+   */
+  totalTimeInForeground: number;
+  /**
+   * Only available on Android Q (API level 29) and above.
+   * Will be undefined on lower Android versions.
+   */
+  totalTimeVisible?: number;
+}
+```
 
-**Returns:** `Promise<PackagesResult>`
+### `UsageStatsPermissionResult`
+Result of a usage stats permission check.
+```typescript
+export interface UsageStatsPermissionResult {
+  /**
+   * Whether the usage stats permission is granted.
+   */
+  granted: boolean;
+}
+```
 
-## Interfaces
+### `PackageInfo`
+Represents basic information about an installed package.
+```typescript
+export interface PackageInfo {
+  /** Package name */
+  packageName: string;
+  /** App display name */
+  appName: string;
+  /** Version name string */
+  versionName: string;
+  /** Version code number */
+  versionCode: number;
+  /** First install time in milliseconds since epoch */
+  firstInstallTime: number;
+  /** Last update time in milliseconds since epoch */
+  lastUpdateTime: number;
+}
+```
 
-### UsageStatsOptions
+## Source Of Truth
 
-| Prop               | Type                | Description                                         |
-| ------------------ | ------------------- | --------------------------------------------------- |
-| **`intervalType`** | `number` | Interval type (0=DAILY, 1=WEEKLY, 2=MONTHLY, etc.) |
-| **`startTime`**    | `number` | Start time in milliseconds                          |
-| **`endTime`**      | `number` | End time in milliseconds                            |
-
-### UsageStatsResult
-
-Contains usage statistics data for each app:
-
-- App usage time and frequency
-- First and last time used
-- Total time in foreground
-- Launch count
-
-### PackagesResult
-
-Contains information about installed packages:
-
-- Package name and version
-- Installation time
-- App labels and icons
-- System vs user apps
-
-## Permission Handling
-
-The plugin requires special permissions that cannot be granted through normal runtime permission requests:
-
-1. **PACKAGE_USAGE_STATS**: Allows access to usage statistics
-2. **QUERY_ALL_PACKAGES**: Required for package information (Android 11+)
-
-Users must manually grant these permissions through system settings. Use `openUsageStatsSettings()` to direct users to the appropriate settings page.
-
-## Best Practices
-
-- Always check permission status before querying usage statistics
-- Handle permission denial gracefully with user-friendly messages
-- Consider user privacy when collecting usage data
-- Implement proper data handling and storage practices
-- Follow Google Play policies for usage data collection
-
-## Use Cases
-
-- **Digital wellbeing apps**: Monitor screen time and app usage
-- **Parental controls**: Track children's device usage
-- **Productivity apps**: Analyze work patterns and focus time
-- **Analytics**: Understand user behavior and app engagement
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

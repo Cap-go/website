@@ -10,10 +10,10 @@ import { Steps } from '@astrojs/starlight/components';
 
 <Steps>
 1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-incoming-call-kit" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@capgo/capacitor-incoming-call-kit" pkgManagers={['bun']} />
 
 2. **Sync native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['bun']} />
 
 3. **Choose your ring source**
    Decide whether the incoming-call event comes from your backend, an SDK such as Twilio or Stream, or a native push path such as FCM or PushKit.

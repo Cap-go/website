@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-appinsights"
-description: Application insights and analytics integration for Capacitor apps using the Apptopia AppInsights SDK.
+description: "A wrapper around the https://github.com/apptopia/appinsights SDK."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,37 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Track app usage, user behavior, and performance metrics with AppInsights integration for your Capacitor apps.
-  image:
-    file: ~public/icons/plugins/appinsights.svg
+  tagline: "A wrapper around the https://github.com/apptopia/appinsights SDK."
   actions:
     - text: Get started
       link: /docs/plugins/appinsights/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-appinsights/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Analytics Tracking" icon="star">
-    Track user behavior and app usage with AppInsights
-  </Card>
-  <Card title="User Identification" icon="heart">
-    Set and manage user IDs for personalized tracking
-  </Card>
-  <Card title="SDK State Management" icon="setting">
-    Monitor SDK initialization and permission status
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/appinsights/getting-started/) to integrate analytics in minutes.
-  </Card>
-</CardGrid>
+A wrapper around the https://github.com/apptopia/appinsights SDK.
+
+## Core Capabilities
+
+- `init` - Initialize the AppInsights SDK.
+- `setUserId` - Set or update the user ID after initialization.
+- `getState` - Get the current state of the SDK.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `init` | Initialize the AppInsights SDK. |
+| `setUserId` | Set or update the user ID after initialization. |
+| `getState` | Get the current state of the SDK. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-appinsights](https://github.com/Cap-go/capacitor-appinsights/).

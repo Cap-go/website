@@ -1,97 +1,67 @@
 ---
 locale: en
 ---
-
 # Using @capgo/capacitor-webview-version-checker
 
-The `@capgo/capacitor-webview-version-checker` package helps you detect outdated Android WebView versions in runtime, listen to status events, and optionally show a native prompt that redirects users to update.
+Public API for checking WebView freshness and guiding users to updates.
 
-Main use case: Browserslist-style compatibility checks.  
-By default, the plugin uses a `3%` device-share threshold with a built-in dataset generated from caniuse data at build time.
-
-## Installation
+## Install
 
 ```bash
 bun add @capgo/capacitor-webview-version-checker
 bunx cap sync
 ```
 
-## Default setup (no plugin settings)
+## What This Plugin Exposes
 
-```ts
-import type { CapacitorConfig } from '@capacitor/cli';
+- `check` - Runs a version check and returns the latest known status.
+- `startMonitoring` - Enables background monitoring (typically on app resume).
+- `stopMonitoring` - Disables monitoring.
+- `getLastStatus` - Returns the last resolved status, or `null` if no check was run yet.
 
-const config: CapacitorConfig = {
-  plugins: {
-    WebviewVersionChecker: {},
-  },
-};
+## Example Usage
 
-export default config;
-```
+### `check`
 
-## Simple config-only setup
+Runs a version check and returns the latest known status.
 
-```ts
-import type { CapacitorConfig } from '@capacitor/cli';
-
-const config: CapacitorConfig = {
-  plugins: {
-    WebviewVersionChecker: {
-      autoPromptOnOutdated: true,
-    },
-  },
-};
-
-export default config;
-```
-
-## Runtime usage
-
-```ts
+```typescript
 import { WebviewVersionChecker } from '@capgo/capacitor-webview-version-checker';
 
-await WebviewVersionChecker.addListener('webViewOutdated', (status) => {
-  console.log('Outdated WebView', status);
-});
-
-const status = await WebviewVersionChecker.check({
-  minimumMajorVersion: 124,
-  showPromptOnOutdated: true,
-});
-
-console.log('Current status', status);
+await WebviewVersionChecker.check();
 ```
 
-## Device-share compatibility mode
+### `startMonitoring`
 
-Default behavior already uses Browserslist-style compatibility (`3%` threshold + bundled dataset).
+Enables background monitoring (typically on app resume).
 
-Use this advanced mode only when you want to override dataset or threshold:
+```typescript
+import { WebviewVersionChecker } from '@capgo/capacitor-webview-version-checker';
 
-```ts
-await WebviewVersionChecker.check({
-  minimumDeviceSharePercent: 3,
-  versionShareByMajor: {
-    '137': 58.2,
-    '136': 21.3,
-    '135': 4.6,
-    '134': 2.1,
-  },
-});
+await WebviewVersionChecker.startMonitoring();
 ```
 
-`versionShareByMajor` means:
-- key = major version
-- value = share percent (`0..100`)
+### `stopMonitoring`
 
-Equivalent remote format via `versionShareApiUrl`:
-- `{ "versionShareByMajor": { "137": 54.2, "136": 23.8 } }`
-- `{ "shareByMajor": { "137": 54.2, "136": 23.8 } }`
-- `{ "versions": [{ "major": 137, "share": 54.2 }, { "version": "136.0.0.0", "percent": 23.8 }] }`
+Disables monitoring.
 
-## Platform notes
+```typescript
+import { WebviewVersionChecker } from '@capgo/capacitor-webview-version-checker';
 
-- Android only
-- Android 5-6 and 10+ use Android System WebView
-- Android 7-9 use Google Chrome as WebView provider
+await WebviewVersionChecker.stopMonitoring();
+```
+
+### `getLastStatus`
+
+Returns the last resolved status, or `null` if no check was run yet.
+
+```typescript
+import { WebviewVersionChecker } from '@capgo/capacitor-webview-version-checker';
+
+await WebviewVersionChecker.getLastStatus();
+```
+
+## Full Reference
+
+- GitHub: https://github.com/Cap-go/capacitor-webview-version-checker/
+- Docs: /docs/plugins/webview-version-checker/

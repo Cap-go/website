@@ -1,344 +1,225 @@
 ---
 title: Getting Started
-description: Learn how to install and integrate JW Player into your Capacitor app for professional video streaming capabilities.
+description: "Install @capgo/capacitor-jw-player and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+## Install
 
-## Installation
-
-<Tabs>
-  <TabItem label="npm">
-    ```bash
-    npm install @capgo/capacitor-jw-player
-    npx cap sync
-    ```
-  </TabItem>
-  <TabItem label="yarn">
-    ```bash
-    yarn add @capgo/capacitor-jw-player
-    npx cap sync
-    ```
-  </TabItem>
-  <TabItem label="pnpm">
-    ```bash
-    pnpm add @capgo/capacitor-jw-player
-    npx cap sync
-    ```
-  </TabItem>
-  <TabItem label="bun">
-    ```bash
-    bun add @capgo/capacitor-jw-player
-    npx cap sync
-    ```
-  </TabItem>
-</Tabs>
-
-## Prerequisites
-
-You'll need a JW Player account and license key to use this plugin. Sign up at [JW Player](https://www.jwplayer.com/) if you don't have one.
-
-## Platform Configuration
-
-### iOS
-
-Add your JW Player license key to your `Info.plist`:
-
-```xml
-<key>JWPlayerLicenseKey</key>
-<string>YOUR_LICENSE_KEY</string>
+```bash
+bun add @capgo/capacitor-jw-player
+bunx cap sync
 ```
 
-### Android
-
-Add your JW Player license key to `android/app/src/main/res/values/strings.xml`:
-
-```xml
-<resources>
-    <string name="jw_player_license_key">YOUR_LICENSE_KEY</string>
-</resources>
-```
-
-## Usage Example
+## Import
 
 ```typescript
-import { JWPlayer } from '@capgo/capacitor-jw-player';
-
-// Play a single video
-await JWPlayer.playVideo({
-  mediaUrl: 'https://example.com/video.mp4',
-  title: 'My Video',
-  description: 'Video description',
-  poster: 'https://example.com/poster.jpg'
-});
-
-// Play a playlist
-await JWPlayer.playPlaylist({
-  playlistUrl: 'https://example.com/playlist.json'
-});
-
-// Listen for player events
-JWPlayer.addListener('playerReady', () => {
-  console.log('Player is ready');
-});
-
-JWPlayer.addListener('play', (data) => {
-  console.log('Video started playing');
-});
-
-JWPlayer.addListener('pause', (data) => {
-  console.log('Video paused');
-});
-
-JWPlayer.addListener('complete', (data) => {
-  console.log('Video playback completed');
-});
-
-JWPlayer.addListener('error', (error) => {
-  console.error('Player error:', error);
-});
+import { JwPlayer } from '@capgo/capacitor-jw-player';
 ```
 
-## API Reference
+## API Overview
 
-### playVideo(options)
+### `initialize`
+
+Initialize the JW Player
 
 ```typescript
-playVideo(options: VideoOptions) => Promise<void>
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.initialize({} as { licenseKey: string; playerUrl?: string });
 ```
 
-Play a single video in fullscreen mode.
+### `play`
 
-| Param         | Type                    |
-| ------------- | ----------------------- |
-| **`options`** | `VideoOptions` |
-
-### playPlaylist(options)
+Play a video
 
 ```typescript
-playPlaylist(options: PlaylistOptions) => Promise<void>
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.play({} as { mediaUrl: string; mediaType: 'video' | 'playlist'; autostart?: boolean });
 ```
 
-Play a playlist in fullscreen mode.
+### `pause`
 
-| Param         | Type                        |
-| ------------- | --------------------------- |
-| **`options`** | `PlaylistOptions` |
-
-### pause()
+Pause the currently playing media
 
 ```typescript
-pause() => Promise<void>
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.pause();
 ```
 
-Pause the current video.
+### `resume`
 
-### play()
+Resume the currently paused media
 
 ```typescript
-play() => Promise<void>
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.resume();
 ```
 
-Resume video playback.
+### `stop`
 
-### seek(options)
+Stop the currently playing media
 
 ```typescript
-seek(options: { position: number }) => Promise<void>
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.stop();
 ```
 
-Seek to a specific position in the video.
+### `seekTo`
 
-| Param         | Type                         |
-| ------------- | ---------------------------- |
-| **`options`** | `{ position: number }` |
-
-### setPlaybackSpeed(options)
+Seek to a specific position in the currently playing media
 
 ```typescript
-setPlaybackSpeed(options: { speed: number }) => Promise<void>
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.seekTo({} as { time: number });
 ```
 
-Set the playback speed.
+### `setVolume`
 
-| Param         | Type                      |
-| ------------- | ------------------------- |
-| **`options`** | `{ speed: number }` |
-
-### setVolume(options)
+Set the volume level
 
 ```typescript
-setVolume(options: { volume: number }) => Promise<void>
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.setVolume({} as { volume: number });
 ```
 
-Set the audio volume (0.0 to 1.0).
+### `getPosition`
 
-| Param         | Type                       |
-| ------------- | -------------------------- |
-| **`options`** | `{ volume: number }` |
-
-### selectAudioTrack(options)
+Get the current position in the media
 
 ```typescript
-selectAudioTrack(options: { trackIndex: number }) => Promise<void>
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.getPosition();
 ```
 
-Select an audio track by index.
+### `getState`
 
-| Param         | Type                            |
-| ------------- | ------------------------------- |
-| **`options`** | `{ trackIndex: number }` |
-
-### selectCaptionTrack(options)
+Get the current player state
 
 ```typescript
-selectCaptionTrack(options: { trackIndex: number }) => Promise<void>
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.getState();
 ```
 
-Select a caption/subtitle track by index.
+### `setSpeed`
 
-| Param         | Type                            |
-| ------------- | ------------------------------- |
-| **`options`** | `{ trackIndex: number }` |
-
-### stop()
+Set the playback speed
 
 ```typescript
-stop() => Promise<void>
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.setSpeed({} as { speed: number });
 ```
 
-Stop playback and close the player.
+### `setPlaylistIndex`
 
-## Interfaces
-
-### VideoOptions
-
-| Prop              | Type               | Description                             |
-| ----------------- | ------------------ | --------------------------------------- |
-| **`mediaUrl`**    | `string` | URL of the video file                   |
-| **`title`**       | `string` | Video title (optional)                  |
-| **`description`** | `string` | Video description (optional)            |
-| **`poster`**      | `string` | URL of the poster/thumbnail (optional)  |
-| **`autoStart`**   | `boolean` | Auto-start playback (optional, default: true) |
-
-### PlaylistOptions
-
-| Prop              | Type               | Description                 |
-| ----------------- | ------------------ | --------------------------- |
-| **`playlistUrl`** | `string` | URL of the JW playlist JSON |
-| **`autoStart`**   | `boolean` | Auto-start playback (optional) |
-
-## Event Listeners
-
-### Available Events
-
-- `playerReady` - Player is initialized and ready
-- `play` - Video playback started
-- `pause` - Video playback paused
-- `complete` - Video playback completed
-- `error` - Player encountered an error
-- `seek` - User sought to a different position
-- `time` - Playback time updated
-- `bufferChange` - Buffer state changed
-
-### Event Example
+Set the current item in the playlist by index
 
 ```typescript
-// Listen for time updates
-JWPlayer.addListener('time', (data) => {
-  console.log('Current time:', data.position);
-  console.log('Duration:', data.duration);
-});
+import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-// Listen for buffer changes
-JWPlayer.addListener('bufferChange', (data) => {
-  console.log('Buffering:', data.buffering);
-});
-
-// Remove listener when done
-const listener = await JWPlayer.addListener('play', (data) => {
-  console.log('Playing');
-});
-
-// Later...
-listener.remove();
+await JwPlayer.setPlaylistIndex({} as { index: number });
 ```
 
-## Advanced Usage
+### `loadPlaylist`
 
-### Playing with Captions
+Load a playlist
 
 ```typescript
-await JWPlayer.playVideo({
-  mediaUrl: 'https://example.com/video.mp4',
-  title: 'Video with Subtitles',
-  poster: 'https://example.com/poster.jpg',
-  tracks: [
-    {
-      file: 'https://example.com/captions-en.vtt',
-      label: 'English',
-      kind: 'captions'
-    },
-    {
-      file: 'https://example.com/captions-es.vtt',
-      label: 'Spanish',
-      kind: 'captions'
-    }
-  ]
-});
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.loadPlaylist({} as { playlistUrl: string });
 ```
 
-### Custom Playback Controls
+### `loadPlaylistWithItems`
+
+Load a playlist with items
 
 ```typescript
-import { JWPlayer } from '@capgo/capacitor-jw-player';
+import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-// Start playing
-await JWPlayer.play();
-
-// Pause after 10 seconds
-setTimeout(() => {
-  JWPlayer.pause();
-}, 10000);
-
-// Seek to 30 seconds
-await JWPlayer.seek({ position: 30 });
-
-// Set playback speed to 1.5x
-await JWPlayer.setPlaybackSpeed({ speed: 1.5 });
-
-// Set volume to 50%
-await JWPlayer.setVolume({ volume: 0.5 });
+await JwPlayer.loadPlaylistWithItems({} as { playlist: any[] });
 ```
 
-## Best Practices
+### `getAudioTracks`
 
-- Always provide a poster image for better user experience
-- Handle player errors gracefully with appropriate error messages
-- Clean up event listeners when component unmounts
-- Test video playback on both iOS and Android devices
-- Use appropriate video formats (MP4 recommended)
-- Implement loading states while video initializes
-- Consider network conditions when streaming
+Get available audio tracks
 
-## Troubleshooting
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-### Video Won't Play
+await JwPlayer.getAudioTracks();
+```
 
-- Verify your JW Player license key is correct
-- Check that video URL is accessible and valid
-- Ensure proper CORS headers if using custom server
-- Test with different video formats
+### `getCurrentAudioTrack`
 
-### Fullscreen Issues
+Get the current audio track
 
-- The plugin always plays in fullscreen mode
-- Ensure proper permissions for fullscreen in your app
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
 
-### Performance
+await JwPlayer.getCurrentAudioTrack();
+```
 
-- Use appropriate video quality for target devices
-- Consider adaptive streaming for better performance
-- Implement proper buffering indicators
+### `setCurrentAudioTrack`
+
+Set the current audio track
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.setCurrentAudioTrack({} as { index: number });
+```
+
+### `getCaptions`
+
+Get the available captions/subtitles
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.getCaptions();
+```
+
+### `getCurrentCaptions`
+
+Get the current captions/subtitles track
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.getCurrentCaptions();
+```
+
+### `setCurrentCaptions`
+
+Set the current captions/subtitles track
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.setCurrentCaptions({} as { index: number });
+```
+
+### `currentPlaylist`
+
+Get the current playlist
+
+```typescript
+import { JwPlayer } from '@capgo/capacitor-jw-player';
+
+await JwPlayer.currentPlaylist();
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

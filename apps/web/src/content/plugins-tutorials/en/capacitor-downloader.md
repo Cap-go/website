@@ -1,87 +1,71 @@
 ---
 locale: en
 ---
-
-# Complete Tutorial: Using @capgo/capacitor-downloader for iOS and Android Mobile Apps
-
-The `@capgo/capacitor-downloader` package provides native downloader functionality for your Capacitor mobile applications on iOS and Android. This comprehensive tutorial will guide you through integrating downloader features into your iOS and Android mobile apps built with Capacitor or Cordova, enabling cross-platform mobile app development with native capabilities.
-
-## What is Capacitor?
-
-Capacitor is Ionic's modern native runtime that enables developers to build native iOS apps, Android apps, and Progressive Web Apps from a single codebase. Unlike older Cordova-based mobile development, Capacitor provides direct access to native iOS and Android APIs, making it the ideal choice for building production-ready mobile applications. This Capacitor plugin brings downloader capabilities to both iOS and Android mobile platforms.
-
-## Why Use downloader in Your Capacitor Mobile App?
-
-The @capgo/capacitor-downloader plugin enables your iOS and Android mobile applications to leverage native downloader functionality without writing platform-specific code. This Capacitor plugin provides a unified JavaScript API that works seamlessly on both iOS and Android mobile devices, making it perfect for cross-platform mobile app development.
-
-Benefits for iOS and Android mobile applications:
-- Native downloader performance on iOS and Android devices
-- Unified API for both iOS and Android mobile platforms
-- No need for separate native iOS or Android code
-- Works with Capacitor and Cordova mobile frameworks
-- Full TypeScript support for mobile app development
-- Seamless integration with existing Capacitor mobile apps
-
----
-locale: en
----
 # Using @capgo/capacitor-downloader
 
-The `@capgo/capacitor-downloader` package provides native functionality for your Capacitor app. Here is a tutorial on how to use this package.
+Capacitor plugin for downloading files with background support. Provides resumable downloads with progress tracking.
 
-## Installation
-
-To install the package, run the following command:
+## Install
 
 ```bash
-npm install @capgo/capacitor-downloader
-npx cap sync
+bun add @capgo/capacitor-downloader
+bunx cap sync
 ```
 
-## Usage
+## What This Plugin Exposes
 
-### Basic Example
+- `download` - Start a new download task.
+- `pause` - Pause an active download. Download can be resumed later from the same position.
+- `resume` - Resume a paused download. Continues from where it was paused.
+- `stop` - Stop and cancel a download permanently. Downloaded data will be deleted.
+
+## Example Usage
+
+### `download`
+
+Start a new download task.
 
 ```typescript
-import { capacitordownloader } from '@capgo/capacitor-downloader';
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
 
-// Use the plugin methods here
+const task = await Downloader.download({
+  id: 'my-download',
+  url: 'https://example.com/file.pdf',
+  destination: 'downloads/file.pdf'
+});
 ```
 
-For detailed API documentation, please visit the [GitHub repository](https://github.com/Cap-go/capacitor-downloader).
+### `pause`
 
-That's it! You have successfully integrated @capgo/capacitor-downloader into your Capacitor app.
+Pause an active download. Download can be resumed later from the same position.
 
-## Platform-Specific Notes for iOS and Android
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
 
-### iOS Mobile Platform
+await CapacitorDownloader.pause({} as { id: string });
+```
 
-- Compatible with iOS 10.0+ mobile devices (iPhone and iPad)
-- Uses native iOS APIs for downloader functionality
-- Optimized performance on iOS mobile platform
-- Full support for latest iOS versions
+### `resume`
 
-### Android Mobile Platform
+Resume a paused download. Continues from where it was paused.
 
-- Compatible with Android 5.0 (API 21)+ mobile devices
-- Uses native Android APIs for downloader functionality
-- Works across all Android device manufacturers
-- Optimized for Android mobile platform
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
 
-## Capacitor vs Cordova for Mobile Development
+await CapacitorDownloader.resume({} as { id: string });
+```
 
-While this downloader plugin works with both Capacitor and Cordova mobile frameworks, Capacitor offers significant advantages for iOS and Android mobile app development:
+### `stop`
 
-- **Modern Architecture**: Better performance on iOS and Android mobile platforms
-- **Direct Native Access**: Easier integration with iOS and Android native APIs
-- **Improved Tooling**: Superior development experience for mobile apps
-- **Active Development**: Regular updates for iOS and Android compatibility
-- **Better Documentation**: Comprehensive guides for mobile app development
+Stop and cancel a download permanently. Downloaded data will be deleted.
 
-## Conclusion
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
 
-You have successfully integrated @capgo/capacitor-downloader into your Capacitor mobile application for iOS and Android. This plugin provides native downloader capabilities for both iOS and Android mobile platforms, enabling professional mobile app development with a unified codebase.
+await CapacitorDownloader.stop({} as { id: string });
+```
 
-For detailed API documentation and advanced downloader features for mobile app development, visit the [GitHub repository](https://github.com/Cap-go/capacitor-downloader).
+## Full Reference
 
-Whether you're building native iOS apps, Android mobile applications, or cross-platform Capacitor mobile apps, this downloader plugin provides the native capabilities you need for professional mobile app development on iOS and Android platforms.
+- GitHub: https://github.com/Cap-go/capacitor-downloader/
+- Docs: /docs/plugins/downloader/

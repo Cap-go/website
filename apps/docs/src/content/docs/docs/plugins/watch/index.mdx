@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-watch"
-description: Capacitor plugin for bidirectional communication between iPhone and Apple Watch using WatchConnectivity framework.
+description: "Capacitor plugin for Apple Watch communication with bidirectional messaging support."
 tableOfContents: false
 next: false
 prev: false
@@ -8,53 +8,47 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Enable seamless two-way communication between your iPhone app and Apple Watch companion app.
-  image:
-    file: ~public/icons/plugins/watch.svg
+  tagline: "Apple Watch communication plugin for Capacitor. Provides bidirectional messaging between iPhone and Apple Watch using WatchConnectivity."
   actions:
     - text: Get started
       link: /docs/plugins/watch/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-watch/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Bidirectional Messaging" icon="rocket">
-    Send and receive messages between iPhone and Apple Watch in real-time
-  </Card>
-  <Card title="Background Transfers" icon="setting">
-    Queue reliable data transfers that deliver even when the watch is offline
-  </Card>
-  <Card title="Application Context" icon="laptop">
-    Sync app state with latest-value-only semantics for efficient updates
-  </Card>
-  <Card title="SwiftUI Ready" icon="seti:swift">
-    Includes watch-side SDK with ObservableObject support for reactive SwiftUI apps
-  </Card>
-</CardGrid>
+Apple Watch communication plugin for Capacitor. Provides bidirectional messaging between iPhone and Apple Watch using WatchConnectivity.
 
-## Documentation
+## Core Capabilities
 
-<CardGrid>
-  <LinkCard
-    title="Getting Started"
-    description="Install the plugin and learn the basic API for iPhone-Watch communication."
-    href="/docs/plugins/watch/getting-started/"
-  />
-  <LinkCard
-    title="Watch App Setup"
-    description="Complete step-by-step guide to creating a watchOS app in Xcode from scratch."
-    href="/docs/plugins/watch/watch-app-setup/"
-  />
-  <LinkCard
-    title="Examples & Use Cases"
-    description="Real-world examples: fitness tracker, smart home remote, notification center, and data sync."
-    href="/docs/plugins/watch/examples/"
-  />
-</CardGrid>
+- `sendMessage` - Send an interactive message to the watch. The watch must be reachable for this to succeed. Use this for time-sensitive, interactive communication.
+- `updateApplicationContext` - Update the application context shared with the watch. Only the latest context is kept - this overwrites any previous context. Use this for syncing app state that the watch needs to display.
+- `transferUserInfo` - Transfer user info to the watch. Transfers are queued and delivered in order, even if the watch is not currently reachable. Use this for important data that must be delivered reliably.
+- `replyToMessage` - Reply to a message from the watch that requested a reply. Use this in response to the messageReceivedWithReply event.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `sendMessage` | Send an interactive message to the watch. The watch must be reachable for this to succeed. Use this for time-sensitive, interactive communication. |
+| `updateApplicationContext` | Update the application context shared with the watch. Only the latest context is kept - this overwrites any previous context. Use this for syncing app state that the watch needs to display. |
+| `transferUserInfo` | Transfer user info to the watch. Transfers are queued and delivered in order, even if the watch is not currently reachable. Use this for important data that must be delivered reliably. |
+| `replyToMessage` | Reply to a message from the watch that requested a reply. Use this in response to the messageReceivedWithReply event. |
+| `getInfo` | Get information about the watch connectivity status. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+| `addListener` | Listen for messages received from the watch. |
+| `addListener` | Listen for messages from the watch that require a reply. |
+| `addListener` | Listen for application context updates from the watch. |
+| `addListener` | Listen for user info transfers from the watch. |
+| `addListener` | Listen for watch reachability changes. |
+| `addListener` | Listen for session activation state changes. |
+| `removeAllListeners` | Remove all listeners for this plugin. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-watch](https://github.com/Cap-go/capacitor-watch/).

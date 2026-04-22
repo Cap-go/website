@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-age-range"
-description: Cross-platform age range detection using Google Play Age Signals (Android) and Apple DeclaredAgeRange (iOS) for Capacitor apps.
+description: "Cross-platform age range detection. Google Play Age Signals on Android, Apple DeclaredAgeRange on iOS."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,33 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Detect user age ranges across platforms with a unified API. Uses Google Play Age Signals on Android and Apple DeclaredAgeRange on iOS for COPPA/KOSA compliance.
-  image:
-    file: ~public/icons/plugins/age-range.svg
+  tagline: "Cross-platform age range detection plugin."
   actions:
     - text: Get started
       link: /docs/plugins/age-range/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-age-range/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Cross-Platform" icon="rocket">
-    Single API wrapping Google Play Age Signals (Android) and Apple DeclaredAgeRange (iOS)
-  </Card>
-  <Card title="Privacy-Preserving" icon="puzzle">
-    No birth dates collected — only age ranges are returned, respecting user privacy
-  </Card>
-  <Card title="Regulatory Compliance" icon="rocket">
-    Meet COPPA, KOSA, and regional age-appropriate design requirements
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/age-range/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+Cross-platform age range detection plugin.
+
+## Core Capabilities
+
+- `requestAgeRange` - Request the user's age range.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `requestAgeRange` | Request the user's age range. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-age-range](https://github.com/Cap-go/capacitor-age-range/).

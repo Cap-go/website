@@ -1,82 +1,132 @@
 ---
 title: Getting Started
-description: Synchronize your player UI with native media controls using the Media Session plugin.
+description: "Install @capgo/capacitor-media-session and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the plugin**
-   <PackageManagers pkg="@capgo/capacitor-media-session" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+```bash
+bun add @capgo/capacitor-media-session
+bunx cap sync
+```
 
-2. **Sync platforms**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+## Import
 
-> ℹ️ The Media Session API is available on Android (Chrome based browsers, WebView) and many desktop browsers. On unsupported platforms the calls resolve without taking effect, so guard your UI accordingly.
+```typescript
+import { MediaSession } from '@capgo/capacitor-media-session';
+```
 
-## Publish metadata
+## API Overview
+
+### `setMetadata`
+
+Sets metadata of the currently playing media.
 
 ```typescript
 import { MediaSession } from '@capgo/capacitor-media-session';
 
-await MediaSession.setMetadata({
-  title: 'Weekly Tech Podcast',
-  artist: 'Capgo Studio',
-  album: 'Season 2',
-  artwork: [
-    { src: 'https://cdn.example.com/covers/s02e05-512.png', sizes: '512x512', type: 'image/.png' },
-  ],
-});
+await MediaSession.setMetadata({} as MetadataOptions);
 ```
 
-## Update playback state
+### `setPlaybackState`
+
+Updates the playback state of the media session.
 
 ```typescript
-await MediaSession.setPlaybackState({ playbackState: 'playing' });
+import { MediaSession } from '@capgo/capacitor-media-session';
 
-// Pause later if needed
-await MediaSession.setPlaybackState({ playbackState: 'paused' });
+await MediaSession.setPlaybackState({} as PlaybackStateOptions);
 ```
 
-## Handle media actions
+### `setActionHandler`
+
+Registers a handler for a media session action.
 
 ```typescript
-const pauseHandler = async () => {
-  player.pause();
-  await MediaSession.setPlaybackState({ playbackState: 'paused' });
-};
+import { MediaSession } from '@capgo/capacitor-media-session';
 
-await MediaSession.setActionHandler({ action: 'pause' }, pauseHandler);
-await MediaSession.setActionHandler({ action: 'play' }, async () => {
-  await player.play();
-  await MediaSession.setPlaybackState({ playbackState: 'playing' });
-});
-
-// Remove a handler when you dispose the player
-await MediaSession.setActionHandler({ action: 'pause' }, null);
+await MediaSession.setActionHandler({} as ActionHandlerOptions, {} as ActionHandler | null);
 ```
 
-## Keep position in sync
+### `setPositionState`
+
+Updates position state for the active media session.
 
 ```typescript
-const updatePosition = async () => {
-  await MediaSession.setPositionState({
-    duration: player.duration,
-    position: player.currentTime,
-    playbackRate: player.playbackRate,
-  });
-};
+import { MediaSession } from '@capgo/capacitor-media-session';
 
-player.ontimeupdate = updatePosition;
-player.onratechange = updatePosition;
+await MediaSession.setPositionState({} as PositionStateOptions);
 ```
 
-## Recommendations
+## Type Reference
 
-- Refresh metadata when the track changes so notifications and smart speakers stay up to date.
-- Throttle position updates (e.g. every 250 ms) to avoid spamming the native layer.
-- Always remove action handlers when tearing down a player instance to prevent accidental leakage.
+### `MetadataOptions`
+```typescript
+export interface MetadataOptions {
+  album?: string;
+  artist?: string;
+  artwork?: MediaImage[];
+  title?: string;
+}
+```
+
+### `PlaybackStateOptions`
+```typescript
+export interface PlaybackStateOptions {
+  playbackState: MediaSessionPlaybackState;
+}
+```
+
+### `ActionHandlerOptions`
+```typescript
+export interface ActionHandlerOptions {
+  action: MediaSessionAction;
+}
+```
+
+### `ActionHandler`
+```typescript
+export type ActionHandler = (details: ActionDetails) => void;
+```
+
+### `PositionStateOptions`
+```typescript
+export interface PositionStateOptions {
+  duration?: number;
+  playbackRate?: number;
+  position?: number;
+}
+```
+
+### `MediaImage`
+```typescript
+export interface MediaImage {
+  src: string;
+  sizes?: string;
+  type?: string;
+}
+```
+
+### `MediaSessionPlaybackState`
+```typescript
+export type MediaSessionPlaybackState = 'none' | 'paused' | 'playing';
+```
+
+### `MediaSessionAction`
+```typescript
+export type MediaSessionAction =
+  | 'play'
+  | 'pause'
+  | 'seekbackward'
+  | 'seekforward'
+  | 'previoustrack'
+  | 'nexttrack'
+  | 'seekto'
+  | 'stop';
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

@@ -1,394 +1,298 @@
 ---
-title: "Getting Started with Audio Recorder"
-description: "Learn how to integrate audio recording into your Capacitor app"
+title: Getting Started
+description: "Install @capgo/capacitor-audio-recorder and start using its current Capacitor API."
+sidebar:
+  order: 2
 ---
 
-This guide will walk you through integrating the Capacitor Audio Recorder plugin into your application.
-
-## Installation
-
-Install the plugin using npm:
+## Install
 
 ```bash
-npm install @capgo/capacitor-audio-recorder
-npx cap sync
+bun add @capgo/capacitor-audio-recorder
+bunx cap sync
 ```
 
-## iOS Configuration
-
-Add the following to your `Info.plist`:
-
-```xml
-<key>NSMicrophoneUsageDescription</key>
-<string>This app needs access to the microphone to record audio</string>
-```
-
-## Android Configuration
-
-Add the following permissions to your `AndroidManifest.xml`:
-
-```xml
-<uses-permission android:name="android.permission.RECORD_AUDIO" />
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-```
-
-## Web Configuration
-
-The plugin uses the MediaRecorder API. Requires HTTPS in production.
-
-## Basic Usage
-
-### Import the Plugin
+## Import
 
 ```typescript
-import { AudioRecorder } from '@capgo/capacitor-audio-recorder';
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
 ```
 
-### Request Permissions
+## API Overview
+
+### `startRecording`
+
+Start recording audio using the device microphone.
 
 ```typescript
-const requestPermission = async () => {
-  const permission = await AudioRecorder.requestPermissions();
-  console.log('Permission status:', permission.recordAudio);
-};
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
+
+await CapacitorAudioRecorder.startRecording();
 ```
 
-### Start Recording
+### `pauseRecording`
+
+Pause the ongoing recording. Only available on Android (API 24+), iOS, and Web.
 
 ```typescript
-const startRecording = async () => {
-  await AudioRecorder.startRecording();
-  console.log('Recording started');
-};
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
+
+await CapacitorAudioRecorder.pauseRecording();
 ```
 
-### Stop Recording
+### `resumeRecording`
+
+Resume a previously paused recording.
 
 ```typescript
-const stopRecording = async () => {
-  const result = await AudioRecorder.stopRecording();
-  console.log('Recording path:', result.filePath);
-  console.log('Duration:', result.duration);
-};
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
+
+await CapacitorAudioRecorder.resumeRecording();
 ```
 
-### Pause/Resume Recording
+### `stopRecording`
+
+Stop the current recording and persist the recorded audio.
 
 ```typescript
-const pauseRecording = async () => {
-  await AudioRecorder.pauseRecording();
-  console.log('Recording paused');
-};
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
 
-const resumeRecording = async () => {
-  await AudioRecorder.resumeRecording();
-  console.log('Recording resumed');
-};
+await CapacitorAudioRecorder.stopRecording();
 ```
 
-### Get Status
+### `cancelRecording`
+
+Cancel the current recording and discard any captured audio.
 
 ```typescript
-const getStatus = async () => {
-  const status = await AudioRecorder.getStatus();
-  console.log('Is recording:', status.isRecording);
-  console.log('Duration:', status.currentTime);
-};
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
+
+await CapacitorAudioRecorder.cancelRecording();
 ```
 
-## Complete Example
+### `getRecordingStatus`
 
-Here's a complete voice recorder implementation:
+Retrieve the current recording status.
 
 ```typescript
-import { AudioRecorder } from '@capgo/capacitor-audio-recorder';
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
 
-class VoiceRecorder {
-  private isRecording = false;
-  private isPaused = false;
-  private recordingPath: string | null = null;
+await CapacitorAudioRecorder.getRecordingStatus();
+```
 
-  async initialize() {
-    const permission = await AudioRecorder.checkPermissions();
+### `getCurrentAmplitude`
 
-    if (permission.recordAudio !== 'granted') {
-      const requested = await AudioRecorder.requestPermissions();
+Retrieve the current input amplitude (microphone level) as a normalized
+number in the `[0, 1]` range.
 
-      if (requested.recordAudio !== 'granted') {
-        throw new Error('Microphone permission denied');
-      }
-    }
-  }
+Intended for driving live visualizations such as VU meters or waveforms
+while recording. Returns `0` when no recording is active. Designed for
+UI-rate polling — a 60–100 ms interval is a good starting point for a
+waveform. Avoid calling it in a tight loop; each call crosses the
+JS/native bridge.
 
-  async startRecording() {
-    try {
-      await AudioRecorder.startRecording();
-      this.isRecording = true;
-      this.isPaused = false;
-      console.log('Recording started');
-    } catch (error) {
-      console.error('Failed to start recording:', error);
-      throw error;
-    }
-  }
+```typescript
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
 
-  async pauseRecording() {
-    if (!this.isRecording || this.isPaused) {
-      return;
-    }
+await CapacitorAudioRecorder.getCurrentAmplitude();
+```
 
-    try {
-      await AudioRecorder.pauseRecording();
-      this.isPaused = true;
-      console.log('Recording paused');
-    } catch (error) {
-      console.error('Failed to pause recording:', error);
-      throw error;
-    }
-  }
+### `checkPermissions`
 
-  async resumeRecording() {
-    if (!this.isRecording || !this.isPaused) {
-      return;
-    }
+Return the current permission state for accessing the microphone.
 
-    try {
-      await AudioRecorder.resumeRecording();
-      this.isPaused = false;
-      console.log('Recording resumed');
-    } catch (error) {
-      console.error('Failed to resume recording:', error);
-      throw error;
-    }
-  }
+```typescript
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
 
-  async stopRecording() {
-    if (!this.isRecording) {
-      return null;
-    }
+await CapacitorAudioRecorder.checkPermissions();
+```
 
-    try {
-      const result = await AudioRecorder.stopRecording();
-      this.isRecording = false;
-      this.isPaused = false;
-      this.recordingPath = result.filePath;
+### `requestPermissions`
 
-      console.log('Recording stopped');
-      console.log('File path:', result.filePath);
-      console.log('Duration:', result.duration, 'seconds');
+Request permission to access the microphone.
 
-      return result;
-    } catch (error) {
-      console.error('Failed to stop recording:', error);
-      throw error;
-    }
-  }
+```typescript
+import { CapacitorAudioRecorder } from '@capgo/capacitor-audio-recorder';
 
-  async getCurrentStatus() {
-    const status = await AudioRecorder.getStatus();
-    return {
-      isRecording: status.isRecording,
-      duration: status.currentTime,
-      isPaused: this.isPaused
-    };
-  }
+await CapacitorAudioRecorder.requestPermissions();
+```
 
-  formatDuration(seconds: number): string {
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-  }
+## Type Reference
 
-  getRecordingPath(): string | null {
-    return this.recordingPath;
-  }
+### `StartRecordingOptions`
+Options accepted by .
+```typescript
+export interface StartRecordingOptions {
+  /**
+   * The audio session category options for recording. Only available on iOS.
+   *
+   * @since 1.0.0
+   */
+  audioSessionCategoryOptions?: AudioSessionCategoryOption[];
+
+  /**
+   * The audio session mode for recording. Only available on iOS.
+   *
+   * @since 1.0.0
+   */
+  audioSessionMode?: AudioSessionMode;
+
+  /**
+   * The audio bit rate in bytes per second.
+   * Only available on Android and iOS.
+   *
+   * @since 1.0.0
+   */
+  bitRate?: number;
+
+  /**
+   * The audio sample rate in Hz.
+   * Only available on Android and iOS.
+   *
+   * @since 1.0.0
+   */
+  sampleRate?: number;
 }
-
-// Usage
-const recorder = new VoiceRecorder();
-
-// Initialize
-await recorder.initialize();
-
-// Start recording
-await recorder.startRecording();
-
-// Pause
-await recorder.pauseRecording();
-
-// Resume
-await recorder.resumeRecording();
-
-// Stop and get result
-const result = await recorder.stopRecording();
-console.log('Recording saved:', result?.filePath);
 ```
 
-## Advanced Configuration
-
-### Configure Audio Quality
-
+### `StopRecordingResult`
+Result returned by .
 ```typescript
-const startHighQualityRecording = async () => {
-  await AudioRecorder.startRecording({
-    format: 'aac',           // aac, mp3, or wav
-    sampleRate: 44100,       // 44100 Hz (CD quality)
-    channels: 2,             // Stereo
-    bitRate: 320000          // 320 kbps
-  });
-};
-```
+export interface StopRecordingResult {
+  /**
+   * The recorded audio as a Blob. Only available on Web.
+   *
+   * @since 1.0.0
+   */
+  blob?: Blob;
 
-### Configure for Voice
+  /**
+   * The duration of the recording in milliseconds.
+   *
+   * @since 1.0.0
+   */
+  duration?: number;
 
-```typescript
-const startVoiceRecording = async () => {
-  await AudioRecorder.startRecording({
-    format: 'aac',
-    sampleRate: 16000,       // 16 kHz (voice optimized)
-    channels: 1,             // Mono
-    bitRate: 64000           // 64 kbps
-  });
-};
-```
-
-## UI Integration Example
-
-```typescript
-class AudioRecorderUI {
-  private recorder: VoiceRecorder;
-  private updateInterval: any;
-
-  constructor() {
-    this.recorder = new VoiceRecorder();
-  }
-
-  async init() {
-    await this.recorder.initialize();
-    this.setupEventListeners();
-  }
-
-  setupEventListeners() {
-    const recordButton = document.getElementById('record-btn');
-    const pauseButton = document.getElementById('pause-btn');
-    const stopButton = document.getElementById('stop-btn');
-
-    recordButton?.addEventListener('click', () => this.handleRecord());
-    pauseButton?.addEventListener('click', () => this.handlePause());
-    stopButton?.addEventListener('click', () => this.handleStop());
-  }
-
-  async handleRecord() {
-    await this.recorder.startRecording();
-    this.startDurationUpdate();
-    this.updateUI('recording');
-  }
-
-  async handlePause() {
-    const status = await this.recorder.getCurrentStatus();
-
-    if (status.isPaused) {
-      await this.recorder.resumeRecording();
-      this.updateUI('recording');
-    } else {
-      await this.recorder.pauseRecording();
-      this.updateUI('paused');
-    }
-  }
-
-  async handleStop() {
-    const result = await this.recorder.stopRecording();
-    this.stopDurationUpdate();
-    this.updateUI('stopped');
-
-    if (result) {
-      this.showRecordingResult(result);
-    }
-  }
-
-  startDurationUpdate() {
-    this.updateInterval = setInterval(async () => {
-      const status = await this.recorder.getCurrentStatus();
-      this.updateDurationDisplay(status.duration);
-    }, 100);
-  }
-
-  stopDurationUpdate() {
-    if (this.updateInterval) {
-      clearInterval(this.updateInterval);
-    }
-  }
-
-  updateDurationDisplay(duration: number) {
-    const display = document.getElementById('duration');
-    if (display) {
-      display.textContent = this.recorder.formatDuration(duration);
-    }
-  }
-
-  updateUI(state: 'recording' | 'paused' | 'stopped') {
-    // Update button states, colors, etc.
-    console.log('UI state:', state);
-  }
-
-  showRecordingResult(result: any) {
-    console.log('Recording complete:', result);
-    // Show playback UI, save options, etc.
-  }
+  /**
+   * The URI pointing to the recorded file. Only available on Android and iOS.
+   *
+   * @since 1.0.0
+   */
+  uri?: string;
 }
-
-// Initialize UI
-const ui = new AudioRecorderUI();
-ui.init();
 ```
 
-## Best Practices
-
-1. **Request Permissions Early**: Check permissions before showing recording UI
-2. **Handle Interruptions**: Phone calls, alarms can interrupt recording
-3. **Manage Storage**: Clean up old recordings to save space
-4. **Provide Feedback**: Show recording status, duration, and waveform
-5. **Test on Devices**: Simulators/emulators have limited audio support
-
-## Common Issues
-
-### Permission Denied
-
+### `GetRecordingStatusResult`
+Result returned by .
 ```typescript
-const handlePermissionDenied = async () => {
-  const permission = await AudioRecorder.checkPermissions();
-
-  if (permission.recordAudio === 'denied') {
-    alert('Microphone permission is required to record audio. Please enable it in Settings.');
-  }
-};
+export interface GetRecordingStatusResult {
+  /**
+   * The current recording status.
+   *
+   * @since 1.0.0
+   */
+  status: RecordingStatus;
+}
 ```
 
-### Recording Interrupted
-
+### `GetCurrentAmplitudeResult`
+Result returned by .
 ```typescript
-// Handle app going to background
-document.addEventListener('pause', async () => {
-  const status = await recorder.getCurrentStatus();
-  if (status.isRecording) {
-    await recorder.pauseRecording();
-    // Notify user
-  }
-});
+export interface GetCurrentAmplitudeResult {
+  /**
+   * The current input amplitude normalized to the `[0, 1]` range, where `0`
+   * represents silence and `1` represents the maximum level the platform can
+   * report. The value is `0` when no recording is active.
+   *
+   * Note: the source signal differs between platforms — Android reports the
+   * peak sample amplitude since the last call, iOS reports the average power
+   * in dB converted to linear, and Web reports the RMS of the latest frame.
+   * Consumers that need cross-platform parity may want to apply a
+   * per-platform scaling curve.
+   *
+   * @since 8.1.0
+   */
+  value: number;
+}
 ```
 
-### Storage Management
-
+### `PermissionStatus`
+Permission information returned by and .
 ```typescript
-const cleanupOldRecordings = async () => {
-  // Implement cleanup logic
-  // Delete recordings older than X days
-  // Or keep only last N recordings
-};
+export interface PermissionStatus {
+  /**
+   * The permission state for audio recording.
+   *
+   * @since 1.0.0
+   */
+  recordAudio: PermissionState;
+}
 ```
 
-## Next Steps
+### `RecordingErrorEvent`
+Event emitted when an error occurs during recording.
+```typescript
+export interface RecordingErrorEvent {
+  /**
+   * The error message.
+   *
+   * @since 1.0.0
+   */
+  message: string;
+}
+```
 
-- Explore the [API Reference](https://github.com/Cap-go/capacitor-audio-recorder#api) for complete method documentation
-- Check out the [example app](https://github.com/Cap-go/capacitor-audio-recorder/tree/main/example) for advanced usage
-- See the [tutorial](/plugins/capacitor-audio-recorder) for complete implementation examples
+### `RecordingStoppedEvent`
+Event emitted when a recording completes.
+```typescript
+export type RecordingStoppedEvent = StopRecordingResult;
+```
+
+### `AudioSessionCategoryOption`
+Audio session category options available on iOS.
+```typescript
+export enum AudioSessionCategoryOption {
+  AllowAirPlay = 'ALLOW_AIR_PLAY',
+  AllowBluetooth = 'ALLOW_BLUETOOTH',
+  AllowBluetoothA2DP = 'ALLOW_BLUETOOTH_A2DP',
+  DefaultToSpeaker = 'DEFAULT_TO_SPEAKER',
+  DuckOthers = 'DUCK_OTHERS',
+  InterruptSpokenAudioAndMixWithOthers = 'INTERRUPT_SPOKEN_AUDIO_AND_MIX_WITH_OTHERS',
+  MixWithOthers = 'MIX_WITH_OTHERS',
+  OverrideMutedMicrophoneInterruption = 'OVERRIDE_MUTED_MICROPHONE_INTERRUPTION',
+}
+```
+
+### `AudioSessionMode`
+Audio session modes available on iOS.
+```typescript
+export enum AudioSessionMode {
+  Default = 'DEFAULT',
+  GameChat = 'GAME_CHAT',
+  Measurement = 'MEASUREMENT',
+  SpokenAudio = 'SPOKEN_AUDIO',
+  VideoChat = 'VIDEO_CHAT',
+  VideoRecording = 'VIDEO_RECORDING',
+  VoiceChat = 'VOICE_CHAT',
+}
+```
+
+### `RecordingStatus`
+The recording status.
+```typescript
+export enum RecordingStatus {
+  Inactive = 'INACTIVE',
+  Recording = 'RECORDING',
+  Paused = 'PAUSED',
+}
+```
+
+### `PermissionState`
+Platform permission states supported by Capacitor.
+```typescript
+export type PermissionState = 'prompt' | 'prompt-with-rationale' | 'granted' | 'denied';
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

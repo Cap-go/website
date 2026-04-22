@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-realtimekit"
-description: Cloudflare Calls integration with built-in meeting UI for video conferencing and real-time communication.
+description: "Cloudflare Calls integration for Capacitor apps with built-in UI for meetings."
 tableOfContents: false
 next: false
 prev: false
@@ -8,39 +8,35 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Add video conferencing and real-time communication to your app with Cloudflare Calls integration and built-in UI.
-  image:
-    file: ~public/icons/plugins/realtimekit.svg
+  tagline: "Capacitor RealtimeKit Plugin for Cloudflare Calls integration."
   actions:
     - text: Get started
       link: /docs/plugins/realtimekit/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-realtimekit/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Cloudflare Calls" icon="rocket">
-    Powered by Cloudflare's global infrastructure ☁️
-  </Card>
-  <Card title="Built-in Meeting UI" icon="star">
-    Ready-to-use video conferencing interface 📹
-  </Card>
-  <Card title="WebRTC Support" icon="setting">
-    High-quality real-time audio and video 🎥
-  </Card>
-  <Card title="Background Modes" icon="laptop">
-    Continue calls when app is backgrounded 🔄
-  </Card>
-  <Card title="Screen Sharing" icon="document">
-    Share screen during meetings on Android 📱
-  </Card>
-  <Card title="Getting Started" icon="open-book">
-    Check the [Getting Started Guide](/docs/plugins/realtimekit/getting-started/) to install and configure the plugin.
-  </Card>
-</CardGrid>
+Capacitor RealtimeKit Plugin for Cloudflare Calls integration.
+
+## Core Capabilities
+
+- `initialize` - Initializes the RealtimeKit plugin before using other methods.
+- `startMeeting` - Start a meeting using the built-in UI. Only available on Android and iOS.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `initialize` | Initializes the RealtimeKit plugin before using other methods. |
+| `startMeeting` | Start a meeting using the built-in UI. Only available on Android and iOS. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-realtimekit](https://github.com/Cap-go/capacitor-realtimekit/).

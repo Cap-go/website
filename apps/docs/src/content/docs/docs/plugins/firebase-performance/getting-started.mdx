@@ -1,0 +1,337 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-firebase-performance and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+```bash
+bun add @capgo/capacitor-firebase-performance
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
+```
+
+## API Overview
+
+### `startTrace`
+
+Starts a trace.
+
+```typescript
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
+
+await FirebasePerformance.startTrace({} as StartTraceOptions);
+```
+
+### `stopTrace`
+
+Stops a trace.
+
+```typescript
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
+
+await FirebasePerformance.stopTrace({} as StopTraceOptions);
+```
+
+### `incrementMetric`
+
+Atomically increments the metric with the given name for the selected trace by the `incrementBy` value.
+
+```typescript
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
+
+await FirebasePerformance.incrementMetric({} as IncrementMetricOptions);
+```
+
+### `setEnabled`
+
+Enables or disables performance monitoring.
+Will be applied with the next start of the app.
+
+```typescript
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
+
+await FirebasePerformance.setEnabled({} as SetEnabledOptions);
+```
+
+### `isEnabled`
+
+Determines whether performance monitoring is enabled or disabled.
+
+```typescript
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
+
+await FirebasePerformance.isEnabled();
+```
+
+### `putAttribute`
+
+Sets a custom attribute of a trace to a given value.
+
+```typescript
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
+
+await FirebasePerformance.putAttribute({} as PutAttributeOptions);
+```
+
+### `getAttribute`
+
+Returns the value of a custom attribute of a trace.
+
+```typescript
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
+
+await FirebasePerformance.getAttribute({} as GetAttributeOptions);
+```
+
+### `getAttributes`
+
+Gets the all the custom attributes of a trace with their values.
+
+```typescript
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
+
+await FirebasePerformance.getAttributes({} as GetAttributesOptions);
+```
+
+### `removeAttribute`
+
+Removes a custom attribute from a trace given its name.
+
+```typescript
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
+
+await FirebasePerformance.removeAttribute({} as RemoveAttributeOptions);
+```
+
+### `putMetric`
+
+Sets the value of a custom metric.
+
+```typescript
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
+
+await FirebasePerformance.putMetric({} as PutMetricOptions);
+```
+
+### `getMetric`
+
+Get the value of a custom metric by name.
+
+```typescript
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
+
+await FirebasePerformance.getMetric({} as GetMetricOptions);
+```
+
+### `record`
+
+Records a trace given its name and options.
+
+Only available on web.
+
+```typescript
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
+
+await FirebasePerformance.record({} as RecordOptions);
+```
+
+## Type Reference
+
+### `StartTraceOptions`
+```typescript
+export interface StartTraceOptions {
+  /**
+   * Custom trace name.
+   *
+   * Names for custom code traces must meet the following requirements:
+   * no leading or trailing whitespace, no leading underscore (_) character,
+   * and max length is 100 characters.
+   *
+   * @since 0.1.0
+   */
+  traceName: string;
+}
+```
+
+### `StopTraceOptions`
+```typescript
+export interface StopTraceOptions {
+  /**
+   * Name of the trace that was set with `startTrace`.
+   *
+   * @since 0.1.0
+   */
+  traceName: string;
+}
+```
+
+### `IncrementMetricOptions`
+```typescript
+export interface IncrementMetricOptions {
+  /**
+   * Name of the trace that was set with `startTrace`.
+   *
+   * @since 0.1.0
+   */
+  traceName: string;
+  /**
+   * Name of the metric to be incremented.
+   *
+   * @since 0.1.0
+   */
+  metricName: string;
+  /**
+   * Amount by which the metric has to be incremented.
+   *
+   * @default 1
+   * @since 0.1.0
+   */
+  incrementBy?: number;
+}
+```
+
+### `SetEnabledOptions`
+```typescript
+export interface SetEnabledOptions {
+  /**
+   * Should performance monitoring be enabled.
+   *
+   * @since 0.1.0
+   */
+  enabled: boolean;
+}
+```
+
+### `IsEnabledResult`
+```typescript
+export interface IsEnabledResult {
+  /**
+   * `true` if performance monitoring is enabled, otherwise `false`.
+   *
+   * @since 0.1.0
+   */
+  enabled: boolean;
+}
+```
+
+### `PutAttributeOptions`
+```typescript
+export interface PutAttributeOptions {
+  /**
+   * Name of the trace to set its attribute.
+   *
+   * @since 6.3.0
+   */
+  traceName: string;
+  /**
+   * Name of the attribute to set its value.
+   *
+   * @since 6.3.0
+   * @example "experiment"
+   */
+  attribute: string;
+  /**
+   * The value to set to the attribute.
+   *
+   * @since 6.3.0
+   * @example "A"
+   */
+  value: string;
+}
+```
+
+### `GetAttributeOptions`
+```typescript
+export interface GetAttributeOptions {
+  /**
+   * Name of the trace to set its attribute.
+   *
+   * @since 6.3.0
+   */
+  traceName: string;
+  /**
+   * Name of the attribute to retrieve its value.
+   *
+   * @since 6.3.0
+   */
+  attribute: string;
+}
+```
+
+### `GetAttributeResult`
+```typescript
+export interface GetAttributeResult {
+  /**
+   * The value of the custom attribute.
+   *
+   * @since 6.3.0
+   */
+  value: string | null;
+}
+```
+
+### `GetAttributesOptions`
+```typescript
+export interface GetAttributesOptions {
+  /**
+   * Name of the trace to get its attributes.
+   *
+   * @since 6.3.0
+   */
+  traceName: string;
+}
+```
+
+### `GetAttributesResult`
+```typescript
+export interface GetAttributesResult {
+  /**
+   * A map of all custom attributes of a trace with their values.
+   *
+   * @since 6.3.0
+   */
+  attributes: { [key: string]: string };
+}
+```
+
+### `RemoveAttributeOptions`
+```typescript
+export type RemoveAttributeOptions = GetAttributeOptions;
+```
+
+### `PutMetricOptions`
+```typescript
+export interface PutMetricOptions {
+  /**
+   * Name of the trace to set its metric.
+   *
+   * @since 6.3.0
+   */
+  traceName: string;
+  /**
+   * The metric name.
+   *
+   * @since 6.3.0
+   */
+  metricName: string;
+  /**
+   * The value to set for the metric.
+   * The given value is floored down to the nearest integer.
+   *
+   * @since 6.3.0
+   */
+  num: number;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

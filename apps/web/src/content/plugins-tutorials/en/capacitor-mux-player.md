@@ -1,87 +1,56 @@
 ---
 locale: en
 ---
-
-# Complete Tutorial: Using @capgo/capacitor-mux-player for iOS and Android Mobile Apps
-
-The `@capgo/capacitor-mux-player` package provides native mux player functionality for your Capacitor mobile applications on iOS and Android. This comprehensive tutorial will guide you through integrating mux player features into your iOS and Android mobile apps built with Capacitor or Cordova, enabling cross-platform mobile app development with native capabilities.
-
-## What is Capacitor?
-
-Capacitor is Ionic's modern native runtime that enables developers to build native iOS apps, Android apps, and Progressive Web Apps from a single codebase. Unlike older Cordova-based mobile development, Capacitor provides direct access to native iOS and Android APIs, making it the ideal choice for building production-ready mobile applications. This Capacitor plugin brings mux player capabilities to both iOS and Android mobile platforms.
-
-## Why Use mux player in Your Capacitor Mobile App?
-
-The @capgo/capacitor-mux-player plugin enables your iOS and Android mobile applications to leverage native mux player functionality without writing platform-specific code. This Capacitor plugin provides a unified JavaScript API that works seamlessly on both iOS and Android mobile devices, making it perfect for cross-platform mobile app development.
-
-Benefits for iOS and Android mobile applications:
-- Native mux player performance on iOS and Android devices
-- Unified API for both iOS and Android mobile platforms
-- No need for separate native iOS or Android code
-- Works with Capacitor and Cordova mobile frameworks
-- Full TypeScript support for mobile app development
-- Seamless integration with existing Capacitor mobile apps
-
----
-locale: en
----
 # Using @capgo/capacitor-mux-player
 
-The `@capgo/capacitor-mux-player` package provides native functionality for your Capacitor app. Here is a tutorial on how to use this package.
+Native Mux Player SDK to play video on IOS and Android.
 
-## Installation
-
-To install the package, run the following command:
+## Install
 
 ```bash
-npm install @capgo/capacitor-mux-player
-npx cap sync
+bun add @capgo/capacitor-mux-player
+bunx cap sync
 ```
 
-## Usage
+## What This Plugin Exposes
 
-### Basic Example
+- `play` - Launch the native Mux Player in fullscreen and begin playback.
+- `dismiss` - Dismiss the player if it is visible.
+- `isActive` - Returns whether the player is currently being displayed.
+
+## Example Usage
+
+### `play`
+
+Launch the native Mux Player in fullscreen and begin playback.
 
 ```typescript
-import { capacitormuxplayer } from '@capgo/capacitor-mux-player';
+import { MuxPlayer } from '@capgo/capacitor-mux-player';
 
-// Use the plugin methods here
+await MuxPlayer.play({} as MuxPlayOptions);
 ```
 
-For detailed API documentation, please visit the [GitHub repository](https://github.com/Cap-go/capacitor-mux-player).
+### `dismiss`
 
-That's it! You have successfully integrated @capgo/capacitor-mux-player into your Capacitor app.
+Dismiss the player if it is visible.
 
-## Platform-Specific Notes for iOS and Android
+```typescript
+import { MuxPlayer } from '@capgo/capacitor-mux-player';
 
-### iOS Mobile Platform
+await MuxPlayer.dismiss();
+```
 
-- Compatible with iOS 10.0+ mobile devices (iPhone and iPad)
-- Uses native iOS APIs for mux player functionality
-- Optimized performance on iOS mobile platform
-- Full support for latest iOS versions
+### `isActive`
 
-### Android Mobile Platform
+Returns whether the player is currently being displayed.
 
-- Compatible with Android 5.0 (API 21)+ mobile devices
-- Uses native Android APIs for mux player functionality
-- Works across all Android device manufacturers
-- Optimized for Android mobile platform
+```typescript
+import { MuxPlayer } from '@capgo/capacitor-mux-player';
 
-## Capacitor vs Cordova for Mobile Development
+await MuxPlayer.isActive();
+```
 
-While this mux player plugin works with both Capacitor and Cordova mobile frameworks, Capacitor offers significant advantages for iOS and Android mobile app development:
+## Full Reference
 
-- **Modern Architecture**: Better performance on iOS and Android mobile platforms
-- **Direct Native Access**: Easier integration with iOS and Android native APIs
-- **Improved Tooling**: Superior development experience for mobile apps
-- **Active Development**: Regular updates for iOS and Android compatibility
-- **Better Documentation**: Comprehensive guides for mobile app development
-
-## Conclusion
-
-You have successfully integrated @capgo/capacitor-mux-player into your Capacitor mobile application for iOS and Android. This plugin provides native mux player capabilities for both iOS and Android mobile platforms, enabling professional mobile app development with a unified codebase.
-
-For detailed API documentation and advanced mux player features for mobile app development, visit the [GitHub repository](https://github.com/Cap-go/capacitor-mux-player).
-
-Whether you're building native iOS apps, Android mobile applications, or cross-platform Capacitor mobile apps, this mux player plugin provides the native capabilities you need for professional mobile app development on iOS and Android platforms.
+- GitHub: https://github.com/Cap-go/capacitor-mux-player/
+- Docs: /docs/plugins/mux-player/

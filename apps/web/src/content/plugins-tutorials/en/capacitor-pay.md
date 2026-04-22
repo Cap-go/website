@@ -1,87 +1,45 @@
 ---
 locale: en
 ---
-
-# Complete Tutorial: Using @capgo/capacitor-pay for iOS and Android Mobile Apps
-
-The `@capgo/capacitor-pay` package provides native pay functionality for your Capacitor mobile applications on iOS and Android. This comprehensive tutorial will guide you through integrating pay features into your iOS and Android mobile apps built with Capacitor or Cordova, enabling cross-platform mobile app development with native capabilities.
-
-## What is Capacitor?
-
-Capacitor is Ionic's modern native runtime that enables developers to build native iOS apps, Android apps, and Progressive Web Apps from a single codebase. Unlike older Cordova-based mobile development, Capacitor provides direct access to native iOS and Android APIs, making it the ideal choice for building production-ready mobile applications. This Capacitor plugin brings pay capabilities to both iOS and Android mobile platforms.
-
-## Why Use pay in Your Capacitor Mobile App?
-
-The @capgo/capacitor-pay plugin enables your iOS and Android mobile applications to leverage native pay functionality without writing platform-specific code. This Capacitor plugin provides a unified JavaScript API that works seamlessly on both iOS and Android mobile devices, making it perfect for cross-platform mobile app development.
-
-Benefits for iOS and Android mobile applications:
-- Native pay performance on iOS and Android devices
-- Unified API for both iOS and Android mobile platforms
-- No need for separate native iOS or Android code
-- Works with Capacitor and Cordova mobile frameworks
-- Full TypeScript support for mobile app development
-- Seamless integration with existing Capacitor mobile apps
-
----
-locale: en
----
 # Using @capgo/capacitor-pay
 
-The `@capgo/capacitor-pay` package provides native functionality for your Capacitor app. Here is a tutorial on how to use this package.
+Capacitor plugin to trigger native payment for iOS(Apple pay) and Android(Google Pay).
 
-## Installation
-
-To install the package, run the following command:
+## Install
 
 ```bash
-npm install @capgo/capacitor-pay
-npx cap sync
+bun add @capgo/capacitor-pay
+bunx cap sync
 ```
 
-## Usage
+## What This Plugin Exposes
 
-### Basic Example
+- `isPayAvailable` - Checks whether native pay is available on the current platform. On iOS this evaluates Apple Pay, on Android it evaluates Google Pay.
+- `requestPayment` - Presents the native pay sheet for the current platform. Provide the Apple Pay configuration on iOS and the Google Pay configuration on Android.
+
+## Example Usage
+
+### `isPayAvailable`
+
+Checks whether native pay is available on the current platform. On iOS this evaluates Apple Pay, on Android it evaluates Google Pay.
 
 ```typescript
-import { capacitorpay } from '@capgo/capacitor-pay';
+import { Pay } from '@capgo/capacitor-pay';
 
-// Use the plugin methods here
+await Pay.isPayAvailable();
 ```
 
-For detailed API documentation, please visit the [GitHub repository](https://github.com/Cap-go/capacitor-pay).
+### `requestPayment`
 
-That's it! You have successfully integrated @capgo/capacitor-pay into your Capacitor app.
+Presents the native pay sheet for the current platform. Provide the Apple Pay configuration on iOS and the Google Pay configuration on Android.
 
-## Platform-Specific Notes for iOS and Android
+```typescript
+import { Pay } from '@capgo/capacitor-pay';
 
-### iOS Mobile Platform
+await Pay.requestPayment({} as PayPaymentOptions);
+```
 
-- Compatible with iOS 10.0+ mobile devices (iPhone and iPad)
-- Uses native iOS APIs for pay functionality
-- Optimized performance on iOS mobile platform
-- Full support for latest iOS versions
+## Full Reference
 
-### Android Mobile Platform
-
-- Compatible with Android 5.0 (API 21)+ mobile devices
-- Uses native Android APIs for pay functionality
-- Works across all Android device manufacturers
-- Optimized for Android mobile platform
-
-## Capacitor vs Cordova for Mobile Development
-
-While this pay plugin works with both Capacitor and Cordova mobile frameworks, Capacitor offers significant advantages for iOS and Android mobile app development:
-
-- **Modern Architecture**: Better performance on iOS and Android mobile platforms
-- **Direct Native Access**: Easier integration with iOS and Android native APIs
-- **Improved Tooling**: Superior development experience for mobile apps
-- **Active Development**: Regular updates for iOS and Android compatibility
-- **Better Documentation**: Comprehensive guides for mobile app development
-
-## Conclusion
-
-You have successfully integrated @capgo/capacitor-pay into your Capacitor mobile application for iOS and Android. This plugin provides native pay capabilities for both iOS and Android mobile platforms, enabling professional mobile app development with a unified codebase.
-
-For detailed API documentation and advanced pay features for mobile app development, visit the [GitHub repository](https://github.com/Cap-go/capacitor-pay).
-
-Whether you're building native iOS apps, Android mobile applications, or cross-platform Capacitor mobile apps, this pay plugin provides the native capabilities you need for professional mobile app development on iOS and Android platforms.
+- GitHub: https://github.com/Cap-go/capacitor-pay/
+- Docs: /docs/plugins/pay/

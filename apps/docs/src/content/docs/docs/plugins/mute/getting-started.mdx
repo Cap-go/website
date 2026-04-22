@@ -1,209 +1,51 @@
 ---
 title: Getting Started
-description: Learn how to install and use the Mute plugin to detect silent mode state in your Capacitor app.
+description: "Install @capgo/capacitor-mute and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-mute" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-2. **Sync with native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
-
-## Usage
-
-Import the plugin and use its methods to check mute state:
-
-```typescript
-import { CapacitorMute } from '@capgo/capacitor-mute';
-
-// Check if device is muted
-const checkMuteState = async () => {
-  const { value } = await CapacitorMute.isMuted();
-
-  if (value) {
-    console.log('Device is muted/silent');
-    // Adjust app behavior for silent mode
-  } else {
-    console.log('Device sound is on');
-  }
-};
+```bash
+bun add @capgo/capacitor-mute
+bunx cap sync
 ```
 
-## API Reference
-
-### isMuted()
-
-Checks if the device is currently muted/in silent mode.
+## Import
 
 ```typescript
-const result = await CapacitorMute.isMuted();
-// Returns: { value: boolean }
+import { Mute } from '@capgo/capacitor-mute';
 ```
 
-## Complete Example
+## API Overview
+
+### `isMuted`
+
+Check if the device mute switch is enabled.
 
 ```typescript
-import { CapacitorMute } from '@capgo/capacitor-mute';
+import { Mute } from '@capgo/capacitor-mute';
 
-export class SoundManager {
-  private isMuted = false;
-
-  async initialize() {
-    // Get initial mute state
-    await this.checkMuteState();
-  }
-
-  async checkMuteState() {
-    try {
-      const { value } = await CapacitorMute.isMuted();
-      this.isMuted = value;
-      this.updateAppBehavior();
-    } catch (error) {
-      console.error('Failed to check mute state:', error);
-    }
-  }
-
-  private updateAppBehavior() {
-    if (this.isMuted) {
-      // Device is muted - adjust app behavior
-      this.disableSoundEffects();
-      this.showVisualNotifications();
-    } else {
-      // Device sound is on
-      this.enableSoundEffects();
-      this.useAudioNotifications();
-    }
-  }
-
-  private disableSoundEffects() {
-    // Disable in-app sounds
-    console.log('Disabling sound effects');
-  }
-
-  private enableSoundEffects() {
-    // Enable in-app sounds
-    console.log('Enabling sound effects');
-  }
-
-  private showVisualNotifications() {
-    // Use visual feedback instead of audio
-    console.log('Using visual notifications');
-  }
-
-  private useAudioNotifications() {
-    // Use audio notifications
-    console.log('Using audio notifications');
-  }
+const { value } = await Mute.isMuted();
+if (value) {
+  console.log('Device is muted');
+} else {
+  console.log('Device is not muted');
 }
-
-// Usage
-const soundManager = new SoundManager();
-await soundManager.initialize();
-
-// Poll periodically to check for changes
-setInterval(() => {
-  soundManager.checkMuteState();
-}, 5000); // Check every 5 seconds
 ```
 
-## Platform Behavior
+## Type Reference
 
-### iOS
-- Detects the physical mute switch state
-- No real-time change events (polling required)
-- Works on iPhone and iPad with mute switch
+### `MuteResponse`
+Response from mute status check.
+```typescript
+export interface MuteResponse {
+  /** True if device is muted, false otherwise */
+  value: boolean;
+}
+```
 
-### Android
-- Checks if ringer mode is set to silent or vibrate
-- No change events (polling required)
-- Based on AudioManager ringer mode
+## Source Of Truth
 
-## Best Practices
-
-1. **Poll for changes**
-   Since the plugin doesn't provide real-time events, poll periodically if you need to track changes:
-   ```typescript
-   // Check mute state periodically
-   setInterval(async () => {
-     const { value } = await CapacitorMute.isMuted();
-     if (value !== previousMuteState) {
-       handleMuteStateChange(value);
-     }
-   }, 5000);
-   ```
-
-2. **Respect user preferences**
-   Always honor the mute state and adjust your app's audio behavior accordingly.
-
-3. **Provide visual alternatives**
-   ```typescript
-   const { value: isMuted } = await CapacitorMute.isMuted();
-   if (isMuted) {
-     // Show visual notifications
-     showToast('New message received');
-   } else {
-     // Play sound notification
-     playNotificationSound();
-   }
-   ```
-
-## Use Cases
-
-1. **Game Sound Management**
-   ```typescript
-   const shouldPlaySound = async () => {
-     const { value: isMuted } = await CapacitorMute.isMuted();
-     return !isMuted && userPreferences.soundEnabled;
-   };
-   ```
-
-2. **Notification Handling**
-   ```typescript
-   const sendNotification = async (message: string) => {
-     const { value: isMuted } = await CapacitorMute.isMuted();
-     
-     if (isMuted) {
-       // Use vibration or visual notification
-       await Haptics.vibrate();
-       showBanner(message);
-     } else {
-       // Play notification sound
-       await playSound('notification.mp3');
-     }
-   };
-   ```
-
-3. **Video Player**
-   ```typescript
-   const initVideoPlayer = async () => {
-     const { value: isMuted } = await CapacitorMute.isMuted();
-     
-     videoPlayer.setMuted(isMuted);
-     if (isMuted) {
-       showSubtitles(true);
-       showMuteIndicator();
-     }
-   };
-   ```
-
-## Troubleshooting
-
-1. **Always returns false on Android**
-   - Check if device ringer mode is actually set to silent
-   - Some Android devices may have different behavior
-
-2. **No change events available**
-   - The plugin does not provide real-time change events
-   - Implement polling if you need to detect changes
-
-3. **Not working on simulator**
-   - iOS Simulator doesn't have a mute switch
-   - Test on real devices for accurate results
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

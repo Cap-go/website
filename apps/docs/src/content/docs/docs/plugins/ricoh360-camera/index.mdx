@@ -1,6 +1,6 @@
 ---
-title: "@capgo/capacitor-ricoh360-camera"
-description: Ricoh 360° camera control plugin for Capacitor apps with panoramic photo and video capture capabilities.
+title: "@capgo/ricoh360"
+description: "Provides an SDK for the Ricoh360 cameras for Capacitor."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,45 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Control Ricoh 360° cameras for immersive panoramic photo and video capture with full device integration.
-  image:
-    file: ~public/icons/plugins/ricoh360-camera.svg
+  tagline: "Provides an SDK for the Ricoh360 cameras for Capacitor."
   actions:
     - text: Get started
       link: /docs/plugins/ricoh360-camera/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
-      link: https://github.com/Cap-go/capacitor-ricoh360-camera/
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-ricoh360-camera-plugin/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="360° capture" icon="rocket">
-    Capture immersive panoramic photos and videos 🌐
-  </Card>
-  <Card title="Device control" icon="setting">
-    Full control over Ricoh Theta camera settings 📸
-  </Card>
-  <Card title="Live preview" icon="magnifier">
-    Real-time 360° preview streaming 👁️
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/ricoh360-camera/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+Provides an SDK for the Ricoh360 cameras for Capacitor.
+
+## Core Capabilities
+
+- `initialize` - Initializes the SDK with camera URL.
+- `getCameraAsset` - Retrieves a camera asset from a URL and returns it as base64.
+- `listFiles` - Lists files stored on the camera.
+- `capturePicture` - Captures a picture.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `initialize` | Initializes the SDK with camera URL. |
+| `getCameraAsset` | Retrieves a camera asset from a URL and returns it as base64. |
+| `listFiles` | Lists files stored on the camera. |
+| `capturePicture` | Captures a picture. |
+| `captureVideo` | Captures a video. |
+| `livePreview` | Starts live preview. |
+| `stopLivePreview` | Stops live preview. |
+| `readSettings` | Reads camera settings. |
+| `setSettings` | Sets camera settings. |
+| `sendCommand` | Send raw command to camera. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-ricoh360-camera-plugin](https://github.com/Cap-go/capacitor-ricoh360-camera-plugin/).

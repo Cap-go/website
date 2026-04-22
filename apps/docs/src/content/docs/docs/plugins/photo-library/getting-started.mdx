@@ -1,75 +1,254 @@
 ---
 title: Getting Started
-description: Integrate the native photo gallery with pagination and media picking.
+description: "Install @capgo/capacitor-photo-library and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the plugin**
-   <PackageManagers pkg="@capgo/capacitor-photo-library" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+```bash
+bun add @capgo/capacitor-photo-library
+bunx cap sync
+```
 
-2. **Sync platforms**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+## Import
 
-## Platform permissions
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+```
 
-- **iOS**: Update `Info.plist` with `NSPhotoLibraryUsageDescription` (and `NSPhotoLibraryAddUsageDescription` if you plan to save media).
-- **Android**: For Android 13+, declare the photo/video permissions (`READ_MEDIA_IMAGES`, `READ_MEDIA_VIDEO`). Capacitor 5 handles this automatically, but double-check custom manifests.
+## API Overview
 
-## Request access
+### `checkAuthorization`
+
+Returns the current authorization status without prompting the user.
 
 ```typescript
 import { PhotoLibrary } from '@capgo/capacitor-photo-library';
 
-const { state } = await PhotoLibrary.requestAuthorization();
-if (state !== 'authorized' && state !== 'limited') {
-  throw new Error('Photo access denied');
+await PhotoLibrary.checkAuthorization();
+```
+
+### `requestAuthorization`
+
+Requests access to the photo library if needed.
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+await PhotoLibrary.requestAuthorization();
+```
+
+### `getAlbums`
+
+Retrieves the available albums.
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+await PhotoLibrary.getAlbums();
+```
+
+### `getLibrary`
+
+Retrieves library assets along with URLs that can be displayed in the web view.
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+await PhotoLibrary.getLibrary();
+```
+
+### `getPhotoUrl`
+
+Retrieves a displayable URL for the full resolution version of the asset.
+If you already called `getLibrary` with `includeFullResolutionData`, you normally
+do not need this method.
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+await PhotoLibrary.getPhotoUrl({} as { id: string });
+```
+
+### `getThumbnailUrl`
+
+Retrieves a displayable URL for a resized thumbnail of the asset.
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+await PhotoLibrary.getThumbnailUrl({} as {
+    id: string;
+    width?: number;
+    height?: number;
+    quality?: number;
+  });
+```
+
+### `pickMedia`
+
+Opens the native system picker so the user can select media without granting full photo library access.
+The selected files are copied into the application cache and returned with portable URLs.
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+await PhotoLibrary.pickMedia();
+```
+
+## Type Reference
+
+### `PhotoLibraryAuthorizationState`
+```typescript
+export type PhotoLibraryAuthorizationState = 'authorized' | 'limited' | 'denied' | 'notDetermined';
+```
+
+### `PhotoLibraryAlbum`
+```typescript
+export interface PhotoLibraryAlbum {
+  id: string;
+  title: string;
+  assetCount: number;
 }
 ```
 
-## Load the gallery
-
+### `GetLibraryOptions`
 ```typescript
-import { Capacitor } from '@capacitor/core';
-
-const { assets, hasMore, nextPage } = await PhotoLibrary.getLibrary({
-  limit: 100,
-  includeAlbums: false,
-  thumbnailWidth: 256,
-  thumbnailHeight: 256,
-});
-
-const gallery = assets.map((asset) => ({
-  id: asset.id,
-  fileName: asset.fileName,
-  created: asset.creationDate,
-  thumbnailUrl: asset.thumbnail
-    ? asset.thumbnail.webPath ?? Capacitor.convertFileSrc(asset.thumbnail.path)
-    : undefined,
-  photoUrl: asset.file
-    ? asset.file.webPath ?? Capacitor.convertFileSrc(asset.file.path)
-    : undefined,
-}));
+export interface GetLibraryOptions {
+  /**
+   * Number of assets to skip from the beginning of the query.
+   */
+  offset?: number;
+  /**
+   * Maximum number of assets to return. Omit to return everything that matches.
+   */
+  limit?: number;
+  /**
+   * Include images in the result. Defaults to `true`.
+   */
+  includeImages?: boolean;
+  /**
+   * Include videos in the result. Defaults to `false`.
+   */
+  includeVideos?: boolean;
+  /**
+   * Include information about the albums each asset belongs to. Defaults to `false`.
+   */
+  includeAlbumData?: boolean;
+  /**
+   * Include assets stored in the cloud (iCloud / Google Photos). Defaults to `true`.
+   */
+  includeCloudData?: boolean;
+  /**
+   * If `true`, use the original filenames reported by the OS when available.
+   */
+  useOriginalFileNames?: boolean;
+  /**
+   * Width of the generated thumbnails. Defaults to `512`.
+   */
+  thumbnailWidth?: number;
+  /**
+   * Height of the generated thumbnails. Defaults to `384`.
+   */
+  thumbnailHeight?: number;
+  /**
+   * JPEG quality for generated thumbnails (0-1). Defaults to `0.5`.
+   */
+  thumbnailQuality?: number;
+  /**
+   * When `true`, copies the full sized asset into the app cache and returns its URL.
+   * Defaults to `false`.
+   */
+  includeFullResolutionData?: boolean;
+}
 ```
 
-To fetch additional pages, call `PhotoLibrary.getLibrary({ cursor: nextPage })`.
-
-## Let users pick media
-
+### `GetLibraryResult`
 ```typescript
-const selection = await PhotoLibrary.pickMedia({
-  selectionLimit: 5,
-  includeVideos: true,
-});
-
-console.log('User selected', selection.assets.length, 'items');
+export interface GetLibraryResult {
+  assets: PhotoLibraryAsset[];
+  /**
+   * Total number of assets matching the query in the library. `assets.length` can be less
+   * than this value when pagination is used.
+   */
+  totalCount: number;
+  /** Whether more assets are available when using pagination. */
+  hasMore: boolean;
+}
 ```
 
-## Clean up cached files
+### `PhotoLibraryFile`
+```typescript
+export interface PhotoLibraryFile {
+  /** Absolute path on the native file system. */
+  path: string;
+  /**
+   * URL that can be used inside a web view. Usually produced by `Capacitor.convertFileSrc(path)`.
+   */
+  webPath: string;
+  mimeType: string;
+  /** Size in bytes if known, otherwise `-1`. */
+  size: number;
+}
+```
 
-Generated thumbnails and exports are stored in the app cache directory under `photoLibrary`. Remove them with your preferred file API when you need to reclaim storage.
+### `PickMediaOptions`
+```typescript
+export interface PickMediaOptions {
+  /**
+   * Maximum number of items the user can select. Use `0` to allow unlimited selection.
+   * Defaults to `1`.
+   */
+  selectionLimit?: number;
+  /** Allow the user to select images. Defaults to `true`. */
+  includeImages?: boolean;
+  /** Allow the user to select videos. Defaults to `false`. */
+  includeVideos?: boolean;
+  /** Width of the generated thumbnails for picked items. Defaults to `256`. */
+  thumbnailWidth?: number;
+  /** Height of the generated thumbnails for picked items. Defaults to `256`. */
+  thumbnailHeight?: number;
+  /** JPEG quality for generated thumbnails (0-1). Defaults to `0.7`. */
+  thumbnailQuality?: number;
+}
+```
+
+### `PickMediaResult`
+```typescript
+export interface PickMediaResult {
+  assets: PhotoLibraryAsset[];
+}
+```
+
+### `PhotoLibraryAsset`
+```typescript
+export interface PhotoLibraryAsset {
+  id: string;
+  fileName: string;
+  type: PhotoAssetType;
+  width: number;
+  height: number;
+  duration?: number;
+  creationDate?: string;
+  modificationDate?: string;
+  latitude?: number;
+  longitude?: number;
+  mimeType: string;
+  /** Size in bytes reported by the OS for the underlying asset, if available. */
+  size?: number;
+  albumIds?: string[];
+  thumbnail?: PhotoLibraryFile;
+  file?: PhotoLibraryFile;
+}
+```
+
+### `PhotoAssetType`
+```typescript
+export type PhotoAssetType = 'image' | 'video';
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

@@ -1,477 +1,614 @@
 ---
 title: Getting Started
-description: Learn how to install and use the Native Audio plugin for high-performance audio playback in your Capacitor app.
+description: "Install @capgo/native-audio and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the package**
-   <PackageManagers pkg="@capgo/native-audio" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+```bash
+bun add @capgo/native-audio
+bunx cap sync
+```
 
-2. **Sync with native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+## Import
 
-3. **Add audio files**
-   Place your audio files in the appropriate platform folders:
-   - **iOS**: `ios/App/App/sounds/`
-   - **Android**: `android/app/src/main/res/raw/`
-</Steps>
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
+```
 
-## Usage
+## API Overview
 
-Import the plugin and preload audio files before playing:
+### `configure`
+
+Configure the audio player
 
 ```typescript
 import { NativeAudio } from '@capgo/native-audio';
 
-// Preload audio files
-const preloadAudio = async () => {
-  // Simple preload for short sounds
-  await NativeAudio.preload({
-    assetId: 'click',
-    assetPath: 'sounds/click.mp3',
-    audioChannelNum: 1,
-    isUrl: false
-  });
-  
-  // Complex preload for music/longer audio
-  await NativeAudio.preloadComplex({
-    assetId: 'background-music',
-    assetPath: 'sounds/background.mp3',
-    audioChannelNum: 1,
-    volume: 0.5,
-    delay: 0,
-    isUrl: false
-  });
-};
-
-// Play audio
-const playSound = async () => {
-  await NativeAudio.play({
-    assetId: 'click'
-  });
-};
-
-// Play with options
-const playMusic = async () => {
-  await NativeAudio.play({
-    assetId: 'background-music',
-    time: 0 // Start from beginning
-  });
-};
-
-// Loop audio
-const loopMusic = async () => {
-  await NativeAudio.loop({
-    assetId: 'background-music'
-  });
-};
-
-// Stop audio
-const stopMusic = async () => {
-  await NativeAudio.stop({
-    assetId: 'background-music'
-  });
-};
-
-// Unload when done
-const cleanup = async () => {
-  await NativeAudio.unload({
-    assetId: 'click'
-  });
-  await NativeAudio.unload({
-    assetId: 'background-music'
-  });
-};
+await NativeAudio.configure({} as ConfigureOptions);
 ```
 
-## API Reference
+### `preload`
 
-### preload(options)
-
-Preloads an audio file for simple playback (best for short sounds).
-
-```typescript
-interface PreloadOptions {
-  assetId: string;
-  assetPath: string;
-  audioChannelNum?: number;
-  isUrl?: boolean;
-}
-
-await NativeAudio.preload({
-  assetId: 'sound-effect',
-  assetPath: 'sounds/effect.mp3',
-  audioChannelNum: 1,
-  isUrl: false
-});
-```
-
-### preloadComplex(options)
-
-Preloads audio with advanced options (best for music/background audio).
-
-```typescript
-interface PreloadComplexOptions {
-  assetId: string;
-  assetPath: string;
-  volume?: number; // 0.0 to 1.0
-  audioChannelNum?: number;
-  delay?: number;
-  isUrl?: boolean;
-  fadeDuration?: number;
-}
-
-await NativeAudio.preloadComplex({
-  assetId: 'theme-song',
-  assetPath: 'sounds/theme.mp3',
-  volume: 0.7,
-  audioChannelNum: 2,
-  isUrl: false
-});
-```
-
-### play(options)
-
-Plays a preloaded audio file.
-
-```typescript
-interface PlayOptions {
-  assetId: string;
-  time?: number; // Start time in seconds
-}
-
-await NativeAudio.play({
-  assetId: 'sound-effect',
-  time: 0
-});
-```
-
-### loop(options)
-
-Loops a preloaded audio file continuously.
-
-```typescript
-await NativeAudio.loop({
-  assetId: 'background-music'
-});
-```
-
-### stop(options)
-
-Stops playing an audio file.
-
-```typescript
-await NativeAudio.stop({
-  assetId: 'background-music'
-});
-```
-
-### pause(options)
-
-Pauses audio playback.
-
-```typescript
-await NativeAudio.pause({
-  assetId: 'background-music'
-});
-```
-
-### resume(options)
-
-Resumes paused audio.
-
-```typescript
-await NativeAudio.resume({
-  assetId: 'background-music'
-});
-```
-
-### setVolume(options)
-
-Sets the volume for an audio asset.
-
-```typescript
-interface SetVolumeOptions {
-  assetId: string;
-  volume: number; // 0.0 to 1.0
-}
-
-await NativeAudio.setVolume({
-  assetId: 'background-music',
-  volume: 0.3
-});
-```
-
-### getDuration(options)
-
-Gets the duration of an audio file in seconds.
-
-```typescript
-const { duration } = await NativeAudio.getDuration({
-  assetId: 'background-music'
-});
-console.log(`Duration: ${duration} seconds`);
-```
-
-### getCurrentTime(options)
-
-Gets the current playback time in seconds.
-
-```typescript
-const { currentTime } = await NativeAudio.getCurrentTime({
-  assetId: 'background-music'
-});
-console.log(`Current time: ${currentTime} seconds`);
-```
-
-### isPlaying(options)
-
-Checks if audio is currently playing.
-
-```typescript
-const { isPlaying } = await NativeAudio.isPlaying({
-  assetId: 'background-music'
-});
-console.log(`Is playing: ${isPlaying}`);
-```
-
-### unload(options)
-
-Unloads an audio file from memory.
-
-```typescript
-await NativeAudio.unload({
-  assetId: 'sound-effect'
-});
-```
-
-## Advanced Usage
-
-### Sound Manager Class
+Load an audio file
 
 ```typescript
 import { NativeAudio } from '@capgo/native-audio';
 
-export class SoundManager {
-  private sounds: Map<string, boolean> = new Map();
-  private volume = 1.0;
-  
-  async init() {
-    // Preload all sounds
-    await this.preloadSound('click', 'sounds/click.mp3');
-    await this.preloadSound('success', 'sounds/success.mp3');
-    await this.preloadSound('error', 'sounds/error.mp3');
-    
-    // Preload music
-    await this.preloadMusic('background', 'sounds/background.mp3', 0.5);
-  }
-  
-  private async preloadSound(id: string, path: string) {
-    try {
-      await NativeAudio.preload({
-        assetId: id,
-        assetPath: path,
-        audioChannelNum: 1,
-        isUrl: false
-      });
-      this.sounds.set(id, true);
-    } catch (error) {
-      console.error(`Failed to preload ${id}:`, error);
-    }
-  }
-  
-  private async preloadMusic(id: string, path: string, volume: number) {
-    try {
-      await NativeAudio.preloadComplex({
-        assetId: id,
-        assetPath: path,
-        volume,
-        audioChannelNum: 2,
-        isUrl: false
-      });
-      this.sounds.set(id, true);
-    } catch (error) {
-      console.error(`Failed to preload ${id}:`, error);
-    }
-  }
-  
-  async playSound(id: string) {
-    if (!this.sounds.has(id)) {
-      console.warn(`Sound ${id} not preloaded`);
-      return;
-    }
-    
-    try {
-      await NativeAudio.play({ assetId: id });
-    } catch (error) {
-      console.error(`Failed to play ${id}:`, error);
-    }
-  }
-  
-  async playMusic(id: string) {
-    if (!this.sounds.has(id)) return;
-    
-    try {
-      await NativeAudio.loop({ assetId: id });
-    } catch (error) {
-      console.error(`Failed to play music ${id}:`, error);
-    }
-  }
-  
-  async stopMusic(id: string) {
-    try {
-      await NativeAudio.stop({ assetId: id });
-    } catch (error) {
-      console.error(`Failed to stop ${id}:`, error);
-    }
-  }
-  
-  async setMasterVolume(volume: number) {
-    this.volume = Math.max(0, Math.min(1, volume));
-    
-    // Update all loaded sounds
-    for (const [id] of this.sounds) {
-      await NativeAudio.setVolume({
-        assetId: id,
-        volume: this.volume
-      });
-    }
-  }
-  
-  async cleanup() {
-    for (const [id] of this.sounds) {
-      await NativeAudio.unload({ assetId: id });
-    }
-    this.sounds.clear();
-  }
-}
+await NativeAudio.preload({} as PreloadOptions);
 ```
 
-### Loading from URLs
+### `playOnce`
+
+Play an audio file once with automatic cleanup
+
+Method designed for simple, single-shot audio playback,
+such as notification sounds, UI feedback, or other short audio clips
+that don't require manual state management.
+
+**Key Features:**
+- **Fire-and-forget**: No need to manually preload, play, stop, or unload
+- **Auto-cleanup**: Asset is automatically unloaded after playback completes
+- **Optional file deletion**: Can delete local files after playback (useful for temp files)
+- **Returns assetId**: Can still control playback if needed (pause, stop, etc.)
+
+**Use Cases:**
+- Notification sounds
+- UI sound effects (button clicks, alerts)
+- Short audio clips that play once
+- Temporary audio files that should be cleaned up
+
+**Comparison with regular play():**
+- `play()`: Requires manual preload, play, and unload steps
+- `playOnce()`: Handles everything automatically with a single call
 
 ```typescript
-// Load audio from URL
-await NativeAudio.preloadComplex({
-  assetId: 'remote-audio',
-  assetPath: 'https://example.com/audio.mp3',
+import { NativeAudio } from '@capgo/native-audio';
+
+// Simple one-shot playback
+await NativeAudio.playOnce({ assetPath: 'audio/notification.mp3' });
+
+// Play and delete the file after completion
+await NativeAudio.playOnce({
+  assetPath: 'file:///path/to/temp/audio.mp3',
   isUrl: true,
-  volume: 0.8
+  deleteAfterPlay: true
 });
+
+// Get the assetId to control playback
+const { assetId } = await NativeAudio.playOnce({
+  assetPath: 'audio/long-track.mp3',
+  autoPlay: true
+});
+// Later, you can stop it manually if needed
+await NativeAudio.stop({ assetId });
 ```
 
-### Fade In/Out Effects
+### `isPreloaded`
+
+Check if an audio file is preloaded
 
 ```typescript
-const fadeIn = async (assetId: string, duration: number) => {
-  const steps = 20;
-  const stepDuration = duration / steps;
-  
-  await NativeAudio.setVolume({ assetId, volume: 0 });
-  await NativeAudio.play({ assetId });
-  
-  for (let i = 1; i <= steps; i++) {
-    await new Promise(resolve => setTimeout(resolve, stepDuration));
-    await NativeAudio.setVolume({
-      assetId,
-      volume: i / steps
-    });
-  }
-};
+import { NativeAudio } from '@capgo/native-audio';
 
-const fadeOut = async (assetId: string, duration: number) => {
-  const steps = 20;
-  const stepDuration = duration / steps;
-  
-  for (let i = steps; i >= 0; i--) {
-    await NativeAudio.setVolume({
-      assetId,
-      volume: i / steps
-    });
-    await new Promise(resolve => setTimeout(resolve, stepDuration));
-  }
-  
-  await NativeAudio.stop({ assetId });
-};
+await NativeAudio.isPreloaded({} as PreloadOptions);
 ```
 
-## Best Practices
+### `play`
 
-1. **Preload during app initialization**
-   ```typescript
-   import { App } from '@capacitor/app';
-   
-   App.addListener('appStateChange', async ({ isActive }) => {
-     if (isActive) {
-       await soundManager.init();
-     }
-   });
-   ```
+Play an audio file
 
-2. **Handle errors gracefully**
-   ```typescript
-   try {
-     await NativeAudio.play({ assetId: 'sound' });
-   } catch (error) {
-     console.log('Audio playback failed, continuing silently');
-   }
-   ```
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
 
-3. **Unload unused audio**
-   ```typescript
-   // Unload sounds when leaving a screen
-   ionViewWillLeave() {
-     this.unloadScreenSounds();
-   }
-   ```
+await NativeAudio.play({} as AssetPlayOptions);
+```
 
-4. **Use appropriate preload methods**
-   - `preload()` for short sound effects (< 5 seconds)
-   - `preloadComplex()` for music and longer audio
+### `pause`
 
-## Platform Notes
+Pause an audio file
 
-### iOS
-- Supports AAC, MP3, WAV, and other Core Audio formats
-- Uses AVAudioPlayer for complex audio
-- Uses System Sound Services for simple audio
-- Supports background audio with proper configuration
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
 
-### Android
-- Supports MP3, OGG, WAV formats
-- Uses SoundPool for simple audio
-- Uses MediaPlayer for complex audio
-- May require WAKE_LOCK permission for background playback
+await NativeAudio.pause({} as AssetPauseOptions);
+```
 
-### File Placement
+### `resume`
 
-#### iOS
-Place files in `ios/App/App/sounds/` or create a folder reference in Xcode.
+Resume an audio file
 
-#### Android
-Place files in `android/app/src/main/res/raw/`. 
-Note: File names must be lowercase with no special characters.
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
 
-## Common Issues
+await NativeAudio.resume({} as AssetResumeOptions);
+```
 
-1. **Audio not playing**
-   - Ensure files are in correct directories
-   - Check file format compatibility
-   - Verify assetId matches exactly
+### `loop`
 
-2. **Delay in playback**
-   - Use `preload()` for sound effects
-   - Preload before you need to play
+Stop an audio file
 
-3. **Memory issues**
-   - Unload audio files when not needed
-   - Don't preload too many large files
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
 
-4. **Background playback**
-   - Configure background audio capability on iOS
-   - Handle audio focus on Android
+await NativeAudio.loop({} as Assets);
+```
+
+### `stop`
+
+Stop an audio file
+
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
+
+await NativeAudio.stop({} as AssetStopOptions);
+```
+
+### `unload`
+
+Unload an audio file
+
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
+
+await NativeAudio.unload({} as Assets);
+```
+
+### `setVolume`
+
+Set the volume of an audio file
+
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
+
+await NativeAudio.setVolume({} as AssetVolume);
+```
+
+### `setRate`
+
+Set the rate of an audio file
+
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
+
+await NativeAudio.setRate({} as AssetRate);
+```
+
+### `setCurrentTime`
+
+Set the current time of an audio file
+
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
+
+await NativeAudio.setCurrentTime({} as AssetSetTime);
+```
+
+### `getCurrentTime`
+
+Get the current time of an audio file
+
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
+
+await NativeAudio.getCurrentTime({} as Assets);
+```
+
+### `getDuration`
+
+Get the duration of an audio file in seconds
+
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
+
+await NativeAudio.getDuration({} as Assets);
+```
+
+### `isPlaying`
+
+Check if an audio file is playing
+
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
+
+await NativeAudio.isPlaying({} as Assets);
+```
+
+### `clearCache`
+
+Clear the audio cache for remote audio files
+
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
+
+await NativeAudio.clearCache();
+```
+
+### `setDebugMode`
+
+Set debug mode logging
+
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
+
+await NativeAudio.setDebugMode({} as { enabled: boolean });
+```
+
+### `deinitPlugin`
+
+Deinitialize the plugin and restore original audio session settings
+This method stops all playing audio and reverts any audio session changes made by the plugin
+Use this when you need to ensure compatibility with other audio plugins
+
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
+
+await NativeAudio.deinitPlugin();
+```
+
+## Type Reference
+
+### `ConfigureOptions`
+```typescript
+export interface ConfigureOptions {
+  /**
+   * focus the audio with Audio Focus
+   */
+  focus?: boolean;
+  /**
+   * Play the audio in the background
+   */
+  background?: boolean;
+  /**
+   * Ignore silent mode, works only on iOS setting this will nuke other audio apps
+   */
+  ignoreSilent?: boolean;
+  /**
+   * Show audio playback in the notification center (iOS and Android)
+   * When enabled, displays audio metadata (title, artist, album, artwork) in the system notification
+   * and Control Center (iOS) or lock screen.
+   *
+   * **Important iOS Behavior:**
+   * Enabling this option changes the audio session category to `.playback` with `.default` mode,
+   * which means your app's audio will **interrupt** other apps' audio (like background music from
+   * Spotify, Apple Music, etc.) instead of mixing with it. This is required for the Now Playing
+   * info to appear in Control Center and on the lock screen.
+   *
+   * **Trade-offs:**
+   * - `showNotification: true` → Shows Now Playing controls, but interrupts other audio
+   * - `showNotification: false` → Audio mixes with other apps, but no Now Playing controls
+   *
+   * Use this when your app is the primary audio source (music players, podcast apps, etc.).
+   * Disable this for secondary audio like sound effects or notification sounds where mixing
+   * with background music is preferred.
+   *
+   * @see https://github.com/Cap-go/capacitor-native-audio/issues/202
+   */
+  showNotification?: boolean;
+  /**
+   * Enable background audio playback (Android only)
+   *
+   * When enabled, audio will continue playing when the app is backgrounded or the screen is locked.
+   * The plugin will skip the automatic pause/resume logic that normally occurs when the app
+   * enters the background or returns to the foreground.
+   *
+   * **Important Android Requirements:**
+   * To use background playback on Android, your app must:
+   * 1. Declare the required permissions in `AndroidManifest.xml`:
+   *    - `<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />`
+   *    - `<uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />`
+   *    - `<uses-permission android:name="android.permission.WAKE_LOCK" />`
+   * 2. Start a Foreground Service with a media-style notification before backgrounding
+   *    (the plugin does not automatically create or manage the foreground service)
+   * 3. Use `showNotification: true` to display playback controls in the notification
+   *
+   * **Usage Example:**
+   * ```typescript
+   * await NativeAudio.configure({
+   *   backgroundPlayback: true,
+   *   showNotification: true
+   * });
+   * // Start your foreground service here
+   * // Then preload and play audio as normal
+   * ```
+   *
+   * @default false
+   * @platform Android
+   * @since 8.2.0
+   */
+  backgroundPlayback?: boolean;
+}
+```
+
+### `PreloadOptions`
+```typescript
+export interface PreloadOptions {
+  /**
+   * Path to the audio file, relative path of the file, absolute url (file://) or remote url (https://)
+   * Supported formats:
+   * - MP3, WAV (all platforms)
+   * - M3U8/HLS streams (iOS and Android)
+   */
+  assetPath: string;
+  /**
+   * Asset Id, unique identifier of the file
+   */
+  assetId: string;
+  /**
+   * Volume of the audio, between 0.1 and 1.0
+   */
+  volume?: number;
+  /**
+   * Audio channel number, default is 1
+   */
+  audioChannelNum?: number;
+  /**
+   * Is the audio file a URL, pass true if assetPath is a `file://` url
+   * or a streaming URL (m3u8)
+   */
+  isUrl?: boolean;
+  /**
+   * Metadata to display in the notification center when audio is playing.
+   * Only used when `showNotification: true` is set in `configure()`.
+   *
+   * See {@link ConfigureOptions.showNotification} for important details about
+   * how this affects audio mixing behavior on iOS.
+   *
+   * @see NotificationMetadata
+   */
+  notificationMetadata?: NotificationMetadata;
+  /**
+   * Custom HTTP headers to include when fetching remote audio files.
+   * Only used when isUrl is true and assetPath is a remote URL (http/https).
+   * Example: { 'x-api-key': 'abc123', 'Authorization': 'Bearer token' }
+   *
+   * @since 7.10.0
+   */
+  headers?: Record<string, string>;
+}
+```
+
+### `PlayOnceOptions`
+```typescript
+export interface PlayOnceOptions {
+  /**
+   * Path to the audio file, relative path of the file, absolute url (file://) or remote url (https://)
+   * Supported formats:
+   * - MP3, WAV (all platforms)
+   * - M3U8/HLS streams (iOS and Android)
+   */
+  assetPath: string;
+  /**
+   * Volume of the audio, between 0.1 and 1.0
+   * @default 1.0
+   */
+  volume?: number;
+  /**
+   * Is the audio file a URL, pass true if assetPath is a `file://` url
+   * or a streaming URL (m3u8)
+   * @default false
+   */
+  isUrl?: boolean;
+  /**
+   * Automatically start playback after loading
+   * @default true
+   */
+  autoPlay?: boolean;
+  /**
+   * Delete the audio file from disk after playback completes
+   * Only works for local files (file:// URLs), ignored for remote URLs
+   * @default false
+   * @since 7.11.0
+   */
+  deleteAfterPlay?: boolean;
+  /**
+   * Metadata to display in the notification center when audio is playing.
+   * Only used when `showNotification: true` is set in `configure()`.
+   *
+   * See {@link ConfigureOptions.showNotification} for important details about
+   * how this affects audio mixing behavior on iOS.
+   *
+   * @see NotificationMetadata
+   * @since 7.10.0
+   */
+  notificationMetadata?: NotificationMetadata;
+  /**
+   * Custom HTTP headers to include when fetching remote audio files.
+   * Only used when isUrl is true and assetPath is a remote URL (http/https).
+   * Example: { 'x-api-key': 'abc123', 'Authorization': 'Bearer token' }
+   *
+   * @since 7.10.0
+   */
+  headers?: Record<string, string>;
+}
+```
+
+### `PlayOnceResult`
+```typescript
+export interface PlayOnceResult {
+  /**
+   * The internally generated asset ID for this playback
+   * Can be used to control playback (pause, stop, etc.) before completion
+   */
+  assetId: string;
+}
+```
+
+### `AssetPlayOptions`
+```typescript
+export interface AssetPlayOptions {
+  /**
+   * Asset Id, unique identifier of the file
+   */
+  assetId: string;
+  /**
+   * Time to start playing the audio, in seconds
+   */
+  time?: number;
+  /**
+   * Delay to start playing the audio, in seconds
+   */
+  delay?: number;
+
+  /**
+   * Volume of the audio, between 0.1 and 1.0
+   */
+  volume?: number;
+
+  /**
+   * Whether to fade in the audio
+   */
+  fadeIn?: boolean;
+
+  /**
+   * Whether to fade out the audio
+   */
+  fadeOut?: boolean;
+
+  /**
+   * Fade in duration in seconds.
+   * Only used if fadeIn is true.
+   * Default is 1s.
+   */
+  fadeInDuration?: number;
+
+  /**
+   * Fade out duration in seconds.
+   * Only used if fadeOut is true.
+   * Default is 1s.
+   */
+  fadeOutDuration?: number;
+
+  /**
+   * Time in seconds from the start of the audio to start fading out.
+   * Only used if fadeOut is true.
+   * Default is fadeOutDuration before end of audio.
+   */
+  fadeOutStartTime?: number;
+}
+```
+
+### `AssetPauseOptions`
+```typescript
+export interface AssetPauseOptions {
+  /**
+   * Asset Id, unique identifier of the file
+   */
+  assetId: string;
+
+  /**
+   * Whether to fade out the audio before pausing
+   */
+  fadeOut?: boolean;
+
+  /**
+   * Fade out duration in seconds.
+   * Default is 1s.
+   */
+  fadeOutDuration?: number;
+}
+```
+
+### `AssetResumeOptions`
+```typescript
+export interface AssetResumeOptions {
+  /**
+   * Asset Id, unique identifier of the file
+   */
+  assetId: string;
+
+  /**
+   * Whether to fade in the audio during resume
+   */
+  fadeIn?: boolean;
+
+  /**
+   * Fade in duration in seconds.
+   * Default is 1s.
+   */
+  fadeInDuration?: number;
+}
+```
+
+### `Assets`
+```typescript
+export interface Assets {
+  /**
+   * Asset Id, unique identifier of the file
+   */
+  assetId: string;
+}
+```
+
+### `AssetStopOptions`
+```typescript
+export interface AssetStopOptions {
+  /**
+   * Asset Id, unique identifier of the file
+   */
+  assetId: string;
+
+  /**
+   * Whether to fade out the audio before stopping
+   */
+  fadeOut?: boolean;
+
+  /**
+   * Fade out duration in seconds.
+   * Default is 1s.
+   */
+  fadeOutDuration?: number;
+}
+```
+
+### `AssetVolume`
+```typescript
+export interface AssetVolume {
+  /**
+   * Asset Id, unique identifier of the file
+   */
+  assetId: string;
+  /**
+   * Volume of the audio, between 0.1 and 1.0
+   */
+  volume: number;
+  /**
+   * Time over which to fade to the target volume, in seconds. Default is 0s (immediate).
+   */
+  duration?: number;
+}
+```
+
+### `AssetRate`
+```typescript
+export interface AssetRate {
+  /**
+   * Asset Id, unique identifier of the file
+   */
+  assetId: string;
+  /**
+   * Rate of the audio, between 0.1 and 1.0
+   */
+  rate: number;
+}
+```
+
+### `AssetSetTime`
+```typescript
+export interface AssetSetTime {
+  /**
+   * Asset Id, unique identifier of the file
+   */
+  assetId: string;
+  /**
+   * Time to set the audio, in seconds
+   */
+  time: number;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

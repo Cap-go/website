@@ -1,78 +1,67 @@
 ---
 locale: en
 ---
-
 # Using @capgo/capacitor-intercom
 
-The `@capgo/capacitor-intercom` package brings Intercom support to Capacitor apps with native iOS and Android implementations. Use this guide to add in-app chat, help center, and push integration to your app.
+Intercom Capacitor plugin.
 
-## Installation
-
-Install the plugin and sync native projects:
+## Install
 
 ```bash
-npm install @capgo/capacitor-intercom
-npx cap sync
+bun add @capgo/capacitor-intercom
+bunx cap sync
 ```
 
-## Configure keys
+## What This Plugin Exposes
 
-You can configure Intercom directly in your Capacitor configuration:
+- `loadWithKeys` - Initialize Intercom with API keys at runtime. Use this if you prefer not to configure keys in capacitor.config.
+- `registerIdentifiedUser` - Register a known user with Intercom. At least one of userId or email must be provided.
+- `registerUnidentifiedUser` - Register an anonymous user with Intercom.
+- `updateUser` - Update user attributes in Intercom.
 
-```json
-{
-  "plugins": {
-    "CapgoIntercom": {
-      "iosApiKey": "ios_sdk-xxx",
-      "iosAppId": "your_ios_app_id",
-      "androidApiKey": "android_sdk-xxx",
-      "androidAppId": "your_android_app_id"
-    }
-  }
-}
-```
+## Example Usage
 
-You can also initialize at runtime with:
+### `loadWithKeys`
+
+Initialize Intercom with API keys at runtime. Use this if you prefer not to configure keys in capacitor.config.
 
 ```typescript
-import { CapgoIntercom } from '@capgo/capacitor-intercom'
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-await CapgoIntercom.loadWithKeys({
-  appId: 'your_app_id',
-  apiKeyIOS: 'ios_sdk-xxx',
-  apiKeyAndroid: 'android_sdk-xxx',
-})
+await CapgoIntercom.loadWithKeys({} as IntercomLoadOptions);
 ```
 
-## Usage
+### `registerIdentifiedUser`
 
-Open the messenger and help center:
+Register a known user with Intercom. At least one of userId or email must be provided.
 
 ```typescript
-await CapgoIntercom.displayMessenger()
-await CapgoIntercom.displayHelpCenter()
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.registerIdentifiedUser({} as IntercomIdentifiedUserOptions);
 ```
 
-Register users, push events, and read unread conversation count:
+### `registerUnidentifiedUser`
+
+Register an anonymous user with Intercom.
 
 ```typescript
-await CapgoIntercom.registerIdentifiedUser({ email: 'user@example.com' })
-await CapgoIntercom.logEvent({ name: 'support_opened', data: { section: 'billing' } })
-const { count } = await CapgoIntercom.getUnreadConversationCount()
-console.log('Unread conversations:', count)
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
+
+await CapgoIntercom.registerUnidentifiedUser();
 ```
 
-## Additional methods
+### `updateUser`
 
-This plugin also exposes methods for:
+Update user attributes in Intercom.
 
-- `registerUnidentifiedUser`
-- `updateUser`
-- `logout`
-- `displayArticle` and `displaySurvey`
-- `setUserHash` / `setUserJwt`
-- `sendPushTokenToIntercom`
-- Event listeners for messenger visibility and unread count changes
+```typescript
+import { CapgoIntercom } from '@capgo/capacitor-intercom';
 
-For official references and advanced setup, check the plugin repository:
-[github.com/Cap-go/capacitor-intercom](https://github.com/Cap-go/capacitor-intercom)
+await CapgoIntercom.updateUser({} as IntercomUserUpdateOptions);
+```
+
+## Full Reference
+
+- GitHub: https://github.com/Cap-go/capacitor-intercom/
+- Docs: /docs/plugins/intercom/

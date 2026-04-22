@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-downloader"
-description: File download manager plugin for Capacitor apps with background downloads, progress tracking, and resume capabilities.
+description: "Download file in background or foreground."
 tableOfContents: false
 next: false
 prev: false
@@ -8,43 +8,45 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Download files with background support, progress tracking, pause/resume capabilities, and efficient download management.
-  image:
-    file: ~public/icons/plugins/downloader.svg
+  tagline: "Capacitor plugin for downloading files with background support. Provides resumable downloads with progress tracking."
   actions:
     - text: Get started
       link: /docs/plugins/downloader/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-downloader/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
-
 ## Overview
 
-The Capacitor Downloader plugin provides powerful file download capabilities with support for background downloads, progress tracking, and comprehensive download management. This plugin enables robust file downloading with pause/resume functionality and detailed progress monitoring.
+Capacitor plugin for downloading files with background support. Provides resumable downloads with progress tracking.
 
-> ⚠️ **Work in Progress**: This plugin is currently under development and not yet ready for production use.
+## Core Capabilities
 
-<CardGrid stagger>
-  <Card title="Background downloads" icon="rocket">
-    Continue downloads when app is backgrounded 📥
-  </Card>
-  <Card title="Progress tracking" icon="star">
-    Real-time download progress and status monitoring 📊
-  </Card>
-  <Card title="Download control" icon="rocket">
-    Pause, resume, and stop downloads dynamically ⏯️
-  </Card>
-  <Card title="Network options" icon="puzzle">
-    Configure network preferences and priorities 📶
-  </Card>
-</CardGrid>
+- `download` - Start a new download task.
+- `pause` - Pause an active download. Download can be resumed later from the same position.
+- `resume` - Resume a paused download. Continues from where it was paused.
+- `stop` - Stop and cancel a download permanently. Downloaded data will be deleted.
 
-## Development Status
+## Public API
 
-This plugin is inspired by react-native-background-downloader and is currently being developed. Features may change as development progresses.
+| Method | Description |
+| --- | --- |
+| `download` | Start a new download task. |
+| `pause` | Pause an active download. Download can be resumed later from the same position. |
+| `resume` | Resume a paused download. Continues from where it was paused. |
+| `stop` | Stop and cancel a download permanently. Downloaded data will be deleted. |
+| `checkStatus` | Check the current status of a download. |
+| `getFileInfo` | Get information about a downloaded file. |
+| `addListener` | Listen for download progress updates. Fired periodically as download progresses. |
+| `addListener` | Listen for download completion. Fired when a download finishes successfully. |
+| `addListener` | Listen for download failures. Fired when a download encounters an error. |
+| `removeAllListeners` | Remove all event listeners. Cleanup method to prevent memory leaks. |
+| `getPluginVersion` | Get the plugin version number. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-downloader](https://github.com/Cap-go/capacitor-downloader/).

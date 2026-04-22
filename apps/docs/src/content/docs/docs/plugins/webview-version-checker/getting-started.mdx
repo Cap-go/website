@@ -10,10 +10,10 @@ import { Steps } from '@astrojs/starlight/components';
 
 <Steps>
 1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-webview-version-checker" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers pkg="@capgo/capacitor-webview-version-checker" pkgManagers={['bun']} />
 
 2. **Sync native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['bun']} />
 
 3. **Optional: add plugin config**
    You can run with defaults (`WebviewVersionChecker: {}`) or customize prompt and threshold behavior in `capacitor.config.ts`.

@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-llm"
-description: Run LLM models locally in iOS and Android with native Apple Intelligence support for privacy and offline capabilities.
+description: "Adds support for locally run LLMs in Capacitor."
 tableOfContents: false
 next: false
 prev: false
@@ -8,39 +8,44 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Run LLM models directly on device with native Apple Intelligence integration and hardware acceleration.
-  image:
-    file: ~public/icons/plugins/llm.svg
+  tagline: "LLM Plugin interface for interacting with on-device language models."
   actions:
     - text: Get started
       link: /docs/plugins/llm/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-llm/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="On-Device Privacy" icon="approve-check-circle">
-    Run LLM models directly on device for privacy and offline capabilities 🤖
-  </Card>
-  <Card title="Apple Intelligence" icon="star">
-    Native Apple Intelligence integration on iOS 26.0+ 🍎
-  </Card>
-  <Card title="Multiple Formats" icon="puzzle">
-    Support for .task and .litertlm model formats 📦
-  </Card>
-  <Card title="Hardware Acceleration" icon="rocket">
-    Fast inference with native hardware acceleration ⚡
-  </Card>
-  <Card title="Streaming Responses" icon="download">
-    Real-time streaming responses with event listeners 🔄
-  </Card>
-  <Card title="Getting Started" icon="open-book">
-    Check the [Getting Started Guide](/docs/plugins/llm/getting-started/) to install and configure the plugin.
-  </Card>
-</CardGrid>
+LLM Plugin interface for interacting with on-device language models.
+
+## Core Capabilities
+
+- `createChat` - Creates a new chat session.
+- `sendMessage` - Sends a message to the AI in a specific chat session.
+- `getReadiness` - Gets the readiness status of the LLM.
+- `setModel` - Sets the model configuration - iOS: Use "Apple Intelligence" as path for system model, or provide path to MediaPipe model - Android: Path to a MediaPipe model file (in assets or files directory).
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `createChat` | Creates a new chat session. |
+| `sendMessage` | Sends a message to the AI in a specific chat session. |
+| `getReadiness` | Gets the readiness status of the LLM. |
+| `setModel` | Sets the model configuration - iOS: Use "Apple Intelligence" as path for system model, or provide path to MediaPipe model - Android: Path to a MediaPipe model file (in assets or files directory). |
+| `downloadModel` | Downloads a model from a URL and saves it to the appropriate location - iOS: Downloads to the app's documents directory - Android: Downloads to the app's files directory. |
+| `addListener` | Adds a listener for text received from AI. |
+| `addListener` | Adds a listener for AI completion events. |
+| `addListener` | Adds a listener for model download progress events. |
+| `addListener` | Adds a listener for readiness status changes. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-llm](https://github.com/Cap-go/capacitor-llm/).

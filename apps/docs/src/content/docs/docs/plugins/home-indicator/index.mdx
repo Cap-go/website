@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-home-indicator"
-description: Capacitor plugin to control the home indicator visibility on iOS devices, allowing for immersive full-screen experiences.
+description: "hide and show home button indicator in Capacitor app."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,37 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Hide or show the home indicator on iOS devices to create truly immersive full-screen experiences in your app.
-  image:
-    file: ~public/icons/plugins/home-indicator.svg
+  tagline: "Capacitor Home Indicator Plugin for controlling the iOS home indicator visibility. The home indicator is the horizontal bar at the bottom of iOS devices without a physical home button."
   actions:
     - text: Get started
       link: /docs/plugins/home-indicator/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-home-indicator/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="iOS home indicator control" icon="rocket">
-    Full control over the home indicator visibility 📱
-  </Card>
-  <Card title="Immersive experiences" icon="setting">
-    Create full-screen experiences without distractions 🎮
-  </Card>
-  <Card title="Simple API" icon="star">
-    Hide, show, and check visibility with a clean API ✨
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/home-indicator/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+Capacitor Home Indicator Plugin for controlling the iOS home indicator visibility. The home indicator is the horizontal bar at the bottom of iOS devices without a physical home button.
+
+## Core Capabilities
+
+- `hide` - Hide the home indicator at the bottom of the screen.
+- `show` - Show the home indicator at the bottom of the screen.
+- `isHidden` - Check whether the home indicator is currently hidden.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `hide` | Hide the home indicator at the bottom of the screen. |
+| `show` | Show the home indicator at the bottom of the screen. |
+| `isHidden` | Check whether the home indicator is currently hidden. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-home-indicator](https://github.com/Cap-go/capacitor-home-indicator/).

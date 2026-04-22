@@ -1,0 +1,113 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-firebase-app and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+```bash
+bun add @capgo/capacitor-firebase-app
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { FirebaseApp } from '@capgo/capacitor-firebase-app';
+```
+
+## API Overview
+
+### `getName`
+
+Get the name for this app.
+
+```typescript
+import { FirebaseApp } from '@capgo/capacitor-firebase-app';
+
+await FirebaseApp.getName();
+```
+
+### `getOptions`
+
+Get the configuration options for this app.
+
+```typescript
+import { FirebaseApp } from '@capgo/capacitor-firebase-app';
+
+await FirebaseApp.getOptions();
+```
+
+## Type Reference
+
+### `GetNameResult`
+```typescript
+export interface GetNameResult {
+  /**
+   * The unique name of this app.
+   *
+   * @since 0.1.0
+   */
+  name: string;
+}
+```
+
+### `GetOptionsResult`
+```typescript
+export interface GetOptionsResult {
+  /**
+   * API key used for authenticating requests from your app.
+   *
+   * @since 0.1.0
+   */
+  apiKey: string;
+  /**
+   * Google App ID used to uniquely identify an instance of an app.
+   *
+   * @since 0.1.0
+   */
+  applicationId: string;
+  /**
+   * The database root URL.
+   *
+   * @since 0.1.0
+   */
+  databaseUrl: string;
+  /**
+   * The Project Number.
+   *
+   * @since 0.1.0
+   */
+  gcmSenderId: string;
+  /**
+   * The Google Cloud project ID.
+   *
+   * @since 0.1.0
+   */
+  projectId: string;
+  /**
+   * The Google Cloud Storage bucket name.
+   *
+   * @since 0.1.0
+   */
+  storageBucket: string;
+}
+```
+
+### `GetPluginVersionResult`
+```typescript
+export interface GetPluginVersionResult {
+  /**
+   * The semantic version of this plugin.
+   *
+   * @since 8.0.1
+   */
+  version: string;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-printer"
-description: Print documents, HTML, PDFs, images and web views from your Capacitor app.
+description: "Capacitor plugin for printing documents, HTML, PDFs, images and web views."
 tableOfContents: false
 next: false
 prev: false
@@ -8,39 +8,40 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Print documents, HTML content, PDFs, images and web views directly from your Capacitor app on iOS and Android.
-  image:
-    file: ~public/icons/plugins/printer.svg
+  tagline: "Capacitor plugin for printing documents, HTML, PDFs, images and web views."
   actions:
     - text: Get started
       link: /docs/plugins/printer/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-printer/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Multiple Formats" icon="document">
-    Print HTML, PDFs, images, and web content 📄
-  </Card>
-  <Card title="Native UI" icon="laptop">
-    Uses native print dialogs on iOS and Android 🖨️
-  </Card>
-  <Card title="Easy Integration" icon="rocket">
-    Simple API for quick integration into your app 🚀
-  </Card>
-  <Card title="Cross-platform" icon="puzzle">
-    Works on both iOS and Android devices 📱
-  </Card>
-  <Card title="Customizable" icon="setting">
-    Control print options like orientation and page size ⚙️
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/printer/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+Capacitor plugin for printing documents, HTML, PDFs, images and web views.
+
+## Core Capabilities
+
+- `printBase64` - Presents the printing UI to print files encoded as base64 strings.
+- `printFile` - Presents the printing UI to print device files.
+- `printHtml` - Presents the printing UI to print HTML documents.
+- `printPdf` - Presents the printing UI to print PDF documents.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `printBase64` | Presents the printing UI to print files encoded as base64 strings. |
+| `printFile` | Presents the printing UI to print device files. |
+| `printHtml` | Presents the printing UI to print HTML documents. |
+| `printPdf` | Presents the printing UI to print PDF documents. |
+| `printWebView` | Presents the printing UI to print web view content. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-printer](https://github.com/Cap-go/capacitor-printer/).

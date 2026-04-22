@@ -12,26 +12,26 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 <Tabs>
   <TabItem label="npm">
     ```bash
-    npm install @capgo/capacitor-updater
-    npx cap sync
+    bun add @capgo/capacitor-updater
+    bunx cap sync
     ```
   </TabItem>
   <TabItem label="yarn">
     ```bash
     yarn add @capgo/capacitor-updater
-    npx cap sync
+    bunx cap sync
     ```
   </TabItem>
   <TabItem label="pnpm">
     ```bash
     pnpm add @capgo/capacitor-updater
-    npx cap sync
+    bunx cap sync
     ```
   </TabItem>
   <TabItem label="bun">
     ```bash
     bun add @capgo/capacitor-updater
-    npx cap sync
+    bunx cap sync
     ```
   </TabItem>
 </Tabs>
@@ -232,7 +232,7 @@ The easiest way to get started:
 
 ```typescript
 // Install the Capgo CLI
-npm install -g @capgo/cli
+bun add -g @capgo/cli
 
 // Login to Capgo
 npx @capgo/cli login

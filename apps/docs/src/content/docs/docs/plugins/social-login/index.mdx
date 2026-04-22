@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-social-login"
-description: Capacitor plugin for seamless social authentication with Google, Apple, Facebook, Twitter, and generic OAuth2 providers, enhancing user login security and experience.
+description: "All social logins in one plugin."
 tableOfContents: false
 next: false
 prev: false
@@ -8,71 +8,50 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: A Capacitor plugin for social authentication with Google, Apple, Facebook, Twitter, and any OAuth2 provider, making user login seamless and secure.
-  image:
-    file: ~public/icons/plugins/social-login.svg
+  tagline: "All social logins in one plugin."
   actions:
     - text: Get started
       link: /docs/plugins/social-login/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-social-login/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
-import YouTubeEmbed from '@/components/YouTubeEmbed.astro';
+## Overview
 
-## Video Walkthrough
+All social logins in one plugin.
 
-Watch a quick demo of the plugin setup and login flow in action.
+## Core Capabilities
 
-<YouTubeEmbed id="iTINYxvSJrE" title="Capgo Social Login plugin overview" />
+- `initialize` - Initialize the plugin.
+- `login` - Login with the selected provider.
+- `logout` - Logout.
+- `isLoggedIn` - IsLoggedIn.
 
-<CardGrid stagger>
-  <Card title="Multiple providers" icon="rocket">
-    One API for Google, Apple, Facebook, Twitter/X, and generic OAuth2.
-  </Card>
-  <Card title="OIDC / OAuth2" icon="external">
-    Multi-provider OAuth2 with OIDC discovery and provider aliases.
-  </Card>
-  <Card title="Auth helpers" icon="setting">
-    Token helpers for refresh, expiry checks, JWT decoding, and redirect handling.
-  </Card>
-  <Card title="Provider-specific behavior" icon="pencil">
-    Supports Google offline mode, Apple proper token exchange, and Facebook business flows.
-  </Card>
-  <Card title="Provider bundling" icon="seti:folder">
-    Configure enabled providers in `capacitor.config` to reduce binary size.
-  </Card>
-  <Card title="Migration guides" icon="open-book">
-    See upgrade docs for Ionic Auth Connect and legacy provider migration.
-  </Card>
-</CardGrid>
+## Public API
 
-## Provider guides
+| Method | Description |
+| --- | --- |
+| `initialize` | Initialize the plugin. |
+| `login` | Login with the selected provider. |
+| `logout` | Logout. |
+| `isLoggedIn` | IsLoggedIn. |
+| `getAuthorizationCode` | Get the current authorization code. |
+| `refresh` | Refresh the access token. |
+| `refreshToken` | OAuth2 refresh-token helper (feature parity with Capawesome OAuth). |
+| `handleRedirectCallback` | Web-only: handle the OAuth redirect callback and return the parsed result. |
+| `decodeIdToken` | Decode a JWT (typically an OIDC ID token) into its claims. |
+| `getAccessTokenExpirationDate` | Convert an access token expiration timestamp (milliseconds since epoch) to an ISO date string. |
+| `isAccessTokenAvailable` | Check if an access token is available (non-empty). |
+| `isAccessTokenExpired` | Check if an access token is expired. |
+| `isRefreshTokenAvailable` | Check if a refresh token is available (non-empty). |
+| `providerSpecificCall` | Execute provider-specific calls. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+| `openSecureWindow` | Opens a secured window for OAuth2 authentication. For web, you should have the code in the redirected page to use a broadcast channel to send the redirected url to the app Something like: ```html <html> <head></head> <body> <script> const searchParams = new URLSearchParams(location.search) if (searchParams.has("code")) { new BroadcastChannel("my-channel-name").postMessage(location.href); window.close(); } </script> </body> </html> ``` For mobile, you should have a redirect uri that opens the app, something like: `myapp://oauth_callback/` And make sure to register it in the app's info.plist: ```xml <key>CFBundleURLTypes</key> <array> <dict> <key>CFBundleURLSchemes</key> <array> <string>myapp</string> </array> </dict> </array> ``` And in the AndroidManifest.xml file: ```xml <activity> <intent-filter> <action android:name="android.intent.action.VIEW" /> <category android:name="android.intent.category.DEFAULT" /> <category android:name="android.intent.category.BROWSABLE" /> <data android:host="oauth_callback" android:scheme="myapp" /> </intent-filter> </activity> ```. |
 
-<CardGrid>
-  <a href="/docs/plugins/social-login/oauth2/">
-    <Card title="OAuth2 and OIDC Providers" icon="external">
-      Setup guides for GitHub, Azure AD, Auth0, Okta, Keycloak, and custom providers.
-    </Card>
-  </a>
-  <a href="/docs/plugins/social-login/migrations/ionic-auth-connect/">
-    <Card title="Auth Connect Migration" icon="open-book">
-      Keep familiar provider names like Auth0, Azure, Cognito, Okta, and OneLogin.
-    </Card>
-  </a>
-</CardGrid>
+## Source Of Truth
 
-## Integrations
-
-<CardGrid>
-  <a href="/docs/plugins/social-login/integrations/">
-    <Card title="Integration Guides" icon="setting">
-      Better Auth, Firebase, and Supabase integration entry points in one place.
-    </Card>
-  </a>
-</CardGrid>
+This reference is synced from `src/definitions.ts` in [capacitor-social-login](https://github.com/Cap-go/capacitor-social-login/).

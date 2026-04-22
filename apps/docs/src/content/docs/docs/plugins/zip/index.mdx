@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-zip"
-description: Zip and unzip files on iOS, Android, and Web with this free Capacitor plugin.
+description: "A free Capacitor plugin for zipping and unzipping files on iOS, Android, and Web."
 tableOfContents: false
 next: false
 prev: false
@@ -8,39 +8,35 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Compress and extract ZIP archives effortlessly on iOS, Android, and Web platforms.
-  image:
-    file: ~public/icons/plugins/zip.svg
+  tagline: "Capacitor Zip Plugin for compressing and extracting zip archives."
   actions:
     - text: Get started
       link: /docs/plugins/zip/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-zip/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Zip & Unzip" icon="add-document">
-    Create and extract ZIP archives with ease 📦
-  </Card>
-  <Card title="Cross-platform" icon="laptop">
-    Works seamlessly on iOS, Android, and Web 📱
-  </Card>
-  <Card title="Simple API" icon="rocket">
-    Easy-to-use interface for compression operations 🚀
-  </Card>
-  <Card title="Free & Open Source" icon="github">
-    Completely free with no limitations 💰
-  </Card>
-  <Card title="Progress Tracking" icon="setting">
-    Monitor compression and extraction progress ⚙️
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/zip/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+Capacitor Zip Plugin for compressing and extracting zip archives.
+
+## Core Capabilities
+
+- `zip` - Compress a file or directory to create a ZIP archive.
+- `unzip` - Extract a ZIP archive to a specified destination directory.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `zip` | Compress a file or directory to create a ZIP archive. |
+| `unzip` | Extract a ZIP archive to a specified destination directory. |
+| `getPluginVersion` | Get the native plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-zip](https://github.com/Cap-go/capacitor-zip/).

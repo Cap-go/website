@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-intune"
-description: Microsoft Intune MAM enrollment, app protection policies, app config, and MSAL authentication in Capacitor apps.
+description: "Capacitor plugin for Microsoft Intune MAM enrollment, app protection policies, app config, and MSAL authentication."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,49 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Bring Microsoft Intune MAM, app protection policy checks, app config, and native MSAL authentication into one Capacitor plugin for iOS and Android.
-  image:
-    file: ~public/icons/plugins/intune.svg
+  tagline: "Capacitor plugin for Microsoft Intune MAM enrollment, app protection policies, app config, and MSAL authentication."
   actions:
     - text: Get started
       link: /docs/plugins/intune/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-intune/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Native Intune SDKs" icon="rocket">
-    Uses the Microsoft Intune iOS and Android SDKs inside a Capacitor-friendly API surface.
-  </Card>
-  <Card title="MSAL Included" icon="puzzle">
-    Acquire interactive or silent Microsoft tokens, then register and enroll the same account with Intune.
-  </Card>
-  <Card title="Policy and Config Access" icon="setting">
-    Read Intune app protection policies, app configuration values, and the common `GroupName` helper value.
-  </Card>
-  <Card title="Operational Signals" icon="open-book">
-    Listen for native app config and policy refresh events so your app can react when Intune updates arrive.
-  </Card>
-</CardGrid>
+Capacitor plugin for Microsoft Intune MAM enrollment, app protection policies, app config, and MSAL authentication.
+
+## Core Capabilities
+
+- `acquireToken` - Present the Microsoft sign-in flow and return an access token plus the account metadata.
+- `acquireTokenSilent` - Acquire a token from the MSAL cache for a previously signed-in user.
+- `registerAndEnrollAccount` - Register a previously authenticated account with Intune and start enrollment.
+- `loginAndEnrollAccount` - Ask Intune to authenticate and enroll a user without first requesting an app token.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `acquireToken` | Present the Microsoft sign-in flow and return an access token plus the account metadata. |
+| `acquireTokenSilent` | Acquire a token from the MSAL cache for a previously signed-in user. |
+| `registerAndEnrollAccount` | Register a previously authenticated account with Intune and start enrollment. |
+| `loginAndEnrollAccount` | Ask Intune to authenticate and enroll a user without first requesting an app token. |
+| `enrolledAccount` | Return the currently enrolled Intune account, if one is available. |
+| `deRegisterAndUnenrollAccount` | Deregister the account from Intune and trigger selective wipe when applicable. |
+| `logoutOfAccount` | Sign the user out of MSAL without unenrolling the Intune account. |
+| `appConfig` | Fetch the remote Intune app configuration for a managed account. |
+| `getPolicy` | Fetch the currently effective Intune app protection policy for a managed account. |
+| `groupName` | Convenience helper that resolves the `GroupName` app configuration value when present. |
+| `sdkVersion` | Return the native Intune and MSAL SDK versions bundled by this plugin. |
+| `displayDiagnosticConsole` | Show the native Intune diagnostics UI. |
+| `addListener` | Listen for remote app configuration refreshes. |
+| `addListener` | Listen for remote app protection policy refreshes. |
+| `removeAllListeners` | Remove all registered listeners for this plugin instance. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-intune](https://github.com/Cap-go/capacitor-intune/).

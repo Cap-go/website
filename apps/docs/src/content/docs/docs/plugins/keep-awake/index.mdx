@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-keep-awake"
-description: Prevent your device screen from dimming or sleeping with this simple Capacitor plugin.
+description: "Prevent the device screen from dimming or sleeping."
 tableOfContents: false
 next: false
 prev: false
@@ -8,39 +8,39 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Keep your device screen on programmatically for video players, navigation apps, games, and presentations.
-  image:
-    file: ~public/icons/plugins/keep-awake.svg
+  tagline: "Capacitor Keep Awake Plugin for preventing the device screen from dimming/sleeping."
   actions:
     - text: Get started
       link: /docs/plugins/keep-awake/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-keep-awake/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Simple API" icon="rocket">
-    Keep screen on or allow sleep with just one method call
-  </Card>
-  <Card title="Cross-platform" icon="puzzle">
-    Works on iOS, Android, and Web platforms
-  </Card>
-  <Card title="Lightweight" icon="star">
-    Zero dependencies with minimal footprint
-  </Card>
-  <Card title="Status Checking" icon="magnifier">
-    Query current wake lock state at any time
-  </Card>
-  <Card title="Platform Detection" icon="setting">
-    Check if wake lock is supported before using
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/keep-awake/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+Capacitor Keep Awake Plugin for preventing the device screen from dimming/sleeping.
+
+## Core Capabilities
+
+- `keepAwake` - Prevent the device from dimming the screen.
+- `allowSleep` - Allow the device to dim the screen (disable keep awake).
+- `isSupported` - Check if the keep awake feature is supported on the current platform.
+- `isKeptAwake` - Check if the device is currently being kept awake.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `keepAwake` | Prevent the device from dimming the screen. |
+| `allowSleep` | Allow the device to dim the screen (disable keep awake). |
+| `isSupported` | Check if the keep awake feature is supported on the current platform. |
+| `isKeptAwake` | Check if the device is currently being kept awake. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-keep-awake](https://github.com/Cap-go/capacitor-keep-awake/).

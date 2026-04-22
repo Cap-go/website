@@ -1,431 +1,570 @@
 ---
 title: Getting Started
-description: Learn how to integrate YouTube video playback in your Capacitor app.
+description: "Install @capgo/capacitor-youtube-player and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-youtube-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+```bash
+bun add @capgo/capacitor-youtube-player
+bunx cap sync
+```
 
-2. **Sync with native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+## Import
 
-## Basic Usage
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+```
+
+## API Overview
+
+### `initialize`
+
+Initialize a new YouTube player instance.
 
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-// Initialize the player
-const result = await YoutubePlayer.initialize({
-  playerId: 'youtube-player',
-  playerSize: { width: 640, height: 360 },
-  videoId: 'dQw4w9WgXcQ',
-  fullscreen: false,
-  playerVars: {
-    autoplay: 1,
-    controls: 1
-  }
-});
-
-// Play video
-await YoutubePlayer.playVideo(result.player);
-
-// Pause video
-await YoutubePlayer.pauseVideo(result.player);
-
-// Listen to player events
-YoutubePlayer.addEventListener(result.player, 'onStateChange', (event) => {
-  console.log('Player state:', event.data);
-});
-```
-
-## API Reference
-
-### initialize(options)
-
-Initialize a YouTube player instance.
-
-```typescript
-const { player, playerReady } = await YoutubePlayer.initialize({
+await YoutubePlayer.initialize({
   playerId: 'my-player',
-  playerSize: { width: 1280, height: 720 },
-  videoId: 'VIDEO_ID',
-  fullscreen: false,
-  playerVars: {
-    autoplay: 0,
-    controls: 1,
-    rel: 0
-  }
+  videoId: 'dQw4w9WgXcQ',
+  playerSize: { width: 640, height: 360 },
+  privacyEnhanced: true
 });
 ```
 
-### Video Control Methods
+### `destroy`
 
-```typescript
-// Play
-await YoutubePlayer.playVideo(playerId);
-
-// Pause
-await YoutubePlayer.pauseVideo(playerId);
-
-// Stop
-await YoutubePlayer.stopVideo(playerId);
-
-// Seek to time
-await YoutubePlayer.seekTo(playerId, seconds, allowSeekAhead);
-
-// Load video by ID
-await YoutubePlayer.loadVideoById(playerId, { videoId: 'VIDEO_ID' });
-
-// Cue video (load without playing)
-await YoutubePlayer.cueVideoById(playerId, { videoId: 'VIDEO_ID' });
-```
-
-### Playlist Control
-
-```typescript
-// Load playlist
-await YoutubePlayer.loadPlaylist(playerId, {
-  listType: 'playlist',
-  list: 'PLAYLIST_ID'
-});
-
-// Cue playlist
-await YoutubePlayer.cuePlaylist(playerId, {
-  playlist: ['VIDEO_ID_1', 'VIDEO_ID_2'],
-  index: 0
-});
-
-// Navigate playlist
-await YoutubePlayer.nextVideo(playerId);
-await YoutubePlayer.previousVideo(playerId);
-await YoutubePlayer.playVideoAt(playerId, index);
-```
-
-### Audio Control
-
-```typescript
-// Mute/Unmute
-await YoutubePlayer.mute(playerId);
-await YoutubePlayer.unMute(playerId);
-
-const { result } = await YoutubePlayer.isMuted(playerId);
-console.log('Muted:', result.value);
-
-// Volume (0-100)
-await YoutubePlayer.setVolume(playerId, 50);
-const { result } = await YoutubePlayer.getVolume(playerId);
-```
-
-### Playback Control
-
-```typescript
-// Playback rate
-await YoutubePlayer.setPlaybackRate(playerId, 1.5);
-const { result } = await YoutubePlayer.getPlaybackRate(playerId);
-
-// Available rates
-const { result } = await YoutubePlayer.getAvailablePlaybackRates(playerId);
-console.log('Available rates:', result.value);
-
-// Loop and shuffle
-await YoutubePlayer.setLoop(playerId, true);
-await YoutubePlayer.setShuffle(playerId, true);
-```
-
-### Quality Control
-
-```typescript
-// Set quality
-await YoutubePlayer.setPlaybackQuality(playerId, 'hd720');
-
-// Get current quality
-const { result } = await YoutubePlayer.getPlaybackQuality(playerId);
-
-// Get available qualities
-const { result } = await YoutubePlayer.getAvailableQualityLevels(playerId);
-```
-
-### Player Information
-
-```typescript
-// Duration
-const { result } = await YoutubePlayer.getDuration(playerId);
-
-// Current time
-const { result } = await YoutubePlayer.getCurrentTime(playerId);
-
-// Loaded fraction
-const { result } = await YoutubePlayer.getVideoLoadedFraction(playerId);
-
-// Player state
-const { result } = await YoutubePlayer.getPlayerState(playerId);
-
-// Video URL
-const { result } = await YoutubePlayer.getVideoUrl(playerId);
-```
-
-### Event Listeners
-
-```typescript
-// State change
-YoutubePlayer.addEventListener(playerId, 'onStateChange', (event) => {
-  console.log('State:', event.data); // -1, 0, 1, 2, 3, 5
-});
-
-// Ready
-YoutubePlayer.addEventListener(playerId, 'onReady', (event) => {
-  console.log('Player ready');
-});
-
-// Error
-YoutubePlayer.addEventListener(playerId, 'onError', (event) => {
-  console.error('Player error:', event.data);
-});
-
-// Quality change
-YoutubePlayer.addEventListener(playerId, 'onPlaybackQualityChange', (event) => {
-  console.log('Quality:', event.data);
-});
-
-// Rate change
-YoutubePlayer.addEventListener(playerId, 'onPlaybackRateChange', (event) => {
-  console.log('Rate:', event.data);
-});
-
-// Remove listener
-YoutubePlayer.removeEventListener(playerId, 'onStateChange', callback);
-```
-
-## Complete Example
+Destroy a player instance and free resources.
 
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-export class YouTubeService {
-  private playerId: string | null = null;
+await YoutubePlayer.destroy({} as PlayerIdOptions);
+```
 
-  async initPlayer(videoId: string) {
-    try {
-      const { player, playerReady } = await YoutubePlayer.initialize({
-        playerId: 'main-player',
-        playerSize: { width: 1280, height: 720 },
-        videoId,
-        fullscreen: false,
-        playerVars: {
-          autoplay: 0,
-          controls: 1,
-          modestbranding: 1,
-          rel: 0
-        }
-      });
+### `stopVideo`
 
-      this.playerId = player;
+Stop video playback and cancel loading.
+Use this sparingly - pauseVideo() is usually preferred.
 
-      // Set up event listeners
-      YoutubePlayer.addEventListener(player, 'onReady', () => {
-        console.log('Player is ready');
-      });
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-      YoutubePlayer.addEventListener(player, 'onStateChange', (event) => {
-        this.handleStateChange(event.data);
-      });
+await YoutubePlayer.stopVideo({} as PlayerIdOptions);
+```
 
-      YoutubePlayer.addEventListener(player, 'onError', (event) => {
-        console.error('YouTube error:', event.data);
-      });
+### `playVideo`
 
-      return player;
-    } catch (error) {
-      console.error('Failed to initialize player:', error);
-      throw error;
-    }
-  }
+Play the currently cued or loaded video.
+Final player state will be PLAYING (1).
 
-  private handleStateChange(state: number) {
-    switch (state) {
-      case -1:
-        console.log('Unstarted');
-        break;
-      case 0:
-        console.log('Ended');
-        break;
-      case 1:
-        console.log('Playing');
-        break;
-      case 2:
-        console.log('Paused');
-        break;
-      case 3:
-        console.log('Buffering');
-        break;
-      case 5:
-        console.log('Video cued');
-        break;
-    }
-  }
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-  async play() {
-    if (!this.playerId) return;
-    await YoutubePlayer.playVideo(this.playerId);
-  }
+await YoutubePlayer.playVideo({} as PlayerIdOptions);
+```
 
-  async pause() {
-    if (!this.playerId) return;
-    await YoutubePlayer.pauseVideo(this.playerId);
-  }
+### `pauseVideo`
 
-  async loadVideo(videoId: string) {
-    if (!this.playerId) return;
-    await YoutubePlayer.loadVideoById(this.playerId, { videoId });
-  }
+Pause the currently playing video.
+Final player state will be PAUSED (2), unless already ENDED (0).
 
-  async loadPlaylist(playlistId: string) {
-    if (!this.playerId) return;
-    await YoutubePlayer.loadPlaylist(this.playerId, {
-      listType: 'playlist',
-      list: playlistId,
-      index: 0
-    });
-  }
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-  async setQuality(quality: 'small' | 'medium' | 'large' | 'hd720' | 'hd1080') {
-    if (!this.playerId) return;
-    await YoutubePlayer.setPlaybackQuality(this.playerId, quality);
-  }
+await YoutubePlayer.pauseVideo({} as PlayerIdOptions);
+```
 
-  async getProgress() {
-    if (!this.playerId) return { current: 0, duration: 0 };
+### `seekTo`
 
-    const current = await YoutubePlayer.getCurrentTime(this.playerId);
-    const duration = await YoutubePlayer.getDuration(this.playerId);
+Seek to a specific time in the video.
+If player is paused, it remains paused. If playing, continues playing.
 
-    return {
-      current: current.result.value,
-      duration: duration.result.value
-    };
-  }
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
 
-  async destroy() {
-    if (!this.playerId) return;
-    await YoutubePlayer.destroy(this.playerId);
-    this.playerId = null;
-  }
+await YoutubePlayer.seekTo({} as SeekToOptions);
+```
+
+### `loadVideoById`
+
+Load and play a video by its YouTube ID.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.loadVideoById({} as VideoByIdMethodOptions);
+```
+
+### `cueVideoById`
+
+Cue a video by ID without playing it.
+Loads thumbnail and prepares player, but doesn't request video until playVideo() called.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.cueVideoById({} as VideoByIdMethodOptions);
+```
+
+### `loadVideoByUrl`
+
+Load and play a video by its full URL.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.loadVideoByUrl({} as VideoByUrlMethodOptions);
+```
+
+### `cueVideoByUrl`
+
+Cue a video by URL without playing it.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.cueVideoByUrl({} as VideoByUrlMethodOptions);
+```
+
+### `cuePlaylist`
+
+Cue a playlist without playing it.
+Loads playlist and prepares first video.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.cuePlaylist({} as PlaylistMethodOptions);
+```
+
+### `loadPlaylist`
+
+Load and play a playlist.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.loadPlaylist({} as PlaylistMethodOptions);
+```
+
+### `nextVideo`
+
+Play the next video in the playlist.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.nextVideo({} as PlayerIdOptions);
+```
+
+### `previousVideo`
+
+Play the previous video in the playlist.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.previousVideo({} as PlayerIdOptions);
+```
+
+### `playVideoAt`
+
+Play a specific video in the playlist by index.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.playVideoAt({} as PlayVideoAtOptions);
+```
+
+### `mute`
+
+Mute the player audio.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.mute({} as PlayerIdOptions);
+```
+
+### `unMute`
+
+Unmute the player audio.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.unMute({} as PlayerIdOptions);
+```
+
+### `isMuted`
+
+Check if the player is currently muted.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.isMuted({} as PlayerIdOptions);
+```
+
+### `setVolume`
+
+Set the player volume level.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.setVolume({} as SetVolumeOptions);
+```
+
+### `getVolume`
+
+Get the current player volume level.
+Returns volume even if player is muted.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.getVolume({} as PlayerIdOptions);
+```
+
+### `setSize`
+
+Set the player dimensions in pixels.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.setSize({} as SetSizeOptions);
+```
+
+### `getPlaybackRate`
+
+Get the current playback rate.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.getPlaybackRate({} as PlayerIdOptions);
+```
+
+### `setPlaybackRate`
+
+Set the playback speed.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.setPlaybackRate({} as SetPlaybackRateOptions);
+```
+
+### `getAvailablePlaybackRates`
+
+Get list of available playback rates for current video.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.getAvailablePlaybackRates({} as PlayerIdOptions);
+```
+
+### `setLoop`
+
+Enable or disable playlist looping.
+When enabled, playlist will restart from beginning after last video.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.setLoop({} as SetLoopOptions);
+```
+
+### `setShuffle`
+
+Enable or disable playlist shuffle.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.setShuffle({} as SetShuffleOptions);
+```
+
+### `getVideoLoadedFraction`
+
+Get the fraction of the video that has been buffered.
+More reliable than deprecated getVideoBytesLoaded/getVideoBytesTotal.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.getVideoLoadedFraction({} as PlayerIdOptions);
+```
+
+### `getPlayerState`
+
+Get the current state of the player.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.getPlayerState({} as PlayerIdOptions);
+```
+
+### `getAllPlayersEventsState`
+
+Get event states for all active players.
+Useful for tracking multiple player instances.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.getAllPlayersEventsState();
+```
+
+### `getCurrentTime`
+
+Get the current playback position in seconds.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.getCurrentTime({} as PlayerIdOptions);
+```
+
+### `toggleFullScreen`
+
+Toggle fullscreen mode on or off.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.toggleFullScreen({} as ToggleFullScreenOptions);
+```
+
+### `getPlaybackQuality`
+
+Get the current playback quality.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.getPlaybackQuality({} as PlayerIdOptions);
+```
+
+### `setPlaybackQuality`
+
+Set the suggested playback quality.
+Actual quality may differ based on network conditions.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.setPlaybackQuality({} as SetPlaybackQualityOptions);
+```
+
+### `getAvailableQualityLevels`
+
+Get list of available quality levels for current video.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.getAvailableQualityLevels({} as PlayerIdOptions);
+```
+
+### `getDuration`
+
+Get the duration of the current video in seconds.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.getDuration({} as PlayerIdOptions);
+```
+
+### `getVideoUrl`
+
+Get the YouTube.com URL for the current video.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.getVideoUrl({} as PlayerIdOptions);
+```
+
+### `getVideoEmbedCode`
+
+Get the embed code for the current video.
+Returns HTML iframe embed code.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.getVideoEmbedCode({} as PlayerIdOptions);
+```
+
+### `getPlaylist`
+
+Get array of video IDs in the current playlist.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.getPlaylist({} as PlayerIdOptions);
+```
+
+### `getPlaylistIndex`
+
+Get the index of the currently playing video in the playlist.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.getPlaylistIndex({} as PlayerIdOptions);
+```
+
+### `getIframe`
+
+Get the iframe DOM element for the player.
+Web platform only.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.getIframe({} as PlayerIdOptions);
+```
+
+### `addEventListener`
+
+Add an event listener to the player.
+Web platform only.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+YoutubePlayer.addEventListener({
+  playerId: 'my-player',
+  eventName: 'onStateChange',
+  listener: (event) => {
+  console.log('Player state:', event.data);
+  },
+});
+```
+
+### `removeEventListener`
+
+Remove an event listener from the player.
+Web platform only.
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+await YoutubePlayer.removeEventListener({} as PlayerEventListenerOptions<TEvent>);
+```
+
+## Type Reference
+
+### `PlayerIdOptions`
+```typescript
+export interface PlayerIdOptions {
+  playerId: string;
 }
 ```
 
-## Player States
+### `SeekToOptions`
+```typescript
+export interface SeekToOptions extends PlayerIdOptions {
+  playerId: string;
+  seconds: number;
+  allowSeekAhead: boolean;
+}
+```
 
-| State | Value | Description |
-|-------|-------|-------------|
-| UNSTARTED | -1 | Video not started |
-| ENDED | 0 | Video has ended |
-| PLAYING | 1 | Video is playing |
-| PAUSED | 2 | Video is paused |
-| BUFFERING | 3 | Video is buffering |
-| CUED | 5 | Video is cued |
+### `VideoByIdMethodOptions`
+```typescript
+export interface VideoByIdMethodOptions extends PlayerIdOptions {
+  playerId: string;
+  options: IVideoOptionsById;
+}
+```
 
-## Quality Levels
+### `VideoByUrlMethodOptions`
+```typescript
+export interface VideoByUrlMethodOptions extends PlayerIdOptions {
+  playerId: string;
+  options: IVideoOptionsByUrl;
+}
+```
 
-- `small`: 240p
-- `medium`: 360p
-- `large`: 480p
-- `hd720`: 720p
-- `hd1080`: 1080p
-- `highres`: >1080p
-- `default`: Auto quality
+### `PlaylistMethodOptions`
+```typescript
+export interface PlaylistMethodOptions extends PlayerIdOptions {
+  playerId: string;
+  playlistOptions: IPlaylistOptions;
+}
+```
 
-## Best Practices
+### `PlayVideoAtOptions`
+```typescript
+export interface PlayVideoAtOptions extends PlayerIdOptions {
+  playerId: string;
+  index: number;
+}
+```
 
-1. **Initialize once**
-   Create player instance once and reuse it:
-   ```typescript
-   let player = await YoutubePlayer.initialize(options);
-   // Reuse player for different videos
-   await YoutubePlayer.loadVideoById(player, { videoId: 'NEW_ID' });
-   ```
+### `SetVolumeOptions`
+```typescript
+export interface SetVolumeOptions extends PlayerIdOptions {
+  playerId: string;
+  volume: number;
+}
+```
 
-2. **Handle errors gracefully**
-   ```typescript
-   YoutubePlayer.addEventListener(playerId, 'onError', (event) => {
-     switch (event.data) {
-       case 2:
-         console.error('Invalid parameter');
-         break;
-       case 100:
-         console.error('Video not found');
-         break;
-       case 101:
-       case 150:
-         console.error('Embedding not allowed');
-         break;
-     }
-   });
-   ```
+### `SetSizeOptions`
+```typescript
+export interface SetSizeOptions extends PlayerIdOptions {
+  playerId: string;
+  width: number;
+  height: number;
+}
+```
 
-3. **Clean up**
-   Destroy player when component unmounts:
-   ```typescript
-   useEffect(() => {
-     return () => {
-       if (playerId) {
-         YoutubePlayer.destroy(playerId);
-       }
-     };
-   }, []);
-   ```
+### `SetPlaybackRateOptions`
+```typescript
+export interface SetPlaybackRateOptions extends PlayerIdOptions {
+  playerId: string;
+  suggestedRate: number;
+}
+```
 
-4. **Respect user preferences**
-   ```typescript
-   // Don't autoplay unless user initiated
-   playerVars: {
-     autoplay: 0
-   }
-   ```
+### `SetLoopOptions`
+```typescript
+export interface SetLoopOptions extends PlayerIdOptions {
+  playerId: string;
+  loopPlaylists: boolean;
+}
+```
 
-5. **Monitor playback**
-   ```typescript
-   setInterval(async () => {
-     const time = await YoutubePlayer.getCurrentTime(playerId);
-     updateProgressBar(time.result.value);
-   }, 1000);
-   ```
+### `SetShuffleOptions`
+```typescript
+export interface SetShuffleOptions extends PlayerIdOptions {
+  playerId: string;
+  shufflePlaylist: boolean;
+}
+```
 
-## Platform Notes
+### `ToggleFullScreenOptions`
+```typescript
+export interface ToggleFullScreenOptions extends PlayerIdOptions {
+  playerId: string;
+  isFullScreen: boolean | null | undefined;
+}
+```
 
-### iOS
-- Works on iOS 9.0+
-- Uses WKWebView with YouTube iframe API
-- Fullscreen supported
+## Source Of Truth
 
-### Android
-- Works on Android 5.0 (API 21)+
-- Uses WebView with YouTube iframe API
-- Fullscreen supported
-
-### Web
-- Direct YouTube iframe integration
-- Full API support
-- Best performance
-
-## Troubleshooting
-
-**Player not loading:**
-- Check video ID is valid
-- Verify internet connection
-- Ensure YouTube embedding is allowed for the video
-
-**Events not firing:**
-- Make sure listeners are added after initialization
-- Check player is ready before adding listeners
-
-**Quality issues:**
-- Check available quality levels first
-- Some videos don't support all qualities
-- Quality changes may not be immediate
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

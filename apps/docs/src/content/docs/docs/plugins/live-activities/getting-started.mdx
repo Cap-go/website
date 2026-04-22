@@ -1,55 +1,44 @@
 ---
 title: Getting Started
-description: Install and configure Capgo Live Activities in a Capacitor app.
+description: "Install @capgo/capacitor-live-activities and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import PluginSetupSteps from '@/components/doc/PluginSetupSteps.astro';
+## Install
 
-<PluginSetupSteps
-  pkg="@capgo/capacitor-live-activities"
-  stepTitle="Create the Live Activity widget target"
->
-  <ul>
-    <li>Create a Widget Extension target in Xcode and name it <code>LiveActivities</code>.</li>
-    <li>Add the same App Group to the main app target and the widget extension target.</li>
-  </ul>
-</PluginSetupSteps>
-
-## Platform requirements
-
-- iOS 16.1 or later is required.
-- Live Activities are not available on Android or web, so use `areActivitiesSupported()` before showing related UI.
-
-## Enable Live Activities
-
-Add the following key to your app `Info.plist`:
-
-```xml
-<key>NSSupportsLiveActivities</key>
-<true/>
+```bash
+bun add @capgo/capacitor-live-activities
+bunx cap sync
 ```
 
-Add an App Group for the app and widget targets. A common pattern is:
+## Import
 
-```xml
-group.YOUR_BUNDLE_ID.liveactivities
+```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
 ```
 
-## Check support
+## API Overview
+
+### `areActivitiesSupported`
+
+Check if Live Activities are supported on this device.
+Requires iOS 16.1+ and device support.
 
 ```typescript
 import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
 
 const { supported, reason } = await CapgoLiveActivities.areActivitiesSupported();
-
-if (!supported) {
-  console.warn('Live Activities unavailable:', reason);
+if (supported) {
+  console.log('Live Activities are supported!');
+} else {
+  console.log('Not supported:', reason);
 }
 ```
 
-## Start an activity
+### `startActivity`
+
+Start a new Live Activity with the specified layout and data.
 
 ```typescript
 import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
@@ -57,60 +46,377 @@ import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
 const { activityId } = await CapgoLiveActivities.startActivity({
   layout: {
     type: 'container',
-    direction: 'vertical',
-    spacing: 8,
+    direction: 'horizontal',
     children: [
       { type: 'text', content: 'Order #{{orderNumber}}', fontSize: 16, fontWeight: 'bold' },
-      { type: 'text', content: '{{status}}', fontSize: 14, color: '#666666' },
-      { type: 'progress', value: 'progress', tint: '#34C759' },
-    ],
+      { type: 'text', content: '{{status}}', fontSize: 14, color: '#666666' }
+    ]
   },
   dynamicIslandLayout: {
     expanded: {
-      center: { type: 'text', content: '{{status}}' },
+      leading: { type: 'image', source: 'sfSymbol', value: 'box.truck' },
       trailing: { type: 'text', content: '{{eta}}' },
+      center: { type: 'text', content: '{{status}}' },
+      bottom: { type: 'progress', value: 'progress' }
     },
-    compactLeading: { type: 'text', content: 'ETA' },
+    compactLeading: { type: 'image', source: 'sfSymbol', value: 'box.truck' },
     compactTrailing: { type: 'text', content: '{{eta}}' },
-    minimal: { type: 'text', content: '{{eta}}' },
-  },
-  behavior: {
-    widgetUrl: 'myapp://orders/12345',
+    minimal: { type: 'image', source: 'sfSymbol', value: 'box.truck' }
   },
   data: {
     orderNumber: '12345',
     status: 'On the way',
     eta: '10 min',
-    progress: 0.6,
-  },
+    progress: 0.6
+  }
 });
+console.log('Started activity:', activityId);
 ```
 
-## Update and end the activity
+### `updateActivity`
+
+Update an existing Live Activity with new data.
 
 ```typescript
-await CapgoLiveActivities.updateActivity({
-  activityId,
-  data: {
-    status: 'Arriving soon',
-    eta: '2 min',
-    progress: 0.9,
-  },
-});
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
 
-await CapgoLiveActivities.endActivity({
-  activityId,
+await CapgoLiveActivities.updateActivity({
+  activityId: 'abc123',
   data: {
-    status: 'Delivered',
-    progress: 1,
+    status: 'Arrived!',
+    eta: 'Now',
+    progress: 1.0
   },
-  dismissalPolicy: 'after',
-  dismissAfter: Date.now() + 60 * 60 * 1000,
+  alertConfiguration: {
+    title: 'Delivery Update',
+    body: 'Your order has arrived!'
+  }
 });
 ```
 
-## Recommended setup
+### `endActivity`
 
-- Keep the widget extension focused on rendering and let the Capacitor app own activity creation and updates.
-- Use App Groups for any shared images or data the widget needs to display.
-- Model your JSON layout from the real-time state you already have in the app so updates stay simple and deterministic.
+End a Live Activity.
+
+```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
+
+await CapgoLiveActivities.endActivity({
+  activityId: 'abc123',
+  data: { status: 'Delivered' },
+  dismissalPolicy: 'after',
+  dismissAfter: Date.now() + 3600000 // 1 hour from now
+});
+```
+
+### `getAllActivities`
+
+Get all currently active Live Activities.
+
+```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
+
+const { activities } = await CapgoLiveActivities.getAllActivities();
+activities.forEach(activity => {
+  console.log(`Activity ${activity.activityId}: ${activity.state}`);
+});
+```
+
+### `saveImage`
+
+Save an image to the shared App Group container for use in Live Activities.
+Images must be saved to the shared container to be accessible from the widget extension.
+
+```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
+
+const { success, imageName } = await CapgoLiveActivities.saveImage({
+  imageData: 'base64EncodedImageData...',
+  name: 'product-image',
+  compressionQuality: 0.8
+});
+// Use in layout with: { type: 'image', source: 'saved', value: imageName }
+```
+
+### `removeImage`
+
+Remove a saved image from the shared container.
+
+```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
+
+const { success } = await CapgoLiveActivities.removeImage({ name: 'product-image' });
+```
+
+### `listImages`
+
+List all saved images in the shared container.
+
+```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
+
+const { images } = await CapgoLiveActivities.listImages();
+console.log('Saved images:', images);
+```
+
+### `cleanupImages`
+
+Remove all saved images from the shared container.
+
+```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
+
+await CapgoLiveActivities.cleanupImages();
+```
+
+### `startTimerSequence`
+
+Start a timer sequence for workouts/sports.
+On iOS: Shows in Live Activity and Dynamic Island
+On Android: Shows as a foreground notification with timer
+
+```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
+
+const { sequenceId } = await CapgoLiveActivities.startTimerSequence({
+  title: 'HIIT Workout',
+  steps: [
+    { duration: 30, title: 'Jumping Jacks', subtitle: 'Warm up', color: '#FF6B00', icon: 'figure.jumprope' },
+    { duration: 10, title: 'Rest', color: '#00C853', icon: 'pause.circle' },
+    { duration: 45, title: 'Burpees', subtitle: 'High intensity', color: '#FF0000', icon: 'flame.fill' },
+    { duration: 15, title: 'Rest', color: '#00C853', icon: 'pause.circle' },
+    { duration: 45, title: 'Mountain Climbers', color: '#FF0000', icon: 'figure.run' },
+    { duration: 15, title: 'Rest', color: '#00C853', icon: 'pause.circle' },
+  ],
+  loop: true,
+  loopCount: 3,
+  soundEnabled: true,
+  vibrateEnabled: true,
+  countdownBeeps: true,
+  tapUrl: 'myapp://workout/hiit'
+});
+```
+
+### `pauseTimerSequence`
+
+Pause the timer sequence.
+
+```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
+
+await CapgoLiveActivities.pauseTimerSequence({ sequenceId: 'abc123' });
+```
+
+### `resumeTimerSequence`
+
+Resume a paused timer sequence.
+
+```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
+
+await CapgoLiveActivities.resumeTimerSequence({ sequenceId: 'abc123' });
+```
+
+### `stopTimerSequence`
+
+Stop and dismiss the timer sequence.
+
+```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
+
+await CapgoLiveActivities.stopTimerSequence({ sequenceId: 'abc123' });
+```
+
+### `skipTimerStep`
+
+Skip to the next step in the sequence.
+
+```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
+
+await CapgoLiveActivities.skipTimerStep({ sequenceId: 'abc123' });
+```
+
+### `previousTimerStep`
+
+Go back to the previous step in the sequence.
+
+```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
+
+await CapgoLiveActivities.previousTimerStep({ sequenceId: 'abc123' });
+```
+
+### `getTimerState`
+
+Get the current state of a timer sequence.
+
+```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
+
+const state = await CapgoLiveActivities.getTimerState({ sequenceId: 'abc123' });
+console.log(`Step ${state.currentStepIndex + 1}/${state.totalSteps}: ${state.currentStep.title}`);
+console.log(`Time remaining: ${state.remainingSeconds}s`);
+```
+
+## Type Reference
+
+### `AreActivitiesSupportedResult`
+Result of checking if activities are supported.
+```typescript
+export interface AreActivitiesSupportedResult {
+  /** Whether Live Activities are supported on this device */
+  supported: boolean;
+  /** Reason if not supported */
+  reason?: string;
+}
+```
+
+### `StartActivityOptions`
+Options for starting a Live Activity.
+```typescript
+export interface StartActivityOptions {
+  /** Main activity layout (lock screen widget) */
+  layout: ActivityLayout;
+  /** Dynamic Island layout configuration */
+  dynamicIslandLayout: DynamicIslandLayout;
+  /** Activity behavior settings */
+  behavior?: LiveActivitiesBehavior;
+  /** Dynamic data for the activity */
+  data: Record<string, unknown>;
+  /** Stale date timestamp (activity becomes stale after this) */
+  staleDate?: number;
+  /** Relevance score for activity ordering (0-100) */
+  relevanceScore?: number;
+}
+```
+
+### `StartActivityResult`
+Result of starting an activity.
+```typescript
+export interface StartActivityResult {
+  /** Unique activity identifier */
+  activityId: string;
+}
+```
+
+### `UpdateActivityOptions`
+Options for updating a Live Activity.
+```typescript
+export interface UpdateActivityOptions {
+  /** Activity ID to update */
+  activityId: string;
+  /** Updated data */
+  data: Record<string, unknown>;
+  /** Optional alert to show with update */
+  alertConfiguration?: ActivityAlertConfiguration;
+  /** Updated stale date */
+  staleDate?: number;
+  /** Updated relevance score */
+  relevanceScore?: number;
+}
+```
+
+### `EndActivityOptions`
+Options for ending a Live Activity.
+```typescript
+export interface EndActivityOptions {
+  /** Activity ID to end */
+  activityId: string;
+  /** Final data to display */
+  data?: Record<string, unknown>;
+  /** Dismissal policy */
+  dismissalPolicy?: 'immediate' | 'default' | 'after';
+  /** Dismiss after timestamp (when dismissalPolicy is 'after') */
+  dismissAfter?: number;
+}
+```
+
+### `GetAllActivitiesResult`
+Result of getAllActivities.
+```typescript
+export interface GetAllActivitiesResult {
+  /** List of activities */
+  activities: ActivityInfo[];
+}
+```
+
+### `SaveImageOptions`
+Options for saving an image.
+```typescript
+export interface SaveImageOptions {
+  /** Base64 encoded image data */
+  imageData: string;
+  /** Name to save the image as */
+  name: string;
+  /** JPEG compression quality (0-1, default 0.8) */
+  compressionQuality?: number;
+}
+```
+
+### `SaveImageResult`
+Result of saving an image.
+```typescript
+export interface SaveImageResult {
+  /** Whether the save was successful */
+  success: boolean;
+  /** Saved image name */
+  imageName: string;
+}
+```
+
+### `RemoveImageOptions`
+Options for removing an image.
+```typescript
+export interface RemoveImageOptions {
+  /** Name of the image to remove */
+  name: string;
+}
+```
+
+### `RemoveImageResult`
+Result of removing an image.
+```typescript
+export interface RemoveImageResult {
+  /** Whether the removal was successful */
+  success: boolean;
+}
+```
+
+### `ListImagesResult`
+Result of listing images.
+```typescript
+export interface ListImagesResult {
+  /** List of saved image names */
+  images: string[];
+}
+```
+
+### `TimerSequenceOptions`
+Options for starting a timer sequence.
+```typescript
+export interface TimerSequenceOptions {
+  /** Array of steps in the sequence */
+  steps: TimerStep[];
+  /** Overall title for the sequence (e.g., "HIIT Workout", "Tabata") */
+  title?: string;
+  /** Whether to loop the sequence when complete */
+  loop?: boolean;
+  /** Number of times to loop (if loop is true, 0 means infinite) */
+  loopCount?: number;
+  /** Play sound on step change (default: true) */
+  soundEnabled?: boolean;
+  /** Vibrate on step change (default: true) */
+  vibrateEnabled?: boolean;
+  /** Play countdown beeps in last 3 seconds (default: true) */
+  countdownBeeps?: boolean;
+  /** Deep link URL when tapping the notification/activity */
+  tapUrl?: string;
+  /** Keep screen on during timer (Android only, default: false) */
+  keepScreenOn?: boolean;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

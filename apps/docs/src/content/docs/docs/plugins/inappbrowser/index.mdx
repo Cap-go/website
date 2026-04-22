@@ -1,6 +1,6 @@
 ---
 title: "@capgo/inappbrowser"
-description: In-app browser plugin with URL change event support for Capacitor apps.
+description: "Capacitor plugin in app browser."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,68 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Open web content in your app with a fully-featured in-app browser that supports URL change events and navigation controls.
-  image:
-    file: ~public/icons/plugins/inappbrowser.svg
+  tagline: "Capacitor plugin in app browser."
   actions:
     - text: Get started
       link: /docs/plugins/inappbrowser/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
-      link: https://github.com/Cap-go/inappbrowser/
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-inappbrowser/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="URL change events" icon="rocket">
-    Track navigation with URL change event listeners 🔗
-  </Card>
-  <Card title="Full navigation control" icon="pencil">
-    Back, forward, reload, and close controls 🎮
-  </Card>
-  <Card title="Customizable UI" icon="pencil">
-    Toolbar color, buttons, and display options 🎨
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/inappbrowser/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+Capacitor plugin in app browser.
+
+## Core Capabilities
+
+- `goBack` - Navigates back in the WebView's history if possible.
+- `open` - Open url in a new window fullscreen, on android it use chrome custom tabs, on ios it use SFSafariViewController.
+- `clearCookies` - Clear cookies of url When `id` is omitted, applies to all open webviews.
+- `clearAllCookies` - Clear all cookies When `id` is omitted, applies to all open webviews.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `goBack` | Navigates back in the WebView's history if possible. |
+| `open` | Open url in a new window fullscreen, on android it use chrome custom tabs, on ios it use SFSafariViewController. |
+| `clearCookies` | Clear cookies of url When `id` is omitted, applies to all open webviews. |
+| `clearAllCookies` | Clear all cookies When `id` is omitted, applies to all open webviews. |
+| `clearCache` | Clear cache When `id` is omitted, applies to all open webviews. |
+| `getCookies` | Get cookies for a specific URL. |
+| `close` | Close the webview. When `id` is omitted, closes the active webview. |
+| `hide` | Hide the webview without closing it. Use show() to bring it back. When `id` is omitted, targets the active webview. |
+| `show` | Show a previously hidden webview. When `id` is omitted, targets the active webview. |
+| `openWebView` | Open url in a new webview with toolbars, and enhanced capabilities, like camera access, file access, listen events, inject javascript, bi directional communication, etc. |
+| `executeScript` | Injects JavaScript code into the InAppBrowser window. When `id` is omitted, executes in all open webviews. |
+| `postMessage` | Sends an event to the webview(inappbrowser). you can listen to this event in the inappbrowser JS with window.addEventListener("messageFromNative", listenerFunc: (event: Record<string, any>) => void) detail is the data you want to send to the webview, it's a requirement of Capacitor we cannot send direct objects Your object has to be serializable to JSON, so no functions or other non-JSON-serializable types are allowed. When `id` is omitted, broadcasts to all open webviews. |
+| `takeScreenshot` | Captures the current webview viewport as a PNG screenshot. When `id` is omitted, targets the active webview. |
+| `setUrl` | Sets the URL of the webview. When `id` is omitted, targets the active webview. |
+| `addListener` | Listen for url change, only for openWebView. |
+| `addListener` | See the source definitions for current behavior. |
+| `addListener` | Listen for close click only for openWebView. |
+| `addListener` | Will be triggered when user clicks on confirm button when disclaimer is required, works with openWebView shareDisclaimer and closeModal. |
+| `addListener` | Will be triggered when event is sent from webview(inappbrowser), to send an event to the main app use window.mobileApp.postMessage({ "detail": { "message": "myMessage" } }) detail is the data you want to send to the main app, it's a requirement of Capacitor we cannot send direct objects Your object has to be serializable to JSON, no functions or other non-JSON-serializable types are allowed. |
+| `addListener` | Will be triggered whenever a screenshot is captured from the plugin API, the native screenshot button, or the injected JavaScript bridge. |
+| `addListener` | Will be triggered when page is loaded. |
+| `addListener` | Will be triggered when page load error. |
+| `addListener` | Will be triggered after native download handling saves a file locally. Enable this with `handleDownloads: true` when opening the webview. |
+| `addListener` | Will be triggered when native download handling fails. Enable this with `handleDownloads: true` when opening the webview. |
+| `addListener` | Will be triggered whenever a page opens a popup/new window. Use the returned popup id with `executeScript`, `postMessage`, `show`, `hide`, and `close`. |
+| `addListener` | Listen for proxied requests delegated by the native runtime. Prefer `addProxyHandler()` instead of calling this directly. |
+| `addListener` | Listen for JavaScript console output emitted by the managed page. Enable this with `captureConsoleLogs: true` when opening the webview. |
+| `handleProxyRequest` | Internal method used by `addProxyHandler()` to send a proxy decision back to native. Forward the original `phase` when replying to a manual `proxyRequest` listener. |
+| `removeAllListeners` | Remove all listeners for this plugin. |
+| `reload` | Reload the current web page. |
+| `updateDimensions` | Update the dimensions of the webview. Allows changing the size and position of the webview at runtime. When `id` is omitted, targets the active webview. |
+| `setEnabledSafeTopMargin` | Sets the enabled safe top margin of the webview at runtime. When `id` is omitted, targets the active webview. On Web, this method is a no-op and resolves without changing layout. |
+| `setEnabledSafeBottomMargin` | Sets the enabled safe bottom margin of the webview at runtime. When `id` is omitted, targets the active webview. On Web, this method is a no-op and resolves without changing layout. |
+| `openSecureWindow` | Opens a secured window for OAuth2 authentication. For web, you should have the code in the redirected page to use a broadcast channel to send the redirected url to the app Something like: ```html <html> <head></head> <body> <script> const searchParams = new URLSearchParams(location.search) if (searchParams.has("code")) { new BroadcastChannel("my-channel-name").postMessage(location.href); window.close(); } </script> </body> </html> ``` For mobile, you should have a redirect uri that opens the app, something like: `myapp://oauth_callback/` And make sure to register it in the app's info.plist: ```xml <key>CFBundleURLTypes</key> <array> <dict> <key>CFBundleURLSchemes</key> <array> <string>myapp</string> </array> </dict> </array> ``` And in the AndroidManifest.xml file: ```xml <activity> <intent-filter> <action android:name="android.intent.action.VIEW" /> <category android:name="android.intent.category.DEFAULT" /> <category android:name="android.intent.category.BROWSABLE" /> <data android:host="oauth_callback" android:scheme="myapp" /> </intent-filter> </activity> ```. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-inappbrowser](https://github.com/Cap-go/capacitor-inappbrowser/).

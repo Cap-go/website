@@ -1,120 +1,279 @@
 ---
 title: Getting Started
-description: Learn how to install and initialize @capgo/capacitor-rudderstack in your Capacitor app.
+description: "Install @capgo/capacitor-rudderstack and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-rudderstack" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-2. **Sync native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-3. **Collect your RudderStack credentials**
-   You need your RudderStack `writeKey` and, in most setups, your `dataPlaneUrl`.
-</Steps>
-
-## Initialize RudderStack
-
-Initialize the SDK as early as practical in your app startup:
-
-```ts
-import { RudderStack } from '@capgo/capacitor-rudderstack';
-
-await RudderStack.initialize('YOUR_WRITE_KEY', {
-  dataPlaneUrl: 'https://your-dataplane.rudderstack.com',
-  trackLifecycleEvents: true,
-  recordScreenViews: false,
-  logLevel: RudderStack.LogLevel.INFO,
-});
+```bash
+bun add @capgo/capacitor-rudderstack
+bunx cap sync
 ```
 
-The plugin keeps the Cordova-style signature, so existing Rudder Cordova integrations can usually migrate with minimal JavaScript changes.
+## Import
 
-## Identify users and track events
-
-```ts
-await RudderStack.identify('user_123', {
-  email: 'user@example.com',
-  plan: 'pro',
-});
-
-await RudderStack.track('Checkout Started', {
-  value: 49,
-  currency: 'EUR',
-});
-
-await RudderStack.screen('Checkout', {
-  step: 'shipping',
-});
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
 ```
 
-You can also use `group()` and `alias()` when your data model depends on account-level grouping or identity transitions.
+## API Overview
 
-## Per-call options
+### `initialize`
 
-RudderStack supports external identifiers and destination-specific toggles:
+Initializes the RudderStack client.
 
-```ts
-await RudderStack.track(
-  'Purchase Completed',
-  {
-    orderId: 'ord_123',
-    total: 99,
-  },
-  {
-    externalIds: {
-      brazeExternalId: 'user_123',
-    },
-    integrations: {
-      All: true,
-      Amplitude: false,
-    },
-  },
-);
+The method keeps the Cordova signature, so the second argument may be either a config object or
+a Rudder options object.
+
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
+
+await nativePlugin.initialize('value');
 ```
 
-## Delivery and privacy controls
+### `identify`
 
-Useful operational methods:
+Sends an identify call for the provided user id.
 
-```ts
-await RudderStack.putDeviceToken('PUSH_TOKEN');
-await RudderStack.putAdvertisingId('ADVERTISING_ID');
-await RudderStack.putAnonymousId('ANON_ID');
-await RudderStack.flush();
-await RudderStack.optOut(false);
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
+
+await nativePlugin.identify('value');
 ```
 
-Use `reset()` when the active user signs out and you want to clear the current Rudder identity state.
+### `group`
 
-## Platform notes
+Sends a group call for the provided group id.
 
-### iOS and Android
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-- The plugin wraps the native RudderStack SDKs directly, so there is no extra bridge dependency to install.
-- `trackLifecycleEvents`, `recordScreenViews`, `flushQueueSize`, `dbCountThreshold`, and related Rudder config values are supported from JavaScript.
+await nativePlugin.group('value');
+```
 
-### Web
+### `track`
 
-- The web implementation is a compatibility shim for development and API parity.
-- It validates initialization state, but it does not send live events to RudderStack.
+Sends a track call for the provided event name.
 
-### Current Capacitor port limits
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
 
-- `config.factories` from `rudder-sdk-cordova` is currently ignored.
-- Native destination factory companion plugins are not part of this first Capacitor release.
+await nativePlugin.track('value');
+```
 
-## Best practices
+### `screen`
 
-1. Initialize RudderStack once during app startup and keep the `writeKey` plus `dataPlaneUrl` in centralized runtime config.
-2. Call `identify()` after authentication and `reset()` on logout to keep profile transitions consistent.
-3. Gate `optOut()` and advertising-related identifiers behind your consent flow.
-4. Use `flush()` for critical handoff points if you need to reduce delivery latency before app backgrounding.
+Sends a screen call for the provided screen name.
 
-For the full API surface and native packaging details, see the [plugin repository](https://github.com/Cap-go/capacitor-rudderstack/).
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
+
+await nativePlugin.screen('value');
+```
+
+### `alias`
+
+Aliases the current user to a new identifier.
+
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
+
+await nativePlugin.alias('value');
+```
+
+### `reset`
+
+Resets the current RudderStack identity state.
+
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
+
+await nativePlugin.reset();
+```
+
+### `flush`
+
+Flushes queued events immediately.
+
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
+
+await nativePlugin.flush();
+```
+
+### `putDeviceToken`
+
+Sets the push token that RudderStack forwards to supported destinations.
+
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
+
+await nativePlugin.putDeviceToken('value');
+```
+
+### `setAdvertisingId`
+
+See the source definitions for the current contract.
+
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
+
+await nativePlugin.setAdvertisingId('value');
+```
+
+### `putAdvertisingId`
+
+Sets a custom advertising id value.
+
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
+
+await nativePlugin.putAdvertisingId('value');
+```
+
+### `setAnonymousId`
+
+See the source definitions for the current contract.
+
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
+
+await nativePlugin.setAnonymousId('value');
+```
+
+### `putAnonymousId`
+
+Sets a custom anonymous id value.
+
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
+
+await nativePlugin.putAnonymousId('value');
+```
+
+### `optOut`
+
+Toggles RudderStack tracking opt-out.
+
+```typescript
+import { nativePlugin } from '@capgo/capacitor-rudderstack';
+
+await nativePlugin.optOut(true);
+```
+
+## Type Reference
+
+### `RudderConfiguration`
+Supported configuration keys for the underlying RudderStack native SDKs.
+```typescript
+export interface RudderConfiguration {
+  /**
+   * RudderStack data plane URL.
+   */
+  dataPlaneUrl?: string;
+
+  /**
+   * Number of events to batch before a flush.
+   */
+  flushQueueSize?: number;
+
+  /**
+   * Database row threshold that triggers pruning on Android and iOS.
+   */
+  dbCountThreshold?: number;
+
+  /**
+   * Server config refresh interval in hours.
+   */
+  configRefreshInterval?: number;
+
+  /**
+   * RudderStack log verbosity.
+   */
+  logLevel?: RudderLogLevelValue;
+
+  /**
+   * Sleep timeout / sleep count used by the native SDK.
+   */
+  sleepTimeOut?: number;
+
+  /**
+   * Android only. Lets the native SDK collect the advertising identifier automatically.
+   */
+  autoCollectAdvertId?: boolean;
+
+  /**
+   * Tracks `Application Installed`, `Application Updated`, and `Application Opened` automatically.
+   */
+  trackLifecycleEvents?: boolean;
+
+  /**
+   * RudderStack control plane URL.
+   */
+  controlPlaneUrl?: string;
+
+  /**
+   * Enables automatic screen tracking where supported by the native SDK.
+   */
+  recordScreenViews?: boolean;
+
+  /**
+   * Ignored in this Capacitor port.
+   *
+   * The Cordova SDK uses this field to bootstrap native destination factories from companion plugins.
+   * Those extension packages are not implemented in this first Capacitor release.
+   */
+  factories?: any[];
+}
+```
+
+### `RudderOptions`
+RudderStack per-call options.
+```typescript
+export interface RudderOptions {
+  /**
+   * External identifiers forwarded with the event.
+   */
+  externalIds?: Record<string, string>;
+
+  /**
+   * Destination enablement flags keyed by integration name.
+   */
+  integrations?: Record<string, boolean>;
+}
+```
+
+### `RudderTraits`
+Traits payload accepted by `identify` and `group`.
+```typescript
+export type RudderTraits = Record<string, any>;
+```
+
+### `RudderProperties`
+Properties payload accepted by `track` and `screen`.
+```typescript
+export type RudderProperties = Record<string, any>;
+```
+
+### `PluginVersionResult`
+Plugin version payload.
+```typescript
+export interface PluginVersionResult {
+  /**
+   * Version identifier returned by the platform implementation.
+   */
+  version: string;
+}
+```
+
+### `RudderLogLevelValue`
+RudderStack log level values exposed for migration convenience.
+```typescript
+export type RudderLogLevelValue = 0 | 1 | 2 | 3 | 4 | 5;
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

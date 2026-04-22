@@ -1,170 +1,73 @@
 ---
 title: Getting Started
-description: Learn how to install and configure the Capacitor Home Indicator plugin to control the home indicator on iOS devices.
+description: "Install @capgo/capacitor-home-indicator and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-home-indicator" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+```bash
+bun add @capgo/capacitor-home-indicator
+bunx cap sync
+```
 
-2. **Sync with native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-3. **Configure the plugin**
-
-   **Hide Home Indicator:**
-   ```typescript
-   import { HomeIndicator } from '@capgo/capacitor-home-indicator';
-
-   // Hide the home indicator
-   await HomeIndicator.hide();
-   ```
-
-   **Show Home Indicator:**
-   ```typescript
-   // Show the home indicator
-   await HomeIndicator.show();
-
-   // Check visibility status
-   const { hidden } = await HomeIndicator.isHidden();
-   console.log('Is hidden:', hidden);
-   ```
-
-   <Tabs>
-     <TabItem label="iOS">
-       No additional setup required. The plugin only works on iOS devices with a home indicator (iPhone X and later).
-     </TabItem>
-     <TabItem label="Android">
-       This plugin has no effect on Android devices as they don't have an iOS-style home indicator.
-     </TabItem>
-   </Tabs>
-
-4. **Advanced usage**
-   ```typescript
-   import { HomeIndicator } from '@capgo/capacitor-home-indicator';
-   import { App } from '@capacitor/app';
-
-   export class ImmersiveMode {
-      private isImmersive = false;
-
-      async enterImmersiveMode() {
-        this.isImmersive = true;
-
-        // Hide home indicator
-        await HomeIndicator.hide();
-
-        // Hide status bar for full immersion
-        // StatusBar.hide(); // If using @capacitor/status-bar
-      }
-
-      async exitImmersiveMode() {
-        this.isImmersive = false;
-
-        // Show home indicator
-        await HomeIndicator.show();
-
-        // Show status bar
-        // StatusBar.show(); // If using @capacitor/status-bar
-      }
-
-      async toggleImmersiveMode() {
-        const { hidden } = await HomeIndicator.isHidden();
-
-        if (hidden) {
-          await this.exitImmersiveMode();
-        } else {
-          await this.enterImmersiveMode();
-        }
-      }
-
-      setupAppLifecycle() {
-        // Handle app state changes
-        App.addListener('appStateChange', async ({ isActive }) => {
-          if (!isActive && this.isImmersive) {
-            // App went to background, might want to show indicator
-            await HomeIndicator.show();
-          } else if (isActive && this.isImmersive) {
-            // App came to foreground, restore immersive mode
-            await HomeIndicator.hide();
-          }
-        });
-      }
-    }
-   ```
-</Steps>
-
-## API Reference
-
-### Methods
-
-#### `hide()`
-Hide the home indicator.
-
-**Returns:** `Promise<void>`
-
-#### `show()`
-Show the home indicator.
-
-**Returns:** `Promise<void>`
-
-#### `isHidden()`
-Check if the home indicator is currently hidden.
-
-**Returns:** `Promise<{ hidden: boolean }>`
-
-### Interfaces
+## Import
 
 ```typescript
-interface HiddenResult {
-  hidden: boolean;
+import { HomeIndicator } from '@capgo/capacitor-home-indicator';
+```
+
+## API Overview
+
+### `hide`
+
+Hide the home indicator at the bottom of the screen.
+
+This visually hides the iOS home indicator bar, providing a more immersive
+full-screen experience. Users can still swipe up to access home, but the
+indicator will not be visible until they start the gesture.
+
+iOS only. Has no effect on Android or web.
+
+```typescript
+import { HomeIndicator } from '@capgo/capacitor-home-indicator';
+
+await HomeIndicator.hide();
+```
+
+### `show`
+
+Show the home indicator at the bottom of the screen.
+
+This restores the default iOS home indicator visibility, making it
+always visible to the user. This is the default behavior.
+
+iOS only. Has no effect on Android or web.
+
+```typescript
+import { HomeIndicator } from '@capgo/capacitor-home-indicator';
+
+await HomeIndicator.show();
+```
+
+### `isHidden`
+
+Check whether the home indicator is currently hidden.
+
+Returns the current visibility state of the iOS home indicator.
+
+```typescript
+import { HomeIndicator } from '@capgo/capacitor-home-indicator';
+
+const { hidden } = await HomeIndicator.isHidden();
+if (hidden) {
+  console.log('Home indicator is hidden');
+} else {
+  console.log('Home indicator is visible');
 }
 ```
 
-## Platform Notes
+## Source Of Truth
 
-### iOS
-- Only works on devices with home indicator (iPhone X and later)
-- Requires iOS 11.0 or later
-- The indicator reappears when users swipe from the bottom
-
-### Android
-- This plugin has no effect on Android
-- Android uses different navigation gestures/buttons
-
-## Common Use Cases
-
-1. **Games**: Full-screen gaming without distractions
-2. **Video Players**: Immersive video playback
-3. **Photo Viewers**: Full-screen photo galleries
-4. **Presentations**: Distraction-free presentations
-5. **Kiosk Apps**: Public display applications
-
-## Best Practices
-
-1. **User Control**: Always provide a way to exit immersive mode
-   ```typescript
-   // Add a gesture or button to toggle immersive mode
-   const toggleButton = document.getElementById('toggle-immersive');
-   toggleButton.addEventListener('click', () => {
-     immersiveMode.toggleImmersiveMode();
-   });
-   ```
-
-2. **Respect System Gestures**: Don't interfere with system navigation
-3. **Save State**: Remember user's preference for immersive mode
-
-## Troubleshooting
-
-**Home indicator not hiding:**
-- Verify the device has a home indicator (iPhone X+)
-- Check iOS version is 11.0 or higher
-- Ensure the app has focus
-
-**Indicator reappears unexpectedly:**
-- This is normal iOS behavior for system gestures
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

@@ -1,6 +1,6 @@
 ---
-title: "@capgo/capacitor-persona"
-description: Launch Persona identity verification inquiries with native iOS and Android SDKs in your Capacitor app.
+title: "@capgo/capacitor-intune"
+description: "Capacitor plugin for Microsoft Intune MAM enrollment, app protection policies, app config, and MSAL authentication."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,49 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Start Persona inquiry flows natively on iOS and Android, prefill fields, and handle complete/cancel/error events in one Capacitor API.
-  image:
-    file: ~public/icons/plugins/persona.svg
+  tagline: "Capacitor plugin for Microsoft Intune MAM enrollment, app protection policies, app config, and MSAL authentication."
   actions:
     - text: Get started
       link: /docs/plugins/persona/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-persona/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Native Persona SDKs" icon="rocket">
-    Uses Persona iOS and Android SDKs for secure identity verification flows.
-  </Card>
-  <Card title="One launch API" icon="puzzle">
-    Start inquiries by template ID, template version, or existing inquiry/session token.
-  </Card>
-  <Card title="Event-driven results" icon="open-book">
-    Listen for `inquiryComplete`, `inquiryCanceled`, and `inquiryError` to power your UX.
-  </Card>
-  <Card title="Prefilled fields" icon="setting">
-    Pass trusted context fields (for example IDs and profile attributes) when launching.
-  </Card>
-</CardGrid>
+Capacitor plugin for Microsoft Intune MAM enrollment, app protection policies, app config, and MSAL authentication.
+
+## Core Capabilities
+
+- `acquireToken` - Present the Microsoft sign-in flow and return an access token plus the account metadata.
+- `acquireTokenSilent` - Acquire a token from the MSAL cache for a previously signed-in user.
+- `registerAndEnrollAccount` - Register a previously authenticated account with Intune and start enrollment.
+- `loginAndEnrollAccount` - Ask Intune to authenticate and enroll a user without first requesting an app token.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `acquireToken` | Present the Microsoft sign-in flow and return an access token plus the account metadata. |
+| `acquireTokenSilent` | Acquire a token from the MSAL cache for a previously signed-in user. |
+| `registerAndEnrollAccount` | Register a previously authenticated account with Intune and start enrollment. |
+| `loginAndEnrollAccount` | Ask Intune to authenticate and enroll a user without first requesting an app token. |
+| `enrolledAccount` | Return the currently enrolled Intune account, if one is available. |
+| `deRegisterAndUnenrollAccount` | Deregister the account from Intune and trigger selective wipe when applicable. |
+| `logoutOfAccount` | Sign the user out of MSAL without unenrolling the Intune account. |
+| `appConfig` | Fetch the remote Intune app configuration for a managed account. |
+| `getPolicy` | Fetch the currently effective Intune app protection policy for a managed account. |
+| `groupName` | Convenience helper that resolves the `GroupName` app configuration value when present. |
+| `sdkVersion` | Return the native Intune and MSAL SDK versions bundled by this plugin. |
+| `displayDiagnosticConsole` | Show the native Intune diagnostics UI. |
+| `addListener` | Listen for remote app configuration refreshes. |
+| `addListener` | Listen for remote app protection policy refreshes. |
+| `removeAllListeners` | Remove all registered listeners for this plugin instance. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-persona](https://github.com/Cap-go/capacitor-persona/).

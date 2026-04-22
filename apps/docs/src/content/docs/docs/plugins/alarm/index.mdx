@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-alarm"
-description: Schedule native alarms and notifications even when app is closed.
+description: "Manage native alarm Capacitor plugin."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,41 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Manage native alarms on iOS and Android directly from your Capacitor app.
-  image:
-    file: ~public/icons/plugins/alarm.svg
+  tagline: "Capacitor Alarm Plugin interface for managing native OS alarms."
   actions:
     - text: Get started
       link: /docs/plugins/alarm/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-alarm/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Native Integration" icon="puzzle">
-    Uses native AlarmKit on iOS and AlarmClock intents on Android 📱
-  </Card>
-  <Card title="Simple API" icon="rocket">
-    Easy-to-use methods to create and manage alarms ⚡
-  </Card>
-  <Card title="Permission Handling" icon="approve-check-circle">
-    Built-in support for requesting necessary permissions 🔒
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/alarm/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+Capacitor Alarm Plugin interface for managing native OS alarms.
+
+## Core Capabilities
+
+- `createAlarm` - Create a native OS alarm using the platform clock app. On Android this uses the Alarm Clock intent; on iOS this uses AlarmKit if available (iOS 16+).
+- `openAlarms` - Open the platform's native alarm list UI, if available.
+- `getOSInfo` - Get information about the OS and capabilities.
+- `requestPermissions` - Request relevant permissions for alarm usage on the platform. On Android, may route to settings for exact alarms.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `createAlarm` | Create a native OS alarm using the platform clock app. On Android this uses the Alarm Clock intent; on iOS this uses AlarmKit if available (iOS 16+). |
+| `openAlarms` | Open the platform's native alarm list UI, if available. |
+| `getOSInfo` | Get information about the OS and capabilities. |
+| `requestPermissions` | Request relevant permissions for alarm usage on the platform. On Android, may route to settings for exact alarms. |
+| `checkPermissions` | Check the current permission state for native alarm access without triggering UI. On iOS this reports AlarmKit readiness; on Android it reports capability details. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+| `getAlarms` | Get a list of alarms scheduled by this app. On iOS 26+, returns alarms from AlarmKit. On Android, this is not supported as the system does not provide an API to query alarms. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-alarm](https://github.com/Cap-go/capacitor-alarm/).

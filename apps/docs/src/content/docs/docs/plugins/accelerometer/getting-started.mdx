@@ -1,302 +1,168 @@
 ---
-title: "Getting Started with Accelerometer"
-description: "Learn how to integrate accelerometer sensing into your Capacitor app"
+title: Getting Started
+description: "Install @capgo/capacitor-accelerometer and start using its current Capacitor API."
+sidebar:
+  order: 2
 ---
 
-This guide will walk you through integrating the Capacitor Accelerometer plugin into your application.
-
-## Installation
-
-Install the plugin using npm:
+## Install
 
 ```bash
-npm install @capgo/capacitor-accelerometer
-npx cap sync
+bun add @capgo/capacitor-accelerometer
+bunx cap sync
 ```
 
-## Platform Configuration
-
-### iOS
-No additional configuration required. The accelerometer is always available.
-
-### Android
-No additional configuration required. The accelerometer is always available.
-
-### Web
-The plugin uses the DeviceMotion API. Requires HTTPS in production.
-
-## Basic Usage
-
-### Import the Plugin
+## Import
 
 ```typescript
-import { Accelerometer } from '@capgo/capacitor-accelerometer';
+import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
 ```
 
-### Start Monitoring
+## API Overview
+
+### `getMeasurement`
+
+Get the most recent accelerometer sample that was recorded by the native layer.
 
 ```typescript
-const startAccelerometer = async () => {
-  await Accelerometer.start({
-    interval: 100 // Update interval in milliseconds
-  });
+import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
 
-  console.log('Accelerometer started');
-};
+await CapacitorAccelerometer.getMeasurement();
 ```
 
-### Listen to Acceleration Events
+### `isAvailable`
+
+Check if the current device includes an accelerometer sensor.
 
 ```typescript
-Accelerometer.addListener('accelerationChange', (data) => {
-  console.log('X:', data.x);
-  console.log('Y:', data.y);
-  console.log('Z:', data.z);
-  console.log('Timestamp:', data.timestamp);
-});
+import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
+
+await CapacitorAccelerometer.isAvailable();
 ```
 
-### Get Current Reading
+### `startMeasurementUpdates`
+
+Begin streaming accelerometer updates to the JavaScript layer.
+
+Call  with the `measurement` event to receive the updates.
 
 ```typescript
-const getCurrentAcceleration = async () => {
-  const reading = await Accelerometer.getCurrentAcceleration();
-  console.log('Current acceleration:', reading);
-};
+import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
+
+await CapacitorAccelerometer.startMeasurementUpdates();
 ```
 
-### Stop Monitoring
+### `stopMeasurementUpdates`
+
+Stop streaming accelerometer updates started via .
 
 ```typescript
-const stopAccelerometer = async () => {
-  await Accelerometer.stop();
-  console.log('Accelerometer stopped');
-};
+import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
+
+await CapacitorAccelerometer.stopMeasurementUpdates();
 ```
 
-## Complete Example
+### `checkPermissions`
 
-Here's a complete example with shake detection:
+Return the current permission state for accessing motion data.
+
+On platforms without explicit permissions this resolves to `granted`.
 
 ```typescript
-import { Accelerometer } from '@capgo/capacitor-accelerometer';
+import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
 
-class AccelerometerService {
-  private listener: any;
-  private lastX = 0;
-  private lastY = 0;
-  private lastZ = 0;
-  private shakeThreshold = 15;
-
-  async initialize() {
-    await Accelerometer.start({ interval: 100 });
-
-    this.listener = Accelerometer.addListener('accelerationChange', (data) => {
-      this.handleAcceleration(data);
-    });
-  }
-
-  handleAcceleration(data: any) {
-    // Calculate delta
-    const deltaX = Math.abs(data.x - this.lastX);
-    const deltaY = Math.abs(data.y - this.lastY);
-    const deltaZ = Math.abs(data.z - this.lastZ);
-
-    // Check for shake
-    if (deltaX > this.shakeThreshold ||
-        deltaY > this.shakeThreshold ||
-        deltaZ > this.shakeThreshold) {
-      this.onShake();
-    }
-
-    // Update last values
-    this.lastX = data.x;
-    this.lastY = data.y;
-    this.lastZ = data.z;
-
-    // Update UI
-    this.updateDisplay(data);
-  }
-
-  onShake() {
-    console.log('Device shaken!');
-    // Trigger shake action
-  }
-
-  updateDisplay(data: any) {
-    console.log(`X: ${data.x.toFixed(2)} m/s²`);
-    console.log(`Y: ${data.y.toFixed(2)} m/s²`);
-    console.log(`Z: ${data.z.toFixed(2)} m/s²`);
-
-    // Calculate magnitude
-    const magnitude = Math.sqrt(
-      data.x * data.x +
-      data.y * data.y +
-      data.z * data.z
-    );
-    console.log(`Magnitude: ${magnitude.toFixed(2)} m/s²`);
-  }
-
-  async cleanup() {
-    if (this.listener) {
-      this.listener.remove();
-    }
-    await Accelerometer.stop();
-  }
-}
-
-// Usage
-const accelService = new AccelerometerService();
-accelService.initialize();
-
-// Cleanup when done
-// accelService.cleanup();
+await CapacitorAccelerometer.checkPermissions();
 ```
 
-## Understanding Readings
+### `requestPermissions`
 
-### Acceleration Axes
-- **X-axis**: Left (-) to Right (+)
-- **Y-axis**: Bottom (-) to Top (+)
-- **Z-axis**: Back (-) to Front (+)
-
-### Gravity
-- Device at rest shows ~9.8 m/s² on one axis (gravity)
-- Moving device shows acceleration in addition to gravity
-
-### Units
-- Measured in meters per second squared (m/s²)
-- Gravity = 9.8 m/s²
-
-## Common Use Cases
-
-### Shake Detection
+Request permission to access motion data if supported by the platform.
 
 ```typescript
-class ShakeDetector {
-  private lastUpdate = 0;
-  private lastX = 0;
-  private lastY = 0;
-  private lastZ = 0;
+import { CapacitorAccelerometer } from '@capgo/capacitor-accelerometer';
 
-  detectShake(x: number, y: number, z: number): boolean {
-    const currentTime = Date.now();
+await CapacitorAccelerometer.requestPermissions();
+```
 
-    if (currentTime - this.lastUpdate > 100) {
-      const deltaX = Math.abs(x - this.lastX);
-      const deltaY = Math.abs(y - this.lastY);
-      const deltaZ = Math.abs(z - this.lastZ);
+## Type Reference
 
-      this.lastUpdate = currentTime;
-      this.lastX = x;
-      this.lastY = y;
-      this.lastZ = z;
+### `GetMeasurementResult`
+Alias for the most recent measurement.
+```typescript
+export type GetMeasurementResult = Measurement;
+```
 
-      return deltaX + deltaY + deltaZ > 15;
-    }
-
-    return false;
-  }
+### `IsAvailableResult`
+Result returned by .
+```typescript
+export interface IsAvailableResult {
+  /**
+   * Whether an accelerometer sensor is available on the device.
+   *
+   * @since 1.0.0
+   */
+  isAvailable: boolean;
 }
 ```
 
-### Tilt Detection
-
+### `PermissionStatus`
+Permission information returned by and .
 ```typescript
-class TiltDetector {
-  getTiltAngles(x: number, y: number, z: number) {
-    const roll = Math.atan2(y, z) * (180 / Math.PI);
-    const pitch = Math.atan2(-x, Math.sqrt(y * y + z * z)) * (180 / Math.PI);
-
-    return { roll, pitch };
-  }
-
-  isDeviceFlat(z: number): boolean {
-    return Math.abs(z - 9.8) < 1.0;
-  }
-
-  isDeviceUpright(y: number): boolean {
-    return Math.abs(y - 9.8) < 2.0;
-  }
+export interface PermissionStatus {
+  /**
+   * The permission state for accessing motion data on the current platform.
+   *
+   * @since 1.0.0
+   */
+  accelerometer: AccelerometerPermissionState;
 }
 ```
 
-### Step Counter
-
+### `MeasurementEvent`
+Event payload emitted when is active.
 ```typescript
-class StepCounter {
-  private steps = 0;
-  private lastMagnitude = 0;
-  private threshold = 11;
+export type MeasurementEvent = Measurement;
+```
 
-  processAcceleration(x: number, y: number, z: number) {
-    const magnitude = Math.sqrt(x * x + y * y + z * z);
+### `Measurement`
+The x, y and z axis acceleration values reported by the device motion sensors.
+```typescript
+export interface Measurement {
+  /**
+   * The acceleration on the x-axis in G's.
+   *
+   * @since 1.0.0
+   */
+  x: number;
 
-    if (magnitude > this.threshold &&
-        this.lastMagnitude < this.threshold) {
-      this.steps++;
-      console.log('Steps:', this.steps);
-    }
+  /**
+   * The acceleration on the y-axis in G's.
+   *
+   * @since 1.0.0
+   */
+  y: number;
 
-    this.lastMagnitude = magnitude;
-  }
+  /**
+   * The acceleration on the z-axis in G's.
+   *
+   * @since 1.0.0
+   */
+  z: number;
 }
 ```
 
-## Best Practices
-
-1. **Choose Appropriate Intervals**: Balance responsiveness and battery life
-   - Gaming: 16-50ms
-   - Fitness: 100-200ms
-   - General: 200-500ms
-
-2. **Remove Listeners**: Always clean up when done
-3. **Filter Noise**: Use moving averages for smoother data
-4. **Consider Battery**: High-frequency polling drains battery
-5. **Test on Real Devices**: Simulators don't provide accurate data
-
-## Performance Tips
-
-### Debouncing
-
+### `AccelerometerPermissionState`
+Permission state union including `limited` for platforms that can throttle motion access.
 ```typescript
-class AccelerometerDebouncer {
-  private timeout: any;
-
-  debounce(callback: Function, delay: number) {
-    return (...args: any[]) => {
-      clearTimeout(this.timeout);
-      this.timeout = setTimeout(() => callback(...args), delay);
-    };
-  }
-}
+export type AccelerometerPermissionState = PermissionState | 'limited';
 ```
 
-### Data Smoothing
-
+### `PermissionState`
+Platform permission states supported by Capacitor.
 ```typescript
-class AccelerometerFilter {
-  private alpha = 0.8;
-  private filteredX = 0;
-  private filteredY = 0;
-  private filteredZ = 0;
-
-  filter(x: number, y: number, z: number) {
-    this.filteredX = this.alpha * x + (1 - this.alpha) * this.filteredX;
-    this.filteredY = this.alpha * y + (1 - this.alpha) * this.filteredY;
-    this.filteredZ = this.alpha * z + (1 - this.alpha) * this.filteredZ;
-
-    return {
-      x: this.filteredX,
-      y: this.filteredY,
-      z: this.filteredZ
-    };
-  }
-}
+export type PermissionState = 'prompt' | 'prompt-with-rationale' | 'granted' | 'denied';
 ```
 
-## Next Steps
+## Source Of Truth
 
-- Explore the [API Reference](https://github.com/Cap-go/capacitor-accelerometer#api) for complete method documentation
-- Check out the [example app](https://github.com/Cap-go/capacitor-accelerometer/tree/main/example) for advanced usage
-- See the [tutorial](/plugins/capacitor-accelerometer) for complete implementation examples
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

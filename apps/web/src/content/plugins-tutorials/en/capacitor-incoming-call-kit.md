@@ -1,98 +1,67 @@
 ---
 locale: en
 ---
-
 # Using @capgo/capacitor-incoming-call-kit
 
-The `@capgo/capacitor-incoming-call-kit` package adds the native incoming-call presentation layer to Capacitor apps. It gives you CallKit on iOS, high-priority incoming-call notifications on Android, and a typed JavaScript API that stays independent from any specific calling vendor.
+Capacitor API for presenting a native incoming-call surface.
 
-## Installation
+## Install
 
 ```bash
 bun add @capgo/capacitor-incoming-call-kit
 bunx cap sync
 ```
 
-## When to use it
+## What This Plugin Exposes
 
-This plugin is a good fit when your app already has signaling and media handled elsewhere, for example with:
+- `showIncomingCall` - Displays the native incoming call UI.
+- `endCall` - Ends a specific tracked call.
+- `endAllCalls` - Ends every tracked call.
+- `getActiveCalls` - Returns the currently tracked calls.
 
-- your own backend event flow
-- Twilio, Stream, Daily, Agora, or SIP infrastructure
-- FCM or PushKit delivery
+## Example Usage
 
-The plugin only owns the native ringing layer. Your app still owns push transport, authentication, and the actual audio or video session.
+### `showIncomingCall`
 
-## Quick start
+Displays the native incoming call UI.
 
-```ts
+```typescript
 import { IncomingCallKit } from '@capgo/capacitor-incoming-call-kit';
 
-await IncomingCallKit.requestPermissions();
-await IncomingCallKit.requestFullScreenIntentPermission();
-
-await IncomingCallKit.addListener('callAccepted', async ({ call }) => {
-  console.log('Accepted', call.callId);
-  // Join the real room or VoIP session here.
-});
-
-await IncomingCallKit.addListener('callDeclined', ({ call }) => {
-  console.log('Declined', call.callId);
-});
-
-await IncomingCallKit.showIncomingCall({
-  callId: 'call-42',
-  callerName: 'Ada Lovelace',
-  handle: '+39 555 010 020',
-  appName: 'Capgo Phone',
-  hasVideo: true,
-  timeoutMs: 45_000,
-  extra: {
-    roomId: 'room-42',
-  },
-  android: {
-    channelId: 'calls',
-    channelName: 'Incoming Calls',
-    showFullScreen: true,
-  },
-  ios: {
-    handleType: 'phoneNumber',
-  },
-});
+await IncomingCallKit.showIncomingCall({} as ShowIncomingCallOptions);
 ```
 
-## Event flow
+### `endCall`
 
-The common production pattern looks like this:
+Ends a specific tracked call.
 
-1. Your backend or communications SDK emits a ring event.
-2. Your Capacitor app calls `showIncomingCall()`.
-3. The plugin presents native incoming-call UI.
-4. `callAccepted` tells your app to join the actual call.
-5. `callDeclined`, `callEnded`, or `callTimedOut` tells your app to clean up remote state.
+```typescript
+import { IncomingCallKit } from '@capgo/capacitor-incoming-call-kit';
 
-## Platform notes
+await IncomingCallKit.endCall({} as EndCallOptions);
+```
 
-### iOS
+### `endAllCalls`
 
-- Uses CallKit for the system incoming-call sheet.
-- Does not register PushKit or APNs for you.
-- `requestPermissions()` resolves immediately because CallKit has no runtime prompt.
+Ends every tracked call.
 
-### Android
+```typescript
+import { IncomingCallKit } from '@capgo/capacitor-incoming-call-kit';
 
-- Uses a high-priority notification and optional full-screen activity.
-- Requests notification permission on Android 13 and later.
-- Can open the Android 14 full-screen intent settings page when needed.
+await IncomingCallKit.endAllCalls();
+```
 
-## Useful APIs
+### `getActiveCalls`
 
-- `showIncomingCall()` to present the native UI
-- `endCall()` to end a single tracked call
-- `endAllCalls()` to clear all tracked calls
-- `getActiveCalls()` to inspect what the native layer still considers active
+Returns the currently tracked calls.
 
-## Learn more
+```typescript
+import { IncomingCallKit } from '@capgo/capacitor-incoming-call-kit';
 
-- Docs: [Incoming Call Kit](https://capgo.app/docs/plugins/incoming-call-kit/)
-- GitHub: [Cap-go/capacitor-incoming-call-kit](https://github.com/Cap-go/capacitor-incoming-call-kit)
+await IncomingCallKit.getActiveCalls();
+```
+
+## Full Reference
+
+- GitHub: https://github.com/Cap-go/capacitor-incoming-call-kit/
+- Docs: /docs/plugins/incoming-call-kit/

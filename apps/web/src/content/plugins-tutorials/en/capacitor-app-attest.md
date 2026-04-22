@@ -1,92 +1,67 @@
 ---
 locale: en
 ---
-# Using @capgo/capacitor-app-attest Package
+# Using @capgo/capacitor-app-attest
 
-The `@capgo/capacitor-app-attest` package is a Capacitor plugin for cross-platform device attestation. It gives you one JavaScript API for:
+Unified cross-platform attestation plugin for Capacitor.
 
-- **iOS** with Apple App Attest (`DeviceCheck`)
-- **Android** with Google Play Integrity Standard API
-
-This is useful to protect sensitive backend routes such as login, account recovery, payments, and abuse-prone endpoints.
-
-## Installation
+## Install
 
 ```bash
 bun add @capgo/capacitor-app-attest
 bunx cap sync
 ```
 
-## iOS setup
+## What This Plugin Exposes
 
-1. Open your app target in Xcode.
-2. Go to **Signing & Capabilities**.
-3. Add the **App Attest** capability.
-4. Test on a physical device for real App Attest validation.
+- `isSupported` - Checks whether native attestation is available on this device.
+- `prepare` - Prepares attestation state and returns the key handle used for later calls.
+- `createAttestation` - Creates a registration attestation token bound to a backend-issued challenge.
+- `createAssertion` - Creates a request assertion token bound to a request payload.
 
-## Android setup
+## Example Usage
 
-1. Enable **Play Integrity API** in your Google Cloud project.
-2. Configure Play Integrity access in Play Console for your app.
-3. Provide `cloudProjectNumber`:
+### `isSupported`
 
-```ts
-// capacitor.config.ts
-plugins: {
-  AppAttest: {
-    cloudProjectNumber: '123456789012',
-  },
-}
+Checks whether native attestation is available on this device.
+
+```typescript
+import { AppAttestNative } from '@capgo/capacitor-app-attest';
+
+await AppAttestNative.isSupported();
 ```
 
-## Unified API usage
+### `prepare`
 
-```ts
-import { AppAttest } from '@capgo/capacitor-app-attest';
+Prepares attestation state and returns the key handle used for later calls.
 
-const support = await AppAttest.isSupported();
-if (!support.isSupported) {
-  throw new Error(`Attestation unavailable on ${support.platform}`);
-}
+```typescript
+import { AppAttestNative } from '@capgo/capacitor-app-attest';
 
-const { keyId } = await AppAttest.prepare();
-
-const registration = await AppAttest.createAttestation({
-  keyId,
-  challenge: 'server-one-time-registration-challenge',
-});
-
-const assertion = await AppAttest.createAssertion({
-  keyId,
-  payload: 'server-one-time-request-payload',
-});
-
-console.log(registration.platform, registration.format, registration.token);
-console.log(assertion.platform, assertion.format, assertion.token);
+await AppAttestNative.prepare();
 ```
 
-## Backend verification model
+### `createAttestation`
 
-You must validate tokens on your backend. The app should never decide trust by itself.
+Creates a registration attestation token bound to a backend-issued challenge.
 
-### iOS backend (Apple App Attest)
+```typescript
+import { AppAttestNative } from '@capgo/capacitor-app-attest';
 
-- Verify attestation certificate chain and app identity.
-- Verify `clientDataHash` against `SHA256(challenge)`.
-- Store key state for assertion checks.
-- Verify assertion signature and replay constraints.
+await AppAttestNative.createAttestation({} as CreateAttestationOptions);
+```
 
-### Android backend (Play Integrity Standard)
+### `createAssertion`
 
-- Decode token with Google `decodeIntegrityToken`.
-- Verify `requestHash` equals `base64url(SHA256(challenge or payload))`.
-- Verify package name and signing certificate digest.
-- Enforce integrity verdict policy and replay/TTL checks.
+Creates a request assertion token bound to a request payload.
 
-## Recommended next step
+```typescript
+import { AppAttestNative } from '@capgo/capacitor-app-attest';
 
-Use the full plugin docs for platform-specific setup and backend schema:
+await AppAttestNative.createAssertion({} as CreateAssertionOptions);
+```
 
-- `/docs/plugins/app-attest/`
-- `/docs/plugins/app-attest/ios/`
-- `/docs/plugins/app-attest/android/`
+## Full Reference
+
+- GitHub: https://github.com/Cap-go/capacitor-app-attest/
+- Docs: /docs/plugins/app-attest/

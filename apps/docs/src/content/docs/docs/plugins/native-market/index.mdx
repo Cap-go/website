@@ -1,6 +1,6 @@
 ---
 title: "@capgo/native-market"
-description: Native Market plugin for redirecting users to Google Play Store or Apple App Store from your Capacitor app.
+description: "A native market plugin for linking to google play or app store."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,40 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: A Capacitor plugin for redirecting users to app stores (Google Play or Apple App Store) from your mobile application.
-  image:
-    file: ~public/icons/plugins/native-market.svg
+  tagline: "Capacitor Native Market Plugin for opening app store listings and pages."
   actions:
     - text: Get started
       link: /docs/plugins/native-market/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
-      link: https://github.com/riderx/native-market/
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-native-market/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Cross-platform" icon="rocket">
-    Works seamlessly on both Android and iOS platforms 🚀
-  </Card>
-  <Card title="Easy integration" icon="pencil">
-    Simple API to redirect users to rate or view your app on their respective app stores 💨
-  </Card>
-  <Card title="TypeScript support" icon="setting">
-    Full TypeScript support for better development experience 😊
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/native-market/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+Capacitor Native Market Plugin for opening app store listings and pages.
+
+## Core Capabilities
+
+- `openStoreListing` - Launch app listing page in Play Store (Android) or App Store (iOS).
+- `openDevPage` - Deep-link directly to a developer's page in the Play Store. Android only.
+- `openCollection` - Link users to a collection or top charts in the Play Store. Android only.
+- `openEditorChoicePage` - Link users to Editor's choice page in the Play Store. Android only.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `openStoreListing` | Launch app listing page in Play Store (Android) or App Store (iOS). |
+| `openDevPage` | Deep-link directly to a developer's page in the Play Store. Android only. |
+| `openCollection` | Link users to a collection or top charts in the Play Store. Android only. |
+| `openEditorChoicePage` | Link users to Editor's choice page in the Play Store. Android only. |
+| `search` | Search the Play Store with custom search terms. Android only. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-native-market](https://github.com/Cap-go/capacitor-native-market/).

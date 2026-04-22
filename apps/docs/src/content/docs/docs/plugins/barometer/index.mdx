@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-barometer"
-description: Access device barometer readings for atmospheric pressure and altitude data from device sensors.
+description: "Access device barometer readings with Capacitor."
 tableOfContents: false
 next: false
 prev: false
@@ -8,36 +8,43 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Access barometric pressure and altitude data from device sensors for weather and fitness applications.
-  image:
-    file: ~public/icons/plugins/barometer.svg
+  tagline: "Capacitor plugin contract for working with the device barometer sensor."
   actions:
     - text: Get started
       link: /docs/plugins/barometer/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-barometer/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Pressure Monitoring" icon="rocket">
-    Real-time atmospheric pressure readings 🌡️
-  </Card>
-  <Card title="Altitude Calculation" icon="star">
-    Derive relative altitude from pressure changes 📈
-  </Card>
-  <Card title="Event Listeners" icon="setting">
-    Subscribe to pressure change events 🔔
-  </Card>
-  <Card title="Cross-Platform" icon="laptop">
-    Works on iOS and Android devices with barometer sensors 📱
-  </Card>
-  <Card title="Getting Started" icon="open-book">
-    Check the [Getting Started Guide](/docs/plugins/barometer/getting-started/) to install and configure the plugin.
-  </Card>
-</CardGrid>
+Capacitor plugin contract for working with the device barometer sensor.
+
+## Core Capabilities
+
+- `getMeasurement` - Get the most recent barometer reading captured by the native layer.
+- `isAvailable` - Check if the current device includes a barometer sensor.
+- `startMeasurementUpdates` - Begin streaming barometer updates to the JavaScript layer.
+- `stopMeasurementUpdates` - Stop the continuous updates started via .
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `getMeasurement` | Get the most recent barometer reading captured by the native layer. |
+| `isAvailable` | Check if the current device includes a barometer sensor. |
+| `startMeasurementUpdates` | Begin streaming barometer updates to the JavaScript layer. |
+| `stopMeasurementUpdates` | Stop the continuous updates started via . |
+| `checkPermissions` | Return the current permission state for accessing barometer data. |
+| `requestPermissions` | Request permission to access barometer data if required by the platform. |
+| `addListener` | Listen for pressure updates. |
+| `removeAllListeners` | Remove all registered listeners for this plugin. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-barometer](https://github.com/Cap-go/capacitor-barometer/).
