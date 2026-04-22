@@ -75,8 +75,7 @@ jobs:
             ${{ runner.os }}-astro-docs-
 
       - run: bun install --frozen-lockfile
-      - run: cd apps/docs && bun run check
-      - run: bun run build:docs
+      - run: bun run ci:verify:docs
         env:
           PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
