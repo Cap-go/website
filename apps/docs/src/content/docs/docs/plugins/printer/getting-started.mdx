@@ -39,7 +39,7 @@ import { Printer } from '@capgo/capacitor-printer';
 // Print a base64 encoded PDF
 await Printer.printBase64({
   name: 'Invoice #12345',
-  data: 'JVBERi0xLjQKJeLjz9MKMyAwIG9iago8PC9UeXBlL...',
+  data: 'base64-encoded-pdf-data',
   mimeType: 'application/pdf',
 });
 
@@ -205,7 +205,7 @@ export interface PrintBase64Options extends PrintOptions {
    * - **Web**: Converted to Blob for printing
    *
    * @since 7.0.0
-   * @example 'JVBERi0xLjQKJeLjz9MKMyAwIG9iago8PC9UeXBlL...'
+   * @example 'base64-encoded-pdf-data'
    */
   data: string;
 

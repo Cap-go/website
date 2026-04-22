@@ -31,7 +31,7 @@ import { Printer } from '@capgo/capacitor-printer';
 // Print a base64 encoded PDF
 await Printer.printBase64({
   name: 'Invoice #12345',
-  data: 'JVBERi0xLjQKJeLjz9MKMyAwIG9iago8PC9UeXBlL...',
+  data: 'base64-encoded-pdf-data',
   mimeType: 'application/pdf',
 });
 
