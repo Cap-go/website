@@ -1,6 +1,6 @@
 ---
-title: "@capgo/ivs-player"
-description: Capacitor plugin for Amazon IVS (Interactive Video Service) player, enabling low-latency live streaming in your mobile apps.
+title: "@capgo/capacitor-ivs-player"
+description: "Ivs player for capacitor app."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,72 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Integrate Amazon IVS player for ultra-low latency live streaming with interactive features in your Capacitor apps.
-  image:
-    file: ~public/icons/plugins/ivs-player.svg
+  tagline: "Ivs player for capacitor app."
   actions:
     - text: Get started
       link: /docs/plugins/ivs-player/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-ivs-player/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Low-latency streaming" icon="rocket">
-    Stream with sub-second latency using Amazon IVS 📡
-  </Card>
-  <Card title="Interactive features" icon="setting">
-    Support for timed metadata and viewer interactions 💬
-  </Card>
-  <Card title="Quality adaptation" icon="star">
-    Automatic quality switching based on network conditions 📶
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/ivs-player/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+Ivs player for capacitor app.
+
+## Core Capabilities
+
+- `create` 
+- `start` 
+- `cast` 
+- `getCastStatus` 
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `create` | See the source definitions for current behavior. |
+| `start` | See the source definitions for current behavior. |
+| `cast` | See the source definitions for current behavior. |
+| `getCastStatus` | See the source definitions for current behavior. |
+| `pause` | See the source definitions for current behavior. |
+| `delete` | See the source definitions for current behavior. |
+| `getUrl` | See the source definitions for current behavior. |
+| `getState` | See the source definitions for current behavior. |
+| `setPlayerPosition` | See the source definitions for current behavior. |
+| `getPlayerPosition` | See the source definitions for current behavior. |
+| `setAutoQuality` | See the source definitions for current behavior. |
+| `getAutoQuality` | See the source definitions for current behavior. |
+| `setPip` | See the source definitions for current behavior. |
+| `getPip` | See the source definitions for current behavior. |
+| `setFrame` | Set the frame of the player view, all number have to be positive and integers. |
+| `getFrame` | See the source definitions for current behavior. |
+| `setBackgroundState` | See the source definitions for current behavior. |
+| `getBackgroundState` | See the source definitions for current behavior. |
+| `setMute` | See the source definitions for current behavior. |
+| `getMute` | See the source definitions for current behavior. |
+| `setQuality` | See the source definitions for current behavior. |
+| `getQuality` | See the source definitions for current behavior. |
+| `getQualities` | See the source definitions for current behavior. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+| `addListener` | Listen for start pip. |
+| `addListener` | Listen for stop pip. |
+| `addListener` | Listen for expend pip. |
+| `addListener` | Listen for close pip. |
+| `addListener` | Listen for state changes. |
+| `addListener` | Listen for cue changes. |
+| `addListener` | Listen for duration changes. |
+| `addListener` | Listen for errors. |
+| `addListener` | Listen for rebuffering. |
+| `addListener` | Listen for position changes. |
+| `addListener` | Listen for video size changes. |
+| `addListener` | Listen for quality changes. |
+| `addListener` | Listen for cast status changes. |
+| `removeAllListeners` | Remove all listeners for this plugin. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-ivs-player](https://github.com/Cap-go/capacitor-ivs-player/).

@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-pedometer"
-description: Track steps, distance, pace, and fitness data with device pedometer sensors for comprehensive health and fitness monitoring.
+description: "Capacitor plugin for accessing pedometer data including steps, distance, pace, cadence, and floors."
 tableOfContents: false
 next: false
 prev: false
@@ -8,39 +8,43 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Access comprehensive pedometer data for fitness and health tracking with real-time updates and historical data queries.
-  image:
-    file: ~public/icons/plugins/pedometer.svg
+  tagline: "Capacitor plugin for accessing pedometer data including steps, distance, pace, cadence, and floors."
   actions:
     - text: Get started
       link: /docs/plugins/pedometer/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-pedometer/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Step Counting" icon="rocket">
-    Accurate step detection and counting 👟
-  </Card>
-  <Card title="Distance Tracking" icon="star">
-    Calculate distance traveled in real-time 📏
-  </Card>
-  <Card title="Pace & Cadence" icon="setting">
-    Monitor walking and running speed 🏃
-  </Card>
-  <Card title="Historical Data" icon="document">
-    Query pedometer data from specific time ranges 📊
-  </Card>
-  <Card title="Floor Tracking" icon="approve-check">
-    Count floors climbed on iOS devices 🪜
-  </Card>
-  <Card title="Getting Started" icon="open-book">
-    Check the [Getting Started Guide](/docs/plugins/pedometer/getting-started/) to install and configure the plugin.
-  </Card>
-</CardGrid>
+Capacitor plugin for accessing pedometer data including steps, distance, pace, cadence, and floors.
+
+## Core Capabilities
+
+- `getMeasurement` - Get pedometer measurements for a specified time range.
+- `isAvailable` - Check which pedometer features are available on this device.
+- `startMeasurementUpdates` - Start receiving real-time pedometer measurement updates.
+- `stopMeasurementUpdates` - Stop receiving real-time pedometer measurement updates.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `getMeasurement` | Get pedometer measurements for a specified time range. |
+| `isAvailable` | Check which pedometer features are available on this device. |
+| `startMeasurementUpdates` | Start receiving real-time pedometer measurement updates. |
+| `stopMeasurementUpdates` | Stop receiving real-time pedometer measurement updates. |
+| `checkPermissions` | Check permission to access pedometer data. |
+| `requestPermissions` | Request permission to access pedometer data. |
+| `addListener` | Called when a new pedometer measurement is received. |
+| `removeAllListeners` | Remove all listeners for this plugin. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-pedometer](https://github.com/Cap-go/capacitor-pedometer/).

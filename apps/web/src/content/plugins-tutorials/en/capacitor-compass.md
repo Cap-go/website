@@ -1,206 +1,80 @@
 ---
 locale: en
 ---
-# Using @capgo/capacitor-compass Package
+# Using @capgo/capacitor-compass
 
-The `@capgo/capacitor-compass` package allows you to read device compass heading data in degrees (0-360) on iOS and Android. In this tutorial, we will guide you through the process of installing and using this package in your Ionic Capacitor app.
+Capacitor Compass Plugin interface for reading device compass heading.
 
-## Installation
-
-To install the `@capgo/capacitor-compass` package, run the following command in your project's root directory:
+## Install
 
 ```bash
-npm install @capgo/capacitor-compass
-npx cap sync
+bun add @capgo/capacitor-compass
+bunx cap sync
 ```
 
-## iOS Setup
+## What This Plugin Exposes
 
-On iOS, the compass requires location permission because heading data is accessed through Core Location. Add the following to your `Info.plist`:
+- `getCurrentHeading` - Get the current compass heading in degrees. On iOS, the heading is updated in the background, and the latest value is returned. On Android, the heading is calculated when the method is called using accelerometer and magnetometer sensors. Not implemented on Web.
+- `startListening` - Start listening for compass heading changes via events. This starts the compass sensors and emits 'headingChange' events.
+- `stopListening` - Stop listening for compass heading changes. This stops the compass sensors and stops emitting events.
+- `checkPermissions` - Check the current permission status for accessing compass data. On iOS, this checks location permission status. On Android, this always returns 'granted' as no permissions are required.
 
-```xml
-<key>NSLocationWhenInUseUsageDescription</key>
-<string>We need location permission to access the compass</string>
-```
+## Example Usage
 
-## Android Setup
+### `getCurrentHeading`
 
-The `@capgo/capacitor-compass` package works out of the box on Android using the device's magnetometer and accelerometer sensors. No additional setup is required.
+Get the current compass heading in degrees. On iOS, the heading is updated in the background, and the latest value is returned. On Android, the heading is calculated when the method is called using accelerometer and magnetometer sensors. Not implemented on Web.
 
-## API
-
-The `@capgo/capacitor-compass` package provides the following API methods:
-
-### checkPermissions()
-
-Check the current permission status for compass access.
-
-```javascript
+```typescript
 import { CapgoCompass } from '@capgo/capacitor-compass';
 
-async function checkCompassPermissions() {
-  const status = await CapgoCompass.checkPermissions();
-  console.log('Compass permission:', status.compass);
-  // Returns: 'prompt', 'granted', or 'denied'
-}
+const { value } = await CapgoCompass.getCurrentHeading();
+console.log('Compass heading:', value, 'degrees');
 ```
 
-### requestPermissions()
+### `startListening`
 
-Request permission to access compass data. On iOS, this requests location permission. On Android, this always returns 'granted' as no permissions are required.
+Start listening for compass heading changes via events. This starts the compass sensors and emits 'headingChange' events.
 
-```javascript
+```typescript
 import { CapgoCompass } from '@capgo/capacitor-compass';
 
-async function requestCompassPermissions() {
-  const status = await CapgoCompass.requestPermissions();
-  if (status.compass === 'granted') {
-    console.log('Compass access granted');
-  }
-}
+// With default throttling (100ms interval, 2° minimum change)
+await CapgoCompass.startListening();
+
+// With custom throttling for high-frequency updates
+await CapgoCompass.startListening({
+  minInterval: 50,      // 50ms between events
+  minHeadingChange: 1.0 // 1° minimum change
+});
+
+CapgoCompass.addListener('headingChange', (event) => {
+  console.log('Heading:', event.value);
+});
 ```
 
-### getCurrentHeading()
+### `stopListening`
 
-Get the current compass heading in degrees (0-360).
+Stop listening for compass heading changes. This stops the compass sensors and stops emitting events.
 
-```javascript
+```typescript
 import { CapgoCompass } from '@capgo/capacitor-compass';
 
-async function getHeading() {
-  const { value } = await CapgoCompass.getCurrentHeading();
-  console.log('Current heading:', value, 'degrees');
-}
+await CapgoCompass.stopListening();
 ```
 
-### startListening()
+### `checkPermissions`
 
-Start listening for continuous compass heading updates.
+Check the current permission status for accessing compass data. On iOS, this checks location permission status. On Android, this always returns 'granted' as no permissions are required.
 
-```javascript
+```typescript
 import { CapgoCompass } from '@capgo/capacitor-compass';
 
-async function startCompass() {
-  await CapgoCompass.startListening();
-  console.log('Compass listening started');
-}
+const status = await CapgoCompass.checkPermissions();
+console.log('Compass permission:', status.compass);
 ```
 
-### stopListening()
+## Full Reference
 
-Stop listening for compass heading updates.
-
-```javascript
-import { CapgoCompass } from '@capgo/capacitor-compass';
-
-async function stopCompass() {
-  await CapgoCompass.stopListening();
-  console.log('Compass listening stopped');
-}
-```
-
-### addListener('headingChange', callback)
-
-Add a listener for heading change events.
-
-```javascript
-import { CapgoCompass } from '@capgo/capacitor-compass';
-
-async function watchHeading() {
-  const handle = await CapgoCompass.addListener('headingChange', (event) => {
-    console.log('Heading:', event.value, 'degrees');
-  });
-
-  // Later, to remove the listener:
-  // await handle.remove();
-}
-```
-
-### removeAllListeners()
-
-Remove all registered event listeners.
-
-```javascript
-import { CapgoCompass } from '@capgo/capacitor-compass';
-
-async function cleanup() {
-  await CapgoCompass.removeAllListeners();
-}
-```
-
-### getPluginVersion()
-
-Get the native plugin version.
-
-```javascript
-import { CapgoCompass } from '@capgo/capacitor-compass';
-
-async function getVersion() {
-  const { version } = await CapgoCompass.getPluginVersion();
-  console.log('Plugin version:', version);
-}
-```
-
-## Complete Example
-
-Here's a complete example showing how to use the compass plugin:
-
-```javascript
-import { CapgoCompass } from '@capgo/capacitor-compass';
-
-class CompassDemo {
-  listenerHandle = null;
-
-  async init() {
-    // Check and request permissions
-    const status = await CapgoCompass.checkPermissions();
-    if (status.compass !== 'granted') {
-      const result = await CapgoCompass.requestPermissions();
-      if (result.compass !== 'granted') {
-        console.error('Compass permission denied');
-        return false;
-      }
-    }
-    return true;
-  }
-
-  async start() {
-    // Start the compass
-    await CapgoCompass.startListening();
-
-    // Listen for heading changes
-    this.listenerHandle = await CapgoCompass.addListener(
-      'headingChange',
-      (event) => {
-        const heading = event.value;
-        const direction = this.getDirection(heading);
-        console.log(`Heading: ${heading.toFixed(1)}° (${direction})`);
-      }
-    );
-  }
-
-  async stop() {
-    if (this.listenerHandle) {
-      await this.listenerHandle.remove();
-      this.listenerHandle = null;
-    }
-    await CapgoCompass.stopListening();
-  }
-
-  getDirection(heading) {
-    const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
-    const index = Math.round(heading / 45) % 8;
-    return directions[index];
-  }
-}
-
-// Usage
-const compass = new CompassDemo();
-await compass.init();
-await compass.start();
-
-// Later...
-await compass.stop();
-```
-
-That's it! You have successfully learned how to use the `@capgo/capacitor-compass` package in your Ionic Capacitor app to read compass heading data.
+- GitHub: https://github.com/Cap-go/capacitor-compass/
+- Docs: /docs/plugins/compass/

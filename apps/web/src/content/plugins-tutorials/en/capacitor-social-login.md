@@ -1,87 +1,70 @@
 ---
 locale: en
 ---
-
-# Complete Tutorial: Using @capgo/capacitor-social-login for iOS and Android Mobile Apps
-
-The `@capgo/capacitor-social-login` package provides native social login functionality for your Capacitor mobile applications on iOS and Android. This comprehensive tutorial will guide you through integrating social login features into your iOS and Android mobile apps built with Capacitor or Cordova, enabling cross-platform mobile app development with native capabilities.
-
-## What is Capacitor?
-
-Capacitor is Ionic's modern native runtime that enables developers to build native iOS apps, Android apps, and Progressive Web Apps from a single codebase. Unlike older Cordova-based mobile development, Capacitor provides direct access to native iOS and Android APIs, making it the ideal choice for building production-ready mobile applications. This Capacitor plugin brings social login capabilities to both iOS and Android mobile platforms.
-
-## Why Use social login in Your Capacitor Mobile App?
-
-The @capgo/capacitor-social-login plugin enables your iOS and Android mobile applications to leverage native social login functionality without writing platform-specific code. This Capacitor plugin provides a unified JavaScript API that works seamlessly on both iOS and Android mobile devices, making it perfect for cross-platform mobile app development.
-
-Benefits for iOS and Android mobile applications:
-- Native social login performance on iOS and Android devices
-- Unified API for both iOS and Android mobile platforms
-- No need for separate native iOS or Android code
-- Works with Capacitor and Cordova mobile frameworks
-- Full TypeScript support for mobile app development
-- Seamless integration with existing Capacitor mobile apps
-
----
-locale: en
----
 # Using @capgo/capacitor-social-login
 
-The `@capgo/capacitor-social-login` package provides native functionality for your Capacitor app. Here is a tutorial on how to use this package.
+All social logins in one plugin.
 
-## Installation
-
-To install the package, run the following command:
+## Install
 
 ```bash
-npm install @capgo/capacitor-social-login
-npx cap sync
+bun add @capgo/capacitor-social-login
+bunx cap sync
 ```
 
-## Usage
+## What This Plugin Exposes
 
-### Basic Example
+- `initialize` - Initialize the plugin.
+- `login` - Login with the selected provider.
+- `logout` - Logout.
+- `isLoggedIn` - IsLoggedIn.
+
+## Example Usage
+
+### `initialize`
+
+Initialize the plugin.
 
 ```typescript
-import { capacitorsociallogin } from '@capgo/capacitor-social-login';
+import { SocialLogin } from '@capgo/capacitor-social-login';
 
-// Use the plugin methods here
+await SocialLogin.initialize({} as InitializeOptions);
 ```
 
-For detailed API documentation, please visit the [GitHub repository](https://github.com/Cap-go/capacitor-social-login).
+### `login`
 
-That's it! You have successfully integrated @capgo/capacitor-social-login into your Capacitor app.
+Login with the selected provider.
 
-## Platform-Specific Notes for iOS and Android
+```typescript
+import { SocialLogin } from '@capgo/capacitor-social-login';
 
-### iOS Mobile Platform
+await SocialLogin.login({} as Extract<LoginOptions, { provider: T }>);
+```
 
-- Compatible with iOS 10.0+ mobile devices (iPhone and iPad)
-- Uses native iOS APIs for social login functionality
-- Optimized performance on iOS mobile platform
-- Full support for latest iOS versions
+### `logout`
 
-### Android Mobile Platform
+Logout.
 
-- Compatible with Android 5.0 (API 21)+ mobile devices
-- Uses native Android APIs for social login functionality
-- Works across all Android device manufacturers
-- Optimized for Android mobile platform
+```typescript
+import { SocialLogin } from '@capgo/capacitor-social-login';
 
-## Capacitor vs Cordova for Mobile Development
+await SocialLogin.logout({} as {
+    provider: 'apple' | 'google' | 'facebook' | 'twitter' | 'oauth2';
+    providerId?: string;
+  });
+```
 
-While this social login plugin works with both Capacitor and Cordova mobile frameworks, Capacitor offers significant advantages for iOS and Android mobile app development:
+### `isLoggedIn`
 
-- **Modern Architecture**: Better performance on iOS and Android mobile platforms
-- **Direct Native Access**: Easier integration with iOS and Android native APIs
-- **Improved Tooling**: Superior development experience for mobile apps
-- **Active Development**: Regular updates for iOS and Android compatibility
-- **Better Documentation**: Comprehensive guides for mobile app development
+IsLoggedIn.
 
-## Conclusion
+```typescript
+import { SocialLogin } from '@capgo/capacitor-social-login';
 
-You have successfully integrated @capgo/capacitor-social-login into your Capacitor mobile application for iOS and Android. This plugin provides native social login capabilities for both iOS and Android mobile platforms, enabling professional mobile app development with a unified codebase.
+await SocialLogin.isLoggedIn({} as isLoggedInOptions);
+```
 
-For detailed API documentation and advanced social login features for mobile app development, visit the [GitHub repository](https://github.com/Cap-go/capacitor-social-login).
+## Full Reference
 
-Whether you're building native iOS apps, Android mobile applications, or cross-platform Capacitor mobile apps, this social login plugin provides the native capabilities you need for professional mobile app development on iOS and Android platforms.
+- GitHub: https://github.com/Cap-go/capacitor-social-login/
+- Docs: /docs/plugins/social-login/

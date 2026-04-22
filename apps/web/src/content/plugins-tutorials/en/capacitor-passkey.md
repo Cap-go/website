@@ -1,95 +1,69 @@
 ---
 locale: en
-published: true
 ---
 # Using @capgo/capacitor-passkey
 
-`@capgo/capacitor-passkey` lets a Capacitor app keep the same WebAuthn flow you already use on the web:
+Capacitor Passkey plugin.
 
-```ts
-await navigator.credentials.create({ publicKey: registrationOptions });
-await navigator.credentials.get({ publicKey: requestOptions });
-```
-
-On native builds, the plugin installs a shim for `navigator.credentials.create()` and `navigator.credentials.get()`, forwards the request to iOS and Android passkey APIs, and returns browser-like credential objects to your app.
-
-## Install the plugin
+## Install
 
 ```bash
 bun add @capgo/capacitor-passkey
 bunx cap sync
 ```
 
-## Configure the host app once
+## What This Plugin Exposes
 
-Add the plugin config in `capacitor.config.ts` or `capacitor.config.json`:
+- `shimWebAuthn` - Install a browser-style WebAuthn shim on top of the native plugin.
+- `getConfiguration` - Load plugin configuration from the host Capacitor app.
+- `autoShimWebAuthn` - Install the browser-style shim using host app configuration.
+- `createCredential` - Register a passkey from a JSON-safe WebAuthn request.
 
-```ts
-import type { CapacitorConfig } from '@capacitor/cli';
+## Example Usage
 
-const config: CapacitorConfig = {
-  appId: 'app.capgo.passkey.example',
-  appName: 'My App',
-  webDir: 'dist',
-  plugins: {
-    CapacitorPasskey: {
-      origin: 'https://signin.example.com',
-      autoShim: true,
-      domains: ['signin.example.com'],
-    },
-  },
-};
+### `shimWebAuthn`
 
-export default config;
-```
+Install a browser-style WebAuthn shim on top of the native plugin.
 
-Run sync again after changing the config:
+```typescript
+import { CapacitorPasskey } from '@capgo/capacitor-passkey';
 
-```bash
-bunx cap sync
-```
-
-During sync, the plugin patches the generated native host projects:
-
-- iOS: associated domains entitlements
-- Android: `asset_statements` metadata for Digital Asset Links
-
-## Import the shim once
-
-Import the auto entrypoint in your app bootstrap:
-
-```ts
-import '@capgo/capacitor-passkey/auto';
-```
-
-After that, your existing browser-style passkey code can stay the same.
-
-## Keep your normal WebAuthn flow
-
-```ts
-const credential = await navigator.credentials.create({
-  publicKey: registrationOptions,
-});
-
-const assertion = await navigator.credentials.get({
-  publicKey: requestOptions,
+CapacitorPasskey.shimWebAuthn({
+  origin: 'https://signin.example.com',
 });
 ```
 
-## Native setup still needs website trust files
+### `getConfiguration`
 
-The plugin reduces app-side work, but passkeys still depend on the website trust files for your relying-party domain:
+Load plugin configuration from the host Capacitor app.
 
-- iOS needs `/.well-known/apple-app-site-association`
-- Android needs `/.well-known/assetlinks.json`
+```typescript
+import { NativeCapacitorPasskey } from '@capgo/capacitor-passkey';
 
-The detailed setup is documented here:
+await NativeCapacitorPasskey.getConfiguration();
+```
 
-- [Getting started](/docs/plugins/passkey/getting-started/)
-- [iOS setup](/docs/plugins/passkey/ios/)
-- [Android setup](/docs/plugins/passkey/android/)
-- [Backend notes](/docs/plugins/passkey/backend/)
+### `autoShimWebAuthn`
 
-## Important Android caveat
+Install the browser-style shim using host app configuration.
 
-Android Credential Manager can share the same relying party and passkeys as your website when Digital Asset Links are configured, but the native assertion origin is not identical to a browser origin. If your backend strictly validates `clientDataJSON.origin`, make sure it accepts the Android app origin alongside your website origin.
+```typescript
+import { CapacitorPasskey } from '@capgo/capacitor-passkey';
+
+await CapacitorPasskey.autoShimWebAuthn();
+```
+
+### `createCredential`
+
+Register a passkey from a JSON-safe WebAuthn request.
+
+```typescript
+import { NativeCapacitorPasskey } from '@capgo/capacitor-passkey';
+
+await NativeCapacitorPasskey.createCredential({} as CreateCredentialOptions);
+```
+
+## Full Reference
+
+- GitHub: https://github.com/Cap-go/capacitor-passkey/
+- Docs: /docs/plugins/passkey/

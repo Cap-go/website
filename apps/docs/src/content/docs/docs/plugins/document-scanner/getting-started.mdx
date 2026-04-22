@@ -1,60 +1,183 @@
 ---
 title: Getting Started
-description: Add native-quality document scanning with edge detection and adjustable output formats.
+description: "Install @capgo/capacitor-document-scanner and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the plugin**
-   <PackageManagers pkg="@capgo/capacitor-document-scanner" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+```bash
+bun add @capgo/capacitor-document-scanner
+bunx cap sync
+```
 
-2. **Sync native platforms**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
-
-## Trigger a scan
+## Import
 
 ```typescript
-import {
-  DocumentScanner,
-  ResponseType,
-  ScanDocumentResponseStatus,
-} from '@capgo/capacitor-document-scanner';
+import { DocumentScanner } from '@capgo/capacitor-document-scanner';
+```
 
-const result = await DocumentScanner.scanDocument({
-  croppedImageQuality: 90,
-  letUserAdjustCrop: true,
-  maxNumDocuments: 10,
-  responseType: ResponseType.ImageFilePath,
-});
+## API Overview
 
-if (result.status === ScanDocumentResponseStatus.Success) {
-  console.log('Scanned files:', result.scannedImages);
-} else {
-  console.log('Scan cancelled by user');
+### `scanDocument`
+
+Opens the device camera and starts the document scanning experience.
+
+```typescript
+import { DocumentScanner } from '@capgo/capacitor-document-scanner';
+
+await DocumentScanner.scanDocument();
+```
+
+## Type Reference
+
+### `ScanDocumentOptions`
+```typescript
+export interface ScanDocumentOptions {
+  /**
+   * Android only: quality of the cropped image from 0 - 100 (100 is best).
+   * @default 100
+   */
+  croppedImageQuality?: number;
+
+  /**
+   * Allow the user to adjust the detected crop before saving.
+   * On iOS this forces the native VisionKit preview/editor after each capture using
+   * the private VisionKit navigation hooks needed to keep the scanner flow alive.
+   * On Android this enables ML Kit's crop adjustment flow.
+   * @default true
+   */
+  letUserAdjustCrop?: boolean;
+
+  /**
+   * When enabled, shows the current scanned page before continuing so the user can
+   * review it and explicitly continue or finish the flow.
+   * On iOS this forces the native VisionKit preview/editor between captures.
+   * On Android this switches to a one-page-at-a-time flow between ML Kit sessions.
+   * The review/editor screen is still shown automatically when the scan limit is reached.
+   * @default false
+   */
+  reviewCapturedDocument?: boolean;
+
+  /**
+   * Maximum number of documents to scan.
+   * On iOS: VisionKit caps scans at 24 pages (system limit), and the hacked native flow
+   * can still stop earlier when you pass a smaller limit.
+   * On Android: customizable limit; defaults to 20 for performance (clamped 1-24).
+   * Set to 1 for single-scan mode where the scanner stops after one document.
+   * @default 20 on Android, 24 on iOS
+   */
+  maxNumDocuments?: number;
+
+  /**
+   * Format to return scanned images in (file paths or base64 strings).
+   * @default ResponseType.ImageFilePath
+   */
+  responseType?: ResponseType;
+
+  /**
+   * Brightness adjustment applied to scanned images.
+   * Range: -255 to 255 (0 = no change, positive = brighter, negative = darker)
+   * Useful for compensating low-light scans.
+   * @default 0
+   */
+  brightness?: number;
+
+  /**
+   * Contrast adjustment applied to scanned images.
+   * Range: 0.0 to 10.0 (1.0 = no change, >1 = more contrast, <1 = less contrast)
+   * Helps improve text clarity in poorly lit scans.
+   * @default 1.0
+   */
+  contrast?: number;
+
+  /**
+   * Android only: scanner mode that controls ML Kit features and filters.
+   * - 'base': Basic scan with crop/rotate, no filters or ML cleaning
+   * - 'base_with_filter': Adds grayscale and auto-enhancement filters
+   * - 'full': All features including ML-based image cleaning (erases stains, fingers, etc.)
+   * @default ScannerMode.Full
+   */
+  scannerMode?: ScannerMode;
 }
 ```
 
-## Return base64 data
-
+### `ScanDocumentResponse`
 ```typescript
-const result = await DocumentScanner.scanDocument({
-  responseType: ResponseType.Base64,
-});
+export interface ScanDocumentResponse {
+  /**
+   * Scanned images in the requested response format.
+   */
+  scannedImages?: string[];
 
-const [firstPage] = result.scannedImages ?? [];
-if (firstPage) {
-  const dataUrl = `data:image/jpeg;base64,${firstPage}`;
-  // Display preview or upload to server
+  /**
+   * Indicates whether the scan completed or was cancelled.
+   */
+  status?: ScanDocumentResponseStatus;
+
+  /**
+   * Get the native Capacitor plugin version
+   *
+   * @returns {Promise<{ id: string }>} an Promise with version for this device
+   * @throws An error if the something went wrong
+   */
+  getPluginVersion(): Promise<{ version: string }>;
 }
 ```
 
-## Platform requirements
+### `ResponseType`
+```typescript
+export enum ResponseType {
+  /**
+   * Return scanned images as base64-encoded strings.
+   */
+  Base64 = 'base64',
 
-- **iOS**: Add `NSCameraUsageDescription` to `ios/App/App/Info.plist` explaining how you use the camera.
-- **Android**: Confirm that `CAMERA` permission is declared (Capacitor adds it automatically) and adjust `croppedImageQuality`, `letUserAdjustCrop`, and `maxNumDocuments` to match your UI.
-- **Storage**: When using `ResponseType.ImageFilePath`, move or copy the scanned files to your desired storage location before the app session ends.
+  /**
+   * Return scanned images as file paths on disk.
+   */
+  ImageFilePath = 'imageFilePath',
+}
+```
+
+### `ScannerMode`
+```typescript
+export enum ScannerMode {
+  /**
+   * Basic document scanning with crop and rotate features only.
+   * No filters or ML-based enhancements.
+   */
+  Base = 'base',
+
+  /**
+   * Basic features plus automatic filters (grayscale, auto-enhancement).
+   */
+  BaseWithFilter = 'base_with_filter',
+
+  /**
+   * Full feature set including ML-based image cleaning.
+   * Automatically removes stains, fingers, and other artifacts.
+   */
+  Full = 'full',
+}
+```
+
+### `ScanDocumentResponseStatus`
+```typescript
+export enum ScanDocumentResponseStatus {
+  /**
+   * The scan completed successfully.
+   */
+  Success = 'success',
+
+  /**
+   * The user cancelled the scan flow.
+   */
+  Cancel = 'cancel',
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

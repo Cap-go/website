@@ -1,87 +1,67 @@
 ---
 locale: en
 ---
+# Using @capgo/capacitor-intune
 
-# Using @capgo/capacitor-persona
+Capacitor plugin for Microsoft Intune MAM enrollment, app protection policies, app config, and MSAL authentication.
 
-The `@capgo/capacitor-persona` package launches Persona identity verification inquiries in Capacitor apps using native iOS and Android SDKs.
-
-Use it to:
-- start inquiries from a template
-- resume an existing inquiry with `inquiryId` + `sessionToken`
-- listen for complete, canceled, and error events
-
-## Installation
+## Install
 
 ```bash
-bun add @capgo/capacitor-persona
+bun add @capgo/capacitor-intune
 bunx cap sync
 ```
 
-## iOS Setup
+## What This Plugin Exposes
 
-Depending on your Persona template, add usage descriptions in `Info.plist`:
+- `acquireToken` - Present the Microsoft sign-in flow and return an access token plus the account metadata.
+- `acquireTokenSilent` - Acquire a token from the MSAL cache for a previously signed-in user.
+- `registerAndEnrollAccount` - Register a previously authenticated account with Intune and start enrollment.
+- `loginAndEnrollAccount` - Ask Intune to authenticate and enroll a user without first requesting an app token.
 
-```xml
-<key>NSCameraUsageDescription</key>
-<string>This app uses the camera for identity verification.</string>
-<key>NSLocationWhenInUseUsageDescription</key>
-<string>This app uses location to support identity verification.</string>
-<key>NSBluetoothAlwaysUsageDescription</key>
-<string>This app uses bluetooth to improve identity verification checks.</string>
+## Example Usage
+
+### `acquireToken`
+
+Present the Microsoft sign-in flow and return an access token plus the account metadata.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+await IntuneMAM.acquireToken({} as AcquireTokenOptions);
 ```
 
-## Android Setup
+### `acquireTokenSilent`
 
-No manual native setup is needed. The plugin includes Persona's required Maven repository and SDK dependency.
+Acquire a token from the MSAL cache for a previously signed-in user.
 
-## Basic Usage
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
 
-```ts
-import { Persona } from '@capgo/capacitor-persona';
-
-await Persona.addListener('inquiryComplete', (result) => {
-  console.log('Persona complete', result.inquiryId, result.status, result.fields);
-});
-
-await Persona.addListener('inquiryCanceled', (result) => {
-  console.log('Persona canceled', result.inquiryId, result.sessionToken);
-});
-
-await Persona.addListener('inquiryError', (result) => {
-  console.error('Persona error', result.error, result.errorCode, result.cause);
-});
-
-await Persona.startInquiry({
-  templateId: 'itmpl_EXAMPLE',
-  environment: 'sandbox',
-  referenceId: 'user_123',
-  fields: {
-    name_first: 'Alex',
-    is_verified_user: true,
-  },
-});
+await IntuneMAM.acquireTokenSilent({} as AcquireTokenSilentOptions);
 ```
 
-## Resume Flow Example
+### `registerAndEnrollAccount`
 
-```ts
-await Persona.startInquiry({
-  inquiryId: 'inq_123',
-  sessionToken: 'usertok_abc',
-  environment: 'production',
-});
+Register a previously authenticated account with Intune and start enrollment.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+await IntuneMAM.registerAndEnrollAccount({} as RegisterAndEnrollAccountOptions);
 ```
 
-## API Summary
+### `loginAndEnrollAccount`
 
-- `startInquiry(options)`: Launch inquiry UI.
-- `inquiryComplete`: Fired when inquiry finishes.
-- `inquiryCanceled`: Fired when user exits.
-- `inquiryError`: Fired on unrecoverable Persona SDK errors.
+Ask Intune to authenticate and enroll a user without first requesting an app token.
 
-## Best Practices
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
 
-- Validate launch options before calling `startInquiry`.
-- Handle all three events to keep UX resilient.
-- Use Persona webhooks on your backend for compliance/business-critical decisions.
+await IntuneMAM.loginAndEnrollAccount();
+```
+
+## Full Reference
+
+- GitHub: https://github.com/Cap-go/capacitor-persona/
+- Docs: /docs/plugins/persona/

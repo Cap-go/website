@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-wechat"
-description: WeChat SDK integration for Capacitor - enables authentication, sharing, payments, and mini-programs.
+description: "WeChat SDK for Capacitor - enables authentication, sharing, payments, and mini-programs."
 tableOfContents: false
 next: false
 prev: false
@@ -8,39 +8,42 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Integrate WeChat SDK into your Capacitor app for seamless authentication, content sharing, payments, and mini-program access.
-  image:
-    file: ~public/icons/plugins/wechat.svg
+  tagline: "Capacitor WeChat Plugin - WeChat SDK integration for authentication, sharing, payments, and mini-programs."
   actions:
     - text: Get started
       link: /docs/plugins/wechat/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-wechat/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="OAuth Authentication" icon="puzzle">
-    Enable secure WeChat login for seamless user authentication 🔐
-  </Card>
-  <Card title="Content Sharing" icon="rocket">
-    Share text, images, links, music, video, and mini-programs to WeChat 📤
-  </Card>
-  <Card title="WeChat Pay" icon="star">
-    Accept payments through WeChat Pay for seamless transactions 💳
-  </Card>
-  <Card title="Mini-Programs" icon="open-book">
-    Launch WeChat mini-programs directly from your app 🚀
-  </Card>
-  <Card title="Cross-platform" icon="puzzle">
-    Works on both iOS and Android with native WeChat SDK 📱
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/wechat/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+Capacitor WeChat Plugin - WeChat SDK integration for authentication, sharing, payments, and mini-programs.
+
+## Core Capabilities
+
+- `initialize` - Initialize the WeChat SDK with your application credentials.
+- `isInstalled` - Check if WeChat app is installed on the device.
+- `auth` - Authenticate user with WeChat OAuth.
+- `share` - Share content to WeChat.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `initialize` | Initialize the WeChat SDK with your application credentials. |
+| `isInstalled` | Check if WeChat app is installed on the device. |
+| `auth` | Authenticate user with WeChat OAuth. |
+| `share` | Share content to WeChat. |
+| `sendPaymentRequest` | Send payment request to WeChat Pay. |
+| `openMiniProgram` | Open WeChat mini-program. |
+| `chooseInvoice` | Choose invoice from WeChat. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-wechat](https://github.com/Cap-go/capacitor-wechat/).

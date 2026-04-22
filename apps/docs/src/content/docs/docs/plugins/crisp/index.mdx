@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-crisp"
-description: Native Crisp chat SDK integration for Capacitor apps, providing in-app customer support.
+description: "Crisp native SDK for capacitor."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,46 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Integrate Crisp native chat SDK into your Capacitor app for seamless in-app customer support and real-time messaging.
-  image:
-    file: ~public/icons/plugins/crisp.svg
+  tagline: "Crisp Chat SDK Plugin for Capacitor. Provides live chat and customer support functionality through Crisp.chat."
   actions:
     - text: Get started
       link: /docs/plugins/crisp/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-crisp/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Native performance" icon="rocket">
-    Native SDK integration for smooth chat experience 🚀
-  </Card>
-  <Card title="Real-time messaging" icon="comment">
-    Live chat with customers directly in your app 💬
-  </Card>
-  <Card title="Rich features" icon="star">
-    Support for user data, events, and custom styling ✨
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/crisp/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+Crisp Chat SDK Plugin for Capacitor. Provides live chat and customer support functionality through Crisp.chat.
+
+## Core Capabilities
+
+- `configure` - Configure the Crisp SDK with your website ID. Must be called before using any other methods.
+- `openMessenger` - Open the Crisp messenger chat window. Shows the chat interface to the user.
+- `setTokenID` - Set a unique token ID for the current user session. Used to identify and restore previous conversations.
+- `setUser` - Set user information for the current session. Updates the user profile visible to support agents.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `configure` | Configure the Crisp SDK with your website ID. Must be called before using any other methods. |
+| `openMessenger` | Open the Crisp messenger chat window. Shows the chat interface to the user. |
+| `setTokenID` | Set a unique token ID for the current user session. Used to identify and restore previous conversations. |
+| `setUser` | Set user information for the current session. Updates the user profile visible to support agents. |
+| `pushEvent` | Push a custom event to Crisp. Useful for tracking user actions and behavior. |
+| `setCompany` | Set company information for the current session. Associates the user with a company in Crisp. |
+| `setInt` | Set a custom integer data field. Stores numerical data associated with the user session. |
+| `setString` | Set a custom string data field. Stores text data associated with the user session. |
+| `sendMessage` | Send a message from the user to the chat. Programmatically send a message as if the user typed it. |
+| `setSegment` | Set a user segment for targeting and organization. Used to categorize users in the Crisp dashboard. |
+| `reset` | Reset the Crisp session. Clears all user data and starts a fresh session. Useful when user logs out. |
+| `getPluginVersion` | Get the plugin version number. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-crisp](https://github.com/Cap-go/capacitor-crisp/).

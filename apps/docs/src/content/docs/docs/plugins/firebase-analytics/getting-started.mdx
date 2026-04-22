@@ -1,0 +1,361 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-firebase-analytics and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+```bash
+bun add @capgo/capacitor-firebase-analytics
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+```
+
+## API Overview
+
+### `getAppInstanceId`
+
+Retrieves the app instance id.
+
+Only available for Android and iOS.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.getAppInstanceId();
+```
+
+### `getSessionId`
+
+Retrieves the current session id (`ga_session_id`).
+
+Only available for Android and iOS.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.getSessionId();
+```
+
+### `setConsent`
+
+Sets the user's consent mode.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.setConsent({} as SetConsentOptions);
+```
+
+### `setUserId`
+
+Sets the user ID property.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.setUserId({} as SetUserIdOptions);
+```
+
+### `setUserProperty`
+
+Sets a custom user property to a given value.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.setUserProperty({} as SetUserPropertyOptions);
+```
+
+### `setCurrentScreen`
+
+Sets the current screen name.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.setCurrentScreen({} as SetCurrentScreenOptions);
+```
+
+### `logEvent`
+
+Logs an app event.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.logEvent({} as LogEventOptions);
+```
+
+### `setSessionTimeoutDuration`
+
+Sets the duration of inactivity that terminates the current session.
+
+Only available for Android and iOS.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.setSessionTimeoutDuration({} as SetSessionTimeoutDurationOptions);
+```
+
+### `setEnabled`
+
+Enables/disables automatic data collection.
+The value does not apply until the next run of the app.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.setEnabled({} as SetEnabledOptions);
+```
+
+### `isEnabled`
+
+Returns whether or not automatic data collection is enabled.
+
+Only available for Web.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.isEnabled();
+```
+
+### `resetAnalyticsData`
+
+Clears all analytics data for this app from the device.
+Resets the app instance id.
+
+Only available for Android and iOS.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.resetAnalyticsData();
+```
+
+### `initiateOnDeviceConversionMeasurementWithEmailAddress`
+
+Initiates on-device conversion measurement with an email address.
+
+Only available for iOS.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.initiateOnDeviceConversionMeasurementWithEmailAddress({} as InitiateOnDeviceConversionMeasurementWithEmailAddressOptions);
+```
+
+### `initiateOnDeviceConversionMeasurementWithPhoneNumber`
+
+Initiates on-device conversion measurement with a phone number.
+
+Only available for iOS.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.initiateOnDeviceConversionMeasurementWithPhoneNumber({} as InitiateOnDeviceConversionMeasurementWithPhoneNumberOptions);
+```
+
+### `initiateOnDeviceConversionMeasurementWithHashedEmailAddress`
+
+Initiates on-device conversion measurement with a hashed email address.
+
+Only available for iOS.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.initiateOnDeviceConversionMeasurementWithHashedEmailAddress({} as InitiateOnDeviceConversionMeasurementWithHashedEmailAddressOptions);
+```
+
+### `initiateOnDeviceConversionMeasurementWithHashedPhoneNumber`
+
+Initiates on-device conversion measurement with a hashed phone number.
+
+Only available for iOS.
+
+```typescript
+import { FirebaseAnalytics } from '@capgo/capacitor-firebase-analytics';
+
+await FirebaseAnalytics.initiateOnDeviceConversionMeasurementWithHashedPhoneNumber({} as InitiateOnDeviceConversionMeasurementWithHashedPhoneNumberOptions);
+```
+
+## Type Reference
+
+### `GetAppInstanceIdResult`
+```typescript
+export interface GetAppInstanceIdResult {
+  /**
+   * The app instance id.
+   *
+   * Not defined if `FirebaseAnalytics.ConsentType.ANALYTICS_STORAGE` has been set to `FirebaseAnalytics.ConsentStatus.DENIED`.
+   *
+   * @since 1.4.0
+   */
+  appInstanceId?: string;
+}
+```
+
+### `GetSessionIdResult`
+```typescript
+export interface GetSessionIdResult {
+  /**
+   * The current session id.
+   *
+   * Matches Firebase Analytics `ga_session_id`.
+   *
+   * Not defined if `FirebaseAnalytics.ConsentType.ANALYTICS_STORAGE` has been set to `FirebaseAnalytics.ConsentStatus.DENIED`.
+   *
+   * @since 8.0.1
+   */
+  sessionId?: number;
+}
+```
+
+### `SetConsentOptions`
+```typescript
+export interface SetConsentOptions {
+  /**
+   * The consent type.
+   *
+   * @since 6.0.0
+   */
+  type: ConsentType;
+  /**
+   * The consent status.
+   *
+   * @since 6.0.0
+   */
+  status: ConsentStatus;
+}
+```
+
+### `SetUserIdOptions`
+```typescript
+export interface SetUserIdOptions {
+  /**
+   * @since 0.1.0
+   */
+  userId: string | null;
+}
+```
+
+### `SetUserPropertyOptions`
+```typescript
+export interface SetUserPropertyOptions {
+  /**
+   * @since 0.1.0
+   */
+  key: string;
+  /**
+   * @since 0.1.0
+   */
+  value: string | null;
+}
+```
+
+### `SetCurrentScreenOptions`
+```typescript
+export interface SetCurrentScreenOptions {
+  /**
+   * @since 0.1.0
+   */
+  screenName: string | null;
+  /**
+   * Only available for Android and iOS.
+   *
+   * @default null
+   * @since 0.1.0
+   */
+  screenClassOverride?: string | null;
+}
+```
+
+### `LogEventOptions`
+```typescript
+export interface LogEventOptions {
+  /**
+   * The event name.
+   *
+   * @since 0.1.0
+   */
+  name: string;
+  /**
+   * The optional event params.
+   *
+   * @since 0.1.0
+   */
+  params?: { [key: string]: any };
+}
+```
+
+### `SetSessionTimeoutDurationOptions`
+```typescript
+export interface SetSessionTimeoutDurationOptions {
+  /**
+   * Duration in seconds.
+   *
+   * @default 1800
+   * @since 0.1.0
+   */
+  duration: number;
+}
+```
+
+### `SetEnabledOptions`
+```typescript
+export interface SetEnabledOptions {
+  /**
+   * @since 0.1.0
+   */
+  enabled: boolean;
+}
+```
+
+### `IsEnabledResult`
+```typescript
+export interface IsEnabledResult {
+  /**
+   * @since 0.1.0
+   */
+  enabled: boolean;
+}
+```
+
+### `InitiateOnDeviceConversionMeasurementWithEmailAddressOptions`
+```typescript
+export interface InitiateOnDeviceConversionMeasurementWithEmailAddressOptions {
+  /**
+   * The email address to initiate on-device conversion measurement with.
+   *
+   * @since 7.2.0
+   */
+  emailAddress: string;
+}
+```
+
+### `InitiateOnDeviceConversionMeasurementWithPhoneNumberOptions`
+```typescript
+export interface InitiateOnDeviceConversionMeasurementWithPhoneNumberOptions {
+  /**
+   * The phone number to initiate on-device conversion measurement with.
+   *
+   * @since 7.2.0
+   */
+  phoneNumber: string;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

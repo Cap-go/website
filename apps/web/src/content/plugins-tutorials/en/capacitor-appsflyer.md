@@ -1,91 +1,67 @@
 ---
 locale: en
 ---
-
 # Using @capgo/capacitor-appsflyer
 
-The `@capgo/capacitor-appsflyer` package adds AppsFlyer attribution, event analytics, and deep-link handling to Capacitor apps with native iOS and Android SDK support. Use this guide to install the plugin, initialize it early in app startup, and listen for conversion and deep-link callbacks.
+Capacitor plugin for AppsFlyer attribution, analytics, and deep links.
 
-## Installation
-
-Install the plugin and sync native projects:
+## Install
 
 ```bash
 bun add @capgo/capacitor-appsflyer
 bunx cap sync
 ```
 
-## Initialize AppsFlyer
+## What This Plugin Exposes
 
-Initialize the SDK as early as possible and register listeners before startup:
+- `initSDK` - Use this method to initialize and start AppsFlyer SDK. This API should be called as soon as the app launched.
+- `startSDK` - Use this method to start AppsFlyer SDK, only on manual start mode.
+- `logEvent` - Log an in-app event.
+- `setCustomerUserId` - Setting your own customer ID enables you to cross-reference your own unique ID with AppsFlyer's unique ID and other devices' IDs. This ID is available in raw-data reports and in the Postback APIs for cross-referencing with your internal IDs.
 
-```ts
-import { AppsFlyer, AFConstants } from '@capgo/capacitor-appsflyer';
+## Example Usage
 
-await AppsFlyer.addListener(AFConstants.CONVERSION_CALLBACK, (event) => {
-  console.log('Conversion callback', event);
-});
+### `initSDK`
 
-await AppsFlyer.addListener(AFConstants.UDL_CALLBACK, (event) => {
-  console.log('Deep link callback', event);
-});
+Use this method to initialize and start AppsFlyer SDK. This API should be called as soon as the app launched.
 
-await AppsFlyer.initSDK({
-  devKey: 'YOUR_DEV_KEY',
-  appID: '1234567890',
-  registerConversionListener: true,
-  registerOnDeepLink: true,
-  waitForATTUserAuthorization: 10,
-});
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.initSDK({} as AFInit);
 ```
 
-If you need to delay startup until after your own consent flow, use manual mode:
+### `startSDK`
 
-```ts
-await AppsFlyer.initSDK({
-  devKey: 'YOUR_DEV_KEY',
-  appID: '1234567890',
-  manualStart: true,
-  registerConversionListener: true,
-  registerOnDeepLink: true,
-});
+Use this method to start AppsFlyer SDK, only on manual start mode.
+
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
 await AppsFlyer.startSDK();
 ```
 
-## Track events
+### `logEvent`
 
-Send AppsFlyer events with custom revenue or campaign parameters:
+Log an in-app event.
 
-```ts
-await AppsFlyer.logEvent({
-  eventName: 'af_purchase',
-  eventValue: {
-    af_revenue: 19.99,
-    af_currency: 'USD',
-    af_content_id: 'plan_pro_monthly',
-  },
-});
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+
+await AppsFlyer.logEvent({} as AFEvent);
 ```
 
-## Common setup notes
+### `setCustomerUserId`
 
-- `appID` is required for iOS and must be the numeric App Store app ID.
-- `waitForATTUserAuthorization` lets AppsFlyer wait for your ATT flow before continuing initialization.
-- `AFConstants.CONVERSION_CALLBACK`, `AFConstants.OAOA_CALLBACK`, and `AFConstants.UDL_CALLBACK` cover the main attribution and deep-link listener channels.
-- `disableSKAdNetwork()` is iOS-only and `disableAppSetId()` is Android-only.
+Setting your own customer ID enables you to cross-reference your own unique ID with AppsFlyer's unique ID and other devices' IDs. This ID is available in raw-data reports and in the Postback APIs for cross-referencing with your internal IDs.
 
-## Useful APIs
+```typescript
+import { AppsFlyer } from '@capgo/capacitor-appsflyer';
 
-The plugin also exposes methods for:
+await AppsFlyer.setCustomerUserId({} as AFCuid);
+```
 
-- `setCustomerUserId`
-- `setAdditionalData`
-- `setConsentData`
-- `generateInviteLink`
-- `updateServerUninstallToken`
-- `sendPushNotificationData`
-- `getAppsFlyerUID`
+## Full Reference
 
-For the complete API surface and advanced setup details, check the plugin repository:
-[github.com/Cap-go/capacitor-appsflyer](https://github.com/Cap-go/capacitor-appsflyer)
+- GitHub: https://github.com/Cap-go/capacitor-appsflyer/
+- Docs: /docs/plugins/appsflyer/

@@ -1,6 +1,6 @@
 ---
 title: "@capgo/native-purchases"
-description: Capacitor plugin for handling in-app purchases and subscriptions with a simple, unified API across iOS and Android.
+description: "In-app Subscriptions Made Easy."
 tableOfContents: false
 next: false
 prev: false
@@ -8,51 +8,49 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Simplify in-app purchases and subscriptions with a unified API that works seamlessly across iOS and Android platforms.
-  image:
-    file: ~public/icons/plugins/native-purchases.svg
+  tagline: "In-app Subscriptions Made Easy."
   actions:
     - text: Get started
       link: /docs/plugins/native-purchases/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
-      link: https://github.com/Cap-go/native-purchases/
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-native-purchases/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Unified API" icon="rocket">
-    Single API for iOS and Android purchases 💳
-  </Card>
-  <Card title="Subscription management" icon="setting">
-    Handle subscriptions with automatic renewal 🔄
-  </Card>
-  <Card title="Receipt validation" icon="approve-check">
-    Built-in receipt validation for security 🔒
-  </Card>
-  <Card title="Getting Started" icon="open-book">
-    Check the [Getting Started Guide](/docs/plugins/native-purchases/getting-started/) to install and configure the plugin.
-  </Card>
-</CardGrid>
+In-app Subscriptions Made Easy.
 
-## Platform Setup Guides
+## Core Capabilities
 
-<CardGrid>
-  <Card title="Android Setup" icon="setting">
-    Complete guides for setting up in-app purchases on Android:
-    - [Configure Sandbox Testing](/docs/plugins/native-purchases/android-sandbox-testing/)
-    - [Create Subscriptions](/docs/plugins/native-purchases/android-create-subscription/)
-    - [Introductory Offers](/docs/plugins/native-purchases/android-introductory-offer/)
-  </Card>
-  <Card title="iOS Setup" icon="star">
-    Complete guides for setting up in-app purchases on iOS:
-    - [Configure Sandbox Testing](/docs/plugins/native-purchases/ios-sandbox-testing/)
-    - [Subscription Groups](/docs/plugins/native-purchases/ios-subscription-group/)
-    - [Create Subscriptions](/docs/plugins/native-purchases/ios-create-subscription/)
-    - [Introductory Offers](/docs/plugins/native-purchases/ios-introductory-offer/)
-  </Card>
-</CardGrid>
+- `restorePurchases` - Restores a user's previous and links their appUserIDs to any user's also using those .
+- `getAppTransaction` - Gets the App Transaction information, which provides details about when the user originally downloaded or purchased the app.
+- `isEntitledToOldBusinessModel` - Compares the original app version from the App Transaction against a target version to determine if the user is entitled to features from an earlier business model.
+- `purchaseProduct` - Started purchase process for the given product.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `restorePurchases` | Restores a user's previous and links their appUserIDs to any user's also using those . |
+| `getAppTransaction` | Gets the App Transaction information, which provides details about when the user originally downloaded or purchased the app. |
+| `isEntitledToOldBusinessModel` | Compares the original app version from the App Transaction against a target version to determine if the user is entitled to features from an earlier business model. |
+| `purchaseProduct` | Started purchase process for the given product. |
+| `getProducts` | Gets the product info associated with a list of product identifiers. |
+| `getProduct` | Gets the product info for a single product identifier. |
+| `isBillingSupported` | Check if billing is supported for the current device. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+| `getPurchases` | Gets all the user's purchases (both in-app purchases and subscriptions). This method queries the platform's purchase history for the current user. |
+| `manageSubscriptions` | Opens the platform's native subscription management page. This allows users to view, modify, or cancel their subscriptions. |
+| `acknowledgePurchase` | Manually acknowledge/finish a purchase transaction. |
+| `consumePurchase` | Consume an in-app purchase on Android. |
+| `addListener` | Listen for StoreKit transaction updates delivered by Apple's Transaction.updates. Fires on app launch if there are unfinished transactions, and for any updates afterward. iOS only. |
+| `addListener` | Listen for StoreKit transaction verification failures delivered by Apple's Transaction.updates. Fires when the verification result is unverified. iOS only. |
+| `removeAllListeners` | Remove all registered listeners. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-native-purchases](https://github.com/Cap-go/capacitor-native-purchases/).

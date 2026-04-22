@@ -1,6 +1,6 @@
 ---
 title: "@capgo/camera-preview"
-description: Capacitor plugin for camera preview functionality with real-time camera feed display and photo/video capture capabilities.
+description: "Camera preview."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,76 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Display camera preview in your app with full control over camera settings, capture photos and videos directly from the preview.
-  image:
-    file: ~public/icons/plugins/camera-preview.svg
+  tagline: "The main interface for the CameraPreview plugin."
   actions:
     - text: Get started
       link: /docs/plugins/camera-preview/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-camera-preview/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Real-time preview" icon="rocket">
-    Display live camera feed directly in your app UI 🚀
-  </Card>
-  <Card title="Full control" icon="setting">
-    Control flash, zoom, focus, and switch between cameras 📸
-  </Card>
-  <Card title="Capture capabilities" icon="pencil">
-    Take photos and record videos from the preview 🎥
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/camera-preview/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+The main interface for the CameraPreview plugin.
+
+## Core Capabilities
+
+- `start` - Starts the camera preview.
+- `stop` - Stops the camera preview.
+- `capture` - Captures a picture from the camera.
+- `captureSample` - Captures a single frame from the camera preview stream.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `start` | Starts the camera preview. |
+| `stop` | Stops the camera preview. |
+| `capture` | Captures a picture from the camera. |
+| `captureSample` | Captures a single frame from the camera preview stream. |
+| `getSupportedFlashModes` | Gets the flash modes supported by the active camera. |
+| `setAspectRatio` | Set the aspect ratio of the camera preview. |
+| `getAspectRatio` | Gets the current aspect ratio of the camera preview. |
+| `setGridMode` | Sets the grid mode of the camera preview overlay. |
+| `getGridMode` | Gets the current grid mode of the camera preview overlay. |
+| `checkPermissions` | Checks the current camera (and optionally microphone) permission status without prompting the system dialog. |
+| `requestPermissions` | Requests camera (and optional microphone) permissions. If permissions are already granted or denied, the current status is returned without prompting. When `showSettingsAlert` is true and permissions are denied, a platform specific alert guiding the user to the app settings will be presented. |
+| `getHorizontalFov` | Gets the horizontal field of view (FoV) for the active camera. Note: This can be an estimate on some devices. |
+| `getSupportedPictureSizes` | Gets the supported picture sizes for all cameras. |
+| `setFlashMode` | Sets the flash mode for the active camera. |
+| `flip` | Toggles between the front and rear cameras. |
+| `setOpacity` | Sets the opacity of the camera preview. |
+| `stopRecordVideo` | Stops an ongoing video recording. |
+| `startRecordVideo` | Starts recording a video. |
+| `isRunning` | Checks if the camera preview is currently running. |
+| `getAvailableDevices` | Gets all available camera devices. |
+| `getZoom` | Gets the current zoom state, including min/max and current lens info. |
+| `getZoomButtonValues` | Returns zoom button values for quick switching. - iOS/Android: includes 0.5 if ultra-wide available; 1 and 2 if wide available; 3 if telephoto available - Web: unsupported. |
+| `setZoom` | Sets the zoom level of the camera. |
+| `getFlashMode` | Gets the current flash mode. |
+| `removeAllListeners` | Removes all registered listeners. |
+| `setDeviceId` | Switches the active camera to the one with the specified `deviceId`. |
+| `getDeviceId` | Gets the ID of the camera device that is currently bound. On Android, if a physical-lens request falls back to a logical camera, this returns the bound logical camera ID. |
+| `getPreviewSize` | Gets the current preview size and position. |
+| `setPreviewSize` | Sets the preview size and position. |
+| `setFocus` | Sets the camera focus to a specific point in the preview. |
+| `addListener` | Adds a listener for screen resize events. |
+| `addListener` | Adds a listener for orientation change events. |
+| `deleteFile` | Deletes a file at the given absolute path on the device. Use this to quickly clean up temporary images created with `storeToFile`. On web, this is not supported and will throw. |
+| `getSafeAreaInsets` | Gets the safe area insets for devices. Returns the orientation-aware notch/camera cutout inset and the current orientation. In portrait mode: returns top inset (notch at top). In landscape mode: returns left inset (notch moved to side). This specifically targets the cutout area (notch, punch hole, etc.) that all modern phones have. |
+| `getOrientation` | Gets the current device orientation in a cross-platform format. |
+| `getExposureModes` | Returns the exposure modes supported by the active camera. Modes can include: 'locked', 'auto', 'continuous', 'custom'. |
+| `getExposureMode` | Returns the current exposure mode. |
+| `setExposureMode` | Sets the exposure mode. |
+| `getExposureCompensationRange` | Returns the exposure compensation (EV bias) supported range. |
+| `getExposureCompensation` | Returns the current exposure compensation (EV bias). |
+| `setExposureCompensation` | Sets the exposure compensation (EV bias). Value will be clamped to range. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-camera-preview](https://github.com/Cap-go/capacitor-camera-preview/).

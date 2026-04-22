@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-fast-sql"
-description: High-performance native SQLite with custom HTTP protocol for efficient sync operations and IndexedDB replacement.
+description: "High-performance native SQLite plugin with custom protocol for efficient sync operations and IndexedDB replacement."
 tableOfContents: false
 next: false
 prev: false
@@ -8,39 +8,43 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Ultra-fast native SQLite with custom protocol for sync systems and large datasets, delivering up to 25x faster performance.
-  image:
-    file: ~public/icons/plugins/fast-sql.svg
+  tagline: "Fast SQL Plugin for high-performance SQLite database access."
   actions:
     - text: Get started
       link: /docs/plugins/fast-sql/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-fast-sql/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Custom HTTP Protocol" icon="rocket">
-    Bypasses Capacitor's bridge for faster large-result and batch workloads.
-  </Card>
-  <Card title="Transaction support" icon="list-format">
-    Supports `transaction()`, explicit begin/commit/rollback, and isolation levels.
-  </Card>
-  <Card title="Batch + BLOB support" icon="random">
-    Execute multiple statements in one request and store binary data.
-  </Card>
-  <Card title="Key-value convenience" icon="document">
-    Use `KeyValueStore` for simple mobile-first key/value persistence.
-  </Card>
-  <Card title="Connection management" icon="setting">
-    Track open databases, disconnect explicitly, or close all in one call.
-  </Card>
-  <Card title="Getting Started" icon="open-book">
-    Check the getting started guide to install and configure the plugin.
-  </Card>
-</CardGrid>
+Fast SQL Plugin for high-performance SQLite database access.
+
+## Core Capabilities
+
+- `connect` - Initialize the database connection and start the HTTP server.
+- `disconnect` - Close database connection and stop the HTTP server.
+- `getServerInfo` - Get the HTTP server port and token for direct communication.
+- `execute` - Execute a SQL query via Capacitor bridge (for simple queries). For better performance with large datasets, use the HTTP protocol directly via SQLConnection class.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `connect` | Initialize the database connection and start the HTTP server. |
+| `disconnect` | Close database connection and stop the HTTP server. |
+| `getServerInfo` | Get the HTTP server port and token for direct communication. |
+| `execute` | Execute a SQL query via Capacitor bridge (for simple queries). For better performance with large datasets, use the HTTP protocol directly via SQLConnection class. |
+| `beginTransaction` | Begin a database transaction. |
+| `commitTransaction` | Commit the current transaction. |
+| `rollbackTransaction` | Rollback the current transaction. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+| `configureWeb` | Configure web-specific options for the sql.js WASM module. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-fast-sql](https://github.com/Cap-go/capacitor-fast-sql/).

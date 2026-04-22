@@ -1,90 +1,157 @@
 ---
 title: Getting Started
-description: Wire up the native Mux Player SDK inside your Capacitor application.
+description: "Install @capgo/capacitor-mux-player and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the plugin**
-   <PackageManagers pkg="@capgo/capacitor-mux-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+```bash
+bun add @capgo/capacitor-mux-player
+bunx cap sync
+```
 
-2. **Sync native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+## Import
 
-## iOS preparation
+```typescript
+import { MuxPlayer } from '@capgo/capacitor-mux-player';
+```
 
-1. Open the Xcode workspace under `ios/App/`.
-2. Add the Swift package `https://github.com/muxinc/mux-player-swift` to your app target so the `MuxPlayerSwift` module is available.
-3. Ensure the deployment target is **iOS 15+** and rebuild.
+## API Overview
 
-## Android preparation
+### `play`
 
-The Gradle module ships with the correct repositories and dependencies. If you use a custom corporate proxy, allow requests to `https://muxinc.jfrog.io/artifactory/default-maven-release-local`.
-
-## Launch the player
+Launch the native Mux Player in fullscreen and begin playback.
 
 ```typescript
 import { MuxPlayer } from '@capgo/capacitor-mux-player';
 
-await MuxPlayer.play({
-  playbackId: 'your-playback-id',
-  environmentKey: 'your-mux-data-key',
-  title: 'Launch Announcement',
-  subtitle: 'Filmed live at Capgo HQ',
-  poster: 'https://stream.example.com/poster.jpg',
-});
+await MuxPlayer.play({} as MuxPlayOptions);
 ```
 
-## Listen to player events
+### `dismiss`
+
+Dismiss the player if it is visible.
 
 ```typescript
-const readyHandle = await MuxPlayer.addListener('ready', ({ playerName }) => {
-  console.log('Mux player ready', playerName);
-});
+import { MuxPlayer } from '@capgo/capacitor-mux-player';
 
-const errorHandle = await MuxPlayer.addListener('error', ({ message }) => {
-  console.error('Mux player error:', message);
-});
-
-// Clean up after dismissing the player
-const dismissPlayer = async () => {
-  await MuxPlayer.dismiss();
-  await readyHandle.remove();
-  await errorHandle.remove();
-};
+await MuxPlayer.dismiss();
 ```
 
-## Token-based playback
+### `isActive`
+
+Returns whether the player is currently being displayed.
 
 ```typescript
-await MuxPlayer.play({
-  playbackId: 'signed-playback-id',
-  playbackToken: signedPlaybackToken,
-  drmToken: signedDrmToken, // Optional if you enabled DRM policies
-  autoPlay: true,
-  startTime: 120, // begin at 2 minutes
-});
+import { MuxPlayer } from '@capgo/capacitor-mux-player';
+
+await MuxPlayer.isActive();
 ```
 
-## React to player lifecycle
+## Type Reference
 
+### `MuxPlayOptions`
 ```typescript
-const { active } = await MuxPlayer.isActive();
-if (active) {
-  console.log('Player currently visible');
+export interface MuxPlayOptions {
+  /**
+   * The playback ID of the asset you want to stream.
+   */
+  playbackId: string;
+  /**
+   * Provide a JSON web token generated for signed playback policies.
+   */
+  playbackToken?: string;
+  /**
+   * Provide a JSON web token generated for DRM playback policies.
+   */
+  drmToken?: string;
+  /**
+   * Override the default Mux playback domain (e.g. `stream.example.com`).
+   */
+  customDomain?: string;
+  /**
+   * Auto-play when the player becomes visible. Defaults to true.
+   */
+  autoPlay?: boolean;
+  /**
+   * Start playback from the provided time (in seconds).
+   */
+  startTime?: number;
+  /**
+   * Provide a poster image URL to display before playback begins.
+   */
+  poster?: string;
+  /**
+   * Provide a custom title to surface in native player chrome when available.
+   */
+  title?: string;
+  /**
+   * Provide a subtitle or description to surface in native player chrome when available.
+   */
+  subtitle?: string;
+  /**
+   * Set to true to keep the video muted when playback starts.
+   */
+  muted?: boolean;
+  /**
+   * Mux Data environment key used for analytics. If omitted, the SDK default is used.
+   */
+  environmentKey?: string;
+  /**
+   * Provide an explicit player name for analytics. Defaults to a generated name.
+   */
+  playerName?: string;
+  /**
+   * Enable smart caching when the underlying SDK supports it.
+   */
+  enableSmartCache?: boolean;
+  /**
+   * Enable verbose logging in native SDKs where available.
+   */
+  debug?: boolean;
 }
-
-// Remove all listener registrations when unmounting
-await MuxPlayer.removeAllListeners();
 ```
 
-## Tips
+### `MuxPlayerEvents`
+```typescript
+export interface MuxPlayerEvents {
+  /**
+   * Fired when the underlying player is ready to begin playback.
+   */
+  ready: { playerName?: string };
+  /**
+   * Fired when playback starts or resumes.
+   */
+  play: void;
+  /**
+   * Fired when playback pauses.
+   */
+  pause: void;
+  /**
+   * Fired when playback ends.
+   */
+  ended: void;
+  /**
+   * Fired when an unrecoverable error occurs.
+   */
+  error: { message: string };
+  /**
+   * Fired when the fullscreen player is closed.
+   */
+  playerDismissed: void;
 
-- Generate signed playback and DRM tokens on your backend using the Mux signing keys.
-- Pass a `playerName` to separate analytics when running multiple players in your app.
-- Combine with `enableSmartCache` to improve offline resilience on supported platforms.
+  /**
+   * Get the native Capacitor plugin version
+   *
+   * @returns {Promise<{ id: string }>} an Promise with version for this device
+   * @throws An error if the something went wrong
+   */
+  getPluginVersion(): Promise<{ version: string }>;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

@@ -1,251 +1,436 @@
 ---
 title: Getting Started
-description: Learn how to install and use the Speech Synthesis plugin to convert text to speech in your Capacitor app.
+description: "Install @capgo/capacitor-speech-synthesis and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-speech-synthesis" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+```bash
+bun add @capgo/capacitor-speech-synthesis
+bunx cap sync
+```
 
-2. **Sync with native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+## Import
 
-## Usage
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+```
 
-Import the plugin and synthesize speech from text:
+## API Overview
+
+### `speak`
+
+Speaks the given text with specified options.
+The utterance is added to the speech queue.
 
 ```typescript
 import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
 
-// Basic text-to-speech
-const speak = async () => {
-  await SpeechSynthesis.speak({
-    text: 'Hello, world!',
-    language: 'en-US'
-  });
-};
-
-// Advanced usage with voice control
-const speakWithVoice = async () => {
-  await SpeechSynthesis.speak({
-    text: 'This is a test of speech synthesis.',
-    language: 'en-US',
-    rate: 1.0,      // Speech rate: 0.1 to 10.0
-    pitch: 1.0,     // Voice pitch: 0.5 to 2.0
-    volume: 1.0,    // Volume: 0.0 to 1.0
-    voice: 'com.apple.ttsbundle.Samantha-compact'
-  });
-};
+const result = await SpeechSynthesis.speak({
+  text: 'Hello, world!',
+  language: 'en-US',
+  rate: 1.0,
+  pitch: 1.0,
+  volume: 1.0,
+  queueStrategy: 'Add'
+});
+console.log('Utterance ID:', result.utteranceId);
 ```
 
-## API Reference
+### `synthesizeToFile`
 
-### speak(options)
-
-Speaks the given text using the specified voice settings.
+Synthesizes speech to an audio file (Android/iOS only).
+Returns the file path where the audio was saved.
 
 ```typescript
-interface SpeakOptions {
-  text: string;           // Text to speak
-  language?: string;      // Language code (e.g., 'en-US', 'es-ES')
-  rate?: number;          // Speech rate: 0.1 to 10.0 (default: 1.0)
-  pitch?: number;         // Voice pitch: 0.5 to 2.0 (default: 1.0)
-  volume?: number;        // Volume: 0.0 to 1.0 (default: 1.0)
-  voice?: string;         // Voice identifier (get from getVoices())
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+const result = await SpeechSynthesis.synthesizeToFile({
+  text: 'Hello, world!',
+  language: 'en-US'
+});
+console.log('Audio file saved at:', result.filePath);
+```
+
+### `cancel`
+
+Cancels all queued utterances and stops current speech.
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+await SpeechSynthesis.cancel();
+```
+
+### `pause`
+
+Pauses speech immediately.
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+await SpeechSynthesis.pause();
+```
+
+### `resume`
+
+Resumes paused speech.
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+await SpeechSynthesis.resume();
+```
+
+### `isSpeaking`
+
+Checks if speech synthesis is currently speaking.
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+const { isSpeaking } = await SpeechSynthesis.isSpeaking();
+console.log('Is speaking:', isSpeaking);
+```
+
+### `isAvailable`
+
+Checks if speech synthesis is available on the device.
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+const { isAvailable } = await SpeechSynthesis.isAvailable();
+if (isAvailable) {
+  console.log('Speech synthesis is available');
 }
-
-await SpeechSynthesis.speak(options);
 ```
 
-### stop()
+### `getVoices`
 
-Stops any ongoing speech synthesis.
-
-```typescript
-await SpeechSynthesis.stop();
-```
-
-### getVoices()
-
-Gets the list of available voices for speech synthesis.
+Gets all available voices.
 
 ```typescript
-interface Voice {
-  voiceURI: string;       // Unique voice identifier
-  name: string;           // Human-readable voice name
-  lang: string;           // Language code
-  default: boolean;       // Whether this is the default voice
-}
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
 
 const { voices } = await SpeechSynthesis.getVoices();
-console.log('Available voices:', voices);
+voices.forEach(voice => {
+  console.log(`${voice.name} (${voice.language})`);
+});
 ```
 
-### getSupportedLanguages()
+### `getLanguages`
 
-Gets the list of supported language codes.
-
-```typescript
-const { languages } = await SpeechSynthesis.getSupportedLanguages();
-console.log('Supported languages:', languages);
-```
-
-### isSpeaking()
-
-Checks if speech synthesis is currently active.
-
-```typescript
-const { speaking } = await SpeechSynthesis.isSpeaking();
-console.log('Currently speaking:', speaking);
-```
-
-## Complete Example
+Gets all available languages.
 
 ```typescript
 import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
 
-export class TextToSpeechService {
-  private currentVoice: string | undefined;
+const { languages } = await SpeechSynthesis.getLanguages();
+console.log('Available languages:', languages);
+```
 
-  async init() {
-    // Get available voices
-    const { voices } = await SpeechSynthesis.getVoices();
+### `isLanguageAvailable`
 
-    // Find English voice
-    const englishVoice = voices.find(v => v.lang.startsWith('en'));
-    this.currentVoice = englishVoice?.voiceURI;
+Checks if a specific language is available.
 
-    console.log(`Using voice: ${englishVoice?.name}`);
-  }
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
 
-  async speak(text: string, options?: Partial<SpeakOptions>) {
-    try {
-      // Stop any ongoing speech
-      await SpeechSynthesis.stop();
+const { isAvailable } = await SpeechSynthesis.isLanguageAvailable({
+  language: 'es-ES'
+});
+console.log('Spanish available:', isAvailable);
+```
 
-      // Speak the text
-      await SpeechSynthesis.speak({
-        text,
-        language: 'en-US',
-        rate: 1.0,
-        pitch: 1.0,
-        volume: 1.0,
-        voice: this.currentVoice,
-        ...options
-      });
-    } catch (error) {
-      console.error('Speech synthesis failed:', error);
-      throw error;
-    }
-  }
+### `isVoiceAvailable`
 
-  async speakWithRate(text: string, rate: number) {
-    await this.speak(text, { rate });
-  }
+Checks if a specific voice is available.
 
-  async stop() {
-    await SpeechSynthesis.stop();
-  }
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
 
-  async checkIfSpeaking(): Promise<boolean> {
-    const { speaking } = await SpeechSynthesis.isSpeaking();
-    return speaking;
-  }
+const { isAvailable } = await SpeechSynthesis.isVoiceAvailable({
+  voiceId: 'com.apple.ttsbundle.Samantha-compact'
+});
+console.log('Voice available:', isAvailable);
+```
 
-  async listVoicesByLanguage(languageCode: string) {
-    const { voices } = await SpeechSynthesis.getVoices();
-    return voices.filter(v => v.lang.startsWith(languageCode));
-  }
+### `initialize`
+
+Initializes the speech synthesis engine (iOS optimization).
+This can reduce latency for the first speech request.
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+await SpeechSynthesis.initialize();
+```
+
+### `activateAudioSession`
+
+Activates the audio session with a specific category (iOS only).
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+await SpeechSynthesis.activateAudioSession({
+  category: 'Playback'
+});
+```
+
+### `deactivateAudioSession`
+
+Deactivates the audio session (iOS only).
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+await SpeechSynthesis.deactivateAudioSession();
+```
+
+## Type Reference
+
+### `SpeakOptions`
+Options for speaking text.
+```typescript
+export interface SpeakOptions {
+  /**
+   * The text to speak.
+   *
+   * @since 1.0.0
+   */
+  text: string;
+
+  /**
+   * The BCP-47 language tag (e.g., 'en-US', 'es-ES').
+   *
+   * @since 1.0.0
+   */
+  language?: string;
+
+  /**
+   * The voice identifier to use.
+   *
+   * @since 1.0.0
+   */
+  voiceId?: string;
+
+  /**
+   * The pitch of the voice (0.5 to 2.0, default: 1.0).
+   *
+   * @since 1.0.0
+   */
+  pitch?: number;
+
+  /**
+   * The speaking rate (0.1 to 10.0, default: 1.0).
+   *
+   * @since 1.0.0
+   */
+  rate?: number;
+
+  /**
+   * The volume (0.0 to 1.0, default: 1.0).
+   *
+   * @since 1.0.0
+   */
+  volume?: number;
+
+  /**
+   * The queue strategy: 'Add' to append or 'Flush' to replace queue.
+   * Default: 'Add'
+   *
+   * @since 1.0.0
+   */
+  queueStrategy?: 'Add' | 'Flush';
 }
 ```
 
-## Advanced Usage
-
-### Multi-language Support
-
+### `SpeakResult`
+Result from speaking text.
 ```typescript
-// Speak in different languages
-const speakMultiLanguage = async () => {
-  await SpeechSynthesis.speak({
-    text: 'Hello!',
-    language: 'en-US'
-  });
-
-  await SpeechSynthesis.speak({
-    text: 'Bonjour!',
-    language: 'fr-FR'
-  });
-
-  await SpeechSynthesis.speak({
-    text: 'こんにちは!',
-    language: 'ja-JP'
-  });
-};
+export interface SpeakResult {
+  /**
+   * Unique identifier for this utterance.
+   *
+   * @since 1.0.0
+   */
+  utteranceId: string;
+}
 ```
 
-### Voice Selection
-
+### `SynthesizeToFileResult`
+Result from synthesizing to file.
 ```typescript
-// Select a specific voice
-const selectVoice = async (languageCode: string) => {
-  const { voices } = await SpeechSynthesis.getVoices();
+export interface SynthesizeToFileResult {
+  /**
+   * The file path where audio was saved.
+   *
+   * @since 1.0.0
+   */
+  filePath: string;
 
-  // Filter voices by language
-  const languageVoices = voices.filter(v =>
-    v.lang.startsWith(languageCode)
-  );
-
-  // Use the first available voice
-  if (languageVoices.length > 0) {
-    await SpeechSynthesis.speak({
-      text: 'Testing voice selection',
-      language: languageCode,
-      voice: languageVoices[0].voiceURI
-    });
-  }
-};
+  /**
+   * Unique identifier for this utterance.
+   *
+   * @since 1.0.0
+   */
+  utteranceId: string;
+}
 ```
 
-### Reading Long Text
-
+### `VoiceInfo`
+Information about a voice.
 ```typescript
-// Split and speak long text in chunks
-const speakLongText = async (longText: string) => {
-  const sentences = longText.match(/[^.!?]+[.!?]+/g) || [longText];
+export interface VoiceInfo {
+  /**
+   * Unique voice identifier.
+   *
+   * @since 1.0.0
+   */
+  id: string;
 
-  for (const sentence of sentences) {
-    await SpeechSynthesis.speak({
-      text: sentence.trim(),
-      language: 'en-US',
-      rate: 0.9
-    });
+  /**
+   * Display name of the voice.
+   *
+   * @since 1.0.0
+   */
+  name: string;
 
-    // Wait a bit between sentences
-    await new Promise(resolve => setTimeout(resolve, 500));
-  }
-};
+  /**
+   * BCP-47 language code.
+   *
+   * @since 1.0.0
+   */
+  language: string;
+
+  /**
+   * Gender of the voice (iOS only).
+   *
+   * @since 1.0.0
+   */
+  gender?: 'male' | 'female' | 'neutral';
+
+  /**
+   * Whether this voice requires a network connection.
+   *
+   * @since 1.0.0
+   */
+  isNetworkConnectionRequired?: boolean;
+
+  /**
+   * Whether this is the default voice (Web only).
+   *
+   * @since 1.0.0
+   */
+  default?: boolean;
+}
 ```
 
-## Best Practices
+### `IsLanguageAvailableOptions`
+Options for checking language availability.
+```typescript
+export interface IsLanguageAvailableOptions {
+  /**
+   * The BCP-47 language code to check.
+   *
+   * @since 1.0.0
+   */
+  language: string;
+}
+```
 
-1. **Voice Selection**: Always check available voices before using a specific voice ID
-2. **Language Codes**: Use standard language codes (e.g., 'en-US', 'es-ES', 'fr-FR')
-3. **Rate Control**: Keep rate between 0.5 and 2.0 for natural-sounding speech
-4. **Stop Before Speak**: Call stop() before starting new speech to avoid overlap
-5. **Error Handling**: Wrap all calls in try-catch blocks for robust error handling
+### `IsVoiceAvailableOptions`
+Options for checking voice availability.
+```typescript
+export interface IsVoiceAvailableOptions {
+  /**
+   * The voice ID to check.
+   *
+   * @since 1.0.0
+   */
+  voiceId: string;
+}
+```
 
-## Troubleshooting
+### `ActivateAudioSessionOptions`
+Options for activating the audio session (iOS only).
+```typescript
+export interface ActivateAudioSessionOptions {
+  /**
+   * The audio session category.
+   * - 'Ambient': Mixes with other audio
+   * - 'Playback': Stops other audio
+   *
+   * @since 1.0.0
+   */
+  category: 'Ambient' | 'Playback';
+}
+```
 
-### Common Issues
+### `UtteranceEvent`
+Event emitted when utterance starts or ends.
+```typescript
+export interface UtteranceEvent {
+  /**
+   * The utterance identifier.
+   *
+   * @since 1.0.0
+   */
+  utteranceId: string;
+}
+```
 
-**No speech output**: Check device volume and ensure text is not empty
-**Voice not found**: Use getVoices() to find available voices on the device
-**Speech interrupted**: Stop any ongoing speech before starting new synthesis
-**Language not supported**: Check getSupportedLanguages() for available languages
+### `BoundaryEvent`
+Event emitted at word boundaries.
+```typescript
+export interface BoundaryEvent {
+  /**
+   * The utterance identifier.
+   *
+   * @since 1.0.0
+   */
+  utteranceId: string;
+
+  /**
+   * The character index in the text.
+   *
+   * @since 1.0.0
+   */
+  charIndex: number;
+
+  /**
+   * The character length of the current word.
+   *
+   * @since 1.0.0
+   */
+  charLength?: number;
+}
+```
+
+### `ErrorEvent`
+Event emitted on synthesis error.
+```typescript
+export interface ErrorEvent {
+  /**
+   * The utterance identifier.
+   *
+   * @since 1.0.0
+   */
+  utteranceId: string;
+
+  /**
+   * The error message.
+   *
+   * @since 1.0.0
+   */
+  error: string;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

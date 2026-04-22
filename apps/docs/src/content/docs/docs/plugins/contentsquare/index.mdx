@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-contentsquare"
-description: Capacitor 8 wrapper for the official Contentsquare mobile analytics SDKs.
+description: "Capacitor plugin for the Contentsquare mobile analytics SDK on Capacitor 8."
 tableOfContents: false
 next: false
 prev: false
@@ -8,9 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Use the official Contentsquare API shape from Capacitor 8 apps with Capgo's updated packaging.
-  image:
-    file: ~public/icons/plugins/contentsquare.svg
+  tagline: "Internal native bridge contract implemented by Capacitor."
   actions:
     - text: Get started
       link: /docs/plugins/contentsquare/getting-started/
@@ -22,26 +20,33 @@ hero:
       variant: minimal
 ---
 
-import PluginOverview from '@/components/doc/PluginOverview.astro';
+## Overview
 
-<PluginOverview
-  summary="Capgo's Contentsquare package keeps the documented API shape while updating the plugin for Capacitor 8, Swift Package Manager, and the Capgo plugin template."
-  cards={[
-    {
-      title: 'Official API shape',
-      body: 'Keep the same optIn, sendScreenName, transaction, and replay masking calls documented by Contentsquare.',
-    },
-    {
-      title: 'Consent-first tracking',
-      body: 'Keep optIn and optOut decisions in your privacy layer so analytics activation stays aligned with user consent.',
-    },
-    {
-      title: 'Replay controls',
-      body: 'Apply URL exclusions, captured-element selectors, and PII masking rules for Session Replay from JavaScript.',
-    },
-    {
-      title: 'Platform notes',
-      body: 'Use the extra iOS deeplink setup for in-app tooling and the Android validation notes to confirm the native bridge is working.',
-    },
-  ]}
-/>
+Internal native bridge contract implemented by Capacitor.
+
+## Core Capabilities
+
+- `optIn` 
+- `optOut` 
+- `sendScreenName` 
+- `sendTransaction` 
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `optIn` | See the source definitions for current behavior. |
+| `optOut` | See the source definitions for current behavior. |
+| `sendScreenName` | See the source definitions for current behavior. |
+| `sendTransaction` | See the source definitions for current behavior. |
+| `sendDynamicVarWithStringValue` | See the source definitions for current behavior. |
+| `sendDynamicVarWithIntValue` | See the source definitions for current behavior. |
+| `onReady` | See the source definitions for current behavior. |
+| `excludeURLForReplay` | See the source definitions for current behavior. |
+| `setPIISelectors` | See the source definitions for current behavior. |
+| `setCapturedElementsSelector` | See the source definitions for current behavior. |
+| `collect` | See the source definitions for current behavior. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-contentsquare](https://github.com/Cap-go/capacitor-contentsquare/).

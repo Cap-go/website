@@ -1,99 +1,67 @@
 ---
 locale: en
 ---
-
 # Using @capgo/capacitor-widget-kit
 
-`@capgo/capacitor-widget-kit` brings WidgetKit and Live Activities to Capacitor through a generic SVG-template bridge. You store template definitions and state in the app, let the widget extension render them, and process action events back in JavaScript.
+Capacitor bridge for an iOS-first WidgetKit / Live Activities plugin.
 
-## Installation
+## Install
 
 ```bash
 bun add @capgo/capacitor-widget-kit
 bunx cap sync
 ```
 
-## iOS requirements
+## What This Plugin Exposes
 
-- Add the same App Group to the main app target and the widget extension target.
-- Set `CapgoWidgetKitAppGroup` in both `Info.plist` files.
-- Add `NSSupportsLiveActivities` to the app `Info.plist`.
-- iOS 17 or later is recommended for interactive widget actions.
+- `areActivitiesSupported` - Check whether the native template activity bridge can run on the current device.
+- `startTemplateActivity` - Persist a generic SVG template activity and start the matching native Live Activity bridge.
+- `updateTemplateActivity` - Replace part or all of the stored activity definition/state.
+- `endTemplateActivity` - End a running activity while optionally persisting one last state snapshot.
 
-## Check support
+## Example Usage
 
-```typescript
-import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
+### `areActivitiesSupported`
 
-const { supported, reason } = await CapgoWidgetKit.areActivitiesSupported();
-
-if (!supported) {
-  console.warn(reason);
-}
-```
-
-## Start a template activity
+Check whether the native template activity bridge can run on the current device.
 
 ```typescript
 import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
 
-const { activity } = await CapgoWidgetKit.startTemplateActivity({
-  activityId: 'session-1',
-  openUrl: 'widgetkitdemo://session/session-1',
-  state: {
-    title: 'Chest Day',
-    count: 0,
-    restDurationMs: 90000,
-  },
-  definition: {
-    id: 'generic-session-card',
-    timers: [
-      {
-        id: 'rest',
-        durationPath: 'state.restDurationMs',
-      },
-    ],
-    actions: [
-      {
-        id: 'complete-set',
-        eventName: 'workout.set.completed',
-        patches: [{ op: 'increment', path: 'count', amount: 1 }],
-      },
-    ],
-    layouts: {
-      lockScreen: {
-        width: 100,
-        height: 40,
-        svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 40">
-  <rect x="0" y="0" width="100" height="40" rx="6" fill="#05070b" />
-  <text x="6" y="10" fill="#ffffff">{{state.title}}</text>
-  <text x="6" y="30" fill="#00d69c">{{timers.rest.remainingText}}</text>
-</svg>`,
-      },
-    },
-  },
-});
+await CapgoWidgetKit.areActivitiesSupported();
 ```
 
-## Trigger an action and read the event log
+### `startTemplateActivity`
+
+Persist a generic SVG template activity and start the matching native Live Activity bridge.
 
 ```typescript
-await CapgoWidgetKit.performTemplateAction({
-  activityId: activity.activityId,
-  actionId: 'complete-set',
-  sourceId: 'app-complete-set-button',
-});
+import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
 
-const pendingEvents = await CapgoWidgetKit.listTemplateEvents({
-  activityId: activity.activityId,
-  unacknowledgedOnly: true,
-});
-
-console.log(pendingEvents.events);
+await CapgoWidgetKit.startTemplateActivity({} as StartTemplateActivityOptions);
 ```
 
-## Practical advice
+### `updateTemplateActivity`
 
-- Treat the widget extension as a renderer and keep business state in the app.
-- Reuse the same declarative actions for widget hotspots and in-app buttons.
-- Keep SVG templates simple and driven by state placeholders so updates stay predictable.
+Replace part or all of the stored activity definition/state.
+
+```typescript
+import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
+
+await CapgoWidgetKit.updateTemplateActivity({} as UpdateTemplateActivityOptions);
+```
+
+### `endTemplateActivity`
+
+End a running activity while optionally persisting one last state snapshot.
+
+```typescript
+import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
+
+await CapgoWidgetKit.endTemplateActivity({} as EndTemplateActivityOptions);
+```
+
+## Full Reference
+
+- GitHub: https://github.com/Cap-go/capacitor-widget-kit/
+- Docs: /docs/plugins/widget-kit/

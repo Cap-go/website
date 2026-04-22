@@ -1,274 +1,778 @@
 ---
 title: Getting Started
-description: Learn how to install and use the Camera Preview plugin to display real-time camera feed and capture photos/videos in your Capacitor app.
+description: "Install @capgo/camera-preview and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the package**
-   <PackageManagers pkg="@capgo/camera-preview" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+```bash
+bun add @capgo/camera-preview
+bunx cap sync
+```
 
-2. **Sync with native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-3. **Configure permissions**
-   
-   ### iOS
-   Add camera usage description to your `Info.plist`:
-   ```xml
-   <key>NSCameraUsageDescription</key>
-   <string>To take photos and videos</string>
-   <key>NSMicrophoneUsageDescription</key>
-   <string>To record audio with videos</string>
-   <key>NSPhotoLibraryUsageDescription</key>
-   <string>To save photos and videos</string>
-   ```
-   
-   ### Android
-   Add camera permissions to your `AndroidManifest.xml`:
-   ```xml
-   <uses-permission android:name="android.permission.CAMERA" />
-   <uses-permission android:name="android.permission.RECORD_AUDIO" />
-   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-   ```
-</Steps>
-
-## Usage
-
-Import the plugin and use its methods to control the camera:
+## Import
 
 ```typescript
 import { CameraPreview } from '@capgo/camera-preview';
-import { CameraPreviewOptions, CameraPreviewPictureOptions } from '@capgo/camera-preview';
-
-// Start camera preview
-const startCamera = async () => {
-  const cameraPreviewOptions: CameraPreviewOptions = {
-    position: 'rear',
-    height: 1920,
-    width: 1080,
-    quality: 50,
-    toBack: false,
-    paddingBottom: 0,
-    rotateWhenOrientationChanged: true,
-    x: 0,
-    y: 0
-  };
-  
-  await CameraPreview.start(cameraPreviewOptions);
-};
-
-// Stop camera preview
-const stopCamera = async () => {
-  await CameraPreview.stop();
-};
-
-// Take a picture
-const takePicture = async () => {
-  const pictureOptions: CameraPreviewPictureOptions = {
-    quality: 90,
-    width: 1920,
-    height: 1080
-  };
-  
-  const result = await CameraPreview.capture(pictureOptions);
-  const base64PictureData = result.value;
-  
-  // Use the base64 image data
-  console.log(base64PictureData);
-};
-
-// Switch camera
-const flipCamera = async () => {
-  await CameraPreview.flip();
-};
-
-// Control flash
-const setFlashMode = async (mode: 'on' | 'off' | 'auto' | 'torch') => {
-  await CameraPreview.setFlashMode({ flashMode: mode });
-};
-
-// Start recording video
-const startRecording = async () => {
-  await CameraPreview.startRecordVideo({ 
-    storeToFile: true,
-    fileName: 'myvideo' 
-  });
-};
-
-// Stop recording
-const stopRecording = async () => {
-  const result = await CameraPreview.stopRecordVideo();
-  console.log('Video path:', result.videoFilePath);
-};
 ```
 
-## API Reference
+## API Overview
 
-### start(options)
+### `start`
 
 Starts the camera preview.
 
 ```typescript
-interface CameraPreviewOptions {
-  position?: 'rear' | 'front';
-  height?: number;
-  width?: number;
-  x?: number;
-  y?: number;
-  toBack?: boolean;
-  paddingBottom?: number;
-  rotateWhenOrientationChanged?: boolean;
-  storeToFile?: boolean;
-  disableExifHeaderStripping?: boolean;
-  enableHighResolution?: boolean;
-  disableAudio?: boolean;
-  lockAndroidOrientation?: boolean;
-  enableOpacity?: boolean;
-  enableZoom?: boolean;
-}
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.start({} as CameraPreviewOptions);
 ```
 
-### stop()
+### `stop`
 
 Stops the camera preview.
 
-### capture(options)
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
 
-Takes a picture and returns it as base64 encoded string.
+await CameraPreview.stop();
+```
+
+### `capture`
+
+Captures a picture from the camera.
+
+If `storeToFile` was set to `true` when starting the preview, the returned
+`value` will be an absolute file path on the device instead of a base64 string. Use getBase64FromFilePath to get the base64 string from the file path.
 
 ```typescript
-interface CameraPreviewPictureOptions {
-  height?: number;
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.capture({} as CameraPreviewPictureOptions);
+```
+
+### `captureSample`
+
+Captures a single frame from the camera preview stream.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.captureSample({} as CameraSampleOptions);
+```
+
+### `getSupportedFlashModes`
+
+Gets the flash modes supported by the active camera.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.getSupportedFlashModes();
+```
+
+### `setAspectRatio`
+
+Set the aspect ratio of the camera preview.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.setAspectRatio({} as { aspectRatio: '4:3' | '16:9'; x?: number; y?: number });
+```
+
+### `getAspectRatio`
+
+Gets the current aspect ratio of the camera preview.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.getAspectRatio();
+```
+
+### `setGridMode`
+
+Sets the grid mode of the camera preview overlay.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.setGridMode({} as { gridMode: GridMode });
+```
+
+### `getGridMode`
+
+Gets the current grid mode of the camera preview overlay.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.getGridMode();
+```
+
+### `checkPermissions`
+
+Checks the current camera (and optionally microphone) permission status without prompting the system dialog.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.checkPermissions();
+```
+
+### `requestPermissions`
+
+Requests camera (and optional microphone) permissions. If permissions are already granted or denied,
+the current status is returned without prompting. When `showSettingsAlert` is true and permissions are denied,
+a platform specific alert guiding the user to the app settings will be presented.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.requestPermissions();
+```
+
+### `getHorizontalFov`
+
+Gets the horizontal field of view (FoV) for the active camera.
+Note: This can be an estimate on some devices.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.getHorizontalFov();
+```
+
+### `getSupportedPictureSizes`
+
+Gets the supported picture sizes for all cameras.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.getSupportedPictureSizes();
+```
+
+### `setFlashMode`
+
+Sets the flash mode for the active camera.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.setFlashMode({} as { flashMode: CameraPreviewFlashMode | string });
+```
+
+### `flip`
+
+Toggles between the front and rear cameras.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.flip();
+```
+
+### `setOpacity`
+
+Sets the opacity of the camera preview.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.setOpacity({} as CameraOpacityOptions);
+```
+
+### `stopRecordVideo`
+
+Stops an ongoing video recording.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.stopRecordVideo();
+```
+
+### `startRecordVideo`
+
+Starts recording a video.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.startRecordVideo({} as CameraPreviewOptions);
+```
+
+### `isRunning`
+
+Checks if the camera preview is currently running.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.isRunning();
+```
+
+### `getAvailableDevices`
+
+Gets all available camera devices.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.getAvailableDevices();
+```
+
+### `getZoom`
+
+Gets the current zoom state, including min/max and current lens info.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.getZoom();
+```
+
+### `getZoomButtonValues`
+
+Returns zoom button values for quick switching.
+- iOS/Android: includes 0.5 if ultra-wide available; 1 and 2 if wide available; 3 if telephoto available
+- Web: unsupported
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.getZoomButtonValues();
+```
+
+### `setZoom`
+
+Sets the zoom level of the camera.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.setZoom({} as { level: number; ramp?: boolean; autoFocus?: boolean });
+```
+
+### `getFlashMode`
+
+Gets the current flash mode.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.getFlashMode();
+```
+
+### `setDeviceId`
+
+Switches the active camera to the one with the specified `deviceId`.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.setDeviceId({} as { deviceId: string });
+```
+
+### `getDeviceId`
+
+Gets the ID of the camera device that is currently bound.
+On Android, if a physical-lens request falls back to a logical camera, this returns the bound logical camera ID.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.getDeviceId();
+```
+
+### `getPreviewSize`
+
+Gets the current preview size and position.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.getPreviewSize();
+```
+
+### `setPreviewSize`
+
+Sets the preview size and position.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.setPreviewSize({} as { x?: number; y?: number; width: number; height: number });
+```
+
+### `setFocus`
+
+Sets the camera focus to a specific point in the preview.
+
+Note: The plugin does not attach any native tap-to-focus gesture handlers. Handle taps in
+your HTML/JS (e.g., on the overlaying UI), then pass normalized coordinates here.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.setFocus({} as { x: number; y: number });
+```
+
+### `deleteFile`
+
+Deletes a file at the given absolute path on the device.
+Use this to quickly clean up temporary images created with `storeToFile`.
+On web, this is not supported and will throw.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.deleteFile({} as { path: string });
+```
+
+### `getSafeAreaInsets`
+
+Gets the safe area insets for devices.
+Returns the orientation-aware notch/camera cutout inset and the current orientation.
+In portrait mode: returns top inset (notch at top).
+In landscape mode: returns left inset (notch moved to side).
+This specifically targets the cutout area (notch, punch hole, etc.) that all modern phones have.
+
+Android: Values returned in dp (logical pixels).
+iOS: Values returned in physical pixels, excluding status bar (only pure notch/cutout size).
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.getSafeAreaInsets();
+```
+
+### `getOrientation`
+
+Gets the current device orientation in a cross-platform format.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.getOrientation();
+```
+
+### `getExposureModes`
+
+Returns the exposure modes supported by the active camera.
+Modes can include: 'locked', 'auto', 'continuous', 'custom'.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.getExposureModes();
+```
+
+### `getExposureMode`
+
+Returns the current exposure mode.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.getExposureMode();
+```
+
+### `setExposureMode`
+
+Sets the exposure mode.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.setExposureMode({} as { mode: ExposureMode });
+```
+
+### `getExposureCompensationRange`
+
+Returns the exposure compensation (EV bias) supported range.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.getExposureCompensationRange();
+```
+
+### `getExposureCompensation`
+
+Returns the current exposure compensation (EV bias).
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.getExposureCompensation();
+```
+
+### `setExposureCompensation`
+
+Sets the exposure compensation (EV bias). Value will be clamped to range.
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+
+await CameraPreview.setExposureCompensation({} as { value: number });
+```
+
+## Type Reference
+
+### `CameraPreviewOptions`
+Defines the configuration options for starting the camera preview.
+```typescript
+export interface CameraPreviewOptions {
+  /**
+   * The parent element to attach the video preview to.
+   * @platform web
+   */
+  parent?: string;
+  /**
+   * A CSS class name to add to the preview element.
+   * @platform web
+   */
+  className?: string;
+  /**
+   * The width of the preview in pixels. Defaults to the screen width.
+   * @platform android, ios, web
+   */
   width?: number;
-  quality?: number;
-}
-```
-
-### flip()
-
-Switches between front and rear camera.
-
-### setFlashMode(options)
-
-Sets the flash mode.
-
-```typescript
-interface CameraPreviewFlashMode {
-  flashMode: 'off' | 'on' | 'auto' | 'torch';
-}
-```
-
-### startRecordVideo(options)
-
-Starts video recording.
-
-```typescript
-interface CameraPreviewVideoOptions {
+  /**
+   * The height of the preview in pixels. Defaults to the screen height.
+   * @platform android, ios, web
+   */
+  height?: number;
+  /**
+   * The horizontal origin of the preview, in pixels.
+   * @platform android, ios
+   */
+  x?: number;
+  /**
+   * The vertical origin of the preview, in pixels.
+   * @platform android, ios
+   */
+  y?: number;
+  /**
+   * The aspect ratio of the camera preview, '4:3' or '16:9' or 'fill'.
+   * Cannot be set if width or height is provided, otherwise the call will be rejected.
+   * Use setPreviewSize to adjust size after starting.
+   *
+   * @since 2.0.0
+   */
+  aspectRatio?: '4:3' | '16:9';
+  /**
+   * Controls how the camera preview fills the available space.
+   * - 'contain': Fits the entire preview within the space, may show letterboxing (default).
+   * - 'cover': Fills the entire space, may crop edges of the preview.
+   * @default "contain"
+   * @platform android, ios, web
+   */
+  aspectMode?: 'cover' | 'contain';
+  /**
+   * The grid overlay to display on the camera preview.
+   * @default "none"
+   * @since 2.1.0
+   */
+  gridMode?: GridMode;
+  /**
+   * Adjusts the y-position to account for safe areas (e.g., notches).
+   * @platform ios
+   * @default false
+   */
+  includeSafeAreaInsets?: boolean;
+  /**
+   * If true, places the preview behind the webview.
+   * @platform android
+   * @default true
+   */
+  toBack?: boolean;
+  /**
+   * Bottom padding for the preview, in pixels.
+   * @platform android, ios
+   */
+  paddingBottom?: number;
+  /**
+   * Whether to rotate the preview when the device orientation changes.
+   * @platform ios
+   * @default true
+   */
+  rotateWhenOrientationChanged?: boolean;
+  /**
+   * The camera to use.
+   * @default "rear"
+   */
+  position?: CameraPosition | string;
+  /**
+   * If true, saves the captured image to a file and returns the file path.
+   * If false, returns a base64 encoded string.
+   * @default false
+   */
   storeToFile?: boolean;
-  fileName?: string;
-  width?: number;
-  height?: number;
-  quality?: number;
-  withFlash?: boolean;
+  /**
+   * If true, prevents the plugin from rotating the image based on EXIF data.
+   * @platform android
+   * @default false
+   */
+  disableExifHeaderStripping?: boolean;
+  /**
+   * If true, disables the audio stream, preventing audio permission requests.
+   * @default true
+   */
+  disableAudio?: boolean;
+  /**
+   * If true, locks the device orientation while the camera is active.
+   * @platform android
+   * @default false
+   */
+  lockAndroidOrientation?: boolean;
+  /**
+   * If true, allows the camera preview's opacity to be changed.
+   * @platform android, web
+   * @default false
+   */
+  enableOpacity?: boolean;
+
+  /**
+   * If true, disables the visual focus indicator when tapping to focus.
+   * @platform android, ios
+   * @default false
+   */
+  disableFocusIndicator?: boolean;
+  /**
+   * The `deviceId` of the camera to use. If provided, `position` is ignored.
+   * @platform ios
+   */
+  deviceId?: string;
+  /**
+   * On Android, attempts to bind a physical camera directly when `deviceId` refers to a physical lens.
+   * Disabled by default because OEM support is inconsistent; when false, Android keeps the current logical-camera fallback behavior.
+   * @default false
+   * @platform android
+   */
+  enablePhysicalDeviceSelection?: boolean;
+  /**
+   * The initial zoom level when starting the camera preview.
+   * If the requested zoom level is not available, the native plugin will reject.
+   * @default 1.0
+   * @platform android, ios
+   * @since 2.2.0
+   */
+  initialZoomLevel?: number;
+  /**
+   * The vertical positioning of the camera preview.
+   * @default "center"
+   * @platform android, ios, web
+   * @since 2.3.0
+   */
+  positioning?: CameraPositioning;
+  /**
+   * If true, enables video capture capabilities when the camera starts.
+   * @default false
+   * @platform android
+   * @since 7.11.0
+   */
+  enableVideoMode?: boolean;
+  /**
+   * If true, forces the camera to start/restart even if it's already running or busy.
+   * This will kill the current camera session and start a new one, ignoring all state checks.
+   * @default false
+   * @platform android, ios, web
+   */
+  force?: boolean;
+  /**
+   * Sets the quality of video for recording.
+   * Options: 'low', 'medium', 'high'
+   * @note On Android requires 'enableVideoMode' to be true
+   * @note Will affect the entire preview stream for iOS
+   * @platform ios, android
+   * @default "high"
+   */
+  videoQuality?: 'low' | 'medium' | 'high';
 }
 ```
 
-### stopRecordVideo()
-
-Stops video recording and returns the video file path.
-
-## Advanced Features
-
-### Focus Control
-
+### `CameraPreviewPictureOptions`
+Defines the options for capturing a picture.
 ```typescript
-// Set focus
-await CameraPreview.setFocusCoordinate({
-  x: 100,
-  y: 100
-});
-
-// Get supported focus modes
-const focusModes = await CameraPreview.getFocusModes();
-
-// Set focus mode
-await CameraPreview.setFocusMode({
-  focusMode: 'continuous-picture'
-});
+export interface CameraPreviewPictureOptions {
+  /**
+   * The maximum height of the picture in pixels. The image will be resized to fit within this height while maintaining aspect ratio.
+   * If not specified the captured image will match the preview's visible area.
+   */
+  height?: number;
+  /**
+   * The maximum width of the picture in pixels. The image will be resized to fit within this width while maintaining aspect ratio.
+   * If not specified the captured image will match the preview's visible area.
+   */
+  width?: number;
+  /**
+   * The quality of the captured image, from 0 to 100.
+   * Does not apply to `png` format.
+   * @default 85
+   */
+  quality?: number;
+  /**
+   * The format of the captured image.
+   * @default "jpeg"
+   */
+  format?: PictureFormat;
+  /**
+   * If true, the captured image will be saved to the user's gallery.
+   * @default false
+   * @since 7.5.0
+   */
+  saveToGallery?: boolean;
+  /**
+   * If true, the plugin will attempt to add GPS location data to the image's EXIF metadata.
+   * This may prompt the user for location permissions.
+   * @default false
+   * @since 7.6.0
+   */
+  withExifLocation?: boolean;
+  /**
+   * If true, the plugin will embed a timestamp in the top-right corner of the image.
+   * @default false
+   * @since 7.17.0
+   */
+  embedTimestamp?: boolean;
+  /**
+   * If true, the plugin will embed the current location in the top-right corner of the image.
+   * Requires `withExifLocation` to be enabled.
+   * @default false
+   * @since 7.18.0
+   */
+  embedLocation?: boolean;
+  /**
+   * Sets the priority for photo quality vs. capture speed.
+   * - "speed": Prioritizes faster capture times, may reduce image quality.
+   * - "balanced": Aims for a balance between quality and speed.
+   * - "quality": Prioritizes image quality, may reduce capture speed.
+   * See https://developer.apple.com/documentation/avfoundation/avcapturephotosettings/photoqualityprioritization for details.
+   *
+   * @since 7.21.0
+   * @platform ios
+   * @default "speed"
+   */
+  photoQualityPrioritization?: 'speed' | 'balanced' | 'quality';
+}
 ```
 
-### Zoom Control
-
+### `ExifData`
+Represents EXIF data extracted from an image.
 ```typescript
-// Get max zoom
-const maxZoom = await CameraPreview.getMaxZoom();
-
-// Set zoom
-await CameraPreview.setZoom({ 
-  zoom: 2.0 
-});
-
-// Get current zoom
-const currentZoom = await CameraPreview.getZoom();
+export interface ExifData {
+  [key: string]: any;
+}
 ```
 
-### Exposure Control
-
+### `CameraSampleOptions`
+Defines the options for capturing a sample frame from the camera preview.
 ```typescript
-// Get exposure compensation range
-const range = await CameraPreview.getExposureCompensationRange();
-
-// Set exposure compensation
-await CameraPreview.setExposureCompensation({
-  exposureCompensation: 0.5
-});
+export interface CameraSampleOptions {
+  /**
+   * The quality of the captured sample, from 0 to 100.
+   * @default 85
+   */
+  quality?: number;
+}
 ```
 
-## Best Practices
+### `CameraPreviewFlashMode`
+The available flash modes for the camera. 'torch' is a continuous light mode.
+```typescript
+export type CameraPreviewFlashMode = 'off' | 'on' | 'auto' | 'torch';
+```
 
-1. **Request permissions first**
-   ```typescript
-   import { Camera } from '@capacitor/camera';
-   
-   const requestPermissions = async () => {
-     const permissions = await Camera.requestPermissions();
-     if (permissions.camera === 'granted') {
-       // Start camera preview
-     }
-   };
-   ```
+### `GridMode`
+```typescript
+export type GridMode = 'none' | '3x3' | '4x4';
+```
 
-2. **Handle orientation changes**
-   Set `rotateWhenOrientationChanged: true` to automatically adjust the preview.
+### `PermissionRequestOptions`
+```typescript
+export interface PermissionRequestOptions {
+  disableAudio?: boolean;
+  showSettingsAlert?: boolean;
+  title?: string;
+  message?: string;
+  openSettingsButtonTitle?: string;
+  cancelButtonTitle?: string;
+}
+```
 
-3. **Optimize performance**
-   - Use appropriate resolution settings
-   - Stop the preview when not in use
-   - Disable features you don't need
+### `CameraPermissionStatus`
+```typescript
+export interface CameraPermissionStatus {
+  camera: PermissionState;
+  microphone?: PermissionState;
+}
+```
 
-4. **Error handling**
-   ```typescript
-   try {
-     await CameraPreview.start(options);
-   } catch (error) {
-     console.error('Failed to start camera:', error);
-   }
-   ```
+### `SupportedPictureSizes`
+Represents the supported picture sizes for a camera facing a certain direction.
+```typescript
+export interface SupportedPictureSizes {
+  /** The camera direction ("front" or "rear"). */
+  facing: string;
+  /** A list of supported picture sizes for this camera. */
+  supportedPictureSizes: PictureSize[];
+}
+```
 
-## Platform Notes
+### `CameraOpacityOptions`
+Defines the options for setting the camera preview's opacity.
+```typescript
+export interface CameraOpacityOptions {
+  /**
+   * The opacity percentage, from 0.0 (fully transparent) to 1.0 (fully opaque).
+   * @default 1.0
+   */
+  opacity?: number;
+}
+```
 
-### iOS
-- Requires iOS 10.0+
-- Uses AVFoundation framework
-- Hardware acceleration supported
+### `CameraDevice`
+Represents a physical camera on the device (e.g., the front-facing camera).
+```typescript
+export interface CameraDevice {
+  /** A unique identifier for the camera device. */
+  deviceId: string;
+  /** A human-readable name for the camera device. */
+  label: string;
+  /** The physical position of the camera on the device. */
+  position: CameraPosition;
+  /** A list of all available lenses for this camera device. */
+  lenses: CameraLens[];
+  /** The overall minimum zoom factor available across all lenses on this device. */
+  minZoom: number;
+  /** The overall maximum zoom factor available across all lenses on this device. */
+  maxZoom: number;
+  /** Identifies whether the device is a logical camera (composed of multiple physical lenses). */
+  isLogical: boolean;
+}
+```
 
-### Android
-- Requires Android 5.0 (API 21)+
-- Uses Camera2 API
-- Supports various camera features based on device capabilities
+### `LensInfo`
+Represents the detailed information of the currently active lens.
+```typescript
+export interface LensInfo {
+  /** The focal length of the active lens in millimeters. */
+  focalLength: number;
+  /** The device type of the active lens. */
+  deviceType: DeviceType;
+  /** The base zoom ratio of the active lens (e.g., 0.5x, 1.0x). */
+  baseZoomRatio: number;
+  /** The current digital zoom factor applied on top of the base zoom. */
+  digitalZoom: number;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

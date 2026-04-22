@@ -1,370 +1,510 @@
 ---
 title: Getting Started
-description: Learn how to install and use the WiFi plugin to manage network connectivity in your Capacitor app.
+description: "Install @capgo/capacitor-wifi and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-wifi" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+```bash
+bun add @capgo/capacitor-wifi
+bunx cap sync
+```
 
-2. **Sync with native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+## Import
 
-3. **Configure permissions**
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+```
 
-   **Android**: Add to `AndroidManifest.xml`:
-   ```xml
-   <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-   <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-   ```
+## API Overview
 
-   **iOS**: Add to `Info.plist`:
-   ```xml
-   <key>NSLocationWhenInUseUsageDescription</key>
-   <string>We need location access to scan WiFi networks</string>
-   ```
-</Steps>
+### `addNetwork`
 
-## Usage
-
-Import the plugin and manage WiFi connectivity:
+Show a system dialog to add a Wi-Fi network to the device.
+On Android SDK 30+, this opens the system Wi-Fi settings with the network pre-filled.
+On iOS, this connects to the network directly.
 
 ```typescript
 import { CapacitorWifi } from '@capgo/capacitor-wifi';
 
-// Get current WiFi connection info
-const getWifiInfo = async () => {
-  const info = await CapacitorWifi.getWifiInfo();
-  console.log('Connected to:', info.ssid);
-  console.log('IP Address:', info.ip);
-};
-
-// Scan for available networks
-const scanNetworks = async () => {
-  const { networks } = await CapacitorWifi.scan();
-  networks.forEach(network => {
-    console.log(`SSID: ${network.ssid}, Signal: ${network.level}`);
-  });
-};
-
-// Connect to a network
-const connectToWifi = async () => {
-  await CapacitorWifi.connect({
-    ssid: 'MyNetwork',
-    password: 'mypassword'
-  });
-};
-```
-
-## API Reference
-
-### getWifiInfo()
-
-Gets information about the currently connected WiFi network.
-
-```typescript
-interface WifiInfo {
-  ssid: string;          // Network name
-  bssid: string;         // MAC address of access point
-  ip: string;            // Device IP address
-  frequency: number;     // Network frequency (MHz)
-  linkSpeed: number;     // Connection speed (Mbps)
-  signalStrength: number; // Signal strength (0-100)
-}
-
-const info = await CapacitorWifi.getWifiInfo();
-```
-
-### scan()
-
-Scans for available WiFi networks.
-
-```typescript
-interface WifiNetwork {
-  ssid: string;          // Network name
-  bssid: string;         // MAC address
-  level: number;         // Signal level (dBm)
-  frequency: number;     // Network frequency
-  capabilities: string;  // Security capabilities
-}
-
-const { networks } = await CapacitorWifi.scan();
-```
-
-### connect(options)
-
-Connects to a WiFi network.
-
-```typescript
-interface ConnectOptions {
-  ssid: string;          // Network name
-  password?: string;     // Network password (if secured)
-  isHiddenSsid?: boolean; // Whether SSID is hidden
-}
-
-await CapacitorWifi.connect({
+await CapacitorWifi.addNetwork({
   ssid: 'MyNetwork',
-  password: 'mypassword'
+  password: 'mypassword',
+  isHiddenSsid: false,
+  securityType: NetworkSecurityType.WPA2_PSK
 });
 ```
 
-### disconnect()
+### `connect`
 
-Disconnects from the current WiFi network.
-
-```typescript
-await CapacitorWifi.disconnect();
-```
-
-### getSSID()
-
-Gets the SSID of the currently connected network.
-
-```typescript
-const { ssid } = await CapacitorWifi.getSSID();
-console.log('Connected to:', ssid);
-```
-
-### getIP()
-
-Gets the current device IP address.
-
-```typescript
-const { ip } = await CapacitorWifi.getIP();
-console.log('IP Address:', ip);
-```
-
-## Complete Example
+Connect to a Wi-Fi network.
+On Android, this creates a temporary connection that doesn't route traffic through the network by default.
+Set autoRouteTraffic to true to bind app traffic to the connected network (useful for local/device-hosted APs).
+For a persistent connection on Android, use addNetwork() instead.
+On iOS, this creates a persistent connection.
 
 ```typescript
 import { CapacitorWifi } from '@capgo/capacitor-wifi';
 
-export class WifiService {
-  async getCurrentNetwork() {
-    try {
-      const info = await CapacitorWifi.getWifiInfo();
-      return {
-        name: info.ssid,
-        strength: this.getSignalQuality(info.signalStrength),
-        speed: `${info.linkSpeed} Mbps`,
-        ip: info.ip
-      };
-    } catch (error) {
-      console.error('Failed to get WiFi info:', error);
-      return null;
-    }
-  }
+await CapacitorWifi.connect({
+  ssid: 'MyNetwork',
+  password: 'mypassword',
+  autoRouteTraffic: true // Android only: route app traffic through this network
+});
+```
 
-  async scanAndConnect(targetSsid: string, password: string) {
-    try {
-      // Scan for networks
-      const { networks } = await CapacitorWifi.scan();
+### `disconnect`
 
-      // Find target network
-      const targetNetwork = networks.find(n => n.ssid === targetSsid);
+Disconnect from the current Wi-Fi network.
+On iOS, only disconnects from networks that were added via this plugin.
 
-      if (!targetNetwork) {
-        throw new Error(`Network ${targetSsid} not found`);
-      }
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
 
-      console.log(`Found network with signal: ${targetNetwork.level} dBm`);
+await CapacitorWifi.disconnect();
+```
 
-      // Connect to network
-      await CapacitorWifi.connect({
-        ssid: targetSsid,
-        password: password
-      });
+### `getAvailableNetworks`
 
-      console.log('Connected successfully!');
-      return true;
-    } catch (error) {
-      console.error('Connection failed:', error);
-      return false;
-    }
-  }
+Get a list of available Wi-Fi networks from the last scan.
+Only available on Android.
 
-  async findBestNetwork(preferredNetworks: string[]) {
-    const { networks } = await CapacitorWifi.scan();
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
 
-    // Filter to preferred networks
-    const available = networks.filter(n =>
-      preferredNetworks.includes(n.ssid)
-    );
+const { networks } = await CapacitorWifi.getAvailableNetworks();
+networks.forEach(network => {
+  console.log(`SSID: ${network.ssid}, Signal: ${network.rssi} dBm`);
+});
+```
 
-    if (available.length === 0) {
-      return null;
-    }
+### `getIpAddress`
 
-    // Sort by signal strength
-    available.sort((a, b) => b.level - a.level);
+Get the device's current IP address.
+Available on both Android and iOS.
 
-    return available[0];
-  }
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
 
-  async monitorConnection(callback: (info: WifiInfo | null) => void) {
-    const checkConnection = async () => {
-      try {
-        const info = await CapacitorWifi.getWifiInfo();
-        callback(info);
-      } catch (error) {
-        callback(null);
-      }
-    };
+const { ipAddress } = await CapacitorWifi.getIpAddress();
+console.log('IP Address:', ipAddress);
+```
 
-    // Check every 5 seconds
-    const interval = setInterval(checkConnection, 5000);
+### `getRssi`
 
-    // Initial check
-    await checkConnection();
+Get the received signal strength indicator (RSSI) of the current network in dBm.
+Only available on Android.
 
-    // Return cleanup function
-    return () => clearInterval(interval);
-  }
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
 
-  private getSignalQuality(strength: number): string {
-    if (strength >= 80) return 'Excellent';
-    if (strength >= 60) return 'Good';
-    if (strength >= 40) return 'Fair';
-    return 'Poor';
-  }
+const { rssi } = await CapacitorWifi.getRssi();
+console.log('Signal strength:', rssi, 'dBm');
+```
 
-  async getNetworkSecurity(ssid: string): Promise<string> {
-    const { networks } = await CapacitorWifi.scan();
-    const network = networks.find(n => n.ssid === ssid);
+### `getSsid`
 
-    if (!network) {
-      return 'Unknown';
-    }
+Get the service set identifier (SSID) of the current network.
+Available on both Android and iOS.
 
-    const caps = network.capabilities.toLowerCase();
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
 
-    if (caps.includes('wpa3')) return 'WPA3';
-    if (caps.includes('wpa2')) return 'WPA2';
-    if (caps.includes('wpa')) return 'WPA';
-    if (caps.includes('wep')) return 'WEP';
+const { ssid } = await CapacitorWifi.getSsid();
+console.log('Connected to:', ssid);
+```
 
-    return 'Open';
-  }
+### `getWifiInfo`
+
+Get comprehensive information about the currently connected WiFi network.
+This method provides detailed network information including SSID, BSSID, IP address,
+frequency, link speed, and signal strength in a single call.
+On iOS, some fields may not be available and will be undefined.
+
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+
+const info = await CapacitorWifi.getWifiInfo();
+console.log('Network:', info.ssid);
+console.log('BSSID:', info.bssid);
+console.log('IP:', info.ip);
+console.log('Frequency:', info.frequency, 'MHz');
+console.log('Speed:', info.linkSpeed, 'Mbps');
+console.log('Signal:', info.signalStrength);
+```
+
+### `isEnabled`
+
+Check if Wi-Fi is enabled on the device.
+Only available on Android.
+
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+
+const { enabled } = await CapacitorWifi.isEnabled();
+console.log('WiFi is', enabled ? 'enabled' : 'disabled');
+```
+
+### `startScan`
+
+Start scanning for Wi-Fi networks.
+Only available on Android.
+Results are delivered via the 'networksScanned' event listener.
+Note: May fail due to system throttling or hardware issues.
+
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+
+await CapacitorWifi.addListener('networksScanned', () => {
+  console.log('Scan completed');
+});
+await CapacitorWifi.startScan();
+```
+
+### `checkPermissions`
+
+Check the current permission status for location access.
+Location permission is required for Wi-Fi operations on both platforms.
+
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+
+const status = await CapacitorWifi.checkPermissions();
+console.log('Location permission:', status.location);
+```
+
+### `requestPermissions`
+
+Request location permissions from the user.
+Location permission is required for Wi-Fi operations on both platforms.
+
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+
+const status = await CapacitorWifi.requestPermissions();
+if (status.location === 'granted') {
+  console.log('Permission granted');
 }
 ```
 
-## Advanced Usage
+## Type Reference
 
-### Network Quality Assessment
-
+### `AddNetworkOptions`
+Options for adding a network.
 ```typescript
-const assessNetworkQuality = async () => {
-  const info = await CapacitorWifi.getWifiInfo();
+export interface AddNetworkOptions {
+  /**
+   * The SSID of the network to add
+   *
+   * @since 7.0.0
+   */
+  ssid: string;
 
-  const quality = {
-    signal: info.signalStrength >= 70 ? 'Excellent' :
-            info.signalStrength >= 50 ? 'Good' :
-            info.signalStrength >= 30 ? 'Fair' : 'Poor',
-    speed: info.linkSpeed >= 100 ? 'Fast' :
-           info.linkSpeed >= 50 ? 'Medium' : 'Slow',
-    frequency: info.frequency >= 5000 ? '5GHz' : '2.4GHz'
-  };
+  /**
+   * The password for the network (optional for open networks)
+   *
+   * @since 7.0.0
+   */
+  password?: string;
 
-  console.log('Network Quality:', quality);
-  return quality;
-};
-```
+  /**
+   * Whether the network is hidden (Android only)
+   *
+   * @since 7.0.0
+   * @default false
+   */
+  isHiddenSsid?: boolean;
 
-### Auto-Connect to Preferred Networks
-
-```typescript
-const autoConnect = async (preferredNetworks: Array<{ ssid: string, password: string }>) => {
-  const { networks } = await CapacitorWifi.scan();
-
-  for (const preferred of preferredNetworks) {
-    const found = networks.find(n => n.ssid === preferred.ssid);
-
-    if (found) {
-      try {
-        await CapacitorWifi.connect({
-          ssid: preferred.ssid,
-          password: preferred.password
-        });
-        console.log(`Connected to ${preferred.ssid}`);
-        return true;
-      } catch (error) {
-        console.error(`Failed to connect to ${preferred.ssid}`);
-      }
-    }
-  }
-
-  return false;
-};
-```
-
-### Network Change Detection
-
-```typescript
-class NetworkMonitor {
-  private currentSsid: string | null = null;
-  private listeners: Array<(ssid: string | null) => void> = [];
-
-  async start() {
-    setInterval(async () => {
-      try {
-        const { ssid } = await CapacitorWifi.getSSID();
-
-        if (ssid !== this.currentSsid) {
-          this.currentSsid = ssid;
-          this.notifyListeners(ssid);
-        }
-      } catch (error) {
-        if (this.currentSsid !== null) {
-          this.currentSsid = null;
-          this.notifyListeners(null);
-        }
-      }
-    }, 3000);
-  }
-
-  onNetworkChange(callback: (ssid: string | null) => void) {
-    this.listeners.push(callback);
-  }
-
-  private notifyListeners(ssid: string | null) {
-    this.listeners.forEach(listener => listener(ssid));
-  }
+  /**
+   * The security type of the network (Android only)
+   *
+   * @since 7.0.0
+   * @default NetworkSecurityType.WPA2_PSK
+   */
+  securityType?: NetworkSecurityType;
 }
 ```
 
-## Best Practices
+### `ConnectOptions`
+Options for connecting to a network.
+```typescript
+export interface ConnectOptions {
+  /**
+   * The SSID of the network to connect to
+   *
+   * @since 7.0.0
+   */
+  ssid: string;
 
-1. **Permissions**: Request location permissions before scanning networks
-2. **Error Handling**: Always wrap WiFi operations in try-catch blocks
-3. **User Feedback**: Show loading indicators during network operations
-4. **Security**: Never store WiFi passwords in plain text
-5. **Testing**: Test on real devices as WiFi APIs may not work in emulators
+  /**
+   * The password for the network (optional for open networks)
+   *
+   * @since 7.0.0
+   */
+  password?: string;
 
-## Platform Differences
+  /**
+   * Whether the network is hidden (Android only)
+   *
+   * @since 7.0.0
+   * @default false
+   */
+  isHiddenSsid?: boolean;
 
-### iOS
-- Requires location permissions to scan networks
-- Cannot programmatically connect to networks (will open Settings)
-- Limited access to network details
+  /**
+   * Whether to automatically route app traffic through the connected Wi-Fi network (Android only)
+   * When enabled, it binds the app process to the connected network using ConnectivityManager.bindProcessToNetwork()
+   * This is useful for connecting to local/device-hosted APs (e.g., ESP32, IoT devices) that don't have internet access.
+   *
+   * @since 7.0.0
+   * @default false
+   */
+  autoRouteTraffic?: boolean;
+}
+```
 
-### Android
-- Full programmatic WiFi control
-- Requires location permissions for network scanning
-- Can connect/disconnect programmatically
+### `DisconnectOptions`
+Options for disconnecting from a network.
+```typescript
+export interface DisconnectOptions {
+  /**
+   * The SSID of the network to disconnect from (optional)
+   *
+   * @since 7.0.0
+   */
+  ssid?: string;
+}
+```
 
-## Troubleshooting
+### `GetAvailableNetworksResult`
+Result from getAvailableNetworks().
+```typescript
+export interface GetAvailableNetworksResult {
+  /**
+   * List of available networks
+   *
+   * @since 7.0.0
+   */
+  networks: Network[];
+}
+```
 
-### Common Issues
+### `GetIpAddressResult`
+Result from getIpAddress().
+```typescript
+export interface GetIpAddressResult {
+  /**
+   * The device's IP address
+   *
+   * @since 7.0.0
+   */
+  ipAddress: string;
+}
+```
 
-**Scan returns empty**: Check location permissions are granted
-**Cannot connect to network**: Verify password is correct and network is in range
-**getWifiInfo fails**: Ensure device is connected to a WiFi network
-**Permission denied**: Add required permissions to platform configuration files
+### `GetRssiResult`
+Result from getRssi().
+```typescript
+export interface GetRssiResult {
+  /**
+   * The signal strength in dBm
+   *
+   * @since 7.0.0
+   */
+  rssi: number;
+}
+```
+
+### `GetSsidResult`
+Result from getSsid().
+```typescript
+export interface GetSsidResult {
+  /**
+   * The SSID of the current network
+   *
+   * @since 7.0.0
+   */
+  ssid: string;
+}
+```
+
+### `WifiInfo`
+Comprehensive WiFi information.
+```typescript
+export interface WifiInfo {
+  /**
+   * The SSID (network name) of the current network
+   *
+   * @since 7.0.0
+   */
+  ssid: string;
+
+  /**
+   * The BSSID (MAC address) of the access point.
+   * Not available on iOS.
+   *
+   * @since 7.0.0
+   */
+  bssid?: string;
+
+  /**
+   * The device's IP address on the network
+   *
+   * @since 7.0.0
+   */
+  ip: string;
+
+  /**
+   * The network frequency in MHz.
+   * Not available on iOS.
+   *
+   * @since 7.0.0
+   */
+  frequency?: number;
+
+  /**
+   * The connection speed in Mbps.
+   * Not available on iOS.
+   *
+   * @since 7.0.0
+   */
+  linkSpeed?: number;
+
+  /**
+   * The signal strength (0-100).
+   * Calculated from RSSI on Android.
+   * Not available on iOS.
+   *
+   * @since 7.0.0
+   */
+  signalStrength?: number;
+}
+```
+
+### `IsEnabledResult`
+Result from isEnabled().
+```typescript
+export interface IsEnabledResult {
+  /**
+   * Whether Wi-Fi is enabled
+   *
+   * @since 7.0.0
+   */
+  enabled: boolean;
+}
+```
+
+### `PermissionStatus`
+Permission status.
+```typescript
+export interface PermissionStatus {
+  /**
+   * Location permission state
+   *
+   * @since 7.0.0
+   */
+  location: PermissionState;
+}
+```
+
+### `RequestPermissionsOptions`
+Options for requesting permissions.
+```typescript
+export interface RequestPermissionsOptions {
+  /**
+   * Permissions to request
+   *
+   * @since 7.0.0
+   */
+  permissions?: 'location'[];
+}
+```
+
+### `NetworkSecurityType`
+Network security types.
+```typescript
+export enum NetworkSecurityType {
+  /**
+   * Open network with no security
+   *
+   * @since 7.0.0
+   */
+  OPEN = 0,
+
+  /**
+   * WEP security
+   *
+   * @since 7.0.0
+   */
+  WEP = 1,
+
+  /**
+   * WPA/WPA2 Personal (PSK)
+   *
+   * @since 7.0.0
+   */
+  WPA2_PSK = 2,
+
+  /**
+   * WPA/WPA2/WPA3 Enterprise (EAP)
+   *
+   * @since 7.0.0
+   */
+  EAP = 3,
+
+  /**
+   * WPA3 Personal (SAE)
+   *
+   * @since 7.0.0
+   */
+  SAE = 4,
+
+  /**
+   * WPA3 Enterprise
+   *
+   * @since 7.0.0
+   */
+  WPA3_ENTERPRISE = 5,
+
+  /**
+   * WPA3 Enterprise 192-bit mode
+   *
+   * @since 7.0.0
+   */
+  WPA3_ENTERPRISE_192_BIT = 6,
+
+  /**
+   * Passpoint network
+   *
+   * @since 7.0.0
+   */
+  PASSPOINT = 7,
+
+  /**
+   * Enhanced Open (OWE)
+   *
+   * @since 7.0.0
+   */
+  OWE = 8,
+
+  /**
+   * WAPI PSK
+   *
+   * @since 7.0.0
+   */
+  WAPI_PSK = 9,
+
+  /**
+   * WAPI Certificate
+   *
+   * @since 7.0.0
+   */
+  WAPI_CERT = 10,
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

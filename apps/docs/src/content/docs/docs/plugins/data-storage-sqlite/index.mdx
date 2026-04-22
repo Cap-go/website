@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-data-storage-sqlite"
-description: Capacitor plugin for SQLite-based key-value storage, providing a fast and reliable data persistence solution.
+description: "SQLite Storage of key/value strings pair."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,56 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Fast and reliable SQLite-based key-value storage for your Capacitor apps with encryption support.
-  image:
-    file: ~public/icons/plugins/data-storage-sqlite.svg
+  tagline: "SQLite Storage of key/value strings pair."
   actions:
     - text: Get started
       link: /docs/plugins/data-storage-sqlite/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-data-storage-sqlite/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="SQLite powered" icon="rocket">
-    Fast and reliable data storage using SQLite 💾
-  </Card>
-  <Card title="Encryption support" icon="setting">
-    Optional encryption for sensitive data 🔐
-  </Card>
-  <Card title="Key-value simplicity" icon="star">
-    Simple key-value API with powerful features 🗂️
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/data-storage-sqlite/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+SQLite Storage of key/value strings pair.
+
+## Core Capabilities
+
+- `openStore` - Open a store.
+- `closeStore` - Close the Store.
+- `isStoreOpen` - Check if the Store is opened.
+- `isStoreExists` - Check if the Store exists.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `openStore` | Open a store. |
+| `closeStore` | Close the Store. |
+| `isStoreOpen` | Check if the Store is opened. |
+| `isStoreExists` | Check if the Store exists. |
+| `deleteStore` | Delete a store. |
+| `setTable` | Set or Add a table to an existing store. |
+| `set` | Store a data with given key and value. |
+| `get` | Retrieve a data value for a given data key. |
+| `remove` | Remove a data with given key. |
+| `clear` | Clear the Data Store (delete all keys). |
+| `iskey` | Check if a data key exists. |
+| `keys` | Get the data key list. |
+| `values` | Get the data value list. |
+| `filtervalues` | Get the data value list for filter keys. |
+| `keysvalues` | Get the data key/value pair list. |
+| `isTable` | Check if a table exists. |
+| `tables` | Get the table list for the current store. |
+| `deleteTable` | Delete a table. |
+| `importFromJson` | Import a database From a JSON. |
+| `isJsonValid` | Check the validity of a JSON Object. |
+| `exportToJson` | Export the given database to a JSON Object. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-data-storage-sqlite](https://github.com/Cap-go/capacitor-data-storage-sqlite/).

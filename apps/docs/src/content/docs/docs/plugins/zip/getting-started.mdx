@@ -1,311 +1,225 @@
 ---
 title: Getting Started
-description: Learn how to install and use the Zip plugin to compress and extract files in your Capacitor app.
+description: "Install @capgo/capacitor-zip and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-zip" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+```bash
+bun add @capgo/capacitor-zip
+bunx cap sync
+```
 
-2. **Sync with native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+## Import
 
-## Usage
+```typescript
+import { CapacitorZip } from '@capgo/capacitor-zip';
+```
 
-Import the plugin and zip or unzip files:
+## API Overview
+
+### `zip`
+
+Compress a file or directory to create a ZIP archive.
+
+Creates a compressed archive from a source file or directory. The archive
+will include the entire directory structure if the source is a folder.
+
+Platform-specific notes:
+- iOS: Password protection is not supported. If a password is provided, it will be ignored and a warning will be logged.
+- Android: Supports AES-256 encryption when a password is provided.
+- Web: Not supported. Throws an error if called.
 
 ```typescript
 import { CapacitorZip } from '@capgo/capacitor-zip';
 
-// Zip a folder
-const zipFolder = async () => {
-  await CapacitorZip.zip({
-    source: 'file:///path/to/folder',
-    destination: 'file:///path/to/archive.zip'
-  });
-  console.log('Folder zipped successfully!');
-};
-
-// Unzip an archive
-const unzipArchive = async () => {
-  await CapacitorZip.unzip({
-    source: 'file:///path/to/archive.zip',
-    destination: 'file:///path/to/output/folder'
-  });
-  console.log('Archive extracted successfully!');
-};
-```
-
-## API Reference
-
-### zip(options)
-
-Creates a ZIP archive from a source folder.
-
-```typescript
-interface ZipOptions {
-  source: string;       // Path to folder to compress
-  destination: string;  // Path for output ZIP file
-}
-
+// Compress a directory without password
 await CapacitorZip.zip({
-  source: 'file:///path/to/folder',
-  destination: 'file:///path/to/archive.zip'
+  source: '/path/to/my-folder',
+  destination: '/path/to/output.zip'
 });
 ```
 
-### unzip(options)
+### `unzip`
 
-Extracts files from a ZIP archive.
+Extract a ZIP archive to a specified destination directory.
 
-```typescript
-interface UnzipOptions {
-  source: string;       // Path to ZIP file
-  destination: string;  // Path to extract to
-}
+Extracts all files and folders from a ZIP archive while preserving the
+directory structure. Creates the destination directory if it doesn't exist.
 
-await CapacitorZip.unzip({
-  source: 'file:///path/to/archive.zip',
-  destination: 'file:///path/to/output/folder'
-});
-```
-
-## Complete Example
+Platform-specific notes:
+- iOS: Supports standard ZIP archives. Password-protected archives are extracted with the provided password.
+- Android: Supports AES-encrypted archives with password. Includes zip slip vulnerability protection.
+- Web: Downloads each file individually to the browser's download folder. Cannot create a directory structure.
 
 ```typescript
 import { CapacitorZip } from '@capgo/capacitor-zip';
-import { Filesystem, Directory } from '@capacitor/filesystem';
 
-export class ZipService {
-  async createBackup() {
-    try {
-      const timestamp = Date.now();
-      const sourceDir = `${Filesystem.Directory.Data}/userdata`;
-      const destPath = `${Filesystem.Directory.Documents}/backup_${timestamp}.zip`;
+// Extract a standard ZIP archive
+await CapacitorZip.unzip({
+  source: '/path/to/archive.zip',
+  destination: '/path/to/extract-folder'
+});
+```
 
-      await CapacitorZip.zip({
-        source: sourceDir,
-        destination: destPath
-      });
+## Type Reference
 
-      console.log('Backup created:', destPath);
-      return destPath;
-    } catch (error) {
-      console.error('Backup failed:', error);
-      throw error;
-    }
-  }
+### `ZipOptions`
+Options for creating a ZIP archive.
+```typescript
+export interface ZipOptions {
+  /**
+   * Path to the file or directory to compress.
+   *
+   * This can be an absolute path or a path relative to the app's working directory.
+   * If the source is a directory, all its contents will be recursively compressed
+   * while preserving the directory structure.
+   *
+   * Platform-specific notes:
+   * - iOS: Use file:// URLs or absolute paths. Relative paths are resolved from the app's documents directory.
+   * - Android: Use absolute file paths or content:// URIs for files accessible via the Android Storage Access Framework.
+   * - Web: Not supported.
+   *
+   * @since 7.0.0
+   * @example '/Users/app/Documents/my-folder'
+   * @example '/var/mobile/Containers/Data/Application/.../Documents/file.pdf'
+   * @example 'file:///storage/emulated/0/Download/document.pdf'
+   */
+  source: string;
 
-  async restoreBackup(backupPath: string) {
-    try {
-      const destDir = `${Filesystem.Directory.Data}/userdata`;
+  /**
+   * Path where the ZIP archive will be created.
+   *
+   * The destination path must include the .zip file extension. If the parent
+   * directory doesn't exist, it will be created automatically.
+   *
+   * Platform-specific notes:
+   * - iOS: Use file:// URLs or absolute paths. Relative paths are resolved from the app's documents directory.
+   * - Android: Use absolute file paths. The plugin will create any missing parent directories.
+   * - Web: Not supported.
+   *
+   * @since 7.0.0
+   * @example '/Users/app/Documents/archive.zip'
+   * @example '/var/mobile/Containers/Data/Application/.../Documents/backup.zip'
+   * @example 'file:///storage/emulated/0/Download/compressed.zip'
+   */
+  destination: string;
 
-      // Clear existing data
-      await Filesystem.rmdir({
-        path: 'userdata',
-        directory: Directory.Data,
-        recursive: true
-      });
+  /**
+   * Optional password for encrypting the ZIP archive.
+   *
+   * When provided, the archive will be encrypted and require this password
+   * to extract. Uses AES-256 encryption on Android.
+   *
+   * Platform-specific notes:
+   * - iOS: Password protection is NOT supported. The password will be ignored and a warning will be logged.
+   * - Android: Supports AES-256 encryption via zip4j library. The password must be provided during extraction.
+   * - Web: Not supported.
+   *
+   * @since 7.0.0
+   * @example 'mySecurePassword123'
+   */
+  password?: string;
 
-      // Extract backup
-      await CapacitorZip.unzip({
-        source: backupPath,
-        destination: destDir
-      });
-
-      console.log('Backup restored successfully');
-    } catch (error) {
-      console.error('Restore failed:', error);
-      throw error;
-    }
-  }
-
-  async compressFiles(filePaths: string[], outputPath: string) {
-    try {
-      // Create temporary directory
-      const tempDir = `${Filesystem.Directory.Cache}/temp_zip_${Date.now()}`;
-
-      await Filesystem.mkdir({
-        path: tempDir,
-        directory: Directory.Cache,
-        recursive: true
-      });
-
-      // Copy files to temp directory
-      for (const filePath of filePaths) {
-        const fileName = filePath.split('/').pop();
-        await Filesystem.copy({
-          from: filePath,
-          to: `${tempDir}/${fileName}`
-        });
-      }
-
-      // Zip the temp directory
-      await CapacitorZip.zip({
-        source: tempDir,
-        destination: outputPath
-      });
-
-      // Clean up temp directory
-      await Filesystem.rmdir({
-        path: tempDir,
-        directory: Directory.Cache,
-        recursive: true
-      });
-
-      return outputPath;
-    } catch (error) {
-      console.error('Compression failed:', error);
-      throw error;
-    }
-  }
-
-  async extractSpecificFiles(zipPath: string, fileNames: string[]) {
-    try {
-      // Extract to temp location
-      const tempDir = `${Filesystem.Directory.Cache}/temp_extract_${Date.now()}`;
-
-      await CapacitorZip.unzip({
-        source: zipPath,
-        destination: tempDir
-      });
-
-      // Read only specific files
-      const extractedFiles: { [key: string]: string } = {};
-
-      for (const fileName of fileNames) {
-        const content = await Filesystem.readFile({
-          path: `${tempDir}/${fileName}`,
-          directory: Directory.Cache
-        });
-        extractedFiles[fileName] = content.data;
-      }
-
-      // Clean up
-      await Filesystem.rmdir({
-        path: tempDir,
-        directory: Directory.Cache,
-        recursive: true
-      });
-
-      return extractedFiles;
-    } catch (error) {
-      console.error('Extraction failed:', error);
-      throw error;
-    }
-  }
+  /**
+   * Whether to include the parent folder in the ZIP archive.
+   *
+   * When true (default), the source folder itself becomes the root directory in the archive.
+   * When false, only the contents of the source folder are included at the root level.
+   *
+   * This option only applies when the source is a directory. For single files, this option is ignored.
+   *
+   * @default true
+   * @since 8.0.5
+   * @example
+   * ```typescript
+   * // With includeParentFolder: true (default)
+   * // Source: /cache/temp/ containing [database.backup, media/]
+   * // ZIP contains: temp/database.backup, temp/media/
+   * await CapacitorZip.zip({
+   *   source: '/cache/temp',
+   *   destination: '/cache/backup.zip',
+   *   includeParentFolder: true
+   * });
+   * ```
+   * @example
+   * ```typescript
+   * // With includeParentFolder: false
+   * // Source: /cache/temp/ containing [database.backup, media/]
+   * // ZIP contains: database.backup, media/
+   * await CapacitorZip.zip({
+   *   source: '/cache/temp',
+   *   destination: '/cache/backup.zip',
+   *   includeParentFolder: false
+   * });
+   * ```
+   */
+  includeParentFolder?: boolean;
 }
 ```
 
-## Advanced Usage
-
-### Creating Archives with Progress Tracking
-
+### `UnzipOptions`
+Options for extracting a ZIP archive.
 ```typescript
-const zipWithProgress = async (source: string, destination: string) => {
-  console.log('Starting compression...');
+export interface UnzipOptions {
+  /**
+   * Path to the ZIP archive to extract.
+   *
+   * The source must be a valid ZIP file. If the file doesn't exist or is
+   * corrupted, the operation will fail with an error.
+   *
+   * Platform-specific notes:
+   * - iOS: Use file:// URLs or absolute paths. Relative paths are resolved from the app's documents directory.
+   * - Android: Use absolute file paths or content:// URIs for files accessible via the Android Storage Access Framework.
+   * - Web: Use HTTP/HTTPS URLs. The file will be fetched and extracted in the browser.
+   *
+   * @since 7.0.0
+   * @example '/Users/app/Documents/archive.zip'
+   * @example '/var/mobile/Containers/Data/Application/.../Documents/backup.zip'
+   * @example 'file:///storage/emulated/0/Download/compressed.zip'
+   * @example 'https://example.com/files/archive.zip' (Web only)
+   */
+  source: string;
 
-  try {
-    await CapacitorZip.zip({ source, destination });
-    console.log('Compression complete!');
-  } catch (error) {
-    console.error('Compression failed:', error);
-    throw error;
-  }
-};
+  /**
+   * Path to the directory where files will be extracted.
+   *
+   * The destination directory will be created if it doesn't exist. All files
+   * and folders from the archive will be extracted while preserving the
+   * directory structure.
+   *
+   * Platform-specific notes:
+   * - iOS: Use file:// URLs or absolute paths. Relative paths are resolved from the app's documents directory.
+   * - Android: Use absolute file paths. Includes protection against zip slip vulnerabilities.
+   * - Web: Not applicable. Files are downloaded individually to the browser's download folder.
+   *
+   * @since 7.0.0
+   * @example '/Users/app/Documents/extracted'
+   * @example '/var/mobile/Containers/Data/Application/.../Documents/files'
+   * @example 'file:///storage/emulated/0/Download/extracted-files'
+   */
+  destination: string;
+
+  /**
+   * Optional password for decrypting password-protected archives.
+   *
+   * Required if the ZIP archive was encrypted with a password. If the password
+   * is incorrect, extraction will fail with an error.
+   *
+   * Platform-specific notes:
+   * - iOS: Supports password-protected ZIP archives.
+   * - Android: Supports AES-encrypted archives created with zip4j or standard password-protected ZIPs.
+   * - Web: Not supported. Password-protected archives cannot be extracted in the browser.
+   *
+   * @since 7.0.0
+   * @example 'mySecurePassword123'
+   */
+  password?: string;
+}
 ```
 
-### Batch Archive Operations
+## Source Of Truth
 
-```typescript
-const batchZip = async (folders: string[]) => {
-  const results = [];
-
-  for (const folder of folders) {
-    const folderName = folder.split('/').pop();
-    const zipPath = `${folder}_${Date.now()}.zip`;
-
-    try {
-      await CapacitorZip.zip({
-        source: folder,
-        destination: zipPath
-      });
-      results.push({ folder, zipPath, success: true });
-    } catch (error) {
-      results.push({ folder, error, success: false });
-    }
-  }
-
-  return results;
-};
-```
-
-### Secure Archive Creation
-
-```typescript
-const createSecureBackup = async (dataPath: string) => {
-  // Zip the data
-  const zipPath = `${Filesystem.Directory.Documents}/secure_backup.zip`;
-
-  await CapacitorZip.zip({
-    source: dataPath,
-    destination: zipPath
-  });
-
-  // Optionally encrypt the zip file here using a crypto plugin
-
-  return zipPath;
-};
-```
-
-### Archive Validation
-
-```typescript
-const validateArchive = async (zipPath: string): Promise<boolean> => {
-  try {
-    const tempDir = `${Filesystem.Directory.Cache}/validate_${Date.now()}`;
-
-    // Try to extract
-    await CapacitorZip.unzip({
-      source: zipPath,
-      destination: tempDir
-    });
-
-    // Clean up
-    await Filesystem.rmdir({
-      path: tempDir,
-      directory: Directory.Cache,
-      recursive: true
-    });
-
-    return true;
-  } catch (error) {
-    console.error('Archive validation failed:', error);
-    return false;
-  }
-};
-```
-
-## Best Practices
-
-1. **Path Validation**: Always validate source and destination paths before operations
-2. **Error Handling**: Wrap all zip/unzip operations in try-catch blocks
-3. **Cleanup**: Remove temporary files and folders after operations
-4. **Large Files**: Be cautious with large archives on mobile devices
-5. **Permissions**: Ensure your app has necessary file system permissions
-
-## Troubleshooting
-
-### Common Issues
-
-**Zip operation fails**: Ensure source path exists and is accessible
-**Unzip fails**: Check that ZIP file is valid and destination path is writable
-**Out of storage**: Monitor available disk space before operations
-**Permission denied**: Verify file system permissions in your app configuration
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

@@ -1,0 +1,157 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-webview-guardian and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+```bash
+bun add @capgo/capacitor-webview-guardian
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { WebviewGuardian } from '@capgo/capacitor-webview-guardian';
+```
+
+## API Overview
+
+### `startMonitoring`
+
+Starts observing foreground events and automatically checks the WebView health.
+
+```typescript
+import { WebviewGuardian } from '@capgo/capacitor-webview-guardian';
+
+await WebviewGuardian.startMonitoring();
+```
+
+### `stopMonitoring`
+
+Stops any automatic foreground monitoring.
+
+```typescript
+import { WebviewGuardian } from '@capgo/capacitor-webview-guardian';
+
+await WebviewGuardian.stopMonitoring();
+```
+
+### `getState`
+
+Returns the latest known monitoring state.
+
+```typescript
+import { WebviewGuardian } from '@capgo/capacitor-webview-guardian';
+
+await WebviewGuardian.getState();
+```
+
+### `checkNow`
+
+Forces a WebView health probe immediately.
+
+```typescript
+import { WebviewGuardian } from '@capgo/capacitor-webview-guardian';
+
+await WebviewGuardian.checkNow();
+```
+
+## Type Reference
+
+### `StartMonitoringOptions`
+```typescript
+export interface StartMonitoringOptions {
+  /**
+   * Delay (in ms) before running a health check after the app re-enters the foreground.
+   * Defaults to 600ms to let the bridge finish resuming.
+   */
+  foregroundDebounceMs?: number;
+
+  /**
+   * Script executed via `evaluateJavascript`/`evaluateJavaScript` to confirm the WebView is alive.
+   * Defaults to `document.readyState`.
+   */
+  pingScript?: string;
+
+  /**
+   * Automatically reloads the WebView when a terminated render process is detected.
+   * Disable to receive `webviewCrashed` events and restart manually.
+   */
+  autoRestart?: boolean;
+
+  /**
+   * Strategy used when restarting the WebView. Defaults to `reload`.
+   */
+  restartStrategy?: RestartStrategy;
+
+  /**
+   * Custom HTTPS/HTTP URL to load when `restartStrategy` is `customUrl`.
+   */
+  customRestartUrl?: string;
+
+  /**
+   * Emits verbose logging in the native layer when true.
+   */
+  debug?: boolean;
+
+  /**
+   * Whether an immediate health check should be executed right after enabling monitoring.
+   * Defaults to `true`.
+   */
+  runInitialCheck?: boolean;
+}
+```
+
+### `GuardianState`
+```typescript
+export interface GuardianState {
+  monitoring: boolean;
+  reason: string;
+  timestamp: string;
+  lastHealthyAt?: string;
+  lastRestartAt?: string;
+  lastCrashAt?: string;
+  pendingRestartReason?: string;
+  error?: string;
+}
+```
+
+### `CheckNowOptions`
+```typescript
+export interface CheckNowOptions {
+  /**
+   * Text tag describing why a manual check is being requested.
+   */
+  reason?: string;
+}
+```
+
+### `CheckResult`
+```typescript
+export interface CheckResult {
+  healthy: boolean;
+  restarted: boolean;
+  reason: string;
+  timestamp: string;
+  error?: string;
+  pendingRestart?: boolean;
+}
+```
+
+### `GuardianEvent`
+```typescript
+export type GuardianEvent = GuardianState;
+```
+
+### `RestartStrategy`
+```typescript
+export type RestartStrategy = 'reload' | 'reloadFromOrigin' | 'customUrl';
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

@@ -1,89 +1,145 @@
 ---
 title: Getting Started
-description: Install and use the Twilio Video Capacitor plugin.
+description: "Install @capgo/capacitor-twilio-video and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import PluginSetupSteps from '@/components/doc/PluginSetupSteps.astro';
+## Install
 
-<PluginSetupSteps
-  pkg="@capgo/capacitor-twilio-video"
-  stepTitle="Issue a short-lived Twilio access token from your backend"
->
-  <ul>
-    <li>The plugin expects a valid Twilio Video access token before it can connect to a room.</li>
-    <li>Keep room creation and token issuance on your server instead of hardcoding credentials in the app.</li>
-  </ul>
-</PluginSetupSteps>
-
-## Permissions
-
-Add the required usage descriptions on iOS:
-
-```xml
-<key>NSCameraUsageDescription</key>
-<string>This app uses the camera for video calls.</string>
-<key>NSMicrophoneUsageDescription</key>
-<string>This app uses the microphone for video calls.</string>
+```bash
+bun add @capgo/capacitor-twilio-video
+bunx cap sync
 ```
 
-On Android, request camera and microphone access before joining a room.
+## Import
 
-## Authenticate and join a room
+```typescript
+import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
+```
+
+## API Overview
+
+### `login`
+
+Store and validate a Twilio Video access token minted by your backend.
+
+```typescript
+import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
+
+await CapacitorTwilioVideo.login({} as { accessToken: string });
+```
+
+### `logout`
+
+Clear the cached access token and leave the active room.
+
+```typescript
+import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
+
+await CapacitorTwilioVideo.logout();
+```
+
+### `isLoggedIn`
+
+Check whether a valid Twilio token is currently cached on the device.
+
+```typescript
+import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
+
+await CapacitorTwilioVideo.isLoggedIn();
+```
+
+### `joinRoom`
+
+Join a Twilio room and present the plugin's native in-app call overlay.
+
+```typescript
+import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
+
+await CapacitorTwilioVideo.joinRoom({} as { roomName: string; enableAudio?: boolean; enableVideo?: boolean });
+```
+
+### `leaveRoom`
+
+Leave the current room if connected.
+
+```typescript
+import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
+
+await CapacitorTwilioVideo.leaveRoom();
+```
+
+### `setMicrophoneEnabled`
+
+Enable/disable local microphone publishing.
+
+```typescript
+import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
+
+await CapacitorTwilioVideo.setMicrophoneEnabled({} as { enabled: boolean });
+```
+
+### `setCameraEnabled`
+
+Enable/disable local camera publishing.
+
+```typescript
+import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
+
+await CapacitorTwilioVideo.setCameraEnabled({} as { enabled: boolean });
+```
+
+### `getCallStatus`
+
+Return the current room name, media state, and participant count.
+
+```typescript
+import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
+
+await CapacitorTwilioVideo.getCallStatus();
+```
+
+### `checkMicrophonePermission`
+
+Check microphone permission state.
+
+```typescript
+import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
+
+await CapacitorTwilioVideo.checkMicrophonePermission();
+```
+
+### `requestMicrophonePermission`
+
+Request microphone permission.
 
 ```typescript
 import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
 
 await CapacitorTwilioVideo.requestMicrophonePermission();
+```
+
+### `checkCameraPermission`
+
+Check camera permission state.
+
+```typescript
+import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
+
+await CapacitorTwilioVideo.checkCameraPermission();
+```
+
+### `requestCameraPermission`
+
+Request camera permission.
+
+```typescript
+import { CapacitorTwilioVideo } from '@capgo/capacitor-twilio-video';
+
 await CapacitorTwilioVideo.requestCameraPermission();
-
-await CapacitorTwilioVideo.login({
-  accessToken: 'TWILIO_ACCESS_TOKEN',
-});
-
-await CapacitorTwilioVideo.joinRoom({
-  roomName: 'support-room',
-  enableAudio: true,
-  enableVideo: true,
-});
 ```
 
-## Listen for room lifecycle events
+## Source Of Truth
 
-```typescript
-await CapacitorTwilioVideo.addListener('roomConnected', ({ roomName, participantCount }) => {
-  console.log('Connected to room', roomName, participantCount);
-});
-
-await CapacitorTwilioVideo.addListener('participantConnected', (event) => {
-  console.log('Participant joined', event);
-});
-
-await CapacitorTwilioVideo.addListener('roomReconnecting', () => {
-  console.log('Reconnecting to Twilio Video');
-});
-```
-
-## Toggle local media
-
-```typescript
-await CapacitorTwilioVideo.setMicrophoneEnabled({ enabled: false });
-await CapacitorTwilioVideo.setCameraEnabled({ enabled: true });
-
-const status = await CapacitorTwilioVideo.getCallStatus();
-console.log(status.callState, status.participantCount);
-```
-
-## Leave the room
-
-```typescript
-await CapacitorTwilioVideo.leaveRoom();
-await CapacitorTwilioVideo.logout();
-```
-
-## Recommended architecture
-
-- Use this plugin for room connection and media state, not for token generation.
-- Keep your visual call UI in your framework layer and react to plugin events.
-- Rotate access tokens from your backend so reconnects and multi-device use stay secure.
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

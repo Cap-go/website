@@ -1,254 +1,224 @@
 ---
-title: Getting Started with Fast SQL
-description: Install and configure the **@capgo/capacitor-fast-sql** plugin for high-performance native SQLite database access
+title: Getting Started
+description: "Install @capgo/capacitor-fast-sql and start using its current Capacitor API."
+sidebar:
+  order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps, Card, CardGrid } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-fast-sql" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+```bash
+bun add @capgo/capacitor-fast-sql
+bunx cap sync
+```
 
-2. **Sync with native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-3. **Configure platforms**
-   
-   ### iOS
-   Allow local network access in `Info.plist`:
-   ```xml title="ios/App/App/Info.plist"
-   <key>NSAppTransportSecurity</key>
-   <dict>
-       <key>NSAllowsLocalNetworking</key>
-       <true/>
-   </dict>
-   ```
-
-   ### Android
-   Add cleartext exception for localhost traffic:
-   ```xml title="android/app/src/main/AndroidManifest.xml"
-   <application android:networkSecurityConfig="@xml/network_security_config">
-       ...
-   </application>
-   ```
-
-   ### Web
-   Install sql.js for web storage fallback:
-   ```bash
-   npm install sql.js
-   ```
-</Steps>
-
-## Why Fast SQL?
-
-Fast SQL avoids heavy bridge serialization by using a local HTTP transport to native SQLite, which is much faster for large result sets and sync-style writes.
-
-## Basic Usage
+## Import
 
 ```typescript
-import { FastSQL, IsolationLevel, KeyValueStore } from '@capgo/capacitor-fast-sql';
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+```
 
-const db = await FastSQL.connect({
+## API Overview
+
+### `connect`
+
+Initialize the database connection and start the HTTP server.
+
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+const conn = await CapgoCapacitorFastSql.connect({ database: 'myapp' });
+console.log('Connected on port:', conn.port);
+```
+
+### `disconnect`
+
+Close database connection and stop the HTTP server.
+
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+await CapgoCapacitorFastSql.disconnect({ database: 'myapp' });
+```
+
+### `getServerInfo`
+
+Get the HTTP server port and token for direct communication.
+
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+const info = await CapgoCapacitorFastSql.getServerInfo({ database: 'myapp' });
+console.log('Server port:', info.port);
+```
+
+### `execute`
+
+Execute a SQL query via Capacitor bridge (for simple queries).
+For better performance with large datasets, use the HTTP protocol directly via SQLConnection class.
+
+```typescript
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+const result = await CapgoCapacitorFastSql.execute({
   database: 'myapp',
-  encrypted: false,
-  readOnly: false,
+  statement: 'SELECT * FROM users WHERE age > ?',
+  params: [18]
 });
-
-await db.execute(`
-  CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    email TEXT UNIQUE,
-    created_at INTEGER DEFAULT (strftime('%s', 'now'))
-  )
-`);
-
-await db.run('INSERT INTO users (name, email) VALUES (?, ?)', ['John', 'john@example.com']);
-const users = await db.query('SELECT * FROM users');
+console.log('Rows:', result.rows);
 ```
 
-## Core connection methods
+### `beginTransaction`
 
-- `execute(statement, params?)` -> returns full SQL result
-- `query(statement, params?)` -> returns `rows`
-- `run(statement, params?)` -> returns `{ rowsAffected, insertId }`
-- `executeBatch(operations)` -> returns an array of results
+Begin a database transaction.
 
 ```typescript
-import { type SQLBatchOperation } from '@capgo/capacitor-fast-sql';
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
 
-const rows = await db.query('SELECT * FROM users WHERE email LIKE ?', ['john%']);
-
-const batch: SQLBatchOperation[] = [
-  { statement: 'INSERT INTO users (name, email) VALUES (?, ?)', params: ['Alice', 'alice@acme.dev'] },
-  { statement: 'INSERT INTO users (name, email) VALUES (?, ?)', params: ['Bob', 'bob@acme.dev'] },
-];
-await db.executeBatch(batch);
+await CapgoCapacitorFastSql.beginTransaction({ database: 'myapp' });
+// Execute multiple operations
+await CapgoCapacitorFastSql.commitTransaction({ database: 'myapp' });
 ```
 
-## Transactions
+### `commitTransaction`
 
-### callback helper
+Commit the current transaction.
 
 ```typescript
-await db.transaction(async (tx) => {
-  await tx.run('UPDATE accounts SET balance = balance - 100 WHERE id = ?', [1]);
-  await tx.run('UPDATE accounts SET balance = balance + 100 WHERE id = ?', [2]);
-});
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+await CapgoCapacitorFastSql.commitTransaction({ database: 'myapp' });
 ```
 
-### explicit control
+### `rollbackTransaction`
+
+Rollback the current transaction.
 
 ```typescript
-import { IsolationLevel } from '@capgo/capacitor-fast-sql';
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
 
-await db.beginTransaction(IsolationLevel.Serializable);
 try {
-  await db.run('UPDATE wallets SET points = points - 1 WHERE user_id = ?', [42]);
-  await db.commit();
+  await CapgoCapacitorFastSql.beginTransaction({ database: 'myapp' });
+  // Operations...
+  await CapgoCapacitorFastSql.commitTransaction({ database: 'myapp' });
 } catch (error) {
-  await db.rollback();
-  throw error;
+  await CapgoCapacitorFastSql.rollbackTransaction({ database: 'myapp' });
 }
 ```
 
-Supported isolation levels:
-- `ReadUncommitted`
-- `ReadCommitted`
-- `RepeatableRead`
-- `Serializable`
+### `configureWeb`
 
-## Binary data (BLOB)
+Configure web-specific options for the sql.js WASM module.
 
-```typescript
-const imageData = new Uint8Array([0xFF, 0xD8, 0xFF, 0xE0]);
-await db.run('INSERT INTO assets (name, data) VALUES (?, ?)', ['avatar', imageData]);
-
-const rows = await db.query('SELECT data FROM assets WHERE name = ?', ['avatar']);
-const retrieved = rows[0].data; // Uint8Array
-```
-
-## Encryption and read-only modes
+Call this **before** the first `connect()` call to load sql.js from a
+locally bundled path instead of the default CDN. This method is a no-op
+on iOS and Android.
 
 ```typescript
-const secureDb = await FastSQL.connect({
-  database: 'secure_db',
-  encrypted: true,
-  encryptionKey: 'replace-with-a-strong-key',
+import { CapgoCapacitorFastSql } from '@capgo/capacitor-fast-sql';
+
+// Configure once at app startup (web only)
+await CapgoCapacitorFastSql.configureWeb({
+  sqlJsUrl: '/assets/sql-wasm.js',
+  wasmUrl: '/assets/sql-wasm.wasm',
 });
-
-const readOnlyDb = await FastSQL.connect({
-  database: 'public_db',
-  readOnly: true,
-});
+const db = await FastSQL.connect({ database: 'myapp' });
 ```
 
-On Android, encrypted mode uses SQLCipher; include dependency in app `build.gradle`.
+## Type Reference
 
-## KeyValueStore
-
-`KeyValueStore` is a convenience wrapper for mobile key/value data.
-
+### `SQLConnectionOptions`
+Database connection options.
 ```typescript
-import { KeyValueStore } from '@capgo/capacitor-fast-sql';
+export interface SQLConnectionOptions {
+  /**
+   * Database name (file will be created in app data directory)
+   */
+  database: string;
 
-const kv = await KeyValueStore.open({
-  database: 'kv',
-  store: 'session',
-  encrypted: true,
-  encryptionKey: 'super-secret-key',
-});
+  /**
+   * Enable encryption (iOS/Android only)
+   */
+  encrypted?: boolean;
 
-await kv.set('session', { token: 'abc', expiresAt: Date.now() + 3600_000 });
-const session = await kv.get('session');
-await kv.has('session');
-await kv.keys();
-await kv.remove('session');
-await kv.clear();
-await kv.close();
-```
+  /**
+   * Encryption key (required if encrypted is true)
+   */
+  encryptionKey?: string;
 
-## Connection lifecycle
-
-```typescript
-await FastSQL.disconnect('myapp');
-await FastSQL.disconnectAll();
-const openDatabases = FastSQL.getOpenDatabases();
-const same = FastSQL.getConnection('myapp');
-```
-
-## Error handling
-
-```typescript
-try {
-  await FastSQL.connect({ database: 'myapp' });
-  await db.query('SELECT * FROM unknown_table');
-} catch (error) {
-  console.error('Fast SQL error:', error);
+  /**
+   * Read-only mode
+   */
+  readOnly?: boolean;
 }
 ```
 
-## Common SQL Patterns
-
-### Check if Table Exists
-
+### `SQLValue`
+SQL value types supported by the plugin.
 ```typescript
-const result = await db.query(
-  "SELECT name FROM sqlite_master WHERE type='table' AND name=?",
-  ['users']
-);
-
-const tableExists = result.length > 0;
+export type SQLValue = string | number | boolean | null | Uint8Array;
 ```
 
-### Get Table Schema
-
+### `SQLResult`
+Result of a SQL query execution.
 ```typescript
-const schema = await db.query('PRAGMA table_info(users)');
-console.log('Columns:', schema);
+export interface SQLResult {
+  /**
+   * Rows returned by the query (for SELECT statements)
+   */
+  rows: SQLRow[];
+
+  /**
+   * Number of rows affected by the query (for INSERT/UPDATE/DELETE)
+   */
+  rowsAffected: number;
+
+  /**
+   * ID of the last inserted row (for INSERT statements with auto-increment)
+   */
+  insertId?: number;
+}
 ```
 
-### Count Rows
-
+### `IsolationLevel`
+Transaction isolation levels.
 ```typescript
-const result = await db.query('SELECT COUNT(*) as count FROM users');
-const count = result[0].count;
+export enum IsolationLevel {
+  ReadUncommitted = 'READ UNCOMMITTED',
+  ReadCommitted = 'READ COMMITTED',
+  RepeatableRead = 'REPEATABLE READ',
+  Serializable = 'SERIALIZABLE',
+}
 ```
 
-### Pagination
-
+### `WebConfig`
+Web platform configuration for the sql.js WASM module. Use with `configureWeb()` to load sql.js from a locally bundled path instead of the default CDN.
 ```typescript
-const pageSize = 20;
-const page = 1;
-const offset = (page - 1) * pageSize;
+export interface WebConfig {
+  /**
+   * URL to the sql.js JavaScript file (`sql-wasm.js`).
+   * When omitted, the plugin loads from the cdnjs CDN.
+   * @example '/assets/sql-wasm.js'
+   */
+  sqlJsUrl?: string;
 
-const users = await db.query(
-  'SELECT * FROM users ORDER BY created_at DESC LIMIT ? OFFSET ?',
-  [pageSize, offset]
-);
+  /**
+   * URL to the sql.js WebAssembly binary (`sql-wasm.wasm`).
+   * When omitted, the plugin loads from the cdnjs CDN.
+   * @example '/assets/sql-wasm.wasm'
+   */
+  wasmUrl?: string;
+}
 ```
 
-## Performance Tips
+### `SQLRow`
+SQL row result - values indexed by column name.
+```typescript
+export interface SQLRow {
+  [column: string]: SQLValue;
+}
+```
 
-1. **Use Transactions** for multiple operations - significantly faster than individual commits
-2. **Use Batch Operations** for bulk inserts - more efficient than loops
-3. **Create Indexes** on frequently queried columns
-4. **Use Prepared Statements** with parameters (?) - prevents SQL injection and improves performance
-5. **Use HTTP Protocol Directly** for very large result sets
-6. **Close Connections** when not in use to free resources
+## Source Of Truth
 
-## Next Steps
-
-Check out the [complete tutorial](/plugins/capacitor-fast-sql) for advanced patterns including:
-- Database service architecture
-- Migration systems
-- Sync engines
-- Complex queries and joins
-- Performance optimization
-
-## Related Documentation
-
-- [Migrate from Ionic Secure Storage](/docs/upgrade/from-ionic-secure-storage/)
-- [Ionic enterprise plugins migration solution](/solutions/ionic-enterprise-plugins/)
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

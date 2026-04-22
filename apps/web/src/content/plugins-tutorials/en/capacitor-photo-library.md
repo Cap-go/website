@@ -1,87 +1,67 @@
 ---
 locale: en
 ---
-
-# Complete Tutorial: Using @capgo/capacitor-photo-library for iOS and Android Mobile Apps
-
-The `@capgo/capacitor-photo-library` package provides native photo library functionality for your Capacitor mobile applications on iOS and Android. This comprehensive tutorial will guide you through integrating photo library features into your iOS and Android mobile apps built with Capacitor or Cordova, enabling cross-platform mobile app development with native capabilities.
-
-## What is Capacitor?
-
-Capacitor is Ionic's modern native runtime that enables developers to build native iOS apps, Android apps, and Progressive Web Apps from a single codebase. Unlike older Cordova-based mobile development, Capacitor provides direct access to native iOS and Android APIs, making it the ideal choice for building production-ready mobile applications. This Capacitor plugin brings photo library capabilities to both iOS and Android mobile platforms.
-
-## Why Use photo library in Your Capacitor Mobile App?
-
-The @capgo/capacitor-photo-library plugin enables your iOS and Android mobile applications to leverage native photo library functionality without writing platform-specific code. This Capacitor plugin provides a unified JavaScript API that works seamlessly on both iOS and Android mobile devices, making it perfect for cross-platform mobile app development.
-
-Benefits for iOS and Android mobile applications:
-- Native photo library performance on iOS and Android devices
-- Unified API for both iOS and Android mobile platforms
-- No need for separate native iOS or Android code
-- Works with Capacitor and Cordova mobile frameworks
-- Full TypeScript support for mobile app development
-- Seamless integration with existing Capacitor mobile apps
-
----
-locale: en
----
 # Using @capgo/capacitor-photo-library
 
-The `@capgo/capacitor-photo-library` package provides native functionality for your Capacitor app. Here is a tutorial on how to use this package.
+Capacitor plugin Displays photo gallery as web page, or boring native screen which you cannot modify but require no authorization.
 
-## Installation
-
-To install the package, run the following command:
+## Install
 
 ```bash
-npm install @capgo/capacitor-photo-library
-npx cap sync
+bun add @capgo/capacitor-photo-library
+bunx cap sync
 ```
 
-## Usage
+## What This Plugin Exposes
 
-### Basic Example
+- `checkAuthorization` - Returns the current authorization status without prompting the user.
+- `requestAuthorization` - Requests access to the photo library if needed.
+- `getAlbums` - Retrieves the available albums.
+- `getLibrary` - Retrieves library assets along with URLs that can be displayed in the web view.
+
+## Example Usage
+
+### `checkAuthorization`
+
+Returns the current authorization status without prompting the user.
 
 ```typescript
-import { capacitorphotoliurary } from '@capgo/capacitor-photo-library';
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
 
-// Use the plugin methods here
+await PhotoLibrary.checkAuthorization();
 ```
 
-For detailed API documentation, please visit the [GitHub repository](https://github.com/Cap-go/capacitor-photo-library).
+### `requestAuthorization`
 
-That's it! You have successfully integrated @capgo/capacitor-photo-library into your Capacitor app.
+Requests access to the photo library if needed.
 
-## Platform-Specific Notes for iOS and Android
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
 
-### iOS Mobile Platform
+await PhotoLibrary.requestAuthorization();
+```
 
-- Compatible with iOS 10.0+ mobile devices (iPhone and iPad)
-- Uses native iOS APIs for photo library functionality
-- Optimized performance on iOS mobile platform
-- Full support for latest iOS versions
+### `getAlbums`
 
-### Android Mobile Platform
+Retrieves the available albums.
 
-- Compatible with Android 5.0 (API 21)+ mobile devices
-- Uses native Android APIs for photo library functionality
-- Works across all Android device manufacturers
-- Optimized for Android mobile platform
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
 
-## Capacitor vs Cordova for Mobile Development
+await PhotoLibrary.getAlbums();
+```
 
-While this photo library plugin works with both Capacitor and Cordova mobile frameworks, Capacitor offers significant advantages for iOS and Android mobile app development:
+### `getLibrary`
 
-- **Modern Architecture**: Better performance on iOS and Android mobile platforms
-- **Direct Native Access**: Easier integration with iOS and Android native APIs
-- **Improved Tooling**: Superior development experience for mobile apps
-- **Active Development**: Regular updates for iOS and Android compatibility
-- **Better Documentation**: Comprehensive guides for mobile app development
+Retrieves library assets along with URLs that can be displayed in the web view.
 
-## Conclusion
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
 
-You have successfully integrated @capgo/capacitor-photo-library into your Capacitor mobile application for iOS and Android. This plugin provides native photo library capabilities for both iOS and Android mobile platforms, enabling professional mobile app development with a unified codebase.
+await PhotoLibrary.getLibrary();
+```
 
-For detailed API documentation and advanced photo library features for mobile app development, visit the [GitHub repository](https://github.com/Cap-go/capacitor-photo-library).
+## Full Reference
 
-Whether you're building native iOS apps, Android mobile applications, or cross-platform Capacitor mobile apps, this photo library plugin provides the native capabilities you need for professional mobile app development on iOS and Android platforms.
+- GitHub: https://github.com/Cap-go/capacitor-photo-library/
+- Docs: /docs/plugins/photo-library/

@@ -1,390 +1,380 @@
 ---
 title: Getting Started
-description: Learn how to install and use the WeChat plugin to integrate WeChat functionality in your Capacitor app.
+description: "Install @capgo/capacitor-wechat and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-wechat" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-2. **Sync with native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
-
-## Configuration
-
-### WeChat App Registration
-
-Before using this plugin, you must register your app on the [WeChat Open Platform](https://open.weixin.qq.com/) to obtain an App ID.
-
-### iOS Configuration
-
-Add the following to your `Info.plist`:
-
-```xml
-<key>LSApplicationQueriesSchemes</key>
-<array>
-  <string>weixin</string>
-  <string>weixinULAPI</string>
-</array>
-
-<key>CFBundleURLTypes</key>
-<array>
-  <dict>
-    <key>CFBundleTypeRole</key>
-    <string>Editor</string>
-    <key>CFBundleURLName</key>
-    <string>weixin</string>
-    <key>CFBundleURLSchemes</key>
-    <array>
-      <string>YOUR_WECHAT_APP_ID</string>
-    </array>
-  </dict>
-</array>
+```bash
+bun add @capgo/capacitor-wechat
+bunx cap sync
 ```
 
-You'll need to integrate the WeChat SDK into your iOS project. Add the WeChat SDK to your `Podfile` or download it from the [WeChat Open Platform](https://developers.weixin.qq.com/doc/oplatform/en/Mobile_App/Access_Guide/iOS.html).
+## Import
 
-### Android Configuration
-
-Add the following to your `AndroidManifest.xml`:
-
-```xml
-<manifest>
-  <application>
-    <!-- WeChat callback activity -->
-    <activity
-      android:name=".wxapi.WXEntryActivity"
-      android:exported="true"
-      android:label="@string/app_name"
-      android:launchMode="singleTask"
-      android:theme="@android:style/Theme.Translucent.NoTitleBar">
-      <intent-filter>
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.DEFAULT" />
-      </intent-filter>
-    </activity>
-  </application>
-</manifest>
+```typescript
+import { CapacitorWechat } from '@capgo/capacitor-wechat';
 ```
 
-You'll need to integrate the WeChat SDK into your Android project. Add the WeChat SDK dependency to your `build.gradle` or download it from the [WeChat Open Platform](https://developers.weixin.qq.com/doc/oplatform/en/Mobile_App/Access_Guide/Android.html).
+## API Overview
 
-## Usage
+### `initialize`
 
-### Check WeChat Installation
+Initialize the WeChat SDK with your application credentials.
+
+You can also set these values in `capacitor.config.ts` under the `CapacitorWechat`
+plugin configuration. Calling this method overrides any bundled configuration at runtime.
 
 ```typescript
 import { CapacitorWechat } from '@capgo/capacitor-wechat';
 
-const checkWeChat = async () => {
-  const { installed } = await CapacitorWechat.isInstalled();
-  if (installed) {
-    console.log('WeChat is installed');
-  } else {
-    console.log('WeChat is not installed');
-  }
-};
+await CapacitorWechat.initialize({
+  appId: 'wx1234567890',
+  universalLink: 'https://example.com/app/'
+});
 ```
 
-### Authentication
-
-```typescript
-const loginWithWeChat = async () => {
-  try {
-    const { code, state } = await CapacitorWechat.auth({
-      scope: 'snsapi_userinfo', // or 'snsapi_login'
-      state: 'my_random_state'
-    });
-
-    // Send code to your backend to exchange for access token
-    const response = await fetch('https://yourapi.com/auth/wechat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ code })
-    });
-
-    const { access_token, openid } = await response.json();
-    console.log('Logged in with WeChat:', openid);
-  } catch (error) {
-    console.error('WeChat auth failed:', error);
-  }
-};
-```
-
-### Share Content
-
-#### Share Text
-
-```typescript
-const shareText = async () => {
-  await CapacitorWechat.share({
-    scene: 0, // 0 = Chat, 1 = Moments, 2 = Favorite
-    type: 'text',
-    text: 'Hello from Capacitor WeChat!'
-  });
-};
-```
-
-#### Share Link
-
-```typescript
-const shareLink = async () => {
-  await CapacitorWechat.share({
-    scene: 1, // Share to Moments
-    type: 'link',
-    title: 'Check out this awesome app!',
-    description: 'Built with Capacitor and WeChat SDK',
-    link: 'https://capacitorjs.com',
-    thumbUrl: 'https://capacitorjs.com/icon.png'
-  });
-};
-```
-
-#### Share Image
-
-```typescript
-const shareImage = async () => {
-  await CapacitorWechat.share({
-    scene: 0,
-    type: 'image',
-    imageUrl: 'https://example.com/image.png', // or base64 data
-    thumbUrl: 'https://example.com/thumb.png'
-  });
-};
-```
-
-### WeChat Pay
-
-```typescript
-const payWithWeChat = async () => {
-  // First, get payment parameters from your server
-  const paymentParams = await fetchPaymentParamsFromServer();
-
-  try {
-    await CapacitorWechat.sendPaymentRequest({
-      partnerId: paymentParams.partnerId,
-      prepayId: paymentParams.prepayId,
-      nonceStr: paymentParams.nonceStr,
-      timeStamp: paymentParams.timeStamp,
-      package: paymentParams.package, // Usually 'Sign=WXPay'
-      sign: paymentParams.sign
-    });
-
-    console.log('Payment successful!');
-  } catch (error) {
-    console.error('Payment failed:', error);
-  }
-};
-```
-
-### Open Mini Program
-
-```typescript
-const openMiniProgram = async () => {
-  await CapacitorWechat.openMiniProgram({
-    username: 'gh_xxxxxxxxxxxxx', // Mini program original ID
-    path: 'pages/index/index', // Path within mini program
-    type: 0 // 0 = Release, 1 = Test, 2 = Preview
-  });
-};
-```
-
-## API Reference
-
-### isInstalled()
+### `isInstalled`
 
 Check if WeChat app is installed on the device.
 
 ```typescript
-const result = await CapacitorWechat.isInstalled();
-// Returns: { installed: boolean }
+import { CapacitorWechat } from '@capgo/capacitor-wechat';
+
+const { installed } = await CapacitorWechat.isInstalled();
+if (installed) {
+  console.log('WeChat is installed');
+}
 ```
 
-### auth(options)
+### `auth`
 
 Authenticate user with WeChat OAuth.
 
 ```typescript
-interface WechatAuthOptions {
-  scope: string; // 'snsapi_userinfo' or 'snsapi_login'
-  state?: string; // Optional state parameter for CSRF protection
-}
+import { CapacitorWechat } from '@capgo/capacitor-wechat';
 
-const result = await CapacitorWechat.auth(options);
-// Returns: { code: string, state?: string }
+const { code, state } = await CapacitorWechat.auth({
+  scope: 'snsapi_userinfo',
+  state: 'my_state'
+});
+// Use code to get access token from your server
 ```
 
-### share(options)
+### `share`
 
 Share content to WeChat.
 
 ```typescript
-interface WechatShareOptions {
-  scene: number; // 0 = Session (chat), 1 = Timeline (moments), 2 = Favorite
-  type: 'text' | 'image' | 'link' | 'music' | 'video' | 'miniprogram';
-  text?: string; // For type 'text'
-  title?: string; // For type 'link', 'music', 'video', 'miniprogram'
-  description?: string; // For type 'link', 'music', 'video', 'miniprogram'
-  link?: string; // For type 'link'
-  imageUrl?: string; // Image URL or base64 data
-  thumbUrl?: string; // Thumbnail URL or base64 data
-  mediaUrl?: string; // For type 'music' or 'video'
-  miniProgramUsername?: string; // For type 'miniprogram'
-  miniProgramPath?: string; // For type 'miniprogram'
-  miniProgramType?: number; // For type 'miniprogram': 0 = Release, 1 = Test, 2 = Preview
-  miniProgramWebPageUrl?: string; // Fallback URL for type 'miniprogram'
-}
+import { CapacitorWechat } from '@capgo/capacitor-wechat';
 
-await CapacitorWechat.share(options);
+// Share text
+await CapacitorWechat.share({
+  scene: 0, // 0 = Session, 1 = Timeline, 2 = Favorite
+  type: 'text',
+  text: 'Hello WeChat!'
+});
+
+// Share link
+await CapacitorWechat.share({
+  scene: 1,
+  type: 'link',
+  title: 'My Website',
+  description: 'Check out my website',
+  link: 'https://example.com',
+  imageUrl: 'https://example.com/image.jpg'
+});
 ```
 
-### sendPaymentRequest(options)
+### `sendPaymentRequest`
 
 Send payment request to WeChat Pay.
 
 ```typescript
-interface WechatPaymentOptions {
-  partnerId: string; // Merchant ID
-  prepayId: string; // Prepay ID from unified order API
-  nonceStr: string; // Random string
-  timeStamp: string; // Timestamp
-  package: string; // Usually 'Sign=WXPay'
-  sign: string; // Signature
-}
+import { CapacitorWechat } from '@capgo/capacitor-wechat';
 
-await CapacitorWechat.sendPaymentRequest(options);
+// Get payment params from your server first
+const paymentParams = await fetchPaymentParamsFromServer();
+
+await CapacitorWechat.sendPaymentRequest({
+  partnerId: paymentParams.partnerId,
+  prepayId: paymentParams.prepayId,
+  nonceStr: paymentParams.nonceStr,
+  timeStamp: paymentParams.timeStamp,
+  package: paymentParams.package,
+  sign: paymentParams.sign
+});
 ```
 
-### openMiniProgram(options)
+### `openMiniProgram`
 
 Open WeChat mini-program.
 
 ```typescript
-interface WechatMiniProgramOptions {
-  username: string; // Mini-program username (original ID)
-  path?: string; // Path to open in mini-program
-  type?: number; // 0 = Release, 1 = Test, 2 = Preview
-}
+import { CapacitorWechat } from '@capgo/capacitor-wechat';
 
-await CapacitorWechat.openMiniProgram(options);
+const { extMsg } = await CapacitorWechat.openMiniProgram({
+  username: 'gh_xxxxxxxxxxxxx',
+  path: 'pages/index/index',
+  type: 0 // 0 = Release, 1 = Test, 2 = Preview
+});
 ```
 
-### chooseInvoice(options)
+### `chooseInvoice`
 
-Choose invoice from WeChat (for business apps).
-
-```typescript
-interface WechatInvoiceOptions {
-  appId: string;
-  signType: string;
-  cardSign: string;
-  timeStamp: string;
-  nonceStr: string;
-}
-
-const result = await CapacitorWechat.chooseInvoice(options);
-// Returns: { cards: string[] }
-```
-
-### getPluginVersion()
-
-Get the native plugin version.
-
-```typescript
-const result = await CapacitorWechat.getPluginVersion();
-// Returns: { version: string }
-```
-
-## Complete Example
+Choose invoice from WeChat.
 
 ```typescript
 import { CapacitorWechat } from '@capgo/capacitor-wechat';
 
-export class WeChatService {
-  async init() {
-    const { installed } = await CapacitorWechat.isInstalled();
-    if (!installed) {
-      throw new Error('WeChat is not installed');
-    }
-  }
+const { cards } = await CapacitorWechat.chooseInvoice({
+  appId: 'your_app_id',
+  signType: 'SHA1',
+  cardSign: 'signature',
+  timeStamp: '1234567890',
+  nonceStr: 'random_string'
+});
+console.log('Selected cards:', cards);
+```
 
-  async login() {
-    const { code } = await CapacitorWechat.auth({
-      scope: 'snsapi_userinfo',
-      state: Math.random().toString(36).substring(7)
-    });
+## Type Reference
 
-    // Exchange code for access token on your backend
-    const response = await fetch('/api/auth/wechat', {
-      method: 'POST',
-      body: JSON.stringify({ code })
-    });
+### `WechatInitializationOptions`
+WeChat initialization options.
+```typescript
+export interface WechatInitializationOptions {
+  /**
+   * Required WeChat application ID.
+   */
+  appId: string;
 
-    return response.json();
-  }
-
-  async shareToChat(title: string, description: string, link: string, imageUrl: string) {
-    await CapacitorWechat.share({
-      scene: 0, // Chat
-      type: 'link',
-      title,
-      description,
-      link,
-      thumbUrl: imageUrl
-    });
-  }
-
-  async shareToMoments(title: string, description: string, link: string, imageUrl: string) {
-    await CapacitorWechat.share({
-      scene: 1, // Moments
-      type: 'link',
-      title,
-      description,
-      link,
-      thumbUrl: imageUrl
-    });
-  }
+  /**
+   * iOS universal link that is associated with your WeChat application.
+   */
+  universalLink?: string;
 }
 ```
 
-## Important Notes
+### `WechatAuthOptions`
+WeChat authentication options.
+```typescript
+export interface WechatAuthOptions {
+  /**
+   * OAuth scope. Use 'snsapi_userinfo' for user info or 'snsapi_login' for login only.
+   */
+  scope: string;
 
-1. **WeChat SDK Integration**: This plugin provides the Capacitor interface, but you need to integrate the official WeChat SDK into your native projects.
+  /**
+   * Optional state parameter for CSRF protection.
+   */
+  state?: string;
+}
+```
 
-2. **App Registration**: You must register your app on the [WeChat Open Platform](https://open.weixin.qq.com/) to get an App ID.
+### `WechatAuthResponse`
+WeChat authentication response.
+```typescript
+export interface WechatAuthResponse {
+  /**
+   * Authorization code to exchange for access token.
+   */
+  code: string;
 
-3. **Universal Links (iOS)**: For iOS 13+, you need to configure Universal Links for WeChat callbacks.
+  /**
+   * State parameter if provided in request.
+   */
+  state?: string;
+}
+```
 
-4. **Backend Integration**: Authentication and payment features require backend integration to exchange codes for tokens and prepare payment parameters.
+### `WechatShareOptions`
+WeChat share options.
+```typescript
+export interface WechatShareOptions {
+  /**
+   * Share scene: 0 = Session (chat), 1 = Timeline (moments), 2 = Favorite.
+   */
+  scene: number;
 
-5. **Testing**: WeChat features require testing on physical devices - they will not work in simulators.
+  /**
+   * Share type: 'text', 'image', 'link', 'music', 'video', 'miniprogram'.
+   */
+  type: 'text' | 'image' | 'link' | 'music' | 'video' | 'miniprogram';
 
-## Best Practices
+  /**
+   * Text content (for type 'text').
+   */
+  text?: string;
 
-1. **Always check if WeChat is installed** before attempting to use features.
-2. **Handle errors gracefully** with try-catch blocks.
-3. **Use state parameter** in auth requests for CSRF protection.
-4. **Validate payment responses** on your backend before granting access.
-5. **Compress images** before sharing to reduce data usage.
+  /**
+   * Title (for type 'link', 'music', 'video', 'miniprogram').
+   */
+  title?: string;
 
-## Platform Notes
+  /**
+   * Description (for type 'link', 'music', 'video', 'miniprogram').
+   */
+  description?: string;
 
-### iOS
-- Requires iOS 10.0+
-- Uses official WeChat SDK for iOS
-- Requires Universal Links configuration for iOS 13+
+  /**
+   * Link URL (for type 'link').
+   */
+  link?: string;
 
-### Android
-- Requires Android 5.0 (API 21)+
-- Uses official WeChat SDK for Android
-- Requires WXEntryActivity configuration
+  /**
+   * Image URL or base64 data.
+   */
+  imageUrl?: string;
 
-### Web
-- Not supported on web platform
+  /**
+   * Thumbnail URL or base64 data (for type 'link', 'music', 'video').
+   */
+  thumbUrl?: string;
+
+  /**
+   * Music or video URL (for type 'music', 'video').
+   */
+  mediaUrl?: string;
+
+  /**
+   * Mini-program username (for type 'miniprogram').
+   */
+  miniProgramUsername?: string;
+
+  /**
+   * Mini-program path (for type 'miniprogram').
+   */
+  miniProgramPath?: string;
+
+  /**
+   * Mini-program type: 0 = Release, 1 = Test, 2 = Preview (for type 'miniprogram').
+   */
+  miniProgramType?: number;
+
+  /**
+   * Mini-program web page URL fallback (for type 'miniprogram').
+   */
+  miniProgramWebPageUrl?: string;
+}
+```
+
+### `WechatPaymentOptions`
+WeChat payment options.
+```typescript
+export interface WechatPaymentOptions {
+  /**
+   * Partner ID (merchant ID).
+   */
+  partnerId: string;
+
+  /**
+   * Prepay ID from unified order API.
+   */
+  prepayId: string;
+
+  /**
+   * Random string.
+   */
+  nonceStr: string;
+
+  /**
+   * Timestamp.
+   */
+  timeStamp: string;
+
+  /**
+   * Package value, typically 'Sign=WXPay'.
+   */
+  package: string;
+
+  /**
+   * Signature.
+   */
+  sign: string;
+}
+```
+
+### `WechatMiniProgramOptions`
+WeChat mini-program options.
+```typescript
+export interface WechatMiniProgramOptions {
+  /**
+   * Mini-program username (original ID).
+   */
+  username: string;
+
+  /**
+   * Path to open in mini-program.
+   */
+  path?: string;
+
+  /**
+   * Mini-program type: 0 = Release, 1 = Test, 2 = Preview.
+   */
+  type?: number;
+}
+```
+
+### `WechatInvoiceOptions`
+WeChat invoice options.
+```typescript
+export interface WechatInvoiceOptions {
+  /**
+   * App ID.
+   */
+  appId: string;
+
+  /**
+   * Signature type.
+   */
+  signType: string;
+
+  /**
+   * Card signature.
+   */
+  cardSign: string;
+
+  /**
+   * Timestamp.
+   */
+  timeStamp: string;
+
+  /**
+   * Random string.
+   */
+  nonceStr: string;
+}
+```
+
+### `WechatInvoiceResponse`
+WeChat invoice response.
+```typescript
+export interface WechatInvoiceResponse {
+  /**
+   * Array of selected card IDs.
+   */
+  cards: WechatInvoiceCard[];
+}
+```
+
+### `WechatInvoiceCard`
+WeChat invoice card item.
+```typescript
+export interface WechatInvoiceCard {
+  /**
+   * The selected card identifier.
+   */
+  cardId: string;
+
+  /**
+   * Encrypted code returned by WeChat.
+   */
+  encryptCode?: string;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

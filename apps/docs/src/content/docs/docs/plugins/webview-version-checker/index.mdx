@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-webview-version-checker"
-description: Capacitor plugin for checking Android WebView version freshness, emitting runtime status events, and showing native update prompts.
+description: "Capacitor plugin for checking outdated Android WebView engines, emitting status events, and presenting native update prompts."
 tableOfContents: false
 next: false
 prev: false
@@ -8,39 +8,43 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Detect outdated Android WebView versions at runtime and guide users to updates with native UX.
-  image:
-    file: ~public/icons/plugins/webview-version-checker.svg
+  tagline: "Public API for checking WebView freshness and guiding users to updates."
   actions:
     - text: Get started
       link: /docs/plugins/webview-version-checker/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-webview-version-checker/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Runtime version check" icon="rocket">
-    Check the active Android WebView provider version while the app is running.
-  </Card>
-  <Card title="Native update prompt" icon="setting">
-    Show a native modal and redirect users to the correct Play Store destination.
-  </Card>
-  <Card title="Event-driven API" icon="open-book">
-    Listen for `webViewLatest`, `webViewOutdated`, and `statusChanged` to drive app logic.
-  </Card>
-  <Card title="Soft enforcement" icon="heart">
-    Let users continue using the app while still pushing them to update their WebView.
-  </Card>
-</CardGrid>
+Public API for checking WebView freshness and guiding users to updates.
 
-## Platform docs
+## Core Capabilities
 
-- [Getting started](/docs/plugins/webview-version-checker/getting-started/)
-- [Android setup](/docs/plugins/webview-version-checker/android/)
-- [iOS notes](/docs/plugins/webview-version-checker/ios/)
+- `check` - Runs a version check and returns the latest known status.
+- `startMonitoring` - Enables background monitoring (typically on app resume).
+- `stopMonitoring` - Disables monitoring.
+- `getLastStatus` - Returns the last resolved status, or `null` if no check was run yet.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `check` | Runs a version check and returns the latest known status. |
+| `startMonitoring` | Enables background monitoring (typically on app resume). |
+| `stopMonitoring` | Disables monitoring. |
+| `getLastStatus` | Returns the last resolved status, or `null` if no check was run yet. |
+| `showUpdatePrompt` | Shows a native prompt asking the user to update the WebView. |
+| `openUpdatePage` | Opens the configured update page directly. |
+| `addListener` | Fired for every successful status evaluation. |
+| `addListener` | Fired when the state resolves to `latest`. |
+| `addListener` | Fired when the state resolves to `outdated`. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-webview-version-checker](https://github.com/Cap-go/capacitor-webview-version-checker/).

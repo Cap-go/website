@@ -1,138 +1,192 @@
 ---
 title: Getting Started
-description: Learn how to install and use the Capacitor Alarm plugin to manage native alarms on iOS and Android.
+description: "Install @capgo/capacitor-alarm and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+## Install
 
-## Installation
+```bash
+bun add @capgo/capacitor-alarm
+bunx cap sync
+```
 
-<Tabs>
-  <TabItem label="npm">
-    ```bash
-    npm install @capgo/capacitor-alarm
-    npx cap sync
-    ```
-  </TabItem>
-  <TabItem label="yarn">
-    ```bash
-    yarn add @capgo/capacitor-alarm
-    npx cap sync
-    ```
-  </TabItem>
-  <TabItem label="pnpm">
-    ```bash
-    pnpm add @capgo/capacitor-alarm
-    npx cap sync
-    ```
-  </TabItem>
-  <TabItem label="bun">
-    ```bash
-    bun add @capgo/capacitor-alarm
-    npx cap sync
-    ```
-  </TabItem>
-</Tabs>
-
-## Requirements
-
-- **iOS**: iOS 26+ only. This plugin relies on `AlarmKit` APIs and will report unsupported on earlier versions or when the framework is unavailable.
-- **Android**: Uses `AlarmClock` intents; behavior depends on the default Clock app and OEM policies.
-
-Note: This plugin only exposes native alarm actions (create/open). It does not implement any custom in-app alarm scheduling/CRUD.
-
-## API
-
-### createAlarm(...)
+## Import
 
 ```typescript
-createAlarm(options: NativeAlarmCreateOptions) => Promise<NativeActionResult>
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
 ```
+
+## API Overview
+
+### `createAlarm`
 
 Create a native OS alarm using the platform clock app.
-On Android this uses the Alarm Clock intent; on iOS this use AlarmKit if available (iOS 26+).
-
-| Param         | Type                                                                          |
-| ------------- | ----------------------------------------------------------------------------- |
-| **`options`** | `NativeAlarmCreateOptions` |
-
-**Returns:** `Promise<NativeActionResult>`
-
-### openAlarms()
+On Android this uses the Alarm Clock intent; on iOS this uses AlarmKit if available (iOS 16+).
 
 ```typescript
-openAlarms() => Promise<NativeActionResult>
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
+
+const result = await CapgoAlarm.createAlarm({
+  hour: 7,
+  minute: 30,
+  label: 'Wake up',
+  skipUi: false,
+  vibrate: true
+});
+console.log('Alarm created:', result.success);
 ```
+
+### `openAlarms`
 
 Open the platform's native alarm list UI, if available.
 
-**Returns:** `Promise<NativeActionResult>`
-
-### getOSInfo()
-
 ```typescript
-getOSInfo() => Promise<OSInfo>
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
+
+const result = await CapgoAlarm.openAlarms();
+if (result.success) {
+  console.log('Alarms UI opened');
+}
 ```
+
+### `getOSInfo`
 
 Get information about the OS and capabilities.
 
-**Returns:** `Promise<OSInfo>`
-
-### requestPermissions(...)
-
 ```typescript
-requestPermissions(options?: { exactAlarm?: boolean | undefined; } | undefined) => Promise<PermissionResult>
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
+
+const info = await CapgoAlarm.getOSInfo();
+console.log('Platform:', info.platform);
+console.log('Supports native alarms:', info.supportsNativeAlarms);
+if (info.platform === 'android') {
+  console.log('Can schedule exact alarms:', info.canScheduleExactAlarms);
+}
 ```
+
+### `requestPermissions`
 
 Request relevant permissions for alarm usage on the platform.
 On Android, may route to settings for exact alarms.
 
-| Param         | Type                                   |
-| ------------- | -------------------------------------- |
-| **`options`** | `{ exactAlarm?: boolean; }` |
+```typescript
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
 
-**Returns:** `Promise<PermissionResult>`
+const result = await CapgoAlarm.requestPermissions({ exactAlarm: true });
+if (result.granted) {
+  console.log('Permissions granted');
+} else {
+  console.log('Permissions denied');
+}
+```
 
-## Interfaces
+### `checkPermissions`
 
-### NativeActionResult
+Check the current permission state for native alarm access without triggering UI.
+On iOS this reports AlarmKit readiness; on Android it reports capability details.
 
-| Prop          | Type                 |
-| ------------- | -------------------- |
-| **`success`** | `boolean` |
-| **`message`** | `string`  |
+```typescript
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
 
-### NativeAlarmCreateOptions
+const status = await CapgoAlarm.checkPermissions();
+console.log('AlarmKit allowed?', status.details?.alarmKit);
+```
 
+### `getAlarms`
+
+Get a list of alarms scheduled by this app.
+On iOS 26+, returns alarms from AlarmKit. On Android, this is not supported
+as the system does not provide an API to query alarms.
+
+```typescript
+import { CapgoAlarm } from '@capgo/capacitor-alarm';
+
+const { alarms } = await CapgoAlarm.getAlarms();
+console.log('Scheduled alarms:', alarms);
+alarms.forEach(alarm => {
+  console.log(`Alarm ${alarm.id}: ${alarm.hour}:${alarm.minute} - ${alarm.label}`);
+});
+```
+
+## Type Reference
+
+### `NativeAlarmCreateOptions`
 Options for creating a native OS alarm via the platform clock app.
+```typescript
+export interface NativeAlarmCreateOptions {
+  /** Hour of day in 24h format (0-23) */
+  hour: number;
+  /** Minute of hour (0-59) */
+  minute: number;
+  /** Optional label for the alarm */
+  label?: string;
+  /** Android only: attempt to skip UI if possible */
+  skipUi?: boolean;
+  /** Android only: set alarm to vibrate */
+  vibrate?: boolean;
+}
+```
 
-| Prop          | Type                 | Description                                  |
-| ------------- | -------------------- | -------------------------------------------- |
-| **`hour`**    | `number`  | Hour of day in 24h format (0-23)             |
-| **`minute`**  | `number`  | Minute of hour (0-59)                        |
-| **`label`**   | `string`  | Optional label for the alarm                 |
-| **`skipUi`**  | `boolean` | Android only: attempt to skip UI if possible |
-| **`vibrate`** | `boolean` | Android only: set alarm to vibrate           |
+### `NativeActionResult`
+Result of a native action.
+```typescript
+export interface NativeActionResult {
+  /** Whether the action was successful */
+  success: boolean;
+  /** Optional message with additional information */
+  message?: string;
+}
+```
 
-### OSInfo
-
+### `OSInfo`
 Returned info about current OS and capabilities.
+```typescript
+export interface OSInfo {
+  /** Platform identifier: 'ios' | 'android' | 'web' */
+  platform: string;
+  /** OS version string */
+  version: string;
+  /** Whether the platform exposes a native alarm app integration */
+  supportsNativeAlarms: boolean;
+  /** Whether scheduling local notifications is supported */
+  supportsScheduledNotifications: boolean;
+  /** Android only: whether exact alarms are allowed */
+  canScheduleExactAlarms?: boolean;
+}
+```
 
-| Prop                                 | Type                 | Description                                                 |
-| ------------------------------------ | -------------------- | ----------------------------------------------------------- |
-| **`platform`**                       | `string`  | 'ios' \| 'android' \| 'web'                                 |
-| **`version`**                        | `string`  | OS version string                                           |
-| **`supportsNativeAlarms`**           | `boolean` | Whether the platform exposes a native alarm app integration |
-| **`supportsScheduledNotifications`** | `boolean` | Whether scheduling local notifications is supported         |
-| **`canScheduleExactAlarms`**         | `boolean` | Android only: whether exact alarms are allowed              |
-
-### PermissionResult
-
+### `PermissionResult`
 Result of a permissions request.
+```typescript
+export interface PermissionResult {
+  /** Overall grant for requested scope */
+  granted: boolean;
+  /** Optional details by permission key */
+  details?: Record<string, boolean>;
+  /** Optional human readable diagnostic */
+  message?: string;
+}
+```
 
-| Prop          | Type                                                             | Description                        |
-| ------------- | ---------------------------------------------------------------- | ---------------------------------- |
-| **`granted`** | `boolean`                                             | Overall grant for requested scope  |
-| **`details`** | `Record<string, boolean>` | Optional details by permission key |
+### `AlarmInfo`
+Information about a scheduled alarm.
+```typescript
+export interface AlarmInfo {
+  /** Unique identifier for the alarm */
+  id: string;
+  /** Hour of day in 24h format (0-23) */
+  hour: number;
+  /** Minute of hour (0-59) */
+  minute: number;
+  /** Optional label for the alarm */
+  label?: string;
+  /** Whether the alarm is enabled */
+  enabled?: boolean;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

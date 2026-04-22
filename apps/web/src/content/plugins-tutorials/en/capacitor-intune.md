@@ -1,70 +1,67 @@
 ---
 locale: en
 ---
-
 # Using @capgo/capacitor-intune
 
-The `@capgo/capacitor-intune` package brings Microsoft Intune MAM enrollment, app protection policies, app config, and MSAL authentication to Capacitor apps.
+Capacitor plugin for Microsoft Intune MAM enrollment, app protection policies, app config, and MSAL authentication.
 
-Use it to:
-
-- sign users in with Microsoft using MSAL
-- enroll the authenticated account into Intune MAM
-- read Intune app configuration and policy values
-- react to policy and app config refresh events
-
-## Installation
+## Install
 
 ```bash
 bun add @capgo/capacitor-intune
 bunx cap sync
 ```
 
-## iOS Setup
+## What This Plugin Exposes
 
-This plugin bundles Intune iOS SDK `21.5.1`, which means:
+- `acquireToken` - Present the Microsoft sign-in flow and return an access token plus the account metadata.
+- `acquireTokenSilent` - Acquire a token from the MSAL cache for a previously signed-in user.
+- `registerAndEnrollAccount` - Register a previously authenticated account with Intune and start enrollment.
+- `loginAndEnrollAccount` - Ask Intune to authenticate and enroll a user without first requesting an app token.
 
-- iOS deployment target `17.0+`
-- current Xcode 26 compatibility
+## Example Usage
 
-Add your `IntuneMAMSettings` dictionary to `Info.plist`, configure your `msauth...` redirect URI, forward the callback to `MSALPublicClientApplication.handleMSALResponse(...)`, and run Microsoft's `IntuneMAMConfigurator`.
+### `acquireToken`
 
-## Android Setup
+Present the Microsoft sign-in flow and return an access token plus the account metadata.
 
-Add the Intune Gradle plugin, the Duo Maven feed, your `auth_config.json`, broker visibility queries, the `BrowserTabActivity` redirect filter, and either:
-
-- `android:name="app.capgo.intune.IntuneApplication"`
-- or your own `MAMApplication` subclass that registers `IntuneMamServiceAuthenticationCallback`
-
-## Basic Usage
-
-```ts
+```typescript
 import { IntuneMAM } from '@capgo/capacitor-intune';
 
-await IntuneMAM.addListener('policyChange', (result) => {
-  console.log('Policy changed', result.accountId);
-});
-
-const auth = await IntuneMAM.acquireToken({
-  scopes: ['https://graph.microsoft.com/.default'],
-});
-
-await IntuneMAM.registerAndEnrollAccount({
-  accountId: auth.accountId,
-});
-
-const user = await IntuneMAM.enrolledAccount();
-const appConfig = await IntuneMAM.appConfig({ accountId: auth.accountId });
-const policy = await IntuneMAM.getPolicy({ accountId: auth.accountId });
-
-console.log({ user, appConfig, policy });
+await IntuneMAM.acquireToken({} as AcquireTokenOptions);
 ```
 
-## API Summary
+### `acquireTokenSilent`
 
-- `acquireToken(options)`: interactive Microsoft sign-in
-- `acquireTokenSilent(options)`: silent token refresh
-- `registerAndEnrollAccount(options)`: Intune registration and enrollment
-- `appConfig(user)`: Intune app config payload
-- `getPolicy(user)`: Intune app protection policy payload
-- `sdkVersion()`: bundled Intune/MSAL versions
+Acquire a token from the MSAL cache for a previously signed-in user.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+await IntuneMAM.acquireTokenSilent({} as AcquireTokenSilentOptions);
+```
+
+### `registerAndEnrollAccount`
+
+Register a previously authenticated account with Intune and start enrollment.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+await IntuneMAM.registerAndEnrollAccount({} as RegisterAndEnrollAccountOptions);
+```
+
+### `loginAndEnrollAccount`
+
+Ask Intune to authenticate and enroll a user without first requesting an app token.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+await IntuneMAM.loginAndEnrollAccount();
+```
+
+## Full Reference
+
+- GitHub: https://github.com/Cap-go/capacitor-intune/
+- Docs: /docs/plugins/intune/

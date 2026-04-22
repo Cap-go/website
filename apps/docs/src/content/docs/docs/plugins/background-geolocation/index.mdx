@@ -1,6 +1,6 @@
 ---
-title: "Background Geolocation"
-description: A Capacitor plugin that lets you receive accurate geolocation updates even while the app is backgrounded
+title: "@capgo/background-geolocation"
+description: "Receive accurate geolocation updates even while the app is in the background."
 tableOfContents: false
 next: false
 prev: false
@@ -8,48 +8,39 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Receive accurate geolocation updates even while the app is backgrounded.
-  image:
-    file: ~public/icons/plugins/background-geolocation.svg
+  tagline: "Main plugin interface for background geolocation functionality. Provides methods to manage location updates and access device settings."
   actions:
     - text: Get started
       link: /docs/plugins/background-geolocation/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
-      link: https://github.com/Cap-go/capacitor-background-geolocation
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-background-geolocation/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Accurate Tracking" icon="rocket">
-    Prioritizes accuracy for use cases like hiking and navigation 🎯
-  </Card>
-  <Card title="Background Updates" icon="puzzle">
-    Continues to receive location updates even when the app is in the background 🏃
-  </Card>
-  <Card title="Battery Efficient" icon="setting">
-    Optimized to balance accuracy and battery consumption 🔋
-  </Card>
-  <Card title="Getting Started" icon="open-book">
-    Check the [Getting Started Guide](/docs/plugins/background-geolocation/getting-started/) to install and configure the plugin.
-  </Card>
-</CardGrid>
+Main plugin interface for background geolocation functionality. Provides methods to manage location updates and access device settings.
 
-## Plugin comparison
+## Core Capabilities
 
-A short comparison between the three main background-geolocation plugins commonly used in Capacitor apps.
+- `start` - To start listening for changes in the device's location, call this method. A Promise is returned to indicate that it finished the call. The callback will be called every time a new location is available, or if there was an error when calling this method. Don't rely on promise rejection for this.
+- `stop` - Stops location updates.
+- `openSettings` - Opens the device's location settings page. Useful for directing users to enable location services or adjust permissions.
+- `setPlannedRoute` - Plays a sound file when the user deviates from the planned route. This should be used to play a sound (in the background too, only for native).
 
-| Plugin | Accuracy | Background | HTTP Upload | Pricing |
-|--------|----------|------------|-------------|---------|
-| `@capacitor-community/background-geolocation` (Community) | Not accurate | Yes | No | Free |
-| `@capgo/background-geolocation` (this plugin) | Accurate | Yes | No | Free |
-| Transistorsoft (original) | Accurate | Yes | Yes — built-in HTTP uploader to your API | Paid |
+## Public API
 
-**Notes:**
-- The Community plugin is lightweight and continues to work in the background, but it is known to be less accurate than the options below.
-- This Capgo plugin is optimized to provide accurate location fixes and reliable background operation without requiring a paid license.
-- Transistorsoft offers a complete commercial solution that also includes built-in HTTP upload capabilities for sending location data to your backend.
+| Method | Description |
+| --- | --- |
+| `start` | To start listening for changes in the device's location, call this method. A Promise is returned to indicate that it finished the call. The callback will be called every time a new location is available, or if there was an error when calling this method. Don't rely on promise rejection for this. |
+| `stop` | Stops location updates. |
+| `openSettings` | Opens the device's location settings page. Useful for directing users to enable location services or adjust permissions. |
+| `setPlannedRoute` | Plays a sound file when the user deviates from the planned route. This should be used to play a sound (in the background too, only for native). |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-background-geolocation](https://github.com/Cap-go/capacitor-background-geolocation/).

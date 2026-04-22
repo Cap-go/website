@@ -1,52 +1,67 @@
 ---
 locale: en
 ---
-
 # Using @capgo/capacitor-contentsquare
 
-`@capgo/capacitor-contentsquare` wires the Contentsquare mobile SDK into Capacitor 8 projects with a Capgo-friendly plugin surface. This tutorial focuses on the integration decisions you need to make around ownership, privacy, and analytics structure.
+Internal native bridge contract implemented by Capacitor.
 
-## Start with the plugin docs
+## Install
 
-- Getting started: [Contentsquare Getting Started](/docs/plugins/contentsquare/getting-started/)
-- iOS setup notes: [Contentsquare iOS Setup](/docs/plugins/contentsquare/ios/)
-- Android notes: [Contentsquare Android Notes](/docs/plugins/contentsquare/android/)
+```bash
+bun add @capgo/capacitor-contentsquare
+bunx cap sync
+```
 
-If you only need installation and the basic API examples, those pages are the canonical reference.
+## What This Plugin Exposes
 
-## Decide what owns consent
+- `optIn` 
+- `optOut` 
+- `sendScreenName` 
+- `sendTransaction` 
 
-Treat consent as a product feature, not an analytics toggle. The simplest rule is:
+## Example Usage
 
-- The consent UI or privacy layer is the only code allowed to call `optIn()` or `optOut()`.
-- Everyone else can only call tracking methods when the privacy layer says tracking is allowed.
+### `optIn`
 
-This keeps you from accidentally emitting events before consent is granted.
+See the upstream definitions for the current contract.
 
-## Keep screen names stable
+```typescript
+import { Contentsquare } from '@capgo/capacitor-contentsquare';
 
-For clean analysis, define names as stable templates instead of user-specific content. A practical approach:
+await Contentsquare.optIn();
+```
 
-- Build a centralized set of constants for route names.
-- Keep names consistent across iOS and Android route stacks.
-- Reuse names when only parameters change, such as an item ID.
+### `optOut`
 
-## Track transactions at the source of truth
+See the upstream definitions for the current contract.
 
-Only emit purchase tracking once the app has a confirmed result, such as a server receipt or a finalized payment state. Avoid firing on UI intent unless you explicitly label it as an attempt.
+```typescript
+import { Contentsquare } from '@capgo/capacitor-contentsquare';
 
-## Keep the plugin behind one service
+await Contentsquare.optOut();
+```
 
-A low-friction pattern is to centralize Contentsquare behind one analytics service and keep the plugin API out of UI components. That makes it easier to gate calls on consent, keep screen naming stable, and change the implementation later without touching screens.
+### `sendScreenName`
 
-## Replay privacy checklist
+See the upstream definitions for the current contract.
 
-Before enabling replay in production:
+```typescript
+import { Contentsquare } from '@capgo/capacitor-contentsquare';
 
-- Decide what should never be captured, such as inputs, payment fields, or identity screens.
-- Add capture selectors intentionally and prefer explicit allow-listing.
-- Keep the selector list owned by the same team that owns privacy compliance.
+await Contentsquare.sendScreenName({} as { name: string });
+```
 
-## Final notes
+### `sendTransaction`
 
-This plugin is a Capgo-maintained Capacitor 8 port of the current Contentsquare Capacitor API surface. Pair it with your existing consent policy and the official Contentsquare documentation for product-level guidance around replay, privacy, and debugging.
+See the upstream definitions for the current contract.
+
+```typescript
+import { Contentsquare } from '@capgo/capacitor-contentsquare';
+
+await Contentsquare.sendTransaction({} as TransactionItem);
+```
+
+## Full Reference
+
+- GitHub: https://github.com/Cap-go/capacitor-contentsquare/
+- Docs: /docs/plugins/contentsquare/

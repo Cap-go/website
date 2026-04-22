@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-env"
-description: Expose configuration values from `capacitor.config` at runtime for white-label and multitenant apps.
+description: "Set Env var in Capacitor config and read them at runtime."
 tableOfContents: false
 next: false
 prev: false
@@ -8,37 +8,33 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Deliver tenant-specific settings without new builds by reading secure configuration values directly from Capacitor.
-  image:
-    file: ~public/settings-go.webp
+  tagline: "Capacitor plugin for accessing environment variables in native code."
   actions:
     - text: Get started
       link: /docs/plugins/env/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-env/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-Capgo Env lets you store secrets and per-build configuration inside `capacitor.config.*` and resolve them at runtime through a simple API.
+Capacitor plugin for accessing environment variables in native code.
 
-<CardGrid stagger>
-  <Card title="Runtime configuration" icon="rocket">
-    Read values from native config files without shipping them in your JavaScript bundle.
-  </Card>
-  <Card title="Per build overrides" icon="rocket">
-    Create multiple app flavors or tenants by providing different config files.
-  </Card>
-  <Card title="Typesafe access" icon="pencil">
-    Fetch keys with TypeScript support and centralize fallback logic.
-  </Card>
-  <Card title="Secure by default" icon="approve-check">
-    Keep API keys and secrets out of Git while still shipping them with native binaries.
-  </Card>
-</CardGrid>
+## Core Capabilities
 
-Follow the getting started guide to declare keys in your Capacitor config and fetch them safely across platforms.
+- `getKey` - Retrieves the value of a specific environment variable by key.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `getKey` | Retrieves the value of a specific environment variable by key. |
+| `getPluginVersion` | Get the version of the native Capacitor plugin. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-env](https://github.com/Cap-go/capacitor-env/).

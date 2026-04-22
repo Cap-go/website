@@ -1,87 +1,88 @@
 ---
 locale: en
 ---
+# Using @capgo/background-geolocation
 
-# Complete Tutorial: Using @capgo/capacitor-background-geolocation for iOS and Android Mobile Apps
+Main plugin interface for background geolocation functionality. Provides methods to manage location updates and access device settings.
 
-The `@capgo/capacitor-background-geolocation` package provides native background geolocation functionality for your Capacitor mobile applications on iOS and Android. This comprehensive tutorial will guide you through integrating background geolocation features into your iOS and Android mobile apps built with Capacitor or Cordova, enabling cross-platform mobile app development with native capabilities.
-
-## What is Capacitor?
-
-Capacitor is Ionic's modern native runtime that enables developers to build native iOS apps, Android apps, and Progressive Web Apps from a single codebase. Unlike older Cordova-based mobile development, Capacitor provides direct access to native iOS and Android APIs, making it the ideal choice for building production-ready mobile applications. This Capacitor plugin brings background geolocation capabilities to both iOS and Android mobile platforms.
-
-## Why Use background geolocation in Your Capacitor Mobile App?
-
-The @capgo/capacitor-background-geolocation plugin enables your iOS and Android mobile applications to leverage native background geolocation functionality without writing platform-specific code. This Capacitor plugin provides a unified JavaScript API that works seamlessly on both iOS and Android mobile devices, making it perfect for cross-platform mobile app development.
-
-Benefits for iOS and Android mobile applications:
-- Native background geolocation performance on iOS and Android devices
-- Unified API for both iOS and Android mobile platforms
-- No need for separate native iOS or Android code
-- Works with Capacitor and Cordova mobile frameworks
-- Full TypeScript support for mobile app development
-- Seamless integration with existing Capacitor mobile apps
-
----
-locale: en
----
-# Using @capgo/capacitor-background-geolocation
-
-The `@capgo/capacitor-background-geolocation` package provides native functionality for your Capacitor app. Here is a tutorial on how to use this package.
-
-## Installation
-
-To install the package, run the following command:
+## Install
 
 ```bash
-npm install @capgo/capacitor-background-geolocation
-npx cap sync
+bun add @capgo/background-geolocation
+bunx cap sync
 ```
 
-## Usage
+## What This Plugin Exposes
 
-### Basic Example
+- `start` - To start listening for changes in the device's location, call this method. A Promise is returned to indicate that it finished the call. The callback will be called every time a new location is available, or if there was an error when calling this method. Don't rely on promise rejection for this.
+- `stop` - Stops location updates.
+- `openSettings` - Opens the device's location settings page. Useful for directing users to enable location services or adjust permissions.
+- `setPlannedRoute` - Plays a sound file when the user deviates from the planned route. This should be used to play a sound (in the background too, only for native).
+
+## Example Usage
+
+### `start`
+
+To start listening for changes in the device's location, call this method. A Promise is returned to indicate that it finished the call. The callback will be called every time a new location is available, or if there was an error when calling this method. Don't rely on promise rejection for this.
 
 ```typescript
-import { capacitoruackgroundgeolocation } from '@capgo/capacitor-background-geolocation';
+import { BackgroundGeolocation } from '@capgo/background-geolocation';
 
-// Use the plugin methods here
+await BackgroundGeolocation.start(
+  {
+    backgroundMessage: "App is using your location in the background",
+    backgroundTitle: "Location Service",
+    requestPermissions: true,
+    stale: false,
+    distanceFilter: 10
+  },
+  (location, error) => {
+    if (error) {
+      console.error('Location error:', error);
+      return;
+    }
+    if (location) {
+      console.log('New location:', location.latitude, location.longitude);
+    }
+  }
+);
 ```
 
-For detailed API documentation, please visit the [GitHub repository](https://github.com/Cap-go/capacitor-background-geolocation).
+### `stop`
 
-That's it! You have successfully integrated @capgo/capacitor-background-geolocation into your Capacitor app.
+Stops location updates.
 
-## Platform-Specific Notes for iOS and Android
+```typescript
+import { BackgroundGeolocation } from '@capgo/background-geolocation';
 
-### iOS Mobile Platform
+await BackgroundGeolocation.stop();
+```
 
-- Compatible with iOS 10.0+ mobile devices (iPhone and iPad)
-- Uses native iOS APIs for background geolocation functionality
-- Optimized performance on iOS mobile platform
-- Full support for latest iOS versions
+### `openSettings`
 
-### Android Mobile Platform
+Opens the device's location settings page. Useful for directing users to enable location services or adjust permissions.
 
-- Compatible with Android 5.0 (API 21)+ mobile devices
-- Uses native Android APIs for background geolocation functionality
-- Works across all Android device manufacturers
-- Optimized for Android mobile platform
+```typescript
+import { BackgroundGeolocation } from '@capgo/background-geolocation';
 
-## Capacitor vs Cordova for Mobile Development
+// Direct user to location settings
+await BackgroundGeolocation.openSettings();
+```
 
-While this background geolocation plugin works with both Capacitor and Cordova mobile frameworks, Capacitor offers significant advantages for iOS and Android mobile app development:
+### `setPlannedRoute`
 
-- **Modern Architecture**: Better performance on iOS and Android mobile platforms
-- **Direct Native Access**: Easier integration with iOS and Android native APIs
-- **Improved Tooling**: Superior development experience for mobile apps
-- **Active Development**: Regular updates for iOS and Android compatibility
-- **Better Documentation**: Comprehensive guides for mobile app development
+Plays a sound file when the user deviates from the planned route. This should be used to play a sound (in the background too, only for native).
 
-## Conclusion
+```typescript
+import { BackgroundGeolocation } from '@capgo/background-geolocation';
 
-You have successfully integrated @capgo/capacitor-background-geolocation into your Capacitor mobile application for iOS and Android. This plugin provides native background geolocation capabilities for both iOS and Android mobile platforms, enabling professional mobile app development with a unified codebase.
+await BackgroundGeolocation.setPlannedRoute({
+  soundFile: "notification.mp3",
+  route: [[-74.0060, 40.7128], [-118.2437, 34.0522]]
+});
+```
 
-For detailed API documentation and advanced background geolocation features for mobile app development, visit the [GitHub repository](https://github.com/Cap-go/capacitor-background-geolocation).
+## Full Reference
 
-Whether you're building native iOS apps, Android mobile applications, or cross-platform Capacitor mobile apps, this background geolocation plugin provides the native capabilities you need for professional mobile app development on iOS and Android platforms.
+- GitHub: https://github.com/Cap-go/capacitor-background-geolocation/
+- Docs: /docs/plugins/background-geolocation/

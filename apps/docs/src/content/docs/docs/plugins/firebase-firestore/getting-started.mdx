@@ -1,0 +1,399 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-firebase-firestore and start using its current Capacitor API."
+sidebar:
+  order: 2
+---
+
+## Install
+
+```bash
+bun add @capgo/capacitor-firebase-firestore
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { FirebaseFirestore } from '@capgo/capacitor-firebase-firestore';
+```
+
+## API Overview
+
+### `addDocument`
+
+Adds a new document to a collection with the given data.
+
+```typescript
+import { FirebaseFirestore } from '@capgo/capacitor-firebase-firestore';
+
+await FirebaseFirestore.addDocument({} as AddDocumentOptions);
+```
+
+### `setDocument`
+
+Writes to the document referred to by the specified reference.
+If the document does not yet exist, it will be created.
+
+```typescript
+import { FirebaseFirestore } from '@capgo/capacitor-firebase-firestore';
+
+await FirebaseFirestore.setDocument({} as SetDocumentOptions);
+```
+
+### `getDocument`
+
+Reads the document referred to by the specified reference.
+
+```typescript
+import { FirebaseFirestore } from '@capgo/capacitor-firebase-firestore';
+
+await FirebaseFirestore.getDocument({} as GetDocumentOptions);
+```
+
+### `updateDocument`
+
+Updates fields in the document referred to by the specified reference.
+
+```typescript
+import { FirebaseFirestore } from '@capgo/capacitor-firebase-firestore';
+
+await FirebaseFirestore.updateDocument({} as UpdateDocumentOptions);
+```
+
+### `deleteDocument`
+
+Deletes the document referred to by the specified reference.
+
+```typescript
+import { FirebaseFirestore } from '@capgo/capacitor-firebase-firestore';
+
+await FirebaseFirestore.deleteDocument({} as DeleteDocumentOptions);
+```
+
+### `writeBatch`
+
+Execute multiple write operations as a single batch.
+
+```typescript
+import { FirebaseFirestore } from '@capgo/capacitor-firebase-firestore';
+
+await FirebaseFirestore.writeBatch({} as WriteBatchOptions);
+```
+
+### `getCollection`
+
+Reads the collection referenced by the specified reference.
+
+```typescript
+import { FirebaseFirestore } from '@capgo/capacitor-firebase-firestore';
+
+await FirebaseFirestore.getCollection({} as GetCollectionOptions);
+```
+
+### `getCollectionGroup`
+
+Reads the collection group referenced by the specified reference.
+
+```typescript
+import { FirebaseFirestore } from '@capgo/capacitor-firebase-firestore';
+
+await FirebaseFirestore.getCollectionGroup({} as GetCollectionGroupOptions);
+```
+
+### `getCountFromServer`
+
+Fetches the number of documents in a collection.
+
+```typescript
+import { FirebaseFirestore } from '@capgo/capacitor-firebase-firestore';
+
+await FirebaseFirestore.getCountFromServer({} as GetCountFromServerOptions);
+```
+
+### `clearPersistence`
+
+Clears the persistent storage. This includes pending writes and cached documents.
+
+Must be called after the app is shutdown or when the app is first initialized.
+
+```typescript
+import { FirebaseFirestore } from '@capgo/capacitor-firebase-firestore';
+
+await FirebaseFirestore.clearPersistence();
+```
+
+### `enableNetwork`
+
+Re-enables use of the network.
+
+```typescript
+import { FirebaseFirestore } from '@capgo/capacitor-firebase-firestore';
+
+await FirebaseFirestore.enableNetwork();
+```
+
+### `disableNetwork`
+
+Disables use of the network.
+
+```typescript
+import { FirebaseFirestore } from '@capgo/capacitor-firebase-firestore';
+
+await FirebaseFirestore.disableNetwork();
+```
+
+### `useEmulator`
+
+Instrument your app to talk to the Firestore emulator.
+
+```typescript
+import { FirebaseFirestore } from '@capgo/capacitor-firebase-firestore';
+
+await FirebaseFirestore.useEmulator({} as UseEmulatorOptions);
+```
+
+### `addDocumentSnapshotListener`
+
+Adds a listener for document snapshot events.
+
+```typescript
+import { FirebaseFirestore } from '@capgo/capacitor-firebase-firestore';
+
+await FirebaseFirestore.addDocumentSnapshotListener({} as AddDocumentSnapshotListenerOptions, {} as AddDocumentSnapshotListenerCallback<T>);
+```
+
+### `addCollectionSnapshotListener`
+
+Adds a listener for collection snapshot events.
+
+```typescript
+import { FirebaseFirestore } from '@capgo/capacitor-firebase-firestore';
+
+await FirebaseFirestore.addCollectionSnapshotListener({} as AddCollectionSnapshotListenerOptions, {} as AddCollectionSnapshotListenerCallback<T>);
+```
+
+### `addCollectionGroupSnapshotListener`
+
+Adds a listener for collection group snapshot events.
+
+```typescript
+import { FirebaseFirestore } from '@capgo/capacitor-firebase-firestore';
+
+await FirebaseFirestore.addCollectionGroupSnapshotListener({} as AddCollectionGroupSnapshotListenerOptions, {} as AddCollectionGroupSnapshotListenerCallback<T>);
+```
+
+### `removeSnapshotListener`
+
+Remove a listener for document or collection snapshot events.
+
+```typescript
+import { FirebaseFirestore } from '@capgo/capacitor-firebase-firestore';
+
+await FirebaseFirestore.removeSnapshotListener({} as RemoveSnapshotListenerOptions);
+```
+
+## Type Reference
+
+### `AddDocumentOptions`
+```typescript
+export interface AddDocumentOptions {
+  /**
+   * The reference as a string, with path components separated by a forward slash (`/`).
+   *
+   * @since 5.2.0
+   * @example 'users'
+   */
+  reference: string;
+  /**
+   * An object containing the data for the new document.
+   *
+   * @since 5.2.0
+   * @example { first: 'Alan', last: 'Turing', born: 1912 }
+   */
+  data: DocumentData;
+}
+```
+
+### `AddDocumentResult`
+```typescript
+export interface AddDocumentResult {
+  /**
+   * The reference of the newly added document.
+   *
+   * @since 5.2.0
+   */
+  reference: DocumentReference;
+}
+```
+
+### `SetDocumentOptions`
+```typescript
+export interface SetDocumentOptions {
+  /**
+   * The reference as a string, with path components separated by a forward slash (`/`).
+   *
+   * @since 5.2.0
+   * @example 'users/Aorq09lkt1ynbR7xhTUx'
+   */
+  reference: string;
+  /**
+   * An object containing the data for the new document.
+   *
+   * @since 5.2.0
+   * @example { first: 'Alan', last: 'Turing', born: 1912 }
+   */
+  data: DocumentData;
+  /**
+   * Whether to merge the provided data with an existing document.
+   *
+   * @since 5.2.0
+   * @example true
+   * @default false
+   */
+  merge?: boolean;
+}
+```
+
+### `DocumentData`
+```typescript
+export interface DocumentData {
+  /**
+   * A mapping between a field and its value.
+   *
+   * @since 5.2.0
+   */
+  [field: string]: any;
+}
+```
+
+### `GetDocumentOptions`
+```typescript
+export interface GetDocumentOptions {
+  /**
+   * The reference as a string, with path components separated by a forward slash (`/`).
+   *
+   * @since 5.2.0
+   */
+  reference: string;
+}
+```
+
+### `GetDocumentResult`
+```typescript
+export interface GetDocumentResult<T> {
+  /**
+   * The current document contents.
+   *
+   * @since 5.2.0
+   */
+  snapshot: DocumentSnapshot<T>;
+}
+```
+
+### `UpdateDocumentOptions`
+```typescript
+export interface UpdateDocumentOptions {
+  /**
+   * The reference as a string, with path components separated by a forward slash (`/`).
+   *
+   * @since 5.2.0
+   */
+  reference: string;
+  /**
+   * An object containing the data for the new document.
+   *
+   * @since 5.2.0
+   * @example { first: 'Alan', last: 'Turing', born: 1912 }
+   */
+  data: DocumentData;
+}
+```
+
+### `DeleteDocumentOptions`
+```typescript
+export interface DeleteDocumentOptions {
+  /**
+   * The reference as a string, with path components separated by a forward slash (`/`).
+   *
+   * @since 5.2.0
+   */
+  reference: string;
+}
+```
+
+### `WriteBatchOptions`
+```typescript
+export interface WriteBatchOptions {
+  /**
+   * The operations to execute in the batch.
+   *
+   * @since 6.1.0
+   */
+  operations: WriteBatchOperation[];
+}
+```
+
+### `GetCollectionOptions`
+```typescript
+export interface GetCollectionOptions {
+  /**
+   * The reference as a string, with path components separated by a forward slash (`/`).
+   *
+   * @since 5.2.0
+   */
+  reference: string;
+  /**
+   * The filter to apply.
+   *
+   * @since 5.2.0
+   */
+  compositeFilter?: QueryCompositeFilterConstraint;
+  /**
+   * Narrow or order the set of documents to retrieve, but do not explicitly filter for document fields.
+   *
+   * @since 5.2.0
+   */
+  queryConstraints?: QueryNonFilterConstraint[];
+}
+```
+
+### `GetCollectionResult`
+```typescript
+export interface GetCollectionResult<T> {
+  /**
+   * The documents in the collection.
+   *
+   * @since 5.2.0
+   */
+  snapshots: DocumentSnapshot<T>[];
+}
+```
+
+### `GetCollectionGroupOptions`
+```typescript
+export interface GetCollectionGroupOptions {
+  /**
+   * The reference as a string, with path components separated by a forward slash (`/`).
+   *
+   * @since 5.2.0
+   */
+  reference: string;
+  /**
+   * The filter to apply.
+   *
+   * @since 5.2.0
+   */
+  compositeFilter?: QueryCompositeFilterConstraint;
+  /**
+   * Narrow or order the set of documents to retrieve, but do not explicitly filter for document fields.
+   *
+   * @since 5.2.0
+   */
+  queryConstraints?: QueryNonFilterConstraint[];
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

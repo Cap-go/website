@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-speech-synthesis"
-description: Synthesize speech from text with full control over language, voice, pitch, rate, and volume.
+description: "Synthesize speech from text with full control over language, voice, pitch, rate, and volume."
 tableOfContents: false
 next: false
 prev: false
@@ -8,39 +8,54 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Convert text to speech with full control over language, voice, pitch, rate, and volume on iOS, Android, and Web.
-  image:
-    file: ~public/icons/plugins/speech-synthesis.svg
+  tagline: "Speech Synthesis Plugin for synthesizing speech from text."
   actions:
     - text: Get started
       link: /docs/plugins/speech-synthesis/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-speech-synthesis/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Multiple Languages" icon="translate">
-    Support for dozens of languages and regional variants 🌍
-  </Card>
-  <Card title="Voice Selection" icon="comment">
-    Choose from available system voices for each language 🎤
-  </Card>
-  <Card title="Fine Control" icon="setting">
-    Adjust pitch, rate, and volume to customize speech output ⚙️
-  </Card>
-  <Card title="Cross-platform" icon="laptop">
-    Consistent API across iOS, Android, and Web platforms 📱
-  </Card>
-  <Card title="Real-time Control" icon="rocket">
-    Pause, resume, and cancel speech playback on the fly 🎮
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/speech-synthesis/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+Speech Synthesis Plugin for synthesizing speech from text.
+
+## Core Capabilities
+
+- `speak` - Speaks the given text with specified options. The utterance is added to the speech queue.
+- `synthesizeToFile` - Synthesizes speech to an audio file (Android/iOS only). Returns the file path where the audio was saved.
+- `cancel` - Cancels all queued utterances and stops current speech.
+- `pause` - Pauses speech immediately.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `speak` | Speaks the given text with specified options. The utterance is added to the speech queue. |
+| `synthesizeToFile` | Synthesizes speech to an audio file (Android/iOS only). Returns the file path where the audio was saved. |
+| `cancel` | Cancels all queued utterances and stops current speech. |
+| `pause` | Pauses speech immediately. |
+| `resume` | Resumes paused speech. |
+| `isSpeaking` | Checks if speech synthesis is currently speaking. |
+| `isAvailable` | Checks if speech synthesis is available on the device. |
+| `getVoices` | Gets all available voices. |
+| `getLanguages` | Gets all available languages. |
+| `isLanguageAvailable` | Checks if a specific language is available. |
+| `isVoiceAvailable` | Checks if a specific voice is available. |
+| `initialize` | Initializes the speech synthesis engine (iOS optimization). This can reduce latency for the first speech request. |
+| `activateAudioSession` | Activates the audio session with a specific category (iOS only). |
+| `deactivateAudioSession` | Deactivates the audio session (iOS only). |
+| `getPluginVersion` | Gets the native plugin version. |
+| `addListener` | Listens for when an utterance starts speaking. |
+| `addListener` | Listens for when an utterance finishes speaking. |
+| `addListener` | Listens for word boundaries during speech. |
+| `addListener` | Listens for synthesis errors. |
+| `removeAllListeners` | Removes all event listeners. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-speech-synthesis](https://github.com/Cap-go/capacitor-speech-synthesis/).

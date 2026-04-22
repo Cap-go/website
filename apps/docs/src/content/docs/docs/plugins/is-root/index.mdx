@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-is-root"
-description: Root and jailbreak detection plugin for Capacitor apps with comprehensive security checks and device integrity validation.
+description: "Jailbreak/Root Detection Plugin for Capacitor."
 tableOfContents: false
 next: false
 prev: false
@@ -8,114 +8,66 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Detect rooted Android devices and jailbroken iOS devices to enhance app security and protect sensitive data.
-  image:
-    file: ~public/icons/plugins/is-root.svg
+  tagline: "Capacitor Is Root Plugin for detecting rooted (Android) or jailbroken (iOS) devices."
   actions:
     - text: Get started
       link: /docs/plugins/is-root/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-is-root/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
-
 ## Overview
 
-The Capacitor Is Root plugin provides comprehensive root and jailbreak detection for Android devices and emulator detection. This plugin helps enhance app security by identifying compromised devices and emulated environments that may pose security risks.
+Capacitor Is Root Plugin for detecting rooted (Android) or jailbroken (iOS) devices.
 
-<CardGrid stagger>
-  <Card title="Root detection" icon="rocket">
-    Advanced Android root detection with multiple methods 🔒
-  </Card>
-  <Card title="Emulator detection" icon="approve-check">
-    Identify emulated environments and testing frameworks 🛡️
-  </Card>
-  <Card title="Security validation" icon="approve-check">
-    Multiple detection techniques for enhanced accuracy ✅
-  </Card>
-  <Card title="Android focused" icon="laptop">
-    Specialized detection for Android security assessment 🤖
-  </Card>
-</CardGrid>
+## Core Capabilities
 
-## Installation
+- `isRooted` - Performs the default root/jailbreak detection checks.
+- `isRootedWithBusyBox` - Extends the default detection with BusyBox specific checks (Android only).
+- `detectRootManagementApps` - Detects if known root management applications are present (Android only).
+- `detectPotentiallyDangerousApps` - Detects potentially dangerous applications commonly found on rooted devices (Android only).
 
-```bash
-npm install @capgo/capacitor-is-root
-npx cap sync
-```
+## Public API
 
-## Core API Methods
+| Method | Description |
+| --- | --- |
+| `isRooted` | Performs the default root/jailbreak detection checks. |
+| `isRootedWithBusyBox` | Extends the default detection with BusyBox specific checks (Android only). |
+| `detectRootManagementApps` | Detects if known root management applications are present (Android only). |
+| `detectPotentiallyDangerousApps` | Detects potentially dangerous applications commonly found on rooted devices (Android only). |
+| `detectTestKeys` | Detects debug/test build tags (Android only). |
+| `checkForBusyBoxBinary` | Checks whether a BusyBox binary exists on the device (Android only). |
+| `checkForSuBinary` | Checks whether a `su` binary is present (Android only). |
+| `checkSuExists` | Detects if the `su` binary can be executed (Android only). |
+| `checkForRWPaths` | Detects world writable system paths (Android only). |
+| `checkForDangerousProps` | Detects dangerous system properties (Android only). |
+| `checkForRootNative` | Executes RootBeer native checks (Android only). |
+| `detectRootCloakingApps` | Detects applications that can hide root (Android only). |
+| `isSelinuxFlagInEnabled` | Checks the SELinux enforcement state (Android only). |
+| `isExistBuildTags` | Detects test build tags on the OS image (Android only). |
+| `doesSuperuserApkExist` | Detects if superuser APKs are installed (Android only). |
+| `isExistSUPath` | Checks for known `su` binary locations (Android only). |
+| `checkDirPermissions` | Detects writable directories that should be protected (Android only). |
+| `checkExecutingCommands` | Executes `which su` style commands to detect root (Android only). |
+| `checkInstalledPackages` | Detects suspicious installed packages (Android only). |
+| `checkforOverTheAirCertificates` | Detects tampered OTA certificates (Android only). |
+| `isRunningOnEmulator` | Detects common emulator fingerprints (Android only). |
+| `simpleCheckEmulator` | Performs a lightweight emulator check (Android only). |
+| `simpleCheckSDKBF86` | Detects x86 emulator fingerprints (Android only). |
+| `simpleCheckQRREFPH` | Detects QC reference phone builds (Android only). |
+| `simpleCheckBuild` | Detects build host anomalies (Android only). |
+| `checkGenymotion` | Detects Genymotion emulator fingerprints (Android only). |
+| `checkGeneric` | Detects generic emulator fingerprints (Android only). |
+| `checkGoogleSDK` | Detects Google SDK emulator fingerprints (Android only). |
+| `togetDeviceInfo` | Returns device information collected during detection. |
+| `isRootedWithEmulator` | Extends the default detection with emulator heuristics (Android only). |
+| `isRootedWithBusyBoxWithEmulator` | Extends the BusyBox detection with emulator heuristics (Android only). |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
 
-### Root Detection
-- `isRooted()` - Performs comprehensive root detection using default methods
-- `isRootedWithBusyBox()` - Extended detection including BusyBox checks
-- `detectRootManagementApps()` - Identifies installed root management applications
-- `checkForSuBinary()` - Checks for `su` binary presence in system paths
+## Source Of Truth
 
-### Emulator Detection
-- `isRunningOnEmulator()` - Detects common Android emulator fingerprints
-
-## Detection Techniques
-
-The plugin employs multiple detection methods:
-
-### Root Detection
-- Checks for root management applications (SuperSU, Magisk, etc.)
-- Scans for suspicious system properties
-- Identifies test build tags and debug flags
-- Validates dangerous binary locations
-- Examines system path permissions
-
-### Emulator Detection
-- Hardware fingerprint analysis
-- Build property inspection
-- Emulator-specific characteristics
-- Virtual environment indicators
-
-## Usage Example
-
-```typescript
-import { IsRoot } from '@capgo/capacitor-is-root';
-
-// Basic root detection
-const rootResult = await IsRoot.isRooted();
-if (rootResult.isRooted) {
-  console.log('Device is rooted');
-  // Handle rooted device appropriately
-}
-
-// Extended root detection with BusyBox
-const extendedResult = await IsRoot.isRootedWithBusyBox();
-if (extendedResult.isRooted) {
-  console.log('Device is rooted (extended check)');
-}
-
-// Check for emulator
-const emulatorResult = await IsRoot.isRunningOnEmulator();
-if (emulatorResult.isEmulator) {
-  console.log('Running on emulator');
-}
-
-// Detect root management apps
-const rootAppsResult = await IsRoot.detectRootManagementApps();
-if (rootAppsResult.hasRootApps) {
-  console.log('Root management apps detected');
-}
-```
-
-## Security Considerations
-
-- Use multiple detection methods for higher accuracy
-- Implement graceful degradation for detected environments
-- Consider user privacy when implementing security measures
-- Regular updates recommended as detection methods evolve
-
-## Documentation
-
-Check the [complete documentation](/docs/plugins/is-root/getting-started/) for detailed implementation guides and advanced security patterns.
+This reference is synced from `src/definitions.ts` in [capacitor-is-root](https://github.com/Cap-go/capacitor-is-root/).

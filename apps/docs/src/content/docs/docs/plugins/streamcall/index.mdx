@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-stream-call"
-description: Stream Video SDK integration for Capacitor apps enabling professional video calling functionality.
+description: "Uses the https://getstream.io/ SDK to implement calling in Capacitor."
 tableOfContents: false
 next: false
 prev: false
@@ -8,42 +8,58 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Enable professional video calling functionality in your app using the Stream Video SDK with full-screen support and caller information.
-  image:
-    file: ~public/icons/plugins/streamcall.svg
+  tagline: "Uses the https://getstream.io/ SDK to implement calling in Capacitor."
   actions:
     - text: Get started
       link: /docs/plugins/streamcall/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
-      link: https://github.com/Cap-go/capacitor-stream-call/
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-streamcall/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Stream Video SDK" icon="star">
-    Powered by Stream's professional video infrastructure 🎥
-  </Card>
-  <Card title="Full-Screen Calls" icon="rocket">
-    Lock-screen and full-screen call support 📱
-  </Card>
-  <Card title="Caller Information" icon="star">
-    Display caller name and profile image 👤
-  </Card>
-  <Card title="Camera Controls" icon="setting">
-    Switch cameras and toggle video/audio 📹
-  </Card>
-  <Card title="Call Management" icon="approve-check">
-    Accept, reject, and manage calls seamlessly 📞
-  </Card>
-  <Card title="Multi-Language" icon="translate">
-    Localization support for iOS and Android 🌍
-  </Card>
-  <Card title="Getting Started" icon="open-book">
-    Check the [Getting Started Guide](/docs/plugins/streamcall/getting-started/) to install and configure the plugin.
-  </Card>
-</CardGrid>
+Uses the https://getstream.io/ SDK to implement calling in Capacitor.
+
+## Core Capabilities
+
+- `login` - Login to Stream Video service.
+- `logout` - Logout from Stream Video service.
+- `call` - Initiate a call to another user.
+- `endCall` - End the current call.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `login` | Login to Stream Video service. |
+| `logout` | Logout from Stream Video service. |
+| `call` | Initiate a call to another user. |
+| `endCall` | End the current call. |
+| `joinCall` | Join an existing call. |
+| `setMicrophoneEnabled` | Enable or disable microphone. |
+| `setCameraEnabled` | Enable or disable camera. |
+| `addListener` | Add listener for call events. |
+| `addListener` | Listen for lock-screen incoming call (Android only). Fired when the app is shown by full-screen intent before user interaction. |
+| `removeAllListeners` | Remove all event listeners. |
+| `enableBluetooth` | Enable bluetooth audio. |
+| `acceptCall` | Accept an incoming call. |
+| `rejectCall` | Reject an incoming call. |
+| `isCameraEnabled` | Check if camera is enabled. |
+| `getCallStatus` | Get the current call status. |
+| `getRingingCall` | Get the current ringing call. |
+| `toggleViews` | Cycle through the available video layouts. |
+| `setSpeaker` | Set speakerphone on. |
+| `switchCamera` | Switch camera. |
+| `getCallInfo` | Get detailed information about an active call including caller details. |
+| `setDynamicStreamVideoApikey` | Set a dynamic Stream Video API key that overrides the static one. |
+| `getDynamicStreamVideoApikey` | Get the currently set dynamic Stream Video API key. |
+| `getCurrentUser` | Get the current user's information. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-streamcall](https://github.com/Cap-go/capacitor-streamcall/).

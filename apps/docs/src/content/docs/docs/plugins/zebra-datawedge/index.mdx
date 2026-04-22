@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-zebra-datawedge"
-description: Manage Zebra DataWedge profiles, notifications, queries, and soft scans from Capacitor.
+description: "Capacitor plugin for Zebra DataWedge profile management, notifications, queries, and soft scanning on Zebra Android devices."
 tableOfContents: false
 next: false
 prev: false
@@ -8,44 +8,72 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Ship Zebra barcode scanning workflows in Capacitor without wrapping DataWedge intents yourself.
-  image:
-    file: ~public/icons/plugins/zebra-datawedge.svg
+  tagline: "Capacitor plugin for Zebra DataWedge profile management, notifications, queries, and soft scanning on Zebra Android devices."
   actions:
     - text: Get started
       link: /docs/plugins/zebra-datawedge/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-zebra-datawedge/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-`@capgo/capacitor-zebra-datawedge` is an Android-first Capacitor wrapper around Zebra DataWedge.
+Capacitor plugin for Zebra DataWedge profile management, notifications, queries, and soft scanning on Zebra Android devices.
 
-It covers the same core areas exposed by the Ionic enterprise Zebra Scanner plugin:
+## Core Capabilities
 
-- `ZebraConfiguration` for profile creation and updates
-- `ZebraNotification` for scanner and profile status events
-- `ZebraQuery` for profiles, scanners, and version metadata
-- `ZebraRuntime` for scanner control and soft-triggered scans
+- `cloneProfile` 
+- `createProfile` 
+- `deleteProfile` 
+- `importConfig` 
 
-<CardGrid stagger>
-  <Card title="Profile management">
-    Create, clone, rename, restore, and update DataWedge profiles directly from JavaScript.
-  </Card>
-  <Card title="Scanner notifications">
-    Subscribe to scanner state and profile switch notifications without manually parsing broadcast bundles.
-  </Card>
-  <Card title="Soft scan triggers">
-    Trigger barcode and RFID scans, then wait for the next intent result through the same Capacitor API.
-  </Card>
-  <Card title="Android device focus">
-    Built for Zebra Android hardware where DataWedge is available. iOS and web expose API parity only.
-  </Card>
-</CardGrid>
+## Public API
 
-Start with the getting started guide, then review the Android notes before wiring production scan flows.
+| Method | Description |
+| --- | --- |
+| `cloneProfile` | See the source definitions for current behavior. |
+| `createProfile` | See the source definitions for current behavior. |
+| `deleteProfile` | See the source definitions for current behavior. |
+| `importConfig` | See the source definitions for current behavior. |
+| `renameProfile` | See the source definitions for current behavior. |
+| `restoreConfig` | See the source definitions for current behavior. |
+| `setConfig` | See the source definitions for current behavior. |
+| `setDisabledAppList` | See the source definitions for current behavior. |
+| `setIgnoreDisabledProfiles` | See the source definitions for current behavior. |
+| `registerForNotification` | See the source definitions for current behavior. |
+| `unRegisterForNotification` | See the source definitions for current behavior. |
+| `enumerateScanners` | See the source definitions for current behavior. |
+| `getActiveProfile` | See the source definitions for current behavior. |
+| `getAssociatedApps` | See the source definitions for current behavior. |
+| `getConfig` | See the source definitions for current behavior. |
+| `getDatawedgeStatus` | See the source definitions for current behavior. |
+| `getDisabledAppList` | See the source definitions for current behavior. |
+| `getIgnoreDisabledProfiles` | See the source definitions for current behavior. |
+| `getProfilesList` | See the source definitions for current behavior. |
+| `getScannerStatus` | See the source definitions for current behavior. |
+| `getVersionInfo` | See the source definitions for current behavior. |
+| `disableDatawedge` | See the source definitions for current behavior. |
+| `disableScannerInput` | See the source definitions for current behavior. |
+| `enableDatawedge` | See the source definitions for current behavior. |
+| `enableScannerInput` | See the source definitions for current behavior. |
+| `enumerateTriggers` | See the source definitions for current behavior. |
+| `notify` | See the source definitions for current behavior. |
+| `resetDefaultProfile` | See the source definitions for current behavior. |
+| `setDefaultProfile` | See the source definitions for current behavior. |
+| `setReportingOptions` | See the source definitions for current behavior. |
+| `softRfidTrigger` | See the source definitions for current behavior. |
+| `softScanTrigger` | See the source definitions for current behavior. |
+| `switchScanner` | See the source definitions for current behavior. |
+| `switchScannerParams` | See the source definitions for current behavior. |
+| `switchToProfile` | See the source definitions for current behavior. |
+| `getPluginVersion` | See the source definitions for current behavior. |
+| `addListener` | See the source definitions for current behavior. |
+| `addListener` | See the source definitions for current behavior. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-zebra-datawedge](https://github.com/Cap-go/capacitor-zebra-datawedge/).

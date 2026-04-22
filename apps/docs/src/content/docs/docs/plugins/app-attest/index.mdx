@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-app-attest"
-description: Capacitor plugin for cross-platform device attestation using Apple App Attest on iOS and Google Play Integrity Standard on Android.
+description: "App Attest on iOS and Play Integrity attestation on Android for Capacitor."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,44 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: One JavaScript API for iOS and Android attestation with native security systems only.
-  image:
-    file: ~public/icons/plugins/app-attest.svg
+  tagline: "Unified cross-platform attestation plugin for Capacitor."
   actions:
     - text: Get started
       link: /docs/plugins/app-attest/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-app-attest/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Unified JavaScript API" icon="rocket">
-    Use the same methods on both platforms: `prepare()`, `createAttestation()`, and `createAssertion()`.
-  </Card>
-  <Card title="Native security systems" icon="approve-check">
-    iOS uses Apple App Attest, Android uses Google Play Integrity Standard API.
-  </Card>
-  <Card title="Backend-ready output" icon="setting">
-    Normalized response shape with `platform`, `format`, `keyId`, and `token` for server verification.
-  </Card>
-  <Card title="Platform guides" icon="open-book">
-    Follow [Getting Started](/docs/plugins/app-attest/getting-started/), then configure [iOS](/docs/plugins/app-attest/ios/) and [Android](/docs/plugins/app-attest/android/).
-  </Card>
-</CardGrid>
+Unified cross-platform attestation plugin for Capacitor.
+
+## Core Capabilities
+
+- `isSupported` - Checks whether native attestation is available on this device.
+- `prepare` - Prepares attestation state and returns the key handle used for later calls.
+- `createAttestation` - Creates a registration attestation token bound to a backend-issued challenge.
+- `createAssertion` - Creates a request assertion token bound to a request payload.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `isSupported` | Checks whether native attestation is available on this device. |
+| `prepare` | Prepares attestation state and returns the key handle used for later calls. |
+| `createAttestation` | Creates a registration attestation token bound to a backend-issued challenge. |
+| `createAssertion` | Creates a request assertion token bound to a request payload. |
+| `storeKeyId` | Stores/prepares a key identifier for reuse. |
+| `getStoredKeyId` | Returns the currently stored/prepared key identifier. |
+| `clearStoredKeyId` | Clears stored/prepared key identifiers. |
+| `generateKey` | Legacy alias for `prepare()`. |
+| `attestKey` | Legacy alias for `createAttestation()`. |
+| `generateAssertion` | Legacy alias for `createAssertion()`. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-app-attest](https://github.com/Cap-go/capacitor-app-attest/).

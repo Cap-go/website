@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-mux-player"
-description: Launch the native Mux Player SDK from Capacitor apps with signed playback and analytics support.
+description: "Native Mux Player SDK to play video on IOS and Android."
 tableOfContents: false
 next: false
 prev: false
@@ -8,37 +8,38 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Stream high-quality Mux video in fullscreen with DRM, analytics, and consistent controls across iOS, Android, and web.
-  image:
-    file: ~public/icons/plugins/mux-player.svg
+  tagline: "Native Mux Player SDK to play video on IOS and Android."
   actions:
     - text: Get started
       link: /docs/plugins/mux-player/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-mux-player/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-Deliver premium playback by wrapping the official Mux native SDKs in a simple Capacitor interface.
+Native Mux Player SDK to play video on IOS and Android.
 
-<CardGrid stagger>
-  <Card title="Native SDK experience" icon="rocket">
-    Use the same playback stack as the Mux mobile SDKs with adaptive bitrate and DRM.
-  </Card>
-  <Card title="Signed playback" icon="approve-check">
-    Provide playback and DRM tokens for secure delivery of protected streams.
-  </Card>
-  <Card title="Uniform API" icon="pencil">
-    Trigger playback, dismiss the player, and listen to events with one TypeScript API.
-  </Card>
-  <Card title="Analytics ready" icon="star">
-    Pass environment keys and player names to feed Mux Data telemetry automatically.
-  </Card>
-</CardGrid>
+## Core Capabilities
 
-The getting started guide walks through hooking up the native SDKs, handling tokens, and responding to player events.
+- `play` - Launch the native Mux Player in fullscreen and begin playback.
+- `dismiss` - Dismiss the player if it is visible.
+- `isActive` - Returns whether the player is currently being displayed.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `play` | Launch the native Mux Player in fullscreen and begin playback. |
+| `dismiss` | Dismiss the player if it is visible. |
+| `isActive` | Returns whether the player is currently being displayed. |
+| `removeAllListeners` | Remove all event listeners registered on the plugin instance. |
+| `addListener` | Listen to player lifecycle or playback events emitted by the plugin. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-mux-player](https://github.com/Cap-go/capacitor-mux-player/).

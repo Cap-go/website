@@ -1,0 +1,46 @@
+---
+title: "@capgo/capacitor-webview-guardian"
+description: "Capacitor plugin to Detect when the WebView was killed in the background and relaunch it on foreground."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Capacitor plugin to Detect when the WebView was killed in the background and relaunch it on foreground."
+  actions:
+    - text: Get started
+      link: /docs/plugins/webview-guardian/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-webview-guardian/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+Capacitor plugin to Detect when the WebView was killed in the background and relaunch it on foreground.
+
+## Core Capabilities
+
+- `startMonitoring` - Starts observing foreground events and automatically checks the WebView health.
+- `stopMonitoring` - Stops any automatic foreground monitoring.
+- `getState` - Returns the latest known monitoring state.
+- `checkNow` - Forces a WebView health probe immediately.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `startMonitoring` | Starts observing foreground events and automatically checks the WebView health. |
+| `stopMonitoring` | Stops any automatic foreground monitoring. |
+| `getState` | Returns the latest known monitoring state. |
+| `checkNow` | Forces a WebView health probe immediately. |
+| `addListener` | See the source definitions for current behavior. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-webview-guardian](https://github.com/Cap-go/capacitor-webview-guardian/).

@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-live-reload"
-description: Live reload your Capacitor app from a remote dev server for faster development.
+description: "Capacitor plugin to live reload Capacitor apps from a remote Vite dev server."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,44 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Connect your Capacitor app to your local development server for instant hot reloading and faster iteration during development.
-  image:
-    file: ~public/icons/plugins/live-reload.svg
+  tagline: "Capacitor plugin to live reload Capacitor apps from a remote Vite dev server."
   actions:
     - text: Get started
       link: /docs/plugins/live-reload/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-live-reload/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Hot Module Replacement" icon="rocket">
-    Instant updates without rebuilding your app
-  </Card>
-  <Card title="Remote Dev Server" icon="laptop">
-    Connect to Vite or any compatible dev server
-  </Card>
-  <Card title="WebSocket Connection" icon="puzzle">
-    Real-time communication for live updates
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/live-reload/getting-started/) to set up live reload.
-  </Card>
-</CardGrid>
+Capacitor plugin to live reload Capacitor apps from a remote Vite dev server.
+
+## Core Capabilities
+
+- `configureServer` - Store remote dev server settings used for subsequent connections.
+- `connect` - Establish a WebSocket connection if one is not already active.
+- `disconnect` - Close the current WebSocket connection and disable auto reconnect.
+- `getStatus` - Returns the current connection status.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `configureServer` | Store remote dev server settings used for subsequent connections. |
+| `connect` | Establish a WebSocket connection if one is not already active. |
+| `disconnect` | Close the current WebSocket connection and disable auto reconnect. |
+| `getStatus` | Returns the current connection status. |
+| `reload` | Trigger a full reload of the Capacitor WebView. |
+| `reloadFile` | Reload a single file/module if the runtime supports it (falls back to full reload). |
+| `addListener` | Listen to incoming reload events emitted by the server. |
+| `addListener` | Listen to socket status changes (connected/disconnected). |
+| `removeAllListeners` | Remove all registered listeners. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-live-reload](https://github.com/Cap-go/capacitor-live-reload/).

@@ -1,110 +1,275 @@
 ---
 title: Getting Started
-description: Learn how to install and launch Persona inquiries in your Capacitor app.
+description: "Install @capgo/capacitor-intune and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-persona" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-2. **Sync native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
-
-## iOS Setup
-
-Persona can require camera, location, and bluetooth depending on your inquiry template. Add usage descriptions in `Info.plist`:
-
-```xml
-<key>NSCameraUsageDescription</key>
-<string>This app uses the camera for identity verification.</string>
-<key>NSLocationWhenInUseUsageDescription</key>
-<string>This app uses location to support identity verification.</string>
-<key>NSBluetoothAlwaysUsageDescription</key>
-<string>This app uses bluetooth to improve identity verification checks.</string>
+```bash
+bun add @capgo/capacitor-intune
+bunx cap sync
 ```
 
-## Android Setup
+## Import
 
-No extra Java/Kotlin wiring is required. The plugin already configures Persona's Android Maven repository and dependency.
-
-## Basic Usage
-
-```ts
-import { Persona } from '@capgo/capacitor-persona';
-
-await Persona.addListener('inquiryComplete', (result) => {
-  console.log('Inquiry complete', result.inquiryId, result.status);
-});
-
-await Persona.addListener('inquiryCanceled', (result) => {
-  console.log('Inquiry canceled', result.inquiryId, result.sessionToken);
-});
-
-await Persona.addListener('inquiryError', (result) => {
-  console.error('Inquiry error', result.error, result.errorCode, result.cause);
-});
-
-await Persona.startInquiry({
-  templateId: 'itmpl_EXAMPLE',
-  environment: 'sandbox',
-  referenceId: 'user_123',
-  fields: {
-    name_first: 'Alex',
-    is_verified_user: true,
-  },
-});
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
 ```
 
-## Resume an Existing Inquiry
+## API Overview
 
-When resuming a flow created on your backend, pass `inquiryId` with a valid `sessionToken`:
+### `acquireToken`
 
-```ts
-await Persona.startInquiry({
-  inquiryId: 'inq_123',
-  sessionToken: 'usertok_abc',
-  environment: 'production',
-});
+Present the Microsoft sign-in flow and return an access token plus the account metadata.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+await IntuneMAM.acquireToken({} as AcquireTokenOptions);
 ```
 
-## API Reference
+### `acquireTokenSilent`
 
-### `startInquiry(options)`
+Acquire a token from the MSAL cache for a previously signed-in user.
 
-Launches Persona inquiry UI.
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
 
-Key options:
-- `templateId`: Recommended for new inquiries.
-- `templateVersion`: Use a specific template version.
-- `inquiryId` + `sessionToken`: Resume an existing inquiry.
-- `environment`: `'production' | 'sandbox'` (default: `'production'`).
-- `fields`: Key/value map to pre-write inquiry fields.
+await IntuneMAM.acquireTokenSilent({} as AcquireTokenSilentOptions);
+```
 
-### Events
+### `registerAndEnrollAccount`
 
-- `inquiryComplete`: Inquiry reached a completed state.
-- `inquiryCanceled`: User exited the inquiry.
-- `inquiryError`: Persona returned an unrecoverable error.
+Register a previously authenticated account with Intune and start enrollment.
 
-## Best Practices
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
 
-1. **Use webhooks for critical decisions**  
-   Treat client callbacks as UX signals. Base compliance or account decisions on Persona webhook events from your backend.
+await IntuneMAM.registerAndEnrollAccount({} as RegisterAndEnrollAccountOptions);
+```
 
-2. **Validate options before launch**  
-   Ensure you pass either `templateId`, `templateVersion`, or `inquiryId`.
+### `loginAndEnrollAccount`
 
-3. **Handle cancellation and errors**  
-   Always listen for `inquiryCanceled` and `inquiryError` so users can recover gracefully.
+Ask Intune to authenticate and enroll a user without first requesting an app token.
 
-## Platform Notes
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
 
-- **iOS**: Requires usage descriptions in `Info.plist` for template-dependent checks.
-- **Android**: Uses Persona SDK v2 and launches inquiry via native activity contract.
-- **Web**: Not supported; the web implementation throws an unavailable error.
+await IntuneMAM.loginAndEnrollAccount();
+```
+
+### `enrolledAccount`
+
+Return the currently enrolled Intune account, if one is available.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+await IntuneMAM.enrolledAccount();
+```
+
+### `deRegisterAndUnenrollAccount`
+
+Deregister the account from Intune and trigger selective wipe when applicable.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+await IntuneMAM.deRegisterAndUnenrollAccount({} as IntuneMAMUser);
+```
+
+### `logoutOfAccount`
+
+Sign the user out of MSAL without unenrolling the Intune account.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+await IntuneMAM.logoutOfAccount({} as IntuneMAMUser);
+```
+
+### `appConfig`
+
+Fetch the remote Intune app configuration for a managed account.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+await IntuneMAM.appConfig({} as IntuneMAMUser);
+```
+
+### `getPolicy`
+
+Fetch the currently effective Intune app protection policy for a managed account.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+await IntuneMAM.getPolicy({} as IntuneMAMUser);
+```
+
+### `groupName`
+
+Convenience helper that resolves the `GroupName` app configuration value when present.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+await IntuneMAM.groupName({} as IntuneMAMUser);
+```
+
+### `sdkVersion`
+
+Return the native Intune and MSAL SDK versions bundled by this plugin.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+await IntuneMAM.sdkVersion();
+```
+
+### `displayDiagnosticConsole`
+
+Show the native Intune diagnostics UI.
+
+```typescript
+import { IntuneMAM } from '@capgo/capacitor-intune';
+
+await IntuneMAM.displayDiagnosticConsole();
+```
+
+## Type Reference
+
+### `AcquireTokenOptions`
+Interactive token acquisition options.
+```typescript
+export interface AcquireTokenOptions {
+  /**
+   * Scopes to request, for example `https://graph.microsoft.com/.default`.
+   */
+  scopes: string[];
+
+  /**
+   * When true, always show the Microsoft account picker or sign-in UI.
+   *
+   * @default false
+   */
+  forcePrompt?: boolean;
+
+  /**
+   * Optional login hint for the interactive sign-in flow.
+   */
+  loginHint?: string;
+}
+```
+
+### `IntuneMAMAcquireToken`
+```typescript
+export interface IntuneMAMAcquireToken {
+  accountId: string;
+  accessToken: string;
+  accountIdentifier: string;
+  idToken?: string;
+  username?: string;
+  tenantId?: string;
+  authority?: string;
+}
+```
+
+### `AcquireTokenSilentOptions`
+Silent token acquisition options.
+```typescript
+export interface AcquireTokenSilentOptions {
+  /**
+   * Scopes to request, for example `https://graph.microsoft.com/.default`.
+   */
+  scopes: string[];
+
+  /**
+   * Microsoft Entra object ID returned by `acquireToken` or `enrolledAccount`.
+   */
+  accountId: string;
+
+  /**
+   * When true, bypass the cached access token and request a fresh one.
+   *
+   * @default false
+   */
+  forceRefresh?: boolean;
+}
+```
+
+### `RegisterAndEnrollAccountOptions`
+```typescript
+export interface RegisterAndEnrollAccountOptions {
+  /**
+   * Microsoft Entra object ID returned by `acquireToken`.
+   */
+  accountId: string;
+}
+```
+
+### `IntuneMAMUser`
+```typescript
+export interface IntuneMAMUser {
+  accountId: string;
+  accountIdentifier?: string;
+  username?: string;
+  tenantId?: string;
+  authority?: string;
+}
+```
+
+### `IntuneMAMAppConfig`
+```typescript
+export interface IntuneMAMAppConfig {
+  accountId: string;
+  fullData: Record<string, string>[];
+  values: Record<string, string>;
+  conflicts: string[];
+}
+```
+
+### `IntuneMAMPolicy`
+```typescript
+export interface IntuneMAMPolicy {
+  accountId: string;
+  isPinRequired?: boolean;
+  isManagedBrowserRequired?: boolean;
+  isScreenCaptureAllowed?: boolean;
+  isContactSyncAllowed?: boolean;
+  isAppSharingAllowed?: boolean;
+  isFileEncryptionRequired?: boolean;
+  notificationPolicy?: string;
+}
+```
+
+### `IntuneMAMGroupName`
+```typescript
+export interface IntuneMAMGroupName {
+  accountId: string;
+  groupName?: string;
+}
+```
+
+### `IntuneMAMVersionInfo`
+```typescript
+export interface IntuneMAMVersionInfo {
+  platform: 'ios' | 'android';
+  intuneSdkVersion: string;
+  msalVersion?: string;
+}
+```
+
+### `IntuneMAMChangeEvent`
+```typescript
+export interface IntuneMAMChangeEvent {
+  accountId?: string;
+}
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

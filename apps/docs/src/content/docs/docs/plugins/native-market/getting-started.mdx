@@ -1,104 +1,96 @@
 ---
 title: Getting Started
-description: Learn how to install and use the Native Market plugin to redirect users to Google Play Store or Apple App Store from your Capacitor app.
+description: "Install @capgo/native-market and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the package**
-   <PackageManagers pkg="@capgo/native-market" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+```bash
+bun add @capgo/native-market
+bunx cap sync
+```
 
-2. **Sync with native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+## Import
 
-## Usage
+```typescript
+import { NativeMarket } from '@capgo/native-market';
+```
 
-Import the plugin and use its methods to redirect users to app stores:
+## API Overview
+
+### `openStoreListing`
+
+Launch app listing page in Play Store (Android) or App Store (iOS).
 
 ```typescript
 import { NativeMarket } from '@capgo/native-market';
 
-// Open app store listing
-const openAppStore = async () => {
-  await NativeMarket.openStoreListing({
-    appId: 'com.example.app' // Your app's bundle ID
-  });
-};
+// Open app in store
+await NativeMarket.openStoreListing({
+  appId: 'com.example.app'
+});
 
-// Request app review
-const requestReview = async () => {
-  await NativeMarket.requestReview();
-};
-
-// Open app store search
-const searchInStore = async () => {
-  await NativeMarket.search({
-    terms: 'fitness app' // Search terms
-  });
-};
+// Open app in specific country store (iOS only)
+await NativeMarket.openStoreListing({
+  appId: 'com.example.app',
+  country: 'IT'
+});
 ```
 
-## API Reference
+### `openDevPage`
 
-### openStoreListing(options)
-
-Opens the app store listing for the specified app.
-
-```typescript
-interface OpenStoreListingOptions {
-  appId: string; // Bundle ID on iOS, Package name on Android
-}
-```
-
-### requestReview()
-
-Requests an in-app review from the user. On iOS 10.3+, this shows the rating dialog without leaving the app.
-
-### search(options)
-
-Opens the app store with search results.
-
-```typescript
-interface SearchOptions {
-  terms: string; // Search terms to use
-}
-```
-
-## Platform Notes
-
-### iOS
-- Uses `SKStoreReviewController` for in-app reviews on iOS 10.3+
-- Falls back to opening App Store for older versions
-
-### Android
-- Opens Google Play Store
-- Uses in-app review API when available
-
-## Example
+Deep-link directly to a developer's page in the Play Store.
+Android only.
 
 ```typescript
 import { NativeMarket } from '@capgo/native-market';
-import { Capacitor } from '@capacitor/core';
 
-export class AppService {
-  async rateApp() {
-    try {
-      // Try in-app review first
-      await NativeMarket.requestReview();
-    } catch (error) {
-      // Fallback to opening store listing
-      const platform = Capacitor.getPlatform();
-      const appId = platform === 'ios' 
-        ? 'id123456789' // Your iOS app ID
-        : 'com.example.app'; // Your Android package name
-        
-      await NativeMarket.openStoreListing({ appId });
-    }
-  }
-}
+await NativeMarket.openDevPage({
+  devId: 'Google+LLC'
+});
+```
+
+### `openCollection`
+
+Link users to a collection or top charts in the Play Store.
+Android only.
+
+```typescript
+import { NativeMarket } from '@capgo/native-market';
+
+await NativeMarket.openCollection({
+  name: 'featured'
+});
+```
+
+### `openEditorChoicePage`
+
+Link users to Editor's choice page in the Play Store.
+Android only.
+
+```typescript
+import { NativeMarket } from '@capgo/native-market';
+
+await NativeMarket.openEditorChoicePage({
+  editorChoice: 'editorial_fitness_apps_us'
+});
+```
+
+### `search`
+
+Search the Play Store with custom search terms.
+Android only.
+
+```typescript
+import { NativeMarket } from '@capgo/native-market';
+
+await NativeMarket.search({
+  terms: 'fitness apps'
+});
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

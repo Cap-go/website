@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-uploader"
-description: Background file upload plugin for Capacitor apps with progress tracking and resumable uploads.
+description: "Upload file natively."
 tableOfContents: false
 next: false
 prev: false
@@ -8,33 +8,36 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Upload files in the background with progress tracking, resumable uploads, and network-aware handling for Capacitor apps.
-  image:
-    file: ~public/icons/plugins/uploader.svg
+  tagline: "Capacitor Uploader Plugin for uploading files with background support and progress tracking."
   actions:
     - text: Get started
       link: /docs/plugins/uploader/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-uploader/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-<CardGrid stagger>
-  <Card title="Background uploads" icon="rocket">
-    Continue uploads even when app is in background 🚀
-  </Card>
-  <Card title="Progress tracking" icon="list-format">
-    Real-time upload progress with detailed statistics 📊
-  </Card>
-  <Card title="Resumable uploads" icon="download">
-    Automatically resume interrupted uploads 🔄
-  </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/uploader/getting-started/) to master the plugin in just a few minutes.
-  </Card>
-</CardGrid>
+Capacitor Uploader Plugin for uploading files with background support and progress tracking.
+
+## Core Capabilities
+
+- `startUpload` - Start uploading a file to a server.
+- `removeUpload` - Cancel and remove an ongoing upload.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `startUpload` | Start uploading a file to a server. |
+| `removeUpload` | Cancel and remove an ongoing upload. |
+| `addListener` | Listen for upload progress and status events. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-uploader](https://github.com/Cap-go/capacitor-uploader/).

@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-photo-library"
-description: Browse and select photos with efficient paging, thumbnails, and cached URLs.
+description: "Capacitor plugin Displays photo gallery as web page, or boring native screen which you cannot modify but require no authorization."
 tableOfContents: false
 next: false
 prev: false
@@ -8,37 +8,42 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: Build custom galleries that tap into the native photo library with robust authorization flows.
-  image:
-    file: ~public/icons/plugins/photo-library.svg
+  tagline: "Capacitor plugin Displays photo gallery as web page, or boring native screen which you cannot modify but require no authorization."
   actions:
     - text: Get started
       link: /docs/plugins/photo-library/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Github
+    - text: GitHub
       link: https://github.com/Cap-go/capacitor-photo-library/
       icon: external
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## Overview
 
-Capgo Photo Library helps you list albums, page through assets, and request thumbnails while keeping performance in check.
+Capacitor plugin Displays photo gallery as web page, or boring native screen which you cannot modify but require no authorization.
 
-<CardGrid stagger>
-  <Card title="Authorization helpers" icon="approve-check">
-    Request permissions and handle limited access states gracefully.
-  </Card>
-  <Card title="Paged fetching" icon="rocket">
-    Paginate the gallery with cursor-based loading and customizable limits.
-  </Card>
-  <Card title="Optimized thumbnails" icon="star">
-    Fetch thumbnail URLs at fixed dimensions for smooth scrolling lists.
-  </Card>
-  <Card title="Media picking" icon="download">
-    Let users select photos or videos with configurable selection limits.
-  </Card>
-</CardGrid>
+## Core Capabilities
 
-Check the getting started guide for permission setup and gallery examples.
+- `checkAuthorization` - Returns the current authorization status without prompting the user.
+- `requestAuthorization` - Requests access to the photo library if needed.
+- `getAlbums` - Retrieves the available albums.
+- `getLibrary` - Retrieves library assets along with URLs that can be displayed in the web view.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `checkAuthorization` | Returns the current authorization status without prompting the user. |
+| `requestAuthorization` | Requests access to the photo library if needed. |
+| `getAlbums` | Retrieves the available albums. |
+| `getLibrary` | Retrieves library assets along with URLs that can be displayed in the web view. |
+| `getPhotoUrl` | Retrieves a displayable URL for the full resolution version of the asset. If you already called `getLibrary` with `includeFullResolutionData`, you normally do not need this method. |
+| `getThumbnailUrl` | Retrieves a displayable URL for a resized thumbnail of the asset. |
+| `pickMedia` | Opens the native system picker so the user can select media without granting full photo library access. The selected files are copied into the application cache and returned with portable URLs. |
+| `getPluginVersion` | Get the native Capacitor plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-photo-library](https://github.com/Cap-go/capacitor-photo-library/).

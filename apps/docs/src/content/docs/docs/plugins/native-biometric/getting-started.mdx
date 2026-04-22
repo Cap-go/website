@@ -1,235 +1,304 @@
 ---
 title: Getting Started
-description: Learn how to install and use the Native Biometric plugin for secure biometric authentication in your Capacitor app.
+description: "Install @capgo/capacitor-native-biometric and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-native-biometric" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-2. **Sync with native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-3. **Configure permissions**
-   
-   ### iOS
-   Add Face ID usage description to your `Info.plist`:
-   ```xml
-   <key>NSFaceIDUsageDescription</key>
-   <string>Authenticate securely to access your account</string>
-   ```
-   
-   ### Android
-   Add biometric permission to your `AndroidManifest.xml`:
-   ```xml
-   <uses-permission android:name="android.permission.USE_BIOMETRIC" />
-   ```
-
-4. **Check availability before prompting**
-   Always inspect full availability details before showing authentication UIs.
-</Steps>
-
-## Usage
-
-Import the plugin and use its methods for biometric authentication:
-
-```typescript
-import {
-  NativeBiometric,
-  BiometryType,
-  AuthenticationStrength,
-  AccessControl,
-} from '@capgo/capacitor-native-biometric';
-
-const checkBiometric = async () => {
-  const result = await NativeBiometric.isAvailable({ useFallback: true });
-  console.log('Biometric available:', result.isAvailable);
-  console.log('Strength:', result.authenticationStrength); // STRONG | WEAK | NONE
-  console.log('Primary type:', result.biometryType);
-  console.log('Device is secure:', result.deviceIsSecure);
-  console.log('Strong biometry:', result.strongBiometryIsAvailable);
-};
-
-const verify = async () => {
-  await NativeBiometric.verifyIdentity({
-    reason: 'Open secure section',
-    title: 'Biometric Login',
-    subtitle: 'Unlock with face, fingerprint, or credentials',
-    description: 'Authenticate to continue',
-    negativeButtonText: 'Cancel',
-    maxAttempts: 5,
-    allowedBiometryTypes: [BiometryType.FINGERPRINT, BiometryType.FACE_ID],
-  });
-};
-
-const saveCredentials = async () => {
-  await NativeBiometric.setCredentials({
-    username: 'user@example.com',
-    password: 'securepassword',
-    server: 'https://api.example.com',
-    accessControl: AccessControl.BIOMETRY_ANY,
-  });
-};
-
-const getCredentials = async () => {
-  const credentials = await NativeBiometric.getSecureCredentials({
-    server: 'https://api.example.com',
-    reason: 'Sign in again',
-    title: 'Confirm identity',
-  });
-  console.log(credentials.username);
-};
-
-const alreadySaved = async () => {
-  const { isSaved } = await NativeBiometric.isCredentialsSaved({
-    server: 'https://api.example.com',
-  });
-  console.log('Credentials saved:', isSaved);
-};
-
-const cleanup = async () => {
-  await NativeBiometric.deleteCredentials({
-    server: 'https://api.example.com',
-  });
-};
-
-const watchChanges = async () => {
-  const handle = await NativeBiometric.addListener('biometryChange', (result) => {
-    console.log('Biometry availability changed:', result.isAvailable);
-    console.log('Type:', result.biometryType);
-  });
-
-  // Remove when no longer needed
-  // await handle.remove();
-};
+```bash
+bun add @capgo/capacitor-native-biometric
+bunx cap sync
 ```
 
-## API Reference
-
-### isAvailable(options)
-
-Checks if biometric authentication is available on the device.
+## Import
 
 ```typescript
-interface IsAvailableOptions {
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
+```
+
+## API Overview
+
+### `isAvailable`
+
+Checks if biometric authentication hardware is available.
+
+```typescript
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
+
+await NativeBiometric.isAvailable();
+```
+
+### `verifyIdentity`
+
+Prompts the user to authenticate with biometrics.
+
+```typescript
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
+
+await NativeBiometric.verifyIdentity();
+```
+
+### `getCredentials`
+
+Gets the stored credentials for a given server.
+
+```typescript
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
+
+await NativeBiometric.getCredentials({} as GetCredentialOptions);
+```
+
+### `setCredentials`
+
+Stores the given credentials for a given server.
+
+```typescript
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
+
+await NativeBiometric.setCredentials({} as SetCredentialOptions);
+```
+
+### `deleteCredentials`
+
+Deletes the stored credentials for a given server.
+
+```typescript
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
+
+await NativeBiometric.deleteCredentials({} as DeleteCredentialOptions);
+```
+
+### `getSecureCredentials`
+
+Gets the stored credentials for a given server, requiring biometric authentication.
+Credentials must have been stored with accessControl set to BIOMETRY_CURRENT_SET or BIOMETRY_ANY.
+
+On iOS, the system automatically shows the biometric prompt when accessing the protected Keychain item.
+On Android, BiometricPrompt is shown with a CryptoObject bound to the credential decryption key.
+
+```typescript
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
+
+await NativeBiometric.getSecureCredentials({} as GetSecureCredentialsOptions);
+```
+
+### `isCredentialsSaved`
+
+Checks if credentials are already saved for a given server.
+
+```typescript
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
+
+await NativeBiometric.isCredentialsSaved({} as IsCredentialsSavedOptions);
+```
+
+## Type Reference
+
+### `IsAvailableOptions`
+```typescript
+export interface IsAvailableOptions {
+  /**
+   * Only for iOS.
+   * Specifies if should fallback to passcode authentication if biometric authentication is not available.
+   * On Android, this parameter is ignored due to BiometricPrompt API constraints:
+   * DEVICE_CREDENTIAL authenticator and negative button (cancel) are mutually exclusive.
+   */
   useFallback: boolean;
 }
+```
 
-interface AvailableResult {
+### `AvailableResult`
+Result from isAvailable() method indicating biometric authentication availability.
+```typescript
+export interface AvailableResult {
+  /**
+   * Whether authentication is available (biometric or fallback if useFallback is true)
+   */
   isAvailable: boolean;
-  authenticationStrength: AuthenticationStrength; // STRONG | WEAK | NONE
+  /**
+   * The strength of available authentication method (STRONG, WEAK, or NONE)
+   */
+  authenticationStrength: AuthenticationStrength;
+  /**
+   * The primary biometry type available on the device.
+   * On Android devices with multiple biometry types, this returns MULTIPLE.
+   * Use this for display purposes only - always use isAvailable for logic decisions.
+   */
   biometryType: BiometryType;
+  /**
+   * Whether the device has a secure lock screen (PIN, pattern, or password).
+   * This is independent of biometric enrollment.
+   */
   deviceIsSecure: boolean;
+  /**
+   * Whether strong biometry (Face ID, Touch ID, or fingerprint on devices that consider it strong)
+   * is specifically available, separate from weak biometry or device credentials.
+   */
   strongBiometryIsAvailable: boolean;
-  errorCode?: number;
+  /**
+   * Error code from BiometricAuthError enum. Only present when isAvailable is false.
+   * Indicates why biometric authentication is not available.
+   * @see BiometricAuthError
+   */
+  errorCode?: BiometricAuthError;
 }
 ```
 
-### verifyIdentity(options)
-
-Prompts for biometric authentication.
-
+### `BiometryChangeListener`
+Callback type for biometry change listener.
 ```typescript
-interface BiometricOptions {
+export type BiometryChangeListener = (result: AvailableResult) => void;
+```
+
+### `BiometricOptions`
+```typescript
+export interface BiometricOptions {
   reason?: string;
   title?: string;
   subtitle?: string;
   description?: string;
   negativeButtonText?: string;
+  /**
+   * Only for iOS.
+   * Specifies if should fallback to passcode authentication if biometric authentication fails.
+   * On Android, this parameter is ignored due to BiometricPrompt API constraints:
+   * DEVICE_CREDENTIAL authenticator and negative button (cancel) are mutually exclusive.
+   */
   useFallback?: boolean;
+  /**
+   * Only for iOS.
+   * Set the text for the fallback button in the authentication dialog.
+   * If this property is not specified, the default text is set by the system.
+   */
   fallbackTitle?: string;
-  maxAttempts?: number; // Android only
+  /**
+   * Only for Android.
+   * Set a maximum number of attempts for biometric authentication. The maximum allowed by android is 5.
+   * @default 1
+   */
+  maxAttempts?: number;
+  /**
+   * Only for Android.
+   * Specify which biometry types are allowed for authentication.
+   * If not specified, all available types will be allowed.
+   * @example [BiometryType.FINGERPRINT, BiometryType.FACE_AUTHENTICATION]
+   */
   allowedBiometryTypes?: BiometryType[];
 }
 ```
 
-### setCredentials(options)
-
-Stores credentials. Use `accessControl` to enforce biometric-only retrieval on supported platforms.
-
+### `GetCredentialOptions`
 ```typescript
-interface SetCredentialOptions {
+export interface GetCredentialOptions {
+  server: string;
+}
+```
+
+### `Credentials`
+```typescript
+export interface Credentials {
+  username: string;
+  password: string;
+}
+```
+
+### `SetCredentialOptions`
+```typescript
+export interface SetCredentialOptions {
   username: string;
   password: string;
   server: string;
+  /**
+   * Access control level for the stored credentials.
+   * When set to BIOMETRY_CURRENT_SET or BIOMETRY_ANY, the credentials are
+   * hardware-protected and require biometric authentication to access.
+   *
+   * On iOS, this adds SecAccessControl to the Keychain item.
+   * On Android, this creates a biometric-protected Keystore key and requires
+   * BiometricPrompt authentication for both storing and retrieving credentials.
+   *
+   * @default AccessControl.NONE
+   * @since 8.4.0
+   */
   accessControl?: AccessControl;
 }
 ```
 
-### getSecureCredentials(options)
-
-Gets stored credentials only when authentication succeeds for protected entries.
-
+### `DeleteCredentialOptions`
 ```typescript
-interface GetSecureCredentialsOptions {
+export interface DeleteCredentialOptions {
   server: string;
+}
+```
+
+### `GetSecureCredentialsOptions`
+```typescript
+export interface GetSecureCredentialsOptions {
+  server: string;
+  /**
+   * Reason for requesting biometric authentication.
+   * Displayed in the biometric prompt on both iOS and Android.
+   */
   reason?: string;
+  /**
+   * Title for the biometric prompt.
+   * Only for Android.
+   */
   title?: string;
+  /**
+   * Subtitle for the biometric prompt.
+   * Only for Android.
+   */
   subtitle?: string;
+  /**
+   * Description for the biometric prompt.
+   * Only for Android.
+   */
   description?: string;
+  /**
+   * Text for the negative/cancel button.
+   * Only for Android.
+   */
   negativeButtonText?: string;
 }
 ```
 
-### isCredentialsSaved(options)
-
-Checks if credentials exist for a server entry.
-
+### `IsCredentialsSavedOptions`
 ```typescript
-interface IsCredentialsSavedOptions {
+export interface IsCredentialsSavedOptions {
   server: string;
 }
+```
 
-interface IsCredentialsSavedResult {
+### `IsCredentialsSavedResult`
+```typescript
+export interface IsCredentialsSavedResult {
   isSaved: boolean;
 }
 ```
 
-### deleteCredentials(options)
-
-Deletes stored credentials for a server entry.
-
+### `AuthenticationStrength`
 ```typescript
-interface DeleteCredentialOptions {
-  server: string;
+export enum AuthenticationStrength {
+  /**
+   * No authentication available, even if PIN is available but useFallback = false
+   */
+  NONE = 0,
+  /**
+   * Strong authentication: Face ID on iOS, fingerprints on devices that consider fingerprints strong (Android).
+   * Note: PIN/pattern/password is NEVER considered STRONG, even when useFallback = true.
+   */
+  STRONG = 1,
+  /**
+   * Weak authentication: Face authentication on Android devices that consider face weak,
+   * or PIN/pattern/password if useFallback = true (PIN is always WEAK, never STRONG).
+   */
+  WEAK = 2,
 }
 ```
 
-### addListener('biometryChange', ...)
+## Source Of Truth
 
-Listen for biometric changes and resume flows safely.
-
-```typescript
-const handle = await NativeBiometric.addListener('biometryChange', (result) => {
-  // result: AvailableResult
-});
-```
-
-## Platform differences
-
-### iOS
-- Supports Face ID and Touch ID
-- `useFallback` follows passcode fallback behavior as configured
-
-### Android
-- Supports fingerprint, face, iris, and PIN/pattern/password flows
-- Android constraints apply for fallback UI and biometric type restrictions
-
-## Best Practices
-
-1. **Always check availability first**
-2. **Use full result data** to choose secure routes
-3. **Prefer secure credential modes** for sensitive data
-4. **Handle cancellation and errors gracefully**
-5. **Remove listeners** when they are no longer needed
-
-## Related Documentation
-
-- [Migrate from Ionic Identity Vault](/docs/upgrade/from-ionic-identity-vault/)
-- [Ionic enterprise plugins migration solution](/solutions/ionic-enterprise-plugins/)
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

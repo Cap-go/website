@@ -1,37 +1,44 @@
 ---
 locale: en
 ---
-
 # Using @capgo/capacitor-live-activities
 
-`@capgo/capacitor-live-activities` lets a Capacitor app start, update, and end iOS Live Activities with a JSON-based layout definition. It is a good fit for delivery tracking, timers, ride progress, sports scores, and any flow that needs persistent lock-screen or Dynamic Island state.
+Capacitor Live Activities Plugin interface for managing iOS Live Activities.
 
-## Installation
+## Install
 
 ```bash
 bun add @capgo/capacitor-live-activities
 bunx cap sync
 ```
 
-## Before you write code
+## What This Plugin Exposes
 
-- Live Activities require iOS 16.1 or later.
-- Create a Widget Extension target in Xcode and share an App Group between the main app and the widget extension.
-- Add `NSSupportsLiveActivities` to your app `Info.plist`.
+- `areActivitiesSupported` - Check if Live Activities are supported on this device. Requires iOS 16.1+ and device support.
+- `startActivity` - Start a new Live Activity with the specified layout and data.
+- `updateActivity` - Update an existing Live Activity with new data.
+- `endActivity` - End a Live Activity.
 
-## Check device support
+## Example Usage
+
+### `areActivitiesSupported`
+
+Check if Live Activities are supported on this device. Requires iOS 16.1+ and device support.
 
 ```typescript
 import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
 
 const { supported, reason } = await CapgoLiveActivities.areActivitiesSupported();
-
-if (!supported) {
-  console.warn('Live Activities unavailable:', reason);
+if (supported) {
+  console.log('Live Activities are supported!');
+} else {
+  console.log('Not supported:', reason);
 }
 ```
 
-## Start an activity
+### `startActivity`
+
+Start a new Live Activity with the specified layout and data.
 
 ```typescript
 import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
@@ -39,64 +46,70 @@ import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
 const { activityId } = await CapgoLiveActivities.startActivity({
   layout: {
     type: 'container',
-    direction: 'vertical',
-    spacing: 8,
+    direction: 'horizontal',
     children: [
       { type: 'text', content: 'Order #{{orderNumber}}', fontSize: 16, fontWeight: 'bold' },
-      { type: 'text', content: '{{status}}', fontSize: 14, color: '#666666' },
-      { type: 'progress', value: 'progress', tint: '#34C759' },
-    ],
+      { type: 'text', content: '{{status}}', fontSize: 14, color: '#666666' }
+    ]
   },
   dynamicIslandLayout: {
     expanded: {
-      center: { type: 'text', content: '{{status}}' },
+      leading: { type: 'image', source: 'sfSymbol', value: 'box.truck' },
       trailing: { type: 'text', content: '{{eta}}' },
+      center: { type: 'text', content: '{{status}}' },
+      bottom: { type: 'progress', value: 'progress' }
     },
-    compactLeading: { type: 'text', content: 'ETA' },
+    compactLeading: { type: 'image', source: 'sfSymbol', value: 'box.truck' },
     compactTrailing: { type: 'text', content: '{{eta}}' },
-    minimal: { type: 'text', content: '{{eta}}' },
-  },
-  behavior: {
-    widgetUrl: 'myapp://orders/12345',
+    minimal: { type: 'image', source: 'sfSymbol', value: 'box.truck' }
   },
   data: {
     orderNumber: '12345',
     status: 'On the way',
     eta: '10 min',
-    progress: 0.6,
-  },
+    progress: 0.6
+  }
 });
+console.log('Started activity:', activityId);
 ```
 
-## Update the activity
+### `updateActivity`
+
+Update an existing Live Activity with new data.
 
 ```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
+
 await CapgoLiveActivities.updateActivity({
-  activityId,
+  activityId: 'abc123',
   data: {
-    status: 'Arriving soon',
-    eta: '2 min',
-    progress: 0.9,
+    status: 'Arrived!',
+    eta: 'Now',
+    progress: 1.0
   },
+  alertConfiguration: {
+    title: 'Delivery Update',
+    body: 'Your order has arrived!'
+  }
 });
 ```
 
-## End the activity
+### `endActivity`
+
+End a Live Activity.
 
 ```typescript
+import { CapgoLiveActivities } from '@capgo/capacitor-live-activities';
+
 await CapgoLiveActivities.endActivity({
-  activityId,
-  data: {
-    status: 'Delivered',
-    progress: 1,
-  },
+  activityId: 'abc123',
+  data: { status: 'Delivered' },
   dismissalPolicy: 'after',
-  dismissAfter: Date.now() + 60 * 60 * 1000,
+  dismissAfter: Date.now() + 3600000 // 1 hour from now
 });
 ```
 
-## Practical advice
+## Full Reference
 
-- Build your layout from stable state keys so updates only change data, not structure.
-- Keep the widget extension focused on rendering and let your Capacitor app own activity state transitions.
-- Always gate the feature behind `areActivitiesSupported()` so unsupported devices fall back cleanly.
+- GitHub: https://github.com/Cap-go/capacitor-live-activities/
+- Docs: /docs/plugins/live-activities/

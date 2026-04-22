@@ -1,321 +1,443 @@
 ---
 title: Getting Started
-description: Learn how to install and use the Printer plugin to print content from your Capacitor app.
+description: "Install @capgo/capacitor-printer and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
+## Install
 
-<Steps>
-1. **Install the package**
-   <PackageManagers pkg="@capgo/capacitor-printer" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+```bash
+bun add @capgo/capacitor-printer
+bunx cap sync
+```
 
-2. **Sync with native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-</Steps>
+## Import
 
-## Usage
+```typescript
+import { Printer } from '@capgo/capacitor-printer';
+```
 
-Import the plugin and print various types of content:
+## API Overview
+
+### `printBase64`
+
+Presents the printing UI to print files encoded as base64 strings.
+
+**Platform Behavior:**
+- **iOS**: Uses UIPrintInteractionController with base64 decoded data
+- **Android**: Uses PrintManager with base64 decoded data
+- **Web**: Creates a blob from base64 data and opens print dialog
+
+**Performance Warning:**
+Large files can lead to app crashes due to memory constraints when decoding base64.
+For files larger than 5MB, it's recommended to use printFile() instead.
 
 ```typescript
 import { Printer } from '@capgo/capacitor-printer';
 
-// Print HTML content
-const printHTML = async () => {
-  await Printer.print({
-    content: '<h1>Hello World</h1><p>This is a test print.</p>',
-    name: 'test-print'
-  });
-};
+// Print a base64 encoded PDF
+await Printer.printBase64({
+  name: 'Invoice #12345',
+  data: 'JVBERi0xLjQKJeLjz9MKMyAwIG9iago8PC9UeXBlL...',
+  mimeType: 'application/pdf',
+});
 
-// Print a PDF file
-const printPDF = async () => {
-  await Printer.print({
-    content: 'file:///path/to/document.pdf',
-    name: 'my-document'
-  });
-};
-
-// Print an image
-const printImage = async () => {
-  await Printer.print({
-    content: 'file:///path/to/image.jpg',
-    name: 'my-image'
-  });
-};
+// Print a base64 encoded image
+await Printer.printBase64({
+  name: 'Product Photo',
+  data: '/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDA...',
+  mimeType: 'image/jpeg',
+});
 ```
 
-## API Reference
+### `printFile`
 
-### print(options)
+Presents the printing UI to print device files.
 
-Opens the native print dialog with the specified content.
+**Platform Behavior:**
+- **iOS**: Uses UIPrintInteractionController with file URL. Supports file:// paths or paths relative to app's documents directory.
+- **Android**: Uses PrintManager with file path. Supports both content:// URIs and file:// paths.
+- **Web**: Reads file and opens print dialog
 
-```typescript
-interface PrintOptions {
-  content: string;          // HTML string, file URI, or base64 data
-  name?: string;            // Print job name
-  orientation?: 'portrait' | 'landscape';
-  grayscale?: boolean;      // Print in grayscale (default: false)
-}
-
-await Printer.print(options);
-```
-
-### canPrint()
-
-Checks if printing is available on the device.
-
-```typescript
-const { value } = await Printer.canPrint();
-console.log('Printing available:', value);
-```
-
-## Complete Example
+**Supported File Types:**
+- PDF documents (application/pdf)
+- Images: JPEG, PNG, GIF, HEIC, HEIF
 
 ```typescript
 import { Printer } from '@capgo/capacitor-printer';
-import { Filesystem, Directory } from '@capacitor/filesystem';
 
-export class PrintService {
-  async checkPrintAvailability(): Promise<boolean> {
-    const { value } = await Printer.canPrint();
-    return value;
-  }
+// iOS: Print from app documents directory
+await Printer.printFile({
+  name: 'Contract',
+  path: 'file:///var/mobile/Containers/Data/Application/.../Documents/contract.pdf',
+});
 
-  async printHTML(htmlContent: string, jobName: string = 'Document') {
-    try {
-      const canPrint = await this.checkPrintAvailability();
-      if (!canPrint) {
-        throw new Error('Printing not available on this device');
-      }
+// Android: Print from content URI
+await Printer.printFile({
+  name: 'Receipt',
+  path: 'content://com.android.providers.downloads.documents/document/123',
+  mimeType: 'application/pdf',
+});
 
-      await Printer.print({
-        content: htmlContent,
-        name: jobName,
-        orientation: 'portrait'
-      });
-    } catch (error) {
-      console.error('Print failed:', error);
-      throw error;
-    }
-  }
+// Android: Print from file path
+await Printer.printFile({
+  name: 'Photo',
+  path: 'file:///storage/emulated/0/Download/photo.jpg',
+  mimeType: 'image/jpeg',
+});
+```
 
-  async printDocument(filePath: string, jobName?: string) {
-    await Printer.print({
-      content: filePath,
-      name: jobName || 'Document'
-    });
-  }
+### `printHtml`
 
-  async printReceipt(receiptData: any) {
-    const html = `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <style>
-            body { font-family: Arial, sans-serif; padding: 20px; }
-            .header { text-align: center; margin-bottom: 20px; }
-            .item { display: flex; justify-content: space-between; margin: 10px 0; }
-            .total { font-weight: bold; font-size: 1.2em; margin-top: 20px; padding-top: 10px; border-top: 2px solid #000; }
-          </style>
-        </head>
-        <body>
-          <div class="header">
-            <h2>Receipt</h2>
-            <p>Date: ${new Date().toLocaleDateString()}</p>
-          </div>
-          ${receiptData.items.map((item: any) => `
-            <div class="item">
-              <span>${item.name}</span>
-              <span>$${item.price.toFixed(2)}</span>
-            </div>
-          `).join('')}
-          <div class="total">
-            <div class="item">
-              <span>Total:</span>
-              <span>$${receiptData.total.toFixed(2)}</span>
-            </div>
-          </div>
-        </body>
-      </html>
-    `;
+Presents the printing UI to print HTML documents.
 
-    await this.printHTML(html, 'Receipt');
-  }
+**Platform Behavior:**
+- **iOS**: Renders HTML in WKWebView, then prints using UIPrintInteractionController
+- **Android**: Renders HTML in WebView, then prints using PrintManager
+- **Web**: Creates iframe with HTML content and triggers print dialog
 
-  async printFromURL(url: string) {
-    // Download the file first
-    const response = await fetch(url);
-    const blob = await response.blob();
-    const reader = new FileReader();
+**HTML Requirements:**
+- Should be a complete HTML document with proper structure
+- Can include inline CSS styles or style tags
+- External resources (images, stylesheets) should use absolute URLs
+- Print-specific CSS can be added using
 
-    return new Promise((resolve, reject) => {
-      reader.onloadend = async () => {
-        try {
-          await Printer.print({
-            content: reader.result as string,
-            name: 'Downloaded Document'
-          });
-          resolve(true);
-        } catch (error) {
-          reject(error);
-        }
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    });
-  }
+```typescript
+import { Printer } from '@capgo/capacitor-printer';
+
+// Simple HTML document
+await Printer.printHtml({
+name: 'Sales Report',
+html: '<html><body><h1>Q4 Sales Report</h1><p>Revenue: $125,000</p></body></html>',
+});
+
+// HTML with print-specific CSS
+await Printer.printHtml({
+name: 'Styled Invoice',
+html: `
+<html>
+<head>
+<style>
+```
+
+### `printPdf`
+
+Presents the printing UI to print PDF documents.
+
+**Platform Behavior:**
+- **iOS**: Uses UIPrintInteractionController with PDF file URL
+- **Android**: Uses PrintManager with PdfDocument
+- **Web**: Creates object URL and opens print dialog
+
+**File Path Requirements:**
+- **iOS**: Must be file:// path or relative to app's documents directory
+- **Android**: Supports content:// URIs (from downloads, media store) or file:// paths
+- **Web**: Must be accessible file path
+
+```typescript
+import { Printer } from '@capgo/capacitor-printer';
+
+// Print PDF from app storage
+await Printer.printPdf({
+  name: 'Annual Report 2024',
+  path: 'file:///var/mobile/Containers/Data/Application/.../Documents/report.pdf',
+});
+
+// Print PDF from Android downloads
+await Printer.printPdf({
+  name: 'Downloaded Document',
+  path: 'content://com.android.providers.downloads.documents/document/123',
+});
+```
+
+### `printWebView`
+
+Presents the printing UI to print web view content.
+
+Prints the current content displayed in your app's web view.
+
+**Platform Behavior:**
+- **iOS**: Uses UIPrintInteractionController with WKWebView's view printable
+- **Android**: Uses WebView.createPrintDocumentAdapter() with PrintManager
+- **Web**: Triggers window.print() for current page
+
+**Print Styling:**
+Supports CSS print media queries for customization. The web view's current
+styles will be applied, including any
+
+```typescript
+import { Printer } from '@capgo/capacitor-printer';
+
+// Print current web view with default name
+await Printer.printWebView();
+
+// Print with custom job name
+await Printer.printWebView({
+name: 'Dashboard Screenshot',
+});
+
+// Use with print-specific CSS in your HTML
+// Add this to your app's CSS:
+//
+```
+
+## Type Reference
+
+### `PrintBase64Options`
+Options for printing base64 encoded data.
+```typescript
+export interface PrintBase64Options extends PrintOptions {
+  /**
+   * Valid base64 encoded string representing the file content.
+   *
+   * The base64 string should NOT include the data URL prefix (e.g., "data:application/pdf;base64,").
+   * Only provide the raw base64 encoded content.
+   *
+   * **Performance Considerations:**
+   * - Base64 encoding increases data size by approximately 33%
+   * - Large files (>5MB) may cause memory issues when decoding
+   * - Consider using printFile() for large documents
+   *
+   * **Platform Notes:**
+   * - **iOS**: Decoded to NSData and passed to UIPrintInteractionController
+   * - **Android**: Decoded to byte array and written to temporary file
+   * - **Web**: Converted to Blob for printing
+   *
+   * @since 7.0.0
+   * @example 'JVBERi0xLjQKJeLjz9MKMyAwIG9iago8PC9UeXBlL...'
+   */
+  data: string;
+
+  /**
+   * MIME type of the base64 encoded data.
+   *
+   * **Supported types:**
+   * - `application/pdf` - PDF documents
+   * - `image/jpeg` - JPEG images
+   * - `image/png` - PNG images
+   * - `image/gif` - GIF images (iOS/Android only)
+   * - `image/heic` - HEIC images (iOS only)
+   * - `image/heif` - HEIF images (iOS only)
+   *
+   * **Platform Support:**
+   * - All platforms support PDF, JPEG, and PNG
+   * - GIF support varies by platform
+   * - HEIC/HEIF are iOS-specific formats
+   *
+   * @since 7.0.0
+   * @example 'application/pdf'
+   * @example 'image/jpeg'
+   */
+  mimeType: string;
 }
 ```
 
-## Advanced Usage
-
-### Printing with Custom Styling
-
+### `PrintFileOptions`
+Options for printing files from device storage.
 ```typescript
-const printStyledDocument = async () => {
-  const html = `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <style>
-          @page {
-            size: A4;
-            margin: 2cm;
-          }
-          body {
-            font-family: 'Times New Roman', serif;
-            line-height: 1.6;
-          }
-          h1 {
-            color: #333;
-            border-bottom: 2px solid #333;
-            padding-bottom: 10px;
-          }
-          .content {
-            margin-top: 20px;
-          }
-        </style>
-      </head>
-      <body>
-        <h1>Professional Document</h1>
-        <div class="content">
-          <p>This is a professionally styled document ready for printing.</p>
-        </div>
-      </body>
-    </html>
-  `;
+export interface PrintFileOptions extends PrintOptions {
+  /**
+   * Path to the file to print.
+   *
+   * **iOS Path Formats:**
+   * - `file://` URL: Full file URL path
+   * - Relative path: Path relative to app's documents directory
+   * - Must be within app's accessible directories (documents, temporary, cache)
+   *
+   * **Android Path Formats:**
+   * - `content://` URI: Content provider URI (recommended for external files)
+   * - `file://` path: Direct file system path
+   * - Must have read permission for the file
+   *
+   * **Common Use Cases:**
+   * - App documents: Files saved in app's document directory
+   * - Downloads: Files from system downloads folder (use content:// on Android)
+   * - Temporary files: Files in app's temporary/cache directory
+   * - Shared storage: Files from external storage (Android, requires permissions)
+   *
+   * @since 7.0.0
+   * @platform ios Supports file:// paths and relative paths
+   * @platform android Supports content:// URIs and file:// paths
+   * @example 'content://com.android.providers.downloads.documents/document/123'
+   * @example 'file:///var/mobile/Containers/Data/Application/.../Documents/document.pdf'
+   * @example 'file:///storage/emulated/0/Download/receipt.pdf'
+   */
+  path: string;
 
-  await Printer.print({
-    content: html,
-    name: 'Styled Document',
-    orientation: 'portrait'
-  });
-};
+  /**
+   * MIME type of the file.
+   *
+   * **Platform Behavior:**
+   * - **Android**: REQUIRED for content:// URIs. Helps the system determine how to handle the file.
+   *                Optional for file:// paths (auto-detected from extension).
+   * - **iOS**: Ignored. File type is auto-detected from file extension.
+   * - **Web**: Optional. Auto-detected if not provided.
+   *
+   * **Common MIME Types:**
+   * - `application/pdf` - PDF documents
+   * - `image/jpeg` - JPEG images
+   * - `image/png` - PNG images
+   * - `image/gif` - GIF images
+   *
+   * @since 7.0.0
+   * @default Undefined (auto-detected from file extension)
+   * @platform android Used for content:// URIs and file type detection
+   * @platform ios Ignored (auto-detected)
+   * @example 'application/pdf'
+   * @example 'image/jpeg'
+   */
+  mimeType?: string;
+}
 ```
 
-### Printing Tables
-
+### `PrintHtmlOptions`
+Options for printing HTML content.
 ```typescript
-const printTable = async (data: any[]) => {
-  const tableRows = data.map(row => `
-    <tr>
-      <td>${row.id}</td>
-      <td>${row.name}</td>
-      <td>${row.value}</td>
-    </tr>
-  `).join('');
-
-  const html = `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <style>
-          table {
-            width: 100%;
-            border-collapse: collapse;
-          }
-          th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-          }
-          th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-          }
-        </style>
-      </head>
-      <body>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Value</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${tableRows}
-          </tbody>
-        </table>
-      </body>
-    </html>
-  `;
-
-  await Printer.print({
-    content: html,
-    name: 'Data Table'
-  });
-};
+export interface PrintHtmlOptions extends PrintOptions {
+  /**
+   * HTML content to print.
+   *
+   * **Content Requirements:**
+   * - Should be a complete HTML document with `<html>`, `<head>`, and `<body>` tags
+   * - Can include inline CSS styles or `<style>` tags
+   * - External resources (images, fonts) should use absolute URLs
+   * - JavaScript is not executed during print rendering
+   *
+   * **Print Optimization Tips:**
+   * - Use `@media print` CSS rules for print-specific styling
+   * - Control page breaks with `page-break-before`, `page-break-after`, `page-break-inside`
+   * - Hide UI elements using `.no-print { display: none; }` class
+   * - Adjust font sizes for readability (12pt is standard for print)
+   * - Use print-friendly colors (avoid dark backgrounds)
+   *
+   * **Platform Rendering:**
+   * - **iOS**: Rendered in WKWebView before printing
+   * - **Android**: Rendered in WebView before printing
+   * - **Web**: Rendered in hidden iframe before printing
+   *
+   * **Character Encoding:**
+   * - UTF-8 is recommended and default
+   * - Include charset in HTML: `<meta charset="UTF-8">`
+   *
+   * @since 7.0.0
+   * @example '<html><body><h1>Hello World</h1><p>This is a test document.</p></body></html>'
+   * @example
+   * ```typescript
+   * const htmlWithStyles = `
+   *   <html>
+   *     <head>
+   *       <meta charset="UTF-8">
+   *       <style>
+   *         @media print {
+   *           body { font-family: Arial, sans-serif; font-size: 12pt; }
+   *           .no-print { display: none; }
+   *           h1 { color: #333; page-break-before: always; }
+   *         }
+   *       </style>
+   *     </head>
+   *     <body>
+   *       <h1>Invoice #12345</h1>
+   *       <p>Amount: $299.99</p>
+   *     </body>
+   *   </html>
+   * `;
+   * ```
+   */
+  html: string;
+}
 ```
 
-### Printing Images
-
+### `PrintPdfOptions`
+Options for printing PDF documents.
 ```typescript
-const printImageWithDetails = async (imagePath: string, title: string) => {
-  const html = `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <style>
-          body { text-align: center; padding: 20px; }
-          h2 { margin-bottom: 20px; }
-          img { max-width: 100%; height: auto; }
-        </style>
-      </head>
-      <body>
-        <h2>${title}</h2>
-        <img src="${imagePath}" alt="${title}" />
-      </body>
-    </html>
-  `;
-
-  await Printer.print({
-    content: html,
-    name: title
-  });
-};
+export interface PrintPdfOptions extends PrintOptions {
+  /**
+   * Path to the PDF document.
+   *
+   * **iOS Path Formats:**
+   * - `file://` URL: Full file URL path to PDF document
+   * - Relative path: Path relative to app's documents directory
+   * - Must be within app's accessible directories (documents, temporary, cache)
+   * - PDF must be valid and not password-protected
+   *
+   * **Android Path Formats:**
+   * - `content://` URI: Content provider URI (recommended for external PDFs)
+   * - `file://` path: Direct file system path to PDF
+   * - Must have read permission for the file
+   * - Supports both single-page and multi-page PDFs
+   *
+   * **Web Path Formats:**
+   * - Relative or absolute path accessible from web context
+   * - Must be a valid PDF file
+   *
+   * **Validation:**
+   * - File must exist at the specified path
+   * - File must be a valid PDF (checked by magic number/header)
+   * - File must be readable by the app
+   *
+   * **Common Sources:**
+   * - App documents: PDFs saved in app's document directory
+   * - Downloads: PDFs from system downloads (use content:// on Android)
+   * - Generated PDFs: Temporary PDFs created by the app
+   * - Network downloads: PDFs downloaded and saved locally
+   *
+   * @since 7.0.0
+   * @platform ios Supports file:// paths and relative paths
+   * @platform android Supports content:// URIs and file:// paths
+   * @platform web Supports accessible file paths
+   * @example 'content://com.android.providers.downloads.documents/document/123'
+   * @example 'file:///var/mobile/Containers/Data/Application/.../Documents/document.pdf'
+   * @example 'file:///storage/emulated/0/Download/report.pdf'
+   * @example 'Documents/invoice-2024.pdf'
+   */
+  path: string;
+}
 ```
 
-## Best Practices
+### `PrintOptions`
+Base options for all print operations.
+```typescript
+export interface PrintOptions {
+  /**
+   * Name of the print job.
+   *
+   * **Usage:**
+   * - Displayed in the system print queue
+   * - Shown in print history/logs
+   * - May appear in printer status displays
+   * - Used as default filename for "Save as PDF" option
+   *
+   * **Platform Behavior:**
+   * - **iOS**: Shown in print preview header and activity view
+   * - **Android**: Displayed in print job notification and print queue
+   * - **Web**: Used as document title in print dialog
+   *
+   * **Best Practices:**
+   * - Use descriptive names (e.g., "Invoice #12345", "Q4 Report")
+   * - Keep under 50 characters for better display
+   * - Avoid special characters that may cause issues in filenames
+   * - Include relevant identifiers (order numbers, dates, etc.)
+   *
+   * **Examples:**
+   * - "Invoice #12345"
+   * - "Sales Report - 2024 Q4"
+   * - "Customer Receipt - John Doe"
+   * - "Product Photo - SKU-ABC123"
+   *
+   * @since 7.0.0
+   * @default 'Document'
+   * @platform ios Shown in print preview and activity view
+   * @platform android Shown in print queue and notifications
+   * @platform web Used as document title in print dialog
+   * @example 'Invoice #12345'
+   * @example 'Annual Report 2024'
+   * @example 'Receipt - Order #789'
+   */
+  name?: string;
+}
+```
 
-1. **Check Availability**: Always check if printing is available before attempting to print
-2. **Valid Content**: Ensure HTML is well-formed and file paths are valid
-3. **Job Names**: Use descriptive names for print jobs to help users identify them
-4. **Styling**: Use inline CSS or embedded styles for consistent print output
-5. **Error Handling**: Wrap print calls in try-catch blocks for user feedback
+## Source Of Truth
 
-## Troubleshooting
-
-### Common Issues
-
-**Print dialog not appearing**: Check that printing is available with canPrint()
-**Content not printing**: Verify that HTML is valid and file paths are correct
-**Images not showing**: Ensure image paths are absolute and files are accessible
-**Styling issues**: Use @page CSS rules and test print output
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
