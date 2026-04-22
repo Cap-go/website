@@ -1,4 +1,4 @@
-import { execSync } from 'node:child_process'
+import { execFileSync } from 'node:child_process'
 import { mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { dirname, join, relative, resolve } from 'node:path'
 import ts from 'typescript'
@@ -63,7 +63,7 @@ const sidebarPath = resolve('apps/docs/src/config/sidebar.mjs')
 const webIconsRoot = resolve('apps/web/public/icons/plugins')
 const mirroredDocSlugs = new Set(['contentsquare', 'live-activities', 'twilio-video', 'widget-kit'])
 const apiBase = 'https://api.github.com'
-const githubToken = execSync('gh auth token', { encoding: 'utf8' }).trim()
+const githubToken = execFileSync('gh', ['auth', 'token'], { encoding: 'utf8' }).trim()
 const builtinTypeNames = new Set([
   'Array',
   'Blob',
@@ -88,7 +88,7 @@ const builtinTypeNames = new Set([
 ])
 const lifecycleMethods = new Set(['addListener', 'removeAllListeners', 'getPluginVersion'])
 
-const normalizeWhitespace = (value: string) => value.replace(/\s+/g, ' ').trim()
+const normalizeWhitespace = (value: string) => value.replaceAll(/\s+/g, ' ').trim()
 
 const sentenceCase = (value: string) => {
   const trimmed = value.trim()
@@ -116,7 +116,7 @@ const serializeJsDocComment = (comment: ts.JSDoc['comment'] | ts.JSDocTag['comme
 }
 
 const getDocInfo = (node: ts.Node): DocInfo => {
-  const jsDocs = ((node as { jsDoc?: ts.JSDoc[] }).jsDoc ?? []) as ts.JSDoc[]
+  const jsDocs = 'jsDoc' in node && Array.isArray(node.jsDoc) ? node.jsDoc : []
   const textParts: string[] = []
   const examples: string[] = []
 
@@ -191,7 +191,7 @@ const parseGitHubHref = (href: string) => {
   if (parts.length < 2) throw new Error(`Invalid GitHub URL: ${href}`)
 
   const [owner, repo, ...rest] = parts
-  const tutorialSlug = rest.length > 0 ? rest.at(-1)! : repo
+  const tutorialSlug = rest.length > 0 ? (rest.at(-1) ?? repo) : repo
   const repoPath = rest[0] === 'tree' ? rest.slice(2).join('/') : ''
   return { owner, repo, repoPath, tutorialSlug }
 }
@@ -220,7 +220,7 @@ const complexDocs = new Set(
   docDirectories.filter((dir) => {
     const files = listFiles(join(docsRoot, dir))
       .map((file) => relative(join(docsRoot, dir), file).replaceAll('\\', '/'))
-      .sort()
+      .sort((left, right) => left.localeCompare(right))
     return files.join('|') !== 'getting-started.mdx|index.mdx'
   }),
 )
@@ -260,8 +260,8 @@ const getRepoPathVariants = (repoPath: string) => {
   const parts = repoPath.split('/').filter(Boolean)
   if (parts.length === 0) return variants
 
-  const last = parts.at(-1)!
-  const collapsed = last.replace(/-/g, '')
+  const last = parts[parts.length - 1]
+  const collapsed = last.replaceAll('-', '')
   if (collapsed !== last) {
     const nextParts = [...parts.slice(0, -1), collapsed]
     variants.push(nextParts.join('/'))
@@ -274,7 +274,7 @@ const fetchGitHubFile = async (plugin: RegistryPlugin, relativePath: string): Pr
   const basePaths = getRepoPathVariants(plugin.repoPath)
   const cacheKey = `${plugin.owner}/${plugin.repo}:${basePaths.join('|')}:${relativePath}`
   const cached = fetchCache.get(cacheKey)
-  if (cached) return cached
+  if (cached !== undefined) return cached
 
   const request = (async () => {
     for (const basePath of basePaths) {
@@ -321,7 +321,7 @@ const readDefinitions = async (plugin: RegistryPlugin) => {
 }
 
 const getImportName = (indexSource: string, interfaceName?: string) => {
-  const match = indexSource.match(/const\s+([A-Za-z0-9_]+)\s*=\s*registerPlugin/)
+  const match = /const\s+(\w+)\s*=\s*registerPlugin/.exec(indexSource)
   if (match?.[1]) return match[1]
   if (!interfaceName) return 'Plugin'
   return interfaceName.replace(/Plugin$/, '')
@@ -426,17 +426,7 @@ const isRegularFile = (path: string) => {
   }
 }
 
-const parseMetadata = async (plugin: RegistryPlugin): Promise<PluginMetadata | null> => {
-  const [packageSource, indexSource, definitionsSource] = await Promise.all([
-    fetchGitHubFile(plugin, 'package.json'),
-    fetchGitHubFile(plugin, 'src/index.ts'),
-    readDefinitions(plugin),
-  ])
-
-  if (!packageSource || !indexSource || !definitionsSource) return null
-
-  const packageJson = JSON.parse(packageSource) as { name?: string; description?: string }
-  const sourceFile = ts.createSourceFile('definitions.ts', definitionsSource, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS)
+const collectExportedDefinitions = (sourceFile: ts.SourceFile) => {
   const exportedTypes = new Map<string, ExportedType>()
   const pluginInterfaces: ts.InterfaceDeclaration[] = []
 
@@ -481,6 +471,22 @@ const parseMetadata = async (plugin: RegistryPlugin): Promise<PluginMetadata | n
     }
   }
 
+  return { exportedTypes, pluginInterfaces }
+}
+
+const parseMetadata = async (plugin: RegistryPlugin): Promise<PluginMetadata | null> => {
+  const [packageSource, indexSource, definitionsSource] = await Promise.all([
+    fetchGitHubFile(plugin, 'package.json'),
+    fetchGitHubFile(plugin, 'src/index.ts'),
+    readDefinitions(plugin),
+  ])
+
+  if (!packageSource || !indexSource || !definitionsSource) return null
+
+  const packageJson = JSON.parse(packageSource) as { name?: string; description?: string }
+  const sourceFile = ts.createSourceFile('definitions.ts', definitionsSource, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS)
+  const { exportedTypes, pluginInterfaces } = collectExportedDefinitions(sourceFile)
+
   const mainInterface = pluginInterfaces.find((item) => item.name.text !== 'PluginsConfig') ?? pluginInterfaces[0]
 
   if (!mainInterface) return null
@@ -490,7 +496,7 @@ const parseMetadata = async (plugin: RegistryPlugin): Promise<PluginMetadata | n
     .filter((member): member is ts.MethodSignature | ts.CallSignatureDeclaration => ts.isMethodSignature(member) || ts.isCallSignatureDeclaration(member))
     .map((member) => getMethodInfo(member, sourceFile, importName, packageJson.name ?? plugin.name))
 
-  const featureMethods = methods.filter((method) => !lifecycleMethods.has(method.name.replace(/['"]/g, '')))
+  const featureMethods = methods.filter((method) => !lifecycleMethods.has(method.name.replaceAll(/['"]/g, '')))
   const referencedTypes = buildReferencedTypes(exportedTypes, methods)
 
   return {
@@ -509,7 +515,10 @@ const parseMetadata = async (plugin: RegistryPlugin): Promise<PluginMetadata | n
 const asBulletList = (methods: MethodInfo[]) =>
   methods
     .slice(0, 4)
-    .map((method) => `- \`${method.displayName}\` ${method.summary ? `- ${method.summary}` : ''}`.replace(/\s+-\s+$/, ''))
+    .map((method) => {
+      const suffix = method.summary ? ` - ${method.summary}` : ''
+      return `- \`${method.displayName}\`${suffix}`
+    })
     .join('\n')
 
 const asApiTable = (methods: MethodInfo[]) =>
@@ -684,7 +693,7 @@ const ensureDirectory = (path: string) => mkdirSync(path, { recursive: true })
 
 const writeTextFile = (path: string, content: string) => {
   ensureDirectory(dirname(path))
-  writeFileSync(path, content.replace(/\r\n/g, '\n').trimEnd() + '\n', 'utf8')
+  writeFileSync(path, content.replaceAll('\r\n', '\n').trimEnd() + '\n', 'utf8')
 }
 
 const copyDirectory = (sourceDir: string, destinationDir: string) => {
@@ -699,10 +708,10 @@ const copyDirectory = (sourceDir: string, destinationDir: string) => {
 
 const normalizePluginCommands = (content: string) =>
   content
-    .replace(/pkgManagers=\{\['npm', 'pnpm', 'yarn', 'bun'\]\}/g, "pkgManagers={['bun']}")
-    .replace(/pkgManagers=\{\['npm',\s*'pnpm',\s*'yarn',\s*'bun'\]\}/g, "pkgManagers={['bun']}")
-    .replace(/\bnpm install\b/g, 'bun add')
-    .replace(/\bnpx cap sync\b/g, 'bunx cap sync')
+    .replaceAll("pkgManagers={['npm', 'pnpm', 'yarn', 'bun']}", "pkgManagers={['bun']}")
+    .replaceAll("pkgManagers={['npm','pnpm','yarn','bun']}", "pkgManagers={['bun']}")
+    .replaceAll('npm install', 'bun add')
+    .replaceAll('npx cap sync', 'bunx cap sync')
 
 const syncSidebarEntries = () => {
   const source = readFileSync(sidebarPath, 'utf8')
@@ -757,6 +766,51 @@ const mapLimit = async <T, R>(items: T[], limit: number, worker: (item: T) => Pr
   return results
 }
 
+const writeSimpleDocs = (items: Array<PluginMetadata | null>) => {
+  for (const metadata of items) {
+    if (!metadata) continue
+    const dir = join(docsRoot, metadata.plugin.docsSlug)
+    writeTextFile(join(dir, 'index.mdx'), renderIndexDoc(metadata))
+    writeTextFile(join(dir, 'getting-started.mdx'), renderGettingStartedDoc(metadata))
+  }
+}
+
+const normalizeComplexGettingStartedDocs = () => {
+  for (const plugin of registryPlugins) {
+    if (!plugin.docsWanted || !complexDocs.has(plugin.docsSlug)) continue
+
+    const dir = join(docsRoot, plugin.docsSlug)
+    const gettingStartedPath = join(dir, 'getting-started.mdx')
+    if (isRegularFile(gettingStartedPath)) {
+      writeTextFile(gettingStartedPath, normalizePluginCommands(readFileSync(gettingStartedPath, 'utf8')))
+    }
+  }
+}
+
+const writeComplexIndexes = (items: Array<PluginMetadata | null>) => {
+  for (const metadata of items) {
+    if (!metadata) continue
+    const indexPath = join(docsRoot, metadata.plugin.docsSlug, 'index.mdx')
+    if (isRegularFile(indexPath)) writeTextFile(indexPath, renderIndexDoc(metadata))
+  }
+}
+
+const writeTutorials = (items: Array<PluginMetadata | null>) => {
+  for (const metadata of items) {
+    if (!metadata) continue
+    writeTextFile(join(tutorialRoot, `${metadata.plugin.tutorialSlug}.md`), renderTutorial(metadata))
+  }
+}
+
+const syncMirrors = () => {
+  for (const slug of mirroredDocSlugs) {
+    const sourceDir = join(docsRoot, slug)
+    if (pathExists(sourceDir) && isRegularFile(join(sourceDir, 'index.mdx'))) {
+      copyDirectory(sourceDir, join(mirrorRoot, slug))
+    }
+  }
+}
+
 const main = async () => {
   syncSidebarEntries()
 
@@ -764,51 +818,20 @@ const main = async () => {
   const complexMetadata = await mapLimit(complexDocsToRefreshIndex, 6, parseMetadata)
   const tutorialMetadata = await mapLimit([...tutorialPlugins.values()], 6, parseMetadata)
 
-  for (const metadata of simpleMetadata) {
-    if (!metadata) continue
-    const dir = join(docsRoot, metadata.plugin.docsSlug)
-    writeTextFile(join(dir, 'index.mdx'), renderIndexDoc(metadata))
-    writeTextFile(join(dir, 'getting-started.mdx'), renderGettingStartedDoc(metadata))
-  }
-
-  for (const metadata of complexMetadata) {
-    if (!metadata) continue
-    const indexPath = join(docsRoot, metadata.plugin.docsSlug, 'index.mdx')
-    if (!isRegularFile(indexPath)) continue
-    writeTextFile(indexPath, renderIndexDoc(metadata))
-
-    const gettingStartedPath = join(docsRoot, metadata.plugin.docsSlug, 'getting-started.mdx')
-    if (isRegularFile(gettingStartedPath)) {
-      writeTextFile(gettingStartedPath, normalizePluginCommands(readFileSync(gettingStartedPath, 'utf8')))
-    }
-  }
-
-  for (const plugin of registryPlugins.filter((item) => item.docsWanted)) {
-    const dir = join(docsRoot, plugin.docsSlug)
-    const gettingStartedPath = join(dir, 'getting-started.mdx')
-    if (isRegularFile(gettingStartedPath) && complexDocs.has(plugin.docsSlug)) {
-      writeTextFile(gettingStartedPath, normalizePluginCommands(readFileSync(gettingStartedPath, 'utf8')))
-    }
-  }
-
-  for (const metadata of tutorialMetadata) {
-    if (!metadata) continue
-    writeTextFile(join(tutorialRoot, `${metadata.plugin.tutorialSlug}.md`), renderTutorial(metadata))
-  }
-
-  for (const slug of mirroredDocSlugs) {
-    const sourceDir = join(docsRoot, slug)
-    if (pathExists(sourceDir) && isRegularFile(join(sourceDir, 'index.mdx'))) {
-      copyDirectory(sourceDir, join(mirrorRoot, slug))
-    }
-  }
+  writeSimpleDocs(simpleMetadata)
+  writeComplexIndexes(complexMetadata)
+  normalizeComplexGettingStartedDocs()
+  writeTutorials(tutorialMetadata)
+  syncMirrors()
 
   console.log(
     `Synced ${simpleMetadata.filter(Boolean).length} simple doc directories, ${complexMetadata.filter(Boolean).length} complex index pages, and ${tutorialMetadata.filter(Boolean).length} tutorials.`,
   )
 }
 
-main().catch((error) => {
+try {
+  await main()
+} catch (error) {
   console.error(error)
   process.exit(1)
-})
+}
