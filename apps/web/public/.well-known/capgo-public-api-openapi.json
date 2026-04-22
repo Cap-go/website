@@ -1722,6 +1722,7 @@
             "$ref": "#/components/schemas/App"
           }
         },
+        "required": ["data"],
         "additionalProperties": true
       },
       "AppListEnvelope": {

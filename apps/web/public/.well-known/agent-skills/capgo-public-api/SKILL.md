@@ -43,5 +43,5 @@ Create or rotate API keys in the dashboard:
 - Use least-privilege API keys (`read`, `upload`, `write`, `all`).
 - Handle `401`, `403`, and `429` responses explicitly, with retry backoff for `429`.
 - Standard accounts are limited to 100 requests per minute; enterprise accounts are limited to 1000 requests per minute.
-- Expect JSON success payloads with `data` or `status`, and JSON failures with `error`.
+- Expect endpoint-specific JSON success shapes. Many responses use `data` or `status`, but `/statistics/...` can return top-level arrays and `bundle_usage` returns an object with `labels` and `datasets`, so rely on the OpenAPI before unwrapping. Errors typically include an `error` field when present.
 - Capgo's public API currently uses API-key authentication, not OAuth/OIDC discovery metadata.
