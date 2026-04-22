@@ -1,0 +1,94 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const locale = Astro.locals.locale
+const tools = [
+  {
+    name: 'capgo.open_pricing',
+    title: 'Open pricing',
+    description: 'Navigate to Capgo pricing to compare plans, credits, and enterprise options.',
+    path: getRelativeLocaleUrl(locale, 'pricing'),
+  },
+  {
+    name: 'capgo.open_signup',
+    title: 'Start signup',
+    description: 'Navigate to the Capgo signup page to create an account.',
+    path: getRelativeLocaleUrl(locale, 'register'),
+  },
+  {
+    name: 'capgo.open_native_build',
+    title: 'Open native build',
+    description: 'Navigate to Capgo native build information for iOS and Android build workflows.',
+    path: getRelativeLocaleUrl(locale, 'native-build'),
+  },
+  {
+    name: 'capgo.open_tools',
+    title: 'Open signing tools',
+    description: 'Navigate to Capgo browser-based mobile signing tools for iOS certificates, UDID capture, and Android keystores.',
+    path: getRelativeLocaleUrl(locale, 'tools'),
+  },
+  {
+    name: 'capgo.open_public_api_docs',
+    title: 'Open public API docs',
+    description: 'Navigate to Capgo public API documentation and authentication guidance.',
+    path: getRelativeLocaleUrl(locale, 'docs/public-api'),
+  },
+  {
+    name: 'capgo.open_ai_skills',
+    title: 'Open AI skills',
+    description: 'Navigate to Capgo AI agent skills and MCP workflow information.',
+    path: getRelativeLocaleUrl(locale, 'skills'),
+  },
+]
+
+const script = `;(() => {
+  if (typeof navigator === 'undefined') return
+
+  const modelContext = navigator.modelContext
+  if (!modelContext || typeof modelContext.registerTool !== 'function') return
+
+  const tools = ${JSON.stringify(tools)}
+  const controller = new AbortController()
+
+  const registerNavigationTool = (tool) => {
+    modelContext.registerTool(
+      {
+        name: tool.name,
+        title: tool.title,
+        description: tool.description,
+        inputSchema: {
+          type: 'object',
+          additionalProperties: false,
+        },
+        execute: async () => {
+          const url = new URL(tool.path, window.location.origin).toString()
+          window.location.assign(url)
+          return {
+            status: 'navigating',
+            url,
+          }
+        },
+      },
+      { signal: controller.signal },
+    )
+  }
+
+  for (const tool of tools) {
+    try {
+      registerNavigationTool(tool)
+    } catch (error) {
+      console.debug('Capgo WebMCP registration skipped', tool.name, error)
+    }
+  }
+
+  window.addEventListener(
+    'pagehide',
+    () => {
+      controller.abort()
+    },
+    { once: true },
+  )
+})()`
+---
+
+<script is:inline set:html={script} />

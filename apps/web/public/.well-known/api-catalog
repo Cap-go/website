@@ -1,0 +1,25 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://capgo.app/api/tools/",
+      "service-desc": [
+        {
+          "href": "https://capgo.app/.well-known/capgo-tools-openapi.json",
+          "type": "application/openapi+json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://capgo.app/tools/",
+          "type": "text/html"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://capgo.app/.well-known/tool-api-status.json",
+          "type": "application/health+json"
+        }
+      ]
+    }
+  ]
+}

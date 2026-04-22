@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "capgo-public-api",
+      "type": "skill-md",
+      "description": "Use Capgo's public API docs and API-key authentication model to manage organizations, apps, channels, devices, bundles, statistics, and API keys.",
+      "url": "/.well-known/agent-skills/capgo-public-api/SKILL.md",
+      "digest": "sha256:a28a7cf3713230bdf6ea8c8f8b48e167f51050cd618ed4d60852fde6086584ef"
+    },
+    {
+      "name": "capgo-mobile-signing-tools",
+      "type": "skill-md",
+      "description": "Use Capgo's browser-based signing tools to generate iOS CSRs, create Android keystores, and capture iPhone or iPad UDIDs.",
+      "url": "/.well-known/agent-skills/capgo-mobile-signing-tools/SKILL.md",
+      "digest": "sha256:468de87ad549972ee8801b7a1289dce660a8995f73408afd9647082c70f44080"
+    },
+    {
+      "name": "capgo-cli-mcp",
+      "type": "skill-md",
+      "description": "Run the local Capgo CLI MCP server with bunx so agents can manage live updates, channels, bundles, stats, apps, and native builds.",
+      "url": "/.well-known/agent-skills/capgo-cli-mcp/SKILL.md",
+      "digest": "sha256:e1c0aaa429f632690f6d8485b77a827518014a1b4b589c307b16695c78508756"
+    },
+    {
+      "name": "capgo-site-routing",
+      "type": "skill-md",
+      "description": "Route developers to the right Capgo landing pages for pricing, native builds, signing tools, API docs, AI skills, and enterprise workflows.",
+      "url": "/.well-known/agent-skills/capgo-site-routing/SKILL.md",
+      "digest": "sha256:4ee6bbca584fe7e15c96a003ef2181bbd660a5c1e47f3c5e810cfc9cee14771e"
+    }
+  ]
+}

@@ -10,13 +10,14 @@
     "@iconify-json/heroicons": "1.2.3"
   },
   "scripts": {
+    "validate:agent-skills": "bun ../../scripts/validate-agent-skills-digests.mjs",
     "paraglide:compile": "bunx paraglide-js compile --project ../../project.inlang --outdir ./src/paraglide --emit-ts-declarations --silent",
     "astro": "astro",
     "dev": "bun run paraglide:compile && NODE_OPTIONS=${NODE_OPTIONS:---max-old-space-size=16384} astro dev",
     "start": "bun run paraglide:compile && NODE_OPTIONS=${NODE_OPTIONS:---max-old-space-size=16384} astro dev",
     "clean:build-cache": "rm -rf dist .astro/content-modules.mjs .astro/content-assets.mjs",
     "build": "bun run paraglide:compile && bun run clean:build-cache && NODE_OPTIONS=${NODE_OPTIONS:---max-old-space-size=16384} BUILD_CONCURRENCY=${BUILD_CONCURRENCY:-1} UV_THREADPOOL_SIZE=${UV_THREADPOOL_SIZE:-16} astro build && rm -rf dist/.prerender",
-    "check": "bun run paraglide:compile && astro check",
+    "check": "bun run validate:agent-skills && bun run paraglide:compile && astro check",
     "preview": "bun run build && bun run preview:worker",
     "preview:astro": "astro preview",
     "preview:worker": "wrangler dev",
