@@ -35,24 +35,24 @@ Capacitor plugin for AppsFlyer attribution, analytics, and deep links.
 
 | Method | Description |
 | --- | --- |
-| `addListener` | See the source definitions for current behavior. |
-| `addListener` | See the source definitions for current behavior. |
-| `addListener` | See the source definitions for current behavior. |
+| `addListener('conversion_callback', listener)` | Listen for conversion callbacks, including `onConversionDataSuccess` and `onConversionDataFail`, with `OnConversionDataResult` payloads. |
+| `addListener('oaoa_callback', listener)` | Listen for app-open attribution callbacks, including `onAppOpenAttribution` and `onAttributionFailure`, with `OnAppOpenAttribution` payloads. |
+| `addListener('udl_callback', listener)` | Listen for unified deep link callbacks with `OnDeepLink` payloads. |
 | `initSDK` | Use this method to initialize and start AppsFlyer SDK. This API should be called as soon as the app launched. |
 | `startSDK` | Use this method to start AppsFlyer SDK, only on manual start mode. |
 | `logEvent` | Log an in-app event. |
 | `setCustomerUserId` | Setting your own customer ID enables you to cross-reference your own unique ID with AppsFlyer's unique ID and other devices' IDs. This ID is available in raw-data reports and in the Postback APIs for cross-referencing with your internal IDs. |
-| `setCurrencyCode` | Sets the currency for in-app purchases. The currency code should be a 3 character ISO 4217 code. |
-| `updateServerUninstallToken` | (Android) Allows to pass GCM/FCM Tokens that where collected by third party plugins to the AppsFlyer server. Can be used for Uninstall log. (iOS) Allows to pass APN Tokens that where collected by third party plugins to the AppsFlyer server. Can be used for log Uninstall. |
-| `setAppInviteOneLink` | Set the OneLink ID that should be used for attributing user-Invite. The link that is generated for the user invite will use this OneLink as the base link. |
-| `setOneLinkCustomDomain` | In order for AppsFlyer SDK to successfully resolve hidden (decoded in shortlink ID) attribution parameters, any domain that is configured as a branded domain in the AppsFlyer Dashboard should be provided to this method. |
-| `appendParametersToDeepLinkingURL` | Enables app owners using App Links for deep linking (without OneLink) to attribute sessions initiated via a domain associated with their app. Call this method before calling start. You must provide the following parameters in the parameters Map: pid is_retargeting must be set to true. |
-| `setResolveDeepLinkURLs` | Advertisers can wrap an AppsFlyer OneLink within another Universal Link. This Universal Link will invoke the app but any deep linking data will not propagate to AppsFlyer. setResolveDeepLinkURLs enables you to configure the SDK to resolve the wrapped OneLink URLs, so that deep linking can occur correctly. |
+| `setCurrencyCode` | Sets the currency used for in-app purchases. Provide a three-character ISO 4217 code. |
+| `updateServerUninstallToken` | Pass GCM/FCM tokens on Android or APNs tokens on iOS when another plugin collected them. Use this to forward uninstall measurement tokens to AppsFlyer. |
+| `setAppInviteOneLink` | Sets the OneLink ID used as the base link for invite attribution. |
+| `setOneLinkCustomDomain` | Registers branded OneLink domains so AppsFlyer can resolve attribution parameters hidden in short links. |
+| `appendParametersToDeepLinkingURL` | Enables attribution for App Links deep links without OneLink. Call this method before `startSDK()`. Include at least `pid` and `is_retargeting=true` in the parameters map. |
+| `setResolveDeepLinkURLs` | Use this when an AppsFlyer OneLink is wrapped inside another Universal Link. It lets the SDK resolve the wrapped URL so deep linking still works correctly. |
 | `addPushNotificationDeepLinkPath` | Configures how the SDK extracts deep link values from push notification payloads. |
 | `setSharingFilter` | Stops events from propagating to the specified AppsFlyer partners. |
 | `setSharingFilterForAllPartners` | Stops events from propagating to all AppsFlyer partners. Overwrites setSharingFilter. |
 | `setSharingFilterForPartners` | Stops events from propagating to the specified AppsFlyer partners. |
-| `setAdditionalData` | Set additional data to be sent to AppsFlyer. See. |
+| `setAdditionalData` | Sets additional key-value data to send to AppsFlyer. |
 | `getAppsFlyerUID` | Get AppsFlyer's unique device ID (created for every new install of an app). |
 | `anonymizeUser` | End User Opt-Out from AppsFlyer analytics (Anonymize user data). |
 | `stop` | Once this API is invoked, our SDK no longer communicates with our servers and stops functioning. Useful when implementing user opt-in/opt-out. |
@@ -67,7 +67,7 @@ Capacitor plugin for AppsFlyer attribution, analytics, and deep links.
 | `enableFacebookDeferredApplinks` | Enable the collection of Facebook Deferred AppLinks. Requires Facebook SDK and Facebook app on target/client device. This API must be invoked before initializing the AppsFlyer SDK in order to function properly. |
 | `sendPushNotificationData` | Measure and get data from push-notification campaigns. |
 | `setCurrentDeviceLanguage` | Set the language of the device. The data will be displayed in Raw Data Reports. |
-| `logCrossPromoteImpression` | logs an impression as part of a cross-promotion campaign. Make sure to use the promoted App ID as it appears within the AppsFlyer dashboard. |
+| `logCrossPromoteImpression` | Logs an impression as part of a cross-promotion campaign. Make sure to use the promoted app ID as it appears in the AppsFlyer dashboard. |
 | `setUserEmails` | Set the user emails and encrypt them. |
 | `logLocation` | Manually log the location of the user. |
 | `setPhoneNumber` | Will be sent as an SHA-256 encrypted string. |

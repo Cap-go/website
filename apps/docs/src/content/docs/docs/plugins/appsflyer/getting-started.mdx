@@ -16,6 +16,40 @@ bunx cap sync
 
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
+import type {
+  AFAdRevenueData,
+  AFAndroidInAppPurchase,
+  AFAnonymizeUser,
+  AFAppendToDeepLink,
+  AFConsentData,
+  AFConsentOptions,
+  AFCuid,
+  AFCurrency,
+  AFData,
+  AFDisable,
+  AFEmails,
+  AFEnableTCFDataCollection,
+  AFEvent,
+  AFFbDAL,
+  AFFilters,
+  AFHost,
+  AFInit,
+  AFIosInAppPurchase,
+  AFLanguage,
+  AFLatLng,
+  AFLinkGenerator,
+  AFLogInvite,
+  AFOnelinkDomain,
+  AFOnelinkID,
+  AFPartnerData,
+  AFPath,
+  AFPhone,
+  AFPromotion,
+  AFPurchaseDetailsV2,
+  AFPushPayload,
+  AFUninstall,
+  AFUrls,
+} from '@capgo/capacitor-appsflyer';
 ```
 
 ## API Overview
@@ -63,7 +97,7 @@ await AppsFlyer.setCustomerUserId({} as AFCuid);
 
 ### `setCurrencyCode`
 
-Sets the currency for in-app purchases. The currency code should be a 3 character ISO 4217 code
+Sets the currency used for in-app purchases. Provide a three-character ISO 4217 code.
 
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
@@ -73,8 +107,8 @@ await AppsFlyer.setCurrencyCode({} as AFCurrency);
 
 ### `updateServerUninstallToken`
 
-(Android) Allows to pass GCM/FCM Tokens that where collected by third party plugins to the AppsFlyer server. Can be used for Uninstall log.
-(iOS) Allows to pass APN Tokens that where collected by third party plugins to the AppsFlyer server. Can be used for log Uninstall.
+Pass GCM/FCM tokens on Android or APNs tokens on iOS when another plugin collected them.
+Use this to forward uninstall measurement tokens to AppsFlyer.
 
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
@@ -84,7 +118,7 @@ await AppsFlyer.updateServerUninstallToken({} as AFUninstall);
 
 ### `setAppInviteOneLink`
 
-Set the OneLink ID that should be used for attributing user-Invite. The link that is generated for the user invite will use this OneLink as the base link.
+Sets the OneLink ID used as the base link for invite attribution.
 
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
@@ -94,7 +128,7 @@ await AppsFlyer.setAppInviteOneLink({} as AFOnelinkID);
 
 ### `setOneLinkCustomDomain`
 
-In order for AppsFlyer SDK to successfully resolve hidden (decoded in shortlink ID) attribution parameters, any domain that is configured as a branded domain in the AppsFlyer Dashboard should be provided to this method.
+Registers branded OneLink domains so AppsFlyer can resolve attribution parameters hidden in short links.
 
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
@@ -104,10 +138,8 @@ await AppsFlyer.setOneLinkCustomDomain({} as AFOnelinkDomain);
 
 ### `appendParametersToDeepLinkingURL`
 
-Enables app owners using App Links for deep linking (without OneLink) to attribute sessions initiated via a domain associated with their app. Call this method before calling start.
-You must provide the following parameters in the parameters Map:
-pid
-is_retargeting must be set to true
+Enables attribution for App Links deep links without OneLink. Call this method before `startSDK()`.
+Include at least `pid` and `is_retargeting=true` in the parameters map.
 
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
@@ -117,8 +149,8 @@ await AppsFlyer.appendParametersToDeepLinkingURL({} as AFAppendToDeepLink);
 
 ### `setResolveDeepLinkURLs`
 
-Advertisers can wrap an AppsFlyer OneLink within another Universal Link. This Universal Link will invoke the app but any deep linking data will not propagate to AppsFlyer.
- setResolveDeepLinkURLs enables you to configure the SDK to resolve the wrapped OneLink URLs, so that deep linking can occur correctly.
+Use this when an AppsFlyer OneLink is wrapped inside another Universal Link.
+It lets the SDK resolve the wrapped URL so deep linking still works correctly.
 
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
@@ -168,7 +200,7 @@ await AppsFlyer.setSharingFilterForPartners({} as AFFilters);
 
 ### `setAdditionalData`
 
-Set additional data to be sent to AppsFlyer. See
+Sets additional key-value data to send to AppsFlyer.
 
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
@@ -320,7 +352,7 @@ await AppsFlyer.setCurrentDeviceLanguage({} as AFLanguage);
 
 ### `logCrossPromoteImpression`
 
-logs an impression as part of a cross-promotion campaign. Make sure to use the promoted App ID as it appears within the AppsFlyer dashboard.
+Logs an impression as part of a cross-promotion campaign. Make sure to use the promoted app ID as it appears in the AppsFlyer dashboard.
 
 ```typescript
 import { AppsFlyer } from '@capgo/capacitor-appsflyer';
