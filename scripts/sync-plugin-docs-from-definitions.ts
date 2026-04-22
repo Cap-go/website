@@ -1,4 +1,3 @@
-import { execFileSync } from 'node:child_process'
 import { mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { dirname, join, relative, resolve } from 'node:path'
 import ts from 'typescript'
@@ -63,7 +62,7 @@ const sidebarPath = resolve('apps/docs/src/config/sidebar.mjs')
 const webIconsRoot = resolve('apps/web/public/icons/plugins')
 const mirroredDocSlugs = new Set(['contentsquare', 'live-activities', 'twilio-video', 'widget-kit'])
 const apiBase = 'https://api.github.com'
-const githubToken = execFileSync('gh', ['auth', 'token'], { encoding: 'utf8' }).trim()
+const githubToken = process.env.GITHUB_TOKEN ?? process.env.GH_TOKEN ?? ''
 const builtinTypeNames = new Set([
   'Array',
   'Blob',
@@ -288,8 +287,8 @@ const fetchGitHubFile = async (plugin: RegistryPlugin, relativePath: string): Pr
       const response = await fetch(url, {
         headers: {
           Accept: 'application/vnd.github+json',
-          Authorization: `Bearer ${githubToken}`,
           'User-Agent': 'capgo-plugin-doc-sync',
+          ...(githubToken ? { Authorization: `Bearer ${githubToken}` } : {}),
         },
       })
 

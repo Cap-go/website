@@ -14,10 +14,10 @@ bunx cap sync
 
 ## What This Plugin Exposes
 
-- `optIn` 
-- `optOut` 
-- `sendScreenName` 
-- `sendTransaction` 
+- `optIn`
+- `optOut`
+- `sendScreenName`
+- `sendTransaction`
 
 ## Example Usage
 

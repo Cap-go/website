@@ -14,10 +14,10 @@ bunx cap sync
 
 ## What This Plugin Exposes
 
-- `create` 
-- `start` 
-- `cast` 
-- `getCastStatus` 
+- `create`
+- `start`
+- `cast`
+- `getCastStatus`
 
 ## Example Usage
 

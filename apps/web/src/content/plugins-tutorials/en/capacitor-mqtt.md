@@ -14,10 +14,10 @@ bunx cap sync
 
 ## What This Plugin Exposes
 
-- `connect` 
-- `disconnect` 
-- `subscribe` 
-- `publish` 
+- `connect`
+- `disconnect`
+- `subscribe`
+- `publish`
 
 ## Example Usage
 

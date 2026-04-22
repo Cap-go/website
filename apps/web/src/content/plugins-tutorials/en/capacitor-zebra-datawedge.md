@@ -14,10 +14,10 @@ bunx cap sync
 
 ## What This Plugin Exposes
 
-- `cloneProfile` 
-- `createProfile` 
-- `deleteProfile` 
-- `importConfig` 
+- `cloneProfile`
+- `createProfile`
+- `deleteProfile`
+- `importConfig`
 
 ## Example Usage
 
