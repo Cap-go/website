@@ -18,8 +18,68 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
 jobs:
+  changes:
+    name: Detect changed areas
+    runs-on: ubuntu-latest
+    outputs:
+      web: ${{ steps.filter.outputs.web }}
+      docs: ${{ steps.filter.outputs.docs }}
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+        with:
+          fetch-depth: 0
+      - id: filter
+        name: Detect web and docs changes
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            {
+              echo "web=true"
+              echo "docs=true"
+            } >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            base="${{ github.event.pull_request.base.sha }}"
+            head="${{ github.event.pull_request.head.sha }}"
+          else
+            base="${{ github.event.before }}"
+            head="${{ github.sha }}"
+
+            if [[ -z "$base" || "$base" == "0000000000000000000000000000000000000000" ]]; then
+              base="$(git rev-list --max-parents=0 "$head")"
+            fi
+          fi
+
+          files="$(git diff --name-only "$base" "$head")"
+
+          matches() {
+            grep -E -q "$1" <<< "$files"
+          }
+
+          web=false
+          docs=false
+
+          if matches '^(apps/web/|apps/shared/|messages/|project\.inlang/|scripts/|configs\.json$|package\.json$|bun\.lock$|\.github/workflows/test\.yml$|\.github/workflows/deploy-web\.yml$)'; then
+            web=true
+          fi
+
+          if matches '^(apps/docs/|apps/shared/|apps/web/public/|apps/web/src/config/plugins\.ts$|messages/|project\.inlang/|configs\.json$|package\.json$|bun\.lock$|\.github/workflows/test\.yml$|\.github/workflows/deploy-docs\.yml$)'; then
+            docs=true
+          fi
+
+          {
+            echo "web=$web"
+            echo "docs=$docs"
+          } >> "$GITHUB_OUTPUT"
+
   web:
     name: Web Build + SEO
+    needs: changes
+    if: needs.changes.outputs.web == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
@@ -61,6 +121,8 @@ jobs:
 
   docs:
     name: Docs Build
+    needs: changes
+    if: needs.changes.outputs.docs == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
