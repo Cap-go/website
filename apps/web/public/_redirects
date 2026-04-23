@@ -32,6 +32,7 @@
 /ja/blog/capgo-vs-capawesome-comparing-ota-update-plugins/ /ja/capwesome/ 301
 /ko/blog/alternative-to-capawesome/ /ko/capwesome/ 301
 /ko/blog/capgo-vs-capawesome-comparing-ota-update-plugins/ /ko/capwesome/ 301
-/.well-known/* /deepLink/:splat 200
+/.well-known/apple-app-site-association /deepLink/apple-app-site-association 200
+/.well-known/assetlinks.json /deepLink/assetlinks.json 200
 /en/* /:splat 301
 /docs/plugin/* /docs/plugins/updater/:splat 301
