@@ -49,8 +49,8 @@ await CapacitorFFmpeg.reencodeVideo({} as ReencodeVideoOptions);
 
 Convert a still image into another format.
 
-iOS currently supports `jpeg` and `png`.
-Android currently supports `webp`, `jpeg`, and `png`.
+iOS currently supports `jpeg` and `.png`.
+Android currently supports `.webp`, `jpeg`, and `.png`.
 Web currently rejects with `UNIMPLEMENTED`.
 
 ```typescript
@@ -185,7 +185,7 @@ export interface FFmpegCapabilitiesFeatures {
 
 ### `ImageOutputFormat`
 ```typescript
-export type ImageOutputFormat = 'webp' | 'jpeg' | 'png';
+export type ImageOutputFormat = '.webp' | 'jpeg' | '.png';
 ```
 
 ### `AudioOutputFormat`

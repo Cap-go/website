@@ -155,8 +155,8 @@ export interface CompressImageOptions {
    *
    * **Platform Support:**
    * - **iOS:** `image/jpeg` only
-   * - **Android:** `image/jpeg`, `image/webp`
-   * - **Web:** `image/jpeg`, `image/webp`
+   * - **Android:** `image/jpeg`, `image/.webp`
+   * - **Web:** `image/jpeg`, `image/.webp`
    *
    * **Format Characteristics:**
    * - **JPEG:** Universal support, good for photos, no transparency
@@ -165,7 +165,7 @@ export interface CompressImageOptions {
    * @since 7.0.0
    * @default "image/jpeg"
    * @example "image/jpeg" // JPEG format (all platforms)
-   * @example "image/webp" // WebP format (Android/Web only)
+   * @example "image/.webp" // WebP format (Android/Web only)
    */
   mimeType?: string;
 }
