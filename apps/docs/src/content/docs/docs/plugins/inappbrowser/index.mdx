@@ -46,7 +46,7 @@ Capacitor plugin in app browser.
 | `show` | Show a previously hidden webview. When `id` is omitted, targets the active webview. |
 | `openWebView` | Open url in a new webview with toolbars, and enhanced capabilities, like camera access, file access, listen events, inject javascript, bi directional communication, etc. |
 | `executeScript` | Injects JavaScript code into the InAppBrowser window. When `id` is omitted, executes in all open webviews. |
-| `postMessage` | Sends an event to the webview (in-app browser). Listen in the page with `window.addEventListener('messageFromNative', listenerFunc)`. Payloads must be JSON-serializable, and when `id` is omitted the message is broadcast to all open webviews. |
+| `postMessage` | Sends an event to the webview (in-app browser). Listen in the page with `window.addEventListener('messageFromNative', listenerFunc)`. The `detail` payload must be JSON-serializable. When `id` is omitted, broadcasts to all open webviews. |
 | `takeScreenshot` | Captures the current webview viewport as a PNG screenshot. When `id` is omitted, targets the active webview. |
 | `setUrl` | Sets the URL of the webview. When `id` is omitted, targets the active webview. |
 | `addListener` | Listen for url change, only for openWebView. |
