@@ -154,7 +154,6 @@ function createRateLimiter({
     }
 
     existing.lastAccess = now
-
     if (existing.count >= limit) {
       const retryAfter = Math.max(1, Math.ceil((existing.resetAt - now) / 1000))
       return webJson({ error: errorMessage }, 429, {

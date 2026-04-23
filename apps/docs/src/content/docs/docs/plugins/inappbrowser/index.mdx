@@ -46,14 +46,14 @@ Capacitor plugin in app browser.
 | `show` | Show a previously hidden webview. When `id` is omitted, targets the active webview. |
 | `openWebView` | Open url in a new webview with toolbars, and enhanced capabilities, like camera access, file access, listen events, inject javascript, bi directional communication, etc. |
 | `executeScript` | Injects JavaScript code into the InAppBrowser window. When `id` is omitted, executes in all open webviews. |
-| `postMessage` | Sends an event to the webview (`inappbrowser`). In the page loaded inside the in-app browser, listen for the `messageFromNative` event on `window`. `detail` is the payload sent to the webview, and it must be JSON-serializable. When `id` is omitted, broadcasts to all open webviews. |
+| `postMessage` | Sends an event to the webview (in-app browser). Listen in the page with `window.addEventListener('messageFromNative', listenerFunc)`. The `detail` payload must be JSON-serializable. When `id` is omitted, broadcasts to all open webviews. |
 | `takeScreenshot` | Captures the current webview viewport as a PNG screenshot. When `id` is omitted, targets the active webview. |
 | `setUrl` | Sets the URL of the webview. When `id` is omitted, targets the active webview. |
 | `addListener` | Listen for url change, only for openWebView. |
 | `addListener` | See the source definitions for current behavior. |
 | `addListener` | Listen for close click only for openWebView. |
 | `addListener` | Will be triggered when user clicks on confirm button when disclaimer is required, works with openWebView shareDisclaimer and closeModal. |
-| `addListener` | Triggered when the webview (`inappbrowser`) sends an event to the main app. From the in-app browser page, call `window.mobileApp.postMessage(...)` with a JSON-serializable `detail` payload. |
+| `addListener` | Fires when the webview sends an event back to the app. Use `window.mobileApp.postMessage(...)` in the page, and keep the payload JSON-serializable. |
 | `addListener` | Will be triggered whenever a screenshot is captured from the plugin API, the native screenshot button, or the injected JavaScript bridge. |
 | `addListener` | Will be triggered when page is loaded. |
 | `addListener` | Will be triggered when page load error. |
@@ -68,7 +68,7 @@ Capacitor plugin in app browser.
 | `updateDimensions` | Update the dimensions of the webview. Allows changing the size and position of the webview at runtime. When `id` is omitted, targets the active webview. |
 | `setEnabledSafeTopMargin` | Sets the enabled safe top margin of the webview at runtime. When `id` is omitted, targets the active webview. On Web, this method is a no-op and resolves without changing layout. |
 | `setEnabledSafeBottomMargin` | Sets the enabled safe bottom margin of the webview at runtime. When `id` is omitted, targets the active webview. On Web, this method is a no-op and resolves without changing layout. |
-| `openSecureWindow` | Opens a secured window for OAuth2 authentication. For web, you should have the code in the redirected page to use a broadcast channel to send the redirected url to the app Something like: ```html <html> <head></head> <body> <script> const searchParams = new URLSearchParams(location.search) if (searchParams.has("code")) { new BroadcastChannel("my-channel-name").postMessage(location.href); window.close(); } </script> </body> </html> ``` For mobile, you should have a redirect uri that opens the app, something like: `myapp://oauth_callback/` And make sure to register it in the app's info.plist: ```xml <key>CFBundleURLTypes</key> <array> <dict> <key>CFBundleURLSchemes</key> <array> <string>myapp</string> </array> </dict> </array> ``` And in the AndroidManifest.xml file: ```xml <activity> <intent-filter> <action android:name="android.intent.action.VIEW" /> <category android:name="android.intent.category.DEFAULT" /> <category android:name="android.intent.category.BROWSABLE" /> <data android:host="oauth_callback" android:scheme="myapp" /> </intent-filter> </activity> ```. |
+| `openSecureWindow` | Opens a secure OAuth2 window. On web, return the redirected URL through a `BroadcastChannel`; on mobile, register a custom redirect URI in your app configuration. See the getting-started guide for the full HTML, Info.plist, and AndroidManifest examples. |
 
 ## Source Of Truth
 

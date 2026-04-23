@@ -1,5 +1,6 @@
 /
   Link: </.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"
+  Link: </.well-known/capgo-public-api-openapi.json>; rel="service-desc"; type="application/openapi+json"
   Link: </.well-known/capgo-tools-openapi.json>; rel="service-desc"; type="application/openapi+json"
   Link: </docs/public-api/>; rel="service-doc"; type="text/html"
   Link: </tools/>; rel="service-doc"; type="text/html"
@@ -9,22 +10,47 @@
   cache-control: immutable
 
 /.well-known/api-catalog
-  Content-Type: application/linkset+json; charset=utf-8
+  Content-Type: application/linkset+json; profile="https://www.rfc-editor.org/info/rfc9727"; charset=utf-8
   Access-Control-Allow-Origin: *
   Access-Control-Allow-Methods: GET, HEAD
   Access-Control-Expose-Headers: Link, ETag
+  Cache-Control: public, max-age=3600
+  Link: <https://api.capgo.app/>; rel="item"
+  Link: <https://capgo.app/api/tools/>; rel="item"
+
+/.well-known/capgo-public-api-openapi.json
+  Content-Type: application/openapi+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD
+  Access-Control-Expose-Headers: Link, ETag
+  Cache-Control: public, max-age=3600
 
 /.well-known/capgo-tools-openapi.json
   Content-Type: application/openapi+json; charset=utf-8
   Access-Control-Allow-Origin: *
   Access-Control-Allow-Methods: GET, HEAD
   Access-Control-Expose-Headers: Link, ETag
+  Cache-Control: public, max-age=3600
 
 /.well-known/tool-api-status.json
   Content-Type: application/health+json; charset=utf-8
   Access-Control-Allow-Origin: *
   Access-Control-Allow-Methods: GET, HEAD
   Access-Control-Expose-Headers: Link, ETag
+  Cache-Control: public, max-age=3600
+
+/.well-known/agent-skills/index.json
+  Content-Type: application/json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD
+  Access-Control-Expose-Headers: Link, ETag
+  Cache-Control: public, max-age=3600
+
+/.well-known/agent-skills/*/SKILL.md
+  Content-Type: text/markdown; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD
+  Cache-Control: public, max-age=3600
 
 /.well-known/mcp/server-card.json
   Content-Type: application/json; charset=utf-8

@@ -1,6 +1,31 @@
 {
   "linkset": [
     {
+      "anchor": "https://api.capgo.app/",
+      "service-desc": [
+        {
+          "href": "https://capgo.app/.well-known/capgo-public-api-openapi.json",
+          "type": "application/openapi+json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://capgo.app/docs/public-api/",
+          "type": "text/html"
+        },
+        {
+          "href": "https://capgo.app/docs/public-api/api-keys/",
+          "type": "text/html"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://status.capgo.app/",
+          "type": "text/html"
+        }
+      ]
+    },
+    {
       "anchor": "https://capgo.app/api/tools/",
       "service-desc": [
         {

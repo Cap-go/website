@@ -149,8 +149,7 @@ await InAppBrowser.executeScript({} as { code: string; id?: string });
 
 ### `postMessage`
 
-Sends an event to the webview (`inappbrowser`).
-In the page loaded inside the in-app browser, listen for the `messageFromNative` event on `window`.
+Sends an event to the webview (in-app browser). In the webview JavaScript, listen for it with `window.addEventListener('messageFromNative', listenerFunc)`.
 `detail` is the payload sent to the webview. Because it crosses the Capacitor bridge, it must be JSON-serializable.
 When `id` is omitted, broadcasts to all open webviews.
 
@@ -1054,11 +1053,11 @@ export interface ScreenshotResult {
   /**
    * Image format used for the screenshot.
    */
-  format: 'png';
+  format: '.png';
   /**
    * MIME type of the generated screenshot.
    */
-  mimeType: 'image/png';
+  mimeType: 'image/.png';
   /**
    * Base64-encoded screenshot payload without the data URL prefix.
    */
