@@ -1,45 +1,126 @@
 ---
-title: Gestione delle chiavi API
-description: Cómo gestionar las claves de API
+title: "Claves API"
+description: "Cómo gestionar las claves API de Capgo Cloud, aprenda para qué se utilizan, cómo crearlas, editarlas o rotarlas para garantizar la seguridad de su cuenta"
 sidebar:
   order: 3
 locale: es
 ---
 
+import { Aside } from "@astrojs/starlight/components";
+
 ## ¿Qué puedo hacer con las claves API?
 
-Una clave API puede ser regenerada, eliminada o se puede añadir una nueva
+Una clave API puede ser regenerada, eliminada o se puede añadir una nueva. También puede establecer fechas de expiración y crear claves cifradas para mayor seguridad.
 
 ## ¿Cómo ver todas las claves API?
 
-Necesitas ir a la [página de claves API](https://console.capgo.app/dashboard/apikeys/) y allí verás todas tus claves API
+Necesita ir a la [página de claves API](https://console.capgo.app/dashboard/apikeys/) y allí verá todas sus claves API.
 
 ## ¿Cómo añadir una nueva clave API?
 
-Para añadir una nueva clave API haz clic en el pequeño botón más
+Para añadir una nueva clave API haga clic en el pequeño botón de más
 
-<figure><img src="/apikeys-Agregar.webp" alt="Agregar apikey" /><figcaption></figcaption></figure>
+<figure><img src="/apikeys-add.webp" alt="añadir clave API" /><figcaption></figcaption></figure>
 
-y luego selecciona los permisos que quieres dar a la nueva clave API. Puedes seleccionar:
+y luego seleccione los permisos que desea otorgar a la nueva clave API. Puede seleccionar:
 
- - Lectura - la clave API podrá leer todos los datos
- - Subir - la clave API podrá subir nuevas versiones desde la CLI y leer
- - Todo - La clave API podrá hacer todo
+- **Lectura** - la clave API podrá leer todos los datos
+- **Subida** - la clave API podrá subir nuevas versiones desde la CLI y leer
+- **Escritura** - la clave API podrá modificar configuraciones, canales, dispositivos y subir
+- **Todo** - la clave API podrá hacer todo
 
-<figure><img src="/apikeys-Seleccione-perm.webp" alt="Seleccione perm" /><figcaption></figcaption></figure>
+{/* TODO: replace with apikeys-select-perm-v2.webp once screenshot is taken */}
+
+<figure><img src="/apikeys-select-perm.webp" alt="seleccionar permisos" /><figcaption></figcaption></figure>
+
+## Cómo funcionan los permisos de las claves API
+
+Los permisos de las claves API siguen uno de dos modelos dependiendo de si su organización tiene el sistema RBAC habilitado.
+
+### Modo legacy (todas las organizaciones)
+
+En el modo legacy, una clave API **hereda los permisos del usuario que la creó**, limitados por el modo de la clave:
+
+| Modo de clave | Qué puede hacer la clave                                 |
+| ------------- | --------------------------------------------------------- |
+| `read`        | Solo lectura de datos                                     |
+| `upload`      | Lectura + subir nuevos paquetes                           |
+| `write`       | Lectura + subida + modificar canales, dispositivos, metadatos de paquetes |
+| `all`         | Todo lo que el propietario puede hacer en la organización |
+
+<Aside type="note">
+  Si un `super_admin` crea una clave `read`, esa clave solo puede leer — aunque
+  el propietario tenga todos los derechos. El modo actúa como un techo, no como un piso.
+</Aside>
+
+Esto significa:
+
+- Si el propietario de la clave pierde acceso a la organización, la clave también deja de funcionar
+- La clave nunca puede hacer más de lo que el propietario podría hacer por sí mismo
+- Los diferentes modos le dan una forma sencilla de limitar las claves de CI/CD sin control detallado
+
+### Vinculaciones de roles RBAC (organizaciones con RBAC habilitado)
+
+Cuando su organización tiene RBAC habilitado, puede asignar **vinculaciones de roles** explícitas directamente a una clave (por ejemplo: `app_uploader` en una organización específica). Cuando una clave tiene vinculaciones explícitas:
+
+- **Solo se evalúan esas vinculaciones** — los permisos del usuario propietario se ignoran por completo
+- La clave está estrictamente limitada a lo que sus vinculaciones permiten, independientemente de quién la posea
+- Esto le permite crear claves con privilegios verdaderamente mínimos, incluso para super administradores
+
+Si una clave no tiene vinculaciones explícitas en una organización con RBAC habilitado, se recurre al modo legacy (permisos del propietario limitados por el modo).
+
+<Aside type="tip">
+  Las vinculaciones RBAC se gestionan desde la configuración de la organización. Consulte [Sistema de permisos de claves API](/docs/webapp/api-key-permissions/) para una explicación completa
+  y ejemplos.
+</Aside>
+
+## Claves API cifradas
+
+Al crear una nueva clave API, puede optar por crear una **clave cifrada**. Las claves cifradas proporcionan mayor seguridad:
+
+- La clave se hashea usando SHA-256 antes de almacenarse en la base de datos
+- **La clave en texto plano solo se muestra una vez** cuando la crea - asegúrese de copiarla y guardarla inmediatamente
+- Después de la creación, la clave no se puede recuperar ni visualizar de nuevo
+- Si pierde una clave cifrada, debe crear una nueva
+
+Este es el enfoque recomendado para entornos de producción, ya que garantiza que incluso si la base de datos se ve comprometida, sus claves API reales permanecen seguras.
+
+## Expiración de claves API
+
+Puede establecer una **fecha de expiración** para sus claves API. Esta es una buena práctica de seguridad que limita la ventana de exposición si una clave se ve comprometida.
+
+### Establecer una fecha de expiración
+
+Al crear o editar una clave API, puede establecer opcionalmente una fecha de expiración. Una vez que la fecha de expiración pasa:
+
+- La clave API dejará de funcionar para autenticación
+- Cualquier solicitud que use la clave expirada será rechazada
+- Las claves expiradas se limpian automáticamente después de 30 días
+
+### Políticas de la organización
+
+Las organizaciones pueden imponer políticas de expiración:
+
+- **Requerir expiración**: Todas las claves API deben tener una fecha de expiración
+- **Período máximo de expiración**: Limitar cuán lejos en el futuro se puede establecer una fecha de expiración (por ejemplo, máximo 90 días)
+- **Requerir claves API seguras**: Requerir que todas las nuevas claves API se creen como claves cifradas/hasheadas
+
+Si su organización tiene estas políticas habilitadas, se le requerirá establecer una fecha de expiración apropiada al crear nuevas claves.
+
+Para más información sobre la configuración de políticas de claves API a nivel de organización, consulte [Seguridad de la organización](/docs/webapp/organization-security/).
 
 ## ¿Cómo eliminar una clave API?
 
-Para eliminar una clave API haz clic en el pequeño botón de papelera
+Para eliminar una clave API haga clic en el pequeño botón de papelera.
 
-<figure><img src="/apikeys-Eliminar.webp" alt="Eliminar apikey" /><figcaption></figcaption></figure>
+<figure><img src="/apikeys-remove.webp" alt="eliminar clave API" /><figcaption></figcaption></figure>
 
-Y luego confirma la eliminación de la clave API
+Y luego confirme la eliminación de la clave API.
 
 ## ¿Cómo regenerar una clave API?
 
-Para regenerar una clave API haz clic en el pequeño botón de actualización
+Para regenerar una clave API haga clic en el pequeño botón de actualización.
 
-<figure><img src="/apikeys-regenerate.webp" alt="generate apikey" /><figcaption></figcaption></figure>
+<figure><img src="/apikeys-regenerate.webp" alt="regenerar clave API" /><figcaption></figcaption></figure>
 
-Y luego confirma la regeneración de la clave API
+Y luego confirme la regeneración de la clave API.

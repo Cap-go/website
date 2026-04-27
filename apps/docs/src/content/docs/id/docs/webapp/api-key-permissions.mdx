@@ -1,0 +1,189 @@
+---
+title: "Sistem Izin Kunci API"
+description: "Pahami cara kerja izin kunci API di Capgo, termasuk mode legacy dan pengikatan peran RBAC untuk kontrol akses yang terperinci."
+sidebar:
+  order: 4
+locale: id
+---
+
+import { Aside, Steps } from "@astrojs/starlight/components";
+
+Capgo mendukung dua model izin untuk kunci API. Model mana yang berlaku tergantung pada apakah organisasi Anda mengaktifkan **RBAC (Kontrol Akses Berbasis Peran)**. Kedua model dapat berdampingan di berbagai organisasi dalam akun yang sama.
+
+## Ikhtisar
+
+| Model                          | Kapan berlaku                                          | Bagaimana izin ditentukan                                  |
+| ------------------------------ | ------------------------------------------------------ | ---------------------------------------------------------- |
+| **Mode legacy**                | Semua organisasi (default)                             | Izin pemilik, dibatasi oleh mode kunci                     |
+| **Pengikatan peran RBAC**      | Organisasi dengan RBAC diaktifkan, kunci memiliki pengikatan | Hanya pengikatan peran kunci itu sendiri (pemilik diabaikan) |
+
+<Aside type="note">
+  Jika organisasi dengan RBAC diaktifkan memiliki kunci **tanpa** pengikatan peran eksplisit,
+  kunci tersebut kembali ke mode legacy untuk organisasi tersebut.
+</Aside>
+
+## Mode legacy
+
+Mode legacy adalah default dan berfungsi untuk setiap organisasi. Logika izinnya sederhana:
+
+1. Kunci memiliki **mode** (`read`, `upload`, `write`, atau `all`)
+2. Kunci milik seorang **pengguna** (pembuat/pemiliknya)
+3. Pengguna tersebut memiliki **peran** dalam organisasi (`read`, `upload`, `write`, `admin`, `super_admin`)
+4. Izin efektif kunci adalah **irisan** dari mode dan peran pengguna
+
+### Empat mode kunci
+
+Mode kunci mengikuti skema bertingkat di mana setiap level mencakup semua yang ada di bawahnya:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="API key modes diagram showing the graduated permission levels" /><figcaption></figcaption></figure>
+
+| Mode     | Kemampuan                                                                             |
+| -------- | ------------------------------------------------------------------------------------- |
+| `read`   | Membaca app, bundle, channel, perangkat, statistik, log                               |
+| `upload` | Semua di `read` + mengunggah bundle baru                                              |
+| `write`  | Semua di `upload` + mengubah channel, perangkat, metadata bundle                      |
+| `all`    | Semua di `write` + menghapus app, mengelola pengaturan dan anggota organisasi         |
+
+### Cara kerjanya dalam praktik
+
+Pertimbangkan pengguna yang merupakan `admin` di sebuah organisasi:
+
+| Mode kunci | Izin efektif                                                                      |
+| ---------- | --------------------------------------------------------------------------------- |
+| `read`     | Hanya baca (mode lebih restriktif dari peran)                                     |
+| `upload`   | Baca + unggah (mode lebih restriktif dari peran)                                  |
+| `write`    | Baca + unggah + ubah (sesuai dengan level peran)                                  |
+| `all`      | Sama dengan `write` dalam praktik (admin tidak dapat menghapus app atau mengelola tagihan) |
+
+<Aside type="caution">
+  Jika pemilik kunci **dihapus dari organisasi** atau perannya
+  diturunkan, izin efektif kunci berubah segera. Kunci tidak pernah
+  bisa melebihi apa yang dapat dilakukan pemiliknya.
+</Aside>
+
+### Kasus penggunaan umum mode legacy
+
+- **Pipeline CI/CD**: Buat kunci `upload` agar CI Anda dapat men-deploy bundle tetapi tidak dapat mengubah channel atau menghapus app
+- **Integrasi pemantauan**: Gunakan kunci `read` untuk dashboard yang hanya perlu mengambil statistik
+- **Otomatisasi deployment**: Gunakan kunci `write` untuk skrip yang mengunggah bundle dan mengganti versi channel
+
+## Pengikatan peran RBAC
+
+Ketika organisasi Anda mengaktifkan RBAC, Anda dapat menetapkan **pengikatan peran** langsung ke kunci API. Ini memberikan kontrol terperinci yang melampaui sistem berbasis mode yang sederhana.
+
+### Apa itu pengikatan peran?
+
+Pengikatan peran menetapkan **peran** tertentu (seperti `app_reader`, `app_uploader`, atau `org_admin`) ke **prinsipal** (pengguna, grup, atau kunci API) dalam **cakupan** (organisasi, app, atau channel).
+
+Untuk kunci API, ini berarti Anda dapat mengatakan: "Kunci ini memiliki peran `app_uploader` pada organisasi X" — secara independen dari apa yang dapat dilakukan pemilik kunci.
+
+### Prioritas pengikatan
+
+Ini adalah konsep paling penting untuk dipahami:
+
+**Ketika kunci API memiliki pengikatan peran eksplisit, hanya pengikatan tersebut yang dievaluasi. Izin pemilik diabaikan sepenuhnya.**
+
+Ini disengaja dan memberikan jaminan keamanan kritis: kunci yang dibatasi tetap dibatasi, meskipun pemiliknya adalah `super_admin`.
+
+```
+Key has role bindings? ──YES──> Evaluate ONLY key bindings ──> Allow/Deny
+                       │
+                       NO
+                       │
+                       v
+              Fall back to legacy mode
+              (owner permissions + key mode)
+```
+
+### Skenario contoh
+
+**Skenario 1: Kunci CI terbatas untuk super admin**
+
+Seorang `super_admin` membuat kunci dengan pengikatan eksplisit `app_uploader` pada organisasi produksi:
+
+- Kunci dapat mengunggah bundle ke organisasi tersebut
+- Kunci **tidak dapat** menghapus app, mengubah pengaturan, atau mengelola anggota
+- Izin luas super admin tidak relevan untuk kunci ini
+
+**Skenario 2: Kunci audit hanya-baca**
+
+Seorang `super_admin` membuat kunci dengan pengikatan `app_reader`:
+
+- Kunci hanya dapat membaca data app, bundle, channel
+- Kunci tidak dapat mengunggah, mengubah, atau menghapus apa pun
+- Sempurna untuk alat pemantauan atau dashboard eksternal
+
+**Skenario 3: Kunci tanpa pengikatan pada organisasi RBAC**
+
+Jika kunci memiliki identifier RBAC tetapi tidak ada pengikatan peran eksplisit, kunci tersebut kembali ke perilaku legacy:
+
+- Peran RBAC pemilik di organisasi dievaluasi
+- Mode kunci (`read`/`upload`/`write`/`all`) bertindak sebagai batas atas
+
+### Mengelola pengikatan peran
+
+{/* TODO: screenshot of RBAC bindings UI - apikeys-rbac-bindings.webp */}
+
+Pengikatan peran untuk kunci API dikelola dari pengaturan organisasi Anda. Anda dapat:
+
+1. Melihat pengikatan apa yang dimiliki kunci
+2. Menambahkan pengikatan peran baru (misalnya, `app_uploader` pada organisasi tertentu)
+3. Menghapus pengikatan yang ada untuk membatasi atau mencabut akses
+
+<Aside type="tip">
+  Saat Anda membuat kunci melalui UI konsol dengan RBAC diaktifkan, pengikatan
+  secara otomatis diatur berdasarkan pilihan Anda. Kunci yang dibuat melalui REST API
+  dapat memiliki pengikatan yang dikonfigurasi secara terpisah.
+</Aside>
+
+## Pembatasan cakupan
+
+Selain mode dan pengikatan peran, kunci API mendukung dua **pembatasan cakupan** yang bertindak sebagai filter tambahan:
+
+### `limited_to_orgs`
+
+Membatasi kunci agar hanya berfungsi dalam organisasi tertentu. Jika kunci digunakan untuk mengakses organisasi yang tidak ada dalam daftar ini, permintaan ditolak — meskipun mode atau pengikatan seharusnya mengizinkannya.
+
+### `limited_to_apps`
+
+Membatasi kunci agar hanya berfungsi dengan app tertentu (berdasarkan ID app). Berguna untuk membuat kunci yang hanya dapat men-deploy ke satu app.
+
+<Aside type="note">
+  Pembatasan cakupan adalah **filter aditif**, bukan pemberian izin. Kunci
+  tetap membutuhkan mode/pengikatan yang sesuai untuk melakukan tindakan — cakupan hanya
+  membatasi di mana izin tersebut berlaku.
+</Aside>
+
+## Perbandingan keamanan
+
+| Aspek                           | Mode legacy                                    | Pengikatan peran RBAC                              |
+| ------------------------------- | ---------------------------------------------- | -------------------------------------------------- |
+| Sumber izin                     | Peran organisasi pemilik + mode kunci           | Hanya pengikatan peran kunci itu sendiri            |
+| Pemilik meninggalkan org        | Kunci berhenti berfungsi                       | Kunci tetap berfungsi (pengikatan independen)       |
+| Peran pemilik diturunkan        | Izin kunci berkurang segera                    | Tidak berpengaruh pada izin kunci                   |
+| Hak istimewa minimum yang mungkin | Dibatasi oleh granularitas mode (4 level)    | Kontrol terperinci per izin                         |
+| Kompleksitas pengaturan         | Sederhana (cukup pilih mode)                   | Memerlukan konfigurasi RBAC                         |
+
+<Aside type="caution">
+  Dalam mode legacy, jika pengguna dihapus dari organisasi, semua kunci API mereka
+  kehilangan akses ke organisasi tersebut segera. Dengan pengikatan RBAC, pengikatan
+  kunci itu sendiri independen — tetapi pemeriksaan kecocokan pengguna tetap mengharuskan
+  pemilik kunci adalah pengguna yang terautentikasi.
+</Aside>
+
+## Perilaku CLI
+
+CLI Capgo secara otomatis bekerja dengan kedua model izin:
+
+- Perintah seperti `app add`, `init`, `organization set`, dan `organization members` menggunakan fungsi `cli_check_permission` yang menghormati jalur legacy dan RBAC
+- Perintah seperti `bundle upload`, `bundle list`, dan operasi `channel` menggunakan jalur izin legacy
+- CLI mendeteksi sistem mana yang berlaku berdasarkan konfigurasi organisasi — tidak perlu peralihan manual
+
+Untuk daftar lengkap perintah CLI dan izin yang diperlukan, lihat [referensi perintah CLI](/docs/cli/reference/login/).
+
+## Langkah selanjutnya
+
+- [Kelola kunci API Anda](/docs/webapp/api-keys/)
+- [Peran dan izin organisasi](/docs/webapp/organization-system/)
+- [Kebijakan keamanan organisasi](/docs/webapp/organization-security/)
+- [Referensi REST API untuk kunci API](/docs/public-api/api-keys/)

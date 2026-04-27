@@ -1,0 +1,188 @@
+---
+title: "API Key Permission System"
+description: "Understand how API key permissions work in Capgo, including legacy mode inheritance and RBAC role bindings for fine-grained access control."
+sidebar:
+  order: 4
+---
+
+import { Aside, Steps } from "@astrojs/starlight/components";
+
+Capgo supports two permission models for API keys. Which model applies depends on whether your organization has **RBAC (Role-Based Access Control)** enabled. Both models can coexist across different organizations in the same account.
+
+## Overview
+
+| Model                | When it applies                              | How permissions are determined                         |
+| -------------------- | -------------------------------------------- | ------------------------------------------------------ |
+| **Legacy mode**      | All organizations (default)                  | Owner's permissions, capped by key mode                |
+| **RBAC role bindings** | Organizations with RBAC enabled, key has bindings | Only the key's own role bindings (owner ignored) |
+
+<Aside type="note">
+  If an RBAC-enabled organization has a key **without** explicit role bindings,
+  that key falls back to legacy mode for that organization.
+</Aside>
+
+## Legacy mode
+
+Legacy mode is the default and works for every organization. The permission logic is straightforward:
+
+1. The key has a **mode** (`read`, `upload`, `write`, or `all`)
+2. The key belongs to a **user** (its creator/owner)
+3. That user has a **role** in the organization (`read`, `upload`, `write`, `admin`, `super_admin`)
+4. The effective permission of the key is the **intersection** of the mode and the user's role
+
+### The four key modes
+
+Key modes follow a graduated/stepped schema where each level includes everything below it:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="API key modes diagram showing the graduated permission levels" /><figcaption></figcaption></figure>
+
+| Mode     | Capabilities                                                                  |
+| -------- | ----------------------------------------------------------------------------- |
+| `read`   | Read apps, bundles, channels, devices, stats, logs                            |
+| `upload` | Everything in `read` + upload new bundles                                     |
+| `write`  | Everything in `upload` + modify channels, devices, bundle metadata            |
+| `all`    | Everything in `write` + delete apps, manage organization settings and members |
+
+### How it works in practice
+
+Consider a user who is `admin` in an organization:
+
+| Key mode   | Effective permissions                                                     |
+| ---------- | ------------------------------------------------------------------------- |
+| `read`     | Read only (mode is more restrictive than role)                            |
+| `upload`   | Read + upload (mode is more restrictive than role)                        |
+| `write`    | Read + upload + modify (matches the role's level)                         |
+| `all`      | Same as `write` in practice (admin cannot delete apps or manage billing)  |
+
+<Aside type="caution">
+  If the key owner is **removed from the organization** or their role is
+  downgraded, the key's effective permissions change immediately. A key can
+  never exceed what its owner can do.
+</Aside>
+
+### Common legacy use cases
+
+- **CI/CD pipeline**: Create an `upload` key so your CI can deploy bundles but cannot modify channels or delete apps
+- **Monitoring integration**: Use a `read` key for dashboards that only need to pull stats
+- **Deployment automation**: Use a `write` key for scripts that upload bundles and switch channel versions
+
+## RBAC role bindings
+
+When your organization has RBAC enabled, you can assign **role bindings** directly to an API key. This provides fine-grained control that goes beyond the simple mode-based system.
+
+### What is a role binding?
+
+A role binding assigns a specific **role** (like `app_reader`, `app_uploader`, or `org_admin`) to a **principal** (a user, a group, or an API key) within a **scope** (an organization, an app, or a channel).
+
+For API keys, this means you can say: "This key has the `app_uploader` role on organization X" — independently of what the key's owner can do.
+
+### Bindings priority
+
+This is the most important concept to understand:
+
+**When an API key has explicit role bindings, only those bindings are evaluated. The owner's permissions are completely ignored.**
+
+This is intentional and provides a critical security guarantee: a limited key stays limited, even if its owner is a `super_admin`.
+
+```
+Key has role bindings? ──YES──> Evaluate ONLY key bindings ──> Allow/Deny
+                       │
+                       NO
+                       │
+                       v
+              Fall back to legacy mode
+              (owner permissions + key mode)
+```
+
+### Example scenarios
+
+**Scenario 1: Limited CI key for a super admin**
+
+A `super_admin` creates a key with an explicit `app_uploader` binding on the production org:
+
+- The key can upload bundles to that org
+- The key **cannot** delete apps, change settings, or manage members
+- The super admin's broad permissions are irrelevant for this key
+
+**Scenario 2: Read-only audit key**
+
+A `super_admin` creates a key with an `app_reader` binding:
+
+- The key can only read app data, bundles, channels
+- The key cannot upload, modify, or delete anything
+- Perfect for monitoring tools or external dashboards
+
+**Scenario 3: Key without bindings on RBAC org**
+
+If a key has an RBAC identifier but no explicit role bindings, it falls back to legacy behavior:
+
+- The owner's RBAC role in the org is evaluated
+- The key mode (`read`/`upload`/`write`/`all`) acts as the ceiling
+
+### Managing role bindings
+
+{/* TODO: screenshot of RBAC bindings UI - apikeys-rbac-bindings.webp */}
+
+Role bindings for API keys are managed from your organization's settings. You can:
+
+1. View which bindings a key has
+2. Add new role bindings (e.g., `app_uploader` on a specific org)
+3. Remove existing bindings to restrict or revoke access
+
+<Aside type="tip">
+  When you create a key through the console UI with RBAC enabled, the bindings
+  are automatically set based on your selection. Keys created via the REST API
+  can have bindings configured separately.
+</Aside>
+
+## Scope restrictions
+
+In addition to modes and role bindings, API keys support two **scope restrictions** that act as additional filters:
+
+### `limited_to_orgs`
+
+Restricts the key to only work within specific organizations. If the key is used to access an org not in this list, the request is denied — even if the mode or bindings would otherwise allow it.
+
+### `limited_to_apps`
+
+Restricts the key to only work with specific apps (by app ID). Useful for creating keys that can only deploy to a single app.
+
+<Aside type="note">
+  Scope restrictions are **additive filters**, not permission grants. A key
+  still needs appropriate mode/bindings to perform actions — the scope just
+  limits where those permissions apply.
+</Aside>
+
+## Security comparison
+
+| Aspect                        | Legacy mode                            | RBAC role bindings                         |
+| ----------------------------- | -------------------------------------- | ------------------------------------------ |
+| Permission source             | Key owner's org role + key mode        | Key's own role bindings only               |
+| Owner leaves org              | Key stops working                      | Key keeps working (bindings are independent)|
+| Owner role downgraded         | Key permissions reduced immediately    | No effect on key permissions               |
+| Minimum privilege possible    | Limited by mode granularity (4 levels) | Fine-grained per-permission control        |
+| Setup complexity              | Simple (just pick a mode)              | Requires RBAC configuration                |
+
+<Aside type="caution">
+  In legacy mode, if a user is removed from an organization, all their API keys
+  lose access to that organization immediately. With RBAC bindings, the key's
+  own bindings are independent — but the user mismatch check still requires
+  the key owner to be the authenticated user.
+</Aside>
+
+## CLI behavior
+
+The Capgo CLI automatically works with both permission models:
+
+- Commands like `app add`, `init`, `organization set`, and `organization members` use the `cli_check_permission` function which respects both legacy and RBAC paths
+- Commands like `bundle upload`, `bundle list`, and `channel` operations use the legacy permission path
+- The CLI detects which system applies based on the organization's configuration — no manual switching is needed
+
+For the full list of CLI commands and their required permissions, see the [CLI command reference](/docs/cli/reference/login/).
+
+## Next steps
+
+- [Manage your API keys](/docs/webapp/api-keys/)
+- [Organization roles and permissions](/docs/webapp/organization-system/)
+- [Organization security policies](/docs/webapp/organization-security/)
+- [REST API reference for API keys](/docs/public-api/api-keys/)

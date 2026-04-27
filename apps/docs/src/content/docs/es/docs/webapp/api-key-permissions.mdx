@@ -1,0 +1,189 @@
+---
+title: "Sistema de permisos de claves API"
+description: "Comprenda cómo funcionan los permisos de las claves API en Capgo, incluyendo el modo legacy y las vinculaciones de roles RBAC para un control de acceso detallado."
+sidebar:
+  order: 4
+locale: es
+---
+
+import { Aside, Steps } from "@astrojs/starlight/components";
+
+Capgo admite dos modelos de permisos para las claves API. El modelo que se aplica depende de si su organización tiene **RBAC (Control de Acceso Basado en Roles)** habilitado. Ambos modelos pueden coexistir en diferentes organizaciones dentro de la misma cuenta.
+
+## Resumen
+
+| Modelo                   | Cuándo se aplica                                   | Cómo se determinan los permisos                        |
+| ------------------------ | -------------------------------------------------- | ------------------------------------------------------ |
+| **Modo legacy**          | Todas las organizaciones (por defecto)             | Permisos del propietario, limitados por el modo de la clave |
+| **Vinculaciones de roles RBAC** | Organizaciones con RBAC habilitado, la clave tiene vinculaciones | Solo las vinculaciones de roles propias de la clave (propietario ignorado) |
+
+<Aside type="note">
+  Si una organización con RBAC habilitado tiene una clave **sin** vinculaciones
+  de roles explícitas, esa clave recurre al modo legacy para esa organización.
+</Aside>
+
+## Modo legacy
+
+El modo legacy es el predeterminado y funciona para todas las organizaciones. La lógica de permisos es sencilla:
+
+1. La clave tiene un **modo** (`read`, `upload`, `write` o `all`)
+2. La clave pertenece a un **usuario** (su creador/propietario)
+3. Ese usuario tiene un **rol** en la organización (`read`, `upload`, `write`, `admin`, `super_admin`)
+4. El permiso efectivo de la clave es la **intersección** del modo y el rol del usuario
+
+### Los cuatro modos de clave
+
+Los modos de clave siguen un esquema graduado/escalonado donde cada nivel incluye todo lo anterior:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="Diagrama de modos de claves API mostrando los niveles de permisos graduados" /><figcaption></figcaption></figure>
+
+| Modo     | Capacidades                                                                   |
+| -------- | ----------------------------------------------------------------------------- |
+| `read`   | Leer apps, paquetes, canales, dispositivos, estadísticas, registros           |
+| `upload` | Todo en `read` + subir nuevos paquetes                                        |
+| `write`  | Todo en `upload` + modificar canales, dispositivos, metadatos de paquetes     |
+| `all`    | Todo en `write` + eliminar apps, gestionar configuración y miembros de la organización |
+
+### Cómo funciona en la práctica
+
+Considere un usuario que es `admin` en una organización:
+
+| Modo de clave | Permisos efectivos                                                        |
+| ------------- | ------------------------------------------------------------------------- |
+| `read`        | Solo lectura (el modo es más restrictivo que el rol)                      |
+| `upload`      | Lectura + subida (el modo es más restrictivo que el rol)                  |
+| `write`       | Lectura + subida + modificación (coincide con el nivel del rol)           |
+| `all`         | Igual que `write` en la práctica (admin no puede eliminar apps ni gestionar facturación) |
+
+<Aside type="caution">
+  Si el propietario de la clave es **eliminado de la organización** o su rol es
+  degradado, los permisos efectivos de la clave cambian inmediatamente. Una clave
+  nunca puede exceder lo que su propietario puede hacer.
+</Aside>
+
+### Casos de uso comunes del modo legacy
+
+- **Pipeline CI/CD**: Cree una clave `upload` para que su CI pueda desplegar paquetes pero no pueda modificar canales ni eliminar apps
+- **Integración de monitoreo**: Use una clave `read` para paneles que solo necesitan obtener estadísticas
+- **Automatización de despliegue**: Use una clave `write` para scripts que suben paquetes y cambian versiones de canales
+
+## Vinculaciones de roles RBAC
+
+Cuando su organización tiene RBAC habilitado, puede asignar **vinculaciones de roles** directamente a una clave API. Esto proporciona un control detallado que va más allá del simple sistema basado en modos.
+
+### ¿Qué es una vinculación de rol?
+
+Una vinculación de rol asigna un **rol** específico (como `app_reader`, `app_uploader` u `org_admin`) a un **principal** (un usuario, un grupo o una clave API) dentro de un **ámbito** (una organización, una app o un canal).
+
+Para las claves API, esto significa que puede decir: "Esta clave tiene el rol `app_uploader` en la organización X" — independientemente de lo que el propietario de la clave pueda hacer.
+
+### Prioridad de las vinculaciones
+
+Este es el concepto más importante a entender:
+
+**Cuando una clave API tiene vinculaciones de roles explícitas, solo se evalúan esas vinculaciones. Los permisos del propietario se ignoran por completo.**
+
+Esto es intencional y proporciona una garantía de seguridad crítica: una clave limitada permanece limitada, incluso si su propietario es un `super_admin`.
+
+```
+Key has role bindings? ──YES──> Evaluate ONLY key bindings ──> Allow/Deny
+                       │
+                       NO
+                       │
+                       v
+              Fall back to legacy mode
+              (owner permissions + key mode)
+```
+
+### Escenarios de ejemplo
+
+**Escenario 1: Clave CI limitada para un super administrador**
+
+Un `super_admin` crea una clave con una vinculación explícita de `app_uploader` en la organización de producción:
+
+- La clave puede subir paquetes a esa organización
+- La clave **no puede** eliminar apps, cambiar configuraciones ni gestionar miembros
+- Los amplios permisos del super administrador son irrelevantes para esta clave
+
+**Escenario 2: Clave de auditoría de solo lectura**
+
+Un `super_admin` crea una clave con una vinculación de `app_reader`:
+
+- La clave solo puede leer datos de apps, paquetes, canales
+- La clave no puede subir, modificar ni eliminar nada
+- Perfecto para herramientas de monitoreo o paneles externos
+
+**Escenario 3: Clave sin vinculaciones en organización RBAC**
+
+Si una clave tiene un identificador RBAC pero no tiene vinculaciones de roles explícitas, recurre al comportamiento legacy:
+
+- Se evalúa el rol RBAC del propietario en la organización
+- El modo de la clave (`read`/`upload`/`write`/`all`) actúa como el techo
+
+### Gestión de vinculaciones de roles
+
+{/* TODO: screenshot of RBAC bindings UI - apikeys-rbac-bindings.webp */}
+
+Las vinculaciones de roles para claves API se gestionan desde la configuración de su organización. Puede:
+
+1. Ver qué vinculaciones tiene una clave
+2. Añadir nuevas vinculaciones de roles (por ejemplo, `app_uploader` en una organización específica)
+3. Eliminar vinculaciones existentes para restringir o revocar el acceso
+
+<Aside type="tip">
+  Cuando crea una clave a través de la interfaz de la consola con RBAC habilitado, las vinculaciones
+  se configuran automáticamente según su selección. Las claves creadas a través de la API REST
+  pueden tener vinculaciones configuradas por separado.
+</Aside>
+
+## Restricciones de ámbito
+
+Además de los modos y las vinculaciones de roles, las claves API admiten dos **restricciones de ámbito** que actúan como filtros adicionales:
+
+### `limited_to_orgs`
+
+Restringe la clave para que solo funcione dentro de organizaciones específicas. Si la clave se usa para acceder a una organización que no está en esta lista, la solicitud se deniega — incluso si el modo o las vinculaciones lo permitirían de otro modo.
+
+### `limited_to_apps`
+
+Restringe la clave para que solo funcione con apps específicas (por ID de app). Útil para crear claves que solo pueden desplegar en una sola app.
+
+<Aside type="note">
+  Las restricciones de ámbito son **filtros aditivos**, no concesiones de permisos. Una clave
+  aún necesita el modo/vinculaciones apropiados para realizar acciones — el ámbito solo
+  limita dónde se aplican esos permisos.
+</Aside>
+
+## Comparación de seguridad
+
+| Aspecto                       | Modo legacy                            | Vinculaciones de roles RBAC                |
+| ----------------------------- | -------------------------------------- | ------------------------------------------ |
+| Fuente de permisos            | Rol del propietario en la org + modo de la clave | Solo las vinculaciones de roles propias de la clave |
+| El propietario deja la org    | La clave deja de funcionar             | La clave sigue funcionando (las vinculaciones son independientes) |
+| Rol del propietario degradado | Los permisos de la clave se reducen inmediatamente | Sin efecto en los permisos de la clave |
+| Privilegio mínimo posible     | Limitado por la granularidad del modo (4 niveles) | Control detallado por permiso |
+| Complejidad de configuración  | Simple (solo elija un modo)            | Requiere configuración RBAC                |
+
+<Aside type="caution">
+  En el modo legacy, si un usuario es eliminado de una organización, todas sus claves API
+  pierden acceso a esa organización inmediatamente. Con vinculaciones RBAC, las
+  vinculaciones propias de la clave son independientes — pero la verificación de coincidencia
+  de usuario aún requiere que el propietario de la clave sea el usuario autenticado.
+</Aside>
+
+## Comportamiento de la CLI
+
+La CLI de Capgo funciona automáticamente con ambos modelos de permisos:
+
+- Comandos como `app add`, `init`, `organization set` y `organization members` usan la función `cli_check_permission` que respeta tanto la ruta legacy como la RBAC
+- Comandos como `bundle upload`, `bundle list` y operaciones de `channel` usan la ruta de permisos legacy
+- La CLI detecta qué sistema se aplica según la configuración de la organización — no se necesita cambio manual
+
+Para la lista completa de comandos de la CLI y sus permisos requeridos, consulte la [referencia de comandos de la CLI](/docs/cli/reference/login/).
+
+## Próximos pasos
+
+- [Gestionar sus claves API](/docs/webapp/api-keys/)
+- [Roles y permisos de la organización](/docs/webapp/organization-system/)
+- [Políticas de seguridad de la organización](/docs/webapp/organization-security/)
+- [Referencia de la API REST para claves API](/docs/public-api/api-keys/)

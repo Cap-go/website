@@ -1,0 +1,192 @@
+---
+title: "Système de permissions des clés API"
+description: "Comprenez comment fonctionnent les permissions des clés API dans Capgo, y compris le mode legacy et les liaisons de rôles RBAC pour un contrôle d'accès granulaire."
+sidebar:
+  order: 4
+locale: fr
+---
+
+import { Aside, Steps } from "@astrojs/starlight/components";
+
+Capgo prend en charge deux modèles de permissions pour les clés API. Le modèle qui s'applique dépend de l'activation ou non du **RBAC (contrôle d'accès basé sur les rôles)** dans votre organisation. Les deux modèles peuvent coexister entre différentes organisations d'un même compte.
+
+## Aperçu
+
+| Modèle                   | Quand il s'applique                                     | Comment les permissions sont déterminées                       |
+| ------------------------ | ------------------------------------------------------- | -------------------------------------------------------------- |
+| **Mode legacy**          | Toutes les organisations (par défaut)                   | Permissions du propriétaire, plafonnées par le mode de la clé  |
+| **Liaisons de rôles RBAC** | Organisations avec RBAC activé, clé ayant des liaisons | Uniquement les liaisons de rôles propres à la clé (propriétaire ignoré) |
+
+<Aside type="note">
+  Si une organisation avec RBAC activé possède une clé **sans** liaisons de
+  rôles explicites, cette clé revient au mode legacy pour cette organisation.
+</Aside>
+
+## Mode legacy
+
+Le mode legacy est le mode par défaut et fonctionne pour toutes les organisations. La logique des permissions est simple :
+
+1. La clé a un **mode** (`read`, `upload`, `write` ou `all`)
+2. La clé appartient à un **utilisateur** (son créateur/propriétaire)
+3. Cet utilisateur a un **rôle** dans l'organisation (`read`, `upload`, `write`, `admin`, `super_admin`)
+4. La permission effective de la clé est l'**intersection** du mode et du rôle de l'utilisateur
+
+### Les quatre modes de clé
+
+Les modes de clé suivent un schéma gradué/par paliers où chaque niveau inclut tout ce qui se trouve en dessous :
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="API key modes diagram showing the graduated permission levels" /><figcaption></figcaption></figure>
+
+| Mode     | Capacités                                                                         |
+| -------- | --------------------------------------------------------------------------------- |
+| `read`   | Lire les apps, bundles, canaux, appareils, statistiques, logs                     |
+| `upload` | Tout ce qui est dans `read` + téléverser de nouveaux bundles                      |
+| `write`  | Tout ce qui est dans `upload` + modifier les canaux, appareils, métadonnées des bundles |
+| `all`    | Tout ce qui est dans `write` + supprimer des apps, gérer les paramètres et membres de l'organisation |
+
+### Comment cela fonctionne en pratique
+
+Considérons un utilisateur qui est `admin` dans une organisation :
+
+| Mode de la clé | Permissions effectives                                                          |
+| -------------- | ------------------------------------------------------------------------------- |
+| `read`         | Lecture seule (le mode est plus restrictif que le rôle)                          |
+| `upload`       | Lecture + téléversement (le mode est plus restrictif que le rôle)                |
+| `write`        | Lecture + téléversement + modification (correspond au niveau du rôle)            |
+| `all`          | Identique à `write` en pratique (un admin ne peut pas supprimer des apps ni gérer la facturation) |
+
+<Aside type="caution">
+  Si le propriétaire de la clé est **retiré de l'organisation** ou si son rôle
+  est rétrogradé, les permissions effectives de la clé changent immédiatement.
+  Une clé ne peut jamais dépasser ce que son propriétaire peut faire.
+</Aside>
+
+### Cas d'utilisation courants du mode legacy
+
+- **Pipeline CI/CD** : Créez une clé `upload` pour que votre CI puisse déployer des bundles sans pouvoir modifier les canaux ni supprimer des apps
+- **Intégration de monitoring** : Utilisez une clé `read` pour les tableaux de bord qui n'ont besoin que de récupérer des statistiques
+- **Automatisation de déploiement** : Utilisez une clé `write` pour les scripts qui téléversent des bundles et changent les versions des canaux
+
+## Liaisons de rôles RBAC
+
+Lorsque votre organisation a le RBAC activé, vous pouvez assigner des **liaisons de rôles** directement à une clé API. Cela offre un contrôle granulaire qui va au-delà du simple système basé sur les modes.
+
+### Qu'est-ce qu'une liaison de rôle ?
+
+Une liaison de rôle assigne un **rôle** spécifique (comme `app_reader`, `app_uploader` ou `org_admin`) à un **principal** (un utilisateur, un groupe ou une clé API) dans un **périmètre** (une organisation, une app ou un canal).
+
+Pour les clés API, cela signifie que vous pouvez dire : « Cette clé a le rôle `app_uploader` sur l'organisation X » — indépendamment de ce que le propriétaire de la clé peut faire.
+
+### Priorité des liaisons
+
+C'est le concept le plus important à comprendre :
+
+**Lorsqu'une clé API possède des liaisons de rôles explicites, seules ces liaisons sont évaluées. Les permissions du propriétaire sont complètement ignorées.**
+
+C'est intentionnel et fournit une garantie de sécurité essentielle : une clé limitée reste limitée, même si son propriétaire est un `super_admin`.
+
+```
+Key has role bindings? ──YES──> Evaluate ONLY key bindings ──> Allow/Deny
+                       │
+                       NO
+                       │
+                       v
+              Fall back to legacy mode
+              (owner permissions + key mode)
+```
+
+### Exemples de scénarios
+
+**Scénario 1 : Clé CI limitée pour un super admin**
+
+Un `super_admin` crée une clé avec une liaison explicite `app_uploader` sur l'organisation de production :
+
+- La clé peut téléverser des bundles vers cette organisation
+- La clé **ne peut pas** supprimer des apps, modifier les paramètres ou gérer les membres
+- Les permissions étendues du super admin sont sans importance pour cette clé
+
+**Scénario 2 : Clé d'audit en lecture seule**
+
+Un `super_admin` crée une clé avec une liaison `app_reader` :
+
+- La clé peut uniquement lire les données des apps, bundles et canaux
+- La clé ne peut pas téléverser, modifier ou supprimer quoi que ce soit
+- Parfait pour les outils de monitoring ou les tableaux de bord externes
+
+**Scénario 3 : Clé sans liaisons sur une organisation RBAC**
+
+Si une clé possède un identifiant RBAC mais aucune liaison de rôle explicite, elle revient au comportement legacy :
+
+- Le rôle RBAC du propriétaire dans l'organisation est évalué
+- Le mode de la clé (`read`/`upload`/`write`/`all`) agit comme plafond
+
+### Gestion des liaisons de rôles
+
+{/* TODO: screenshot of RBAC bindings UI - apikeys-rbac-bindings.webp */}
+
+Les liaisons de rôles pour les clés API sont gérées depuis les paramètres de votre organisation. Vous pouvez :
+
+1. Voir quelles liaisons une clé possède
+2. Ajouter de nouvelles liaisons de rôles (par ex., `app_uploader` sur une organisation spécifique)
+3. Supprimer des liaisons existantes pour restreindre ou révoquer l'accès
+
+<Aside type="tip">
+  Lorsque vous créez une clé via l'interface de la console avec le RBAC activé,
+  les liaisons sont automatiquement définies en fonction de votre sélection. Les
+  clés créées via l'API REST peuvent avoir leurs liaisons configurées
+  séparément.
+</Aside>
+
+## Restrictions de périmètre
+
+En plus des modes et des liaisons de rôles, les clés API prennent en charge deux **restrictions de périmètre** qui agissent comme des filtres supplémentaires :
+
+### `limited_to_orgs`
+
+Restreint la clé pour qu'elle ne fonctionne qu'au sein d'organisations spécifiques. Si la clé est utilisée pour accéder à une organisation absente de cette liste, la requête est refusée — même si le mode ou les liaisons l'autoriseraient autrement.
+
+### `limited_to_apps`
+
+Restreint la clé pour qu'elle ne fonctionne qu'avec des apps spécifiques (par identifiant d'app). Utile pour créer des clés qui ne peuvent déployer que vers une seule app.
+
+<Aside type="note">
+  Les restrictions de périmètre sont des **filtres additifs**, pas des
+  attributions de permissions. Une clé a toujours besoin du mode/des liaisons
+  appropriés pour effectuer des actions — le périmètre limite simplement où ces
+  permissions s'appliquent.
+</Aside>
+
+## Comparaison de sécurité
+
+| Aspect                            | Mode legacy                                  | Liaisons de rôles RBAC                              |
+| --------------------------------- | -------------------------------------------- | --------------------------------------------------- |
+| Source des permissions            | Rôle du propriétaire dans l'org + mode de la clé | Uniquement les liaisons de rôles propres à la clé |
+| Le propriétaire quitte l'org      | La clé cesse de fonctionner                  | La clé continue de fonctionner (les liaisons sont indépendantes) |
+| Rôle du propriétaire rétrogradé   | Permissions de la clé réduites immédiatement | Aucun effet sur les permissions de la clé           |
+| Privilège minimum possible        | Limité par la granularité du mode (4 niveaux)| Contrôle granulaire par permission                  |
+| Complexité de configuration       | Simple (choisir un mode)                     | Nécessite une configuration RBAC                    |
+
+<Aside type="caution">
+  En mode legacy, si un utilisateur est retiré d'une organisation, toutes ses
+  clés API perdent immédiatement l'accès à cette organisation. Avec les liaisons
+  RBAC, les liaisons propres à la clé sont indépendantes — mais la vérification
+  de correspondance utilisateur exige toujours que le propriétaire de la clé
+  soit l'utilisateur authentifié.
+</Aside>
+
+## Comportement du CLI
+
+Le CLI Capgo fonctionne automatiquement avec les deux modèles de permissions :
+
+- Les commandes comme `app add`, `init`, `organization set` et `organization members` utilisent la fonction `cli_check_permission` qui respecte les deux chemins legacy et RBAC
+- Les commandes comme `bundle upload`, `bundle list` et les opérations sur les `channel` utilisent le chemin de permissions legacy
+- Le CLI détecte automatiquement quel système s'applique en fonction de la configuration de l'organisation — aucun changement manuel n'est nécessaire
+
+Pour la liste complète des commandes CLI et leurs permissions requises, voir la [référence des commandes CLI](/docs/cli/reference/login/).
+
+## Étapes suivantes
+
+- [Gérer vos clés API](/docs/webapp/api-keys/)
+- [Rôles et permissions de l'organisation](/docs/webapp/organization-system/)
+- [Politiques de sécurité de l'organisation](/docs/webapp/organization-security/)
+- [Référence de l'API REST pour les clés API](/docs/public-api/api-keys/)

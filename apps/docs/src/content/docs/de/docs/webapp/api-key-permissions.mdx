@@ -1,0 +1,193 @@
+---
+title: "API-Schl\u00fcssel-Berechtigungssystem"
+description: "Verstehen Sie, wie API-Schl\u00fcssel-Berechtigungen in Capgo funktionieren, einschlie\u00dflich des Legacy-Modus und der RBAC-Rollenbindungen f\u00fcr feingranulare Zugriffskontrolle."
+sidebar:
+  order: 4
+locale: de
+---
+
+import { Aside, Steps } from "@astrojs/starlight/components";
+
+Capgo unterstützt zwei Berechtigungsmodelle für API-Schlüssel. Welches Modell gilt, hängt davon ab, ob Ihre Organisation **RBAC (rollenbasierte Zugriffskontrolle)** aktiviert hat. Beide Modelle können in verschiedenen Organisationen innerhalb desselben Kontos nebeneinander existieren.
+
+## Übersicht
+
+| Modell                | Wann es gilt                              | Wie Berechtigungen bestimmt werden                         |
+| -------------------- | -------------------------------------------- | ------------------------------------------------------ |
+| **Legacy-Modus**      | Alle Organisationen (Standard)                  | Berechtigungen des Besitzers, begrenzt durch Schlüssel-Modus                |
+| **RBAC-Rollenbindungen** | Organisationen mit aktiviertem RBAC, Schlüssel hat Bindungen | Nur die eigenen Rollenbindungen des Schlüssels (Besitzer ignoriert) |
+
+<Aside type="note">
+  Wenn eine RBAC-aktivierte Organisation einen Schlüssel **ohne** explizite
+  Rollenbindungen hat, fällt dieser Schlüssel für diese Organisation auf den
+  Legacy-Modus zurück.
+</Aside>
+
+## Legacy-Modus
+
+Der Legacy-Modus ist der Standard und funktioniert für jede Organisation. Die Berechtigungslogik ist unkompliziert:
+
+1. Der Schlüssel hat einen **Modus** (`read`, `upload`, `write` oder `all`)
+2. Der Schlüssel gehört einem **Benutzer** (seinem Ersteller/Besitzer)
+3. Dieser Benutzer hat eine **Rolle** in der Organisation (`read`, `upload`, `write`, `admin`, `super_admin`)
+4. Die effektive Berechtigung des Schlüssels ist die **Schnittmenge** aus Modus und Rolle des Benutzers
+
+### Die vier Schlüssel-Modi
+
+Schlüssel-Modi folgen einem gestuften Schema, bei dem jede Stufe alles darunter einschließt:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="API-Schlüssel-Modi-Diagramm, das die gestuften Berechtigungsebenen zeigt" /><figcaption></figcaption></figure>
+
+| Modus     | Fähigkeiten                                                                  |
+| -------- | ----------------------------------------------------------------------------- |
+| `read`   | Apps, Bundles, Kanäle, Geräte, Statistiken, Protokolle lesen                            |
+| `upload` | Alles in `read` + neue Bundles hochladen                                     |
+| `write`  | Alles in `upload` + Kanäle, Geräte, Bundle-Metadaten ändern            |
+| `all`    | Alles in `write` + Apps löschen, Organisationseinstellungen und Mitglieder verwalten |
+
+### Wie es in der Praxis funktioniert
+
+Betrachten Sie einen Benutzer, der `admin` in einer Organisation ist:
+
+| Schlüssel-Modus   | Effektive Berechtigungen                                                     |
+| ---------- | ------------------------------------------------------------------------- |
+| `read`     | Nur lesen (Modus ist restriktiver als Rolle)                            |
+| `upload`   | Lesen + hochladen (Modus ist restriktiver als Rolle)                        |
+| `write`    | Lesen + hochladen + ändern (entspricht der Rollenebene)                         |
+| `all`      | In der Praxis wie `write` (Admin kann keine Apps löschen oder Abrechnung verwalten)  |
+
+<Aside type="caution">
+  Wenn der Schlüsselbesitzer **aus der Organisation entfernt** wird oder seine
+  Rolle herabgestuft wird, ändern sich die effektiven Berechtigungen des
+  Schlüssels sofort. Ein Schlüssel kann niemals mehr als sein Besitzer tun.
+</Aside>
+
+### Häufige Legacy-Anwendungsfälle
+
+- **CI/CD-Pipeline**: Erstellen Sie einen `upload`-Schlüssel, damit Ihr CI Bundles bereitstellen kann, aber keine Kanäle ändern oder Apps löschen kann
+- **Monitoring-Integration**: Verwenden Sie einen `read`-Schlüssel für Dashboards, die nur Statistiken abrufen müssen
+- **Deployment-Automatisierung**: Verwenden Sie einen `write`-Schlüssel für Skripte, die Bundles hochladen und Kanal-Versionen wechseln
+
+## RBAC-Rollenbindungen
+
+Wenn Ihre Organisation RBAC aktiviert hat, können Sie **Rollenbindungen** direkt einem API-Schlüssel zuweisen. Dies bietet feingranulare Kontrolle, die über das einfache modusbasierte System hinausgeht.
+
+### Was ist eine Rollenbindung?
+
+Eine Rollenbindung weist eine bestimmte **Rolle** (wie `app_reader`, `app_uploader` oder `org_admin`) einem **Prinzipal** (einem Benutzer, einer Gruppe oder einem API-Schlüssel) innerhalb eines **Geltungsbereichs** (einer Organisation, einer App oder eines Kanals) zu.
+
+Für API-Schlüssel bedeutet dies: „Dieser Schlüssel hat die Rolle `app_uploader` in Organisation X" — unabhängig davon, was der Besitzer des Schlüssels tun kann.
+
+### Bindungspriorität
+
+Dies ist das wichtigste Konzept zum Verständnis:
+
+**Wenn ein API-Schlüssel explizite Rollenbindungen hat, werden nur diese Bindungen ausgewertet. Die Berechtigungen des Besitzers werden vollständig ignoriert.**
+
+Dies ist beabsichtigt und bietet eine wichtige Sicherheitsgarantie: Ein eingeschränkter Schlüssel bleibt eingeschränkt, selbst wenn sein Besitzer ein `super_admin` ist.
+
+```
+Key has role bindings? ──YES──> Evaluate ONLY key bindings ──> Allow/Deny
+                       │
+                       NO
+                       │
+                       v
+              Fall back to legacy mode
+              (owner permissions + key mode)
+```
+
+### Beispielszenarien
+
+**Szenario 1: Eingeschränkter CI-Schlüssel für einen Super-Admin**
+
+Ein `super_admin` erstellt einen Schlüssel mit einer expliziten `app_uploader`-Bindung für die Produktionsorganisation:
+
+- Der Schlüssel kann Bundles in diese Organisation hochladen
+- Der Schlüssel **kann keine** Apps löschen, Einstellungen ändern oder Mitglieder verwalten
+- Die umfassenden Berechtigungen des Super-Admins sind für diesen Schlüssel irrelevant
+
+**Szenario 2: Schreibgeschützter Audit-Schlüssel**
+
+Ein `super_admin` erstellt einen Schlüssel mit einer `app_reader`-Bindung:
+
+- Der Schlüssel kann nur App-Daten, Bundles und Kanäle lesen
+- Der Schlüssel kann nichts hochladen, ändern oder löschen
+- Perfekt für Monitoring-Tools oder externe Dashboards
+
+**Szenario 3: Schlüssel ohne Bindungen in einer RBAC-Organisation**
+
+Wenn ein Schlüssel eine RBAC-Kennung hat, aber keine expliziten Rollenbindungen, fällt er auf das Legacy-Verhalten zurück:
+
+- Die RBAC-Rolle des Besitzers in der Organisation wird ausgewertet
+- Der Schlüssel-Modus (`read`/`upload`/`write`/`all`) wirkt als Obergrenze
+
+### Rollenbindungen verwalten
+
+{/* TODO: screenshot of RBAC bindings UI - apikeys-rbac-bindings.webp */}
+
+Rollenbindungen für API-Schlüssel werden über die Einstellungen Ihrer Organisation verwaltet. Sie können:
+
+1. Anzeigen, welche Bindungen ein Schlüssel hat
+2. Neue Rollenbindungen hinzufügen (z.B. `app_uploader` für eine bestimmte Organisation)
+3. Bestehende Bindungen entfernen, um den Zugang einzuschränken oder zu widerrufen
+
+<Aside type="tip">
+  Wenn Sie einen Schlüssel über die Konsolen-Benutzeroberfläche mit aktiviertem
+  RBAC erstellen, werden die Bindungen automatisch basierend auf Ihrer Auswahl
+  festgelegt. Schlüssel, die über die REST-API erstellt werden, können separat
+  mit Bindungen konfiguriert werden.
+</Aside>
+
+## Geltungsbereichsbeschränkungen
+
+Zusätzlich zu Modi und Rollenbindungen unterstützen API-Schlüssel zwei **Geltungsbereichsbeschränkungen**, die als zusätzliche Filter wirken:
+
+### `limited_to_orgs`
+
+Beschränkt den Schlüssel auf die Verwendung innerhalb bestimmter Organisationen. Wenn der Schlüssel verwendet wird, um auf eine Organisation zuzugreifen, die nicht in dieser Liste steht, wird die Anfrage abgelehnt — selbst wenn der Modus oder die Bindungen dies ansonsten erlauben würden.
+
+### `limited_to_apps`
+
+Beschränkt den Schlüssel auf die Verwendung mit bestimmten Apps (nach App-ID). Nützlich zum Erstellen von Schlüsseln, die nur in einer einzelnen App bereitgestellt werden können.
+
+<Aside type="note">
+  Geltungsbereichsbeschränkungen sind **additive Filter**, keine
+  Berechtigungserteilungen. Ein Schlüssel benötigt weiterhin den entsprechenden
+  Modus/die entsprechenden Bindungen, um Aktionen auszuführen — der
+  Geltungsbereich begrenzt nur, wo diese Berechtigungen gelten.
+</Aside>
+
+## Sicherheitsvergleich
+
+| Aspekt                        | Legacy-Modus                            | RBAC-Rollenbindungen                         |
+| ----------------------------- | -------------------------------------- | ------------------------------------------ |
+| Berechtigungsquelle             | Organisationsrolle des Schlüsselbesitzers + Schlüssel-Modus        | Nur die eigenen Rollenbindungen des Schlüssels               |
+| Besitzer verlässt Organisation              | Schlüssel funktioniert nicht mehr                      | Schlüssel funktioniert weiterhin (Bindungen sind unabhängig)|
+| Rolle des Besitzers herabgestuft         | Schlüsselberechtigungen sofort reduziert    | Keine Auswirkung auf Schlüsselberechtigungen               |
+| Minimale Berechtigung möglich    | Begrenzt durch Modusgranularität (4 Stufen) | Feingranulare Kontrolle pro Berechtigung        |
+| Einrichtungskomplexität              | Einfach (nur einen Modus wählen)              | Erfordert RBAC-Konfiguration                |
+
+<Aside type="caution">
+  Im Legacy-Modus verlieren alle API-Schlüssel eines Benutzers sofort den
+  Zugang zu dieser Organisation, wenn der Benutzer aus einer Organisation
+  entfernt wird. Bei RBAC-Bindungen sind die eigenen Bindungen des Schlüssels
+  unabhängig — aber die Benutzerübereinstimmungsprüfung erfordert weiterhin,
+  dass der Schlüsselbesitzer der authentifizierte Benutzer ist.
+</Aside>
+
+## CLI-Verhalten
+
+Die Capgo CLI funktioniert automatisch mit beiden Berechtigungsmodellen:
+
+- Befehle wie `app add`, `init`, `organization set` und `organization members` verwenden die Funktion `cli_check_permission`, die sowohl Legacy- als auch RBAC-Pfade berücksichtigt
+- Befehle wie `bundle upload`, `bundle list` und `channel`-Operationen verwenden den Legacy-Berechtigungspfad
+- Die CLI erkennt anhand der Organisationskonfiguration automatisch, welches System gilt — ein manuelles Umschalten ist nicht erforderlich
+
+Die vollständige Liste der CLI-Befehle und ihrer erforderlichen Berechtigungen finden Sie in der [CLI-Befehlsreferenz](/docs/cli/reference/login/).
+
+## Nächste Schritte
+
+- [API-Schlüssel verwalten](/docs/webapp/api-keys/)
+- [Organisationsrollen und Berechtigungen](/docs/webapp/organization-system/)
+- [Organisationssicherheitsrichtlinien](/docs/webapp/organization-security/)
+- [REST-API-Referenz für API-Schlüssel](/docs/public-api/api-keys/)

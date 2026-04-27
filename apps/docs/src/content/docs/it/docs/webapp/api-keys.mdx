@@ -1,20 +1,22 @@
 ---
-title: Gestione delle chiavi api
-description: Come gestire le chiavi API
+title: "Chiavi API"
+description: "Come gestire le chiavi API per Capgo Cloud, scopri a cosa servono, come crearle, modificarle o ruotarle per garantire la sicurezza del tuo account"
 sidebar:
   order: 3
 locale: it
 ---
 
-## Cosa posso fare con le chiavi api?
+import { Aside } from "@astrojs/starlight/components";
 
-Una chiave API può essere rigenerata, rimossa o se ne può aggiungere una nuova
+## Cosa posso fare con le chiavi API?
 
-## Come vedere tutte le chiavi api?
+Una chiave API può essere rigenerata, rimossa o se ne può aggiungere una nuova. Puoi anche impostare date di scadenza e creare chiavi crittografate per una maggiore sicurezza.
 
-Devi andare alla [pagina delle chiavi API](https://console.capgo.app/dashboard/apikeys/) e lì vedrai tutte le tue chiavi api
+## Come vedere tutte le chiavi API?
 
-## Come aggiungere una nuova chiave api?
+Devi andare alla [pagina delle chiavi API](https://console.capgo.app/dashboard/apikeys/) e lì vedrai tutte le tue chiavi API.
+
+## Come aggiungere una nuova chiave API?
 
 Per aggiungere una nuova chiave API clicca sul piccolo pulsante più
 
@@ -22,24 +24,103 @@ Per aggiungere una nuova chiave API clicca sul piccolo pulsante più
 
 e poi seleziona i permessi che vuoi dare alla nuova chiave API. Puoi selezionare:
 
- - Lettura - la chiave API potrà leggere tutti i dati
- - Caricamento - la chiave API potrà caricare nuove versioni dalla CLI e leggere
- - Tutto - La chiave API potrà fare tutto
+- **Lettura** - la chiave API potrà leggere tutti i dati
+- **Caricamento** - la chiave API potrà caricare nuove versioni dalla CLI e leggere
+- **Scrittura** - la chiave API potrà modificare impostazioni, canali, dispositivi e caricare
+- **Tutto** - la chiave API potrà fare tutto
 
-<figure><img src="/apikeys-select-perm.webp" alt="select perm" /><figcaption></figcaption></figure>
+{/* TODO: replace with apikeys-select-perm-v2.webp once screenshot is taken */}
 
-## Come rimuovere una chiave api?
+<figure><img src="/apikeys-select-perm.webp" alt="select permissions" /><figcaption></figcaption></figure>
 
-Per rimuovere una chiave API clicca sul piccolo pulsante cestino
+## Come funzionano i permessi delle chiavi API
+
+I permessi delle chiavi API seguono uno dei due modelli a seconda che la tua organizzazione abbia il sistema RBAC abilitato.
+
+### Modalità legacy (tutte le organizzazioni)
+
+In modalità legacy, una chiave API **eredita i permessi dell'utente che l'ha creata**, limitati dalla modalità della chiave:
+
+| Modalità chiave | Cosa può fare la chiave                                            |
+| --------------- | ------------------------------------------------------------------ |
+| `read`          | Solo lettura dei dati                                              |
+| `upload`        | Lettura + caricamento di nuovi bundle                              |
+| `write`         | Lettura + caricamento + modifica di canali, dispositivi, metadati dei bundle |
+| `all`           | Tutto ciò che il proprietario può fare nell'organizzazione         |
+
+<Aside type="note">
+  Se un `super_admin` crea una chiave `read`, quella chiave può solo leggere — anche se
+  il proprietario ha pieni diritti. La modalità agisce come un tetto, non come una base.
+</Aside>
+
+Questo significa:
+
+- Se il proprietario della chiave perde l'accesso all'organizzazione, anche la chiave smette di funzionare
+- La chiave non può mai fare più di quanto potrebbe fare il proprietario stesso
+- Le diverse modalità offrono un modo semplice per limitare le chiavi CI/CD senza un controllo granulare
+
+### Associazioni di ruoli RBAC (organizzazioni con RBAC abilitato)
+
+Quando la tua organizzazione ha RBAC abilitato, puoi assegnare **associazioni di ruoli** esplicite direttamente a una chiave (ad esempio: `app_uploader` su un'organizzazione specifica). Quando una chiave ha associazioni esplicite:
+
+- **Solo quelle associazioni vengono valutate** — i permessi dell'utente proprietario vengono completamente ignorati
+- La chiave è strettamente limitata a ciò che le sue associazioni consentono, indipendentemente da chi la possiede
+- Questo ti permette di creare chiavi con privilegi veramente minimi, anche per i super admin
+
+Se una chiave non ha associazioni esplicite su un'organizzazione con RBAC abilitato, torna alla modalità legacy (permessi del proprietario limitati dalla modalità).
+
+<Aside type="tip">
+  Le associazioni di ruoli RBAC vengono gestite dalle impostazioni dell'organizzazione. Consulta il [Sistema di permessi delle chiavi API](/docs/webapp/api-key-permissions/) per una spiegazione
+  completa ed esempi.
+</Aside>
+
+## Chiavi API crittografate
+
+Quando crei una nuova chiave API, puoi scegliere di creare una **chiave crittografata**. Le chiavi crittografate offrono una maggiore sicurezza:
+
+- La chiave viene sottoposta a hash usando SHA-256 prima di essere memorizzata nel database
+- **La chiave in chiaro viene mostrata solo una volta** quando la crei - assicurati di copiarla e salvarla immediatamente
+- Dopo la creazione, la chiave non può essere recuperata o visualizzata nuovamente
+- Se perdi una chiave crittografata, devi crearne una nuova
+
+Questo è l'approccio consigliato per gli ambienti di produzione poiché garantisce che, anche se il database viene compromesso, le tue chiavi API effettive rimangono sicure.
+
+## Scadenza delle chiavi API
+
+Puoi impostare una **data di scadenza** per le tue chiavi API. Questa è una buona pratica di sicurezza che limita la finestra di esposizione in caso di compromissione di una chiave.
+
+### Impostare una data di scadenza
+
+Quando crei o modifichi una chiave API, puoi opzionalmente impostare una data di scadenza. Una volta superata la data di scadenza:
+
+- La chiave API non funzionerà più per l'autenticazione
+- Qualsiasi richiesta che utilizza la chiave scaduta verrà rifiutata
+- Le chiavi scadute vengono automaticamente eliminate dopo 30 giorni
+
+### Politiche dell'organizzazione
+
+Le organizzazioni possono applicare politiche di scadenza:
+
+- **Richiedere la scadenza**: Tutte le chiavi API devono avere una data di scadenza
+- **Periodo massimo di scadenza**: Limitare quanto nel futuro può essere impostata una data di scadenza (ad es., massimo 90 giorni)
+- **Imporre chiavi API sicure**: Richiedere che tutte le nuove chiavi API vengano create come chiavi crittografate/con hash
+
+Se la tua organizzazione ha queste politiche abilitate, ti sarà richiesto di impostare una data di scadenza appropriata quando crei nuove chiavi.
+
+Per maggiori informazioni sulla configurazione delle politiche di sicurezza a livello di organizzazione, consulta [Sicurezza dell'organizzazione](/docs/webapp/organization-security/).
+
+## Come rimuovere una chiave API?
+
+Per rimuovere una chiave API clicca sul piccolo pulsante cestino.
 
 <figure><img src="/apikeys-remove.webp" alt="remove apikey" /><figcaption></figcaption></figure>
 
-E poi conferma la rimozione della chiave API
+E poi conferma la rimozione della chiave API.
 
-## Come rigenerare una chiave api?
+## Come rigenerare una chiave API?
 
-Per rigenerare una chiave API clicca sul piccolo pulsante di aggiornamento
+Per rigenerare una chiave API clicca sul piccolo pulsante di aggiornamento.
 
 <figure><img src="/apikeys-regenerate.webp" alt="generate apikey" /><figcaption></figcaption></figure>
 
-E poi conferma la rigenerazione della chiave API
+E poi conferma la rigenerazione della chiave API.

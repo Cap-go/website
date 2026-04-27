@@ -23,6 +23,20 @@ Please take a look at the following diagram to better understand how API keys wo
 
 You can create subkeys with limited access to specific apps or organizations. This is useful for restricting access to certain resources while still allowing operations on others. Use the `limited_to_apps` and `limited_to_orgs` parameters when creating a key to define these restrictions.
 
+## Permission Resolution
+
+How permissions are evaluated depends on whether your organization has RBAC enabled and whether the key has explicit role bindings (identified by a non-null `rbac_id`):
+
+| Condition | What is evaluated |
+|---|---|
+| Legacy org (no RBAC) | Key mode capped on owner's org membership rights |
+| RBAC org, key has no bindings | Owner's RBAC role bindings, capped by key mode |
+| RBAC org, key has explicit bindings | **Only the key's own bindings** — owner's permissions are ignored |
+
+The third case is the most important for security: a key with explicit bindings is strictly isolated from its owner's rights. This allows creating minimal-privilege automation keys even when the owner is a super admin.
+
+See the [API Key permission system](/docs/webapp/api-key-permissions/) for the full explanation.
+
 ## Encrypted Keys
 
 You can create **encrypted (hashed) API keys** for enhanced security. When creating an encrypted key:
@@ -75,6 +89,7 @@ interface ApiKey {
   name: string
   updated_at: string | null
   user_id: string
+  rbac_id: string | null  // RBAC principal UUID, null for legacy keys
   limited_to_apps?: string[]
   limited_to_orgs?: string[]
   expires_at?: string | null  // ISO 8601 date, null means never expires

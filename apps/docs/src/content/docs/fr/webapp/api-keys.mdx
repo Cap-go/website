@@ -1,46 +1,128 @@
 ---
-locale: fr
 title: "Clés API"
-description: "How to manage Clés API for Capgo cloud, learn what they use for, how to Créer, Modifier or roll them to ensure Sécurité with your Compte"
-sidebar: 
+description: "Comment gérer les clés API pour Capgo Cloud, découvrez à quoi elles servent, comment les créer, les modifier ou les renouveler pour assurer la sécurité de votre compte"
+sidebar:
   order: 3
+locale: fr
 ---
 
+import { Aside } from "@astrojs/starlight/components";
 
-## What can I do with the Clés API?
+## Que puis-je faire avec les clés API ?
 
-An Clé API can be regenerated, or removed or a Nouveau one can be added.
+Une clé API peut être régénérée, supprimée, ou une nouvelle peut être ajoutée. Vous pouvez également définir des dates d'expiration et créer des clés chiffrées pour une sécurité renforcée.
 
-## How to see all Clés API?
+## Comment voir toutes les clés API ?
 
-You need to go to [Clés API page](https://console.capgo.Application/Tableau de bord/apikeys/) and there you will see all your Clés API.
+Vous devez vous rendre sur la [page des clés API](https://console.capgo.app/dashboard/apikeys/) et vous y verrez toutes vos clés API.
 
-## How to Ajouter a Nouveau Clé API?
+## Comment ajouter une nouvelle clé API ?
 
-To Ajouter a Nouveau Clé API click on the little plus button
+Pour ajouter une nouvelle clé API, cliquez sur le petit bouton plus
 
 <figure><img src="/apikeys-add.webp" alt="add apikey" /><figcaption></figcaption></figure>
 
-and then select the permissions you want to give to the Nouveau Clé API. You can select:
+puis sélectionnez les permissions que vous souhaitez accorder à la nouvelle clé API. Vous pouvez sélectionner :
 
- - Read - the Clé API will be able to read all the data
- - Télécharger - the Clé API will be able to Télécharger Nouveau versions from the CLI and read
- - All - The Clé API will be able to do everything
+- **Read** - la clé API pourra lire toutes les données
+- **Upload** - la clé API pourra téléverser de nouvelles versions depuis le CLI et lire
+- **Write** - la clé API pourra modifier les paramètres, les canaux, les appareils et téléverser
+- **All** - la clé API pourra tout faire
 
-<figure><img src="/apikeys-select-perm.webp" alt="select perm" /><figcaption></figcaption></figure>
+{/* TODO: replace with apikeys-select-perm-v2.webp once screenshot is taken */}
 
-## How to Retirer an Clé API?
+<figure><img src="/apikeys-select-perm.webp" alt="select permissions" /><figcaption></figcaption></figure>
 
-To Retirer an Clé API click on the little trash button.
+## Comment fonctionnent les permissions des clés API
+
+Les permissions des clés API suivent l'un des deux modèles selon que votre organisation a activé ou non le système RBAC.
+
+### Mode legacy (toutes les organisations)
+
+En mode legacy, une clé API **hérite des permissions de l'utilisateur qui l'a créée**, plafonnées par le mode de la clé :
+
+| Mode de la clé | Ce que la clé peut faire                                          |
+| -------------- | ----------------------------------------------------------------- |
+| `read`         | Lecture des données uniquement                                    |
+| `upload`       | Lecture + téléversement de nouveaux bundles                       |
+| `write`        | Lecture + téléversement + modification des canaux, appareils, métadonnées des bundles |
+| `all`          | Tout ce que le propriétaire peut faire dans l'organisation        |
+
+<Aside type="note">
+  Si un `super_admin` crée une clé `read`, cette clé ne peut que lire — même si
+  le propriétaire a tous les droits. Le mode agit comme un plafond, pas comme un
+  plancher.
+</Aside>
+
+Cela signifie :
+
+- Si le propriétaire de la clé perd l'accès à l'organisation, la clé cesse de fonctionner également
+- La clé ne peut jamais faire plus que ce que le propriétaire pourrait faire lui-même
+- Les différents modes vous offrent un moyen simple de limiter les clés CI/CD sans contrôle granulaire
+
+### Liaisons de rôles RBAC (organisations avec RBAC activé)
+
+Lorsque votre organisation a le RBAC activé, vous pouvez assigner des **liaisons de rôles** explicites directement à une clé (par exemple : `app_uploader` sur une organisation spécifique). Quand une clé possède des liaisons explicites :
+
+- **Seules ces liaisons sont évaluées** — les permissions de l'utilisateur propriétaire sont entièrement ignorées
+- La clé est strictement limitée à ce que ses liaisons autorisent, quel que soit son propriétaire
+- Cela vous permet de créer des clés à privilèges vraiment minimaux, même pour les super admins
+
+Si une clé n'a pas de liaisons explicites sur une organisation avec RBAC activé, elle revient au mode legacy (permissions du propriétaire plafonnées par le mode).
+
+<Aside type="tip">
+  Les liaisons RBAC sont gérées depuis les paramètres de l'organisation. Voir
+  [Système de permissions des clés API](/docs/webapp/api-key-permissions/) pour
+  une explication complète et des exemples.
+</Aside>
+
+## Clés API chiffrées
+
+Lors de la création d'une nouvelle clé API, vous pouvez choisir de créer une **clé chiffrée**. Les clés chiffrées offrent une sécurité renforcée :
+
+- La clé est hachée en utilisant SHA-256 avant d'être stockée dans la base de données
+- **La clé en clair n'est affichée qu'une seule fois** lors de sa création - assurez-vous de la copier et de la sauvegarder immédiatement
+- Après la création, la clé ne peut plus être récupérée ni consultée
+- Si vous perdez une clé chiffrée, vous devez en créer une nouvelle
+
+C'est l'approche recommandée pour les environnements de production car elle garantit que même si la base de données est compromise, vos clés API réelles restent sécurisées.
+
+## Expiration des clés API
+
+Vous pouvez définir une **date d'expiration** pour vos clés API. C'est une bonne pratique de sécurité qui limite la fenêtre d'exposition si une clé est compromise.
+
+### Définir une date d'expiration
+
+Lors de la création ou de la modification d'une clé API, vous pouvez optionnellement définir une date d'expiration. Une fois la date d'expiration passée :
+
+- La clé API ne fonctionnera plus pour l'authentification
+- Toute requête utilisant la clé expirée sera rejetée
+- Les clés expirées sont automatiquement nettoyées après 30 jours
+
+### Politiques d'organisation
+
+Les organisations peuvent appliquer des politiques d'expiration :
+
+- **Exiger une expiration** : Toutes les clés API doivent avoir une date d'expiration
+- **Période d'expiration maximale** : Limiter la durée maximale d'une date d'expiration (par ex., maximum 90 jours)
+- **Imposer des clés API sécurisées** : Exiger que toutes les nouvelles clés API soient créées comme clés chiffrées/hachées
+
+Si votre organisation a activé ces politiques, vous devrez définir une date d'expiration appropriée lors de la création de nouvelles clés.
+
+Pour plus d'informations sur la configuration des politiques de clés API à l'échelle de l'organisation, voir [Sécurité de l'organisation](/docs/webapp/organization-security/).
+
+## Comment supprimer une clé API ?
+
+Pour supprimer une clé API, cliquez sur le petit bouton corbeille.
 
 <figure><img src="/apikeys-remove.webp" alt="remove apikey" /><figcaption></figcaption></figure>
 
-And then confirm removing the Clé API.
+Puis confirmez la suppression de la clé API.
 
-## How to regenerate an Clé API?
+## Comment régénérer une clé API ?
 
-To regenerate an Clé API click on the little Actualiser button.
+Pour régénérer une clé API, cliquez sur le petit bouton actualiser.
 
 <figure><img src="/apikeys-regenerate.webp" alt="generate apikey" /><figcaption></figcaption></figure>
 
-And then confirm regenerating the Clé API.
+Puis confirmez la régénération de la clé API.

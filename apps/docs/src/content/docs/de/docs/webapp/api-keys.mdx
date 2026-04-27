@@ -1,45 +1,128 @@
 ---
-title: API-Schlüssel verwalten
-description: API-Schlüssel verwalten
+title: "API-Schl\u00fcssel"
+description: "So verwalten Sie API-Schl\u00fcssel f\u00fcr Capgo Cloud, erfahren Sie, wof\u00fcr sie verwendet werden, wie Sie sie erstellen, bearbeiten oder rotieren, um die Sicherheit Ihres Kontos zu gew\u00e4hrleisten"
 sidebar:
   order: 3
 locale: de
 ---
 
-## Was kann ich mit den API-Schlüsseln tun?
+import { Aside } from "@astrojs/starlight/components";
 
-Ein API-Schlüssel kann neu generiert, entfernt oder ein neuer hinzugefügt werden
+## Was kann ich mit API-Schlüsseln tun?
+
+Ein API-Schlüssel kann neu generiert, entfernt oder ein neuer hinzugefügt werden. Sie können auch Ablaufdaten festlegen und verschlüsselte Schlüssel für erhöhte Sicherheit erstellen.
 
 ## Wie kann ich alle API-Schlüssel sehen?
 
-Sie müssen zur [API-Schlüssel-Seite](https://console.capgo.app/dashboard/apikeys/) gehen und dort sehen Sie alle Ihre API-Schlüssel
+Sie müssen zur [API-Schlüssel-Seite](https://console.capgo.app/dashboard/apikeys/) gehen und dort sehen Sie alle Ihre API-Schlüssel.
 
 ## Wie füge ich einen neuen API-Schlüssel hinzu?
 
 Um einen neuen API-Schlüssel hinzuzufügen, klicken Sie auf den kleinen Plus-Button
 
-<figure><img src="/apikeys-add.webp" alt="add apikey" /><figcaption></figcaption></figure>
+<figure><img src="/apikeys-add.webp" alt="API-Schlüssel hinzufügen" /><figcaption></figcaption></figure>
 
 und wählen Sie dann die Berechtigungen aus, die Sie dem neuen API-Schlüssel geben möchten. Sie können auswählen:
 
- - Lesen - der API-Schlüssel kann alle Daten lesen
- - Upload - der API-Schlüssel kann neue Versionen über die CLI hochladen und lesen
- - Alles - der API-Schlüssel kann alles tun
+- **Lesen** - der API-Schlüssel kann alle Daten lesen
+- **Upload** - der API-Schlüssel kann neue Versionen über die CLI hochladen und lesen
+- **Schreiben** - der API-Schlüssel kann Einstellungen, Kanäle, Geräte ändern und hochladen
+- **Alle** - der API-Schlüssel kann alles tun
 
-<figure><img src="/apikeys-select-perm.webp" alt="select perm" /><figcaption></figcaption></figure>
+{/* TODO: replace with apikeys-select-perm-v2.webp once screenshot is taken */}
+
+<figure><img src="/apikeys-select-perm.webp" alt="Berechtigungen auswählen" /><figcaption></figcaption></figure>
+
+## Wie funktionieren API-Schlüssel-Berechtigungen?
+
+API-Schlüssel-Berechtigungen folgen einem von zwei Modellen, je nachdem, ob Ihre Organisation das RBAC-System aktiviert hat.
+
+### Legacy-Modus (alle Organisationen)
+
+Im Legacy-Modus **erbt ein API-Schlüssel die Berechtigungen des Benutzers, der ihn erstellt hat**, begrenzt durch den Modus des Schlüssels:
+
+| Schlüssel-Modus | Was der Schlüssel tun kann |
+| -------- | --------------------------------------------------------- |
+| `read` | Nur Daten lesen |
+| `upload` | Lesen + neue Bundles hochladen |
+| `write` | Lesen + hochladen + Kanäle, Geräte, Bundle-Metadaten ändern |
+| `all` | Alles, was der Besitzer in der Organisation tun kann |
+
+<Aside type="note">
+  Wenn ein `super_admin` einen `read`-Schlüssel erstellt, kann dieser Schlüssel
+  nur lesen — obwohl der Besitzer volle Rechte hat. Der Modus wirkt als
+  Obergrenze, nicht als Untergrenze.
+</Aside>
+
+Das bedeutet:
+
+- Wenn der Schlüsselbesitzer den Zugang zur Organisation verliert, funktioniert der Schlüssel ebenfalls nicht mehr
+- Der Schlüssel kann niemals mehr tun, als der Besitzer selbst tun könnte
+- Verschiedene Modi bieten Ihnen eine einfache Möglichkeit, CI/CD-Schlüssel einzuschränken, ohne feingranulare Kontrolle
+
+### RBAC-Rollenbindungen (Organisationen mit aktiviertem RBAC)
+
+Wenn Ihre Organisation RBAC aktiviert hat, können Sie explizite **Rollenbindungen** direkt einem Schlüssel zuweisen (zum Beispiel: `app_uploader` für eine bestimmte Organisation). Wenn ein Schlüssel explizite Bindungen hat:
+
+- **Nur diese Bindungen werden ausgewertet** — die Benutzerberechtigungen des Besitzers werden vollständig ignoriert
+- Der Schlüssel ist strikt auf das beschränkt, was seine Bindungen erlauben, unabhängig davon, wem er gehört
+- So können Sie wirklich minimal-privilegierte Schlüssel erstellen, selbst für Super-Admins
+
+Wenn ein Schlüssel keine expliziten Bindungen in einer RBAC-aktivierten Organisation hat, fällt er auf den Legacy-Modus zurück (Berechtigungen des Besitzers, begrenzt durch den Modus).
+
+<Aside type="tip">
+  RBAC-Bindungen werden über die Organisationseinstellungen verwaltet. Siehe
+  [API-Schlüssel-Berechtigungssystem](/docs/webapp/api-key-permissions/) für
+  eine vollständige Erklärung und Beispiele.
+</Aside>
+
+## Verschlüsselte API-Schlüssel
+
+Beim Erstellen eines neuen API-Schlüssels können Sie einen **verschlüsselten Schlüssel** erstellen. Verschlüsselte Schlüssel bieten erhöhte Sicherheit:
+
+- Der Schlüssel wird vor der Speicherung in der Datenbank mit SHA-256 gehasht
+- **Der Klartext-Schlüssel wird nur einmal angezeigt**, wenn Sie ihn erstellen - stellen Sie sicher, dass Sie ihn sofort kopieren und speichern
+- Nach der Erstellung kann der Schlüssel nicht mehr abgerufen oder angezeigt werden
+- Wenn Sie einen verschlüsselten Schlüssel verlieren, müssen Sie einen neuen erstellen
+
+Dies ist der empfohlene Ansatz für Produktionsumgebungen, da er sicherstellt, dass Ihre tatsächlichen API-Schlüssel auch bei einer Kompromittierung der Datenbank sicher bleiben.
+
+## API-Schlüssel-Ablauf
+
+Sie können ein **Ablaufdatum** für Ihre API-Schlüssel festlegen. Dies ist eine bewährte Sicherheitspraxis, die das Zeitfenster einer Gefährdung begrenzt, falls ein Schlüssel kompromittiert wird.
+
+### Ablaufdatum festlegen
+
+Beim Erstellen oder Bearbeiten eines API-Schlüssels können Sie optional ein Ablaufdatum festlegen. Sobald das Ablaufdatum überschritten ist:
+
+- Funktioniert der API-Schlüssel nicht mehr zur Authentifizierung
+- Werden alle Anfragen mit dem abgelaufenen Schlüssel abgelehnt
+- Werden abgelaufene Schlüssel nach 30 Tagen automatisch bereinigt
+
+### Organisationsrichtlinien
+
+Organisationen können Ablaufrichtlinien durchsetzen:
+
+- **Ablauf erforderlich**: Alle API-Schlüssel müssen ein Ablaufdatum haben
+- **Maximaler Ablaufzeitraum**: Begrenzen Sie, wie weit in der Zukunft ein Ablaufdatum gesetzt werden kann (z.B. maximal 90 Tage)
+- **Sichere API-Schlüssel erzwingen**: Erfordern Sie, dass alle neuen API-Schlüssel als verschlüsselte/gehashte Schlüssel erstellt werden
+
+Wenn Ihre Organisation diese Richtlinien aktiviert hat, müssen Sie beim Erstellen neuer Schlüssel ein entsprechendes Ablaufdatum festlegen.
+
+Weitere Informationen zur Konfiguration organisationsweiter API-Schlüssel-Richtlinien finden Sie unter [Organisationssicherheit](/docs/webapp/organization-security/).
 
 ## Wie entferne ich einen API-Schlüssel?
 
-Um einen API-Schlüssel zu entfernen, klicken Sie auf den kleinen Papierkorb-Button
+Um einen API-Schlüssel zu entfernen, klicken Sie auf den kleinen Papierkorb-Button.
 
-<figure><img src="/apikeys-remove.webp" alt="remove apikey" /><figcaption></figcaption></figure>
+<figure><img src="/apikeys-remove.webp" alt="API-Schlüssel entfernen" /><figcaption></figcaption></figure>
 
-Und bestätigen Sie dann das Entfernen des API-Schlüssels
+Und bestätigen Sie dann das Entfernen des API-Schlüssels.
 
 ## Wie generiere ich einen API-Schlüssel neu?
 
-Um einen API-Schlüssel neu zu generieren, klicken Sie auf den kleinen Aktualisieren-Button
+Um einen API-Schlüssel neu zu generieren, klicken Sie auf den kleinen Aktualisieren-Button.
 
-<figure><img src="/apikeys-regenerate.webp" alt="generate apikey" /><figcaption></figcaption></figure>
+<figure><img src="/apikeys-regenerate.webp" alt="API-Schlüssel neu generieren" /><figcaption></figcaption></figure>
 
-Und bestätigen Sie dann die Neugenerierung des API-Schlüssels
+Und bestätigen Sie dann die Neugenerierung des API-Schlüssels.

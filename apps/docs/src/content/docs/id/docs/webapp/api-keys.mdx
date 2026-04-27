@@ -1,20 +1,22 @@
 ---
-title: API-Schlüssel verwalten
-description: Cara Mengelola API Key
+title: "Kunci API"
+description: "Cara mengelola kunci API untuk Capgo Cloud, pelajari kegunaannya, cara membuat, mengedit, atau merotasinya untuk memastikan keamanan akun Anda"
 sidebar:
   order: 3
 locale: id
 ---
 
-## Apa yang bisa saya lakukan dengan kunci api?
+import { Aside } from "@astrojs/starlight/components";
 
-Kunci API dapat dibuat ulang, dihapus atau bisa ditambahkan yang baru
+## Apa yang bisa saya lakukan dengan kunci API?
 
-## Bagaimana cara melihat semua kunci api?
+Kunci API dapat dibuat ulang, dihapus, atau yang baru dapat ditambahkan. Anda juga dapat mengatur tanggal kedaluwarsa dan membuat kunci terenkripsi untuk keamanan yang lebih baik.
 
-Anda perlu mengunjungi [halaman kunci API](https://console.capgo.app/dashboard/apikeys/) dan di sana Anda akan melihat semua kunci api Anda
+## Bagaimana cara melihat semua kunci API?
 
-## Bagaimana cara menambahkan kunci api baru?
+Anda perlu mengunjungi [halaman kunci API](https://console.capgo.app/dashboard/apikeys/) dan di sana Anda akan melihat semua kunci API Anda.
+
+## Bagaimana cara menambahkan kunci API baru?
 
 Untuk menambahkan kunci API baru klik pada tombol plus kecil
 
@@ -22,24 +24,103 @@ Untuk menambahkan kunci API baru klik pada tombol plus kecil
 
 dan kemudian pilih izin yang ingin Anda berikan ke kunci API baru. Anda dapat memilih:
 
- - Read - kunci API akan dapat membaca semua data
- - Upload - kunci API akan dapat mengunggah versi baru dari CLI dan membaca
- - All - Kunci API akan dapat melakukan semuanya
+- **Baca** - kunci API akan dapat membaca semua data
+- **Unggah** - kunci API akan dapat mengunggah versi baru dari CLI dan membaca
+- **Tulis** - kunci API akan dapat mengubah pengaturan, channel, perangkat, dan mengunggah
+- **Semua** - kunci API akan dapat melakukan semuanya
 
-<figure><img src="/apikeys-select-perm.webp" alt="select perm" /><figcaption></figcaption></figure>
+{/* TODO: replace with apikeys-select-perm-v2.webp once screenshot is taken */}
 
-## Bagaimana cara menghapus kunci api?
+<figure><img src="/apikeys-select-perm.webp" alt="select permissions" /><figcaption></figcaption></figure>
 
-Untuk menghapus kunci API klik pada tombol sampah kecil
+## Cara kerja izin kunci API
+
+Izin kunci API mengikuti salah satu dari dua model tergantung pada apakah organisasi Anda mengaktifkan sistem RBAC.
+
+### Mode legacy (semua organisasi)
+
+Dalam mode legacy, kunci API **mewarisi izin pengguna yang membuatnya**, dibatasi oleh mode kunci:
+
+| Mode kunci | Apa yang dapat dilakukan kunci                                       |
+| ---------- | -------------------------------------------------------------------- |
+| `read`     | Hanya membaca data                                                   |
+| `upload`   | Membaca + mengunggah bundle baru                                     |
+| `write`    | Membaca + mengunggah + mengubah channel, perangkat, metadata bundle  |
+| `all`      | Semua yang dapat dilakukan pemilik dalam organisasi                   |
+
+<Aside type="note">
+  Jika `super_admin` membuat kunci `read`, kunci tersebut hanya dapat membaca — meskipun
+  pemiliknya memiliki hak penuh. Mode bertindak sebagai batas atas, bukan batas bawah.
+</Aside>
+
+Ini berarti:
+
+- Jika pemilik kunci kehilangan akses ke organisasi, kunci tersebut juga berhenti berfungsi
+- Kunci tidak pernah bisa melakukan lebih dari yang bisa dilakukan pemiliknya sendiri
+- Mode yang berbeda memberi Anda cara sederhana untuk membatasi kunci CI/CD tanpa kontrol yang terperinci
+
+### Pengikatan peran RBAC (organisasi dengan RBAC diaktifkan)
+
+Ketika organisasi Anda mengaktifkan RBAC, Anda dapat menetapkan **pengikatan peran** eksplisit langsung ke kunci (misalnya: `app_uploader` pada organisasi tertentu). Ketika kunci memiliki pengikatan eksplisit:
+
+- **Hanya pengikatan tersebut yang dievaluasi** — izin pengguna pemilik diabaikan sepenuhnya
+- Kunci dibatasi secara ketat pada apa yang diizinkan oleh pengikatannya, terlepas dari siapa pemiliknya
+- Ini memungkinkan Anda membuat kunci dengan hak istimewa minimal, bahkan untuk super admin
+
+Jika kunci tidak memiliki pengikatan eksplisit pada organisasi dengan RBAC diaktifkan, kunci tersebut kembali ke mode legacy (izin pemilik dibatasi oleh mode).
+
+<Aside type="tip">
+  Pengikatan peran RBAC dikelola dari pengaturan organisasi. Lihat [Sistem Izin Kunci API](/docs/webapp/api-key-permissions/) untuk penjelasan
+  lengkap dan contoh.
+</Aside>
+
+## Kunci API Terenkripsi
+
+Saat membuat kunci API baru, Anda dapat memilih untuk membuat **kunci terenkripsi**. Kunci terenkripsi memberikan keamanan yang lebih baik:
+
+- Kunci di-hash menggunakan SHA-256 sebelum disimpan di database
+- **Kunci asli hanya ditampilkan sekali** saat Anda membuatnya - pastikan untuk menyalin dan menyimpannya segera
+- Setelah dibuat, kunci tidak dapat diambil atau dilihat lagi
+- Jika Anda kehilangan kunci terenkripsi, Anda harus membuat yang baru
+
+Ini adalah pendekatan yang disarankan untuk lingkungan produksi karena memastikan bahwa meskipun database terkompromi, kunci API Anda yang sebenarnya tetap aman.
+
+## Kedaluwarsa Kunci API
+
+Anda dapat mengatur **tanggal kedaluwarsa** untuk kunci API Anda. Ini adalah praktik keamanan terbaik yang membatasi jendela paparan jika kunci terkompromi.
+
+### Mengatur tanggal kedaluwarsa
+
+Saat membuat atau mengedit kunci API, Anda dapat secara opsional mengatur tanggal kedaluwarsa. Setelah tanggal kedaluwarsa berlalu:
+
+- Kunci API tidak akan lagi berfungsi untuk autentikasi
+- Setiap permintaan yang menggunakan kunci kedaluwarsa akan ditolak
+- Kunci kedaluwarsa secara otomatis dibersihkan setelah 30 hari
+
+### Kebijakan organisasi
+
+Organisasi dapat menerapkan kebijakan kedaluwarsa:
+
+- **Wajibkan kedaluwarsa**: Semua kunci API harus memiliki tanggal kedaluwarsa
+- **Periode kedaluwarsa maksimum**: Membatasi seberapa jauh di masa depan tanggal kedaluwarsa dapat diatur (misalnya, maksimum 90 hari)
+- **Wajibkan kunci API aman**: Mengharuskan semua kunci API baru dibuat sebagai kunci terenkripsi/ter-hash
+
+Jika organisasi Anda mengaktifkan kebijakan ini, Anda akan diminta untuk mengatur tanggal kedaluwarsa yang sesuai saat membuat kunci baru.
+
+Untuk informasi lebih lanjut tentang mengonfigurasi kebijakan keamanan tingkat organisasi, lihat [Keamanan Organisasi](/docs/webapp/organization-security/).
+
+## Bagaimana cara menghapus kunci API?
+
+Untuk menghapus kunci API klik pada tombol sampah kecil.
 
 <figure><img src="/apikeys-remove.webp" alt="remove apikey" /><figcaption></figcaption></figure>
 
-Dan kemudian konfirmasi penghapusan kunci API
+Dan kemudian konfirmasi penghapusan kunci API.
 
-## Bagaimana cara membuat ulang kunci api?
+## Bagaimana cara membuat ulang kunci API?
 
-Untuk membuat ulang kunci API klik pada tombol refresh kecil
+Untuk membuat ulang kunci API klik pada tombol refresh kecil.
 
 <figure><img src="/apikeys-regenerate.webp" alt="generate apikey" /><figcaption></figcaption></figure>
 
-Dan kemudian konfirmasi pembuatan ulang kunci API
+Dan kemudian konfirmasi pembuatan ulang kunci API.

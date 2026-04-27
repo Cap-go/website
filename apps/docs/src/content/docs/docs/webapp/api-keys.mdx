@@ -1,20 +1,21 @@
 ---
-title: "Api keys"
-description: "How to manage api keys for Capgo cloud, learn what they use for, how to create, edit or roll them to ensure security with your account"
+title: "API Keys"
+description: "How to manage API keys for Capgo cloud, learn what they are used for, how to create, edit, or rotate them to ensure security with your account"
 sidebar:
   order: 3
 ---
 
+import { Aside } from "@astrojs/starlight/components";
 
-## What can I do with the api keys?
+## What can I do with API keys?
 
-An API key can be regenerated, or removed or a new one can be added. You can also set expiration dates and create encrypted keys for enhanced security.
+An API key can be regenerated, removed, or a new one can be added. You can also set expiration dates and create encrypted keys for enhanced security.
 
-## How to see all api keys?
+## How to see all API keys?
 
-You need to go to [API keys page](https://console.capgo.app/dashboard/apikeys/) and there you will see all your api keys.
+You need to go to the [API keys page](https://console.capgo.app/dashboard/apikeys/) and there you will see all your API keys.
 
-## How to add a new api key?
+## How to add a new API key?
 
 To add a new API key click on the little plus button
 
@@ -22,11 +23,56 @@ To add a new API key click on the little plus button
 
 and then select the permissions you want to give to the new API key. You can select:
 
- - Read - the API key will be able to read all the data
- - Upload - the API key will be able to upload new versions from the CLI and read
- - All - The API key will be able to do everything
+- **Read** - the API key will be able to read all the data
+- **Upload** - the API key will be able to upload new versions from the CLI and read
+- **Write** - the API key will be able to modify settings, channels, devices, and upload
+- **All** - the API key will be able to do everything
 
-<figure><img src="/apikeys-select-perm.webp" alt="select perm" /><figcaption></figcaption></figure>
+{/* TODO: replace with apikeys-select-perm-v2.webp once screenshot is taken */}
+
+<figure><img src="/apikeys-select-perm.webp" alt="select permissions" /><figcaption></figcaption></figure>
+
+## How API key permissions work
+
+API key permissions follow one of two models depending on whether your organization has the RBAC system enabled.
+
+### Legacy mode (all organizations)
+
+In legacy mode, an API key **inherits the permissions of the user who created it**, capped by the key's mode:
+
+| Key mode | What the key can do                                       |
+| -------- | --------------------------------------------------------- |
+| `read`   | Read data only                                            |
+| `upload` | Read + upload new bundles                                 |
+| `write`  | Read + upload + modify channels, devices, bundle metadata |
+| `all`    | Everything the owner can do in the organization           |
+
+<Aside type="note">
+  If a `super_admin` creates a `read` key, that key can only read — even though
+  the owner has full rights. The mode acts as a ceiling, not a floor.
+</Aside>
+
+This means:
+
+- If the key owner loses access to the organization, the key stops working too
+- The key can never do more than the owner could do themselves
+- Different modes give you a simple way to limit CI/CD keys without fine-grained control
+
+### RBAC role bindings (organizations with RBAC enabled)
+
+When your organization has RBAC enabled, you can assign explicit **role bindings** directly to a key (for example: `app_uploader` on a specific organization). When a key has explicit bindings:
+
+- **Only those bindings are evaluated** — the owner's user permissions are ignored entirely
+- The key is strictly limited to what its bindings allow, regardless of who owns it
+- This lets you create truly minimal-privilege keys, even for super admins
+
+If a key has no explicit bindings on an RBAC-enabled org, it falls back to legacy mode (owner's permissions capped by mode).
+
+<Aside type="tip">
+  RBAC bindings are managed from the organization settings. See [API Key
+  permission system](/docs/webapp/api-key-permissions/) for a full explanation
+  and examples.
+</Aside>
 
 ## Encrypted API Keys
 
@@ -63,7 +109,7 @@ If your organization has these policies enabled, you will be required to set an 
 
 For more information on configuring organization-wide API key policies, see [Organization Security](/docs/webapp/organization-security/).
 
-## How to remove an api key?
+## How to remove an API key?
 
 To remove an API key click on the little trash button.
 
@@ -71,7 +117,7 @@ To remove an API key click on the little trash button.
 
 And then confirm removing the API key.
 
-## How to regenerate an api key?
+## How to regenerate an API key?
 
 To regenerate an API key click on the little refresh button.
 

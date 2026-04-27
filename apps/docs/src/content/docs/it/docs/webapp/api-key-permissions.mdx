@@ -1,0 +1,189 @@
+---
+title: "Sistema di permessi delle chiavi API"
+description: "Comprendi come funzionano i permessi delle chiavi API in Capgo, inclusa la modalità legacy e le associazioni di ruoli RBAC per un controllo degli accessi granulare."
+sidebar:
+  order: 4
+locale: it
+---
+
+import { Aside, Steps } from "@astrojs/starlight/components";
+
+Capgo supporta due modelli di permessi per le chiavi API. Il modello applicato dipende dal fatto che la tua organizzazione abbia **RBAC (Controllo degli Accessi Basato sui Ruoli)** abilitato. Entrambi i modelli possono coesistere tra diverse organizzazioni nello stesso account.
+
+## Panoramica
+
+| Modello                  | Quando si applica                                     | Come vengono determinati i permessi                         |
+| ------------------------ | ----------------------------------------------------- | ----------------------------------------------------------- |
+| **Modalità legacy**      | Tutte le organizzazioni (predefinito)                  | Permessi del proprietario, limitati dalla modalità della chiave |
+| **Associazioni di ruoli RBAC** | Organizzazioni con RBAC abilitato, chiave con associazioni | Solo le associazioni di ruolo della chiave (proprietario ignorato) |
+
+<Aside type="note">
+  Se un'organizzazione con RBAC abilitato ha una chiave **senza** associazioni di ruolo esplicite,
+  quella chiave torna alla modalità legacy per quell'organizzazione.
+</Aside>
+
+## Modalità legacy
+
+La modalità legacy è quella predefinita e funziona per ogni organizzazione. La logica dei permessi è semplice:
+
+1. La chiave ha una **modalità** (`read`, `upload`, `write` o `all`)
+2. La chiave appartiene a un **utente** (il suo creatore/proprietario)
+3. Quell'utente ha un **ruolo** nell'organizzazione (`read`, `upload`, `write`, `admin`, `super_admin`)
+4. Il permesso effettivo della chiave è l'**intersezione** tra la modalità e il ruolo dell'utente
+
+### Le quattro modalità della chiave
+
+Le modalità della chiave seguono uno schema graduato/a livelli dove ogni livello include tutto ciò che è al di sotto:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="API key modes diagram showing the graduated permission levels" /><figcaption></figcaption></figure>
+
+| Modalità | Capacità                                                                          |
+| -------- | --------------------------------------------------------------------------------- |
+| `read`   | Lettura di app, bundle, canali, dispositivi, statistiche, log                     |
+| `upload` | Tutto in `read` + caricamento di nuovi bundle                                     |
+| `write`  | Tutto in `upload` + modifica di canali, dispositivi, metadati dei bundle           |
+| `all`    | Tutto in `write` + eliminazione di app, gestione impostazioni e membri dell'organizzazione |
+
+### Come funziona in pratica
+
+Consideriamo un utente che è `admin` in un'organizzazione:
+
+| Modalità chiave | Permessi effettivi                                                               |
+| --------------- | -------------------------------------------------------------------------------- |
+| `read`          | Solo lettura (la modalità è più restrittiva del ruolo)                           |
+| `upload`        | Lettura + caricamento (la modalità è più restrittiva del ruolo)                  |
+| `write`         | Lettura + caricamento + modifica (corrisponde al livello del ruolo)              |
+| `all`           | Uguale a `write` in pratica (l'admin non può eliminare app o gestire la fatturazione) |
+
+<Aside type="caution">
+  Se il proprietario della chiave viene **rimosso dall'organizzazione** o il suo ruolo viene
+  declassato, i permessi effettivi della chiave cambiano immediatamente. Una chiave non può
+  mai superare ciò che il suo proprietario può fare.
+</Aside>
+
+### Casi d'uso comuni della modalità legacy
+
+- **Pipeline CI/CD**: Crea una chiave `upload` così la tua CI può distribuire bundle ma non può modificare canali o eliminare app
+- **Integrazione di monitoraggio**: Usa una chiave `read` per dashboard che devono solo recuperare statistiche
+- **Automazione del deployment**: Usa una chiave `write` per script che caricano bundle e cambiano versioni dei canali
+
+## Associazioni di ruoli RBAC
+
+Quando la tua organizzazione ha RBAC abilitato, puoi assegnare **associazioni di ruoli** direttamente a una chiave API. Questo fornisce un controllo granulare che va oltre il semplice sistema basato sulle modalità.
+
+### Cos'è un'associazione di ruolo?
+
+Un'associazione di ruolo assegna un **ruolo** specifico (come `app_reader`, `app_uploader` o `org_admin`) a un **principale** (un utente, un gruppo o una chiave API) all'interno di un **ambito** (un'organizzazione, un'app o un canale).
+
+Per le chiavi API, questo significa che puoi dire: "Questa chiave ha il ruolo `app_uploader` sull'organizzazione X" — indipendentemente da ciò che il proprietario della chiave può fare.
+
+### Priorità delle associazioni
+
+Questo è il concetto più importante da comprendere:
+
+**Quando una chiave API ha associazioni di ruolo esplicite, solo quelle associazioni vengono valutate. I permessi del proprietario vengono completamente ignorati.**
+
+Questo è intenzionale e fornisce una garanzia di sicurezza critica: una chiave limitata rimane limitata, anche se il suo proprietario è un `super_admin`.
+
+```
+Key has role bindings? ──YES──> Evaluate ONLY key bindings ──> Allow/Deny
+                       │
+                       NO
+                       │
+                       v
+              Fall back to legacy mode
+              (owner permissions + key mode)
+```
+
+### Scenari di esempio
+
+**Scenario 1: Chiave CI limitata per un super admin**
+
+Un `super_admin` crea una chiave con un'associazione esplicita `app_uploader` sull'organizzazione di produzione:
+
+- La chiave può caricare bundle su quell'organizzazione
+- La chiave **non può** eliminare app, modificare impostazioni o gestire membri
+- I permessi ampi del super admin sono irrilevanti per questa chiave
+
+**Scenario 2: Chiave di audit in sola lettura**
+
+Un `super_admin` crea una chiave con un'associazione `app_reader`:
+
+- La chiave può solo leggere dati delle app, bundle, canali
+- La chiave non può caricare, modificare o eliminare nulla
+- Perfetta per strumenti di monitoraggio o dashboard esterne
+
+**Scenario 3: Chiave senza associazioni su un'organizzazione RBAC**
+
+Se una chiave ha un identificatore RBAC ma nessuna associazione di ruolo esplicita, torna al comportamento legacy:
+
+- Il ruolo RBAC del proprietario nell'organizzazione viene valutato
+- La modalità della chiave (`read`/`upload`/`write`/`all`) agisce come tetto
+
+### Gestione delle associazioni di ruolo
+
+{/* TODO: screenshot of RBAC bindings UI - apikeys-rbac-bindings.webp */}
+
+Le associazioni di ruolo per le chiavi API vengono gestite dalle impostazioni della tua organizzazione. Puoi:
+
+1. Visualizzare quali associazioni ha una chiave
+2. Aggiungere nuove associazioni di ruolo (ad es., `app_uploader` su un'organizzazione specifica)
+3. Rimuovere associazioni esistenti per limitare o revocare l'accesso
+
+<Aside type="tip">
+  Quando crei una chiave tramite l'interfaccia della console con RBAC abilitato, le associazioni
+  vengono impostate automaticamente in base alla tua selezione. Le chiavi create tramite l'API REST
+  possono avere le associazioni configurate separatamente.
+</Aside>
+
+## Restrizioni di ambito
+
+Oltre alle modalità e alle associazioni di ruolo, le chiavi API supportano due **restrizioni di ambito** che agiscono come filtri aggiuntivi:
+
+### `limited_to_orgs`
+
+Limita la chiave a funzionare solo all'interno di organizzazioni specifiche. Se la chiave viene usata per accedere a un'organizzazione non presente in questa lista, la richiesta viene rifiutata — anche se la modalità o le associazioni lo consentirebbero.
+
+### `limited_to_apps`
+
+Limita la chiave a funzionare solo con app specifiche (per ID app). Utile per creare chiavi che possono fare il deployment solo su una singola app.
+
+<Aside type="note">
+  Le restrizioni di ambito sono **filtri additivi**, non concessioni di permessi. Una chiave
+  ha comunque bisogno di modalità/associazioni appropriate per eseguire azioni — l'ambito limita
+  solo dove quei permessi si applicano.
+</Aside>
+
+## Confronto di sicurezza
+
+| Aspetto                         | Modalità legacy                                | Associazioni di ruoli RBAC                        |
+| ------------------------------- | ---------------------------------------------- | ------------------------------------------------- |
+| Fonte dei permessi              | Ruolo dell'organizzazione del proprietario + modalità chiave | Solo le associazioni di ruolo della chiave   |
+| Il proprietario lascia l'org    | La chiave smette di funzionare                 | La chiave continua a funzionare (le associazioni sono indipendenti) |
+| Ruolo del proprietario declassato | Permessi della chiave ridotti immediatamente  | Nessun effetto sui permessi della chiave          |
+| Privilegio minimo possibile     | Limitato dalla granularità delle modalità (4 livelli) | Controllo granulare per permesso            |
+| Complessità di configurazione   | Semplice (basta scegliere una modalità)        | Richiede configurazione RBAC                      |
+
+<Aside type="caution">
+  In modalità legacy, se un utente viene rimosso da un'organizzazione, tutte le sue chiavi API
+  perdono immediatamente l'accesso a quell'organizzazione. Con le associazioni RBAC, le associazioni
+  della chiave sono indipendenti — ma il controllo di corrispondenza dell'utente richiede comunque
+  che il proprietario della chiave sia l'utente autenticato.
+</Aside>
+
+## Comportamento della CLI
+
+La CLI di Capgo funziona automaticamente con entrambi i modelli di permessi:
+
+- Comandi come `app add`, `init`, `organization set` e `organization members` usano la funzione `cli_check_permission` che rispetta sia il percorso legacy che RBAC
+- Comandi come `bundle upload`, `bundle list` e le operazioni sui `channel` usano il percorso di permessi legacy
+- La CLI rileva automaticamente quale sistema si applica in base alla configurazione dell'organizzazione — non è necessario alcun cambio manuale
+
+Per l'elenco completo dei comandi CLI e dei permessi richiesti, consulta il [riferimento dei comandi CLI](/docs/cli/reference/login/).
+
+## Prossimi passi
+
+- [Gestisci le tue chiavi API](/docs/webapp/api-keys/)
+- [Ruoli e permessi dell'organizzazione](/docs/webapp/organization-system/)
+- [Politiche di sicurezza dell'organizzazione](/docs/webapp/organization-security/)
+- [Riferimento API REST per le chiavi API](/docs/public-api/api-keys/)

@@ -1,46 +1,125 @@
 ---
 title: "API 密钥"
-description: "如何管理 Capgo 云的 API 密钥,了解它们的用途,如何创建、编辑或轮换它们以确保帐户安全"
+description: "如何管理 Capgo Cloud 的 API 密钥，了解其用途、如何创建、编辑或轮换密钥以确保账户安全"
 sidebar:
   order: 3
 locale: zh
 ---
 
+import { Aside } from "@astrojs/starlight/components";
 
-## 我可以用 API 密钥做什么?
+## 我可以用 API 密钥做什么？
 
-API 密钥可以重新生成、删除或添加新密钥。
+API 密钥可以重新生成、删除或添加新密钥。您还可以设置过期日期并创建加密密钥以增强安全性。
 
-## 如何查看所有 API 密钥?
+## 如何查看所有 API 密钥？
 
-您需要转到 [API 密钥页面](https://console.capgo.app/dashboard/apikeys/),在那里您将看到所有 API 密钥。
+您需要转到 [API 密钥页面](https://console.capgo.app/dashboard/apikeys/)，在那里您将看到所有 API 密钥。
 
-## 如何添加新的 API 密钥?
+## 如何添加新的 API 密钥？
 
-要添加新的 API 密钥,请单击小加号按钮
+要添加新的 API 密钥，请点击小加号按钮
 
-<figure><img src="/apikeys-add.webp" alt="添加 API 密钥" /><figcaption></figcaption></figure>
+<figure><img src="/apikeys-add.webp" alt="add apikey" /><figcaption></figcaption></figure>
 
-然后选择要授予新 API 密钥的权限。您可以选择:
+然后选择要授予新 API 密钥的权限。您可以选择：
 
- - 读取 - API 密钥将能够读取所有数据
- - 上传 - API 密钥将能够从 CLI 上传新版本并读取
- - 全部 - API 密钥将能够执行所有操作
+- **读取** - API 密钥将能够读取所有数据
+- **上传** - API 密钥将能够从 CLI 上传新版本并读取
+- **写入** - API 密钥将能够修改设置、频道、设备并上传
+- **全部** - API 密钥将能够执行所有操作
 
-<figure><img src="/apikeys-select-perm.webp" alt="选择权限" /><figcaption></figcaption></figure>
+{/* TODO: replace with apikeys-select-perm-v2.webp once screenshot is taken */}
 
-## 如何删除 API 密钥?
+<figure><img src="/apikeys-select-perm.webp" alt="select permissions" /><figcaption></figcaption></figure>
 
-要删除 API 密钥,请单击小垃圾桶按钮。
+## API 密钥权限的工作原理
 
-<figure><img src="/apikeys-remove.webp" alt="删除 API 密钥" /><figcaption></figcaption></figure>
+API 密钥权限遵循两种模型之一，取决于您的组织是否启用了 RBAC 系统。
+
+### 传统模式（所有组织）
+
+在传统模式下，API 密钥**继承创建者的权限**，并受密钥模式的上限限制：
+
+| 密钥模式 | 密钥可以做什么 |
+| -------- | --------------------------------------------------------- |
+| `read`   | 仅读取数据 |
+| `upload` | 读取 + 上传新包 |
+| `write`  | 读取 + 上传 + 修改频道、设备、包元数据 |
+| `all`    | 所有者在组织中可以做的一切 |
+
+<Aside type="note">
+  如果 `super_admin` 创建了一个 `read` 密钥，该密钥只能读取 ——
+  即使所有者拥有完全权限。模式充当上限而非下限。
+</Aside>
+
+这意味着：
+
+- 如果密钥所有者失去了对组织的访问权限，密钥也会停止工作
+- 密钥永远不能做超出所有者自身能力范围的事情
+- 不同的模式为您提供了一种简单的方式来限制 CI/CD 密钥，而无需细粒度控制
+
+### RBAC 角色绑定（启用 RBAC 的组织）
+
+当您的组织启用了 RBAC 时，您可以将明确的**角色绑定**直接分配给密钥（例如：特定组织上的 `app_uploader`）。当密钥具有明确的绑定时：
+
+- **仅评估这些绑定** — 所有者的用户权限被完全忽略
+- 密钥严格限制在其绑定允许的范围内，无论谁是所有者
+- 这使您即使是超级管理员也能创建真正的最小权限密钥
+
+如果 RBAC 启用的组织中密钥没有明确的绑定，则回退到传统模式（所有者权限 + 模式上限）。
+
+<Aside type="tip">
+  RBAC 绑定从组织设置中管理。有关完整说明和示例，请参阅 [API 密钥权限系统](/docs/webapp/api-key-permissions/)。
+</Aside>
+
+## 加密 API 密钥
+
+创建新的 API 密钥时，您可以选择创建**加密密钥**。加密密钥提供增强的安全性：
+
+- 密钥在存储到数据库之前使用 SHA-256 进行哈希处理
+- **明文密钥仅在创建时显示一次** - 请确保立即复制并保存
+- 创建后，密钥无法被检索或再次查看
+- 如果丢失了加密密钥，必须创建新的密钥
+
+这是生产环境的推荐方法，因为即使数据库被入侵，您的实际 API 密钥仍然是安全的。
+
+## API 密钥过期
+
+您可以为 API 密钥设置**过期日期**。这是一种安全最佳实践，可以在密钥泄露时限制暴露窗口。
+
+### 设置过期日期
+
+创建或编辑 API 密钥时，您可以选择设置过期日期。过期日期过后：
+
+- API 密钥将无法用于身份验证
+- 使用过期密钥的任何请求都将被拒绝
+- 过期密钥将在 30 天后自动清理
+
+### 组织策略
+
+组织可以强制执行过期策略：
+
+- **要求过期**: 所有 API 密钥必须有过期日期
+- **最大过期期限**: 限制过期日期可以设置到多远的未来（例如，最多 90 天）
+- **强制安全 API 密钥**: 要求所有新 API 密钥创建为加密/哈希密钥
+
+如果您的组织启用了这些策略，创建新密钥时将需要设置适当的过期日期。
+
+有关配置组织范围 API 密钥策略的更多信息，请参阅[组织安全](/docs/webapp/organization-security/)。
+
+## 如何删除 API 密钥？
+
+要删除 API 密钥，请点击小垃圾桶按钮。
+
+<figure><img src="/apikeys-remove.webp" alt="remove apikey" /><figcaption></figcaption></figure>
 
 然后确认删除 API 密钥。
 
-## 如何重新生成 API 密钥?
+## 如何重新生成 API 密钥？
 
-要重新生成 API 密钥,请单击小刷新按钮。
+要重新生成 API 密钥，请点击小刷新按钮。
 
-<figure><img src="/apikeys-regenerate.webp" alt="生成 API 密钥" /><figcaption></figcaption></figure>
+<figure><img src="/apikeys-regenerate.webp" alt="generate apikey" /><figcaption></figcaption></figure>
 
 然后确认重新生成 API 密钥。
