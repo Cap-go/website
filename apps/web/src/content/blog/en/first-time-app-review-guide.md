@@ -631,6 +631,18 @@ function SubscriptionOffer() {
 
 ## Android-Specific Requirements
 
+### Google Play Console Account Setup
+
+Before your first Android release, make sure the Play Console account and app shell exist:
+
+- Create your developer account at [Play Console signup](https://play.google.com/console/signup)
+- In Play Console, go to **Home > Create app**
+- Choose the default language, app/game type, and support email
+- Accept the required Play policy, export, and Play App Signing declarations
+- Decide whether the app is **free** or **paid**
+
+**Important**: Google lets you change a paid app to free later, but once an app has been offered for free, it cannot be switched to paid.
+
 ### App Bundle Requirement
 
 **Important**: Google Play requires Android App Bundle (.aab) format, not APK:
