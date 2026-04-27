@@ -1,0 +1,142 @@
+---
+title: "SSO (Enterprise)"
+description: "Set up SAML 2.0 single sign-on (SSO) for your Capgo organization: prerequisites, IdP configuration, DNS domain verification, provider lifecycle, and enforcement."
+sidebar:
+  order: 10
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+<Aside type="caution">
+
+**SSO setup is available on the Enterprise plan only.** Your organization must also have SSO explicitly enabled by Capgo (a per-organization flag). If your org has the SSO flag but is not on Enterprise, the dashboard shows an upgrade prompt instead of the configuration form. If you do not see **SSO configuration** under **Settings → Organization → Security**, contact your Capgo account contact.
+
+</Aside>
+
+## What is SSO?
+
+Single Sign-On (SSO) lets your team log in to Capgo using your company identity provider (IdP). Capgo uses SAML 2.0 through Supabase Auth. When a user's email domain matches an active SSO provider, they can authenticate against your IdP and are provisioned into the organization during the SSO callback.
+
+SSO does not change what users can do. Permissions are controlled by [organization roles](/docs/webapp/organization-system/#permission-breakdown). SSO only changes how they authenticate.
+
+## Prerequisites
+
+Before starting:
+
+- Enterprise subscription active on the Capgo organization.
+- Capgo has **enabled SSO** for that org.
+- An identity provider that supports **SAML 2.0** and exposes an IdP **metadata URL** (HTTPS).
+- Ability to publish a **DNS TXT record** for the email domain (e.g. `company.com` for users logging in as `user@company.com`).
+- A Capgo organization member with permission to update organization settings.
+- An **IdP admin** contact on your IT/security side.
+
+## Where to find SSO settings
+
+<Steps>
+
+1. Open [https://console.capgo.app/](https://console.capgo.app/)
+2. Click **Settings** in the left sidebar
+3. Select the **Organization** tab
+4. Select the **Security** tab
+5. Scroll to **SSO configuration**. The form is available only when SSO is enabled for your org and the org is on the Enterprise plan
+
+</Steps>
+
+## Step 1 - Configure your IdP
+
+In your identity provider, create a new SAML 2.0 application. You will need the following **Service Provider** values shown in the Capgo SSO configuration panel:
+
+| Field | Where to use it |
+|-------|-----------------|
+| **ACS URL** | Assertion Consumer Service URL in your IdP SAML app |
+| **Entity ID** | Service Provider entity identifier |
+| **SP metadata URL** | Optional: import if your IdP supports SP metadata import by URL |
+| **NameID format** | Format expected for the SAML Name Identifier |
+
+Your IdP must release the user's **email address** in the assertion. Capgo uses the email domain to resolve the active SSO provider and to match existing accounts.
+
+## Step 2 - Add the SSO provider in Capgo
+
+<Steps>
+
+1. In the SSO configuration panel, click to add a new provider
+2. Enter the **email domain** (e.g. `company.com`). It must match the domain part of your users' sign-in emails
+3. Enter your IdP **metadata URL** (HTTPS)
+4. Submit
+
+</Steps>
+
+The provider is created with status **Pending verification**.
+
+## Step 3 - DNS domain verification
+
+Capgo verifies you control the domain before SSO can become active.
+
+Add a **TXT** record at your DNS provider:
+
+| Field | Value |
+|-------|-------|
+| Type | `TXT` |
+| Name / host | `_capgo-sso.<your-domain>` (e.g. `_capgo-sso.company.com`) |
+| Value | The verification token shown in the dashboard panel |
+
+Once the record is published (DNS TTL propagation typically takes a few minutes to an hour), click **Verify DNS** in the dashboard. On success, the provider moves to **Verified**.
+
+## Step 4 - Activate the provider
+
+After DNS verification, click **Activate**. The provider status becomes **Active**. Only **Active** providers are used during the SSO login flow.
+
+You can **Deactivate** a provider at any time to pause SSO for that domain without deleting the configuration.
+
+## Step 5 - Test and assign roles
+
+When a user signs in via SSO for the first time and has no existing membership in that organization, Capgo provisions them with the **read** role.
+
+After pilot users sign in:
+
+1. Go to **Settings → Organization → Members**
+2. Find each SSO-provisioned user
+3. Adjust their role to the appropriate level (**Upload**, **Write**, **Admin**, etc.)
+
+See the [full permission breakdown](/docs/webapp/organization-system/#permission-breakdown) for what each role can do.
+
+<Aside type="note">
+
+If Supabase creates a separate SSO auth user for an email that already exists in Capgo, Capgo merges the SSO identity into the existing account and asks the user to sign in again.
+
+</Aside>
+
+## Optional - Enforce SSO
+
+On an **Active** provider you can toggle **Enforce SSO**. When enabled, Capgo marks existing auth users for that email domain as SSO-only and the login flow requires IdP authentication for that domain. Disabling the provider or turning enforcement off removes that SSO-only flag for the domain.
+
+<Aside type="caution">
+
+Coordinate with your IdP admin and notify all affected users before enabling enforcement. Users who cannot complete IdP authentication will not be able to sign in with their password for that domain.
+
+</Aside>
+
+## Provider status reference
+
+| Status | Meaning |
+|--------|---------|
+| **Pending verification** | DNS TXT record not yet verified |
+| **Verified** | Domain ownership confirmed; ready to activate |
+| **Active** | SSO is live for this domain |
+| **Disabled** | Provider paused; SSO not used; can be re-activated |
+
+## Rollout checklist
+
+- [ ] Enterprise plan confirmed; Capgo has enabled SSO for the org
+- [ ] SAML app created in IdP with ACS URL and Entity ID from Capgo
+- [ ] IdP configured to release a stable email claim
+- [ ] DNS TXT record published and **Verify DNS** succeeded
+- [ ] Provider activated
+- [ ] Pilot users signed in successfully
+- [ ] Roles elevated from default **read** as needed
+- [ ] Enforcement decision made (and communicated if enabled)
+
+## Related documentation
+
+- [Organization system: roles and permissions](/docs/webapp/organization-system/)
+- [Organization security: 2FA, passwords, API keys](/docs/webapp/organization-security/)
