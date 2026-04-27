@@ -9,9 +9,35 @@ import { Steps } from '@astrojs/starlight/components';
 
 Testing in-app purchases requires proper configuration in Google Play Console. This guide will walk you through setting up sandbox testing for your Android app.
 
+## Use the right build for the job
+
+Before you start, separate these three Android build types:
+
+- **Local debug/dev build**: Good for checking UI and native integrations on your device.
+- **Signed release AAB uploaded to Play Console**: Required for realistic Google Play billing tests.
+- **Play-installed testing build**: The build your testers install from an internal or closed track. Use this for purchase QA.
+
+:::warning
+If you only sideload an APK from Android Studio or `adb`, Google Play Billing may not behave the same way it does in production. For subscription and in-app purchase validation, always test with a build installed from Google Play.
+:::
+
 ## Prerequisites
 
-You need an active Google Play Console account with a current subscription (renewed annually).
+- A Google Play Console developer account
+- An app record created in Play Console with your final Android package name
+- Your in-app products or subscriptions created in Play Console
+- A test Gmail account that you can add to license testing
+- A signed release build ready for upload
+
+Use an Android App Bundle (`.aab`) for new Play Store apps:
+
+```bash
+bunx cap sync android
+cd android
+./gradlew bundleRelease
+```
+
+If you prefer the IDE flow, you can also generate a signed bundle from Android Studio with **Build > Generate Signed App Bundle / APK**.
 
 ## Setup Process
 
@@ -19,43 +45,50 @@ You need an active Google Play Console account with a current subscription (rene
 
 1. **Add Testing Account**
 
-   Navigate to your Google Play Console, select your app, and go to **Setup > License testing**.
+   In Play Console, open **Settings > License testing** and add the primary Google account used on your Android test device.
 
-   Add the primary Google account associated with the Android device you're using for testing.
+   This ensures purchases show the Play sandbox flow instead of attempting a real charge.
 
    ![Add testing account](/native-purchases/android/sandbox-testing/add-testing-account.webp)
 
-2. **Create Testing Track**
+2. **Choose a Testing Track**
 
-   Go to **Testing > Closed testing** or **Testing > Internal testing** and create a new track.
+   Go to **Test and release > Testing** and choose one of these tracks:
 
-   You must upload at least one signed version of your app to this track.
+   - **Internal testing**: Fastest path for QA and billing smoke tests. New bundles are normally available within minutes.
+   - **Closed testing**: Better for broader testing, and required before production for personal developer accounts created after November 13, 2023.
+
+   For a first release, Play may show a temporary app name and listing information to internal testers for up to 48 hours.
 
    ![Create testing track](/native-purchases/android/sandbox-testing/create-testing-track.webp)
 
 3. **Create Tester List**
 
-   After setting up the testing track, create an email list and add the testing device's account email address.
+   After opening your track, create a tester list and add the Google accounts that should receive the build.
+
+   If you are working toward production access on a newly created personal account, make sure you use **closed testing** and keep at least 12 testers opted in for 14 consecutive days.
 
    ![Create tester list](/native-purchases/android/sandbox-testing/create-tester-list.webp)
 
-4. **Join Testing Program**
+4. **Upload a Signed Release Build**
+
+   Create a new release in the selected testing track and upload your signed `.aab`.
+
+   New Google Play apps should use an Android App Bundle rather than an APK. After upload, save the release, fix any policy or store listing blockers Play flags, then publish the release to the testing track.
+
+   ![Upload release build](/native-purchases/android/sandbox-testing/upload-signed-apk.webp)
+
+5. **Join the Testing Program**
 
    Open the opt-in URL from your test device and click the **"Become a tester"** button to enroll.
 
+   Install the app from the Play Store listing created by that opt-in flow, not from a locally exported APK.
+
    ![Join testing](/native-purchases/android/sandbox-testing/join-testing-program.webp)
-
-5. **Upload Signed APK**
-
-   Generate a signed APK or use Android App Bundle to upload your app to the testing track.
-
-   Rolling out isn't required - just upload and await approval.
-
-   ![Upload APK](/native-purchases/android/sandbox-testing/upload-signed-apk.webp)
 
 6. **Build and Test**
 
-   Run your app on the test device. When attempting a purchase, you should see a message:
+   Launch the Play-installed build on the test device and attempt a purchase. You should see a message like:
 
    > "This is a test order; you will not be charged."
 
@@ -65,10 +98,13 @@ You need an active Google Play Console account with a current subscription (rene
 
 ## Important Notes
 
+- For billing QA, uninstall any sideloaded copy of the app before installing the Play testing build.
+- Internal testing is great for fast smoke tests, but closed testing is the track that matters for new personal-account production access.
 - Test accounts will not be charged for purchases
 - Test purchases use the same flow as production purchases
 - You can test all subscription features including trials and introductory offers
 - Test subscriptions have accelerated renewal periods for faster testing
+- Use the same Google account for all three places: the Play Store on the device, the tester opt-in flow, and License testing
 
 ## Troubleshooting
 
@@ -76,11 +112,13 @@ You need an active Google Play Console account with a current subscription (rene
 - Ensure your app is uploaded to a testing track
 - Verify the test account is added to License testing
 - Check that products are active in Google Play Console
+- Confirm the build was installed from Google Play, not sideloaded locally
 
 **"Item not available" error:**
 - Wait 2-3 hours after creating products for them to become available
 - Ensure your app's package name matches the one in Play Console
 - Verify you're signed in with a test account
+- Confirm you uploaded the signed release build that points at the same package name and product catalog
 
 **Test purchases showing as real charges:**
 - Double-check the account is added to License testing
@@ -89,4 +127,6 @@ You need an active Google Play Console account with a current subscription (rene
 
 ## Additional Resources
 
-For more details, refer to the [official Google Play documentation](https://developer.android.com/google/play/billing/test) on testing in-app purchases.
+- [Test purchases with Google Play Billing](https://developer.android.com/google/play/billing/test)
+- [Set up an open, closed, or internal test](https://support.google.com/googleplay/android-developer/answer/9845334)
+- [Testing requirements for new personal developer accounts](https://support.google.com/googleplay/android-developer/answer/14151465)
