@@ -34,7 +34,8 @@ Both Apple and Google have significantly tightened their review processes in rec
 ### Google Play Store Review Timeline (2026 Update)
 
 - **Initial Review**: 3-7 days (significantly longer than previous years)
-- **With Testing Track**: 7-14 days for apps requiring internal/closed testing
+- **Closed Testing Gate**: 14 days minimum for affected new personal Play Console accounts before you can request production access
+- **Production Review After Testing**: Usually another 3-7 days after the closed testing requirement is complete
 - **Updates to Existing Apps**: 1-3 days
 - **Policy Violations**: Can extend to 14+ days if additional review is triggered
 
@@ -857,9 +858,9 @@ Crash rate: 0.8%
 All crashes fixed in this build
 
 === API Levels ===
-Target SDK: 34 (Android 14)
+Target SDK: 35 (Android 15)
 Min SDK: 23 (Android 6.0)
-Tested on: Android 11, 12, 13, 14
+Tested on: Android 11, 12, 13, 14, 15
 ```
 
 ## What to Do If Rejected
