@@ -11,6 +11,42 @@ Getting your app approved on the App Store requires careful attention to Apple's
 
 ![iOS App Store Review Process](/native-purchases/review-guides/ios-review-hero.webp)
 
+## Before You Submit
+
+### Finish App Store Connect Setup
+
+Before Apple reviews your purchase flow, make sure the app record itself is complete:
+
+- Add a **Privacy Policy URL** in App Store Connect
+- Add a **Support URL** that leads to real contact information for users
+- Complete the **age rating** questionnaire so the app is publishable
+- Add **App Review contact details** and clear reviewer notes
+- If login is required, provide a **demo account that does not expire during review**
+
+:::note
+Apple treats the support site as more than a placeholder link. It should contain real contact details so users can reach you about app issues, feedback, and feature requests.
+:::
+
+![App Store listing metadata with policy and support links](/app-store-assets/checklist/policy-links.png)
+
+### Prepare Real Screenshots
+
+- Use current screenshots from the actual build under review
+- For iPhone, `1290 x 2796` (6.7-inch) is the easiest default size
+- If your app runs on iPad, upload iPad screenshots too
+- Current accepted large iPad sizes include `2064 x 2752` (13-inch) and `2048 x 2732` (12.9-inch)
+- Never stretch iPhone screenshots to fake iPad support
+
+### Dry-Run the Reviewer Journey in TestFlight
+
+Run the exact path Apple will follow on a real device:
+
+- Install the latest build from TestFlight
+- Sign in with the review account you plan to provide
+- Reach the paywall without hidden gestures or debug menus
+- Complete purchase, restore, and manage-subscription flows
+- Verify the app still behaves correctly if permissions are denied
+
 ## In-App Purchase Requirements
 
 ### Pricing Transparency (Critical)
@@ -44,6 +80,8 @@ Even a $1 discrepancy between store listing ($4.99) and app ($5.99) will trigger
 - Easy-to-locate cancellation instructions
 
 ![UI Design Dos and Don'ts](/native-purchases/review-guides/ui-design-dos-donts.webp)
+
+![Paywall with restore purchases and legal links](/app-store-assets/checklist/paywall-links.png)
 
 **Example of Compliant UI:**
 ```typescript
@@ -168,6 +206,10 @@ const SUBSCRIPTION_FEATURES = {
 **Prevention:**
 
 Update your `Info.plist` with clear explanations:
+
+![Permission copy that is too vague for review](/app-store-assets/checklist/rejected-permissions.png)
+
+![Permission copy with clearer explanations](/app-store-assets/checklist/accepted-permissions.png)
 
 ```xml
 <key>NSCameraUsageDescription</key>
@@ -304,23 +346,31 @@ Inaccurate privacy labels are a common rejection reason in 2025. Audit your data
    - Verify Info.plist descriptions are clear
 
 5. **Prepare Test Account**
-   - Create sandbox test account
-   - Document login credentials in App Review Notes
-   - Verify test account has active subscription
-   - Test that reviewer can complete purchase flow
+   - Create a review account that remains valid during review
+   - Document login credentials in App Review information
+   - Verify the reviewer can reach the paywall and complete the purchase flow
+   - Include extra accounts or app-specific switches in the Notes field if needed
 
 6. **Check Metadata**
    - Screenshots match current UI
+   - Support URL includes real contact information
+   - Privacy policy URL is filled in
+   - Age rating matches the content in the build
    - App preview video (if any) shows current version
    - Description accurately describes features
-   - Age rating matches content
-   - Privacy policy is accessible in-app
+   - Privacy policy is accessible in-app and from the store listing
 
 7. **Write Detailed Review Notes**
    ```
+   Contact:
+   Name: Jane Developer
+   Email: review@yourapp.com
+   Phone: +1 555-0100
+
    Test Account:
    Email: reviewer@test.com
    Password: TestPass123!
+   This account does not expire during review.
 
    Testing Instructions:
    1. Log in with test account above
@@ -344,36 +394,38 @@ Inaccurate privacy labels are a common rejection reason in 2025. Audit your data
 **Weekends:** No reviews processed
 **Expedited Review:** Available for critical bug fixes (request via App Store Connect)
 
+Common statuses you will see in App Store Connect:
+- `Waiting for Review`
+- `In Review`
+- `Pending Developer Release`
+- `Rejected`
+
 :::tip
 Submit early in the week to avoid weekend delays. Monday submissions typically get reviewed by Wednesday.
 :::
 
-## 2025 Guideline Updates
+## 2026 Submission Focus
 
-### New Requirements
+### Current Focus Areas
 
-**1. AI Functionality Disclosure**
-If your app uses AI for any features, you must:
-- Clearly label AI-generated content
-- Explain how AI is used
-- Document content safety measures
-
-**2. Enhanced Subscription Clarity**
+**1. Subscription Clarity**
 - Side-by-side plan comparisons required
 - No "dark patterns" that hide cheaper options
 - Clear downgrade/upgrade paths
 
-**3. Privacy Intensification**
-- Section 5.1.1 enforcement increased
-- More scrutiny on data collection justification
-- Stricter requirements for children's apps
+**2. Metadata Accuracy**
+- Screenshots must match the build being reviewed
+- iPad screenshots are required if iPad support is enabled
+- Support URL and privacy policy should already be live before submission
 
-### What Changed from 2024
+**3. Privacy and Review Detail Quality**
+- Privacy disclosures must match what your SDKs actually collect
+- App Review contact info and notes should be complete on the first submission
+- Demo credentials must stay valid for the full review window
 
-- Modular submissions now allowed (update product pages independently)
-- In-app events can be submitted separately
-- Stricter enforcement of misleading subscription UIs
-- New guidance on cryptocurrency/NFT apps
+**4. Submission Readiness**
+- Apple updates minimum SDK requirements regularly, so confirm the current deadline before uploading a release build
+- TestFlight is the safest place to verify the exact reviewer path before you submit
 
 ## Best Practices for Native Purchases Plugin
 
@@ -519,6 +571,8 @@ If you believe the rejection is incorrect:
 - [In-App Purchase Guidelines](https://developer.apple.com/app-store/review/guidelines/#in-app-purchase)
 - [Subscriptions Best Practices](https://developer.apple.com/app-store/subscriptions/)
 - [App Store Connect Help](https://developer.apple.com/help/app-store-connect/)
+- [Screenshot Specifications](https://developer.apple.com/help/app-store-connect/reference/app-information/screenshot-specifications)
+- [Platform Version Information](https://developer.apple.com/help/app-store-connect/reference/app-information/platform-version-information)
 
 ## Support
 

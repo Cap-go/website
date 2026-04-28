@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-10-30T00:00:00.000Z
-updated_at: 2026-04-27T00:00:00.000Z
+updated_at: 2026-04-28T00:00:00.000Z
 head_image: /app-review-guide.webp
 head_image_alt: App Review Process
 keywords: app store review, play store review, app submission, privacy policy, terms and conditions, social login, app testing, android review, ios review
@@ -31,6 +31,14 @@ Both Apple and Google have significantly tightened their review processes in rec
 
 **Pro Tip**: Submit early in the week (Monday-Tuesday) to avoid weekend delays. Monday submissions typically get reviewed by Wednesday.
 
+### App Store Connect Statuses You'll See
+
+- **Prepare for Submission**: Your build or metadata is still being prepared
+- **Waiting for Review**: Apple has your submission in queue
+- **In Review**: The review team is actively checking the app
+- **Pending Developer Release**: Approved, but waiting for your manual release choice
+- **Rejected / Unresolved Issues**: Apple needs changes before approval
+
 ### Google Play Store Review Timeline (2026 Update)
 
 - **Initial Review**: 3-7 days (significantly longer than previous years)
@@ -40,6 +48,26 @@ Both Apple and Google have significantly tightened their review processes in rec
 - **Policy Violations**: Can extend to 14+ days if additional review is triggered
 
 **Important Update**: Google now requires substantially more rigorous testing for some new Play Console accounts, which we'll cover in detail below.
+
+## Apple Developer Account Setup
+
+Before your first iOS release, make sure the Apple side is set up correctly:
+
+- Enroll in the [Apple Developer Program](https://developer.apple.com/programs/enroll/)
+- Turn on two-factor authentication for the Apple Account used for enrollment
+- Choose the correct membership type:
+  - **Individual / Sole Proprietor**: your legal personal name becomes the seller name on the App Store
+  - **Organization**: requires a legal entity, a D-U-N-S number, a public website, and a person with authority to bind the company to Apple's agreements
+- Use legal names during enrollment. Aliases or company names in the first/last name fields can delay approval
+- After enrollment is approved, sign in to App Store Connect and create the app record with the final bundle ID, app name, SKU, and primary language
+
+![Apple Developer Program enrollment page](/app-store-assets/apple-account/apple-developer-program.jpg)
+
+![Continue Apple enrollment on the web](/app-store-assets/apple-account/web-enrollment.png)
+
+![Select the right Apple Developer entity type](/app-store-assets/apple-account/entity-type.png)
+
+**Important**: Apple changes minimum SDK requirements over time. As of **April 28, 2026**, apps uploaded to App Store Connect must use the **iOS & iPadOS 26 SDK or later**.
 
 ## The Critical Android Testing Requirement
 
@@ -321,6 +349,8 @@ Both stores require you to provide the privacy policy URL during app submission:
 - App Information > General Information > Privacy Policy URL
 - Must be HTTPS (HTTP will be rejected)
 - Will be displayed on your App Store page
+- Add a Support URL with real contact details for users
+- Complete the age rating questionnaire before submission
 
 **Android - Google Play Console**:
 - Store presence > Store settings > Privacy Policy
@@ -549,9 +579,11 @@ async function takePicture() {
 ### App Store Screenshots and Previews
 
 **Required Sizes**:
-- 6.7" (iPhone 14 Pro Max, iPhone 15 Pro Max): 1290 x 2796
-- 6.5" (iPhone 11 Pro Max, iPhone XS Max): 1242 x 2688
-- 5.5" (iPhone 8 Plus): 1242 x 2208
+- 6.7" iPhone: 1290 x 2796
+- 13" iPad: 2064 x 2752
+- 12.9" iPad: 2048 x 2732
+
+**Important**: If your app supports iPad, you must upload iPad screenshots. Do not stretch iPhone screenshots to fit iPad slots.
 
 **Screenshot Best Practices**:
 - Must show actual app content (no mockups)
@@ -559,6 +591,26 @@ async function takePicture() {
 - Localize for all supported languages
 - Avoid excessive text overlay
 - Show key features in first 2-3 screenshots
+
+### App Store Connect Metadata Setup
+
+Before submission, finish these App Store Connect fields:
+
+- **Privacy Policy URL**: required for iOS apps
+- **Support URL**: required, and should lead to actual contact information
+- **Age Rating**: complete the questionnaire so the app can be published
+- **App Review Information**: add a review contact, working demo credentials if login is required, and clear notes for the review team
+- **Export Compliance**: answer the encryption questions, or set `ITSAppUsesNonExemptEncryption` in `Info.plist` when appropriate so you do not repeat the same answers every upload
+
+### TestFlight Before App Review
+
+Do one real TestFlight pass before production review:
+
+- Install the exact build from TestFlight
+- Sign in with the same review account you plan to provide
+- Walk through the purchase, restore, and cancellation path
+- Confirm the reviewer can reach key features without hidden setup
+- Test on iPhone and iPad if both are supported
 
 ### App Preview Videos (Optional but Recommended)
 
@@ -772,7 +824,13 @@ Before you hit submit, go through this comprehensive checklist:
 
 - [ ] Sign in with Apple implemented (if using social login)
 - [ ] All required screenshot sizes provided
+- [ ] Real iPad screenshots uploaded if iPad support is enabled
 - [ ] Info.plist permission descriptions are clear
+- [ ] Support URL added with real contact details
+- [ ] Privacy Policy URL added in App Store Connect
+- [ ] Age rating questionnaire completed
+- [ ] Export compliance answered correctly
+- [ ] App Review contact and non-expiring demo account provided
 - [ ] Target iOS 15.0 or higher
 - [ ] If IAP: pricing clear, restore purchases button present
 - [ ] No references to Android or other platforms
@@ -810,6 +868,12 @@ APP REVIEW INFORMATION
 Email: reviewer@testapp.com
 Password: TestReview123!
 (This account has all premium features enabled)
+(This account stays active during review)
+
+=== Review Contact ===
+Name: Jane Developer
+Email: review@yourapp.com
+Phone: +1 555-0100
 
 === Testing Instructions ===
 1. Launch app and tap "Sign In"
@@ -835,10 +899,29 @@ Password: TestReview123!
 - Camera permission only requested when uploading profile picture
 - All subscription flows use Apple/Google sandbox environments
 - Background location is not used
+- Support URL and privacy policy are available from Settings > Account
 
 === Contact ===
 For questions: developer@yourapp.com
 Response time: Within 24 hours
+```
+
+### iOS-Specific Review Notes
+
+For iOS, also include:
+
+```
+=== Device Coverage ===
+Tested on: iPhone 15 Pro Max, iPad Pro 13-inch
+
+=== App Store Connect Metadata ===
+Support URL: https://yourapp.com/support
+Privacy Policy: https://yourapp.com/privacy-policy
+
+=== Submission Notes ===
+- iPad screenshots match the current iPad UI
+- Export compliance answered for this build
+- Sign in with Apple is available on the login screen
 ```
 
 ### Android-Specific Review Notes
