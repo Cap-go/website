@@ -86,7 +86,7 @@ Once the record is published (DNS TTL propagation typically takes a few minutes 
 
 After DNS verification, click **Activate**. The provider status becomes **Active**. Only **Active** providers are used during the SSO login flow.
 
-You can **Deactivate** a provider at any time to pause SSO for that domain without deleting the configuration.
+You can choose **Deactivate** in the dashboard at any time. That moves the provider to **Disabled**, which pauses SSO for that domain without deleting the configuration.
 
 ## Step 5 - Test and assign roles
 
@@ -108,7 +108,7 @@ If Supabase creates a separate SSO auth user for an email that already exists in
 
 ## Optional - Enforce SSO
 
-On an **Active** provider you can toggle **Enforce SSO**. When enabled, Capgo marks existing auth users for that email domain as SSO-only and the login flow requires IdP authentication for that domain. Disabling the provider or turning enforcement off removes that SSO-only flag for the domain.
+On an **Active** provider you can toggle **Enforce SSO**. When enabled, Capgo marks existing auth users for that email domain as SSO-only and the login flow requires IdP authentication for that domain. Setting the provider to **Disabled** (**Deactivate**) or turning enforcement off removes that SSO-only flag for the domain.
 
 <Aside type="caution">
 
@@ -123,7 +123,7 @@ Coordinate with your IdP admin and notify all affected users before enabling enf
 | **Pending verification** | DNS TXT record not yet verified |
 | **Verified** | Domain ownership confirmed; ready to activate |
 | **Active** | SSO is live for this domain |
-| **Disabled** | Provider paused; SSO not used; can be re-activated |
+| **Disabled** | Set by **Deactivate** in the dashboard; SSO not used for that domain; use **Re-activate** to return to **Active** |
 
 ## Rollout checklist
 
