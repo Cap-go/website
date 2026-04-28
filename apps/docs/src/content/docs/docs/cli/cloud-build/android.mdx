@@ -123,7 +123,12 @@ There is also a way to do this with the command line, but we will not cover that
 ### Creating the internal testing group
 
 Now that you have created the app, you can create an internal testing group. Since I won't actually publish the app for everyone on Play Store, I will need to create an internal testing group.
-However, if you are going to publish the app for everyone, you can likely skip this step, although I don't recommend it.
+
+:::note
+Internal testing is still the fastest way to smoke-test your Play-distributed build before a real launch.
+
+If your developer account is a personal account created after November 13, 2023, internal testing does **not** replace the closed-testing requirement for production access. You will still need a closed test with at least 12 opted-in testers for 14 consecutive days before production.
+:::
 
 <Steps>
   1. Go to `internal testing`
@@ -159,13 +164,13 @@ Now that you have created the internal testing group, you can upload the app to 
       ![Google Play Console create new release](/native-build-assets/google-play-console-create-new-release.webp)
   4. Click on `Upload`
       ![Google Play Console upload](/native-build-assets/google-play-console-upload.webp)
-  5. Select the AAB (or APK) file
-        ![Google Play Console select AAB (or APK) file](/native-build-assets/google-play-console-select-apk-file.webp)
+  5. Select the AAB file
+        ![Google Play Console select AAB file](/native-build-assets/google-play-console-select-apk-file.webp)
 
         :::caution
-        Make sure you select the AAB (or APK) file that you built manually with Android Studio. If this file doesn't use the same keystore as the one you will use for the Capgo build, the Capgo Native Build will fail.
+        Make sure you select the AAB file that you built manually with Android Studio. If this file doesn't use the same keystore as the one you will use for the Capgo build, the Capgo Native Build will fail.
         :::
-  6. Wait for the AAB (or APK) file to be uploaded
+  6. Wait for the AAB file to be uploaded
   7. Click on `Next`
       ![Google Play Console next](/native-build-assets/google-play-console-next-step.webp)
   8. Fix the errors

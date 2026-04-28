@@ -1,12 +1,12 @@
 ---
 slug: first-time-app-review-guide
-title: The Complete First-Time App Review Guide for 2025 - iOS and Android
-description: A comprehensive guide for first-time app developers on passing App Store and Play Store reviews, including login requirements, privacy policies, and the new 2025 testing requirements.
+title: The Complete First-Time App Review Guide for 2026 - iOS and Android
+description: A comprehensive guide for first-time app developers on passing App Store and Play Store reviews, including login requirements, privacy policies, and current Google Play testing requirements.
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-10-30T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-04-28T00:00:00.000Z
 head_image: /app-review-guide.webp
 head_image_alt: App Review Process
 keywords: app store review, play store review, app submission, privacy policy, terms and conditions, social login, app testing, android review, ios review
@@ -16,11 +16,11 @@ locale: en
 next_blog: ''
 ---
 
-Submitting your first app to the App Store or Play Store can feel overwhelming. With constantly evolving guidelines and stricter enforcement in 2025, getting your app approved requires careful attention to detail. This comprehensive guide walks you through everything you need to know to pass review on your first submission for both iOS and Android platforms.
+Submitting your first app to the App Store or Play Store can feel overwhelming. With constantly evolving guidelines and stricter enforcement in 2026, getting your app approved requires careful attention to detail. This comprehensive guide walks you through everything you need to know to pass review on your first submission for both iOS and Android platforms.
 
-## Understanding the Review Process in 2025
+## Understanding the Review Process in 2026
 
-Both Apple and Google have significantly tightened their review processes in 2025, with particular emphasis on privacy, security, and user experience. Understanding these changes is crucial for first-time developers.
+Both Apple and Google have significantly tightened their review processes in recent years, with particular emphasis on privacy, security, and user experience. Understanding these changes is crucial for first-time developers.
 
 ### iOS App Store Review Timeline
 
@@ -31,28 +31,57 @@ Both Apple and Google have significantly tightened their review processes in 202
 
 **Pro Tip**: Submit early in the week (Monday-Tuesday) to avoid weekend delays. Monday submissions typically get reviewed by Wednesday.
 
-### Google Play Store Review Timeline (2025 Changes)
+### App Store Connect Statuses You'll See
+
+- **Prepare for Submission**: Your build or metadata is still being prepared
+- **Waiting for Review**: Apple has your submission in queue
+- **In Review**: The review team is actively checking the app
+- **Pending Developer Release**: Approved, but waiting for your manual release choice
+- **Rejected / Unresolved Issues**: Apple needs changes before approval
+
+### Google Play Store Review Timeline (2026 Update)
 
 - **Initial Review**: 3-7 days (significantly longer than previous years)
-- **With Testing Track**: 7-14 days for apps requiring internal/closed testing
+- **Closed Testing Gate**: 14 days minimum for affected new personal Play Console accounts before you can request production access
+- **Production Review After Testing**: Usually another 3-7 days after the closed testing requirement is complete
 - **Updates to Existing Apps**: 1-3 days
 - **Policy Violations**: Can extend to 14+ days if additional review is triggered
 
-**Important 2025 Update**: Google now requires substantially more rigorous testing for new apps, which we'll cover in detail below.
+**Important Update**: Google now requires substantially more rigorous testing for some new Play Console accounts, which we'll cover in detail below.
 
-## The Critical 2025 Android Testing Requirement
+## Apple Developer Account Setup
 
-This is the biggest change for 2025 and the one that catches most first-time developers off guard:
+Before your first iOS release, make sure the Apple side is set up correctly:
 
-### 20 Tester Requirement for New Android Apps
+- Enroll in the [Apple Developer Program](https://developer.apple.com/programs/enroll/)
+- Turn on two-factor authentication for the Apple Account used for enrollment
+- Choose the correct membership type:
+  - **Individual / Sole Proprietor**: your legal personal name becomes the seller name on the App Store
+  - **Organization**: requires a legal entity, a D-U-N-S number, a public website, and a person with authority to bind the company to Apple's agreements
+- Use legal names during enrollment. Aliases or company names in the first/last name fields can delay approval
+- After enrollment is approved, sign in to App Store Connect and create the app record with the final bundle ID, app name, SKU, and primary language
 
-Starting in early 2025, Google Play Store has implemented a mandatory testing period for **all new apps** before they can be published to production:
+![Apple Developer Program enrollment page](/app-store-assets/apple-account/apple-developer-program.jpg)
+
+![Continue Apple enrollment on the web](/app-store-assets/apple-account/web-enrollment.png)
+
+![Select the right Apple Developer entity type](/app-store-assets/apple-account/entity-type.png)
+
+**Important**: Apple changes minimum SDK requirements over time. As of **April 28, 2026**, apps uploaded to App Store Connect must use the **iOS & iPadOS 26 SDK or later**.
+
+## The Critical Android Testing Requirement
+
+This is the change that catches most first-time Android publishers off guard:
+
+### 12 Tester Requirement for New Personal Android Accounts
+
+If your Google Play developer account is a **personal account created after November 13, 2023**, you must complete a closed testing period before the app can go to production:
 
 **Requirements**:
-- **Minimum 20 Testers**: You must recruit at least 20 unique testers
+- **Minimum 12 Testers**: You must recruit at least 12 opted-in testers
 - **14-Day Testing Period**: The app must remain in closed testing for a minimum of 14 consecutive days
-- **Active Testing**: Google monitors whether testers actually use the app (passive installs don't count)
-- **Feedback Collection**: You should document any issues found and fixes implemented
+- **Production Access Application**: After the testing period, you still need to apply for production access in Play Console
+- **Feedback Collection**: You should document the issues found, fixes made, and how testers used the app
 
 ### How to Set Up Your Testing Track
 
@@ -60,9 +89,9 @@ Starting in early 2025, Google Play Store has implemented a mandatory testing pe
 
 1. **Create a Closed Testing Track**
    - Go to Google Play Console
-   - Navigate to Testing > Closed testing
+   - Navigate to Test and release > Testing > Closed testing
    - Create a new release in the closed testing track
-   - Upload your APK or App Bundle
+   - Upload your Android App Bundle (`.aab`)
 
 2. **Recruit Your Testers**
 
@@ -76,7 +105,7 @@ Starting in early 2025, Google Play Store has implemented a mandatory testing pe
    **Important**: Make sure testers:
    - Have valid Gmail accounts
    - Actually use Android devices
-   - Will actively test during the 14-day period
+   - Stay opted in during the full 14-day period
 
 3. **Invite Testers**
    - Create a tester list in Play Console
@@ -91,10 +120,10 @@ Starting in early 2025, Google Play Store has implemented a mandatory testing pe
    - Fix any critical issues before promotion
 
 5. **Promote to Production**
-   - After 14 days with 20+ active testers
+   - After 14 days with 12+ opted-in testers
+   - Apply for production access from the Play Console dashboard
    - Review all crash reports and feedback
-   - Create production release
-   - Submit for final review
+   - Create production release and submit for final review
 
 </Steps>
 
@@ -106,7 +135,7 @@ Google introduced this requirement to:
 - Identify malicious apps through real-world usage patterns
 - Improve overall Play Store quality
 
-**Reality Check**: This adds 2-3 weeks to your launch timeline. Plan accordingly and start recruiting testers early.
+**Reality Check**: This adds at least 2-3 weeks to your launch timeline. Plan accordingly and start recruiting testers early.
 
 ## Authentication and Login Requirements
 
@@ -196,7 +225,7 @@ Offer the same login options on both platforms for consistency:
 Demo Account Information:
 
 Username: reviewer@demo.com
-Password: ReviewTest2025!
+Password: ReviewTest123!
 
 OR
 
@@ -320,6 +349,8 @@ Both stores require you to provide the privacy policy URL during app submission:
 - App Information > General Information > Privacy Policy URL
 - Must be HTTPS (HTTP will be rejected)
 - Will be displayed on your App Store page
+- Add a Support URL with real contact details for users
+- Complete the age rating questionnaire before submission
 
 **Android - Google Play Console**:
 - Store presence > Store settings > Privacy Policy
@@ -469,7 +500,7 @@ async function loadData() {
 - Description: "Track your workouts with customizable routines and progress charts."
 - Screenshots: Actual app screens from current build
 
-### 5. Insufficient Testing (Especially Android 2025)
+### 5. Insufficient Testing (Especially Android Closed Testing)
 
 **Why It Happens**:
 - Skipping the required 14-day testing period
@@ -547,10 +578,12 @@ async function takePicture() {
 
 ### App Store Screenshots and Previews
 
-**Required Sizes** (as of 2025):
-- 6.7" (iPhone 14 Pro Max, iPhone 15 Pro Max): 1290 x 2796
-- 6.5" (iPhone 11 Pro Max, iPhone XS Max): 1242 x 2688
-- 5.5" (iPhone 8 Plus): 1242 x 2208
+**Required Sizes**:
+- 6.7" iPhone: 1290 x 2796
+- 13" iPad: 2064 x 2752
+- 12.9" iPad: 2048 x 2732
+
+**Important**: If your app supports iPad, you must upload iPad screenshots. Do not stretch iPhone screenshots to fit iPad slots.
 
 **Screenshot Best Practices**:
 - Must show actual app content (no mockups)
@@ -558,6 +591,26 @@ async function takePicture() {
 - Localize for all supported languages
 - Avoid excessive text overlay
 - Show key features in first 2-3 screenshots
+
+### App Store Connect Metadata Setup
+
+Before submission, finish these App Store Connect fields:
+
+- **Privacy Policy URL**: required for iOS apps
+- **Support URL**: required, and should lead to actual contact information
+- **Age Rating**: complete the questionnaire so the app can be published
+- **App Review Information**: add a review contact, working demo credentials if login is required, and clear notes for the review team
+- **Export Compliance**: answer the encryption questions, or set `ITSAppUsesNonExemptEncryption` in `Info.plist` when appropriate so you do not repeat the same answers every upload
+
+### TestFlight Before App Review
+
+Do one real TestFlight pass before production review:
+
+- Install the exact build from TestFlight
+- Sign in with the same review account you plan to provide
+- Walk through the purchase, restore, and cancellation path
+- Confirm the reviewer can reach key features without hidden setup
+- Test on iPhone and iPad if both are supported
 
 ### App Preview Videos (Optional but Recommended)
 
@@ -631,30 +684,42 @@ function SubscriptionOffer() {
 
 ## Android-Specific Requirements
 
+### Google Play Console Account Setup
+
+Before your first Android release, make sure the Play Console account and app shell exist:
+
+- Create your developer account at [Play Console signup](https://play.google.com/console/signup)
+- In Play Console, go to **Home > Create app**
+- Choose the default language, app/game type, and support email
+- Accept the required Play policy, export, and Play App Signing declarations
+- Decide whether the app is **free** or **paid**
+
+**Important**: Google lets you change a paid app to free later, but once an app has been offered for free, it cannot be switched to paid.
+
 ### App Bundle Requirement
 
 **Important**: Google Play requires Android App Bundle (.aab) format, not APK:
 
 ```bash
-# Build app bundle with Capacitor
-npx cap build android --release
+# Sync the native Android project first
+bunx cap sync android
 
-# Or with Gradle
+# Then build the release app bundle
 cd android
 ./gradlew bundleRelease
 ```
 
 ### Target API Level Requirement
 
-**2025 Requirement**: New apps must target Android 14 (API level 34) or higher.
+**Current Requirement**: New apps and app updates must target Android 15 (API level 35) or higher.
 
 **Update in android/app/build.gradle**:
 ```kotlin
 android {
-    compileSdkVersion 34
+    compileSdkVersion 35
 
     defaultConfig {
-        targetSdkVersion 34
+        targetSdkVersion 35
         minSdkVersion 23  // Minimum supported version
     }
 }
@@ -664,9 +729,9 @@ android {
 
 Already covered above, but absolutely critical for Android approval.
 
-### Closed Testing Track (Critical for 2025)
+### Closed Testing Track (Current Requirement)
 
-This is the big one - the 20 tester, 14-day requirement detailed earlier in this guide.
+This is the big one for newly created personal developer accounts: the 12 tester, 14-day requirement detailed earlier in this guide.
 
 **Timeline**:
 1. Week 1: Recruit testers, set up closed testing
@@ -680,7 +745,7 @@ This is the big one - the 20 tester, 14-day requirement detailed earlier in this
 - Required for all apps
 - Takes 10-15 minutes to complete
 - Determines age rating (Everyone, Teen, Mature, etc.)
-- Must be renewed annually
+- Update it whenever your content changes in a way that affects the answers
 
 **Topics Covered**:
 - Violence
@@ -759,7 +824,13 @@ Before you hit submit, go through this comprehensive checklist:
 
 - [ ] Sign in with Apple implemented (if using social login)
 - [ ] All required screenshot sizes provided
+- [ ] Real iPad screenshots uploaded if iPad support is enabled
 - [ ] Info.plist permission descriptions are clear
+- [ ] Support URL added with real contact details
+- [ ] Privacy Policy URL added in App Store Connect
+- [ ] Age rating questionnaire completed
+- [ ] Export compliance answered correctly
+- [ ] App Review contact and non-expiring demo account provided
 - [ ] Target iOS 15.0 or higher
 - [ ] If IAP: pricing clear, restore purchases button present
 - [ ] No references to Android or other platforms
@@ -767,16 +838,16 @@ Before you hit submit, go through this comprehensive checklist:
 ### Android Specific
 
 - [ ] App Bundle (.aab) format used
-- [ ] Target API 34 or higher
+- [ ] Target API 35 or higher
 - [ ] Content rating questionnaire completed
 - [ ] Feature graphic uploaded
-- [ ] Closed testing completed (20 testers, 14 days)
+- [ ] Closed testing completed if your Play Console account requires it (12 testers, 14 days)
 - [ ] Crash reports from testing reviewed and fixed
 - [ ] No references to iOS or other platforms
 
-### Testing (Android 2025)
+### Testing (Android Current Requirement)
 
-- [ ] 20+ testers recruited
+- [ ] 12+ testers recruited if your Play account requires closed testing
 - [ ] Closed testing track created
 - [ ] 14 consecutive days of testing completed
 - [ ] Testers actually used the app (not just installed)
@@ -795,8 +866,14 @@ APP REVIEW INFORMATION
 
 === Test Account ===
 Email: reviewer@testapp.com
-Password: TestReview2025!
+Password: TestReview123!
 (This account has all premium features enabled)
+(This account stays active during review)
+
+=== Review Contact ===
+Name: Jane Developer
+Email: review@yourapp.com
+Phone: +1 555-0100
 
 === Testing Instructions ===
 1. Launch app and tap "Sign In"
@@ -822,10 +899,29 @@ Password: TestReview2025!
 - Camera permission only requested when uploading profile picture
 - All subscription flows use Apple/Google sandbox environments
 - Background location is not used
+- Support URL and privacy policy are available from Settings > Account
 
 === Contact ===
 For questions: developer@yourapp.com
 Response time: Within 24 hours
+```
+
+### iOS-Specific Review Notes
+
+For iOS, also include:
+
+```
+=== Device Coverage ===
+Tested on: iPhone 15 Pro Max, iPad Pro 13-inch
+
+=== App Store Connect Metadata ===
+Support URL: https://yourapp.com/support
+Privacy Policy: https://yourapp.com/privacy-policy
+
+=== Submission Notes ===
+- iPad screenshots match the current iPad UI
+- Export compliance answered for this build
+- Sign in with Apple is available on the login screen
 ```
 
 ### Android-Specific Review Notes
@@ -845,9 +941,9 @@ Crash rate: 0.8%
 All crashes fixed in this build
 
 === API Levels ===
-Target SDK: 34 (Android 14)
+Target SDK: 35 (Android 15)
 Min SDK: 23 (Android 6.0)
-Tested on: Android 11, 12, 13, 14
+Tested on: Android 11, 12, 13, 14, 15
 ```
 
 ## What to Do If Rejected
@@ -1058,14 +1154,14 @@ Our team has helped hundreds of developers successfully navigate the app review 
 
 Submitting your first app can be daunting, but with proper preparation, you can pass review on the first try. Remember these key points:
 
-1. **Start Early**: Especially for Android - recruit those 20 testers at least 3 weeks before your planned launch
+1. **Start Early**: Especially for Android - recruit those 12 testers at least 3 weeks before your planned launch
 2. **Privacy First**: Have your privacy policy ready and accurately reflect your data practices
 3. **Apple Sign-In**: If you use any social login, you must include Sign in with Apple on iOS
 4. **Test Thoroughly**: Test on real devices, with poor networks, and with permissions denied
 5. **Be Honest**: Accurate metadata and privacy disclosures prevent rejection and legal issues
 6. **Detailed Review Notes**: Help reviewers understand your app quickly
 
-The 2025 changes - particularly Android's testing requirements - add time to the process, but they ultimately result in better apps and fewer post-launch issues. Plan for an extra 3-4 weeks for Android submissions, and you'll be well-positioned for success.
+The current Android testing requirements add time to the process, but they ultimately result in better apps and fewer post-launch issues. Plan for an extra 3-4 weeks for Android submissions, and you'll be well-positioned for success.
 
 Good luck with your app launch! Remember, even if you get rejected, it's a learning opportunity. Most successful apps go through multiple rounds of review before approval.
 

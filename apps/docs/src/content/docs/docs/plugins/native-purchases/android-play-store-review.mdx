@@ -9,6 +9,55 @@ import { Steps } from '@astrojs/starlight/components';
 
 Getting your Android app approved on Google Play requires compliance with Google's policies, especially for apps with in-app purchases and subscriptions. This guide covers everything you need to pass review successfully.
 
+## Release Path That Works
+
+<Steps>
+
+1. **Build a Signed Android App Bundle**
+
+   New Google Play apps should be uploaded as an Android App Bundle (`.aab`), not a sideloaded debug APK.
+
+   Keep your `versionCode` increasing on every upload and store your upload key safely if you use Play App Signing.
+
+   ![Android App Bundle flow](/native-build-assets/android-studio-select-android-app-bundle.webp)
+
+2. **Create the App Record in Play Console**
+
+   If you do not have a developer account yet, start with [Play Console signup](https://play.google.com/console/signup). Then, in **Home > Create app**, choose the language, app/game type, free/paid status, support email, and accept the required declarations.
+
+   Choose the free/paid setting carefully. Google lets you change a paid app to free later, but once an app has been offered for free, it cannot be switched to paid.
+
+   ![Create app in Play Console](/native-build-assets/google-play-console-create-app.webp)
+
+3. **Complete App Content and Store Listing**
+
+   Before production review, finish the required Play Console declarations:
+
+   - Privacy policy
+   - Ads
+   - App access
+   - Target audience and content
+   - Content rating
+   - Data Safety
+   - Sensitive permissions declarations, if applicable
+
+4. **Run a Play-Installed Test Track**
+
+   Start with **internal testing** for fast QA. If your developer account is a personal account created after November 13, 2023, you must also complete a **closed test** with at least 12 opted-in testers for 14 consecutive days before production access.
+
+   ![Internal testing in Play Console](/native-build-assets/google-play-console-internal-testing.webp)
+
+5. **Verify Billing End-to-End**
+
+   Install the app from Google Play, not from a locally exported APK. Then confirm that:
+
+   - Products load from Play correctly
+   - The purchase sheet shows a **test purchase** banner for license testers
+   - Entitlements unlock after purchase
+   - Restore and subscription management flows work
+
+</Steps>
+
 ## Google Play Billing Requirements
 
 ### Mandatory Billing System
@@ -27,8 +76,8 @@ For digital goods and services, you **must** use Google Play's billing system:
 - Real-world services
 - One-time donations to nonprofits
 
-:::caution 2025 Requirement
-New apps must use the `monetization.subscriptions` APIs for handling subscription catalogs. Legacy billing APIs are deprecated.
+:::note Subscription Setup
+In Play Console, configure Android subscriptions using the current **subscription -> base plan -> offer** model. In `native-purchases`, pass the Base Plan ID with `planIdentifier`.
 :::
 
 ### Implementation with Native Purchases
@@ -121,16 +170,11 @@ Before a subscription auto-renews, Google requires:
 The native-purchases plugin works with Google Play to handle auto-renewal notifications automatically. Ensure your subscription products are properly configured in Google Play Console.
 :::
 
-### Price Consistency Across Platforms
+### Cross-Platform Pricing Clarity
 
-**Critical Rule:** Prices must be consistent across all platforms where your app is available.
+If you sell the same entitlement on multiple platforms, keep the product naming, billing period, included benefits, and renewal language aligned so users are not surprised.
 
-**Example Violation:**
-- iOS: $9.99/month
-- Android: $7.99/month
-- Web: $11.99/month
-
-**Why It Matters:** Users can screenshot price differences and report to Google, triggering policy violations.
+Prices can legitimately differ because of taxes, local currency, or store economics, but the purchase UI must never hide those differences or imply a different renewal cost than the one Google Play will charge.
 
 ## Privacy Policy Requirements
 
@@ -171,7 +215,7 @@ function SettingsScreen() {
         Terms of Service
       </button>
 
-      <button onClick={() => NativePurchases.showManageSubscriptions()}>
+      <button onClick={() => NativePurchases.manageSubscriptions()}>
         Manage Subscriptions
       </button>
     </div>
@@ -194,6 +238,22 @@ Google Play requires detailed disclosure in the Data Safety section:
 The Data Safety section is legally binding. Inaccurate declarations can result in app removal.
 :::
 
+## App Content Declarations
+
+Google Play review is not only about the binary. Before a production release, complete the declarations on **Policy and programs > App content**.
+
+**The minimum set to review carefully:**
+- **Privacy policy**: Public URL in Play Console, plus an in-app entry point when required
+- **Ads**: Declare whether the app contains ads
+- **App access**: Give reviewers working credentials or a clear test path if any screen is gated
+- **Target audience and content**: Match the real audience of the app
+- **Content ratings**: Complete the IARC questionnaire so the app is not marked unrated
+- **Data Safety**: Declare collection, sharing, and security practices accurately
+
+:::tip
+If a reviewer needs login credentials, 2FA steps, a region toggle, or a specific test account to access billing, put that in **App access** and in your release notes. Missing reviewer access is a common preventable rejection.
+:::
+
 ## Common Rejection Reasons
 
 ### 1. Missing or Incorrect Billing Implementation
@@ -207,7 +267,9 @@ The Data Safety section is legally binding. Inaccurate declarations can result i
 ```typescript
 // ✅ Correct: Use native-purchases (uses Google Play Billing)
 await NativePurchases.purchaseProduct({
-  productIdentifier: 'premium_monthly'
+  productIdentifier: 'premium_monthly',
+  planIdentifier: 'monthly-plan',
+  productType: PURCHASE_TYPE.SUBS,
 });
 
 // ❌ Wrong: Custom payment processor for subscriptions
@@ -286,6 +348,7 @@ function PurchaseScreen({ product }) {
 - Products don't load
 - Purchase confirmation doesn't show
 - Premium features don't unlock after purchase
+- Testing only happened on sideloaded builds instead of a Play-installed testing track
 
 **Prevention:**
 ```typescript
@@ -348,25 +411,12 @@ async function testPurchaseFlow() {
 - Accurately fill out Data Safety section
 - Update policy when adding new data collection
 
-## Alternative Billing Systems (2025 Update)
+## Alternative Billing Programs
 
-### Regional Compliance
-
-Google now allows alternative billing systems in certain regions:
-
-**Eligible Regions:**
-- European Economic Area (EEA)
-- South Korea
-- India (coming soon)
-
-**Requirements if Using Alternative Billing:**
-- Must still offer Google Play Billing as option
-- Clear communication to users about choice
-- Comply with local regulations
-- Service fee still applies (reduced)
+Google's alternative billing programs are region-specific and can change. If you want anything other than standard Google Play Billing, confirm the exact market eligibility, required APIs, and disclosure language in Play Console immediately before implementation.
 
 :::note
-For most developers, sticking with Google Play Billing only is simpler. The native-purchases plugin handles this automatically.
+For most apps, sticking to standard Google Play Billing is the simplest and lowest-risk path for review.
 :::
 
 ## Subscription Management
@@ -386,7 +436,7 @@ function ManageSubscriptionButton() {
   const openManagement = async () => {
     try {
       // Opens Google Play subscription management
-      await NativePurchases.showManageSubscriptions();
+      await NativePurchases.manageSubscriptions();
     } catch (error) {
       // Fallback to direct URL
       const playStoreUrl = 'https://play.google.com/store/account/subscriptions';
@@ -421,7 +471,7 @@ function CancellationInfo() {
         <li>Resubscribe anytime to regain access</li>
       </ul>
 
-      <button onClick={() => NativePurchases.showManageSubscriptions()}>
+      <button onClick={() => NativePurchases.manageSubscriptions()}>
         Manage in Google Play
       </button>
     </div>
@@ -438,14 +488,17 @@ function CancellationInfo() {
 1. **Verify Billing Implementation**
    - Using Google Play Billing (via native-purchases)
    - All subscription products created in Play Console
+   - Base plans and offers configured correctly
    - Products are activated and published
    - Pricing set for all target countries
 
 2. **Test Purchase Flows**
    - Create license test account
+   - Install the build from a Play testing track
    - Test each subscription tier
    - Verify products load correctly
    - Test purchase completion
+   - Confirm the **test purchase** banner appears
    - Verify premium features unlock
    - Test subscription restoration
    - Test on multiple devices
@@ -457,31 +510,37 @@ function CancellationInfo() {
    - Cancellation process explained
    - No misleading claims
 
-4. **Privacy Compliance**
+4. **App Content and Privacy**
    - Privacy policy linked in Play Console
    - Privacy policy accessible in app
+   - Ads declaration completed
+   - App access instructions added if the app is gated
    - Data Safety section completed accurately
    - Permissions justified and documented
 
-5. **Content Rating**
+5. **Content Rating and Audience**
    - Complete content rating questionnaire
+   - Complete target audience and content section
    - Ensure rating matches actual content
    - Declare in-app purchases in questionnaire
 
 6. **Prepare Store Listing**
    - App description accurate
+   - Short description is within 80 characters
+   - Full description is within 4000 characters
+   - At least 2 phone screenshots uploaded
+   - 1024x500 feature graphic uploaded
    - Screenshots show current version
-   - Feature graphic meets requirements
    - All required assets uploaded
 
 </Steps>
 
 ## Review Timeline
 
-**Initial Review:** 7 days on average (can be faster)
-**Updates:** Typically faster than initial submission
-**Policy Violations:** Immediate suspension possible
-**Appeals:** 7-14 days for review
+**Production Access for New Personal Accounts:** Usually 7 days or less after you apply
+**First Production Review:** Often several days, sometimes longer if billing or policy questions are raised
+**Updates:** Often faster than a first release, but still reviewed
+**Appeals:** Plan for several days and provide exact fixes and reviewer instructions
 
 :::tip Rolling Reviews
 Unlike Apple, Google reviews apps continuously. Your app may go live at any time during the review period, not at a fixed time.
@@ -493,7 +552,7 @@ Unlike Apple, Google reviews apps continuously. Your app may go live at any time
 
 1. **Add Test Account:**
    - Go to Play Console
-   - Setup > License Testing
+   - Settings > License testing
    - Add Gmail account for testing
 
 2. **Test in Sandbox:**
@@ -532,15 +591,20 @@ async function testInSandbox() {
    - Should see "Test purchase" notification
    - No real charges occur
 
-### Internal Testing Track
+### Internal and Closed Testing Tracks
 
 Before production release:
 
-1. Create Internal Testing track in Play Console
-2. Upload APK/AAB
-3. Add tester email addresses
-4. Testers download from Play Store (testing track)
-5. Verify purchase flows work end-to-end
+1. Create an **internal testing** track for fast QA or a **closed testing** track for broader testing
+2. Upload a signed `.aab` and publish the testing release
+3. Add tester email addresses and share the opt-in link
+4. Have testers install the build from Google Play
+5. Verify purchase flows work end-to-end on the Play-installed build
+6. If your personal developer account was created after November 13, 2023, keep at least 12 testers opted in to a closed test for 14 consecutive days before applying for production
+
+:::warning
+A sideloaded debug build is not a substitute for a Play-installed testing build when validating Google Play Billing.
+:::
 
 ## Best Practices for Native Purchases
 
@@ -770,11 +834,13 @@ async function checkSubscriptionStatus() {
 - [Google Play Developer Policy Center](https://play.google.com/about/developer-content-policy/)
 - [Google Play Billing Documentation](https://developer.android.com/google/play/billing)
 - [Subscriptions Best Practices](https://developer.android.com/google/play/billing/subscriptions)
+- [Prepare Your App for Review](https://support.google.com/googleplay/android-developer/answer/9859455)
+- [Testing Requirements for New Personal Accounts](https://support.google.com/googleplay/android-developer/answer/14151465)
 - [Play Console Help](https://support.google.com/googleplay/android-developer/)
 
 ## Need Expert Help?
 
-Navigating Play Store review can be complex, especially with the new 2025 testing requirements. If you need personalized assistance:
+Navigating Play Store review can be complex, especially when you need to combine billing compliance, App content declarations, and testing-track setup. If you need personalized assistance:
 
 **[Book a consultation call with our team](https://cal.com/team/capgo/capacitor-consulting-services)** for help with:
 - Complete Play Store review preparation
@@ -784,7 +850,7 @@ Navigating Play Store review can be complex, especially with the new 2025 testin
 - Rejection troubleshooting and appeals
 - Complete app submission process
 
-Our experts have guided hundreds of apps through successful Play Store submissions and can help you navigate the 2025 requirements.
+Our experts have guided hundreds of apps through successful Play Store submissions and can help you navigate the current requirements.
 
 ## Support
 
