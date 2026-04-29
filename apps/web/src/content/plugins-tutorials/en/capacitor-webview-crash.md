@@ -30,6 +30,7 @@ await WebViewCrash.addListener('webViewRestoredAfterCrash', async (info) => {
 });
 
 const pending = await WebViewCrash.getPendingCrashInfo();
+// Note: the listener callback may have already cleared the pending marker.
 if (pending.value) {
   console.log('Pending crash marker', pending.value);
 }
