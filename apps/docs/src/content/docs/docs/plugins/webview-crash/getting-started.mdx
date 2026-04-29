@@ -1,0 +1,157 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-webview-crash and handle recovered WebView crashes in your Capacitor app startup flow."
+sidebar:
+  order: 2
+---
+
+## Install
+
+```bash
+bun add @capgo/capacitor-webview-crash
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { WebViewCrash } from '@capgo/capacitor-webview-crash';
+```
+
+## Recommended recovery flow
+
+Attach the listener as early as possible in your app startup so the recovered runtime can react before users continue navigating:
+
+```typescript
+import { WebViewCrash } from '@capgo/capacitor-webview-crash';
+
+await WebViewCrash.addListener('webViewRestoredAfterCrash', async (info) => {
+  console.log('Recovered after a WebView crash', info);
+
+  // Rehydrate critical state, reopen the correct screen, or prompt the user to retry.
+  await WebViewCrash.clearPendingCrashInfo();
+});
+
+const pending = await WebViewCrash.getPendingCrashInfo();
+// Note: the listener callback may have already cleared the pending marker.
+if (pending.value) {
+  console.log('Pending crash marker', pending.value);
+}
+```
+
+## API overview
+
+### `getPendingCrashInfo`
+
+Returns the stored native crash marker, or `null` when nothing is pending.
+
+```typescript
+const pending = await WebViewCrash.getPendingCrashInfo();
+if (pending.value) {
+  console.log(pending.value.platform, pending.value.reason);
+}
+```
+
+### `clearPendingCrashInfo`
+
+Clears the stored crash marker after your recovery handling is finished.
+
+```typescript
+await WebViewCrash.clearPendingCrashInfo();
+```
+
+### `simulateCrashRecovery`
+
+Creates a fake crash marker so QA and local debugging can exercise the recovery path without crashing a real WebView.
+
+```typescript
+const simulated = await WebViewCrash.simulateCrashRecovery();
+console.log(simulated.value);
+```
+
+## Platform notes
+
+- Android stores crash metadata from `onRenderProcessGone`, including `didCrash` and `rendererPriorityAtExit` when the platform provides them.
+- iOS stores crash metadata from `webViewWebContentProcessDidTerminate` and adds the current application state when available.
+- Web does not detect real renderer crashes. The web implementation only simulates the behavior with local storage.
+
+## Type reference
+
+### `PendingCrashInfoResult`
+
+```typescript
+export interface PendingCrashInfoResult {
+  /**
+   * Stored crash metadata, or `null` when no marker is pending.
+   */
+  value: WebViewCrashInfo | null;
+}
+```
+
+### `WebViewCrashInfo`
+
+```typescript
+export interface WebViewCrashInfo {
+  /**
+   * Platform that detected and stored the crash marker.
+   */
+  platform: WebViewCrashPlatform;
+
+  /**
+   * Unix timestamp in milliseconds for when the crash marker was written.
+   */
+  timestamp: number;
+
+  /**
+   * ISO-8601 version of `timestamp`.
+   */
+  timestampISO: string;
+
+  /**
+   * Platform-specific reason for the crash marker.
+   */
+  reason: WebViewCrashReason;
+
+  /**
+   * Last known WebView URL when the crash marker was written.
+   */
+  url?: string;
+
+  /**
+   * Android-only hint from `RenderProcessGoneDetail.didCrash()`.
+   */
+  didCrash?: boolean;
+
+  /**
+   * Android-only renderer priority reported at exit.
+   */
+  rendererPriorityAtExit?: number;
+
+  /**
+   * iOS-only application state captured when the WebView process died.
+   */
+  appState?: WebViewCrashAppState;
+}
+```
+
+### `WebViewCrashPlatform`
+
+```typescript
+export type WebViewCrashPlatform = 'android' | 'ios' | 'web';
+```
+
+### `WebViewCrashReason`
+
+```typescript
+export type WebViewCrashReason = 'renderProcessGone' | 'webContentProcessDidTerminate' | 'simulated';
+```
+
+### `WebViewCrashAppState`
+
+```typescript
+export type WebViewCrashAppState = 'active' | 'inactive' | 'background' | 'unknown';
+```
+
+## Source Of Truth
+
+This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

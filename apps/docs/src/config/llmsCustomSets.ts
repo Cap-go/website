@@ -100,6 +100,7 @@ Plugin Volume Buttons|volume button event detection plugin|docs/plugins/volume-b
 Plugin Watch|Apple Watch and Wear OS integration plugin|docs/plugins/watch/**
 Plugin WeChat|WeChat integration plugin|docs/plugins/wechat/**
 Plugin Webview Guardian|webview security and protection plugin|docs/plugins/webview-guardian/**
+Plugin WebView Crash|recovered WebView crash detection plugin|docs/plugins/webview-crash/**
 Plugin Webview Version Checker|Android WebView version validation plugin|docs/plugins/webview-version-checker/**
 Plugin WiFi|WiFi network information plugin|docs/plugins/wifi/**
 Plugin Widget Kit|WidgetKit and Live Activities template plugin|docs/plugins/widget-kit/**
