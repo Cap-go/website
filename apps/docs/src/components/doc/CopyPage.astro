@@ -119,42 +119,6 @@ const translations = {
       </svg>
     </a>
 
-    <a class="menu-item view-github-raw" role="menuitem" target="_blank" rel="noopener noreferrer" hidden>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <text x="2" y="18" font-size="16" font-weight="bold" fill="currentColor">GH</text>
-      </svg>
-      <div>
-        <div class="menu-item-title">{translations.viewRawOnGithub}</div>
-        <div class="menu-item-subtitle">{translations.openRawOnGithub}</div>
-      </div>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="14"
-        height="14"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="external-icon"
-      >
-        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-        <polyline points="15 3 21 3 21 9"></polyline>
-        <line x1="10" x2="21" y1="14" y2="3"></line>
-      </svg>
-    </a>
-
     <button class="menu-item open-chatgpt" role="menuitem">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -440,16 +404,6 @@ const translations = {
     if (markdownSourceUrl) return markdownSourceUrl
     return ''
   }
-
-  document.querySelectorAll('.view-github-raw').forEach((link) => {
-    const rawUrl = getRawGithubUrl()
-    if (rawUrl) {
-      link.href = rawUrl
-      link.hidden = false
-    } else {
-      link.hidden = true
-    }
-  })
 
   // Get markdown URL - use absolute URL for AI assistants
   function getMarkdownUrl() {
