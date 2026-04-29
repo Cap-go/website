@@ -30,15 +30,17 @@ Starting on **April 28, 2026**, App Store Connect no longer accepts uploads buil
 
 For most Capacitor apps, this is mainly about how you build the app, not about replacing Capacitor or rewriting your project.
 
-- If you build locally on a Mac, you need Xcode 26 or later installed and selected.
-- If you use your own CI pipeline, your macOS runner image needs Xcode 26 or later.
-- If you have native dependencies or older plugins, rebuild once on the new SDK and test a fresh archive before your next release.
+Ensure every build path uses Xcode 26 or later:
+
+- Local Mac builds: install and select Xcode 26 or later.
+- Self-managed CI: use a macOS runner image with Xcode 26 or later.
+- Native dependencies and older plugins: rebuild on the new SDK and test a fresh archive before your next release.
 
 The failure mode here is simple: everything may still work in development, but App Store Connect will block the upload if the build came from an older Xcode line.
 
 ## Capgo Build Is Already on Xcode 26
 
-If you build with [Capgo Build](/native-build/), you do not need to scramble to update your build environment for this Apple deadline. Our current iOS build system is already running on Xcode 26 or later.
+If you build with [Capgo Build](/native-build/), you do not need to scramble to update your build environment for this Apple deadline. As of April 29, 2026, our current iOS build system is already running on Xcode 26 or later through [Capgo Build](/native-build/).
 
 That means teams using Capgo Build are already aligned with Apple's April 28, 2026 submission requirement. No local Mac refresh, no runner image hunt, and no last-minute Xcode upgrade just to keep shipping.
 
@@ -56,4 +58,4 @@ If that is your setup, update the toolchain first, then run a clean build and a 
 
 This is Apple’s normal yearly toolchain cutoff, but the enforcement date is real: **since April 28, 2026**, older Xcode builds are no longer enough for App Store uploads.
 
-If you use Capgo Build, you are already on Xcode 26 or later. If you build elsewhere, now is the time to update your environment before your next iOS release window.
+If you use Capgo Build, you are already on Xcode 26 or later. If you build elsewhere, update your environment to Xcode 26 or later before your next iOS release.
