@@ -1,0 +1,53 @@
+---
+title: "@capgo/capacitor-webview-crash"
+description: "Capacitor plugin for detecting recovered WebView crashes and exposing the pending crash marker to the next JavaScript runtime."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Detect recovered WebView crashes and handle lost in-memory state after the WebView restarts."
+  actions:
+    - text: Get started
+      link: /docs/plugins/webview-crash/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-webview-crash/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+This plugin stores a native crash marker when the previous Capacitor WebView process dies, then exposes that marker to the next JavaScript runtime after the app recovers.
+
+## Core Capabilities
+
+- `getPendingCrashInfo` - Returns the stored native crash marker, or `null` when nothing is pending.
+- `clearPendingCrashInfo` - Clears the stored crash marker after your app has restored its state.
+- `simulateCrashRecovery` - Creates a fake crash marker so recovery flows can be tested locally.
+- `addListener` - Fires `webViewRestoredAfterCrash` when a listener attaches and a crash marker is still pending.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `getPendingCrashInfo` | Returns the stored native crash marker, or `null` when nothing is pending. |
+| `clearPendingCrashInfo` | Clears the stored crash marker after your app has restored its state. |
+| `simulateCrashRecovery` | Creates a fake crash marker so recovery flows can be tested locally. |
+| `addListener` | Fires `webViewRestoredAfterCrash` when a listener attaches and a crash marker is still pending. |
+| `removeAllListeners` | Removes all plugin listeners. |
+
+## Notes
+
+- This plugin detects recovery after a WebView crash. It does not prevent the underlying crash.
+- The recovered JavaScript runtime is new, so any in-memory state from the previous WebView is already gone when this API fires.
+- On Android, extra fields such as `didCrash` and `rendererPriorityAtExit` may be available.
+- On iOS, the plugin records `appState` when the terminated WebView process is observed.
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-webview-crash](https://github.com/Cap-go/capacitor-webview-crash/).

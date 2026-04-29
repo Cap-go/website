@@ -217,6 +217,7 @@ const pluginEntries = [
   ['Volume Buttons', 'volume-buttons'],
   ['Watch', 'watch'],
   ['WebView Guardian', 'webview-guardian'],
+  ['WebView Crash', 'webview-crash'],
   ['WeChat', 'wechat'],
   [
     'WebView Version Checker',

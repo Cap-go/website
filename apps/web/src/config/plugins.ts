@@ -113,6 +113,7 @@ const actionDefinitionRows =
 @capgo/capacitor-wifi|github.com/Cap-go|Manage WiFi connectivity for your Capacitor app|https://github.com/Cap-go/capacitor-wifi/|WiFi
 @capgo/capacitor-screen-orientation|github.com/Cap-go|Screen orientation plugin with support for bypassing orientation lock|https://github.com/Cap-go/capacitor-screen-orientation/|Screen Orientation
 @capgo/capacitor-webview-guardian|github.com/Cap-go|Detect when the WebView was killed in the background and relaunch it on foreground|https://github.com/Cap-go/capacitor-webview-guardian/|WebView Guardian
+@capgo/capacitor-webview-crash|github.com/Cap-go|Detect recovered WebView crashes and tell the next JavaScript runtime what happened|https://github.com/Cap-go/capacitor-webview-crash/|WebView Crash
 @capgo/capacitor-webview-version-checker|github.com/Cap-go|Capacitor plugin for checking Android WebView version freshness and guiding users to native update flows|https://github.com/Cap-go/capacitor-webview-version-checker/|WebView Version Checker
 @capgo/capacitor-firebase-analytics|github.com/Cap-go|Capacitor plugin for Firebase Analytics|https://github.com/Cap-go/capacitor-firebase/tree/main/packages/analytics|Firebase Analytics
 @capgo/capacitor-firebase-app|github.com/Cap-go|Capacitor plugin for Firebase App|https://github.com/Cap-go/capacitor-firebase/tree/main/packages/app|Firebase App
@@ -238,6 +239,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-wifi': 'Wifi',
   '@capgo/capacitor-screen-orientation': 'DevicePhoneMobile',
   '@capgo/capacitor-webview-guardian': 'ShieldExclamation',
+  '@capgo/capacitor-webview-crash': 'ShieldExclamation',
   '@capgo/capacitor-webview-version-checker': 'ShieldExclamation',
   '@capgo/capacitor-firebase-analytics': 'ChartBar',
   '@capgo/capacitor-firebase-app': 'Fire',
