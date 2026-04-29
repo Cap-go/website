@@ -70,7 +70,7 @@ export default defineConfig({
       markdown: { headingLinks: true },
       customCss: ['./src/css/docs.css'],
       expressiveCode: { themes: ['github-dark'] },
-      editLink: { baseUrl: 'https://github.com/Cap-go/website/edit/main/' },
+      editLink: { baseUrl: 'https://github.com/Cap-go/website/edit/main/apps/docs/' },
       components: {
         Head: './src/components/doc/Head.astro',
         LanguageSelect: './src/components/doc/LanguageSelect.astro',
@@ -88,7 +88,6 @@ export default defineConfig({
     publicDir: PUBLIC_DIR,
     cpuCount: CPU_COUNT,
     optimizeDepsInclude: ['mermaid'],
-    ssrNoExternal: true,
     extraPlugins: [
       viteStaticCopy({
         targets: [
