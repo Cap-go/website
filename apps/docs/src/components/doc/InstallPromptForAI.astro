@@ -1,0 +1,293 @@
+---
+import { actions, type Action } from '@/config/plugins'
+import type { StarlightRouteData } from '@astrojs/starlight/route-data'
+
+const route = Astro.locals.starlightRoute as StarlightRouteData | undefined
+const pageId = route?.id ?? ''
+const pageUrl = Astro.url.toString()
+const pageData = (route?.entry?.data as Record<string, unknown> | undefined) ?? {}
+const pageDescription = typeof pageData.description === 'string' ? pageData.description : ''
+const routeMatch = pageId.match(/(?:^|\/)plugins\/([^/]+)(?:\/.*)?\/getting-started$/)
+const pluginSlug = routeMatch?.[1] ?? ''
+
+const addCandidate = (items: string[], value?: string) => {
+  if (value && !items.includes(value)) items.push(value)
+}
+
+const addNormalizedCandidates = (items: string[], value: string) => {
+  addCandidate(items, value)
+
+  if (value.startsWith('capacitor-')) {
+    const withoutPrefix = value.slice('capacitor-'.length)
+    addCandidate(items, withoutPrefix)
+
+    if (withoutPrefix.startsWith('android-')) {
+      addCandidate(items, withoutPrefix.slice('android-'.length))
+    }
+  }
+
+  if (value.endsWith('-plugin')) {
+    addCandidate(items, value.slice(0, -'-plugin'.length))
+  }
+
+  if (value.startsWith('capacitor-') && value.endsWith('-plugin')) {
+    addCandidate(items, value.slice('capacitor-'.length, -'-plugin'.length))
+  }
+}
+
+const getSlugCandidates = (plugin: Pick<Action, 'href' | 'name'>): string[] => {
+  const candidates: string[] = []
+  const name = plugin.name ?? ''
+  const slashIndex = name.indexOf('/')
+  const packageSegment = slashIndex >= 0 ? name.slice(slashIndex + 1) : name
+
+  if (packageSegment.startsWith('capacitor-plus')) {
+    addCandidate(candidates, 'capacitor-plus')
+  }
+
+  if (packageSegment) {
+    addNormalizedCandidates(candidates, packageSegment)
+  }
+
+  const normalizedHref = plugin.href.replace(/\/$/, '')
+  const repoHref = normalizedHref.includes('/tree/') ? normalizedHref.slice(0, normalizedHref.indexOf('/tree/')) : normalizedHref
+  const repoName = repoHref.slice(repoHref.lastIndexOf('/') + 1)
+
+  if (repoName) {
+    addNormalizedCandidates(candidates, repoName)
+  }
+
+  return candidates
+}
+
+const descriptionPackages = Array.from(pageDescription.matchAll(/@[a-z0-9_.-]+\/[a-z0-9_.-]+/gi), (match) => match[0])
+const matchedActions = pluginSlug ? actions.filter((action) => action.name && getSlugCandidates(action).includes(pluginSlug)) : []
+const matchedPackages = matchedActions.flatMap((action) => (action.name ? [action.name] : []))
+const packages = [...new Set([...descriptionPackages, ...matchedPackages])]
+
+const buildPrompt = () => {
+  if (!pluginSlug || packages.length === 0) return null
+
+  if (pluginSlug === 'capacitor-plus') {
+    return [
+      'You are working in a Capacitor project.',
+      'Use `bun` and `bunx` only. Do not use `npm`, `npx`, `pnpm`, or `yarn`.',
+      '',
+      'For a new Capacitor+ setup, use:',
+      '```bash',
+      'bun add @capacitor-plus/core @capacitor-plus/cli',
+      'bun add @capacitor-plus/android    # if the project targets Android',
+      'bun add @capacitor-plus/ios        # if the project targets iOS',
+      'bunx cap init                      # only for a brand new project',
+      'bunx cap add android              # if needed',
+      'bunx cap add ios                  # if needed',
+      '```',
+      '',
+      'For an existing Capacitor app, replace the official packages with Capacitor+ and then run:',
+      '```bash',
+      'bunx cap sync',
+      '```',
+      '',
+      `Continue with the remaining setup from this Capgo docs page: ${pageUrl}`,
+      'Do not skip any platform-specific setup, native file changes, or config steps from that page.',
+    ].join('\n')
+  }
+
+  return [
+    'You are working in a Capacitor project.',
+    'Use `bun` and `bunx` only. Do not use `npm`, `npx`, `pnpm`, or `yarn`.',
+    '',
+    'Install and sync the plugin with:',
+    '```bash',
+    `bun add ${packages.join(' ')}`,
+    'bunx cap sync',
+    '```',
+    '',
+    `Continue with the remaining setup from this Capgo docs page: ${pageUrl}`,
+    'Do not skip any platform-specific setup, native file changes, permissions, or config steps from that page.',
+    'After installation, follow the import and usage examples from the docs page.',
+  ].join('\n')
+}
+
+const promptText = buildPrompt()
+const promptHtml = promptText ? promptText.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;') : ''
+---
+
+{
+  promptText && (
+    <details class="ai-install-panel">
+      <summary>
+        <span>Install Prompt For AI</span>
+        <span class="ai-install-panel__hint">Hidden by default</span>
+      </summary>
+
+      <div class="ai-install-panel__body">
+        <div class="ai-install-panel__actions">
+          <p>Copy this into your coding assistant so it installs the plugin with the right package manager and keeps the remaining setup steps from this page.</p>
+          <button type="button" class="ai-install-panel__copy">
+            Copy for AI
+          </button>
+        </div>
+
+        <pre>
+          <code set:html={promptHtml} />
+        </pre>
+      </div>
+    </details>
+  )
+}
+
+<script is:inline>
+  document.querySelectorAll('.ai-install-panel__copy').forEach((button) => {
+    let resetTimer
+
+    button.addEventListener('click', async () => {
+      const panel = button.closest('.ai-install-panel')
+      const code = panel?.querySelector('pre code')
+      const content = code?.textContent?.trim()
+
+      if (!content) {
+        return
+      }
+
+      const originalText = button.textContent
+
+      const fallbackCopy = (value) => {
+        const textarea = document.createElement('textarea')
+        textarea.value = value
+        textarea.style.position = 'fixed'
+        textarea.style.opacity = '0'
+        document.body.appendChild(textarea)
+        textarea.focus()
+        textarea.select()
+        const legacyCopy = Reflect.get(document, 'execCommand')
+        if (typeof legacyCopy !== 'function' || !legacyCopy.call(document, 'copy')) {
+          throw new Error('Fallback copy method failed')
+        }
+        document.body.removeChild(textarea)
+      }
+
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(content)
+        } else {
+          fallbackCopy(content)
+        }
+
+        button.textContent = 'Copied'
+      } catch {
+        try {
+          fallbackCopy(content)
+          button.textContent = 'Copied'
+        } catch {
+          button.textContent = 'Copy failed'
+        }
+      }
+
+      if (resetTimer) {
+        window.clearTimeout(resetTimer)
+      }
+
+      resetTimer = window.setTimeout(() => {
+        button.textContent = originalText ?? 'Copy for AI'
+      }, 2000)
+    })
+  })
+</script>
+
+<style>
+  .ai-install-panel {
+    margin-top: 1rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.9rem;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--sl-color-bg-nav) 88%, white 12%), var(--sl-color-bg));
+    overflow: hidden;
+  }
+
+  .ai-install-panel summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    list-style: none;
+  }
+
+  .ai-install-panel summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .ai-install-panel summary::after {
+    content: '+';
+    margin-left: auto;
+    color: var(--sl-color-text-accent);
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  .ai-install-panel[open] summary::after {
+    content: '-';
+  }
+
+  .ai-install-panel__hint {
+    color: var(--sl-color-text-accent);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .ai-install-panel__body {
+    padding: 0 1rem 1rem;
+  }
+
+  .ai-install-panel__actions {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .ai-install-panel__actions p {
+    margin: 0;
+    color: var(--sl-color-text);
+    font-size: 0.95rem;
+  }
+
+  .ai-install-panel__copy {
+    border: 1px solid var(--sl-color-gray-4);
+    border-radius: 999px;
+    padding: 0.5rem 0.9rem;
+    background: var(--sl-color-white);
+    color: var(--sl-color-black);
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .ai-install-panel__copy:hover {
+    border-color: var(--sl-color-text-accent);
+  }
+
+  .ai-install-panel pre {
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .ai-install-panel summary {
+      flex-wrap: wrap;
+    }
+
+    .ai-install-panel__hint {
+      width: 100%;
+    }
+
+    .ai-install-panel__actions {
+      flex-direction: column;
+    }
+  }
+</style>

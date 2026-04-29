@@ -1,12 +1,14 @@
 ---
 import Default from '@astrojs/starlight/components/PageTitle.astro'
 import CopyPage from './CopyPage.astro'
+import InstallPromptForAI from './InstallPromptForAI.astro'
 ---
 
 <div class="page-title-wrapper">
   <Default><slot /></Default>
   <CopyPage />
 </div>
+<InstallPromptForAI />
 
 <style>
   .page-title-wrapper {
