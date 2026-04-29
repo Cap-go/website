@@ -1,17 +1,19 @@
 ---
+import PluginIcon from '@/components/PluginIcon.astro'
 import type { Plugin } from '@/config/plugins'
 import { actions } from '@/config/plugins'
 import Layout from '@/layouts/Layout.astro'
 import { createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import * as m from '@/paraglide/messages'
-import { getSlug } from '@/services/github'
+import { getPluginsWithStars, getSlug } from '@/services/github'
 import { defaultLocale } from '@/services/locale'
+import { getPluginDocsSlugs, resolvePluginDocsSlug } from '@/services/pluginDocs'
+import { Icon as AstroIcon } from 'astro-icon/components'
 import type { GetStaticPaths } from 'astro'
 import type { CollectionEntry } from 'astro:content'
 import { getCollection } from 'astro:content'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { marked } from 'marked'
-import PluginIcon from '@/components/PluginIcon.astro'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const pluginPosts: { [k: string]: CollectionEntry<'plugin'>[] } = {}
@@ -31,15 +33,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
   })
 }
 
-// Get the plugin from the actions set
-const plugin = actions.find((item) => getSlug(item.href) === Astro.params.slug) as Plugin
+const locale = Astro.locals.locale ?? defaultLocale
+const plugins = getPluginsWithStars(actions)
+const plugin = plugins.find((item) => getSlug(item.href) === Astro.params.slug)
 
 if (!plugin || !plugin.title) return new Response(`plugin is not found for: ${Astro.url.pathname}`, { status: 404 })
 
 let tutorialPlugin = ''
 const tutorialEntries = Astro.props.posts as CollectionEntry<'plugin'>[]
-const thisTut =
-  tutorialEntries.find((i) => (i.data.locale || defaultLocale) === Astro.locals.locale) ?? tutorialEntries.find((i) => (i.data.locale || defaultLocale) === defaultLocale)
+const thisTut = tutorialEntries.find((i) => (i.data.locale || defaultLocale) === locale) ?? tutorialEntries.find((i) => (i.data.locale || defaultLocale) === defaultLocale)
 if (thisTut?.body) tutorialPlugin = thisTut.body
 
 if (tutorialPlugin.length > 0) {
@@ -48,83 +50,34 @@ if (tutorialPlugin.length > 0) {
   else plugin['tutorial'] = tmp
 }
 
-plugin['githubStars'] = 0
-plugin['npmDownloads'] = 0
-
 const tmp = marked.parse(`# ${plugin.title}\n\n${plugin.description}`)
 if (typeof tmp !== 'string') plugin['readme'] = await tmp
 else plugin['readme'] = tmp
 
-// const promises: any[] = []
+const { localizedDocsSlugs, docsSlugs } = await getPluginDocsSlugs(locale)
+const docsSlug = resolvePluginDocsSlug(plugin, docsSlugs)
+const docsLocale = docsSlug && localizedDocsSlugs.has(docsSlug) ? locale : defaultLocale
 
-// Fetch npm package details to get npm downloads
-// const npmApiUrl = `https://api.npmjs.org/downloads/point/last-month/${plugin.name}`
-// promises.push(
-//   fetch(npmApiUrl)
-//     .then((res) => (res.ok ? res.json() : null))
-//     .then((res) => {
-//       if (res) plugin.npmDownloads = res.downloads
-//     })
-//     .catch(() => {}),
-// )
-
-// Fetch npm package details to get npm modified
-// const registryNpmApiUrl = `https://registry.npmjs.org/${plugin.name}`
-// promises.push(
-//   fetch(registryNpmApiUrl)
-//     .then((res) => (res.ok ? res.json() : null))
-//     .then((res) => {
-//       if (res) {
-//         plugin.datePublished = res.time.created
-//         plugin.dateModified = res.time.modified
-//       }
-//     })
-//     .catch(() => {}),
-// )
-
-// Extract the GitHub repository owner and name from the URL
-// const githubUrlParts = plugin.href.split('/')
-// const githubOwner = githubUrlParts[3]
-// const githubRepo = githubUrlParts[4]
-
-// Fetch GitHub repository details to get GitHub stars
-// const githubApiUrl = `https://api.github.com/repos/${githubOwner}/${githubRepo}`
-// promises.push(
-//   fetch(githubApiUrl)
-//     .then((res) => (res.ok ? res.json() : null))
-//     .then((res) => {
-//       if (res) plugin.githubStars = res.stargazers_count
-//     })
-//     .catch(() => {}),
-// )
-
-// Update the item with fetched data
-// const readmeApiUrl = `https://api.github.com/repos/${githubOwner}/${githubRepo}/readme`
-// promises.push(
-//   fetchWithToken(readmeApiUrl)
-//     .then((res) => (res.ok ? res.json() : null))
-//     .then((res) => {
-//       if (res) {
-//         const tmp = marked.parse(Buffer.from(res.content, 'base64').toString('utf-8'))
-//         if (typeof tmp !== 'string') tmp.then((result) => (plugin.readme = result))
-//         else plugin.readme = tmp
-//       }
-//     })
-//     .catch(() => {}),
-// )
-
-// Await all the items to be fetched
-// await Promise.all(promises)
+const formatCount = (count?: number): string => {
+  if (count === undefined) return 'n/a'
+  if (count >= 1000000) return `${(count / 1000000).toFixed(1)}M`
+  if (count >= 1000) return `${(count / 1000).toFixed(1)}k`
+  return count.toString()
+}
 
 const { slug: id } = Astro.params
+const { title, description, githubStars, npmDownloads, href, name, tutorial, icon, author } = plugin as Plugin
+
+const npmHref = name ? `https://www.npmjs.com/package/${name}` : undefined
+const docsHref = docsSlug ? getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`) : (npmHref ?? href)
+const docsIsExternal = !docsSlug
 
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
 
 if (plugin.title) content['title'] = `${plugin.title} Capacitor Plugin: Install, Setup & Examples`
 if (plugin.description) content['description'] = plugin.description
 
-// Create improved ldJSON using helper function for SoftwareApplication
-const pluginUrl = getRelativeLocaleUrl(Astro.locals.locale, `/plugins/${id}`)
+const pluginUrl = getRelativeLocaleUrl(locale, `/plugins/${id}`)
 
 content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.public, {
   name: plugin.title,
@@ -132,110 +85,145 @@ content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.p
   url: pluginUrl,
   applicationCategory: 'DeveloperApplication',
   operatingSystem: 'iOS, Android',
-  softwareVersion: '1.0.0', // Default version as plugin doesn't have version property
+  softwareVersion: '1.0.0',
   downloadUrl: plugin.href,
   aggregateRating: plugin.githubStars
     ? {
-        ratingValue: Math.min(plugin.githubStars / 100, 5), // Normalize stars to 5-star scale
+        ratingValue: Math.min(plugin.githubStars / 100, 5),
         reviewCount: plugin.githubStars,
       }
     : undefined,
 })
-
-const { title, description, githubStars, npmDownloads, href, name, tutorial, icon } = plugin
 ---
 
 <Layout {content}>
-  <div class="flex w-full flex-col items-center">
-    <div class="flex w-full flex-row flex-wrap px-10 lg:max-w-6xl xl:px-0">
-      <a aria-label="Back To Plugins" href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')} class="max-w-max border-b border-white/10 pb-0.5 text-white/50 hover:text-white">
-        ← Back To Plugins
-      </a>
-    </div>
-    <div class="mt-6 flex w-full flex-row flex-wrap gap-8 px-10 lg:max-w-6xl xl:px-0">
-      <button class="rounded border border-white px-3 py-1 text-sm" id="tutorialBtn">
-        {m.tutorial_on({}, { locale: Astro.locals.locale })}
-        {title}
-      </button>
-      <!-- <button class="py-1 px-3 text-sm rounded border border-white/10" id="aboutBtn">
-        {m.about({}, { locale: Astro.locals.locale })}
-        {title}
-      </button> -->
-    </div>
-    <div class="mt-6 flex w-full flex-col items-center">
-      <div class="z-10 mb-8 hidden w-full flex-row flex-wrap gap-10 px-10 md:flex-nowrap lg:max-w-6xl xl:px-0" id="aboutSection">
-        <div class="flex w-full flex-col">
-          <div class="mt-4 flex items-center gap-4">
-            {icon && <PluginIcon icon={icon} name={title} className="shrink-0" />}
-            <h1 class="text-2xl font-bold md:text-4xl">
-              {title}
-            </h1>
-          </div>
-          <span class="mt-8 text-lg font-light md:text-xl">
-            {description}
-          </span>
-          {
-            githubStars && (
-              <div class="mt-8 flex flex-row items-center justify-between border-t border-white/10 pt-2">
-                <span class="text-sm font-semibold text-gray-400">GitHub Stars</span>{' '}
-                <a class="text-gray-600 hover:underline" href={href} target="_blank" rel="noopener noreferrer">
-                  {githubStars}
-                </a>
+  <div class="relative overflow-hidden">
+    <div aria-hidden="true" class="absolute inset-x-0 top-0 -z-10 h-[32rem] bg-linear-to-b from-blue-500/12 via-cyan-500/6 to-transparent"></div>
+
+    <section class="px-6 pt-10 pb-8 lg:px-8 lg:pt-14">
+      <div class="mx-auto max-w-6xl">
+        <a
+          aria-label="Back To Plugins"
+          href={getRelativeLocaleUrl(locale, 'plugins')}
+          class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-gray-300 transition hover:border-white/20 hover:bg-white/[0.06] hover:text-white"
+        >
+          <AstroIcon name="heroicons:arrow-left-solid" class="size-4 text-gray-400" aria-hidden="true" />
+          <span>Back to plugins</span>
+        </a>
+
+        <div class="mt-8 grid gap-8 lg:grid-cols-[19fr_11fr] lg:items-start">
+          <div>
+            <div class="flex flex-wrap items-center gap-3">
+              {
+                name && (
+                  <a
+                    href={npmHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="rounded-full border border-blue-400/20 bg-blue-400/10 px-3 py-1 text-sm text-blue-100 transition hover:border-blue-300/40 hover:bg-blue-400/15"
+                  >
+                    {name}
+                  </a>
+                )
+              }
+              <div class="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-sm text-gray-300">Tutorial</div>
+              <div class="text-sm text-gray-500">by {author}</div>
+            </div>
+
+            <div class="mt-6 flex items-start gap-4 sm:gap-5">
+              {icon && <PluginIcon icon={icon} name={title} className="shrink-0" />}
+              <div class="min-w-0">
+                <h1 class="font-pj text-4xl font-bold text-white sm:text-5xl">
+                  {title}
+                </h1>
+                <p class="mt-4 max-w-[52ch] text-base leading-7 text-gray-300 sm:text-lg">
+                  {description}
+                </p>
               </div>
-            )
-          }
-          {
-            npmDownloads && (
-              <div class="mt-4 flex flex-row items-center justify-between border-t border-white/10 pt-2">
-                <span class="text-sm font-semibold text-gray-400">NPM Downloads</span> <span class="text-gray-600">{npmDownloads}</span>
-              </div>
-            )
-          }
-          <div class="flex flex-row flex-wrap items-center justify-between">
-            {
-              href && (
-                <a
-                  aria-label="View Repo URL"
-                  class="mt-8 w-full rounded border border-white/50 px-6 py-2 text-center text-sm hover:border-white sm:w-auto"
-                  href={href}
-                  target="_blank"
-                >
-                  {m.view_repo({}, { locale: Astro.locals.locale })} &rarr;
-                </a>
-              )
-            }
-            {
-              name && (
-                <a
-                  aria-label="View NPM"
-                  class="mt-8 w-full rounded border border-white/50 px-6 py-2 text-center text-sm hover:border-white sm:w-auto"
-                  href={`https://www.npmjs.com/package/${name}`}
-                  target="_blank"
-                >
-                  {m.view_npm({}, { locale: Astro.locals.locale })} &rarr;
-                </a>
-              )
-            }
+            </div>
+
+            <div class="mt-8 grid gap-3 sm:grid-cols-2">
+              <a
+                href={npmHref ?? href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-white/20 hover:bg-white/[0.05]"
+              >
+                <p class="text-sm text-gray-400">{m.downloads({}, { locale })}/week</p>
+                <p class="mt-2 text-2xl font-semibold text-white tabular-nums sm:text-xl">
+                  {formatCount(npmDownloads)}
+                </p>
+              </a>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-white/20 hover:bg-white/[0.05]"
+              >
+                <p class="text-sm text-gray-400">{m.github_stars({}, { locale })}</p>
+                <p class="mt-2 text-2xl font-semibold text-white tabular-nums sm:text-xl">
+                  {formatCount(githubStars)}
+                </p>
+              </a>
+            </div>
           </div>
-          <!-- {readme && <div id="readme" class="my-8 prose" set:html={readme} />} -->
+
+          <aside class="rounded-[1.75rem] border border-white/10 bg-linear-to-b from-white/[0.08] to-white/[0.03] p-6 shadow-[0_24px_80px_rgba(2,6,23,0.45)] backdrop-blur-sm">
+            <p class="text-[0.7rem] font-semibold tracking-[0.28em] text-blue-200/70 uppercase">Quick links</p>
+            <div class="mt-5 flex flex-col gap-3">
+              <a
+                href={docsHref}
+                target={docsIsExternal ? '_blank' : undefined}
+                rel={docsIsExternal ? 'noopener noreferrer' : undefined}
+                class="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+              >
+                <span>{m.solutions_view_docs({}, { locale })}</span>
+                <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-white" aria-hidden="true" />
+              </a>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-4 py-3 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/[0.06] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+              >
+                <span>{m.view_repo({}, { locale })}</span>
+                <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-gray-300" aria-hidden="true" />
+              </a>
+              {
+                npmHref && (
+                  <a
+                    href={npmHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-4 py-3 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/[0.06] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+                  >
+                    <span>{m.view_npm({}, { locale })}</span>
+                    <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-gray-300" aria-hidden="true" />
+                  </a>
+                )
+              }
+            </div>
+          </aside>
         </div>
       </div>
-    </div>
-    {tutorial && <div class="prose prose-invert mx-auto w-full px-10 py-8 lg:max-w-6xl xl:px-0" id="tutorialSection" set:html={tutorial} />}
+    </section>
+
+    {
+      tutorial && (
+        <section class="px-6 pb-16 lg:px-8 lg:pb-24">
+          <div class="mx-auto max-w-6xl">
+            <article class="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-[0_24px_80px_rgba(2,6,23,0.35)]">
+              <div class="border-b border-white/10 px-6 py-5 sm:px-8">
+                <p class="text-[0.7rem] font-semibold tracking-[0.28em] text-blue-200/70 uppercase">Guide</p>
+                <h2 class="mt-2 text-2xl font-semibold text-white sm:text-3xl">
+                  {m.tutorial_on({}, { locale })} {title}
+                </h2>
+              </div>
+              <div class="prose prose-invert max-w-none px-6 py-8 sm:px-8 lg:px-10" set:html={tutorial} />
+            </article>
+          </div>
+        </section>
+      )
+    }
   </div>
 </Layout>
-
-<!-- <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const aboutBtn = document.getElementById('aboutBtn')
-    const tutorialBtn = document.getElementById('tutorialBtn')
-    const aboutSection = document.getElementById('aboutSection')
-    const tutorialSection = document.getElementById('tutorialSection')
-    const toggleSections = () => {
-      aboutSection?.classList.toggle('hidden')
-      tutorialSection?.classList.toggle('hidden')
-    }
-    aboutBtn?.addEventListener('click', toggleSections)
-    tutorialBtn?.addEventListener('click', toggleSections)
-  })
-</script> -->
