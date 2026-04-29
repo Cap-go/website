@@ -24,4 +24,12 @@ export const integrations: IntegrationEntry[] = [
     rel: 'noopener noreferrer',
     description: 'Continuous delivery workflow integration with Capgo for mobile update pipelines.',
   },
+  {
+    name: 'Dyad',
+    href: 'https://www.dyad.sh',
+    logo: '/dyad-logo.svg',
+    target: '_blank',
+    rel: 'noopener noreferrer',
+    description: 'Flexible, local, open-source AI app builder with zero lock-in and support for your own models and tools.',
+  },
 ]
