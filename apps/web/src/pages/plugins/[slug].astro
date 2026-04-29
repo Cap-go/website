@@ -42,12 +42,17 @@ if (!plugin || !plugin.title) return new Response(`plugin is not found for: ${As
 let tutorialPlugin = ''
 const tutorialEntries = Astro.props.posts as CollectionEntry<'plugin'>[]
 const thisTut = tutorialEntries.find((i) => (i.data.locale || defaultLocale) === locale) ?? tutorialEntries.find((i) => (i.data.locale || defaultLocale) === defaultLocale)
+
+const normalizeTutorialHeading = (html: string): string => {
+  return html.replace(/^(\s*)<h1(\b[^>]*)>([\s\S]*?)<\/h1>/i, '$1<h2$2>$3</h2>')
+}
+
 if (thisTut?.body) tutorialPlugin = thisTut.body
 
 if (tutorialPlugin.length > 0) {
   const tmp = marked.parse(tutorialPlugin)
-  if (typeof tmp !== 'string') plugin['tutorial'] = await tmp
-  else plugin['tutorial'] = tmp
+  const tutorialHtml = typeof tmp !== 'string' ? await tmp : tmp
+  plugin['tutorial'] = normalizeTutorialHeading(tutorialHtml)
 }
 
 const tmp = marked.parse(`# ${plugin.title}\n\n${plugin.description}`)
@@ -71,6 +76,8 @@ const { title, description, githubStars, npmDownloads, href, name, tutorial, ico
 const npmHref = name ? `https://www.npmjs.com/package/${name}` : undefined
 const docsHref = docsSlug ? getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`) : (npmHref ?? href)
 const docsIsExternal = !docsSlug
+const showRepoLink = href !== docsHref
+const showNpmLink = !!npmHref && npmHref !== docsHref
 
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
 
@@ -85,14 +92,7 @@ content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.p
   url: pluginUrl,
   applicationCategory: 'DeveloperApplication',
   operatingSystem: 'iOS, Android',
-  softwareVersion: '1.0.0',
   downloadUrl: plugin.href,
-  aggregateRating: plugin.githubStars
-    ? {
-        ratingValue: Math.min(plugin.githubStars / 100, 5),
-        reviewCount: plugin.githubStars,
-      }
-    : undefined,
 })
 ---
 
@@ -180,17 +180,21 @@ content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.p
                 <span>{m.solutions_view_docs({}, { locale })}</span>
                 <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-white" aria-hidden="true" />
               </a>
-              <a
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-4 py-3 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/[0.06] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
-              >
-                <span>{m.view_repo({}, { locale })}</span>
-                <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-gray-300" aria-hidden="true" />
-              </a>
               {
-                npmHref && (
+                showRepoLink && (
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-4 py-3 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/[0.06] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+                  >
+                    <span>{m.view_repo({}, { locale })}</span>
+                    <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-gray-300" aria-hidden="true" />
+                  </a>
+                )
+              }
+              {
+                showNpmLink && (
                   <a
                     href={npmHref}
                     target="_blank"
