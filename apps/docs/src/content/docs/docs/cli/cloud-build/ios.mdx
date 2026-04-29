@@ -6,6 +6,10 @@ sidebar:
 ---
 
 import { Steps, Aside, Card, CardGrid } from '@astrojs/starlight/components';
+import appStoreConnectHomeImage from './ios-assets/app-store-connect-home.png';
+import entityTypeImage from './ios-assets/entity-type.png';
+import startEnrollmentImage from './ios-assets/start-enrollment.png';
+import webEnrollmentImage from './ios-assets/web-enrollment.png';
 
 Build and submit iOS apps to TestFlight and the App Store using Capgo's dedicated Mac infrastructure.
 
@@ -47,13 +51,13 @@ Useful official references:
 - [Platform version information in App Store Connect](https://developer.apple.com/help/app-store-connect/reference/app-information/platform-version-information)
 :::
 
-![Start Apple Developer enrollment](/app-store-assets/apple-account/start-enrollment.png)
+<img src={startEnrollmentImage.src} alt="Start Apple Developer enrollment" />
 
-![Continue Apple enrollment on the web](/app-store-assets/apple-account/web-enrollment.png)
+<img src={webEnrollmentImage.src} alt="Continue Apple enrollment on the web" />
 
-![Select the correct Apple Developer entity type](/app-store-assets/apple-account/entity-type.png)
+<img src={entityTypeImage.src} alt="Select the correct Apple Developer entity type" />
 
-![App Store Connect after enrollment](/app-store-assets/apple-account/app-store-connect-home.png)
+<img src={appStoreConnectHomeImage.src} alt="App Store Connect after enrollment" />
 
 :::caution
 Apple updates its minimum SDK requirement regularly. As of **April 28, 2026**, iPhone and iPad apps uploaded to App Store Connect must be built with the **iOS & iPadOS 26 SDK or later**.
