@@ -73,11 +73,8 @@ const formatCount = (count?: number): string => {
 const { slug: id } = Astro.params
 const { title, description, githubStars, npmDownloads, href, name, tutorial, icon, author } = plugin as Plugin
 
-const npmHref = name ? `https://www.npmjs.com/package/${name}` : undefined
-const docsHref = docsSlug ? getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`) : (npmHref ?? href)
-const docsIsExternal = !docsSlug
-const showRepoLink = href !== docsHref
-const showNpmLink = !!npmHref && npmHref !== docsHref
+const npmHref = name ? `https://www.npmjs.com/package/${name}` : `https://www.npmjs.com/search?q=${encodeURIComponent(title)}`
+const docsHref = docsSlug ? getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`) : getRelativeLocaleUrl(locale, 'docs/plugins/')
 
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
 
@@ -105,7 +102,7 @@ content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.p
         <a
           aria-label="Back To Plugins"
           href={getRelativeLocaleUrl(locale, 'plugins')}
-          class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-gray-300 transition hover:border-white/20 hover:bg-white/[0.06] hover:text-white"
+          class="inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-gray-300 transition hover:border-white/20 hover:bg-white/[0.06] hover:text-white"
         >
           <span aria-hidden="true" class="text-gray-400">←</span>
           <span>Back to plugins</span>
@@ -120,7 +117,7 @@ content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.p
                     href={npmHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="rounded-full border border-blue-400/20 bg-blue-400/10 px-3 py-1 text-sm text-blue-100 transition hover:border-blue-300/40 hover:bg-blue-400/15"
+                    class="cursor-pointer rounded-full border border-blue-400/20 bg-blue-400/10 px-3 py-1 text-sm text-blue-100 transition hover:border-blue-300/40 hover:bg-blue-400/15"
                   >
                     {name}
                   </a>
@@ -147,7 +144,7 @@ content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.p
                 href={npmHref ?? href}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-white/20 hover:bg-white/[0.05]"
+                class="cursor-pointer rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-white/20 hover:bg-white/[0.05]"
               >
                 <p class="text-sm text-gray-400">{m.downloads({}, { locale })}/week</p>
                 <p class="mt-2 text-2xl font-semibold text-white tabular-nums sm:text-xl">
@@ -158,7 +155,7 @@ content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.p
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-white/20 hover:bg-white/[0.05]"
+                class="cursor-pointer rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-white/20 hover:bg-white/[0.05]"
               >
                 <p class="text-sm text-gray-400">{m.github_stars({}, { locale })}</p>
                 <p class="mt-2 text-2xl font-semibold text-white tabular-nums sm:text-xl">
@@ -173,39 +170,29 @@ content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.p
             <div class="mt-5 flex flex-col gap-3">
               <a
                 href={docsHref}
-                target={docsIsExternal ? '_blank' : undefined}
-                rel={docsIsExternal ? 'noopener noreferrer' : undefined}
-                class="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+                class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
               >
                 <span>{m.solutions_view_docs({}, { locale })}</span>
                 <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-white" aria-hidden="true" />
               </a>
-              {
-                showRepoLink && (
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-4 py-3 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/[0.06] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
-                  >
-                    <span>{m.view_repo({}, { locale })}</span>
-                    <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-gray-300" aria-hidden="true" />
-                  </a>
-                )
-              }
-              {
-                showNpmLink && (
-                  <a
-                    href={npmHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-4 py-3 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/[0.06] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
-                  >
-                    <span>{m.view_npm({}, { locale })}</span>
-                    <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-gray-300" aria-hidden="true" />
-                  </a>
-                )
-              }
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-4 py-3 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/[0.06] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+              >
+                <span>{m.view_repo({}, { locale })}</span>
+                <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-gray-300" aria-hidden="true" />
+              </a>
+              <a
+                href={npmHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-4 py-3 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/[0.06] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+              >
+                <span>{m.view_npm({}, { locale })}</span>
+                <AstroIcon name="heroicons:arrow-up-right-solid" class="size-4 text-gray-300" aria-hidden="true" />
+              </a>
             </div>
           </aside>
         </div>
