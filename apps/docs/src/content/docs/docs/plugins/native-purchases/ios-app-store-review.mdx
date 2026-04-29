@@ -6,6 +6,10 @@ sidebar:
 ---
 
 import { Steps } from '@astrojs/starlight/components';
+import acceptedPermissionsImage from './ios-app-store-review-assets/accepted-permissions.png';
+import paywallLinksImage from './ios-app-store-review-assets/paywall-links.png';
+import policyLinksImage from './ios-app-store-review-assets/policy-links.png';
+import rejectedPermissionsImage from './ios-app-store-review-assets/rejected-permissions.png';
 
 Getting your app approved on the App Store requires careful attention to Apple's guidelines, especially when implementing in-app purchases and subscriptions. This guide covers everything you need to know to pass review on your first submission.
 
@@ -27,7 +31,7 @@ Before Apple reviews your purchase flow, make sure the app record itself is comp
 Apple treats the support site as more than a placeholder link. It should contain real contact details so users can reach you about app issues, feedback, and feature requests.
 :::
 
-![App Store listing metadata with policy and support links](/app-store-assets/checklist/policy-links.png)
+<img src={policyLinksImage.src} alt="App Store listing metadata with policy and support links" />
 
 ### Prepare Real Screenshots
 
@@ -81,7 +85,7 @@ Even a $1 discrepancy between store listing ($4.99) and app ($5.99) will trigger
 
 ![UI Design Dos and Don'ts](/native-purchases/review-guides/ui-design-dos-donts.webp)
 
-![Paywall with restore purchases and legal links](/app-store-assets/checklist/paywall-links.png)
+<img src={paywallLinksImage.src} alt="Paywall with restore purchases and legal links" />
 
 **Example of Compliant UI:**
 ```typescript
@@ -207,9 +211,9 @@ const SUBSCRIPTION_FEATURES = {
 
 Update your `Info.plist` with clear explanations:
 
-![Permission copy that is too vague for review](/app-store-assets/checklist/rejected-permissions.png)
+<img src={rejectedPermissionsImage.src} alt="Permission copy that is too vague for review" />
 
-![Permission copy with clearer explanations](/app-store-assets/checklist/accepted-permissions.png)
+<img src={acceptedPermissionsImage.src} alt="Permission copy with clearer explanations" />
 
 ```xml
 <key>NSCameraUsageDescription</key>
