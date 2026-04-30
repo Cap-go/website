@@ -22,7 +22,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
       <!-- Card 1 -->
       <div class="flex flex-col justify-between rounded-3xl bg-[#0c0e12]/30 p-8 ring-1 ring-white/10">
         <div class="relative top-30 left-8 mb-8 flex h-64 items-center justify-center">
-          <svg width="324" height="441" viewBox="0 0 324 441" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg width="324" height="441" viewBox="0 0 324 441" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
             <path
               d="M39.8184 24C39.8184 17.3726 45.1909 12 51.8184 12H620.818C627.446 12 632.818 17.3726 632.818 24V201C632.818 207.627 627.446 213 620.818 213H51.8184C45.1909 213 39.8184 207.627 39.8184 201V24Z"
               fill="white"
@@ -100,7 +100,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
       <!-- Card 2 -->
       <div class="flex flex-col justify-between rounded-3xl bg-[#0c0e12]/30 p-8 ring-1 ring-white/10">
         <div class="mb-8 flex h-64 items-center justify-center">
-          <svg width="324" height="420" viewBox="0 0 324 420" fill="none" class="relative top-25" xmlns="http://www.w3.org/2000/svg">
+          <svg width="324" height="420" viewBox="0 0 324 420" fill="none" class="relative top-25" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
             <g filter="url(#filter0_f_0_1)">
               <path
                 d="M21.858 79.8181C20.7315 75.8897 23.0905 72.1868 27.1269 71.5475L251.255 36.0491C255.292 35.4098 259.477 38.0761 260.603 42.0045L302.245 187.228C303.372 191.156 301.013 194.859 296.977 195.498L72.8483 230.997C68.8119 231.636 64.6266 228.97 63.5001 225.041L21.858 79.8181Z"
@@ -229,7 +229,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
       <!-- Card 3 -->
       <div class="flex flex-col justify-between rounded-3xl bg-[#0c0e12]/30 p-8 ring-1 ring-white/10">
         <div class="mb-8 flex h-64 items-center justify-center">
-          <svg width="239" height="288" class="relative top-10" viewBox="0 0 239 288" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg width="239" height="288" class="relative top-10" viewBox="0 0 239 288" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
             <path d="M33.1 31.1001C33.1 20.0544 42.0543 11.1001 53.1 11.1001H184.1C195.146 11.1001 204.1 20.0544 204.1 31.1001V212.1H33.1V31.1001Z" fill="url(#paint0_linear_0_1)"
             ></path>
             <path
@@ -390,11 +390,12 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
       <blockquote class="mt-4">
         <p
           class="relative text-lg leading-8 font-semibold text-white before:absolute before:inline before:-translate-x-full before:content-['\201C'] after:inline after:content-['\201D']"
-          set:html={m.testimonial_title({}, { locale: Astro.locals.locale })}
-        />
+        >
+          {m.testimonial_title({}, { locale: Astro.locals.locale })}
+        </p>
       </blockquote>
       <p class="mt-3 text-sm leading-6 text-gray-400">
-        {m.testimonial_highlight({}, { locale: Astro.locals.locale })}.
+        {m.testimonial_highlight({}, { locale: Astro.locals.locale })}
       </p>
     </div>
 
