@@ -8,7 +8,7 @@ type AiMessage = {
 }
 
 type AiBinding = {
-  run(model: string, input: { messages: AiMessage[]; temperature?: number; max_tokens?: number }): Promise<unknown>
+  run(model: string, input: { messages: AiMessage[]; temperature?: number; max_tokens?: number; response_format?: unknown }): Promise<unknown>
 }
 
 type WorkerService = {
@@ -63,6 +63,7 @@ interface Env {
   TRANSLATION_QUEUE: QueueBinding<TranslationJob>
   TRANSLATION_STORE: R2BucketBinding
   TRANSLATION_MODEL?: string
+  TRANSLATION_TEST_MODE?: string
 }
 
 declare global {
@@ -110,11 +111,11 @@ type AttributeMatch = {
 
 const DEFAULT_LOCALE = 'en'
 const ALL_LOCALES = [DEFAULT_LOCALE, ...SUPPORTED_LOCALES] as const
-const DEFAULT_MODEL = '@cf/moonshotai/kimi-k2.6'
+const DEFAULT_MODEL = '@cf/meta/llama-3.1-8b-instruct-fast'
 const FRESH_MS = 24 * 60 * 60 * 1000
 const CACHE_KEEP_SECONDS = 7 * 24 * 60 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
-const TRANSLATION_CACHE_VERSION = '2026-05-01-kimi-k2.6-v1'
+const TRANSLATION_CACHE_VERSION = '2026-05-01-llama-3.1-8b-json-v1'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
 const MAX_HTML_BYTES = 1_500_000
 const MAX_BATCH_CHARS = 1_500
@@ -124,6 +125,7 @@ const TRANSLATION_MODEL_ATTEMPTS = 3
 const TRANSLATION_SINGLE_TEXT_ATTEMPTS = 2
 const TRANSLATION_QUEUE_RETRY_DELAY_SECONDS = 60
 const AI_OUTPUT_PREVIEW_CHARS = 240
+const TRANSLATION_TEST_ROUTE_PREFIX = '/__translation-test__'
 
 const LANGUAGE_NAMES: Record<Locale, string> = {
   de: 'German',
@@ -809,7 +811,8 @@ function extractAiPayload(result: unknown): unknown {
     if (typeof value === 'string' || Array.isArray(value) || recordOf(value)) return value
   }
 
-  return extractChoicesText(record.choices)
+  const choicesText = extractChoicesText(record.choices)
+  return choicesText || record
 }
 
 function errorMessage(error: unknown): string {
@@ -970,7 +973,25 @@ function assertTranslatedBatch(targetLanguage: string, batch: string[], translat
   }
 }
 
-async function translateBatch(env: Env, targetLanguage: string, batch: string[]): Promise<string[]> {
+function translationBatchJsonSchema(batchLength: number): Record<string, unknown> {
+  return {
+    type: 'object',
+    additionalProperties: false,
+    properties: {
+      translations: {
+        type: 'array',
+        minItems: batchLength,
+        maxItems: batchLength,
+        items: {
+          type: 'string',
+        },
+      },
+    },
+    required: ['translations'],
+  }
+}
+
+async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batch: string[]): Promise<string[]> {
   const model = env.TRANSLATION_MODEL || DEFAULT_MODEL
   let lastError: Error | null = null
 
@@ -980,16 +1001,21 @@ async function translateBatch(env: Env, targetLanguage: string, batch: string[])
       const result = await env.AI.run(model, {
         temperature: 0,
         max_tokens: 8192,
+        response_format: {
+          type: 'json_schema',
+          json_schema: translationBatchJsonSchema(batch.length),
+        },
         messages: [
           {
             role: 'system',
             content: [
               'You translate Capgo website copy for the target locale.',
-              'Translate naturally for the user cultural context; do not translate word for word.',
+              'Translate naturally for the user cultural context; adapt idioms, grammar, tone, and phrasing instead of translating word for word.',
               'Translate every human-readable label, heading, sentence, and paragraph into the target language, including short navigation labels.',
-              'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning. Preserve terms like Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, and Cloudflare when they are names or technical terms.',
-              `Return only valid JSON: one JSON array of exactly ${batch.length} strings, in the same order as the input. Do not return Markdown, an object, keys, comments, or explanations. Escape quotes and newlines inside JSON strings.`,
-              attempt > 1 ? 'Your previous response was rejected. Fix the format and return only the JSON array.' : '',
+              'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning.',
+              'Do not translate or transliterate literal tokens such as Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
+              `Return a JSON object with exactly one key named "translations". Its value must be an array of exactly ${batch.length} strings in the same order as the input. Do not return Markdown, comments, or explanations.`,
+              attempt > 1 ? 'Your previous response was rejected. Fix the format and return only the JSON object matching the schema.' : '',
             ]
               .filter(Boolean)
               .join(' '),
@@ -1025,11 +1051,21 @@ async function translateBatch(env: Env, targetLanguage: string, batch: string[])
     })
   }
 
-  console.warn('Translation batch JSON failed; falling back to single-text translation', {
-    targetLanguage,
-    batchSize: batch.length,
-    error: lastError?.message ?? 'unknown error',
-  })
+  throw new Error(`Translation JSON mode failed for ${targetLanguage}: ${lastError?.message ?? 'unknown error'}`)
+}
+
+async function translateBatch(env: Env, targetLanguage: string, batch: string[]): Promise<string[]> {
+  try {
+    return await translateBatchWithJsonMode(env, targetLanguage, batch)
+  } catch (error) {
+    const message = errorMessage(error)
+    console.warn('Translation batch JSON failed; falling back to single-text translation', {
+      targetLanguage,
+      batchSize: batch.length,
+      error: message,
+    })
+  }
+
   return await translateBatchIndividually(env, targetLanguage, batch)
 }
 
@@ -1048,9 +1084,9 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
             role: 'system',
             content: [
               'You translate one Capgo website string for the target locale.',
-              'Translate naturally for the user cultural context; do not translate word for word.',
+              'Translate naturally for the user cultural context; adapt idioms, grammar, tone, and phrasing instead of translating word for word.',
               'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning.',
-              'Preserve terms like Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, and Cloudflare when they are names or technical terms.',
+              'Do not translate or transliterate literal tokens such as Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
               'Return only the translated text. Do not return JSON, Markdown, labels, explanations, quotes around the whole answer, or extra lines.',
             ].join(' '),
           },
@@ -1784,6 +1820,66 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
   return temporaryEnglishRedirectResponse(requestUrl, isHead)
 }
 
+function jsonResponse(body: unknown, status = 200): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Cache-Control': CLIENT_NO_STORE,
+    },
+  })
+}
+
+async function probeRuntimeStorage(env: Env, requestUrl: URL): Promise<{ cache: true; r2: true }> {
+  const nonce = crypto.randomUUID()
+  const cacheProbeKey = new Request(`${requestUrl.origin}${TRANSLATION_TEST_ROUTE_PREFIX}/cache/${nonce}`, { method: 'GET' })
+  await caches.default.put(
+    cacheProbeKey,
+    new Response(nonce, {
+      headers: {
+        'Cache-Control': 'public, max-age=60',
+      },
+    }),
+  )
+  const cached = await caches.default.match(cacheProbeKey)
+  const cachedText = cached ? await cached.text() : ''
+  await caches.default.delete(cacheProbeKey)
+  if (cachedText !== nonce) throw new Error('Real Cache API probe failed')
+
+  const r2Key = `tests/${nonce}.txt`
+  await env.TRANSLATION_STORE.put(r2Key, nonce)
+  const object = await env.TRANSLATION_STORE.get(r2Key)
+  const objectText = object ? await object.text() : ''
+  await env.TRANSLATION_STORE.delete(r2Key)
+  if (objectText !== nonce) throw new Error('Real R2 probe failed')
+
+  return { cache: true, r2: true }
+}
+
+async function handleTranslationTestRequest(request: Request, env: Env, requestUrl: URL): Promise<Response> {
+  if (request.method !== 'GET') return jsonResponse({ ok: false, error: 'Method not allowed' }, 405)
+  if (requestUrl.pathname !== `${TRANSLATION_TEST_ROUTE_PREFIX}/real-runtime`) return jsonResponse({ ok: false, error: 'Not found' }, 404)
+
+  try {
+    const storage = await probeRuntimeStorage(env, requestUrl)
+    const translations = await translateBatchWithJsonMode(env, 'Spanish', [
+      'Ship updates instantly',
+      'Pricing',
+      'Keep Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, and Cloudflare unchanged.',
+    ])
+
+    return jsonResponse({
+      ok: true,
+      model: env.TRANSLATION_MODEL || DEFAULT_MODEL,
+      cacheVersion: TRANSLATION_CACHE_VERSION,
+      storage,
+      translations,
+    })
+  } catch (error) {
+    return jsonResponse({ ok: false, error: errorMessage(error) }, 500)
+  }
+}
+
 export const __translationWorkerTest = {
   TRANSLATION_CACHE_VERSION,
 }
@@ -1791,6 +1887,10 @@ export const __translationWorkerTest = {
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const requestUrl = new URL(request.url)
+    if (env.TRANSLATION_TEST_MODE === '1' && requestUrl.pathname.startsWith(TRANSLATION_TEST_ROUTE_PREFIX)) {
+      return await handleTranslationTestRequest(request, env, requestUrl)
+    }
+
     const locale = extractLocale(requestUrl.pathname)
 
     if (!locale) return await fetchEnglishOrigin(request, env, requestUrl)
