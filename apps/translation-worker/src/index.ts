@@ -667,7 +667,10 @@ function extractAiText(result: unknown): string {
 }
 
 function errorMessage(error: unknown): string {
-  if (error instanceof Error) return `${error.name}: ${error.message}${error.stack ? `\n${error.stack}` : ''}`
+  if (error instanceof Error) {
+    const base = `${error.name}: ${error.message}`
+    return error.stack ? `${base}\n${error.stack}` : base
+  }
   if (typeof error === 'string') return error
   try {
     return JSON.stringify(error)
@@ -1175,14 +1178,12 @@ async function refreshCacheIncrementally(request: Request, env: Env, requestUrl:
   }
 
   let state = await readPartialTranslationState(requestUrl, locale, sourceHash)
-  if (!state) {
-    state = {
-      cacheVersion: TRANSLATION_CACHE_VERSION,
-      sourceHash,
-      locale,
-      translatedBatches: [],
-      updatedAt: Date.now(),
-    }
+  state ??= {
+    cacheVersion: TRANSLATION_CACHE_VERSION,
+    sourceHash,
+    locale,
+    translatedBatches: [],
+    updatedAt: Date.now(),
   }
 
   let translatedInThisJob = 0
