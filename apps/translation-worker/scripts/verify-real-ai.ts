@@ -16,6 +16,7 @@ type ProbePayload = {
 const WORKER_DIR = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const MODEL = process.env.TRANSLATION_REAL_TEST_MODEL || '@cf/meta/llama-3.1-8b-instruct-fast'
 const TIMEOUT_MS = Number.parseInt(process.env.TRANSLATION_REAL_TEST_TIMEOUT_MS || '180000', 10)
+const REQUEST_TIMEOUT_MS = Math.min(10_000, TIMEOUT_MS)
 const LOG_LIMIT = 16_000
 const WRANGLER_CONFIG = 'wrangler.real-test.jsonc'
 const DEVELOPMENT_R2_BUCKET = 'capgo-translation-cache-development'
@@ -92,22 +93,31 @@ function assertProbePayload(payload: ProbePayload): void {
     if (typeof item !== 'string') throw new Error('Probe returned a non-string translation')
     return item
   })
-  if (translations[0].trim() === SOURCE_TEXTS[0] && translations[1].trim() === SOURCE_TEXTS[1]) {
+  if (translations.some((translation, index) => translation.trim() === SOURCE_TEXTS[index])) {
     throw new Error('Probe left the Spanish sample untranslated')
   }
 
   const joined = translations.join(' ')
-  for (const token of ['Capgo', 'Capacitor', 'API', 'SDK', 'CLI', 'GitHub', 'Cloudflare']) {
+  for (const token of ['Capgo', 'Capacitor', 'code', 'API', 'SDK', 'CLI', 'npm', 'bun', 'GitHub', 'Cloudflare']) {
     if (!joined.includes(token)) throw new Error(`Probe translated or dropped protected token: ${token}`)
   }
 }
 
 async function fetchProbe(url: string): Promise<ProbePayload> {
-  const response = await fetch(url, {
-    headers: {
-      Accept: 'application/json',
-    },
-  })
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
+  let response: Response
+  try {
+    response = await fetch(url, {
+      signal: controller.signal,
+      headers: {
+        Accept: 'application/json',
+      },
+    })
+  } finally {
+    clearTimeout(timeout)
+  }
+
   const text = await response.text()
   let payload: ProbePayload
   try {

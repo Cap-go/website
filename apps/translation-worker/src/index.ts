@@ -126,6 +126,7 @@ const TRANSLATION_SINGLE_TEXT_ATTEMPTS = 2
 const TRANSLATION_QUEUE_RETRY_DELAY_SECONDS = 60
 const AI_OUTPUT_PREVIEW_CHARS = 240
 const TRANSLATION_TEST_ROUTE_PREFIX = '/__translation-test__'
+const PROTECTED_TRANSLATION_TOKENS = ['Cloudflare', 'Capacitor', 'GitHub', 'Capgo', 'code', 'API', 'SDK', 'CLI', 'npm', 'bun'] as const
 
 const LANGUAGE_NAMES: Record<Locale, string> = {
   de: 'German',
@@ -973,6 +974,51 @@ function assertTranslatedBatch(targetLanguage: string, batch: string[], translat
   }
 }
 
+function isProtectedTokenBoundary(value: string, index: number): boolean {
+  if (index < 0 || index >= value.length) return true
+  const code = value.charCodeAt(index)
+  return !((code >= 65 && code <= 90) || (code >= 97 && code <= 122) || (code >= 48 && code <= 57))
+}
+
+function protectedTokenAt(value: string, index: number): string | null {
+  for (const token of PROTECTED_TRANSLATION_TOKENS) {
+    if (!value.startsWith(token, index)) continue
+    if (!isProtectedTokenBoundary(value, index - 1) || !isProtectedTokenBoundary(value, index + token.length)) continue
+    return token
+  }
+  return null
+}
+
+function protectTranslationTokens(value: string): { text: string; restore(translated: string): string } {
+  let text = ''
+  const replacements: [string, string][] = []
+
+  for (let index = 0; index < value.length; ) {
+    const token = protectedTokenAt(value, index)
+    if (!token) {
+      text += value[index]
+      index += 1
+      continue
+    }
+
+    const placeholder = `__CAPGO_KEEP_${replacements.length}__`
+    replacements.push([placeholder, token])
+    text += placeholder
+    index += token.length
+  }
+
+  return {
+    text,
+    restore(translated: string): string {
+      let restored = translated
+      for (const [placeholder, token] of replacements) {
+        restored = restored.split(placeholder).join(token)
+      }
+      return restored
+    },
+  }
+}
+
 function translationBatchJsonSchema(batchLength: number): Record<string, unknown> {
   return {
     type: 'object',
@@ -994,6 +1040,7 @@ function translationBatchJsonSchema(batchLength: number): Record<string, unknown
 async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batch: string[]): Promise<string[]> {
   const model = env.TRANSLATION_MODEL || DEFAULT_MODEL
   let lastError: Error | null = null
+  const protectedBatch = batch.map((text) => protectTranslationTokens(text))
 
   for (let attempt = 1; attempt <= TRANSLATION_MODEL_ATTEMPTS; attempt += 1) {
     let payload: unknown = ''
@@ -1014,6 +1061,7 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
               'Translate every human-readable label, heading, sentence, and paragraph into the target language, including short navigation labels.',
               'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning.',
               'Do not translate or transliterate literal tokens such as Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
+              'Source text may include placeholders like __CAPGO_KEEP_0__. Copy every placeholder exactly as written; placeholders are restored after translation.',
               `Return a JSON object with exactly one key named "translations". Its value must be an array of exactly ${batch.length} strings in the same order as the input. Do not return Markdown, comments, or explanations.`,
               attempt > 1 ? 'Your previous response was rejected. Fix the format and return only the JSON object matching the schema.' : '',
             ]
@@ -1022,7 +1070,7 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
           },
           {
             role: 'user',
-            content: JSON.stringify({ targetLanguage, texts: batch }),
+            content: JSON.stringify({ targetLanguage, protectedTokens: PROTECTED_TRANSLATION_TOKENS, texts: protectedBatch.map((item) => item.text) }),
           },
         ],
       })
@@ -1034,8 +1082,9 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
       } else if (translated.length !== batch.length) {
         lastError = new Error(`Translation model returned ${translated.length} strings for ${batch.length} ${targetLanguage} strings`)
       } else {
-        assertTranslatedBatch(targetLanguage, batch, translated)
-        return translated
+        const restored = translated.map((text, index) => protectedBatch[index].restore(text))
+        assertTranslatedBatch(targetLanguage, batch, restored)
+        return restored
       }
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(errorMessage(error))
@@ -1072,6 +1121,7 @@ async function translateBatch(env: Env, targetLanguage: string, batch: string[])
 async function translateSingleText(env: Env, targetLanguage: string, text: string): Promise<string> {
   const model = env.TRANSLATION_MODEL || DEFAULT_MODEL
   let lastError: Error | null = null
+  const protectedText = protectTranslationTokens(text)
 
   for (let attempt = 1; attempt <= TRANSLATION_SINGLE_TEXT_ATTEMPTS; attempt += 1) {
     let payload: unknown = ''
@@ -1087,19 +1137,20 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
               'Translate naturally for the user cultural context; adapt idioms, grammar, tone, and phrasing instead of translating word for word.',
               'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning.',
               'Do not translate or transliterate literal tokens such as Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, Cloudflare, package names, command names, and framework names.',
+              'Source text may include placeholders like __CAPGO_KEEP_0__. Copy every placeholder exactly as written; placeholders are restored after translation.',
               'Return only the translated text. Do not return JSON, Markdown, labels, explanations, quotes around the whole answer, or extra lines.',
             ].join(' '),
           },
           {
             role: 'user',
-            content: JSON.stringify({ targetLanguage, text }),
+            content: JSON.stringify({ targetLanguage, protectedTokens: PROTECTED_TRANSLATION_TOKENS, text: protectedText.text }),
           },
         ],
       })
 
       payload = extractAiPayload(result)
       const translated = plainTranslationFromUnknown(payload)
-      if (translated) return translated
+      if (translated) return protectedText.restore(translated)
       lastError = new Error(`Translation model returned empty text for ${targetLanguage}`)
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(errorMessage(error))
@@ -1833,24 +1884,40 @@ function jsonResponse(body: unknown, status = 200): Response {
 async function probeRuntimeStorage(env: Env, requestUrl: URL): Promise<{ cache: true; r2: true }> {
   const nonce = crypto.randomUUID()
   const cacheProbeKey = new Request(`${requestUrl.origin}${TRANSLATION_TEST_ROUTE_PREFIX}/cache/${nonce}`, { method: 'GET' })
-  await caches.default.put(
-    cacheProbeKey,
-    new Response(nonce, {
-      headers: {
-        'Cache-Control': 'public, max-age=60',
-      },
-    }),
-  )
-  const cached = await caches.default.match(cacheProbeKey)
-  const cachedText = cached ? await cached.text() : ''
-  await caches.default.delete(cacheProbeKey)
+  let cachedText = ''
+  try {
+    await caches.default.put(
+      cacheProbeKey,
+      new Response(nonce, {
+        headers: {
+          'Cache-Control': 'public, max-age=60',
+        },
+      }),
+    )
+    const cached = await caches.default.match(cacheProbeKey)
+    cachedText = cached ? await cached.text() : ''
+  } finally {
+    try {
+      await caches.default.delete(cacheProbeKey)
+    } catch {
+      // Best-effort cleanup for the test probe.
+    }
+  }
   if (cachedText !== nonce) throw new Error('Real Cache API probe failed')
 
   const r2Key = `tests/${nonce}.txt`
-  await env.TRANSLATION_STORE.put(r2Key, nonce)
-  const object = await env.TRANSLATION_STORE.get(r2Key)
-  const objectText = object ? await object.text() : ''
-  await env.TRANSLATION_STORE.delete(r2Key)
+  let objectText = ''
+  try {
+    await env.TRANSLATION_STORE.put(r2Key, nonce)
+    const object = await env.TRANSLATION_STORE.get(r2Key)
+    objectText = object ? await object.text() : ''
+  } finally {
+    try {
+      await env.TRANSLATION_STORE.delete(r2Key)
+    } catch {
+      // Best-effort cleanup for the test probe.
+    }
+  }
   if (objectText !== nonce) throw new Error('Real R2 probe failed')
 
   return { cache: true, r2: true }
