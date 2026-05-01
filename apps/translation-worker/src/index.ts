@@ -23,6 +23,7 @@ type TranslationJob = {
   cacheVersion: string
   reason: TranslationQueueReason
   sourceHash?: string
+  translatedBatches?: string[][]
 }
 
 type QueueBinding<T> = {
@@ -35,14 +36,6 @@ type QueueMessage<T> = {
 
 type MessageBatch<T> = {
   messages: QueueMessage<T>[]
-}
-
-type PartialTranslationState = {
-  cacheVersion: string
-  sourceHash: string
-  locale: Locale
-  translatedBatches: string[][]
-  updatedAt: number
 }
 
 type SourceHtmlResult = { type: 'response'; response: Response } | { type: 'html'; originResponse: Response; sourceHtml: string }
@@ -86,7 +79,6 @@ const DEFAULT_MODEL = '@cf/moonshotai/kimi-k2.6'
 const FRESH_MS = 24 * 60 * 60 * 1000
 const CACHE_KEEP_SECONDS = 7 * 24 * 60 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
-const TRANSLATION_PARTIAL_SECONDS = 60 * 60
 const TRANSLATION_CACHE_VERSION = '2026-05-01-kimi-k2.6-v1'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
 const MAX_HTML_BYTES = 1_500_000
@@ -304,14 +296,6 @@ function pendingKeyFor(requestUrl: URL, locale: Locale): Request {
   return new Request(pendingUrl.toString(), { method: 'GET' })
 }
 
-function partialKeyFor(requestUrl: URL, locale: Locale): Request {
-  const partialUrl = new URL(requestUrl)
-  partialUrl.pathname = localizedPath(partialUrl.pathname, locale)
-  partialUrl.search = ''
-  partialUrl.searchParams.set('__capgo_translation_partial', TRANSLATION_CACHE_VERSION)
-  return new Request(partialUrl.toString(), { method: 'GET' })
-}
-
 function withResponseHeaders(response: Response, cacheState: 'MISS' | 'HIT' | 'STALE' | 'BYPASS', isHead = false): Response {
   const headers = new Headers(response.headers)
   headers.set('Cache-Control', CLIENT_NO_STORE)
@@ -350,6 +334,26 @@ function toCachedResponse(response: Response): Response {
   })
 }
 
+function splitLongCoreText(value: string): string[] {
+  const chunks: string[] = []
+  let cursor = 0
+
+  while (cursor < value.length) {
+    let end = Math.min(cursor + MAX_BATCH_CHARS, value.length)
+    if (end < value.length) {
+      let splitIndex = end - 1
+      const minimumSplitIndex = cursor + Math.floor(MAX_BATCH_CHARS * 0.6)
+      while (splitIndex > minimumSplitIndex && !isWhitespace(value[splitIndex])) splitIndex -= 1
+      if (splitIndex > cursor) end = splitIndex + 1
+    }
+
+    chunks.push(value.slice(cursor, end))
+    cursor = end
+  }
+
+  return chunks
+}
+
 function addSegment(parts: HtmlPart[], segments: Segment[], text: string, mode: Segment['mode'], quote?: string): void {
   if (!hasAsciiLetter(text)) {
     parts.push(text)
@@ -365,8 +369,18 @@ function addSegment(parts: HtmlPart[], segments: Segment[], text: string, mode: 
     return
   }
 
-  const segmentIndex = segments.push({ text: core, leading, trailing, mode, quote }) - 1
-  parts.push({ segmentIndex })
+  const chunks = splitLongCoreText(core)
+  for (let index = 0; index < chunks.length; index += 1) {
+    const segmentIndex =
+      segments.push({
+        text: chunks[index],
+        leading: index === 0 ? leading : '',
+        trailing: index === chunks.length - 1 ? trailing : '',
+        mode,
+        quote,
+      }) - 1
+    parts.push({ segmentIndex })
+  }
 }
 
 function tagNameOf(tag: string): string | null {
@@ -800,51 +814,6 @@ function isStringArrayArray(value: unknown): value is string[][] {
   return Array.isArray(value) && value.every((item) => Array.isArray(item) && item.every((nestedItem) => typeof nestedItem === 'string'))
 }
 
-function partialTranslationStateFrom(value: unknown, locale: Locale, sourceHash: string): PartialTranslationState | null {
-  const record = recordOf(value)
-  if (!record) return null
-  if (record.cacheVersion !== TRANSLATION_CACHE_VERSION || record.locale !== locale || record.sourceHash !== sourceHash) return null
-  if (!isStringArrayArray(record.translatedBatches)) return null
-  return {
-    cacheVersion: TRANSLATION_CACHE_VERSION,
-    sourceHash,
-    locale,
-    translatedBatches: record.translatedBatches,
-    updatedAt: typeof record.updatedAt === 'number' ? record.updatedAt : 0,
-  }
-}
-
-async function readPartialTranslationState(requestUrl: URL, locale: Locale, sourceHash: string): Promise<PartialTranslationState | null> {
-  const response = await caches.default.match(partialKeyFor(requestUrl, locale))
-  if (!response) return null
-
-  try {
-    return partialTranslationStateFrom(await response.json(), locale, sourceHash)
-  } catch {
-    return null
-  }
-}
-
-async function writePartialTranslationState(requestUrl: URL, locale: Locale, state: PartialTranslationState): Promise<void> {
-  await caches.default.put(
-    partialKeyFor(requestUrl, locale),
-    new Response(JSON.stringify(state), {
-      headers: {
-        'Content-Type': 'application/json',
-        'Cache-Control': `public, max-age=${TRANSLATION_PARTIAL_SECONDS}`,
-      },
-    }),
-  )
-}
-
-async function deletePartialTranslationState(requestUrl: URL, locale: Locale): Promise<void> {
-  try {
-    await caches.default.delete(partialKeyFor(requestUrl, locale))
-  } catch (error) {
-    console.error('Failed to clear partial translated page state', { pathname: requestUrl.pathname, locale, error: errorMessage(error) })
-  }
-}
-
 function nextMissingBatchIndex(translatedBatches: string[][], batchCount: number): number {
   for (let index = 0; index < batchCount; index += 1) {
     if (!Array.isArray(translatedBatches[index])) return index
@@ -1157,45 +1126,44 @@ function createTranslatedHtmlResponse(originResponse: Response, translatedHtml: 
   })
 }
 
-async function refreshCacheIncrementally(request: Request, env: Env, requestUrl: URL, locale: Locale, cacheKey: Request, expectedSourceHash?: string): Promise<boolean> {
+async function refreshCacheIncrementally(
+  request: Request,
+  env: Env,
+  requestUrl: URL,
+  locale: Locale,
+  cacheKey: Request,
+  expectedSourceHash?: string,
+  existingTranslatedBatches?: string[][],
+): Promise<boolean> {
   const renderRequest = request.method === 'GET' ? request : new Request(request, { method: 'GET' })
   const source = await loadSourceHtml(renderRequest, env, requestUrl, locale)
-  if (source.type === 'response') return true
+  if (source.type === 'response') {
+    if (isRedirect(source.response)) {
+      await caches.default.put(cacheKey, toCachedResponse(source.response.clone()))
+    }
+    return true
+  }
 
   const { parts, segments } = collectSegments(source.sourceHtml)
   if (segments.length === 0) {
     const response = createTranslatedHtmlResponse(source.originResponse, source.sourceHtml, requestUrl, locale)
     const cachedResponse = toCachedResponse(response.clone())
     await caches.default.put(cacheKey, cachedResponse)
-    await deletePartialTranslationState(requestUrl, locale)
     return true
   }
 
   const batches = buildBatches(segments)
   const sourceHash = await sha256Hex(`${TRANSLATION_CACHE_VERSION}:${locale}:${source.sourceHtml}`)
-  if (expectedSourceHash && expectedSourceHash !== sourceHash) {
-    await deletePartialTranslationState(requestUrl, locale)
-  }
-
-  let state = await readPartialTranslationState(requestUrl, locale, sourceHash)
-  state ??= {
-    cacheVersion: TRANSLATION_CACHE_VERSION,
-    sourceHash,
-    locale,
-    translatedBatches: [],
-    updatedAt: Date.now(),
-  }
+  const translatedBatches = expectedSourceHash === sourceHash && existingTranslatedBatches ? existingTranslatedBatches : []
 
   let translatedInThisJob = 0
-  let batchIndex = nextMissingBatchIndex(state.translatedBatches, batches.length)
+  let batchIndex = nextMissingBatchIndex(translatedBatches, batches.length)
 
   while (batchIndex < batches.length && translatedInThisJob < TRANSLATION_BATCHES_PER_QUEUE_JOB) {
     const translatedBatch = await translateBatch(env, LANGUAGE_NAMES[locale], batches[batchIndex])
-    state.translatedBatches[batchIndex] = translatedBatch
-    state.updatedAt = Date.now()
-    await writePartialTranslationState(requestUrl, locale, state)
+    translatedBatches[batchIndex] = translatedBatch
     translatedInThisJob += 1
-    batchIndex = nextMissingBatchIndex(state.translatedBatches, batches.length)
+    batchIndex = nextMissingBatchIndex(translatedBatches, batches.length)
   }
 
   if (batchIndex < batches.length) {
@@ -1205,12 +1173,13 @@ async function refreshCacheIncrementally(request: Request, env: Env, requestUrl:
       cacheVersion: TRANSLATION_CACHE_VERSION,
       reason: 'continue',
       sourceHash,
+      translatedBatches,
     })
     console.log('Translation queue job continued', { pathname: requestUrl.pathname, locale, batchIndex, batchCount: batches.length })
     return false
   }
 
-  const translations = flattenTranslatedBatches(state.translatedBatches, batches.length)
+  const translations = flattenTranslatedBatches(translatedBatches, batches.length)
   if (translations.length !== segments.length) {
     throw new Error(`Partial translation produced ${translations.length} strings for ${segments.length} HTML segments`)
   }
@@ -1221,7 +1190,6 @@ async function refreshCacheIncrementally(request: Request, env: Env, requestUrl:
     const cachedResponse = toCachedResponse(response.clone())
     await caches.default.put(cacheKey, cachedResponse)
   }
-  await deletePartialTranslationState(requestUrl, locale)
   return true
 }
 
@@ -1299,7 +1267,15 @@ async function processTranslationJob(job: TranslationJob, env: Env): Promise<voi
         'Accept-Language': job.locale,
       },
     })
-    completed = await refreshCacheIncrementally(renderRequest, env, requestUrl, job.locale, cacheKey, job.sourceHash)
+    completed = await refreshCacheIncrementally(
+      renderRequest,
+      env,
+      requestUrl,
+      job.locale,
+      cacheKey,
+      job.sourceHash,
+      isStringArrayArray(job.translatedBatches) ? job.translatedBatches : undefined,
+    )
   } finally {
     if (completed) {
       try {
