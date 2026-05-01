@@ -695,7 +695,7 @@ async function translateBatch(env: Env, targetLanguage: string, batch: string[])
       {
         role: 'system',
         content:
-          'You translate website copy. Translate every human-readable label, heading, sentence, and paragraph into the target language, including short navigation labels. Return only a JSON array of strings with the same length and order as the input. Preserve only brand names, product names, URLs, code identifiers, file paths, language codes, numbers, punctuation, and whitespace meaning. Do not leave English copy unchanged unless it is one of those preserved terms. Do not add explanations.',
+          'You translate website copy for real users. Translate every human-readable label, heading, sentence, and paragraph into natural, culturally appropriate target-language copy, including short navigation labels. Do not translate word for word when a local idiom or phrasing would read better. Return only a JSON array of strings with the same length and order as the input. Preserve brand names and product names such as Capgo, Cap-go, Capacitor, Ionic, Apple, Google, Cloudflare, and npm. Also preserve URLs, package names, API names, code identifiers, CLI commands, file paths, language codes, numbers, punctuation, and whitespace meaning. Do not leave English copy unchanged unless it is one of those preserved terms. Do not add explanations.',
       },
       {
         role: 'user',
