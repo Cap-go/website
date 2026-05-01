@@ -1,0 +1,200 @@
+---
+title: Revenue Playbook
+description: Learn how to turn a Capacitor app into revenue with a focused MVP, store discovery, paywall placement, pricing, analytics, and @capgo/native-purchases.
+sidebar:
+  order: 3
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+![Revenue playbook for in-app purchases](/native-purchases/revenue-playbook.png)
+
+The purchase SDK is only one part of making money from an app. Revenue comes from a clear problem, a small product that users can try, reliable store billing, and a paywall that teaches you what people are willing to buy.
+
+Use this playbook when you are adding subscriptions or premium unlocks with `@capgo/native-purchases`.
+
+## Start with a simple revenue target
+
+Make the first target concrete. For example:
+
+| Monthly price | Active subscribers needed for about $1K MRR |
+| --- | --- |
+| $4.99 | 201 |
+| $7.99 | 126 |
+| $9.99 | 101 |
+| $29.99 yearly | About 400 annual subscribers, depending on timing |
+
+These numbers are before store fees, taxes, refunds, and currency differences. They are still useful because they keep the launch plan practical: you need a few hundred motivated users, not a huge audience.
+
+## Build the smallest paid product
+
+<Steps>
+1. **Pick one painful use case**
+
+   Build around one outcome users already search for. Examples: a workout plan for new parents, a budget tracker for couples, a receipt scanner for freelancers, or a language drill app for one exam.
+
+2. **Check demand in the stores**
+
+   Search App Store and Google Play for the core keyword. Read low and mid-score reviews of competing apps to find missing features, confusing onboarding, pricing complaints, and UI friction.
+
+3. **Ship a narrow MVP**
+
+   The first version should include onboarding, one useful core action, basic error handling, and enough analytics to see whether users reach the value moment.
+
+4. **Add purchases early**
+
+   Do not wait until the app feels complete. A basic paywall helps you learn whether users understand the value and whether your pricing is plausible.
+</Steps>
+
+## Instrument the funnel before optimizing
+
+Track these events before you start changing prices or screens:
+
+| Event | Why it matters |
+| --- | --- |
+| `install` or first open | Baseline traffic |
+| `onboarding_completed` | Whether users understand the setup |
+| `core_action_completed` | Whether the product delivers value |
+| `paywall_viewed` | Whether users reach monetization |
+| `trial_started` | Whether the offer is compelling |
+| `purchase_completed` | Paid conversion |
+| `restore_started` and `restore_completed` | Purchase recovery and review compliance |
+| `subscription_status_checked` | Entitlement reliability |
+| `cancel_feedback_submitted` | Churn reason |
+
+If many users do not see the paywall, fix onboarding before changing the paywall. If users see the paywall but do not start a trial, improve the offer, proof, or price presentation.
+
+## Choose one monetization model
+
+Start with one model so the data is readable.
+
+| Model | Good fit | First version |
+| --- | --- | --- |
+| Freemium | Daily utilities, trackers, tools with repeat use | Free core action, paid limits or premium features |
+| Paywall plus free trial | Apps that deliver quick value after onboarding | Paywall after onboarding with 3- to 14-day trial |
+| One-time unlock | Small tools with limited recurring value | Lifetime product plus optional future subscription later |
+
+Avoid shipping three tiers, many bundles, and complex upgrade paths on day one. Use one monthly plan and one annual plan when you need subscriptions. Add localized pricing after you see meaningful traffic from a country.
+
+## Configure products for revenue learning
+
+Keep product identifiers stable and readable:
+
+```text
+com.example.app.premium.monthly
+com.example.app.premium.yearly
+com.example.app.premium.lifetime
+```
+
+Use store product names that reinforce the value users are searching for, such as "Meal Planner Pro Monthly" instead of only "Monthly". Store metadata and in-app purchase names can help discovery and clarity.
+
+Load product data from the stores so pricing, currency, and introductory offers are always accurate:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: [
+    'com.example.app.premium.monthly',
+    'com.example.app.premium.yearly',
+  ],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const monthly = products.find((product) => product.identifier.endsWith('.monthly'));
+const yearly = products.find((product) => product.identifier.endsWith('.yearly'));
+```
+
+Never hardcode store pricing in the UI. Render `product.priceString`, localized product title, billing period, and trial terms from store data whenever possible.
+
+## Build a first paywall
+
+A first paywall should be clear, not clever:
+
+- Headline: the paid outcome, such as "Unlock unlimited workout plans".
+- Benefits: 3 to 5 concrete improvements, not a long feature list.
+- Plans: monthly and annual, with real annual savings if offered.
+- Trial: exact trial length and what happens after it ends.
+- CTA: "Start free trial" or "Upgrade now".
+- Links: terms, privacy policy, restore purchases, and manage subscriptions.
+
+Place the first paywall after onboarding, once the user understands what the app does. Later, test additional triggers such as usage limits, premium feature taps, or completed core actions.
+
+## Purchase and restore flow
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+export async function buyYearly(appAccountToken: string) {
+  const transaction = await NativePurchases.purchaseProduct({
+    productIdentifier: 'com.example.app.premium.yearly',
+    planIdentifier: 'yearly-plan',
+    productType: PURCHASE_TYPE.SUBS,
+    appAccountToken,
+  });
+
+  await fetch('/api/purchases/validate', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({
+      transactionId: transaction.transactionId,
+      receipt: transaction.receipt,
+      purchaseToken: transaction.purchaseToken,
+      productIdentifier: transaction.productIdentifier,
+    }),
+  });
+
+  return transaction;
+}
+
+export async function restorePurchases() {
+  await NativePurchases.restorePurchases();
+
+  return NativePurchases.getPurchases({
+    productType: PURCHASE_TYPE.SUBS,
+  });
+}
+```
+
+Always validate purchases on your backend before granting durable entitlements. Keep a local entitlement cache for fast UI, but treat the store and your backend as the source of truth.
+
+## Bring in the first users
+
+Revenue needs traffic. Start with channels that can work before you have a brand:
+
+- ASO: title, subtitle, keywords, screenshots, app description, icon, ratings, and in-app purchase names.
+- Short-form video: post quick demos, problem/solution clips, and before/after examples for the target country.
+- Reddit and communities: join the conversation first, then share what you built as a useful story instead of an ad.
+- Beta groups: TestFlight, Google Play internal testing, Discord, and niche forums.
+
+Each channel should send users into the same measured funnel so you can compare retention, paywall views, trials, and purchases.
+
+## Read churn correctly
+
+Some churn means users tried the app and decided it was not for them. That is normal. What matters is the pattern:
+
+- Cancels during trial: unclear value, poor onboarding, or wrong traffic.
+- Cancels after one cycle: not enough repeat value or weak habit loop.
+- Refunds: pricing mismatch, accidental purchase risk, or unclear terms.
+- No restores: broken entitlement handling or missing restore UI.
+
+Add a one-question cancellation survey when possible. Use the answers to improve onboarding, feature scope, store screenshots, and paywall copy.
+
+## Launch checklist
+
+- Product solves one clear paid problem.
+- Store products are active and tested on iOS and Android.
+- Paywall displays store-loaded prices and terms.
+- Purchase, restore, manage subscription, and backend validation are implemented.
+- Funnel events are tracked from first open to purchase.
+- App store metadata explains the value in the first screenshots.
+- At least one acquisition channel is active before launch.
+- Churn feedback is collected from the first subscribers.
+
+## Related guides
+
+- [Getting started](/docs/plugins/native-purchases/getting-started/)
+- [Create iOS subscriptions](/docs/plugins/native-purchases/ios-create-subscription/)
+- [Create Android subscriptions](/docs/plugins/native-purchases/android-create-subscription/)
+- [iOS sandbox testing](/docs/plugins/native-purchases/ios-sandbox-testing/)
+- [Android sandbox testing](/docs/plugins/native-purchases/android-sandbox-testing/)
