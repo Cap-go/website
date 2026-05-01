@@ -670,7 +670,10 @@ const locale = Astro.locals.locale
         if (!dropdown.wrapper?.contains(document.activeElement)) setDesktopDropdownOpen(dropdown, false)
       })
     })
-    dropdown.toggle.addEventListener('click', () => setDesktopDropdownOpen(dropdown, true))
+    dropdown.toggle.addEventListener('click', () => {
+      const isOpen = dropdown.toggle?.getAttribute('aria-expanded') === 'true'
+      setDesktopDropdownOpen(dropdown, !isOpen)
+    })
     dropdown.toggle.addEventListener('keydown', (event) => {
       if (event.key !== 'Enter' && event.key !== ' ') return
 
