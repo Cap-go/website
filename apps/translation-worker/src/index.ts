@@ -699,18 +699,18 @@ function findNextHtmlTag(html: string, startIndex: number): { index: number; end
   return { index, end, tag: html.slice(index, end) }
 }
 
-function findClosingTag(html: string, startIndex: number, tagName: string): { index: number; end: number; tag: string } | null {
+function findNamedTag(html: string, startIndex: number, needle: string): { index: number; end: number; tag: string } | null {
   const lowerHtml = html.toLowerCase()
-  const needle = `</${tagName.toLowerCase()}`
+  const lowerNeedle = needle.toLowerCase()
   let searchIndex = startIndex
 
   while (searchIndex < html.length) {
-    const index = lowerHtml.indexOf(needle, searchIndex)
+    const index = lowerHtml.indexOf(lowerNeedle, searchIndex)
     if (index === -1) return null
 
-    const boundary = html[index + needle.length] ?? ''
+    const boundary = html[index + lowerNeedle.length] ?? ''
     if (!isTagNameBoundary(boundary)) {
-      searchIndex = index + needle.length
+      searchIndex = index + lowerNeedle.length
       continue
     }
 
@@ -722,6 +722,10 @@ function findClosingTag(html: string, startIndex: number, tagName: string): { in
   }
 
   return null
+}
+
+function findClosingTag(html: string, startIndex: number, tagName: string): { index: number; end: number; tag: string } | null {
+  return findNamedTag(html, startIndex, `</${tagName}`)
 }
 
 function collectSegments(html: string): { parts: HtmlPart[]; segments: Segment[] } {
@@ -1506,27 +1510,7 @@ function localizeUrlAttributes(html: string, locale: Locale, basePath: string, r
 }
 
 function findOpeningTag(html: string, tagName: string): { index: number; end: number; tag: string } | null {
-  const lowerHtml = html.toLowerCase()
-  const needle = `<${tagName.toLowerCase()}`
-  let searchIndex = 0
-
-  while (searchIndex < html.length) {
-    const index = lowerHtml.indexOf(needle, searchIndex)
-    if (index === -1) return null
-
-    const boundary = html[index + needle.length] ?? ''
-    if (!isTagNameBoundary(boundary)) {
-      searchIndex = index + needle.length
-      continue
-    }
-
-    const tagEnd = findTagEnd(html, index)
-    if (tagEnd === null) return null
-    const end = tagEnd + 1
-    return { index, end, tag: html.slice(index, end) }
-  }
-
-  return null
+  return findNamedTag(html, 0, `<${tagName}`)
 }
 
 function updateHtmlLang(html: string, locale: Locale): string {
