@@ -403,6 +403,28 @@ function appendTag(parts: HtmlPart[], segments: Segment[], tag: string, skipText
   parts.push(tag.slice(lastIndex))
 }
 
+function findTagEnd(html: string, tagStartIndex: number): number | null {
+  let quote: '"' | "'" | null = null
+
+  for (let index = tagStartIndex + 1; index < html.length; index += 1) {
+    const char = html[index]
+
+    if (quote) {
+      if (char === quote) quote = null
+      continue
+    }
+
+    if (char === '"' || char === "'") {
+      quote = char
+      continue
+    }
+
+    if (char === '>') return index
+  }
+
+  return null
+}
+
 function findNextHtmlTag(html: string, startIndex: number): { index: number; end: number; tag: string } | null {
   const index = html.indexOf('<', startIndex)
   if (index === -1) return null
@@ -419,8 +441,8 @@ function findNextHtmlTag(html: string, startIndex: number): { index: number; end
     return { index, end, tag: html.slice(index, end) }
   }
 
-  const tagEnd = html.indexOf('>', index + 1)
-  if (tagEnd === -1) return null
+  const tagEnd = findTagEnd(html, index)
+  if (tagEnd === null) return null
   const end = tagEnd + 1
   return { index, end, tag: html.slice(index, end) }
 }
@@ -660,8 +682,8 @@ function findOpeningTag(html: string, tagName: string): { index: number; end: nu
       continue
     }
 
-    const tagEnd = html.indexOf('>', index + needle.length)
-    if (tagEnd === -1) return null
+    const tagEnd = findTagEnd(html, index)
+    if (tagEnd === null) return null
     const end = tagEnd + 1
     return { index, end, tag: html.slice(index, end) }
   }
@@ -872,7 +894,8 @@ async function buildTranslatedResponse(request: Request, env: Env, requestUrl: U
 }
 
 async function refreshCache(request: Request, env: Env, requestUrl: URL, locale: Locale, cacheKey: Request): Promise<Response> {
-  const response = await buildTranslatedResponse(request, env, requestUrl, locale)
+  const renderRequest = request.method === 'GET' ? request : new Request(request, { method: 'GET' })
+  const response = await buildTranslatedResponse(renderRequest, env, requestUrl, locale)
   if (response.ok && isHtmlResponse(response)) {
     const cachedResponse = toCachedResponse(response.clone())
     await caches.default.put(cacheKey, cachedResponse)
