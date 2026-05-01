@@ -155,6 +155,16 @@ type RouteDefinition = {
   handle: (request: Request, env: Env) => Promise<Response>
 }
 
+type LinkDefinition = {
+  href: string
+  rel: string
+  type?: string
+}
+
+const HOMEPAGE_LINK_HEADERS: LinkDefinition[] = [
+  { href: '/docs/public-api/', rel: 'service-doc', type: 'text/html' },
+]
+
 const routeDefinitions: Record<string, RouteDefinition> = {
   '/sponsors.json': {
     methods: ['GET'],
@@ -173,6 +183,27 @@ async function handleRouteRequest(request: Request, env: Env, pathname: string):
   return await route.handle(request, env)
 }
 
+function withLinkHeaders(response: Response, links: LinkDefinition[]): Response {
+  if (!links.length) return response
+
+  const headers = new Headers(response.headers)
+  for (const link of links) {
+    const valueParts = [`<${link.href}>`, `rel="${link.rel}"`]
+    if (link.type) valueParts.push(`type="${link.type}"`)
+    const value = valueParts.join('; ')
+    const existingLinkHeader = headers.get('Link')
+    if (!existingLinkHeader || !existingLinkHeader.includes(value)) {
+      headers.append('Link', value)
+    }
+  }
+
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  })
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const pathname = new URL(request.url).pathname
@@ -188,6 +219,10 @@ export default {
     if (toolRouteResponse) return toolRouteResponse
     const routeResponse = await handleRouteRequest(request, env, pathname)
     if (routeResponse) return routeResponse
-    return await env.ASSETS.fetch(request)
+    const assetResponse = await env.ASSETS.fetch(request)
+    if (pathname === '/' || pathname === '/index.html') {
+      return withLinkHeaders(assetResponse, HOMEPAGE_LINK_HEADERS)
+    }
+    return assetResponse
   },
 }
