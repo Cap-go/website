@@ -224,7 +224,7 @@ For a simple, well-built web app:
 | Test login, routing, and API behavior | 1-2 days |
 | Add store billing, if needed | 2-7+ days |
 | Prepare App Store and Play Store listings | 1-3 days |
-| Google closed testing for affected accounts | 14+ days under the May 1, 2026 requirement |
+| Google closed testing for affected accounts | 14+ days under the May 1, 2026, requirement |
 
 So the right expectation is:
 
