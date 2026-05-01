@@ -22,7 +22,7 @@
     "build:after": "bun run repair_sitemap && bun run seo:check",
     "ci:verify:web": "cd apps/web && bun run check && cd ../.. && bun run clean:build-cache && bun run build:web && bun run build:after",
     "ci:verify:docs": "bun run check:docs-mirror && cd apps/docs && bun run check && cd ../.. && bun run build:docs",
-    "ci:verify:translation": "cd apps/translation-worker && bun run check",
+    "ci:verify:translation": "cd apps/translation-worker && bun run check && bun run test",
     "check:docs-mirror": "bun run scripts/check-plugin-doc-mirrors.ts",
     "check": "bun run check:docs-mirror && cd apps/web && bun run check && cd ../docs && bun run check && cd ../translation-worker && bun run check",
     "seo:check": "seo-checker --output github",
