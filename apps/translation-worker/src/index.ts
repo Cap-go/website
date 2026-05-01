@@ -77,6 +77,7 @@ type Segment = {
   leading: string
   trailing: string
   mode: 'text' | 'attribute'
+  inBody: boolean
   quote?: string
 }
 
@@ -115,11 +116,11 @@ const DEFAULT_MODEL = '@cf/meta/llama-3.1-8b-instruct-fast'
 const FRESH_MS = 24 * 60 * 60 * 1000
 const CACHE_KEEP_SECONDS = 7 * 24 * 60 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
-const TRANSLATION_CACHE_VERSION = '2026-05-01-llama-3.1-8b-json-v1'
+const TRANSLATION_CACHE_VERSION = '2026-05-02-llama-3.1-8b-json-body-v2'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
 const MAX_HTML_BYTES = 1_500_000
 const MAX_BATCH_CHARS = 1_500
-const MAX_BATCH_ITEMS = 32
+const MAX_BATCH_ITEMS = 12
 const TRANSLATION_BATCHES_PER_QUEUE_JOB = 1
 const TRANSLATION_MODEL_ATTEMPTS = 3
 const TRANSLATION_SINGLE_TEXT_ATTEMPTS = 2
@@ -484,7 +485,7 @@ function splitLongCoreText(value: string): string[] {
   return chunks
 }
 
-function addSegment(parts: HtmlPart[], segments: Segment[], text: string, mode: Segment['mode'], quote?: string): void {
+function addSegment(parts: HtmlPart[], segments: Segment[], text: string, mode: Segment['mode'], inBody: boolean, quote?: string): void {
   if (!hasAsciiLetter(text)) {
     parts.push(text)
     return
@@ -507,6 +508,7 @@ function addSegment(parts: HtmlPart[], segments: Segment[], text: string, mode: 
         leading: index === 0 ? leading : '',
         trailing: index === chunks.length - 1 ? trailing : '',
         mode,
+        inBody,
         quote,
       }) - 1
     parts.push({ segmentIndex })
@@ -625,7 +627,7 @@ function shouldTranslateAttribute(tag: string, tagName: string, attrName: string
   return TRANSLATABLE_ATTRIBUTES.has(normalizedAttr)
 }
 
-function appendTag(parts: HtmlPart[], segments: Segment[], tag: string, skipText: boolean): void {
+function appendTag(parts: HtmlPart[], segments: Segment[], tag: string, skipText: boolean, inBody: boolean): void {
   const tagName = tagNameOf(tag)
   if (!tagName || skipText || isClosingTag(tag)) {
     parts.push(tag)
@@ -639,7 +641,7 @@ function appendTag(parts: HtmlPart[], segments: Segment[], tag: string, skipText
     if (!shouldTranslateAttribute(tag, tagName, attribute.name, attribute.value)) continue
 
     parts.push(tag.slice(lastIndex, attribute.start), tag.slice(attribute.start, attribute.valueStart))
-    addSegment(parts, segments, attribute.value, 'attribute', attribute.quote)
+    addSegment(parts, segments, attribute.value, 'attribute', inBody, attribute.quote)
     parts.push(attribute.quote)
     lastIndex = attribute.end
     matched = true
@@ -697,13 +699,54 @@ function findNextHtmlTag(html: string, startIndex: number): { index: number; end
   return { index, end, tag: html.slice(index, end) }
 }
 
+function findClosingTag(html: string, startIndex: number, tagName: string): { index: number; end: number; tag: string } | null {
+  const lowerHtml = html.toLowerCase()
+  const needle = `</${tagName.toLowerCase()}`
+  let searchIndex = startIndex
+
+  while (searchIndex < html.length) {
+    const index = lowerHtml.indexOf(needle, searchIndex)
+    if (index === -1) return null
+
+    const boundary = html[index + needle.length] ?? ''
+    if (!isTagNameBoundary(boundary)) {
+      searchIndex = index + needle.length
+      continue
+    }
+
+    const tagEnd = findTagEnd(html, index)
+    if (tagEnd === null) return null
+
+    const end = tagEnd + 1
+    return { index, end, tag: html.slice(index, end) }
+  }
+
+  return null
+}
+
 function collectSegments(html: string): { parts: HtmlPart[]; segments: Segment[] } {
   const parts: HtmlPart[] = []
   const segments: Segment[] = []
   const skipStack: string[] = []
+  let insideBody = false
   let lastIndex = 0
 
   while (lastIndex < html.length) {
+    const skippedTagName = skipStack[skipStack.length - 1]
+    if (skippedTagName) {
+      const closingTag = findClosingTag(html, lastIndex, skippedTagName)
+      if (!closingTag) {
+        parts.push(html.slice(lastIndex))
+        lastIndex = html.length
+        break
+      }
+
+      parts.push(html.slice(lastIndex, closingTag.index), closingTag.tag)
+      skipStack.pop()
+      lastIndex = closingTag.end
+      continue
+    }
+
     const nextTag = findNextHtmlTag(html, lastIndex)
     if (!nextTag) break
 
@@ -711,22 +754,23 @@ function collectSegments(html: string): { parts: HtmlPart[]; segments: Segment[]
     const text = html.slice(lastIndex, nextTag.index)
 
     if (text) {
-      if (skipStack.length > 0) parts.push(text)
-      else addSegment(parts, segments, text, 'text')
+      addSegment(parts, segments, text, 'text', insideBody)
     }
 
     const tagName = tagNameOf(tag)
-    const insideSkippedElement = skipStack.length > 0
 
-    appendTag(parts, segments, tag, insideSkippedElement)
+    appendTag(parts, segments, tag, false, insideBody)
 
-    if (tagName && !isClosingTag(tag) && !isSelfClosingTag(tag, tagName) && (insideSkippedElement || shouldSkipElementText(tag, tagName))) {
+    if (tagName === 'body' && isClosingTag(tag)) {
+      insideBody = false
+    }
+
+    if (tagName && !isClosingTag(tag) && !isSelfClosingTag(tag, tagName) && shouldSkipElementText(tag, tagName)) {
       skipStack.push(tagName)
     }
 
-    if (tagName && isClosingTag(tag) && insideSkippedElement) {
-      const stackIndex = skipStack.lastIndexOf(tagName)
-      if (stackIndex !== -1) skipStack.splice(stackIndex)
+    if (tagName === 'body' && !isClosingTag(tag) && !isSelfClosingTag(tag, tagName)) {
+      insideBody = true
     }
 
     lastIndex = nextTag.end
@@ -735,7 +779,7 @@ function collectSegments(html: string): { parts: HtmlPart[]; segments: Segment[]
   const tail = html.slice(lastIndex)
   if (tail) {
     if (skipStack.length > 0) parts.push(tail)
-    else addSegment(parts, segments, tail, 'text')
+    else addSegment(parts, segments, tail, 'text', insideBody)
   }
 
   return { parts, segments }
@@ -974,6 +1018,28 @@ function assertTranslatedBatch(targetLanguage: string, batch: string[], translat
   }
 }
 
+function bodyTranslationStats(segments: Segment[], translations: string[]): { candidateCount: number; changedCount: number } {
+  const candidates = segments
+    .map((segment, index) => ({
+      source: normalizedTranslationValue(segment.text),
+      translated: normalizedTranslationValue(translations[index] ?? ''),
+      inBody: segment.inBody,
+    }))
+    .filter(({ source, inBody }) => inBody && shouldCheckUnchangedTranslation(source))
+
+  return {
+    candidateCount: candidates.length,
+    changedCount: candidates.filter(({ source, translated }) => source !== translated).length,
+  }
+}
+
+function assertTranslatedBody(targetLanguage: string, segments: Segment[], translations: string[]): void {
+  const { candidateCount, changedCount } = bodyTranslationStats(segments, translations)
+  if (candidateCount > 0 && changedCount === 0) {
+    throw new Error(`Translation produced no changed body strings for ${targetLanguage}`)
+  }
+}
+
 function isProtectedTokenBoundary(value: string, index: number): boolean {
   if (index < 0 || index >= value.length) return true
   const code = value.charCodeAt(index)
@@ -981,10 +1047,12 @@ function isProtectedTokenBoundary(value: string, index: number): boolean {
 }
 
 function protectedTokenAt(value: string, index: number): string | null {
+  const lowerValue = value.toLowerCase()
   for (const token of PROTECTED_TRANSLATION_TOKENS) {
-    if (!value.startsWith(token, index)) continue
-    if (!isProtectedTokenBoundary(value, index - 1) || !isProtectedTokenBoundary(value, index + token.length)) continue
-    return token
+    if (!lowerValue.startsWith(token.toLowerCase(), index)) continue
+    const matched = value.slice(index, index + token.length)
+    if (!isProtectedTokenBoundary(value, index - 1) || !isProtectedTokenBoundary(value, index + matched.length)) continue
+    return matched
   }
   return null
 }
@@ -1742,6 +1810,7 @@ async function refreshCacheIncrementally(request: Request, env: Env, requestUrl:
   if (translations.length !== segments.length) {
     throw new Error(`Partial translation produced ${translations.length} strings for ${segments.length} HTML segments`)
   }
+  assertTranslatedBody(LANGUAGE_NAMES[locale], segments, translations)
 
   const translatedHtml = renderTranslatedHtml(parts, segments, translations)
   const response = createTranslatedHtmlResponse(source.originResponse, translatedHtml, requestUrl, locale)
@@ -1946,11 +2015,30 @@ function testProbePathParam(requestUrl: URL): string {
   return `${pathname}${pathUrl.search}`
 }
 
+function testProbeCheckParams(requestUrl: URL): string[] {
+  return requestUrl.searchParams
+    .getAll('check')
+    .map((value) => value.trim())
+    .filter(Boolean)
+}
+
+function findBatchText(batches: string[][], expectedText: string): { batchIndex: number; textIndex: number; source: string } | null {
+  for (let batchIndex = 0; batchIndex < batches.length; batchIndex += 1) {
+    const batch = batches[batchIndex]
+    for (let textIndex = 0; textIndex < batch.length; textIndex += 1) {
+      const source = batch[textIndex]
+      if (source.includes(expectedText)) return { batchIndex, textIndex, source }
+    }
+  }
+  return null
+}
+
 async function probeRealPageTranslation(env: Env, requestUrl: URL): Promise<Record<string, unknown>> {
   const locale = testProbeLocaleParam(requestUrl)
   const targetLanguage = LANGUAGE_NAMES[locale]
   const path = testProbePathParam(requestUrl)
   const maxBatches = testProbeNumberParam(requestUrl, 'batches', 2, 1, 4)
+  const requiredChecks = testProbeCheckParams(requestUrl)
   const sourceUrl = new URL(path, 'https://capgo.app')
   const sourceResponse = await fetch(sourceUrl.toString(), {
     headers: {
@@ -1969,16 +2057,36 @@ async function probeRealPageTranslation(env: Env, requestUrl: URL): Promise<Reco
   const batches = buildBatches(segments)
   if (batches.length === 0) throw new Error(`Real page probe found no translatable segments for ${path}`)
 
-  const translatedBatches: string[][] = []
+  const selectedBatchIndexes = new Set<number>()
   const batchLimit = Math.min(maxBatches, batches.length)
   for (let batchIndex = 0; batchIndex < batchLimit; batchIndex += 1) {
-    translatedBatches.push(await translateBatchWithJsonMode(env, targetLanguage, batches[batchIndex]))
+    selectedBatchIndexes.add(batchIndex)
   }
 
-  const sourceTexts = batches.slice(0, batchLimit).flat()
-  const translatedTexts = translatedBatches.flat()
+  const checkSources = requiredChecks.map((check) => {
+    const found = findBatchText(batches, check)
+    if (!found) throw new Error(`Real page probe did not collect required body text for ${path}: ${check}`)
+    selectedBatchIndexes.add(found.batchIndex)
+    return { check, ...found }
+  })
+
+  const translatedBatchMap = new Map<number, string[]>()
+  for (const batchIndex of [...selectedBatchIndexes].sort((left, right) => left - right)) {
+    translatedBatchMap.set(batchIndex, await translateBatchWithJsonMode(env, targetLanguage, batches[batchIndex]))
+  }
+
+  const sourceTexts = [...translatedBatchMap.keys()].flatMap((batchIndex) => batches[batchIndex])
+  const translatedTexts = [...translatedBatchMap.values()].flat()
   const changedCount = translatedTexts.filter((translated, index) => normalizedTranslationValue(translated) !== normalizedTranslationValue(sourceTexts[index] ?? '')).length
   if (changedCount === 0) throw new Error(`Real page probe left ${path} untranslated for ${targetLanguage}`)
+
+  const bodyChecks = checkSources.map(({ check, batchIndex, textIndex, source }) => {
+    const translated = translatedBatchMap.get(batchIndex)?.[textIndex] ?? ''
+    if (normalizedTranslationValue(translated) === normalizedTranslationValue(source)) {
+      throw new Error(`Real page probe left required body text untranslated for ${path}: ${check}`)
+    }
+    return { check, batchIndex, source, translated }
+  })
 
   return {
     path,
@@ -1986,10 +2094,12 @@ async function probeRealPageTranslation(env: Env, requestUrl: URL): Promise<Reco
     targetLanguage,
     sourceBytes: new TextEncoder().encode(sourceHtml).length,
     segmentCount: segments.length,
+    bodySegmentCount: segments.filter((segment) => segment.inBody).length,
     batchCount: batches.length,
-    translatedBatchCount: translatedBatches.length,
+    translatedBatchCount: translatedBatchMap.size,
     translatedSegmentCount: translatedTexts.length,
     changedCount,
+    bodyChecks,
     samples: translatedTexts.slice(0, 5),
   }
 }
@@ -2031,6 +2141,10 @@ async function handleTranslationTestRequest(request: Request, env: Env, requestU
 
 export const __translationWorkerTest = {
   TRANSLATION_CACHE_VERSION,
+  bodyTranslationStats,
+  buildBatches,
+  collectSegments,
+  renderTranslatedHtml,
 }
 
 export default {

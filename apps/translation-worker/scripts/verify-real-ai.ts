@@ -13,10 +13,12 @@ type ProbePayload = {
     path?: string
     locale?: string
     segmentCount?: number
+    bodySegmentCount?: number
     batchCount?: number
     translatedBatchCount?: number
     translatedSegmentCount?: number
     changedCount?: number
+    bodyChecks?: unknown
     samples?: unknown
   }
   translations?: unknown
@@ -31,7 +33,10 @@ const LOG_LIMIT = 16_000
 const WRANGLER_CONFIG = 'wrangler.real-test.jsonc'
 const DEVELOPMENT_R2_BUCKET = 'capgo-translation-cache-development'
 const SOURCE_TEXTS = ['Ship updates instantly', 'Pricing', 'Keep Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, and Cloudflare unchanged.']
-const REAL_PAGE_PROBES = ['/', '/docs/'] as const
+const REAL_PAGE_PROBES = [
+  { path: '/', checks: ['Skip to main content', 'Products', 'By Team'] },
+  { path: '/docs/', checks: ['Skip to content', 'Select theme', 'Deploy a Live Update'] },
+] as const
 
 let wranglerLog = ''
 
@@ -181,10 +186,12 @@ async function fetchRealPageProbe(url: string, path: string): Promise<ProbePaylo
   if (page.path !== path) throw new Error(`Real page probe returned ${page.path || 'unknown path'} instead of ${path}`)
   if (page.locale !== 'es') throw new Error(`Real page probe returned ${page.locale || 'unknown locale'} instead of es`)
   if (!page.segmentCount || page.segmentCount < 1) throw new Error(`Real page probe found no segments for ${path}`)
+  if (!page.bodySegmentCount || page.bodySegmentCount < 1) throw new Error(`Real page probe found no body segments for ${path}`)
   if (!page.batchCount || page.batchCount < 1) throw new Error(`Real page probe found no batches for ${path}`)
   if (!page.translatedBatchCount || page.translatedBatchCount < 1) throw new Error(`Real page probe translated no batches for ${path}`)
   if (!page.translatedSegmentCount || page.translatedSegmentCount < 1) throw new Error(`Real page probe translated no segments for ${path}`)
   if (!page.changedCount || page.changedCount < 1) throw new Error(`Real page probe left ${path} untranslated`)
+  if (!Array.isArray(page.bodyChecks) || page.bodyChecks.length < 1) throw new Error(`Real page probe returned no translated body checks for ${path}`)
   if (!Array.isArray(page.samples) || page.samples.length < 1) throw new Error(`Real page probe returned no translated samples for ${path}`)
 
   return payload
@@ -199,9 +206,9 @@ await ensureDevelopmentBucket()
 const port = await getFreePort()
 const probeBaseUrl = `http://127.0.0.1:${port}`
 const runtimeProbeUrl = `${probeBaseUrl}/__translation-test__/real-runtime`
-const realPageProbeUrls = REAL_PAGE_PROBES.map((path) => ({
-  path,
-  url: `${probeBaseUrl}/__translation-test__/real-page?path=${encodeURIComponent(path)}&locale=es&batches=2`,
+const realPageProbeUrls = REAL_PAGE_PROBES.map((probe) => ({
+  path: probe.path,
+  url: `${probeBaseUrl}/__translation-test__/real-page?path=${encodeURIComponent(probe.path)}&locale=es&batches=2${probe.checks.map((check) => `&check=${encodeURIComponent(check)}`).join('')}`,
 }))
 const wrangler = Bun.spawn(
   [
@@ -253,7 +260,7 @@ try {
       for (const probe of realPageProbeUrls) {
         await fetchRealPageProbe(probe.url, probe.path)
       }
-      console.log(`Real translation worker probe passed with ${payload.model} on ${REAL_PAGE_PROBES.join(', ')}`)
+      console.log(`Real translation worker probe passed with ${payload.model} on ${REAL_PAGE_PROBES.map((probe) => probe.path).join(', ')}`)
       passed = true
       break
     } catch (error) {
