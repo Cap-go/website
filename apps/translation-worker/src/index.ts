@@ -53,10 +53,10 @@ type AttributeMatch = {
 
 const DEFAULT_LOCALE = 'en'
 const ALL_LOCALES = [DEFAULT_LOCALE, ...SUPPORTED_LOCALES] as const
-const DEFAULT_MODEL = '@cf/meta/llama-3.1-8b-instruct'
+const DEFAULT_MODEL = '@cf/moonshotai/kimi-k2.6'
 const FRESH_MS = 24 * 60 * 60 * 1000
 const CACHE_KEEP_SECONDS = 7 * 24 * 60 * 60
-const TRANSLATION_CACHE_VERSION = '2026-05-01-strict-translation-v1'
+const TRANSLATION_CACHE_VERSION = '2026-05-01-kimi-k2.6-v1'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
 const MAX_HTML_BYTES = 1_500_000
 const MAX_BATCH_CHARS = 6_000
@@ -277,15 +277,12 @@ function withResponseHeaders(response: Response, cacheState: 'MISS' | 'HIT' | 'S
   })
 }
 
-function translationUnavailableResponse(isHead = false): Response {
-  return withResponseHeaders(
-    new Response(isHead ? null : 'Translation temporarily unavailable', {
-      status: 503,
-      headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Retry-After': '60' },
-    }),
-    'BYPASS',
-    isHead,
-  )
+function temporaryEnglishRedirectResponse(requestUrl: URL, isHead = false): Response {
+  const headers = new Headers({
+    Location: localizedPath(requestUrl.pathname, DEFAULT_LOCALE) + requestUrl.search,
+    'X-Capgo-Translation-Fallback': 'temporary-english-redirect',
+  })
+  return withResponseHeaders(new Response(null, { status: 302, headers }), 'BYPASS', isHead)
 }
 
 function toCachedResponse(response: Response): Response {
@@ -567,15 +564,53 @@ function buildBatches(segments: Segment[]): string[][] {
   return batches
 }
 
-function extractAiText(result: unknown): string {
-  if (typeof result === 'string') return result
-  if (result && typeof result === 'object') {
-    const record = result as Record<string, unknown>
-    for (const key of ['response', 'text', 'result']) {
-      if (typeof record[key] === 'string') return record[key] as string
-    }
+function recordOf(value: unknown): Record<string, unknown> | null {
+  return value && typeof value === 'object' ? (value as Record<string, unknown>) : null
+}
+
+function extractContentText(content: unknown): string {
+  if (typeof content === 'string') return content
+  if (!Array.isArray(content)) return ''
+
+  return content
+    .map((item) => {
+      if (typeof item === 'string') return item
+      const itemRecord = recordOf(item)
+      return typeof itemRecord?.text === 'string' ? itemRecord.text : ''
+    })
+    .join('')
+}
+
+function extractChoiceText(choice: unknown): string {
+  const choiceRecord = recordOf(choice)
+  if (!choiceRecord) return ''
+  if (typeof choiceRecord.text === 'string') return choiceRecord.text
+
+  const message = recordOf(choiceRecord.message)
+  return message ? extractContentText(message.content) : ''
+}
+
+function extractChoicesText(choices: unknown): string {
+  if (!Array.isArray(choices)) return ''
+
+  for (const choice of choices) {
+    const text = extractChoiceText(choice)
+    if (text) return text
   }
   return ''
+}
+
+function extractAiText(result: unknown): string {
+  if (typeof result === 'string') return result
+
+  const record = recordOf(result)
+  if (!record) return ''
+
+  for (const key of ['response', 'text', 'result']) {
+    if (typeof record[key] === 'string') return record[key] as string
+  }
+
+  return extractChoicesText(record.choices)
 }
 
 function stripJsonFence(value: string): string {
@@ -1030,8 +1065,12 @@ async function serveTranslated(request: Request, env: Env, ctx: ExecutionContext
     return withResponseHeaders(cachedResponse, isStale ? 'STALE' : 'HIT', isHead)
   }
 
-  const translatedResponse = await refreshCache(request, env, requestUrl, locale, cacheKey)
-  return withResponseHeaders(translatedResponse, 'MISS', isHead)
+  ctx.waitUntil(
+    refreshCache(request, env, requestUrl, locale, cacheKey).catch((error) => {
+      console.error('Failed to create translated page', { pathname: requestUrl.pathname, locale, error })
+    }),
+  )
+  return temporaryEnglishRedirectResponse(requestUrl, isHead)
 }
 
 export default {
@@ -1053,7 +1092,7 @@ export default {
       return await serveTranslated(request, env, ctx, requestUrl, locale)
     } catch (error) {
       console.error('Translation worker failed', { pathname: requestUrl.pathname, locale, error })
-      return translationUnavailableResponse(request.method === 'HEAD')
+      return temporaryEnglishRedirectResponse(requestUrl, request.method === 'HEAD')
     }
   },
 }
