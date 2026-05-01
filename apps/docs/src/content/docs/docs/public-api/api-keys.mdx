@@ -9,13 +9,13 @@ API keys are used to authenticate requests to the Capgo API. Keys are organizati
 
 ## Using an API key
 
-Pass your API key in the `authorization` header of every request:
+Pass your API key in the `x-api-key` header of every request:
 
 ```bash
-curl -H "authorization: YOUR_API_KEY" https://api.capgo.app/...
+curl -H "x-api-key: YOUR_API_KEY" https://api.capgo.app/...
 ```
 
-The same header is used for all endpoints. No `Bearer` prefix is needed — pass the key value directly.
+The `authorization` header is also accepted but is primarily intended for JWT tokens. When the value is a UUID-formatted API key it works, but `x-api-key` is the recommended header for all key types (including secure/hashed keys).
 
 ## RBAC Permissions
 
