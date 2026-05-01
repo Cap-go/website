@@ -7,6 +7,16 @@ sidebar:
 
 API keys are used to authenticate requests to the Capgo API. Keys are organization-specific and can be assigned RBAC roles for fine-grained access control. Each key can also have an optional expiration date and can be created as a "secure" (hashed) key where the plain-text value is only shown once.
 
+## Using an API key
+
+Pass your API key in the `authorization` header of every request:
+
+```bash
+curl -H "authorization: YOUR_API_KEY" https://api.capgo.app/...
+```
+
+The same header is used for all endpoints. No `Bearer` prefix is needed — pass the key value directly.
+
 ## RBAC Permissions
 
 API keys use the same role-based access control (RBAC) system as user accounts. When creating or managing keys through the web app, you assign roles at two levels:
