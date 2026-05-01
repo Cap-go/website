@@ -1012,6 +1012,7 @@ function protectTranslationTokens(value: string): { text: string; restore(transl
     restore(translated: string): string {
       let restored = translated
       for (const [placeholder, token] of replacements) {
+        if (!restored.includes(placeholder)) throw new Error(`Translation dropped protected token: ${token}`)
         restored = restored.split(placeholder).join(token)
       }
       return restored

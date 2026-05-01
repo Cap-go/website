@@ -58,7 +58,7 @@ async function drainStream(stream: ReadableStream<Uint8Array> | null): Promise<v
   }
 }
 
-async function runWrangler(args: string[]): Promise<{ code: number; output: string }> {
+async function runWrangler(args: string[], timeoutMs = REQUEST_TIMEOUT_MS): Promise<{ code: number; output: string }> {
   const child = Bun.spawn(['bunx', 'wrangler', ...args], {
     cwd: WORKER_DIR,
     stdout: 'pipe',
@@ -70,8 +70,32 @@ async function runWrangler(args: string[]): Promise<{ code: number; output: stri
       NO_COLOR: '1',
     },
   })
-  const [stdout, stderr, code] = await Promise.all([new Response(child.stdout).text(), new Response(child.stderr).text(), child.exited])
-  return { code, output: `${stdout}${stderr}` }
+
+  const completed = Promise.all([new Response(child.stdout).text(), new Response(child.stderr).text(), child.exited]).then(([stdout, stderr, code]) => ({
+    code,
+    output: `${stdout}${stderr}`,
+  }))
+
+  let timeout: ReturnType<typeof setTimeout> | undefined
+  const timedOut = new Promise<never>((_resolve, reject) => {
+    timeout = setTimeout(() => {
+      void (async () => {
+        try {
+          child.kill('SIGTERM')
+        } catch {
+          // Process may already be gone.
+        }
+        await Promise.race([child.exited, sleep(5000)])
+        reject(new Error(`wrangler ${args.join(' ')} timed out after ${timeoutMs}ms`))
+      })().catch(reject)
+    }, timeoutMs)
+  })
+
+  try {
+    return await Promise.race([completed, timedOut])
+  } finally {
+    if (timeout) clearTimeout(timeout)
+  }
 }
 
 async function ensureDevelopmentBucket(): Promise<void> {
