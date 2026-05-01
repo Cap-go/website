@@ -127,6 +127,7 @@ const pluginEntries = [
     [
       linkItem('Overview', '/docs/plugins/native-purchases/'),
       linkItem('Getting started', '/docs/plugins/native-purchases/getting-started'),
+      linkItem('Revenue Playbook', '/docs/plugins/native-purchases/revenue-playbook'),
       section('Android Setup', [
         linkItem('Sandbox Testing', '/docs/plugins/native-purchases/android-sandbox-testing'),
         linkItem('Create Subscription', '/docs/plugins/native-purchases/android-create-subscription'),
