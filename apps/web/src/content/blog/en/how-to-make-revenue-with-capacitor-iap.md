@@ -91,7 +91,7 @@ Early revenue tests fail when the offer is too complicated. Start simple.
 
 Freemium works well when users can get ongoing value for free but hit meaningful premium limits. Examples: more scans, unlimited plans, cloud sync, export, advanced insights, or premium content.
 
-A paywall with a free trial works well when the app delivers value quickly and the user understands the outcome after onboarding. A 3 to 14 day trial is common, but the right length depends on how fast users can experience value.
+A paywall with a free trial works well when the app delivers value quickly and the user understands the outcome after onboarding. A 3- to 14-day trial is common, but the right length depends on how fast users can experience value.
 
 A one-time unlock can work for small utilities where recurring value is weak. You can add a subscription later if the product evolves into a service.
 
