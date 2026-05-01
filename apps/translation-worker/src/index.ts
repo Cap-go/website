@@ -1984,7 +1984,7 @@ async function probeRealPageTranslation(env: Env, requestUrl: URL): Promise<Reco
     path,
     locale,
     targetLanguage,
-    sourceBytes: sourceHtml.length,
+    sourceBytes: new TextEncoder().encode(sourceHtml).length,
     segmentCount: segments.length,
     batchCount: batches.length,
     translatedBatchCount: translatedBatches.length,
