@@ -23,7 +23,6 @@ type TranslationJob = {
   cacheVersion: string
   reason: TranslationQueueReason
   sourceHash?: string
-  translatedBatches?: string[][]
 }
 
 type QueueBinding<T> = {
@@ -38,6 +37,16 @@ type MessageBatch<T> = {
   messages: QueueMessage<T>[]
 }
 
+type R2ObjectBody = {
+  text(): Promise<string>
+}
+
+type R2BucketBinding = {
+  get(key: string): Promise<R2ObjectBody | null>
+  put(key: string, value: string): Promise<unknown>
+  delete(key: string): Promise<void>
+}
+
 type SourceHtmlResult = { type: 'response'; response: Response } | { type: 'html'; originResponse: Response; sourceHtml: string }
 
 interface Env {
@@ -45,6 +54,7 @@ interface Env {
   WEB: WorkerService
   DOCS: WorkerService
   TRANSLATION_QUEUE: QueueBinding<TranslationJob>
+  TRANSLATION_STORE: R2BucketBinding
   TRANSLATION_MODEL?: string
 }
 
@@ -63,6 +73,23 @@ type Segment = {
 }
 
 type HtmlPart = string | { segmentIndex: number }
+type PartialTranslationState = {
+  cacheVersion: string
+  locale: Locale
+  sourceHash: string
+  batchCount: number
+  translatedBatches: string[][]
+  updatedAt: number
+}
+type StoredTranslatedResponse = {
+  cacheVersion: string
+  locale: Locale
+  translatedAt: number
+  status: number
+  statusText: string
+  headers: [string, string][]
+  body: string
+}
 type AttributeMatch = {
   name: string
   quote: string
@@ -294,6 +321,19 @@ function pendingKeyFor(requestUrl: URL, locale: Locale): Request {
   pendingUrl.search = ''
   pendingUrl.searchParams.set('__capgo_translation_pending', TRANSLATION_CACHE_VERSION)
   return new Request(pendingUrl.toString(), { method: 'GET' })
+}
+
+function canonicalTranslationStoreUrl(requestUrl: URL, locale: Locale): string {
+  const storeUrl = new URL(requestUrl)
+  storeUrl.pathname = localizedPath(storeUrl.pathname, locale)
+  storeUrl.search = ''
+  storeUrl.hash = ''
+  return storeUrl.toString()
+}
+
+async function translationStoreKey(kind: 'pages' | 'state', requestUrl: URL, locale: Locale): Promise<string> {
+  const urlHash = await sha256Hex(canonicalTranslationStoreUrl(requestUrl, locale))
+  return `${kind}/${TRANSLATION_CACHE_VERSION}/${locale}/${urlHash}.json`
 }
 
 function withResponseHeaders(response: Response, cacheState: 'MISS' | 'HIT' | 'STALE' | 'BYPASS', isHead = false): Response {
@@ -814,6 +854,118 @@ function isStringArrayArray(value: unknown): value is string[][] {
   return Array.isArray(value) && value.every((item) => Array.isArray(item) && item.every((nestedItem) => typeof nestedItem === 'string'))
 }
 
+function isStringPairArray(value: unknown): value is [string, string][] {
+  return Array.isArray(value) && value.every((item) => Array.isArray(item) && item.length === 2 && typeof item[0] === 'string' && typeof item[1] === 'string')
+}
+
+function parseStoredJson(value: string): Record<string, unknown> | null {
+  try {
+    return recordOf(JSON.parse(value))
+  } catch {
+    return null
+  }
+}
+
+function partialTranslationStateFrom(value: unknown, locale: Locale, sourceHash: string, batchCount: number): PartialTranslationState | null {
+  const record = recordOf(value)
+  if (!record) return null
+  if (record.cacheVersion !== TRANSLATION_CACHE_VERSION || record.locale !== locale || record.sourceHash !== sourceHash) return null
+  if (record.batchCount !== batchCount || !isStringArrayArray(record.translatedBatches)) return null
+  if (record.translatedBatches.length > batchCount) return null
+  if (typeof record.updatedAt !== 'number' || Date.now() - record.updatedAt > CACHE_KEEP_SECONDS * 1000) return null
+  return {
+    cacheVersion: TRANSLATION_CACHE_VERSION,
+    locale,
+    sourceHash,
+    batchCount,
+    translatedBatches: record.translatedBatches,
+    updatedAt: record.updatedAt,
+  }
+}
+
+function storedTranslatedResponseFrom(value: unknown, locale: Locale): StoredTranslatedResponse | null {
+  const record = recordOf(value)
+  if (!record) return null
+  if (record.cacheVersion !== TRANSLATION_CACHE_VERSION || record.locale !== locale) return null
+  if (typeof record.translatedAt !== 'number' || typeof record.status !== 'number' || typeof record.statusText !== 'string') return null
+  if (!isStringPairArray(record.headers) || typeof record.body !== 'string') return null
+  return {
+    cacheVersion: TRANSLATION_CACHE_VERSION,
+    locale,
+    translatedAt: record.translatedAt,
+    status: record.status,
+    statusText: record.statusText,
+    headers: record.headers,
+    body: record.body,
+  }
+}
+
+async function readPartialTranslationState(env: Env, requestUrl: URL, locale: Locale, sourceHash: string, batchCount: number): Promise<PartialTranslationState | null> {
+  const key = await translationStoreKey('state', requestUrl, locale)
+  const object = await env.TRANSLATION_STORE.get(key)
+  if (!object) return null
+  return partialTranslationStateFrom(parseStoredJson(await object.text()), locale, sourceHash, batchCount)
+}
+
+async function writePartialTranslationState(env: Env, requestUrl: URL, locale: Locale, state: PartialTranslationState): Promise<void> {
+  const key = await translationStoreKey('state', requestUrl, locale)
+  await env.TRANSLATION_STORE.put(key, JSON.stringify(state))
+}
+
+async function deletePartialTranslationState(env: Env, requestUrl: URL, locale: Locale): Promise<void> {
+  const key = await translationStoreKey('state', requestUrl, locale)
+  await env.TRANSLATION_STORE.delete(key)
+}
+
+async function deletePartialTranslationStateSafely(env: Env, requestUrl: URL, locale: Locale): Promise<void> {
+  try {
+    await deletePartialTranslationState(env, requestUrl, locale)
+  } catch (error) {
+    console.error('Failed to delete partial translation state', { pathname: requestUrl.pathname, locale, error: errorMessage(error) })
+  }
+}
+
+async function readStoredTranslatedResponse(env: Env, requestUrl: URL, locale: Locale): Promise<Response | null> {
+  const key = await translationStoreKey('pages', requestUrl, locale)
+  const object = await env.TRANSLATION_STORE.get(key)
+  if (!object) return null
+
+  const stored = storedTranslatedResponseFrom(parseStoredJson(await object.text()), locale)
+  if (!stored) return null
+
+  const headers = new Headers(stored.headers)
+  headers.set('X-Capgo-Translated-At', stored.translatedAt.toString())
+  headers.delete('Content-Length')
+  return new Response(stored.body, {
+    status: stored.status,
+    statusText: stored.statusText,
+    headers,
+  })
+}
+
+async function writeStoredTranslatedResponse(env: Env, requestUrl: URL, locale: Locale, response: Response): Promise<void> {
+  const key = await translationStoreKey('pages', requestUrl, locale)
+  const headers: [string, string][] = []
+  response.headers.forEach((value, name) => {
+    if (name.toLowerCase() !== 'content-length') headers.push([name, value])
+  })
+  const stored: StoredTranslatedResponse = {
+    cacheVersion: TRANSLATION_CACHE_VERSION,
+    locale,
+    translatedAt: readTranslatedAt(response) || Date.now(),
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+    body: await response.text(),
+  }
+  await env.TRANSLATION_STORE.put(key, JSON.stringify(stored))
+}
+
+async function cacheTranslatedResponse(env: Env, requestUrl: URL, locale: Locale, cacheKey: Request, response: Response): Promise<void> {
+  await writeStoredTranslatedResponse(env, requestUrl, locale, response.clone())
+  await caches.default.put(cacheKey, response)
+}
+
 function nextMissingBatchIndex(translatedBatches: string[][], batchCount: number): number {
   for (let index = 0; index < batchCount; index += 1) {
     if (!Array.isArray(translatedBatches[index])) return index
@@ -1126,21 +1278,15 @@ function createTranslatedHtmlResponse(originResponse: Response, translatedHtml: 
   })
 }
 
-async function refreshCacheIncrementally(
-  request: Request,
-  env: Env,
-  requestUrl: URL,
-  locale: Locale,
-  cacheKey: Request,
-  expectedSourceHash?: string,
-  existingTranslatedBatches?: string[][],
-): Promise<boolean> {
+async function refreshCacheIncrementally(request: Request, env: Env, requestUrl: URL, locale: Locale, cacheKey: Request, expectedSourceHash?: string): Promise<boolean> {
   const renderRequest = request.method === 'GET' ? request : new Request(request, { method: 'GET' })
   const source = await loadSourceHtml(renderRequest, env, requestUrl, locale)
   if (source.type === 'response') {
     if (isRedirect(source.response)) {
-      await caches.default.put(cacheKey, toCachedResponse(source.response.clone()))
+      const cachedResponse = toCachedResponse(source.response.clone())
+      await cacheTranslatedResponse(env, requestUrl, locale, cacheKey, cachedResponse)
     }
+    await deletePartialTranslationStateSafely(env, requestUrl, locale)
     return true
   }
 
@@ -1148,13 +1294,18 @@ async function refreshCacheIncrementally(
   if (segments.length === 0) {
     const response = createTranslatedHtmlResponse(source.originResponse, source.sourceHtml, requestUrl, locale)
     const cachedResponse = toCachedResponse(response.clone())
-    await caches.default.put(cacheKey, cachedResponse)
+    await cacheTranslatedResponse(env, requestUrl, locale, cacheKey, cachedResponse)
+    await deletePartialTranslationStateSafely(env, requestUrl, locale)
     return true
   }
 
   const batches = buildBatches(segments)
   const sourceHash = await sha256Hex(`${TRANSLATION_CACHE_VERSION}:${locale}:${source.sourceHtml}`)
-  const translatedBatches = expectedSourceHash === sourceHash && existingTranslatedBatches ? existingTranslatedBatches : []
+  const state = await readPartialTranslationState(env, requestUrl, locale, sourceHash, batches.length)
+  if (expectedSourceHash && expectedSourceHash !== sourceHash) {
+    console.log('Translation source changed during continuation', { pathname: requestUrl.pathname, locale })
+  }
+  const translatedBatches = state?.translatedBatches ?? []
 
   let translatedInThisJob = 0
   let batchIndex = nextMissingBatchIndex(translatedBatches, batches.length)
@@ -1167,13 +1318,20 @@ async function refreshCacheIncrementally(
   }
 
   if (batchIndex < batches.length) {
+    await writePartialTranslationState(env, requestUrl, locale, {
+      cacheVersion: TRANSLATION_CACHE_VERSION,
+      locale,
+      sourceHash,
+      batchCount: batches.length,
+      translatedBatches,
+      updatedAt: Date.now(),
+    })
     await env.TRANSLATION_QUEUE.send({
       url: requestUrl.toString(),
       locale,
       cacheVersion: TRANSLATION_CACHE_VERSION,
       reason: 'continue',
       sourceHash,
-      translatedBatches,
     })
     console.log('Translation queue job continued', { pathname: requestUrl.pathname, locale, batchIndex, batchCount: batches.length })
     return false
@@ -1188,8 +1346,9 @@ async function refreshCacheIncrementally(
   const response = createTranslatedHtmlResponse(source.originResponse, translatedHtml, requestUrl, locale)
   if (response.ok && isHtmlResponse(response)) {
     const cachedResponse = toCachedResponse(response.clone())
-    await caches.default.put(cacheKey, cachedResponse)
+    await cacheTranslatedResponse(env, requestUrl, locale, cacheKey, cachedResponse)
   }
+  await deletePartialTranslationStateSafely(env, requestUrl, locale)
   return true
 }
 
@@ -1255,6 +1414,18 @@ async function processTranslationJob(job: TranslationJob, env: Env): Promise<voi
     if (cachedResponse) {
       const translatedAt = readTranslatedAt(cachedResponse)
       if (Date.now() - translatedAt <= FRESH_MS) {
+        await deletePartialTranslationStateSafely(env, requestUrl, job.locale)
+        completed = true
+        return
+      }
+    }
+
+    const storedResponse = await readStoredTranslatedResponse(env, requestUrl, job.locale)
+    if (storedResponse) {
+      const translatedAt = readTranslatedAt(storedResponse)
+      if (Date.now() - translatedAt <= FRESH_MS) {
+        await caches.default.put(cacheKey, storedResponse.clone())
+        await deletePartialTranslationStateSafely(env, requestUrl, job.locale)
         completed = true
         return
       }
@@ -1267,15 +1438,7 @@ async function processTranslationJob(job: TranslationJob, env: Env): Promise<voi
         'Accept-Language': job.locale,
       },
     })
-    completed = await refreshCacheIncrementally(
-      renderRequest,
-      env,
-      requestUrl,
-      job.locale,
-      cacheKey,
-      job.sourceHash,
-      isStringArrayArray(job.translatedBatches) ? job.translatedBatches : undefined,
-    )
+    completed = await refreshCacheIncrementally(renderRequest, env, requestUrl, job.locale, cacheKey, job.sourceHash)
   } finally {
     if (completed) {
       try {
@@ -1299,6 +1462,17 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
       await enqueueTranslationSafely(env, requestUrl, locale, 'stale')
     }
     return withResponseHeaders(cachedResponse, isStale ? 'STALE' : 'HIT', isHead)
+  }
+
+  const storedResponse = await readStoredTranslatedResponse(env, requestUrl, locale)
+  if (storedResponse) {
+    const translatedAt = readTranslatedAt(storedResponse)
+    const isStale = Date.now() - translatedAt > FRESH_MS
+    await caches.default.put(cacheKey, storedResponse.clone())
+    if (isStale) {
+      await enqueueTranslationSafely(env, requestUrl, locale, 'stale')
+    }
+    return withResponseHeaders(storedResponse, isStale ? 'STALE' : 'HIT', isHead)
   }
 
   await enqueueTranslationSafely(env, requestUrl, locale, 'miss')
