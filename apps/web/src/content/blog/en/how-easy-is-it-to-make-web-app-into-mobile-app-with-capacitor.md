@@ -124,14 +124,14 @@ bun add -D @capacitor/cli
 Initialize it with your app name, app identifier, and web output folder:
 
 ```bash
-bunx cap init "My App" com.example.myapp --web-dir dist
+bunx cap init "<app-name>" <reverse-domain-app-id> --web-dir <web-output-folder>
 ```
 
 Replace:
 
-- `My App` with the public app name
-- `com.example.myapp` with your real reverse-domain app ID
-- `dist` with the correct build output folder for your framework
+- `<app-name>` with the public app name
+- `<reverse-domain-app-id>` with your real reverse-domain app ID
+- `<web-output-folder>` with the correct build output folder for your framework
 
 Capacitor will create a `capacitor.config.ts` file. A simple starting point looks like this:
 
@@ -304,7 +304,8 @@ Before submitting your Capacitor app, confirm:
 - Safe areas are handled on iOS and Android.
 - Keyboard behavior is correct on forms.
 - Android back navigation is tested.
-- Login, logout, password reset, and account deletion work.
+- Login, logout, and password reset work.
+- Account deletion works if users can create accounts.
 - Reviewers have demo credentials if login is required.
 - Privacy policy and support links are live.
 - Permission prompts match actual app features.
