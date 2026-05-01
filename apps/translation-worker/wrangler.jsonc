@@ -9,7 +9,7 @@
     "binding": "AI",
   },
   "vars": {
-    "TRANSLATION_MODEL": "@cf/meta/llama-3.1-8b-instruct",
+    "TRANSLATION_MODEL": "@cf/moonshotai/kimi-k2.6",
   },
   "services": [
     {
