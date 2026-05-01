@@ -70,7 +70,10 @@ const locale = Astro.locals.locale
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div id="desktop-products-menu" class="invisible absolute left-0 z-50 w-48 pt-2 opacity-0 transition-all duration-200" aria-hidden="true">
+            <div
+              id="desktop-products-menu"
+              class="invisible absolute left-0 z-50 w-48 pt-2 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100"
+            >
               <div class="rounded-lg border border-gray-700 bg-gray-800 py-2 shadow-xl">
                 <a
                   href={getRelativeLocaleUrl(Astro.locals.locale, 'live-update')}
@@ -121,7 +124,10 @@ const locale = Astro.locals.locale
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div id="desktop-solutions-menu" class="invisible absolute left-0 z-50 w-[600px] pt-2 opacity-0 transition-all duration-200" aria-hidden="true">
+            <div
+              id="desktop-solutions-menu"
+              class="invisible absolute left-0 z-50 w-[600px] pt-2 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100"
+            >
               <div class="rounded-lg border border-gray-700 bg-gray-800 p-4 shadow-xl">
                 <div class="grid grid-cols-3 gap-4">
                   <!-- By Team Type Column -->
@@ -374,7 +380,6 @@ const locale = Astro.locals.locale
             rel="noopener noreferrer"
             aria-label={m.register({}, { locale: Astro.locals.locale })}
             class="font-pj rounded-lg border border-white/30 bg-white/5 px-4 py-2 text-base font-semibold text-gray-100 transition-all duration-200 hover:border-white/50 hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none"
-            role="button"
           >
             {m.register({}, { locale: Astro.locals.locale })}
           </a>
@@ -663,6 +668,8 @@ const locale = Astro.locals.locale
 
   desktopDropdowns.forEach((dropdown) => {
     if (!dropdown.wrapper || !dropdown.toggle || !dropdown.menu) return
+
+    setDesktopDropdownOpen(dropdown, false)
 
     dropdown.wrapper.addEventListener('mouseenter', () => setDesktopDropdownOpen(dropdown, true))
     dropdown.wrapper.addEventListener('mouseleave', () => {
