@@ -383,6 +383,22 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
       </div>
     </div>
 
+    <div class="mx-auto mt-16 max-w-3xl rounded-3xl border border-white/10 bg-white/5 p-6 text-center sm:p-8">
+      <p class="text-sm leading-6 font-semibold tracking-wide text-[#44BCFF] uppercase">
+        {m.testimonial_description({}, { locale: Astro.locals.locale })}
+      </p>
+      <blockquote class="mt-4">
+        <p
+          class="relative text-lg leading-8 font-semibold text-white before:absolute before:inline before:-translate-x-full before:content-['\201C'] after:inline after:content-['\201D']"
+        >
+          {m.testimonial_title({}, { locale: Astro.locals.locale })}
+        </p>
+      </blockquote>
+      <p class="mt-3 text-sm leading-6 text-gray-400">
+        {m.testimonial_highlight({}, { locale: Astro.locals.locale })}
+      </p>
+    </div>
+
     <div class="mt-16 flex flex-col items-center gap-3">
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
