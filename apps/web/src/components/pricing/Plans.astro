@@ -88,24 +88,26 @@ function planInitial(name: string) {
             </div>
           </div>
           <div class="px-4 py-5 sm:p-6">
-            <div class="flex items-end">
-              <p class="text-5xl font-semibold text-gray-900 tabular-nums" data-price>
-                {priceDisplay(plan.price_m, plan.price_y, plan.name)}
-              </p>
-              <p class="py-1 text-sm font-normal text-gray-500">/{m.month({}, { locale: Astro.locals.locale })}</p>
-            </div>
-            <p class="mt-8" data-yearly-price style={yearly ? '' : 'display: none'}>
-              <span class="text-gray-900">
-                <span>
-                  {m.billed_annually_at({}, { locale: Astro.locals.locale })} $<span data-yearly-total>{numberWithSpaces(plan.price_y)}</span>
+            <div role="status" aria-live="polite" aria-atomic="true">
+              <div class="flex items-end">
+                <p class="text-5xl font-semibold text-gray-900 tabular-nums" data-price>
+                  {priceDisplay(plan.price_m, plan.price_y, plan.name)}
+                </p>
+                <p class="py-1 text-sm font-normal text-gray-500">/{m.month({}, { locale: Astro.locals.locale })}</p>
+              </div>
+              <p class="mt-8" data-yearly-price style={yearly ? '' : 'display: none'}>
+                <span class="text-gray-900">
+                  <span>
+                    {m.billed_annually_at({}, { locale: Astro.locals.locale })} $<span data-yearly-total>{numberWithSpaces(plan.price_y)}</span>
+                  </span>
                 </span>
-              </span>
-            </p>
-            <p class="mt-8" data-monthly-price style={yearly ? 'display: none' : ''}>
-              <span class="text-gray-900">
-                <span>{m.billed_monthly({}, { locale: Astro.locals.locale })}</span>
-              </span>
-            </p>
+              </p>
+              <p class="mt-8" data-monthly-price style={yearly ? 'display: none' : ''}>
+                <span class="text-gray-900">
+                  <span>{m.billed_monthly({}, { locale: Astro.locals.locale })}</span>
+                </span>
+              </p>
+            </div>
             <div class="mt-6">
               <a
                 href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
@@ -125,7 +127,7 @@ function planInitial(name: string) {
             </div>
             <ul class="mt-8 space-y-4 text-black">
               <li class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="mr-1 h-6 w-6 shrink-0 text-blue-600" width="32" height="32" viewBox="0 0 32 32">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mr-1 h-6 w-6 shrink-0 text-blue-600" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
                   <path
                     fill="currentColor"
                     d="M23 23c-5.656 0-7.858-6.41-7.949-6.684C15.034 16.265 13.208 11 9 11c-2.757 0-5 2.243-5 5s2.243 5 5 5c1.588 0 3.013-.732 4.237-2.176l1.526 1.293C13.164 22.003 11.172 23 9 23c-3.86 0-7-3.14-7-7s3.14-7 7-7c5.656 0 7.858 6.41 7.949 6.684C16.966 15.735 18.792 21 23 21c2.757 0 5-2.243 5-5s-2.243-5-5-5c-1.588 0-3.013.732-4.237 2.176l-1.526-1.293C18.836 9.997 20.828 9 23 9c3.86 0 7 3.14 7 7s-3.14 7-7 7"
@@ -134,7 +136,15 @@ function planInitial(name: string) {
                 <span>{m.unlimited_live_updates({}, { locale: Astro.locals.locale })}</span>
               </li>
               <li class="flex items-center">
-                <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                <svg
+                  class="mr-2 h-5 w-5 shrink-0 text-blue-600"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  height="1em"
+                  viewBox="0 0 448 512"
+                  aria-hidden="true"
+                  focusable="false"
+                >
                   <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
                 </svg>
                 <span>
@@ -152,7 +162,15 @@ function planInitial(name: string) {
                 </span>
               </li>
               <li class="flex items-center">
-                <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                <svg
+                  class="mr-2 h-5 w-5 shrink-0 text-blue-600"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  height="1em"
+                  viewBox="0 0 448 512"
+                  aria-hidden="true"
+                  focusable="false"
+                >
                   <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
                 </svg>
                 <span>
@@ -171,7 +189,15 @@ function planInitial(name: string) {
                 </span>
               </li>
               <li class="flex items-center">
-                <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                <svg
+                  class="mr-2 h-5 w-5 shrink-0 text-blue-600"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  height="1em"
+                  viewBox="0 0 448 512"
+                  aria-hidden="true"
+                  focusable="false"
+                >
                   <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
                 </svg>
                 <span>
@@ -191,7 +217,15 @@ function planInitial(name: string) {
               </li>
               {plan.build_time_unit && plan.build_time_unit > 0 && (
                 <li class="flex items-center">
-                  <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                  <svg
+                    class="mr-2 h-5 w-5 shrink-0 text-blue-600"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    height="1em"
+                    viewBox="0 0 448 512"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
                     <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
                   </svg>
                   <span>
@@ -209,7 +243,15 @@ function planInitial(name: string) {
               {plan.name === 'Solo' && (
                 <>
                   <li class="flex items-center">
-                    <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                    <svg
+                      class="mr-2 h-5 w-5 shrink-0 text-blue-600"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      height="1em"
+                      viewBox="0 0 448 512"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
                       <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
                     </svg>
                     <span>{m.community_support({}, { locale: Astro.locals.locale })}</span>
@@ -219,7 +261,15 @@ function planInitial(name: string) {
               {(plan.name === 'Team' || plan.name === 'Enterprise') && (
                 <>
                   <li class="flex items-center">
-                    <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                    <svg
+                      class="mr-2 h-5 w-5 shrink-0 text-blue-600"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      height="1em"
+                      viewBox="0 0 448 512"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
                       <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
                     </svg>
                     <span>{m.all_lower_tiers_benefits({}, { locale: Astro.locals.locale })}</span>
@@ -229,7 +279,15 @@ function planInitial(name: string) {
               {plan.name === 'Maker' && (
                 <>
                   <li class="flex items-center">
-                    <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                    <svg
+                      class="mr-2 h-5 w-5 shrink-0 text-blue-600"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      height="1em"
+                      viewBox="0 0 448 512"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
                       <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
                     </svg>
                     <span>{m.priority_bug_fixes_on_our_plugins({}, { locale: Astro.locals.locale })}</span>
@@ -239,7 +297,15 @@ function planInitial(name: string) {
               {plan.name == 'Team' && (
                 <>
                   <li class="flex items-center">
-                    <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                    <svg
+                      class="mr-2 h-5 w-5 shrink-0 text-blue-600"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      height="1em"
+                      viewBox="0 0 448 512"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
                       <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
                     </svg>
                     <span>{m.priority_support({}, { locale: Astro.locals.locale })}</span>
@@ -249,31 +315,71 @@ function planInitial(name: string) {
               {plan.name === 'Enterprise' && (
                 <>
                   <li class="flex items-center">
-                    <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                    <svg
+                      class="mr-2 h-5 w-5 shrink-0 text-blue-600"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      height="1em"
+                      viewBox="0 0 448 512"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
                       <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
                     </svg>
                     <span>{m.single_sign_on_sso({}, { locale: Astro.locals.locale })}</span>
                   </li>
                   <li class="flex items-center">
-                    <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                    <svg
+                      class="mr-2 h-5 w-5 shrink-0 text-blue-600"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      height="1em"
+                      viewBox="0 0 448 512"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
                       <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
                     </svg>
                     <span>{m.custom_domain({}, { locale: Astro.locals.locale })}</span>
                   </li>
                   <li class="flex items-center">
-                    <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                    <svg
+                      class="mr-2 h-5 w-5 shrink-0 text-blue-600"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      height="1em"
+                      viewBox="0 0 448 512"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
                       <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
                     </svg>
                     <span>{m.direct_slack_channel_support({}, { locale: Astro.locals.locale })}</span>
                   </li>
                   <li class="flex items-center">
-                    <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                    <svg
+                      class="mr-2 h-5 w-5 shrink-0 text-blue-600"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      height="1em"
+                      viewBox="0 0 448 512"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
                       <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
                     </svg>
                     <span>{m.SLA({}, { locale: Astro.locals.locale })}</span>
                   </li>
                   <li class="flex items-center">
-                    <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                    <svg
+                      class="mr-2 h-5 w-5 shrink-0 text-blue-600"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      height="1em"
+                      viewBox="0 0 448 512"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
                       <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
                     </svg>
                     <span>

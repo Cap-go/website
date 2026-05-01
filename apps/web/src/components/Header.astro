@@ -30,7 +30,7 @@ const locale = Astro.locals.locale
           id="menu-toggle"
         >
           <span class="absolute top-1/2 left-1/2 size-[max(100%,3rem)] -translate-1/2 pointer-fine:hidden" aria-hidden="true"></span>
-          <svg class="size-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg class="size-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
         </button>
@@ -46,18 +46,31 @@ const locale = Astro.locals.locale
             {m.docs({}, { locale: Astro.locals.locale })}
           </a>
           <!-- Products Dropdown -->
-          <div class="group relative">
+          <div id="desktop-products-dropdown" class="group relative">
             <button
+              id="desktop-products-toggle"
               type="button"
               class="flex items-center border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
               aria-label={m.products({}, { locale: Astro.locals.locale })}
+              aria-controls="desktop-products-menu"
+              aria-expanded="false"
+              aria-haspopup="true"
             >
               {m.products({}, { locale: Astro.locals.locale })}
-              <svg class="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg
+                id="desktop-products-chevron"
+                class="ml-1 h-4 w-4 transition-transform"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+                focusable="false"
+              >
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div class="invisible absolute left-0 z-50 w-48 pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+            <div id="desktop-products-menu" class="invisible absolute left-0 z-50 w-48 pt-2 opacity-0 transition-all duration-200" aria-hidden="true">
               <div class="rounded-lg border border-gray-700 bg-gray-800 py-2 shadow-xl">
                 <a
                   href={getRelativeLocaleUrl(Astro.locals.locale, 'live-update')}
@@ -84,18 +97,31 @@ const locale = Astro.locals.locale
             </div>
           </div>
           <!-- Solutions Dropdown -->
-          <div class="group relative">
+          <div id="desktop-solutions-dropdown" class="group relative">
             <button
+              id="desktop-solutions-toggle"
               type="button"
               class="flex items-center border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
               aria-label={m.solutions({}, { locale: Astro.locals.locale })}
+              aria-controls="desktop-solutions-menu"
+              aria-expanded="false"
+              aria-haspopup="true"
             >
               {m.solutions({}, { locale: Astro.locals.locale })}
-              <svg class="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg
+                id="desktop-solutions-chevron"
+                class="ml-1 h-4 w-4 transition-transform"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+                focusable="false"
+              >
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div class="invisible absolute left-0 z-50 w-[600px] pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+            <div id="desktop-solutions-menu" class="invisible absolute left-0 z-50 w-[600px] pt-2 opacity-0 transition-all duration-200" aria-hidden="true">
               <div class="rounded-lg border border-gray-700 bg-gray-800 p-4 shadow-xl">
                 <div class="grid grid-cols-3 gap-4">
                   <!-- By Team Type Column -->
@@ -388,7 +414,16 @@ const locale = Astro.locals.locale
           class="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white"
         >
           {m.products({}, { locale: Astro.locals.locale })}
-          <svg id="products-chevron" class="h-4 w-4 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg
+            id="products-chevron"
+            class="h-4 w-4 transition-transform"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+            focusable="false"
+          >
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </button>
@@ -426,7 +461,16 @@ const locale = Astro.locals.locale
           class="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white"
         >
           {m.solutions({}, { locale: Astro.locals.locale })}
-          <svg id="solutions-chevron" class="h-4 w-4 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg
+            id="solutions-chevron"
+            class="h-4 w-4 transition-transform"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+            focusable="false"
+          >
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </button>
@@ -581,12 +625,80 @@ const locale = Astro.locals.locale
   const solutionsToggle = document.getElementById('solutions-toggle')
   const solutionsSubmenu = document.getElementById('solutions-submenu')
   const solutionsChevron = document.getElementById('solutions-chevron')
+  const desktopDropdowns = [
+    {
+      wrapper: document.getElementById('desktop-products-dropdown'),
+      toggle: document.getElementById('desktop-products-toggle'),
+      menu: document.getElementById('desktop-products-menu'),
+      chevron: document.getElementById('desktop-products-chevron'),
+    },
+    {
+      wrapper: document.getElementById('desktop-solutions-dropdown'),
+      toggle: document.getElementById('desktop-solutions-toggle'),
+      menu: document.getElementById('desktop-solutions-menu'),
+      chevron: document.getElementById('desktop-solutions-chevron'),
+    },
+  ]
 
   function syncExpandedState(control: HTMLElement | null, target: HTMLElement | null) {
     if (!control || !target) return
 
     control.setAttribute('aria-expanded', String(!target.classList.contains('hidden')))
   }
+
+  function setDesktopDropdownOpen(dropdown: (typeof desktopDropdowns)[number], isOpen: boolean) {
+    if (!dropdown.toggle || !dropdown.menu) return
+
+    dropdown.toggle.setAttribute('aria-expanded', String(isOpen))
+    dropdown.menu.setAttribute('aria-hidden', String(!isOpen))
+    dropdown.menu.classList.toggle('invisible', !isOpen)
+    dropdown.menu.classList.toggle('opacity-0', !isOpen)
+    dropdown.menu.classList.toggle('opacity-100', isOpen)
+    dropdown.chevron?.classList.toggle('rotate-180', isOpen)
+  }
+
+  desktopDropdowns.forEach((dropdown) => {
+    if (!dropdown.wrapper || !dropdown.toggle || !dropdown.menu) return
+
+    dropdown.wrapper.addEventListener('mouseenter', () => setDesktopDropdownOpen(dropdown, true))
+    dropdown.wrapper.addEventListener('mouseleave', () => {
+      if (!dropdown.wrapper?.contains(document.activeElement)) setDesktopDropdownOpen(dropdown, false)
+    })
+    dropdown.wrapper.addEventListener('focusin', () => setDesktopDropdownOpen(dropdown, true))
+    dropdown.wrapper.addEventListener('focusout', () => {
+      requestAnimationFrame(() => {
+        if (!dropdown.wrapper?.contains(document.activeElement)) setDesktopDropdownOpen(dropdown, false)
+      })
+    })
+    dropdown.toggle.addEventListener('click', () => setDesktopDropdownOpen(dropdown, true))
+    dropdown.toggle.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return
+
+      event.preventDefault()
+      const isOpen = dropdown.toggle?.getAttribute('aria-expanded') === 'true'
+      setDesktopDropdownOpen(dropdown, !isOpen)
+    })
+    dropdown.toggle.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        setDesktopDropdownOpen(dropdown, false)
+        dropdown.toggle?.focus()
+      }
+    })
+    dropdown.menu.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return
+
+      setDesktopDropdownOpen(dropdown, false)
+      dropdown.toggle?.focus()
+    })
+  })
+
+  document.addEventListener('click', (event) => {
+    desktopDropdowns.forEach((dropdown) => {
+      if (!dropdown.wrapper || dropdown.wrapper.contains(event.target as Node)) return
+
+      setDesktopDropdownOpen(dropdown, false)
+    })
+  })
 
   menuToggle?.addEventListener('click', () => {
     mobileMenu?.classList.toggle('hidden')
