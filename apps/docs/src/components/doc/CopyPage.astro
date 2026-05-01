@@ -1,6 +1,6 @@
 ---
 import type { StarlightRouteData } from '@astrojs/starlight/route-data'
-import * as m from '@/paraglide/messages'
+import m from '@/copy/messages'
 import { resolveMessageLocale } from '@/services/message-locale'
 
 const route = Astro.locals.starlightRoute as StarlightRouteData
@@ -8,8 +8,6 @@ const { editUrl, id: pageSlug } = route
 const messageLocale = resolveMessageLocale(route.locale, Astro.currentLocale)
 const repoSourcePath = route.entry?.filePath ? `apps/docs/${route.entry.filePath}` : ''
 const markdownSourceUrl = repoSourcePath ? `https://raw.githubusercontent.com/Cap-go/website/refs/heads/main/${repoSourcePath}` : ''
-const githubSourceUrl = repoSourcePath ? `https://github.com/Cap-go/website/blob/main/${repoSourcePath}` : ''
-const githubRawUrl = githubSourceUrl ? `${githubSourceUrl}?raw=1` : ''
 
 const translations = {
   copyPage: m.copy_page({}, { locale: messageLocale }),
@@ -17,8 +15,6 @@ const translations = {
   copyPageAsMarkdown: m.copy_page_as_markdown({}, { locale: messageLocale }),
   viewAsMarkdown: m.view_as_markdown({}, { locale: messageLocale }),
   viewPageAsPlainText: m.view_page_as_plain_text({}, { locale: messageLocale }),
-  viewRawOnGithub: m.view_raw_on_github({}, { locale: messageLocale }),
-  openRawOnGithub: m.open_raw_on_github({}, { locale: messageLocale }),
   openInChatgpt: m.open_in_chatgpt({}, { locale: messageLocale }),
   openInClaude: m.open_in_claude({}, { locale: messageLocale }),
   openInPerplexity: m.open_in_perplexity({}, { locale: messageLocale }),
@@ -235,7 +231,7 @@ const translations = {
   <span class="copy-page-feedback sr-only" role="status" aria-live="polite" aria-atomic="true"></span>
 </div>
 
-<script is:inline define:vars={{ translations, editUrl: editUrl?.toString() ?? '', markdownSourceUrl, githubRawUrl }}>
+<script is:inline define:vars={{ translations, editUrl: editUrl?.toString() ?? '', markdownSourceUrl }}>
   // Toggle menu visibility
   const buttons = document.querySelectorAll('.copy-page-button')
   buttons.forEach((button) => {
@@ -397,13 +393,6 @@ const translations = {
       link.href = `/${pageSlug}.md`
     }
   })
-
-  // View raw on GitHub
-  function getRawGithubUrl() {
-    if (githubRawUrl) return githubRawUrl
-    if (markdownSourceUrl) return markdownSourceUrl
-    return ''
-  }
 
   // Get markdown URL - use absolute URL for AI assistants
   function getMarkdownUrl() {

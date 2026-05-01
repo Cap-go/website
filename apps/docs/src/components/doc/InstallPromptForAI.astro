@@ -3,7 +3,15 @@ import { actions, type Action } from '@/config/plugins'
 import type { StarlightRouteData } from '@astrojs/starlight/route-data'
 import InstallPromptForAIPanel from './InstallPromptForAIPanel.astro'
 
-const route = Astro.locals.starlightRoute as StarlightRouteData | undefined
+const getRoute = (): StarlightRouteData | undefined => {
+  try {
+    return Astro.locals.starlightRoute as StarlightRouteData | undefined
+  } catch {
+    return undefined
+  }
+}
+
+const route = getRoute()
 const pageId = route?.id ?? ''
 const pageData = (route?.entry?.data as Record<string, unknown> | undefined) ?? {}
 const pageDescription = typeof pageData.description === 'string' ? pageData.description : ''

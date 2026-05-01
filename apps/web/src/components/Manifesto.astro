@@ -1,28 +1,29 @@
 ---
-import * as m from '@/paraglide/messages'
----    
-<section class="py-12 sm:py-16 lg:py-20 bg-[#1a1a1a]">
-  <div class="px-4 mx-auto mb-12 max-w-4xl sm:px-6 sm:mb-16 lg:px-8 lg:mb-20">
-    <div class="overflow-hidden relative rounded-lg bg-[#e8e4dc]" style="
+import m from '@/copy/messages'
+---
+
+<section class="bg-[#1a1a1a] py-12 sm:py-16 lg:py-20">
+  <div class="mx-auto mb-12 max-w-4xl px-4 sm:mb-16 sm:px-6 lg:mb-20 lg:px-8">
+    <div class="relative overflow-hidden rounded-lg bg-[#e8e4dc]" style="
       filter: drop-shadow(0 25px 50px -12px rgba(0, 0, 0, 0.25));
     ">
       <!-- Folded corner effect -->
-      <div class="absolute right-0 bottom-0 z-10 w-16 h-16 sm:w-20 sm:h-20 bg-[#1a1a1a]" style="
+      <div class="absolute right-0 bottom-0 z-10 h-16 w-16 bg-[#1a1a1a] sm:h-20 sm:w-20" style="
         clip-path: polygon(100% 0, 0% 100%, 100% 100%);
       "></div>
-      <div class="absolute right-0 bottom-0 w-16 h-16 sm:w-20 sm:h-20" style="
+      <div
+        class="absolute right-0 bottom-0 h-16 w-16 sm:h-20 sm:w-20"
+        style="
         background: linear-gradient(225deg, #e8e4dc 0%, #e8e4dc 50%, transparent 50%, transparent 100%);
         box-shadow: -2px -2px 5px rgba(0,0,0,0.15);
-      "></div>
+      "
+      >
+      </div>
 
-      <div class="relative py-12 px-8 sm:py-16 sm:px-12 lg:px-16">
+      <div class="relative px-8 py-12 sm:px-12 sm:py-16 lg:px-16">
         <!-- Avatar -->
         <div class="mb-8">
-          <img
-            src="/martin_manifesto.webp"
-            alt="Martin Donadieu"
-            class="object-cover w-20 h-20 rounded-full ring-4 ring-white shadow-lg sm:w-24 sm:h-24"
-          />
+          <img src="/martin_manifesto.webp" alt="Martin Donadieu" class="h-20 w-20 rounded-full object-cover shadow-lg ring-4 ring-white sm:h-24 sm:w-24" />
         </div>
 
         <!-- Title -->
@@ -45,12 +46,8 @@ import * as m from '@/paraglide/messages'
 
         <!-- Signature -->
         <div class="mt-12 sm:mt-16">
-          <p class="text-2xl font-light text-gray-900 sm:text-3xl" style="font-family: 'Brush Script MT', cursive;">
-            Martin Donadieu
-          </p>
-          <p class="mt-2 text-sm text-gray-600 sm:text-base">
-            Founder, Capgo
-          </p>
+          <p class="text-2xl font-light text-gray-900 sm:text-3xl" style="font-family: 'Brush Script MT', cursive;">Martin Donadieu</p>
+          <p class="mt-2 text-sm text-gray-600 sm:text-base">Founder, Capgo</p>
         </div>
       </div>
     </div>

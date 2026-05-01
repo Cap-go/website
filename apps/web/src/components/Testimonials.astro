@@ -1,10 +1,10 @@
 ---
-import * as m from '@/paraglide/messages'
+import m from '@/copy/messages'
 ---
 
-<section class="relative pt-24 pb-32 sm:pt-32 isolate bg-[#1a1a1a]">
+<section class="relative isolate bg-[#1a1a1a] pt-24 pb-32 sm:pt-32">
   <!-- Background effects -->
-  <div class="absolute inset-x-0 overflow-hidden -translate-y-1/2 top-1/2 opacity-30 transform-gpu -z-10 blur-3xl" aria-hidden="true">
+  <div class="absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-30 blur-3xl" aria-hidden="true">
     <div
       class="ml-[max(50%,38rem)] aspect-1313/771 w-328.25 bg-linear-to-tr from-indigo-500 to-blue-500"
       style="
@@ -30,7 +30,7 @@ import * as m from '@/paraglide/messages'
     >
     </div>
   </div>
-  <div class="absolute inset-x-0 top-0 flex pt-32 overflow-hidden opacity-25 transform-gpu sm:pt-40 xl:justify-end -z-10 blur-3xl" aria-hidden="true">
+  <div class="absolute inset-x-0 top-0 -z-10 flex transform-gpu overflow-hidden pt-32 opacity-25 blur-3xl sm:pt-40 xl:justify-end" aria-hidden="true">
     <div
       class="-ml-88 aspect-1313/771 w-328.25 flex-none origin-top-right rotate-30 bg-linear-to-tr from-indigo-500 to-blue-500 xl:mr-[calc(50%-12rem)] xl:ml-0"
       style="
@@ -57,12 +57,12 @@ import * as m from '@/paraglide/messages'
     </div>
   </div>
 
-  <div class="px-6 mx-auto max-w-7xl lg:px-8">
-    <div class="max-w-2xl mx-auto text-center">
-      <h2 class="mt-2 text-4xl font-semibold tracking-tight text-white sm:text-5xl text-balance">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="mt-2 text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">
         {m.they_love_capgo({}, { locale: Astro.locals.locale })}
       </h2>
-      <p class="mt-6 mb-2 text-lg text-center whitespace-pre-line text-white/70">
+      <p class="mt-6 mb-2 text-center text-lg whitespace-pre-line text-white/70">
         {m.From_indie_devs_to({}, { locale: Astro.locals.locale })}
       </p>
     </div>
@@ -73,8 +73,7 @@ import * as m from '@/paraglide/messages'
       title="Customer testimonials and reviews for Capgo"
       aria-label="Wall of Love - Customer testimonials"
       style="overflow: hidden;"
-      width="100%"
-    ></iframe>
+      width="100%"></iframe>
     <script is:inline>
       document.addEventListener('DOMContentLoaded', function () {
         iFrameResize({ log: false, checkOrigin: false }, '#wall-of-love-eEqRvoc')

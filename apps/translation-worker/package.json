@@ -1,0 +1,10 @@
+{
+  "name": "@capgo/translation-worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit",
+    "dev": "wrangler dev -c wrangler.jsonc -c ../web/wrangler.jsonc -c ../docs/wrangler.jsonc",
+    "deploy": "wrangler deploy"
+  }
+}

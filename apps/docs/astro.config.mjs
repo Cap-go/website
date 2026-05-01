@@ -2,12 +2,14 @@ import starlight from '@astrojs/starlight'
 import starlightDocSearch from '@astrojs/starlight-docsearch'
 import { defineConfig } from 'astro/config'
 import { fileURLToPath } from 'node:url'
+import starlightLlmsTxt from 'starlight-llms-txt'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import config from '../../configs.json'
 import { buildSharedAstroBaseConfig, buildSharedIntegrations, buildSharedViteConfig } from '../shared/astro-config.mjs'
 import { buildPluginIcons, getBuildConcurrency, getPageLastModDates, normalizeDirectoryPath } from '../shared/astro-utils.mjs'
+import { docsLlmsCustomSets } from './src/config/llmsCustomSets'
 import { docsSidebar } from './src/config/sidebar.mjs'
-import { defaultLocale, localeNames, locales } from './src/services/locale'
+import { defaultLocale } from './src/services/locale'
 
 const CPU_COUNT = getBuildConcurrency()
 const SRC_DIR = `${normalizeDirectoryPath(fileURLToPath(new URL('./src/', import.meta.url)))}/`
@@ -21,7 +23,6 @@ const SITE_DOMAIN = process.env.BRANCH === 'development' ? config.base_domain.de
 export default defineConfig({
   ...buildSharedAstroBaseConfig({
     siteDomain: SITE_DOMAIN,
-    locales,
     defaultLocale,
     cpuCount: CPU_COUNT,
     build: {
@@ -46,8 +47,6 @@ export default defineConfig({
   integrations: [
     ...buildSharedIntegrations({
       pluginIcons,
-      defaultLocale,
-      localeNames,
       pageLastModDates,
     }),
     starlight({
@@ -59,6 +58,10 @@ export default defineConfig({
           appId: 'R0TIQUJRSN',
           apiKey: '039b8d50eaa068b9ff8726d912c6f388',
           indexName: 'capgo',
+        }),
+        starlightLlmsTxt({
+          customSets: docsLlmsCustomSets,
+          details: 'The canonical source documentation is English. Translated language paths are served at request time by the Capgo edge translation worker.',
         }),
       ],
       disable404Route: true,

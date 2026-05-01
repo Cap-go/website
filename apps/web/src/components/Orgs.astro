@@ -1,5 +1,5 @@
 ---
-import * as m from '@/paraglide/messages'
+import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { Image } from 'astro:assets'
 import orgsGraphic from '@/assets/orgs-graphic.svg'
@@ -20,17 +20,17 @@ const features = [
 ]
 ---
 
-<section class="relative py-20 sm:py-24 lg:py-32 bg-[#1a1a1a]">
-  <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+<section class="relative bg-[#1a1a1a] py-20 sm:py-24 lg:py-32">
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <!-- Header Section -->
     <div class="mb-20 text-center">
       <!-- Badge -->
-      <div class="inline-flex items-center py-2 px-5 mb-8 text-xs font-semibold tracking-widest text-blue-400 uppercase rounded-full border border-blue-500/30 bg-blue-500/10">
+      <div class="mb-8 inline-flex items-center rounded-full border border-blue-500/30 bg-blue-500/10 px-5 py-2 text-xs font-semibold tracking-widest text-blue-400 uppercase">
         {m.orgs_badge({}, { locale: Astro.locals.locale })}
       </div>
 
       <!-- Main Heading -->
-      <h2 class="mb-6 text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+      <h2 class="mb-6 text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">
         {m.orgs_title({}, { locale: Astro.locals.locale })}<br />{m.orgs_title_line2({}, { locale: Astro.locals.locale })}
       </h2>
 
@@ -41,12 +41,17 @@ const features = [
     </div>
 
     <!-- Feature Cards Grid -->
-    <div class="grid grid-cols-1 gap-8 mx-auto max-w-7xl lg:grid-cols-3">
+    <div class="mx-auto grid max-w-7xl grid-cols-1 gap-8 lg:grid-cols-3">
       <!-- Card 1: Manage various teams -->
-      <div class="flex overflow-hidden relative flex-col p-8 rounded-3xl transition-all duration-300 group bg-[#10131a] hover:bg-[#141822]">
-        <div class="absolute inset-0 rounded-3xl pointer-events-none" aria-hidden="true" style="background: radial-gradient(circle at top, rgba(59, 130, 246, 0.22) 0%, rgba(16, 19, 26, 0.95) 70%);"></div>
-        <div class="flex relative justify-center items-center mb-8 h-[400px]">
-          <div class="absolute -top-20 left-1/2 w-80 h-80 rounded-full -translate-x-1/2 pointer-events-none bg-blue-500/25 blur-[120px]"></div>
+      <div class="group relative flex flex-col overflow-hidden rounded-3xl bg-[#10131a] p-8 transition-all duration-300 hover:bg-[#141822]">
+        <div
+          class="pointer-events-none absolute inset-0 rounded-3xl"
+          aria-hidden="true"
+          style="background: radial-gradient(circle at top, rgba(59, 130, 246, 0.22) 0%, rgba(16, 19, 26, 0.95) 70%);"
+        >
+        </div>
+        <div class="relative mb-8 flex h-[400px] items-center justify-center">
+          <div class="pointer-events-none absolute -top-20 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-blue-500/25 blur-[120px]"></div>
           <Image src={orgsGraphic} alt="Organization Management" class="relative z-10 w-full max-w-[400px]" />
         </div>
 
@@ -55,50 +60,57 @@ const features = [
       </div>
 
       <!-- Card 2: Control access levels -->
-      <div class="flex overflow-hidden relative flex-col p-8 rounded-3xl transition-all duration-300 group bg-[#10131a] hover:bg-[#141822]">
-        <div class="absolute inset-0 rounded-3xl pointer-events-none" aria-hidden="true" style="background: radial-gradient(circle at 40% 10%, rgba(59, 130, 246, 0.22) 0%, rgba(16, 19, 26, 0.95) 70%);"></div>
-        <div class="flex relative justify-center items-center mb-8 h-[400px]">
-          <div class="absolute bottom-0 left-1/2 w-80 h-80 rounded-full -translate-x-1/2 pointer-events-none bg-blue-500/25 blur-[140px]"></div>
+      <div class="group relative flex flex-col overflow-hidden rounded-3xl bg-[#10131a] p-8 transition-all duration-300 hover:bg-[#141822]">
+        <div
+          class="pointer-events-none absolute inset-0 rounded-3xl"
+          aria-hidden="true"
+          style="background: radial-gradient(circle at 40% 10%, rgba(59, 130, 246, 0.22) 0%, rgba(16, 19, 26, 0.95) 70%);"
+        >
+        </div>
+        <div class="relative mb-8 flex h-[400px] items-center justify-center">
+          <div class="pointer-events-none absolute bottom-0 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-blue-500/25 blur-[140px]"></div>
 
           <svg width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" class="relative z-10 w-full max-w-[320px]">
             <!-- Glow -->
             <g filter="url(#filter0_f)">
-              <circle cx="160" cy="160" r="100" fill="#3B82F6" fill-opacity="0.2"/>
+              <circle cx="160" cy="160" r="100" fill="#3B82F6" fill-opacity="0.2"></circle>
             </g>
-            
+
             <!-- Card -->
-            <rect x="20" y="60" width="280" height="200" rx="20" fill="#090B11" fill-opacity="0.95" stroke="rgba(59, 130, 246, 0.3)" stroke-width="1"/>
-            
+            <rect x="20" y="60" width="280" height="200" rx="20" fill="#090B11" fill-opacity="0.95" stroke="rgba(59, 130, 246, 0.3)" stroke-width="1"></rect>
+
             <!-- Header -->
-            <circle cx="50" cy="90" r="12" fill="rgba(59, 130, 246, 0.15)"/>
-            <path d="M50 86C47.7909 86 46 87.7909 46 90C46 92.2091 47.7909 94 50 94C52.2091 94 54 92.2091 54 90C54 87.7909 52.2091 86 50 86ZM50 96C47.3333 96 46 97.3333 46 98V99H54V98C54 97.3333 52.6667 96 50 96Z" fill="#BFDBFE"/>
+            <circle cx="50" cy="90" r="12" fill="rgba(59, 130, 246, 0.15)"></circle>
+            <path
+              d="M50 86C47.7909 86 46 87.7909 46 90C46 92.2091 47.7909 94 50 94C52.2091 94 54 92.2091 54 90C54 87.7909 52.2091 86 50 86ZM50 96C47.3333 96 46 97.3333 46 98V99H54V98C54 97.3333 52.6667 96 50 96Z"
+              fill="#BFDBFE"></path>
             <text x="70" y="94" fill="#DBEAFE" font-family="sans-serif" font-size="12" font-weight="500">Developer</text>
-            
+
             <!-- Body -->
             <text x="40" y="130" fill="rgba(255, 255, 255, 0.4)" font-family="sans-serif" font-size="10" letter-spacing="0.1em">ACCOUNT</text>
             <text x="40" y="155" fill="white" font-family="sans-serif" font-size="24" font-weight="600">Joseph</text>
-            
+
             <!-- Divider -->
-            <line x1="40" y1="180" x2="280" y2="180" stroke="white" stroke-opacity="0.1"/>
-            
+            <line x1="40" y1="180" x2="280" y2="180" stroke="white" stroke-opacity="0.1"></line>
+
             <!-- Permissions Row -->
             <text x="40" y="205" fill="rgba(255, 255, 255, 0.7)" font-family="sans-serif" font-size="13">Permissions</text>
             <text x="200" y="205" fill="white" font-family="sans-serif" font-size="13" font-weight="500">Full access</text>
-            
+
             <!-- Cursor -->
-            <path d="M240 210L250 235L255 225L265 230L268 224L258 219L268 215L240 210Z" fill="#3B82F6" stroke="white" stroke-width="1.5"/>
-            
+            <path d="M240 210L250 235L255 225L265 230L268 224L258 219L268 215L240 210Z" fill="#3B82F6" stroke="white" stroke-width="1.5"></path>
+
             <!-- Divider -->
-            <line x1="40" y1="225" x2="280" y2="225" stroke="white" stroke-opacity="0.1"/>
-            
+            <line x1="40" y1="225" x2="280" y2="225" stroke="white" stroke-opacity="0.1"></line>
+
             <!-- Footer -->
             <text x="40" y="245" fill="rgba(255, 255, 255, 0.6)" font-family="sans-serif" font-size="13">Settings</text>
 
             <defs>
               <filter id="filter0_f" x="-40" y="-40" width="400" height="400" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-                <feGaussianBlur stdDeviation="60" result="effect1_foregroundBlur"/>
+                <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
+                <feGaussianBlur stdDeviation="60" result="effect1_foregroundBlur"></feGaussianBlur>
               </filter>
             </defs>
           </svg>
@@ -109,52 +121,57 @@ const features = [
       </div>
 
       <!-- Card 3: Adapt as you grow -->
-      <div class="flex overflow-hidden relative flex-col p-8 rounded-3xl transition-all duration-300 group bg-[#10131a] hover:bg-[#141822]">
-        <div class="absolute inset-0 rounded-3xl pointer-events-none" aria-hidden="true" style="background: radial-gradient(circle at 70% 15%, rgba(59, 130, 246, 0.24) 0%, rgba(16, 19, 26, 0.95) 70%);"></div>
-        <div class="flex relative justify-center items-center mb-8 h-[400px]">
-          <div class="absolute inset-0 rounded-full pointer-events-none bg-blue-500/20 blur-[140px]"></div>
+      <div class="group relative flex flex-col overflow-hidden rounded-3xl bg-[#10131a] p-8 transition-all duration-300 hover:bg-[#141822]">
+        <div
+          class="pointer-events-none absolute inset-0 rounded-3xl"
+          aria-hidden="true"
+          style="background: radial-gradient(circle at 70% 15%, rgba(59, 130, 246, 0.24) 0%, rgba(16, 19, 26, 0.95) 70%);"
+        >
+        </div>
+        <div class="relative mb-8 flex h-[400px] items-center justify-center">
+          <div class="pointer-events-none absolute inset-0 rounded-full bg-blue-500/20 blur-[140px]"></div>
 
           <svg width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" class="relative z-10 w-full max-w-[320px]">
             <!-- Glow -->
             <g filter="url(#filter1_f)">
-              <circle cx="160" cy="160" r="100" fill="#3B82F6" fill-opacity="0.2"/>
+              <circle cx="160" cy="160" r="100" fill="#3B82F6" fill-opacity="0.2"></circle>
             </g>
 
             <!-- Card -->
-            <rect x="20" y="40" width="280" height="240" rx="20" fill="#090B11" fill-opacity="0.95" stroke="rgba(59, 130, 246, 0.3)" stroke-width="1"/>
-            
+            <rect x="20" y="40" width="280" height="240" rx="20" fill="#090B11" fill-opacity="0.95" stroke="rgba(59, 130, 246, 0.3)" stroke-width="1"></rect>
+
             <!-- Header -->
             <text x="40" y="80" fill="white" font-family="sans-serif" font-size="16" font-weight="600">Role Permissions</text>
-            
+
             <!-- List Container -->
-            <rect x="40" y="100" width="240" height="160" rx="12" fill="rgba(255, 255, 255, 0.02)" stroke="rgba(255, 255, 255, 0.08)"/>
-            
+            <rect x="40" y="100" width="240" height="160" rx="12" fill="rgba(255, 255, 255, 0.02)" stroke="rgba(255, 255, 255, 0.08)"></rect>
+
             <!-- Item 1 -->
             <text x="55" y="135" fill="rgba(255, 255, 255, 0.9)" font-family="sans-serif" font-size="14">Deploy updates</text>
-            <rect x="240" y="120" width="24" height="24" rx="6" fill="#3B82F6"/>
-            <path d="M246 132L250 136L258 128" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            
+            <rect x="240" y="120" width="24" height="24" rx="6" fill="#3B82F6"></rect>
+            <path d="M246 132L250 136L258 128" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+
             <!-- Divider -->
-            <line x1="40" y1="153" x2="280" y2="153" stroke="rgba(255, 255, 255, 0.08)"/>
-            
+            <line x1="40" y1="153" x2="280" y2="153" stroke="rgba(255, 255, 255, 0.08)"></line>
+
             <!-- Item 2 -->
             <text x="55" y="188" fill="rgba(255, 255, 255, 0.9)" font-family="sans-serif" font-size="14">View logs</text>
-            <rect x="240" y="173" width="24" height="24" rx="6" fill="#3B82F6"/>
-            <path d="M246 185L250 189L258 181" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            
+            <rect x="240" y="173" width="24" height="24" rx="6" fill="#3B82F6"></rect>
+            <path d="M246 185L250 189L258 181" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+
             <!-- Divider -->
-            <line x1="40" y1="206" x2="280" y2="206" stroke="rgba(255, 255, 255, 0.08)"/>
-            
+            <line x1="40" y1="206" x2="280" y2="206" stroke="rgba(255, 255, 255, 0.08)"></line>
+
             <!-- Item 3 -->
             <text x="55" y="241" fill="rgba(255, 255, 255, 0.9)" font-family="sans-serif" font-size="14">Manage Channels</text>
-            <rect x="240" y="226" width="24" height="24" rx="6" fill="#3B82F6"/>
-            <path d="M246 238L250 242L258 234" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="240" y="226" width="24" height="24" rx="6" fill="#3B82F6"></rect>
+            <path d="M246 238L250 242L258 234" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
 
             <defs>
               <filter id="filter1_f" x="-40" y="-40" width="400" height="400" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-                <feGaussianBlur stdDeviation="60" result="effect1_foregroundBlur"/>
+                <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
+                <feGaussianBlur stdDeviation="60" result="effect1_foregroundBlur"></feGaussianBlur>
               </filter>
             </defs>
           </svg>
@@ -169,9 +186,9 @@ const features = [
     <div class="mt-20 text-center">
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-        class="inline-flex justify-center items-center py-4 px-12 text-lg font-semibold text-white rounded-xl shadow-lg transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none bg-[#5B7FE8] shadow-blue-500/20 hover:bg-[#4a6ed4] hover:shadow-blue-500/30 focus:ring-offset-[#1a1a1a]"
+        class="inline-flex items-center justify-center rounded-xl bg-[#5B7FE8] px-12 py-4 text-lg font-semibold text-white shadow-lg shadow-blue-500/20 transition-all duration-200 hover:bg-[#4a6ed4] hover:shadow-blue-500/30 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#1a1a1a] focus:outline-none"
       >
-{m.orgs_cta({}, { locale: Astro.locals.locale })}
+        {m.orgs_cta({}, { locale: Astro.locals.locale })}
       </a>
     </div>
   </div>

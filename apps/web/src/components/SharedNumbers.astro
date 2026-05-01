@@ -1,5 +1,5 @@
 ---
-import * as m from '@/paraglide/messages'
+import m from '@/copy/messages'
 import { shortNumber } from '@/services/misc'
 import dayjs from 'dayjs'
 
@@ -22,31 +22,32 @@ if (tmp.ok) {
 }
 ---
 
-<section class="overflow-hidden relative py-24 sm:py-32 bg-[#1a1a1a]">
+<section class="relative overflow-hidden bg-[#1a1a1a] py-24 sm:py-32">
   <!-- Background Glow -->
-  <div class="overflow-hidden absolute inset-0 pointer-events-none">
+  <div class="pointer-events-none absolute inset-0 overflow-hidden">
     <!-- Planet Background -->
-    <div class="absolute top-0 left-1/2 w-full -translate-x-1/2 max-w-[1200px]">
+    <div class="absolute top-0 left-1/2 w-full max-w-[1200px] -translate-x-1/2">
       <svg width="100%" height="100%" viewBox="0 0 1198 599" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1198 599C1198 520.338 1182.51 442.447 1152.4 369.773C1122.3 297.099 1078.18 231.065 1022.56 175.443C966.935 119.821 900.901 75.6987 828.227 45.5962C755.553 15.4936 677.662 -3.43842e-06 599 0C520.338 3.43842e-06 442.447 15.4936 369.773 45.5962C297.099 75.6987 231.065 119.821 175.443 175.443C119.821 231.065 75.6987 297.099 45.5961 369.773C15.4936 442.447 -6.87683e-06 520.338 0 599L599 599H1198Z" fill="url(#paint0_linear_1_23404)"/>
+        <path
+          d="M1198 599C1198 520.338 1182.51 442.447 1152.4 369.773C1122.3 297.099 1078.18 231.065 1022.56 175.443C966.935 119.821 900.901 75.6987 828.227 45.5962C755.553 15.4936 677.662 -3.43842e-06 599 0C520.338 3.43842e-06 442.447 15.4936 369.773 45.5962C297.099 75.6987 231.065 119.821 175.443 175.443C119.821 231.065 75.6987 297.099 45.5961 369.773C15.4936 442.447 -6.87683e-06 520.338 0 599L599 599H1198Z"
+          fill="url(#paint0_linear_1_23404)"></path>
         <defs>
           <linearGradient id="paint0_linear_1_23404" x1="599" y1="-225" x2="599" y2="447" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#5273EB"/>
-            <stop offset="1" stop-color="#1D1E22" stop-opacity="0"/>
+            <stop stop-color="#5273EB"></stop>
+            <stop offset="1" stop-color="#1D1E22" stop-opacity="0"></stop>
           </linearGradient>
         </defs>
       </svg>
     </div>
     <!-- Fade to bottom -->
-
   </div>
-  <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <!-- Header Section -->
     <div class="mb-20 text-center">
-      <div class="flex gap-2 justify-center items-center mb-6 text-sm font-medium tracking-wider text-blue-400">
-        <span class="flex relative w-2 h-2">
-          <span class="inline-flex absolute w-full h-full bg-green-400 rounded-full opacity-75 animate-ping"></span>
-          <span class="inline-flex relative w-2 h-2 bg-green-500 rounded-full"></span>
+      <div class="mb-6 flex items-center justify-center gap-2 text-sm font-medium tracking-wider text-blue-400">
+        <span class="relative flex h-2 w-2">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
         </span>
         {m.last_update({}, { locale: Astro.locals.locale }).toUpperCase()}: {dayjs().format('MMMM DD, YYYY').toUpperCase()}
       </div>
@@ -63,19 +64,21 @@ if (tmp.ok) {
     </div>
 
     <!-- Top Row: 3 Cards -->
-    <div class="grid grid-cols-1 gap-8 mb-8 md:grid-cols-3">
+    <div class="mb-8 grid grid-cols-1 gap-8 md:grid-cols-3">
       <!-- Updates Delivered -->
-      <div class="overflow-hidden relative p-8 bg-linear-to-br rounded-3xl border transition-all duration-300 group from-[#1a1d24]/90 to-[#14161b]/90 backdrop-blur-sm border-white/10 hover:border-white/20">
+      <div
+        class="group relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-[#1a1d24]/90 to-[#14161b]/90 p-8 backdrop-blur-sm transition-all duration-300 hover:border-white/20"
+      >
         <!-- Visual Area -->
-        <div class="flex relative justify-center items-center mb-6 h-44">
-          <img src="/planet_updates.svg" alt="World Map Glow" class="object-cover absolute inset-0 w-full h-full opacity-90" />
+        <div class="relative mb-6 flex h-44 items-center justify-center">
+          <img src="/planet_updates.svg" alt="World Map Glow" class="absolute inset-0 h-full w-full object-cover opacity-90" />
         </div>
 
         <!-- Content -->
         <div class="relative z-10">
           <div class="mb-3">
-            <svg class="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <svg class="h-8 w-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
           </div>
           <div class="mb-2 text-5xl font-bold text-white">{stats.updates}</div>
@@ -85,17 +88,24 @@ if (tmp.ok) {
       </div>
 
       <!-- Apps -->
-      <div class="overflow-hidden relative p-8 bg-linear-to-br rounded-3xl border transition-all duration-300 group from-[#1a1d24]/90 to-[#14161b]/90 backdrop-blur-sm border-white/10 hover:border-white/20">
+      <div
+        class="group relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-[#1a1d24]/90 to-[#14161b]/90 p-8 backdrop-blur-sm transition-all duration-300 hover:border-white/20"
+      >
         <!-- Visual Area -->
-        <div class="flex relative justify-center items-center mb-6 h-44">
-           <img src="/logo_apps.svg" alt="customers logos" class="object-contain w-full h-full" />
+        <div class="relative mb-6 flex h-44 items-center justify-center">
+          <img src="/logo_apps.svg" alt="customers logos" class="h-full w-full object-contain" />
         </div>
 
         <!-- Content -->
         <div class="relative z-10">
           <div class="mb-3">
-            <svg class="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+            <svg class="h-8 w-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+              ></path>
             </svg>
           </div>
           <div class="mb-2 text-5xl font-bold text-white">{stats.apps}</div>
@@ -105,25 +115,32 @@ if (tmp.ok) {
       </div>
 
       <!-- GitHub Stars -->
-      <div class="overflow-hidden relative p-8 bg-linear-to-br rounded-3xl border transition-all duration-300 group from-[#1a1d24]/90 to-[#14161b]/90 backdrop-blur-sm border-white/10 hover:border-white/20">
+      <div
+        class="group relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-[#1a1d24]/90 to-[#14161b]/90 p-8 backdrop-blur-sm transition-all duration-300 hover:border-white/20"
+      >
         <!-- Visual Area -->
-        <div class="flex relative justify-center items-center mb-6 h-44">
-          <div class="flex relative justify-center items-center w-full h-full">
-            <img src="/github_glow.svg" alt="GitHub Logo" class="object-contain w-auto h-full max-h-44" />
+        <div class="relative mb-6 flex h-44 items-center justify-center">
+          <div class="relative flex h-full w-full items-center justify-center">
+            <img src="/github_glow.svg" alt="GitHub Logo" class="h-full max-h-44 w-auto object-contain" />
           </div>
         </div>
 
         <!-- Content -->
         <div class="relative z-10">
           <div class="mb-3">
-            <svg class="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+            <svg class="h-8 w-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+              ></path>
             </svg>
           </div>
           <div class="mb-2 text-5xl font-bold text-white">
-             <a href="https://github.com/Cap-go/capacitor-updater" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-400">
+            <a href="https://github.com/Cap-go/capacitor-updater" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-400">
               {stats.stars}
-             </a>
+            </a>
           </div>
           <div class="mb-1 text-base font-semibold text-white">{m.stars_in_github({}, { locale: Astro.locals.locale })}</div>
           <div class="text-sm text-gray-400">{m.shared_numbers_opensource({}, { locale: Astro.locals.locale })}</div>
@@ -134,17 +151,23 @@ if (tmp.ok) {
     <!-- Bottom Row: 2 Cards -->
     <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
       <!-- Active Users & Success Rate -->
-      <div class="overflow-hidden relative p-8 bg-linear-to-br rounded-3xl border transition-all duration-300 group from-[#1a1d24]/90 to-[#14161b]/90 backdrop-blur-sm border-white/10 hover:border-white/20">
+      <div
+        class="group relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-[#1a1d24]/90 to-[#14161b]/90 p-8 backdrop-blur-sm transition-all duration-300 hover:border-white/20"
+      >
         <!-- Visual Area -->
-        <div class="flex relative justify-center items-center mb-6 h-48">
-          <img src="/updates_nbar.svg" alt="Active Users Chart" class="object-cover absolute inset-0 w-full h-full opacity-90" />
+        <div class="relative mb-6 flex h-48 items-center justify-center">
+          <img src="/updates_nbar.svg" alt="Active Users Chart" class="absolute inset-0 h-full w-full object-cover opacity-90" />
         </div>
 
         <!-- Content -->
         <div class="relative z-10">
           <div class="mb-4">
-            <svg class="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            <svg class="h-8 w-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
             </svg>
           </div>
           <div class="grid grid-cols-2 gap-12">
@@ -163,32 +186,34 @@ if (tmp.ok) {
       </div>
 
       <!-- Speed & API Response -->
-      <div class="overflow-hidden relative p-8 bg-linear-to-br rounded-3xl border transition-all duration-300 group from-[#1a1d24]/90 to-[#14161b]/90 backdrop-blur-sm border-white/10 hover:border-white/20">
+      <div
+        class="group relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-[#1a1d24]/90 to-[#14161b]/90 p-8 backdrop-blur-sm transition-all duration-300 hover:border-white/20"
+      >
         <!-- Visual Area -->
-        <div class="flex overflow-hidden relative justify-center items-center mb-6 h-48">
-           <div class="flex relative justify-center items-center w-full h-full">
-            <img src="/speed_card.svg" alt="Speed Card" class="object-contain w-full h-full" />
-           </div>
+        <div class="relative mb-6 flex h-48 items-center justify-center overflow-hidden">
+          <div class="relative flex h-full w-full items-center justify-center">
+            <img src="/speed_card.svg" alt="Speed Card" class="h-full w-full object-contain" />
+          </div>
         </div>
 
         <!-- Content -->
         <div class="relative z-10">
           <div class="mb-4">
-            <svg class="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <svg class="h-8 w-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
           </div>
           <div class="grid grid-cols-2 gap-12">
             <div>
               <div class="mb-2 text-5xl font-bold text-white">
-                 <a href="https://status.capgo.app" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-400">114ms</a>
+                <a href="https://status.capgo.app" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-400">114ms</a>
               </div>
               <div class="mb-1 text-sm font-semibold text-white">{m.shared_numbers_speed({}, { locale: Astro.locals.locale })}</div>
               <div class="text-xs text-gray-400">{m.download_time_globally({}, { locale: Astro.locals.locale })}</div>
             </div>
             <div>
               <div class="mb-2 text-5xl font-bold text-white">
-                 <a href="https://status.capgo.app" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-400">57ms</a>
+                <a href="https://status.capgo.app" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-400">57ms</a>
               </div>
               <div class="mb-1 text-sm font-semibold text-white">{m.shared_numbers_api_response({}, { locale: Astro.locals.locale })}</div>
               <div class="text-xs text-gray-400">{m.home_avg_latency({}, { locale: Astro.locals.locale })}</div>

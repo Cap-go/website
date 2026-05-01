@@ -24,6 +24,7 @@ jobs:
     outputs:
       web: ${{ steps.filter.outputs.web }}
       docs: ${{ steps.filter.outputs.docs }}
+      translation: ${{ steps.filter.outputs.translation }}
     steps:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
         with:
@@ -38,6 +39,7 @@ jobs:
             {
               echo "web=true"
               echo "docs=true"
+              echo "translation=true"
             } >> "$GITHUB_OUTPUT"
             exit 0
           fi
@@ -62,18 +64,24 @@ jobs:
 
           web=false
           docs=false
+          translation=false
 
-          if matches '^(apps/web/|apps/shared/|messages/|project\.inlang/|scripts/|configs\.json$|package\.json$|bun\.lock$|\.github/workflows/test\.yml$|\.github/workflows/deploy-web\.yml$)'; then
+          if matches '^(apps/web/|apps/shared/|scripts/|configs\.json$|package\.json$|bun\.lock$|\.github/workflows/test\.yml$|\.github/workflows/deploy-web\.yml$)'; then
             web=true
           fi
 
-          if matches '^(apps/docs/|apps/shared/|apps/web/public/|apps/web/src/config/plugins\.ts$|messages/|project\.inlang/|configs\.json$|package\.json$|bun\.lock$|\.github/workflows/test\.yml$|\.github/workflows/deploy-docs\.yml$)'; then
+          if matches '^(apps/docs/|apps/shared/|apps/web/public/|apps/web/src/config/plugins\.ts$|configs\.json$|package\.json$|bun\.lock$|\.github/workflows/test\.yml$|\.github/workflows/deploy-docs\.yml$)'; then
             docs=true
+          fi
+
+          if matches '^(apps/translation-worker/|package\.json$|bun\.lock$|\.github/workflows/test\.yml$|\.github/workflows/deploy-translation\.yml$)'; then
+            translation=true
           fi
 
           {
             echo "web=$web"
             echo "docs=$docs"
+            echo "translation=$translation"
           } >> "$GITHUB_OUTPUT"
 
   web:
@@ -107,7 +115,7 @@ jobs:
             apps/web/.astro
             node_modules/.astro
             node_modules/.cache
-          key: ${{ runner.os }}-astro-web-${{ hashFiles('**/bun.lock') }}-${{ hashFiles('apps/web/**', 'apps/shared/**', 'messages/**', 'project.inlang/**', 'scripts/**', 'configs.json') }}
+          key: ${{ runner.os }}-astro-web-${{ hashFiles('**/bun.lock') }}-${{ hashFiles('apps/web/**', 'apps/shared/**', 'scripts/**', 'configs.json') }}
           restore-keys: |
             ${{ runner.os }}-astro-web-${{ hashFiles('**/bun.lock') }}-
             ${{ runner.os }}-astro-web-
@@ -150,7 +158,7 @@ jobs:
             apps/docs/.astro
             node_modules/.astro
             node_modules/.cache
-          key: ${{ runner.os }}-astro-docs-${{ hashFiles('**/bun.lock') }}-${{ hashFiles('apps/docs/**', 'apps/shared/**', 'apps/web/public/**', 'apps/web/src/config/plugins.ts', 'messages/**', 'project.inlang/**', 'configs.json') }}
+          key: ${{ runner.os }}-astro-docs-${{ hashFiles('**/bun.lock') }}-${{ hashFiles('apps/docs/**', 'apps/shared/**', 'apps/web/public/**', 'apps/web/src/config/plugins.ts', 'configs.json') }}
           restore-keys: |
             ${{ runner.os }}-astro-docs-${{ hashFiles('**/bun.lock') }}-
             ${{ runner.os }}-astro-docs-
@@ -161,3 +169,27 @@ jobs:
           ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
           ORAMA_CLOUD_ENDPOINT: ${{ secrets.ORAMA_CLOUD_ENDPOINT }}
           CLOUDFLARE_TURNSTILE_SITE_KEY: ${{ secrets.CLOUDFLARE_TURNSTILE_SITE_KEY }}
+
+  translation:
+    name: Translation Worker Check
+    needs: changes
+    if: needs.changes.outputs.translation == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: 1.3.11
+      - name: Cache bun modules
+        uses: actions/cache@v5
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+      - run: bun install --frozen-lockfile
+      - run: bun run ci:verify:translation

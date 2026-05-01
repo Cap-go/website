@@ -1,24 +1,27 @@
 ---
-import * as m from '@/paraglide/messages'
+import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
----    
+---
+
 <!-- Ionic Appflow Shutdown Notice Section -->
-<section class="overflow-hidden relative py-16 sm:py-20 lg:py-24 bg-slate-700">
-  <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+<section class="relative overflow-hidden bg-slate-700 py-16 sm:py-20 lg:py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="mx-auto text-center">
       <!-- Notice Badge -->
-      <div class="inline-flex items-center py-2 px-4 mb-8 text-xs font-medium tracking-wider text-white uppercase rounded-full ring-1 ring-inset bg-white/20 backdrop-blur-sm ring-white/30">
+      <div
+        class="mb-8 inline-flex items-center rounded-full bg-white/20 px-4 py-2 text-xs font-medium tracking-wider text-white uppercase ring-1 ring-white/30 backdrop-blur-sm ring-inset"
+      >
         {m.home_important_update_badge({}, { locale: Astro.locals.locale })}
       </div>
 
-      <h2 class="mx-auto mb-8 max-w-5xl text-4xl font-bold leading-tight text-white sm:text-5xl xl:text-6xl">
+      <h2 class="mx-auto mb-8 max-w-5xl text-4xl leading-tight font-bold text-white sm:text-5xl xl:text-6xl">
         {m.home_appflow_shutdown_heading({}, { locale: Astro.locals.locale })},<br />
         <span class="underline decoration-2 underline-offset-8">
           {m.home_capgo_here_to_stay({}, { locale: Astro.locals.locale })}
         </span>
       </h2>
 
-      <div class="mx-auto mb-12 space-y-6 max-w-6xl text-lg leading-relaxed text-white sm:text-xl">
+      <div class="mx-auto mb-12 max-w-6xl space-y-6 text-lg leading-relaxed text-white sm:text-xl">
         <p class="font-normal">
           {m.home_appflow_notice_intro({}, { locale: Astro.locals.locale })}
         </p>
@@ -36,25 +39,31 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
       </div>
 
       <!-- Key Differentiators -->
-      <div class="grid grid-cols-1 gap-6 mb-12 md:grid-cols-3">
+      <div class="mb-12 grid grid-cols-1 gap-6 md:grid-cols-3">
         <!-- Bootstrapped -->
-        <div class="flex flex-col justify-between items-center p-8 h-full text-center rounded-2xl ring-1 bg-[#1c1c1c] ring-white/10">
-          <div class="flex flex-col gap-6 items-center pt-4 w-full">
+        <div class="flex h-full flex-col items-center justify-between rounded-2xl bg-[#1c1c1c] p-8 text-center ring-1 ring-white/10">
+          <div class="flex w-full flex-col items-center gap-6 pt-4">
             <!-- Toggle Switch -->
-            <div class="flex gap-3 items-center py-3 px-6 bg-white rounded-full shadow-lg">
-              <div class="inline-flex relative w-11 h-6 bg-blue-600 rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out cursor-pointer focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none shrink-0" role="switch" aria-checked="true">
-                <span aria-hidden="true" class="inline-block w-5 h-5 bg-white rounded-full ring-0 shadow transition duration-200 ease-in-out transform translate-x-5 pointer-events-none"></span>
+            <div class="flex items-center gap-3 rounded-full bg-white px-6 py-3 shadow-lg">
+              <div
+                class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-blue-600 transition-colors duration-200 ease-in-out focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+                role="switch"
+                aria-checked="true"
+              >
+                <span
+                  aria-hidden="true"
+                  class="pointer-events-none inline-block h-5 w-5 translate-x-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
               </div>
               <span class="font-semibold text-gray-900">Fully Bootstrapped</span>
             </div>
 
             <!-- Tags -->
-            <div class="flex flex-wrap gap-3 justify-center w-full max-w-[280px]">
-              <span class="py-1.5 px-4 text-sm text-gray-300 rounded-full border shadow-lg -rotate-6 bg-[#2a2a2a] border-white/10">No VCs</span>
-              <span class="py-1.5 px-4 text-sm text-gray-300 rounded-full border shadow-lg rotate-[4deg] bg-[#2a2a2a] border-white/10">Self funded</span>
-              <span class="py-1.5 px-4 text-sm text-gray-300 rounded-full border shadow-lg -rotate-3 bg-[#2a2a2a] border-white/10">Growing</span>
-              <span class="py-1.5 px-4 text-sm text-gray-300 rounded-full border shadow-lg rotate-2 bg-[#2a2a2a] border-white/10">Own resources</span>
-              <span class="py-1.5 px-4 text-sm text-gray-300 rounded-full border shadow-lg -rotate-2 bg-[#2a2a2a] border-white/10">Happy customers</span>
+            <div class="flex w-full max-w-[280px] flex-wrap justify-center gap-3">
+              <span class="-rotate-6 rounded-full border border-white/10 bg-[#2a2a2a] px-4 py-1.5 text-sm text-gray-300 shadow-lg">No VCs</span>
+              <span class="rotate-[4deg] rounded-full border border-white/10 bg-[#2a2a2a] px-4 py-1.5 text-sm text-gray-300 shadow-lg">Self funded</span>
+              <span class="-rotate-3 rounded-full border border-white/10 bg-[#2a2a2a] px-4 py-1.5 text-sm text-gray-300 shadow-lg">Growing</span>
+              <span class="rotate-2 rounded-full border border-white/10 bg-[#2a2a2a] px-4 py-1.5 text-sm text-gray-300 shadow-lg">Own resources</span>
+              <span class="-rotate-2 rounded-full border border-white/10 bg-[#2a2a2a] px-4 py-1.5 text-sm text-gray-300 shadow-lg">Happy customers</span>
             </div>
           </div>
 
@@ -65,26 +74,27 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
         </div>
 
         <!-- Profitable -->
-        <div class="flex flex-col justify-between items-center p-8 h-full text-center rounded-2xl ring-1 bg-[#1c1c1c] ring-white/10">
-          <div class="flex relative justify-center items-center w-full h-48">
-            <svg class="w-full h-full" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+        <div class="flex h-full flex-col items-center justify-between rounded-2xl bg-[#1c1c1c] p-8 text-center ring-1 ring-white/10">
+          <div class="relative flex h-48 w-full items-center justify-center">
+            <svg class="h-full w-full" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
               <!-- Grid lines -->
-              <line x1="0" y1="20" x2="200" y2="20" stroke="#333" stroke-width="1" stroke-dasharray="4 4" />
-              <line x1="0" y1="50" x2="200" y2="50" stroke="#333" stroke-width="1" stroke-dasharray="4 4" />
-              <line x1="0" y1="80" x2="200" y2="80" stroke="#333" stroke-width="1" stroke-dasharray="4 4" />
-              
+              <line x1="0" y1="20" x2="200" y2="20" stroke="#333" stroke-width="1" stroke-dasharray="4 4"></line>
+              <line x1="0" y1="50" x2="200" y2="50" stroke="#333" stroke-width="1" stroke-dasharray="4 4"></line>
+              <line x1="0" y1="80" x2="200" y2="80" stroke="#333" stroke-width="1" stroke-dasharray="4 4"></line>
+
               <!-- Chart Line -->
-              <path d="M10,100 L40,90 L60,40 L90,80 L120,80 L140,50 L170,50 L200,20" fill="none" stroke="#3B82F6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-              
+              <path d="M10,100 L40,90 L60,40 L90,80 L120,80 L140,50 L170,50 L200,20" fill="none" stroke="#3B82F6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+              ></path>
+
               <!-- Tooltip -->
               <g transform="translate(60, 10)">
-                <rect x="-30" y="0" width="60" height="24" rx="4" fill="white" />
+                <rect x="-30" y="0" width="60" height="24" rx="4" fill="white"></rect>
                 <text x="0" y="16" text-anchor="middle" font-size="10" font-weight="bold" fill="#1F2937">Revenue</text>
-                <path d="M-4,24 L0,28 L4,24 Z" fill="white" />
+                <path d="M-4,24 L0,28 L4,24 Z" fill="white"></path>
               </g>
-              
+
               <!-- Dot -->
-              <circle cx="60" cy="40" r="4" fill="#1c1c1c" stroke="#3B82F6" stroke-width="2" />
+              <circle cx="60" cy="40" r="4" fill="#1c1c1c" stroke="#3B82F6" stroke-width="2"></circle>
             </svg>
           </div>
 
@@ -95,38 +105,42 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
         </div>
 
         <!-- Long-term -->
-        <div class="flex flex-col justify-between items-center p-8 h-full text-center rounded-2xl ring-1 bg-[#1c1c1c] ring-white/10">
-          <div class="flex relative justify-center items-center w-full h-48">
+        <div class="flex h-full flex-col items-center justify-between rounded-2xl bg-[#1c1c1c] p-8 text-center ring-1 ring-white/10">
+          <div class="relative flex h-48 w-full items-center justify-center">
             <!-- Grid background -->
-            <div class="absolute inset-0" style="background-image: linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px); background-size: 20px 20px; opacity: 0.2;"></div>
-            
+            <div
+              class="absolute inset-0"
+              style="background-image: linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px); background-size: 20px 20px; opacity: 0.2;"
+            >
+            </div>
+
             <!-- Shield Icon -->
             <div class="relative z-10">
               <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
-                  <path id="shield_shape" d="M60 110C60 110 105 85 105 45V20L60 5L15 20V45C15 85 60 110 60 110Z" />
+                  <path id="shield_shape" d="M60 110C60 110 105 85 105 45V20L60 5L15 20V45C15 85 60 110 60 110Z"></path>
                   <clipPath id="shield_inner_clip">
-                      <use href="#shield_shape" />
+                    <use href="#shield_shape"></use>
                   </clipPath>
                   <linearGradient id="wave_grad" x1="60" y1="0" x2="60" y2="100" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stop-color="white" stop-opacity="0.5"/>
-                    <stop offset="1" stop-color="white" stop-opacity="0.0"/>
+                    <stop offset="0" stop-color="white" stop-opacity="0.5"></stop>
+                    <stop offset="1" stop-color="white" stop-opacity="0.0"></stop>
                   </linearGradient>
                 </defs>
-              
+
                 <!-- Background -->
-                <use href="#shield_shape" fill="#22C55E" />
-              
+                <use href="#shield_shape" fill="#22C55E"></use>
+
                 <!-- Wave Highlight -->
                 <g clip-path="url(#shield_inner_clip)">
-                  <path d="M-10 50 C 30 20, 90 70, 130 40 V -20 H -10 Z" fill="url(#wave_grad)" />
+                  <path d="M-10 50 C 30 20, 90 70, 130 40 V -20 H -10 Z" fill="url(#wave_grad)"></path>
                 </g>
-              
+
                 <!-- Border -->
-                <use href="#shield_shape" stroke="#333333" stroke-width="10" fill="none" stroke-linejoin="round" />
-              
+                <use href="#shield_shape" stroke="#333333" stroke-width="10" fill="none" stroke-linejoin="round"></use>
+
                 <!-- Checkmark -->
-                <path d="M42 62L54 74L78 50" stroke="#333333" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M42 62L54 74L78 50" stroke="#333333" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
               </svg>
             </div>
           </div>
@@ -140,15 +154,15 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
     </div>
 
     <!-- Migration CTA -->
-    <div class="p-8 text-center bg-white rounded-3xl sm:p-12">
-      <div class="flex flex-col gap-4 justify-center items-center mb-6 sm:flex-row sm:gap-8">
-        <img src="/appflow_logo.webp" alt="Appflow" class="w-auto h-10" />
-        <svg class="w-6 h-6 text-gray-400 rotate-90 sm:rotate-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+    <div class="rounded-3xl bg-white p-8 text-center sm:p-12">
+      <div class="mb-6 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-8">
+        <img src="/appflow_logo.webp" alt="Appflow" class="h-10 w-auto" />
+        <svg class="h-6 w-6 rotate-90 text-gray-400 sm:rotate-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
         </svg>
-        <img src="/capgo_logo.webp" alt="Capgo" class="w-auto h-20 sm:h-32 invert" />
+        <img src="/capgo_logo.webp" alt="Capgo" class="h-20 w-auto invert sm:h-32" />
       </div>
 
       <h3 class="mb-4 text-2xl font-bold text-gray-900 sm:text-3xl">
@@ -159,27 +173,45 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
       </p>
 
       <!-- User avatars -->
-      <div class="flex justify-center mb-6 -space-x-4">
-        <img class="inline-block object-cover w-12 h-12 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=64&h=64" alt="Capgo user avatar" />
-        <img class="inline-block object-cover w-12 h-12 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=64&h=64" alt="Capgo user avatar" />
-        <img class="inline-block object-cover w-12 h-12 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=64&h=64" alt="Capgo user avatar" />
-        <img class="inline-block object-cover w-12 h-12 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=64&h=64" alt="Capgo user avatar" />
-        <img class="inline-block object-cover w-12 h-12 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=64&h=64" alt="Capgo user avatar" />
-        <div class="flex justify-center items-center w-12 h-12 text-sm font-bold text-white bg-blue-600 rounded-full ring-2 ring-white">
-          1k+
-        </div>
+      <div class="mb-6 flex justify-center -space-x-4">
+        <img
+          class="inline-block h-12 w-12 rounded-full object-cover ring-2 ring-white"
+          src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=64&h=64"
+          alt="Capgo user avatar"
+        />
+        <img
+          class="inline-block h-12 w-12 rounded-full object-cover ring-2 ring-white"
+          src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=64&h=64"
+          alt="Capgo user avatar"
+        />
+        <img
+          class="inline-block h-12 w-12 rounded-full object-cover ring-2 ring-white"
+          src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=64&h=64"
+          alt="Capgo user avatar"
+        />
+        <img
+          class="inline-block h-12 w-12 rounded-full object-cover ring-2 ring-white"
+          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=64&h=64"
+          alt="Capgo user avatar"
+        />
+        <img
+          class="inline-block h-12 w-12 rounded-full object-cover ring-2 ring-white"
+          src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=64&h=64"
+          alt="Capgo user avatar"
+        />
+        <div class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white ring-2 ring-white">1k+</div>
       </div>
 
-      <div class="flex flex-col gap-4 justify-center items-center sm:flex-row">
+      <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
         <a
           href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-          class="inline-flex justify-center items-center py-4 px-8 text-base font-semibold text-white bg-blue-600 rounded-xl transition-all duration-200 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+          class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-8 py-4 text-base font-semibold text-white transition-all duration-200 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
         >
           {m.cta_start_migration({}, { locale: Astro.locals.locale })}
         </a>
         <a
           href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/upgrade/from-appflow-to-capgo')}
-          class="inline-flex justify-center items-center py-4 px-8 text-base font-semibold text-gray-900 bg-white rounded-xl border-2 border-gray-300 transition-all duration-200 hover:bg-gray-50 hover:border-gray-400 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
+          class="inline-flex items-center justify-center rounded-xl border-2 border-gray-300 bg-white px-8 py-4 text-base font-semibold text-gray-900 transition-all duration-200 hover:border-gray-400 hover:bg-gray-50 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
         >
           {m.migration_guide({}, { locale: Astro.locals.locale })}
         </a>

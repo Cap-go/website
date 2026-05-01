@@ -1,57 +1,5 @@
 [files]
-# Exclude translated content - these are not English typos
 extend-exclude = [
-    "messages/*.json",
-    "src/content/i18n/*.json",
-    "apps/docs/src/content/i18n/*.json",
-    "src/content/docs/es/**",
-    "src/content/docs/it/**",
-    "src/content/docs/ja/**",
-    "src/content/docs/de/**",
-    "src/content/docs/fr/**",
-    "src/content/docs/pt/**",
-    "src/content/docs/zh/**",
-    "src/content/docs/ko/**",
-    "src/content/docs/ru/**",
-    "src/content/docs/id/**",
-    "apps/docs/src/content/docs/es/**",
-    "apps/docs/src/content/docs/it/**",
-    "apps/docs/src/content/docs/ja/**",
-    "apps/docs/src/content/docs/de/**",
-    "apps/docs/src/content/docs/fr/**",
-    "apps/docs/src/content/docs/pt/**",
-    "apps/docs/src/content/docs/zh/**",
-    "apps/docs/src/content/docs/ko/**",
-    "apps/docs/src/content/docs/ru/**",
-    "apps/docs/src/content/docs/id/**",
-    "src/content/plugins-tutorials/es/**",
-    "src/content/plugins-tutorials/it/**",
-    "src/content/plugins-tutorials/fr/**",
-    "src/content/plugins-tutorials/id/**",
-    "src/content/plugins-tutorials/de/**",
-    "apps/web/src/content/plugins-tutorials/es/**",
-    "apps/web/src/content/plugins-tutorials/it/**",
-    "apps/web/src/content/plugins-tutorials/fr/**",
-    "apps/web/src/content/plugins-tutorials/id/**",
-    "apps/web/src/content/plugins-tutorials/de/**",
-    "src/content/blog/es/**",
-    "src/content/blog/fr/**",
-    "src/content/blog/it/**",
-    "src/content/blog/ja/**",
-    "src/content/blog/de/**",
-    "src/content/blog/pt/**",
-    "src/content/blog/id/**",
-    "src/content/blog/ko/**",
-    "src/content/blog/zh-cn/**",
-    "apps/web/src/content/blog/es/**",
-    "apps/web/src/content/blog/fr/**",
-    "apps/web/src/content/blog/it/**",
-    "apps/web/src/content/blog/ja/**",
-    "apps/web/src/content/blog/de/**",
-    "apps/web/src/content/blog/pt/**",
-    "apps/web/src/content/blog/id/**",
-    "apps/web/src/content/blog/ko/**",
-    "apps/web/src/content/blog/zh-cn/**",
     "public/**/*_tye.png",
     "apps/web/public/**/*_tye.png",
     "apps/docs/public/**/*_tye.png",
@@ -88,6 +36,9 @@ formatable = "formatable"  # NFC event literal from upstream API
 udid = "udid"  # iOS device UDID (technical term)
 UDID = "UDID"  # iOS device UDID (technical term)
 RTO = "RTO"  # Recovery Time Objective
+Sanbox = "Sanbox"  # Legacy copy key kept for runtime compatibility
+framworks = "framworks"  # Legacy copy key kept for runtime compatibility
+youre = "youre"  # Legacy copy key kept for runtime compatibility
 
 # OpenSSL command flags
 passin = "passin"  # OpenSSL password input flag

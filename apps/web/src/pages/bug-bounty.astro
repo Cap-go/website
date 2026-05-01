@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import * as m from '@/paraglide/messages'
+import m from '@/copy/messages'
 import { createWebPageLdJson, createLdJsonGraph } from '@/lib/ldJson'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.bug_bounty_program({}, { locale: Astro.locals.locale })].join(' | ')
@@ -43,7 +43,7 @@ const repositories = [
 ---
 
 <Layout content={content}>
-  <div class="py-8 m-auto prose-sm prose prose-invert">
+  <div class="prose-sm prose prose-invert m-auto py-8">
     <h1>{m.bug_bounty_program({}, { locale: Astro.locals.locale })}</h1>
 
     <p>{m.bug_bounty_intro({}, { locale: Astro.locals.locale })}</p>
@@ -53,26 +53,26 @@ const repositories = [
 
     <p>
       <strong>{m.bug_bounty_org({}, { locale: Astro.locals.locale })}:</strong>{' '}
-      <a href="https://github.com/Cap-go" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">
-        github.com/Cap-go
-      </a>
+      <a href="https://github.com/Cap-go" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300"> github.com/Cap-go </a>
     </p>
 
-    <div class="not-prose grid gap-4 my-6">
-      {repositories.map((repo) => (
-        <div class="p-4 rounded-lg border border-zinc-700 bg-zinc-800/50">
-          <h3 class="text-lg font-semibold text-white mb-1">{repo.name}</h3>
-          <p class="text-sm text-zinc-400 mb-3">{repo.desc}</p>
-          <div class="flex gap-4 text-sm">
-            <a href={repo.url} target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">
-              {m.bug_bounty_view_repository({}, { locale: Astro.locals.locale })}
-            </a>
-            <a href={repo.securityUrl} target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300">
-              {m.bug_bounty_report_security_issue({}, { locale: Astro.locals.locale })}
-            </a>
+    <div class="not-prose my-6 grid gap-4">
+      {
+        repositories.map((repo) => (
+          <div class="rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
+            <h3 class="mb-1 text-lg font-semibold text-white">{repo.name}</h3>
+            <p class="mb-3 text-sm text-zinc-400">{repo.desc}</p>
+            <div class="flex gap-4 text-sm">
+              <a href={repo.url} target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">
+                {m.bug_bounty_view_repository({}, { locale: Astro.locals.locale })}
+              </a>
+              <a href={repo.securityUrl} target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300">
+                {m.bug_bounty_report_security_issue({}, { locale: Astro.locals.locale })}
+              </a>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
 
     <h2>{m.bug_bounty_requirements_title({}, { locale: Astro.locals.locale })}</h2>
@@ -84,9 +84,10 @@ const repositories = [
       <li>{m.bug_bounty_requirement_4({}, { locale: Astro.locals.locale })}</li>
     </ul>
 
-    <div class="not-prose my-6 p-4 rounded-lg border border-amber-700/50 bg-amber-900/20">
-      <p class="text-amber-200 text-sm">
-        <strong class="text-amber-100">{m.bug_bounty_important_label({}, { locale: Astro.locals.locale })}:</strong> {m.bug_bounty_important_note({}, { locale: Astro.locals.locale })}
+    <div class="not-prose my-6 rounded-lg border border-amber-700/50 bg-amber-900/20 p-4">
+      <p class="text-sm text-amber-200">
+        <strong class="text-amber-100">{m.bug_bounty_important_label({}, { locale: Astro.locals.locale })}:</strong>
+        {m.bug_bounty_important_note({}, { locale: Astro.locals.locale })}
       </p>
     </div>
 
@@ -100,9 +101,10 @@ const repositories = [
       <li>{m.bug_bounty_conduct_rule_5({}, { locale: Astro.locals.locale })}</li>
     </ul>
 
-    <div class="not-prose my-6 p-4 rounded-lg border border-amber-700/50 bg-amber-900/20">
-      <p class="text-amber-200 text-sm">
-        <strong class="text-amber-100">{m.bug_bounty_important_label({}, { locale: Astro.locals.locale })}:</strong> {m.bug_bounty_payment_note({}, { locale: Astro.locals.locale })}
+    <div class="not-prose my-6 rounded-lg border border-amber-700/50 bg-amber-900/20 p-4">
+      <p class="text-sm text-amber-200">
+        <strong class="text-amber-100">{m.bug_bounty_important_label({}, { locale: Astro.locals.locale })}:</strong>
+        {m.bug_bounty_payment_note({}, { locale: Astro.locals.locale })}
       </p>
     </div>
 
@@ -129,18 +131,18 @@ const repositories = [
     <p>{m.bug_bounty_supabase_intro({}, { locale: Astro.locals.locale })}</p>
 
     <h3>{m.bug_bounty_supabase_examples_title({}, { locale: Astro.locals.locale })}</h3>
-    <div class="not-prose grid gap-4 my-6 md:grid-cols-2">
-      <div class="p-4 rounded-lg border border-zinc-700 bg-zinc-800/50">
-        <h4 class="text-base font-semibold text-white mb-2">{m.bug_bounty_supabase_not_valid_title({}, { locale: Astro.locals.locale })}</h4>
-        <ul class="list-disc pl-5 text-sm text-zinc-300 space-y-1">
+    <div class="not-prose my-6 grid gap-4 md:grid-cols-2">
+      <div class="rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
+        <h4 class="mb-2 text-base font-semibold text-white">{m.bug_bounty_supabase_not_valid_title({}, { locale: Astro.locals.locale })}</h4>
+        <ul class="list-disc space-y-1 pl-5 text-sm text-zinc-300">
           <li>{m.bug_bounty_supabase_not_valid_1({}, { locale: Astro.locals.locale })}</li>
           <li>{m.bug_bounty_supabase_not_valid_2({}, { locale: Astro.locals.locale })}</li>
           <li>{m.bug_bounty_supabase_not_valid_3({}, { locale: Astro.locals.locale })}</li>
         </ul>
       </div>
-      <div class="p-4 rounded-lg border border-zinc-700 bg-zinc-800/50">
-        <h4 class="text-base font-semibold text-white mb-2">{m.bug_bounty_supabase_valid_title({}, { locale: Astro.locals.locale })}</h4>
-        <ul class="list-disc pl-5 text-sm text-zinc-300 space-y-1">
+      <div class="rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
+        <h4 class="mb-2 text-base font-semibold text-white">{m.bug_bounty_supabase_valid_title({}, { locale: Astro.locals.locale })}</h4>
+        <ul class="list-disc space-y-1 pl-5 text-sm text-zinc-300">
           <li>{m.bug_bounty_supabase_valid_1({}, { locale: Astro.locals.locale })}</li>
           <li>{m.bug_bounty_supabase_valid_2({}, { locale: Astro.locals.locale })}</li>
           <li>{m.bug_bounty_supabase_valid_3({}, { locale: Astro.locals.locale })}</li>
