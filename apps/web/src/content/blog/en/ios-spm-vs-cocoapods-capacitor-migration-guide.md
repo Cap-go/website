@@ -186,9 +186,9 @@ After migration:
 
 If Xcode cannot resolve packages, reset package caches from Xcode and run `bunx cap sync ios` again.
 
-If the migration fails because of a plugin, check whether the plugin has a newer release with SPM support. If you maintain the plugin, migrate the plugin package first and then return to the app migration.
+If the migration fails because of a plugin, check whether the plugin has a newer release with SPM support. For plugins you maintain, migrate the plugin package first and then return to the app migration.
 
-If the app builds locally but CI fails, check for old CocoaPods assumptions. Common causes are a forced `.xcworkspace` build path, a stale `pod install` command, or caching `Pods/` from previous builds.
+When the app builds locally but CI fails, check for old CocoaPods assumptions. Common causes are a forced `.xcworkspace` build path, a stale `pod install` command, or caching `Pods/` from previous builds.
 
 ## Conclusion
 
