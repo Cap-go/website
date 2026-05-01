@@ -1,178 +1,204 @@
 ---
 slug: ios-spm-vs-cocoapods-capacitor-migration-guide
-title: "CocoaPods is Dying: Why You Should Migrate to Swift Package Manager Now"
+title: "How to Migrate a Capacitor App to Swift Package Manager"
 description: >-
-  CocoaPods will become read-only in December 2026. Learn why Swift Package Manager (SPM) is the future of iOS dependency management and how to migrate your Capacitor app today.
+  Learn how to migrate an existing Capacitor iOS app from CocoaPods to Swift Package Manager, what changes in the iOS project, and how to verify the migration.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-01-15T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
-head_image: /capacitor-guide.webp
-head_image_alt: Swift Package Manager vs CocoaPods comparison
-keywords: Swift Package Manager, SPM, CocoaPods, Capacitor, iOS, migration, dependency management, Xcode, Apple
+updated_at: 2026-05-01T10:33:24.000Z
+head_image: /capacitor-spm-migration-guide.jpg
+head_image_alt: Capacitor app migration from CocoaPods to Swift Package Manager
+keywords: Swift Package Manager, SPM, CocoaPods, Capacitor, iOS, migration, dependency management, Xcode, CapApp-SPM
 tag: Tutorial
 published: true
 locale: en
 next_blog: ''
 ---
 
-After 13 years of being the dominant iOS dependency manager, CocoaPods is officially sunsetting. The CocoaPods trunk will become **read-only on December 2, 2026**, meaning no new pods can be added and no updates to existing pods will be accepted. If you're still using CocoaPods for your Capacitor project, now is the time to migrate to Swift Package Manager (SPM).
+Capacitor 8 creates new iOS projects with Swift Package Manager (SPM) by default. Existing apps that still use CocoaPods can migrate too, but the safest path depends on how much native iOS customization your app has.
 
-## Why CocoaPods is Shutting Down
+This guide walks through what changes, what to back up, and the two practical migration paths: using the Capacitor migration assistant or re-scaffolding the iOS project with SPM.
 
-In August 2024, the CocoaPods team announced they were entering maintenance mode. By November 2024, they confirmed the specs repository would become read-only by December 2, 2026. The team isn't killing CocoaPods—existing projects will still work as long as GitHub and jsDelivr continue operating—but they're putting it into retirement.
+## Why migrate now
 
-### Key Timeline
+CocoaPods is moving toward a read-only trunk. The current plan is for CocoaPods trunk to stop accepting new podspecs on **December 2, 2026**. Existing builds should keep working, but new releases and dependency updates that rely on trunk will not be published there after the switch.
 
-| Date | Event |
-|------|-------|
-| January 2025 | First notification to CocoaPods contributors |
-| September-October 2026 | Second notification before final switch |
-| November 1-7, 2026 | Test run of read-only mode |
-| **December 2, 2026** | **Trunk becomes permanently read-only** |
+SPM is also the direction Capacitor is moving. Capacitor has supported choosing CocoaPods or SPM since Capacitor 6, and Capacitor 8 now creates iOS SPM projects as the default template.
 
-## Why Swift Package Manager is Better
+## What changes in a Capacitor SPM project
 
-SPM isn't just the alternative—it's the superior choice. Here's why:
+Migrating from CocoaPods to SPM replaces the iOS dependency layer. The web app, Android project, and most Capacitor workflow commands stay the same.
 
-### 1. Faster Dependency Installation
+### CapApp-SPM replaces the Podfile
 
-SPM is significantly faster than CocoaPods when installing and updating dependencies. CocoaPods requires:
-- Running `pod install` which can take minutes
-- Cloning the entire specs repository
-- Analyzing the dependency graph from scratch each time
+In a CocoaPods app, iOS dependencies are wired through `ios/App/Podfile`, `Podfile.lock`, `Pods/`, and the generated `.xcworkspace`.
 
-SPM uses a more efficient resolution algorithm and caches packages intelligently, resulting in dramatically faster build times.
+In an SPM app, Capacitor creates a local package named `CapApp-SPM`. This package becomes the central place where Capacitor references your native iOS plugin dependencies. The Capacitor CLI updates `CapApp-SPM` when you sync plugins, so treat it as generated output and avoid editing it by hand.
 
-### 2. Apple's Official Support
+### debug.xcconfig replaces Pods configuration
 
-SPM is built and maintained by Apple. It's integrated directly into Xcode and Swift, meaning:
-- **Native Xcode integration**: No workspace files, no extra configuration
-- **First-party support**: Updates come directly from Apple with each Xcode release
-- **Future-proof**: Apple will continue investing in SPM as part of the Swift ecosystem
+The migration assistant also creates a generated `debug.xcconfig`. This file carries build settings that CocoaPods used to provide through its generated xcconfig files.
 
-CocoaPods, on the other hand, was always a community tool working around Apple's limitations rather than with Apple's blessing.
+After migration, you may need to add `debug.xcconfig` to the Xcode project configuration if the assistant tells you to do so.
 
-### 3. Simpler Project Structure
+### Every plugin must support SPM
 
-With CocoaPods, you need:
-- A `Podfile`
-- A `Podfile.lock`
-- A `Pods` directory (often gigabytes in size)
-- A `.xcworkspace` file
+You cannot mix CocoaPods and SPM in the same Capacitor iOS project. Before migrating, check every Capacitor and Cordova plugin in `package.json`.
 
-With SPM, dependency information lives directly in your Xcode project. No extra files, no workspace, no bloat.
+If a plugin does not support SPM yet, update it, replace it, or migrate the plugin first. Simple Swift plugins can often be converted with Ionic's `capacitor-plugin-converter`, but plugins with more complex Objective-C and Swift layouts may need manual work.
 
-### 4. Better Security
+## What to back up first
 
-SPM packages are resolved and verified using checksums. The package manifest (`Package.swift`) is type-safe Swift code, reducing the risk of malformed configurations that could introduce vulnerabilities.
+Start from a clean git branch and commit your current state before touching the iOS project. Then list the native files your app depends on.
 
-## Capacitor and SPM
+Common files to preserve from `ios/App/` include:
 
-**Capacitor 8 now uses SPM as the default dependency manager for new iOS projects.** This isn't just a preference—it's the direction the entire ecosystem is moving.
+- `App/Info.plist`
+- `App/AppDelegate.swift`
+- `App/SceneDelegate.swift`, if your app has one
+- `App/Assets.xcassets/`
+- `App/Base.lproj/`
+- `App/App.entitlements`
+- `App/GoogleService-Info.plist`, if you use Firebase
+- Custom `.xcconfig` files
+- Signing settings, bundle identifier, team ID, and provisioning profile settings
 
-### Capgo Plugins Are SPM-Ready
+Also preserve any native Swift, Objective-C, framework, extension, or SDK files you added outside the standard Capacitor template.
 
-All Capgo plugins fully support SPM. We've migrated our entire plugin ecosystem and now primarily test on SPM. This includes:
+## Option 1: Use the Capacitor migration assistant
 
-- `@capgo/capacitor-updater`
-- `@capgo/capacitor-inappbrowser`
-- `@capgo/capacitor-flash`
-- `@capgo/capacitor-screen-recorder`
-- And all other Capgo plugins
+Use this path when your iOS project has custom native edits that you do not want to lose.
 
-### Future Capacitor Versions
-
-The next major version of Capacitor will enforce SPM as the default, with CocoaPods becoming a legacy option. Get ahead of the curve by migrating now.
-
-## How to Migrate Your Capacitor Project to SPM
-
-Migrating is straightforward with Capacitor's built-in tools.
-
-### Option 1: Fresh Migration (Recommended)
-
-If you haven't made manual changes to your Xcode project:
+Run the assistant from the root of your Capacitor project:
 
 ```bash
-# Remove the existing iOS directory
+bunx cap spm-migration-assistant
+```
+
+The assistant removes the CocoaPods infrastructure, creates the local `CapApp-SPM` package, generates package references from your installed plugins, and creates the generated SPM configuration files.
+
+When it finishes, open the project:
+
+```bash
+bunx cap open ios
+```
+
+Then follow the manual Xcode steps printed by the assistant. In most projects this means:
+
+1. Add `CapApp-SPM` as a local package dependency.
+2. Add the generated `debug.xcconfig` to the app configuration.
+3. Resolve any warnings about plugins that could not be converted to SPM.
+4. Build the app from Xcode once before updating CI.
+
+After the Xcode project builds, sync again:
+
+```bash
+bunx cap sync ios
+```
+
+## Option 2: Re-scaffold the iOS project with SPM
+
+Use this path when your `ios/` directory is close to the default Capacitor template and you can safely restore custom files afterward.
+
+First, make sure the files listed in the backup section are committed or copied somewhere safe. Then remove and recreate the iOS project with SPM:
+
+```bash
 rm -rf ios
-
-# Re-add iOS with SPM
-npx cap add ios --packagemanager SPM
+bunx cap add ios --packagemanager SPM
+bunx cap sync ios
 ```
 
-This gives you a clean SPM-based project.
-
-### Option 2: In-Place Migration
-
-For projects with custom Xcode modifications:
+Restore the native files your app needs, then open the project:
 
 ```bash
-npx cap spm-migration-assistant
+bunx cap open ios
 ```
 
-This tool guides you through the migration while preserving your customizations. Two manual steps are still required:
-1. Removing the CocoaPods configuration from your project
-2. Adding SPM package dependencies in Xcode
+This path is often cleaner than an in-place migration because it gives you a fresh Capacitor 8 iOS template. The tradeoff is that you must carefully reapply signing, entitlements, Firebase files, native source changes, and any custom Xcode settings.
 
-### Adding iOS to a New Project
+## New Capacitor apps
 
-For new Capacitor projects:
+For a new app, Capacitor 8 uses SPM by default when adding iOS:
 
 ```bash
-npx cap add ios --packagemanager SPM
+bunx cap add ios
 ```
 
-That's it—your project is now using SPM from the start.
+If you need to be explicit, you can still pass the package manager option:
 
-## Handling Third-Party Plugins
+```bash
+bunx cap add ios --packagemanager SPM
+```
 
-One important note: **you cannot mix SPM and CocoaPods in the same project.** While all Ionic-maintained Capacitor plugins support SPM, some third-party plugins may still need updates.
+## Update CI after migration
 
-### Checking Plugin Compatibility
+Once the app builds locally, update CI/CD so it no longer assumes CocoaPods.
 
-Before migrating, verify your plugins support SPM. Most actively maintained plugins have already added SPM support. If a plugin you depend on doesn't support SPM yet:
+Remove steps that run:
 
-1. Check if there's an open issue or PR for SPM support
-2. Consider using Ionic's [capacitor-plugin-converter](https://github.com/ionic-team/capacitor-plugin-converter) to convert simple plugins
-3. Reach out to the plugin maintainer
+```bash
+pod install
+```
 
-### Plugin Limitations
+Also remove caches for:
 
-If your plugin mixes Objective-C and Swift, automatic conversion tools won't work—SPM doesn't allow mixing these languages in the same target. These plugins require manual conversion.
+- `ios/App/Pods`
+- `ios/App/Podfile.lock`
+- CocoaPods specs repositories, if your workflow cached them only for this app
 
-## Migration Checklist
+Keep your regular web build and Capacitor sync steps. A typical iOS job should install JavaScript dependencies, build the web assets, sync Capacitor, and then build with Xcode:
 
-Before you migrate:
+```bash
+bun install --frozen-lockfile
+bun run build
+bunx cap sync ios
+```
 
-- [ ] Verify all your plugins support SPM
-- [ ] Back up your project (or create a new git branch)
-- [ ] Document any custom Xcode project modifications
-- [ ] Run your test suite to establish a baseline
+## Migration checklist
+
+Before migration:
+
+- [ ] Create a new git branch.
+- [ ] Commit the current working app.
+- [ ] Verify every installed plugin supports SPM.
+- [ ] Record custom iOS files and signing settings.
+- [ ] Confirm the app builds before the migration.
 
 During migration:
 
-- [ ] Run the migration assistant or fresh migration
-- [ ] Update any custom build scripts that reference CocoaPods
-- [ ] Verify the project builds successfully
-- [ ] Run your test suite again
+- [ ] Run `bunx cap spm-migration-assistant` or re-scaffold `ios/`.
+- [ ] Add `CapApp-SPM` in Xcode if required.
+- [ ] Add `debug.xcconfig` in Xcode if required.
+- [ ] Restore app-specific native files.
+- [ ] Run `bunx cap sync ios`.
 
 After migration:
 
-- [ ] Remove any leftover CocoaPods files (`Podfile`, `Podfile.lock`, `Pods/`)
-- [ ] Update your CI/CD pipelines to remove `pod install` steps
-- [ ] Update your documentation
+- [ ] Build and run the app in Xcode.
+- [ ] Remove leftover CocoaPods files.
+- [ ] Remove `pod install` from CI.
+- [ ] Verify release signing still works.
+- [ ] Run the app on at least one simulator and one real device before shipping.
+
+## Troubleshooting
+
+If Xcode cannot resolve packages, reset package caches from Xcode and run `bunx cap sync ios` again.
+
+If the migration fails because of a plugin, check whether the plugin has a newer release with SPM support. For plugins you maintain, migrate the plugin package first and then return to the app migration.
+
+When the app builds locally but CI fails, check for old CocoaPods assumptions. Common causes are a forced `.xcworkspace` build path, a stale `pod install` command, or caching `Pods/` from previous builds.
 
 ## Conclusion
 
-CocoaPods served the iOS community well for over a decade, but its time is ending. Swift Package Manager offers faster builds, better Xcode integration, and long-term support from Apple. With Capacitor 8 defaulting to SPM and future versions enforcing it, there's no reason to wait.
+Migrating a Capacitor app to Swift Package Manager is mostly about replacing the iOS dependency wiring. `CapApp-SPM` takes over the dependency references, `debug.xcconfig` replaces generated CocoaPods build configuration, and CI no longer needs `pod install`.
 
-Start your migration today. Your CI/CD pipelines—and your sanity—will thank you.
+For customized iOS projects, start with `bunx cap spm-migration-assistant`. For projects close to the default template, a clean SPM re-scaffold is often faster and easier to reason about.
 
 ## Resources
 
-- [Capacitor SPM Documentation](https://capacitorjs.com/docs/ios/spm)
-- [CocoaPods Sunset Announcement](https://blog.cocoapods.org/CocoaPods-Specs-Repo/)
-- [Ionic's SPM Migration Guide](https://ionic.io/blog/swift-package-manager-and-capacitor)
+- [Capacitor Swift Package Manager documentation](https://capacitorjs.com/docs/ios/spm)
+- [Capacitor 8 update guide](https://capacitorjs.com/docs/updating/8-0)
+- [CocoaPods trunk read-only plan](https://blog.cocoapods.org/CocoaPods-Specs-Repo/)
 - [capacitor-plugin-converter](https://github.com/ionic-team/capacitor-plugin-converter)
