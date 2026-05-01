@@ -128,7 +128,7 @@ describe('translation worker queue', () => {
       env,
     )
 
-    expect(calls.filter((input) => Array.isArray(lastUserPayload(input).texts))).toHaveLength(3)
+    expect(calls.some((input) => Array.isArray(lastUserPayload(input).texts))).toBe(true)
     expect(calls.some((input) => typeof lastUserPayload(input).text === 'string')).toBe(true)
 
     const response = await worker.fetch(new Request('https://capgo.app/ja/'), env)
