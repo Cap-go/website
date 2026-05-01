@@ -88,6 +88,7 @@ type StoredTranslatedResponse = {
   status: number
   statusText: string
   headers: [string, string][]
+  bodyEncoding: 'text' | 'base64'
   body: string
 }
 type AttributeMatch = {
@@ -159,6 +160,29 @@ const STATIC_PREFIXES = [
   '/status.json',
   '/sponsors.json',
 ]
+const IGNORED_TRANSLATION_QUERY_KEYS = new Set([
+  '_branch_match_id',
+  '_branch_referrer',
+  '_gl',
+  '_hsenc',
+  '_hsmi',
+  'fbclid',
+  'gad_source',
+  'gbraid',
+  'gclid',
+  'igshid',
+  'mc_cid',
+  'mc_eid',
+  'msclkid',
+  'ref',
+  'ref_src',
+  'session',
+  'session_id',
+  'sessionid',
+  'twclid',
+  'wbraid',
+  'yclid',
+])
 
 function escapeHtmlText(value: string): string {
   return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -311,10 +335,38 @@ function readTranslatedAt(response: Response): number {
   return Number.isFinite(timestamp) ? timestamp : 0
 }
 
+function shouldIgnoreTranslationQueryParam(name: string): boolean {
+  const normalizedName = name.toLowerCase()
+  return normalizedName.startsWith('utm_') || IGNORED_TRANSLATION_QUERY_KEYS.has(normalizedName)
+}
+
+function normalizedTranslationSearchParams(requestUrl: URL): URLSearchParams {
+  const entries: [string, string][] = []
+  requestUrl.searchParams.forEach((value, name) => {
+    if (!shouldIgnoreTranslationQueryParam(name)) entries.push([name, value])
+  })
+
+  entries.sort(([leftName, leftValue], [rightName, rightValue]) => leftName.localeCompare(rightName) || leftValue.localeCompare(rightValue))
+
+  const params = new URLSearchParams()
+  for (const [name, value] of entries) {
+    params.append(name, value)
+  }
+  return params
+}
+
+function applyNormalizedTranslationSearch(targetUrl: URL, requestUrl: URL): void {
+  targetUrl.search = ''
+  const params = normalizedTranslationSearchParams(requestUrl)
+  params.forEach((value, name) => {
+    targetUrl.searchParams.append(name, value)
+  })
+}
+
 function cacheKeyFor(requestUrl: URL, locale: Locale): Request {
   const cacheUrl = new URL(requestUrl)
   cacheUrl.pathname = localizedPath(cacheUrl.pathname, locale)
-  cacheUrl.search = ''
+  applyNormalizedTranslationSearch(cacheUrl, requestUrl)
   cacheUrl.searchParams.set('__capgo_translation_cache', TRANSLATION_CACHE_VERSION)
   return new Request(cacheUrl.toString(), { method: 'GET' })
 }
@@ -322,7 +374,7 @@ function cacheKeyFor(requestUrl: URL, locale: Locale): Request {
 function pendingKeyFor(requestUrl: URL, locale: Locale): Request {
   const pendingUrl = new URL(requestUrl)
   pendingUrl.pathname = localizedPath(pendingUrl.pathname, locale)
-  pendingUrl.search = ''
+  applyNormalizedTranslationSearch(pendingUrl, requestUrl)
   pendingUrl.searchParams.set('__capgo_translation_pending', TRANSLATION_CACHE_VERSION)
   return new Request(pendingUrl.toString(), { method: 'GET' })
 }
@@ -350,7 +402,7 @@ async function putTranslationPendingMarkerSafely(requestUrl: URL, locale: Locale
 function canonicalTranslationStoreUrl(requestUrl: URL, locale: Locale): string {
   const storeUrl = new URL(requestUrl)
   storeUrl.pathname = localizedPath(storeUrl.pathname, locale)
-  storeUrl.search = ''
+  applyNormalizedTranslationSearch(storeUrl, requestUrl)
   storeUrl.hash = ''
   return storeUrl.toString()
 }
@@ -913,6 +965,7 @@ function storedTranslatedResponseFrom(value: unknown, locale: Locale): StoredTra
   if (record.cacheVersion !== TRANSLATION_CACHE_VERSION || record.locale !== locale) return null
   if (typeof record.translatedAt !== 'number' || typeof record.status !== 'number' || typeof record.statusText !== 'string') return null
   if (!isStringPairArray(record.headers) || typeof record.body !== 'string') return null
+  const bodyEncoding = record.bodyEncoding === 'base64' ? 'base64' : 'text'
   return {
     cacheVersion: TRANSLATION_CACHE_VERSION,
     locale,
@@ -920,8 +973,42 @@ function storedTranslatedResponseFrom(value: unknown, locale: Locale): StoredTra
     status: record.status,
     statusText: record.statusText,
     headers: record.headers,
+    bodyEncoding,
     body: record.body,
   }
+}
+
+function bytesToBase64(buffer: ArrayBuffer): string {
+  const bytes = new Uint8Array(buffer)
+  let binary = ''
+  for (let index = 0; index < bytes.length; index += 0x8000) {
+    binary += String.fromCharCode(...bytes.subarray(index, index + 0x8000))
+  }
+  return btoa(binary)
+}
+
+function base64ToBytes(value: string): ArrayBuffer {
+  const binary = atob(value)
+  const bytes = new Uint8Array(binary.length)
+  for (let index = 0; index < binary.length; index += 1) {
+    bytes[index] = binary.charCodeAt(index)
+  }
+  return bytes.buffer
+}
+
+function isTextLikeContentType(value: string | null): boolean {
+  const contentType = value?.toLowerCase() ?? ''
+  if (contentType.startsWith('text/')) return true
+  if (contentType.includes('charset=')) return true
+  if (contentType.includes('+json') || contentType.includes('+xml')) return true
+  return (
+    contentType.includes('application/json') ||
+    contentType.includes('application/javascript') ||
+    contentType.includes('application/ld+json') ||
+    contentType.includes('application/xml') ||
+    contentType.includes('application/xhtml+xml') ||
+    contentType.includes('image/svg+xml')
+  )
 }
 
 async function readPartialTranslationState(env: Env, requestUrl: URL, locale: Locale, sourceHash: string, batchCount: number): Promise<PartialTranslationState | null> {
@@ -960,7 +1047,8 @@ async function readStoredTranslatedResponse(env: Env, requestUrl: URL, locale: L
   const headers = new Headers(stored.headers)
   headers.set('X-Capgo-Translated-At', stored.translatedAt.toString())
   headers.delete('Content-Length')
-  return new Response(stored.body, {
+  const body = stored.bodyEncoding === 'base64' ? base64ToBytes(stored.body) : stored.body
+  return new Response(body, {
     status: stored.status,
     statusText: stored.statusText,
     headers,
@@ -980,8 +1068,10 @@ async function writeStoredTranslatedResponse(env: Env, requestUrl: URL, locale: 
     status: response.status,
     statusText: response.statusText,
     headers,
-    body: await response.text(),
+    bodyEncoding: isTextLikeContentType(response.headers.get('Content-Type')) ? 'text' : 'base64',
+    body: '',
   }
+  stored.body = stored.bodyEncoding === 'text' ? await response.text() : bytesToBase64(await response.arrayBuffer())
   await env.TRANSLATION_STORE.put(key, JSON.stringify(stored))
 }
 
