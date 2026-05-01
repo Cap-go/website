@@ -143,7 +143,7 @@ If your web app was designed as an app from the beginning, you are already close
 
 If your app sells physical goods or services consumed outside the app, external payment methods such as Stripe are usually expected.
 
-If your app sells digital content, subscriptions, premium features, credits, or access used inside the app, you must be much more careful. Apple's [in-app purchase rule](https://developer.apple.com/app-store/review/guidelines/#in-app-purchase) generally requires In-App Purchase for digital unlocks, with specific regional and entitlement exceptions. Google has similar Play Billing requirements for many digital purchases.
+If your app sells digital content, subscriptions, premium features, credits, or access used inside the app, you must be much more careful. Apple's [in-app purchase rule](https://developer.apple.com/app-store/review/guidelines/#in-app-purchase) generally requires In-App Purchase for digital unlocks, with specific regional and entitlement exceptions. Google has similar [Play Billing requirements](https://support.google.com/googleplay/android-developer/answer/9858738) for many digital purchases.
 
 For example:
 
@@ -159,7 +159,7 @@ If your business model depends on subscriptions, implement the correct store pur
 
 For Android, the build itself may be quick, but publishing can still take time.
 
-Google's [testing requirements for new personal developer accounts](https://support.google.com/googleplay/android-developer/answer/14151465) say that affected accounts must run a closed test with at least 12 opted-in testers for 14 continuous days before applying for production access.
+As of May 1, 2026, Google's [testing requirements for new personal developer accounts](https://support.google.com/googleplay/android-developer/answer/14151465) say that affected accounts must run a closed test with at least 12 opted-in testers for 14 continuous days before applying for production access.
 
 That means your launch plan should include:
 
@@ -224,7 +224,7 @@ For a simple, well-built web app:
 | Test login, routing, and API behavior | 1-2 days |
 | Add store billing, if needed | 2-7+ days |
 | Prepare App Store and Play Store listings | 1-3 days |
-| Google closed testing for affected accounts | 14+ days |
+| Google closed testing for affected accounts | 14+ days under the May 1, 2026 requirement |
 
 So the right expectation is:
 
