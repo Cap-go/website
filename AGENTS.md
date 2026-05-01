@@ -38,4 +38,4 @@ bunx @tailwindcss/upgrade --force
 - Register documented plugins in `apps/docs/src/config/sidebar.mjs` so they appear in the Starlight plugin sidebar.
 - Register documented plugins in `apps/docs/src/config/llmsCustomSets.ts` so they appear in the docs search and LLM sets.
 - Refresh metadata after adding a plugin with `bun run fetch:stars` and `bun run fetch:downloads`.
-- Validate the change with `bunx prettier --write <touched-files>` and `NODE_OPTIONS=--max-old-space-size=16384 bunx astro check` in both `apps/web` and `apps/docs`, or `bun run check` from the repo root.
+- Validate the change with `bunx prettier --write <touched-files>` and `bunx astro check` in both `apps/web` and `apps/docs`, or `bun run check` from the repo root.

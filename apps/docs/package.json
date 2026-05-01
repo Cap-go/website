@@ -31,7 +31,7 @@
     "dev": "bun run sync:public && bun run paraglide:compile && astro dev",
     "start": "bun run sync:public && bun run paraglide:compile && astro dev",
     "clean:build-cache": "rm -rf dist .astro/content-modules.mjs .astro/content-assets.mjs .wrangler/deploy",
-    "build": "bun run sync:public && bun run paraglide:compile && bun run clean:build-cache && NODE_OPTIONS=${NODE_OPTIONS:---max-old-space-size=16384} BUILD_CONCURRENCY=${BUILD_CONCURRENCY:-1} UV_THREADPOOL_SIZE=${UV_THREADPOOL_SIZE:-16} astro build",
+    "build": "bun run sync:public && bun run paraglide:compile && bun run clean:build-cache && astro build",
     "check": "bun run sync:public && bun run paraglide:compile && astro check",
     "preview": "astro preview",
     "preview:worker": "rm -rf .wrangler/deploy && wrangler dev",
