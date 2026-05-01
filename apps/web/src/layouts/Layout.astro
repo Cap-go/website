@@ -14,7 +14,7 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
 ---
 
 <!doctype html>
-<html lang={Astro.locals.locale.toLowerCase()}>
+<html lang={Astro.locals.locale.toLowerCase()} class="antialiased">
   <head>
     <link rel="preload" as="font" type="font/woff" href="/fonts/AirbnbCerealLight.woff" crossorigin />
     <link rel="preload" as="font" type="font/woff" href="/fonts/AirbnbCerealMedium.woff" crossorigin />
@@ -30,7 +30,7 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
     >
       Skip to main content
     </a>
-    <div class="overflow-x-hidden bg-gray-900 text-white">
+    <div class="isolate overflow-x-hidden bg-gray-900 text-white">
       <Header />
       <main id="main-content">
         <slot />
