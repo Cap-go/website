@@ -250,6 +250,8 @@ The Android build may be ready quickly, but Google Play production access can ad
 
 As of May 1, 2026, Google's [testing requirements for new personal developer accounts](https://support.google.com/googleplay/android-developer/answer/14151465) say that affected accounts must run a closed test with at least 12 opted-in testers for 14 continuous days before applying for production access.
 
+Verify the latest Google Play policy at that link before submission because requirements can change.
+
 Plan this early:
 
 - Create the Play Console app before the final week.
