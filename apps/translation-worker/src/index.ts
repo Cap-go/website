@@ -1321,8 +1321,7 @@ async function refreshCacheIncrementally(request: Request, env: Env, requestUrl:
       return true
     }
 
-    console.error('Translation source returned transient terminal response', { pathname: requestUrl.pathname, locale, status: source.response.status })
-    return false
+    throw new Error(`Translation source returned transient response: ${source.response.status} ${source.response.statusText}`)
   }
 
   const { parts, segments } = collectSegments(source.sourceHtml)
