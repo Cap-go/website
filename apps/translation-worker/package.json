@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "check": "tsc --noEmit",
+    "test": "bun test test",
     "dev": "wrangler dev -c wrangler.jsonc -c ../web/wrangler.jsonc -c ../docs/wrangler.jsonc",
     "deploy": "wrangler deploy"
   }

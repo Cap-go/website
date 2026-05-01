@@ -121,6 +121,7 @@ const MAX_BATCH_CHARS = 1_500
 const MAX_BATCH_ITEMS = 32
 const TRANSLATION_BATCHES_PER_QUEUE_JOB = 1
 const TRANSLATION_MODEL_ATTEMPTS = 3
+const TRANSLATION_SINGLE_TEXT_ATTEMPTS = 2
 const TRANSLATION_QUEUE_RETRY_DELAY_SECONDS = 60
 const AI_OUTPUT_PREVIEW_CHARS = 240
 
@@ -902,6 +903,41 @@ function aiPayloadPreview(value: unknown): string {
   return text.replace(/\s+/g, ' ').trim().slice(0, AI_OUTPUT_PREVIEW_CHARS)
 }
 
+function unquotePlainTranslation(value: string): string {
+  const trimmed = stripJsonFence(value).trim()
+  if (trimmed.startsWith('"') && trimmed.endsWith('"')) {
+    const parsed = parseJsonValue(trimmed)
+    if (typeof parsed === 'string') return parsed.trim()
+  }
+  return trimmed
+}
+
+function plainTranslationFromUnknown(value: unknown, depth = 0): string | null {
+  if (depth > 3) return null
+  if (typeof value === 'string') {
+    const trimmed = stripJsonFence(value).trim()
+    const parsed = parseJsonValue(trimmed)
+    if (parsed !== null && typeof parsed !== 'string') {
+      const nested = plainTranslationFromUnknown(parsed, depth + 1)
+      if (nested) return nested
+    }
+    return unquotePlainTranslation(trimmed)
+  }
+
+  const array = stringArrayFromUnknown(value)
+  if (array?.length === 1) return unquotePlainTranslation(array[0])
+
+  const record = recordOf(value)
+  if (!record) return null
+
+  for (const key of ['translation', 'translated', 'translatedText', 'text', 'response', 'result', 'output', 'data']) {
+    const nested = plainTranslationFromUnknown(record[key], depth + 1)
+    if (nested) return nested
+  }
+
+  return null
+}
+
 function normalizedTranslationValue(value: string): string {
   return value.trim().replace(/\s+/g, ' ')
 }
@@ -989,7 +1025,69 @@ async function translateBatch(env: Env, targetLanguage: string, batch: string[])
     })
   }
 
-  throw new Error(`Translation model failed after ${TRANSLATION_MODEL_ATTEMPTS} attempts for ${targetLanguage}: ${lastError?.message ?? 'unknown error'}`)
+  console.warn('Translation batch JSON failed; falling back to single-text translation', {
+    targetLanguage,
+    batchSize: batch.length,
+    error: lastError?.message ?? 'unknown error',
+  })
+  return await translateBatchIndividually(env, targetLanguage, batch)
+}
+
+async function translateSingleText(env: Env, targetLanguage: string, text: string): Promise<string> {
+  const model = env.TRANSLATION_MODEL || DEFAULT_MODEL
+  let lastError: Error | null = null
+
+  for (let attempt = 1; attempt <= TRANSLATION_SINGLE_TEXT_ATTEMPTS; attempt += 1) {
+    let payload: unknown = ''
+    try {
+      const result = await env.AI.run(model, {
+        temperature: 0,
+        max_tokens: Math.min(2048, Math.max(256, text.length * 3 + 128)),
+        messages: [
+          {
+            role: 'system',
+            content: [
+              'You translate one Capgo website string for the target locale.',
+              'Translate naturally for the user cultural context; do not translate word for word.',
+              'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning.',
+              'Preserve terms like Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, and Cloudflare when they are names or technical terms.',
+              'Return only the translated text. Do not return JSON, Markdown, labels, explanations, quotes around the whole answer, or extra lines.',
+            ].join(' '),
+          },
+          {
+            role: 'user',
+            content: JSON.stringify({ targetLanguage, text }),
+          },
+        ],
+      })
+
+      payload = extractAiPayload(result)
+      const translated = plainTranslationFromUnknown(payload)
+      if (translated) return translated
+      lastError = new Error(`Translation model returned empty text for ${targetLanguage}`)
+    } catch (error) {
+      lastError = error instanceof Error ? error : new Error(errorMessage(error))
+    }
+
+    console.warn('Single-text translation response rejected', {
+      targetLanguage,
+      attempt,
+      maxAttempts: TRANSLATION_SINGLE_TEXT_ATTEMPTS,
+      error: lastError.message,
+      outputPreview: aiPayloadPreview(payload),
+    })
+  }
+
+  throw new Error(`Single-text translation failed for ${targetLanguage}: ${lastError?.message ?? 'unknown error'}`)
+}
+
+async function translateBatchIndividually(env: Env, targetLanguage: string, batch: string[]): Promise<string[]> {
+  const translated: string[] = []
+  for (const text of batch) {
+    translated.push(await translateSingleText(env, targetLanguage, text))
+  }
+  assertTranslatedBatch(targetLanguage, batch, translated)
+  return translated
 }
 
 function logPathnameFromUrl(value: string): string {
@@ -1684,6 +1782,10 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
 
   await enqueueTranslationSafely(env, requestUrl, locale, 'miss')
   return temporaryEnglishRedirectResponse(requestUrl, isHead)
+}
+
+export const __translationWorkerTest = {
+  TRANSLATION_CACHE_VERSION,
 }
 
 export default {
