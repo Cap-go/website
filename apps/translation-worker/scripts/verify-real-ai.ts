@@ -9,18 +9,29 @@ type ProbePayload = {
     cache?: boolean
     r2?: boolean
   }
+  page?: {
+    path?: string
+    locale?: string
+    segmentCount?: number
+    batchCount?: number
+    translatedBatchCount?: number
+    translatedSegmentCount?: number
+    changedCount?: number
+    samples?: unknown
+  }
   translations?: unknown
   error?: string
 }
 
 const WORKER_DIR = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const MODEL = process.env.TRANSLATION_REAL_TEST_MODEL || '@cf/meta/llama-3.1-8b-instruct-fast'
-const TIMEOUT_MS = Number.parseInt(process.env.TRANSLATION_REAL_TEST_TIMEOUT_MS || '180000', 10)
-const REQUEST_TIMEOUT_MS = Math.min(10_000, TIMEOUT_MS)
+const TIMEOUT_MS = Number.parseInt(process.env.TRANSLATION_REAL_TEST_TIMEOUT_MS || '240000', 10)
+const REQUEST_TIMEOUT_MS = Math.min(60_000, TIMEOUT_MS)
 const LOG_LIMIT = 16_000
 const WRANGLER_CONFIG = 'wrangler.real-test.jsonc'
 const DEVELOPMENT_R2_BUCKET = 'capgo-translation-cache-development'
 const SOURCE_TEXTS = ['Ship updates instantly', 'Pricing', 'Keep Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, and Cloudflare unchanged.']
+const REAL_PAGE_PROBES = ['/', '/docs/'] as const
 
 let wranglerLog = ''
 
@@ -127,7 +138,7 @@ function assertProbePayload(payload: ProbePayload): void {
   }
 }
 
-async function fetchProbe(url: string): Promise<ProbePayload> {
+async function fetchJsonProbe(url: string): Promise<ProbePayload> {
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
   let response: Response
@@ -151,7 +162,31 @@ async function fetchProbe(url: string): Promise<ProbePayload> {
   }
 
   if (!response.ok) throw new Error(payload.error || `Probe returned HTTP ${response.status}`)
+  return payload
+}
+
+async function fetchRuntimeProbe(url: string): Promise<ProbePayload> {
+  const payload = await fetchJsonProbe(url)
   assertProbePayload(payload)
+  return payload
+}
+
+async function fetchRealPageProbe(url: string, path: string): Promise<ProbePayload> {
+  const payload = await fetchJsonProbe(url)
+  if (!payload.ok) throw new Error(payload.error || `Real page probe failed for ${path}`)
+  if (payload.model !== MODEL) throw new Error(`Real page probe used ${payload.model || 'unknown model'} instead of ${MODEL}`)
+
+  const page = payload.page
+  if (!page) throw new Error(`Real page probe returned no page result for ${path}`)
+  if (page.path !== path) throw new Error(`Real page probe returned ${page.path || 'unknown path'} instead of ${path}`)
+  if (page.locale !== 'es') throw new Error(`Real page probe returned ${page.locale || 'unknown locale'} instead of es`)
+  if (!page.segmentCount || page.segmentCount < 1) throw new Error(`Real page probe found no segments for ${path}`)
+  if (!page.batchCount || page.batchCount < 1) throw new Error(`Real page probe found no batches for ${path}`)
+  if (!page.translatedBatchCount || page.translatedBatchCount < 1) throw new Error(`Real page probe translated no batches for ${path}`)
+  if (!page.translatedSegmentCount || page.translatedSegmentCount < 1) throw new Error(`Real page probe translated no segments for ${path}`)
+  if (!page.changedCount || page.changedCount < 1) throw new Error(`Real page probe left ${path} untranslated`)
+  if (!Array.isArray(page.samples) || page.samples.length < 1) throw new Error(`Real page probe returned no translated samples for ${path}`)
+
   return payload
 }
 
@@ -162,7 +197,12 @@ async function exitedCode(process: Bun.Subprocess<'pipe', 'pipe', 'inherit'>): P
 await ensureDevelopmentBucket()
 
 const port = await getFreePort()
-const probeUrl = `http://127.0.0.1:${port}/__translation-test__/real-runtime`
+const probeBaseUrl = `http://127.0.0.1:${port}`
+const runtimeProbeUrl = `${probeBaseUrl}/__translation-test__/real-runtime`
+const realPageProbeUrls = REAL_PAGE_PROBES.map((path) => ({
+  path,
+  url: `${probeBaseUrl}/__translation-test__/real-page?path=${encodeURIComponent(path)}&locale=es&batches=2`,
+}))
 const wrangler = Bun.spawn(
   [
     'bunx',
@@ -209,8 +249,11 @@ try {
     if (code !== null) throw new Error(`wrangler dev exited early with code ${code}`)
 
     try {
-      const payload = await fetchProbe(probeUrl)
-      console.log(`Real translation worker probe passed with ${payload.model}`)
+      const payload = await fetchRuntimeProbe(runtimeProbeUrl)
+      for (const probe of realPageProbeUrls) {
+        await fetchRealPageProbe(probe.url, probe.path)
+      }
+      console.log(`Real translation worker probe passed with ${payload.model} on ${REAL_PAGE_PROBES.join(', ')}`)
       passed = true
       break
     } catch (error) {

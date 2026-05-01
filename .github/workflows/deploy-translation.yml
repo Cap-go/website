@@ -53,7 +53,7 @@ jobs:
             if [ "$status" -eq 0 ]; then
               return 0
             fi
-            printf '%s\n' "$output" | grep -Eiq "already exists|already.*${queue}"
+            printf '%s\n' "$output" | grep -Eiq "already exists|already taken|already.*${queue}"
           }
 
           ensure_queue capgo-translation-refresh

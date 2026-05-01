@@ -1924,11 +1924,92 @@ async function probeRuntimeStorage(env: Env, requestUrl: URL): Promise<{ cache: 
   return { cache: true, r2: true }
 }
 
+function testProbeNumberParam(requestUrl: URL, name: string, defaultValue: number, minimum: number, maximum: number): number {
+  const rawValue = requestUrl.searchParams.get(name)
+  if (!rawValue) return defaultValue
+
+  const value = Number.parseInt(rawValue, 10)
+  if (!Number.isFinite(value)) return defaultValue
+  return Math.min(maximum, Math.max(minimum, value))
+}
+
+function testProbeLocaleParam(requestUrl: URL): Locale {
+  const rawLocale = requestUrl.searchParams.get('locale') || 'es'
+  return isSupportedLocale(rawLocale) ? rawLocale : 'es'
+}
+
+function testProbePathParam(requestUrl: URL): string {
+  const rawPath = requestUrl.searchParams.get('path') || '/'
+  const pathUrl = new URL(rawPath, 'https://capgo.app')
+  const pathname = normalizePathname(stripLocalePrefix(pathUrl.pathname))
+  if (shouldBypassTranslation(pathname)) throw new Error(`Real page probe cannot translate bypassed path: ${pathname}`)
+  return `${pathname}${pathUrl.search}`
+}
+
+async function probeRealPageTranslation(env: Env, requestUrl: URL): Promise<Record<string, unknown>> {
+  const locale = testProbeLocaleParam(requestUrl)
+  const targetLanguage = LANGUAGE_NAMES[locale]
+  const path = testProbePathParam(requestUrl)
+  const maxBatches = testProbeNumberParam(requestUrl, 'batches', 2, 1, 4)
+  const sourceUrl = new URL(path, 'https://capgo.app')
+  const sourceResponse = await fetch(sourceUrl.toString(), {
+    headers: {
+      Accept: 'text/html',
+      'Accept-Language': DEFAULT_LOCALE,
+      'X-Capgo-Translation-Origin': 'real-page-probe',
+    },
+  })
+
+  if (!sourceResponse.ok || !isHtmlResponse(sourceResponse)) {
+    throw new Error(`Real page probe source failed: ${sourceResponse.status} ${sourceResponse.statusText}`)
+  }
+
+  const sourceHtml = await sourceResponse.text()
+  const { segments } = collectSegments(sourceHtml)
+  const batches = buildBatches(segments)
+  if (batches.length === 0) throw new Error(`Real page probe found no translatable segments for ${path}`)
+
+  const translatedBatches: string[][] = []
+  const batchLimit = Math.min(maxBatches, batches.length)
+  for (let batchIndex = 0; batchIndex < batchLimit; batchIndex += 1) {
+    translatedBatches.push(await translateBatchWithJsonMode(env, targetLanguage, batches[batchIndex]))
+  }
+
+  const sourceTexts = batches.slice(0, batchLimit).flat()
+  const translatedTexts = translatedBatches.flat()
+  const changedCount = translatedTexts.filter((translated, index) => normalizedTranslationValue(translated) !== normalizedTranslationValue(sourceTexts[index] ?? '')).length
+  if (changedCount === 0) throw new Error(`Real page probe left ${path} untranslated for ${targetLanguage}`)
+
+  return {
+    path,
+    locale,
+    targetLanguage,
+    sourceBytes: sourceHtml.length,
+    segmentCount: segments.length,
+    batchCount: batches.length,
+    translatedBatchCount: translatedBatches.length,
+    translatedSegmentCount: translatedTexts.length,
+    changedCount,
+    samples: translatedTexts.slice(0, 5),
+  }
+}
+
 async function handleTranslationTestRequest(request: Request, env: Env, requestUrl: URL): Promise<Response> {
   if (request.method !== 'GET') return jsonResponse({ ok: false, error: 'Method not allowed' }, 405)
-  if (requestUrl.pathname !== `${TRANSLATION_TEST_ROUTE_PREFIX}/real-runtime`) return jsonResponse({ ok: false, error: 'Not found' }, 404)
 
   try {
+    if (requestUrl.pathname === `${TRANSLATION_TEST_ROUTE_PREFIX}/real-page`) {
+      const page = await probeRealPageTranslation(env, requestUrl)
+      return jsonResponse({
+        ok: true,
+        model: env.TRANSLATION_MODEL || DEFAULT_MODEL,
+        cacheVersion: TRANSLATION_CACHE_VERSION,
+        page,
+      })
+    }
+
+    if (requestUrl.pathname !== `${TRANSLATION_TEST_ROUTE_PREFIX}/real-runtime`) return jsonResponse({ ok: false, error: 'Not found' }, 404)
+
     const storage = await probeRuntimeStorage(env, requestUrl)
     const translations = await translateBatchWithJsonMode(env, 'Spanish', [
       'Ship updates instantly',
