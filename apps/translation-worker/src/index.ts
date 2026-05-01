@@ -282,7 +282,7 @@ function temporaryEnglishRedirectResponse(requestUrl: URL, isHead = false): Resp
     Location: localizedPath(requestUrl.pathname, DEFAULT_LOCALE) + requestUrl.search,
     'X-Capgo-Translation-Fallback': 'temporary-english-redirect',
   })
-  return withResponseHeaders(new Response(isHead ? null : null, { status: 302, headers }), 'BYPASS', isHead)
+  return withResponseHeaders(new Response(null, { status: 302, headers }), 'BYPASS', isHead)
 }
 
 function toCachedResponse(response: Response): Response {
@@ -564,42 +564,53 @@ function buildBatches(segments: Segment[]): string[][] {
   return batches
 }
 
-function extractAiText(result: unknown): string {
-  if (typeof result === 'string') return result
-  if (result && typeof result === 'object') {
-    const record = result as Record<string, unknown>
-    for (const key of ['response', 'text', 'result']) {
-      if (typeof record[key] === 'string') return record[key] as string
-    }
+function recordOf(value: unknown): Record<string, unknown> | null {
+  return value && typeof value === 'object' ? (value as Record<string, unknown>) : null
+}
 
-    const choices = record.choices
-    if (Array.isArray(choices)) {
-      for (const choice of choices) {
-        if (!choice || typeof choice !== 'object') continue
-        const choiceRecord = choice as Record<string, unknown>
-        if (typeof choiceRecord.text === 'string') return choiceRecord.text
+function extractContentText(content: unknown): string {
+  if (typeof content === 'string') return content
+  if (!Array.isArray(content)) return ''
 
-        const message = choiceRecord.message
-        if (message && typeof message === 'object') {
-          const content = (message as Record<string, unknown>).content
-          if (typeof content === 'string') return content
-          if (Array.isArray(content)) {
-            const text = content
-              .map((item) => {
-                if (typeof item === 'string') return item
-                if (item && typeof item === 'object' && typeof (item as Record<string, unknown>).text === 'string') {
-                  return (item as Record<string, unknown>).text as string
-                }
-                return ''
-              })
-              .join('')
-            if (text) return text
-          }
-        }
-      }
-    }
+  return content
+    .map((item) => {
+      if (typeof item === 'string') return item
+      const itemRecord = recordOf(item)
+      return typeof itemRecord?.text === 'string' ? itemRecord.text : ''
+    })
+    .join('')
+}
+
+function extractChoiceText(choice: unknown): string {
+  const choiceRecord = recordOf(choice)
+  if (!choiceRecord) return ''
+  if (typeof choiceRecord.text === 'string') return choiceRecord.text
+
+  const message = recordOf(choiceRecord.message)
+  return message ? extractContentText(message.content) : ''
+}
+
+function extractChoicesText(choices: unknown): string {
+  if (!Array.isArray(choices)) return ''
+
+  for (const choice of choices) {
+    const text = extractChoiceText(choice)
+    if (text) return text
   }
   return ''
+}
+
+function extractAiText(result: unknown): string {
+  if (typeof result === 'string') return result
+
+  const record = recordOf(result)
+  if (!record) return ''
+
+  for (const key of ['response', 'text', 'result']) {
+    if (typeof record[key] === 'string') return record[key] as string
+  }
+
+  return extractChoicesText(record.choices)
 }
 
 function stripJsonFence(value: string): string {
@@ -684,7 +695,7 @@ async function translateBatch(env: Env, targetLanguage: string, batch: string[])
       {
         role: 'system',
         content:
-          'You translate website copy. Translate every human-readable label, heading, sentence, and paragraph into the target language, including short navigation labels. Return only a JSON array of strings with the same length and order as the input. Preserve only brand names, product names, URLs, code identifiers, file paths, language codes, numbers, punctuation, and whitespace meaning. Do not leave English copy unchanged unless it is one of those preserved terms. Do not add explanations.',
+          'You translate website copy for real users. Translate every human-readable label, heading, sentence, and paragraph into natural, culturally appropriate target-language copy, including short navigation labels. Do not translate word for word when a local idiom or phrasing would read better. Return only a JSON array of strings with the same length and order as the input. Preserve brand names and product names such as Capgo, Cap-go, Capacitor, Ionic, Apple, Google, Cloudflare, and npm. Also preserve URLs, package names, API names, code identifiers, CLI commands, file paths, language codes, numbers, punctuation, and whitespace meaning. Do not leave English copy unchanged unless it is one of those preserved terms. Do not add explanations.',
       },
       {
         role: 'user',
