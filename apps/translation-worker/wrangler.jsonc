@@ -1,0 +1,78 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "capgo-translation",
+  "main": "./src/index.ts",
+  "compatibility_date": "2026-05-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "ai": {
+    "binding": "AI",
+  },
+  "vars": {
+    "TRANSLATION_MODEL": "@cf/meta/llama-3.1-8b-instruct",
+  },
+  "services": [
+    {
+      "binding": "WEB",
+      "service": "capgo-website",
+    },
+    {
+      "binding": "DOCS",
+      "service": "capgo-docs",
+    },
+  ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1,
+  },
+  "routes": [
+    { "pattern": "capgo.app/de", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/de/*", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/es", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/es/*", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/fr", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/fr/*", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/id", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/id/*", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/it", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/it/*", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/ja", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/ja/*", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/ko", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/ko/*", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/zh", "zone_name": "capgo.app" },
+    { "pattern": "capgo.app/zh/*", "zone_name": "capgo.app" },
+  ],
+  "env": {
+    "development": {
+      "services": [
+        {
+          "binding": "WEB",
+          "service": "capgo-website-development",
+        },
+        {
+          "binding": "DOCS",
+          "service": "capgo-docs-development",
+        },
+      ],
+      "routes": [
+        { "pattern": "development.capgo.app/de", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/de/*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/es", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/es/*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/fr", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/fr/*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/id", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/id/*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/it", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/it/*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/ja", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/ja/*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/ko", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/ko/*", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/zh", "zone_name": "capgo.app" },
+        { "pattern": "development.capgo.app/zh/*", "zone_name": "capgo.app" },
+      ],
+    },
+  },
+}

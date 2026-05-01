@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import * as m from '@/paraglide/messages'
+import m from '@/copy/messages'
 import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 
 const locale = Astro.locals.locale
@@ -74,8 +74,8 @@ const content = {
             {m.alternatives_open_transparent_desc({}, { locale })}
           </p>
           <ul class="ml-6 list-disc space-y-1 text-gray-400">
-            <li set:html={m.alternatives_open_transparent_li1({}, { locale })}></li>
-            <li set:html={m.alternatives_open_transparent_li2({}, { locale })}></li>
+            <li set:html={m.alternatives_open_transparent_li1({}, { locale })} />
+            <li set:html={m.alternatives_open_transparent_li2({}, { locale })} />
             <li>{m.alternatives_open_transparent_li3({}, { locale })}</li>
             <li>{m.alternatives_open_transparent_li4({}, { locale })}</li>
             <li>{m.alternatives_open_transparent_li5({}, { locale })}</li>
@@ -161,10 +161,7 @@ const content = {
               <h3 class="mb-2 text-2xl font-bold text-gray-100">Ionic Appflow</h3>
               <p class="text-sm text-orange-400">{m.alternatives_appflow_status({}, { locale })}</p>
             </div>
-            <a
-              href={getRelativeLocaleUrl(locale, 'ionic-appflow')}
-              class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700"
-            >
+            <a href={getRelativeLocaleUrl(locale, 'ionic-appflow')} class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700">
               {m.alternatives_appflow_migration_guide({}, { locale })}
             </a>
           </div>
@@ -221,10 +218,7 @@ const content = {
               <h3 class="mb-2 text-2xl font-bold text-gray-100">Capawesome Cloud</h3>
               <p class="text-sm text-green-400">{m.alternatives_capawesome_status({}, { locale })}</p>
             </div>
-            <a
-              href={getRelativeLocaleUrl(locale, 'capwesome')}
-              class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700"
-            >
+            <a href={getRelativeLocaleUrl(locale, 'capwesome')} class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700">
               {m.alternatives_capawesome_full_comparison({}, { locale })}
             </a>
           </div>
@@ -236,12 +230,12 @@ const content = {
 
             <p><strong class="text-gray-100">{m.alternatives_capawesome_differences_label({}, { locale })}</strong></p>
             <ul class="ml-6 list-disc space-y-1 text-gray-400">
-              <li set:html={m.alternatives_capawesome_diff_experience({}, { locale })}></li>
-              <li set:html={m.alternatives_capawesome_diff_scale({}, { locale })}></li>
-              <li set:html={m.alternatives_capawesome_diff_pricing({}, { locale })}></li>
-              <li set:html={m.alternatives_capawesome_diff_focus({}, { locale })}></li>
-              <li set:html={m.alternatives_capawesome_diff_security({}, { locale })}></li>
-              <li set:html={m.alternatives_capawesome_diff_support({}, { locale })}></li>
+              <li set:html={m.alternatives_capawesome_diff_experience({}, { locale })} />
+              <li set:html={m.alternatives_capawesome_diff_scale({}, { locale })} />
+              <li set:html={m.alternatives_capawesome_diff_pricing({}, { locale })} />
+              <li set:html={m.alternatives_capawesome_diff_focus({}, { locale })} />
+              <li set:html={m.alternatives_capawesome_diff_security({}, { locale })} />
+              <li set:html={m.alternatives_capawesome_diff_support({}, { locale })} />
             </ul>
           </div>
 
@@ -259,10 +253,12 @@ const content = {
       </h2>
       <div class="space-y-3 text-gray-300">
         <p>
-          <strong class="text-gray-100">{m.alternatives_not_good_at_ci_cd_label({}, { locale })}</strong> {m.alternatives_not_good_at_ci_cd({}, { locale })}
+          <strong class="text-gray-100">{m.alternatives_not_good_at_ci_cd_label({}, { locale })}</strong>
+          {m.alternatives_not_good_at_ci_cd({}, { locale })}
         </p>
         <p>
-          <strong class="text-gray-100">{m.alternatives_not_good_at_docs_label({}, { locale })}</strong> {m.alternatives_not_good_at_docs({}, { locale })}
+          <strong class="text-gray-100">{m.alternatives_not_good_at_docs_label({}, { locale })}</strong>
+          {m.alternatives_not_good_at_docs({}, { locale })}
         </p>
       </div>
     </div>
@@ -275,28 +271,28 @@ const content = {
 
       <div class="grid gap-6 sm:grid-cols-2">
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-          <p class="mb-2 italic text-gray-300">
+          <p class="mb-2 text-gray-300 italic">
             "{m.alternatives_testimonial_1({}, { locale })}"
           </p>
           <p class="text-sm text-gray-400">{m.alternatives_testimonial_1_author({}, { locale })}</p>
         </div>
 
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-          <p class="mb-2 italic text-gray-300">
+          <p class="mb-2 text-gray-300 italic">
             "{m.alternatives_testimonial_2({}, { locale })}"
           </p>
           <p class="text-sm text-gray-400">{m.alternatives_testimonial_2_author({}, { locale })}</p>
         </div>
 
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-          <p class="mb-2 italic text-gray-300">
+          <p class="mb-2 text-gray-300 italic">
             "{m.alternatives_testimonial_3({}, { locale })}"
           </p>
           <p class="text-sm text-gray-400">{m.alternatives_testimonial_3_author({}, { locale })}</p>
         </div>
 
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-          <p class="mb-2 italic text-gray-300">
+          <p class="mb-2 text-gray-300 italic">
             "{m.alternatives_testimonial_4({}, { locale })}"
           </p>
           <p class="text-sm text-gray-400">{m.alternatives_testimonial_4_author({}, { locale })}</p>
@@ -312,13 +308,10 @@ const content = {
       <p class="mb-8 text-gray-300">
         {m.alternatives_cta_subtitle({}, { locale })}
       </p>
-      <a
-        href={getRelativeLocaleUrl(locale, 'register')}
-        class="inline-block rounded-lg bg-emerald-600 px-8 py-3 text-lg font-medium text-white hover:bg-emerald-700"
-      >
+      <a href={getRelativeLocaleUrl(locale, 'register')} class="inline-block rounded-lg bg-emerald-600 px-8 py-3 text-lg font-medium text-white hover:bg-emerald-700">
         {m.alternatives_cta_button({}, { locale })}
       </a>
-      <p class="mt-4 text-sm text-gray-400" set:html={m.alternatives_cta_questions({}, { locale })}></p>
+      <p class="mt-4 text-sm text-gray-400" set:html={m.alternatives_cta_questions({}, { locale })} />
     </div>
   </div>
 </Layout>

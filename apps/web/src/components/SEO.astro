@@ -1,14 +1,13 @@
 ---
 import { baseDomain, structuredData } from '@/config/app'
 import { appName } from '@/constants'
-import * as m from '@/paraglide/messages'
+import m from '@/copy/messages'
 import { generateAlternateVersions } from '@/lib/alternateVersions'
 
 const rawLocale = (Astro.locals.locale || 'en').toString().toLowerCase()
 // Paraglide message functions use a narrower locale union than the app router.
 // Cast once here to avoid repeating casts and keep runtime behavior unchanged.
 const messageLocale = Astro.locals.locale as any
-
 
 const {
   ldJSON = structuredData,
@@ -54,8 +53,7 @@ const toStringUrl = (value: unknown): string | null => {
 }
 
 const titleString = typeof title === 'string' && title.trim().length > 0 ? title : m.website_title({}, { locale: messageLocale })
-const descriptionString =
-  typeof description === 'string' && description.trim().length > 0 ? description : m.website_description({}, { locale: messageLocale })
+const descriptionString = typeof description === 'string' && description.trim().length > 0 ? description : m.website_description({}, { locale: messageLocale })
 
 const urlString = toStringUrl(url) || Astro.url.toString()
 const canonicalString = toStringUrl(canonical) || urlString
@@ -84,6 +82,7 @@ if (displayDescription.length > descSize) displayDescription = `${displayDescrip
 
 const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
 ---
+
 <!-- Sitemap -->
 <link rel="sitemap" href="/sitemap-index.xml" />
 

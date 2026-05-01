@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import * as m from '@/paraglide/messages'
+import m from '@/copy/messages'
 
 const locale = Astro.locals.locale
 const title = m.capwesome_title({}, { locale })
@@ -17,14 +17,14 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
 ---
 
 <Layout content={content}>
-  <section class="py-16 bg-gray-900 sm:py-20">
-    <div class="px-6 mx-auto max-w-4xl lg:px-8">
+  <section class="bg-gray-900 py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-6 lg:px-8">
       <!-- Hero -->
-      <div class="text-center mb-12">
-        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl mb-4">
+      <div class="mb-12 text-center">
+        <h1 class="mb-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">
           {m.capwesome_hero_title({}, { locale })}
         </h1>
-        <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+        <p class="mx-auto max-w-2xl text-xl text-gray-300">
           {m.capwesome_hero_subtitle({}, { locale })}
         </p>
       </div>
@@ -57,9 +57,9 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
               {m.capwesome_diff_experience_title({}, { locale })}
             </h3>
             <div class="space-y-2 text-gray-300">
-              <p set:html={m.capwesome_diff_experience_capgo({}, { locale })}></p>
-              <p set:html={m.capwesome_diff_experience_capawesome({}, { locale })}></p>
-              <p class="text-sm text-gray-400 pt-2">
+              <p set:html={m.capwesome_diff_experience_capgo({}, { locale })} />
+              <p set:html={m.capwesome_diff_experience_capawesome({}, { locale })} />
+              <p class="pt-2 text-sm text-gray-400">
                 {m.capwesome_diff_experience_note({}, { locale })}
               </p>
             </div>
@@ -71,9 +71,9 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
               {m.capwesome_diff_pricing_title({}, { locale })}
             </h3>
             <div class="space-y-2 text-gray-300">
-              <p set:html={m.capwesome_diff_pricing_capgo({}, { locale })}></p>
-              <p set:html={m.capwesome_diff_pricing_capawesome({}, { locale })}></p>
-              <p class="text-sm text-gray-400 pt-2">
+              <p set:html={m.capwesome_diff_pricing_capgo({}, { locale })} />
+              <p set:html={m.capwesome_diff_pricing_capawesome({}, { locale })} />
+              <p class="pt-2 text-sm text-gray-400">
                 {m.capwesome_diff_pricing_note({}, { locale })}
               </p>
             </div>
@@ -85,20 +85,20 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
               {m.capwesome_diff_opensource_title({}, { locale })}
             </h3>
             <div class="space-y-2 text-gray-300">
-              <p set:html={m.capwesome_diff_opensource_capgo({}, { locale })}></p>
+              <p set:html={m.capwesome_diff_opensource_capgo({}, { locale })} />
               <ul class="ml-6 list-disc space-y-1 text-gray-400">
-                <li set:html={m.capwesome_diff_opensource_capgo_li1({}, { locale })}></li>
-                <li set:html={m.capwesome_diff_opensource_capgo_li2({}, { locale })}></li>
+                <li set:html={m.capwesome_diff_opensource_capgo_li1({}, { locale })} />
+                <li set:html={m.capwesome_diff_opensource_capgo_li2({}, { locale })} />
                 <li>{m.capwesome_diff_opensource_capgo_li3({}, { locale })}</li>
                 <li>{m.capwesome_diff_opensource_capgo_li4({}, { locale })}</li>
               </ul>
-              <p class="mt-2" set:html={m.capwesome_diff_opensource_capawesome({}, { locale })}></p>
+              <p class="mt-2" set:html={m.capwesome_diff_opensource_capawesome({}, { locale })} />
               <ul class="ml-6 list-disc space-y-1 text-gray-400">
                 <li>{m.capwesome_diff_opensource_capawesome_li1({}, { locale })}</li>
                 <li>{m.capwesome_diff_opensource_capawesome_li2({}, { locale })}</li>
                 <li>{m.capwesome_diff_opensource_capawesome_li3({}, { locale })}</li>
               </ul>
-              <p class="text-sm text-gray-400 pt-2">
+              <p class="pt-2 text-sm text-gray-400">
                 {m.capwesome_diff_opensource_note({}, { locale })}
               </p>
             </div>
@@ -110,15 +110,15 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
               {m.capwesome_diff_business_title({}, { locale })}
             </h3>
             <div class="space-y-2 text-gray-300">
-              <p set:html={m.capwesome_diff_business_capgo({}, { locale })}></p>
-              <ul class="ml-6 list-disc space-y-1 text-gray-400 text-sm">
+              <p set:html={m.capwesome_diff_business_capgo({}, { locale })} />
+              <ul class="ml-6 list-disc space-y-1 text-sm text-gray-400">
                 <li>{m.capwesome_diff_business_capgo_li1({}, { locale })}</li>
                 <li>{m.capwesome_diff_business_capgo_li2({}, { locale })}</li>
                 <li>{m.capwesome_diff_business_capgo_li3({}, { locale })}</li>
                 <li>{m.capwesome_diff_business_capgo_li4({}, { locale })}</li>
               </ul>
-              <p class="mt-3" set:html={m.capwesome_diff_business_capawesome({}, { locale })}></p>
-              <p class="text-gray-400 text-sm pt-2">
+              <p class="mt-3" set:html={m.capwesome_diff_business_capawesome({}, { locale })} />
+              <p class="pt-2 text-sm text-gray-400">
                 {m.capwesome_diff_business_note({}, { locale })}
               </p>
             </div>
@@ -130,9 +130,9 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
               {m.capwesome_diff_plugins_title({}, { locale })}
             </h3>
             <div class="space-y-2 text-gray-300">
-              <p set:html={m.capwesome_diff_plugins_capgo({}, { locale })}></p>
-              <p set:html={m.capwesome_diff_plugins_capawesome({}, { locale })}></p>
-              <p class="text-gray-400 text-sm pt-2">
+              <p set:html={m.capwesome_diff_plugins_capgo({}, { locale })} />
+              <p set:html={m.capwesome_diff_plugins_capawesome({}, { locale })} />
+              <p class="pt-2 text-sm text-gray-400">
                 {m.capwesome_diff_plugins_note({}, { locale })}
               </p>
             </div>
@@ -144,10 +144,10 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
               {m.capwesome_diff_support_title({}, { locale })}
             </h3>
             <div class="space-y-2 text-gray-300">
-              <p set:html={m.capwesome_diff_support_both({}, { locale })}></p>
-              <p set:html={m.capwesome_diff_support_capgo({}, { locale })}></p>
-              <p set:html={m.capwesome_diff_support_capawesome({}, { locale })}></p>
-              <p class="text-gray-400 text-sm pt-2">
+              <p set:html={m.capwesome_diff_support_both({}, { locale })} />
+              <p set:html={m.capwesome_diff_support_capgo({}, { locale })} />
+              <p set:html={m.capwesome_diff_support_capawesome({}, { locale })} />
+              <p class="pt-2 text-sm text-gray-400">
                 {m.capwesome_diff_support_note({}, { locale })}
               </p>
             </div>
@@ -159,9 +159,9 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
               {m.capwesome_diff_channels_title({}, { locale })}
             </h3>
             <div class="space-y-2 text-gray-300">
-              <p set:html={m.capwesome_diff_channels_capgo({}, { locale })}></p>
-              <p set:html={m.capwesome_diff_channels_capawesome({}, { locale })}></p>
-              <p class="text-gray-400 text-sm pt-2">
+              <p set:html={m.capwesome_diff_channels_capgo({}, { locale })} />
+              <p set:html={m.capwesome_diff_channels_capawesome({}, { locale })} />
+              <p class="pt-2 text-sm text-gray-400">
                 {m.capwesome_diff_channels_note({}, { locale })}
               </p>
             </div>
@@ -173,9 +173,9 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
               {m.capwesome_diff_logs_title({}, { locale })}
             </h3>
             <div class="space-y-2 text-gray-300">
-              <p set:html={m.capwesome_diff_logs_capgo({}, { locale })}></p>
-              <p set:html={m.capwesome_diff_logs_capawesome({}, { locale })}></p>
-              <p class="text-gray-400 text-sm pt-2">
+              <p set:html={m.capwesome_diff_logs_capgo({}, { locale })} />
+              <p set:html={m.capwesome_diff_logs_capawesome({}, { locale })} />
+              <p class="pt-2 text-sm text-gray-400">
                 {m.capwesome_diff_logs_note({}, { locale })}
               </p>
             </div>
@@ -190,15 +190,18 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
         </h2>
         <div class="space-y-3 text-gray-300">
           <p>
-            <strong class="text-gray-100">{m.capwesome_when_better_manual_label({}, { locale })}</strong> {m.capwesome_when_better_manual({}, { locale })}
+            <strong class="text-gray-100">{m.capwesome_when_better_manual_label({}, { locale })}</strong>
+            {m.capwesome_when_better_manual({}, { locale })}
           </p>
           <p>
-            <strong class="text-gray-100">{m.capwesome_when_better_git_label({}, { locale })}</strong> {m.capwesome_when_better_git({}, { locale })}
+            <strong class="text-gray-100">{m.capwesome_when_better_git_label({}, { locale })}</strong>
+            {m.capwesome_when_better_git({}, { locale })}
           </p>
           <p>
-            <strong class="text-gray-100">{m.capwesome_when_better_european_label({}, { locale })}</strong> {m.capwesome_when_better_european({}, { locale })}
+            <strong class="text-gray-100">{m.capwesome_when_better_european_label({}, { locale })}</strong>
+            {m.capwesome_when_better_european({}, { locale })}
           </p>
-          <p class="text-sm text-gray-400 pt-2">
+          <p class="pt-2 text-sm text-gray-400">
             {m.capwesome_when_better_note({}, { locale })}
           </p>
         </div>
@@ -211,10 +214,12 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
         </h2>
         <div class="space-y-3 text-gray-300">
           <p>
-            <strong class="text-gray-100">{m.capwesome_not_good_at_docs_label({}, { locale })}</strong> {m.capwesome_not_good_at_docs({}, { locale })}
+            <strong class="text-gray-100">{m.capwesome_not_good_at_docs_label({}, { locale })}</strong>
+            {m.capwesome_not_good_at_docs({}, { locale })}
           </p>
           <p>
-            <strong class="text-gray-100">{m.capwesome_not_good_at_git_label({}, { locale })}</strong> {m.capwesome_not_good_at_git({}, { locale })}
+            <strong class="text-gray-100">{m.capwesome_not_good_at_git_label({}, { locale })}</strong>
+            {m.capwesome_not_good_at_git({}, { locale })}
           </p>
         </div>
       </div>
@@ -226,8 +231,8 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
         </h2>
         <div class="grid gap-6 sm:grid-cols-2">
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-            <h3 class="text-lg font-semibold text-white mb-4">Capgo</h3>
-            <ul class="space-y-2 text-gray-300 text-sm">
+            <h3 class="mb-4 text-lg font-semibold text-white">Capgo</h3>
+            <ul class="space-y-2 text-sm text-gray-300">
               <li>{m.capwesome_quick_facts_capgo_li1({}, { locale })}</li>
               <li>{m.capwesome_quick_facts_capgo_li2({}, { locale })}</li>
               <li>{m.capwesome_quick_facts_capgo_li3({}, { locale })}</li>
@@ -239,8 +244,8 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
             </ul>
           </div>
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-            <h3 class="text-lg font-semibold text-white mb-4">Capawesome</h3>
-            <ul class="space-y-2 text-gray-300 text-sm">
+            <h3 class="mb-4 text-lg font-semibold text-white">Capawesome</h3>
+            <ul class="space-y-2 text-sm text-gray-300">
               <li>{m.capwesome_quick_facts_capawesome_li1({}, { locale })}</li>
               <li>{m.capwesome_quick_facts_capawesome_li2({}, { locale })}</li>
               <li>{m.capwesome_quick_facts_capawesome_li3({}, { locale })}</li>
@@ -266,23 +271,23 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
           <p>
             {m.capwesome_migration_intro({}, { locale })}
           </p>
-          <div class="mt-6 p-6 bg-gray-800 rounded-xl">
-            <h3 class="text-lg font-semibold text-white mb-3">{m.capwesome_migration_basics_title({}, { locale })}</h3>
+          <div class="mt-6 rounded-xl bg-gray-800 p-6">
+            <h3 class="mb-3 text-lg font-semibold text-white">{m.capwesome_migration_basics_title({}, { locale })}</h3>
             <ol class="space-y-2 text-gray-300">
               <li class="flex gap-3">
-                <span class="text-emerald-400 font-semibold">1.</span>
+                <span class="font-semibold text-emerald-400">1.</span>
                 <span>{m.capwesome_migration_step1({}, { locale })}</span>
               </li>
               <li class="flex gap-3">
-                <span class="text-emerald-400 font-semibold">2.</span>
+                <span class="font-semibold text-emerald-400">2.</span>
                 <span>{m.capwesome_migration_step2({}, { locale })}</span>
               </li>
               <li class="flex gap-3">
-                <span class="text-emerald-400 font-semibold">3.</span>
+                <span class="font-semibold text-emerald-400">3.</span>
                 <span>{m.capwesome_migration_step3({}, { locale })}</span>
               </li>
             </ol>
-            <p class="mt-4 text-sm text-emerald-300" set:html={m.capwesome_migration_guide_text({ url: migrationGuideUrl }, { locale })}></p>
+            <p class="mt-4 text-sm text-emerald-300" set:html={m.capwesome_migration_guide_text({ url: migrationGuideUrl }, { locale })} />
           </div>
         </div>
       </div>
@@ -294,41 +299,40 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
         </h2>
         <div class="grid gap-6 sm:grid-cols-2">
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-            <p class="mb-2 italic text-gray-300">
+            <p class="mb-2 text-gray-300 italic">
               "{m.capwesome_testimonial_1({}, { locale })}"
             </p>
             <p class="text-sm text-gray-400">{m.capwesome_testimonial_1_author({}, { locale })}</p>
           </div>
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-            <p class="mb-2 italic text-gray-300">
+            <p class="mb-2 text-gray-300 italic">
               "{m.capwesome_testimonial_2({}, { locale })}"
             </p>
             <p class="text-sm text-gray-400">{m.capwesome_testimonial_2_author({}, { locale })}</p>
           </div>
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-            <p class="mb-2 italic text-gray-300">
+            <p class="mb-2 text-gray-300 italic">
               "{m.capwesome_testimonial_3({}, { locale })}"
             </p>
             <p class="text-sm text-gray-400">{m.capwesome_testimonial_3_author({}, { locale })}</p>
           </div>
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
-            <p class="mb-2 italic text-gray-300">
+            <p class="mb-2 text-gray-300 italic">
               "{m.capwesome_testimonial_4({}, { locale })}"
             </p>
             <p class="text-sm text-gray-400">{m.capwesome_testimonial_4_author({}, { locale })}</p>
           </div>
         </div>
 
-        <div class="mt-8 p-6 bg-gray-800 rounded-xl">
-          <h3 class="text-lg font-semibold text-white mb-4">{m.capwesome_testimonials_more({}, { locale })}</h3>
+        <div class="mt-8 rounded-xl bg-gray-800 p-6">
+          <h3 class="mb-4 text-lg font-semibold text-white">{m.capwesome_testimonials_more({}, { locale })}</h3>
           <iframe
             id="wall-of-love-Ngmn41b"
             src="https://senja.io/p/capgo/Ngmn41b?hideNavigation=true&embed=true"
             aria-label="Wall of Love"
             style="border: 0; overflow: hidden;"
             width="100%"
-            class="min-h-100"
-          ></iframe>
+            class="min-h-100"></iframe>
           <script is:inline>
             document.addEventListener('DOMContentLoaded', function () {
               if (typeof iFrameResize === 'function') {
@@ -340,33 +344,33 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
       </div>
 
       <!-- CTA -->
-      <div class="overflow-hidden p-1 bg-linear-to-r rounded-3xl ring-1 from-[#44BCFF]/10 via-[#FF44EC]/10 to-[#FF675E]/10 ring-white/10">
-        <div class="overflow-hidden relative py-12 px-8 bg-gray-900 sm:py-16 sm:px-12 rounded-[1.45rem]">
-          <div class="absolute -left-10 -top-24 w-48 h-48 rounded-full pointer-events-none bg-[#44BCFF]/30 blur-3xl"></div>
-          <div class="absolute -right-16 -bottom-28 w-56 h-56 rounded-full pointer-events-none bg-[#FF44EC]/20 blur-3xl"></div>
+      <div class="overflow-hidden rounded-3xl bg-linear-to-r from-[#44BCFF]/10 via-[#FF44EC]/10 to-[#FF675E]/10 p-1 ring-1 ring-white/10">
+        <div class="relative overflow-hidden rounded-[1.45rem] bg-gray-900 px-8 py-12 sm:px-12 sm:py-16">
+          <div class="pointer-events-none absolute -top-24 -left-10 h-48 w-48 rounded-full bg-[#44BCFF]/30 blur-3xl"></div>
+          <div class="pointer-events-none absolute -right-16 -bottom-28 h-56 w-56 rounded-full bg-[#FF44EC]/20 blur-3xl"></div>
           <div class="relative text-center">
-            <h2 class="text-3xl font-bold text-white sm:text-4xl mb-4">
+            <h2 class="mb-4 text-3xl font-bold text-white sm:text-4xl">
               {m.capwesome_cta_title({}, { locale })}
             </h2>
-            <p class="text-gray-300 mb-8 max-w-2xl mx-auto">
+            <p class="mx-auto mb-8 max-w-2xl text-gray-300">
               {m.capwesome_cta_subtitle({}, { locale })}
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center">
+            <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <a
                 href={getRelativeLocaleUrl(locale, 'register')}
-                class="inline-flex justify-center items-center py-4 px-8 text-lg font-bold text-white bg-emerald-600 rounded-xl hover:bg-emerald-700 transition-all"
+                class="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-8 py-4 text-lg font-bold text-white transition-all hover:bg-emerald-700"
               >
                 {m.capwesome_cta_start_trial({}, { locale })}
               </a>
               <a
                 href="https://cal.com/team/capgo/demo"
                 target="_blank"
-                class="inline-flex justify-center items-center py-4 px-8 text-lg font-semibold text-white rounded-xl ring-1 bg-white/10 ring-white/20 hover:bg-white/15"
+                class="inline-flex items-center justify-center rounded-xl bg-white/10 px-8 py-4 text-lg font-semibold text-white ring-1 ring-white/20 hover:bg-white/15"
               >
                 {m.capwesome_cta_book_demo_btn({}, { locale })}
               </a>
             </div>
-            <p class="mt-6 text-sm text-gray-400" set:html={m.capwesome_cta_questions({}, { locale })}></p>
+            <p class="mt-6 text-sm text-gray-400" set:html={m.capwesome_cta_questions({}, { locale })} />
           </div>
         </div>
       </div>

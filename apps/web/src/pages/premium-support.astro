@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import * as m from '@/paraglide/messages'
+import m from '@/copy/messages'
 import { createServiceLdJson, createLdJsonGraph, createFAQPageLdJson } from '@/lib/ldJson'
 
 const locale = Astro.locals.locale
@@ -80,65 +80,70 @@ const helpAreas = [
 
 <Layout content={content}>
   <!-- Hero Section -->
-  <section class="relative py-20 sm:py-28 lg:py-36 overflow-hidden">
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-full">
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-red-500/10 rounded-full blur-3xl"></div>
+  <section class="relative overflow-hidden py-20 sm:py-28 lg:py-36">
+    <div class="pointer-events-none absolute inset-0 overflow-hidden">
+      <div class="absolute top-0 left-1/2 h-full w-full max-w-6xl -translate-x-1/2">
+        <div class="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-orange-500/10 blur-3xl"></div>
+        <div class="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-red-500/10 blur-3xl"></div>
       </div>
     </div>
 
-    <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto text-center">
-        <div class="inline-flex items-center px-4 py-2 text-sm font-medium text-orange-200 border rounded-full border-orange-400/40 bg-orange-500/10 mb-8">
-          <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-4xl text-center">
+        <div class="mb-8 inline-flex items-center rounded-full border border-orange-400/40 bg-orange-500/10 px-4 py-2 text-sm font-medium text-orange-200">
+          <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
+            ></path>
           </svg>
           {m.ps_retainer_badge({}, { locale })}
         </div>
 
-        <h1 class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+        <h1 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">
           {m.ps_hero_title_1({}, { locale })}
           <br />
           <span class="text-orange-400">{m.ps_hero_title_2({}, { locale })}</span>
         </h1>
 
-        <p class="max-w-3xl mx-auto mt-8 text-xl leading-relaxed text-gray-300">
+        <p class="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-gray-300">
           {m.ps_hero_subtitle({}, { locale })}
           <br class="hidden sm:block" />
           <strong class="text-white">{m.ps_hero_subtitle_strong({}, { locale })}</strong>
         </p>
 
-        <div class="mt-10 p-8 bg-gray-800/50 rounded-2xl border border-gray-700 max-w-2xl mx-auto">
-          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
+        <div class="mx-auto mt-10 max-w-2xl rounded-2xl border border-gray-700 bg-gray-800/50 p-8">
+          <div class="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-8">
             <div class="text-center">
               <div class="text-5xl font-bold text-white">{m.ps_price({}, { locale })}</div>
-              <div class="text-gray-400 mt-1">{m.ps_per_month({}, { locale })}</div>
+              <div class="mt-1 text-gray-400">{m.ps_per_month({}, { locale })}</div>
             </div>
-            <div class="hidden sm:block w-px h-16 bg-gray-600"></div>
+            <div class="hidden h-16 w-px bg-gray-600 sm:block"></div>
             <div class="text-center">
               <div class="text-5xl font-bold text-orange-400">{m.ps_hours({}, { locale })}</div>
-              <div class="text-gray-400 mt-1">{m.ps_of_expert_support({}, { locale })}</div>
+              <div class="mt-1 text-gray-400">{m.ps_of_expert_support({}, { locale })}</div>
             </div>
           </div>
-          <p class="mt-4 text-gray-400 text-sm">{m.ps_rate_info({}, { locale })}</p>
+          <p class="mt-4 text-sm text-gray-400">{m.ps_rate_info({}, { locale })}</p>
         </div>
 
-        <div class="flex flex-col items-center justify-center gap-4 mt-10 sm:flex-row">
+        <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
             href="https://pay.capgo.app/b/8wM8wNaKHbTMbsIfZg"
             target="_blank"
-            class="px-8 py-4 text-base font-semibold text-white transition-all duration-200 bg-orange-600 rounded-xl hover:bg-orange-700 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 shadow-lg shadow-orange-500/25"
+            class="rounded-xl bg-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-orange-500/25 transition-all duration-200 hover:bg-orange-700 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
           >
             {m.ps_subscribe_now({}, { locale })}
-            <svg class="inline-block w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="ml-2 inline-block h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
             </svg>
           </a>
           <a
             href="https://cal.com/team/capgo/premium-support"
             target="_blank"
-            class="px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 border border-gray-600 rounded-xl hover:bg-gray-800 hover:text-white"
+            class="rounded-xl border border-gray-600 px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 hover:bg-gray-800 hover:text-white"
           >
             {m.ps_talk_first({}, { locale })}
           </a>
@@ -148,42 +153,55 @@ const helpAreas = [
   </section>
 
   <!-- The Problem Section -->
-  <section class="py-20 bg-gray-800">
-    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto text-center mb-16">
-        <h2 class="text-sm font-semibold tracking-wide text-red-400 uppercase mb-4">{m.ps_reality({}, { locale })}</h2>
+  <section class="bg-gray-800 py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto mb-16 max-w-3xl text-center">
+        <h2 class="mb-4 text-sm font-semibold tracking-wide text-red-400 uppercase">{m.ps_reality({}, { locale })}</h2>
         <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.ps_when_things_go_wrong({}, { locale })}</h3>
         <p class="mt-4 text-xl text-gray-400">{m.ps_you_know_the_feeling({}, { locale })}</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        <div class="bg-gray-900 rounded-2xl p-8 border border-red-500/20">
-          <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center mb-6">
-            <svg class="w-6 h-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      <div class="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-3">
+        <div class="rounded-2xl border border-red-500/20 bg-gray-900 p-8">
+          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
+            <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
             </svg>
           </div>
-          <h4 class="text-xl font-bold text-white mb-3">{m.ps_problem_crash_title({}, { locale })}</h4>
+          <h4 class="mb-3 text-xl font-bold text-white">{m.ps_problem_crash_title({}, { locale })}</h4>
           <p class="text-gray-400">{m.ps_problem_crash_desc({}, { locale })}</p>
         </div>
 
-        <div class="bg-gray-900 rounded-2xl p-8 border border-red-500/20">
-          <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center mb-6">
-            <svg class="w-6 h-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+        <div class="rounded-2xl border border-red-500/20 bg-gray-900 p-8">
+          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
+            <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
             </svg>
           </div>
-          <h4 class="text-xl font-bold text-white mb-3">{m.ps_problem_blocked_title({}, { locale })}</h4>
+          <h4 class="mb-3 text-xl font-bold text-white">{m.ps_problem_blocked_title({}, { locale })}</h4>
           <p class="text-gray-400">{m.ps_problem_blocked_desc({}, { locale })}</p>
         </div>
 
-        <div class="bg-gray-900 rounded-2xl p-8 border border-red-500/20">
-          <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center mb-6">
-            <svg class="w-6 h-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <div class="rounded-2xl border border-red-500/20 bg-gray-900 p-8">
+          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
+            <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
             </svg>
           </div>
-          <h4 class="text-xl font-bold text-white mb-3">{m.ps_problem_confused_title({}, { locale })}</h4>
+          <h4 class="mb-3 text-xl font-bold text-white">{m.ps_problem_confused_title({}, { locale })}</h4>
           <p class="text-gray-400">{m.ps_problem_confused_desc({}, { locale })}</p>
         </div>
       </div>
@@ -191,78 +209,86 @@ const helpAreas = [
   </section>
 
   <!-- Features Section -->
-  <section class="py-20 bg-gray-900">
-    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto text-center mb-16">
-        <h2 class="text-sm font-semibold tracking-wide text-green-400 uppercase mb-4">{m.ps_solution({}, { locale })}</h2>
+  <section class="bg-gray-900 py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto mb-16 max-w-3xl text-center">
+        <h2 class="mb-4 text-sm font-semibold tracking-wide text-green-400 uppercase">{m.ps_solution({}, { locale })}</h2>
         <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.ps_expert_backup({}, { locale })}</h3>
         <p class="mt-4 text-xl text-gray-400">{m.ps_expert_backup_desc({}, { locale })}</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-        {supportFeatures.map((feature) => (
-          <div class="bg-gray-800 rounded-2xl p-8 border border-gray-700 hover:border-orange-500/50 transition-colors">
-            <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center mb-6">
-              <svg class="w-6 h-6 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={feature.icon} />
-              </svg>
+      <div class="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">
+        {
+          supportFeatures.map((feature) => (
+            <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8 transition-colors hover:border-orange-500/50">
+              <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-orange-500/20">
+                <svg class="h-6 w-6 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={feature.icon} />
+                </svg>
+              </div>
+              <h4 class="mb-3 text-xl font-bold text-white">{feature.title}</h4>
+              <p class="text-gray-400">{feature.description}</p>
             </div>
-            <h4 class="text-xl font-bold text-white mb-3">{feature.title}</h4>
-            <p class="text-gray-400">{feature.description}</p>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   </section>
 
   <!-- What We Help With Section -->
-  <section class="py-20 bg-gray-800">
-    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto text-center mb-16">
+  <section class="bg-gray-800 py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto mb-16 max-w-3xl text-center">
         <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.ps_what_we_help({}, { locale })}</h2>
         <p class="mt-4 text-xl text-gray-400">{m.ps_what_we_help_desc({}, { locale })}</p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-        {helpAreas.map((area) => (
-          <div class="bg-gray-900 rounded-xl p-6 border border-gray-700">
-            <div class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-green-400 mt-1 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              <div>
-                <h4 class="font-bold text-white">{area.title}</h4>
-                <p class="text-sm text-gray-400 mt-1">{area.desc}</p>
+      <div class="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          helpAreas.map((area) => (
+            <div class="rounded-xl border border-gray-700 bg-gray-900 p-6">
+              <div class="flex items-start gap-3">
+                <svg class="mt-1 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <div>
+                  <h4 class="font-bold text-white">{area.title}</h4>
+                  <p class="mt-1 text-sm text-gray-400">{area.desc}</p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   </section>
 
   <!-- How It Works Section -->
-  <section class="py-20 bg-gray-900">
-    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto text-center mb-16">
+  <section class="bg-gray-900 py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto mb-16 max-w-3xl text-center">
         <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.ps_how_it_works({}, { locale })}</h2>
       </div>
 
-      <div class="max-w-4xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="mx-auto max-w-4xl">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div class="text-center">
-            <div class="flex justify-center items-center mx-auto mb-6 w-16 h-16 text-2xl font-bold text-white bg-orange-600 rounded-full">1</div>
-            <h4 class="text-xl font-bold text-white mb-2">{m.ps_step1_title({}, { locale })}</h4>
+            <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-orange-600 text-2xl font-bold text-white">1</div>
+            <h4 class="mb-2 text-xl font-bold text-white">{m.ps_step1_title({}, { locale })}</h4>
             <p class="text-gray-400">{m.ps_step1_desc({}, { locale })}</p>
           </div>
           <div class="text-center">
-            <div class="flex justify-center items-center mx-auto mb-6 w-16 h-16 text-2xl font-bold text-white bg-orange-600 rounded-full">2</div>
-            <h4 class="text-xl font-bold text-white mb-2">{m.ps_step2_title({}, { locale })}</h4>
+            <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-orange-600 text-2xl font-bold text-white">2</div>
+            <h4 class="mb-2 text-xl font-bold text-white">{m.ps_step2_title({}, { locale })}</h4>
             <p class="text-gray-400">{m.ps_step2_desc({}, { locale })}</p>
           </div>
           <div class="text-center">
-            <div class="flex justify-center items-center mx-auto mb-6 w-16 h-16 text-2xl font-bold text-white bg-orange-600 rounded-full">3</div>
-            <h4 class="text-xl font-bold text-white mb-2">{m.ps_step3_title({}, { locale })}</h4>
+            <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-orange-600 text-2xl font-bold text-white">3</div>
+            <h4 class="mb-2 text-xl font-bold text-white">{m.ps_step3_title({}, { locale })}</h4>
             <p class="text-gray-400">{m.ps_step3_desc({}, { locale })}</p>
           </div>
         </div>
@@ -271,49 +297,64 @@ const helpAreas = [
   </section>
 
   <!-- Pricing Details Section -->
-  <section class="py-20 bg-gray-800">
-    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <div class="bg-gray-900 rounded-2xl p-8 lg:p-12 border border-orange-500/30">
-          <div class="text-center mb-8">
-            <h2 class="text-3xl font-bold text-white mb-2">{m.ps_retainer_badge({}, { locale })}</h2>
+  <section class="bg-gray-800 py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl">
+        <div class="rounded-2xl border border-orange-500/30 bg-gray-900 p-8 lg:p-12">
+          <div class="mb-8 text-center">
+            <h2 class="mb-2 text-3xl font-bold text-white">{m.ps_retainer_badge({}, { locale })}</h2>
             <p class="text-gray-400">{m.ps_peace_of_mind({}, { locale })}</p>
           </div>
 
-          <div class="flex flex-col md:flex-row items-center justify-center gap-8 mb-8">
+          <div class="mb-8 flex flex-col items-center justify-center gap-8 md:flex-row">
             <div class="text-center">
               <div class="text-6xl font-bold text-white">{m.ps_price({}, { locale })}</div>
               <div class="text-gray-400">/{m.month({}, { locale })}</div>
             </div>
-            <div class="hidden md:block w-px h-24 bg-gray-700"></div>
+            <div class="hidden h-24 w-px bg-gray-700 md:block"></div>
             <div class="space-y-3 text-left">
               <div class="flex items-center gap-2 text-gray-300">
-                <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"></path>
                 </svg>
                 {m.ps_benefit_hours({}, { locale })}
               </div>
               <div class="flex items-center gap-2 text-gray-300">
-                <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"></path>
                 </svg>
                 {m.ps_benefit_priority({}, { locale })}
               </div>
               <div class="flex items-center gap-2 text-gray-300">
-                <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"></path>
                 </svg>
                 {m.ps_benefit_direct({}, { locale })}
               </div>
               <div class="flex items-center gap-2 text-gray-300">
-                <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"></path>
                 </svg>
                 {m.ps_benefit_additional({}, { locale })}
               </div>
               <div class="flex items-center gap-2 text-gray-300">
-                <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"></path>
                 </svg>
                 {m.ps_benefit_cancel({}, { locale })}
               </div>
@@ -324,10 +365,10 @@ const helpAreas = [
             <a
               href="https://pay.capgo.app/b/8wM8wNaKHbTMbsIfZg"
               target="_blank"
-              class="inline-flex items-center px-8 py-4 text-lg font-semibold text-white bg-orange-600 rounded-xl hover:bg-orange-700 transition-colors shadow-lg shadow-orange-500/25"
+              class="inline-flex items-center rounded-xl bg-orange-600 px-8 py-4 text-lg font-semibold text-white shadow-lg shadow-orange-500/25 transition-colors hover:bg-orange-700"
             >
               {m.ps_subscribe_now({}, { locale })}
-              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
               </svg>
             </a>
@@ -339,34 +380,34 @@ const helpAreas = [
   </section>
 
   <!-- FAQ Section -->
-  <section class="py-20 bg-gray-900">
-    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-white text-center mb-12">{m.ps_faq_title({}, { locale })}</h2>
+  <section class="bg-gray-900 py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl">
+        <h2 class="mb-12 text-center text-3xl font-bold text-white">{m.ps_faq_title({}, { locale })}</h2>
 
         <div class="space-y-6">
-          <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-            <h3 class="text-lg font-semibold text-white mb-2">{m.ps_faq_q1({}, { locale })}</h3>
+          <div class="rounded-xl border border-gray-700 bg-gray-800 p-6">
+            <h3 class="mb-2 text-lg font-semibold text-white">{m.ps_faq_q1({}, { locale })}</h3>
             <p class="text-gray-400">{m.ps_faq_a1({}, { locale })}</p>
           </div>
 
-          <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-            <h3 class="text-lg font-semibold text-white mb-2">{m.ps_faq_q2({}, { locale })}</h3>
+          <div class="rounded-xl border border-gray-700 bg-gray-800 p-6">
+            <h3 class="mb-2 text-lg font-semibold text-white">{m.ps_faq_q2({}, { locale })}</h3>
             <p class="text-gray-400">{m.ps_faq_a2({}, { locale })}</p>
           </div>
 
-          <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-            <h3 class="text-lg font-semibold text-white mb-2">{m.ps_faq_q3({}, { locale })}</h3>
+          <div class="rounded-xl border border-gray-700 bg-gray-800 p-6">
+            <h3 class="mb-2 text-lg font-semibold text-white">{m.ps_faq_q3({}, { locale })}</h3>
             <p class="text-gray-400">{m.ps_faq_a3({}, { locale })}</p>
           </div>
 
-          <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-            <h3 class="text-lg font-semibold text-white mb-2">{m.ps_faq_q4({}, { locale })}</h3>
+          <div class="rounded-xl border border-gray-700 bg-gray-800 p-6">
+            <h3 class="mb-2 text-lg font-semibold text-white">{m.ps_faq_q4({}, { locale })}</h3>
             <p class="text-gray-400">{m.ps_faq_a4({}, { locale })}</p>
           </div>
 
-          <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-            <h3 class="text-lg font-semibold text-white mb-2">{m.ps_faq_q5({}, { locale })}</h3>
+          <div class="rounded-xl border border-gray-700 bg-gray-800 p-6">
+            <h3 class="mb-2 text-lg font-semibold text-white">{m.ps_faq_q5({}, { locale })}</h3>
             <p class="text-gray-400">{m.ps_faq_a5({}, { locale })}</p>
           </div>
         </div>
@@ -375,27 +416,27 @@ const helpAreas = [
   </section>
 
   <!-- Testimonial / Trust Section -->
-  <section class="py-20 bg-gray-800">
-    <div class="px-4 mx-auto max-w-4xl text-center">
-      <h2 class="text-3xl font-bold text-white mb-8">{m.ps_trust_title({}, { locale })}</h2>
-      <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center justify-center opacity-70">
-        <img class="h-10 object-contain mx-auto grayscale" src="/nana-logo-transparent.webp" alt="Nana" />
-        <img class="h-10 object-contain mx-auto grayscale" src="/snowqueen.webp" alt="Snowqueen" />
-        <img class="h-10 object-contain mx-auto grayscale" src="/shelf_app.webp" alt="Shelf" />
-        <img class="h-10 object-contain mx-auto grayscale" src="/suez.webp" alt="Suez" />
-        <img class="h-10 object-contain mx-auto grayscale" src="/janitor_app.webp" alt="Janitor" />
+  <section class="bg-gray-800 py-20">
+    <div class="mx-auto max-w-4xl px-4 text-center">
+      <h2 class="mb-8 text-3xl font-bold text-white">{m.ps_trust_title({}, { locale })}</h2>
+      <div class="grid grid-cols-2 items-center justify-center gap-8 opacity-70 md:grid-cols-5">
+        <img class="mx-auto h-10 object-contain grayscale" src="/nana-logo-transparent.webp" alt="Nana" />
+        <img class="mx-auto h-10 object-contain grayscale" src="/snowqueen.webp" alt="Snowqueen" />
+        <img class="mx-auto h-10 object-contain grayscale" src="/shelf_app.webp" alt="Shelf" />
+        <img class="mx-auto h-10 object-contain grayscale" src="/suez.webp" alt="Suez" />
+        <img class="mx-auto h-10 object-contain grayscale" src="/janitor_app.webp" alt="Janitor" />
       </div>
     </div>
   </section>
 
   <!-- Final CTA Section -->
-  <section class="relative py-20 bg-gray-900">
+  <section class="relative bg-gray-900 py-20">
     <div class="absolute inset-0 overflow-hidden">
-      <div class="absolute rounded-full -top-40 -left-40 w-80 h-80 animate-pulse bg-orange-500/10 blur-3xl"></div>
-      <div class="absolute rounded-full -right-40 -bottom-40 w-80 h-80 animate-pulse bg-red-500/10 blur-3xl" style="animation-delay: 2s;"></div>
+      <div class="absolute -top-40 -left-40 h-80 w-80 animate-pulse rounded-full bg-orange-500/10 blur-3xl"></div>
+      <div class="absolute -right-40 -bottom-40 h-80 w-80 animate-pulse rounded-full bg-red-500/10 blur-3xl" style="animation-delay: 2s;"></div>
     </div>
 
-    <div class="relative px-6 mx-auto max-w-7xl lg:px-8">
+    <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
       <div class="text-center">
         <h2 class="mb-6 text-4xl font-bold text-white sm:text-5xl">
           {m.ps_cta_title_1({}, { locale })}
@@ -403,7 +444,7 @@ const helpAreas = [
           <span class="text-orange-400">{m.ps_cta_title_2({}, { locale })}</span>
         </h2>
 
-        <p class="max-w-2xl mx-auto mt-6 mb-10 text-xl text-gray-300">
+        <p class="mx-auto mt-6 mb-10 max-w-2xl text-xl text-gray-300">
           {m.ps_cta_subtitle({}, { locale })}
         </p>
 
@@ -411,17 +452,19 @@ const helpAreas = [
           <a
             href="https://pay.capgo.app/b/8wM8wNaKHbTMbsIfZg"
             target="_blank"
-            class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-orange-600 rounded-xl hover:bg-orange-700 shadow-lg shadow-orange-500/25"
+            class="inline-flex items-center justify-center rounded-xl bg-orange-600 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-orange-500/25 transition-all duration-200 hover:bg-orange-700"
           >
             {m.ps_cta_button({}, { locale })}
-            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
             </svg>
           </a>
         </div>
 
         <p class="mt-6 text-sm text-gray-400">
-          {m.ps_questions({}, { locale })} <a href="https://cal.com/team/capgo/premium-support" target="_blank" class="text-orange-400 hover:underline">{m.ps_schedule_call({}, { locale })}</a> {m.ps_to_learn_more({}, { locale })}
+          {m.ps_questions({}, { locale })}
+          <a href="https://cal.com/team/capgo/premium-support" target="_blank" class="text-orange-400 hover:underline">{m.ps_schedule_call({}, { locale })}</a>
+          {m.ps_to_learn_more({}, { locale })}
         </p>
       </div>
     </div>

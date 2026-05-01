@@ -1,8 +1,6 @@
 import cloudflare from '@astrojs/cloudflare'
 import sitemap from '@astrojs/sitemap'
-import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import tailwindcss from '@tailwindcss/vite'
-import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
 import icon from 'astro-icon'
 import { sessionDrivers } from 'astro/config'
 
@@ -21,14 +19,14 @@ function withSitemapLastMod(item, pageLastModDates) {
   return item
 }
 
-export function buildSharedAstroBaseConfig({ siteDomain, locales, defaultLocale, cpuCount, build = {} }) {
+export function buildSharedAstroBaseConfig({ siteDomain, defaultLocale, cpuCount, build = {} }) {
   const { output = 'server', ...buildOptions } = build
   const baseConfig = {
     trailingSlash: 'always',
     site: `https://${siteDomain}`,
     output,
     i18n: {
-      locales,
+      locales: [defaultLocale],
       defaultLocale,
       routing: {
         redirectToDefaultLocale: false,
@@ -54,25 +52,14 @@ export function buildSharedAstroBaseConfig({ siteDomain, locales, defaultLocale,
   return baseConfig
 }
 
-export function buildSharedIntegrations({ pluginIcons, defaultLocale, localeNames, pageLastModDates }) {
+export function buildSharedIntegrations({ pluginIcons, pageLastModDates }) {
   return [
     icon({
       include: {
         heroicons: pluginIcons,
       },
     }),
-    i18n({
-      locales: localeNames,
-      defaultLocale,
-      redirectDefaultLocale: true,
-      exclude: ['pages/**/*.json.ts', 'pages/api/**/*.ts'],
-    }),
     sitemap({
-      i18n: {
-        defaultLocale,
-        locales: localeNames,
-      },
-      filter: filterSitemapByDefaultLocale({ defaultLocale }),
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
@@ -105,15 +92,7 @@ export function buildSharedViteConfig({ srcDir, publicDir, cpuCount, optimizeDep
         maxParallelFileOps: cpuCount * 3,
       },
     },
-    plugins: [
-      tailwindcss(),
-      paraglideVitePlugin({
-        outdir: './src/paraglide',
-        project: '../../project.inlang',
-        disableAsyncLocalStorage: true,
-      }),
-      ...extraPlugins,
-    ],
+    plugins: [tailwindcss(), ...extraPlugins],
   }
 
   if (ssrNoExternal) {

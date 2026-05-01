@@ -2,7 +2,7 @@
 import Layout from '@/layouts/Layout.astro'
 import Testimonials from '@/components/Testimonials.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import * as m from '@/paraglide/messages'
+import m from '@/copy/messages'
 import type { Database } from '@/services/supabase.types'
 import { createLdJsonGraph, createServiceLdJson, createProductLdJson } from '@/lib/ldJson'
 import HierarchyDashboardIllustration from '@/components/solutions/HierarchyDashboardIllustration.astro'
@@ -126,45 +126,49 @@ const content = {
 
 <Layout content={content}>
   <!-- Hero Section -->
-  <section class="relative py-20 sm:py-28 lg:py-36 overflow-hidden">
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-full">
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+  <section class="relative overflow-hidden py-20 sm:py-28 lg:py-36">
+    <div class="pointer-events-none absolute inset-0 overflow-hidden">
+      <div class="absolute top-0 left-1/2 h-full w-full max-w-6xl -translate-x-1/2">
+        <div class="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl"></div>
+        <div class="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-purple-500/10 blur-3xl"></div>
       </div>
     </div>
 
-    <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto text-center">
-        <div class="inline-flex items-center px-4 py-2 text-sm font-medium text-blue-200 border rounded-full border-blue-400/40 bg-blue-500/10 mb-8">
-          <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-4xl text-center">
+        <div class="mb-8 inline-flex items-center rounded-full border border-blue-400/40 bg-blue-500/10 px-4 py-2 text-sm font-medium text-blue-200">
+          <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
           </svg>
           {m.enterprise_ready()}
         </div>
 
-        <h1 class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+        <h1 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">
           {m.deliver_updates({}, { locale: Astro.locals.locale })}
           <br />
           {m.at_scale({}, { locale: Astro.locals.locale })}
         </h1>
 
-        <p class="max-w-3xl mx-auto mt-8 text-xl leading-relaxed text-gray-300">
+        <p class="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-gray-300">
           {m.deploy_ota({}, { locale: Astro.locals.locale })}
         </p>
 
-        <div class="flex flex-col items-center justify-center gap-4 mt-10 sm:flex-row">
+        <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
             href="https://cal.com/team/capgo/demo"
             target="_blank"
-            class="px-8 py-4 text-base font-semibold text-white transition-all duration-200 bg-blue-600 rounded-xl hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-lg shadow-blue-500/25"
+            class="rounded-xl bg-blue-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-blue-500/25 transition-all duration-200 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             {m.request_demo({}, { locale: Astro.locals.locale })}
           </a>
           <a
             href="https://cal.com/team/capgo/capgo-enterprise-inquiry"
             target="_blank"
-            class="px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 border border-gray-600 rounded-xl hover:bg-gray-800 hover:text-white"
+            class="rounded-xl border border-gray-600 px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 hover:bg-gray-800 hover:text-white"
           >
             {m.contact_sales({}, { locale: Astro.locals.locale })}
           </a>
@@ -174,13 +178,13 @@ const content = {
   </section>
 
   <!-- Trusted By Section -->
-  <section class="py-12 bg-gray-800 sm:py-16">
-    <div class="px-6 mx-auto max-w-7xl lg:px-8">
-      <h2 class="font-semibold text-center text-gray-200 text-lg/8">{m.trusted_by_the_biggest_capacitor_apps({}, { locale: Astro.locals.locale })}</h2>
-      <div class="grid items-center max-w-lg grid-cols-2 mx-auto mt-10 gap-x-8 gap-y-10 sm:grid-cols-3 sm:gap-x-10 sm:max-w-2xl lg:grid-cols-5 lg:mx-0 lg:max-w-none">
+  <section class="bg-gray-800 py-12 sm:py-16">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <h2 class="text-center text-lg/8 font-semibold text-gray-200">{m.trusted_by_the_biggest_capacitor_apps({}, { locale: Astro.locals.locale })}</h2>
+      <div class="mx-auto mt-10 grid max-w-lg grid-cols-2 items-center gap-x-8 gap-y-10 sm:max-w-2xl sm:grid-cols-3 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
         <div class="flex flex-col items-center space-y-2">
-          <div class="bg-gray-600 shadow-sm rounded-2xl">
-            <img class="object-contain w-12 h-12 rounded-xl grayscale" src="/nana-logo-transparent.webp" alt="Nana" width="48" height="48" />
+          <div class="rounded-2xl bg-gray-600 shadow-sm">
+            <img class="h-12 w-12 rounded-xl object-contain grayscale" src="/nana-logo-transparent.webp" alt="Nana" width="48" height="48" />
           </div>
           <div class="text-center">
             <p class="text-sm font-medium text-gray-200">Nana</p>
@@ -188,8 +192,8 @@ const content = {
           </div>
         </div>
         <div class="flex flex-col items-center space-y-2">
-          <div class="bg-gray-600 shadow-sm rounded-2xl">
-            <img class="object-contain w-12 h-12 rounded-xl brightness-90 contrast-75 grayscale" src="/snowqueen.webp" alt="Snowqueen" width="48" height="48" />
+          <div class="rounded-2xl bg-gray-600 shadow-sm">
+            <img class="h-12 w-12 rounded-xl object-contain brightness-90 contrast-75 grayscale" src="/snowqueen.webp" alt="Snowqueen" width="48" height="48" />
           </div>
           <div class="text-center">
             <p class="text-sm font-medium text-gray-200">Snowqueen</p>
@@ -197,8 +201,8 @@ const content = {
           </div>
         </div>
         <div class="flex flex-col items-center space-y-2">
-          <div class="bg-gray-600 shadow-sm rounded-2xl">
-            <img class="object-contain w-12 h-12 rounded-xl brightness-90 contrast-75 grayscale" src="/shelf_app.webp" alt="Shelf" width="48" height="48" />
+          <div class="rounded-2xl bg-gray-600 shadow-sm">
+            <img class="h-12 w-12 rounded-xl object-contain brightness-90 contrast-75 grayscale" src="/shelf_app.webp" alt="Shelf" width="48" height="48" />
           </div>
           <div class="text-center">
             <p class="text-sm font-medium text-gray-200">Shelf</p>
@@ -206,8 +210,8 @@ const content = {
           </div>
         </div>
         <div class="flex flex-col items-center space-y-2">
-          <div class="bg-gray-600 shadow-sm rounded-2xl">
-            <img class="object-contain w-12 h-12 rounded-xl brightness-90 contrast-75 grayscale" src="/suez.webp" alt="Suez" width="48" height="48" />
+          <div class="rounded-2xl bg-gray-600 shadow-sm">
+            <img class="h-12 w-12 rounded-xl object-contain brightness-90 contrast-75 grayscale" src="/suez.webp" alt="Suez" width="48" height="48" />
           </div>
           <div class="text-center">
             <p class="text-sm font-medium text-gray-200">Suez</p>
@@ -215,8 +219,8 @@ const content = {
           </div>
         </div>
         <div class="flex flex-col items-center space-y-2">
-          <div class="bg-gray-600 shadow-sm rounded-2xl">
-            <img class="object-contain w-12 h-12 rounded-xl grayscale" src="/janitor_app.webp" alt="Janitor" width="48" height="48" />
+          <div class="rounded-2xl bg-gray-600 shadow-sm">
+            <img class="h-12 w-12 rounded-xl object-contain grayscale" src="/janitor_app.webp" alt="Janitor" width="48" height="48" />
           </div>
           <div class="text-center">
             <p class="text-sm font-medium text-gray-200">Janitor</p>
@@ -228,77 +232,101 @@ const content = {
   </section>
 
   <!-- Your Problems - We Get It -->
-  <section class="py-20 bg-gray-900">
-    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto text-center mb-16">
-        <h2 class="text-sm font-semibold tracking-wide text-red-400 uppercase mb-4">{m.solutions_enterprise_problems_label({}, { locale })}</h2>
+  <section class="bg-gray-900 py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto mb-16 max-w-3xl text-center">
+        <h2 class="mb-4 text-sm font-semibold tracking-wide text-red-400 uppercase">{m.solutions_enterprise_problems_label({}, { locale })}</h2>
         <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_enterprise_problems_title({}, { locale })}</h3>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         <!-- Problem 1: Multiple Apps -->
-        <div class="bg-gray-800 rounded-2xl p-8 border border-red-500/20">
-          <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center mb-6">
-            <svg class="w-6 h-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+        <div class="rounded-2xl border border-red-500/20 bg-gray-800 p-8">
+          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
+            <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
+              ></path>
             </svg>
           </div>
-          <h4 class="text-xl font-bold text-white mb-3">{m.solutions_enterprise_problem1_title({}, { locale })}</h4>
+          <h4 class="mb-3 text-xl font-bold text-white">{m.solutions_enterprise_problem1_title({}, { locale })}</h4>
           <p class="text-gray-400">{m.solutions_enterprise_problem1_desc({}, { locale })}</p>
         </div>
 
         <!-- Problem 2: Version Fragmentation -->
-        <div class="bg-gray-800 rounded-2xl p-8 border border-red-500/20">
-          <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center mb-6">
-            <svg class="w-6 h-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+        <div class="rounded-2xl border border-red-500/20 bg-gray-800 p-8">
+          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
+            <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"
+              ></path>
             </svg>
           </div>
-          <h4 class="text-xl font-bold text-white mb-3">{m.solutions_enterprise_problem2_title({}, { locale })}</h4>
+          <h4 class="mb-3 text-xl font-bold text-white">{m.solutions_enterprise_problem2_title({}, { locale })}</h4>
           <p class="text-gray-400">{m.solutions_enterprise_problem2_desc({}, { locale })}</p>
         </div>
 
         <!-- Problem 3: Compliance & Audits -->
-        <div class="bg-gray-800 rounded-2xl p-8 border border-red-500/20">
-          <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center mb-6">
-            <svg class="w-6 h-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        <div class="rounded-2xl border border-red-500/20 bg-gray-800 p-8">
+          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
+            <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+              ></path>
             </svg>
           </div>
-          <h4 class="text-xl font-bold text-white mb-3">{m.solutions_enterprise_problem3_title({}, { locale })}</h4>
+          <h4 class="mb-3 text-xl font-bold text-white">{m.solutions_enterprise_problem3_title({}, { locale })}</h4>
           <p class="text-gray-400">{m.solutions_enterprise_problem3_desc({}, { locale })}</p>
         </div>
 
         <!-- Problem 4: Slow Rollouts -->
-        <div class="bg-gray-800 rounded-2xl p-8 border border-red-500/20">
-          <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center mb-6">
-            <svg class="w-6 h-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <div class="rounded-2xl border border-red-500/20 bg-gray-800 p-8">
+          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
+            <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
           </div>
-          <h4 class="text-xl font-bold text-white mb-3">{m.solutions_enterprise_problem4_title({}, { locale })}</h4>
+          <h4 class="mb-3 text-xl font-bold text-white">{m.solutions_enterprise_problem4_title({}, { locale })}</h4>
           <p class="text-gray-400">{m.solutions_enterprise_problem4_desc({}, { locale })}</p>
         </div>
 
         <!-- Problem 5: Team Coordination -->
-        <div class="bg-gray-800 rounded-2xl p-8 border border-red-500/20">
-          <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center mb-6">
-            <svg class="w-6 h-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        <div class="rounded-2xl border border-red-500/20 bg-gray-800 p-8">
+          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
+            <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+              ></path>
             </svg>
           </div>
-          <h4 class="text-xl font-bold text-white mb-3">{m.solutions_enterprise_problem5_title({}, { locale })}</h4>
+          <h4 class="mb-3 text-xl font-bold text-white">{m.solutions_enterprise_problem5_title({}, { locale })}</h4>
           <p class="text-gray-400">{m.solutions_enterprise_problem5_desc({}, { locale })}</p>
         </div>
 
         <!-- Problem 6: Production Incidents -->
-        <div class="bg-gray-800 rounded-2xl p-8 border border-red-500/20">
-          <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center mb-6">
-            <svg class="w-6 h-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        <div class="rounded-2xl border border-red-500/20 bg-gray-800 p-8">
+          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
+            <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
             </svg>
           </div>
-          <h4 class="text-xl font-bold text-white mb-3">{m.solutions_enterprise_problem6_title({}, { locale })}</h4>
+          <h4 class="mb-3 text-xl font-bold text-white">{m.solutions_enterprise_problem6_title({}, { locale })}</h4>
           <p class="text-gray-400">{m.solutions_enterprise_problem6_desc({}, { locale })}</p>
         </div>
       </div>
@@ -306,50 +334,64 @@ const content = {
   </section>
 
   <!-- How We Solve It -->
-  <section class="py-20 bg-gray-800">
-    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto text-center mb-16">
-        <h2 class="text-sm font-semibold tracking-wide text-green-400 uppercase mb-4">{m.solutions_enterprise_solution_label({}, { locale })}</h2>
+  <section class="bg-gray-800 py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto mb-16 max-w-3xl text-center">
+        <h2 class="mb-4 text-sm font-semibold tracking-wide text-green-400 uppercase">{m.solutions_enterprise_solution_label({}, { locale })}</h2>
         <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_enterprise_solution_title({}, { locale })}</h3>
         <p class="mt-4 text-xl text-gray-400">{m.solutions_enterprise_solution_subtitle({}, { locale })}</p>
       </div>
 
       <div class="space-y-12">
         <!-- Solution 1: Multi-App Management -->
-        <div class="bg-gray-900 rounded-2xl p-8 lg:p-10 border border-gray-700">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 lg:p-10">
+          <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
             <div>
-              <div class="flex items-center gap-3 mb-4">
-                <div class="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
-                  <svg class="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+              <div class="mb-4 flex items-center gap-3">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/20">
+                  <svg class="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                    ></path>
                   </svg>
                 </div>
                 <h3 class="text-xl font-bold text-white">{m.solutions_enterprise_sol1_title({}, { locale })}</h3>
               </div>
-              <p class="text-gray-300 mb-4">{m.solutions_enterprise_sol1_desc({}, { locale })}</p>
+              <p class="mb-4 text-gray-300">{m.solutions_enterprise_sol1_desc({}, { locale })}</p>
               <ul class="space-y-2">
                 <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="w-5 h-5 text-green-400 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"></path>
                   </svg>
                   {m.solutions_enterprise_sol1_point1({}, { locale })}
                 </li>
                 <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="w-5 h-5 text-green-400 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"></path>
                   </svg>
                   {m.solutions_enterprise_sol1_point2({}, { locale })}
                 </li>
                 <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="w-5 h-5 text-green-400 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"></path>
                   </svg>
                   {m.solutions_enterprise_sol1_point3({}, { locale })}
                 </li>
               </ul>
             </div>
-            <div class="bg-gray-800 rounded-xl p-6 flex items-center justify-center">
+            <div class="flex items-center justify-center rounded-xl bg-gray-800 p-6">
               <div class="w-full max-w-sm">
                 <HierarchyDashboardIllustration class="text-green-500" />
               </div>
@@ -358,39 +400,53 @@ const content = {
         </div>
 
         <!-- Solution 2: Staged Rollouts -->
-        <div class="bg-gray-900 rounded-2xl p-8 lg:p-10 border border-gray-700">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div class="order-2 lg:order-1 bg-gray-800 rounded-xl p-6 flex items-center justify-center">
+        <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 lg:p-10">
+          <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
+            <div class="order-2 flex items-center justify-center rounded-xl bg-gray-800 p-6 lg:order-1">
               <div class="w-full max-w-sm">
                 <RolloutIllustration class="text-blue-500" />
               </div>
             </div>
             <div class="order-1 lg:order-2">
-              <div class="flex items-center gap-3 mb-4">
-                <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                  <svg class="w-5 h-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              <div class="mb-4 flex items-center gap-3">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/20">
+                  <svg class="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                    ></path>
                   </svg>
                 </div>
                 <h3 class="text-xl font-bold text-white">{m.solutions_enterprise_sol2_title({}, { locale })}</h3>
               </div>
-              <p class="text-gray-300 mb-4">{m.solutions_enterprise_sol2_desc({}, { locale })}</p>
+              <p class="mb-4 text-gray-300">{m.solutions_enterprise_sol2_desc({}, { locale })}</p>
               <ul class="space-y-2">
                 <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="w-5 h-5 text-green-400 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"></path>
                   </svg>
                   {m.solutions_enterprise_sol2_point1({}, { locale })}
                 </li>
                 <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="w-5 h-5 text-green-400 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"></path>
                   </svg>
                   {m.solutions_enterprise_sol2_point2({}, { locale })}
                 </li>
                 <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="w-5 h-5 text-green-400 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"></path>
                   </svg>
                   {m.solutions_enterprise_sol2_point3({}, { locale })}
                 </li>
@@ -400,40 +456,53 @@ const content = {
         </div>
 
         <!-- Solution 3: Security & Compliance -->
-        <div class="bg-gray-900 rounded-2xl p-8 lg:p-10 border border-gray-700">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 lg:p-10">
+          <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
             <div>
-              <div class="flex items-center gap-3 mb-4">
-                <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center">
-                  <svg class="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              <div class="mb-4 flex items-center gap-3">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/20">
+                  <svg class="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                   </svg>
                 </div>
                 <h3 class="text-xl font-bold text-white">{m.solutions_enterprise_sol3_title({}, { locale })}</h3>
               </div>
-              <p class="text-gray-300 mb-4">{m.solutions_enterprise_sol3_desc({}, { locale })}</p>
+              <p class="mb-4 text-gray-300">{m.solutions_enterprise_sol3_desc({}, { locale })}</p>
               <ul class="space-y-2">
                 <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="w-5 h-5 text-green-400 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"></path>
                   </svg>
                   {m.solutions_enterprise_sol3_point1({}, { locale })}
                 </li>
                 <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="w-5 h-5 text-green-400 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"></path>
                   </svg>
                   {m.solutions_enterprise_sol3_point2({}, { locale })}
                 </li>
                 <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="w-5 h-5 text-green-400 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"></path>
                   </svg>
                   {m.solutions_enterprise_sol3_point3({}, { locale })}
                 </li>
               </ul>
             </div>
-            <div class="bg-gray-800 rounded-xl p-6 flex items-center justify-center">
+            <div class="flex items-center justify-center rounded-xl bg-gray-800 p-6">
               <div class="w-full max-w-sm">
                 <SecurityIllustration class="text-purple-500" />
               </div>
@@ -445,42 +514,44 @@ const content = {
   </section>
 
   <!-- Enterprise Customers Stats -->
-  <section class="py-20 bg-gray-900">
-    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto text-center mb-16">
+  <section class="bg-gray-900 py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto mb-16 max-w-3xl text-center">
         <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_enterprise_customers_title({}, { locale })}</h2>
         <p class="mt-4 text-xl text-gray-400">{m.solutions_enterprise_customers_subtitle({}, { locale })}</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-        <div class="p-8 text-center bg-gray-800 border border-gray-700 rounded-2xl">
-          <div class="text-5xl font-bold text-blue-400 mb-2">500M+</div>
+      <div class="mb-12 grid grid-cols-1 gap-8 md:grid-cols-3">
+        <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8 text-center">
+          <div class="mb-2 text-5xl font-bold text-blue-400">500M+</div>
           <p class="text-gray-400">{m.solutions_enterprise_stat_updates({}, { locale })}</p>
         </div>
-        <div class="p-8 text-center bg-gray-800 border border-gray-700 rounded-2xl">
-          <div class="text-5xl font-bold text-green-400 mb-2">99.9%</div>
+        <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8 text-center">
+          <div class="mb-2 text-5xl font-bold text-green-400">99.9%</div>
           <p class="text-gray-400">{m.solutions_enterprise_stat_uptime({}, { locale })}</p>
         </div>
-        <div class="p-8 text-center bg-gray-800 border border-gray-700 rounded-2xl">
-          <div class="text-5xl font-bold text-purple-400 mb-2">&lt;10s</div>
+        <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8 text-center">
+          <div class="mb-2 text-5xl font-bold text-purple-400">&lt;10s</div>
           <p class="text-gray-400">{m.solutions_enterprise_stat_rollback({}, { locale })}</p>
         </div>
       </div>
 
       <!-- Testimonial -->
-      <div class="max-w-3xl mx-auto">
-        <div class="p-8 bg-gray-800 border border-gray-700 rounded-2xl">
-          <div class="flex items-center gap-1 mb-4">
-            {Array.from({ length: 5 }).map(() => (
-              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-            ))}
+      <div class="mx-auto max-w-3xl">
+        <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8">
+          <div class="mb-4 flex items-center gap-1">
+            {
+              Array.from({ length: 5 }).map(() => (
+                <svg class="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              ))
+            }
           </div>
-          <p class="text-gray-300 italic text-lg mb-6">"{m.solutions_enterprise_testimonial({}, { locale })}"</p>
+          <p class="mb-6 text-lg text-gray-300 italic">"{m.solutions_enterprise_testimonial({}, { locale })}"</p>
           <div class="flex items-center gap-3">
-            <div class="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center">
-              <span class="text-blue-400 font-bold text-lg">J</span>
+            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/20">
+              <span class="text-lg font-bold text-blue-400">J</span>
             </div>
             <div>
               <p class="font-semibold text-white">{m.solutions_enterprise_testimonial_author({}, { locale })}</p>
@@ -493,20 +564,20 @@ const content = {
   </section>
 
   <!-- Enterprise Features Section -->
-  <section class="py-16 bg-gray-900 sm:py-20">
-    <div class="max-w-2xl px-6 mx-auto lg:px-8 lg:max-w-7xl">
-      <h2 class="font-semibold text-gray-200 text-base/7">{m.enterprise_features({}, { locale: Astro.locals.locale })}</h2>
-      <p class="max-w-2xl mt-2 text-4xl font-semibold tracking-tight text-white sm:text-5xl text-pretty">
+  <section class="bg-gray-900 py-16 sm:py-20">
+    <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+      <h2 class="text-base/7 font-semibold text-gray-200">{m.enterprise_features({}, { locale: Astro.locals.locale })}</h2>
+      <p class="mt-2 max-w-2xl text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
         {m.built_for_enterprise_teams({}, { locale: Astro.locals.locale })}
       </p>
-      <p class="max-w-2xl mt-4 text-lg text-gray-400">{m.advanced_collaboration_security_compliance({}, { locale: Astro.locals.locale })}</p>
+      <p class="mt-4 max-w-2xl text-lg text-gray-400">{m.advanced_collaboration_security_compliance({}, { locale: Astro.locals.locale })}</p>
 
-      <div class="grid grid-cols-1 gap-4 mt-10 sm:mt-16 lg:grid-cols-6">
+      <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6">
         <!-- Organizations and Teams -->
         <div class="flex p-px lg:col-span-2">
-          <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
-            <div class="flex flex-col items-center justify-center h-80 bg-blue-900/30">
-              <svg class="w-24 h-24 mb-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-blue-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -518,7 +589,7 @@ const content = {
             </div>
             <div class="p-10">
               <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.centralized_management({}, { locale: Astro.locals.locale })}</p>
-              <p class="max-w-lg mt-2 text-gray-400 text-sm/6">
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
                 {m.organize_projects_across_teams({}, { locale: Astro.locals.locale })}
               </p>
             </div>
@@ -527,9 +598,9 @@ const content = {
 
         <!-- Role-Based Access Control -->
         <div class="flex p-px lg:col-span-2">
-          <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
-            <div class="flex flex-col items-center justify-center h-80 bg-purple-900/30">
-              <svg class="w-24 h-24 mb-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-purple-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -540,7 +611,7 @@ const content = {
             </div>
             <div class="p-10">
               <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.fine_grained_permissions({}, { locale: Astro.locals.locale })}</p>
-              <p class="max-w-lg mt-2 text-gray-400 text-sm/6">
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
                 {m.control_access_deploy_manage({}, { locale: Astro.locals.locale })}
               </p>
             </div>
@@ -549,9 +620,9 @@ const content = {
 
         <!-- Enterprise Billing -->
         <div class="flex p-px lg:col-span-2">
-          <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
-            <div class="flex flex-col items-center justify-center h-80 bg-green-900/30">
-              <svg class="w-24 h-24 mb-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-green-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -562,7 +633,7 @@ const content = {
             </div>
             <div class="p-10">
               <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.flexible_payment_terms({}, { locale: Astro.locals.locale })}</p>
-              <p class="max-w-lg mt-2 text-gray-400 text-sm/6">
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
                 {m.consolidated_invoicing_purchase_orders({}, { locale: Astro.locals.locale })}
               </p>
             </div>
@@ -571,9 +642,9 @@ const content = {
 
         <!-- SSO + 2FA -->
         <div class="flex p-px lg:col-span-3">
-          <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
-            <div class="flex flex-col items-center justify-center h-80 bg-orange-900/30">
-              <svg class="w-24 h-24 mb-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-orange-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -585,7 +656,7 @@ const content = {
             </div>
             <div class="p-10">
               <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.enterprise_authentication({}, { locale: Astro.locals.locale })}</p>
-              <p class="max-w-lg mt-2 text-gray-400 text-sm/6">
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
                 {m.integrate_identity_provider_mfa({}, { locale: Astro.locals.locale })}
                 <a href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/plugin/cloud-mode/authentication')} class="ml-2 text-gray-200 underline hover:text-gray-200">
                   {m.learn_more({}, { locale: Astro.locals.locale })}
@@ -597,18 +668,18 @@ const content = {
 
         <!-- Open Source -->
         <div class="flex p-px lg:col-span-3">
-          <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
-            <div class="flex flex-col items-center justify-center h-80 bg-slate-900/30">
-              <svg class="w-24 h-24 mb-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-slate-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
               </svg>
               <h3 class="text-xl font-bold text-white">{m.open_source({}, { locale: Astro.locals.locale })}</h3>
             </div>
             <div class="p-10">
               <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.transparency_security({}, { locale: Astro.locals.locale })}</p>
-              <p class="max-w-lg mt-2 text-gray-400 text-sm/6">
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
                 {m.live_update_sdk_open_source({}, { locale: Astro.locals.locale })}
-                <a href="https://github.com/cap-go/" target="_blank" rel="noopener noreferrer" class="ml-2 underline hover:text-gray-200 text-[#44BCFF]">
+                <a href="https://github.com/cap-go/" target="_blank" rel="noopener noreferrer" class="ml-2 text-[#44BCFF] underline hover:text-gray-200">
                   {m.view_source({}, { locale: Astro.locals.locale })}
                 </a>
               </p>
@@ -618,9 +689,9 @@ const content = {
 
         <!-- Enterprise Plugins -->
         <div class="flex p-px lg:col-span-6">
-          <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
-            <div class="flex flex-col items-center justify-center h-80 bg-indigo-900/30">
-              <svg class="w-24 h-24 mb-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-indigo-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -632,7 +703,7 @@ const content = {
             </div>
             <div class="p-10">
               <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.premium_plugin_suite({}, { locale: Astro.locals.locale })}</p>
-              <p class="max-w-lg mt-2 text-gray-400 text-sm/6">
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
                 {m.access_maintain_enterprise_plugins({}, { locale: Astro.locals.locale })}
                 <a href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')} class="ml-2 text-indigo-400 underline hover:text-indigo-300">
                   {m.explore_plugins({}, { locale: Astro.locals.locale })}
@@ -646,15 +717,15 @@ const content = {
   </section>
 
   <!-- Scalability Section -->
-  <section class="relative py-16 overflow-hidden bg-gray-800 sm:py-20">
+  <section class="relative overflow-hidden bg-gray-800 py-16 sm:py-20">
     <!-- Dynamic Floating Elements -->
-    <div class="absolute w-32 h-32 rounded-full top-10 left-10 animate-pulse bg-gray-800/40 blur-2xl"></div>
-    <div class="absolute w-40 h-40 rounded-full right-10 bottom-10 animate-pulse bg-gray-800/40 blur-2xl" style="animation-delay: 1.5s;"></div>
+    <div class="absolute top-10 left-10 h-32 w-32 animate-pulse rounded-full bg-gray-800/40 blur-2xl"></div>
+    <div class="absolute right-10 bottom-10 h-40 w-40 animate-pulse rounded-full bg-gray-800/40 blur-2xl" style="animation-delay: 1.5s;"></div>
 
-    <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mb-8 text-center">
-        <div class="inline-flex items-center px-4 py-2 mb-8 text-sm font-medium text-gray-200 rounded-full ring-1 ring-inset bg-gray-800/40 ring-white/15">
-          <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div class="mb-8 inline-flex items-center rounded-full bg-gray-800/40 px-4 py-2 text-sm font-medium text-gray-200 ring-1 ring-white/15 ring-inset">
+          <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -665,7 +736,7 @@ const content = {
           {m.global_infrastructure({}, { locale: Astro.locals.locale })}
         </div>
 
-        <h2 class="mb-6 text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+        <h2 class="mb-6 text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">
           <span class="text-gray-200">
             {m.global_infrastructure_lowercase({}, { locale: Astro.locals.locale })}
           </span>
@@ -673,31 +744,31 @@ const content = {
           <span class="text-white">{m.that_grows_with_you({}, { locale: Astro.locals.locale })}</span>
         </h2>
 
-        <p class="max-w-3xl mx-auto mt-6 text-lg leading-relaxed text-gray-300">
+        <p class="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-300">
           {m.powered_by_serverless_edge_computing({}, { locale: Astro.locals.locale })}
         </p>
       </div>
 
       <div class="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
-        <div class="relative group">
+        <div class="group relative">
           <div
-            class="relative p-8 overflow-hidden transition-all duration-300 rounded-3xl ring-1 bg-gray-800/80 ring-white/10 backdrop-blur-sm hover:bg-gray-800/90 hover:ring-white/20"
+            class="relative overflow-hidden rounded-3xl bg-gray-800/80 p-8 ring-1 ring-white/10 backdrop-blur-sm transition-all duration-300 hover:bg-gray-800/90 hover:ring-white/20"
           >
             <div class="mb-4 text-6xl font-bold text-gray-200">300+</div>
             <div class="text-gray-300">{m.cities_worldwide({}, { locale: Astro.locals.locale })}<br />{m.for_ultra_fast_delivery({}, { locale: Astro.locals.locale })}</div>
           </div>
         </div>
-        <div class="relative group">
+        <div class="group relative">
           <div
-            class="relative p-8 overflow-hidden transition-all duration-300 rounded-3xl ring-1 bg-gray-800/80 ring-white/10 backdrop-blur-sm hover:bg-gray-800/90 hover:ring-white/20"
+            class="relative overflow-hidden rounded-3xl bg-gray-800/80 p-8 ring-1 ring-white/10 backdrop-blur-sm transition-all duration-300 hover:bg-gray-800/90 hover:ring-white/20"
           >
             <div class="mb-4 text-6xl font-bold text-gray-200">13,000+</div>
             <div class="text-gray-300">{m.network_connections({}, { locale: Astro.locals.locale })}<br />{m.direct_peering_worldwide({}, { locale: Astro.locals.locale })}</div>
           </div>
         </div>
-        <div class="relative group">
+        <div class="group relative">
           <div
-            class="relative p-8 overflow-hidden transition-all duration-300 rounded-3xl ring-1 bg-gray-800/80 ring-white/10 backdrop-blur-sm hover:bg-gray-800/90 hover:ring-white/20"
+            class="relative overflow-hidden rounded-3xl bg-gray-800/80 p-8 ring-1 ring-white/10 backdrop-blur-sm transition-all duration-300 hover:bg-gray-800/90 hover:ring-white/20"
           >
             <div class="mb-4 text-6xl font-bold text-green-300">50ms</div>
             <div class="text-gray-300">{m.from_95_percent_users({}, { locale: Astro.locals.locale })}<br />{m.ultra_low_latency({}, { locale: Astro.locals.locale })}</div>
@@ -708,20 +779,20 @@ const content = {
   </section>
 
   <!-- Security & Compliance Section -->
-  <section class="py-16 bg-gray-900 sm:py-20">
-    <div class="max-w-2xl px-6 mx-auto lg:px-8 lg:max-w-7xl">
-      <h2 class="font-semibold text-gray-200 text-base/7">{m.security_compliance({}, { locale: Astro.locals.locale })}</h2>
-      <p class="max-w-2xl mt-2 text-4xl font-semibold tracking-tight text-white sm:text-5xl text-pretty">
+  <section class="bg-gray-900 py-16 sm:py-20">
+    <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+      <h2 class="text-base/7 font-semibold text-gray-200">{m.security_compliance({}, { locale: Astro.locals.locale })}</h2>
+      <p class="mt-2 max-w-2xl text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
         {m.enterprise_grade_security_trust({}, { locale: Astro.locals.locale })}
       </p>
-      <p class="max-w-2xl mt-4 text-lg text-gray-400">{m.industry_leading_security_compliance({}, { locale: Astro.locals.locale })}</p>
+      <p class="mt-4 max-w-2xl text-lg text-gray-400">{m.industry_leading_security_compliance({}, { locale: Astro.locals.locale })}</p>
 
-      <div class="grid grid-cols-1 gap-4 mt-10 sm:mt-16 lg:grid-cols-3">
+      <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-3">
         <!-- SOC 2 Compliance -->
         <div class="flex p-px">
-          <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
-            <div class="flex flex-col items-center justify-center h-80 bg-blue-900/30">
-              <svg class="w-24 h-24 mb-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-blue-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -733,7 +804,7 @@ const content = {
             </div>
             <div class="p-10">
               <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.type_ii_certified({}, { locale: Astro.locals.locale })}</p>
-              <p class="max-w-lg mt-2 text-gray-400 text-sm/6">
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
                 {m.soc2_type_ii_certified_infrastructure({}, { locale: Astro.locals.locale })}
                 <a href="https://trust.capgo.app" target="_blank" rel="noopener noreferrer" class="ml-2 text-gray-200 underline hover:text-gray-200">
                   {m.trust_center({}, { locale: Astro.locals.locale })}
@@ -745,9 +816,9 @@ const content = {
 
         <!-- Zero-Trust Security -->
         <div class="flex p-px">
-          <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
-            <div class="flex flex-col items-center justify-center h-80 bg-purple-900/30">
-              <svg class="w-24 h-24 mb-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-purple-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -758,7 +829,7 @@ const content = {
             </div>
             <div class="p-10">
               <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.signed_verified({}, { locale: Astro.locals.locale })}</p>
-              <p class="max-w-lg mt-2 text-gray-400 text-sm/6">
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
                 {m.every_live_update_signed_verified({}, { locale: Astro.locals.locale })}
               </p>
             </div>
@@ -767,9 +838,9 @@ const content = {
 
         <!-- Multi-Factor Authentication -->
         <div class="flex p-px">
-          <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
-            <div class="flex flex-col items-center justify-center h-80 bg-green-900/30">
-              <svg class="w-24 h-24 mb-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-green-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -780,7 +851,7 @@ const content = {
             </div>
             <div class="p-10">
               <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.enterprise_identity({}, { locale: Astro.locals.locale })}</p>
-              <p class="max-w-lg mt-2 text-gray-400 text-sm/6">
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
                 {m.mandatory_mfa_integration({}, { locale: Astro.locals.locale })}
               </p>
             </div>
@@ -791,27 +862,27 @@ const content = {
   </section>
 
   <!-- Enterprise Support Section -->
-  <section class="py-16 bg-gray-800 sm:py-20">
-    <div class="max-w-2xl px-6 mx-auto lg:px-8 lg:max-w-7xl">
-      <h2 class="font-semibold text-gray-200 text-base/7">{m.enterprise_support({}, { locale: Astro.locals.locale })}</h2>
-      <p class="max-w-2xl mt-2 text-4xl font-semibold tracking-tight text-white sm:text-5xl text-pretty">
+  <section class="bg-gray-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+      <h2 class="text-base/7 font-semibold text-gray-200">{m.enterprise_support({}, { locale: Astro.locals.locale })}</h2>
+      <p class="mt-2 max-w-2xl text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
         {m.first_class_support_when_needed({}, { locale: Astro.locals.locale })}
       </p>
-      <p class="max-w-2xl mt-4 text-lg text-gray-400">{m.dedicated_support_channels_sla({}, { locale: Astro.locals.locale })}</p>
+      <p class="mt-4 max-w-2xl text-lg text-gray-400">{m.dedicated_support_channels_sla({}, { locale: Astro.locals.locale })}</p>
 
-      <div class="grid grid-cols-1 gap-4 mt-10 sm:mt-16 lg:grid-cols-3">
+      <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-3">
         <!-- Priority Support -->
         <div class="flex p-px">
-          <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
-            <div class="flex flex-col items-center justify-center h-80 bg-orange-900/30">
-              <svg class="w-24 h-24 mb-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-orange-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
               <h3 class="text-xl font-bold text-white">{m.priority_support({}, { locale: Astro.locals.locale })}</h3>
             </div>
             <div class="p-10">
               <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.guaranteed_response({}, { locale: Astro.locals.locale })}</p>
-              <p class="max-w-lg mt-2 text-gray-400 text-sm/6">
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
                 {m.fast_track_support_guaranteed_response({}, { locale: Astro.locals.locale })}
               </p>
             </div>
@@ -820,9 +891,9 @@ const content = {
 
         <!-- Dedicated Support Channels -->
         <div class="flex p-px">
-          <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
-            <div class="flex flex-col items-center justify-center h-80 bg-blue-900/30">
-              <svg class="w-24 h-24 mb-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-blue-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -834,7 +905,7 @@ const content = {
             </div>
             <div class="p-10">
               <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.direct_engineering_access({}, { locale: Astro.locals.locale })}</p>
-              <p class="max-w-lg mt-2 text-gray-400 text-sm/6">
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
                 {m.direct_access_engineering_team({}, { locale: Astro.locals.locale })}
               </p>
             </div>
@@ -843,9 +914,9 @@ const content = {
 
         <!-- Service Level Agreement -->
         <div class="flex p-px">
-          <div class="w-full overflow-hidden bg-gray-800 rounded-lg ring-1 ring-white/15">
-            <div class="flex flex-col items-center justify-center h-80 bg-indigo-900/30">
-              <svg class="w-24 h-24 mb-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-indigo-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -856,7 +927,7 @@ const content = {
             </div>
             <div class="p-10">
               <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.contractual_guarantees({}, { locale: Astro.locals.locale })}</p>
-              <p class="max-w-lg mt-2 text-gray-400 text-sm/6">
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
                 {m.contractual_sla_guarantees({}, { locale: Astro.locals.locale })}
                 <a href={getRelativeLocaleUrl(Astro.locals.locale, 'sla')} class="ml-2 text-indigo-400 underline hover:text-indigo-300">
                   {m.view_sla({}, { locale: Astro.locals.locale })}
@@ -873,17 +944,17 @@ const content = {
   <Testimonials />
 
   <!-- Final CTA Section -->
-  <section class="relative py-16 bg-gray-900 sm:py-20">
+  <section class="relative bg-gray-900 py-16 sm:py-20">
     <!-- Background Effects -->
     <div class="absolute inset-0 overflow-hidden">
-      <div class="absolute rounded-full -top-40 -left-40 w-80 h-80 animate-pulse bg-gray-800/40 blur-3xl"></div>
-      <div class="absolute rounded-full -right-40 -bottom-40 w-80 h-80 animate-pulse bg-gray-800/40 blur-3xl" style="animation-delay: 2s;"></div>
+      <div class="absolute -top-40 -left-40 h-80 w-80 animate-pulse rounded-full bg-gray-800/40 blur-3xl"></div>
+      <div class="absolute -right-40 -bottom-40 h-80 w-80 animate-pulse rounded-full bg-gray-800/40 blur-3xl" style="animation-delay: 2s;"></div>
     </div>
 
-    <div class="relative px-6 mx-auto max-w-7xl lg:px-8">
+    <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
       <div class="text-center">
-        <div class="inline-flex items-center px-4 py-2 mb-8 text-sm font-medium text-gray-200 rounded-full ring-1 ring-inset bg-gray-800/40 ring-white/15">
-          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="mb-8 inline-flex items-center rounded-full bg-gray-800/40 px-4 py-2 text-sm font-medium text-gray-200 ring-1 ring-white/15 ring-inset">
+          <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
           </svg>
           {m.ready_to_scale({}, { locale: Astro.locals.locale })}
@@ -897,24 +968,24 @@ const content = {
           <span class="text-white">{m.updates_at_scale({}, { locale: Astro.locals.locale })}</span>
         </h2>
 
-        <p class="max-w-3xl mx-auto mt-6 mb-10 text-xl text-gray-300">
+        <p class="mx-auto mt-6 mb-10 max-w-3xl text-xl text-gray-300">
           {m.join_leading_enterprises({}, { locale: Astro.locals.locale })}
         </p>
 
         <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <div class="relative inline-flex group" role="presentation">
+          <div class="group relative inline-flex" role="presentation">
             <div
-              class="absolute -inset-4 rounded-xl opacity-70 duration-1000 group-hover:-inset-5 group-hover:opacity-100 group-hover:duration-200 transition-all"
+              class="absolute -inset-4 rounded-xl opacity-70 transition-all duration-1000 group-hover:-inset-5 group-hover:opacity-100 group-hover:duration-200"
               style="background: radial-gradient(ellipse at center, rgba(68, 188, 255, 0.6) 0%, rgba(68, 188, 255, 0.3) 40%, rgba(68, 188, 255, 0) 70%);"
             >
             </div>
             <a
               href="https://cal.com/team/capgo/demo"
               target="_blank"
-              class="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 border border-blue-500 rounded-xl hover:bg-gray-900 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none"
+              class="relative inline-flex items-center justify-center rounded-xl border border-blue-500 bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 hover:bg-gray-900 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none"
             >
               {m.request_demo({}, { locale: Astro.locals.locale })}
-              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
               </svg>
             </a>
@@ -922,7 +993,7 @@ const content = {
 
           <a
             href="https://cal.com/team/capgo/capgo-enterprise-inquiry"
-            class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-transparent border border-gray-300 rounded-xl hover:bg-gray-800 hover:border-gray-200 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none"
+            class="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-transparent px-8 py-4 text-lg font-bold text-white transition-all duration-200 hover:border-gray-200 hover:bg-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none"
           >
             {m.contact_sales({}, { locale: Astro.locals.locale })}
           </a>

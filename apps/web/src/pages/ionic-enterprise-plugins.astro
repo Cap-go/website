@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import * as m from '@/paraglide/messages'
+import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 
@@ -152,18 +152,10 @@ const content = { title, description, ldJSON }
               <tr class="transition hover:bg-gray-800/60">
                 <td class="px-6 py-4 font-medium text-gray-100">Ionic Payments</td>
                 <td class="px-6 py-4">
-                  <a
-                    href={getRelativeLocaleUrl(locale, 'docs/plugins/pay/')}
-                    class="text-emerald-300 hover:underline"
-                  >
-                    @capgo/capacitor-pay
-                  </a>
+                  <a href={getRelativeLocaleUrl(locale, 'docs/plugins/pay/')} class="text-emerald-300 hover:underline"> @capgo/capacitor-pay </a>
                 </td>
                 <td class="px-6 py-4">
-                  <a
-                    href={getRelativeLocaleUrl(locale, 'docs/plugins/pay/getting-started/')}
-                    class="text-blue-300 hover:underline"
-                  >
+                  <a href={getRelativeLocaleUrl(locale, 'docs/plugins/pay/getting-started/')} class="text-blue-300 hover:underline">
                     {m.appflow_plugins_link_text({}, { locale })}
                   </a>
                 </td>
@@ -171,18 +163,10 @@ const content = { title, description, ldJSON }
               <tr class="transition hover:bg-gray-800/60">
                 <td class="px-6 py-4 font-medium text-gray-100">Ionic Zebra Scanner</td>
                 <td class="px-6 py-4">
-                  <a
-                    href={getRelativeLocaleUrl(locale, 'docs/plugins/zebra-datawedge/')}
-                    class="text-emerald-300 hover:underline"
-                  >
-                    Zebra DataWedge
-                  </a>
+                  <a href={getRelativeLocaleUrl(locale, 'docs/plugins/zebra-datawedge/')} class="text-emerald-300 hover:underline"> Zebra DataWedge </a>
                 </td>
                 <td class="px-6 py-4">
-                  <a
-                    href={getRelativeLocaleUrl(locale, 'docs/plugins/zebra-datawedge/')}
-                    class="text-blue-300 hover:underline"
-                  >
+                  <a href={getRelativeLocaleUrl(locale, 'docs/plugins/zebra-datawedge/')} class="text-blue-300 hover:underline">
                     {m.appflow_plugins_link_text({}, { locale })}
                   </a>
                 </td>
@@ -190,22 +174,10 @@ const content = { title, description, ldJSON }
               <tr class="transition hover:bg-gray-800/60">
                 <td class="px-6 py-4 font-medium text-gray-100">@ionic-enterprise/ssl-pinning</td>
                 <td class="px-6 py-4">
-                  <a
-                    href="https://github.com/mchl18/Capacitor-SSL-Pinning"
-                    class="text-emerald-300 hover:underline"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    capacitor-ssl-pinning
-                  </a>
+                  <a href="https://github.com/mchl18/Capacitor-SSL-Pinning" class="text-emerald-300 hover:underline" target="_blank" rel="noreferrer"> capacitor-ssl-pinning </a>
                 </td>
                 <td class="px-6 py-4">
-                  <a
-                    href="https://github.com/mchl18/Capacitor-SSL-Pinning"
-                    class="text-blue-300 hover:underline"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
+                  <a href="https://github.com/mchl18/Capacitor-SSL-Pinning" class="text-blue-300 hover:underline" target="_blank" rel="noreferrer">
                     {m.appflow_plugins_link_text({}, { locale })}
                   </a>
                 </td>

@@ -1,6 +1,6 @@
 ---
 // FrameworkSelector.astro - Framework selection buttons for conditional steps
-import * as m from '@/paraglide/messages'
+import m from '@/copy/messages'
 import { resolveMessageLocale } from '@/services/message-locale'
 
 interface FrameworkOption {
@@ -19,7 +19,15 @@ const frameworks: FrameworkOption[] = [
   { id: 'qwik', nameKey: 'framework_qwik', icon: '/icons/qwik.svg' },
 ]
 
-const messageLocale = resolveMessageLocale(Astro.locals.starlightRoute.locale, Astro.currentLocale)
+const getRouteLocale = (): string | undefined => {
+  try {
+    return Astro.locals.starlightRoute?.locale
+  } catch {
+    return undefined
+  }
+}
+
+const messageLocale = resolveMessageLocale(getRouteLocale(), Astro.currentLocale)
 
 const getFrameworkName = (key: string) => {
   const translations: Record<string, string> = {

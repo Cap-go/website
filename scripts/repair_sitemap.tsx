@@ -1,7 +1,8 @@
 import { XMLParser } from 'fast-xml-parser'
-import { copyFileSync, existsSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { SitemapStream, streamToPromise } from 'sitemap'
+import { defaultLocale, locales } from '../apps/web/src/services/locale'
 
 interface SitemapUrl {
   loc: string
@@ -13,6 +14,55 @@ interface SitemapUrl {
 const HOSTNAME = 'https://capgo.app'
 
 const parser = new XMLParser()
+
+function stripLocalePath(pathname: string): string {
+  for (const locale of locales) {
+    if (pathname === `/${locale}`) return '/'
+    if (pathname.startsWith(`/${locale}/`)) return pathname.slice(locale.length + 1) || '/'
+  }
+  return pathname
+}
+
+function localizedUrl(loc: string, locale: string): string {
+  const url = new URL(loc)
+  const basePath = stripLocalePath(url.pathname)
+  url.pathname = locale === defaultLocale ? basePath : basePath === '/' ? `/${locale}/` : `/${locale}${basePath}`
+  return url.toString()
+}
+
+function expandLocalizedUrls(urls: SitemapUrl[]): SitemapUrl[] {
+  const expanded = new Map<string, SitemapUrl>()
+
+  for (const item of urls) {
+    for (const locale of locales) {
+      const loc = localizedUrl(item.loc, locale)
+      if (!expanded.has(loc)) {
+        expanded.set(loc, {
+          ...item,
+          loc,
+        })
+      }
+    }
+  }
+
+  return [...expanded.values()].sort((left, right) => left.loc.localeCompare(right.loc))
+}
+
+function appendSupportedLanguagePaths(content: string): string {
+  const localizedPaths = locales
+    .filter((locale) => locale !== defaultLocale)
+    .map((locale) => `/${locale}/`)
+    .join(', ')
+
+  return [
+    content.trimEnd(),
+    '',
+    '## Supported language paths',
+    '',
+    `The canonical English source is served at /. Translated pages are served at request time for these language prefixes: ${localizedPaths}.`,
+    '',
+  ].join('\n')
+}
 
 function resolveDistDir(appName: 'web' | 'docs'): string {
   const distRoot = join('apps', appName, 'dist')
@@ -32,7 +82,7 @@ async function normalizeSitemap(inputPath: string, outputPath = inputPath): Prom
   const urls: SitemapUrl[] = Array.isArray(rawUrls) ? rawUrls : rawUrls ? [rawUrls] : []
   const smStream = new SitemapStream({ hostname: HOSTNAME })
 
-  urls.forEach((item) => {
+  expandLocalizedUrls(urls).forEach((item) => {
     smStream.write({
       url: item.loc,
       lastmod: item.lastmod,
@@ -60,7 +110,7 @@ if (await normalizeSitemap(join(DOCS_DIST, 'sitemap-0.xml'), join(WEB_DIST, 'doc
 for (const docsArtifact of ['llms.txt', 'llms-full.txt']) {
   const sourcePath = join(DOCS_DIST, docsArtifact)
   if (existsSync(sourcePath)) {
-    copyFileSync(sourcePath, join(WEB_DIST, docsArtifact))
+    writeFileSync(join(WEB_DIST, docsArtifact), appendSupportedLanguagePaths(readFileSync(sourcePath, 'utf-8')), 'utf-8')
   }
 }
 

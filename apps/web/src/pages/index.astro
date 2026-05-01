@@ -7,7 +7,7 @@ import Testimonials from '@/components/Testimonials.astro'
 import SharedNumbers from '@/components/SharedNumbers.astro'
 import Hero from '@/components/Hero.astro'
 import Manifesto from '@/components/Manifesto.astro'
-import * as m from '@/paraglide/messages'
+import m from '@/copy/messages'
 import DeviceLogs from '@/components/landing/DeviceLogs.astro'
 import HowItWorks from '@/components/HowItWorks.astro'
 import GlobalInfrastructure from '@/components/GlobalInfrastructure.astro'
@@ -43,7 +43,8 @@ const description = m.ship_updates_fixes_changes_and_features({}, { locale: Astr
 // Create comprehensive LD+JSON for homepage
 const capgoService = createServiceLdJson(config.public, {
   name: 'Capgo - Live Updates for Capacitor Apps',
-  description: 'Instant over-the-air / CodePush updates for Capacitor mobile and Electron applications. Deploy OTA, bug fixes, feature updates, and improvements without release delays.',
+  description:
+    'Instant over-the-air / CodePush updates for Capacitor mobile and Electron applications. Deploy OTA, bug fixes, feature updates, and improvements without release delays.',
   url: config.public.baseUrl,
   serviceType: 'Software Development Service',
   areaServed: ['Worldwide'],
@@ -97,7 +98,6 @@ const content = {
     additionalEntities: [capgoSoftware],
   }),
 }
-
 ---
 
 <Layout content={content}>
@@ -118,8 +118,6 @@ const content = {
     <Orgs />
     <AppflowShutdown />
   </div>
-
-
 
   <style is:global>
     /* Minimum required CSS for animations */
@@ -196,7 +194,5 @@ const content = {
         opacity: 0;
       }
     }
-
-
   </style>
 </Layout>

@@ -1,5 +1,6 @@
 ---
-import * as m from '@/paraglide/messages'
+import m from '@/copy/messages'
+import { getLocalizedPath } from '@/services/locale-path'
 import { locales } from '@/services/locale'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
@@ -334,7 +335,9 @@ const navigation: Record<string, NavigationItem[]> = {
               {
                 locales.map((item) => (
                   <a
-                    href={getRelativeLocaleUrl(item.toLowerCase(), Astro.url.pathname.replace(`/${Astro.locals.locale}/`, '/'))}
+                    href={getLocalizedPath(item, Astro.url.pathname)}
+                    id={`language_${item}`}
+                    data-language={item}
                     class="block px-4 py-2 text-sm text-zinc-400 hover:bg-zinc-800 hover:text-white"
                   >
                     {item.toUpperCase()}

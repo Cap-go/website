@@ -12,8 +12,6 @@ on:
     paths:
       - 'apps/web/**'
       - 'apps/shared/**'
-      - 'messages/**'
-      - 'project.inlang/**'
       - 'scripts/**'
       - 'configs.json'
       - 'package.json'
@@ -68,7 +66,7 @@ jobs:
             apps/web/.astro
             node_modules/.astro
             node_modules/.cache
-          key: ${{ runner.os }}-astro-web-${{ hashFiles('**/bun.lock') }}-${{ hashFiles('apps/web/**', 'apps/shared/**', 'messages/**', 'project.inlang/**', 'scripts/**', 'configs.json') }}
+          key: ${{ runner.os }}-astro-web-${{ hashFiles('**/bun.lock') }}-${{ hashFiles('apps/web/**', 'apps/shared/**', 'scripts/**', 'configs.json') }}
           restore-keys: |
             ${{ runner.os }}-astro-web-${{ hashFiles('**/bun.lock') }}-
             ${{ runner.os }}-astro-web-

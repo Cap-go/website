@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import * as m from '@/paraglide/messages'
+import m from '@/copy/messages'
 import { defaultLocale } from '@/services/locale'
 
 const locale = Astro.locals.locale
@@ -58,7 +58,7 @@ const subprocessors = [
 ---
 
 <Layout content={content}>
-  <div class="py-8 m-auto prose-sm prose prose-invert">
+  <div class="prose-sm prose prose-invert m-auto py-8">
     {
       locale !== defaultLocale && (
         <span class="text-xs">
@@ -79,12 +79,14 @@ const subprocessors = [
           </tr>
         </thead>
         <tbody>
-          {subprocessors.map((item) => (
-            <tr>
-              <td>{item.name}</td>
-              <td>{item.purpose}</td>
-            </tr>
-          ))}
+          {
+            subprocessors.map((item) => (
+              <tr>
+                <td>{item.name}</td>
+                <td>{item.purpose}</td>
+              </tr>
+            ))
+          }
         </tbody>
       </table>
     </div>

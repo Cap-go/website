@@ -6,7 +6,15 @@ import { resolveMessageLocale } from '@/services/message-locale'
 import { getPluginDocsSlugs, resolvePluginDocsSlug } from '@/services/pluginDocs'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
-const locale = resolveMessageLocale(Astro.locals.starlightRoute?.locale, Astro.currentLocale)
+const getRouteLocale = (): string | undefined => {
+  try {
+    return Astro.locals.starlightRoute?.locale
+  } catch {
+    return undefined
+  }
+}
+
+const locale = resolveMessageLocale(getRouteLocale(), Astro.currentLocale)
 const { localizedDocsSlugs, docsSlugs } = await getPluginDocsSlugs(locale)
 const seenPluginLinks = new Set<string>()
 

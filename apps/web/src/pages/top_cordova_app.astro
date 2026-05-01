@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import * as m from '@/paraglide/messages'
+import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { renameCat, shortNumber } from '@/services/misc'
 
@@ -31,9 +31,9 @@ try {
 
 <Layout content={content}>
   <section class="py-10 sm:py-12 lg:py-20">
-    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-2xl text-center">
-        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
+        <h1 class="text-3xl leading-tight font-bold text-white sm:text-4xl lg:text-5xl">
           {m.top_cordova_apps_title({}, { locale: Astro.locals.locale })}
         </h1>
         <h2 class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-gray-50">
@@ -43,23 +43,23 @@ try {
           {m.cordova_power_approximately_1_of_apps_on_google_play_store({}, { locale: Astro.locals.locale }).replace('$1', usage.toString())}
         </p>
       </div>
-      <div class="grid grid-cols-1 gap-6 mx-auto mt-8 max-w-md lg:grid-cols-3 lg:mt-16 lg:max-w-full">
+      <div class="mx-auto mt-8 grid max-w-md grid-cols-1 gap-6 lg:mt-16 lg:max-w-full lg:grid-cols-3">
         {
           apps.map((app, index) => (
-            <div class="overflow-hidden bg-gray-100 rounded shadow">
+            <div class="overflow-hidden rounded bg-gray-100 shadow">
               <div class="p-5">
                 <div class="relative">
-                  <a href={app.url} aria-label={app.title} class="block aspect-w-4 aspect-h-3">
-                    <img class="object-cover w-full h-full rounded-lg" src={app.icon} alt={`app icon ${app.title}`} />
+                  <a href={app.url} aria-label={app.title} class="aspect-w-4 aspect-h-3 block">
+                    <img class="h-full w-full rounded-lg object-cover" src={app.icon} alt={`app icon ${app.title}`} />
                   </a>
                   <div class="absolute top-4 left-4">
-                    <span class="py-2 px-4 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full shadow-lg">{renameCat(app.category)}</span>
+                    <span class="rounded-full bg-white px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase shadow-lg">{renameCat(app.category)}</span>
                   </div>
                   <div class="absolute top-4 right-4">
-                    <span class="py-2 px-4 text-xs font-semibold tracking-widest text-white uppercase rounded-full shadow-lg bg-pumpkin-orange-500">{index + 1}</span>
+                    <span class="bg-pumpkin-orange-500 rounded-full px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase shadow-lg">{index + 1}</span>
                   </div>
                 </div>
-                <span class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase">
+                <span class="mt-6 block text-sm font-semibold tracking-widest text-gray-500 uppercase">
                   {shortNumber(app.installs)} {m.downloads({}, { locale: Astro.locals.locale })}
                 </span>
                 <p class="mt-5 text-2xl font-semibold">
@@ -70,10 +70,10 @@ try {
                 <a
                   href={app.url}
                   aria-label={app.title}
-                  class="inline-flex justify-center items-center pb-0.5 mt-5 text-base font-semibold text-gray-600 border-b-2 border-transparent transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+                  class="mt-5 inline-flex items-center justify-center border-b-2 border-transparent pb-0.5 text-base font-semibold text-gray-600 transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
                 >
                   {m.see_in_play_store({}, { locale: Astro.locals.locale })}
-                  <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                     <path
                       fill-rule="evenodd"
                       d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
@@ -86,16 +86,16 @@ try {
           ))
         }
       </div>
-      <div class="grid grid-cols-1 gap-6 mx-auto mt-8 max-w-md lg:grid-cols-3 lg:mt-16 lg:max-w-full">
+      <div class="mx-auto mt-8 grid max-w-md grid-cols-1 gap-6 lg:mt-16 lg:max-w-full lg:grid-cols-3">
         {
           others.map((l) => (
-            <a href={`/${l}/`} class="flex flex-col py-8 text-center bg-gray-700 rounded-lg transition-all duration-200 hover:bg-gray-700 focus:bg-blue-900">
-              <div class="flex relative mx-auto">
-                <div class="block pb-4 mx-4 w-full">
-                  <img class="object-cover w-full h-full rounded-lg" src={`/${l.replace('top_', '').replace('_app', '')}.webp`} alt={`blog illustration ${l}`} />
+            <a href={`/${l}/`} class="flex flex-col rounded-lg bg-gray-700 py-8 text-center transition-all duration-200 hover:bg-gray-700 focus:bg-blue-900">
+              <div class="relative mx-auto flex">
+                <div class="mx-4 block w-full pb-4">
+                  <img class="h-full w-full rounded-lg object-cover" src={`/${l.replace('top_', '').replace('_app', '')}.webp`} alt={`blog illustration ${l}`} />
                 </div>
               </div>
-              <div class="px-4 pt-2 w-full sm:pt-0">
+              <div class="w-full px-4 pt-2 sm:pt-0">
                 <p class="text-lg font-bold capitalize">{renameCat(l)}</p>
               </div>
             </a>
@@ -105,9 +105,9 @@ try {
 
       <div class="mx-auto mt-12 max-w-4xl">
         <div class="relative overflow-hidden rounded-3xl border border-gray-700 bg-linear-to-r from-orange-600/30 to-sky-700/30 p-10 sm:p-12">
-          <div class="absolute inset-0 pointer-events-none">
-            <div class="absolute -top-20 -left-20 w-64 h-64 bg-orange-500/15 rounded-full blur-3xl"></div>
-            <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-sky-500/15 rounded-full blur-3xl"></div>
+          <div class="pointer-events-none absolute inset-0">
+            <div class="absolute -top-20 -left-20 h-64 w-64 rounded-full bg-orange-500/15 blur-3xl"></div>
+            <div class="absolute -right-24 -bottom-24 h-64 w-64 rounded-full bg-sky-500/15 blur-3xl"></div>
           </div>
           <div class="relative">
             <h3 class="text-2xl font-bold text-white sm:text-3xl">{m.top_cordova_migrate_cta_title({}, { locale: Astro.locals.locale })}</h3>
@@ -115,13 +115,13 @@ try {
             <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
               <a
                 href={getRelativeLocaleUrl(Astro.locals.locale, 'solutions/cordova-to-capacitor')}
-                class="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-gray-900 bg-white rounded-xl hover:bg-gray-100 transition-colors"
+                class="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 text-base font-semibold text-gray-900 transition-colors hover:bg-gray-100"
               >
                 {m.solutions_cordova_to_capacitor_short({}, { locale: Astro.locals.locale })}
               </a>
               <a
                 href="https://cal.com/team/capgo/convert-your-cordova-app-to-capacitor"
-                class="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white border border-white/30 rounded-xl hover:bg-white/10 transition-colors"
+                class="inline-flex items-center justify-center rounded-xl border border-white/30 px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-white/10"
               >
                 {m.solutions_talk_to_team({}, { locale: Astro.locals.locale })}
               </a>
