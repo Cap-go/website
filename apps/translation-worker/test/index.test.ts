@@ -90,6 +90,7 @@ function createEnv(aiHandler: AiHandler, html = '<html lang="en"><body><h1>Ship 
 
 const originalWarn = console.warn
 const originalError = console.error
+const originalCaches = (globalThis as typeof globalThis & { caches?: unknown }).caches
 
 beforeEach(() => {
   ;(globalThis as typeof globalThis & { caches: { default: MemoryCache } }).caches = { default: new MemoryCache() }
@@ -98,6 +99,7 @@ beforeEach(() => {
 })
 
 afterEach(() => {
+  ;(globalThis as typeof globalThis & { caches?: unknown }).caches = originalCaches
   console.warn = originalWarn
   console.error = originalError
 })
