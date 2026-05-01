@@ -11,6 +11,24 @@
   "vars": {
     "TRANSLATION_MODEL": "@cf/moonshotai/kimi-k2.6",
   },
+  "queues": {
+    "producers": [
+      {
+        "binding": "TRANSLATION_QUEUE",
+        "queue": "capgo-translation-refresh",
+      },
+    ],
+    "consumers": [
+      {
+        "queue": "capgo-translation-refresh",
+        "max_batch_size": 1,
+        "max_batch_timeout": 1,
+        "max_retries": 3,
+        "retry_delay": 60,
+        "max_concurrency": 2,
+      },
+    ],
+  },
   "services": [
     {
       "binding": "WEB",
@@ -45,6 +63,24 @@
   ],
   "env": {
     "development": {
+      "queues": {
+        "producers": [
+          {
+            "binding": "TRANSLATION_QUEUE",
+            "queue": "capgo-translation-refresh-development",
+          },
+        ],
+        "consumers": [
+          {
+            "queue": "capgo-translation-refresh-development",
+            "max_batch_size": 1,
+            "max_batch_timeout": 1,
+            "max_retries": 3,
+            "retry_delay": 60,
+            "max_concurrency": 2,
+          },
+        ],
+      },
       "services": [
         {
           "binding": "WEB",
