@@ -46,7 +46,7 @@ const locale = Astro.locals.locale
             {m.docs({}, { locale: Astro.locals.locale })}
           </a>
           <!-- Products Dropdown -->
-          <div id="desktop-products-dropdown" class="group relative">
+          <div id="desktop-products-dropdown" class="desktop-dropdown group relative">
             <button
               id="desktop-products-toggle"
               type="button"
@@ -70,10 +70,7 @@ const locale = Astro.locals.locale
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div
-              id="desktop-products-menu"
-              class="invisible absolute left-0 z-50 w-48 pt-2 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100"
-            >
+            <div id="desktop-products-menu" class="desktop-dropdown-menu invisible absolute left-0 z-50 w-48 pt-2 opacity-0 transition-all duration-200">
               <div class="rounded-lg border border-gray-700 bg-gray-800 py-2 shadow-xl">
                 <a
                   href={getRelativeLocaleUrl(Astro.locals.locale, 'live-update')}
@@ -100,7 +97,7 @@ const locale = Astro.locals.locale
             </div>
           </div>
           <!-- Solutions Dropdown -->
-          <div id="desktop-solutions-dropdown" class="group relative">
+          <div id="desktop-solutions-dropdown" class="desktop-dropdown group relative">
             <button
               id="desktop-solutions-toggle"
               type="button"
@@ -124,10 +121,7 @@ const locale = Astro.locals.locale
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div
-              id="desktop-solutions-menu"
-              class="invisible absolute left-0 z-50 w-[600px] pt-2 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100"
-            >
+            <div id="desktop-solutions-menu" class="desktop-dropdown-menu invisible absolute left-0 z-50 w-[600px] pt-2 opacity-0 transition-all duration-200">
               <div class="rounded-lg border border-gray-700 bg-gray-800 p-4 shadow-xl">
                 <div class="grid grid-cols-3 gap-4">
                   <!-- By Team Type Column -->
@@ -625,7 +619,17 @@ const locale = Astro.locals.locale
   </div>
 </header>
 
+<style is:global>
+  html:not(.js) .desktop-dropdown:hover .desktop-dropdown-menu,
+  html:not(.js) .desktop-dropdown:focus-within .desktop-dropdown-menu {
+    visibility: visible;
+    opacity: 1;
+  }
+</style>
+
 <script>
+  document.documentElement.classList.add('js')
+
   const menuToggle = document.getElementById('menu-toggle')
   const mobileMenu = document.getElementById('mobile-menu')
   const productsToggle = document.getElementById('products-toggle')
