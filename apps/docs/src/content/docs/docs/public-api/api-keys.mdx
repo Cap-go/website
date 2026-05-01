@@ -1,279 +1,59 @@
 ---
 title: "API Keys"
-description: "Comprehensive documentation for API Keys endpoint, detailing authentication, permissions, and management within Capgo API"
+description: "Comprehensive documentation for API Keys, detailing authentication, RBAC permissions, and management within Capgo"
 sidebar:
   order: 9
 ---
 
-API keys are used to authenticate requests to the Capgo API. Each key can have different permissions (modes) to control access levels. Keys are organization-specific and should be managed carefully as they grant access to your Capgo resources.
+API keys are used to authenticate requests to the Capgo API. Keys are organization-specific and can be assigned RBAC roles for fine-grained access control. Each key can also have an optional expiration date and can be created as a "secure" (hashed) key where the plain-text value is only shown once.
 
-## Key Modes
+## RBAC Permissions
 
-- **read**: Can only read data, no modifications allowed
-- **upload**: Can read, modify, and upload new bundles
-- **write**: Can read, modify data, and upload bundles
-- **all**: Full access to all operations
+API keys use the same role-based access control (RBAC) system as user accounts. When creating or managing keys through the web app, you assign roles at two levels:
 
-Key modes follow a stepped/gradual schema. If you have an upload key, and then you create a write key, the write key will be able to do everything that the upload key could.
-Please take a look at the following diagram to better understand how API keys work.
+- **Organization role** — Defines the key's baseline permissions across the entire organization (e.g. `org_admin`, `org_member`).
+- **App roles** — Optional per-app permissions (e.g. `app_admin`, `app_developer`, `app_uploader`, `app_reader`).
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="A diagram explaining how API key work" /><figcaption></figcaption></figure>
+If an API key has explicit role bindings, **only those bindings** are evaluated for permission checks. The key owner's personal permissions are not inherited by the key.
 
-## Subkeys with Limited Rights
+{/* [SCREENSHOT: capgo_apikeys_rbac_diagram.webp] — Diagram showing the RBAC hierarchy: org roles → app roles → API key permissions */}
+<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_rbac_diagram.webp" alt="A diagram explaining how RBAC API key permissions work" /><figcaption></figcaption></figure>
 
-You can create subkeys with limited access to specific apps or organizations. This is useful for restricting access to certain resources while still allowing operations on others. Use the `limited_to_apps` and `limited_to_orgs` parameters when creating a key to define these restrictions.
+:::note
+Keys without role bindings fall back to a legacy mode-based system (`read`, `upload`, `write`, `all`). These modes are deprecated — use RBAC roles instead.
+:::
 
-## Encrypted Keys
+## Secure (Hashed) Keys
 
-You can create **encrypted (hashed) API keys** for enhanced security. When creating an encrypted key:
+When creating a secure key, the server generates the key material and returns the plain-text value once. Only a hash is stored. This means:
 
-- The key is hashed using SHA-256 before being stored in the database
-- **The plain key is returned only once** in the creation response - save it immediately
-- The key cannot be retrieved or viewed again after creation
-- If you lose an encrypted key, you must create a new one
+- The plain-text key **cannot be retrieved** after creation.
+- Regeneration produces a new plain-text key (shown once) and updates the stored hash.
+- Hashed keys are recommended for production use.
 
-Use the `hashed: true` parameter when creating a key to enable encryption. This is the recommended approach for production environments.
+Some organizations enforce hashed keys via the `enforce_hashed_api_keys` org policy.
 
-## Key Expiration
+## Expiration
 
-API keys can have an **expiration date** to limit the window of exposure if a key is compromised. When an expiration date is set:
+Keys can have an optional expiration date. Expired keys are rejected at the permission check layer.
 
-- The key stops working after the specified date and time
-- Requests using expired keys will be rejected with an error
-- Expired keys are automatically cleaned up after 30 days
-
-Organizations can enforce expiration policies:
-- **Require expiration**: All API keys must have an expiration date
-- **Maximum expiration period**: Limit how far in the future an expiration date can be set
+Organization policies can enforce:
+- **Mandatory expiration** (`require_apikey_expiration`) — All new keys must have an expiry.
+- **Maximum TTL** (`max_apikey_expiration_days`) — The expiry cannot be further than N days from now.
 
 ## Security Best Practices
 
-1. **Principle of Least Privilege**: Always use the most restrictive mode that still allows your integration to function
-2. **Use Encrypted Keys**: Create hashed keys for production to protect against database breaches
-3. **Set Expiration Dates**: Use expiration dates to limit the lifetime of your keys
-4. **Regular Rotation**: Rotate your API keys periodically
-5. **Secure Storage**: Store API keys securely and never commit them to version control
-6. **Monitoring**: Monitor API key usage and revoke any compromised keys immediately
-7. **Limited Subkeys**: Use subkeys with limited rights for specific integrations to minimize risk
-
-## Endpoints
-
-### GET
-
-`https://api.capgo.app/apikey/`
-
-Retrieve all API keys associated with your account.
-
-#### Response Type
-
-```typescript
-interface ApiKey {
-  created_at: string | null
-  id: number
-  key: string | null  // null for encrypted keys
-  mode: 'read' | 'write' | 'upload' | 'all'
-  name: string
-  updated_at: string | null
-  user_id: string
-  limited_to_apps?: string[]
-  limited_to_orgs?: string[]
-  expires_at?: string | null  // ISO 8601 date, null means never expires
-}
-```
-
-> **Note**: For encrypted keys, the `key` field will be `null` in GET responses since the plain key is only shown once during creation.
-
-#### Example Request
-
-```bash
-curl -H "authorization: your-api-key" https://api.capgo.app/apikey/
-```
-
-#### Example Response
-
-```json
-{
-  "data": [
-    {
-      "id": 1,
-      "key": "ak_123...",
-      "mode": "read",
-      "name": "CI/CD Read Key",
-      "created_at": "2024-01-01T00:00:00Z",
-      "updated_at": "2024-01-01T00:00:00Z",
-      "user_id": "user_123"
-    },
-    {
-      "id": 2,
-      "key": "ak_456...",
-      "mode": "upload",
-      "name": "Deploy Bot",
-      "created_at": "2024-01-02T00:00:00Z",
-      "updated_at": "2024-01-02T00:00:00Z",
-      "user_id": "user_123",
-      "limited_to_apps": ["com.demo.app"]
-    }
-  ]
-}
-```
-
-### POST
-
-`https://api.capgo.app/apikey/`
-
-Create a new API key for a specific organization.
-
-#### Request Body
-
-```typescript
-interface ApiKeyCreate {
-  name: string
-  mode: 'read' | 'write' | 'upload' | 'all'
-  limited_to_apps?: string[]
-  limited_to_orgs?: string[]
-  hashed?: boolean       // Create an encrypted key (recommended for production)
-  expires_at?: string    // ISO 8601 date for key expiration
-}
-```
-
-#### Example Request (Standard Key)
-
-```bash
-curl -X POST \
-  -H "authorization: your-api-key" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Limited Read Key",
-    "mode": "read",
-    "limited_to_apps": ["com.demo.app"]
-  }' \
-  https://api.capgo.app/apikey/
-```
-
-#### Example Request (Encrypted Key with Expiration)
-
-```bash
-curl -X POST \
-  -H "authorization: your-api-key" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Secure CI Key",
-    "mode": "upload",
-    "hashed": true,
-    "expires_at": "2025-06-01T00:00:00Z"
-  }' \
-  https://api.capgo.app/apikey/
-```
-
-#### Example Response (Standard Key)
-
-```json
-{
-  "apikey": {
-    "id": 3,
-    "key": "ak_789...",
-    "mode": "read",
-    "name": "Limited Read Key",
-    "created_at": "2024-02-12T00:00:00Z",
-    "user_id": "user_123",
-    "limited_to_apps": ["com.demo.app"]
-  }
-}
-```
-
-#### Example Response (Encrypted Key)
-
-```json
-{
-  "apikey": {
-    "id": 4,
-    "key": "ak_abc123...",
-    "mode": "upload",
-    "name": "Secure CI Key",
-    "created_at": "2024-02-12T00:00:00Z",
-    "user_id": "user_123",
-    "expires_at": "2025-06-01T00:00:00Z"
-  }
-}
-```
-
-> **Important**: For encrypted keys, the `key` value in this response is the **only time** you will see the plain key. Save it immediately in a secure location. Subsequent GET requests will return `null` for the `key` field.
-
-### DELETE
-
-`https://api.capgo.app/apikey/:id/`
-
-Delete an existing API key. Use this to revoke access immediately.
-
-#### Parameters
-- `id`: The ID of the API key to delete (numeric identifier, not the key string itself)
-
-#### Example Request
-
-```bash
-curl -X DELETE -H "authorization: your-api-key" https://api.capgo.app/apikey/1/
-```
-
-#### Success Response
-
-```json
-{
-  "success": true
-}
-```
+1. **Principle of Least Privilege**: Assign the most restrictive role that still allows your integration to function
+2. **Regular Rotation**: Rotate your API keys periodically using the regenerate feature
+3. **Secure Storage**: Store API keys securely and never commit them to version control
+4. **Use Hashed Keys**: Create secure (hashed) keys for production integrations
+5. **Set Expiration**: Always set an expiration date on keys used for temporary or CI/CD access
+6. **Scope Restrictions**: Restrict keys to specific apps with the minimum required role
 
 ## Common Use Cases
 
-1. **CI/CD Integration**: Create read-only keys for CI pipelines to check deployment status
-2. **Deployment Automation**: Use upload mode keys for automated deployment scripts
-3. **Monitoring Tools**: Use read mode keys for external monitoring integrations
-4. **Admin Access**: Use all mode keys sparingly for administrative tools
-5. **Limited Access**: Create subkeys with limited rights to specific apps or organizations for third-party integrations
-
-## Error Handling
-
-Common error scenarios and their responses:
-
-```json
-// Invalid mode
-{
-  "error": "Invalid mode specified. Must be one of: read, write, upload, all",
-  "status": "KO"
-}
-
-// Key not found
-{
-  "error": "API key not found",
-  "status": "KO"
-}
-
-// Permission denied
-{
-  "error": "Insufficient permissions to manage API keys",
-  "status": "KO"
-}
-
-// Expired API key used for authentication
-{
-  "error": "API key has expired",
-  "status": "KO"
-}
-
-// Invalid expiration date (in the past)
-{
-  "error": "Expiration date must be in the future",
-  "status": "KO"
-}
-
-// Organization requires expiration
-{
-  "error": "Organization policy requires an expiration date for API keys",
-  "status": "KO"
-}
-
-// Expiration exceeds organization limit
-{
-  "error": "Expiration date exceeds organization maximum of 90 days",
-  "status": "KO"
-}
-``` 
+1. **CI/CD Integration**: Create keys scoped to specific apps with the `App Uploader` or `App Developer` role, and set an expiration date
+2. **Deployment Automation**: Use keys with the `App Developer` role for automated deployment scripts
+3. **Monitoring Tools**: Create keys with the `App Reader` role for external monitoring integrations
+4. **Admin Access**: Use keys with the `Admin` org role sparingly for administrative tools
+5. **Third-Party Integrations**: Create keys restricted to specific apps with the minimum required role
