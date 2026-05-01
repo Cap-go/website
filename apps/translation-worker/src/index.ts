@@ -56,7 +56,8 @@ const ALL_LOCALES = [DEFAULT_LOCALE, ...SUPPORTED_LOCALES] as const
 const DEFAULT_MODEL = '@cf/meta/llama-3.1-8b-instruct'
 const FRESH_MS = 24 * 60 * 60 * 1000
 const CACHE_KEEP_SECONDS = 7 * 24 * 60 * 60
-const CLIENT_CACHE_SECONDS = 5 * 60
+const TRANSLATION_CACHE_VERSION = '2026-05-01-strict-translation-v1'
+const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
 const MAX_HTML_BYTES = 1_500_000
 const MAX_BATCH_CHARS = 6_000
 
@@ -71,7 +72,20 @@ const LANGUAGE_NAMES: Record<Locale, string> = {
   zh: 'Simplified Chinese',
 }
 
+const LANGUAGE_FLAG_ENTITIES: Record<string, string> = {
+  de: '&#127465;&#127466;',
+  en: '&#127482;&#127480;',
+  es: '&#127466;&#127480;',
+  fr: '&#127467;&#127479;',
+  id: '&#127470;&#127465;',
+  it: '&#127470;&#127481;',
+  ja: '&#127471;&#127477;',
+  ko: '&#127472;&#127479;',
+  zh: '&#127464;&#127475;',
+}
+
 const SKIP_TEXT_TAGS = new Set(['script', 'style', 'svg', 'pre', 'code', 'kbd', 'samp', 'textarea'])
+const LANGUAGE_SELECTOR_SKIP_IDS = new Set(['language-dropdown-button', 'language-dropdown', 'language-menu'])
 const VOID_TAGS = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'])
 const TRANSLATABLE_META = new Set(['description', 'keywords', 'title', 'og:title', 'og:description', 'og:image:alt', 'twitter:title', 'twitter:description', 'twitter:image:alt'])
 const TRANSLATABLE_ATTRIBUTES = new Set(['alt', 'aria-label', 'placeholder', 'title'])
@@ -241,19 +255,37 @@ function cacheKeyFor(requestUrl: URL, locale: Locale): Request {
   const cacheUrl = new URL(requestUrl)
   cacheUrl.pathname = localizedPath(cacheUrl.pathname, locale)
   cacheUrl.search = ''
+  cacheUrl.searchParams.set('__capgo_translation_cache', TRANSLATION_CACHE_VERSION)
   return new Request(cacheUrl.toString(), { method: 'GET' })
 }
 
 function withResponseHeaders(response: Response, cacheState: 'MISS' | 'HIT' | 'STALE' | 'BYPASS', isHead = false): Response {
   const headers = new Headers(response.headers)
-  headers.set('Cache-Control', `public, max-age=${CLIENT_CACHE_SECONDS}, stale-while-revalidate=${FRESH_MS / 1000}`)
+  headers.set('Cache-Control', CLIENT_NO_STORE)
+  headers.set('CDN-Cache-Control', CLIENT_NO_STORE)
+  headers.set('Cloudflare-CDN-Cache-Control', CLIENT_NO_STORE)
+  headers.set('Pragma', 'no-cache')
+  headers.set('Expires', '0')
   headers.set('X-Capgo-Translation-Cache', cacheState)
+  headers.delete('ETag')
+  headers.delete('Last-Modified')
   headers.delete('Content-Length')
   return new Response(isHead ? null : response.body, {
     status: response.status,
     statusText: response.statusText,
     headers,
   })
+}
+
+function translationUnavailableResponse(isHead = false): Response {
+  return withResponseHeaders(
+    new Response(isHead ? null : 'Translation temporarily unavailable', {
+      status: 503,
+      headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Retry-After': '60' },
+    }),
+    'BYPASS',
+    isHead,
+  )
 }
 
 function toCachedResponse(response: Response): Response {
@@ -353,6 +385,30 @@ function readAttributeValue(tag: string, attrName: string): string | null {
   const normalizedAttr = attrName.toLowerCase()
   const attribute = collectQuotedAttributes(tag).find((item) => item.name.toLowerCase() === normalizedAttr)
   return attribute?.value ?? null
+}
+
+function isSupportedLanguagePath(value: string): boolean {
+  return (ALL_LOCALES as readonly string[]).includes(value)
+}
+
+function languageSelectorTargetLocale(tag: string): string | null {
+  const dataLanguage = readAttributeValue(tag, 'data-language')
+  if (dataLanguage && isSupportedLanguagePath(dataLanguage)) return dataLanguage
+
+  const id = readAttributeValue(tag, 'id')
+  if (!id?.startsWith('language_')) return null
+
+  const idLocale = id.slice('language_'.length)
+  return isSupportedLanguagePath(idLocale) ? idLocale : null
+}
+
+function shouldSkipElementText(tag: string, tagName: string): boolean {
+  if (SKIP_TEXT_TAGS.has(tagName)) return true
+
+  const id = readAttributeValue(tag, 'id')
+  if (id && (LANGUAGE_SELECTOR_SKIP_IDS.has(id) || id.startsWith('language_'))) return true
+
+  return languageSelectorTargetLocale(tag) !== null
 }
 
 function getMetaKey(tag: string): string | null {
@@ -466,15 +522,17 @@ function collectSegments(html: string): { parts: HtmlPart[]; segments: Segment[]
     }
 
     const tagName = tagNameOf(tag)
-    if (tagName && SKIP_TEXT_TAGS.has(tagName) && isClosingTag(tag)) {
-      const stackIndex = skipStack.lastIndexOf(tagName)
-      if (stackIndex !== -1) skipStack.splice(stackIndex, 1)
+    const insideSkippedElement = skipStack.length > 0
+
+    appendTag(parts, segments, tag, insideSkippedElement)
+
+    if (tagName && !isClosingTag(tag) && !isSelfClosingTag(tag, tagName) && (insideSkippedElement || shouldSkipElementText(tag, tagName))) {
+      skipStack.push(tagName)
     }
 
-    appendTag(parts, segments, tag, skipStack.length > 0)
-
-    if (tagName && SKIP_TEXT_TAGS.has(tagName) && !isClosingTag(tag) && !isSelfClosingTag(tag, tagName)) {
-      skipStack.push(tagName)
+    if (tagName && isClosingTag(tag) && insideSkippedElement) {
+      const stackIndex = skipStack.lastIndexOf(tagName)
+      if (stackIndex !== -1) skipStack.splice(stackIndex)
     }
 
     lastIndex = nextTag.end
@@ -561,6 +619,38 @@ function parseTranslationArray(rawText: string): string[] | null {
   }
 }
 
+function normalizedTranslationValue(value: string): string {
+  return value.trim().replace(/\s+/g, ' ')
+}
+
+function shouldCheckUnchangedTranslation(value: string): boolean {
+  const normalized = normalizedTranslationValue(value)
+  if (normalized.length < 20 || !hasAsciiLetter(normalized)) return false
+  if (/[`{}[\]|\\/@#$%^*_+=<>]/.test(normalized)) return false
+  if (/\b(?:https?|mailto|tel):/i.test(normalized)) return false
+  if (/\.(?:js|ts|tsx|jsx|json|md|mdx|css|html|yml|yaml)\b/i.test(normalized)) return false
+
+  const words = normalized.match(/[A-Za-z][A-Za-z'-]*/g) ?? []
+  if (words.length < 4) return false
+  return true
+}
+
+function assertTranslatedBatch(targetLanguage: string, batch: string[], translated: string[]): void {
+  const candidates = batch
+    .map((source, index) => ({
+      source: normalizedTranslationValue(source),
+      translated: normalizedTranslationValue(translated[index] ?? ''),
+    }))
+    .filter(({ source }) => shouldCheckUnchangedTranslation(source))
+
+  if (candidates.length < 6) return
+
+  const unchanged = candidates.filter(({ source, translated: target }) => source === target).length
+  if (unchanged / candidates.length >= 0.6) {
+    throw new Error(`Translation model left ${unchanged}/${candidates.length} ${targetLanguage} strings unchanged`)
+  }
+}
+
 async function translateBatch(env: Env, targetLanguage: string, batch: string[]): Promise<string[]> {
   const model = env.TRANSLATION_MODEL || DEFAULT_MODEL
   const result = await env.AI.run(model, {
@@ -570,7 +660,7 @@ async function translateBatch(env: Env, targetLanguage: string, batch: string[])
       {
         role: 'system',
         content:
-          'You translate website copy. Return only a JSON array of strings with the same length and order as the input. Preserve brand names, product names, URLs, code identifiers, numbers, punctuation, and whitespace meaning. Do not add explanations.',
+          'You translate website copy. Translate every human-readable label, heading, sentence, and paragraph into the target language, including short navigation labels. Return only a JSON array of strings with the same length and order as the input. Preserve only brand names, product names, URLs, code identifiers, file paths, language codes, numbers, punctuation, and whitespace meaning. Do not leave English copy unchanged unless it is one of those preserved terms. Do not add explanations.',
       },
       {
         role: 'user',
@@ -580,7 +670,12 @@ async function translateBatch(env: Env, targetLanguage: string, batch: string[])
   })
 
   const translated = parseTranslationArray(extractAiText(result))
-  if (!translated || translated.length !== batch.length) return batch
+  if (!translated) throw new Error(`Translation model returned invalid JSON for ${targetLanguage}`)
+  if (translated.length !== batch.length) {
+    throw new Error(`Translation model returned ${translated.length} strings for ${batch.length} ${targetLanguage} strings`)
+  }
+
+  assertTranslatedBatch(targetLanguage, batch, translated)
   return translated
 }
 
@@ -599,7 +694,8 @@ function renderTranslatedHtml(parts: HtmlPart[], segments: Segment[], translatio
       if (typeof part === 'string') return part
 
       const segment = segments[part.segmentIndex]
-      const translated = translations[part.segmentIndex] || segment.text
+      const translated = translations[part.segmentIndex]
+      if (typeof translated !== 'string') throw new Error(`Missing translation for segment ${part.segmentIndex}`)
       if (segment.mode === 'attribute') {
         return `${segment.leading}${escapeHtmlAttribute(translated, segment.quote)}${segment.trailing}`
       }
@@ -613,6 +709,9 @@ async function translateHtml(env: Env, locale: Locale, html: string): Promise<st
   if (segments.length === 0) return html
 
   const translations = await translateSegments(env, locale, segments)
+  if (translations.length !== segments.length) {
+    throw new Error(`Translation produced ${translations.length} strings for ${segments.length} HTML segments`)
+  }
   return renderTranslatedHtml(parts, segments, translations)
 }
 
@@ -651,7 +750,7 @@ function alternateLinks(requestUrl: URL, basePath: string): string {
   return links.join('\n')
 }
 
-function localizeUrlAttributes(html: string, locale: Locale): string {
+function localizeUrlAttributes(html: string, locale: Locale, basePath: string, requestUrl: URL): string {
   let rewritten = ''
   let cursor = 0
 
@@ -660,7 +759,7 @@ function localizeUrlAttributes(html: string, locale: Locale): string {
     if (!nextTag) break
 
     rewritten += html.slice(cursor, nextTag.index)
-    rewritten += localizeTagUrlAttributes(nextTag.tag, locale)
+    rewritten += localizeTagUrlAttributes(nextTag.tag, locale, basePath, requestUrl)
     cursor = nextTag.end
   }
 
@@ -715,16 +814,17 @@ function replaceTagAttributeValue(tag: string, attrName: string, value: string):
   return `${tag.slice(0, attribute.valueStart)}${escapeHtmlAttribute(value, attribute.quote)}${tag.slice(attribute.valueEnd)}`
 }
 
-function localizeTagUrlAttributes(tag: string, locale: Locale): string {
+function localizeTagUrlAttributes(tag: string, locale: Locale, basePath: string, requestUrl: URL): string {
   let rewritten = ''
   let lastIndex = 0
   let changed = false
+  const targetLanguageLocale = languageSelectorTargetLocale(tag)
 
   for (const attribute of collectQuotedAttributes(tag)) {
     const name = attribute.name.toLowerCase()
     if (name !== 'href' && name !== 'action') continue
 
-    const localized = localizeHref(attribute.value, locale)
+    const localized = name === 'href' && targetLanguageLocale ? `${localizedPath(basePath, targetLanguageLocale)}${requestUrl.search}` : localizeHref(attribute.value, locale)
     if (localized === attribute.value) continue
 
     rewritten += tag.slice(lastIndex, attribute.valueStart)
@@ -803,45 +903,54 @@ function insertBeforeClosingTag(html: string, tagName: string, insertion: string
   return `${html.slice(0, index)}${insertion}\n${html.slice(index)}`
 }
 
-function languageSelectorScript(locale: Locale): string {
-  const locales = JSON.stringify(ALL_LOCALES)
-  const currentLocale = JSON.stringify(locale)
-  return `<script id="capgo-edge-language-selector">
+function replaceElementContentById(html: string, tagName: string, id: string, content: string): string {
+  let cursor = 0
+  const closingTag = `</${tagName.toLowerCase()}>`
+  const lowerHtml = html.toLowerCase()
+
+  while (cursor < html.length) {
+    const nextTag = findNextHtmlTag(html, cursor)
+    if (!nextTag) break
+
+    if (tagNameOf(nextTag.tag) === tagName && !isClosingTag(nextTag.tag) && readAttributeValue(nextTag.tag, 'id') === id) {
+      const closeIndex = lowerHtml.indexOf(closingTag, nextTag.end)
+      if (closeIndex === -1) return html
+      return `${html.slice(0, nextTag.end)}${content}${html.slice(closeIndex)}`
+    }
+
+    cursor = nextTag.end
+  }
+
+  return html
+}
+
+function updateFooterLanguageButton(html: string, locale: Locale): string {
+  const flag = LANGUAGE_FLAG_ENTITIES[locale] || LANGUAGE_FLAG_ENTITIES[DEFAULT_LOCALE]
+  return replaceElementContentById(
+    html,
+    'button',
+    'language-dropdown-button',
+    `
+            <span class="mr-2">${flag}</span>
+            ${locale.toUpperCase()}
+            <span class="ml-1">&#9662;</span>
+          `,
+  )
+}
+
+function languageSelectorHashScript(): string {
+  return `<script id="capgo-edge-language-selector-hash">
 (() => {
-  const locales = ${locales};
-  const currentLocale = ${currentLocale};
-  const stripLocale = (pathname) => {
-    const segments = pathname.split('/');
-    if (!locales.includes(segments[1])) return pathname || '/';
-    const stripped = '/' + segments.slice(2).join('/');
-    return stripped || '/';
-  };
-  const localizedPath = (targetLocale) => {
-    const basePath = stripLocale(window.location.pathname);
-    return targetLocale === '${DEFAULT_LOCALE}' ? basePath : '/' + targetLocale + (basePath === '/' ? '/' : basePath);
-  };
-  for (const targetLocale of locales) {
-    const target = localizedPath(targetLocale) + window.location.search + window.location.hash;
-    document.querySelectorAll('#language_' + targetLocale + ', a[data-language="' + targetLocale + '"]').forEach((item) => {
-      item.setAttribute('href', target);
-      item.addEventListener('click', (event) => {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        window.location.href = target;
-      }, true);
-      item.addEventListener('keydown', (event) => {
-        if (event.key !== 'Enter' && event.key !== ' ') return;
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        window.location.href = target;
-      }, true);
-    });
-  }
-  const footerButton = document.getElementById('language-dropdown-button');
-  if (footerButton) {
-    const textNodes = Array.from(footerButton.childNodes).filter((node) => node.nodeType === Node.TEXT_NODE);
-    if (textNodes.length > 0) textNodes[0].textContent = currentLocale.toUpperCase();
-  }
+  if (!window.location.hash) return;
+
+  document.querySelectorAll('a[id^="language_"][href], a[data-language][href]').forEach((item) => {
+    const href = item.getAttribute('href');
+    if (!href || href.startsWith('http:') || href.startsWith('https:') || href.startsWith('//')) return;
+
+    const url = new URL(href, window.location.origin);
+    url.hash = window.location.hash;
+    item.setAttribute('href', url.pathname + url.search + url.hash);
+  });
 })();
 </script>`
 }
@@ -857,10 +966,10 @@ function rewriteMetadataAndLinks(html: string, requestUrl: URL, locale: Locale):
   rewritten = setMetaContent(rewritten, 'property', 'og:url', localizedUrl)
   rewritten = setMetaContent(rewritten, 'property', 'twitter:url', localizedUrl)
   rewritten = setMetaContent(rewritten, 'name', 'twitter:url', localizedUrl)
-  rewritten = localizeUrlAttributes(rewritten, locale)
-
-  if (!rewritten.includes('capgo-edge-language-selector')) {
-    rewritten = insertBeforeClosingTag(rewritten, 'body', languageSelectorScript(locale))
+  rewritten = localizeUrlAttributes(rewritten, locale, basePath, requestUrl)
+  rewritten = updateFooterLanguageButton(rewritten, locale)
+  if (!rewritten.includes('capgo-edge-language-selector-hash')) {
+    rewritten = insertBeforeClosingTag(rewritten, 'body', languageSelectorHashScript())
   }
 
   return rewritten
@@ -873,12 +982,12 @@ async function buildTranslatedResponse(request: Request, env: Env, requestUrl: U
 
   const contentLength = Number.parseInt(originResponse.headers.get('Content-Length') || '0', 10)
   if (Number.isFinite(contentLength) && contentLength > MAX_HTML_BYTES) {
-    return withResponseHeaders(originResponse, 'BYPASS')
+    throw new Error(`Source HTML is too large to translate: ${contentLength} bytes`)
   }
 
   const sourceHtml = await originResponse.text()
   if (new TextEncoder().encode(sourceHtml).length > MAX_HTML_BYTES) {
-    return withResponseHeaders(new Response(sourceHtml, originResponse), 'BYPASS')
+    throw new Error(`Source HTML is too large to translate after download: ${sourceHtml.length} characters`)
   }
 
   const translatedHtml = await translateHtml(env, locale, sourceHtml)
@@ -944,12 +1053,7 @@ export default {
       return await serveTranslated(request, env, ctx, requestUrl, locale)
     } catch (error) {
       console.error('Translation worker failed', { pathname: requestUrl.pathname, locale, error })
-      const fallback = await fetchEnglishOrigin(request, env, requestUrl)
-      if (isHtmlResponse(fallback)) {
-        const localizedHtml = rewriteMetadataAndLinks(await fallback.text(), requestUrl, locale)
-        return withResponseHeaders(new Response(localizedHtml, fallback), 'BYPASS', request.method === 'HEAD')
-      }
-      return fallback
+      return translationUnavailableResponse(request.method === 'HEAD')
     }
   },
 }
