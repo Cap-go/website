@@ -363,6 +363,7 @@ const locale = Astro.locals.locale
             href="https://console.capgo.app/login/"
             aria-label={m.login({}, { locale: Astro.locals.locale })}
             target="_blank"
+            rel="noopener noreferrer"
             class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
           >
             {m.login({}, { locale: Astro.locals.locale })}
@@ -370,6 +371,7 @@ const locale = Astro.locals.locale
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
             target="_blank"
+            rel="noopener noreferrer"
             aria-label={m.register({}, { locale: Astro.locals.locale })}
             class="font-pj rounded-lg border border-white/30 bg-white/5 px-4 py-2 text-base font-semibold text-gray-100 transition-all duration-200 hover:border-white/50 hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none"
             role="button"
@@ -598,6 +600,7 @@ const locale = Astro.locals.locale
         <a
           href="https://console.capgo.app/login/"
           target="_blank"
+          rel="noopener noreferrer"
           aria-label={m.login({}, { locale: Astro.locals.locale })}
           class="block rounded-xl px-3 py-2.5 text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white"
         >
@@ -605,6 +608,7 @@ const locale = Astro.locals.locale
         </a>
         <a
           target="_blank"
+          rel="noopener noreferrer"
           aria-label={m.register({}, { locale: Astro.locals.locale })}
           href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
           class="font-pj mt-2 block rounded-xl border border-white/30 bg-white/10 px-5 py-2.5 text-center text-base font-medium text-gray-100 transition-all duration-200 hover:border-white/50 hover:bg-white/20 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none"
