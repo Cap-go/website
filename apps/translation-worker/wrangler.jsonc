@@ -5,6 +5,9 @@
   "compatibility_date": "2026-05-01",
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": false,
+  "limits": {
+    "cpu_ms": 300000,
+  },
   "ai": {
     "binding": "AI",
   },
@@ -63,6 +66,9 @@
   ],
   "env": {
     "development": {
+      "limits": {
+        "cpu_ms": 300000,
+      },
       "queues": {
         "producers": [
           {
