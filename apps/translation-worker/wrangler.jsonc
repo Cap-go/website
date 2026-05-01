@@ -5,9 +5,18 @@
   "compatibility_date": "2026-05-01",
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": false,
+  "limits": {
+    "cpu_ms": 300000,
+  },
   "ai": {
     "binding": "AI",
   },
+  "r2_buckets": [
+    {
+      "binding": "TRANSLATION_STORE",
+      "bucket_name": "capgo-translation-cache",
+    },
+  ],
   "vars": {
     "TRANSLATION_MODEL": "@cf/moonshotai/kimi-k2.6",
   },
@@ -63,6 +72,21 @@
   ],
   "env": {
     "development": {
+      "limits": {
+        "cpu_ms": 300000,
+      },
+      "ai": {
+        "binding": "AI",
+      },
+      "vars": {
+        "TRANSLATION_MODEL": "@cf/moonshotai/kimi-k2.6",
+      },
+      "r2_buckets": [
+        {
+          "binding": "TRANSLATION_STORE",
+          "bucket_name": "capgo-translation-cache-development",
+        },
+      ],
       "queues": {
         "producers": [
           {

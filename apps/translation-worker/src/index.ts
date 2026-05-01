@@ -15,13 +15,14 @@ type WorkerService = {
   fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>
 }
 
-type TranslationQueueReason = 'miss' | 'stale'
+type TranslationQueueReason = 'miss' | 'stale' | 'continue'
 
 type TranslationJob = {
   url: string
   locale: Locale
   cacheVersion: string
   reason: TranslationQueueReason
+  sourceHash?: string
 }
 
 type QueueBinding<T> = {
@@ -36,11 +37,24 @@ type MessageBatch<T> = {
   messages: QueueMessage<T>[]
 }
 
+type R2ObjectBody = {
+  text(): Promise<string>
+}
+
+type R2BucketBinding = {
+  get(key: string): Promise<R2ObjectBody | null>
+  put(key: string, value: string): Promise<unknown>
+  delete(key: string): Promise<void>
+}
+
+type SourceHtmlResult = { type: 'response'; response: Response } | { type: 'html'; originResponse: Response; sourceHtml: string }
+
 interface Env {
   AI: AiBinding
   WEB: WorkerService
   DOCS: WorkerService
   TRANSLATION_QUEUE: QueueBinding<TranslationJob>
+  TRANSLATION_STORE: R2BucketBinding
   TRANSLATION_MODEL?: string
 }
 
@@ -59,6 +73,24 @@ type Segment = {
 }
 
 type HtmlPart = string | { segmentIndex: number }
+type PartialTranslationState = {
+  cacheVersion: string
+  locale: Locale
+  sourceHash: string
+  batchCount: number
+  translatedBatches: string[][]
+  updatedAt: number
+}
+type StoredTranslatedResponse = {
+  cacheVersion: string
+  locale: Locale
+  translatedAt: number
+  status: number
+  statusText: string
+  headers: [string, string][]
+  bodyEncoding: 'text' | 'base64'
+  body: string
+}
 type AttributeMatch = {
   name: string
   quote: string
@@ -78,7 +110,9 @@ const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_CACHE_VERSION = '2026-05-01-kimi-k2.6-v1'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
 const MAX_HTML_BYTES = 1_500_000
-const MAX_BATCH_CHARS = 6_000
+const MAX_BATCH_CHARS = 1_500
+const MAX_BATCH_ITEMS = 32
+const TRANSLATION_BATCHES_PER_QUEUE_JOB = 1
 
 const LANGUAGE_NAMES: Record<Locale, string> = {
   de: 'German',
@@ -126,6 +160,29 @@ const STATIC_PREFIXES = [
   '/status.json',
   '/sponsors.json',
 ]
+const IGNORED_TRANSLATION_QUERY_KEYS = new Set([
+  '_branch_match_id',
+  '_branch_referrer',
+  '_gl',
+  '_hsenc',
+  '_hsmi',
+  'fbclid',
+  'gad_source',
+  'gbraid',
+  'gclid',
+  'igshid',
+  'mc_cid',
+  'mc_eid',
+  'msclkid',
+  'ref',
+  'ref_src',
+  'session',
+  'session_id',
+  'sessionid',
+  'twclid',
+  'wbraid',
+  'yclid',
+])
 
 function escapeHtmlText(value: string): string {
   return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -253,6 +310,10 @@ function isRedirect(response: Response): boolean {
   return response.status >= 300 && response.status < 400 && response.headers.has('Location')
 }
 
+function isStableTerminalResponse(response: Response): boolean {
+  return isRedirect(response) || response.ok || response.status === 404 || response.status === 410
+}
+
 function localizeRedirect(response: Response, requestUrl: URL, locale: Locale): Response {
   const headers = new Headers(response.headers)
   const location = headers.get('Location')
@@ -274,10 +335,38 @@ function readTranslatedAt(response: Response): number {
   return Number.isFinite(timestamp) ? timestamp : 0
 }
 
+function shouldIgnoreTranslationQueryParam(name: string): boolean {
+  const normalizedName = name.toLowerCase()
+  return normalizedName.startsWith('utm_') || IGNORED_TRANSLATION_QUERY_KEYS.has(normalizedName)
+}
+
+function normalizedTranslationSearchParams(requestUrl: URL): URLSearchParams {
+  const entries: [string, string][] = []
+  requestUrl.searchParams.forEach((value, name) => {
+    if (!shouldIgnoreTranslationQueryParam(name)) entries.push([name, value])
+  })
+
+  entries.sort(([leftName, leftValue], [rightName, rightValue]) => leftName.localeCompare(rightName) || leftValue.localeCompare(rightValue))
+
+  const params = new URLSearchParams()
+  for (const [name, value] of entries) {
+    params.append(name, value)
+  }
+  return params
+}
+
+function applyNormalizedTranslationSearch(targetUrl: URL, requestUrl: URL): void {
+  targetUrl.search = ''
+  const params = normalizedTranslationSearchParams(requestUrl)
+  params.forEach((value, name) => {
+    targetUrl.searchParams.append(name, value)
+  })
+}
+
 function cacheKeyFor(requestUrl: URL, locale: Locale): Request {
   const cacheUrl = new URL(requestUrl)
   cacheUrl.pathname = localizedPath(cacheUrl.pathname, locale)
-  cacheUrl.search = ''
+  applyNormalizedTranslationSearch(cacheUrl, requestUrl)
   cacheUrl.searchParams.set('__capgo_translation_cache', TRANSLATION_CACHE_VERSION)
   return new Request(cacheUrl.toString(), { method: 'GET' })
 }
@@ -285,9 +374,42 @@ function cacheKeyFor(requestUrl: URL, locale: Locale): Request {
 function pendingKeyFor(requestUrl: URL, locale: Locale): Request {
   const pendingUrl = new URL(requestUrl)
   pendingUrl.pathname = localizedPath(pendingUrl.pathname, locale)
-  pendingUrl.search = ''
+  applyNormalizedTranslationSearch(pendingUrl, requestUrl)
   pendingUrl.searchParams.set('__capgo_translation_pending', TRANSLATION_CACHE_VERSION)
   return new Request(pendingUrl.toString(), { method: 'GET' })
+}
+
+async function putTranslationPendingMarker(requestUrl: URL, locale: Locale, reason: TranslationQueueReason): Promise<void> {
+  await caches.default.put(
+    pendingKeyFor(requestUrl, locale),
+    new Response(reason, {
+      headers: {
+        'Cache-Control': `public, max-age=${TRANSLATION_PENDING_SECONDS}`,
+        'X-Capgo-Translation-Pending': reason,
+      },
+    }),
+  )
+}
+
+async function putTranslationPendingMarkerSafely(requestUrl: URL, locale: Locale, reason: TranslationQueueReason): Promise<void> {
+  try {
+    await putTranslationPendingMarker(requestUrl, locale, reason)
+  } catch (error) {
+    console.error('Failed to refresh translated page pending marker', { pathname: requestUrl.pathname, locale, reason, error: errorMessage(error) })
+  }
+}
+
+function canonicalTranslationStoreUrl(requestUrl: URL, locale: Locale): string {
+  const storeUrl = new URL(requestUrl)
+  storeUrl.pathname = localizedPath(storeUrl.pathname, locale)
+  applyNormalizedTranslationSearch(storeUrl, requestUrl)
+  storeUrl.hash = ''
+  return storeUrl.toString()
+}
+
+async function translationStoreKey(kind: 'pages' | 'state', requestUrl: URL, locale: Locale): Promise<string> {
+  const urlHash = await sha256Hex(canonicalTranslationStoreUrl(requestUrl, locale))
+  return `${kind}/${TRANSLATION_CACHE_VERSION}/${locale}/${urlHash}.json`
 }
 
 function withResponseHeaders(response: Response, cacheState: 'MISS' | 'HIT' | 'STALE' | 'BYPASS', isHead = false): Response {
@@ -328,6 +450,26 @@ function toCachedResponse(response: Response): Response {
   })
 }
 
+function splitLongCoreText(value: string): string[] {
+  const chunks: string[] = []
+  let cursor = 0
+
+  while (cursor < value.length) {
+    let end = Math.min(cursor + MAX_BATCH_CHARS, value.length)
+    if (end < value.length) {
+      let splitIndex = end - 1
+      const minimumSplitIndex = cursor + Math.floor(MAX_BATCH_CHARS * 0.6)
+      while (splitIndex > minimumSplitIndex && !isWhitespace(value[splitIndex])) splitIndex -= 1
+      if (splitIndex > cursor) end = splitIndex + 1
+    }
+
+    chunks.push(value.slice(cursor, end))
+    cursor = end
+  }
+
+  return chunks
+}
+
 function addSegment(parts: HtmlPart[], segments: Segment[], text: string, mode: Segment['mode'], quote?: string): void {
   if (!hasAsciiLetter(text)) {
     parts.push(text)
@@ -343,8 +485,18 @@ function addSegment(parts: HtmlPart[], segments: Segment[], text: string, mode: 
     return
   }
 
-  const segmentIndex = segments.push({ text: core, leading, trailing, mode, quote }) - 1
-  parts.push({ segmentIndex })
+  const chunks = splitLongCoreText(core)
+  for (let index = 0; index < chunks.length; index += 1) {
+    const segmentIndex =
+      segments.push({
+        text: chunks[index],
+        leading: index === 0 ? leading : '',
+        trailing: index === chunks.length - 1 ? trailing : '',
+        mode,
+        quote,
+      }) - 1
+    parts.push({ segmentIndex })
+  }
 }
 
 function tagNameOf(tag: string): string | null {
@@ -582,7 +734,7 @@ function buildBatches(segments: Segment[]): string[][] {
 
   for (const segment of segments) {
     const nextLength = currentLength + segment.text.length
-    if (currentBatch.length > 0 && nextLength > MAX_BATCH_CHARS) {
+    if (currentBatch.length > 0 && (nextLength > MAX_BATCH_CHARS || currentBatch.length >= MAX_BATCH_ITEMS)) {
       batches.push(currentBatch)
       currentBatch = []
       currentLength = 0
@@ -642,6 +794,19 @@ function extractAiText(result: unknown): string {
   }
 
   return extractChoicesText(record.choices)
+}
+
+function errorMessage(error: unknown): string {
+  if (error instanceof Error) {
+    const base = `${error.name}: ${error.message}`
+    return error.stack ? `${base}\n${error.stack}` : base
+  }
+  if (typeof error === 'string') return error
+  try {
+    return JSON.stringify(error)
+  } catch {
+    return String(error)
+  }
 }
 
 function stripJsonFence(value: string): string {
@@ -745,15 +910,6 @@ async function translateBatch(env: Env, targetLanguage: string, batch: string[])
   return translated
 }
 
-async function translateSegments(env: Env, locale: Locale, segments: Segment[]): Promise<string[]> {
-  const translations: string[] = []
-  for (const batch of buildBatches(segments)) {
-    const translatedBatch = await translateBatch(env, LANGUAGE_NAMES[locale], batch)
-    translations.push(...translatedBatch)
-  }
-  return translations
-}
-
 function renderTranslatedHtml(parts: HtmlPart[], segments: Segment[], translations: string[]): string {
   return parts
     .map((part) => {
@@ -770,15 +926,188 @@ function renderTranslatedHtml(parts: HtmlPart[], segments: Segment[], translatio
     .join('')
 }
 
-async function translateHtml(env: Env, locale: Locale, html: string): Promise<string> {
-  const { parts, segments } = collectSegments(html)
-  if (segments.length === 0) return html
+function isStringArrayArray(value: unknown): value is string[][] {
+  return Array.isArray(value) && value.every((item) => Array.isArray(item) && item.every((nestedItem) => typeof nestedItem === 'string'))
+}
 
-  const translations = await translateSegments(env, locale, segments)
-  if (translations.length !== segments.length) {
-    throw new Error(`Translation produced ${translations.length} strings for ${segments.length} HTML segments`)
+function isStringPairArray(value: unknown): value is [string, string][] {
+  return Array.isArray(value) && value.every((item) => Array.isArray(item) && item.length === 2 && typeof item[0] === 'string' && typeof item[1] === 'string')
+}
+
+function parseStoredJson(value: string): Record<string, unknown> | null {
+  try {
+    return recordOf(JSON.parse(value))
+  } catch {
+    return null
   }
-  return renderTranslatedHtml(parts, segments, translations)
+}
+
+function partialTranslationStateFrom(value: unknown, locale: Locale, sourceHash: string, batchCount: number): PartialTranslationState | null {
+  const record = recordOf(value)
+  if (!record) return null
+  if (record.cacheVersion !== TRANSLATION_CACHE_VERSION || record.locale !== locale || record.sourceHash !== sourceHash) return null
+  if (record.batchCount !== batchCount || !isStringArrayArray(record.translatedBatches)) return null
+  if (record.translatedBatches.length > batchCount) return null
+  if (typeof record.updatedAt !== 'number' || Date.now() - record.updatedAt > CACHE_KEEP_SECONDS * 1000) return null
+  return {
+    cacheVersion: TRANSLATION_CACHE_VERSION,
+    locale,
+    sourceHash,
+    batchCount,
+    translatedBatches: record.translatedBatches,
+    updatedAt: record.updatedAt,
+  }
+}
+
+function storedTranslatedResponseFrom(value: unknown, locale: Locale): StoredTranslatedResponse | null {
+  const record = recordOf(value)
+  if (!record) return null
+  if (record.cacheVersion !== TRANSLATION_CACHE_VERSION || record.locale !== locale) return null
+  if (typeof record.translatedAt !== 'number' || typeof record.status !== 'number' || typeof record.statusText !== 'string') return null
+  if (!isStringPairArray(record.headers) || typeof record.body !== 'string') return null
+  const bodyEncoding = record.bodyEncoding === 'base64' ? 'base64' : 'text'
+  return {
+    cacheVersion: TRANSLATION_CACHE_VERSION,
+    locale,
+    translatedAt: record.translatedAt,
+    status: record.status,
+    statusText: record.statusText,
+    headers: record.headers,
+    bodyEncoding,
+    body: record.body,
+  }
+}
+
+function bytesToBase64(buffer: ArrayBuffer): string {
+  const bytes = new Uint8Array(buffer)
+  let binary = ''
+  for (let index = 0; index < bytes.length; index += 0x8000) {
+    binary += String.fromCharCode(...bytes.subarray(index, index + 0x8000))
+  }
+  return btoa(binary)
+}
+
+function base64ToBytes(value: string): ArrayBuffer {
+  const binary = atob(value)
+  const bytes = new Uint8Array(binary.length)
+  for (let index = 0; index < binary.length; index += 1) {
+    bytes[index] = binary.charCodeAt(index)
+  }
+  return bytes.buffer
+}
+
+function isTextLikeContentType(value: string | null): boolean {
+  const contentType = value?.toLowerCase() ?? ''
+  if (contentType.startsWith('text/')) return true
+  if (contentType.includes('charset=')) return true
+  if (contentType.includes('+json') || contentType.includes('+xml')) return true
+  return (
+    contentType.includes('application/json') ||
+    contentType.includes('application/javascript') ||
+    contentType.includes('application/ld+json') ||
+    contentType.includes('application/xml') ||
+    contentType.includes('application/xhtml+xml') ||
+    contentType.includes('image/svg+xml')
+  )
+}
+
+async function readPartialTranslationState(env: Env, requestUrl: URL, locale: Locale, sourceHash: string, batchCount: number): Promise<PartialTranslationState | null> {
+  const key = await translationStoreKey('state', requestUrl, locale)
+  const object = await env.TRANSLATION_STORE.get(key)
+  if (!object) return null
+  return partialTranslationStateFrom(parseStoredJson(await object.text()), locale, sourceHash, batchCount)
+}
+
+async function writePartialTranslationState(env: Env, requestUrl: URL, locale: Locale, state: PartialTranslationState): Promise<void> {
+  const key = await translationStoreKey('state', requestUrl, locale)
+  await env.TRANSLATION_STORE.put(key, JSON.stringify(state))
+}
+
+async function deletePartialTranslationState(env: Env, requestUrl: URL, locale: Locale): Promise<void> {
+  const key = await translationStoreKey('state', requestUrl, locale)
+  await env.TRANSLATION_STORE.delete(key)
+}
+
+async function deletePartialTranslationStateSafely(env: Env, requestUrl: URL, locale: Locale): Promise<void> {
+  try {
+    await deletePartialTranslationState(env, requestUrl, locale)
+  } catch (error) {
+    console.error('Failed to delete partial translation state', { pathname: requestUrl.pathname, locale, error: errorMessage(error) })
+  }
+}
+
+async function readStoredTranslatedResponse(env: Env, requestUrl: URL, locale: Locale): Promise<Response | null> {
+  const key = await translationStoreKey('pages', requestUrl, locale)
+  const object = await env.TRANSLATION_STORE.get(key)
+  if (!object) return null
+
+  const stored = storedTranslatedResponseFrom(parseStoredJson(await object.text()), locale)
+  if (!stored) return null
+
+  const headers = new Headers(stored.headers)
+  headers.set('X-Capgo-Translated-At', stored.translatedAt.toString())
+  headers.delete('Content-Length')
+  const body = stored.bodyEncoding === 'base64' ? base64ToBytes(stored.body) : stored.body
+  return new Response(body, {
+    status: stored.status,
+    statusText: stored.statusText,
+    headers,
+  })
+}
+
+async function writeStoredTranslatedResponse(env: Env, requestUrl: URL, locale: Locale, response: Response): Promise<void> {
+  const key = await translationStoreKey('pages', requestUrl, locale)
+  const headers: [string, string][] = []
+  response.headers.forEach((value, name) => {
+    if (name.toLowerCase() !== 'content-length') headers.push([name, value])
+  })
+  const stored: StoredTranslatedResponse = {
+    cacheVersion: TRANSLATION_CACHE_VERSION,
+    locale,
+    translatedAt: readTranslatedAt(response) || Date.now(),
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+    bodyEncoding: isTextLikeContentType(response.headers.get('Content-Type')) ? 'text' : 'base64',
+    body: '',
+  }
+  stored.body = stored.bodyEncoding === 'text' ? await response.text() : bytesToBase64(await response.arrayBuffer())
+  await env.TRANSLATION_STORE.put(key, JSON.stringify(stored))
+}
+
+async function cacheTranslatedResponse(env: Env, requestUrl: URL, locale: Locale, cacheKey: Request, response: Response): Promise<void> {
+  await writeStoredTranslatedResponse(env, requestUrl, locale, response.clone())
+  await caches.default.put(cacheKey, response)
+}
+
+async function repopulateTranslatedPageCacheSafely(cacheKey: Request, response: Response, requestUrl: URL, locale: Locale): Promise<void> {
+  try {
+    await caches.default.put(cacheKey, response)
+  } catch (error) {
+    console.error('Failed to repopulate translated page cache from R2', { pathname: requestUrl.pathname, locale, error: errorMessage(error) })
+  }
+}
+
+function nextMissingBatchIndex(translatedBatches: string[][], batchCount: number): number {
+  for (let index = 0; index < batchCount; index += 1) {
+    if (!Array.isArray(translatedBatches[index])) return index
+  }
+  return batchCount
+}
+
+function flattenTranslatedBatches(translatedBatches: string[][], batchCount: number): string[] {
+  const translations: string[] = []
+  for (let index = 0; index < batchCount; index += 1) {
+    const batch = translatedBatches[index]
+    if (!Array.isArray(batch)) throw new Error(`Missing translated batch ${index}`)
+    translations.push(...batch)
+  }
+  return translations
+}
+
+async function sha256Hex(value: string): Promise<string> {
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value))
+  return [...new Uint8Array(digest)].map((item) => item.toString(16).padStart(2, '0')).join('')
 }
 
 function setLinkRel(html: string, rel: string, tag: string): string {
@@ -1041,10 +1370,10 @@ function rewriteMetadataAndLinks(html: string, requestUrl: URL, locale: Locale):
   return rewritten
 }
 
-async function buildTranslatedResponse(request: Request, env: Env, requestUrl: URL, locale: Locale): Promise<Response> {
+async function loadSourceHtml(request: Request, env: Env, requestUrl: URL, locale: Locale): Promise<SourceHtmlResult> {
   const originResponse = await fetchEnglishOrigin(request, env, requestUrl)
-  if (isRedirect(originResponse)) return localizeRedirect(originResponse, requestUrl, locale)
-  if (!isHtmlResponse(originResponse) || !originResponse.ok) return originResponse
+  if (isRedirect(originResponse)) return { type: 'response', response: localizeRedirect(originResponse, requestUrl, locale) }
+  if (!isHtmlResponse(originResponse) || !originResponse.ok) return { type: 'response', response: originResponse }
 
   const contentLength = Number.parseInt(originResponse.headers.get('Content-Length') || '0', 10)
   if (Number.isFinite(contentLength) && contentLength > MAX_HTML_BYTES) {
@@ -1056,7 +1385,10 @@ async function buildTranslatedResponse(request: Request, env: Env, requestUrl: U
     throw new Error(`Source HTML is too large to translate after download: ${sourceHtml.length} characters`)
   }
 
-  const translatedHtml = await translateHtml(env, locale, sourceHtml)
+  return { type: 'html', originResponse, sourceHtml }
+}
+
+function createTranslatedHtmlResponse(originResponse: Response, translatedHtml: string, requestUrl: URL, locale: Locale): Response {
   const localizedHtml = rewriteMetadataAndLinks(translatedHtml, requestUrl, locale)
   const headers = new Headers(originResponse.headers)
   headers.set('Content-Type', 'text/html; charset=utf-8')
@@ -1068,14 +1400,81 @@ async function buildTranslatedResponse(request: Request, env: Env, requestUrl: U
   })
 }
 
-async function refreshCache(request: Request, env: Env, requestUrl: URL, locale: Locale, cacheKey: Request): Promise<Response> {
+async function refreshCacheIncrementally(request: Request, env: Env, requestUrl: URL, locale: Locale, cacheKey: Request, expectedSourceHash?: string): Promise<boolean> {
   const renderRequest = request.method === 'GET' ? request : new Request(request, { method: 'GET' })
-  const response = await buildTranslatedResponse(renderRequest, env, requestUrl, locale)
+  const source = await loadSourceHtml(renderRequest, env, requestUrl, locale)
+  if (source.type === 'response') {
+    if (isStableTerminalResponse(source.response)) {
+      const cachedResponse = toCachedResponse(source.response.clone())
+      await cacheTranslatedResponse(env, requestUrl, locale, cacheKey, cachedResponse)
+      await deletePartialTranslationStateSafely(env, requestUrl, locale)
+      return true
+    }
+
+    throw new Error(`Translation source returned transient response: ${source.response.status} ${source.response.statusText}`)
+  }
+
+  const { parts, segments } = collectSegments(source.sourceHtml)
+  if (segments.length === 0) {
+    const response = createTranslatedHtmlResponse(source.originResponse, source.sourceHtml, requestUrl, locale)
+    const cachedResponse = toCachedResponse(response.clone())
+    await cacheTranslatedResponse(env, requestUrl, locale, cacheKey, cachedResponse)
+    await deletePartialTranslationStateSafely(env, requestUrl, locale)
+    return true
+  }
+
+  const batches = buildBatches(segments)
+  const sourceHash = await sha256Hex(`${TRANSLATION_CACHE_VERSION}:${locale}:${source.sourceHtml}`)
+  const state = await readPartialTranslationState(env, requestUrl, locale, sourceHash, batches.length)
+  if (expectedSourceHash && expectedSourceHash !== sourceHash) {
+    console.log('Translation source changed during continuation', { pathname: requestUrl.pathname, locale })
+  }
+  const translatedBatches = state?.translatedBatches ?? []
+
+  let translatedInThisJob = 0
+  let batchIndex = nextMissingBatchIndex(translatedBatches, batches.length)
+
+  while (batchIndex < batches.length && translatedInThisJob < TRANSLATION_BATCHES_PER_QUEUE_JOB) {
+    const translatedBatch = await translateBatch(env, LANGUAGE_NAMES[locale], batches[batchIndex])
+    translatedBatches[batchIndex] = translatedBatch
+    translatedInThisJob += 1
+    batchIndex = nextMissingBatchIndex(translatedBatches, batches.length)
+  }
+
+  if (batchIndex < batches.length) {
+    await writePartialTranslationState(env, requestUrl, locale, {
+      cacheVersion: TRANSLATION_CACHE_VERSION,
+      locale,
+      sourceHash,
+      batchCount: batches.length,
+      translatedBatches,
+      updatedAt: Date.now(),
+    })
+    await putTranslationPendingMarkerSafely(requestUrl, locale, 'continue')
+    await env.TRANSLATION_QUEUE.send({
+      url: requestUrl.toString(),
+      locale,
+      cacheVersion: TRANSLATION_CACHE_VERSION,
+      reason: 'continue',
+      sourceHash,
+    })
+    console.log('Translation queue job continued', { pathname: requestUrl.pathname, locale, batchIndex, batchCount: batches.length })
+    return false
+  }
+
+  const translations = flattenTranslatedBatches(translatedBatches, batches.length)
+  if (translations.length !== segments.length) {
+    throw new Error(`Partial translation produced ${translations.length} strings for ${segments.length} HTML segments`)
+  }
+
+  const translatedHtml = renderTranslatedHtml(parts, segments, translations)
+  const response = createTranslatedHtmlResponse(source.originResponse, translatedHtml, requestUrl, locale)
   if (response.ok && isHtmlResponse(response)) {
     const cachedResponse = toCachedResponse(response.clone())
-    await caches.default.put(cacheKey, cachedResponse)
+    await cacheTranslatedResponse(env, requestUrl, locale, cacheKey, cachedResponse)
   }
-  return response
+  await deletePartialTranslationStateSafely(env, requestUrl, locale)
+  return true
 }
 
 async function enqueueTranslation(env: Env, requestUrl: URL, locale: Locale, reason: TranslationQueueReason): Promise<void> {
@@ -1085,18 +1484,10 @@ async function enqueueTranslation(env: Env, requestUrl: URL, locale: Locale, rea
   try {
     if (await caches.default.match(pendingKey)) return
 
-    await caches.default.put(
-      pendingKey,
-      new Response(reason, {
-        headers: {
-          'Cache-Control': `public, max-age=${TRANSLATION_PENDING_SECONDS}`,
-          'X-Capgo-Translation-Pending': reason,
-        },
-      }),
-    )
+    await putTranslationPendingMarker(requestUrl, locale, reason)
     markedPending = true
   } catch (error) {
-    console.error('Failed to mark translated page as pending', { pathname: requestUrl.pathname, locale, reason, error })
+    console.error('Failed to mark translated page as pending', { pathname: requestUrl.pathname, locale, reason, error: errorMessage(error) })
   }
 
   try {
@@ -1111,7 +1502,7 @@ async function enqueueTranslation(env: Env, requestUrl: URL, locale: Locale, rea
       try {
         await caches.default.delete(pendingKey)
       } catch (deleteError) {
-        console.error('Failed to clear translated page pending marker after enqueue failure', { pathname: requestUrl.pathname, locale, reason, error: deleteError })
+        console.error('Failed to clear translated page pending marker after enqueue failure', { pathname: requestUrl.pathname, locale, reason, error: errorMessage(deleteError) })
       }
     }
     throw error
@@ -1122,7 +1513,7 @@ async function enqueueTranslationSafely(env: Env, requestUrl: URL, locale: Local
   try {
     await enqueueTranslation(env, requestUrl, locale, reason)
   } catch (error) {
-    console.error('Failed to enqueue translated page', { pathname: requestUrl.pathname, locale, reason, error })
+    console.error('Failed to enqueue translated page', { pathname: requestUrl.pathname, locale, reason, error: errorMessage(error) })
   }
 }
 
@@ -1140,6 +1531,18 @@ async function processTranslationJob(job: TranslationJob, env: Env): Promise<voi
     if (cachedResponse) {
       const translatedAt = readTranslatedAt(cachedResponse)
       if (Date.now() - translatedAt <= FRESH_MS) {
+        await deletePartialTranslationStateSafely(env, requestUrl, job.locale)
+        completed = true
+        return
+      }
+    }
+
+    const storedResponse = await readStoredTranslatedResponse(env, requestUrl, job.locale)
+    if (storedResponse) {
+      const translatedAt = readTranslatedAt(storedResponse)
+      if (Date.now() - translatedAt <= FRESH_MS) {
+        await repopulateTranslatedPageCacheSafely(cacheKey, storedResponse.clone(), requestUrl, job.locale)
+        await deletePartialTranslationStateSafely(env, requestUrl, job.locale)
         completed = true
         return
       }
@@ -1152,14 +1555,13 @@ async function processTranslationJob(job: TranslationJob, env: Env): Promise<voi
         'Accept-Language': job.locale,
       },
     })
-    await refreshCache(renderRequest, env, requestUrl, job.locale, cacheKey)
-    completed = true
+    completed = await refreshCacheIncrementally(renderRequest, env, requestUrl, job.locale, cacheKey, job.sourceHash)
   } finally {
     if (completed) {
       try {
         await caches.default.delete(pendingKey)
       } catch (error) {
-        console.error('Failed to clear translated page pending marker', { pathname: requestUrl.pathname, locale: job.locale, error })
+        console.error('Failed to clear translated page pending marker', { pathname: requestUrl.pathname, locale: job.locale, error: errorMessage(error) })
       }
     }
   }
@@ -1177,6 +1579,17 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
       await enqueueTranslationSafely(env, requestUrl, locale, 'stale')
     }
     return withResponseHeaders(cachedResponse, isStale ? 'STALE' : 'HIT', isHead)
+  }
+
+  const storedResponse = await readStoredTranslatedResponse(env, requestUrl, locale)
+  if (storedResponse) {
+    const translatedAt = readTranslatedAt(storedResponse)
+    const isStale = Date.now() - translatedAt > FRESH_MS
+    await repopulateTranslatedPageCacheSafely(cacheKey, storedResponse.clone(), requestUrl, locale)
+    if (isStale) {
+      await enqueueTranslationSafely(env, requestUrl, locale, 'stale')
+    }
+    return withResponseHeaders(storedResponse, isStale ? 'STALE' : 'HIT', isHead)
   }
 
   await enqueueTranslationSafely(env, requestUrl, locale, 'miss')
@@ -1201,7 +1614,7 @@ export default {
     try {
       return await serveTranslated(request, env, requestUrl, locale)
     } catch (error) {
-      console.error('Translation worker failed', { pathname: requestUrl.pathname, locale, error })
+      console.error('Translation worker failed', { pathname: requestUrl.pathname, locale, error: errorMessage(error) })
       return temporaryEnglishRedirectResponse(requestUrl, request.method === 'HEAD')
     }
   },
@@ -1210,7 +1623,7 @@ export default {
       try {
         await processTranslationJob(message.body, env)
       } catch (error) {
-        console.error('Failed to process translated page queue job', { job: message.body, error })
+        console.error('Failed to process translated page queue job', { job: message.body, error: errorMessage(error) })
         throw error
       }
     }
