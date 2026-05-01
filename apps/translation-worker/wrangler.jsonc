@@ -1,6 +1,7 @@
 {
   "$schema": "../../node_modules/wrangler/config-schema.json",
   "name": "capgo-translation",
+  "account_id": "9ee3d7479a3c359681e3fab2c8cb22c0",
   "main": "./src/index.ts",
   "compatibility_date": "2026-05-01",
   "compatibility_flags": ["nodejs_compat"],
@@ -18,7 +19,7 @@
     },
   ],
   "vars": {
-    "TRANSLATION_MODEL": "@cf/moonshotai/kimi-k2.6",
+    "TRANSLATION_MODEL": "@cf/meta/llama-3.1-8b-instruct-fast",
   },
   "queues": {
     "producers": [
@@ -79,7 +80,7 @@
         "binding": "AI",
       },
       "vars": {
-        "TRANSLATION_MODEL": "@cf/moonshotai/kimi-k2.6",
+        "TRANSLATION_MODEL": "@cf/meta/llama-3.1-8b-instruct-fast",
       },
       "r2_buckets": [
         {

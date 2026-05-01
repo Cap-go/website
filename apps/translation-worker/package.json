@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "check": "tsc --noEmit",
-    "test": "bun test test",
+    "test": "bun run test:real",
+    "test:real": "bun run scripts/verify-real-ai.ts",
     "dev": "wrangler dev -c wrangler.jsonc -c ../web/wrangler.jsonc -c ../docs/wrangler.jsonc",
     "deploy": "wrangler deploy"
   }
