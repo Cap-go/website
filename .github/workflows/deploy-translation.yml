@@ -1,5 +1,8 @@
 name: Deploy Translation Worker
 
+permissions:
+  contents: read
+
 concurrency:
   group: deploy-translation
   cancel-in-progress: false

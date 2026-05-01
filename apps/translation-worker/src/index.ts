@@ -51,7 +51,8 @@ type AttributeMatch = {
   end: number
 }
 
-const ALL_LOCALES = ['en', ...SUPPORTED_LOCALES] as const
+const DEFAULT_LOCALE = 'en'
+const ALL_LOCALES = [DEFAULT_LOCALE, ...SUPPORTED_LOCALES] as const
 const DEFAULT_MODEL = '@cf/meta/llama-3.1-8b-instruct'
 const FRESH_MS = 24 * 60 * 60 * 1000
 const CACHE_KEEP_SECONDS = 7 * 24 * 60 * 60
@@ -153,7 +154,7 @@ function extractLocale(pathname: string): Locale | null {
 
 function localizedPath(basePath: string, locale: string): string {
   const normalizedBasePath = normalizePathname(stripLocalePrefix(basePath))
-  if (locale === 'en') return normalizedBasePath
+  if (locale === DEFAULT_LOCALE) return normalizedBasePath
   return normalizedBasePath === '/' ? `/${locale}/` : `/${locale}${normalizedBasePath}`
 }
 
@@ -186,15 +187,16 @@ function localizeHref(value: string, locale: Locale): string {
 
 function createOriginRequest(request: Request, originUrl: URL): Request {
   const headers = new Headers(request.headers)
-  headers.set('Accept-Language', 'en')
+  headers.set('Accept-Language', DEFAULT_LOCALE)
   headers.set('X-Capgo-Translation-Origin', 'english')
   headers.delete('If-None-Match')
   headers.delete('If-Modified-Since')
 
   return new Request(originUrl.toString(), {
-    method: 'GET',
+    method: request.method,
     headers,
     redirect: 'manual',
+    body: request.method === 'GET' || request.method === 'HEAD' ? undefined : request.body,
   })
 }
 
@@ -622,7 +624,7 @@ function alternateLinks(requestUrl: URL, basePath: string): string {
     const href = localizedAbsoluteUrl(requestUrl, locale, basePath)
     return `<link rel="alternate" hreflang="${locale}" href="${escapeHtmlAttribute(href)}" />`
   })
-  const xDefault = localizedAbsoluteUrl(requestUrl, 'en', basePath)
+  const xDefault = localizedAbsoluteUrl(requestUrl, DEFAULT_LOCALE, basePath)
   links.push(`<link rel="alternate" hreflang="x-default" href="${escapeHtmlAttribute(xDefault)}" />`)
   return links.join('\n')
 }
@@ -794,13 +796,19 @@ function languageSelectorScript(locale: Locale): string {
   };
   const localizedPath = (targetLocale) => {
     const basePath = stripLocale(window.location.pathname);
-    return targetLocale === 'en' ? basePath : '/' + targetLocale + (basePath === '/' ? '/' : basePath);
+    return targetLocale === '${DEFAULT_LOCALE}' ? basePath : '/' + targetLocale + (basePath === '/' ? '/' : basePath);
   };
   for (const targetLocale of locales) {
     const target = localizedPath(targetLocale) + window.location.search + window.location.hash;
     document.querySelectorAll('#language_' + targetLocale + ', a[data-language="' + targetLocale + '"]').forEach((item) => {
       item.setAttribute('href', target);
       item.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        window.location.href = target;
+      }, true);
+      item.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
         event.preventDefault();
         event.stopImmediatePropagation();
         window.location.href = target;

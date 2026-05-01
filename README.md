@@ -130,7 +130,7 @@ All commands are run from the repo root:
 | `bun run deploy:web` | Deploy the website worker |
 | `bun run deploy:docs` | Deploy the docs worker |
 | `bun run deploy:translation` | Deploy the localized edge translation worker |
-| `bun run deploy` | Fails intentionally to prevent deploying both workers together |
+| `bun run deploy` | Fails intentionally; use `deploy:web`, `deploy:docs`, or `deploy:translation` for one worker at a time |
 | `bun run astro -- --help` | Get help using the Astro CLI |
 
 ## Localized Pages

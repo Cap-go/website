@@ -22,7 +22,7 @@ const getLocalizedPath = (locale) => {
   <button
     id="language-menu-button"
     type="button"
-    class="inline-flex w-full flex-row items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-1 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+    class="inline-flex w-full flex-row items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-1 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 dark:focus-visible:outline-blue-400"
   >
     {m.language_label({}, { locale: currentLocale })}
     <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -31,6 +31,7 @@ const getLocalizedPath = (locale) => {
   </button>
   <div
     id="language-menu"
+    role="menu"
     class="absolute z-50 hidden w-56 origin-top-right rounded-md border border-gray-400 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-800"
     style="top: 100%; right: 0;"
   >
@@ -40,9 +41,9 @@ const getLocalizedPath = (locale) => {
           id={`language_${j}`}
           href={getLocalizedPath(j)}
           data-language={j}
-          class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-100"
+          class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus-visible:bg-gray-100 focus-visible:text-gray-900 focus-visible:outline-none dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-100 dark:focus-visible:bg-gray-700 dark:focus-visible:text-gray-100"
           role="menuitem"
-          tabindex="-1"
+          tabindex="0"
         >
           {j.toUpperCase()}
         </a>
@@ -51,7 +52,7 @@ const getLocalizedPath = (locale) => {
   </div>
 </div>
 
-<script is:inline define:vars={{ locales }}>
+<script is:inline define:vars={{ locales, defaultLocale }}>
   const languageMenu = document.getElementById('language-menu')
   const button = document.getElementById('language-menu-button')
   if (languageMenu && button) {
@@ -82,15 +83,24 @@ const getLocalizedPath = (locale) => {
     }
     const localizedPath = (targetLocale) => {
       const basePath = stripLocale(window.location.pathname)
-      return targetLocale === 'en' ? basePath : '/' + targetLocale + (basePath === '/' ? '/' : basePath)
+      return targetLocale === defaultLocale ? basePath : '/' + targetLocale + (basePath === '/' ? '/' : basePath)
+    }
+    const activateLanguage = (target) => {
+      window.location.href = target
     }
     locales.forEach((j) => {
       const item = document.getElementById(`language_${j}`)
       if (!item) return
       const target = localizedPath(j) + window.location.search + window.location.hash
       item.setAttribute('href', target)
-      item.addEventListener('click', () => {
-        window.location.href = target
+      item.addEventListener('click', (event) => {
+        event.preventDefault()
+        activateLanguage(target)
+      })
+      item.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return
+        event.preventDefault()
+        activateLanguage(target)
       })
     })
   }
