@@ -34,6 +34,7 @@ type QueueRetryOptions = {
 }
 
 type QueueMessage<T> = {
+  readonly id?: string
   readonly body: T
   readonly attempts?: number
   retry?: (options?: QueueRetryOptions) => void
@@ -866,7 +867,7 @@ function translationArrayFromUnknown(value: unknown): string[] | null {
   const record = recordOf(value)
   if (!record) return null
 
-  for (const key of ['translations', 'translated', 'translatedTexts', 'texts', 'items', 'result', 'response', 'data']) {
+  for (const key of ['translations', 'translated', 'translatedTexts', 'items', 'result', 'response', 'data']) {
     const nestedArray = stringArrayFromUnknown(record[key])
     if (nestedArray) return nestedArray
   }
@@ -938,43 +939,44 @@ async function translateBatch(env: Env, targetLanguage: string, batch: string[])
   let lastError: Error | null = null
 
   for (let attempt = 1; attempt <= TRANSLATION_MODEL_ATTEMPTS; attempt += 1) {
-    const result = await env.AI.run(model, {
-      temperature: 0,
-      max_tokens: 8192,
-      messages: [
-        {
-          role: 'system',
-          content: [
-            'You translate Capgo website copy for the target locale.',
-            'Translate naturally for the user cultural context; do not translate word for word.',
-            'Translate every human-readable label, heading, sentence, and paragraph into the target language, including short navigation labels.',
-            'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning. Preserve terms like Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, and Cloudflare when they are names or technical terms.',
-            `Return only valid JSON: one JSON array of exactly ${batch.length} strings, in the same order as the input. Do not return Markdown, an object, keys, comments, or explanations. Escape quotes and newlines inside JSON strings.`,
-            attempt > 1 ? 'Your previous response was rejected. Fix the format and return only the JSON array.' : '',
-          ]
-            .filter(Boolean)
-            .join(' '),
-        },
-        {
-          role: 'user',
-          content: JSON.stringify({ targetLanguage, texts: batch }),
-        },
-      ],
-    })
+    let payload: unknown = ''
+    try {
+      const result = await env.AI.run(model, {
+        temperature: 0,
+        max_tokens: 8192,
+        messages: [
+          {
+            role: 'system',
+            content: [
+              'You translate Capgo website copy for the target locale.',
+              'Translate naturally for the user cultural context; do not translate word for word.',
+              'Translate every human-readable label, heading, sentence, and paragraph into the target language, including short navigation labels.',
+              'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning. Preserve terms like Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, and Cloudflare when they are names or technical terms.',
+              `Return only valid JSON: one JSON array of exactly ${batch.length} strings, in the same order as the input. Do not return Markdown, an object, keys, comments, or explanations. Escape quotes and newlines inside JSON strings.`,
+              attempt > 1 ? 'Your previous response was rejected. Fix the format and return only the JSON array.' : '',
+            ]
+              .filter(Boolean)
+              .join(' '),
+          },
+          {
+            role: 'user',
+            content: JSON.stringify({ targetLanguage, texts: batch }),
+          },
+        ],
+      })
 
-    const payload = extractAiPayload(result)
-    const translated = parseTranslationArray(payload)
-    if (!translated) {
-      lastError = new Error(`Translation model returned invalid JSON for ${targetLanguage}`)
-    } else if (translated.length !== batch.length) {
-      lastError = new Error(`Translation model returned ${translated.length} strings for ${batch.length} ${targetLanguage} strings`)
-    } else {
-      try {
+      payload = extractAiPayload(result)
+      const translated = parseTranslationArray(payload)
+      if (!translated) {
+        lastError = new Error(`Translation model returned invalid JSON for ${targetLanguage}`)
+      } else if (translated.length !== batch.length) {
+        lastError = new Error(`Translation model returned ${translated.length} strings for ${batch.length} ${targetLanguage} strings`)
+      } else {
         assertTranslatedBatch(targetLanguage, batch, translated)
         return translated
-      } catch (error) {
-        lastError = error instanceof Error ? error : new Error(errorMessage(error))
       }
+    } catch (error) {
+      lastError = error instanceof Error ? error : new Error(errorMessage(error))
     }
 
     console.warn('Translation model response rejected', {
@@ -988,6 +990,14 @@ async function translateBatch(env: Env, targetLanguage: string, batch: string[])
   }
 
   throw new Error(`Translation model failed after ${TRANSLATION_MODEL_ATTEMPTS} attempts for ${targetLanguage}: ${lastError?.message ?? 'unknown error'}`)
+}
+
+function logPathnameFromUrl(value: string): string {
+  try {
+    return new URL(value).pathname
+  } catch {
+    return ''
+  }
 }
 
 function renderTranslatedHtml(parts: HtmlPart[], segments: Segment[], translations: string[]): string {
@@ -1704,7 +1714,11 @@ export default {
         await processTranslationJob(message.body, env)
       } catch (error) {
         console.error('Failed to process translated page queue job; retrying message', {
-          job: message.body,
+          messageId: message.id,
+          pathname: logPathnameFromUrl(message.body.url),
+          locale: message.body.locale,
+          reason: message.body.reason,
+          cacheVersion: message.body.cacheVersion,
           attempts: message.attempts,
           retryDelaySeconds: TRANSLATION_QUEUE_RETRY_DELAY_SECONDS,
           error: errorMessage(error),
