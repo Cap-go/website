@@ -29,12 +29,19 @@ type QueueBinding<T> = {
   send(message: T): Promise<void>
 }
 
+type QueueRetryOptions = {
+  delaySeconds?: number
+}
+
 type QueueMessage<T> = {
-  body: T
+  readonly id?: string
+  readonly body: T
+  readonly attempts?: number
+  retry?: (options?: QueueRetryOptions) => void
 }
 
 type MessageBatch<T> = {
-  messages: QueueMessage<T>[]
+  readonly messages: readonly QueueMessage<T>[]
 }
 
 type R2ObjectBody = {
@@ -113,6 +120,9 @@ const MAX_HTML_BYTES = 1_500_000
 const MAX_BATCH_CHARS = 1_500
 const MAX_BATCH_ITEMS = 32
 const TRANSLATION_BATCHES_PER_QUEUE_JOB = 1
+const TRANSLATION_MODEL_ATTEMPTS = 3
+const TRANSLATION_QUEUE_RETRY_DELAY_SECONDS = 60
+const AI_OUTPUT_PREVIEW_CHARS = 240
 
 const LANGUAGE_NAMES: Record<Locale, string> = {
   de: 'German',
@@ -783,14 +793,19 @@ function extractChoicesText(choices: unknown): string {
   return ''
 }
 
-function extractAiText(result: unknown): string {
-  if (typeof result === 'string') return result
+function extractAiPayload(result: unknown): unknown {
+  if (typeof result === 'string' || Array.isArray(result)) return result
 
   const record = recordOf(result)
   if (!record) return ''
 
-  for (const key of ['response', 'text', 'result']) {
-    if (typeof record[key] === 'string') return record[key] as string
+  for (const key of ['response', 'text', 'result', 'output']) {
+    const value = record[key]
+    if (Array.isArray(value)) {
+      const text = extractContentText(value)
+      return text || value
+    }
+    if (typeof value === 'string' || Array.isArray(value) || recordOf(value)) return value
   }
 
   return extractChoicesText(record.choices)
@@ -833,21 +848,58 @@ function extractJsonArray(value: string): string | null {
   return value.slice(start, end + 1)
 }
 
-function parseTranslationArray(rawText: string): string[] | null {
-  const trimmed = stripJsonFence(rawText)
+function parseJsonValue(value: string): unknown {
   try {
-    const parsed = JSON.parse(trimmed)
-    return Array.isArray(parsed) && parsed.every((item) => typeof item === 'string') ? parsed : null
+    return JSON.parse(value)
   } catch {
-    const jsonArray = extractJsonArray(trimmed)
-    if (!jsonArray) return null
+    return null
+  }
+}
+
+function stringArrayFromUnknown(value: unknown): string[] | null {
+  return Array.isArray(value) && value.every((item) => typeof item === 'string') ? value : null
+}
+
+function translationArrayFromUnknown(value: unknown): string[] | null {
+  const directArray = stringArrayFromUnknown(value)
+  if (directArray) return directArray
+
+  const record = recordOf(value)
+  if (!record) return null
+
+  for (const key of ['translations', 'translated', 'translatedTexts', 'items', 'result', 'response', 'data']) {
+    const nestedArray = stringArrayFromUnknown(record[key])
+    if (nestedArray) return nestedArray
+  }
+
+  return null
+}
+
+function parseTranslationArray(rawValue: unknown): string[] | null {
+  const directArray = translationArrayFromUnknown(rawValue)
+  if (directArray) return directArray
+  if (typeof rawValue !== 'string') return null
+
+  const trimmed = stripJsonFence(rawValue)
+  const parsed = translationArrayFromUnknown(parseJsonValue(trimmed))
+  if (parsed) return parsed
+
+  const jsonArray = extractJsonArray(trimmed)
+  return jsonArray ? translationArrayFromUnknown(parseJsonValue(jsonArray)) : null
+}
+
+function aiPayloadPreview(value: unknown): string {
+  let text = ''
+  if (typeof value === 'string') {
+    text = value
+  } else {
     try {
-      const parsed = JSON.parse(jsonArray)
-      return Array.isArray(parsed) && parsed.every((item) => typeof item === 'string') ? parsed : null
+      text = JSON.stringify(value) ?? ''
     } catch {
-      return null
+      text = String(value)
     }
   }
+  return text.replace(/\s+/g, ' ').trim().slice(0, AI_OUTPUT_PREVIEW_CHARS)
 }
 
 function normalizedTranslationValue(value: string): string {
@@ -884,30 +936,68 @@ function assertTranslatedBatch(targetLanguage: string, batch: string[], translat
 
 async function translateBatch(env: Env, targetLanguage: string, batch: string[]): Promise<string[]> {
   const model = env.TRANSLATION_MODEL || DEFAULT_MODEL
-  const result = await env.AI.run(model, {
-    temperature: 0,
-    max_tokens: 8192,
-    messages: [
-      {
-        role: 'system',
-        content:
-          'You translate website copy. Translate every human-readable label, heading, sentence, and paragraph into the target language, including short navigation labels. Return only a JSON array of strings with the same length and order as the input. Preserve only brand names, product names, URLs, code identifiers, file paths, language codes, numbers, punctuation, and whitespace meaning. Do not leave English copy unchanged unless it is one of those preserved terms. Do not add explanations.',
-      },
-      {
-        role: 'user',
-        content: JSON.stringify({ targetLanguage, texts: batch }),
-      },
-    ],
-  })
+  let lastError: Error | null = null
 
-  const translated = parseTranslationArray(extractAiText(result))
-  if (!translated) throw new Error(`Translation model returned invalid JSON for ${targetLanguage}`)
-  if (translated.length !== batch.length) {
-    throw new Error(`Translation model returned ${translated.length} strings for ${batch.length} ${targetLanguage} strings`)
+  for (let attempt = 1; attempt <= TRANSLATION_MODEL_ATTEMPTS; attempt += 1) {
+    let payload: unknown = ''
+    try {
+      const result = await env.AI.run(model, {
+        temperature: 0,
+        max_tokens: 8192,
+        messages: [
+          {
+            role: 'system',
+            content: [
+              'You translate Capgo website copy for the target locale.',
+              'Translate naturally for the user cultural context; do not translate word for word.',
+              'Translate every human-readable label, heading, sentence, and paragraph into the target language, including short navigation labels.',
+              'Preserve brand names, product names, developer terms, URLs, code identifiers, file paths, package names, language codes, numbers, punctuation, and whitespace meaning. Preserve terms like Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, and Cloudflare when they are names or technical terms.',
+              `Return only valid JSON: one JSON array of exactly ${batch.length} strings, in the same order as the input. Do not return Markdown, an object, keys, comments, or explanations. Escape quotes and newlines inside JSON strings.`,
+              attempt > 1 ? 'Your previous response was rejected. Fix the format and return only the JSON array.' : '',
+            ]
+              .filter(Boolean)
+              .join(' '),
+          },
+          {
+            role: 'user',
+            content: JSON.stringify({ targetLanguage, texts: batch }),
+          },
+        ],
+      })
+
+      payload = extractAiPayload(result)
+      const translated = parseTranslationArray(payload)
+      if (!translated) {
+        lastError = new Error(`Translation model returned invalid JSON for ${targetLanguage}`)
+      } else if (translated.length !== batch.length) {
+        lastError = new Error(`Translation model returned ${translated.length} strings for ${batch.length} ${targetLanguage} strings`)
+      } else {
+        assertTranslatedBatch(targetLanguage, batch, translated)
+        return translated
+      }
+    } catch (error) {
+      lastError = error instanceof Error ? error : new Error(errorMessage(error))
+    }
+
+    console.warn('Translation model response rejected', {
+      targetLanguage,
+      attempt,
+      maxAttempts: TRANSLATION_MODEL_ATTEMPTS,
+      batchSize: batch.length,
+      error: lastError.message,
+      outputPreview: aiPayloadPreview(payload),
+    })
   }
 
-  assertTranslatedBatch(targetLanguage, batch, translated)
-  return translated
+  throw new Error(`Translation model failed after ${TRANSLATION_MODEL_ATTEMPTS} attempts for ${targetLanguage}: ${lastError?.message ?? 'unknown error'}`)
+}
+
+function logPathnameFromUrl(value: string): string {
+  try {
+    return new URL(value).pathname
+  } catch {
+    return ''
+  }
 }
 
 function renderTranslatedHtml(parts: HtmlPart[], segments: Segment[], translations: string[]): string {
@@ -1623,8 +1713,21 @@ export default {
       try {
         await processTranslationJob(message.body, env)
       } catch (error) {
-        console.error('Failed to process translated page queue job', { job: message.body, error: errorMessage(error) })
-        throw error
+        console.error('Failed to process translated page queue job; retrying message', {
+          messageId: message.id,
+          pathname: logPathnameFromUrl(message.body.url),
+          locale: message.body.locale,
+          reason: message.body.reason,
+          cacheVersion: message.body.cacheVersion,
+          attempts: message.attempts,
+          retryDelaySeconds: TRANSLATION_QUEUE_RETRY_DELAY_SECONDS,
+          error: errorMessage(error),
+        })
+        if (typeof message.retry === 'function') {
+          message.retry({ delaySeconds: TRANSLATION_QUEUE_RETRY_DELAY_SECONDS })
+        } else {
+          throw error
+        }
       }
     }
   },
