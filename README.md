@@ -123,7 +123,6 @@ All commands are run from the repo root:
 | `bun run build:web` | Build the website app |
 | `bun run build:docs` | Build the docs app |
 | `bun run build` | Build both apps |
-| `bun run build:prepare:web` | Refresh web-only generated assets used by the marketing site |
 | `bun run check` | Run `astro check` for both apps |
 | `bun run preview:web` | Preview the website locally |
 | `bun run preview:docs` | Preview the docs locally |
