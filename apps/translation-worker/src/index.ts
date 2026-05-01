@@ -286,6 +286,10 @@ function isRedirect(response: Response): boolean {
   return response.status >= 300 && response.status < 400 && response.headers.has('Location')
 }
 
+function isStableTerminalResponse(response: Response): boolean {
+  return isRedirect(response) || response.ok || response.status === 404 || response.status === 410
+}
+
 function localizeRedirect(response: Response, requestUrl: URL, locale: Locale): Response {
   const headers = new Headers(response.headers)
   const location = headers.get('Location')
@@ -321,6 +325,26 @@ function pendingKeyFor(requestUrl: URL, locale: Locale): Request {
   pendingUrl.search = ''
   pendingUrl.searchParams.set('__capgo_translation_pending', TRANSLATION_CACHE_VERSION)
   return new Request(pendingUrl.toString(), { method: 'GET' })
+}
+
+async function putTranslationPendingMarker(requestUrl: URL, locale: Locale, reason: TranslationQueueReason): Promise<void> {
+  await caches.default.put(
+    pendingKeyFor(requestUrl, locale),
+    new Response(reason, {
+      headers: {
+        'Cache-Control': `public, max-age=${TRANSLATION_PENDING_SECONDS}`,
+        'X-Capgo-Translation-Pending': reason,
+      },
+    }),
+  )
+}
+
+async function putTranslationPendingMarkerSafely(requestUrl: URL, locale: Locale, reason: TranslationQueueReason): Promise<void> {
+  try {
+    await putTranslationPendingMarker(requestUrl, locale, reason)
+  } catch (error) {
+    console.error('Failed to refresh translated page pending marker', { pathname: requestUrl.pathname, locale, reason, error: errorMessage(error) })
+  }
 }
 
 function canonicalTranslationStoreUrl(requestUrl: URL, locale: Locale): string {
@@ -966,6 +990,14 @@ async function cacheTranslatedResponse(env: Env, requestUrl: URL, locale: Locale
   await caches.default.put(cacheKey, response)
 }
 
+async function repopulateTranslatedPageCacheSafely(cacheKey: Request, response: Response, requestUrl: URL, locale: Locale): Promise<void> {
+  try {
+    await caches.default.put(cacheKey, response)
+  } catch (error) {
+    console.error('Failed to repopulate translated page cache from R2', { pathname: requestUrl.pathname, locale, error: errorMessage(error) })
+  }
+}
+
 function nextMissingBatchIndex(translatedBatches: string[][], batchCount: number): number {
   for (let index = 0; index < batchCount; index += 1) {
     if (!Array.isArray(translatedBatches[index])) return index
@@ -1282,12 +1314,15 @@ async function refreshCacheIncrementally(request: Request, env: Env, requestUrl:
   const renderRequest = request.method === 'GET' ? request : new Request(request, { method: 'GET' })
   const source = await loadSourceHtml(renderRequest, env, requestUrl, locale)
   if (source.type === 'response') {
-    if (isRedirect(source.response)) {
+    if (isStableTerminalResponse(source.response)) {
       const cachedResponse = toCachedResponse(source.response.clone())
       await cacheTranslatedResponse(env, requestUrl, locale, cacheKey, cachedResponse)
+      await deletePartialTranslationStateSafely(env, requestUrl, locale)
+      return true
     }
-    await deletePartialTranslationStateSafely(env, requestUrl, locale)
-    return true
+
+    console.error('Translation source returned transient terminal response', { pathname: requestUrl.pathname, locale, status: source.response.status })
+    return false
   }
 
   const { parts, segments } = collectSegments(source.sourceHtml)
@@ -1326,6 +1361,7 @@ async function refreshCacheIncrementally(request: Request, env: Env, requestUrl:
       translatedBatches,
       updatedAt: Date.now(),
     })
+    await putTranslationPendingMarkerSafely(requestUrl, locale, 'continue')
     await env.TRANSLATION_QUEUE.send({
       url: requestUrl.toString(),
       locale,
@@ -1359,15 +1395,7 @@ async function enqueueTranslation(env: Env, requestUrl: URL, locale: Locale, rea
   try {
     if (await caches.default.match(pendingKey)) return
 
-    await caches.default.put(
-      pendingKey,
-      new Response(reason, {
-        headers: {
-          'Cache-Control': `public, max-age=${TRANSLATION_PENDING_SECONDS}`,
-          'X-Capgo-Translation-Pending': reason,
-        },
-      }),
-    )
+    await putTranslationPendingMarker(requestUrl, locale, reason)
     markedPending = true
   } catch (error) {
     console.error('Failed to mark translated page as pending', { pathname: requestUrl.pathname, locale, reason, error: errorMessage(error) })
@@ -1424,7 +1452,7 @@ async function processTranslationJob(job: TranslationJob, env: Env): Promise<voi
     if (storedResponse) {
       const translatedAt = readTranslatedAt(storedResponse)
       if (Date.now() - translatedAt <= FRESH_MS) {
-        await caches.default.put(cacheKey, storedResponse.clone())
+        await repopulateTranslatedPageCacheSafely(cacheKey, storedResponse.clone(), requestUrl, job.locale)
         await deletePartialTranslationStateSafely(env, requestUrl, job.locale)
         completed = true
         return
@@ -1468,7 +1496,7 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
   if (storedResponse) {
     const translatedAt = readTranslatedAt(storedResponse)
     const isStale = Date.now() - translatedAt > FRESH_MS
-    await caches.default.put(cacheKey, storedResponse.clone())
+    await repopulateTranslatedPageCacheSafely(cacheKey, storedResponse.clone(), requestUrl, locale)
     if (isStale) {
       await enqueueTranslationSafely(env, requestUrl, locale, 'stale')
     }
