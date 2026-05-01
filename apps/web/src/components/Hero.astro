@@ -7,199 +7,214 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
 
 <section>
   <div class="relative overflow-hidden">
-    <div class="relative pb-8 mx-auto max-w-7xl md:pb-32">
+    <div class="relative mx-auto max-w-7xl pb-8 md:pb-32">
       <!-- Background Grid of Squares -->
-      <div class="absolute inset-0 flex flex-col justify-center w-full gap-4 pointer-events-none select-none blur-sm sm:blur-none">
+      <div class="pointer-events-none absolute inset-0 flex w-full flex-col justify-center gap-4 opacity-40 blur-md select-none sm:opacity-90 sm:blur-none">
         <!-- Row 0 -->
         <div class="grid w-full grid-cols-12 gap-4">
           <!-- Left -->
-          <div class="flex overflow-hidden col-start-1 justify-center items-center w-16 h-16 rounded-2xl border opacity-20 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm"></div>
-          <div class="flex overflow-hidden col-start-2 justify-center items-center w-16 h-16 rounded-2xl border opacity-20 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm"></div>
-          <div class="flex overflow-hidden col-start-3 justify-center items-center w-16 h-16 rounded-2xl border opacity-40 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm"></div>
-          <div class="flex overflow-hidden col-start-4 justify-center items-center w-16 h-16 rounded-2xl border opacity-60 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm"></div>
+          <div class="col-start-1 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 opacity-20 backdrop-blur-sm"></div>
+          <div class="col-start-2 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 opacity-20 backdrop-blur-sm"></div>
+          <div class="col-start-3 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 opacity-40 backdrop-blur-sm"></div>
+          <div class="col-start-4 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 opacity-60 backdrop-blur-sm"></div>
           <!-- Right -->
-          <div class="flex overflow-hidden col-start-9 justify-center items-center w-16 h-16 rounded-2xl border opacity-70 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm"></div>
-          <div class="flex overflow-hidden col-start-10 justify-center items-center w-16 h-16 rounded-2xl border opacity-60 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm"></div>
-          <div class="flex overflow-hidden col-start-11 justify-center items-center w-16 h-16 rounded-2xl border opacity-40 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm"></div>
-          <div class="flex overflow-hidden col-start-12 justify-center items-center w-16 h-16 rounded-2xl border opacity-20 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm"></div>
+          <div class="col-start-9 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 opacity-70 backdrop-blur-sm"></div>
+          <div class="col-start-10 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 opacity-60 backdrop-blur-sm"></div>
+          <div class="col-start-11 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 opacity-40 backdrop-blur-sm"></div>
+          <div class="col-start-12 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 opacity-20 backdrop-blur-sm"></div>
         </div>
         <!-- Row 1 -->
         <div class="grid w-full grid-cols-12 gap-4">
-          <div class="flex overflow-hidden col-start-1 w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
-            <img src="/logo_cloud/poplin_logo.webp" alt="Poplin" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-1 flex h-16 w-16 overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+            <img src="/logo_cloud/poplin_logo.webp" alt="Poplin" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
           <!-- Left -->
-          <div class="flex overflow-hidden col-start-2 justify-center items-center w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
-            <img src="/logo_cloud/ajeer_logo.webp" alt="Ajeer" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-2 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+            <img src="/logo_cloud/ajeer_logo.webp" alt="Ajeer" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
           <!-- Right -->
-          <div class="flex overflow-hidden col-start-11 justify-center items-center w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
-            <img src="/logo_cloud/felix_health_logo.webp" alt="Felix Health" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-11 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+            <img src="/logo_cloud/felix_health_logo.webp" alt="Felix Health" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
-          <div class="flex overflow-hidden col-start-12 w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
-            <img src="/logo_cloud/public_square_logo.webp" alt="Public Square" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-12 flex h-16 w-16 overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+            <img src="/logo_cloud/public_square_logo.webp" alt="Public Square" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
         </div>
 
         <!-- Row 2 -->
         <div class="grid w-full grid-cols-12 gap-4">
           <!-- Left -->
-          <div class="flex overflow-hidden col-start-1 justify-center items-center w-16 h-16 rounded-2xl border opacity-60 -translate-x-12 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+          <div
+            class="col-start-1 flex h-16 w-16 -translate-x-12 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 opacity-60 backdrop-blur-sm"
+          >
           </div>
-          <div class="flex overflow-hidden col-start-2 justify-center items-center w-16 h-16 rounded-2xl border -translate-x-12 border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm">
-            <img src="/logo_cloud/happypal_logo.webp" alt="HappyPal" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-2 flex h-16 w-16 -translate-x-12 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm">
+            <img src="/logo_cloud/happypal_logo.webp" alt="HappyPal" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
-          <div class="flex overflow-hidden col-start-3 justify-center items-center w-16 h-16 rounded-2xl border -translate-x-12 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
-            <img src="/logo_cloud/seaport_logo.webp" alt="Seaport" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-3 flex h-16 w-16 -translate-x-12 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+            <img src="/logo_cloud/seaport_logo.webp" alt="Seaport" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
 
           <!-- Right -->
-          <div class="flex overflow-hidden col-start-10 justify-center items-center w-16 h-16 rounded-2xl border translate-x-12 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
-            <img src="/logo_cloud/janitor_logo.webp" alt="Janitor" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-10 flex h-16 w-16 translate-x-12 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+            <img src="/logo_cloud/janitor_logo.webp" alt="Janitor" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
-          <div class="flex overflow-hidden col-start-11 justify-center items-center w-16 h-16 rounded-2xl border translate-x-12 border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm">
-            <img src="/logo_cloud/suez_logo.webp" alt="Suez" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-11 flex h-16 w-16 translate-x-12 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm">
+            <img src="/logo_cloud/suez_logo.webp" alt="Suez" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
-          <div class="flex overflow-hidden col-start-12 justify-center items-center w-16 h-16 rounded-2xl border opacity-60 translate-x-12 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+          <div
+            class="col-start-12 flex h-16 w-16 translate-x-12 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 opacity-60 backdrop-blur-sm"
+          >
           </div>
         </div>
 
         <!-- Row 3 -->
         <div class="grid w-full grid-cols-12 gap-4">
-          <div class="col-start-1 w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
-            <img src="/logo_cloud/torchys_logo.webp" alt="Torchys" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-1 h-16 w-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+            <img src="/logo_cloud/torchys_logo.webp" alt="Torchys" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
           <!-- Left -->
-          <div class="flex overflow-hidden col-start-2 justify-center items-center w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
-            <img src="/logo_cloud/leaderboard_logo.webp" alt="Leaderboard" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-2 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+            <img src="/logo_cloud/leaderboard_logo.webp" alt="Leaderboard" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
-          <div class="flex overflow-hidden col-start-3 justify-center items-center w-16 h-16 rounded-2xl border border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm">
-            <img src="/logo_cloud/revel_logo.webp" alt="Revel" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-3 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm">
+            <img src="/logo_cloud/revel_logo.webp" alt="Revel" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
 
           <!-- Right -->
-          <div class="flex overflow-hidden col-start-10 justify-center items-center w-16 h-16 rounded-2xl border border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm">
-            <img src="/logo_cloud/pizza_hut_logo.webp" alt="Pizza Hut" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-10 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm">
+            <img src="/logo_cloud/pizza_hut_logo.webp" alt="Pizza Hut" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
-          <div class="flex overflow-hidden col-start-11 justify-center items-center w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
-            <img src="/logo_cloud/livance_logo.webp" alt="Livance" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-11 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+            <img src="/logo_cloud/livance_logo.webp" alt="Livance" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
-          <div class="flex overflow-hidden col-start-12 w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
-            <img src="/logo_cloud/codere_logo.webp" alt="Codere" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-12 flex h-16 w-16 overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+            <img src="/logo_cloud/codere_logo.webp" alt="Codere" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
         </div>
 
         <!-- Row 4 -->
         <div class="grid w-full grid-cols-12 gap-4">
           <!-- Left -->
-          <div class="flex overflow-hidden col-start-1 justify-center items-center w-16 h-16 rounded-2xl border opacity-60 -translate-x-12 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+          <div
+            class="col-start-1 flex h-16 w-16 -translate-x-12 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 opacity-60 backdrop-blur-sm"
+          >
           </div>
-          <div class="flex overflow-hidden col-start-2 justify-center items-center w-16 h-16 rounded-2xl border -translate-x-12 border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm">
-            <img src="/logo_cloud/our_living_logo.webp" alt="OurLiving" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-2 flex h-16 w-16 -translate-x-12 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm">
+            <img src="/logo_cloud/our_living_logo.webp" alt="OurLiving" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
-          <div class="flex overflow-hidden col-start-3 justify-center items-center w-16 h-16 rounded-2xl border -translate-x-12 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
-            <img src="/logo_cloud/nana_logo.webp" alt="Nana" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-3 flex h-16 w-16 -translate-x-12 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+            <img src="/logo_cloud/nana_logo.webp" alt="Nana" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
 
           <!-- Right -->
-          <div class="flex overflow-hidden col-start-10 justify-center items-center w-16 h-16 rounded-2xl border translate-x-12 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
-            <img src="/logo_cloud/nx_logo.webp" alt="NX" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-10 flex h-16 w-16 translate-x-12 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+            <img src="/logo_cloud/nx_logo.webp" alt="NX" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
-          <div class="flex overflow-hidden col-start-11 justify-center items-center w-16 h-16 rounded-2xl border translate-x-12 border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm">
-            <img src="/logo_cloud/remnote_logo.webp" alt="RemNote" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-11 flex h-16 w-16 translate-x-12 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm">
+            <img src="/logo_cloud/remnote_logo.webp" alt="RemNote" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
-          <div class="flex overflow-hidden col-start-12 justify-center items-center w-16 h-16 rounded-2xl border opacity-60 translate-x-12 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+          <div
+            class="col-start-12 flex h-16 w-16 translate-x-12 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 opacity-60 backdrop-blur-sm"
+          >
           </div>
         </div>
 
         <!-- Row 5 -->
         <div class="grid w-full grid-cols-12 gap-4">
-          <div class="col-start-1 w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
-            <img src="/logo_cloud/shelf_logo.webp" alt="Shelf" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-1 h-16 w-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+            <img src="/logo_cloud/shelf_logo.webp" alt="Shelf" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
           <!-- Left -->
-          <div class="flex overflow-hidden col-start-2 justify-center items-center w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
-            <img src="/logo_cloud/pixiesset_logo.webp" alt="Pixiesset" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-2 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+            <img src="/logo_cloud/pixiesset_logo.webp" alt="Pixiesset" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
-          <div class="flex overflow-hidden col-start-3 justify-center items-center w-16 h-16 rounded-2xl border border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm">
-            <img src="/logo_cloud/vella_logo.webp" alt="Vella" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-3 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm">
+            <img src="/logo_cloud/vella_logo.webp" alt="Vella" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
 
           <!-- Right -->
-          <div class="flex overflow-hidden col-start-10 justify-center items-center w-16 h-16 rounded-2xl border border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm">
-            <img src="/logo_cloud/irec_logo.webp" alt="IREC" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-10 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm">
+            <img src="/logo_cloud/irec_logo.webp" alt="IREC" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
-          <div class="flex overflow-hidden col-start-11 justify-center items-center w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
-            <img src="/logo_cloud/plataforma_logo.webp" alt="Plataforma" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-11 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+            <img src="/logo_cloud/plataforma_logo.webp" alt="Plataforma" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
-          <div class="flex overflow-hidden col-start-12 w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
-            <img src="/logo_cloud/snowqueen_logo.webp" alt="Snowqueen" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-12 flex h-16 w-16 overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+            <img src="/logo_cloud/snowqueen_logo.webp" alt="Snowqueen" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
         </div>
         <!-- Row 6 -->
         <div class="grid w-full grid-cols-12 gap-4">
           <!-- Left -->
-          <div class="flex overflow-hidden col-start-1 justify-center items-center w-16 h-16 rounded-2xl border opacity-40 -translate-x-12 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm"></div>
-          <div class="flex overflow-hidden col-start-2 justify-center items-center w-16 h-16 rounded-2xl border opacity-60 -translate-x-12 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm"></div>
-          <div class="flex overflow-hidden col-start-3 justify-center items-center w-16 h-16 rounded-2xl border -translate-x-12 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
-            <img src="/logo_cloud/marketplace_logo.webp" alt="Marketplace" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div
+            class="col-start-1 flex h-16 w-16 -translate-x-12 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 opacity-40 backdrop-blur-sm"
+          >
           </div>
-          <div class="flex overflow-hidden col-start-4 justify-center items-center w-16 h-16 rounded-2xl border -translate-x-12 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
-            <img src="/logo_cloud/gartner_health_logo.webp" alt="Gartner Health" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div
+            class="col-start-2 flex h-16 w-16 -translate-x-12 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 opacity-60 backdrop-blur-sm"
+          >
+          </div>
+          <div class="col-start-3 flex h-16 w-16 -translate-x-12 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+            <img src="/logo_cloud/marketplace_logo.webp" alt="Marketplace" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
+          </div>
+          <div class="col-start-4 flex h-16 w-16 -translate-x-12 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+            <img src="/logo_cloud/gartner_health_logo.webp" alt="Gartner Health" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
           <!-- Right -->
-          <div class="flex overflow-hidden col-start-9 justify-center items-center w-16 h-16 rounded-2xl border translate-x-12 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
-            <img src="/logo_cloud/kick_logo.webp" alt="Kick" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-9 flex h-16 w-16 translate-x-12 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+            <img src="/logo_cloud/kick_logo.webp" alt="Kick" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
-          <div class="flex overflow-hidden col-start-10 justify-center items-center w-16 h-16 rounded-2xl border translate-x-12 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
-            <img src="/logo_cloud/oneclick_logo.webp" alt="OneClick" width="64" height="64" class="object-contain max-w-full max-h-full opacity-30" />
+          <div class="col-start-10 flex h-16 w-16 translate-x-12 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm">
+            <img src="/logo_cloud/oneclick_logo.webp" alt="OneClick" width="64" height="64" class="max-h-full max-w-full object-contain opacity-30" />
           </div>
-          <div class="flex overflow-hidden col-start-11 justify-center items-center w-16 h-16 rounded-2xl border opacity-60 translate-x-12 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm"></div>
-          <div class="flex overflow-hidden col-start-12 justify-center items-center w-16 h-16 rounded-2xl border opacity-40 translate-x-12 border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm"></div>
+          <div
+            class="col-start-11 flex h-16 w-16 translate-x-12 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 opacity-60 backdrop-blur-sm"
+          >
+          </div>
+          <div
+            class="col-start-12 flex h-16 w-16 translate-x-12 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-[#1a1d24]/30 opacity-40 backdrop-blur-sm"
+          >
+          </div>
         </div>
       </div>
 
-      <div class="relative z-10 max-w-4xl px-4 pt-16 mx-auto text-center sm:px-6 sm:pt-24 lg:px-0 lg:pt-32">
-        <h1 class="text-4xl font-bold leading-tight tracking-tight sm:text-5xl sm:leading-tight lg:text-6xl lg:leading-tight xl:text-7xl font-pj">
+      <div class="relative z-10 mx-auto max-w-4xl px-4 pt-14 text-center sm:px-6 sm:pt-24 lg:px-0 lg:pt-32">
+        <h1 class="font-pj text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl lg:text-6xl xl:text-7xl">
           {m.instant_updates_for_your({}, { locale: Astro.locals.locale })}
           <br />
           <span class="text-azure-500">&lt;CapacitorJS app/&gt;</span>
         </h1>
-        <p class="max-w-3xl mx-auto mt-6 text-lg leading-8 text-gray-400 sm:text-xl font-inter">
+        <p class="font-inter mx-auto mt-6 max-w-[48ch] text-lg leading-8 text-pretty text-gray-300 sm:text-xl">
           {m.hero_subtitle_part1({}, { locale: Astro.locals.locale })}
           {m.hero_subtitle_part2({}, { locale: Astro.locals.locale })}<br />{m.hero_subtitle_line2({}, { locale: Astro.locals.locale })}
         </p>
-        <div class="flex flex-col items-center gap-3 mt-10">
-          <div class="relative inline-flex group">
-            <div
-              class="absolute -inset-4 rounded-xl opacity-70 duration-1000 group-hover:-inset-5 group-hover:opacity-100 group-hover:duration-200 transition-all"
-              style="background: radial-gradient(ellipse at center, rgba(68, 188, 255, 0.6) 0%, rgba(68, 188, 255, 0.3) 40%, rgba(68, 188, 255, 0) 70%);"
-            >
-            </div>
+        <div class="mt-10 flex flex-col items-center gap-3">
+          <div class="relative inline-flex">
             <a
               href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-              class="relative z-10 inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-blue-600 rounded-xl focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none font-pj"
+              class="font-pj relative z-10 inline-flex items-center justify-center rounded-xl bg-blue-600 px-7 py-3.5 text-lg font-semibold text-white shadow-lg ring-1 shadow-blue-600/25 ring-blue-600 transition-all duration-200 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 focus-visible:outline-none"
             >
               {m.cta_start_free({}, { locale: Astro.locals.locale })}
             </a>
           </div>
-          <p class="text-sm leading-6 text-gray-400 font-inter">{ctaSubtext}</p>
+          <p class="font-inter text-base leading-6 text-gray-400 sm:text-sm">{ctaSubtext}</p>
         </div>
       </div>
     </div>
   </div>
   <!-- Features Bar -->
-  <div class="py-6 from-gray-900 sm:py-16 lg:py-20 bg-linear-to-b to-[#1a1a1a]">
-    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+  <div class="bg-linear-to-b from-gray-900 to-[#1a1a1a] py-6 sm:py-16 lg:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <!-- Single Horizontal Bar with Features and Stats -->
-      <div class="max-w-6xl mx-auto">
-        <div class="rounded-3xl border border-white/10 bg-linear-to-br from-[#1a1d24]/50 to-[#14161b]/50 backdrop-blur-sm">
-          <div class="grid items-start grid-cols-1 gap-12 my-6 md:grid-cols-3">
+      <div class="mx-auto max-w-6xl">
+        <div class="rounded-2xl border border-white/10 bg-linear-to-br from-[#1a1d24]/60 to-[#14161b]/60 backdrop-blur-sm">
+          <div class="my-6 grid grid-cols-1 items-start gap-12 md:grid-cols-3">
             <!-- Instant Updates -->
             <div class="flex flex-col items-center gap-4 text-center">
               <div class="shrink-0">
-                <div class="flex items-center justify-center w-8 h-8 rounded-2xl">
-                  <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex h-8 w-8 items-center justify-center rounded-2xl">
+                  <svg class="h-8 w-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
                   </svg>
                 </div>
@@ -213,14 +228,14 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             <!-- App Store Compliant -->
             <div class="flex flex-col items-center gap-4 text-center">
               <div class="shrink-0">
-                <div class="flex items-center justify-center w-8 h-8 rounded-2xl">
+                <div class="flex h-8 w-8 items-center justify-center rounded-2xl">
                   <div class="flex gap-2">
-                    <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 384 512">
+                    <svg class="h-6 w-6 text-gray-400" fill="currentColor" viewBox="0 0 384 512" aria-hidden="true" focusable="false">
                       <path
                         d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"
                       ></path>
                     </svg>
-                    <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 488 512">
+                    <svg class="h-6 w-6 text-gray-400" fill="currentColor" viewBox="0 0 488 512" aria-hidden="true" focusable="false">
                       <path
                         d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"
                       ></path>
@@ -237,8 +252,8 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             <!-- End-to-end Encryption -->
             <div class="flex flex-col items-center gap-4 text-center">
               <div class="shrink-0">
-                <div class="flex items-center justify-center w-8 h-8 rounded-2xl">
-                  <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex h-8 w-8 items-center justify-center rounded-2xl">
+                  <svg class="h-8 w-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -258,10 +273,10 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
 
         <!-- Stats Bar -->
         <div class="pt-8">
-          <div class="flex flex-wrap items-center justify-center text-sm gap-y-6 gap-x-12">
+          <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 text-sm">
             <!-- Trusted by Companies -->
             <div class="flex items-center gap-3">
-              <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="h-5 w-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -277,7 +292,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
 
             <!-- Devices Tracked -->
             <div class="flex items-center gap-3">
-              <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="h-5 w-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
               </svg>
               <div class="flex items-center gap-1">
@@ -288,7 +303,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
 
             <!-- Uptime -->
             <div class="flex items-center gap-3">
-              <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="h-5 w-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
               <div class="flex items-center gap-1">
@@ -301,7 +316,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
 
             <!-- Update Adoption -->
             <div class="flex items-center gap-3">
-              <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="h-5 w-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
               <div class="flex items-center gap-1">
@@ -311,23 +326,23 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             </div>
           </div>
         </div>
-        <div class="flex items-center justify-center gap-8 my-6 text-sm text-slate-500">
+        <div class="my-6 flex items-center justify-center gap-8 text-sm text-slate-500">
           <div class="flex flex-col items-center gap-1">
             <img
               loading="lazy"
               src="/soc2.svg"
               alt={m.soc2_compliance_short({}, { locale: Astro.locals.locale })}
-              class="w-auto h-10 transition-opacity opacity-90 hover:opacity-80"
+              class="h-10 w-auto opacity-90 transition-opacity hover:opacity-80"
             />
-            <span class="text-xs font-semibold text-center text-slate-500">{m.soc2_compliance_short({}, { locale: Astro.locals.locale })}</span>
+            <span class="text-center text-xs font-semibold text-slate-500">{m.soc2_compliance_short({}, { locale: Astro.locals.locale })}</span>
           </div>
           <div class="flex flex-col items-center gap-1">
-            <img loading="lazy" src="/soc1.svg" alt={m.compliance_soc1({}, { locale: Astro.locals.locale })} class="h-10 transition-opacity opacity-90 hover:opacity-80 w-autoo" />
-            <span class="text-xs font-semibold text-center text-slate-500">{m.compliance_soc1({}, { locale: Astro.locals.locale })}</span>
+            <img loading="lazy" src="/soc1.svg" alt={m.compliance_soc1({}, { locale: Astro.locals.locale })} class="w-autoo h-10 opacity-90 transition-opacity hover:opacity-80" />
+            <span class="text-center text-xs font-semibold text-slate-500">{m.compliance_soc1({}, { locale: Astro.locals.locale })}</span>
           </div>
           <div class="flex flex-col items-center gap-1">
-            <img loading="lazy" src="/gdpr.svg" alt={m.compliance_gdpr({}, { locale: Astro.locals.locale })} class="h-10 transition-opacity opacity-90 hover:opacity-80 w-autoo" />
-            <span class="text-xs font-semibold text-center text-slate-500">{m.compliance_gdpr({}, { locale: Astro.locals.locale })}</span>
+            <img loading="lazy" src="/gdpr.svg" alt={m.compliance_gdpr({}, { locale: Astro.locals.locale })} class="w-autoo h-10 opacity-90 transition-opacity hover:opacity-80" />
+            <span class="text-center text-xs font-semibold text-slate-500">{m.compliance_gdpr({}, { locale: Astro.locals.locale })}</span>
           </div>
         </div>
       </div>
