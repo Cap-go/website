@@ -33,7 +33,7 @@ These roles are assigned when inviting a member. They grant access across the en
 | Role | Internal name | Description |
 |------|---------------|-------------|
 | **Super Admin** | `org_super_admin` | Owner-equivalent. Full control including deleting the org, managing billing, and transferring apps. Automatically granted to the org creator. |
-| **Admin** | `org_admin` | Full administration — manage members, apps, channels. Cannot delete the org, update billing, or transfer apps. |
+| **Admin** | `org_admin` | Full administration — manage members, apps, channels. Cannot delete the org, update billing, transfer apps, or promote users to Super Admin. |
 | **Billing Manager** | `org_billing_admin` | Billing-only access: view and update billing info, invoices, and billing audit logs. No access to apps or members. |
 | **Member** | `org_member` | Read-only access to the org and all its apps. |
 
@@ -46,7 +46,7 @@ These roles are assigned when inviting a member. They grant access across the en
 | `org.delete` | Permanently delete the organization | ✅ | ❌ | ❌ | ❌ |
 | `org.read_members` | View the member list | ✅ | ✅ | ❌ | ✅ |
 | `org.invite_user` | Invite new members | ✅ | ✅ | ❌ | ❌ |
-| `org.update_user_roles` | Change member roles (including Super Admin) | ✅ | ✅ | ❌ | ❌ |
+| `org.update_user_roles` | Change member roles (Admin cannot promote to Super Admin — blocked by role hierarchy) | ✅ | ✅ | ❌ | ❌ |
 | `org.read_billing` | View billing info and current plan | ✅ | ✅ | ✅ | ❌ |
 | `org.update_billing` | Update payment method and plan | ✅ | ❌ | ✅ | ❌ |
 | `org.read_invoices` | View invoices | ✅ | ✅ | ✅ | ❌ |
