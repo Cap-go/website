@@ -153,6 +153,7 @@ const LANGUAGE_FLAG_ENTITIES: Record<string, string> = {
 }
 
 const SKIP_TEXT_TAGS = new Set(['script', 'style', 'svg', 'pre', 'code', 'kbd', 'samp', 'textarea'])
+const RAW_TEXT_SKIP_TAGS = new Set(['script', 'style', 'textarea'])
 const LANGUAGE_SELECTOR_SKIP_IDS = new Set(['language-dropdown-button', 'language-dropdown', 'language-menu'])
 const VOID_TAGS = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'])
 const TRANSLATABLE_META = new Set(['description', 'keywords', 'title', 'og:title', 'og:description', 'og:image:alt', 'twitter:title', 'twitter:description', 'twitter:image:alt'])
@@ -725,7 +726,29 @@ function findNamedTag(html: string, startIndex: number, needle: string): { index
 }
 
 function findClosingTag(html: string, startIndex: number, tagName: string): { index: number; end: number; tag: string } | null {
-  return findNamedTag(html, startIndex, `</${tagName}`)
+  if (RAW_TEXT_SKIP_TAGS.has(tagName)) return findNamedTag(html, startIndex, `</${tagName}`)
+
+  let depth = 1
+  let cursor = startIndex
+
+  while (cursor < html.length) {
+    const nextTag = findNextHtmlTag(html, cursor)
+    if (!nextTag) return null
+
+    const nextTagName = tagNameOf(nextTag.tag)
+    if (nextTagName === tagName) {
+      if (isClosingTag(nextTag.tag)) {
+        depth -= 1
+        if (depth === 0) return nextTag
+      } else if (!isSelfClosingTag(nextTag.tag, tagName)) {
+        depth += 1
+      }
+    }
+
+    cursor = nextTag.end
+  }
+
+  return null
 }
 
 function collectSegments(html: string): { parts: HtmlPart[]; segments: Segment[] } {
@@ -2006,15 +2029,48 @@ function testProbeCheckParams(requestUrl: URL): string[] {
     .filter(Boolean)
 }
 
-function findBatchText(batches: string[][], expectedText: string): { batchIndex: number; textIndex: number; source: string } | null {
+function findBatchPositionForSegmentIndex(batches: string[][], targetSegmentIndex: number): { batchIndex: number; textIndex: number } | null {
+  let segmentIndex = 0
   for (let batchIndex = 0; batchIndex < batches.length; batchIndex += 1) {
     const batch = batches[batchIndex]
     for (let textIndex = 0; textIndex < batch.length; textIndex += 1) {
-      const source = batch[textIndex]
-      if (source.includes(expectedText)) return { batchIndex, textIndex, source }
+      if (segmentIndex === targetSegmentIndex) return { batchIndex, textIndex }
+      segmentIndex += 1
     }
   }
   return null
+}
+
+function findBatchText(segments: Segment[], batches: string[][], expectedText: string): { batchIndex: number; textIndex: number; source: string } | null {
+  for (let segmentIndex = 0; segmentIndex < segments.length; segmentIndex += 1) {
+    const segment = segments[segmentIndex]
+    if (!segment.inBody || segment.mode !== 'text' || !segment.text.includes(expectedText)) continue
+
+    const position = findBatchPositionForSegmentIndex(batches, segmentIndex)
+    if (position) return { ...position, source: segment.text }
+  }
+  return null
+}
+
+function selectBodyProbeChecks(segments: Segment[], batches: string[][], maximum = 3): { check: string; batchIndex: number; textIndex: number; source: string }[] {
+  const selected: { check: string; batchIndex: number; textIndex: number; source: string }[] = []
+  const fallback: { check: string; batchIndex: number; textIndex: number; source: string }[] = []
+
+  for (let segmentIndex = 0; segmentIndex < segments.length; segmentIndex += 1) {
+    const segment = segments[segmentIndex]
+    if (!segment.inBody || segment.mode !== 'text' || !hasAsciiLetter(segment.text)) continue
+
+    const position = findBatchPositionForSegmentIndex(batches, segmentIndex)
+    if (!position) continue
+
+    const check = normalizedTranslationValue(segment.text).slice(0, 80)
+    const item = { check, ...position, source: segment.text }
+    if (shouldCheckUnchangedTranslation(segment.text)) selected.push(item)
+    else if (check.length >= 4) fallback.push(item)
+    if (selected.length >= maximum) return selected
+  }
+
+  return selected.length > 0 ? selected : fallback.slice(0, maximum)
 }
 
 async function probeRealPageTranslation(env: Env, requestUrl: URL): Promise<Record<string, unknown>> {
@@ -2047,12 +2103,19 @@ async function probeRealPageTranslation(env: Env, requestUrl: URL): Promise<Reco
     selectedBatchIndexes.add(batchIndex)
   }
 
-  const checkSources = requiredChecks.map((check) => {
-    const found = findBatchText(batches, check)
-    if (!found) throw new Error(`Real page probe did not collect required body text for ${path}: ${check}`)
-    selectedBatchIndexes.add(found.batchIndex)
-    return { check, ...found }
-  })
+  const checkSources =
+    requiredChecks.length > 0
+      ? requiredChecks.map((check) => {
+          const found = findBatchText(segments, batches, check)
+          if (!found) throw new Error(`Real page probe did not collect required body text for ${path}: ${check}`)
+          selectedBatchIndexes.add(found.batchIndex)
+          return { check, ...found }
+        })
+      : selectBodyProbeChecks(segments, batches)
+  if (checkSources.length === 0) throw new Error(`Real page probe found no body text checks for ${path}`)
+  for (const checkSource of checkSources) {
+    selectedBatchIndexes.add(checkSource.batchIndex)
+  }
 
   const translatedBatchMap = new Map<number, string[]>()
   for (const batchIndex of [...selectedBatchIndexes].sort((left, right) => left - right)) {

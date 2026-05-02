@@ -15,6 +15,8 @@ const html = `<!doctype html>
   <body>
     <a href="#main-content">Skip to main content</a>
     <h1>Ship mobile updates instantly to every user</h1>
+    <svg><svg><text>Do not collect nested SVG text</text></svg><text>Do not collect outer SVG text</text></svg>
+    <p>Translate the paragraph after a nested skipped SVG.</p>
     <script>if (current < total) console.log(current)</script>
     <p>Deploy fixes and features without waiting for app store review delays.</p>
   </body>
@@ -30,6 +32,14 @@ assert(
 assert(
   bodySegments.some((text) => text.includes('Ship mobile updates instantly')),
   'Parser did not collect the body heading',
+)
+assert(
+  bodySegments.every((text) => !text.includes('Do not collect')),
+  'Parser collected text from a nested skipped SVG',
+)
+assert(
+  bodySegments.some((text) => text.includes('paragraph after a nested skipped SVG')),
+  'Parser did not resume body text after a nested skipped SVG',
 )
 assert(
   bodySegments.some((text) => text.includes('Deploy fixes and features')),

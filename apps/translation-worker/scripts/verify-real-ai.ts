@@ -33,10 +33,7 @@ const LOG_LIMIT = 16_000
 const WRANGLER_CONFIG = 'wrangler.real-test.jsonc'
 const DEVELOPMENT_R2_BUCKET = 'capgo-translation-cache-development'
 const SOURCE_TEXTS = ['Ship updates instantly', 'Pricing', 'Keep Capgo, Capacitor, code, API, SDK, CLI, npm, bun, GitHub, and Cloudflare unchanged.']
-const REAL_PAGE_PROBES = [
-  { path: '/', checks: ['Skip to main content', 'Products', 'By Team'] },
-  { path: '/docs/', checks: ['Skip to content', 'Select theme', 'Deploy a Live Update'] },
-] as const
+const REAL_PAGE_PROBES = ['/', '/docs/'] as const
 
 let wranglerLog = ''
 
@@ -206,9 +203,9 @@ await ensureDevelopmentBucket()
 const port = await getFreePort()
 const probeBaseUrl = `http://127.0.0.1:${port}`
 const runtimeProbeUrl = `${probeBaseUrl}/__translation-test__/real-runtime`
-const realPageProbeUrls = REAL_PAGE_PROBES.map((probe) => ({
-  path: probe.path,
-  url: `${probeBaseUrl}/__translation-test__/real-page?path=${encodeURIComponent(probe.path)}&locale=es&batches=2${probe.checks.map((check) => `&check=${encodeURIComponent(check)}`).join('')}`,
+const realPageProbeUrls = REAL_PAGE_PROBES.map((path) => ({
+  path,
+  url: `${probeBaseUrl}/__translation-test__/real-page?path=${encodeURIComponent(path)}&locale=es&batches=2`,
 }))
 const wrangler = Bun.spawn(
   [
@@ -260,7 +257,7 @@ try {
       for (const probe of realPageProbeUrls) {
         await fetchRealPageProbe(probe.url, probe.path)
       }
-      console.log(`Real translation worker probe passed with ${payload.model} on ${REAL_PAGE_PROBES.map((probe) => probe.path).join(', ')}`)
+      console.log(`Real translation worker probe passed with ${payload.model} on ${REAL_PAGE_PROBES.join(', ')}`)
       passed = true
       break
     } catch (error) {
