@@ -116,12 +116,12 @@ const DEFAULT_MODEL = '@cf/meta/llama-3.1-8b-instruct-fast'
 const FRESH_MS = 24 * 60 * 60 * 1000
 const CACHE_KEEP_SECONDS = 7 * 24 * 60 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
-const TRANSLATION_CACHE_VERSION = '2026-05-02-llama-3.1-8b-json-body-v2'
+const TRANSLATION_CACHE_VERSION = '2026-05-02-llama-3.1-8b-json-body-v3'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
 const MAX_HTML_BYTES = 1_500_000
 const MAX_BATCH_CHARS = 1_500
 const MAX_BATCH_ITEMS = 12
-const TRANSLATION_BATCHES_PER_QUEUE_JOB = 1
+const TRANSLATION_BATCHES_PER_QUEUE_JOB = 96
 const TRANSLATION_MODEL_ATTEMPTS = 3
 const TRANSLATION_SINGLE_TEXT_ATTEMPTS = 2
 const TRANSLATION_QUEUE_RETRY_DELAY_SECONDS = 60
@@ -1261,6 +1261,15 @@ async function translateSingleText(env: Env, targetLanguage: string, text: strin
     })
   }
 
+  if (lastError?.message.startsWith('Translation dropped protected token: ')) {
+    console.warn('Single-text translation kept source after protected token drop', {
+      targetLanguage,
+      error: lastError.message,
+      sourcePreview: aiPayloadPreview(text),
+    })
+    return text
+  }
+
   throw new Error(`Single-text translation failed for ${targetLanguage}: ${lastError?.message ?? 'unknown error'}`)
 }
 
@@ -1790,6 +1799,17 @@ async function refreshCacheIncrementally(request: Request, env: Env, requestUrl:
     translatedBatches[batchIndex] = translatedBatch
     translatedInThisJob += 1
     batchIndex = nextMissingBatchIndex(translatedBatches, batches.length)
+
+    if (batchIndex < batches.length) {
+      await writePartialTranslationState(env, requestUrl, locale, {
+        cacheVersion: TRANSLATION_CACHE_VERSION,
+        locale,
+        sourceHash,
+        batchCount: batches.length,
+        translatedBatches,
+        updatedAt: Date.now(),
+      })
+    }
   }
 
   if (batchIndex < batches.length) {
@@ -1942,6 +1962,10 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
       await enqueueTranslationSafely(env, requestUrl, locale, 'stale')
     }
     return withResponseHeaders(storedResponse, isStale ? 'STALE' : 'HIT', isHead)
+  }
+
+  if (request.method !== 'GET') {
+    return temporaryEnglishRedirectResponse(requestUrl, isHead)
   }
 
   await enqueueTranslationSafely(env, requestUrl, locale, 'miss')
