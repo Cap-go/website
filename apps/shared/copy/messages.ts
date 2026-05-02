@@ -1291,9 +1291,9 @@ const messages = {
     'Content or other computer technology that may damage, interfere with, surreptitiously intercept, or expropriate any system, program, or data, including viruses, Trojan horses, worms, time bombs, or cancelbots.',
   help_customers_with_app_issues: 'Help customers with app issues efficiently',
   here: 'here.',
-  hero_subtitle_line2: 'Fewer support tickets while your native app stays store-compliant.',
-  hero_subtitle_part1: 'Push JavaScript and asset changes the moment they are ready. ',
-  hero_subtitle_part2: 'Capgo downloads them in the background and applies them on launch.',
+  hero_subtitle_line2: 'Capgo downloads them in the background and applies them on launch.',
+  hero_subtitle_part1: 'Ship JavaScript and asset fixes in minutes.',
+  hero_subtitle_part2: '',
   high_enterprise_response: '2 business hours<br />Monday - Friday',
   high_priority_response: '2 hours<br />24/7 × 365',
   high_support_desc:
