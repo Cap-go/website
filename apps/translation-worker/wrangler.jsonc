@@ -9,6 +9,20 @@
   "limits": {
     "cpu_ms": 300000,
   },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "TRANSLATION_COORDINATOR",
+        "class_name": "TranslationCoordinator",
+      },
+    ],
+  },
+  "migrations": [
+    {
+      "tag": "v1_translation_coordinator",
+      "new_classes": ["TranslationCoordinator"],
+    },
+  ],
   "ai": {
     "binding": "AI",
   },
@@ -87,6 +101,14 @@
     "development": {
       "limits": {
         "cpu_ms": 300000,
+      },
+      "durable_objects": {
+        "bindings": [
+          {
+            "name": "TRANSLATION_COORDINATOR",
+            "class_name": "TranslationCoordinator",
+          },
+        ],
       },
       "ai": {
         "binding": "AI",

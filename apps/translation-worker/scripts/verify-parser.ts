@@ -1,4 +1,4 @@
-import { __translationWorkerTest } from '../src/index'
+import { __translationWorkerTest, TranslationCoordinator } from '../src/index'
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message)
@@ -54,3 +54,56 @@ assert(stats.changedCount > 0, 'Body translation validator did not detect change
 const rendered = __translationWorkerTest.renderTranslatedHtml(parts, segments, translations)
 assert(rendered.includes('FR: Ship mobile updates instantly to every user'), 'Renderer did not write translated body text')
 assert(rendered.includes('current < total'), 'Renderer changed skipped script content')
+
+function coordinatorRequest(body: unknown): Request {
+  return new Request('https://translation-coordinator/enqueue', {
+    method: 'POST',
+    body: JSON.stringify(body),
+  })
+}
+
+const stored = new Map<string, unknown>()
+const queued: unknown[] = []
+const priorityQueued: unknown[] = []
+const coordinator = new TranslationCoordinator(
+  {
+    storage: {
+      get: async (key: string) => stored.get(key),
+      put: async (key: string, value: unknown) => {
+        stored.set(key, value)
+      },
+      delete: async (key: string) => stored.delete(key),
+    },
+  },
+  {
+    TRANSLATION_QUEUE: {
+      send: async (message: unknown) => {
+        queued.push(message)
+      },
+    },
+    TRANSLATION_PRIORITY_QUEUE: {
+      send: async (message: unknown) => {
+        priorityQueued.push(message)
+      },
+    },
+  } as any,
+)
+const queueJob = {
+  url: 'https://capgo.app/fr/',
+  locale: 'fr',
+  cacheVersion: __translationWorkerTest.TRANSLATION_CACHE_VERSION,
+  reason: 'miss',
+}
+
+let response = await coordinator.fetch(coordinatorRequest(queueJob))
+assert(response.ok, 'Coordinator rejected initial queue job')
+assert((await response.json()).queued === true, 'Coordinator did not enqueue the initial job')
+response = await coordinator.fetch(coordinatorRequest(queueJob))
+assert(response.ok, 'Coordinator rejected duplicate queue job')
+assert((await response.json()).queued === false, 'Coordinator enqueued a duplicate job for the same page')
+assert(queued.length === 1, 'Coordinator sent duplicate normal queue messages')
+
+response = await coordinator.fetch(coordinatorRequest({ ...queueJob, priority: true }))
+assert(response.ok, 'Coordinator rejected priority promotion')
+assert((await response.json()).queued === true, 'Coordinator did not promote a pending non-priority job')
+assert(priorityQueued.length === 1, 'Coordinator did not send the promoted job to the priority queue')
