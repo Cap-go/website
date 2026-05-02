@@ -1374,7 +1374,7 @@ const messages = {
   instant_updates_for_capacitor_apps: 'Live updates for Capacitor apps',
   instant_updates_for_capacitor_apps_description:
     'When a web-layer bug is live, ship the fix through Capgo instead of waiting days for app store approval. Users get the update in the background while native changes stay in the normal review path.',
-  instant_updates_for_your: 'Ship fixes before app store review ends for your',
+  instant_updates_for_your: 'Ship live updates to your',
   instant_version_switching: 'Instant version switching',
   integrate_identity_provider_mfa: 'Integrate with your identity provider and enforce multi-factor authentication across your organization.',
   integration_and_api: 'Integration & API',
