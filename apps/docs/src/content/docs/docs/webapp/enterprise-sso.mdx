@@ -2,7 +2,7 @@
 title: "SSO (Enterprise)"
 description: "Set up SAML 2.0 single sign-on (SSO) for your Capgo organization: prerequisites, IdP configuration, DNS domain verification, provider lifecycle, and enforcement."
 sidebar:
-  order: 10
+  order: 12
 ---
 
 import { Aside, Steps } from '@astrojs/starlight/components';
@@ -17,7 +17,7 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 Single Sign-On (SSO) lets your team log in to Capgo using your company identity provider (IdP). Capgo uses SAML 2.0 through Supabase Auth. When a user's email domain matches an active SSO provider, they can authenticate against your IdP and are provisioned into the organization during the SSO callback.
 
-SSO does not change what users can do. Permissions are controlled by [organization roles](/docs/webapp/organization-system/#permission-breakdown). SSO only changes how they authenticate.
+SSO does not change what users can do. Permissions are controlled by [organization roles](/docs/webapp/organization-system/#roles-overview). SSO only changes how they authenticate.
 
 ## Prerequisites
 
@@ -97,7 +97,7 @@ After pilot users sign in:
 2. Find each SSO-provisioned user
 3. Adjust their role to the appropriate level (**Upload**, **Write**, **Admin**, etc.)
 
-See the [full permission breakdown](/docs/webapp/organization-system/#permission-breakdown) for what each role can do.
+See the [full permission breakdown](/docs/webapp/organization-roles/) for what each role can do.
 
 <Aside type="note">
 
@@ -137,5 +137,5 @@ Coordinate with your IdP admin and notify all affected users before enabling enf
 
 ## Related documentation
 
-- [Organization system: roles and permissions](/docs/webapp/organization-system/)
+- [Organization: roles and permissions](/docs/webapp/organization-system/)
 - [Organization security: 2FA, passwords, API keys](/docs/webapp/organization-security/)

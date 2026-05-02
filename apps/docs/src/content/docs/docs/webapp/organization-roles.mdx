@@ -1,0 +1,373 @@
+---
+title: "Access Control Reference"
+description: "Complete reference for Capgo's role-based access control system — every role, every permission, the hierarchy, and how to assign roles via API and CLI."
+sidebar:
+  order: 14
+---
+
+Capgo uses **role-based access control (RBAC)** to manage what each team member can do. Roles are organized by **scope** — from the entire organization down to a single bundle.
+
+For a visual walkthrough of managing members in the dashboard, see [Organization](/docs/webapp/organization-system/).
+
+---
+
+## Role scopes
+
+Every role belongs to a scope that determines what resource it grants access to.
+
+| Scope | Applies to | Example use case |
+|-------|-----------|-----------------|
+| **Organization** | The entire org and all its apps | Your co-founder gets Super Admin; your accountant gets Billing Manager |
+| **App** | A single app and its channels | A contractor working on one app gets App Developer |
+| **Channel** | A single channel within an app | A QA engineer only manages the `staging` channel |
+| **Bundle** | A single bundle version | A reviewer needs read access to one specific release |
+
+A member can hold **one role per scope target** — for example, one org role, one role on App A, and a different role on App B.
+
+---
+
+## Organization roles
+
+These roles are assigned when inviting a member. They grant access across the entire organization.
+
+| Role | Internal name | Description |
+|------|---------------|-------------|
+| **Super Admin** | `org_super_admin` | Owner-equivalent. Full control including deleting the org, managing billing, and transferring apps. Automatically granted to the org creator. |
+| **Admin** | `org_admin` | Full administration — manage members, apps, channels. Cannot delete the org, update billing, transfer apps, or promote users to Super Admin. |
+| **Billing Manager** | `org_billing_admin` | Billing-only access: view and update billing info, invoices, and billing audit logs. No access to apps or members. |
+| **Member** | `org_member` | Read-only access to the org and all its apps. |
+
+### Organization permission matrix
+
+| Permission | Description | Super Admin | Admin | Billing Manager | Member |
+|------------|-------------|:-----------:|:-----:|:---------------:|:------:|
+| `org.read` | View the organization | ✅ | ✅ | ✅ | ✅ |
+| `org.update_settings` | Edit org name, logo, management email | ✅ | ✅ | ❌ | ❌ |
+| `org.delete` | Permanently delete the organization | ✅ | ❌ | ❌ | ❌ |
+| `org.read_members` | View the member list | ✅ | ✅ | ❌ | ✅ |
+| `org.invite_user` | Invite new members | ✅ | ✅ | ❌ | ❌ |
+| `org.update_user_roles` | Change member roles (Admin cannot promote to Super Admin — blocked by role hierarchy) | ✅ | ✅ | ❌ | ❌ |
+| `org.read_billing` | View billing info and current plan | ✅ | ✅ | ✅ | ❌ |
+| `org.update_billing` | Update payment method and plan | ✅ | ❌ | ✅ | ❌ |
+| `org.read_invoices` | View invoices | ✅ | ✅ | ✅ | ❌ |
+| `org.read_audit` | View organization activity log | ✅ | ✅ | ❌ | ❌ |
+| `org.read_billing_audit` | View billing-specific audit log | ✅ | ✅ | ✅ | ❌ |
+
+:::note
+Organization roles inherit all permissions of the app, channel, and bundle roles below them in the hierarchy. A **Super Admin** can do everything an **App Admin** or **Channel Admin** can do, across all apps and channels.
+:::
+
+---
+
+## App roles
+
+Scoped to a single app. Use these when a team member should only work on one app, not the whole organization.
+
+| Role | Internal name | Description |
+|------|---------------|-------------|
+| **App Admin** | `app_admin` | Full control of one app — channels, devices, user roles for the app. Cannot delete or transfer the app (those are org-level operations). |
+| **App Developer** | `app_developer` | Upload bundles, manage devices, trigger native builds, update channel settings. No deletion, no app settings changes, no channel creation. |
+| **App Uploader** | `app_uploader` | Read access + upload new bundle versions. |
+| **App Reader** | `app_reader` | Read-only — stats, bundles, channels, logs, devices. |
+
+### App permission matrix
+
+| Permission | Description | App Admin | App Developer | App Uploader | App Reader |
+|------------|-------------|:---------:|:-------------:|:------------:|:----------:|
+| `app.read` | View app details, stats, and metadata | ✅ | ✅ | ✅ | ✅ |
+| `app.update_settings` | Edit app settings | ✅ | ❌ | ❌ | ❌ |
+| `app.read_bundles` | View the list of uploaded bundles | ✅ | ✅ | ✅ | ✅ |
+| `app.upload_bundle` | Upload a new bundle version | ✅ | ✅ | ✅ | ❌ |
+| `app.create_channel` | Create a new channel | ✅ | ❌ | ❌ | ❌ |
+| `app.read_channels` | View channels | ✅ | ✅ | ✅ | ✅ |
+| `app.read_logs` | View update delivery logs | ✅ | ✅ | ✅ | ✅ |
+| `app.manage_devices` | Assign, override, or unlink devices | ✅ | ✅ | ❌ | ❌ |
+| `app.read_devices` | View the device list | ✅ | ✅ | ✅ | ✅ |
+| `app.build_native` | Trigger a native cloud build | ✅ | ✅ | ❌ | ❌ |
+| `app.read_audit` | View app-level activity log | ✅ | ✅ | ✅ | ✅ |
+| `app.update_user_roles` | Manage app-scoped role assignments | ✅ | ❌ | ❌ | ❌ |
+| `bundle.delete` | Delete a bundle | ✅ | ❌ | ❌ | ❌ |
+
+:::note
+`app.delete` and `app.transfer` are **org-level operations** — only `org_super_admin` can perform them, regardless of app-level roles.
+:::
+
+---
+
+## Channel roles
+
+Scoped to a single channel. Useful for giving targeted access to a specific release channel.
+
+:::note
+Channel roles are currently available **via API and CLI only** — there is no UI to assign them in the dashboard. In the dashboard, use [channel permission overrides](/docs/webapp/organization-system/#overriding-channel-permissions) instead to fine-tune channel access per user.
+:::
+
+| Role | Internal name | Description |
+|------|---------------|-------------|
+| **Channel Admin** | `channel_admin` | Full control of one channel: settings, promote/rollback bundles, manage forced devices. |
+| **Channel Viewer** | `channel_reader` | Read-only — current bundle, history, forced devices, audit log. |
+
+### Channel permission matrix
+
+| Permission | Description | Channel Admin | Channel Viewer |
+|------------|-------------|:-------------:|:--------------:|
+| `channel.read` | View the channel and its current bundle | ✅ | ✅ |
+| `channel.update_settings` | Edit channel settings (platform toggles, update policy…) | ✅ | ❌ |
+| `channel.delete` | Delete the channel | ✅ | ❌ |
+| `channel.read_history` | View bundle assignment history | ✅ | ✅ |
+| `channel.promote_bundle` | Set the active bundle on the channel | ✅ | ❌ |
+| `channel.rollback_bundle` | Roll back to a previous bundle | ✅ | ❌ |
+| `channel.manage_forced_devices` | Force specific devices to this channel | ✅ | ❌ |
+| `channel.read_forced_devices` | View the list of forced devices | ✅ | ✅ |
+| `channel.read_audit` | View channel activity log | ✅ | ✅ |
+
+---
+
+## Bundle roles
+
+Scoped to a single bundle version. Rarely needed — most teams use app-level roles instead.
+
+:::note
+Bundle roles are currently available **via API and CLI only** — there is no UI to assign them in the dashboard.
+:::
+
+| Role | Internal name | Description |
+|------|---------------|-------------|
+| **Bundle Admin** | `bundle_admin` | Read, update metadata, and delete a specific bundle. |
+| **Bundle Viewer** | `bundle_reader` | Read-only access to a specific bundle. |
+
+---
+
+## Channel permission overrides (Dashboard)
+
+In the dashboard, channel access is determined by the user's app role by default. For more granular control, you can **override specific channel permissions** per user or group without changing their app role.
+
+Overrides are configured from the app's **Access** tab by clicking the channel permissions button (shield icon) next to a user. See [Organization — Overriding channel permissions](/docs/webapp/organization-system/#overriding-channel-permissions) for a visual walkthrough.
+
+### Overridable permissions
+
+| Permission | Description | Default behavior |
+|-----------|-------------|-----------------|
+| **Read** | View the channel and its current bundle | Inherited from app role |
+| **History** | View the bundle assignment history | Inherited from app role |
+| **Associate bundle** | Set or change the active bundle on the channel | Inherited from app role |
+
+Each permission can be set to:
+- **Default** — inherit from the app role (the default)
+- **Allow** — explicitly grant, regardless of the app role
+- **Deny** — explicitly block, regardless of the app role
+
+This lets you, for example, give an App Reader the ability to associate bundles on the `staging` channel without promoting them to App Developer.
+
+---
+
+## Role hierarchy
+
+Roles form a hierarchy. A parent role **inherits all permissions** of its children. This means an `org_admin` can do everything an `app_admin` can, which in turn can do everything a `channel_admin` can, and so on.
+
+```
+Super Admin (org_super_admin)
+  └── Admin (org_admin)
+        └── App Admin (app_admin)
+              ├── App Developer (app_developer)
+              │     └── App Uploader (app_uploader)
+              │           └── App Reader (app_reader)
+              ├── Bundle Admin (bundle_admin)
+              │     └── Bundle Viewer (bundle_reader)
+              └── Channel Admin (channel_admin)
+                    └── Channel Viewer (channel_reader)
+```
+
+**How it works in practice:**
+
+- An **Admin** at the org level can do everything an **App Admin** can, on every app in the org.
+- An **App Admin** on a specific app can do everything a **Channel Admin** can, on every channel in that app.
+- An **App Developer** can do everything an **App Uploader** can, plus more.
+
+The hierarchy only flows **downward** — a `channel_admin` never gains org-level permissions, even if they also hold an app-level role.
+
+---
+
+## Groups
+
+Instead of assigning roles to each user individually, you can create **groups** and assign roles to the group. Every member of the group inherits those roles automatically.
+
+### How groups work
+
+- A group belongs to **one organization** — it cannot span multiple orgs.
+- Groups can hold role bindings at **any scope**: org, app, channel, or bundle. For example, a group can be assigned the **App Developer** role on App A and the **Channel Admin** role on the `staging` channel of App B.
+- When a user's permissions are evaluated, all their group memberships are resolved transparently. If any of their groups grants the required permission, access is allowed.
+- A user can belong to **multiple groups**, and permissions from all groups are additive.
+- Group-based permissions only apply to **user principals** — API keys do not inherit group roles.
+
+### When to use groups
+
+| Scenario | Without groups | With groups |
+|----------|---------------|-------------|
+| 5 QA engineers need Developer access to 3 apps | 15 individual role bindings | 1 group + 3 role bindings |
+| Someone joins the QA team | Add 3 role bindings manually | Add them to the group |
+| Someone leaves the QA team | Remove 3 role bindings manually | Remove them from the group |
+
+### Managing groups via API
+
+All group endpoints require authentication and are served under `/private/groups`.
+
+#### List groups
+
+```bash
+curl -X GET "https://api.capgo.app/private/groups/<ORG_ID>" \
+  -H "authorization: <API_KEY>"
+```
+
+Requires `org.read_members` permission.
+
+#### Create a group
+
+```bash
+curl -X POST "https://api.capgo.app/private/groups/<ORG_ID>" \
+  -H "authorization: <API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "QA Team",
+    "description": "Quality assurance engineers"
+  }'
+```
+
+Requires `org.update_user_roles` permission (**Super Admin** or **Admin**).
+
+#### Update a group
+
+```bash
+curl -X PUT "https://api.capgo.app/private/groups/<GROUP_ID>" \
+  -H "authorization: <API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "QA Team",
+    "description": "Updated description"
+  }'
+```
+
+#### Delete a group
+
+```bash
+curl -X DELETE "https://api.capgo.app/private/groups/<GROUP_ID>" \
+  -H "authorization: <API_KEY>"
+```
+
+Deleting a group also removes all its role bindings. Members are not deleted from the organization.
+
+#### List group members
+
+```bash
+curl -X GET "https://api.capgo.app/private/groups/<GROUP_ID>/members" \
+  -H "authorization: <API_KEY>"
+```
+
+#### Add a member to a group
+
+```bash
+curl -X POST "https://api.capgo.app/private/groups/<GROUP_ID>/members" \
+  -H "authorization: <API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{ "user_id": "<USER_UUID>" }'
+```
+
+The user must already be a member of the organization. Adding an existing member is a no-op.
+
+#### Remove a member from a group
+
+```bash
+curl -X DELETE "https://api.capgo.app/private/groups/<GROUP_ID>/members/<USER_UUID>" \
+  -H "authorization: <API_KEY>"
+```
+
+:::note
+To assign a role to a group, use the role bindings API with `principal_type: "group"` and `principal_id` set to the group UUID.
+:::
+
+---
+
+## Assigning roles via API
+
+### List members
+
+```bash
+curl -X GET "https://api.capgo.app/organization/members" \
+  -H "authorization: <API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{ "orgId": "<ORG_ID>" }'
+```
+
+Response:
+
+```json
+[
+  {
+    "uid": "user-uuid",
+    "email": "alice@example.com",
+    "image_url": "https://...",
+    "role": "org_admin",
+    "is_tmp": false
+  }
+]
+```
+
+### Invite a member
+
+```bash
+curl -X POST "https://api.capgo.app/organization/members" \
+  -H "authorization: <API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "orgId": "<ORG_ID>",
+    "email": "bob@example.com",
+    "invite_type": "org_admin"
+  }'
+```
+
+**Accepted values for `invite_type`:**
+
+| Value | Role assigned |
+|-------|---------------|
+| `org_super_admin` | Super Admin |
+| `org_admin` | Admin |
+| `org_billing_admin` | Billing Manager |
+| `org_member` | Member |
+
+### Remove a member
+
+```bash
+curl -X DELETE "https://api.capgo.app/organization/members" \
+  -H "authorization: <API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "orgId": "<ORG_ID>",
+    "email": "bob@example.com"
+  }'
+```
+
+---
+
+## Assigning roles via CLI
+
+### List organizations
+
+```bash
+npx @capgo/cli organization list --apikey <API_KEY>
+```
+
+### List members
+
+```bash
+npx @capgo/cli organization members <ORG_ID> --apikey <API_KEY>
+```
+
+:::note
+The CLI currently supports listing members. To invite members or change roles programmatically, use the API endpoints above.
+:::
+
+---
+
+## Custom roles
+
+The built-in roles cover most team structures. Custom role creation is on our roadmap — if this is something your team needs, [reach out to us](https://capgo.app/support). Your use case will directly help us prioritize this feature.
