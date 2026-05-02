@@ -57,7 +57,9 @@ jobs:
           }
 
           ensure_queue capgo-translation-refresh
+          ensure_queue capgo-translation-priority-refresh
           ensure_queue capgo-translation-refresh-development
+          ensure_queue capgo-translation-priority-refresh-development
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

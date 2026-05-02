@@ -27,8 +27,20 @@
         "binding": "TRANSLATION_QUEUE",
         "queue": "capgo-translation-refresh",
       },
+      {
+        "binding": "TRANSLATION_PRIORITY_QUEUE",
+        "queue": "capgo-translation-priority-refresh",
+      },
     ],
     "consumers": [
+      {
+        "queue": "capgo-translation-priority-refresh",
+        "max_batch_size": 1,
+        "max_batch_timeout": 1,
+        "max_retries": 3,
+        "retry_delay": 15,
+        "max_concurrency": 4,
+      },
       {
         "queue": "capgo-translation-refresh",
         "max_batch_size": 1,
@@ -94,8 +106,20 @@
             "binding": "TRANSLATION_QUEUE",
             "queue": "capgo-translation-refresh-development",
           },
+          {
+            "binding": "TRANSLATION_PRIORITY_QUEUE",
+            "queue": "capgo-translation-priority-refresh-development",
+          },
         ],
         "consumers": [
+          {
+            "queue": "capgo-translation-priority-refresh-development",
+            "max_batch_size": 1,
+            "max_batch_timeout": 1,
+            "max_retries": 3,
+            "retry_delay": 15,
+            "max_concurrency": 4,
+          },
           {
             "queue": "capgo-translation-refresh-development",
             "max_batch_size": 1,
