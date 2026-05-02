@@ -23,6 +23,7 @@ type TranslationJob = {
   cacheVersion: string
   reason: TranslationQueueReason
   sourceHash?: string
+  priority?: boolean
 }
 
 type QueueBinding<T> = {
@@ -61,6 +62,7 @@ interface Env {
   WEB: WorkerService
   DOCS: WorkerService
   TRANSLATION_QUEUE: QueueBinding<TranslationJob>
+  TRANSLATION_PRIORITY_QUEUE?: QueueBinding<TranslationJob>
   TRANSLATION_STORE: R2BucketBinding
   TRANSLATION_MODEL?: string
   TRANSLATION_TEST_MODE?: string
@@ -116,7 +118,7 @@ const DEFAULT_MODEL = '@cf/meta/llama-3.1-8b-instruct-fast'
 const FRESH_MS = 24 * 60 * 60 * 1000
 const CACHE_KEEP_SECONDS = 7 * 24 * 60 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
-const TRANSLATION_CACHE_VERSION = '2026-05-02-llama-3.1-8b-json-body-v3'
+const TRANSLATION_CACHE_VERSION = '2026-05-02-llama-3.1-8b-json-body-v4'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
 const MAX_HTML_BYTES = 1_500_000
 const MAX_BATCH_CHARS = 1_500
@@ -395,21 +397,39 @@ function pendingKeyFor(requestUrl: URL, locale: Locale): Request {
   return new Request(pendingUrl.toString(), { method: 'GET' })
 }
 
-async function putTranslationPendingMarker(requestUrl: URL, locale: Locale, reason: TranslationQueueReason): Promise<void> {
+function requestCfMetadata(request: Request): { verifiedBotCategory?: string } | undefined {
+  return (request as Request & { cf?: { verifiedBotCategory?: string } }).cf
+}
+
+function isCrawlerRequest(request: Request): boolean {
+  if (requestCfMetadata(request)?.verifiedBotCategory) return true
+
+  const userAgent = request.headers.get('user-agent') || ''
+  return /\b(?:bot|crawler|spider|crawl|slurp|bingpreview|facebookexternalhit|whatsapp|telegrambot|linkedinbot|pinterest|petalbot|ahrefsbot|semrushbot|bytespider|gptbot|claudebot|perplexitybot)\b/i.test(
+    userAgent,
+  )
+}
+
+function shouldUsePriorityTranslationQueue(request: Request): boolean {
+  return !isCrawlerRequest(request)
+}
+
+async function putTranslationPendingMarker(requestUrl: URL, locale: Locale, reason: TranslationQueueReason, priority: boolean): Promise<void> {
   await caches.default.put(
     pendingKeyFor(requestUrl, locale),
     new Response(reason, {
       headers: {
         'Cache-Control': `public, max-age=${TRANSLATION_PENDING_SECONDS}`,
         'X-Capgo-Translation-Pending': reason,
+        'X-Capgo-Translation-Priority': priority ? '1' : '0',
       },
     }),
   )
 }
 
-async function putTranslationPendingMarkerSafely(requestUrl: URL, locale: Locale, reason: TranslationQueueReason): Promise<void> {
+async function putTranslationPendingMarkerSafely(requestUrl: URL, locale: Locale, reason: TranslationQueueReason, priority: boolean): Promise<void> {
   try {
-    await putTranslationPendingMarker(requestUrl, locale, reason)
+    await putTranslationPendingMarker(requestUrl, locale, reason, priority)
   } catch (error) {
     console.error('Failed to refresh translated page pending marker', { pathname: requestUrl.pathname, locale, reason, error: errorMessage(error) })
   }
@@ -1084,7 +1104,11 @@ function protectedTokenAt(value: string, index: number): string | null {
   return null
 }
 
-function protectTranslationTokens(value: string): { text: string; restore(translated: string): string } {
+function protectTranslationTokens(value: string): {
+  text: string
+  restore(translated: string): string
+  restoreOrSource(translated: string): { text: string; missingTokens: string[] }
+} {
   let text = ''
   const replacements: [string, string][] = []
 
@@ -1111,6 +1135,18 @@ function protectTranslationTokens(value: string): { text: string; restore(transl
         restored = restored.split(placeholder).join(token)
       }
       return restored
+    },
+    restoreOrSource(translated: string): { text: string; missingTokens: string[] } {
+      let restored = translated
+      const missingTokens: string[] = []
+      for (const [placeholder, token] of replacements) {
+        if (!restored.includes(placeholder)) {
+          missingTokens.push(token)
+          continue
+        }
+        restored = restored.split(placeholder).join(token)
+      }
+      return missingTokens.length > 0 ? { text: value, missingTokens } : { text: restored, missingTokens }
     },
   }
 }
@@ -1178,7 +1214,19 @@ async function translateBatchWithJsonMode(env: Env, targetLanguage: string, batc
       } else if (translated.length !== batch.length) {
         lastError = new Error(`Translation model returned ${translated.length} strings for ${batch.length} ${targetLanguage} strings`)
       } else {
-        const restored = translated.map((text, index) => protectedBatch[index].restore(text))
+        const restored = translated.map((text, index) => {
+          const result = protectedBatch[index].restoreOrSource(text)
+          if (result.missingTokens.length > 0) {
+            console.warn('Translation kept source after protected token drop', {
+              targetLanguage,
+              index,
+              missingTokens: result.missingTokens,
+              sourcePreview: aiPayloadPreview(batch[index]),
+              outputPreview: aiPayloadPreview(text),
+            })
+          }
+          return result.text
+        })
         assertTranslatedBatch(targetLanguage, batch, restored)
         return restored
       }
@@ -1760,7 +1808,20 @@ function createTranslatedHtmlResponse(originResponse: Response, translatedHtml: 
   })
 }
 
-async function refreshCacheIncrementally(request: Request, env: Env, requestUrl: URL, locale: Locale, cacheKey: Request, expectedSourceHash?: string): Promise<boolean> {
+async function sendTranslationJob(env: Env, job: TranslationJob): Promise<void> {
+  const queue = job.priority && env.TRANSLATION_PRIORITY_QUEUE ? env.TRANSLATION_PRIORITY_QUEUE : env.TRANSLATION_QUEUE
+  await queue.send(job)
+}
+
+async function refreshCacheIncrementally(
+  request: Request,
+  env: Env,
+  requestUrl: URL,
+  locale: Locale,
+  cacheKey: Request,
+  expectedSourceHash?: string,
+  priority = false,
+): Promise<boolean> {
   const renderRequest = request.method === 'GET' ? request : new Request(request, { method: 'GET' })
   const source = await loadSourceHtml(renderRequest, env, requestUrl, locale)
   if (source.type === 'response') {
@@ -1821,13 +1882,14 @@ async function refreshCacheIncrementally(request: Request, env: Env, requestUrl:
       translatedBatches,
       updatedAt: Date.now(),
     })
-    await putTranslationPendingMarkerSafely(requestUrl, locale, 'continue')
-    await env.TRANSLATION_QUEUE.send({
+    await putTranslationPendingMarkerSafely(requestUrl, locale, 'continue', priority)
+    await sendTranslationJob(env, {
       url: requestUrl.toString(),
       locale,
       cacheVersion: TRANSLATION_CACHE_VERSION,
       reason: 'continue',
       sourceHash,
+      priority,
     })
     console.log('Translation queue job continued', { pathname: requestUrl.pathname, locale, batchIndex, batchCount: batches.length })
     return false
@@ -1849,25 +1911,30 @@ async function refreshCacheIncrementally(request: Request, env: Env, requestUrl:
   return true
 }
 
-async function enqueueTranslation(env: Env, requestUrl: URL, locale: Locale, reason: TranslationQueueReason): Promise<void> {
+async function enqueueTranslation(env: Env, requestUrl: URL, locale: Locale, reason: TranslationQueueReason, priority: boolean): Promise<void> {
   const pendingKey = pendingKeyFor(requestUrl, locale)
   let markedPending = false
 
   try {
-    if (await caches.default.match(pendingKey)) return
+    const pending = await caches.default.match(pendingKey)
+    if (pending) {
+      const alreadyPriority = pending.headers.get('X-Capgo-Translation-Priority') === '1'
+      if (alreadyPriority || !priority) return
+    }
 
-    await putTranslationPendingMarker(requestUrl, locale, reason)
+    await putTranslationPendingMarker(requestUrl, locale, reason, priority)
     markedPending = true
   } catch (error) {
     console.error('Failed to mark translated page as pending', { pathname: requestUrl.pathname, locale, reason, error: errorMessage(error) })
   }
 
   try {
-    await env.TRANSLATION_QUEUE.send({
+    await sendTranslationJob(env, {
       url: requestUrl.toString(),
       locale,
       cacheVersion: TRANSLATION_CACHE_VERSION,
       reason,
+      priority,
     })
   } catch (error) {
     if (markedPending) {
@@ -1881,9 +1948,9 @@ async function enqueueTranslation(env: Env, requestUrl: URL, locale: Locale, rea
   }
 }
 
-async function enqueueTranslationSafely(env: Env, requestUrl: URL, locale: Locale, reason: TranslationQueueReason): Promise<void> {
+async function enqueueTranslationSafely(env: Env, requestUrl: URL, locale: Locale, reason: TranslationQueueReason, priority: boolean): Promise<void> {
   try {
-    await enqueueTranslation(env, requestUrl, locale, reason)
+    await enqueueTranslation(env, requestUrl, locale, reason, priority)
   } catch (error) {
     console.error('Failed to enqueue translated page', { pathname: requestUrl.pathname, locale, reason, error: errorMessage(error) })
   }
@@ -1927,7 +1994,7 @@ async function processTranslationJob(job: TranslationJob, env: Env): Promise<voi
         'Accept-Language': job.locale,
       },
     })
-    completed = await refreshCacheIncrementally(renderRequest, env, requestUrl, job.locale, cacheKey, job.sourceHash)
+    completed = await refreshCacheIncrementally(renderRequest, env, requestUrl, job.locale, cacheKey, job.sourceHash, job.priority === true)
   } finally {
     if (completed) {
       try {
@@ -1943,12 +2010,13 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
   const cacheKey = cacheKeyFor(requestUrl, locale)
   const cachedResponse = await caches.default.match(cacheKey)
   const isHead = request.method === 'HEAD'
+  const priority = shouldUsePriorityTranslationQueue(request)
 
   if (cachedResponse) {
     const translatedAt = readTranslatedAt(cachedResponse)
     const isStale = Date.now() - translatedAt > FRESH_MS
     if (isStale) {
-      await enqueueTranslationSafely(env, requestUrl, locale, 'stale')
+      await enqueueTranslationSafely(env, requestUrl, locale, 'stale', priority)
     }
     return withResponseHeaders(cachedResponse, isStale ? 'STALE' : 'HIT', isHead)
   }
@@ -1959,7 +2027,7 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
     const isStale = Date.now() - translatedAt > FRESH_MS
     await repopulateTranslatedPageCacheSafely(cacheKey, storedResponse.clone(), requestUrl, locale)
     if (isStale) {
-      await enqueueTranslationSafely(env, requestUrl, locale, 'stale')
+      await enqueueTranslationSafely(env, requestUrl, locale, 'stale', priority)
     }
     return withResponseHeaders(storedResponse, isStale ? 'STALE' : 'HIT', isHead)
   }
@@ -1968,7 +2036,7 @@ async function serveTranslated(request: Request, env: Env, requestUrl: URL, loca
     return temporaryEnglishRedirectResponse(requestUrl, isHead)
   }
 
-  await enqueueTranslationSafely(env, requestUrl, locale, 'miss')
+  await enqueueTranslationSafely(env, requestUrl, locale, 'miss', priority)
   return temporaryEnglishRedirectResponse(requestUrl, isHead)
 }
 
@@ -2254,6 +2322,7 @@ export default {
           pathname: logPathnameFromUrl(message.body.url),
           locale: message.body.locale,
           reason: message.body.reason,
+          priority: message.body.priority === true,
           cacheVersion: message.body.cacheVersion,
           attempts: message.attempts,
           retryDelaySeconds: TRANSLATION_QUEUE_RETRY_DELAY_SECONDS,
