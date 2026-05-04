@@ -30,6 +30,25 @@ type QueueBinding<T> = {
   send(message: T): Promise<void>
 }
 
+type DurableObjectStorageBinding = {
+  get<T = unknown>(key: string): Promise<T | undefined>
+  put(key: string, value: unknown): Promise<void>
+  delete(key: string): Promise<boolean>
+}
+
+type DurableObjectStateBinding = {
+  storage: DurableObjectStorageBinding
+}
+
+type DurableObjectStubBinding = {
+  fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>
+}
+
+type DurableObjectNamespaceBinding = {
+  idFromName(name: string): unknown
+  get(id: unknown): DurableObjectStubBinding
+}
+
 type QueueRetryOptions = {
   delaySeconds?: number
 }
@@ -63,6 +82,7 @@ interface Env {
   DOCS: WorkerService
   TRANSLATION_QUEUE: QueueBinding<TranslationJob>
   TRANSLATION_PRIORITY_QUEUE?: QueueBinding<TranslationJob>
+  TRANSLATION_COORDINATOR?: DurableObjectNamespaceBinding
   TRANSLATION_STORE: R2BucketBinding
   TRANSLATION_MODEL?: string
   TRANSLATION_TEST_MODE?: string
@@ -111,6 +131,13 @@ type AttributeMatch = {
   valueEnd: number
   end: number
 }
+type TranslationCoordinatorRecord = {
+  cacheVersion: string
+  locale: Locale
+  url: string
+  priority: boolean
+  pendingUntil: number
+}
 
 const DEFAULT_LOCALE = 'en'
 const ALL_LOCALES = [DEFAULT_LOCALE, ...SUPPORTED_LOCALES] as const
@@ -118,6 +145,7 @@ const DEFAULT_MODEL = '@cf/meta/llama-3.1-8b-instruct-fast'
 const FRESH_MS = 24 * 60 * 60 * 1000
 const CACHE_KEEP_SECONDS = 7 * 24 * 60 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
+const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
 const TRANSLATION_CACHE_VERSION = '2026-05-02-llama-3.1-8b-json-body-v4'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
 const MAX_HTML_BYTES = 1_500_000
@@ -1813,6 +1841,41 @@ async function sendTranslationJob(env: Env, job: TranslationJob): Promise<void> 
   await queue.send(job)
 }
 
+async function translationCoordinatorName(requestUrl: URL, locale: Locale): Promise<string> {
+  return await sha256Hex(`${TRANSLATION_CACHE_VERSION}:${locale}:${canonicalTranslationStoreUrl(requestUrl, locale)}`)
+}
+
+async function coordinateTranslationJob(env: Env, requestUrl: URL, locale: Locale, job: TranslationJob): Promise<boolean> {
+  if (!env.TRANSLATION_COORDINATOR) {
+    await sendTranslationJob(env, job)
+    return true
+  }
+
+  const id = env.TRANSLATION_COORDINATOR.idFromName(await translationCoordinatorName(requestUrl, locale))
+  const response = await env.TRANSLATION_COORDINATOR.get(id).fetch('https://translation-coordinator/enqueue', {
+    method: 'POST',
+    body: JSON.stringify(job),
+  })
+  if (!response.ok) throw new Error(`Translation coordinator failed to enqueue: ${response.status} ${await response.text()}`)
+
+  const payload = (await response.json()) as { queued?: unknown }
+  return payload.queued === true
+}
+
+async function clearTranslationCoordinatorSafely(env: Env, requestUrl: URL, locale: Locale, job: TranslationJob): Promise<void> {
+  if (!env.TRANSLATION_COORDINATOR) return
+
+  try {
+    const id = env.TRANSLATION_COORDINATOR.idFromName(await translationCoordinatorName(requestUrl, locale))
+    await env.TRANSLATION_COORDINATOR.get(id).fetch('https://translation-coordinator/complete', {
+      method: 'POST',
+      body: JSON.stringify(job),
+    })
+  } catch (error) {
+    console.error('Failed to clear translation coordinator', { pathname: requestUrl.pathname, locale, error: errorMessage(error) })
+  }
+}
+
 async function refreshCacheIncrementally(
   request: Request,
   env: Env,
@@ -1913,7 +1976,6 @@ async function refreshCacheIncrementally(
 
 async function enqueueTranslation(env: Env, requestUrl: URL, locale: Locale, reason: TranslationQueueReason, priority: boolean): Promise<void> {
   const pendingKey = pendingKeyFor(requestUrl, locale)
-  let markedPending = false
 
   try {
     const pending = await caches.default.match(pendingKey)
@@ -1921,31 +1983,18 @@ async function enqueueTranslation(env: Env, requestUrl: URL, locale: Locale, rea
       const alreadyPriority = pending.headers.get('X-Capgo-Translation-Priority') === '1'
       if (alreadyPriority || !priority) return
     }
-
-    await putTranslationPendingMarker(requestUrl, locale, reason, priority)
-    markedPending = true
   } catch (error) {
     console.error('Failed to mark translated page as pending', { pathname: requestUrl.pathname, locale, reason, error: errorMessage(error) })
   }
 
-  try {
-    await sendTranslationJob(env, {
-      url: requestUrl.toString(),
-      locale,
-      cacheVersion: TRANSLATION_CACHE_VERSION,
-      reason,
-      priority,
-    })
-  } catch (error) {
-    if (markedPending) {
-      try {
-        await caches.default.delete(pendingKey)
-      } catch (deleteError) {
-        console.error('Failed to clear translated page pending marker after enqueue failure', { pathname: requestUrl.pathname, locale, reason, error: errorMessage(deleteError) })
-      }
-    }
-    throw error
-  }
+  await coordinateTranslationJob(env, requestUrl, locale, {
+    url: requestUrl.toString(),
+    locale,
+    cacheVersion: TRANSLATION_CACHE_VERSION,
+    reason,
+    priority,
+  })
+  await putTranslationPendingMarkerSafely(requestUrl, locale, reason, priority)
 }
 
 async function enqueueTranslationSafely(env: Env, requestUrl: URL, locale: Locale, reason: TranslationQueueReason, priority: boolean): Promise<void> {
@@ -2002,6 +2051,7 @@ async function processTranslationJob(job: TranslationJob, env: Env): Promise<voi
       } catch (error) {
         console.error('Failed to clear translated page pending marker', { pathname: requestUrl.pathname, locale: job.locale, error: errorMessage(error) })
       }
+      await clearTranslationCoordinatorSafely(env, requestUrl, job.locale, job)
     }
   }
 }
@@ -2275,6 +2325,72 @@ async function handleTranslationTestRequest(request: Request, env: Env, requestU
     })
   } catch (error) {
     return jsonResponse({ ok: false, error: errorMessage(error) }, 500)
+  }
+}
+
+function translationJobFromUnknown(value: unknown): TranslationJob | null {
+  const record = recordOf(value)
+  if (!record) return null
+  if (typeof record.url !== 'string') return null
+  if (typeof record.cacheVersion !== 'string') return null
+  if (record.reason !== 'miss' && record.reason !== 'stale' && record.reason !== 'continue') return null
+  if (typeof record.locale !== 'string' || !isSupportedLocale(record.locale)) return null
+  if (record.sourceHash !== undefined && typeof record.sourceHash !== 'string') return null
+
+  return {
+    url: record.url,
+    locale: record.locale,
+    cacheVersion: record.cacheVersion,
+    reason: record.reason,
+    sourceHash: record.sourceHash,
+    priority: record.priority === true,
+  }
+}
+
+function matchesCoordinatorRecord(record: TranslationCoordinatorRecord | undefined, job: TranslationJob): boolean {
+  return record?.cacheVersion === job.cacheVersion && record.locale === job.locale && record.url === job.url
+}
+
+export class TranslationCoordinator {
+  private readonly state: DurableObjectStateBinding
+  private readonly env: Env
+
+  constructor(state: DurableObjectStateBinding, env: Env) {
+    this.state = state
+    this.env = env
+  }
+
+  async fetch(request: Request): Promise<Response> {
+    if (request.method !== 'POST') return jsonResponse({ ok: false, error: 'Method not allowed' }, 405)
+
+    const requestUrl = new URL(request.url)
+    const job = translationJobFromUnknown(await request.json().catch(() => null))
+    if (!job) return jsonResponse({ ok: false, error: 'Invalid translation job' }, 400)
+
+    if (requestUrl.pathname === '/complete') {
+      const record = await this.state.storage.get<TranslationCoordinatorRecord>('pending')
+      if (matchesCoordinatorRecord(record, job)) await this.state.storage.delete('pending')
+      return jsonResponse({ ok: true, cleared: true })
+    }
+
+    if (requestUrl.pathname !== '/enqueue') return jsonResponse({ ok: false, error: 'Not found' }, 404)
+
+    const now = Date.now()
+    const record = await this.state.storage.get<TranslationCoordinatorRecord>('pending')
+    if (record && matchesCoordinatorRecord(record, job) && record.pendingUntil > now && (record.priority || !job.priority)) {
+      return jsonResponse({ ok: true, queued: false, pendingUntil: record.pendingUntil, priority: record.priority })
+    }
+
+    await sendTranslationJob(this.env, job)
+    const nextRecord: TranslationCoordinatorRecord = {
+      cacheVersion: job.cacheVersion,
+      locale: job.locale,
+      url: job.url,
+      priority: job.priority === true,
+      pendingUntil: now + TRANSLATION_COORDINATOR_PENDING_MS,
+    }
+    await this.state.storage.put('pending', nextRecord)
+    return jsonResponse({ ok: true, queued: true, pendingUntil: nextRecord.pendingUntil, priority: nextRecord.priority })
   }
 }
 
