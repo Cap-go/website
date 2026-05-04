@@ -146,7 +146,7 @@ const FRESH_MS = 24 * 60 * 60 * 1000
 const CACHE_KEEP_SECONDS = 7 * 24 * 60 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-05-02-llama-3.1-8b-json-body-v4'
+const TRANSLATION_CACHE_VERSION = '2026-05-04-llama-3.1-8b-json-body-v5'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
 const MAX_HTML_BYTES = 1_500_000
 const MAX_BATCH_CHARS = 1_500

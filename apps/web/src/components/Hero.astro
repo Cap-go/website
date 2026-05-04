@@ -183,8 +183,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
         <h1 class="font-pj text-4xl leading-tight font-bold tracking-tight sm:text-5xl sm:leading-tight lg:text-6xl lg:leading-tight xl:text-7xl">
           {m.instant_updates_for_your({}, { locale: Astro.locals.locale })}
           <br />
-          <span class="hero-capacitor-target text-azure-500" aria-hidden="true"></span>
-          <span class="sr-only">CapacitorJS app</span>
+          <span class="text-azure-500">CapacitorJS app</span>
         </h1>
         <p class="font-inter mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-400 sm:text-xl">
           {m.hero_subtitle_part1({}, { locale: Astro.locals.locale })}
@@ -357,9 +356,3 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
     </div>
   </div>
 </section>
-
-<style>
-  .hero-capacitor-target::before {
-    content: '<CapacitorJS app/>';
-  }
-</style>
