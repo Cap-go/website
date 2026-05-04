@@ -100,7 +100,7 @@
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-organize-imports": "^4.3.0",
-    "prettier-plugin-tailwindcss": "^0.7.4",
+    "prettier-plugin-tailwindcss": "^0.8.0",
     "seobot": "^1.4.0",
     "typescript": "^6.0.3",
     "vite-plugin-static-copy": "^4.1.0",
