@@ -236,8 +236,13 @@ base64 -i BUILD_PROVISION_PROFILE.mobileprovision | pbcopy
 Fastlane is a Ruby library created to automate common mobile development tasks. Using Fastlane, you can configure custom "lanes" which bundle a series of "actions" that perform tasks that you'd normally perform using Android studio. You can do a lot with Fastlane, but for the purposes of this tutorial, we'll be using only a handful of core actions.
 
 
-Create a Fastlane folder at the root of your project and copy the following files:
-`Fastfile`
+Create the Fastlane folder at the root of your Capacitor/Ionic project and add the Fastfile there:
+
+- Folder: `<project-root>/fastlane/`
+- File: `<project-root>/fastlane/Fastfile`
+
+This is the same level as `package.json`, `capacitor.config.*`, and the `ios/` folder. Do not create it inside `ios/App/`.
+
 ```ruby
 platform :ios do
   desc 'Export ipa and submit to TestFlight'
@@ -381,8 +386,9 @@ end
 ```
 
 ## 5. Setting up secrets
-Locally, fastlane will use the `.env` file for the secrets.
-Here is an example of the `.env` file:
+GitHub Actions uses the repository secrets you configure in the next step. You only need a local `.env` file if you want to run or test Fastlane from your own machine.
+
+For local testing, create `<project-root>/fastlane/.env` next to the `Fastfile`. Do not commit this file. Here is an example:
 
 ```shell
 APP_STORE_CONNECT_TEAM_ID=UVTJ336J2D
