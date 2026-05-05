@@ -53,11 +53,13 @@ jobs:
             if [ "$status" -eq 0 ]; then
               return 0
             fi
-            printf '%s\n' "$output" | grep -Eiq "already exists|already.*${queue}"
+            printf '%s\n' "$output" | grep -Eiq "already exists|already taken|already.*${queue}"
           }
 
           ensure_queue capgo-translation-refresh
+          ensure_queue capgo-translation-priority-refresh
           ensure_queue capgo-translation-refresh-development
+          ensure_queue capgo-translation-priority-refresh-development
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

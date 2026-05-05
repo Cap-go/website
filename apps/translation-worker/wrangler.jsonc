@@ -9,6 +9,20 @@
   "limits": {
     "cpu_ms": 300000,
   },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "TRANSLATION_COORDINATOR",
+        "class_name": "TranslationCoordinator",
+      },
+    ],
+  },
+  "migrations": [
+    {
+      "tag": "v1_translation_coordinator",
+      "new_classes": ["TranslationCoordinator"],
+    },
+  ],
   "ai": {
     "binding": "AI",
   },
@@ -27,8 +41,20 @@
         "binding": "TRANSLATION_QUEUE",
         "queue": "capgo-translation-refresh",
       },
+      {
+        "binding": "TRANSLATION_PRIORITY_QUEUE",
+        "queue": "capgo-translation-priority-refresh",
+      },
     ],
     "consumers": [
+      {
+        "queue": "capgo-translation-priority-refresh",
+        "max_batch_size": 1,
+        "max_batch_timeout": 1,
+        "max_retries": 3,
+        "retry_delay": 15,
+        "max_concurrency": 4,
+      },
       {
         "queue": "capgo-translation-refresh",
         "max_batch_size": 1,
@@ -76,6 +102,14 @@
       "limits": {
         "cpu_ms": 300000,
       },
+      "durable_objects": {
+        "bindings": [
+          {
+            "name": "TRANSLATION_COORDINATOR",
+            "class_name": "TranslationCoordinator",
+          },
+        ],
+      },
       "ai": {
         "binding": "AI",
       },
@@ -94,8 +128,20 @@
             "binding": "TRANSLATION_QUEUE",
             "queue": "capgo-translation-refresh-development",
           },
+          {
+            "binding": "TRANSLATION_PRIORITY_QUEUE",
+            "queue": "capgo-translation-priority-refresh-development",
+          },
         ],
         "consumers": [
+          {
+            "queue": "capgo-translation-priority-refresh-development",
+            "max_batch_size": 1,
+            "max_batch_timeout": 1,
+            "max_retries": 3,
+            "retry_delay": 15,
+            "max_concurrency": 4,
+          },
           {
             "queue": "capgo-translation-refresh-development",
             "max_batch_size": 1,

@@ -1291,9 +1291,9 @@ const messages = {
     'Content or other computer technology that may damage, interfere with, surreptitiously intercept, or expropriate any system, program, or data, including viruses, Trojan horses, worms, time bombs, or cancelbots.',
   help_customers_with_app_issues: 'Help customers with app issues efficiently',
   here: 'here.',
-  hero_subtitle_line2: 'Fewer support tickets while your native app stays store-compliant.',
-  hero_subtitle_part1: 'Push JavaScript and asset changes the moment they are ready. ',
-  hero_subtitle_part2: 'Capgo downloads them in the background and applies them on launch.',
+  hero_subtitle_line2: 'Capgo downloads them in the background and applies them on launch.',
+  hero_subtitle_part1: 'Ship JavaScript and asset fixes in minutes.',
+  hero_subtitle_part2: '',
   high_enterprise_response: '2 business hours<br />Monday - Friday',
   high_priority_response: '2 hours<br />24/7 × 365',
   high_support_desc:
@@ -1374,7 +1374,7 @@ const messages = {
   instant_updates_for_capacitor_apps: 'Live updates for Capacitor apps',
   instant_updates_for_capacitor_apps_description:
     'When a web-layer bug is live, ship the fix through Capgo instead of waiting days for app store approval. Users get the update in the background while native changes stay in the normal review path.',
-  instant_updates_for_your: 'Ship fixes before app store review ends for your',
+  instant_updates_for_your: 'Ship live updates to your',
   instant_version_switching: 'Instant version switching',
   integrate_identity_provider_mfa: 'Integrate with your identity provider and enforce multi-factor authentication across your organization.',
   integration_and_api: 'Integration & API',

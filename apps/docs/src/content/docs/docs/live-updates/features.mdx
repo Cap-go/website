@@ -330,13 +330,14 @@ Require all bundles to be encrypted at the organization level.
 Granular permissions for organization and app-level access control.
 
 **Organization roles:**
-- `super_admin` - Full access
-- `admin` - Admin access
-- `read` - Read-only access
-- `upload` - Upload-only access
+- `org_super_admin` - Full organization control
+- `org_admin` - Organization administration (no billing/deletion)
+- `org_billing_admin` - Billing-only access
+- `org_member` - Read-only organization access
 
 **App roles:**
-- `app_developer` - Full app access
+- `app_admin` - Full control of one app
+- `app_developer` - Upload bundles, manage devices
 - `app_uploader` - Upload bundles only
 - `app_reader` - Read-only access
 
@@ -344,7 +345,7 @@ Granular permissions for organization and app-level access control.
 - Web Dashboard → Organization → Members
 - Web Dashboard → App → Access
 
-[Learn more about RBAC →](/docs/webapp/organization-system/#roles-and-permissions)
+[Learn more about RBAC →](/docs/webapp/organization-system/#roles-overview)
 
 ---
 

@@ -1,80 +1,99 @@
 ---
-title: "Api keys"
-description: "How to manage api keys for Capgo cloud, learn what they use for, how to create, edit or roll them to ensure security with your account"
+title: "API Keys"
+description: "How to manage API keys with RBAC role-based permissions in Capgo. Create, edit, regenerate, and delete API keys with fine-grained access control per organization and app."
 sidebar:
-  order: 3
+  order: 5
 ---
 
+API keys are managed at the organization level with role-based access control (RBAC). Each key can be assigned an organization-wide role and optional per-app roles, giving you fine-grained control over what each key can access.
 
-## What can I do with the api keys?
+## Where are API keys managed?
 
-An API key can be regenerated, or removed or a new one can be added. You can also set expiration dates and create encrypted keys for enhanced security.
+Navigate to **Settings > Organization > API Keys** at [console.capgo.app/settings/organization/api-keys](https://console.capgo.app/settings/organization/api-keys).
 
-## How to see all api keys?
+The page displays two sections:
 
-You need to go to [API keys page](https://console.capgo.app/dashboard/apikeys/) and there you will see all your api keys.
+- **RBAC Keys** — Keys with assigned roles (recommended). These keys use the new role-based permission system.
+- **Legacy Keys** — Older keys that use the simple mode-based system (`read`, `upload`, `write`, `all`) without role assignments.
 
-## How to add a new api key?
+{/* [SCREENSHOT: apikeys-org-list.webp] — The API keys list page showing the RBAC keys table and Legacy keys table */}
+<figure><img src="/apikeys-org-list.webp" alt="API keys list page showing RBAC and Legacy sections" /><figcaption></figcaption></figure>
 
-To add a new API key click on the little plus button
+## How to create a new API key?
 
-<figure><img src="/apikeys-add.webp" alt="add apikey" /><figcaption></figcaption></figure>
+1. Click the **"+"** button at the top of the RBAC keys table.
 
-and then select the permissions you want to give to the new API key. You can select:
+2. Fill in the **Key information**:
+   - **Name** (required) — A descriptive label for the key (e.g. "CI/CD Deploy", "Monitoring Read-Only").
+   - **Create secure key** (optional) — When checked, the key will be hashed server-side. The plain-text key is shown **only once** after creation. You will not be able to retrieve it later.
+   - **Set expiration date** (optional) — Pick a date after which the key will stop working. Some organizations enforce mandatory expiration via policy.
 
- - Read - the API key will be able to read all the data
- - Upload - the API key will be able to upload new versions from the CLI and read
- - All - The API key will be able to do everything
+{/* [SCREENSHOT: apikeys-create-form.webp] — The creation form showing Name field, "Create secure key" checkbox, and expiration date picker */}
+<figure><img src="/apikeys-create-form.webp" alt="API key creation form with name, secure key option, and expiration" /><figcaption></figcaption></figure>
 
-<figure><img src="/apikeys-select-perm.webp" alt="select perm" /><figcaption></figcaption></figure>
+3. Select an **Organization role** — This defines the key's baseline permissions across the entire organization. Available roles (depending on your own role level):
+   - **None** — No org-wide access; the key only has access to individually assigned apps.
+   - **Member** — Basic read access to the organization.
+   - **Admin** — Full administrative access to the organization (inherits access to all apps).
 
-## Encrypted API Keys
+4. If the selected org role is not Admin, you can add **per-app access**:
+   - Click **"+ Add App"** to open the app picker.
+   - Select one or more apps, then assign a role to each:
+     - **App Reader** — Read-only access to the app.
+     - **App Uploader** — Can upload new bundles.
+     - **App Developer** — Can manage the app configuration and deployments.
+     - **App Admin** — Full access to the app.
 
-When creating a new API key, you can choose to create an **encrypted key**. Encrypted keys provide enhanced security:
+{/* [SCREENSHOT: apikeys-rbac-roles.webp] — The role selection section showing org role radio buttons and the per-app role assignment table */}
+<figure><img src="/apikeys-rbac-roles.webp" alt="RBAC role selection with org-level and per-app roles" /><figcaption></figcaption></figure>
 
-- The key is hashed using SHA-256 before being stored in the database
-- **The plain key is only shown once** when you create it - make sure to copy and save it immediately
-- After creation, the key cannot be retrieved or viewed again
-- If you lose an encrypted key, you must create a new one
+5. Click **"Create"**.
 
-This is the recommended approach for production environments as it ensures that even if the database is compromised, your actual API keys remain secure.
+6. If you checked "Create secure key", a modal will display the plain-text key. **Copy it immediately** — it cannot be retrieved after closing the modal.
 
-## API Key Expiration
+{/* [SCREENSHOT: apikeys-secret-modal.webp] — The one-time secret modal showing the plain-text key with a copy button */}
+<figure><img src="/apikeys-secret-modal.webp" alt="One-time API key secret modal with copy button" /><figcaption></figcaption></figure>
 
-You can set an **expiration date** for your API keys. This is a security best practice that limits the window of exposure if a key is compromised.
+## How to manage (edit) an API key?
 
-### Setting an expiration date
+Click the **wrench icon** (Manage) on any RBAC key in the list. This opens the key detail page where you can:
 
-When creating or editing an API key, you can optionally set an expiration date. Once the expiration date passes:
+- Change the key **name**.
+- Update the **organization role**.
+- Add, remove, or change **per-app roles**.
 
-- The API key will no longer work for authentication
-- Any requests using the expired key will be rejected
-- Expired keys are automatically cleaned up after 30 days
+Click **"Save Changes"** when done.
 
-### Organization policies
+{/* [SCREENSHOT: apikeys-manage.webp] — The key edit page showing the form pre-filled with the key's current settings */}
+<figure><img src="/apikeys-manage.webp" alt="API key edit page with current role settings" /><figcaption></figcaption></figure>
 
-Organizations can enforce expiration policies:
+## How to regenerate an API key?
 
-- **Require expiration**: All API keys must have an expiration date
-- **Maximum expiration period**: Limit how far in the future an expiration date can be set (e.g., maximum 90 days)
-- **Enforce secure API keys**: Require all new API keys to be created as encrypted/hashed keys
+To regenerate the secret value of an API key, click the **refresh icon** (Regenerate) on any key in the list.
 
-If your organization has these policies enabled, you will be required to set an appropriate expiration date when creating new keys.
+A confirmation dialog will appear. After confirming:
 
-For more information on configuring organization-wide API key policies, see [Organization Security](/docs/webapp/organization-security/).
+- For **secure (hashed) keys**: A new plain-text key is generated and displayed once in a modal. Copy it immediately.
+- For **plain keys**: The key value is regenerated server-side.
 
-## How to remove an api key?
+Any integration using the old key value will stop working immediately.
 
-To remove an API key click on the little trash button.
+{/* [SCREENSHOT: apikeys-regenerate-modal.webp] — The regeneration confirmation dialog */}
+<figure><img src="/apikeys-regenerate-modal.webp" alt="API key regeneration confirmation" /><figcaption></figcaption></figure>
 
-<figure><img src="/apikeys-remove.webp" alt="remove apikey" /><figcaption></figcaption></figure>
+## How to delete an API key?
 
-And then confirm removing the API key.
+Click the **trash icon** (Delete) on any key in the list. Confirm the deletion in the dialog.
 
-## How to regenerate an api key?
+The key is revoked immediately — any request using it will fail.
 
-To regenerate an API key click on the little refresh button.
+{/* [SCREENSHOT: apikeys-delete-confirm.webp] — The deletion confirmation dialog */}
+<figure><img src="/apikeys-delete-confirm.webp" alt="API key deletion confirmation dialog" /><figcaption></figcaption></figure>
 
-<figure><img src="/apikeys-regenerate.webp" alt="generate apikey" /><figcaption></figcaption></figure>
+## Legacy keys
 
-And then confirm regenerating the API key.
+If you see keys in the **Legacy Keys** section (keys without role assignments), these use the older mode-based permission system (`read`, `upload`, `write`, `all`). They still work but do not benefit from RBAC fine-grained permissions.
+
+Legacy keys can be regenerated and deleted from the list, but cannot be edited to add RBAC roles. We recommend creating new RBAC keys and deleting legacy keys when possible.
+
+If you need to manage legacy keys directly, you can still access them at [console.capgo.app/dashboard/apikeys](https://console.capgo.app/dashboard/apikeys/). This page is deprecated and will be removed in a future update.
