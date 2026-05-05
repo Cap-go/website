@@ -5,9 +5,11 @@
 /solutions/enterprise /enterprise/ 302
 /solutions/enterprise/ /enterprise/ 302
 /docs/plugin/auto-update /docs/plugins/updater/settings/ 302
-/docs/self-hosted/auto-update /docs/plugins/updater/self-hosted/getting-started/ 302
+/docs/self-hosted/auto-update /docs/plugins/updater/self-hosted/auto-update/ 302
+/docs/self-hosted/auto-update/ /docs/plugins/updater/self-hosted/auto-update/ 302
 /docs/v3/plugin-api /docs/upgrade/api-v3/ 200
 /docs/plugin/know-issues /docs/plugins/updater/known-issues/ 302
+/docs/plugin/know-issues/ /docs/plugins/updater/known-issues/ 302
 /self-hosted-capgo /docs/plugins/updater/self-hosted/getting-started/ 302
 /self-hosted-live-updates /docs/plugins/updater/self-hosted/auto-update/ 200
 /docs/getting-started/ /docs/getting-started/quickstart/ 301

@@ -89,7 +89,7 @@ Recent improvements have made full releases more efficient and dependable, offer
 | --- | --- | --- |
 | **Instant Distribution** | Updates reach everyone at once | Keeps versions consistent |
 | **Uniform Experience** | All users get the same features | Simplifies support processes |
-| **[Automatic Updates](https://capgo.app/docs/getting-started/add-an-app/)** | Updates happen in the background | Reduces disruptions |
+| **[Automatic Updates](https://capgo.app/docs/plugins/updater/self-hosted/auto-update/)** | Updates happen in the background | Reduces disruptions |
 | **Direct Deployment** | Bypasses app store review delays | Speeds up release timelines |
 
 Now, let's look at how traditional full releases compare to modern methods.
