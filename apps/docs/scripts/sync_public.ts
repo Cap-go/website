@@ -105,7 +105,11 @@ for (const [relativePath, content] of trackedFiles) {
 
 const referencedAssets = new Set<string>()
 for (const assetPath of alwaysCopiedAssets) {
-  referencedAssets.add(assetPath)
+  const resolvedAsset = resolveReferencedAsset(assetPath)
+  if (!resolvedAsset) {
+    throw new Error(`Required docs public asset "${assetPath}" is missing or invalid in ${sourcePublicDir}.`)
+  }
+  referencedAssets.add(resolvedAsset)
 }
 const scanTargets = [resolve(docsDir, 'astro.config.mjs'), ...walkFiles(resolve(docsDir, 'src'))]
 
@@ -114,6 +118,7 @@ for (const scanTarget of scanTargets) {
 }
 
 let copiedBytes = 0
+let copiedCount = 0
 
 for (const assetPath of [...referencedAssets].sort((left, right) => left.localeCompare(right))) {
   const sourcePath = resolve(sourcePublicDir, assetPath)
@@ -126,7 +131,8 @@ for (const assetPath of [...referencedAssets].sort((left, right) => left.localeC
   mkdirSync(dirname(outputPath), { recursive: true })
   copyFileSync(sourcePath, outputPath)
   copiedBytes += sourceMetadata.size
+  copiedCount += 1
 }
 
 const copiedMegabytes = (copiedBytes / 1024 / 1024).toFixed(2)
-console.log(`Synced ${referencedAssets.size} docs public assets (${copiedMegabytes} MB) from ${relative(docsDir, sourcePublicDir)}.`)
+console.log(`Synced ${copiedCount} docs public assets (${copiedMegabytes} MB) from ${relative(docsDir, sourcePublicDir)}.`)
