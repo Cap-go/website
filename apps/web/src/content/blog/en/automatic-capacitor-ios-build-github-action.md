@@ -388,7 +388,7 @@ end
 ## 5. Setting up secrets
 GitHub Actions uses the repository secrets you configure in the next step. You only need a local `.env` file if you want to run or test Fastlane from your own machine.
 
-For local testing, create `<project-root>/fastlane/.env` next to the `Fastfile`. Do not commit this file. Here is an example:
+For local testing, create `<project-root>/fastlane/.env` next to the `Fastfile`. Do not commit this file. Add `fastlane/.env` to your `.gitignore` first (or verify it is already ignored). Here is an example:
 
 ```shell
 APP_STORE_CONNECT_TEAM_ID=UVTJ336J2D
