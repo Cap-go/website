@@ -1,20 +1,14 @@
-import { copyFileSync, existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs'
+import { copyFileSync, existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, isAbsolute, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const docsDir = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const sourcePublicDir = resolve(docsDir, '../web/public')
 const targetPublicDir = resolve(docsDir, 'public')
-const trackedFiles = new Map([
-  ['.gitignore', '*\n!.gitignore\n'],
-])
+const trackedFiles = new Map([['.gitignore', '*\n!.gitignore\n']])
+const alwaysCopiedAssets = ['_redirects']
 
-const referencePatterns = [
-  /~public\/([^'"`\s)]+)/g,
-  /(?:src|href)=["']\/([^"'?#]+)["']/g,
-  /url\(["']?\/([^)"'?#]+)["']?\)/g,
-  /["'`]\/([^"'`?#]+)["'`]/g,
-]
+const referencePatterns = [/~public\/([^'"`\s)]+)/g, /(?:src|href)=["']\/([^"'?#]+)["']/g, /url\(["']?\/([^)"'?#]+)["']?\)/g, /["'`]\/([^"'`?#]+)["'`]/g]
 
 function isWithinRoot(root: string, candidate: string): boolean {
   const candidatePath = resolve(candidate)
@@ -71,7 +65,7 @@ function addMarkdownReferencedAssets(content: string, referencedAssets: Set<stri
     let pathEnd = pathStart
     while (pathEnd < content.length) {
       const char = content[pathEnd]
-      if (char === ')' || char === '"' || char === '\'' || char === '#' || char === '?' || /\s/.test(char)) break
+      if (char === ')' || char === '"' || char === "'" || char === '#' || char === '?' || /\s/.test(char)) break
       pathEnd += 1
     }
 
@@ -110,6 +104,9 @@ for (const [relativePath, content] of trackedFiles) {
 }
 
 const referencedAssets = new Set<string>()
+for (const assetPath of alwaysCopiedAssets) {
+  referencedAssets.add(assetPath)
+}
 const scanTargets = [resolve(docsDir, 'astro.config.mjs'), ...walkFiles(resolve(docsDir, 'src'))]
 
 for (const scanTarget of scanTargets) {
