@@ -17,6 +17,7 @@ const redirectRows: RedirectRow[] = [
   ['/docs/plugins/updater/commonProblems/', '/docs/plugins/updater/commonproblems/', 301],
   ['/docs/cli/', '/docs/cli/overview/', 302],
   ['/docs/cli/reference/', '/docs/cli/commands/', 302],
+  ['/docs/cli/commands/build/', '/docs/cli/reference/build/', 302],
   ['/docs/tooling/cli/', '/docs/cli/overview/', 302],
   ['/docs/plugin/cloud-mode/getting-started/', '/docs/getting-started/quickstart/', 302],
   ['/docs/plugin/cloud-mode/auto-update', '/docs/getting-started/add-an-app/', 302],
