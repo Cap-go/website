@@ -87,14 +87,14 @@ Capacitor's built-in tools provide a reliable framework for basic update functio
 
 ## Key Differences Between Update Methods
 
-When comparing [update methods](https://capgo.app/docs/plugin/cloud-mode/hybrid-update), specialized platforms clearly surpass native options in several important areas.
+When comparing [update methods](https://capgo.app/docs/live-updates/differentials/), specialized platforms clearly surpass native options in several important areas.
 
 Here's a detailed breakdown of how they differ:
 
 | **Feature** | **Native Capacitor Updates** | **Capgo Platform** |
 | --- | --- | --- |
 | **Deployment Speed** | 2–7 days (app store review) | Minutes to hours |
-| **Update Distribution** | Manual user approval needed | [Automatic background updates](https://capgo.app/docs/plugins/updater/self-hosted/getting-started/) |
+| **Update Distribution** | Manual user approval needed | [Automatic background updates](https://capgo.app/docs/plugins/updater/self-hosted/auto-update/) |
 | **Success Rate** | Variable (user-dependent) | 95% within 24 hours |
 | **Bandwidth Usage** | Full app download required | Only changed content |
 | **Security Level** | Standard HTTPS | End-to-end encryption |
@@ -148,7 +148,7 @@ Another key benefit is that OTA updates ensure every user is running the same se
 ::: faq
 ### What makes Capgo a better choice for OTA updates in Capacitor apps compared to native options?
 
-Capgo is an excellent option for over-the-air (OTA) updates, delivering **instant updates** without the hassle of waiting for app store approvals. With **end-to-end encryption**, it ensures updates are secure and offers robust tools like rollback capabilities, error tracking, and [user-specific update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
+Capgo is an excellent option for over-the-air (OTA) updates, delivering **instant updates** without the hassle of waiting for app store approvals. With **end-to-end encryption**, it ensures updates are secure and offers robust tools like rollback capabilities, error tracking, and [user-specific update management](https://capgo.app/docs/getting-started/deploy/).
 
 Being an **open-source platform**, Capgo works effortlessly with CI/CD workflows, streamlining the update process for developers. This not only speeds up deployment but also gives developers more control and flexibility over app updates - all while staying compliant with Apple and Android guidelines.
 :::

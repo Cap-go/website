@@ -23,9 +23,7 @@ const formatNumber = (num: number): string => {
 }
 
 // Filter only @capgo/ plugins
-const capgoPlugins = actions.filter(
-  (plugin) => plugin.author === 'github.com/Cap-go' && plugin.name?.startsWith('@capgo/')
-)
+const capgoPlugins = actions.filter((plugin) => plugin.author === 'github.com/Cap-go' && plugin.name?.startsWith('@capgo/'))
 
 // Sort by GitHub stars (most popular first)
 const sortedPlugins = [...capgoPlugins].sort((a, b) => {
@@ -62,7 +60,7 @@ const capgoCloudCards: CardData[] = [
     name: '@capgo/cli',
     href: 'https://github.com/Cap-go/cli/',
     description: 'Manage/Upload your Cloud/ Self hosted apps from CLI',
-    docsUrl: 'https://capgo.app/docs/cli/',
+    docsUrl: 'https://capgo.app/docs/cli/overview/',
   },
 ]
 
@@ -71,19 +69,14 @@ const generatePluginCard = (card: CardData): string => {
   const code = card.code ?? card.name
   const npmPackage = card.npmPackage ?? card.name
   const npmUrl = npmPackage ? `https://www.npmjs.com/package/${npmPackage}` : undefined
-  const docsUrl =
-    card.docsUrl ?? `https://capgo.app/plugins/${card.title.toLowerCase().replace(/\s+/g, '-')}/`
+  const docsUrl = card.docsUrl ?? `https://capgo.app/plugins/${card.title.toLowerCase().replaceAll(/\s+/g, '-')}/`
   const repoPath = card.href.replace('https://github.com/', '').replace(/\/$/, '').split('/tree/')[0]
 
   const badges: string[] = []
   if (npmUrl && npmPackage) {
-    badges.push(
-      `<a href="${npmUrl}"><img src="https://img.shields.io/npm/dw/${npmPackage}?style=flat-square&label=downloads" alt="npm downloads"></a>`
-    )
+    badges.push(`<a href="${npmUrl}"><img src="https://img.shields.io/npm/dw/${npmPackage}?style=flat-square&label=downloads" alt="npm downloads"></a>`)
   }
-  badges.push(
-    `<a href="${card.href}"><img src="https://img.shields.io/github/stars/${repoPath}?style=flat-square&label=stars" alt="GitHub stars"></a>`
-  )
+  badges.push(`<a href="${card.href}"><img src="https://img.shields.io/github/stars/${repoPath}?style=flat-square&label=stars" alt="GitHub stars"></a>`)
 
   const links: string[] = []
   if (docsUrl) {
@@ -103,13 +96,7 @@ ${badges.join('\n')}
 }
 
 // Generate awesome list card (same style as plugins)
-const generateAwesomeCard = (
-  title: string,
-  description: string,
-  username: string,
-  repo: string,
-  href: string
-): string => {
+const generateAwesomeCard = (title: string, description: string, username: string, repo: string, href: string): string => {
   return `<td align="center" width="50%">
 <h3><a href="${href}">${title}</a></h3>
 <p>${description}</p>
@@ -189,7 +176,7 @@ ${capgoCloudSection}
 A collection of high-quality Capacitor plugins maintained by [Capgo](https://capgo.app).
 
 **Total Plugins:** ${sortedPlugins.length} | **Weekly Downloads:** ${formatNumber(
-  Object.values(npmDownloads).reduce((sum, d) => sum + d, 0)
+  Object.values(npmDownloads).reduce((sum, d) => sum + d, 0),
 )} | **GitHub Stars:** ${formatNumber(Object.values(githubStars).reduce((sum, s) => sum + s, 0))}
 
 <table>

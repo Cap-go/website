@@ -45,7 +45,7 @@ next_blog: ''
 | **Rollback Capability** | Limited | Immediate (15 min) |
 | **User Adoption Rate** | 45–60% (7 days) | Up to 95% (24 hours) |
 
-Navigating these changes requires careful planning, automated compliance tracking, and [agile update systems](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) to ensure smooth operations in China.
+Navigating these changes requires careful planning, automated compliance tracking, and [agile update systems](https://capgo.app/docs/live-updates/differentials/) to ensure smooth operations in China.
 
 ## Unpacking the China Data Laws
 
@@ -61,7 +61,7 @@ App developers now face a patchwork of rules across various app stores. These in
 
 ### Data Management Rules
 
-Stricter data management protocols have added layers of difficulty to the app [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/). Developers are now required to implement measures such as mandatory data classification, detailed activity logging, local storage verification, and obtaining dynamic user consent. These steps make it far more challenging to ensure that every update aligns with the new legal framework.
+Stricter data management protocols have added layers of difficulty to the app [update process](https://capgo.app/docs/getting-started/deploy/). Developers are now required to implement measures such as mandatory data classification, detailed activity logging, local storage verification, and obtaining dynamic user consent. These steps make it far more challenging to ensure that every update aligns with the new legal framework.
 
 ### Update Review Delays
 
@@ -188,7 +188,7 @@ With cybersecurity regulations, including those effective from January 1, 2025 [
 ::: faq
 ### How can app developers navigate longer update review times under China's Cybersecurity Law?
 
-China's Cybersecurity Law has brought about tighter regulations, resulting in longer review times for app updates. To navigate these changes while ensuring a smooth user experience, developers need to prioritize [smart update management strategies](https://capgo.app/docs/plugin/cloud-mode/hybrid-update).
+China's Cybersecurity Law has brought about tighter regulations, resulting in longer review times for app updates. To navigate these changes while ensuring a smooth user experience, developers need to prioritize [smart update management strategies](https://capgo.app/docs/live-updates/differentials/).
 
 One practical approach is using live update tools like **Capgo**. These tools enable developers to deliver updates, fixes, and new features directly to users without waiting for app store approvals. This approach not only cuts down on delays but also ensures updates align with platform requirements. By implementing such tools, developers can save valuable time, keep users happy, and effectively manage regulatory hurdles.
 :::

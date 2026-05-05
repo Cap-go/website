@@ -115,7 +115,7 @@ Once your privacy policy is finalized, incorporate these standards into your dev
 
 Building on the risk assessment and privacy policy, focus on integrating privacy into every stage of app development. Here's how:
 
-**[Secure Update Management](https://capgo.app/docs/plugin/cloud-mode/manual-update)**
+**[Secure Update Management](https://capgo.app/docs/getting-started/deploy/)**
 
 -   Enable instant rollbacks to address any privacy issues quickly.
 -   Use controlled channels for testing new features.

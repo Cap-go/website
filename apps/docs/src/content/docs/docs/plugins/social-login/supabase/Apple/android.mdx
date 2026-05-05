@@ -9,7 +9,7 @@ import { Steps } from '@astrojs/starlight/components';
 ## Prerequisites
 
 This guide will help you integrate Apple Sign-In with Supabase Authentication on Android. It is assumed that you have already completed:
-- the [Supabase Apple Login - General Setup](./general/).
+- the [Supabase Apple Login - General Setup](../general/).
 
 :::note[Important]
 Apple Sign-In on Android requires a backend server because Apple doesn't provide native Android support. We'll use a Supabase Edge Function as the backend.
@@ -289,4 +289,3 @@ On Android, Apple Sign-In uses an OAuth redirect flow:
 6. **Supabase Authentication**: The app receives the token and signs in to Supabase
 
 This flow is necessary because Apple doesn't provide native Android support for Sign in with Apple.
-

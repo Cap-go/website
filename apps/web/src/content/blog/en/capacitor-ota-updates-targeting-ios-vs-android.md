@@ -40,7 +40,7 @@ next_blog: ''
 | **Power Requirements** | 50% battery or plugged in | Flexible |
 | **Network** | Wi-Fi required | Supports various connections |
 
-Capgo helps streamline the process, ensuring updates are secure, efficient, and compliant across both platforms. Whether you're targeting iOS or Android, understanding these differences will help you create a better OTA [update strategy](https://capgo.app/docs/plugin/cloud-mode/hybrid-update).
+Capgo helps streamline the process, ensuring updates are secure, efficient, and compliant across both platforms. Whether you're targeting iOS or Android, understanding these differences will help you create a better OTA [update strategy](https://capgo.app/docs/live-updates/differentials/).
 
 ## How iOS and Android Handle OTA Updates
 
@@ -52,7 +52,7 @@ Apple has strict guidelines for OTA updates. Devices must meet specific technica
 
 ### Google Play Store Update Rules
 
-Google Play operates differently, using a staged rollout system. Updates start with a small release to 1% of users for 24–48 hours and then expand, often in 25% increments, until they reach full deployment within one to two weeks [\[7\]](https://www.phonearena.com/news/Google-engineer-Dan-Morrill-talks-about-Android-OTA-updates-and-why-you-need-to-be-patient_id49573). Since August 2023, all new Android versions must target the highest available API level [\[3\]](https://applandeo.com/blog/upcoming-google-play-a-appstore-updates-how-will-they-affect-your-mobile-app/). Additionally, Android employs streaming updates, which help reduce the need for extra storage space during the [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/) [\[8\]](https://source.android.com/docs/core/ota/ab).
+Google Play operates differently, using a staged rollout system. Updates start with a small release to 1% of users for 24–48 hours and then expand, often in 25% increments, until they reach full deployment within one to two weeks [\[7\]](https://www.phonearena.com/news/Google-engineer-Dan-Morrill-talks-about-Android-OTA-updates-and-why-you-need-to-be-patient_id49573). Since August 2023, all new Android versions must target the highest available API level [\[3\]](https://applandeo.com/blog/upcoming-google-play-a-appstore-updates-how-will-they-affect-your-mobile-app/). Additionally, Android employs streaming updates, which help reduce the need for extra storage space during the [update process](https://capgo.app/docs/getting-started/deploy/) [\[8\]](https://source.android.com/docs/core/ota/ab).
 
 ### Platform Update Differences
 
@@ -74,7 +74,7 @@ When it comes to update distribution, strategies need to account for the unique 
 
 ### Device-Based Update Rules
 
-Update requirements depend heavily on the hardware and platform. For instance, iOS devices need at least 20% battery for user-initiated updates and 30% for [automatic updates](https://capgo.app/docs/plugin/cloud-mode/auto-update/). On Macs, the requirements differ based on the chipset - 20% battery for Apple silicon devices and 50% for Intel-based ones [\[10\]](https://support.apple.com/guide/deployment/about-software-updates-depc4c80847a/web). Android, on the other hand, has a more flexible system but faces challenges due to ecosystem fragmentation. Manufacturers and carriers introduce delays, with security updates taking an average of 24 days and an additional 11 days for device-specific completions [\[11\]](https://dl.acm.org/doi/10.1145/3372297.3423346).
+Update requirements depend heavily on the hardware and platform. For instance, iOS devices need at least 20% battery for user-initiated updates and 30% for [automatic updates](https://capgo.app/docs/getting-started/add-an-app/). On Macs, the requirements differ based on the chipset - 20% battery for Apple silicon devices and 50% for Intel-based ones [\[10\]](https://support.apple.com/guide/deployment/about-software-updates-depc4c80847a/web). Android, on the other hand, has a more flexible system but faces challenges due to ecosystem fragmentation. Manufacturers and carriers introduce delays, with security updates taking an average of 24 days and an additional 11 days for device-specific completions [\[11\]](https://dl.acm.org/doi/10.1145/3372297.3423346).
 
 ### OS Version Requirements
 

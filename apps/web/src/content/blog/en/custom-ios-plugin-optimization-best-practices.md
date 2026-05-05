@@ -114,7 +114,7 @@ Make it a habit to profile your plugin regularly with tools like **Time Profiler
 
 ## Plugin Setup and Release Steps
 
-Setting up and releasing iOS plugins involves a meticulous approach to managing dependencies, ensuring [seamless updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update), and adhering to App Store guidelines. Here's a breakdown of the key practices to ensure a smooth deployment process.
+Setting up and releasing iOS plugins involves a meticulous approach to managing dependencies, ensuring [seamless updates](https://capgo.app/docs/live-updates/differentials/), and adhering to App Store guidelines. Here's a breakdown of the key practices to ensure a smooth deployment process.
 
 ### Managing Plugin Dependencies
 

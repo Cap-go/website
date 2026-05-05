@@ -77,7 +77,7 @@ A strong OTA system relies on a skilled team with well-defined roles. Here's a b
     Conducts thorough testing and validation to guarantee updates function as intended.
     
 -   **DevOps Engineer**  
-    Manages the [CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-gitlab/) and oversees automation processes to keep the system running efficiently.
+    Manages the [CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-in-gitlab/) and oversees automation processes to keep the system running efficiently.
     
 
 ## OTA Updates and Fleet Management at Scale
@@ -264,7 +264,7 @@ When expanding **OTA (Over-the-Air) update systems** to handle a growing fleet o
 
 -   **Security**: Updates must be encrypted and authenticated to prevent unauthorized access and protect the integrity of your devices and systems. A strong focus on security keeps both your users and infrastructure safe.
     
--   **Bandwidth Management**: Efficiently managing data transfer is essential, especially when delivering updates to millions of devices. Proper bandwidth allocation minimizes downtime and ensures [smooth update processes](https://capgo.app/docs/plugin/cloud-mode/hybrid-update).
+-   **Bandwidth Management**: Efficiently managing data transfer is essential, especially when delivering updates to millions of devices. Proper bandwidth allocation minimizes downtime and ensures [smooth update processes](https://capgo.app/docs/live-updates/differentials/).
     
 -   **Rollback Mechanisms**: Equip devices with the ability to revert to a previous version if an update encounters issues. This safeguard helps maintain device reliability and reduces potential disruptions.
     

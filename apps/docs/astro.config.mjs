@@ -33,7 +33,7 @@ export default defineConfig({
   redirects: {
     '/docs/getting-started/': {
       status: 301,
-      destination: '/docs/plugins/updater/cloud-mode/getting-started/',
+      destination: '/docs/getting-started/quickstart/',
     },
     '/docs/plugins/updater/cloud-mode/getting-started/': {
       status: 301,

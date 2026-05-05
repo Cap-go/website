@@ -164,7 +164,7 @@ Here's a breakdown of how traditional cloud providers stack up against Capgo in 
 | Update Success Rate | Not reported | 82% worldwide[\[1\]](https://capgo.app/) |
 | Encryption | Standard update signing | End-to-end encryption[\[1\]](https://capgo.app/) |
 | CI/CD Integration | Requires custom setup | Built-in integration with GitHub, GitLab, etc.[\[1\]](https://capgo.app/) |
-| [Update Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) | Custom implementation | Channel system included[\[1\]](https://capgo.app/) |
+| [Update Management](https://capgo.app/docs/getting-started/deploy/) | Custom implementation | Channel system included[\[1\]](https://capgo.app/) |
 
 While traditional providers deliver reliable performance, Capgo stands out with its faster global CDN speeds, streamlined update success rates, and enhanced security. For example, Capgo achieves a 114ms delivery time for a 5MB bundle and an 82% update success rate globally - metrics that are hard to ignore.
 

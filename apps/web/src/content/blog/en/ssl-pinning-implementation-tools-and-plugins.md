@@ -136,7 +136,7 @@ Here are some essential tools for verifying SSL pinning:
 
 | Tool | Primary Function | Key Features |
 | --- | --- | --- |
-| **[Charles Proxy](https://www.charlesproxy.com/)** | Traffic inspection | Certificate generation, [breakpoint debugging](https://capgo.app/docs/plugin/debugging/) |
+| **[Charles Proxy](https://www.charlesproxy.com/)** | Traffic inspection | Certificate generation, [breakpoint debugging](https://capgo.app/docs/plugins/updater/debugging/) |
 | **[Burp Suite](https://portswigger.net/burp)** | Security testing | Advanced interception, automated scanning |
 | **[mitmproxy](https://mitmproxy.org/)** | HTTPS analysis | Custom certificate support, command-line interface |
 | **[OpenSSL](https://www.openssl.org/)** | Certificate handling | Fingerprint generation, validation testing |
@@ -246,7 +246,7 @@ Choosing between the two depends on your app's needs. If your certificates are u
 
 To keep your SSL pinning both secure and functional, especially when certificates are updated, it's smart to use **multiple certificate pins** with staggered expiration dates. This way, your app can switch to another valid certificate without disruption if one expires.
 
-Make it a habit to update pinned certificates in your app's code whenever your server's SSL certificates change. Automating this step with a **[CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-gitlab/)** can make the process smoother and reduce the chances of security gaps. Tools and libraries specifically built for SSL pinning can also simplify the setup while maintaining strong security practices. For Capacitor apps, platforms like Capgo offer an added advantage by allowing real-time updates while staying compliant with Apple and Android guidelines.
+Make it a habit to update pinned certificates in your app's code whenever your server's SSL certificates change. Automating this step with a **[CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-in-gitlab/)** can make the process smoother and reduce the chances of security gaps. Tools and libraries specifically built for SSL pinning can also simplify the setup while maintaining strong security practices. For Capacitor apps, platforms like Capgo offer an added advantage by allowing real-time updates while staying compliant with Apple and Android guidelines.
 :::
 
 ::: faq

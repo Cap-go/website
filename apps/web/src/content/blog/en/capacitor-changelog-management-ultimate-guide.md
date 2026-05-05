@@ -219,7 +219,7 @@ Managing changelogs effectively enhances clarity and builds user trust. Here are
 | Practice | Description | Impact |
 | --- | --- | --- |
 | **Version Tracking** | Keep track of version numbers (app and OTA). | 82% global success rate for tracked updates [\[1\]](https://capgo.app/) |
-| **Update Categories** | [Classify updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) by type (fixes, features, security). | 95% of active users update within 24 hours [\[1\]](https://capgo.app/) |
+| **Update Categories** | [Classify updates](https://capgo.app/docs/live-updates/differentials/) by type (fixes, features, security). | 95% of active users update within 24 hours [\[1\]](https://capgo.app/) |
 | **Deployment Records** | Document timestamps, success rates, and metrics. | Supports monitoring of 23.5M updates [\[1\]](https://capgo.app/) |
 | **Rollback Strategy** | Maintain logs of previous versions with OTA integration. | Allows immediate recovery when necessary. |
 

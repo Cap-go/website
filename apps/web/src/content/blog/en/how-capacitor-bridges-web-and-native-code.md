@@ -129,7 +129,7 @@ To make native data updates even better, consider these tips:
 -   **Event Debouncing**: Limit high-frequency native events to avoid overwhelming the system.
 -   **Error Handling**: Use strong error management strategies on both the native and web sides.
 
-Capacitor's bridge, paired with [Capgo's update system](https://capgo.app/docs/plugin/cloud-mode/manual-update/), creates a dependable setup for native-to-web communication.
+Capacitor's bridge, paired with [Capgo's update system](https://capgo.app/docs/getting-started/deploy/), creates a dependable setup for native-to-web communication.
 
 ## Creating Custom Plugins
 

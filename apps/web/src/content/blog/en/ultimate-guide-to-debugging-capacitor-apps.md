@@ -22,8 +22,8 @@ Debugging [Capacitor](https://capacitorjs.com/) apps can be complex due to their
 
 -   **Common Challenges**: Platform-specific bugs and native plugin mismatches.
 -   **Tools You Need**:
-    -   **[Web Debugging](https://capgo.app/docs/plugin/debugging/)**: [Chrome DevTools](https://developer.chrome.com/docs/devtools), [Safari Web Inspector](https://developer.apple.com/documentation/safari-developer-tools/web-inspector).
-    -   **[Native Debugging](https://capgo.app/docs/plugin/debugging/)**: [Xcode](https://developer.apple.com/xcode/) for iOS, [Android Studio](https://developer.android.com/studio) for Android.
+    -   **[Web Debugging](https://capgo.app/docs/plugins/updater/debugging/)**: [Chrome DevTools](https://developer.chrome.com/docs/devtools), [Safari Web Inspector](https://developer.apple.com/documentation/safari-developer-tools/web-inspector).
+    -   **[Native Debugging](https://capgo.app/docs/plugins/updater/debugging/)**: [Xcode](https://developer.apple.com/xcode/) for iOS, [Android Studio](https://developer.android.com/studio) for Android.
     -   **Capacitor CLI**: Commands like `npx cap doctor` and `npx cap sync`.
 -   **Debugging Steps**:
     -   Inspect web code with browser tools.
@@ -47,7 +47,7 @@ This guide provides everything you need to identify and fix bugs, ensuring your 
 
 ## Core Debugging Tools
 
-Debugging [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) effectively requires the right tools. Here’s a breakdown of the essential [debugging resources](https://capgo.app/docs/plugin/debugging/) every Capacitor developer should know.
+Debugging [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) effectively requires the right tools. Here’s a breakdown of the essential [debugging resources](https://capgo.app/docs/plugins/updater/debugging/) every Capacitor developer should know.
 
 ### Web Debugging with Browser Tools
 
@@ -64,7 +64,7 @@ Make sure to enable source maps - this lets you debug your original code instead
 
 When working on platform-specific problems, native debugging tools provide deeper insights into app behavior.
 
-**[Xcode Debugging Tools](https://capgo.app/docs/plugin/debugging/)** (for iOS):
+**[Xcode Debugging Tools](https://capgo.app/docs/plugins/updater/debugging/)** (for iOS):
 
 -   Monitor memory usage.
 -   Profile CPU performance.
@@ -112,7 +112,7 @@ This outputs detailed logs about plugin initialization and native bridge communi
 
 ### Web Code Debugging Steps
 
-To troubleshoot web components, leverage browser developer tools. These tools let you inspect elements, log messages to the console, monitor performance, and track network requests to pinpoint problems. Use source maps to trace errors back to the original code. If the issue involves native components, switch to [debugging methods](https://capgo.app/docs/plugin/debugging/) tailored to the platform.
+To troubleshoot web components, leverage browser developer tools. These tools let you inspect elements, log messages to the console, monitor performance, and track network requests to pinpoint problems. Use source maps to trace errors back to the original code. If the issue involves native components, switch to [debugging methods](https://capgo.app/docs/plugins/updater/debugging/) tailored to the platform.
 
 ### Native Code Debug Steps
 
@@ -291,7 +291,7 @@ If you use source maps in production, restrict access to authorized developers t
 
 ![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
 
-Building on solid [debugging techniques](https://capgo.app/docs/plugin/debugging), tools like Capgo make it easier to keep your app stable by allowing instant updates. Capgo lets developers push updates without waiting for app store approvals, all while keeping debugging features intact.
+Building on solid [debugging techniques](https://capgo.app/docs/plugins/updater/debugging/), tools like Capgo make it easier to keep your app stable by allowing instant updates. Capgo lets developers push updates without waiting for app store approvals, all while keeping debugging features intact.
 
 ### Capgo Debug Features
 

@@ -234,7 +234,7 @@ Capgo's security framework is built to safeguard every aspect of live updates. H
 | --- | --- | --- |
 | **End-to-End Encryption** | Secure update delivery protocol | Prevents unauthorized code modifications |
 | **Partial Updates** | Delta-only file transmission | Reduces the attack surface during updates |
-| **[Channel System](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** | Controlled deployment paths | Ensures secure, staged rollouts |
+| **[Channel System](https://capgo.app/docs/live-updates/channels/)** | Controlled deployment paths | Ensures secure, staged rollouts |
 | **Real-time Analytics** | Performance monitoring | Identifies and addresses security anomalies |
 
 This layered approach ensures not only secure sessions but also the safe delivery of updates that enhance overall security.

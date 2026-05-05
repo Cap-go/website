@@ -64,7 +64,7 @@ To properly replicate your production environment, you'll need the following com
 | **Test Devices** | Ensure device diversity | Include a mix of iOS and Android devices. |
 | **Network Simulator** | Test under varied conditions | Configure bandwidth limits and latency. |
 | **Monitoring Tools** | Track performance issues | Set up error logging and analytics tools. |
-| **Version Control** | [Manage updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/) | Use separate branches for staging. |
+| **Version Control** | [Manage updates](https://capgo.app/docs/getting-started/deploy/) | Use separate branches for staging. |
 | **CI/CD Pipeline** | Automate deployments | Replicate production deployment workflows. |
 
 Your staging environment should closely resemble production but remain isolated. Platforms like Capgo make this easier by offering dedicated testing channels, allowing for precise and reliable testing conditions.
@@ -73,19 +73,19 @@ Your staging environment should closely resemble production but remain isolated.
 
 Follow these steps to create and maintain a staging setup that mirrors your production environment:
 
-1.  **Environment Configuration**  
+1.  **Environment Configuration**
     Match your production settings, including servers, databases, and third-party integrations.
-    
-2.  **Data Management**  
+
+2.  **Data Management**
     Use anonymized production data for testing. Refresh this data regularly to keep it realistic.
-    
-3.  **Automation Integration**  
+
+3.  **Automation Integration**
     Implement a CI/CD pipeline that mirrors production. For example:
-    
+
     -   Automate builds, run integration tests, monitor performance, and enable rollback features.
-4.  **[Update Channel System](https://capgo.app/docs/plugin/cloud-mode/channel-system/)**  
+4.  **[Update Channel System](https://capgo.app/docs/live-updates/channels/)**
     Divide your testing process into distinct phases:
-    
+
     -   _Alpha channel_: For developer testing.
     -   _Beta channel_: For internal team testing.
     -   _Release candidate channel_: For final pre-production checks.
@@ -111,12 +111,12 @@ Simulated network testing also plays a critical role by uncovering connectivity-
 Testing under different network conditions ensures that OTA updates perform reliably:
 
 -   **Simulate Network Scenarios**
-    
+
     -   Test updates over 2G, 3G, 4G, and 5G networks.
     -   Check performance during intermittent connectivity.
     -   Verify that updates resume seamlessly after a connection is lost.
 -   **Monitor Performance Metrics**
-    
+
     -   Measure download speeds under varying conditions.
     -   Track how often updates complete successfully.
     -   Log bandwidth usage patterns for analysis.
@@ -135,19 +135,19 @@ Testing often uncovers issues that require robust recovery strategies to maintai
 
 Capgo provides tools for error tracking and analytics to streamline recovery efforts:
 
--   **Monitoring Update Health**  
+-   **Monitoring Update Health**
     Track update success rates and identify potential problems early using real-time insights.
-    
--   **Implementing Recovery Procedures**  
+
+-   **Implementing Recovery Procedures**
     Roll back quickly to stable versions when issues arise, especially during staged rollouts.
-    
--   **Managing Distribution Channels**  
+
+-   **Managing Distribution Channels**
     Use dedicated channels for beta testing and staged rollouts. This approach minimizes risks by validating updates with smaller user groups before a full release.
-    
+
 
 ## OTA Update Management
 
-Effective [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) is the final piece of a successful OTA strategy. It ensures smooth deployment and builds on strong testing practices.
+Effective [update management](https://capgo.app/docs/getting-started/deploy/) is the final piece of a successful OTA strategy. It ensures smooth deployment and builds on strong testing practices.
 
 ### Reducing Update Size
 

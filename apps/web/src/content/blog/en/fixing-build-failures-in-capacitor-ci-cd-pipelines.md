@@ -108,7 +108,7 @@ To mitigate these issues, teams should fine-tune their CI/CD pipelines by config
 
 ## Build Failure Debugging Steps
 
-Debugging build failures effectively is crucial for keeping your [CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-gitlab/) running smoothly. Let’s break down some practical steps to troubleshoot and resolve these issues.
+Debugging build failures effectively is crucial for keeping your [CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-in-gitlab/) running smoothly. Let’s break down some practical steps to troubleshoot and resolve these issues.
 
 ### Testing Build Failures Locally
 

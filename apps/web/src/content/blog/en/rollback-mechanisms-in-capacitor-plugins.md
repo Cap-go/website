@@ -28,7 +28,7 @@ Rollback mechanisms ensure stability when updating [Capacitor](https://capacitor
     -   **Rollback Execution**: Restores previous versions seamlessly.
 -   **Tools**:
     -   **[Capgo](https://capgo.app/)**: Managed service with features like one-click rollback and real-time analytics.
-    -   **Capacitor [Live Update Plugin](https://capgo.app/docs/plugins/updater/self-hosted/getting-started/)**: Native solution requiring manual setup but offering direct API access.
+    -   **Capacitor [Live Update Plugin](https://capgo.app/docs/plugins/updater/self-hosted/auto-update/)**: Native solution requiring manual setup but offering direct API access.
 
 ### Quick Comparison:
 
@@ -125,7 +125,7 @@ Capgo emerged as a strong rollback management solution after [Microsoft Code Pus
 | --- | --- | --- |
 | **One-Click Rollback** | Quickly revert to any version | 114ms average bundle download |
 | **End-to-End Encryption** | [Secure updates](https://capgo.app/docs/live-updates/update-behavior/) | 434ms API response time |
-| **[Channel System](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** | Distribute beta updates to specific groups | 23.5M updates delivered |
+| **[Channel System](https://capgo.app/docs/live-updates/channels/)** | Distribute beta updates to specific groups | 23.5M updates delivered |
 | **Analytics Dashboard** | Track updates in real-time | 750 production apps served |
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica [\[1\]](https://capgo.app/)

@@ -163,7 +163,7 @@ Launched in April 2025, this tool uses shell scripts to:
 
 For consistent results, include these tools in your project directory. This ensures smooth manifest generation across your team and CI/CD pipelines.
 
-When utilizing [over-the-air updates](https://capgo.app/blog/open-source-licecing/) through platforms like [Capgo](https://capgo.app), ensure your Privacy Manifest reflects any data collection or API usage tied to update functionality. Maintaining transparency here is key to staying compliant with App Store requirements while benefiting from modern update features.
+When utilizing [over-the-air updates](https://capgo.app/blog/open-source-licence/) through platforms like [Capgo](https://capgo.app), ensure your Privacy Manifest reflects any data collection or API usage tied to update functionality. Maintaining transparency here is key to staying compliant with App Store requirements while benefiting from modern update features.
 
 ## Data Collection and API Documentation
 

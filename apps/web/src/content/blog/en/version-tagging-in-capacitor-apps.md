@@ -135,7 +135,7 @@ Now let’s look at automating these updates to simplify release management.
 
 ### Version Update Automation
 
-[Automating version updates](https://capgo.app/docs/plugins/updater/self-hosted/getting-started/) can save time and reduce errors in your Capacitor project. Here's how to set it up:
+[Automating version updates](https://capgo.app/docs/plugins/updater/self-hosted/auto-update/) can save time and reduce errors in your Capacitor project. Here's how to set it up:
 
 1.  **NPM Version Scripts**
 
@@ -195,7 +195,7 @@ The build number should always increase, even if the version remains the same. T
 
 ### Beta Version Management
 
-Managing beta versions requires a structured process to distribute test builds. Capgo’s [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) simplifies this with the following steps:
+Managing beta versions requires a structured process to distribute test builds. Capgo’s [channel system](https://capgo.app/docs/live-updates/channels/) simplifies this with the following steps:
 
 1.  **Channel Setup**
 

@@ -131,21 +131,21 @@ These tools directly tackle compliance challenges. However, technical solutions 
 
 To complement technical tools, developers should follow specific practices to address compliance needs:
 
-**Data Protection Measures**  
+**Data Protection Measures**
 Implement protocols that meet PIPL standards, such as secure consent mechanisms and thorough records of data processing activities.
 
-**Regular Compliance Audits**  
+**Regular Compliance Audits**
 Conduct routine reviews of how your app handles data. As Bessie Cooper highlights:
 
 > "Capgo is a must-have tool for developers who want to be more productive. Avoiding review for bugfix is golden."
 
-**User Consent Management**  
+**User Consent Management**
 Create clear, transparent processes for user consent that explain why data is being collected. Rodrigo Mantica shares:
 
 > "We practice agile development and Capgo is mission-critical in delivering continuously to our users!"
 
-**[Update Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) Strategy**  
-With regulations constantly changing, having a solid update management approach is essential. Statistics show that [effective update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) leads to an 82% global success rate in maintaining compliance [\[1\]](https://capgo.app/).
+**[Update Management](https://capgo.app/docs/getting-started/deploy/) Strategy**
+With regulations constantly changing, having a solid update management approach is essential. Statistics show that [effective update management](https://capgo.app/docs/getting-started/deploy/) leads to an 82% global success rate in maintaining compliance [\[1\]](https://capgo.app/).
 
 ## Conclusion
 

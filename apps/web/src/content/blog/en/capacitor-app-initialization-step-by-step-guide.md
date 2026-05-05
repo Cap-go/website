@@ -77,7 +77,7 @@ Get the Capacitor CLI up and running with these steps:
     npx @capgo/cli init
     ```
     
-    This will configure the necessary settings to [manage updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/) effectively [\[1\]](https://capgo.app/). It simplifies the process for building, testing, and deploying your app.
+    This will configure the necessary settings to [manage updates](https://capgo.app/docs/getting-started/deploy/) effectively [\[1\]](https://capgo.app/). It simplifies the process for building, testing, and deploying your app.
     
 
 ## Starting a New Capacitor Project

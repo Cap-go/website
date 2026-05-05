@@ -58,7 +58,7 @@ Google Play prioritizes transparency and giving users control over their data. T
 | **Data Safety Section** | Developers must fully disclose what data is collected. |
 | **User Controls** | Privacy settings and data deletion options must be easy to access. |
 | **Security Measures** | Personal and sensitive data must be encrypted. |
-| **[Update Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/)** | [App updates](https://capgo.app/plugins/capacitor-updater/) and patches must be securely distributed. |
+| **[Update Management](https://capgo.app/docs/getting-started/deploy/)** | [App updates](https://capgo.app/plugins/capacitor-updater/) and patches must be securely distributed. |
 
 To stay compliant, developers should focus on secure update processes and provide clear options for user data management. Tools like Capgo support these efforts with features such as end-to-end encryption, controlled beta testing, staged rollouts, and analytics tracking [\[1\]](https://capgo.app/).
 
@@ -140,7 +140,7 @@ Capgo also supports compliance through additional tools designed to enhance data
 | **Tool Category** | **Implementation Benefits** |
 | --- | --- |
 | **User Management** | Controls data access |
-| **[Channel System](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** | Targets specific rollout stages |
+| **[Channel System](https://capgo.app/docs/live-updates/channels/)** | Targets specific rollout stages |
 | **Error Tracking** | Identifies compliance issues |
 | **CI/CD Integration** | Automates compliance checks |
 

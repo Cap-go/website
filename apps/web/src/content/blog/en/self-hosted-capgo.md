@@ -87,7 +87,7 @@ const config: CapacitorConfig = {
 };
 ```
 
-Note: To get localSupaAnon please follow this [tutorial](https://capgo.app/docs/self-hosted/local-dev/getting-started/) and copy the anon key into localSupaAnon
+Note: To get localSupaAnon please follow this [tutorial](https://capgo.app/docs/plugins/updater/local-dev/getting-started/) and copy the anon key into localSupaAnon
 
 # Using the capacitor updater with self-hosted capgo
 
@@ -121,5 +121,5 @@ This will enable you to use local capgo in development. However, by default, thi
 
 In conclusion, self-hosting Capgo can be a good option for organizations that have the resources and expertise to do so. It offers a number of benefits, including control over the update process, security, and compliance. However, it is important to carefully weigh the benefits and challenges before deciding whether to self-host.
 
-If you are considering self-hosting Capgo, I recommend that you start by reading the Capgo [self-hosting documentation](https://capgo.app/docs/self-hosted/getting-started/). This will give you a good understanding of the requirements and risks of self-hosting. 
+If you are considering self-hosting Capgo, I recommend that you start by reading the Capgo [self-hosting documentation](https://capgo.app/docs/plugins/updater/self-hosted/getting-started/). This will give you a good understanding of the requirements and risks of self-hosting.
 

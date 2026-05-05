@@ -208,14 +208,14 @@ Here's a streamlined checklist to help you tackle key privacy compliance tasks. 
 | --- | --- | --- |
 | Data Security | Use end-to-end encryption | Run security audits |
 | User Rights | Set up a permission system | Test user flows |
-| [Update Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) | Enable fast update rollouts | Integrate CI/CD tools |
+| [Update Management](https://capgo.app/docs/getting-started/deploy/) | Enable fast update rollouts | Integrate CI/CD tools |
 | Documentation | Keep privacy policies updated | Conduct monthly reviews |
 
 Focus on tools that allow quick responses to compliance needs. This checklist is your starting point - time to take action.
 
 ### Getting Started
 
-Begin by setting up an [effective update system](https://capgo.app/docs/plugin/cloud-mode/hybrid-update). Modern tools make this easier than ever. For example, **Capgo** integrates with CI/CD platforms like [Azure DevOps](https://azure.microsoft.com/en-us/products/devops), [GitLab](https://about.gitlab.com/solutions/devops-platform/), and [GitHub](https://github.com/about), ensuring updates are both fast and secure.
+Begin by setting up an [effective update system](https://capgo.app/docs/live-updates/differentials/). Modern tools make this easier than ever. For example, **Capgo** integrates with CI/CD platforms like [Azure DevOps](https://azure.microsoft.com/en-us/products/devops), [GitLab](https://about.gitlab.com/solutions/devops-platform/), and [GitHub](https://github.com/about), ensuring updates are both fast and secure.
 
 Here's a step-by-step guide to implementation:
 

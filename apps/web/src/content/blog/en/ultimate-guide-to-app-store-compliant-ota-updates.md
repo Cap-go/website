@@ -133,7 +133,7 @@ Here are common pitfalls to avoid when updating apps:
 
 To stay compliant:
 
--   Regularly audit your [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/) for security issues.
+-   Regularly audit your [update process](https://capgo.app/docs/getting-started/deploy/) for security issues.
 -   Use machine learning to analyze update patterns.
 -   Clearly explain the purpose of updates to users.
 -   Avoid altering the app's core functionality through OTA updates [\[8\]](https://stackoverflow.com/questions/43951710/does-apple-allow-ota-updates-of-application).

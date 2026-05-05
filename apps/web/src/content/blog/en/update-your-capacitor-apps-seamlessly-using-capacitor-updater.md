@@ -147,7 +147,7 @@ For your application to receive a live update from Deploy, you'll need to run th
 
 Open the app, put it in the background and open it again, you should see in the logs the app did the update.
 
-Congrats! 🎉 You have successfully deployed your first Live Update. This is just the start of what you can do with Live Updates. To learn more, view the complete [Live Updates docs](/docs/plugin/cloud-mode/getting-started/).
+Congrats! 🎉 You have successfully deployed your first Live Update. This is just the start of what you can do with Live Updates. To learn more, view the complete [Live Updates docs](/docs/getting-started/quickstart/).
 
 
 > If you need to stop receive in local the update run this command

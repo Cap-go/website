@@ -59,7 +59,7 @@ The [Capgo platform](https://capgo.app/docs/webapp/) enhances Capacitor's update
 | Update Success Rate | Global deployment | 82% worldwide |
 | API Response Time | Real-time operations | 434 ms average |
 | Security | End-to-end encryption | Full update protection |
-| Distribution | [Channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) | Targeted rollouts |
+| Distribution | [Channel system](https://capgo.app/docs/live-updates/channels/) | Targeted rollouts |
 
 Capgo's channel system enables precise update distribution, such as running beta tests or rolling out updates in stages, without compromising security. Teams can choose between cloud-hosted and self-hosted setups, gaining full control with tools like one-click rollbacks and proactive error monitoring.OTA Update Methods
 
@@ -71,7 +71,7 @@ App store updates remain the primary way to distribute new versions of Capacitor
 | --- | --- | --- |
 | Review Time | 1-7 days delay | Slows down critical fixes |
 | Cost | $99/year (Apple), $25 (Google) | Requires additional fees |
-| User Action | [Manual update](https://capgo.app/docs/plugin/cloud-mode/manual-update/) required | Can lead to lower adoption |
+| User Action | [Manual update](https://capgo.app/docs/getting-started/deploy/) required | Can lead to lower adoption |
 | Distribution | Global reach | No option for targeted rollouts |
 
 ### Capacitor Web Updates
@@ -179,7 +179,7 @@ Transparent communication about updates builds trust and ensures smooth deployme
 | Update Type | Communication Method | Timing |
 | --- | --- | --- |
 | Critical Updates | In-app notification | Immediately |
-| Feature Updates | [Automatic background update](https://capgo.app/docs/plugins/updater/self-hosted/getting-started/) | During low usage |
+| Feature Updates | [Automatic background update](https://capgo.app/docs/plugins/updater/self-hosted/auto-update/) | During low usage |
 | Security Patches | Silent update | Automatically applied |
 
 Using background updates can reduce user interruptions. Pairing analytics with error monitoring allows for early detection of problems, minimizing their impact on users and preserving a seamless experience.

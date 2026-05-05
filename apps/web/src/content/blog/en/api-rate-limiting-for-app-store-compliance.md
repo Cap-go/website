@@ -148,7 +148,7 @@ Capgo provides a range of tools to help maintain API rate limits and meet app st
 
 -   **Real-Time Analytics**: Keep track of update distribution and API usage.
 -   **Error Tracking**: Quickly identify and fix rate limit issues.
--   **[Channel System](https://capgo.app/docs/plugin/cloud-mode/channel-system/)**: Manage update rollouts effectively.
+-   **[Channel System](https://capgo.app/docs/live-updates/channels/)**: Manage update rollouts effectively.
 -   **Encryption**: Protect API communications.
 
 These tools work alongside standard rate limiting practices, offering real-time data and proactive error resolution. Capgo's system has been tested across 750 production apps, delivering 23.5 million updates while maintaining compliance and strong performance [\[1\]](https://capgo.app/).

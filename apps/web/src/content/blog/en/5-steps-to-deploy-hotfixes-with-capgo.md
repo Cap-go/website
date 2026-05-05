@@ -123,7 +123,7 @@ Clear labeling is key for managing and tracking your hotfixes. When uploading yo
 
 Martin Donadieu, Capgo's founder, has designed a versioning system that integrates smoothly with CI/CD workflows. This system makes it easy to track updates and roll back if necessary.
 
-Capgo’s [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) also includes features like end-to-end encryption and instant deployment, ensuring your hotfixes are secure while reaching users quickly.
+Capgo’s [update management](https://capgo.app/docs/getting-started/deploy/) also includes features like end-to-end encryption and instant deployment, ensuring your hotfixes are secure while reaching users quickly.
 
 Once your hotfix is uploaded and labeled, move on to Step 4 to configure your update settings.
 

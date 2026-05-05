@@ -63,7 +63,7 @@ To initialize Capgo CLI, run this command:
 npx @capgo/cli init
 ```
 
-This sets up your project with the necessary configuration files and connects it to Capgo's [update service](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
+This sets up your project with the necessary configuration files and connects it to Capgo's [update service](https://capgo.app/docs/getting-started/deploy/).
 
 ### Configuring Access and Permissions
 
@@ -251,7 +251,7 @@ Getting started with Capgo is simple and quick. Just follow these three steps:
 
 > "@Capgo is a must have tools for developers, who want to be more productive. Avoiding review for bugfix is golden." - Bessie Cooper [\[1\]](https://capgo.app/)
 
-Capgo supports over 30 plugins and works seamlessly with CI/CD pipelines, making it easy to fit into your existing development process. It enhances [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) while keeping everything efficient and straightforward.
+Capgo supports over 30 plugins and works seamlessly with CI/CD pipelines, making it easy to fit into your existing development process. It enhances [update management](https://capgo.app/docs/getting-started/deploy/) while keeping everything efficient and straightforward.
 
 ## Summary
 

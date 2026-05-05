@@ -19,7 +19,7 @@ next_blog: ''
 **[Capgo](https://capgo.app/) OTA updates let you deliver [app updates](https://capgo.app/plugins/capacitor-updater/) in minutes, while manual [app store](https://www.apple.com/app-store/) submissions can take days.** If you're looking for faster deployment, targeted updates, and less user disruption, Capgo's Over-The-Air (OTA) platform is a game-changer for [Capacitor](https://capacitorjs.com/) apps. Here's a quick breakdown:
 
 -   **Speed**: Capgo updates deploy in minutes; app store reviews take 2–7 days.
--   **User Reach**: 95% of users updated within 24 hours via Capgo; [manual updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/) depend on user action.
+-   **User Reach**: 95% of users updated within 24 hours via Capgo; [manual updates](https://capgo.app/docs/getting-started/deploy/) depend on user action.
 -   **Data Efficiency**: Only changed content is sent with Capgo; app stores require full app downloads.
 -   **Control**: Capgo allows instant rollbacks; app stores require resubmission.
 -   **Cost**: Starting at $12/month for Capgo vs. $99/year for Apple or $25 for Google developer accounts.
@@ -77,7 +77,7 @@ Capgo’s OTA updates focus exclusively on web assets and JavaScript code, where
 
 ![App Store](https://assets.seobotai.com/capgo.app/682c8ab34fa53d42207d8d4e/ab359297e839832a0f76203cfe630f58.jpg)
 
-App store guidelines play a critical role in shaping [update strategies](https://capgo.app/docs/plugin/cloud-mode/hybrid-update). Both Apple and Google have specific rules that dictate how developers can implement OTA (Over-The-Air) updates versus traditional app submissions. Here’s how Capgo ensures its updates align with these regulatory standards.
+App store guidelines play a critical role in shaping [update strategies](https://capgo.app/docs/live-updates/differentials/). Both Apple and Google have specific rules that dictate how developers can implement OTA (Over-The-Air) updates versus traditional app submissions. Here’s how Capgo ensures its updates align with these regulatory standards.
 
 ### Apple Store Guidelines
 

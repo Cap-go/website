@@ -123,7 +123,7 @@ While app store updates can take weeks for approval, Capgo enables developers to
 
 Our analysis highlights patterns for effective and compliant OTA updates, offering insights to guide your decision-making when adopting these methods.
 
-Choosing the right [update strategy](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) depends on your project's specific needs:
+Choosing the right [update strategy](https://capgo.app/docs/live-updates/differentials/) depends on your project's specific needs:
 
 | **Project Need** | **Recommended Approach** | **Evidence** |
 | --- | --- | --- |

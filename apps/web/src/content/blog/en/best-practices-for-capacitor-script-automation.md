@@ -235,7 +235,7 @@ Capgo sets a high bar, but it’s worth considering how other tools stack up in 
 | Hosting Options | Cloud-only to self-hosted | Impacts compliance flexibility |
 | Cost Structure | $300-$6,000 annually | Shapes scalability planning |
 
-Evaluating these metrics helps development teams choose a tool that fits their [update strategy](https://capgo.app/docs/plugin/cloud-mode/hybrid-update). As noted by NASA’s [OSIRIS-REx](https://en.wikipedia.org/wiki/OSIRIS-REx) team:
+Evaluating these metrics helps development teams choose a tool that fits their [update strategy](https://capgo.app/docs/live-updates/differentials/). As noted by NASA’s [OSIRIS-REx](https://en.wikipedia.org/wiki/OSIRIS-REx) team:
 
 > "Capgo is a smart way to make hot code pushes (and not for all the money in the world like with @AppFlow) 🙂" - NASA's OSIRIS-REx [\[1\]](https://capgo.app/)
 

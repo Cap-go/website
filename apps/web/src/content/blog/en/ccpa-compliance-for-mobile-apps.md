@@ -187,7 +187,7 @@ Here’s what Capgo offers for compliance:
 | **Rollback Capability** | Quickly reverts updates if issues occur |
 | **User Assignment** | Delivers targeted privacy updates |
 | **Analytics Dashboard** | Monitors updates and user engagement |
-| **[Channel System](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** | Tests updates with specific user groups |
+| **[Channel System](https://capgo.app/docs/live-updates/channels/)** | Tests updates with specific user groups |
 
 Capgo works seamlessly alongside CI/CD tools to automate compliance updates.
 

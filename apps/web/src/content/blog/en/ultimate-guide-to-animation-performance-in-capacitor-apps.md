@@ -271,7 +271,7 @@ When performance hiccups appear after deployment, ensuring smooth animations bec
 
 ### Instant Updates for Performance Fixes
 
-When animation issues arise in production, quick action is key. Capgo empowers developers to push live code changes directly to users, eliminating the need to wait days for app store approvals. Its [partial update system](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) downloads only the files that have changed, minimizing bandwidth usage and allowing for targeted beta testing. Large user groups have already benefited from Capgo's live updates. Plus, if something goes wrong with an update, the one-click rollback feature lets you instantly revert to a previous version, ensuring stability [\[24\]](https://capgo.app).
+When animation issues arise in production, quick action is key. Capgo empowers developers to push live code changes directly to users, eliminating the need to wait days for app store approvals. Its [partial update system](https://capgo.app/docs/live-updates/differentials/) downloads only the files that have changed, minimizing bandwidth usage and allowing for targeted beta testing. Large user groups have already benefited from Capgo's live updates. Plus, if something goes wrong with an update, the one-click rollback feature lets you instantly revert to a previous version, ensuring stability [\[24\]](https://capgo.app).
 
 ### CI/CD Integration for Animation Testing
 

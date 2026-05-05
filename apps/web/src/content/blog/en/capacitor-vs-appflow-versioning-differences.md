@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
-**Managing app versions can be tricky.** [Capacitor](https://capacitorjs.com/) uses [manual updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/), while [Appflow](https://ionic.io/docs/appflow) automates the process. Here’s what you need to know:
+**Managing app versions can be tricky.** [Capacitor](https://capacitorjs.com/) uses [manual updates](https://capgo.app/docs/getting-started/deploy/), while [Appflow](https://ionic.io/docs/appflow) automates the process. Here’s what you need to know:
 
 -   **Capacitor:** Manual versioning requires editing files like `Info.plist` (iOS) and `build.gradle` (Android). This gives control but risks errors and slows updates.
 -   **Appflow:** Automates versioning with CI/CD tools for faster releases but costs ~$6,000/year and may lack flexibility.

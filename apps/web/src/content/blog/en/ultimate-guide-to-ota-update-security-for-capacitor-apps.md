@@ -116,7 +116,7 @@ Privacy regulations further complicate OTA update compliance. Laws like GDPR and
 | Data Collection | Minimal necessary data | Full disclosure required |
 | User Rights | Explicit consent needed | Opt-out option mandatory |
 | Security Measures | End-to-end encryption | Reasonable security |
-| Documentation | [Update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/) documentation | Update process documentation |
+| Documentation | [Update process](https://capgo.app/docs/getting-started/deploy/) documentation | Update process documentation |
 
 > "The key to maintaining compliance is implementing privacy by design principles from the outset", explains a European Data Protection Board guidance document. "This includes incorporating data protection considerations into every aspect of the update process." [\[8\]](https://essaypro.com/blog/article-review)
 

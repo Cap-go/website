@@ -24,7 +24,7 @@ next_blog: ''
 -   **SDK Updates**: [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) must use [Xcode](https://developer.apple.com/xcode/) 15+ and updated SDKs to stay compliant.
 -   **Live Updates**: Over-the-air (OTA) updates must follow encrypted protocols and thorough device testing.
 
-**Key Tool**: Platforms like [Capgo](https://capgo.app/) simplify compliance by automating [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/), tracking, and encryption. With a 95% update rate within 24 hours and tools for secure rollouts, [Capgo](https://capgo.app/) helps developers stay aligned with Apple's policies.
+**Key Tool**: Platforms like [Capgo](https://capgo.app/) simplify compliance by automating [update management](https://capgo.app/docs/getting-started/deploy/), tracking, and encryption. With a 95% update rate within 24 hours and tools for secure rollouts, [Capgo](https://capgo.app/) helps developers stay aligned with Apple's policies.
 
 **Quick Comparison**:
 
@@ -119,7 +119,7 @@ Capgo integrates seamlessly with CI/CD systems like [GitHub Actions](https://doc
 
 ## Summary
 
-As Apple updates its policies in 2025, [Capacitor app developers](https://capgo.app/docs/) will need to adjust their workflows to stay compliant while ensuring updates are delivered efficiently. Below is a recap of the key actions and resources discussed earlier, highlighting the importance of strong security measures and [effective update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
+As Apple updates its policies in 2025, [Capacitor app developers](https://capgo.app/docs/) will need to adjust their workflows to stay compliant while ensuring updates are delivered efficiently. Below is a recap of the key actions and resources discussed earlier, highlighting the importance of strong security measures and [effective update management](https://capgo.app/docs/getting-started/deploy/).
 
 ### Action Items
 

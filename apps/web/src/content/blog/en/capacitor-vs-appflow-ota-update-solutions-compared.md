@@ -67,7 +67,7 @@ The [Capgo platform](https://capgo.app/docs/webapp/) enhances Capacitor's update
 | Update Success Rate | Global deployment | 82% worldwide |
 | API Response Time | Real-time operations | 434 ms average |
 | Security | End-to-end encryption | Full update protection |
-| Distribution | [Channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) | Targeted rollouts |
+| Distribution | [Channel system](https://capgo.app/docs/live-updates/channels/) | Targeted rollouts |
 
 Capgo's channel system enables precise update distribution, such as running beta tests or rolling out updates in stages, without compromising security. Teams can choose between cloud-hosted and self-hosted setups, gaining full control with tools like one-click rollbacks and proactive error monitoring.
 

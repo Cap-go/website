@@ -22,7 +22,7 @@ Here’s what you’ll learn:
 
 -   **Tools you need:** [Node.js](https://nodejs.org/en), npm, Capacitor CLI, [Xcode](https://developer.apple.com/xcode/), [Android Studio](https://developer.android.com/studio), and more.
     
--   **Skills checklist:** JavaScript/TypeScript, [mobile debugging](https://capgo.app/docs/plugin/debugging/), and [Capacitor API knowledge](https://capgo.app/blog/capacitor-comprehensive-guide/).
+-   **Skills checklist:** JavaScript/TypeScript, [mobile debugging](https://capgo.app/docs/plugins/updater/debugging/), and [Capacitor API knowledge](https://capgo.app/blog/capacitor-comprehensive-guide/).
     
 -   **Finding plugins:** Use npm, [Capacitor Community Hub](https://capgo.app/blog/capacitor-comprehensive-guide/), or GitHub to discover reliable options.
     
@@ -30,7 +30,7 @@ Here’s what you’ll learn:
     
 -   **Configuration:** Update platform-specific files like `Info.plist` (iOS) or `AndroidManifest.xml` (Android).
     
--   [**Debugging tips**](https://capgo.app/docs/plugin/debugging/)**:** Use tools like `npx cap doctor` and verbose logging to fix issues.
+-   [**Debugging tips**](https://capgo.app/docs/plugins/updater/debugging/)**:** Use tools like `npx cap doctor` and verbose logging to fix issues.
     
 
 **Pro Tip:** Tools like [Capgo](https://capgo.app/) make managing updates and plugin rollouts seamless, with features like encrypted updates and real-time analytics.
@@ -89,7 +89,7 @@ Here’s what you should be comfortable with:
     
 -   Basic Android development (for Android plugins)
     
--   [Mobile app debugging techniques](https://capgo.app/docs/plugin/debugging/)
+-   [Mobile app debugging techniques](https://capgo.app/docs/plugins/updater/debugging/)
     
 
 **Framework Familiarity**:
@@ -305,7 +305,7 @@ Test plugin functionality at every stage of deployment to ensure reliability.
 
 | Plugin Testing Phase | Best Practice | Impact |
 | --- | --- | --- |
-| Development | Use [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) | Isolate testing environments |
+| Development | Use [channel system](https://capgo.app/docs/live-updates/channels/) | Isolate testing environments |
 | Beta Testing | Leverage error tracking | Identify platform-specific issues |
 | Production | Enable automatic updates | 95% user update rate within 24 hours |
 
@@ -365,7 +365,7 @@ If multiple plugins require different Capacitor versions, check the compatibilit
 }
 ```
 
-Still stuck? Move on to [debugging steps](https://capgo.app/docs/plugin/debugging/) for a deeper analysis.
+Still stuck? Move on to [debugging steps](https://capgo.app/docs/plugins/updater/debugging/) for a deeper analysis.
 
 ### Debug Steps
 

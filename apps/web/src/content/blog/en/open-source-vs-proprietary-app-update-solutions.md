@@ -132,8 +132,8 @@ Here's a clear breakdown of how open-source and proprietary [app update solution
 
 | Feature Category | Open Source Solutions | Proprietary Solutions |
 | --- | --- | --- |
-| Update Control | [Manual updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/), basic rollback | Advanced versioning, automated rollback |
-| Security | [Community-managed updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/), custom encryption setup | Enterprise-level encryption, automated vulnerability checks |
+| Update Control | [Manual updates](https://capgo.app/docs/getting-started/deploy/), basic rollback | Advanced versioning, automated rollback |
+| Security | [Community-managed updates](https://capgo.app/docs/getting-started/deploy/), custom encryption setup | Enterprise-level encryption, automated vulnerability checks |
 | Integration | Custom CI/CD setup | Pre-built CI/CD connectors |
 | Scaling | Manual configuration | Built-in load balancing |
 | Support | Community forums, documentation | 24/7 professional support, SLA guarantees |

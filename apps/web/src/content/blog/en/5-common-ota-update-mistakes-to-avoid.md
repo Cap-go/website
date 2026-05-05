@@ -166,7 +166,7 @@ Adjust update schedules to avoid peak usage periods in different regions:
 
 ### Tips for User-Friendly Updates
 
--   **Background Installations**: Use [automatic background updates](https://capgo.app/docs/plugins/updater/self-hosted/getting-started/) to reduce interruptions.
+-   **Background Installations**: Use [automatic background updates](https://capgo.app/docs/plugins/updater/self-hosted/auto-update/) to reduce interruptions.
 -   **Gradual Rollouts**: Roll out updates in stages. This allows you to track performance, identify issues early, and avoid overloading servers.
 -   **Clear Communication**: Inform users about update timing, duration, and changes. When possible, provide an option to delay updates.
 
@@ -174,7 +174,7 @@ Adjust update schedules to avoid peak usage periods in different regions:
 
 ### Leveraging Advanced Tools
 
-Modern [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) systems can help minimize disruptions:
+Modern [update management](https://capgo.app/docs/getting-started/deploy/) systems can help minimize disruptions:
 
 -   **Channel Systems**: Target updates to specific user groups for better timing.
 -   **Flexible Scheduling**: Deploy updates during off-peak hours.

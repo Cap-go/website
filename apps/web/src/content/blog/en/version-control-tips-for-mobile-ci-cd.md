@@ -106,7 +106,7 @@ If your iOS and Android apps have platform-specific features or fixes, maintain 
 
 ### Version-Based Build Triggers
 
-Set up your [CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-gitlab/) to automate builds using version tags. For example, the configuration below ensures that builds are triggered only for valid version tags like `v2.1.0`:
+Set up your [CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-in-gitlab/) to automate builds using version tags. For example, the configuration below ensures that builds are triggered only for valid version tags like `v2.1.0`:
 
 ```yaml
 workflows:

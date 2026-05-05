@@ -29,7 +29,7 @@ next_blog: ''
 
 | **Aspect** | **Development** | **Production** |
 | --- | --- | --- |
-| **Purpose** | [Debugging and testing](https://capgo.app/docs/plugin/debugging/) | Stability and performance |
+| **Purpose** | [Debugging and testing](https://capgo.app/docs/plugins/updater/debugging/) | Stability and performance |
 | **Code Optimization** | Minimal | Fully optimized |
 | **Security** | Relaxed | Tightened |
 | **Updates** | Immediate (local/hot reload) | Controlled rollouts |
@@ -47,7 +47,7 @@ Setting up the right environment is essential to ensure your app performs well a
 
 ### Setting Up Development Mode
 
-Development mode focuses on making [testing and debugging](https://capgo.app/docs/plugin/debugging/) as smooth and fast as possible. This setup allows developers to iterate quickly and fix issues efficiently.
+Development mode focuses on making [testing and debugging](https://capgo.app/docs/plugins/updater/debugging/) as smooth and fast as possible. This setup allows developers to iterate quickly and fix issues efficiently.
 
 | **Development Feature** | **Purpose** | **Implementation** |
 | --- | --- | --- |
@@ -69,7 +69,7 @@ Production mode focuses on delivering a secure, high-performance app that provid
 | Code Minification | Reduce file size | Optimize during build time |
 | Security Measures | Protect app data | Enforce end-to-end encryption |
 | Build Optimization | Boost performance | Configure production build flags |
-| [Update Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) | Streamline deployments | Set up CI/CD integration |
+| [Update Management](https://capgo.app/docs/getting-started/deploy/) | Streamline deployments | Set up CI/CD integration |
 
 For production, automation tools like CI/CD make deployments more efficient. Platforms such as [Azure DevOps](https://azure.microsoft.com/en-us/products/devops), [GitLab](https://about.gitlab.com/solutions/devops-platform/), and [GitHub](https://github.com/) work seamlessly with Capgo to manage updates [\[1\]](https://capgo.app/).
 
@@ -83,7 +83,7 @@ Performance tuning differs significantly between development and production envi
 
 ### Development Mode Performance
 
-Development mode focuses on enabling quick iterations and [effective debugging](https://capgo.app/docs/plugin/debugging/) rather than peak performance. It offers developers the tools needed to identify and fix issues efficiently.
+Development mode focuses on enabling quick iterations and [effective debugging](https://capgo.app/docs/plugins/updater/debugging/) rather than peak performance. It offers developers the tools needed to identify and fix issues efficiently.
 
 | **Performance Aspect** | **Development Mode Approach** | **Impact on Development** |
 | --- | --- | --- |

@@ -52,7 +52,7 @@ next_blog: ''
 | Rollback Capability | Instant rollback | Requires resubmission |
 | Bandwidth Usage | Only changed content | Full app download |
 
-[Capgo](https://capgo.app/), a popular OTA platform, simplifies this process with global CDN delivery, real-time analytics, and [secure update management](https://capgo.app/docs/plugin/cloud-mode/manual-update). Start optimizing your app updates today!
+[Capgo](https://capgo.app/), a popular OTA platform, simplifies this process with global CDN delivery, real-time analytics, and [secure update management](https://capgo.app/docs/getting-started/deploy/). Start optimizing your app updates today!
 
 ## Ship Mobile App Updates Instantly With Appflow
 
@@ -60,11 +60,11 @@ next_blog: ''
 
 ## Server Requirements
 
-[Capacitor OTA updates](https://capgo.app/) rely on specific hardware and software to ensure secure and efficient delivery. Below are the key requirements for setting up a [production-ready OTA update server](https://capgo.app/it/docs/plugin/self-hosted/getting-started/).
+[Capacitor OTA updates](https://capgo.app/) rely on specific hardware and software to ensure secure and efficient delivery. Below are the key requirements for setting up a [production-ready OTA update server](https://capgo.app/it/docs/plugins/updater/self-hosted/getting-started/).
 
 ### System Specifications
 
-Your server should be capable of handling multiple [update requests](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) simultaneously.
+Your server should be capable of handling multiple [update requests](https://capgo.app/docs/live-updates/differentials/) simultaneously.
 
 | Resource | Minimum Requirement | Recommended |
 | --- | --- | --- |
@@ -257,7 +257,7 @@ Capgo delivers updates through a global CDN network, ensuring speed and reliabil
 | **Feature** | **Implementation** | **Performance Metric** |
 | --- | --- | --- |
 | Update Distribution | Global CDN Network | Global Coverage |
-| User Management | [Channel System](https://capgo.app/docs/plugin/cloud-mode/channel-system/) | Granular Control |
+| User Management | [Channel System](https://capgo.app/docs/live-updates/channels/) | Granular Control |
 | Security | End-to-End Encryption | Military-grade Protection |
 | Storage | Secure Cloud Infrastructure | Up to 20GB (PAYG plan) |
 
@@ -265,7 +265,7 @@ The platform’s end-to-end encryption safeguards update integrity, while its ch
 
 ### Workflow Integration
 
-Capgo integrates easily into your [CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-gitlab/) with minimal configuration. Here’s an example setup using a configuration file and environment variables:
+Capgo integrates easily into your [CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-in-gitlab/) with minimal configuration. Here’s an example setup using a configuration file and environment variables:
 
 ```json
 {
@@ -341,7 +341,7 @@ It’s important to note that OTA updates are limited to web content. Any [nativ
 
 To maintain reliability, robust monitoring and backup systems are indispensable. The Capacitor updater ensures updates are checked and applied during app startup using a background thread, minimizing disruption for users [\[1\]](https://capgo.app/docs/faq).
 
-For efficient [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/), tools like the [Capgo CLI](https://capgo.app/docs/cli/commands) and channel-based distribution allow for streamlined packaging and targeted rollouts. These practices are key to building a resilient and dependable OTA update system.
+For efficient [update management](https://capgo.app/docs/getting-started/deploy/), tools like the [Capgo CLI](https://capgo.app/docs/cli/commands) and channel-based distribution allow for streamlined packaging and targeted rollouts. These practices are key to building a resilient and dependable OTA update system.
 
 ## FAQs
 

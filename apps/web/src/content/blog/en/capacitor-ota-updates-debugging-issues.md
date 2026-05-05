@@ -51,7 +51,7 @@ Following platform rules for OTA updates is critical. Capgo ensures compliance b
 
 > "only users can decrypt updates" [\[1\]](https://capgo.app/)
 
-Capgo's monitoring tools also show that up to 95% of active users switch to the latest version within 24 hours [\[1\]](https://capgo.app/). These stats highlight the importance of precise error tracking and a robust [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
+Capgo's monitoring tools also show that up to 95% of active users switch to the latest version within 24 hours [\[1\]](https://capgo.app/). These stats highlight the importance of precise error tracking and a robust [update process](https://capgo.app/docs/getting-started/deploy/).
 
 ## Finding and Fixing Update Issues
 
@@ -134,15 +134,15 @@ Capgo simplifies OTA updates with features designed to enhance efficiency:
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
-Capgo's [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) provides precise control over update distribution and testing. With 1.9K apps already using Capgo in production, it has proven to handle complex update scenarios effectively [\[1\]](https://capgo.app/).
+Capgo's [channel system](https://capgo.app/docs/live-updates/channels/) provides precise control over update distribution and testing. With 1.9K apps already using Capgo in production, it has proven to handle complex update scenarios effectively [\[1\]](https://capgo.app/).
 
 ## OTA Platform Options
 
-Since 2022, OTA platforms have expanded their capabilities, particularly in [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) and debugging.
+Since 2022, OTA platforms have expanded their capabilities, particularly in [update management](https://capgo.app/docs/getting-started/deploy/) and debugging.
 
 ### Key Features
 
-Here’s a breakdown of some critical [debugging features](https://capgo.app/docs/plugin/debugging/):
+Here’s a breakdown of some critical [debugging features](https://capgo.app/docs/plugins/updater/debugging/):
 
 | Feature | Capgo |
 | --- | --- |

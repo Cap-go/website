@@ -243,7 +243,7 @@ Here’s an example configuration:
 **Important configurations to focus on:**
 
 -   **Security**: Ensure live updates are encrypted end-to-end.
--   **[Update Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/)**: Set up controlled rollouts with specific [update channels](https://capgo.app/docs/webapp/channels/).
+-   **[Update Management](https://capgo.app/docs/getting-started/deploy/)**: Set up controlled rollouts with specific [update channels](https://capgo.app/docs/webapp/channels/).
 -   **Performance**: Fine-tune WebView settings. For example:
 
 ```json
@@ -318,7 +318,7 @@ Resolving these issues will prepare your environment for advanced features and s
 
 ![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
 
-Once your Android environment is ready, it's time to integrate Capgo. This tool simplifies your [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/) by allowing you to push updates to your Capacitor app instantly - no Play Store review needed.
+Once your Android environment is ready, it's time to integrate Capgo. This tool simplifies your [update process](https://capgo.app/docs/getting-started/deploy/) by allowing you to push updates to your Capacitor app instantly - no Play Store review needed.
 
 ### Key Capgo Features
 

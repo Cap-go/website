@@ -494,7 +494,7 @@ Handle common error scenarios:
 
 ## Integration with Updates
 
-Channel assignments work together with your [Update API Endpoint](/docs/plugin/self-hosted/handling-updates/). When a device requests an update, check its channel assignment to determine which version to serve:
+Channel assignments work together with your [Update API Endpoint](/docs/plugins/updater/self-hosted/handling-updates/). When a device requests an update, check its channel assignment to determine which version to serve:
 
 ```typescript
 async function getUpdateForDevice(deviceId: string, appId: string) {

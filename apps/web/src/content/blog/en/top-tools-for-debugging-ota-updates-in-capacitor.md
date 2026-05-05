@@ -26,7 +26,7 @@ Debugging Over-the-Air (OTA) updates in [Capacitor](https://capacitorjs.com/) ap
 | Feature | Capgo | Inspect.dev |
 | --- | --- | --- |
 | Update Management | Advanced (encryption, CI/CD) | Not applicable |
-| [Debugging Tools](https://capgo.app/docs/plugin/debugging/) | Version control, rollback | Chrome DevTools |
+| [Debugging Tools](https://capgo.app/docs/plugins/updater/debugging/) | Version control, rollback | Chrome DevTools |
 | Platform Support | Android, iOS | Android, iOS (Windows support) |
 | Pricing | $12/month | $49/year |
 
@@ -52,7 +52,7 @@ Once these are in place, it's time to explore OTA distribution options.
 
 | Distribution Method | Key Features | Best For |
 | --- | --- | --- |
-| [Manual Updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/) | Full control over the update process, supports custom URLs | Smaller apps, testing |
+| [Manual Updates](https://capgo.app/docs/getting-started/deploy/) | Full control over the update process, supports custom URLs | Smaller apps, testing |
 | Capgo | Offers end-to-end encryption, CI/CD integration, and user assignment | Enterprise applications |
 
 Choose the method that best fits your app's needs and workflow.
@@ -79,7 +79,7 @@ Keep version control organized to track changes and simplify debugging. Use Capa
 
 ![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-20.jpg?auto=compress)
 
-These tools help developers tackle specific [debugging challenges](https://capgo.app/docs/plugin/debugging/) while managing OTA updates effectively.
+These tools help developers tackle specific [debugging challenges](https://capgo.app/docs/plugins/updater/debugging/) while managing OTA updates effectively.
 
 ### [Capgo](https://capgo.app)
 
@@ -161,7 +161,7 @@ If you use CI/CD pipelines, **Capgo** integrates effortlessly into your workflow
 Consider your technical priorities and match them to the tool's strengths:
 
 -   For cross-platform debugging, **Inspect.dev** is a solid choice.
--   Need [automated updates](https://capgo.app/docs/plugins/updater/self-hosted/getting-started/) with added security? **Capgo** is ideal.
+-   Need [automated updates](https://capgo.app/docs/plugins/updater/self-hosted/auto-update/) with added security? **Capgo** is ideal.
 
 **Budget**
 Budget plays a big role. **Capgo** offers advanced features like automation and security starting at $12/month. **Inspect.dev** provides specialized debugging features for $49 annually, catering to specific use cases.
@@ -183,7 +183,7 @@ Once connected, you can use Chrome's developer tools to check **console logs**, 
 
 Pay attention to the **Network** tab to track update downloads and use the **Console** to spot any errors.
 
-For additional [debugging options](https://capgo.app/docs/plugin/debugging/), explore these tools:
+For additional [debugging options](https://capgo.app/docs/plugins/updater/debugging/), explore these tools:
 
 -   **Inspect.dev**: A cross-platform debugging tool.
 -   **Capgo**: Helps with live update management, along with built-in security and CI/CD features.

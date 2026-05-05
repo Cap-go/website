@@ -208,7 +208,7 @@ Capgo focuses on updating only the JavaScript layer of your [Capacitor app](http
 
 The platform excels at speed, delivering updates to **95% of active users within 24 hours**. This rapid deployment can be a lifesaver when fixing memory leaks or optimizing CPU-intensive background operations that might otherwise degrade the user experience.
 
-Capgo uses a [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) to manage updates. You can test changes in a [Dev channel](https://capgo.app/docs/webapp/channels/), roll them out to Beta, and finally push them to Production - reducing risks while ensuring your updates are thoroughly tested. With an **82% global success rate**, most users receive these updates seamlessly, without requiring any manual action. Plus, if something goes wrong, Capgo automatically manages update failures and provides detailed analytics to pinpoint issues by device or region.
+Capgo uses a [channel system](https://capgo.app/docs/live-updates/channels/) to manage updates. You can test changes in a [Dev channel](https://capgo.app/docs/webapp/channels/), roll them out to Beta, and finally push them to Production - reducing risks while ensuring your updates are thoroughly tested. With an **82% global success rate**, most users receive these updates seamlessly, without requiring any manual action. Plus, if something goes wrong, Capgo automatically manages update failures and provides detailed analytics to pinpoint issues by device or region.
 
 > "@Capgo is a must-have tool for developers who want to be more productive. Avoiding review for bug fixes is golden." - Bessie Cooper
 

@@ -153,7 +153,7 @@ Use technical tools that align with China's security requirements. Key solutions
 -   **Data encryption** that complies with national standards
 -   **Real-time monitoring** tools to track data flows
 -   **Automated compliance software** for streamlined processes
--   **[Update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) systems** with version control capabilities
+-   **[Update management](https://capgo.app/docs/getting-started/deploy/) systems** with version control capabilities
 
 Platforms like Capgo provide secure update deployment with features such as end-to-end encryption and user assignment. These tools simplify app maintenance while adhering to Chinese regulations.
 

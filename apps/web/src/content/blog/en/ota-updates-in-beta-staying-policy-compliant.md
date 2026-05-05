@@ -29,7 +29,7 @@ next_blog: ''
 | Feature | Capgo | [TestFlight](https://developer.apple.com/testflight/) | [Google Play Console](https://developer.android.com/distribute/console) |
 | --- | --- | --- | --- |
 | End-to-end encryption | Yes | Yes | Yes |
-| Targeted updates | Yes ([channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/)) | Limited | Limited |
+| Targeted updates | Yes ([channel system](https://capgo.app/docs/live-updates/channels/)) | Limited | Limited |
 | Rollback capability | Yes | No  | No  |
 | Real-time tracking | Yes | Limited | Limited |
 | Setup cost | $2,600 (one-time) | Free | Free |
@@ -131,7 +131,7 @@ Follow these privacy guidelines to protect user data:
 
 ## OTA Update Management Tools
 
-Managing OTA updates during beta testing requires reliable tools to ensure efficiency and compliance. Today's platforms are built to simplify the [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/) while keeping policies intact. Let’s take a closer look at Capgo’s features and other beta testing platforms to see how they fit into smooth update workflows.
+Managing OTA updates during beta testing requires reliable tools to ensure efficiency and compliance. Today's platforms are built to simplify the [update process](https://capgo.app/docs/getting-started/deploy/) while keeping policies intact. Let’s take a closer look at Capgo’s features and other beta testing platforms to see how they fit into smooth update workflows.
 
 ### [Capgo](https://capgo.app/) Update Features
 

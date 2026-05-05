@@ -42,7 +42,7 @@ Both platforms demand attention to build environments, security, and deployment.
 
 ## Build Setup Requirements
 
-[Capacitor build pipelines](https://capgo.app/docs/plugin/cloud-mode/channel-system/) rely on specific environments and configurations tailored to the platform being developed.
+[Capacitor build pipelines](https://capgo.app/docs/live-updates/channels/) rely on specific environments and configurations tailored to the platform being developed.
 
 ### iOS Build Setup
 
@@ -219,7 +219,7 @@ When setting up build pipelines with Capacitor, it's important to understand tha
 
 For **iOS**, the focus is on strict adherence to App Store guidelines. This includes using hardware-backed encryption and meeting specific conditions for over-the-air (OTA) updates. For example, updates require a stable network connection and enough battery life to ensure a smooth process.
 
-On the other hand, **Android** relies on Verified Boot and SELinux to maintain security. It also offers developers more flexibility with features like staged rollouts and the ability to perform [background updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update).
+On the other hand, **Android** relies on Verified Boot and SELinux to maintain security. It also offers developers more flexibility with features like staged rollouts and the ability to perform [background updates](https://capgo.app/docs/live-updates/differentials/).
 
 While both platforms are serious about security, their methods differ. iOS leans toward controlled, tightly regulated environments, whereas Android gives developers more freedom to manage updates. To navigate these differences, tools like Capgo can help by facilitating live updates that comply with each platform's unique requirements.
 :::

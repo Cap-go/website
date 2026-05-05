@@ -40,7 +40,7 @@ Building on the earlier overview, iOS and Android utilize distinct update system
 
 ### iOS Update Requirements
 
-The iOS [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/) is heavily shaped by Apple's App Store review system. With a team of over 500 experts manually reviewing around 100,000 apps each week [\[2\]](https://thisisglance.com/learning-centre/how-does-the-app-store-approval-process-work), the process prioritizes quality and compliance. Although Apple claims to review 90% of app submissions within 24 hours [\[2\]](https://thisisglance.com/learning-centre/how-does-the-app-store-approval-process-work), developers must account for potential delays when planning releases.
+The iOS [update process](https://capgo.app/docs/getting-started/deploy/) is heavily shaped by Apple's App Store review system. With a team of over 500 experts manually reviewing around 100,000 apps each week [\[2\]](https://thisisglance.com/learning-centre/how-does-the-app-store-approval-process-work), the process prioritizes quality and compliance. Although Apple claims to review 90% of app submissions within 24 hours [\[2\]](https://thisisglance.com/learning-centre/how-does-the-app-store-approval-process-work), developers must account for potential delays when planning releases.
 
 Here are some key factors for iOS updates:
 
@@ -64,10 +64,10 @@ Key features of Android's update system include:
 | Feature | Capability | Benefit |
 | --- | --- | --- |
 | **Update Postponement** | Users can delay OTA updates for up to 90 days [\[3\]](https://source.android.com/docs/devices/admin/ota-updates) | Provides greater control over rollouts |
-| **SystemUpdatePolicy** | Device owner apps manage system updates [\[3\]](https://source.android.com/docs/devices/admin/ota-updates) | Enables [detailed update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) |
+| **SystemUpdatePolicy** | Device owner apps manage system updates [\[3\]](https://source.android.com/docs/devices/admin/ota-updates) | Enables [detailed update management](https://capgo.app/docs/getting-started/deploy/) |
 | **OEM Integration** | FOTA updates via manufacturers [\[4\]](https://learn.microsoft.com/en-us/mem/intune-service/protect/fota-updates-android) | Ensures compatibility across devices |
 
-This flexibility allows Android developers to tailor their [update strategies](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) to specific needs, though it requires navigating a more fragmented ecosystem.
+This flexibility allows Android developers to tailor their [update strategies](https://capgo.app/docs/live-updates/differentials/) to specific needs, though it requires navigating a more fragmented ecosystem.
 
 ### Platform Update Comparison
 
@@ -114,7 +114,7 @@ These challenges highlight the importance of tailored solutions to manage update
 
 ## Update Management Tools
 
-Capacitor [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) tools tackle the unique challenges of maintaining iOS and Android applications. Let’s dive into some of the top tools, comparing their features, market positioning, and performance metrics.
+Capacitor [update management](https://capgo.app/docs/getting-started/deploy/) tools tackle the unique challenges of maintaining iOS and Android applications. Let’s dive into some of the top tools, comparing their features, market positioning, and performance metrics.
 
 ### [Capgo](https://capgo.app/) Features
 

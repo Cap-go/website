@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
-**Want secure OTA updates in your [CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-gitlab/)? Here’s what you need to know:**
+**Want secure OTA updates in your [CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-in-gitlab/)? Here’s what you need to know:**
 
 -   **Use secure communication protocols:** Implement TLS 1.3, HTTPS, and SSL pinning to prevent tampering or interception during updates.
 -   **Sign updates with cryptographic keys:** Verify update integrity using Public Key Infrastructure (PKI) and secure bootloaders.

@@ -97,7 +97,7 @@ Explore real-world apps using Capgo in production in the [Showcase](https://capg
 <a href="https://www.npmjs.com/package/@capgo/cli"><img src="https://img.shields.io/npm/dw/@capgo/cli?style=flat-square&label=downloads" alt="npm downloads"></a>
 <a href="https://github.com/Cap-go/cli/"><img src="https://img.shields.io/github/stars/Cap-go/cli?style=flat-square&label=stars" alt="GitHub stars"></a>
 </p>
-<p><a href="https://capgo.app/docs/cli/">Docs</a> | <a href="https://github.com/Cap-go/cli/">GitHub</a></p>
+<p><a href="https://capgo.app/docs/cli/overview/">Docs</a> | <a href="https://github.com/Cap-go/cli/">GitHub</a></p>
 </td>
 </tr>
 </table>

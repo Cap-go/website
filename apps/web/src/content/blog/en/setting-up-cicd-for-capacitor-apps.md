@@ -204,7 +204,7 @@ steps:
       CAPGO_KEY: ${{ secrets.CAPGO_API_KEY }}
 ```
 
-This addition extends your CI/CD lifecycle by incorporating [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) into your automated build and deployment process.
+This addition extends your CI/CD lifecycle by incorporating [update management](https://capgo.app/docs/getting-started/deploy/) into your automated build and deployment process.
 
 Next, include the upload command after your build steps:
 

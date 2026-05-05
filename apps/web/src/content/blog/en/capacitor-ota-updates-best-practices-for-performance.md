@@ -200,7 +200,7 @@ When adding OTA updates to Capacitor apps, focusing on both security and perform
 | --- | --- | --- |
 | **Security First** | Build on existing security protocols | Protects update integrity |
 | **Size Optimization** | Use compression techniques discussed earlier | Cuts down user wait times |
-| **Update Scheduling** | [Process updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) in the background, Wi-Fi only | Reduces user disruption |
+| **Update Scheduling** | [Process updates](https://capgo.app/docs/live-updates/differentials/) in the background, Wi-Fi only | Reduces user disruption |
 | **Version Control** | Separate updates for web and native layers | Ensures smooth compliance |
 
 > "OTA updates are a critical infrastructure component to nearly every embedded IoT device" [\[8\]](https://www.beningo.com/5-best-practices-for-over-the-air-ota-updates/)

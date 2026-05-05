@@ -62,7 +62,7 @@ Here's how to set up Capgo for managing OTA updates and version control with eas
 
 ### Initial Setup Steps
 
-Start by installing the [Capgo updater plugin](https://capgo.app/docs/plugin/self-hosted/manual-update/):
+Start by installing the [Capgo updater plugin](https://capgo.app/docs/plugins/updater/self-hosted/manual-update/):
 
 ```bash
 npm install @capgo/capacitor-updater  
@@ -148,7 +148,7 @@ Capgo uses Semantic Versioning (SemVer) to manage app versions, formatted as **M
 -   **Minor Version (1.X.0)**: Increase the MINOR number for new features that remain compatible.
 -   **Patch Version (1.0.X)**: Increase the PATCH number for bug fixes that don't affect compatibility.
 
-| Version Type | When to Increment | [Auto-Update Behavior](https://capgo.app/docs/plugin/cloud-mode/auto-update/) |
+| Version Type | When to Increment | [Auto-Update Behavior](https://capgo.app/docs/getting-started/add-an-app/) |
 | --- | --- | --- |
 | Major (X.0.0) | For breaking API changes | Requires manual approval |
 | Minor (1.X.0) | For new features | Configurable in Capgo |
@@ -200,7 +200,7 @@ Start by updating the version in **package.json** and **capacitor.config.json**.
 
 Thoroughly test your build and confirm the app communicates with the server using `notifyAppReady`.
 
-Next, decide on your [update strategy](https://capgo.app/docs/plugin/cloud-mode/hybrid-update). You can choose from:
+Next, decide on your [update strategy](https://capgo.app/docs/live-updates/differentials/). You can choose from:
 
 -   **Auto-Update**: Automatically enforce minimum version requirements.
 -   **Manual Control**: Specify exact version requirements for updates.

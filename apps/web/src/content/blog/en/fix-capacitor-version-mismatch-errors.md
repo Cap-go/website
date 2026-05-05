@@ -19,17 +19,17 @@ next_blog: ''
 **Version mismatch errors in [Capacitor](https://capacitorjs.com/) apps can disrupt builds, cause runtime crashes, and delay updates.** These issues arise when core packages, plugins, or dependencies are misaligned. Here's how to quickly resolve them:
 
 -   **Common Causes**:
-    
+
     -   Partial updates or dependency conflicts.
     -   Errors in `package.json` or pod files.
-    -   [Automatic updates](https://capgo.app/docs/plugin/cloud-mode/auto-update/) creating inconsistencies.
+    -   [Automatic updates](https://capgo.app/docs/getting-started/add-an-app/) creating inconsistencies.
 -   **Quick Fixes**:
-    
+
     -   Run `npx cap doctor` or `npm list @capacitor/*` to spot mismatches.
     -   Align versions in `package.json` (e.g., `@capacitor/core`, `@capacitor/ios`, `@capacitor/android`).
     -   Use `npm install` to update all core packages and plugins.
 -   **Prevent Future Issues**:
-    
+
     -   Lock versions in `package.json` (e.g., `"@capacitor/core": "5.0.0"`).
     -   Automate version checks with CI/CD tools.
     -   Use live update tools like [Capgo](https://capgo.app/) for faster fixes.
@@ -129,17 +129,17 @@ Ensure your plugins are compatible with the Capacitor version you're using. Upda
 If a plugin requires Capacitor 5.x but you're using 6.x, you have two options:
 
 -   Update the plugin to the latest version:
-    
+
     ```bash
     npm install @plugin-name@latest
     ```
-    
+
 -   Downgrade Capacitor to match the plugin's requirements:
-    
+
     ```bash
     npm install @capacitor/core@5.x
     ```
-    
+
 
 For updates that involve breaking changes, additional adjustments may be necessary.
 
@@ -148,15 +148,15 @@ For updates that involve breaking changes, additional adjustments may be necessa
 When transitioning to a new major version, follow these steps:
 
 1.  **Backup Your Project**: Create a full backup before starting any updates.
-    
+
 2.  **Check the Changelog**: Review the official changelog for any breaking changes that may affect your project.
-    
+
 3.  **Update Dependencies**: Upgrade your Capacitor packages to the required versions. For example:
-    
+
     ```bash
     npm install @capacitor/core@7.0.0 @capacitor/ios@7.0.0 @capacitor/android@7.0.0
     ```
-    
+
 
 Capgo provides live updates for Capacitor 8, allowing you to apply fixes without needing app store approvals [\[1\]](https://capgo.app/).
 
@@ -220,20 +220,20 @@ These steps summarize the diagnostic methods discussed earlier.
 To ensure long-term stability, consider these best practices for managing Capacitor versions effectively. These methods have been successfully applied in over 750 production apps [\[1\]](https://capgo.app/).
 
 -   **Version Control**
-    
+
     -   Keep dependency versions consistent.
     -   Synchronize versioning across all team environments.
     -   Clearly document version requirements for easy reference.
--   **[Update Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/)**  
+-   **[Update Management](https://capgo.app/docs/getting-started/deploy/)**
     Rodrigo Mantica shares:
-    
+
     > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" \[2\]
-    
--   **Monitoring and Recovery**  
+
+-   **Monitoring and Recovery**
     Regularly monitor dependencies to identify conflicts early. Proper monitoring has shown that 95% of active users can update within 24 hours [\[1\]](https://capgo.app/).
-    
+
 -   **Key Implementation Tips**
-    
+
     -   Automate version checks within CI/CD pipelines.
     -   Use testing channels before full distribution.
     -   Maintain rollback options for unexpected issues.

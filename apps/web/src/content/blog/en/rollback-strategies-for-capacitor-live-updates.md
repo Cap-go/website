@@ -95,7 +95,7 @@ To minimize user impact and isolate potential issues, it's important to configur
 -   **Production Channel**: Use this channel for stable releases intended for your entire user base.
 -   **Version Controls**: Set clear version tracking parameters for each channel to maintain organization and control.
 
-Capgo's [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) makes it easy to test pull requests directly within the app. This reduces the chances of problematic updates making it to production.
+Capgo's [channel system](https://capgo.app/docs/live-updates/channels/) makes it easy to test pull requests directly within the app. This reduces the chances of problematic updates making it to production.
 
 ### Automated Rollback Systems
 

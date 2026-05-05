@@ -457,7 +457,7 @@ This approach ensures real-time updates to meet Apple and Google compliance requ
 
 ## Summary
 
-To wrap up the detailed setup and management process, here's a quick overview. Automated consent tracking requires strict adherence to privacy regulations, secure data handling, and efficient [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
+To wrap up the detailed setup and management process, here's a quick overview. Automated consent tracking requires strict adherence to privacy regulations, secure data handling, and efficient [update management](https://capgo.app/docs/getting-started/deploy/).
 
 Success hinges on accurate technical execution combined with fast update deployment. Tools like Capgo support this approach, achieving an impressive 82% global success rate for consent-related updates [\[1\]](https://capgo.app/). As Rodrigo Mantica puts it:
 

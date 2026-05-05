@@ -1,20 +1,14 @@
-import { copyFileSync, existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs'
+import { copyFileSync, existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, isAbsolute, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const docsDir = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const sourcePublicDir = resolve(docsDir, '../web/public')
 const targetPublicDir = resolve(docsDir, 'public')
-const trackedFiles = new Map([
-  ['.gitignore', '*\n!.gitignore\n'],
-])
+const trackedFiles = new Map([['.gitignore', '*\n!.gitignore\n']])
+const alwaysCopiedAssets = ['_redirects']
 
-const referencePatterns = [
-  /~public\/([^'"`\s)]+)/g,
-  /(?:src|href)=["']\/([^"'?#]+)["']/g,
-  /url\(["']?\/([^)"'?#]+)["']?\)/g,
-  /["'`]\/([^"'`?#]+)["'`]/g,
-]
+const referencePatterns = [/~public\/([^'"`\s)]+)/g, /(?:src|href)=["']\/([^"'?#]+)["']/g, /url\(["']?\/([^)"'?#]+)["']?\)/g, /["'`]\/([^"'`?#]+)["'`]/g]
 
 function isWithinRoot(root: string, candidate: string): boolean {
   const candidatePath = resolve(candidate)
@@ -71,7 +65,7 @@ function addMarkdownReferencedAssets(content: string, referencedAssets: Set<stri
     let pathEnd = pathStart
     while (pathEnd < content.length) {
       const char = content[pathEnd]
-      if (char === ')' || char === '"' || char === '\'' || char === '#' || char === '?' || /\s/.test(char)) break
+      if (char === ')' || char === '"' || char === "'" || char === '#' || char === '?' || /\s/.test(char)) break
       pathEnd += 1
     }
 
@@ -110,6 +104,13 @@ for (const [relativePath, content] of trackedFiles) {
 }
 
 const referencedAssets = new Set<string>()
+for (const assetPath of alwaysCopiedAssets) {
+  const resolvedAsset = resolveReferencedAsset(assetPath)
+  if (!resolvedAsset) {
+    throw new Error(`Required docs public asset "${assetPath}" is missing or invalid in ${sourcePublicDir}.`)
+  }
+  referencedAssets.add(resolvedAsset)
+}
 const scanTargets = [resolve(docsDir, 'astro.config.mjs'), ...walkFiles(resolve(docsDir, 'src'))]
 
 for (const scanTarget of scanTargets) {
@@ -117,6 +118,7 @@ for (const scanTarget of scanTargets) {
 }
 
 let copiedBytes = 0
+let copiedCount = 0
 
 for (const assetPath of [...referencedAssets].sort((left, right) => left.localeCompare(right))) {
   const sourcePath = resolve(sourcePublicDir, assetPath)
@@ -129,7 +131,8 @@ for (const assetPath of [...referencedAssets].sort((left, right) => left.localeC
   mkdirSync(dirname(outputPath), { recursive: true })
   copyFileSync(sourcePath, outputPath)
   copiedBytes += sourceMetadata.size
+  copiedCount += 1
 }
 
 const copiedMegabytes = (copiedBytes / 1024 / 1024).toFixed(2)
-console.log(`Synced ${referencedAssets.size} docs public assets (${copiedMegabytes} MB) from ${relative(docsDir, sourcePublicDir)}.`)
+console.log(`Synced ${copiedCount} docs public assets (${copiedMegabytes} MB) from ${relative(docsDir, sourcePublicDir)}.`)

@@ -58,7 +58,7 @@ next_blog: ''
         npx @capgo/cli init
         ```
         
-9.  **[Test Your App](https://capgo.app/docs/plugin/debugging/)**:
+9.  **[Test Your App](https://capgo.app/docs/plugins/updater/debugging/)**:
     
     -   Use iOS Simulator (`npx cap open ios`) or Android Emulator (`npx cap open android`).
 

@@ -109,7 +109,7 @@ For secure and efficient updates, modern tools provide these capabilities:
 | End-to-End Encryption | Secures data transmission during updates. |
 | Analytics and Error Tracking | Tracks update performance and issues. |
 | Rollback Support | Quickly recover from problematic updates. |
-| [Channel System](https://capgo.app/docs/plugin/cloud-mode/channel-system/) | Allows targeted updates for specific users. |
+| [Channel System](https://capgo.app/docs/live-updates/channels/) | Allows targeted updates for specific users. |
 
 To support remote inspection, configure your app as shown below:
 
@@ -133,7 +133,7 @@ Setting up these tools ensures a reliable debugging environment, speeding up dev
 
 ## Platform-Specific Debugging Methods
 
-Building on core [debugging tools](https://capgo.app/docs/plugin/debugging/), platform-specific techniques help fine-tune your [debugging process](https://capgo.app/docs/plugin/debugging/) for greater accuracy.
+Building on core [debugging tools](https://capgo.app/docs/plugins/updater/debugging/), platform-specific techniques help fine-tune your [debugging process](https://capgo.app/docs/plugins/updater/debugging/) for greater accuracy.
 
 ### Native Bridge Testing
 
@@ -179,7 +179,7 @@ To debug production issues more effectively, configure source maps for each plat
 
 The table below highlights how source map settings impact debugging across platforms:
 
-| Platform | Source Map Type | [Debugging Tool](https://capgo.app/docs/plugin/debugging/) |
+| Platform | Source Map Type | [Debugging Tool](https://capgo.app/docs/plugins/updater/debugging/) |
 | --- | --- | --- |
 | iOS | Inline | Safari Web Inspector |
 | Android | Hidden | Chrome DevTools |
@@ -249,7 +249,7 @@ Each debugging tool provides unique insights depending on the platform:
 | Source Map Support | ✓   | Limited | Limited | ✓   |
 | Hot Reload | ✓   | Native only | Native only | ✓   |
 
-By combining platform-specific IDEs like Android Studio or Xcode with VS Code, developers can leverage [native debugging capabilities](https://capgo.app/docs/plugin/debugging/) while maintaining cross-platform flexibility.
+By combining platform-specific IDEs like Android Studio or Xcode with VS Code, developers can leverage [native debugging capabilities](https://capgo.app/docs/plugins/updater/debugging/) while maintaining cross-platform flexibility.
 
 ### Update System Options
 
@@ -306,6 +306,6 @@ Key features of live update systems include real-time error tracking, instant ro
 
 ## Conclusion
 
-A well-thought-out mix of [effective debugging](https://capgo.app/docs/plugin/debugging/) tools and efficient live update systems is key to addressing platform-specific challenges. By combining traditional debugging methods with live update platforms like Capgo, developers can implement immediate fixes without waiting for app store approvals. With a global update success rate and the ability to reach most users within 24 hours, these tools make resolving issues faster and easier.
+A well-thought-out mix of [effective debugging](https://capgo.app/docs/plugins/updater/debugging/) tools and efficient live update systems is key to addressing platform-specific challenges. By combining traditional debugging methods with live update platforms like Capgo, developers can implement immediate fixes without waiting for app store approvals. With a global update success rate and the ability to reach most users within 24 hours, these tools make resolving issues faster and easier.
 
 Key elements for success include accurate platform detection, secure update processes with end-to-end encryption, quick rollback options, and actionable analytics.

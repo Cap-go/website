@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
-**Want your [CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-gitlab/) to run smoothly without surprises? Start by adding alerts.** Alerts notify your team about failed builds, deployment issues, or performance drops, helping you fix problems quickly. Here’s a quick guide to setting them up:
+**Want your [CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-in-gitlab/) to run smoothly without surprises? Start by adding alerts.** Alerts notify your team about failed builds, deployment issues, or performance drops, helping you fix problems quickly. Here’s a quick guide to setting them up:
 
 -   **Why Alerts Matter:** They monitor key metrics like build success rates, deployment frequency, and recovery times, ensuring your pipeline stays healthy.
 -   **Choose the Right Tools:** Tools like [Prometheus Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/) or [Datadog](https://www.datoghq.com/) integrate seamlessly with platforms like [GitHub Actions](https://docs.github.com/actions/learn-github-actions/understanding-github-actions) or [Jenkins](https://www.jenkins.io/).

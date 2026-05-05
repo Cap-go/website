@@ -21,7 +21,7 @@ Over-The-Air (OTA) updates let you deliver app fixes and features directly to us
 ### Key Benefits of OTA Updates:
 
 -   **Instant Deployment**: Push updates immediately without app store delays.
--   **[Automatic Updates](https://capgo.app/docs/plugin/cloud-mode/auto-update/)**: Users get updates in the background.
+-   **[Automatic Updates](https://capgo.app/docs/getting-started/add-an-app/)**: Users get updates in the background.
 -   **Version Management**: Easily manage and roll back versions.
 -   **Selective Distribution**: Target specific user groups like beta testers.
 
@@ -175,7 +175,7 @@ Here’s a breakdown of the top OTA update tools for Capacitor apps:
 | CI/CD Integration | Yes | Limited | Yes | \-  |
 | Monthly Cost | From $12 | Comparable | ~$500 | Was free |
 
-This comparison helps developers identify the best tool for delivering [fast and secure OTA updates](https://capgo.app/blog/open-source-licecing/) in their Capacitor apps.
+This comparison helps developers identify the best tool for delivering [fast and secure OTA updates](https://capgo.app/blog/open-source-licence/) in their Capacitor apps.
 
 The OTA tool landscape is changing rapidly. With Microsoft CodePush ending in 2024 and Appflow set to shut down by 2026, developers are exploring more sustainable options. launched in 2024, has carved out a space in the German market.
 

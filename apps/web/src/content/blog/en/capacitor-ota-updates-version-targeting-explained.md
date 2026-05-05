@@ -36,7 +36,7 @@ Here’s what you’ll learn:
     
     -   Follow semantic versioning (**MAJOR.MINOR.PATCH**).
         
-    -   [Configure updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/) in your Capacitor project.
+    -   [Configure updates](https://capgo.app/docs/getting-started/deploy/) in your Capacitor project.
         
     -   Test thoroughly across targeted versions.
         
@@ -155,7 +155,7 @@ This approach is particularly effective in enterprise settings where multiple ap
 
 ## Implementation Guidelines
 
-Now that you’ve got the technical foundation covered, it’s time to plan and execute your [update strategy](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) effectively.
+Now that you’ve got the technical foundation covered, it’s time to plan and execute your [update strategy](https://capgo.app/docs/live-updates/differentials/) effectively.
 
 ### Planning Your Update Strategy
 

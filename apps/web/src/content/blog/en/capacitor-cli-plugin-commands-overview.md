@@ -293,7 +293,7 @@ If CLI commands don't solve the problem, check the plugin's GitHub repository fo
 
 ![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
 
-Capgo works seamlessly with the Capacitor CLI, enabling [real-time plugin updates](https://capgo.app/docs/plugins/updater/self-hosted/getting-started/) and simplifying maintenance tasks for developers.
+Capgo works seamlessly with the Capacitor CLI, enabling [real-time plugin updates](https://capgo.app/docs/plugins/updater/self-hosted/auto-update/) and simplifying maintenance tasks for developers.
 
 ### Capgo Plugin Features
 
@@ -333,7 +333,7 @@ Key highlights of the update system include:
 
 -   **One-click rollback** for quick fixes
 -   **User management** for beta testing
--   **[Channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** for targeted updates
+-   **[Channel system](https://capgo.app/docs/live-updates/channels/)** for targeted updates
 -   **Error tracking** to monitor issues
 
 Currently, **750 apps** are using Capgo in production. The platform also offers CI/CD configuration services for $2,600, ensuring smooth integration into workflows. Its global CDN delivers updates with an average speed of **114ms** for 5MB bundles.
@@ -362,7 +362,7 @@ Capgo can take your workflow to the next level. It offers both cloud and self-ho
 Here’s what Capgo brings to the table:
 
 -   Real-time analytics to monitor update performance
--   End-to-end encryption for [secure plugin updates](https://capgo.app/docs/plugin/self-hosted/encrypted-bundles/)
+-   End-to-end encryption for [secure plugin updates](https://capgo.app/docs/plugins/updater/self-hosted/encrypted-bundles/)
 -   Easy CI/CD integration with major platforms
 -   Pricing that starts at $12/month for solo developers
 

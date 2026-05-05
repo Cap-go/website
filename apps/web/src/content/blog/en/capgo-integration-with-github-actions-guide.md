@@ -225,7 +225,7 @@ This setup ensures that your updates are automatically built, versioned, and dep
 
 ### Running Test Workflows
 
-You can test your GitHub Actions workflow by using a dedicated [Capgo testing channel](https://capgo.app/docs/plugin/cloud-mode/channel-system/). This allows you to validate updates before they go live.
+You can test your GitHub Actions workflow by using a dedicated [Capgo testing channel](https://capgo.app/docs/live-updates/channels/). This allows you to validate updates before they go live.
 
 ```yaml
 - name: Test Build Deployment

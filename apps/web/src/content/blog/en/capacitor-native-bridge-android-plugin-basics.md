@@ -239,7 +239,7 @@ public void processData(PluginCall call) {
 
 ### Testing Your Plugin
 
-Use Android Studio's [debugging tools](https://capgo.app/docs/plugin/debugging/) to test each method thoroughly. Ensure that your methods are focused on specific tasks to keep the code clean and easy to maintain. Once debugging is complete, test your plugin on actual Android devices to confirm everything works as expected.
+Use Android Studio's [debugging tools](https://capgo.app/docs/plugins/updater/debugging/) to test each method thoroughly. Ensure that your methods are focused on specific tasks to keep the code clean and easy to maintain. Once debugging is complete, test your plugin on actual Android devices to confirm everything works as expected.
 
 ## Plugin Testing Guide
 
@@ -443,7 +443,7 @@ Capgo provides essential tools for managing live updates, ensuring smooth perfor
 | --- | --- |
 | End-to-End Encryption | Ensures secure delivery of updates |
 | Partial Updates | Downloads only modified components |
-| [Channel System](https://capgo.app/docs/plugin/cloud-mode/channel-system/) | Enables targeted staged rollouts |
+| [Channel System](https://capgo.app/docs/live-updates/channels/) | Enables targeted staged rollouts |
 | Real-time Analytics | Monitors update performance |
 | One-click Rollback | Quick recovery in case of issues |
 | CI/CD Integration | Compatible with GitHub Actions, GitLab CI, and Jenkins |

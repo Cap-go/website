@@ -161,11 +161,11 @@ After making updates, track their effectiveness using performance metrics.
 
 Measuring the impact of metadata updates is essential. Use metrics like update success rates and user engagement to evaluate effectiveness. For example, apps using live update solutions like Capgo report a 95% update success rate among active users within 24 hours [\[1\]](https://capgo.app/). Regularly check user feedback to ensure your metadata is clear and resonates with your audience.
 
-These insights can help you select the right [tools for managing updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
+These insights can help you select the right [tools for managing updates](https://capgo.app/docs/getting-started/deploy/).
 
 ### Tools for Managing Updates
 
-Modern platforms simplify [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) with features like:
+Modern platforms simplify [update management](https://capgo.app/docs/getting-started/deploy/) with features like:
 
 -   **Real-time deployment**: Push updates instantly without waiting for store approval. Capgo, for instance, has delivered 23.5 million updates with an 82% global success rate [\[1\]](https://capgo.app/).
 -   **Analytics integration**: Monitor update success, user engagement, and version history.

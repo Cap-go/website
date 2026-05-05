@@ -153,7 +153,7 @@ To monitor user update rates:
 -   Set target completion times and track update rates for different devices to identify trends.
     
 
-Once you have this data, focus on spotting and addressing problem areas to improve your [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
+Once you have this data, focus on spotting and addressing problem areas to improve your [update process](https://capgo.app/docs/getting-started/deploy/).
 
 ### Problem Areas Detection
 
@@ -296,7 +296,7 @@ When comparing OTA update tracking tools, focus on these features:
 
 ### Capgo Features
 
-Capgo stands out with an impressive 82% global success rate [\[1\]](https://capgo.app/), offering features that cover all aspects of [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/):
+Capgo stands out with an impressive 82% global success rate [\[1\]](https://capgo.app/), offering features that cover all aspects of [update management](https://capgo.app/docs/getting-started/deploy/):
 
 -   **Real-time Analytics**  
     Capgo provides worldwide monitoring with an average API response time of 434ms [\[1\]](https://capgo.app/). This helps you detect and address issues early.

@@ -342,7 +342,7 @@ You’ve completed three key steps to get started:
 
 ### Why Integrate These Tools?
 
-Pairing Firebase Crashlytics with Capgo gives you a powerful system for error tracking and [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/). Here’s what this combo offers:
+Pairing Firebase Crashlytics with Capgo gives you a powerful system for error tracking and [update management](https://capgo.app/docs/getting-started/deploy/). Here’s what this combo offers:
 
 -   **Quick fixes**: Push instant updates and roll back changes with just one click.
 -   **Reliable rollouts**: Ensure updates are widely adopted and smoothly delivered to users.

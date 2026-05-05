@@ -267,7 +267,7 @@ Capgo simplifies live updates for Capacitor apps, especially when it comes to na
 | --- | --- |
 | End-to-End Encryption | Ensures secure update delivery |
 | CI/CD Integration | Enables automated deployments |
-| Version Control | Simplifies [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) |
+| Version Control | Simplifies [update management](https://capgo.app/docs/getting-started/deploy/) |
 | Rollback Capability | Reduces risks with easy reversals |
 
 This efficient process extends to native bridges, as explained below.
@@ -396,5 +396,5 @@ If you’re using live update services like _Capgo_, you can push fixes and upda
 
 Capgo simplifies the process of updating native bridges in Capacitor apps with **Over-the-Air (OTA) updates**. This feature lets developers deploy changes instantly, bypassing the need for app store submissions. Whether it's bug fixes, new features, or asset updates, you can deliver them directly to your users in real time.
 
-Setting up Capgo is quick and straightforward. Its comprehensive [auto-update system](https://capgo.app/docs/plugin/cloud-mode/auto-update/) can be up and running in just minutes. Plus, it ensures your app stays current while adhering to both Apple and Android guidelines.
+Setting up Capgo is quick and straightforward. Its comprehensive [auto-update system](https://capgo.app/docs/getting-started/add-an-app/) can be up and running in just minutes. Plus, it ensures your app stays current while adhering to both Apple and Android guidelines.
 :::
