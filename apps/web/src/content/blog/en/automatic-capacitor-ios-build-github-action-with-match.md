@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-10-30T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-05T08:23:52.000Z
 head_image: /fastlane_ios.webp
 head_image_alt: Fastlane testflight GitHub action illustration
 keywords: Fastlane, CI/CD, iOS, automatic build, automatic release, mobile app updates
@@ -21,6 +21,11 @@ next_blog: automatic-capacitor-android-build-github-action
 # Automatic iOS Builds with GitHub Actions using Match
 
 Setting up CI/CD for Capacitor apps can be complex and time-consuming. Here's what you need to know:
+
+## Recommended for New Builds: Use Capgo Build
+
+> **We now recommend using [Capgo Build with the Capgo CLI](/docs/cli/cloud-build/) for native Capacitor builds.**
+> This Fastlane Match guide is kept for teams maintaining existing GitHub Actions pipelines, but new iOS builds should use the Capgo CLI so you do not have to maintain Fastlane, Match repositories, Xcode runners, certificates, and upload scripts yourself.
 
 ## Prerequisites
 
