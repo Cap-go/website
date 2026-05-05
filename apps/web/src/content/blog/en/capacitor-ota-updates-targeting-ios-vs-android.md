@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-01T04:05:37.460Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-05T11:43:34.000Z
 head_image: https://assets.seobotai.com/capgo.app/67c2639cd8e4215290f21bf1-1740801998811.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, iOS updates, Android updates, mobile app development, security measures, update strategies

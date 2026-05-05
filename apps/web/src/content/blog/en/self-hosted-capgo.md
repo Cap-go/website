@@ -8,7 +8,7 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-20T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-05T11:43:34.000Z
 head_image: /self-hosted-capgo.webp
 head_image_alt: self-hosted capgo
 keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
