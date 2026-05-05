@@ -94,7 +94,7 @@ Here's a detailed breakdown of how they differ:
 | **Feature** | **Native Capacitor Updates** | **Capgo Platform** |
 | --- | --- | --- |
 | **Deployment Speed** | 2–7 days (app store review) | Minutes to hours |
-| **Update Distribution** | Manual user approval needed | [Automatic background updates](https://capgo.app/docs/plugin/self-hosted/auto-update/) |
+| **Update Distribution** | Manual user approval needed | [Automatic background updates](https://capgo.app/docs/plugins/updater/self-hosted/getting-started/) |
 | **Success Rate** | Variable (user-dependent) | 95% within 24 hours |
 | **Bandwidth Usage** | Full app download required | Only changed content |
 | **Security Level** | Standard HTTPS | End-to-end encryption |

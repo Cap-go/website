@@ -161,7 +161,7 @@ If you use CI/CD pipelines, **Capgo** integrates effortlessly into your workflow
 Consider your technical priorities and match them to the tool's strengths:
 
 -   For cross-platform debugging, **Inspect.dev** is a solid choice.
--   Need [automated updates](https://capgo.app/docs/plugin/self-hosted/auto-update/) with added security? **Capgo** is ideal.
+-   Need [automated updates](https://capgo.app/docs/plugins/updater/self-hosted/getting-started/) with added security? **Capgo** is ideal.
 
 **Budget**
 Budget plays a big role. **Capgo** offers advanced features like automation and security starting at $12/month. **Inspect.dev** provides specialized debugging features for $49 annually, catering to specific use cases.

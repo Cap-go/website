@@ -28,7 +28,7 @@ Rollback mechanisms ensure stability when updating [Capacitor](https://capacitor
     -   **Rollback Execution**: Restores previous versions seamlessly.
 -   **Tools**:
     -   **[Capgo](https://capgo.app/)**: Managed service with features like one-click rollback and real-time analytics.
-    -   **Capacitor [Live Update Plugin](https://capgo.app/docs/plugin/self-hosted/auto-update/)**: Native solution requiring manual setup but offering direct API access.
+    -   **Capacitor [Live Update Plugin](https://capgo.app/docs/plugins/updater/self-hosted/getting-started/)**: Native solution requiring manual setup but offering direct API access.
 
 ### Quick Comparison:
 

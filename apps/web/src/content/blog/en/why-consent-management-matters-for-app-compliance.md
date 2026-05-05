@@ -143,7 +143,7 @@ Here’s how different update methods perform when it comes to handling consent 
 | --- | --- | --- | --- |
 | App Store Updates | 3–7 days | Full review process | Requires manual update |
 | Server-side Controls | Instant | Limited oversight | No user action needed |
-| Live Updates | Under 24 hours | Platform compliant | [Automatic background update](https://capgo.app/docs/plugin/self-hosted/auto-update/) |
+| Live Updates | Under 24 hours | Platform compliant | [Automatic background update](https://capgo.app/docs/plugins/updater/self-hosted/getting-started/) |
 
 This table shows how live updates stand out for their speed and ease of use. Capgo takes full advantage of this approach to deliver efficient solutions.
 

@@ -135,7 +135,7 @@ Now let’s look at automating these updates to simplify release management.
 
 ### Version Update Automation
 
-[Automating version updates](https://capgo.app/docs/plugin/self-hosted/auto-update/) can save time and reduce errors in your Capacitor project. Here's how to set it up:
+[Automating version updates](https://capgo.app/docs/plugins/updater/self-hosted/getting-started/) can save time and reduce errors in your Capacitor project. Here's how to set it up:
 
 1.  **NPM Version Scripts**
 

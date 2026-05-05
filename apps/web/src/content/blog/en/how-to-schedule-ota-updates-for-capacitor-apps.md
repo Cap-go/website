@@ -100,7 +100,7 @@ Successfully managing scheduled OTA updates requires careful code implementation
 
 ### Update Schedule Code
 
-Here’s how you can set up [automatic background updates](https://capgo.app/docs/plugin/self-hosted/auto-update/) with a simple script:
+Here’s how you can set up [automatic background updates](https://capgo.app/docs/plugins/updater/self-hosted/getting-started/) with a simple script:
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater'

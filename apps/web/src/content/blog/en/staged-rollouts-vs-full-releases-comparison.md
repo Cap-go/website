@@ -102,7 +102,7 @@ Older full release methods relied on lengthy app store reviews, often delaying u
 | --- | --- | --- |
 | **Update Speed** | Weeks for app store approval | Immediate deployment |
 | **Success Tracking** | Limited insights | Real-time analytics |
-| **User Experience** | Manual updates by users | [Automatic background updates](https://capgo.app/docs/plugin/self-hosted/auto-update/) |
+| **User Experience** | Manual updates by users | [Automatic background updates](https://capgo.app/docs/plugins/updater/self-hosted/getting-started/) |
 | **Release Control** | Basic version handling | Advanced release controls |
 
 > "No more wait! Push live code changes directly to users without app store delays. Deploy critical fixes and features when they're ready." - Capgo [\[1\]](https://capgo.app/)

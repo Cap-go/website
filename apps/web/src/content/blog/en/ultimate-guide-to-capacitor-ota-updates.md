@@ -179,7 +179,7 @@ Transparent communication about updates builds trust and ensures smooth deployme
 | Update Type | Communication Method | Timing |
 | --- | --- | --- |
 | Critical Updates | In-app notification | Immediately |
-| Feature Updates | [Automatic background update](https://capgo.app/docs/plugin/self-hosted/auto-update/) | During low usage |
+| Feature Updates | [Automatic background update](https://capgo.app/docs/plugins/updater/self-hosted/getting-started/) | During low usage |
 | Security Patches | Silent update | Automatically applied |
 
 Using background updates can reduce user interruptions. Pairing analytics with error monitoring allows for early detection of problems, minimizing their impact on users and preserving a seamless experience.
