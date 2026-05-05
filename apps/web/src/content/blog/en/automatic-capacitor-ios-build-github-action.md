@@ -470,7 +470,7 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v6
-      - name: Use Node.js 20
+      - name: Set Node.js
         uses: actions/setup-node@v6
         with:
           node-version: 24
@@ -481,10 +481,7 @@ jobs:
       - name: Build
         id: build_code
         run: npm run build
-      - name: Build
-        id: build_code
-        run: npm run mobile
-      - uses: actions/cache@v3
+      - uses: actions/cache@v5
         with:
           path: ios/App/Pods
           key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
@@ -511,7 +508,7 @@ jobs:
         with:
           lane: ios beta
       - name: Upload release bundle
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ios-release
           path: ./App.ipa

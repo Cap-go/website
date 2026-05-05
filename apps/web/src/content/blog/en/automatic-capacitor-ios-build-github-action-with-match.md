@@ -456,7 +456,7 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v6
-      - name: Use Node.js 16
+      - name: set Node.js
         uses: actions/setup-node@v6
         with:
           node-version: '24'
@@ -467,10 +467,7 @@ jobs:
       - name: Build
         id: build_code
         run: npm run build
-      - name: Build
-        id: build_code
-        run: npm run mobile
-      - uses: actions/cache@v3
+      - uses: actions/cache@v5
         with:
           path: ios/App/Pods
           key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}

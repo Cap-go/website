@@ -345,7 +345,7 @@ jobs:
         run: npm ci
         
       - name: Cache Gradle
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: |
             ~/.gradle/caches
