@@ -68,7 +68,7 @@ If plugin Gradle settings are outdated, the whole app build can fail, even when 
 
 [Capgo](https://capgo.app/) provides tools around Capacitor delivery and operations:
 
-- [Live updates](https://capgo.app/docs/plugin/cloud-mode/auto-update/) for web bundle changes
+- [Live updates](https://capgo.app/docs/getting-started/add-an-app/) for web bundle changes
 - Plugin ecosystem and native feature packages
 - CI/CD-friendly update workflows for Capacitor teams
 
@@ -259,7 +259,7 @@ If you are documenting this in internal runbooks or support pages, include terms
 - Android code shrinking: [R8 and rules](https://developer.android.com/build/shrink-code)
 - Gradle docs: [Build tool fundamentals](https://docs.gradle.org/current/userguide/userguide.html)
 - Capacitor docs: [Official documentation](https://capacitorjs.com/docs)
-- Capgo docs: [Auto update docs](https://capgo.app/docs/plugin/cloud-mode/auto-update/)
+- Capgo docs: [Auto update docs](https://capgo.app/docs/getting-started/add-an-app/)
 
 ## Final takeaway
 

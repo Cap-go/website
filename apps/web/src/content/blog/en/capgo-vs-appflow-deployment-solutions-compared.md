@@ -21,7 +21,7 @@ next_blog: ''
 ### Key Takeaways:
 
 -   **Capgo**: Affordable, secure, supports [cloud and self-hosted setups](https://capgo.app/blog/self-hosted-capgo/), and integrates with external CI/CD tools like [GitHub Actions](https://docs.github.com/actions). Plans start at $12/month.
--   **Appflow**: Proprietary, cloud-only, higher costs ($5,000/year for some teams), and [built-in CI/CD](https://capgo.app/blog/setup-ci-and-cd-gitlab/).
+-   **Appflow**: Proprietary, cloud-only, higher costs ($5,000/year for some teams), and [built-in CI/CD](https://capgo.app/blog/setup-ci-and-cd-in-gitlab/).
 
 ### Quick Comparison:
 
@@ -33,7 +33,7 @@ next_blog: ''
 | **Pricing** | From $12/month | ~$5,000/year for teams |
 | **CI/CD Integration** | External tools supported | Built-in system |
 
-Capgo stands out for its affordability, strong security, and flexibility, making it a top choice for developers seeking fast, [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) without breaking the bank.
+Capgo stands out for its affordability, strong security, and flexibility, making it a top choice for developers seeking fast, [secure updates](https://capgo.app/docs/live-updates/differentials/) without breaking the bank.
 
 ## Feature Comparison
 

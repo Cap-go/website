@@ -252,7 +252,7 @@ When rolling out cross-platform UI updates, complying with app store rules is no
 
 -   **Update Compliance**: Ensure all updates meet Apple and Android guidelines for UI changes.
 -   **Security Standards**: Use end-to-end encryption to securely deliver updates.
--   For enterprise apps, Capgo offers options like [self-hosted updates](https://capgo.app/docs/plugin/self-hosted/handling-updates/) and custom domain support. This gives organizations tighter control over the update process while ensuring compliance.
+-   For enterprise apps, Capgo offers options like [self-hosted updates](https://capgo.app/docs/plugins/updater/self-hosted/handling-updates/) and custom domain support. This gives organizations tighter control over the update process while ensuring compliance.
 
 Capgo’s approach to updates has a proven track record - 95% of active users adopt updates within 24 hours. This quick uptake helps maintain a consistent experience and minimizes support issues caused by outdated versions.
 

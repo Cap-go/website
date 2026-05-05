@@ -27,9 +27,9 @@ next_blog: ''
 
 | Update Method | Speed | Compliance Support | User Impact |
 | --- | --- | --- | --- |
-| App Store Updates | 3–7 days | Full review process | [Manual user updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/) |
+| App Store Updates | 3–7 days | Full review process | [Manual user updates](https://capgo.app/docs/getting-started/deploy/) |
 | Server-side Controls | Instant | Limited oversight | No user action needed |
-| Live Updates (e.g., Capgo) | Under 24 hours | Platform compliant | [Automatic updates](https://capgo.app/docs/plugin/cloud-mode/auto-update/) |
+| Live Updates (e.g., Capgo) | Under 24 hours | Platform compliant | [Automatic updates](https://capgo.app/docs/getting-started/add-an-app/) |
 
 **Takeaway:** Stay compliant by implementing real-time consent updates, securing user data, and using tools that adapt quickly to changing regulations.
 
@@ -143,7 +143,7 @@ Here’s how different update methods perform when it comes to handling consent 
 | --- | --- | --- | --- |
 | App Store Updates | 3–7 days | Full review process | Requires manual update |
 | Server-side Controls | Instant | Limited oversight | No user action needed |
-| Live Updates | Under 24 hours | Platform compliant | [Automatic background update](https://capgo.app/docs/plugin/self-hosted/auto-update/) |
+| Live Updates | Under 24 hours | Platform compliant | [Automatic background update](https://capgo.app/docs/plugins/updater/self-hosted/auto-update/) |
 
 This table shows how live updates stand out for their speed and ease of use. Capgo takes full advantage of this approach to deliver efficient solutions.
 
@@ -157,7 +157,7 @@ Some of the standout features include:
 
 -   **End-to-end encryption** to ensure secure transmission of consent data.
 -   **Partial updates** to reduce bandwidth usage during consent-related changes.
--   **[Channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** that allows testing updates with specific user groups.
+-   **[Channel system](https://capgo.app/docs/live-updates/channels/)** that allows testing updates with specific user groups.
 -   **Analytics dashboard** for tracking the success of consent implementations.
 
 > "Capgo is a smart way to make hot code pushes (and not for all the money in the world like with @AppFlow) :-)" [\[1\]](https://capgo.app/)

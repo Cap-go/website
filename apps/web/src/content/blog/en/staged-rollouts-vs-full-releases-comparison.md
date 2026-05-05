@@ -34,7 +34,7 @@ Choosing between **staged rollouts** and **full releases** depends on your appâ€
 
 ### When to Use Each Method
 
--   **Staged Rollouts**: Best for [complex updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update), large user bases, or when minimizing risks is a priority.
+-   **Staged Rollouts**: Best for [complex updates](https://capgo.app/docs/live-updates/differentials/), large user bases, or when minimizing risks is a priority.
 -   **Full Releases**: Ideal for urgent bug fixes, security patches, or simple updates requiring broad adoption.
 
 Tools like **[Capgo](https://capgo.app/)** can support both methods, offering features like real-time analytics, instant rollback, and seamless deployment. Choose the method that aligns with your appâ€™s goals and infrastructure.
@@ -89,7 +89,7 @@ Recent improvements have made full releases more efficient and dependable, offer
 | --- | --- | --- |
 | **Instant Distribution** | Updates reach everyone at once | Keeps versions consistent |
 | **Uniform Experience** | All users get the same features | Simplifies support processes |
-| **[Automatic Updates](https://capgo.app/docs/plugin/cloud-mode/auto-update/)** | Updates happen in the background | Reduces disruptions |
+| **[Automatic Updates](https://capgo.app/docs/getting-started/add-an-app/)** | Updates happen in the background | Reduces disruptions |
 | **Direct Deployment** | Bypasses app store review delays | Speeds up release timelines |
 
 Now, let's look at how traditional full releases compare to modern methods.
@@ -102,7 +102,7 @@ Older full release methods relied on lengthy app store reviews, often delaying u
 | --- | --- | --- |
 | **Update Speed** | Weeks for app store approval | Immediate deployment |
 | **Success Tracking** | Limited insights | Real-time analytics |
-| **User Experience** | Manual updates by users | [Automatic background updates](https://capgo.app/docs/plugin/self-hosted/auto-update/) |
+| **User Experience** | Manual updates by users | [Automatic background updates](https://capgo.app/docs/plugins/updater/self-hosted/auto-update/) |
 | **Release Control** | Basic version handling | Advanced release controls |
 
 > "No more wait! Push live code changes directly to users without app store delays. Deploy critical fixes and features when they're ready." - Capgo [\[1\]](https://capgo.app/)

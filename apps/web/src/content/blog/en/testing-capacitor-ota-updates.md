@@ -106,7 +106,7 @@ Comprehensive testing using production data should confirm the following:
 
 Once functionality is verified, ensure updates comply with app store guidelines. OTA updates must meet requirements such as size limits, content standards, performance expectations, and user consent.
 
-To stay compliant and improve efficiency, consider staged rollouts. Capgo’s [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) allows you to target specific user groups for beta testing before a full deployment. For enterprise apps, its end-to-end encryption ensures that only authorized users can decrypt and apply updates, keeping sensitive content secure.
+To stay compliant and improve efficiency, consider staged rollouts. Capgo’s [channel system](https://capgo.app/docs/live-updates/channels/) allows you to target specific user groups for beta testing before a full deployment. For enterprise apps, its end-to-end encryption ensures that only authorized users can decrypt and apply updates, keeping sensitive content secure.
 
 ## Testing Guidelines
 
@@ -120,7 +120,7 @@ Managing risks in OTA updates involves implementing several protective measures.
 | Staged Rollouts | Distributes updates in phases | Limits risk exposure |
 | Rollback Mechanism | Allows reverting to previous versions | Quick problem resolution |
 
-[Capgo's channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) makes it easier for developers to distribute updates to specific user groups, such as beta testers, before rolling them out widely [\[1\]](https://capgo.app/). This phased approach ensures updates are validated in smaller groups, reducing the chance of widespread issues. Once risks are under control, developers can then prioritize securing the updates themselves.
+[Capgo's channel system](https://capgo.app/docs/live-updates/channels/) makes it easier for developers to distribute updates to specific user groups, such as beta testers, before rolling them out widely [\[1\]](https://capgo.app/). This phased approach ensures updates are validated in smaller groups, reducing the chance of widespread issues. Once risks are under control, developers can then prioritize securing the updates themselves.
 
 ### Security Checks
 
@@ -178,7 +178,7 @@ Using the Capgo CLI, developers can automate build and deployment tasks, making 
 
 ### Debug with Capgo
 
-Capgo includes a robust [debugging suite](https://capgo.app/docs/plugin/debugging/) with real-time analytics and error tracking, helping developers quickly identify and address issues during testing. A **one-click rollback** feature makes it easy to revert to previous versions, reducing downtime.
+Capgo includes a robust [debugging suite](https://capgo.app/docs/plugins/updater/debugging/) with real-time analytics and error tracking, helping developers quickly identify and address issues during testing. A **one-click rollback** feature makes it easy to revert to previous versions, reducing downtime.
 
 The error tracking system provides insights such as:
 

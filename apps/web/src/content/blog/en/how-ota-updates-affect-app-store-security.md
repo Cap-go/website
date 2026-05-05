@@ -191,7 +191,7 @@ With 1.4K apps in production relying on these solutions, it's clear that the mar
 
 The security measures and platform insights covered earlier highlight the importance of well-rounded OTA (over-the-air) update strategies. Industry data underscores the need for precise security controls alongside efficient deployment capabilities [\[1\]](https://capgo.app/).
 
-Today's OTA platforms have advanced to tackle key security challenges while meeting strict app store standards. This progress addresses earlier risks and ensures compliance with app store requirements. Effective solutions combine strong security frameworks with [smooth update processes](https://capgo.app/docs/plugin/cloud-mode/hybrid-update), leading to high success rates and widespread user adoption [\[1\]](https://capgo.app/).
+Today's OTA platforms have advanced to tackle key security challenges while meeting strict app store standards. This progress addresses earlier risks and ensures compliance with app store requirements. Effective solutions combine strong security frameworks with [smooth update processes](https://capgo.app/docs/live-updates/differentials/), leading to high success rates and widespread user adoption [\[1\]](https://capgo.app/).
 
 > "The community needed this and @Capgo is doing something really important!" - Lincoln Baxter [\[1\]](https://capgo.app/)
 

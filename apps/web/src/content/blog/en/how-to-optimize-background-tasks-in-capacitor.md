@@ -171,7 +171,7 @@ For Android, **Android Studio Profiler** offers powerful features like the **CPU
 
 For example, one optimization involving secure storage access cut response times dramatically - from 1,660 ms down to 410 ms.
 
-Always profile on real devices for the most accurate results. For Android apps, enable [WebView debugging](https://capgo.app/docs/plugin/debugging/) by adding `WebView.setWebContentsDebuggingEnabled(true)`. This allows you to use [Chrome DevTools](https://developer.chrome.com/docs/devtools) for a detailed analysis of both web and native components.
+Always profile on real devices for the most accurate results. For Android apps, enable [WebView debugging](https://capgo.app/docs/plugins/updater/debugging/) by adding `WebView.setWebContentsDebuggingEnabled(true)`. This allows you to use [Chrome DevTools](https://developer.chrome.com/docs/devtools) for a detailed analysis of both web and native components.
 
 To filter logs effectively, use Android Studio’s **Logcat view** with the `CSLIB` filter for Android apps. On iOS, the macOS Console app or Xcode can help you track logs with the same filter [\[8\]](https://docs.contentsquare.com/en/capacitor). For even more advanced logging, activate the "SDK logs stream" in your app's settings and use tools like the Contentsquare Log Visualizer for real-time event monitoring [\[8\]](https://docs.contentsquare.com/en/capacitor).
 
@@ -193,13 +193,13 @@ Capgo's over-the-air (OTA) update system is a game-changer for managing backgrou
 
 The process is seamless for users. They automatically receive your optimized updates, and Capgo reports that 95% of active users are up-to-date within 24 hours. Plus, the platform boasts an 82% global success rate for updates. For a typical 5 MB bundle, the download takes just 114 milliseconds, thanks to their global CDN [\[11\]](https://capgo.app).
 
-Another standout feature is [partial updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update). If you're tweaking just one background task handler, users only download the updated code rather than the entire app bundle. This not only saves bandwidth but also speeds up the deployment of your fixes.
+Another standout feature is [partial updates](https://capgo.app/docs/live-updates/differentials/). If you're tweaking just one background task handler, users only download the updated code rather than the entire app bundle. This not only saves bandwidth but also speeds up the deployment of your fixes.
 
 To make things even easier, you can integrate Capgo into your CI/CD pipeline. Once your tests confirm improvements, the platform can automatically build, bundle, and deploy your optimized code.
 
 ### Version-Specific Task Optimization
 
-Capgo goes beyond just live updates with its [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/), which gives you precise control over how and where you deploy your optimizations. You can create separate channels - like Dev, Beta, or Production - to test and roll out changes to specific user groups [\[10\]](https://www.uneed.best/blog/capgo-review).
+Capgo goes beyond just live updates with its [channel system](https://capgo.app/docs/live-updates/channels/), which gives you precise control over how and where you deploy your optimizations. You can create separate channels - like Dev, Beta, or Production - to test and roll out changes to specific user groups [\[10\]](https://www.uneed.best/blog/capgo-review).
 
 This level of control is especially useful for background tasks, where performance can vary widely across different devices and operating systems. For instance, an optimization that works great on newer Android devices might not perform as well on older iOS versions. With Capgo, you can deploy tailored strategies for different user segments, ensuring a smoother experience for everyone.
 
@@ -219,7 +219,7 @@ And don't worry about compliance - Capgo only updates the JavaScript portion of 
 
 Optimizing background tasks in Capacitor apps is key to delivering reliable and user-friendly experiences. Performance issues can be costly - 90% of users abandon apps with poor performance, and 60% uninstall apps after crashes [\[13\]](https://uxcam.com/blog/mobile-app-optimization)[\[14\]](https://vwo.com/blog/mobile-app-optimization). This makes managing background tasks efficiently a critical aspect of app development.
 
-The strategies outlined here - from platform-specific optimizations to [monitoring and debugging](https://capgo.app/docs/plugin/debugging/) - combine to create a solid performance framework. Start by writing clean, modular code and reducing unnecessary background processes to minimize battery drain [\[13\]](https://uxcam.com/blog/mobile-app-optimization). Then, incorporate platform-specific adjustments and continuous monitoring while staying mindful of platform constraints.
+The strategies outlined here - from platform-specific optimizations to [monitoring and debugging](https://capgo.app/docs/plugins/updater/debugging/) - combine to create a solid performance framework. Start by writing clean, modular code and reducing unnecessary background processes to minimize battery drain [\[13\]](https://uxcam.com/blog/mobile-app-optimization). Then, incorporate platform-specific adjustments and continuous monitoring while staying mindful of platform constraints.
 
 A well-implemented approach can lead to impressive results. For example, data-driven optimization techniques have been shown to boost user activity by 460% and cut app crashes by 40% [\[13\]](https://uxcam.com/blog/mobile-app-optimization). Apps that maintain a smooth 60 frames per second enjoy 52% higher user engagement [\[14\]](https://vwo.com/blog/mobile-app-optimization), highlighting how performance improvements directly impact user satisfaction and business outcomes.
 

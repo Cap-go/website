@@ -129,7 +129,7 @@ Capgo's performance is impressive: 95% of active users receive updates within 24
 
 Getting started with Capgo is straightforward and typically takes about 20 minutes [\[9\]](https://www.uneed.best/blog/capgo-review). In one test case, a simulated bug fix was live in under a minute [\[9\]](https://www.uneed.best/blog/capgo-review).
 
-The setup process involves integrating Capgo's SDK into your Capacitor app and configuring your [CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-gitlab/). To signal that your app is ready, include the following code snippet:
+The setup process involves integrating Capgo's SDK into your Capacitor app and configuring your [CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-in-gitlab/). To signal that your app is ready, include the following code snippet:
 
 ```javascript
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -160,7 +160,7 @@ Real-world users have praised Capgo’s impact:
 
 > Rodrigo Mantica added, "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" [\[10\]](https://capgo.app)
 
-Capgo also provides analytics to track update performance and user engagement, helping you refine your rollout strategies. The platform supports [partial updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update), which fit seamlessly with delta update techniques, saving both time and bandwidth. With an average API response time of 434 milliseconds globally and over 1,747.6 billion updates delivered to date, Capgo proves its scalability and reliability for production applications [\[10\]](https://capgo.app).
+Capgo also provides analytics to track update performance and user engagement, helping you refine your rollout strategies. The platform supports [partial updates](https://capgo.app/docs/live-updates/differentials/), which fit seamlessly with delta update techniques, saving both time and bandwidth. With an average API response time of 434 milliseconds globally and over 1,747.6 billion updates delivered to date, Capgo proves its scalability and reliability for production applications [\[10\]](https://capgo.app).
 
 ## Monitoring Update Performance
 

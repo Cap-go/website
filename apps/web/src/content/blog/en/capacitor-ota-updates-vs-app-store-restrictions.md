@@ -75,7 +75,7 @@ A plugin handles the detection and installation of updates. When developers depl
 
 ### Benefits of OTA Updates
 
-OTA updates bring more than just speed - they give developers better control over their [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/). Here's a quick breakdown:
+OTA updates bring more than just speed - they give developers better control over their [update process](https://capgo.app/docs/getting-started/deploy/). Here's a quick breakdown:
 
 | Feature | Benefit | Key Metric |
 | --- | --- | --- |
@@ -111,7 +111,7 @@ Here's a breakdown of the key differences between app store updates and OTA upda
 | **Update Success Rate** | Depends on user action | 95% within 24 hours |
 | **Distribution Control** | Limited targeting options | Channel-based targeting |
 | **Rollback Capability** | Requires new submission | Instant rollback |
-| **User Interaction** | [Manual update approval](https://capgo.app/docs/plugin/cloud-mode/manual-update/) | [Automatic background updates](https://capgo.app/docs/plugin/self-hosted/auto-update/) |
+| **User Interaction** | [Manual update approval](https://capgo.app/docs/getting-started/deploy/) | [Automatic background updates](https://capgo.app/docs/plugins/updater/self-hosted/auto-update/) |
 | **Analytics** | Basic install metrics | Detailed update tracking |
 | **Bandwidth Usage** | Full app download | Only changed content |
 | **Development Workflow** | Rigid release cycles | CI/CD integration enabled |

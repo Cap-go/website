@@ -226,7 +226,7 @@ Tracking these metrics isn't just about performance - it also helps you identify
 
 Using tools built with Apple's requirements in mind can simplify this process. For example, Capgo offers features like end-to-end encryption and user assignment, making it easier to stay compliant while delivering updates efficiently [\[1\]](https://capgo.app/).
 
-Regularly monitor your app's compliance through your [update management platform](https://capgo.app/docs/plugin/cloud-mode/manual-update/). Staying proactive can help you catch and resolve potential issues before they affect your App Store standing, keeping your live update strategy both effective and within the rules.
+Regularly monitor your app's compliance through your [update management platform](https://capgo.app/docs/getting-started/deploy/). Staying proactive can help you catch and resolve potential issues before they affect your App Store standing, keeping your live update strategy both effective and within the rules.
 
 ## Conclusion
 

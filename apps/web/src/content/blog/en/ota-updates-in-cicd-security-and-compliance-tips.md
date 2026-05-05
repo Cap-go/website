@@ -54,7 +54,7 @@ Encrypting OTA update packages from start to finish ensures they remain secure d
 
 ### Code Signing Methods
 
-Code signing is crucial for verifying that updates are legitimate and untampered. Pair this with strong encryption to create a more secure [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
+Code signing is crucial for verifying that updates are legitimate and untampered. Pair this with strong encryption to create a more secure [update process](https://capgo.app/docs/getting-started/deploy/).
 
 ### Secure Update Delivery
 
@@ -189,7 +189,7 @@ Here’s a breakdown of Capgo’s key security features:
 | --- | --- |
 | End-to-End Encryption | Protects data from unauthorized access during updates |
 | [Self-Hosted Option](https://capgo.app/blog/self-hosted-capgo/) | Offers better control over data and compliance |
-| [Channel System](https://capgo.app/docs/plugin/cloud-mode/channel-system/) | Enables controlled staged rollouts |
+| [Channel System](https://capgo.app/docs/live-updates/channels/) | Enables controlled staged rollouts |
 | Error Tracking | Helps identify and fix issues quickly |
 | Version Control | Ensures consistency across updates |
 

@@ -22,7 +22,7 @@ next_blog: ''
 -   **Easy Setup:** Install the plugin with `npm install @capgo/capacitor-updater`, sync your project, and configure updates in minutes.
 -   **Secure & Compliant:** End-to-end encryption and adherence to Apple and Google guidelines.
 -   **Flexible Rollouts:** Assign updates to specific user groups (e.g., beta, production) for controlled releases.
--   **Error Handling:** Real-time tracking, rollback options, and [partial updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) ensure stability.
+-   **Error Handling:** Real-time tracking, rollback options, and [partial updates](https://capgo.app/docs/live-updates/differentials/) ensure stability.
 
 Capgo is designed for seamless, lightweight deployment, so you can focus on improving your app while updates happen in the background.
 
@@ -50,7 +50,7 @@ Here’s how you can install and set up Capgo:
 
 -   **Step 1: Install the Capgo Plugin**
     
-    Run the following command to install the [Capgo updater plugin](https://capgo.app/docs/plugin/self-hosted/manual-update/):
+    Run the following command to install the [Capgo updater plugin](https://capgo.app/docs/plugins/updater/self-hosted/manual-update/):
     
     ```bash
     npm install @capgo/capacitor-updater
@@ -95,8 +95,8 @@ You can fine-tune these settings based on your project’s needs. Here’s a qui
 
 | Setting | Purpose | Recommended Value |
 | --- | --- | --- |
-| **autoUpdate** | Enables [automatic updates](https://capgo.app/docs/plugin/cloud-mode/auto-update/) | `true` |
-| **updateUrl** | The [endpoint for updates](https://capgo.app/docs/self-hosted/auto-update/update-endpoint/) | `https://api.capgo.app/updates` |
+| **autoUpdate** | Enables [automatic updates](https://capgo.app/docs/getting-started/add-an-app/) | `true` |
+| **updateUrl** | The [endpoint for updates](https://capgo.app/docs/plugins/updater/self-hosted/handling-updates/) | `https://api.capgo.app/updates` |
 
 With these configurations in place, your project is ready to handle live updates efficiently.
 
@@ -124,7 +124,7 @@ Once configured, Capgo automatically checks for updates when the app starts, ins
 | Manual Trigger | On-demand | Minimal disruption |
 | Push Notification | Event-based | User-controlled |
 
-After automating updates, you can use Capgo's [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) to customize the rollout process for different user groups.
+After automating updates, you can use Capgo's [channel system](https://capgo.app/docs/live-updates/channels/) to customize the rollout process for different user groups.
 
 ### Update Distribution Control
 
@@ -283,7 +283,7 @@ Want to simplify your app's deployment process? Start using Capgo today to strea
 
 Capgo ensures it meets all Apple and Google app store guidelines by strictly following their update policies. For Apple, updates are limited to **non-executable content**, while Google offers more flexibility but demands stringent security measures. Capgo addresses these requirements by implementing **end-to-end encryption**, obtaining users' consent for updates, and aligning with each platform’s specific rules.
 
-To keep everything on track, Capgo regularly audits its update systems and monitors policy changes. These efforts guarantee that [over-the-air updates](https://capgo.app/blog/open-source-licecing/) remain secure, seamless, and fully compliant - offering developers and users confidence in the process.
+To keep everything on track, Capgo regularly audits its update systems and monitors policy changes. These efforts guarantee that [over-the-air updates](https://capgo.app/blog/open-source-licence/) remain secure, seamless, and fully compliant - offering developers and users confidence in the process.
 :::
 
 ::: faq

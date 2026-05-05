@@ -65,7 +65,7 @@ This segmentation allows for a more tailored approach to improving user experien
 
 ### Plan Updates for Each User Group
 
-With your users grouped, you can design [update strategies](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) that cater to their specific needs. Here's how to approach each segment:
+With your users grouped, you can design [update strategies](https://capgo.app/docs/live-updates/differentials/) that cater to their specific needs. Here's how to approach each segment:
 
 -   **Power Users**: Create a beta channel where they can test new features and provide feedback before a full release.
 -   **Regular Users**: Use staged rollouts to ensure stability. [Partial updates](https://capgo.app/docs/live-updates/update-behavior/) can reduce bandwidth demands and speed up downloads.
@@ -79,7 +79,7 @@ Capgo offers tools that make targeting updates to specific user groups more prec
 
 ### Capgo's User Assignment Tools
 
-Capgo takes user segmentation a step further by assigning users to specific channels for tailored update rollouts. This [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) ensures updates are delivered with precision:
+Capgo takes user segmentation a step further by assigning users to specific channels for tailored update rollouts. This [channel system](https://capgo.app/docs/live-updates/channels/) ensures updates are delivered with precision:
 
 | **User Segment** | **Channel Type** | **[Update Strategy](https://capgo.app/docs/live-updates/update-behavior/)** |
 | --- | --- | --- |
@@ -138,7 +138,7 @@ When segmentation is done right, the results speak for themselves. Update adopti
 
 Tailored updates also have a direct impact on user engagement. Session lengths increase by 10–20%, and app ratings can jump by as much as a full star. For monetized apps, the effects are even more compelling, with [in-app purchases](https://capgo.app/plugins/native-purchases/) rising by 15–30% when updates are focused on high-value users [\[1\]](https://www.pushwoosh.com/blog/mobile-app-user-segmentation/).
 
-These results highlight just how impactful targeted segmentation can be, laying the groundwork for a more [customized update strategy](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) powered by Capgo.
+These results highlight just how impactful targeted segmentation can be, laying the groundwork for a more [customized update strategy](https://capgo.app/docs/live-updates/differentials/) powered by Capgo.
 
 ### Capgo's Role in Update Targeting
 

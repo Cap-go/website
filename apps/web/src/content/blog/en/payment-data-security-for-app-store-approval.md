@@ -47,7 +47,7 @@ Here are some key features of Capgo's platform:
 -   **End-to-end encryption**: Sensitive updates can only be decrypted by end users.
 -   **[Self-hosting option](https://capgo.app/blog/self-hosted-capgo/)**: Gives businesses full control over their payment data.
 -   **Rollback controls**: Instantly revert updates if issues arise.
--   **[Channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/)**: Send specific updates to targeted user groups.
+-   **[Channel system](https://capgo.app/docs/live-updates/channels/)**: Send specific updates to targeted user groups.
 
 Capgo’s approach has achieved an 82% global success rate for update deployments. Businesses can opt for either secure cloud hosting or self-hosting to align with their compliance needs.
 

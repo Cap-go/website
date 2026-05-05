@@ -21,7 +21,7 @@ Live updates let developers quickly push updates and fixes to users’ apps with
 ### Key Benefits of Live Updates:
 
 -   **Faster Deployments**: Updates can go live in 1-2 hours instead of 3-5 days.
--   **[Automatic Updates](https://capgo.app/docs/plugin/cloud-mode/auto-update/)**: Users don’t need to manually update the app.
+-   **[Automatic Updates](https://capgo.app/docs/getting-started/add-an-app/)**: Users don’t need to manually update the app.
 -   **Partial Updates**: Only the necessary changes are updated, not the whole app.
 -   **Emergency Fixes**: Critical bugs can be resolved immediately.
 
@@ -105,7 +105,7 @@ App.addListener('resume', async () => {
 
 Capgo adds an extra layer of security with encryption and flexible deployment options. According to Martin Donadieu, Capgo's founder, these features are tailored to meet real-world developer needs and app store requirements.
 
-To refine your [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/), use **Ionic Appflow** to monitor deployment success rates and user adoption. This setup ensures your app stays responsive and current.
+To refine your [update process](https://capgo.app/docs/getting-started/deploy/), use **Ionic Appflow** to monitor deployment success rates and user adoption. This setup ensures your app stays responsive and current.
 
 Once live updates are in place, the next step is integrating them into a CI/CD pipeline to simplify and automate your deployment workflow.
 
@@ -225,7 +225,7 @@ Here’s a quick breakdown of popular live update tools and how they stack up:
 
 Capgo handles over 150,000 live updates monthly, proving it’s built to scale for medium-sized enterprises. Here’s what sets it apart:
 
-**[Update Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/)**
+**[Update Management](https://capgo.app/docs/getting-started/deploy/)**
 
 -   Real-time deployment with a 99.9% success rate
 -   Smooth background updates and instant rollback options

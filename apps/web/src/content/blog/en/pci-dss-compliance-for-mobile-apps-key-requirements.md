@@ -28,7 +28,7 @@ Here’s what you need to know:
     -   **User Access Controls:** Use [Multi-Factor Authentication](https://capgo.app/docs/webapp/mfa/) (MFA), unique user IDs, and regular access reviews.
     -   **Compliance Tools:** Automate security testing, manage access controls, and maintain audit trails.
 
-**Quick Tip:** Embed security into every stage of your [CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-gitlab/) with tools like SAST, DAST, and container security scanning to stay compliant and secure.
+**Quick Tip:** Embed security into every stage of your [CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-in-gitlab/) with tools like SAST, DAST, and container security scanning to stay compliant and secure.
 
 ## PCI SSC and EMVCo Mobile Security and Standards Update
 

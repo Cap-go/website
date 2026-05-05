@@ -8,7 +8,7 @@ import { Steps } from '@astrojs/starlight/components';
 
 ## Introduction
 
-This guide will help you integrate Google Sign-In with Firebase Authentication on Android. I assume you have already completed the [general Firebase Google setup](./general/) 
+This guide will help you integrate Google Sign-In with Firebase Authentication on Android. I assume you have already completed the [general Firebase Google setup](../general/)
 
 :::note
 I will assume that you have not yet created your Android app in the Firebase Console. If you have, your steps will be slightly different.
@@ -57,12 +57,12 @@ I will assume that you have not yet created your Android app in the Firebase Con
 8. If you do not get automatically authenticated, go to `settings` -> `general` -> `your apps` -> find your android app and click on it
    <img src="/social-login-assets/firebase_project_add_app_android_settings_general_your_apps.webp" alt="Firebase Add App Android Settings General Your Apps Button" />
 9. Get your SHA1 fingerprint
-   
+
    Follow steps 10-11 from the [Google Login Android setup guide](/docs/plugins/social-login/google/android/#using-google-login-on-android):
-   
+
    1. Now, open the terminal. Make sure that you are in the `android` folder of your app and run `./gradlew signInReport`
       <img src="/social-login-assets/term_sign_report.png" alt="Terminal showing gradlew signInReport command" />
-   
+
    2. Scroll to the top of this command. You should see the following. Copy the `SHA1`.
       <img src="/social-login-assets/term_sign_report_res.png" alt="Terminal output showing SHA1 certificate fingerprint" />
 
@@ -74,7 +74,7 @@ I will assume that you have not yet created your Android app in the Firebase Con
    The SHA1 is very important to get right. If you mess up, the authentication will fail in strange ways.
    Please __**[READ THE GOOGLE LOGIN ANDROID SETUP GUIDE](/docs/plugins/social-login/google/android/#using-google-login-on-android)**__ to get it right.
    :::
-   
+
 10. Add the SHA1 to the Firebase project
       1. Click on the `Add fingerprint` button
          <img src="/social-login-assets/firebase_project_add_app_android_add_fingerprint.webp" alt="Firebase Add App Android Add Fingerprint Button" />
@@ -149,4 +149,3 @@ If authentication hangs or fails:
 - Check that Google Sign-In is enabled in Firebase Console
 - Ensure the SHA-1 fingerprint is correctly configured
 - Review the [example app code](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app/src/authUtils.ts) for reference
-

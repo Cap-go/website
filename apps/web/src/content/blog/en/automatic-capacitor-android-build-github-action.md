@@ -417,7 +417,7 @@ jobs:
 - [Build with CodeMagic](/blog/automatic-capacitor-ios-build-codemagic/) - CodeMagic setup guide
 
 ### Live Updates & Deployment
-- [Capgo Live Updates Documentation](/docs/plugin/cloud-mode/getting-started/) - Add OTA updates to your app
+- [Capgo Live Updates Documentation](/docs/getting-started/quickstart/) - Add OTA updates to your app
 - [CI/CD Integration with Capgo](/docs/getting-started/cicd-integration/) - Integrate live updates in your pipeline
 
 ## Resources

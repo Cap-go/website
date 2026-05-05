@@ -150,7 +150,7 @@ These security measures align with Apple's code signing requirements and Google'
 
 ![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-15.jpg?auto=compress)
 
-Capgo provides a secure way to deliver and manage [Capacitor OTA updates](https://capgo.app/), ensuring smooth distribution while meeting compliance standards. It also offers advanced tools for enterprise-level [update management](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/).
+Capgo provides a secure way to deliver and manage [Capacitor OTA updates](https://capgo.app/), ensuring smooth distribution while meeting compliance standards. It also offers advanced tools for enterprise-level [update management](https://capgo.app/it/docs/getting-started/deploy/).
 
 ### Key Features of Capgo
 

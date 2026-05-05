@@ -134,7 +134,7 @@ For features involving sensitive data or security, run tools like `npm audit` or
 
 ![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-10.jpg?auto=compress)
 
-Capgo provides a [live update plugin](https://capgo.app/docs/plugin/self-hosted/auto-update/) that works seamlessly with Capacitor. It allows you to deploy updates - like bug fixes or new features - directly to your app using encrypted channels, all while staying compliant with app store policies [\[3\]](https://github.com/riderx/awesome-capacitor).
+Capgo provides a [live update plugin](https://capgo.app/docs/plugins/updater/self-hosted/auto-update/) that works seamlessly with Capacitor. It allows you to deploy updates - like bug fixes or new features - directly to your app using encrypted channels, all while staying compliant with app store policies [\[3\]](https://github.com/riderx/awesome-capacitor).
 
 ### Plugin Testing Methods
 
@@ -174,7 +174,7 @@ When upgrading major versions, follow these steps:
 
 Document any customizations or workarounds you’ve implemented.
 
-2\. **[Update Strategy](https://capgo.app/docs/plugin/cloud-mode/hybrid-update)**
+2\. **[Update Strategy](https://capgo.app/docs/live-updates/differentials/)**
 
 Develop a detailed update plan that includes:
 

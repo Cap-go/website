@@ -24,7 +24,7 @@ next_blog: ''
     -   **Auto-update scheduling** for precise rollouts.
     -   **Channel support** for beta testing or staged releases.
     -   **Performance stats:** 434ms API response, 114ms for 5MB downloads.
--   **Setup steps:** [Install the plugin](https://capgo.app/docs/plugin/cloud-mode/getting-started/), configure settings, and [enable auto-updates](https://capgo.app/docs/plugin/self-hosted/auto-update/) with `CapacitorUpdater.notifyAppReady()`.
+-   **Setup steps:** [Install the plugin](https://capgo.app/docs/getting-started/quickstart/), configure settings, and [enable auto-updates](https://capgo.app/docs/plugins/updater/self-hosted/auto-update/) with `CapacitorUpdater.notifyAppReady()`.
 
 Capgo ensures updates are fast, secure, and user-friendly, making it a must-have for developers managing frequent app changes.
 
@@ -32,11 +32,11 @@ Capgo ensures updates are fast, secure, and user-friendly, making it a must-have
 
 ![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68311bb4d3b96619817f3ed6/146f21857bbfc9b0e31de0c031b7d889.jpg)
 
-To schedule updates with Capgo, you’ll need to install the plugin, set up your project, and configure the [auto-update features](https://capgo.app/docs/plugin/cloud-mode/auto-update/) to suit your needs. This process ensures your app can handle updates efficiently while maintaining compatibility with Capgo’s server.
+To schedule updates with Capgo, you’ll need to install the plugin, set up your project, and configure the [auto-update features](https://capgo.app/docs/getting-started/add-an-app/) to suit your needs. This process ensures your app can handle updates efficiently while maintaining compatibility with Capgo’s server.
 
 ### Installing and Configuring the Plugin
 
-Start by installing the [Capgo updater plugin](https://capgo.app/docs/plugin/self-hosted/manual-update/). Run the following commands:
+Start by installing the [Capgo updater plugin](https://capgo.app/docs/plugins/updater/self-hosted/manual-update/). Run the following commands:
 
 ```bash
 npm install @capgo/capacitor-updater
@@ -44,7 +44,7 @@ npx cap sync
 npx @capgo/cli init
 ```
 
-Next, configure your app settings in the `capacitor.config.ts` or `capacitor.config.json` file. Two critical fields - **appId** and **version** - identify your app to the Capgo server and ensure that updates are compatible. Make sure your app version adheres to [Semantic Versioning](https://semver.org/) (e.g., 1.0.0) [\[4\]](https://capgo.app/docs/plugin/cloud-mode/auto-update).
+Next, configure your app settings in the `capacitor.config.ts` or `capacitor.config.json` file. Two critical fields - **appId** and **version** - identify your app to the Capgo server and ensure that updates are compatible. Make sure your app version adheres to [Semantic Versioning](https://semver.org/) (e.g., 1.0.0) [\[4\]](https://capgo.app/docs/getting-started/add-an-app/).
 
 Here’s an example of the basic configuration in `capacitor.config.json`:
 
@@ -61,7 +61,7 @@ During development, it’s a good idea to set `autoUpdate` to `false`. This prev
 
 With auto-update enabled, Capgo can handle background downloads and installations. The system periodically checks for updates and ensures users always have the latest version of your app.
 
-One key step is implementing the `notifyAppReady()` function within your app. Use the `CapacitorUpdater.notifyAppReady()` method as early as possible after the app starts. This confirms that the new version is functioning properly. If the function isn’t called within the specified timeout, the system will revert to the last working version [\[4\]](https://capgo.app/docs/plugin/cloud-mode/auto-update).
+One key step is implementing the `notifyAppReady()` function within your app. Use the `CapacitorUpdater.notifyAppReady()` method as early as possible after the app starts. This confirms that the new version is functioning properly. If the function isn’t called within the specified timeout, the system will revert to the last working version [\[4\]](https://capgo.app/docs/getting-started/add-an-app/).
 
 Here are some configuration options to fine-tune auto-update behavior:
 
@@ -74,11 +74,11 @@ Here are some configuration options to fine-tune auto-update behavior:
 | `directUpdate` | Installs updates directly upon app update/installation | `undefined` |
 | `defaultChannel` | Sets the default update channel | `undefined` |
 
-The `statsUrl` setting, which defaults to `https://api.capgo.app/stats`, allows you to monitor update performance and success rates via Capgo’s analytics dashboard [\[6\]](https://capgo.app/docs/plugin/settings).
+The `statsUrl` setting, which defaults to `https://api.capgo.app/stats`, allows you to monitor update performance and success rates via Capgo’s analytics dashboard [\[6\]](https://capgo.app/docs/plugins/updater/settings).
 
-For production environments, using CI/CD pipelines to upload new versions is highly recommended. This ensures consistency in your update process and minimizes the risk of manual errors during releases [\[4\]](https://capgo.app/docs/plugin/cloud-mode/auto-update).
+For production environments, using CI/CD pipelines to upload new versions is highly recommended. This ensures consistency in your update process and minimizes the risk of manual errors during releases [\[4\]](https://capgo.app/docs/getting-started/add-an-app/).
 
-Finally, remember that over-the-air (OTA) updates are limited to changes in HTML, CSS, and JavaScript files [\[5\]](https://capgo.app/docs/getting-started/quickstart)[\[7\]](https://capgo.app/docs/plugin/self-hosted/getting-started). Any modifications to native code will require submitting an updated version through the app store.
+Finally, remember that over-the-air (OTA) updates are limited to changes in HTML, CSS, and JavaScript files [\[5\]](https://capgo.app/docs/getting-started/quickstart)[\[7\]](https://capgo.app/docs/plugins/updater/self-hosted/getting-started/). Any modifications to native code will require submitting an updated version through the app store.
 
 ## How to Schedule and Prioritize Updates
 
@@ -100,7 +100,7 @@ Battery life is another critical factor. Updates should only proceed if the devi
 
 Capgo offers tools to tailor update strategies for various user segments by using separate channels. This approach ensures updates are delivered in a way that aligns with each group's needs.
 
-| User Segment | Channel Type | [Update Strategy](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) |
+| User Segment | Channel Type | [Update Strategy](https://capgo.app/docs/live-updates/differentials/) |
 | --- | --- | --- |
 | Power Users | Beta Channel | Early access to new features |
 | Regular Users | Production Channel | Gradual rollouts prioritizing stability |
@@ -125,7 +125,7 @@ To get started, you'll need specific tools and software versions. Your testing e
 -   The latest **Capgo plugin**
 -   A testing framework like **[Cypress](https://www.cypress.io/)** or **[Appium](http://appium.io/)** for automated testing
 
-Focus your testing on these key areas: [update detection](https://capgo.app/docs/plugin/cloud-mode/hybrid-update), download, installation, and rollback. Each phase should meet strict performance and reliability standards.
+Focus your testing on these key areas: [update detection](https://capgo.app/docs/live-updates/differentials/), download, installation, and rollback. Each phase should meet strict performance and reliability standards.
 
 | Test Type | Focus Area | Target Metrics |
 | --- | --- | --- |
@@ -154,7 +154,7 @@ Error tracking is another valuable feature. Capgo captures logs and metrics, hel
 
 > "One-click rollback to any previous version if needed" - Capgo [\[8\]](https://capgo.app/)
 
-To optimize your update strategy further, monitor performance across different user segments and device types. Capgo's [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) lets you target specific groups for staged rollouts, reducing the risk of widespread issues. Set up alerts for critical metrics, such as high failure rates or unusually slow downloads, so you can address problems promptly. Consistent monitoring not only helps you resolve issues quickly but also improves your update process over time, leading to better performance and happier users.
+To optimize your update strategy further, monitor performance across different user segments and device types. Capgo's [channel system](https://capgo.app/docs/live-updates/channels/) lets you target specific groups for staged rollouts, reducing the risk of widespread issues. Set up alerts for critical metrics, such as high failure rates or unusually slow downloads, so you can address problems promptly. Consistent monitoring not only helps you resolve issues quickly but also improves your update process over time, leading to better performance and happier users.
 
 ## Best Practices and Advanced Methods
 
@@ -209,7 +209,7 @@ Capgo’s simplicity is one of its standout features. In April 2025, Thomas Sanl
 
 Ready to roll out your updates? Start with a **15-day free trial** to explore Capgo’s scheduling features and see how they align with your app’s needs [\[2\]](https://www.uneed.best/blog/capgo-review). When you’re prepared to deploy, the CLI command `npx @capgo/cli@latest bundle upload --channel=production` makes the process seamless [\[2\]](https://www.uneed.best/blog/capgo-review).
 
-**Keep an eye on your progress** by tracking update adoption rates, setting up automated error tracking for quick rollbacks, and using staged rollouts to control delivery [\[1\]](https://capgo.app/blog). Make sure your app confirms updates as outlined earlier [\[4\]](https://capgo.app/docs/plugin/cloud-mode/auto-update).
+**Keep an eye on your progress** by tracking update adoption rates, setting up automated error tracking for quick rollbacks, and using staged rollouts to control delivery [\[1\]](https://capgo.app/blog). Make sure your app confirms updates as outlined earlier [\[4\]](https://capgo.app/docs/getting-started/add-an-app/).
 
 In a constantly evolving OTA update landscape, Capgo stands out as a reliable, long-term solution. Its open-source foundation and compliance with both Apple and Android guidelines ensure it’s ready to meet your needs now and in the future.
 

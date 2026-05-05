@@ -100,7 +100,7 @@ Ionic Appflow prioritizes security with strong encryption and authentication mea
 -   **Automated builds** linked to GitHub and Bitbucket
 -   **Secure deployment** with encryption
 -   **Real-time analytics** for performance tracking
--   **Centralized [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/)** across platforms
+-   **Centralized [update management](https://capgo.app/docs/getting-started/deploy/)** across platforms
 -   **Live updates** for immediate app asset changes
 
 While Ionic Appflow is a great tool for managing hybrid apps, tools like Microsoft Intune provide additional options for broader enterprise-level update management.

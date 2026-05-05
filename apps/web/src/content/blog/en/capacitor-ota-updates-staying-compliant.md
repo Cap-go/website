@@ -57,7 +57,7 @@ OTA updates offer multiple advantages to both developers and end-users. Here’s
 Despite these benefits, implementing OTA updates can come with challenges. Data from 750 apps highlights some common issues [\[1\]](https://capgo.app/):
 
 -   **Security Concerns**: End-to-end encryption is critical to prevent tampering or unauthorized access.
--   **Version Management**: Using a [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) helps manage beta testing and phased rollouts effectively.
+-   **Version Management**: Using a [channel system](https://capgo.app/docs/live-updates/channels/) helps manage beta testing and phased rollouts effectively.
 -   **Update Monitoring**: Without proper tracking, failed updates can go unnoticed. Analytics and error tracking are essential, as global success rates of 82% emphasize the importance of monitoring [\[1\]](https://capgo.app/).
 
 > "We rolled out Capgo OTA updates in production for our user base of +5000. We're seeing very smooth operation almost all our users are up to date within minutes of the OTA being deployed to @Capgo." – Colenso [\[1\]](https://capgo.app/)
@@ -111,7 +111,7 @@ These practices reduce risks and ensure your updates meet app store requirements
 
 ### Keeping Users in the Loop
 
--   **[Automatic Updates](https://capgo.app/docs/plugin/cloud-mode/auto-update/)**: Updates can be installed in the background, but users should still be informed. Tools like Capgo make it simple to automate installations while keeping users updated.
+-   **[Automatic Updates](https://capgo.app/docs/getting-started/add-an-app/)**: Updates can be installed in the background, but users should still be informed. Tools like Capgo make it simple to automate installations while keeping users updated.
 -   **Monitoring and Feedback**: Use analytics, error tracking, and feedback channels to monitor the success of installations and address any problems.
 
 Clear communication fosters trust with users and reinforces compliance with app store guidelines.
@@ -122,7 +122,7 @@ Clear communication fosters trust with users and reinforces compliance with app 
 
 ![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e61434a2c14cac42f85a37/cf21af63f433895b269de0da5dc7d74c.jpg)
 
-Capgo provides a solution for managing over-the-air (OTA) updates in Capacitor apps, addressing compliance requirements with an integrated system. With more than 750 apps in production and 23.5 million updates delivered, Capgo ensures a smooth and compliant [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/) [\[1\]](https://capgo.app/).
+Capgo provides a solution for managing over-the-air (OTA) updates in Capacitor apps, addressing compliance requirements with an integrated system. With more than 750 apps in production and 23.5 million updates delivered, Capgo ensures a smooth and compliant [update process](https://capgo.app/docs/getting-started/deploy/) [\[1\]](https://capgo.app/).
 
 ### How Capgo Manages Updates
 
@@ -192,7 +192,7 @@ Capgo also ensures compliance with robust security measures like end-to-end encr
 
 Managing OTA updates while staying compliant with app store rules requires careful planning and the right tools. Capgo, with over 23.5 million updates delivered and 750 apps in production [\[1\]](https://capgo.app/), offers a dependable solution for handling OTA updates within platform guidelines.
 
-The secret to [effective OTA update management](https://capgo.app/blog/open-source-licecing/) lies in using robust compliance tools and monitoring systems. By employing end-to-end encryption and strictly following platform requirements, developers can ensure both security and smooth operations during updates.
+The secret to [effective OTA update management](https://capgo.app/blog/open-source-licence/) lies in using robust compliance tools and monitoring systems. By employing end-to-end encryption and strictly following platform requirements, developers can ensure both security and smooth operations during updates.
 
 Even experts in the field emphasize the importance of fast and compliant updates. As NASA's [OSIRIS-REx](https://science.nasa.gov/mission/osiris-rex/) team noted:
 

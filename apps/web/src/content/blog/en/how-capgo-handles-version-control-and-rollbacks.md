@@ -171,5 +171,5 @@ The system also includes **one-click rollback options**, allowing developers to 
 
 Capgo's rollback system is built to keep your app running smoothly by automatically switching back to the last stable version if an update runs into trouble. Before rolling out any changes, the system saves a backup of the current version. Once the update goes live, it runs health checks to spot any potential issues. If something's off, the system quickly reverts to the previous version to prevent disruptions.
 
-On top of that, developers can manually roll back to earlier versions whenever necessary. This setup helps reduce downtime, ensures users experience minimal interruptions, and makes the [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/) far less stressful.
+On top of that, developers can manually roll back to earlier versions whenever necessary. This setup helps reduce downtime, ensures users experience minimal interruptions, and makes the [update process](https://capgo.app/docs/getting-started/deploy/) far less stressful.
 :::

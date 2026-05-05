@@ -60,7 +60,7 @@ Several tools and processes work together to ensure smooth updates:
 | **Version Control System** | Tracks code versions | Makes precise comparisons |
 | **Diff Generator** | Produces binary differences | Shrinks update file size |
 | **Update Manager** | Manages download and installation | Ensures updates are reliable |
-| **Background Processor** | Handles updates silently | Allows [automatic updates](https://capgo.app/docs/plugin/cloud-mode/auto-update/) |
+| **Background Processor** | Handles updates silently | Allows [automatic updates](https://capgo.app/docs/getting-started/add-an-app/) |
 
 These components handle everything from identifying changes to deploying updates, often without requiring user action.
 
@@ -78,7 +78,7 @@ Before implementing delta updates, make sure you have the following:
 | --- | --- | --- |
 | **Capacitor Version** | Framework version | Version 6 or 7 |
 | **Development Environment** | Build tools | [Node.js](https://nodejs.org/en) and npm |
-| **[Update Service](https://capgo.app/docs/plugin/cloud-mode/manual-update/)** | Delta management | [Capgo CLI](https://capgo.app/docs/cli/commands) |
+| **[Update Service](https://capgo.app/docs/getting-started/deploy/)** | Delta management | [Capgo CLI](https://capgo.app/docs/cli/commands) |
 | **CI/CD Integration** | Automated deployment | GitHub Actions, [GitLab CI](https://docs.gitlab.com/ee/ci/), or Jenkins |
 
 ### Code Setup Guide
@@ -165,7 +165,7 @@ Here's a quick breakdown of effective techniques:
 | Code Splitting | Separates chunks | Use dynamic imports |
 | Asset Versioning | Prevents redundant downloads | Add content hashes |
 
-Once you've reduced the [update size](https://capgo.app/docs/plugin/cloud-mode/hybrid-update), focus on ensuring the update process is secure and reliable.
+Once you've reduced the [update size](https://capgo.app/docs/live-updates/differentials/), focus on ensuring the update process is secure and reliable.
 
 ### Update Safety Checks
 

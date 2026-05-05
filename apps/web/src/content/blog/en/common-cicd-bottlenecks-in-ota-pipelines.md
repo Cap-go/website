@@ -88,7 +88,7 @@ Following app store rules is a must for successful OTA updates. Both the [Apple 
 
 Some important compliance requirements include:
 
--   [Secure update delivery methods](https://capgo.app/docs/plugin/cloud-mode/hybrid-update)
+-   [Secure update delivery methods](https://capgo.app/docs/live-updates/differentials/)
 -   Obtaining user consent for updates
 -   Clear version tracking
 -   Effective error handling

@@ -115,7 +115,7 @@ Capgo enhances compliance workflows with tools that integrate directly into your
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
-For teams handling multiple app versions, Capgo's [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) supports targeted beta testing and staged rollouts [\[1\]](https://capgo.app/).
+For teams handling multiple app versions, Capgo's [channel system](https://capgo.app/docs/live-updates/channels/) supports targeted beta testing and staged rollouts [\[1\]](https://capgo.app/).
 
 ## Security and Privacy Checks
 
@@ -222,7 +222,7 @@ Here’s how to get started:
 
 -   **Automate compliance checks** with Capgo's CLI tool to ensure nothing slips through the cracks.
 -   **Track errors in real-time** to monitor how updates perform.
--   **[Use the channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** to beta test compliance changes before a full rollout.
+-   **[Use the channel system](https://capgo.app/docs/live-updates/channels/)** to beta test compliance changes before a full rollout.
 
 With Capgo's analytics, you can quickly validate compliance and streamline staged rollouts. These steps ensure smoother updates and long-term compliance.
 

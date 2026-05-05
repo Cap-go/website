@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
-**Want to simplify your [CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-gitlab/)?** Conventional Commits can help by automating versioning, changelog creation, and deployment. Here's how:
+**Want to simplify your [CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-in-gitlab/)?** Conventional Commits can help by automating versioning, changelog creation, and deployment. Here's how:
 
 -   Use a standard commit format like `feat: add new feature` or `fix: resolve issue`.
 -   Automate [version updates](https://capgo.app/docs/live-updates/update-behavior/) based on commit types (e.g., `fix` = patch, `feat` = minor).
@@ -317,7 +317,7 @@ Capgo also stands out with these key features:
 -   Detailed **analytics and error tracking**
 -   Smooth integration with major CI/CD platforms like **GitHub Actions** and **[GitLab CI](https://docs.gitlab.com/ci/)**
 
-These features make Capgo a strong choice for automating [mobile app CI/CD](https://capgo.app/blog/setup-ci-and-cd-gitlab/) workflows from start to finish.
+These features make Capgo a strong choice for automating [mobile app CI/CD](https://capgo.app/blog/setup-ci-and-cd-in-gitlab/) workflows from start to finish.
 
 ## Conclusion
 
@@ -340,7 +340,7 @@ These advantages strengthen the foundation of a reliable CI/CD pipeline.
 
 ### Implementation Guide
 
-To get the most out of Conventional Commits, implement them thoughtfully. Use tools like Commitlint and Husky to enforce commit message standards, [integrate semantic-release](https://capgo.app/blog/how-rapido-cloud-manage-semantic-rerlease-with-CapGo-CapacitorUpdater/) for automated versioning, and [leverage Capgo](https://capgo.app/consulting/) for mobile over-the-air (OTA) updates.
+To get the most out of Conventional Commits, implement them thoughtfully. Use tools like Commitlint and Husky to enforce commit message standards, [integrate semantic-release](https://capgo.app/blog/how-I-manage-semantic-release-with-CapGo-CapacitorUpdater/) for automated versioning, and [leverage Capgo](https://capgo.app/consulting/) for mobile over-the-air (OTA) updates.
 
 Capgo complements the Conventional Commits workflow by offering:
 

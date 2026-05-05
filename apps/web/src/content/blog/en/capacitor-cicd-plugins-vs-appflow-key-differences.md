@@ -56,7 +56,7 @@ Here are some standout features:
 | **Live Updates** | Push updates and fixes instantly without waiting for app store approvals. |
 | **End-to-End Encryption** | Ensures secure delivery of app updates. |
 | **Partial Updates** | Saves bandwidth by downloading only the necessary changes. |
-| **[Channel System](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** | Distribute updates selectively, ideal for beta testing. |
+| **[Channel System](https://capgo.app/docs/live-updates/channels/)** | Distribute updates selectively, ideal for beta testing. |
 | **CI/CD Integration** | Works seamlessly with tools like GitHub Actions, GitLab CI, and Jenkins. |
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" [\[1\]](https://capgo.app/)
@@ -81,7 +81,7 @@ Here’s a breakdown of what these plugins offer:
 
 | Feature Category | Capabilities |
 | --- | --- |
-| [Update Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) | • Push updates instantly without app store delays  <br>• Send partial updates to save bandwidth  <br>• Use channel-based distribution for beta testing |
+| [Update Management](https://capgo.app/docs/getting-started/deploy/) | • Push updates instantly without app store delays  <br>• Send partial updates to save bandwidth  <br>• Use channel-based distribution for beta testing |
 | Security | • End-to-end encryption  <br>• Securely deliver updates  <br>• Control access with detailed permissions |
 | Integration | • Native support for GitHub Actions  <br>• Compatible with GitLab CI  <br>• Integrates with Jenkins pipelines |
 | Analytics | • Track updates in real time  <br>• Monitor success rates  <br>• Measure user adoption |

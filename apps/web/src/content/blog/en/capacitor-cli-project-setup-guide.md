@@ -48,7 +48,7 @@ To get started, make sure you have the following tools installed:
 -   **Android Studio** (for Android builds)
 -   **Capacitor CLI** (version 6 or 7)
 
-_Optional:_ If you want to enable live updates, check out the "[Capgo Setup Guide](https://capgo.app/docs/plugin/cloud-mode/getting-started/)" below.
+_Optional:_ If you want to enable live updates, check out the "[Capgo Setup Guide](https://capgo.app/docs/getting-started/quickstart/)" below.
 
 ## CLI Installation Steps
 
@@ -161,33 +161,33 @@ Capgo offers several tools to streamline app updates:
 -   Updates run **in the background** when the app launches.
 -   **Analytics tools** help track update success rates and user engagement.
 -   A **one-click rollback** option lets you quickly recover from problematic updates.
--   Use the **[channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** for staged rollouts and beta testing.
+-   Use the **[channel system](https://capgo.app/docs/live-updates/channels/)** for staged rollouts and beta testing.
 
 ### Installing Capgo
 
 Follow these steps to get started with Capgo:
 
-1.  [Install the Capgo CLI](https://capgo.app/docs/self-hosted/local-dev/cli/):
-    
+1.  [Install the Capgo CLI](https://capgo.app/docs/plugins/updater/local-dev/cli/):
+
     ```bash
     npm install --save @capgo/cli
     ```
-    
+
 2.  [Initialize Capgo](https://capgo.app/docs/webapp/) in your project:
-    
+
     ```bash
     npx capgo init
     ```
-    
+
 3.  Build and release updates:
-    
+
     ```bash
     npm run build
     npx capgo release
     ```
-    
+
 4.  Open the app to trigger the background update process.
-    
+
 
 ### Best Practices
 
@@ -204,41 +204,41 @@ Once you've completed the platform and Capgo setup, you might face some common e
 
 ### Environment Setup Issues
 
--   **CLI Not Found**  
-    **Error**: The command `npx cap` fails.  
+-   **CLI Not Found**
+    **Error**: The command `npx cap` fails.
     **Fix**: Run `npm install --save @capacitor/cli @capacitor/core` and try again.
-    
--   **Node Version Mismatch**  
-    **Error**: CLI commands fail due to Node.js version errors.  
+
+-   **Node Version Mismatch**
+    **Error**: CLI commands fail due to Node.js version errors.
     **Fix**: Install Node.js version 14 or higher as outlined in the setup requirements.
-    
+
 
 ### Configuration Problems
 
--   **Config Mismatch**  
-    **Error**: Changes in `capacitor.config.json` don't take effect.  
+-   **Config Mismatch**
+    **Error**: Changes in `capacitor.config.json` don't take effect.
     **Fix**: Make sure the `appId` and `webDir` values match your project's `package.json` and the web build output folder.
-    
--   **Platform Sync Errors**  
-    **Error**: Running `npx cap sync` results in plugin version conflicts.  
+
+-   **Platform Sync Errors**
+    **Error**: Running `npx cap sync` results in plugin version conflicts.
     **Fix**: Update `@capacitor/android` and `@capacitor/ios` to the same major version, then rerun the sync command.
-    
+
 
 ### Build and Deployment
 
--   **Build Signing Failures**  
-    **Error**: iOS or Android builds fail due to missing certificates or a keystore.  
+-   **Build Signing Failures**
+    **Error**: iOS or Android builds fail due to missing certificates or a keystore.
     **Fix**: Follow the IDE setup instructions. For iOS, add your development team in Xcode. For Android, configure the keystore in `build.gradle`.
-    
--   **Web Directory Not Found**  
-    **Error**: `npx cap sync` can't find the web assets.  
+
+-   **Web Directory Not Found**
+    **Error**: `npx cap sync` can't find the web assets.
     **Fix**: Run your web build command (e.g., `npm run build`) before syncing the platforms.
-    
+
 
 ### Live Update Issues
 
--   **[Capgo Update Failures](https://capgo.app/docs/plugin/cloud-mode/manual-update/)**  
-    **Error**: Updates are not appearing in the production app.  
+-   **[Capgo Update Failures](https://capgo.app/docs/getting-started/deploy/)**
+    **Error**: Updates are not appearing in the production app.
     **Fix**: Double-check your [Capgo API key](https://capgo.app/docs/webapp/api-keys/) in `capacitor.config.json` and ensure you're targeting the correct channel.
 
 For more details on platform-specific setup, revisit the Platform Setup section. If you're working with live updates, consult the Capgo Setup Guide for additional troubleshooting tips.

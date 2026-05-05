@@ -52,7 +52,7 @@ To get your app listed on the [Apple App Store](https://developer.apple.com/app-
 
 ### Meeting Legal Standards
 
-Your app's technical setup must adhere to Russian legal requirements. Use [secure update methods](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) to protect user data during the update process. For example, Capgo offers end-to-end encryption for updates [\[1\]](https://capgo.app/). Strong security measures and clear transparency can make the app approval process smoother.
+Your app's technical setup must adhere to Russian legal requirements. Use [secure update methods](https://capgo.app/docs/live-updates/differentials/) to protect user data during the update process. For example, Capgo offers end-to-end encryption for updates [\[1\]](https://capgo.app/). Strong security measures and clear transparency can make the app approval process smoother.
 
 ## Step-by-Step Compliance Guide
 
@@ -111,7 +111,7 @@ Ongoing monitoring is essential to maintain compliance:
     -   Data transfer pathways
     -   User consent logs
     -   Privacy policy updates
-3.  **[Update Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/)**: When rolling out app updates through platforms like Capgo, ensure that updates adhere to data locality requirements and avoid transferring Russian user data outside the country.
+3.  **[Update Management](https://capgo.app/docs/getting-started/deploy/)**: When rolling out app updates through platforms like Capgo, ensure that updates adhere to data locality requirements and avoid transferring Russian user data outside the country.
     
 
 Use automated monitoring tools to detect compliance issues, like accidental data transfers to non-Russian servers or geo-routing errors. These tools can integrate with your update processes to ensure ongoing compliance.

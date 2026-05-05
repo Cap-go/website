@@ -19,7 +19,7 @@ next_blog: ''
 Rollback management is crucial for fixing [app updates](https://capgo.app/plugins/capacitor-updater/) that cause crashes or bugs. With [Capgo](https://capgo.app/), you can quickly revert to a stable version without needing app store approvals. Here's how [Capgo](https://capgo.app/) simplifies rollback management:
 
 -   **Fast Recovery**: Rollbacks average just 114 milliseconds.
--   **[Automatic Updates](https://capgo.app/docs/plugin/cloud-mode/auto-update/)**: No manual intervention needed - Capgo handles updates and rollbacks seamlessly.
+-   **[Automatic Updates](https://capgo.app/docs/getting-started/add-an-app/)**: No manual intervention needed - Capgo handles updates and rollbacks seamlessly.
 -   **Secure Process**: End-to-end encryption ensures safe updates.
 -   **Easy Setup**: Install the `@capgo/capacitor-updater` package and configure your app in minutes.
 -   **[Update Channels](https://capgo.app/docs/webapp/channels/)**: Control updates with staging, beta, and production environments.
@@ -107,7 +107,7 @@ Automate rollbacks by defining triggers based on conditions like error rates, pe
 
 Before deploying to production, test the rollback functionality in the staging channel. This step ensures your rollback system works as expected under real-world conditions.
 
-Finally, integrate your update channels with your [CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-gitlab/). This automation streamlines deployments and rollbacks, keeping your workflow efficient while maintaining a safety net for unforeseen issues.
+Finally, integrate your update channels with your [CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-in-gitlab/). This automation streamlines deployments and rollbacks, keeping your workflow efficient while maintaining a safety net for unforeseen issues.
 
 ## How to Execute Rollbacks with Capgo
 
@@ -231,7 +231,7 @@ Regularly testing scenarios like version mismatches, corrupted bundles, network 
 
 ## Conclusion
 
-Having a reliable rollback strategy is crucial for maintaining the stability of your [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/), and Capgo provides the tools to make this process seamless. It combines efficient [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) with robust security measures to ensure your apps stay dependable and protected.
+Having a reliable rollback strategy is crucial for maintaining the stability of your [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/), and Capgo provides the tools to make this process seamless. It combines efficient [update management](https://capgo.app/docs/getting-started/deploy/) with robust security measures to ensure your apps stay dependable and protected.
 
 Capgo's standout feature is its **one-click rollback capability**, which lets you quickly revert to a previous version if something goes wrong. This minimizes downtime and keeps disruptions to your users at a minimum. On top of that, the platform ensures compliance with Apple and Google requirements while using **end-to-end encryption** to safeguard your applications in production environments.
 

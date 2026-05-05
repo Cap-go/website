@@ -417,7 +417,7 @@ public void yourMethod(PluginCall call) {
 
 Use the Debug panel in Android Studio to monitor key areas:
 
-| [Debugging Area](https://capgo.app/docs/plugin/debugging/) | What to Check | Common Issues |
+| [Debugging Area](https://capgo.app/docs/plugins/updater/debugging/) | What to Check | Common Issues |
 | --- | --- | --- |
 | Logcat | AAR initialization messages | Missing permissions or incorrect context |
 | Variables | Data type conversions | Null values or type mismatches |

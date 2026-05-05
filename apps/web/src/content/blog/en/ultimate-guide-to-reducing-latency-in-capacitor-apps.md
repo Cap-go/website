@@ -419,7 +419,7 @@ On top of that, gRPC relies on **Protocol Buffers** for serialization. These cre
 ::: faq
 ### How do live update platforms like Capgo improve app performance and user experience compared to traditional app store updates?
 
-Live update tools like **Capgo** have changed the game for app developers, making it possible to roll out updates instantly without waiting for traditional app store approvals. This means bugs can be fixed on the fly, new features can be introduced quickly, and apps can be improved in real time. For users, this translates to always having the most up-to-date version of an app - no [manual updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/) required.
+Live update tools like **Capgo** have changed the game for app developers, making it possible to roll out updates instantly without waiting for traditional app store approvals. This means bugs can be fixed on the fly, new features can be introduced quickly, and apps can be improved in real time. For users, this translates to always having the most up-to-date version of an app - no [manual updates](https://capgo.app/docs/getting-started/deploy/) required.
 
 With **secure over-the-air (OTA) updates**, Capgo ensures compliance with app store rules while also minimizing downtime and increasing reliability. Developers can push out multiple updates each week, which not only streamlines their workflow but also enhances the overall user experience. By removing the hassle of manual updates, live update platforms like Capgo help boost user engagement and retention, delivering a seamless and modern app experience.
 :::

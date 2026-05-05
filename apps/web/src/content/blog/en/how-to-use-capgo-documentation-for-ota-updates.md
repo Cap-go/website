@@ -138,10 +138,10 @@ npx @capgo/cli upload -c production
 
 Capgo provides two main ways to handle updates:
 
-**[Automatic Updates](https://capgo.app/docs/plugin/cloud-mode/auto-update/)**  
+**[Automatic Updates](https://capgo.app/docs/getting-started/add-an-app/)**
 Enable automatic updates by setting `autoUpdate: true` in your configuration. This ensures updates are applied in the background with no extra effort from developers.
 
-**[Manual Updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/)**  
+**[Manual Updates](https://capgo.app/docs/getting-started/deploy/)**
 For more control, you can manage updates manually. Use the following pattern to check for and apply updates:
 
 ```typescript
@@ -273,18 +273,18 @@ Capgo's error logs and built-in tools help tackle OTA update challenges while ke
 
 Here are some typical problems and how to address them:
 
--   **Failed Downloads**  
-    _Symptoms_: Downloads freeze or fail to complete.  
+-   **Failed Downloads**
+    _Symptoms_: Downloads freeze or fail to complete.
     _Solution_: Check your network connection, confirm the update URL is valid, and add retry mechanisms to handle interruptions.
-    
--   **Version Conflicts**  
-    _Symptoms_: Updates either fail to install or cause app instability.  
+
+-   **Version Conflicts**
+    _Symptoms_: Updates either fail to install or cause app instability.
     _Solution_: Use clear version numbers to avoid conflicts and implement rollback options for safety.
-    
--   **Installation Errors**  
-    _Symptoms_: Updates fail or trigger automatic rollbacks.  
+
+-   **Installation Errors**
+    _Symptoms_: Updates fail or trigger automatic rollbacks.
     _Solution_: Ensure you call `notifyAppReady()` after a successful update to prevent rollbacks.
-    
+
 
 For updates larger than 50MB, splitting them into smaller files can improve performance on Android devices [\[5\]](https://github.com/Cap-go/capacitor-updater/issues/119).
 
@@ -345,11 +345,11 @@ Using Capgo's resources, developers can implement essential features like **end-
 | --- | --- | --- |
 | **Security** | Encryption and integrity checks | _Security Features_ section |
 | **Compliance** | Meeting Apple and Android requirements | _App Store Rules_ guide |
-| **[Update Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/)** | Version control and rollback options | _[Update Methods](https://capgo.app/docs/plugin/cloud-mode/hybrid-update)_ guide |
+| **[Update Management](https://capgo.app/docs/getting-started/deploy/)** | Version control and rollback options | _[Update Methods](https://capgo.app/docs/live-updates/differentials/)_ guide |
 | **Error Handling** | Logging and troubleshooting steps | _Problem Solving Guide_ |
 
 These areas form the backbone of Capgo's update management system.
 
-Capgo's CLI and analytics tools simplify [managing updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/) throughout your app's lifecycle [\[1\]](https://github.com/Cap-go/capacitor-updater).
+Capgo's CLI and analytics tools simplify [managing updates](https://capgo.app/docs/getting-started/deploy/) throughout your app's lifecycle [\[1\]](https://github.com/Cap-go/capacitor-updater).
 
 For further support, you can explore additional resources like **API documentation**, **sample projects**, and **community forums** [\[2\]](https://dev.to/arnosolo/ionic-appflow-live-update-alternative-55c3).

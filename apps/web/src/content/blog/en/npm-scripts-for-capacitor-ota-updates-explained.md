@@ -307,7 +307,7 @@ When implementing npm scripts in your deployment workflow, consider these factor
 -   **Strong security measures** to ensure compliance
 -   **Affordability** for scaling without breaking the budget
 
-Capgo's ability to handle complex npm script configurations while maintaining high performance makes it a strong contender for OTA [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
+Capgo's ability to handle complex npm script configurations while maintaining high performance makes it a strong contender for OTA [update management](https://capgo.app/docs/getting-started/deploy/).
 
 ## Conclusion
 

@@ -63,7 +63,7 @@ The table below outlines key server weaknesses and their potential impacts:
 | Insufficient Role Management | Release of untested updates |
 | Compromised API Keys | Distribution of malicious code |
 
-These examples show why security must go beyond just signing updates. A layered approach - including encryption, verification, and strict access controls - is critical to protect the [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
+These examples show why security must go beyond just signing updates. A layered approach - including encryption, verification, and strict access controls - is critical to protect the [update process](https://capgo.app/docs/getting-started/deploy/).
 
 ## Security Steps for OTA Updates
 
@@ -135,7 +135,7 @@ Key components of an effective rollback system:
 
 ### Staged Release Process
 
-Pair rollback strategies with a phased deployment plan to minimize risk and test security in real-time. A [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) helps control distribution and ensures updates are thoroughly tested before full deployment.
+Pair rollback strategies with a phased deployment plan to minimize risk and test security in real-time. A [channel system](https://capgo.app/docs/live-updates/channels/) helps control distribution and ensures updates are thoroughly tested before full deployment.
 
 | Stage | Audience | Duration | Security Measures |
 | --- | --- | --- | --- |
@@ -195,7 +195,7 @@ These numbers showcase Capgo’s ability to deliver secure updates efficiently, 
 
 ### Update Monitoring
 
-Keeping an eye on your OTA updates in real time is key to ensuring security after deployment. Use your [update management platform](https://capgo.app/docs/plugin/cloud-mode/manual-update/)'s analytics dashboard to track important metrics like:
+Keeping an eye on your OTA updates in real time is key to ensuring security after deployment. Use your [update management platform](https://capgo.app/docs/getting-started/deploy/)'s analytics dashboard to track important metrics like:
 
 | Metric | Target Threshold | Security Implication |
 | --- | --- | --- |

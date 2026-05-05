@@ -135,7 +135,7 @@ Capgo uses advanced encryption techniques to deliver secure OTA updates while fu
 
 Capgo employs FIPS 140-2 compliant encryption to safeguard update packages at every stage. Encryption keys are managed within a secure infrastructure, ensuring they remain isolated from Capgo's servers[\[1\]](https://www.cubtale.com/pages/compliance-data-security).
 
-The [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/) includes specific security measures at each stage:
+The [update process](https://capgo.app/docs/getting-started/deploy/) includes specific security measures at each stage:
 
 | Stage | Security Measure |
 | --- | --- |

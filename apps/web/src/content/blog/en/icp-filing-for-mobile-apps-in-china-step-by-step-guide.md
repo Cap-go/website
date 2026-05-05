@@ -276,7 +276,7 @@ When working on an ICP filing, these strategies can help:
 | Document Preparation | Reduces delays | Ensure all necessary documents are translated and notarized before submission. |
 | Provider Selection | Ensures compliance | Work with providers experienced in handling mobile app ICP filings. |
 | Monitoring System | Tracks progress | Regularly check compliance requirements to stay updated with any changes. |
-| [Update Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) | Avoids violations | Keep app information and filings current with regulatory authorities. |
+| [Update Management](https://capgo.app/docs/getting-started/deploy/) | Avoids violations | Keep app information and filings current with regulatory authorities. |
 
 ### Capgo Benefits
 

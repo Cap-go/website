@@ -265,7 +265,7 @@ Interested in trying it out? [Join our Discord](https://discord.com/invite/VnYRv
 
 ## Getting Started
 
-Ready to build without the hassle? Check out the [Cloud Build documentation](/docs/cli/reference/build/) to learn more about:
+Ready to build without the hassle? Check out the [Cloud Build documentation](/docs/cli/commands/build/) to learn more about:
 
 - [Setting up credentials](/docs/cli/cloud-build/credentials/) - iOS certificates and Android keystores
 - [Getting started guide](/docs/cli/cloud-build/getting-started/) - Your first build in 5 minutes
@@ -291,7 +291,7 @@ Happy building!
 
 ## Learn More
 
-- [Cloud Build Overview](/docs/cli/reference/build/)
+- [Cloud Build Overview](/docs/cli/commands/build/)
 - [Credentials Setup Guide](/docs/cli/cloud-build/credentials/)
 - [Getting Started with Cloud Build](/docs/cli/cloud-build/getting-started/)
 - [iOS Build Configuration](/docs/cli/cloud-build/ios/)

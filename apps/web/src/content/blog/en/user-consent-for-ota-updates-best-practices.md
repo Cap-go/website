@@ -86,7 +86,7 @@ For a simpler integration process, consider using Capgo’s built-in tools for m
 
 ![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680c46c45a08fca89178f92d/c4b9497df1c5d14f98df25934b50bafa.jpg)
 
-Capgo simplifies the process of handling user consent for OTA updates with its [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) and other tools. Below is an overview of what it offers:
+Capgo simplifies the process of handling user consent for OTA updates with its [channel system](https://capgo.app/docs/live-updates/channels/) and other tools. Below is an overview of what it offers:
 
 | Feature | Purpose | Example Use Case |
 | --- | --- | --- |

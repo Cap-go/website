@@ -154,7 +154,7 @@ Once live updates are configured, you’re ready to wrap up your distribution wo
 
 ## Conclusion
 
-By following these five steps, you can create a [custom Capacitor plugin](https://capgo.app/blog/release-of-a-brand-new-capacitor-social-login/) that's well-built, simple to integrate, and ready for deployment.
+By following these five steps, you can create a [custom Capacitor plugin](https://capgo.app/blog/capacitor-social-login-release/) that's well-built, simple to integrate, and ready for deployment.
 
 From development and testing to packaging, publishing, integration, and even optional live updates, this structured process ensures your plugins work seamlessly on both iOS and Android platforms.
 

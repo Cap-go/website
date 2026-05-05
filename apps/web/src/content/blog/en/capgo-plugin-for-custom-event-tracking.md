@@ -243,7 +243,7 @@ Once you've confirmed your event flow is working as expected, it’s time to fin
 
 ### Data Transfer Settings
 
-After verifying your events using [debugging tools](https://capgo.app/docs/plugin/debugging/), you can optimize data transfer settings to ensure smooth and efficient performance. For example, Capgo’s CDN can transfer a 5MB bundle in just 114ms, with an API response time of 434ms.
+After verifying your events using [debugging tools](https://capgo.app/docs/plugins/updater/debugging/), you can optimize data transfer settings to ensure smooth and efficient performance. For example, Capgo’s CDN can transfer a 5MB bundle in just 114ms, with an API response time of 434ms.
 
 **Security Configuration Example:**
 
@@ -375,9 +375,9 @@ By using these strategies, you can improve event tracking performance without co
 ::: faq
 ### How can I troubleshoot and resolve issues with custom event tracking using Capgo tools?
 
-To address custom event tracking issues in your Capacitor app, several tools and strategies from Capgo can come in handy. Start by using [web debugging tools](https://capgo.app/docs/plugin/debugging/) like **Chrome DevTools** or **Safari Web Inspector**. These are great for inspecting API calls, tracking resource loading, and identifying JavaScript errors. For native components, rely on platform-specific tools such as **Xcode** for iOS or **Android Studio** for Android to dig deeper into potential problems.
+To address custom event tracking issues in your Capacitor app, several tools and strategies from Capgo can come in handy. Start by using [web debugging tools](https://capgo.app/docs/plugins/updater/debugging/) like **Chrome DevTools** or **Safari Web Inspector**. These are great for inspecting API calls, tracking resource loading, and identifying JavaScript errors. For native components, rely on platform-specific tools such as **Xcode** for iOS or **Android Studio** for Android to dig deeper into potential problems.
 
 Running key [Capacitor CLI commands](https://capgo.app/docs/cli/commands/) is another effective approach. For example, `npx cap doctor` helps diagnose configuration issues, while `npx cap sync` ensures plugins are correctly integrated into your project.
 
-For a more robust [debugging process](https://capgo.app/docs/plugin/debugging/), you might also integrate error tracking platforms like **Sentry** or **[LogRocket](https://logrocket.com/)**. These tools monitor real-time errors and user interactions, making them especially useful during over-the-air (OTA) updates. By combining these methods, you can streamline the debugging process and improve the performance of your custom event tracking.
+For a more robust [debugging process](https://capgo.app/docs/plugins/updater/debugging/), you might also integrate error tracking platforms like **Sentry** or **[LogRocket](https://logrocket.com/)**. These tools monitor real-time errors and user interactions, making them especially useful during over-the-air (OTA) updates. By combining these methods, you can streamline the debugging process and improve the performance of your custom event tracking.
 :::

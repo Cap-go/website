@@ -152,7 +152,7 @@ Here are some time-based update controls to consider:
 | --- | --- | --- |
 | Deferred Updates | Postpone updates for 1–90 days after release | Allows for controlled testing and gradual rollout |
 | Version Control | Decide which app versions receive updates | Supports staged deployment and testing |
-| [Automatic Updates](https://capgo.app/docs/plugin/cloud-mode/auto-update/) | Set update behavior on managed devices | Simplifies maintenance |
+| [Automatic Updates](https://capgo.app/docs/getting-started/add-an-app/) | Set update behavior on managed devices | Simplifies maintenance |
 
 To enforce deadlines, use system notifications. Research shows that consistent, well-planned updates can increase user engagement by up to 200%[\[9\]](https://moldstud.com/articles/p-update-your-app-on-google-play-best-practices-and-tips). Beyond meeting app store rules, ensuring security in your updates is just as critical.
 
@@ -245,7 +245,7 @@ Your choice of OTA update software can have a big impact on your team's efficien
 
 ### Summary
 
-Balancing technical precision with user experience can improve OTA [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) efficiency by 81% [\[1\]](https://capgo.app/). This approach supports effective version control and reliable OTA deployments.
+Balancing technical precision with user experience can improve OTA [update management](https://capgo.app/docs/getting-started/deploy/) efficiency by 81% [\[1\]](https://capgo.app/). This approach supports effective version control and reliable OTA deployments.
 
 Here are the main points to keep in mind for successful OTA updates:
 

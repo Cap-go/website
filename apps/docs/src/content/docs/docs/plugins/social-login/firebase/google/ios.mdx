@@ -8,7 +8,7 @@ import { Steps } from '@astrojs/starlight/components';
 
 ## Introduction
 
-This guide will help you integrate Google Sign-In with Firebase Authentication on iOS. I assume you have already completed the [general Firebase Google setup](./general/). 
+This guide will help you integrate Google Sign-In with Firebase Authentication on iOS. I assume you have already completed the [general Firebase Google setup](../general/).
 
 :::note
 I will assume that you have not yet created your iOS app in the Firebase Console. If you have, your steps will be slightly different.
@@ -96,7 +96,7 @@ I will assume that you have not yet created your iOS app in the Firebase Console
         <img src="/social-login-assets/xcode_dict_tag.png" alt="Closing dict tag in Info.plist file" />
     4. Insert the following fragment just before the closing `</dict>` tag
         <img src="/social-login-assets/xcode_plist_inserted.png" alt="Info.plist with URL schemes code inserted before closing dict tag" />
-        
+
         ```xml
         <key>CFBundleURLTypes</key>
         <array>
@@ -110,16 +110,16 @@ I will assume that you have not yet created your iOS app in the Firebase Console
         <key>GIDClientID</key>
         <string>YOUR_IOS_CLIENT_ID.apps.googleusercontent.com</string>
         ```
-    
+
     5. Change the `YOUR_DOT_REVERSED_IOS_CLIENT_ID` to the value copied in step 9 (the iOS URL scheme)
         <img src="/social-login-assets/xcode_plist_final.png" alt="Info.plist with actual reversed client ID inserted in URL schemes" />
-        
+
         :::caution
         Ensure that this value **STARTS** with `com.googleusercontent.apps`
         :::
-    
+
    6. Change the `YOUR_IOS_CLIENT_ID` to the iOS Client ID you copied in step 9
-    
+
    7. Save the file with `Command + S`
 
 12. Modify the `AppDelegate.swift`
@@ -130,25 +130,25 @@ I will assume that you have not yet created your iOS app in the Firebase Console
     3. Find the `func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:])` function
         <img src="/social-login-assets/xcode_app_deleg_app_fn.png" alt="Original application openURL function in AppDelegate" />
     4. Modify the function to look like this
-        
+
         ```swift
         func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
             // Called when the app was launched with a url. Feel free to add additional processing here,
             // but if you want the App API to support tracking app url opens, make sure to keep this call
-        
+
             var handled: Bool
-        
+
             handled = GIDSignIn.sharedInstance.handle(url)
             if handled {
               return true
             }
-        
+
             return ApplicationDelegateProxy.shared.application(app, open: url, options: options)
         }
         ```
-        
+
         <img src="/social-login-assets/xcode_app_deleg_app_fn_mod.png" alt="Modified application openURL function with GoogleSignIn handling" />
-    
+
     5. Save the file with `Command + S`
 
 15. Using the Google login in your app
@@ -168,5 +168,4 @@ If authentication hangs or fails:
 - Ensure Info.plist has the correct URL schemes and GIDClientID
 - Verify `iOSServerClientId` matches your web client ID
 - Review the [example app code](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app/src/authUtils.ts) for reference
-
 

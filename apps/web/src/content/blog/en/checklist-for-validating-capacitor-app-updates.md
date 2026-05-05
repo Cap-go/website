@@ -65,7 +65,7 @@ Set up your repository with the following practices:
 Configure Capgo with these steps [\[1\]](https://capgo.app/):
 
 -   [Initialize Capgo](https://capgo.app/docs/webapp/) using: `npx @capgo/cli init`.
--   Set up a [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) to target specific updates.
+-   Set up a [channel system](https://capgo.app/docs/live-updates/channels/) to target specific updates.
 -   Enable end-to-end encryption for added security.
 -   Turn on error tracking and analytics.
 -   Configure rollback options for better control.

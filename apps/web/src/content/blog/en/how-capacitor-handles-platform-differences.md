@@ -247,10 +247,10 @@ Keeping [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) 
 | --- | --- | --- |
 | **Live Updates** | Deploy instantly without app store review | Ensures a unified experience on iOS and Android |
 | **End-to-End Encryption** | Secures update delivery | Meets security requirements of both platforms |
-| **[Channel System](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** | Targets specific user groups | Supports beta testing and phased rollouts |
+| **[Channel System](https://capgo.app/docs/live-updates/channels/)** | Targets specific user groups | Supports beta testing and phased rollouts |
 | **Partial Updates** | Downloads only modified content | Saves bandwidth and speeds up updates |
 
-Capgo has delivered 23.5 million updates, achieving a 95% active user update rate within 24 hours [\[1\]](https://capgo.app/). These features make [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) smoother and more efficient across platforms.
+Capgo has delivered 23.5 million updates, achieving a 95% active user update rate within 24 hours [\[1\]](https://capgo.app/). These features make [update management](https://capgo.app/docs/getting-started/deploy/) smoother and more efficient across platforms.
 
 ### Capgo Platform Management
 

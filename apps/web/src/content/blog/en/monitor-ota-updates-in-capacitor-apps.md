@@ -50,7 +50,7 @@ This plugin works seamlessly with Capacitor 8, making it compatible with a range
 
 ### Managing Update Versions
 
-Version control plays a key role in handling OTA updates. Capgo's [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) helps you manage update distribution efficiently:
+Version control plays a key role in handling OTA updates. Capgo's [channel system](https://capgo.app/docs/live-updates/channels/) helps you manage update distribution efficiently:
 
 | Channel Type | Purpose | Best Use Case |
 | --- | --- | --- |
@@ -174,7 +174,7 @@ This ensures updates comply with security standards and keeps user data safe thr
 
 ## Summary
 
-This section recaps the main steps for monitoring OTA updates and highlights the features that make Capgo a standout choice for [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
+This section recaps the main steps for monitoring OTA updates and highlights the features that make Capgo a standout choice for [update management](https://capgo.app/docs/getting-started/deploy/).
 
 ### Key Monitoring Steps
 

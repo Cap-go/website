@@ -162,7 +162,7 @@ For developers, staying compliant across different jurisdictions means adopting 
 
 To tackle these challenges, developers should concentrate on three key areas:
 
--   **[Quick Update Systems](https://capgo.app/docs/plugin/cloud-mode/hybrid-update)**: Set up processes that allow for fast implementation of privacy updates.
+-   **[Quick Update Systems](https://capgo.app/docs/live-updates/differentials/)**: Set up processes that allow for fast implementation of privacy updates.
 -   **Strong Security Measures**: Ensure all data transfers and updates are protected with end-to-end encryption.
 -   **Thorough Testing**: Use staged rollouts and beta testing to confirm that privacy updates work as intended.
 

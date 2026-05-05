@@ -104,7 +104,7 @@ Google Play requires clear notifications for pending updates to keep users infor
 
 Different types of over-the-air (OTA) updates require specific levels of user permissions:
 
-**[Automatic Updates](https://capgo.app/docs/plugin/cloud-mode/auto-update/)**
+**[Automatic Updates](https://capgo.app/docs/getting-started/add-an-app/)**
 
 -   Used for smaller patches and minor fixes.
 -   No action needed from the user [\[1\]](https://capgo.app/).
@@ -202,7 +202,7 @@ Capgo easily fits into existing development workflows while adhering to Google P
 | CI/CD Pipeline | Supports [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/), [Jenkins](https://www.jenkins.io/) | Automates compliance checks |
 | CLI Tools | One-command deployments | Standardizes the update process |
 | API Access | Public API for custom setups | Offers flexible compliance management |
-| [Channel System](https://capgo.app/docs/plugin/cloud-mode/channel-system/) | Beta testing and staged rollouts | Enables controlled update releases |
+| [Channel System](https://capgo.app/docs/live-updates/channels/) | Beta testing and staged rollouts | Enables controlled update releases |
 
 OTA updates start at $12 per month. For teams needing automated CI/CD pipelines to build native mobile apps, an optional setup service is available for $2,600 one-time.
 

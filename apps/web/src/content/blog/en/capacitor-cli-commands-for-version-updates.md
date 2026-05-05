@@ -19,7 +19,7 @@ next_blog: ''
 [Capacitor](https://capacitorjs.com/) CLI simplifies [updating your app](https://capgo.app/plugins/capacitor-updater/) for iOS and Android. Here's what you need to know:
 
 -   **Why Update?** Stay secure, improve performance, and ensure compatibility with the latest mobile OS versions.
--   **Key Commands:** Use `npm install @capacitor/cli@latest` to update Capacitor CLI, `npx cap migrate` to apply changes, and `npx cap sync` to [finalize updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update).
+-   **Key Commands:** Use `npm install @capacitor/cli@latest` to update Capacitor CLI, `npx cap migrate` to apply changes, and `npx cap sync` to [finalize updates](https://capgo.app/docs/live-updates/differentials/).
 -   **Platform-Specific Steps:** Update iOS with [CocoaPods](https://cocoapods.org/) (`pod install`) and [Xcode](https://developer.apple.com/xcode/) settings. For Android, adjust [Gradle](https://gradle.org/) configurations and verify Java versions.
 -   **Use [Capgo](https://capgo.app/) for Live Updates:** Deploy changes instantly without app store delays, with features like rollback and real-time analytics.
 
@@ -33,7 +33,7 @@ Updating ensures your app remains efficient and user-friendly. Follow the steps 
 
 ## Before You Update
 
-Taking the time to prepare before updating can save you from headaches later. A bit of groundwork helps avoid common pitfalls and ensures everything runs smoothly. Here's what you need to focus on to minimize risks during the [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
+Taking the time to prepare before updating can save you from headaches later. A bit of groundwork helps avoid common pitfalls and ensures everything runs smoothly. Here's what you need to focus on to minimize risks during the [update process](https://capgo.app/docs/getting-started/deploy/).
 
 ### Check System Requirements
 
@@ -212,7 +212,7 @@ This feature streamlines the update process, keeping your app up-to-date without
 | **Feature** | **Description** | **Benefit** |
 | --- | --- | --- |
 | End-to-End Encryption | Built-in security for updates | Ensures only authorized users can access updates |
-| [Channel System](https://capgo.app/docs/plugin/cloud-mode/channel-system/) | Advanced update distribution | Target specific user segments |
+| [Channel System](https://capgo.app/docs/live-updates/channels/) | Advanced update distribution | Target specific user segments |
 | Real-time Analytics | Monitor update performance | Track success rates and user engagement |
 
 ### Update Safety Features
@@ -305,7 +305,7 @@ Finally, if you're using Capgo for live updates, double-check that your build co
 
 ## Summary
 
-This section highlights the essential steps and tools for [managing updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/) in Capacitor, emphasizing how effective use of [Capacitor CLI commands](https://capgo.app/docs/cli/commands/) ensures smooth workflows in app development. The tools and strategies discussed aim to simplify updates while reducing potential risks.
+This section highlights the essential steps and tools for [managing updates](https://capgo.app/docs/getting-started/deploy/) in Capacitor, emphasizing how effective use of [Capacitor CLI commands](https://capgo.app/docs/cli/commands/) ensures smooth workflows in app development. The tools and strategies discussed aim to simplify updates while reducing potential risks.
 
 Earlier, we noted that Capgo supports **1.7K production apps**, achieving an impressive **82% update success rate** [\[1\]](https://capgo.app). Its instant update feature enables **95% of users to update within 24 hours** [\[1\]](https://capgo.app), showcasing its efficiency.
 

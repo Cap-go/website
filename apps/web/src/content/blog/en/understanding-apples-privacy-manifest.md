@@ -89,7 +89,7 @@ Consider using Capgo to push manifest updates instantly, avoiding delays caused 
 
 ### Common Pitfalls
 
-Relying on [manual updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/) can be slow, as they depend on App Store review times, which can take days or even weeks. This often leaves documentation outdated. On the other hand, automated tools allow for instant updates, provide analytics to monitor deployments, and make it easy to roll back changes if something goes wrong [\[1\]](https://capgo.app/).
+Relying on [manual updates](https://capgo.app/docs/getting-started/deploy/) can be slow, as they depend on App Store review times, which can take days or even weeks. This often leaves documentation outdated. On the other hand, automated tools allow for instant updates, provide analytics to monitor deployments, and make it easy to roll back changes if something goes wrong [\[1\]](https://capgo.app/).
 
 ### Manual vs. Automated Updates
 

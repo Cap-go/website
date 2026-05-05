@@ -36,7 +36,7 @@ To manage version Capgo use the SemVer system, read more about it [here](https:/
 
 Where Capgo find the version to compare
 
-  > You can override this behavior by setting version key in `capacitor.config.json` file [docs here](/docs/plugin/settings/#version)
+  > You can override this behavior by setting version key in `capacitor.config.json` file [docs here](/docs/plugins/updater/settings/#version)
   > The native version will be ignored for all platforms.
 
 #### IOS

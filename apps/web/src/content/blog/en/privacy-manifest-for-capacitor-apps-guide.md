@@ -244,7 +244,7 @@ These tools make adding Capgo to your workflow smooth and efficient.
 
 ### Using Capgo
 
-To get started, [install the Capgo plugin](https://capgo.app/docs/plugin/cloud-mode/getting-started/) with this command:
+To get started, [install the Capgo plugin](https://capgo.app/docs/getting-started/quickstart/) with this command:
 
 ```bash
 npx @capgo/cli init

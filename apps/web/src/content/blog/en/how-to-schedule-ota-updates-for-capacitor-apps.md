@@ -100,7 +100,7 @@ Successfully managing scheduled OTA updates requires careful code implementation
 
 ### Update Schedule Code
 
-Here’s how you can set up [automatic background updates](https://capgo.app/docs/plugin/self-hosted/auto-update/) with a simple script:
+Here’s how you can set up [automatic background updates](https://capgo.app/docs/plugins/updater/self-hosted/auto-update/) with a simple script:
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
@@ -166,7 +166,7 @@ Keeping an eye on OTA update performance helps refine your schedule and ensures 
 
 ### Update Metrics
 
-Measuring key performance indicators (KPIs) is essential for assessing your [update strategy](https://capgo.app/docs/plugin/cloud-mode/hybrid-update). Recent data from Capgo's analytics platform highlights the following benchmarks for successful OTA updates:
+Measuring key performance indicators (KPIs) is essential for assessing your [update strategy](https://capgo.app/docs/live-updates/differentials/). Recent data from Capgo's analytics platform highlights the following benchmarks for successful OTA updates:
 
 | Metric | Target Benchmark | Industry Average |
 | --- | --- | --- |
