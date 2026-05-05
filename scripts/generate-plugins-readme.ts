@@ -69,7 +69,7 @@ const generatePluginCard = (card: CardData): string => {
   const code = card.code ?? card.name
   const npmPackage = card.npmPackage ?? card.name
   const npmUrl = npmPackage ? `https://www.npmjs.com/package/${npmPackage}` : undefined
-  const docsUrl = card.docsUrl ?? `https://capgo.app/plugins/${card.title.toLowerCase().replace(/\s+/g, '-')}/`
+  const docsUrl = card.docsUrl ?? `https://capgo.app/plugins/${card.title.toLowerCase().replaceAll(/\s+/g, '-')}/`
   const repoPath = card.href.replace('https://github.com/', '').replace(/\/$/, '').split('/tree/')[0]
 
   const badges: string[] = []
