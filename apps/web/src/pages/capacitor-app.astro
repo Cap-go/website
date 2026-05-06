@@ -1,0 +1,417 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { createFAQPageLdJson, createLdJsonGraph, createWebPageLdJson } from '@/lib/ldJson'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const locale = Astro.locals.locale
+const config = Astro.locals.runtimeConfig.public
+
+const title = 'What is a Capacitor app? Pros, cons, history, and project health'
+const description =
+  'A practical guide to Capacitor apps, including pros, cons, native tradeoffs, project health, and how Capgo live updates, plugins, and cloud builds improve Capacitor delivery.'
+const pageUrl = `${config.baseUrl}/capacitor-app/`
+const image = `${config.baseUrl}/capgo_social.png`
+
+const healthStats = [
+  { label: 'Latest stable release', value: '8.3.1', detail: 'Published April 16, 2026' },
+  { label: 'GitHub stars', value: '15.6k', detail: 'ionic-team/capacitor' },
+  { label: 'Forks', value: '1.2k', detail: 'Public GitHub repo' },
+  { label: 'Monthly downloads', value: '9.6M', detail: '@capacitor/core, Apr 6-May 5 2026' },
+]
+
+const positives = [
+  'One web codebase can ship to iOS, Android, and the web.',
+  'With Capgo live updates, allowed HTML, CSS, and JavaScript fixes can bypass the store review queue after the native app is approved.',
+  'Teams keep React, Vue, Angular, Svelte, or plain web tooling instead of rewriting in Swift and Kotlin.',
+  'Native access comes through plugins, and custom Swift, Kotlin, Java, or Objective-C code can still be added.',
+  'Existing modern web apps can adopt Capacitor without changing UI frameworks.',
+  'Capacitor keeps native iOS and Android projects in the repo, which makes platform debugging and SDK work more explicit.',
+  'Most Cordova plugins can still work, which helps older Ionic and Cordova teams migrate gradually.',
+  'Capgo adds maintained Capacitor plugins, live-update channels, rollback, and cloud builds on top of the Capacitor runtime.',
+]
+
+const negatives = [
+  'The UI runs in a WebView, so poor web performance becomes poor mobile performance.',
+  'Large or frequent data transfers across the JavaScript-to-native bridge add overhead.',
+  'Teams still need some native app knowledge for signing, store review, permissions, Gradle, Xcode, and SDK upgrades.',
+  'Native projects are source files, so major upgrades can require careful manual changes.',
+  'The plugin ecosystem is broad, but not every community plugin has the same maintenance quality, which is why maintained Capgo plugins matter for production apps.',
+  'It is usually not the best fit for fully native UI, advanced games, AR-heavy apps, or apps with constant low-latency native data flows.',
+]
+
+const bestFits = [
+  'SaaS, fintech, healthcare, education, marketplace, and internal tools with strong web product needs.',
+  'Existing web apps that need app-store distribution without a full native rewrite.',
+  'Teams that want web, iOS, and Android handled by mostly the same frontend team.',
+  'Apps with normal native needs: camera, push, auth, files, biometrics, payments, location, and deep links.',
+  'Products that benefit from live web bundle updates after store approval.',
+  'Teams that want Capgo Build to handle repeatable iOS and Android builds, signing, and release artifacts without maintaining every native CI detail.',
+]
+
+const poorFits = [
+  'High-end 3D games, video editors, AR-first products, or apps driven by heavy real-time native rendering.',
+  'Teams that want to write only Swift, Kotlin, Java, or Dart.',
+  'Products where every screen must be built from stock platform-native controls.',
+  'Apps that depend on a niche native SDK when no maintained plugin exists and the team cannot maintain one.',
+  'Teams that expect native-code, permission, entitlement, or store-policy changes to bypass app review. Capgo live updates are for the web bundle, not native binary changes.',
+]
+
+const timeline = [
+  {
+    year: 'Cordova and PhoneGap',
+    text: 'Capacitor inherits the hybrid-app idea: a native shell, a WebView, and a bridge from JavaScript to native APIs.',
+  },
+  {
+    year: 'Late 2017',
+    text: 'The Ionic team started exploring a modern alternative to Cordova as Ionic expanded beyond only mobile UI.',
+  },
+  {
+    year: '2019',
+    text: 'Capacitor was first released as Ionic moved toward a web-native runtime for iOS, Android, desktop, and PWAs.',
+  },
+  {
+    year: '2022',
+    text: 'Ionic joined OutSystems. Ionic later said Capacitor remains central to OutSystems mobile work and open source support.',
+  },
+  {
+    year: '2023-2026',
+    text: 'Ionic moved Capacitor to a more predictable release cadence and began a public backlog health reset.',
+  },
+]
+
+const capgoAdvantages = [
+  {
+    title: 'Live updates that skip the review queue',
+    text: 'Capgo ships allowed web bundle changes directly to users after the native app is approved, so copy fixes, UI fixes, JavaScript patches, and remote configuration do not wait days for App Store or Play Store review.',
+  },
+  {
+    title: 'Rollback, channels, and controlled rollout',
+    text: 'Capgo lets teams release to beta users, percentages, channels, or specific versions, then roll back quickly when a web update is bad.',
+  },
+  {
+    title: 'Maintained Capacitor plugins',
+    text: 'Capgo keeps a large plugin catalog for production Capacitor apps, covering common native needs such as auth, storage, purchases, media, device APIs, and enterprise migrations.',
+  },
+  {
+    title: 'Capgo Build for native releases',
+    text: 'When native code really changes, Capgo Build helps produce iOS and Android builds, manage signing, follow logs, and ship store-ready artifacts from the same Capacitor project.',
+  },
+]
+
+const sources = [
+  { label: 'Capgo live updates', href: 'https://capgo.app/live-update/' },
+  { label: 'Capgo plugins', href: 'https://capgo.app/plugins/' },
+  { label: 'Capgo native build', href: 'https://capgo.app/native-build/' },
+  { label: 'Capacitor documentation', href: 'https://capacitorjs.com/docs' },
+  { label: 'Capacitor GitHub repository', href: 'https://github.com/ionic-team/capacitor' },
+  { label: 'Building cross-platform apps with Capacitor', href: 'https://ionic.io/resources/articles/building-cross-platform-apps-with-capacitor' },
+  { label: 'Announcing Capacitor 1.0', href: 'https://ionic.io/blog/announcing-capacitor-1-0' },
+  { label: 'Everything you wanted to know about Capacitor', href: 'https://ionic.io/blog/capacitor-everything-youve-ever-wanted-to-know' },
+  { label: 'New Capacitor release cadence', href: 'https://ionic.io/blog/introducing-a-new-capacitor-release-cadence' },
+  { label: 'Capacitor backlog health update', href: 'https://ionic.io/blog/keeping-capacitors-backlog-healthy' },
+  { label: 'Ionic and OutSystems', href: 'https://ionic.io/blog/ionic-outsystems-the-future-of-enterprise-app-development' },
+  { label: '@capacitor/core on npm', href: 'https://www.npmjs.com/package/@capacitor/core' },
+]
+
+const faqLdJson = createFAQPageLdJson(config, {
+  url: pageUrl,
+  questions: [
+    {
+      question: 'What is a Capacitor app?',
+      answer: 'A Capacitor app is a real iOS, Android, or web app that runs a modern web application inside a native container and uses plugins to access native device APIs.',
+    },
+    {
+      question: 'Is Capacitor healthy?',
+      answer:
+        'As of May 6, 2026, Capacitor is actively maintained by the Ionic team, has a recent 8.3.1 release, about 15.6k GitHub stars, and about 9.6 million @capacitor/core downloads in the previous month.',
+    },
+    {
+      question: 'When is Capacitor a bad fit?',
+      answer:
+        'Capacitor is a weaker fit for teams that want only native-language development, stock native UI everywhere, heavy native rendering, advanced games, AR-first products, constant high-volume native bridge traffic, or native-binary changes that must ship without store review.',
+    },
+    {
+      question: 'How does Capgo improve a Capacitor app?',
+      answer:
+        'Capgo adds live updates, rollback, channels, maintained Capacitor plugins, and cloud native builds. It helps teams bypass the store review queue for allowed web bundle updates while keeping native binary changes in the normal app review process.',
+    },
+  ],
+})
+
+const webPageLdJson = createWebPageLdJson(config, {
+  name: title,
+  description,
+  url: pageUrl,
+})
+
+const ldJSON = createLdJsonGraph(config, webPageLdJson, {
+  includeOrganization: true,
+  additionalEntities: [faqLdJson],
+})
+
+const content = {
+  title,
+  description,
+  image,
+  ldJSON,
+}
+---
+
+<Layout content={content}>
+  <section class="bg-gray-900 py-12 sm:py-16 lg:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid items-center gap-10 lg:grid-cols-[1fr_0.9fr]">
+        <div>
+          <p class="inline-flex rounded-full border border-sky-400/30 bg-sky-500/10 px-4 py-2 text-sm font-semibold text-sky-100">Capacitor app guide</p>
+          <h1 class="mt-5 text-4xl leading-tight font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">What is a Capacitor app?</h1>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-gray-300">
+            A Capacitor app is a web app shipped inside real native iOS and Android projects. Your interface is HTML, CSS, and JavaScript running in a WebView, while Capacitor
+            plugins bridge that web code to native device APIs like camera, storage, push notifications, biometrics, files, and location. Capgo turns that architecture into a
+            release advantage with live updates, maintained plugins, and native cloud builds.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href={getRelativeLocaleUrl(locale, 'plugins')}
+              class="inline-flex items-center justify-center rounded-lg bg-sky-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-sky-400"
+            >
+              Browse Capgo plugins
+            </a>
+            <a
+              href={getRelativeLocaleUrl(locale, 'live-update')}
+              class="inline-flex items-center justify-center rounded-lg border border-gray-600 px-5 py-3 text-sm font-semibold text-gray-100 transition hover:bg-gray-800"
+            >
+              Bypass review for web fixes
+            </a>
+          </div>
+        </div>
+        <div class="overflow-hidden rounded-lg border border-gray-700 bg-gray-950">
+          <img
+            src="/cross-platform-app-dev-2024.webp"
+            alt="Cross-platform mobile app development across iOS, web frameworks, and Android"
+            class="aspect-[16/10] w-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gray-950 py-14 sm:py-20">
+    <div class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.75fr_1.25fr] lg:px-8">
+      <div>
+        <h2 class="text-3xl font-bold text-white">How it works</h2>
+        <p class="mt-4 text-gray-300">
+          Capacitor is not a UI framework. It is the native runtime under the app. Ionic, React, Vue, Angular, Svelte, Tailwind, or your own design system can render the UI inside
+          the WebView.
+        </p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-3">
+        <div class="rounded-lg border border-gray-800 bg-gray-900 p-5">
+          <p class="text-sm font-semibold text-sky-300">1. Web app</p>
+          <p class="mt-2 text-sm text-gray-300">You build the product with normal web tooling, then output static assets. Capgo can update those assets after approval.</p>
+        </div>
+        <div class="rounded-lg border border-gray-800 bg-gray-900 p-5">
+          <p class="text-sm font-semibold text-emerald-300">2. Native shell</p>
+          <p class="mt-2 text-sm text-gray-300">Capacitor places those assets inside iOS and Android projects. Capgo Build helps when those binaries must be rebuilt.</p>
+        </div>
+        <div class="rounded-lg border border-gray-800 bg-gray-900 p-5">
+          <p class="text-sm font-semibold text-amber-300">3. Plugin bridge</p>
+          <p class="mt-2 text-sm text-gray-300">
+            JavaScript calls plugins, and plugins call Swift, Kotlin, Java, Objective-C, or web fallbacks. Capgo maintains plugins for common native needs.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gray-900 py-14 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-8 lg:grid-cols-2">
+        <div>
+          <h2 class="text-3xl font-bold text-white">Positive parts</h2>
+          <ul class="mt-6 space-y-3">
+            {
+              positives.map((item) => (
+                <li class="flex gap-3 text-gray-300">
+                  <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-emerald-400" />
+                  <span>{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div>
+          <h2 class="text-3xl font-bold text-white">Negative parts</h2>
+          <ul class="mt-6 space-y-3">
+            {
+              negatives.map((item) => (
+                <li class="flex gap-3 text-gray-300">
+                  <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-rose-400" />
+                  <span>{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gray-950 py-14 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Best fit, bad fit</h2>
+      <div class="mt-8 grid gap-6 lg:grid-cols-2">
+        <div class="rounded-lg border border-emerald-500/30 bg-emerald-500/5 p-6">
+          <h3 class="text-xl font-semibold text-emerald-100">Capacitor fits best when</h3>
+          <ul class="mt-5 space-y-3">
+            {
+              bestFits.map((item) => (
+                <li class="flex gap-3 text-gray-300">
+                  <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-emerald-300" />
+                  <span>{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div class="rounded-lg border border-amber-500/30 bg-amber-500/5 p-6">
+          <h3 class="text-xl font-semibold text-amber-100">Choose another stack when</h3>
+          <ul class="mt-5 space-y-3">
+            {
+              poorFits.map((item) => (
+                <li class="flex gap-3 text-gray-300">
+                  <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-amber-300" />
+                  <span>{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gray-900 py-14 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-10 max-w-3xl">
+        <h2 class="text-3xl font-bold text-white">Why Capgo matters</h2>
+        <p class="mt-4 text-gray-300">
+          Native-only apps wait on a new binary, signing, rollout, and app review for every visible change. Capacitor gives you a web bundle inside the native app. Capgo turns that
+          bundle into a faster release path while still keeping native-code changes in the proper app-store review flow.
+        </p>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2">
+        {
+          capgoAdvantages.map((item) => (
+            <div class="rounded-lg border border-sky-500/30 bg-sky-500/5 p-6">
+              <h3 class="text-xl font-semibold text-sky-100">{item.title}</h3>
+              <p class="mt-3 text-gray-300">{item.text}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a
+          href={getRelativeLocaleUrl(locale, 'live-update')}
+          class="inline-flex items-center justify-center rounded-lg bg-sky-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-sky-400"
+        >
+          Use Capgo live updates
+        </a>
+        <a
+          href={getRelativeLocaleUrl(locale, 'native-build')}
+          class="inline-flex items-center justify-center rounded-lg border border-gray-600 px-5 py-3 text-sm font-semibold text-gray-100 transition hover:bg-gray-800"
+        >
+          Build native releases
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gray-950 py-14 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+        <div>
+          <h2 class="text-3xl font-bold text-white">History and lineage</h2>
+          <p class="mt-4 text-gray-300">
+            Capacitor came from the Ionic team, the same company behind Ionic Framework. It inherits the core WebView and native-plugin pattern from Cordova and PhoneGap, but
+            modernizes the developer experience around npm packages, TypeScript, Swift, Kotlin, committed native projects, and PWA support.
+          </p>
+        </div>
+        <div class="space-y-4">
+          {
+            timeline.map((item) => (
+              <div class="rounded-lg border border-gray-800 bg-gray-950 p-5">
+                <p class="text-sm font-semibold text-sky-300">{item.year}</p>
+                <p class="mt-2 text-gray-300">{item.text}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gray-900 py-14 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+        <div>
+          <h2 class="text-3xl font-bold text-white">Maintenance and health</h2>
+          <p class="mt-4 text-gray-300">
+            Capacitor is maintained by the Ionic team, with community contributors around the ecosystem. The project is healthy, but not perfect: Ionic publicly acknowledged
+            backlog debt in February 2026 and started a cleanup process for old issues and pull requests.
+          </p>
+          <p class="mt-4 text-sm text-gray-400">Snapshot checked May 6, 2026. Counts move over time.</p>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {
+            healthStats.map((stat) => (
+              <div class="rounded-lg border border-gray-800 bg-gray-900 p-5">
+                <p class="text-sm text-gray-400">{stat.label}</p>
+                <p class="mt-2 text-3xl font-bold text-white">{stat.value}</p>
+                <p class="mt-1 text-sm text-gray-400">{stat.detail}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <div class="mt-8 rounded-lg border border-sky-500/30 bg-sky-500/5 p-6">
+        <h3 class="text-xl font-semibold text-sky-100">Practical reading</h3>
+        <p class="mt-3 text-gray-300">
+          Treat Capacitor as a strong default when your product is web-first and mobile matters. Use Capgo when release speed matters: live updates for web fixes, rollback for bad
+          releases, channels for staged rollout, maintained plugins for native features, and Capgo Build when a real native binary must be produced. Native-only apps do not get
+          that live-update path; every fix waits for a fresh build and store review.
+        </p>
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+          <a
+            href={getRelativeLocaleUrl(locale, 'native-build')}
+            class="inline-flex items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-gray-900 transition hover:bg-gray-200"
+          >
+            Build native apps with Capgo
+          </a>
+          <a
+            href={getRelativeLocaleUrl(locale, 'register')}
+            class="inline-flex items-center justify-center rounded-lg border border-gray-600 px-5 py-3 text-sm font-semibold text-gray-100 transition hover:bg-gray-800"
+          >
+            Start with Capgo
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gray-900 py-14 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white">Sources</h2>
+      <ul class="mt-6 grid gap-3 text-sm text-gray-300 sm:grid-cols-2">
+        {
+          sources.map((source) => (
+            <li>
+              <a href={source.href} class="text-sky-300 hover:underline">
+                {source.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Layout>

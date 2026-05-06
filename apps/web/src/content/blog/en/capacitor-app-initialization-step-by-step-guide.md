@@ -217,7 +217,7 @@ With these configurations in place, you’re ready to build and test your app on
 
 ## Building and Testing
 
-Using the setup outlined earlier, you can now build and test your [Capacitor app](https://capgo.app/plugins/capacitor-ivs-player/) to ensure it works correctly on various devices.
+Using the setup outlined earlier, you can now build and test your [Capacitor app](https://capgo.app/capacitor-app/) to ensure it works correctly on various devices.
 
 ### Build and Run Commands
 

@@ -173,7 +173,7 @@ If security is a top priority, **Capgo** ensures updates comply with both Apple 
 
 ### How to debug a Capacitor app on Android?
 
-Debugging a [Capacitor app](https://capgo.app/plugins/capacitor-ivs-player/) on Android is straightforward using Chrome's developer tools. Here's how you can do it:
+Debugging a [Capacitor app](https://capgo.app/capacitor-app/) on Android is straightforward using Chrome's developer tools. Here's how you can do it:
 
 1.  Start your app using your IDE or [Android Studio](https://developer.android.com/studio).
 2.  Open `chrome://inspect` in Google Chrome.

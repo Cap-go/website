@@ -87,7 +87,7 @@ Following these steps will help ensure your app updates remain within Apple's st
 
 ## Setting Up Compliant Live Updates
 
-To implement live updates in your [Capacitor app](https://capgo.app/plugins/capacitor-updater/) while meeting Apple's compliance rules, you'll need a structured setup. Here's how you can get started.
+To implement live updates in your [Capacitor app](https://capgo.app/capacitor-app/) while meeting Apple's compliance rules, you'll need a structured setup. Here's how you can get started.
 
 ### Project Setup Steps
 

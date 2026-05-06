@@ -111,7 +111,7 @@ Properly managing keys and credentials can significantly lower the chances of ap
 
 ## Creating Your CI/CD Pipeline
 
-Once your environment is ready, the next step is setting up a CI/CD pipeline for your [Capacitor app](https://capgo.app/plugins/capacitor-ivs-player/). This pipeline should efficiently manage both web assets and native platform builds.
+Once your environment is ready, the next step is setting up a CI/CD pipeline for your [Capacitor app](https://capgo.app/capacitor-app/). This pipeline should efficiently manage both web assets and native platform builds.
 
 ### Installing and Updating Dependencies
 

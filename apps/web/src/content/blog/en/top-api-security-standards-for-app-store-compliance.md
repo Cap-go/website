@@ -26,7 +26,7 @@ Securing your app's API is critical for meeting Apple App Store and Google Play 
 -   **JWT Security**: Safeguard tokens with proper signing and storage.
 -   **API Rate Controls**: Protect APIs from abuse with request limits.
 
-By implementing these standards, you’ll ensure your [Capacitor app](https://capgo.app/plugins/capacitor-ivs-player/) meets approval criteria while keeping user data safe. Ready to dive deeper? Let’s break it down step by step.
+By implementing these standards, you’ll ensure your [Capacitor app](https://capgo.app/capacitor-app/) meets approval criteria while keeping user data safe. Ready to dive deeper? Let’s break it down step by step.
 
 ## Secure API Key in Front End App using Proxy Server & User ...
 
