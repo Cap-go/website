@@ -20,6 +20,7 @@ bunx cap sync
 - `enableAdvertiserTracking` - Enable native advertiser tracking where supported.
 - `disableAdvertiserTracking` - Disable native advertiser tracking where supported.
 - `getAdvertiserTrackingStatus` - Read the current advertiser tracking status.
+- `getPluginVersion` - Read the native plugin version.
 
 ## Example Usage
 
@@ -79,5 +80,5 @@ await FacebookAnalytics.logPurchase({
 
 ## Full Reference
 
-- GitHub: https://github.com/Cap-go/capacitor-facebook-analytics/
-- Docs: /docs/plugins/facebook-analytics/
+- [GitHub](https://github.com/Cap-go/capacitor-facebook-analytics/)
+- [Docs](/docs/plugins/facebook-analytics/)
