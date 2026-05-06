@@ -204,7 +204,7 @@ With over **1.7 trillion updates** delivered across 2,000 apps, [Capgo's CDN](ht
 
 ### Coordinating Background Tasks with OTA Updates
 
-Capgo focuses on updating only the JavaScript layer of your [Capacitor app](https://capgo.app/plugins/ivs-player/). This means you can tweak your background task logic without touching native code, all while staying within Apple's and Google's guidelines.
+Capgo focuses on updating only the JavaScript layer of your [Capacitor app](https://capgo.app/plugins/capacitor-ivs-player/). This means you can tweak your background task logic without touching native code, all while staying within Apple's and Google's guidelines.
 
 The platform excels at speed, delivering updates to **95% of active users within 24 hours**. This rapid deployment can be a lifesaver when fixing memory leaks or optimizing CPU-intensive background operations that might otherwise degrade the user experience.
 

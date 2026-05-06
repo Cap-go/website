@@ -99,7 +99,7 @@ Start by setting up both the native Android project and the web application laye
 
 | Setup Component | Required Configuration |
 | --- | --- |
-| **[Capacitor Version](https://capgo.app/plugins/ivs-player/)** | Use version 6.x or 7.x |
+| **[Capacitor Version](https://capacitorjs.com/docs)** | Use version 6.x or 7.x |
 | **[Android Studio](https://developer.android.com/studio)** | Install the latest stable version |
 | **Gradle Dependencies** | Include the `capacitor-android` library |
 | **Project Structure** | Properly configure `AndroidManifest.xml` |

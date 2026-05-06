@@ -19,7 +19,7 @@ next_blog: ''
 [Capacitor](https://capacitorjs.com/) Native Bridge simplifies building Android plugins by connecting JavaScript and native Android code. Here's what you need to know:
 
 -   **What It Does**: Acts as a two-way bridge for web apps to access native Android features like the camera or sensors.
--   **Why Use It**: Combines web technologies with [native performance](https://capgo.app/plugins/native-audio/), making plugin development straightforward.
+-   **Why Use It**: Combines web technologies with [native performance](https://capgo.app/plugins/capacitor-native-audio/), making plugin development straightforward.
 -   **Setup Essentials**: Requires [Node.js](https://nodejs.org/en), JDK 11+, [Android Studio](https://developer.android.com/studio), and Capacitor CLI. Ensure proper environment variables and [Gradle](https://gradle.org/) configurations.
 -   **How to Start**: Use `npm init @capacitor/plugin` to scaffold a plugin, define methods in Java, and test using Android Studio or real devices.
 -   **[Capgo](https://capgo.app/) Integration**: Enables live updates, rollbacks, and analytics for seamless plugin deployment.
@@ -39,7 +39,7 @@ Capacitor bridges the gap between web and native Android, offering developers a 
 
 ## Setup and Installation
 
-To start developing a [Capacitor Android plugin](https://capgo.app/plugins/ivs-player/), you’ll need to set up your environment carefully. Here’s how to get everything ready.
+To start developing a [Capacitor Android plugin](https://capgo.app/plugins/capacitor-ivs-player/), you’ll need to set up your environment carefully. Here’s how to get everything ready.
 
 ### Required Tools Setup
 

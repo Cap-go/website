@@ -136,7 +136,7 @@ To get the most out of your segmentation efforts:
 
 When segmentation is done right, the results speak for themselves. Update adoption rates can climb by 25–35% when updates are delivered based on user activity. At the same time, technical support tickets see a significant drop - around 30–45% - thanks to early detection of potential issues. Even user retention gets a solid boost, improving by 15–25% due to fewer disruptions and more relevant feature rollouts.
 
-Tailored updates also have a direct impact on user engagement. Session lengths increase by 10–20%, and app ratings can jump by as much as a full star. For monetized apps, the effects are even more compelling, with [in-app purchases](https://capgo.app/plugins/native-purchases/) rising by 15–30% when updates are focused on high-value users [\[1\]](https://www.pushwoosh.com/blog/mobile-app-user-segmentation/).
+Tailored updates also have a direct impact on user engagement. Session lengths increase by 10–20%, and app ratings can jump by as much as a full star. For monetized apps, the effects are even more compelling, with [in-app purchases](https://capgo.app/plugins/capacitor-native-purchases/) rising by 15–30% when updates are focused on high-value users [\[1\]](https://www.pushwoosh.com/blog/mobile-app-user-segmentation/).
 
 These results highlight just how impactful targeted segmentation can be, laying the groundwork for a more [customized update strategy](https://capgo.app/docs/live-updates/differentials/) powered by Capgo.
 

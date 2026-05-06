@@ -53,7 +53,7 @@ next_blog: ''
 
 ## Setup Requirements
 
-To enable biometric authentication in your [Capacitor app](https://capgo.app/plugins/ivs-player/), you'll need to configure some tools, dependencies, and platform-specific settings. Below, you'll find the step-by-step setup requirements for both Android and iOS platforms.
+To enable biometric authentication in your [Capacitor app](https://capgo.app/plugins/capacitor-native-biometric/), you'll need to configure some tools, dependencies, and platform-specific settings. Below, you'll find the step-by-step setup requirements for both Android and iOS platforms.
 
 ### Required Tools and Dependencies
 

@@ -44,7 +44,7 @@ The next step is to understand the penalties and enforcement measures tied to th
 
 ## App Store Rules for Russian Markets
 
-Launching a [Capacitor app](https://capgo.app/plugins/ivs-player/) in Russia means following strict data laws and app store guidelines. Your app must align with platform standards and local regulations. Below are key points to consider for store approval and legal compliance.
+Launching a [Capacitor app](https://capgo.app/plugins/capacitor-ivs-player/) in Russia means following strict data laws and app store guidelines. Your app must align with platform standards and local regulations. Below are key points to consider for store approval and legal compliance.
 
 ### Store Approval Requirements
 

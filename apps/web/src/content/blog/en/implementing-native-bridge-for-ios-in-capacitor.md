@@ -115,7 +115,7 @@ Ensure that the native bridge is functioning correctly within your Capacitor app
 
 ## Building a Native Bridge Plugin
 
-Developing a [native bridge plugin](https://capgo.app/plugins/native-audio/) allows smooth communication between your web application and native functionality.
+Developing a [native bridge plugin](https://capgo.app/plugins/capacitor-native-audio/) allows smooth communication between your web application and native functionality.
 
 ### Plugin Structure Setup
 

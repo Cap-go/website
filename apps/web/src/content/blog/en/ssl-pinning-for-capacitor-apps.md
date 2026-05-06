@@ -54,7 +54,7 @@ SSL pinning is a must-have for any [Capacitor](https://capacitorjs.com/) app to 
 
 ## Setup Requirements
 
-Configuring SSL pinning in your [Capacitor app](https://capgo.app/plugins/ivs-player/) requires careful planning and precise setup. Here's what you need to know to implement certificate pinning effectively.
+Configuring [SSL pinning in your Capacitor app](https://capgo.app/plugins/capacitor-ssl-pinning/) requires careful planning and precise setup. Here's what you need to know to implement certificate pinning effectively.
 
 ### Choosing the Right SSL Pinning Plugin
 

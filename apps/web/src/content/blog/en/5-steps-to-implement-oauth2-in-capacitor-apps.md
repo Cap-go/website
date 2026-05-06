@@ -20,7 +20,7 @@ next_blog: ''
 
 OAuth2 is a protocol that lets users share access to their data without sharing passwords. It’s ideal for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) because it works across platforms like iOS, Android, and the web. Plus, it keeps your app secure by using tokens instead of storing sensitive credentials.
 
-Here’s how to integrate OAuth2 into your [Capacitor app](https://capgo.app/plugins/ivs-player/) in just 5 steps:
+Here’s how to integrate OAuth2 into your [Capacitor app](https://capgo.app/plugins/capacitor-ivs-player/) in just 5 steps:
 
 1.  **Set Up Your OAuth2 Provider**: Choose a provider (e.g., Google, [Auth0](https://auth0.com/)), configure redirect URIs, and manage client credentials securely.
 2.  **Install and Configure the OAuth2 Plugin**: Add the `@byteowls/capacitor-oauth2` plugin and set up platform-specific settings (e.g., `Info.plist` for iOS, `AndroidManifest.xml` for Android).

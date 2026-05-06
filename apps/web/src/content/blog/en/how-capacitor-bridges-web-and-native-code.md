@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
--   **Native Bridge**: Translates JavaScript into native actions (e.g., [accessing the camera](https://capgo.app/plugins/camera-preview/) or GPS).
+-   **Native Bridge**: Translates JavaScript into native actions (e.g., [accessing the camera](https://capgo.app/plugins/capacitor-camera-preview/) or GPS).
 -   **Plugin System**: Securely links web and native layers for smooth communication.
 -   **Live Updates**: Push updates directly to users without app store delays.
 -   **Custom Plugins**: Create plugins to access advanced device features like biometric authentication or specialized sensors.
