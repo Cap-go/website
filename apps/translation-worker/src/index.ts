@@ -138,6 +138,7 @@ type TranslationCoordinatorRecord = {
   url: string
   priority: boolean
   pendingUntil: number
+  sourceHash?: string
 }
 type WorkerExecutionContext = {
   waitUntil(promise: Promise<unknown>): void
@@ -2066,7 +2067,6 @@ async function checkTranslatedSourceFreshness(env: Env, requestUrl: URL, locale:
     method: 'GET',
     headers: {
       Accept: 'text/html',
-      'Accept-Language': locale,
     },
   })
   const source = await loadSourceHtml(renderRequest, env, requestUrl, locale)
@@ -2435,7 +2435,8 @@ function translationJobFromUnknown(value: unknown): TranslationJob | null {
 }
 
 function matchesCoordinatorRecord(record: TranslationCoordinatorRecord | undefined, job: TranslationJob): boolean {
-  return record?.cacheVersion === job.cacheVersion && record.locale === job.locale && record.url === job.url
+  if (!record || record.cacheVersion !== job.cacheVersion || record.locale !== job.locale || record.url !== job.url) return false
+  return !job.sourceHash || record.sourceHash === job.sourceHash
 }
 
 export class TranslationCoordinator {
@@ -2475,6 +2476,7 @@ export class TranslationCoordinator {
       url: job.url,
       priority: job.priority === true,
       pendingUntil: now + TRANSLATION_COORDINATOR_PENDING_MS,
+      sourceHash: job.sourceHash,
     }
     await this.state.storage.put('pending', nextRecord)
     return jsonResponse({ ok: true, queued: true, pendingUntil: nextRecord.pendingUntil, priority: nextRecord.priority })

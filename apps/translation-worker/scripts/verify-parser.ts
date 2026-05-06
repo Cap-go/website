@@ -107,3 +107,14 @@ response = await coordinator.fetch(coordinatorRequest({ ...queueJob, priority: t
 assert(response.ok, 'Coordinator rejected priority promotion')
 assert((await response.json()).queued === true, 'Coordinator did not promote a pending non-priority job')
 assert(priorityQueued.length === 1, 'Coordinator did not send the promoted job to the priority queue')
+
+const sourceHash = 'a'.repeat(64)
+response = await coordinator.fetch(coordinatorRequest({ ...queueJob, priority: true, sourceHash }))
+assert(response.ok, 'Coordinator rejected source-specific refresh')
+assert((await response.json()).queued === true, 'Coordinator dropped a source-specific refresh behind an older pending job')
+assert(priorityQueued.length === 2, 'Coordinator did not queue the source-specific refresh')
+
+response = await coordinator.fetch(coordinatorRequest({ ...queueJob, priority: true, sourceHash }))
+assert(response.ok, 'Coordinator rejected duplicate source-specific refresh')
+assert((await response.json()).queued === false, 'Coordinator enqueued a duplicate source-specific refresh')
+assert(priorityQueued.length === 2, 'Coordinator sent duplicate source-specific refresh messages')
