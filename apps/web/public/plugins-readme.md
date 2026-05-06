@@ -305,7 +305,7 @@ A collection of high-quality Capacitor plugins maintained by [Capgo](https://cap
 <td align="center" width="33%">
 <h3><a href="https://github.com/Cap-go/capacitor-background-geolocation/">Background Geolocation</a></h3>
 <p><code>@capgo/capacitor-background-geolocation</code></p>
-<p>Track device location continuously in background with battery-efficient geofencing</p>
+<p>Accurate background location tracking with native iOS and Android geofencing plus transition webhooks</p>
 <p>
 <a href="https://www.npmjs.com/package/@capgo/capacitor-background-geolocation"><img src="https://img.shields.io/npm/dw/@capgo/capacitor-background-geolocation?style=flat-square&label=downloads" alt="npm downloads"></a>
 <a href="https://github.com/Cap-go/capacitor-background-geolocation/"><img src="https://img.shields.io/github/stars/Cap-go/capacitor-background-geolocation?style=flat-square&label=stars" alt="GitHub stars"></a>
