@@ -1697,11 +1697,14 @@ function localizeTagUrlAttributes(tag: string, locale: Locale, basePath: string,
   let rewritten = ''
   let lastIndex = 0
   let changed = false
+  const tagName = tagNameOf(tag)
   const targetLanguageLocale = languageSelectorTargetLocale(tag)
+  const isAlternateLink = tagName === 'link' && (readAttributeValue(tag, 'rel') || '').toLowerCase().split(/\s+/).includes('alternate')
 
   for (const attribute of collectQuotedAttributes(tag)) {
     const name = attribute.name.toLowerCase()
     if (name !== 'href' && name !== 'action') continue
+    if (name === 'href' && isAlternateLink) continue
 
     const localized =
       name === 'href' && targetLanguageLocale ? `${localizedPath(basePath, targetLanguageLocale)}${requestUrl.search}` : localizeHref(attribute.value, locale, requestUrl)

@@ -78,6 +78,8 @@ const localizedLinksHtml = __translationWorkerTest.rewriteMetadataAndLinks(
   new URL('https://capgo.app/fr/blog/post?ref=nav'),
   'fr',
 )
+assert(localizedLinksHtml.includes('hreflang="en" href="https://capgo.app/blog/post"'), 'Link rewrite changed the English hreflang alternate')
+assert(localizedLinksHtml.includes('hreflang="fr" href="https://capgo.app/fr/blog/post"'), 'Link rewrite changed the French hreflang alternate')
 assert(localizedLinksHtml.includes('href="/fr/pricing"'), 'Link rewrite did not localize root-relative internal links')
 assert(localizedLinksHtml.includes('href="https://capgo.app/fr/docs/"'), 'Link rewrite did not localize absolute same-site links')
 assert(localizedLinksHtml.includes('href="//capgo.app/fr/plugins"'), 'Link rewrite did not localize protocol-relative same-site links')
