@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-10T22:09:04.610Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-06T12:08:25.000Z
 head_image: https://assets.seobotai.com/capgo.app/67a9581f762bb46adb44912d-1739225358216.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor plugins, mobile development, cross-platform apps, native features, custom plugins, community plugins
@@ -19,7 +19,7 @@ next_blog: ''
 [Capacitor](https://capacitorjs.com/) plugins are essential for building cross-platform apps, letting you use native device features like cameras, file systems, and notifications with minimal effort. They combine JavaScript APIs and native code for seamless integration across iOS, Android, and web platforms. Here's what you need to know:
 
 -   **Core Plugins**: Built by the [Ionic](https://ionicframework.com/) team, these cover basics like file storage (`Filesystem.writeFile`) and network checks (`Network.getStatus`).
--   **Community Plugins**: Offer specialized features like [Firebase Analytics](https://firebase.google.com/docs/analytics), [in-app purchases](https://capgo.app/plugins/native-purchases/), and live updates.
+-   **Community Plugins**: Offer specialized features like [Firebase Analytics](https://firebase.google.com/docs/analytics), [in-app purchases](https://capgo.app/plugins/capacitor-native-purchases/), and live updates.
 -   **Custom Plugins**: Create your own for unique hardware or business needs.
 
 ### Quick Overview
@@ -28,7 +28,7 @@ next_blog: ''
 | --- | --- | --- |
 | Development Speed | Faster feature implementation | Add camera functionality easily |
 | Code Efficiency | Reuse across platforms | Shared APIs for iOS and Android |
-| [Native Performance](https://capgo.app/plugins/native-audio/) | Direct access to device capabilities | Platform-specific optimizations |
+| [Native Performance](https://capgo.app/plugins/capacitor-native-audio/) | Direct access to device capabilities | Platform-specific optimizations |
 
 Capacitor's plugin system simplifies app development while maintaining native performance. Whether you're using pre-built plugins or creating custom ones, they help you focus on building features, not handling platform-specific complexities.
 

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-23T04:39:40.995Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-06T12:37:13.000Z
 head_image: https://assets.seobotai.com/capgo.app/67ba891fbfa83cf6a92e8bd2-1740285846827.jpg
 head_image_alt: Mobile Development
 keywords: geolocation targeting, OTA updates, mobile app updates, user engagement, location-based features, background location tracking, app development, analytics
@@ -55,7 +55,7 @@ Before diving into geolocation-targeted OTA updates, make sure the following set
 
 ![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-23.jpg?auto=compress)
 
-To build a location-aware [Capacitor app](https://capgo.app/plugins/ivs-player/) with OTA updates, you'll need:
+To build a location-aware [Capacitor app](https://capgo.app/capacitor-app/) with OTA updates, you'll need:
 
 -   **[Node.js](https://nodejs.org/en) and npm** installed on your machine.
 -   A Capacitor project initialized with native platforms (iOS/Android).

@@ -64,6 +64,45 @@ const localizedOgDescription = /property="og:description" content="([^"]+)"/.exe
 assert(localizedDescription.length >= 120, 'Localized meta description stayed too short')
 assert(localizedDescription.length <= 159, 'Localized meta description exceeded the SEO limit')
 assert(localizedOgDescription === localizedDescription, 'Localized Open Graph description was not expanded consistently')
+const localizedLinksHtml = __translationWorkerTest.rewriteMetadataAndLinks(
+  `<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="canonical" href="https://capgo.app/pricing" />
+    <meta property="og:url" content="https://capgo.app/pricing" />
+  </head>
+  <body>
+    <a href="/pricing">Pricing</a>
+    <a href="/es/pricing">Spanish pricing</a>
+    <a href="https://capgo.app/docs/">Docs</a>
+    <a href="https://capgo.app/de/docs/">German docs</a>
+    <a href="//capgo.app/plugins">Plugins</a>
+    <a href="support-policy">Support policy</a>
+    <a href="/#faq">FAQ</a>
+    <a href="#local">Local anchor</a>
+    <a href="https://github.com/Cap-go/capgo">GitHub</a>
+    <a href="mailto:hello@capgo.app">Email</a>
+    <a href="/images/logo.png">Logo</a>
+    <form action="/register"></form>
+  </body>
+</html>`,
+  new URL('https://capgo.app/fr/pricing?ref=nav'),
+  'fr',
+)
+assert(localizedLinksHtml.includes('hreflang="en" href="https://capgo.app/pricing"'), 'Link rewrite changed the English hreflang alternate')
+assert(localizedLinksHtml.includes('hreflang="fr" href="https://capgo.app/fr/pricing"'), 'Link rewrite changed the French hreflang alternate')
+assert(localizedLinksHtml.includes('href="/fr/pricing"'), 'Link rewrite did not localize root-relative internal links')
+assert(localizedLinksHtml.includes('href="/es/pricing"'), 'Link rewrite changed an already localized root-relative link')
+assert(localizedLinksHtml.includes('href="https://capgo.app/de/docs/"'), 'Link rewrite changed an already localized absolute same-site link')
+assert(localizedLinksHtml.includes('href="https://capgo.app/fr/docs/"'), 'Link rewrite did not localize absolute same-site links')
+assert(localizedLinksHtml.includes('href="//capgo.app/fr/plugins"'), 'Link rewrite did not localize protocol-relative same-site links')
+assert(localizedLinksHtml.includes('href="/fr/support-policy"'), 'Link rewrite did not localize relative internal links')
+assert(localizedLinksHtml.includes('href="/fr/#faq"'), 'Link rewrite did not localize root anchor links')
+assert(localizedLinksHtml.includes('href="#local"'), 'Link rewrite changed same-page anchors')
+assert(localizedLinksHtml.includes('href="https://github.com/Cap-go/capgo"'), 'Link rewrite changed an external URL')
+assert(localizedLinksHtml.includes('href="mailto:hello@capgo.app"'), 'Link rewrite changed a mail link')
+assert(localizedLinksHtml.includes('href="/images/logo.png"'), 'Link rewrite changed an asset URL')
+assert(localizedLinksHtml.includes('action="/fr/register"'), 'Link rewrite did not localize internal form actions')
 
 function coordinatorRequest(body: unknown, path = '/enqueue'): Request {
   return new Request(`https://translation-coordinator${path}`, {

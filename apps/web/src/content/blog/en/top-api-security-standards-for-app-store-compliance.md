@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-24T01:52:28.048Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-06T12:37:13.000Z
 head_image: https://assets.seobotai.com/capgo.app/6809811c9bd9ce97f26b7b78-1745459563928.jpg
 head_image_alt: Mobile Development
 keywords: API security, OAuth 2.0, OpenID Connect, TLS, JWT, app store compliance, user data protection
@@ -26,7 +26,7 @@ Securing your app's API is critical for meeting Apple App Store and Google Play 
 -   **JWT Security**: Safeguard tokens with proper signing and storage.
 -   **API Rate Controls**: Protect APIs from abuse with request limits.
 
-By implementing these standards, you’ll ensure your [Capacitor app](https://capgo.app/plugins/ivs-player/) meets approval criteria while keeping user data safe. Ready to dive deeper? Let’s break it down step by step.
+By implementing these standards, you’ll ensure your [Capacitor app](https://capgo.app/capacitor-app/) meets approval criteria while keeping user data safe. Ready to dive deeper? Let’s break it down step by step.
 
 ## Secure API Key in Front End App using Proxy Server & User ...
 

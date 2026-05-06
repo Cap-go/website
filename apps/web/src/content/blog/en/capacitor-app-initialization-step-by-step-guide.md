@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-28T03:11:03.831Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-06T12:37:13.000Z
 head_image: https://assets.seobotai.com/capgo.app/67e6018fa2c14cac42f82293-1743131474608.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, mobile app development, iOS setup, Android setup, app configuration, web apps, plugins, live updates
@@ -217,7 +217,7 @@ With these configurations in place, you’re ready to build and test your app on
 
 ## Building and Testing
 
-Using the setup outlined earlier, you can now build and test your [Capacitor app](https://capgo.app/plugins/ivs-player/) to ensure it works correctly on various devices.
+Using the setup outlined earlier, you can now build and test your [Capacitor app](https://capgo.app/capacitor-app/) to ensure it works correctly on various devices.
 
 ### Build and Run Commands
 

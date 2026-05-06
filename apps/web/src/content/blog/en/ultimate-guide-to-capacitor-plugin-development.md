@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-25T06:22:55.260Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-06T12:08:25.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6832a665d3b96619818090ef-1748154227922.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, mobile apps, plugin development, iOS, Android, JavaScript, web technologies, security, performance, testing
@@ -118,7 +118,7 @@ The Capacitor bridge is what makes communication between your JavaScript code an
 
 **On Android, the bridge serves as the backbone of the Capacitor Android library** [\[7\]](https://capacitorjs.com/docs/core-apis/android). iOS uses a similar setup. The bridge operates through a **runtime system that loads both built-in and custom plugins, initializes the Web View, and injects JavaScript symbols for all available plugins into the Web View** [\[8\]](https://capacitorjs.jp/blog/how-capacitor-works)[\[5\]](https://ionic.io/blog/how-capacitor-works-2).
 
-When you call a plugin method like `Camera.getPhoto()` in JavaScript, the bridge automatically routes the call to the corresponding native implementation on iOS or Android. Here's a quick look at how JavaScript maps to [native functionality](https://capgo.app/plugins/native-audio/):
+When you call a plugin method like `Camera.getPhoto()` in JavaScript, the bridge automatically routes the call to the corresponding native implementation on iOS or Android. Here's a quick look at how JavaScript maps to [native functionality](https://capgo.app/plugins/capacitor-native-audio/):
 
 | Native Feature | JavaScript Implementation |
 | --- | --- |

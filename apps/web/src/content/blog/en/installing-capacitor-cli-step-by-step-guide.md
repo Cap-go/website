@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-04T02:49:29.961Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-06T12:08:25.000Z
 head_image: https://assets.seobotai.com/capgo.app/67ef362eebbb9dc80641f34f-1743734983341.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, CLI, mobile app development, Node.js, Android, iOS, live updates
@@ -112,7 +112,7 @@ Start by installing the Capacitor CLI and Core packages using npm:
 npm install @capacitor/cli @capacitor/core
 ```
 
-Once installed, confirm the setup by checking the [Capacitor version](https://capgo.app/plugins/ivs-player/):
+Once installed, confirm the setup by checking the [Capacitor CLI version](https://capacitorjs.com/docs/cli):
 
 ```bash
 npx cap --version

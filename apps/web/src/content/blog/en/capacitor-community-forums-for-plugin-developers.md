@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-19T03:15:19.291Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-06T12:08:25.000Z
 head_image: https://assets.seobotai.com/capgo.app/67da1574cfd1b2222c56b5cd-1742354143434.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, plugin development, developer forums, troubleshooting, community support
@@ -81,7 +81,7 @@ Get the most out of forums by following these best practices.
 Crafting clear and detailed questions helps you get faster, more helpful responses. Here’s how:
 
 -   **Start with a descriptive title**: Summarize your issue in a few words.
--   **Provide context**: Include your [Capacitor version](https://capgo.app/plugins/ivs-player/), platform (iOS/Android), and plugin versions.
+-   **Provide context**: Include your [Capacitor version](https://capgo.app/plugins/capacitor-ivs-player/), platform (iOS/Android), and plugin versions.
 -   **Describe your efforts**: Share what you've already tried and any error messages you’ve encountered.
 -   **Reproduce the problem**: Offer minimal steps or code snippets to help others understand your issue.
 

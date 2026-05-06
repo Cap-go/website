@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-12T03:03:33.472Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-06T12:37:13.000Z
 head_image: https://assets.seobotai.com/capgo.app/67d0d3f9cf9d4dc0b2c0bff2-1741748627082.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, live updates, app compliance, Apple guidelines, encryption, bug fixes, mobile development
@@ -87,7 +87,7 @@ Following these steps will help ensure your app updates remain within Apple's st
 
 ## Setting Up Compliant Live Updates
 
-To implement live updates in your [Capacitor app](https://capgo.app/plugins/ivs-player/) while meeting Apple's compliance rules, you'll need a structured setup. Here's how you can get started.
+To implement live updates in your [Capacitor app](https://capgo.app/capacitor-app/) while meeting Apple's compliance rules, you'll need a structured setup. Here's how you can get started.
 
 ### Project Setup Steps
 

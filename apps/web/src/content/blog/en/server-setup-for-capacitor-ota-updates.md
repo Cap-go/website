@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-22T11:56:26.311Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-06T12:08:25.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682f07854fa53d422080d523-1747915054503.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, OTA updates, server setup, mobile app, security, deployment, web server
@@ -337,7 +337,7 @@ Take [Capgo](https://capgo.app), for example. It has successfully facilitated sm
 | Deployment | Auto-mode native handling | Reliable update execution |
 | Monitoring | Real-time analytics | Quick issue detection |
 
-It’s important to note that OTA updates are limited to web content. Any [native changes](https://capgo.app/plugins/native-audio/) still require submission through app stores.
+It’s important to note that OTA updates are limited to web content. Any [native changes](https://capgo.app/plugins/capacitor-native-audio/) still require submission through app stores.
 
 To maintain reliability, robust monitoring and backup systems are indispensable. The Capacitor updater ensures updates are checked and applied during app startup using a background thread, minimizing disruption for users [\[1\]](https://capgo.app/docs/faq).
 

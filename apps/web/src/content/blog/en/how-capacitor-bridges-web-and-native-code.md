@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-26T02:55:05.863Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-06T12:08:25.000Z
 head_image: https://assets.seobotai.com/capgo.app/67e35e3910051fda3b61fe9f-1742957721554.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, native bridge, web apps, live updates, plugin system, mobile development
@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
--   **Native Bridge**: Translates JavaScript into native actions (e.g., [accessing the camera](https://capgo.app/plugins/camera-preview/) or GPS).
+-   **Native Bridge**: Translates JavaScript into native actions (e.g., [accessing the camera](https://capgo.app/plugins/capacitor-camera-preview/) or GPS).
 -   **Plugin System**: Securely links web and native layers for smooth communication.
 -   **Live Updates**: Push updates directly to users without app store delays.
 -   **Custom Plugins**: Create plugins to access advanced device features like biometric authentication or specialized sensors.

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-22T02:26:08.446Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-06T12:08:25.000Z
 head_image: https://assets.seobotai.com/capgo.app/67de087b13cee397379a0b94-1742610380581.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, Android, native bridge, JavaScript, mobile development, app performance, updates, communication
@@ -99,7 +99,7 @@ Start by setting up both the native Android project and the web application laye
 
 | Setup Component | Required Configuration |
 | --- | --- |
-| **[Capacitor Version](https://capgo.app/plugins/ivs-player/)** | Use version 6.x or 7.x |
+| **[Capacitor Version](https://capacitorjs.com/docs)** | Use version 6.x or 7.x |
 | **[Android Studio](https://developer.android.com/studio)** | Install the latest stable version |
 | **Gradle Dependencies** | Include the `capacitor-android` library |
 | **Project Structure** | Properly configure `AndroidManifest.xml` |

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-11T06:22:21.536Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-06T12:37:13.000Z
 head_image: https://assets.seobotai.com/capgo.app/67aa9923b771216988320bf2-1739254956493.jpg
 head_image_alt: Mobile Development
 keywords: CI/CD, Capacitor apps, mobile development, automation, build process, live updates
@@ -111,7 +111,7 @@ Properly managing keys and credentials can significantly lower the chances of ap
 
 ## Creating Your CI/CD Pipeline
 
-Once your environment is ready, the next step is setting up a CI/CD pipeline for your [Capacitor app](https://capgo.app/plugins/ivs-player/). This pipeline should efficiently manage both web assets and native platform builds.
+Once your environment is ready, the next step is setting up a CI/CD pipeline for your [Capacitor app](https://capgo.app/capacitor-app/). This pipeline should efficiently manage both web assets and native platform builds.
 
 ### Installing and Updating Dependencies
 

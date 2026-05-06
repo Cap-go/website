@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-23T05:36:41.635Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-06T12:37:13.000Z
 head_image: https://assets.seobotai.com/capgo.app/67df674387fa49042c75b4e1-1742708253934.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, performance monitoring, Firebase, Sentry, mobile app development, error tracking, monitoring tools
@@ -73,7 +73,7 @@ When deciding between these tools, consider the following:
 
 ## Firebase Setup Guide
 
-Setting up Firebase Performance Monitoring in your [Capacitor app](https://capgo.app/plugins/ivs-player/) requires a few clear steps to ensure accurate data tracking.
+Setting up Firebase Performance Monitoring in your [Capacitor app](https://capgo.app/capacitor-app/) requires a few clear steps to ensure accurate data tracking.
 
 ### Install Firebase SDK
 

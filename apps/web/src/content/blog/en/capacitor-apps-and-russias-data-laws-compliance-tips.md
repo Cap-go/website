@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-25T03:05:27.312Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-06T12:37:13.000Z
 head_image: https://assets.seobotai.com/capgo.app/680ae0495a08fca891774cdd-1745550383310.jpg
 head_image_alt: Mobile Development
 keywords: Russia data laws, data localization, Capacitor app compliance, privacy policy, user consent
@@ -44,7 +44,7 @@ The next step is to understand the penalties and enforcement measures tied to th
 
 ## App Store Rules for Russian Markets
 
-Launching a [Capacitor app](https://capgo.app/plugins/ivs-player/) in Russia means following strict data laws and app store guidelines. Your app must align with platform standards and local regulations. Below are key points to consider for store approval and legal compliance.
+Launching a [Capacitor app](https://capgo.app/capacitor-app/) in Russia means following strict data laws and app store guidelines. Your app must align with platform standards and local regulations. Below are key points to consider for store approval and legal compliance.
 
 ### Store Approval Requirements
 

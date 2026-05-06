@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-20T02:05:05.290Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-06T12:37:13.000Z
 head_image: https://assets.seobotai.com/capgo.app/67b67f2eacf635f489c4a234-1740017141105.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, OTA updates, debugging tools, mobile development, app updates
@@ -173,7 +173,7 @@ If security is a top priority, **Capgo** ensures updates comply with both Apple 
 
 ### How to debug a Capacitor app on Android?
 
-Debugging a [Capacitor app](https://capgo.app/plugins/ivs-player/) on Android is straightforward using Chrome's developer tools. Here's how you can do it:
+Debugging a [Capacitor app](https://capgo.app/capacitor-app/) on Android is straightforward using Chrome's developer tools. Here's how you can do it:
 
 1.  Start your app using your IDE or [Android Studio](https://developer.android.com/studio).
 2.  Open `chrome://inspect` in Google Chrome.
