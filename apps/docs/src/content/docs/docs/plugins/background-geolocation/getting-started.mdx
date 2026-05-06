@@ -1,9 +1,12 @@
 ---
 title: Getting Started
-description: "Install @capgo/background-geolocation and start using its current Capacitor API."
+description: "Install @capgo/background-geolocation for background location tracking and native geofencing."
 sidebar:
   order: 2
 ---
+
+
+`@capgo/background-geolocation` combines precise background location tracking with native geofencing for iOS and Android. Use it for delivery zones, stores, job sites, campuses, check-ins, route alerts, and any workflow that needs enter or exit events even when the WebView is not running.
 
 ## Install
 
@@ -84,6 +87,44 @@ await BackgroundGeolocation.setPlannedRoute({
   route: [[-74.0060, 40.7128], [-118.2437, 34.0522]]
 });
 ```
+
+### Native geofencing
+
+Geofencing runs in the native layer, so iOS and Android can trigger enter and exit events without relying on the WebView to stay awake. Configure a webhook URL when your backend must receive transitions even while the app UI is suspended.
+
+```typescript
+import { BackgroundGeolocation } from '@capgo/background-geolocation';
+
+await BackgroundGeolocation.setupGeofencing({
+  url: 'https://api.example.com/geofences',
+  notifyOnEntry: true,
+  notifyOnExit: true,
+  payload: { userId: '123' },
+});
+
+await BackgroundGeolocation.addGeofence({
+  identifier: 'store-42',
+  latitude: 37.33182,
+  longitude: -122.03118,
+  radius: 150,
+  payload: { storeId: '42' },
+});
+
+const handle = await BackgroundGeolocation.addListener(
+  'geofenceTransition',
+  (event) => {
+    console.log(event.identifier, event.transition);
+  },
+);
+
+const { regions } = await BackgroundGeolocation.getMonitoredGeofences();
+console.log(regions);
+
+await BackgroundGeolocation.removeGeofence({ identifier: 'store-42' });
+await handle.remove();
+```
+
+On iOS, geofencing requires Always location authorization. On Android 10 and newer, geofencing needs background location permission in addition to foreground location permission.
 
 ## Type Reference
 

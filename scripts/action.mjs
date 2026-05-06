@@ -333,7 +333,7 @@ export const actions = [
   {
     name: '@capgo/capacitor-background-geolocation',
     author: 'Martin Donadieu',
-    description: 'Track device location in background with battery optimization',
+    description: 'Accurate background location tracking with native geofencing and transition webhooks',
     href: 'https://github.com/Cap-go/capacitor-background-geolocation/',
     title: 'Background Geolocation',
   },
