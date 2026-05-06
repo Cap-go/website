@@ -1643,7 +1643,7 @@ function truncateSeoDescription(value: string): string {
 }
 
 function buildSeoMetaDescription(content: string, locale: Locale): string {
-  const normalized = content.replace(/\s+/g, ' ').trim()
+  const normalized = content.replaceAll(/\s+/g, ' ').trim()
   if (!normalized || normalized.length >= SEO_DESCRIPTION_MIN_LENGTH) return truncateSeoDescription(normalized)
 
   let expanded = normalized + ' ' + SEO_DESCRIPTION_SUFFIXES[locale]

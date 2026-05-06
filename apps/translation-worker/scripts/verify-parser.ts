@@ -59,8 +59,8 @@ const localizedMeta = __translationWorkerTest.expandShortMetaDescriptions(
   '<head><meta name="description" content="短い説明"><meta property="og:description" content="短い説明"></head>',
   'ja',
 )
-const localizedDescription = localizedMeta.match(/name="description" content="([^"]+)"/)?.[1] ?? ''
-const localizedOgDescription = localizedMeta.match(/property="og:description" content="([^"]+)"/)?.[1] ?? ''
+const localizedDescription = /name="description" content="([^"]+)"/.exec(localizedMeta)?.[1] ?? ''
+const localizedOgDescription = /property="og:description" content="([^"]+)"/.exec(localizedMeta)?.[1] ?? ''
 assert(localizedDescription.length >= 120, 'Localized meta description stayed too short')
 assert(localizedDescription.length <= 159, 'Localized meta description exceeded the SEO limit')
 assert(localizedOgDescription === localizedDescription, 'Localized Open Graph description was not expanded consistently')
