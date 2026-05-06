@@ -36,6 +36,7 @@ Plugin Fast SQL|high-performance SQL database plugin|docs/plugins/fast-sql/**
 Plugin FFmpeg|FFmpeg media processing plugin|docs/plugins/ffmpeg/**
 Plugin File|file system access plugin|docs/plugins/file/**
 Plugin File Compressor|file compression plugin|docs/plugins/file-compressor/**
+Plugin File Sharer|file sharing and saving plugin for base64 data and local paths|docs/plugins/file-sharer/**
 Plugin File Picker|file picker plugin for selecting files|docs/plugins/file-picker/**
 Plugin Flash|device flashlight control plugin|docs/plugins/flash/**
 Plugin GTM|Google Tag Manager integration plugin|docs/plugins/gtm/**

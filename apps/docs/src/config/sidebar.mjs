@@ -83,6 +83,7 @@ const pluginEntries = [
   ['FFmpeg', 'ffmpeg'],
   ['File', 'file'],
   ['File Compressor', 'file-compressor'],
+  ['File Sharer', 'file-sharer'],
   ['File Picker', 'file-picker'],
   ['Flash', 'flash'],
   ['Firebase Analytics', 'firebase-analytics'],

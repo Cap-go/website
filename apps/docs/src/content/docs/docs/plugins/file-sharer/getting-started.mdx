@@ -1,0 +1,130 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-file-sharer and share or save files from base64 data and local paths."
+sidebar:
+  order: 2
+---
+
+## Install
+
+```bash
+bun add @capgo/capacitor-file-sharer
+bunx cap sync
+```
+
+## Import
+
+```typescript
+import { FileSharer } from '@capgo/capacitor-file-sharer';
+```
+
+## Share A Base64 File
+
+```typescript
+import { FileSharer } from '@capgo/capacitor-file-sharer';
+
+await FileSharer.share({
+  filename: 'report.pdf',
+  contentType: 'application/pdf',
+  base64Data: reportBase64,
+  title: 'Quarterly report',
+  text: 'Attached report',
+});
+```
+
+`base64Data` can be a raw base64 string or a data URL such as `data:application/pdf;base64,...`.
+
+## Share A Local File
+
+```typescript
+await FileSharer.share({
+  filename: 'export.zip',
+  contentType: 'application/zip',
+  path: fileUri,
+});
+```
+
+The native implementations accept local paths, `file://` URLs, Android `content://` URIs, and Capacitor `_capacitor_file_` URLs.
+
+## Save A File
+
+```typescript
+const result = await FileSharer.save({
+  filename: 'backup.zip',
+  contentType: 'application/zip',
+  base64Data: zipBase64,
+  android: {
+    saveDirectory: 'downloads',
+    relativePath: 'Download/My App',
+  },
+});
+
+console.log(result.uri);
+```
+
+Android save directories are `downloads`, `pictures`, `movies`, `music`, and `documents`. On Android 10 and newer, the plugin writes through MediaStore. On Android 9 and below, public saves use the manifest `WRITE_EXTERNAL_STORAGE` permission with `maxSdkVersion=28`.
+
+## Share Text With A File
+
+```typescript
+await FileSharer.share({
+  filename: 'photo.jpg',
+  contentType: 'image/jpeg',
+  path: photoUri,
+  title: 'Site photo',
+  subject: 'Photo export',
+  text: 'Captured during inspection.',
+});
+```
+
+`text` is passed as `EXTRA_TEXT` on Android and as a second activity item on iOS.
+
+## Type Reference
+
+### `ShareFileOptions`
+
+```typescript
+export interface ShareFileOptions {
+  filename: string;
+  base64Data?: string;
+  path?: string;
+  contentType?: string;
+  text?: string;
+  title?: string;
+  subject?: string;
+  android?: AndroidFileSharerOptions;
+}
+```
+
+### `AndroidFileSharerOptions`
+
+```typescript
+export interface AndroidFileSharerOptions {
+  chooserTitle?: string;
+  saveDirectory?: 'downloads' | 'pictures' | 'movies' | 'music' | 'documents';
+  relativePath?: string;
+}
+```
+
+### `SaveFileResult`
+
+```typescript
+export interface SaveFileResult {
+  uri?: string;
+}
+```
+
+## Error Codes
+
+- `ERR_PARAM_NO_FILENAME` - `filename` is missing or blank.
+- `ERR_PARAM_NO_DATA` - neither `base64Data` nor `path` was provided.
+- `ERR_PARAM_DATA_INVALID` - base64 input could not be decoded.
+- `ERR_LOCAL_FILE_NOT_FOUND` - the provided local path or content URI could not be opened.
+- `ERR_FILE_CACHING_FAILED` - the native temporary file could not be written.
+- `ERR_FILE_SAVE_FAILED` - Android could not save the file to public storage.
+- `ERR_ACTIVITY_NOT_FOUND` - Android could not open a share target.
+- `USER_CANCELLED` - the iOS share sheet was dismissed without completing.
+
+## Source Of Truth
+
+This page tracks the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.

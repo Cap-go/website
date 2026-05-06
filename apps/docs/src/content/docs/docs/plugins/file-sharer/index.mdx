@@ -1,0 +1,53 @@
+---
+title: "@capgo/capacitor-file-sharer"
+description: "Capacitor plugin for sharing and saving files from base64 data or local paths on Android, iOS, and Web."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Share and save files with native sheets, Android MediaStore, and browser downloads."
+  actions:
+    - text: Get started
+      link: /docs/plugins/file-sharer/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-file-sharer/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+`@capgo/capacitor-file-sharer` shares or saves files from base64 data, data URLs, local file paths, `file://` URLs, `content://` URIs, and Capacitor `_capacitor_file_` URLs.
+
+Use it when an app needs to export reports, backups, images, videos, PDFs, ZIP archives, or other generated files without forcing every platform through the same storage path.
+
+## Core Capabilities
+
+- `share` - Open the native share sheet on Android and iOS, or download the file on Web.
+- `save` - Save into Android public collections, open the iOS save/share sheet, or download on Web.
+- `getPluginVersion` - Return the native/web plugin implementation version.
+
+## Platform Behavior
+
+| Platform | Share behavior | Save behavior |
+| --- | --- | --- |
+| Android | Uses a `FileProvider`, `ClipData`, and URI grants so chooser previews and thumbnails can read the file. | Uses MediaStore on Android 10+ and public directories on Android 9 and below. |
+| iOS | Uses `UIActivityViewController` with base64 or direct path-backed files. | Opens the native share sheet so the user can choose Save to Files or another destination. |
+| Web | Downloads the file. | Downloads the file. |
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `share` | Share a file using the native share sheet on Android and iOS, or download on Web. |
+| `save` | Save a file locally on Android/Web, or open the iOS save/share sheet. |
+| `getPluginVersion` | Returns the platform implementation version marker. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-file-sharer](https://github.com/Cap-go/capacitor-file-sharer/).
