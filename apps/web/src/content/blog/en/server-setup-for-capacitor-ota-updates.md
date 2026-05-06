@@ -337,7 +337,7 @@ Take [Capgo](https://capgo.app), for example. It has successfully facilitated sm
 | Deployment | Auto-mode native handling | Reliable update execution |
 | Monitoring | Real-time analytics | Quick issue detection |
 
-It’s important to note that OTA updates are limited to web content. Any [native changes](https://capgo.app/plugins/native-audio/) still require submission through app stores.
+It’s important to note that OTA updates are limited to web content. Any [native changes](https://capgo.app/plugins/capacitor-native-audio/) still require submission through app stores.
 
 To maintain reliability, robust monitoring and backup systems are indispensable. The Capacitor updater ensures updates are checked and applied during app startup using a background thread, minimizing disruption for users [\[1\]](https://capgo.app/docs/faq).
 

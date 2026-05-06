@@ -112,7 +112,7 @@ Start by installing the Capacitor CLI and Core packages using npm:
 npm install @capacitor/cli @capacitor/core
 ```
 
-Once installed, confirm the setup by checking the [Capacitor version](https://capgo.app/plugins/ivs-player/):
+Once installed, confirm the setup by checking the [Capacitor version](https://capgo.app/plugins/capacitor-ivs-player/):
 
 ```bash
 npx cap --version

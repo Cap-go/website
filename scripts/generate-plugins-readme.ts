@@ -46,7 +46,7 @@ const capgoCloudCards: CardData[] = [
     name: '@capgo/capacitor-updater',
     href: 'https://github.com/Cap-go/capacitor-updater/',
     description: 'Deploy live updates instantly to your users without app store review delays',
-    docsUrl: 'https://capgo.app/plugins/updater/',
+    docsUrl: 'https://capgo.app/plugins/capacitor-updater/',
   },
   {
     title: 'Capgo Console',
@@ -64,12 +64,17 @@ const capgoCloudCards: CardData[] = [
   },
 ]
 
+const getPluginSlug = (href: string): string => {
+  const normalizedHref = href.replace(/\/$/, '')
+  return normalizedHref.substring(normalizedHref.lastIndexOf('/') + 1).toLowerCase()
+}
+
 // Generate HTML table rows (3 plugins per row)
 const generatePluginCard = (card: CardData): string => {
   const code = card.code ?? card.name
   const npmPackage = card.npmPackage ?? card.name
   const npmUrl = npmPackage ? `https://www.npmjs.com/package/${npmPackage}` : undefined
-  const docsUrl = card.docsUrl ?? `https://capgo.app/plugins/${card.title.toLowerCase().replaceAll(/\s+/g, '-')}/`
+  const docsUrl = card.docsUrl ?? `https://capgo.app/plugins/${getPluginSlug(card.href)}/`
   const repoPath = card.href.replace('https://github.com/', '').replace(/\/$/, '').split('/tree/')[0]
 
   const badges: string[] = []
