@@ -327,6 +327,16 @@ function isHttpUrl(value: string): boolean {
   return /^https?:/i.test(value)
 }
 
+function pathnameHasLocalePrefix(pathname: string): boolean {
+  const normalizedPathname = normalizePathname(pathname)
+  return ALL_LOCALES.some((locale) => normalizedPathname === `/${locale}` || normalizedPathname.startsWith(`/${locale}/`))
+}
+
+function hasExplicitLocalePath(value: string, url: URL): boolean {
+  if (!value.startsWith('/') && !value.startsWith('//') && !isHttpUrl(value)) return false
+  return pathnameHasLocalePrefix(url.pathname)
+}
+
 function localizeHref(value: string, locale: Locale, requestUrl: URL): string {
   const trimmed = value.trim()
   if (!trimmed || trimmed.startsWith('#')) return value
@@ -340,6 +350,7 @@ function localizeHref(value: string, locale: Locale, requestUrl: URL): string {
   }
 
   if (url.host !== requestUrl.host) return value
+  if (hasExplicitLocalePath(trimmed, url)) return value
   if (shouldBypassTranslation(url.pathname)) return value
 
   url.pathname = localizedPath(url.pathname, locale)
