@@ -23,6 +23,7 @@ bunx cap sync
 - `removeGeofence` / `removeAllGeofences` - Stop monitoring one or all registered regions.
 - `getMonitoredGeofences` - List monitored region identifiers.
 - `geofenceTransition` listener - Receive enter and exit events while the app is active.
+- `geofenceError` listener - Handle native monitoring errors separately from transition events.
 
 ## Example Usage
 
@@ -89,7 +90,7 @@ await BackgroundGeolocation.setPlannedRoute({
 
 ### Native geofencing
 
-Monitor stores, job sites, delivery zones, campuses, or check-in areas with native iOS and Android geofences. Add a `url` to let native code POST transition payloads while the WebView is suspended.
+Monitor stores, job sites, delivery zones, campuses, or check-in areas with native iOS and Android geofences. Add an HTTP or HTTPS `url` to let native code POST transition payloads while the WebView is suspended.
 
 ```typescript
 import { BackgroundGeolocation } from '@capgo/background-geolocation';
@@ -113,8 +114,20 @@ const listener = await BackgroundGeolocation.addListener(
   (event) => console.log(event.identifier, event.transition),
 );
 
+const errorListener = await BackgroundGeolocation.addListener(
+  'geofenceError',
+  (event) => console.error(event.identifier, event.message),
+);
+
 await BackgroundGeolocation.removeGeofence({ identifier: 'warehouse' });
 await listener.remove();
+await errorListener.remove();
+```
+
+On Android, add `ACCESS_BACKGROUND_LOCATION` to your app manifest only when you need background geofencing:
+
+```xml
+<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 ```
 
 ## Full Reference

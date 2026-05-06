@@ -35,6 +35,7 @@ Use `@capgo/background-geolocation` when your Capacitor app needs precise locati
 - `removeGeofence` / `removeAllGeofences` - Stop monitoring one or all registered geofences.
 - `getMonitoredGeofences` - List region identifiers currently monitored by the native layer.
 - `geofenceTransition` listener - Receive enter and exit events while the app is active.
+- `geofenceError` listener - Handle native monitoring errors without changing the transition event shape.
 
 ## Public API
 
@@ -50,6 +51,7 @@ Use `@capgo/background-geolocation` when your Capacitor app needs precise locati
 | `removeAllGeofences` | Stops monitoring all geofences registered by this plugin. |
 | `getMonitoredGeofences` | Returns the identifiers currently monitored by the native layer. |
 | `addListener('geofenceTransition', ...)` | Receives geofence enter and exit events while the app is alive. |
+| `addListener('geofenceError', ...)` | Receives native geofence monitoring errors while the app is alive. |
 | `getPluginVersion` | Get the native Capacitor plugin version. |
 
 ## Source Of Truth
