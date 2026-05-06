@@ -45,10 +45,12 @@ const result = await InstallReferrer.getReferrer({
   appleAttributionRetryDelayMs: 5000,
 });
 
+// result.appleAttribution is the parsed Apple attribution response.
+// See the iOS attribution page for the Apple-provided payload fields.
 console.log(result.appleAttribution);
 ```
 
-Apple can return `404` while attribution data is still being prepared for a valid token. The retry options control how often the native plugin retries before rejecting.
+Apple can return `404` while attribution data is still being prepared for a valid token. The retry options control how often the native plugin retries before rejecting. See [iOS attribution](/docs/plugins/install-referrer/ios/) for platform details.
 
 ## Compatibility Alias
 
