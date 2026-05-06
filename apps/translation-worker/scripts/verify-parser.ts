@@ -55,6 +55,15 @@ const rendered = __translationWorkerTest.renderTranslatedHtml(parts, segments, t
 assert(rendered.includes('FR: Ship mobile updates instantly to every user'), 'Renderer did not write translated body text')
 assert(rendered.includes('current < total'), 'Renderer changed skipped script content')
 
+const localizedMeta = __translationWorkerTest.expandShortMetaDescriptions(
+  '<head><meta name="description" content="短い説明"><meta property="og:description" content="短い説明"></head>',
+  'ja',
+)
+const localizedDescription = /name="description" content="([^"]+)"/.exec(localizedMeta)?.[1] ?? ''
+const localizedOgDescription = /property="og:description" content="([^"]+)"/.exec(localizedMeta)?.[1] ?? ''
+assert(localizedDescription.length >= 120, 'Localized meta description stayed too short')
+assert(localizedDescription.length <= 159, 'Localized meta description exceeded the SEO limit')
+assert(localizedOgDescription === localizedDescription, 'Localized Open Graph description was not expanded consistently')
 const localizedLinksHtml = __translationWorkerTest.rewriteMetadataAndLinks(
   `<!doctype html>
 <html lang="en">

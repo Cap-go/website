@@ -152,7 +152,7 @@ const CACHE_KEEP_SECONDS = 7 * 24 * 60 * 60
 const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-05-06-llama-3.1-8b-json-body-v6-localized-links'
+const TRANSLATION_CACHE_VERSION = '2026-05-06-seo-meta-description-v2-localized-links'
 const TRANSLATION_SOURCE_HASH_HEADER = 'X-Capgo-Translation-Source-Hash'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
 const MAX_HTML_BYTES = 1_500_000
@@ -194,6 +194,20 @@ const RAW_TEXT_SKIP_TAGS = new Set(['script', 'style', 'textarea'])
 const LANGUAGE_SELECTOR_SKIP_IDS = new Set(['language-dropdown-button', 'language-dropdown', 'language-menu'])
 const VOID_TAGS = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'])
 const TRANSLATABLE_META = new Set(['description', 'keywords', 'title', 'og:title', 'og:description', 'og:image:alt', 'twitter:title', 'twitter:description', 'twitter:image:alt'])
+const SEO_DESCRIPTION_META_KEYS = new Set(['description', 'og:description', 'twitter:description'])
+const SEO_DESCRIPTION_MIN_LENGTH = 120
+const SEO_DESCRIPTION_MAX_LENGTH = 159
+const SEO_DESCRIPTION_FALLBACK_SUFFIX = 'Capgo helps Capacitor teams ship live updates, automate rollbacks, manage channels, and monitor delivery without app store delays.'
+const SEO_DESCRIPTION_SUFFIXES: Record<Locale, string> = {
+  de: SEO_DESCRIPTION_FALLBACK_SUFFIX,
+  es: SEO_DESCRIPTION_FALLBACK_SUFFIX,
+  fr: SEO_DESCRIPTION_FALLBACK_SUFFIX,
+  id: SEO_DESCRIPTION_FALLBACK_SUFFIX,
+  it: SEO_DESCRIPTION_FALLBACK_SUFFIX,
+  ja: SEO_DESCRIPTION_FALLBACK_SUFFIX,
+  ko: SEO_DESCRIPTION_FALLBACK_SUFFIX,
+  zh: SEO_DESCRIPTION_FALLBACK_SUFFIX,
+}
 const TRANSLATABLE_ATTRIBUTES = new Set(['alt', 'aria-label', 'placeholder', 'title'])
 const STATIC_PREFIXES = [
   '/_astro/',
@@ -1650,6 +1664,48 @@ function setMetaContent(html: string, keyName: 'name' | 'property', keyValue: st
   return html
 }
 
+function truncateSeoDescription(value: string): string {
+  if (value.length <= SEO_DESCRIPTION_MAX_LENGTH) return value
+  return value.substring(0, SEO_DESCRIPTION_MAX_LENGTH - 3).trimEnd() + '...'
+}
+
+function buildSeoMetaDescription(content: string, locale: Locale): string {
+  const normalized = content.replaceAll(/\s+/g, ' ').trim()
+  if (!normalized || normalized.length >= SEO_DESCRIPTION_MIN_LENGTH) return truncateSeoDescription(normalized)
+
+  let expanded = normalized + ' ' + SEO_DESCRIPTION_SUFFIXES[locale]
+  if (expanded.length < SEO_DESCRIPTION_MIN_LENGTH) expanded = expanded + ' ' + SEO_DESCRIPTION_FALLBACK_SUFFIX
+
+  return truncateSeoDescription(expanded)
+}
+
+function expandShortMetaDescriptions(html: string, locale: Locale): string {
+  let rewritten = ''
+  let cursor = 0
+
+  while (cursor < html.length) {
+    const nextTag = findNextHtmlTag(html, cursor)
+    if (!nextTag) break
+
+    rewritten += html.slice(cursor, nextTag.index)
+    let tag = nextTag.tag
+
+    if (tagNameOf(tag) === 'meta') {
+      const metaKey = getMetaKey(tag)
+      const content = readAttributeValue(tag, 'content')
+      if (metaKey && SEO_DESCRIPTION_META_KEYS.has(metaKey) && content) {
+        const expanded = buildSeoMetaDescription(content, locale)
+        if (expanded !== content) tag = replaceTagAttributeValue(tag, 'content', expanded) ?? tag
+      }
+    }
+
+    rewritten += tag
+    cursor = nextTag.end
+  }
+
+  return rewritten + html.slice(cursor)
+}
+
 function alternateLinks(requestUrl: URL, basePath: string): string {
   const links = ALL_LOCALES.map((locale) => {
     const href = localizedAbsoluteUrl(requestUrl, locale, basePath)
@@ -1861,6 +1917,7 @@ function rewriteMetadataAndLinks(html: string, requestUrl: URL, locale: Locale):
   rewritten = setMetaContent(rewritten, 'property', 'twitter:url', localizedUrl)
   rewritten = setMetaContent(rewritten, 'name', 'twitter:url', localizedUrl)
   rewritten = localizeUrlAttributes(rewritten, locale, basePath, requestUrl)
+  rewritten = expandShortMetaDescriptions(rewritten, locale)
   rewritten = updateFooterLanguageButton(rewritten, locale)
   if (!rewritten.includes('capgo-edge-language-selector-hash')) {
     rewritten = insertBeforeClosingTag(rewritten, 'body', languageSelectorHashScript())
@@ -2520,6 +2577,7 @@ export const __translationWorkerTest = {
   buildBatches,
   collectSegments,
   renderTranslatedHtml,
+  expandShortMetaDescriptions,
   rewriteMetadataAndLinks,
 }
 

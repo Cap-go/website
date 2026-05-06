@@ -54,6 +54,7 @@ const toStringUrl = (value: unknown): string | null => {
 
 const titleString = typeof title === 'string' && title.trim().length > 0 ? title : m.website_title({}, { locale: messageLocale })
 const descriptionString = typeof description === 'string' && description.trim().length > 0 ? description : m.website_description({}, { locale: messageLocale })
+const defaultDescription = m.website_description({}, { locale: messageLocale })
 
 const urlString = toStringUrl(url) || Astro.url.toString()
 const canonicalString = toStringUrl(canonical) || urlString
@@ -74,11 +75,30 @@ const getImageMimeType = (img: string): string | null => {
 
 const imageMimeType = getImageMimeType(imageUrl)
 
-let displayDescription = descriptionString
+const normalizeMetaDescription = (value: string) => value.replace(/\s+/g, ' ').replace(/"/g, "'").trim()
 
-const descSize = 170
+const minDescriptionLength = 120
+const maxDescriptionLength = 159
+const shortDescriptionSuffix = 'Capgo helps Capacitor teams ship live updates, automate rollbacks, manage channels, and monitor delivery without app store delays.'
 
-if (displayDescription.length > descSize) displayDescription = `${displayDescription.substring(0, descSize - 3)}...`
+const buildMetaDescription = (value: string) => {
+  let nextDescription = normalizeMetaDescription(value)
+  const normalizedDefaultDescription = normalizeMetaDescription(defaultDescription)
+
+  if (nextDescription.length < minDescriptionLength && normalizedDefaultDescription && nextDescription !== normalizedDefaultDescription) {
+    nextDescription = nextDescription + ' - ' + normalizedDefaultDescription
+  }
+
+  if (nextDescription.length < minDescriptionLength) {
+    nextDescription = nextDescription + ' - ' + shortDescriptionSuffix
+  }
+
+  if (nextDescription.length > maxDescriptionLength) nextDescription = nextDescription.substring(0, maxDescriptionLength - 3) + '...'
+
+  return nextDescription
+}
+
+const displayDescription = buildMetaDescription(descriptionString)
 
 const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
 ---
@@ -149,10 +169,10 @@ const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
 <meta property="og:description" content={displayDescription} />
 
 <!-- Twitter -->
-<meta property="twitter:url" content={url} />
+<meta property="twitter:url" content={urlString} />
 <meta property="twitter:site" content="@Capgo_app" />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:image" content={image} />
+<meta property="twitter:title" content={titleString} />
+<meta property="twitter:image" content={imageUrl} />
 <meta property="twitter:app:id:iphone" content={appName} />
 <meta property="twitter:app:name:iphone" content="1602316563" />
 <meta property="twitter:creator" content="@martindonadieu" />
