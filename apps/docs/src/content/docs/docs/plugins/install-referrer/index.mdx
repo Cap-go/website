@@ -1,0 +1,54 @@
+---
+title: "@capgo/capacitor-install-referrer"
+description: "Install attribution for Capacitor apps using Google Play Install Referrer and Apple AdServices."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Read Android Play install referrer data and iOS Apple AdServices attribution tokens from Capacitor."
+  actions:
+    - text: Get started
+      link: /docs/plugins/install-referrer/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-install-referrer/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+`@capgo/capacitor-install-referrer` exposes install attribution signals through one Capacitor API.
+
+On Android, it reads Google Play Install Referrer details: the raw referrer string, click timestamp, install timestamp, and instant app flag. On iOS, it returns an Apple AdServices attribution token and can optionally call Apple's AdServices attribution endpoint for Apple Search Ads attribution data.
+
+## Core Capabilities
+
+- `getReferrer` - Return native install attribution details for the current platform.
+- `GetReferrer` - Deprecated compatibility alias for apps migrating from `cap-play-install-referrer`.
+- `getPluginVersion` - Return the native plugin implementation version marker.
+- Optional iOS Apple attribution lookup with retry support for delayed AdServices responses.
+
+## Platform Support
+
+| Platform | Support |
+| --- | --- |
+| Android | Google Play Install Referrer API |
+| iOS | Apple AdServices attribution token and optional Apple attribution payload |
+| Web | Unsupported stub |
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `getReferrer(options?)` | Return install attribution details for Android or iOS. |
+| `GetReferrer(options?)` | Deprecated compatibility alias for `getReferrer`. |
+| `getPluginVersion()` | Return the native plugin version marker. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-install-referrer](https://github.com/Cap-go/capacitor-install-referrer/).

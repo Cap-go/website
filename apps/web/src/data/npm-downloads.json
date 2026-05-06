@@ -75,6 +75,7 @@
   "@capgo/capacitor-persona": 356,
   "@capgo/capacitor-intune": 268,
   "@capgo/capacitor-incoming-call-kit": 481,
+  "@capgo/capacitor-install-referrer": 0,
   "@capgo/capacitor-android-age-signals": 674,
   "@capgo/capacitor-barometer": 3227,
   "@capgo/capacitor-accelerometer": 2223,
