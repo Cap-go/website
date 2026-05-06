@@ -151,7 +151,7 @@ These measures ensure the app is ready for secure deployment and continuous upda
 
 ## App Deployment and Update Methods
 
-Deploying a [Capacitor app](https://capacitorjs.com/docs) involves different approaches depending on whether you're in development or production. Development focuses on quick testing and debugging, while production demands thorough quality checks and compliance with platform standards.
+Deploying a [Capacitor app](https://capgo.app/capacitor-app/) involves different approaches depending on whether you're in development or production. Development focuses on quick testing and debugging, while production demands thorough quality checks and compliance with platform standards.
 
 ### Testing and Development Deployment
 
