@@ -198,7 +198,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             </div>
             <a
               href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-              class="font-pj relative z-10 inline-flex items-center justify-center rounded-xl bg-blue-600 px-8 py-4 text-lg font-bold text-white transition-all duration-200 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+              class="font-pj relative z-10 inline-flex items-center justify-center rounded-xl bg-blue-600 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-blue-600/20 transition-all duration-200 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 focus-visible:outline-none active:scale-[0.98]"
             >
               {m.cta_start_free({}, { locale: Astro.locals.locale })}
             </a>
@@ -342,11 +342,11 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             <span class="text-center text-xs font-semibold text-slate-500">{m.soc2_compliance_short({}, { locale: Astro.locals.locale })}</span>
           </div>
           <div class="flex flex-col items-center gap-1">
-            <img loading="lazy" src="/soc1.svg" alt={m.compliance_soc1({}, { locale: Astro.locals.locale })} class="w-autoo h-10 opacity-90 transition-opacity hover:opacity-80" />
+            <img loading="lazy" src="/soc1.svg" alt={m.compliance_soc1({}, { locale: Astro.locals.locale })} class="h-10 w-auto opacity-90 transition-opacity hover:opacity-80" />
             <span class="text-center text-xs font-semibold text-slate-500">{m.compliance_soc1({}, { locale: Astro.locals.locale })}</span>
           </div>
           <div class="flex flex-col items-center gap-1">
-            <img loading="lazy" src="/gdpr.svg" alt={m.compliance_gdpr({}, { locale: Astro.locals.locale })} class="w-autoo h-10 opacity-90 transition-opacity hover:opacity-80" />
+            <img loading="lazy" src="/gdpr.svg" alt={m.compliance_gdpr({}, { locale: Astro.locals.locale })} class="h-10 w-auto opacity-90 transition-opacity hover:opacity-80" />
             <span class="text-center text-xs font-semibold text-slate-500">{m.compliance_gdpr({}, { locale: Astro.locals.locale })}</span>
           </div>
         </div>
