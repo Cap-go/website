@@ -152,7 +152,7 @@ const CACHE_KEEP_SECONDS = 7 * 24 * 60 * 60
 const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-05-04-llama-3.1-8b-json-body-v5'
+const TRANSLATION_CACHE_VERSION = '2026-05-06-seo-meta-description-v1'
 const TRANSLATION_SOURCE_HASH_HEADER = 'X-Capgo-Translation-Source-Hash'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
 const MAX_HTML_BYTES = 1_500_000
@@ -194,6 +194,20 @@ const RAW_TEXT_SKIP_TAGS = new Set(['script', 'style', 'textarea'])
 const LANGUAGE_SELECTOR_SKIP_IDS = new Set(['language-dropdown-button', 'language-dropdown', 'language-menu'])
 const VOID_TAGS = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'])
 const TRANSLATABLE_META = new Set(['description', 'keywords', 'title', 'og:title', 'og:description', 'og:image:alt', 'twitter:title', 'twitter:description', 'twitter:image:alt'])
+const SEO_DESCRIPTION_META_KEYS = new Set(['description', 'og:description', 'twitter:description'])
+const SEO_DESCRIPTION_MIN_LENGTH = 120
+const SEO_DESCRIPTION_MAX_LENGTH = 159
+const SEO_DESCRIPTION_FALLBACK_SUFFIX = 'Capgo helps Capacitor teams ship live updates, automate rollbacks, manage channels, and monitor delivery without app store delays.'
+const SEO_DESCRIPTION_SUFFIXES: Record<Locale, string> = {
+  de: 'Capgo hilft Capacitor-Teams, Live-Updates sicher auszuliefern, Rollbacks zu automatisieren, Channels zu verwalten und die Verteilung ohne App-Store-Wartezeit zu überwachen.',
+  es: 'Capgo ayuda a los equipos Capacitor a entregar actualizaciones en vivo, automatizar rollbacks, gestionar canales y supervisar la distribución sin esperar revisiones de tiendas.',
+  fr: 'Capgo aide les équipes Capacitor à livrer des mises à jour en direct, automatiser les rollbacks, gérer les canaux et suivre la diffusion sans attendre les stores.',
+  id: 'Capgo membantu tim Capacitor mengirim pembaruan langsung, mengotomatiskan rollback, mengelola channel, dan memantau pengiriman tanpa menunggu ulasan app store.',
+  it: 'Capgo aiuta i team Capacitor a distribuire aggiornamenti live, automatizzare rollback, gestire canali e monitorare la consegna senza attendere gli app store.',
+  ja: 'Capgo は Capacitor チームがライブ更新を安全に配信し、自動ロールバック、チャンネル管理、配信状況の監視を行い、アプリストア審査を待たずに修正を届けられるよう支援します。',
+  ko: 'Capgo는 Capacitor 팀이 라이브 업데이트를 안전하게 배포하고, 자동 롤백과 채널 관리를 운영하며, 앱 스토어 심사를 기다리지 않고 전달 상태를 모니터링하도록 돕습니다.',
+  zh: 'Capgo 帮助 Capacitor 团队安全发布实时更新、自动回滚、管理发布频道并监控交付状态，无需等待应用商店审核，适合快速修复错误和分阶段上线。',
+}
 const TRANSLATABLE_ATTRIBUTES = new Set(['alt', 'aria-label', 'placeholder', 'title'])
 const STATIC_PREFIXES = [
   '/_astro/',
@@ -1623,6 +1637,48 @@ function setMetaContent(html: string, keyName: 'name' | 'property', keyValue: st
   return html
 }
 
+function truncateSeoDescription(value: string): string {
+  if (value.length <= SEO_DESCRIPTION_MAX_LENGTH) return value
+  return value.substring(0, SEO_DESCRIPTION_MAX_LENGTH - 3).trimEnd() + '...'
+}
+
+function buildSeoMetaDescription(content: string, locale: Locale): string {
+  const normalized = content.replace(/\s+/g, ' ').trim()
+  if (!normalized || normalized.length >= SEO_DESCRIPTION_MIN_LENGTH) return truncateSeoDescription(normalized)
+
+  let expanded = normalized + ' ' + SEO_DESCRIPTION_SUFFIXES[locale]
+  if (expanded.length < SEO_DESCRIPTION_MIN_LENGTH) expanded = expanded + ' ' + SEO_DESCRIPTION_FALLBACK_SUFFIX
+
+  return truncateSeoDescription(expanded)
+}
+
+function expandShortMetaDescriptions(html: string, locale: Locale): string {
+  let rewritten = ''
+  let cursor = 0
+
+  while (cursor < html.length) {
+    const nextTag = findNextHtmlTag(html, cursor)
+    if (!nextTag) break
+
+    rewritten += html.slice(cursor, nextTag.index)
+    let tag = nextTag.tag
+
+    if (tagNameOf(tag) === 'meta') {
+      const metaKey = getMetaKey(tag)
+      const content = readAttributeValue(tag, 'content')
+      if (metaKey && SEO_DESCRIPTION_META_KEYS.has(metaKey) && content) {
+        const expanded = buildSeoMetaDescription(content, locale)
+        if (expanded !== content) tag = replaceTagAttributeValue(tag, 'content', expanded) ?? tag
+      }
+    }
+
+    rewritten += tag
+    cursor = nextTag.end
+  }
+
+  return rewritten + html.slice(cursor)
+}
+
 function alternateLinks(requestUrl: URL, basePath: string): string {
   const links = ALL_LOCALES.map((locale) => {
     const href = localizedAbsoluteUrl(requestUrl, locale, basePath)
@@ -1830,6 +1886,7 @@ function rewriteMetadataAndLinks(html: string, requestUrl: URL, locale: Locale):
   rewritten = setMetaContent(rewritten, 'property', 'twitter:url', localizedUrl)
   rewritten = setMetaContent(rewritten, 'name', 'twitter:url', localizedUrl)
   rewritten = localizeUrlAttributes(rewritten, locale, basePath, requestUrl)
+  rewritten = expandShortMetaDescriptions(rewritten, locale)
   rewritten = updateFooterLanguageButton(rewritten, locale)
   if (!rewritten.includes('capgo-edge-language-selector-hash')) {
     rewritten = insertBeforeClosingTag(rewritten, 'body', languageSelectorHashScript())
@@ -2489,6 +2546,7 @@ export const __translationWorkerTest = {
   buildBatches,
   collectSegments,
   renderTranslatedHtml,
+  expandShortMetaDescriptions,
 }
 
 export default {

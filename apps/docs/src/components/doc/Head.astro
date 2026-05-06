@@ -107,26 +107,52 @@ const entryData = (entry?.data as Record<string, unknown> | undefined) ?? undefi
 const entryTitle = typeof entryData?.title === 'string' ? entryData.title : ''
 const entryDescription = typeof entryData?.description === 'string' ? entryData.description : typeof entryData?.summary === 'string' ? entryData.summary : ''
 
-let metaDescription = (entryDescription || entryTitle || defaultDescription).replace(/\s+/g, ' ').replace(/"/g, "'").trim()
+const normalizeMetaDescription = (value: string) => normalizeWhitespace(value).replace(/"/g, "'").trim()
 
-if (metaDescription && metaDescription !== defaultDescription && metaDescription.length < 120) {
-  metaDescription = `${metaDescription} — ${defaultDescription}`
-}
-
+const minDescriptionLength = 120
 const maxDescriptionLength = 159
-if (metaDescription.length > maxDescriptionLength) {
-  metaDescription = `${metaDescription.substring(0, maxDescriptionLength - 3)}...`
+const shortDescriptionSuffix = 'Capgo helps Capacitor teams ship live updates, automate rollbacks, manage channels, and monitor delivery without app store delays.'
+
+const buildMetaDescription = (value: string) => {
+  let nextDescription = normalizeMetaDescription(value)
+  const normalizedDefaultDescription = normalizeMetaDescription(defaultDescription)
+
+  if (nextDescription.length < minDescriptionLength && normalizedDefaultDescription && nextDescription !== normalizedDefaultDescription) {
+    nextDescription = nextDescription + ' - ' + normalizedDefaultDescription
+  }
+
+  if (nextDescription.length < minDescriptionLength) {
+    nextDescription = nextDescription + ' - ' + shortDescriptionSuffix
+  }
+
+  if (nextDescription.length > maxDescriptionLength) nextDescription = nextDescription.substring(0, maxDescriptionLength - 3) + '...'
+
+  return nextDescription
 }
 
-const hasMetaDescription = head.some(({ tag, attrs }) => tag === 'meta' && attrs?.name === 'description')
-if (!hasMetaDescription && metaDescription) {
+const metaDescription = buildMetaDescription(entryDescription || entryTitle || defaultDescription)
+
+const setHeadMetaContent = (keyName: 'name' | 'property', keyValue: string, content: string) => {
+  const existingMeta = head.find(({ tag, attrs }) => tag === 'meta' && attrs?.[keyName] === keyValue)
+  if (existingMeta) {
+    existingMeta.attrs = { ...existingMeta.attrs, content }
+    return
+  }
+
   head.push({
     tag: 'meta',
     attrs: {
-      name: 'description',
-      content: metaDescription,
+      [keyName]: keyValue,
+      content,
     },
   })
+}
+
+if (metaDescription) {
+  setHeadMetaContent('name', 'description', metaDescription)
+  setHeadMetaContent('property', 'og:description', metaDescription)
+  setHeadMetaContent('name', 'twitter:description', metaDescription)
+  setHeadMetaContent('property', 'twitter:description', metaDescription)
 }
 
 // Add og:image if not present
