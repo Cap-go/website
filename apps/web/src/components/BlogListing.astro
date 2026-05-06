@@ -29,10 +29,10 @@ if (Astro.locals.runtimeConfig.public.blog_description) content['description'] =
       <h2 class="mt-2 text-base leading-relaxed text-gray-50">
         {config.public.blog_description}
       </h2>
-      <div class="mt-8 flex flex-wrap gap-2">
+      <div class="mt-8 flex flex-wrap gap-3 rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-3">
         <a
           href={getRelativeLocaleUrl(Astro.locals.locale, `blog`)}
-          class="rounded-md border border-gray-400 px-3 py-2 text-xs font-medium transition-colors duration-300 ease-in-out hover:border-transparent hover:bg-gray-500 hover:text-white"
+          class="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-medium text-gray-100 transition duration-200 hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 focus-visible:outline-none"
         >
           All
         </a>
@@ -40,14 +40,14 @@ if (Astro.locals.runtimeConfig.public.blog_description) content['description'] =
           uniqueTags.map((val) => (
             <a
               href={getRelativeLocaleUrl(Astro.locals.locale, `blog/category/${slugify(val)}`)}
-              class="rounded-md border border-gray-400 px-3 py-2 text-xs font-medium transition-colors duration-300 ease-in-out hover:border-transparent hover:bg-gray-500 hover:text-white"
+              class="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-medium text-gray-100 transition duration-200 hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 focus-visible:outline-none"
             >
               {val}
             </a>
           ))
         }
       </div>
-      <div class="mt-8 grid w-full grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+      <div class="mt-8 grid w-full grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
         {
           posts.map((j, i) => (
             <Blog tag={j.data.tag} link={j.data.slug} title={j.data.title} date={j.data.created_at} image={j.data.head_image} loading={i < 3 ? 'eager' : 'lazy'} />
