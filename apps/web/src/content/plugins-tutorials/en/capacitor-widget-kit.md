@@ -3,7 +3,10 @@ locale: en
 ---
 # Using @capgo/capacitor-widget-kit
 
-Capacitor bridge for an iOS-first WidgetKit / Live Activities plugin.
+`@capgo/capacitor-widget-kit` lets a Capacitor app drive WidgetKit and Live Activity experiences in two ways:
+
+- Render resolved SVG template surfaces with frame switching, tap hotspots, and pause/play timers.
+- Keep the widget fully native while the app and widget share JSON session state and async messages.
 
 ## Install
 
@@ -12,54 +15,141 @@ bun add @capgo/capacitor-widget-kit
 bunx cap sync
 ```
 
-## What This Plugin Exposes
+## When To Use SVG Templates
 
-- `areActivitiesSupported` - Check whether the native template activity bridge can run on the current device.
-- `startTemplateActivity` - Persist a generic SVG template activity and start the matching native Live Activity bridge.
-- `updateTemplateActivity` - Replace part or all of the stored activity definition/state.
-- `endTemplateActivity` - End a running activity while optionally persisting one last state snapshot.
+Use SVG templates when the widget surface can be described as SVG. The app stores a template definition, the native bridge resolves placeholders, and widget taps can mutate state later.
 
-## Example Usage
-
-### `areActivitiesSupported`
-
-Check whether the native template activity bridge can run on the current device.
+Good fits include workout timers, delivery status cards, sports scores, or any compact UI where switching between named frames is enough.
 
 ```typescript
 import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
 
-await CapgoWidgetKit.areActivitiesSupported();
+const { activity } = await CapgoWidgetKit.startTemplateActivity({
+  activityId: 'session-1',
+  state: {
+    title: 'Chest Day',
+    frame: 'summary',
+    restDurationMs: 90000,
+  },
+  definition: {
+    id: 'workout-card',
+    timers: [{ id: 'rest', durationPath: 'state.restDurationMs' }],
+    actions: [
+      {
+        id: 'next-frame',
+        frameMutations: [{ op: 'next', path: 'frame', surface: 'lockScreen' }],
+      },
+      {
+        id: 'toggle-rest',
+        timerMutations: [{ op: 'toggle', timerId: 'rest' }],
+      },
+    ],
+    layouts: {
+      lockScreen: {
+        width: 100,
+        height: 40,
+        frameIdPath: 'state.frame',
+        frames: [
+          {
+            id: 'summary',
+            hotspots: [{ id: 'switch', actionId: 'next-frame', x: 0, y: 0, width: 100, height: 40 }],
+            svg: `<svg viewBox="0 0 100 40"><text x="6" y="22">{{state.title}}</text></svg>`,
+          },
+          {
+            id: 'timer',
+            hotspots: [{ id: 'pause-play', actionId: 'toggle-rest', x: 0, y: 0, width: 100, height: 40 }],
+            svg: `<svg viewBox="0 0 100 40"><text x="6" y="22">{{timers.rest.remainingText}}</text></svg>`,
+          },
+        ],
+      },
+    },
+  },
+});
 ```
 
-### `startTemplateActivity`
+## Handle Widget Actions In The App
 
-Persist a generic SVG template activity and start the matching native Live Activity bridge.
+Widget actions are persisted as events. Read and acknowledge them when the app resumes or after a background sync step.
 
 ```typescript
-import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
+const { events } = await CapgoWidgetKit.listTemplateEvents({
+  activityId: activity.activityId,
+  unacknowledgedOnly: true,
+});
 
-await CapgoWidgetKit.startTemplateActivity({} as StartTemplateActivityOptions);
+for (const event of events) {
+  console.log(event.actionId, event.state, event.timers);
+}
+
+await CapgoWidgetKit.acknowledgeTemplateEvents({ activityId: activity.activityId });
 ```
 
-### `updateTemplateActivity`
+## When To Use Full-Native Sessions
 
-Replace part or all of the stored activity definition/state.
+Use full-native sessions when the widget UI is better built directly in Swift, Kotlin, or Java. Capacitor still starts and stops the session, keeps shared state current, and queues work between app and widget code.
 
 ```typescript
-import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
+const { session } = await CapgoWidgetKit.startWidgetSession({
+  widgetId: 'native-session-1',
+  kind: 'workout-controls',
+  state: { isRunning: true, selectedSetId: 'set-1' },
+  metadata: { accent: '#00d69c' },
+});
 
-await CapgoWidgetKit.updateTemplateActivity({} as UpdateTemplateActivityOptions);
+await CapgoWidgetKit.updateWidgetSession({
+  widgetId: session.widgetId,
+  merge: true,
+  state: { isRunning: false },
+});
 ```
 
-### `endTemplateActivity`
+## Queue Async Work Between Widget And App
 
-End a running activity while optionally persisting one last state snapshot.
+Messages can flow from app to widget or widget to app. They stay pending until acknowledged and completed.
 
 ```typescript
-import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
+const { message } = await CapgoWidgetKit.sendWidgetMessage({
+  widgetId: session.widgetId,
+  direction: 'widgetToApp',
+  name: 'syncWorkoutSet',
+  payload: { setId: 'set-1' },
+  expectsResponse: true,
+});
 
-await CapgoWidgetKit.endTemplateActivity({} as EndTemplateActivityOptions);
+await CapgoWidgetKit.acknowledgeWidgetMessages({ messageIds: [message.messageId] });
+
+await CapgoWidgetKit.completeWidgetMessage({
+  messageId: message.messageId,
+  response: { synced: true },
+});
 ```
+
+If the job fails, complete the message with an error:
+
+```typescript
+await CapgoWidgetKit.completeWidgetMessage({
+  messageId: message.messageId,
+  error: 'Sync failed',
+});
+```
+
+## Stop Sessions Cleanly
+
+```typescript
+await CapgoWidgetKit.endTemplateActivity({
+  activityId: activity.activityId,
+  state: { title: 'Workout complete', frame: 'summary' },
+});
+
+await CapgoWidgetKit.stopWidgetSession({
+  widgetId: session.widgetId,
+  state: { isRunning: false },
+});
+```
+
+## Native Setup Notes
+
+For iOS WidgetKit and Live Activities, configure an App Group on the app and widget extension targets and set `CapgoWidgetKitAppGroup` in both `Info.plist` files. Interactive buttons require a widget extension that wires the plugin-provided native bridge and action intent.
 
 ## Full Reference
 
