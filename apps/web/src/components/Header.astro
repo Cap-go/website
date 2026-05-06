@@ -24,7 +24,7 @@ const locale = Astro.locals.locale
         <button
           type="button"
           class="rounded-md p-2 text-white transition-colors hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 focus-visible:outline-none"
-          aria-label={m.expand_menu({}, { locale: Astro.locals.locale })}
+          aria-label={m.menu({}, { locale: Astro.locals.locale })}
           aria-expanded="false"
           aria-controls="mobile-menu"
           id="menu-toggle"
@@ -592,7 +592,13 @@ const locale = Astro.locals.locale
   const isExpanded = (button: HTMLElement | null) => button?.getAttribute('aria-expanded') === 'true'
 
   menuToggle?.addEventListener('click', () => {
-    setDisclosureState(menuToggle, mobileMenu, null, !isExpanded(menuToggle))
+    const nextIsOpen = !isExpanded(menuToggle)
+    setDisclosureState(menuToggle, mobileMenu, null, nextIsOpen)
+
+    if (!nextIsOpen) {
+      setDisclosureState(productsToggle, productsSubmenu, productsChevron, false)
+      setDisclosureState(solutionsToggle, solutionsSubmenu, solutionsChevron, false)
+    }
   })
 
   productsToggle?.addEventListener('click', () => {
@@ -606,8 +612,25 @@ const locale = Astro.locals.locale
   document.addEventListener('keydown', (event) => {
     if (event.key !== 'Escape') return
 
+    const activeElement = document.activeElement
+    const focusMenuToggle = mobileMenu?.contains(activeElement) || isExpanded(menuToggle)
+    const focusProductsToggle = productsSubmenu?.contains(activeElement) || activeElement === productsToggle
+    const focusSolutionsToggle = solutionsSubmenu?.contains(activeElement) || activeElement === solutionsToggle
+
     setDisclosureState(menuToggle, mobileMenu, null, false)
     setDisclosureState(productsToggle, productsSubmenu, productsChevron, false)
     setDisclosureState(solutionsToggle, solutionsSubmenu, solutionsChevron, false)
+
+    if (focusProductsToggle) {
+      productsToggle?.focus()
+      return
+    }
+
+    if (focusSolutionsToggle) {
+      solutionsToggle?.focus()
+      return
+    }
+
+    if (focusMenuToggle) menuToggle?.focus()
   })
 </script>

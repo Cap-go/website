@@ -1,5 +1,6 @@
 ---
 import { formatTime } from '@/config/app'
+import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const props = Astro.props as {
@@ -44,7 +45,7 @@ const cannLink = getRelativeLocaleUrl(Astro.locals.locale, `blog/${props.link}`)
         {props.title}
       </p>
       <span class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-blue-200 transition group-hover:text-white">
-        Read article
+        {m.blog_read_article({}, { locale: Astro.locals.locale })}
         <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-1">→</span>
       </span>
     </div>

@@ -150,7 +150,7 @@ content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.p
                 <p class="mt-2 text-2xl font-semibold text-white tabular-nums sm:text-xl">
                   {formatCount(npmDownloads)}
                 </p>
-                <p class="mt-3 text-sm text-gray-500">Package activity</p>
+                <p class="mt-3 text-sm text-gray-500">{m.plugin_package_activity({}, { locale })}</p>
               </a>
               <a
                 href={href}
@@ -162,7 +162,7 @@ content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.p
                 <p class="mt-2 text-2xl font-semibold text-white tabular-nums sm:text-xl">
                   {formatCount(githubStars)}
                 </p>
-                <p class="mt-3 text-sm text-gray-500">Repository trust signal</p>
+                <p class="mt-3 text-sm text-gray-500">{m.plugin_repository_trust_signal({}, { locale })}</p>
               </a>
             </div>
           </div>
@@ -171,7 +171,7 @@ content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.p
             class="rounded-[1.75rem] border border-white/10 bg-linear-to-b from-white/[0.08] to-white/[0.03] p-6 shadow-[0_24px_80px_rgba(2,6,23,0.45)] backdrop-blur-sm lg:sticky lg:top-24"
           >
             <p class="text-[0.7rem] font-semibold tracking-[0.28em] text-blue-200/70 uppercase">Quick links</p>
-            <p class="mt-2 text-sm leading-6 text-gray-300">Jump straight to docs, source, or the published package without scanning the full tutorial.</p>
+            <p class="mt-2 text-sm leading-6 text-gray-300">{m.plugin_quick_links_helper({}, { locale })}</p>
             <div class="mt-5 flex flex-col gap-3">
               <a
                 href={docsHref}
