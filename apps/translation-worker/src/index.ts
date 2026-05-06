@@ -1977,7 +1977,7 @@ async function refreshCacheIncrementally(
       translatedBatches,
       updatedAt: Date.now(),
     })
-    await putTranslationPendingMarkerSafely(requestUrl, locale, 'continue', priority)
+    await putTranslationPendingMarkerSafely(requestUrl, locale, 'continue', priority, sourceHash)
     await sendTranslationJob(env, {
       url: requestUrl.toString(),
       locale,
@@ -2436,7 +2436,7 @@ function translationJobFromUnknown(value: unknown): TranslationJob | null {
 
 function matchesCoordinatorRecord(record: TranslationCoordinatorRecord | undefined, job: TranslationJob): boolean {
   if (!record || record.cacheVersion !== job.cacheVersion || record.locale !== job.locale || record.url !== job.url) return false
-  return !job.sourceHash || record.sourceHash === job.sourceHash
+  return record.sourceHash === job.sourceHash
 }
 
 export class TranslationCoordinator {

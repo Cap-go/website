@@ -55,8 +55,8 @@ const rendered = __translationWorkerTest.renderTranslatedHtml(parts, segments, t
 assert(rendered.includes('FR: Ship mobile updates instantly to every user'), 'Renderer did not write translated body text')
 assert(rendered.includes('current < total'), 'Renderer changed skipped script content')
 
-function coordinatorRequest(body: unknown): Request {
-  return new Request('https://translation-coordinator/enqueue', {
+function coordinatorRequest(body: unknown, path = '/enqueue'): Request {
+  return new Request(`https://translation-coordinator${path}`, {
     method: 'POST',
     body: JSON.stringify(body),
   })
@@ -114,7 +114,11 @@ assert(response.ok, 'Coordinator rejected source-specific refresh')
 assert((await response.json()).queued === true, 'Coordinator dropped a source-specific refresh behind an older pending job')
 assert(priorityQueued.length === 2, 'Coordinator did not queue the source-specific refresh')
 
+response = await coordinator.fetch(coordinatorRequest(queueJob, '/complete'))
+assert(response.ok, 'Coordinator rejected completion for older pending job')
+assert((await response.json()).cleared === true, 'Coordinator did not accept completion for older pending job')
+
 response = await coordinator.fetch(coordinatorRequest({ ...queueJob, priority: true, sourceHash }))
 assert(response.ok, 'Coordinator rejected duplicate source-specific refresh')
-assert((await response.json()).queued === false, 'Coordinator enqueued a duplicate source-specific refresh')
+assert((await response.json()).queued === false, 'Coordinator enqueued a duplicate source-specific refresh after older job completion')
 assert(priorityQueued.length === 2, 'Coordinator sent duplicate source-specific refresh messages')
