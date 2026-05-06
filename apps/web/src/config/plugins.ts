@@ -134,6 +134,7 @@ const actionDefinitionRows =
 @capacitor-plus/ios|github.com/Cap-go|Capacitor+ iOS runtime - Drop-in replacement with merged community fixes|https://github.com/Cap-go/capacitor-plus/|Capacitor+ iOS
 @capgo/capacitor-compass|github.com/Cap-go|Read device compass heading in degrees with continuous updates and permission handling|https://github.com/Cap-go/capacitor-compass/|Compass
 @capgo/capacitor-file|github.com/Cap-go|Full-featured file system plugin for reading, writing, and managing files and directories|https://github.com/Cap-go/capacitor-file/|File
+@capgo/capacitor-file-sharer|github.com/Cap-go|Share and save files from base64 data or local paths across Android, iOS, and Web|https://github.com/Cap-go/capacitor-file-sharer/|File Sharer
 @capgo/capacitor-bluetooth-low-energy|github.com/Cap-go|Full-featured BLE plugin for scanning, connecting, reading, writing, and receiving notifications from Bluetooth devices|https://github.com/Cap-go/capacitor-bluetooth-low-energy/|Bluetooth Low Energy
 @capgo/capacitor-keep-awake|github.com/Cap-go|Prevent device screen from dimming or sleeping for video players, navigation, and presentations|https://github.com/Cap-go/capacitor-keep-awake/|Keep Awake
 @capgo/capacitor-in-app-review|github.com/Cap-go|Prompt users to submit app store ratings and reviews without leaving your app using native iOS and Android APIs|https://github.com/Cap-go/capacitor-in-app-review/|In App Review
@@ -262,6 +263,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capacitor-plus/ios': 'DevicePhoneMobile',
   '@capgo/capacitor-compass': 'MapPin',
   '@capgo/capacitor-file': 'Folder',
+  '@capgo/capacitor-file-sharer': 'Share',
   '@capgo/capacitor-bluetooth-low-energy': 'Radio',
   '@capgo/capacitor-keep-awake': 'Sun',
   '@capgo/capacitor-in-app-review': 'Star',

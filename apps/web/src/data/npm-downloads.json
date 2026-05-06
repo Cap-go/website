@@ -113,6 +113,7 @@
   "@capacitor-plus/ios": 74,
   "@capgo/capacitor-compass": 6481,
   "@capgo/capacitor-file": 2742,
+  "@capgo/capacitor-file-sharer": 0,
   "@capgo/capacitor-bluetooth-low-energy": 5311,
   "@capgo/capacitor-keep-awake": 3361,
   "@capgo/capacitor-in-app-review": 26965,
