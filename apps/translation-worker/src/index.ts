@@ -152,7 +152,7 @@ const CACHE_KEEP_SECONDS = 7 * 24 * 60 * 60
 const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-05-04-llama-3.1-8b-json-body-v5'
+const TRANSLATION_CACHE_VERSION = '2026-05-06-llama-3.1-8b-json-body-v6-localized-links'
 const TRANSLATION_SOURCE_HASH_HEADER = 'X-Capgo-Translation-Source-Hash'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
 const MAX_HTML_BYTES = 1_500_000
@@ -319,16 +319,32 @@ function shouldBypassTranslation(pathname: string): boolean {
   return false
 }
 
-function shouldLocalizeHref(value: string): boolean {
-  if (!value.startsWith('/') || value.startsWith('//')) return false
-  if (value.startsWith('/#')) return false
-  return !shouldBypassTranslation(value)
+function hasUrlScheme(value: string): boolean {
+  return /^[A-Za-z][A-Za-z0-9+.-]*:/.test(value)
 }
 
-function localizeHref(value: string, locale: Locale): string {
-  if (!shouldLocalizeHref(value)) return value
-  const url = new URL(value, 'https://capgo.app')
+function isHttpUrl(value: string): boolean {
+  return /^https?:/i.test(value)
+}
+
+function localizeHref(value: string, locale: Locale, requestUrl: URL): string {
+  const trimmed = value.trim()
+  if (!trimmed || trimmed.startsWith('#')) return value
+  if (hasUrlScheme(trimmed) && !isHttpUrl(trimmed)) return value
+
+  let url: URL
+  try {
+    url = new URL(trimmed, requestUrl)
+  } catch {
+    return value
+  }
+
+  if (url.host !== requestUrl.host) return value
+  if (shouldBypassTranslation(url.pathname)) return value
+
   url.pathname = localizedPath(url.pathname, locale)
+  if (trimmed.startsWith('//')) return `//${url.host}${url.pathname}${url.search}${url.hash}`
+  if (isHttpUrl(trimmed)) return url.toString()
   return `${url.pathname}${url.search}${url.hash}`
 }
 
@@ -1687,7 +1703,8 @@ function localizeTagUrlAttributes(tag: string, locale: Locale, basePath: string,
     const name = attribute.name.toLowerCase()
     if (name !== 'href' && name !== 'action') continue
 
-    const localized = name === 'href' && targetLanguageLocale ? `${localizedPath(basePath, targetLanguageLocale)}${requestUrl.search}` : localizeHref(attribute.value, locale)
+    const localized =
+      name === 'href' && targetLanguageLocale ? `${localizedPath(basePath, targetLanguageLocale)}${requestUrl.search}` : localizeHref(attribute.value, locale, requestUrl)
     if (localized === attribute.value) continue
 
     rewritten += tag.slice(lastIndex, attribute.valueStart)
@@ -2489,6 +2506,7 @@ export const __translationWorkerTest = {
   buildBatches,
   collectSegments,
   renderTranslatedHtml,
+  rewriteMetadataAndLinks,
 }
 
 export default {

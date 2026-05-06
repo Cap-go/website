@@ -55,6 +55,40 @@ const rendered = __translationWorkerTest.renderTranslatedHtml(parts, segments, t
 assert(rendered.includes('FR: Ship mobile updates instantly to every user'), 'Renderer did not write translated body text')
 assert(rendered.includes('current < total'), 'Renderer changed skipped script content')
 
+const localizedLinksHtml = __translationWorkerTest.rewriteMetadataAndLinks(
+  `<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="canonical" href="https://capgo.app/blog/post" />
+    <meta property="og:url" content="https://capgo.app/blog/post" />
+  </head>
+  <body>
+    <a href="/pricing">Pricing</a>
+    <a href="https://capgo.app/docs/">Docs</a>
+    <a href="//capgo.app/plugins">Plugins</a>
+    <a href="features">Features</a>
+    <a href="/#faq">FAQ</a>
+    <a href="#local">Local anchor</a>
+    <a href="https://github.com/Cap-go/capgo">GitHub</a>
+    <a href="mailto:hello@capgo.app">Email</a>
+    <a href="/images/logo.png">Logo</a>
+    <form action="/register"></form>
+  </body>
+</html>`,
+  new URL('https://capgo.app/fr/blog/post?ref=nav'),
+  'fr',
+)
+assert(localizedLinksHtml.includes('href="/fr/pricing"'), 'Link rewrite did not localize root-relative internal links')
+assert(localizedLinksHtml.includes('href="https://capgo.app/fr/docs/"'), 'Link rewrite did not localize absolute same-site links')
+assert(localizedLinksHtml.includes('href="//capgo.app/fr/plugins"'), 'Link rewrite did not localize protocol-relative same-site links')
+assert(localizedLinksHtml.includes('href="/fr/blog/features"'), 'Link rewrite did not localize relative internal links')
+assert(localizedLinksHtml.includes('href="/fr/#faq"'), 'Link rewrite did not localize root anchor links')
+assert(localizedLinksHtml.includes('href="#local"'), 'Link rewrite changed same-page anchors')
+assert(localizedLinksHtml.includes('href="https://github.com/Cap-go/capgo"'), 'Link rewrite changed an external URL')
+assert(localizedLinksHtml.includes('href="mailto:hello@capgo.app"'), 'Link rewrite changed a mail link')
+assert(localizedLinksHtml.includes('href="/images/logo.png"'), 'Link rewrite changed an asset URL')
+assert(localizedLinksHtml.includes('action="/fr/register"'), 'Link rewrite did not localize internal form actions')
+
 function coordinatorRequest(body: unknown, path = '/enqueue'): Request {
   return new Request(`https://translation-coordinator${path}`, {
     method: 'POST',
