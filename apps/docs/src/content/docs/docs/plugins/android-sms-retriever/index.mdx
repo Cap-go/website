@@ -1,0 +1,62 @@
+---
+title: "@capgo/capacitor-android-sms-retriever"
+description: "Android SMS Retriever and Phone Number Hint APIs for Capacitor apps."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Read one app-targeted verification SMS without SMS permissions and request SIM phone number hints on Android."
+  actions:
+    - text: Get started
+      link: /docs/plugins/android-sms-retriever/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-android-sms-retriever/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+`@capgo/capacitor-android-sms-retriever` wraps Google Play services SMS Retriever and Phone Number Hint APIs for Android-only Capacitor verification flows.
+
+The plugin lets your app listen for a single verification SMS addressed to your app without requesting SMS permissions. It can also show Android's native Phone Number Hint UI so users can choose a SIM-based phone number without typing it manually.
+
+## Core Capabilities
+
+- `startWatch` - Start a five-minute SMS Retriever watch for one verification SMS.
+- `stopWatch` - Stop the active SMS Retriever watch.
+- `getHashString` - Read the 11-character app hash used in verification SMS messages.
+- `getPhoneNumber` - Open Android Phone Number Hint and return the selected phone number.
+- `smsReceived` - Listen for the retrieved verification SMS.
+- `smsRetrieverTimeout` - Listen for the five-minute timeout.
+- `smsRetrieverError` - Listen for runtime errors from Android or Google Play services.
+
+## Platform Support
+
+| Platform | Support |
+| --- | --- |
+| Android | Supported |
+| iOS | Unsupported stub |
+| Web | Unsupported stub |
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `startWatch` | Start listening for one verification SMS. |
+| `stopWatch` | Stop the active watch. |
+| `getHashString` | Return the 11-character app hash. |
+| `getPhoneNumber` | Show Phone Number Hint and return the selected number. |
+| `addListener('smsReceived', ...)` | Receive the retrieved SMS payload. |
+| `addListener('smsRetrieverTimeout', ...)` | Handle timeout events. |
+| `addListener('smsRetrieverError', ...)` | Handle retriever errors. |
+| `getPluginVersion` | Return the native plugin version. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-android-sms-retriever](https://github.com/Cap-go/capacitor-android-sms-retriever/).

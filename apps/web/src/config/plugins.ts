@@ -55,6 +55,7 @@ const actionDefinitionRows =
 @capgo/capacitor-alarm|github.com/Cap-go|Schedule native alarms and notifications even when app is closed|https://github.com/Cap-go/capacitor-alarm/|Alarm
 @capgo/capacitor-android-inline-install|github.com/Cap-go|Install app updates directly within the app without leaving to Play Store|https://github.com/Cap-go/capacitor-android-inline-install/|Android Inline Install
 @capgo/capacitor-android-kiosk|github.com/Cap-go|Lock Android devices into kiosk mode with launcher functionality and hardware key control|https://github.com/Cap-go/capacitor-android-kiosk/|Android Kiosk
+@capgo/capacitor-android-sms-retriever|github.com/Cap-go|Read one app-targeted verification SMS without SMS permissions and request SIM phone number hints on Android|https://github.com/Cap-go/capacitor-android-sms-retriever/|Android SMS Retriever
 @capgo/capacitor-appinsights|github.com/Cap-go|Track app usage, performance metrics, and user behavior with Apptopia AppInsights|https://github.com/Cap-go/capacitor-appinsights/|AppInsights
 @capgo/capacitor-app-attest|github.com/Cap-go|Capacitor plugin for cross-platform device attestation using Apple App Attest and Google Play Integrity Standard|https://github.com/Cap-go/capacitor-app-attest/|App Attest
 @capgo/capacitor-audiosession|github.com/Cap-go|Configure iOS audio session for background playback, mixing, and routing control|https://github.com/Cap-go/capacitor-audiosession/|Audio Session
@@ -181,6 +182,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-alarm': 'Bell',
   '@capgo/capacitor-android-inline-install': 'CloudArrowDown',
   '@capgo/capacitor-android-kiosk': 'LockClosed',
+  '@capgo/capacitor-android-sms-retriever': 'ChatBubbleLeft',
   '@capgo/capacitor-appinsights': 'ChartBar',
   '@capgo/capacitor-app-attest': 'ShieldCheck',
   '@capgo/capacitor-audiosession': 'SpeakerWave',
