@@ -64,6 +64,8 @@ const capgoCloudCards: CardData[] = [
   },
 ]
 
+// Match apps/web/src/services/github.ts getSlug(): plugin routes use the final href segment.
+// Monorepo package URLs intentionally resolve to package pages like /plugins/analytics/.
 const getPluginSlug = (href: string): string => {
   const normalizedHref = href.replace(/\/$/, '')
   return normalizedHref.substring(normalizedHref.lastIndexOf('/') + 1).toLowerCase()
