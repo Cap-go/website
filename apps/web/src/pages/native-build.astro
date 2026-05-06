@@ -1,5 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import m, { type MessageValues } from '@/copy/messages'
 import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import type { Database } from '@/services/supabase.types'
 import { getRelativeLocaleUrl } from 'astro:i18n'
@@ -19,13 +20,25 @@ const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
 const config = Astro.locals.runtimeConfig
 
-const title = `${brand} | Capgo Builder`
-const description = 'Build signed iOS and Android apps from any machine with Capgo Builder.'
+function copy(key: string, values: MessageValues = {}) {
+  return m[key](values, { locale })
+}
 
-const [plansResponse, creditsResponse] = await Promise.all([fetch(`${config.public.baseApiUrl}/private/plans`), fetch(`${config.public.baseApiUrl}/private/credits`)])
+const builderTitle = copy('native_build_builder_title')
+const title = `${brand} | ${builderTitle}`
+const description = copy('native_build_builder_description')
 
-const plansAll: Plan[] = plansResponse.ok ? await plansResponse.json() : []
-const credits: Credit[] = creditsResponse.ok ? await creditsResponse.json() : []
+let plansAll: Plan[] = []
+let credits: Credit[] = []
+
+try {
+  const [plansResponse, creditsResponse] = await Promise.all([fetch(`${config.public.baseApiUrl}/private/plans`), fetch(`${config.public.baseApiUrl}/private/credits`)])
+
+  plansAll = plansResponse.ok ? await plansResponse.json() : []
+  credits = creditsResponse.ok ? await creditsResponse.json() : []
+} catch (error) {
+  console.warn('Unable to load Capgo Builder pricing data', error)
+}
 
 const plans = plansAll.filter((plan) => plan.name !== 'Free')
 const buildCredits = credits.filter((credit) => credit.type === 'build_time').sort((a, b) => a.step_min - b.step_min)
@@ -49,127 +62,124 @@ const content = {
 }
 
 const heroStats = [
-  { value: '1 command', label: 'Local, CI, or teammate laptop' },
-  { value: '0 stored', label: 'Credentials kept runtime-only' },
-  { value: 'iOS + Android', label: 'Signed native builds' },
-  { value: 'Stores', label: 'Submit after a clean build' },
+  { value: copy('native_build_builder_stat_command_value'), label: copy('native_build_builder_stat_command_label') },
+  { value: copy('native_build_builder_stat_credentials_value'), label: copy('native_build_builder_stat_credentials_label') },
+  { value: copy('native_build_builder_stat_platforms_value'), label: copy('native_build_builder_stat_platforms_label') },
+  { value: copy('native_build_builder_stat_stores_value'), label: copy('native_build_builder_stat_stores_label') },
 ]
 
 const builderFeatures = [
   {
-    title: 'Native builds without the native setup',
-    text: 'Build iOS on dedicated Apple Silicon and Android in isolated containers without installing Xcode or Android Studio everywhere.',
+    title: copy('native_build_builder_feature_no_setup_title'),
+    text: copy('native_build_builder_feature_no_setup_text'),
     accent: 'text-emerald-300',
   },
   {
-    title: 'Bring your own signing',
-    text: 'Certificates, provisioning profiles, and keystores are supplied at build time from local env vars or CI secrets.',
+    title: copy('native_build_builder_feature_signing_title'),
+    text: copy('native_build_builder_feature_signing_text'),
     accent: 'text-cyan-300',
   },
   {
-    title: 'Upload to the stores',
-    text: 'Ship signed artifacts to App Store Connect and Google Play from the same command that produced the build.',
+    title: copy('native_build_builder_feature_stores_title'),
+    text: copy('native_build_builder_feature_stores_text'),
     accent: 'text-amber-300',
   },
   {
-    title: 'Works in any CI',
-    text: 'Run from GitHub Actions, GitLab CI, Jenkins, local scripts, or a teammate machine. No repo access required.',
+    title: copy('native_build_builder_feature_ci_title'),
+    text: copy('native_build_builder_feature_ci_text'),
     accent: 'text-sky-300',
   },
   {
-    title: 'Live logs in your terminal',
-    text: 'Stream every build step as it happens, so failures are visible where the command was started.',
+    title: copy('native_build_builder_feature_logs_title'),
+    text: copy('native_build_builder_feature_logs_text'),
     accent: 'text-fuchsia-300',
   },
   {
-    title: 'Clean build artifacts',
-    text: 'Download IPA, AAB, or APK output when you need it, while keeping the build environment disposable.',
+    title: copy('native_build_builder_feature_artifacts_title'),
+    text: copy('native_build_builder_feature_artifacts_text'),
     accent: 'text-violet-300',
   },
 ]
 
 const setupSteps = [
-  'Install the Capgo CLI in your project workflow.',
-  'Point the command at your app id and target platform.',
-  'Pass signing values from your secrets manager.',
-  'Stream logs until the signed artifact is ready.',
+  copy('native_build_builder_setup_step_install'),
+  copy('native_build_builder_setup_step_app'),
+  copy('native_build_builder_setup_step_signing'),
+  copy('native_build_builder_setup_step_logs'),
 ]
 
 const securityFeatures = [
   {
-    title: 'Credentials stay runtime-only',
-    text: 'Signing material is used during the build and is not kept as stored Capgo data.',
+    title: copy('native_build_builder_security_credentials_title'),
+    text: copy('native_build_builder_security_credentials_text'),
   },
   {
-    title: 'Only native build inputs upload',
-    text: 'Capgo Builder receives the platform folder and built web assets needed for the requested native target.',
+    title: copy('native_build_builder_security_upload_title'),
+    text: copy('native_build_builder_security_upload_text'),
   },
   {
-    title: 'Ephemeral build environments',
-    text: 'iOS and Android jobs run in isolated environments designed around short-lived build execution.',
+    title: copy('native_build_builder_security_ephemeral_title'),
+    text: copy('native_build_builder_security_ephemeral_text'),
   },
   {
-    title: 'Logs stream back to you',
-    text: 'Build output is delivered to the running command so teams can debug without a separate dashboard loop.',
+    title: copy('native_build_builder_security_logs_title'),
+    text: copy('native_build_builder_security_logs_text'),
   },
 ]
 
 const comparisons = [
   {
-    feature: 'First setup',
-    capgo: 'One CLI command after signing values are available.',
-    local: 'Install Xcode, Android Studio, SDKs, Ruby, Gradle, and signing files per machine.',
-    ci: 'Maintain runners, images, certificates, and store upload scripts.',
+    feature: copy('native_build_builder_compare_setup_feature'),
+    capgo: copy('native_build_builder_compare_setup_capgo'),
+    local: copy('native_build_builder_compare_setup_local'),
+    ci: copy('native_build_builder_compare_setup_ci'),
   },
   {
-    feature: 'iOS from any OS',
-    capgo: 'Trigger iOS builds from macOS, Linux, Windows, or CI.',
-    local: 'Requires macOS hardware for iOS output.',
-    ci: 'Requires macOS runners and queue management.',
+    feature: copy('native_build_builder_compare_ios_feature'),
+    capgo: copy('native_build_builder_compare_ios_capgo'),
+    local: copy('native_build_builder_compare_ios_local'),
+    ci: copy('native_build_builder_compare_ios_ci'),
   },
   {
-    feature: 'Credential handling',
-    capgo: 'Use existing local or CI secrets at build time.',
-    local: 'Each build machine needs secure local signing setup.',
-    ci: 'Secrets must be wired into every pipeline path.',
+    feature: copy('native_build_builder_compare_credentials_feature'),
+    capgo: copy('native_build_builder_compare_credentials_capgo'),
+    local: copy('native_build_builder_compare_credentials_local'),
+    ci: copy('native_build_builder_compare_credentials_ci'),
   },
   {
-    feature: 'Store delivery',
-    capgo: 'Build and submit from the same workflow.',
-    local: 'Manual export and upload steps are common.',
-    ci: 'Possible, but you own the automation.',
+    feature: copy('native_build_builder_compare_delivery_feature'),
+    capgo: copy('native_build_builder_compare_delivery_capgo'),
+    local: copy('native_build_builder_compare_delivery_local'),
+    ci: copy('native_build_builder_compare_delivery_ci'),
   },
   {
-    feature: 'Best fit',
-    capgo: 'Capacitor teams that want signed native builds without babysitting native toolchains.',
-    local: 'Native specialists working inside Xcode or Android Studio every day.',
-    ci: 'Teams with dedicated DevOps ownership for mobile runners.',
+    feature: copy('native_build_builder_compare_fit_feature'),
+    capgo: copy('native_build_builder_compare_fit_capgo'),
+    local: copy('native_build_builder_compare_fit_local'),
+    ci: copy('native_build_builder_compare_fit_ci'),
   },
 ]
 
 const faqs = [
   {
-    question: 'Is Capgo Builder a replacement for live updates?',
-    answer:
-      'No. Use live updates for JavaScript, CSS, and asset changes that do not require store review. Use Capgo Builder when native code, plugins, permissions, icons, SDKs, or store binaries change.',
+    question: copy('native_build_builder_faq_live_updates_q'),
+    answer: copy('native_build_builder_faq_live_updates_a'),
   },
   {
-    question: 'Do you need access to my repository?',
-    answer: 'No. The CLI uploads the build inputs from the machine or CI job where it runs. Private dependencies should already be installed before the build command starts.',
+    question: copy('native_build_builder_faq_repo_q'),
+    answer: copy('native_build_builder_faq_repo_a'),
   },
   {
-    question: 'How does signing work?',
-    answer:
-      'You provide certificates, provisioning profiles, keystores, and store credentials through CLI flags or environment variables. Teams usually source them from their CI secret manager.',
+    question: copy('native_build_builder_faq_signing_q'),
+    answer: copy('native_build_builder_faq_signing_a'),
   },
   {
-    question: 'How does pricing work?',
-    answer:
-      'Build minutes are included in paid Capgo plans, and extra minutes are available through prepaid credits. iOS uses Apple Silicon build capacity and Android uses containerized Linux builds.',
+    question: copy('native_build_builder_faq_pricing_q'),
+    answer: copy('native_build_builder_faq_pricing_a'),
   },
   {
-    question: 'What platforms are supported?',
-    answer: 'Capgo Builder supports iOS and Android builds for Capacitor apps, including store submission workflows and downloadable signed artifacts.',
+    question: copy('native_build_builder_faq_platforms_q'),
+    answer: copy('native_build_builder_faq_platforms_a'),
   },
 ]
 
@@ -179,34 +189,38 @@ function annualMonthlyPrice(plan: Plan) {
 }
 
 function monthlyPrice(plan: Plan) {
-  return plan.name === 'Enterprise' ? `$${plan.price_m}+ month-to-month` : `$${plan.price_m} month-to-month`
+  return copy('native_build_builder_month_to_month', { price: `$${plan.price_m}`, suffix: plan.name === 'Enterprise' ? '+' : '' })
 }
 
 function yearlyBilling(plan: Plan) {
-  return plan.name === 'Enterprise' ? `Billed annually from $${formatNumber(plan.price_y)}` : `Billed annually at $${formatNumber(plan.price_y)}`
+  const amount = `$${formatNumber(plan.price_y)}`
+  return plan.name === 'Enterprise' ? copy('native_build_builder_yearly_billing_enterprise', { amount }) : copy('native_build_builder_yearly_billing', { amount })
 }
 
 function planDescription(plan: Plan) {
-  if (plan.name === 'Enterprise') return 'Best for enterprises with millions of users'
-  return plan.market_desc
+  if (plan.name === 'Solo') return copy('plan_solo_desc')
+  if (plan.name === 'Maker') return copy('plan_maker_desc')
+  if (plan.name === 'Team') return copy('plan_team_desc')
+  if (plan.name === 'Enterprise') return copy('plan_payasyougo_desc')
+  return plan.market_desc ?? plan.description ?? ''
 }
 
 function formatNumber(value: number) {
-  return new Intl.NumberFormat('en-US').format(value)
+  return new Intl.NumberFormat(locale).format(value)
 }
 
 function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
-  if (!buildTimeSeconds) return '0 build minutes'
+  if (!buildTimeSeconds) return copy('native_build_builder_build_minutes_zero')
 
   const buildTimeHours = Math.floor(buildTimeSeconds / 3600)
   const buildTimeMinutes = Math.floor(buildTimeSeconds / 60)
   const suffix = name === 'Enterprise' ? '+' : ''
 
   if (buildTimeHours >= 1) {
-    return `${buildTimeHours} build ${buildTimeHours === 1 ? 'hour' : 'hours'}${suffix}`
+    return copy(buildTimeHours === 1 ? 'native_build_builder_build_hour' : 'native_build_builder_build_hours', { count: buildTimeHours, suffix })
   }
 
-  return `${buildTimeMinutes} build minutes${suffix}`
+  return copy('native_build_builder_build_minutes', { count: buildTimeMinutes, suffix })
 }
 
 function compactNumber(value: number) {
@@ -218,14 +232,14 @@ function creditStepLabel(credit: Credit, index: number, total: number) {
   const normalizedMin = credit.step_min / credit.unit_factor
   const normalizedMax = credit.step_max / credit.unit_factor
 
-  if (index === 0) return `First ${compactNumber(normalizedMax)}`
-  if (index === total - 1) return `Over ${compactNumber(normalizedMin)}`
+  if (index === 0) return copy('native_build_builder_credit_first', { count: compactNumber(normalizedMax) })
+  if (index === total - 1) return copy('native_build_builder_credit_over', { count: compactNumber(normalizedMin) })
 
-  return `Next ${compactNumber(normalizedMax - normalizedMin)}`
+  return copy('native_build_builder_credit_next', { count: compactNumber(normalizedMax - normalizedMin) })
 }
 
 function creditPrice(credit: Credit) {
-  return `$${parseFloat(credit.price_per_unit.toFixed(4))}/min`
+  return copy('native_build_builder_credit_price', { price: `$${parseFloat(credit.price_per_unit.toFixed(4))}` })
 }
 ---
 
@@ -236,27 +250,27 @@ function creditPrice(credit: Credit) {
       <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
         <div class="mx-auto max-w-3xl text-center">
           <p class="inline-flex items-center rounded-full border border-amber-300/40 bg-amber-300/10 px-4 py-2 text-xs font-semibold text-amber-100 uppercase">
-            Native iOS and Android builds from any machine
+            {copy('native_build_builder_badge')}
           </p>
-          <h1 class="mt-6 text-5xl leading-tight font-black text-white sm:text-6xl lg:text-7xl">Capgo Builder</h1>
+          <h1 class="mt-6 text-5xl leading-tight font-black text-white sm:text-6xl lg:text-7xl">{builderTitle}</h1>
           <p class="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">
-            One command for signed iOS and Android builds, store submission, and live build logs without maintaining native toolchains on every machine.
+            {copy('native_build_builder_hero_subtitle')}
           </p>
           <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
               href={getRelativeLocaleUrl(locale, 'register')}
               class="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-950/40 transition hover:bg-blue-500 focus:ring-2 focus:ring-blue-300 focus:outline-none"
             >
-              Start 14-day free trial
+              {copy('native_build_builder_start_trial')}
             </a>
             <a
               href={getRelativeLocaleUrl(locale, 'docs/cli/cloud-build/getting-started')}
               class="inline-flex min-h-11 items-center justify-center rounded-lg border border-white/15 bg-white/5 px-6 py-3 text-sm font-bold text-white transition hover:border-white/30 hover:bg-white/10 focus:ring-2 focus:ring-white/30 focus:outline-none"
             >
-              View docs
+              {copy('native_build_builder_view_docs')}
             </a>
           </div>
-          <p class="mt-4 text-xs text-slate-400">No credit card required for the free trial.</p>
+          <p class="mt-4 text-xs text-slate-400">{copy('native_build_builder_no_credit_card_trial')}</p>
         </div>
 
         <div class="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -275,10 +289,10 @@ function creditPrice(credit: Credit) {
     <section class="border-b border-white/10 bg-[#081322] py-20 sm:py-24">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-3xl text-center">
-          <p class="text-xs font-bold tracking-[0.24em] text-emerald-300 uppercase">One command</p>
-          <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">Signed native builds, straight to the stores.</h2>
+          <p class="text-xs font-bold tracking-[0.24em] text-emerald-300 uppercase">{copy('native_build_builder_one_command_eyebrow')}</p>
+          <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_one_command_title')}</h2>
           <p class="mt-4 text-base leading-7 text-slate-300">
-            Run the same build command locally or in CI. Capgo Builder handles the native build job, streams logs, signs the artifact, and can submit it after success.
+            {copy('native_build_builder_one_command_text')}
           </p>
         </div>
 
@@ -289,10 +303,10 @@ function creditPrice(credit: Credit) {
               <span class="h-2.5 w-2.5 rounded-full bg-amber-300"></span>
               <span class="h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
             </div>
-            <div class="text-xs text-slate-500">capgo-builder.log</div>
+            <div class="text-xs text-slate-500">{copy('native_build_builder_terminal_file')}</div>
           </div>
-          <div class="terminal-animation overflow-x-auto p-5 font-mono text-sm leading-7 text-slate-300 sm:p-8" aria-label="Animated Capgo Builder terminal log">
-            <div class="terminal-line text-slate-500" style="--delay: 0ms"># Build and submit a signed iOS app</div>
+          <div class="terminal-animation overflow-x-auto p-5 font-mono text-sm leading-7 text-slate-300 sm:p-8" aria-label={copy('native_build_builder_terminal_aria')}>
+            <div class="terminal-line text-slate-500" style="--delay: 0ms">{copy('native_build_builder_terminal_comment')}</div>
             <div class="terminal-line min-w-max" style="--delay: 450ms">
               <span class="text-emerald-300">bunx</span> @capgo/cli build <span class="text-cyan-300">com.example.app</span> \
             </div>
@@ -300,14 +314,15 @@ function creditPrice(credit: Credit) {
             <div class="terminal-line pl-4 text-sky-300" style="--delay: 1350ms">--build-mode <span class="text-slate-300">release</span> \</div>
             <div class="terminal-line pl-4 text-sky-300" style="--delay: 1800ms">--submit</div>
             <div class="terminal-line h-4" style="--delay: 2250ms"></div>
-            <div class="terminal-line" style="--delay: 2700ms"><span class="text-emerald-300">ok</span> Creating build job</div>
-            <div class="terminal-line" style="--delay: 3300ms"><span class="text-emerald-300">ok</span> Uploading native project inputs</div>
-            <div class="terminal-line" style="--delay: 3900ms"><span class="text-amber-300">run</span> Installing native dependencies</div>
-            <div class="terminal-line" style="--delay: 4500ms"><span class="text-amber-300">run</span> Building with Xcode on Apple Silicon</div>
-            <div class="terminal-line" style="--delay: 5100ms"><span class="text-amber-300">run</span> Signing IPA from runtime credentials</div>
-            <div class="terminal-line" style="--delay: 5700ms"><span class="text-emerald-300">ok</span> Build succeeded</div>
+            <div class="terminal-line" style="--delay: 2700ms"><span class="text-emerald-300">ok</span> {copy('native_build_builder_terminal_create')}</div>
+            <div class="terminal-line" style="--delay: 3300ms"><span class="text-emerald-300">ok</span> {copy('native_build_builder_terminal_upload')}</div>
+            <div class="terminal-line" style="--delay: 3900ms"><span class="text-amber-300">run</span> {copy('native_build_builder_terminal_install')}</div>
+            <div class="terminal-line" style="--delay: 4500ms"><span class="text-amber-300">run</span> {copy('native_build_builder_terminal_build')}</div>
+            <div class="terminal-line" style="--delay: 5100ms"><span class="text-amber-300">run</span> {copy('native_build_builder_terminal_sign')}</div>
+            <div class="terminal-line" style="--delay: 5700ms"><span class="text-emerald-300">ok</span> {copy('native_build_builder_terminal_succeeded')}</div>
             <div class="terminal-line" style="--delay: 6300ms">
-              <span class="text-emerald-300">ok</span> Submitted to App Store Connect<span class="terminal-cursor ml-1"></span>
+              <span class="text-emerald-300">ok</span>
+              {copy('native_build_builder_terminal_submitted')}<span class="terminal-cursor ml-1"></span>
             </div>
             <div class="mt-6 h-1 overflow-hidden rounded-full bg-white/10" aria-hidden="true">
               <div class="terminal-progress h-full rounded-full bg-linear-to-r from-emerald-300 via-cyan-300 to-blue-400"></div>
@@ -320,9 +335,9 @@ function creditPrice(credit: Credit) {
     <section class="border-b border-white/10 py-20 sm:py-24">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-2xl text-center">
-          <p class="text-xs font-bold tracking-[0.24em] text-slate-500 uppercase">Built for shipping</p>
-          <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">No native build babysitting.</h2>
-          <p class="mt-4 text-base leading-7 text-slate-300">Capgo Builder focuses on the work between a native change and a store-ready artifact.</p>
+          <p class="text-xs font-bold tracking-[0.24em] text-slate-500 uppercase">{copy('native_build_builder_features_eyebrow')}</p>
+          <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_features_title')}</h2>
+          <p class="mt-4 text-base leading-7 text-slate-300">{copy('native_build_builder_features_text')}</p>
         </div>
 
         <div class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -347,12 +362,13 @@ function creditPrice(credit: Credit) {
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
-            <p class="text-xs font-bold tracking-[0.24em] text-emerald-300 uppercase">Setup</p>
+            <p class="text-xs font-bold tracking-[0.24em] text-emerald-300 uppercase">{copy('native_build_builder_setup_eyebrow')}</p>
             <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">
-              Setup in <span class="text-emerald-300 italic">60 seconds</span>.
+              {copy('native_build_builder_setup_title_prefix')}
+              <span class="text-emerald-300 italic">{copy('native_build_builder_setup_title_time')}</span>.
             </h2>
             <p class="mt-4 text-base leading-7 text-slate-300">
-              Add the command to a local script or CI job, pass signing values from secrets, and keep native release builds reproducible.
+              {copy('native_build_builder_setup_text')}
             </p>
             <div class="mt-7 rounded-lg border border-emerald-300/20 bg-emerald-300/10 px-4 py-3 font-mono text-sm text-emerald-100">
               bunx @capgo/cli build com.example.app --platform android
@@ -380,9 +396,9 @@ function creditPrice(credit: Credit) {
     <section class="border-b border-white/10 py-20 sm:py-24">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-2xl text-center">
-          <p class="text-xs font-bold tracking-[0.24em] text-slate-500 uppercase">Security model</p>
-          <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">Your secrets stay your secrets.</h2>
-          <p class="mt-4 text-base leading-7 text-slate-300">Capgo Builder is designed for teams that already treat signing material as sensitive CI data.</p>
+          <p class="text-xs font-bold tracking-[0.24em] text-slate-500 uppercase">{copy('native_build_builder_security_eyebrow')}</p>
+          <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_security_title')}</h2>
+          <p class="mt-4 text-base leading-7 text-slate-300">{copy('native_build_builder_security_text')}</p>
         </div>
 
         <div class="mt-12 grid gap-4 md:grid-cols-2">
@@ -407,9 +423,9 @@ function creditPrice(credit: Credit) {
     <section class="border-b border-white/10 bg-[#081322] py-20 sm:py-24">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-2xl text-center">
-          <p class="text-xs font-bold tracking-[0.24em] text-slate-500 uppercase">Comparison</p>
-          <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">Capgo Builder vs. alternatives.</h2>
-          <p class="mt-4 text-base leading-7 text-slate-300">Keep the native build path simple when your team mainly ships Capacitor apps.</p>
+          <p class="text-xs font-bold tracking-[0.24em] text-slate-500 uppercase">{copy('native_build_builder_comparison_eyebrow')}</p>
+          <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_comparison_title')}</h2>
+          <p class="mt-4 text-base leading-7 text-slate-300">{copy('native_build_builder_comparison_text')}</p>
         </div>
 
         <div class="mt-12 space-y-4 lg:hidden">
@@ -419,15 +435,15 @@ function creditPrice(credit: Credit) {
                 <h3 class="text-sm font-black text-white">{row.feature}</h3>
                 <dl class="mt-4 space-y-4 text-sm">
                   <div>
-                    <dt class="text-xs font-bold tracking-wide text-emerald-200 uppercase">Capgo Builder</dt>
+                    <dt class="text-xs font-bold tracking-wide text-emerald-200 uppercase">{builderTitle}</dt>
                     <dd class="mt-1 leading-6 text-emerald-100">{row.capgo}</dd>
                   </div>
                   <div>
-                    <dt class="text-xs font-bold tracking-wide text-slate-500 uppercase">Local native builds</dt>
+                    <dt class="text-xs font-bold tracking-wide text-slate-500 uppercase">{copy('native_build_builder_comparison_local_header')}</dt>
                     <dd class="mt-1 leading-6 text-slate-400">{row.local}</dd>
                   </div>
                   <div>
-                    <dt class="text-xs font-bold tracking-wide text-slate-500 uppercase">Generic CI</dt>
+                    <dt class="text-xs font-bold tracking-wide text-slate-500 uppercase">{copy('native_build_builder_comparison_ci_header')}</dt>
                     <dd class="mt-1 leading-6 text-slate-400">{row.ci}</dd>
                   </div>
                 </dl>
@@ -440,10 +456,10 @@ function creditPrice(credit: Credit) {
           <table class="min-w-[860px] divide-y divide-white/10 bg-[#050911] text-left text-sm">
             <thead class="bg-white/[0.04] text-xs tracking-wide text-slate-400 uppercase">
               <tr>
-                <th class="px-5 py-4 font-bold">Workflow</th>
-                <th class="px-5 py-4 font-bold text-emerald-200">Capgo Builder</th>
-                <th class="px-5 py-4 font-bold">Local native builds</th>
-                <th class="px-5 py-4 font-bold">Generic CI</th>
+                <th class="px-5 py-4 font-bold">{copy('native_build_builder_comparison_workflow_header')}</th>
+                <th class="px-5 py-4 font-bold text-emerald-200">{builderTitle}</th>
+                <th class="px-5 py-4 font-bold">{copy('native_build_builder_comparison_local_header')}</th>
+                <th class="px-5 py-4 font-bold">{copy('native_build_builder_comparison_ci_header')}</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-white/10">
@@ -468,11 +484,9 @@ function creditPrice(credit: Credit) {
         <section class="border-b border-white/10 py-20 sm:py-24">
           <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div class="mx-auto max-w-2xl text-center">
-              <p class="text-xs font-bold tracking-[0.24em] text-slate-500 uppercase">Pricing</p>
-              <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">Pay for build minutes. That's it.</h2>
-              <p class="mt-4 text-base leading-7 text-slate-300">
-                The real Capgo plans include native build minutes. Start with a 14-day free trial, then choose monthly or annual billing.
-              </p>
+              <p class="text-xs font-bold tracking-[0.24em] text-slate-500 uppercase">{copy('native_build_builder_pricing_eyebrow')}</p>
+              <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_pricing_title')}</h2>
+              <p class="mt-4 text-base leading-7 text-slate-300">{copy('native_build_builder_pricing_text')}</p>
             </div>
 
             <div class="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -487,7 +501,7 @@ function creditPrice(credit: Credit) {
                   ]}
                 >
                   <div class="flex w-full flex-col">
-                    {plan.name === 'Maker' && <p class="mb-4 w-fit rounded-md bg-blue-500 px-3 py-1 text-xs font-bold text-white uppercase">Most popular</p>}
+                    {plan.name === 'Maker' && <p class="mb-4 w-fit rounded-md bg-blue-500 px-3 py-1 text-xs font-bold text-white uppercase">{copy('most_popular')}</p>}
                     <h3 class="text-lg font-black text-white uppercase">{plan.name}</h3>
                     <p class="mt-2 min-h-10 text-sm leading-5 text-slate-400">{planDescription(plan)}</p>
                     <div class="mt-6">
@@ -506,7 +520,7 @@ function creditPrice(credit: Credit) {
                         },
                       ]}
                     >
-                      14-day free trial
+                      {copy('native_build_builder_plan_trial')}
                     </a>
                     <ul class="mt-6 space-y-3 text-sm text-slate-300">
                       <li class="flex gap-2">
@@ -515,15 +529,21 @@ function creditPrice(credit: Credit) {
                       </li>
                       <li class="flex gap-2">
                         <span class="text-emerald-300">+</span>
-                        <span>{formatNumber(plan.mau)} monthly active users</span>
+                        <span>
+                          {formatNumber(plan.mau)} {copy('native_build_builder_monthly_active_users')}
+                        </span>
                       </li>
                       <li class="flex gap-2">
                         <span class="text-emerald-300">+</span>
-                        <span>{formatNumber(plan.bandwidth)} GiB bandwidth/month</span>
+                        <span>
+                          {formatNumber(plan.bandwidth)} {copy('native_build_builder_bandwidth_month')}
+                        </span>
                       </li>
                       <li class="flex gap-2">
                         <span class="text-emerald-300">+</span>
-                        <span>{formatNumber(plan.storage)} GiB storage</span>
+                        <span>
+                          {formatNumber(plan.storage)} {copy('native_build_builder_storage')}
+                        </span>
                       </li>
                     </ul>
                   </div>
@@ -534,7 +554,7 @@ function creditPrice(credit: Credit) {
             {buildCredits.length > 0 && (
               <div class="mt-6 rounded-lg border border-cyan-300/20 bg-cyan-300/10 p-4">
                 <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-                  <p class="text-sm font-bold text-cyan-100">Extra build minutes use prepaid credits.</p>
+                  <p class="text-sm font-bold text-cyan-100">{copy('native_build_builder_extra_minutes')}</p>
                   <div class="flex flex-wrap gap-2">
                     {buildCredits.map((credit, index) => (
                       <span class="rounded-md border border-cyan-200/20 bg-black/20 px-3 py-1 text-xs text-cyan-100">
@@ -553,8 +573,8 @@ function creditPrice(credit: Credit) {
     <section class="border-b border-white/10 bg-[#081322] py-20 sm:py-24">
       <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-2xl text-center">
-          <p class="text-xs font-bold tracking-[0.24em] text-slate-500 uppercase">FAQ</p>
-          <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">Specific answers to specific worries.</h2>
+          <p class="text-xs font-bold tracking-[0.24em] text-slate-500 uppercase">{copy('native_build_builder_faq_eyebrow')}</p>
+          <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_faq_title')}</h2>
         </div>
 
         <div class="mt-10 divide-y divide-white/10 rounded-lg border border-white/10 bg-[#050911]">
@@ -575,23 +595,23 @@ function creditPrice(credit: Credit) {
 
     <section class="py-20 sm:py-24">
       <div class="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
-        <p class="text-2xl font-black text-emerald-300">Capgo Builder</p>
-        <h2 class="mt-3 text-3xl leading-tight font-black text-white sm:text-4xl">Native builds without the pain.</h2>
+        <p class="text-2xl font-black text-emerald-300">{builderTitle}</p>
+        <h2 class="mt-3 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_cta_title')}</h2>
         <p class="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-300">
-          Build signed iOS and Android releases from your machine or CI while keeping Capgo's existing site header, docs, and pricing flow.
+          {copy('native_build_builder_cta_text')}
         </p>
         <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a
             href={getRelativeLocaleUrl(locale, 'register')}
             class="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-950/40 transition hover:bg-blue-500 focus:ring-2 focus:ring-blue-300 focus:outline-none"
           >
-            Start 14-day free trial
+            {copy('native_build_builder_start_trial')}
           </a>
           <a
             href={getRelativeLocaleUrl(locale, 'pricing')}
             class="inline-flex min-h-11 items-center justify-center rounded-lg border border-white/15 bg-white/5 px-6 py-3 text-sm font-bold text-white transition hover:border-white/30 hover:bg-white/10 focus:ring-2 focus:ring-white/30 focus:outline-none"
           >
-            View real pricing
+            {copy('native_build_builder_view_pricing')}
           </a>
         </div>
       </div>
