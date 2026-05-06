@@ -21,8 +21,15 @@ const locale = Astro.locals.locale
         </a>
       </div>
       <div class="flex xl:hidden">
-        <button type="button" class="text-white" aria-label={m.expand_menu({}, { locale: Astro.locals.locale })} id="menu-toggle">
-          <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <button
+          type="button"
+          class="rounded-md p-2 text-white transition-colors hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 focus-visible:outline-none"
+          aria-label={m.expand_menu({}, { locale: Astro.locals.locale })}
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          id="menu-toggle"
+        >
+          <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
         </button>
@@ -41,15 +48,26 @@ const locale = Astro.locals.locale
           <div class="group relative">
             <button
               type="button"
-              class="flex items-center border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+              class="flex items-center border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-900 focus-visible:outline-none"
               aria-label={m.products({}, { locale: Astro.locals.locale })}
+              aria-haspopup="true"
             >
               {m.products({}, { locale: Astro.locals.locale })}
-              <svg class="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg
+                class="ml-1 h-4 w-4 transition-transform group-focus-within:rotate-180 group-hover:rotate-180"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+                focusable="false"
+              >
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div class="invisible absolute left-0 z-50 w-48 pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+            <div
+              class="invisible absolute left-0 z-50 w-48 pt-2 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100"
+            >
               <div class="rounded-lg border border-gray-700 bg-gray-800 py-2 shadow-xl">
                 <a
                   href={getRelativeLocaleUrl(Astro.locals.locale, 'live-update')}
@@ -79,15 +97,26 @@ const locale = Astro.locals.locale
           <div class="group relative">
             <button
               type="button"
-              class="flex items-center border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+              class="flex items-center border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-900 focus-visible:outline-none"
               aria-label={m.solutions({}, { locale: Astro.locals.locale })}
+              aria-haspopup="true"
             >
               {m.solutions({}, { locale: Astro.locals.locale })}
-              <svg class="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg
+                class="ml-1 h-4 w-4 transition-transform group-focus-within:rotate-180 group-hover:rotate-180"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+                focusable="false"
+              >
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div class="invisible absolute left-0 z-50 w-[600px] pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+            <div
+              class="invisible absolute left-0 z-50 w-[600px] pt-2 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100"
+            >
               <div class="rounded-lg border border-gray-700 bg-gray-800 p-4 shadow-xl">
                 <div class="grid grid-cols-3 gap-4">
                   <!-- By Team Type Column -->
@@ -346,7 +375,7 @@ const locale = Astro.locals.locale
       </div>
     </div>
   </div>
-  <div id="mobile-menu" class="hidden">
+  <div id="mobile-menu" class="hidden" aria-hidden="true">
     <div class="mt-2 space-y-1 bg-gray-700 px-2 pt-2 pb-3">
       <!-- GitHub Stars -->
       <a
@@ -375,14 +404,25 @@ const locale = Astro.locals.locale
         <button
           type="button"
           id="products-toggle"
-          class="flex w-full items-center justify-between rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-600 hover:text-white"
+          aria-expanded="false"
+          aria-controls="products-submenu"
+          class="flex w-full items-center justify-between rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-600 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-700 focus-visible:outline-none"
         >
           {m.products({}, { locale: Astro.locals.locale })}
-          <svg id="products-chevron" class="h-4 w-4 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg
+            id="products-chevron"
+            class="h-4 w-4 transition-transform"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+            focusable="false"
+          >
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </button>
-        <div id="products-submenu" class="hidden space-y-1 pl-4">
+        <div id="products-submenu" class="hidden space-y-1 pl-4" aria-hidden="true">
           <a href={getRelativeLocaleUrl(Astro.locals.locale, 'live-update')} class="block rounded-md px-3 py-2 text-sm text-gray-400 hover:bg-gray-600 hover:text-white">
             {m.live_update({}, { locale: Astro.locals.locale })}
           </a>
@@ -405,14 +445,25 @@ const locale = Astro.locals.locale
         <button
           type="button"
           id="solutions-toggle"
-          class="flex w-full items-center justify-between rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-600 hover:text-white"
+          aria-expanded="false"
+          aria-controls="solutions-submenu"
+          class="flex w-full items-center justify-between rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-600 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-700 focus-visible:outline-none"
         >
           {m.solutions({}, { locale: Astro.locals.locale })}
-          <svg id="solutions-chevron" class="h-4 w-4 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg
+            id="solutions-chevron"
+            class="h-4 w-4 transition-transform"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+            focusable="false"
+          >
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </button>
-        <div id="solutions-submenu" class="hidden space-y-1 pl-4">
+        <div id="solutions-submenu" class="hidden space-y-1 pl-4" aria-hidden="true">
           <p class="px-3 py-1 text-xs font-semibold tracking-wider text-gray-500 uppercase">{m.solutions_by_team({}, { locale: Astro.locals.locale })}</p>
           <a href={getRelativeLocaleUrl(Astro.locals.locale, 'enterprise')} class="block rounded-md px-3 py-2 text-sm text-gray-400 hover:bg-gray-600 hover:text-white">
             {m.solutions_enterprise_short({}, { locale: Astro.locals.locale })}
@@ -531,17 +582,32 @@ const locale = Astro.locals.locale
   const solutionsSubmenu = document.getElementById('solutions-submenu')
   const solutionsChevron = document.getElementById('solutions-chevron')
 
+  const setDisclosureState = (button: HTMLElement | null, panel: HTMLElement | null, chevron: HTMLElement | null, isOpen: boolean) => {
+    button?.setAttribute('aria-expanded', String(isOpen))
+    panel?.setAttribute('aria-hidden', String(!isOpen))
+    panel?.classList.toggle('hidden', !isOpen)
+    chevron?.classList.toggle('rotate-180', isOpen)
+  }
+
+  const isExpanded = (button: HTMLElement | null) => button?.getAttribute('aria-expanded') === 'true'
+
   menuToggle?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden')
+    setDisclosureState(menuToggle, mobileMenu, null, !isExpanded(menuToggle))
   })
 
   productsToggle?.addEventListener('click', () => {
-    productsSubmenu?.classList.toggle('hidden')
-    productsChevron?.classList.toggle('rotate-180')
+    setDisclosureState(productsToggle, productsSubmenu, productsChevron, !isExpanded(productsToggle))
   })
 
   solutionsToggle?.addEventListener('click', () => {
-    solutionsSubmenu?.classList.toggle('hidden')
-    solutionsChevron?.classList.toggle('rotate-180')
+    setDisclosureState(solutionsToggle, solutionsSubmenu, solutionsChevron, !isExpanded(solutionsToggle))
+  })
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return
+
+    setDisclosureState(menuToggle, mobileMenu, null, false)
+    setDisclosureState(productsToggle, productsSubmenu, productsChevron, false)
+    setDisclosureState(solutionsToggle, solutionsSubmenu, solutionsChevron, false)
   })
 </script>

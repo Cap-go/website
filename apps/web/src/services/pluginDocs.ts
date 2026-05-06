@@ -31,7 +31,7 @@ const getPackageSegment = (name?: string): string => {
   return slashIndex >= 0 ? name.slice(slashIndex + 1) : name
 }
 
-const getPluginDocEntry = (filePath?: string): { locale: Locales; slug: string } | null => {
+function getPluginDocEntry(filePath?: string): { locale: Locales; slug: string } | null {
   if (!filePath) return null
 
   const segments = filePath.replaceAll('\\', '/').split('/').filter(Boolean)
