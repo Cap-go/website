@@ -1,0 +1,45 @@
+---
+title: iOS Attribution
+description: "iOS behavior for @capgo/capacitor-install-referrer with Apple AdServices."
+sidebar:
+  order: 4
+---
+
+## Apple AdServices
+
+Apple does not provide a generic App Store install referrer equivalent to Google Play Install Referrer. On iOS, this plugin uses Apple AdServices attribution.
+
+By default, `getReferrer()` returns an AdServices attribution token that you can send to your backend or mobile measurement partner.
+
+```typescript
+const result = await InstallReferrer.getReferrer();
+console.log(result.attributionToken);
+```
+
+## Native Apple Attribution Lookup
+
+The plugin can also send the token to Apple's AdServices endpoint from native code.
+
+```typescript
+const result = await InstallReferrer.getReferrer({
+  fetchAppleAttribution: true,
+});
+
+console.log(result.appleAttribution);
+```
+
+Use this mode when the app itself should receive Apple's attribution payload. Keep `fetchAppleAttribution` false when your backend or attribution provider should exchange the token.
+
+## Returned Fields
+
+| Field | Description |
+| --- | --- |
+| `platform` | Always `ios`. |
+| `attributionToken` | Apple AdServices attribution token. |
+| `appleAttribution` | Optional Apple attribution payload when `fetchAppleAttribution` is true. |
+
+## Requirements
+
+- Apple AdServices attribution tokens are available on iOS 14.3 and later.
+- The attribution payload covers Apple Search Ads attribution, not arbitrary App Store referrer URLs.
+- No App Tracking Transparency prompt is required just to request the AdServices attribution token.

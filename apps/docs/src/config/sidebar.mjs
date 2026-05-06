@@ -104,6 +104,11 @@ const pluginEntries = [
   ['In App Review', 'in-app-review'],
   ['InAppBrowser', 'inappbrowser'],
   ['Incoming Call Kit', 'incoming-call-kit', [linkItem('iOS', '/docs/plugins/incoming-call-kit/ios'), linkItem('Android', '/docs/plugins/incoming-call-kit/android')]],
+  [
+    'Install Referrer',
+    'install-referrer',
+    [linkItem('iOS attribution', '/docs/plugins/install-referrer/ios'), linkItem('Android referrer', '/docs/plugins/install-referrer/android')],
+  ],
   ['Intent Launcher', 'intent-launcher'],
   ['Intercom', 'intercom'],
   ['Is Root', 'is-root'],
