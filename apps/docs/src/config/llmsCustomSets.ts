@@ -10,6 +10,7 @@ Plugin Alarm|alarm and notification scheduling plugin|docs/plugins/alarm/**
 Plugin Android Inline Install|Android inline app installation plugin|docs/plugins/android-inline-install/**
 Plugin Android Usage Stats|Android usage statistics manager plugin|docs/plugins/android-usagestatsmanager/**
 Plugin Android Kiosk|Android kiosk mode plugin for locked-down device experiences|docs/plugins/android-kiosk/**
+Plugin Android SMS Retriever|Android SMS Retriever and Phone Number Hint plugin for passwordless verification flows|docs/plugins/android-sms-retriever/**
 Plugin AppInsights|Microsoft Application Insights analytics plugin|docs/plugins/appinsights/**
 Plugin AppsFlyer|AppsFlyer mobile attribution, analytics, and deep linking plugin|docs/plugins/appsflyer/**
 Plugin App Attest|cross-platform app attestation plugin using Apple App Attest and Google Play Integrity Standard|docs/plugins/app-attest/**
