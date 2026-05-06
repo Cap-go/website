@@ -199,14 +199,14 @@ const SEO_DESCRIPTION_MIN_LENGTH = 120
 const SEO_DESCRIPTION_MAX_LENGTH = 159
 const SEO_DESCRIPTION_FALLBACK_SUFFIX = 'Capgo helps Capacitor teams ship live updates, automate rollbacks, manage channels, and monitor delivery without app store delays.'
 const SEO_DESCRIPTION_SUFFIXES: Record<Locale, string> = {
-  de: 'Capgo hilft Capacitor-Teams, Live-Updates sicher auszuliefern, Rollbacks zu automatisieren, Channels zu verwalten und die Verteilung ohne App-Store-Wartezeit zu überwachen.',
-  es: 'Capgo ayuda a los equipos Capacitor a entregar actualizaciones en vivo, automatizar rollbacks, gestionar canales y supervisar la distribución sin esperar revisiones de tiendas.',
-  fr: 'Capgo aide les équipes Capacitor à livrer des mises à jour en direct, automatiser les rollbacks, gérer les canaux et suivre la diffusion sans attendre les stores.',
-  id: 'Capgo membantu tim Capacitor mengirim pembaruan langsung, mengotomatiskan rollback, mengelola channel, dan memantau pengiriman tanpa menunggu ulasan app store.',
-  it: 'Capgo aiuta i team Capacitor a distribuire aggiornamenti live, automatizzare rollback, gestire canali e monitorare la consegna senza attendere gli app store.',
-  ja: 'Capgo は Capacitor チームがライブ更新を安全に配信し、自動ロールバック、チャンネル管理、配信状況の監視を行い、アプリストア審査を待たずに修正を届けられるよう支援します。',
-  ko: 'Capgo는 Capacitor 팀이 라이브 업데이트를 안전하게 배포하고, 자동 롤백과 채널 관리를 운영하며, 앱 스토어 심사를 기다리지 않고 전달 상태를 모니터링하도록 돕습니다.',
-  zh: 'Capgo 帮助 Capacitor 团队安全发布实时更新、自动回滚、管理发布频道并监控交付状态，无需等待应用商店审核，适合快速修复错误和分阶段上线。',
+  de: SEO_DESCRIPTION_FALLBACK_SUFFIX,
+  es: SEO_DESCRIPTION_FALLBACK_SUFFIX,
+  fr: SEO_DESCRIPTION_FALLBACK_SUFFIX,
+  id: SEO_DESCRIPTION_FALLBACK_SUFFIX,
+  it: SEO_DESCRIPTION_FALLBACK_SUFFIX,
+  ja: SEO_DESCRIPTION_FALLBACK_SUFFIX,
+  ko: SEO_DESCRIPTION_FALLBACK_SUFFIX,
+  zh: SEO_DESCRIPTION_FALLBACK_SUFFIX,
 }
 const TRANSLATABLE_ATTRIBUTES = new Set(['alt', 'aria-label', 'placeholder', 'title'])
 const STATIC_PREFIXES = [
