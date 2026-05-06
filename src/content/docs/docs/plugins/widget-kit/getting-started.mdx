@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: "Install @capgo/capacitor-widget-kit and start using its current Capacitor API."
+description: "Install @capgo/capacitor-widget-kit, create SVG frame/timer widgets, or sync full-native widgets with the app."
 sidebar:
   order: 2
 ---
@@ -18,297 +18,250 @@ bunx cap sync
 import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
 ```
 
-## API Overview
+## iOS Setup
 
-### `areActivitiesSupported`
+For Live Activities and WidgetKit extensions, configure the native app first:
 
-Check whether the native template activity bridge can run on the current device.
+- Use iOS 17+ for interactive Live Activity buttons when possible.
+- Add `NSSupportsLiveActivities` to the app `Info.plist` when using ActivityKit.
+- Add the same App Group to the app target and the widget extension target.
+- Set `CapgoWidgetKitAppGroup` in both `Info.plist` files to the shared App Group identifier.
 
-```typescript
-import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
-
-await CapgoWidgetKit.areActivitiesSupported();
+```xml
+<key>CapgoWidgetKitAppGroup</key>
+<string>group.app.capgo.widgetkit.exampleapp.widgetkit</string>
 ```
 
-### `startTemplateActivity`
-
-Persist a generic SVG template activity and start the matching native Live Activity bridge.
+## Check Support
 
 ```typescript
-import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
+const { supported, reason } = await CapgoWidgetKit.areActivitiesSupported();
 
-await CapgoWidgetKit.startTemplateActivity({} as StartTemplateActivityOptions);
-```
-
-### `updateTemplateActivity`
-
-Replace part or all of the stored activity definition/state.
-
-```typescript
-import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
-
-await CapgoWidgetKit.updateTemplateActivity({} as UpdateTemplateActivityOptions);
-```
-
-### `endTemplateActivity`
-
-End a running activity while optionally persisting one last state snapshot.
-
-```typescript
-import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
-
-await CapgoWidgetKit.endTemplateActivity({} as EndTemplateActivityOptions);
-```
-
-### `performTemplateAction`
-
-Execute one declarative action and record the resulting event.
-
-```typescript
-import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
-
-await CapgoWidgetKit.performTemplateAction({} as PerformTemplateActionOptions);
-```
-
-### `getTemplateActivity`
-
-Read one activity back from the shared store.
-
-```typescript
-import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
-
-await CapgoWidgetKit.getTemplateActivity({} as GetTemplateActivityOptions);
-```
-
-### `listTemplateActivities`
-
-List every activity currently known by the plugin.
-
-```typescript
-import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
-
-await CapgoWidgetKit.listTemplateActivities();
-```
-
-### `listTemplateEvents`
-
-List stored action events so the app can react to widget interactions later.
-
-```typescript
-import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
-
-await CapgoWidgetKit.listTemplateEvents();
-```
-
-### `acknowledgeTemplateEvents`
-
-Mark previously processed events as acknowledged.
-
-```typescript
-import { CapgoWidgetKit } from '@capgo/capacitor-widget-kit';
-
-await CapgoWidgetKit.acknowledgeTemplateEvents({} as AcknowledgeTemplateEventsOptions);
-```
-
-## Type Reference
-
-### `ActivitiesSupportedResult`
-Result of a Live Activities capability check.
-```typescript
-export interface ActivitiesSupportedResult {
-  /**
-   * Whether the current device and runtime can run the native template activity bridge.
-   */
-  supported: boolean;
-
-  /**
-   * Human-readable reason when support is unavailable.
-   */
-  reason?: string;
+if (!supported) {
+  console.log('WidgetKit bridge unavailable:', reason);
 }
 ```
 
-### `StartTemplateActivityOptions`
-Options for starting a generic SVG template activity.
+## Option 1: SVG Template Activity
+
+Use this mode when the widget can render resolved SVG. The plugin stores state, resolves placeholders, applies tap actions, switches SVG frames, and keeps timer state consistent.
+
 ```typescript
-export interface StartTemplateActivityOptions {
-  /**
-   * Optional explicit activity identifier. When omitted, the native runtime creates one.
-   */
-  activityId?: string;
-
-  /**
-   * Generic SVG template definition.
-   */
-  definition: SvgTemplateDefinition;
-
-  /**
-   * Initial JSON state exposed under `state.*`.
-   */
-  state: SvgTemplateState;
-
-  /**
-   * Optional deep link used when the widget body is tapped.
-   */
-  openUrl?: string;
-}
+const { activity } = await CapgoWidgetKit.startTemplateActivity({
+  activityId: 'workout-session-1',
+  openUrl: 'myapp://workout/session-1',
+  state: {
+    title: 'Chest Day',
+    frame: 'summary',
+    restDurationMs: 90000,
+  },
+  definition: {
+    id: 'workout-card',
+    timers: [
+      {
+        id: 'rest',
+        durationPath: 'state.restDurationMs',
+      },
+    ],
+    actions: [
+      {
+        id: 'next-frame',
+        eventName: 'widget.frame.changed',
+        frameMutations: [
+          {
+            op: 'next',
+            path: 'frame',
+            surface: 'lockScreen',
+          },
+        ],
+      },
+      {
+        id: 'toggle-rest',
+        eventName: 'widget.timer.toggled',
+        timerMutations: [
+          {
+            op: 'toggle',
+            timerId: 'rest',
+          },
+        ],
+      },
+    ],
+    layouts: {
+      lockScreen: {
+        width: 100,
+        height: 40,
+        frameIdPath: 'state.frame',
+        frames: [
+          {
+            id: 'summary',
+            hotspots: [{ id: 'switch', actionId: 'next-frame', x: 0, y: 0, width: 100, height: 40 }],
+            svg: `<svg viewBox="0 0 100 40"><text x="6" y="22">{{state.title}}</text></svg>`,
+          },
+          {
+            id: 'timer',
+            hotspots: [{ id: 'pause-play', actionId: 'toggle-rest', x: 0, y: 0, width: 100, height: 40 }],
+            svg: `<svg viewBox="0 0 100 40"><text x="6" y="22">{{timers.rest.remainingText}}</text></svg>`,
+          },
+        ],
+      },
+    },
+  },
+});
 ```
 
-### `StartTemplateActivityResult`
-Result when starting a generic template activity.
+### Run Actions From The App
+
+Native widgets can trigger the same actions through their hotspot/action wiring. The app can also run them directly:
+
 ```typescript
-export interface StartTemplateActivityResult {
-  /**
-   * Stored activity snapshot.
-   */
-  activity: SvgTemplateActivityRecord;
-}
+await CapgoWidgetKit.performTemplateAction({
+  activityId: activity.activityId,
+  actionId: 'toggle-rest',
+  sourceId: 'app-pause-play-button',
+});
 ```
 
-### `UpdateTemplateActivityOptions`
-Options for updating an existing template activity.
+### Process Widget Events
+
+Actions emit events so the app can process widget interactions after launch or resume:
+
 ```typescript
-export interface UpdateTemplateActivityOptions {
-  /**
-   * Activity identifier returned by `startTemplateActivity`.
-   */
-  activityId: string;
+const { events } = await CapgoWidgetKit.listTemplateEvents({
+  activityId: activity.activityId,
+  unacknowledgedOnly: true,
+});
 
-  /**
-   * Optional replacement definition.
-   */
-  definition?: SvgTemplateDefinition;
-
-  /**
-   * Optional replacement state.
-   */
-  state?: SvgTemplateState;
-
-  /**
-   * Optional replacement deep link.
-   */
-  openUrl?: string;
+for (const event of events) {
+  console.log('Widget event:', event.eventName, event.state, event.timers);
 }
+
+await CapgoWidgetKit.acknowledgeTemplateEvents({
+  activityId: activity.activityId,
+});
 ```
 
-### `TemplateActivityResult`
-Result when reading or updating a single activity.
+### Update Or End The Activity
+
 ```typescript
-export interface TemplateActivityResult {
-  /**
-   * Stored activity snapshot, or `null` when not found.
-   */
-  activity: SvgTemplateActivityRecord | null;
-}
+await CapgoWidgetKit.updateTemplateActivity({
+  activityId: activity.activityId,
+  state: {
+    title: 'Back Day',
+    frame: 'summary',
+    restDurationMs: 120000,
+  },
+});
+
+await CapgoWidgetKit.endTemplateActivity({
+  activityId: activity.activityId,
+  state: { title: 'Workout complete', frame: 'summary' },
+});
 ```
 
-### `EndTemplateActivityOptions`
-Options for ending a template activity.
-```typescript
-export interface EndTemplateActivityOptions {
-  /**
-   * Activity identifier returned by `startTemplateActivity`.
-   */
-  activityId: string;
+## Frame Mutations
 
-  /**
-   * Optional final state persisted before ending.
-   */
-  state?: SvgTemplateState;
-}
+Frame mutations write the active frame id into state. A layout can then read it with `frameIdPath`.
+
+| Operation | Behavior |
+| --- | --- |
+| `set` | Set a specific frame id. Plain strings are treated as literal frame ids; `{{...}}` templates are resolved first. |
+| `next` | Move to the next frame from `frameIds` or the frames declared on `surface`. |
+| `previous` | Move to the previous frame. |
+| `toggle` | Toggle between the first two available frames, or between the current frame and `frameId`. |
+
+Invalid frame ids are ignored when the mutation has a known selectable frame list, so state stays aligned with the rendered surface.
+
+## Timer Mutations
+
+Timer mutations target a named timer from `definition.timers`.
+
+| Operation | Behavior |
+| --- | --- |
+| `start` / `restart` | Start from zero using the current duration. |
+| `pause` | Store elapsed time and clear `startedAt`. |
+| `resume` | Resume only paused timers. Stopped timers stay stopped until an explicit start or restart. |
+| `toggle` | Pause a running timer or resume a paused timer. |
+| `reset` | Clear elapsed time and return to idle. |
+| `stop` | Clear runtime progress and mark the timer stopped. |
+| `setDuration` | Recompute status after a duration change. |
+
+Timer bindings are available to SVG as `{{timers.<id>.remainingText}}`, `{{timers.<id>.elapsedMs}}`, `{{timers.<id>.status}}`, and related fields.
+
+## Option 2: Full-Native Widget Session
+
+Use this mode when the widget UI is built in native code. The plugin gives the app and widget a shared session record and a message queue.
+
+```typescript
+const { session } = await CapgoWidgetKit.startWidgetSession({
+  widgetId: 'native-session-1',
+  kind: 'workout-controls',
+  state: { isRunning: true, selectedSetId: 'set-1' },
+  metadata: { accent: '#00d69c' },
+});
+
+await CapgoWidgetKit.updateWidgetSession({
+  widgetId: session.widgetId,
+  merge: true,
+  state: { isRunning: false },
+});
+
+const { sessions } = await CapgoWidgetKit.listWidgetSessions();
+console.log('Known widget sessions:', sessions);
 ```
 
-### `PerformTemplateActionOptions`
-Options for executing a declarative action.
+## Async Widget Messages
+
+Messages cover work that needs a later response, such as a widget asking the app to sync data.
+
 ```typescript
-export interface PerformTemplateActionOptions {
-  /**
-   * Activity identifier returned by `startTemplateActivity`.
-   */
-  activityId: string;
+const { message } = await CapgoWidgetKit.sendWidgetMessage({
+  widgetId: session.widgetId,
+  direction: 'widgetToApp',
+  name: 'syncWorkoutSet',
+  payload: { setId: 'set-1' },
+  expectsResponse: true,
+});
 
-  /**
-   * Action identifier declared in the template definition.
-   */
-  actionId: string;
+await CapgoWidgetKit.acknowledgeWidgetMessages({
+  messageIds: [message.messageId],
+});
 
-  /**
-   * Optional source identifier, typically the hotspot id that triggered the action.
-   */
-  sourceId?: string;
-
-  /**
-   * Optional payload stored with the emitted event and exposed to declarative patches under `{{action.payload.*}}`.
-   */
-  payload?: JsonObject;
-}
+await CapgoWidgetKit.completeWidgetMessage({
+  messageId: message.messageId,
+  response: { synced: true },
+});
 ```
 
-### `PerformTemplateActionResult`
-Result after executing an action.
-```typescript
-export interface PerformTemplateActionResult {
-  /**
-   * Updated activity snapshot.
-   */
-  activity: SvgTemplateActivityRecord;
+To fail the job, pass `error` instead of `response`:
 
-  /**
-   * Action event emitted by the runtime.
-   */
-  event: SvgTemplateActionEvent;
-}
+```typescript
+await CapgoWidgetKit.completeWidgetMessage({
+  messageId: message.messageId,
+  error: 'Network unavailable',
+});
 ```
 
-### `GetTemplateActivityOptions`
-Options for reading one stored activity.
+`completeWidgetMessage` is idempotent. If the message is already completed or failed, repeated calls return the existing message snapshot.
+
+## Stop A Native Session
+
 ```typescript
-export interface GetTemplateActivityOptions {
-  /**
-   * Activity identifier to load.
-   */
-  activityId: string;
-}
+await CapgoWidgetKit.stopWidgetSession({
+  widgetId: session.widgetId,
+  state: { isRunning: false },
+});
 ```
 
-### `ListTemplateActivitiesResult`
-Result when listing stored activities.
-```typescript
-export interface ListTemplateActivitiesResult {
-  /**
-   * Stored activity snapshots.
-   */
-  activities: SvgTemplateActivityRecord[];
-}
-```
+## API Groups
 
-### `ListTemplateEventsOptions`
-Options when listing action events.
-```typescript
-export interface ListTemplateEventsOptions {
-  /**
-   * Optional activity filter.
-   */
-  activityId?: string;
-
-  /**
-   * When true, only unacknowledged events are returned.
-   */
-  unacknowledgedOnly?: boolean;
-}
-```
-
-### `ListTemplateEventsResult`
-Result when listing action events.
-```typescript
-export interface ListTemplateEventsResult {
-  /**
-   * Matching action events.
-   */
-  events: SvgTemplateActionEvent[];
-}
-```
+| Group | APIs |
+| --- | --- |
+| Capability | `areActivitiesSupported`, `getPluginVersion` |
+| SVG activity lifecycle | `startTemplateActivity`, `updateTemplateActivity`, `endTemplateActivity`, `getTemplateActivity`, `listTemplateActivities` |
+| SVG actions and events | `performTemplateAction`, `listTemplateEvents`, `acknowledgeTemplateEvents` |
+| Native widget sessions | `startWidgetSession`, `updateWidgetSession`, `stopWidgetSession`, `getWidgetSession`, `listWidgetSessions` |
+| Native widget messages | `sendWidgetMessage`, `listWidgetMessages`, `acknowledgeWidgetMessages`, `completeWidgetMessage` |
 
 ## Source Of Truth
 
-This page is generated from the plugin's `src/definitions.ts`. Re-run the sync when the public API changes upstream.
+The full type reference lives in the plugin repository at [`src/definitions.ts`](https://github.com/Cap-go/capacitor-widget-kit/blob/main/src/definitions.ts).
