@@ -1,20 +1,53 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import m from '@/copy/messages'
+import m, { type MessageValues } from '@/copy/messages'
+import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
+import type { Database } from '@/services/supabase.types'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
+
+type Plan = Database['public']['Tables']['plans']['Row']
+
+type Credit = {
+  id: number
+  step_min: number
+  step_max: number
+  price_per_unit: number
+  type: string
+  unit_factor: number
+}
 
 const locale = Astro.locals.locale
 const brand = Astro.locals.runtimeConfig.public.brand
+const config = Astro.locals.runtimeConfig
 
-const title = `${brand} | ${m.native_build({}, { locale })}`
-const description = m.native_build_description({}, { locale })
+function copy(key: string, values: MessageValues = {}) {
+  return m[key](values, { locale })
+}
+
+const builderTitle = copy('native_build_builder_title')
+const title = `${brand} | ${builderTitle}`
+const description = copy('native_build_builder_description')
+
+let plansAll: Plan[] = []
+let credits: Credit[] = []
+
+try {
+  const [plansResponse, creditsResponse] = await Promise.all([fetch(`${config.public.baseApiUrl}/private/plans`), fetch(`${config.public.baseApiUrl}/private/credits`)])
+
+  plansAll = plansResponse.ok ? await plansResponse.json() : []
+  credits = creditsResponse.ok ? await creditsResponse.json() : []
+} catch (error) {
+  console.warn('Unable to load Capgo Builder pricing data', error)
+}
+
+const plans = plansAll.filter((plan) => plan.name !== 'Free')
+const buildCredits = credits.filter((credit) => credit.type === 'build_time').sort((a, b) => a.step_min - b.step_min)
 
 const serviceLdJson = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: title,
-  description: description,
+  description,
   url: Astro.url.href,
-  serviceType: 'Software Development Service',
+  serviceType: 'Cloud native mobile app build service',
   areaServed: ['Worldwide'],
 })
 
@@ -27,598 +60,615 @@ const content = {
   description,
   ldJSON,
 }
+
+const heroStats = [
+  { value: copy('native_build_builder_stat_command_value'), label: copy('native_build_builder_stat_command_label') },
+  { value: copy('native_build_builder_stat_credentials_value'), label: copy('native_build_builder_stat_credentials_label') },
+  { value: copy('native_build_builder_stat_platforms_value'), label: copy('native_build_builder_stat_platforms_label') },
+  { value: copy('native_build_builder_stat_stores_value'), label: copy('native_build_builder_stat_stores_label') },
+]
+
+const builderFeatures = [
+  {
+    title: copy('native_build_builder_feature_no_setup_title'),
+    text: copy('native_build_builder_feature_no_setup_text'),
+    accent: 'text-emerald-300',
+  },
+  {
+    title: copy('native_build_builder_feature_signing_title'),
+    text: copy('native_build_builder_feature_signing_text'),
+    accent: 'text-cyan-300',
+  },
+  {
+    title: copy('native_build_builder_feature_stores_title'),
+    text: copy('native_build_builder_feature_stores_text'),
+    accent: 'text-amber-300',
+  },
+  {
+    title: copy('native_build_builder_feature_ci_title'),
+    text: copy('native_build_builder_feature_ci_text'),
+    accent: 'text-sky-300',
+  },
+  {
+    title: copy('native_build_builder_feature_logs_title'),
+    text: copy('native_build_builder_feature_logs_text'),
+    accent: 'text-fuchsia-300',
+  },
+  {
+    title: copy('native_build_builder_feature_artifacts_title'),
+    text: copy('native_build_builder_feature_artifacts_text'),
+    accent: 'text-violet-300',
+  },
+]
+
+const setupSteps = [
+  copy('native_build_builder_setup_step_install'),
+  copy('native_build_builder_setup_step_app'),
+  copy('native_build_builder_setup_step_signing'),
+  copy('native_build_builder_setup_step_logs'),
+]
+
+const securityFeatures = [
+  {
+    title: copy('native_build_builder_security_credentials_title'),
+    text: copy('native_build_builder_security_credentials_text'),
+  },
+  {
+    title: copy('native_build_builder_security_upload_title'),
+    text: copy('native_build_builder_security_upload_text'),
+  },
+  {
+    title: copy('native_build_builder_security_ephemeral_title'),
+    text: copy('native_build_builder_security_ephemeral_text'),
+  },
+  {
+    title: copy('native_build_builder_security_logs_title'),
+    text: copy('native_build_builder_security_logs_text'),
+  },
+]
+
+const comparisons = [
+  {
+    feature: copy('native_build_builder_compare_setup_feature'),
+    capgo: copy('native_build_builder_compare_setup_capgo'),
+    local: copy('native_build_builder_compare_setup_local'),
+    ci: copy('native_build_builder_compare_setup_ci'),
+  },
+  {
+    feature: copy('native_build_builder_compare_ios_feature'),
+    capgo: copy('native_build_builder_compare_ios_capgo'),
+    local: copy('native_build_builder_compare_ios_local'),
+    ci: copy('native_build_builder_compare_ios_ci'),
+  },
+  {
+    feature: copy('native_build_builder_compare_credentials_feature'),
+    capgo: copy('native_build_builder_compare_credentials_capgo'),
+    local: copy('native_build_builder_compare_credentials_local'),
+    ci: copy('native_build_builder_compare_credentials_ci'),
+  },
+  {
+    feature: copy('native_build_builder_compare_delivery_feature'),
+    capgo: copy('native_build_builder_compare_delivery_capgo'),
+    local: copy('native_build_builder_compare_delivery_local'),
+    ci: copy('native_build_builder_compare_delivery_ci'),
+  },
+  {
+    feature: copy('native_build_builder_compare_fit_feature'),
+    capgo: copy('native_build_builder_compare_fit_capgo'),
+    local: copy('native_build_builder_compare_fit_local'),
+    ci: copy('native_build_builder_compare_fit_ci'),
+  },
+]
+
+const faqs = [
+  {
+    question: copy('native_build_builder_faq_live_updates_q'),
+    answer: copy('native_build_builder_faq_live_updates_a'),
+  },
+  {
+    question: copy('native_build_builder_faq_repo_q'),
+    answer: copy('native_build_builder_faq_repo_a'),
+  },
+  {
+    question: copy('native_build_builder_faq_signing_q'),
+    answer: copy('native_build_builder_faq_signing_a'),
+  },
+  {
+    question: copy('native_build_builder_faq_pricing_q'),
+    answer: copy('native_build_builder_faq_pricing_a'),
+  },
+  {
+    question: copy('native_build_builder_faq_platforms_q'),
+    answer: copy('native_build_builder_faq_platforms_a'),
+  },
+]
+
+function annualMonthlyPrice(plan: Plan) {
+  const price = Math.round(plan.price_y / 12)
+  return plan.name === 'Enterprise' ? `$${price}+` : `$${price}`
+}
+
+function monthlyPrice(plan: Plan) {
+  return copy('native_build_builder_month_to_month', { price: `$${plan.price_m}`, suffix: plan.name === 'Enterprise' ? '+' : '' })
+}
+
+function yearlyBilling(plan: Plan) {
+  const amount = `$${formatNumber(plan.price_y)}`
+  return plan.name === 'Enterprise' ? copy('native_build_builder_yearly_billing_enterprise', { amount }) : copy('native_build_builder_yearly_billing', { amount })
+}
+
+function planDescription(plan: Plan) {
+  if (plan.name === 'Solo') return copy('plan_solo_desc')
+  if (plan.name === 'Maker') return copy('plan_maker_desc')
+  if (plan.name === 'Team') return copy('plan_team_desc')
+  if (plan.name === 'Enterprise') return copy('plan_payasyougo_desc')
+  return plan.market_desc ?? plan.description ?? ''
+}
+
+function formatNumber(value: number) {
+  return new Intl.NumberFormat(locale).format(value)
+}
+
+function buildTimeDisplay(buildTimeSeconds: number, name?: string) {
+  if (!buildTimeSeconds) return copy('native_build_builder_build_minutes_zero')
+
+  const buildTimeHours = Math.floor(buildTimeSeconds / 3600)
+  const buildTimeMinutes = Math.floor(buildTimeSeconds / 60)
+  const suffix = name === 'Enterprise' ? '+' : ''
+
+  if (buildTimeHours >= 1) {
+    return copy(buildTimeHours === 1 ? 'native_build_builder_build_hour' : 'native_build_builder_build_hours', { count: buildTimeHours, suffix })
+  }
+
+  return copy('native_build_builder_build_minutes', { count: buildTimeMinutes, suffix })
+}
+
+function compactNumber(value: number) {
+  if (value >= 1000) return `${formatNumber(value / 1000).replace(/\.0$/, '')}k`
+  return formatNumber(value)
+}
+
+function creditStepLabel(credit: Credit, index: number, total: number) {
+  const normalizedMin = credit.step_min / credit.unit_factor
+  const normalizedMax = credit.step_max / credit.unit_factor
+
+  if (index === 0) return copy('native_build_builder_credit_first', { count: compactNumber(normalizedMax) })
+  if (index === total - 1) return copy('native_build_builder_credit_over', { count: compactNumber(normalizedMin) })
+
+  return copy('native_build_builder_credit_next', { count: compactNumber(normalizedMax - normalizedMin) })
+}
+
+function creditPrice(credit: Credit) {
+  return copy('native_build_builder_credit_price', { price: `$${parseFloat(credit.price_per_unit.toFixed(4))}` })
+}
 ---
 
 <Layout content={content}>
-  <div>
-    <div class="relative">
-      <!-- Animated background elements -->
-      <div class="pointer-events-none absolute inset-0 overflow-hidden">
-        {
-          Array.from({ length: 12 }).map(() => (
-            <div
-              class="absolute h-2 w-2 animate-pulse rounded-full bg-emerald-500 opacity-20"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${2 + Math.random() * 2}s`,
-              }}
-            />
-          ))
-        }
+  <main class="bg-[#070d18] text-white">
+    <section class="relative overflow-hidden border-b border-white/10">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(34,197,94,0.18),transparent_34%),linear-gradient(180deg,rgba(8,18,34,0.4),rgba(7,13,24,1))]"></div>
+      <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
+        <div class="mx-auto max-w-3xl text-center">
+          <p class="inline-flex items-center rounded-full border border-amber-300/40 bg-amber-300/10 px-4 py-2 text-xs font-semibold text-amber-100 uppercase">
+            {copy('native_build_builder_badge')}
+          </p>
+          <h1 class="mt-6 text-5xl leading-tight font-black text-white sm:text-6xl lg:text-7xl">{builderTitle}</h1>
+          <p class="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">
+            {copy('native_build_builder_hero_subtitle')}
+          </p>
+          <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a
+              href={getRelativeLocaleUrl(locale, 'register')}
+              class="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-950/40 transition hover:bg-blue-500 focus:ring-2 focus:ring-blue-300 focus:outline-none"
+            >
+              {copy('native_build_builder_start_trial')}
+            </a>
+            <a
+              href={getRelativeLocaleUrl(locale, 'docs/cli/cloud-build/getting-started')}
+              class="inline-flex min-h-11 items-center justify-center rounded-lg border border-white/15 bg-white/5 px-6 py-3 text-sm font-bold text-white transition hover:border-white/30 hover:bg-white/10 focus:ring-2 focus:ring-white/30 focus:outline-none"
+            >
+              {copy('native_build_builder_view_docs')}
+            </a>
+          </div>
+          <p class="mt-4 text-xs text-slate-400">{copy('native_build_builder_no_credit_card_trial')}</p>
+        </div>
+
+        <div class="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {
+            heroStats.map((item) => (
+              <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4 text-center">
+                <p class="text-sm font-bold text-white">{item.value}</p>
+                <p class="mt-1 text-xs text-slate-400">{item.label}</p>
+              </div>
+            ))
+          }
+        </div>
       </div>
+    </section>
 
-      <!-- Hero Section -->
-      <section class="relative py-12 sm:py-16 lg:pt-20 xl:pb-0">
-        <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div class="relative z-10 mx-auto max-w-4xl text-center">
-            <p class="font-pj inline-flex rounded-full border border-emerald-400/40 bg-emerald-500/10 px-4 py-2 text-base text-emerald-100">
-              <svg class="mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
-                ></path>
-              </svg>
-              {m.build_from_anywhere({}, { locale })}
-            </p>
-            <h1 class="font-pj mt-5 text-3xl leading-tight font-bold text-white sm:text-4xl sm:leading-tight lg:leading-tight xl:text-5xl">
-              {m.native_build_hero_title({}, { locale })}
-            </h1>
-            <h2 class="font-inter mx-auto mt-6 max-w-2xl text-base leading-7 text-gray-300">
-              {m.native_build_hero_subtitle({}, { locale })}
-            </h2>
+    <section class="border-b border-white/10 bg-[#081322] py-20 sm:py-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center">
+          <p class="text-xs font-bold tracking-[0.24em] text-emerald-300 uppercase">{copy('native_build_builder_one_command_eyebrow')}</p>
+          <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_one_command_title')}</h2>
+          <p class="mt-4 text-base leading-7 text-slate-300">
+            {copy('native_build_builder_one_command_text')}
+          </p>
+        </div>
 
-            <!-- CTA buttons -->
-            <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <a
-                href={getRelativeLocaleUrl(locale, 'register')}
-                class="rounded-xl bg-emerald-600 px-8 py-3 text-base font-semibold text-white transition-all duration-200 hover:bg-emerald-700 focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:outline-none"
-              >
-                {m.native_build_get_started({}, { locale })}
-              </a>
-              <a
-                href={getRelativeLocaleUrl(locale, 'docs/cli/cloud-build/getting-started')}
-                class="rounded-xl border border-gray-600 px-8 py-3 text-base font-semibold text-gray-300 transition-all duration-200 hover:bg-gray-800 hover:text-white"
-              >
-                {m.native_build_view_docs({}, { locale })}
-              </a>
+        <div class="mx-auto mt-12 max-w-4xl overflow-hidden rounded-lg border border-white/10 bg-[#050911] shadow-2xl shadow-blue-950/30">
+          <div class="flex items-center justify-between border-b border-white/10 bg-black/30 px-4 py-3">
+            <div class="flex items-center gap-2">
+              <span class="h-2.5 w-2.5 rounded-full bg-red-400"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-amber-300"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
+            </div>
+            <div class="text-xs text-slate-500">{copy('native_build_builder_terminal_file')}</div>
+          </div>
+          <div class="terminal-animation overflow-x-auto p-5 font-mono text-sm leading-7 text-slate-300 sm:p-8" aria-label={copy('native_build_builder_terminal_aria')}>
+            <div class="terminal-line text-slate-500" style="--delay: 0ms">{copy('native_build_builder_terminal_comment')}</div>
+            <div class="terminal-line min-w-max" style="--delay: 450ms">
+              <span class="text-emerald-300">bunx</span> @capgo/cli build <span class="text-cyan-300">com.example.app</span> \
+            </div>
+            <div class="terminal-line pl-4 text-sky-300" style="--delay: 900ms">--platform <span class="text-slate-300">ios</span> \</div>
+            <div class="terminal-line pl-4 text-sky-300" style="--delay: 1350ms">--build-mode <span class="text-slate-300">release</span> \</div>
+            <div class="terminal-line pl-4 text-sky-300" style="--delay: 1800ms">--submit</div>
+            <div class="terminal-line h-4" style="--delay: 2250ms"></div>
+            <div class="terminal-line" style="--delay: 2700ms"><span class="text-emerald-300">ok</span> {copy('native_build_builder_terminal_create')}</div>
+            <div class="terminal-line" style="--delay: 3300ms"><span class="text-emerald-300">ok</span> {copy('native_build_builder_terminal_upload')}</div>
+            <div class="terminal-line" style="--delay: 3900ms"><span class="text-amber-300">run</span> {copy('native_build_builder_terminal_install')}</div>
+            <div class="terminal-line" style="--delay: 4500ms"><span class="text-amber-300">run</span> {copy('native_build_builder_terminal_build')}</div>
+            <div class="terminal-line" style="--delay: 5100ms"><span class="text-amber-300">run</span> {copy('native_build_builder_terminal_sign')}</div>
+            <div class="terminal-line" style="--delay: 5700ms"><span class="text-emerald-300">ok</span> {copy('native_build_builder_terminal_succeeded')}</div>
+            <div class="terminal-line" style="--delay: 6300ms">
+              <span class="text-emerald-300">ok</span>
+              {copy('native_build_builder_terminal_submitted')}<span class="terminal-cursor ml-1"></span>
+            </div>
+            <div class="mt-6 h-1 overflow-hidden rounded-full bg-white/10" aria-hidden="true">
+              <div class="terminal-progress h-full rounded-full bg-linear-to-r from-emerald-300 via-cyan-300 to-blue-400"></div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Features Grid Section -->
-      <section class="bg-gray-900 py-12 sm:py-16 lg:py-20">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div class="mb-12 text-center">
-            <h2 class="text-3xl leading-tight font-bold text-white sm:text-4xl">
-              {m.native_build_features_title({}, { locale })}
-            </h2>
-            <p class="mt-4 text-lg text-gray-300">
-              {m.native_build_features_subtitle({}, { locale })}
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <!-- Cloud Builds -->
-            <div class="rounded-2xl border border-gray-700 bg-gray-800 p-6 transition-all duration-300 hover:border-emerald-500/50 hover:bg-gray-800/90">
-              <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/15 ring-1 ring-emerald-300/40">
-                <svg class="h-6 w-6 text-emerald-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
-                  ></path>
-                </svg>
-              </div>
-              <h3 class="mb-2 text-xl font-bold text-emerald-100">{m.native_build_feature_cloud_builds({}, { locale })}</h3>
-              <p class="text-sm text-gray-300">
-                {m.native_build_feature_cloud_builds_desc({}, { locale })}
-              </p>
-            </div>
-
-            <!-- Automated Signing -->
-            <div class="rounded-2xl border border-gray-700 bg-gray-800 p-6 transition-all duration-300 hover:border-emerald-500/50 hover:bg-gray-800/90">
-              <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/15 ring-1 ring-emerald-300/40">
-                <svg class="h-6 w-6 text-emerald-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
-                </svg>
-              </div>
-              <h3 class="mb-2 text-xl font-bold text-emerald-100">{m.native_build_feature_auto_signing({}, { locale })}</h3>
-              <p class="text-sm text-gray-300">
-                {m.native_build_feature_auto_signing_desc({}, { locale })}
-              </p>
-            </div>
-
-            <!-- App Store Upload -->
-            <div class="rounded-2xl border border-gray-700 bg-gray-800 p-6 transition-all duration-300 hover:border-emerald-500/50 hover:bg-gray-800/90">
-              <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/15 ring-1 ring-emerald-300/40">
-                <svg class="h-6 w-6 text-emerald-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                  ></path>
-                </svg>
-              </div>
-              <h3 class="mb-2 text-xl font-bold text-emerald-100">{m.native_build_feature_store_upload({}, { locale })}</h3>
-              <p class="text-sm text-gray-300">
-                {m.native_build_feature_store_upload_desc({}, { locale })}
-              </p>
-            </div>
-
-            <!-- CI/CD Integration -->
-            <div class="rounded-2xl border border-gray-700 bg-gray-800 p-6 transition-all duration-300 hover:border-emerald-500/50 hover:bg-gray-800/90">
-              <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/15 ring-1 ring-emerald-300/40">
-                <svg class="h-6 w-6 text-emerald-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                </svg>
-              </div>
-              <h3 class="mb-2 text-xl font-bold text-emerald-100">{m.native_build_feature_ci_cd({}, { locale })}</h3>
-              <p class="text-sm text-gray-300">
-                {m.native_build_feature_ci_cd_desc({}, { locale })}
-              </p>
-            </div>
-
-            <!-- Secure Credentials -->
-            <div class="rounded-2xl border border-gray-700 bg-gray-800 p-6 transition-all duration-300 hover:border-emerald-500/50 hover:bg-gray-800/90">
-              <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/15 ring-1 ring-emerald-300/40">
-                <svg class="h-6 w-6 text-emerald-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                </svg>
-              </div>
-              <h3 class="mb-2 text-xl font-bold text-emerald-100">{m.native_build_feature_credentials({}, { locale })}</h3>
-              <p class="text-sm text-gray-300">
-                {m.native_build_feature_credentials_desc({}, { locale })}
-              </p>
-            </div>
-
-            <!-- Real-time Logs -->
-            <div class="rounded-2xl border border-gray-700 bg-gray-800 p-6 transition-all duration-300 hover:border-emerald-500/50 hover:bg-gray-800/90">
-              <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/15 ring-1 ring-emerald-300/40">
-                <svg class="h-6 w-6 text-emerald-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                </svg>
-              </div>
-              <h3 class="mb-2 text-xl font-bold text-emerald-100">{m.native_build_feature_logs({}, { locale })}</h3>
-              <p class="text-sm text-gray-300">
-                {m.native_build_feature_logs_desc({}, { locale })}
-              </p>
-            </div>
-          </div>
+    <section class="border-b border-white/10 py-20 sm:py-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-xs font-bold tracking-[0.24em] text-slate-500 uppercase">{copy('native_build_builder_features_eyebrow')}</p>
+          <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_features_title')}</h2>
+          <p class="mt-4 text-base leading-7 text-slate-300">{copy('native_build_builder_features_text')}</p>
         </div>
-      </section>
-    </div>
 
-    <!-- CLI Command Section -->
-    <section class="bg-gray-800 py-16 sm:py-20 lg:py-28">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+        <div class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {
+            builderFeatures.map((feature) => (
+              <article class="rounded-lg border border-white/10 bg-white/[0.04] p-6 transition hover:border-white/20 hover:bg-white/[0.06]">
+                <div class:list={['mb-4 flex h-10 w-10 items-center justify-center rounded-lg border border-current/30 bg-current/10', feature.accent]}>
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M5 12.5 9.5 17 19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+                <h3 class="text-lg font-bold text-white">{feature.title}</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-400">{feature.text}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b border-white/10 bg-[#081322] py-20 sm:py-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
-            <h2 class="text-3xl leading-tight font-bold text-white sm:text-4xl">
-              {m.native_build_cli_title({}, { locale })}
+            <p class="text-xs font-bold tracking-[0.24em] text-emerald-300 uppercase">{copy('native_build_builder_setup_eyebrow')}</p>
+            <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">
+              {copy('native_build_builder_setup_title_prefix')}
+              <span class="text-emerald-300 italic">{copy('native_build_builder_setup_title_time')}</span>.
             </h2>
-            <p class="mt-4 text-lg text-gray-300">
-              {m.native_build_cli_subtitle({}, { locale })}
+            <p class="mt-4 text-base leading-7 text-slate-300">
+              {copy('native_build_builder_setup_text')}
             </p>
-            <div class="mt-8">
-              <p class="text-gray-400">
-                {m.native_build_streaming_desc({}, { locale })}
-              </p>
+            <div class="mt-7 rounded-lg border border-emerald-300/20 bg-emerald-300/10 px-4 py-3 font-mono text-sm text-emerald-100">
+              bunx @capgo/cli build com.example.app --platform android
             </div>
           </div>
-          <div class="rounded-2xl border border-gray-700 bg-gray-900 p-6">
-            <div class="mb-4 flex items-center gap-2">
-              <div class="h-3 w-3 rounded-full bg-gray-600"></div>
-              <div class="h-3 w-3 rounded-full bg-gray-600"></div>
-              <div class="h-3 w-3 rounded-full bg-gray-600"></div>
-              <span class="ml-2 text-sm text-gray-500">Terminal</span>
-            </div>
-            <pre
-              class="overflow-x-auto text-sm text-gray-300"><code><span class="text-gray-500"># {m.native_build_cli_example({}, { locale })}</span>
-npx @capgo/cli build <span class="text-emerald-400">com.example.app</span> \
-  <span class="text-blue-400">--platform</span> ios \
-  <span class="text-blue-400">--build-mode</span> release
 
-<span class="text-emerald-400">✔</span> Creating build job...
-<span class="text-emerald-400">✔</span> Uploading project (15.2 MB)...
-<span class="text-emerald-400">✔</span> Build started
-
-<span class="text-gray-500"># Real-time logs stream to your terminal</span>
-<span class="text-yellow-400">→</span> Running pod install...
-<span class="text-yellow-400">→</span> Building with Xcode...
-<span class="text-yellow-400">→</span> Signing IPA...
-<span class="text-emerald-400">✔</span> Build succeeded in 7m 23s
-<span class="text-emerald-400">✔</span> Submitted to App Store Connect</code></pre>
+          <div class="rounded-lg border border-white/10 bg-[#050911] p-5">
+            <ol class="space-y-4">
+              {
+                setupSteps.map((step, index) => (
+                  <li class="flex gap-4">
+                    <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-sm font-bold text-emerald-300">
+                      {index + 1}
+                    </span>
+                    <p class="pt-1 text-sm leading-6 text-slate-300">{step}</p>
+                  </li>
+                ))
+              }
+            </ol>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Security Section -->
-    <section class="bg-gray-900 py-16 sm:py-20 lg:py-28">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mb-12 text-center">
-          <h2 class="text-3xl leading-tight font-bold text-white sm:text-4xl">
-            {m.native_build_security_title({}, { locale })}
-          </h2>
-          <p class="mx-auto mt-4 max-w-2xl text-lg text-gray-300">
-            {m.native_build_security_subtitle({}, { locale })}
-          </p>
+    <section class="border-b border-white/10 py-20 sm:py-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-xs font-bold tracking-[0.24em] text-slate-500 uppercase">{copy('native_build_builder_security_eyebrow')}</p>
+          <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_security_title')}</h2>
+          <p class="mt-4 text-base leading-7 text-slate-300">{copy('native_build_builder_security_text')}</p>
         </div>
 
-        <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
-          <div class="rounded-2xl border border-gray-700 bg-gray-800 p-6">
-            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/15 ring-1 ring-emerald-300/40">
-              <svg class="h-6 w-6 text-emerald-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-              </svg>
-            </div>
-            <h3 class="mb-2 text-xl font-bold text-white">{m.native_build_security_feature1_title({}, { locale })}</h3>
-            <p class="text-gray-400">{m.native_build_security_feature1_desc({}, { locale })}</p>
-          </div>
-          <div class="rounded-2xl border border-gray-700 bg-gray-800 p-6">
-            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/15 ring-1 ring-emerald-300/40">
-              <svg class="h-6 w-6 text-emerald-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-            </div>
-            <h3 class="mb-2 text-xl font-bold text-white">{m.native_build_security_feature2_title({}, { locale })}</h3>
-            <p class="text-gray-400">{m.native_build_security_feature2_desc({}, { locale })}</p>
-          </div>
-          <div class="rounded-2xl border border-gray-700 bg-gray-800 p-6">
-            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/15 ring-1 ring-emerald-300/40">
-              <svg class="h-6 w-6 text-emerald-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                ></path>
-              </svg>
-            </div>
-            <h3 class="mb-2 text-xl font-bold text-white">{m.native_build_security_feature3_title({}, { locale })}</h3>
-            <p class="text-gray-400">{m.native_build_security_feature3_desc({}, { locale })}</p>
-          </div>
-          <div class="rounded-2xl border border-gray-700 bg-gray-800 p-6">
-            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/15 ring-1 ring-emerald-300/40">
-              <svg class="h-6 w-6 text-emerald-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-              </svg>
-            </div>
-            <h3 class="mb-2 text-xl font-bold text-white">{m.native_build_security_feature4_title({}, { locale })}</h3>
-            <p class="text-gray-400">{m.native_build_security_feature4_desc({}, { locale })}</p>
-          </div>
+        <div class="mt-12 grid gap-4 md:grid-cols-2">
+          {
+            securityFeatures.map((feature) => (
+              <article class="rounded-lg border border-white/10 bg-white/[0.04] p-6">
+                <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-lg border border-emerald-300/30 bg-emerald-300/10 text-emerald-300">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M7 11V8a5 5 0 0 1 10 0v3" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    <path d="M6 11h12v9H6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                  </svg>
+                </div>
+                <h3 class="text-lg font-bold text-white">{feature.title}</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-400">{feature.text}</p>
+              </article>
+            ))
+          }
         </div>
       </div>
     </section>
 
-    <!-- Pricing Transparency Section -->
-    <section class="bg-gray-800 py-16 sm:py-20 lg:py-28">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-          <div class="order-2 lg:order-1">
-            <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8">
-              <div class="mb-4 flex items-center justify-between gap-4 border-b border-gray-700 pb-4">
-                <span class="text-gray-400">Storage costs</span>
-                <span class="text-xl font-bold text-emerald-400">$0</span>
-              </div>
-              <div class="mb-4 flex items-center justify-between gap-4 border-b border-gray-700 pb-4">
-                <span class="text-gray-400">Log storage</span>
-                <span class="text-xl font-bold text-emerald-400">$0</span>
-              </div>
-              <div class="mb-4 flex items-center justify-between gap-4 border-b border-gray-700 pb-4">
-                <span class="text-gray-400">Artifact storage</span>
-                <span class="text-xl font-bold text-emerald-400">$0</span>
-              </div>
-              <div class="flex items-center justify-between gap-4">
-                <span class="font-semibold text-white">You only pay</span>
-                <span class="text-xl font-bold text-white">Build minutes</span>
-              </div>
-            </div>
-          </div>
-          <div class="order-1 lg:order-2">
-            <h2 class="text-3xl leading-tight font-bold text-white sm:text-4xl">
-              {m.native_build_pricing_title({}, { locale })}
-            </h2>
-            <p class="mt-4 text-lg text-gray-300">
-              {m.native_build_pricing_subtitle({}, { locale })}
-            </p>
-            <p class="mt-6 text-gray-400">
-              {m.native_build_pricing_desc({}, { locale })}
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- How It Works Section -->
-    <section class="bg-gray-50 py-16 sm:py-20 lg:py-28">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto mb-16 max-w-2xl text-center">
-          <h2 class="text-3xl leading-tight font-bold text-black sm:text-4xl xl:text-5xl">
-            {m.native_build_how_it_works_title({}, { locale })}
-          </h2>
-          <p class="mx-auto mt-4 max-w-lg text-base leading-relaxed text-gray-600">
-            {m.native_build_how_it_works_subtitle({}, { locale })}
-          </p>
+    <section class="border-b border-white/10 bg-[#081322] py-20 sm:py-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-xs font-bold tracking-[0.24em] text-slate-500 uppercase">{copy('native_build_builder_comparison_eyebrow')}</p>
+          <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_comparison_title')}</h2>
+          <p class="mt-4 text-base leading-7 text-slate-300">{copy('native_build_builder_comparison_text')}</p>
         </div>
 
-        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-          <!-- Step 1 -->
-          <div class="text-center">
-            <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-emerald-300/40 bg-emerald-500/15 text-xl font-bold text-emerald-600">
-              1
-            </div>
-            <h3 class="mb-2 text-xl font-bold text-gray-900">{m.native_build_step1_title({}, { locale })}</h3>
-            <p class="text-gray-600">
-              {m.native_build_step1_desc({}, { locale })}
-            </p>
-          </div>
-
-          <!-- Step 2 -->
-          <div class="text-center">
-            <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-gray-700 bg-gray-900 text-xl font-bold text-white">2</div>
-            <h3 class="mb-2 text-xl font-bold text-gray-900">{m.native_build_step2_title({}, { locale })}</h3>
-            <p class="text-gray-600">
-              {m.native_build_step2_desc({}, { locale })}
-            </p>
-          </div>
-
-          <!-- Step 3 -->
-          <div class="text-center">
-            <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-emerald-300/40 bg-emerald-500/15 text-xl font-bold text-emerald-600">
-              3
-            </div>
-            <h3 class="mb-2 text-xl font-bold text-gray-900">{m.native_build_step3_title({}, { locale })}</h3>
-            <p class="text-gray-600">
-              {m.native_build_step3_desc({}, { locale })}
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Comparison Section -->
-    <section class="bg-gray-900 py-16 sm:py-20 lg:py-28">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mb-16 text-center">
-          <h2 class="text-3xl leading-tight font-bold text-white sm:text-4xl xl:text-5xl">
-            {m.native_build_comparison_title({}, { locale })}
-          </h2>
-          <p class="mt-4 text-lg text-gray-300">
-            {m.native_build_comparison_subtitle({}, { locale })}
-          </p>
+        <div class="mt-12 space-y-4 lg:hidden">
+          {
+            comparisons.map((row) => (
+              <article class="rounded-lg border border-white/10 bg-[#050911] p-5">
+                <h3 class="text-sm font-black text-white">{row.feature}</h3>
+                <dl class="mt-4 space-y-4 text-sm">
+                  <div>
+                    <dt class="text-xs font-bold tracking-wide text-emerald-200 uppercase">{builderTitle}</dt>
+                    <dd class="mt-1 leading-6 text-emerald-100">{row.capgo}</dd>
+                  </div>
+                  <div>
+                    <dt class="text-xs font-bold tracking-wide text-slate-500 uppercase">{copy('native_build_builder_comparison_local_header')}</dt>
+                    <dd class="mt-1 leading-6 text-slate-400">{row.local}</dd>
+                  </div>
+                  <div>
+                    <dt class="text-xs font-bold tracking-wide text-slate-500 uppercase">{copy('native_build_builder_comparison_ci_header')}</dt>
+                    <dd class="mt-1 leading-6 text-slate-400">{row.ci}</dd>
+                  </div>
+                </dl>
+              </article>
+            ))
+          }
         </div>
 
-        <div class="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-gray-700 bg-gray-800">
-          <table class="w-full">
-            <thead>
-              <tr class="border-b border-gray-700">
-                <th class="px-6 py-4 text-left text-gray-300">Feature</th>
-                <th class="px-6 py-4 text-center text-white">Cloud Builds</th>
-                <th class="px-6 py-4 text-center text-gray-400">Local Builds</th>
+        <div class="mt-12 hidden overflow-x-auto rounded-lg border border-white/10 lg:block">
+          <table class="min-w-[860px] divide-y divide-white/10 bg-[#050911] text-left text-sm">
+            <thead class="bg-white/[0.04] text-xs tracking-wide text-slate-400 uppercase">
+              <tr>
+                <th class="px-5 py-4 font-bold">{copy('native_build_builder_comparison_workflow_header')}</th>
+                <th class="px-5 py-4 font-bold text-emerald-200">{builderTitle}</th>
+                <th class="px-5 py-4 font-bold">{copy('native_build_builder_comparison_local_header')}</th>
+                <th class="px-5 py-4 font-bold">{copy('native_build_builder_comparison_ci_header')}</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-gray-700">
-              <tr>
-                <td class="px-6 py-4 text-gray-300">{m.native_build_comparison_xcode({}, { locale })}</td>
-                <td class="px-6 py-4 text-center text-emerald-400">✓</td>
-                <td class="px-6 py-4 text-center text-gray-500">✗</td>
-              </tr>
-              <tr>
-                <td class="px-6 py-4 text-gray-300">{m.native_build_comparison_android({}, { locale })}</td>
-                <td class="px-6 py-4 text-center text-emerald-400">✓</td>
-                <td class="px-6 py-4 text-center text-gray-500">✗</td>
-              </tr>
-              <tr>
-                <td class="px-6 py-4 text-gray-300">{m.native_build_comparison_signing({}, { locale })}</td>
-                <td class="px-6 py-4 text-center text-emerald-400">✓</td>
-                <td class="px-6 py-4 text-center text-gray-500">✗</td>
-              </tr>
-              <tr>
-                <td class="px-6 py-4 text-gray-300">{m.native_build_comparison_parallel({}, { locale })}</td>
-                <td class="px-6 py-4 text-center text-emerald-400">✓</td>
-                <td class="px-6 py-4 text-center text-gray-500">✗</td>
-              </tr>
-              <tr>
-                <td class="px-6 py-4 text-gray-300">{m.native_build_comparison_submission({}, { locale })}</td>
-                <td class="px-6 py-4 text-center text-emerald-400">✓</td>
-                <td class="px-6 py-4 text-center text-gray-500">✗</td>
-              </tr>
+            <tbody class="divide-y divide-white/10">
+              {
+                comparisons.map((row) => (
+                  <tr>
+                    <th class="w-40 px-5 py-5 align-top font-bold text-white">{row.feature}</th>
+                    <td class="px-5 py-5 align-top text-emerald-100">{row.capgo}</td>
+                    <td class="px-5 py-5 align-top text-slate-400">{row.local}</td>
+                    <td class="px-5 py-5 align-top text-slate-400">{row.ci}</td>
+                  </tr>
+                ))
+              }
             </tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="bg-gray-800 py-16 sm:py-20 lg:py-28">
+    {
+      plans.length > 0 && (
+        <section class="border-b border-white/10 py-20 sm:py-24">
+          <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-2xl text-center">
+              <p class="text-xs font-bold tracking-[0.24em] text-slate-500 uppercase">{copy('native_build_builder_pricing_eyebrow')}</p>
+              <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_pricing_title')}</h2>
+              <p class="mt-4 text-base leading-7 text-slate-300">{copy('native_build_builder_pricing_text')}</p>
+            </div>
+
+            <div class="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {plans.map((plan) => (
+                <article
+                  class:list={[
+                    'flex rounded-lg border bg-white/[0.04] p-6',
+                    {
+                      'border-blue-400/70 shadow-lg shadow-blue-950/30': plan.name === 'Maker',
+                      'border-white/10': plan.name !== 'Maker',
+                    },
+                  ]}
+                >
+                  <div class="flex w-full flex-col">
+                    {plan.name === 'Maker' && <p class="mb-4 w-fit rounded-md bg-blue-500 px-3 py-1 text-xs font-bold text-white uppercase">{copy('most_popular')}</p>}
+                    <h3 class="text-lg font-black text-white uppercase">{plan.name}</h3>
+                    <p class="mt-2 min-h-10 text-sm leading-5 text-slate-400">{planDescription(plan)}</p>
+                    <div class="mt-6">
+                      <span class="text-4xl font-black text-white">{annualMonthlyPrice(plan)}</span>
+                      <span class="text-sm text-slate-400">/mo</span>
+                    </div>
+                    <p class="mt-2 text-xs text-slate-500">{yearlyBilling(plan)}</p>
+                    <p class="mt-1 text-xs text-slate-500">{monthlyPrice(plan)}</p>
+                    <a
+                      href={getRelativeLocaleUrl(locale, 'register')}
+                      class:list={[
+                        'mt-6 inline-flex min-h-10 items-center justify-center rounded-lg px-4 py-2 text-sm font-bold transition focus:ring-2 focus:outline-none',
+                        {
+                          'bg-blue-600 text-white hover:bg-blue-500 focus:ring-blue-300': plan.name === 'Maker',
+                          'border border-white/15 bg-white/5 text-white hover:bg-white/10 focus:ring-white/30': plan.name !== 'Maker',
+                        },
+                      ]}
+                    >
+                      {copy('native_build_builder_plan_trial')}
+                    </a>
+                    <ul class="mt-6 space-y-3 text-sm text-slate-300">
+                      <li class="flex gap-2">
+                        <span class="text-emerald-300">+</span>
+                        <span>{buildTimeDisplay(plan.build_time_unit, plan.name)}</span>
+                      </li>
+                      <li class="flex gap-2">
+                        <span class="text-emerald-300">+</span>
+                        <span>
+                          {formatNumber(plan.mau)} {copy('native_build_builder_monthly_active_users')}
+                        </span>
+                      </li>
+                      <li class="flex gap-2">
+                        <span class="text-emerald-300">+</span>
+                        <span>
+                          {formatNumber(plan.bandwidth)} {copy('native_build_builder_bandwidth_month')}
+                        </span>
+                      </li>
+                      <li class="flex gap-2">
+                        <span class="text-emerald-300">+</span>
+                        <span>
+                          {formatNumber(plan.storage)} {copy('native_build_builder_storage')}
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            {buildCredits.length > 0 && (
+              <div class="mt-6 rounded-lg border border-cyan-300/20 bg-cyan-300/10 p-4">
+                <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+                  <p class="text-sm font-bold text-cyan-100">{copy('native_build_builder_extra_minutes')}</p>
+                  <div class="flex flex-wrap gap-2">
+                    {buildCredits.map((credit, index) => (
+                      <span class="rounded-md border border-cyan-200/20 bg-black/20 px-3 py-1 text-xs text-cyan-100">
+                        {creditStepLabel(credit, index, buildCredits.length)}: {creditPrice(credit)}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+      )
+    }
+
+    <section class="border-b border-white/10 bg-[#081322] py-20 sm:py-24">
       <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <div class="mb-12 text-center">
-          <h2 class="text-3xl leading-tight font-bold text-white sm:text-4xl">
-            {m.native_build_faq_title({}, { locale })}
-          </h2>
-          <p class="mx-auto mt-4 max-w-2xl text-lg text-gray-300">
-            {m.native_build_faq_subtitle({}, { locale })}
-          </p>
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-xs font-bold tracking-[0.24em] text-slate-500 uppercase">{copy('native_build_builder_faq_eyebrow')}</p>
+          <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_faq_title')}</h2>
         </div>
 
-        <div class="space-y-4" id="faq-container">
-          <div class="overflow-hidden rounded-2xl border border-gray-700 bg-gray-900">
-            <button type="button" class="faq-toggle flex w-full items-center justify-between p-6 text-left">
-              <h3 class="text-lg font-bold text-white">{m.native_build_faq1_q({}, { locale })}</h3>
-              <svg
-                class="faq-icon h-5 w-5 text-gray-400 transition-transform duration-200"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            <div class="faq-content hidden px-6 pb-6">
-              <p class="text-gray-400">{m.native_build_faq1_a({}, { locale })}</p>
-            </div>
-          </div>
-          <div class="overflow-hidden rounded-2xl border border-gray-700 bg-gray-900">
-            <button type="button" class="faq-toggle flex w-full items-center justify-between p-6 text-left">
-              <h3 class="text-lg font-bold text-white">{m.native_build_faq2_q({}, { locale })}</h3>
-              <svg
-                class="faq-icon h-5 w-5 text-gray-400 transition-transform duration-200"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            <div class="faq-content hidden px-6 pb-6">
-              <p class="text-gray-400">{m.native_build_faq2_a({}, { locale })}</p>
-            </div>
-          </div>
-          <div class="overflow-hidden rounded-2xl border border-gray-700 bg-gray-900">
-            <button type="button" class="faq-toggle flex w-full items-center justify-between p-6 text-left">
-              <h3 class="text-lg font-bold text-white">{m.native_build_faq3_q({}, { locale })}</h3>
-              <svg
-                class="faq-icon h-5 w-5 text-gray-400 transition-transform duration-200"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            <div class="faq-content hidden px-6 pb-6">
-              <p class="text-gray-400">{m.native_build_faq3_a({}, { locale })}</p>
-            </div>
-          </div>
-          <div class="overflow-hidden rounded-2xl border border-gray-700 bg-gray-900">
-            <button type="button" class="faq-toggle flex w-full items-center justify-between p-6 text-left">
-              <h3 class="text-lg font-bold text-white">{m.native_build_faq4_q({}, { locale })}</h3>
-              <svg
-                class="faq-icon h-5 w-5 text-gray-400 transition-transform duration-200"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            <div class="faq-content hidden px-6 pb-6">
-              <p class="text-gray-400">{m.native_build_faq4_a({}, { locale })}</p>
-            </div>
-          </div>
-          <div class="overflow-hidden rounded-2xl border border-gray-700 bg-gray-900">
-            <button type="button" class="faq-toggle flex w-full items-center justify-between p-6 text-left">
-              <h3 class="text-lg font-bold text-white">{m.native_build_faq5_q({}, { locale })}</h3>
-              <svg
-                class="faq-icon h-5 w-5 text-gray-400 transition-transform duration-200"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            <div class="faq-content hidden px-6 pb-6">
-              <p class="text-gray-400">{m.native_build_faq5_a({}, { locale })}</p>
-            </div>
-          </div>
-          <div class="overflow-hidden rounded-2xl border border-gray-700 bg-gray-900">
-            <button type="button" class="faq-toggle flex w-full items-center justify-between p-6 text-left">
-              <h3 class="text-lg font-bold text-white">{m.native_build_faq6_q({}, { locale })}</h3>
-              <svg
-                class="faq-icon h-5 w-5 text-gray-400 transition-transform duration-200"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            <div class="faq-content hidden px-6 pb-6">
-              <p class="text-gray-400">{m.native_build_faq6_a({}, { locale })}</p>
-            </div>
-          </div>
+        <div class="mt-10 divide-y divide-white/10 rounded-lg border border-white/10 bg-[#050911]">
+          {
+            faqs.map((item) => (
+              <details class="group p-5">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-base font-bold text-white">
+                  {item.question}
+                  <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-white/10 text-slate-400 transition group-open:rotate-45">+</span>
+                </summary>
+                <p class="mt-4 max-w-3xl text-sm leading-6 text-slate-400">{item.answer}</p>
+              </details>
+            ))
+          }
         </div>
       </div>
     </section>
 
-    <script>
-      document.querySelectorAll('.faq-toggle').forEach((button) => {
-        button.addEventListener('click', () => {
-          const content = button.nextElementSibling
-          const icon = button.querySelector('.faq-icon')
-          content?.classList.toggle('hidden')
-          icon?.classList.toggle('rotate-180')
-        })
-      })
-    </script>
-
-    <!-- CTA Section -->
-    <div class="relative bg-gray-900 py-16 sm:py-20">
-      <div class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
-        <div class="relative overflow-hidden rounded-2xl bg-linear-to-r from-emerald-600 to-emerald-800 px-6 py-12 shadow-xl sm:px-12 sm:py-24">
-          <div aria-hidden="true" class="absolute inset-0 -mt-72 sm:-mt-32 md:mt-0">
-            <svg class="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360">
-              <path class="text-opacity-40 text-emerald-500" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"></path>
-              <path class="text-opacity-20 text-emerald-400" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"></path>
-            </svg>
-          </div>
-          <div class="relative text-center">
-            <h2 class="text-3xl tracking-tight text-white sm:text-4xl xl:text-5xl">
-              {m.native_build_cta_title({}, { locale })}
-            </h2>
-            <p class="mx-auto mt-6 max-w-3xl text-xl text-emerald-100">
-              {m.native_build_cta_subtitle({}, { locale })}
-            </p>
-
-            <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <a
-                href={getRelativeLocaleUrl(locale, 'register')}
-                class="rounded-xl bg-white px-8 py-3 text-base font-semibold text-emerald-600 transition-all duration-200 hover:bg-gray-100 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-emerald-600 focus:outline-none"
-              >
-                {m.native_build_get_started({}, { locale })}
-              </a>
-              <a
-                href={getRelativeLocaleUrl(locale, 'pricing')}
-                class="rounded-xl border border-white/30 px-8 py-3 text-base font-semibold text-white transition-all duration-200 hover:bg-white/10"
-              >
-                {m.pricing({}, { locale })}
-              </a>
-            </div>
-          </div>
+    <section class="py-20 sm:py-24">
+      <div class="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
+        <p class="text-2xl font-black text-emerald-300">{builderTitle}</p>
+        <h2 class="mt-3 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_cta_title')}</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-300">
+          {copy('native_build_builder_cta_text')}
+        </p>
+        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a
+            href={getRelativeLocaleUrl(locale, 'register')}
+            class="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-950/40 transition hover:bg-blue-500 focus:ring-2 focus:ring-blue-300 focus:outline-none"
+          >
+            {copy('native_build_builder_start_trial')}
+          </a>
+          <a
+            href={getRelativeLocaleUrl(locale, 'pricing')}
+            class="inline-flex min-h-11 items-center justify-center rounded-lg border border-white/15 bg-white/5 px-6 py-3 text-sm font-bold text-white transition hover:border-white/30 hover:bg-white/10 focus:ring-2 focus:ring-white/30 focus:outline-none"
+          >
+            {copy('native_build_builder_view_pricing')}
+          </a>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
+
+  <style>
+    .terminal-line {
+      opacity: 0;
+      transform: translateY(0.35rem);
+      animation: terminal-line-in 520ms ease forwards;
+      animation-delay: var(--delay);
+    }
+
+    .terminal-cursor {
+      display: inline-block;
+      width: 0.58ch;
+      height: 1em;
+      background: currentColor;
+      vertical-align: -0.15em;
+      animation: terminal-cursor-blink 900ms steps(1) infinite;
+    }
+
+    .terminal-progress {
+      width: 100%;
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: terminal-progress-fill 7s ease forwards;
+    }
+
+    @keyframes terminal-line-in {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes terminal-cursor-blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes terminal-progress-fill {
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .terminal-line,
+      .terminal-progress,
+      .terminal-cursor {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
 </Layout>
