@@ -33,6 +33,7 @@ const actionDefinitionRows =
 @capgo/capacitor-intercom|github.com/Cap-go|Integrate Intercom live chat, help center, and support workflows in your Capacitor app|https://github.com/Cap-go/capacitor-intercom/|Intercom
 @capgo/capacitor-appsflyer|github.com/Cap-go|Add AppsFlyer attribution, analytics, deferred deep links, and OneLink support to your Capacitor app|https://github.com/Cap-go/capacitor-appsflyer/|AppsFlyer
 @capgo/capacitor-contentsquare|github.com/Cap-go|Integrate Contentsquare mobile analytics, consent gating, screen tracking, transactions, and session replay controls in Capacitor|https://github.com/Cap-go/capacitor-contentsquare/|Contentsquare
+@capgo/capacitor-facebook-analytics|github.com/Cap-go|Meta/Facebook App Events analytics with standard events, purchase logging, currency parameters, and advertiser tracking controls|https://github.com/Cap-go/capacitor-facebook-analytics/|Facebook Analytics
 @capgo/nativegeocoder|github.com/Cap-go|Convert addresses to coordinates and coordinates to addresses using native geocoding|https://github.com/Cap-go/capacitor-nativegeocoder/|Native Geocoder
 @capgo/inappbrowser|github.com/Cap-go|Open web pages in a customizable in-app browser without leaving your application|https://github.com/Cap-go/capacitor-inappbrowser/|In App Browser
 @capgo/capacitor-mqtt|github.com/Cap-go|MQTT support for real-time messaging across iOS, Android, and Web.|https://github.com/Cap-go/capacitor-mqtt/|MQTT
@@ -162,6 +163,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-intercom': 'ChatBubbleLeft',
   '@capgo/capacitor-appsflyer': 'ChartBar',
   '@capgo/capacitor-contentsquare': 'ChartBar',
+  '@capgo/capacitor-facebook-analytics': 'ChartBar',
   '@capgo/nativegeocoder': 'MapPin',
   '@capgo/inappbrowser': 'GlobeAlt',
   '@capgo/capacitor-mqtt': 'Signal',
