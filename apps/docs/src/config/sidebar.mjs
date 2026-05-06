@@ -85,6 +85,7 @@ const pluginEntries = [
   ['File Compressor', 'file-compressor'],
   ['File Picker', 'file-picker'],
   ['Flash', 'flash'],
+  ['Facebook Analytics', 'facebook-analytics'],
   ['Firebase Analytics', 'firebase-analytics'],
   ['Firebase App', 'firebase-app'],
   ['Firebase App Check', 'firebase-app-check'],

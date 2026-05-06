@@ -122,5 +122,6 @@
   "@capgo/capacitor-brightness": 1602,
   "@capgo/capacitor-light-sensor": 508,
   "@capgo/capacitor-video-thumbnails": 1581,
-  "@capgo/capacitor-intent-launcher": 3316
+  "@capgo/capacitor-intent-launcher": 3316,
+  "@capgo/capacitor-facebook-analytics": 0
 }
