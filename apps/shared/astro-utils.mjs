@@ -37,13 +37,12 @@ export function toHeroiconName(value) {
     const currentCharacter = value[index]
     const previousCharacter = value[index - 1] ?? ''
     const nextCharacter = value[index + 1] ?? ''
-    const shouldInsertDash = index > 0
-      && (
-        (isUpperCase(currentCharacter) && (isLowerCase(previousCharacter) || isDigit(previousCharacter)))
-        || (isUpperCase(currentCharacter) && isUpperCase(previousCharacter) && isLowerCase(nextCharacter))
-        || (isDigit(currentCharacter) && isLetter(previousCharacter))
-        || (isLetter(currentCharacter) && isDigit(previousCharacter))
-      )
+    const shouldInsertDash =
+      index > 0 &&
+      ((isUpperCase(currentCharacter) && (isLowerCase(previousCharacter) || isDigit(previousCharacter))) ||
+        (isUpperCase(currentCharacter) && isUpperCase(previousCharacter) && isLowerCase(nextCharacter)) ||
+        (isDigit(currentCharacter) && isLetter(previousCharacter)) ||
+        (isLetter(currentCharacter) && isDigit(previousCharacter)))
 
     if (shouldInsertDash) normalizedValue += '-'
     normalizedValue += currentCharacter.toLowerCase()
@@ -55,17 +54,11 @@ export function toHeroiconName(value) {
 export function buildPluginIcons(configPath) {
   try {
     const configSource = readFileSync(configPath, 'utf8')
-    const iconMatches = [
-      ...configSource.matchAll(/icon:\s*'([^']+)'/g),
-      ...configSource.matchAll(/'[^']+':\s*'([^']+)'/g),
-    ]
+    const iconMatches = [...configSource.matchAll(/icon:\s*'([^']+)'/g), ...configSource.matchAll(/'[^']+':\s*'([^']+)'/g)]
     const iconNames = iconMatches.map(([, iconName]) => toHeroiconName(iconName))
-    return [...new Set(['arrow-up-right-solid', ...iconNames])].sort((left, right) => left.localeCompare(right))
+    return [...new Set(['arrow-up-right-solid', 'information-circle-solid', 'question-mark-circle-solid', ...iconNames])].sort((left, right) => left.localeCompare(right))
   } catch (error) {
-    throw new Error(
-      `Failed to read plugin config at ${configPath}. This build depends on apps/web/src/config/plugins.ts being present.`,
-      { cause: error },
-    )
+    throw new Error(`Failed to read plugin config at ${configPath}. This build depends on apps/web/src/config/plugins.ts being present.`, { cause: error })
   }
 }
 
