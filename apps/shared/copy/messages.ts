@@ -1791,7 +1791,7 @@ const messages = {
   native_build_builder_infra_text:
     'Capgo Builder runs native build jobs on dedicated Apple Silicon machines with the mobile SDKs already installed, so teams get repeatable iOS and Android output from any local or CI trigger.',
   native_build_builder_infra_title: 'Built on Mac Mini Silicon M4.',
-  native_build_builder_infra_toolchain: 'Toolchain support includes Xcode 26.2, Android Studio 2025, and Visual Studio for Mac with .NET 9, .NET 10, and workloads.',
+  native_build_builder_infra_toolchain: 'Toolchain support includes Xcode 26.2, Android Studio 2025, and .NET 9/.NET 10 SDK workloads for native build pipelines.',
   native_build_builder_month_to_month: '{price}{suffix} month-to-month',
   native_build_builder_monthly_active_users: 'monthly active users',
   native_build_builder_no_credit_card_trial: 'No credit card required for the free trial.',
@@ -3204,7 +3204,7 @@ const messages = {
   solutions_schedule_demo: 'Schedule a Demo',
   solutions_setup_minutes: '5-minute setup',
   solutions_solo_after1: 'Push updates instantly, no review needed',
-  solutions_solo_after2: 'One command to deploy: bunx @capgo/cli bundle upload',
+  solutions_solo_after2: 'One command to deploy: bunx @capgo/cli@latest bundle upload',
   solutions_solo_after3: 'Start free, then $14/month as you grow',
   solutions_solo_after4: 'One-click rollback if something goes wrong',
   solutions_solo_after_title: 'With Capgo',

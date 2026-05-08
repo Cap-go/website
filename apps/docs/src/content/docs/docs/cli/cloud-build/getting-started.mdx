@@ -48,7 +48,7 @@ Before you begin, ensure you have:
 
    **For iOS:**
    ```bash
-   bunx @capgo/cli build credentials save \
+   bunx @capgo/cli@latest build credentials save \
      --platform ios \
      --certificate ./cert.p12 \
      --p12-password "password" \
@@ -61,7 +61,7 @@ Before you begin, ensure you have:
 
    **For Android:**
    ```bash
-   bunx @capgo/cli build credentials save \
+   bunx @capgo/cli@latest build credentials save \
      --platform android \
      --keystore ./release.keystore \
      --keystore-alias "my-key" \
@@ -155,7 +155,7 @@ Build execution runs on dedicated Mac Mini Silicon M4 machines:
 - 16GB of RAM
 - macOS Tahoe 26.2
 
-The build image supports Xcode 26.2, Android Studio 2025, and Visual Studio for Mac with .NET 9, .NET 10, and workloads.
+The build image supports Xcode 26.2, Android Studio 2025, and .NET 9/.NET 10 SDK workloads for native build pipelines.
 
 ## Your First Production Build
 
@@ -212,7 +212,7 @@ Your built web assets (JS, CSS, HTML) **are** uploaded - but as part of the nati
 
 ### Your Responsibilities
 
-Before running `bunx @capgo/cli build`:
+Before running `bunx @capgo/cli@latest build`:
 
 1. **Build your web assets** - Run `bun run build` (or your framework's build command)
 2. **Sync to native** - Run `bunx cap sync` to copy web assets into the native project
@@ -244,6 +244,10 @@ You only pay for actual build time used. No hidden fees.
 Add to your GitHub Actions workflow:
 
 ```yaml
+- uses: oven-sh/setup-bun@v2
+  with:
+    bun-version: latest
+
 - name: Build native app
   env:
     CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
