@@ -1,6 +1,6 @@
 ---
 title: Introduction to Capgo Build
-description: Build iOS and Android apps in the cloud without local setup. No Mac required for iOS builds.
+description: Build iOS and Android apps in the cloud without local setup. No local Mac required for iOS builds.
 sidebar:
   order: 0
   label: Introduction
@@ -8,18 +8,33 @@ sidebar:
 
 import { Card, CardGrid, Aside, LinkCard } from '@astrojs/starlight/components';
 
-Capgo Build is a cloud-based native app compilation service for Capacitor apps. It lets you build iOS and Android apps without maintaining local development environments - no Xcode, no Android Studio, no Mac hardware required.
+Capgo Build is a cloud-based native app compilation service for Capacitor apps. It lets you build iOS and Android apps without maintaining local development environments - no Xcode, no Android Studio, no Mac hardware required on your own machine.
 
 ## What Capgo Build Does
 
 Capgo Build compiles the **native parts** of your Capacitor app in the cloud:
 
-- **iOS builds** run on dedicated Apple Silicon (Mac Mini M4) machines
-- **Android builds** run in isolated Docker containers
+- **iOS builds** run on dedicated Mac Mini Silicon M4 machines
+- **Android builds** run on the same Mac Mini Silicon M4 build fleet with Android Studio 2025 available
 - **Automatic code signing** handles certificates, provisioning profiles, and keystores
 - **Direct store submission** uploads signed apps to App Store Connect and Google Play
 
 You trigger builds with a single CLI command that works from anywhere - your local machine, GitHub Actions, GitLab CI, or any CI/CD pipeline.
+
+## Build Machines and Toolchain
+
+Capgo Build runs native jobs on dedicated Mac Mini Silicon M4 machines:
+
+| Component | Specification |
+|----------|---------------|
+| Machine | Mac Mini Silicon M4 |
+| CPU | 10-core M4 CPU (4 performance cores, 6 efficiency cores) |
+| GPU | 10-core GPU |
+| Neural Engine | 16-core Neural Engine |
+| Memory | 16GB of RAM |
+| OS image | macOS Tahoe 26.2 |
+
+The build image supports Xcode 26.2, Android Studio 2025, and Visual Studio for Mac with .NET 9, .NET 10, and workloads.
 
 ## When to Use Capgo Build vs Live Updates
 
@@ -45,8 +60,8 @@ Capgo offers two complementary features for updating your app. Here's when to us
 ## Why Use Capgo Build
 
 <CardGrid>
-  <Card title="No Mac Required for iOS" icon="laptop">
-    Build and ship iOS apps without Mac hardware. Anyone on Windows, Linux, or any CI/CD system can trigger iOS builds and publish to TestFlight.
+  <Card title="No Local Mac Required for iOS" icon="laptop">
+    Build and ship iOS apps without owning Mac hardware. Anyone on Windows, Linux, or any CI/CD system can trigger iOS builds and publish to TestFlight.
   </Card>
 
   <Card title="Skip Local Environment Setup" icon="rocket">
@@ -97,8 +112,7 @@ Build time is the only cost:
 
 - Build minutes are included in your Capgo plan
 - Extra minutes available via credit system
-- iOS builds run on Mac Mini M4 (2x cost multiplier due to hardware costs)
-- Android builds run in Docker containers (1x cost)
+- Builds run on Mac Mini Silicon M4 machines with the native toolchains already installed
 - No storage fees
 
 ## Next Steps
