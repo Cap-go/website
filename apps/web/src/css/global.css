@@ -282,6 +282,48 @@ body,
   border-bottom: 1px solid var(--sl-color-hairline);
 }
 
+.prose.prose-invert:not(.max-w-none) {
+  max-width: 74ch;
+  padding-inline: 1rem;
+}
+
+.prose.prose-invert :is(h1, h2, h3, h4):not(:where(.not-content *)) {
+  scroll-margin-top: 6rem;
+}
+
+.prose.prose-invert h1:not(:where(.not-content *)) {
+  margin-bottom: 1rem;
+}
+
+.prose.prose-invert :is(h2, h3):not(:where(.not-content *)) {
+  margin-top: 2.75rem;
+}
+
+.prose.prose-invert a:not(:where(.not-content *)) {
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.22em;
+}
+
+.prose.prose-invert :is(ul, ol):not(:where(.not-content *)) {
+  padding-inline-start: 1.25rem;
+}
+
+.prose.prose-invert :is(ul, ol) > li::marker {
+  color: var(--color-gray-400);
+}
+
+.prose.prose-invert code:not(pre code):not(:where(.not-content *)) {
+  border: 1px solid rgb(255 255 255 / 0.08);
+  border-radius: 0.5rem;
+  background: rgb(255 255 255 / 0.06);
+  padding: 0.15rem 0.45rem;
+}
+
+.prose.prose-invert pre:not(:where(.not-content *)) {
+  border: 1px solid rgb(255 255 255 / 0.08);
+  border-radius: 1rem;
+}
+
 @layer base {
   button:not(:disabled),
   [role='button']:not(:disabled) {
