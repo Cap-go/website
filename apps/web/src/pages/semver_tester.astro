@@ -1,9 +1,11 @@
 ---
+import { Icon as AstroIcon } from 'astro-icon/components'
+
 import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout title="Semver Check - Capgo">
-  <main class="py-8 px-4 min-h-screen text-black bg-gray-50">
+  <main class="min-h-screen bg-gray-50 px-4 py-8 text-black">
     <div class="mx-auto max-w-6xl">
       <!-- Header -->
       <div class="mb-8 text-center">
@@ -12,55 +14,67 @@ import Layout from '../layouts/Layout.astro'
       </div>
 
       <!-- Main comparison tool -->
-      <div class="mb-8 bg-white rounded-lg border border-gray-200 shadow-sm">
-        <div class="p-6 border-b border-gray-200">
+      <div class="mb-8 rounded-lg border border-gray-200 bg-white shadow-sm">
+        <div class="border-b border-gray-200 p-6">
           <!-- Basic Version Inputs -->
-          <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2">
+          <div class="mb-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
             <div>
-              <label class="block mb-2 text-sm font-medium text-gray-700"> Local Version </label>
+              <div class="mb-2 flex items-center gap-2">
+                <label class="text-sm font-medium text-gray-700" for="version1">Local Version</label>
+                <a
+                  href="#local-version-guide"
+                  class="inline-flex size-8 items-center justify-center rounded-full text-gray-500 transition hover:bg-gray-100 hover:text-gray-900 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
+                  aria-label="Show where Local Version comes from"
+                  title="Where does Local Version come from?"
+                >
+                  <AstroIcon name="heroicons:question-mark-circle-solid" class="size-5" aria-hidden="true" />
+                </a>
+              </div>
               <input
                 type="text"
                 id="version1"
                 placeholder="1.0.0"
-                class="py-2 px-3 w-full font-mono text-lg rounded-md border border-gray-300 focus:border-transparent focus:ring-2 focus:ring-gray-500 focus:outline-none"
+                aria-describedby="version1-help version1-status"
+                class="w-full rounded-md border border-gray-300 px-3 py-2 font-mono text-lg focus:border-transparent focus:ring-2 focus:ring-gray-500 focus:outline-none"
               />
+              <p id="version1-help" class="mt-1 text-xs text-gray-500">The version your installed app reports to Capgo, from config or native app metadata.</p>
               <div id="version1-status" class="mt-1 text-sm"></div>
             </div>
 
             <div>
-              <label class="block mb-2 text-sm font-medium text-gray-700"> Remote Version </label>
+              <label class="mb-2 block text-sm font-medium text-gray-700" for="version2">Remote Version</label>
               <input
                 type="text"
                 id="version2"
                 placeholder="1.1.0"
-                class="py-2 px-3 w-full font-mono text-lg rounded-md border border-gray-300 focus:border-transparent focus:ring-2 focus:ring-gray-500 focus:outline-none"
+                class="w-full rounded-md border border-gray-300 px-3 py-2 font-mono text-lg focus:border-transparent focus:ring-2 focus:ring-gray-500 focus:outline-none"
               />
               <div id="version2-status" class="mt-1 text-sm"></div>
             </div>
           </div>
 
           <!-- Advanced Settings Toggle -->
-          <div class="pt-4 border-t border-gray-200">
-            <button type="button" id="advanced-toggle" class="flex justify-between items-center p-2 w-full text-left rounded-md hover:bg-gray-50">
+          <div class="border-t border-gray-200 pt-4">
+            <button type="button" id="advanced-toggle" class="flex w-full items-center justify-between rounded-md p-2 text-left hover:bg-gray-50">
               <span class="text-sm font-medium text-gray-700">Advanced Settings</span>
-              <svg id="advanced-chevron" class="w-5 h-5 text-gray-500 transition-transform transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg id="advanced-chevron" class="h-5 w-5 transform text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
 
             <!-- Advanced Settings Panel -->
-            <div id="advanced-panel" class="hidden mt-4">
+            <div id="advanced-panel" class="mt-4 hidden">
               <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
                 <!-- Local Version & App Context -->
                 <div class="space-y-6">
-                  <div class="pt-4 border-t border-gray-200">
-                    <h4 class="mb-4 font-semibold text-gray-900 text-md">App Context</h4>
+                  <div class="border-t border-gray-200 pt-4">
+                    <h4 class="text-md mb-4 font-semibold text-gray-900">App Context</h4>
                     <div class="space-y-4">
                       <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-700">Platform</label>
+                        <label class="mb-2 block text-sm font-medium text-gray-700">Platform</label>
                         <select
                           id="platform-select"
-                          class="py-2 px-3 w-full rounded-md border border-gray-300 focus:border-transparent focus:ring-2 focus:ring-gray-500 focus:outline-none"
+                          class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-gray-500 focus:outline-none"
                         >
                           <option value="ios">iOS</option>
                           <option value="android">Android</option>
@@ -82,10 +96,10 @@ import Layout from '../layouts/Layout.astro'
 
                 <!-- Remote Version & Channel Settings -->
                 <div class="space-y-6">
-                  <div class="pt-4 border-t border-gray-200">
-                    <h4 class="mb-4 font-semibold text-gray-900 text-md">Channel Settings</h4>
+                  <div class="border-t border-gray-200 pt-4">
+                    <h4 class="text-md mb-4 font-semibold text-gray-900">Channel Settings</h4>
                     <div class="space-y-4">
-                      <div class="flex justify-between items-center">
+                      <div class="flex items-center justify-between">
                         <div>
                           <label class="text-sm font-medium text-gray-700">iOS</label>
                           <div class="text-xs text-gray-500">Allow updates for iOS devices</div>
@@ -93,16 +107,16 @@ import Layout from '../layouts/Layout.astro'
                         <button
                           type="button"
                           id="ios-toggle"
-                          class="inline-flex relative shrink-0 w-11 h-6 bg-gray-700 rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out cursor-pointer focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
+                          class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-gray-700 transition-colors duration-200 ease-in-out focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
                           role="switch"
                           aria-checked="true"
                         >
-                          <span class="inline-block w-5 h-5 bg-white rounded-full ring-0 shadow transition duration-200 ease-in-out transform translate-x-5 pointer-events-none"
+                          <span class="pointer-events-none inline-block h-5 w-5 translate-x-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
                           ></span>
                         </button>
                       </div>
 
-                      <div class="flex justify-between items-center">
+                      <div class="flex items-center justify-between">
                         <div>
                           <label class="text-sm font-medium text-gray-700">Android</label>
                           <div class="text-xs text-gray-500">Allow updates for Android devices</div>
@@ -110,16 +124,16 @@ import Layout from '../layouts/Layout.astro'
                         <button
                           type="button"
                           id="android-toggle"
-                          class="inline-flex relative shrink-0 w-11 h-6 bg-gray-700 rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out cursor-pointer focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
+                          class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-gray-700 transition-colors duration-200 ease-in-out focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
                           role="switch"
                           aria-checked="true"
                         >
-                          <span class="inline-block w-5 h-5 bg-white rounded-full ring-0 shadow transition duration-200 ease-in-out transform translate-x-5 pointer-events-none"
+                          <span class="pointer-events-none inline-block h-5 w-5 translate-x-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
                           ></span>
                         </button>
                       </div>
 
-                      <div class="flex justify-between items-center">
+                      <div class="flex items-center justify-between">
                         <div>
                           <label class="text-sm font-medium text-gray-700">Allow development build</label>
                           <div class="text-xs text-gray-500">Allow updates for development builds</div>
@@ -127,16 +141,16 @@ import Layout from '../layouts/Layout.astro'
                         <button
                           type="button"
                           id="dev-build-toggle"
-                          class="inline-flex relative shrink-0 w-11 h-6 bg-gray-700 rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out cursor-pointer focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
+                          class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-gray-700 transition-colors duration-200 ease-in-out focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
                           role="switch"
                           aria-checked="true"
                         >
-                          <span class="inline-block w-5 h-5 bg-white rounded-full ring-0 shadow transition duration-200 ease-in-out transform translate-x-5 pointer-events-none"
+                          <span class="pointer-events-none inline-block h-5 w-5 translate-x-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
                           ></span>
                         </button>
                       </div>
 
-                      <div class="flex justify-between items-center">
+                      <div class="flex items-center justify-between">
                         <div>
                           <label class="text-sm font-medium text-gray-700">Allow Emulators</label>
                           <div class="text-xs text-gray-500">Allow updates for emulator devices</div>
@@ -144,16 +158,16 @@ import Layout from '../layouts/Layout.astro'
                         <button
                           type="button"
                           id="emulator-toggle"
-                          class="inline-flex relative shrink-0 w-11 h-6 bg-gray-700 rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out cursor-pointer focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
+                          class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-gray-700 transition-colors duration-200 ease-in-out focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
                           role="switch"
                           aria-checked="true"
                         >
-                          <span class="inline-block w-5 h-5 bg-white rounded-full ring-0 shadow transition duration-200 ease-in-out transform translate-x-5 pointer-events-none"
+                          <span class="pointer-events-none inline-block h-5 w-5 translate-x-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
                           ></span>
                         </button>
                       </div>
 
-                      <div class="flex justify-between items-center">
+                      <div class="flex items-center justify-between">
                         <div>
                           <label class="text-sm font-medium text-gray-700">Disable auto downgrade under native</label>
                           <div class="text-xs text-gray-500">Prevents downgrading when running native code</div>
@@ -161,20 +175,20 @@ import Layout from '../layouts/Layout.astro'
                         <button
                           type="button"
                           id="disable-downgrade-toggle"
-                          class="inline-flex relative shrink-0 w-11 h-6 bg-gray-700 rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out cursor-pointer focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
+                          class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-gray-700 transition-colors duration-200 ease-in-out focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
                           role="switch"
                           aria-checked="true"
                         >
-                          <span class="inline-block w-5 h-5 bg-white rounded-full ring-0 shadow transition duration-200 ease-in-out transform translate-x-5 pointer-events-none"
+                          <span class="pointer-events-none inline-block h-5 w-5 translate-x-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
                           ></span>
                         </button>
                       </div>
 
                       <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-700">Disable auto update</label>
+                        <label class="mb-2 block text-sm font-medium text-gray-700">Disable auto update</label>
                         <select
                           id="update-strategy"
-                          class="py-2 px-3 w-full rounded-md border border-gray-300 focus:border-transparent focus:ring-2 focus:ring-gray-500 focus:outline-none"
+                          class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-gray-500 focus:outline-none"
                         >
                           <option value="major" selected>Major</option>
                           <option value="minor">Minor</option>
@@ -186,12 +200,12 @@ import Layout from '../layouts/Layout.astro'
                       </div>
 
                       <div id="metadata-input-container" class="hidden">
-                        <label class="block mb-2 text-sm font-medium text-gray-700">Metadata Value</label>
+                        <label class="mb-2 block text-sm font-medium text-gray-700">Metadata Value</label>
                         <input
                           type="text"
                           id="metadata-value"
                           placeholder="1.0.1"
-                          class="py-2 px-3 w-full font-mono rounded-md border border-gray-300 focus:border-transparent focus:ring-2 focus:ring-gray-500 focus:outline-none"
+                          class="w-full rounded-md border border-gray-300 px-3 py-2 font-mono focus:border-transparent focus:ring-2 focus:ring-gray-500 focus:outline-none"
                         />
                         <div class="mt-1 text-xs text-gray-500">Minimum version requirement for local app</div>
                       </div>
@@ -209,11 +223,71 @@ import Layout from '../layouts/Layout.astro'
         </div>
       </div>
 
-      <!-- Why Capgo uses semver -->
-      <div class="p-6 mb-8 bg-gray-100 rounded-lg border border-gray-200">
+      <!-- Local version guide -->
+      <section id="local-version-guide" class="mb-8 scroll-mt-8 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
         <div class="flex">
           <div class="shrink-0">
-            <svg class="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+            <AstroIcon name="heroicons:information-circle-solid" class="size-5 text-blue-500" aria-hidden="true" />
+          </div>
+          <div class="ml-3">
+            <h2 class="text-sm font-medium text-gray-800">What "Local Version" means</h2>
+            <div class="mt-2 space-y-4 text-sm text-gray-700">
+              <p>
+                Local Version is the version already on the device when it asks the update server for a bundle. In a Capacitor app, that value can come from
+                <code class="rounded bg-gray-100 px-1">CapacitorUpdater.version</code> in <code class="rounded bg-gray-100 px-1">capacitor.config.*</code>. If that setting is not
+                present, the plugin falls back to the native app version from iOS or Android. Do not assume it is your <code class="rounded bg-gray-100 px-1">package.json</code>
+                version unless your build copies that value into config or native metadata.
+              </p>
+
+              <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
+                <div class="rounded-md border border-gray-200 p-4">
+                  <h3 class="font-medium text-gray-900">Capacitor config</h3>
+                  <p class="mt-2 text-xs text-gray-600">
+                    Set <code class="rounded bg-gray-100 px-1">CapacitorUpdater.version</code> when you want one explicit version sent by the app.
+                  </p>
+                  <div class="mt-3 space-y-2 text-xs">
+                    <p><strong>Pro:</strong> easy to keep the same across iOS and Android builds.</p>
+                    <p><strong>Con:</strong> stale config can report the wrong version if you forget to update it before a native release.</p>
+                  </div>
+                </div>
+
+                <div class="rounded-md border border-gray-200 p-4">
+                  <h3 class="font-medium text-gray-900">Native app version</h3>
+                  <p class="mt-2 text-xs text-gray-600">
+                    Use the platform version, such as iOS <code class="rounded bg-gray-100 px-1">CFBundleShortVersionString</code> or Android
+                    <code class="rounded bg-gray-100 px-1">versionName</code>.
+                  </p>
+                  <div class="mt-3 space-y-2 text-xs">
+                    <p><strong>Pro:</strong> matches the binary users installed from TestFlight, App Store, Play Store, or internal testing.</p>
+                    <p><strong>Con:</strong> changing it requires a native build and can differ by platform if release settings drift.</p>
+                  </div>
+                </div>
+
+                <div class="rounded-md border border-gray-200 p-4">
+                  <h3 class="font-medium text-gray-900">Bundle targeting</h3>
+                  <p class="mt-2 text-xs text-gray-600">
+                    Compare it with remote bundle versions, channel semver rules, or upload constraints such as <code class="rounded bg-gray-100 px-1">--native-version</code>.
+                  </p>
+                  <div class="mt-3 space-y-2 text-xs">
+                    <p><strong>Pro:</strong> prevents sending JavaScript that needs newer native code to old app binaries.</p>
+                    <p><strong>Con:</strong> rules that are too strict can block valid updates until the channel or bundle metadata is adjusted.</p>
+                  </div>
+                </div>
+              </div>
+
+              <p class="text-xs text-gray-600">
+                For this tester, enter the version the device would report as local, then compare it with the remote bundle version you want Capgo to deliver.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Capgo uses semver -->
+      <div class="mb-8 rounded-lg border border-gray-200 bg-gray-100 p-6">
+        <div class="flex">
+          <div class="shrink-0">
+            <svg class="h-5 w-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fill-rule="evenodd"
                 d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
@@ -228,7 +302,7 @@ import Layout from '../layouts/Layout.astro'
                 By using semver, Capgo ensures compatibility and safety when delivering live updates to your Capacitor apps.
               </p>
               <p class="mb-2">The semver standard allows Capgo to understand exactly what changes are included in each update:</p>
-              <ul class="ml-4 space-y-1 list-disc list-inside">
+              <ul class="ml-4 list-inside list-disc space-y-1">
                 <li><strong>Patch updates (1.0.0 → 1.0.1):</strong> Bug fixes, safe to apply automatically</li>
                 <li><strong>Minor updates (1.0.0 → 1.1.0):</strong> New features, backward compatible</li>
                 <li><strong>Major updates (1.0.0 → 2.0.0):</strong> Breaking changes, require native app store release</li>
@@ -242,10 +316,10 @@ import Layout from '../layouts/Layout.astro'
       </div>
 
       <!-- Flexible semver strategies -->
-      <div class="p-6 mb-8 bg-gray-100 rounded-lg border border-gray-200">
+      <div class="mb-8 rounded-lg border border-gray-200 bg-gray-100 p-6">
         <div class="flex">
           <div class="shrink-0">
-            <svg class="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="h-5 w-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fill-rule="evenodd"
                 d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
@@ -264,15 +338,15 @@ import Layout from '../layouts/Layout.astro'
                 <div>
                   <h4 class="mb-2 font-medium text-gray-800">🏷️ Build Metadata (+) - The "Cosmetic" Layer</h4>
                   <div class="ml-4 space-y-2">
-                    <div class="p-3 text-sm bg-gray-200 rounded">
+                    <div class="rounded bg-gray-200 p-3 text-sm">
                       <div class="font-mono text-gray-800">1.2.0+20240315.142530</div>
                       <div class="text-gray-600">Timestamp for deployment tracking</div>
                     </div>
-                    <div class="p-3 text-sm bg-gray-200 rounded">
+                    <div class="rounded bg-gray-200 p-3 text-sm">
                       <div class="font-mono text-gray-800">1.2.0+ui.refresh.dark-mode</div>
                       <div class="text-gray-600">UI update description for design team</div>
                     </div>
-                    <div class="p-3 text-sm bg-gray-200 rounded">
+                    <div class="rounded bg-gray-200 p-3 text-sm">
                       <div class="font-mono text-gray-800">1.2.0+build.4729.commit.a1b2c3d</div>
                       <div class="text-gray-600">CI/CD build number and git commit</div>
                     </div>
@@ -286,15 +360,15 @@ import Layout from '../layouts/Layout.astro'
                 <div>
                   <h4 class="mb-2 font-medium text-gray-800">🔧 Pre-release Identifiers (-) - Development Channels</h4>
                   <div class="ml-4 space-y-2">
-                    <div class="p-3 text-sm bg-gray-200 rounded">
+                    <div class="rounded bg-gray-200 p-3 text-sm">
                       <div class="font-mono text-gray-800">1.3.0-beta.1</div>
                       <div class="text-gray-600">Beta testing channel</div>
                     </div>
-                    <div class="p-3 text-sm bg-gray-200 rounded">
+                    <div class="rounded bg-gray-200 p-3 text-sm">
                       <div class="font-mono text-gray-800">1.3.0-hotfix.payment</div>
                       <div class="text-gray-600">Urgent fix branch</div>
                     </div>
-                    <div class="p-3 text-sm bg-gray-200 rounded">
+                    <div class="rounded bg-gray-200 p-3 text-sm">
                       <div class="font-mono text-gray-800">1.3.0-feature.newapi</div>
                       <div class="text-gray-600">Feature branch testing</div>
                     </div>
@@ -308,7 +382,7 @@ import Layout from '../layouts/Layout.astro'
                 <div>
                   <h4 class="mb-2 font-medium text-gray-800">🎯 Hybrid Approach - Best of Both Worlds</h4>
                   <div class="ml-4">
-                    <div class="p-3 text-sm bg-gray-200 rounded">
+                    <div class="rounded bg-gray-200 p-3 text-sm">
                       <div class="font-mono text-gray-800">1.3.0-rc.1+ui.redesign.20240315</div>
                       <div class="text-gray-600">Release candidate with UI metadata and timestamp</div>
                     </div>
@@ -321,10 +395,10 @@ import Layout from '../layouts/Layout.astro'
       </div>
 
       <!-- Semver use cases -->
-      <div class="p-6 mb-8 bg-gray-100 rounded-lg border border-gray-200">
+      <div class="mb-8 rounded-lg border border-gray-200 bg-gray-100 p-6">
         <div class="flex">
           <div class="shrink-0">
-            <svg class="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="h-5 w-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fill-rule="evenodd"
                 d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
@@ -340,10 +414,10 @@ import Layout from '../layouts/Layout.astro'
                   <div>
                     <h4 class="mb-2 font-medium text-gray-800">🚀 Startup / Fast Development</h4>
                     <div class="space-y-1 text-xs">
-                      <div><code class="px-1 bg-gray-200 rounded">0.1.0</code> - First MVP release</div>
-                      <div><code class="px-1 bg-gray-200 rounded">0.2.0-beta.1</code> - New feature testing</div>
-                      <div><code class="px-1 bg-gray-200 rounded">0.2.0+ui.v2</code> - UI redesign metadata</div>
-                      <div><code class="px-1 bg-gray-200 rounded">1.0.0</code> - Production ready</div>
+                      <div><code class="rounded bg-gray-200 px-1">0.1.0</code> - First MVP release</div>
+                      <div><code class="rounded bg-gray-200 px-1">0.2.0-beta.1</code> - New feature testing</div>
+                      <div><code class="rounded bg-gray-200 px-1">0.2.0+ui.v2</code> - UI redesign metadata</div>
+                      <div><code class="rounded bg-gray-200 px-1">1.0.0</code> - Production ready</div>
                     </div>
                     <p class="mt-1 text-xs text-gray-600">Use 0.x.x for pre-1.0 development, metadata for design tracking</p>
                   </div>
@@ -351,9 +425,9 @@ import Layout from '../layouts/Layout.astro'
                   <div>
                     <h4 class="mb-2 font-medium text-gray-800">🏢 Enterprise / Regulated</h4>
                     <div class="space-y-1 text-xs">
-                      <div><code class="px-1 bg-gray-200 rounded">2.1.0</code> → Quarterly release</div>
-                      <div><code class="px-1 bg-gray-200 rounded">2.1.1+sec.patch.cve2024</code> → Security patch with tracking</div>
-                      <div><code class="px-1 bg-gray-200 rounded">2.2.0-rc.1+audit.ready</code> → Pre-audit release candidate</div>
+                      <div><code class="rounded bg-gray-200 px-1">2.1.0</code> → Quarterly release</div>
+                      <div><code class="rounded bg-gray-200 px-1">2.1.1+sec.patch.cve2024</code> → Security patch with tracking</div>
+                      <div><code class="rounded bg-gray-200 px-1">2.2.0-rc.1+audit.ready</code> → Pre-audit release candidate</div>
                     </div>
                     <p class="mt-1 text-xs text-gray-600">Strict semver with compliance metadata</p>
                   </div>
@@ -361,9 +435,9 @@ import Layout from '../layouts/Layout.astro'
                   <div>
                     <h4 class="mb-2 font-medium text-gray-800">🎮 Gaming / Creative Apps</h4>
                     <div class="space-y-1 text-xs">
-                      <div><code class="px-1 bg-gray-200 rounded">1.0.0+season.winter.2024</code> → Seasonal content</div>
-                      <div><code class="px-1 bg-gray-200 rounded">1.1.0+event.halloween</code> → Event-driven features</div>
-                      <div><code class="px-1 bg-gray-200 rounded">1.2.0+assets.hd.remaster</code> → Asset updates</div>
+                      <div><code class="rounded bg-gray-200 px-1">1.0.0+season.winter.2024</code> → Seasonal content</div>
+                      <div><code class="rounded bg-gray-200 px-1">1.1.0+event.halloween</code> → Event-driven features</div>
+                      <div><code class="rounded bg-gray-200 px-1">1.2.0+assets.hd.remaster</code> → Asset updates</div>
                     </div>
                     <p class="mt-1 text-xs text-gray-600">Creative metadata for content tracking</p>
                   </div>
@@ -374,9 +448,9 @@ import Layout from '../layouts/Layout.astro'
                   <div>
                     <h4 class="mb-2 font-medium text-gray-800">⚡ Hotfix Strategy</h4>
                     <div class="space-y-1 text-xs">
-                      <div><code class="px-1 bg-gray-200 rounded">1.2.0</code> → Current production</div>
-                      <div><code class="px-1 bg-gray-200 rounded">1.2.1-hotfix.payment</code> → Critical bug fix</div>
-                      <div><code class="px-1 bg-gray-200 rounded">1.2.1+urgent.20240315.1430</code> → Released with timestamp</div>
+                      <div><code class="rounded bg-gray-200 px-1">1.2.0</code> → Current production</div>
+                      <div><code class="rounded bg-gray-200 px-1">1.2.1-hotfix.payment</code> → Critical bug fix</div>
+                      <div><code class="rounded bg-gray-200 px-1">1.2.1+urgent.20240315.1430</code> → Released with timestamp</div>
                     </div>
                     <p class="mt-1 text-xs text-gray-600">Pre-release for testing, metadata for deployment tracking</p>
                   </div>
@@ -384,9 +458,9 @@ import Layout from '../layouts/Layout.astro'
                   <div>
                     <h4 class="mb-2 font-medium text-gray-800">🌍 Multi-Platform Strategy</h4>
                     <div class="space-y-1 text-xs">
-                      <div><code class="px-1 bg-gray-200 rounded">1.3.0+ios.optimized</code> → iOS-specific optimizations</div>
-                      <div><code class="px-1 bg-gray-200 rounded">1.3.0+android.material3</code> → Android design updates</div>
-                      <div><code class="px-1 bg-gray-200 rounded">1.3.0+web.pwa.ready</code> → PWA capabilities</div>
+                      <div><code class="rounded bg-gray-200 px-1">1.3.0+ios.optimized</code> → iOS-specific optimizations</div>
+                      <div><code class="rounded bg-gray-200 px-1">1.3.0+android.material3</code> → Android design updates</div>
+                      <div><code class="rounded bg-gray-200 px-1">1.3.0+web.pwa.ready</code> → PWA capabilities</div>
                     </div>
                     <p class="mt-1 text-xs text-gray-600">Same version, platform-specific metadata</p>
                   </div>
@@ -394,18 +468,18 @@ import Layout from '../layouts/Layout.astro'
                   <div>
                     <h4 class="mb-2 font-medium text-gray-800">🔄 CI/CD Integration</h4>
                     <div class="space-y-1 text-xs">
-                      <div><code class="px-1 bg-gray-200 rounded">1.4.0-alpha.1+build.123</code> → Automated pre-release</div>
-                      <div><code class="px-1 bg-gray-200 rounded">1.4.0+deploy.staging.456</code> → Staging deployment</div>
-                      <div><code class="px-1 bg-gray-200 rounded">1.4.0+prod.final.789</code> → Production deployment</div>
+                      <div><code class="rounded bg-gray-200 px-1">1.4.0-alpha.1+build.123</code> → Automated pre-release</div>
+                      <div><code class="rounded bg-gray-200 px-1">1.4.0+deploy.staging.456</code> → Staging deployment</div>
+                      <div><code class="rounded bg-gray-200 px-1">1.4.0+prod.final.789</code> → Production deployment</div>
                     </div>
                     <p class="mt-1 text-xs text-gray-600">Automated versioning with deployment metadata</p>
                   </div>
                 </div>
               </div>
 
-              <div class="p-3 mt-4 text-xs bg-gray-200 rounded text-gray-700">
+              <div class="mt-4 rounded bg-gray-200 p-3 text-xs text-gray-700">
                 <strong>💡 Pro Tips:</strong>
-                <ul class="mt-1 space-y-1 list-disc list-inside">
+                <ul class="mt-1 list-inside list-disc space-y-1">
                   <li>Use build metadata (+) for tracking, timestamps, or cosmetic info that doesn't affect compatibility</li>
                   <li>Use pre-release identifiers (-) for development channels that need different update precedence</li>
                   <li>Combine both for maximum flexibility: <code>1.2.0-beta.1+ui.dark.theme.20240315</code></li>
@@ -418,10 +492,10 @@ import Layout from '../layouts/Layout.astro'
       </div>
 
       <!-- Important notice about npm semver -->
-      <div class="p-6 mb-8 bg-yellow-50 rounded-lg border border-yellow-200">
+      <div class="mb-8 rounded-lg border border-yellow-200 bg-yellow-50 p-6">
         <div class="flex">
           <div class="shrink-0">
-            <svg class="w-5 h-5 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="h-5 w-5 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fill-rule="evenodd"
                 d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
@@ -436,7 +510,7 @@ import Layout from '../layouts/Layout.astro'
                 unexpected behavior.
               </p>
               <p>
-                For example, npm treats versions like <code class="px-1 bg-yellow-200 rounded">1.0.0-alpha.1</code>
+                For example, npm treats versions like <code class="rounded bg-yellow-200 px-1">1.0.0-alpha.1</code>
                 differently than the specification requires. See our
                 <a href="https://github.com/npm/node-semver/issues/376" target="_blank" rel="noopener" class="underline"> reported issue </a> and
                 <a href="https://github.com/npm/node-semver/pull/476" target="_blank" rel="noopener" class="underline"> attempted fix </a> that was never merged.
@@ -449,30 +523,30 @@ import Layout from '../layouts/Layout.astro'
       <!-- Reference tables -->
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
         <!-- Valid versions -->
-        <div class="bg-white rounded-lg border border-gray-200 shadow-sm">
-          <div class="py-4 px-6 border-b border-gray-200">
+        <div class="rounded-lg border border-gray-200 bg-white shadow-sm">
+          <div class="border-b border-gray-200 px-6 py-4">
             <h3 class="text-lg font-semibold text-gray-900">Valid Semantic Versions</h3>
           </div>
           <div class="p-6">
             <div class="space-y-3">
-              <div class="flex justify-between items-center">
-                <code class="py-1 px-2 font-mono text-sm bg-gray-100 rounded">1.0.0</code>
+              <div class="flex items-center justify-between">
+                <code class="rounded bg-gray-100 px-2 py-1 font-mono text-sm">1.0.0</code>
                 <span class="text-sm text-gray-600">✓ Standard release</span>
               </div>
-              <div class="flex justify-between items-center">
-                <code class="py-1 px-2 font-mono text-sm bg-gray-100 rounded">2.1.3-alpha</code>
+              <div class="flex items-center justify-between">
+                <code class="rounded bg-gray-100 px-2 py-1 font-mono text-sm">2.1.3-alpha</code>
                 <span class="text-sm text-gray-600">✓ Pre-release</span>
               </div>
-              <div class="flex justify-between items-center">
-                <code class="py-1 px-2 font-mono text-sm bg-gray-100 rounded">1.0.0-beta.1</code>
+              <div class="flex items-center justify-between">
+                <code class="rounded bg-gray-100 px-2 py-1 font-mono text-sm">1.0.0-beta.1</code>
                 <span class="text-sm text-gray-600">✓ Pre-release with number</span>
               </div>
-              <div class="flex justify-between items-center">
-                <code class="py-1 px-2 font-mono text-sm bg-gray-100 rounded">1.0.0+build.1</code>
+              <div class="flex items-center justify-between">
+                <code class="rounded bg-gray-100 px-2 py-1 font-mono text-sm">1.0.0+build.1</code>
                 <span class="text-sm text-gray-600">✓ Build metadata</span>
               </div>
-              <div class="flex justify-between items-center">
-                <code class="py-1 px-2 font-mono text-sm bg-gray-100 rounded">1.0.0-rc.1+build.1</code>
+              <div class="flex items-center justify-between">
+                <code class="rounded bg-gray-100 px-2 py-1 font-mono text-sm">1.0.0-rc.1+build.1</code>
                 <span class="text-sm text-gray-600">✓ Complete version</span>
               </div>
             </div>
@@ -480,30 +554,30 @@ import Layout from '../layouts/Layout.astro'
         </div>
 
         <!-- Invalid versions -->
-        <div class="bg-white rounded-lg border border-gray-200 shadow-sm">
-          <div class="py-4 px-6 border-b border-gray-200">
+        <div class="rounded-lg border border-gray-200 bg-white shadow-sm">
+          <div class="border-b border-gray-200 px-6 py-4">
             <h3 class="text-lg font-semibold text-gray-900">Invalid Semantic Versions</h3>
           </div>
           <div class="p-6">
             <div class="space-y-3">
-              <div class="flex justify-between items-center">
-                <code class="py-1 px-2 font-mono text-sm bg-gray-100 rounded">v1.0.0</code>
+              <div class="flex items-center justify-between">
+                <code class="rounded bg-gray-100 px-2 py-1 font-mono text-sm">v1.0.0</code>
                 <span class="text-sm text-gray-600">✗ Leading 'v' not allowed</span>
               </div>
-              <div class="flex justify-between items-center">
-                <code class="py-1 px-2 font-mono text-sm bg-gray-100 rounded">1.0</code>
+              <div class="flex items-center justify-between">
+                <code class="rounded bg-gray-100 px-2 py-1 font-mono text-sm">1.0</code>
                 <span class="text-sm text-gray-600">✗ Missing patch version</span>
               </div>
-              <div class="flex justify-between items-center">
-                <code class="py-1 px-2 font-mono text-sm bg-gray-100 rounded">1.0.0.0</code>
+              <div class="flex items-center justify-between">
+                <code class="rounded bg-gray-100 px-2 py-1 font-mono text-sm">1.0.0.0</code>
                 <span class="text-sm text-gray-600">✗ Too many version parts</span>
               </div>
-              <div class="flex justify-between items-center">
-                <code class="py-1 px-2 font-mono text-sm bg-gray-100 rounded">1.0.0-</code>
+              <div class="flex items-center justify-between">
+                <code class="rounded bg-gray-100 px-2 py-1 font-mono text-sm">1.0.0-</code>
                 <span class="text-sm text-gray-600">✗ Empty pre-release</span>
               </div>
-              <div class="flex justify-between items-center">
-                <code class="py-1 px-2 font-mono text-sm bg-gray-100 rounded">1.0.0+</code>
+              <div class="flex items-center justify-between">
+                <code class="rounded bg-gray-100 px-2 py-1 font-mono text-sm">1.0.0+</code>
                 <span class="text-sm text-gray-600">✗ Empty build metadata</span>
               </div>
             </div>
@@ -511,8 +585,8 @@ import Layout from '../layouts/Layout.astro'
         </div>
 
         <!-- Capgo behavior -->
-        <div class="bg-white rounded-lg border border-gray-200 shadow-sm lg:col-span-2">
-          <div class="py-4 px-6 border-b border-gray-200">
+        <div class="rounded-lg border border-gray-200 bg-white shadow-sm lg:col-span-2">
+          <div class="border-b border-gray-200 px-6 py-4">
             <h3 class="text-lg font-semibold text-gray-900">Capgo Update Behavior</h3>
           </div>
           <div class="p-6">
@@ -543,7 +617,7 @@ import Layout from '../layouts/Layout.astro'
       </div>
 
       <!-- Footer note -->
-      <div class="mt-8 text-sm text-center text-gray-500">
+      <div class="mt-8 text-center text-sm text-gray-500">
         <p>
           This tool follows the official
           <a href="https://semver.org/" target="_blank" rel="noopener" class="underline">Semantic Versioning specification</a>
