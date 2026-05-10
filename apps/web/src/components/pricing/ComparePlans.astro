@@ -176,6 +176,10 @@ const rows: CompareSection[] = [
         value: () => '+130 plugins',
       },
       {
+        label: 'Ionic enterprise alternative plugins',
+        value: (plan: Database['public']['Tables']['plans']['Row']) => (included(plan.name, ['Team', 'Enterprise']) ? true : false),
+      },
+      {
         label: m.priority_bug_fixes_on_our_plugins({}, { locale: Astro.locals.locale }),
         value: (plan: Database['public']['Tables']['plans']['Row']) => (included(plan.name, ['Maker', 'Team', 'Enterprise']) ? true : false),
       },
