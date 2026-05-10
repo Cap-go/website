@@ -1310,9 +1310,8 @@ const messages = {
   help_customers_with_app_issues: 'Help customers with app issues efficiently',
   here: 'here.',
   hero_secondary_cta: 'See live updates',
-  hero_subtitle_line2: 'Capgo controls rollout with channels, rollback, device logs, and CLI safety checks before a bad deploy becomes a support incident.',
-  hero_subtitle_part1:
-    'Ship JavaScript and asset fixes in minutes with the live-update platform that opened the independent Capacitor path while native changes keep the normal store review path.',
+  hero_subtitle_line2: 'Protect users with channels, rollback, logs, and CLI checks.',
+  hero_subtitle_part1: 'Ship JS and asset fixes in minutes.',
   hero_subtitle_part2: '',
   high_enterprise_response: '2 business hours<br />Monday - Friday',
   high_priority_response: '2 hours<br />24/7 × 365',
@@ -1422,7 +1421,7 @@ const messages = {
   it_all_started_with_a_github_issue_where_many_developers_voiced_their_frustration_with_the_high_costs_of_existing_solutions_like_appflow:
     'It all started with a GitHub issue where many developers voiced their frustration with the high costs of existing solutions like Appflow.',
   it_s_faster_cheaper_and_requires_fewer_developers_to_do_it: "It's faster, cheaper, and requires fewer developers to do it.",
-  iterate_faster: 'the original independent Capacitor live-update platform',
+  iterate_faster: 'original independent live updates',
   javascript_and_typescript: 'JavaScript and TypeScript',
   jobs: 'Jobs',
   join_leading_enterprises: 'Join leading enterprises who trust Capgo to deliver secure, scalable live updates to millions of users worldwide.',
@@ -1546,8 +1545,7 @@ const messages = {
   live_update_features_subtitle: 'Most tools can upload files. Capgo adds the release controls, native safety, logs, and rollback behavior production teams need.',
   live_update_features_title: 'The Complete Live Update System',
   live_update_get_started: 'Get Started',
-  live_update_hero_subtitle:
-    'Before Capgo, serious Capacitor live updates mostly meant Appflow: expensive, closed, and basic. Capgo created the independent path and kept going with 5-minute setup, advanced manual control, CLI safety checks, native rollback, dynamic channels, logs, and encryption.',
+  live_update_hero_subtitle: 'First independent Appflow alternative. Five-minute setup, advanced control, and safety checks built in.',
   live_update_hero_title: 'The Live Update Platform Others Copy',
   live_update_how_it_works_subtitle: 'Automatic when you want speed. Manual when you need control. Safety checks at every step.',
   live_update_how_it_works_title: 'How It Works',
