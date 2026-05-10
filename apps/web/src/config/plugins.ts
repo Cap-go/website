@@ -21,6 +21,7 @@ export interface Plugin extends Action {
 
 const actionDefinitionRows =
   String.raw`@capgo/native-market|github.com/Cap-go|Deep link users directly to your app page on Google Play Store or Apple App Store|https://github.com/Cap-go/capacitor-native-market/|Native Market
+@capgo/native-navigation|github.com/Cap-go|Render native navbars, tabbars, and transition shells over a full-screen Capacitor WebView|https://github.com/Cap-go/capacitor-native-navigation/|Native Navigation
 @capgo/capacitor-native-biometric|github.com/Cap-go|Secure authentication using Face ID, Touch ID, and Android biometric APIs|https://github.com/Cap-go/capacitor-native-biometric/|Native Biometric
 @capgo/camera-preview|github.com/Cap-go|Display live camera feed as overlay with customizable controls and capture capabilities|https://github.com/Cap-go/capacitor-camera-preview/|Camera Preview
 @capgo/capacitor-updater|github.com/Cap-go|Deploy live updates instantly to your users without app store review delays|https://github.com/Cap-go/capacitor-updater/|Updater
@@ -151,6 +152,7 @@ const actionDefinitionRows =
 
 const pluginIconsByName: Record<string, string> = {
   '@capgo/native-market': 'ArchiveBoxArrowDown',
+  '@capgo/native-navigation': 'DevicePhoneMobile',
   '@capgo/capacitor-native-biometric': 'FingerPrint',
   '@capgo/camera-preview': 'Camera',
   '@capgo/capacitor-updater': 'ArrowPath',

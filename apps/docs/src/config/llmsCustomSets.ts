@@ -68,6 +68,7 @@ Plugin Native Audio|native audio playback plugin|docs/plugins/native-audio/**
 Plugin Native Biometric|biometric authentication plugin for fingerprint and face ID|docs/plugins/native-biometric/**
 Plugin Native Geocoder|native geocoding plugin for address lookup|docs/plugins/nativegeocoder/**
 Plugin Native Market|app store deep linking plugin|docs/plugins/native-market/**
+Plugin Native Navigation|native navbar, tabbar, and transition shell plugin for Capacitor WebView apps|docs/plugins/native-navigation/**
 Plugin Native Purchases|in-app purchases, subscriptions, paywalls, revenue playbook, and monetization plugin|docs/plugins/native-purchases/**
 Plugin Navigation Bar|Android navigation bar customization plugin|docs/plugins/navigation-bar/**
 Plugin NFC|NFC reading and writing plugin|docs/plugins/nfc/**

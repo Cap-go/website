@@ -130,6 +130,7 @@ const pluginEntries = [
   ['Native Biometric', 'native-biometric'],
   ['Native Geocoder', 'nativegeocoder'],
   ['Native Market', 'native-market'],
+  ['Native Navigation', 'native-navigation'],
   section(
     'Native Purchases',
     [
