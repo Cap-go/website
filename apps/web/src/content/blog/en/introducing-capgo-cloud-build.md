@@ -259,7 +259,7 @@ Use Cloud Build when you add a new plugin or change native configurations. Use l
 
 ## Current Status: Fully Released
 
-Cloud Build has been fully released since January and is available to all Capgo users. We're continuing to improve the experience based on production feedback.
+Cloud Build has been fully released since January 2026 and is available to all Capgo users. We're continuing to improve the experience based on production feedback.
 
 Need help getting started? [Join our Discord](https://discord.com/invite/VnYRvBfgA6) and let us know - we'd love to help you get your first build running.
 
