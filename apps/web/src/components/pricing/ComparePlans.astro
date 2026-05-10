@@ -14,6 +14,7 @@ type CompareValue = string | boolean
 interface CompareItem {
   label: string
   emphasis?: boolean
+  href?: string
   value: (plan: Plan) => CompareValue
 }
 
@@ -115,6 +116,7 @@ const rows: CompareSection[] = [
       },
       {
         label: 'Credit-based overages',
+        href: '#credit-pricing',
         value: () => 'Available',
       },
       {
@@ -307,6 +309,10 @@ const rows: CompareSection[] = [
                             ) : (
                               <span class="text-gray-400">—</span>
                             )
+                          ) : item.href ? (
+                            <a href={item.href} class="font-semibold text-blue-700 underline-offset-4 hover:underline focus:underline focus:outline-none">
+                              {value}
+                            </a>
                           ) : item.emphasis ? (
                             <strong class="font-semibold text-blue-950">{value}</strong>
                           ) : (
