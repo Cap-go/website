@@ -39,6 +39,7 @@ const makeSeoTitle = (primary: string, descriptionText: string) => {
 const title = makeSeoTitle(m.pricing({}, { locale }), description)
 
 const content: { title: string; description: string; ldJSON?: any } = { title, description }
+const serviceDisruptionPolicyUrl = `${getRelativeLocaleUrl(locale, 'support-policy')}#service-disruption-and-ending`
 
 const config = Astro.locals.runtimeConfig
 
@@ -217,10 +218,7 @@ if (plans.length > 0) {
 
       <!-- Service disruption policy link -->
       <div class="mt-10 mb-10 text-center">
-        <a
-          href={getRelativeLocaleUrl(Astro.locals.locale, '/support-policy#service-disruption-and-ending')}
-          class="inline-flex items-center text-sm font-semibold text-blue-600 hover:underline"
-        >
+        <a href={serviceDisruptionPolicyUrl} class="inline-flex items-center text-sm font-semibold text-blue-600 hover:underline">
           {m.support_policy_service_disruption_link_text({}, { locale: Astro.locals.locale })}
           <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
