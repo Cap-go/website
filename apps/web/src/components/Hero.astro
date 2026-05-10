@@ -7,7 +7,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
 
 <section>
   <div class="relative overflow-hidden">
-    <div class="relative mx-auto max-w-7xl pb-8 md:pb-32">
+    <div class="relative mx-auto max-w-7xl pb-4 md:pb-14">
       <!-- Background Grid of Squares -->
       <div class="pointer-events-none absolute inset-0 flex w-full flex-col justify-center gap-4 blur-sm select-none sm:blur-none">
         <!-- Row 0 -->
@@ -185,11 +185,11 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
           <br />
           <span class="text-azure-500">CapacitorJS app</span>
         </h1>
-        <p class="font-inter mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-400 sm:text-xl">
+        <p class="font-inter mx-auto mt-5 max-w-xl text-lg leading-8 text-gray-400 sm:text-xl">
           {m.hero_subtitle_part1({}, { locale: Astro.locals.locale })}
           {m.hero_subtitle_part2({}, { locale: Astro.locals.locale })}<br />{m.hero_subtitle_line2({}, { locale: Astro.locals.locale })}
         </p>
-        <div class="mt-10 flex flex-col items-center gap-4">
+        <div class="mt-8 flex flex-col items-center gap-3">
           <div class="flex flex-col items-center gap-4 sm:flex-row">
             <div class="group relative inline-flex">
               <div
@@ -217,12 +217,12 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
     </div>
   </div>
   <!-- Features Bar -->
-  <div class="bg-linear-to-b from-gray-900 to-[#1a1a1a] py-6 sm:py-16 lg:py-20">
+  <div class="bg-linear-to-b from-gray-900 to-[#1a1a1a] py-4 sm:py-8 lg:py-10">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <!-- Single Horizontal Bar with Features and Stats -->
       <div class="mx-auto max-w-6xl">
-        <div class="rounded-2xl border border-white/10 bg-linear-to-br from-[#1a1d24]/70 to-[#14161b]/60 p-5 shadow-[0_20px_70px_rgba(2,6,23,0.28)] backdrop-blur-sm sm:p-6 lg:p-8">
-          <div class="grid grid-cols-1 items-start gap-6 md:grid-cols-3 lg:gap-8">
+        <div class="rounded-2xl border border-white/10 bg-linear-to-br from-[#1a1d24]/70 to-[#14161b]/60 p-4 shadow-[0_20px_70px_rgba(2,6,23,0.28)] backdrop-blur-sm sm:p-5 lg:p-6">
+          <div class="grid grid-cols-1 items-start gap-5 md:grid-cols-3 lg:gap-6">
             <!-- Production Recovery -->
             <div class="flex flex-col items-center gap-4 text-center">
               <div class="shrink-0">
@@ -233,8 +233,8 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 </div>
               </div>
               <div class="mx-auto max-w-72">
-                <h2 class="mb-2 text-base leading-6 font-semibold text-white sm:text-lg">{m.home_hero_outcome_recover_title({}, { locale: Astro.locals.locale })}</h2>
-                <p class="text-sm leading-6 text-gray-400">{m.home_hero_outcome_recover_desc({}, { locale: Astro.locals.locale })}</p>
+                <h2 class="mb-1.5 text-base leading-6 font-semibold text-white sm:text-lg">{m.home_hero_outcome_recover_title({}, { locale: Astro.locals.locale })}</h2>
+                <p class="text-sm leading-5 text-gray-400">{m.home_hero_outcome_recover_desc({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
 
@@ -257,8 +257,8 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 </div>
               </div>
               <div class="mx-auto max-w-72">
-                <h2 class="mb-2 text-base leading-6 font-semibold text-white sm:text-lg">{m.home_hero_outcome_compliance_title({}, { locale: Astro.locals.locale })}</h2>
-                <p class="text-sm leading-6 text-gray-400">{m.home_hero_outcome_compliance_desc({}, { locale: Astro.locals.locale })}</p>
+                <h2 class="mb-1.5 text-base leading-6 font-semibold text-white sm:text-lg">{m.home_hero_outcome_compliance_title({}, { locale: Astro.locals.locale })}</h2>
+                <p class="text-sm leading-5 text-gray-400">{m.home_hero_outcome_compliance_desc({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
 
@@ -277,15 +277,15 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 </div>
               </div>
               <div class="mx-auto max-w-72">
-                <h2 class="mb-2 text-base leading-6 font-semibold text-white sm:text-lg">{m.home_hero_outcome_observe_title({}, { locale: Astro.locals.locale })}</h2>
-                <p class="text-sm leading-6 text-gray-400">{m.home_hero_outcome_observe_desc({}, { locale: Astro.locals.locale })}</p>
+                <h2 class="mb-1.5 text-base leading-6 font-semibold text-white sm:text-lg">{m.home_hero_outcome_observe_title({}, { locale: Astro.locals.locale })}</h2>
+                <p class="text-sm leading-5 text-gray-400">{m.home_hero_outcome_observe_desc({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Stats Bar -->
-        <div class="pt-8">
+        <div class="pt-6">
           <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 text-sm">
             <!-- Trusted by Companies -->
             <div class="flex items-center gap-3">
