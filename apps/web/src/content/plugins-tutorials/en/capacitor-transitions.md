@@ -2,14 +2,14 @@
 locale: en
 published: true
 ---
-# Using @capgo/transitions
+# Using @capgo/capacitor-transitions
 
-`@capgo/transitions` adds Ionic-style route transitions to Capacitor apps without adopting Ionic UI. It runs in the web layer, keeps your existing router, and can auto-enable an iOS edge swipe-back gesture only inside native Capacitor iOS.
+`@capgo/capacitor-transitions` adds Ionic-style route transitions to Capacitor apps without adopting Ionic UI. It runs in the web layer, keeps your existing router, and can auto-enable an iOS edge swipe-back gesture only inside native Capacitor iOS.
 
 ## Install
 
 ```bash
-bun add @capgo/transitions
+npm install @capgo/capacitor-transitions
 ```
 
 There is no native sync step because the package does not add native plugin code.
@@ -17,7 +17,7 @@ There is no native sync step because the package does not add native plugin code
 ## Register the elements
 
 ```ts
-import '@capgo/transitions';
+import '@capgo/capacitor-transitions';
 ```
 
 ## Wrap your pages
@@ -45,7 +45,7 @@ import '@capgo/transitions';
 Set the transition direction before your normal route update:
 
 ```ts
-import { setDirection } from '@capgo/transitions/react';
+import { setDirection } from '@capgo/capacitor-transitions/react';
 
 setDirection('forward');
 router.push('/message/42');
@@ -59,8 +59,8 @@ router.back();
 ```tsx
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { initTransitions, setDirection, setupPage, setupRouterOutlet } from '@capgo/transitions/react';
-import '@capgo/transitions';
+import { initTransitions, setDirection, setupPage, setupRouterOutlet } from '@capgo/capacitor-transitions/react';
+import '@capgo/capacitor-transitions';
 
 initTransitions({ platform: 'auto' });
 
@@ -123,6 +123,67 @@ outlet?.setSwipeGesture('auto');
 ```
 
 The gesture follows the finger during the transition, then completes or cancels when the user releases. Add `data-swipe-gesture-ignore` on buttons, sliders, or drawers that should not start the edge gesture.
+
+## Use with native navigation
+
+Install `@capgo/native-navigation` when the native layer should own the navbar or tabbar:
+
+```bash
+npm install @capgo/native-navigation
+npx cap sync
+```
+
+Configure native chrome, then keep transitions focused on the WebView pages:
+
+```ts
+import { NativeNavigation } from '@capgo/native-navigation';
+import { setDirection } from '@capgo/capacitor-transitions/react';
+
+await NativeNavigation.configure({
+  contentInsetMode: 'css',
+});
+
+await NativeNavigation.setNavbar({
+  title: 'Inbox',
+  backButton: { visible: false },
+});
+
+await NativeNavigation.addListener('navbarBack', () => {
+  setDirection('back');
+  router.back();
+});
+
+async function openMessage(id: string) {
+  setDirection('forward');
+  router.push(`/message/${id}`);
+
+  await NativeNavigation.setNavbar({
+    title: 'Message',
+    backButton: { visible: true, title: 'Inbox' },
+  });
+}
+```
+
+Use `cap-content` for the animated page body and native-navigation CSS variables for insets:
+
+```html
+<cap-router-outlet platform="auto" swipe-gesture="auto">
+  <cap-page>
+    <cap-content slot="content" fullscreen>
+      <main class="native-page">Inbox content</main>
+    </cap-content>
+  </cap-page>
+</cap-router-outlet>
+```
+
+```css
+.native-page {
+  padding-top: var(--cap-native-navigation-top);
+  padding-bottom: var(--cap-native-navigation-bottom);
+}
+```
+
+Do not duplicate the native navbar as a moving web header. `@capgo/native-navigation` keeps the bar native; `@capgo/capacitor-transitions` animates the page content underneath it.
 
 ## Full Reference
 

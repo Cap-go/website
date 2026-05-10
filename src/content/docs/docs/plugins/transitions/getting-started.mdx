@@ -1,21 +1,23 @@
 ---
 title: Getting Started
-description: Install @capgo/transitions and add Ionic-style route transitions to a Capacitor app.
+description: Install @capgo/capacitor-transitions and add Ionic-style route transitions to a Capacitor app.
 sidebar:
   order: 2
 ---
 
 import { Steps, Aside } from '@astrojs/starlight/components';
-import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
 1. **Install the package**
-   <PackageManagers pkg="@capgo/transitions" pkgManagers={['bun']} />
+
+   ```bash
+   npm install @capgo/capacitor-transitions
+   ```
 
 2. **Register the web components**
 
    ```ts
-   import '@capgo/transitions';
+   import '@capgo/capacitor-transitions';
    ```
 
 3. **Wrap routed pages**
@@ -41,7 +43,7 @@ import { PackageManagers } from 'starlight-package-managers'
 4. **Set the direction before your router changes route**
 
    ```ts
-   import { setDirection } from '@capgo/transitions/react';
+   import { setDirection } from '@capgo/capacitor-transitions/react';
 
    setDirection('forward');
    router.push('/message/42');
@@ -60,8 +62,8 @@ import { PackageManagers } from 'starlight-package-managers'
 ```tsx
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { initTransitions, setDirection, setupPage, setupRouterOutlet } from '@capgo/transitions/react';
-import '@capgo/transitions';
+import { initTransitions, setDirection, setupPage, setupRouterOutlet } from '@capgo/capacitor-transitions/react';
+import '@capgo/capacitor-transitions';
 
 initTransitions({ platform: 'auto' });
 
@@ -145,6 +147,75 @@ To keep an element from starting the gesture, add `data-swipe-gesture-ignore`:
 <button data-swipe-gesture-ignore>Open drawer</button>
 ```
 
+## With Native Navigation
+
+Use `@capgo/capacitor-transitions` with `@capgo/native-navigation` when native should own the top and bottom bars while web content keeps Ionic-style page motion.
+
+1. Install and sync the native navigation package:
+
+   ```bash
+   npm install @capgo/native-navigation
+   npx cap sync
+   ```
+
+2. Configure native chrome:
+
+   ```ts
+   import { NativeNavigation } from '@capgo/native-navigation';
+
+   await NativeNavigation.configure({
+     contentInsetMode: 'css',
+   });
+
+   await NativeNavigation.setNavbar({
+     title: 'Inbox',
+     backButton: { visible: false },
+   });
+   ```
+
+3. Keep the web transition outlet responsible for pages only:
+
+   ```html
+   <cap-router-outlet platform="auto" swipe-gesture="auto">
+     <cap-page>
+       <cap-content slot="content" fullscreen>
+         <main class="native-page">Inbox content</main>
+       </cap-content>
+     </cap-page>
+   </cap-router-outlet>
+   ```
+
+   ```css
+   .native-page {
+     padding-top: var(--cap-native-navigation-top);
+     padding-bottom: var(--cap-native-navigation-bottom);
+   }
+   ```
+
+4. Drive both systems from the same router events:
+
+   ```ts
+   import { NativeNavigation } from '@capgo/native-navigation';
+   import { setDirection } from '@capgo/capacitor-transitions/react';
+
+   await NativeNavigation.addListener('navbarBack', () => {
+     setDirection('back');
+     router.back();
+   });
+
+   async function openMessage(id: string) {
+     setDirection('forward');
+     router.push(`/message/${id}`);
+
+     await NativeNavigation.setNavbar({
+       title: 'Message',
+       backButton: { visible: true, title: 'Inbox' },
+     });
+   }
+   ```
+
+Do not render the native top bar again as a moving `<cap-header>`. Let `@capgo/native-navigation` keep the bar native and use `@capgo/capacitor-transitions` for the WebView page content underneath it.
+
 ## Components
 
 ### `<cap-router-outlet>`
@@ -186,7 +257,7 @@ Wraps one page and emits lifecycle events:
 The framework entrypoints expose the same core helpers:
 
 ```ts
-import { initTransitions, setDirection, setupPage, setupRouterOutlet } from '@capgo/transitions/react';
+import { initTransitions, setDirection, setupPage, setupRouterOutlet } from '@capgo/capacitor-transitions/react';
 
 initTransitions({ platform: 'auto' });
 setDirection('forward');
@@ -196,8 +267,8 @@ setupPage(element, { onWillEnter, onDidEnter, onWillLeave, onDidLeave });
 
 Available entrypoints:
 
-- `@capgo/transitions/react`
-- `@capgo/transitions/vue`
-- `@capgo/transitions/angular`
-- `@capgo/transitions/svelte`
-- `@capgo/transitions/solid`
+- `@capgo/capacitor-transitions/react`
+- `@capgo/capacitor-transitions/vue`
+- `@capgo/capacitor-transitions/angular`
+- `@capgo/capacitor-transitions/svelte`
+- `@capgo/capacitor-transitions/solid`
