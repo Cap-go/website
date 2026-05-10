@@ -11,6 +11,8 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 If you get a cloud refusal code and need concrete remediation steps, see [Common Update Problems](/docs/plugins/updater/commonproblems/).
 
+Capgo logs can include metadata for the event. In the dashboard, use the action filter to isolate any code listed below, and click the metadata cell to copy the full JSON payload. Metadata is especially useful for crash and WebView events because it can include context such as the error message, source URL, line and column, process state, memory pressure, or platform-specific reason.
+
 ### Sent from the backend
 
 | code                          | Description                                                                                                                                                                 |
@@ -66,6 +68,20 @@ If you get a cloud refusal code and need concrete remediation steps, see [Common
 | **low_mem_fail** | Download failed because of low memory in the device                                    |
 | **app_moved_to_background** | The application entered the background state.                                   |
 | **app_moved_to_foreground** | The application entered the foreground state.                                   |
+| **app_crash** | The app reported a crash detected from the JavaScript or Capacitor layer. Metadata can include the message, stack, source, and active bundle context. |
+| **app_crash_native** | The native layer reported a platform crash. Metadata can include platform, reason, stack, and process details when available. |
+| **app_anr** | Android reported an Application Not Responding event. Metadata can include the ANR reason, thread, or trace summary when available. |
+| **app_killed_low_memory** | The app process was killed after low-memory pressure. Metadata can include available memory and platform signals when available. |
+| **app_killed_excessive_resource_usage** | The OS killed the app for excessive resource use. Metadata can include the resource type or platform reason when available. |
+| **app_initialization_failure** | The updater or app startup flow failed before normal runtime was ready. Metadata can include the failing step and error message. |
+| **app_memory_warning** | iOS reported a memory warning. Metadata can include the active bundle and memory context when available. |
+| **webview_javascript_error** | The WebView reported an uncaught JavaScript error. Metadata can include the message, source URL, line, column, and stack. |
+| **webview_unhandled_rejection** | The WebView reported an unhandled promise rejection. Metadata can include the rejection reason, source URL, and stack. |
+| **webview_resource_error** | A WebView resource failed to load. Metadata can include the URL, status code, resource type, and error message. |
+| **webview_security_policy_violation** | The WebView reported a content security policy violation. Metadata can include the blocked URI, directive, and document URL. |
+| **webview_unclean_restart** | The app detected a previous WebView session that did not shut down cleanly. This can help identify crash loops after an update. |
+| **webview_render_process_gone** | Android reported that the WebView renderer process exited. Metadata can include whether the renderer crashed and the renderer priority. |
+| **webview_content_process_terminated** | iOS reported that the WebView content process terminated. Metadata can include the active bundle and page URL when available. |
 | **decrypt_fail**        | Failed to decrypt the downloaded bundle.                                          |
 | **getChannel**          | The current channel for the device was queried.                                   |
 | **setChannel**          | A channel was successfully set for the device.                                    |
