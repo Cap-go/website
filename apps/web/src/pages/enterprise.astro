@@ -122,6 +122,8 @@ const content = {
     additionalEntities: [enterpriseService],
   }),
 }
+
+const enterpriseDecisionPoints = [m.enterprise_decision_point_1({}, { locale }), m.enterprise_decision_point_2({}, { locale }), m.enterprise_decision_point_3({}, { locale })]
 ---
 
 <Layout content={content}>
@@ -226,6 +228,33 @@ const content = {
             <p class="text-sm font-medium text-gray-200">Janitor</p>
             <p class="text-xs text-gray-400">750K {m.downloads({}, { locale: Astro.locals.locale })}</p>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gray-950 py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div>
+          <p class="text-sm font-semibold tracking-wide text-blue-300 uppercase">{m.enterprise_decision_criteria_eyebrow({}, { locale })}</p>
+          <h2 class="mt-4 text-3xl font-bold text-white sm:text-4xl">{m.enterprise_decision_criteria_title({}, { locale })}</h2>
+          <p class="mt-4 text-lg leading-8 text-gray-300">
+            {m.enterprise_decision_criteria_desc({}, { locale })}
+          </p>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+          <h3 class="text-xl font-bold text-white">{m.enterprise_decision_questions_title({}, { locale })}</h3>
+          <ul class="mt-5 space-y-4 text-sm leading-6 text-gray-300">
+            {
+              enterpriseDecisionPoints.map((item) => (
+                <li class="flex gap-3">
+                  <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-300" />
+                  <span>{item}</span>
+                </li>
+              ))
+            }
+          </ul>
         </div>
       </div>
     </div>
