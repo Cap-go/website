@@ -175,6 +175,10 @@ const rows: CompareSection[] = [
         label: 'Capgo plugins',
         value: () => '+130 plugins',
       },
+      {
+        label: m.priority_bug_fixes_on_our_plugins({}, { locale: Astro.locals.locale }),
+        value: (plan: Database['public']['Tables']['plans']['Row']) => (included(plan.name, ['Maker', 'Team', 'Enterprise']) ? true : false),
+      },
     ],
   },
   {
@@ -192,10 +196,6 @@ const rows: CompareSection[] = [
           if (plan.name === 'Enterprise') return m.direct_slack_channel_support({}, { locale: Astro.locals.locale })
           return m.priority_bug_fixes_on_our_plugins({}, { locale: Astro.locals.locale })
         },
-      },
-      {
-        label: m.priority_bug_fixes_on_our_plugins({}, { locale: Astro.locals.locale }),
-        value: (plan: Database['public']['Tables']['plans']['Row']) => (included(plan.name, ['Maker', 'Team', 'Enterprise']) ? true : false),
       },
       {
         label: 'Dedicated Slack/Teams channel',
