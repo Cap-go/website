@@ -1,6 +1,6 @@
 {
   "@capgo/native-market": 19517,
-  "@capgo/native-navigation": 0,
+  "@capgo/capacitor-native-navigation": 0,
   "@capgo/capacitor-transitions": 0,
   "@capgo/capacitor-native-biometric": 603625,
   "@capgo/camera-preview": 46030,
