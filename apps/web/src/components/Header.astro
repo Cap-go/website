@@ -34,13 +34,13 @@ const locale = Astro.locals.locale
           </svg>
         </button>
       </div>
-      <div class="hidden xl:flex xl:flex-1 xl:items-center xl:gap-10">
-        <nav class="flex items-center space-x-8">
+      <div class="hidden xl:flex xl:flex-1 xl:items-center xl:gap-8">
+        <nav class="flex items-center gap-4 2xl:gap-6">
           <!-- Docs -->
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}
             aria-label={m.docs({}, { locale: Astro.locals.locale })}
-            class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+            class="flex h-10 items-center rounded-lg px-2 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
           >
             {m.docs({}, { locale: Astro.locals.locale })}
           </a>
@@ -48,34 +48,47 @@ const locale = Astro.locals.locale
           <div class="group relative">
             <button
               type="button"
-              class="flex items-center border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+              class="flex h-10 items-center rounded-lg px-2 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
               aria-label={m.products({}, { locale: Astro.locals.locale })}
             >
               {m.products({}, { locale: Astro.locals.locale })}
-              <svg class="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg
+                class="ml-1 h-4 w-4 transition-transform group-focus-within:rotate-180 group-hover:rotate-180"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+                focusable="false"
+              >
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div class="invisible absolute left-0 z-50 w-48 pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
-              <div class="rounded-lg border border-gray-700 bg-gray-800 py-2 shadow-xl">
+            <div
+              class="invisible absolute left-0 z-50 w-56 pt-2 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100"
+            >
+              <div class="rounded-xl border border-slate-600/60 bg-slate-800/95 p-2 shadow-2xl shadow-black/40 backdrop-blur-xl">
                 <a
                   href={getRelativeLocaleUrl(Astro.locals.locale, 'live-update')}
-                  class="block px-4 py-2 text-sm text-gray-300 transition-colors hover:bg-gray-700 hover:text-white"
+                  class="flex min-h-10 items-center rounded-lg px-3 text-sm font-medium text-slate-100 transition-colors hover:bg-slate-700"
                 >
                   {m.live_update({}, { locale: Astro.locals.locale })}
                 </a>
                 <a
                   href={getRelativeLocaleUrl(Astro.locals.locale, 'native-build')}
-                  class="block px-4 py-2 text-sm text-gray-300 transition-colors hover:bg-gray-700 hover:text-white"
+                  class="flex min-h-10 items-center rounded-lg px-3 text-sm font-medium text-slate-100 transition-colors hover:bg-slate-700"
                 >
                   {m.native_build({}, { locale: Astro.locals.locale })}
                 </a>
-                <a href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')} class="block px-4 py-2 text-sm text-gray-300 transition-colors hover:bg-gray-700 hover:text-white">
+                <a
+                  href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
+                  class="flex min-h-10 items-center rounded-lg px-3 text-sm font-medium text-slate-100 transition-colors hover:bg-slate-700"
+                >
                   {m.plugins({}, { locale: Astro.locals.locale })}
                 </a>
                 <a
                   href={getRelativeLocaleUrl(Astro.locals.locale, 'ionic-enterprise-plugins')}
-                  class="block px-4 py-2 text-sm text-gray-300 transition-colors hover:bg-gray-700 hover:text-white"
+                  class="flex min-h-10 items-center rounded-lg px-3 text-sm font-medium text-slate-100 transition-colors hover:bg-slate-700"
                 >
                   {m.solutions_ionic_plugins_short({}, { locale: Astro.locals.locale })}
                 </a>
@@ -86,16 +99,26 @@ const locale = Astro.locals.locale
           <div class="group relative">
             <button
               type="button"
-              class="flex items-center border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+              class="flex h-10 items-center rounded-lg px-2 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
               aria-label={m.solutions({}, { locale: Astro.locals.locale })}
             >
               {m.solutions({}, { locale: Astro.locals.locale })}
-              <svg class="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg
+                class="ml-1 h-4 w-4 transition-transform group-focus-within:rotate-180 group-hover:rotate-180"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+                focusable="false"
+              >
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div class="invisible absolute left-0 z-50 w-[600px] pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
-              <div class="rounded-lg border border-gray-700 bg-gray-800 p-4 shadow-xl">
+            <div
+              class="invisible absolute left-0 z-50 w-[620px] pt-2 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100"
+            >
+              <div class="rounded-xl border border-slate-600/60 bg-slate-800/95 p-4 shadow-2xl shadow-black/40 backdrop-blur-xl">
                 <div class="grid grid-cols-3 gap-4">
                   <!-- By Team Type Column -->
                   <div>
@@ -297,7 +320,7 @@ const locale = Astro.locals.locale
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'enterprise')}
             aria-label={m.enterprise_title({}, { locale: Astro.locals.locale })}
-            class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+            class="flex h-10 items-center rounded-lg px-2 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
           >
             {m.enterprise_title({}, { locale: Astro.locals.locale })}
           </a>
@@ -305,7 +328,7 @@ const locale = Astro.locals.locale
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'pricing')}
             aria-label={m.pricing({}, { locale: Astro.locals.locale })}
-            class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+            class="flex h-10 items-center rounded-lg px-2 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
           >
             {m.pricing({}, { locale: Astro.locals.locale })}
           </a>
@@ -313,16 +336,16 @@ const locale = Astro.locals.locale
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'blog')}
             aria-label={m.blog({}, { locale: Astro.locals.locale })}
-            class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+            class="flex h-10 items-center rounded-lg px-2 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
           >
             {m.blog({}, { locale: Astro.locals.locale })}
           </a>
         </nav>
-        <div class="ml-auto flex items-center space-x-4">
+        <div class="ml-auto flex items-center gap-3">
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
             aria-label={m.github_stars({}, { locale: Astro.locals.locale })}
-            class="flex items-center gap-2 rounded-md bg-gray-800 px-3 py-1.5 text-sm font-medium text-gray-300 transition-colors hover:bg-gray-700"
+            class="flex h-10 items-center gap-2 rounded-lg border border-slate-700 bg-slate-800/80 px-3 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-500 hover:bg-slate-700 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
           >
             <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path
@@ -336,7 +359,7 @@ const locale = Astro.locals.locale
             href="https://console.capgo.app/login/"
             aria-label={m.login({}, { locale: Astro.locals.locale })}
             target="_blank"
-            class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+            class="flex h-10 items-center rounded-lg px-2 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
           >
             {m.login({}, { locale: Astro.locals.locale })}
           </a>
@@ -345,7 +368,7 @@ const locale = Astro.locals.locale
             target="_blank"
             rel="noopener noreferrer"
             aria-label={m.request_demo({}, { locale: Astro.locals.locale })}
-            class="font-pj rounded-xl bg-blue-600 px-5 py-2 text-base leading-7 font-semibold text-white shadow-lg shadow-blue-600/20 transition-all duration-200 hover:bg-blue-500 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-950 focus:outline-none"
+            class="font-pj flex h-10 items-center rounded-xl bg-blue-500 px-4 text-sm font-semibold text-white shadow-lg shadow-blue-600/25 transition-colors hover:bg-blue-400 focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-950 focus:outline-none"
             role="button"
           >
             {m.request_demo({}, { locale: Astro.locals.locale })}
@@ -354,7 +377,7 @@ const locale = Astro.locals.locale
             href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
             target="_blank"
             aria-label={m.register({}, { locale: Astro.locals.locale })}
-            class="font-pj rounded-xl border border-gray-300 bg-transparent px-5 py-2 text-base leading-7 font-semibold text-gray-300 transition-all duration-200 hover:bg-gray-500 hover:text-white focus:bg-gray-500 focus:text-white focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
+            class="font-pj flex h-10 items-center rounded-xl border border-slate-600 bg-slate-900/20 px-4 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-400 hover:bg-slate-700 hover:text-white focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 focus:outline-none"
             role="button"
           >
             {m.register({}, { locale: Astro.locals.locale })}
