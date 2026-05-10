@@ -101,64 +101,33 @@ function formatPrice(price: number): string {
 }
 ---
 
-<section id="credit-pricing" class="mx-auto max-w-7xl px-0 py-12 sm:px-6 lg:px-8">
-  <div class="rounded-3xl bg-white p-6 shadow-xl sm:p-8 lg:p-12">
-    <div class="mb-6 text-center sm:mb-8">
-      <h2 class="inline-flex flex-col items-center gap-2 text-2xl font-bold text-gray-900 sm:flex-row sm:gap-3 sm:text-3xl">
+<section id="credit-pricing" class="mx-auto max-w-7xl py-10">
+  <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+    <div class="border-b border-gray-200 p-6 sm:p-8 lg:p-10">
+      <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">Usage credits</p>
+      <h2 class="mt-3 text-3xl leading-tight font-semibold tracking-tight text-gray-950 sm:text-4xl">
         {m.credit_pricing({}, { locale: Astro.locals.locale })}
       </h2>
+      <p class="mt-4 max-w-2xl text-base leading-7 text-gray-600">Credits cover usage beyond the limits included in your plan.</p>
     </div>
 
-    <div class="grid gap-6 sm:gap-8 md:grid-cols-2 xl:grid-cols-4">
+    <div class="grid md:grid-cols-2 xl:grid-cols-4">
       {
-        sortedCreditTypes.map(([type, typeCredits]) => (
-          <div class="rounded-2xl border border-gray-200 p-4 sm:p-6">
-            <h3 class="mb-4 flex items-center text-lg font-semibold text-gray-900 sm:text-xl">
-              {type === 'mau' && (
-                <svg class="mr-2 h-5 w-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                  />
-                </svg>
-              )}
-              {type === 'bandwidth' && (
-                <svg class="mr-2 h-4 w-4 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
-                </svg>
-              )}
-              {type === 'storage' && (
-                <svg class="mr-2 h-5 w-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z"
-                  />
-                </svg>
-              )}
-              {type === 'build_time' && (
-                <svg class="mr-2 h-5 w-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22a10 10 0 100-20 10 10 0 000 20z" />
-                </svg>
-              )}
-              {getTypeLabel(type)}
-            </h3>
+        sortedCreditTypes.map(([type, typeCredits], typeIndex) => (
+          <div class:list={['border-b border-gray-200 p-6 sm:p-7 xl:border-b-0', typeIndex < sortedCreditTypes.length - 1 && 'xl:border-r']}>
+            <h3 class="text-sm leading-6 font-semibold tracking-wide text-gray-950 uppercase">{getTypeLabel(type)}</h3>
 
-            <div class="space-y-3">
+            <div class="mt-5 divide-y divide-gray-100">
               {typeCredits.map((credit, index) => (
-                <div class="flex flex-col space-y-1 border-b border-gray-100 pb-3 last:border-0 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
-                  <div class="text-xs text-gray-600 sm:text-sm">
+                <div class="flex items-start justify-between gap-4 py-3 first:pt-0 last:pb-0">
+                  <div class="text-sm leading-6 text-gray-600">
                     {index === 0
                       ? `${m.first({}, { locale: Astro.locals.locale })} ${formatNumber(credit.step_max, type, credit.unit_factor)}`
                       : index === typeCredits.length - 1
                         ? `${m.over({}, { locale: Astro.locals.locale })} ${formatNumber(credit.step_min, type, credit.unit_factor)}`
                         : `${m.next({}, { locale: Astro.locals.locale })} ${formatNumber(credit.step_max - credit.step_min, type, credit.unit_factor)}`}
                   </div>
-                  <div class="text-xs font-medium text-gray-900 sm:text-sm">
+                  <div class="text-right text-sm leading-6 font-semibold text-gray-950">
                     ${formatPrice(credit.price_per_unit)} {getUnitLabel(type)}
                   </div>
                 </div>
@@ -169,11 +138,11 @@ function formatPrice(price: number): string {
       }
     </div>
 
-    <div class="mt-6 space-y-3 text-center sm:mt-8 sm:space-y-4">
-      <p class="text-xs text-gray-600 sm:text-sm">
+    <div class="space-y-2 border-t border-gray-200 bg-gray-50 p-6 text-sm leading-6 text-gray-600 sm:p-8">
+      <p>
         {m.storage_calculated_info({}, { locale: Astro.locals.locale })}
       </p>
-      <p class="text-xs text-gray-500 sm:text-sm">
+      <p>
         {m.credits_usage_info({}, { locale: Astro.locals.locale })}
       </p>
     </div>
