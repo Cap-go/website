@@ -7,7 +7,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
 
 <section>
   <div class="relative overflow-hidden">
-    <div class="relative mx-auto max-w-7xl pb-8 md:pb-32">
+    <div class="relative mx-auto max-w-7xl pb-4 md:pb-14">
       <!-- Background Grid of Squares -->
       <div class="pointer-events-none absolute inset-0 flex w-full flex-col justify-center gap-4 blur-sm select-none sm:blur-none">
         <!-- Row 0 -->
@@ -185,11 +185,11 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
           <br />
           <span class="text-azure-500">CapacitorJS app</span>
         </h1>
-        <p class="font-inter mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-400 sm:text-xl">
+        <p class="font-inter mx-auto mt-5 max-w-xl text-lg leading-8 text-gray-400 sm:text-xl">
           {m.hero_subtitle_part1({}, { locale: Astro.locals.locale })}
           {m.hero_subtitle_part2({}, { locale: Astro.locals.locale })}<br />{m.hero_subtitle_line2({}, { locale: Astro.locals.locale })}
         </p>
-        <div class="mt-10 flex flex-col items-center gap-4">
+        <div class="mt-8 flex flex-col items-center gap-3">
           <div class="flex flex-col items-center gap-4 sm:flex-row">
             <div class="group relative inline-flex">
               <div
@@ -217,38 +217,38 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
     </div>
   </div>
   <!-- Features Bar -->
-  <div class="bg-linear-to-b from-gray-900 to-[#1a1a1a] py-6 sm:py-16 lg:py-20">
+  <div class="bg-linear-to-b from-gray-900 to-[#1a1a1a] py-4 sm:py-8 lg:py-10">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <!-- Single Horizontal Bar with Features and Stats -->
       <div class="mx-auto max-w-6xl">
-        <div class="rounded-3xl border border-white/10 bg-linear-to-br from-[#1a1d24]/50 to-[#14161b]/50 backdrop-blur-sm">
-          <div class="my-6 grid grid-cols-1 items-start gap-12 md:grid-cols-3">
+        <div class="rounded-2xl border border-white/10 bg-linear-to-br from-[#1a1d24]/70 to-[#14161b]/60 p-4 shadow-[0_20px_70px_rgba(2,6,23,0.28)] backdrop-blur-sm sm:p-5 lg:p-6">
+          <div class="grid grid-cols-1 items-start gap-5 md:grid-cols-3 lg:gap-6">
             <!-- Production Recovery -->
             <div class="flex flex-col items-center gap-4 text-center">
               <div class="shrink-0">
-                <div class="flex h-8 w-8 items-center justify-center rounded-2xl">
-                  <svg class="h-8 w-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <div class="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04]">
+                  <svg class="h-6 w-6 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
                   </svg>
                 </div>
               </div>
-              <div>
-                <h2 class="mb-2 text-lg font-semibold text-white">{m.home_hero_outcome_recover_title({}, { locale: Astro.locals.locale })}</h2>
-                <p class="text-sm leading-relaxed text-gray-400">{m.home_hero_outcome_recover_desc({}, { locale: Astro.locals.locale })}</p>
+              <div class="mx-auto max-w-72">
+                <h2 class="mb-1.5 text-base leading-6 font-semibold text-white sm:text-lg">{m.home_hero_outcome_recover_title({}, { locale: Astro.locals.locale })}</h2>
+                <p class="text-sm leading-5 text-gray-400">{m.home_hero_outcome_recover_desc({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
 
             <!-- Store Review Fit -->
             <div class="flex flex-col items-center gap-4 text-center">
               <div class="shrink-0">
-                <div class="flex h-8 w-8 items-center justify-center rounded-2xl">
+                <div class="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04]">
                   <div class="flex gap-2">
-                    <svg class="h-6 w-6 text-gray-400" fill="currentColor" viewBox="0 0 384 512" aria-hidden="true" focusable="false">
+                    <svg class="h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 384 512" aria-hidden="true" focusable="false">
                       <path
                         d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"
                       ></path>
                     </svg>
-                    <svg class="h-6 w-6 text-gray-400" fill="currentColor" viewBox="0 0 488 512" aria-hidden="true" focusable="false">
+                    <svg class="h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 488 512" aria-hidden="true" focusable="false">
                       <path
                         d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"
                       ></path>
@@ -256,17 +256,17 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   </div>
                 </div>
               </div>
-              <div>
-                <h2 class="mb-2 text-lg font-semibold text-white">{m.home_hero_outcome_compliance_title({}, { locale: Astro.locals.locale })}</h2>
-                <p class="text-sm leading-relaxed text-gray-400">{m.home_hero_outcome_compliance_desc({}, { locale: Astro.locals.locale })}</p>
+              <div class="mx-auto max-w-72">
+                <h2 class="mb-1.5 text-base leading-6 font-semibold text-white sm:text-lg">{m.home_hero_outcome_compliance_title({}, { locale: Astro.locals.locale })}</h2>
+                <p class="text-sm leading-5 text-gray-400">{m.home_hero_outcome_compliance_desc({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
 
             <!-- Release Proof -->
             <div class="flex flex-col items-center gap-4 text-center">
               <div class="shrink-0">
-                <div class="flex h-8 w-8 items-center justify-center rounded-2xl">
-                  <svg class="h-8 w-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <div class="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04]">
+                  <svg class="h-6 w-6 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -276,16 +276,16 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   </svg>
                 </div>
               </div>
-              <div>
-                <h2 class="mb-2 text-lg font-semibold text-white">{m.home_hero_outcome_observe_title({}, { locale: Astro.locals.locale })}</h2>
-                <p class="text-sm leading-relaxed text-gray-400">{m.home_hero_outcome_observe_desc({}, { locale: Astro.locals.locale })}</p>
+              <div class="mx-auto max-w-72">
+                <h2 class="mb-1.5 text-base leading-6 font-semibold text-white sm:text-lg">{m.home_hero_outcome_observe_title({}, { locale: Astro.locals.locale })}</h2>
+                <p class="text-sm leading-5 text-gray-400">{m.home_hero_outcome_observe_desc({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Stats Bar -->
-        <div class="pt-8">
+        <div class="pt-6">
           <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 text-sm">
             <!-- Trusted by Companies -->
             <div class="flex items-center gap-3">

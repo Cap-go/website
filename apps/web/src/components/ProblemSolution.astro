@@ -4,7 +4,7 @@ import m from '@/copy/messages'
 const locale = Astro.locals.locale
 ---
 
-<section class="relative overflow-hidden bg-[#1a1a1a] pt-24 sm:py-32">
+<section class="relative overflow-hidden bg-[#1a1a1a] py-16 sm:py-20">
   <!-- Background Gradient -->
   <div class="pointer-events-none absolute top-0 left-1/2 w-full max-w-7xl -translate-x-1/2 opacity-80">
     <svg width="1198" height="599" viewBox="0 0 1198 599" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-auto w-full">
@@ -22,20 +22,20 @@ const locale = Astro.locals.locale
 
   <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
     <!-- Header -->
-    <div class="mx-auto mb-16 max-w-2xl text-center">
+    <div class="mx-auto mb-10 max-w-2xl text-center">
       <h2 class="text-sm leading-7 font-semibold tracking-wide text-[#44BCFF] uppercase">{m.problem_solution_badge({}, { locale })}</h2>
       <p class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-5xl">
         {m.problem_solution_title({}, { locale })}<br />
         <span class="underline decoration-[#44BCFF] underline-offset-4">{m.problem_solution_velocity({}, { locale })}</span>
       </p>
-      <p class="mt-6 text-lg leading-8 text-gray-400">
+      <p class="mt-4 text-base leading-7 text-gray-400 sm:text-lg">
         {m.problem_solution_subtitle({}, { locale })}
       </p>
     </div>
 
     <div class="mx-auto grid max-w-5xl grid-cols-1 gap-8 lg:grid-cols-2">
       <!-- Problem Card -->
-      <div class="relative rounded-3xl border border-red-500/30 bg-[#111] p-8">
+      <div class="relative rounded-2xl border border-red-500/30 bg-[#111] p-6">
         <!-- Red Cross Icon -->
         <div class="absolute -top-5 left-1/2 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-red-500 ring-4 ring-[#0B0C10]">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 text-white">
@@ -44,7 +44,7 @@ const locale = Astro.locals.locale
         </div>
 
         <!-- Timeline -->
-        <div class="mt-4 mb-12 flex flex-wrap justify-center gap-2">
+        <div class="mt-4 mb-8 flex flex-wrap justify-center gap-2">
           <span class="rounded-md border border-gray-700 bg-[#222] px-3 py-1 font-mono text-xs text-gray-300">/dev</span>
           <span class="rounded-md border border-gray-700 bg-[#222] px-3 py-1 font-mono text-xs text-gray-300">/build</span>
           <span class="rounded-md border border-blue-900/50 bg-[#222] px-3 py-1 font-mono text-xs text-blue-300">/submit</span>
@@ -53,7 +53,7 @@ const locale = Astro.locals.locale
         </div>
 
         <!-- Chat -->
-        <div class="space-y-6 font-sans text-sm">
+        <div class="space-y-5 font-sans text-sm">
           <!-- Left Message -->
           <div class="flex gap-3">
             <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-xs font-bold text-gray-400">A</div>
@@ -78,7 +78,7 @@ const locale = Astro.locals.locale
       </div>
 
       <!-- Solution Card -->
-      <div class="relative rounded-3xl border border-blue-500/30 bg-[#111] p-8">
+      <div class="relative rounded-2xl border border-blue-500/30 bg-[#111] p-6">
         <!-- Blue Check Icon -->
         <div class="absolute -top-5 left-1/2 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-blue-500 ring-4 ring-[#0B0C10]">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 text-white">
@@ -87,14 +87,14 @@ const locale = Astro.locals.locale
         </div>
 
         <!-- Timeline -->
-        <div class="mt-4 mb-12 flex flex-wrap justify-center gap-2">
+        <div class="mt-4 mb-8 flex flex-wrap justify-center gap-2">
           <span class="rounded-md border border-gray-700 bg-[#222] px-3 py-1 font-mono text-xs text-gray-300">/dev</span>
           <span class="rounded-md border border-gray-700 bg-[#222] px-3 py-1 font-mono text-xs text-gray-300">/build</span>
           <span class="rounded-md border border-green-900/50 bg-[#222] px-3 py-1 font-mono text-xs text-green-400">/live</span>
         </div>
 
         <!-- Chat -->
-        <div class="space-y-6 font-sans text-sm">
+        <div class="space-y-5 font-sans text-sm">
           <!-- Left Message -->
           <div class="flex gap-3">
             <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-xs font-bold text-gray-400">A</div>

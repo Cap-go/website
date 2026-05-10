@@ -11,7 +11,7 @@ function getRightKey(branch: string, keyname: 'base_domain'): string {
 
 const brand = 'Capgo'
 const blogTitle = `${brand} | Capacitor Blog`
-const blogDescription = 'The best articles to enhance your Capacitor app. Do more with Capacitor and Capgo. Learn how to build a modern app with Capacitor.'
+const blogDescription = 'Practical Capacitor guides for shipping, debugging, and updating mobile apps.'
 
 function getUrl(branch = ''): string {
   if (branch === 'local') return `http://${getRightKey(branch, 'base_domain')}`
