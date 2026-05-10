@@ -161,9 +161,10 @@ type LinkDefinition = {
   type?: string
 }
 
-const HOMEPAGE_LINK_HEADERS: LinkDefinition[] = [
-  { href: '/docs/public-api/', rel: 'service-doc', type: 'text/html' },
-]
+const HOMEPAGE_LINK_HEADERS: LinkDefinition[] = [{ href: '/docs/public-api/', rel: 'service-doc', type: 'text/html' }]
+
+const GLOBAL_CSS_PATH = '/_astro/global.css'
+const LEGACY_GLOBAL_CSS_PATH_PATTERN = /^\/_astro\/global\.[A-Za-z0-9_-]+\.css$/
 
 const routeDefinitions: Record<string, RouteDefinition> = {
   '/sponsors.json': {
@@ -174,6 +175,26 @@ const routeDefinitions: Record<string, RouteDefinition> = {
     methods: ['GET'],
     handle: async () => await handleStatus(),
   },
+}
+
+function isGlobalCssPath(pathname: string): boolean {
+  return pathname === GLOBAL_CSS_PATH || LEGACY_GLOBAL_CSS_PATH_PATTERN.test(pathname)
+}
+
+function globalCssRequest(request: Request): Request {
+  const url = new URL(request.url)
+  url.pathname = GLOBAL_CSS_PATH
+  return new Request(url.toString(), request)
+}
+
+function withGlobalCssCacheHeaders(response: Response): Response {
+  const headers = new Headers(response.headers)
+  headers.set('Cache-Control', 'public, max-age=300, must-revalidate')
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  })
 }
 
 async function handleRouteRequest(request: Request, env: Env, pathname: string): Promise<Response | null> {
@@ -219,7 +240,8 @@ export default {
     if (toolRouteResponse) return toolRouteResponse
     const routeResponse = await handleRouteRequest(request, env, pathname)
     if (routeResponse) return routeResponse
-    const assetResponse = await env.ASSETS.fetch(request)
+    const assetResponse = await env.ASSETS.fetch(isGlobalCssPath(pathname) ? globalCssRequest(request) : request)
+    if (isGlobalCssPath(pathname)) return withGlobalCssCacheHeaders(assetResponse)
     if (pathname === '/' || pathname === '/index.html') {
       return withLinkHeaders(assetResponse, HOMEPAGE_LINK_HEADERS)
     }
