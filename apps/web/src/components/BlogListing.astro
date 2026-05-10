@@ -34,7 +34,7 @@ if (Astro.locals.runtimeConfig.public.blog_description) content['description'] =
       <div class="mt-6 flex flex-wrap gap-2.5">
         <a
           href={getRelativeLocaleUrl(Astro.locals.locale, `blog`)}
-          class="rounded-full border border-white/15 bg-white/[0.04] px-3 py-1.5 text-sm font-medium text-gray-200 transition-colors duration-200 hover:border-white/25 hover:bg-white/[0.08] hover:text-white"
+          class="rounded-full border border-white/15 bg-white/[0.04] px-3 py-1.5 text-sm font-medium text-gray-200 transition-colors duration-200 hover:border-white/25 hover:bg-white/[0.08] hover:text-white focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-none"
         >
           All
         </a>
@@ -42,7 +42,7 @@ if (Astro.locals.runtimeConfig.public.blog_description) content['description'] =
           uniqueTags.map((val) => (
             <a
               href={getRelativeLocaleUrl(Astro.locals.locale, `blog/category/${slugify(val)}`)}
-              class="rounded-full border border-white/15 bg-white/[0.04] px-3 py-1.5 text-sm font-medium text-gray-300 transition-colors duration-200 hover:border-white/25 hover:bg-white/[0.08] hover:text-white"
+              class="rounded-full border border-white/15 bg-white/[0.04] px-3 py-1.5 text-sm font-medium text-gray-300 transition-colors duration-200 hover:border-white/25 hover:bg-white/[0.08] hover:text-white focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-none"
             >
               {val}
             </a>
