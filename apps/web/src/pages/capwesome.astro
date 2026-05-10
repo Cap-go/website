@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import m from '@/copy/messages'
+import { pluginCountLabel } from '@/config/plugins'
 
 const locale = Astro.locals.locale
 const title = m.capwesome_title({}, { locale })
@@ -130,7 +131,7 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
               {m.capwesome_diff_plugins_title({}, { locale })}
             </h3>
             <div class="space-y-2 text-gray-300">
-              <p set:html={m.capwesome_diff_plugins_capgo({}, { locale })} />
+              <p set:html={m.capwesome_diff_plugins_capgo({ pluginCountLabel }, { locale })} />
               <p set:html={m.capwesome_diff_plugins_capawesome({}, { locale })} />
               <p class="pt-2 text-sm text-gray-400">
                 {m.capwesome_diff_plugins_note({}, { locale })}
@@ -239,7 +240,7 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
               <li>{m.capwesome_quick_facts_capgo_li4({}, { locale })}</li>
               <li>{m.capwesome_quick_facts_capgo_li5({}, { locale })}</li>
               <li>{m.capwesome_quick_facts_capgo_li6({}, { locale })}</li>
-              <li>{m.capwesome_quick_facts_capgo_li7({}, { locale })}</li>
+              <li>{m.capwesome_quick_facts_capgo_li7({ pluginCountLabel }, { locale })}</li>
               <li>{m.capwesome_quick_facts_capgo_li8({}, { locale })}</li>
             </ul>
           </div>

@@ -2,6 +2,7 @@
 import { numberWithSpaces } from '@/services/misc'
 import type { Database } from '@/services/supabase.types'
 import m from '@/copy/messages'
+import { pluginCountLabel } from '@/config/plugins'
 
 interface Props {
   pricing: Database['public']['Tables']['plans']['Row'][]
@@ -173,7 +174,7 @@ const rows: CompareSection[] = [
     items: [
       {
         label: 'Capgo plugins',
-        value: () => '+130 plugins',
+        value: () => `${pluginCountLabel} plugins`,
       },
       {
         label: 'Ionic enterprise alternative plugins',

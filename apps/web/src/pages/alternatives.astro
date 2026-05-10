@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import m from '@/copy/messages'
+import { pluginCountLabel } from '@/config/plugins'
 import { createServiceLdJson, createLdJsonGraph } from '@/lib/ldJson'
 
 const locale = Astro.locals.locale
@@ -98,7 +99,7 @@ const content = {
             {m.alternatives_biggest_plugin_title({}, { locale })}
           </h3>
           <p class="mb-2 text-gray-300">
-            {m.alternatives_biggest_plugin_desc({}, { locale })}
+            {m.alternatives_biggest_plugin_desc({ pluginCountLabel }, { locale })}
           </p>
           <p class="text-gray-400">
             {m.alternatives_biggest_plugin_note({}, { locale })}
