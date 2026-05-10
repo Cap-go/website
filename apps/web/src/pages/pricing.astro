@@ -41,16 +41,16 @@ const content: { title: string; description: string; ldJSON?: any } = { title, d
 
 const pricingProof = [
   {
-    title: 'Start by release risk',
-    text: 'Pick a plan that covers the apps and active users that need emergency update coverage, not a bloated suite you will not use.',
+    title: m.pricing_proof_risk_title({}, { locale }),
+    text: m.pricing_proof_risk_text({}, { locale }),
   },
   {
-    title: 'Scale by real usage',
-    text: 'Usage-based bandwidth, storage, MAU, and build credits make the buying conversation concrete for finance and engineering.',
+    title: m.pricing_proof_usage_title({}, { locale }),
+    text: m.pricing_proof_usage_text({}, { locale }),
   },
   {
-    title: 'Upgrade when process requires it',
-    text: 'Move up when you need higher limits, more native build time, enterprise support, or a stronger compliance path.',
+    title: m.pricing_proof_upgrade_title({}, { locale }),
+    text: m.pricing_proof_upgrade_text({}, { locale }),
   },
 ]
 

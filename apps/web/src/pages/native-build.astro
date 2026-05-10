@@ -156,16 +156,16 @@ const securityFeatures = [
 
 const buyerChecks = [
   {
-    title: 'For teams without a dedicated mobile CI owner',
-    text: 'Avoid maintaining macOS runners, Android toolchains, provisioning profiles, and store upload scripts just to produce release binaries.',
+    title: copy('native_build_builder_buyer_check_ci_owner_title'),
+    text: copy('native_build_builder_buyer_check_ci_owner_text'),
   },
   {
-    title: 'For teams already using GitHub Actions or GitLab',
-    text: 'Keep your existing workflow and call Capgo only for the native build, signing, artifact, or submit step.',
+    title: copy('native_build_builder_buyer_check_existing_ci_title'),
+    text: copy('native_build_builder_buyer_check_existing_ci_text'),
   },
   {
-    title: 'For agencies and multi-app teams',
-    text: 'Standardize builds across client apps without rebuilding the same iOS and Android release pipeline for every project.',
+    title: copy('native_build_builder_buyer_check_agencies_title'),
+    text: copy('native_build_builder_buyer_check_agencies_text'),
   },
 ]
 
@@ -332,11 +332,10 @@ function creditPrice(credit: Credit) {
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <div>
-            <p class="text-xs font-bold tracking-[0.24em] text-cyan-300 uppercase">Buying guide</p>
-            <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">Native builds should remove release work, not replace your whole pipeline.</h2>
+            <p class="text-xs font-bold tracking-[0.24em] text-cyan-300 uppercase">{copy('native_build_builder_buyer_guide_eyebrow')}</p>
+            <h2 class="mt-4 text-3xl leading-tight font-black text-white sm:text-4xl">{copy('native_build_builder_buyer_guide_title')}</h2>
             <p class="mt-4 text-base leading-7 text-slate-300">
-              Capgo Builder is positioned for teams that want the boring, failure-prone native release work handled for them while keeping source control, CI, and release
-              ownership.
+              {copy('native_build_builder_buyer_guide_text')}
             </p>
           </div>
           <div class="grid gap-4 md:grid-cols-3">
