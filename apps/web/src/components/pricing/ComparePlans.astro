@@ -244,6 +244,10 @@ const rows: CompareSection[] = [
         value: (plan: Database['public']['Tables']['plans']['Row']) => plan.name === 'Enterprise',
       },
       {
+        label: 'ISO 27001',
+        value: (plan: Database['public']['Tables']['plans']['Row']) => (plan.name === 'Enterprise' ? 'Ongoing' : false),
+      },
+      {
         label: 'Signed NDAs & DPAs',
         value: (plan: Database['public']['Tables']['plans']['Row']) => plan.name === 'Enterprise',
       },
