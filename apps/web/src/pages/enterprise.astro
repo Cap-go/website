@@ -142,6 +142,29 @@ const enterpriseLevers = [
   },
 ]
 
+const approvalTracks = [
+  {
+    title: 'Security review',
+    description: 'Give InfoSec the controls they expect before a production rollout.',
+    items: ['SOC 2 certified infrastructure', 'ISO 27001 in progress', 'Audit logs, signed updates, and E2E encrypted updates'],
+  },
+  {
+    title: 'Reliability review',
+    description: 'Show that critical fixes can reach users fast without waiting on app review.',
+    items: ['99.9% uptime SLA', 'Updates under 100ms', '7-continent replication and instant rollback'],
+  },
+  {
+    title: 'Procurement review',
+    description: 'Keep finance and legal moving with enterprise-friendly paperwork.',
+    items: ['Signed NDAs and DPAs', 'Custom payment process', 'SAP, PO, and procurement workflows'],
+  },
+  {
+    title: 'Migration review',
+    description: 'Plan the switch from Appflow, custom scripts, or Ionic Enterprise plugins.',
+    items: ['Live Updates, Native Builds, and App Store publishing in one platform', 'Ionic enterprise alternative plugins', 'Onboarding and training with our team'],
+  },
+]
+
 const customers = [
   { name: 'Nana', downloads: '2.5M', logo: '/nana-logo-transparent.webp' },
   { name: 'Snowqueen', downloads: '1.8M', logo: '/snowqueen.webp' },
@@ -274,23 +297,10 @@ const stats = [
               <div>
                 <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.enterprise_title({}, { locale })}</p>
                 <h2 class="mt-3 text-3xl font-semibold tracking-tight text-gray-950">Custom</h2>
+                <p class="mt-3 max-w-sm text-sm leading-6 text-gray-600">Scope usage, compliance, procurement, and support with the team that will onboard you.</p>
               </div>
               <span class="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">For scale</span>
             </div>
-            <a
-              href="https://cal.com/team/capgo/capgo-enterprise-inquiry"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Talk to our team"
-              class="mt-6 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-            >
-              <span class="flex -space-x-2" aria-hidden="true">
-                <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/martin-avatar.png" alt="" width="24" height="24" loading="lazy" />
-                <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/valeria-avatar.jpg" alt="" width="24" height="24" loading="lazy" />
-                <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/jordan-avatar.jpg" alt="" width="24" height="24" loading="lazy" />
-              </span>
-              <span>Talk to our team</span>
-            </a>
           </div>
           <div class="divide-y divide-gray-100">
             {
@@ -356,6 +366,42 @@ const stats = [
             </article>
           ))
         }
+      </div>
+    </section>
+
+    <section class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+          <div>
+            <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">Enterprise approval</p>
+            <h2 class="mt-3 text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">Built for security, legal, finance, and release teams.</h2>
+            <p class="mt-4 text-base leading-7 text-gray-600">
+              Enterprise deals fail when each reviewer has to rediscover the same answers. Capgo packages the operational, compliance, and migration details teams need to approve a
+              release platform.
+            </p>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            {
+              approvalTracks.map((track) => (
+                <article class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+                  <h3 class="text-lg font-semibold tracking-tight text-gray-950">{track.title}</h3>
+                  <p class="mt-2 text-sm leading-6 text-gray-600">{track.description}</p>
+                  <ul class="mt-5 space-y-3">
+                    {track.items.map((item) => (
+                      <li class="flex gap-3 text-sm leading-6 font-medium text-gray-700">
+                        <svg class="mt-1 h-4 w-4 shrink-0 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                        </svg>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              ))
+            }
+          </div>
+        </div>
       </div>
     </section>
 
