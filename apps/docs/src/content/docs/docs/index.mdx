@@ -17,6 +17,7 @@ hero:
 ---
 
 import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { pluginCountLabel } from '@/config/plugins';
 
 ## 🚀 Capgo Cloud - Live Updates Made Simple
 
@@ -49,7 +50,7 @@ import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
     href="/docs/plugins/electron-updater/"
   />
   <LinkCard
-    title="20+ Capacitor Plugins"
+    title={`${pluginCountLabel} Capacitor Plugins`}
     description="Explore our collection of production-ready plugins for biometrics, purchases, camera, storage, and more native features."
     href="/docs/plugins/"
   />

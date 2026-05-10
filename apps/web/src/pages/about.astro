@@ -3,6 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { createLdJsonGraph, createPersonLdJson, createWebPageLdJson } from '@/lib/ldJson'
+import { pluginCountLabel } from '@/config/plugins'
 import type { Thing } from 'schema-dts'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.about_capgo({}, { locale: Astro.locals.locale })].join(' | ')
@@ -130,7 +131,8 @@ const content = {
             </div>
             <h3 class="mb-2 text-xl font-bold text-white">Enterprise Support Contracts</h3>
             <p class="text-sm text-gray-300">
-              Multiple Fortune 500 companies have long-term support contracts with us, ensuring Capgo and our 30+ plugins will be maintained and improved for years to come.
+              Multiple Fortune 500 companies have long-term support contracts with us, ensuring Capgo and our {pluginCountLabel} plugins will be maintained and improved for years to
+              come.
             </p>
           </div>
         </div>
@@ -140,7 +142,7 @@ const content = {
           <h3 class="mb-4 text-center text-xl font-bold text-white">Why Enterprises Trust Capgo</h3>
           <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
             <div class="text-center">
-              <p class="text-2xl font-bold text-white">30+</p>
+              <p class="text-2xl font-bold text-white">{pluginCountLabel}</p>
               <p class="text-xs text-gray-400">Open Source Plugins</p>
             </div>
             <div class="text-center">
@@ -392,7 +394,8 @@ const content = {
                 { locale: Astro.locals.locale },
               )
             }
-            With 30+ maintained plugins and long-term support contracts with multiple enterprises, we're building infrastructure that companies can depend on for the next decade.
+            With {pluginCountLabel} maintained plugins and long-term support contracts with multiple enterprises, we're building infrastructure that companies can depend on for the next
+            decade.
           </p>
           <h3 class="mb-4 text-2xl font-bold text-white">💪 {m.practicing_what_we_preach({}, { locale: Astro.locals.locale })}</h3>
           <p class="mb-6 text-gray-300">

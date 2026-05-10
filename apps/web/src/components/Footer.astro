@@ -1,5 +1,6 @@
 ---
 import m from '@/copy/messages'
+import { pluginCountLabel } from '@/config/plugins'
 import { getLocalizedPath } from '@/services/locale-path'
 import { locales } from '@/services/locale'
 import { getRelativeLocaleUrl } from 'astro:i18n'
@@ -182,7 +183,7 @@ const navigation: Record<string, NavigationItem[]> = {
     <div class="mb-12 flex flex-col items-start justify-between lg:flex-row lg:items-center">
       <h2 class="mb-6 max-w-2xl text-3xl font-bold tracking-tight text-white md:text-4xl lg:mb-0">
         {m.footer_tagline_part1({}, { locale: Astro.locals.locale })}
-        <span class="block text-zinc-500">{m.footer_tagline_part2({}, { locale: Astro.locals.locale })}</span>
+        <span class="block text-zinc-500">{m.footer_tagline_part2({ pluginCountLabel }, { locale: Astro.locals.locale })}</span>
       </h2>
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}

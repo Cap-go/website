@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import m from '@/copy/messages'
+import { pluginCountLabel } from '@/config/plugins'
 
 const locale = Astro.locals.locale
 const title = m.capflow_title({}, { locale })
@@ -118,7 +119,7 @@ const migrationServicesUrl = getRelativeLocaleUrl(locale, 'consulting')
             <p class="text-gray-300">
               {m.appflow_experience_desc({}, { locale })}
             </p>
-            <p class="mt-2 text-sm text-gray-400" set:html={m.appflow_experience_note({}, { locale })} />
+            <p class="mt-2 text-sm text-gray-400" set:html={m.appflow_experience_note({ pluginCountLabel }, { locale })} />
           </div>
 
           <!-- Support -->

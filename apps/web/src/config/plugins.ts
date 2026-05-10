@@ -286,3 +286,6 @@ export const actions: Action[] = actionDefinitionRows.map((row) => {
   const [name, author, description, href, title] = row.split('|')
   return { name, author, description, href, title, icon: pluginIconsByName[name] }
 })
+
+export const pluginCount = actions.length
+export const pluginCountLabel = `${pluginCount}+`

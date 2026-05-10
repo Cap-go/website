@@ -85,7 +85,7 @@ We love Ionic and Capacitor, and we're here for the long haul. If any part of th
 
 ### Proven Track Record
 - **Massive Scale**: Serving over 30 million live updates daily in our cloud infrastructure, with even more in self-hosted environments
-- **Active Development**: Created and maintained over 20 plugins in the Capacitor ecosystem: [explore our plugins](https://github.com/cap-go/)
+- **Active Development**: Created and maintained a broad plugin collection in the Capacitor ecosystem: [explore our plugins](https://github.com/cap-go/)
 - **Growing Community**: Successfully helping numerous teams transition to Capgo this year
 - **Complete Solutions**: Providing comprehensive CI/CD solutions, from tutorials to full service integration
 - **Sustainable Model**: Self-funded and profitable, ensuring long-term stability for our users

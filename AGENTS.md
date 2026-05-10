@@ -27,6 +27,12 @@ bunx @tailwindcss/upgrade --force
 
 - Do not switch Open Graph or Twitter/X social meta images to `webp`; use `png` or `jpg`/`jpeg` for those assets and tags.
 
+## Plugin Count Copy
+
+- Never hardcode the number of Capgo plugins in text, marketing copy, docs, or UI.
+- Use the real registry-derived count from `apps/web/src/config/plugins.ts` (`pluginCount` or `pluginCountLabel`) anywhere code can import it.
+- In Markdown or static content that cannot import the registry value, avoid stating a plugin count and link to the live plugin directory instead.
+
 ## Adding A Plugin To The Website
 
 - Add the plugin registry entry in `apps/web/src/config/plugins.ts` inside `actionDefinitionRows` with the package name, title, short description, and GitHub URL.
