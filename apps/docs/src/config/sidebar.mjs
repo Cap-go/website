@@ -219,6 +219,7 @@ const pluginEntries = [
   ),
   ['StreamCall', 'streamcall'],
   ['Text Interaction', 'textinteraction'],
+  ['Transitions', 'transitions'],
   ['Twilio Video', 'twilio-video'],
   ['Twilio Voice', 'twilio-voice'],
   ['Uploader', 'uploader'],
