@@ -119,6 +119,33 @@ export function InboxPage() {
 }
 ```
 
+### React JSX TypeScript
+
+Importing from `@capgo/capacitor-transitions/react` includes JSX typings for `cap-router-outlet`, `cap-page`, `cap-header`, `cap-content`, and `cap-footer`. In most React projects, that import makes the custom elements valid in TSX automatically.
+
+If TypeScript still reports `Property 'cap-router-outlet' does not exist on type 'JSX.IntrinsicElements'`, add a project declaration file:
+
+```ts
+// src/capgo-transitions.d.ts
+import '@capgo/capacitor-transitions/react';
+```
+
+For Vite, Create React App, and most webpack React apps, placing that file inside `src/` is enough. For Next.js, put it in `src/` or the project root and make sure `tsconfig.json` includes it:
+
+```json
+{
+  "include": ["src", "src/capgo-transitions.d.ts"]
+}
+```
+
+For custom TypeScript or webpack setups that use a separate `types/` folder, include that folder instead:
+
+```json
+{
+  "include": ["src", "types"]
+}
+```
+
 ## Swipe Back
 
 Enable or disable the iOS edge gesture from markup:
