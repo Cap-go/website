@@ -1310,7 +1310,7 @@ const messages = {
   help_customers_with_app_issues: 'Help customers with app issues efficiently',
   here: 'here.',
   hero_secondary_cta: 'See live updates',
-  hero_highlight_capacitor: 'Capacitor app without app review',
+  hero_highlight_capacitor: 'without app review',
   hero_subtitle_line2: 'Protect users with channels, rollback, device logs, and CLI safety checks.',
   hero_subtitle_part1: 'Ship JavaScript, CSS, copy, and asset fixes in minutes.',
   hero_subtitle_part2: '',
@@ -1406,7 +1406,7 @@ const messages = {
   instant_updates_for_capacitor_apps: 'Live updates for Capacitor apps',
   instant_updates_for_capacitor_apps_description:
     'When a web-layer bug is live, ship the fix through Capgo instead of waiting days for app store approval. Users get the update in the background while native changes stay in the normal review path.',
-  instant_updates_for_your: 'Fix production bugs in your',
+  instant_updates_for_your: 'Fix Capacitor bugs',
   instant_version_switching: 'Instant version switching',
   integrate_identity_provider_mfa: 'Integrate with your identity provider and enforce multi-factor authentication across your organization.',
   integration_and_api: 'Integration & API',
