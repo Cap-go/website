@@ -1,33 +1,24 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import Testimonials from '@/components/Testimonials.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import m from '@/copy/messages'
 import type { Database } from '@/services/supabase.types'
 import { createLdJsonGraph, createServiceLdJson, createProductLdJson } from '@/lib/ldJson'
-import HierarchyDashboardIllustration from '@/components/solutions/HierarchyDashboardIllustration.astro'
-import RolloutIllustration from '@/components/solutions/RolloutIllustration.astro'
-import SecurityIllustration from '@/components/solutions/SecurityIllustration.astro'
 
 const locale = Astro.locals.locale
 const config = Astro.locals.runtimeConfig
 
-let plansAll: Database['public']['Tables']['plans']['Row'][] = []
-const payg = plansAll.length ? plansAll.filter((p) => p.name === 'Enterprise')[0] : undefined
-
-// Fetch plans data
 const response = await fetch(`${config.public.baseApiUrl}/private/plans`)
-plansAll = await response.json()
+const plansAll: Database['public']['Tables']['plans']['Row'][] = await response.json()
+const payg = plansAll.find((p) => p.name === 'Enterprise')
 
 const title = [Astro.locals.runtimeConfig.public.brand, 'Enterprise'].join(' | ')
 const description = 'Enterprise-grade live updates for Capacitor apps. Built for teams that need advanced security, compliance, and dedicated support at scale.'
 
-// Build absolute URLs for structured data (Schema.org requires absolute URLs)
 const baseUrl = Astro.locals.runtimeConfig.public.baseUrl
 const enterpriseUrl = `${baseUrl}${getRelativeLocaleUrl(Astro.locals.locale, 'enterprise/')}`
 const homeUrl = `${baseUrl}${getRelativeLocaleUrl(Astro.locals.locale, '/')}`
 
-// Create enterprise service schema
 const enterpriseService = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: 'Capgo Enterprise - Professional Live Updates',
   description: 'Enterprise-grade live update platform for Capacitor applications with advanced security, compliance features, and dedicated support for large-scale deployments.',
@@ -36,7 +27,6 @@ const enterpriseService = createServiceLdJson(Astro.locals.runtimeConfig.public,
   areaServed: ['Worldwide'],
 })
 
-// Create enterprise product offering
 const enterpriseProduct = createProductLdJson(Astro.locals.runtimeConfig.public, {
   name: 'Capgo Enterprise Plan',
   description: 'Complete enterprise solution with advanced security, compliance, dedicated support, and unlimited scalability for professional teams.',
@@ -52,7 +42,6 @@ const enterpriseProduct = createProductLdJson(Astro.locals.runtimeConfig.public,
   ],
 })
 
-// Enhanced enterprise product with additional properties
 const enhancedEnterpriseProduct = {
   ...enterpriseProduct,
   category: 'Enterprise Software',
@@ -101,7 +90,6 @@ const enhancedEnterpriseProduct = {
   },
 }
 
-// Create comprehensive LD+JSON for enterprise page
 const content = {
   title,
   description,
@@ -124,914 +112,281 @@ const content = {
 }
 
 const enterpriseDecisionPoints = [m.enterprise_decision_point_1({}, { locale }), m.enterprise_decision_point_2({}, { locale }), m.enterprise_decision_point_3({}, { locale })]
+
+const customers = [
+  { name: 'Nana', downloads: '2.5M', logo: '/nana-logo-transparent.webp' },
+  { name: 'Snowqueen', downloads: '1.8M', logo: '/snowqueen.webp' },
+  { name: 'Shelf', downloads: '950K', logo: '/shelf_app.webp' },
+  { name: 'Suez', downloads: '3.2M', logo: '/suez.webp' },
+  { name: 'Janitor', downloads: '750K', logo: '/janitor_app.webp' },
+]
+
+const pillars = [
+  {
+    eyebrow: 'Control',
+    title: m.solutions_enterprise_sol1_title({}, { locale }),
+    description: m.solutions_enterprise_sol1_desc({}, { locale }),
+    points: [m.solutions_enterprise_sol1_point1({}, { locale }), m.solutions_enterprise_sol1_point2({}, { locale }), m.solutions_enterprise_sol1_point3({}, { locale })],
+  },
+  {
+    eyebrow: 'Release safety',
+    title: m.solutions_enterprise_sol2_title({}, { locale }),
+    description: m.solutions_enterprise_sol2_desc({}, { locale }),
+    points: [m.solutions_enterprise_sol2_point1({}, { locale }), m.solutions_enterprise_sol2_point2({}, { locale }), m.solutions_enterprise_sol2_point3({}, { locale })],
+  },
+  {
+    eyebrow: 'Audit trail',
+    title: m.solutions_enterprise_sol3_title({}, { locale }),
+    description: m.solutions_enterprise_sol3_desc({}, { locale }),
+    points: [m.solutions_enterprise_sol3_point1({}, { locale }), 'SOC 2 certified infrastructure', 'ISO 27001 in progress'],
+  },
+]
+
+const includedGroups = [
+  {
+    title: 'Live updates at scale',
+    items: ['1M+ MAUs', '1,000 GiB bandwidth/month', '500 GiB storage', 'Delta updates', 'Updates under 100ms', '7-continent replication'],
+  },
+  {
+    title: 'Enterprise control',
+    items: ['Unlimited apps, members, and teams', 'Single sign-on (SSO)', 'Custom domain', 'Audit logs', '90-day org statistics', '90-day device logs'],
+  },
+  {
+    title: 'Compliance and procurement',
+    items: ['SOC 2 certified', 'ISO 27001 ongoing', 'Signed NDAs and DPAs', 'Custom payment process', 'SAP and procurement workflows', 'Stripe payment options'],
+  },
+  {
+    title: 'Support and onboarding',
+    items: ['Dedicated Slack/Teams channel', 'Dedicated account manager', 'Onboarding and training', '99.9% uptime SLA', 'Priority support', 'Discord support'],
+  },
+]
+
+const stats = [
+  { value: '500M+', label: m.solutions_enterprise_stat_updates({}, { locale }) },
+  { value: '99.9%', label: m.solutions_enterprise_stat_uptime({}, { locale }) },
+  { value: '<10s', label: m.solutions_enterprise_stat_rollback({}, { locale }) },
+]
 ---
 
 <Layout content={content}>
-  <!-- Hero Section -->
-  <section class="relative overflow-hidden py-20 sm:py-28 lg:py-36">
-    <div class="pointer-events-none absolute inset-0 overflow-hidden">
-      <div class="absolute top-0 left-1/2 h-full w-full max-w-6xl -translate-x-1/2">
-        <div class="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl"></div>
-        <div class="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-purple-500/10 blur-3xl"></div>
-      </div>
-    </div>
-
-    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-4xl text-center">
-        <div class="mb-8 inline-flex items-center rounded-full border border-blue-400/40 bg-blue-500/10 px-4 py-2 text-sm font-medium text-blue-200">
-          <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-          </svg>
-          {m.enterprise_ready()}
-        </div>
-
-        <h1 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">
-          {m.deliver_updates({}, { locale: Astro.locals.locale })}
-          <br />
-          {m.at_scale({}, { locale: Astro.locals.locale })}
-        </h1>
-
-        <p class="mx-auto mt-8 max-w-3xl text-xl leading-relaxed text-gray-300">
-          {m.deploy_ota({}, { locale: Astro.locals.locale })}
-        </p>
-
-        <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a
-            href="https://cal.com/team/capgo/demo"
-            target="_blank"
-            class="rounded-xl bg-blue-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-blue-500/25 transition-all duration-200 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          >
-            {m.request_demo({}, { locale: Astro.locals.locale })}
-          </a>
-          <a
-            href="https://cal.com/team/capgo/capgo-enterprise-inquiry"
-            target="_blank"
-            class="rounded-xl border border-gray-600 px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 hover:bg-gray-800 hover:text-white"
-          >
-            {m.contact_sales({}, { locale: Astro.locals.locale })}
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Trusted By Section -->
-  <section class="bg-gray-800 py-12 sm:py-16">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <h2 class="text-center text-lg/8 font-semibold text-gray-200">{m.trusted_by_the_biggest_capacitor_apps({}, { locale: Astro.locals.locale })}</h2>
-      <div class="mx-auto mt-10 grid max-w-lg grid-cols-2 items-center gap-x-8 gap-y-10 sm:max-w-2xl sm:grid-cols-3 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
-        <div class="flex flex-col items-center space-y-2">
-          <div class="rounded-2xl bg-gray-600 shadow-sm">
-            <img class="h-12 w-12 rounded-xl object-contain grayscale" src="/nana-logo-transparent.webp" alt="Nana" width="48" height="48" />
-          </div>
-          <div class="text-center">
-            <p class="text-sm font-medium text-gray-200">Nana</p>
-            <p class="text-xs text-gray-400">2.5M {m.downloads({}, { locale: Astro.locals.locale })}</p>
-          </div>
-        </div>
-        <div class="flex flex-col items-center space-y-2">
-          <div class="rounded-2xl bg-gray-600 shadow-sm">
-            <img class="h-12 w-12 rounded-xl object-contain brightness-90 contrast-75 grayscale" src="/snowqueen.webp" alt="Snowqueen" width="48" height="48" />
-          </div>
-          <div class="text-center">
-            <p class="text-sm font-medium text-gray-200">Snowqueen</p>
-            <p class="text-xs text-gray-400">1.8M {m.downloads({}, { locale: Astro.locals.locale })}</p>
-          </div>
-        </div>
-        <div class="flex flex-col items-center space-y-2">
-          <div class="rounded-2xl bg-gray-600 shadow-sm">
-            <img class="h-12 w-12 rounded-xl object-contain brightness-90 contrast-75 grayscale" src="/shelf_app.webp" alt="Shelf" width="48" height="48" />
-          </div>
-          <div class="text-center">
-            <p class="text-sm font-medium text-gray-200">Shelf</p>
-            <p class="text-xs text-gray-400">950K {m.downloads({}, { locale: Astro.locals.locale })}</p>
-          </div>
-        </div>
-        <div class="flex flex-col items-center space-y-2">
-          <div class="rounded-2xl bg-gray-600 shadow-sm">
-            <img class="h-12 w-12 rounded-xl object-contain brightness-90 contrast-75 grayscale" src="/suez.webp" alt="Suez" width="48" height="48" />
-          </div>
-          <div class="text-center">
-            <p class="text-sm font-medium text-gray-200">Suez</p>
-            <p class="text-xs text-gray-400">3.2M {m.downloads({}, { locale: Astro.locals.locale })}</p>
-          </div>
-        </div>
-        <div class="flex flex-col items-center space-y-2">
-          <div class="rounded-2xl bg-gray-600 shadow-sm">
-            <img class="h-12 w-12 rounded-xl object-contain grayscale" src="/janitor_app.webp" alt="Janitor" width="48" height="48" />
-          </div>
-          <div class="text-center">
-            <p class="text-sm font-medium text-gray-200">Janitor</p>
-            <p class="text-xs text-gray-400">750K {m.downloads({}, { locale: Astro.locals.locale })}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-gray-950 py-16">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <div>
-          <p class="text-sm font-semibold tracking-wide text-blue-300 uppercase">{m.enterprise_decision_criteria_eyebrow({}, { locale })}</p>
-          <h2 class="mt-4 text-3xl font-bold text-white sm:text-4xl">{m.enterprise_decision_criteria_title({}, { locale })}</h2>
-          <p class="mt-4 text-lg leading-8 text-gray-300">
-            {m.enterprise_decision_criteria_desc({}, { locale })}
+  <main class="bg-gray-50 text-gray-950">
+    <section class="mx-auto max-w-7xl px-4 pt-16 pb-12 sm:px-6 sm:pt-20 lg:px-8 lg:pt-24">
+      <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
+        <div class="flex flex-col justify-center">
+          <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.enterprise_ready()}</p>
+          <h1 class="mt-4 max-w-4xl text-4xl leading-tight font-semibold tracking-tight text-gray-950 sm:text-5xl lg:text-6xl">
+            {m.deliver_updates({}, { locale })}
+            <span class="block text-gray-500">{m.at_scale({}, { locale })}</span>
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
+            {m.deploy_ota({}, { locale })}
           </p>
-        </div>
-        <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
-          <h3 class="text-xl font-bold text-white">{m.enterprise_decision_questions_title({}, { locale })}</h3>
-          <ul class="mt-5 space-y-4 text-sm leading-6 text-gray-300">
-            {
-              enterpriseDecisionPoints.map((item) => (
-                <li class="flex gap-3">
-                  <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-300" />
-                  <span>{item}</span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Your Problems - We Get It -->
-  <section class="bg-gray-900 py-20">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="mx-auto mb-16 max-w-3xl text-center">
-        <h2 class="mb-4 text-sm font-semibold tracking-wide text-red-400 uppercase">{m.solutions_enterprise_problems_label({}, { locale })}</h2>
-        <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_enterprise_problems_title({}, { locale })}</h3>
-      </div>
-
-      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        <!-- Problem 1: Multiple Apps -->
-        <div class="rounded-2xl border border-red-500/20 bg-gray-800 p-8">
-          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
-            <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
-              ></path>
-            </svg>
-          </div>
-          <h4 class="mb-3 text-xl font-bold text-white">{m.solutions_enterprise_problem1_title({}, { locale })}</h4>
-          <p class="text-gray-400">{m.solutions_enterprise_problem1_desc({}, { locale })}</p>
-        </div>
-
-        <!-- Problem 2: Version Fragmentation -->
-        <div class="rounded-2xl border border-red-500/20 bg-gray-800 p-8">
-          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
-            <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"
-              ></path>
-            </svg>
-          </div>
-          <h4 class="mb-3 text-xl font-bold text-white">{m.solutions_enterprise_problem2_title({}, { locale })}</h4>
-          <p class="text-gray-400">{m.solutions_enterprise_problem2_desc({}, { locale })}</p>
-        </div>
-
-        <!-- Problem 3: Compliance & Audits -->
-        <div class="rounded-2xl border border-red-500/20 bg-gray-800 p-8">
-          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
-            <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-              ></path>
-            </svg>
-          </div>
-          <h4 class="mb-3 text-xl font-bold text-white">{m.solutions_enterprise_problem3_title({}, { locale })}</h4>
-          <p class="text-gray-400">{m.solutions_enterprise_problem3_desc({}, { locale })}</p>
-        </div>
-
-        <!-- Problem 4: Slow Rollouts -->
-        <div class="rounded-2xl border border-red-500/20 bg-gray-800 p-8">
-          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
-            <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-          </div>
-          <h4 class="mb-3 text-xl font-bold text-white">{m.solutions_enterprise_problem4_title({}, { locale })}</h4>
-          <p class="text-gray-400">{m.solutions_enterprise_problem4_desc({}, { locale })}</p>
-        </div>
-
-        <!-- Problem 5: Team Coordination -->
-        <div class="rounded-2xl border border-red-500/20 bg-gray-800 p-8">
-          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
-            <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-              ></path>
-            </svg>
-          </div>
-          <h4 class="mb-3 text-xl font-bold text-white">{m.solutions_enterprise_problem5_title({}, { locale })}</h4>
-          <p class="text-gray-400">{m.solutions_enterprise_problem5_desc({}, { locale })}</p>
-        </div>
-
-        <!-- Problem 6: Production Incidents -->
-        <div class="rounded-2xl border border-red-500/20 bg-gray-800 p-8">
-          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20">
-            <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-            </svg>
-          </div>
-          <h4 class="mb-3 text-xl font-bold text-white">{m.solutions_enterprise_problem6_title({}, { locale })}</h4>
-          <p class="text-gray-400">{m.solutions_enterprise_problem6_desc({}, { locale })}</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- How We Solve It -->
-  <section class="bg-gray-800 py-20">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="mx-auto mb-16 max-w-3xl text-center">
-        <h2 class="mb-4 text-sm font-semibold tracking-wide text-green-400 uppercase">{m.solutions_enterprise_solution_label({}, { locale })}</h2>
-        <h3 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_enterprise_solution_title({}, { locale })}</h3>
-        <p class="mt-4 text-xl text-gray-400">{m.solutions_enterprise_solution_subtitle({}, { locale })}</p>
-      </div>
-
-      <div class="space-y-12">
-        <!-- Solution 1: Multi-App Management -->
-        <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 lg:p-10">
-          <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
-            <div>
-              <div class="mb-4 flex items-center gap-3">
-                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/20">
-                  <svg class="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-                    ></path>
-                  </svg>
-                </div>
-                <h3 class="text-xl font-bold text-white">{m.solutions_enterprise_sol1_title({}, { locale })}</h3>
-              </div>
-              <p class="mb-4 text-gray-300">{m.solutions_enterprise_sol1_desc({}, { locale })}</p>
-              <ul class="space-y-2">
-                <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd"></path>
-                  </svg>
-                  {m.solutions_enterprise_sol1_point1({}, { locale })}
-                </li>
-                <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd"></path>
-                  </svg>
-                  {m.solutions_enterprise_sol1_point2({}, { locale })}
-                </li>
-                <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd"></path>
-                  </svg>
-                  {m.solutions_enterprise_sol1_point3({}, { locale })}
-                </li>
-              </ul>
-            </div>
-            <div class="flex items-center justify-center rounded-xl bg-gray-800 p-6">
-              <div class="w-full max-w-sm">
-                <HierarchyDashboardIllustration class="text-green-500" />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Solution 2: Staged Rollouts -->
-        <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 lg:p-10">
-          <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
-            <div class="order-2 flex items-center justify-center rounded-xl bg-gray-800 p-6 lg:order-1">
-              <div class="w-full max-w-sm">
-                <RolloutIllustration class="text-blue-500" />
-              </div>
-            </div>
-            <div class="order-1 lg:order-2">
-              <div class="mb-4 flex items-center gap-3">
-                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/20">
-                  <svg class="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                    ></path>
-                  </svg>
-                </div>
-                <h3 class="text-xl font-bold text-white">{m.solutions_enterprise_sol2_title({}, { locale })}</h3>
-              </div>
-              <p class="mb-4 text-gray-300">{m.solutions_enterprise_sol2_desc({}, { locale })}</p>
-              <ul class="space-y-2">
-                <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd"></path>
-                  </svg>
-                  {m.solutions_enterprise_sol2_point1({}, { locale })}
-                </li>
-                <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd"></path>
-                  </svg>
-                  {m.solutions_enterprise_sol2_point2({}, { locale })}
-                </li>
-                <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd"></path>
-                  </svg>
-                  {m.solutions_enterprise_sol2_point3({}, { locale })}
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Solution 3: Security & Compliance -->
-        <div class="rounded-2xl border border-gray-700 bg-gray-900 p-8 lg:p-10">
-          <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
-            <div>
-              <div class="mb-4 flex items-center gap-3">
-                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/20">
-                  <svg class="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                  </svg>
-                </div>
-                <h3 class="text-xl font-bold text-white">{m.solutions_enterprise_sol3_title({}, { locale })}</h3>
-              </div>
-              <p class="mb-4 text-gray-300">{m.solutions_enterprise_sol3_desc({}, { locale })}</p>
-              <ul class="space-y-2">
-                <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd"></path>
-                  </svg>
-                  {m.solutions_enterprise_sol3_point1({}, { locale })}
-                </li>
-                <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd"></path>
-                  </svg>
-                  {m.solutions_enterprise_sol3_point2({}, { locale })}
-                </li>
-                <li class="flex items-start gap-2 text-gray-400">
-                  <svg class="mt-0.5 h-5 w-5 shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd"></path>
-                  </svg>
-                  {m.solutions_enterprise_sol3_point3({}, { locale })}
-                </li>
-              </ul>
-            </div>
-            <div class="flex items-center justify-center rounded-xl bg-gray-800 p-6">
-              <div class="w-full max-w-sm">
-                <SecurityIllustration class="text-purple-500" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Enterprise Customers Stats -->
-  <section class="bg-gray-900 py-20">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="mx-auto mb-16 max-w-3xl text-center">
-        <h2 class="text-3xl font-bold text-white sm:text-4xl">{m.solutions_enterprise_customers_title({}, { locale })}</h2>
-        <p class="mt-4 text-xl text-gray-400">{m.solutions_enterprise_customers_subtitle({}, { locale })}</p>
-      </div>
-
-      <div class="mb-12 grid grid-cols-1 gap-8 md:grid-cols-3">
-        <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8 text-center">
-          <div class="mb-2 text-5xl font-bold text-blue-400">500M+</div>
-          <p class="text-gray-400">{m.solutions_enterprise_stat_updates({}, { locale })}</p>
-        </div>
-        <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8 text-center">
-          <div class="mb-2 text-5xl font-bold text-green-400">99.9%</div>
-          <p class="text-gray-400">{m.solutions_enterprise_stat_uptime({}, { locale })}</p>
-        </div>
-        <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8 text-center">
-          <div class="mb-2 text-5xl font-bold text-purple-400">&lt;10s</div>
-          <p class="text-gray-400">{m.solutions_enterprise_stat_rollback({}, { locale })}</p>
-        </div>
-      </div>
-
-      <!-- Testimonial -->
-      <div class="mx-auto max-w-3xl">
-        <div class="rounded-2xl border border-gray-700 bg-gray-800 p-8">
-          <div class="mb-4 flex items-center gap-1">
-            {
-              Array.from({ length: 5 }).map(() => (
-                <svg class="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-              ))
-            }
-          </div>
-          <p class="mb-6 text-lg text-gray-300 italic">"{m.solutions_enterprise_testimonial({}, { locale })}"</p>
-          <div class="flex items-center gap-3">
-            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/20">
-              <span class="text-lg font-bold text-blue-400">J</span>
-            </div>
-            <div>
-              <p class="font-semibold text-white">{m.solutions_enterprise_testimonial_author({}, { locale })}</p>
-              <p class="text-sm text-gray-400">{m.solutions_enterprise_testimonial_role({}, { locale })}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Enterprise Features Section -->
-  <section class="bg-gray-900 py-16 sm:py-20">
-    <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-      <h2 class="text-base/7 font-semibold text-gray-200">{m.enterprise_features({}, { locale: Astro.locals.locale })}</h2>
-      <p class="mt-2 max-w-2xl text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
-        {m.built_for_enterprise_teams({}, { locale: Astro.locals.locale })}
-      </p>
-      <p class="mt-4 max-w-2xl text-lg text-gray-400">{m.advanced_collaboration_security_compliance({}, { locale: Astro.locals.locale })}</p>
-
-      <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6">
-        <!-- Organizations and Teams -->
-        <div class="flex p-px lg:col-span-2">
-          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-blue-900/30">
-              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                ></path>
-              </svg>
-              <h3 class="text-xl font-bold text-white">{m.organizations_and_teams({}, { locale: Astro.locals.locale })}</h3>
-            </div>
-            <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.centralized_management({}, { locale: Astro.locals.locale })}</p>
-              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                {m.organize_projects_across_teams({}, { locale: Astro.locals.locale })}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Role-Based Access Control -->
-        <div class="flex p-px lg:col-span-2">
-          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-purple-900/30">
-              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-              </svg>
-              <h3 class="text-xl font-bold text-white">{m.role_based_access_control({}, { locale: Astro.locals.locale })}</h3>
-            </div>
-            <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.fine_grained_permissions({}, { locale: Astro.locals.locale })}</p>
-              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                {m.control_access_deploy_manage({}, { locale: Astro.locals.locale })}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Enterprise Billing -->
-        <div class="flex p-px lg:col-span-2">
-          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-green-900/30">
-              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-              </svg>
-              <h3 class="text-xl font-bold text-white">{m.enterprise_billing({}, { locale: Astro.locals.locale })}</h3>
-            </div>
-            <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.flexible_payment_terms({}, { locale: Astro.locals.locale })}</p>
-              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                {m.consolidated_invoicing_purchase_orders({}, { locale: Astro.locals.locale })}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- SSO + 2FA -->
-        <div class="flex p-px lg:col-span-3">
-          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-orange-900/30">
-              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                ></path>
-              </svg>
-              <h3 class="text-xl font-bold text-white">{m.sso_2fa({}, { locale: Astro.locals.locale })}</h3>
-            </div>
-            <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.enterprise_authentication({}, { locale: Astro.locals.locale })}</p>
-              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                {m.integrate_identity_provider_mfa({}, { locale: Astro.locals.locale })}
-                <a href={getRelativeLocaleUrl(Astro.locals.locale, 'security')} class="ml-2 text-gray-200 underline hover:text-gray-200">
-                  {m.learn_more({}, { locale: Astro.locals.locale })}
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Open Source -->
-        <div class="flex p-px lg:col-span-3">
-          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-slate-900/30">
-              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-              </svg>
-              <h3 class="text-xl font-bold text-white">{m.open_source({}, { locale: Astro.locals.locale })}</h3>
-            </div>
-            <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.transparency_security({}, { locale: Astro.locals.locale })}</p>
-              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                {m.live_update_sdk_open_source({}, { locale: Astro.locals.locale })}
-                <a href="https://github.com/cap-go/" target="_blank" rel="noopener noreferrer" class="ml-2 text-[#44BCFF] underline hover:text-gray-200">
-                  {m.view_source({}, { locale: Astro.locals.locale })}
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Enterprise Plugins -->
-        <div class="flex p-px lg:col-span-6">
-          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-indigo-900/30">
-              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"
-                ></path>
-              </svg>
-              <h3 class="text-xl font-bold text-white">{m.enterprise_plugins({}, { locale: Astro.locals.locale })}</h3>
-            </div>
-            <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.premium_plugin_suite({}, { locale: Astro.locals.locale })}</p>
-              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                {m.access_maintain_enterprise_plugins({}, { locale: Astro.locals.locale })}
-                <a href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')} class="ml-2 text-indigo-400 underline hover:text-indigo-300">
-                  {m.explore_plugins({}, { locale: Astro.locals.locale })}
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Scalability Section -->
-  <section class="relative overflow-hidden bg-gray-800 py-16 sm:py-20">
-    <!-- Dynamic Floating Elements -->
-    <div class="absolute top-10 left-10 h-32 w-32 animate-pulse rounded-full bg-gray-800/40 blur-2xl"></div>
-    <div class="absolute right-10 bottom-10 h-40 w-40 animate-pulse rounded-full bg-gray-800/40 blur-2xl" style="animation-delay: 1.5s;"></div>
-
-    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="mb-8 text-center">
-        <div class="mb-8 inline-flex items-center rounded-full bg-gray-800/40 px-4 py-2 text-sm font-medium text-gray-200 ring-1 ring-white/15 ring-inset">
-          <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            ></path>
-          </svg>
-          {m.global_infrastructure({}, { locale: Astro.locals.locale })}
-        </div>
-
-        <h2 class="mb-6 text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">
-          <span class="text-gray-200">
-            {m.global_infrastructure_lowercase({}, { locale: Astro.locals.locale })}
-          </span>
-          <br />
-          <span class="text-white">{m.that_grows_with_you({}, { locale: Astro.locals.locale })}</span>
-        </h2>
-
-        <p class="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-300">
-          {m.powered_by_serverless_edge_computing({}, { locale: Astro.locals.locale })}
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
-        <div class="group relative">
-          <div
-            class="relative overflow-hidden rounded-3xl bg-gray-800/80 p-8 ring-1 ring-white/10 backdrop-blur-sm transition-all duration-300 hover:bg-gray-800/90 hover:ring-white/20"
-          >
-            <div class="mb-4 text-6xl font-bold text-gray-200">300+</div>
-            <div class="text-gray-300">{m.cities_worldwide({}, { locale: Astro.locals.locale })}<br />{m.for_ultra_fast_delivery({}, { locale: Astro.locals.locale })}</div>
-          </div>
-        </div>
-        <div class="group relative">
-          <div
-            class="relative overflow-hidden rounded-3xl bg-gray-800/80 p-8 ring-1 ring-white/10 backdrop-blur-sm transition-all duration-300 hover:bg-gray-800/90 hover:ring-white/20"
-          >
-            <div class="mb-4 text-6xl font-bold text-gray-200">13,000+</div>
-            <div class="text-gray-300">{m.network_connections({}, { locale: Astro.locals.locale })}<br />{m.direct_peering_worldwide({}, { locale: Astro.locals.locale })}</div>
-          </div>
-        </div>
-        <div class="group relative">
-          <div
-            class="relative overflow-hidden rounded-3xl bg-gray-800/80 p-8 ring-1 ring-white/10 backdrop-blur-sm transition-all duration-300 hover:bg-gray-800/90 hover:ring-white/20"
-          >
-            <div class="mb-4 text-6xl font-bold text-green-300">50ms</div>
-            <div class="text-gray-300">{m.from_95_percent_users({}, { locale: Astro.locals.locale })}<br />{m.ultra_low_latency({}, { locale: Astro.locals.locale })}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Security & Compliance Section -->
-  <section class="bg-gray-900 py-16 sm:py-20">
-    <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-      <h2 class="text-base/7 font-semibold text-gray-200">{m.security_compliance({}, { locale: Astro.locals.locale })}</h2>
-      <p class="mt-2 max-w-2xl text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
-        {m.enterprise_grade_security_trust({}, { locale: Astro.locals.locale })}
-      </p>
-      <p class="mt-4 max-w-2xl text-lg text-gray-400">{m.industry_leading_security_compliance({}, { locale: Astro.locals.locale })}</p>
-
-      <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-3">
-        <!-- SOC 2 Compliance -->
-        <div class="flex p-px">
-          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-blue-900/30">
-              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                ></path>
-              </svg>
-              <h3 class="text-xl font-bold text-white">{m.soc2_compliance({}, { locale: Astro.locals.locale })}</h3>
-            </div>
-            <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.type_ii_certified({}, { locale: Astro.locals.locale })}</p>
-              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                {m.soc2_type_ii_certified_infrastructure({}, { locale: Astro.locals.locale })}
-                <a href="https://trust.capgo.app" target="_blank" rel="noopener noreferrer" class="ml-2 text-gray-200 underline hover:text-gray-200">
-                  {m.trust_center({}, { locale: Astro.locals.locale })}
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Zero-Trust Security -->
-        <div class="flex p-px">
-          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-purple-900/30">
-              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-              </svg>
-              <h3 class="text-xl font-bold text-white">{m.zero_trust_security({}, { locale: Astro.locals.locale })}</h3>
-            </div>
-            <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.signed_verified({}, { locale: Astro.locals.locale })}</p>
-              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                {m.every_live_update_signed_verified({}, { locale: Astro.locals.locale })}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Multi-Factor Authentication -->
-        <div class="flex p-px">
-          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-green-900/30">
-              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path>
-              </svg>
-              <h3 class="text-xl font-bold text-white">{m.multi_factor_authentication({}, { locale: Astro.locals.locale })}</h3>
-            </div>
-            <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.enterprise_identity({}, { locale: Astro.locals.locale })}</p>
-              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                {m.mandatory_mfa_integration({}, { locale: Astro.locals.locale })}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Enterprise Support Section -->
-  <section class="bg-gray-800 py-16 sm:py-20">
-    <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-      <h2 class="text-base/7 font-semibold text-gray-200">{m.enterprise_support({}, { locale: Astro.locals.locale })}</h2>
-      <p class="mt-2 max-w-2xl text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
-        {m.first_class_support_when_needed({}, { locale: Astro.locals.locale })}
-      </p>
-      <p class="mt-4 max-w-2xl text-lg text-gray-400">{m.dedicated_support_channels_sla({}, { locale: Astro.locals.locale })}</p>
-
-      <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-3">
-        <!-- Priority Support -->
-        <div class="flex p-px">
-          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-orange-900/30">
-              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-              </svg>
-              <h3 class="text-xl font-bold text-white">{m.priority_support({}, { locale: Astro.locals.locale })}</h3>
-            </div>
-            <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.guaranteed_response({}, { locale: Astro.locals.locale })}</p>
-              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                {m.fast_track_support_guaranteed_response({}, { locale: Astro.locals.locale })}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Dedicated Support Channels -->
-        <div class="flex p-px">
-          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-blue-900/30">
-              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                ></path>
-              </svg>
-              <h3 class="text-xl font-bold text-white">{m.dedicated_channels({}, { locale: Astro.locals.locale })}</h3>
-            </div>
-            <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.direct_engineering_access({}, { locale: Astro.locals.locale })}</p>
-              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                {m.direct_access_engineering_team({}, { locale: Astro.locals.locale })}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Service Level Agreement -->
-        <div class="flex p-px">
-          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-indigo-900/30">
-              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-              </svg>
-              <h3 class="text-xl font-bold text-white">{m.service_level_agreement({}, { locale: Astro.locals.locale })}</h3>
-            </div>
-            <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.contractual_guarantees({}, { locale: Astro.locals.locale })}</p>
-              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                {m.contractual_sla_guarantees({}, { locale: Astro.locals.locale })}
-                <a href={getRelativeLocaleUrl(Astro.locals.locale, 'sla')} class="ml-2 text-indigo-400 underline hover:text-indigo-300">
-                  {m.view_sla({}, { locale: Astro.locals.locale })}
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials Section -->
-  <Testimonials />
-
-  <!-- Final CTA Section -->
-  <section class="relative bg-gray-900 py-16 sm:py-20">
-    <!-- Background Effects -->
-    <div class="absolute inset-0 overflow-hidden">
-      <div class="absolute -top-40 -left-40 h-80 w-80 animate-pulse rounded-full bg-gray-800/40 blur-3xl"></div>
-      <div class="absolute -right-40 -bottom-40 h-80 w-80 animate-pulse rounded-full bg-gray-800/40 blur-3xl" style="animation-delay: 2s;"></div>
-    </div>
-
-    <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="text-center">
-        <div class="mb-8 inline-flex items-center rounded-full bg-gray-800/40 px-4 py-2 text-sm font-medium text-gray-200 ring-1 ring-white/15 ring-inset">
-          <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          {m.ready_to_scale({}, { locale: Astro.locals.locale })}
-        </div>
-
-        <h2 class="mb-6 text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
-          <span class="text-gray-200">
-            {m.ready_to_deliver({}, { locale: Astro.locals.locale })}
-          </span>
-          <br />
-          <span class="text-white">{m.updates_at_scale({}, { locale: Astro.locals.locale })}</span>
-        </h2>
-
-        <p class="mx-auto mt-6 mb-10 max-w-3xl text-xl text-gray-300">
-          {m.join_leading_enterprises({}, { locale: Astro.locals.locale })}
-        </p>
-
-        <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <div class="group relative inline-flex" role="presentation">
-            <div
-              class="absolute -inset-4 rounded-xl opacity-70 transition-all duration-1000 group-hover:-inset-5 group-hover:opacity-100 group-hover:duration-200"
-              style="background: radial-gradient(ellipse at center, rgba(68, 188, 255, 0.6) 0%, rgba(68, 188, 255, 0.3) 40%, rgba(68, 188, 255, 0) 70%);"
-            >
-            </div>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
-              href="https://cal.com/team/capgo/demo"
+              href="https://cal.com/team/capgo/capgo-enterprise-inquiry"
               target="_blank"
-              class="relative inline-flex items-center justify-center rounded-xl border border-blue-500 bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 hover:bg-gray-900 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none"
+              rel="noopener noreferrer"
+              class="inline-flex min-h-11 items-center justify-center rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
             >
-              {m.request_demo({}, { locale: Astro.locals.locale })}
-              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-              </svg>
+              {m.contact_sales({}, { locale })}
+            </a>
+            <a
+              href={getRelativeLocaleUrl(locale, 'pricing')}
+              class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+            >
+              View pricing
             </a>
           </div>
-
-          <a
-            href="https://cal.com/team/capgo/capgo-enterprise-inquiry"
-            class="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-transparent px-8 py-4 text-lg font-bold text-white transition-all duration-200 hover:border-gray-200 hover:bg-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none"
-          >
-            {m.contact_sales({}, { locale: Astro.locals.locale })}
-          </a>
         </div>
 
-        <p class="mt-6 text-sm text-gray-400">
-          {m.get_started_personalized_demo({}, { locale: Astro.locals.locale })}
-        </p>
+        <aside class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+          <div class="border-b border-gray-200 p-6 sm:p-8">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.enterprise_title({}, { locale })}</p>
+                <h2 class="mt-3 text-3xl font-semibold tracking-tight text-gray-950">Custom</h2>
+              </div>
+              <span class="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">For scale</span>
+            </div>
+            <a
+              href="https://cal.com/team/capgo/capgo-enterprise-inquiry"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-6 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+            >
+              {m.get_enterprise_quote()}
+            </a>
+          </div>
+          <div class="divide-y divide-gray-100">
+            {
+              ['1M+ MAUs', '6 concurrent macOS M4 builds', 'Dedicated Slack/Teams channel', 'SSO, SOC 2, ISO 27001 ongoing', 'Onboarding and account management'].map((item) => (
+                <div class="flex items-center gap-3 px-6 py-4 text-sm font-medium text-gray-700 sm:px-8">
+                  <svg class="h-5 w-5 shrink-0 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                  </svg>
+                  <span>{item}</span>
+                </div>
+              ))
+            }
+          </div>
+        </aside>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section class="border-y border-gray-200 bg-white py-10">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <p class="text-center text-sm font-semibold tracking-wide text-gray-500 uppercase">{m.trusted_by_the_biggest_capacitor_apps({}, { locale })}</p>
+        <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+          {
+            customers.map((customer) => (
+              <div class="flex items-center gap-3 rounded-xl border border-gray-200 bg-white p-4">
+                <img class="h-10 w-10 rounded-lg object-contain grayscale" src={customer.logo} alt={customer.name} width="40" height="40" loading="lazy" />
+                <div>
+                  <p class="text-sm font-semibold text-gray-950">{customer.name}</p>
+                  <p class="text-xs font-medium text-gray-500">
+                    {customer.downloads} {m.downloads({}, { locale })}
+                  </p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.enterprise_decision_criteria_eyebrow({}, { locale })}</p>
+          <h2 class="mt-3 max-w-2xl text-3xl leading-tight font-semibold tracking-tight text-gray-950 sm:text-4xl">
+            {m.enterprise_decision_criteria_title({}, { locale })}
+          </h2>
+          <p class="mt-4 text-base leading-7 text-gray-600">{m.enterprise_decision_criteria_desc({}, { locale })}</p>
+        </div>
+        <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+          <div class="border-b border-gray-200 px-6 py-4">
+            <h3 class="text-base font-semibold text-gray-950">{m.enterprise_decision_questions_title({}, { locale })}</h3>
+          </div>
+          <div class="divide-y divide-gray-100">
+            {
+              enterpriseDecisionPoints.map((item, index) => (
+                <div class="flex gap-4 px-6 py-5">
+                  <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-50 text-sm font-semibold text-blue-700">{index + 1}</span>
+                  <p class="text-sm leading-6 font-medium text-gray-700">{item}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center">
+          <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.solutions_enterprise_solution_label({}, { locale })}</p>
+          <h2 class="mt-3 text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">{m.solutions_enterprise_solution_title({}, { locale })}</h2>
+          <p class="mt-4 text-base leading-7 text-gray-600">{m.solutions_enterprise_solution_subtitle({}, { locale })}</p>
+        </div>
+
+        <div class="mt-10 grid gap-4 lg:grid-cols-3">
+          {
+            pillars.map((pillar) => (
+              <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <p class="text-xs font-semibold tracking-wide text-blue-700 uppercase">{pillar.eyebrow}</p>
+                <h3 class="mt-3 text-xl font-semibold tracking-tight text-gray-950">{pillar.title}</h3>
+                <p class="mt-3 text-sm leading-6 text-gray-600">{pillar.description}</p>
+                <ul class="mt-6 space-y-3">
+                  {pillar.points.map((point) => (
+                    <li class="flex gap-3 text-sm leading-6 font-medium text-gray-700">
+                      <svg class="mt-1 h-4 w-4 shrink-0 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                      </svg>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.enterprise_features({}, { locale })}</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">{m.built_for_enterprise_teams({}, { locale })}</h2>
+        <p class="mt-4 text-base leading-7 text-gray-600">{m.advanced_collaboration_security_compliance({}, { locale })}</p>
+      </div>
+
+      <div class="mt-10 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+        <div class="grid divide-y divide-gray-200 lg:grid-cols-2 lg:divide-x lg:divide-y-0">
+          {
+            includedGroups.map((group) => (
+              <div class="p-6 sm:p-8">
+                <h3 class="text-lg font-semibold tracking-tight text-gray-950">{group.title}</h3>
+                <ul class="mt-5 grid gap-3 sm:grid-cols-2">
+                  {group.items.map((item) => (
+                    <li class="flex gap-3 text-sm leading-6 font-medium text-gray-700">
+                      <svg class="mt-1 h-4 w-4 shrink-0 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                      </svg>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <div>
+            <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.global_infrastructure({}, { locale })}</p>
+            <h2 class="mt-3 text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">
+              {m.global_infrastructure_lowercase({}, { locale })}
+              {m.that_grows_with_you({}, { locale })}
+            </h2>
+            <p class="mt-4 text-base leading-7 text-gray-600">{m.powered_by_serverless_edge_computing({}, { locale })}</p>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-3">
+            {
+              stats.map((stat) => (
+                <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                  <p class="text-3xl font-semibold tracking-tight text-gray-950">{stat.value}</p>
+                  <p class="mt-2 text-sm leading-6 font-medium text-gray-600">{stat.label}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <div class="overflow-hidden rounded-2xl border border-gray-200 bg-gray-950 text-white shadow-sm">
+        <div class="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center lg:p-10">
+          <div>
+            <p class="text-sm font-semibold tracking-wide text-blue-300 uppercase">{m.ready_to_scale({}, { locale })}</p>
+            <h2 class="mt-3 max-w-3xl text-3xl font-semibold tracking-tight sm:text-4xl">{m.ready_to_deliver({}, { locale })} {m.updates_at_scale({}, { locale })}</h2>
+            <p class="mt-4 max-w-2xl text-base leading-7 text-gray-300">{m.join_leading_enterprises({}, { locale })}</p>
+          </div>
+          <a
+            href="https://cal.com/team/capgo/capgo-enterprise-inquiry"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex min-h-11 items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:bg-blue-50 hover:text-blue-700 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-950 focus:outline-none"
+          >
+            {m.contact_sales({}, { locale })}
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>
