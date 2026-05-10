@@ -3,6 +3,12 @@ import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. ${m.no_credit_card_required({}, { locale: Astro.locals.locale })}`
+const trustSignals = [
+  m.hero_trust_signal_trial({}, { locale: Astro.locals.locale }),
+  m.hero_trust_signal_store_review({}, { locale: Astro.locals.locale }),
+  m.hero_trust_signal_open_source({}, { locale: Astro.locals.locale }),
+  m.hero_trust_signal_rollback({}, { locale: Astro.locals.locale }),
+]
 ---
 
 <section>
@@ -183,7 +189,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
         <h1 class="font-pj text-4xl leading-tight font-bold tracking-tight sm:text-5xl sm:leading-tight lg:text-6xl lg:leading-tight xl:text-7xl">
           {m.instant_updates_for_your({}, { locale: Astro.locals.locale })}
           <br />
-          <span class="text-azure-500">CapacitorJS app</span>
+          <span class="text-azure-500">Capacitor app without app review</span>
         </h1>
         <p class="font-inter mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-400 sm:text-xl">
           {m.hero_subtitle_part1({}, { locale: Astro.locals.locale })}
@@ -212,6 +218,22 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             </a>
           </div>
           <p class="font-inter text-sm leading-6 text-gray-400">{ctaSubtext}</p>
+          <ul class="flex max-w-3xl flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-gray-300">
+            {
+              trustSignals.map((signal) => (
+                <li class="inline-flex items-center gap-2 whitespace-nowrap">
+                  <svg class="h-4 w-4 shrink-0 text-blue-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.704 5.29a1 1 0 010 1.42l-7.25 7.25a1 1 0 01-1.415 0L3.296 9.217a1 1 0 011.414-1.414l4.036 4.035 6.543-6.546a1 1 0 011.415-.002z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span>{signal}</span>
+                </li>
+              ))
+            }
+          </ul>
         </div>
       </div>
     </div>
