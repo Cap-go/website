@@ -260,20 +260,20 @@ const content = {
           {
             plugins.map((item) => (
               <div
-                class="plugin-card group relative rounded-2xl border border-gray-700 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-gray-500/50 hover:bg-white/10"
+                class="plugin-card group relative rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/[0.06]"
                 data-title={item.title.toLowerCase()}
                 data-description={item.description.toLowerCase()}
                 data-author={item.author.toLowerCase()}
                 data-downloads={item.npmDownloads ?? 0}
                 data-stars={item.githubStars ?? 0}
               >
-                <div class="relative">
-                  {item.icon && <PluginIcon icon={item.icon} name={item.title} className="mb-4 transition-transform duration-300 group-hover:scale-110" />}
-                  <h3 class="font-pj mb-3 text-xl font-bold text-white transition-colors duration-300 group-hover:text-gray-200">{item.title}</h3>
-                  <div class="mb-4 line-clamp-3 leading-relaxed text-gray-300" set:html={item.description} />
-                  <div class="mb-4 flex items-center justify-between">
-                    <span class="text-sm text-gray-500">by {item.author}</span>
-                    <div class="flex gap-3">
+                <div class="relative flex h-full flex-col">
+                  {item.icon && <PluginIcon icon={item.icon} name={item.title} className="mb-4 transition-transform duration-200 group-hover:scale-105" />}
+                  <h3 class="font-pj mb-3 text-xl leading-7 font-bold text-white transition-colors duration-200 group-hover:text-gray-100">{item.title}</h3>
+                  <div class="mb-5 line-clamp-3 text-sm leading-6 text-gray-300" set:html={item.description} />
+                  <div class="mt-auto mb-5 flex items-center justify-between gap-4">
+                    <span class="truncate text-sm text-gray-400">by {item.author}</span>
+                    <div class="flex shrink-0 gap-3">
                       {item.npmDownloads !== undefined && (
                         <span class="inline-flex items-center text-sm text-gray-200">
                           <svg class="mr-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -294,7 +294,7 @@ const content = {
                     {item.hasSiteDocs ? (
                       <a
                         href={item.docsHref}
-                        class="inline-flex flex-1 items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700"
+                        class="inline-flex min-h-11 flex-1 items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none"
                       >
                         Documentation
                       </a>
@@ -303,7 +303,7 @@ const content = {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="inline-flex flex-1 items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700"
+                        class="inline-flex min-h-11 flex-1 items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none"
                       >
                         Docs
                         <AstroIcon name="heroicons:arrow-up-right-solid" class="ml-1 h-4 w-4 text-white" aria-hidden="true" />
@@ -313,7 +313,7 @@ const content = {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="inline-flex items-center justify-center rounded-lg border border-gray-600 bg-gray-800 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-gray-700"
+                      class="inline-flex min-h-11 items-center justify-center rounded-lg border border-white/15 bg-white/[0.04] px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:border-white/25 hover:bg-white/[0.08] focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none"
                     >
                       GitHub
                       <AstroIcon name="heroicons:arrow-up-right-solid" class="ml-1 h-4 w-4 text-white" aria-hidden="true" />
