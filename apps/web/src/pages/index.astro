@@ -17,7 +17,6 @@ import BuiltForDevelopers from '@/components/BuiltForDevelopers.astro'
 import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import AppflowShutdown from '@/components/AppflowShutdown.astro'
 import UpdateTypesSection from '@/components/landing/UpdateTypesSection.astro'
-import PlatformOverview from '@/components/PlatformOverview.astro'
 
 const config = Astro.locals.runtimeConfig
 
@@ -104,7 +103,6 @@ const content = {
 <Layout content={content}>
   <div>
     <Hero />
-    <PlatformOverview />
     <!-- <CompaniesLogo /> -->
     <ProblemSolution />
     <HowItWorks />
