@@ -138,6 +138,7 @@ Configure native chrome, then keep transitions focused on the WebView pages:
 ```ts
 import { NativeNavigation } from '@capgo/native-navigation';
 import { setDirection } from '@capgo/capacitor-transitions/react';
+import { router } from './router';
 
 await NativeNavigation.configure({
   contentInsetMode: 'css',

@@ -197,6 +197,7 @@ Use `@capgo/capacitor-transitions` with `@capgo/native-navigation` when native s
    ```ts
    import { NativeNavigation } from '@capgo/native-navigation';
    import { setDirection } from '@capgo/capacitor-transitions/react';
+   import { router } from './router';
 
    await NativeNavigation.addListener('navbarBack', () => {
      setDirection('back');
