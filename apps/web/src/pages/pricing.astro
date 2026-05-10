@@ -54,6 +54,8 @@ const pricingProof = [
   },
 ]
 
+const pricingHeroSignals = [m.pricing_hero_signal_trial({}, { locale }), m.pricing_hero_signal_no_card({}, { locale }), m.pricing_hero_signal_no_auto_bill({}, { locale })]
+
 const config = Astro.locals.runtimeConfig
 
 let yearly = true
@@ -144,12 +146,28 @@ if (plans.length > 0) {
         <p class="font-pj mt-6 text-xl font-normal text-gray-600">
           {m.plans_that_scale_with_your_business_description({}, { locale: Astro.locals.locale })}
         </p>
+        <ul class="mt-6 flex flex-wrap items-center justify-center gap-3">
+          {
+            pricingHeroSignals.map((signal) => (
+              <li class="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white px-4 py-2 text-sm font-semibold text-gray-700 shadow-sm">
+                <svg class="h-4 w-4 shrink-0 text-blue-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.704 5.29a1 1 0 010 1.42l-7.25 7.25a1 1 0 01-1.415 0L3.296 9.217a1 1 0 011.414-1.414l4.036 4.035 6.543-6.546a1 1 0 011.415-.002z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span>{signal}</span>
+              </li>
+            ))
+          }
+        </ul>
       </div>
 
       <div class="mx-auto mb-12 grid max-w-6xl gap-4 md:grid-cols-3">
         {
           pricingProof.map((item) => (
-            <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+            <article class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
               <h2 class="text-lg font-bold text-gray-900">{item.title}</h2>
               <p class="mt-3 text-sm leading-6 text-gray-600">{item.text}</p>
             </article>
