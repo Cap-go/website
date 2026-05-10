@@ -90,6 +90,7 @@ export default defineConfig({
     srcDir: SRC_DIR,
     publicDir: PUBLIC_DIR,
     cpuCount: CPU_COUNT,
+    assetsDir: '_docs',
     optimizeDepsInclude: ['mermaid'],
     extraPlugins: [
       viteStaticCopy({

@@ -55,6 +55,15 @@ const rendered = __translationWorkerTest.renderTranslatedHtml(parts, segments, t
 assert(rendered.includes('FR: Ship mobile updates instantly to every user'), 'Renderer did not write translated body text')
 assert(rendered.includes('current < total'), 'Renderer changed skipped script content')
 
+const titleSegmentIndex = segments.findIndex((segment) => segment.text.includes('Capgo - Live Updates for Capacitor Apps'))
+assert(titleSegmentIndex >= 0, 'Parser did not collect the title segment')
+const emptyTitleTranslations = segments.map((segment, index) => (index === titleSegmentIndex ? '' : segment.text))
+const renderedEmptyTitleFallback = __translationWorkerTest.renderTranslatedHtml(parts, segments, emptyTitleTranslations)
+assert(
+  renderedEmptyTitleFallback.includes('<title>Capgo - Live Updates for Capacitor Apps</title>'),
+  'Renderer did not preserve the source title when a translated title was empty',
+)
+
 const localizedMeta = __translationWorkerTest.expandShortMetaDescriptions(
   '<head><meta name="description" content="短い説明"><meta property="og:description" content="短い説明"></head>',
   'ja',

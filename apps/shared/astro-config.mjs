@@ -70,7 +70,36 @@ export function buildSharedIntegrations({ pluginIcons, pageLastModDates }) {
   ]
 }
 
-export function buildSharedViteConfig({ srcDir, publicDir, cpuCount, optimizeDepsInclude = [], extraPlugins = [], ssrNoExternal }) {
+function assetBasename(value) {
+  const normalized = (value || 'asset').replaceAll('\\', '/')
+  const fileName = normalized.split('/').pop() || 'asset'
+  const extIndex = fileName.lastIndexOf('.')
+  return extIndex > 0 ? fileName.slice(0, extIndex) : fileName
+}
+
+function sanitizeAssetBasename(value) {
+  return (
+    assetBasename(value)
+      .replace(/@_@astro/gi, '-astro')
+      .replace(/[^A-Za-z0-9_-]+/g, '-')
+      .replace(/^-+|-+$/g, '') || 'asset'
+  )
+}
+
+function buildAssetFileNames(assetsDir) {
+  return (assetInfo) => {
+    const rawName = assetInfo.name || assetInfo.names?.[0] || 'asset'
+    const safeName = sanitizeAssetBasename(rawName)
+    const isCss = rawName.toLowerCase().endsWith('.css')
+
+    if (isCss && safeName === 'global') return `${assetsDir}/global[extname]`
+    if (isCss) return `${assetsDir}/${safeName}.[hash][extname]`
+
+    return `${assetsDir}/${safeName}.[hash][extname]`
+  }
+}
+
+export function buildSharedViteConfig({ srcDir, publicDir, cpuCount, optimizeDepsInclude = [], extraPlugins = [], ssrNoExternal, assetsDir = '_astro' }) {
   const viteConfig = {
     resolve: {
       alias: [
@@ -87,6 +116,7 @@ export function buildSharedViteConfig({ srcDir, publicDir, cpuCount, optimizeDep
       cssMinify: 'esbuild',
       rollupOptions: {
         output: {
+          assetFileNames: buildAssetFileNames(assetsDir),
           manualChunks: undefined,
         },
         maxParallelFileOps: cpuCount * 3,
