@@ -24,6 +24,7 @@
 - Plugin and native build workflows.
 
 ## Personas
+
 | Persona | Cares about | Challenge | Value we promise |
 |---------|-------------|-----------|------------------|
 | Solo developer | Speed, low cost, simple setup | App store delays slow fixes and learning | Start free, ship first update quickly, pay only when it proves value |
@@ -57,6 +58,7 @@
 **Why customers choose us:** Fast setup, lower cost than enterprise suites, open-source trust, Appflow continuity, and real production observability.
 
 ## Objections
+
 | Objection | Response |
 |-----------|----------|
 | Is this store compliant? | Native changes still go through store review; Capgo is positioned for web-layer updates, assets, configuration, and controlled rollouts. |
@@ -100,6 +102,7 @@
 **Customers:** Public logo cloud and pricing page examples include apps such as Nana, Snowqueen, Shelf, Suez, and Janitor.
 **Testimonials:** Existing testimonial sections highlight migration speed, support responsiveness, open-source trust, and cost savings.
 **Value themes:**
+
 | Theme | Proof |
 |-------|-------|
 | Speed | Ship fixes in minutes instead of waiting for review |
