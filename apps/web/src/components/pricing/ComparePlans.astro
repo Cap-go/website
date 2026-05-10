@@ -1,0 +1,333 @@
+---
+import { numberWithSpaces } from '@/services/misc'
+import type { Database } from '@/services/supabase.types'
+import m from '@/copy/messages'
+
+interface Props {
+  pricing: Database['public']['Tables']['plans']['Row'][]
+}
+
+const { pricing } = Astro.props
+type Plan = Database['public']['Tables']['plans']['Row']
+type CompareValue = string | boolean
+
+interface CompareItem {
+  label: string
+  emphasis?: boolean
+  href?: string
+  value: (plan: Plan) => CompareValue
+}
+
+interface CompareSection {
+  group: string
+  items: CompareItem[]
+}
+
+function buildTimeDisplay(buildTimeSeconds: number) {
+  if (!buildTimeSeconds) return '—'
+
+  const buildTimeHours = Math.floor(buildTimeSeconds / 3600)
+  const buildTimeMinutes = Math.floor(buildTimeSeconds / 60)
+
+  if (buildTimeHours >= 1) {
+    return buildTimeHours === 1 ? '1 build hour' : `${buildTimeHours} ${m.build_hours({}, { locale: Astro.locals.locale })}`
+  }
+
+  return `${buildTimeMinutes} ${m.build_minutes({}, { locale: Astro.locals.locale })}`
+}
+
+function priceDisplay(plan: Database['public']['Tables']['plans']['Row']) {
+  const yearlyMonthly = (plan.price_y / 12).toFixed(0)
+  const suffix = plan.name === 'Enterprise' ? '+' : ''
+  return `$${yearlyMonthly}${suffix}/mo yearly or $${plan.price_m}${suffix}/mo monthly`
+}
+
+function included(planName: string, names: string[]) {
+  return names.includes(planName)
+}
+
+function buildConcurrency(planName: string) {
+  switch (planName) {
+    case 'Solo':
+      return '2 concurrent builds'
+    case 'Maker':
+      return '3 concurrent builds'
+    case 'Team':
+      return '4 concurrent builds'
+    case 'Enterprise':
+      return '6 concurrent builds'
+    default:
+      return '—'
+  }
+}
+
+const rows: CompareSection[] = [
+  {
+    group: 'Platform',
+    items: [
+      {
+        label: 'Apps',
+        value: () => 'Unlimited',
+      },
+      {
+        label: 'Members',
+        value: () => 'Unlimited',
+      },
+      {
+        label: 'Teams',
+        value: () => 'Unlimited',
+      },
+      {
+        label: 'Webhooks',
+        value: () => 'Unlimited',
+      },
+      {
+        label: 'Org statistics',
+        value: () => '90 days',
+      },
+      {
+        label: 'App logs',
+        value: () => '90 days',
+      },
+      {
+        label: 'Audit logs',
+        value: () => true,
+      },
+    ],
+  },
+  {
+    group: 'Live Updates',
+    items: [
+      {
+        label: m.monthly_active_users({}, { locale: Astro.locals.locale }),
+        emphasis: true,
+        value: (plan: Database['public']['Tables']['plans']['Row']) => `${numberWithSpaces(plan.mau)}${plan.name === 'Enterprise' ? '+' : ''}`,
+      },
+      {
+        label: 'Bandwidth',
+        emphasis: true,
+        value: (plan: Database['public']['Tables']['plans']['Row']) =>
+          `${numberWithSpaces(plan.bandwidth)}${plan.name === 'Enterprise' ? '+' : ''} GiB/${m.month({}, { locale: Astro.locals.locale })}`,
+      },
+      {
+        label: 'Storage',
+        emphasis: true,
+        value: (plan: Database['public']['Tables']['plans']['Row']) => `${numberWithSpaces(plan.storage)}${plan.name === 'Enterprise' ? '+' : ''} GiB`,
+      },
+      {
+        label: 'Credit-based overages',
+        href: '#credit-pricing',
+        value: () => 'Available',
+      },
+      {
+        label: 'Signed updates',
+        value: () => true,
+      },
+      {
+        label: 'Updates E2E encrypted',
+        value: () => true,
+      },
+    ],
+  },
+  {
+    group: 'Native Build',
+    items: [
+      {
+        label: 'Native build time',
+        value: (plan: Database['public']['Tables']['plans']['Row']) => `${buildTimeDisplay(plan.build_time_unit ?? 0)}${plan.name === 'Enterprise' ? '+' : ''}`,
+      },
+      {
+        label: 'Build machines',
+        value: () => 'Large build machines (macOS M4)',
+      },
+      {
+        label: 'Build concurrency',
+        value: (plan: Database['public']['Tables']['plans']['Row']) => buildConcurrency(plan.name),
+      },
+      {
+        label: 'App Store publishing',
+        value: () => true,
+      },
+    ],
+  },
+  {
+    group: 'Plugins',
+    items: [
+      {
+        label: 'Capgo plugins',
+        value: () => '+130 plugins',
+      },
+    ],
+  },
+  {
+    group: 'Support',
+    items: [
+      {
+        label: 'Discord support',
+        value: () => true,
+      },
+      {
+        label: 'Support level',
+        value: (plan: Database['public']['Tables']['plans']['Row']) => {
+          if (plan.name === 'Solo') return m.community_support({}, { locale: Astro.locals.locale })
+          if (plan.name === 'Team') return m.priority_support({}, { locale: Astro.locals.locale })
+          if (plan.name === 'Enterprise') return m.direct_slack_channel_support({}, { locale: Astro.locals.locale })
+          return m.priority_bug_fixes_on_our_plugins({}, { locale: Astro.locals.locale })
+        },
+      },
+      {
+        label: m.priority_bug_fixes_on_our_plugins({}, { locale: Astro.locals.locale }),
+        value: (plan: Database['public']['Tables']['plans']['Row']) => (included(plan.name, ['Maker', 'Team', 'Enterprise']) ? true : false),
+      },
+      {
+        label: 'Dedicated Slack/Teams channel',
+        value: (plan: Database['public']['Tables']['plans']['Row']) => plan.name === 'Enterprise',
+      },
+      {
+        label: 'Onboarding & training',
+        value: (plan: Database['public']['Tables']['plans']['Row']) => plan.name === 'Enterprise',
+      },
+      {
+        label: 'Dedicated account manager',
+        value: (plan: Database['public']['Tables']['plans']['Row']) => plan.name === 'Enterprise',
+      },
+    ],
+  },
+  {
+    group: 'Reliability',
+    items: [
+      {
+        label: 'Uptime SLA',
+        value: () => '99.9%',
+      },
+    ],
+  },
+  {
+    group: 'Billing',
+    items: [
+      {
+        label: 'Stripe payments',
+        value: () => 'All payment options',
+      },
+      {
+        label: 'Custom payment process',
+        value: (plan: Database['public']['Tables']['plans']['Row']) => (included(plan.name, ['Team', 'Enterprise']) ? 'SAP, procurement, and custom workflows' : false),
+      },
+    ],
+  },
+  {
+    group: 'Security & compliance',
+    items: [
+      {
+        label: m.single_sign_on_sso({}, { locale: Astro.locals.locale }),
+        value: (plan: Database['public']['Tables']['plans']['Row']) => plan.name === 'Enterprise',
+      },
+      {
+        label: m.custom_domain({}, { locale: Astro.locals.locale }),
+        value: (plan: Database['public']['Tables']['plans']['Row']) => plan.name === 'Enterprise',
+      },
+      {
+        label: m.soc2_compliance({}, { locale: Astro.locals.locale }),
+        value: (plan: Database['public']['Tables']['plans']['Row']) => plan.name === 'Enterprise',
+      },
+      {
+        label: 'Signed NDAs & DPAs',
+        value: (plan: Database['public']['Tables']['plans']['Row']) => plan.name === 'Enterprise',
+      },
+    ],
+  },
+]
+---
+
+<section id="compare-plans" class="mt-20 pb-16 sm:mt-24 sm:pb-20">
+  <div class="mx-auto max-w-3xl text-center">
+    <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">Compare plans</p>
+    <h2 class="mt-3 text-3xl font-bold text-gray-900 sm:text-4xl">All plan differences, in one view.</h2>
+    <p class="mt-4 text-base leading-7 text-gray-600">Use the cards above to pick a starting point. Use this table when you need the exact limits and controls.</p>
+    <p class="mt-3 text-xs font-semibold tracking-wide text-gray-500 uppercase sm:hidden">Swipe sideways to compare plans</p>
+  </div>
+
+  <div class="mt-10 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+    <div class="overflow-x-auto">
+      <table class="w-full min-w-[820px] border-collapse text-left text-sm">
+        <caption class="sr-only">Compare Capgo pricing plans</caption>
+        <thead>
+          <tr class="border-b border-gray-200 bg-gray-50">
+            <th scope="col" class="sticky left-0 z-20 w-40 bg-gray-50 px-4 py-5 text-xs font-semibold tracking-wide text-gray-500 uppercase sm:w-56 sm:px-5"> Feature </th>
+            {
+              pricing.map((plan) => (
+                <th scope="col" class:list={['min-w-40 px-4 py-5 align-top sm:min-w-44 sm:px-5', plan.name === 'Maker' ? 'bg-blue-50' : 'bg-gray-50']}>
+                  <div class="flex items-center gap-2">
+                    <span class="text-base font-bold text-gray-950">{plan.name}</span>
+                    {plan.name === 'Maker' && (
+                      <span class="rounded-full bg-blue-600 px-2 py-0.5 text-xs font-semibold text-white">{m.most_popular({}, { locale: Astro.locals.locale })}</span>
+                    )}
+                  </div>
+                  <p class="mt-2 text-xs leading-5 font-medium text-gray-600">{priceDisplay(plan)}</p>
+                </th>
+              ))
+            }
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          {
+            rows.map((section) => (
+              <>
+                <tr>
+                  <th colspan={pricing.length + 1} scope="colgroup" class="bg-gray-100 px-5 py-3 text-xs font-bold tracking-wide text-gray-700 uppercase">
+                    {section.group}
+                  </th>
+                </tr>
+                {section.items.map((item) => (
+                  <tr class:list={['group', item.emphasis && 'ring-1 ring-blue-200/80 ring-inset']}>
+                    <th
+                      scope="row"
+                      class:list={[
+                        'sticky left-0 z-10 px-4 py-4 font-semibold text-gray-900 sm:px-5',
+                        item.emphasis ? 'border-l-4 border-blue-600 bg-blue-50 group-hover:bg-blue-50' : 'bg-white group-hover:bg-gray-50',
+                      ]}
+                    >
+                      {item.label}
+                    </th>
+                    {pricing.map((plan) => {
+                      const value = item.value(plan)
+                      return (
+                        <td
+                          class:list={[
+                            'px-4 py-4 text-gray-700 sm:px-5',
+                            item.emphasis ? 'bg-blue-50/70 group-hover:bg-blue-50' : 'group-hover:bg-gray-50',
+                            !item.emphasis && plan.name === 'Maker' ? 'bg-blue-50/50' : !item.emphasis ? 'bg-white' : '',
+                          ]}
+                        >
+                          {typeof value === 'boolean' ? (
+                            value ? (
+                              <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-100 text-blue-700" aria-label="Included">
+                                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                </svg>
+                              </span>
+                            ) : (
+                              <span class="text-gray-400">—</span>
+                            )
+                          ) : item.href ? (
+                            <a href={item.href} class="font-semibold text-blue-700 underline-offset-4 hover:underline focus:underline focus:outline-none">
+                              {value}
+                            </a>
+                          ) : item.emphasis ? (
+                            <strong class="font-semibold text-blue-950">{value}</strong>
+                          ) : (
+                            value
+                          )}
+                        </td>
+                      )
+                    })}
+                  </tr>
+                ))}
+              </>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
