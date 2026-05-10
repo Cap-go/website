@@ -14,6 +14,7 @@ type CompareValue = string | boolean
 interface CompareItem {
   label: string
   emphasis?: boolean
+  faqHref?: string
   href?: string
   value: (plan: Plan) => CompareValue
 }
@@ -101,21 +102,25 @@ const rows: CompareSection[] = [
       {
         label: m.monthly_active_users({}, { locale: Astro.locals.locale }),
         emphasis: true,
+        faqHref: '#faq-mau',
         value: (plan: Database['public']['Tables']['plans']['Row']) => `${numberWithSpaces(plan.mau)}${plan.name === 'Enterprise' ? '+' : ''}`,
       },
       {
         label: 'Bandwidth',
         emphasis: true,
+        faqHref: '#faq-bandwidth',
         value: (plan: Database['public']['Tables']['plans']['Row']) =>
           `${numberWithSpaces(plan.bandwidth)}${plan.name === 'Enterprise' ? '+' : ''} GiB/${m.month({}, { locale: Astro.locals.locale })}`,
       },
       {
         label: 'Storage',
         emphasis: true,
+        faqHref: '#faq-storage',
         value: (plan: Database['public']['Tables']['plans']['Row']) => `${numberWithSpaces(plan.storage)}${plan.name === 'Enterprise' ? '+' : ''} GiB`,
       },
       {
         label: 'Credit-based overages',
+        faqHref: '#faq-credits',
         href: '#credit-pricing',
         value: () => 'Available',
       },
@@ -134,6 +139,7 @@ const rows: CompareSection[] = [
     items: [
       {
         label: 'Native build time',
+        faqHref: '#faq-build-time',
         value: (plan: Database['public']['Tables']['plans']['Row']) => `${buildTimeDisplay(plan.build_time_unit ?? 0)}${plan.name === 'Enterprise' ? '+' : ''}`,
       },
       {
@@ -207,10 +213,12 @@ const rows: CompareSection[] = [
     items: [
       {
         label: 'Stripe payments',
+        faqHref: '#faq-payment-methods',
         value: () => 'All payment options',
       },
       {
         label: 'Custom payment process',
+        faqHref: '#faq-annual-ach',
         value: (plan: Database['public']['Tables']['plans']['Row']) => (included(plan.name, ['Team', 'Enterprise']) ? 'SAP, procurement, and custom workflows' : false),
       },
     ],
@@ -228,6 +236,7 @@ const rows: CompareSection[] = [
       },
       {
         label: m.soc2_compliance({}, { locale: Astro.locals.locale }),
+        faqHref: '#faq-soc2',
         value: (plan: Database['public']['Tables']['plans']['Row']) => plan.name === 'Enterprise',
       },
       {
@@ -287,7 +296,18 @@ const rows: CompareSection[] = [
                         item.emphasis ? 'border-l-4 border-blue-600 bg-blue-50 group-hover:bg-blue-50' : 'bg-white group-hover:bg-gray-50',
                       ]}
                     >
-                      {item.label}
+                      <span class="inline-flex items-center gap-2">
+                        <span>{item.label}</span>
+                        {item.faqHref && (
+                          <a
+                            href={item.faqHref}
+                            class="inline-flex size-5 shrink-0 items-center justify-center rounded-full border border-gray-300 bg-white text-[11px] leading-none font-bold text-gray-500 transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+                            aria-label={`Open FAQ for ${item.label}`}
+                          >
+                            ?
+                          </a>
+                        )}
+                      </span>
                     </th>
                     {pricing.map((plan) => {
                       const value = item.value(plan)
