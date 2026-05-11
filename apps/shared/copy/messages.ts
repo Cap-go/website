@@ -1079,7 +1079,8 @@ const messages = {
   enterprise_audit_trail_label: 'Audit trail',
   enterprise_capacity_desc: 'Enterprise gives teams the MAU, bandwidth, and storage bands that actually decide whether a large rollout feels safe.',
   enterprise_capacity_title: 'Capacity that keeps launches moving',
-  enterprise_compliance_procurement_desc: 'SOC 2 certified controls, ISO 27001 in progress, signed NDAs, DPAs, and custom payment workflows are ready for enterprise review.',
+  enterprise_compliance_procurement_desc:
+    'SOC 2 certified controls, ISO 27001 in progress, signed non-disclosure agreements, DPAs, and custom payment workflows are ready for enterprise review.',
   enterprise_compliance_procurement_group: 'Compliance and procurement',
   enterprise_compliance_procurement_title: 'Compliance before procurement asks',
   enterprise_continents_replicated: 'continents replicated',
@@ -1137,7 +1138,7 @@ const messages = {
   enterprise_security_automations: 'SonarCloud, Coderabbit, and Snyk review every commit before release.',
   enterprise_security_review_desc: 'Give InfoSec the controls they expect before a production rollout.',
   enterprise_security_review_title: 'Security review',
-  enterprise_signed_ndas_dpas: 'Signed NDAs and DPAs',
+  enterprise_signed_ndas_dpas: 'Signed non-disclosure agreements and DPAs',
   enterprise_signed_updates: 'Signed updates',
   enterprise_solutions: 'Enterprise Solutions',
   enterprise_soc2_certified: 'SOC 2 certified',
