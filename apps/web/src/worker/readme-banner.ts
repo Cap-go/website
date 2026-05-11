@@ -1,9 +1,6 @@
 import { actions, pluginCountLabel, type Action } from '../config/plugins'
 import { README_BANNER_LOGO_PNG, README_BANNER_PHONE_PNG } from './readme-banner-assets'
-
-type BackgroundContext = {
-  waitUntil(promise: Promise<unknown>): void
-}
+import type { BackgroundContext } from './types'
 
 type BannerCampaign = 'build' | 'live-update'
 
@@ -149,7 +146,7 @@ function isFresh(response: Response): boolean {
 }
 
 function escapeSvg(value: string): string {
-  return value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;')
+  return value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;')
 }
 
 function truncate(value: string, maxLength: number): string {

@@ -1,5 +1,6 @@
 import { handleToolApiRequest } from '../lib/tools/api'
 import { handleReadmeBanner } from './readme-banner'
+import type { BackgroundContext } from './types'
 
 interface Env {
   ASSETS: {
@@ -154,10 +155,6 @@ async function handleStatus(): Promise<Response> {
 type RouteDefinition = {
   methods: readonly string[]
   handle: (request: Request, env: Env, ctx?: BackgroundContext) => Promise<Response>
-}
-
-type BackgroundContext = {
-  waitUntil(promise: Promise<unknown>): void
 }
 
 type LinkDefinition = {
