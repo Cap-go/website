@@ -5,6 +5,7 @@ import m from '@/copy/messages'
 import type { Database } from '@/services/supabase.types'
 import { createLdJsonGraph, createServiceLdJson, createProductLdJson } from '@/lib/ldJson'
 import { numberWithSpaces } from '@/services/misc'
+import { pluginCountLabel } from '@/config/plugins'
 
 const locale = Astro.locals.locale
 const config = Astro.locals.runtimeConfig
@@ -243,7 +244,7 @@ const includedGroups = [
       m.enterprise_large_macos_m4({}, { locale }),
       m.enterprise_6_concurrent_builds({}, { locale }),
       m.enterprise_app_store_publishing({}, { locale }),
-      m.enterprise_130_plugins({}, { locale }),
+      m.enterprise_130_plugins({ pluginCountLabel }, { locale }),
       m.enterprise_ionic_alternative_plugins({}, { locale }),
       m.enterprise_priority_plugin_fixes({}, { locale }),
     ],
@@ -291,7 +292,7 @@ const stats = [
             <span class="block text-gray-500">{m.at_scale({}, { locale })}</span>
           </h1>
           <p class="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
-            {m.enterprise_hero_platform_desc({}, { locale })}
+            {m.enterprise_hero_platform_desc({ pluginCountLabel }, { locale })}
           </p>
 
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">

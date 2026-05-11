@@ -1062,7 +1062,7 @@ const messages = {
   enterprise_decision_point_2: 'Can you support multiple apps, organizations, environments, and release owners without sharing risky credentials?',
   enterprise_decision_point_3: 'Can you keep shipping critical fixes if a proprietary vendor changes pricing, roadmap, or availability?',
   enterprise_decision_questions_title: 'Questions procurement will ask',
-  enterprise_130_plugins: '+130 Capgo plugins',
+  enterprise_130_plugins: '{pluginCountLabel} Capgo plugins',
   enterprise_6_concurrent_builds: '6 concurrent native builds',
   enterprise_6_concurrent_macos_m4: '6 concurrent macOS M4 builds',
   enterprise_7_continent_replication: '7-continent replication',
@@ -1101,7 +1101,7 @@ const messages = {
   enterprise_global_update_delivery: 'global update delivery',
   enterprise_grade_security_trust: 'Enterprise-grade security you can trust',
   enterprise_hero_platform_desc:
-    'Live Updates, Native Builds, App Store Publishing, +130 plugins, and Automations in one platform, with enterprise scale, compliance, and procurement support.',
+    'Live Updates, Native Builds, App Store Publishing, {pluginCountLabel} plugins, and Automations in one platform, with enterprise scale, compliance, and procurement support.',
   enterprise_identity: 'Enterprise Identity',
   enterprise_ionic_alternative_plugins: 'Ionic enterprise alternative plugins',
   enterprise_iso27001_in_progress: 'ISO 27001 in progress',
