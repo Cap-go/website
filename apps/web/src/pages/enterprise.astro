@@ -9,9 +9,20 @@ import { numberWithSpaces } from '@/services/misc'
 const locale = Astro.locals.locale
 const config = Astro.locals.runtimeConfig
 
-const response = await fetch(`${config.public.baseApiUrl}/private/plans`)
-const plansAll: Database['public']['Tables']['plans']['Row'][] = await response.json()
+let plansAll: Database['public']['Tables']['plans']['Row'][] = []
+try {
+  const response = await fetch(`${config.public.baseApiUrl}/private/plans`)
+  if (response.ok) {
+    const payload = await response.json()
+    if (Array.isArray(payload)) {
+      plansAll = payload as Database['public']['Tables']['plans']['Row'][]
+    }
+  }
+} catch {
+  plansAll = []
+}
 const payg = plansAll.find((p) => p.name === 'Enterprise')
+const enterprisePrice = typeof payg?.price_m === 'number' && Number.isFinite(payg.price_m) ? payg.price_m : undefined
 
 const title = [Astro.locals.runtimeConfig.public.brand, 'Enterprise'].join(' | ')
 const description = 'Enterprise-grade live updates for Capacitor apps. Built for teams that need advanced security, compliance, and dedicated support at scale.'
@@ -33,14 +44,17 @@ const enterpriseProduct = createProductLdJson(Astro.locals.runtimeConfig.public,
   description: 'Complete enterprise solution with advanced security, compliance, dedicated support, and unlimited scalability for professional teams.',
   url: enterpriseUrl,
   sku: 'capgo-enterprise',
-  offers: [
-    {
-      price: payg?.price_m?.toString() || '0',
-      priceCurrency: 'USD',
-      availability: 'https://schema.org/InStock',
-      priceValidUntil: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-    },
-  ],
+  offers:
+    enterprisePrice === undefined
+      ? []
+      : [
+          {
+            price: enterprisePrice.toString(),
+            priceCurrency: 'USD',
+            availability: 'https://schema.org/InStock',
+            priceValidUntil: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+          },
+        ],
 })
 
 const enhancedEnterpriseProduct = {
@@ -119,49 +133,49 @@ const enterpriseBandwidth = `${numberWithSpaces(payg?.bandwidth ?? 5000)}+ GiB/m
 const enterpriseStorage = `${numberWithSpaces(payg?.storage ?? 100)}+ GiB`
 
 const heroProofPoints = [
-  { label: 'Audience', value: enterpriseMau, detail: 'MAUs included for large production apps' },
-  { label: 'Delivery', value: enterpriseBandwidth, detail: 'bandwidth for update rollouts' },
-  { label: 'Artifacts', value: enterpriseStorage, detail: 'storage for bundles and releases' },
+  { label: m.enterprise_audience_label({}, { locale }), value: enterpriseMau, detail: m.enterprise_audience_detail({}, { locale }) },
+  { label: m.enterprise_delivery_label({}, { locale }), value: enterpriseBandwidth, detail: m.enterprise_delivery_detail({}, { locale }) },
+  { label: m.enterprise_artifacts_label({}, { locale }), value: enterpriseStorage, detail: m.enterprise_artifacts_detail({}, { locale }) },
 ]
 
 const enterpriseLevers = [
   {
-    title: 'Capacity that keeps launches moving',
+    title: m.enterprise_capacity_title({}, { locale }),
     metric: enterpriseMau,
-    description: 'Enterprise gives teams the MAU, bandwidth, and storage bands that actually decide whether a large rollout feels safe.',
+    description: m.enterprise_capacity_desc({}, { locale }),
   },
   {
-    title: 'Native builds without queue anxiety',
+    title: m.enterprise_native_builds_title({}, { locale }),
     metric: '6 M4 builds',
-    description: 'Large macOS M4 machines and six concurrent builds reduce the wait that slows release-critical fixes.',
+    description: m.enterprise_native_builds_desc({}, { locale }),
   },
   {
-    title: 'Compliance before procurement asks',
+    title: m.enterprise_compliance_procurement_title({}, { locale }),
     metric: 'SOC 2 + ISO',
-    description: 'SOC 2 certified controls, ISO 27001 in progress, signed NDAs, DPAs, and custom payment workflows are ready for enterprise review.',
+    description: m.enterprise_compliance_procurement_desc({}, { locale }),
   },
 ]
 
 const approvalTracks = [
   {
-    title: 'Security review',
-    description: 'Give InfoSec the controls they expect before a production rollout.',
-    items: ['SOC 2 certified infrastructure', 'ISO 27001 in progress', 'Audit logs, signed updates, and E2E encrypted updates'],
+    title: m.enterprise_security_review_title({}, { locale }),
+    description: m.enterprise_security_review_desc({}, { locale }),
+    items: [m.enterprise_soc2_certified_infrastructure({}, { locale }), m.enterprise_iso27001_in_progress({}, { locale }), m.enterprise_audit_signed_e2e({}, { locale })],
   },
   {
-    title: 'Reliability review',
-    description: 'Show that critical fixes can reach users fast without waiting on app review.',
-    items: ['99.9% uptime SLA', 'Updates under 100ms', '7-continent replication and instant rollback'],
+    title: m.enterprise_reliability_review_title({}, { locale }),
+    description: m.enterprise_reliability_review_desc({}, { locale }),
+    items: [m.enterprise_uptime_sla({}, { locale }), m.enterprise_updates_under_100ms({}, { locale }), m.enterprise_replication_rollback({}, { locale })],
   },
   {
-    title: 'Procurement review',
-    description: 'Keep finance and legal moving with enterprise-friendly paperwork.',
-    items: ['Signed NDAs and DPAs', 'Custom payment process', 'SAP, PO, and procurement workflows'],
+    title: m.enterprise_procurement_review_title({}, { locale }),
+    description: m.enterprise_procurement_review_desc({}, { locale }),
+    items: [m.enterprise_signed_ndas_dpas({}, { locale }), m.enterprise_custom_payment_process({}, { locale }), m.enterprise_sap_po_procurement({}, { locale })],
   },
   {
-    title: 'Migration review',
-    description: 'Plan the switch from Appflow, custom scripts, or Ionic Enterprise plugins.',
-    items: ['Live Updates, Native Builds, and App Store publishing in one platform', 'Ionic enterprise alternative plugins', 'Onboarding and training with our team'],
+    title: m.enterprise_migration_review_title({}, { locale }),
+    description: m.enterprise_migration_review_desc({}, { locale }),
+    items: [m.enterprise_platform_one_place({}, { locale }), m.enterprise_ionic_alternative_plugins({}, { locale }), m.enterprise_onboarding_training_team({}, { locale })],
   },
 ]
 
@@ -175,67 +189,89 @@ const customers = [
 
 const pillars = [
   {
-    eyebrow: 'Control',
+    eyebrow: m.enterprise_control_label({}, { locale }),
     title: m.solutions_enterprise_sol1_title({}, { locale }),
     description: m.solutions_enterprise_sol1_desc({}, { locale }),
     points: [m.solutions_enterprise_sol1_point1({}, { locale }), m.solutions_enterprise_sol1_point2({}, { locale }), m.solutions_enterprise_sol1_point3({}, { locale })],
   },
   {
-    eyebrow: 'Release safety',
+    eyebrow: m.enterprise_release_safety_label({}, { locale }),
     title: m.solutions_enterprise_sol2_title({}, { locale }),
     description: m.solutions_enterprise_sol2_desc({}, { locale }),
     points: [m.solutions_enterprise_sol2_point1({}, { locale }), m.solutions_enterprise_sol2_point2({}, { locale }), m.solutions_enterprise_sol2_point3({}, { locale })],
   },
   {
-    eyebrow: 'Audit trail',
+    eyebrow: m.enterprise_audit_trail_label({}, { locale }),
     title: m.solutions_enterprise_sol3_title({}, { locale }),
     description: m.solutions_enterprise_sol3_desc({}, { locale }),
-    points: [m.solutions_enterprise_sol3_point1({}, { locale }), 'SOC 2 certified infrastructure', 'ISO 27001 in progress'],
+    points: [m.solutions_enterprise_sol3_point1({}, { locale }), m.enterprise_soc2_certified_infrastructure({}, { locale }), m.enterprise_iso27001_in_progress({}, { locale })],
   },
 ]
 
 const includedGroups = [
   {
-    title: 'Live updates at scale',
+    title: m.enterprise_live_updates_at_scale({}, { locale }),
     items: [
-      `${enterpriseMau} MAUs`,
+      m.enterprise_feature_maus({ mau: enterpriseMau }, { locale }),
       enterpriseBandwidth,
       enterpriseStorage,
-      'Delta updates',
-      'Updates under 100ms',
-      '7-continent replication',
-      'Signed updates',
-      'Updates E2E encrypted',
+      m.enterprise_delta_updates({}, { locale }),
+      m.enterprise_updates_under_100ms({}, { locale }),
+      m.enterprise_7_continent_replication({}, { locale }),
+      m.enterprise_signed_updates({}, { locale }),
+      m.enterprise_updates_e2e_encrypted({}, { locale }),
     ],
   },
   {
-    title: 'Enterprise control',
-    items: ['Unlimited apps, members, and teams', 'Unlimited webhooks', 'Single sign-on (SSO)', 'Custom domain', 'Audit logs', '90-day org statistics', '90-day device logs'],
-  },
-  {
-    title: 'Native builds and plugins',
+    title: m.enterprise_control_title({}, { locale }),
     items: [
-      'Large build machines (macOS M4)',
-      '6 concurrent native builds',
-      'App Store publishing',
-      '+130 Capgo plugins',
-      'Ionic enterprise alternative plugins',
-      'Priority bug fixes on plugins',
+      m.enterprise_unlimited_apps_members_teams({}, { locale }),
+      m.enterprise_unlimited_webhooks({}, { locale }),
+      m.single_sign_on_sso({}, { locale }),
+      m.custom_domain({}, { locale }),
+      m.audit_logs({}, { locale }),
+      m.enterprise_org_statistics_90_days({}, { locale }),
+      m.enterprise_device_logs_90_days({}, { locale }),
     ],
   },
   {
-    title: 'Compliance and procurement',
-    items: ['SOC 2 certified', 'ISO 27001 ongoing', 'Signed NDAs and DPAs', 'Custom payment process', 'SAP and procurement workflows', 'Stripe payment options'],
+    title: m.enterprise_native_builds_plugins({}, { locale }),
+    items: [
+      m.enterprise_large_macos_m4({}, { locale }),
+      m.enterprise_6_concurrent_builds({}, { locale }),
+      m.enterprise_app_store_publishing({}, { locale }),
+      m.enterprise_130_plugins({}, { locale }),
+      m.enterprise_ionic_alternative_plugins({}, { locale }),
+      m.enterprise_priority_plugin_fixes({}, { locale }),
+    ],
   },
   {
-    title: 'Support and onboarding',
-    items: ['Dedicated Slack/Teams channel', 'Dedicated account manager', 'Onboarding and training', '99.9% uptime SLA', 'Priority support', 'Discord support'],
+    title: m.enterprise_compliance_procurement_group({}, { locale }),
+    items: [
+      m.enterprise_soc2_certified({}, { locale }),
+      m.enterprise_iso27001_ongoing({}, { locale }),
+      m.enterprise_signed_ndas_dpas({}, { locale }),
+      m.enterprise_custom_payment_process({}, { locale }),
+      m.enterprise_sap_procurement_workflows({}, { locale }),
+      m.enterprise_stripe_payment_options({}, { locale }),
+    ],
+  },
+  {
+    title: m.enterprise_support_onboarding({}, { locale }),
+    items: [
+      m.enterprise_dedicated_slack_teams({}, { locale }),
+      m.enterprise_dedicated_account_manager({}, { locale }),
+      m.enterprise_onboarding_training({}, { locale }),
+      m.enterprise_uptime_sla({}, { locale }),
+      m.priority_support({}, { locale }),
+      m.enterprise_discord_support({}, { locale }),
+    ],
   },
 ]
 
 const stats = [
-  { value: '<100ms', label: 'global update delivery' },
-  { value: '7', label: 'continents replicated' },
+  { value: '<100ms', label: m.enterprise_global_update_delivery({}, { locale }) },
+  { value: '7', label: m.enterprise_continents_replicated({}, { locale }) },
   { value: '99.9%', label: m.solutions_enterprise_stat_uptime({}, { locale }) },
   { value: '500M+', label: m.solutions_enterprise_stat_updates({}, { locale }) },
 ]
@@ -252,7 +288,7 @@ const stats = [
             <span class="block text-gray-500">{m.at_scale({}, { locale })}</span>
           </h1>
           <p class="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
-            Live Updates, Native Builds, App Store Publishing, +130 plugins, and Automations in one platform, with enterprise scale, compliance, and procurement support.
+            {m.enterprise_hero_platform_desc({}, { locale })}
           </p>
 
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -260,7 +296,7 @@ const stats = [
               href="https://cal.com/team/capgo/capgo-enterprise-inquiry"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Talk to our team"
+              aria-label={m.enterprise_talk_to_team({}, { locale })}
               class="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-gray-950 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
             >
               <span class="flex -space-x-2" aria-hidden="true">
@@ -268,13 +304,13 @@ const stats = [
                 <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/valeria-avatar.jpg" alt="" width="24" height="24" loading="lazy" />
                 <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/jordan-avatar.jpg" alt="" width="24" height="24" loading="lazy" />
               </span>
-              <span>Talk to our team</span>
+              <span>{m.enterprise_talk_to_team({}, { locale })}</span>
             </a>
             <a
               href={getRelativeLocaleUrl(locale, 'pricing')}
               class="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:border-blue-300 hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
             >
-              View pricing
+              {m.view_pricing({}, { locale })}
             </a>
           </div>
 
@@ -296,22 +332,22 @@ const stats = [
             <div class="flex items-start justify-between gap-4">
               <div>
                 <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.enterprise_title({}, { locale })}</p>
-                <h2 class="mt-3 text-3xl font-semibold tracking-tight text-gray-950">Custom</h2>
-                <p class="mt-3 max-w-sm text-sm leading-6 text-gray-600">Scope usage, compliance, procurement, and support with the team that will onboard you.</p>
+                <h2 class="mt-3 text-3xl font-semibold tracking-tight text-gray-950">{m.custom({}, { locale })}</h2>
+                <p class="mt-3 max-w-sm text-sm leading-6 text-gray-600">{m.enterprise_custom_card_desc({}, { locale })}</p>
               </div>
-              <span class="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">For scale</span>
+              <span class="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">{m.enterprise_for_scale({}, { locale })}</span>
             </div>
           </div>
           <div class="divide-y divide-gray-100">
             {
               [
-                `${enterpriseMau} MAUs`,
+                m.enterprise_feature_maus({ mau: enterpriseMau }, { locale }),
                 enterpriseBandwidth,
                 enterpriseStorage,
-                '6 concurrent macOS M4 builds',
-                'Dedicated Slack/Teams channel',
-                'SSO, SOC 2, ISO 27001 ongoing',
-                'Onboarding and account management',
+                m.enterprise_6_concurrent_macos_m4({}, { locale }),
+                m.enterprise_dedicated_slack_teams({}, { locale }),
+                m.enterprise_sso_soc2_iso({}, { locale }),
+                m.enterprise_onboarding_account_management({}, { locale }),
               ].map((item) => (
                 <div class="flex items-center gap-3 px-6 py-4 text-sm font-medium text-gray-700 sm:px-8">
                   <svg class="h-5 w-5 shrink-0 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
@@ -333,7 +369,7 @@ const stats = [
           {
             customers.map((customer) => (
               <div class="flex items-center gap-3 rounded-xl border border-gray-200 bg-white p-4">
-                <img class="h-10 w-10 rounded-lg object-contain grayscale" src={customer.logo} alt={customer.name} width="40" height="40" loading="lazy" />
+                <img class="h-10 w-10 rounded-lg object-contain grayscale" src={customer.logo} alt={`${customer.name} logo`} width="40" height="40" loading="lazy" />
                 <div>
                   <p class="text-sm font-semibold text-gray-950">{customer.name}</p>
                   <p class="text-xs font-medium text-gray-500">
@@ -349,10 +385,10 @@ const stats = [
 
     <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
       <div class="mx-auto max-w-3xl text-center">
-        <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">Enterprise scale</p>
-        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">The limits that matter most are clear before the call.</h2>
+        <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.enterprise_scale_label({}, { locale })}</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">{m.enterprise_limits_title({}, { locale })}</h2>
         <p class="mt-4 text-base leading-7 text-gray-600">
-          Enterprise buying usually stalls when scale, release speed, compliance, or procurement is unclear. These are the differences teams ask for first.
+          {m.enterprise_limits_desc({}, { locale })}
         </p>
       </div>
 
@@ -373,11 +409,10 @@ const stats = [
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
           <div>
-            <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">Enterprise approval</p>
-            <h2 class="mt-3 text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">Built for security, legal, finance, and release teams.</h2>
+            <p class="text-sm font-semibold tracking-wide text-blue-700 uppercase">{m.enterprise_approval_label({}, { locale })}</p>
+            <h2 class="mt-3 text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">{m.enterprise_approval_title({}, { locale })}</h2>
             <p class="mt-4 text-base leading-7 text-gray-600">
-              Enterprise deals fail when each reviewer has to rediscover the same answers. Capgo packages the operational, compliance, and migration details teams need to approve a
-              release platform.
+              {m.enterprise_approval_desc({}, { locale })}
             </p>
           </div>
 
@@ -531,7 +566,7 @@ const stats = [
             href="https://cal.com/team/capgo/capgo-enterprise-inquiry"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Talk to our team"
+            aria-label={m.enterprise_talk_to_team({}, { locale })}
             class="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:bg-blue-50 hover:text-blue-700 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-950 focus:outline-none"
           >
             <span class="flex -space-x-2" aria-hidden="true">
@@ -539,7 +574,7 @@ const stats = [
               <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/valeria-avatar.jpg" alt="" width="24" height="24" loading="lazy" />
               <img class="h-6 w-6 rounded-full border-2 border-white object-cover" src="/jordan-avatar.jpg" alt="" width="24" height="24" loading="lazy" />
             </span>
-            <span>Talk to our team</span>
+            <span>{m.enterprise_talk_to_team({}, { locale })}</span>
           </a>
         </div>
       </div>
