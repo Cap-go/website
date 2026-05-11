@@ -47,6 +47,7 @@ const capgoCloudCards: CardData[] = [
     href: 'https://github.com/Cap-go/capacitor-updater/',
     description: 'Deploy live updates instantly to your users without app store review delays',
     docsUrl: 'https://capgo.app/plugins/capacitor-updater/',
+    width: '50%',
   },
   {
     title: 'Capgo Console',
@@ -54,13 +55,7 @@ const capgoCloudCards: CardData[] = [
     href: 'https://github.com/Cap-go/capgo/',
     description: 'Front and back base on Supabase',
     docsUrl: 'https://capgo.app/docs/',
-  },
-  {
-    title: 'Capgo CLI',
-    name: '@capgo/cli',
-    href: 'https://github.com/Cap-go/cli/',
-    description: 'Manage/Upload your Cloud/ Self hosted apps from CLI',
-    docsUrl: 'https://capgo.app/docs/cli/overview/',
+    width: '50%',
   },
 ]
 

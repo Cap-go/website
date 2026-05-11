@@ -296,7 +296,7 @@ For larger teams, the following version management matrix can help organize upda
 Even with precautions, updates can fail. If that happens, follow these recovery steps:
 
 1.  Roll back to a previous stable bundle.
-2.  Increment version numbers for any new fixes (note: version numbers cannot be reused after deletion) [\[2\]](https://github.com/Cap-go/CLI).
+2.  Increment version numbers for any new fixes (note: version numbers cannot be reused after deletion) [\[2\]](https://github.com/Cap-go/capgo).
 3.  Verify updates during app startup to ensure they work as expected.
 
 Capgo's updater is designed to handle disruptions. For example, if the server is unreachable or an update is deleted, the app continues to function normally [\[3\]](https://capgo.app/docs/faq/). Additionally, failed network requests are automatically retried during the next app launch [\[3\]](https://capgo.app/docs/faq/). This built-in resilience minimizes downtime and ensures smoother operations.

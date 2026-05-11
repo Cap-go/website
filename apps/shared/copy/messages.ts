@@ -355,8 +355,6 @@ const messages = {
   bug_bounty_payment_note:
     'Payments are issued only after we have identified the issue, fixed it, opened a pull request, and you have verified after release that the fix works for you. This process usually takes between 20 and 30 days. Please do not send messages like "to get paid"; payment happens only once the release is live and you\'ve tested and validated the fix.',
   bug_bounty_program: 'Bug Bounty Program',
-  bug_bounty_repo_cli: 'Capgo CLI',
-  bug_bounty_repo_cli_desc: 'Command-line interface for managing Capgo deployments and live updates',
   bug_bounty_repo_landing: 'Capgo Backend & Landing',
   bug_bounty_repo_landing_desc: 'Main Capgo repository including backend services and landing website',
   bug_bounty_repo_updater: 'Capacitor Updater Plugin',
