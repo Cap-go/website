@@ -48,7 +48,7 @@ const messages = {
   alternatives_been_doing_desc:
     'Capgo created the first serious independent Capacitor live-update platform after Appflow. Since then, others have copied the pattern. We kept shipping: 5-minute automatic setup, manual control, native rollback, CLI compatibility checks, logs, channels, and production scale.',
   alternatives_been_doing_title: 'We pioneered the independent Capacitor live-update path',
-  alternatives_biggest_plugin_desc: 'We maintain 100+ free, open-source Capacitor plugins. More than anyone else in the ecosystem except the Capacitor team itself.',
+  alternatives_biggest_plugin_desc: 'We maintain {pluginCountLabel} free, open-source Capacitor plugins. More than anyone else in the ecosystem except the Capacitor team itself.',
   alternatives_biggest_plugin_note: 'So yeah, we know a thing or two about Capacitor.',
   alternatives_biggest_plugin_title: '🚀 Biggest plugin provider after official Capacitor',
   alternatives_bootstrapped_desc: 'No investors. No debt. Just sustainable revenue from happy customers.',
@@ -156,7 +156,7 @@ const messages = {
   appflow_experience_desc:
     'Capgo created the first serious independent Capacitor live-update platform after Appflow. We have handled billions of updates, every App Store policy shift, and the weird device failures that only show up in production.',
   appflow_experience_note:
-    "Also: we're the <strong>biggest Capacitor plugin provider</strong> after the official Capacitor team, with 100+ open-source plugins. We know the ecosystem inside and out.",
+    "Also: we're the <strong>biggest Capacitor plugin provider</strong> after the official Capacitor team, with {pluginCountLabel} open-source plugins. We know the ecosystem inside and out.",
   appflow_experience_title: '4. We pioneered the independent path',
   appflow_faq_a1: "Nope. Whatever you're using now (GitHub Actions, GitLab CI, Jenkins, etc.) keeps working. Just change the upload step to use our CLI instead of Appflow's.",
   appflow_faq_a2:
@@ -499,7 +499,7 @@ const messages = {
   capwesome_diff_plugins_capawesome:
     '<strong class="text-white">Capawesome:</strong> They also make great plugins, quality-focused approach. Some are paid - that\'s their main business.',
   capwesome_diff_plugins_capgo:
-    '<strong class="text-white">Capgo:</strong> We maintain <strong class="text-emerald-400">100+ Capacitor plugins</strong> - biggest provider after official Capacitor team. All free and open source.',
+    '<strong class="text-white">Capgo:</strong> We maintain <strong class="text-emerald-400">{pluginCountLabel} Capacitor plugins</strong> - biggest provider after official Capacitor team. All free and open source.',
   capwesome_diff_plugins_note: 'Different philosophies: we go broad with all-free plugins, they focus on paid premium plugins.',
   capwesome_diff_plugins_title: 'Plugin Ecosystem',
   capwesome_diff_pricing_capawesome:
@@ -549,7 +549,7 @@ const messages = {
   capwesome_quick_facts_capgo_li4: '✅ $14/month start',
   capwesome_quick_facts_capgo_li5: '✅ 100% open source (plugin + backend)',
   capwesome_quick_facts_capgo_li6: '✅ Family business, bootstrapped',
-  capwesome_quick_facts_capgo_li7: '✅ 100+ free plugins',
+  capwesome_quick_facts_capgo_li7: '✅ {pluginCountLabel} free plugins',
   capwesome_quick_facts_capgo_li8: '✅ Self-hosting option',
   capwesome_quick_facts_legend: '✅ = Strong point | ⚠️ = Depends on needs | ❌ = Not available | ⚪ = Unknown/Not disclosed',
   capwesome_quick_facts_title: 'Quick facts (no BS)',
@@ -1336,7 +1336,7 @@ const messages = {
   footer: 'Footer',
   free_mobile_tools: 'Free Mobile Tools',
   footer_tagline_part1: 'Power your Capacitor apps with',
-  footer_tagline_part2: 'over 90+production-ready plugins',
+  footer_tagline_part2: '{pluginCountLabel} production-ready plugins',
   for_the_pay_as_you_go_plan: 'for any plan with credit-based usage',
   for_ultra_fast_delivery: 'for ultra-fast delivery',
   four_definitions_title: '4. Definitions',

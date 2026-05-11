@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-21T03:02:38.679Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-10T23:28:47.000Z
 head_image: https://assets.seobotai.com/capgo.app/67dcb1f883b63ee70fa08665-1742526177947.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, update channels, app updates, development, mobile, CI/CD, user management, version control
@@ -251,7 +251,7 @@ Getting started with Capgo is simple and quick. Just follow these three steps:
 
 > "@Capgo is a must have tools for developers, who want to be more productive. Avoiding review for bugfix is golden." - Bessie Cooper [\[1\]](https://capgo.app/)
 
-Capgo supports over 30 plugins and works seamlessly with CI/CD pipelines, making it easy to fit into your existing development process. It enhances [update management](https://capgo.app/docs/getting-started/deploy/) while keeping everything efficient and straightforward.
+Capgo supports a broad plugin collection and works seamlessly with CI/CD pipelines, making it easy to fit into your existing development process. It enhances [update management](https://capgo.app/docs/getting-started/deploy/) while keeping everything efficient and straightforward.
 
 ## Summary
 

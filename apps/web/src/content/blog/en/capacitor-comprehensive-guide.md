@@ -10,7 +10,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-10T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-10T23:28:47.000Z
 head_image: /capacitor-guide.webp
 head_image_alt: Capacitor guide illustration
 keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
@@ -92,7 +92,7 @@ You can use pre-baked, optimized components from Ionic Framework, Quasar, Framew
 
 ## How many plugins does Capacitor have?
 
-Capacitor has 26 core plugins and numerous community-built plugins. Check out [awesome-capacitor](https://github.com/riderx/awesome-capacitor/), the [capacitor-community](https://github.com/capacitor-community/) organization, and [Capgo](https://capgo.app/plugins/) with 91 plugins for community plugin resources.
+Capacitor has 26 core plugins and numerous community-built plugins. Check out [awesome-capacitor](https://github.com/riderx/awesome-capacitor/), the [capacitor-community](https://github.com/capacitor-community/) organization, and the [Capgo plugin directory](https://capgo.app/plugins/) for community plugin resources.
 
 ## Is there a VS Code Extension for Capacitor?
 
