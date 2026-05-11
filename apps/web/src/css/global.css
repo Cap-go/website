@@ -304,7 +304,7 @@ body,
   color: #4b5563 !important;
 }
 
-.marketing-refresh header img[alt$='logo'] {
+.marketing-refresh header .site-logo {
   filter: invert(1) brightness(0.35) contrast(1.4);
 }
 
@@ -377,7 +377,6 @@ body,
 .marketing-refresh :where(a.bg-blue-600, a.bg-sky-600, a.bg-cyan-600, a.bg-emerald-600, a.bg-green-600, a.bg-amber-600, a.bg-orange-600, a.bg-rose-600, a.bg-red-600) {
   background-color: #111827 !important;
   color: #ffffff !important;
-  box-shadow: none !important;
 }
 
 .marketing-refresh :where(a.border-gray-600, a.border-white\/30, a.bg-white\/5) {
