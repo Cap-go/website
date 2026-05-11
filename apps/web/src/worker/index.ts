@@ -1,4 +1,5 @@
 import { handleToolApiRequest } from '../lib/tools/api'
+import { handleReadmeBanner } from './readme-banner'
 
 interface Env {
   ASSETS: {
@@ -152,7 +153,11 @@ async function handleStatus(): Promise<Response> {
 
 type RouteDefinition = {
   methods: readonly string[]
-  handle: (request: Request, env: Env) => Promise<Response>
+  handle: (request: Request, env: Env, ctx?: BackgroundContext) => Promise<Response>
+}
+
+type BackgroundContext = {
+  waitUntil(promise: Promise<unknown>): void
 }
 
 type LinkDefinition = {
@@ -174,6 +179,10 @@ const routeDefinitions: Record<string, RouteDefinition> = {
   '/status.json': {
     methods: ['GET'],
     handle: async () => await handleStatus(),
+  },
+  '/readme-banner.svg': {
+    methods: ['GET', 'HEAD'],
+    handle: async (request, _env, ctx) => await handleReadmeBanner(request, ctx),
   },
 }
 
@@ -197,11 +206,11 @@ function withGlobalCssCacheHeaders(response: Response): Response {
   })
 }
 
-async function handleRouteRequest(request: Request, env: Env, pathname: string): Promise<Response | null> {
+async function handleRouteRequest(request: Request, env: Env, pathname: string, ctx?: BackgroundContext): Promise<Response | null> {
   const route = routeDefinitions[pathname]
   if (!route) return null
   if (!route.methods.includes(request.method)) return webJson({ error: 'Method not allowed.' }, 405)
-  return await route.handle(request, env)
+  return await route.handle(request, env, ctx)
 }
 
 function withLinkHeaders(response: Response, links: LinkDefinition[]): Response {
@@ -226,7 +235,7 @@ function withLinkHeaders(response: Response, links: LinkDefinition[]): Response 
 }
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx?: BackgroundContext): Promise<Response> {
     const pathname = new URL(request.url).pathname
     const toolRouteResponse = await handleToolApiRequest(
       request,
@@ -238,7 +247,7 @@ export default {
       pathname,
     )
     if (toolRouteResponse) return toolRouteResponse
-    const routeResponse = await handleRouteRequest(request, env, pathname)
+    const routeResponse = await handleRouteRequest(request, env, pathname, ctx)
     if (routeResponse) return routeResponse
     const assetResponse = await env.ASSETS.fetch(isGlobalCssPath(pathname) ? globalCssRequest(request) : request)
     if (isGlobalCssPath(pathname)) return withGlobalCssCacheHeaders(assetResponse)
