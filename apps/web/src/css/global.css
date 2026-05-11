@@ -304,6 +304,26 @@ body,
   color: #4b5563 !important;
 }
 
+.marketing-refresh :where(.text-blue-400, .text-sky-400) {
+  color: #1d4ed8 !important;
+}
+
+.marketing-refresh :where(.text-green-400, .text-emerald-400) {
+  color: #15803d !important;
+}
+
+.marketing-refresh :where(.text-orange-400, .text-amber-400, .text-yellow-400) {
+  color: #c2410c !important;
+}
+
+.marketing-refresh :where(.text-red-400, .text-rose-400) {
+  color: #b91c1c !important;
+}
+
+.marketing-refresh :where(.text-cyan-400) {
+  color: #0e7490 !important;
+}
+
 .marketing-refresh header .site-logo {
   filter: invert(1) brightness(0.35) contrast(1.4);
 }
@@ -379,7 +399,7 @@ body,
   color: #ffffff !important;
 }
 
-.marketing-refresh :where(a.border-gray-600, a.border-white\/30, a.bg-white\/5) {
+.marketing-refresh :where(a.border-gray-600, a.border-white\/30, a.bg-white\/5):not(:hover):not(:focus-visible) {
   border-color: #d1d5db !important;
   background-color: #ffffff !important;
   color: #111827 !important;
