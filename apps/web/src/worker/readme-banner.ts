@@ -14,6 +14,9 @@ const FRESH_SECONDS = 300
 const STALE_SECONDS = 86_400
 const BANNER_WIDTH = 2048
 const BANNER_HEIGHT = 296
+const COPY_SAFE_RIGHT_EDGE = 1504
+const TITLE_MAX_LENGTH = 34
+const DETAIL_MAX_LENGTH = 62
 const SVG_CONTENT_TYPE = 'image/svg+xml; charset=utf-8'
 const CACHE_KEY_PARAMS = ['ad', 'campaign', 'package', 'pkg', 'repo', 'repository']
 const GITHUB_REPO_RE = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/
@@ -157,10 +160,12 @@ function truncate(value: string, maxLength: number): string {
 function buildCopy(context: BannerContext): { title: string; detail: string; cta: string } {
   if (context.plugin) {
     const title = `${context.plugin.title} for Capacitor`
-    const product = context.campaign === 'build' ? 'native builds' : 'live updates'
     return {
       title,
-      detail: `${context.plugin.name} plus ${product} and ${pluginCountLabel} free plugins:`,
+      detail:
+        context.campaign === 'build'
+          ? `Native build, AppStore publishing, ${pluginCountLabel} Free plugins:`
+          : `OTA, Native build, AppStore publishing, ${pluginCountLabel} Free plugins:`,
       cta: context.campaign === 'build' ? 'Click to try Capgo Build' : 'Click to check out Capgo',
     }
   }
@@ -182,16 +187,21 @@ function buildCopy(context: BannerContext): { title: string; detail: string; cta
 
 function renderBannerSvg(context: BannerContext): string {
   const copy = buildCopy(context)
-  const title = escapeSvg(truncate(copy.title, 42))
-  const detail = escapeSvg(truncate(copy.detail, 77))
+  const title = escapeSvg(truncate(copy.title, TITLE_MAX_LENGTH))
+  const detail = escapeSvg(truncate(copy.detail, DETAIL_MAX_LENGTH))
   const cta = escapeSvg(copy.cta)
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${BANNER_WIDTH}" height="${BANNER_HEIGHT}" viewBox="0 0 ${BANNER_WIDTH} ${BANNER_HEIGHT}" role="img" aria-labelledby="title desc">
   <title id="title">${title}</title>
   <desc id="desc">${detail} ${cta}</desc>
+  <defs>
+    <clipPath id="copy-safe-area">
+      <rect x="0" y="0" width="${COPY_SAFE_RIGHT_EDGE}" height="${BANNER_HEIGHT}"/>
+    </clipPath>
+  </defs>
   <rect width="${BANNER_WIDTH}" height="${BANNER_HEIGHT}" fill="#002444"/>
   <image href="${README_BANNER_LOGO_PNG}" x="20" y="20" width="155" height="155" preserveAspectRatio="none"/>
-  <g fill="#f8fbff" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+  <g fill="#f8fbff" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" clip-path="url(#copy-safe-area)">
     <text x="198" y="108" font-size="74" font-weight="400">${title}</text>
     <text x="134" y="217" font-size="50" font-weight="400">${detail}</text>
     <text x="134" y="277" font-size="50" font-weight="400">${cta.replace('Capgo', '<tspan font-weight="800">Capgo</tspan>')}</text>
