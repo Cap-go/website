@@ -8,10 +8,13 @@ import { numberWithSpaces } from '@/services/misc'
 
 const locale = Astro.locals.locale
 const config = Astro.locals.runtimeConfig
+const plansFetchTimeoutMs = 3000
 
 let plansAll: Database['public']['Tables']['plans']['Row'][] = []
 try {
-  const response = await fetch(`${config.public.baseApiUrl}/private/plans`)
+  const response = await fetch(`${config.public.baseApiUrl}/private/plans`, {
+    signal: AbortSignal.timeout(plansFetchTimeoutMs),
+  })
   if (response.ok) {
     const payload = await response.json()
     if (Array.isArray(payload)) {
