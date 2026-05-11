@@ -48,7 +48,7 @@
   "dependencies": {
     "@astrojs/cloudflare": "13.3.0",
     "@astrojs/sitemap": "3.7.2",
-    "@astrojs/starlight": "0.38.4",
+    "@astrojs/starlight": "0.39.2",
     "@astrojs/starlight-docsearch": "0.7.0",
     "@astrojs/starlight-tailwind": "5.0.0",
     "@std/semver": "npm:@jsr/std__semver@1.0.8",

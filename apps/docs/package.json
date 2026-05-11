@@ -6,7 +6,7 @@
     "@astrojs/cloudflare": "13.1.7",
     "@astrojs/mdx": "5.0.3",
     "@astrojs/sitemap": "3.7.2",
-    "@astrojs/starlight": "0.38.2",
+    "@astrojs/starlight": "0.39.2",
     "@astrojs/starlight-docsearch": "0.7.0",
     "@tailwindcss/vite": "^4.2.1",
     "astro": "6.1.3",
