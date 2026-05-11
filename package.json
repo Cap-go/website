@@ -75,7 +75,7 @@
     "@astrojs/check": "0.9.9",
     "@astrojs/compiler-rs": "^0.1.10",
     "@capgo/seo-checker": "^0.0.13",
-    "@cloudflare/vite-plugin": "1.35.0",
+    "@cloudflare/vite-plugin": "1.36.3",
     "@dotenvx/dotenvx": "^1.64.0",
     "@iconify-json/carbon": "^1.2.19",
     "@iconify-json/heroicons": "1.2.3",
