@@ -84,6 +84,7 @@ Plugin Intune|Microsoft Intune MAM and MSAL plugin|docs/plugins/intune/**
 Plugin Persistent Account|persistent account storage plugin|docs/plugins/persistent-account/**
 Plugin Photo Library|photo library access plugin|docs/plugins/photo-library/**
 Plugin Printer|printing plugin for documents and images|docs/plugins/printer/**
+Plugin reCAPTCHA|reCAPTCHA and reCAPTCHA Enterprise token plugin for Web, Android, and iOS|docs/plugins/recaptcha/**
 Plugin RealtimeKit|real-time communication plugin|docs/plugins/realtimekit/**
 Plugin Ricoh 360 Camera|Ricoh 360 camera integration plugin|docs/plugins/ricoh360-camera/**
 Plugin Screen Orientation|screen orientation control plugin|docs/plugins/screen-orientation/**

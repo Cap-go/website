@@ -171,6 +171,7 @@ const pluginEntries = [
   ['Persistent Account', 'persistent-account'],
   ['Photo Library', 'photo-library'],
   ['Printer', 'printer'],
+  ['reCAPTCHA', 'recaptcha', [linkItem('iOS setup', '/docs/plugins/recaptcha/ios'), linkItem('Android setup', '/docs/plugins/recaptcha/android')]],
   ['RealtimeKit', 'realtimekit'],
   ['Ricoh 360 Camera', 'ricoh360-camera'],
   ['Screen Orientation', 'screen-orientation'],

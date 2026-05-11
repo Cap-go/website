@@ -1,0 +1,42 @@
+---
+title: iOS Setup
+description: iOS-specific setup for @capgo/capacitor-recaptcha.
+sidebar:
+  order: 4
+---
+
+## Site Key
+
+Create an iOS mobile application key in Google Cloud reCAPTCHA. Register the bundle identifier used by your Capacitor app, then set the key in `capacitor.config.ts`.
+
+```ts
+import type { CapacitorConfig } from '@capacitor/cli';
+import '@capgo/capacitor-recaptcha';
+
+const config: CapacitorConfig = {
+  plugins: {
+    Recaptcha: {
+      iosSiteKey: 'IOS_SITE_KEY',
+    },
+  },
+};
+
+export default config;
+```
+
+## Dependency
+
+The plugin ships CocoaPods and Swift Package Manager metadata for Google's `RecaptchaEnterprise` iOS SDK. Running `npx cap sync ios` installs the native dependency through your selected Capacitor iOS workflow.
+
+## Execute
+
+```ts
+import { Recaptcha } from '@capgo/capacitor-recaptcha';
+
+const { token } = await Recaptcha.execute({
+  action: 'password_reset',
+  timeout: 10000,
+});
+```
+
+Send the token to your backend immediately and create a reCAPTCHA assessment before accepting the protected request.

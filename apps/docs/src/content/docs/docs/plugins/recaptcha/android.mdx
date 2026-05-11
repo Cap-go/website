@@ -1,0 +1,48 @@
+---
+title: Android Setup
+description: Android-specific setup for @capgo/capacitor-recaptcha.
+sidebar:
+  order: 3
+---
+
+## Site Key
+
+Create an Android mobile application key in Google Cloud reCAPTCHA. Register the package name used by your Capacitor app, then set the key in `capacitor.config.ts`.
+
+```ts
+import type { CapacitorConfig } from '@capacitor/cli';
+import '@capgo/capacitor-recaptcha';
+
+const config: CapacitorConfig = {
+  plugins: {
+    Recaptcha: {
+      androidSiteKey: 'ANDROID_SITE_KEY',
+    },
+  },
+};
+
+export default config;
+```
+
+## Dependency
+
+The plugin includes the Google Android reCAPTCHA dependency:
+
+```gradle
+com.google.android.recaptcha:recaptcha:18.8.0
+```
+
+You can override the dependency version from the app Gradle config with `recaptchaVersion` when you need to pin a newer Google SDK release.
+
+## Execute
+
+```ts
+import { Recaptcha } from '@capgo/capacitor-recaptcha';
+
+const { token } = await Recaptcha.execute({
+  action: 'checkout',
+  timeout: 10000,
+});
+```
+
+Send the token to your backend immediately and create a reCAPTCHA assessment before accepting the protected request.
