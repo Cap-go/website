@@ -25,7 +25,7 @@ const ldJSON = createLdJsonGraph(Astro.locals.runtimeConfig.public, serviceLdJso
 const content = { title, description, ldJSON }
 ---
 
-<Layout content={content} pageStyle="marketing-refresh">
+<Layout content={content}>
   <div>
     <!-- Hero Section -->
     <section class="relative py-16 sm:py-20 lg:py-28">

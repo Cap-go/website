@@ -8,7 +8,6 @@ import globalStylesHref from '../css/global.css?url'
 
 const content = Astro.props.content ?? {}
 const disableThirdPartyScripts = Astro.props.disableThirdPartyScripts ?? false
-const pageStyle = Astro.props.pageStyle ?? ''
 
 const isLocalhost = Astro.url.origin.includes('localhost:')
 const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
@@ -31,7 +30,7 @@ const enableThirdPartyScripts = !isLocalhost && !disableThirdPartyScripts
     >
       Skip to main content
     </a>
-    <div class:list={['overflow-x-hidden bg-gray-900 text-white', pageStyle]}>
+    <div class="overflow-x-hidden bg-gray-900 text-white">
       <Header />
       <main id="main-content">
         <slot />
