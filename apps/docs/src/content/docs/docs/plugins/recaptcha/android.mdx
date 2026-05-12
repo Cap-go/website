@@ -9,6 +9,8 @@ sidebar:
 
 Create an Android mobile application key in Google Cloud reCAPTCHA. Register the package name used by your Capacitor app, then set the key in `capacitor.config.ts`.
 
+Android uses Google's mobile reCAPTCHA SDK. Regular, non-Enterprise reCAPTCHA v3 is only available on Web in this plugin; `enterprise: false` is rejected on Android.
+
 ```ts
 import type { CapacitorConfig } from '@capacitor/cli';
 import '@capgo/capacitor-recaptcha';

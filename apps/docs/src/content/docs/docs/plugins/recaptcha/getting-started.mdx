@@ -69,8 +69,8 @@ const { token } = await Recaptcha.execute({
 });
 ```
 
-On Android and iOS, the native Google mobile SDK is used and the returned result reports `enterprise: true`.
+On Android and iOS, Google's native mobile SDK path is Enterprise/mobile only. Passing `enterprise: false` on native platforms is rejected so a standard Web v3 key is not used accidentally.
 
 ## Migration Notes
 
-The plugin accepts the old Cordova option aliases `sitekeyAndroid` and `sitekeyWeb` during execution. Prefer the Capacitor config names for new code.
+The plugin accepts the old Cordova option aliases `sitekeyAndroid` and `sitekeyWeb` in call options and Capacitor config. It also accepts `sitekeyIos` and `sitekeyIOS` as iOS migration aliases. Prefer the Capacitor config names for new code.

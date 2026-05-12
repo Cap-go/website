@@ -9,6 +9,8 @@ sidebar:
 
 Create an iOS mobile application key in Google Cloud reCAPTCHA. Register the bundle identifier used by your Capacitor app, then set the key in `capacitor.config.ts`.
 
+iOS uses Google's `RecaptchaEnterprise` mobile SDK. Regular, non-Enterprise reCAPTCHA v3 is only available on Web in this plugin; `enterprise: false` is rejected on iOS.
+
 ```ts
 import type { CapacitorConfig } from '@capacitor/cli';
 import '@capgo/capacitor-recaptcha';

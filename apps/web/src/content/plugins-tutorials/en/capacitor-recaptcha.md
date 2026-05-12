@@ -32,7 +32,7 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-Use `enterprise: false` only when the Web implementation should load standard reCAPTCHA v3 instead of reCAPTCHA Enterprise.
+Use `enterprise: false` only when the Web implementation should load standard reCAPTCHA v3 instead of reCAPTCHA Enterprise. Android and iOS use Google's Enterprise/mobile SDK path and reject `enterprise: false`.
 
 ## Generate A Token
 
