@@ -148,6 +148,7 @@ const pluginEntries = [
         linkItem('Sandbox Testing', '/docs/plugins/native-purchases/ios-sandbox-testing'),
         linkItem('Subscription Groups', '/docs/plugins/native-purchases/ios-subscription-group'),
         linkItem('Create Subscription', '/docs/plugins/native-purchases/ios-create-subscription'),
+        linkItem('Monthly Commitment Plans', '/docs/plugins/native-purchases/ios-monthly-commitment'),
         linkItem('Introductory Offers', '/docs/plugins/native-purchases/ios-introductory-offer'),
         linkItem('App Store Review', '/docs/plugins/native-purchases/ios-app-store-review'),
       ]),

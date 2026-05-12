@@ -1,0 +1,127 @@
+---
+title: iOS Monthly Commitment Billing Plans
+description: Learn how to merchandise and purchase StoreKit monthly subscriptions with a 12-month commitment using @capgo/native-purchases.
+sidebar:
+  order: 9
+---
+
+Apple supports subscriptions that bill monthly while committing the customer to a longer 12-month term. When StoreKit and the running OS support this billing plan, `@capgo/native-purchases` exposes the pricing terms, lets you select the monthly billing plan during purchase, and returns commitment metadata on transactions and renewal info.
+
+Use this for annual subscription offers where users prefer monthly payments but you still want the retention and predictability of a committed annual term.
+
+## Requirements
+
+- Configure the monthly with 12-month commitment billing plan in App Store Connect or in StoreKit Testing in Xcode.
+- Build the iOS app with an Xcode SDK that contains StoreKit `pricingTerms` and `billingPlanType`.
+- Run on an iOS version that supports StoreKit commitment billing plans.
+- Keep a standard billing option available for devices or storefronts that do not return commitment pricing terms.
+
+:::note
+The JavaScript API is safe to call on all platforms. Unsupported platforms simply will not return `pricingTerms`, and Android ignores `billingPlanType`.
+:::
+
+## Load and Display Pricing Terms
+
+Call `getProducts()` as usual. For supported iOS subscription products, each product can include `pricingTerms`.
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['com.example.app.premium.yearly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const premiumYearly = products.find(
+  (product) => product.identifier === 'com.example.app.premium.yearly',
+);
+const monthlyCommitment = premiumYearly?.pricingTerms?.find(
+  (term) => term.billingPlanType === 'monthly',
+);
+```
+
+Render the store-provided values instead of hardcoded pricing:
+
+| Field | Use it for |
+| --- | --- |
+| `billingDisplayPrice` | The recurring billing amount shown to the user, for example the monthly charge. |
+| `billingPeriod` | The billing cadence for the displayed billing price. |
+| `commitmentInfo.priceString` | The total commitment price formatted for the user's storefront. |
+| `commitmentInfo.period` | The full commitment period. |
+| `subscriptionOffers` | Introductory or promotional offers attached to the pricing term. |
+
+Example paywall copy:
+
+```typescript
+function commitmentLabel(term: NonNullable<typeof monthlyCommitment>) {
+  const total = term.commitmentInfo?.priceString;
+  return total
+    ? `${term.billingDisplayPrice} billed monthly, ${total} total commitment`
+    : term.billingDisplayPrice;
+}
+```
+
+## Purchase the Monthly Commitment Plan
+
+When the user selects the monthly commitment plan, pass `billingPlanType: 'monthly'`.
+
+```typescript
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'com.example.app.premium.yearly',
+  productType: PURCHASE_TYPE.SUBS,
+  billingPlanType: 'monthly',
+  appAccountToken: userStoreUuid,
+});
+```
+
+Use `billingPlanType: 'upFront'` only when you need to explicitly select the standard up-front billing plan. If you omit `billingPlanType`, StoreKit uses its default purchase behavior for the product.
+
+:::tip
+Keep your paywall state tied to the pricing term the user tapped. If `pricingTerms` is missing, hide the commitment option and show the regular subscription purchase button.
+:::
+
+## Read Commitment Metadata
+
+Transactions include the billing plan and commitment progress when StoreKit provides it:
+
+```typescript
+if (transaction.billingPlanType === 'monthly') {
+  console.log('Current billing period:', transaction.commitmentInfo?.billingPeriodNumber);
+  console.log('Total billing periods:', transaction.commitmentInfo?.totalBillingPeriods);
+  console.log('Commitment ends:', transaction.commitmentInfo?.expirationDate);
+  console.log('Commitment total:', transaction.commitmentInfo?.price);
+}
+```
+
+Renewal info can include the next commitment state:
+
+```typescript
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+  onlyCurrentEntitlements: true,
+});
+
+for (const purchase of purchases) {
+  const commitment = purchase.renewalInfo?.commitmentInfo;
+  if (!commitment) continue;
+
+  console.log('Renews into another commitment:', commitment.willAutoRenew);
+  console.log('Next billing plan:', commitment.renewalBillingPlanType);
+  console.log('Next renewal date:', commitment.renewalDate);
+}
+```
+
+Use the top-level `expirationDate` and `isActive` fields for entitlement decisions. Use `commitmentInfo.expirationDate` to explain the full commitment timeline to the customer.
+
+## App Store Review Notes
+
+- Show both the recurring billing price and the total commitment price before purchase.
+- Make the commitment length explicit near the purchase button.
+- Use `product.title`, `product.priceString`, `pricingTerms[].billingDisplayPrice`, and `pricingTerms[].commitmentInfo.priceString` from StoreKit instead of hardcoded prices.
+- Provide restore purchases and manage subscription actions on the paywall or account screen.
+
+## Related Guides
+
+- [Create iOS subscriptions](/docs/plugins/native-purchases/ios-create-subscription/)
+- [Configure iOS sandbox testing](/docs/plugins/native-purchases/ios-sandbox-testing/)
+- [iOS App Store review guidelines](/docs/plugins/native-purchases/ios-app-store-review/)
