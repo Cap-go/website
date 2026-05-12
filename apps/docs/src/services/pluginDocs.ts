@@ -12,25 +12,6 @@ type PluginDocsSlugs = {
 
 const DOCS_CONTENT_ROOT = fileURLToPath(new URL('../content/docs/', import.meta.url))
 
-const pluginDocsIndexPromise: Promise<Map<Locales, Set<string>>> = Promise.resolve(
-  globSync('**/plugins/*/index.{md,mdx}', { cwd: DOCS_CONTENT_ROOT, nodir: true }).reduce((docsByLocale, filePath) => {
-    const docEntry = getPluginDocEntry(filePath)
-    if (!docEntry) return docsByLocale
-
-    const localeDocs = docsByLocale.get(docEntry.locale) ?? new Set<string>()
-    localeDocs.add(docEntry.slug)
-    docsByLocale.set(docEntry.locale, localeDocs)
-
-    return docsByLocale
-  }, new Map<Locales, Set<string>>()),
-)
-
-const getPackageSegment = (name?: string): string => {
-  if (!name) return ''
-  const slashIndex = name.indexOf('/')
-  return slashIndex >= 0 ? name.slice(slashIndex + 1) : name
-}
-
 const getPluginDocEntry = (filePath?: string): { locale: Locales; slug: string } | null => {
   if (!filePath) return null
 
@@ -57,6 +38,25 @@ const getPluginDocEntry = (filePath?: string): { locale: Locales; slug: string }
   if (!slug || !fileName?.startsWith('index.')) return null
 
   return { locale, slug }
+}
+
+const pluginDocsIndexPromise: Promise<Map<Locales, Set<string>>> = Promise.resolve(
+  globSync('**/plugins/*/index.{md,mdx}', { cwd: DOCS_CONTENT_ROOT, nodir: true }).reduce((docsByLocale, filePath) => {
+    const docEntry = getPluginDocEntry(filePath)
+    if (!docEntry) return docsByLocale
+
+    const localeDocs = docsByLocale.get(docEntry.locale) ?? new Set<string>()
+    localeDocs.add(docEntry.slug)
+    docsByLocale.set(docEntry.locale, localeDocs)
+
+    return docsByLocale
+  }, new Map<Locales, Set<string>>()),
+)
+
+const getPackageSegment = (name?: string): string => {
+  if (!name) return ''
+  const slashIndex = name.indexOf('/')
+  return slashIndex >= 0 ? name.slice(slashIndex + 1) : name
 }
 
 const addCandidate = (items: string[], value?: string) => {

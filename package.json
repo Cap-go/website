@@ -15,6 +15,8 @@
     "repair_sitemap": "bun run scripts/repair_sitemap.tsx",
     "fetch:stars": "bun run scripts/fetch-github-stars.ts",
     "fetch:downloads": "bun run scripts/fetch-npm-downloads.ts",
+    "refresh:stars": "GITHUB_STATS_REFRESH=true bun run scripts/fetch-github-stars.ts",
+    "refresh:downloads": "NPM_DOWNLOADS_REFRESH=true bun run scripts/fetch-npm-downloads.ts",
     "just:build": "bun run build",
     "build:web": "cd apps/web && bun run build",
     "build:docs": "cd apps/docs && bun run build",
