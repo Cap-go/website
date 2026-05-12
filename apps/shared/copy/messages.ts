@@ -1626,8 +1626,8 @@ const messages = {
   live_update_features_subtitle: 'Most tools can upload files. Capgo adds the release controls, native safety, logs, and rollback behavior production teams need.',
   live_update_features_title: 'The Complete Live Update System',
   live_update_get_started: 'Get Started',
-  live_update_hero_subtitle: 'First independent Appflow alternative. Five-minute setup, advanced control, and safety checks built in.',
-  live_update_hero_title: 'The Live Update Platform Others Copy',
+  live_update_hero_subtitle: 'The CLI catches risky changes before deploy. The native engine rolls back automatically if something goes wrong.',
+  live_update_hero_title: 'Live Updates That Keep Production Safe',
   live_update_how_it_works_subtitle: 'Automatic when you want speed. Manual when you need control. Safety checks at every step.',
   live_update_how_it_works_title: 'How It Works',
   live_update_logs_bullet1: 'Per-device timelines highlight stalled downloads, checksum issues, or missing notifyAppReady().',
@@ -1647,7 +1647,7 @@ const messages = {
   live_update_lts_desc:
     'No pressure to upgrade immediately. Capgo officially supports Capacitor 8, 7, 6, 5 and Electron - giving you years of support and flexibility to upgrade on your own schedule.',
   live_update_proof_card1_desc:
-    'When Appflow was the only serious option, live updates were closed, expensive, and tied to a broad platform. Capgo made the independent Capacitor path real.',
+    'Capgo gives Capacitor teams a focused release system for live updates, with open-source SDKs, flexible hosting, and production controls built for real apps.',
   live_update_proof_card1_title: 'First independent path',
   live_update_proof_card2_desc:
     'Use the automatic path to install and ship in 5 minutes, or switch to manual and half-manual flows for custom rollout, support, QA, and per-user scenarios.',
@@ -1659,7 +1659,7 @@ const messages = {
   live_update_proof_desc:
     'Capgo is not a basic bundle uploader. It is the release system around the bundle: targeting, validation, observability, rollback, and control for teams that cannot afford to break production.',
   live_update_proof_kicker: 'Why Capgo leads',
-  live_update_proof_title: 'We built the independent category after Appflow. Then kept going.',
+  live_update_proof_title: 'Capgo turns live updates into a production release system.',
   live_update_lts_electron: 'Electron',
   live_update_lts_electron_new: 'New',
   live_update_lts_supported: 'Fully Supported',
