@@ -1,0 +1,91 @@
+---
+title: Getting Started
+description: "Install and initialize the native Supabase Capacitor plugin."
+sidebar:
+  order: 2
+---
+
+## Install
+
+```bash
+npm install @capgo/capacitor-supabase
+npx cap sync
+```
+
+## Android Minimum SDK
+
+The Android implementation requires Android 8.0 or newer. Set `minSdkVersion = 26` in `android/variables.gradle`.
+
+## Initialize The Client
+
+```ts
+import { CapacitorSupabase } from '@capgo/capacitor-supabase';
+
+await CapacitorSupabase.initialize({
+  supabaseUrl: 'https://your-project.supabase.co',
+  supabaseKey: 'your-anon-key',
+});
+```
+
+## Sign In And Access The JWT
+
+```ts
+const { session, user } = await CapacitorSupabase.signInWithPassword({
+  email: 'user@example.com',
+  password: 'password123',
+});
+
+console.log('User', user?.id);
+console.log('JWT available', Boolean(session?.accessToken));
+```
+
+## Listen For Auth Changes
+
+```ts
+const listener = await CapacitorSupabase.addListener('authStateChange', ({ event, session }) => {
+  console.log('Auth event', event);
+  console.log('Current JWT available', Boolean(session?.accessToken));
+});
+
+await listener.remove();
+```
+
+## Pair Native Auth With supabase-js
+
+```ts
+import { createClient } from '@supabase/supabase-js';
+
+const { session } = await CapacitorSupabase.getSession();
+
+const supabase = createClient('https://your-project.supabase.co', 'your-anon-key', {
+  global: {
+    headers: {
+      Authorization: `Bearer ${session?.accessToken}`,
+    },
+  },
+});
+
+const { data } = await supabase.from('table').select('*');
+console.log(data);
+```
+
+## Native Database Helpers
+
+```ts
+const { data, error } = await CapacitorSupabase.select({
+  table: 'users',
+  columns: 'id, name, email',
+  filter: { active: true },
+  limit: 10,
+  orderBy: 'created_at',
+  ascending: false,
+});
+
+console.log(data, error);
+```
+
+## Recommended Usage
+
+- Use this plugin for authentication and session management.
+- Keep Realtime, Storage, Edge Functions, and advanced querying in `@supabase/supabase-js`.
+- Pass the native JWT into the JavaScript client whenever you need the rest of the Supabase surface area.

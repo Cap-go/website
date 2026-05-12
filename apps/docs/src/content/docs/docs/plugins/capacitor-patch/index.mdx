@@ -1,0 +1,48 @@
+---
+title: "@capgo/capacitor-patch"
+description: "Apply vetted Capgo patches during cap sync and cap update."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Apply small, version-gated Capacitor patches repeatably during sync and update hooks."
+  actions:
+    - text: Get started
+      link: /docs/plugins/capacitor-patch/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-patch/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+`@capgo/capacitor-patch` applies vetted Capgo patches to Capacitor packages or generated native projects during `cap sync` and `cap update`.
+
+The package is hook-only. It does not register a native runtime API. It is useful when an app needs a repeatable fix for a known Capacitor issue before that fix is available upstream.
+
+## Core Capabilities
+
+- Package phase patches run before `sync` and `update`.
+- Native project patches run after `sync` and `update`.
+- Version ranges prevent incompatible patches from applying to the wrong Capacitor release.
+- Recommended patches can be enabled with one config flag.
+- The CLI can list, dry-run, and apply selected patches manually.
+
+## Patch Selection
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `recommended` | `boolean` | `false` | Applies Capgo-recommended compatible patches. |
+| `patches` | `string[]` | `[]` | Applies explicit patch IDs. |
+| `disabled` | `string[]` | `[]` | Skips selected patch IDs, even when recommended. |
+| `strict` | `boolean` | `false` | Throws when a selected patch is incompatible or cannot apply. |
+
+## Source Of Truth
+
+This reference is synced from the README and patch catalog in [capacitor-patch](https://github.com/Cap-go/capacitor-patch/).

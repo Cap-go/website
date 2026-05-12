@@ -1,0 +1,75 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-patch and enable Capgo-recommended Capacitor patches."
+sidebar:
+  order: 2
+---
+
+## Install
+
+```bash
+npm install @capgo/capacitor-patch
+npx cap sync
+```
+
+## Enable Recommended Patches
+
+`@capgo/capacitor-patch` is a no-op until patches are selected. Enable Capgo-recommended compatible patches in `capacitor.config.ts`:
+
+```ts
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.example.app',
+  appName: 'Example',
+  webDir: 'dist',
+  plugins: {
+    CapacitorPatch: {
+      recommended: true,
+    },
+  },
+};
+
+export default config;
+```
+
+Then run:
+
+```bash
+npx cap sync
+```
+
+Package patches run before `sync` and `update`. Native project patches run after `sync` and `update`.
+
+## Select Specific Patches
+
+```ts
+plugins: {
+  CapacitorPatch: {
+    patches: ['capacitor-cli-spm-ios-minor-platform'],
+    disabled: [],
+    strict: true,
+  },
+}
+```
+
+## CLI
+
+```bash
+npx capgo-capacitor-patch list --all
+npx capgo-capacitor-patch doctor
+npx capgo-capacitor-patch apply
+```
+
+Commands:
+
+- `list` shows catalog patches. Add `--all` to include unselected patches.
+- `doctor` dry-runs selected patches and reports what would happen.
+- `apply` applies selected patches manually.
+
+Useful options:
+
+- `--root <dir>` sets the app root.
+- `--phase package|native|all` limits which patch phase runs.
+- `--platform ios|android` applies platform filtering outside a Capacitor hook.
+- `--strict` treats selected patch failures as errors.

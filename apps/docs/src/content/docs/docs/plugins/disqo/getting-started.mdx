@@ -1,0 +1,79 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-disqo and initialize the Disqo Pulse Android SDK bridge."
+sidebar:
+  order: 2
+---
+
+## Install
+
+```bash
+npm install @capgo/capacitor-disqo
+npx cap sync android
+```
+
+## Android Notes
+
+- The underlying Pulse SDK is Android-only.
+- The host app is responsible for the prominent disclosure screen, onboarding flow, Play Console declarations, privacy policy updates, and review video.
+- The plugin ships default resource strings for `accessibility_service_label`, `tracking_service_description`, and `tracking_service_summary`.
+- The host app can override those strings in `android/app/src/main/res/values/strings.xml`.
+
+## Token Callbacks
+
+Register token listeners before starting the SDK so native can request fresh credentials from your app auth layer.
+
+```ts
+import { Disqo } from '@capgo/capacitor-disqo';
+
+await Disqo.addListener('accessTokenRequested', async ({ requestId }) => {
+  const accessToken = await authStore.getPulseToken();
+
+  await Disqo.resolveAccessTokenRequest({
+    requestId,
+    accessToken,
+  });
+});
+
+await Disqo.addListener('refreshTokenRequested', async ({ requestId }) => {
+  const refreshedSession = await authStore.refreshPulseToken();
+
+  await Disqo.resolveRefreshTokenRequest({
+    requestId,
+    accessToken: refreshedSession.accessToken,
+  });
+});
+```
+
+## Initialize And Start
+
+```ts
+const sdkStatus = await Disqo.getSdkStatus();
+if (!sdkStatus.available) {
+  throw new Error(sdkStatus.message);
+}
+
+await Disqo.initialize({
+  apiUrl: 'https://pulse.example.internal',
+  accessToken: await authStore.getPulseToken(),
+});
+
+await Disqo.start({
+  userId: 'member-123',
+});
+```
+
+## Service State
+
+```ts
+const state = await Disqo.getServiceState();
+if (!state.enabled) {
+  await Disqo.openAccessibilitySettings();
+}
+```
+
+## Stop Tracking
+
+```ts
+await Disqo.stop();
+```
