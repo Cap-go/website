@@ -224,7 +224,6 @@ const pluginEntries = [
   ),
   ['StreamCall', 'streamcall'],
   ['Supabase', 'supabase'],
-  ['Disqo', 'disqo'],
   ['Text Interaction', 'textinteraction'],
   ['Transitions', 'transitions'],
   ['Twilio Video', 'twilio-video'],
