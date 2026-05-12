@@ -71,6 +71,7 @@ const pluginEntries = [
   ['Brightness', 'brightness'],
   ['Camera Preview', 'camera-preview'],
   ['Capacitor+', 'capacitor-plus'],
+  ['Capacitor Patch', 'capacitor-patch'],
   ['Compass', 'compass'],
   ['Contentsquare', 'contentsquare', [linkItem('iOS setup', '/docs/plugins/contentsquare/ios'), linkItem('Android setup', '/docs/plugins/contentsquare/android')]],
   ['Contacts', 'contacts'],
