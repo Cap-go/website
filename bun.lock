@@ -91,6 +91,9 @@
         "zod": "^4",
       },
     },
+    "apps/outrank-worker": {
+      "name": "@capgo/outrank-worker",
+    },
     "apps/translation-worker": {
       "name": "@capgo/translation-worker",
     },
@@ -211,6 +214,8 @@
     "@braintree/sanitize-url": ["@braintree/sanitize-url@7.1.2", "", {}, "sha512-jigsZK+sMF/cuiB7sERuo9V7N9jx+dhmHHnQyDSVdpZwVutaBu7WvNYqMDLSgFgfB30n452TP3vjDAvFC973mA=="],
 
     "@capgo/docs": ["@capgo/docs@workspace:apps/docs"],
+
+    "@capgo/outrank-worker": ["@capgo/outrank-worker@workspace:apps/outrank-worker"],
 
     "@capgo/seo-checker": ["@capgo/seo-checker@0.0.13", "", { "dependencies": { "ajv": "^8.17.1", "cheerio": "^1.0.0", "schema-org-json-schemas": "^2.1.4" }, "bin": { "seo-checker": "dist/cli.js" } }, "sha512-A5Een5f10LwSYOdf8ivRe9z7rtH1HlFIMUYX4YyYeaMY46aYe5Qu5RiA9leJMYHOg1cNvUDGZ/7P8TuHGyQSiA=="],
 
