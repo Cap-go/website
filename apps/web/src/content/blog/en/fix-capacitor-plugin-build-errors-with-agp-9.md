@@ -1,6 +1,6 @@
 ---
 slug: fix-capacitor-plugin-build-errors-with-agp-9
-title: Capacitor Plugin Build Error AGP 9 Fix (proguard-android.txt Not Found)
+title: Capacitor Plugin AGP 9 Build Error Fix
 description: Solve AGP 9 Capacitor plugin build errors fast. Learn why proguard-android.txt fails, how to use proguard-android-optimize.txt, and how Capgo fixed Android Gradle Plugin 9 issues across plugins.
 author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
