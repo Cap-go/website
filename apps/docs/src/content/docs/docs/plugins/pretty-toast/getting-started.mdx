@@ -1,0 +1,80 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-pretty-toast and show native-first toast notifications."
+sidebar:
+  order: 2
+---
+
+## Install
+
+```bash
+npm install @capgo/capacitor-pretty-toast
+npx cap sync
+```
+
+## Import
+
+```ts
+import { toast } from '@capgo/capacitor-pretty-toast';
+```
+
+## Show A Toast
+
+```ts
+toast.success('Saved', {
+  message: 'Your changes are ready.',
+});
+```
+
+## Update A Loading Toast
+
+```ts
+const id = toast.loading('Uploading', {
+  message: 'Waiting for the server response.',
+});
+
+setTimeout(() => {
+  toast.update(id, {
+    title: 'Upload complete',
+    message: 'The file was stored successfully.',
+    icon: 'checkmark.circle.fill',
+    autoDismiss: true,
+  });
+}, 1500);
+```
+
+## Track A Promise
+
+```ts
+await toast.promise(uploadFile(), {
+  loading: {
+    title: 'Uploading',
+    message: 'Keep the app open while the file is sent.',
+  },
+  success: 'Uploaded',
+  error: 'Upload failed',
+});
+```
+
+## Icons And Images
+
+Use `icon` for a symbol name or raw SVG markup:
+
+```ts
+toast.info('New message', {
+  icon: 'message.fill',
+  message: 'Open the inbox to reply.',
+});
+```
+
+Use `iconSource` for URI-like images. It supports `https://`, `http://`, `file://`, `data:`, `blob:`, absolute file paths, or `{ uri }`.
+
+```ts
+toast.show({
+  title: 'Profile updated',
+  message: 'Your avatar changed.',
+  iconSource: 'https://example.com/avatar.png',
+});
+```
+
+`iconSource` takes precedence over `icon`.

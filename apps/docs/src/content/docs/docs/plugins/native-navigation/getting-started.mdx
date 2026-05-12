@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: Install @capgo/native-navigation and render native navigation chrome over a Capacitor WebView.
+description: Install @capgo/capacitor-native-navigation and render native navigation chrome over a Capacitor WebView.
 sidebar:
   order: 2
 ---
@@ -10,15 +10,15 @@ import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
 1. **Install the package**
-   <PackageManagers pkg="@capgo/native-navigation" pkgManagers={['bun']} />
+   <PackageManagers pkg="@capgo/capacitor-native-navigation" pkgManagers={['npm']} />
 
 2. **Sync native projects**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['bun']} />
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm']} />
 
 3. **Configure native chrome**
 
    ```ts
-   import { NativeNavigation } from '@capgo/native-navigation';
+   import { NativeNavigation } from '@capgo/capacitor-native-navigation';
 
    await NativeNavigation.configure({
      contentInsetMode: 'css',
@@ -55,8 +55,13 @@ import { PackageManagers } from 'starlight-package-managers'
    ```ts
    await NativeNavigation.setTabbar({
      selectedId: 'home',
-     labels: true,
+     labelVisibilityMode: 'selected',
      icons: true,
+     colors: {
+       dynamic: true,
+       tint: '#0f172a',
+       inactiveTint: '#64748b',
+     },
      tabs: [
        {
          id: 'home',
@@ -117,6 +122,97 @@ await NativeNavigation.finishTransition({
 });
 ```
 
+## Zoom transition
+
+Use the zoom helpers for card-to-detail or media-preview flows. Pass the tapped element before your router changes content, then finish after the detail page is ready.
+
+```ts
+import { beginZoomTransition, finishZoomTransition } from '@capgo/capacitor-native-navigation';
+
+const card = document.querySelector('[data-message-card]');
+if (card) {
+  const transition = await beginZoomTransition(card, { cornerRadius: 18 });
+
+  router.push('/message/42');
+  await router.ready?.();
+
+  await NativeNavigation.setNavbar({
+    title: 'Message',
+    backButton: { visible: true, title: 'Inbox' },
+  });
+
+  await finishZoomTransition(undefined, {
+    id: transition.id,
+    cornerRadius: 18,
+  });
+}
+```
+
+## Use with @capgo/capacitor-transitions
+
+Use Native Navigation for the native navbar, tabbar, safe-area insets, and native intent events. Use `@capgo/capacitor-transitions` for the WebView page stack underneath the native chrome.
+
+```bash
+npm install @capgo/capacitor-native-navigation @capgo/capacitor-transitions
+npx cap sync
+```
+
+Initialize both packages once:
+
+```ts
+import { NativeNavigation } from '@capgo/capacitor-native-navigation';
+import '@capgo/capacitor-transitions';
+import { initTransitions, setupRouterOutlet, setDirection } from '@capgo/capacitor-transitions/react';
+
+initTransitions({ platform: 'auto' });
+
+const outlet = document.querySelector('cap-router-outlet');
+if (outlet) {
+  setupRouterOutlet(outlet, { platform: 'auto', swipeGesture: 'auto' });
+}
+
+await NativeNavigation.configure({
+  contentInsetMode: 'css',
+});
+```
+
+Keep `cap-router-outlet` focused on pages, not duplicate web bars:
+
+```html
+<cap-router-outlet platform="auto" swipe-gesture="auto">
+  <cap-page>
+    <cap-content slot="content" fullscreen>
+      <main class="page">Inbox content</main>
+    </cap-content>
+  </cap-page>
+</cap-router-outlet>
+```
+
+Drive both packages from the same router actions:
+
+```ts
+async function openMessage(id: string) {
+  setDirection('forward');
+  await router.push(`/messages/${id}`);
+  await NativeNavigation.setNavbar({
+    title: 'Message',
+    backButton: { visible: true, title: 'Inbox' },
+  });
+}
+
+await NativeNavigation.addListener('navbarBack', () => {
+  setDirection('back');
+  router.back();
+});
+
+await NativeNavigation.addListener('tabSelect', ({ id }) => {
+  setDirection('root');
+  router.push(`/${id}`);
+});
+```
+
+Pick one animation layer per route change. Let `@capgo/capacitor-transitions` animate normal page pushes, and use Native Navigation's zoom helpers only for shared-element or zoom routes.
+
 ## CSS insets
 
 With `contentInsetMode: 'css'`, the plugin writes native bar dimensions to `document.documentElement`.
@@ -168,7 +264,7 @@ Inline SVG supports the icon-focused subset used by common icon sets such as Luc
 The package can register custom elements for framework-agnostic declarative setup:
 
 ```ts
-import { defineNativeNavigationElements } from '@capgo/native-navigation';
+import { defineNativeNavigationElements } from '@capgo/capacitor-native-navigation';
 
 defineNativeNavigationElements();
 ```

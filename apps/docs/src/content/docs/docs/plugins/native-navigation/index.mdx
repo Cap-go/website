@@ -1,5 +1,5 @@
 ---
-title: "@capgo/native-navigation"
+title: "@capgo/capacitor-native-navigation"
 description: Native navbar, tabbar, and transition shell chrome for Capacitor apps that keep content in one WebView.
 tableOfContents: false
 next: false
@@ -35,6 +35,9 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
   <Card title="Native transition shell" icon="setting">
     Capture the current WebView, update content in JavaScript, then finish with a native snapshot-to-WebView animation.
   </Card>
+  <Card title="Zoom routes" icon="star">
+    Open card, grid, and media-detail routes with shared-element-style native zoom geometry.
+  </Card>
 </CardGrid>
 
 ## Core API
@@ -44,6 +47,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 - `setTabbar(options)` updates tabs, selected tab, badges, labels, icons, colors, and visibility.
 - `beginTransition(options?)` captures the outgoing WebView before the JavaScript route change.
 - `finishTransition(options?)` animates from the captured snapshot to the live WebView after route content is ready.
+- `beginZoomTransition(target, options?)` and `finishZoomTransition(target?, options?)` are JavaScript helpers for zoom transitions from elements or rectangles.
 - `getPluginVersion()` returns the native implementation version marker.
 
 ## Events

@@ -2,21 +2,21 @@
 locale: en
 published: true
 ---
-# Using @capgo/native-navigation
+# Using @capgo/capacitor-native-navigation
 
-`@capgo/native-navigation` renders native top navigation, bottom tab chrome, and route transition shells over a single full-screen Capacitor WebView. Your web framework still owns routes and content, while native owns the app frame.
+`@capgo/capacitor-native-navigation` renders native top navigation, bottom tab chrome, and route transition shells over a single full-screen Capacitor WebView. Your web framework still owns routes and content, while native owns the app frame.
 
 ## Install and sync
 
 ```bash
-bun add @capgo/native-navigation
-bunx cap sync
+npm install @capgo/capacitor-native-navigation
+npx cap sync
 ```
 
 ## Configure the native frame
 
 ```ts
-import { NativeNavigation } from '@capgo/native-navigation';
+import { NativeNavigation } from '@capgo/capacitor-native-navigation';
 
 await NativeNavigation.configure({
   contentInsetMode: 'css',
@@ -53,8 +53,13 @@ await NativeNavigation.setNavbar({
 ```ts
 await NativeNavigation.setTabbar({
   selectedId: 'inbox',
-  labels: true,
+  labelVisibilityMode: 'selected',
   icons: true,
+  colors: {
+    dynamic: true,
+    tint: '#0f172a',
+    inactiveTint: '#64748b',
+  },
   tabs: [
     {
       id: 'inbox',
@@ -115,6 +120,32 @@ await NativeNavigation.finishTransition({
 });
 ```
 
+## Add a zoom transition
+
+Use the zoom helpers for routes that open from a card, grid item, or media preview.
+
+```ts
+import { beginZoomTransition, finishZoomTransition } from '@capgo/capacitor-native-navigation';
+
+const card = document.querySelector('[data-message-card]');
+if (card) {
+  const transition = await beginZoomTransition(card, { cornerRadius: 18 });
+
+  router.push('/message/42');
+  await router.ready?.();
+
+  await NativeNavigation.setNavbar({
+    title: 'Message',
+    backButton: { visible: true, title: 'Inbox' },
+  });
+
+  await finishZoomTransition(undefined, {
+    id: transition.id,
+    cornerRadius: 18,
+  });
+}
+```
+
 ## Pad content with native insets
 
 When `contentInsetMode` is `css`, the plugin writes CSS variables for the native bars:
@@ -140,6 +171,71 @@ const icon = {
 ```
 
 Inline SVG supports `path`, `line`, `polyline`, `polygon`, `circle`, and `rect`, which covers common icon sets such as Lucide and Feather.
+
+## Combine with @capgo/capacitor-transitions
+
+Use Native Navigation for the native navbar, tabbar, safe-area insets, and native intent events. Use `@capgo/capacitor-transitions` for the WebView page stack underneath that native chrome.
+
+```bash
+npm install @capgo/capacitor-native-navigation @capgo/capacitor-transitions
+npx cap sync
+```
+
+Initialize both packages once:
+
+```ts
+import { NativeNavigation } from '@capgo/capacitor-native-navigation';
+import '@capgo/capacitor-transitions';
+import { initTransitions, setupRouterOutlet, setDirection } from '@capgo/capacitor-transitions/react';
+
+initTransitions({ platform: 'auto' });
+
+const outlet = document.querySelector('cap-router-outlet');
+if (outlet) {
+  setupRouterOutlet(outlet, { platform: 'auto', swipeGesture: 'auto' });
+}
+
+await NativeNavigation.configure({
+  contentInsetMode: 'css',
+});
+```
+
+Keep the transition outlet focused on pages, not duplicate web bars:
+
+```html
+<cap-router-outlet platform="auto" swipe-gesture="auto">
+  <cap-page>
+    <cap-content slot="content" fullscreen>
+      <main class="page">Inbox content</main>
+    </cap-content>
+  </cap-page>
+</cap-router-outlet>
+```
+
+Drive both packages from the same router actions:
+
+```ts
+async function openMessage(id: string) {
+  setDirection('forward');
+  await router.push(`/messages/${id}`);
+  await NativeNavigation.setNavbar({
+    title: 'Message',
+    backButton: { visible: true, title: 'Inbox' },
+  });
+}
+
+await NativeNavigation.addListener('navbarBack', () => {
+  setDirection('back');
+  router.back();
+});
+
+await NativeNavigation.addListener('tabSelect', ({ id }) => {
+  setDirection('root');
+  router.push(`/${id}`);
+});
+```
+
+Pick one animation layer per route change. Let `@capgo/capacitor-transitions` animate normal page pushes, and use Native Navigation's zoom helpers only for shared-element or zoom routes.
 
 ## Full Reference
 
