@@ -19,6 +19,7 @@ Plugin Audio Recorder|audio recording plugin for capturing microphone input|docs
 Plugin Audio Session|iOS audio session configuration plugin|docs/plugins/audiosession/**
 Plugin Autofill Save Password|autofill and password save plugin for credential management|docs/plugins/autofill-save-password/**
 Plugin Background Geolocation|background location tracking plugin|docs/plugins/background-geolocation/**
+Plugin Background Task|periodic background fetch task plugin for iOS and Android|docs/plugins/background-task/**
 Plugin Barometer|barometric pressure sensor plugin|docs/plugins/barometer/**
 Plugin Bluetooth Low Energy|Bluetooth Low Energy (BLE) plugin for device communication|docs/plugins/bluetooth-low-energy/**
 Plugin Brightness|screen brightness control plugin|docs/plugins/brightness/**

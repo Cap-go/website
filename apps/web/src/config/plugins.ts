@@ -63,6 +63,7 @@ const actionDefinitionRows =
 @capgo/capacitor-app-attest|github.com/Cap-go|Capacitor plugin for cross-platform device attestation using Apple App Attest and Google Play Integrity Standard|https://github.com/Cap-go/capacitor-app-attest/|App Attest
 @capgo/capacitor-audiosession|github.com/Cap-go|Configure iOS audio session for background playback, mixing, and routing control|https://github.com/Cap-go/capacitor-audiosession/|Audio Session
 @capgo/capacitor-background-geolocation|github.com/Cap-go|Accurate background location tracking with native iOS and Android geofencing plus transition webhooks|https://github.com/Cap-go/capacitor-background-geolocation/|Background Geolocation
+@capgo/capacitor-background-task|github.com/Cap-go|Schedule periodic background fetch tasks on iOS and Android with Expo-style task registration|https://github.com/Cap-go/capacitor-background-task/|Background Task
 @capgo/capacitor-document-scanner|github.com/Cap-go|Scan documents with auto edge detection, perspective correction, and PDF export|https://github.com/Cap-go/capacitor-document-scanner/|Document Scanner
 @capgo/capacitor-downloader|github.com/Cap-go|Download large files in background with progress tracking and pause/resume support|https://github.com/Cap-go/capacitor-downloader/|Downloader
 @capgo/capacitor-env|github.com/Cap-go|Securely manage environment variables and configuration across different build environments|https://github.com/Cap-go/capacitor-env/|Env
@@ -195,6 +196,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-app-attest': 'ShieldCheck',
   '@capgo/capacitor-audiosession': 'SpeakerWave',
   '@capgo/capacitor-background-geolocation': 'MapPin',
+  '@capgo/capacitor-background-task': 'Clock',
   '@capgo/capacitor-document-scanner': 'Document',
   '@capgo/capacitor-downloader': 'CloudArrowDown',
   '@capgo/capacitor-env': 'Cog',

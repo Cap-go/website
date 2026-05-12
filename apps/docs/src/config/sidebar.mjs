@@ -65,6 +65,7 @@ const pluginEntries = [
   ['Audio Session', 'audiosession'],
   ['Autofill Save Password', 'autofill-save-password'],
   ['Background Geolocation', 'background-geolocation'],
+  ['Background Task', 'background-task', [linkItem('iOS setup', '/docs/plugins/background-task/ios'), linkItem('Android behavior', '/docs/plugins/background-task/android')]],
   ['Barometer', 'barometer'],
   ['Bluetooth Low Energy', 'bluetooth-low-energy'],
   ['Brightness', 'brightness'],
