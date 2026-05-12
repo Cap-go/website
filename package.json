@@ -46,7 +46,7 @@
     "generate:plugins-readme": "bun run scripts/generate-plugins-readme.ts"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "13.3.0",
+    "@astrojs/cloudflare": "13.5.0",
     "@astrojs/sitemap": "3.7.2",
     "@astrojs/starlight": "0.38.4",
     "@astrojs/starlight-docsearch": "0.7.0",
@@ -55,7 +55,7 @@
     "@supabase/supabase-js": "^2.105.1",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.4",
-    "astro": "6.2.1",
+    "astro": "6.3.1",
     "astro-icon": "1.1.5",
     "github-slugger": "^2.0.0",
     "glob": "^13.0.6",
