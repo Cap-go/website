@@ -259,6 +259,187 @@ body,
   overflow: auto;
   border-spacing: 0;
 }
+
+/* Shared refresh for product and solution pages.
+   Lighten only neutral sections; explicit dark sections keep their own contrast. */
+.marketing-refresh {
+  background: #f9fafb;
+  color: #111827;
+}
+
+.marketing-refresh > main {
+  background: #f9fafb;
+}
+
+.marketing-refresh main section:not([class*='bg-gray-9']):not([class*='bg-slate-9']):not([class*='bg-zinc-9']):not([class*='bg-[#']]) {
+  background-color: #f9fafb;
+}
+
+.marketing-refresh
+  main
+  section:not([class*='bg-gray-9']):not([class*='bg-slate-9']):not([class*='bg-zinc-9']):not([class*='bg-[#']])
+  :where(
+    h1.text-white,
+    h2.text-white,
+    h2.text-gray-100,
+    h2.text-gray-200,
+    h2.text-gray-300,
+    h3.text-white,
+    h3.text-gray-100,
+    h3.text-gray-200,
+    h3.text-gray-300,
+    h4.text-white,
+    h4.text-gray-100,
+    h4.text-gray-200,
+    h4.text-gray-300
+  ) {
+  color: #111827 !important;
+}
+
+.marketing-refresh
+  main
+  section:not([class*='bg-gray-9']):not([class*='bg-slate-9']):not([class*='bg-zinc-9']):not([class*='bg-[#']])
+  :where(p.text-gray-300, p.text-gray-400, li.text-gray-300, li.text-gray-400, span.text-gray-300, span.text-gray-400, div.text-gray-300, div.text-gray-400) {
+  color: #4b5563 !important;
+}
+
+.marketing-refresh
+  main
+  section:not([class*='bg-gray-9']):not([class*='bg-slate-9']):not([class*='bg-zinc-9']):not([class*='bg-[#']])
+  :where(span.text-white, span.text-gray-100, span.text-gray-200, div.text-white, div.text-gray-100, div.text-gray-200) {
+  color: #111827 !important;
+}
+
+.marketing-refresh
+  main
+  section:not([class*='bg-gray-9']):not([class*='bg-slate-9']):not([class*='bg-zinc-9']):not([class*='bg-[#']])
+  :where(.text-blue-100, .text-blue-200, .text-sky-100, .text-sky-200, .text-emerald-100, .text-emerald-200, .text-green-100, .text-green-200) {
+  color: #1d4ed8 !important;
+}
+
+.marketing-refresh
+  main
+  section:not([class*='bg-gray-9']):not([class*='bg-slate-9']):not([class*='bg-zinc-9']):not([class*='bg-[#']])
+  :where(svg.text-white, svg.text-gray-300, svg.text-gray-400) {
+  color: #1d4ed8 !important;
+}
+
+.marketing-refresh
+  main
+  section:not([class*='bg-gray-9']):not([class*='bg-slate-9']):not([class*='bg-zinc-9']):not([class*='bg-[#']])
+  :where(.border-gray-800, .border-gray-700, .border-gray-600, .border-white\/10, .border-white\/15) {
+  border-color: #d1d5db !important;
+}
+
+.marketing-refresh
+  main
+  section:not([class*='bg-gray-9']):not([class*='bg-slate-9']):not([class*='bg-zinc-9']):not([class*='bg-[#']])
+  :where(.bg-gray-900\/40, .bg-gray-900\/50, .bg-gray-800\/40, .bg-gray-800\/50, .bg-white\/5) {
+  background-color: #ffffff !important;
+}
+
+.marketing-refresh
+  main
+  section:not([class*='bg-gray-9']):not([class*='bg-slate-9']):not([class*='bg-zinc-9']):not([class*='bg-[#']])
+  :where(a.border-gray-600, a.border-white\/15, a.border-white\/30, a.bg-white\/5):not(:hover):not(:focus-visible) {
+  border-color: #d1d5db !important;
+  color: #111827 !important;
+}
+
+.marketing-refresh
+  main
+  section:not([class*='bg-gray-9']):not([class*='bg-slate-9']):not([class*='bg-zinc-9']):not([class*='bg-[#']])
+  :where(a.border-gray-600, a.border-white\/15, a.border-white\/30, a.bg-white\/5):hover {
+  color: #111827 !important;
+}
+
+.marketing-refresh main section:not([class*='bg-gray-9']):not([class*='bg-slate-9']):not([class*='bg-zinc-9']):not([class*='bg-[#']]) :where(input, select, textarea) {
+  border-color: #d1d5db !important;
+  background-color: #ffffff !important;
+  color: #111827 !important;
+}
+
+.marketing-refresh
+  main
+  section:not([class*='bg-gray-9']):not([class*='bg-slate-9']):not([class*='bg-zinc-9']):not([class*='bg-[#']])
+  :where(input::placeholder, textarea::placeholder) {
+  color: #6b7280 !important;
+}
+
+.marketing-refresh
+  main
+  section:not([class*='bg-gray-9']):not([class*='bg-slate-9']):not([class*='bg-zinc-9']):not([class*='bg-[#']])
+  [data-refresh-dark]
+  :where(h1.text-white, h2.text-white, h3.text-white, h4.text-white, span.text-white, div.text-white) {
+  color: #ffffff !important;
+}
+
+.marketing-refresh
+  main
+  section:not([class*='bg-gray-9']):not([class*='bg-slate-9']):not([class*='bg-zinc-9']):not([class*='bg-[#']])
+  [data-refresh-dark]
+  :where(p.text-gray-300, p.text-gray-400, li.text-gray-300, li.text-gray-400, span.text-gray-300, span.text-gray-400, div.text-gray-300, div.text-gray-400) {
+  color: #9ca3af !important;
+}
+
+.marketing-refresh
+  main
+  section:not([class*='bg-gray-9']):not([class*='bg-slate-9']):not([class*='bg-zinc-9']):not([class*='bg-[#']])
+  :where([class*='bg-gray-9'], [class*='bg-slate-9'], [class*='bg-zinc-9'], [class*='bg-[#']], [data-refresh-dark])
+  :where(h1.text-white, h2.text-white, h3.text-white, h4.text-white, span.text-white, div.text-white) {
+  color: #ffffff !important;
+}
+
+.marketing-refresh
+  main
+  section:not([class*='bg-gray-9']):not([class*='bg-slate-9']):not([class*='bg-zinc-9']):not([class*='bg-[#']])
+  :where([class*='bg-gray-9'], [class*='bg-slate-9'], [class*='bg-zinc-9'], [class*='bg-[#']], [data-refresh-dark])
+  :where(p.text-gray-300, p.text-gray-400, li.text-gray-300, li.text-gray-400, span.text-gray-300, span.text-gray-400, div.text-gray-300, div.text-gray-400) {
+  color: #9ca3af !important;
+}
+
+.marketing-refresh
+  main
+  section:not([class*='bg-gray-9']):not([class*='bg-slate-9']):not([class*='bg-zinc-9']):not([class*='bg-[#']])
+  :where([class*='bg-gray-9'], [class*='bg-slate-9'], [class*='bg-zinc-9'], [class*='bg-[#']], [data-refresh-dark])
+  :where(svg.text-white, svg.text-gray-300, svg.text-gray-400) {
+  color: #9ca3af !important;
+}
+
+.marketing-refresh header :where(.text-slate-100, .text-slate-200, .text-gray-300) {
+  color: #4b5563 !important;
+}
+
+.marketing-refresh header .site-logo {
+  filter: invert(1) brightness(0.35) contrast(1.4);
+}
+
+.marketing-refresh header :where(a.bg-slate-800\/80) {
+  background-color: #111827 !important;
+  border-color: #111827 !important;
+  color: #ffffff !important;
+}
+
+.marketing-refresh header :where(a.bg-slate-800\/80 svg, a.bg-slate-800\/80 span) {
+  color: #ffffff !important;
+}
+
+.marketing-refresh header :where(.bg-slate-800\/95, .bg-white\/5) {
+  background-color: rgb(255 255 255 / 0.95) !important;
+}
+
+.marketing-refresh header :where(button.text-white, #mobile-menu a.text-white, #mobile-menu button.text-white) {
+  color: #111827 !important;
+}
+
+.marketing-refresh header :where(.hover\:bg-white\/10:hover, .hover\:bg-slate-700:hover, .hover\:bg-gray-700:hover) {
+  background-color: #f3f4f6 !important;
+}
+
+.marketing-refresh header :where(.hover\:text-white:hover) {
+  color: #111827 !important;
+}
+
 .blog.prose :is(th, td):not(:where(.not-content *)) {
   border-bottom: 1px solid var(--color-gray-700);
   padding: 0.5rem 1rem;
