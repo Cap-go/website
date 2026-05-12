@@ -33,7 +33,7 @@ body {
 html,
 body,
 #app {
-  height: 100%;
+  min-height: 100%;
   margin: 0;
   padding: 0;
 }
@@ -43,6 +43,9 @@ body,
 }
 
 @theme {
+  /* Match Expo's current 1328px website container width while keeping Tailwind v4's canonical max-w-7xl utility. */
+  --container-7xl: 83rem;
+
   /* Typography tokens used by font-pj/font-prompt/font-inter utilities */
   --font-pj: AirbnbCerealBold, AirbnbCerealMedium, ui-sans-serif, system-ui, sans-serif;
   --font-prompt: AirbnbCerealBold, AirbnbCerealMedium, ui-sans-serif, system-ui, sans-serif;

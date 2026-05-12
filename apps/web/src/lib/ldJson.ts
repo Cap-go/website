@@ -1,23 +1,23 @@
 import type { RuntimeConfig } from '@/config/app'
 import type {
+  BreadcrumbList,
+  FAQPage,
+  Graph,
+  ItemList,
+  NewsArticle,
   Organization,
   Person,
-  NewsArticle,
-  WebPage,
-  SoftwareApplication,
   Product,
   Service,
-  FAQPage,
-  WebSite,
-  ItemList,
-  BreadcrumbList,
-  WithContext,
-  Graph,
+  SoftwareApplication,
   Thing,
+  WebPage,
+  WebSite,
+  WithContext,
 } from 'schema-dts'
 
 // Re-export schema-dts types for external use
-export type { Organization, Person, NewsArticle, WebPage, SoftwareApplication, Product, Service, FAQPage, WebSite, ItemList, BreadcrumbList, WithContext, Graph, Thing }
+export type { BreadcrumbList, FAQPage, Graph, ItemList, NewsArticle, Organization, Person, Product, Service, SoftwareApplication, Thing, WebPage, WebSite, WithContext }
 
 // Type for standalone schemas with @context
 export type LdJsonType = WithContext<Organization | Person | NewsArticle | WebPage | SoftwareApplication | Product | Service | FAQPage | WebSite | ItemList | BreadcrumbList>
@@ -36,10 +36,10 @@ export function createCapgoOrganization(config: RuntimeConfig['public']): Organi
     url: config.baseUrl,
     logo: {
       '@type': 'ImageObject',
-      url: `${config.baseUrl}/icon.webp`,
-      contentUrl: `${config.baseUrl}/icon.webp`,
-      width: '512',
-      height: '512',
+      url: `${config.baseUrl}/capgo.webp`,
+      contentUrl: `${config.baseUrl}/capgo.webp`,
+      width: '1024',
+      height: '1024',
     },
     sameAs: ['https://twitter.com/Capgo_app', 'https://github.com/Cap-go', 'https://www.linkedin.com/company/capgo'],
     description: config.blog_description,

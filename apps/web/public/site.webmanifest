@@ -3,9 +3,11 @@
   "short_name": "Capgo",
   "description": "Instant over-the-air updates for Capacitor mobile applications. Deploy OTA updates, bug fixes, and improvements without app store delays.",
   "start_url": "/",
+  "scope": "/",
+  "id": "/",
   "display": "standalone",
   "background_color": "#111827",
-  "theme_color": "#456b9a",
+  "theme_color": "#111827",
   "icons": [
     {
       "src": "/icon-192.png",
@@ -18,8 +20,8 @@
       "type": "image/png"
     },
     {
-      "src": "/icon.webp",
-      "sizes": "512x512",
+      "src": "/capgo.webp",
+      "sizes": "1024x1024",
       "type": "image/webp"
     }
   ]
