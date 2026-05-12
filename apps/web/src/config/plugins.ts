@@ -45,7 +45,7 @@ const actionDefinitionRows =
 @capgo/capacitor-navigation-bar|github.com/Cap-go|Customize Android navigation bar color and visibility for immersive UI experiences|https://github.com/Cap-go/capacitor-navigation-bar/|Navigation Bar
 @capgo/ivs-player|github.com/Cap-go|Stream ultra-low latency live video using Amazon Interactive Video Service (IVS)|https://github.com/Cap-go/capacitor-ivs-player/|IVS Player
 @capgo/home-indicator|github.com/Cap-go|Hide or show iOS home indicator for fullscreen and immersive app experiences|https://github.com/Cap-go/capacitor-home-indicator/|Indicator
-@capgo/native-purchases|github.com/Cap-go|Implement native in-app purchases and subscriptions for iOS and Android with simple API|https://github.com/Cap-go/capacitor-native-purchases/|Native Purchases
+@capgo/native-purchases|github.com/Cap-go|Implement native in-app purchases, subscriptions, and iOS StoreKit commitment billing plans with a simple API|https://github.com/Cap-go/capacitor-native-purchases/|Native Purchases
 @capgo/capacitor-data-storage-sqlite|github.com/Cap-go|Store data locally using SQLite database with simple key-value API and encryption support|https://github.com/Cap-go/capacitor-data-storage-sqlite/|Data Storage
 @capgo/capacitor-android-usagestatsmanager|github.com/Cap-go|Access Android usage statistics to track app usage time and screen time analytics|https://github.com/Cap-go/capacitor-android-usagestatsmanager/|Usage Stats Manager
 @capgo/capacitor-streamcall|github.com/Cap-go|Integrate video calling and live streaming with Stream SDK for real-time communication|https://github.com/Cap-go/capacitor-streamcall/|Streamcall

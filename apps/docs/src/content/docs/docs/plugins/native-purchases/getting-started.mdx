@@ -65,6 +65,10 @@ import { PackageManagers } from 'starlight-package-managers'
    await NativePurchases.restorePurchases();
    ```
 
+   :::tip[iOS monthly commitment plans]
+   If a supported iOS subscription returns `pricingTerms`, you can show a monthly billing option with a 12-month commitment and pass `billingPlanType: 'monthly'` to `purchaseProduct()`. See [iOS monthly commitment billing plans](/docs/plugins/native-purchases/ios-monthly-commitment/) for the full flow.
+   :::
+
    <Tabs>
      <TabItem label="iOS">
        - Create in-app products and subscriptions in App Store Connect.<br />
@@ -183,6 +187,7 @@ class PurchaseService {
 | `productIdentifier` | iOS + Android | SKU/Product ID configured in App Store Connect / Google Play Console. |
 | `productType` | Android only | `PURCHASE_TYPE.INAPP` or `PURCHASE_TYPE.SUBS`. Defaults to `INAPP`. Always set to `SUBS` for subscriptions. |
 | `planIdentifier` | Android subscriptions | Base Plan ID from Google Play Console. Required for subscriptions, ignored on iOS and in-app purchases. |
+| `billingPlanType` | iOS subscriptions | StoreKit billing plan to purchase. Use `'monthly'` for monthly billing with a 12-month commitment when `product.pricingTerms` exposes that option. |
 | `quantity` | iOS | Only for in-app purchases, defaults to `1`. Android always purchases one item. |
 | `appAccountToken` | iOS + Android | UUID/string linking the purchase to your user. Required to be UUID on iOS; Android accepts any obfuscated string up to 64 chars. |
 | `isConsumable` | Android | Set to `true` to auto-consume tokens after granting entitlement for consumables. Defaults to `false`. |
@@ -220,8 +225,8 @@ purchases.forEach((purchase) => {
 ## API quick reference
 
 - `isBillingSupported()` – check for StoreKit / Google Play availability.
-- `getProduct()` / `getProducts()` – fetch price, localized title, description, intro offers.
-- `purchaseProduct()` – initiate StoreKit 2 or Billing client purchase flow.
+- `getProduct()` / `getProducts()` – fetch price, localized title, description, intro offers, and supported iOS pricing terms.
+- `purchaseProduct()` – initiate StoreKit 2 or Billing client purchase flow, including iOS monthly commitment billing plans.
 - `restorePurchases()` – replay historical purchases and sync to current device.
 - `getPurchases()` – list all iOS transactions or Play Billing purchases.
 - `manageSubscriptions()` – open the native subscription management UI.

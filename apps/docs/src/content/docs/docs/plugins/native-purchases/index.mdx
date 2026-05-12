@@ -26,10 +26,11 @@ In-app Subscriptions Made Easy.
 
 ## Core Capabilities
 
-- `restorePurchases` - Restores a user's previous and links their appUserIDs to any user's also using those .
-- `getAppTransaction` - Gets the App Transaction information, which provides details about when the user originally downloaded or purchased the app.
-- `isEntitledToOldBusinessModel` - Compares the original app version from the App Transaction against a target version to determine if the user is entitled to features from an earlier business model.
-- `purchaseProduct` - Started purchase process for the given product.
+- Native in-app purchases and subscriptions with StoreKit 2 and Google Play Billing.
+- Product metadata loaded directly from the stores, including localized titles and prices.
+- iOS StoreKit pricing terms for monthly subscriptions with 12-month commitments.
+- Purchase, restore, entitlement refresh, and native subscription management flows.
+- App Transaction helpers for migration from older business models.
 
 ## Public API
 
@@ -38,8 +39,8 @@ In-app Subscriptions Made Easy.
 | `restorePurchases` | Restores a user's previous and links their appUserIDs to any user's also using those . |
 | `getAppTransaction` | Gets the App Transaction information, which provides details about when the user originally downloaded or purchased the app. |
 | `isEntitledToOldBusinessModel` | Compares the original app version from the App Transaction against a target version to determine if the user is entitled to features from an earlier business model. |
-| `purchaseProduct` | Started purchase process for the given product. |
-| `getProducts` | Gets the product info associated with a list of product identifiers. |
+| `purchaseProduct` | Starts the native purchase flow. On supported iOS versions, pass `billingPlanType: 'monthly'` to purchase a monthly billing plan with a 12-month commitment. |
+| `getProducts` | Gets product info associated with product identifiers. On supported iOS versions, subscription products can include `pricingTerms`. |
 | `getProduct` | Gets the product info for a single product identifier. |
 | `isBillingSupported` | Check if billing is supported for the current device. |
 | `getPluginVersion` | Get the native Capacitor plugin version. |
