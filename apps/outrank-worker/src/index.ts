@@ -1,6 +1,6 @@
 interface Env {
   OUTRANK_ACCESS_TOKEN?: string
-  GITHUB_DISPATCH_TOKEN?: string
+  PERSONAL_ACCESS_TOKEN?: string
   GITHUB_OWNER: string
   GITHUB_REPO: string
   GITHUB_EVENT_TYPE?: string
@@ -102,7 +102,7 @@ async function parsePayload(request: Request): Promise<OutrankPayload | undefine
 }
 
 async function dispatchToGithub(env: Env, payload: OutrankPayload): Promise<Response> {
-  if (!env.GITHUB_DISPATCH_TOKEN) return jsonResponse({ error: 'missing_github_dispatch_token' }, 500)
+  if (!env.PERSONAL_ACCESS_TOKEN) return jsonResponse({ error: 'missing_personal_access_token' }, 500)
 
   const dispatchBody = JSON.stringify({
     event_type: env.GITHUB_EVENT_TYPE || DEFAULT_GITHUB_EVENT_TYPE,
@@ -118,7 +118,7 @@ async function dispatchToGithub(env: Env, payload: OutrankPayload): Promise<Resp
       method: 'POST',
       headers: {
         accept: 'application/vnd.github+json',
-        authorization: `Bearer ${env.GITHUB_DISPATCH_TOKEN}`,
+        authorization: `Bearer ${env.PERSONAL_ACCESS_TOKEN}`,
         'content-type': 'application/json',
         'user-agent': 'capgo-outrank-webhook',
         'x-github-api-version': '2022-11-28',
