@@ -25,6 +25,7 @@ Plugin Bluetooth Low Energy|Bluetooth Low Energy (BLE) plugin for device communi
 Plugin Brightness|screen brightness control plugin|docs/plugins/brightness/**
 Plugin Camera Preview|camera preview plugin for live camera feed|docs/plugins/camera-preview/**
 Plugin Capacitor+|Capacitor+ enhanced runtime plugin|docs/plugins/capacitor-plus/**
+Plugin Capacitor Patch|hook-only patch catalog plugin for applying Capacitor core, CLI, plugin, and native project fixes during sync and update|docs/plugins/capacitor-patch/**
 Plugin Compass|digital compass plugin for device orientation|docs/plugins/compass/**
 Plugin Contentsquare|Contentsquare analytics, consent gating, and session replay integration plugin|docs/plugins/contentsquare/**
 Plugin Facebook Analytics|Meta/Facebook App Events analytics plugin|docs/plugins/facebook-analytics/**

@@ -1,6 +1,6 @@
 ---
 title: "@capgo/capacitor-patch"
-description: "Apply vetted Capgo patches during cap sync and cap update."
+description: Apply version-gated Capacitor patches during cap sync and cap update.
 tableOfContents: false
 next: false
 prev: false
@@ -8,7 +8,7 @@ sidebar:
   order: 1
   label: "Introduction"
 hero:
-  tagline: "Apply small, version-gated Capacitor patches repeatably during sync and update hooks."
+  tagline: Apply vetted fixes to Capacitor core packages, the CLI, plugins, and native projects during sync and update hooks.
   actions:
     - text: Get started
       link: /docs/plugins/capacitor-patch/getting-started/
@@ -20,29 +20,53 @@ hero:
       variant: minimal
 ---
 
-## Overview
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
 
-`@capgo/capacitor-patch` applies vetted Capgo patches to Capacitor packages or generated native projects during `cap sync` and `cap update`.
+`@capgo/capacitor-patch` is a hook-only Capacitor package that applies selected patch files whenever Capacitor runs `sync` or `update`.
 
-The package is hook-only. It does not register a native runtime API. It is useful when an app needs a repeatable fix for a known Capacitor issue before that fix is available upstream.
+It is built for fixes that are useful before they land in an official Capacitor release. The bundled catalog tracks external upstream Capacitor PRs mirrored by Capacitor+ `sync/upstream-pr-*` branches.
 
-## Core Capabilities
+<Aside type="note">
+  This package has no native runtime API. It works through Capacitor hooks, npm package files, and generated native project files.
+</Aside>
 
-- Package phase patches run before `sync` and `update`.
-- Native project patches run after `sync` and `update`.
-- Version ranges prevent incompatible patches from applying to the wrong Capacitor release.
-- Recommended patches can be enabled with one config flag.
-- The CLI can list, dry-run, and apply selected patches manually.
+## What it patches
 
-## Patch Selection
+<CardGrid>
+  <Card title="Capacitor packages" icon="puzzle">
+    Patch `@capacitor/core`, `@capacitor/android`, `@capacitor/ios`, and third-party Capacitor plugins under `node_modules`.
+  </Card>
+  <Card title="Capacitor CLI" icon="seti:config">
+    Patch shipped CLI JavaScript files. When a CLI patch is applied, the next `cap` command uses the patched code.
+  </Card>
+  <Card title="Native projects" icon="rocket">
+    Apply generated Android or iOS project patches after `cap sync` or `cap update`.
+  </Card>
+  <Card title="Safe selection" icon="approve-check">
+    Version ranges, idempotency checks, and strict mode help prevent stale patches from applying silently.
+  </Card>
+</CardGrid>
 
-| Option | Type | Default | Description |
-| --- | --- | --- | --- |
-| `recommended` | `boolean` | `false` | Applies Capgo-recommended compatible patches. |
-| `patches` | `string[]` | `[]` | Applies explicit patch IDs. |
-| `disabled` | `string[]` | `[]` | Skips selected patch IDs, even when recommended. |
-| `strict` | `boolean` | `false` | Throws when a selected patch is incompatible or cannot apply. |
+## Patch catalog
 
-## Source Of Truth
+Patches are opt-in by default. List the shipped catalog, pick the patch IDs your app needs, and add them to `plugins.CapacitorPatch.patches`.
 
-This reference is synced from the README and patch catalog in [capacitor-patch](https://github.com/Cap-go/capacitor-patch/).
+Each catalog entry includes:
+
+- a stable patch ID
+- the target package or native project phase
+- supported version range
+- the upstream Capacitor PR
+- the matching Capacitor+ sync branch
+- the patch file shipped with the package
+
+## Why use it
+
+Use `@capgo/capacitor-patch` when:
+
+- a Capacitor fix exists upstream but has not shipped yet
+- your app needs the fix without maintaining local patch scripts
+- you want patches to re-apply after every Capacitor sync/update
+- you need a team-readable catalog of the fixes your app depends on
+
+For a full catalog and contribution guide, see the [capacitor-patch repository](https://github.com/Cap-go/capacitor-patch/).
