@@ -45,7 +45,7 @@ Background tasks are not exact timers. Android and iOS decide when to run schedu
 
 | Platform | Native scheduler | Important behavior |
 | --- | --- | --- |
-| Android | WorkManager | Periodic work has a 15 minute minimum interval. |
+| Android | WorkManager | Periodic work has a 15-minute minimum interval. |
 | iOS | BGTaskScheduler | `minimumInterval` is an earliest begin date, not a guaranteed cadence. |
 | Web | Test-only fallback | No real background scheduler is available. |
 
