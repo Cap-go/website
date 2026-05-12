@@ -1,0 +1,10 @@
+{
+  "name": "@capgo/outrank-worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  }
+}

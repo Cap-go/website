@@ -1,0 +1,142 @@
+name: Import Outrank Articles
+
+on:
+  repository_dispatch:
+    types:
+      - outrank_publish_articles
+  workflow_dispatch:
+    inputs:
+      payload:
+        description: Raw Outrank publish_articles payload JSON for testing.
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: outrank-import-${{ github.event.client_payload.timestamp || github.run_id }}
+  cancel-in-progress: false
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+  HAS_PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN != '' }}
+  NODE_OPTIONS: '--max-old-space-size=16384'
+  UV_THREADPOOL_SIZE: '32'
+
+jobs:
+  import:
+    name: Import articles
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN || github.token }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: 1.3.11
+
+      - name: Cache bun modules
+        uses: actions/cache@v5
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+
+      - run: bun install --frozen-lockfile
+
+      - name: Write manual payload
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          OUTRANK_MANUAL_PAYLOAD: ${{ inputs.payload }}
+        run: printf '%s' "$OUTRANK_MANUAL_PAYLOAD" > "$RUNNER_TEMP/outrank-payload.json"
+
+      - name: Import Outrank articles
+        id: import
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            bun run scripts/blogs/import_outrank.ts "$RUNNER_TEMP/outrank-payload.json"
+          else
+            bun run scripts/blogs/import_outrank.ts
+          fi
+
+      - name: Format imported articles
+        if: steps.import.outputs.files != ''
+        run: xargs bunx prettier --write < .outrank-imported-files
+
+      - name: Verify website
+        if: steps.import.outputs.files != ''
+        run: bun run ci:verify:web
+        env:
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
+          ORAMA_CLOUD_ENDPOINT: ${{ secrets.ORAMA_CLOUD_ENDPOINT }}
+          CLOUDFLARE_TURNSTILE_SITE_KEY: ${{ secrets.CLOUDFLARE_TURNSTILE_SITE_KEY }}
+
+      - name: Create import branch
+        id: branch
+        if: steps.import.outputs.files != ''
+        shell: bash
+        run: |
+          rm -f .outrank-imported-files
+
+          if [[ -z "$(git status --porcelain apps/web/src/content/blog/en)" ]]; then
+            echo "No blog changes to publish."
+            echo "branch=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          branch="codex/outrank-${{ github.run_id }}-${{ github.run_attempt }}"
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git checkout -b "$branch"
+          git add apps/web/src/content/blog/en
+          git commit -m "chore: import Outrank articles"
+          git push --set-upstream origin "$branch"
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+
+      - name: Open draft pull request
+        id: pull-request
+        if: steps.branch.outputs.branch != ''
+        env:
+          GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN || github.token }}
+          BRANCH: ${{ steps.branch.outputs.branch }}
+        shell: bash
+        run: |
+          pr_url="$(gh pr create \
+            --draft \
+            --head "$BRANCH" \
+            --base "${{ github.event.repository.default_branch }}" \
+            --title "chore: import Outrank articles" \
+            --body "Imported ${{ steps.import.outputs.article_count }} article(s) from Outrank.")"
+
+          echo "pr_url=$pr_url" >> "$GITHUB_OUTPUT"
+
+      - name: Wait for checks and mark ready
+        if: steps.pull-request.outputs.pr_url != '' && env.HAS_PERSONAL_ACCESS_TOKEN == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          PR_URL: ${{ steps.pull-request.outputs.pr_url }}
+        shell: bash
+        run: |
+          for _ in {1..40}; do
+            check_count="$(gh pr checks "$PR_URL" --json name,state --jq 'length' 2>/dev/null || echo 0)"
+            if [[ "$check_count" -gt 0 ]]; then
+              break
+            fi
+            sleep 15
+          done
+
+          gh pr checks "$PR_URL" --watch --fail-fast --interval 30
+          gh pr ready "$PR_URL"

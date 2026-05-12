@@ -1,0 +1,40 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "capgo-outrank-webhook",
+  "account_id": "9ee3d7479a3c359681e3fab2c8cb22c0",
+  "main": "./src/index.ts",
+  "compatibility_date": "2026-05-12",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "vars": {
+    "GITHUB_OWNER": "Cap-go",
+    "GITHUB_REPO": "website",
+    "GITHUB_EVENT_TYPE": "outrank_publish_articles",
+  },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1,
+  },
+  "routes": [
+    {
+      "pattern": "outrank.capgo.app",
+      "custom_domain": true,
+    },
+  ],
+  "env": {
+    "development": {
+      "name": "capgo-outrank-webhook-development",
+      "vars": {
+        "GITHUB_OWNER": "Cap-go",
+        "GITHUB_REPO": "website",
+        "GITHUB_EVENT_TYPE": "outrank_publish_articles",
+      },
+      "routes": [
+        {
+          "pattern": "outrank-development.capgo.app",
+          "custom_domain": true,
+        },
+      ],
+    },
+  },
+}

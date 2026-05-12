@@ -25,6 +25,7 @@ jobs:
       web: ${{ steps.filter.outputs.web }}
       docs: ${{ steps.filter.outputs.docs }}
       translation: ${{ steps.filter.outputs.translation }}
+      outrank: ${{ steps.filter.outputs.outrank }}
     steps:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
         with:
@@ -40,6 +41,7 @@ jobs:
               echo "web=true"
               echo "docs=true"
               echo "translation=true"
+              echo "outrank=true"
             } >> "$GITHUB_OUTPUT"
             exit 0
           fi
@@ -65,6 +67,7 @@ jobs:
           web=false
           docs=false
           translation=false
+          outrank=false
 
           if matches '^(apps/web/|apps/shared/|scripts/|configs\.json$|package\.json$|bun\.lock$|\.github/workflows/test\.yml$|\.github/workflows/deploy-web\.yml$)'; then
             web=true
@@ -78,10 +81,15 @@ jobs:
             translation=true
           fi
 
+          if matches '^(apps/outrank-worker/|package\.json$|bun\.lock$|\.github/workflows/test\.yml$|\.github/workflows/deploy-outrank-worker\.yml$)'; then
+            outrank=true
+          fi
+
           {
             echo "web=$web"
             echo "docs=$docs"
             echo "translation=$translation"
+            echo "outrank=$outrank"
           } >> "$GITHUB_OUTPUT"
 
   web:
@@ -193,3 +201,27 @@ jobs:
             ${{ runner.os }}-bun-
       - run: bun install --frozen-lockfile
       - run: bun run ci:verify:translation
+
+  outrank:
+    name: Outrank Worker Check
+    needs: changes
+    if: needs.changes.outputs.outrank == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: 1.3.11
+      - name: Cache bun modules
+        uses: actions/cache@v5
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+      - run: bun install --frozen-lockfile
+      - run: bun run ci:verify:outrank
