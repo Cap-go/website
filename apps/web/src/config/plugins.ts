@@ -100,7 +100,9 @@ const actionDefinitionRows =
 @capgo/capacitor-age-range|github.com/Cap-go|Cross-platform age range detection using Google Play Age Signals (Android) and Apple DeclaredAgeRange (iOS)|https://github.com/Cap-go/capacitor-age-range/|Age Range
 @capgo/capacitor-persona|github.com/Cap-go|Launch Persona identity verification inquiries with native iOS and Android SDKs|https://github.com/Cap-go/capacitor-persona/|Persona
 @capgo/capacitor-intune|github.com/Cap-go|Microsoft Intune MAM, app protection policy, app config, and MSAL authentication for Capacitor|https://github.com/Cap-go/capacitor-intune/|Intune
+@capgo/capacitor-pretty-toast|github.com/Cap-go|Native-first pretty toast notifications for Capacitor and the web|https://github.com/Cap-go/capacitor-pretty-toast/|Pretty Toast
 @capgo/capacitor-patch|github.com/Cap-go|Apply version-gated Capacitor core, CLI, plugin, and native project patches during cap sync and update|https://github.com/Cap-go/capacitor-patch/|Capacitor Patch
+@capgo/capacitor-supabase|github.com/Cap-go|Native Supabase authentication, JWT access, and basic database helpers for Capacitor|https://github.com/Cap-go/capacitor-supabase/|Supabase
 @capgo/capacitor-incoming-call-kit|github.com/Cap-go|Present native incoming-call UI with iOS CallKit and Android full-screen notifications|https://github.com/Cap-go/capacitor-incoming-call-kit/|Incoming Call Kit
 @capgo/capacitor-install-referrer|github.com/Cap-go|Read Google Play install referrer data and Apple AdServices attribution from Capacitor|https://github.com/Cap-go/capacitor-install-referrer/|Install Referrer
 @capgo/capacitor-android-age-signals|github.com/Cap-go|Google Play Age Signals API wrapper - detect supervised accounts and verified users|https://github.com/Cap-go/capacitor-android-age-signals/|Age Signals
@@ -234,7 +236,9 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-age-range': 'UserGroup',
   '@capgo/capacitor-persona': 'UserCircle',
   '@capgo/capacitor-intune': 'ShieldCheck',
+  '@capgo/capacitor-pretty-toast': 'Bell',
   '@capgo/capacitor-patch': 'WrenchScrewdriver',
+  '@capgo/capacitor-supabase': 'CircleStack',
   '@capgo/capacitor-incoming-call-kit': 'Phone',
   '@capgo/capacitor-install-referrer': 'Tag',
   '@capgo/capacitor-android-age-signals': 'UserGroup',
