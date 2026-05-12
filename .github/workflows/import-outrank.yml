@@ -37,7 +37,7 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN || github.token }}
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 24
 
@@ -46,7 +46,7 @@ jobs:
           bun-version: 1.3.11
 
       - name: Cache bun modules
-        uses: actions/cache@v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: ~/.bun/install/cache
           key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
@@ -130,6 +130,8 @@ jobs:
           PR_URL: ${{ steps.pull-request.outputs.pr_url }}
         shell: bash
         run: |
+          check_count=0
+
           for _ in {1..40}; do
             check_count="$(gh pr checks "$PR_URL" --json name,state --jq 'length' 2>/dev/null || echo 0)"
             if [[ "$check_count" -gt 0 ]]; then
@@ -137,6 +139,11 @@ jobs:
             fi
             sleep 15
           done
+
+          if [[ "$check_count" -eq 0 ]]; then
+            echo "No PR checks found; leaving PR in draft."
+            exit 0
+          fi
 
           gh pr checks "$PR_URL" --watch --fail-fast --interval 30
           gh pr ready "$PR_URL"

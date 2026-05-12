@@ -66,7 +66,10 @@ function validatePayload(payload: unknown): payload is OutrankPayload {
   if (candidate.event_type !== 'publish_articles') return false
   if (!candidate.data || !Array.isArray(candidate.data.articles)) return false
 
-  return candidate.data.articles.every((article) => typeof article?.title === 'string' && typeof article?.content_markdown === 'string')
+  return candidate.data.articles.every(
+    (article) =>
+      typeof article?.title === 'string' && article.title.trim().length > 0 && typeof article?.content_markdown === 'string' && article.content_markdown.trim().length > 0,
+  )
 }
 
 function normalizePayload(payload: OutrankPayload): OutrankPayload {
@@ -110,29 +113,41 @@ async function dispatchToGithub(env: Env, payload: OutrankPayload): Promise<Resp
     return jsonResponse({ error: 'payload_too_large_for_repository_dispatch' }, 413)
   }
 
-  const response = await fetch(`https://api.github.com/repos/${env.GITHUB_OWNER}/${env.GITHUB_REPO}/dispatches`, {
-    method: 'POST',
-    headers: {
-      accept: 'application/vnd.github+json',
-      authorization: `Bearer ${env.GITHUB_DISPATCH_TOKEN}`,
-      'content-type': 'application/json',
-      'user-agent': 'capgo-outrank-webhook',
-      'x-github-api-version': '2022-11-28',
-    },
-    body: dispatchBody,
-  })
+  try {
+    const response = await fetch(`https://api.github.com/repos/${env.GITHUB_OWNER}/${env.GITHUB_REPO}/dispatches`, {
+      method: 'POST',
+      headers: {
+        accept: 'application/vnd.github+json',
+        authorization: `Bearer ${env.GITHUB_DISPATCH_TOKEN}`,
+        'content-type': 'application/json',
+        'user-agent': 'capgo-outrank-webhook',
+        'x-github-api-version': '2022-11-28',
+      },
+      body: dispatchBody,
+    })
 
-  if (response.ok) return jsonResponse({ message: 'Outrank payload dispatched' }, 202)
+    if (response.ok) return jsonResponse({ message: 'Outrank payload dispatched' }, 202)
 
-  const details = await response.text()
-  return jsonResponse(
-    {
-      error: 'github_dispatch_failed',
-      status: response.status,
-      details: details.slice(0, 500),
-    },
-    502,
-  )
+    const details = await response.text()
+    return jsonResponse(
+      {
+        error: 'github_dispatch_failed',
+        status: response.status,
+        details: details.slice(0, 500),
+      },
+      502,
+    )
+  } catch (error) {
+    const details = error instanceof Error ? error.message : String(error)
+    console.error('GitHub repository_dispatch request failed', details)
+    return jsonResponse(
+      {
+        error: 'github_dispatch_network_failure',
+        details: details.slice(0, 500),
+      },
+      502,
+    )
+  }
 }
 
 export default {

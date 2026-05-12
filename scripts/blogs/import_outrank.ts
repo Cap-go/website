@@ -19,7 +19,7 @@ interface OutrankArticle {
   created_at?: string
   image_url?: string
   slug?: string
-  tags?: string[]
+  tags?: unknown[]
 }
 
 interface OutrankPayload {
@@ -131,7 +131,12 @@ function writeArticle(article: OutrankArticle, payloadTimestamp: string, blogDir
   const slug = toSlug(article.slug || title || article.id || '')
   if (!slug) throw new Error(`Outrank article "${title}" does not have a usable slug.`)
 
-  const tags = article.tags?.map((tag) => tag.trim()).filter(Boolean) || []
+  const tags = Array.isArray(article.tags)
+    ? article.tags
+        .filter((tag): tag is string => typeof tag === 'string')
+        .map((tag) => tag.trim())
+        .filter(Boolean)
+    : []
   const markdown = normalizeMarkdown(article.content_markdown, title)
   const createdAt = toIsoDate(article.created_at, payloadTimestamp)
   const updatedAt = toIsoDate(payloadTimestamp, createdAt)
