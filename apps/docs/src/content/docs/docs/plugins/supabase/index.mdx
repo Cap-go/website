@@ -1,0 +1,49 @@
+---
+title: "@capgo/capacitor-supabase"
+description: "Native Supabase SDK integration for Capacitor with JWT access and basic database operations."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Use native Supabase authentication in Capacitor while still pairing it with @supabase/supabase-js where it makes sense."
+  actions:
+    - text: Get started
+      link: /docs/plugins/supabase/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-supabase/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+`@capgo/capacitor-supabase` focuses on the parts where native Supabase SDKs give Capacitor apps real value: authentication flows, session persistence, token refresh, and direct JWT access.
+
+Use the plugin for native auth and session management, then pass the native JWT to `@supabase/supabase-js` for Realtime, Storage, Edge Functions, and advanced querying.
+
+## Core Capabilities
+
+- Native Supabase client initialization.
+- Email/password sign-in and sign-up.
+- OTP, magic link, OAuth, and session helpers.
+- Native auth state listeners.
+- JWT access for JavaScript or backend calls.
+- Basic native `select`, `insert`, `update`, and `delete` helpers.
+
+## Recommended Architecture
+
+| Concern | Recommended path |
+| --- | --- |
+| Authentication | Use `@capgo/capacitor-supabase`. |
+| Session persistence and refresh | Use `@capgo/capacitor-supabase`. |
+| Advanced database queries | Use `@supabase/supabase-js` with the native JWT. |
+| Realtime, Storage, Edge Functions | Use `@supabase/supabase-js`. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-supabase](https://github.com/Cap-go/capacitor-supabase/).

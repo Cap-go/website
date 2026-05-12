@@ -19,11 +19,13 @@ Plugin Audio Recorder|audio recording plugin for capturing microphone input|docs
 Plugin Audio Session|iOS audio session configuration plugin|docs/plugins/audiosession/**
 Plugin Autofill Save Password|autofill and password save plugin for credential management|docs/plugins/autofill-save-password/**
 Plugin Background Geolocation|background location tracking plugin|docs/plugins/background-geolocation/**
+Plugin Background Task|periodic background fetch task plugin for iOS and Android|docs/plugins/background-task/**
 Plugin Barometer|barometric pressure sensor plugin|docs/plugins/barometer/**
 Plugin Bluetooth Low Energy|Bluetooth Low Energy (BLE) plugin for device communication|docs/plugins/bluetooth-low-energy/**
 Plugin Brightness|screen brightness control plugin|docs/plugins/brightness/**
 Plugin Camera Preview|camera preview plugin for live camera feed|docs/plugins/camera-preview/**
 Plugin Capacitor+|Capacitor+ enhanced runtime plugin|docs/plugins/capacitor-plus/**
+Plugin Capacitor Patch|hook-only patch catalog plugin for applying Capacitor core, CLI, plugin, and native project fixes during sync and update|docs/plugins/capacitor-patch/**
 Plugin Compass|digital compass plugin for device orientation|docs/plugins/compass/**
 Plugin Contentsquare|Contentsquare analytics, consent gating, and session replay integration plugin|docs/plugins/contentsquare/**
 Plugin Facebook Analytics|Meta/Facebook App Events analytics plugin|docs/plugins/facebook-analytics/**
@@ -84,6 +86,7 @@ Plugin Persistent Account|persistent account storage plugin|docs/plugins/persist
 Plugin Photo Library|photo library access plugin|docs/plugins/photo-library/**
 Plugin Printer|printing plugin for documents and images|docs/plugins/printer/**
 Plugin RealtimeKit|real-time communication plugin|docs/plugins/realtimekit/**
+Plugin reCAPTCHA|Web reCAPTCHA, Web reCAPTCHA Enterprise, and native Enterprise mobile token plugin|docs/plugins/recaptcha/**
 Plugin Ricoh 360 Camera|Ricoh 360 camera integration plugin|docs/plugins/ricoh360-camera/**
 Plugin Screen Orientation|screen orientation control plugin|docs/plugins/screen-orientation/**
 Plugin Screen Recorder|screen recording plugin|docs/plugins/screen-recorder/**

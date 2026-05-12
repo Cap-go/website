@@ -104,6 +104,21 @@ export function InboxPage() {
 }
 ```
 
+The React subpath includes JSX typings for the custom elements. If TypeScript still reports that `cap-router-outlet` does not exist on `JSX.IntrinsicElements`, add this file:
+
+```ts
+// src/capgo-transitions.d.ts
+import '@capgo/capacitor-transitions/react';
+```
+
+For Vite, Create React App, and most webpack React apps, keeping that file under `src/` is enough. For Next.js or custom TypeScript setups, make sure it is included by `tsconfig.json`:
+
+```json
+{
+  "include": ["src", "src/capgo-transitions.d.ts"]
+}
+```
+
 ## Enable swipe back
 
 Use `swipe-gesture="auto"` to enable the gesture only when Capacitor reports a native iOS runtime:

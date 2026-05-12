@@ -209,6 +209,33 @@ if (premium?.isActive) {
 }
 ```
 
+## Monthly with 12-Month Commitment Plans
+
+If your App Store Connect subscription is configured with a monthly billing plan and 12-month commitment, StoreKit can return additional pricing terms for that product. Use those terms to show the monthly charge, total commitment price, and full commitment period before purchase.
+
+```typescript
+const yearlyProduct = products.find(
+  (product) => product.identifier === 'com.yourcompany.yourapp.premium_annual',
+);
+
+const monthlyCommitment = yearlyProduct?.pricingTerms?.find(
+  (term) => term.billingPlanType === 'monthly',
+);
+
+if (yearlyProduct && monthlyCommitment) {
+  console.log('Monthly charge:', monthlyCommitment.billingDisplayPrice);
+  console.log('Total commitment:', monthlyCommitment.commitmentInfo?.priceString);
+
+  await NativePurchases.purchaseProduct({
+    productIdentifier: yearlyProduct.identifier,
+    productType: PURCHASE_TYPE.SUBS,
+    billingPlanType: 'monthly',
+  });
+}
+```
+
+For the full paywall and entitlement flow, see [iOS monthly commitment billing plans](/docs/plugins/native-purchases/ios-monthly-commitment/).
+
 ## Best Practices
 
 ### Pricing Strategy
@@ -302,6 +329,7 @@ Free App + Premium Subscription
 ## Next Steps
 
 - [Create an introductory offer](/docs/plugins/native-purchases/ios-introductory-offer/) to attract new subscribers
+- [Merchandise monthly commitment billing plans](/docs/plugins/native-purchases/ios-monthly-commitment/) for supported annual subscription offers
 - [Configure sandbox testing](/docs/plugins/native-purchases/ios-sandbox-testing/) to test your subscriptions
 - Set up promotional offers for win-back and retention
 - Implement subscription analytics tracking

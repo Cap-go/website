@@ -1,0 +1,36 @@
+---
+title: Android behavior
+description: "How @capgo/capacitor-background-task uses WorkManager on Android."
+sidebar:
+  order: 4
+---
+
+Android scheduling is backed by WorkManager. No extra app manifest entry is required for normal periodic background fetch work.
+
+## Scheduling
+
+```typescript
+await BackgroundTask.registerTaskAsync('sync-offline-data', {
+  minimumInterval: 30,
+  requiresNetwork: true,
+});
+```
+
+## Behavior
+
+- Android enforces a 15 minute minimum interval for periodic work.
+- `requiresNetwork: true` maps to WorkManager's connected network constraint.
+- Each task name is scheduled as unique periodic work, so registering the same task name updates the existing schedule.
+- Task runs are recorded natively before being delivered to JavaScript, so pending events can be drained when the WebView is ready.
+
+## Testing
+
+Use the test trigger to execute registered callbacks immediately during development:
+
+```typescript
+await BackgroundTask.triggerTaskWorkerForTestingAsync();
+```
+
+## Limits
+
+WorkManager is designed for deferrable work. It does not guarantee exact timing and should not be used for alarms, countdowns, or user-visible deadlines.

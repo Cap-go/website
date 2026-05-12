@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-02-09T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-10T23:28:47.000Z
 head_image: /appflow_alt.webp
 head_image_alt: Appflow alternative illustration
 keywords: Ionic AppFlow shutdown, mobile app development, live updates, OTA updates, continuous integration, mobile app updates, Capgo alternative
@@ -85,7 +85,7 @@ We love Ionic and Capacitor, and we're here for the long haul. If any part of th
 
 ### Proven Track Record
 - **Massive Scale**: Serving over 30 million live updates daily in our cloud infrastructure, with even more in self-hosted environments
-- **Active Development**: Created and maintained over 20 plugins in the Capacitor ecosystem: [explore our plugins](https://github.com/cap-go/)
+- **Active Development**: Created and maintained a broad plugin collection in the Capacitor ecosystem: [explore our plugins](https://github.com/cap-go/)
 - **Growing Community**: Successfully helping numerous teams transition to Capgo this year
 - **Complete Solutions**: Providing comprehensive CI/CD solutions, from tutorials to full service integration
 - **Sustainable Model**: Self-funded and profitable, ensuring long-term stability for our users

@@ -1,1 +1,1 @@
-export { actions, type Action, type Plugin } from '../../../web/src/config/plugins'
+export { actions, pluginCount, pluginCountLabel, type Action, type Plugin } from '../../../web/src/config/plugins'

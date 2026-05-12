@@ -3,12 +3,29 @@ import Layout from '@/layouts/Layout.astro'
 import m from '@/copy/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { createLdJsonGraph, createPersonLdJson, createWebPageLdJson } from '@/lib/ldJson'
+import { pluginCountLabel } from '@/config/plugins'
 import type { Thing } from 'schema-dts'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.about_capgo({}, { locale: Astro.locals.locale })].join(' | ')
 const description = m.about_capgo_description({}, { locale: Astro.locals.locale })
 
 const config = Astro.locals.runtimeConfig.public
+const locale = Astro.locals.locale
+const foundingDate = new Date('2022-12-01T00:00:00Z')
+const today = new Date()
+const yearsInProduction =
+  today.getUTCFullYear() -
+  foundingDate.getUTCFullYear() -
+  (today.getUTCMonth() < foundingDate.getUTCMonth() || (today.getUTCMonth() === foundingDate.getUTCMonth() && today.getUTCDate() < foundingDate.getUTCDate()) ? 1 : 0)
+const displayedYearsInProduction = Math.max(1, yearsInProduction)
+const yearsInProductionLabel = new Intl.NumberFormat(locale, {
+  style: 'unit',
+  unit: 'year',
+  unitDisplay: 'long',
+})
+  .formatToParts(displayedYearsInProduction)
+  .map((part) => (part.type === 'integer' ? `${part.value}+` : part.value))
+  .join('')
 
 // Create founder Person schema
 const founder = createPersonLdJson('Martin Donadieu', 'https://x.com/martindonadieu', `${config.baseUrl}/martindonadieu.webp`, 'Founder & CEO')
@@ -130,7 +147,8 @@ const content = {
             </div>
             <h3 class="mb-2 text-xl font-bold text-white">Enterprise Support Contracts</h3>
             <p class="text-sm text-gray-300">
-              Multiple Fortune 500 companies have long-term support contracts with us, ensuring Capgo and our 30+ plugins will be maintained and improved for years to come.
+              Multiple Fortune 500 companies have long-term support contracts with us, ensuring Capgo and our {pluginCountLabel} plugins will be maintained and improved for years to
+              come.
             </p>
           </div>
         </div>
@@ -140,11 +158,11 @@ const content = {
           <h3 class="mb-4 text-center text-xl font-bold text-white">Why Enterprises Trust Capgo</h3>
           <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
             <div class="text-center">
-              <p class="text-2xl font-bold text-white">30+</p>
+              <p class="text-2xl font-bold text-white">{pluginCountLabel}</p>
               <p class="text-xs text-gray-400">Open Source Plugins</p>
             </div>
             <div class="text-center">
-              <p class="text-2xl font-bold text-white">3+ Years</p>
+              <p class="text-2xl font-bold text-white" aria-live="polite" aria-atomic="true">{yearsInProductionLabel}</p>
               <p class="text-xs text-gray-400">In Production</p>
             </div>
             <div class="text-center">
@@ -173,7 +191,7 @@ const content = {
     <div class="relative mx-auto mt-20 max-w-7xl px-4 sm:px-6 lg:px-8">
       <h2 class="mb-12 text-center text-3xl font-bold text-white">Meet Our Growing Team</h2>
 
-      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         <!-- Martin - Founder -->
         <div class="relative">
           <div class="h-full rounded-lg border border-gray-700 bg-gray-800 p-6">
@@ -204,10 +222,10 @@ const content = {
           </div>
         </div>
 
-        <!-- Jordan - This year -->
+        <!-- Jordan - 2025 -->
         <div class="relative">
           <div class="h-full rounded-lg border border-gray-700 bg-gray-800 p-6">
-            <div class="absolute -top-3 -left-3 rounded-full bg-gray-700 px-3 py-1 text-xs font-bold text-white">2025 - This Year</div>
+            <div class="absolute -top-3 -left-3 rounded-full bg-gray-700 px-3 py-1 text-xs font-bold text-white">2025</div>
             <div class="mt-4 text-center">
               <div class="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-gray-700">
                 <span class="text-4xl">🎨</span>
@@ -219,10 +237,10 @@ const content = {
           </div>
         </div>
 
-        <!-- Valeria (Lera) - This year -->
+        <!-- Valeria (Lera) - 2025 -->
         <div class="relative">
           <div class="h-full rounded-lg border border-gray-700 bg-gray-800 p-6">
-            <div class="absolute -top-3 -left-3 rounded-full bg-gray-700 px-3 py-1 text-xs font-bold text-white">2025 - This Year</div>
+            <div class="absolute -top-3 -left-3 rounded-full bg-gray-700 px-3 py-1 text-xs font-bold text-white">2025</div>
             <div class="mt-4 text-center">
               <div class="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-gray-700">
                 <span class="text-4xl">🤝</span>
@@ -233,24 +251,39 @@ const content = {
             </div>
           </div>
         </div>
+
+        <!-- Adrien - 2026 -->
+        <div class="relative">
+          <div class="h-full rounded-lg border border-gray-700 bg-gray-800 p-6">
+            <div class="absolute -top-3 -left-3 rounded-full bg-gray-700 px-3 py-1 text-xs font-bold text-white">2026</div>
+            <div class="mt-4 text-center">
+              <div class="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-gray-700">
+                <span class="text-4xl">📱</span>
+              </div>
+              <h3 class="text-xl font-bold text-white">Adrien</h3>
+              <p class="font-semibold text-gray-200">Mobile Developer</p>
+              <p class="mt-3 text-sm text-gray-300">Young mobile developer improving the Capacitor ecosystem and making Capacitor/Capgo DX match Expo and React Native.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Note about full team photo -->
       <div class="mt-8 rounded-lg border border-gray-700 bg-gray-800/70 p-6">
         <p class="text-center text-gray-300">
-          <span class="font-semibold text-gray-200">Team Update:</span> We now have Valeria (Lera) featured in the photo above with Michael and Martin. A complete team photo including
-          all four members (with Jordan) is coming soon!
+          <span class="font-semibold text-gray-200">Team Update:</span> We now have Valeria (Lera) featured with Michael and Martin. A complete team photo including Jordan and Adrien
+          is coming soon!
         </p>
       </div>
 
       <!-- Key Metrics -->
       <div class="mt-12 grid grid-cols-2 gap-6 md:grid-cols-4">
         <div class="rounded-lg bg-gray-800 p-4 text-center">
-          <p class="text-3xl font-bold text-white">4</p>
+          <p class="text-3xl font-bold text-white">5</p>
           <p class="text-sm text-gray-400">Team Members</p>
         </div>
         <div class="rounded-lg bg-gray-800 p-4 text-center">
-          <p class="text-3xl font-bold text-white">$10k+</p>
+          <p class="text-3xl font-bold text-white">$25k+</p>
           <p class="text-sm text-gray-400">Monthly MRR</p>
         </div>
         <div class="rounded-lg bg-gray-800 p-4 text-center">
@@ -258,8 +291,8 @@ const content = {
           <p class="text-sm text-gray-400">End Users</p>
         </div>
         <div class="rounded-lg bg-gray-800 p-4 text-center">
-          <p class="text-3xl font-bold text-white">2000s</p>
-          <p class="text-sm text-gray-400">Apps Served</p>
+          <p class="text-3xl font-bold text-white">5k+</p>
+          <p class="text-sm text-gray-400">Apps Using Capgo</p>
         </div>
       </div>
     </div>
@@ -318,6 +351,18 @@ const content = {
             </p>
           </div>
 
+          <div>
+            <h3 class="mb-3 text-xl font-bold text-white">2026: Adrien Joins - Raising Capacitor DX</h3>
+            <p class="mb-3">
+              In 2026, with Capgo above $25k MRR and used by more than 5,000 apps, Adrien joined as our Mobile Developer. He is a young developer focused on improving the Capacitor
+              ecosystem and closing the developer experience gap with Expo and React Native. His work is about making Capacitor and Capgo feel faster, clearer, and more natural for
+              teams building mobile apps from web technology.
+            </p>
+            <p class="text-gray-400 italic">
+              "Adrien is helping us raise the bar for Capacitor DX. Capgo should feel as polished and productive as the best mobile tooling developers already know." - Martin
+            </p>
+          </div>
+
           <!-- Team Photo 1: The Engineering Trio at Climbing Offsite -->
           <div class="my-8">
             <img src="/capgo_michael_martin_jordan.webp" alt="Jordan, Martin, and Michael during team climbing offsite" class="w-full rounded-lg shadow-2xl" />
@@ -331,16 +376,17 @@ const content = {
             <p class="mb-3">
               My role has completely transformed. I'm no longer the solo developer coding until dawn. As CEO, I focus on vision, strategy, and taking important customer calls when
               needed. Michael ensures our technology stays cutting-edge and performant. Jordan keeps our product delightful and powerful, always thinking about the user journey.
-              Valeria (Lera) makes sure every customer, from indie hackers to Fortune 500 companies, succeeds with Capgo.
+              Valeria (Lera) makes sure every customer, from indie hackers to Fortune 500 companies, succeeds with Capgo. Adrien improves the mobile developer experience and helps
+              push the Capacitor ecosystem forward.
             </p>
             <p class="mb-3">
               We're not just a team; we're a family united by a simple belief: every developer deserves access to instant, affordable updates. From our base in beautiful Madeira,
-              Portugal - where we work hard and play harder, scaling mountains and climbing walls together - we serve thousands of applications and millions of end users worldwide.
-              What started as my solo project has become a collaborative effort where each team member brings unique expertise that makes Capgo better than I could have ever
-              imagined alone.
+              Portugal - where we work hard and play harder, scaling mountains and climbing walls together - we serve more than 5,000 applications and millions of end users
+              worldwide. What started as my solo project has become a collaborative effort where each team member brings unique expertise that makes Capgo better than I could have
+              ever imagined alone.
             </p>
             <p class="text-lg font-bold text-white">
-              The journey from 1 to 4 has been transformative, but this is just the beginning. Together, we're building the future of app deployment. 🚀
+              The journey from 1 to 5 has been transformative, but this is just the beginning. Together, we're building the future of app deployment. 🚀
             </p>
           </div>
         </div>
@@ -392,7 +438,8 @@ const content = {
                 { locale: Astro.locals.locale },
               )
             }
-            With 30+ maintained plugins and long-term support contracts with multiple enterprises, we're building infrastructure that companies can depend on for the next decade.
+            With {pluginCountLabel} maintained plugins and long-term support contracts with multiple enterprises, we're building infrastructure that companies can depend on for the next
+            decade.
           </p>
           <h3 class="mb-4 text-2xl font-bold text-white">💪 {m.practicing_what_we_preach({}, { locale: Astro.locals.locale })}</h3>
           <p class="mb-6 text-gray-300">

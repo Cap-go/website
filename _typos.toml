@@ -3,6 +3,7 @@ extend-exclude = [
     "public/**/*_tye.png",
     "apps/web/public/**/*_tye.png",
     "apps/docs/public/**/*_tye.png",
+    ".github/assets/readme-banner-preview.png",
     "loadedVectorStore/**",
     "src/pages/**",
     "apps/web/src/pages/**",

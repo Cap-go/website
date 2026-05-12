@@ -1,0 +1,68 @@
+---
+title: "@capgo/capacitor-background-task"
+description: "Schedule periodic background fetch tasks on iOS and Android from a Capacitor app."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Expo-style named background tasks for Capacitor apps, backed by Android WorkManager and iOS BGTaskScheduler."
+  actions:
+    - text: Get started
+      link: /docs/plugins/background-task/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-background-task/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+Use `@capgo/capacitor-background-task` when your Capacitor app needs periodic background fetch work such as sync, cache refreshes, inbox polling, analytics flushing, or lightweight maintenance jobs.
+
+The plugin follows the practical feature set of Expo BackgroundTask with named tasks, persistent registration, status checks, unregistering, a development trigger, and iOS expiration events.
+
+## Core Capabilities
+
+- `defineTask` - Register the JavaScript callback for a named task.
+- `registerTaskAsync` - Persist and schedule a periodic task.
+- `unregisterTaskAsync` - Cancel future runs for one task.
+- `isTaskRegisteredAsync` - Check whether a task is registered.
+- `getRegisteredTasksAsync` - List currently registered task names.
+- `getPendingTaskRunsAsync` - Inspect native task events recorded before JavaScript was ready.
+- `getStatusAsync` - Check native background task availability.
+- `triggerTaskWorkerForTestingAsync` - Run registered tasks immediately during development.
+- `addExpirationListener` - Handle iOS expiration callbacks.
+- `define`, `schedule`, `cancel`, `statusAsync`, and `finish` - Compatibility helpers for `react-native-background-task`.
+
+## Platform Behavior
+
+Background tasks are not exact timers. Android and iOS decide when to run scheduled work based on battery, network, app usage, and system policy.
+
+| Platform | Native scheduler | Important behavior |
+| --- | --- | --- |
+| Android | WorkManager | Periodic work has a 15-minute minimum interval. |
+| iOS | BGTaskScheduler | `minimumInterval` is an earliest begin date, not a guaranteed cadence. |
+| Web | Test-only fallback | No real background scheduler is available. |
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `defineTask` | Defines the JavaScript callback for a named task. |
+| `registerTaskAsync` | Registers a named periodic background task. |
+| `unregisterTaskAsync` | Cancels future task runs. |
+| `isTaskRegisteredAsync` | Returns whether a task is registered. |
+| `getRegisteredTasksAsync` | Lists registered task names. |
+| `getPendingTaskRunsAsync` | Lists native task events waiting to be finished. |
+| `getStatusAsync` | Returns whether native background scheduling is available. |
+| `triggerTaskWorkerForTestingAsync` | Triggers registered tasks for development and QA. |
+| `addExpirationListener` | Listens for iOS expiration events. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-background-task](https://github.com/Cap-go/capacitor-background-task/).

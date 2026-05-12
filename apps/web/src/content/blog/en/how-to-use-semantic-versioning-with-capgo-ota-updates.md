@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-03T04:48:38.491Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-11T10:43:58.000Z
 head_image: https://assets.seobotai.com/capgo.app/67c4f6356c9ebce91891f4e6-1740977344964.jpg
 head_image_alt: Mobile Development
 keywords: Semantic Versioning, Capgo, OTA updates, Capacitor apps, version control, app updates, deployment, CI/CD
@@ -296,7 +296,7 @@ For larger teams, the following version management matrix can help organize upda
 Even with precautions, updates can fail. If that happens, follow these recovery steps:
 
 1.  Roll back to a previous stable bundle.
-2.  Increment version numbers for any new fixes (note: version numbers cannot be reused after deletion) [\[2\]](https://github.com/Cap-go/CLI).
+2.  Increment version numbers for any new fixes (note: version numbers cannot be reused after deletion) [\[2\]](https://github.com/Cap-go/capgo).
 3.  Verify updates during app startup to ensure they work as expected.
 
 Capgo's updater is designed to handle disruptions. For example, if the server is unreachable or an update is deleted, the app continues to function normally [\[3\]](https://capgo.app/docs/faq/). Additionally, failed network requests are automatically retried during the next app launch [\[3\]](https://capgo.app/docs/faq/). This built-in resilience minimizes downtime and ensures smoother operations.

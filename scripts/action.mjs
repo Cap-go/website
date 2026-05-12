@@ -1,13 +1,5 @@
 export const actions = [
   {
-    name: '@capgo/cli',
-    author: 'github.com/riderx',
-    description: 'A CLI to upload to capgo servers',
-    href: 'https://github.com/Cap-go/capgo-cli/',
-    title: 'CLI',
-    // icon: CommandLineIcon,
-  },
-  {
     name: '@capgo/standard-version',
     author: 'Martin Donadieu',
     description: 'replacement for `npm version` with automatic CHANGELOG generation',

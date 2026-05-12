@@ -9,7 +9,7 @@ import m from '@/copy/messages'
       <h2 class="text-3xl leading-tight font-bold text-white sm:text-4xl lg:text-5xl">
         {m.questions_and_answers({}, { locale: Astro.locals.locale })}
       </h2>
-      <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-gray-300">
+      <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-gray-200">
         {m.explore_common_questions({}, { locale: Astro.locals.locale })}
       </p>
     </div>
@@ -17,17 +17,17 @@ import m from '@/copy/messages'
     <div class="mx-auto mt-16 max-w-3xl">
       <div class="mb-8 text-center">
         <h3 class="mb-2 cursor-default text-2xl font-semibold text-white transition-colors duration-200 hover:text-blue-400">Plan Features & Limits</h3>
-        <p class="text-sm text-gray-400">Everything you need to know about your plan's capabilities</p>
+        <p class="text-sm text-gray-200">Everything you need to know about your plan's capabilities</p>
       </div>
 
-      <div class="space-y-1 overflow-hidden rounded-2xl border border-gray-800 bg-gray-800/20">
-        <details class="group border-b border-gray-800 last:border-b-0 open:border-blue-600/30 open:bg-blue-950/20" id="faq-mau">
-          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/20 hover:bg-gray-800/30">
+      <div class="space-y-1 overflow-hidden rounded-2xl border border-gray-700 bg-gray-800 shadow-xl shadow-black/20">
+        <details class="group border-b border-gray-700 last:border-b-0 open:border-blue-500/40 open:bg-blue-950/40" id="faq-mau">
+          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
             <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400"
               >{m.how_are_mau_counted({}, { locale: Astro.locals.locale })}</span
             >
             <svg
-              class="h-5 w-5 shrink-0 text-gray-400 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+              class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -35,7 +35,7 @@ import m from '@/copy/messages'
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
           </summary>
-          <div class="bg-blue-950/10 px-8 pt-2 pb-6">
+          <div class="bg-gray-950/40 px-8 pt-2 pb-6">
             <div class="space-y-3 leading-relaxed text-gray-200">
               <p>{m.mau_counting_explanation({}, { locale: Astro.locals.locale })}</p>
               <p>
@@ -51,13 +51,13 @@ import m from '@/copy/messages'
           </div>
         </details>
 
-        <details class="group border-b border-gray-800 last:border-b-0" id="faq-storage">
-          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/20 hover:bg-gray-800/30">
+        <details class="group border-b border-gray-700 last:border-b-0" id="faq-storage">
+          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
             <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400"
               >{m.storage_what_is_it_used_for({}, { locale: Astro.locals.locale })}</span
             >
             <svg
-              class="h-5 w-5 shrink-0 text-gray-400 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+              class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -72,13 +72,13 @@ import m from '@/copy/messages'
           </div>
         </details>
 
-        <details class="group border-b border-gray-800 last:border-b-0" id="faq-bandwidth">
-          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/20 hover:bg-gray-800/30">
+        <details class="group border-b border-gray-700 last:border-b-0" id="faq-bandwidth">
+          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
             <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400"
               >{m.how_is_bandwidth_counted({}, { locale: Astro.locals.locale })}</span
             >
             <svg
-              class="h-5 w-5 shrink-0 text-gray-400 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+              class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -86,20 +86,20 @@ import m from '@/copy/messages'
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
           </summary>
-          <div class="bg-blue-950/10 px-8 pt-2 pb-6">
+          <div class="bg-gray-950/40 px-8 pt-2 pb-6">
             <div class="leading-relaxed text-gray-200">
               {m.bandwidth_explanation({}, { locale: Astro.locals.locale })}
             </div>
           </div>
         </details>
 
-        <details class="group border-b border-gray-800 last:border-b-0" id="faq-build-time">
-          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/20 hover:bg-gray-800/30">
+        <details class="group border-b border-gray-700 last:border-b-0" id="faq-build-time">
+          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
             <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400"
               >{m.what_does_build_time_refer_to({}, { locale: Astro.locals.locale })}</span
             >
             <svg
-              class="h-5 w-5 shrink-0 text-gray-400 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+              class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -107,20 +107,20 @@ import m from '@/copy/messages'
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
           </summary>
-          <div class="bg-blue-950/10 px-8 pt-2 pb-6">
+          <div class="bg-gray-950/40 px-8 pt-2 pb-6">
             <div class="leading-relaxed text-gray-200">
               {m.build_time_explanation({}, { locale: Astro.locals.locale })}
             </div>
           </div>
         </details>
 
-        <details class="group border-b border-gray-800 last:border-b-0 open:border-blue-600/30 open:bg-blue-950/20">
-          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/20 hover:bg-gray-800/30">
+        <details class="group border-b border-gray-700 last:border-b-0 open:border-blue-500/40 open:bg-blue-950/40" id="faq-mau-limit">
+          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
             <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400"
               >{m.what_happens_if_i_reach_the_mau_limit({}, { locale: Astro.locals.locale })}</span
             >
             <svg
-              class="h-5 w-5 shrink-0 text-gray-400 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+              class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -128,20 +128,20 @@ import m from '@/copy/messages'
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
           </summary>
-          <div class="bg-blue-950/10 px-8 pt-2 pb-6">
+          <div class="bg-gray-950/40 px-8 pt-2 pb-6">
             <div class="leading-relaxed text-gray-200">
               {m.what_happens_if_i_reach_the_mau_limit_answer({}, { locale: Astro.locals.locale })}
             </div>
           </div>
         </details>
 
-        <details class="group border-b border-gray-800 last:border-b-0 open:border-blue-600/30 open:bg-blue-950/20">
-          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/20 hover:bg-gray-800/30">
+        <details class="group border-b border-gray-700 last:border-b-0 open:border-blue-500/40 open:bg-blue-950/40" id="faq-storage-limit">
+          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
             <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400"
               >{m.what_happens_if_i_reach_the_storage_limit({}, { locale: Astro.locals.locale })}</span
             >
             <svg
-              class="h-5 w-5 shrink-0 text-gray-400 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+              class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -149,20 +149,20 @@ import m from '@/copy/messages'
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
           </summary>
-          <div class="bg-blue-950/10 px-8 pt-2 pb-6">
+          <div class="bg-gray-950/40 px-8 pt-2 pb-6">
             <div class="leading-relaxed text-gray-200">
               {m.what_happens_if_i_reach_the_storage_limit_answer({}, { locale: Astro.locals.locale })}
             </div>
           </div>
         </details>
 
-        <details class="group border-b border-gray-800 last:border-b-0 open:border-blue-600/30 open:bg-blue-950/20">
-          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/20 hover:bg-gray-800/30">
+        <details class="group border-b border-gray-700 last:border-b-0 open:border-blue-500/40 open:bg-blue-950/40" id="faq-bandwidth-limit">
+          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
             <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400"
               >{m.what_happens_if_i_reach_the_bandwidth_limit({}, { locale: Astro.locals.locale })}</span
             >
             <svg
-              class="h-5 w-5 shrink-0 text-gray-400 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+              class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -170,20 +170,20 @@ import m from '@/copy/messages'
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
           </summary>
-          <div class="bg-blue-950/10 px-8 pt-2 pb-6">
+          <div class="bg-gray-950/40 px-8 pt-2 pb-6">
             <div class="leading-relaxed text-gray-200">
               {m.what_happens_if_i_reach_the_bandwidth_limit_answer({}, { locale: Astro.locals.locale })}
             </div>
           </div>
         </details>
 
-        <details class="group border-b border-gray-800 last:border-b-0 open:border-blue-600/30 open:bg-blue-950/20" id="faq-capacitor-config">
-          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/20 hover:bg-gray-800/30">
+        <details class="group border-b border-gray-700 last:border-b-0 open:border-blue-500/40 open:bg-blue-950/40" id="faq-capacitor-config">
+          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
             <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400"
               >{m.capacitor_config_changes_question({}, { locale: Astro.locals.locale })}</span
             >
             <svg
-              class="h-5 w-5 shrink-0 text-gray-400 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+              class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -191,7 +191,7 @@ import m from '@/copy/messages'
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
           </summary>
-          <div class="bg-blue-950/10 px-8 pt-2 pb-6">
+          <div class="bg-gray-950/40 px-8 pt-2 pb-6">
             <div class="leading-relaxed text-gray-200">
               {m.capacitor_config_changes_answer({}, { locale: Astro.locals.locale })}
             </div>
@@ -204,17 +204,17 @@ import m from '@/copy/messages'
     <div class="mx-auto mt-16 max-w-3xl">
       <div class="mb-8 text-center">
         <h3 class="mb-2 cursor-default text-2xl font-semibold text-white transition-colors duration-200 hover:text-blue-400">Billing & Payments</h3>
-        <p class="text-sm text-gray-400">Everything about pricing, payments, and subscriptions</p>
+        <p class="text-sm text-gray-200">Everything about pricing, payments, and subscriptions</p>
       </div>
 
-      <div class="space-y-1 overflow-hidden rounded-2xl border border-gray-800 bg-gray-800/20">
-        <details class="group border-b border-gray-800 last:border-b-0 open:border-blue-600/30 open:bg-blue-950/20">
-          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/20 hover:bg-gray-800/30">
+      <div class="space-y-1 overflow-hidden rounded-2xl border border-gray-700 bg-gray-800 shadow-xl shadow-black/20">
+        <details class="group border-b border-gray-700 last:border-b-0 open:border-blue-500/40 open:bg-blue-950/40" id="faq-annual-ach">
+          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
             <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400"
               >{m.do_you_offer_annual_billing_and_ach_payment_options({}, { locale: Astro.locals.locale })}</span
             >
             <svg
-              class="h-5 w-5 shrink-0 text-gray-400 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+              class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -222,20 +222,20 @@ import m from '@/copy/messages'
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
           </summary>
-          <div class="bg-blue-950/10 px-8 pt-2 pb-6">
+          <div class="bg-gray-950/40 px-8 pt-2 pb-6">
             <div class="leading-relaxed text-gray-200">
               {m.ach_available_for_enterprise_annual_payments({}, { locale: Astro.locals.locale })}
             </div>
           </div>
         </details>
 
-        <details class="group border-b border-gray-800 last:border-b-0 open:border-blue-600/30 open:bg-blue-950/20">
-          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/20 hover:bg-gray-800/30">
+        <details class="group border-b border-gray-700 last:border-b-0 open:border-blue-500/40 open:bg-blue-950/40" id="faq-payment-methods">
+          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
             <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400"
               >{m.what_payment_methods_do_you_accept({}, { locale: Astro.locals.locale })}</span
             >
             <svg
-              class="h-5 w-5 shrink-0 text-gray-400 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+              class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -243,20 +243,20 @@ import m from '@/copy/messages'
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
           </summary>
-          <div class="bg-blue-950/10 px-8 pt-2 pb-6">
+          <div class="bg-gray-950/40 px-8 pt-2 pb-6">
             <div class="leading-relaxed text-gray-200">
               {m.what_payment_methods_answer({}, { locale: Astro.locals.locale })}
             </div>
           </div>
         </details>
 
-        <details class="group border-b border-gray-800 last:border-b-0 open:border-blue-600/30 open:bg-blue-950/20">
-          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/20 hover:bg-gray-800/30">
+        <details class="group border-b border-gray-700 last:border-b-0 open:border-blue-500/40 open:bg-blue-950/40">
+          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
             <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400"
               >{m.can_i_change_my_plan_at_any_time({}, { locale: Astro.locals.locale })}</span
             >
             <svg
-              class="h-5 w-5 shrink-0 text-gray-400 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+              class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -264,20 +264,20 @@ import m from '@/copy/messages'
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
           </summary>
-          <div class="bg-blue-950/10 px-8 pt-2 pb-6">
+          <div class="bg-gray-950/40 px-8 pt-2 pb-6">
             <div class="leading-relaxed text-gray-200">
               {m.can_i_change_my_plan_answer({}, { locale: Astro.locals.locale })}
             </div>
           </div>
         </details>
 
-        <details class="group border-b border-gray-800 last:border-b-0 open:border-blue-600/30 open:bg-blue-950/20">
-          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/20 hover:bg-gray-800/30">
+        <details class="group border-b border-gray-700 last:border-b-0 open:border-blue-500/40 open:bg-blue-950/40">
+          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
             <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400"
               >{m.can_i_cancel_at_any_time({}, { locale: Astro.locals.locale })}</span
             >
             <svg
-              class="h-5 w-5 shrink-0 text-gray-400 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+              class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -285,20 +285,20 @@ import m from '@/copy/messages'
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
           </summary>
-          <div class="bg-blue-950/10 px-8 pt-2 pb-6">
+          <div class="bg-gray-950/40 px-8 pt-2 pb-6">
             <div class="leading-relaxed text-gray-200">
               {m.cancellation_policy_details({}, { locale: Astro.locals.locale })}
             </div>
           </div>
         </details>
 
-        <details class="group border-b border-gray-800 last:border-b-0 open:border-blue-600/30 open:bg-blue-950/20">
-          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/20 hover:bg-gray-800/30">
+        <details class="group border-b border-gray-700 last:border-b-0 open:border-blue-500/40 open:bg-blue-950/40">
+          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
             <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400"
               >{m.do_you_offer_refunds({}, { locale: Astro.locals.locale })}</span
             >
             <svg
-              class="h-5 w-5 shrink-0 text-gray-400 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+              class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -306,20 +306,20 @@ import m from '@/copy/messages'
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
           </summary>
-          <div class="bg-blue-950/10 px-8 pt-2 pb-6">
+          <div class="bg-gray-950/40 px-8 pt-2 pb-6">
             <div class="leading-relaxed text-gray-200">
               {m.do_you_offer_refunds_answer({}, { locale: Astro.locals.locale })}
             </div>
           </div>
         </details>
 
-        <details class="group border-b border-gray-800 last:border-b-0 open:border-blue-600/30 open:bg-blue-950/20">
-          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/20 hover:bg-gray-800/30">
+        <details class="group border-b border-gray-700 last:border-b-0 open:border-blue-500/40 open:bg-blue-950/40">
+          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
             <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400"
               >{m.are_there_any_setup_fees_or_hidden_costs({}, { locale: Astro.locals.locale })}</span
             >
             <svg
-              class="h-5 w-5 shrink-0 text-gray-400 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+              class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -327,20 +327,20 @@ import m from '@/copy/messages'
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
           </summary>
-          <div class="bg-blue-950/10 px-8 pt-2 pb-6">
+          <div class="bg-gray-950/40 px-8 pt-2 pb-6">
             <div class="leading-relaxed text-gray-200">
               {m.are_there_any_setup_fees_answer({}, { locale: Astro.locals.locale })}
             </div>
           </div>
         </details>
 
-        <details class="group border-b border-gray-800 last:border-b-0 open:border-blue-600/30 open:bg-blue-950/20">
-          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/20 hover:bg-gray-800/30">
+        <details class="group border-b border-gray-700 last:border-b-0 open:border-blue-500/40 open:bg-blue-950/40" id="faq-credits">
+          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
             <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400"
               >{m.can_i_use_credits_without_subscription({}, { locale: Astro.locals.locale })}</span
             >
             <svg
-              class="h-5 w-5 shrink-0 text-gray-400 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+              class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -348,21 +348,21 @@ import m from '@/copy/messages'
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
           </summary>
-          <div class="bg-blue-950/10 px-8 pt-2 pb-6">
+          <div class="bg-gray-950/40 px-8 pt-2 pb-6">
             <div class="leading-relaxed text-gray-200">
               {m.can_i_use_credits_without_subscription_answer({}, { locale: Astro.locals.locale })}
             </div>
           </div>
         </details>
 
-        <details class="group border-b border-gray-800 last:border-b-0 open:border-blue-600/30 open:bg-blue-950/20" id="faq-cancel">
-          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/20 hover:bg-gray-800/30">
+        <details class="group border-b border-gray-700 last:border-b-0 open:border-blue-500/40 open:bg-blue-950/40" id="faq-cancel">
+          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
             <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400"
               >{m.capgo_availability_faq_title({}, { locale: Astro.locals.locale })}</span
             >
             <svg
               aria-hidden="true"
-              class="h-5 w-5 shrink-0 text-gray-400 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+              class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -370,7 +370,7 @@ import m from '@/copy/messages'
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
           </summary>
-          <div class="bg-blue-950/10 px-8 pt-2 pb-6">
+          <div class="bg-gray-950/40 px-8 pt-2 pb-6">
             <div class="leading-relaxed text-gray-200">
               <p class="mb-3">{m.capgo_availability_faq_intro({}, { locale: Astro.locals.locale })}</p>
               <ul class="mb-4 list-inside list-disc space-y-2">
@@ -391,17 +391,17 @@ import m from '@/copy/messages'
     <div class="mx-auto mt-16 max-w-3xl">
       <div class="mb-8 text-center">
         <h3 class="mb-2 cursor-default text-2xl font-semibold text-white transition-colors duration-200 hover:text-blue-400">Trial & Support</h3>
-        <p class="text-sm text-gray-400">Free trials, discounts, and getting help</p>
+        <p class="text-sm text-gray-200">Free trials, discounts, and getting help</p>
       </div>
 
-      <div class="space-y-1 overflow-hidden rounded-2xl border border-gray-800 bg-gray-800/20">
-        <details class="group border-b border-gray-800 last:border-b-0 open:border-blue-600/30 open:bg-blue-950/20">
-          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/20 hover:bg-gray-800/30">
+      <div class="space-y-1 overflow-hidden rounded-2xl border border-gray-700 bg-gray-800 shadow-xl shadow-black/20">
+        <details class="group border-b border-gray-700 last:border-b-0 open:border-blue-500/40 open:bg-blue-950/40">
+          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
             <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400"
               >{m.unsure_about_active_users({}, { locale: Astro.locals.locale })}</span
             >
             <svg
-              class="h-5 w-5 shrink-0 text-gray-400 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+              class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -409,20 +409,20 @@ import m from '@/copy/messages'
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
           </summary>
-          <div class="bg-blue-950/10 px-8 pt-2 pb-6">
+          <div class="bg-gray-950/40 px-8 pt-2 pb-6">
             <div class="leading-relaxed text-gray-200">
               {m.free_trial_explanation({}, { locale: Astro.locals.locale })}
             </div>
           </div>
         </details>
 
-        <details class="group border-b border-gray-800 last:border-b-0 open:border-blue-600/30 open:bg-blue-950/20">
-          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/20 hover:bg-gray-800/30">
+        <details class="group border-b border-gray-700 last:border-b-0 open:border-blue-500/40 open:bg-blue-950/40">
+          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
             <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400"
               >{m.do_you_offer_discounts_for_students_non_profits_or_startups({}, { locale: Astro.locals.locale })}</span
             >
             <svg
-              class="h-5 w-5 shrink-0 text-gray-400 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+              class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -430,20 +430,20 @@ import m from '@/copy/messages'
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
           </summary>
-          <div class="bg-blue-950/10 px-8 pt-2 pb-6">
+          <div class="bg-gray-950/40 px-8 pt-2 pb-6">
             <div class="leading-relaxed text-gray-200">
               {m.no_discounts_available_at_this_time({}, { locale: Astro.locals.locale })}
             </div>
           </div>
         </details>
 
-        <details class="group border-b border-gray-800 last:border-b-0 open:border-blue-600/30 open:bg-blue-950/20">
-          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/20 hover:bg-gray-800/30">
+        <details class="group border-b border-gray-700 last:border-b-0 open:border-blue-500/40 open:bg-blue-950/40">
+          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
             <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400"
               >{m.do_you_have_purchasing_power_parity_pricing({}, { locale: Astro.locals.locale })}</span
             >
             <svg
-              class="h-5 w-5 shrink-0 text-gray-400 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+              class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -451,7 +451,7 @@ import m from '@/copy/messages'
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
           </summary>
-          <div class="bg-blue-950/10 px-8 pt-2 pb-6">
+          <div class="bg-gray-950/40 px-8 pt-2 pb-6">
             <div class="leading-relaxed text-gray-200">
               {m.no_ppp_available_at_this_time({}, { locale: Astro.locals.locale })}
             </div>
@@ -464,17 +464,17 @@ import m from '@/copy/messages'
     <div class="mx-auto mt-16 max-w-3xl">
       <div class="mb-8 text-center">
         <h3 class="mb-2 cursor-default text-2xl font-semibold text-white transition-colors duration-200 hover:text-blue-400">Security & Compliance</h3>
-        <p class="text-sm text-gray-400">Enterprise security features and certifications</p>
+        <p class="text-sm text-gray-200">Enterprise security features and certifications</p>
       </div>
 
-      <div class="space-y-1 overflow-hidden rounded-2xl border border-gray-800 bg-gray-800/20">
-        <details class="group border-b border-gray-800 last:border-b-0 open:border-blue-600/30 open:bg-blue-950/20" id="faq-soc2">
-          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/20 hover:bg-gray-800/30">
+      <div class="space-y-1 overflow-hidden rounded-2xl border border-gray-700 bg-gray-800 shadow-xl shadow-black/20">
+        <details class="group border-b border-gray-700 last:border-b-0 open:border-blue-500/40 open:bg-blue-950/40" id="faq-soc2">
+          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
             <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400"
               >{m.soc2_what_does_it_mean({}, { locale: Astro.locals.locale })}</span
             >
             <svg
-              class="h-5 w-5 shrink-0 text-gray-400 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+              class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -482,20 +482,20 @@ import m from '@/copy/messages'
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
           </summary>
-          <div class="bg-blue-950/10 px-8 pt-2 pb-6">
+          <div class="bg-gray-950/40 px-8 pt-2 pb-6">
             <div class="leading-relaxed text-gray-200">
               {m.soc2_explanation({}, { locale: Astro.locals.locale })}
             </div>
           </div>
         </details>
 
-        <details class="group border-b border-gray-800 last:border-b-0 open:border-blue-600/30 open:bg-blue-950/20">
-          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/20 hover:bg-gray-800/30">
+        <details class="group border-b border-gray-700 last:border-b-0 open:border-blue-500/40 open:bg-blue-950/40">
+          <summary class="flex cursor-pointer items-center justify-between px-8 py-6 transition-all duration-200 group-open:bg-blue-900/40 hover:bg-gray-700/60">
             <span class="pr-4 text-lg font-medium text-white transition-colors duration-200 group-open:text-blue-400 group-hover:text-blue-400"
               >{m.can_i_use_soc2_with_other_plans({}, { locale: Astro.locals.locale })}</span
             >
             <svg
-              class="h-5 w-5 shrink-0 text-gray-400 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
+              class="h-5 w-5 shrink-0 text-gray-200 transition-all duration-300 group-open:rotate-180 group-open:text-blue-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -503,7 +503,7 @@ import m from '@/copy/messages'
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
             </svg>
           </summary>
-          <div class="bg-blue-950/10 px-8 pt-2 pb-6">
+          <div class="bg-gray-950/40 px-8 pt-2 pb-6">
             <div class="leading-relaxed text-gray-200">
               {m.soc2_enterprise_only({}, { locale: Astro.locals.locale })}
             </div>

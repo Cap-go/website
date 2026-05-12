@@ -1,0 +1,48 @@
+---
+title: iOS setup
+description: "Configure BGTaskScheduler for @capgo/capacitor-background-task on iOS."
+sidebar:
+  order: 3
+---
+
+iOS background processing uses `BGTaskScheduler`. The app must declare the background mode and the permitted task identifier before scheduling can work on a physical device.
+
+## Info.plist
+
+Add these keys to `ios/App/App/Info.plist`:
+
+```xml
+<key>UIBackgroundModes</key>
+<array>
+  <string>processing</string>
+</array>
+<key>BGTaskSchedulerPermittedIdentifiers</key>
+<array>
+  <string>app.capgo.backgroundtask.processing</string>
+</array>
+```
+
+## Sync
+
+```bash
+npx cap sync ios
+```
+
+## Behavior
+
+- `minimumInterval` is mapped to `earliestBeginDate`.
+- iOS decides the actual run time based on battery, network, usage patterns, and system policy.
+- Background task execution does not run reliably in the simulator. Test on a physical device.
+- The plugin re-schedules the next background processing request after each task launch.
+
+## Expiration
+
+Use `addExpirationListener` when work needs cleanup if iOS ends the task early.
+
+```typescript
+const handle = await BackgroundTask.addExpirationListener((event) => {
+  console.warn('Task expired', event.taskName);
+});
+
+await handle.remove();
+```
