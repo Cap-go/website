@@ -127,5 +127,6 @@
   "@capgo/capacitor-brightness": 1749,
   "@capgo/capacitor-light-sensor": 561,
   "@capgo/capacitor-video-thumbnails": 1664,
-  "@capgo/capacitor-intent-launcher": 3905
+  "@capgo/capacitor-intent-launcher": 3905,
+  "@capgo/capacitor-recaptcha": 0
 }
