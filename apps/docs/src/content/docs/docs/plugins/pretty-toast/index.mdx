@@ -1,0 +1,55 @@
+---
+title: "@capgo/capacitor-pretty-toast"
+description: "Native-first pretty toast notifications for Capacitor and the web."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Show native-looking toast notifications on iOS, Android, and Web with queueing, updates, actions, icons, and promise states."
+  actions:
+    - text: Get started
+      link: /docs/plugins/pretty-toast/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-pretty-toast/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+`@capgo/capacitor-pretty-toast` provides a `toast.*` API for native-first toast notifications in Capacitor apps. It renders native overlays on iOS and Android and a DOM renderer on Web.
+
+Use it for success messages, errors, loading states, long-running promise feedback, and action toasts that should feel integrated with the platform.
+
+## Core Capabilities
+
+- `toast.show` - Shows a custom toast from a full config object.
+- `toast.success`, `toast.error`, `toast.info`, `toast.warning` - Shows common semantic toasts with a title and optional config.
+- `toast.loading` - Shows a persistent loading toast.
+- `toast.update` - Updates an existing toast in place.
+- `toast.promise` - Tracks a promise with loading, success, and error states.
+- `toast.dismiss` and `toast.dismissAll` - Removes one toast or clears the queue.
+
+## Public API
+
+| Method | Description |
+| --- | --- |
+| `toast.show(config, options?)` | Shows a toast using the full `ToastConfig`. |
+| `toast.success(title, config?, options?)` | Shows a success toast. |
+| `toast.error(title, config?, options?)` | Shows an error toast. |
+| `toast.info(title, config?, options?)` | Shows an informational toast. |
+| `toast.warning(title, config?, options?)` | Shows a warning toast. |
+| `toast.loading(title, config?, options?)` | Shows a loading toast that does not auto-dismiss by default. |
+| `toast.update(id, partial)` | Updates an existing toast. |
+| `toast.promise(promise, messages)` | Shows loading state, then updates for success or error. |
+| `toast.dismiss(id?)` | Dismisses one toast or the active toast. |
+| `toast.dismissAll()` | Dismisses all visible and queued toasts. |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-pretty-toast](https://github.com/Cap-go/capacitor-pretty-toast/).

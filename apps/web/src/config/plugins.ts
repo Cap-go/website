@@ -21,7 +21,7 @@ export interface Plugin extends Action {
 
 const actionDefinitionRows =
   String.raw`@capgo/native-market|github.com/Cap-go|Deep link users directly to your app page on Google Play Store or Apple App Store|https://github.com/Cap-go/capacitor-native-market/|Native Market
-@capgo/native-navigation|github.com/Cap-go|Render native navbars, tabbars, and transition shells over a full-screen Capacitor WebView|https://github.com/Cap-go/capacitor-native-navigation/|Native Navigation
+@capgo/capacitor-native-navigation|github.com/Cap-go|Render native navbars, tabbars, and transition shells over a full-screen Capacitor WebView|https://github.com/Cap-go/capacitor-native-navigation/|Native Navigation
 @capgo/capacitor-transitions|github.com/Cap-go|Add Ionic-style page transitions and iOS edge swipe-back gestures without Ionic UI|https://github.com/Cap-go/capacitor-transitions/|Transitions
 @capgo/capacitor-native-biometric|github.com/Cap-go|Secure authentication using Face ID, Touch ID, and Android biometric APIs|https://github.com/Cap-go/capacitor-native-biometric/|Native Biometric
 @capgo/camera-preview|github.com/Cap-go|Display live camera feed as overlay with customizable controls and capture capabilities|https://github.com/Cap-go/capacitor-camera-preview/|Camera Preview
@@ -100,7 +100,9 @@ const actionDefinitionRows =
 @capgo/capacitor-age-range|github.com/Cap-go|Cross-platform age range detection using Google Play Age Signals (Android) and Apple DeclaredAgeRange (iOS)|https://github.com/Cap-go/capacitor-age-range/|Age Range
 @capgo/capacitor-persona|github.com/Cap-go|Launch Persona identity verification inquiries with native iOS and Android SDKs|https://github.com/Cap-go/capacitor-persona/|Persona
 @capgo/capacitor-intune|github.com/Cap-go|Microsoft Intune MAM, app protection policy, app config, and MSAL authentication for Capacitor|https://github.com/Cap-go/capacitor-intune/|Intune
+@capgo/capacitor-pretty-toast|github.com/Cap-go|Native-first pretty toast notifications for Capacitor and the web|https://github.com/Cap-go/capacitor-pretty-toast/|Pretty Toast
 @capgo/capacitor-patch|github.com/Cap-go|Apply version-gated Capacitor core, CLI, plugin, and native project patches during cap sync and update|https://github.com/Cap-go/capacitor-patch/|Capacitor Patch
+@capgo/capacitor-supabase|github.com/Cap-go|Native Supabase authentication, JWT access, and basic database helpers for Capacitor|https://github.com/Cap-go/capacitor-supabase/|Supabase
 @capgo/capacitor-incoming-call-kit|github.com/Cap-go|Present native incoming-call UI with iOS CallKit and Android full-screen notifications|https://github.com/Cap-go/capacitor-incoming-call-kit/|Incoming Call Kit
 @capgo/capacitor-install-referrer|github.com/Cap-go|Read Google Play install referrer data and Apple AdServices attribution from Capacitor|https://github.com/Cap-go/capacitor-install-referrer/|Install Referrer
 @capgo/capacitor-android-age-signals|github.com/Cap-go|Google Play Age Signals API wrapper - detect supervised accounts and verified users|https://github.com/Cap-go/capacitor-android-age-signals/|Age Signals
@@ -156,7 +158,7 @@ const actionDefinitionRows =
 
 const pluginIconsByName: Record<string, string> = {
   '@capgo/native-market': 'ArchiveBoxArrowDown',
-  '@capgo/native-navigation': 'DevicePhoneMobile',
+  '@capgo/capacitor-native-navigation': 'DevicePhoneMobile',
   '@capgo/capacitor-transitions': 'ArrowsRightLeft',
   '@capgo/capacitor-native-biometric': 'FingerPrint',
   '@capgo/camera-preview': 'Camera',
@@ -234,7 +236,9 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-age-range': 'UserGroup',
   '@capgo/capacitor-persona': 'UserCircle',
   '@capgo/capacitor-intune': 'ShieldCheck',
+  '@capgo/capacitor-pretty-toast': 'Bell',
   '@capgo/capacitor-patch': 'WrenchScrewdriver',
+  '@capgo/capacitor-supabase': 'CircleStack',
   '@capgo/capacitor-incoming-call-kit': 'Phone',
   '@capgo/capacitor-install-referrer': 'Tag',
   '@capgo/capacitor-android-age-signals': 'UserGroup',
