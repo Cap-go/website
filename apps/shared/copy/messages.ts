@@ -328,6 +328,8 @@ const messages = {
   bug_bounty_out_of_scope_4: 'Bugs in third-party platforms, dependencies, or services that Capgo cannot fix directly (report those upstream, for example to Supabase).',
   bug_bounty_out_of_scope_5: 'Social engineering or phishing attempts',
   bug_bounty_out_of_scope_6: 'Denial of service attacks',
+  bug_bounty_out_of_scope_7:
+    'SSRF or DNS spoofing reports against webhooks or website preview. These features run on serverless infrastructure and cannot be used to reach private Capgo infrastructure, so they are not exploitable in our environment.',
   bug_bounty_out_of_scope_title: 'Out of Scope',
   bug_bounty_supabase_title: 'Supabase and Third-Party Services',
   bug_bounty_supabase_intro:
@@ -353,7 +355,7 @@ const messages = {
   bug_bounty_supabase_limitations_4:
     'If the issue is in this list but you can show a concrete Supabase-side fix in the provided project or a concrete Capgo-owned security defect, we can consider it in scope.',
   bug_bounty_payment_note:
-    'Payments are issued only after we have identified the issue, fixed it, opened a pull request, and you have verified after release that the fix works for you. This process usually takes between 20 and 30 days. Please do not send messages like "to get paid"; payment happens only once the release is live and you\'ve tested and validated the fix.',
+    'Capgo is a tiny bootstrapped company, so our bounty amounts are lower than large-company programs. Reports without a clear exploit path are paid up to $30 max. Exploits with real, reproducible impact on Capgo are paid up to $300 max. Payments are issued only after we have identified the issue, fixed it, opened a pull request, and you have verified after release that the fix works for you. This process usually takes between 20 and 30 days. Please do not send messages like "to get paid"; payment happens only once the release is live and you\'ve tested and validated the fix.',
   bug_bounty_program: 'Bug Bounty Program',
   bug_bounty_repo_landing: 'Capgo Backend & Landing',
   bug_bounty_repo_landing_desc: 'Main Capgo repository including backend services and landing website',
@@ -2440,6 +2442,8 @@ const messages = {
   security_out_of_scope_1: 'Clickjacking on pages with no sensitive actions.',
   security_out_of_scope_10: 'Deadlinks',
   security_out_of_scope_11: 'User enumeration',
+  security_out_of_scope_12:
+    'SSRF or DNS spoofing reports against webhooks or website preview. These features run on serverless infrastructure and cannot be used to reach private Capgo infrastructure, so they are not exploitable in our environment.',
   security_supabase_limitations_title: 'Known Supabase Auth Limitations',
   security_supabase_limitations_intro:
     'Some findings are repeatedly reported and tied to Supabase Auth behavior. These are only treated as Supabase-side issues when they can be reproduced in a shared Supabase demo project configured like ours and when a Supabase configuration change fixes the behavior without changing Capgo security rules. If the fix requires changing Capgo-owned SQL, RPCs, RLS policies, functions, or app logic, that is a Capgo issue and should be reported to us.',
