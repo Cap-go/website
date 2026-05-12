@@ -108,12 +108,18 @@ const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
-<meta name="theme-color" content="#456b9a" />
+<meta name="color-scheme" content="dark light" />
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#111827" media="(prefers-color-scheme: dark)" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="format-detection" content="telephone=no" />
 <meta name="generator" content={Astro.generator} />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-title" content={baseDomain()} />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta property="keywords" content={keywords} />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="keywords" content={keywords} />
 
 <link rel="canonical" href={canonicalString} />
 <link rel="apple-touch-icon" href="/capgo.webp?v=2" />
@@ -169,17 +175,17 @@ const titleFix = titleString || (imageUrl.split('/').pop() || '.').split('.')[0]
 <meta property="og:description" content={displayDescription} />
 
 <!-- Twitter -->
-<meta property="twitter:url" content={urlString} />
-<meta property="twitter:site" content="@Capgo_app" />
-<meta property="twitter:title" content={titleString} />
-<meta property="twitter:image" content={imageUrl} />
-<meta property="twitter:app:id:iphone" content={appName} />
-<meta property="twitter:app:name:iphone" content="1602316563" />
-<meta property="twitter:creator" content="@martindonadieu" />
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:description" content={displayDescription} />
-<meta property="twitter:app:id:googleplay" content="ee.forgr.capgo" />
-<meta property="twitter:app:name:googleplay" content={appName} />
+<meta name="twitter:url" content={urlString} />
+<meta name="twitter:site" content="@Capgo_app" />
+<meta name="twitter:title" content={titleString} />
+<meta name="twitter:image" content={imageUrl} />
+<meta name="twitter:app:id:iphone" content="1602316563" />
+<meta name="twitter:app:name:iphone" content={appName} />
+<meta name="twitter:creator" content="@martindonadieu" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content={displayDescription} />
+<meta name="twitter:app:id:googleplay" content="ee.forgr.capgo" />
+<meta name="twitter:app:name:googleplay" content={appName} />
 
 <!-- @ts-ignore -->
 <script is:inline hid="seo-schema-graph" type="application/ld+json" set:html={JSON.stringify(ldJSON)} />
