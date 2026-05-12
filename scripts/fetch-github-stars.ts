@@ -181,14 +181,21 @@ ${batch
     let response: Response | null = null
 
     for (let attempt = 1; attempt <= 5; attempt++) {
-      response = await fetch('https://api.github.com/graphql', {
-        method: 'POST',
-        headers: {
-          ...githubHeaders,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ query }),
-      })
+      try {
+        response = await fetch('https://api.github.com/graphql', {
+          method: 'POST',
+          headers: {
+            ...githubHeaders,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ query }),
+        })
+      } catch (error) {
+        const delayMs = Math.min(30000, attempt * 5000)
+        console.warn(`Error fetching repository stats batch ${Math.floor(i / batchSize) + 1}, retrying in ${Math.ceil(delayMs / 1000)}s:`, error)
+        await sleep(delayMs)
+        continue
+      }
 
       if (response.ok) break
 
@@ -337,7 +344,7 @@ async function main() {
     }
   }
 
-  const cachedContributors = REFRESH_CONTRIBUTORS ? null : getCachedContributors(previousStats, capgoRepoRefs)
+  const cachedContributors = REFRESH_STATS || REFRESH_CONTRIBUTORS ? null : getCachedContributors(previousStats, capgoRepoRefs)
   const contributorsByRepoKey: Record<string, number> = cachedContributors?.contributorsByRepoKey ?? {}
   let contributorCount = cachedContributors?.contributorCount ?? 0
 
@@ -439,4 +446,7 @@ async function main() {
   console.log(`Saved OSS stats to ${STATS_OUTPUT_PATH}`)
 }
 
-main().catch(console.error)
+main().catch((error) => {
+  console.error(error)
+  process.exit(1)
+})

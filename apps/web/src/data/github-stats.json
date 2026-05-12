@@ -1,12 +1,12 @@
 {
-  "repositoryCount": 116,
+  "repositoryCount": 119,
   "contributorCount": 534,
-  "versionCount": 7570,
-  "releaseCount": 3276,
-  "closedIssueCount": 958,
+  "versionCount": 7587,
+  "releaseCount": 3286,
+  "closedIssueCount": 959,
   "mergedPullRequestCount": 3147,
-  "resolvedItemCount": 4105,
-  "totalStars": 2212,
+  "resolvedItemCount": 4106,
+  "totalStars": 2219,
   "repositories": {
     "Cap-go/capacitor-native-market": {
       "url": "https://github.com/Cap-go/capacitor-native-market",
@@ -718,6 +718,33 @@
       "releases": 3,
       "closedIssues": 0,
       "mergedPullRequests": 1
+    },
+    "Cap-go/capacitor-pretty-toast": {
+      "url": "https://github.com/Cap-go/capacitor-pretty-toast",
+      "stars": 1,
+      "contributors": 1,
+      "versionTags": 0,
+      "releases": 0,
+      "closedIssues": 0,
+      "mergedPullRequests": 0
+    },
+    "Cap-go/capacitor-patch": {
+      "url": "https://github.com/Cap-go/capacitor-patch",
+      "stars": 0,
+      "contributors": 1,
+      "versionTags": 3,
+      "releases": 3,
+      "closedIssues": 0,
+      "mergedPullRequests": 0
+    },
+    "Cap-go/capacitor-supabase": {
+      "url": "https://github.com/Cap-go/capacitor-supabase",
+      "stars": 6,
+      "contributors": 1,
+      "versionTags": 14,
+      "releases": 7,
+      "closedIssues": 1,
+      "mergedPullRequests": 0
     },
     "Cap-go/capacitor-incoming-call-kit": {
       "url": "https://github.com/Cap-go/capacitor-incoming-call-kit",

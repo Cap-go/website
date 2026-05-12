@@ -1,6 +1,6 @@
 {
   "@capgo/native-market": 23563,
-  "@capgo/native-navigation": 987,
+  "@capgo/capacitor-native-navigation": 419,
   "@capgo/capacitor-transitions": 388,
   "@capgo/capacitor-native-biometric": 611572,
   "@capgo/camera-preview": 46687,
@@ -79,7 +79,9 @@
   "@capgo/capacitor-age-range": 612,
   "@capgo/capacitor-persona": 480,
   "@capgo/capacitor-intune": 405,
+  "@capgo/capacitor-pretty-toast": 0,
   "@capgo/capacitor-patch": 0,
+  "@capgo/capacitor-supabase": 0,
   "@capgo/capacitor-incoming-call-kit": 667,
   "@capgo/capacitor-install-referrer": 194,
   "@capgo/capacitor-android-age-signals": 967,
@@ -129,6 +131,5 @@
   "@capgo/capacitor-brightness": 1749,
   "@capgo/capacitor-light-sensor": 561,
   "@capgo/capacitor-video-thumbnails": 1664,
-  "@capgo/capacitor-intent-launcher": 3905,
-  "@capgo/capacitor-recaptcha": 0
+  "@capgo/capacitor-intent-launcher": 3905
 }

@@ -152,7 +152,7 @@ async function main() {
 
   // Fetch packages with concurrency limit to avoid rate limiting
   const concurrency = Math.max(1, Number.isFinite(CONCURRENCY) ? CONCURRENCY : 20)
-  const downloads: Record<string, number> = { ...cachedDownloads }
+  const downloads: Record<string, number> = {}
 
   for (let i = 0; i < packageNames.length; i += concurrency) {
     const batch = packageNames.slice(i, i + concurrency)
