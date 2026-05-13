@@ -583,6 +583,7 @@ const messages = {
   centralized_management: 'Centralized Management',
   channel_management: 'Channel management',
   chat: 'Chat',
+  choose_an_order: 'Choose an order',
   choose_from_your_capgo_projects: 'Choose from your Capgo projects',
   ci_cd_integration: 'Mobile CI/CD',
   cities_worldwide: 'Cities worldwide',
@@ -2482,6 +2483,8 @@ const messages = {
   security_reporting_guidelines_1: 'Submit your findings through our GitHub Security Advisory:',
   security_reporting_guidelines_2: 'Do provide sufficient information to reproduce the problem, so we will be able to resolve it as quickly as possible.',
   security_reporting_guidelines_title: 'Reporting guidelines:',
+  search_plugins_by_name_or_description: 'Search plugins by name or description',
+  search_plugins_by_name_or_description_placeholder: 'Search plugins by name or description...',
   security_testing_guidelines_1:
     "Do not run automated scanners on other customer projects. Running automated scanners can run up costs for our users. Aggressively configured scanners might inadvertently disrupt services, exploit vulnerabilities, lead to system instability or breaches and violate Terms of Service from our upstream providers. Our own security systems won't be able to distinguish hostile reconnaissance from whitehat research. If you wish to run an automated scanner, notify us at security@capgo.app and only run it on your own Capgo project. Do NOT attack projects of other customers.",
   security_testing_guidelines_2:
@@ -3681,6 +3684,8 @@ const messages = {
   somebody_developed_an_app_for_you_but_it_doesn_t_meet_your_expectations_and_the_quality_of_the_final_product_is_really_low:
     "Somebody developed an app for you but it doesn't meet your expectations and the quality of the final product is really low.",
   something_doesn_t_work_but_you_don_t_know_why: "Something doesn't work but you don't know why",
+  sort_by_prefix: 'Sort:',
+  sort_plugins_by: 'Sort plugins by',
   source_code_protection_1: "As an open source project, Capgo's code is publicly available on",
   source_code_protection_2: 'The code is continuously audited by: ',
   source_code_protection_3: ', with critical issues blocked from production.',
