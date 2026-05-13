@@ -214,7 +214,7 @@ const content = {
             >
               <span class="flex min-w-0 items-center gap-2">
                 <span class="shrink-0 text-gray-400">{m.sort_by_prefix({}, { locale })}</span>
-                <span id="plugin-sort-current-label" class="block truncate font-semibold text-white">
+                <span id="plugin-sort-current-label" class="block truncate font-semibold text-white" aria-live="polite" aria-atomic="true">
                   {defaultSortOption.label}
                 </span>
               </span>
@@ -350,9 +350,9 @@ const content = {
           {plugins.length}+ {m.plugins({}, { locale: Astro.locals.locale })} available
         </div>
 
-        <h1 class="font-pj pb-6 text-5xl font-bold text-white md:text-7xl">
+        <h2 class="font-pj pb-6 text-5xl font-bold text-white md:text-7xl">
           {m.supercharge_your_app({}, { locale: Astro.locals.locale })}
-        </h1>
+        </h2>
 
         <p class="mx-auto mb-12 max-w-3xl text-xl leading-relaxed text-gray-300 md:text-2xl">
           {m.powerful_app_plugins_description({}, { locale: Astro.locals.locale })}
