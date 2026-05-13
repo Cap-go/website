@@ -27,6 +27,10 @@ jobs:
       translation: ${{ steps.filter.outputs.translation }}
       outrank: ${{ steps.filter.outputs.outrank }}
     steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
         with:
           fetch-depth: 0
