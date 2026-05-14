@@ -182,6 +182,7 @@ const pluginEntries = [
   ['Screen Recorder', 'screen-recorder'],
   ['Shake', 'shake'],
   ['Share Target', 'share-target'],
+  ['Sheets', 'sheets'],
   ['SIM', 'sim'],
   ['Speech Recognition', 'speech-recognition'],
   ['Speech Synthesis', 'speech-synthesis'],

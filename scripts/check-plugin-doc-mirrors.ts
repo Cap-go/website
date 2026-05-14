@@ -4,7 +4,7 @@ import { join, relative, resolve } from 'node:path'
 const canonicalRoot = resolve('apps/docs/src/content/docs/docs/plugins')
 const mirrorRoot = resolve('src/content/docs/docs/plugins')
 // These plugin docs intentionally exist in both docs trees and must stay byte-for-byte aligned.
-const mirroredPluginDirs = ['contentsquare', 'live-activities', 'transitions', 'twilio-video', 'widget-kit'] as const
+const mirroredPluginDirs = ['contentsquare', 'live-activities', 'sheets', 'transitions', 'twilio-video', 'widget-kit'] as const
 
 function listFiles(root: string): string[] {
   const entries = readdirSync(root, { withFileTypes: true })

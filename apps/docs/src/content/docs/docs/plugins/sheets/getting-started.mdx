@@ -1,0 +1,359 @@
+---
+title: Getting Started
+description: Install @capgo/capacitor-sheets and add framework-agnostic sheets to a Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+
+<Steps>
+1. **Install the package**
+
+   ```bash
+   npm install @capgo/capacitor-sheets
+   ```
+
+2. **Register the web components**
+
+   ```ts
+   import '@capgo/capacitor-sheets';
+   ```
+
+3. **Add the viewport setting for safe areas**
+
+   ```html
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+   ```
+
+4. **Render a sheet**
+
+   ```html
+   <cap-sheet-trigger for="booking-sheet" action="present">Open route</cap-sheet-trigger>
+
+   <cap-sheet id="booking-sheet" detents="18em 32em" content-placement="bottom">
+     <cap-sheet-portal>
+       <cap-sheet-view>
+         <cap-sheet-backdrop></cap-sheet-backdrop>
+         <cap-sheet-content class="route-sheet">
+           <cap-sheet-bleeding-background></cap-sheet-bleeding-background>
+           <cap-sheet-handle></cap-sheet-handle>
+           <cap-sheet-title>Evening route</cap-sheet-title>
+           <cap-sheet-description>Choose a route and confirm pickup.</cap-sheet-description>
+           <cap-sheet-trigger action="dismiss">Done</cap-sheet-trigger>
+         </cap-sheet-content>
+       </cap-sheet-view>
+     </cap-sheet-portal>
+   </cap-sheet>
+   ```
+
+   ```css
+   .route-sheet {
+     width: min(100%, 34em);
+     padding: 0 1.25em 1.25em;
+   }
+   ```
+</Steps>
+
+<Aside type="note">
+  There is no native plugin registration step. Run `npx cap sync` only as part of your normal Capacitor workflow when you need to sync web assets or native project changes.
+</Aside>
+
+## Capacitor Safe Areas
+
+Safe areas are enabled by default through `safe-area="auto"`. The sheet viewport reads both browser environment values and Capacitor fallback variables:
+
+```css
+env(safe-area-inset-top)
+env(safe-area-inset-bottom)
+env(safe-area-inset-left)
+env(safe-area-inset-right)
+var(--safe-area-inset-top)
+var(--safe-area-inset-bottom)
+var(--safe-area-inset-left)
+var(--safe-area-inset-right)
+```
+
+Choose the protected edges per sheet:
+
+```html
+<cap-sheet safe-area="auto"></cap-sheet>
+<cap-sheet safe-area="bottom left right"></cap-sheet>
+<cap-sheet safe-area="none"></cap-sheet>
+```
+
+For apps with overlay status bars or system bars, keep the native plugins responsible for exposing correct inset values:
+
+```ts
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    StatusBar: {
+      overlaysWebView: true,
+    },
+    Keyboard: {
+      resize: 'body',
+      resizeOnFullScreen: true,
+    },
+    SystemBars: {
+      insetsHandling: 'css',
+    },
+  },
+};
+
+export default config;
+```
+
+Keyboard handling is controlled by `native-focus-scroll-prevention`, which defaults to `true`. Disable it only when your app already owns keyboard avoidance:
+
+```html
+<cap-sheet native-focus-scroll-prevention="false"></cap-sheet>
+```
+
+## Imperative Control
+
+All framework helpers configure the same underlying custom element. You can also control a sheet directly:
+
+```ts
+const sheet = document.querySelector('cap-sheet');
+
+await sheet?.present();
+await sheet?.stepTo(2);
+await sheet?.step('down');
+await sheet?.dismiss();
+```
+
+Listen to events for controlled state, analytics, or coordinated animation:
+
+```ts
+sheet?.addEventListener('cap-sheet-presented-change', (event) => {
+  console.log(event.detail.presented);
+});
+
+sheet?.addEventListener('cap-sheet-active-detent-change', (event) => {
+  console.log(event.detail.activeDetent);
+});
+
+sheet?.addEventListener('cap-sheet-travel', (event) => {
+  console.log(event.detail.progress);
+});
+```
+
+## React
+
+```tsx
+import { useEffect, useRef } from 'react';
+import { setupSheet } from '@capgo/capacitor-sheets/react';
+import '@capgo/capacitor-sheets';
+
+export function BookingSheet() {
+  const sheetRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!sheetRef.current) return;
+
+    return setupSheet(sheetRef.current, {
+      detents: ['18em', '32em'],
+      contentPlacement: 'bottom',
+      onPresentedChange: ({ presented }) => console.log({ presented }),
+    });
+  }, []);
+
+  return (
+    <cap-sheet id="booking-sheet" ref={sheetRef}>
+      <cap-sheet-trigger action="present">Open</cap-sheet-trigger>
+      <cap-sheet-view>
+        <cap-sheet-backdrop />
+        <cap-sheet-content>
+          <cap-sheet-handle />
+          <cap-sheet-title>React sheet</cap-sheet-title>
+        </cap-sheet-content>
+      </cap-sheet-view>
+    </cap-sheet>
+  );
+}
+```
+
+Importing from `@capgo/capacitor-sheets/react` also registers JSX typings for the custom elements. If TypeScript still reports unknown tags, add a declaration file inside your source tree:
+
+```ts
+// src/capgo-sheets.d.ts
+import '@capgo/capacitor-sheets/react';
+```
+
+## Vue
+
+```vue
+<script setup lang="ts">
+import { onMounted, onUnmounted, ref } from 'vue';
+import { setupSheet } from '@capgo/capacitor-sheets/vue';
+import '@capgo/capacitor-sheets';
+
+const sheetRef = ref<HTMLElement | null>(null);
+let cleanup: (() => void) | undefined;
+
+onMounted(() => {
+  if (sheetRef.value) {
+    cleanup = setupSheet(sheetRef.value, {
+      detents: ['18em', '32em'],
+      contentPlacement: 'bottom',
+    });
+  }
+});
+
+onUnmounted(() => cleanup?.());
+</script>
+
+<template>
+  <cap-sheet id="booking-sheet" ref="sheetRef">
+    <cap-sheet-trigger action="present">Open</cap-sheet-trigger>
+    <cap-sheet-view>
+      <cap-sheet-backdrop />
+      <cap-sheet-content>
+        <cap-sheet-handle />
+        <cap-sheet-title>Vue sheet</cap-sheet-title>
+      </cap-sheet-content>
+    </cap-sheet-view>
+  </cap-sheet>
+</template>
+```
+
+## Angular
+
+```ts
+import { AfterViewInit, Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, ViewChild } from '@angular/core';
+import { setupSheet } from '@capgo/capacitor-sheets/angular';
+import '@capgo/capacitor-sheets';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: `
+    <cap-sheet id="booking-sheet" #sheet>
+      <cap-sheet-trigger action="present">Open</cap-sheet-trigger>
+      <cap-sheet-view>
+        <cap-sheet-backdrop></cap-sheet-backdrop>
+        <cap-sheet-content>
+          <cap-sheet-handle></cap-sheet-handle>
+          <cap-sheet-title>Angular sheet</cap-sheet-title>
+        </cap-sheet-content>
+      </cap-sheet-view>
+    </cap-sheet>
+  `,
+})
+export class AppComponent implements AfterViewInit {
+  @ViewChild('sheet', { static: true }) sheet?: ElementRef<HTMLElement>;
+
+  ngAfterViewInit(): void {
+    if (this.sheet?.nativeElement) {
+      setupSheet(this.sheet.nativeElement, {
+        detents: ['18em', '32em'],
+        contentPlacement: 'bottom',
+      });
+    }
+  }
+}
+```
+
+## Svelte
+
+```svelte
+<script lang="ts">
+  import { sheet } from '@capgo/capacitor-sheets/svelte';
+  import '@capgo/capacitor-sheets';
+</script>
+
+<cap-sheet id="booking-sheet" use:sheet={{ detents: ['18em', '32em'], contentPlacement: 'bottom' }}>
+  <cap-sheet-trigger action="present">Open</cap-sheet-trigger>
+  <cap-sheet-view>
+    <cap-sheet-backdrop />
+    <cap-sheet-content>
+      <cap-sheet-handle />
+      <cap-sheet-title>Svelte sheet</cap-sheet-title>
+    </cap-sheet-content>
+  </cap-sheet-view>
+</cap-sheet>
+```
+
+## Solid
+
+```tsx
+import { onCleanup, onMount } from 'solid-js';
+import { setupSheet } from '@capgo/capacitor-sheets/solid';
+import '@capgo/capacitor-sheets';
+
+export function BookingSheet() {
+  let sheetEl!: HTMLElement;
+
+  onMount(() => {
+    const cleanup = setupSheet(sheetEl, {
+      detents: ['18em', '32em'],
+      contentPlacement: 'bottom',
+    });
+
+    onCleanup(cleanup);
+  });
+
+  return (
+    <cap-sheet id="booking-sheet" ref={sheetEl}>
+      <cap-sheet-trigger action="present">Open</cap-sheet-trigger>
+      <cap-sheet-view>
+        <cap-sheet-backdrop />
+        <cap-sheet-content>
+          <cap-sheet-handle />
+          <cap-sheet-title>Solid sheet</cap-sheet-title>
+        </cap-sheet-content>
+      </cap-sheet-view>
+    </cap-sheet>
+  );
+}
+```
+
+## Components
+
+| Element | Purpose |
+| --- | --- |
+| `cap-sheet` | Sheet state, detents, gestures, modal behavior, and events |
+| `cap-sheet-trigger` | Declarative present, dismiss, toggle, and step actions |
+| `cap-sheet-portal` | Optional body portal for overlay layering |
+| `cap-sheet-view` | Fixed viewport host with safe-area and keyboard padding |
+| `cap-sheet-backdrop` | Progress-synced backdrop |
+| `cap-sheet-content` | Accessible sheet surface |
+| `cap-sheet-bleeding-background` | Background extension for rounded edge sheets |
+| `cap-sheet-handle` | Draggable and keyboard-accessible detent handle |
+| `cap-sheet-title` | Accessible title |
+| `cap-sheet-description` | Accessible description |
+| `cap-sheet-special-wrapper` | Composition hook for detached sheets, cards, and lightboxes |
+| `cap-sheet-stack` | Stacked sheet grouping |
+| `cap-sheet-outlet` | Progress outlet for depth, parallax, and page effects |
+| `cap-scroll` | Scroll progress helper |
+| `cap-fixed` | Fixed layer helper |
+| `cap-island` | Related floating island content |
+| `cap-external-overlay` | Overlay content managed outside the sheet tree |
+
+## Main Options
+
+| Option | Attribute | Default | Description |
+| --- | --- | --- | --- |
+| `contentPlacement` | `content-placement` | `bottom` | `top`, `bottom`, `left`, `right`, or `center` |
+| `detents` | `detents` | none | Space-separated CSS lengths such as `18em 32em` |
+| `safeArea` | `safe-area` | `auto` | Protected safe-area edges |
+| `swipe` | `swipe` | `true` | Enable pointer, touch, trackpad, and wheel gestures |
+| `swipeDismissal` | `swipe-dismissal` | `true` | Allow gestures to dismiss to detent `0` |
+| `inertOutside` | `inert-outside` | `true` | Prevent interaction behind modal sheets |
+| `focusTrap` | `focus-trap` | `true` | Keep keyboard focus inside the sheet |
+| `closeOnOutsideClick` | `close-on-outside-click` | `true` | Dismiss when clicking the backdrop or view |
+| `closeOnEscape` | `close-on-escape` | `true` | Dismiss when pressing Escape |
+| `nativeFocusScrollPrevention` | `native-focus-scroll-prevention` | `true` | Keep focused inputs visible above the keyboard |
+| `themeColorDimming` | `theme-color-dimming` | `auto` | Dim the WebView theme color while modal |
+
+## Available Entrypoints
+
+- `@capgo/capacitor-sheets`
+- `@capgo/capacitor-sheets/react`
+- `@capgo/capacitor-sheets/vue`
+- `@capgo/capacitor-sheets/angular`
+- `@capgo/capacitor-sheets/svelte`
+- `@capgo/capacitor-sheets/solid`

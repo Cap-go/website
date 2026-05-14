@@ -23,6 +23,7 @@ const actionDefinitionRows =
   String.raw`@capgo/native-market|github.com/Cap-go|Deep link users directly to your app page on Google Play Store or Apple App Store|https://github.com/Cap-go/capacitor-native-market/|Native Market
 @capgo/capacitor-native-navigation|github.com/Cap-go|Render native navbars, tabbars, and transition shells over a full-screen Capacitor WebView|https://github.com/Cap-go/capacitor-native-navigation/|Native Navigation
 @capgo/capacitor-transitions|github.com/Cap-go|Add Ionic-style page transitions and iOS edge swipe-back gestures without Ionic UI|https://github.com/Cap-go/capacitor-transitions/|Transitions
+@capgo/capacitor-sheets|github.com/Cap-go|Framework-agnostic sheets, drawers, dialogs, and overlay primitives optimized for Capacitor apps|https://github.com/Cap-go/capacitor-sheets/|Sheets
 @capgo/capacitor-native-biometric|github.com/Cap-go|Secure authentication using Face ID, Touch ID, and Android biometric APIs|https://github.com/Cap-go/capacitor-native-biometric/|Native Biometric
 @capgo/camera-preview|github.com/Cap-go|Display live camera feed as overlay with customizable controls and capture capabilities|https://github.com/Cap-go/capacitor-camera-preview/|Camera Preview
 @capgo/capacitor-updater|github.com/Cap-go|Deploy live updates instantly to your users without app store review delays|https://github.com/Cap-go/capacitor-updater/|Updater
@@ -160,6 +161,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/native-market': 'ArchiveBoxArrowDown',
   '@capgo/capacitor-native-navigation': 'DevicePhoneMobile',
   '@capgo/capacitor-transitions': 'ArrowsRightLeft',
+  '@capgo/capacitor-sheets': 'ArrowsPointingOut',
   '@capgo/capacitor-native-biometric': 'FingerPrint',
   '@capgo/camera-preview': 'Camera',
   '@capgo/capacitor-updater': 'ArrowPath',
