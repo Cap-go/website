@@ -96,7 +96,7 @@ const rows: CompareSection[] = [
         value: () => true,
       },
       {
-        label: 'MCP Server',
+        label: m.mcp_server({}, { locale: Astro.locals.locale }),
         value: () => true,
       },
     ],
@@ -269,7 +269,7 @@ const rows: CompareSection[] = [
         value: (plan: Database['public']['Tables']['plans']['Row']) => plan.name === 'Enterprise',
       },
       {
-        label: 'Security questionnaires',
+        label: m.security_questionnaires({}, { locale: Astro.locals.locale }),
         value: (plan: Database['public']['Tables']['plans']['Row']) => plan.name === 'Enterprise',
       },
     ],

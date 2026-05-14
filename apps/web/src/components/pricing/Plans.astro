@@ -32,7 +32,7 @@ function planHighlights(plan: Database['public']['Tables']['plans']['Row']) {
     `${numberWithSpaces(plan.bandwidth)}${plan.name === 'Enterprise' ? '+' : ''} GiB/${m.month({}, { locale: Astro.locals.locale })} ${m.of_bandwidth({}, { locale: Astro.locals.locale })}`,
     `${numberWithSpaces(plan.storage)}${plan.name === 'Enterprise' ? '+' : ''} GiB storage`,
     m.unlimited_live_updates({}, { locale: Astro.locals.locale }),
-    'MCP Server',
+    m.mcp_server({}, { locale: Astro.locals.locale }),
   ]
 
   if (plan.build_time_unit && plan.build_time_unit > 0) {
@@ -40,7 +40,7 @@ function planHighlights(plan: Database['public']['Tables']['plans']['Row']) {
   }
 
   if (plan.name === 'Enterprise') {
-    highlights.push('Security questionnaires')
+    highlights.push(m.security_questionnaires({}, { locale: Astro.locals.locale }))
   }
 
   return highlights
