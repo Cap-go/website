@@ -95,6 +95,10 @@ const rows: CompareSection[] = [
         label: 'Audit logs',
         value: () => true,
       },
+      {
+        label: 'MCP Server',
+        value: () => true,
+      },
     ],
   },
   {
@@ -262,6 +266,10 @@ const rows: CompareSection[] = [
       },
       {
         label: 'Signed NDAs & DPAs',
+        value: (plan: Database['public']['Tables']['plans']['Row']) => plan.name === 'Enterprise',
+      },
+      {
+        label: 'Security questionnaires',
         value: (plan: Database['public']['Tables']['plans']['Row']) => plan.name === 'Enterprise',
       },
     ],
