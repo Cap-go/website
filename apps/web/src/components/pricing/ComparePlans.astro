@@ -95,6 +95,10 @@ const rows: CompareSection[] = [
         label: 'Audit logs',
         value: () => true,
       },
+      {
+        label: m.mcp_server({}, { locale: Astro.locals.locale }),
+        value: () => true,
+      },
     ],
   },
   {
@@ -262,6 +266,10 @@ const rows: CompareSection[] = [
       },
       {
         label: 'Signed NDAs & DPAs',
+        value: (plan: Database['public']['Tables']['plans']['Row']) => plan.name === 'Enterprise',
+      },
+      {
+        label: m.security_questionnaires({}, { locale: Astro.locals.locale }),
         value: (plan: Database['public']['Tables']['plans']['Row']) => plan.name === 'Enterprise',
       },
     ],

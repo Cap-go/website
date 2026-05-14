@@ -1761,6 +1761,7 @@ const messages = {
   mau: 'MAU',
   mau_counting_explanation:
     'We count MAU (Monthly Active Users) by tracking unique users who open your app within a 30-day period. Each user is counted once, regardless of how many times they engage with the app.',
+  mcp_server: 'MCP Server',
   mention_issue_before_working: 'When you work on an issue, mention so in the issue comments <em>before</em> you start working on the issue.',
   migration_guide: 'Migration Guide',
   monitor_adoption_and_performance: 'Monitor adoption and performance metrics',
@@ -2447,6 +2448,7 @@ const messages = {
   seamless_integration_with_your_capgo_account: 'Seamless integration with your Capgo account',
   seamless_third_party_sdk: 'Wrap third-party SDKs in clean Capacitor APIs with TypeScript definitions, documentation, examples, and long-term maintenance.',
   security_and_compliance: 'Security & Compliance',
+  security_questionnaires: 'Security questionnaires',
   security_closing:
     'We strive to resolve all problems as quickly as possible, and we would like to play an active role in the ultimate publication on the problem after it is resolved.',
   security_compliance: 'Security & Compliance',
