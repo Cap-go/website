@@ -70,10 +70,10 @@ function assertInsideDirectory(directory: string, filePath: string): void {
   }
 }
 
-function toIsoDate(value: string | undefined, fallback: string): string {
-  const date = new Date(value || fallback)
-  if (Number.isNaN(date.getTime())) return new Date(fallback).toISOString()
-  return date.toISOString()
+function toDate(value: string | undefined, fallback: Date): Date {
+  const date = value ? new Date(value) : new Date(fallback)
+  if (Number.isNaN(date.getTime())) return new Date(fallback)
+  return date
 }
 
 function firstText(content: string, maxLength = 155): string {
@@ -123,7 +123,7 @@ function writeGithubOutput(files: string[], articleCount: number): void {
   appendFileSync(process.env.GITHUB_OUTPUT, 'EOF\n')
 }
 
-function writeArticle(article: OutrankArticle, payloadTimestamp: string, blogDirectory: string): string {
+function writeArticle(article: OutrankArticle, payloadTimestamp: Date, blogDirectory: string): string {
   const title = article.title?.trim()
   if (!title) throw new Error(`Outrank article is missing title: ${JSON.stringify(article)}`)
   if (!article.content_markdown?.trim()) throw new Error(`Outrank article "${title}" is missing content_markdown.`)
@@ -138,8 +138,8 @@ function writeArticle(article: OutrankArticle, payloadTimestamp: string, blogDir
         .filter(Boolean)
     : []
   const markdown = normalizeMarkdown(article.content_markdown, title)
-  const createdAt = toIsoDate(article.created_at, payloadTimestamp)
-  const updatedAt = toIsoDate(payloadTimestamp, createdAt)
+  const createdAt = toDate(article.created_at, payloadTimestamp)
+  const updatedAt = new Date(payloadTimestamp)
   const tag = tags.length > 0 ? tags.join(', ') : 'Development'
 
   const frontmatter = {
@@ -180,7 +180,7 @@ function main(): void {
   const articles = payload.data?.articles || []
   if (articles.length === 0) throw new Error('Outrank payload does not contain any articles.')
 
-  const payloadTimestamp = toIsoDate(payload.timestamp, new Date().toISOString())
+  const payloadTimestamp = toDate(payload.timestamp, new Date())
   const blogDirectory = process.env.OUTRANK_BLOG_DIR || DEFAULT_BLOG_DIR
 
   if (!existsSync(blogDirectory)) mkdirSync(blogDirectory, { recursive: true })
