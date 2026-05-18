@@ -34,9 +34,9 @@ Automate your iOS and Android builds directly from your GitHub repository. With 
 Before setting up the workflow, make sure you have:
 
 - A Capgo account with an active subscription and a [Capgo API key](/docs/webapp/api-keys/)
-- Your app registered in Capgo (`npx @capgo/cli@latest app add` if not)
-- Build credentials configured locally with `npx @capgo/cli@latest build init` — see [Managing Credentials](/docs/cli/cloud-build/credentials/) for the wizard walkthrough
-- A successful local build (`npx @capgo/cli@latest build com.example.app --platform android --build-mode debug`) — CI is not the place to debug your first build
+- Your app registered in Capgo (`bunx @capgo/cli@latest app add` if not)
+- Build credentials configured locally with `bunx @capgo/cli@latest build init` — see [Managing Credentials](/docs/cli/cloud-build/credentials/) for the wizard walkthrough
+- A successful local build (`bunx @capgo/cli@latest build com.example.app --platform android --build-mode debug`) — CI is not the place to debug your first build
 - The [GitHub CLI (`gh`)](https://cli.github.com/) installed and authenticated (`gh auth login`)
 
 <Aside>
@@ -64,7 +64,7 @@ The Capgo CLI can export your local credentials as a ready-to-use `.env` file. C
    Run the interactive credentials manager:
 
    ```bash
-   npx @capgo/cli@latest build credentials manage --appId com.example.app
+   bunx @capgo/cli@latest build credentials manage --appId com.example.app
    ```
 
    In the TUI, select **Export to .env**. The CLI writes `.env.capgo.<appId>` to your current directory with mode `0600` (owner-readable only) — for example, `.env.capgo.com.example.app`. When both iOS and Android are configured, both platforms' secrets land in the same file under `# === IOS ===` and `# === ANDROID ===` section headers. iOS and Android env-var names are disjoint, so combining them is conflict-free.
@@ -149,14 +149,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: '20'
-          cache: 'npm'
+          bun-version: latest
 
-      - run: npm ci
-      - run: npm run build
-      - run: npx cap sync
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+      - run: bunx cap sync
 
       - name: Trigger Capgo Build
         env:
@@ -174,7 +173,7 @@ jobs:
           KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
           PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
         run: |
-          npx @capgo/cli@latest build com.example.app \
+          bunx @capgo/cli@latest build com.example.app \
             --platform ${{ inputs.platform }} \
             --build-mode ${{ inputs.mode }}
 ```
@@ -203,14 +202,13 @@ jobs:
         platform: [ios, android]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: '20'
-          cache: 'npm'
+          bun-version: latest
 
-      - run: npm ci
-      - run: npm run build
-      - run: npx cap sync ${{ matrix.platform }}
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+      - run: bunx cap sync ${{ matrix.platform }}
 
       - name: Build ${{ matrix.platform }}
         env:
@@ -230,7 +228,7 @@ jobs:
           KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
           PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
         run: |
-          npx @capgo/cli@latest build com.example.app \
+          bunx @capgo/cli@latest build com.example.app \
             --platform ${{ matrix.platform }} \
             --build-mode release
 ```
@@ -264,14 +262,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: '20'
-          cache: 'npm'
+          bun-version: latest
 
-      - run: npm ci
-      - run: npm run build
-      - run: npx cap sync android
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+      - run: bunx cap sync android
 
       - name: Smoke build (Android debug)
         env:
@@ -281,7 +278,7 @@ jobs:
           KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
           KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
         run: |
-          npx @capgo/cli@latest build com.example.app \
+          bunx @capgo/cli@latest build com.example.app \
             --platform android \
             --build-mode debug \
             --no-playstore-upload \
@@ -306,7 +303,7 @@ Pass `--output-record <path>` to persist the build artifact URL and QR code to d
     CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
     # ...credentials...
   run: |
-    npx @capgo/cli@latest build com.example.app \
+    bunx @capgo/cli@latest build com.example.app \
       --platform android --build-mode debug \
       --output-upload --output-retention 1d \
       --output-record /tmp/build.json
@@ -315,7 +312,7 @@ Pass `--output-record <path>` to persist the build artifact URL and QR code to d
   env:
     GH_TOKEN: ${{ github.token }}
   run: |
-    URL=$(npx @capgo/cli@latest build last-output --path /tmp/build.json --field outputUrl)
+    URL=$(bunx @capgo/cli@latest build last-output --path /tmp/build.json --field outputUrl)
     if [ -n "$URL" ]; then
       gh pr comment ${{ github.event.pull_request.number }} \
         --body "Debug build ready: $URL"
@@ -341,30 +338,30 @@ By default each release build increments the build number. To pin it to a value 
   run: |
     VERSION="${GITHUB_REF#refs/tags/v}"
     # Update package.json or your version source here
-    npm version "$VERSION" --no-git-tag-version
+    bun pm version "$VERSION" --no-git-tag-version
 
 - name: Build
   env:
     CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
     # ...credentials...
   run: |
-    npx @capgo/cli@latest build com.example.app \
+    bunx @capgo/cli@latest build com.example.app \
       --platform ios --build-mode release \
       --skip-build-number-bump
 ```
 
-### Cache node_modules
+### Cache dependencies
 
-The `cache: 'npm'` option on `actions/setup-node` already caches based on `package-lock.json`. For larger projects, also cache Capacitor's native dependencies:
+`bun install` is already fast enough that a JS-deps cache rarely pays off, but Capacitor's native dependencies (CocoaPods, Gradle) are worth caching for larger projects:
 
 ```yaml
 - uses: actions/cache@v4
   with:
     path: |
-      ~/.npm
+      ~/.bun/install/cache
       ios/App/Pods
       android/.gradle
-    key: ${{ runner.os }}-capgo-${{ hashFiles('**/package-lock.json', '**/Podfile.lock') }}
+    key: ${{ runner.os }}-capgo-${{ hashFiles('**/bun.lock', '**/Podfile.lock') }}
 ```
 
 ## Troubleshooting
@@ -373,11 +370,11 @@ The `cache: 'npm'` option on `actions/setup-node` already caches based on `packa
 |---------|--------------|
 | `CAPGO_TOKEN is not set` | Secret not added, or job has no access to it (check environment/branch protections) |
 | Missing iOS / Android credential errors | `gh secret set -f` was not run, or was run against a different repo. Verify with `gh secret list` |
-| `cap sync` fails in CI but works locally | A native plugin isn't in `package.json`, or you forgot `npm ci` before `cap sync` |
-| Build succeeds but no app appears in App Store Connect | Wrong team ID, or the app record doesn't exist yet in App Store Connect. Verify locally with `npx @capgo/cli build credentials manage` |
+| `cap sync` fails in CI but works locally | A native plugin isn't in `package.json`, or you forgot `bun install` before `cap sync` |
+| Build succeeds but no app appears in App Store Connect | Wrong team ID, or the app record doesn't exist yet in App Store Connect. Verify locally with `bunx @capgo/cli build credentials manage` |
 | Build hangs after "Uploading project" | Project archive is unusually large — check that `node_modules` isn't being uploaded (it shouldn't be by default) |
 | `Provisioning profile doesn't match bundle ID` | The provisioning map points at a different bundle ID than the one Xcode is signing. Re-run `build init` to refresh the profile, then re-export with `build credentials manage` |
-| Credentials changed locally but CI still fails | Don't forget to re-export and re-push: `npx @capgo/cli build credentials manage` → `gh secret set -f .env.capgo.<appId>` |
+| Credentials changed locally but CI still fails | Don't forget to re-export and re-push: `bunx @capgo/cli build credentials manage` → `gh secret set -f .env.capgo.<appId>` |
 | Manager refuses to write the combined file | Shared config keys differ between platforms — the manager warns and asks for confirmation. Either confirm to overwrite-one-wins, or re-export per-platform with `--platform ios` / `--platform android` |
 | `build last-output` prints an empty URL | The build did not pass `--output-upload`, or it failed before producing an artifact. `outputUrl` will be `null` in the record. Branch on `[ -n "$URL" ]` before using it |
 | `build last-output` errors with `Unsupported record schemaVersion` | The runner is on an older CLI than the one that wrote the record. Pin both producer and reader to the same `@capgo/cli@latest` version |
