@@ -241,23 +241,7 @@ You only pay for actual build time used. No hidden fees.
 
 ### CI/CD Integration
 
-Add to your GitHub Actions workflow:
-
-```yaml
-- uses: oven-sh/setup-bun@v2
-  with:
-    bun-version: latest
-
-- name: Build native app
-  env:
-    CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
-  run: |
-    bun run build
-    bunx cap sync
-    bunx @capgo/cli@latest build ${{ secrets.APP_ID }} \
-      --platform both \
-      --build-mode release
-```
+Trigger Capgo Build automatically from your GitHub Actions workflow — on push, on tag, or with a manual button click. See the dedicated [GitHub Actions guide](/docs/cli/cloud-build/github-actions/) for complete workflow examples covering manual triggers, tag-based releases, and continuous debug builds.
 
 ### Local Development
 
