@@ -437,12 +437,12 @@ This approach uses the free `ipapi.co` service to determine the user's country b
 
 ### More Accurate Location Detection with Capacitor Plugins
 
-For more accurate location detection, you can use the Capacitor Geolocation plugin along with @capgo/nativegeocoder to determine the user's country with higher precision:
+For more accurate location detection, you can use the Capacitor Geolocation plugin along with @capgo/capacitor-nativegeocoder to determine the user's country with higher precision:
 
 1. First, install the required plugins:
 
 ```bash
-npm install @capacitor/geolocation @capgo/nativegeocoder
+npm install @capacitor/geolocation @capgo/capacitor-nativegeocoder
 ```
 
 2. Configure the plugins in your Capacitor project. Add the following to your `capacitor.config.ts`:
@@ -468,7 +468,7 @@ export default config;
 ```typescript
 import { Capacitor } from '@capacitor/core';
 import { Geolocation } from '@capacitor/geolocation';
-import { NativeGeocoder } from '@capgo/nativegeocoder';
+import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
 
 async function isUserInUSA() {
   try {

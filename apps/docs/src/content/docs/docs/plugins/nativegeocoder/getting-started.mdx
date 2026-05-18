@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: "Install @capgo/nativegeocoder and start using its current Capacitor API."
+description: "Install @capgo/capacitor-nativegeocoder and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
@@ -8,14 +8,14 @@ sidebar:
 ## Install
 
 ```bash
-bun add @capgo/nativegeocoder
-bunx cap sync
+npm install @capgo/capacitor-nativegeocoder
+npx cap sync
 ```
 
 ## Import
 
 ```typescript
-import { NativeGeocoder } from '@capgo/nativegeocoder';
+import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
 ```
 
 ## API Overview
@@ -25,7 +25,7 @@ import { NativeGeocoder } from '@capgo/nativegeocoder';
 Convert latitude and longitude to an address
 
 ```typescript
-import { NativeGeocoder } from '@capgo/nativegeocoder';
+import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
 
 await NativeGeocoder.reverseGeocode({} as ReverseOptions);
 ```
@@ -35,7 +35,7 @@ await NativeGeocoder.reverseGeocode({} as ReverseOptions);
 Convert an address to latitude and longitude
 
 ```typescript
-import { NativeGeocoder } from '@capgo/nativegeocoder';
+import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
 
 await NativeGeocoder.forwardGeocode({} as ForwardOptions);
 ```
