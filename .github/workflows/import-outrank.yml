@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       payload:
-        description: Raw Outrank publish_articles payload JSON for testing.
+        description: Raw Outrank publish_articles or update_article payload JSON for testing.
         required: true
         type: string
 
