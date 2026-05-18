@@ -377,7 +377,7 @@ By default each release build increments the build number. To pin it to a value 
 | Credentials changed locally but CI still fails | Don't forget to re-export and re-push: `bunx @capgo/cli build credentials manage` → `gh secret set -f .env.capgo.<appId>` |
 | Manager refuses to write the combined file | Shared config keys differ between platforms — the manager warns and asks for confirmation. Either confirm to overwrite-one-wins, or re-export per-platform with `--platform ios` / `--platform android` |
 | `build last-output` prints an empty URL | The build did not pass `--output-upload`, or it failed before producing an artifact. `outputUrl` will be `null` in the record. Branch on `[ -n "$URL" ]` before using it |
-| `build last-output` errors with `Unsupported record schemaVersion` | The runner is on an older CLI than the one that wrote the record. Pin both producer and reader to the same `@capgo/cli@latest` version |
+| `build last-output` errors with `Unsupported record schemaVersion` | The runner is on an older CLI than the one that wrote the record. Pin both producer and reader to the same explicit version (e.g. `bunx @capgo/cli@7.104.0 …` on both sides) rather than `@latest`, which floats and can drift between jobs |
 
 For platform-specific build failures, see the [Troubleshooting guide](/docs/cli/cloud-build/troubleshooting/).
 
