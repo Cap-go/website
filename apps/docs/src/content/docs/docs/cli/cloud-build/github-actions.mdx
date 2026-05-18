@@ -323,7 +323,7 @@ Pass `--output-record <path>` to persist the build artifact URL and QR code to d
 
 - `--field outputUrl` prints just the download URL (newline-terminated; safe for `URL=$(...)`).
 - `--field qrCodePngPath` prints the PNG path so you can upload it as a PR attachment.
-- `--qr` prints the rendered ASCII QR — drop it inside a markdown code fence on the PR comment for inline scannability.
+- `--qr` prints the rendered ASCII QR — drop it inside a Markdown code fence on the PR comment for inline scannability.
 
 <Aside>
 The record is only written on a successful build. Unsupported `schemaVersion` and unknown `--field` values exit non-zero, so a stale CLI in the runner fails loudly instead of silently emitting an empty URL.
