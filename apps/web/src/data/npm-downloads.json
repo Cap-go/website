@@ -15,7 +15,7 @@
   "@capgo/capacitor-appsflyer": 2383,
   "@capgo/capacitor-contentsquare": 301,
   "@capgo/capacitor-facebook-analytics": 184,
-  "@capgo/nativegeocoder": 21461,
+  "@capgo/capacitor-nativegeocoder": 0,
   "@capgo/inappbrowser": 359340,
   "@capgo/capacitor-mqtt": 745,
   "@capgo/capacitor-mute": 43300,

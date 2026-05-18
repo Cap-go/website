@@ -1,15 +1,15 @@
 ---
 locale: en
 ---
-# Using @capgo/nativegeocoder
+# Using @capgo/capacitor-nativegeocoder
 
 Capacitor plugin for native forward and reverse geocoding.
 
 ## Install
 
 ```bash
-bun add @capgo/nativegeocoder
-bunx cap sync
+npm install @capgo/capacitor-nativegeocoder
+npx cap sync
 ```
 
 ## What This Plugin Exposes
@@ -24,7 +24,7 @@ bunx cap sync
 Convert latitude and longitude to an address.
 
 ```typescript
-import { NativeGeocoder } from '@capgo/nativegeocoder';
+import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
 
 await NativeGeocoder.reverseGeocode({} as ReverseOptions);
 ```
@@ -34,7 +34,7 @@ await NativeGeocoder.reverseGeocode({} as ReverseOptions);
 Convert an address to latitude and longitude.
 
 ```typescript
-import { NativeGeocoder } from '@capgo/nativegeocoder';
+import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
 
 await NativeGeocoder.forwardGeocode({} as ForwardOptions);
 ```

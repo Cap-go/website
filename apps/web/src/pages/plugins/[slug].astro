@@ -74,6 +74,10 @@ const { slug: id } = Astro.params
 const { title, description, githubStars, npmDownloads, href, name, tutorial, icon, author } = plugin as Plugin
 
 const npmHref = name ? `https://www.npmjs.com/package/${name}` : `https://www.npmjs.com/search?q=${encodeURIComponent(title)}`
+const packageRenameNote =
+  name === '@capgo/capacitor-nativegeocoder'
+    ? 'Renamed from @capgo/nativegeocoder to @capgo/capacitor-nativegeocoder so the package name matches the Capacitor plugin repository.'
+    : undefined
 const docsHref = docsSlug ? getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`) : getRelativeLocaleUrl(locale, 'docs/plugins/')
 
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
@@ -113,14 +117,33 @@ content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.p
             <div class="flex flex-wrap items-center gap-3">
               {
                 name && (
-                  <a
-                    href={npmHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="cursor-pointer rounded-full border border-blue-400/20 bg-blue-400/10 px-3 py-1 text-sm text-blue-100 transition hover:border-blue-300/40 hover:bg-blue-400/15"
-                  >
-                    {name}
-                  </a>
+                  <>
+                    <a
+                      href={npmHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="cursor-pointer rounded-full border border-blue-400/20 bg-blue-400/10 px-3 py-1 text-sm text-blue-100 transition hover:border-blue-300/40 hover:bg-blue-400/15"
+                    >
+                      {name}
+                    </a>
+                    {packageRenameNote && (
+                      <span class="group relative inline-flex items-center">
+                        <span
+                          tabindex="0"
+                          title={packageRenameNote}
+                          class="rounded-full border border-amber-300/25 bg-amber-300/10 px-3 py-1 text-sm text-amber-100 transition outline-none group-focus-within:border-amber-200/45 group-hover:border-amber-200/45"
+                        >
+                          Renamed
+                        </span>
+                        <span
+                          role="tooltip"
+                          class="pointer-events-none absolute top-full left-1/2 z-20 mt-2 w-72 -translate-x-1/2 rounded-md border border-white/10 bg-gray-950 px-3 py-2 text-xs leading-5 text-gray-200 opacity-0 shadow-xl transition group-focus-within:opacity-100 group-hover:opacity-100"
+                        >
+                          {packageRenameNote}
+                        </span>
+                      </span>
+                    )}
+                  </>
                 )
               }
               <div class="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-sm text-gray-300">Tutorial</div>

@@ -37,7 +37,7 @@ const actionDefinitionRows =
 @capgo/capacitor-appsflyer|github.com/Cap-go|Add AppsFlyer attribution, analytics, deferred deep links, and OneLink support to your Capacitor app|https://github.com/Cap-go/capacitor-appsflyer/|AppsFlyer
 @capgo/capacitor-contentsquare|github.com/Cap-go|Integrate Contentsquare mobile analytics, consent gating, screen tracking, transactions, and session replay controls in Capacitor|https://github.com/Cap-go/capacitor-contentsquare/|Contentsquare
 @capgo/capacitor-facebook-analytics|github.com/Cap-go|Meta/Facebook App Events analytics with standard events, purchase logging, currency parameters, and advertiser tracking controls|https://github.com/Cap-go/capacitor-facebook-analytics/|Facebook Analytics
-@capgo/nativegeocoder|github.com/Cap-go|Convert addresses to coordinates and coordinates to addresses using native geocoding|https://github.com/Cap-go/capacitor-nativegeocoder/|Native Geocoder
+@capgo/capacitor-nativegeocoder|github.com/Cap-go|Convert addresses to coordinates and coordinates to addresses using native geocoding|https://github.com/Cap-go/capacitor-nativegeocoder/|Native Geocoder
 @capgo/inappbrowser|github.com/Cap-go|Open web pages in a customizable in-app browser without leaving your application|https://github.com/Cap-go/capacitor-inappbrowser/|In App Browser
 @capgo/capacitor-mqtt|github.com/Cap-go|MQTT support for real-time messaging across iOS, Android, and Web.|https://github.com/Cap-go/capacitor-mqtt/|MQTT
 @capgo/capacitor-mute|github.com/Cap-go|Detect device mute switch state for iOS devices to handle audio playback appropriately|https://github.com/Cap-go/capacitor-mute/|Mute
@@ -175,7 +175,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-appsflyer': 'ChartBar',
   '@capgo/capacitor-contentsquare': 'ChartBar',
   '@capgo/capacitor-facebook-analytics': 'ChartBar',
-  '@capgo/nativegeocoder': 'MapPin',
+  '@capgo/capacitor-nativegeocoder': 'MapPin',
   '@capgo/inappbrowser': 'GlobeAlt',
   '@capgo/capacitor-mqtt': 'Signal',
   '@capgo/capacitor-mute': 'SpeakerXMark',

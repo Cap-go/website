@@ -186,10 +186,10 @@ A collection of high-quality Capacitor plugins maintained by [Capgo](https://cap
 </td>
 <td align="center" width="33%">
 <h3><a href="https://github.com/Cap-go/capacitor-nativegeocoder/">Native Geocoder</a></h3>
-<p><code>@capgo/nativegeocoder</code></p>
+<p><code>@capgo/capacitor-nativegeocoder</code></p>
 <p>Convert addresses to coordinates and coordinates to addresses using native geocoding</p>
 <p>
-<a href="https://www.npmjs.com/package/@capgo/nativegeocoder"><img src="https://img.shields.io/npm/dw/@capgo/nativegeocoder?style=flat-square&label=downloads" alt="npm downloads"></a>
+<a href="https://www.npmjs.com/package/@capgo/capacitor-nativegeocoder"><img src="https://img.shields.io/npm/dw/@capgo/capacitor-nativegeocoder?style=flat-square&label=downloads" alt="npm downloads"></a>
 <a href="https://github.com/Cap-go/capacitor-nativegeocoder/"><img src="https://img.shields.io/github/stars/Cap-go/capacitor-nativegeocoder?style=flat-square&label=stars" alt="GitHub stars"></a>
 </p>
 <p><a href="https://capgo.app/plugins/capacitor-nativegeocoder/">Docs</a> | <a href="https://github.com/Cap-go/capacitor-nativegeocoder/">GitHub</a></p>
