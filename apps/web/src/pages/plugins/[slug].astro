@@ -130,12 +130,14 @@ content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.p
                       <span class="group relative inline-flex items-center">
                         <span
                           tabindex="0"
+                          aria-describedby="nativegeocoder-rename-tooltip"
                           title={packageRenameNote}
                           class="rounded-full border border-amber-300/25 bg-amber-300/10 px-3 py-1 text-sm text-amber-100 transition outline-none group-focus-within:border-amber-200/45 group-hover:border-amber-200/45"
                         >
                           Renamed
                         </span>
                         <span
+                          id="nativegeocoder-rename-tooltip"
                           role="tooltip"
                           class="pointer-events-none absolute top-full left-1/2 z-20 mt-2 w-72 -translate-x-1/2 rounded-md border border-white/10 bg-gray-950 px-3 py-2 text-xs leading-5 text-gray-200 opacity-0 shadow-xl transition group-focus-within:opacity-100 group-hover:opacity-100"
                         >
