@@ -296,34 +296,41 @@ The `paths` filter ensures the workflow doesn't run on doc-only changes. `--no-p
 
 For test builds, use `--no-playstore-upload` (Android) or `--no-app-store-upload` (iOS) to skip store submission. Combine with `--output-upload` to get a time-limited download URL for the binary.
 
-### Read the build output URL
+### Read the build output URL and QR code
 
-When you pass `--output-upload`, the CLI prints a download URL to stdout when the build finishes. Capture it for use in later steps:
+Pass `--output-record <path>` to persist the build artifact URL and QR code to disk when the build succeeds, then read it back in subsequent steps with `build last-output`. No log scraping, no regex.
 
 ```yaml
-- name: Build and capture URL
-  id: build
+- name: Build
   env:
     CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
     # ...credentials...
   run: |
-    URL=$(npx @capgo/cli@latest build com.example.app \
+    npx @capgo/cli@latest build com.example.app \
       --platform android --build-mode debug \
       --output-upload --output-retention 1d \
-      | tee /dev/stderr | grep -oE 'https://[^ ]+\.apk' | tail -1)
-    echo "url=$URL" >> "$GITHUB_OUTPUT"
+      --output-record /tmp/build.json
 
-- name: Comment on PR
-  uses: actions/github-script@v7
-  with:
-    script: |
-      github.rest.issues.createComment({
-        issue_number: context.payload.pull_request.number,
-        owner: context.repo.owner,
-        repo: context.repo.repo,
-        body: `Debug build ready: ${{ steps.build.outputs.url }}`
-      });
+- name: Comment on PR with build URL
+  env:
+    GH_TOKEN: ${{ github.token }}
+  run: |
+    URL=$(npx @capgo/cli@latest build last-output --path /tmp/build.json --field outputUrl)
+    if [ -n "$URL" ]; then
+      gh pr comment ${{ github.event.pull_request.number }} \
+        --body "Debug build ready: $URL"
+    fi
 ```
+
+`--output-record /tmp/build.json` writes a JSON record (with `jobId`, `status`, `outputUrl`, `qrCodeAscii`, `qrCodePngPath`, `finishedAt`) and a PNG QR code alongside at `/tmp/build.json.qr.png`. `build last-output` reads it back:
+
+- `--field outputUrl` prints just the download URL (newline-terminated; safe for `URL=$(...)`).
+- `--field qrCodePngPath` prints the PNG path so you can upload it as a PR attachment.
+- `--qr` prints the rendered ASCII QR — drop it inside a markdown code fence on the PR comment for inline scannability.
+
+<Aside>
+The record is only written on a successful build. Unsupported `schemaVersion` and unknown `--field` values exit non-zero, so a stale CLI in the runner fails loudly instead of silently emitting an empty URL.
+</Aside>
 
 ### Skip build number bumping
 
@@ -372,6 +379,8 @@ The `cache: 'npm'` option on `actions/setup-node` already caches based on `packa
 | `Provisioning profile doesn't match bundle ID` | The provisioning map points at a different bundle ID than the one Xcode is signing. Re-run `build init` to refresh the profile, then re-export with `build credentials manage` |
 | Credentials changed locally but CI still fails | Don't forget to re-export and re-push: `npx @capgo/cli build credentials manage` → `gh secret set -f .env.capgo.<appId>` |
 | Manager refuses to write the combined file | Shared config keys differ between platforms — the manager warns and asks for confirmation. Either confirm to overwrite-one-wins, or re-export per-platform with `--platform ios` / `--platform android` |
+| `build last-output` prints an empty URL | The build did not pass `--output-upload`, or it failed before producing an artifact. `outputUrl` will be `null` in the record. Branch on `[ -n "$URL" ]` before using it |
+| `build last-output` errors with `Unsupported record schemaVersion` | The runner is on an older CLI than the one that wrote the record. Pin both producer and reader to the same `@capgo/cli@latest` version |
 
 For platform-specific build failures, see the [Troubleshooting guide](/docs/cli/cloud-build/troubleshooting/).
 
