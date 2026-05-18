@@ -22,12 +22,14 @@ interface OutrankPayload {
   event_type?: string
   timestamp?: string
   data?: {
+    article?: OutrankArticle
     articles?: OutrankArticle[]
   }
 }
 
 const DEFAULT_GITHUB_EVENT_TYPE = 'outrank_publish_articles'
 const MAX_REPOSITORY_DISPATCH_BYTES = 65_000
+const SUPPORTED_OUTRANK_EVENT_TYPES = new Set(['publish_articles', 'update_article'])
 const JSON_HEADERS = {
   'content-type': 'application/json; charset=utf-8',
 }
@@ -59,14 +61,26 @@ async function secureEqual(left: string, right: string): Promise<boolean> {
   return difference === 0
 }
 
+function isSupportedEventType(eventType: string | undefined): boolean {
+  return typeof eventType === 'string' && SUPPORTED_OUTRANK_EVENT_TYPES.has(eventType)
+}
+
+function payloadArticles(payload: OutrankPayload): OutrankArticle[] {
+  if (Array.isArray(payload.data?.articles)) return payload.data.articles
+  if (payload.data?.article && typeof payload.data.article === 'object') return [payload.data.article]
+  return []
+}
+
 function validatePayload(payload: unknown): payload is OutrankPayload {
   if (!payload || typeof payload !== 'object') return false
 
   const candidate = payload as OutrankPayload
-  if (candidate.event_type !== 'publish_articles') return false
-  if (!candidate.data || !Array.isArray(candidate.data.articles)) return false
+  if (!isSupportedEventType(candidate.event_type)) return false
 
-  return candidate.data.articles.every(
+  const articles = payloadArticles(candidate)
+  if (articles.length === 0) return false
+
+  return articles.every(
     (article) =>
       typeof article?.title === 'string' && article.title.trim().length > 0 && typeof article?.content_markdown === 'string' && article.content_markdown.trim().length > 0,
   )
@@ -77,7 +91,7 @@ function normalizePayload(payload: OutrankPayload): OutrankPayload {
     event_type: payload.event_type,
     timestamp: payload.timestamp,
     data: {
-      articles: (payload.data?.articles || []).map((article) => ({
+      articles: payloadArticles(payload).map((article) => ({
         id: article.id,
         title: article.title,
         content_markdown: article.content_markdown,
@@ -85,7 +99,7 @@ function normalizePayload(payload: OutrankPayload): OutrankPayload {
         created_at: article.created_at,
         image_url: article.image_url,
         slug: article.slug,
-        tags: Array.isArray(article.tags) ? article.tags.filter((tag) => typeof tag === 'string') : [],
+        tags: Array.isArray(article.tags) ? article.tags.filter((tag) => typeof tag === 'string') : undefined,
       })),
     },
   }

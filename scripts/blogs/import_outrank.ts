@@ -26,9 +26,12 @@ interface OutrankPayload {
   event_type?: string
   timestamp?: string
   data?: {
+    article?: OutrankArticle
     articles?: OutrankArticle[]
   }
 }
+
+const SUPPORTED_OUTRANK_EVENT_TYPES = new Set(['publish_articles', 'update_article'])
 
 function readJson(path: string): unknown {
   return JSON.parse(readFileSync(path, 'utf8'))
@@ -70,7 +73,22 @@ function assertInsideDirectory(directory: string, filePath: string): void {
   }
 }
 
-function toDate(value: string | undefined, fallback: Date): Date {
+function isSupportedEventType(eventType: string | undefined): boolean {
+  return typeof eventType === 'string' && SUPPORTED_OUTRANK_EVENT_TYPES.has(eventType)
+}
+
+function payloadArticles(payload: OutrankPayload): OutrankArticle[] {
+  if (Array.isArray(payload.data?.articles)) return payload.data.articles
+  if (payload.data?.article) return [payload.data.article]
+  return []
+}
+
+function frontmatterString(frontmatter: Record<string, unknown>, key: string): string {
+  const value = frontmatter[key]
+  return typeof value === 'string' ? value : ''
+}
+
+function toDate(value: Date | string | undefined, fallback: Date): Date {
   const date = value ? new Date(value) : new Date(fallback)
   if (Number.isNaN(date.getTime())) return new Date(fallback)
   return date
@@ -131,16 +149,28 @@ function writeArticle(article: OutrankArticle, payloadTimestamp: Date, blogDirec
   const slug = toSlug(article.slug || title || article.id || '')
   if (!slug) throw new Error(`Outrank article "${title}" does not have a usable slug.`)
 
+  const filePath = join(blogDirectory, `${slug}.md`)
+  assertInsideDirectory(blogDirectory, filePath)
+
+  const existingContent = existsSync(filePath) ? readFileSync(filePath, 'utf8') : ''
+  const existingFrontmatter = existingContent ? (matter(existingContent).data as Record<string, unknown>) : {}
+  const existingTag = frontmatterString(existingFrontmatter, 'tag')
+  const existingKeywords = frontmatterString(existingFrontmatter, 'keywords')
   const tags = Array.isArray(article.tags)
     ? article.tags
         .filter((tag): tag is string => typeof tag === 'string')
         .map((tag) => tag.trim())
         .filter(Boolean)
-    : []
+    : existingTag
+        .split(',')
+        .map((tag) => tag.trim())
+        .filter(Boolean)
   const markdown = normalizeMarkdown(article.content_markdown, title)
-  const createdAt = toDate(article.created_at, payloadTimestamp)
+  const createdAt = toDate(article.created_at, toDate(existingFrontmatter.created_at as Date | string | undefined, payloadTimestamp))
   const updatedAt = new Date(payloadTimestamp)
   const tag = tags.length > 0 ? tags.join(', ') : 'Development'
+  const headImage = article.image_url ? normalizeHeadImage(article.image_url) : frontmatterString(existingFrontmatter, 'head_image') || DEFAULT_HEAD_IMAGE
+  const keywords = Array.isArray(article.tags) ? tags.join(', ') : existingKeywords || tags.join(', ')
 
   const frontmatter = {
     slug,
@@ -151,20 +181,16 @@ function writeArticle(article: OutrankArticle, payloadTimestamp: Date, blogDirec
     author_url: process.env.OUTRANK_BLOG_AUTHOR_URL || DEFAULT_AUTHOR_URL,
     created_at: createdAt,
     updated_at: updatedAt,
-    head_image: normalizeHeadImage(article.image_url),
+    head_image: headImage,
     head_image_alt: title,
-    keywords: tags.join(', '),
+    keywords,
     tag,
     published: true,
     locale: 'en',
     next_blog: '',
   }
 
-  const filePath = join(blogDirectory, `${slug}.md`)
-  assertInsideDirectory(blogDirectory, filePath)
-
   const content = matter.stringify(markdown, frontmatter, { lineWidth: -1 })
-  const existingContent = existsSync(filePath) ? readFileSync(filePath, 'utf8') : ''
   if (existingContent === content) return ''
 
   writeFileSync(filePath, content, 'utf8')
@@ -173,11 +199,11 @@ function writeArticle(article: OutrankArticle, payloadTimestamp: Date, blogDirec
 
 function main(): void {
   const payload = loadPayload()
-  if (payload.event_type !== 'publish_articles') {
-    throw new Error(`Unsupported Outrank event_type "${payload.event_type}". Expected "publish_articles".`)
+  if (!isSupportedEventType(payload.event_type)) {
+    throw new Error(`Unsupported Outrank event_type "${payload.event_type}". Expected one of: ${Array.from(SUPPORTED_OUTRANK_EVENT_TYPES).join(', ')}.`)
   }
 
-  const articles = payload.data?.articles || []
+  const articles = payloadArticles(payload)
   if (articles.length === 0) throw new Error('Outrank payload does not contain any articles.')
 
   const payloadTimestamp = toDate(payload.timestamp, new Date())
