@@ -25,7 +25,7 @@ next_blog: ''
 
 | Feature | Capacitor CI/CD Plugins | Appflow |
 | --- | --- | --- |
-| **Cost** | From $12/month for OTA updates; Capgo Build available | $6,000/year |
+| **Cost** | From $12/month for OTA updates; Capgo Build for native builds | $6,000/year |
 | **Customization** | High | Limited |
 | **Integration** | GitHub, GitLab, [Jenkins](https://www.jenkins.io/) | Platform-specific |
 | **Future Support** | Ongoing | Ends in 2026 |
@@ -107,7 +107,7 @@ Capacitor CI/CD plugins come with a straightforward pricing model. For example, 
 | Plan Component | Cost |
 | --- | --- |
 | OTA Update Plans | $12 - $249/month |
-| Native Build Automation | Capgo Build available for CI/CD pipelines |
+| Native Build Automation | Capgo Build for CI/CD pipelines |
 
 This structure is particularly appealing for long-term projects, offering budget-friendly scaling options. On the other hand, Appflow takes a different approach.
 

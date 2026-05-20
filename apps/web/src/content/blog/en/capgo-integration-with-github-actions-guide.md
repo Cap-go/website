@@ -94,7 +94,7 @@ This command will set up the plugin and its required dependencies.
 
 Prepare your GitHub repository to meet the requirements for CI/CD integration with Capgo.
 
-Capgo offers OTA updates from $12/month, which is more affordable compared to AppFlow's $6,000 annual fee [\[1\]](https://capgo.app/).
+Before adding the workflow, confirm the repository has the required secrets, branch protections, and deployment triggers for your OTA release process.
 
 Here’s how to set up your repository:
 

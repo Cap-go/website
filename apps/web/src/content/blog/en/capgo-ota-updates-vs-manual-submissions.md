@@ -191,7 +191,7 @@ Cost is another critical factor when choosing an update strategy. The pricing st
 
 | **Cost Factor** | **Capgo OTA** | **Manual Submission** |
 | --- | --- | --- |
-| **Setup Cost** | No setup fee for OTA updates; Capgo Build available for CI/CD native builds | Developer account fees |
+| **Setup Cost** | No setup fee for OTA updates; Capgo Build for CI/CD native builds | Developer account fees |
 | **Monthly Fee** | From $12 (SOLO) to $249 (PAYG) | None |
 | **Bandwidth** | 50GB–10TB (based on plan) | Store-managed |
 | **Storage** | 2GB–20GB (based on plan) | Store-managed |

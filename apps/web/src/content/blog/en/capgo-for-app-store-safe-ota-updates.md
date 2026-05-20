@@ -32,7 +32,7 @@ next_blog: ''
 
 | Platform | Key Features | Limitations | Cost |
 | --- | --- | --- | --- |
-| **Capgo** | Secure OTA, CI/CD ready, user targeting | Initial setup effort | From $12/month; Capgo Build available |
+| **Capgo** | Secure OTA, CI/CD ready, user targeting | Initial setup effort | From $12/month; [Capgo Build](https://capgo.app/docs/cli/cloud-build/getting-started/) for native builds |
 | **AppFlow** | Ionic integration, enterprise support | High cost barrier | $6,000/year |
 | **[App Center](https://visualstudio.microsoft.com/app-center/)** | Free tier, Microsoft-backed | No hybrid app support | Free tier available |
 
@@ -106,7 +106,7 @@ Take a closer look at OTA update methods, drawing insights from real-world examp
 | Update Method | Key Benefits | Notable Limitations | Cost Impact |
 | --- | --- | --- | --- |
 | Traditional App Store | • Built-in user trust  <br>• Guaranteed compliance  <br>• No extra infrastructure needed | • Long approval times  <br>• Limited update frequency  <br>• Higher development effort | Base app store fees |
-| Capgo OTA | • Instant updates  <br>• End-to-end encryption  <br>• CI/CD integration  <br>• Control over user assignments | • Initial setup effort  <br>• Platform-specific limitations | From $12/month; Capgo Build available |
+| Capgo OTA | • Instant updates  <br>• End-to-end encryption  <br>• CI/CD integration  <br>• Control over user assignments | • Initial setup effort  <br>• Platform-specific limitations | From $12/month; [Capgo Build](https://capgo.app/docs/cli/cloud-build/getting-started/) for native builds |
 | AppFlow | • Seamless Ionic integration  <br>• Enterprise-grade support  <br>• Comprehensive tools | • High upfront cost barrier | $6,000/year |
 
 This table highlights the balance between fast OTA updates and conventional app store methods. Capgo stands out by offering **instant deployments** and **strong security measures**, addressing common delays and risks tied to app store updates.
