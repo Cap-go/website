@@ -186,7 +186,7 @@ const messages = {
   appflow_migration_step2: 'Call <code class="text-blue-300">notifyAppReady()</code> instead of all the Appflow sync/download/reload code',
   appflow_migration_step3: 'Upload bundles with our CLI instead of theirs',
   appflow_migration_stuck:
-    'Stuck? <a href="https://cal.com/team/capgo/appflow-migration" class="text-blue-300 underline hover:text-blue-200">Book a free migration call</a> and we\'ll walk you through it.',
+    'Stuck? <a href="https://book.capgo.app/appflow-migration/" class="text-blue-300 underline hover:text-blue-200">Book a free migration call</a> and we\'ll walk you through it.',
   appflow_not_good_at_ci_cd:
     'We are not trying to lock you into a single all-in-one pipeline. Use our Cloud Build for native iOS/Android builds, or integrate with your own CI/CD (GitHub Actions, GitLab CI, Jenkins, local scripts, etc.). The live-update layer stays flexible either way.',
   appflow_not_good_at_ci_cd_label: 'All-in-one CI/CD:',

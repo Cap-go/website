@@ -503,7 +503,7 @@ Users should always know:
 
 Getting stuck with app review or need hands-on assistance? Our team provides dedicated support for in-app purchase implementation and review preparation.
 
-**[Book a consultation call with us](https://cal.com/team/capgo/capacitor-consulting-services)** to get personalized help with:
+**[Book a consultation call with us](https://book.capgo.app/consulting-services/)** to get personalized help with:
 - IAP implementation review
 - App Store review preparation
 - Submission strategy guidance

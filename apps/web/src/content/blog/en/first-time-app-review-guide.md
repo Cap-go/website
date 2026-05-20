@@ -1139,7 +1139,7 @@ When submitting updates:
 
 If you're feeling overwhelmed or want expert guidance to ensure your app passes review on the first try, we're here to help!
 
-**[Book a consultation call with our team](https://cal.com/team/capgo/capacitor-consulting-services)** for personalized assistance with:
+**[Book a consultation call with our team](https://book.capgo.app/consulting-services/)** for personalized assistance with:
 - App Store and Play Store review preparation
 - Privacy policy and legal documentation review
 - Sign in with Apple implementation
@@ -1165,7 +1165,7 @@ The current Android testing requirements add time to the process, but they ultim
 
 Good luck with your app launch! Remember, even if you get rejected, it's a learning opportunity. Most successful apps go through multiple rounds of review before approval.
 
-**Don't want to go it alone?** [Schedule a consultation](https://cal.com/team/capgo/capacitor-consulting-services) and let our experts guide you through the process.
+**Don't want to go it alone?** [Schedule a consultation](https://book.capgo.app/consulting-services/) and let our experts guide you through the process.
 
 ---
 
