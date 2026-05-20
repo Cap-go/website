@@ -17,7 +17,7 @@ const locale = Astro.locals.locale
           aria-label={m.capgo_home({}, { locale: Astro.locals.locale })}
           class="font-prompt flex items-center pr-3 text-4xl font-medium"
         >
-          <img class="h-18 w-auto pr-1 py-5" loading="eager" height="72" width="260" alt={`${brand} logo`} src="/capgo_logo_header.webp" />
+          <img class="h-18 w-auto py-5 pr-1" loading="eager" height="72" width="260" alt={`${brand} logo`} src="/capgo_logo_header.webp" />
         </a>
       </div>
       <div class="flex xl:hidden">
@@ -372,12 +372,13 @@ const locale = Astro.locals.locale
             href="https://console.capgo.app/login/"
             aria-label={m.login({}, { locale: Astro.locals.locale })}
             target="_blank"
+            rel="noopener noreferrer"
             class="flex h-10 items-center rounded-lg px-2 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
           >
             {m.login({}, { locale: Astro.locals.locale })}
           </a>
           <a
-            href="https://cal.com/team/capgo/demo"
+            href="https://book.capgo.app/demo/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label={m.request_demo({}, { locale: Astro.locals.locale })}
@@ -389,6 +390,7 @@ const locale = Astro.locals.locale
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
             target="_blank"
+            rel="noopener noreferrer"
             aria-label={m.register({}, { locale: Astro.locals.locale })}
             class="font-pj flex h-10 items-center rounded-xl border border-slate-600 bg-slate-900/20 px-4 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-400 hover:bg-slate-700 hover:text-white focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 focus:outline-none"
             role="button"
@@ -403,7 +405,7 @@ const locale = Astro.locals.locale
     <div class="mx-auto max-w-7xl px-4 pb-4 sm:px-6 lg:px-8">
       <div class="max-h-[calc(100dvh-6rem)] overflow-y-auto rounded-2xl border border-slate-500/40 bg-slate-800/95 p-3 shadow-2xl shadow-black/45 backdrop-blur-xl">
         <a
-          href="https://cal.com/team/capgo/demo"
+          href="https://book.capgo.app/demo/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label={m.request_demo({}, { locale: Astro.locals.locale })}
@@ -413,6 +415,7 @@ const locale = Astro.locals.locale
         </a>
         <a
           target="_blank"
+          rel="noopener noreferrer"
           aria-label={m.register({}, { locale: Astro.locals.locale })}
           href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
           class="font-pj mt-2 flex min-h-12 items-center justify-center rounded-xl border border-slate-300/35 bg-slate-700/75 px-4 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-slate-700 focus:ring-2 focus:ring-slate-200 focus:outline-none"
@@ -642,6 +645,7 @@ const locale = Astro.locals.locale
           <a
             href="https://console.capgo.app/login/"
             target="_blank"
+            rel="noopener noreferrer"
             aria-label={m.login({}, { locale: Astro.locals.locale })}
             class="flex min-h-12 items-center rounded-xl px-3 text-base font-semibold text-white transition-colors hover:bg-slate-700/80"
           >

@@ -1241,7 +1241,7 @@ Getting your age rating right is just one part of successful app store submissio
 - Navigating app review processes
 - Implementing live updates post-approval
 
-**[Book a consultation with our team](https://cal.com/team/capgo/capacitor-consulting-services)** for personalized assistance with your app store journey.
+**[Book a consultation with our team](https://book.capgo.app/consulting-services/)** for personalized assistance with your app store journey.
 
 ---
 

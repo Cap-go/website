@@ -623,7 +623,7 @@ Track the effectiveness of your responses:
 
 Managing app reviews and ratings is just one piece of the app store optimization puzzle. If you're looking to maximize your app's potential in the App Store and Google Play Store, our team can help.
 
-**[Book a consultation with our ASO experts](https://cal.com/team/capgo/capacitor-consulting-services)** for personalized guidance on:
+**[Book a consultation with our ASO experts](https://book.capgo.app/consulting-services/)** for personalized guidance on:
 
 - App Store Optimization (ASO) strategy
 - Review and rating management
@@ -660,7 +660,7 @@ By implementing the strategies outlined in this guide and using tools like the C
 
 Remember, the best way to get great reviews is to build a great app that solves real problems for your users. Everything else is optimization.
 
-**Ready to take your app to the next level?** [Schedule a consultation](https://cal.com/team/capgo/capacitor-consulting-services) with our team to develop a customized strategy for your app's success.
+**Ready to take your app to the next level?** [Schedule a consultation](https://book.capgo.app/consulting-services/) with our team to develop a customized strategy for your app's success.
 
 ---
 

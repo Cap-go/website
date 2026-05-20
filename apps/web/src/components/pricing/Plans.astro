@@ -108,6 +108,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
             <a
               href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
               target="_blank"
+              rel="noopener noreferrer"
               aria-label={`Start ${plan.name} free trial`}
               class="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-gray-950 bg-gray-950 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
               role="button"
@@ -116,7 +117,7 @@ function buildTimeDisplay(buildTimeSeconds: number) {
             </a>
             {plan.name === 'Enterprise' && (
               <a
-                href="https://cal.com/team/capgo/capgo-enterprise-inquiry"
+                href="https://book.capgo.app/enterprise-inquiry/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Talk to our team"
