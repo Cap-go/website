@@ -133,6 +133,7 @@ const helpAreas = [
           <a
             href="https://pay.capgo.app/b/8wM8wNaKHbTMbsIfZg"
             target="_blank"
+            rel="noopener noreferrer"
             class="rounded-xl bg-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-orange-500/25 transition-all duration-200 hover:bg-orange-700 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
           >
             {m.ps_subscribe_now({}, { locale })}
@@ -143,6 +144,7 @@ const helpAreas = [
           <a
             href="https://book.capgo.app/premium-support/"
             target="_blank"
+            rel="noopener noreferrer"
             class="rounded-xl border border-gray-600 px-8 py-4 text-base font-semibold text-gray-300 transition-all duration-200 hover:bg-gray-800 hover:text-white"
           >
             {m.ps_talk_first({}, { locale })}
@@ -365,6 +367,7 @@ const helpAreas = [
             <a
               href="https://pay.capgo.app/b/8wM8wNaKHbTMbsIfZg"
               target="_blank"
+              rel="noopener noreferrer"
               class="inline-flex items-center rounded-xl bg-orange-600 px-8 py-4 text-lg font-semibold text-white shadow-lg shadow-orange-500/25 transition-colors hover:bg-orange-700"
             >
               {m.ps_subscribe_now({}, { locale })}
@@ -452,6 +455,7 @@ const helpAreas = [
           <a
             href="https://pay.capgo.app/b/8wM8wNaKHbTMbsIfZg"
             target="_blank"
+            rel="noopener noreferrer"
             class="inline-flex items-center justify-center rounded-xl bg-orange-600 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-orange-500/25 transition-all duration-200 hover:bg-orange-700"
           >
             {m.ps_cta_button({}, { locale })}
@@ -463,7 +467,9 @@ const helpAreas = [
 
         <p class="mt-6 text-sm text-gray-400">
           {m.ps_questions({}, { locale })}
-          <a href="https://book.capgo.app/premium-support/" target="_blank" class="text-orange-400 hover:underline">{m.ps_schedule_call({}, { locale })}</a>
+          <a href="https://book.capgo.app/premium-support/" target="_blank" rel="noopener noreferrer" class="text-orange-400 hover:underline"
+            >{m.ps_schedule_call({}, { locale })}</a
+          >
           {m.ps_to_learn_more({}, { locale })}
         </p>
       </div>

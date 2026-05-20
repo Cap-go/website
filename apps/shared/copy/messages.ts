@@ -186,7 +186,7 @@ const messages = {
   appflow_migration_step2: 'Call <code class="text-blue-300">notifyAppReady()</code> instead of all the Appflow sync/download/reload code',
   appflow_migration_step3: 'Upload bundles with our CLI instead of theirs',
   appflow_migration_stuck:
-    'Stuck? <a href="https://book.capgo.app/appflow-migration/" class="text-blue-300 underline hover:text-blue-200">Book a free migration call</a> and we\'ll walk you through it.',
+    'Stuck? <a href="https://book.capgo.app/appflow-migration/" target="_blank" rel="noopener noreferrer" class="text-blue-300 underline hover:text-blue-200">Book a free migration call</a> and we\'ll walk you through it.',
   appflow_not_good_at_ci_cd:
     'We are not trying to lock you into a single all-in-one pipeline. Use our Cloud Build for native iOS/Android builds, or integrate with your own CI/CD (GitHub Actions, GitLab CI, Jenkins, local scripts, etc.). The live-update layer stays flexible either way.',
   appflow_not_good_at_ci_cd_label: 'All-in-one CI/CD:',
@@ -614,7 +614,7 @@ const messages = {
     '<strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Disclaimer) refers to Digital Shift OU, 6 sepapaja, 15510 Tallinn.',
   company_name: 'Company name',
   company_no_liability:
-    'In no event shall the Company be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service. The Company reserves the right to make additions, deletions, or modifications to the contents on the Service at any time without prior notice. This Disclaimer has been created with the help of the <a href="https://www.termsfeed.com/blog/sample-disclaimer-template/" target="_blank"> Disclaimer Template. </a>',
+    'In no event shall the Company be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service. The Company reserves the right to make additions, deletions, or modifications to the contents on the Service at any time without prior notice. This Disclaimer has been created with the help of the <a href="https://www.termsfeed.com/blog/sample-disclaimer-template/" target="_blank" rel="noopener noreferrer"> Disclaimer Template. </a>',
   company_no_liability_for_access:
     'In no event shall the Company or its suppliers be liable for any special, incidental, indirect, or consequential damages whatsoever arising out of or in connection with your access or use or inability to access or use the Service.',
   company_no_liability_for_decisions:
