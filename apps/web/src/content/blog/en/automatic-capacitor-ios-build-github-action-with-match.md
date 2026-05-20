@@ -27,18 +27,6 @@ Setting up CI/CD for Capacitor apps can be complex and time-consuming. Here's wh
 > **We now recommend using [Capgo Build with the Capgo CLI](/docs/cli/cloud-build/) for native Capacitor builds.**
 > This Fastlane Match guide is kept for teams maintaining existing GitHub Actions pipelines, but new iOS builds should use the Capgo CLI so you do not have to maintain Fastlane, Match repositories, Xcode runners, certificates, and upload scripts yourself.
 
-## Prerequisites
-
-Before starting, you'll need to set up:
-
-- A GitHub account with admin access
-- iOS developer program membership
-- App Store Connect API access with proper permissions
-- Understanding of GitHub Actions workflows
-- Knowledge of Fastlane and Match configuration
-- Time to maintain and debug the pipeline
-- A team of many devs, otherwise we recommend to use [fastlane cert](/blog/automatic-capacitor-ios-build-github-action) for simpler workflows
-
 ## Manual Setup Guide
 
 Here's what you need to do:
@@ -76,7 +64,6 @@ We are going to use a **_macOS_** machine, you can see in the screenshot its pri
 3.  _Creating an App Store Connect API Key_
 4.  _Using an App Store Connect API Key_
 5.  _Copy Fastlane files_
-6.  _Configure Fastlane match_
 6.  _Configure Fastlane match_
 
 ## 1\. Using App Store Connect API with Fastlane Match

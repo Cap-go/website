@@ -25,18 +25,6 @@ Setting up CI/CD for Capacitor apps can be complex and time-consuming. Here's wh
 > **We now recommend using [Capgo Build with the Capgo CLI](/docs/cli/cloud-build/) for native Capacitor builds.**
 > This Fastlane guide is kept for teams maintaining existing GitHub Actions pipelines, but new iOS builds should use the Capgo CLI so you do not have to maintain Fastlane, Xcode runners, certificates, and upload scripts yourself.
 
-## Prerequisites
-
-Before starting, you'll need to set up:
-
-- A GitHub account with admin access
-- iOS developer program membership
-- App Store Connect API access with proper permissions
-- Understanding of GitHub Actions workflows
-- Knowledge of Fastlane configuration
-- Time to maintain and debug the pipeline
-- Proper certificates and provisioning profiles
-
 ## Manual Setup Guide
 
 Here's what you need to do:
