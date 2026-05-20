@@ -309,8 +309,6 @@ build_and_deploy:
     - run: npx @capgo/cli deploy
 ```
 
-> "We configure your CI/CD pipeline directly in your preferred platform, whether it's GitHub Actions, GitLab CI, or others. We don't host CI/CD or charge you to maintain it." - Capgo [\[1\]](https://capgo.app/)
-
 ### Custom Settings
 
 Tailor your app's configuration with specific settings beyond live updates and automation:

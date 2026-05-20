@@ -32,7 +32,7 @@ next_blog: ''
 | Targeted updates | Yes ([channel system](https://capgo.app/docs/live-updates/channels/)) | Limited | Limited |
 | Rollback capability | Yes | No  | No  |
 | Real-time tracking | Yes | Limited | Limited |
-| Setup cost | $2,600 (one-time) | Free | Free |
+| Setup cost | Plan-based | Free | Free |
 
 ## Device Firmware Update Best Practices
 
@@ -164,7 +164,7 @@ Incorporating update management into your workflow demands a focus on compliance
 
 1\. **CI/CD Pipeline Setup**
 
-Modern update tools often integrate directly with CI/CD pipelines. For instance, Capgo’s one-time CI/CD setup costs $2,600 [\[1\]](https://capgo.app/), which is far more budget-friendly compared to [AppFlow](https://ionic.io/appflow)’s $6,000 annual fee [\[1\]](https://capgo.app/).
+Modern update tools often integrate directly with CI/CD pipelines. For instance, Capgo offers CI/CD integration and Capgo Build alongside OTA updates [\[1\]](https://capgo.app/), which is far more budget-friendly compared to [AppFlow](https://ionic.io/appflow)’s $6,000 annual fee [\[1\]](https://capgo.app/).
 
 2\. **Update Distribution Strategy**
 

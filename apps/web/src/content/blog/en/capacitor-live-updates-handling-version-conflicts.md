@@ -126,8 +126,8 @@ Capgo offers a range of features designed to fill the gaps left by other platfor
 
 Here’s how Capgo stacks up against traditional solutions:
 
--   **Setup cost**: Capgo requires a one-time fee of **$2,600**, compared to over **$6,000 annually** for other tools.
--   **CI/CD operations**: Capgo costs around **$300/month**, while traditional tools often exceed **$500/month**.
+-   **Pricing**: Capgo starts at **$12/month** for OTA updates, while traditional tools can exceed **$6,000 annually**.
+-   **CI/CD operations**: Capgo Build can run native builds from existing CI/CD pipelines, while traditional tools often require platform-specific workflows.
 -   **Delivery speed**: Capgo delivers a 5 MB bundle in **114 ms**, whereas other platforms have variable speeds.
 -   **Encryption**: Capgo offers **end-to-end encryption**, while many alternatives only provide basic signing.
 

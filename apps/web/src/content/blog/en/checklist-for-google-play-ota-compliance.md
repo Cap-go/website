@@ -204,7 +204,7 @@ Capgo easily fits into existing development workflows while adhering to Google P
 | API Access | Public API for custom setups | Offers flexible compliance management |
 | [Channel System](https://capgo.app/docs/live-updates/channels/) | Beta testing and staged rollouts | Enables controlled update releases |
 
-OTA updates start at $12 per month. For teams needing automated CI/CD pipelines to build native mobile apps, an optional setup service is available for $2,600 one-time.
+OTA updates start at $12 per month.
 
 ### Update Management
 

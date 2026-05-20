@@ -65,8 +65,6 @@ Integrating an OTA platform is crucial for managing scheduled updates efficientl
 -   **Integrate your CI/CD pipeline** into your existing workflow for smoother operations.
     
 
-> "We configure your CI/CD pipeline directly in your preferred platform, whether it's GitHub Actions, GitLab CI, or others. We don't host CI/CD or charge you to maintain it." – Capgo [\[1\]](https://capgo.app/)
-
 For enterprise-level needs, Capgo supports integration with major CI/CD systems. Their platform has been successfully used in 750 production apps, managing over 23.5 million updates to date [\[1\]](https://capgo.app/).
 
 Here are some performance benchmarks [\[1\]](https://capgo.app/):

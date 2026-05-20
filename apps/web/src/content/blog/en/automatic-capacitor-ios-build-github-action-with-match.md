@@ -39,29 +39,11 @@ Before starting, you'll need to set up:
 - Time to maintain and debug the pipeline
 - A team of many devs, otherwise we recommend to use [fastlane cert](/blog/automatic-capacitor-ios-build-github-action) for simpler workflows
 
-## Professional CI/CD Setup by Capgo
-
-Skip the complexity. [Capgo](https://capgo.app/docs/getting-started/cicd-integration/) configures your CI/CD pipeline directly in your preferred platform:
-
-- **Platform Independence**: Works with GitHub Actions, GitLab CI, or others
-- **Seamless Integration**: No platform switch needed, works with your current process
-- **Tailored Configuration**: Customized setup matching your project needs
-- **Expert Guidance**: We've already set up CI/CD for 50+ apps
-
-### Pricing
-- One-time setup fee: $2,600
-- Your running costs: ~$300/year
-- Compare to Other proprietary solution: $6,000/year
-- **Save $26,100 over 5 years**
-
-[Setup CI/CD Now](https://cal.com/team/capgo/mobile-ci-cd-done-for-you/)
-
 ## Manual Setup Guide
 
-If you still want to set up everything yourself, here's what you need to do:
+Here's what you need to do:
 
 ## Continuous Delivery for iOS using Fastlane and GitHub Actions using match
-
 
 ## Prerequisites
 
@@ -103,7 +85,6 @@ We are going to use a **_macOS_** machine, you can see in the screenshot its pri
 > From [Apple Support](https://developer.apple.com/support/authentication/)
 
 > Getting started with match requires you to revoke your existing certificates. But no worry, you will have the new one directly.
-
 
 ## Requirements
 
@@ -161,7 +142,6 @@ _Now we can manage Fastlane with the App Store Connect API key, great!_
 ## 2\. Copy Fastlane files
 
 Fastlane is a Ruby library created to automate common mobile development tasks. Using Fastlane, you can configure custom "lanes" which bundle a series of "actions" that perform tasks that you'd normally perform using Android studio. You can do a lot with Fastlane, but for the purposes of this tutorial, we'll be using only a handful of core actions.
-
 
 Create a Fastlane folder at the root of your project and copy the following files:
 Fastfile
@@ -356,7 +336,6 @@ Generated certificates and provisioning profiles are uploaded to the certificate
 
 ![App Store Connect certificates](/certificates.webp)
 
-
 Lastly, open your `project` in Xcode, and update the provisioning profile for the release configuration of your app.
 
 ![XCode certificates](/xcode_cert.webp)
@@ -390,7 +369,6 @@ username(FASTLANE_APPLE_ID)
 This will be used by GitHub Actions to import the certificates and provisioning profiles.
 And var will be set in GitHub Secrets, instead of hard-coding them in the file.
 
-
 ## **Build Processing**
 
 In GitHub Actions, **you are billed based on the minutes** you have used for running your CI/CD workflow. From experience, it takes about 10–15 minutes before a build can be processed in App Store Connect.
@@ -402,7 +380,6 @@ If you share the same concerns for the pricing as I do for private projects, you
 What's the catch? You have to manually update the compliance of your app in App Store Connect after the build has been processed, for you to distribute the build to your users.
 
 This is just an optional parameter to update if you want to save on the build minutes for private projects. For free projects, this shouldn't be a problem at all. See [pricing](https://github.com/pricing/).
-
 
 ## 3\. Setup GitHub Actions
 

@@ -29,7 +29,7 @@ next_blog: ''
 | Feature | Appflow | Capgo |
 | --- | --- | --- |
 | Annual Cost | $6,000 | ~$3,600 |
-| Setup Fee | Included | $2,600 (one-time) |
+| Native Build Automation | Included | Capgo Build |
 | Update Speed | Reliable | 114 ms for 5 MB bundles |
 | Trial Period | Limited | 15 days |
 
@@ -149,7 +149,7 @@ Capgo delivers updates impressively fast, clocking in at 114 ms for 5 MB bundles
 | Feature | Capgo | Appflow |
 | --- | --- | --- |
 | Annual Cost | ~$3,600 | $6,000 |
-| CI/CD Setup | $2,600 (one-time) | Included |
+| Native Build Automation | Capgo Build | Included |
 | Monthly Operations | ~$300 | ~$500 |
 | Trial Period | 15 days | Limited |
 

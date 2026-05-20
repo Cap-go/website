@@ -37,29 +37,11 @@ Before starting, you'll need to set up:
 - Time to maintain and debug the pipeline
 - Proper certificates and provisioning profiles
 
-## Professional CI/CD Setup by Capgo
-
-Skip the complexity. [Capgo](https://capgo.app/docs/getting-started/cicd-integration/) configures your CI/CD pipeline directly in your preferred platform:
-
-- **Platform Independence**: Works with GitHub Actions, GitLab CI, or others
-- **Seamless Integration**: No platform switch needed, works with your current process
-- **Tailored Configuration**: Customized setup matching your project needs
-- **Expert Guidance**: We've already set up CI/CD for 50+ apps
-
-### Pricing
-- One-time setup fee: $2,600
-- Your running costs: ~$300/year
-- Compare to Other proprietary solution: $6,000/year
-- **Save $26,100 over 5 years**
-
-[Setup CI/CD Now](https://cal.com/team/capgo/mobile-ci-cd-done-for-you/)
-
 ## Manual Setup Guide
 
-If you still want to set up everything yourself, here's what you need to do:
+Here's what you need to do:
 
 ## Continuous Delivery for iOS using Fastlane and GitHub Actions and certificate
-
 
 ## Prerequisites
 
@@ -91,7 +73,6 @@ We are going to use a **_macOS_** machine, you can see in the screenshot its pri
       - _Using an App Store Connect API Key_
 2.  _Copy Fastlane files_
 3.  _Configure GitHub Actions_
-
 
 ## 1. Using App Store Connect API with Fastlane
 
@@ -130,7 +111,6 @@ To generate keys, you must have Admin permission in App Store Connect. If you do
 
 6 — Under Access, select the role for the key. The roles that apply to keys are the same roles that apply to users on your team. See [role permissions](https://help.apple.com/app-store-connect/#/deve5f9a89d7/). We recommend to select **App manager**.
 
-
 7. Click Generate.
 
 > **An API key's access cannot be limited to specific apps.**
@@ -155,7 +135,6 @@ Please convert the p8 file that you download to Base64 and store it as a secret 
 ```shell
 base64 -i APPLE_KEY_CONTENT.p8 | pbcopy
 ```
-
 
 _Now we can manage the App Store Connect with Fastlane using the API key, great!_
 
@@ -234,7 +213,6 @@ base64 -i BUILD_PROVISION_PROFILE.mobileprovision | pbcopy
 ## 4\. Copy Fastlane files
 
 Fastlane is a Ruby library created to automate common mobile development tasks. Using Fastlane, you can configure custom "lanes" which bundle a series of "actions" that perform tasks that you'd normally perform using Android studio. You can do a lot with Fastlane, but for the purposes of this tutorial, we'll be using only a handful of core actions.
-
 
 Create the Fastlane folder at the root of your Capacitor/Ionic project and add the Fastfile there:
 
@@ -432,7 +410,6 @@ If you're concerned about costs for private projects, you can set `skip_waiting_
 However, there is a tradeoff - you'll need to manually update your app's compliance information in App Store Connect before you can distribute the build to users.
 
 This optimization is mainly useful for private projects where build minutes cost money. For public/free projects, the build minutes are free so there's no need to enable this setting. See GitHub's [pricing page](https://github.com/pricing/) for more details.
-
 
 ## 7. Setup GitHub Actions
 

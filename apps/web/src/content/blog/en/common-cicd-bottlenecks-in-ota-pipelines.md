@@ -38,8 +38,6 @@ OTA CI/CD pipelines often face bottlenecks that delay deployments, impacting eff
 
 Getting development tools to work smoothly together can cause delays. Seamless integration with widely-used CI/CD platforms like [GitHub Actions](https://docs.github.com/actions) and [GitLab CI](https://docs.gitlab.com/ee/ci/) simplifies workflows while maintaining security protocols.
 
-> "We configure your CI/CD pipeline directly in your preferred platform, whether it's GitHub Actions, GitLab CI, or others. We don't host CI/CD or charge you to maintain it." – Capgo [\[1\]](https://capgo.app/)
-
 This hurdle often sets the stage for other challenges within the CI/CD pipeline.
 
 ### Testing Delays

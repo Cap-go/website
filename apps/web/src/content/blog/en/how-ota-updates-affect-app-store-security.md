@@ -155,8 +155,6 @@ A reliable OTA update platform incorporates these practices to secure and simpli
 | Analytics dashboard | Monitors update performance in real time |
 | Rollback support | Allows instant reversal in case of issues |
 
-For enterprise users, Capgo offers CI/CD setup services priced at $2,600 [\[1\]](https://capgo.app/), ensuring your security framework is correctly configured from the start.
-
 ## OTA Platform Comparison
 
 When evaluating OTA update platforms, it's essential to consider stability, security features, and long-term support. The closure of [Microsoft CodePush](https://microsoft.github.io/code-push/) in 2024 and the upcoming shutdown of [Appflow](https://ionic.io/appflow/) in 2026 underscore the importance of choosing a reliable solution. This comparison highlights how strong security measures and consistent support set leading OTA platforms apart.

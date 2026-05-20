@@ -38,26 +38,9 @@ Before starting, you'll need to set up:
 - Knowledge of Fastlane configuration
 - Time to maintain and debug the pipeline
 
-## Professional CI/CD Setup by Capgo
-
-Skip the complexity. [Capgo](https://capgo.app/docs/getting-started/cicd-integration/) configures your CI/CD pipeline directly in your preferred platform:
-
-- **Platform Independence**: Works with GitHub Actions, GitLab CI, or others
-- **Seamless Integration**: No platform switch needed, works with your current process
-- **Tailored Configuration**: Customized setup matching your project needs
-- **Expert Guidance**: We've already set up CI/CD for 50+ apps
-
-### Pricing
-- One-time setup fee: $2,600
-- Your running costs: ~$300/year
-- Compare to Other proprietary solution: $6,000/year
-- **Save $26,100 over 5 years**
-
-[Setup CI/CD Now](https://cal.com/team/capgo/mobile-ci-cd-done-for-you/)
-
 ## Manual Setup Guide
 
-If you still want to set up everything yourself, here's what you need to do:
+Here's what you need to do:
 
 ## GitHub Actions Pricing
 

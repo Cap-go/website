@@ -46,7 +46,6 @@ Instead of being locked into a proprietary CI/CD system, Capgo allows you to:
 - Use popular platforms like GitHub Actions
 - Maintain full control over your build process
 - Follow our detailed tutorials for [iOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/) setup
-- Or let us handle it all with our [CI/CD Done For You](https://cal.com/team/capgo/mobile-ci-cd-done-for-you) service
 
 ## Why Choose Capgo?
 
@@ -87,11 +86,10 @@ We love Ionic and Capacitor, and we're here for the long haul. If any part of th
 - **Massive Scale**: Serving over 30 million live updates daily in our cloud infrastructure, with even more in self-hosted environments
 - **Active Development**: Created and maintained a broad plugin collection in the Capacitor ecosystem: [explore our plugins](https://github.com/cap-go/)
 - **Growing Community**: Successfully helping numerous teams transition to Capgo this year
-- **Complete Solutions**: Providing comprehensive CI/CD solutions, from tutorials to full service integration
+- **Practical Guides**: Providing CI/CD tutorials and migration docs for common workflows
 - **Sustainable Model**: Self-funded and profitable, ensuring long-term stability for our users
 
 We're not just an alternative – we're actively building the future of mobile app development, ensuring that teams relying on these technologies have a reliable, sustainable path forward.
-
 
 ## Ready to Migrate?
 

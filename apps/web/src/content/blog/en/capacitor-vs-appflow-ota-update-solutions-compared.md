@@ -24,7 +24,7 @@ next_blog: ''
     
     -   Updates reach 95% of users in 24 hours.
     -   Offers end-to-end encryption and flexible hosting (cloud or self-hosted).
-    -   OTA updates from $12/month ($144+/year). Optional CI/CD setup service for native builds available for $2,600 one-time.
+    -   OTA updates from $12/month ($144+/year).
     -   Actively developed and open-source.
 -   **Appflow**:
     
@@ -154,7 +154,7 @@ Capgo doesn't just stop at setup - it further enhances the build pipeline with C
 
 ### Build Pipeline Support
 
-Following the quick setup, Capgo integrates effortlessly with widely-used CI/CD tools like GitHub Actions, GitLab CI, and Jenkins. This approach supports over 50 apps without locking developers into specific platforms. For teams needing automated CI/CD pipelines to build native mobile apps, an optional setup service is available for a one-time fee of $2,600 [\[1\]](https://capgo.app/).
+Following the quick setup, Capgo integrates effortlessly with widely-used CI/CD tools like GitHub Actions, GitLab CI, and Jenkins. This approach supports over 50 apps without locking developers into specific platforms.
 
 ### Update Management
 
@@ -226,7 +226,7 @@ Pricing is a major factor in choosing an OTA update solution, especially for lon
 | Year 3 | $432 | $18,000 | $17,568 |
 | Year 5 | $720 | $30,000 | $29,280 |
 
-\*Capgo's OTA update costs at $12/month ($144/year) [\[1\]](https://capgo.app/). Optional CI/CD setup service for building native apps available for $2,600 one-time (not included in table).
+\*Capgo's OTA update costs at $12/month ($144/year) [\[1\]](https://capgo.app/).
 
 Jermaine shared his experience:
 

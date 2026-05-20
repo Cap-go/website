@@ -225,7 +225,7 @@ Capgo prioritizes safe and reliable updates, achieving a 95% adoption rate withi
 
 ### CI/CD Integration
 
-Once safety measures are in place, you can integrate Capgo into your CI/CD pipeline for smooth and efficient deployments. Capgo has already configured CI/CD for over 50 apps, offering cost-effective solutions compared to other options [\[1\]](https://capgo.app).
+Once safety measures are in place, you can integrate Capgo into your existing CI/CD workflow for smooth and efficient deployments.
 
 Here's an example deployment command:
 
@@ -239,10 +239,6 @@ Capgo supports a variety of CI/CD platforms, including:
 -   [GitLab CI](https://docs.gitlab.com/ee/ci/)
 -   [Jenkins](https://www.jenkins.io/)
 -   Custom pipeline setups
-
-> "We configure your CI/CD pipeline directly in your preferred platform, whether it's GitHub Actions, GitLab CI, or others. We don't host CI/CD or charge you to maintain it." - Capgo [\[1\]](https://capgo.app)
-
-For teams seeking expert assistance, Capgo offers a professional CI/CD configuration service for $2,600. This one-time setup includes custom pipeline configuration and expert advice on mobile app deployment best practices [\[1\]](https://capgo.app).
 
 ## Fix Common Problems
 

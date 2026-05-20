@@ -220,7 +220,7 @@ To get started, run:
 npx @capgo/cli init
 ```
 
-Capgo works seamlessly with CI/CD systems and offers features like targeted beta testing and staged rollouts using its channel system. For a one-time fee of $2,600, it also provides real-time analytics and error tracking, giving you full visibility into the update process.
+Capgo works seamlessly with CI/CD systems and offers features like targeted beta testing and staged rollouts using its channel system. It also provides real-time analytics and error tracking, giving you full visibility into the update process.
 
 ## Conclusion
 

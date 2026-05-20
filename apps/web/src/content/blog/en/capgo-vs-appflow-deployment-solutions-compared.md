@@ -83,7 +83,7 @@ These tiers are structured to scale with your team's growth, offering flexibilit
 
 ### Small Team Pricing
 
-For startups and smaller teams, Capgo's pricing stands out as a cost-effective alternative to traditional solutions. While platforms like Appflow can cost thousands annually, Capgo provides a more budget-friendly option. Its CI/CD setup requires a one-time fee of $2,600, with ongoing monthly costs averaging $300 [\[1\]](https://capgo.app).
+For startups and smaller teams, Capgo's pricing stands out as a cost-effective alternative to traditional solutions. While platforms like Appflow can cost thousands annually, Capgo provides a more budget-friendly option with OTA plans starting at $12/month and Capgo Build available for CI/CD native builds [\[1\]](https://capgo.app).
 
 > "We are currently giving a try to @Capgo since Appcenter stopped live updates support on hybrid apps and @AppFlow is way too expensive." - Simon Flack [\[1\]](https://capgo.app)
 
@@ -98,7 +98,7 @@ Here’s what makes Capgo appealing for small teams:
 
 ### Build Automation
 
-Capgo and Appflow tackle build automation and CI/CD integration in distinct ways. Capgo focuses on flexibility by working seamlessly with external CI/CD platforms like GitHub Actions, GitLab CI, and [Jenkins](https://www.jenkins.io/). This approach lets developers use the tools they’re already comfortable with. So far, Capgo has successfully configured CI/CD pipelines for over 50 apps, simplifying deployment processes significantly [\[1\]](https://capgo.app).
+Capgo and Appflow tackle build automation and CI/CD integration in distinct ways. Capgo focuses on flexibility by working seamlessly with external CI/CD platforms like GitHub Actions, GitLab CI, and [Jenkins](https://www.jenkins.io/). This approach lets developers use the tools they’re already comfortable with.
 
 Here’s a quick comparison of the two platforms:
 

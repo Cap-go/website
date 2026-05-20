@@ -142,7 +142,7 @@ Use Capgo's analytics to track update performance in real time. Key metrics incl
 
 If an issue arises, Capgo's one-click rollback feature allows for quick recovery.
 
-For enterprise apps, Capgo's CI/CD integration (priced at $2,600 one-time) can streamline testing and deployment, saving time and reducing errors.
+For enterprise apps, Capgo's CI/CD integration can streamline testing and deployment, saving time and reducing errors.
 
 ## Delta Update Tips
 

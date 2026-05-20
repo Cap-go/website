@@ -336,7 +336,7 @@ Key highlights of the update system include:
 -   **[Channel system](https://capgo.app/docs/live-updates/channels/)** for targeted updates
 -   **Error tracking** to monitor issues
 
-Currently, **750 apps** are using Capgo in production. The platform also offers CI/CD configuration services for $2,600, ensuring smooth integration into workflows. Its global CDN delivers updates with an average speed of **114ms** for 5MB bundles.
+Currently, **750 apps** are using Capgo in production. Its global CDN delivers updates with an average speed of **114ms** for 5MB bundles.
 
 > "Jumped over to @Capgo after @AppFlow hit us with a $5000 bill for the year to continue. Loving Capgo so far. Thanks for @Capgo, it's a great product." - jermaine [\[1\]](https://capgo.app/)
 
