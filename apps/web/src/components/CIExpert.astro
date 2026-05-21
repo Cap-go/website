@@ -79,18 +79,21 @@ const credentialsDocsUrl = getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/c
     </div>
 
     <div class="mt-12 flex flex-col justify-center gap-4 sm:flex-row">
-      <a href={buildDocsUrl} class="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 text-base font-bold text-gray-950 transition hover:bg-gray-200">
+      <a
+        href={buildDocsUrl}
+        class="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 text-base font-bold text-gray-950 transition hover:bg-gray-200 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 focus-visible:outline-none"
+      >
         Start with Capgo Build
       </a>
       <a
         href={githubActionsDocsUrl}
-        class="inline-flex items-center justify-center rounded-xl border border-white/15 bg-gray-800 px-6 py-3 text-base font-medium text-white transition hover:bg-gray-700"
+        class="inline-flex items-center justify-center rounded-xl border border-white/15 bg-gray-800 px-6 py-3 text-base font-medium text-white transition hover:bg-gray-700 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 focus-visible:outline-none"
       >
         GitHub Actions guide
       </a>
       <a
         href={credentialsDocsUrl}
-        class="inline-flex items-center justify-center rounded-xl border border-white/15 px-6 py-3 text-base font-medium text-white transition hover:bg-gray-800"
+        class="inline-flex items-center justify-center rounded-xl border border-white/15 px-6 py-3 text-base font-medium text-white transition hover:bg-gray-800 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 focus-visible:outline-none"
       >
         Credentials guide
       </a>
