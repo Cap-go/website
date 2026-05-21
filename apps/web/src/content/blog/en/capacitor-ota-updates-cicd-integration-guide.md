@@ -22,7 +22,7 @@ next_blog: ''
 
 -   **Why OTA + CI/CD?** Automates updates, enables rollbacks, and ensures faster bug fixes.
 -   **What You Need:** Capacitor app, Git repository, CI/CD platform (e.g., [GitHub Actions](https://docs.github.com/actions)), and an OTA service like [Capgo](https://capgo.app/).
--   **Setup Costs:** Capgo starts at $12/month for OTA updates. Optional CI/CD setup for building native mobile apps is available for a one-time fee of $2,600.
+-   **Setup Costs:** Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits.
 -   **Best Practices:** Use versioning (major, minor, patch), staged rollouts, and error tracking to ensure smooth updates.
 -   **Top OTA Platforms:** Capgo stands out with fast updates (114ms), high success rates (82%), and global support.
 
@@ -33,7 +33,7 @@ next_blog: ''
 | Status | Active | Active | Shutting down 2026 | Discontinued 2024 |
 | Update Speed | 114ms | Standard | Fluctuates | N/A |
 | E2E Encryption | Yes | Limited | Limited | No  |
-| Monthly Cost | From $12 | Similar to Capgo | ~$500 | Was free |
+| Monthly Cost | From $14 | Similar to Capgo | ~$500 | Was free |
 
 **Ready to streamline your updates?** Start by setting up your CI/CD pipeline with tools like Capgo CLI and secure your secrets for safe deployments.
 
@@ -68,13 +68,11 @@ Keeping credentials secure is critical for maintaining the integrity of your CI/
 | Build Secrets | Use secret management tools specific to your platform |
 | Access Tokens | Apply role-based access control (RBAC) |
 
-Capgo emphasizes the importance of proper configuration in CI/CD pipelines:
-
-> "We configure your CI/CD pipeline directly in your preferred platform, whether it's GitHub Actions, GitLab CI, or others. We don't host CI/CD or charge you to maintain it." – Capgo[\[1\]](https://capgo.app/)
+Proper configuration matters in CI/CD pipelines.
 
 When selecting tools, prioritize platform independence, scalability, and strong security measures like end-to-end encryption for updates.
 
-Capgo's OTA update service starts at just $12 per month[\[1\]](https://capgo.app/). For teams that need automated CI/CD pipelines to build native mobile apps, an optional setup service is available for $2,600 one-time, which pays off by speeding up deployments and reducing manual work.
+Capgo plans start at $14 per month and include OTA updates plus about 15 native builds per month; extra build minutes are billed by minute through credits [\[1\]](https://capgo.app/).
 
 Once these components are in place, you’re ready to integrate them into your CI/CD pipeline.
 
@@ -118,9 +116,7 @@ Deploying updates involves pushing your bundles through an Over-The-Air (OTA) se
 -   Configure **automatic rollbacks** to handle issues quickly.
 -   Integrate **error tracking** for better debugging.
 
-> "We configure your CI/CD pipeline directly in your preferred platform, whether it's GitHub Actions, GitLab CI, or others. We don't host CI/CD or charge you to maintain it." – Capgo [\[1\]](https://capgo.app/)
-
-For teams needing CI/CD pipeline setup to build native mobile apps, Capgo offers an optional one-time setup service for $2,600 [\[1\]](https://capgo.app/), making deployment efficient while keeping costs under control. OTA updates themselves start at just $12/month.
+Capgo plans start at $14/month and include OTA updates plus about 15 native builds per month; extra build minutes are billed by minute through credits.
 
 ## OTA Update Guidelines
 
@@ -170,7 +166,7 @@ Here’s a breakdown of key features across popular OTA platforms for [Capacitor
 | E2E Encryption | Yes | Limited | Limited | No  |
 | Self-hostable | Yes | No  | No  | No  |
 | CI/CD Integration | Native support | Basic | Advanced | N/A |
-| Monthly Cost | From $12 | Similar to Capgo | ~$500 | Was free |
+| Monthly Cost | From $14 | Similar to Capgo | ~$500 | Was free |
 
 Capgo stands out with over 1.1 trillion updates delivered, a 95% user update rate, and a global CDN average API response time of 434ms [\[1\]](https://capgo.app/). These numbers demonstrate its ability to handle fast and secure OTA updates at scale.
 
@@ -202,7 +198,8 @@ To make the most of OTA updates, focus on these components:
 
 ### Cost Efficiency
 
-Capgo's affordable OTA update pricing starting at **$12/month** can lead to **$26,100 in savings** over five years compared to competitors [\[1\]](https://capgo.app/). For teams needing CI/CD setup to build native apps, the optional one-time **$2,600** setup service provides additional value.
+Capgo plans start at **$14/month** and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits. That can lead
+to **$26,100 in savings** over five years compared to competitors [\[1\]](https://capgo.app/).
 
 ### Best Practices
 

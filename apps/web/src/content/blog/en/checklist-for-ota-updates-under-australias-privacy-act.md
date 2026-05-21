@@ -169,9 +169,9 @@ Capgo offers end-to-end encryption and achieves an 82% update success rate [\[1\
 
 Here’s a breakdown of costs for different OTA solutions:
 
--   **Standard CI/CD setup**: $300/month
+-   **Standard CI/CD infrastructure**: varies by provider usage
 -   **Enterprise solutions (e.g., Appflow)**: $6,000/year
--   **One-time CI/CD setup with Capgo**: $2,600
+-   **Capgo**: starts at $14/month with OTA updates and about 15 native builds/month; extra build minutes are billed by minute through credits
 
 While cost is a factor, the platform's structure also impacts compliance and efficiency.
 

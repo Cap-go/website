@@ -35,26 +35,26 @@ Before starting, you'll need to set up:
 - Knowledge of Fastlane configuration
 - Time to maintain and debug the pipeline
 
-## Professional CI/CD Setup by Capgo
+## Capgo Build for CI/CD by Capgo
 
-Skip the complexity. [Capgo](https://capgo.app/docs/getting-started/cicd-integration/) configures your CI/CD pipeline directly in your preferred platform:
+Skip the Fastlane, Gradle runner, keystore, and upload-script maintenance. [Capgo Build](/docs/cli/cloud-build/) runs signed native Android builds from your existing CI/CD pipeline:
 
-- **Platform Independence**: Works with GitHub Actions, GitLab CI, or others
-- **Seamless Integration**: No platform switch needed, works with your current process
-- **Tailored Configuration**: Customized setup matching your project needs
-- **Expert Guidance**: We've already set up CI/CD for 50+ apps
+- **Works with your pipeline**: Trigger Capgo Build from GitLab CI, GitHub Actions, Jenkins, or local scripts after your web build and `npx cap sync`.
+- **Signing from CI secrets**: Keep Android keystores, key aliases, passwords, and Play Console service account JSON in your own CI secrets.
+- **No native runner upkeep**: Capgo Build provides maintained Android build environments, so you do not have to manage SDK images, Gradle cache issues, or Fastlane lanes.
+- **Artifacts and submission**: Download signed artifacts for QA or submit release builds through the Capgo CLI.
 
 ### Pricing
-- One-time setup fee: $2,600
-- Your running costs: ~$300/year
-- Compare to Other proprietary solution: $6,000/year
-- **Save $26,100 over 5 years**
 
-[Setup CI/CD Now](https://cal.com/team/capgo/mobile-ci-cd-done-for-you/)
+- Capgo plans start at $14/month
+- Includes OTA updates and about 15 native builds per month
+- Extra build minutes are billed by minute through credits
+
+[Set up Capgo Build in CI/CD](/docs/cli/cloud-build/)
 
 ## Manual Setup Guide
 
-If you still want to set up everything yourself, here's what you need to do:
+Here's what you need to do:
 
 **Steps to follow in the post**
 

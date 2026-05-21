@@ -191,7 +191,8 @@ npx @capgo/cli@latest init [APIKEY]
 Teams using Capgo have seen an **81% improvement in release efficiency** [\[14\]](https://capgo.app/). Here’s why it stands out:
 
 -   **Fast Deployment**: Push updates quickly and manage them with features like user assignment and rollback options.
--   **Affordable Pricing**: OTA updates start at just $12/month, making it a budget-friendly choice. Optional CI/CD setup service for building native apps is available for $2,600 one-time.
+-   **Affordable Pricing**: Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month. Extra build minutes beyond the included allowance are billed by minute
+    through credits.
 -   **Improved Workflow**: Real-time monitoring and flexible organization tools give teams better control over their projects.
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" – Rodrigo Mantica [\[14\]](https://capgo.app/)

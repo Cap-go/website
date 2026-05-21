@@ -21,7 +21,6 @@ const messages = {
   actual_availability_desc: '"Actual Availability" means Scheduled Availability less Unscheduled Downtime.',
   actual_availability_title: '4.3 Actual Availability',
   adapt_as_you_grow: 'Adapt as You Grow',
-  adapt_configuration_to_infrastructure: 'Whether you use GitHub, GitLab, or another platform, we adapt our configuration to fit your existing infrastructure.',
   additionally_make_sure_that: 'Additionally to the above make sure that:',
   address: 'Address',
   advanced_access_levels: 'Advanced Access Levels',
@@ -286,14 +285,11 @@ const messages = {
   beautiful_native_experience: 'Beautiful native experience',
   become_a_sponsor: 'Become a sponsor',
   before_submitting_a_pr: 'Before submitting a PR to any of the repos, please make sure the following is done:',
-  benefit_from_our_deep_expertise_in_mobile_app_ci_cd_best_practices_without_the_need_to_build_and_maintain_a_complex_system_yourself:
-    'Benefit from our deep expertise in mobile app CI/CD best practices, without the need to build and maintain a complex system yourself.',
   best_value: 'Best Value',
   billed_annually_at: 'Billed annually at',
   billed_monthly: 'Billed monthly',
   blog: 'Blog',
   book_a_consultation: 'Book a consultation',
-  break_even_timeline: "After just 6 months, you're already saving money!",
   browse_all_plugins: 'Browse All Plugins',
   browse_plugin_library: 'Find the Native Capability You Need',
   bug_bounty: 'Bug Bounty',
@@ -627,7 +623,6 @@ const messages = {
   compliance_soc1: 'SOC 2 Type I Compliant',
   compliant_with_apple_and_android_requirements: 'Update JavaScript and assets while native code still goes through normal store review.',
   conditions_for_returns: 'Conditions for Returns',
-  configure_ci_cd_pipeline_description: 'We configure your CI/CD pipeline directly in your preferred platform (GitHub Actions, GitLab CI, etc.).',
   connect_your_account: 'Connect Your Account',
   consolidated_invoicing_purchase_orders: 'Consolidated invoicing, purchase orders, and flexible payment terms to meet your procurement requirements.',
   consulting: 'Consulting',
@@ -1046,7 +1041,6 @@ const messages = {
   dpa_title: 'Data Processing Agreement',
   easily_adjust_user_roles_and_permissions_as_your_team_and_projects_evolve_maintaining_optimal_organization_structure:
     'Easily adjust user roles and permissions as your team and projects evolve, maintaining optimal organization structure.',
-  effortless_ci_cd_solutions: 'Effortless CI/CD Solutions',
   email_label: 'Email',
   email_placeholder: 'Enter your email',
   emergency_fixes_on_the_go: 'Emergency fixes on the go',
@@ -1302,7 +1296,6 @@ const messages = {
   examples_of_good_pr_title: 'Examples of good PR title:',
   expand_menu: 'Expand menu',
   experienced_in_working_on_demanding: 'Experienced in working on demanding',
-  expert_ci_cd_setup: 'Expert CI/CD Setup',
   expert_consultation: 'Expert Consultation',
   expert_guidance: 'Expert Guidance',
   expert_team_builds_custom_plugins:
@@ -1754,7 +1747,7 @@ const messages = {
   manifesto_behind_every_movie:
     'Your team excels at web development, and we excel at native mobile. Let us handle the complexities of updates, app store submissions, native integrations, and mobile maintenance while you focus on what you do best - creating amazing user experiences.',
   manifesto_full_ecosystem:
-    "We're your dedicated native partner, offering live updates, custom plugin development, CI/CD setup, and ongoing maintenance services. Need a specific native feature? We'll build it. App store rejections giving you headaches? We'll handle the submissions. Think of us as your mobile development team.",
+    "We're your dedicated native partner, offering live updates, Capgo Build, custom plugin development, and ongoing maintenance services. Need a specific native feature? We'll build it. App store rejections giving you headaches? We'll handle the submissions. Think of us as your mobile development team.",
   manifesto_home_for_developers:
     "Your team excels at web development - you shouldn't need native mobile experts. We're the bridge between your web expertise and mobile success. Open source, transparent, and built by developers who understand the web-to-mobile journey.",
   massive_cost_reduction: 'Massive cost reduction',
@@ -2020,7 +2013,6 @@ const messages = {
   no_commitment_required: 'No commitment required',
   no_credit_card_required: 'No credit card required',
   no_discounts_available_at_this_time: 'No, we do not offer discounts at this time.',
-  no_hosting_or_maintenance_charges: "we don't host CI/CD or charge you to maintain it.",
   no_ppp_available_at_this_time: 'No, we do not offer PPP at this time.',
   no_responsibility_disclaimer_text:
     'The information on the Service is provided with the understanding that the Company is not herein engaged in rendering legal, accounting, tax, or other professional advice and services. As such, it should not be used as a substitute for consultation with professional accounting, tax, legal or other competent advisers.',
@@ -2076,14 +2068,8 @@ const messages = {
   our_dedication: 'Our Dedication',
   our_manifesto: 'Our Manifesto',
   our_numbers_are_shared_transparently_since_december_2021: 'Our numbers are shared transparently since December 2021.',
-  our_setup_you_own_it: 'Our Setup - You Own It',
   our_story: 'Our Story',
-  our_team_customizes_the_ci_cd_setup_to_match_your_specific_project_requirements_ensuring_optimal_performance_and_efficiency:
-    'Our team customizes the CI/CD setup to match your specific project requirements, ensuring optimal performance and efficiency.',
   over: 'Over',
-  own_complete_pipeline_modify_anytime: 'You own the complete pipeline and can modify it anytime',
-  own_complete_setup_zero_vendor_lockin: 'You own the complete setup with zero vendor lock-in',
-  own_setup_zero_vendor_lockin: 'You own the entire setup forever with zero vendor lock-in.',
   page_not_found_description: 'Please check the URL in the address bar and try again.',
   page_not_found_title: 'Page Not Found - Error 404',
   password_label: 'Password',
@@ -2517,10 +2503,6 @@ const messages = {
   service_credits_title: '2. Service Credits',
   service_definition: '<strong>Service</strong> refers to the Application.',
   service_level_agreement: 'Service Level Agreement',
-  setup_ci_cd_now: 'Setup CI/CD now →',
-  setup_fee_github_gitlab_ci: 'Setup fee + GitHub/GitLab CI',
-  setup_fee_savings_comparison:
-    'Our one-time setup fee of $2,600 plus ~$30/month paid directly to your git provider (GitHub/GitLab) results in 94% savings compared to managed solutions like AppFlow ($499/month).',
   severity_level: 'Severity Level',
   share_test_builds_with_your_team: 'Share test builds with your team instantly',
   share_where_you_want_to_contribute_to_fix_the_backend_of_capgo: 'Share where you want to contribute to fix the backend of Capgo.',
@@ -4123,14 +4105,11 @@ const messages = {
   views_expressed_disclaimer_text:
     'The Service may contain views and opinions which are those of the authors and do not necessarily reflect the official policy or position of any other author, agency, organization, employer or company, including the Company.',
   views_expressed_disclaimer_title: 'Views Expressed Disclaimer',
-  we_already_setup_ci_cd_for_50_apps: 'We already setup CI/CD for 50+ apps.',
   we_don_t_bill_you_automatically_until_your_confirmation: "We don't bill you automatically until your confirmation.",
   we_don_t_store_or_sell_your_data_to_anyone: "We don't store or sell your data to anyone.",
   we_empower_developers_to_push_updates_instantly_ensuring_your_users_always_have_the_latest_version_of_your_app_without_the_hassle_of_app_store_approvals:
     'We empower developers to push updates instantly, ensuring your users always have the latest version of your app without the hassle of app store approvals.',
   we_practice_what_we_preach: 'We practice what we preach',
-  we_set_up_your_ci_cd_workflow_to_work_seamlessly_with_your_current_development_process_no_need_to_switch_platforms_or_learn_new_tools:
-    'We set up your CI/CD workflow to work seamlessly with your current development process. No need to switch platforms or learn new tools.',
   we_welcome_and_appreciate_all_contributions_to_capgo: 'We welcome and appreciate all contributions to Capgo.',
   website_description:
     'Manage updates in realtime for your capacitor app without store hassle, 5 min to install Over-the-Air (OTA) updates. Use channels to send to specific groups.',
@@ -4174,7 +4153,6 @@ const messages = {
   total_plugins: 'Total plugins',
   versions_shipped: 'Versions shipped',
   zero_trust_security: 'Zero-Trust Security',
-  zero_vendor_lockin_pay_provider_directly: 'zero vendor lock-in, pay your provider directly.',
   capgo_availability_faq_title: 'What happens when Capgo is down, canceled, or I exceed my plan limits?',
   capgo_availability_faq_intro: 'Your app continues to work normally even when Capgo is unavailable. Here is what happens in different scenarios:',
   capgo_availability_faq_capgo_down: 'Capgo is down: App ignores updates, existing updates stay on device',

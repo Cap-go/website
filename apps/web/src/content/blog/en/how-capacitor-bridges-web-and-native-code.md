@@ -305,7 +305,7 @@ Capgo stands out among live update services for Capacitor apps thanks to several
 
 | Feature | Capgo | Market Context |
 | --- | --- | --- |
-| Pricing Model | Starting at $12/month | Affordable for both small and large teams |
+| Pricing Model | Starting at $14/month | Affordable for both small and large teams |
 | Update Delivery | 114ms average | Faster than most competitors |
 | User Limit | 1,000 to 1M+ MAU | Scales with growing apps |
 | Storage | 2GB to 20GB | Flexible storage options |

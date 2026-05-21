@@ -150,7 +150,7 @@ Once security is locked in, the platform's broader advantages come into focus.
 
 ### Benefits of Using Capgo
 
-Capgo isn't just about speed - it also provides a safety net with its one-click rollback feature, allowing you to revert to a previous version if an update causes issues [\[10\]](https://capgo.app). Cost-wise, it's a smart choice: OTA updates start at just $12/month, costing less than half of [AppFlow](https://ionic.io/appflow/)'s first-year expenses and saving $26,100 over five years [\[10\]](https://capgo.app). For teams needing automated CI/CD to build native apps, an optional one-time setup service is available for $2,600.
+Capgo isn't just about speed - it also provides a safety net with its one-click rollback feature, allowing you to revert to a previous version if an update causes issues [\[10\]](https://capgo.app). Cost-wise, it's a smart choice: plans start at $14/month and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits. That costs less than half of [AppFlow](https://ionic.io/appflow/)'s first-year expenses and saves $26,100 over five years [\[10\]](https://capgo.app).
 
 Another standout feature is Capgo’s open-source nature, which eliminates vendor lock-in and offers full transparency in how updates are handled. Organizations can choose between using Capgo’s cloud infrastructure or hosting it themselves, depending on their needs [\[10\]](https://capgo.app).
 

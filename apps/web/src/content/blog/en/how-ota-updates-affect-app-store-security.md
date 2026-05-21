@@ -155,8 +155,6 @@ A reliable OTA update platform incorporates these practices to secure and simpli
 | Analytics dashboard | Monitors update performance in real time |
 | Rollback support | Allows instant reversal in case of issues |
 
-For enterprise users, Capgo offers CI/CD setup services priced at $2,600 [\[1\]](https://capgo.app/), ensuring your security framework is correctly configured from the start.
-
 ## OTA Platform Comparison
 
 When evaluating OTA update platforms, it's essential to consider stability, security features, and long-term support. The closure of [Microsoft CodePush](https://microsoft.github.io/code-push/) in 2024 and the upcoming shutdown of [Appflow](https://ionic.io/appflow/) in 2026 underscore the importance of choosing a reliable solution. This comparison highlights how strong security measures and consistent support set leading OTA platforms apart.
@@ -180,7 +178,7 @@ Selecting the right OTA platform is crucial for ensuring app store compliance an
 > "We are currently giving a try to @Capgo since Appcenter stopped live updates support on hybrid apps and @AppFlow is way too expensive."  
 > – Simon Flack [\[1\]](https://capgo.app/)
 
-Costs for OTA platforms can vary widely, with CI/CD operations ranging from $300 per month to $6,000 annually [\[1\]](https://capgo.app/).
+Costs for OTA and CI/CD platforms can vary widely. Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits, compared with Appflow's $6,000 annual platform pricing [\[1\]](https://capgo.app/).
 
 > "Cancelled my @Appflow subscription after 4 years. Code-Push never seemed to work well, hopefully @CapGO has it figured out."  
 > – LeVar Berry [\[1\]](https://capgo.app/)

@@ -32,7 +32,7 @@ next_blog: ''
 -   CI/CD integration
 -   Rollback for errors
 
-Capgo supports 750+ apps globally, offering fast updates and error tracking for $12/month.
+Capgo supports 750+ apps globally, offering fast updates and error tracking from $14/month.
 
 Start managing [Capacitor plugins](https://capgo.app/plugins/) efficiently and enhance your development workflow today!
 
@@ -327,7 +327,7 @@ These features make Capgo an efficient solution for managing updates.
 
 ### Capgo Update System
 
-Capgo ensures compliance with Apple and Google guidelines by using end-to-end encryption. Pricing starts at $12/month for individual developers, with enterprise plans available for larger teams.
+Capgo ensures compliance with Apple and Google guidelines by using end-to-end encryption. Pricing starts at $14/month for individual developers, with enterprise plans available for larger teams.
 
 Key highlights of the update system include:
 
@@ -336,7 +336,8 @@ Key highlights of the update system include:
 -   **[Channel system](https://capgo.app/docs/live-updates/channels/)** for targeted updates
 -   **Error tracking** to monitor issues
 
-Currently, **750 apps** are using Capgo in production. The platform also offers CI/CD configuration services for $2,600, ensuring smooth integration into workflows. Its global CDN delivers updates with an average speed of **114ms** for 5MB bundles.
+Currently, **750 apps** are using Capgo in production. Its global CDN delivers updates with an average speed of **114ms** for 5MB bundles. Plans start at $14/month and include OTA
+updates plus about 15 native builds/month; extra build minutes are billed by minute through credits.
 
 > "Jumped over to @Capgo after @AppFlow hit us with a $5000 bill for the year to continue. Loving Capgo so far. Thanks for @Capgo, it's a great product." - jermaine [\[1\]](https://capgo.app/)
 
@@ -364,6 +365,6 @@ Here’s what Capgo brings to the table:
 -   Real-time analytics to monitor update performance
 -   End-to-end encryption for [secure plugin updates](https://capgo.app/docs/plugins/updater/self-hosted/encrypted-bundles/)
 -   Easy CI/CD integration with major platforms
--   Pricing that starts at $12/month for solo developers
+-   Pricing that starts at $14/month for solo developers
 
 With 750 production apps already relying on Capgo, it’s a proven choice. Whether you're fixing bugs or launching new features, pairing Capacitor CLI with Capgo gives you a reliable and efficient toolkit for app development. Start using these tools to streamline your Capacitor projects today.

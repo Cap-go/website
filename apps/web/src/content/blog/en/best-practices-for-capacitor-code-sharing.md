@@ -95,8 +95,8 @@ Incorporate debugging tools into your CI/CD pipeline. This streamlines issue det
 
 **Cost Overview**
 
--   **OTA Update Plans**: From $12/month [\[1\]](https://capgo.app/)
--   **Optional CI/CD Setup Service** (for building native apps): $2,600 one-time [\[1\]](https://capgo.app/)
+-   **Capgo Plans**: From $14/month with OTA updates and about 15 native builds/month included [\[1\]](https://capgo.app/)
+-   **Build Credits**: Extra build minutes are billed by minute through credits.
 
 **Advanced Debugging Tips**
 
@@ -119,9 +119,8 @@ Setting up a CI/CD pipeline simplifies deployments by integrating seamlessly wit
 | [GitLab CI](https://docs.gitlab.com/ee/ci/) | Built-in pipeline tools, container registry | All-in-one DevOps solution |
 | [Jenkins](https://www.jenkins.io/) | Custom workflow support, extensive plugins | High level of customization |
 
-On average, CI/CD setup costs around $2,600, with monthly maintenance averaging $300. Over five years, this could save you up to $26,100 compared to other approaches [\[1\]](https://capgo.app/).
-
-> "We configure your CI/CD pipeline directly in your preferred platform, whether it's GitHub Actions, GitLab CI, or others. We don't host CI/CD or charge you to maintain it." - Capgo [\[1\]](https://capgo.app/)
+Reusable CI/CD workflows reduce manual release work and keep deployment behavior consistent across projects. Capgo plans start at $14/month and include OTA updates plus about 15
+native builds/month; extra build minutes are billed by minute through credits.
 
 Once your CI/CD pipeline is operational, you can shift your attention to implementing fast and efficient OTA updates.
 

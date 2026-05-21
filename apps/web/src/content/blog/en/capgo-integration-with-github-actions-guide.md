@@ -25,7 +25,7 @@ next_blog: ''
 
 ### Quick Overview
 
-1.  **Requirements**: GitHub account, [Capgo account](https://capgo.app/disclaimer/) (from $12/month), Capacitor project, [Node.js](https://nodejs.org/en).
+1.  **Requirements**: GitHub account, [Capgo account](https://capgo.app/disclaimer/) (from $14/month), Capacitor project, [Node.js](https://nodejs.org/en).
 2.  **Setup**: Install [Capgo CLI](https://capgo.app/docs/cli/commands) with `npx @capgo/cli init`, configure GitHub Actions with a YAML workflow.
 3.  **Deployment**: Use commands like `npx @capgo/cli deploy` to [automate updates](https://capgo.app/docs/live-updates/update-behavior/).
 4.  **Testing**: Deploy to test channels (e.g., beta, staging) before production.
@@ -74,7 +74,7 @@ Make sure you have the following accounts and tools ready:
 | Requirement | Purpose | Details |
 | --- | --- | --- |
 | **GitHub Account** | Version Control & CI/CD | Active account with access to repositories |
-| **Capgo Account** | Manage Live Updates | Plans start at $12/month for the SOLO plan |
+| **Capgo Account** | Manage Live Updates | Plans start at $14/month |
 | **Capacitor Project** | App Development | A functional project ready for integration |
 | **Node.js** | Runtime Environment | Latest LTS version is recommended |
 
@@ -92,11 +92,15 @@ This command will set up the plugin and its required dependencies.
 
 ### GitHub Repository Setup
 
-Prepare your GitHub repository to meet the requirements for CI/CD integration with Capgo. As mentioned in their documentation:
+Prepare your GitHub repository to meet the requirements for CI/CD integration with Capgo.
 
-> "We configure your CI/CD pipeline directly in your preferred platform, whether it's GitHub Actions, GitLab CI, or others. We don't host CI/CD or charge you to maintain it." [\[1\]](https://capgo.app/)
+Before adding the workflow, confirm the repository has the required secrets, branch protections, and deployment triggers for your OTA release process.
 
-Capgo offers OTA updates from $12/month, which is more affordable compared to AppFlow's $6,000 annual fee [\[1\]](https://capgo.app/). For teams needing automated CI/CD to build native apps, an optional setup service is available for $2,600 one-time.
+### Pricing
+
+- Capgo plans start at $14/month.
+- The same plan includes OTA updates and about 15 native builds per month.
+- Extra build minutes are billed by minute through credits.
 
 Here’s how to set up your repository:
 

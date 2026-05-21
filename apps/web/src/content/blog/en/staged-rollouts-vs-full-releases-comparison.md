@@ -223,7 +223,7 @@ To ensure smooth deployments, it's crucial to avoid common mistakes.
 
 -   **Testing Environment Setup**: Your testing environment should closely resemble production. Tools like Capgo's channel system make beta testing and staged rollouts easier [\[1\]](https://capgo.app/).
 -   **Rollback Preparation**: Always have a rollback plan ready. Many modern platforms, such as Capgo, offer instant rollback features to revert to previous versions if issues occur [\[1\]](https://capgo.app/).
--   **Integration Requirements**: Ensure proper CI/CD pipeline integration. While setup may involve an upfront cost (Capgo charges $2,600 [\[1\]](https://capgo.app/)), this investment minimizes deployment risks and reduces manual errors in the long run.
+-   **Integration Requirements**: Ensure proper CI/CD pipeline integration. Use repository secrets, staged workflows, and automated checks to minimize deployment risks and reduce manual errors in the long run.
 
 ## [Capgo](https://capgo.app/) Release Management Features
 
@@ -263,9 +263,9 @@ Capgo’s tools improve update performance while offering notable cost savings c
 
 Here’s how Capgo stacks up against competitors:
 
-| Service | Setup Cost | Monthly Operating Cost |
+| Service | Pricing Model | Monthly Operating Cost |
 | --- | --- | --- |
-| **Capgo** | $2,600 one-time | ~$300 |
+| **Capgo** | From $14/month with OTA updates and ~15 native builds/month; extra build minutes are billed by minute through credits | Plan-based |
 | **[Appflow](https://ionic.io/appflow)** | N/A | $500 ($6,000 annually) |
 
 > "Capgo is a smart way to make hot code pushes (and not for all the money in the world like with @Appflow) :-)" – NASA's OSIRIS-REx [\[1\]](https://capgo.app/)

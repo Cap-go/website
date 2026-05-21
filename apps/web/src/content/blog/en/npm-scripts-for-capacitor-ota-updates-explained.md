@@ -99,8 +99,6 @@ Add these npm scripts to your `package.json` file to streamline the build and de
 -   **`deploy:update`**: Uploads the update package to Capgo.
 -   **`deploy:production`**: Handles the complete build and deployment workflow, ideal for production releases.
 
-> "We configure your CI/CD pipeline directly in your preferred platform, whether it's GitHub Actions, GitLab CI, or others. We don't host CI/CD or charge you to maintain it." - Capgo [\[1\]](https://capgo.app/)
-
 ### Setting Environment Variables
 
 To finalize the setup, define these environment variables:
@@ -297,7 +295,7 @@ The OTA update market has shifted significantly, especially after [Microsoft Cod
 
 > "We are currently giving a try to @Capgo since Appcenter stopped live updates support on hybrid apps and @AppFlow is way too expensive." [\[1\]](https://capgo.app/)
 
-Cost is another important consideration for teams. Capgo offers OTA updates starting at just $12 per month, a much lower cost compared to the $6,000 annual fees of enterprise-level alternatives [\[1\]](https://capgo.app/). For teams needing automated CI/CD to build native apps, an optional one-time setup service is available for $2,600.
+Cost is another important consideration for teams. Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits. That is much lower than the $6,000 annual fees of enterprise-level alternatives [\[1\]](https://capgo.app/).
 
 When implementing npm scripts in your deployment workflow, consider these factors:
 
@@ -337,4 +335,5 @@ Capgo's performance metrics speak for themselves:
 | Bundle Download Speed | 114 ms for 5 MB |
 | Update Success Rate | 82% globally |
 
-Starting at just $12 per month for OTA updates - compared to $6,000 annually for enterprise-level solutions - Capgo offers a secure, reliable, and cost-efficient option for managing OTA updates [\[1\]](https://capgo.app/).
+Starting at $14/month with OTA updates and about 15 native builds/month included - and extra build minutes are billed by minute through credits - Capgo offers a secure,
+reliable, and cost-efficient option for managing OTA updates and native build automation [\[1\]](https://capgo.app/).
