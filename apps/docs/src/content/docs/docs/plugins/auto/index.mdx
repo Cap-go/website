@@ -46,9 +46,9 @@ It does not mirror a WebView to the car screen. The phone app sends a limited ca
 - `isAvailable()` returns platform support and current connection state.
 - `setRootTemplate(options)` updates the car display with a simple list template.
 - `sendMessage(options)` sends an application-defined message through the native bridge.
-- `connectionChanged` fires when the car host connects or disconnects.
-- `carAction` fires when a car row is selected.
-- `messageReceived` fires for application-defined bridge messages.
+- `connectionChanged` reports when the car host connects or disconnects.
+- `carAction` is emitted when a car row is selected.
+- `messageReceived` carries application-defined bridge messages.
 
 ## Platform model
 
