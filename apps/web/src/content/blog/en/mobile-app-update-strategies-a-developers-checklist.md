@@ -124,12 +124,12 @@ Capgo makes OTA updates simple, secure, and fast with features like encryption a
 
 ### Capgo Pricing and Features Overview
 
-Capgo offers flexible plans to match your app's needs as it grows. Pricing starts at $14/month for small apps, with higher plans available for larger, enterprise-level
+Capgo offers flexible plans to match your app's needs as it grows. Pricing starts at $12/month for small apps, with higher plans available for larger, enterprise-level
 requirements. Each plan includes key features like instant updates, version control, and analytics.
 
 | Plan | Monthly Cost | Updates/Month | Active Users |
 | --- | --- | --- | --- |
-| SOLO | $14 | 2,500 | 500 |
+| SOLO | $12 | 2,500 | 500 |
 | MAKER | $33 | 25,000 | 5,000 |
 | TEAM | $83 | 150,000 | 30,000 |
 | PAYG | $249 | 1,000,000 | 200,000 |

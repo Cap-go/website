@@ -327,7 +327,7 @@ A great example of Capgo’s capabilities is Rapido Cloud, which successfully in
 | Major Updates | Phased deployment | Comprehensive testing |
 | Critical Fixes | Targeted release | Emergency validation |
 
-Capgo offers flexible pricing to suit different development needs. Plans start at $14/month for independent developers and go up to $249/month for enterprises, offering custom features and dedicated support.
+Capgo offers flexible pricing to suit different development needs. Plans start at $12/month for independent developers and go up to $249/month for enterprises, offering custom features and dedicated support.
 
 ## Summary
 

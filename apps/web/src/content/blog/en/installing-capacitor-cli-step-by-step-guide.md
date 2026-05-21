@@ -302,7 +302,7 @@ Capgo offers several pricing tiers to suit different needs:
 
 | Plan | Monthly Active Users | Bandwidth | Storage | Price (Annual) |
 | --- | --- | --- | --- | --- |
-| SOLO | 1,000 | 50 GB | 2 GB | $14/month |
+| SOLO | 1,000 | 50 GB | 2 GB | $12/month |
 | MAKER | 10,000 | 500 GB | 5 GB | $33/month |
 | TEAM | 100,000 | 2,000 GB | 10 GB | $83/month |
 

@@ -161,7 +161,7 @@ Pricing is an important factor when selecting an OTA platform. The market now of
 
 | Platform | Monthly Cost | Market Position |
 | --- | --- | --- |
-| Capgo SOLO | $14 | Expanding since 2022 |
+| Capgo SOLO | $12 | Expanding since 2022 |
 | Capgo MAKER | $33 | Popular with SMBs |
 | Capgo TEAM | $83 | Preferred by enterprises |
 | Capgo PAYG | $249 | Tailored for custom use |

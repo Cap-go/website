@@ -44,7 +44,7 @@ That why we made you a clear and simple table to help you compare.
 | Sandbox app for test | ✅ | ❌ |
 | Capacitor Plugin | ✅ | ❌ Cordova compatible |
 | Cordova plugin | ❌ Could be back port | ✅ |
-| Affordable pricing | ✅ Start at $14/mo | ❌ Start at $499/mo |
+| Affordable pricing | ✅ Start at $12/mo | ❌ Start at $499/mo |
 | Native build | ❌ | ✅ |
 | End-to-End encryption | ✅ | ❌ only for Portal |
 | 100% Open source | ✅ | ❌ |

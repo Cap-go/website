@@ -43,7 +43,7 @@ To help you make an informed decision, we've created a comparison table of featu
 | Sandbox app for test | ✅ | ❌ |
 | Capacitor Plugin | ✅ | ❌ |
 | Cordova plugin support | ❌ Could be back port | ✅ |
-| Affordable pricing | ✅ Start at $14/mo | ✅ Start at $9.95/mo |
+| Affordable pricing | ✅ Start at $12/mo | ✅ Start at $9.95/mo |
 | Native build | ❌ | ✅ |
 | End-to-End encryption | ✅ | ❌ |
 | 100% Open source | ✅ | ❌ |
