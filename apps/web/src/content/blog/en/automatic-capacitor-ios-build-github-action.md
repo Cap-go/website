@@ -33,6 +33,7 @@ Skip the Fastlane, Xcode runner, certificate, provisioning profile, and upload-s
 - **Signing from CI secrets**: Keep App Store Connect keys, certificates, provisioning profiles, passwords, and team IDs in your own CI secrets.
 - **No native runner upkeep**: Capgo Build provides maintained Apple build environments, so you do not have to manage macOS runners, Xcode images, or Fastlane lanes.
 - **Artifacts and submission**: Download signed artifacts for QA or submit release builds through the Capgo CLI.
+- **Predictable pricing**: Starts at $14/month for about 15 native builds per month, or roughly $0.50 per native build depending on project build time.
 
 [Set up Capgo Build in CI/CD](/docs/cli/cloud-build/github-actions/)
 
