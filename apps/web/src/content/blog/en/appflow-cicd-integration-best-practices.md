@@ -22,13 +22,13 @@ next_blog: ''
 
 -   **Core Features**: OTA updates, automated builds, app store deployment, CLI tools.
 -   **Setup Tips**: Use branch-based automation, secure environment variables, and role-based access control.
--   **Alternatives**: Capgo provides similar features with plans from $14/month that include OTA updates and about 15 native builds/month; extra build minutes are billed by minute through credits.
+-   **Alternatives**: Capgo provides similar features with plans from $12/month that include OTA updates and about 15 native builds/month; extra build minutes are billed by minute through credits.
 
 ### Quick Comparison:
 
 | Feature | Appflow | Capgo |
 | --- | --- | --- |
-| Annual Cost | $6,000 | From $14/month with OTA updates and ~15 native builds/month |
+| Annual Cost | $6,000 | From $12/month with OTA updates and ~15 native builds/month |
 | Native Build Automation | Included | Included in the same plan, extra build minutes billed by minute through credits |
 | Update Speed | Reliable | 114 ms for 5 MB bundles |
 | Trial Period | Limited | 15 days |
@@ -148,7 +148,7 @@ Capgo delivers updates impressively fast, clocking in at 114 ms for 5 MB bundles
 
 | Feature | Capgo | Appflow |
 | --- | --- | --- |
-| Annual Cost | From $14/month with OTA updates and ~15 native builds/month | $6,000 |
+| Annual Cost | From $12/month with OTA updates and ~15 native builds/month | $6,000 |
 | Native Build Automation | Included in the same plan, extra build minutes billed by minute through credits | Included |
 | Monthly Operations | Plan-based | ~$500 |
 | Trial Period | 15 days | Limited |

@@ -255,7 +255,7 @@ Version targeting for OTA updates offers a smarter way to manage app deployments
 | --- | --- | --- |
 | Deployment Efficiency | Speeds up release cycles | 81% boost in weekly releases |
 | Update Control | Manages versions precisely | Targeted delivery to 947.6M+ updates |
-| Cost Savings | Cuts operational expenses | From $14/month with OTA updates and ~15 native builds/month |
+| Cost Savings | Cuts operational expenses | From $12/month with OTA updates and ~15 native builds/month |
 
 This method ensures updates are sent only to compatible devices, cutting down on version-related challenges.
 

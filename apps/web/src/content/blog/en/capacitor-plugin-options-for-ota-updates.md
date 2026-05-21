@@ -27,7 +27,7 @@ next_blog: ''
 
 ### Top Plugins for OTA Updates:
 
-1.  **[Capgo](https://capgo.app/)**: Fast updates (5MB in 114ms), end-to-end encryption, real-time analytics, and flexible pricing (starting at $14/month).
+1.  **[Capgo](https://capgo.app/)**: Fast updates (5MB in 114ms), end-to-end encryption, real-time analytics, and flexible pricing (starting at $12/month).
 2.  **[Appflow](https://ionic.io/appflow/)**: Enterprise-grade features at $6,000/year but shutting down in 2026.
 3.  **[Microsoft CodePush](https://microsoft.github.io/code-push/)**: Discontinued in 2024.
 
@@ -35,7 +35,7 @@ next_blog: ''
 
 | Plugin | Status | Key Features | Starting Price |
 | --- | --- | --- | --- |
-| **Capgo** | Active | Fast updates, encryption | $14/month |
+| **Capgo** | Active | Fast updates, encryption | $12/month |
 | **Appflow** | Sunsetting (2026) | Enterprise features | $6,000/year |
 | **CodePush** | Discontinued (2024) | Previously free | N/A |
 
@@ -77,7 +77,7 @@ Microsoft CodePush, once a popular choice, was discontinued in 2024. Developers 
 
 | Plugin | Status | Pricing | Key Feature |
 | --- | --- | --- | --- |
-| **Capgo** | Active | From $14/month | End-to-end encryption |
+| **Capgo** | Active | From $12/month | End-to-end encryption |
 | **Appflow** | Closing 2026 | $6,000/year | Enterprise support |
 | **CodePush** | Discontinued | Free (was) | N/A |
 
@@ -98,7 +98,7 @@ This table outlines key differences between active and discontinued plugins:
 | Update Success Rate | 82% | Not reported | N/A |
 | Monthly Active Users | Up to 1M | Enterprise | N/A |
 | Storage Capacity | Up to 20GB | Enterprise | N/A |
-| Starting Price | $14/month | $6,000/year | Discontinued |
+| Starting Price | $12/month | $6,000/year | Discontinued |
 | App Store Compliance | ✓   | ✓   | N/A |
 
 ### Plugin Pros and Cons
@@ -145,7 +145,7 @@ After understanding these requirements, focus on picking the right plugin based 
 The size of your project plays a significant role in determining the best plugin. Here's how to choose:
 
 -   **Solo Developers**: Opt for affordable solutions with essential features.  
-    _Example_: Capgo's entry plan supports up to 1,000 monthly active users for $14/month.
+    _Example_: Capgo's entry plan supports up to 1,000 monthly active users for $12/month.
     
 -   **Small Teams**: Look for scalable options with collaborative tools.  
     _Example_: Capgo's MAKER plan supports 10,000 monthly active users and includes team collaboration features for $33/month.
@@ -154,7 +154,7 @@ The size of your project plays a significant role in determining the best plugin
     _Example_: [Capgo's PAYG plan](https://capgo.app/docs/webapp/payment/) supports up to 1,000,000 monthly active users, includes 10 TB of bandwidth, and offers self-hosting options.
     
 
-Capgo stands out by offering cost-efficient plans with enterprise-grade features, starting at $14/month with OTA updates and about 15 native builds/month included. Extra build minutes are
+Capgo stands out by offering cost-efficient plans with enterprise-grade features, starting at $12/month with OTA updates and about 15 native builds/month included. Extra build minutes are
 billed by minute through credits [\[1\]](https://capgo.app/).
 
 ## Summary

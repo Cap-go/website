@@ -295,7 +295,7 @@ The OTA update market has shifted significantly, especially after [Microsoft Cod
 
 > "We are currently giving a try to @Capgo since Appcenter stopped live updates support on hybrid apps and @AppFlow is way too expensive." [\[1\]](https://capgo.app/)
 
-Cost is another important consideration for teams. Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits. That is much lower than the $6,000 annual fees of enterprise-level alternatives [\[1\]](https://capgo.app/).
+Cost is another important consideration for teams. Capgo plans start at $12/month and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits. That is much lower than the $6,000 annual fees of enterprise-level alternatives [\[1\]](https://capgo.app/).
 
 When implementing npm scripts in your deployment workflow, consider these factors:
 
@@ -335,5 +335,5 @@ Capgo's performance metrics speak for themselves:
 | Bundle Download Speed | 114 ms for 5 MB |
 | Update Success Rate | 82% globally |
 
-Starting at $14/month with OTA updates and about 15 native builds/month included - and extra build minutes are billed by minute through credits - Capgo offers a secure,
+Starting at $12/month with OTA updates and about 15 native builds/month included - and extra build minutes are billed by minute through credits - Capgo offers a secure,
 reliable, and cost-efficient option for managing OTA updates and native build automation [\[1\]](https://capgo.app/).
