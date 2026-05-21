@@ -27,6 +27,17 @@ Setting up CI/CD for Capacitor apps can be complex and time-consuming. Here's wh
 > **We now recommend using [Capgo Build with the Capgo CLI](/docs/cli/cloud-build/) for native Capacitor builds.**
 > This Fastlane Match guide is kept for teams maintaining existing GitHub Actions pipelines, but new iOS builds should use the Capgo CLI so you do not have to maintain Fastlane, Match repositories, Xcode runners, certificates, and upload scripts yourself.
 
+## Capgo Build for CI/CD by Capgo
+
+Skip the Fastlane Match, Xcode runner, certificate, provisioning profile, and upload-script maintenance. [Capgo Build](/docs/cli/cloud-build/) runs signed native iOS builds from your existing CI/CD pipeline:
+
+- **Works with your pipeline**: Trigger Capgo Build from GitHub Actions, GitLab CI, Jenkins, or local scripts after your web build and `npx cap sync`.
+- **Signing from CI secrets**: Keep App Store Connect keys, certificates, provisioning profiles, passwords, and team IDs in your own CI secrets.
+- **No native runner upkeep**: Capgo Build provides maintained Apple build environments, so you do not have to manage macOS runners, Xcode images, Fastlane, or Match repositories.
+- **Artifacts and submission**: Download signed artifacts for QA or submit release builds through the Capgo CLI.
+
+[Set up Capgo Build in CI/CD](/docs/cli/cloud-build/github-actions/)
+
 ## Manual Setup Guide
 
 Here's what you need to do:

@@ -1,0 +1,99 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const buildDocsUrl = getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/cloud-build/')
+const githubActionsDocsUrl = getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/cloud-build/github-actions/')
+const credentialsDocsUrl = getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/cloud-build/credentials/')
+---
+
+<section class="relative overflow-hidden bg-gray-900 py-12 sm:py-16 lg:py-20">
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl text-center">
+      <div class="mb-8 inline-flex items-center rounded-full bg-gray-800/40 px-4 py-2 text-sm font-medium text-gray-200 ring-1 ring-white/15 ring-inset">
+        <svg aria-hidden="true" focusable="false" class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h10M4 17h16"></path>
+        </svg>
+        Capgo Build for CI/CD
+      </div>
+
+      <h2 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">Cloud native builds from your existing pipeline</h2>
+
+      <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-300">
+        Trigger signed iOS and Android builds from GitHub Actions, GitLab CI, Jenkins, or local scripts with the Capgo CLI. Keep your source control and CI workflow, while Capgo
+        Build handles the native build environment.
+      </p>
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 gap-6 sm:mt-16 lg:grid-cols-2">
+      <div class="rounded-2xl border border-white/10 bg-gray-800 p-6">
+        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-700/40 ring-1 ring-white/15">
+          <svg aria-hidden="true" focusable="false" class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+          </svg>
+        </div>
+        <h3 class="mt-4 text-xl font-bold text-white">Pipeline friendly</h3>
+        <p class="mt-3 text-sm leading-relaxed text-gray-300">
+          Run your normal install, web build, and Capacitor sync steps, then call <code>npx @capgo/cli@latest build</code> for iOS, Android, or both platforms.
+        </p>
+      </div>
+
+      <div class="rounded-2xl border border-white/10 bg-gray-800 p-6">
+        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-700/40 ring-1 ring-white/15">
+          <svg aria-hidden="true" focusable="false" class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M12 15v2m-6 4h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2Zm10-10V7a4 4 0 0 0-8 0v4h8Z"></path>
+          </svg>
+        </div>
+        <h3 class="mt-4 text-xl font-bold text-white">Secrets stay in CI</h3>
+        <p class="mt-3 text-sm leading-relaxed text-gray-300">
+          Store App Store Connect keys, iOS certificates, provisioning profiles, Android keystores, and Play Console credentials in your own CI secret store.
+        </p>
+      </div>
+
+      <div class="rounded-2xl border border-white/10 bg-gray-800 p-6">
+        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-700/40 ring-1 ring-white/15">
+          <svg aria-hidden="true" focusable="false" class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l5 5v11a2 2 0 0 1-2 2Z"></path>
+          </svg>
+        </div>
+        <h3 class="mt-4 text-xl font-bold text-white">Maintained build images</h3>
+        <p class="mt-3 text-sm leading-relaxed text-gray-300">
+          Avoid maintaining macOS runners, Xcode images, Android SDK setup, Gradle caches, Fastlane lanes, and native release scripts for every app.
+        </p>
+      </div>
+
+      <div class="rounded-2xl border border-white/10 bg-gray-800 p-6">
+        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-700/40 ring-1 ring-white/15">
+          <svg aria-hidden="true" focusable="false" class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m5 12 5 5L20 7"></path>
+          </svg>
+        </div>
+        <h3 class="mt-4 text-xl font-bold text-white">Artifacts and submissions</h3>
+        <p class="mt-3 text-sm leading-relaxed text-gray-300">
+          Produce signed artifacts for QA, trigger release builds from tags, and submit store-ready binaries through the same CLI-driven workflow.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-col justify-center gap-4 sm:flex-row">
+      <a href={buildDocsUrl} class="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 text-base font-bold text-gray-950 transition hover:bg-gray-200">
+        Start with Capgo Build
+      </a>
+      <a
+        href={githubActionsDocsUrl}
+        class="inline-flex items-center justify-center rounded-xl border border-white/15 bg-gray-800 px-6 py-3 text-base font-medium text-white transition hover:bg-gray-700"
+      >
+        GitHub Actions guide
+      </a>
+      <a
+        href={credentialsDocsUrl}
+        class="inline-flex items-center justify-center rounded-xl border border-white/15 px-6 py-3 text-base font-medium text-white transition hover:bg-gray-800"
+      >
+        Credentials guide
+      </a>
+    </div>
+  </div>
+</section>
