@@ -17,6 +17,7 @@ Plugin App Attest|cross-platform app attestation plugin using Apple App Attest a
 Plugin App Tracking Transparency|iOS app tracking transparency permission plugin|docs/plugins/app-tracking-transparency/**
 Plugin Audio Recorder|audio recording plugin for capturing microphone input|docs/plugins/audio-recorder/**
 Plugin Audio Session|iOS audio session configuration plugin|docs/plugins/audiosession/**
+Plugin Auto|CarPlay and Android Auto template bridge for two-way communication with Capacitor apps|docs/plugins/auto/**
 Plugin Autofill Save Password|autofill and password save plugin for credential management|docs/plugins/autofill-save-password/**
 Plugin Background Geolocation|background location tracking plugin|docs/plugins/background-geolocation/**
 Plugin Background Task|periodic background fetch task plugin for iOS and Android|docs/plugins/background-task/**
