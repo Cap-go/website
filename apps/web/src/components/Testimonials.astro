@@ -174,7 +174,7 @@ const dateFormatter = new Intl.DateTimeFormat(Astro.locals.locale || 'en', {
         testimonials.map((testimonial) => (
           <article class="mb-5 break-inside-avoid rounded-lg border border-white/10 bg-slate-700/95 p-6 shadow-xl ring-1 shadow-black/20 ring-white/5">
             <div class="flex items-center gap-4">
-              <img class="h-12 w-12 rounded-full object-cover" src={testimonial.avatar} alt="" loading="lazy" decoding="async" />
+              <img class="h-12 w-12 rounded-full object-cover" src={testimonial.avatar} alt={`${testimonial.name} avatar`} loading="lazy" decoding="async" />
               <div>
                 <h3 class="text-base font-semibold text-white">{testimonial.name}</h3>
                 {testimonial.role && <p class="text-sm leading-5 text-white/75">{testimonial.role}</p>}
