@@ -126,8 +126,8 @@ Capgo offers a range of features designed to fill the gaps left by other platfor
 
 Here’s how Capgo stacks up against traditional solutions:
 
--   **Pricing**: Capgo plans start at **$14/month** and include OTA updates plus native builds, while traditional tools can exceed **$6,000 annually**.
--   **CI/CD operations**: Capgo Build can run native builds from existing CI/CD pipelines, starts at $14/month for about 15 native builds/month, and costs roughly $0.50 per native build depending on project build time.
+-   **Pricing**: Capgo plans start at **$14/month** and include OTA updates plus about 15 native builds/month, while traditional tools can exceed **$6,000 annually**.
+-   **CI/CD operations**: Capgo Build can run native builds from existing CI/CD pipelines. Extra build minutes beyond the included allowance are billed by minute through credits.
 -   **Delivery speed**: Capgo delivers a 5 MB bundle in **114 ms**, whereas other platforms have variable speeds.
 -   **Encryption**: Capgo offers **end-to-end encryption**, while many alternatives only provide basic signing.
 

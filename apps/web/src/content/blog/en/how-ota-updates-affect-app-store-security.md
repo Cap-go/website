@@ -178,8 +178,7 @@ Selecting the right OTA platform is crucial for ensuring app store compliance an
 > "We are currently giving a try to @Capgo since Appcenter stopped live updates support on hybrid apps and @AppFlow is way too expensive."  
 > – Simon Flack [\[1\]](https://capgo.app/)
 
-Costs for OTA and CI/CD platforms can vary widely. Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month, or roughly $0.50 per native build
-depending on project build time, compared with Appflow's $6,000 annual platform pricing [\[1\]](https://capgo.app/).
+Costs for OTA and CI/CD platforms can vary widely. Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits, compared with Appflow's $6,000 annual platform pricing [\[1\]](https://capgo.app/).
 
 > "Cancelled my @Appflow subscription after 4 years. Code-Push never seemed to work well, hopefully @CapGO has it figured out."  
 > – LeVar Berry [\[1\]](https://capgo.app/)

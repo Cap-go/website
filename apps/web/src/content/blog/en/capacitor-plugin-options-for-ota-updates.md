@@ -154,8 +154,8 @@ The size of your project plays a significant role in determining the best plugin
     _Example_: [Capgo's PAYG plan](https://capgo.app/docs/webapp/payment/) supports up to 1,000,000 monthly active users, includes 10 TB of bandwidth, and offers self-hosting options.
     
 
-Capgo stands out by offering cost-efficient plans with enterprise-grade features, starting at $14/month with OTA updates and about 15 native builds/month included, or roughly
-$0.50 per native build depending on project build time [\[1\]](https://capgo.app/).
+Capgo stands out by offering cost-efficient plans with enterprise-grade features, starting at $14/month with OTA updates and about 15 native builds/month included. Extra build minutes are
+billed by minute through credits [\[1\]](https://capgo.app/).
 
 ## Summary
 

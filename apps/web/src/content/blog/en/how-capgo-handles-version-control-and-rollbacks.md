@@ -25,8 +25,8 @@ next_blog: ''
 -   **CI/CD Integration**: Automates updates with tools like [GitHub Actions](https://docs.github.com/actions) and [Jenkins](https://www.jenkins.io/).
 -   **Security**: End-to-end encryption ensures updates are safe.
 
-Capgo supports 2,000+ apps, delivering updates to 95% of users within 24 hours. Pricing starts at **$14/month** and includes OTA updates plus native builds, making it a
-cost-effective solution for developers. Whether you're fixing bugs or rolling out features, Capgo ensures stability and speed.
+Capgo supports 2,000+ apps, delivering updates to 95% of users within 24 hours. Pricing starts at **$14/month** and includes OTA updates plus about 15 native builds/month; extra build
+minutes are billed by minute through credits. Whether you're fixing bugs or rolling out features, Capgo ensures stability and speed.
 
 ## How [Capgo](https://capgo.app/)'s Version Control Works
 
@@ -67,7 +67,7 @@ To get started, configure the Capgo CLI with an API key from the dashboard. Then
 By incorporating semantic versioning, you can streamline version management, automate release notes, and maintain a clear audit trail. This end-to-end automation - from committing code to delivering updates - ensures a smooth, efficient workflow while retaining rollback capabilities.
 
 The benefits of this integration are clear. Capgo currently supports nearly 2,000 production apps, delivering updates in just 114ms for a 5MB bundle. Plans start at $14/month and
-include OTA updates plus about 15 native builds/month, or roughly $0.50 per native build depending on project build time, so the time savings and reduced risk of manual errors
+include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits, so the time savings and reduced risk of manual errors
 make it a worthwhile investment for development teams.
 
 These streamlined version control processes work hand-in-hand with Capgo's rollback features, which are covered in the next section.
@@ -139,8 +139,8 @@ Capgo transforms how developers manage version control and rollbacks for [Capaci
 
 One of Capgo's standout features is its **one-click rollback**, paired with real-time monitoring. This gives developers the confidence to roll out updates knowing they can quickly revert changes if something goes wrong. On top of that, the **analytics dashboard** provides clear insights into update success rates and user engagement, helping teams make informed decisions about whether to roll back or move forward with deployments. These tools come together to create a complete solution for managing updates effectively.
 
-When it comes to pricing, Capgo plans start at **$14 per month** and include OTA updates plus about 15 native builds/month, or roughly $0.50 per native build depending on project
-build time - far more economical than alternatives that can cost up to $500 monthly. With **end-to-end encryption** and compliance with app store requirements for both Apple and
+When it comes to pricing, Capgo plans start at **$14 per month** and include OTA updates plus about 15 native builds/month. Extra build minutes beyond that allowance are billed by minute
+through the credit system, keeping costs far below alternatives that can cost up to $500 monthly. With **end-to-end encryption** and compliance with app store requirements for both Apple and
 Android, Capgo ensures updates are secure and meet the necessary standards, reducing risks like app rejections or security flaws.
 
 | **Feature** | **Capgo Advantage** |

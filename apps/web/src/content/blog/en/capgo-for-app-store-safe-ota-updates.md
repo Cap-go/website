@@ -24,7 +24,7 @@ next_blog: ''
 
 -   **Instant Updates**: Fix bugs or roll out features without delays.
 -   **Secure Deployments**: Updates are encrypted and accessible only to authorized users.
--   **Cost-Effective**: Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month, or roughly $0.50 per native build depending on project build time.
+-   **Cost-Effective**: Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits.
 -   **Controlled Rollouts**: Target specific users or groups for updates.
 -   **App Store Compliance**: Fully adheres to Apple and Google policies.
 
@@ -46,7 +46,7 @@ Capgo is ideal for developers needing **fast, compliant updates** without breaki
 
 Capgo's platform offers powerful over-the-air (OTA) update capabilities, ensuring secure and efficient app updates. With **end-to-end encryption**, updates are accessible only to authorized users, keeping deployments secure from start to finish.
 
-Capgo works effortlessly with popular CI/CD platforms like **[GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/), [Azure DevOps](https://azure.microsoft.com/en-us/products/devops), [Jenkins](https://www.jenkins.io/), and [CircleCI](https://circleci.com/)**. Plans start at $14/month and include OTA updates plus about 15 native builds/month, or roughly $0.50 per native build depending on project build time. This integration simplifies deployment while adhering to app store regulations.
+Capgo works effortlessly with popular CI/CD platforms like **[GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/), [Azure DevOps](https://azure.microsoft.com/en-us/products/devops), [Jenkins](https://www.jenkins.io/), and [CircleCI](https://circleci.com/)**. Plans start at $14/month and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits. This integration simplifies deployment while adhering to app store regulations.
 
 The platform's **user assignment system** gives developers precise control over update distribution. This feature allows for targeted rollouts and beta testing while staying within app store policies. As colenso shared:
 
@@ -92,7 +92,7 @@ To better understand the landscape, here's a quick comparison of key OTA platfor
 | --- | --- | --- | --- |
 | AppFlow | Built-in Ionic integration | Functionality concerns | $6,000/year |
 | App Center | Backed by Microsoft | No hybrid app support | Free tier available |
-| Capgo | End-to-end encryption; CI/CD ready | Still maturing as a platform | From $14/month with OTA updates and native builds |
+| Capgo | End-to-end encryption; CI/CD ready | Still maturing as a platform | From $14/month with OTA updates and ~15 native builds/month |
 
 The industry is clearly looking for more affordable and reliable OTA solutions. Even NASA's [OSIRIS-REx](https://en.wikipedia.org/wiki/OSIRIS-REx) team weighed in:
 
@@ -129,7 +129,7 @@ Choosing the right [update strategy](https://capgo.app/docs/live-updates/differe
 | **Project Need** | **Recommended Approach** | **Evidence** |
 | --- | --- | --- |
 | Critical Bug Fixes | [Capgo OTA Updates](https://console.capgo.app/resend_email) | "Avoiding review for bugfix is golden." – Bessie Cooper [\[1\]](https://capgo.app/) |
-| Cost-Sensitive Projects | Capgo (plans from $14/month with OTA updates and native builds) | Saves costs compared to other alternatives [\[1\]](https://capgo.app/) |
+| Cost-Sensitive Projects | Capgo (plans from $14/month with OTA updates and ~15 native builds/month) | Saves costs compared to other alternatives [\[1\]](https://capgo.app/) |
 | Enterprise Scale | Traditional + OTA Hybrid | Over 947.6M successful updates across 1,400 production apps [\[1\]](https://capgo.app/) |
 
 Here are some strategies that build on these findings:

@@ -21,7 +21,7 @@ next_blog: ''
 -   **Live Updates**: Push updates instantly without app store delays. 95% of users receive updates in 24 hours.
 -   **Pipeline Essentials**: Automate builds triggered by branch activity (`main`, `staging`, `feature/*`) and define separate environments for staging and production.
 -   **[Capgo](https://capgo.app/) Integration**: Use Capgo to deploy secure, encrypted updates, manage [update channels](https://capgo.app/docs/webapp/channels/), and monitor performance.
--   **Affordable Plans**: Plans start at $14/month for live updates, native builds, and analytics.
+-   **Affordable Plans**: Plans start at $14/month with live updates, analytics, and about 15 native builds/month.
 
 Capacitor CI/CD pipelines simplify workflows, improve efficiency, and ensure your app stays up-to-date seamlessly. Let’s dive into the details.
 

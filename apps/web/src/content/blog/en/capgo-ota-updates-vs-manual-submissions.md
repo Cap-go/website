@@ -191,13 +191,13 @@ Cost is another critical factor when choosing an update strategy. The pricing st
 
 | **Cost Factor** | **Capgo OTA** | **Manual Submission** |
 | --- | --- | --- |
-| **Setup Cost** | Included in Capgo plans with OTA updates and native builds | Developer account fees |
-| **Monthly Fee** | From $14 with about 15 native builds/month to $249 (PAYG) | None |
+| **Setup Cost** | Included in Capgo plans with OTA updates and about 15 native builds/month | Developer account fees |
+| **Monthly Fee** | From $14/month with OTA updates and about 15 native builds/month included | None |
 | **Bandwidth** | 50GB–10TB (based on plan) | Store-managed |
 | **Storage** | 2GB–20GB (based on plan) | Store-managed |
 | **User Limit** | 1,000–1,000,000 MAU | Unlimited |
 
-Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month, or roughly $0.50 per native build depending on project build time [\[1\]](https://capgo.app).
+Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits [\[1\]](https://capgo.app).
 The monthly plans provide flexibility based on bandwidth, storage, build usage, and user needs.
 
 These factors highlight the trade-offs between the two approaches, helping teams choose the best fit for their app deployment strategy.

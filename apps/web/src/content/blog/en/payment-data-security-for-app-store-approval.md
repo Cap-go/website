@@ -71,7 +71,7 @@ Microsoft Code Push was discontinued in 2024 due to ongoing reliability issues a
 Here's a breakdown of the tools based on security, compliance, deployment options, and cost:
 
 -   **Capgo**: Offers true end-to-end encryption, complies with Apple and Google standards, supports both cloud and self-hosted deployment, integrates with CI/CD pipelines, and is
-    open-source. Plans start at $14/month and include OTA updates plus about 15 native builds/month, or roughly $0.50 per native build depending on project build time. Over five
+    open-source. Plans start at $14/month and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits. Over five
     years, it could save up to $26,100 compared to Appflow [\[1\]](https://capgo.app/).
     
     
@@ -85,8 +85,8 @@ Here's a breakdown of the tools based on security, compliance, deployment option
 Here’s a breakdown of the key takeaways:
 
 -   **Implement end-to-end encryption**: Ensure updates and payment data are fully encrypted to meet app store security standards.
--   **Manage costs effectively**: Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month, or roughly $0.50 per native build depending on project
-    build time. This is much lower than Appflow's $6,000 annual fee [\[1\]](https://capgo.app/).
+-   **Manage costs effectively**: Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month. Extra build minutes beyond the included allowance are billed by
+    minute through credits. This is much lower than Appflow's $6,000 annual fee [\[1\]](https://capgo.app/).
 -   **Stay compliant**: Regularly update security measures and align with app store policies to avoid issues.
 -   **Offer deployment flexibility**: Choose between cloud or self-hosted solutions, giving you control over payment data security.
 

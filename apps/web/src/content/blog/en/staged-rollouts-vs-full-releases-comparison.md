@@ -265,7 +265,7 @@ Here’s how Capgo stacks up against competitors:
 
 | Service | Pricing Model | Monthly Operating Cost |
 | --- | --- | --- |
-| **Capgo** | From $14/month with OTA updates and ~15 native builds/month, or roughly $0.50/build | Plan-based |
+| **Capgo** | From $14/month with OTA updates and ~15 native builds/month; extra build minutes are billed by minute through credits | Plan-based |
 | **[Appflow](https://ionic.io/appflow)** | N/A | $500 ($6,000 annually) |
 
 > "Capgo is a smart way to make hot code pushes (and not for all the money in the world like with @Appflow) :-)" – NASA's OSIRIS-REx [\[1\]](https://capgo.app/)

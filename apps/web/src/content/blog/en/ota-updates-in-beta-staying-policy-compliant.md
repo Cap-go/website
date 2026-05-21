@@ -164,7 +164,7 @@ Incorporating update management into your workflow demands a focus on compliance
 
 1\. **CI/CD Pipeline Setup**
 
-Modern update tools often integrate directly with CI/CD pipelines. For instance, Capgo offers CI/CD integration and Capgo Build alongside OTA updates, with Capgo Build starting at $14/month for about 15 native builds/month, or roughly $0.50 per native build depending on project build time [\[1\]](https://capgo.app/). That is far more budget-friendly compared to [AppFlow](https://ionic.io/appflow)’s $6,000 annual fee [\[1\]](https://capgo.app/).
+Modern update tools often integrate directly with CI/CD pipelines. For instance, Capgo offers CI/CD integration and Capgo Build alongside OTA updates. Plans start at $14/month and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits [\[1\]](https://capgo.app/). That is far more budget-friendly compared to [AppFlow](https://ionic.io/appflow)’s $6,000 annual fee [\[1\]](https://capgo.app/).
 
 2\. **Update Distribution Strategy**
 

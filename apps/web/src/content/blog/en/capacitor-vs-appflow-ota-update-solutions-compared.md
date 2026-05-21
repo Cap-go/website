@@ -24,7 +24,7 @@ next_blog: ''
     
     -   Updates reach 95% of users in 24 hours.
     -   Offers end-to-end encryption and flexible hosting (cloud or self-hosted).
-    -   Plans start at $14/month and include OTA updates plus about 15 native builds/month, or roughly $0.50 per native build depending on project build time.
+    -   Plans start at $14/month and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits.
     -   Actively developed and open-source.
 -   **Appflow**:
     
@@ -155,8 +155,8 @@ Capgo doesn't just stop at setup - it further enhances the build pipeline with C
 ### Build Pipeline Support
 
 Following the quick setup, Capgo integrates effortlessly with widely-used CI/CD tools like GitHub Actions, GitLab CI, and Jenkins. This approach supports over 50 apps without
-locking developers into specific platforms. Plans start at $14/month and include OTA updates plus about 15 native builds/month, or roughly $0.50 per native build depending on
-project build time.
+locking developers into specific platforms. Plans start at $14/month and include OTA updates plus about 15 native builds/month. Extra build minutes beyond the included allowance are billed
+by minute through credits.
 
 ### Update Management
 
@@ -203,7 +203,7 @@ These features ensure updates are encrypted, access-controlled, and reversible, 
 
 ### Platform Costs
 
-The cost of OTA update solutions can vary widely. Capgo offers plans starting at $14/month and going up to $249/month (PAYG). Here's a breakdown of their pricing:
+The cost of OTA update solutions can vary widely. Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits. Here's a breakdown of their pricing:
 
 | Plan | Monthly Cost (Billed Annually) | Key Features |
 | --- | --- | --- |
@@ -228,7 +228,7 @@ Pricing is a major factor in choosing an OTA update solution, especially for lon
 | Year 3 | $504 | $18,000 | $17,496 |
 | Year 5 | $840 | $30,000 | $29,160 |
 
-\*Capgo plans start at $14/month ($168/year) and include OTA updates plus about 15 native builds/month, or roughly $0.50 per native build depending on project build time [\[1\]](https://capgo.app/).
+\*Capgo plans start at $14/month ($168/year) and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits [\[1\]](https://capgo.app/).
 
 Jermaine shared his experience:
 

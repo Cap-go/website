@@ -221,8 +221,7 @@ npx @capgo/cli init
 ```
 
 Capgo works seamlessly with CI/CD systems and offers features like targeted beta testing and staged rollouts using its channel system. It also provides real-time analytics and error
-tracking, giving you full visibility into the update process. Plans start at $14/month and include OTA updates plus about 15 native builds/month, or roughly $0.50 per native build
-depending on project build time.
+tracking, giving you full visibility into the update process. Plans start at $14/month and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits.
 
 ## Conclusion
 

@@ -49,10 +49,9 @@ Skip the Fastlane, Gradle runner, keystore, and upload-script maintenance. [Capg
 
 ### Pricing
 
-- Starts at $14/month
-- Includes about 15 native builds per month
-- Roughly $0.50 per native build depending on project build time
-- Usage-based native build pricing
+- Capgo plans start at $14/month
+- Includes OTA updates and about 15 native builds per month
+- Extra build minutes are billed by minute through credits
 
 [Set up Capgo Build in CI/CD](/docs/cli/cloud-build/github-actions/)
 

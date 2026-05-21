@@ -204,7 +204,7 @@ Capgo easily fits into existing development workflows while adhering to Google P
 | API Access | Public API for custom setups | Offers flexible compliance management |
 | [Channel System](https://capgo.app/docs/live-updates/channels/) | Beta testing and staged rollouts | Enables controlled update releases |
 
-Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month, or roughly $0.50 per native build depending on project build time.
+Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits.
 
 ### Update Management
 
@@ -221,8 +221,8 @@ Capgo provides tools to manage updates effectively while aligning with Google Pl
 
 Capgo also offers flexible hosting options, including cloud-based and self-hosted solutions. These options allow organizations to maintain control over their update infrastructure while meeting Google Play's security standards. Features like real-time monitoring and instant rollback help achieve the 82% global success rate benchmark.
 
-For teams adding native build automation to the same compliance workflow, Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month, or roughly
-$0.50 per native build depending on project build time.
+For teams adding native build automation to the same compliance workflow, Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month. Extra build minutes
+beyond the included allowance are billed by minute through credits.
 
 ## Summary
 

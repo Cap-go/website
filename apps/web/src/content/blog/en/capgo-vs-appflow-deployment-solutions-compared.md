@@ -85,7 +85,7 @@ These tiers are structured to scale with your team's growth, offering flexibilit
 ### Small Team Pricing
 
 For startups and smaller teams, Capgo's pricing stands out as a cost-effective alternative to traditional solutions. While platforms like Appflow can cost thousands annually,
-Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month, or roughly $0.50 per native build depending on project build time [\[1\]](https://capgo.app).
+Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits [\[1\]](https://capgo.app).
 
 > "We are currently giving a try to @Capgo since Appcenter stopped live updates support on hybrid apps and @AppFlow is way too expensive." - Simon Flack [\[1\]](https://capgo.app)
 

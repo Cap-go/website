@@ -337,7 +337,7 @@ Key highlights of the update system include:
 -   **Error tracking** to monitor issues
 
 Currently, **750 apps** are using Capgo in production. Its global CDN delivers updates with an average speed of **114ms** for 5MB bundles. Plans start at $14/month and include OTA
-updates plus about 15 native builds/month, or roughly $0.50 per native build depending on project build time.
+updates plus about 15 native builds/month; extra build minutes are billed by minute through credits.
 
 > "Jumped over to @Capgo after @AppFlow hit us with a $5000 bill for the year to continue. Loving Capgo so far. Thanks for @Capgo, it's a great product." - jermaine [\[1\]](https://capgo.app/)
 

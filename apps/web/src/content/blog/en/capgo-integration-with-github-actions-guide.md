@@ -100,7 +100,7 @@ Before adding the workflow, confirm the repository has the required secrets, bra
 
 - Capgo plans start at $14/month.
 - The same plan includes OTA updates and about 15 native builds per month.
-- Native builds cost roughly $0.50 each depending on project build time.
+- Extra build minutes are billed by minute through credits.
 
 Here’s how to set up your repository:
 

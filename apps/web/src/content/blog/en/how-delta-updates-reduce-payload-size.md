@@ -142,8 +142,8 @@ Use Capgo's analytics to track update performance in real time. Key metrics incl
 
 If an issue arises, Capgo's one-click rollback feature allows for quick recovery.
 
-For enterprise apps, Capgo's CI/CD integration can streamline testing and deployment. Plans start at $14/month and include OTA updates plus about 15 native builds/month, or roughly
-$0.50 per native build depending on project build time.
+For enterprise apps, Capgo's CI/CD integration can streamline testing and deployment. Plans start at $14/month and include OTA updates plus about 15 native builds/month. Extra build minutes
+beyond the included allowance are billed by minute through credits.
 
 ## Delta Update Tips
 
