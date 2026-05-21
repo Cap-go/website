@@ -264,7 +264,7 @@ Here's how update systems compare:
 | Success Rate | 82% worldwide [\[1\]](https://capgo.app/) | Not publicly disclosed | Not publicly disclosed |
 | Encryption | End-to-end | Standard encryption | Standard encryption |
 | Self-hosting | Available | Not available | Not available |
-| Pricing | $12–$249/month | Typically higher | Comparable |
+| Pricing | $14–$249/month | Typically higher | Comparable |
 
 Capgo's instant updates help maintain app stability by avoiding app store delays. As Rodrigo Mantica, an industry leader, puts it:
 

@@ -25,7 +25,7 @@ next_blog: ''
 
 ### Quick Overview
 
-1.  **Requirements**: GitHub account, [Capgo account](https://capgo.app/disclaimer/) (from $12/month), Capacitor project, [Node.js](https://nodejs.org/en).
+1.  **Requirements**: GitHub account, [Capgo account](https://capgo.app/disclaimer/) (from $14/month), Capacitor project, [Node.js](https://nodejs.org/en).
 2.  **Setup**: Install [Capgo CLI](https://capgo.app/docs/cli/commands) with `npx @capgo/cli init`, configure GitHub Actions with a YAML workflow.
 3.  **Deployment**: Use commands like `npx @capgo/cli deploy` to [automate updates](https://capgo.app/docs/live-updates/update-behavior/).
 4.  **Testing**: Deploy to test channels (e.g., beta, staging) before production.
@@ -74,7 +74,7 @@ Make sure you have the following accounts and tools ready:
 | Requirement | Purpose | Details |
 | --- | --- | --- |
 | **GitHub Account** | Version Control & CI/CD | Active account with access to repositories |
-| **Capgo Account** | Manage Live Updates | Plans start at $12/month for the SOLO plan |
+| **Capgo Account** | Manage Live Updates | Plans start at $14/month |
 | **Capacitor Project** | App Development | A functional project ready for integration |
 | **Node.js** | Runtime Environment | Latest LTS version is recommended |
 
@@ -98,8 +98,8 @@ Before adding the workflow, confirm the repository has the required secrets, bra
 
 ### Pricing
 
-- OTA updates start at $12/month.
-- Capgo Build starts at $14/month for about 15 native builds per month.
+- Capgo plans start at $14/month.
+- The same plan includes OTA updates and about 15 native builds per month.
 - Native builds cost roughly $0.50 each depending on project build time.
 
 Here’s how to set up your repository:

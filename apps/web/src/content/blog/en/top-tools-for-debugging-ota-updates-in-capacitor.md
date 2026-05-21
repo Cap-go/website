@@ -18,7 +18,7 @@ next_blog: ''
 
 Debugging Over-the-Air (OTA) updates in [Capacitor](https://capacitorjs.com/) apps can be tricky, but the right tools make a big difference. Whether you're managing version conflicts, ensuring [secure updates](https://capgo.app/docs/live-updates/update-behavior/), or debugging across platforms, here are two essential tools to consider:
 
--   **[Capgo](https://capgo.app/)**: Secure OTA updates with end-to-end encryption, CI/CD integration, and user-specific rollouts. Starts at $12/month.
+-   **[Capgo](https://capgo.app/)**: Secure OTA updates with end-to-end encryption, CI/CD integration, and user-specific rollouts. Starts at $14/month.
 -   **[Inspect.dev](https://inspect.dev/)**: Debug both Android and iOS apps, even on Windows, with [Chrome DevTools](https://developer.chrome.com/docs/devtools) integration. Costs $49/year.
 
 ### Quick Comparison
@@ -28,7 +28,7 @@ Debugging Over-the-Air (OTA) updates in [Capacitor](https://capacitorjs.com/) ap
 | Update Management | Advanced (encryption, CI/CD) | Not applicable |
 | [Debugging Tools](https://capgo.app/docs/plugins/updater/debugging/) | Version control, rollback | Chrome DevTools |
 | Platform Support | Android, iOS | Android, iOS (Windows support) |
-| Pricing | $12/month | $49/year |
+| Pricing | $14/month | $49/year |
 
 Choose based on your app's needs: **Capgo** for security and automation, or **Inspect.dev** for cross-platform debugging.
 
@@ -96,7 +96,7 @@ Capgo provides a reliable solution for handling OTA updates in Capacitor apps. I
 | User Assignment | Targets specific users | Allows controlled update rollouts |
 | Version Control | Tracks update history | Eases troubleshooting and management |
 
-Capgo's pricing starts at $12/month for solo developers, with options scaling up for enterprises, including custom domains and API access.
+Capgo's pricing starts at $14/month for solo developers, with options scaling up for enterprises, including custom domains and API access.
 
 ### [Inspect.dev](https://inspect.dev/)
 
@@ -127,7 +127,7 @@ When selecting a debugging tool for Capacitor OTA updates, it's essential to eva
 | Security Features | End-to-end encryption, compliance checks | Standard debugging security |
 | Platform Support | Android, iOS | Android, iOS (including iOS on Windows) |
 | CI/CD Integration | Built-in | Limited |
-| Monthly Cost | $12/month (SOLO) | $4.08/month (billed annually) |
+| Monthly Cost | $14/month | $4.08/month (billed annually) |
 
 ### What Makes Each Tool Stand Out?
 
@@ -164,7 +164,8 @@ Consider your technical priorities and match them to the tool's strengths:
 -   Need [automated updates](https://capgo.app/docs/plugins/updater/self-hosted/auto-update/) with added security? **Capgo** is ideal.
 
 **Budget**
-Budget plays a big role. **Capgo** offers advanced features like automation and security starting at $12/month. **Inspect.dev** provides specialized debugging features for $49 annually, catering to specific use cases.
+Budget plays a big role. **Capgo** offers advanced features like automation and security starting at $14/month. **Inspect.dev** provides specialized debugging features for $49
+annually, catering to specific use cases.
 
 **Security and Compliance**  
 If security is a top priority, **Capgo** ensures updates comply with both Apple and Android standards while offering end-to-end encryption.

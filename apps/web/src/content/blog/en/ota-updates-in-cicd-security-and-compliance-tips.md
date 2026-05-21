@@ -199,7 +199,7 @@ The OTA market is evolving, with new platforms offering competitive pricing and 
 
 | **Cost Component** | **Other OTA Solutions** | **Capgo** |
 | --- | --- | --- |
-| Monthly Operations | $300 | Starting at $12 |
+| Monthly Operations | $300 | Starting at $14 |
 | Annual Enterprise Cost | $6,000+ | $996 |
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica, @manticarodrigo [\[1\]](https://capgo.app/)

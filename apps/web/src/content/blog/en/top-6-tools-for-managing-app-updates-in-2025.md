@@ -29,7 +29,7 @@ next_blog: ''
 
 | Tool | Best For | Key Features | Pricing (Starting) |
 | --- | --- | --- | --- |
-| **Capgo** | Capacitor apps | OTA updates, encryption, CI/CD integration | $12/month |
+| **Capgo** | Capacitor apps | OTA updates, encryption, CI/CD integration | $14/month |
 | **Automox** | Cross-platform updates | Automated patching, compliance reporting | Custom pricing |
 | **Ionic Appflow** | Hybrid app development | CI/CD integration, live updates | $49/month |
 | **Microsoft Intune** | Enterprise security | Endpoint management, Azure integration | Part of Microsoft 365 |
@@ -188,7 +188,8 @@ While Capgo highlights encrypted OTA updates for Capacitor apps, CodePush stands
 
 Different tools shine depending on specific team needs and project requirements. Managing app updates in 2025 calls for tools that combine efficiency, security, and seamless integration with CI/CD workflows.
 
-**Capgo** is a standout choice for [Capacitor developers](https://capgo.app/blog/capacitor-comprehensive-guide/), offering instant deployments and encrypted over-the-air (OTA) updates. Starting at $12/month for independent developers, it provides real-time updates and strong version control, making it suitable for projects of any size.
+**Capgo** is a standout choice for [Capacitor developers](https://capgo.app/blog/capacitor-comprehensive-guide/), offering instant deployments and encrypted over-the-air (OTA)
+updates. Starting at $14/month for independent developers, it provides real-time updates and strong version control, making it suitable for projects of any size.
 
 For teams prioritizing enterprise-level security and compliance, **Microsoft Intune** and **Jamf Pro** are excellent options. These platforms deliver extensive endpoint management, crucial for organizations dealing with sensitive data and strict compliance standards.
 

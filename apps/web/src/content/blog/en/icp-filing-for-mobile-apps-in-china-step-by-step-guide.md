@@ -253,7 +253,7 @@ Capgo’s features provide a competitive advantage, as highlighted below:
 | Storage Capacity | Up to 20 GB | Variable |
 | Bandwidth | Up to 10 TB | Often restricted |
 | Update Speed | 434ms average response [\[1\]](https://capgo.app/) | Typically slower |
-| Cost Structure | Starts at $12/month | Generally higher |
+| Cost Structure | Starts at $14/month | Generally higher |
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 

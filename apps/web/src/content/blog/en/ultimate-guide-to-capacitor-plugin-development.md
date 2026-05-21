@@ -363,7 +363,7 @@ Here’s a quick comparison:
 | Feature | Capgo | Appflow | CodePush |
 | --- | --- | --- | --- |
 | **Status** | Active | Shutting down 2026 | Discontinued 2024 |
-| **Pricing** | $12–$249/month | $5,000+/year | Free (discontinued) |
+| **Pricing** | $14–$249/month | $5,000+/year | Free (discontinued) |
 | **Encryption** | End-to-end | Code signing only | Basic |
 | **Platform Support** | Capacitor 8 | Ionic/Capacitor | React Native |
 

@@ -322,7 +322,8 @@ Keeping certificates updated is critical for securing API communications. Capgo 
 **How to Implement:**
 
 -   **Set Up Automated Updates**  
-    Integrate Capgo's CI/CD pipeline to handle certificate updates automatically. For native builds, Capgo Build starts at $14/month for about 15 native builds/month, or roughly $0.50 per native build depending on project build time.
+    Integrate Capgo's CI/CD pipeline to handle certificate updates automatically. Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month, or
+    roughly $0.50 per native build depending on project build time.
     
 -   **Track Certificate Metrics**  
     Use Capgo’s analytics dashboard to monitor key metrics, such as the global update success rate, which currently stands at 82% [\[1\]](https://capgo.app).

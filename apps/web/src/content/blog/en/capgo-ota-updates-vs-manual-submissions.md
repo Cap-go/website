@@ -22,7 +22,7 @@ next_blog: ''
 -   **User Reach**: 95% of users updated within 24 hours via Capgo; [manual updates](https://capgo.app/docs/getting-started/deploy/) depend on user action.
 -   **Data Efficiency**: Only changed content is sent with Capgo; app stores require full app downloads.
 -   **Control**: Capgo allows instant rollbacks; app stores require resubmission.
--   **Cost**: Starting at $12/month for Capgo vs. $99/year for Apple or $25 for Google developer accounts.
+-   **Cost**: Starting at $14/month for Capgo vs. $99/year for Apple or $25 for Google developer accounts.
 
 ### Quick Comparison
 
@@ -32,7 +32,7 @@ next_blog: ''
 | **Update Success Rate** | 95% within 24 hours | User-dependent |
 | **Bandwidth Usage** | Only changed content | Full app download |
 | **Rollback Capability** | Instant one-click | New submission required |
-| **Cost** | From $12/month | $99/year (Apple), $25 (Google) |
+| **Cost** | From $14/month | $99/year (Apple), $25 (Google) |
 
 Capgo is ideal for quick fixes and feature tweaks, while major updates or native code changes still require manual store submissions. Combining both methods ensures [efficient and compliant app updates](https://capgo.app/blog/do-apple-allow-live-updates/).
 
@@ -53,7 +53,7 @@ Here’s how Capgo OTA updates stack up against traditional app store submission
 | Update Distribution | Targeted channels | Global release only |
 | Bandwidth Usage | Only changed content | Full app download |
 | Rollback Capability | Instant one-click | New submission required |
-| Cost Structure | From $12/month | $99/year (Apple), $25 (Google) |
+| Cost Structure | From $14/month | $99/year (Apple), $25 (Google) |
 
 ### Update Speed Analysis
 
@@ -191,13 +191,14 @@ Cost is another critical factor when choosing an update strategy. The pricing st
 
 | **Cost Factor** | **Capgo OTA** | **Manual Submission** |
 | --- | --- | --- |
-| **Setup Cost** | No setup fee for OTA updates; Capgo Build starts at $14/month for ~15 native builds/month, or roughly $0.50/build | Developer account fees |
-| **Monthly Fee** | From $12 (SOLO) to $249 (PAYG) | None |
+| **Setup Cost** | Included in Capgo plans with OTA updates and native builds | Developer account fees |
+| **Monthly Fee** | From $14 with about 15 native builds/month to $249 (PAYG) | None |
 | **Bandwidth** | 50GB–10TB (based on plan) | Store-managed |
 | **Storage** | 2GB–20GB (based on plan) | Store-managed |
 | **User Limit** | 1,000–1,000,000 MAU | Unlimited |
 
-Capgo's OTA update plans start at just $12/month, making it a cost-efficient solution for teams that release frequent updates or manage multiple apps [\[1\]](https://capgo.app). The monthly plans provide flexibility based on bandwidth, storage, and user needs. For native CI/CD builds, Capgo Build starts at $14/month for about 15 native builds/month, or roughly $0.50 per native build depending on project build time.
+Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month, or roughly $0.50 per native build depending on project build time [\[1\]](https://capgo.app).
+The monthly plans provide flexibility based on bandwidth, storage, build usage, and user needs.
 
 These factors highlight the trade-offs between the two approaches, helping teams choose the best fit for their app deployment strategy.
 
@@ -258,7 +259,9 @@ What sets Capgo apart is its ability to push updates in real time. You can test 
 ::: faq
 ### How does the cost of Capgo's OTA updates compare to traditional app store update costs?
 
-Capgo's OTA updates provide a **more budget-friendly option** compared to the traditional app store update process. With Capgo, you're looking at plans starting from just **$12 per month**. When you stack that up against competitors like [Appflow](https://ionic.io/appflow/), which charges roughly **$6,000 annually** for similar services, the savings become clear.
+Capgo's OTA updates provide a **more budget-friendly option** compared to the traditional app store update process. With Capgo, you're looking at plans starting from **$14 per
+month**. When you stack that up against competitors like [Appflow](https://ionic.io/appflow/), which charges roughly **$6,000 annually** for similar services, the savings become
+clear.
 
 Traditional app store submissions, on the other hand, come with recurring expenses like **Apple's $99 annual Developer Program fee** and a **30% commission** on in-app purchases. Plus, Capgo saves you from the hassle of waiting for app store approvals, letting you roll out updates instantly and simplify your workflow.
 :::

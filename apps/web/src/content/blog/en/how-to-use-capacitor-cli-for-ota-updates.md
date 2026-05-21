@@ -44,7 +44,7 @@ Over-The-Air (OTA) updates let you deliver app fixes and features directly to us
 | --- | --- | --- | --- | --- |
 | **Market Focus** | Global | German Market | Enterprise | \-  |
 | **Security** | End-to-end encryption | Basic signing | Basic signing | \-  |
-| **Cost** | From $12/mo | Comparable | ~$500/mo | Was free |
+| **Cost** | From $14/mo | Comparable | ~$500/mo | Was free |
 
 Capgo stands out with fast updates (95% within 24 hours), strong security, and CI/CD integration. With other tools phasing out, it’s a reliable choice for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/).
 
@@ -173,7 +173,7 @@ Here’s a breakdown of the top OTA update tools for Capacitor apps:
 | Security | End-to-end encryption | Basic signing | Basic signing | \-  |
 | [Self-hosting Option](https://capgo.app/blog/self-hosted-capgo/) | Yes | No  | No  | \-  |
 | CI/CD Integration | Yes | Limited | Yes | \-  |
-| Monthly Cost | From $12 | Comparable | ~$500 | Was free |
+| Monthly Cost | From $14 | Comparable | ~$500 | Was free |
 
 This comparison helps developers identify the best tool for delivering [fast and secure OTA updates](https://capgo.app/blog/open-source-licence/) in their Capacitor apps.
 

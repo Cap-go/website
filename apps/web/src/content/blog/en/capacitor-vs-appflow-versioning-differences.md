@@ -24,7 +24,7 @@ next_blog: ''
 **Key Changes in the Market:**
 
 -   **Appflow shuts down in 2026.**
--   Alternatives like **[Capgo](https://capgo.app/)** offer live updates, starting at $12/month, with 95% updates delivered in 24 hours.
+-   Alternatives like **[Capgo](https://capgo.app/)** offer live updates, starting at $14/month, with 95% updates delivered in 24 hours.
 
 ### Quick Comparison
 
@@ -32,7 +32,7 @@ next_blog: ''
 | --- | --- | --- | --- |
 | **Versioning** | Manual edits | Automated via CI/CD | Live updates |
 | **Update Speed** | Slower (App Store delays) | Faster (Code-push) | Near-instant |
-| **Cost** | Free tools | ~$6,000/year | Starting at $12/month |
+| **Cost** | Free tools | ~$6,000/year | Starting at $14/month |
 | **Error Risk** | Higher (manual errors) | Lower | Lower |
 | **End Date** | Active | Ends 2026 | Active |
 
@@ -118,7 +118,7 @@ Capgo offers a solution for teams looking to streamline version control without 
 
 The version control market is shifting as older services phase out. Teams now need to focus on cost, speed, and compliance when choosing a strategy. Here's a snapshot of the current options:
 
--   **Capgo** (launched 2022): Active, starting at $12/month, supports live updates
+-   **Capgo** (launched 2022): Active, starting at $14/month, supports live updates
 -   **Appflow**: Shutting down in 2026, priced at $6,000/year [\[1\]](https://capgo.app/), offers [automated updates](https://capgo.app/docs/live-updates/update-behavior/)
 
 These tools are stepping in to fill the void left by the closure of CodePush in 2024 and the upcoming end of Appflow in 2026.

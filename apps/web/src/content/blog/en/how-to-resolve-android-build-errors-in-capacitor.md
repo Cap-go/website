@@ -268,7 +268,7 @@ This rapid deployment process eliminates the delays associated with traditional 
 | Deployment Time | Minutes | Days to weeks |
 | Update Control | Immediate | Requires store review |
 | Rollback | One-click | Requires new submission |
-| Cost | Starts at $12/month | Store fees + added dev time |
+| Cost | Starts at $14/month | Store fees + added dev time |
 | Security | E2E encryption | Standard store security |
 
 > "Capgo is a must-have tool for developers, who want to be more productive. Avoiding review for bugfix is golden." - Bessie Cooper [\[1\]](https://capgo.app/)

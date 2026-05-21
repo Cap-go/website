@@ -24,7 +24,7 @@ next_blog: ''
     
     -   Updates reach 95% of users in 24 hours.
     -   Offers end-to-end encryption and flexible hosting (cloud or self-hosted).
-    -   OTA updates from $12/month ($144+/year). Capgo Build starts at $14/month for about 15 native builds/month, or roughly $0.50 per native build depending on project build time.
+    -   Plans start at $14/month and include OTA updates plus about 15 native builds/month, or roughly $0.50 per native build depending on project build time.
     -   Actively developed and open-source.
 -   **Appflow**:
     
@@ -40,7 +40,7 @@ next_blog: ''
 | **Security** | End-to-end encryption | Standard signing |
 | **Hosting** | Cloud or self-hosted | Cloud-only |
 | **Future Availability** | Actively developed | Ends in 2026 |
-| **Annual Cost** | From $144/year (OTA only) | $6,000 |
+| **Annual Cost** | From $168/year | $6,000 |
 
 **Bottom line:** Capacitor (Capgo) is a future-proof, secure, and cost-efficient choice, especially for long-term projects. Appflow may suit short-term needs but requires migration planning due to its upcoming shutdown.
 
@@ -109,7 +109,7 @@ This table highlights the main differences between Capgo and Appflow:
 | **CI/CD Integration** | GitHub Actions, GitLab CI, Jenkins | Ionic-specific tools |
 | **Hosting Options** | Cloud or self-hosted | Cloud-only |
 | **Platform Status** | Active development | Support ends in 2026 |
-| **Annual Cost** | From $144/year ($12/month for OTA) | $6,000 |
+| **Annual Cost** | From $168/year ($14/month) | $6,000 |
 | **Source Code** | 100% open-source | Proprietary |
 
 These distinctions can help guide your choice depending on your specific needs.
@@ -154,7 +154,9 @@ Capgo doesn't just stop at setup - it further enhances the build pipeline with C
 
 ### Build Pipeline Support
 
-Following the quick setup, Capgo integrates effortlessly with widely-used CI/CD tools like GitHub Actions, GitLab CI, and Jenkins. This approach supports over 50 apps without locking developers into specific platforms. For native build automation, Capgo Build starts at $14/month for about 15 native builds/month, or roughly $0.50 per native build depending on project build time.
+Following the quick setup, Capgo integrates effortlessly with widely-used CI/CD tools like GitHub Actions, GitLab CI, and Jenkins. This approach supports over 50 apps without
+locking developers into specific platforms. Plans start at $14/month and include OTA updates plus about 15 native builds/month, or roughly $0.50 per native build depending on
+project build time.
 
 ### Update Management
 
@@ -201,11 +203,11 @@ These features ensure updates are encrypted, access-controlled, and reversible, 
 
 ### Platform Costs
 
-The cost of OTA update solutions can vary widely. Capgo offers plans starting at $12/month (Solo) and going up to $249/month (PAYG). Here's a breakdown of their pricing:
+The cost of OTA update solutions can vary widely. Capgo offers plans starting at $14/month and going up to $249/month (PAYG). Here's a breakdown of their pricing:
 
 | Plan | Monthly Cost (Billed Annually) | Key Features |
 | --- | --- | --- |
-| Solo | $12 | 1,000 MAU, 50GB bandwidth |
+| Solo | $14 | 1,000 MAU, 50GB bandwidth |
 | Maker | $33 | 10,000 MAU, 500GB bandwidth |
 | Team | $83 | 100,000 MAU, 2,000GB bandwidth |
 | PAYG | $249 | 1,000,000 MAU, 10TB bandwidth |
@@ -220,13 +222,13 @@ These contrasting pricing models highlight the importance of evaluating costs al
 
 Pricing is a major factor in choosing an OTA update solution, especially for long-term planning. Over time, the cost gap between Capgo and Appflow becomes more noticeable:
 
-| Time Period | Capgo Total Cost (OTA only)\* | Appflow Total Cost | Potential Savings |
+| Time Period | Capgo Plan Total Cost\* | Appflow Total Cost | Potential Savings |
 | --- | --- | --- | --- |
-| Year 1 | $144 | $6,000 | $5,856 |
-| Year 3 | $432 | $18,000 | $17,568 |
-| Year 5 | $720 | $30,000 | $29,280 |
+| Year 1 | $168 | $6,000 | $5,832 |
+| Year 3 | $504 | $18,000 | $17,496 |
+| Year 5 | $840 | $30,000 | $29,160 |
 
-\*Capgo's OTA update costs at $12/month ($144/year) [\[1\]](https://capgo.app/). Capgo Build starts at $14/month for about 15 native builds/month, or roughly $0.50 per native build depending on project build time.
+\*Capgo plans start at $14/month ($168/year) and include OTA updates plus about 15 native builds/month, or roughly $0.50 per native build depending on project build time [\[1\]](https://capgo.app/).
 
 Jermaine shared his experience:
 
