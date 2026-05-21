@@ -43,7 +43,13 @@ Skip the Fastlane, Gradle runner, keystore, and upload-script maintenance. [Capg
 - **Signing from CI secrets**: Keep Android keystores, key aliases, passwords, and Play Console service account JSON in your own CI secrets.
 - **No native runner upkeep**: Capgo Build provides maintained Android build environments, so you do not have to manage SDK images, Gradle cache issues, or Fastlane lanes.
 - **Artifacts and submission**: Download signed artifacts for QA or submit release builds through the Capgo CLI.
-- **Predictable pricing**: Starts at $14/month for about 15 native builds per month, or roughly $0.50 per native build depending on project build time.
+
+### Pricing
+
+- Starts at $14/month
+- Includes about 15 native builds per month
+- Roughly $0.50 per native build depending on project build time
+- Usage-based native build pricing
 
 [Set up Capgo Build in CI/CD](/docs/cli/cloud-build/)
 

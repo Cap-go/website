@@ -221,6 +221,9 @@ Capgo provides tools to manage updates effectively while aligning with Google Pl
 
 Capgo also offers flexible hosting options, including cloud-based and self-hosted solutions. These options allow organizations to maintain control over their update infrastructure while meeting Google Play's security standards. Features like real-time monitoring and instant rollback help achieve the 82% global success rate benchmark.
 
+For teams adding native build automation to the same compliance workflow, Capgo Build starts at $14/month for about 15 native builds/month, or roughly $0.50 per native build
+depending on project build time.
+
 ## Summary
 
 ### Checklist Review

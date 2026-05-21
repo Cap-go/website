@@ -225,7 +225,8 @@ Capgo prioritizes safe and reliable updates, achieving a 95% adoption rate withi
 
 ### CI/CD Integration
 
-Once safety measures are in place, you can integrate Capgo into your existing CI/CD workflow for smooth and efficient deployments.
+Once safety measures are in place, you can integrate Capgo into your existing CI/CD workflow for smooth and efficient deployments. For native builds in that workflow, Capgo Build
+starts at $14/month for about 15 native builds/month, or roughly $0.50 per native build depending on project build time.
 
 Here's an example deployment command:
 

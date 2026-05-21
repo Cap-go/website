@@ -255,7 +255,7 @@ Version targeting for OTA updates offers a smarter way to manage app deployments
 | --- | --- | --- |
 | Deployment Efficiency | Speeds up release cycles | 81% boost in weekly releases |
 | Update Control | Manages versions precisely | Targeted delivery to 947.6M+ updates |
-| Cost Savings | Cuts operational expenses | Lower-cost plans vs. $6,000 annual alternatives |
+| Cost Savings | Cuts operational expenses | OTA from $12/month; Capgo Build from $14/month for ~15 native builds/month |
 
 This method ensures updates are sent only to compatible devices, cutting down on version-related challenges.
 

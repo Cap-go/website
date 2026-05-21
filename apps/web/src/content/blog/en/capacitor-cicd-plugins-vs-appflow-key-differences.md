@@ -18,14 +18,14 @@ next_blog: ''
 
 **Looking for a better way to manage updates for your [Capacitor](https://capacitorjs.com/) apps?** With [Microsoft CodePush](https://learn.microsoft.com/en-us/appcenter/distribution/codepush/) shutting down in 2024 and [Appflow](https://ionic.io/appflow/) scheduled to close in 2026, developers are turning to alternatives like Capacitor CI/CD plugins. Here's a quick breakdown:
 
--   **Capacitor CI/CD Plugins**: Open-source, customizable, and integrates with tools like [GitHub Actions](https://docs.github.com/actions) and [GitLab CI](https://docs.gitlab.com/ee/ci/). Offers features like live updates, end-to-end encryption, and partial updates. OTA updates start at $12/month.
+-   **Capacitor CI/CD Plugins**: Open-source, customizable, and integrates with tools like [GitHub Actions](https://docs.github.com/actions) and [GitLab CI](https://docs.gitlab.com/ee/ci/). Offers features like live updates, end-to-end encryption, partial updates, and native builds. OTA updates start at $12/month; Capgo Build starts at $14/month for about 15 native builds/month, or roughly $0.50/build.
 -   **Appflow**: A centralized platform for builds and deployments but lacks flexibility. Costs $6,000/year and will be discontinued in 2026.
 
 ### Quick Comparison
 
 | Feature | Capacitor CI/CD Plugins | Appflow |
 | --- | --- | --- |
-| **Cost** | From $12/month for OTA updates; Capgo Build for native builds | $6,000/year |
+| **Cost** | From $12/month for OTA updates; Capgo Build starts at $14/month for ~15 native builds/month, or roughly $0.50/build | $6,000/year |
 | **Customization** | High | Limited |
 | **Integration** | GitHub, GitLab, [Jenkins](https://www.jenkins.io/) | Platform-specific |
 | **Future Support** | Ongoing | Ends in 2026 |
@@ -107,7 +107,7 @@ Capacitor CI/CD plugins come with a straightforward pricing model. For example, 
 | Plan Component | Cost |
 | --- | --- |
 | OTA Update Plans | $12 - $249/month |
-| Native Build Automation | Capgo Build for CI/CD pipelines |
+| Native Build Automation | Capgo Build for CI/CD pipelines, starting at $14/month for ~15 native builds/month, or roughly $0.50/build |
 
 This structure is particularly appealing for long-term projects, offering budget-friendly scaling options. On the other hand, Appflow takes a different approach.
 
@@ -178,7 +178,8 @@ The future of your CI/CD solution directly impacts your development workflow. Wi
 Here are key factors to weigh:
 
 -   **Platform Stability:** Capgo offers ongoing support and active development, while Appflow's upcoming discontinuation could disrupt workflows.
--   **Cost Efficiency:** Capgo's $300 monthly pricing is a significant savings compared to Appflow's $6,000 annual fee.
+-   **Cost Efficiency:** Capgo OTA updates start at $12/month, while Capgo Build starts at $14/month for about 15 native builds/month, or roughly $0.50/build. That is a
+    significant savings compared to Appflow's $6,000 annual fee.
 -   **Feature Continuity:** Open-source platforms ensure essential features remain available, free from the changing priorities of a single vendor.
 
 The industry's shift toward open-source solutions highlights the importance of sustainability and independence. These factors are essential for creating a dependable CI/CD strategy that avoids costly and time-consuming migrations down the line.

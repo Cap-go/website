@@ -25,6 +25,7 @@ next_blog: ''
 -   **Follow standards**: Use TLS encryption, track token usage, and align with NIST and SOC 2 guidelines.
 
 **Quick Tip:** Platforms like [Capgo](https://capgo.app/) simplify token rotation by automating the process, integrating encryption, and reducing costs compared to industry standards.
+Capgo Build starts at $14/month for about 15 native builds/month, or roughly $0.50 per native build depending on project build time.
 
 Token rotation is a simple yet effective way to secure your CI/CD pipelines. Keep reading to learn how to set it up and avoid common pitfalls.
 
@@ -216,7 +217,7 @@ Since 2022, the CI/CD security landscape has seen significant advancements, and 
 | --- | --- | --- |
 | End-to-End Encryption | Yes | Varies |
 | Self-Hosting Option | Available | Rare |
-| Monthly Operating Cost | ~$300 | $500+ |
+| Monthly Operating Cost | OTA from $12/month; Capgo Build from $14/month for ~15 native builds/month, or roughly $0.50/build | $500+ |
 | Token Rotation Automation | Built-in | Limited |
 
 > "We are currently giving a try to @Capgo since Appcenter stopped live updates support on hybrid apps and @AppFlow is way too expensive." - Simon Flack[\[1\]](https://capgo.app)
@@ -284,5 +285,7 @@ If you're developing with Capacitor apps, **Capgo** simplifies CI/CD integration
 
 Capgo provides a secure and efficient way to handle token rotation and integrate CI/CD workflows, aligning with industry standards while emphasizing automation. By weaving refresh token rotation into CI/CD processes, Capgo ensures developers can keep app updates secure without compromising on ease of use.
 
-When it comes to cost and features, Capgo stands out as a strong contender. It offers key functionalities like **end-to-end encryption**, **smooth CI/CD integration**, and **real-time updates**, all while meeting Apple and Android compliance guidelines. On top of that, Capgo's pricing is designed to be budget-friendly, making it an appealing option for developers looking for a dependable and secure live update solution for Capacitor apps.
+When it comes to cost and features, Capgo stands out as a strong contender. It offers key functionalities like **end-to-end encryption**, **smooth CI/CD integration**, and
+**real-time updates**, all while meeting Apple and Android compliance guidelines. On top of that, Capgo's pricing is designed to be budget-friendly: OTA starts at $12/month, and
+Capgo Build starts at $14/month for about 15 native builds/month, or roughly $0.50 per native build depending on project build time.
 :::

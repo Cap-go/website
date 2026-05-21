@@ -22,7 +22,7 @@ next_blog: ''
 
 -   **Why OTA + CI/CD?** Automates updates, enables rollbacks, and ensures faster bug fixes.
 -   **What You Need:** Capacitor app, Git repository, CI/CD platform (e.g., [GitHub Actions](https://docs.github.com/actions)), and an OTA service like [Capgo](https://capgo.app/).
--   **Setup Costs:** Capgo starts at $12/month for OTA updates, and Capgo Build can run native builds from CI/CD.
+-   **Setup Costs:** Capgo starts at $12/month for OTA updates, and Capgo Build starts at $14/month for about 15 native builds/month, or roughly $0.50 per native build depending on project build time.
 -   **Best Practices:** Use versioning (major, minor, patch), staged rollouts, and error tracking to ensure smooth updates.
 -   **Top OTA Platforms:** Capgo stands out with fast updates (114ms), high success rates (82%), and global support.
 
@@ -116,7 +116,7 @@ Deploying updates involves pushing your bundles through an Over-The-Air (OTA) se
 -   Configure **automatic rollbacks** to handle issues quickly.
 -   Integrate **error tracking** for better debugging.
 
-OTA updates start at just $12/month.
+OTA updates start at just $12/month. Capgo Build starts at $14/month for about 15 native builds per month, or roughly $0.50 per native build depending on project build time.
 
 ## OTA Update Guidelines
 
@@ -198,7 +198,7 @@ To make the most of OTA updates, focus on these components:
 
 ### Cost Efficiency
 
-Capgo's affordable OTA update pricing starting at **$12/month** can lead to **$26,100 in savings** over five years compared to competitors [\[1\]](https://capgo.app/).
+Capgo's affordable OTA update pricing starting at **$12/month** can lead to **$26,100 in savings** over five years compared to competitors [\[1\]](https://capgo.app/). For native builds in CI/CD, Capgo Build starts at **$14/month** for about 15 native builds/month, or roughly **$0.50 per native build** depending on project build time.
 
 ### Best Practices
 

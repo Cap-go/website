@@ -160,7 +160,7 @@ Setting up OTA updates requires careful planning. Here's how to integrate them i
 | CI/CD Integration | Connect with tools like GitHub Actions, GitLab CI, or Azure DevOps | Automates the deployment pipeline |
 | Testing Environment | Assign users and create staging channels | Enables controlled distribution |
 
-For enterprise teams, Capgo works with automated deployment workflows across platforms like Azure DevOps, GitLab, GitHub, [Jenkins](https://www.jenkins.io/), [Cloudbees](https://www.cloudbees.com/), [Travis](https://www.travis-ci.com/), and [CircleCI](https://circleci.com/) [\[1\]](https://capgo.app/).
+For enterprise teams, Capgo works with automated deployment workflows across platforms like Azure DevOps, GitLab, GitHub, [Jenkins](https://www.jenkins.io/), [Cloudbees](https://www.cloudbees.com/), [Travis](https://www.travis-ci.com/), and [CircleCI](https://circleci.com/) [\[1\]](https://capgo.app/). For native builds, Capgo Build starts at $14/month for about 15 native builds/month, or roughly $0.50 per native build depending on project build time.
 
 After setup, the focus shifts to managing app versions strategically.
 

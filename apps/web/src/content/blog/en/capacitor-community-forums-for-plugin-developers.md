@@ -220,7 +220,7 @@ To get started, run:
 npx @capgo/cli init
 ```
 
-Capgo works seamlessly with CI/CD systems and offers features like targeted beta testing and staged rollouts using its channel system. It also provides real-time analytics and error tracking, giving you full visibility into the update process.
+Capgo works seamlessly with CI/CD systems and offers features like targeted beta testing and staged rollouts using its channel system. It also provides real-time analytics and error tracking, giving you full visibility into the update process. For native builds, Capgo Build starts at $14/month for about 15 native builds/month, or roughly $0.50 per native build depending on project build time.
 
 ## Conclusion
 

@@ -195,7 +195,7 @@ Effective update management tools should include the following features to ensur
 | **CI/CD Integration** | Connect with major platforms | Automates deployment workflows |
 | **Organization Management** | Manage teams and permissions | Simplifies administration |
 
-For enterprise deployments, Capgo offers CI/CD integration and Capgo Build for native build automation [\[1\]](https://capgo.app/). The platform also ensures end-to-end encryption and complies with Apple App Store and Google Play requirements, safeguarding user data while adhering to platform rules.
+For enterprise deployments, Capgo offers CI/CD integration and Capgo Build for native build automation, starting at $14/month for about 15 native builds/month, or roughly $0.50 per native build depending on project build time [\[1\]](https://capgo.app/). The platform also ensures end-to-end encryption and complies with Apple App Store and Google Play requirements, safeguarding user data while adhering to platform rules.
 
 ## Summary
 

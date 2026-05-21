@@ -96,6 +96,12 @@ Prepare your GitHub repository to meet the requirements for CI/CD integration wi
 
 Before adding the workflow, confirm the repository has the required secrets, branch protections, and deployment triggers for your OTA release process.
 
+### Pricing
+
+- OTA updates start at $12/month.
+- Capgo Build starts at $14/month for about 15 native builds per month.
+- Native builds cost roughly $0.50 each depending on project build time.
+
 Here’s how to set up your repository:
 
 -   **Repository Structure**: Organize your repository with separate directories for source code, assets, and configuration files to keep everything clean and manageable.

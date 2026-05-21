@@ -24,7 +24,7 @@ next_blog: ''
 
 -   **Instant Updates**: Fix bugs or roll out features without delays.
 -   **Secure Deployments**: Updates are encrypted and accessible only to authorized users.
--   **Cost-Effective**: OTA updates start at just $12/month.
+-   **Cost-Effective**: OTA updates start at just $12/month. Capgo Build starts at $14/month for about 15 native builds/month, or roughly $0.50 per native build depending on project build time.
 -   **Controlled Rollouts**: Target specific users or groups for updates.
 -   **App Store Compliance**: Fully adheres to Apple and Google policies.
 
@@ -32,7 +32,7 @@ next_blog: ''
 
 | Platform | Key Features | Limitations | Cost |
 | --- | --- | --- | --- |
-| **Capgo** | Secure OTA, CI/CD ready, user targeting | Initial setup effort | From $12/month; [Capgo Build](https://capgo.app/docs/cli/cloud-build/getting-started/) for native builds |
+| **Capgo** | Secure OTA, CI/CD ready, user targeting | Initial setup effort | From $12/month; [Capgo Build](https://capgo.app/docs/cli/cloud-build/getting-started/) from $14/month for ~15 native builds/month |
 | **AppFlow** | Ionic integration, enterprise support | High cost barrier | $6,000/year |
 | **[App Center](https://visualstudio.microsoft.com/app-center/)** | Free tier, Microsoft-backed | No hybrid app support | Free tier available |
 
@@ -46,7 +46,7 @@ Capgo is ideal for developers needing **fast, compliant updates** without breaki
 
 Capgo's platform offers powerful over-the-air (OTA) update capabilities, ensuring secure and efficient app updates. With **end-to-end encryption**, updates are accessible only to authorized users, keeping deployments secure from start to finish.
 
-Capgo works effortlessly with popular CI/CD platforms like **[GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/), [Azure DevOps](https://azure.microsoft.com/en-us/products/devops), [Jenkins](https://www.jenkins.io/), and [CircleCI](https://circleci.com/)**. OTA updates start at just $12/month. This integration simplifies deployment while adhering to app store regulations.
+Capgo works effortlessly with popular CI/CD platforms like **[GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/), [Azure DevOps](https://azure.microsoft.com/en-us/products/devops), [Jenkins](https://www.jenkins.io/), and [CircleCI](https://circleci.com/)**. OTA updates start at just $12/month, and Capgo Build starts at $14/month for about 15 native builds/month, or roughly $0.50 per native build depending on project build time. This integration simplifies deployment while adhering to app store regulations.
 
 The platform's **user assignment system** gives developers precise control over update distribution. This feature allows for targeted rollouts and beta testing while staying within app store policies. As colenso shared:
 
@@ -106,7 +106,7 @@ Take a closer look at OTA update methods, drawing insights from real-world examp
 | Update Method | Key Benefits | Notable Limitations | Cost Impact |
 | --- | --- | --- | --- |
 | Traditional App Store | • Built-in user trust  <br>• Guaranteed compliance  <br>• No extra infrastructure needed | • Long approval times  <br>• Limited update frequency  <br>• Higher development effort | Base app store fees |
-| Capgo OTA | • Instant updates  <br>• End-to-end encryption  <br>• CI/CD integration  <br>• Control over user assignments | • Initial setup effort  <br>• Platform-specific limitations | From $12/month; [Capgo Build](https://capgo.app/docs/cli/cloud-build/getting-started/) for native builds |
+| Capgo OTA | • Instant updates  <br>• End-to-end encryption  <br>• CI/CD integration  <br>• Control over user assignments | • Initial setup effort  <br>• Platform-specific limitations | From $12/month; [Capgo Build](https://capgo.app/docs/cli/cloud-build/getting-started/) from $14/month for ~15 native builds/month |
 | AppFlow | • Seamless Ionic integration  <br>• Enterprise-grade support  <br>• Comprehensive tools | • High upfront cost barrier | $6,000/year |
 
 This table highlights the balance between fast OTA updates and conventional app store methods. Capgo stands out by offering **instant deployments** and **strong security measures**, addressing common delays and risks tied to app store updates.

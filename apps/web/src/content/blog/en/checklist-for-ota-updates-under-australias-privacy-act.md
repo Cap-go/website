@@ -171,7 +171,7 @@ Here’s a breakdown of costs for different OTA solutions:
 
 -   **Standard CI/CD infrastructure**: varies by provider usage
 -   **Enterprise solutions (e.g., Appflow)**: $6,000/year
--   **Capgo**: starts at $12/month for OTA updates, with Capgo Build for native builds
+-   **Capgo**: starts at $12/month for OTA updates, with Capgo Build from $14/month for about 15 native builds/month, or roughly $0.50 per native build depending on project build time
 
 While cost is a factor, the platform's structure also impacts compliance and efficiency.
 

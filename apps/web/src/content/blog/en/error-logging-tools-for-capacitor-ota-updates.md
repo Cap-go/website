@@ -125,7 +125,8 @@ A detailed look at error logging tools for Capacitor OTA updates.
 | Bugsnag | 7.5K events/month | $59/month | Custom |
 | Capgo | 15-day trial | $12/month | $249/month |
 
-Capgo highlights cost efficiency with OTA updates starting at just $12/month.
+Capgo highlights cost efficiency with OTA updates starting at just $12/month. Capgo Build adds native build automation from $14/month for about 15 native builds/month, or roughly
+$0.50 per native build depending on project build time.
 
 ### Setup Difficulty Levels
 

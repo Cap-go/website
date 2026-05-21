@@ -189,7 +189,8 @@ Here’s what you should prioritize:
 Modern update systems come with several benefits:
 
 -   **Quick Adjustments**: Instant update capabilities let teams address compliance issues right away.
--   **Cost Savings**: Streamlined CI/CD and OTA tooling can reduce manual release work and ongoing operational cost [\[1\]](https://capgo.app/).
+-   **Cost Savings**: Streamlined CI/CD and OTA tooling can reduce manual release work and ongoing operational cost. Capgo Build starts at $14/month for about 15 native
+    builds/month, or roughly $0.50 per native build depending on project build time [\[1\]](https://capgo.app/).
 -   **Improved User Experience**: Partial updates use less bandwidth while still meeting compliance standards.
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica [\[1\]](https://capgo.app/)

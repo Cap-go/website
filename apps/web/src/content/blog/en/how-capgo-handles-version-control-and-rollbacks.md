@@ -136,7 +136,10 @@ Capgo transforms how developers manage version control and rollbacks for [Capaci
 
 One of Capgo's standout features is its **one-click rollback**, paired with real-time monitoring. This gives developers the confidence to roll out updates knowing they can quickly revert changes if something goes wrong. On top of that, the **analytics dashboard** provides clear insights into update success rates and user engagement, helping teams make informed decisions about whether to roll back or move forward with deployments. These tools come together to create a complete solution for managing updates effectively.
 
-When it comes to pricing, Capgo offers live updates starting at just **$12 per month** for the SOLO plan, which includes unlimited updates - far more economical than alternatives that can cost up to $500 monthly. With **end-to-end encryption** and compliance with app store requirements for both Apple and Android, Capgo ensures updates are secure and meet the necessary standards, reducing risks like app rejections or security flaws.
+When it comes to pricing, Capgo offers live updates starting at just **$12 per month** for the SOLO plan, which includes unlimited updates - far more economical than alternatives
+that can cost up to $500 monthly. For native builds, Capgo Build starts at $14/month for about 15 native builds/month, or roughly $0.50 per native build depending on project
+build time. With **end-to-end encryption** and compliance with app store requirements for both Apple and Android, Capgo ensures updates are secure and meet the necessary standards,
+reducing risks like app rejections or security flaws.
 
 | **Feature** | **Capgo Advantage** |
 | --- | --- |
