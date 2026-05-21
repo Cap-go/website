@@ -63,6 +63,7 @@ const pluginEntries = [
   ['AppsFlyer', 'appsflyer'],
   ['Audio Recorder', 'audio-recorder'],
   ['Audio Session', 'audiosession'],
+  ['Auto', 'auto', [linkItem('iOS setup', '/docs/plugins/auto/ios'), linkItem('Android setup', '/docs/plugins/auto/android')]],
   ['Autofill Save Password', 'autofill-save-password'],
   ['Background Geolocation', 'background-geolocation'],
   ['Background Task', 'background-task', [linkItem('iOS setup', '/docs/plugins/background-task/ios'), linkItem('Android behavior', '/docs/plugins/background-task/android')]],

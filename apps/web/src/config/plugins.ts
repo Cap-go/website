@@ -22,6 +22,7 @@ export interface Plugin extends Action {
 const actionDefinitionRows =
   String.raw`@capgo/native-market|github.com/Cap-go|Deep link users directly to your app page on Google Play Store or Apple App Store|https://github.com/Cap-go/capacitor-native-market/|Native Market
 @capgo/capacitor-native-navigation|github.com/Cap-go|Render native navbars, tabbars, and transition shells over a full-screen Capacitor WebView|https://github.com/Cap-go/capacitor-native-navigation/|Native Navigation
+@capgo/capacitor-auto|github.com/Cap-go|Bridge Capacitor apps with CarPlay and Android Auto template surfaces for two-way car communication|https://github.com/Cap-go/capacitor-auto/|Auto
 @capgo/capacitor-transitions|github.com/Cap-go|Add Ionic-style page transitions and iOS edge swipe-back gestures without Ionic UI|https://github.com/Cap-go/capacitor-transitions/|Transitions
 @capgo/capacitor-sheets|github.com/Cap-go|Framework-agnostic sheets, drawers, dialogs, and overlay primitives optimized for Capacitor apps|https://github.com/Cap-go/capacitor-sheets/|Sheets
 @capgo/capacitor-native-biometric|github.com/Cap-go|Secure authentication using Face ID, Touch ID, and Android biometric APIs|https://github.com/Cap-go/capacitor-native-biometric/|Native Biometric
@@ -160,6 +161,7 @@ const actionDefinitionRows =
 const pluginIconsByName: Record<string, string> = {
   '@capgo/native-market': 'ArchiveBoxArrowDown',
   '@capgo/capacitor-native-navigation': 'DevicePhoneMobile',
+  '@capgo/capacitor-auto': 'Truck',
   '@capgo/capacitor-transitions': 'ArrowsRightLeft',
   '@capgo/capacitor-sheets': 'ArrowsPointingOut',
   '@capgo/capacitor-native-biometric': 'FingerPrint',
