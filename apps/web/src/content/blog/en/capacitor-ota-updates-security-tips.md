@@ -179,7 +179,7 @@ When choosing an OTA platform for Capacitor apps, security and reliability are c
 | Rollback Capability | Instant | Manual | Manual |
 | Market Experience | Since 2022 | Shutting down 2026 | Since 2024 |
 | Update Distribution | Partial updates | Full bundle | Full bundle |
-| CI/CD Integration | Included in Capgo plans from $14/month with ~15 native builds/month; extra build minutes are billed by minute through credits | Higher annual costs | Comparable |
+| CI/CD Integration | Included in Capgo plans from $12/month with ~15 native builds/month; extra build minutes are billed by minute through credits | Higher annual costs | Comparable |
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 

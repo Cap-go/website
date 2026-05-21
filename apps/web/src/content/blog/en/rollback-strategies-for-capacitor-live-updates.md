@@ -25,7 +25,7 @@ next_blog: ''
     2.  Set up monitoring for real-time error alerts.
     3.  Define rollback triggers and response protocols.
 
-Platforms like [Capgo](https://capgo.app/) offer fast updates (114ms for 5MB), high success rates (82%), and cost-effective solutions (from $14/month). They also support rollback automation, real-time tracking, and user segmentation, making them a reliable choice for managing live updates.
+Platforms like [Capgo](https://capgo.app/) offer fast updates (114ms for 5MB), high success rates (82%), and cost-effective solutions (from $12/month). They also support rollback automation, real-time tracking, and user segmentation, making them a reliable choice for managing live updates.
 
 | **Feature** | **Capgo** | **[Appflow](https://ionic.io/appflow/)** |
 | --- | --- | --- | --- |
@@ -33,7 +33,7 @@ Platforms like [Capgo](https://capgo.app/) offer fast updates (114ms for 5MB), h
 | Success Rate | 82% | Not Published | Not Published |
 | End-to-End Encryption | Yes | No  | No  |
 | [Self-Hosting Option](https://capgo.app/blog/self-hosted-capgo/) | Yes | No  | No  |
-| Monthly Cost | From $14 | Similar | ~$500 |
+| Monthly Cost | From $12 | Similar | ~$500 |
 
 Set up rollback tools today to ensure smooth updates and maintain user trust.
 
@@ -139,7 +139,7 @@ Since Microsoft CodePush shut down in 2024, the options for managing live update
 | End-to-End Encryption | Yes | No  | No  |
 | Self-hosting Option | Yes | No  | No  |
 | CI/CD Integration | Built-in | Limited | Yes |
-| Monthly Cost | From $14 | Similar | ~$500 |
+| Monthly Cost | From $12 | Similar | ~$500 |
 
 These features highlight Capgo's ability to deliver fast updates, strong security, and cost-effective solutions.
 

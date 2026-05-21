@@ -240,7 +240,7 @@ Capgo offers flexible pricing options to match different needs:
 
 | **Plan** | **Monthly Cost\*** | **Updates/Month** | **Monthly Active Users** |
 | --- | --- | --- | --- |
-| **SOLO** | $14 | 2,500 | 500 |
+| **SOLO** | $12 | 2,500 | 500 |
 | **MAKER** | $33 | 25,000 | 5,000 |
 | **TEAM** | $83 | 150,000 | 30,000 |
 | **PAYG** | $249 | 1,000,000 | 200,000 |

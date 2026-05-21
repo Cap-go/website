@@ -322,7 +322,7 @@ Keeping certificates updated is critical for securing API communications. Capgo 
 **How to Implement:**
 
 -   **Set Up Automated Updates**  
-    Integrate Capgo's CI/CD pipeline to handle certificate updates automatically. Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month. Extra build
+    Integrate Capgo's CI/CD pipeline to handle certificate updates automatically. Capgo plans start at $12/month and include OTA updates plus about 15 native builds/month. Extra build
     minutes are billed by minute through credits.
     
 -   **Track Certificate Metrics**  

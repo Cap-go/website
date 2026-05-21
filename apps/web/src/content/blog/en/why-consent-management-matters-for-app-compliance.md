@@ -189,7 +189,7 @@ Here’s what you should prioritize:
 Modern update systems come with several benefits:
 
 -   **Quick Adjustments**: Instant update capabilities let teams address compliance issues right away.
--   **Cost Savings**: Streamlined CI/CD and OTA tooling can reduce manual release work and ongoing operational cost. Capgo plans start at $14/month and include OTA updates plus
+-   **Cost Savings**: Streamlined CI/CD and OTA tooling can reduce manual release work and ongoing operational cost. Capgo plans start at $12/month and include OTA updates plus
     about 15 native builds/month; extra build minutes are billed by minute through credits [\[1\]](https://capgo.app/).
 -   **Improved User Experience**: Partial updates use less bandwidth while still meeting compliance standards.
 

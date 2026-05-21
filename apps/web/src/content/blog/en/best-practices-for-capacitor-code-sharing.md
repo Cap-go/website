@@ -95,7 +95,7 @@ Incorporate debugging tools into your CI/CD pipeline. This streamlines issue det
 
 **Cost Overview**
 
--   **Capgo Plans**: From $14/month with OTA updates and about 15 native builds/month included [\[1\]](https://capgo.app/)
+-   **Capgo Plans**: From $12/month with OTA updates and about 15 native builds/month included [\[1\]](https://capgo.app/)
 -   **Build Credits**: Extra build minutes are billed by minute through credits.
 
 **Advanced Debugging Tips**
@@ -119,7 +119,7 @@ Setting up a CI/CD pipeline simplifies deployments by integrating seamlessly wit
 | [GitLab CI](https://docs.gitlab.com/ee/ci/) | Built-in pipeline tools, container registry | All-in-one DevOps solution |
 | [Jenkins](https://www.jenkins.io/) | Custom workflow support, extensive plugins | High level of customization |
 
-Reusable CI/CD workflows reduce manual release work and keep deployment behavior consistent across projects. Capgo plans start at $14/month and include OTA updates plus about 15
+Reusable CI/CD workflows reduce manual release work and keep deployment behavior consistent across projects. Capgo plans start at $12/month and include OTA updates plus about 15
 native builds/month; extra build minutes are billed by minute through credits.
 
 Once your CI/CD pipeline is operational, you can shift your attention to implementing fast and efficient OTA updates.

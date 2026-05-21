@@ -217,7 +217,7 @@ Here’s a quick breakdown of popular live update tools and how they stack up:
 | CI/CD Integration | Yes, with Bitrise | Limited | Platform dependent |
 | Security Features | End-to-end encryption | Basic encryption | Varies |
 | Cross-platform Support | Full | Partial | Limited |
-| Pricing (Monthly) | $14-$249 | Custom pricing | Variable |
+| Pricing (Monthly) | $12-$249 | Custom pricing | Variable |
 
 ### [Capgo](https://capgo.app/) Features Overview
 

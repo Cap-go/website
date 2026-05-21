@@ -36,7 +36,7 @@ Skip the Fastlane, Xcode runner, certificate, provisioning profile, and upload-s
 
 ### Pricing
 
-- Capgo plans start at $14/month
+- Capgo plans start at $12/month
 - Includes OTA updates and about 15 native builds per month
 - Extra build minutes are billed by minute through credits
 

@@ -20,7 +20,7 @@ next_blog: ''
 
 ### Key Takeaways:
 
--   **Capgo**: Affordable, secure, supports [cloud and self-hosted setups](https://capgo.app/blog/self-hosted-capgo/), and integrates with external CI/CD tools like [GitHub Actions](https://docs.github.com/actions). Plans start at $14/month.
+-   **Capgo**: Affordable, secure, supports [cloud and self-hosted setups](https://capgo.app/blog/self-hosted-capgo/), and integrates with external CI/CD tools like [GitHub Actions](https://docs.github.com/actions). Plans start at $12/month.
 -   **Appflow**: Proprietary, cloud-only, higher costs ($5,000/year for some teams), and built-in CI/CD.
 
 ### Quick Comparison:
@@ -30,7 +30,7 @@ next_blog: ''
 | **Launch Year** | 2022 | Long-standing, ending 2026 |
 | **Hosting Options** | Cloud or self-hosted | Cloud-only |
 | **Security** | End-to-end encryption | Update signing |
-| **Pricing** | From $14/month | ~$5,000/year for teams |
+| **Pricing** | From $12/month | ~$5,000/year for teams |
 | **CI/CD Integration** | External tools supported | Built-in system |
 
 Capgo stands out for its affordability, strong security, and flexibility, making it a top choice for developers seeking fast [differential updates](https://capgo.app/docs/live-updates/differentials/) without breaking the bank.
@@ -70,12 +70,12 @@ Capgo also integrates smoothly with CI/CD pipelines like GitHub Actions and [Git
 
 ### Plan Options
 
-Capgo offers four pricing tiers, each designed to cater to different needs and budgets. Plans start at $14 per month, while the **PAYG** tier, which includes enterprise-level
+Capgo offers four pricing tiers, each designed to cater to different needs and budgets. Plans start at $12 per month, while the **PAYG** tier, which includes enterprise-level
 features, is priced at $249 per month.
 
 | Feature | Capgo SOLO | [Capgo MAKER](https://capgo.app/imprint/) | [Capgo TEAM](https://capgo.app/consulting/) | [Capgo PAYG](https://capgo.app/docs/webapp/payment/) |
 | --- | --- | --- | --- | --- |
-| **Price ($/month, annual billing)** | $14 | $33 | $83 | $249 |
+| **Price ($/month, annual billing)** | $12 | $33 | $83 | $249 |
 | **MAU Limit** | 1,000 | 10,000 | 100,000 | 1,000,000 |
 | **Bandwidth** | 50 GB | 500 GB | 2,000 GB | 10 TB |
 | **Storage** | 2 GB | 5 GB | 10 GB | 20 GB |
@@ -85,7 +85,7 @@ These tiers are structured to scale with your team's growth, offering flexibilit
 ### Small Team Pricing
 
 For startups and smaller teams, Capgo's pricing stands out as a cost-effective alternative to traditional solutions. While platforms like Appflow can cost thousands annually,
-Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits [\[1\]](https://capgo.app).
+Capgo plans start at $12/month and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits [\[1\]](https://capgo.app).
 
 > "We are currently giving a try to @Capgo since Appcenter stopped live updates support on hybrid apps and @AppFlow is way too expensive." - Simon Flack [\[1\]](https://capgo.app)
 
@@ -107,7 +107,7 @@ Here’s a quick comparison of the two platforms:
 | Feature | Capgo | Appflow |
 | --- | --- | --- |
 | CI/CD Integration | Works with external platforms like GitHub, GitLab, and Jenkins | Comes with a built-in system |
-| Operating Cost | From US$14/month | Roughly US$6,000 per year |
+| Operating Cost | From US$12/month | Roughly US$6,000 per year |
 
 Now, let’s look at how these platforms handle collaboration and team workflows.
 

@@ -20,7 +20,7 @@ next_blog: ''
 
 ### Key Points:
 
--   **Capgo**: Affordable (from $14/month), one-click rollback, GitHub/GitLab integration, real-time analytics, encryption, and Capgo Build for native mobile builds.
+-   **Capgo**: Affordable (from $12/month), one-click rollback, GitHub/GitLab integration, real-time analytics, encryption, and Capgo Build for native mobile builds.
 -   **Appflow**: Expensive ($6,000/year); supports snapshots but ends in 2026.
 -   **Microsoft CodePush**: Discontinued in 2024, leaving hybrid app developers seeking alternatives.
 
@@ -31,7 +31,7 @@ next_blog: ''
 | Rollback Options | One-click rollback | Snapshots | Discontinued |
 | CI/CD Integration | GitHub, GitLab, [Jenkins](https://www.jenkins.io/) | Limited | None |
 | Security | End-to-end encryption | Update signing | Update signing |
-| Pricing | From $14/month with OTA updates and ~15 native builds/month; extra build minutes are billed by minute through credits | $6,000/year | Free (discontinued) |
+| Pricing | From $12/month with OTA updates and ~15 native builds/month; extra build minutes are billed by minute through credits | $6,000/year | Free (discontinued) |
 
 **Bottom Line:** With CodePush gone and Appflow nearing its end, **Capgo** stands out as a cost-effective, secure, and feature-rich solution for rollback management.
 
@@ -62,7 +62,7 @@ It works seamlessly with popular tools like **[GitHub Actions](https://docs.gith
 
 ### Pricing
 
-Capgo plans start at $14/month and include OTA updates plus about 15 native builds per month; extra build minutes are billed by minute through credits.
+Capgo plans start at $12/month and include OTA updates plus about 15 native builds per month; extra build minutes are billed by minute through credits.
 
 ### Update Management
 
@@ -97,13 +97,13 @@ Here's a breakdown of rollback features, CI/CD integration, security, and pricin
 | Rollback Options | One-click rollback to any previous version [\[1\]](https://capgo.app/) | –   | Discontinued |
 | CI/CD Integration | GitHub Actions, GitLab CI, Jenkins [\[1\]](https://capgo.app/) | –   | –   |
 | Security | End-to-end encryption (meets Apple and Google requirements) [\[1\]](https://capgo.app/) | Update signing | Update signing |
-| Pricing Model | Starts at $14/month with OTA updates and ~15 native builds/month; extra build minutes are billed by minute through credits [\[1\]](https://capgo.app/) | $6,000/year [\[1\]](https://capgo.app/) | Free (discontinued) |
+| Pricing Model | Starts at $12/month with OTA updates and ~15 native builds/month; extra build minutes are billed by minute through credits [\[1\]](https://capgo.app/) | $6,000/year [\[1\]](https://capgo.app/) | Free (discontinued) |
 
 This comparison emphasizes Capgo's strengths in cost, security, and CI/CD integration.
 
 > "@Capgo is a smart way to make hot code pushes (and not for all the money in the world like with @AppFlow) 🙂" - NASA's OSIRIS‑REx [\[1\]](https://capgo.app/)
 
-Capgo stands out by offering a more affordable option compared to Appflow, with over 50% savings on annual costs. Starting at $14/month with OTA updates and about 15 native builds/month
+Capgo stands out by offering a more affordable option compared to Appflow, with over 50% savings on annual costs. Starting at $12/month with OTA updates and about 15 native builds/month
 included, Capgo provides end-to-end encryption, GitHub/GitLab/Jenkins integration, and live analytics - features that competitors lack.
 
 Next, we'll summarize the key takeaways from this comparison.

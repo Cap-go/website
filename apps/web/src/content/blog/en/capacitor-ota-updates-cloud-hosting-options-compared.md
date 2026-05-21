@@ -33,7 +33,7 @@ Over-the-Air (OTA) updates let you update your [Capacitor](https://capacitorjs.c
 | **Security** | Requires setup | Built-in tools | Strong tools | End-to-end encryption |
 | **Ease of Integration** | Manual setup | Moderate complexity | REST APIs, CLI | Built-in CI/CD |
 | **Update Success Rate** | 82% | Not reported | Not reported | 82% |
-| **Cost** | Pay-as-you-go | Pay-as-you-go | Flexible plans | Starts at $14/month |
+| **Cost** | Pay-as-you-go | Pay-as-you-go | Flexible plans | Starts at $12/month |
 
 **Capgo** is ideal for small teams or those prioritizing speed and simplicity. Meanwhile, AWS, Google Cloud, and Azure offer more flexibility but require more effort to configure.
 
@@ -200,14 +200,14 @@ Here’s a quick guide to help you match your needs with the right platform:
 
 | **Need** | **Best Choice** | **Why** |
 | --- | --- | --- |
-| Small Teams (<10 devs) | Capgo (Solo/Maker plans) | Affordable plans ($14–$33/month) with essential features for smaller teams |
+| Small Teams (<10 devs) | Capgo (Solo/Maker plans) | Affordable plans ($12–$33/month) with essential features for smaller teams |
 | Enterprise Scale | Traditional Cloud or [Capgo PAYG](https://capgo.app/docs/webapp/payment/) | Customizable infrastructure and scalable solutions (Capgo PAYG starts at $249/month) |
 | High Security | Platforms with E2E Encryption | Ensures sensitive data is protected and compliance requirements are met |
 | CI/CD Integration | Platforms with Built-in Support | Simplifies setup and reduces ongoing maintenance |
 
 ### **Cost Considerations**
 
-Costs can vary widely depending on your needs. For example, Capgo plans start at $14 per month, while platforms like **AppFlow** can reach up to $6,000 annually [\[1\]](https://capgo.app/).
+Costs can vary widely depending on your needs. For example, Capgo plans start at $12 per month, while platforms like **AppFlow** can reach up to $6,000 annually [\[1\]](https://capgo.app/).
 Balancing costs with performance is key, and platforms like Capgo offer competitive pricing alongside strong performance metrics.
 
 ### **Technical Requirements**

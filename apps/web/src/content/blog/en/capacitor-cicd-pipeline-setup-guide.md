@@ -21,7 +21,7 @@ next_blog: ''
 -   **Live Updates**: Push updates instantly without app store delays. 95% of users receive updates in 24 hours.
 -   **Pipeline Essentials**: Automate builds triggered by branch activity (`main`, `staging`, `feature/*`) and define separate environments for staging and production.
 -   **[Capgo](https://capgo.app/) Integration**: Use Capgo to deploy secure, encrypted updates, manage [update channels](https://capgo.app/docs/webapp/channels/), and monitor performance.
--   **Affordable Plans**: Plans start at $14/month with live updates, analytics, and about 15 native builds/month.
+-   **Affordable Plans**: Plans start at $12/month with live updates, analytics, and about 15 native builds/month.
 
 Capacitor CI/CD pipelines simplify workflows, improve efficiency, and ensure your app stays up-to-date seamlessly. Let’s dive into the details.
 
@@ -125,7 +125,7 @@ Capgo brings several benefits to Capacitor apps, including:
 
 Capgo offers flexible plans to suit different needs:
 
--   **SOLO**: $14/month (1,000 MAU, 2 GB storage, 50 GB bandwidth)
+-   **SOLO**: $12/month (1,000 MAU, 2 GB storage, 50 GB bandwidth)
 -   **MAKER**: $33/month (10,000 MAU, 5 GB storage, 500 GB bandwidth)
 -   **TEAM**: $83/month (100,000 MAU, 10 GB storage, 2,000 GB bandwidth)
 -   **PAYG**: Starting at $249/month, with options for custom scaling, API access, and custom domains.
@@ -172,5 +172,5 @@ To get started, you'll need to install the CLI, configure builds and environment
 
 ### CI/CD Benefits
 
-The connection between setup and results showcases how Capgo boosts efficiency: updates reach **95% of users within just 24 hours**. Plus, Capgo's pricing starts at **$14/month**,
+The connection between setup and results showcases how Capgo boosts efficiency: updates reach **95% of users within just 24 hours**. Plus, Capgo's pricing starts at **$12/month**,
 offering a massive cost advantage compared to legacy services that can charge over **$500/month**. Currently, Capgo supports more than **1,900 production apps** [\[1\]](https://capgo.app/).

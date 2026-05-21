@@ -226,7 +226,7 @@ Capgo prioritizes safe and reliable updates, achieving a 95% adoption rate withi
 ### CI/CD Integration
 
 Once safety measures are in place, you can integrate Capgo into your existing CI/CD workflow for smooth and efficient deployments. For native builds in that workflow, Capgo plans start at
-$14/month and include OTA updates plus about 15 native builds/month. Extra build minutes are billed by minute through credits.
+$12/month and include OTA updates plus about 15 native builds/month. Extra build minutes are billed by minute through credits.
 
 Here's an example deployment command:
 

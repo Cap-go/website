@@ -49,7 +49,7 @@ Instead of being locked into a proprietary CI/CD system, Capgo allows you to:
 
 ## Why Choose Capgo?
 
-1. **Cost-Effective**: Starting at just $14/month compared to AppFlow's $499/month
+1. **Cost-Effective**: Starting at just $12/month compared to AppFlow's $499/month
 2. **Enhanced Security**: End-to-end encryption included in all plans
 3. **Open Source**: 100% open-source, allowing for complete transparency and customization
 4. **Modern Architecture**: Built specifically for Capacitor, ensuring optimal performance

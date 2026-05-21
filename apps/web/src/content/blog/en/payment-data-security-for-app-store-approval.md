@@ -18,13 +18,13 @@ next_blog: ''
 
 **Want your app approved by Apple or Google? Start with secure payment data.** App stores demand **end-to-end encryption** for payment data to meet compliance standards. Without it, your app could face rejection or removal. Here's what you need to know:
 
--   **[Capgo](https://capgo.app/)**: Offers true end-to-end encryption, rollback controls, and [self-hosting options](https://capgo.app/blog/self-hosted-capgo/), with plans starting at $14/month.
+-   **[Capgo](https://capgo.app/)**: Offers true end-to-end encryption, rollback controls, and [self-hosting options](https://capgo.app/blog/self-hosted-capgo/), with plans starting at $12/month.
 -   **[Appflow](https://ionic.io/appflow/live-updates)**: Partial encryption, inconsistent performance, and $6,000/year. Scheduled to retire in 2026.
 -   **[Microsoft Code Push](https://www.reddit.com/r/reactnative/comments/1dsorxn/end_of_appcenter_x_codepush_for_2025_march/)**: Discontinued in 2024, no end-to-end encryption.
 
 | **Tool** | **Encryption** | **Deployment Options** | **Cost** | **Status** |
 | --- | --- | --- | --- | --- |
-| Capgo | End-to-end | Cloud, Self-hosted | From $14/month | Active |
+| Capgo | End-to-end | Cloud, Self-hosted | From $12/month | Active |
 | Cryptographic signing | Cloud | Similar to Capgo | Active |
 | Appflow | Partial | Cloud | $6,000/year | Retiring in 2026 |
 | Code Push | None | Cloud | N/A | Discontinued in 2024 |
@@ -71,7 +71,7 @@ Microsoft Code Push was discontinued in 2024 due to ongoing reliability issues a
 Here's a breakdown of the tools based on security, compliance, deployment options, and cost:
 
 -   **Capgo**: Offers true end-to-end encryption, complies with Apple and Google standards, supports both cloud and self-hosted deployment, integrates with CI/CD pipelines, and is
-    open-source. Plans start at $14/month and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits. Over five
+    open-source. Plans start at $12/month and include OTA updates plus about 15 native builds/month; extra build minutes are billed by minute through credits. Over five
     years, it could save up to $26,100 compared to Appflow [\[1\]](https://capgo.app/).
     
     
@@ -85,7 +85,7 @@ Here's a breakdown of the tools based on security, compliance, deployment option
 Here’s a breakdown of the key takeaways:
 
 -   **Implement end-to-end encryption**: Ensure updates and payment data are fully encrypted to meet app store security standards.
--   **Manage costs effectively**: Capgo plans start at $14/month and include OTA updates plus about 15 native builds/month. Extra build minutes beyond the included allowance are billed by
+-   **Manage costs effectively**: Capgo plans start at $12/month and include OTA updates plus about 15 native builds/month. Extra build minutes beyond the included allowance are billed by
     minute through credits. This is much lower than Appflow's $6,000 annual fee [\[1\]](https://capgo.app/).
 -   **Stay compliant**: Regularly update security measures and align with app store policies to avoid issues.
 -   **Offer deployment flexibility**: Choose between cloud or self-hosted solutions, giving you control over payment data security.
