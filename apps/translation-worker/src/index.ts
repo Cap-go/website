@@ -152,7 +152,7 @@ const CACHE_KEEP_SECONDS = 7 * 24 * 60 * 60
 const TRANSLATION_SOURCE_CHECK_SECONDS = 5 * 60
 const TRANSLATION_PENDING_SECONDS = 10 * 60
 const TRANSLATION_COORDINATOR_PENDING_MS = 15 * 60 * 1000
-const TRANSLATION_CACHE_VERSION = '2026-05-23-ahrefs-sitemap-assets-v1'
+const TRANSLATION_CACHE_VERSION = '2026-05-10-ahrefs-head-assets-v1'
 const TRANSLATION_SOURCE_HASH_HEADER = 'X-Capgo-Translation-Source-Hash'
 const CLIENT_NO_STORE = 'no-store, max-age=0, must-revalidate'
 const MAX_HTML_BYTES = 1_500_000
