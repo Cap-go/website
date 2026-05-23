@@ -1,101 +1,5 @@
 ---
 import m from '@/copy/messages'
-
-type Testimonial = {
-  name: string
-  role?: string
-  handle?: string
-  avatar: string
-  body: string
-  date?: string
-  rating?: number
-}
-
-const testimonials: Testimonial[] = [
-  {
-    name: 'Mikołaj Wilczek',
-    role: 'Principal Mobile Platform Engineer',
-    avatar: 'https://senja-io.s3.us-west-1.amazonaws.com/public/avatar/cd659df9-70a5-43f5-bbfd-c11f5c6cec7e_avatar.png',
-    date: 'Apr 15, 2026',
-    rating: 5,
-    body: 'We originally discovered Capgo through its plugins, and that turned out to be a great entry point into a platform that now supports a much more efficient release process for our team.',
-  },
-  {
-    name: 'Michael Haberler',
-    role: 'nethead emeritors',
-    avatar: 'https://senja-io.s3.us-west-1.amazonaws.com/public/avatar/f79c80c6-8a49-4972-88b4-7ec68ea92822_avatar.png',
-    date: 'Jul 3, 2025',
-    rating: 5,
-    body: 'Working on an app for iOS and Android called Montgolfiere to support hot air ballooning.\n\nThis requires location, pressure sensor and BLE advertisement scanning for BLE sensors, so Capacitor was the way to go.\n\nGreat job on the updater plugin - works flawlessly for me. Live updates are a super accelerator for quick testing turnaround.',
-  },
-  {
-    name: 'Sergiu S',
-    role: 'Lead Developer',
-    avatar: 'https://senja-io.s3.us-west-1.amazonaws.com/public/avatar/98496c09-8f14-45ec-a8fc-21c2f76bf2ca_photo_2024-04-28_17-25-58.jpg',
-    date: 'Jun 23, 2025',
-    rating: 5,
-    body: "We've been using the Capgo Capacitor Updater plugin, and it completely transformed how we ship updates. What used to take days now takes just minutes - our users get the latest changes almost instantly. The plugin is solid, easy to integrate, and the support team is absolutely fantastic - responsive, knowledgeable, and with a genuine willingness to assist.",
-  },
-  {
-    name: 'jermaine',
-    handle: 'jermaine',
-    avatar: 'https://senja-io.s3.us-west-1.amazonaws.com/public/media/b370d927-f56a-4ae9-9f14-a6d80e80e1f2_fa02717a-5755-431e-9ea5-f582309bace9_avatar-male-2.webp',
-    date: 'May 28, 2025',
-    rating: 5,
-    body: "Jumped over to @Capgo after @AppFlow hit us with a $5000 bill for the year to continue.\n\nLoving Capgo so far. Thanks for @Capgo, it's a great product.",
-  },
-  {
-    name: 'SP-CMingay',
-    handle: 'SP-CMingay',
-    avatar: 'https://senja-io.s3.us-west-1.amazonaws.com/public/media/033e3f55-e917-4e1f-b593-6701970b3383_43a49cb8-f8f0-4cbf-b02f-df9aec52da57_avatar-male-3.webp',
-    date: 'May 28, 2025',
-    body: "I've got self-hosted updates working with very little work on my part.\n\nI've proposed with my bosses that we consider @Capgo app for automated updates as well, so I will begin giving that a go now too.",
-  },
-  {
-    name: 'Simon Flack',
-    handle: 'simonflack',
-    avatar: 'https://senja-io.s3.us-west-1.amazonaws.com/public/media/550975b2-0b6e-4b9d-a100-764e29f399eb_0d120971-15c9-4976-bc91-ce08a0fd5444_simon%20%281%29.webp',
-    date: 'May 28, 2025',
-    rating: 5,
-    body: 'We are currently giving a try to @Capgo since Appcenter stopped live updates support on hybrid apps and @AppFlow is far too expensive.',
-  },
-  {
-    name: "NASA's OSIRIS-REx",
-    handle: 'osirisrex',
-    avatar: 'https://senja-io.s3.us-west-1.amazonaws.com/public/media/46c36vfKUgSbvgoA2y5wCcKe.webp',
-    date: 'May 28, 2025',
-    body: '@Capgo is a smart way to make hot code pushes, and not for all the money in the world like with @AppFlow.',
-  },
-  {
-    name: 'Lincoln Baxter',
-    handle: 'lincolnthree',
-    avatar: 'https://senja-io.s3.us-west-1.amazonaws.com/public/media/NtTFULS7sRUbAd0eluEIf2q7.webp',
-    date: 'May 28, 2025',
-    body: 'The community needed this and @Capgo is doing something really important.',
-  },
-  {
-    name: 'Andrew Peacock',
-    handle: '_andypeacock',
-    avatar: 'https://senja-io.s3.us-west-1.amazonaws.com/public/media/lGgR7oiCLu9yITbeUHzkoH2W.webp',
-    date: 'May 28, 2025',
-    body: "Here's my view: React-native: too many moving parts that eventually broke. Flutterflow: new language, stumbled on first attempt to add a plugin. Now: @Capacitor + @vue or @react + @VoltBuilder + @Capgo.",
-  },
-]
-
-const distributeTestimonials = (items: Testimonial[], columnCount: number) => {
-  const columns = Array.from({ length: columnCount }, () => [] as Testimonial[])
-
-  items.forEach((item, index) => {
-    columns[index % columnCount].push(item)
-  })
-
-  return columns
-}
-
-const testimonialColumns = distributeTestimonials(testimonials, 3)
-
-const getMeta = (testimonial: Testimonial) => testimonial.role ?? (testimonial.handle ? `@${testimonial.handle}` : undefined)
-const getAvatarAlt = (testimonial: Testimonial) => (testimonial.name ? `Avatar of ${testimonial.name}` : 'Author avatar')
 ---
 
 <section id="testimonials" class="relative isolate scroll-mt-20 pt-24 pb-32 sm:pt-32">
@@ -163,48 +67,20 @@ const getAvatarAlt = (testimonial: Testimonial) => (testimonial.name ? `Avatar o
       </p>
     </div>
 
-    <div class="mx-auto mt-16 grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {
-        testimonialColumns.map((column) => (
-          <div class="flex flex-col gap-6">
-            {column.map((testimonial) => (
-              <figure class="rounded-lg bg-[#314158] p-6 shadow-xl ring-1 ring-white/10">
-                <figcaption class="flex items-center gap-4">
-                  <img
-                    class="h-12 w-12 rounded-full bg-slate-900 object-cover ring-1 ring-white/10"
-                    src={testimonial.avatar}
-                    alt={getAvatarAlt(testimonial)}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div class="min-w-0">
-                    <div class="truncate text-base font-semibold text-white">{testimonial.name}</div>
-                    {getMeta(testimonial) && <div class="truncate text-sm font-medium text-white/70">{getMeta(testimonial)}</div>}
-                  </div>
-                </figcaption>
-
-                {testimonial.rating && (
-                  <div class="mt-5 flex gap-1 text-yellow-300" aria-label={`${testimonial.rating} out of 5 stars`}>
-                    {Array.from({ length: testimonial.rating }).map(() => (
-                      <svg class="h-5 w-5 fill-current" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-                        <path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.07 3.3a1 1 0 0 0 .95.69h3.46c.97 0 1.37 1.24.59 1.81l-2.8 2.03a1 1 0 0 0-.36 1.12l1.07 3.3c.3.92-.76 1.69-1.54 1.12l-2.8-2.03a1 1 0 0 0-1.18 0l-2.8 2.03c-.78.57-1.84-.2-1.54-1.12l1.07-3.3a1 1 0 0 0-.36-1.12L2.98 8.73c-.78-.57-.38-1.81.59-1.81h3.46a1 1 0 0 0 .95-.69l1.07-3.3Z" />
-                      </svg>
-                    ))}
-                  </div>
-                )}
-
-                <blockquote class="mt-5 space-y-4 text-base leading-7 font-medium text-white/90">
-                  {testimonial.body.split('\n\n').map((paragraph) => (
-                    <p>{paragraph}</p>
-                  ))}
-                </blockquote>
-
-                {testimonial.date && <div class="mt-5 text-sm font-medium text-white/55">{testimonial.date}</div>}
-              </figure>
-            ))}
-          </div>
-        ))
-      }
-    </div>
+    <iframe
+      id="wall-of-love-eEqRvoc"
+      src="https://senja.io/p/capgo/love-embed?hideNavigation=true&embed=true"
+      title="Customer testimonials and reviews for Capgo"
+      aria-label="Wall of Love - Customer testimonials"
+      allowtransparency="true"
+      loading="lazy"
+      class="relative left-1/2 mt-16 block w-screen max-w-none -translate-x-1/2 bg-transparent"
+      style="overflow: hidden; color-scheme: dark; background: transparent; background-color: transparent;"
+      width="100%"></iframe>
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', function () {
+        iFrameResize({ log: false, checkOrigin: false }, '#wall-of-love-eEqRvoc')
+      })
+    </script>
   </div>
 </section>
