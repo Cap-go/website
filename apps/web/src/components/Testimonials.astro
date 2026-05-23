@@ -82,13 +82,20 @@ const testimonials: Testimonial[] = [
   },
 ]
 
-const testimonialColumns = [
-  [testimonials[0], testimonials[3], testimonials[6]],
-  [testimonials[1], testimonials[4], testimonials[7]],
-  [testimonials[2], testimonials[5], testimonials[8]],
-]
+const distributeTestimonials = (items: Testimonial[], columnCount: number) => {
+  const columns = Array.from({ length: columnCount }, () => [] as Testimonial[])
+
+  items.forEach((item, index) => {
+    columns[index % columnCount].push(item)
+  })
+
+  return columns
+}
+
+const testimonialColumns = distributeTestimonials(testimonials, 3)
 
 const getMeta = (testimonial: Testimonial) => testimonial.role ?? (testimonial.handle ? `@${testimonial.handle}` : undefined)
+const getAvatarAlt = (testimonial: Testimonial) => (testimonial.name ? `Avatar of ${testimonial.name}` : 'Author avatar')
 ---
 
 <section id="testimonials" class="relative isolate scroll-mt-20 pt-24 pb-32 sm:pt-32">
@@ -163,7 +170,13 @@ const getMeta = (testimonial: Testimonial) => testimonial.role ?? (testimonial.h
             {column.map((testimonial) => (
               <figure class="rounded-lg bg-[#314158] p-6 shadow-xl ring-1 ring-white/10">
                 <figcaption class="flex items-center gap-4">
-                  <img class="h-12 w-12 rounded-full bg-slate-900 object-cover ring-1 ring-white/10" src={testimonial.avatar} alt="" loading="lazy" decoding="async" />
+                  <img
+                    class="h-12 w-12 rounded-full bg-slate-900 object-cover ring-1 ring-white/10"
+                    src={testimonial.avatar}
+                    alt={getAvatarAlt(testimonial)}
+                    loading="lazy"
+                    decoding="async"
+                  />
                   <div class="min-w-0">
                     <div class="truncate text-base font-semibold text-white">{testimonial.name}</div>
                     {getMeta(testimonial) && <div class="truncate text-sm font-medium text-white/70">{getMeta(testimonial)}</div>}
