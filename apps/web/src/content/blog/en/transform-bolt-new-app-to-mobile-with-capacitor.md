@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-07-28T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-23T12:40:00.000Z
 head_image: /bolt_capacitor.webp
 head_image_alt: Bolt.new and Capacitor integration illustration
 keywords: Bolt.new, Capacitor, mobile app development, React, Vue, export project, native mobile apps
@@ -121,8 +121,6 @@ Now let's bring your Bolt.new project into Cursor.
 3. Download the ZIP file containing your project
 4. Extract it to a folder on your computer
 
-![Bolt.new project files](/bolt-project-files.webp)
-
 ### Open in Cursor
 
 Once extracted, open the project in Cursor:
@@ -151,8 +149,6 @@ Bolt.new can generate projects using different frameworks. Let's identify what y
 ### Check package.json
 
 Open `package.json` to see what framework your project uses:
-
-![Bolt.new package.json inspection](/bolt-package-json.webp)
 
 Common Bolt.new project types:
 - **React + Vite**: Most common setup
@@ -212,8 +208,6 @@ cd your-bolt-project
 npm install
 npm run dev
 ```
-
-![Bolt.new app running locally](/bolt-app-running.webp)
 
 Your Bolt.new app should now be running (typically at `http://localhost:5173` for Vite projects).
 
@@ -321,8 +315,6 @@ Cursor will run the appropriate build command based on your framework.
 npm run build
 ```
 
-![Bolt.new Vite build success](/bolt-vite-build.webp)
-
 **For Next.js Applications:**
 ```shell
 npm run static
@@ -333,8 +325,6 @@ npm run static
 Ensure your build generated the correct output:
 - **Vite projects**: Look for a `dist` directory
 - **Next.js projects**: Check for an `out` directory
-
-![Bolt.new build output](/bolt-build-output.webp)
 
 ## Step 6: Add Capacitor to Your Bolt.new Project
 
@@ -361,8 +351,6 @@ npm install -D @capacitor/cli
 npx cap init
 ```
 
-![Capacitor initialization Bolt](/capacitor-init-bolt.webp)
-
 You'll be prompted for:
 - **App name**: Your Bolt.new project name
 - **Bundle ID**: Format like `com.yourcompany.yourapp`
@@ -377,8 +365,6 @@ npm install @capacitor/core @capacitor/ios @capacitor/android
 npx cap add ios
 npx cap add android
 ```
-
-![Capacitor platforms added Bolt](/capacitor-platforms-bolt.webp)
 
 ### What Just Happened?
 
@@ -470,8 +456,6 @@ npm run build
 npx cap sync
 ```
 
-![Capacitor sync Bolt complete](/capacitor-sync-bolt.webp)
-
 ## Step 9: Open Native IDEs
 
 Access the native development environments for your app.
@@ -488,8 +472,6 @@ Open my iOS project in Xcode
 npx cap open ios
 ```
 
-![Xcode opening Bolt project](/xcode-bolt-project.webp)
-
 ### Android Development
 
 **Option A: Via Cursor AI**
@@ -501,8 +483,6 @@ Open my Android project in Android Studio
 ```shell
 npx cap open android
 ```
-
-![Android Studio opening Bolt project](/android-studio-bolt-project.webp)
 
 ## Step 10: Build and Run Your Mobile App
 
@@ -532,8 +512,6 @@ npx cap open android
 - **"Failed to build"**: Clean build folder (Shift+Command+K) and retry
 - **Simulator issues**: Restart simulator via Device > Restart
 
-![Bolt app running on iOS](/bolt-ios-app.webp)
-
 ### Running on Android
 
 #### Setting Up Android Studio (First Time)
@@ -560,8 +538,6 @@ npx cap open android
 - **"Gradle sync failed"**: Try File > Invalidate Caches
 - **Slow emulator**: Enable hardware acceleration in AVD settings
 - **Build errors**: Update Gradle via suggested fixes
-
-![Bolt app running on Android](/bolt-android-app.webp)
 
 ### Verification Checklist
 
@@ -622,8 +598,6 @@ export default config;
 ```shell
 npx cap copy
 ```
-
-![Live reload enabled Bolt](/capacitor-live-reload-bolt.webp)
 
 ## Step 12: Add Native Features
 
@@ -721,8 +695,6 @@ Sync my native feature changes to all platforms
 npx cap sync
 ```
 
-![Native features added Bolt](/bolt-native-features.webp)
-
 ## Step 13: Optimize for Production
 
 ### App Icons and Splash Screens
@@ -749,8 +721,6 @@ npm install -D @capacitor/assets
 ```shell
 npx capacitor-assets generate
 ```
-
-![Bolt app assets generated](/bolt-app-assets.webp)
 
 ### Optimize Build
 

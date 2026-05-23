@@ -174,11 +174,22 @@ function redirectResponse(request: Request, redirect: RedirectDefinition): Respo
   return Response.redirect(new URL(redirect.destination, request.url).toString(), redirect.status)
 }
 
+function isStaleCapgoLogoAsset(pathname: string): boolean {
+  return /^\/_docs\/capgo_logo\.[A-Za-z0-9_-]+\.webp$/.test(pathname)
+}
+
+async function capgoLogoFallback(request: Request, env: Env): Promise<Response> {
+  const fallbackUrl = new URL('/capgo_logo.webp', request.url)
+  return env.ASSETS.fetch(new Request(fallbackUrl, request))
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const pathname = new URL(request.url).pathname
     const redirect = redirectMap.get(pathname)
     if (redirect) return redirectResponse(request, redirect)
-    return env.ASSETS.fetch(request)
+    const response = await env.ASSETS.fetch(request)
+    if (response.status === 404 && isStaleCapgoLogoAsset(pathname)) return capgoLogoFallback(request, env)
+    return response
   },
 }

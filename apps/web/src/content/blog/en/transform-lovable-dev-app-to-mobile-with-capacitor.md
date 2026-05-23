@@ -7,7 +7,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-07-28T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-23T12:40:00.000Z
 head_image: /lovable_capacitor.webp
 head_image_alt: Lovable.dev and Capacitor integration illustration
 keywords: Lovable.dev, Capacitor, mobile app development, Next.js, export project, native mobile apps
@@ -179,8 +179,6 @@ npm install
 npm run dev
 ```
 
-![Lovable.dev app running locally](/lovable-app-running.webp)
-
 Your Lovable.dev app should now be running at `http://localhost:3000`.
 
 ## Step 3: Prepare for Mobile Export
@@ -242,8 +240,6 @@ Run the static export and verify it creates an 'out' folder
 npm run static
 ```
 
-![Lovable.dev static export success](/lovable-static-export.webp)
-
 You should see a new `out` folder containing your static files.
 
 ## Step 4: Add Capacitor to Your Lovable.dev Project
@@ -263,8 +259,6 @@ Now let's transform your Lovable.dev app into a native mobile app using Cursor A
 The AI will handle everything automatically, asking you for:
 - **App name**: Your Lovable.dev project name
 - **Bundle ID**: Like `com.yourcompany.yourapp`
-
-![Capacitor initialization](/capacitor-init-lovable.webp)
 
 #### Method 2: Manual Installation
 
@@ -288,8 +282,6 @@ npm install @capacitor/core @capacitor/ios @capacitor/android
 npx cap add ios
 npx cap add android
 ```
-
-![Capacitor platforms added](/capacitor-platforms-added.webp)
 
 ### Understanding Your New Project Structure
 
@@ -358,8 +350,6 @@ npm run static
 npx cap sync
 ```
 
-![Capacitor sync complete](/capacitor-sync-complete.webp)
-
 ## Step 7: Open Native IDEs
 
 ### For iOS Development
@@ -374,8 +364,6 @@ Open the iOS project in Xcode
 npx cap open ios
 ```
 
-![Xcode opening Lovable project](/xcode-lovable-project.webp)
-
 ### For Android Development
 
 #### Method 1: Using Cursor AI (Recommended)
@@ -387,8 +375,6 @@ Open the Android project in Android Studio
 ```shell
 npx cap open android
 ```
-
-![Android Studio opening Lovable project](/android-studio-lovable-project.webp)
 
 ## Step 8: Build and Run Your Mobile App
 
@@ -418,8 +404,6 @@ npx cap open android
 - **"No simulator available"**: Download one in Xcode Settings
 - **"Signing requires a development team"**: Need Apple Developer account
 
-![Lovable app running on iOS](/lovable-ios-app.webp)
-
 ### Running on Android
 
 #### First-Time Android Studio Setup
@@ -446,8 +430,6 @@ npx cap open android
 - **"SDK not found"**: Let Android Studio install it
 - **"Gradle sync failed"**: File > Sync Project
 - **Emulator won't start**: Check virtualization is enabled in BIOS
-
-![Lovable app running on Android](/lovable-android-app.webp)
 
 ### Success Indicators
 
@@ -501,8 +483,6 @@ export default config;
 npx cap copy
 ```
 
-![Live reload enabled](/capacitor-live-reload.webp)
-
 ## Step 10: Add Native Features
 
 ### Method 1: Using Cursor AI (Recommended)
@@ -545,8 +525,6 @@ const shareContent = async () => {
 npx cap sync
 ```
 
-![Native features added](/lovable-native-features.webp)
-
 ### Quick Test: Verify Native Features Work
 
 Test your new native capabilities:
@@ -581,8 +559,6 @@ npm install -D @capacitor/assets
 ```shell
 npx capacitor-assets generate
 ```
-
-![App assets generated](/lovable-app-assets.webp)
 
 ### Build for Production
 
