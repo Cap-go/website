@@ -2,7 +2,7 @@
 import m from '@/copy/messages'
 ---
 
-<section class="relative isolate pt-24 pb-32 sm:pt-32">
+<section id="testimonials" class="relative isolate scroll-mt-20 pt-24 pb-32 sm:pt-32">
   <!-- Background effects -->
   <div class="absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-30 blur-3xl" aria-hidden="true">
     <div
@@ -69,12 +69,13 @@ import m from '@/copy/messages'
 
     <iframe
       id="wall-of-love-eEqRvoc"
-      src="https://senja.io/p/capgo/love-embed?hideNavigation=true&embed=true&v=transparent-bg-20260521"
+      src="https://senja.io/p/capgo/love-embed?hideNavigation=true&embed=true"
       title="Customer testimonials and reviews for Capgo"
       aria-label="Wall of Love - Customer testimonials"
       allowtransparency="true"
-      class="block bg-transparent"
-      style="overflow: hidden; background-color: transparent;"
+      loading="lazy"
+      class="relative left-1/2 mt-16 block w-screen max-w-none -translate-x-1/2 bg-transparent"
+      style="overflow: hidden; color-scheme: dark; background: transparent; background-color: transparent;"
       width="100%"></iframe>
     <script is:inline>
       document.addEventListener('DOMContentLoaded', function () {
