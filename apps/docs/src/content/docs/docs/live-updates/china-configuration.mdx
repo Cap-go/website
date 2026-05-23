@@ -29,7 +29,7 @@ To configure Capgo for China, you need to set three specific URLs in your Capaci
     const config: CapacitorConfig = {
       plugins: {
         CapacitorUpdater: {
-          autoUpdate: true,
+          autoUpdate: 'atBackground',
           updateUrl: 'https://updater.capgo.com.cn/updates',
           statsUrl: 'https://updater.capgo.com.cn/stats',
           channelUrl: 'https://updater.capgo.com.cn/channel_self',
@@ -65,9 +65,9 @@ All three URLs must be configured together to ensure full functionality of the C
 
 Due to network performance limitations caused by the Great Firewall of China, we have specific recommendations for apps deployed in mainland China:
 
-### Disable Direct Updates
+### Use Background Updates
 
-We **strongly recommend disabling `directUpdate`** for apps in China. Network connectivity in China is less performant than in other regions, and direct updates (which apply immediately) can lead to a poor user experience if downloads are interrupted or slow.
+We **strongly recommend using `autoUpdate: 'atBackground'`** for apps in China. Network connectivity in China is less performant than in other regions, and instant apply modes can lead to a poor user experience if downloads are interrupted or slow.
 
 Instead, use the default update behavior where updates download in the background and apply when the app backgrounds or restarts. This provides a more reliable experience for your users.
 
@@ -75,8 +75,7 @@ Instead, use the default update behavior where updates download in the backgroun
 const config: CapacitorConfig = {
   plugins: {
     CapacitorUpdater: {
-      autoUpdate: true,
-      directUpdate: false, // Recommended for China
+      autoUpdate: 'atBackground', // Recommended for China
       updateUrl: 'https://updater.capgo.com.cn/updates',
       statsUrl: 'https://updater.capgo.com.cn/stats',
       channelUrl: 'https://updater.capgo.com.cn/channel_self',
@@ -86,7 +85,7 @@ const config: CapacitorConfig = {
 ```
 
 <Aside type="caution">
-While our Hong Kong-based infrastructure helps minimize latency and improve reliability, network performance to mainland China can still be affected by the Great Firewall. Disabling `directUpdate` helps ensure updates complete successfully without disrupting the user experience.
+While our Hong Kong-based infrastructure helps minimize latency and improve reliability, network performance to mainland China can still be affected by the Great Firewall. Using background updates helps ensure updates complete successfully without disrupting the user experience.
 </Aside>
 
 ## Complete Configuration Example
@@ -102,8 +101,7 @@ const config: CapacitorConfig = {
   webDir: 'dist',
   plugins: {
     CapacitorUpdater: {
-      autoUpdate: true,
-      directUpdate: false, // Recommended: disable for better reliability in China
+      autoUpdate: 'atBackground', // Recommended for better reliability in China
       updateUrl: 'https://updater.capgo.com.cn/updates',
       statsUrl: 'https://updater.capgo.com.cn/stats',
       channelUrl: 'https://updater.capgo.com.cn/channel_self',
@@ -154,8 +152,7 @@ The Chinese domain URLs work seamlessly for multi-region apps:
 const config: CapacitorConfig = {
   plugins: {
     CapacitorUpdater: {
-      autoUpdate: true,
-      directUpdate: false, // Recommended for China users
+      autoUpdate: 'atBackground', // Recommended for China users
       updateUrl: 'https://updater.capgo.com.cn/updates',
       statsUrl: 'https://updater.capgo.com.cn/stats',
       channelUrl: 'https://updater.capgo.com.cn/channel_self',

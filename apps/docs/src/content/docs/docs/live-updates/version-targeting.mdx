@@ -87,7 +87,7 @@ const config: CapacitorConfig = {
   appName: 'Example App',
   plugins: {
     CapacitorUpdater: {
-      autoUpdate: true,
+      autoUpdate: 'atBackground',
       defaultChannel: 'production', // or omit for default
     }
   }
@@ -103,7 +103,7 @@ const config: CapacitorConfig = {
   appName: 'Example App',
   plugins: {
     CapacitorUpdater: {
-      autoUpdate: true,
+      autoUpdate: 'atBackground',
       defaultChannel: 'v2', // Routes v2 users automatically
     }
   }
@@ -117,7 +117,7 @@ const config: CapacitorConfig = {
   appName: 'Example App',
   plugins: {
     CapacitorUpdater: {
-      autoUpdate: true,
+      autoUpdate: 'atBackground',
       defaultChannel: 'v3', // Routes v3 users automatically
     }
   }
@@ -319,7 +319,7 @@ npx @capgo/cli channel create production \
 const config: CapacitorConfig = {
   plugins: {
     CapacitorUpdater: {
-      autoUpdate: true,
+      autoUpdate: 'atBackground',
       defaultChannel: 'production',
     }
   }
@@ -345,7 +345,7 @@ git push origin v1-maintenance
 const config: CapacitorConfig = {
   plugins: {
     CapacitorUpdater: {
-      autoUpdate: true,
+      autoUpdate: 'atBackground',
       defaultChannel: 'v2', // New users get v2 channel
     }
   }

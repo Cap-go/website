@@ -43,7 +43,7 @@ Applying updates on a background or kill event has a few key benefits for user e
 
 - You can deliver updates frequently without worrying about disrupting active users.
 
-The main downside is that if a user backgrounds and quickly resumes your app, they may lose any unsaved state since the update was applied in between those actions. 
+The main downside is that if a user backgrounds and quickly resumes your app, they may lose any unsaved state since the update was applied in between those actions.
 
 To mitigate this, we recommend:
 
@@ -93,17 +93,17 @@ Note that the `kill` condition currently triggers the update after the first kil
 
 ## Applying Updates Immediately
 
-For critical updates or apps with very simple state, you may want to apply an update as soon as it's downloaded, without waiting for a background or kill event. Capgo supports this via the `directUpdate` configuration option.
+For critical updates or apps with very simple state, you may want to apply an update as soon as it's downloaded, without waiting for a background or kill event. Capgo supports this via the `autoUpdate` policy in your Capacitor config.
 
-<Aside type="tip" title="Recommended: Use Delta (Manifest) Updates with Direct Update">
-When using `directUpdate`, we **strongly recommend** enabling [Delta (manifest) Updates](/docs/live-updates/differentials/) to minimize download times and improve the user experience. Delta (manifest) updates only download changed files instead of the entire bundle, which is especially important when updates are applied immediately while users are actively using your app.
+<Aside type="tip" title="Recommended: Use Delta (Manifest) Updates with Instant Apply">
+When using an instant apply mode, we **strongly recommend** enabling [Delta (manifest) Updates](/docs/live-updates/differentials/) to minimize download times and improve the user experience. Delta (manifest) updates only download changed files instead of the entire bundle, which is especially important when updates are applied immediately while users are actively using your app.
 
-**Why this matters for Direct Updates:**
+**Why this matters for instant apply modes:**
 - **Faster updates**: Smaller downloads mean updates complete quickly, reducing the time users see loading screens
 - **Better mobile experience**: Users on cellular networks or slower connections won't face long wait times
 - **Lower bandwidth usage**: Only changed files are downloaded, saving data for both you and your users
 
-When `directUpdate` is enabled in your `capacitor.config`, the CLI detects it. In non-interactive environments it sends Delta (manifest) updates automatically, and in interactive environments it prompts you to confirm before uploading. Use `--no-delta` to force a full bundle upload.
+When `autoUpdate` is set to `"atInstall"`, `"onLaunch"`, or `"always"` in your `capacitor.config`, the CLI detects it. In non-interactive environments it sends Delta (manifest) updates automatically, and in interactive environments it prompts you to confirm before uploading. Legacy `directUpdate` config is still detected. Use `--no-delta` to force a full bundle upload.
 
 To enable Delta (manifest) updates, simply use the `--delta` flag when uploading bundles:
 ```shell
@@ -113,13 +113,14 @@ npx @capgo/cli@latest bundle upload --delta
 Learn more in the [Delta (manifest) Updates documentation](/docs/live-updates/differentials/).
 </Aside>
 
-`directUpdate` is set in your `capacitor.config.ts` file, not in JavaScript code. It supports three values:
+`autoUpdate` is set in your `capacitor.config.ts` file, not in JavaScript code. It supports these values:
 
-- `false` (default): Never do direct updates (use default behavior: download at start, set when backgrounded)
-- `'atInstall'`: Direct update only when app is installed, updated from store, otherwise act as directUpdate = false
-- `'onLaunch'`: Direct update only on app installed, updated from store or after app kill, otherwise act as directUpdate = false
-- `'always'`: Direct update in all previous cases (app installed, updated from store, after app kill or app resume), never act as directUpdate = false
-- `true` (deprecated): Same as `'always'` for backward compatibility
+- `false` or `'off'`: Disable Auto Update
+- `true` or `'atBackground'` (default): Download automatically and apply when the app moves to the background
+- `'atInstall'`: Apply immediately only after a fresh install or native app update, otherwise use the background flow
+- `'onLaunch'`: Apply immediately on app launch, otherwise use the background flow after the launch check
+- `'always'`: Apply immediately whenever Auto Update runs
+- `'onlyDownload'`: Download automatically, emit `updateAvailable`, and never set the next bundle automatically
 
 ```typescript
 import { CapacitorConfig } from '@capacitor/cli';
@@ -127,13 +128,12 @@ import { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   plugins: {
     CapacitorUpdater: {
-      autoUpdate: true,
-      directUpdate: 'always', // or 'atInstall' for updates only on app install/update
-      autoSplashscreen: true, // NEW: Automatically handle splashscreen
+      autoUpdate: 'always', // or 'atInstall' for updates only on app install/update
+      autoSplashscreen: true,
       keepUrlPathAfterReload: true,
     },
     SplashScreen: {
-      launchAutoHide: false, // Still required when using directUpdate
+      launchAutoHide: false, // Required when using instant apply with autoSplashscreen
     },
   },
 };
@@ -142,27 +142,42 @@ export default config;
 ```
 
 <Aside type="note">
-**Important**: `directUpdate` only applies updates when the app actually checks for them. By default, this happens only at app startup or when resuming from background. Note that `periodCheckDelay` is not compatible with `directUpdate`.
+**Important**: instant apply modes only apply updates when the app actually checks for them. By default, this happens only at app startup or when resuming from background. Note that `periodCheckDelay` is not compatible with instant apply modes.
 </Aside>
 
-With `directUpdate` enabled, Capgo will immediately apply an update as soon as the download completes during an update check, even if the user is actively using the app. Without periodic checking enabled, this means updates will only be applied when the app starts or resumes from background.
+With `autoUpdate: 'always'`, Capgo will immediately apply an update as soon as the download completes during an update check, even if the user is actively using the app. Without periodic checking enabled, this means updates will only be applied when the app starts or resumes from background.
 
-Note that because `directUpdate` is a native configuration, it requires some additional handling in your JavaScript code.
+Note that because `autoUpdate` is a native configuration, instant apply modes require some additional handling in your JavaScript code.
 
 <Aside type="caution">
-When using `directUpdate`, you must set `launchAutoHide: false` in the SplashScreen configuration (as shown above) to prevent the splash screen from hiding automatically. This ensures you have full control over when the splash screen is hidden after the update process completes.
+When using an instant apply mode with `autoSplashscreen`, you must set `launchAutoHide: false` in the SplashScreen configuration (as shown above) to prevent the splash screen from hiding automatically. This ensures you have full control over when the splash screen is hidden after the update process completes.
 </Aside>
 
-## Automatic Splashscreen Handling
+## Downloading Automatically Without Applying
 
-To make `directUpdate` easier to use, Capgo provides an `autoSplashscreen` option that automatically handles hiding the splashscreen for you (available since version 7.6.0):
+If you want Capgo to check and download updates automatically but never apply them automatically, use `autoUpdate: 'onlyDownload'`:
 
 ```typescript
 const config: CapacitorConfig = {
   plugins: {
     CapacitorUpdater: {
-      autoUpdate: true,
-      directUpdate: 'always', // or 'atInstall' 
+      autoUpdate: 'onlyDownload',
+    },
+  },
+};
+```
+
+In this mode, the plugin emits `updateAvailable` after a bundle is downloaded. Your app can then decide when to call `CapacitorUpdater.set()` or show its own update prompt.
+
+## Automatic Splashscreen Handling
+
+To make instant apply modes easier to use, Capgo provides an `autoSplashscreen` option that automatically handles hiding the splashscreen for you (available since version 7.6.0):
+
+```typescript
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: 'always', // or 'atInstall'
       autoSplashscreen: true, // Automatically hide splashscreen
       keepUrlPathAfterReload: true,
     },
@@ -196,18 +211,18 @@ CapacitorUpdater.notifyAppReady();
 
 The `appReady` event fires once the app has finished initializing and applying any pending updates. This is the point at which it's safe to show your app's UI, as it ensures the user will see the latest version.
 
-In addition to handling the `appReady` event, we recommend setting the `keepUrlPathAfterReload` configuration option to `true` when using `directUpdate`. This preserves the current URL path when the app is reloaded due to an update, helping maintain the user's location in the app and reducing disorientation.
+In addition to handling the `appReady` event, we recommend setting the `keepUrlPathAfterReload` configuration option to `true` when using an instant apply mode. This preserves the current URL path when the app is reloaded due to an update, helping maintain the user's location in the app and reducing disorientation.
 
-If you don't handle the `appReady` event and set `keepUrlPathAfterReload` when using `directUpdate`, the user may briefly see a stale version of the app, be taken back to the initial route, or see a flicker as the update is applied.
+If you don't handle the `appReady` event and set `keepUrlPathAfterReload` when using an instant apply mode, the user may briefly see a stale version of the app, be taken back to the initial route, or see a flicker as the update is applied.
 
-Using `directUpdate` can be useful for delivering critical bug fixes or security patches, but it comes with some tradeoffs:
+Using an instant apply mode can be useful for delivering critical bug fixes or security patches, but it comes with some tradeoffs:
 
 - The user may see a brief flicker or loading state as the update is applied if you don't properly handle the splashscreen (either with `autoSplashscreen` or manual `appReady` event handling).
 - If the update modifies the app state or UI, the user may see a disruptive change in the middle of a session.
 - The user's location in the app may be lost if `keepUrlPathAfterReload` is not set, potentially disorienting them.
 - You'll need to carefully handle saving and restoring state to ensure a smooth transition.
 
-If you do enable `directUpdate`, we recommend:
+If you do enable instant apply, we recommend:
 
 - Using `autoSplashscreen: true` for the simplest setup, or manually handling the `appReady` event if you need custom logic.
 - Setting `keepUrlPathAfterReload` to `true` to preserve the user's location in the app.

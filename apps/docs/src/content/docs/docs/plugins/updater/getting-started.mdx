@@ -72,7 +72,7 @@ Add to your `capacitor.config.ts`:
 {
   plugins: {
     CapacitorUpdater: {
-      autoUpdate: true,
+      autoUpdate: 'atBackground',
       updateUrl: 'https://your-update-server.com/api/updates'
     }
   }
@@ -201,12 +201,11 @@ Configure the plugin in your `capacitor.config.ts`:
   plugins: {
     CapacitorUpdater: {
       // Auto-update settings
-      autoUpdate: true,
+      autoUpdate: 'atBackground',
       updateUrl: 'https://api.example.com/updates',
 
       // Update behavior
       resetWhenUpdate: true,
-      directUpdate: false,
 
       // Version settings
       version: '1.0.0',
@@ -254,7 +253,7 @@ Host your own update server:
 {
   plugins: {
     CapacitorUpdater: {
-      autoUpdate: true,
+      autoUpdate: 'atBackground',
       updateUrl: 'https://your-server.com/api/check-update'
     }
   }
