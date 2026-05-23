@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-23T07:08:33.313Z
-updated_at: 2026-05-23T07:08:35.837Z
+updated_at: 2026-05-23T07:11:03.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/5c10b37f-e2bb-474f-8687-7ae18998f45f/rapid-app-dev-app-development.jpg'
 head_image_alt: 'Master Rapid App Dev: Build Apps Faster'
 keywords: 'rapid app dev, agile development, low-code, application development, ci/cd'
