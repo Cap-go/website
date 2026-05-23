@@ -86,7 +86,14 @@ async function normalizeSitemap(inputPath: string, outputPath = inputPath): Prom
   const xmlData = readFileSync(inputPath, 'utf-8')
   const jsonObj = parser.parse(xmlData)
   const rawUrls = jsonObj?.urlset?.url
-  const urls: SitemapUrl[] = (Array.isArray(rawUrls) ? rawUrls : rawUrls ? [rawUrls] : []).filter(isAllowedSitemapUrl)
+  let sitemapUrls: SitemapUrl[] = []
+  if (Array.isArray(rawUrls)) {
+    sitemapUrls = rawUrls
+  } else if (rawUrls) {
+    sitemapUrls = [rawUrls]
+  }
+
+  const urls = sitemapUrls.filter(isAllowedSitemapUrl)
   const smStream = new SitemapStream({ hostname: HOSTNAME })
 
   expandLocalizedUrls(urls).forEach((item) => {
