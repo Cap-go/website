@@ -15,18 +15,19 @@ Controls **when** an update is applied after it is downloaded.
 
 | Type | Description | Use Case |
 |------|-------------|----------|
-| **Default** | Download in background, apply when user backgrounds or kills the app | Most apps; minimal disruption |
-| **directUpdate: `atInstall`** | Apply immediately only on fresh install or app store update | New users get latest; existing users use default flow |
-| **directUpdate: `onLaunch`** | Apply immediately on install, store update, or after app kill | Balance between freshness and session stability |
-| **directUpdate: `always`** | Apply immediately whenever an update is downloaded (including on resume) | Critical fixes, apps with simple state |
+| **autoUpdate: `atBackground`** | Download in background, apply when user backgrounds or kills the app | Most apps; minimal disruption |
+| **autoUpdate: `atInstall`** | Apply immediately only on fresh install or app store update | New users get latest; existing users use default flow |
+| **autoUpdate: `onLaunch`** | Apply immediately on install, store update, or after app kill | Balance between freshness and session stability |
+| **autoUpdate: `always`** | Apply immediately whenever an update is downloaded (including on resume) | Critical fixes, apps with simple state |
+| **autoUpdate: `onlyDownload`** | Download automatically and emit `updateAvailable`, but never apply or set the next bundle automatically | Apps that show their own update prompt or control exactly when to call `set()` |
 
 Configure in `capacitor.config.ts`:
 
 ```typescript
 plugins: {
   CapacitorUpdater: {
-    directUpdate: false, // default
-    // or: 'atInstall' | 'onLaunch' | 'always'
+    autoUpdate: 'atBackground', // default; true is still accepted
+    // or: 'off' | 'atInstall' | 'onLaunch' | 'always' | 'onlyDownload'
   }
 }
 ```
@@ -99,14 +100,14 @@ npx @capgo/cli bundle upload --channel production --delta
 ```
 
 <Aside type="tip">
-When using `directUpdate`, enable [Delta updates](/docs/live-updates/differentials/) to minimize download time and improve UX.
+When using instant apply modes (`atInstall`, `onLaunch`, or `always`), enable [Delta updates](/docs/live-updates/differentials/) to minimize download time and improve UX.
 </Aside>
 
 ## Quick Reference
 
 | Category | Types |
 |----------|-------|
-| **Apply timing** | Default, `atInstall`, `onLaunch`, `always` |
+| **Apply timing** | `off`, `atBackground`, `atInstall`, `onLaunch`, `always`, `onlyDownload` |
 | **Delay conditions** | `date`, `background`, `nativeVersion`, `kill` |
 | **Version blocking** | `none`, `major`, `minor`, `patch`, `metadata` |
 | **Delivery** | Full bundle, Delta (manifest) |

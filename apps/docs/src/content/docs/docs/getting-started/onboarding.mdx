@@ -188,7 +188,7 @@ After installation, you'll be asked:
 
 **If you select Yes:**
 - Updates will be configured to apply immediately when the app is backgrounded and reopened
-- `directUpdate: 'always'` and `autoSplashscreen: true` will be added to your config
+- `autoUpdate: 'always'` and `autoSplashscreen: true` will be added to your config
 - Your `capacitor.config.ts` will be updated automatically
 - **Delta updates** will be automatically enabled - this sends only the files that changed between updates instead of the full bundle, making updates much faster
 
@@ -362,15 +362,15 @@ npx @capgo/cli@latest bundle upload
 ```
 
 <Aside type="tip">
-**Delta updates with Direct Update:** If you enabled instant updates (Direct Update) in Step 4, the CLI will automatically ask if you want to enable delta updates. Delta updates send only the files that changed between versions instead of the entire bundle. Since usually only a few files change between updates, this makes downloads much faster. Select **Yes** for the best experience with instant updates.
+**Delta updates with instant updates:** If you enabled instant updates in Step 4, the CLI will automatically ask if you want to enable delta updates. Delta updates send only the files that changed between versions instead of the entire bundle. Since usually only a few files change between updates, this makes downloads much faster. Select **Yes** for the best experience with instant updates.
 </Aside>
 
-**Delta updates prompt (if Direct Update is enabled):**
+**Delta updates prompt (if an instant apply mode is enabled):**
 ```
-💡 Direct Update (instant updates) is enabled in your config
+💡 Instant updates are enabled in your config
    Delta updates send only changed files instead of the full bundle
 
-❓ Enable delta updates for this upload? (Recommended with Direct Update)
+❓ Enable delta updates for this upload? (Recommended with instant updates)
 ```
 
 <Aside type="caution">

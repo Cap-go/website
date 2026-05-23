@@ -111,11 +111,11 @@ Default: `true`
 
 ## `autoSplashscreen`
 
-> Automatically handle splashscreen hiding when using directUpdate. When enabled, the plugin will automatically hide the splashscreen after updates are applied or when no update is needed.
+> Automatically handle splashscreen hiding when using instant apply modes. When enabled, the plugin will automatically hide the splashscreen after updates are applied or when no update is needed.
 > This removes the need to manually listen for appReady events and call SplashScreen.hide().
-> Only works when directUpdate is set to "atInstall", "always", or true.
+> Only works when `autoUpdate` is set to `"atInstall"`, `"onLaunch"`, or `"always"`. Legacy `directUpdate` values are still supported for backward compatibility.
 > Requires the @capacitor/splash-screen plugin to be installed and configured with launchAutoHide: false.
-> Requires autoUpdate and directUpdate to be enabled.
+> Requires Auto Update to be enabled.
 
 Available on Android, iOS, and Electron.
 
@@ -126,8 +126,7 @@ Default: `false`
 {
   "plugins": {
     "CapacitorUpdater": {
-      "autoUpdate": true,
-      "directUpdate": "atInstall",
+      "autoUpdate": "atInstall",
       "autoSplashscreen": true
     }
   }
@@ -136,18 +135,27 @@ Default: `false`
 
 ## `autoUpdate`
 
-> Configure whether the plugin should use Auto Update via an update server.
+> Configure how the plugin should use Auto Update via an update server.
+> Boolean values are still supported for backward compatibility: `true` is the same as `"atBackground"` and `false` is the same as `"off"`.
+
+Options:
+- `"off"` or `false`: Disable Auto Update
+- `"atBackground"` or `true`: Check and download automatically, then apply when the app moves to the background
+- `"atInstall"`: Apply immediately only after a fresh install or native app update, otherwise use `"atBackground"`
+- `"onLaunch"`: Apply immediately on launch, otherwise use `"atBackground"` after the launch check
+- `"always"`: Apply immediately whenever Auto Update runs
+- `"onlyDownload"`: Check and download automatically, emit `updateAvailable`, and never set the next bundle automatically
 
 Available on Android, iOS, and Electron.
 
-Default: `true`
+Default: `"atBackground"` (`true` is still accepted)
 
 ```json
 // capacitor.config.json
 {
   "plugins": {
     "CapacitorUpdater": {
-      "autoUpdate": false
+      "autoUpdate": "onlyDownload"
     }
   }
 }
@@ -194,15 +202,14 @@ Default: `undefined`
 
 ## `directUpdate`
 
-> Configure when the plugin should direct install updates. Only for autoUpdate mode.
-> Works well for apps less than 10MB and with uploads done using the --delta flag.
-> Zip or apps more than 10MB will be relatively slow for users to update.
+> Deprecated. Use `autoUpdate` string modes instead: `"atInstall"`, `"onLaunch"`, or `"always"`.
+> This option remains supported for existing apps.
 
 Options:
-- `false`: Never do direct updates (use default behavior: download at start, set when backgrounded)
-- `'atInstall'`: Direct update only when app is installed, updated from store, otherwise act as directUpdate = false
-- `'onLaunch'`: Direct update only on app installed, updated from store or after app kill, otherwise act as directUpdate = false
-- `'always'`: Direct update in all previous cases (app installed, updated from store, after app kill or app resume), never act as directUpdate = false
+- `false`: Never do direct updates
+- `'atInstall'`: Same as `autoUpdate: "atInstall"`
+- `'onLaunch'`: Same as `autoUpdate: "onLaunch"`
+- `'always'`: Same as `autoUpdate: "always"`
 - `true`: (deprecated) Same as "always" for backward compatibility
 
 Available on Android, iOS, and Electron.
@@ -214,8 +221,7 @@ Default: `false`
 {
   "plugins": {
     "CapacitorUpdater": {
-      "autoUpdate": true,
-      "directUpdate": "atInstall"
+      "autoUpdate": "atInstall"
     }
   }
 }
