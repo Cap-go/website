@@ -2262,7 +2262,8 @@ const messages = {
   problem_solution_badge: 'PROBLEM → SOLUTION',
   problem_solution_capgo_time: 'Few min',
   problem_solution_old_way_time: 'Days',
-  problem_solution_subtitle: "When a web-layer bug is already in users' hands, your team needs a web-style release path that still respects native store rules.",
+  problem_solution_subtitle:
+    'A web bug is already live. The old way waits days for Apple or Google review. Capgo ships the fix in minutes, while native changes still go through the stores.',
   problem_solution_time_label: 'Time to live',
   problem_solution_title: 'App Store review delays',
   problem_solution_velocity: 'production fixes',
