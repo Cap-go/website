@@ -109,6 +109,13 @@ const locale = Astro.locals.locale
             <div class="flex h-6 w-6 items-center justify-center rounded-full bg-[#D34545]/20 text-sm">🤬</div>
           </div>
         </div>
+
+        <div class="mt-8 border-t border-red-500/20 pt-5">
+          <div class="flex items-end justify-between gap-4">
+            <p class="text-xs font-semibold tracking-[0.18em] text-red-200/70 uppercase">{m.problem_solution_time_label({}, { locale })}</p>
+            <p class="text-2xl leading-none font-bold text-red-300">{m.problem_solution_old_way_time({}, { locale })}</p>
+          </div>
+        </div>
       </div>
 
       <!-- Solution Card -->
@@ -168,6 +175,13 @@ const locale = Astro.locals.locale
 
           <div class="scroll-chat-message flex justify-end" data-reveal-at="0.76" style="--message-index: 5">
             <div class="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500/20 text-sm">😍</div>
+          </div>
+        </div>
+
+        <div class="mt-8 border-t border-blue-500/20 pt-5">
+          <div class="flex items-end justify-between gap-4">
+            <p class="text-xs font-semibold tracking-[0.18em] text-blue-200/70 uppercase">{m.problem_solution_time_label({}, { locale })}</p>
+            <p class="text-2xl leading-none font-bold text-blue-300">{m.problem_solution_capgo_time({}, { locale })}</p>
           </div>
         </div>
       </div>
