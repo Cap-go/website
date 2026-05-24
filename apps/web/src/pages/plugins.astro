@@ -14,6 +14,7 @@ import { marked } from 'marked'
 
 const locale = Astro.locals.locale ?? defaultLocale
 const brand = Astro.locals.runtimeConfig.public.brand
+const config = Astro.locals.runtimeConfig.public
 const description = m.plugins_description({}, { locale })
 
 const makeSeoTitle = (primary: string, descriptionText: string) => {
@@ -138,6 +139,7 @@ const content = {
   title,
   description,
   keywords: 'capacitor plugins, mobile plugins, ionic plugins, native plugins, app plugins',
+  image: `${config.baseUrl}/capgo_plugins.png`,
   ldJSON,
 }
 ---
