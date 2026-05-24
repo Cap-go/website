@@ -75,6 +75,7 @@ export default defineConfig({
       expressiveCode: { themes: ['github-dark'] },
       editLink: { baseUrl: 'https://github.com/Cap-go/website/edit/main/apps/docs/' },
       components: {
+        Footer: './src/components/doc/Footer.astro',
         Head: './src/components/doc/Head.astro',
         LanguageSelect: './src/components/doc/LanguageSelect.astro',
         PageTitle: './src/components/doc/PageTitle.astro',

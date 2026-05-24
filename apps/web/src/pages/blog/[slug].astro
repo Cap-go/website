@@ -1,5 +1,6 @@
 ---
 import Blog from '@/components/Blog.astro'
+import BlogInternalLinks from '@/components/BlogInternalLinks.astro'
 import GetStarted from '@/components/GetStarted.astro'
 import { formatTime } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
@@ -191,6 +192,7 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
           <article class="prose prose-invert blog mt-8 min-w-full">
             <Content />
           </article>
+          <BlogInternalLinks />
         </div>
         <div class="right-0 hidden px-10 sm:block">
           <div class="relative flex flex-col gap-y-4 pb-5">

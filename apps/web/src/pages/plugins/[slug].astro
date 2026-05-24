@@ -1,5 +1,6 @@
 ---
 import PluginIcon from '@/components/PluginIcon.astro'
+import PluginInternalLinks from '@/components/PluginInternalLinks.astro'
 import type { Plugin } from '@/config/plugins'
 import { actions } from '@/config/plugins'
 import Layout from '@/layouts/Layout.astro'
@@ -241,5 +242,6 @@ content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.p
         </section>
       )
     }
+    <PluginInternalLinks docsHref={docsHref} hasDocs={Boolean(docsSlug)} plugin={plugin as Plugin} plugins={plugins} />
   </div>
 </Layout>
