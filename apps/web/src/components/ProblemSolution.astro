@@ -4,7 +4,7 @@ import m from '@/copy/messages'
 const locale = Astro.locals.locale
 ---
 
-<section class="relative overflow-hidden bg-[#1a1a1a] pt-24 sm:py-32">
+<section class="relative overflow-hidden bg-[#1a1a1a] pt-24 pb-32 sm:py-32 lg:pb-44" data-scroll-chat-section>
   <!-- Background Gradient -->
   <div class="pointer-events-none absolute top-0 left-1/2 w-full max-w-7xl -translate-x-1/2 opacity-80">
     <svg width="1198" height="599" viewBox="0 0 1198 599" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-auto w-full">
@@ -35,7 +35,7 @@ const locale = Astro.locals.locale
 
     <div class="mx-auto grid max-w-5xl grid-cols-1 gap-8 lg:grid-cols-2">
       <!-- Problem Card -->
-      <div class="relative rounded-3xl border border-red-500/30 bg-[#111] p-8">
+      <div class="relative rounded-3xl border border-red-500/30 bg-[#111] p-6 sm:p-8">
         <!-- Red Cross Icon -->
         <div class="absolute -top-5 left-1/2 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-red-500 ring-4 ring-[#0B0C10]">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 text-white">
@@ -43,8 +43,12 @@ const locale = Astro.locals.locale
           </svg>
         </div>
 
+        <div class="mt-4 text-center">
+          <p class="text-xs font-semibold tracking-[0.2em] text-red-300 uppercase">{m.problem_solution_without_capgo({}, { locale })}</p>
+        </div>
+
         <!-- Timeline -->
-        <div class="mt-4 mb-12 flex flex-wrap justify-center gap-2">
+        <div class="mt-6 mb-10 flex flex-wrap justify-center gap-2">
           <span class="rounded-md border border-gray-700 bg-[#222] px-3 py-1 font-mono text-xs text-gray-300">/dev</span>
           <span class="rounded-md border border-gray-700 bg-[#222] px-3 py-1 font-mono text-xs text-gray-300">/build</span>
           <span class="rounded-md border border-blue-900/50 bg-[#222] px-3 py-1 font-mono text-xs text-blue-300">/submit</span>
@@ -53,32 +57,69 @@ const locale = Astro.locals.locale
         </div>
 
         <!-- Chat -->
-        <div class="space-y-6 font-sans text-sm">
+        <div class="min-h-[25rem] space-y-5 font-sans text-base/6 sm:text-sm/6">
           <!-- Left Message -->
-          <div class="flex gap-3">
+          <div class="scroll-chat-message flex gap-3" data-reveal-at="0.08" style="--message-index: 0">
             <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-xs font-bold text-gray-400">A</div>
-            <div class="rounded-2xl rounded-tl-none bg-[#222] px-4 py-2 text-gray-200">
+            <div class="max-w-[18rem] rounded-2xl rounded-tl-none bg-[#222] px-4 py-2 text-gray-200">
               {m.problem_chat_whats_status({}, { locale })}
             </div>
           </div>
 
-          <!-- Right Message -->
-          <div class="flex flex-col items-end gap-2">
-            <div class="rounded-2xl rounded-tr-none bg-[#D34545] px-4 py-2 text-white">
+          <div class="scroll-chat-message flex gap-3" data-reveal-at="0.2" style="--message-index: 1">
+            <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-xs font-bold text-gray-400">S</div>
+            <div class="max-w-[18rem] rounded-2xl rounded-tl-none bg-[#222] px-4 py-2 text-gray-200">
+              {m.problem_chat_customers_waiting({}, { locale })}
+            </div>
+          </div>
+
+          <div class="scroll-chat-message flex justify-end" data-reveal-at="0.32" style="--message-index: 2">
+            <div class="max-w-[18rem] rounded-2xl rounded-tr-none bg-[#D34545] px-4 py-2 text-white">
               {m.problem_chat_still_pending({}, { locale })}
             </div>
-            <div class="rounded-2xl rounded-tr-none bg-[#D34545] px-4 py-2 text-white">
-              {m.problem_chat_hope_approved({}, { locale })}
+          </div>
+
+          <div class="scroll-chat-message flex gap-3" data-reveal-at="0.44" style="--message-index: 3">
+            <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-xs font-bold text-gray-400">P</div>
+            <div class="max-w-[18rem] rounded-2xl rounded-tl-none bg-[#222] px-4 py-2 text-gray-200">
+              {m.problem_chat_any_eta({}, { locale })}
             </div>
-            <div class="mt-1 flex justify-end">
-              <div class="flex h-6 w-6 items-center justify-center rounded-full bg-[#D34545]/20 text-sm">🤬</div>
+          </div>
+
+          <div class="scroll-chat-message flex gap-3" data-reveal-at="0.56" style="--message-index: 4">
+            <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-xs font-bold text-gray-400">S</div>
+            <div class="max-w-[18rem] rounded-2xl rounded-tl-none bg-[#222] px-4 py-2 text-gray-200">
+              {m.problem_chat_support_tickets({}, { locale })}
             </div>
+          </div>
+
+          <div class="scroll-chat-message flex justify-end" data-reveal-at="0.68" style="--message-index: 5">
+            <div class="max-w-[18rem] rounded-2xl rounded-tr-none bg-[#D34545] px-4 py-2 text-white">
+              <span
+                data-random-store-message
+                data-apple-message={m.problem_chat_hope_approved_apple({}, { locale })}
+                data-google-message={m.problem_chat_hope_approved_google({}, { locale })}
+              >
+                {m.problem_chat_hope_approved_apple({}, { locale })}
+              </span>
+            </div>
+          </div>
+
+          <div class="scroll-chat-message loss-emoji-message flex justify-end" data-reveal-at="0.76" style="--message-index: 6">
+            <div class="loss-emoji flex h-9 w-9 items-center justify-center rounded-md bg-[#D34545]/20 text-lg" aria-label="Frustrated loss">🤬</div>
+          </div>
+        </div>
+
+        <div class="mt-8 border-t border-red-500/20 pt-5">
+          <div class="flex items-end justify-between gap-4">
+            <p class="text-xs font-semibold tracking-[0.18em] text-red-200/70 uppercase">{m.problem_solution_time_label({}, { locale })}</p>
+            <p class="text-2xl leading-none font-bold text-red-300">{m.problem_solution_old_way_time({}, { locale })}</p>
           </div>
         </div>
       </div>
 
       <!-- Solution Card -->
-      <div class="relative rounded-3xl border border-blue-500/30 bg-[#111] p-8">
+      <div class="relative rounded-3xl border border-blue-500/30 bg-[#111] p-6 sm:p-8">
         <!-- Blue Check Icon -->
         <div class="absolute -top-5 left-1/2 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-blue-500 ring-4 ring-[#0B0C10]">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 text-white">
@@ -86,37 +127,333 @@ const locale = Astro.locals.locale
           </svg>
         </div>
 
+        <div class="mt-4 text-center">
+          <p class="text-xs font-semibold tracking-[0.2em] text-blue-300 uppercase">{m.problem_solution_with_capgo({}, { locale })}</p>
+        </div>
+
         <!-- Timeline -->
-        <div class="mt-4 mb-12 flex flex-wrap justify-center gap-2">
+        <div class="mt-6 mb-10 flex flex-wrap justify-center gap-2">
           <span class="rounded-md border border-gray-700 bg-[#222] px-3 py-1 font-mono text-xs text-gray-300">/dev</span>
           <span class="rounded-md border border-gray-700 bg-[#222] px-3 py-1 font-mono text-xs text-gray-300">/build</span>
           <span class="rounded-md border border-green-900/50 bg-[#222] px-3 py-1 font-mono text-xs text-green-400">/live</span>
         </div>
 
         <!-- Chat -->
-        <div class="space-y-6 font-sans text-sm">
+        <div class="min-h-[25rem] space-y-5 font-sans text-base/6 sm:text-sm/6">
           <!-- Left Message -->
-          <div class="flex gap-3">
+          <div class="scroll-chat-message flex gap-3" data-reveal-at="0.08" style="--message-index: 0">
             <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-xs font-bold text-gray-400">A</div>
-            <div class="rounded-2xl rounded-tl-none bg-[#3B82F6] px-4 py-2 text-white">
+            <div class="max-w-[18rem] rounded-2xl rounded-tl-none bg-[#222] px-4 py-2 text-gray-200">
               {m.solution_chat_whats_status({}, { locale })}
             </div>
           </div>
 
-          <!-- Right Message -->
-          <div class="flex flex-col items-end gap-2">
-            <div class="rounded-2xl rounded-tr-none bg-[#3B82F6] px-4 py-2 text-white">
+          <div class="scroll-chat-message flex justify-end" data-reveal-at="0.24" style="--message-index: 1">
+            <div class="max-w-[18rem] rounded-2xl rounded-tr-none bg-[#3B82F6] px-4 py-2 text-white">
+              {m.solution_chat_hotfix_live({}, { locale })}
+            </div>
+          </div>
+
+          <div class="scroll-chat-message flex gap-3" data-reveal-at="0.4" style="--message-index: 2">
+            <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-xs font-bold text-gray-400">S</div>
+            <div class="max-w-[18rem] rounded-2xl rounded-tl-none bg-[#222] px-4 py-2 text-gray-200">
+              {m.solution_chat_support_clear({}, { locale })}
+            </div>
+          </div>
+
+          <div class="scroll-chat-message flex justify-end" data-reveal-at="0.56" style="--message-index: 3">
+            <div class="max-w-[18rem] rounded-2xl rounded-tr-none bg-[#3B82F6] px-4 py-2 text-white">
               {m.solution_chat_shipped({}, { locale })}
             </div>
-            <div class="rounded-2xl rounded-tr-none bg-[#3B82F6] px-4 py-2 text-white">
+          </div>
+
+          <div class="scroll-chat-message flex justify-end" data-reveal-at="0.68" style="--message-index: 4">
+            <div class="max-w-[18rem] rounded-2xl rounded-tr-none bg-[#3B82F6] px-4 py-2 text-white">
               {m.solution_chat_users_have_it({}, { locale })}
             </div>
-            <div class="mt-1 flex justify-end">
-              <div class="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500/20 text-sm">😍</div>
-            </div>
+          </div>
+
+          <div class="scroll-chat-message joy-emoji-message flex justify-end" data-reveal-at="0.76" style="--message-index: 5">
+            <div class="joy-emoji flex h-10 w-10 items-center justify-center rounded-full bg-blue-500/20 text-xl" aria-label="Joyful success">😍</div>
+          </div>
+        </div>
+
+        <div class="mt-8 border-t border-blue-500/20 pt-5">
+          <div class="flex items-end justify-between gap-4">
+            <p class="text-xs font-semibold tracking-[0.18em] text-blue-200/70 uppercase">{m.problem_solution_time_label({}, { locale })}</p>
+            <p class="text-2xl leading-none font-bold text-blue-300">{m.problem_solution_capgo_time({}, { locale })}</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  const scrollChatSections = document.querySelectorAll<HTMLElement>('[data-scroll-chat-section]')
+
+  if (scrollChatSections.length > 0) {
+    const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max)
+
+    document.querySelectorAll<HTMLElement>('[data-random-store-message]').forEach((message) => {
+      message.textContent = Math.random() < 0.5 ? (message.dataset.appleMessage ?? '') : (message.dataset.googleMessage ?? '')
+    })
+
+    const updateScrollMessages = () => {
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight
+
+      scrollChatSections.forEach((section) => {
+        const rect = section.getBoundingClientRect()
+        const progress = clamp((viewportHeight * 0.78 - rect.top) / (rect.height * 0.82), 0, 1)
+
+        section.querySelectorAll<HTMLElement>('.scroll-chat-message').forEach((message) => {
+          const revealAt = Number(message.dataset.revealAt ?? 0)
+          message.classList.toggle('is-visible', progress >= revealAt)
+        })
+      })
+    }
+
+    let ticking = false
+    const queueUpdate = () => {
+      if (ticking) return
+
+      ticking = true
+      window.requestAnimationFrame(() => {
+        updateScrollMessages()
+        ticking = false
+      })
+    }
+
+    scrollChatSections.forEach((section) => section.classList.add('scroll-chat-ready'))
+    updateScrollMessages()
+
+    window.addEventListener('scroll', queueUpdate, { passive: true })
+    window.addEventListener('resize', queueUpdate)
+  }
+</script>
+
+<style>
+  .scroll-chat-ready .scroll-chat-message {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+    filter: blur(2px);
+    transition:
+      opacity 420ms ease,
+      transform 480ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 420ms ease;
+    transition-delay: calc(var(--message-index, 0) * 40ms);
+  }
+
+  .scroll-chat-ready .scroll-chat-message.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+
+  .loss-emoji,
+  .joy-emoji {
+    position: relative;
+    will-change: transform, box-shadow, filter;
+  }
+
+  .loss-emoji::before,
+  .loss-emoji::after,
+  .joy-emoji::before,
+  .joy-emoji::after {
+    position: absolute;
+    pointer-events: none;
+    content: '';
+  }
+
+  .loss-emoji::before {
+    inset: -4px;
+    border: 2px solid rgb(239 68 68 / 0.65);
+    border-radius: 6px;
+    opacity: 0;
+  }
+
+  .loss-emoji::after {
+    top: -8px;
+    right: -6px;
+    width: 6px;
+    height: 6px;
+    background: #ef4444;
+    box-shadow:
+      -18px 8px 0 #991b1b,
+      -8px 22px 0 #f87171,
+      -28px 28px 0 #7f1d1d;
+    opacity: 0;
+  }
+
+  .joy-emoji::before {
+    inset: -10px;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgb(96 165 250 / 0.38), transparent 68%);
+    opacity: 0;
+  }
+
+  .joy-emoji::after {
+    inset: -14px;
+    border-radius: 9999px;
+    background:
+      radial-gradient(circle at 12% 28%, #facc15 0 3px, transparent 4px), radial-gradient(circle at 82% 18%, #34d399 0 3px, transparent 4px),
+      radial-gradient(circle at 76% 78%, #60a5fa 0 3px, transparent 4px), radial-gradient(circle at 22% 82%, #f472b6 0 3px, transparent 4px);
+    opacity: 0;
+  }
+
+  .scroll-chat-ready .loss-emoji-message.is-visible {
+    animation: loss-message-shake 640ms steps(2, end) 180ms both;
+  }
+
+  .scroll-chat-ready .loss-emoji-message.is-visible .loss-emoji {
+    animation: loss-emoji-drop 900ms cubic-bezier(0.34, 1.56, 0.64, 1) 120ms both;
+    box-shadow: 0 0 0 1px rgb(239 68 68 / 0.24);
+    filter: saturate(1.25);
+  }
+
+  .scroll-chat-ready .loss-emoji-message.is-visible .loss-emoji::before {
+    animation: loss-red-flash 760ms steps(2, end) 160ms both;
+  }
+
+  .scroll-chat-ready .loss-emoji-message.is-visible .loss-emoji::after {
+    animation: loss-pixels 780ms ease-out 190ms both;
+  }
+
+  .scroll-chat-ready .joy-emoji-message.is-visible .joy-emoji {
+    animation: joy-emoji-pop 1100ms cubic-bezier(0.2, 1.4, 0.32, 1) 120ms both;
+    box-shadow:
+      0 0 0 1px rgb(96 165 250 / 0.35),
+      0 0 28px rgb(59 130 246 / 0.62),
+      0 0 56px rgb(34 197 94 / 0.25);
+    filter: saturate(1.55) brightness(1.12);
+  }
+
+  .scroll-chat-ready .joy-emoji-message.is-visible .joy-emoji::before {
+    animation: joy-glow 1200ms ease-out 130ms both;
+  }
+
+  .scroll-chat-ready .joy-emoji-message.is-visible .joy-emoji::after {
+    animation: joy-confetti 950ms ease-out 190ms both;
+  }
+
+  @keyframes loss-message-shake {
+    0%,
+    100% {
+      translate: 0;
+    }
+    20% {
+      translate: -4px 0;
+    }
+    40% {
+      translate: 5px 0;
+    }
+    60% {
+      translate: -3px 0;
+    }
+    80% {
+      translate: 2px 0;
+    }
+  }
+
+  @keyframes loss-emoji-drop {
+    0% {
+      transform: translateY(-22px) rotate(-18deg) scale(1.35);
+    }
+    42% {
+      transform: translateY(8px) rotate(12deg) scale(0.92);
+    }
+    62% {
+      transform: translateY(-4px) rotate(-8deg) scale(1.05);
+    }
+    100% {
+      transform: translateY(0) rotate(0deg) scale(1);
+    }
+  }
+
+  @keyframes loss-red-flash {
+    0%,
+    100% {
+      opacity: 0;
+    }
+    28%,
+    70% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes loss-pixels {
+    0% {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.7);
+    }
+    30% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(18px) scale(1);
+    }
+  }
+
+  @keyframes joy-emoji-pop {
+    0% {
+      transform: scale(0.5) rotate(-10deg);
+    }
+    36% {
+      transform: scale(1.32) rotate(8deg);
+    }
+    62% {
+      transform: scale(0.94) rotate(-4deg);
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
+  }
+
+  @keyframes joy-glow {
+    0% {
+      opacity: 0;
+      transform: scale(0.45);
+    }
+    45% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.8);
+    }
+  }
+
+  @keyframes joy-confetti {
+    0% {
+      opacity: 0;
+      transform: scale(0.45) rotate(0deg);
+    }
+    35% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.55) rotate(22deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-chat-ready .scroll-chat-message {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      transition: none;
+    }
+
+    .scroll-chat-ready .loss-emoji-message.is-visible,
+    .scroll-chat-ready .loss-emoji-message.is-visible .loss-emoji,
+    .scroll-chat-ready .loss-emoji-message.is-visible .loss-emoji::before,
+    .scroll-chat-ready .loss-emoji-message.is-visible .loss-emoji::after,
+    .scroll-chat-ready .joy-emoji-message.is-visible .joy-emoji,
+    .scroll-chat-ready .joy-emoji-message.is-visible .joy-emoji::before,
+    .scroll-chat-ready .joy-emoji-message.is-visible .joy-emoji::after {
+      animation: none;
+    }
+  }
+</style>
