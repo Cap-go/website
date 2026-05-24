@@ -95,7 +95,13 @@ const locale = Astro.locals.locale
 
           <div class="scroll-chat-message flex justify-end" data-reveal-at="0.68" style="--message-index: 5">
             <div class="max-w-[18rem] rounded-2xl rounded-tr-none bg-[#D34545] px-4 py-2 text-white">
-              {m.problem_chat_hope_approved({}, { locale })}
+              <span
+                data-random-store-message
+                data-apple-message={m.problem_chat_hope_approved_apple({}, { locale })}
+                data-google-message={m.problem_chat_hope_approved_google({}, { locale })}
+              >
+                {m.problem_chat_hope_approved_apple({}, { locale })}
+              </span>
             </div>
           </div>
 
@@ -174,6 +180,10 @@ const locale = Astro.locals.locale
 
   if (scrollChatSections.length > 0) {
     const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max)
+
+    document.querySelectorAll<HTMLElement>('[data-random-store-message]').forEach((message) => {
+      message.textContent = Math.random() < 0.5 ? (message.dataset.appleMessage ?? '') : (message.dataset.googleMessage ?? '')
+    })
 
     const updateScrollMessages = () => {
       const viewportHeight = window.innerHeight || document.documentElement.clientHeight
