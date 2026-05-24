@@ -4,7 +4,7 @@ import m from '@/copy/messages'
 const locale = Astro.locals.locale
 ---
 
-<section class="relative overflow-hidden bg-[#1a1a1a] pt-24 sm:py-32">
+<section class="relative overflow-hidden bg-[#1a1a1a] pt-24 pb-32 sm:py-32 lg:pb-44" data-scroll-chat-section>
   <!-- Background Gradient -->
   <div class="pointer-events-none absolute top-0 left-1/2 w-full max-w-7xl -translate-x-1/2 opacity-80">
     <svg width="1198" height="599" viewBox="0 0 1198 599" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-auto w-full">
@@ -35,7 +35,7 @@ const locale = Astro.locals.locale
 
     <div class="mx-auto grid max-w-5xl grid-cols-1 gap-8 lg:grid-cols-2">
       <!-- Problem Card -->
-      <div class="relative rounded-3xl border border-red-500/30 bg-[#111] p-8">
+      <div class="relative rounded-3xl border border-red-500/30 bg-[#111] p-6 sm:p-8">
         <!-- Red Cross Icon -->
         <div class="absolute -top-5 left-1/2 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-red-500 ring-4 ring-[#0B0C10]">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 text-white">
@@ -43,8 +43,12 @@ const locale = Astro.locals.locale
           </svg>
         </div>
 
+        <div class="mt-4 text-center">
+          <p class="text-xs font-semibold tracking-[0.2em] text-red-300 uppercase">{m.problem_solution_without_capgo({}, { locale })}</p>
+        </div>
+
         <!-- Timeline -->
-        <div class="mt-4 mb-12 flex flex-wrap justify-center gap-2">
+        <div class="mt-6 mb-10 flex flex-wrap justify-center gap-2">
           <span class="rounded-md border border-gray-700 bg-[#222] px-3 py-1 font-mono text-xs text-gray-300">/dev</span>
           <span class="rounded-md border border-gray-700 bg-[#222] px-3 py-1 font-mono text-xs text-gray-300">/build</span>
           <span class="rounded-md border border-blue-900/50 bg-[#222] px-3 py-1 font-mono text-xs text-blue-300">/submit</span>
@@ -53,32 +57,56 @@ const locale = Astro.locals.locale
         </div>
 
         <!-- Chat -->
-        <div class="space-y-6 font-sans text-sm">
+        <div class="min-h-[25rem] space-y-5 font-sans text-base/6 sm:text-sm/6">
           <!-- Left Message -->
-          <div class="flex gap-3">
+          <div class="scroll-chat-message flex gap-3" data-reveal-at="0.08" style="--message-index: 0">
             <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-xs font-bold text-gray-400">A</div>
-            <div class="rounded-2xl rounded-tl-none bg-[#222] px-4 py-2 text-gray-200">
+            <div class="max-w-[18rem] rounded-2xl rounded-tl-none bg-[#222] px-4 py-2 text-gray-200">
               {m.problem_chat_whats_status({}, { locale })}
             </div>
           </div>
 
-          <!-- Right Message -->
-          <div class="flex flex-col items-end gap-2">
-            <div class="rounded-2xl rounded-tr-none bg-[#D34545] px-4 py-2 text-white">
+          <div class="scroll-chat-message flex gap-3" data-reveal-at="0.2" style="--message-index: 1">
+            <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-xs font-bold text-gray-400">S</div>
+            <div class="max-w-[18rem] rounded-2xl rounded-tl-none bg-[#222] px-4 py-2 text-gray-200">
+              {m.problem_chat_customers_waiting({}, { locale })}
+            </div>
+          </div>
+
+          <div class="scroll-chat-message flex justify-end" data-reveal-at="0.32" style="--message-index: 2">
+            <div class="max-w-[18rem] rounded-2xl rounded-tr-none bg-[#D34545] px-4 py-2 text-white">
               {m.problem_chat_still_pending({}, { locale })}
             </div>
-            <div class="rounded-2xl rounded-tr-none bg-[#D34545] px-4 py-2 text-white">
+          </div>
+
+          <div class="scroll-chat-message flex gap-3" data-reveal-at="0.44" style="--message-index: 3">
+            <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-xs font-bold text-gray-400">P</div>
+            <div class="max-w-[18rem] rounded-2xl rounded-tl-none bg-[#222] px-4 py-2 text-gray-200">
+              {m.problem_chat_any_eta({}, { locale })}
+            </div>
+          </div>
+
+          <div class="scroll-chat-message flex gap-3" data-reveal-at="0.56" style="--message-index: 4">
+            <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-xs font-bold text-gray-400">S</div>
+            <div class="max-w-[18rem] rounded-2xl rounded-tl-none bg-[#222] px-4 py-2 text-gray-200">
+              {m.problem_chat_support_tickets({}, { locale })}
+            </div>
+          </div>
+
+          <div class="scroll-chat-message flex justify-end" data-reveal-at="0.68" style="--message-index: 5">
+            <div class="max-w-[18rem] rounded-2xl rounded-tr-none bg-[#D34545] px-4 py-2 text-white">
               {m.problem_chat_hope_approved({}, { locale })}
             </div>
-            <div class="mt-1 flex justify-end">
-              <div class="flex h-6 w-6 items-center justify-center rounded-full bg-[#D34545]/20 text-sm">🤬</div>
-            </div>
+          </div>
+
+          <div class="scroll-chat-message flex justify-end" data-reveal-at="0.76" style="--message-index: 6">
+            <div class="flex h-6 w-6 items-center justify-center rounded-full bg-[#D34545]/20 text-sm">🤬</div>
           </div>
         </div>
       </div>
 
       <!-- Solution Card -->
-      <div class="relative rounded-3xl border border-blue-500/30 bg-[#111] p-8">
+      <div class="relative rounded-3xl border border-blue-500/30 bg-[#111] p-6 sm:p-8">
         <!-- Blue Check Icon -->
         <div class="absolute -top-5 left-1/2 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-blue-500 ring-4 ring-[#0B0C10]">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 text-white">
@@ -86,37 +114,124 @@ const locale = Astro.locals.locale
           </svg>
         </div>
 
+        <div class="mt-4 text-center">
+          <p class="text-xs font-semibold tracking-[0.2em] text-blue-300 uppercase">{m.problem_solution_with_capgo({}, { locale })}</p>
+        </div>
+
         <!-- Timeline -->
-        <div class="mt-4 mb-12 flex flex-wrap justify-center gap-2">
+        <div class="mt-6 mb-10 flex flex-wrap justify-center gap-2">
           <span class="rounded-md border border-gray-700 bg-[#222] px-3 py-1 font-mono text-xs text-gray-300">/dev</span>
           <span class="rounded-md border border-gray-700 bg-[#222] px-3 py-1 font-mono text-xs text-gray-300">/build</span>
           <span class="rounded-md border border-green-900/50 bg-[#222] px-3 py-1 font-mono text-xs text-green-400">/live</span>
         </div>
 
         <!-- Chat -->
-        <div class="space-y-6 font-sans text-sm">
+        <div class="min-h-[25rem] space-y-5 font-sans text-base/6 sm:text-sm/6">
           <!-- Left Message -->
-          <div class="flex gap-3">
+          <div class="scroll-chat-message flex gap-3" data-reveal-at="0.08" style="--message-index: 0">
             <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-xs font-bold text-gray-400">A</div>
-            <div class="rounded-2xl rounded-tl-none bg-[#3B82F6] px-4 py-2 text-white">
+            <div class="max-w-[18rem] rounded-2xl rounded-tl-none bg-[#3B82F6] px-4 py-2 text-white">
               {m.solution_chat_whats_status({}, { locale })}
             </div>
           </div>
 
-          <!-- Right Message -->
-          <div class="flex flex-col items-end gap-2">
-            <div class="rounded-2xl rounded-tr-none bg-[#3B82F6] px-4 py-2 text-white">
+          <div class="scroll-chat-message flex justify-end" data-reveal-at="0.24" style="--message-index: 1">
+            <div class="max-w-[18rem] rounded-2xl rounded-tr-none bg-[#3B82F6] px-4 py-2 text-white">
+              {m.solution_chat_hotfix_live({}, { locale })}
+            </div>
+          </div>
+
+          <div class="scroll-chat-message flex gap-3" data-reveal-at="0.4" style="--message-index: 2">
+            <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-xs font-bold text-gray-400">S</div>
+            <div class="max-w-[18rem] rounded-2xl rounded-tl-none bg-[#222] px-4 py-2 text-gray-200">
+              {m.solution_chat_support_clear({}, { locale })}
+            </div>
+          </div>
+
+          <div class="scroll-chat-message flex justify-end" data-reveal-at="0.56" style="--message-index: 3">
+            <div class="max-w-[18rem] rounded-2xl rounded-tr-none bg-[#3B82F6] px-4 py-2 text-white">
               {m.solution_chat_shipped({}, { locale })}
             </div>
-            <div class="rounded-2xl rounded-tr-none bg-[#3B82F6] px-4 py-2 text-white">
+          </div>
+
+          <div class="scroll-chat-message flex justify-end" data-reveal-at="0.68" style="--message-index: 4">
+            <div class="max-w-[18rem] rounded-2xl rounded-tr-none bg-[#3B82F6] px-4 py-2 text-white">
               {m.solution_chat_users_have_it({}, { locale })}
             </div>
-            <div class="mt-1 flex justify-end">
-              <div class="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500/20 text-sm">😍</div>
-            </div>
+          </div>
+
+          <div class="scroll-chat-message flex justify-end" data-reveal-at="0.76" style="--message-index: 5">
+            <div class="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500/20 text-sm">😍</div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  const scrollChatSections = document.querySelectorAll<HTMLElement>('[data-scroll-chat-section]')
+
+  if (scrollChatSections.length > 0) {
+    const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max)
+
+    const updateScrollMessages = () => {
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight
+
+      scrollChatSections.forEach((section) => {
+        const rect = section.getBoundingClientRect()
+        const progress = clamp((viewportHeight * 0.78 - rect.top) / (rect.height * 0.82), 0, 1)
+
+        section.querySelectorAll<HTMLElement>('.scroll-chat-message').forEach((message) => {
+          const revealAt = Number(message.dataset.revealAt ?? 0)
+          message.classList.toggle('is-visible', progress >= revealAt)
+        })
+      })
+    }
+
+    let ticking = false
+    const queueUpdate = () => {
+      if (ticking) return
+
+      ticking = true
+      window.requestAnimationFrame(() => {
+        updateScrollMessages()
+        ticking = false
+      })
+    }
+
+    scrollChatSections.forEach((section) => section.classList.add('scroll-chat-ready'))
+    updateScrollMessages()
+
+    window.addEventListener('scroll', queueUpdate, { passive: true })
+    window.addEventListener('resize', queueUpdate)
+  }
+</script>
+
+<style>
+  .scroll-chat-ready .scroll-chat-message {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+    filter: blur(2px);
+    transition:
+      opacity 420ms ease,
+      transform 480ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 420ms ease;
+    transition-delay: calc(var(--message-index, 0) * 40ms);
+  }
+
+  .scroll-chat-ready .scroll-chat-message.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-chat-ready .scroll-chat-message {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      transition: none;
+    }
+  }
+</style>
