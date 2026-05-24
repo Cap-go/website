@@ -105,8 +105,8 @@ const locale = Astro.locals.locale
             </div>
           </div>
 
-          <div class="scroll-chat-message flex justify-end" data-reveal-at="0.76" style="--message-index: 6">
-            <div class="flex h-6 w-6 items-center justify-center rounded-full bg-[#D34545]/20 text-sm">🤬</div>
+          <div class="scroll-chat-message loss-emoji-message flex justify-end" data-reveal-at="0.76" style="--message-index: 6">
+            <div class="loss-emoji flex h-9 w-9 items-center justify-center rounded-md bg-[#D34545]/20 text-lg" aria-label="Frustrated loss">🤬</div>
           </div>
         </div>
 
@@ -173,8 +173,8 @@ const locale = Astro.locals.locale
             </div>
           </div>
 
-          <div class="scroll-chat-message flex justify-end" data-reveal-at="0.76" style="--message-index: 5">
-            <div class="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500/20 text-sm">😍</div>
+          <div class="scroll-chat-message joy-emoji-message flex justify-end" data-reveal-at="0.76" style="--message-index: 5">
+            <div class="joy-emoji flex h-10 w-10 items-center justify-center rounded-full bg-blue-500/20 text-xl" aria-label="Joyful success">😍</div>
           </div>
         </div>
 
@@ -250,12 +250,210 @@ const locale = Astro.locals.locale
     filter: blur(0);
   }
 
+  .loss-emoji,
+  .joy-emoji {
+    position: relative;
+    will-change: transform, box-shadow, filter;
+  }
+
+  .loss-emoji::before,
+  .loss-emoji::after,
+  .joy-emoji::before,
+  .joy-emoji::after {
+    position: absolute;
+    pointer-events: none;
+    content: '';
+  }
+
+  .loss-emoji::before {
+    inset: -4px;
+    border: 2px solid rgb(239 68 68 / 0.65);
+    border-radius: 6px;
+    opacity: 0;
+  }
+
+  .loss-emoji::after {
+    top: -8px;
+    right: -6px;
+    width: 6px;
+    height: 6px;
+    background: #ef4444;
+    box-shadow:
+      -18px 8px 0 #991b1b,
+      -8px 22px 0 #f87171,
+      -28px 28px 0 #7f1d1d;
+    opacity: 0;
+  }
+
+  .joy-emoji::before {
+    inset: -10px;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgb(96 165 250 / 0.38), transparent 68%);
+    opacity: 0;
+  }
+
+  .joy-emoji::after {
+    inset: -14px;
+    border-radius: 9999px;
+    background:
+      radial-gradient(circle at 12% 28%, #facc15 0 3px, transparent 4px), radial-gradient(circle at 82% 18%, #34d399 0 3px, transparent 4px),
+      radial-gradient(circle at 76% 78%, #60a5fa 0 3px, transparent 4px), radial-gradient(circle at 22% 82%, #f472b6 0 3px, transparent 4px);
+    opacity: 0;
+  }
+
+  .scroll-chat-ready .loss-emoji-message.is-visible {
+    animation: loss-message-shake 640ms steps(2, end) 180ms both;
+  }
+
+  .scroll-chat-ready .loss-emoji-message.is-visible .loss-emoji {
+    animation: loss-emoji-drop 900ms cubic-bezier(0.34, 1.56, 0.64, 1) 120ms both;
+    box-shadow: 0 0 0 1px rgb(239 68 68 / 0.24);
+    filter: saturate(1.25);
+  }
+
+  .scroll-chat-ready .loss-emoji-message.is-visible .loss-emoji::before {
+    animation: loss-red-flash 760ms steps(2, end) 160ms both;
+  }
+
+  .scroll-chat-ready .loss-emoji-message.is-visible .loss-emoji::after {
+    animation: loss-pixels 780ms ease-out 190ms both;
+  }
+
+  .scroll-chat-ready .joy-emoji-message.is-visible .joy-emoji {
+    animation: joy-emoji-pop 1100ms cubic-bezier(0.2, 1.4, 0.32, 1) 120ms both;
+    box-shadow:
+      0 0 0 1px rgb(96 165 250 / 0.35),
+      0 0 28px rgb(59 130 246 / 0.62),
+      0 0 56px rgb(34 197 94 / 0.25);
+    filter: saturate(1.55) brightness(1.12);
+  }
+
+  .scroll-chat-ready .joy-emoji-message.is-visible .joy-emoji::before {
+    animation: joy-glow 1200ms ease-out 130ms both;
+  }
+
+  .scroll-chat-ready .joy-emoji-message.is-visible .joy-emoji::after {
+    animation: joy-confetti 950ms ease-out 190ms both;
+  }
+
+  @keyframes loss-message-shake {
+    0%,
+    100% {
+      translate: 0;
+    }
+    20% {
+      translate: -4px 0;
+    }
+    40% {
+      translate: 5px 0;
+    }
+    60% {
+      translate: -3px 0;
+    }
+    80% {
+      translate: 2px 0;
+    }
+  }
+
+  @keyframes loss-emoji-drop {
+    0% {
+      transform: translateY(-22px) rotate(-18deg) scale(1.35);
+    }
+    42% {
+      transform: translateY(8px) rotate(12deg) scale(0.92);
+    }
+    62% {
+      transform: translateY(-4px) rotate(-8deg) scale(1.05);
+    }
+    100% {
+      transform: translateY(0) rotate(0deg) scale(1);
+    }
+  }
+
+  @keyframes loss-red-flash {
+    0%,
+    100% {
+      opacity: 0;
+    }
+    28%,
+    70% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes loss-pixels {
+    0% {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.7);
+    }
+    30% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(18px) scale(1);
+    }
+  }
+
+  @keyframes joy-emoji-pop {
+    0% {
+      transform: scale(0.5) rotate(-10deg);
+    }
+    36% {
+      transform: scale(1.32) rotate(8deg);
+    }
+    62% {
+      transform: scale(0.94) rotate(-4deg);
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
+  }
+
+  @keyframes joy-glow {
+    0% {
+      opacity: 0;
+      transform: scale(0.45);
+    }
+    45% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.8);
+    }
+  }
+
+  @keyframes joy-confetti {
+    0% {
+      opacity: 0;
+      transform: scale(0.45) rotate(0deg);
+    }
+    35% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.55) rotate(22deg);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .scroll-chat-ready .scroll-chat-message {
       opacity: 1;
       transform: none;
       filter: none;
       transition: none;
+    }
+
+    .scroll-chat-ready .loss-emoji-message.is-visible,
+    .scroll-chat-ready .loss-emoji-message.is-visible .loss-emoji,
+    .scroll-chat-ready .loss-emoji-message.is-visible .loss-emoji::before,
+    .scroll-chat-ready .loss-emoji-message.is-visible .loss-emoji::after,
+    .scroll-chat-ready .joy-emoji-message.is-visible .joy-emoji,
+    .scroll-chat-ready .joy-emoji-message.is-visible .joy-emoji::before,
+    .scroll-chat-ready .joy-emoji-message.is-visible .joy-emoji::after {
+      animation: none;
     }
   }
 </style>
