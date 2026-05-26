@@ -229,3 +229,7 @@ To make your OTA updates secure and efficient, consider these steps:
 A well-prepared staging environment, supported by platforms like Capgo, can help you achieve these goals. For instance, 95% of active users can update within 24 hours, with an average global API response time of 434ms [\[1\]](https://capgo.app/).
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" [\[1\]](https://capgo.app/)
+
+## Keep going from Staging OTA Updates: Best Practices
+
+If you are using **Staging OTA Updates: Best Practices** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

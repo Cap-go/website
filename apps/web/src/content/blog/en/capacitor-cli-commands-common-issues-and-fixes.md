@@ -198,3 +198,7 @@ The methods and tools mentioned earlier help resolve these issues while supporti
 | Update Distribution | Ensures precise delivery | Channel-based deployment |
 
 These elements tie into earlier strategies for preventing errors and debugging, creating a streamlined update process. Automated and secure update systems are setting new standards for CLI management. Strong CLI practices are essential for staying ahead in app development [\[1\]](https://capgo.app/).
+
+## Keep going from Capacitor CLI Commands: Common Issues and Fixes
+
+If you are using **Capacitor CLI Commands: Common Issues and Fixes** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

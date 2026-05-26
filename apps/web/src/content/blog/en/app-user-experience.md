@@ -293,3 +293,7 @@ Good app user experience usually emerges this way. Not from a single brilliant r
 ---
 
 If you're shipping Capacitor or Electron apps and need a safer way to iterate on UX in production, [Capgo](https://capgo.app) is worth evaluating. It lets teams push web-layer fixes, copy changes, config updates, and assets quickly with targeted rollouts, rollback protection, and release visibility, which makes continuous UX improvement much easier to manage.
+
+## Keep going from App User Experience: A Guide for Capacitor & Electron Teams
+
+If you are using **App User Experience: A Guide for Capacitor & Electron Teams** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

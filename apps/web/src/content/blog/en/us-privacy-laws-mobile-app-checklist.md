@@ -260,3 +260,7 @@ Here’s a breakdown of key areas and their metrics for maintaining compliance:
 | Update Speed | Instant deployment | High update success |
 | Security | End-to-end encryption | \-  |
 | Testing | Channel-based rollouts | 750 apps in production [\[1\]](https://capgo.app/) |
+
+## Keep going from U.S. Privacy Laws: Mobile App Checklist
+
+If you are using **U.S. Privacy Laws: Mobile App Checklist** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

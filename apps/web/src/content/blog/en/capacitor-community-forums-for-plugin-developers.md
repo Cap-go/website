@@ -236,3 +236,7 @@ Ready to jump in? Here's how to begin:
 -   **Join key platforms**: Participate in Discord and GitHub Discussions to connect with the community and explore official documentation.
 -   **Share your plugins**: Contribute your work to help others and gain constructive feedback.
 -   **Use tools for efficiency**: Tools like Capgo can simplify updates, testing, and deployment, making your development process smoother.
+
+## Keep going from Capacitor Community Forums for Plugin Developers
+
+If you are using **Capacitor Community Forums for Plugin Developers** to plan migration and enterprise operations, connect it with [Capgo Enterprise](/enterprise/) for the product workflow in Capgo Enterprise, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, [Capgo Alternatives](/alternatives/) for the product workflow in Capgo Alternatives, [Capgo Consulting](/consulting/) for the product workflow in Capgo Consulting, and [Capgo Premium Support](/premium-support/) for the product workflow in Capgo Premium Support.

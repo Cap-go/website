@@ -297,3 +297,7 @@ Happy building!
 - [iOS Build Configuration](/docs/cli/cloud-build/ios/)
 - [Android Build Configuration](/docs/cli/cloud-build/android/)
 - [Join our Discord](https://discord.com/invite/VnYRvBfgA6)
+
+## Keep going from Introducing Capgo Cloud Build - Build Native Apps Without the Hassle
+
+If you are using **Introducing Capgo Cloud Build - Build Native Apps Without the Hassle** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

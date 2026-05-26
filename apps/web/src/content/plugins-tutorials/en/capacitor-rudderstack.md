@@ -65,3 +65,7 @@ await nativePlugin.track('value');
 
 - GitHub: https://github.com/Cap-go/capacitor-rudderstack/
 - Docs: /docs/plugins/rudderstack/
+
+## Keep going from Using @capgo/capacitor-rudderstack
+
+If you are using **Using @capgo/capacitor-rudderstack** to plan dashboard and API operations, connect it with [@capgo/capacitor-rudderstack](/docs/plugins/rudderstack/) for the implementation detail in @capgo/capacitor-rudderstack, [Getting Started](/docs/plugins/rudderstack/getting-started/) for the implementation detail in Getting Started, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, and [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys.

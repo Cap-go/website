@@ -204,3 +204,7 @@ To balance security and app performance, development teams should focus on:
 -   Adhering to **platform-specific guidelines**
 
 This approach ensures strong protection without sacrificing performance, laying the groundwork for reliable updates and secure app maintenance.
+
+## Keep going from Code Integrity in Capacitor Apps: Key Techniques
+
+If you are using **Code Integrity in Capacitor Apps: Key Techniques** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

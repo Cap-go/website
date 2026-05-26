@@ -263,3 +263,7 @@ Capgo simplifies handling background tasks in Capacitor apps by allowing **insta
 
 It also boosts app performance and security through **end-to-end encryption** and efficient deployment workflows. By keeping background tasks stable and optimized, Capgo helps deliver a seamless user experience while adhering to Apple and Android guidelines.
 :::
+
+## Keep going from How Background Tasks Work in Capacitor
+
+If you are using **How Background Tasks Work in Capacitor** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

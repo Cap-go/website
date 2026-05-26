@@ -211,3 +211,7 @@ Xcode’s **debugging tools** also play a crucial role, allowing you to test you
 
 For faster updates and streamlined fixes, platforms like **Capgo** can be a game-changer. They allow you to push live updates directly to users without requiring app store approvals, all while staying within Apple’s guidelines. This approach not only saves time but also keeps your app running at its best.
 :::
+
+## Keep going from Custom iOS Plugin Optimization: Best Practices
+
+If you are using **Custom iOS Plugin Optimization: Best Practices** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

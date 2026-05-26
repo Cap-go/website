@@ -228,3 +228,7 @@ To keep plugins running smoothly, it's important to understand their categories 
 The plugin ecosystem remains stable thanks to active updates and ongoing improvements [\[3\]](https://github.com/riderx/awesome-capacitor). This commitment ensures consistent performance across platforms while introducing features like live updates.
 
 For teams looking to manage plugins effectively, modern tools have simplified traditional update processes. Native methods are designed to execute in under 200ms [\[6\]](https://capacitorjs.jp/blog/how-capacitor-works), ensuring fast and reliable performance across all platforms.
+
+## Keep going from Capacitor Plugins: What You Need to Know
+
+If you are using **Capacitor Plugins: What You Need to Know** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

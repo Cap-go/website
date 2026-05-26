@@ -197,3 +197,7 @@ A **zero-trust security model** is designed to guard against third-party data br
 
 By eliminating blind trust, zero-trust reduces the potential entry points for attackers and limits the damage that could come from a compromised third-party connection. It also offers greater visibility into user activities and data movement, making it easier to detect and respond quickly to suspicious actions. This approach is crucial for managing the risks tied to third-party integrations and ensuring adherence to security standards.
 :::
+
+## Keep going from Third-Party Breach Response: Best Practices
+
+If you are using **Third-Party Breach Response: Best Practices** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

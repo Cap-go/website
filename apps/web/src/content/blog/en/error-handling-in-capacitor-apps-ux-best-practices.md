@@ -256,3 +256,7 @@ Changing market needs push the boundaries of error management. Here are key fact
 These data points show how fast fixes, effective communication, and consistent cross-platform performance strengthen app stability.
 
 As error-handling solutions grow more advanced, developers need to focus on reliable error tracking, transparent communication, and swift updates. This approach ensures high user satisfaction while minimizing disruptions caused by technical challenges.
+
+## Keep going from Error Handling in Capacitor Apps: UX Best Practices
+
+If you are using **Error Handling in Capacitor Apps: UX Best Practices** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

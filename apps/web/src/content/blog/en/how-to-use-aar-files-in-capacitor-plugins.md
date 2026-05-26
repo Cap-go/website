@@ -509,3 +509,7 @@ To enhance your plugin, focus on these areas:
     
 
 If you plan to share your plugin publicly, make sure to provide detailed documentation on AAR-specific setups and any platform limitations. This will make it easier for other developers to adopt and use your plugin effectively.
+
+## Keep going from How to Use AAR Files in Capacitor Plugins
+
+If you are using **How to Use AAR Files in Capacitor Plugins** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

@@ -178,3 +178,7 @@ Capgo gives developers the ability to push updates, fixes, and new features to t
 
 Key features like **end-to-end encryption**, **CI/CD integration**, and the option to target updates to specific user groups make Capgo both secure and adaptable. Plus, its **organization management tools** simplify coordination across teams, all while ensuring compliance with Apple and Android guidelines.
 :::
+
+## Keep going from Usage Frequency Segmentation for App Updates
+
+If you are using **Usage Frequency Segmentation for App Updates** to plan monitoring and analytics, connect it with [Statistics](/docs/public-api/statistics/) for the implementation detail in Statistics, [Logs](/docs/webapp/logs/) for the implementation detail in Logs, [@capgo/capacitor-appinsights](/docs/plugins/appinsights/) for the implementation detail in @capgo/capacitor-appinsights, [Using @capgo/capacitor-appinsights](/plugins/capacitor-appinsights/) for the native capability in Using @capgo/capacitor-appinsights, and [@capgo/capacitor-firebase-analytics](/docs/plugins/firebase-analytics/) for the implementation detail in @capgo/capacitor-firebase-analytics.

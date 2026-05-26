@@ -101,3 +101,7 @@ Join us here 👇
 - [How OTA Updates Work](/docs/live-updates/) - Understanding live updates
 - [Getting Started with Capgo](/docs/getting-started/quickstart/) - Quick setup guide
 - [CI/CD Integration](/docs/getting-started/cicd-integration/) - Integrate with your pipeline
+
+## Keep going from Alternative to Ionic Appflow
+
+If you are using **Alternative to Ionic Appflow** to plan migration and enterprise operations, connect it with [Capgo Enterprise](/enterprise/) for the product workflow in Capgo Enterprise, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, [Capgo Alternatives](/alternatives/) for the product workflow in Capgo Alternatives, [Capgo Consulting](/consulting/) for the product workflow in Capgo Consulting, and [Capgo Premium Support](/premium-support/) for the product workflow in Capgo Premium Support.

@@ -523,3 +523,7 @@ UI overlays are exactly the kind of feature where that safety net pays off. They
 ---
 
 If your team ships Ionic or Capacitor apps regularly, [Capgo](https://capgo.app) is worth evaluating as part of your release workflow. It gives you a way to push web-layer fixes for issues like action sheet layout bugs, styling regressions, and copy mistakes after release, while keeping control over rollout channels and update behavior.
+
+## Keep going from Ionic Action Sheet: A Complete Guide for 2026
+
+If you are using **Ionic Action Sheet: A Complete Guide for 2026** to plan migration and enterprise operations, connect it with [Capgo Enterprise](/enterprise/) for the product workflow in Capgo Enterprise, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, [Capgo Alternatives](/alternatives/) for the product workflow in Capgo Alternatives, [Capgo Consulting](/consulting/) for the product workflow in Capgo Consulting, and [Capgo Premium Support](/premium-support/) for the product workflow in Capgo Premium Support.

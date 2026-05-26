@@ -241,3 +241,7 @@ Another key area to focus on is minimizing **WebView overhead**. You can achieve
 
 For simplifying updates and deployments, tools like Capgo can be incredibly helpful. They provide real-time updates, integrate seamlessly with CI/CD workflows, and ensure compliance with Apple and Android guidelines. By combining these strategies, developers can significantly improve performance and streamline workflows for both platforms.
 :::
+
+## Keep going from Capacitor Build Pipelines: iOS vs. Android
+
+If you are using **Capacitor Build Pipelines: iOS vs. Android** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

@@ -188,3 +188,7 @@ For additional [debugging options](https://capgo.app/docs/plugins/updater/debugg
 
 -   **Inspect.dev**: A cross-platform debugging tool.
 -   **Capgo**: Helps with live update management, along with built-in security and CI/CD features.
+
+## Keep going from Top Tools for Debugging OTA Updates in Capacitor
+
+If you are using **Top Tools for Debugging OTA Updates in Capacitor** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

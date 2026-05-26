@@ -205,3 +205,7 @@ Do not duplicate the native navbar as a moving web header. `@capgo/native-naviga
 
 - GitHub: https://github.com/Cap-go/capacitor-transitions/
 - Docs: /docs/plugins/transitions/
+
+## Keep going from Using @capgo/capacitor-transitions
+
+If you are using **Using @capgo/capacitor-transitions** to plan native media and interface behavior, connect it with [@capgo/capacitor-transitions](/docs/plugins/transitions/) for the implementation detail in @capgo/capacitor-transitions, [Getting Started](/docs/plugins/transitions/getting-started/) for the implementation detail in Getting Started, [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, and [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player.

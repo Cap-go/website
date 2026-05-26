@@ -65,3 +65,7 @@ await CapgoCapacitorDataStorageSqlite.isStoreExists({} as capStorageOptions);
 
 - GitHub: https://github.com/Cap-go/capacitor-data-storage-sqlite/
 - Docs: /docs/plugins/data-storage-sqlite/
+
+## Keep going from Using @capgo/capacitor-data-storage-sqlite
+
+If you are using **Using @capgo/capacitor-data-storage-sqlite** to plan storage and file handling, connect it with [@capgo/capacitor-data-storage-sqlite](/docs/plugins/data-storage-sqlite/) for the implementation detail in @capgo/capacitor-data-storage-sqlite, [Getting Started](/docs/plugins/data-storage-sqlite/getting-started/) for the implementation detail in Getting Started, [@capgo/capacitor-file](/docs/plugins/file/) for the implementation detail in @capgo/capacitor-file, [Using @capgo/capacitor-file](/plugins/capacitor-file/) for the native capability in Using @capgo/capacitor-file, and [@capgo/capacitor-uploader](/docs/plugins/uploader/) for the implementation detail in @capgo/capacitor-uploader.

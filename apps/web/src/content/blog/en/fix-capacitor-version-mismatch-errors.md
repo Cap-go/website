@@ -238,3 +238,7 @@ To ensure long-term stability, consider these best practices for managing Capaci
     -   Use testing channels before full distribution.
     -   Maintain rollback options for unexpected issues.
     -   Track update success rates to gauge performance.
+
+## Keep going from Fix Capacitor Version Mismatch Errors
+
+If you are using **Fix Capacitor Version Mismatch Errors** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

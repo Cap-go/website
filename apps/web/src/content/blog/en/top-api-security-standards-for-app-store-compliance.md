@@ -354,3 +354,7 @@ For effective API security management in your app, consider tools that enable re
 
 Capgo also offers **end-to-end encryption**, integration with CI/CD pipelines, and the ability to assign updates to specific user groups. These features not only enhance security but also streamline the update process, making it easier to maintain compliance with Apple and Google app store requirements.
 :::
+
+## Keep going from Top API Security Standards for App Store Compliance
+
+If you are using **Top API Security Standards for App Store Compliance** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

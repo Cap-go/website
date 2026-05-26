@@ -193,3 +193,7 @@ Here are some key factors that contribute to successful OTA updates:
 | Update Verification | Confirms the integrity of each update |
 
 The future of app updates depends on systems that combine security with adaptability. As more developers embrace end-to-end encryption, OTA updates will continue to safeguard apps while setting a higher standard for delivery systems.
+
+## Keep going from How End-to-End Encryption Secures Updates
+
+If you are using **How End-to-End Encryption Secures Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

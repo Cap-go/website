@@ -85,3 +85,6 @@ Then you have to wait 100% of your users, have the app or at least 90%, it will 
 While during this time you cannot send any update with Capgo, since old user cannot get the new version.
 You don't have a way to select only some users to receive the update.
 
+## Keep going from How to release major version in capgo
+
+If you are using **How to release major version in capgo** to plan rollback and version control, connect it with [Rollbacks](/docs/live-updates/rollbacks/) for the implementation detail in Rollbacks, [Version Targeting](/docs/live-updates/version-targeting/) for the implementation detail in Version Targeting, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, [bundle](/docs/cli/reference/bundle/) for the implementation detail in bundle, and [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates.

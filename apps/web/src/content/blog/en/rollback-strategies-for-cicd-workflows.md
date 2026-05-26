@@ -117,3 +117,7 @@ With Microsoft CodePush set to retire in 2024 and Appflow wrapping up in 2026, f
 Key factors to consider include **end-to-end encryption** for Apple and Android platforms, **native support for GitHub/GitLab CI**, a balance between setup effort and subscription costs, and **clear rollback metrics**.
 
 Platforms that combine strong encryption with seamless CI/CD integration are leading the pack. Among them, Capgo stands out for its secure updates, smooth integration, and budget-friendly approach.
+
+## Keep going from Rollback Strategies for CI/CD Workflows
+
+If you are using **Rollback Strategies for CI/CD Workflows** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

@@ -169,3 +169,7 @@ To tackle these challenges, developers should concentrate on three key areas:
 These approaches align with the specific challenges posed by state regulations and help ensure compliance.
 
 With state privacy laws continuing to change, mobile app success increasingly depends on the ability to adapt. Currently, 750 production apps are managing these requirements effectively with automated compliance tools[\[1\]](https://capgo.app/). By applying these methods, developers can keep their apps compliant and ready for future changes.
+
+## Keep going from State Privacy Laws for Mobile Apps: Comparison
+
+If you are using **State Privacy Laws for Mobile Apps: Comparison** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

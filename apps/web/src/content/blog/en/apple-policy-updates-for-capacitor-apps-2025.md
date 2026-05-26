@@ -144,3 +144,7 @@ Capgo addresses common challenges by offering:
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
 Capgo also integrates seamlessly with CI/CD workflows, making it easier for developers to maintain consistent update processes - essential for aligning with Apple's 2025 requirements.
+
+## Keep going from Apple Policy Updates for Capacitor Apps 2025
+
+If you are using **Apple Policy Updates for Capacitor Apps 2025** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

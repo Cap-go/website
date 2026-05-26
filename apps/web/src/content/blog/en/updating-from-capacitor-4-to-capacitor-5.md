@@ -207,3 +207,7 @@ The following plugin functionality has been modified or removed. Update your cod
 - On iOS, the default status bar animation has been changed to `FADE`.
 
 By following these steps and updating your code accordingly, you should now have successfully updated your project from Capacitor 4 to Capacitor 5. Make sure to test your application thoroughly to ensure that all features and plugins are working as expected.
+
+## Keep going from Updating from Capacitor 4 to Capacitor 5: A Step-by-Step Guide
+
+If you are using **Updating from Capacitor 4 to Capacitor 5: A Step-by-Step Guide** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

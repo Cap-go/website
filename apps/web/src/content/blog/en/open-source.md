@@ -148,3 +148,7 @@ Why not try it for yourself? [Try our free version](https://console.capgo.app/re
 Open Source Software is code that is publicly available for people to view, modify, and share. The term "open source software" was coined by Foresight Institute's co-founder Christine Peterson.
 
 Open source software has many benefits including large community support, helpful guides to get started contributing, learning by studying people's code, and gaining experience working with other developers.
+
+## Keep going from Learn about what open source is and why its important!
+
+If you are using **Learn about what open source is and why its important!** to plan live update delivery, connect it with [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates, [Overview](/docs/live-updates/) for the implementation detail in Overview, [Features](/docs/live-updates/features/) for the implementation detail in Features, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, and [Update Types](/docs/live-updates/update-types/) for the implementation detail in Update Types.

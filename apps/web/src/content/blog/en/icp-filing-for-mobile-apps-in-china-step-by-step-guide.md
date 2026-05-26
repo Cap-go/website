@@ -289,3 +289,7 @@ Capgo also offers a channel system that lets developers test compliance updates 
 -   **Flexible Hosting**: Choose between cloud-based or self-hosted options to meet localization needs.
 
 These tools make Capgo a valuable resource for developers navigating the Chinese market, where fast responses to regulatory changes are critical to staying compliant.
+
+## Keep going from ICP Filing for Mobile Apps in China: Step-by-Step Guide
+
+If you are using **ICP Filing for Mobile Apps in China: Step-by-Step Guide** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

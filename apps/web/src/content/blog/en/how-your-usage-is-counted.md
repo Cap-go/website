@@ -90,3 +90,7 @@ This data is only related to your download size, the better your Capacitor JS ap
 The best way to stay in your plan is to have a small bundle, and if you can't, show a download bar to your user, and let them know how much they have left to download.
 
 In the future, Capgo will improve the download system to have more chances to download the bundle at one time.
+
+## Keep going from How your usage is counted in Capgo
+
+If you are using **How your usage is counted in Capgo** to plan live update delivery, connect it with [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates, [Overview](/docs/live-updates/) for the implementation detail in Overview, [Features](/docs/live-updates/features/) for the implementation detail in Features, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, and [Update Types](/docs/live-updates/update-types/) for the implementation detail in Update Types.

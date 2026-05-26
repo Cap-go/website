@@ -362,3 +362,7 @@ Follow this checklist to meet Apple's requirements:
     
 
 Capgo's platform provides a reliable way to meet these privacy standards while keeping your app functional and user-focused [\[1\]](https://capgo.app/).
+
+## Keep going from Apple Privacy Rules for Capacitor Apps
+
+If you are using **Apple Privacy Rules for Capacitor Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

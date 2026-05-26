@@ -219,3 +219,7 @@ Key practices include:
 -   Using tools that allow for quick rollbacks if needed.
 
 Following this approach helps you deliver secure, uninterrupted updates to your Capacitor apps.
+
+## Keep going from Phased Rollouts for Capacitor Live Updates
+
+If you are using **Phased Rollouts for Capacitor Live Updates** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

@@ -98,3 +98,7 @@ Don't let AppFlow's shutdown disrupt your development workflow. [Start your jour
 For enterprise solutions and dedicated support, [schedule a call with our team](https://book.capgo.app/enterprise-inquiry/) to discuss your migration strategy.
 
 Remember, Capgo isn't just an alternative – it's an upgrade to your mobile app development workflow, offering more features, better performance, and significant cost savings compared to AppFlow.
+
+## Keep going from Ionic AppFlow Shutdown - What's Next for Your Mobile App Development?
+
+If you are using **Ionic AppFlow Shutdown - What's Next for Your Mobile App Development?** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

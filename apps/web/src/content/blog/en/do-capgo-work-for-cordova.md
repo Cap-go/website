@@ -37,3 +37,7 @@ However, making the switch to Capgo may seem daunting. The official Capacitor tu
 But fear not! You have a more efficient and stress-free option. By [hiring me](https://book.capgo.app/convert-your-cordova-app-to-capacitor/), the creator of Capgo, you can have your app upgraded in just a week. Not only will I handle the migration, but I'll also teach your team the basics of native platform so that you can continue to develop and maintain your app with ease.
 
 In conclusion, upgrading your app with Capgo is the easy and efficient way to ensure that you're using the best and most modern app development platform. By [hiring me](https://book.capgo.app/convert-your-cordova-app-to-capacitor/), you'll save time, avoid frustration, and come away with a more profound understanding of native platform."
+
+## Keep going from Why Capgo Doesn't Support Cordova: Migration Guide
+
+If you are using **Why Capgo Doesn't Support Cordova: Migration Guide** to plan migration and enterprise operations, connect it with [Capgo Enterprise](/enterprise/) for the product workflow in Capgo Enterprise, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, [Capgo Alternatives](/alternatives/) for the product workflow in Capgo Alternatives, [Capgo Consulting](/consulting/) for the product workflow in Capgo Consulting, and [Capgo Premium Support](/premium-support/) for the product workflow in Capgo Premium Support.

@@ -202,3 +202,7 @@ These steps help developers manage updates smoothly while keeping user experienc
 > "A structured approach helps in minimizing downtime by automating the update process and ensuring that updates are thoroughly tested before deployment. This approach also enhances user satisfaction by delivering updates that are based on user feedback and are designed to improve the app's performance and functionality" [\[1\]](https://www.nimbleappgenie.com/blogs/mobile-app-development-checklist/)[\[5\]](https://www.netsolutions.com/hub/mobile-app-development/checklist).
 
 Ultimately, effective app updates come down to balancing technical excellence with what users want. By sticking to these strategies and staying committed, developers can keep their apps secure, competitive, and easy to use in a constantly changing digital world.
+
+## Keep going from Mobile App Update Strategies: A Developer's Checklist
+
+If you are using **Mobile App Update Strategies: A Developer's Checklist** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

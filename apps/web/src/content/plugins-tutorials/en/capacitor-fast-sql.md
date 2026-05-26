@@ -72,3 +72,7 @@ console.log('Rows:', result.rows);
 
 - GitHub: https://github.com/Cap-go/capacitor-fast-sql/
 - Docs: /docs/plugins/fast-sql/
+
+## Keep going from Using @capgo/capacitor-fast-sql
+
+If you are using **Using @capgo/capacitor-fast-sql** to plan storage and file handling, connect it with [@capgo/capacitor-fast-sql](/docs/plugins/fast-sql/) for the implementation detail in @capgo/capacitor-fast-sql, [Getting Started](/docs/plugins/fast-sql/getting-started/) for the implementation detail in Getting Started, [@capgo/capacitor-data-storage-sqlite](/docs/plugins/data-storage-sqlite/) for the implementation detail in @capgo/capacitor-data-storage-sqlite, [Using @capgo/capacitor-data-storage-sqlite](/plugins/capacitor-data-storage-sqlite/) for the native capability in Using @capgo/capacitor-data-storage-sqlite, and [@capgo/capacitor-file](/docs/plugins/file/) for the implementation detail in @capgo/capacitor-file.

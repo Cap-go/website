@@ -46,3 +46,7 @@ await SavePassword.readPassword();
 
 - GitHub: https://github.com/Cap-go/capacitor-autofill-save-password/
 - Docs: /docs/plugins/autofill-save-password/
+
+## Keep going from Using @capgo/capacitor-autofill-save-password
+
+If you are using **Using @capgo/capacitor-autofill-save-password** to plan authentication and account flows, connect it with [@capgo/capacitor-autofill-save-password](/docs/plugins/autofill-save-password/) for the implementation detail in @capgo/capacitor-autofill-save-password, [Getting Started](/docs/plugins/autofill-save-password/getting-started/) for the implementation detail in Getting Started, [@capgo/capacitor-social-login](/docs/plugins/social-login/) for the implementation detail in @capgo/capacitor-social-login, [@capgo/capacitor-passkey](/docs/plugins/passkey/) for the implementation detail in @capgo/capacitor-passkey, and [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) for the implementation detail in @capgo/capacitor-native-biometric.

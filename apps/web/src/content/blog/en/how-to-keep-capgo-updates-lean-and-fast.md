@@ -227,3 +227,7 @@ For Capgo teams, "lean and fast" is not just a bundle-size problem.
 It is a release design problem.
 
 Use Delta updates for payload size, channels for rollout size, and rollbacks for failure size. Once you think about OTA that way, your updates stay quick even as the app, team, and user base get bigger.
+
+## Keep going from How to Keep Capgo Updates Lean and Fast
+
+If you are using **How to Keep Capgo Updates Lean and Fast** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

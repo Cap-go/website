@@ -91,3 +91,7 @@ Here’s a breakdown of the key takeaways:
 -   **Offer deployment flexibility**: Choose between cloud or self-hosted solutions, giving you control over payment data security.
 
 Following these steps will help streamline live-update workflows while meeting Apple and Google’s payment data requirements.
+
+## Keep going from Payment Data Security for App Store Approval
+
+If you are using **Payment Data Security for App Store Approval** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

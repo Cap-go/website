@@ -311,3 +311,7 @@ Treat privacy as part of release engineering. Teams that do that ship cleaner ap
 If your team ships Capacitor or Electron apps and needs privacy policy changes to stay aligned with fast production updates, [Capgo](https://capgo.app) is worth evaluating as part of that workflow. It gives teams controlled live updates, version history, channel-based rollout management, and release observability, which can help connect app behavior changes to disclosure and policy updates instead of leaving compliance to manual memory.
 
 *Written with [Outrank tool](https://outrank.so)*
+
+## Keep going from Privacy Policy for Android Apps: A 2026 Guide
+
+If you are using **Privacy Policy for Android Apps: A 2026 Guide** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

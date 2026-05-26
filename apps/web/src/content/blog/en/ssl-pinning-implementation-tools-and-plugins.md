@@ -258,3 +258,7 @@ Testing plays a vital role here. Tools like **Burp Suite** or **OWASP ZAP** can 
 
 For apps built with Capacitor, tools like **Capgo** can be a game-changer. Capgo not only supports live updates but also integrates securely with your app’s CI/CD pipeline. This makes it easier to roll out fixes or updates quickly while staying compliant with Apple and Android guidelines.
 :::
+
+## Keep going from SSL Pinning Implementation: Tools and Plugins
+
+If you are using **SSL Pinning Implementation: Tools and Plugins** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

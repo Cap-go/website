@@ -201,3 +201,7 @@ Capgo's tools are built to handle OTA updates with precision. Here's what sets i
 -   **One-click Rollback**: Quickly revert to an earlier version if problems arise
 
 These features have gained traction among developers, reflected in growing adoption rates and positive feedback from users.
+
+## Keep going from Monitor OTA Updates in Capacitor Apps
+
+If you are using **Monitor OTA Updates in Capacitor Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

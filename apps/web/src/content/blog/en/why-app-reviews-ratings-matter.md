@@ -665,3 +665,7 @@ Remember, the best way to get great reviews is to build a great app that solves 
 ---
 
 *Looking for a way to update your app instantly without waiting for app store approval? Check out [Capgo's live update solution](/docs/getting-started/) for seamless over-the-air updates that keep your app fresh and your users happy.*
+
+## Keep going from Why App Reviews and Ratings Matter: Success Guide
+
+If you are using **Why App Reviews and Ratings Matter: Success Guide** to plan store approval and distribution, connect it with [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/native-market, [Using @capgo/native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/native-market, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.

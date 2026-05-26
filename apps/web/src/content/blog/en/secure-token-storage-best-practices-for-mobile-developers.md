@@ -246,3 +246,7 @@ When it comes to storing tokens in mobile apps, using custom encryption can be a
 
 That said, there are situations where custom encryption becomes unavoidable - like when you're dealing with extremely sensitive data or trying to meet strict regulatory requirements that standard tools just can't handle. In these cases, it’s crucial for developers to stick to **best practices** to ensure their [encryption methods](https://capgo.app/docs/cli/migrations/encryption/) are not only secure but also reliable and compliant with industry standards. Carefully consider the trade-offs before diving into a custom encryption approach.
 :::
+
+## Keep going from Secure Token Storage: Best Practices for Mobile Developers
+
+If you are using **Secure Token Storage: Best Practices for Mobile Developers** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

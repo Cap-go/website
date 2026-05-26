@@ -383,3 +383,7 @@ Building a Capacitor app involves a few straightforward steps:
     
 
 The synchronization step is crucial for keeping your app consistent across platforms and ensuring smooth operation in CI/CD pipelines. For more details on setting up your environment, check out the Tools section.
+
+## Keep going from Setting Up CI/CD for Capacitor Apps
+
+If you are using **Setting Up CI/CD for Capacitor Apps** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

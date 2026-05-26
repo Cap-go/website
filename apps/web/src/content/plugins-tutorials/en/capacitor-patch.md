@@ -60,3 +60,7 @@ Package patches run before `sync` and `update`. Native project patches run after
 
 - GitHub: https://github.com/Cap-go/capacitor-patch/
 - Docs: /docs/plugins/capacitor-patch/
+
+## Keep going from Using @capgo/capacitor-patch
+
+If you are using **Using @capgo/capacitor-patch** to plan native plugin work, connect it with [@capgo/capacitor-patch](/docs/plugins/capacitor-patch/) for the implementation detail in @capgo/capacitor-patch, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.

@@ -234,3 +234,7 @@ To address these risks, developers should consider the following measures:
 -   Implement **behavioral monitoring systems** (see Section 5).
 
 For Capacitor apps, following security protocols and incorporating automated CI/CD validation (outlined in Section 6) are critical. These steps complement the encryption methods and compliance frameworks detailed in Sections 3 and 4.
+
+## Keep going from Ultimate Guide to OTA Update Security for Capacitor Apps
+
+If you are using **Ultimate Guide to OTA Update Security for Capacitor Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

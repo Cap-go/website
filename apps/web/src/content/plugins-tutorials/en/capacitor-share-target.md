@@ -64,3 +64,7 @@ console.log('Plugin version:', version);
 
 - GitHub: https://github.com/Cap-go/capacitor-share-target/
 - Docs: /docs/plugins/share-target/
+
+## Keep going from Using @capgo/capacitor-share-target
+
+If you are using **Using @capgo/capacitor-share-target** to plan native plugin work, connect it with [@capgo/capacitor-share-target](/docs/plugins/share-target/) for the implementation detail in @capgo/capacitor-share-target, [Getting Started](/docs/plugins/share-target/getting-started/) for the implementation detail in Getting Started, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, and [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins.

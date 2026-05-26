@@ -272,3 +272,7 @@ To enhance your OTA update process, consider these actions:
     
 
 Future OTA updates should aim to combine fast deployment with a smooth user experience, ensuring both efficiency and satisfaction.
+
+## Keep going from Capacitor OTA Updates: Versioning Best Practices
+
+If you are using **Capacitor OTA Updates: Versioning Best Practices** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

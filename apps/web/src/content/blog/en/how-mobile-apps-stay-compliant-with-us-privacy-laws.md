@@ -230,3 +230,7 @@ A real-world example comes from Rodrigo Mantica, who shared:
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!"
 
 > "@Capgo is a must-have tool for developers who want to be more productive. Avoiding review for bug fixes is golden."
+
+## Keep going from How Mobile Apps Stay Compliant with U.S. Privacy Laws
+
+If you are using **How Mobile Apps Stay Compliant with U.S. Privacy Laws** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

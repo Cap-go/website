@@ -178,3 +178,7 @@ Here’s a quick implementation breakdown:
 | Optimization | Analyze performance and adjust targeting | Improved efficiency |
 
 Capgo’s advanced user management tools allow you to control updates at a granular level. For teams following agile development practices, features like end-to-end encryption and detailed analytics ensure updates are both secure and high-performing.
+
+## Keep going from Real-Time Updates with User Segmentation
+
+If you are using **Real-Time Updates with User Segmentation** to plan live update delivery, connect it with [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates, [Overview](/docs/live-updates/) for the implementation detail in Overview, [Features](/docs/live-updates/features/) for the implementation detail in Features, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, and [Update Types](/docs/live-updates/update-types/) for the implementation detail in Update Types.

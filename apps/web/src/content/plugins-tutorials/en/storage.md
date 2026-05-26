@@ -65,3 +65,7 @@ await FirebaseStorage.listFiles({} as ListFilesOptions);
 
 - GitHub: https://github.com/Cap-go/capacitor-firebase/tree/main/packages/storage
 - Docs: /docs/plugins/firebase-storage/
+
+## Keep going from Using @capgo/capacitor-firebase-storage
+
+If you are using **Using @capgo/capacitor-firebase-storage** to plan storage and file handling, connect it with [@capgo/capacitor-data-storage-sqlite](/docs/plugins/data-storage-sqlite/) for the implementation detail in @capgo/capacitor-data-storage-sqlite, [Using @capgo/capacitor-data-storage-sqlite](/plugins/capacitor-data-storage-sqlite/) for the native capability in Using @capgo/capacitor-data-storage-sqlite, [@capgo/capacitor-file](/docs/plugins/file/) for the implementation detail in @capgo/capacitor-file, [Using @capgo/capacitor-file](/plugins/capacitor-file/) for the native capability in Using @capgo/capacitor-file, and [@capgo/capacitor-uploader](/docs/plugins/uploader/) for the implementation detail in @capgo/capacitor-uploader.

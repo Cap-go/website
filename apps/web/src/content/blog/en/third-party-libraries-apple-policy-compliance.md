@@ -300,3 +300,7 @@ If your app doesn’t have the necessary privacy manifests submitted by the **Ma
 
 On top of that, any app that doesn’t clearly outline its use of required APIs in the privacy manifests will also be rejected. This policy is part of Apple’s initiative to enhance transparency about data usage and curb unauthorized data collection.
 :::
+
+## Keep going from Third-Party Libraries: Apple Policy Compliance
+
+If you are using **Third-Party Libraries: Apple Policy Compliance** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

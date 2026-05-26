@@ -238,3 +238,7 @@ Integrate continuous deployment pipelines with robust security measures. Key pra
 -   Gradual rollouts using channel systems
 -   Real-time error tracking and analytics
 -   Version control for seamless updates
+
+## Keep going from OTA Updates in CI/CD: Security and Compliance Tips
+
+If you are using **OTA Updates in CI/CD: Security and Compliance Tips** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

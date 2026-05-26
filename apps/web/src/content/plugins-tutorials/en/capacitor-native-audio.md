@@ -81,3 +81,7 @@ await NativeAudio.isPreloaded({} as PreloadOptions);
 
 - GitHub: https://github.com/Cap-go/capacitor-native-audio/
 - Docs: /docs/plugins/native-audio/
+
+## Keep going from Using @capgo/native-audio
+
+If you are using **Using @capgo/native-audio** to plan native media and interface behavior, connect it with [@capgo/native-audio](/docs/plugins/native-audio/) for the implementation detail in @capgo/native-audio, [Getting Started](/docs/plugins/native-audio/getting-started/) for the implementation detail in Getting Started, [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, and [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player.

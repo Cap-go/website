@@ -316,3 +316,7 @@ Join use here 👇
 ## Register here to get your account
 
 [Capgo](/register/)
+
+## Keep going from in app purchases for capacitor
+
+If you are using **in app purchases for capacitor** to plan payments and purchases, connect it with [Capgo Pricing](/pricing/) for the product workflow in Capgo Pricing, [Payment system](/docs/webapp/payment/) for the implementation detail in Payment system, [@capgo/native-purchases](/docs/plugins/native-purchases/) for the implementation detail in @capgo/native-purchases, [Getting Started](/docs/plugins/native-purchases/getting-started/) for the implementation detail in Getting Started, and [Revenue Playbook](/docs/plugins/native-purchases/revenue-playbook/) for the implementation detail in Revenue Playbook.

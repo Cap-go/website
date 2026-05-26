@@ -71,3 +71,7 @@ console.log(result.uri);
 
 - GitHub: https://github.com/Cap-go/capacitor-file-sharer/
 - Docs: /docs/plugins/file-sharer/
+
+## Keep going from Using @capgo/capacitor-file-sharer
+
+If you are using **Using @capgo/capacitor-file-sharer** to plan storage and file handling, connect it with [@capgo/capacitor-file-sharer](/docs/plugins/file-sharer/) for the implementation detail in @capgo/capacitor-file-sharer, [Getting Started](/docs/plugins/file-sharer/getting-started/) for the implementation detail in Getting Started, [@capgo/capacitor-data-storage-sqlite](/docs/plugins/data-storage-sqlite/) for the implementation detail in @capgo/capacitor-data-storage-sqlite, [Using @capgo/capacitor-data-storage-sqlite](/plugins/capacitor-data-storage-sqlite/) for the native capability in Using @capgo/capacitor-data-storage-sqlite, and [@capgo/capacitor-file](/docs/plugins/file/) for the implementation detail in @capgo/capacitor-file.

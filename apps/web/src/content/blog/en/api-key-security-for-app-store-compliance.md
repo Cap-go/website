@@ -337,3 +337,7 @@ Refer to this checklist as a guide for securing your API keys.
     
 
 > "App Store compliant" - Capgo [\[1\]](https://capgo.app/)
+
+## Keep going from API Key Security for App Store Compliance
+
+If you are using **API Key Security for App Store Compliance** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

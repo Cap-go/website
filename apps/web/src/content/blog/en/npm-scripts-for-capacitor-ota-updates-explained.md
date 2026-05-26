@@ -337,3 +337,7 @@ Capgo's performance metrics speak for themselves:
 
 Starting at $12/month with OTA updates and about 15 native builds/month included - and extra build minutes are billed by minute through credits - Capgo offers a secure,
 reliable, and cost-efficient option for managing OTA updates and native build automation [\[1\]](https://capgo.app/).
+
+## Keep going from npm Scripts for Capacitor OTA Updates Explained
+
+If you are using **npm Scripts for Capacitor OTA Updates Explained** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

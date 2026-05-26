@@ -314,3 +314,7 @@ To keep your live updates running smoothly and ensure they meet platform require
 -   Share your documented testing protocols with your team for consistency.
 
 These practices will help maintain your workflow and stay compliant with Apple and Google Play guidelines.
+
+## Keep going from Live Updates FAQ: Answers for App Developers
+
+If you are using **Live Updates FAQ: Answers for App Developers** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

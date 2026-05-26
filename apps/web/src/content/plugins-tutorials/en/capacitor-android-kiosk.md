@@ -68,3 +68,7 @@ console.log('Exited kiosk mode');
 
 - GitHub: https://github.com/Cap-go/capacitor-android-kiosk/
 - Docs: /docs/plugins/android-kiosk/
+
+## Keep going from Using @capgo/capacitor-android-kiosk
+
+If you are using **Using @capgo/capacitor-android-kiosk** to plan dashboard and API operations, connect it with [@capgo/capacitor-android-kiosk](/docs/plugins/android-kiosk/) for the implementation detail in @capgo/capacitor-android-kiosk, [Getting Started](/docs/plugins/android-kiosk/getting-started/) for the implementation detail in Getting Started, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, and [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys.

@@ -476,3 +476,7 @@ NASA's [OSIRIS-REx](https://en.wikipedia.org/wiki/OSIRIS-REx) team underscores t
 > "Capgo is a smart way to make hot code pushes (and not for all the money in the world like with @AppFlow) :-)" [\[1\]](https://capgo.app/)
 
 When managing consent tracking, focus on encryption and analytics monitoring to stay compliant and foster user trust. This strategy ensures quick responses to regulatory changes and evolving privacy standards.
+
+## Keep going from Automated Consent Tracking for Capacitor Apps
+
+If you are using **Automated Consent Tracking for Capacitor Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

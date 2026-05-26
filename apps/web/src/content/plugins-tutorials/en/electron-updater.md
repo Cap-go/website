@@ -95,3 +95,7 @@ bunx @capgo/cli@latest bundle upload --channel=production
 - Always call `notifyAppReady()` early in the renderer so rollback protection works as intended.
 - Keep the built-in path stable and let the updater decide whether to load the shipped bundle or a downloaded one.
 - Reuse the same Capgo channel and rollout model you already use on mobile when your Electron app shares a backend release pipeline.
+
+## Keep going from Using @capgo/electron-updater
+
+If you are using **Using @capgo/electron-updater** to plan native plugin work, connect it with [@capgo/electron-updater](/docs/plugins/electron-updater/) for the implementation detail in @capgo/electron-updater, [Getting Started with Electron Updater](/docs/plugins/electron-updater/getting-started/) for the implementation detail in Getting Started with Electron Updater, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, and [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins.

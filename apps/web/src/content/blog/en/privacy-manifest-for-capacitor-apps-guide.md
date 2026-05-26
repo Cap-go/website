@@ -283,3 +283,7 @@ You can begin implementing these principles by following these steps:
 > "Capgo is a must-have tool for developers who want to boost productivity. Avoiding review delays for bug fixes is a game changer." - Bessie Cooper
 
 Regular updates and proper tools are key to staying compliant and improving over time.
+
+## Keep going from Privacy Manifest for Capacitor Apps: Guide
+
+If you are using **Privacy Manifest for Capacitor Apps: Guide** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

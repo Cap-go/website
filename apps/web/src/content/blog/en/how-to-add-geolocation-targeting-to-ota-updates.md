@@ -306,3 +306,7 @@ Key areas for improvement include:
 -   **Adapting updates** to work seamlessly across varying connectivity levels [\[1\]](https://www.acldigital.com/blogs/ota-updates-in-automotive)
 
 Platforms that focus on encryption and compliance will lead the way in making these advancements more accessible and effective.
+
+## Keep going from How to Add Geolocation Targeting to OTA Updates
+
+If you are using **How to Add Geolocation Targeting to OTA Updates** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

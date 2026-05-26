@@ -88,3 +88,7 @@ but there should not be any major changes to this system.
 <br>
 
 Thank you for reading 🚀
+
+## Keep going from A brand new organization system
+
+If you are using **A brand new organization system** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.

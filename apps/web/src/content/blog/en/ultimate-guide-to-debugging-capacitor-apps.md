@@ -388,3 +388,7 @@ You can enhance your debugging process by taking these steps:
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica[\[1\]](https://capgo.app/)
 
 Keep an eye on critical performance metrics to ensure your app runs smoothly.
+
+## Keep going from Ultimate Guide to Debugging Capacitor Apps
+
+If you are using **Ultimate Guide to Debugging Capacitor Apps** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

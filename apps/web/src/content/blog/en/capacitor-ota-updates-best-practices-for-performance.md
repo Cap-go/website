@@ -216,3 +216,7 @@ To maximize the efficiency of OTA updates in your Capacitor app, make sure to:
 -   **Streamline update delivery**: Consider tools like Capgo for smooth, background updates.
     
 -   **Prepare fallback systems**: Ensure the app remains functional even if an update fails [\[9\]](https://dzone.com/articles/why-device-firmware-updates-are-critical-to-produc).
+
+## Keep going from Capacitor OTA Updates: Best Practices for Performance
+
+If you are using **Capacitor OTA Updates: Best Practices for Performance** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

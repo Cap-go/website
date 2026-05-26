@@ -180,3 +180,7 @@ You cannot run Xcode on Windows, but you *can* ship iOS apps from Windows:
 1. Wrap your web app with Capacitor (`ios/` in your repo).
 2. Build web assets locally, then `cap sync`.
 3. Use Capgo Build to compile, sign, and submit your iOS binary from the CLI.
+
+## Keep going from Build an iOS App from Windows with Capacitor and Capgo Build
+
+If you are using **Build an iOS App from Windows with Capacitor and Capgo Build** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

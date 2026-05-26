@@ -105,3 +105,7 @@ Yes, Capgo offers [Enterprise support and features](https://capgo.app/) for Capa
 ## How do I get started with Capacitor?
 
 Visit the [Capacitor documentation](https://capacitorjs.com/docs/) and follow the instructions to install Capacitor in your app. If you want to start with an opinionated Capacitor app using Ionic Framework and Angular/React/Vue, follow the Get Started flow on the [Ionic Framework site](https://ionicframework.com/).
+
+## Keep going from Capacitor: A Comprehensive Guide
+
+If you are using **Capacitor: A Comprehensive Guide** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

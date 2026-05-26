@@ -354,3 +354,7 @@ Pairing Firebase Crashlytics with Capgo gives you a powerful system for error tr
 3.  Use [Capgo channels](https://capgo.app/docs/webapp/channels/) to test and release fixes step by step.
 
 With Crashlytics and Capgo in place, you’re set to keep your app running smoothly and improving over time.
+
+## Keep going from Firebase Crashlytics for Capacitor Apps
+
+If you are using **Firebase Crashlytics for Capacitor Apps** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

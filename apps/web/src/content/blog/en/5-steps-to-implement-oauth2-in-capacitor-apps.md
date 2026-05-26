@@ -319,3 +319,7 @@ When testing OAuth2 integration in Capacitor apps, developers might run into a f
 
 To tackle these issues, take the time to review your app's OAuth setup thoroughly. Implement strong error handling to catch and address problems early, and test your authentication flow under different scenarios. Tools like Capgo can make life easier by allowing you to push updates and fixes directly to your app without waiting for app store approvals, keeping development efficient and users happy.
 :::
+
+## Keep going from 5 Steps to Implement OAuth2 in Capacitor Apps
+
+If you are using **5 Steps to Implement OAuth2 in Capacitor Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

@@ -253,3 +253,7 @@ To improve your OTA testing process, keep these practical tips in mind:
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" [\[1\]](https://capgo.app/)
 
 > "Capgo streamlines development by eliminating app store delays for bug fixes." [\[1\]](https://capgo.app/)
+
+## Keep going from Testing Capacitor OTA Updates
+
+If you are using **Testing Capacitor OTA Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

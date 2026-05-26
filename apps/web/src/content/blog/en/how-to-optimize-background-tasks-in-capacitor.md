@@ -261,3 +261,7 @@ Capgo's over-the-air (OTA) update system streamlines the process of managing upd
 
 One standout feature is its support for background updates. Changes are applied while the app operates in the background, ensuring minimal disruption for users. By leveraging **partial updates** and **end-to-end encryption**, Capgo transmits only the necessary data, which helps conserve memory and reduces CPU usage. With an impressive 95% adoption rate for updates within just 24 hours, Capgo proves to be a dependable tool for maintaining app performance and keeping users satisfied.
 :::
+
+## Keep going from How to Optimize Background Tasks in Capacitor
+
+If you are using **How to Optimize Background Tasks in Capacitor** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

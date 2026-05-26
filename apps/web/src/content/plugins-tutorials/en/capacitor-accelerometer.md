@@ -65,3 +65,7 @@ await CapacitorAccelerometer.stopMeasurementUpdates();
 
 - GitHub: https://github.com/Cap-go/capacitor-accelerometer/
 - Docs: /docs/plugins/accelerometer/
+
+## Keep going from Using @capgo/capacitor-accelerometer
+
+If you are using **Using @capgo/capacitor-accelerometer** to plan dashboard and API operations, connect it with [@capgo/capacitor-accelerometer](/docs/plugins/accelerometer/) for the implementation detail in @capgo/capacitor-accelerometer, [Getting Started](/docs/plugins/accelerometer/getting-started/) for the implementation detail in Getting Started, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, and [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys.

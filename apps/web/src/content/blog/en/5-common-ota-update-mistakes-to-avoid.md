@@ -240,3 +240,7 @@ Today's OTA technology simplifies compliance and enables rapid improvements. To 
 -   **Performance Monitoring**: Track key metrics to maintain high success rates.
 
 With more than 23.5 million updates delivered across 750 production apps [\[1\]](https://capgo.app/), effective OTA update management has become a vital tool in the fast-paced app development world. By prioritizing security, monitoring performance, and ensuring a smooth user experience, developers can keep their apps up-to-date while maintaining stability and trust.
+
+## Keep going from 5 Common OTA Update Mistakes to Avoid
+
+If you are using **5 Common OTA Update Mistakes to Avoid** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

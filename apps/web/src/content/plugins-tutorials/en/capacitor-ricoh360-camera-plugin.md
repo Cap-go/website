@@ -65,3 +65,7 @@ await Ricoh360Camera.capturePicture();
 
 - GitHub: https://github.com/Cap-go/capacitor-ricoh360-camera-plugin/
 - Docs: /docs/plugins/ricoh360-camera/
+
+## Keep going from Using @capgo/ricoh360
+
+If you are using **Using @capgo/ricoh360** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player, and [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) for the native capability in Using @capgo/capacitor-native-navigation.

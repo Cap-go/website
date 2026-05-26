@@ -65,3 +65,7 @@ await CapgoLLM.setModel({} as ModelOptions);
 
 - GitHub: https://github.com/Cap-go/capacitor-llm/
 - Docs: /docs/plugins/llm/
+
+## Keep going from Using @capgo/capacitor-llm
+
+If you are using **Using @capgo/capacitor-llm** to plan dashboard and API operations, connect it with [@capgo/capacitor-llm](/docs/plugins/llm/) for the implementation detail in @capgo/capacitor-llm, [Getting Started](/docs/plugins/llm/getting-started/) for the implementation detail in Getting Started, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, and [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys.

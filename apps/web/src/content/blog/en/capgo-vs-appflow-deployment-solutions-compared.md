@@ -167,3 +167,7 @@ On the other hand, while Appflow provides functionality, it lacks the same advan
 
 The article doesn’t delve into the specifics of Capgo's cloud and self-hosted deployment options. To get more detailed information, it’s a good idea to check out Capgo's official resources or reach out to their team directly. They can provide guidance that aligns with your specific needs.
 :::
+
+## Keep going from Capgo vs. Appflow: Deployment Solutions Compared
+
+If you are using **Capgo vs. Appflow: Deployment Solutions Compared** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

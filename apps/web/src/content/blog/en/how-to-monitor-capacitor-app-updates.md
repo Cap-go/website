@@ -181,3 +181,7 @@ Keep your focus on three key areas: technical performance, user experience, and 
 | Security Compliance | Encryption checks, code signing, platform rules adherence | Keeps apps compliant with store requirements |
 
 Incorporate automated tools into your development process. Real-time metrics and alerts, paired with your CI/CD pipeline, allow for faster issue resolution with minimal disruption to users.
+
+## Keep going from How To Monitor Capacitor App Updates
+
+If you are using **How To Monitor Capacitor App Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

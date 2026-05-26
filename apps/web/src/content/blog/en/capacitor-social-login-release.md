@@ -50,3 +50,7 @@ Feel free to check out the [Apple](https://github.com/Cap-go/capacitor-social-lo
 ## Conclusion
 
 In conclusion, the Capacitor Social Login plugin introduces a lot of new and exciting features with more to come in the future 🚀
+
+## Keep going from Release of a brand new Capacitor Social Login plugin
+
+If you are using **Release of a brand new Capacitor Social Login plugin** to plan authentication and account flows, connect it with [@capgo/capacitor-social-login](/docs/plugins/social-login/) for the implementation detail in @capgo/capacitor-social-login, [@capgo/capacitor-passkey](/docs/plugins/passkey/) for the implementation detail in @capgo/capacitor-passkey, [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) for the implementation detail in @capgo/capacitor-native-biometric, [Two-factor authentication](/docs/webapp/mfa/) for the implementation detail in Two-factor authentication, and [SSO (Enterprise)](/docs/webapp/enterprise-sso/) for the implementation detail in SSO (Enterprise).

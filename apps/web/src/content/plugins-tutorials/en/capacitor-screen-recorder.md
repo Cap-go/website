@@ -48,3 +48,7 @@ console.log('Recording saved to gallery');
 
 - GitHub: https://github.com/Cap-go/capacitor-screen-recorder/
 - Docs: /docs/plugins/screen-recorder/
+
+## Keep going from Using @capgo/capacitor-screen-recorder
+
+If you are using **Using @capgo/capacitor-screen-recorder** to plan native media and interface behavior, connect it with [@capgo/capacitor-screen-recorder](/docs/plugins/screen-recorder/) for the implementation detail in @capgo/capacitor-screen-recorder, [Getting Started](/docs/plugins/screen-recorder/getting-started/) for the implementation detail in Getting Started, [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, and [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player.

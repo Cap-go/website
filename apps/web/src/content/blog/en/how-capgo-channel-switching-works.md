@@ -344,3 +344,7 @@ Channel surfing transforms how you can iterate on your Capacitor app. Instead of
 With the instant channel switching introduced in recent plugin versions, the experience is now seamless - users can switch channels and immediately receive updates from the new channel without any waiting period.
 
 Whether you're validating bug fixes with stakeholders, running beta programs, or debugging issues with specific users, channel surfing gives you the flexibility to ship the right update to the right user at the right time.
+
+## Keep going from Channel Surfing for Capgo: How to Switch Update Channels at Runtime
+
+If you are using **Channel Surfing for Capgo: How to Switch Update Channels at Runtime** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

@@ -32,3 +32,7 @@ await SSLPinning.getConfiguration();
 
 - GitHub: https://github.com/Cap-go/capacitor-ssl-pinning/
 - Docs: /docs/plugins/ssl-pinning/
+
+## Keep going from Using @capgo/capacitor-ssl-pinning
+
+If you are using **Using @capgo/capacitor-ssl-pinning** to plan security and compliance, connect it with [@capgo/capacitor-ssl-pinning](/docs/plugins/ssl-pinning/) for the implementation detail in @capgo/capacitor-ssl-pinning, [Getting Started](/docs/plugins/ssl-pinning/getting-started/) for the implementation detail in Getting Started, [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, and [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner.

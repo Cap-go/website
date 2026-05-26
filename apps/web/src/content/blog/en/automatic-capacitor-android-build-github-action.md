@@ -429,3 +429,7 @@ jobs:
 
 - [GitHub Actions Documentation](https://docs.github.com/en/actions/)
 - [Fastlane Documentation](https://docs.fastlane.tools/)
+
+## Keep going from Automatic Capacitor Android build with GitHub actions
+
+If you are using **Automatic Capacitor Android build with GitHub actions** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

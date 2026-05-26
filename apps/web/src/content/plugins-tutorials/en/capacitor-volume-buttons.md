@@ -63,3 +63,7 @@ console.log('Plugin version:', version);
 
 - GitHub: https://github.com/Cap-go/capacitor-volume-buttons/
 - Docs: /docs/plugins/volume-buttons/
+
+## Keep going from Using @capgo/capacitor-volume-buttons
+
+If you are using **Using @capgo/capacitor-volume-buttons** to plan native plugin work, connect it with [@capgo/capacitor-volume-buttons](/docs/plugins/volume-buttons/) for the implementation detail in @capgo/capacitor-volume-buttons, [Getting Started](/docs/plugins/volume-buttons/getting-started/) for the implementation detail in Getting Started, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, and [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins.

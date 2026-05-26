@@ -230,3 +230,7 @@ End-to-end encryption plays a critical role in protecting OTA updates, blocking 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
 Maintaining security requires continuous attention and the right tools. With proper monitoring, quick responses to threats, and regularly updated protocols, your OTA system can remain both secure and efficient. This aligns with thorough testing, careful management, and well-planned post-release processes.
+
+## Keep going from Capacitor OTA Updates: Security Tips
+
+If you are using **Capacitor OTA Updates: Security Tips** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

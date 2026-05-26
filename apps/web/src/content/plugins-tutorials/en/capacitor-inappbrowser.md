@@ -65,3 +65,7 @@ await InAppBrowser.clearAllCookies();
 
 - GitHub: https://github.com/Cap-go/capacitor-inappbrowser/
 - Docs: /docs/plugins/inappbrowser/
+
+## Keep going from Using @capgo/inappbrowser
+
+If you are using **Using @capgo/inappbrowser** to plan native plugin work, connect it with [@capgo/inappbrowser](/docs/plugins/inappbrowser/) for the implementation detail in @capgo/inappbrowser, [Getting Started](/docs/plugins/inappbrowser/getting-started/) for the implementation detail in Getting Started, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, and [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins.

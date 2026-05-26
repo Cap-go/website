@@ -482,3 +482,7 @@ To achieve these results, following key practices is crucial:
 Developers have praised these tools. Bessie Cooper shared, _"Capgo is a must-have tool for developers who want to be more productive. Avoiding review for bug fixes is golden."_ [\[1\]](https://capgo.app/)
 
 Features like error tracking, performance monitoring, end-to-end encryption, and seamless CI/CD integration contribute to high update success rates and smooth performance. Together, these tools combine native functionality with fast, reliable updates, showcasing the platform's strengths.
+
+## Keep going from Capacitor Native Bridge: Android Plugin Basics
+
+If you are using **Capacitor Native Bridge: Android Plugin Basics** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

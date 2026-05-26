@@ -100,3 +100,7 @@ await BackgroundTask.unregisterTaskAsync(SYNC_TASK);
 
 - GitHub: https://github.com/Cap-go/capacitor-background-task/
 - Docs: /docs/plugins/background-task/
+
+## Keep going from Using @capgo/capacitor-background-task
+
+If you are using **Using @capgo/capacitor-background-task** to plan native plugin work, connect it with [@capgo/capacitor-background-task](/docs/plugins/background-task/) for the implementation detail in @capgo/capacitor-background-task, [Getting Started](/docs/plugins/background-task/getting-started/) for the implementation detail in Getting Started, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, and [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins.

@@ -267,3 +267,7 @@ Based on these distinctions, here’s a quick guide to help you pick the right p
 -   **Cost-Conscious Developers**: With its competitive pricing, Capgo is a budget-friendly option compared to Appflow, making it suitable for teams of any size [\[1\]](https://capgo.app/).
     
 -   **Planning for the Future**: Appflow’s scheduled shutdown in 2026 means migration planning is essential. Capgo’s open-source approach, active development, and growing community make it a reliable long-term choice [\[1\]](https://capgo.app/).
+
+## Keep going from Capacitor vs Appflow: OTA Update Solutions Compared
+
+If you are using **Capacitor vs Appflow: OTA Update Solutions Compared** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

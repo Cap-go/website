@@ -274,3 +274,7 @@ Optimizing the Native Bridge in Capacitor is all about ensuring efficient commun
 
 For apps that need frequent updates or quick feature rollouts, tools like **Capgo** can be a game-changer. Capgo lets developers push updates instantly, bypassing app store delays while staying compliant with Apple and Android guidelines. By combining these strategies, you can boost your app's performance and provide users with a smoother, more seamless experience.
 :::
+
+## Keep going from What Is Native Bridge in Capacitor?
+
+If you are using **What Is Native Bridge in Capacitor?** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.

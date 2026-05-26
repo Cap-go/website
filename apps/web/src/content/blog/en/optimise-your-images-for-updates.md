@@ -30,3 +30,6 @@ In addition to improving the performance of your app, converting your images to 
 
 Overall, converting your images to WebP can be an effective way to optimize your mobile app's assets and improve the performance of your app. It's a simple and straightforward process that can have a big impact on the overall user experience of your app. By taking the time to convert your images to WebP, you'll be able to provide a better experience for your users and potentially increase engagement and retention.
 
+## Keep going from Optimise your images for updates
+
+If you are using **Optimise your images for updates** to plan live update delivery, connect it with [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates, [Overview](/docs/live-updates/) for the implementation detail in Overview, [Features](/docs/live-updates/features/) for the implementation detail in Features, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, and [Update Types](/docs/live-updates/update-types/) for the implementation detail in Update Types.

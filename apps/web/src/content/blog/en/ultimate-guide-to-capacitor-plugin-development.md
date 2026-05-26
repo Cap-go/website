@@ -426,3 +426,7 @@ Once testing is done, use the Capacitor CLI to build the plugin for both platfor
 
 For quick updates without needing app store approvals, tools like **Capgo** can simplify the process. This allows you to roll out new features and fixes to your users in real-time, keeping your app up to date effortlessly.
 :::
+
+## Keep going from Ultimate Guide to Capacitor Plugin Development
+
+If you are using **Ultimate Guide to Capacitor Plugin Development** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

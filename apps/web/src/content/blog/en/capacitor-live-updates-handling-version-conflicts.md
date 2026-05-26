@@ -189,3 +189,7 @@ To avoid version conflicts when testing updates on your Capacitor app, it’s es
 
 If you’re using a live update solution like **Capgo**, its features - such as user assignment and real-time updates - can make managing and testing updates across platforms more seamless. This ensures smooth deployment while staying compliant with Apple and Android guidelines.
 :::
+
+## Keep going from Capacitor Live Updates: Handling Version Conflicts
+
+If you are using **Capacitor Live Updates: Handling Version Conflicts** to plan rollback and version control, connect it with [Rollbacks](/docs/live-updates/rollbacks/) for the implementation detail in Rollbacks, [Version Targeting](/docs/live-updates/version-targeting/) for the implementation detail in Version Targeting, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, [bundle](/docs/cli/reference/bundle/) for the implementation detail in bundle, and [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates.

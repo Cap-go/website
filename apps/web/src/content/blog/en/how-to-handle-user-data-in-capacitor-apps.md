@@ -395,3 +395,7 @@ For teams managing OTA updates, Capgo offers built-in security tools that align 
 
 -   **End-to-end encryption** to secure update packages.
 -   **Real-time monitoring** for quickly addressing potential security threats.
+
+## Keep going from How to Handle User Data in Capacitor Apps
+
+If you are using **How to Handle User Data in Capacitor Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

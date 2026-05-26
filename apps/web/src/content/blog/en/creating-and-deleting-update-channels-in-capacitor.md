@@ -277,3 +277,7 @@ To take advantage of these proven results, begin by refining your channel setup:
 -   **Track Performance**: Regularly monitor update success rates and user engagement.
 
 Don't forget to periodically review and remove inactive channels to maintain an efficient workflow. With well-managed channels, developers can deploy updates more quickly while maintaining control and stability.
+
+## Keep going from Creating and Deleting Update Channels in Capacitor
+
+If you are using **Creating and Deleting Update Channels in Capacitor** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

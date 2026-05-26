@@ -226,3 +226,7 @@ Your app should also make it simple for users to adjust their preferences, inclu
 
 For developers using tools like **Capgo** to deliver live updates in Capacitor apps, integrating consent management is straightforward. This approach not only keeps your app compliant with Apple and Android guidelines but also ensures it stays privacy-focused and user-friendly.
 :::
+
+## Keep going from CPRA Compliance for App Developers
+
+If you are using **CPRA Compliance for App Developers** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

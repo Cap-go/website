@@ -189,3 +189,7 @@ OTA updates for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-
 Data from platforms like Capgo demonstrates how effective these strategies can be. Developers have successfully delivered 947.6 million updates across 1,400 production apps, proving the scalability of well-designed update systems [\[1\]](https://capgo.app/). However, success relies heavily on meeting each platform's requirements while maintaining strong security measures.
 
 For example, Apple mandates that interpreted code must not alter an app's core functionality or compromise its security [\[2\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/). This rule is a clear reminder of the platform-specific guidelines developers must follow to implement OTA updates effectively.
+
+## Keep going from Capacitor OTA Updates: Targeting iOS vs Android
+
+If you are using **Capacitor OTA Updates: Targeting iOS vs Android** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

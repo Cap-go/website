@@ -260,3 +260,7 @@ Tools like **Capgo** make it easier for developers to stay compliant with Apple 
 
 This is particularly helpful for apps deployed across multiple regions, where differing regulations and app store policies can complicate updates. With features like end-to-end encryption and real-time updates, Capgo not only simplifies compliance but also helps developers meet regional requirements, maintain user trust, and provide a smooth app experience worldwide.
 :::
+
+## Keep going from Apple vs. Google Policies: Multi-Region Compliance
+
+If you are using **Apple vs. Google Policies: Multi-Region Compliance** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

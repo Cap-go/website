@@ -102,3 +102,7 @@ If 16 KB devices are breaking your app and a plugin isn’t ready, talk to us:
 - We help you avoid last‑minute rushes as enforcement rolls out.
 
 Tell us which feature is failing and the plugin name (if you know it). We’ll handle the rest. Visit our services page: [Capgo Consulting](/consulting)
+
+## Keep going from Android 16 KB Page Size: Find the Problem Plugin and What to Do Next
+
+If you are using **Android 16 KB Page Size: Find the Problem Plugin and What to Do Next** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

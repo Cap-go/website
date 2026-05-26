@@ -364,3 +364,7 @@ Capacitor is an excellent option for building native applications based on an ex
 And with the addition of [Capgo](https://capgo.app/), it's even easier to add live updates to your app, ensuring that your users always have access to the latest features and bug fixes.
 
 If you would like to learn how to add Capgo to your Next.js app, take a look at the next article :
+
+## Keep going from Creating Mobile Apps with live updates, Quasar and Capacitor.
+
+If you are using **Creating Mobile Apps with live updates, Quasar and Capacitor.** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

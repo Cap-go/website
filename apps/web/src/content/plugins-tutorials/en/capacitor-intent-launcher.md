@@ -85,3 +85,7 @@ if (icon) {
 
 - GitHub: https://github.com/Cap-go/capacitor-intent-launcher/
 - Docs: /docs/plugins/intent-launcher/
+
+## Keep going from Using @capgo/capacitor-intent-launcher
+
+If you are using **Using @capgo/capacitor-intent-launcher** to plan dashboard and API operations, connect it with [@capgo/capacitor-intent-launcher](/docs/plugins/intent-launcher/) for the implementation detail in @capgo/capacitor-intent-launcher, [Getting Started](/docs/plugins/intent-launcher/getting-started/) for the implementation detail in Getting Started, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, and [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys.

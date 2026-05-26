@@ -138,3 +138,7 @@ Since [Microsoft CodePush](https://microsoft.github.io/code-push/)'s shutdown in
 To stay compliant with China's encryption laws while maintaining development speed, it's crucial to use the right tools, keep documentation up to date, conduct regular audits, and collaborate with experts. These steps are key to navigating China's complex regulatory environment effectively.
 
 > "Capgo is a must-have tool for developers who want to be more productive. Avoiding review for bug fixes is golden." - Bessie Cooper [\[1\]](https://capgo.app/)
+
+## Keep going from Key Management Under China's Encryption Rules
+
+If you are using **Key Management Under China's Encryption Rules** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

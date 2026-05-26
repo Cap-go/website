@@ -275,3 +275,7 @@ Key strategies for effective delta updates include:
 -   Supporting background installations for seamless updates
 
 With 23.5 million updates delivered [\[1\]](https://capgo.app/), delta updates are transforming app deployment. They make updates faster, lighter, and more dependable, making them a critical tool for modern app development.
+
+## Keep going from How Delta Updates Reduce Payload Size
+
+If you are using **How Delta Updates Reduce Payload Size** to plan storage and file handling, connect it with [@capgo/capacitor-data-storage-sqlite](/docs/plugins/data-storage-sqlite/) for the implementation detail in @capgo/capacitor-data-storage-sqlite, [Using @capgo/capacitor-data-storage-sqlite](/plugins/capacitor-data-storage-sqlite/) for the native capability in Using @capgo/capacitor-data-storage-sqlite, [@capgo/capacitor-file](/docs/plugins/file/) for the implementation detail in @capgo/capacitor-file, [Using @capgo/capacitor-file](/plugins/capacitor-file/) for the native capability in Using @capgo/capacitor-file, and [@capgo/capacitor-uploader](/docs/plugins/uploader/) for the implementation detail in @capgo/capacitor-uploader.

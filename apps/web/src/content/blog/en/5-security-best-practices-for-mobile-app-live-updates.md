@@ -197,3 +197,7 @@ These efforts also bring measurable improvements across several business areas:
 | Operating Costs | Cuts down expenses tied to security incidents |
 
 For those looking to implement these strategies, tools like [ProGuard](https://www.guardsquare.com/proguard) for Android and secure compilation methods for iOS offer practical solutions to enhance update security. Using HTTPS protocols and [encryption during update delivery](https://capgo.app/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/) ensures both the transmission process and user data remain safe.
+
+## Keep going from 5 Security Best Practices for Mobile App Live Updates
+
+If you are using **5 Security Best Practices for Mobile App Live Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

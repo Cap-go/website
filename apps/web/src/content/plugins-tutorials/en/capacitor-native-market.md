@@ -80,3 +80,7 @@ await NativeMarket.openEditorChoicePage({
 
 - GitHub: https://github.com/Cap-go/capacitor-native-market/
 - Docs: /docs/plugins/native-market/
+
+## Keep going from Using @capgo/native-market
+
+If you are using **Using @capgo/native-market** to plan store approval and distribution, connect it with [@capgo/native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/native-market, [Getting Started](/docs/plugins/native-market/getting-started/) for the implementation detail in Getting Started, [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.

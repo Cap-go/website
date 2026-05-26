@@ -139,3 +139,7 @@ Navigating China's data regulations while maintaining global app functionality i
 Modern solutions now enable developers to strike a balance between meeting regulatory demands and achieving operational efficiency. Capgo, for instance, has shown how compliance efforts can align with the need for smooth global distribution, proving that the right tools can make a big difference.
 
 As China's data protection rules continue to shift, it's essential for developers to focus on tools that combine security and adaptability. Features like end-to-end encryption, flexible hosting setups, and fast deployment options are key to meeting both regulatory standards and the expectations of a global audience.
+
+## Keep going from How China's Data Laws Impact App Store Submissions
+
+If you are using **How China's Data Laws Impact App Store Submissions** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

@@ -174,3 +174,7 @@ User feedback highlights the real-world impact of these tools. For example, NASA
 > "Capgo is a smart way to make hot code pushes (and not for all the money in the world like with @AppFlow) :-)"
 
 This comparison makes it clear how each platform serves specific needs, whether for solo developers or enterprise teams. Among them, Capgo stands out for its secure updates and strong adoption in production environments [\[1\]](https://capgo.app/).
+
+## Keep going from Capacitor Plugin Options for OTA Updates
+
+If you are using **Capacitor Plugin Options for OTA Updates** to plan migration and enterprise operations, connect it with [Capgo Enterprise](/enterprise/) for the product workflow in Capgo Enterprise, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, [Capgo Alternatives](/alternatives/) for the product workflow in Capgo Alternatives, [Capgo Consulting](/consulting/) for the product workflow in Capgo Consulting, and [Capgo Premium Support](/premium-support/) for the product workflow in Capgo Premium Support.

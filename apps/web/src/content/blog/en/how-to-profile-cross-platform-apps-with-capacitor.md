@@ -161,3 +161,7 @@ Use tools like Chrome DevTools, Xcode Instruments, and Android Studio Profiler t
 -   **Profile consistently** using platform-specific tools (Chrome DevTools, Xcode, Android Studio Profiler).
 -   **Track performance and errors** in real time across all platforms.
 -   **Deploy live updates in stages** to introduce bug fixes and new features smoothly.
+
+## Keep going from How to Profile Cross-Platform Apps with Capacitor
+
+If you are using **How to Profile Cross-Platform Apps with Capacitor** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

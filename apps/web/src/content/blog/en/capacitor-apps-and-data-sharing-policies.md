@@ -207,3 +207,7 @@ By focusing on these strategies, you can set your app up for ongoing success whi
 Keep an eye on updates from Apple's and Google's developer portals to stay informed about policy changes. Strengthen security by implementing end-to-end encryption to safeguard user data and align with current standards.
 
 Consider using tools like Capgo, which has managed updates for over 750 production apps [\[1\]](https://capgo.app/). This can help ensure your app stays up-to-date and avoids policy violations.
+
+## Keep going from Capacitor Apps and Data Sharing Policies
+
+If you are using **Capacitor Apps and Data Sharing Policies** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

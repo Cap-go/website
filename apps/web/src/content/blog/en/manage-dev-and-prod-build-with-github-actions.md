@@ -151,3 +151,7 @@ Add the commit will generate a new Capacitor build for production and developmen
 You should add your test in the Ionic build step to be certain your code is working.
 
 Go To your Capgo dashboard and check your build who just appeared, you now have your CI/CD system.
+
+## Keep going from Manage development and production build with GitHub actions
+
+If you are using **Manage development and production build with GitHub actions** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

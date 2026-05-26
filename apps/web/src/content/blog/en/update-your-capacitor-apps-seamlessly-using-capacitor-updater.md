@@ -152,3 +152,7 @@ Congrats! 🎉 You have successfully deployed your first Live Update. This is ju
 
 > If you need to stop receive in local the update run this command
 `npx @capgo/cli@latest channel set`
+
+## Keep going from Update your Capacitor apps seamlessly using Capacitor-updater
+
+If you are using **Update your Capacitor apps seamlessly using Capacitor-updater** to plan migration and enterprise operations, connect it with [Capgo Enterprise](/enterprise/) for the product workflow in Capgo Enterprise, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, [Capgo Alternatives](/alternatives/) for the product workflow in Capgo Alternatives, [Capgo Consulting](/consulting/) for the product workflow in Capgo Consulting, and [Capgo Premium Support](/premium-support/) for the product workflow in Capgo Premium Support.

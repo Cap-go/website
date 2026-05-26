@@ -364,3 +364,7 @@ Developers working on iOS apps can create and manage a Privacy Manifest by adher
 
 To streamline compliance, tools such as mobile app consent software can help manage SDKs and ensure proper user consent is obtained. These tools make it easier to stay aligned with Apple's data-sharing policies while fostering transparency with users. For developers using Capacitor apps, platforms like Capgo offer real-time update capabilities while maintaining compliance with privacy requirements.
 :::
+
+## Keep going from Privacy Manifest for iOS Apps
+
+If you are using **Privacy Manifest for iOS Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

@@ -368,3 +368,7 @@ Here’s what Capgo brings to the table:
 -   Pricing that starts at $12/month for solo developers
 
 With 750 production apps already relying on Capgo, it’s a proven choice. Whether you're fixing bugs or launching new features, pairing Capacitor CLI with Capgo gives you a reliable and efficient toolkit for app development. Start using these tools to streamline your Capacitor projects today.
+
+## Keep going from Capacitor CLI Plugin Commands Overview
+
+If you are using **Capacitor CLI Plugin Commands Overview** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.

@@ -246,3 +246,7 @@ With Capgo's channel system, you can tailor updates for different user groups by
 
 You can also assign roles such as **Admin**, **Developer**, or **Viewer** to manage access and permissions for each channel. This structure streamlines phased testing and ensures updates are deployed gradually and effectively to your users.
 :::
+
+## Keep going from Capgo Plugin: Scheduling Updates Tutorial
+
+If you are using **Capgo Plugin: Scheduling Updates Tutorial** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

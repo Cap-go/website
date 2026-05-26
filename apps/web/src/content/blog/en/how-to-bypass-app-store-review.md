@@ -109,3 +109,7 @@ If yes only to (4), send through Capgo.
 This is the same approach people use on large Capacitor programs in production: fast updates for JS-only fixes, native review only for real binaries.
 
 If you want to go deeper, pair this with a strict environment strategy based on channels so QA never receives production mistakes. That is the Capgo-native way to keep staging, beta, and production clean.
+
+## Keep going from How to update Capacitor JS apps without repeat store review
+
+If you are using **How to update Capacitor JS apps without repeat store review** to plan store approval and distribution, connect it with [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/native-market, [Using @capgo/native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/native-market, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.

@@ -77,3 +77,7 @@ Use the car surface for short, predictable actions:
 - simple state handoff from the phone app
 
 Keep complex flows in the phone UI and use `carAction` events as native intent triggers.
+
+## Keep going from Using @capgo/capacitor-auto
+
+If you are using **Using @capgo/capacitor-auto** to plan native media and interface behavior, connect it with [@capgo/capacitor-auto](/docs/plugins/auto/) for the implementation detail in @capgo/capacitor-auto, [Getting Started](/docs/plugins/auto/getting-started/) for the implementation detail in Getting Started, [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, and [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player.
