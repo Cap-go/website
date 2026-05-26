@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-05-01T00:00:00.000Z
-updated_at: 2026-05-01T11:22:40.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /capgo_banner.png
 head_image_alt: Capacitor web app to mobile app guide
 keywords: Capacitor, web app to mobile app, app store review, Google Play closed testing, iOS app, Android app, mobile app publishing, app wrapper

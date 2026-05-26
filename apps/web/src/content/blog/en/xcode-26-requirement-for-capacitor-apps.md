@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2026-04-29T09:30:00.000Z
-updated_at: 2026-04-29T16:02:06.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /build_list.webp
 head_image_alt: Capgo native build list
 keywords: Apple, Xcode 26, iOS 26 SDK, Capacitor, App Store Connect, Capgo Build, cloud builds

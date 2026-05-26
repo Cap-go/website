@@ -7,7 +7,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-01-15T00:00:00.000Z
-updated_at: 2026-05-01T11:31:51.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /capacitor-spm-migration-guide.jpg
 head_image_alt: Capacitor app migration from CocoaPods to Swift Package Manager
 keywords: Swift Package Manager, SPM, CocoaPods, Capacitor, iOS, migration, dependency management, Xcode, CapApp-SPM

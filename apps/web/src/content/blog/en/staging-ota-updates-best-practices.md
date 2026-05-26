@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-15T01:20:29.530Z
-updated_at: 2026-05-05T11:43:34.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67fda45772a40527486bdcbd-1744680128983.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, staging environment, app testing, error tracking, network conditions, phased rollouts, app deployment

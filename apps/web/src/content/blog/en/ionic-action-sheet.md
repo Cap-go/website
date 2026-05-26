@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-17T06:51:40.561Z
-updated_at: 2026-05-17T06:51:41.896Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/80865b62-eb16-4232-8c81-0c35159806dd/ionic-action-sheet-stationery-doodles.jpg'
 head_image_alt: 'Ionic Action Sheet: A Complete Guide for 2026'
 keywords: 'ionic action sheet, ionic components, capacitorjs, ionic angular, ionic react'

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-24T07:15:52.262Z
-updated_at: 2026-05-24T07:18:01.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/39c1730b-fbc4-4f4a-842a-28599592084d/splash-screen-in-react-native-tutorial-guide.jpg'
 head_image_alt: 'Splash Screen in React Native: A Complete Guide for 2026'
 keywords: 'react native, splash screen, expo, react native cli, mobile development'

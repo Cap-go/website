@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2026-05-14T06:50:28.488Z
-updated_at: 2026-05-18T16:36:44.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: 'https://cdnimg.co/c504846a-b33a-4018-bc93-5bfa9be0f3af/414a51cb-b1c9-4d68-91fc-3557db7d8c48/what-is-network-latency-network-latency.jpg'
 head_image_alt: 'What Is Network Latency: A Developer''s 2026 Guide'
 keywords: 'what is network latency, network performance, mobile app speed, live updates, capacitorjs'

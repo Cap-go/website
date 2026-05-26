@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2026-02-23T00:00:00.000Z
-updated_at: 2026-04-08T14:34:13.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: /capacitor-guide.webp
 head_image_alt: PWA running in a Capacitor native wrapper
 keywords: PWA, Capacitor, native mobile app, iOS, Android, web-to-app migration, web app deployment

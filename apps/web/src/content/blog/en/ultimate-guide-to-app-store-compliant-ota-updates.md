@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-28T05:46:14.390Z
-updated_at: 2026-05-21T12:00:20.000Z
+updated_at: 2026-05-26T13:03:40.000Z
 head_image: https://assets.seobotai.com/capgo.app/67c122f35f2cea0ab3a1fd8f-1740721832892.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, app store compliance, mobile app updates, bug fixes, performance improvements
