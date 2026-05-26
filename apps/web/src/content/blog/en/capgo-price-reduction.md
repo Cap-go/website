@@ -46,3 +46,7 @@ Happy coding!
 Martin ❤️
 
 P.S. Spread the word! 🌍
+
+## Keep going from Capgo Price Reduction: Making Live Updates More Accessible
+
+If you are using **Capgo Price Reduction: Making Live Updates More Accessible** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

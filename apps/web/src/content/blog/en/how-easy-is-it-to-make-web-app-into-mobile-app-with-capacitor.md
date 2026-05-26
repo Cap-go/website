@@ -252,3 +252,7 @@ Yes, it is usually easy to turn a good web app into a mobile app with Capacitor.
 But the goal is not just to "wrap" the website. The goal is to ship a mobile app that looks complete, behaves well on iOS and Android, follows billing and privacy rules, and can survive review.
 
 Start by getting a local Capacitor build running. Then spend most of your effort on mobile polish, store compliance, testing, and launch workflow. That is where the real approval work happens.
+
+## Keep going from How Easy Is It to Turn a Web App into a Mobile App with Capacitor?
+
+If you are using **How Easy Is It to Turn a Web App into a Mobile App with Capacitor?** to plan store approval and distribution, connect it with [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/native-market, [Using @capgo/native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/native-market, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.

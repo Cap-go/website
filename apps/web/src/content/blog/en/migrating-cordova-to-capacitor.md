@@ -88,3 +88,7 @@ To implement Capgo live updates in your Capacitor project, follow these steps:
 ## Conclusion
 
 We hope this guide has helped you migrate your web app from Cordova to Capacitor. If you have any questions or need assistance with the migration process, feel free to contact us on our [discord](https://discord.capgo.app) server.
+
+## Keep going from Migrating a Web App from Cordova to Capacitor: A Step-by-Step Guide
+
+If you are using **Migrating a Web App from Cordova to Capacitor: A Step-by-Step Guide** to plan migration and enterprise operations, connect it with [Capgo Enterprise](/enterprise/) for the product workflow in Capgo Enterprise, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, [Capgo Alternatives](/alternatives/) for the product workflow in Capgo Alternatives, [Capgo Consulting](/consulting/) for the product workflow in Capgo Consulting, and [Capgo Premium Support](/premium-support/) for the product workflow in Capgo Premium Support.

@@ -286,4 +286,8 @@ Perfect for:
 Not suitable for:
 - Native code changes
 - Major version updates
-- Security patches requiring native changes 
+- Security patches requiring native changes
+
+## Keep going from How Live Updates Work in Capgo
+
+If you are using **How Live Updates Work in Capgo** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

@@ -442,3 +442,7 @@ These improvements come from following the setup and integration practices discu
 **Benefits for Developers**
 
 A properly configured environment lets developers focus on creating features instead of dealing with infrastructure. The setup outlined in this guide ensures you can take full advantage of these benefits while meeting platform requirements.
+
+## Keep going from Setting Up Capacitor Local Environment
+
+If you are using **Setting Up Capacitor Local Environment** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

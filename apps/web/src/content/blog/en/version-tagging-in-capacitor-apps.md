@@ -447,3 +447,7 @@ To put these benefits into action, follow these steps:
 -   **Configure distribution channels**: Create separate environments for production, beta, and development.
 
 Finally, consider adding a live update system to ensure deployments are both fast and secure.
+
+## Keep going from Version Tagging in Capacitor Apps
+
+If you are using **Version Tagging in Capacitor Apps** to plan rollback and version control, connect it with [Rollbacks](/docs/live-updates/rollbacks/) for the implementation detail in Rollbacks, [Version Targeting](/docs/live-updates/version-targeting/) for the implementation detail in Version Targeting, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, [bundle](/docs/cli/reference/bundle/) for the implementation detail in bundle, and [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates.

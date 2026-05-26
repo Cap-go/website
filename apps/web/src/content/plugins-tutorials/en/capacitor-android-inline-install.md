@@ -44,3 +44,7 @@ if (result.started) {
 
 - GitHub: https://github.com/Cap-go/capacitor-android-inline-install/
 - Docs: /docs/plugins/android-inline-install/
+
+## Keep going from Using @capgo/capacitor-android-inline-install
+
+If you are using **Using @capgo/capacitor-android-inline-install** to plan store approval and distribution, connect it with [@capgo/capacitor-android-inline-install](/docs/plugins/android-inline-install/) for the implementation detail in @capgo/capacitor-android-inline-install, [Getting Started](/docs/plugins/android-inline-install/getting-started/) for the implementation detail in Getting Started, [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, and [@capgo/native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/native-market.

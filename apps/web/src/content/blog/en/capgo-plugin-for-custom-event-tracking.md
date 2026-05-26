@@ -381,3 +381,7 @@ Running key [Capacitor CLI commands](https://capgo.app/docs/cli/commands/) is an
 
 For a more robust [debugging process](https://capgo.app/docs/plugins/updater/debugging/), you might also integrate error tracking platforms like **Sentry** or **[LogRocket](https://logrocket.com/)**. These tools monitor real-time errors and user interactions, making them especially useful during over-the-air (OTA) updates. By combining these methods, you can streamline the debugging process and improve the performance of your custom event tracking.
 :::
+
+## Keep going from Capgo Plugin for Custom Event Tracking
+
+If you are using **Capgo Plugin for Custom Event Tracking** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

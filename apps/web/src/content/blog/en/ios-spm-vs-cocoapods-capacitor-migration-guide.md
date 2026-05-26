@@ -202,3 +202,7 @@ For customized iOS projects, start with `bunx cap spm-migration-assistant`. For 
 - [Capacitor 8 update guide](https://capacitorjs.com/docs/updating/8-0)
 - [CocoaPods trunk read-only plan](https://blog.cocoapods.org/CocoaPods-Specs-Repo/)
 - [capacitor-plugin-converter](https://github.com/ionic-team/capacitor-plugin-converter)
+
+## Keep going from How to Migrate a Capacitor App to Swift Package Manager
+
+If you are using **How to Migrate a Capacitor App to Swift Package Manager** to plan migration and enterprise operations, connect it with [Capgo Enterprise](/enterprise/) for the product workflow in Capgo Enterprise, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, [Capgo Alternatives](/alternatives/) for the product workflow in Capgo Alternatives, [Capgo Consulting](/consulting/) for the product workflow in Capgo Consulting, and [Capgo Premium Support](/premium-support/) for the product workflow in Capgo Premium Support.

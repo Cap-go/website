@@ -194,3 +194,7 @@ Organizations can cut costs significantly with plugin-based solutions while gain
 These changes highlight the importance of choosing tools that offer strong features and reliable long-term support. For teams that value control and flexibility, Capacitor CI/CD plugins stand out by enabling self-hosting and tailored setups - meeting unique security and deployment needs while maintaining independence.
 
 The decision between these solutions ultimately depends on immediate priorities and long-term goals. The growing preference for open-source, cost-conscious tools underscores their potential to support development efforts well into the future. This trend solidifies the appeal of open-source, flexible CI/CD tools for maintaining sustainable development practices.
+
+## Keep going from Capacitor CI/CD Plugins vs Appflow: Key Differences
+
+If you are using **Capacitor CI/CD Plugins vs Appflow: Key Differences** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

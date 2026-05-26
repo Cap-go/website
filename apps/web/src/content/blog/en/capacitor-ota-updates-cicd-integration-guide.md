@@ -214,3 +214,7 @@ Here are some tips to optimize your CI/CD process:
 > "The community needed this and @Capgo is doing something really important!" – Lincoln Baxter, @lincolnthree [\[1\]](https://capgo.app/)
 
 Integrating OTA updates with CI/CD has transformed mobile app development, helping teams deliver updates faster while keeping users satisfied and success rates high.
+
+## Keep going from Capacitor OTA Updates: CI/CD Integration Guide
+
+If you are using **Capacitor OTA Updates: CI/CD Integration Guide** to plan rollback and version control, connect it with [Rollbacks](/docs/live-updates/rollbacks/) for the implementation detail in Rollbacks, [Version Targeting](/docs/live-updates/version-targeting/) for the implementation detail in Version Targeting, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, [bundle](/docs/cli/reference/bundle/) for the implementation detail in bundle, and [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates.

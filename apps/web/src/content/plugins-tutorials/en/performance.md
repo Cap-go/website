@@ -65,3 +65,7 @@ await FirebasePerformance.setEnabled({} as SetEnabledOptions);
 
 - GitHub: https://github.com/Cap-go/capacitor-firebase/tree/main/packages/performance
 - Docs: /docs/plugins/firebase-performance/
+
+## Keep going from Using @capgo/capacitor-firebase-performance
+
+If you are using **Using @capgo/capacitor-firebase-performance** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

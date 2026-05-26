@@ -271,3 +271,7 @@ I have over 22 years' experience of Salesforce, as a client and user, as a partn
 You can find me on LinkedIn at https://linkedin.com/in/rbarrow. 
 
 You can take a look at our Salesforce offerings at https://www.rapido-companion.app and https://www.rapido.cloud (under development).
+
+## Keep going from How Rapido Cloud manage Semantic Release with Capgo CapacitorUpdater
+
+If you are using **How Rapido Cloud manage Semantic Release with Capgo CapacitorUpdater** to plan live update delivery, connect it with [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates, [Overview](/docs/live-updates/) for the implementation detail in Overview, [Features](/docs/live-updates/features/) for the implementation detail in Features, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, and [Update Types](/docs/live-updates/update-types/) for the implementation detail in Update Types.

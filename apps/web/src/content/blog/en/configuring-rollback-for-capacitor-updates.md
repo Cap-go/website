@@ -163,3 +163,7 @@ When choosing a platform, key factors to weigh include **security**, the depth o
 Ensuring smooth updates for your Capacitor app requires reliable rollback methods from the initial setup to phased releases. By configuring settings correctly and choosing the right platforms, teams can quickly address issues from faulty updates while keeping users happy.
 
 A solid rollback plan includes a mix of automatic and manual options, real-time monitoring, gradual rollouts, and secure update pipelines. Tools such as Capgo simplify this process with features like one-click rollbacks, encrypted updates, and integrated analytics. With these strategies, your app can deliver consistent and reliable updates without interruptions.
+
+## Keep going from Configuring Rollback for Capacitor Updates
+
+If you are using **Configuring Rollback for Capacitor Updates** to plan rollback and version control, connect it with [Rollbacks](/docs/live-updates/rollbacks/) for the implementation detail in Rollbacks, [Version Targeting](/docs/live-updates/version-targeting/) for the implementation detail in Version Targeting, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, [bundle](/docs/cli/reference/bundle/) for the implementation detail in bundle, and [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates.

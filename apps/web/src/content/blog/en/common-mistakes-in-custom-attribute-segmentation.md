@@ -131,3 +131,7 @@ Effective segmentation relies on keeping things straightforward, using real-time
 Today's platforms have changed the game with real-time segmentation tools. Developers can now update and manage user segments instantly, ensuring accurate targeting across a wide range of users.
 
 Success in segmentation comes down to a few core practices: keeping models simple, leveraging real-time updates, setting measurable objectives, and using analytics to track performance. With the right tools, developers can build user segments that are both responsive and impactful.
+
+## Keep going from Common Mistakes in Custom Attribute Segmentation
+
+If you are using **Common Mistakes in Custom Attribute Segmentation** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

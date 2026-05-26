@@ -151,3 +151,7 @@ Here are some strategies that build on these findings:
 For teams moving to a new platform, Capgo offers an easy integration process. Jay (@jaythegeek) noted:
 
 > "Did setup @Capgo and testing out this awesome replacement for @AppFlow! Thank you for the hard work, it has been easy so far" [\[1\]](https://capgo.app/)
+
+## Keep going from Capgo for App Store-Safe OTA Updates
+
+If you are using **Capgo for App Store-Safe OTA Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

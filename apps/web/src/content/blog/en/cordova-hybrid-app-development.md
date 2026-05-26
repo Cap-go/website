@@ -113,3 +113,7 @@ Capgo is a comprehensive platform explicitly designed to simplify and enhance th
 ## Why Capgo Exclusively Supports Capacitor for Live Updates
 
 Capgo has made the strategic decision to focus solely on Capacitor, a modern and powerful hybrid app runtime, to deliver the best possible live update experience. Capacitor's modern architecture, deep integration with native SDKs, and commitment to web standards align perfectly with Capgo's vision of providing seamless, reliable, and efficient live updates for hybrid mobile applications.
+
+## Keep going from Ultimate Guide to Apache Cordova: Hybrid App Development Made Easy
+
+If you are using **Ultimate Guide to Apache Cordova: Hybrid App Development Made Easy** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

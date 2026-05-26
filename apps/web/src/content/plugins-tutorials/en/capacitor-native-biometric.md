@@ -65,3 +65,7 @@ await NativeBiometric.setCredentials({} as SetCredentialOptions);
 
 - GitHub: https://github.com/Cap-go/capacitor-native-biometric/
 - Docs: /docs/plugins/native-biometric/
+
+## Keep going from Using @capgo/capacitor-native-biometric
+
+If you are using **Using @capgo/capacitor-native-biometric** to plan authentication and account flows, connect it with [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) for the implementation detail in @capgo/capacitor-native-biometric, [Getting Started](/docs/plugins/native-biometric/getting-started/) for the implementation detail in Getting Started, [@capgo/capacitor-social-login](/docs/plugins/social-login/) for the implementation detail in @capgo/capacitor-social-login, [@capgo/capacitor-passkey](/docs/plugins/passkey/) for the implementation detail in @capgo/capacitor-passkey, and [Two-factor authentication](/docs/webapp/mfa/) for the implementation detail in Two-factor authentication.

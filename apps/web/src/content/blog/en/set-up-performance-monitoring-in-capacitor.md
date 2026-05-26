@@ -401,3 +401,7 @@ Performance monitoring tools and practices are always advancing. Stay ahead by e
 -   Capacitor's official performance optimization guides
 
 **Advanced Implementation**: Explore Capgo's analytics system, successfully used in over 750 production apps [\[1\]](https://capgo.app/). Their documentation provides insights into monitoring patterns and live update strategies that work seamlessly with other performance tracking tools.
+
+## Keep going from Set Up Performance Monitoring in Capacitor
+
+If you are using **Set Up Performance Monitoring in Capacitor** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

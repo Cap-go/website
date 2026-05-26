@@ -70,3 +70,7 @@ if (status.readSimCard === 'granted') {
 
 - GitHub: https://github.com/Cap-go/capacitor-sim/
 - Docs: /docs/plugins/sim/
+
+## Keep going from Using @capgo/capacitor-sim
+
+If you are using **Using @capgo/capacitor-sim** to plan dashboard and API operations, connect it with [@capgo/capacitor-sim](/docs/plugins/sim/) for the implementation detail in @capgo/capacitor-sim, [Getting Started](/docs/plugins/sim/getting-started/) for the implementation detail in Getting Started, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, and [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys.

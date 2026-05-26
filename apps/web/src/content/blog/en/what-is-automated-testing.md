@@ -287,3 +287,7 @@ The teams that succeed are disciplined about pruning. They delete low-value test
 ---
 
 If your Capacitor or Electron team wants faster recovery from web-layer regressions, [Capgo](https://capgo.app) is one option for shipping signed live updates to users without waiting for app store review. That changes how teams think about release risk, rollback, and what their automated suite should validate before and after deployment.
+
+## Keep going from What Is Automated Testing: Automated Testing Explained
+
+If you are using **What Is Automated Testing: Automated Testing Explained** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

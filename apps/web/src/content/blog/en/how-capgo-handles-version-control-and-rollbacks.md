@@ -178,3 +178,7 @@ Capgo's rollback system is built to keep your app running smoothly by automatica
 
 On top of that, developers can manually roll back to earlier versions whenever necessary. This setup helps reduce downtime, ensures users experience minimal interruptions, and makes the [update process](https://capgo.app/docs/getting-started/deploy/) far less stressful.
 :::
+
+## Keep going from How Capgo Handles Version Control and Rollbacks
+
+If you are using **How Capgo Handles Version Control and Rollbacks** to plan rollback and version control, connect it with [Rollbacks](/docs/live-updates/rollbacks/) for the implementation detail in Rollbacks, [Version Targeting](/docs/live-updates/version-targeting/) for the implementation detail in Version Targeting, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, [bundle](/docs/cli/reference/bundle/) for the implementation detail in bundle, and [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates.

@@ -78,3 +78,7 @@ console.log('Compass permission:', status.compass);
 
 - GitHub: https://github.com/Cap-go/capacitor-compass/
 - Docs: /docs/plugins/compass/
+
+## Keep going from Using @capgo/capacitor-compass
+
+If you are using **Using @capgo/capacitor-compass** to plan dashboard and API operations, connect it with [@capgo/capacitor-compass](/docs/plugins/compass/) for the implementation detail in @capgo/capacitor-compass, [Getting Started](/docs/plugins/compass/getting-started/) for the implementation detail in Getting Started, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, and [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys.

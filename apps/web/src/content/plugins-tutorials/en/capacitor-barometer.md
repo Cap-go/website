@@ -65,3 +65,7 @@ await CapacitorBarometer.stopMeasurementUpdates();
 
 - GitHub: https://github.com/Cap-go/capacitor-barometer/
 - Docs: /docs/plugins/barometer/
+
+## Keep going from Using @capgo/capacitor-barometer
+
+If you are using **Using @capgo/capacitor-barometer** to plan dashboard and API operations, connect it with [@capgo/capacitor-barometer](/docs/plugins/barometer/) for the implementation detail in @capgo/capacitor-barometer, [Getting Started](/docs/plugins/barometer/getting-started/) for the implementation detail in Getting Started, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, and [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys.

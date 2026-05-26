@@ -148,3 +148,7 @@ The goal of the AGPL is to maximize user freedom and to encourage companies to c
 ## Conclusion
 
 There are many factors to consider when choosing an open-source software license. Yet, there are certainly popular choices among the developer community. Common permissive licenses include the MIT License, Apache License, and BSD License. Some common copyleft licenses include the GNU General Public License and the Mozilla Public License.
+
+## Keep going from Understanding Open-Source Software Licenses
+
+If you are using **Understanding Open-Source Software Licenses** to plan live update delivery, connect it with [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates, [Overview](/docs/live-updates/) for the implementation detail in Overview, [Features](/docs/live-updates/features/) for the implementation detail in Features, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, and [Update Types](/docs/live-updates/update-types/) for the implementation detail in Update Types.

@@ -144,3 +144,7 @@ OTA updates for low-end devices continue to evolve. With **end-to-end encryption
 > "@Capgo is a smart way to make hot code pushes (and not for all the money in the world like with @AppFlow)"
 
 Looking ahead, advancements in package size reduction, bandwidth efficiency, resource management, and deployment speed are expected to further improve performance and user satisfaction, building on the robust benefits already demonstrated.
+
+## Keep going from Capacitor OTA Updates: Boosting Low-End Device Performance
+
+If you are using **Capacitor OTA Updates: Boosting Low-End Device Performance** to plan storage and file handling, connect it with [@capgo/capacitor-data-storage-sqlite](/docs/plugins/data-storage-sqlite/) for the implementation detail in @capgo/capacitor-data-storage-sqlite, [Using @capgo/capacitor-data-storage-sqlite](/plugins/capacitor-data-storage-sqlite/) for the native capability in Using @capgo/capacitor-data-storage-sqlite, [@capgo/capacitor-file](/docs/plugins/file/) for the implementation detail in @capgo/capacitor-file, [Using @capgo/capacitor-file](/plugins/capacitor-file/) for the native capability in Using @capgo/capacitor-file, and [@capgo/capacitor-uploader](/docs/plugins/uploader/) for the implementation detail in @capgo/capacitor-uploader.

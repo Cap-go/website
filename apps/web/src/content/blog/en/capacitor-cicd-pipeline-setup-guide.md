@@ -174,3 +174,7 @@ To get started, you'll need to install the CLI, configure builds and environment
 
 The connection between setup and results showcases how Capgo boosts efficiency: updates reach **95% of users within just 24 hours**. Plus, Capgo's pricing starts at **$12/month**,
 offering a massive cost advantage compared to legacy services that can charge over **$500/month**. Currently, Capgo supports more than **1,900 production apps** [\[1\]](https://capgo.app/).
+
+## Keep going from Capacitor CI/CD Pipeline Setup Guide
+
+If you are using **Capacitor CI/CD Pipeline Setup Guide** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

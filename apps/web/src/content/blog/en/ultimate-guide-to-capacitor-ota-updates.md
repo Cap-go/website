@@ -255,3 +255,7 @@ Capgo stands out by following these best practices, enabling reliable OTA update
 > "NASA's OSIRIS-REx team noted: '@Capgo is a smart way to make hot code pushes (and not for all the money in the world like with @AppFlow) 🙂'" [\[1\]](https://capgo.app/)
 
 > "Capgo is a must-have tool for developers who want to be more productive. Avoiding review for bug fixes is golden" [\[1\]](https://capgo.app/)
+
+## Keep going from Ultimate Guide to Capacitor OTA Updates
+
+If you are using **Ultimate Guide to Capacitor OTA Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

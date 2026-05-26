@@ -402,3 +402,7 @@ Capgo prioritizes security with **end-to-end encryption** for live updates. This
 
 Updates are handled seamlessly in the background, so users aren’t interrupted while using the app. They’ll only see an update notification when they relaunch the app, keeping the experience smooth and aligning with app store rules.
 :::
+
+## Keep going from Capacitor Plugins for Secure Session Management
+
+If you are using **Capacitor Plugins for Secure Session Management** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

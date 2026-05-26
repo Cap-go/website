@@ -683,4 +683,8 @@ You now have a complete authentication system combining Supabase's robust backen
 
 The combination of Supabase and the Capgo Social Login plugin offers a powerful, scalable authentication solution for your Capacitor apps.
 
-For more advanced features like **multi-factor authentication** or **custom claims**, check out the [Supabase documentation](https://supabase.com/docs/guides/auth/) and the [Social Login plugin documentation](/docs/plugins/social-login/). 
+For more advanced features like **multi-factor authentication** or **custom claims**, check out the [Supabase documentation](https://supabase.com/docs/guides/auth/) and the [Social Login plugin documentation](/docs/plugins/social-login/).
+
+## Keep going from Setup Supabase Authentication with Capacitor Social Login Plugin
+
+If you are using **Setup Supabase Authentication with Capacitor Social Login Plugin** to plan authentication and account flows, connect it with [@capgo/capacitor-social-login](/docs/plugins/social-login/) for the implementation detail in @capgo/capacitor-social-login, [@capgo/capacitor-passkey](/docs/plugins/passkey/) for the implementation detail in @capgo/capacitor-passkey, [@capgo/capacitor-native-biometric](/docs/plugins/native-biometric/) for the implementation detail in @capgo/capacitor-native-biometric, [Two-factor authentication](/docs/webapp/mfa/) for the implementation detail in Two-factor authentication, and [SSO (Enterprise)](/docs/webapp/enterprise-sso/) for the implementation detail in SSO (Enterprise).

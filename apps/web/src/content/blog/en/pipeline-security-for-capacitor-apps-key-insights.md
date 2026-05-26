@@ -155,3 +155,7 @@ The industry is expected to maintain its focus on security-first strategies, wit
 Securing the development pipeline for Capacitor apps now requires integrating end-to-end encryption and prioritizing security throughout the CI/CD process. This reflects the growing trend toward using open-source, community-driven security tools, as highlighted in the Industry Outlook.
 
 To safeguard Capacitor apps, teams should implement measures like encryption, detailed access controls, staged rollouts, error monitoring, analytics, and automatic rollback features - all while adhering to app store guidelines. Keeping up with the latest practices will be key to ensuring strong and reliable app security over time.
+
+## Keep going from Pipeline Security for Capacitor Apps: Key Insights
+
+If you are using **Pipeline Security for Capacitor Apps: Key Insights** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

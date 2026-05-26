@@ -193,3 +193,7 @@ Capgo simplifies the update process for developers with features like:
 > "Capgo is a must-have tool for developers who want to be more productive. Avoiding review for bug fixes is golden." [\[1\]](https://capgo.app/)
 
 These tools allow teams to roll out updates quickly while ensuring their releases remain stable for users worldwide.
+
+## Keep going from Google Play Staged Rollouts: How It Works
+
+If you are using **Google Play Staged Rollouts: How It Works** to plan store approval and distribution, connect it with [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/native-market, [Using @capgo/native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/native-market, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.

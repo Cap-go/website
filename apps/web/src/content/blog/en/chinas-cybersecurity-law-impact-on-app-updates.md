@@ -210,3 +210,7 @@ Live update systems give developers the ability to roll out updates, bug fixes, 
 
 Platforms like **Capgo** simplify this process further. Capgo supports live updates for Capacitor apps, offering features like end-to-end encryption and adherence to both Apple and Android guidelines. This allows developers to meet regulatory standards while delivering updates quickly and securely.
 :::
+
+## Keep going from China's Cybersecurity Law: Impact on App Updates
+
+If you are using **China's Cybersecurity Law: Impact on App Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

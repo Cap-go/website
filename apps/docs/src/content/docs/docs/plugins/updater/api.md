@@ -1154,3 +1154,7 @@ error: The bundle has failed to download.
 <code>'background' | 'kill' | 'nativeVersion' | 'date'</code>
 
 </docgen-api>
+
+## Keep going from Functions and settings
+
+If you are using **Functions and settings** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-updater](/plugins/capacitor-updater/) for the native capability in Using @capgo/capacitor-updater, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.

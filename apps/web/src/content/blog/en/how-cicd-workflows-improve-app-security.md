@@ -194,3 +194,7 @@ Capgo's CI/CD integration strengthens adherence to regulations like **GDPR** and
 
 These measures not only keep user data safe but also ensure that updates align with strict regulatory requirements, minimizing the chances of data breaches while keeping app performance smooth and uninterrupted.
 :::
+
+## Keep going from How CI/CD Workflows Improve App Security
+
+If you are using **How CI/CD Workflows Improve App Security** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

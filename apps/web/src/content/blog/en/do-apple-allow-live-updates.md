@@ -32,3 +32,7 @@ The second condition, not providing additional features or functionality, is det
 Google Play is less restrictive than Apple when it comes to updating apps. Google Play allows for apps installed from their store with JavaScript bundles to be updated by non-Google services. 
 
 For more information on how to install Capgo to bypass review, please refer to my next article.
+
+## Keep going from Does Apple Allow Live Updates Without Store Review?
+
+If you are using **Does Apple Allow Live Updates Without Store Review?** to plan store approval and distribution, connect it with [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/native-market, [Using @capgo/native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/native-market, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.

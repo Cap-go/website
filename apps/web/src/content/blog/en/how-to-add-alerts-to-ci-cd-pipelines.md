@@ -223,3 +223,7 @@ To set up effective alerts for your mobile app deployments, start by pinpointing
 
 Leverage tools with **real-time monitoring** capabilities to quickly identify and resolve issues, ensuring your deployments run smoothly. Platforms like **Capgo** can make this even easier by offering **integrated CI/CD solutions** and customized alerts tailored to specific deployment needs, giving you instant updates and greater control over your deployment pipeline.
 :::
+
+## Keep going from How to Add Alerts to CI/CD Pipelines
+
+If you are using **How to Add Alerts to CI/CD Pipelines** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

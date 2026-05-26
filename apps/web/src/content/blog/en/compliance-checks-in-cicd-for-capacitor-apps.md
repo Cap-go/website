@@ -235,3 +235,7 @@ To keep your compliance process effective, focus on these areas:
 | Policy Tracking | Automated monitoring | Monthly compliance report |
 | Update Distribution | Staged rollouts | 95% successful updates |
 | Error Management | Real-time tracking | Average API response time: 434ms |
+
+## Keep going from Compliance Checks in CI/CD for Capacitor Apps
+
+If you are using **Compliance Checks in CI/CD for Capacitor Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

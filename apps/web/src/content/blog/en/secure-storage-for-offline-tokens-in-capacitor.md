@@ -72,3 +72,7 @@ For cross-platform encryption, tools like **@capacitor-community/secure-storage*
 -   **@capacitor-community/secure-storage**: Encrypted key-value storage for iOS and Android.
 -   **Ionic Identity Vault**: Enterprise-level storage with biometric security.
 -   **Capgo**: Provides live updates with encrypted CI/CD delivery.
+
+## Keep going from Secure Storage for Offline Tokens in Capacitor
+
+If you are using **Secure Storage for Offline Tokens in Capacitor** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

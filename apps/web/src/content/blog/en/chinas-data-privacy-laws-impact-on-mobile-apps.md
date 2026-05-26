@@ -158,3 +158,7 @@ Meeting these requirements involves significant financial and operational invest
 As regulations continue to evolve, flexibility remains essential for maintaining compliance. Capgo has been recognized for its ability to deliver cost-efficient and agile update solutions that align with stringent standards [\[1\]](https://capgo.app/).
 
 For long-term success, app developers in China must adopt a proactive strategy that combines strong technical systems, strict regulatory adherence, and efficient update management.
+
+## Keep going from China's Data Privacy Laws: Impact on Mobile Apps
+
+If you are using **China's Data Privacy Laws: Impact on Mobile Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

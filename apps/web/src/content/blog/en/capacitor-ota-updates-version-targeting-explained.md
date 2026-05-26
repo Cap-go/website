@@ -268,3 +268,7 @@ To make the most of version targeting, a solid plan is key for maintaining app c
 -   **Track Deployments**: Monitor update success rates across various app versions.
     
 -   **Support Legacy Versions**: Keep critical older versions functional while nudging users toward updates.
+
+## Keep going from Capacitor OTA Updates: Version Targeting Explained
+
+If you are using **Capacitor OTA Updates: Version Targeting Explained** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

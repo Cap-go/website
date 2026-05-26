@@ -182,3 +182,7 @@ To safeguard user data during Over-the-Air (OTA) updates, implementing **end-to-
 
 Additionally, it's crucial to comply with platform-specific security guidelines from Apple and Android, regularly audit update mechanisms, and use trusted solutions that prioritize data protection.
 :::
+
+## Keep going from User Consent for OTA Updates: Best Practices
+
+If you are using **User Consent for OTA Updates: Best Practices** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

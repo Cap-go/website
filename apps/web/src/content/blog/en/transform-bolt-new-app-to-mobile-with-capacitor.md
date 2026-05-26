@@ -860,4 +860,8 @@ Your Bolt.new creation is now ready for the mobile ecosystem!
 - [Vite Mobile Deployment Guide](https://vitejs.dev/guide/static-deploy.html)
 - [Capgo - Live Updates for Capacitor Apps](https://capgo.app/)
 
-Learn how Capgo can help you deliver instant updates to your mobile app, [sign up for a free account](/register/) today. 
+Learn how Capgo can help you deliver instant updates to your mobile app, [sign up for a free account](/register/) today.
+
+## Keep going from Transform Your Bolt.new Project into Native Mobile Apps with Capacitor
+
+If you are using **Transform Your Bolt.new Project into Native Mobile Apps with Capacitor** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

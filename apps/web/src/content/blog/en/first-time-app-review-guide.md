@@ -1170,3 +1170,7 @@ Good luck with your app launch! Remember, even if you get rejected, it's a learn
 ---
 
 *Need help with implementing live updates after your app is approved? Check out [Capgo's live update solution](/docs/getting-started/) for seamless app updates without app store review.*
+
+## Keep going from The Complete First-Time App Review Guide for 2026 - iOS and Android
+
+If you are using **The Complete First-Time App Review Guide for 2026 - iOS and Android** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

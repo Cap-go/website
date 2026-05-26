@@ -299,3 +299,7 @@ The Network API provides several methods and interfaces to help you handle the n
 - [`getStatus()`](https://capacitorjs.com/docs/apis/network/#getstatus): Query the current status of the network connection.
 - [`addListener('networkStatusChange', ...)`](https://capacitorjs.com/docs/apis/network/#addlistenernetworkstatuschange): Listen for changes in the network connection.
 -
+
+## Keep going from Offline Screen in Vue, Angular, React with Capacitor
+
+If you are using **Offline Screen in Vue, Angular, React with Capacitor** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player, and [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) for the native capability in Using @capgo/capacitor-native-navigation.

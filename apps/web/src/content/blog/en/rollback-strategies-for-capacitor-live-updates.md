@@ -241,3 +241,7 @@ Using a testing channel before deploying updates to your entire user base is cru
 
 By testing updates with a smaller group of users first, you can gather valuable feedback, monitor performance metrics, and make necessary adjustments before a full-scale release. This approach not only improves the quality of your updates but also helps maintain user trust and satisfaction.
 :::
+
+## Keep going from Rollback Strategies for Capacitor Live Updates
+
+If you are using **Rollback Strategies for Capacitor Live Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

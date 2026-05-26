@@ -65,3 +65,7 @@ await AppAttestNative.createAssertion({} as CreateAssertionOptions);
 
 - GitHub: https://github.com/Cap-go/capacitor-app-attest/
 - Docs: /docs/plugins/app-attest/
+
+## Keep going from Using @capgo/capacitor-app-attest
+
+If you are using **Using @capgo/capacitor-app-attest** to plan security and compliance, connect it with [@capgo/capacitor-app-attest](/docs/plugins/app-attest/) for the implementation detail in @capgo/capacitor-app-attest, [Getting Started](/docs/plugins/app-attest/getting-started/) for the implementation detail in Getting Started, [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, and [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner.

@@ -266,3 +266,7 @@ If you are documenting this in internal runbooks or support pages, include terms
 This AGP 9 issue is simple, but it is easy to miss in multi-plugin workspaces. Once you replace `proguard-android.txt` with `proguard-android-optimize.txt` everywhere relevant, Android builds become predictable again.
 
 If you use Capgo plugins, this migration is already applied in official repositories so you can upgrade with fewer surprises.
+
+## Keep going from Capacitor Plugin AGP 9 Build Error Fix
+
+If you are using **Capacitor Plugin AGP 9 Build Error Fix** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

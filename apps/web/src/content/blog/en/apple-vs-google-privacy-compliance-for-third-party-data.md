@@ -206,3 +206,7 @@ Capgo empowers developers by simplifying app updates and ensuring compliance wit
 
 With **end-to-end encryption**, Capgo protects user data while offering seamless integration with CI/CD pipelines. This combination not only enhances privacy compliance but also boosts development efficiency, helping developers deliver a secure and up-to-date experience to users across both platforms.
 :::
+
+## Keep going from Apple vs. Google: Privacy Compliance for Third-Party Data
+
+If you are using **Apple vs. Google: Privacy Compliance for Third-Party Data** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

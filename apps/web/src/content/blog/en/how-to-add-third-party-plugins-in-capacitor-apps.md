@@ -448,3 +448,7 @@ Capgo offers tools to streamline updates. Rodrigo Mantica highlights its importa
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!"[\[1\]](https://capgo.app/)
 
 For enterprise applications, Capgo’s channel system enables staged rollouts effectively. With an 82% global update success rate[\[1\]](https://capgo.app/) and advanced error tracking, Capgo ensures a dependable update process. NASA’s OSIRIS-REx team is a great example of how a strong update pipeline can make a difference[\[1\]](https://capgo.app/).
+
+## Keep going from How to Add Third-Party Plugins in Capacitor Apps
+
+If you are using **How to Add Third-Party Plugins in Capacitor Apps** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

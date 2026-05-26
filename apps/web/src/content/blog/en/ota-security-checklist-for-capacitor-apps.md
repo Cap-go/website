@@ -206,3 +206,7 @@ Here are three key components for ensuring OTA security:
 | Recovery | Instant rollback | Reduces the impact of flawed or compromised updates |
 
 This breakdown highlights the importance of robust encryption, continuous monitoring, and quick recovery options. As mobile app development advances, secure OTA updates become increasingly critical. Developers should focus on features like end-to-end encryption, strong monitoring systems, and reliable rollback capabilities. These precautions ensure updates are delivered securely, maintaining user confidence and meeting platform standards.
+
+## Keep going from OTA Security Checklist for Capacitor Apps
+
+If you are using **OTA Security Checklist for Capacitor Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

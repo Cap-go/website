@@ -226,3 +226,7 @@ Next, maintain **detailed records of user consent**. This includes timestamps, t
 
 If you're using a Capacitor app, platforms like **Capgo** can help you stay compliant by providing seamless live updates and ensuring your app reflects the latest privacy requirements. With features like end-to-end encryption and real-time updates, Capgo supports compliance with both Apple and Android standards, making it easier to manage changes related to user consent.
 :::
+
+## Keep going from Why Consent Management Matters for App Compliance
+
+If you are using **Why Consent Management Matters for App Compliance** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

@@ -219,3 +219,7 @@ Comprehensive OTA update testing has achieved an 82% success rate globally, impr
 The advantages of testing are amplified with a platform like **Capgo**. It simplifies OTA update testing through advanced validation tools and integrates proven testing results to provide secure and efficient updates. Capgo’s channel system supports beta testing and staged rollouts, allowing updates to be thoroughly vetted before full deployment. With features like detailed analytics, error tracking, and global CDN performance, Capgo delivers impressive download speeds - 114ms for a 5MB bundle [\[1\]](https://capgo.app/).
 
 Capgo also offers end-to-end encryption and instant rollback options, ensuring app stability. These capabilities have supported 750 production apps, delivering 23.5 million updates [\[1\]](https://capgo.app/).
+
+## Keep going from Testing Capacitor OTA Updates with Mock Scenarios
+
+If you are using **Testing Capacitor OTA Updates with Mock Scenarios** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

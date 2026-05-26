@@ -216,3 +216,7 @@ When implementing CI/CD, three key factors stand out:
 Prioritizing these areas helps teams adapt to the shifting CI/CD environment. With Appflow set to discontinue in 2026, it's crucial to consider not just technical performance, but also cost efficiency, update reliability, and long-term platform stability.
 
 As platforms handle 1,155.1 billion updates globally[\[1\]](https://capgo.app/), efficient and reliable update delivery remains a critical focus for modern mobile app development. Balancing performance and cost is essential when choosing the right CI/CD solution.
+
+## Keep going from Appflow CI/CD Integration: Best Practices
+
+If you are using **Appflow CI/CD Integration: Best Practices** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

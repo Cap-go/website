@@ -196,3 +196,7 @@ For mobile apps, strong permission controls are essential. **Capgo** simplifies 
 Speed matters: 95% of users receive updates within 24 hours through **Capgo** [\[1\]](https://capgo.app/), ensuring fast compliance with regulations.
 
 CCPA compliance isn't a one-time task. Regular audits and updates are necessary to keep up with changing rules and protect user privacy.
+
+## Keep going from How to Handle User Data Requests Under CCPA
+
+If you are using **How to Handle User Data Requests Under CCPA** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

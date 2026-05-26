@@ -252,3 +252,7 @@ Here’s how to begin:
 -   Configure updates for specific user groups.
 
 These steps ensure a smoother workflow and faster updates.
+
+## Keep going from Common Live Update Issues and Solutions for Developers
+
+If you are using **Common Live Update Issues and Solutions for Developers** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

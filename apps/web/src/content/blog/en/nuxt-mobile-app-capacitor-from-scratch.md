@@ -564,3 +564,7 @@ Make sure you configured `nitro: { preset: 'static' }` in `nuxt.config.ts` and r
 - [Konsta UI - Mobile UI Components](https://konstaui.com/)
 
 Ready to ship your app? Learn how Capgo can help you deliver updates faster — [sign up for a free account](/register/) today.
+
+## Keep going from Build a Nuxt Mobile App from Scratch with Capacitor 8
+
+If you are using **Build a Nuxt Mobile App from Scratch with Capacitor 8** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

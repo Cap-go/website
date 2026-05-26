@@ -271,3 +271,7 @@ Real-world data supports these practices, and developers have shared their posit
 Industry leaders like Rodrigo Mantica also emphasize its importance:
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" [\[1\]](https://capgo.app/)
+
+## Keep going from Best Practices for Capacitor Script Automation
+
+If you are using **Best Practices for Capacitor Script Automation** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

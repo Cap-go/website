@@ -134,3 +134,7 @@ Managing version control for Capacitor apps involves a mix of manual workflows, 
 -   **Live-update platforms**: Tools like Capgo make it easier to roll out fixes and new features quickly.
 
 When deciding between manual updates, automated pipelines, or live-update platforms, teams should consider their release frequency, budget, and the need for speed and compliance. Each approach has its strengths and trade-offs.
+
+## Keep going from Capacitor vs Appflow: Versioning Differences
+
+If you are using **Capacitor vs Appflow: Versioning Differences** to plan rollback and version control, connect it with [Rollbacks](/docs/live-updates/rollbacks/) for the implementation detail in Rollbacks, [Version Targeting](/docs/live-updates/version-targeting/) for the implementation detail in Version Targeting, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, [bundle](/docs/cli/reference/bundle/) for the implementation detail in bundle, and [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates.

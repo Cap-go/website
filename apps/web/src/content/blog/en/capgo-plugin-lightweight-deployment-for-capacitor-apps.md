@@ -305,3 +305,7 @@ To make updates faster and keep their size manageable with Capgo, developers can
 
 On top of these practices, tracking your app’s performance with tools like [Firebase](https://firebase.google.com/) can highlight areas for improvement. This helps ensure updates are not just smaller but also enhance the user experience. Together, these steps allow developers to provide smooth, real-time updates while keeping the app reliable and efficient.
 :::
+
+## Keep going from Capgo Plugin: Lightweight Deployment for Capacitor Apps
+
+If you are using **Capgo Plugin: Lightweight Deployment for Capacitor Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

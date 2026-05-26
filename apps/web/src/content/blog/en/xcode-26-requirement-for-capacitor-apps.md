@@ -59,3 +59,7 @@ If that is your setup, update the toolchain first, then run a clean build and a 
 This is Apple’s normal yearly toolchain cutoff, but the enforcement date is real: **since April 28, 2026**, older Xcode builds are no longer enough for App Store uploads.
 
 If you use Capgo Build, you are already on Xcode 26 or later. If you build elsewhere, update your environment to Xcode 26 or later before your next iOS release.
+
+## Keep going from Apple's Xcode 26 Requirement for Capacitor Apps
+
+If you are using **Apple's Xcode 26 Requirement for Capacitor Apps** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

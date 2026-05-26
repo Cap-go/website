@@ -398,3 +398,7 @@ Capgo simplifies the process of updating native bridges in Capacitor apps with *
 
 Setting up Capgo is quick and straightforward. Its comprehensive [auto-update system](https://capgo.app/docs/getting-started/add-an-app/) can be up and running in just minutes. Plus, it ensures your app stays current while adhering to both Apple and Android guidelines.
 :::
+
+## Keep going from Implementing Native Bridge for iOS in Capacitor
+
+If you are using **Implementing Native Bridge for iOS in Capacitor** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

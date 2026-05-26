@@ -331,3 +331,7 @@ Under the PDPL, appointing a DPO may be necessary depending on the nature of dat
 
 When it comes to data breaches, the PDPL emphasizes prompt notification to authorities. Meanwhile, the GDPR sets a specific **72-hour window** for notifying authorities and affected individuals if the breach could impact their rights. Aligning these processes to comply with both regulations helps organizations minimize compliance risks while strengthening their data protection strategies.
 :::
+
+## Keep going from Saudi Arabia PDPL vs GDPR: Key Differences
+
+If you are using **Saudi Arabia PDPL vs GDPR: Key Differences** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

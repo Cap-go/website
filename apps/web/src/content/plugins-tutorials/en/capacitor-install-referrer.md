@@ -57,3 +57,7 @@ Android uses the Google Play Install Referrer service and requires a Play Store 
 
 - GitHub: https://github.com/Cap-go/capacitor-install-referrer/
 - Docs: /docs/plugins/install-referrer/
+
+## Keep going from Using @capgo/capacitor-install-referrer
+
+If you are using **Using @capgo/capacitor-install-referrer** to plan native plugin work, connect it with [@capgo/capacitor-install-referrer](/docs/plugins/install-referrer/) for the implementation detail in @capgo/capacitor-install-referrer, [Getting Started](/docs/plugins/install-referrer/getting-started/) for the implementation detail in Getting Started, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, and [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins.

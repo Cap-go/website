@@ -170,3 +170,7 @@ The best tool depends on your team's needs and how you plan to approach OTA upda
 -   Prioritize tools that enable quick setup and automated workflows.
 
 When deciding, weigh factors like the number of active users, budget, team size and expertise, security requirements, and how well the tool integrates with your existing systems.
+
+## Keep going from Error Logging Tools for Capacitor OTA Updates
+
+If you are using **Error Logging Tools for Capacitor OTA Updates** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

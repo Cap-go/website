@@ -154,3 +154,7 @@ await ScreenOrientation.lock({ orientation: 'portrait' });
 ```
 
 That's it! You now have a faster-updated version of Capacitor with community improvements merged faster. Your apps will benefit from bug fixes and features without waiting for the official release cycle.
+
+## Keep going from Using Capacitor+ (@capacitor-plus) Packages
+
+If you are using **Using Capacitor+ (@capacitor-plus) Packages** to plan native plugin work, connect it with [Capacitor+](/docs/plugins/capacitor-plus/) for the implementation detail in Capacitor+, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, and [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives.

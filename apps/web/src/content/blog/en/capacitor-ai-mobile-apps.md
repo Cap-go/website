@@ -823,3 +823,7 @@ In 2026, the market for AI apps moves too fast for “slow release” engineerin
 That is Capacitor’s sweet spot. And when you add Capgo for Live Updates and Builds, you get an end-to-end pipeline that matches what AI products actually need: **ship, measure, improve, repeat**.
 
 If you are building an AI mobile app today and you want the highest probability of shipping quickly without painting yourself into a corner, **Capacitor + Capgo is the best default choice right now**.
+
+## Keep going from Why Capacitor Is the Best Way to Build AI Mobile Apps Right Now
+
+If you are using **Why Capacitor Is the Best Way to Build AI Mobile Apps Right Now** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

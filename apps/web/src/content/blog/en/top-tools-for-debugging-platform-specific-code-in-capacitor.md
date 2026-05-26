@@ -309,3 +309,7 @@ Key features of live update systems include real-time error tracking, instant ro
 A well-thought-out mix of [effective debugging](https://capgo.app/docs/plugins/updater/debugging/) tools and efficient live update systems is key to addressing platform-specific challenges. By combining traditional debugging methods with live update platforms like Capgo, developers can implement immediate fixes without waiting for app store approvals. With a global update success rate and the ability to reach most users within 24 hours, these tools make resolving issues faster and easier.
 
 Key elements for success include accurate platform detection, secure update processes with end-to-end encryption, quick rollback options, and actionable analytics.
+
+## Keep going from Top Tools for Debugging Platform-Specific Code in Capacitor
+
+If you are using **Top Tools for Debugging Platform-Specific Code in Capacitor** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

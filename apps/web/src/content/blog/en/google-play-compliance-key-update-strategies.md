@@ -165,3 +165,7 @@ Stay ahead by monitoring and reviewing policies regularly:
 Staying compliant with Google Play requires keeping a close eye on policy updates, incorporating checks during development, assigning clear roles within your team, and managing live updates effectively. Tools such as Capgo can help simplify these processes, ensuring critical fixes reach 95% of users within 24 hours [\[1\]](https://capgo.app/).
 
 Use these methods to keep up with Google Play's changing policies and reduce the risk of compliance issues.
+
+## Keep going from Google Play Compliance: Key Update Strategies
+
+If you are using **Google Play Compliance: Key Update Strategies** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

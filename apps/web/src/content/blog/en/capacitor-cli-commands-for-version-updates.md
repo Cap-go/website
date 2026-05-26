@@ -365,3 +365,7 @@ Before making the leap to the latest version of Capacitor, it's crucial to doubl
 
 You can also test your app in a controlled environment with the updated Capacitor version. This lets you spot and fix any compatibility problems before the update goes live in production. Tools like **Capgo** can be a lifesaver here, allowing you to push updates directly without needing app store approvals. This means you can quickly address plugin-related issues while staying within platform guidelines.
 :::
+
+## Keep going from Capacitor CLI Commands for Version Updates
+
+If you are using **Capacitor CLI Commands for Version Updates** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.

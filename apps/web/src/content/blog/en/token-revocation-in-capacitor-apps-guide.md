@@ -258,3 +258,7 @@ Regularly monitoring authentication attempts is also critical. It helps identify
 
 By following these practices, your app will remain secure and meet the ever-evolving requirements of app store platforms.
 :::
+
+## Keep going from Token Revocation in Capacitor Apps: Guide
+
+If you are using **Token Revocation in Capacitor Apps: Guide** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

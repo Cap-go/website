@@ -52,3 +52,7 @@ I contacted them to share with them what I was doing, and we found a business fr
 I build for the maker, they build for the business that need CI/CD and dedicated support :)
 
 You are welcome to join the community to build together, I use it for my projects too, and even I expect this to become my main project in the future.
+
+## Keep going from How Capgo is born
+
+If you are using **How Capgo is born** to plan live update delivery, connect it with [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates, [Overview](/docs/live-updates/) for the implementation detail in Overview, [Features](/docs/live-updates/features/) for the implementation detail in Features, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, and [Update Types](/docs/live-updates/update-types/) for the implementation detail in Update Types.

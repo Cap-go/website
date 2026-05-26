@@ -372,3 +372,7 @@ To make sure your server can handle heavy traffic and frequent updates smoothly,
 
 These strategies help build a setup that manages high traffic efficiently while enabling seamless updates. If you're looking for a live update solution, platforms like _Capgo_ offer real-time updates and align with Apple and Android standards.
 :::
+
+## Keep going from Server Setup for Capacitor OTA Updates
+
+If you are using **Server Setup for Capacitor OTA Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

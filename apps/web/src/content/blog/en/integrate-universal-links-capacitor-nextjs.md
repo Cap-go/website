@@ -187,3 +187,7 @@ This will apply the settings specified in the YAML file to your native projects.
 ## Conclusion
 
 Setting up deep links with Capacitor for a Next.js app involves configuring your domain and project settings for both iOS and Android. While the process requires attention to detail, it's streamlined compared to older methods and doesn't require additional plugins. Ensure your domain verification files are correctly served and check them with the respective platform tools. Once set up, your app will seamlessly open from web links, providing a smooth transition for your users from web to app.
+
+## Keep going from How to Integrate Universal Links in Next.js with Capacitor
+
+If you are using **How to Integrate Universal Links in Next.js with Capacitor** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

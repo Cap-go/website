@@ -240,3 +240,7 @@ When choosing tools for changelog management, prioritize:
 By combining these practices with the right tools, you can establish a reliable changelog system that supports continuous delivery while keeping users informed.
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" [\[1\]](https://capgo.app/)
+
+## Keep going from Capacitor Changelog Management: Ultimate Guide
+
+If you are using **Capacitor Changelog Management: Ultimate Guide** to plan rollback and version control, connect it with [Rollbacks](/docs/live-updates/rollbacks/) for the implementation detail in Rollbacks, [Version Targeting](/docs/live-updates/version-targeting/) for the implementation detail in Version Targeting, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, [bundle](/docs/cli/reference/bundle/) for the implementation detail in bundle, and [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates.

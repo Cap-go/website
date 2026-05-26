@@ -268,3 +268,7 @@ To effectively test rollback functionality with Capgo, begin by setting up a **s
 
 Before rolling out any updates, thoroughly test the rollback process. Make sure it can seamlessly return to the previous stable version without causing additional problems. Simulating failure scenarios is another good way to verify that the rollback mechanism works as intended. Lastly, take advantage of Capgo's **analytics tools** to keep an eye on update performance and user engagement. These insights can guide you in making well-informed decisions about when a rollback might be necessary.
 :::
+
+## Keep going from Rollback Management with Capgo: Guide
+
+If you are using **Rollback Management with Capgo: Guide** to plan rollback and version control, connect it with [Rollbacks](/docs/live-updates/rollbacks/) for the implementation detail in Rollbacks, [Version Targeting](/docs/live-updates/version-targeting/) for the implementation detail in Version Targeting, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, [bundle](/docs/cli/reference/bundle/) for the implementation detail in bundle, and [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates.

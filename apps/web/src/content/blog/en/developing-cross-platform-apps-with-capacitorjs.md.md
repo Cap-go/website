@@ -173,3 +173,7 @@ These commands will allow you to run your application in Android Studio, Xcode, 
 Developing cross-platform applications with CapacitorJS using pure JavaScript is a cost-effective and efficient way to create apps for multiple platforms with a single codebase. By following this guide, you've set up your project, restructured it for Vite, and prepared your app for development. With this foundation, you're well on your way to building a robust and versatile application.
 
 Remember to test thoroughly on all platforms and make use of Capacitor's native plugins to enhance your app's functionality. Happy coding!
+
+## Keep going from Developing Cross-Platform Apps with CapacitorJS: A Step-by-Step Guide
+
+If you are using **Developing Cross-Platform Apps with CapacitorJS: A Step-by-Step Guide** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

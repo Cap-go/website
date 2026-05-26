@@ -174,3 +174,7 @@ const res = await axios.get('https://api.capgo.app/device?app_id=YOUR_APP_ID&dev
 
 console.log('data', res.json())
 ```
+
+## Keep going from How to send specific update to one user or a group
+
+If you are using **How to send specific update to one user or a group** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

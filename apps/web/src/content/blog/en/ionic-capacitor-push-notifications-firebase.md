@@ -443,3 +443,7 @@ request(options, (error, response, body) => {
 Replace `YOUR_SERVER_KEY` and `YOUR_DEVICE_TOKEN` with your actual server key and device token. Run the script, and your device should receive the push notification with the custom payload.
 
 That's it! You've successfully integrated push notifications in your Ionic Capacitor app using Firebase. Now you can send push notifications to your users on both Android and iOS platforms.
+
+## Keep going from Ionic Capacitor Push Notifications with Firebase: A Step-by-Step Guide
+
+If you are using **Ionic Capacitor Push Notifications with Firebase: A Step-by-Step Guide** to plan migration and enterprise operations, connect it with [Capgo Enterprise](/enterprise/) for the product workflow in Capgo Enterprise, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, [Capgo Alternatives](/alternatives/) for the product workflow in Capgo Alternatives, [Capgo Consulting](/consulting/) for the product workflow in Capgo Consulting, and [Capgo Premium Support](/premium-support/) for the product workflow in Capgo Premium Support.

@@ -222,3 +222,7 @@ Here are some strategies to consider:
 | **Organization Management** | Provides detailed access control |
 
 Platforms like Azure DevOps, GitLab, and GitHub are excellent choices for setting up CI/CD workflows. Pairing these with tools like Capgo can close the gap between development and production, ensuring reliable app performance across both environments.
+
+## Keep going from Development vs. Production: Key Differences in Capacitor Apps
+
+If you are using **Development vs. Production: Key Differences in Capacitor Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

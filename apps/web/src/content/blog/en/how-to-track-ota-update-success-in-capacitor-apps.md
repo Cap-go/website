@@ -380,3 +380,7 @@ These metrics guide the following steps to ensure secure and automated update tr
 Starting with a trial period can help you test and refine these methods for your specific needs.
 
 > "Capgo is a must-have tool for developers who want to be more productive. Avoiding reviews for bug fixes is golden." - Bessie Cooper [\[1\]](https://capgo.app/)
+
+## Keep going from How to Track OTA Update Success in Capacitor Apps
+
+If you are using **How to Track OTA Update Success in Capacitor Apps** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

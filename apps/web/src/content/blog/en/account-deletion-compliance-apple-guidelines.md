@@ -238,3 +238,7 @@ To meet Apple’s account deletion requirements, it’s crucial to stay updated 
 
 If your app is built using Capacitor, tools like **Capgo** can simplify the process. Capgo offers features such as real-time updates and ensures your app meets Apple’s platform requirements, all while maintaining a smooth user experience. Additionally, regular testing and monitoring are vital to confirm compliance and quickly resolve any potential issues.
 :::
+
+## Keep going from Account Deletion Compliance: Apple Guidelines
+
+If you are using **Account Deletion Compliance: Apple Guidelines** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

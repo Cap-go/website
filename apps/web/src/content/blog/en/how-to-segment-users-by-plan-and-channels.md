@@ -176,4 +176,8 @@ const assignToABTest = async (userId: string) => {
 
 By leveraging Capgo's channel system, you can create more personalized app experiences and run A/B tests. For production use, always prefer the backend assignment method for better security and control.
 
-For more details on channel management, check out our [channels documentation](/docs/live-updates/channels/). 
+For more details on channel management, check out our [channels documentation](/docs/live-updates/channels/).
+
+## Keep going from How to Use Channels for Feature Flags and A/B Testing
+
+If you are using **How to Use Channels for Feature Flags and A/B Testing** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

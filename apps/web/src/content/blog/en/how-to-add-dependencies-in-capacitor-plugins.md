@@ -525,3 +525,7 @@ Here’s a quick look at Capgo’s performance:
 | Global API Response Time | 434ms |
 | Update Success Rate | 82% |
 | User Update Rate (24 Hours) | 95% |
+
+## Keep going from How to Add Dependencies in Capacitor Plugins
+
+If you are using **How to Add Dependencies in Capacitor Plugins** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

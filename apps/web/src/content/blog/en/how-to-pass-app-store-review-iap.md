@@ -527,3 +527,7 @@ By following this guide and using proper tools like the [native-purchases plugin
 Remember: Reviewers are looking for apps that respect users and follow guidelines. Build with that mindset, and approval will follow.
 
 **Need help implementing in-app purchases?** Check out our [comprehensive documentation](/docs/plugins/native-purchases/) or reach out to the community for support.
+
+## Keep going from How to Pass App Store Review for In-App Purchases in 2025
+
+If you are using **How to Pass App Store Review for In-App Purchases in 2025** to plan store approval and distribution, connect it with [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/native-market, [Using @capgo/native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/native-market, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.

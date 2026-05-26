@@ -221,3 +221,7 @@ Kick off your Capgo integration by adding the Capgo CLI to your project. With **
 > "Capgo is a smart way to make hot code pushes."
 
 For even greater efficiency, integrate Capgo with your CI/CD tools like Azure DevOps, GitLab, or GitHub. This setup enables automated deployments while giving you control over update distribution through user assignment features.
+
+## Keep going from 5 Steps to Deploy Hotfixes with Capgo
+
+If you are using **5 Steps to Deploy Hotfixes with Capgo** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

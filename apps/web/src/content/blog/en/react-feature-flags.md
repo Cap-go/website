@@ -425,3 +425,7 @@ Used together, live updates and flags give hybrid teams something closer to web-
 ---
 
 If your team ships Capacitor or Electron apps and needs that release-control layer, [Capgo](https://capgo.app) is one option to look at. It delivers signed web bundles to targeted channels, supports rollback protection and observability, and fits the kind of hybrid-app workflow where feature flags need to work alongside live updates rather than replacing them.
+
+## Keep going from React Feature Flags: A Complete Implementation Guide
+
+If you are using **React Feature Flags: A Complete Implementation Guide** to plan channel routing and staged rollout, connect it with [Channels](/docs/live-updates/channels/) for the implementation detail in Channels, [Channels](/docs/public-api/channels/) for the implementation detail in Channels, [Channels](/docs/webapp/channels/) for the implementation detail in Channels, [Beta Testing Solution](/solutions/beta-testing/) for the product workflow in Beta Testing Solution, and [Version Targeting Solution](/solutions/version-targeting/) for the product workflow in Version Targeting Solution.

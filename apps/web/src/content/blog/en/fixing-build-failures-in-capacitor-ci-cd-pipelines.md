@@ -360,3 +360,7 @@ Capgo takes the hassle out of diagnosing and fixing build failures in Capacitor 
 
 On top of that, Capgo simplifies over-the-air (OTA) updates with features such as **rollback options**, **staged rollouts**, and **real-time monitoring**. These tools make deployments smoother and more controlled. Plus, its integration with your existing CI/CD tools enables **automated compliance checks** and **performance tracking**, boosting the reliability and efficiency of your pipeline.
 :::
+
+## Keep going from Fixing Build Failures in Capacitor CI/CD Pipelines
+
+If you are using **Fixing Build Failures in Capacitor CI/CD Pipelines** to plan CI/CD automation, connect it with [Capgo CI/CD](/ci_cd/) for the product workflow in Capgo CI/CD, [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds, [Capgo Integrations](/integrations/) for the product workflow in Capgo Integrations, [CI/CD Integration](/docs/getting-started/cicd-integration/) for the implementation detail in CI/CD Integration, and [GitHub Actions Integration](/docs/live-updates/integrations/github-actions/) for the implementation detail in GitHub Actions Integration.

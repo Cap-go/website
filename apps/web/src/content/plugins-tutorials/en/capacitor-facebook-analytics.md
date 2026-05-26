@@ -82,3 +82,7 @@ await FacebookAnalytics.logPurchase({
 
 - [GitHub](https://github.com/Cap-go/capacitor-facebook-analytics/)
 - [Docs](/docs/plugins/facebook-analytics/)
+
+## Keep going from Using @capgo/capacitor-facebook-analytics
+
+If you are using **Using @capgo/capacitor-facebook-analytics** to plan native plugin work, connect it with [@capgo/capacitor-facebook-analytics](/docs/plugins/facebook-analytics/) for the implementation detail in @capgo/capacitor-facebook-analytics, [Getting Started](/docs/plugins/facebook-analytics/getting-started/) for the implementation detail in Getting Started, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, and [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins.

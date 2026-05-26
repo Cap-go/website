@@ -329,3 +329,7 @@ To succeed with an OTA strategy, focus on:
 -   Using non-intrusive background updates
 -   Monitoring performance and user feedback regularly
 -   Meeting strict security standards
+
+## Keep going from Ultimate Guide to App Store-Compliant OTA Updates
+
+If you are using **Ultimate Guide to App Store-Compliant OTA Updates** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

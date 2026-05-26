@@ -287,3 +287,7 @@ To maximize these benefits, consider implementing the following strategies:
 For developers aiming to improve their workflow, tools like Capgo can simplify the process. Features such as end-to-end encryption and CI/CD integration help teams maintain consistency while efficiently deploying updates.
 
 Success in platform management depends on using the right tools and adhering to platform-specific guidelines. By focusing on robust detection and management strategies, developers can ensure their apps perform seamlessly across both iOS and Android.
+
+## Keep going from How Capacitor Handles Platform Differences
+
+If you are using **How Capacitor Handles Platform Differences** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player, and [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) for the native capability in Using @capgo/capacitor-native-navigation.

@@ -202,3 +202,7 @@ For secure over-the-air (OTA) implementation:
 -   Perform regular audits of your [encryption practices](https://capgo.app/docs/cli/migrations/encryption/)
 
 Routine reviews of your encryption methods help ensure compliance with Apple and Google’s security requirements.
+
+## Keep going from How OTA Encryption Meets App Store Compliance
+
+If you are using **How OTA Encryption Meets App Store Compliance** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

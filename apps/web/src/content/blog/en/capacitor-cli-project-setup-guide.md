@@ -257,3 +257,7 @@ Here's how to get started:
 -   Install and set up Capgo with the following command: `npm install --save @capgo/cli && npx capgo init`
 
 For detailed setup instructions or troubleshooting, check out the official Capacitor and Capgo documentation.
+
+## Keep going from Capacitor CLI: Project Setup Guide
+
+If you are using **Capacitor CLI: Project Setup Guide** to plan dashboard and API operations, connect it with [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, [Devices](/docs/public-api/devices/) for the implementation detail in Devices, and [Bundles](/docs/public-api/bundles/) for the implementation detail in Bundles.

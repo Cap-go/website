@@ -314,3 +314,7 @@ The MAJOR.MINOR.PATCH versioning system makes it easy to communicate breaking ch
 Capgo’s [encrypted solution](https://capgo.app/docs/cli/migrations/encryption/), integrated with CI/CD tools, is also budget-friendly - cutting costs by up to $26,100 over five years [\[1\]](https://capgo.app/). Its customizable channels ensure updates reach the right users at the right time.
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
+
+## Keep going from How to Use Semantic Versioning with Capgo OTA Updates
+
+If you are using **How to Use Semantic Versioning with Capgo OTA Updates** to plan rollback and version control, connect it with [Rollbacks](/docs/live-updates/rollbacks/) for the implementation detail in Rollbacks, [Version Targeting](/docs/live-updates/version-targeting/) for the implementation detail in Version Targeting, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, [bundle](/docs/cli/reference/bundle/) for the implementation detail in bundle, and [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates.

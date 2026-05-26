@@ -209,3 +209,7 @@ Smooth data transfer between web and Android layers is a key aspect of modern ap
 Features like end-to-end encryption, partial updates for performance boosts, and active error monitoring play a big role in ensuring reliable data handling.
 
 > "The community needed this and @Capgo is doing something really important!" [\[1\]](https://capgo.app/)
+
+## Keep going from Capacitor Native Bridge: Web to Android Data Transfer
+
+If you are using **Capacitor Native Bridge: Web to Android Data Transfer** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

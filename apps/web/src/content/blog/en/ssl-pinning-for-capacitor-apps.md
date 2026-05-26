@@ -390,3 +390,7 @@ While the article doesn't dive into tools or strategies for automating SSL certi
 
 For managing live updates and simplifying app maintenance, platforms like **Capgo** can be a game-changer. They make it easier to roll out updates while staying within app store regulations, ensuring a smoother experience for both developers and users.
 :::
+
+## Keep going from SSL Pinning for Capacitor Apps
+
+If you are using **SSL Pinning for Capacitor Apps** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

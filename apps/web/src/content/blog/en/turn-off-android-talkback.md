@@ -59,3 +59,7 @@ Once TalkBack is active, your device will provide auditory feedback as you navig
 If you need to disable TalkBack, you can use any of the methods mentioned above. The volume key shortcut is particularly useful when you cannot see the screen.
 
 Remember, mastering TalkBack takes practice. Don't hesitate to explore the settings and customize the experience to your preferences. With these steps, you can confidently navigate your Android device using TalkBack.
+
+## Keep going from How to Turn off and Use TalkBack on Android Devices
+
+If you are using **How to Turn off and Use TalkBack on Android Devices** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player, and [Using @capgo/capacitor-native-navigation](/plugins/capacitor-native-navigation/) for the native capability in Using @capgo/capacitor-native-navigation.

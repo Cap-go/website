@@ -64,3 +64,7 @@ await Purchases.getCachedVirtualCurrencies();
 ## Full Reference
 
 - GitHub: https://github.com/RevenueCat/purchases-capacitor/
+
+## Keep going from Using @revenuecat/purchases-capacitor
+
+If you are using **Using @revenuecat/purchases-capacitor** to plan payments and purchases, connect it with [Capgo Pricing](/pricing/) for the product workflow in Capgo Pricing, [Payment system](/docs/webapp/payment/) for the implementation detail in Payment system, [@capgo/native-purchases](/docs/plugins/native-purchases/) for the implementation detail in @capgo/native-purchases, [Getting Started](/docs/plugins/native-purchases/getting-started/) for the implementation detail in Getting Started, and [Revenue Playbook](/docs/plugins/native-purchases/revenue-playbook/) for the implementation detail in Revenue Playbook.

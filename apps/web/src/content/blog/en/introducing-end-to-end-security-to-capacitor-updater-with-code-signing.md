@@ -89,3 +89,7 @@ Capgo code signing is available for all customers. To get started, follow the [s
 ## Credits
 
 Thanks a lot to [Ionic](https://ionic.com/), this article is based on [this article](https://ionic.io/blog/introducing-the-ionic-end-to-end-testing-reference-example/) rewrote with chat-gpt-3 and adapted.
+
+## Keep going from E2E Encryption for Capacitor Updater via Code Signing
+
+If you are using **E2E Encryption for Capacitor Updater via Code Signing** to plan security and compliance, connect it with [Encryption](/docs/live-updates/encryption/) for the implementation detail in Encryption, [Compliance](/docs/live-updates/compliance/) for the implementation detail in Compliance, [Capgo Security Scanner](/security-scanner/) for the product workflow in Capgo Security Scanner, [Capgo Security](/security/) for the product workflow in Capgo Security, and [Capgo Trust Center](/trust/) for the product workflow in Capgo Trust Center.

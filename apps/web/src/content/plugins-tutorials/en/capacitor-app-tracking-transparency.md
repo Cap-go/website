@@ -60,3 +60,7 @@ switch (status) {
 
 - GitHub: https://github.com/Cap-go/capacitor-app-tracking-transparency/
 - Docs: /docs/plugins/app-tracking-transparency/
+
+## Keep going from Using @capgo/capacitor-app-tracking-transparency
+
+If you are using **Using @capgo/capacitor-app-tracking-transparency** to plan native plugin work, connect it with [@capgo/capacitor-app-tracking-transparency](/docs/plugins/app-tracking-transparency/) for the implementation detail in @capgo/capacitor-app-tracking-transparency, [Getting Started](/docs/plugins/app-tracking-transparency/getting-started/) for the implementation detail in Getting Started, [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, and [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins.

@@ -29,3 +29,7 @@ Additionally, making updates to native code is generally against the rules for a
 In summary, while Capgo Live Update is a useful tool for quickly deploying updates to certain types of mobile apps, it cannot be used to update Flutter apps.
 
 It's due to the nature of Flutter's compilation process and the rules of the app stores.
+
+## Keep going from Flutter live update
+
+If you are using **Flutter live update** to plan store approval and distribution, connect it with [@capgo/capacitor-in-app-review](/docs/plugins/in-app-review/) for the implementation detail in @capgo/capacitor-in-app-review, [Using @capgo/capacitor-in-app-review](/plugins/capacitor-in-app-review/) for the native capability in Using @capgo/capacitor-in-app-review, [@capgo/native-market](/docs/plugins/native-market/) for the implementation detail in @capgo/native-market, [Using @capgo/native-market](/plugins/capacitor-native-market/) for the native capability in Using @capgo/native-market, and [Capacitor OTA Updates: App Store Approval Guide](/blog/capacitor-ota-updates-app-store-approval-guide/) for the practical context in Capacitor OTA Updates: App Store Approval Guide.

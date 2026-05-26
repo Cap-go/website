@@ -176,3 +176,7 @@ To ensure your Capacitor app updates are seamless and reliable, use a robust liv
 
 Capgo supports **end-to-end encryption** and complies with Apple and Android guidelines, ensuring updates are secure and meet platform requirements. It also integrates effortlessly with CI/CD systems, making the deployment process efficient and hassle-free. By leveraging these tools, you can minimize potential issues and keep your app users up-to-date with the latest changes in real time.
 :::
+
+## Keep going from Merge Policies for Teams Using Capacitor Apps
+
+If you are using **Merge Policies for Teams Using Capacitor Apps** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

@@ -225,3 +225,7 @@ Capgo simplifies the update process for Capacitor apps with **instant over-the-a
 
 With a **95% success rate** and global download speeds averaging an impressive 114ms, Capgo ensures updates are delivered quickly and reliably. Developers can target updates to specific user groups or undo changes instantly with one-click rollbacks, offering greater control and adaptability. These tools not only boost deployment efficiency but also ensure a smooth experience for users.
 :::
+
+## Keep going from How to Optimize Capacitor Update Rollouts
+
+If you are using **How to Optimize Capacitor Update Rollouts** to plan native plugin work, connect it with [Capgo Plugin Directory](/plugins/) for the product workflow in Capgo Plugin Directory, [Capacitor Plugins by Capgo](/docs/plugins/) for the implementation detail in Capacitor Plugins by Capgo, [Adding or Updating Plugins](/docs/contributing/adding-plugins/) for the implementation detail in Adding or Updating Plugins, [Ionic Enterprise Plugin Alternatives](/ionic-enterprise-plugins/) for the product workflow in Ionic Enterprise Plugin Alternatives, and [Capgo Native Builds](/native-build/) for the product workflow in Capgo Native Builds.

@@ -313,3 +313,7 @@ Follow these steps to get started:
 -   Define clear success metrics to track progress
 
 The right mix of release methods and tools tailored to your app's needs will ensure smoother updates and better results.
+
+## Keep going from Staged Rollouts vs Full Releases: Comparison
+
+If you are using **Staged Rollouts vs Full Releases: Comparison** to plan live update delivery, connect it with [Capgo Live Updates](/live-update/) for the product workflow in Capgo Live Updates, [Overview](/docs/live-updates/) for the implementation detail in Overview, [Features](/docs/live-updates/features/) for the implementation detail in Features, [Update Behavior](/docs/live-updates/update-behavior/) for the implementation detail in Update Behavior, and [Update Types](/docs/live-updates/update-types/) for the implementation detail in Update Types.
