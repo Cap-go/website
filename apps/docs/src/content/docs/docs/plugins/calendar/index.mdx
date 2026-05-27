@@ -1,0 +1,66 @@
+---
+title: "@capgo/capacitor-calendar"
+description: "Manage native calendar events on iOS and Android, with Reminders support on iOS."
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: "Native calendar event management for Capacitor apps, including event prompts, direct event CRUD, calendar listing, and iOS Reminders."
+  actions:
+    - text: Get started
+      link: /docs/plugins/calendar/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Cap-go/capacitor-calendar/
+      icon: external
+      variant: minimal
+---
+
+## Overview
+
+`@capgo/capacitor-calendar` gives Capacitor apps direct access to native calendar features. Use it to request calendar permissions, create and modify events, open the system calendar UI, list calendars and events, and manage Reminders on iOS.
+
+## Demo
+
+| iOS | Android |
+| :---: | :---: |
+| <img src="/calendar/demo/ios-demo.gif" alt="iOS demo of native calendar event creation" width="280" /> | <img src="/calendar/demo/android-demo.gif" alt="Android demo of native calendar event creation" width="280" /> |
+
+## Core Capabilities
+
+- Request calendar and reminder permissions with modern iOS calendar access levels.
+- Create, modify, delete, and list calendar events on iOS and Android.
+- Open native event creation, edit, delete, and calendar selection UI where the platform supports it.
+- List calendars, get the default calendar, and create or modify calendars.
+- Manage iOS Reminders lists and reminder items.
+
+## Platform Support
+
+| Feature | iOS | Android | Web |
+| --- | --- | --- | --- |
+| Permission checks and requests | Yes | Yes | No |
+| Calendar event CRUD | Yes | Yes | No |
+| Native event prompts | Yes | Yes | No |
+| Calendar listing and default calendar | Yes | Yes | No |
+| Calendar sources and picker | Yes | No | No |
+| Calendar CRUD | Yes | Yes | No |
+| Reminder lists and reminder CRUD | Yes | No | No |
+
+The web implementation is a Capacitor stub for native-only APIs.
+
+## Public API
+
+| Area | Methods |
+| --- | --- |
+| Permissions | `checkPermission`, `checkAllPermissions`, `requestWriteOnlyCalendarAccess`, `requestReadOnlyCalendarAccess`, `requestFullCalendarAccess`, `requestFullRemindersAccess` |
+| Events | `createEvent`, `createEventWithPrompt`, `modifyEvent`, `modifyEventWithPrompt`, `deleteEvent`, `deleteEventWithPrompt`, `listEventsInRange`, `commit` |
+| Calendars | `listCalendars`, `getDefaultCalendar`, `openCalendar`, `selectCalendarsWithPrompt`, `fetchAllCalendarSources`, `createCalendar`, `modifyCalendar`, `deleteCalendar` |
+| Reminders | `openReminders`, `fetchAllRemindersSources`, `getDefaultRemindersList`, `getRemindersLists`, `createReminder`, `modifyReminder`, `deleteReminder`, `deleteReminderWithPrompt`, `getReminderById`, `getRemindersFromLists` |
+
+## Source Of Truth
+
+This reference is synced from `src/definitions.ts` in [capacitor-calendar](https://github.com/Cap-go/capacitor-calendar/).
