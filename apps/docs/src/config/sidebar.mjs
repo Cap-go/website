@@ -70,6 +70,7 @@ const pluginEntries = [
   ['Barometer', 'barometer'],
   ['Bluetooth Low Energy', 'bluetooth-low-energy'],
   ['Brightness', 'brightness'],
+  ['Calendar', 'calendar'],
   ['Camera Preview', 'camera-preview'],
   ['Capacitor+', 'capacitor-plus'],
   ['Capacitor Patch', 'capacitor-patch'],
