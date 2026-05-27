@@ -7,6 +7,7 @@
   "@capgo/capacitor-native-biometric": 657220,
   "@capgo/camera-preview": 52746,
   "@capgo/capacitor-calendar": 0,
+  "@capgo/capacitor-date-picker": 0,
   "@capgo/capacitor-updater": 1120281,
   "@capgo/electron-updater": 1240,
   "@capgo/capacitor-uploader": 26129,
