@@ -30,6 +30,7 @@ const actionDefinitionRows =
 @capgo/capacitor-calendar|github.com/Cap-go|Manage native calendar events on iOS and Android, with iOS Reminders support|https://github.com/Cap-go/capacitor-calendar/|Calendar
 @capgo/capacitor-date-picker|github.com/Cap-go|Native date, time, date-time, year-month, and range picker for iOS, Android, and Web|https://github.com/Cap-go/capacitor-date-picker/|Date Picker
 @capgo/capacitor-updater|github.com/Cap-go|Deploy live updates instantly to your users without app store review delays|https://github.com/Cap-go/capacitor-updater/|Updater
+@capgo/capacitor-notifications|github.com/Cap-go|Send native iOS and Android push notifications from Capgo with user lookup, badges, stats, and silent update checks|https://github.com/Cap-go/capgo/tree/main/packages/capacitor-notifications/|Notifications
 @capgo/electron-updater|github.com/Cap-go|OTA live updates for Electron apps with the same API surface as capacitor-updater|https://github.com/Cap-go/electron-updater/|Electron Updater
 @capgo/capacitor-uploader|github.com/Cap-go|Upload large files reliably in background with progress tracking and retry support|https://github.com/Cap-go/capacitor-uploader/|Uploader
 @revenuecat/purchases-capacitor|github.com/Cap-go|Implement in-app subscriptions and purchases with RevenueCat SDK for cross-platform monetization|https://github.com/RevenueCat/purchases-capacitor/|Purchases
@@ -171,6 +172,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-calendar': 'CalendarDays',
   '@capgo/capacitor-date-picker': 'CalendarDays',
   '@capgo/capacitor-updater': 'ArrowPath',
+  '@capgo/capacitor-notifications': 'Bell',
   '@capgo/electron-updater': 'ArrowPath',
   '@capgo/capacitor-uploader': 'ArrowUpOnSquare',
   '@revenuecat/purchases-capacitor': 'CurrencyDollar',
