@@ -1,5 +1,5 @@
 {
-  "repositoryCount": 122,
+  "repositoryCount": 123,
   "contributorCount": 540,
   "versionCount": 7673,
   "releaseCount": 3365,
@@ -73,6 +73,15 @@
     },
     "Cap-go/capacitor-calendar": {
       "url": "https://github.com/Cap-go/capacitor-calendar",
+      "stars": 0,
+      "contributors": 1,
+      "versionTags": 0,
+      "releases": 0,
+      "closedIssues": 0,
+      "mergedPullRequests": 0
+    },
+    "Cap-go/capacitor-date-picker": {
+      "url": "https://github.com/Cap-go/capacitor-date-picker",
       "stars": 0,
       "contributors": 1,
       "versionTags": 0,

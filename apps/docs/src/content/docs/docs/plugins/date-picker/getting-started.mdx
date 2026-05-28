@@ -1,0 +1,137 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-date-picker and present native date pickers from a Capacitor app."
+sidebar:
+  order: 2
+---
+
+## Install
+
+```bash
+npm install @capgo/capacitor-date-picker
+npx cap sync
+```
+
+## Import
+
+```typescript
+import { DatePicker } from '@capgo/capacitor-date-picker';
+```
+
+## Pick A Date
+
+```typescript
+const result = await DatePicker.present({
+  mode: 'date',
+  date: '2026-05-27',
+  min: '2026-01-01',
+  max: '2026-12-31',
+  format: 'yyyy-MM-dd',
+  title: 'Select date',
+});
+
+console.log(result.value);
+```
+
+## Pick A Time
+
+```typescript
+const result = await DatePicker.present({
+  mode: 'time',
+  is24h: true,
+  minuteStep: 15,
+  format: 'HH:mm',
+  title: 'Select time',
+});
+
+console.log(result.value);
+```
+
+## Pick Date And Time
+
+```typescript
+const result = await DatePicker.present({
+  mode: 'dateAndTime',
+  date: '2026-05-27T14:30:00',
+  format: "yyyy-MM-dd'T'HH:mm:ss",
+  title: 'Select date and time',
+});
+```
+
+## Pick A Month
+
+```typescript
+const result = await DatePicker.present({
+  mode: 'yearAndMonth',
+  date: '2026-05-01',
+  format: 'yyyy-MM',
+  title: 'Select month',
+});
+```
+
+## Pick A Range
+
+```typescript
+const range = await DatePicker.presentRange({
+  start: '2026-05-01',
+  end: '2026-05-27',
+  format: 'yyyy-MM-dd',
+  startTitle: 'Start date',
+  endTitle: 'End date',
+});
+
+console.log(range.start, range.end, range.value);
+```
+
+## Hide The Picker
+
+```typescript
+await DatePicker.hide();
+```
+
+## Platform Options
+
+```typescript
+await DatePicker.present({
+  mode: 'date',
+  date: '2026-05-27',
+  title: 'Select date',
+  ios: {
+    style: 'inline',
+    theme: 'light',
+  },
+  android: {
+    theme: 'light',
+  },
+});
+```
+
+## Common Options
+
+| Option | Description |
+| --- | --- |
+| `mode` | `date`, `time`, `dateAndTime`, `yearAndMonth`, `countDownTimer`, or `range`. |
+| `date` | Initial selected value. |
+| `min` / `max` | Minimum and maximum selectable values. |
+| `format` | Output format. ISO, Java/Unicode, and common Moment-style formats are supported. |
+| `title` | Dialog title. |
+| `locale` | Locale used by native pickers where supported. |
+| `timezone` | Timezone used for parsing and formatting. |
+| `is24h` | Prefer 24-hour time. |
+| `minuteStep` | Time picker minute interval. |
+| `doneText` / `cancelText` | Custom action labels. |
+
+## Example App
+
+The repository includes a Capacitor example app that opens the native date picker, time picker, range picker, `hide()`, and plugin version calls.
+
+| iOS | Android |
+| :---: | :---: |
+| <img src="/date-picker/demo/ios-date-picker-demo.webp" alt="Animated iOS demo of @capgo/capacitor-date-picker opening, selecting a date, and closing" width="280" /> | <img src="/date-picker/demo/android-date-picker-demo.webp" alt="Animated Android demo of @capgo/capacitor-date-picker opening, selecting a date, and closing" width="280" /> |
+
+## API Reference
+
+The complete API reference is maintained in the package README and TypeScript definitions:
+
+- [README](https://github.com/Cap-go/capacitor-date-picker/#api)
+- [Type definitions](https://github.com/Cap-go/capacitor-date-picker/blob/main/src/definitions.ts)
