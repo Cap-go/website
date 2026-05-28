@@ -14,6 +14,12 @@ npm install @capgo/capacitor-date-picker
 npx cap sync
 ```
 
+## Native Picker Demo
+
+| iOS | Android |
+| :---: | :---: |
+| <img src="/date-picker/demo/ios-date-picker-demo.webp" alt="Animated iOS demo of @capgo/capacitor-date-picker opening, selecting a date, and closing" width="280" /> | <img src="/date-picker/demo/android-date-picker-demo.webp" alt="Animated Android demo of @capgo/capacitor-date-picker opening, selecting a date, and closing" width="280" /> |
+
 ## Native Picker Screenshots
 
 | iOS | Android |
