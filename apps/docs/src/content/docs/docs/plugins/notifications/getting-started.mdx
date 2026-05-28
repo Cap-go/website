@@ -1,0 +1,279 @@
+---
+title: Getting Started
+description: "Install @capgo/capacitor-notifications, configure platform credentials, register devices, send test notifications, and enable silent update checks."
+sidebar:
+  order: 2
+---
+
+`@capgo/capacitor-notifications` is the first-party Capgo plugin for native iOS and Android push notifications. It is built for Capgo's dashboard, public API, Analytics Engine device registry, campaign stats, badge updates, and silent live-update checks.
+
+The package is currently in private preview. Capgo must enable package access for your npm account before the install command works.
+
+## Requirements
+
+- A Capacitor app already added to Capgo.
+- Access to the Capgo app's Notifications tab.
+- A Capgo API key with write access for backend proof minting and API sends.
+- iOS and/or Android platform push authority for the app.
+- `@capgo/capacitor-updater` if you want silent push update checks.
+
+## 1. Configure Capgo Platform Credentials
+
+Open the app in Capgo, then go to **Notifications**.
+
+Add one platform credential entry for each platform you want to support:
+
+- **Android** - app package ID and Android push project metadata.
+- **iOS** - bundle ID, team ID, key ID, and the matching iOS push key metadata.
+
+Capgo shows the exact environment secret name that must exist in the API worker before the platform is marked configured. The dashboard stores metadata and the expected secret reference. The private credential itself stays in the worker environment.
+
+## 2. Install
+
+For the fastest setup, run the Capgo CLI from your app project:
+
+```bash
+npx @capgo/cli@latest notifications setup com.example.app
+```
+
+The command installs the notification package, saves the Capacitor plugin config, creates a small helper file, and runs Capacitor sync. Use this path for new apps unless you need to wire every file manually.
+
+Manual install:
+
+```bash
+npm install @capgo/capacitor-notifications @capgo/capacitor-updater
+npx cap sync
+```
+
+If you are not using silent Capgo update checks, you can omit `@capgo/capacitor-updater`.
+
+## 3. Configure The Plugin
+
+Configure the plugin once when your app starts.
+
+```typescript
+import { CapgoNotifications } from '@capgo/capacitor-notifications'
+
+await CapgoNotifications.configure({
+  appId: 'com.example.app',
+  autoUpdater: true,
+  updateInstallMode: 'next',
+})
+```
+
+Use `updateInstallMode: 'next'` to download an update and install it on the next restart or background cycle. Use `updateInstallMode: 'set'` only when you want Capgo to install the update as soon as the updater can safely do it.
+
+## 4. Mint An Identity Proof
+
+Do not put your Capgo API key in the mobile app. Your backend should ask Capgo for an `identityProof` after your own user authentication succeeds.
+
+```bash
+curl -X POST 'https://api.capgo.app/notifications/recipients/proof' \
+  -H 'Content-Type: application/json' \
+  -H 'x-api-key: CAPGO_API_KEY' \
+  -d '{
+    "appId": "com.example.app",
+    "externalId": "customer-user-123"
+  }'
+```
+
+Return the `identityProof` to the app with your own session response.
+
+## 5. Register The Device
+
+Register only after you know which customer user is signed in.
+
+```typescript
+const registration = await CapgoNotifications.register({
+  externalId: 'customer-user-123',
+  identityProof,
+  tags: ['paid', 'beta'],
+  attributes: {
+    plan: 'team',
+    locale: 'en-US',
+  },
+  consent: true,
+})
+
+console.log(registration.recipientKey, registration.deviceKey)
+```
+
+Call `register` again when:
+
+- The app starts.
+- The native push token changes.
+- The signed-in user changes.
+- Tags, attributes, or consent change.
+- The app has not refreshed registration for a long time.
+
+## 6. Add Event Listeners
+
+Register listeners during app startup so foreground, opened, and background events are visible to JavaScript.
+
+```typescript
+await CapgoNotifications.addListener('registrationChanged', () => {
+  void CapgoNotifications.register({
+    externalId: currentUser.id,
+    identityProof: currentUser.capgoNotificationProof,
+    tags: currentUser.notificationTags,
+    consent: currentUser.pushConsent,
+  })
+})
+
+await CapgoNotifications.addListener('notificationReceived', (notification) => {
+  console.log('Notification received', notification)
+})
+
+await CapgoNotifications.addListener('notificationOpened', (event) => {
+  console.log('Notification opened', event.notification.id)
+})
+
+await CapgoNotifications.addListener('backgroundNotification', async (event) => {
+  try {
+    console.log('Background notification', event.notification.data)
+  } finally {
+    await event.finish()
+  }
+})
+```
+
+Always call `finish()` for background notifications after your work is done. Keep the work short and idempotent.
+
+## 7. iOS Setup
+
+In Xcode, open the app target and enable:
+
+- **Push Notifications**
+- **Background Modes > Remote notifications**
+
+Forward remote notifications from `ios/App/App/AppDelegate.swift`:
+
+```swift
+func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    NotificationCenter.default.post(name: Notification.Name("CapgoNotificationsRemoteNotification"), object: userInfo)
+    completionHandler(.newData)
+}
+```
+
+Then run:
+
+```bash
+npx cap sync ios
+```
+
+Use a physical iOS device when testing background notifications. Simulators are useful for UI work but do not represent production background push behavior.
+
+## 8. Android Setup
+
+Run:
+
+```bash
+npx cap sync android
+```
+
+Then verify:
+
+- Your Android platform credential is configured in Capgo.
+- The app package ID matches the package ID used for platform push setup.
+- Android 13+ notification permission is requested before expecting visible notifications.
+- The app has a notification icon and channel strategy that matches your brand.
+- You test on a physical device or emulator with Google Play services.
+
+Create a default Android channel when your app starts:
+
+```typescript
+await CapgoNotifications.configure({ appId: 'com.example.app' })
+
+await CapgoNotifications.register({
+  externalId: currentUser.id,
+  identityProof: currentUser.capgoNotificationProof,
+  consent: true,
+})
+```
+
+The plugin declares the Android push messaging service. Keep app backup, data extraction, network security, and notification icon policy in the host app.
+
+## 9. Send A Test Notification
+
+Use **Notifications > Test send** in Capgo, or call the public API from your backend:
+
+```bash
+curl -X POST 'https://api.capgo.app/notifications/send' \
+  -H 'Content-Type: application/json' \
+  -H 'x-api-key: CAPGO_API_KEY' \
+  -d '{
+    "appId": "com.example.app",
+    "target": { "externalId": "customer-user-123" },
+    "payload": {
+      "title": "Hello from Capgo",
+      "body": "This is a test notification.",
+      "data": { "screen": "inbox" }
+    }
+  }'
+```
+
+For a campaign, create it in the dashboard or call `/notifications/campaigns`, then send to an external ID, tag, segment, or broadcast audience.
+
+## 10. Set Badges
+
+```typescript
+await CapgoNotifications.setBadge(4)
+await CapgoNotifications.incrementBadge()
+await CapgoNotifications.clearBadge()
+```
+
+From your backend:
+
+```bash
+curl -X POST 'https://api.capgo.app/notifications/badge' \
+  -H 'Content-Type: application/json' \
+  -H 'x-api-key: CAPGO_API_KEY' \
+  -d '{
+    "appId": "com.example.app",
+    "target": { "externalId": "customer-user-123" },
+    "badge": 4
+  }'
+```
+
+## 11. Enable Silent Update Checks
+
+Silent update checks connect this plugin with `@capgo/capacitor-updater`.
+
+In the app:
+
+```typescript
+await CapgoNotifications.enableUpdaterIntegration({
+  enabled: true,
+  installMode: 'next',
+})
+```
+
+In Capgo, enable **Push update to users** in the app's Notifications settings. Then send an update check from the dashboard or API:
+
+```bash
+curl -X POST 'https://api.capgo.app/notifications/update-check' \
+  -H 'Content-Type: application/json' \
+  -H 'x-api-key: CAPGO_API_KEY' \
+  -d '{
+    "appId": "com.example.app",
+    "target": { "externalId": "customer-user-123" },
+    "installMode": "next"
+  }'
+```
+
+The notification is silent and uses a collapse ID so repeated update checks replace each other when the platform supports collapse behavior.
+
+## Validation Checklist
+
+- The app appears in Capgo recipient lookup for the expected `externalId`.
+- Permission is `granted` or the user has accepted notification permission.
+- The registered platform is `android` or `ios`.
+- `registrationChanged` fires after a token refresh.
+- A foreground test logs `notificationReceived`.
+- Opening a notification logs `notificationOpened`.
+- Dashboard stats show queued and sent events, then received/opened when the device reports them.
+- Silent update checks log a result from `runUpdateCheck` or the updater integration.
+
+## Keep going from Getting Started
+
+If setup does not work, use [Debugging](/docs/plugins/notifications/debugging/) before changing app code. Most failures are caused by identity proof mismatch, platform credential setup, OS permission state, background throttling, or app/package ID mismatch.

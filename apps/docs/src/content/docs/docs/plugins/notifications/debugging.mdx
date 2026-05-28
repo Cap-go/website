@@ -1,0 +1,301 @@
+---
+title: Debugging
+description: "Troubleshoot Capgo native notification setup, device registration, delivery, foreground events, background notifications, badges, and silent update checks."
+sidebar:
+  order: 3
+---
+
+Use this checklist when a notification does not register, does not arrive, does not show, or does not update Capgo stats.
+
+## Start With The Device Record
+
+Before debugging native code, confirm that Capgo can see the device.
+
+1. Open the app and sign in as the user you want to test.
+2. Call `CapgoNotifications.register(...)` after sign-in.
+3. In Capgo, open **Notifications > Recipient lookup**.
+4. Search by the same external customer ID.
+
+You should see at least one active device with:
+
+- `recipientKey`
+- `deviceKey`
+- platform `android` or `ios`
+- permission state
+- app version
+- plugin version
+- tags and attributes
+
+If lookup returns no device, the send path cannot target that user.
+
+## Add Temporary Debug Listeners
+
+Add temporary listeners while testing. Remove noisy logs before shipping.
+
+```typescript
+await CapgoNotifications.addListener('registrationChanged', (token) => {
+  console.log('[CapgoNotifications] registrationChanged', token.value.slice(0, 12))
+})
+
+await CapgoNotifications.addListener('notificationReceived', (notification) => {
+  console.log('[CapgoNotifications] notificationReceived', notification.id, notification.data)
+})
+
+await CapgoNotifications.addListener('notificationOpened', (event) => {
+  console.log('[CapgoNotifications] notificationOpened', event.notification.id, event.actionId)
+})
+
+await CapgoNotifications.addListener('backgroundNotification', async (event) => {
+  console.log('[CapgoNotifications] backgroundNotification', event.notification.id, event.notification.data)
+  await event.finish()
+})
+```
+
+## Collect This Information
+
+When debugging with your team or Capgo support, collect:
+
+- Capgo app ID.
+- App package ID or iOS bundle ID.
+- Device platform and OS version.
+- App version and build number.
+- Plugin version.
+- External customer ID.
+- `recipientKey` and `deviceKey` from registration or recipient lookup.
+- Campaign ID or notification ID.
+- Whether the app was foreground, background, force-closed, or freshly installed.
+- Device logs from the run that reproduced the issue.
+
+## Use Device Logs
+
+Keep one real device connected while you send a test notification.
+
+On Android:
+
+- Open Android Studio Logcat.
+- Filter by the app package ID.
+- Watch for the notification permission request, native token refresh, message receive, and JavaScript listener logs.
+- If a visible notification does not show, inspect the notification channel importance and Android 13+ permission state first.
+
+On iOS:
+
+- Run the app from Xcode on a physical device.
+- Open the Xcode console or **Devices and Simulators** logs.
+- Filter by the bundle ID and `CapgoNotifications`.
+- Confirm `AppDelegate.swift` forwards remote notifications and that the background mode capability is enabled.
+
+Send one foreground test first, then one background test, then one silent update-check test. This order separates JavaScript listener issues from OS background delivery limits.
+
+## Registration Problems
+
+### CLI Setup Did Not Finish
+
+Run the setup command from the folder that contains `capacitor.config.*`:
+
+```bash
+npx @capgo/cli@latest notifications setup com.example.app
+```
+
+If the command cannot infer your app ID, pass it explicitly as shown above. If package installation fails, confirm Capgo has enabled private-preview package access for your npm account, then rerun the command.
+
+### Device Does Not Appear In Recipient Lookup
+
+Check:
+
+- `register` is called after your app has an authenticated user.
+- `externalId` matches the user ID you search in the dashboard.
+- `identityProof` was minted by your backend for the same `appId` and `externalId`.
+- `appId` in `configure` matches the Capgo app.
+- `consent` is not set to `false` unless the user opted out.
+- The device has network access to `https://api.capgo.app`.
+- The native push token was created. Use `registrationChanged` to confirm token refresh.
+
+### Invalid Identity Proof
+
+The proof is bound to the Capgo app ID and external ID. If either value changes, mint a new proof.
+
+Do not cache one proof forever or reuse a proof across apps. Mint it from your backend after login, return it to the app, and call `register`.
+
+### Device Registered But Has Permission Denied
+
+The plugin can register device state even when the user denied permission. You can still see the device, but visible notifications will not show.
+
+Use a permission primer screen before the OS prompt. Explain what the user gets, then ask for permission only when the action makes sense.
+
+## Delivery Problems
+
+### Queued But Not Sent
+
+Check:
+
+- Platform credential status is `configured` in Capgo.
+- The worker environment contains the exact secret reference shown by the dashboard.
+- The package ID or bundle ID in the app matches the platform push setup.
+- The target audience resolves to at least one active device.
+- The campaign is not limited to a tag or segment the device does not have.
+
+### Sent But Not Received
+
+Check:
+
+- The device is online.
+- The app was not force-stopped by the user.
+- The OS notification permission is granted.
+- Android battery restrictions are not blocking the app during testing.
+- iOS Low Power Mode and background refresh restrictions are not affecting background delivery.
+- The notification was not replaced by another notification with the same collapse ID.
+
+Native push platforms can accept a notification and still delay, throttle, coalesce, or drop delivery later. Treat provider accepted stats as "accepted for delivery", not proof that the device displayed it.
+
+### Received But Not Displayed
+
+Check:
+
+- The app was not foregrounded. Foreground notifications are usually delivered to JavaScript so your app can decide what UI to show.
+- Android notification channel importance is high enough to display an alert.
+- Android 13+ notification permission is granted.
+- iOS Focus, notification summary, or per-app notification settings are not hiding the notification.
+- Badge clearing or app-open logic is not removing delivered notifications during testing.
+
+## Background Notification Problems
+
+### Background Callback Does Not Run
+
+Background notifications are best-effort. The OS can skip them.
+
+Check:
+
+- iOS has **Background Modes > Remote notifications** enabled.
+- iOS `AppDelegate.swift` forwards remote notifications to `CapgoNotificationsRemoteNotification`.
+- You test iOS background behavior on a physical device.
+- The app was not force-quit by the user.
+- The background handler calls `finish()`.
+- Work inside the callback is short, network-safe, and idempotent.
+
+On iOS, background pushes may be throttled if you send too many, use too much time, or the user rarely opens the app. This is expected platform behavior.
+
+### Background Started But Not Finished
+
+If stats show `background_started` without `background_finished`, the JavaScript handler likely threw, timed out, or did not call `finish()`.
+
+Wrap the handler in `try/finally`:
+
+```typescript
+await CapgoNotifications.addListener('backgroundNotification', async (event) => {
+  try {
+    await doShortBackgroundWork(event.notification.data)
+  } finally {
+    await event.finish()
+  }
+})
+```
+
+## Silent Update Check Problems
+
+### Update Check Notification Arrives But No Update Installs
+
+Check:
+
+- `@capgo/capacitor-updater` is installed and configured.
+- `autoUpdater` is `true` or `enableUpdaterIntegration` was called.
+- The app's Notifications settings allow push update checks.
+- The target device belongs to the channel you expect.
+- The app has a newer bundle available in Capgo.
+- Your update install mode is correct: `next` queues for the next restart or background cycle, `set` installs as soon as the updater can safely do it.
+
+Run a manual check while the app is open:
+
+```typescript
+const result = await CapgoNotifications.runUpdateCheck({
+  enabled: true,
+  installMode: 'next',
+})
+
+console.log(result)
+```
+
+If the manual check returns `unavailable`, inspect the updater plugin setup first.
+
+## Badge Problems
+
+Check:
+
+- The target resolves to the right device in recipient lookup.
+- The platform supports app badges for the launcher or home screen being tested.
+- The user has not disabled badges in OS notification settings.
+- The app does not clear badges immediately on startup.
+- You are not racing local `setBadge` calls against backend badge sends.
+
+## Stats Problems
+
+### Stats Look Duplicated
+
+Notification sending is at-least-once. Queue retry and platform retry can duplicate a send. Use notification IDs and collapse IDs when your app action must be idempotent.
+
+### Stats Are Missing For Old Devices
+
+The Analytics Engine registry is for active devices, not a forever database. The plugin should refresh registration on app start, token refresh, external ID change, and periodically before the active-device retention window.
+
+### Open Events Are Missing
+
+Check:
+
+- The notification includes a stable `id`.
+- `notificationOpened` listener is registered during app startup.
+- The app is not replacing the native open flow with custom code before the plugin sees it.
+- The user actually tapped the notification rather than opening the app manually.
+
+## API Debug Commands
+
+Lookup a recipient:
+
+```bash
+curl -X POST 'https://api.capgo.app/notifications/recipients/lookup' \
+  -H 'Content-Type: application/json' \
+  -H 'x-api-key: CAPGO_API_KEY' \
+  -d '{
+    "appId": "com.example.app",
+    "externalId": "customer-user-123"
+  }'
+```
+
+Read stats:
+
+```bash
+curl 'https://api.capgo.app/notifications/stats?app_id=com.example.app&days=7' \
+  -H 'x-api-key: CAPGO_API_KEY'
+```
+
+Send a foreground test:
+
+```bash
+curl -X POST 'https://api.capgo.app/notifications/send' \
+  -H 'Content-Type: application/json' \
+  -H 'x-api-key: CAPGO_API_KEY' \
+  -d '{
+    "appId": "com.example.app",
+    "target": { "externalId": "customer-user-123" },
+    "payload": {
+      "title": "Capgo test",
+      "body": "Open this notification to test events.",
+      "data": { "debug": "true" }
+    }
+  }'
+```
+
+## Common Root Causes
+
+| Symptom | Likely cause |
+| --- | --- |
+| Device missing from lookup | `register` not called, proof mismatch, consent false, app ID mismatch. |
+| Permission denied | OS prompt denied or not requested yet. |
+| Queued but no sent stats | Platform credentials are missing or disabled. |
+| Sent but no received stats | Device offline, OS throttling, app force-stopped, or token invalid. |
+| Foreground notification logs but no banner | App is foregrounded and must show its own in-app UI. |
+| Background never runs on iOS | Missing capabilities, missing AppDelegate forwarding, force-quit app, or OS throttling. |
+| Update check does nothing | Updater integration disabled, no newer bundle, wrong channel, or install mode misunderstood. |
+| Badge resets | App startup code clears badges or local and backend badge writes race. |
+
+## Keep going from Debugging
+
+After the device registers and a test notification works, use [Getting Started](/docs/plugins/notifications/getting-started/) to wire badges, campaign targeting, and silent update checks into your production app.

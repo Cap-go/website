@@ -136,6 +136,7 @@ const pluginEntries = [
   ['Native Geocoder', 'nativegeocoder'],
   ['Native Market', 'native-market'],
   ['Native Navigation', 'native-navigation'],
+  ['Notifications', 'notifications', [linkItem('Debugging', '/docs/plugins/notifications/debugging')]],
   section(
     'Native Purchases',
     [
