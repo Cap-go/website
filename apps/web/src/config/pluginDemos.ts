@@ -110,8 +110,8 @@ export const pluginDemosBySlug: Record<string, PluginDemoGroup> = {
       {
         title: 'Toast notification flow',
         alt: 'Animated Pretty Toast demo on an external device',
-        src: `${demoBase}/capacitor-pretty-toast/demo-pretty-toast.gif`,
-        aspect: 'wide',
+        src: `${demoBase}/capacitor-pretty-toast/demo-pretty-toast.webp`,
+        aspect: 'phone',
       },
     ],
   },
