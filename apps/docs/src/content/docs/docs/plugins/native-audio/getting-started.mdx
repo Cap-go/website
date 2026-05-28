@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: "Install @capgo/native-audio and start using its current Capacitor API."
+description: "Install @capgo/capacitor-native-audio and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
@@ -8,14 +8,14 @@ sidebar:
 ## Install
 
 ```bash
-bun add @capgo/native-audio
-bunx cap sync
+npm install @capgo/capacitor-native-audio
+npx cap sync
 ```
 
 ## Import
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 ```
 
 ## API Overview
@@ -25,7 +25,7 @@ import { NativeAudio } from '@capgo/native-audio';
 Configure the audio player
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.configure({} as ConfigureOptions);
 ```
@@ -35,7 +35,7 @@ await NativeAudio.configure({} as ConfigureOptions);
 Load an audio file
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.preload({} as PreloadOptions);
 ```
@@ -65,7 +65,7 @@ that don't require manual state management.
 - `playOnce()`: Handles everything automatically with a single call
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 // Simple one-shot playback
 await NativeAudio.playOnce({ assetPath: 'audio/notification.mp3' });
@@ -91,7 +91,7 @@ await NativeAudio.stop({ assetId });
 Check if an audio file is preloaded
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.isPreloaded({} as PreloadOptions);
 ```
@@ -101,7 +101,7 @@ await NativeAudio.isPreloaded({} as PreloadOptions);
 Play an audio file
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.play({} as AssetPlayOptions);
 ```
@@ -111,7 +111,7 @@ await NativeAudio.play({} as AssetPlayOptions);
 Pause an audio file
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.pause({} as AssetPauseOptions);
 ```
@@ -121,7 +121,7 @@ await NativeAudio.pause({} as AssetPauseOptions);
 Resume an audio file
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.resume({} as AssetResumeOptions);
 ```
@@ -131,7 +131,7 @@ await NativeAudio.resume({} as AssetResumeOptions);
 Stop an audio file
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.loop({} as Assets);
 ```
@@ -141,7 +141,7 @@ await NativeAudio.loop({} as Assets);
 Stop an audio file
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.stop({} as AssetStopOptions);
 ```
@@ -151,7 +151,7 @@ await NativeAudio.stop({} as AssetStopOptions);
 Unload an audio file
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.unload({} as Assets);
 ```
@@ -161,7 +161,7 @@ await NativeAudio.unload({} as Assets);
 Set the volume of an audio file
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.setVolume({} as AssetVolume);
 ```
@@ -171,7 +171,7 @@ await NativeAudio.setVolume({} as AssetVolume);
 Set the rate of an audio file
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.setRate({} as AssetRate);
 ```
@@ -181,7 +181,7 @@ await NativeAudio.setRate({} as AssetRate);
 Set the current time of an audio file
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.setCurrentTime({} as AssetSetTime);
 ```
@@ -191,7 +191,7 @@ await NativeAudio.setCurrentTime({} as AssetSetTime);
 Get the current time of an audio file
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.getCurrentTime({} as Assets);
 ```
@@ -201,7 +201,7 @@ await NativeAudio.getCurrentTime({} as Assets);
 Get the duration of an audio file in seconds
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.getDuration({} as Assets);
 ```
@@ -211,7 +211,7 @@ await NativeAudio.getDuration({} as Assets);
 Check if an audio file is playing
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.isPlaying({} as Assets);
 ```
@@ -221,7 +221,7 @@ await NativeAudio.isPlaying({} as Assets);
 Clear the audio cache for remote audio files
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.clearCache();
 ```
@@ -231,7 +231,7 @@ await NativeAudio.clearCache();
 Set debug mode logging
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.setDebugMode({} as { enabled: boolean });
 ```
@@ -243,7 +243,7 @@ This method stops all playing audio and reverts any audio session changes made b
 Use this when you need to ensure compatibility with other audio plugins
 
 ```typescript
-import { NativeAudio } from '@capgo/native-audio';
+import { NativeAudio } from '@capgo/capacitor-native-audio';
 
 await NativeAudio.deinitPlugin();
 ```
@@ -615,4 +615,4 @@ This page is generated from the plugin's `src/definitions.ts`. Re-run the sync w
 
 ## Keep going from Getting Started
 
-If you are using **Getting Started** to plan native media and interface behavior, connect it with [Using @capgo/native-audio](/plugins/capacitor-native-audio/) for the native capability in Using @capgo/native-audio, [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, and [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player.
+If you are using **Getting Started** to plan native media and interface behavior, connect it with [Using @capgo/capacitor-native-audio](/plugins/capacitor-native-audio/) for the native capability in Using @capgo/capacitor-native-audio, [Using @capgo/capacitor-live-activities](/plugins/capacitor-live-activities/) for the native capability in Using @capgo/capacitor-live-activities, [@capgo/capacitor-live-activities](/docs/plugins/live-activities/) for the implementation detail in @capgo/capacitor-live-activities, [Using @capgo/capacitor-video-player](/plugins/capacitor-video-player/) for the native capability in Using @capgo/capacitor-video-player, and [@capgo/capacitor-video-player](/docs/plugins/video-player/) for the implementation detail in @capgo/capacitor-video-player.

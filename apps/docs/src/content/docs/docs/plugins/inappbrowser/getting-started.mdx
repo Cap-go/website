@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: "Install @capgo/inappbrowser and start using its current Capacitor API."
+description: "Install @capgo/capacitor-inappbrowser and start using its current Capacitor API."
 sidebar:
   order: 2
 ---
@@ -8,14 +8,14 @@ sidebar:
 ## Install
 
 ```bash
-bun add @capgo/inappbrowser
-bunx cap sync
+npm install @capgo/capacitor-inappbrowser
+npx cap sync
 ```
 
 ## Import
 
 ```typescript
-import { InAppBrowser } from '@capgo/inappbrowser';
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 ```
 
 ## API Overview
@@ -25,7 +25,7 @@ import { InAppBrowser } from '@capgo/inappbrowser';
 Navigates back in the WebView's history if possible
 
 ```typescript
-import { InAppBrowser } from '@capgo/inappbrowser';
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
 await InAppBrowser.goBack();
 ```
@@ -35,7 +35,7 @@ await InAppBrowser.goBack();
 Open url in a new window fullscreen, on android it use chrome custom tabs, on ios it use SFSafariViewController
 
 ```typescript
-import { InAppBrowser } from '@capgo/inappbrowser';
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
 await InAppBrowser.open({} as OpenOptions);
 ```
@@ -46,7 +46,7 @@ Clear cookies of url
 When `id` is omitted, applies to all open webviews.
 
 ```typescript
-import { InAppBrowser } from '@capgo/inappbrowser';
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
 await InAppBrowser.clearCookies({} as ClearCookieOptions);
 ```
@@ -57,7 +57,7 @@ Clear all cookies
 When `id` is omitted, applies to all open webviews.
 
 ```typescript
-import { InAppBrowser } from '@capgo/inappbrowser';
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
 await InAppBrowser.clearAllCookies();
 ```
@@ -68,7 +68,7 @@ Clear cache
 When `id` is omitted, applies to all open webviews.
 
 ```typescript
-import { InAppBrowser } from '@capgo/inappbrowser';
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
 await InAppBrowser.clearCache();
 ```
@@ -78,7 +78,7 @@ await InAppBrowser.clearCache();
 Get cookies for a specific URL.
 
 ```typescript
-import { InAppBrowser } from '@capgo/inappbrowser';
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
 await InAppBrowser.getCookies({} as GetCookieOptions);
 ```
@@ -89,7 +89,7 @@ Close the webview.
 When `id` is omitted, closes the active webview.
 
 ```typescript
-import { InAppBrowser } from '@capgo/inappbrowser';
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
 await InAppBrowser.close();
 ```
@@ -101,7 +101,7 @@ Use show() to bring it back.
 When `id` is omitted, targets the active webview.
 
 ```typescript
-import { InAppBrowser } from '@capgo/inappbrowser';
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
 await InAppBrowser.hide();
 ```
@@ -112,7 +112,7 @@ Show a previously hidden webview.
 When `id` is omitted, targets the active webview.
 
 ```typescript
-import { InAppBrowser } from '@capgo/inappbrowser';
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
 await InAppBrowser.show();
 ```
@@ -131,7 +131,7 @@ Promise timing differs by platform when `isPresentAfterPageLoad` is used.
 Android resolves with `{ id }` after the dialog is ready to control, while iOS resolves with `{ id }` immediately after creating the native webview.
 
 ```typescript
-import { InAppBrowser } from '@capgo/inappbrowser';
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
 await InAppBrowser.openWebView({} as OpenWebViewOptions);
 ```
@@ -142,7 +142,7 @@ Injects JavaScript code into the InAppBrowser window.
 When `id` is omitted, executes in all open webviews.
 
 ```typescript
-import { InAppBrowser } from '@capgo/inappbrowser';
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
 await InAppBrowser.executeScript({} as { code: string; id?: string });
 ```
@@ -154,7 +154,7 @@ Sends an event to the webview (in-app browser). In the webview JavaScript, liste
 When `id` is omitted, broadcasts to all open webviews.
 
 ```typescript
-import { InAppBrowser } from '@capgo/inappbrowser';
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
 await InAppBrowser.postMessage({} as { detail: Record<string, any>; id?: string });
 ```
@@ -165,7 +165,7 @@ Captures the current webview viewport as a PNG screenshot.
 When `id` is omitted, targets the active webview.
 
 ```typescript
-import { InAppBrowser } from '@capgo/inappbrowser';
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
 await InAppBrowser.takeScreenshot();
 ```
@@ -176,7 +176,7 @@ Sets the URL of the webview.
 When `id` is omitted, targets the active webview.
 
 ```typescript
-import { InAppBrowser } from '@capgo/inappbrowser';
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
 await InAppBrowser.setUrl({} as { url: string; id?: string });
 ```
@@ -187,7 +187,7 @@ Internal method used by `addProxyHandler()` to send a proxy decision back to nat
 Forward the original `phase` when replying to a manual `proxyRequest` listener.
 
 ```typescript
-import { InAppBrowser } from '@capgo/inappbrowser';
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
 await InAppBrowser.handleProxyRequest({} as {
     requestId: string;
@@ -203,7 +203,7 @@ await InAppBrowser.handleProxyRequest({} as {
 Reload the current web page.
 
 ```typescript
-import { InAppBrowser } from '@capgo/inappbrowser';
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
 await InAppBrowser.reload();
 ```
@@ -215,7 +215,7 @@ Allows changing the size and position of the webview at runtime.
 When `id` is omitted, targets the active webview.
 
 ```typescript
-import { InAppBrowser } from '@capgo/inappbrowser';
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
 await InAppBrowser.updateDimensions({} as DimensionOptions & { id?: string });
 ```
@@ -227,7 +227,7 @@ When `id` is omitted, targets the active webview.
 On Web, this method is a no-op and resolves without changing layout.
 
 ```typescript
-import { InAppBrowser } from '@capgo/inappbrowser';
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
 await InAppBrowser.setEnabledSafeTopMargin({} as { enabled: boolean; id?: string });
 ```
@@ -239,7 +239,7 @@ When `id` is omitted, targets the active webview.
 On Web, this method is a no-op and resolves without changing layout.
 
 ```typescript
-import { InAppBrowser } from '@capgo/inappbrowser';
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
 await InAppBrowser.setEnabledSafeBottomMargin({} as { enabled: boolean; id?: string });
 ```
@@ -289,7 +289,7 @@ And in the AndroidManifest.xml file:
 ```
 
 ```typescript
-import { InAppBrowser } from '@capgo/inappbrowser';
+import { InAppBrowser } from '@capgo/capacitor-inappbrowser';
 
 await InAppBrowser.openSecureWindow({} as OpenSecureWindowOptions);
 ```
@@ -1183,4 +1183,4 @@ This page is generated from the plugin's `src/definitions.ts`. Re-run the sync w
 
 ## Keep going from Getting Started
 
-If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/inappbrowser](/plugins/capacitor-inappbrowser/) for the native capability in Using @capgo/inappbrowser, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.
+If you are using **Getting Started** to plan dashboard and API operations, connect it with [Using @capgo/capacitor-inappbrowser](/plugins/capacitor-inappbrowser/) for the native capability in Using @capgo/capacitor-inappbrowser, [API Overview](/docs/public-api/) for the implementation detail in API Overview, [Introduction](/docs/webapp/) for the implementation detail in Introduction, [API Keys](/docs/public-api/api-keys/) for the implementation detail in API Keys, and [Devices](/docs/public-api/devices/) for the implementation detail in Devices.
