@@ -81,10 +81,14 @@ const { title, description, githubStars, npmDownloads, href, name, tutorial, ico
 const demoGroup = id ? pluginDemosBySlug[id] : undefined
 
 const npmHref = name ? `https://www.npmjs.com/package/${name}` : `https://www.npmjs.com/search?q=${encodeURIComponent(title)}`
-const packageRenameNote =
-  name === '@capgo/capacitor-nativegeocoder'
-    ? 'Renamed from @capgo/nativegeocoder to @capgo/capacitor-nativegeocoder so the package name matches the Capacitor plugin repository.'
-    : undefined
+const packageRenameNotes: Record<string, string> = {
+  '@capgo/capacitor-inappbrowser': 'Renamed from @capgo/inappbrowser to @capgo/capacitor-inappbrowser.',
+  '@capgo/capacitor-native-audio': 'Renamed from @capgo/native-audio to @capgo/capacitor-native-audio.',
+  '@capgo/capacitor-native-market': 'Renamed from @capgo/native-market to @capgo/capacitor-native-market.',
+  '@capgo/capacitor-nativegeocoder': 'Renamed from @capgo/nativegeocoder to @capgo/capacitor-nativegeocoder.',
+  '@capgo/capacitor-ricoh360': 'Renamed from @capgo/ricoh360 to @capgo/capacitor-ricoh360.',
+}
+const packageRenameNote = name ? packageRenameNotes[name] : undefined
 const docsHref = docsSlug ? getRelativeLocaleUrl(docsLocale, `docs/plugins/${docsSlug}/`) : getRelativeLocaleUrl(locale, 'docs/plugins/')
 
 const content: { title?: string; description?: string; image?: string; author?: string; ldJSON?: Object } = {}
@@ -137,14 +141,14 @@ content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.p
                       <span class="group relative inline-flex items-center">
                         <span
                           tabindex="0"
-                          aria-describedby="nativegeocoder-rename-tooltip"
+                          aria-describedby="package-rename-tooltip"
                           title={packageRenameNote}
                           class="rounded-full border border-amber-300/25 bg-amber-300/10 px-3 py-1 text-sm text-amber-100 transition outline-none group-focus-within:border-amber-200/45 group-hover:border-amber-200/45"
                         >
                           Renamed
                         </span>
                         <span
-                          id="nativegeocoder-rename-tooltip"
+                          id="package-rename-tooltip"
                           role="tooltip"
                           class="pointer-events-none absolute top-full left-1/2 z-20 mt-2 w-72 -translate-x-1/2 rounded-md border border-white/10 bg-gray-950 px-3 py-2 text-xs leading-5 text-gray-200 opacity-0 shadow-xl transition group-focus-within:opacity-100 group-hover:opacity-100"
                         >

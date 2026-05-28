@@ -122,10 +122,10 @@ A collection of high-quality Capacitor plugins maintained by [Capgo](https://cap
 </td>
 <td align="center" width="33%">
 <h3><a href="https://github.com/Cap-go/capacitor-inappbrowser/">In App Browser</a></h3>
-<p><code>@capgo/inappbrowser</code></p>
+<p><code>@capgo/capacitor-inappbrowser</code></p>
 <p>Open web pages in a customizable in-app browser without leaving your application</p>
 <p>
-<a href="https://www.npmjs.com/package/@capgo/inappbrowser"><img src="https://img.shields.io/npm/dw/@capgo/inappbrowser?style=flat-square&label=downloads" alt="npm downloads"></a>
+<a href="https://www.npmjs.com/package/@capgo/capacitor-inappbrowser"><img src="https://img.shields.io/npm/dw/@capgo/capacitor-inappbrowser?style=flat-square&label=downloads" alt="npm downloads"></a>
 <a href="https://github.com/Cap-go/capacitor-inappbrowser/"><img src="https://img.shields.io/github/stars/Cap-go/capacitor-inappbrowser?style=flat-square&label=stars" alt="GitHub stars"></a>
 </p>
 <p><a href="https://capgo.app/plugins/capacitor-inappbrowser/">Docs</a> | <a href="https://github.com/Cap-go/capacitor-inappbrowser/">GitHub</a></p>
@@ -154,10 +154,10 @@ A collection of high-quality Capacitor plugins maintained by [Capgo](https://cap
 </td>
 <td align="center" width="33%">
 <h3><a href="https://github.com/Cap-go/capacitor-native-audio/">Native Audio</a></h3>
-<p><code>@capgo/native-audio</code></p>
+<p><code>@capgo/capacitor-native-audio</code></p>
 <p>Play short audio files with low latency using native audio engine for games and apps</p>
 <p>
-<a href="https://www.npmjs.com/package/@capgo/native-audio"><img src="https://img.shields.io/npm/dw/@capgo/native-audio?style=flat-square&label=downloads" alt="npm downloads"></a>
+<a href="https://www.npmjs.com/package/@capgo/capacitor-native-audio"><img src="https://img.shields.io/npm/dw/@capgo/capacitor-native-audio?style=flat-square&label=downloads" alt="npm downloads"></a>
 <a href="https://github.com/Cap-go/capacitor-native-audio/"><img src="https://img.shields.io/github/stars/Cap-go/capacitor-native-audio?style=flat-square&label=stars" alt="GitHub stars"></a>
 </p>
 <p><a href="https://capgo.app/plugins/capacitor-native-audio/">Docs</a> | <a href="https://github.com/Cap-go/capacitor-native-audio/">GitHub</a></p>
@@ -326,10 +326,10 @@ A collection of high-quality Capacitor plugins maintained by [Capgo](https://cap
 <tr>
 <td align="center" width="33%">
 <h3><a href="https://github.com/Cap-go/capacitor-native-market/">Native Market</a></h3>
-<p><code>@capgo/native-market</code></p>
+<p><code>@capgo/capacitor-native-market</code></p>
 <p>Deep link users directly to your app page on Google Play Store or Apple App Store</p>
 <p>
-<a href="https://www.npmjs.com/package/@capgo/native-market"><img src="https://img.shields.io/npm/dw/@capgo/native-market?style=flat-square&label=downloads" alt="npm downloads"></a>
+<a href="https://www.npmjs.com/package/@capgo/capacitor-native-market"><img src="https://img.shields.io/npm/dw/@capgo/capacitor-native-market?style=flat-square&label=downloads" alt="npm downloads"></a>
 <a href="https://github.com/Cap-go/capacitor-native-market/"><img src="https://img.shields.io/github/stars/Cap-go/capacitor-native-market?style=flat-square&label=stars" alt="GitHub stars"></a>
 </p>
 <p><a href="https://capgo.app/plugins/capacitor-native-market/">Docs</a> | <a href="https://github.com/Cap-go/capacitor-native-market/">GitHub</a></p>
@@ -998,10 +998,10 @@ A collection of high-quality Capacitor plugins maintained by [Capgo](https://cap
 <tr>
 <td align="center" width="33%">
 <h3><a href="https://github.com/Cap-go/capacitor-ricoh360-camera-plugin/">Ricoh360 Camera</a></h3>
-<p><code>@capgo/capacitor-ricoh360-camera-plugin</code></p>
+<p><code>@capgo/capacitor-ricoh360</code></p>
 <p>Control Ricoh Theta 360-degree cameras for immersive panoramic photography</p>
 <p>
-<a href="https://www.npmjs.com/package/@capgo/capacitor-ricoh360-camera-plugin"><img src="https://img.shields.io/npm/dw/@capgo/capacitor-ricoh360-camera-plugin?style=flat-square&label=downloads" alt="npm downloads"></a>
+<a href="https://www.npmjs.com/package/@capgo/capacitor-ricoh360"><img src="https://img.shields.io/npm/dw/@capgo/capacitor-ricoh360?style=flat-square&label=downloads" alt="npm downloads"></a>
 <a href="https://github.com/Cap-go/capacitor-ricoh360-camera-plugin/"><img src="https://img.shields.io/github/stars/Cap-go/capacitor-ricoh360-camera-plugin?style=flat-square&label=stars" alt="GitHub stars"></a>
 </p>
 <p><a href="https://capgo.app/plugins/capacitor-ricoh360-camera-plugin/">Docs</a> | <a href="https://github.com/Cap-go/capacitor-ricoh360-camera-plugin/">GitHub</a></p>
