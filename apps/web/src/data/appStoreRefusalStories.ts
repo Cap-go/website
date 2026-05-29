@@ -6,6 +6,7 @@ export interface RefusalStoryImage {
 export interface RefusalStory {
   id: string
   title: string
+  sharedBy?: string
   platform: 'Apple App Store' | 'Google Play'
   severity: 'Painful' | 'Absurd' | 'Expensive' | 'Launch blocker'
   appType: string
@@ -17,6 +18,44 @@ export interface RefusalStory {
 }
 
 export const refusalStories: RefusalStory[] = [
+  {
+    id: 'adrien-target-users-unclear',
+    title: 'The app with users Apple could not identify',
+    sharedBy: 'Adrien',
+    platform: 'Apple App Store',
+    severity: 'Absurd',
+    appType: 'Version 1.0 iPad app',
+    delay: 'Review paused on May 29, 2026',
+    outcome: 'Apple asked for a target-user explanation before continuing review.',
+    quote: 'Who will be the users of this app?',
+    story:
+      'Adrien submitted version 1.0 and Apple stopped the review under Guideline 2.1, Information Needed. There was no crash report, no broken feature, and no requested binary fix in the message. The only blocker was that Apple wanted a detailed answer explaining who the app was for before review could continue.',
+    images: [
+      {
+        src: '/app-store-assets/adrien-target-users-refusal.svg',
+        alt: 'Apple App Review message asking who will be the users of Adrien app',
+      },
+    ],
+  },
+  {
+    id: 'adrien-saturated-category-spam',
+    title: 'The app Apple decided was not different enough',
+    sharedBy: 'Adrien',
+    platform: 'Apple App Store',
+    severity: 'Painful',
+    appType: 'Entertainment sound app',
+    delay: 'Rejected on May 15, 2026',
+    outcome: 'Apple rejected it under Guideline 4.3(b), saying the app duplicated a saturated category.',
+    quote: 'There are already enough of these apps on the App Store.',
+    story:
+      'Adrien got a Design - Spam refusal because Apple did not see enough distinct value compared with similar apps. The review said the app was primarily a fart or burp app, and even if it had features that distinguished it, that functionality was prominent enough for Apple to treat the whole app as duplicate content in a saturated category.',
+    images: [
+      {
+        src: '/app-store-assets/adrien-saturated-category-refusal.svg',
+        alt: 'Apple App Review message saying Adrien app did not differ enough from similar apps',
+      },
+    ],
+  },
   {
     id: 'metadata-loop-before-launch',
     title: 'The metadata loop that ate launch week',

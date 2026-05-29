@@ -121,7 +121,7 @@ const severityStyles = {
                   <div class={`grid gap-2 p-4 ${story.images.length === 1 ? 'grid-cols-1' : 'grid-cols-2'}`}>
                     {story.images.slice(0, 5).map((image, index) => (
                       <figure class={`${index === 0 && story.images.length > 2 ? 'col-span-2' : ''} overflow-hidden rounded-md border border-zinc-200 bg-zinc-100`}>
-                        <img src={image.src} alt={image.alt} class="aspect-[16/10] w-full object-cover" loading="lazy" width="800" height="500" />
+                        <img src={image.src} alt={image.alt} class="aspect-[16/10] w-full bg-zinc-50 object-contain" loading="lazy" width="800" height="500" />
                       </figure>
                     ))}
                   </div>
@@ -130,6 +130,11 @@ const severityStyles = {
                     <div class="flex flex-wrap gap-2">
                       <span class={`inline-flex min-h-8 items-center rounded-full border px-3 text-xs font-black ${platformStyles[story.platform]}`}>{story.platform}</span>
                       <span class={`inline-flex min-h-8 items-center rounded-full border px-3 text-xs font-black ${severityStyles[story.severity]}`}>{story.severity}</span>
+                      {story.sharedBy && (
+                        <span class="inline-flex min-h-8 items-center rounded-full border border-zinc-300 bg-white px-3 text-xs font-black text-zinc-800">
+                          Shared by {story.sharedBy}
+                        </span>
+                      )}
                     </div>
                     <h3 class="mt-4 text-2xl font-black text-zinc-950">{story.title}</h3>
                     <blockquote class="mt-4 border-l-4 border-red-600 pl-4 text-base leading-7 font-semibold text-zinc-800">"{story.quote}"</blockquote>
