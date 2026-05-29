@@ -136,6 +136,11 @@ const pluginEntries = [
   ['Native Geocoder', 'nativegeocoder'],
   ['Native Market', 'native-market'],
   ['Native Navigation', 'native-navigation'],
+  [
+    'Network Diagnostics',
+    'network-diagnostics',
+    [linkItem('iOS setup', '/docs/plugins/network-diagnostics/ios'), linkItem('Android setup', '/docs/plugins/network-diagnostics/android')],
+  ],
   section(
     'Native Purchases',
     [

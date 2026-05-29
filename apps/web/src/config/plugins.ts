@@ -124,6 +124,7 @@ const actionDefinitionRows =
 @capgo/capacitor-printer|github.com/Cap-go|Capacitor plugin for printing documents, HTML, PDFs, images and web views|https://github.com/Cap-go/capacitor-printer/|Printer
 @capgo/capacitor-zip|github.com/Cap-go|A free Capacitor plugin for zipping and unzipping files on iOS, Android, and Web.|https://github.com/Cap-go/capacitor-zip/|Zip
 @capgo/capacitor-zebra-datawedge|github.com/Cap-go|Manage Zebra DataWedge profiles, notifications, queries, and scan triggers on Zebra Android devices|https://github.com/Cap-go/capacitor-zebra-datawedge/|Zebra DataWedge
+@capgo/capacitor-network-diagnostics|github.com/Cap-go|Run native network diagnostics for URL reachability, TCP ports, WebSocket handshakes, speed, and packet loss|https://github.com/Cap-go/capacitor-network-diagnostics/|Network Diagnostics
 @capgo/capacitor-wifi|github.com/Cap-go|Manage WiFi connectivity for your Capacitor app|https://github.com/Cap-go/capacitor-wifi/|WiFi
 @capgo/capacitor-screen-orientation|github.com/Cap-go|Screen orientation plugin with support for bypassing orientation lock|https://github.com/Cap-go/capacitor-screen-orientation/|Screen Orientation
 @capgo/capacitor-webview-guardian|github.com/Cap-go|Detect when the WebView was killed in the background and relaunch it on foreground|https://github.com/Cap-go/capacitor-webview-guardian/|WebView Guardian
@@ -265,6 +266,7 @@ const pluginIconsByName: Record<string, string> = {
   '@capgo/capacitor-proximity': 'Signal',
   '@capgo/capacitor-zip': 'ArchiveBox',
   '@capgo/capacitor-zebra-datawedge': 'QrCode',
+  '@capgo/capacitor-network-diagnostics': 'Signal',
   '@capgo/capacitor-wifi': 'Wifi',
   '@capgo/capacitor-screen-orientation': 'DevicePhoneMobile',
   '@capgo/capacitor-webview-guardian': 'ShieldExclamation',

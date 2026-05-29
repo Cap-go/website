@@ -74,6 +74,7 @@ Plugin Native Biometric|biometric authentication plugin for fingerprint and face
 Plugin Native Geocoder|native geocoding plugin for address lookup|docs/plugins/nativegeocoder/**
 Plugin Native Market|app store deep linking plugin|docs/plugins/native-market/**
 Plugin Native Navigation|native navbar, tabbar, and transition shell plugin for Capacitor WebView apps|docs/plugins/native-navigation/**
+Plugin Network Diagnostics|native network diagnostics plugin for URL reachability, TCP ports, WebSocket handshakes, speed, and packet loss checks|docs/plugins/network-diagnostics/**
 Plugin Native Purchases|in-app purchases, subscriptions, paywalls, revenue playbook, and monetization plugin|docs/plugins/native-purchases/**
 Plugin Navigation Bar|Android navigation bar customization plugin|docs/plugins/navigation-bar/**
 Plugin NFC|NFC reading and writing plugin|docs/plugins/nfc/**
